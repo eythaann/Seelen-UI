@@ -8,7 +8,7 @@ import { FocusedApp } from '../../../../shared/interfaces/common';
 export type HWND = number & {};
 
 export interface MediaSession {
-  id: string;
+  umid: string;
   title: string;
   author: string;
   thumbnail: string | null;
@@ -16,8 +16,7 @@ export interface MediaSession {
   default: boolean;
   owner: {
     name: string;
-    iconPath: string | null;
-  } | null;
+  };
 }
 
 export type PinnedWegItem = Extract<WegItem, { type: 'Pinned' }>;

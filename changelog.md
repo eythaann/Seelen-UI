@@ -5,6 +5,8 @@
 - crash on user module.
 - slow loading of toolbar.
 - no icons on PWA from edge browser.
+- icon packs not modifying icons on toolbar/dock media modules.
+- icon packs bad ordering, now the priority order is (umid > full-path > filename > extension).
 
 ## [2.1.3]
 ### fix

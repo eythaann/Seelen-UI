@@ -185,7 +185,7 @@ impl MediaManagerEvents {
                 trace_lock!(MEDIA_MANAGER)
                     .playing()
                     .iter()
-                    .map(|session| session.id.clone())
+                    .map(|session| session.umid.clone())
                     .collect_vec()
             };
 
@@ -363,7 +363,7 @@ impl MediaManager {
     }
 
     pub fn player_mut(&mut self, id: &str) -> Option<&mut MediaPlayer> {
-        self.playing.iter_mut().find(|p| p.id == id)
+        self.playing.iter_mut().find(|p| p.umid == id)
     }
 
     pub fn get_raw_device(&self, device_id: &str) -> Option<IMMDevice> {
@@ -572,14 +572,12 @@ impl MediaManager {
             }
         };
 
+        let _ = extract_and_save_icon_umid(&source_app_umid);
         self.playing.push(MediaPlayer {
-            id: source_app_umid.clone(),
+            umid: source_app_umid.clone(),
             title: properties.Title().unwrap_or_default().to_string_lossy(),
             author: properties.Artist().unwrap_or_default().to_string_lossy(),
-            owner: Some(MediaPlayerOwner {
-                name: display_name,
-                icon_path: extract_and_save_icon_umid(&source_app_umid).ok(),
-            }),
+            owner: MediaPlayerOwner { name: display_name },
             thumbnail: properties
                 .Thumbnail()
                 .ok()
@@ -603,7 +601,7 @@ impl MediaManager {
     fn update_recommended_player(&mut self) {
         if let Ok(recommended) = self.get_recommended_player_id() {
             for player in &mut self.playing {
-                player.default = player.id == recommended;
+                player.default = player.umid == recommended;
             }
         }
     }
@@ -617,7 +615,7 @@ impl MediaManager {
                 session.RemovePlaybackInfoChanged(playback_token)?;
             }
         }
-        self.playing.retain(|player| player.id != player_id);
+        self.playing.retain(|player| player.umid != player_id);
         Ok(())
     }
 
@@ -750,7 +748,7 @@ impl MediaManager {
     /// Release all resources
     /// should be called on application exit
     pub fn release(&mut self) {
-        let player_ids = self.playing.iter().map(|p| p.id.clone()).collect_vec();
+        let player_ids = self.playing.iter().map(|p| p.umid.clone()).collect_vec();
 
         for player_id in player_ids {
             log_error!(self.release_media_transport_session(&player_id));

@@ -1,6 +1,4 @@
-import { IconPackManager } from '@seelen-ui/lib';
 import { ToolbarItem } from '@seelen-ui/lib/types';
-import { convertFileSrc } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { cloneDeep } from 'lodash';
@@ -9,13 +7,11 @@ import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { LAZY_CONSTANTS } from '../../shared/utils/infra';
-
 import { Selectors } from '../../shared/store/app';
 import { performClick, safeEval, Scope } from '../app';
 
-import { Icon } from '../../../../shared/components/Icon';
 import { cx } from '../../../../shared/styles';
+import { StringToElement } from './StringElement';
 
 export interface InnerItemProps extends PropsWithChildren {
   module: Omit<ToolbarItem, 'type'>;
@@ -26,116 +22,6 @@ export interface InnerItemProps extends PropsWithChildren {
   // needed for dropdown/popup wrappers
   onClick?: (e: React.MouseEvent) => void;
   onKeydown?: (e: React.KeyboardEvent) => void;
-}
-
-interface StringToElementProps {
-  text: string;
-}
-
-interface StringToElementState {
-  exe_icon_path: string;
-}
-
-class StringToElement extends React.PureComponent<StringToElementProps, StringToElementState> {
-  static splitter = /:([^:]+):/;
-
-  static imgPrefix = 'IMG:';
-  static iconPrefix = 'ICON:';
-  static exePrefix = 'EXE:';
-
-  static getIcon(name: string, size = 16) {
-    return `[ICON:${name}:${size}]`;
-  }
-
-  static imgFromUrl(url: string, size = 16) {
-    if (!url) {
-      return '';
-    }
-    return `[IMG:${size}px:${url}]`;
-  }
-
-  static imgFromPath(path?: string | null, size = 16) {
-    if (!path) {
-      return '';
-    }
-    return StringToElement.imgFromUrl(convertFileSrc(path), size);
-  }
-
-  static imgFromExe(exe_path: string, umid?: string, size = 16) {
-    if (!exe_path) {
-      return '';
-    }
-    if (umid) {
-      // Path got to be the last one because of regex magic
-      return `[EXE:${size}px:${umid}:${exe_path}]`;
-    } else {
-      return `[EXE:${size}px:${exe_path}]`;
-    }
-  }
-
-  constructor(props: StringToElementProps) {
-    super(props);
-    this.state = { exe_icon_path: LAZY_CONSTANTS.MISSING_ICON_PATH };
-  }
-
-  isImg() {
-    return this.props.text.startsWith(StringToElement.imgPrefix);
-  }
-
-  isIcon() {
-    return this.props.text.startsWith(StringToElement.iconPrefix);
-  }
-
-  isExe() {
-    return this.props.text.startsWith(StringToElement.exePrefix);
-  }
-
-  setExeIcon(exe_path: string | null) {
-    this.setState({ exe_icon_path: exe_path || LAZY_CONSTANTS.MISSING_ICON_PATH });
-  }
-
-  loadExeIconToState() {
-    if (this.isExe()) {
-      const [_, _size, param_0, param_1] = this.props.text.split(StringToElement.splitter);
-
-      if (param_0) { // At least path is given
-        if (param_1) { // When param 1 is given, then we have umid
-          IconPackManager.extractIcon({ path: param_1, umid: param_0 }).then(this.setExeIcon.bind(this));
-        } else { // We have only exe path
-          IconPackManager.extractIcon({ path: param_0 }).then(this.setExeIcon.bind(this));
-        }
-      }
-    }
-  }
-
-  componentDidMount() {
-    this.loadExeIconToState();
-  }
-
-  componentDidUpdate(prevProps: StringToElementProps) {
-    if (this.props.text !== prevProps.text) {
-      this.loadExeIconToState();
-    }
-  }
-
-  render() {
-    if (this.isExe()) {
-      const [_, width] = this.props.text.split(StringToElement.splitter);
-      return <img src={convertFileSrc(this.state.exe_icon_path)} style={{ width }} />;
-    }
-
-    if (this.isImg()) {
-      const [_, width, url] = this.props.text.split(StringToElement.splitter);
-      return <img src={url} style={{ width }} />;
-    }
-
-    if (this.isIcon()) {
-      const [_, iconName, size] = this.props.text.split(':');
-      return <Icon iconName={iconName || ''} size={size ? size + 'px' : undefined} />;
-    }
-
-    return <span>{this.props.text}</span>;
-  }
 }
 
 export function ElementsFromEvaluated(content: any) {

@@ -72,7 +72,7 @@ export interface NetworkAdapter {
 }
 
 export interface MediaChannelTransportData {
-  id: string;
+  umid: string;
   title: string;
   author: string;
   thumbnail: string | null;
@@ -80,8 +80,7 @@ export interface MediaChannelTransportData {
   default: boolean;
   owner: {
     name: string;
-    iconPath: string | null;
-  } | null;
+  };
 }
 
 export interface MediaDeviceChannel {

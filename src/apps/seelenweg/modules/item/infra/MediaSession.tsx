@@ -10,6 +10,7 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { calcLuminance } from '../../../../toolbar/modules/media/application';
 import { Selectors } from '../../shared/store/app';
+import { useIcon } from 'src/apps/shared/hooks';
 import { cx } from 'src/apps/shared/styles';
 
 import { MediaWegItem } from '../../shared/store/domain';
@@ -32,15 +33,18 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
   const sessions = useSelector(Selectors.mediaSessions);
   const session = sessions.find((s) => s.default);
 
-  let src = convertFileSrc(
+  let appIconSrc =
+    useIcon({ umid: session?.umid }) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
+
+  let thumbnailSrc = convertFileSrc(
     session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
   );
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    calcLuminance(src).then(setLuminance).catch(console.error);
-  }, [src]);
+    calcLuminance(thumbnailSrc).then(setLuminance).catch(console.error);
+  }, [thumbnailSrc]);
 
   useEffect(() => {
     emit('register-media-events');
@@ -54,7 +58,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
 
   const onClickBtn = (cmd: string) => {
     if (session) {
-      invoke(cmd, { id: session.id }).catch(console.error);
+      invoke(cmd, { id: session.umid }).catch(console.error);
     }
   };
 
@@ -77,19 +81,10 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
             }}
           >
             <div className="media-session-thumbnail-container">
-              {session?.owner && (
-                <img
-                  className="media-session-app-icon"
-                  src={convertFileSrc(
-                    session.owner.iconPath
-                      ? session.owner.iconPath
-                      : LAZY_CONSTANTS.MISSING_ICON_PATH,
-                  )}
-                />
-              )}
-              <img className="media-session-thumbnail" src={src} />
+              <img className="media-session-app-icon" src={appIconSrc} />
+              <img className="media-session-thumbnail" src={thumbnailSrc} />
             </div>
-            <img className="media-session-blurred-thumbnail" src={src} />
+            <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />
 
             <div className="media-session-info">
               <span

@@ -1,6 +1,6 @@
 import { GetIconArgs, IconPackManager } from '@seelen-ui/lib';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export function useWindowFocusChange(cb: (focused: boolean) => void) {
   useEffect(() => {
@@ -48,14 +48,15 @@ export function useIcon(args: GetIconArgs): string | null {
 
   useEffect(() => {
     iconPackManager.onChange(() => setIconSrc(iconPackManager.getIcon(args)));
-  }, []);
-
-  useLayoutEffect(() => {
     if (!iconSrc) {
-      // this will run asynchronously on end `iconPackManager.onChange` will be triggered
+      // this will run asynchronously and then `iconPackManager.onChange` will be triggered
       IconPackManager.extractIcon(args);
     }
   }, []);
+
+  useEffect(() => {
+    setIconSrc(iconPackManager.getIcon(args));
+  }, [args.path, args.umid]);
 
   return iconSrc;
 }
