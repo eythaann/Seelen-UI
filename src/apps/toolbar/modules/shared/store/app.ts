@@ -1,4 +1,4 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import {
   ApplicationHistory,
   DesktopFolder,
@@ -29,13 +29,13 @@ const initialState: RootState = {
   dateFormat: '',
   isOverlaped: false,
   user: (await UserDetails.getAsync()).user,
-  userRecentFolder: (await RecentFolder.getAsync()).asArray(),
-  userDesktopFolder: (await DesktopFolder.getAsync()).asArray(),
-  userDocumentsFolder: (await DocumentsFolder.getAsync()).asArray(),
-  userDownloadsFolder: (await DownloadsFolder.getAsync()).asArray(),
-  userPicturesFolder: (await PicturesFolder.getAsync()).asArray(),
-  userVideosFolder: (await VideosFolder.getAsync()).asArray(),
-  userMusicFolder: (await MusicFolder.getAsync()).asArray(),
+  userRecentFolder: [],
+  userDesktopFolder: [],
+  userDocumentsFolder: [],
+  userDownloadsFolder: [],
+  userPicturesFolder: [],
+  userVideosFolder: [],
+  userMusicFolder: [],
   focused: null,
   settings: settings.fancyToolbar,
   env: (await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>,
@@ -60,8 +60,8 @@ const initialState: RootState = {
   mediaOutputs: [],
   mediaInputs: [],
   notifications: [],
-  history: (await ApplicationHistory.getAsync()).asArray(),
-  historyOnMonitor: (await ApplicationHistory.getCurrentMonitorHistoryAsync()).asArray(),
+  history: [],
+  historyOnMonitor: [],
   colors: UIColors.default().inner,
 };
 
@@ -116,6 +116,26 @@ export const RootSlice = createSlice({
 export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 
-export const selectDefaultOutput = createSelector(Selectors.mediaOutputs, (mediaOutputs) =>
-  mediaOutputs.find((d) => d.is_default_multimedia),
-);
+// no core things that can be lazy loaded to improve performance
+export async function lazySlice(d: Dispatch) {
+  const obj = {
+    userRecentFolder: (await RecentFolder.getAsync()).asArray(),
+    userDesktopFolder: (await DesktopFolder.getAsync()).asArray(),
+    userDocumentsFolder: (await DocumentsFolder.getAsync()).asArray(),
+    userDownloadsFolder: (await DownloadsFolder.getAsync()).asArray(),
+    userPicturesFolder: (await PicturesFolder.getAsync()).asArray(),
+    userVideosFolder: (await VideosFolder.getAsync()).asArray(),
+    userMusicFolder: (await MusicFolder.getAsync()).asArray(),
+    history: (await ApplicationHistory.getAsync()).asArray(),
+    historyOnMonitor: (await ApplicationHistory.getCurrentMonitorHistoryAsync()).asArray(),
+  };
+  d(RootActions.setUserRecentFolder(obj.userRecentFolder));
+  d(RootActions.setUserDesktopFolder(obj.userDesktopFolder));
+  d(RootActions.setUserDocumentsFolder(obj.userDocumentsFolder));
+  d(RootActions.setUserDownloadsFolder(obj.userDownloadsFolder));
+  d(RootActions.setUserPicturesFolder(obj.userPicturesFolder));
+  d(RootActions.setUserVideosFolder(obj.userVideosFolder));
+  d(RootActions.setUserMusicFolder(obj.userMusicFolder));
+  d(RootActions.setHistory(obj.history));
+  d(RootActions.setHistoryOnMonitor(obj.historyOnMonitor));
+}

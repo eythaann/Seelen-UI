@@ -18,7 +18,7 @@ import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { throttle } from 'lodash';
 
-import { RootActions, RootSlice } from './app';
+import { lazySlice, RootActions, RootSlice } from './app';
 
 import { WlanBssEntry } from '../../network/domain';
 import { AppNotification } from '../../Notifications/domain';
@@ -44,6 +44,8 @@ export const store = configureStore({
     });
   },
 });
+
+lazySlice(store.dispatch);
 
 async function initUIColors() {
   function loadColors(colors: UIColors) {
