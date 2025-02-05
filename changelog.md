@@ -4,6 +4,7 @@
 ### fix
 - crash on user module.
 - slow loading of toolbar.
+- no icons on PWA from edge browser.
 
 ## [2.1.3]
 ### fix
