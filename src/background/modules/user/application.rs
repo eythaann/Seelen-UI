@@ -64,18 +64,15 @@ event_manager!(UserManager, UserManagerEvent);
 
 impl UserManager {
     fn get_path_from_folder(folder_type: &FolderType) -> Result<PathBuf> {
+        let resolver = get_app_handle().path();
         Ok(match folder_type {
-            FolderType::Recent => get_app_handle()
-                .path()
-                .data_dir()?
-                .as_path()
-                .join("Microsoft\\Windows\\Recent"),
-            FolderType::Desktop => get_app_handle().path().desktop_dir()?,
-            FolderType::Downloads => get_app_handle().path().download_dir()?,
-            FolderType::Documents => get_app_handle().path().document_dir()?,
-            FolderType::Pictures => get_app_handle().path().picture_dir()?,
-            FolderType::Videos => get_app_handle().path().video_dir()?,
-            FolderType::Music => get_app_handle().path().audio_dir()?,
+            FolderType::Recent => resolver.data_dir()?.join("Microsoft\\Windows\\Recent"),
+            FolderType::Desktop => resolver.desktop_dir()?,
+            FolderType::Downloads => resolver.download_dir()?,
+            FolderType::Documents => resolver.document_dir()?,
+            FolderType::Pictures => resolver.picture_dir()?,
+            FolderType::Videos => resolver.video_dir()?,
+            FolderType::Music => resolver.audio_dir()?,
             FolderType::Unknown => {
                 return Err("There is no such folder could be handled!".into());
             }
