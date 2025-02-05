@@ -24,25 +24,26 @@ use crate::{
 pub fn declare_system_events_handlers() -> Result<()> {
     let handle = get_app_handle();
 
+    // todo change this to current implementation pattern
     handle.listen("register-power-events", move |_| {
         log_error!(PowerManager::register_power_events());
         log_error!(PowerManager::emit_system_power_info());
     });
 
+    // todo change this to current implementation pattern
     handle.listen("register-tray-events", move |_| register_tray_events());
 
+    // todo change this to current implementation pattern
     handle.listen("register-network-events", move |_| {
         log_error!(register_network_events());
     });
 
-    handle.listen("register-bluetooth-events", move |_| {
-        // todo
-    });
-
+    // todo change this to current implementation pattern
     handle.listen("register-media-events", move |_| {
         register_media_events();
     });
 
+    // todo change this to current implementation pattern
     handle.listen("register-notifications-events", move |_| {
         register_notification_events();
     });

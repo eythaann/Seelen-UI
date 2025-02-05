@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- crash on user module.
+- slow loading of toolbar.
+
 ## [2.1.3]
 ### fix
 - bad user infomation on user module.
