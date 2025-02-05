@@ -7,7 +7,8 @@
   xmlns:desktop7="http://schemas.microsoft.com/appx/manifest/desktop/windows10/7"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap uap3 uap10 rescap uap5">
-  <Identity Name="Seelen.SeelenUI" Publisher="CN=7E60225C-94CB-4B2E-B17F-0159A11074CB" Version="{{version}}" ProcessorArchitecture="x64" />
+  <Identity Name="Seelen.SeelenUI" Publisher="CN=7E60225C-94CB-4B2E-B17F-0159A11074CB"
+    Version="{{version}}" ProcessorArchitecture="x64" />
   <Properties>
     <DisplayName>Seelen UI</DisplayName>
     <PublisherDisplayName>Seelen</PublisherDisplayName>
@@ -44,7 +45,7 @@
         </uap5:Extension>
 
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="seelen-ui-msix.file">
+          <uap:FileTypeAssociation Name="seelen-ui.file">
             <uap:Logo>static\icons\128x128.png</uap:Logo>
             <uap:DisplayName>Seelen UI</uap:DisplayName>
             <uap:SupportedFileTypes>
@@ -54,7 +55,7 @@
         </uap:Extension>
 
         <uap10:Extension Category="windows.protocol">
-          <uap10:Protocol Name="seelen-ui-msix.uri">
+          <uap10:Protocol Name="seelen-ui.uri">
             <uap10:Logo>static\icons\128x128.png</uap10:Logo>
             <uap10:DisplayName>Seelen UI</uap10:DisplayName>
           </uap10:Protocol>
@@ -63,15 +64,6 @@
     </Application>
 
     <Application Id="Service" Executable="slu-service.exe" EntryPoint="Windows.FullTrustApplication">
-      <uap3:VisualElements
-        DisplayName="Seelen UI Service"
-        Description="Handle system actions and crash reports."
-        Square150x150Logo="static\icons\128x128.png"
-        Square44x44Logo="static\icons\48x48.png"
-        BackgroundColor="transparent"
-        AppListEntry="none">
-      </uap3:VisualElements>
-
       <Extensions>
         <uap5:Extension Category="windows.appExecutionAlias">
           <uap5:AppExecutionAlias>
