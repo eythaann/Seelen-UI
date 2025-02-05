@@ -62,16 +62,6 @@
         </uap10:Extension>
       </Extensions>
     </Application>
-
-    <Application Id="Service" Executable="slu-service.exe" EntryPoint="Windows.FullTrustApplication">
-      <Extensions>
-        <uap5:Extension Category="windows.appExecutionAlias">
-          <uap5:AppExecutionAlias>
-            <uap5:ExecutionAlias Alias="slu-service.exe" />
-          </uap5:AppExecutionAlias>
-        </uap5:Extension>
-      </Extensions>
-    </Application>
   </Applications>
 
   <Capabilities>
