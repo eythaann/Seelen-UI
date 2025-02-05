@@ -35,7 +35,7 @@ use itertools::Itertools;
 use modules::{
     cli::{
         application::{attach_console, is_just_getting_info, SEELEN_COMMAND_LINE},
-        AppClient, ServiceClient,
+        AppClient, ServiceClient, SvcAction,
     },
     tray::application::ensure_tray_overflow_creation,
 };
@@ -109,7 +109,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             Some(code) => {
                 // if exit code is 0 it means that the app was closed by the user
                 if code == 0 {
-                    log_error!(ServiceClient::emit_stop_signal());
+                    log_error!(ServiceClient::request(SvcAction::Stop));
                 }
             }
             // prevent close background on webview windows closing

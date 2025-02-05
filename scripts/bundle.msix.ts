@@ -19,7 +19,7 @@ async function getArgs() {
   };
 }
 
-const [major, minor, patch, _nightly_date = 0] = packageJson.version.split(/[\.\+]/);
+const [major, minor, patch, nightly_date] = packageJson.version.split(/[\.\+]/);
 if (major === undefined || minor === undefined || patch === undefined) {
   throw new Error('Invalid package version');
 }
@@ -36,8 +36,9 @@ fs.mkdirSync(bundleFolder, { recursive: true });
 
 // we skip revision here because greater numbers than 65535 are not supported on msix
 const appxPackageVersion = `${major}.${minor}.${patch}.0`;
+const fileVersion = nightly_date ? packageJson.version : appxPackageVersion;
 const installer_msix_path = path.resolve(
-  `${bundleFolder}/Seelen.SeelenUI_${packageJson.version}_x64__p6yyn03m1894e.msix`,
+  `${bundleFolder}/Seelen.SeelenUI_${fileVersion}_x64__p6yyn03m1894e.msix`,
 );
 
 // Add manifest

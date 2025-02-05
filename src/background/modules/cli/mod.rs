@@ -3,12 +3,14 @@ pub mod domain;
 
 use std::{
     fs,
-    io::Write,
+    io::{BufRead, Write},
     net::{TcpListener, TcpStream},
     path::PathBuf,
 };
 
 use application::{handle_cli_events, SEELEN_COMMAND_LINE};
+pub use domain::SvcAction;
+use domain::SvcMessage;
 use itertools::Itertools;
 use windows::Win32::System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler};
 use windows_core::Interface;
@@ -94,7 +96,7 @@ impl AppClient {
 pub struct ServiceClient;
 impl ServiceClient {
     fn token() -> &'static str {
-        std::option_env!("SLU_SERVICE_CONNECTION_TOKEN").unwrap_or("__local__")
+        std::env!("SLU_SERVICE_CONNECTION_TOKEN")
     }
 
     fn socket_path() -> PathBuf {
@@ -106,18 +108,38 @@ impl ServiceClient {
         Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
     }
 
-    fn send_message(message: &[&str]) -> Result<()> {
+    /// will ignore any response
+    pub fn request(message: SvcAction) -> Result<()> {
         let stream = Self::connect_tcp()?;
-        let mut writter = std::io::BufWriter::new(stream);
-        serde_json::to_writer(
-            &mut writter,
-            &serde_json::json!({
-                "token": Self::token(),
-                "message": message,
-            }),
-        )?;
+        let mut writter = std::io::BufWriter::new(&stream);
+
+        let data = serde_json::to_vec(&SvcMessage {
+            token: Self::token().to_string(),
+            action: message,
+        })?;
+        writter.write_all(&data)?;
+        writter.write_all(&[0x17])?;
         writter.flush()?;
         Ok(())
+    }
+
+    /// will wait for a response
+    pub fn request_response(message: SvcAction) -> Result<Vec<u8>> {
+        let stream = Self::connect_tcp()?;
+        stream.set_read_timeout(Some(std::time::Duration::from_millis(1000)))?;
+
+        let mut writter = std::io::BufWriter::new(&stream);
+        let mut reader = std::io::BufReader::new(&stream);
+
+        let data = serde_json::to_vec(&message)?;
+        writter.write_all(&data)?;
+        writter.write_all(&[0x17])?;
+        writter.flush()?;
+
+        let mut bytes = Vec::new();
+        reader.read_until(0x17, &mut bytes)?; // Read until end of transmission block
+        bytes.pop(); // Remove end of transmission block
+        Ok(bytes)
     }
 
     pub fn is_running() -> bool {
@@ -169,44 +191,5 @@ impl ServiceClient {
             .await?;
         }
         Ok(())
-    }
-
-    pub fn emit_stop_signal() -> Result<()> {
-        Self::send_message(&["stop"])
-    }
-
-    pub fn emit_set_startup(enabled: bool) -> Result<()> {
-        Self::send_message(&["set-startup", &enabled.to_string()])
-    }
-
-    pub fn emit_show_window(hwnd: isize, command: i32) -> Result<()> {
-        Self::send_message(&["show-window", &hwnd.to_string(), &command.to_string()])
-    }
-
-    pub fn emit_show_window_async(hwnd: isize, command: i32) -> Result<()> {
-        Self::send_message(&["show-window-async", &hwnd.to_string(), &command.to_string()])
-    }
-
-    pub fn emit_set_window_position(
-        hwnd: isize,
-        x: i32,
-        y: i32,
-        width: i32,
-        height: i32,
-        flags: u32,
-    ) -> Result<()> {
-        Self::send_message(&[
-            "set-window-position",
-            &hwnd.to_string(),
-            &x.to_string(),
-            &y.to_string(),
-            &width.to_string(),
-            &height.to_string(),
-            &flags.to_string(),
-        ])
-    }
-
-    pub fn emit_set_foreground(hwnd: isize) -> Result<()> {
-        Self::send_message(&["set-foreground", &hwnd.to_string()])
     }
 }

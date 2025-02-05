@@ -2,7 +2,7 @@ cargo-features = ["profile-rustflags"]
 
 [package]
 name = "seelen-ui"
-version = "2.1.0"
+version = "2.1.3"
 description = "Seelen UI Background"
 authors = ["eythaann"]
 license = "Polyform Strict License"
@@ -126,6 +126,7 @@ features = [
     "Win32_Storage_Packaging_Appx",        # UWP apps
     "Win32_Media_Audio_Endpoints",         # required for audio module
     "Win32_Media_DeviceManager",           # required for audio module
+    "Win32_Security_Authentication_Identity",
     "Media",                               # required for audio module
     "Media_Control",                       # required for audio module
     "Storage_Streams",                     # required for audio module

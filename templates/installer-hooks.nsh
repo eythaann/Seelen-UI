@@ -1,7 +1,11 @@
 !macro NSIS_HOOK_PREINSTALL
-  ; Stop the service
-  DetailPrint 'Exec: slu-service.exe stop'
-  nsExec::Exec '"$INSTDIR\slu-service.exe" stop'
+  StrCpy $1 "taskkill.exe /F /T /IM slu-service.exe"
+  DetailPrint 'Exec: $1'
+  nsExec::Exec $1
+  Pop $0
+  StrCpy $1 "taskkill.exe /F /T /IM seelen-ui.exe"
+  DetailPrint 'Exec: $1'
+  nsExec::Exec $1
   Pop $0
 !macroend
 
@@ -15,7 +19,7 @@
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  ; Stop the service
+  ; Gracefully stop the service
   DetailPrint 'Exec: slu-service.exe stop'
   nsExec::Exec '"$INSTDIR\slu-service.exe" stop'
   Pop $0

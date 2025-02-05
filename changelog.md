@@ -2,7 +2,18 @@
 
 ## [Unreleased]
 ### fix
+- crash on user module.
+- slow loading of toolbar.
+
+## [2.1.3]
+### fix
+- bad user infomation on user module.
+
+## [2.1.2]
+### fix
 - style issue on toolbar user module.
+- showing unhandable tray icons (ex: nvidia old control panel).
+- installer being frozen on update.
 
 ## [2.1.0]
 ### features
