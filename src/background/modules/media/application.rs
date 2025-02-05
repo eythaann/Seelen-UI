@@ -35,10 +35,10 @@ use crate::{
     error_handler::Result,
     event_manager, log_error,
     modules::start::application::START_MENU_MANAGER,
-    seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
+    seelen_weg::icon_extractor::extract_and_save_icon_umid,
     trace_lock,
     utils::pcwstr,
-    windows_api::{process::Process, Com, WindowsApi},
+    windows_api::{Com, WindowsApi},
 };
 
 use super::domain::{
@@ -472,22 +472,9 @@ impl MediaManager {
         for session_idx in 0..enumerator.GetCount()? {
             let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
             let volume: ISimpleAudioVolume = session.cast()?;
-
-            let name;
-            let icon_path;
-            let process = Process::from_id(session.GetProcessId()?);
-            match process.program_path() {
-                Ok(path) => {
-                    name = WindowsApi::get_executable_display_name(&path)?;
-                    icon_path = extract_and_save_icon_from_file(&path)
-                        .ok()
-                        .map(|p| p.to_string_lossy().to_string());
-                }
-                Err(_) => {
-                    name = session.GetDisplayName()?.to_string()?;
-                    icon_path = None;
-                }
-            }
+            // let process = Process::from_id(session.GetProcessId()?);
+            let name = String::new(); // todo on media mixer feature
+            let icon_path = None; // todo on media mixer feature
 
             sessions.push(DeviceChannel {
                 id: session.GetSessionIdentifier()?.to_string()?,

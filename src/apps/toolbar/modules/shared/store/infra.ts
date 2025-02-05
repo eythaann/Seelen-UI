@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
-  ApplicationHistory,
   DocumentsFolder,
   DownloadsFolder,
   MusicFolder,
@@ -16,9 +15,10 @@ import {
 import { FancyToolbarSettings, Placeholder } from '@seelen-ui/lib/types';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { throttle } from 'lodash';
+import { debounce, throttle } from 'lodash';
 
 import { lazySlice, RootActions, RootSlice } from './app';
+import { FocusedApp } from 'src/apps/shared/interfaces/common';
 
 import { WlanBssEntry } from '../../network/domain';
 import { AppNotification } from '../../Notifications/domain';
@@ -129,11 +129,15 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));
   });
 
-  ApplicationHistory.onFocusChanged((app) => store.dispatch(RootActions.setFocused(app.payload)));
-  ApplicationHistory.onChange((history) => store.dispatch(RootActions.setHistory(history.all())));
-  ApplicationHistory.onCurrentMonitorHistoryChanged((history) =>
-    store.dispatch(RootActions.setHistoryOnMonitor(history.all())),
-  );
+  const onFocusChanged = debounce((app: FocusedApp) => {
+    store.dispatch(RootActions.setFocused(app));
+  }, 200);
+  await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
+    onFocusChanged(e.payload);
+    if (e.payload.name != 'Seelen UI') {
+      onFocusChanged.flush();
+    }
+  });
 
   UserDetails.onChange((details) => store.dispatch(RootActions.setUser(details.user)));
   RecentFolder.onChange((details) =>

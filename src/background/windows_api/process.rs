@@ -107,6 +107,14 @@ impl Process {
     }
 
     pub fn program_display_name(&self) -> Result<String> {
-        WindowsApi::get_executable_display_name(&self.program_path()?)
+        let path = self.program_path()?;
+        match WindowsApi::get_executable_display_name(&path) {
+            Ok(name) => Ok(name.trim_end_matches(".exe").to_owned()),
+            Err(_) => Ok(path
+                .file_stem()
+                .ok_or("there is no file stem")?
+                .to_string_lossy()
+                .to_string()),
+        }
     }
 }
