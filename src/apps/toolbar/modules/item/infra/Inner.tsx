@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../shared/store/app';
-import { performClick, safeEval, Scope } from '../app';
+import { safeEval, Scope } from '../app';
 
 import { cx } from '../../../../shared/styles';
 import { StringToElement } from './StringElement';
@@ -57,7 +57,7 @@ export function InnerItem(props: InnerItemProps) {
     clickable = true,
     ...rest
   } = props;
-  const { template, tooltip, onClick: oldOnClick, onClickV2, style, id, badge } = module;
+  const { template, tooltip, onClickV2, style, id, badge } = module;
 
   const [mounted, setMounted] = React.useState(false);
   const env = useSelector(Selectors.env);
@@ -116,19 +116,16 @@ export function InnerItem(props: InnerItemProps) {
         style={style}
         className={cx('ft-bar-item', {
           // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
-          'ft-bar-item-clickable': clickable || oldOnClick || onClickV2,
+          'ft-bar-item-clickable': clickable || onClickV2,
           'ft-bar-item-active': active,
         })}
         onWheel={onWheelProp}
         onKeyDown={onKeydownProp}
         onClick={(e) => {
           onClickProp?.(e);
-
           if (onClickV2) {
             safeEval(onClickV2, scope.current);
           }
-
-          performClick(oldOnClick, scope.current);
         }}
         as="div"
         transition={{ duration: 0.15 }}
