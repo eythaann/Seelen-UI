@@ -33,8 +33,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
   const sessions = useSelector(Selectors.mediaSessions);
   const session = sessions.find((s) => s.default);
 
-  let appIconSrc =
-    useIcon({ umid: session?.umid }) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
+  let appIconSrc = useIcon({ umid: session?.umid });
 
   let thumbnailSrc = convertFileSrc(
     session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
@@ -81,7 +80,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
             }}
           >
             <div className="media-session-thumbnail-container">
-              <img className="media-session-app-icon" src={appIconSrc} />
+              {appIconSrc && <img className="media-session-app-icon" src={appIconSrc} />}
               <img className="media-session-thumbnail" src={thumbnailSrc} />
             </div>
             <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />

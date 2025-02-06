@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### fix
 - devices and battery not clickables on toolbar.
+- missing icon on dock media module while not playing.
 
 ## [2.1.4]
 ### fix
