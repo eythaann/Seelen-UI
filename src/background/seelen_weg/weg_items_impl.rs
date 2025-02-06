@@ -168,7 +168,7 @@ impl WegItemsImpl {
 
         let get_info_from = match &umid {
             Some(umid) => {
-                log_error!(extract_and_save_icon_umid(umid));
+                let _ = extract_and_save_icon_umid(umid);
                 if WindowsApi::is_uwp_package_id(umid) {
                     ShouldGetInfoFrom::Package(umid.clone())
                 } else {
@@ -216,7 +216,7 @@ impl WegItemsImpl {
                     display_name = relaunch_display_name;
                 } else {
                     pin_disabled = window.prevent_pinning();
-                    relaunch_command = format!("\"explorer.exe\" shell:AppsFolder\\{umid}");
+                    relaunch_command = path.to_string_lossy().to_string();
                 }
             }
             ShouldGetInfoFrom::Process => {
