@@ -12,13 +12,14 @@ use application::{get_app_command, handle_cli_events};
 pub use domain::SvcAction;
 use domain::SvcMessage;
 use itertools::Itertools;
+use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use windows::Win32::System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler};
 use windows_core::Interface;
 
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::Seelen,
+    seelen::{get_app_handle, Seelen},
     utils::{pwsh::PwshScript, spawn_named_thread},
     windows_api::Com,
 };
@@ -168,15 +169,23 @@ impl ServiceClient {
     // so if the service is not running, we need to start it (common on msix setup)
     pub async fn start_service() -> Result<()> {
         if let Err(err) = Self::start_service_task() {
-            log::debug!("Can not start service via task: {}", err);
+            log::debug!("Can not start service via task scheduler: {}", err);
             let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
-            PwshScript::new(format!(
-                "Start-Process '{}' -Verb runAs",
-                service_path.display(),
-            ))
-            .inline_command()
-            .execute()
-            .await?;
+            let script = PwshScript::new(format!("&\"{}\"", service_path.display(),)).elevated();
+            let result = script.execute().await;
+            if let Err(err) = result {
+                let try_again = get_app_handle()
+                    .dialog()
+                    .message(t!("service.not_running_description"))
+                    .title(t!("service.not_running"))
+                    .kind(MessageDialogKind::Info)
+                    .ok_button_label(t!("service.not_running_ok"))
+                    .blocking_show();
+                if try_again {
+                    script.execute().await?;
+                }
+                return Err(err);
+            }
         }
         Ok(())
     }

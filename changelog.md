@@ -4,6 +4,7 @@
 ### fix
 - devices and battery not clickables on toolbar.
 - missing icon on dock media module while not playing.
+- msix store not showing admin prompt.
 
 ## [2.1.4]
 ### fix
