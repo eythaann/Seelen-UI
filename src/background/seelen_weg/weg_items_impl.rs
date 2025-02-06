@@ -324,29 +324,26 @@ impl WegItemsImpl {
             }
             let temporal_mode = state.get_weg_temporal_item_visibility(&monitor_id);
             let pinned_mode = state.get_weg_pinned_item_visibility(&monitor_id);
-            let pinned_visible = pinned_mode == WegPinnedItemsVisibility::Always
-                || (pinned_mode == WegPinnedItemsVisibility::WhenPrimary && monitor.is_primary());
+            let pinned_visible = match pinned_mode {
+                WegPinnedItemsVisibility::Always => true,
+                WegPinnedItemsVisibility::WhenPrimary => monitor.is_primary(),
+            };
 
-            match (temporal_mode, pinned_visible) {
-                (WegTemporalItemsVisibility::All, true) => {
-                    result.insert(monitor_id, self.items.clone());
+            match temporal_mode {
+                WegTemporalItemsVisibility::All => {
+                    let mut items = self.items.clone();
+                    if !pinned_visible {
+                        temporalise(&mut items);
+                        items.sanitize();
+                    }
+                    result.insert(monitor_id, items);
                 }
-                (WegTemporalItemsVisibility::All, false) => {
-                    let mut weg_items = self.clone();
-                    temporalise(&mut weg_items.items);
-                    weg_items.items.sanitize();
-                    result.insert(monitor_id, weg_items.items);
-                }
-                (WegTemporalItemsVisibility::OnMonitor, true) => {
-                    let mut weg_items = self.clone();
-                    weg_items.filter_by_monitor(&monitor_id);
-                    weg_items.items.sanitize();
-                    result.insert(monitor_id, weg_items.items);
-                }
-                (WegTemporalItemsVisibility::OnMonitor, false) => {
+                WegTemporalItemsVisibility::OnMonitor => {
                     let mut weg_items = self.clone();
                     weg_items.filter_by_monitor(&monitor_id);
-                    temporalise(&mut weg_items.items);
+                    if !pinned_visible {
+                        temporalise(&mut weg_items.items);
+                    }
                     weg_items.items.sanitize();
                     result.insert(monitor_id, weg_items.items);
                 }

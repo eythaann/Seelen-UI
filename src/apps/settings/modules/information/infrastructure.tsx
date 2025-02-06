@@ -43,7 +43,7 @@ export function Information() {
         <SettingsSubGroup label="Seelen UI">
           <SettingsOption>
             <span>{t('extras.version')}:</span>
-            <span className={cs.version}>v{EnvConfig.version} {isDevMode && '(dev)'}</span>
+            <span className={cs.version}>v{EnvConfig.version} {isDevMode && '(dev)'} {isMsixBuild && '(msix)'}</span>
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>

@@ -8,7 +8,7 @@ use std::{
     path::PathBuf,
 };
 
-use application::{handle_cli_events, SEELEN_COMMAND_LINE};
+use application::{get_app_command, handle_cli_events};
 pub use domain::SvcAction;
 use domain::SvcMessage;
 use itertools::Itertools;
@@ -19,7 +19,6 @@ use crate::{
     error_handler::Result,
     log_error,
     seelen::Seelen,
-    trace_lock,
     utils::{pwsh::PwshScript, spawn_named_thread},
     windows_api::Com,
 };
@@ -35,21 +34,13 @@ impl AppClient {
     }
 
     // const BUFFER_SIZE: usize = 5 * 1024 * 1024; // 5 MB
-    fn handle_message(stream: TcpStream) {
-        let argv = match serde_json::from_reader::<TcpStream, Vec<String>>(stream) {
-            Ok(argv) => argv,
-            Err(e) => {
-                log::error!("Failed to deserialize message: {}", e);
-                return;
-            }
-        };
+    fn handle_message(stream: TcpStream) -> Result<()> {
+        let argv: Vec<String> = serde_json::from_reader(stream)?;
         log::trace!(target: "slu::cli", "{}", argv[1..].join(" "));
-        std::thread::spawn(move || {
-            let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
-            if let Ok(matches) = command.try_get_matches_from(argv) {
-                log_error!(handle_cli_events(&matches));
-            }
-        });
+        if let Ok(matches) = get_app_command().try_get_matches_from(argv) {
+            handle_cli_events(&matches)?;
+        }
+        Ok(())
     }
 
     pub fn listen_tcp() -> Result<()> {
@@ -67,7 +58,9 @@ impl AppClient {
                     break;
                 }
                 match stream {
-                    Ok(stream) => Self::handle_message(stream),
+                    Ok(stream) => {
+                        std::thread::spawn(move || log_error!(Self::handle_message(stream)));
+                    }
                     Err(e) => log::error!("Failed to accept connection: {}", e),
                 }
             }
@@ -80,15 +73,10 @@ impl AppClient {
         Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
     }
 
+    /// will fail if no instance is running
     pub fn redirect_cli_to_instance() -> Result<()> {
-        let mut attempts: i32 = 0;
-        let mut stream = Self::connect_tcp();
-        while stream.is_err() && attempts < 10 {
-            attempts += 1;
-            std::thread::sleep(std::time::Duration::from_millis(100));
-            stream = AppClient::connect_tcp();
-        }
-        serde_json::to_writer(stream?, &std::env::args().collect_vec())?;
+        let stream = Self::connect_tcp()?;
+        serde_json::to_writer(stream, &std::env::args().collect_vec())?;
         Ok(())
     }
 }

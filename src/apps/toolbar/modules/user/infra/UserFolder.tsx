@@ -33,7 +33,6 @@ export function UserFolder({ folderProps, setCategoryOpen, categoryOpen }: UserF
   const { content, category, icon } = folderProps;
 
   const OpenOnExplorer = async () => {
-    console.log(pathByCategory);
     invoke(SeelenCommand.OpenFile, { path: pathByCategory[category] });
   };
 

@@ -117,7 +117,7 @@ async function completeTranslationsFor(localesDir: string) {
   const en = deepSortObject(yaml.load(readFileSync(enPath, 'utf8')) as object);
   writeFileSync(enPath, yaml.dump(en)); // overwrite sorted
 
-  console.log(`* ${enPath} (total: ${deepObjectSize(en)} messages)`);
+  console.info(`* ${enPath} (total: ${deepObjectSize(en)} messages)`);
 
   for (const item of targets) {
     const filePath = `${localesDir}/${item.value}.yml`;
@@ -127,7 +127,7 @@ async function completeTranslationsFor(localesDir: string) {
       ? Translator.DeepL
       : Translator.Google;
 
-    console.log(`  - ${filePath} (${item.enLabel}) - ${translator}`);
+    console.info(`  - ${filePath} (${item.enLabel}) - ${translator}`);
 
     let translation: any = {};
     if (existsSync(filePath)) {
@@ -139,7 +139,7 @@ async function completeTranslationsFor(localesDir: string) {
 
     writeFileSync(filePath, yaml.dump(deepSortObject(translation)));
   }
-  console.log(); // newline on finish
+  console.info(); // newline on finish
 }
 
 await completeTranslationsFor('src/apps/toolbar/i18n/translations');

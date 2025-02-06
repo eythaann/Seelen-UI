@@ -16,9 +16,7 @@ use crate::seelen_weg::icon_extractor::{
 };
 
 use crate::utils::pwsh::PwshScript;
-use crate::utils::{
-    is_running_as_appx_package, is_virtual_desktop_supported as virtual_desktop_supported,
-};
+use crate::utils::{is_running_as_appx, is_virtual_desktop_supported as virtual_desktop_supported};
 use crate::windows_api::WindowsApi;
 use crate::winevent::{SyntheticFullscreenData, WinEvent};
 use crate::{log_error, utils};
@@ -82,7 +80,7 @@ fn is_dev_mode() -> bool {
 
 #[tauri::command(async)]
 fn is_appx_package() -> bool {
-    is_running_as_appx_package()
+    is_running_as_appx()
 }
 
 #[tauri::command(async)]

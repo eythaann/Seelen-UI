@@ -1,12 +1,13 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use base64::Engine;
-use clap::ArgMatches;
 use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{error_handler::Result, modules::cli::application::URI_MSIX};
+use crate::{
+    error_handler::Result, is_local_dev, utils::is_running_as_appx, windows_api::WindowsApi,
+};
 
 use super::spawn_named_thread;
 
@@ -41,6 +42,34 @@ pub fn register_panic_hook() {
         );
         base_hook(info);
     }));
+}
+
+/// Prints information about the computer runtime context to help debugging.
+pub fn print_initial_information() {
+    let version = env!("CARGO_PKG_VERSION");
+    let debug = if tauri::is_dev() { " (debug)" } else { "" };
+    let local = if is_local_dev() { " (local)" } else { "" };
+    let msix = if is_running_as_appx() { " (msix)" } else { "" };
+    log::info!(
+        "───────────────────── Starting Seelen UI v{version}{local}{debug}{msix} ─────────────────────"
+    );
+    let os = os_info::get();
+    let sys_locale = seelen_core::state::Settings::get_locale();
+    log::info!("Operating System: {}", os.os_type());
+    log::info!("  version       : {}", os.version());
+    log::info!("  edition       : {}", os.edition().unwrap_or("None"));
+    log::info!("  codename      : {}", os.codename().unwrap_or("None"));
+    log::info!("  bitness       : {}", os.bitness());
+    log::info!(
+        "  architecture  : {}",
+        os.architecture().unwrap_or("Unknown")
+    );
+    log::info!(
+        "  locate        : {}",
+        sys_locale.unwrap_or("Unknown".to_owned())
+    );
+    log::info!("WebView2 Runtime: {:?}", webview_version());
+    log::info!("Elevated        : {:?}", WindowsApi::is_elevated());
 }
 
 pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<()> {
@@ -116,13 +145,9 @@ pub fn start_integrity_thread(app: tauri::AppHandle) {
     .expect("Failed to start integrity thread");
 }
 
-pub fn restart_as_appx(args: &ArgMatches) -> Result<!> {
-    let mut command = URI_MSIX.to_string();
-    if args.get_flag("silent") {
-        command += " --silent"
-    }
+pub fn restart_as_appx() -> Result<!> {
     std::process::Command::new("explorer")
-        .arg(command)
+        .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
         .spawn()?;
     std::process::exit(0);
 }

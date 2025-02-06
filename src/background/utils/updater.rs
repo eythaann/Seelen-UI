@@ -8,10 +8,10 @@ use crate::{
     state::application::FULL_STATE,
 };
 
-use super::is_running_as_appx_package;
+use super::is_running_as_appx;
 
 pub async fn check_for_updates() -> Result<Option<Update>> {
-    if tauri::is_dev() || is_running_as_appx_package() {
+    if tauri::is_dev() || is_running_as_appx() {
         return Ok(None);
     }
 
