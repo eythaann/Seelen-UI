@@ -170,7 +170,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::state::infrastructure::*;
     use crate::system::brightness::*;
 
-    use crate::modules::application_history::infrastructure::*;
     use crate::modules::language::*;
     use crate::modules::media::infrastructure::*;
     use crate::modules::monitors::infrastructure::*;

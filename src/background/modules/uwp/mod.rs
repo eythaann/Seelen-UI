@@ -86,12 +86,17 @@ impl UwpManager {
         let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
         let package = app_info.Package()?;
         let manifest = Self::manifest_from_package(&package)?;
-        if let Some(apps) = manifest.applications {
-            for app in apps.application {
-                if app_umid == app.id {
-                    let package_path = PathBuf::from(package.InstalledPath()?.to_os_string());
-                    return Ok(package_path.join(app.executable.clone()));
-                }
+        let apps = manifest
+            .applications
+            .map(|apps| apps.application)
+            .unwrap_or_default();
+        for app in apps {
+            if app_umid != app.id {
+                continue;
+            }
+            if let Some(executable) = app.executable {
+                let package_path = PathBuf::from(package.InstalledPath()?.to_os_string());
+                return Ok(package_path.join(executable));
             }
         }
         Err(format!("App path not found for {app_umid}").into())

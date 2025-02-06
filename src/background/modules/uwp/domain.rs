@@ -25,19 +25,23 @@ pub struct ManifestProperties {
     pub description: Option<String>,
 }
 
+/// This struct makes reference to:
+/// https://learn.microsoft.com/en-us/uwp/schemas/appxpackage/uapmanifestschema/element-applications
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct ManifestApplications {
     pub application: Vec<ManifestApplication>,
 }
 
+/// This struct makes reference to:
+/// https://learn.microsoft.com/en-us/uwp/schemas/appxpackage/uapmanifestschema/element-application
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct ManifestApplication {
     #[serde(rename = "@Id")]
     pub id: String,
     #[serde(rename = "@Executable")]
-    pub executable: String,
+    pub executable: Option<String>,
     pub visual_elements: ManifestApplicationVisualElements,
 }
 

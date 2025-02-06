@@ -174,7 +174,7 @@ const inputVolume: number; // Input master volume from 0 to 1
 const inputIsMuted: boolean; // Input master volume is muted
 
 interface MediaSession {
-    id: string;
+    umid: string;
     title: string;
     author: string;
     thumbnail: string | null; // Path to temporary media session image
@@ -182,8 +182,7 @@ interface MediaSession {
     default: boolean;
     owner: {
         name: string;
-        iconPath: string | null;
-    } | null;
+    };
 }
 
 const mediaSession: MediaSession | null;

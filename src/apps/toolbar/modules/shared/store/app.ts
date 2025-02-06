@@ -1,6 +1,5 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import {
-  ApplicationHistory,
   DesktopFolder,
   DocumentsFolder,
   DownloadsFolder,
@@ -60,8 +59,6 @@ const initialState: RootState = {
   mediaOutputs: [],
   mediaInputs: [],
   notifications: [],
-  history: [],
-  historyOnMonitor: [],
   colors: UIColors.default().inner,
 };
 
@@ -132,8 +129,6 @@ export async function lazySlice(d: Dispatch) {
     userPicturesFolder: (await PicturesFolder.getAsync()).asArray(),
     userVideosFolder: (await VideosFolder.getAsync()).asArray(),
     userMusicFolder: (await MusicFolder.getAsync()).asArray(),
-    history: (await ApplicationHistory.getAsync()).asArray(),
-    historyOnMonitor: (await ApplicationHistory.getCurrentMonitorHistoryAsync()).asArray(),
   };
   d(RootActions.setUserRecentFolder(obj.userRecentFolder));
   d(RootActions.setUserDesktopFolder(obj.userDesktopFolder));
@@ -142,6 +137,4 @@ export async function lazySlice(d: Dispatch) {
   d(RootActions.setUserPicturesFolder(obj.userPicturesFolder));
   d(RootActions.setUserVideosFolder(obj.userVideosFolder));
   d(RootActions.setUserMusicFolder(obj.userMusicFolder));
-  d(RootActions.setHistory(obj.history));
-  d(RootActions.setHistoryOnMonitor(obj.historyOnMonitor));
 }

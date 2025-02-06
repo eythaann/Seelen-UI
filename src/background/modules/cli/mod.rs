@@ -26,12 +26,12 @@ use crate::{
 
 pub struct AppClient;
 impl AppClient {
-    fn socket_path() -> PathBuf {
+    fn socket_path() -> Result<PathBuf> {
         let dir = std::env::temp_dir().join("com.seelen.seelen-ui");
         if !dir.exists() {
-            fs::create_dir_all(&dir).unwrap();
+            fs::create_dir(&dir)?;
         }
-        dir.join("slu_tcp_socket")
+        Ok(dir.join("slu_tcp_socket"))
     }
 
     // const BUFFER_SIZE: usize = 5 * 1024 * 1024; // 5 MB
@@ -58,7 +58,7 @@ impl AppClient {
         let port = socket_addr.port();
 
         log::info!("TCP server listening on 127.0.0.1:{}", port);
-        fs::write(Self::socket_path(), port.to_string())?;
+        fs::write(Self::socket_path()?, port.to_string())?;
 
         spawn_named_thread("TCP Listener", move || {
             for stream in listener.incoming() {
@@ -76,7 +76,7 @@ impl AppClient {
     }
 
     pub fn connect_tcp() -> Result<TcpStream> {
-        let port = fs::read_to_string(Self::socket_path())?;
+        let port = fs::read_to_string(Self::socket_path()?)?;
         Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
     }
 

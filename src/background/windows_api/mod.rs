@@ -616,13 +616,10 @@ impl WindowsApi {
     pub fn get_executable_display_name(path: &Path) -> Result<String> {
         Com::run_with_context(|| unsafe {
             let shell_item = Self::get_shell_item(path)?;
-            match shell_item.GetString(&PKEY_FileDescription) {
-                Ok(description) => Ok(description.to_string()?),
-                Err(_) => Ok(shell_item
-                    .GetDisplayName(SIGDN_NORMALDISPLAY)?
-                    .to_string()?
-                    .replace(".exe", "")),
-            }
+            let text = shell_item
+                .GetString(&PKEY_FileDescription)
+                .or_else(|_| shell_item.GetDisplayName(SIGDN_NORMALDISPLAY))?;
+            Ok(text.to_string()?)
         })
     }
 

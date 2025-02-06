@@ -1,4 +1,4 @@
-import { ApplicationHistoryEntry, FancyToolbarSettings, File, Placeholder, Plugin, Settings, User } from '@seelen-ui/lib/types';
+import { FancyToolbarSettings, File, Placeholder, Plugin, Settings, User } from '@seelen-ui/lib/types';
 import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -72,7 +72,7 @@ export interface NetworkAdapter {
 }
 
 export interface MediaChannelTransportData {
-  id: string;
+  umid: string;
   title: string;
   author: string;
   thumbnail: string | null;
@@ -80,8 +80,7 @@ export interface MediaChannelTransportData {
   default: boolean;
   owner: {
     name: string;
-    iconPath: string | null;
-  } | null;
+  };
 }
 
 export interface MediaDeviceChannel {
@@ -140,6 +139,4 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   mediaOutputs: MediaDevice[];
   mediaInputs: MediaDevice[];
   notifications: AppNotification[];
-  history: ApplicationHistoryEntry[];
-  historyOnMonitor: ApplicationHistoryEntry[];
 }

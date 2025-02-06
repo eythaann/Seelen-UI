@@ -35,10 +35,10 @@ use crate::{
     error_handler::Result,
     event_manager, log_error,
     modules::start::application::START_MENU_MANAGER,
-    seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
+    seelen_weg::icon_extractor::extract_and_save_icon_umid,
     trace_lock,
     utils::pcwstr,
-    windows_api::{process::Process, Com, WindowsApi},
+    windows_api::{Com, WindowsApi},
 };
 
 use super::domain::{
@@ -185,7 +185,7 @@ impl MediaManagerEvents {
                 trace_lock!(MEDIA_MANAGER)
                     .playing()
                     .iter()
-                    .map(|session| session.id.clone())
+                    .map(|session| session.umid.clone())
                     .collect_vec()
             };
 
@@ -363,7 +363,7 @@ impl MediaManager {
     }
 
     pub fn player_mut(&mut self, id: &str) -> Option<&mut MediaPlayer> {
-        self.playing.iter_mut().find(|p| p.id == id)
+        self.playing.iter_mut().find(|p| p.umid == id)
     }
 
     pub fn get_raw_device(&self, device_id: &str) -> Option<IMMDevice> {
@@ -472,22 +472,9 @@ impl MediaManager {
         for session_idx in 0..enumerator.GetCount()? {
             let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
             let volume: ISimpleAudioVolume = session.cast()?;
-
-            let name;
-            let icon_path;
-            let process = Process::from_id(session.GetProcessId()?);
-            match process.program_path() {
-                Ok(path) => {
-                    name = WindowsApi::get_executable_display_name(&path)?;
-                    icon_path = extract_and_save_icon_from_file(&path)
-                        .ok()
-                        .map(|p| p.to_string_lossy().to_string());
-                }
-                Err(_) => {
-                    name = session.GetDisplayName()?.to_string()?;
-                    icon_path = None;
-                }
-            }
+            // let process = Process::from_id(session.GetProcessId()?);
+            let name = String::new(); // todo on media mixer feature
+            let icon_path = None; // todo on media mixer feature
 
             sessions.push(DeviceChannel {
                 id: session.GetSessionIdentifier()?.to_string()?,
@@ -585,14 +572,12 @@ impl MediaManager {
             }
         };
 
+        let _ = extract_and_save_icon_umid(&source_app_umid);
         self.playing.push(MediaPlayer {
-            id: source_app_umid.clone(),
+            umid: source_app_umid.clone(),
             title: properties.Title().unwrap_or_default().to_string_lossy(),
             author: properties.Artist().unwrap_or_default().to_string_lossy(),
-            owner: Some(MediaPlayerOwner {
-                name: display_name,
-                icon_path: extract_and_save_icon_umid(&source_app_umid).ok(),
-            }),
+            owner: MediaPlayerOwner { name: display_name },
             thumbnail: properties
                 .Thumbnail()
                 .ok()
@@ -616,7 +601,7 @@ impl MediaManager {
     fn update_recommended_player(&mut self) {
         if let Ok(recommended) = self.get_recommended_player_id() {
             for player in &mut self.playing {
-                player.default = player.id == recommended;
+                player.default = player.umid == recommended;
             }
         }
     }
@@ -630,7 +615,7 @@ impl MediaManager {
                 session.RemovePlaybackInfoChanged(playback_token)?;
             }
         }
-        self.playing.retain(|player| player.id != player_id);
+        self.playing.retain(|player| player.umid != player_id);
         Ok(())
     }
 
@@ -763,7 +748,7 @@ impl MediaManager {
     /// Release all resources
     /// should be called on application exit
     pub fn release(&mut self) {
-        let player_ids = self.playing.iter().map(|p| p.id.clone()).collect_vec();
+        let player_ids = self.playing.iter().map(|p| p.umid.clone()).collect_vec();
 
         for player_id in player_ids {
             log_error!(self.release_media_transport_session(&player_id));

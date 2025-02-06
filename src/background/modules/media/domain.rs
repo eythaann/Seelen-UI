@@ -16,17 +16,16 @@ use windows::{
 #[serde(rename_all = "camelCase")]
 pub struct MediaPlayerOwner {
     pub name: String,
-    pub icon_path: Option<PathBuf>,
 }
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MediaPlayer {
-    pub id: String,
+    pub umid: String,
     pub title: String,
     pub author: String,
     pub thumbnail: Option<PathBuf>,
-    pub owner: Option<MediaPlayerOwner>,
+    pub owner: MediaPlayerOwner,
     pub playing: bool,
     pub default: bool,
 }
