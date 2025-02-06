@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- devices and battery not clickables on toolbar.
+
 ## [2.1.4]
 ### fix
 - crash on user module.
