@@ -11,11 +11,14 @@ use crate::{
         are_overlaped,
         constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
     },
-    windows_api::{window::Window, AppBarData, AppBarDataEdge, WindowsApi},
+    windows_api::{window::Window, AppBarData, WindowsApi},
 };
 use base64::Engine;
 use itertools::Itertools;
-use seelen_core::{handlers::SeelenEvent, state::HideMode};
+use seelen_core::{
+    handlers::SeelenEvent,
+    state::{FancyToolbarSide, HideMode},
+};
 use serde::Serialize;
 use tauri::{Emitter, Listener, WebviewWindow};
 use windows::Win32::{
@@ -147,14 +150,25 @@ impl FancyToolbar {
     /// so we use this functions that only takes the toolbar in account
     pub fn get_work_area_by_monitor(monitor: HMONITOR) -> Result<RECT> {
         let monitor_info = WindowsApi::monitor_info(monitor)?;
-
         let dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let mut rect = monitor_info.monitorInfo.rcMonitor;
-
         let state = FULL_STATE.load();
+        let settings = state.settings().fancy_toolbar();
         if state.is_bar_enabled() {
-            let toolbar_height = state.settings().fancy_toolbar().height;
-            rect.top += (toolbar_height as f32 * dpi) as i32;
+            match settings.position {
+                FancyToolbarSide::Top => {
+                    rect = RECT {
+                        top: rect.top + (settings.height as f32 * dpi) as i32,
+                        ..rect
+                    };
+                }
+                FancyToolbarSide::Bottom => {
+                    rect = RECT {
+                        bottom: rect.bottom - (settings.height as f32 * dpi) as i32,
+                        ..rect
+                    };
+                }
+            }
         }
 
         Ok(rect)
@@ -169,15 +183,26 @@ impl FancyToolbar {
         let monitor_info = WindowsApi::monitor_info(monitor)?;
         let monitor_dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let rc_monitor = monitor_info.monitorInfo.rcMonitor;
-        self.theoretical_rect = RECT {
-            bottom: rc_monitor.top + (settings.height as f32 * monitor_dpi) as i32,
-            ..rc_monitor
-        };
+
+        match settings.position {
+            FancyToolbarSide::Top => {
+                self.theoretical_rect = RECT {
+                    bottom: rc_monitor.top + (settings.height as f32 * monitor_dpi) as i32,
+                    ..rc_monitor
+                };
+            }
+            FancyToolbarSide::Bottom => {
+                self.theoretical_rect = RECT {
+                    top: rc_monitor.bottom - (settings.height as f32 * monitor_dpi) as i32,
+                    ..rc_monitor
+                };
+            }
+        }
 
         let mut abd = AppBarData::from_handle(hwnd);
         match settings.hide_mode {
             HideMode::Never => {
-                abd.set_edge(AppBarDataEdge::Top);
+                abd.set_edge(settings.position.into());
                 abd.set_rect(self.theoretical_rect);
                 abd.register_as_new_bar();
             }

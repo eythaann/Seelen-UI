@@ -80,6 +80,7 @@ export function ToolBar() {
   const plugins = useSelector(Selectors.plugins);
   const isOverlaped = useSelector(Selectors.isOverlaped);
   const hideMode = useSelector(Selectors.settings.hideMode);
+  const position = useSelector(Selectors.settings.position);
 
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
@@ -156,7 +157,7 @@ export function ToolBar() {
           ...structure.right,
         ]}
         onReorder={onReorderPinned}
-        className={cx('ft-bar', {
+        className={cx('ft-bar', position.toLowerCase(), {
           'ft-bar-hidden': shouldBeHidden,
           'ft-bar-delayed': delayed,
         })}
