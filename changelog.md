@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.1.6]
 ### fix
 - missing translations.
 - fullscreen match not beeing removed.
