@@ -20,7 +20,7 @@ use windows::Win32::{
 use windows_core::Interface;
 
 use crate::{
-    error_handler::{AppError, Result},
+    error_handler::Result,
     log_error,
     seelen::{get_app_handle, Seelen},
     utils::{pwsh::PwshScript, spawn_named_thread, was_installed_using_msix},
@@ -56,8 +56,6 @@ impl AppClient {
         fs::write(Self::socket_path()?, port.to_string())?;
 
         spawn_named_thread("TCP Listener", move || {
-            log::debug!("Testing trace: {:?}", AppError::from("test"));
-
             for stream in listener.incoming() {
                 if !Seelen::is_running() {
                     log::trace!("Exiting TCP Listener");

@@ -24,6 +24,11 @@ network:
   saved: সংরক্ষিত নেটওয়ার্ক
   scanning: নেটওয়ার্কের জন্য স্ক্যান করা হচ্ছে
   secured: এনক্রিপ্ট করা নেটওয়ার্ক
+notifications:
+  clear: সব পরিষ্কার
+  empty: কোন বিজ্ঞপ্তি
+  settings: আরও বিজ্ঞপ্তি সেটিংস
+  title: বিজ্ঞপ্তি
 placeholder:
   battery_remaining: '% অবশিষ্ট'
   bluetooth_devices: ব্লুটুথ এবং ডিভাইস

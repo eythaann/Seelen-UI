@@ -24,6 +24,11 @@ network:
   saved: ເຄືອຂ່າຍທີ່ບັນທຶກໄວ້
   scanning: ກຳລັງສະແກນຫາເຄືອຂ່າຍ
   secured: ເຄືອຂ່າຍເຂົ້າລະຫັດ
+notifications:
+  clear: ລ້າງທັງຫມົດ
+  empty: ບໍ່ມີການແຈ້ງເຕືອນ
+  settings: ການຕັ້ງຄ່າການແຈ້ງເຕືອນເພີ່ມເຕີມ
+  title: ແຈ້ງການ
 placeholder:
   battery_remaining: ສ່ວນທີ່ເຫຼືອ
   bluetooth_devices: Bluetooth & ອຸປະກອນ

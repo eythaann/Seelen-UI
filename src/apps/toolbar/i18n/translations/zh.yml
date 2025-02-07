@@ -24,6 +24,11 @@ network:
   saved: 已保存的网络
   scanning: 扫描网络
   secured: 加密网络
+notifications:
+  clear: 全部清除
+  empty: 无通知
+  settings: 更多通知设置
+  title: 通知
 placeholder:
   battery_remaining: '% 剩余电量'
   bluetooth_devices: 蓝牙和设备

@@ -1,7 +1,7 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
-import { Button } from 'antd';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
@@ -15,18 +15,20 @@ import { Notification } from './Notification';
 export function Notifications() {
   const notifications = useSelector(Selectors.notifications);
 
+  const { t } = useTranslation();
+
   return (
     <BackgroundByLayersV2 className="notifications" onContextMenu={(e) => e.stopPropagation()}>
       <div className="notifications-header">
-        <span>Notifications</span>
-        <Button
-          size="small"
+        <span>{t('notifications.title')}</span>
+        <button
+          className="notifications-clear-button"
           onClick={() => {
             invoke(SeelenCommand.NotificationsCloseAll).catch(console.error);
           }}
         >
-          Clear all
-        </Button>
+          {t('notifications.clear')}
+        </button>
       </div>
 
       <div className="notifications-body">
@@ -43,22 +45,21 @@ export function Notifications() {
             animate={{ opacity: 1, height: 200 }}
             transition={{ duration: 0.2, delay: 0.4 }}
           >
-            <p>No notifications</p>
+            <p>{t('notifications.empty')}</p>
           </motion.div>
         )}
       </div>
       <div className="notifications-footer">
-        <Button
-          size="small"
-          type="text"
+        <button
+          className="notifications-settings-button"
           onClick={() => {
             invoke(SeelenCommand.OpenFile, { path: 'ms-settings:notifications' }).catch(
               console.error,
             );
           }}
         >
-          Go to notifications settings
-        </Button>
+          {t('notifications.settings')}
+        </button>
       </div>
     </BackgroundByLayersV2>
   );

@@ -24,6 +24,11 @@ network:
   saved: Mạng đã lưu
   scanning: Đang quét mạng
   secured: Mạng được mã hóa
+notifications:
+  clear: Rõ ràng tất cả
+  empty: Không có thông báo
+  settings: Nhiều cài đặt thông báo
+  title: Thông báo
 placeholder:
   battery_remaining: '% còn lại'
   bluetooth_devices: Bluetooth & thiết bị

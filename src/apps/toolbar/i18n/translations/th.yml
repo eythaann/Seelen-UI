@@ -24,6 +24,11 @@ network:
   saved: เครือข่ายที่บันทึกไว้
   scanning: กำลังสแกนหาเครือข่าย
   secured: เครือข่ายที่เข้ารหัส
+notifications:
+  clear: ล้างทั้งหมด
+  empty: ไม่มีการแจ้งเตือน
+  settings: การตั้งค่าการแจ้งเตือนเพิ่มเติม
+  title: การแจ้งเตือน
 placeholder:
   battery_remaining: '% ที่เหลืออยู่'
   bluetooth_devices: บลูทู ธ และอุปกรณ์

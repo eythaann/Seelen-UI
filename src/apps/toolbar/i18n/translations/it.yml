@@ -24,6 +24,11 @@ network:
   saved: Reti salvate
   scanning: Scansione delle reti
   secured: Rete criptata
+notifications:
+  clear: Cancella tutto
+  empty: Nessuna notifica
+  settings: Altre impostazioni di notifica
+  title: Notifiche
 placeholder:
   battery_remaining: '% rimanente'
   bluetooth_devices: Bluetooth & Dispositivi

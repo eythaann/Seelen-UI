@@ -24,6 +24,11 @@ network:
   saved: සුරැකි ජාල
   scanning: ජාල සඳහා ස්කෑන් කිරීම
   secured: සංකේතාත්මක ජාලය
+notifications:
+  clear: සියල්ල ඉවත් කරන්න
+  empty: දැනුම්දීම් නොමැත
+  settings: දැනුම්දීම් සැකසුම්
+  title: දැනුම්දීම්
 placeholder:
   battery_remaining: ඉතිරි% ඉතිරිව ඇත
   bluetooth_devices: බ්ලූටූත් සහ උපාංග

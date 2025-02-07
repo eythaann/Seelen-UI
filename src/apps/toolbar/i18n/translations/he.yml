@@ -24,6 +24,11 @@ network:
   saved: רשתות שמורות
   scanning: סריקה לאיתור רשתות
   secured: רשת מוצפנת
+notifications:
+  clear: לנקות הכל
+  empty: אין התראות
+  settings: הגדרות התראות נוספות
+  title: התראות
 placeholder:
   battery_remaining: '% נותר'
   bluetooth_devices: Bluetooth ומכשירים

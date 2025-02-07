@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- missing translations.
+- fullscreen match not beeing removed.
+
 ## [2.1.5]
 ### fix
 - devices and battery not clickables on toolbar.

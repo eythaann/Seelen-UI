@@ -24,6 +24,11 @@ network:
   saved: Saqlangan tarmoqlar
   scanning: Tarmoqlarni skanerlash
   secured: Shifrlangan tarmoq
+notifications:
+  clear: Hamma narsani tozalang
+  empty: Hech qanday bildirishnomalar yo'q
+  settings: Ko'proq xabarnomalar sozlamalari
+  title: Bildirishnoma
 placeholder:
   battery_remaining: '% Qolgan'
   bluetooth_devices: Bluetooth va qurilmalar

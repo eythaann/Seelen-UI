@@ -24,6 +24,11 @@ network:
   saved: Збережені мережі
   scanning: Сканування мереж
   secured: Зашифрована мережа
+notifications:
+  clear: Зачистити все.
+  empty: Немає сповіщень
+  settings: Більше налаштувань сповіщень
+  title: Сповіщення
 placeholder:
   battery_remaining: '% залишилось'
   bluetooth_devices: Bluetooth та пристрої

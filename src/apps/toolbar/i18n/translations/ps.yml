@@ -24,6 +24,11 @@ network:
   saved: خوندي شوي شبکې
   scanning: د شبکو لپاره سکین کول
   secured: کوډ شوی شبکه
+notifications:
+  clear: ټول پاک کړه
+  empty: خبرتیاوې نشته
+  settings: نور د خبرتیاوې تنظیمات
+  title: خبرتیاوې
 placeholder:
   battery_remaining: ٪ پاتې
   bluetooth_devices: بلوتوث او وسایل

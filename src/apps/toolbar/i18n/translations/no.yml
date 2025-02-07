@@ -24,6 +24,11 @@ network:
   saved: Lagrede nettverk
   scanning: Skanner etter nettverk
   secured: Kryptert nettverk
+notifications:
+  clear: Fjern alle
+  empty: Ingen varsler
+  settings: Flere varsler
+  title: Varsler
 placeholder:
   battery_remaining: '% gjenstående'
   bluetooth_devices: Bluetooth & Devices

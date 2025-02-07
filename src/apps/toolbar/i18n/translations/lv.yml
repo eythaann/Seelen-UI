@@ -24,6 +24,11 @@ network:
   saved: Saglabātie tīkli
   scanning: Tīklu meklēšana
   secured: Šifrēts tīkls
+notifications:
+  clear: Notīrīt visus
+  empty: Nav paziņojumu
+  settings: Vairāk paziņojumu iestatījumu
+  title: Paziņojumi
 placeholder:
   battery_remaining: '% atliekas'
   bluetooth_devices: Bluetooth & ierīces

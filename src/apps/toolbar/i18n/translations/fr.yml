@@ -24,6 +24,11 @@ network:
   saved: Réseaux enregistrés
   scanning: Recherche de réseaux
   secured: Réseau crypté
+notifications:
+  clear: Tout effacer
+  empty: Aucune notification
+  settings: Autres paramètres de notification
+  title: Notifications
 placeholder:
   battery_remaining: '% restant'
   bluetooth_devices: Bluetooth

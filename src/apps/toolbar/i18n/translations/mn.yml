@@ -24,6 +24,11 @@ network:
   saved: Хадгалсан сүлжээнүүд
   scanning: Сүлжээг хайж байна
   secured: Шифрлэгдсэн сүлжээ
+notifications:
+  clear: Бүгдийг цэвэрлэ
+  empty: Мэдэгдэл байхгүй байна
+  settings: Илүү олон мэдэгдлийн тохиргоо
+  title: Мэдэгдэл
 placeholder:
   battery_remaining: '% үлдсэн'
   bluetooth_devices: Блютүүт ба төхөөрөмж

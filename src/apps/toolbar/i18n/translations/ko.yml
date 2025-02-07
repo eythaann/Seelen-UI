@@ -24,6 +24,11 @@ network:
   saved: 저장된 네트워크
   scanning: 네트워크 검색 중
   secured: 암호화된 네트워크
+notifications:
+  clear: 모두 지우기
+  empty: 알림 없음
+  settings: 추가 알림 설정
+  title: 알림
 placeholder:
   battery_remaining: '% 남음'
   bluetooth_devices: 블루투스 및 장치
