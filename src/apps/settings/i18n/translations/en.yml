@@ -271,6 +271,7 @@ weg:
       label: Pinned Items Visibility
       when_primary: When the monitor is primary
     size: Item Size
+    show_instance_counter: Show counter for open windows
     temporal_visibility:
       all: All
       label: Unpinned Items Visibility
