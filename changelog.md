@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- power module not clickable on toolbar.
+
 ## [2.1.6]
 ### fix
 - missing translations.

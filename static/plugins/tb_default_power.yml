@@ -24,4 +24,4 @@ plugin:
       string(battery.percentage),
       "%"
     )
-  onClick: open("ms-settings:powersleep")
+  onClickV2: open("ms-settings:powersleep")
