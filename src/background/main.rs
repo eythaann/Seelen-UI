@@ -125,6 +125,7 @@ fn main() -> Result<()> {
     handle_console_cli()?;
 
     if is_already_runnning() {
+        AppClient::open_settings()?;
         return Ok(());
     }
 

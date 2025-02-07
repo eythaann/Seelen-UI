@@ -17,7 +17,7 @@ use windows_core::Interface;
 
 use std::{
     ffi::{c_void, OsString},
-    os::windows::ffi::OsStrExt,
+    os::windows::ffi::{OsStrExt, OsStringExt},
     path::{Path, PathBuf},
     thread::sleep,
     time::Duration,
@@ -88,9 +88,9 @@ use windows::{
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
-                SHCreateItemFromParsingName, SHLoadIndirectString, SHQueryUserNotificationState,
-                ShellLink, VirtualDesktopManager, QUERY_USER_NOTIFICATION_STATE,
-                QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
+                SHCreateItemFromParsingName, SHGetKnownFolderPath, SHLoadIndirectString,
+                SHQueryUserNotificationState, ShellLink, VirtualDesktopManager, KF_FLAG_DEFAULT,
+                QUERY_USER_NOTIFICATION_STATE, QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 BringWindowToTop, EnumWindows, GetClassNameW, GetDesktopWindow,
@@ -984,5 +984,13 @@ impl WindowsApi {
         let mut name = WindowsString::new_to_fill(1024);
         unsafe { GetComputerNameExW(format, name.as_pwstr(), &mut 1024)? };
         Ok(name.to_string())
+    }
+
+    // change to some crate like dirs to allow multiple platforms
+    pub fn known_folder(folder_id: windows::core::GUID) -> Result<PathBuf> {
+        let path = unsafe { SHGetKnownFolderPath(&folder_id, KF_FLAG_DEFAULT, None)? };
+        Ok(PathBuf::from(OsString::from_wide(unsafe {
+            path.as_wide()
+        })))
     }
 }

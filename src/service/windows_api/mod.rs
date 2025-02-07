@@ -1,6 +1,6 @@
 pub mod com;
 
-use std::path::PathBuf;
+use std::{ffi::OsString, os::windows::ffi::OsStringExt, path::PathBuf};
 
 use com::Com;
 use windows::Win32::{
@@ -16,7 +16,7 @@ use windows::Win32::{
     },
     UI::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
-        Shell::{IShellLinkW, ShellLink},
+        Shell::{IShellLinkW, SHGetKnownFolderPath, ShellLink, KF_FLAG_DEFAULT},
         WindowsAndMessaging::{
             BringWindowToTop, GetForegroundWindow, GetWindowThreadProcessId, IsIconic,
             SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
@@ -190,5 +190,13 @@ impl WindowsApi {
             persist_file.Save(lnk_path_wide.as_pcwstr(), true)?;
             Ok(lnk_path)
         })
+    }
+
+    // change to some crate like dirs to allow multiple platforms
+    pub fn known_folder(folder_id: windows::core::GUID) -> Result<PathBuf> {
+        let path = unsafe { SHGetKnownFolderPath(&folder_id, KF_FLAG_DEFAULT, None)? };
+        Ok(PathBuf::from(OsString::from_wide(unsafe {
+            path.as_wide()
+        })))
     }
 }

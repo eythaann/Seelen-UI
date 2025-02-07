@@ -13,15 +13,18 @@ pub use domain::SvcAction;
 use domain::SvcMessage;
 use itertools::Itertools;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
-use windows::Win32::System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler};
+use windows::Win32::{
+    System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler},
+    UI::Shell::FOLDERID_LocalAppData,
+};
 use windows_core::Interface;
 
 use crate::{
-    error_handler::Result,
+    error_handler::{AppError, Result},
     log_error,
     seelen::{get_app_handle, Seelen},
-    utils::{pwsh::PwshScript, spawn_named_thread},
-    windows_api::Com,
+    utils::{pwsh::PwshScript, spawn_named_thread, was_installed_using_msix},
+    windows_api::{Com, WindowsApi},
 };
 
 pub struct AppClient;
@@ -53,6 +56,8 @@ impl AppClient {
         fs::write(Self::socket_path()?, port.to_string())?;
 
         spawn_named_thread("TCP Listener", move || {
+            log::debug!("Testing trace: {:?}", AppError::from("test"));
+
             for stream in listener.incoming() {
                 if !Seelen::is_running() {
                     log::trace!("Exiting TCP Listener");
@@ -72,6 +77,12 @@ impl AppClient {
     pub fn connect_tcp() -> Result<TcpStream> {
         let port = fs::read_to_string(Self::socket_path()?)?;
         Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
+    }
+
+    pub fn open_settings() -> Result<()> {
+        let stream = Self::connect_tcp()?;
+        serde_json::to_writer(stream, &["settings"])?;
+        Ok(())
     }
 
     /// will fail if no instance is running
@@ -135,6 +146,16 @@ impl ServiceClient {
         Self::connect_tcp().is_ok()
     }
 
+    pub fn service_path() -> Result<PathBuf> {
+        let service_path = if was_installed_using_msix() {
+            WindowsApi::known_folder(FOLDERID_LocalAppData)?
+                .join("Microsoft\\WindowsApps\\slu-service.exe")
+        } else {
+            std::env::current_exe()?.with_file_name("slu-service.exe")
+        };
+        Ok(service_path)
+    }
+
     fn start_service_task() -> Result<()> {
         Com::run_with_context(|| unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
@@ -148,11 +169,7 @@ impl ServiceClient {
             let mut action_path = windows_core::BSTR::new();
             action.Path(&mut action_path)?;
 
-            let service_path = std::env::current_exe()?
-                .with_file_name("slu-service.exe")
-                .to_string_lossy()
-                .to_lowercase();
-
+            let service_path = Self::service_path()?.to_string_lossy().to_lowercase();
             match action_path.to_string().to_lowercase() == service_path {
                 true => {
                     task.Run(None)?;
@@ -170,8 +187,12 @@ impl ServiceClient {
     pub async fn start_service() -> Result<()> {
         if let Err(err) = Self::start_service_task() {
             log::debug!("Can not start service via task scheduler: {}", err);
-            let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
-            let script = PwshScript::new(format!("&\"{}\"", service_path.display(),)).elevated();
+            let script = PwshScript::new(format!(
+                "Start-Process '{}' -Verb runAs",
+                Self::service_path()?.display()
+            ))
+            .inline_command()
+            .elevated();
             let result = script.execute().await;
             if let Err(err) = result {
                 let try_again = get_app_handle()

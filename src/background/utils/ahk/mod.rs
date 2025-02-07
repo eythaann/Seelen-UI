@@ -3,8 +3,13 @@ use std::{collections::HashMap, env::temp_dir, path::PathBuf};
 use regex::Regex;
 use tauri::{path::BaseDirectory, Manager};
 use tauri_plugin_shell::ShellExt;
+use windows::Win32::UI::Shell::FOLDERID_LocalAppData;
 
-use crate::{error_handler::Result, seelen::get_app_handle, state::domain::AhkVar};
+use crate::{
+    error_handler::Result, seelen::get_app_handle, state::domain::AhkVar, windows_api::WindowsApi,
+};
+
+use super::was_installed_using_msix;
 
 pub struct AutoHotKey {
     inner: String,
@@ -13,14 +18,16 @@ pub struct AutoHotKey {
 
 impl AutoHotKey {
     pub fn new(contents: &str) -> Self {
+        let app_path = if was_installed_using_msix() {
+            WindowsApi::known_folder(FOLDERID_LocalAppData)
+                .expect("Failed to get known folder")
+                .join("Microsoft\\WindowsApps\\slu-service.exe")
+        } else {
+            std::env::current_exe().expect("Failed to get current exe path")
+        };
         Self {
             name: None,
-            inner: contents.replace(
-                "SEELEN_UI_EXE_PATH",
-                &std::env::current_exe()
-                    .expect("Failed to get current exe path")
-                    .to_string_lossy(),
-            ),
+            inner: contents.replace("SEELEN_UI_EXE_PATH", app_path.to_string_lossy().as_ref()),
         }
     }
 

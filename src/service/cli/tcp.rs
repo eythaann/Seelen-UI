@@ -51,7 +51,6 @@ impl TcpService {
         bytes.pop(); // Remove end of transmission block
         let message: SvcMessage = serde_json::from_slice(&bytes)?;
         log::trace!("TCP command received: {:?}", message.action);
-        log::trace!("Token: {:?}", message.token);
 
         if message.token != Self::token() {
             log::warn!("Unauthorized connection");

@@ -6,7 +6,7 @@ use std::sync::atomic::Ordering;
 
 use clap::{Arg, ArgAction, Command};
 use debugger::CliDebugger;
-use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_PROCESS};
+use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
 use crate::modules::virtual_desk::{VirtualDesktopManager, VIRTUAL_DESKTOP_MANAGER};
@@ -115,19 +115,10 @@ pub fn get_app_command() -> Command {
         ])
 }
 
-pub fn attach_console() -> Result<()> {
-    if !tauri::is_dev() {
-        unsafe { AttachConsole(ATTACH_PARENT_PROCESS)? };
-    }
-    Ok(())
-}
-
-#[allow(dead_code)]
-pub fn detach_console() -> Result<()> {
-    if !tauri::is_dev() {
-        unsafe { FreeConsole()? };
-    }
-    Ok(())
+// attach console could fail if not console to attach is present
+pub fn attach_console() -> bool {
+    let already_attached = unsafe { !GetConsoleWindow().is_invalid() };
+    already_attached || unsafe { AttachConsole(ATTACH_PARENT_PROCESS).is_ok() }
 }
 
 /// Handles the CLI and will exit the process if needed.\
@@ -137,7 +128,7 @@ pub fn handle_console_cli() -> Result<()> {
         Ok(m) => m,
         Err(e) => {
             // (help, --help or -h) and other sugestions are managed as error
-            attach_console()?;
+            attach_console();
             e.exit();
         }
     };
@@ -151,13 +142,13 @@ pub fn handle_console_cli() -> Result<()> {
     }
 
     if matches.get_flag("version") {
-        attach_console()?;
+        attach_console();
         println!("{}", env!("CARGO_PKG_VERSION"));
         std::process::exit(0);
     }
 
     if matches.subcommand().is_some() || matches.get_one::<String>("uri").is_some() {
-        attach_console()?;
+        attach_console();
         AppClient::redirect_cli_to_instance()?;
         std::process::exit(0);
     }
@@ -237,7 +228,5 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
         }
         return Ok(());
     }
-
-    Seelen::show_settings()?;
     Ok(())
 }

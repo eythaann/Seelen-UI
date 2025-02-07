@@ -12,6 +12,7 @@ mod windows_api;
 
 use cli::{handle_console_client, TcpService};
 use crossbeam_channel::{Receiver, Sender};
+use enviroment::was_installed_using_msix;
 use error::Result;
 use itertools::Itertools;
 use lazy_static::lazy_static;
@@ -51,15 +52,19 @@ fn is_seelen_ui_running() -> bool {
 }
 
 fn launch_seelen_ui() -> Result<()> {
-    let program = std::env::current_exe()
-        .unwrap()
+    if was_installed_using_msix() {
+        std::process::Command::new("explorer")
+            .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
+            .status()?;
+        return Ok(());
+    }
+
+    let program = std::env::current_exe()?
         .with_file_name("seelen-ui.exe")
         .to_string_lossy()
         .to_string();
-    // we create a link file to trick with explorer into a separated process and without elevation
-    let lnk_file = WindowsApi::create_temp_shortcut(&program, "--silent")?;
-    Command::new("explorer").arg(&lnk_file).status()?;
-    std::fs::remove_file(&lnk_file)?;
+    // start it using explorer to spawn it as unelevated
+    Command::new("explorer").arg(&program).status()?;
     Ok(())
 }
 

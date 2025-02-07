@@ -5,10 +5,15 @@ use windows::Win32::{
         TASK_CREATE_OR_UPDATE, TASK_LOGON_INTERACTIVE_TOKEN, TASK_RUNLEVEL_HIGHEST,
         TASK_TRIGGER_LOGON,
     },
+    UI::Shell::FOLDERID_LocalAppData,
 };
 use windows_core::{Interface, BSTR};
 
-use crate::{error::Result, windows_api::com::Com};
+use crate::{
+    enviroment::was_installed_using_msix,
+    error::Result,
+    windows_api::{com::Com, WindowsApi},
+};
 
 pub struct TaskSchedulerHelper {}
 
@@ -38,7 +43,12 @@ impl TaskSchedulerHelper {
 
     /// this task handles the startup of the service and the app on login
     pub fn create_service_task() -> Result<()> {
-        let path = std::env::current_exe()?.to_string_lossy().to_string();
+        let service_path = if was_installed_using_msix() {
+            WindowsApi::known_folder(FOLDERID_LocalAppData)?
+                .join("Microsoft\\WindowsApps\\slu-service.exe")
+        } else {
+            std::env::current_exe()?
+        };
         Com::run_with_context(|| unsafe {
             let task_service = Self::get_task_service()?;
             // remove old task as backwards compatibility
@@ -69,7 +79,7 @@ impl TaskSchedulerHelper {
 
             let actions = task.Actions()?;
             let exec_action: IExecAction2 = actions.Create(TASK_ACTION_EXEC)?.cast()?;
-            exec_action.SetPath(&path.into())?;
+            exec_action.SetPath(&service_path.to_string_lossy().to_string().into())?;
 
             let mut task_xml = BSTR::new();
             task.XmlText(&mut task_xml)?;
