@@ -48,20 +48,20 @@ unlabelled_tray: Иконка трея без надписи
 userhome:
   empty_list: Нет предметов
   folders:
-    desktop: Настольный компьютер
+    desktop: Рабочий стол
     documents: Документы
-    downloads: Скачать
+    downloads: Загрузки
     more_items: Показать еще...
     music: Музыка
-    pictures: Фотографии
+    pictures: Изображения
     recent: Недавно использованные
     reduce_items: Показать меньше...
-    title: Каталоги пользователей
+    title: Папки пользователей
     videos: Видео
   profile:
-    accounts: Настройки открытого счета
-    open_onedrive: Откройте каталог OneDrive
-    open_user_folder: Откройте каталог пользователя
+    accounts: Настройки учетной записи
+    open_onedrive: Открыть папку OneDrive
+    open_user_folder: Откройте папку пользователя
   seelen_options:
     open_installation_folder: Откройте папку настроек Seelen
     open_log_folder: Откройте папку журнала Seelen
