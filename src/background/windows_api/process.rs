@@ -74,7 +74,7 @@ impl Process {
         Ok(family_name.to_string())
     }
 
-    /// package app user model id
+    /// package app user model id, (appx, eg: "Microsoft.WindowsTerminal_8wekyb3d8bbwe!TerminalApp")
     pub fn package_app_user_model_id(&self) -> Result<AppUserModelId> {
         let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;

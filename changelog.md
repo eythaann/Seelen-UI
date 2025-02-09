@@ -4,6 +4,7 @@
 ### fix
 - power module not clickable on toolbar.
 - pinned items not working correctly for some apps.
+- electron apps without aumid.
 
 ## [2.1.6]
 ### fix

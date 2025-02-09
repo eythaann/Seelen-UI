@@ -15,6 +15,7 @@ use crate::{
     error_handler::Result,
     modules::{
         cli::{ServiceClient, SvcAction},
+        start::application::START_MENU_MANAGER,
         virtual_desk::{get_vd_manager, VirtualDesktop},
     },
     seelen_bar::FancyToolbar,
@@ -80,15 +81,25 @@ impl Window {
     ///
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
     pub fn app_user_model_id(&self) -> Option<AppUserModelId> {
-        match WindowsApi::get_window_app_user_model_id(self.0) {
-            Ok(umid) => match WindowsApi::is_uwp_package_id(&umid) {
+        if let Ok(umid) = WindowsApi::get_window_app_user_model_id(self.0) {
+            return match WindowsApi::is_uwp_package_id(&umid) {
                 true => Some(AppUserModelId::Appx(umid)),
                 false => Some(AppUserModelId::PropertyStore(umid)),
-            },
-            Err(_) => match self.process().package_app_user_model_id() {
-                Ok(umid) => Some(umid),
-                Err(_) => None,
-            },
+            };
+        }
+
+        let process = self.process();
+        if let Ok(umid) = process.package_app_user_model_id() {
+            return Some(umid);
+        }
+
+        if self.is_electron() {
+            let path = process.program_path().ok()?;
+            let guard = START_MENU_MANAGER.load();
+            let item = guard.get_by_target(&path)?;
+            Some(AppUserModelId::PropertyStore(item.umid.clone()?))
+        } else {
+            None
         }
     }
 
