@@ -1,4 +1,4 @@
-use std::ops::Index;
+use std::{ops::Index, path::PathBuf};
 
 use clap::Command;
 use regex::Regex;
@@ -97,8 +97,11 @@ impl SeelenWeg {
                         // and without elevation in case Seelen UI was running as admin
                         // this could take some delay like is creating a file but just are some milliseconds
                         // and this exposed funtion is intended to just run certain times
-                        let lnk_file =
-                            WindowsApi::create_temp_shortcut(&program, &matches.join(" "))?;
+                        let lnk_file = WindowsApi::create_temp_shortcut(
+                            &PathBuf::from(program),
+                            &matches.join(" "),
+                            inner_data.relaunch_in.as_deref(),
+                        )?;
                         let path = lnk_file.clone();
                         tauri::async_runtime::block_on(async move {
                             get_app_handle()

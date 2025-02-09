@@ -226,10 +226,7 @@ export function SeelenWeg() {
 
 function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
   if (item.type === WegItemType.Pinned) {
-    if (
-      item.path.toLowerCase().endsWith('.exe') ||
-      item.relaunchCommand.toLowerCase().includes('.exe')
-    ) {
+    if (item.subtype === 'App') {
       return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
     }
     return <FileOrFolder key={item.id} item={item} />;

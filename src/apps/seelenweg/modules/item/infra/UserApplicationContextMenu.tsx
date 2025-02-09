@@ -50,11 +50,9 @@ export function getUserApplicationContextMenu(
       });
     }
 
-    menu.push(
-      {
-        type: 'divider',
-      },
-    );
+    menu.push({
+      type: 'divider',
+    });
   }
 
   menu.push(
@@ -64,7 +62,7 @@ export function getUserApplicationContextMenu(
       icon: <img className="weg-context-menu-item-icon" src={iconSrc} />,
       onClick: () => {
         const { program, args } = parseCommand(item.relaunchCommand);
-        invoke(SeelenCommand.Run, { program, args });
+        invoke(SeelenCommand.Run, { program, args, workingDir: item.relaunchIn });
       },
     },
     {

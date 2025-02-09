@@ -145,7 +145,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
               let window = item.windows[0];
               if (!window) {
                 const { program, args } = parseCommand(item.relaunchCommand);
-                invoke(SeelenCommand.Run, { program, args });
+                invoke(SeelenCommand.Run, { program, args, workingDir: item.relaunchIn });
               } else {
                 invoke(SeelenCommand.WegToggleWindowState, {
                   hwnd: window.handle,

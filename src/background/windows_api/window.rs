@@ -24,7 +24,9 @@ use crate::{
     seelen_wm_v2::instance::WindowManagerV2,
 };
 
-use super::{monitor::Monitor, process::Process, WindowEnumerator, WindowsApi};
+use super::{
+    monitor::Monitor, process::Process, types::AppUserModelId, WindowEnumerator, WindowsApi,
+};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Window(HWND);
@@ -70,12 +72,24 @@ impl Window {
         self.0 .0 as isize
     }
 
-    /// App user model id asigned to the window via property-store
-    /// To get UWP app user model id use `self.process().package_app_user_model_id()`
+    pub fn is_electron(&self) -> bool {
+        self.class() == "Chrome_WidgetWin_1"
+    }
+
+    /// Application user model id asigned to the window via property-store or inherited from the process
     ///
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
-    pub fn app_user_model_id(&self) -> Option<String> {
-        WindowsApi::get_window_app_user_model_id(self.0).ok()
+    pub fn app_user_model_id(&self) -> Option<AppUserModelId> {
+        match WindowsApi::get_window_app_user_model_id(self.0) {
+            Ok(umid) => match WindowsApi::is_uwp_package_id(&umid) {
+                true => Some(AppUserModelId::Appx(umid)),
+                false => Some(AppUserModelId::PropertyStore(umid)),
+            },
+            Err(_) => match self.process().package_app_user_model_id() {
+                Ok(umid) => Some(umid),
+                Err(_) => None,
+            },
+        }
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-preventpinning

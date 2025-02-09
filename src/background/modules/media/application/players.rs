@@ -19,7 +19,7 @@ use crate::{
     },
     seelen_weg::icon_extractor::extract_and_save_icon_umid,
     trace_lock,
-    windows_api::WindowsApi,
+    windows_api::{types::AppUserModelId, WindowsApi},
 };
 
 use super::{MediaManagerEvents, MEDIA_MANAGER};
@@ -111,34 +111,37 @@ impl MediaManager {
         &mut self,
         session: GlobalSystemMediaTransportControlsSession,
     ) -> Result<()> {
-        let source_app_umid = session.SourceAppUserModelId()?.to_string_lossy();
+        let source_app_umid: AppUserModelId =
+            session.SourceAppUserModelId()?.to_string_lossy().into();
         let properties = session.TryGetMediaPropertiesAsync()?.get()?;
 
         let playback_info = session.GetPlaybackInfo()?;
         let status = playback_info.PlaybackStatus()?;
 
-        let display_name = if WindowsApi::is_uwp_package_id(&source_app_umid) {
-            WindowsApi::get_uwp_app_info(&source_app_umid)?
+        let display_name = match &source_app_umid {
+            AppUserModelId::Appx(umid) => WindowsApi::get_uwp_app_info(umid)?
                 .DisplayInfo()?
                 .DisplayName()?
-                .to_string_lossy()
-        } else {
-            let shortcut = START_MENU_MANAGER
-                .load()
-                .search_shortcut_with_same_umid(&source_app_umid);
-            match shortcut {
-                Some(shortcut) => shortcut
-                    .file_stem()
-                    .unwrap_or_else(|| OsStr::new("Unknown"))
-                    .to_string_lossy()
-                    .to_string(),
-                None => "Unknown".to_string(),
+                .to_string_lossy(),
+            AppUserModelId::PropertyStore(umid) => {
+                let shortcut = START_MENU_MANAGER
+                    .load()
+                    .search_shortcut_with_same_umid(umid);
+                match shortcut {
+                    Some(shortcut) => shortcut
+                        .file_stem()
+                        .unwrap_or_else(|| OsStr::new("Unknown"))
+                        .to_string_lossy()
+                        .to_string(),
+                    None => "Unknown".to_string(),
+                }
             }
         };
 
+        // pre-extraction to avoid flickering on the ui
         let _ = extract_and_save_icon_umid(&source_app_umid);
         self.playing.push(MediaPlayer {
-            umid: source_app_umid.clone(),
+            umid: source_app_umid.to_string(),
             title: properties.Title().unwrap_or_default().to_string_lossy(),
             author: properties.Artist().unwrap_or_default().to_string_lossy(),
             owner: MediaPlayerOwner { name: display_name },
@@ -152,13 +155,14 @@ impl MediaManager {
 
         // listen for media transport events
         self.media_player_event_tokens.insert(
-            source_app_umid.clone(),
+            source_app_umid.to_string(),
             (
                 session.MediaPropertiesChanged(&self.media_player_properties_event_handler)?,
                 session.PlaybackInfoChanged(&self.media_player_playback_event_handler)?,
             ),
         );
-        self.media_players.insert(source_app_umid, session);
+        self.media_players
+            .insert(source_app_umid.to_string(), session);
         Ok(())
     }
 

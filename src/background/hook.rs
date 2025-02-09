@@ -176,10 +176,7 @@ impl HookManager {
                         .app_display_name()
                         .unwrap_or(String::from("Error on App Name")),
                     exe: process.program_path().ok(),
-                    umid: process
-                        .package_app_user_model_id()
-                        .ok()
-                        .or_else(|| window.app_user_model_id()),
+                    umid: window.app_user_model_id().map(|umid| umid.to_string()),
                 },
             );
             log_error!(result);

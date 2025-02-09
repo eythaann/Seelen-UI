@@ -28,6 +28,7 @@ use crate::modules::uwp::UwpManager;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 use crate::utils::constants::SEELEN_COMMON;
+use crate::windows_api::types::AppUserModelId;
 use crate::windows_api::WindowsApi;
 
 /// Convert BGRA to RGBA
@@ -300,37 +301,35 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
 }
 
 /// returns the path of the icon extracted from the app with the specified package app user model id.
-pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf> {
-    let app_umid = app_umid.as_ref();
-
+pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<PathBuf> {
     let icon_manager_mutex = FULL_STATE.load().icon_packs().clone();
-    if let Some(icon) = trace_lock!(icon_manager_mutex).get_icon_by_key(app_umid) {
+    if let Some(icon) = trace_lock!(icon_manager_mutex).get_icon_by_key(aumid.as_ref()) {
         return Ok(icon);
     }
 
-    if !WindowsApi::is_uwp_package_id(app_umid) {
-        let shortcut = START_MENU_MANAGER
-            .load()
-            .search_shortcut_with_same_umid(app_umid)
-            .ok_or("No shortcut found for umid")?;
-        let extracted = extract_and_save_icon_from_file(&shortcut)?;
-        let filename = PathBuf::from(extracted.file_name().unwrap());
-        let mut icon_manager = trace_lock!(icon_manager_mutex);
-        icon_manager.add_system_icon(app_umid, &filename);
-        icon_manager.write_system_icon_pack()?;
-        return Ok(extracted);
-    }
+    let image_path = match aumid {
+        AppUserModelId::Appx(aumid) => {
+            let app_icon = UwpManager::get_high_quality_icon_path(aumid)?;
+            let image_path = SEELEN_COMMON
+                .icons_path()
+                .join("system")
+                .join(&format!("{}.png", uuid::Uuid::new_v4()));
+            std::fs::copy(app_icon, &image_path)?;
+            image_path
+        }
+        AppUserModelId::PropertyStore(aumid) => {
+            let shortcut = START_MENU_MANAGER
+                .load()
+                .search_shortcut_with_same_umid(aumid)
+                .ok_or("No shortcut found for umid")?;
+            extract_and_save_icon_from_file(&shortcut)?
+        }
+    };
 
-    let app_icon = UwpManager::get_high_quality_icon_path(app_umid)?;
-
-    let relative_path = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
-    let image_path = SEELEN_COMMON
-        .icons_path()
-        .join("system")
-        .join(&relative_path);
-    std::fs::copy(app_icon, &image_path)?;
+    let filename = PathBuf::from(image_path.file_name().unwrap());
     let mut icon_manager = trace_lock!(icon_manager_mutex);
-    icon_manager.add_system_icon(app_umid, &relative_path);
+    icon_manager.add_system_icon(aumid, &filename);
     icon_manager.write_system_icon_pack()?;
+
     Ok(image_path)
 }

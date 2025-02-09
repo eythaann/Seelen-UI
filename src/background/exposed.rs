@@ -57,12 +57,13 @@ async fn run_as_admin(program: String, args: Vec<String>) -> Result<()> {
 }
 
 #[tauri::command(async)]
-async fn run(program: String, args: Vec<String>) -> Result<()> {
+async fn run(program: PathBuf, args: Vec<String>, working_dir: Option<PathBuf>) -> Result<()> {
     // we create a link file to trick with explorer into a separated process
     // and without elevation in case Seelen UI was running as admin
     // this could take some delay like is creating a file but just are some milliseconds
     // and this exposed funtion is intended to just run certain times
-    let lnk_file = WindowsApi::create_temp_shortcut(&program, &args.join(" "))?;
+    let lnk_file =
+        WindowsApi::create_temp_shortcut(&program, &args.join(" "), working_dir.as_deref())?;
     get_app_handle()
         .shell()
         .command("explorer")
@@ -119,7 +120,7 @@ fn send_keys(keys: String) -> Result<()> {
 fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Option<PathBuf> {
     let mut icon = None;
     if let Some(umid) = umid {
-        icon = extract_and_save_icon_umid(&umid).ok();
+        icon = extract_and_save_icon_umid(&umid.into()).ok();
     }
     match path {
         Some(path) if icon.is_none() => extract_and_save_icon_from_file(&path).ok(),

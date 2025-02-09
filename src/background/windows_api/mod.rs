@@ -4,6 +4,7 @@ mod iterator;
 pub mod monitor;
 pub mod process;
 pub mod string_utils;
+pub mod types;
 pub mod window;
 
 pub use app_bar::*;
@@ -559,15 +560,26 @@ impl WindowsApi {
         Ok(app_info)
     }
 
-    pub fn create_temp_shortcut(program: &str, args: &str) -> Result<PathBuf> {
+    pub fn create_temp_shortcut(
+        program: &Path,
+        args: &str,
+        working_dir: Option<&Path>,
+    ) -> Result<PathBuf> {
+        let working_dir = working_dir.or_else(|| program.parent());
+
         Com::run_with_context(|| unsafe {
             let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
 
-            let program = WindowsString::from_str(program);
+            let program = WindowsString::from_os_string(program.as_os_str());
             shell_link.SetPath(program.as_pcwstr())?;
 
             let arguments = WindowsString::from_str(args);
             shell_link.SetArguments(arguments.as_pcwstr())?;
+
+            if let Some(working_dir) = working_dir {
+                let working_dir = WindowsString::from_os_string(working_dir.as_os_str());
+                shell_link.SetWorkingDirectory(working_dir.as_pcwstr())?;
+            }
 
             let temp_dir = std::env::temp_dir();
             let lnk_path = temp_dir.join(format!("{}.lnk", uuid::Uuid::new_v4()));

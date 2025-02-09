@@ -43,8 +43,8 @@ const ActionsScope = {
   open(path: string) {
     invoke(SeelenCommand.OpenFile, { path }).catch(console.error);
   },
-  run(program: string, ...args: string[]) {
-    invoke(SeelenCommand.Run, { program, args }).catch(console.error);
+  run(program: string, args: string[], workingDir: string) {
+    invoke(SeelenCommand.Run, { program, args, workingDir }).catch(console.error);
   },
   copyClipboard(text: string) {
     navigator.clipboard.writeText(text);

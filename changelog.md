@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### fix
 - power module not clickable on toolbar.
+- pinned items not working correctly for some apps.
 
 ## [2.1.6]
 ### fix
