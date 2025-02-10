@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.1.8]
 ### features
 - add button to clear the cached icons on settings.
 
