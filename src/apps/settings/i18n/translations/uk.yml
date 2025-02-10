@@ -84,6 +84,8 @@ devtools:
   settings_file: Файл налаштувань
   simulate_fullscreen: Симулювати повноекранну подію
 extras:
+  clear_icons: Очистити кеш системних іконок
+  clear_icons_tooltip: Може знадобитися перезапуск для повного набрання чинності для всіх віджетів
   discord: Discord
   exit: Закрити програму
   github: GitHub

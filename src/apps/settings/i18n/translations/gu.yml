@@ -84,6 +84,8 @@ devtools:
   settings_file: સેટિંગ્સ ફાઇલ
   simulate_fullscreen: પૂર્ણસ્ક્રીન ઇવેન્ટનું અનુકરણ કરો
 extras:
+  clear_icons: સ્પષ્ટ સિસ્ટમ ચિહ્નો કેશ
+  clear_icons_tooltip: બધા વિજેટો પર સંપૂર્ણ અસર કરવા માટે ફરીથી પ્રારંભ કરવાની જરૂર પડી શકે છે
   discord: વિખવાદ
   exit: છોડો/બહાર નીકળો
   github: GitHub

@@ -84,6 +84,10 @@ devtools:
   settings_file: Файл настроек
   simulate_fullscreen: Имитировать полноэкранное событие
 extras:
+  clear_icons: Очистить кэш системных значков
+  clear_icons_tooltip: >-
+    Для полного вступления в силу всех виджетов может потребоваться
+    перезагрузка.
   discord: Discord
   exit: Выйти
   github: GitHub

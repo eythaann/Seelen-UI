@@ -11,13 +11,12 @@ import { parseCommand } from 'src/apps/shared/Command';
 
 import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
 
-import { Icon } from '../../../../shared/components/Icon';
+import { FileIcon, Icon } from '../../../../shared/components/Icon';
 
 export function getUserApplicationContextMenu(
   t: TFunction,
   item: PinnedWegItem | TemporalWegItem,
   devTools: boolean,
-  iconSrc: string,
 ): ItemType[] {
   const isPinned = isPinnedApp(item);
 
@@ -59,7 +58,7 @@ export function getUserApplicationContextMenu(
     {
       key: 'weg_run_new',
       label: item.displayName,
-      icon: <img className="weg-context-menu-item-icon" src={iconSrc} />,
+      icon: <FileIcon className="weg-context-menu-item-icon" path={item.path} umid={item.umid} />,
       onClick: () => {
         const { program, args } = parseCommand(item.relaunchCommand);
         invoke(SeelenCommand.Run, { program, args, workingDir: item.relaunchIn });

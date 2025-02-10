@@ -26,14 +26,40 @@ impl IconPacksManager {
         self.0.values().cloned().collect_vec()
     }
 
-    pub fn add_system_icon(&mut self, key: &str, icon: &Path) {
+    /// key could be path or user model id
+    pub fn add_system_app_icon(&mut self, key: &str, target_rel_path: &Path) {
         let system_pack = self.0.get_mut("system").unwrap();
         let key = key.trim_start_matches(r"\\?\").to_string();
-        system_pack.apps.insert(key, icon.to_owned());
+        system_pack.apps.insert(key, target_rel_path.to_owned());
+    }
+
+    pub fn add_system_file_icon(&mut self, origin: &Path, target_rel_path: &Path) {
+        let system_pack = self.0.get_mut("system").unwrap();
+        if let Some(ext) = origin.extension() {
+            system_pack.files.insert(
+                ext.to_string_lossy().to_lowercase(),
+                target_rel_path.to_owned(),
+            );
+        }
+    }
+
+    pub fn clear_system_icons(&mut self) -> Result<()> {
+        let system_pack = self.0.get_mut("system").unwrap();
+        system_pack.apps.clear();
+        system_pack.files.clear();
+        let meta = std::ffi::OsStr::new("metadata.yml");
+        for entry in std::fs::read_dir(SEELEN_COMMON.icons_path().join("system"))?.flatten() {
+            if entry.file_type()?.is_dir() {
+                std::fs::remove_dir_all(entry.path())?;
+            } else if entry.file_name() != meta {
+                std::fs::remove_file(entry.path())?;
+            }
+        }
+        Ok(())
     }
 
     /// Get icon pack by app user model id, filename or path
-    pub fn get_icon_by_key(&self, key: &str) -> Option<PathBuf> {
+    pub fn get_app_icon_by_key(&self, key: &str) -> Option<PathBuf> {
         let filename = PathBuf::from(key)
             .file_name()
             .map(|p| p.to_string_lossy().to_string());
@@ -56,6 +82,31 @@ impl IconPacksManager {
                 }
             }
         }
+        None
+    }
+
+    pub fn get_file_icon(&self, path: &Path) -> Option<PathBuf> {
+        let extension = path.extension()?.to_string_lossy().to_lowercase();
+
+        let using = FULL_STATE.load().settings().icon_packs.clone();
+        for icon_pack in using.into_iter().rev() {
+            let icon_pack = match self.0.get(&icon_pack) {
+                Some(icon_pack) => icon_pack,
+                None => continue,
+            };
+
+            if let Some(sub_path) = icon_pack.files.get(extension.as_str()) {
+                let full_path = SEELEN_COMMON
+                    .icons_path()
+                    .join(&icon_pack.metadata.filename)
+                    .join(sub_path);
+
+                if full_path.exists() {
+                    return Some(full_path);
+                }
+            }
+        }
+
         None
     }
 

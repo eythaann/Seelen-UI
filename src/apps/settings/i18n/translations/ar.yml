@@ -82,6 +82,8 @@ devtools:
   settings_file: ملف الإعدادات
   simulate_fullscreen: محاكاة حدث ملء الشاشة
 extras:
+  clear_icons: مسح ذاكرة التخزين المؤقت لأيقونات النظام
+  clear_icons_tooltip: قد تكون إعادة التشغيل مطلوبة لتدخل جميع الأدوات حيز التنفيذ بالكامل
   discord: ديسكورد
   exit: إنهاء/خروج
   github: جيت هب

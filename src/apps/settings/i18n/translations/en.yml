@@ -83,6 +83,8 @@ devtools:
   settings_file: Settings File
   simulate_fullscreen: Simulate fullscreen event
 extras:
+  clear_icons: Clear System Icons Cache
+  clear_icons_tooltip: A restart could be required to fully take effect on all widgets
   discord: Discord
   exit: Quit/Exit
   github: GitHub

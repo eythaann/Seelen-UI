@@ -84,6 +84,8 @@ devtools:
   settings_file: Arquivo de configurações
   simulate_fullscreen: Simular evento em tela cheia
 extras:
+  clear_icons: Ícones do sistema limpo cache
+  clear_icons_tooltip: Pode ser necessário reinício para entrar em vigor em todos os widgets
   discord: Discord
   exit: Sair/Sair
   github: GitHub

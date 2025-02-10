@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add button to clear the cached icons on settings.
+
+### enhancements
+- allow custom icons by extension on icon packs.
+
+### fix
+- error on file icons.
+
 ## [2.1.7]
 ### fix
 - power module not clickable on toolbar.

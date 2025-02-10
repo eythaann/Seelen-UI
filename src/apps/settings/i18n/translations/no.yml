@@ -84,6 +84,8 @@ devtools:
   settings_file: Innstillingsfilen
   simulate_fullscreen: Simuler fullskjermhendelse
 extras:
+  clear_icons: Klare systemikoner cache
+  clear_icons_tooltip: Det kan kreves en omstart for å tre i kraft alle widgeter
   discord: Uenighet
   exit: Avslutt/avslutte
   github: Github

@@ -84,6 +84,8 @@ devtools:
   settings_file: सेटिंग्स फाइल
   simulate_fullscreen: फुलस्क्रिन घटना सिमुलेट गर्नुहोस्
 extras:
+  clear_icons: स्पष्ट प्रणाली आइकनहरू क्यास
+  clear_icons_tooltip: 'सबै विजेटहरूमा पूर्ण रूपमा प्रभाव लिनको लागि एक पुन: सुरू गर्न आवश्यक पर्दछ'
   discord: छलफल दिनु
   exit: छोड्नुहोस् / बाहिर निस्कनुहोस्
   github: Github

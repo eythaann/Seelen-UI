@@ -84,6 +84,8 @@ devtools:
   settings_file: سیٹنگ فاعل
   simulate_fullscreen: پورے اسکرین ایونٹ کی تقلید کریں۔
 extras:
+  clear_icons: صاف نظام شبیہیں کیشے
+  clear_icons_tooltip: دوبارہ شروع کرنے کے لئے تمام ویجٹوں پر مکمل اثر ڈالنے کی ضرورت ہوسکتی ہے
   discord: ڈسکارڈ
   exit: چھوڑ دیں/باہر نکلیں
   github: گٹ ہب

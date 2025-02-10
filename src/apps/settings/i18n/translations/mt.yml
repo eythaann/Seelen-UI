@@ -84,6 +84,10 @@ devtools:
   settings_file: Settings Fajl
   simulate_fullscreen: Issimula avveniment fullscreen
 extras:
+  clear_icons: Ikoni tas-sistema ċara cache
+  clear_icons_tooltip: >-
+    Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq
+    il-widgets kollha
   discord: Diskordja
   exit: Nieqaf / ħruġ
   github: Github

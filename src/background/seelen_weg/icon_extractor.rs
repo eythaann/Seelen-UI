@@ -17,7 +17,6 @@ use windows::Win32::{
 use std::arch::x86_64::{
     __m128i, _mm_loadu_si128, _mm_setr_epi8, _mm_shuffle_epi8, _mm_storeu_si128,
 };
-use std::ffi::OsStr;
 use std::io::BufRead;
 use std::os::windows::ffi::OsStrExt;
 use std::path::{Path, PathBuf};
@@ -219,7 +218,9 @@ pub fn get_icon_from_file(path: &Path) -> Result<RgbaImage> {
     }
 }
 
-pub fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
+// maintain this function as documentation for url files
+#[allow(dead_code)]
+fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     let file = std::fs::File::open(path)?;
     let reader = std::io::BufReader::new(file);
 
@@ -250,51 +251,67 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
     }
 
     let key = path.to_string_lossy().to_string();
+    let lowercased_key = key.to_lowercase();
+
+    let is_exe_file = lowercased_key.ends_with(".exe");
+    let is_lnk_file = lowercased_key.ends_with(".lnk");
+    let is_url_file = lowercased_key.ends_with(".url");
 
     let mutex = FULL_STATE.load().icon_packs().clone();
     let mut icon_manager = trace_lock!(mutex);
-    if let Some(icon) = icon_manager.get_icon_by_key(&key) {
+    if is_exe_file || is_lnk_file {
+        if let Some(icon) = icon_manager.get_app_icon_by_key(&key) {
+            return Ok(icon);
+        }
+    } else if let Some(icon) = icon_manager.get_file_icon(path) {
         return Ok(icon);
     }
 
     let file_name = path.file_name().ok_or("Failed to get file name")?;
-    let ext = path.extension();
-    let is_lnk_file = ext == Some(OsStr::new("lnk"));
-    let is_url_file = ext == Some(OsStr::new("url"));
 
-    let icon_filename = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
-    let icon_path = SEELEN_COMMON
+    let to_store_filename = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
+    let to_store_path = SEELEN_COMMON
         .icons_path()
         .join("system")
-        .join(&icon_filename);
+        .join(&to_store_filename);
 
     log::trace!(
         "Extracting icon for \"{}\"",
         file_name.to_string_lossy().to_string()
     );
 
-    // try get icons for URLs
+    // Special case for url files, these can have a custom icon, but to simplicity we use a single one for every .url
     if is_url_file {
-        let icon = get_icon_from_url_file(path)?;
-        icon.save(&icon_path)?;
-        icon_manager.add_system_icon(&key, &icon_filename);
-        icon_manager.write_system_icon_pack()?;
-        return Ok(icon_path);
+        let url_placeholder_icon = SEELEN_COMMON.app_resource_dir().join("icons/url.png");
+        std::fs::copy(&url_placeholder_icon, &to_store_path)?;
+        icon_manager.add_system_file_icon(path, &to_store_filename);
+        return Ok(to_store_path);
     }
 
     // try get the icon directly from the file
     if let Ok(icon) = get_icon_from_file(path) {
-        icon.save(&icon_path)?;
-        icon_manager.add_system_icon(&key, &icon_filename);
+        icon.save(&to_store_path)?;
+        if is_exe_file || is_lnk_file {
+            icon_manager.add_system_app_icon(&key, &to_store_filename);
+        } else {
+            icon_manager.add_system_file_icon(path, &to_store_filename);
+        }
         icon_manager.write_system_icon_pack()?;
-        return Ok(icon_path);
+        return Ok(to_store_path);
     }
 
     // if the lnk don't have an icon, try to extract it from the target
     if is_lnk_file {
         drop(icon_manager);
         let (target, _) = WindowsApi::resolve_lnk_target(path)?;
-        return extract_and_save_icon_from_file(&target);
+        let target_icon = extract_and_save_icon_from_file(&target)?;
+        std::fs::copy(&target_icon, &to_store_path)?;
+
+        let mutex = FULL_STATE.load().icon_packs().clone();
+        let mut icon_manager = trace_lock!(mutex);
+        icon_manager.add_system_app_icon(&key, &to_store_filename);
+        icon_manager.write_system_icon_pack()?;
+        return Ok(to_store_path);
     }
 
     Err("Failed to extract icon".into())
@@ -303,7 +320,7 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
 /// returns the path of the icon extracted from the app with the specified package app user model id.
 pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<PathBuf> {
     let icon_manager_mutex = FULL_STATE.load().icon_packs().clone();
-    if let Some(icon) = trace_lock!(icon_manager_mutex).get_icon_by_key(aumid.as_ref()) {
+    if let Some(icon) = trace_lock!(icon_manager_mutex).get_app_icon_by_key(aumid.as_ref()) {
         return Ok(icon);
     }
 
@@ -328,7 +345,7 @@ pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<PathBuf> {
 
     let filename = PathBuf::from(image_path.file_name().unwrap());
     let mut icon_manager = trace_lock!(icon_manager_mutex);
-    icon_manager.add_system_icon(aumid, &filename);
+    icon_manager.add_system_app_icon(aumid, &filename);
     icon_manager.write_system_icon_pack()?;
 
     Ok(image_path)

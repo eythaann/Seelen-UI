@@ -84,6 +84,8 @@ devtools:
   settings_file: Ayarlar Dosyası
   simulate_fullscreen: Tam ekran etkinliğini simüle et
 extras:
+  clear_icons: Sistem Simgeleri Önbelleğini Temizle
+  clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
   discord: Discord
   exit: Çık
   github: GitHub

@@ -84,6 +84,10 @@ devtools:
   settings_file: Iestatīšanas fails
   simulate_fullscreen: Simulējiet pilnekrāna notikumu
 extras:
+  clear_icons: Iztīrīt sistēmas ikonu kešatmiņu
+  clear_icons_tooltip: >-
+    Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos
+    logrīkos.
   discord: Nesaskaņas
   exit: Atmest/iziet
   github: Github

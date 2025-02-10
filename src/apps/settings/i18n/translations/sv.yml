@@ -84,6 +84,8 @@ devtools:
   settings_file: Inställningsfil
   simulate_fullscreen: Simulera helskärmshändelse
 extras:
+  clear_icons: Rensa cachen för systemikoner
+  clear_icons_tooltip: En omstart kan krävas för att få full effekt på alla widgets
   discord: Disharmoni
   exit: Sluta/avsluta
   github: Github

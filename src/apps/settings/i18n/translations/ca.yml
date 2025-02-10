@@ -84,6 +84,8 @@ devtools:
   settings_file: Arxiu de configuració
   simulate_fullscreen: Simula un esdeveniment a pantalla completa
 extras:
+  clear_icons: Esborrar la memòria cau de les icones del sistema
+  clear_icons_tooltip: Es pot requerir un reinici per tenir efecte sobre tots els ginys
   discord: Discòrdia
   exit: Deixar/sortir
   github: Github

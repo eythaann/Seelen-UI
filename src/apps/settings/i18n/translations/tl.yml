@@ -86,6 +86,10 @@ devtools:
   settings_file: File ng mga setting
   simulate_fullscreen: Gayahin ang fullscreen na kaganapan
 extras:
+  clear_icons: I -clear ang Mga Icon ng System Cache
+  clear_icons_tooltip: >-
+    Ang isang pag -restart ay maaaring kailanganin upang ganap na maisakatuparan
+    ang lahat ng mga widget
   discord: Discord
   exit: Huminto/exit
   github: Github

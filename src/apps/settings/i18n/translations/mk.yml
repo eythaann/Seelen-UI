@@ -84,6 +84,10 @@ devtools:
   settings_file: Датотека за поставки
   simulate_fullscreen: Симулирајте настан на цел екран
 extras:
+  clear_icons: Јасна кеш за икони на системот
+  clear_icons_tooltip: >-
+    Може да се бара рестартирање за целосно да се стапат на сила на сите
+    додатоци
   discord: Раздор
   exit: Откажете/излез
   github: Github

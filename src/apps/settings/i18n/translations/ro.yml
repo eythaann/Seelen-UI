@@ -84,6 +84,10 @@ devtools:
   settings_file: Fișier de setări
   simulate_fullscreen: Simulați un eveniment pe ecran complet
 extras:
+  clear_icons: Ștergeți memoria cache a pictogramelor de sistem
+  clear_icons_tooltip: >-
+    Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în
+    vigoare
   discord: Discordie
   exit: Renunță/ieșire
   github: Github

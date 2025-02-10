@@ -84,6 +84,8 @@ devtools:
   settings_file: Файлҳои танзимот
   simulate_fullscreen: Ҳодисаи пурраи экранро тақлид кунед
 extras:
+  clear_icons: Нишондиҳандаи системаи тозагӣ
+  clear_icons_tooltip: Бозоғоз кардан мумкин аст, ки ба ҳама виджет пурра таъсир расонад
   discord: Ихтисор
   exit: Курат / баромадан
   github: Github

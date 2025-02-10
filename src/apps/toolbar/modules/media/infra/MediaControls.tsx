@@ -15,9 +15,9 @@ import { calcLuminance, selectDefaultOutput } from '../application';
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
 
 import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
-import { Icon } from '../../../../shared/components/Icon';
+import { FileIcon, Icon } from '../../../../shared/components/Icon';
 import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
-import { useIcon, useTimeout, useWindowFocusChange } from '../../../../shared/hooks';
+import { useTimeout, useWindowFocusChange } from '../../../../shared/hooks';
 
 import './index.css';
 
@@ -27,9 +27,6 @@ const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
 function MediaSession({ session }: { session: MediaChannelTransportData }) {
   const [luminance, setLuminance] = useState(0);
-
-  let appIconSrc =
-    useIcon({ umid: session.umid }) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
 
   let thumbnailSrc = convertFileSrc(
     session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
@@ -58,7 +55,7 @@ function MediaSession({ session }: { session: MediaChannelTransportData }) {
     >
       <div className="media-session-thumbnail-container">
         <Tooltip title={session.owner.name} placement="bottom">
-          <img className="media-session-app-icon" src={appIconSrc} />
+          <FileIcon className="media-session-app-icon" path={session.umid} />
         </Tooltip>
         <img className="media-session-thumbnail" src={thumbnailSrc} />
       </div>

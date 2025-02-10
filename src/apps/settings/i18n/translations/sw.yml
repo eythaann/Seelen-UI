@@ -83,6 +83,8 @@ devtools:
   settings_file: Faili ya mipangilio
   simulate_fullscreen: Iga tukio la skrini nzima
 extras:
+  clear_icons: Kashe ya icons za mfumo wazi
+  clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
   discord: Ugomvi
   exit: Acha/exit
   github: GitHub

@@ -82,6 +82,8 @@ devtools:
   settings_file: קובץ הגדרות
   simulate_fullscreen: הדמיית אירוע במסך מלא
 extras:
+  clear_icons: מטמון סמלי מערכת נקה
+  clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
   discord: מַחֲלוֹקֶת
   exit: יצא/יציאה
   github: Github

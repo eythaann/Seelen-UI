@@ -84,6 +84,8 @@ devtools:
   settings_file: Instellingslêer
   simulate_fullscreen: Simuleer volskerm gebeurtenis
 extras:
+  clear_icons: Maak stelselikone kas uit
+  clear_icons_tooltip: '''N Herbegin kan nodig wees om alle widgets ten volle in werking te stel'
   discord: Teenstrydigheid
   exit: Hou op/uitgang
   github: Github

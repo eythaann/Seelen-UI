@@ -83,6 +83,10 @@ devtools:
   settings_file: සැකසුම් ගොනුව
   simulate_fullscreen: සම්පූර්ණ තිර සිදුවීම අනුකරණය කරන්න
 extras:
+  clear_icons: පැහැදිලි පද්ධති අයිකන හැඹිලිය
+  clear_icons_tooltip: >-
+    සියලුම විජට් සඳහා සම්පූර්ණයෙන්ම බලාත්මක වීමට නැවත ආරම්භ කිරීම අවශ්ය විය
+    හැකිය
   discord: අසමගිය
   exit: පිටවීම/පිටවීම
   github: GitHub

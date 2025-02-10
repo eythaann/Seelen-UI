@@ -84,6 +84,10 @@ devtools:
   settings_file: Ifayela lezilungiselelo
   simulate_fullscreen: Lingisa umcimbi wesikrini esigcwele
 extras:
+  clear_icons: Sula i-Cold yesistimu ye-System
+  clear_icons_tooltip: >-
+    Ukuqalisa kabusha kungadingeka ukuthi kusebenze ngokuphelele kuwo wonke
+    amawijethi
   discord: Ukunqaba
   exit: Quit / Phuma
   github: Umuthi othile kiki
