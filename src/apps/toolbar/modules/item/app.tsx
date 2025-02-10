@@ -51,11 +51,18 @@ const ActionsScope = {
   },
 };
 
-export function safeEval(expression: string, scope: Scope) {
+type Result = { ok: any; err?: never } | { err: any; ok?: never };
+export function safeEval(expression: string, scope: Scope): Result {
   try {
-    evaluate(expression, scope);
+    return {
+      ok: evaluate(expression, scope),
+    };
   } catch (error) {
+    console.error('Error evaluating: ', expression);
     console.error(error);
+    return {
+      err: error,
+    };
   }
 }
 

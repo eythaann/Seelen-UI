@@ -9,6 +9,7 @@
 
 ### fix
 - error on file icons.
+- fix blue screen on toolbar when errors on template evaluation.
 
 ## [2.1.7]
 ### fix
