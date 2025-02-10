@@ -79,7 +79,7 @@ arc-swap = "1.7.1"
 notify-debouncer-full = "0.3.1"
 encoding_rs = "0.8.34"
 evalexpr = "=11.3.0"
-quick-xml = { version = "0.36.2", features = ["serialize", "encoding"] }
+quick-xml = { version = "0.37.2", features = ["serialize", "encoding"] }
 backtrace = "0.3.71"
 owo-colors = "4.1.0"
 rust-i18n = "3.1.2"

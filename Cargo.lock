@@ -4121,9 +4121,9 @@ dependencies = [
 
 [[package]]
 name = "quick-xml"
-version = "0.36.2"
+version = "0.37.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f7649a7b4df05aed9ea7ec6f628c67c9953a43869b8bc50929569b2999d443fe"
+checksum = "165859e9e55f79d67b96c5d96f4e88b6f2695a1972849c15a6a3f5c59fc2c003"
 dependencies = [
  "encoding_rs",
  "memchr",
@@ -4817,7 +4817,7 @@ dependencies = [
  "owo-colors",
  "parking_lot",
  "phf 0.11.2",
- "quick-xml 0.36.2",
+ "quick-xml 0.37.2",
  "regex",
  "rust-i18n",
  "seelen-core",
