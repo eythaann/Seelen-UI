@@ -46,7 +46,7 @@ tauri = { version = "2.0.0-rc", features = [
 tauri-plugin-fs = "2.0.0-rc"
 tauri-plugin-dialog = "2.0.0-rc"
 tauri-plugin-autostart = "2.0.0-rc"
-tauri-plugin-shell = "2.0.0-rc"
+tauri-plugin-shell = "2.2.0"
 tauri-plugin-process = "2.0.0-rc"
 tauri-plugin-log = "2.0.0-rc"
 tauri-plugin-updater = "2.0.0-rc"
