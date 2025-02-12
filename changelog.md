@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.1.9]
 ### fix
 - shortcuts not working on MSIX.
 - empty username for local accounts.
