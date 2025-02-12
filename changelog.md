@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- shortcuts not working on MSIX
+
 ## [2.1.8]
 ### features
 - add button to clear the cached icons on settings.

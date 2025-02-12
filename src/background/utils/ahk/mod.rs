@@ -21,7 +21,7 @@ impl AutoHotKey {
         let app_path = if was_installed_using_msix() {
             WindowsApi::known_folder(FOLDERID_LocalAppData)
                 .expect("Failed to get known folder")
-                .join("Microsoft\\WindowsApps\\slu-service.exe")
+                .join("Microsoft\\WindowsApps\\seelen-ui.exe")
         } else {
             std::env::current_exe().expect("Failed to get current exe path")
         };
