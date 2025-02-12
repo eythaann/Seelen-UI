@@ -2,7 +2,8 @@
 
 ## [Unreleased]
 ### fix
-- shortcuts not working on MSIX
+- shortcuts not working on MSIX.
+- empty username for local accounts.
 
 ## [2.1.8]
 ### features

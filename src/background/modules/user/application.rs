@@ -15,7 +15,7 @@ use std::{
 };
 use tauri::Manager;
 use windows::Win32::{
-    Security::Authentication::Identity::NameDisplay,
+    Security::Authentication::Identity::{NameDisplay, NameSamCompatible},
     System::SystemInformation::ComputerNameDnsDomain,
 };
 use winreg::{
@@ -153,10 +153,24 @@ impl UserManager {
     }
 
     fn get_logged_user() -> User {
+        let domain = WindowsApi::get_computer_name(ComputerNameDnsDomain).unwrap_or_default();
+        let name = WindowsApi::get_username(NameDisplay)
+            .or_else(|_| -> Result<String> {
+                // A legacy account name (for example, Engineering\JSmith).
+                // The domain-only version includes trailing backslashes (\).
+                let name = WindowsApi::get_username(NameSamCompatible)?;
+                let name = name.trim_start_matches(&format!("{}\\", domain));
+                match name.is_empty() {
+                    true => Err("Empty username".into()),
+                    false => Ok(name.to_string()),
+                }
+            })
+            .unwrap_or_else(|_| "???".to_string()); // no username
+
         let mut user = User {
-            name: WindowsApi::get_username(NameDisplay).unwrap_or_default(),
-            domain: WindowsApi::get_computer_name(ComputerNameDnsDomain).unwrap_or_default(),
-            profile_home_path: PathBuf::new(), // deprecated, remove this is unncessary
+            name,
+            domain,
+            profile_home_path: PathBuf::new(), // deprecated, remove this is unnecessary
             email: None,
             one_drive_path: None,
             profile_picture_path: None,
