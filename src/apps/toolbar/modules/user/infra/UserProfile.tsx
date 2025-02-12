@@ -73,20 +73,22 @@ export function UserProfile({ user }: Props) {
 
         <div className="userhome-profile-email">{user.email}</div>
 
-        <Tooltip
-          mouseLeaveDelay={0}
-          arrow={false}
-          title={t('userhome.profile.open_onedrive')}
-          placement="right"
-        >
-          <button
-            className="userhome-profile-action-button"
-            onClick={() => invoke(SeelenCommand.OpenFile, { path: user.oneDrivePath })}
+        { user.oneDrivePath &&
+          <Tooltip
+            mouseLeaveDelay={0}
+            arrow={false}
+            title={t('userhome.profile.open_onedrive')}
+            placement="right"
           >
-            <Icon iconName="ImOnedrive" />
-            <span>OneDrive</span>
-          </button>
-        </Tooltip>
+            <button
+              className="userhome-profile-action-button"
+              onClick={() => invoke(SeelenCommand.OpenFile, { path: user.oneDrivePath })}
+            >
+              <Icon iconName="ImOnedrive" />
+              <span>OneDrive</span>
+            </button>
+          </Tooltip>
+        }
       </div>
     </div>
   );

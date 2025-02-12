@@ -15,7 +15,7 @@ use std::{
 };
 use tauri::Manager;
 use windows::Win32::{
-    Security::Authentication::Identity::NameDisplay,
+    Security::Authentication::Identity::{NameDisplay, NameSamCompatible},
     System::SystemInformation::ComputerNameDnsDomain,
 };
 use winreg::{
@@ -154,7 +154,43 @@ impl UserManager {
 
     fn get_logged_user() -> User {
         let mut user = User {
-            name: WindowsApi::get_username(NameDisplay).unwrap_or_default(),
+            name: if WindowsApi::is_elevated().unwrap_or_default() {
+                let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+                if let Ok(settings) = hklm.open_subkey(
+                    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI",
+                ) {
+                    let domainfull_name: String =
+                        settings.get_value("LastLoggedOnUser").unwrap_or_default();
+                    let separator = domainfull_name
+                        .find('\\')
+                        .map(|index| index + 1)
+                        .unwrap_or(0);
+                    domainfull_name[separator..domainfull_name.len()].to_string()
+                } else {
+                    WindowsApi::get_username(NameSamCompatible)
+                        .map(|domainfull_name| {
+                            let separator = domainfull_name
+                                .find('\\')
+                                .map(|index| index + 1)
+                                .unwrap_or(0);
+                            domainfull_name[separator..domainfull_name.len()].to_string()
+                        })
+                        .unwrap_or_default()
+                }
+            } else {
+                WindowsApi::get_username(NameDisplay)
+                    .ok()
+                    .or(WindowsApi::get_username(NameSamCompatible)
+                        .map(|domainfull_name| {
+                            let separator = domainfull_name
+                                .find('\\')
+                                .map(|index| index + 1)
+                                .unwrap_or(0);
+                            domainfull_name[separator..domainfull_name.len()].to_string()
+                        })
+                        .ok())
+                    .unwrap_or_default()
+            },
             domain: WindowsApi::get_computer_name(ComputerNameDnsDomain).unwrap_or_default(),
             profile_home_path: PathBuf::new(), // deprecated, remove this is unncessary
             email: None,
@@ -164,7 +200,16 @@ impl UserManager {
 
         if let Ok(sid) = Self::get_logged_on_user_sid() {
             user.profile_picture_path =
-                Self::get_user_profile_picture_path(&sid, PictureQuality::Quality1080).ok();
+                Self::get_user_profile_picture_path(&sid, PictureQuality::Quality1080)
+                    .ok()
+                    .or(get_app_handle()
+                        .path()
+                        .home_dir()
+                        .unwrap()
+                        .join("..\\..\\ProgramData\\Microsoft\\User Account Pictures\\user.png")
+                        .canonicalize()
+                        .ok());
+
             if let Ok((user_mail, one_drive_path)) = Self::get_one_drive_attributes() {
                 user.email = Some(user_mail);
                 user.one_drive_path = Some(one_drive_path);
