@@ -144,6 +144,9 @@ features = [
     "Win32_Networking_WinSock",            # required for network manager
     "Win32_Networking_NetworkListManager", # required for network manager // events
     "Win32_NetworkManagement_WiFi",        # required for network manager // wifi
+    "Win32_Devices_Bluetooth",             # required for bluetooth handling // bluetooth
+    "Devices_Bluetooth",                   # required for bluetooth handling // bluetooth"
+    "Devices_Enumeration",                 # required for bluetooth handling // bluetooth"
 ]
 
 [features]

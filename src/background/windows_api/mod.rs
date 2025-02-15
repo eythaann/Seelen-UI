@@ -35,9 +35,15 @@ use windows::{
         Threading::{NtQueryInformationProcess, ProcessBasicInformation},
     },
     Win32::{
-        Devices::Display::{
-            GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
-            PHYSICAL_MONITOR,
+        Devices::{
+            Bluetooth::{
+                BluetoothFindDeviceClose, BluetoothFindFirstDevice, BluetoothFindNextDevice,
+                BLUETOOTH_DEVICE_INFO, BLUETOOTH_DEVICE_SEARCH_PARAMS,
+            },
+            Display::{
+                GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
+                PHYSICAL_MONITOR,
+            },
         },
         Foundation::{
             CloseHandle, FALSE, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT,
@@ -158,6 +164,41 @@ impl WindowsApi {
             .filter_fake_error()?;
         }
         Ok(())
+    }
+
+    pub fn enum_bluetooth_device(query_new: bool) -> Result<Vec<BLUETOOTH_DEVICE_INFO>> {
+        let mut result = vec![];
+        let mut info = BLUETOOTH_DEVICE_INFO::default();
+        info.dwSize = std::mem::size_of::<BLUETOOTH_DEVICE_INFO>() as u32;
+        let mut params = BLUETOOTH_DEVICE_SEARCH_PARAMS::default();
+        params.dwSize = std::mem::size_of::<BLUETOOTH_DEVICE_SEARCH_PARAMS>() as u32;
+        params.fReturnAuthenticated = true.into();
+        params.fReturnConnected = true.into();
+        params.fReturnRemembered = true.into();
+        params.fReturnUnknown = true.into();
+
+        if query_new {
+            params.fIssueInquiry = true.into();
+            params.cTimeoutMultiplier = 10;
+        }
+
+        unsafe {
+            let founded_device =
+                BluetoothFindFirstDevice(&params as *const _, &mut info as *mut _)?;
+            if !founded_device.is_invalid() {
+                loop {
+                    result.push(info.clone());
+
+                    if BluetoothFindNextDevice(founded_device, &mut info as *mut _).is_err() {
+                        break;
+                    }
+                }
+            }
+
+            BluetoothFindDeviceClose(founded_device)?;
+        }
+
+        Ok(result)
     }
 
     pub fn enum_windows(callback: WNDENUMPROC, callback_data_address: isize) -> Result<()> {
