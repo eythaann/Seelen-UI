@@ -2,7 +2,7 @@ import { AppConfig } from '@seelen-ui/lib/types';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
 import { TFunction } from 'i18next';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, debounce } from 'lodash';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../shared/utils/infra';
 
 import { RootSelectors } from '../../shared/store/app/selectors';
-import { cx, debounce } from '../../shared/utils/app';
+import { cx } from '../../shared/utils/app';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 import { Icon } from 'src/apps/shared/components/Icon';

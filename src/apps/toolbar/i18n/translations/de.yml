@@ -24,6 +24,11 @@ network:
   saved: Gespeicherte Netzwerke
   scanning: Nach Netzwerken suchen
   secured: Verschlüsseltes Netzwerk
+notifications:
+  clear: Alle löschen
+  empty: Keine Benachrichtigungen
+  settings: Weitere Einstellungen für Benachrichtigungen
+  title: Benachrichtigungen
 placeholder:
   battery_remaining: '% verbleibend'
   bluetooth_devices: Bluetooth & Geräte

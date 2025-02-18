@@ -84,6 +84,10 @@ devtools:
   settings_file: File Pengaturan
   simulate_fullscreen: Simulasikan acara layar penuh
 extras:
+  clear_icons: Menghapus Cache Ikon Sistem
+  clear_icons_tooltip: >-
+    Pengaktifan ulang mungkin diperlukan untuk menerapkan efek sepenuhnya pada
+    semua widget
   discord: Perselisihan
   exit: Berhenti/keluar
   github: GitHub

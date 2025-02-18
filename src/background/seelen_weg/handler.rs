@@ -1,7 +1,7 @@
 use std::{ffi::OsStr, path::PathBuf};
 
 use image::ImageFormat;
-use seelen_core::state::{PinnedWegItemData, WegItem, WegItems};
+use seelen_core::state::{PinnedWegItemData, WegItem, WegItemSubtype, WegItems};
 use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
@@ -113,22 +113,40 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
         "Unknown".to_string()
     };
 
+    let subtype = if path.is_dir() {
+        WegItemSubtype::Folder
+    } else if path.ends_with(".exe") {
+        WegItemSubtype::App
+    } else {
+        WegItemSubtype::File
+    };
+
     // todo add support to UWP for seelen rofi
     let mut data = PinnedWegItemData {
         id: uuid::Uuid::new_v4().to_string(),
-        umid: WindowsApi::get_file_umid(&path).ok(),
+        subtype,
+        umid: None,
         display_name,
         path: path.clone(),
-        is_dir: path.is_dir(),
+        is_dir: false,
+        relaunch_in: None,
         relaunch_command: path.to_string_lossy().to_string(),
         windows: vec![],
         pin_disabled: false,
     };
 
     if path.extension() == Some(OsStr::new("lnk")) {
-        let (program, _arguments) = WindowsApi::resolve_lnk_target(&path)?;
+        data.umid = WindowsApi::get_file_umid(&path).ok();
+        let (program, arguments) = WindowsApi::resolve_lnk_target(&path)?;
         data.is_dir = program.is_dir();
-        data.relaunch_command = program.to_string_lossy().to_string();
+        data.relaunch_command = format!(
+            "\"{}\" {}",
+            program.to_string_lossy(),
+            arguments.to_string_lossy()
+        );
+        if program.extension() == Some(OsStr::new("exe")) {
+            data.subtype = WegItemSubtype::App;
+        }
     }
 
     let guard = FULL_STATE.load();

@@ -84,6 +84,8 @@ devtools:
   settings_file: Fail tetapan
   simulate_fullscreen: Simulasikan acara skrin penuh
 extras:
+  clear_icons: Cacon Ikon Sistem Jelas
+  clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
   discord: Perselisihan
   exit: Berhenti/keluar
   github: Github

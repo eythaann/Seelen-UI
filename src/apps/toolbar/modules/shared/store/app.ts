@@ -1,6 +1,5 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import {
-  ApplicationHistory,
   DesktopFolder,
   DocumentsFolder,
   DownloadsFolder,
@@ -16,7 +15,7 @@ import {
 } from '@seelen-ui/lib';
 import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 
-import { RootState } from './domain';
+import { PowerPlan, RootState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
@@ -48,6 +47,7 @@ const initialState: RootState = {
     batteryLifeTime: -1,
     batteryFullLifeTime: -1,
   },
+  powerPlan: PowerPlan.Balanced,
   batteries: [],
   workspaces: [],
   activeWorkspace: null,
@@ -60,8 +60,6 @@ const initialState: RootState = {
   mediaOutputs: [],
   mediaInputs: [],
   notifications: [],
-  history: [],
-  historyOnMonitor: [],
   colors: UIColors.default().inner,
 };
 
@@ -110,6 +108,12 @@ export const RootSlice = createSlice({
         state.items.right = state.items.right.filter(filter);
       }
     },
+    setToolbarReorderDisabled(state, action: PayloadAction<boolean>) {
+      let enabled = action.payload;
+      if (state.items) {
+        state.items.isReorderDisabled = enabled;
+      }
+    },
   },
 });
 
@@ -126,8 +130,6 @@ export async function lazySlice(d: Dispatch) {
     userPicturesFolder: (await PicturesFolder.getAsync()).asArray(),
     userVideosFolder: (await VideosFolder.getAsync()).asArray(),
     userMusicFolder: (await MusicFolder.getAsync()).asArray(),
-    history: (await ApplicationHistory.getAsync()).asArray(),
-    historyOnMonitor: (await ApplicationHistory.getCurrentMonitorHistoryAsync()).asArray(),
   };
   d(RootActions.setUserRecentFolder(obj.userRecentFolder));
   d(RootActions.setUserDesktopFolder(obj.userDesktopFolder));
@@ -136,6 +138,4 @@ export async function lazySlice(d: Dispatch) {
   d(RootActions.setUserPicturesFolder(obj.userPicturesFolder));
   d(RootActions.setUserVideosFolder(obj.userVideosFolder));
   d(RootActions.setUserMusicFolder(obj.userMusicFolder));
-  d(RootActions.setHistory(obj.history));
-  d(RootActions.setHistoryOnMonitor(obj.historyOnMonitor));
 }

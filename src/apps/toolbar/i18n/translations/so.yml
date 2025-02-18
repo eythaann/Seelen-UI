@@ -24,6 +24,11 @@ network:
   saved: Shabakado la keydiyay
   scanning: Sawirka shabakadaha
   secured: Shabakadda qarsoon
+notifications:
+  clear: Caddee dhammaan
+  empty: Wax wargelin ah
+  settings: Meelo badan oo ogeysiisyo ah
+  title: Ogeysiisyada
 placeholder:
   battery_remaining: '% haray'
   bluetooth_devices: Bluetooth & aaladda

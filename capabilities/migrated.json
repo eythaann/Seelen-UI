@@ -45,6 +45,8 @@
     "dialog:allow-open",
 
     "process:allow-restart",
-    "process:allow-exit"
+    "process:allow-exit",
+
+    "shell:allow-open"
   ]
 }

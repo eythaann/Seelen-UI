@@ -84,6 +84,8 @@ devtools:
   settings_file: Ffeil Gosodiadau
   simulate_fullscreen: Efelychu digwyddiad sgrin lawn
 extras:
+  clear_icons: Storfa eiconau system glir
+  clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
   discord: Anghytgord
   exit: Rhoi'r gorau iddi/allanfa
   github: Github

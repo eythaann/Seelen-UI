@@ -1,12 +1,10 @@
 import { SeelenCommand } from '@seelen-ui/lib';
-import { path } from '@tauri-apps/api';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 
-import { Icon } from 'src/apps/shared/components/Icon';
-import { useIcon } from 'src/apps/shared/hooks';
+import { FileIcon, Icon } from 'src/apps/shared/components/Icon';
 
 import { AppNotification } from '../domain';
 
@@ -21,11 +19,7 @@ function WindowsDateFileTimeToDate(fileTime: bigint) {
   return new Date(Number(fileTime / 10000n - EPOCH_DIFF_MILLISECONDS));
 }
 
-const MISSING_ICON_SRC = convertFileSrc(await path.resolveResource('static/icons/missing.png'));
-
 export function Notification({ notification }: Props) {
-  const icon = useIcon({ umid: notification.appUmid });
-
   return (
     <motion.div
       className="notification"
@@ -37,7 +31,7 @@ export function Notification({ notification }: Props) {
     >
       <div className="notification-header">
         <div className="notification-header-info">
-          <img className="notification-icon" src={icon || MISSING_ICON_SRC} />
+          <FileIcon className="notification-icon" umid={notification.appUmid} />
           <div>{notification.appName}</div>
           <span>-</span>
           <div>{moment(WindowsDateFileTimeToDate(BigInt(notification.date))).fromNow()}</div>

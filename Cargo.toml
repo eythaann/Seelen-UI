@@ -1,8 +1,8 @@
-cargo-features = ["profile-rustflags"]
+cargo-features = ["profile-rustflags", "codegen-backend"]
 
 [package]
 name = "seelen-ui"
-version = "2.1.3"
+version = "2.1.9"
 description = "Seelen UI Background"
 authors = ["eythaann"]
 license = "Polyform Strict License"
@@ -21,15 +21,18 @@ name = "slu-service"
 path = "src/service/main.rs"
 
 [profile.dev]
+debug = "full"
+strip = "symbols"
 incremental = true
-rustflags = ["-Z", "threads=8"]
+rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
 [profile.release]
-debug = 1
+debug = "limited"
+strip = "symbols"
 opt-level = "z"
 lto = true
 codegen-units = 1
-rustflags = ["-Z", "threads=8"]
+rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
 [build-dependencies]
 tauri-build = { version = "2.0.0-rc", features = [] }

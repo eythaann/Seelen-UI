@@ -64,6 +64,7 @@ export function SeelenWeg() {
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
 
+  let isReorderDisabled: boolean = useSelector(Selectors.reorderDisabled);
   const pinnedOnLeft = useSelector(Selectors.itemsOnLeft);
   const pinnedOnCenter = useSelector(Selectors.itemsOnCenter);
   const pinnedOnRight = useSelector(Selectors.itemsOnRight);
@@ -162,10 +163,10 @@ export function SeelenWeg() {
     setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen));
   }, []);
 
-  const projectSwItem = (item: SwItem) => ItemByType(item, shit);
+  const projectSwItem = (item: SwItem) => ItemByType(item, !isReorderDisabled, shit);
 
   return (
-    <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar)}>
+    <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar, isReorderDisabled)}>
       <Reorder.Group
         as="div"
         values={
@@ -224,27 +225,24 @@ export function SeelenWeg() {
   );
 }
 
-function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
+function ItemByType(item: SwItem, drag: boolean, callback: (isOpen: boolean) => void) {
   if (item.type === WegItemType.Pinned) {
-    if (
-      item.path.toLowerCase().endsWith('.exe') ||
-      item.relaunchCommand.toLowerCase().includes('.exe')
-    ) {
-      return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
+    if (item.subtype === 'App') {
+      return <UserApplication key={item.id} item={item} drag={drag} onAssociatedViewOpenChanged={callback} />;
     }
     return <FileOrFolder key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.Temporal) {
-    return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
+    return <UserApplication key={item.id} item={item} drag={drag} onAssociatedViewOpenChanged={callback} />;
   }
 
   if (item.type === WegItemType.Media) {
-    return <MediaSession key={item.id} item={item} />;
+    return <MediaSession key={item.id} item={item} drag={drag} />;
   }
 
   if (item.type === WegItemType.StartMenu) {
-    return <StartMenu key={item.id} item={item} />;
+    return <StartMenu key={item.id} item={item} drag={drag} />;
   }
 
   return null;

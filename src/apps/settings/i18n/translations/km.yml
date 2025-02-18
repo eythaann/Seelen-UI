@@ -83,6 +83,9 @@ devtools:
   settings_file: ឯកសារការកំណត់
   simulate_fullscreen: ក្លែងធ្វើព្រឹត្តិការណ៍ពេញអេក្រង់
 extras:
+  clear_icons: សម្អាតឃ្លាំងសម្ងាត់ប្រព័ន្ធ
+  clear_icons_tooltip: >-
+    ការចាប់ផ្តើមឡើងវិញអាចត្រូវបានតម្រូវឱ្យមានប្រសិទ្ធិភាពពេញលេញលើធាតុក្រាហ្វិកទាំងអស់
   discord: ការមិនចុះសម្រុងគ្នា។
   exit: ចេញ/ចេញ
   github: GitHub

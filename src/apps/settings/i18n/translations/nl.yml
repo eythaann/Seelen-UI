@@ -84,6 +84,8 @@ devtools:
   settings_file: Instellingenbestand
   simulate_fullscreen: Simuleer een gebeurtenis op volledig scherm
 extras:
+  clear_icons: Systeempictogrammen cache wissen
+  clear_icons_tooltip: Er kan een herstart nodig zijn om volledig effect te hebben op alle widgets
   discord: Discord
   exit: Stop/exit
   github: GitHub

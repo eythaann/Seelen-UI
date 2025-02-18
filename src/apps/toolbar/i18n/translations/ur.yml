@@ -24,6 +24,11 @@ network:
   saved: محفوظ کردہ نیٹ ورکس
   scanning: نیٹ ورکس کے لیے سکیننگ
   secured: خفیہ کردہ نیٹ ورک
+notifications:
+  clear: سب کو صاف کریں
+  empty: کوئی اطلاعات نہیں
+  settings: مزید اطلاعات کی ترتیبات
+  title: اطلاعات
 placeholder:
   battery_remaining: ٪ یٹری
   bluetooth_devices: بلوٹوتھ اور ڈیوائسز

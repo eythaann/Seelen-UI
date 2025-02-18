@@ -1,4 +1,4 @@
-import { ApplicationHistoryEntry, FancyToolbarSettings, File, Placeholder, Plugin, Settings, User } from '@seelen-ui/lib/types';
+import { FancyToolbarSettings, File, Placeholder, Plugin, Settings, User } from '@seelen-ui/lib/types';
 import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -15,6 +15,16 @@ export interface PowerStatus {
   systemStatusFlag: number;
   batteryLifeTime: number;
   batteryFullLifeTime: number;
+}
+
+export enum PowerPlan {
+  Balanced = 'Balanced',
+  BatterySaver = 'BatterySaver',
+  BetterBattery = 'BetterBattery',
+  GameMode = 'GameMode',
+  HighPerformance = 'HighPerformance',
+  MaxPerformance = 'MaxPerformance',
+  MixedReality = 'MixedReality',
 }
 
 export interface Battery {
@@ -72,7 +82,7 @@ export interface NetworkAdapter {
 }
 
 export interface MediaChannelTransportData {
-  id: string;
+  umid: string;
   title: string;
   author: string;
   thumbnail: string | null;
@@ -80,8 +90,7 @@ export interface MediaChannelTransportData {
   default: boolean;
   owner: {
     name: string;
-    iconPath: string | null;
-  } | null;
+  };
 }
 
 export interface MediaDeviceChannel {
@@ -128,6 +137,7 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   focused: FocusedApp | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
+  powerPlan: PowerPlan;
   batteries: Battery[];
   workspaces: Workspace[];
   activeWorkspace: WorkspaceId | null;
@@ -140,6 +150,4 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   mediaOutputs: MediaDevice[];
   mediaInputs: MediaDevice[];
   notifications: AppNotification[];
-  history: ApplicationHistoryEntry[];
-  historyOnMonitor: ApplicationHistoryEntry[];
 }

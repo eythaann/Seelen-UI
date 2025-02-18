@@ -84,6 +84,8 @@ devtools:
   settings_file: File delle Impostazioni
   simulate_fullscreen: Simula un evento a schermo intero
 extras:
+  clear_icons: Cancella la cache delle icone di sistema
+  clear_icons_tooltip: Potrebbe essere necessario un riavvio per avere effetto su tutti i widget.
   discord: Discord
   exit: Esci
   github: GitHub

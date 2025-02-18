@@ -80,6 +80,8 @@ devtools:
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
   simulate_fullscreen: ਪੂਰੀ ਸਕ੍ਰੀਨ ਇਵੈਂਟ ਦੀ ਨਕਲ ਕਰੋ
 extras:
+  clear_icons: ਸਿਸਟਮ ਆਈਕਾਨ ਕੈਚੇ ਸਾਫ਼ ਕਰੋ
+  clear_icons_tooltip: ਸਾਰੇ ਵਿਜੇਟਸ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਹੋਣ ਲਈ ਇੱਕ ਰੀਸਟਾਰਟ ਦੀ ਜ਼ਰੂਰਤ ਹੋ ਸਕਦੀ ਹੈ
   discord: ਵਿਵਾਦ
   exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
   github: GitHub

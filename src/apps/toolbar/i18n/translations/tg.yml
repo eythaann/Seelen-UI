@@ -24,6 +24,11 @@ network:
   saved: Шабакаҳои захирашуда
   scanning: Сканкунии шабакаҳо
   secured: Шабакаи рамзгузорӣ
+notifications:
+  clear: Тамоман тоза
+  empty: Огоҳӣ
+  settings: Танзимоти огоҳиномаи огоҳӣ
+  title: Огоҳиҳо
 placeholder:
   battery_remaining: '% боқимонда'
   bluetooth_devices: Bluetooth & Дастгоҳҳо

@@ -6,7 +6,7 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-global seelen := "SEELEN_UI_EXE_PATH"
+global seelen := "`"SEELEN_UI_EXE_PATH`""
 
 /** Close the AHK if app is crashed or forced to close */
 CloseIfNotRunning() {

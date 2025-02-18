@@ -15,7 +15,7 @@ pub fn is_virtual_desktop_supported() -> bool {
     false
 }
 
-pub fn is_running_as_appx_package() -> bool {
+pub fn is_running_as_appx() -> bool {
     unsafe {
         let mut len = 0u32;
         let _ = GetCurrentPackageId(&mut len, None);

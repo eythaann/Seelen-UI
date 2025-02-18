@@ -13,7 +13,6 @@ body {
 #root {
   position: absolute;
   width: 100vw;
-  top: 0;
   transition: top 0.2s ease-in-out;
 
   &:has(.ft-bar-delayed) {
@@ -23,9 +22,33 @@ body {
     }
   }
 
-  &:has(.ft-bar-hidden):not(:hover) {
+  &:has(.ft-bar-hidden.top):not(:hover) {
     top: calc(var(--config-height) * -1 + 1px);
     border-bottom: 1px solid transparent;
+  }
+  &:has(.ft-bar-hidden.bottom):not(:hover) {
+    bottom: calc(var(--config-height) * -1 + 1px);
+    border-bottom: 1px solid transparent;
+  }
+
+  &:has(.ft-bar.top) {
+    top: 0;
+    &::after {
+      top: 0;
+      right: 0;
+      width: 100vw;
+      height: 1px;
+    }
+  }
+
+  &:has(.ft-bar.bottom) {
+    bottom: 0;
+    &::after {
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 1px;
+    }
   }
 }
 
@@ -70,7 +93,12 @@ body {
 }
 
 .ft-bar-item-tooltip {
-  top: calc(var(--config-height) + 4px) !important; /* Override inline style */
+  .ft-bar.top & {
+    top: calc(var(--config-height) + 4px) !important; /* Override inline style */
+  }
+  .ft-bar.bottom & {
+    bottom: calc(var(--config-height) + 4px) !important; /* Override inline style */
+  }
 }
 
 .ft-bar-group {

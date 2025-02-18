@@ -84,6 +84,8 @@ devtools:
   settings_file: Indstillinger fil
   simulate_fullscreen: Simuler begivenhed i fuld skærm
 extras:
+  clear_icons: Ryd cache for systemikoner
+  clear_icons_tooltip: En genstart kan være nødvendig for at få fuld effekt på alle widgets
   discord: Uenighed
   exit: Afslut/exit
   github: GitHub

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin to Right
   run_as: Run as Administrator
   unpin: Unpin
+context_menu:
+  reorder_disable: Lock taskbar
+  reorder_enable: Unlock taskbar
 media:
   not_playing: Nothing is playing
 media_menu:

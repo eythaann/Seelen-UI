@@ -24,6 +24,11 @@ network:
   saved: Rețele salvate
   scanning: Scanare pentru rețele
   secured: Rețea criptată
+notifications:
+  clear: Ștergeți toate
+  empty: Nu există notificări
+  settings: Mai multe setări pentru notificări
+  title: Notificări
 placeholder:
   battery_remaining: '% rămas'
   bluetooth_devices: Bluetooth & Devices

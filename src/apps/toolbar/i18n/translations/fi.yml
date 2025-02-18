@@ -24,6 +24,11 @@ network:
   saved: Tallennetut verkot
   scanning: Etsii verkkoja
   secured: Salattu verkko
+notifications:
+  clear: Tyhjennä kaikki
+  empty: Ei ilmoituksia
+  settings: Lisää ilmoitusten asetuksia
+  title: Ilmoitukset
 placeholder:
   battery_remaining: '% jäljelle jäänyt'
   bluetooth_devices: Bluetooth ja laitteet

@@ -24,6 +24,11 @@ network:
   saved: Պահպանված ցանցեր
   scanning: Ցանցերի սկանավորում
   secured: Կոդավորված ցանց
+notifications:
+  clear: Մաքրել բոլորը
+  empty: Ոչ մի ծանուցում
+  settings: Ավելի շատ ծանուցումների պարամետրեր
+  title: Ծանուցումներ
 placeholder:
   battery_remaining: Մնացած
   bluetooth_devices: Bluetooth & սարքեր

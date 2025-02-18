@@ -77,6 +77,8 @@ devtools:
   settings_file: 设置文件
   simulate_fullscreen: 模拟全屏事件
 extras:
+  clear_icons: 清除系统图标缓存
+  clear_icons_tooltip: 可能需要重新启动才能对所有部件完全生效
   discord: Discord
   exit: 退出 / 关闭
   github: GitHub

@@ -24,6 +24,11 @@ network:
   saved: Сачуване мреже
   scanning: Скенирање за мреже
   secured: Шифрована мрежа
+notifications:
+  clear: Очистити све
+  empty: Нема обавештења
+  settings: Више поставки обавештења
+  title: Обавештења
 placeholder:
   battery_remaining: преостали%
   bluetooth_devices: Блуетоотх и уређаји

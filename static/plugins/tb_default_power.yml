@@ -8,6 +8,15 @@ plugin:
   template: >-
     concat(
       string(equalText(battery.state, "charging") ? concat(getIcon("MdOutlineElectricBolt", 12), " ") : ""),
+      string(
+        equalText(powerPlan, "BetterBattery") 
+        ? concat(getIcon("FaLeaf", 12), " ") 
+        : equalText(powerPlan, "HighPerformance")
+        ? concat(getIcon("PiSpeedometer", 12), " ") 
+        : equalText(powerPlan, "MaxPerformance")
+        ? concat(getIcon("PiSpeedometer", 12), " ") 
+        : ""
+      ),
       string(battery.smartCharging ? concat(getIcon("FaHeart", 12), " ") : ""),
       string(
         battery.percentage > 90
@@ -24,4 +33,4 @@ plugin:
       string(battery.percentage),
       "%"
     )
-  onClick: open -> "ms-settings:powersleep"
+  onClickV2: open("ms-settings:powersleep")

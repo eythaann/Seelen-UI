@@ -24,6 +24,11 @@ network:
   saved: Opgeslagen netwerken
   scanning: Scannen naar netwerken
   secured: Versleuteld netwerk
+notifications:
+  clear: Alles wissen
+  empty: Geen meldingen
+  settings: Meer instellingen voor meldingen
+  title: Meldingen
 placeholder:
   battery_remaining: '% resterend'
   bluetooth_devices: Bluetooth & apparaten

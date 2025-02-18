@@ -84,6 +84,8 @@ devtools:
   settings_file: Nustatymų failas
   simulate_fullscreen: Imituoti viso ekrano įvykį
 extras:
+  clear_icons: Išvalyti sistemos piktogramų talpyklą
+  clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
   discord: Nesantaika
   exit: Mesti/išeiti
   github: Github

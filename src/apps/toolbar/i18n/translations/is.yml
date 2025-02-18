@@ -24,6 +24,11 @@ network:
   saved: Vistað netkerfi
   scanning: Leitar að netkerfum
   secured: Dulkóðað net
+notifications:
+  clear: Skýrt allt
+  empty: Engar tilkynningar
+  settings: Fleiri tilkynningarstillingar
+  title: Tilkynningar
 placeholder:
   battery_remaining: '% eftir'
   bluetooth_devices: Bluetooth og tæki

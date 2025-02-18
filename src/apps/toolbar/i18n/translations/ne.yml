@@ -24,6 +24,11 @@ network:
   saved: सुरक्षित नेटवर्कहरू
   scanning: नेटवर्कहरूको लागि स्क्यान गर्दै
   secured: ईन्क्रिप्टेड नेटवर्क
+notifications:
+  clear: सबै खाली गर्नुहोस्
+  empty: NOSESTIONES
+  settings: अधिक सूचनाहरू सेटिंग्स
+  title: सूचना
 placeholder:
   battery_remaining: '% बाँकी'
   bluetooth_devices: ब्लुटुथ र उपकरणहरू

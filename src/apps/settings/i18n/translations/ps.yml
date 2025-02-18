@@ -83,6 +83,8 @@ devtools:
   settings_file: د امستنې دوتنه
   simulate_fullscreen: د بشپړ سکرین پیښې انډول کړئ
 extras:
+  clear_icons: د ایکسین عکس کې کیچ
+  clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
   discord: ډارول
   exit: پریښودل / وتل
   github: ګیتوب

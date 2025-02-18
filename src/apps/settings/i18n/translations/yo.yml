@@ -82,6 +82,8 @@ devtools:
   settings_file: Faili eto
   simulate_fullscreen: Ṣe afarawe iṣẹlẹ ni kikun iboju
 extras:
+  clear_icons: Ko awọn ilana eto kuro
+  clear_icons_tooltip: A le nilo atunbere lati ṣe ipa ni kikun lori gbogbo awọn ẹrọ ailorukọ
   discord: Di eniyan
   exit: Duro / Jade
   github: Gitter

@@ -27,50 +27,37 @@ mod winevent;
 extern crate rust_i18n;
 i18n!("src/background/i18n", fallback = "en");
 
-use std::sync::OnceLock;
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    OnceLock,
+};
 
 use error_handler::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
 use modules::{
-    cli::{
-        application::{attach_console, is_just_getting_info, SEELEN_COMMAND_LINE},
-        AppClient, ServiceClient, SvcAction,
-    },
+    cli::{application::handle_console_cli, AppClient, ServiceClient, SvcAction},
     tray::application::ensure_tray_overflow_creation,
 };
 use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
-use seelen_core::state::Settings;
-use tauri::webview_version;
 use tray::try_register_tray_icon;
 use utils::{
     integrity::{
-        check_for_webview_optimal_state, register_panic_hook, restart_as_appx,
-        validate_webview_runtime_is_installed,
+        check_for_webview_optimal_state, print_initial_information, register_panic_hook,
+        restart_as_appx, validate_webview_runtime_is_installed,
     },
-    is_running_as_appx_package, was_installed_using_msix, PERFORMANCE_HELPER,
+    is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
+static SILENT: AtomicBool = AtomicBool::new(false);
+static VERBOSE: AtomicBool = AtomicBool::new(false);
 
 pub fn is_local_dev() -> bool {
     cfg!(dev)
-}
-
-fn print_initial_information() {
-    let version = env!("CARGO_PKG_VERSION");
-    let debug = if tauri::is_dev() { " (debug)" } else { "" };
-    let local = if is_local_dev() { " (local)" } else { "" };
-    log::info!(
-        "───────────────────── Starting Seelen UI v{version}{local}{debug} ─────────────────────"
-    );
-    log::info!("Operating System: {}", os_info::get());
-    log::info!("WebView2 Runtime: {:?}", webview_version());
-    log::info!("Elevated        : {:?}", WindowsApi::is_elevated());
-    log::info!("Locate          : {:?}", Settings::get_locale());
 }
 
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
@@ -90,11 +77,8 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());
 
-    if !tauri::is_dev() {
-        let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
-        if !command.get_matches().get_flag("silent") {
-            Seelen::show_settings()?;
-        }
+    if !tauri::is_dev() && !SILENT.load(Ordering::SeqCst) {
+        Seelen::show_settings()?;
     }
 
     trace_lock!(SEELEN).start()?;
@@ -138,28 +122,15 @@ fn is_already_runnning() -> bool {
 
 fn main() -> Result<()> {
     register_panic_hook();
+    handle_console_cli()?;
 
-    let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
-    let matches = match command.try_get_matches() {
-        Ok(m) => m,
-        Err(e) => {
-            // (help, --help or -h) and other sugestions are managed as error
-            attach_console()?;
-            e.print()?;
-            return Ok(());
-        }
-    };
-
-    if is_just_getting_info(&matches)? {
+    if is_already_runnning() {
+        AppClient::open_settings()?;
         return Ok(());
     }
 
-    if is_already_runnning() {
-        return AppClient::redirect_cli_to_instance();
-    }
-
-    if was_installed_using_msix() && !is_running_as_appx_package() {
-        restart_as_appx(&matches)?;
+    if was_installed_using_msix() && !is_running_as_appx() {
+        restart_as_appx()?;
     }
 
     trace_lock!(PERFORMANCE_HELPER).start("setup");

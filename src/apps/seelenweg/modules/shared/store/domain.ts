@@ -8,7 +8,7 @@ import { FocusedApp } from '../../../../shared/interfaces/common';
 export type HWND = number & {};
 
 export interface MediaSession {
-  id: string;
+  umid: string;
   title: string;
   author: string;
   thumbnail: string | null;
@@ -16,8 +16,7 @@ export interface MediaSession {
   default: boolean;
   owner: {
     name: string;
-    iconPath: string | null;
-  } | null;
+  };
 }
 
 export type PinnedWegItem = Extract<WegItem, { type: 'Pinned' }>;
@@ -34,6 +33,7 @@ export interface RootState extends IRootState<SeelenWegSettings> {
   itemsOnLeft: SwItem[];
   itemsOnCenter: SwItem[];
   itemsOnRight: SwItem[];
+  reorderDisabled: boolean;
   // ----------------------
   focusedApp: FocusedApp | null;
   isOverlaped: boolean;

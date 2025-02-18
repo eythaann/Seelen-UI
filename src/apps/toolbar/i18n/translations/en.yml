@@ -2,6 +2,8 @@ context_menu:
   add_module: Add Module
   remove: Remove Module
   settings: Settings
+  reorder_disable: Lock toolbar
+  reorder_enable: Unlock toolbar
   task_manager: Task Manager
 media:
   device:
@@ -24,6 +26,11 @@ network:
   saved: Saved networks
   scanning: Scanning for networks
   secured: Encrypted network
+notifications:
+  clear: Clear all
+  empty: No notifications
+  settings: More Notifications Settings
+  title: Notifications
 placeholder:
   battery_remaining: '% remaining'
   bluetooth_devices: Bluetooth & Devices

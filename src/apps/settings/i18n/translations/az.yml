@@ -83,6 +83,8 @@ devtools:
   settings_file: Parametrlər faylı
   simulate_fullscreen: Tam ekran hadisəsini simulyasiya edin
 extras:
+  clear_icons: Sistem nişanlar önbelleği təmizləyin
+  clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
   discord: Nifaq
   exit: Çıxmaq / çıxmaq
   github: Gitub

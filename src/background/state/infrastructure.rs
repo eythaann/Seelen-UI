@@ -126,3 +126,12 @@ pub fn state_get_widgets() -> Vec<Widget> {
 pub fn state_get_profiles() -> Vec<Profile> {
     FULL_STATE.load().profiles.clone()
 }
+
+#[tauri::command(async)]
+pub fn state_delete_cached_icons() -> Result<()> {
+    let mutex = FULL_STATE.load().icon_packs().clone();
+    let mut icon_manager = trace_lock!(mutex);
+    icon_manager.clear_system_icons()?;
+    icon_manager.write_system_icon_pack()?;
+    Ok(())
+}

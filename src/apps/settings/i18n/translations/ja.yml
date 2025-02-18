@@ -80,6 +80,8 @@ devtools:
   settings_file: 設定ファイル
   simulate_fullscreen: 全画面イベントをシミュレートする
 extras:
+  clear_icons: システムアイコンキャッシュをクリアする
+  clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
   discord: Discordコミュニティー
   exit: SeelenUIを終了
   github: GitHubレポジトリ

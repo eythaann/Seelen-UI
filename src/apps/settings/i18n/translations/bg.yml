@@ -84,6 +84,10 @@ devtools:
   settings_file: Файл за настройки
   simulate_fullscreen: Симулирайте събитие на цял екран
 extras:
+  clear_icons: Изчистване на кеша на системните икони
+  clear_icons_tooltip: >-
+    Може да се наложи рестартиране, за да се прояви напълно ефектът върху всички
+    джаджи.
   discord: Раздор
   exit: QUIT/EXIT
   github: Github

@@ -1,4 +1,6 @@
-use std::{collections::HashMap, ffi::OsStr, path::PathBuf, sync::Arc, time::Duration};
+mod players;
+
+use std::{collections::HashMap, path::PathBuf, sync::Arc, time::Duration};
 
 use itertools::Itertools;
 use lazy_static::lazy_static;
@@ -7,8 +9,7 @@ use windows::{
     Foundation::{EventRegistrationToken, TypedEventHandler},
     Media::Control::{
         GlobalSystemMediaTransportControlsSession,
-        GlobalSystemMediaTransportControlsSessionManager,
-        GlobalSystemMediaTransportControlsSessionPlaybackStatus, MediaPropertiesChangedEventArgs,
+        GlobalSystemMediaTransportControlsSessionManager, MediaPropertiesChangedEventArgs,
         PlaybackInfoChangedEventArgs, SessionsChangedEventArgs,
     },
     Win32::{
@@ -32,18 +33,10 @@ use windows::{
 use windows_core::Interface;
 
 use crate::{
-    error_handler::Result,
-    event_manager, log_error,
-    modules::start::application::START_MENU_MANAGER,
-    seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
-    trace_lock,
-    utils::pcwstr,
-    windows_api::{process::Process, Com, WindowsApi},
+    error_handler::Result, event_manager, log_error, trace_lock, utils::pcwstr, windows_api::Com,
 };
 
-use super::domain::{
-    Device, DeviceChannel, IPolicyConfig, MediaPlayer, MediaPlayerOwner, PolicyConfig,
-};
+use super::domain::{Device, DeviceChannel, IPolicyConfig, MediaPlayer, PolicyConfig};
 
 lazy_static! {
     pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> = Arc::new(Mutex::new(
@@ -135,73 +128,6 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
         _device_id: &windows_core::PCWSTR,
         _key: &PROPERTYKEY,
     ) -> windows_core::Result<()> {
-        Ok(())
-    }
-}
-
-impl MediaManagerEvents {
-    fn on_media_player_properties_changed(
-        session: &Option<GlobalSystemMediaTransportControlsSession>,
-        _args: &Option<MediaPropertiesChangedEventArgs>,
-    ) -> windows_core::Result<()> {
-        if let Some(session) = session {
-            let id = session.SourceAppUserModelId()?.to_string();
-            let properties = session.TryGetMediaPropertiesAsync()?.get()?;
-            let tx = MediaManager::event_tx();
-            let result = tx.send(MediaEvent::MediaPlayerPropertiesChanged {
-                id,
-                title: properties.Title()?.to_string(),
-                author: properties.Artist()?.to_string(),
-                thumbnail: WindowsApi::extract_thumbnail_from_ref(properties.Thumbnail()?).ok(),
-            });
-            log_error!(result);
-        }
-        Ok(())
-    }
-
-    fn on_media_player_playback_changed(
-        session: &Option<GlobalSystemMediaTransportControlsSession>,
-        _args: &Option<PlaybackInfoChangedEventArgs>,
-    ) -> windows_core::Result<()> {
-        if let Some(session) = session {
-            let playback = session.GetPlaybackInfo()?;
-            let tx = MediaManager::event_tx();
-            let result = tx.send(MediaEvent::MediaPlayerPlaybackStatusChanged {
-                id: session.SourceAppUserModelId()?.to_string(),
-                playing: playback.PlaybackStatus()?
-                    == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
-            });
-            log_error!(result);
-        }
-        Ok(())
-    }
-
-    fn on_media_players_changed(
-        session_manager: &Option<GlobalSystemMediaTransportControlsSessionManager>,
-        _args: &Option<SessionsChangedEventArgs>,
-    ) -> windows_core::Result<()> {
-        if let Some(session_manager) = session_manager {
-            let mut current_list = {
-                trace_lock!(MEDIA_MANAGER)
-                    .playing()
-                    .iter()
-                    .map(|session| session.id.clone())
-                    .collect_vec()
-            };
-
-            let tx = MediaManager::event_tx();
-            for session in session_manager.GetSessions()? {
-                let id = session.SourceAppUserModelId()?.to_string();
-                if !current_list.contains(&id) {
-                    let _ = tx.send(MediaEvent::MediaPlayerAdded(session));
-                }
-                current_list.retain(|x| *x != id);
-            }
-
-            for id in current_list {
-                let _ = tx.send(MediaEvent::MediaPlayerRemoved(id));
-            }
-        }
         Ok(())
     }
 }
@@ -363,7 +289,7 @@ impl MediaManager {
     }
 
     pub fn player_mut(&mut self, id: &str) -> Option<&mut MediaPlayer> {
-        self.playing.iter_mut().find(|p| p.id == id)
+        self.playing.iter_mut().find(|p| p.umid == id)
     }
 
     pub fn get_raw_device(&self, device_id: &str) -> Option<IMMDevice> {
@@ -374,18 +300,6 @@ impl MediaManager {
         &self,
     ) -> &HashMap<String, (IAudioEndpointVolume, IAudioEndpointVolumeCallback)> {
         &self.devices_audio_endpoint
-    }
-
-    pub fn session_by_id(&self, id: &str) -> Option<&GlobalSystemMediaTransportControlsSession> {
-        self.media_players.get(id)
-    }
-
-    pub fn get_recommended_player_id(&self) -> Result<String> {
-        Ok(self
-            .media_player_manager
-            .GetCurrentSession()?
-            .SourceAppUserModelId()?
-            .to_string_lossy())
     }
 }
 
@@ -472,22 +386,9 @@ impl MediaManager {
         for session_idx in 0..enumerator.GetCount()? {
             let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
             let volume: ISimpleAudioVolume = session.cast()?;
-
-            let name;
-            let icon_path;
-            let process = Process::from_id(session.GetProcessId()?);
-            match process.program_path() {
-                Ok(path) => {
-                    name = WindowsApi::get_executable_display_name(&path)?;
-                    icon_path = extract_and_save_icon_from_file(&path)
-                        .ok()
-                        .map(|p| p.to_string_lossy().to_string());
-                }
-                Err(_) => {
-                    name = session.GetDisplayName()?.to_string()?;
-                    icon_path = None;
-                }
-            }
+            // let process = Process::from_id(session.GetProcessId()?);
+            let name = String::new(); // todo on media mixer feature
+            let icon_path = None; // todo on media mixer feature
 
             sessions.push(DeviceChannel {
                 id: session.GetSessionIdentifier()?.to_string()?,
@@ -553,84 +454,6 @@ impl MediaManager {
         }
         self.inputs.retain(|d| d.id != device_id);
         self.outputs.retain(|d| d.id != device_id);
-        Ok(())
-    }
-
-    fn load_media_transport_session(
-        &mut self,
-        session: GlobalSystemMediaTransportControlsSession,
-    ) -> Result<()> {
-        let source_app_umid = session.SourceAppUserModelId()?.to_string_lossy();
-        let properties = session.TryGetMediaPropertiesAsync()?.get()?;
-
-        let playback_info = session.GetPlaybackInfo()?;
-        let status = playback_info.PlaybackStatus()?;
-
-        let display_name = if WindowsApi::is_uwp_package_id(&source_app_umid) {
-            WindowsApi::get_uwp_app_info(&source_app_umid)?
-                .DisplayInfo()?
-                .DisplayName()?
-                .to_string_lossy()
-        } else {
-            let shortcut = START_MENU_MANAGER
-                .load()
-                .search_shortcut_with_same_umid(&source_app_umid);
-            match shortcut {
-                Some(shortcut) => shortcut
-                    .file_stem()
-                    .unwrap_or_else(|| OsStr::new("Unknown"))
-                    .to_string_lossy()
-                    .to_string(),
-                None => "Unknown".to_string(),
-            }
-        };
-
-        self.playing.push(MediaPlayer {
-            id: source_app_umid.clone(),
-            title: properties.Title().unwrap_or_default().to_string_lossy(),
-            author: properties.Artist().unwrap_or_default().to_string_lossy(),
-            owner: Some(MediaPlayerOwner {
-                name: display_name,
-                icon_path: extract_and_save_icon_umid(&source_app_umid).ok(),
-            }),
-            thumbnail: properties
-                .Thumbnail()
-                .ok()
-                .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
-            playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
-            default: false,
-        });
-
-        // listen for media transport events
-        self.media_player_event_tokens.insert(
-            source_app_umid.clone(),
-            (
-                session.MediaPropertiesChanged(&self.media_player_properties_event_handler)?,
-                session.PlaybackInfoChanged(&self.media_player_playback_event_handler)?,
-            ),
-        );
-        self.media_players.insert(source_app_umid, session);
-        Ok(())
-    }
-
-    fn update_recommended_player(&mut self) {
-        if let Ok(recommended) = self.get_recommended_player_id() {
-            for player in &mut self.playing {
-                player.default = player.id == recommended;
-            }
-        }
-    }
-
-    fn release_media_transport_session(&mut self, player_id: &str) -> Result<()> {
-        if let Some(session) = self.media_players.remove(player_id) {
-            if let Some((properties_token, playback_token)) =
-                self.media_player_event_tokens.remove(player_id)
-            {
-                session.RemoveMediaPropertiesChanged(properties_token)?;
-                session.RemovePlaybackInfoChanged(playback_token)?;
-            }
-        }
-        self.playing.retain(|player| player.id != player_id);
         Ok(())
     }
 
@@ -763,7 +586,7 @@ impl MediaManager {
     /// Release all resources
     /// should be called on application exit
     pub fn release(&mut self) {
-        let player_ids = self.playing.iter().map(|p| p.id.clone()).collect_vec();
+        let player_ids = self.playing.iter().map(|p| p.umid.clone()).collect_vec();
 
         for player_id in player_ids {
             log_error!(self.release_media_transport_session(&player_id));

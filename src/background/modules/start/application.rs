@@ -42,7 +42,7 @@ impl StartMenuManager {
     pub fn new() -> StartMenuManager {
         StartMenuManager {
             list: Vec::new(),
-            cache_path: SEELEN_COMMON.app_cache_dir().join("start_menu.json"),
+            cache_path: SEELEN_COMMON.app_cache_dir().join("start_menu_v2.json"),
         }
     }
 
@@ -54,6 +54,12 @@ impl StartMenuManager {
             self.store_cache()?;
         }
         Ok(())
+    }
+
+    pub fn get_by_target(&self, target: &Path) -> Option<&StartMenuItem> {
+        self.list
+            .iter()
+            .find(|item| item.target.as_ref().is_some_and(|t| t == target))
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
@@ -82,16 +88,18 @@ impl StartMenuManager {
     fn _get_items(dir: &Path) -> Result<Vec<StartMenuItem>> {
         let mut items = Vec::new();
         for entry in std::fs::read_dir(dir)?.flatten() {
-            let file_type = entry.file_type()?;
             let path = entry.path();
+            let file_type = entry.file_type()?;
             if file_type.is_dir() {
                 items.extend(Self::_get_items(&path)?);
                 continue;
             }
             if file_type.is_file() {
+                let target = WindowsApi::resolve_lnk_target(&path).ok().map(|(t, _)| t);
                 items.push(StartMenuItem {
                     umid: WindowsApi::get_file_umid(&path).ok(),
                     path,
+                    target,
                 })
             }
         }

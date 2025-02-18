@@ -82,6 +82,8 @@ devtools:
   settings_file: የቅንብሮች ፋይል
   simulate_fullscreen: የሙሉ ስክሪን ክስተት አስመስለው
 extras:
+  clear_icons: የስርዓት አዶዎች መሸጎጫ
+  clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
   discord: አለመግባባት
   exit: ማቆም / መውጣት
   github: Github

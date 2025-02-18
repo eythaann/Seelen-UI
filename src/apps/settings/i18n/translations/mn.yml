@@ -83,6 +83,10 @@ devtools:
   settings_file: Тохиргооын нэр
   simulate_fullscreen: Бүтэн дэлгэцийн үйл явдлыг дуурайх
 extras:
+  clear_icons: Системийн дүрсийг цэвэрлэх
+  clear_icons_tooltip: >-
+    Бүх виджет дээр хүчин төгөлдөр болохын тулд дахин эхлүүлэх шаардлагатай байж
+    болно
   discord: Холор
   exit: Гарах / гарах
   github: Github

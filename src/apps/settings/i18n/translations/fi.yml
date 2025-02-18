@@ -84,6 +84,10 @@ devtools:
   settings_file: Asetustiedosto
   simulate_fullscreen: Simuloi koko näytön tapahtumaa
 extras:
+  clear_icons: Tyhjennä järjestelmän kuvakkeiden välimuisti
+  clear_icons_tooltip: >-
+    Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat
+    täysin voimaan.
   discord: Erimielisyys
   exit: Lopettaa/poistua
   github: Github

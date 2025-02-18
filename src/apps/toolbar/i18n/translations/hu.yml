@@ -24,6 +24,11 @@ network:
   saved: Mentett hálózatok
   scanning: Hálózatok keresése
   secured: Titkosított hálózat
+notifications:
+  clear: Mindent törölni
+  empty: Nincsenek értesítések
+  settings: További értesítések beállításai
+  title: Értesítések
 placeholder:
   battery_remaining: '% megmaradt'
   bluetooth_devices: Bluetooth & eszközök

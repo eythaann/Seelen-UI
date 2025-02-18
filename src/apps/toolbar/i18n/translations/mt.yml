@@ -24,6 +24,11 @@ network:
   saved: Netwerks salvati
   scanning: Skennjar għal netwerks
   secured: Netwerk kriptat
+notifications:
+  clear: Ċar kollox
+  empty: L-ebda notifika
+  settings: Aktar settings ta 'notifiki
+  title: Notifiki
 placeholder:
   battery_remaining: '% jibqa '''
   bluetooth_devices: Bluetooth & Apparat

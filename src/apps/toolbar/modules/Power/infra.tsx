@@ -13,6 +13,7 @@ interface Props {
 
 export function PowerModule({ module }: Props) {
   const power = useSelector(Selectors.powerStatus);
+  const powerPlan = useSelector(Selectors.powerPlan);
   const batteries = useSelector(Selectors.batteries);
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export function PowerModule({ module }: Props) {
     <Item
       extraVars={{
         power,
+        powerPlan,
         batteries,
         battery: batteries[0],
       }}

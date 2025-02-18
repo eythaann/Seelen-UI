@@ -83,6 +83,10 @@ devtools:
   settings_file: Beállítási fájl
   simulate_fullscreen: Teljes képernyős esemény szimulálása
 extras:
+  clear_icons: Rendszerikonok gyorsítótárának törlése
+  clear_icons_tooltip: >-
+    Újraindítás szükséges lehet ahhoz, hogy az összes widget teljes mértékben
+    érvénybe lépjen.
   discord: Viszály
   exit: Kilépés/kilépés
   github: Github

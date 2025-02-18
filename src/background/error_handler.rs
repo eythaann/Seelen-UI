@@ -57,13 +57,13 @@ define_app_errors!(
 
 impl std::fmt::Debug for AppError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.msg)?;
-
-        let frames = self.backtrace.frames();
-        if !frames.is_empty() {
-            writeln!(f)?;
+        for line in self.msg.lines() {
+            if !line.is_empty() {
+                writeln!(f, "{}", line)?;
+            }
         }
 
+        let frames = self.backtrace.frames();
         let mut index = 0;
         for frame in frames {
             for symbol in frame.symbols() {
@@ -125,13 +125,17 @@ impl From<AppError> for tauri::ipc::InvokeError {
 
 impl From<tauri_plugin_shell::process::Output> for AppError {
     fn from(output: tauri_plugin_shell::process::Output) -> Self {
-        if !output.stderr.is_empty() {
-            let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stderr);
-            cow.to_string().into()
+        let msg = if !output.stderr.is_empty() {
+            // let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stderr);
+            // cow.to_string().into()
+            String::from_utf8_lossy(&output.stderr).to_string()
         } else {
-            let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
-            cow.to_string().into()
-        }
+            // let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
+            // cow.to_string().into()
+            String::from_utf8_lossy(&output.stdout).to_string()
+        };
+        let backtrace = backtrace::Backtrace::new();
+        AppError { msg, backtrace }
     }
 }
 

@@ -83,6 +83,10 @@ devtools:
   settings_file: Cài đặt tập tin
   simulate_fullscreen: Mô phỏng sự kiện toàn màn hình
 extras:
+  clear_icons: Xóa bộ đệm biểu tượng hệ thống
+  clear_icons_tooltip: >-
+    Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các
+    tiện ích
   discord: Bất hòa
   exit: Thoát/Thoát
   github: GitHub

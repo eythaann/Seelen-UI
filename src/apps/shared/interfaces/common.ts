@@ -3,4 +3,5 @@ export interface FocusedApp {
   name: string;
   title: string;
   exe: string | null;
+  umid: string | null;
 }

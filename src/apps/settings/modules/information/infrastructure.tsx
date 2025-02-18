@@ -1,6 +1,6 @@
-import { UpdateChannel } from '@seelen-ui/lib';
+import { invoke, SeelenCommand, UpdateChannel } from '@seelen-ui/lib';
 import { exit, relaunch } from '@tauri-apps/plugin-process';
-import { Button, Select, Switch } from 'antd';
+import { Button, Select, Switch, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,7 +43,18 @@ export function Information() {
         <SettingsSubGroup label="Seelen UI">
           <SettingsOption>
             <span>{t('extras.version')}:</span>
-            <span className={cs.version}>v{EnvConfig.version} {isDevMode && '(dev)'}</span>
+            <span className={cs.version}>
+              v{EnvConfig.version} {isDevMode && '(dev)'} {isMsixBuild && '(msix)'}
+            </span>
+          </SettingsOption>
+          <SettingsOption>
+            <span>{t('update.channel')}</span>
+            <Select
+              value={updaterSettings.channel}
+              disabled={isMsixBuild}
+              onChange={onChangeUpdateChannel}
+              options={Object.values(UpdateChannel).map((c) => ({ value: c, label: c }))}
+            />
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
@@ -67,29 +78,39 @@ export function Information() {
 
       <SettingsGroup>
         <SettingsOption>
-          <span>{t('devtools.enable')}</span>
+          <b>{t('devtools.enable')}</b>
           <Switch value={devTools} onChange={onToggleDevTools} />
-        </SettingsOption>
-        <SettingsOption>
-          <span>{t('update.channel')}</span>
-          <Select
-            value={updaterSettings.channel}
-            disabled={isMsixBuild}
-            onChange={onChangeUpdateChannel}
-            options={Object.values(UpdateChannel).map((c) => ({ value: c, label: c }))}
-          />
         </SettingsOption>
       </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
-          <span>{t('extras.relaunch')}</span>
+          <b style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            {t('extras.clear_icons')}
+            <Tooltip title={t('extras.clear_icons_tooltip')}>
+              <Icon iconName="LuCircleHelp" />
+            </Tooltip>
+          </b>
+          <Button
+            type="dashed"
+            danger
+            onClick={() => invoke(SeelenCommand.StateDeleteCachedIcons)}
+            style={{ width: '50px' }}
+          >
+            <Icon iconName="IoReload" size={12} />
+          </Button>
+        </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <b>{t('extras.relaunch')}</b>
           <Button type="dashed" onClick={relaunch} style={{ width: '50px' }}>
             <Icon iconName="IoReload" size={12} />
           </Button>
         </SettingsOption>
         <SettingsOption>
-          <span>{t('extras.exit')}</span>
+          <b>{t('extras.exit')}</b>
           <Button type="dashed" danger onClick={() => exit(0)} style={{ width: '50px' }}>
             <Icon iconName="IoClose" />
           </Button>

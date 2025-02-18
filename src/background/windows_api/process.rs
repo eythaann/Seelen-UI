@@ -13,7 +13,7 @@ use windows::{
 
 use crate::error_handler::Result;
 
-use super::{string_utils::WindowsString, window::Window, WindowsApi};
+use super::{string_utils::WindowsString, types::AppUserModelId, window::Window, WindowsApi};
 
 // https://stackoverflow.com/questions/47300622/meaning-of-flags-in-process-extended-basic-information-struct
 #[allow(dead_code)]
@@ -74,13 +74,13 @@ impl Process {
         Ok(family_name.to_string())
     }
 
-    /// package app user model id
-    pub fn package_app_user_model_id(&self) -> Result<String> {
+    /// package app user model id, (appx, eg: "Microsoft.WindowsTerminal_8wekyb3d8bbwe!TerminalApp")
+    pub fn package_app_user_model_id(&self) -> Result<AppUserModelId> {
         let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;
         let mut id = WindowsString::new_to_fill(len as usize);
         unsafe { GetApplicationUserModelId(hprocess, &mut len, id.as_pwstr()).ok()? };
-        Ok(id.to_string())
+        Ok(AppUserModelId::Appx(id.to_string()))
     }
 
     pub fn package_app_info(&self) -> Result<AppInfo> {
@@ -107,6 +107,14 @@ impl Process {
     }
 
     pub fn program_display_name(&self) -> Result<String> {
-        WindowsApi::get_executable_display_name(&self.program_path()?)
+        let path = self.program_path()?;
+        match WindowsApi::get_executable_display_name(&path) {
+            Ok(name) => Ok(name.trim_end_matches(".exe").to_owned()),
+            Err(_) => Ok(path
+                .file_stem()
+                .ok_or("there is no file stem")?
+                .to_string_lossy()
+                .to_string()),
+        }
     }
 }

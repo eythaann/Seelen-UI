@@ -24,6 +24,11 @@ network:
   saved: torên Saved
   scanning: Ji bo toran lêgerîn
   secured: Tora şîfrekirî
+notifications:
+  clear: Hemî paqij bikin
+  empty: No notifications
+  settings: Mîhengên bêtir agahdariyan
+  title: Notifications
 placeholder:
   battery_remaining: '% mayî'
   bluetooth_devices: Bluetooth & Amûrên

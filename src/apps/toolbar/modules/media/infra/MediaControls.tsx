@@ -15,7 +15,7 @@ import { calcLuminance, selectDefaultOutput } from '../application';
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
 
 import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
-import { Icon } from '../../../../shared/components/Icon';
+import { FileIcon, Icon } from '../../../../shared/components/Icon';
 import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 import { useTimeout, useWindowFocusChange } from '../../../../shared/hooks';
 
@@ -28,13 +28,13 @@ const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 function MediaSession({ session }: { session: MediaChannelTransportData }) {
   const [luminance, setLuminance] = useState(0);
 
-  let src = convertFileSrc(
-    session.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
+  let thumbnailSrc = convertFileSrc(
+    session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
   );
 
   useEffect(() => {
-    calcLuminance(src).then(setLuminance).catch(console.error);
-  }, [src]);
+    calcLuminance(thumbnailSrc).then(setLuminance).catch(console.error);
+  }, [thumbnailSrc]);
 
   const filteredLuminance = Math.max(
     Math.min(luminance * BRIGHTNESS_MULTIPLIER, MAX_LUMINANCE),
@@ -43,7 +43,7 @@ function MediaSession({ session }: { session: MediaChannelTransportData }) {
   const color = filteredLuminance < 125 ? '#efefef' : '#222222';
 
   const onClickBtn = (cmd: string) => {
-    invoke(cmd, { id: session.id }).catch(console.error);
+    invoke(cmd, { id: session.umid }).catch(console.error);
   };
 
   return (
@@ -54,19 +54,12 @@ function MediaSession({ session }: { session: MediaChannelTransportData }) {
       }}
     >
       <div className="media-session-thumbnail-container">
-        {session.owner && (
-          <Tooltip title={session.owner.name} placement="bottom">
-            <img
-              className="media-session-app-icon"
-              src={convertFileSrc(
-                session.owner.iconPath ? session.owner.iconPath : LAZY_CONSTANTS.MISSING_ICON_PATH,
-              )}
-            />
-          </Tooltip>
-        )}
-        <img className="media-session-thumbnail" src={src} />
+        <Tooltip title={session.owner.name} placement="bottom">
+          <FileIcon className="media-session-app-icon" path={session.umid} />
+        </Tooltip>
+        <img className="media-session-thumbnail" src={thumbnailSrc} />
       </div>
-      <img className="media-session-blurred-thumbnail" src={src} />
+      <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />
 
       <div className="media-session-info" style={{ color }}>
         <h4 className="media-session-title">{session.title}</h4>

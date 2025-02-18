@@ -24,6 +24,11 @@ network:
   saved: Mitandao iliyohifadhiwa
   scanning: Inatafuta mitandao
   secured: Mtandao uliosimbwa kwa njia fiche
+notifications:
+  clear: Futa zote
+  empty: Hakuna arifa
+  settings: Mipangilio ya Arifa zaidi
+  title: Arifa
 placeholder:
   battery_remaining: Imebaki
   bluetooth_devices: Bluetooth & vifaa

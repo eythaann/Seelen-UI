@@ -8,48 +8,43 @@ use std::{
     path::PathBuf,
 };
 
-use application::{handle_cli_events, SEELEN_COMMAND_LINE};
+use application::{get_app_command, handle_cli_events};
 pub use domain::SvcAction;
 use domain::SvcMessage;
 use itertools::Itertools;
-use windows::Win32::System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler};
+use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use windows::Win32::{
+    System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler},
+    UI::Shell::FOLDERID_LocalAppData,
+};
 use windows_core::Interface;
 
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::Seelen,
-    trace_lock,
-    utils::{pwsh::PwshScript, spawn_named_thread},
-    windows_api::Com,
+    seelen::{get_app_handle, Seelen},
+    utils::{pwsh::PwshScript, spawn_named_thread, was_installed_using_msix},
+    windows_api::{Com, WindowsApi},
 };
 
 pub struct AppClient;
 impl AppClient {
-    fn socket_path() -> PathBuf {
+    fn socket_path() -> Result<PathBuf> {
         let dir = std::env::temp_dir().join("com.seelen.seelen-ui");
         if !dir.exists() {
-            fs::create_dir_all(&dir).unwrap();
+            fs::create_dir(&dir)?;
         }
-        dir.join("slu_tcp_socket")
+        Ok(dir.join("slu_tcp_socket"))
     }
 
     // const BUFFER_SIZE: usize = 5 * 1024 * 1024; // 5 MB
-    fn handle_message(stream: TcpStream) {
-        let argv = match serde_json::from_reader::<TcpStream, Vec<String>>(stream) {
-            Ok(argv) => argv,
-            Err(e) => {
-                log::error!("Failed to deserialize message: {}", e);
-                return;
-            }
-        };
+    fn handle_message(stream: TcpStream) -> Result<()> {
+        let argv: Vec<String> = serde_json::from_reader(stream)?;
         log::trace!(target: "slu::cli", "{}", argv[1..].join(" "));
-        std::thread::spawn(move || {
-            let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
-            if let Ok(matches) = command.try_get_matches_from(argv) {
-                log_error!(handle_cli_events(&matches));
-            }
-        });
+        if let Ok(matches) = get_app_command().try_get_matches_from(argv) {
+            handle_cli_events(&matches)?;
+        }
+        Ok(())
     }
 
     pub fn listen_tcp() -> Result<()> {
@@ -58,7 +53,7 @@ impl AppClient {
         let port = socket_addr.port();
 
         log::info!("TCP server listening on 127.0.0.1:{}", port);
-        fs::write(Self::socket_path(), port.to_string())?;
+        fs::write(Self::socket_path()?, port.to_string())?;
 
         spawn_named_thread("TCP Listener", move || {
             for stream in listener.incoming() {
@@ -67,7 +62,9 @@ impl AppClient {
                     break;
                 }
                 match stream {
-                    Ok(stream) => Self::handle_message(stream),
+                    Ok(stream) => {
+                        std::thread::spawn(move || log_error!(Self::handle_message(stream)));
+                    }
                     Err(e) => log::error!("Failed to accept connection: {}", e),
                 }
             }
@@ -76,19 +73,20 @@ impl AppClient {
     }
 
     pub fn connect_tcp() -> Result<TcpStream> {
-        let port = fs::read_to_string(Self::socket_path())?;
+        let port = fs::read_to_string(Self::socket_path()?)?;
         Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
     }
 
+    pub fn open_settings() -> Result<()> {
+        let stream = Self::connect_tcp()?;
+        serde_json::to_writer(stream, &["settings"])?;
+        Ok(())
+    }
+
+    /// will fail if no instance is running
     pub fn redirect_cli_to_instance() -> Result<()> {
-        let mut attempts: i32 = 0;
-        let mut stream = Self::connect_tcp();
-        while stream.is_err() && attempts < 10 {
-            attempts += 1;
-            std::thread::sleep(std::time::Duration::from_millis(100));
-            stream = AppClient::connect_tcp();
-        }
-        serde_json::to_writer(stream?, &std::env::args().collect_vec())?;
+        let stream = Self::connect_tcp()?;
+        serde_json::to_writer(stream, &std::env::args().collect_vec())?;
         Ok(())
     }
 }
@@ -146,6 +144,16 @@ impl ServiceClient {
         Self::connect_tcp().is_ok()
     }
 
+    pub fn service_path() -> Result<PathBuf> {
+        let service_path = if was_installed_using_msix() {
+            WindowsApi::known_folder(FOLDERID_LocalAppData)?
+                .join("Microsoft\\WindowsApps\\slu-service.exe")
+        } else {
+            std::env::current_exe()?.with_file_name("slu-service.exe")
+        };
+        Ok(service_path)
+    }
+
     fn start_service_task() -> Result<()> {
         Com::run_with_context(|| unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
@@ -159,11 +167,7 @@ impl ServiceClient {
             let mut action_path = windows_core::BSTR::new();
             action.Path(&mut action_path)?;
 
-            let service_path = std::env::current_exe()?
-                .with_file_name("slu-service.exe")
-                .to_string_lossy()
-                .to_lowercase();
-
+            let service_path = Self::service_path()?.to_string_lossy().to_lowercase();
             match action_path.to_string().to_lowercase() == service_path {
                 true => {
                     task.Run(None)?;
@@ -180,15 +184,27 @@ impl ServiceClient {
     // so if the service is not running, we need to start it (common on msix setup)
     pub async fn start_service() -> Result<()> {
         if let Err(err) = Self::start_service_task() {
-            log::debug!("Can not start service via task: {}", err);
-            let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
-            PwshScript::new(format!(
+            log::debug!("Can not start service via task scheduler: {}", err);
+            let script = PwshScript::new(format!(
                 "Start-Process '{}' -Verb runAs",
-                service_path.display(),
+                Self::service_path()?.display()
             ))
             .inline_command()
-            .execute()
-            .await?;
+            .elevated();
+            let result = script.execute().await;
+            if let Err(err) = result {
+                let try_again = get_app_handle()
+                    .dialog()
+                    .message(t!("service.not_running_description"))
+                    .title(t!("service.not_running"))
+                    .kind(MessageDialogKind::Info)
+                    .ok_button_label(t!("service.not_running_ok"))
+                    .blocking_show();
+                if try_again {
+                    script.execute().await?;
+                }
+                return Err(err);
+            }
         }
         Ok(())
     }

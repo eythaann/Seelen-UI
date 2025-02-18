@@ -85,6 +85,10 @@ devtools:
   settings_file: Faylka Dejinta
   simulate_fullscreen: Isku day dhacdo shaashad buuxda
 extras:
+  clear_icons: Calaamadaha Calaamadaha Camis Cast
+  clear_icons_tooltip: >-
+    Dib-u-bilaabi kara ayaa loo baahan karaa inuu si buuxda u dhaqan geliyo
+    dhammaan waxyaabaha widgets
   discord: Huf
   exit: Jooji / bixitaan
   github: GitHub

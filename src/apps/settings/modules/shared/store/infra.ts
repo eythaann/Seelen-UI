@@ -116,8 +116,6 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     ? await Settings.loadCustom(customPath)
     : await Settings.getAsync();
 
-  console.log(settings.inner);
-
   const currentState = store.getState();
   store.dispatch(
     RootActions.setState({

@@ -24,6 +24,11 @@ network:
   saved: Sparade nätverk
   scanning: Söker efter nätverk
   secured: Krypterat nätverk
+notifications:
+  clear: Rensa alla
+  empty: Inga meddelanden
+  settings: Fler inställningar för aviseringar
+  title: Meddelanden
 placeholder:
   battery_remaining: '% återstående'
   bluetooth_devices: Bluetooth & enheter
