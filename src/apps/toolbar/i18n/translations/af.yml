@@ -24,6 +24,11 @@ network:
   saved: Gestoorde netwerke
   scanning: Soek vir netwerke
   secured: Geënkripteerde netwerk
+notifications:
+  clear: Duidelik alles
+  empty: Geen kennisgewings nie
+  settings: Meer kennisgewingsinstellings
+  title: Kennisgewings
 placeholder:
   battery_remaining: '% oorblywende'
   bluetooth_devices: Bluetooth & toestelle

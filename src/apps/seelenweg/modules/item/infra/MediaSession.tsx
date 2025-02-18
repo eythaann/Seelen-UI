@@ -10,12 +10,11 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { calcLuminance } from '../../../../toolbar/modules/media/application';
 import { Selectors } from '../../shared/store/app';
-import { useIcon } from 'src/apps/shared/hooks';
 import { cx } from 'src/apps/shared/styles';
 
 import { MediaWegItem } from '../../shared/store/domain';
 
-import { Icon } from '../../../../shared/components/Icon';
+import { FileIcon, Icon } from '../../../../shared/components/Icon';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
@@ -32,9 +31,6 @@ export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean
   const dockPosition = useSelector(Selectors.settings.position);
   const sessions = useSelector(Selectors.mediaSessions);
   const session = sessions.find((s) => s.default);
-
-  let appIconSrc =
-    useIcon({ umid: session?.umid }) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
 
   let thumbnailSrc = convertFileSrc(
     session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
@@ -81,7 +77,7 @@ export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean
             }}
           >
             <div className="media-session-thumbnail-container">
-              <img className="media-session-app-icon" src={appIconSrc} />
+              <FileIcon className="media-session-app-icon" umid={session?.umid} noFallback />
               <img className="media-session-thumbnail" src={thumbnailSrc} />
             </div>
             <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />

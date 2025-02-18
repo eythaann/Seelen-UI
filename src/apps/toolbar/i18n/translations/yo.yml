@@ -24,6 +24,11 @@ network:
   saved: Awọn nẹtiwọki ti a fipamọ
   scanning: Ṣiṣayẹwo fun awọn nẹtiwọki
   secured: Nẹtiwọọki ti paroko
+notifications:
+  clear: Pa gbogbo run
+  empty: Ko si awọn iwifunni
+  settings: Awọn ifiranṣẹ iwifunni diẹ sii
+  title: Awọn iwifunni
 placeholder:
   battery_remaining: '% ti o ku'
   bluetooth_devices: Bluetooth & awọn ẹrọ

@@ -1,4 +1,7 @@
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::{
+    ffi::c_void,
+    sync::atomic::{AtomicBool, AtomicIsize, Ordering},
+};
 
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
@@ -6,7 +9,14 @@ use windows::{
     core::PCWSTR,
     Win32::{
         Foundation::{HWND, LPARAM, LRESULT, WPARAM},
-        System::Shutdown::{EWX_LOGOFF, EWX_REBOOT, EWX_SHUTDOWN, SHTDN_REASON_NONE},
+        System::{
+            Power::{
+                PowerRegisterForEffectivePowerModeNotifications,
+                PowerUnregisterFromEffectivePowerModeNotifications, EFFECTIVE_POWER_MODE,
+                EFFECTIVE_POWER_MODE_V1, EFFECTIVE_POWER_MODE_V2,
+            },
+            Shutdown::{EWX_LOGOFF, EWX_REBOOT, EWX_SHUTDOWN, SHTDN_REASON_NONE},
+        },
         UI::WindowsAndMessaging::{
             CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
             RegisterClassW, TranslateMessage, MSG, PBT_APMPOWERSTATUSCHANGE, WINDOW_EX_STYLE,
@@ -16,13 +26,25 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result, log_error, modules::power::domain::Battery, seelen::get_app_handle,
-    utils::spawn_named_thread, windows_api::WindowsApi,
+    error_handler::Result,
+    log_error,
+    modules::power::domain::{Battery, PowerPlan},
+    seelen::get_app_handle,
+    utils::spawn_named_thread,
+    windows_api::WindowsApi,
 };
 
 use super::domain::PowerStatus;
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
+static REGISTRATION_HANDLE: AtomicIsize = AtomicIsize::new(0);
+
+pub fn release_power_events() {
+    let handle = REGISTRATION_HANDLE.load(Ordering::Acquire);
+    let result =
+        unsafe { PowerUnregisterFromEffectivePowerModeNotifications(handle as *const c_void) };
+    log_error!(result);
+}
 
 pub struct PowerManager;
 impl PowerManager {
@@ -44,6 +66,17 @@ impl PowerManager {
                 LRESULT(0)
             }
             _ => DefWindowProcW(hwnd, msg, w_param, l_param),
+        }
+    }
+    unsafe extern "system" fn on_effective_power_mode_change(
+        mode: EFFECTIVE_POWER_MODE,
+        _ctx: *const c_void,
+    ) {
+        let power_mode: Result<PowerPlan> = mode.try_into();
+        if let Ok(power_mode) = power_mode {
+            log_error!(get_app_handle().emit(SeelenEvent::PowerPlan, power_mode));
+        } else {
+            log_error!(power_mode);
         }
     }
 
@@ -99,6 +132,29 @@ impl PowerManager {
                 DispatchMessageW(&msg);
             }
         })?;
+
+        let mut unregister: isize = 0;
+        // https://learn.microsoft.com/en-us/windows/win32/api/powersetting/nf-powersetting-powerregisterforeffectivepowermodenotifications
+        unsafe {
+            if PowerRegisterForEffectivePowerModeNotifications(
+                EFFECTIVE_POWER_MODE_V2,
+                Some(Self::on_effective_power_mode_change),
+                None,
+                &mut unregister as *mut isize as *mut *mut c_void,
+            )
+            .is_err()
+            {
+                // Awaited error in case V2 not supported before Windows 10, version 1903
+                PowerRegisterForEffectivePowerModeNotifications(
+                    EFFECTIVE_POWER_MODE_V1,
+                    Some(Self::on_effective_power_mode_change),
+                    None,
+                    &mut unregister as *mut isize as *mut *mut c_void,
+                )?;
+            }
+
+            REGISTRATION_HANDLE.store(unregister, Ordering::Release);
+        };
 
         // TODO search for a better way to do this, WM_POWERBROADCAST only register status events
         // like charging, discharging, battery low, etc.

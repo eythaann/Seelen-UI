@@ -82,6 +82,10 @@ devtools:
   settings_file: Pelê Mîhengan
   simulate_fullscreen: Bûyera tevahî ekranê simule bikin
 extras:
+  clear_icons: Îkonên pergala zelal cache
+  clear_icons_tooltip: >-
+    Pêdivî ye ku ji nû ve destpêkirinê were xwestin ku bi tevahî li ser hemî
+    widgetan bandor bike
   discord: Nakemala
   exit: Qut / derketin
   github: Github

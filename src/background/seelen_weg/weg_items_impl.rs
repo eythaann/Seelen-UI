@@ -3,8 +3,8 @@ use parking_lot::Mutex;
 use seelen_core::{
     handlers::SeelenEvent,
     state::{
-        PinnedWegItemData, WegAppGroupItem, WegItem, WegItems, WegPinnedItemsVisibility,
-        WegTemporalItemsVisibility,
+        PinnedWegItemData, WegAppGroupItem, WegItem, WegItemSubtype, WegItems,
+        WegPinnedItemsVisibility, WegTemporalItemsVisibility,
     },
 };
 use std::{collections::HashMap, ffi::OsStr, sync::Arc};
@@ -12,11 +12,10 @@ use tauri::Emitter;
 
 use crate::{
     error_handler::Result,
-    log_error,
     modules::start::application::START_MENU_MANAGER,
     seelen::get_app_handle,
     state::application::FULL_STATE,
-    windows_api::{window::Window, MonitorEnumerator, WindowsApi},
+    windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
 };
 
 use super::{
@@ -27,13 +26,6 @@ use super::{
 lazy_static! {
     pub static ref WEG_ITEMS_IMPL: Arc<Mutex<WegItemsImpl>> =
         Arc::new(Mutex::new(WegItemsImpl::new()));
-}
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub enum ShouldGetInfoFrom {
-    Package(String),
-    WindowPropertyStore(String),
-    Process,
 }
 
 #[derive(Debug, Clone)]
@@ -160,71 +152,59 @@ impl WegItemsImpl {
             Err(_) => window.process().program_path()?,
         };
 
-        let umid = window
-            .process()
-            .package_app_user_model_id()
-            .ok()
-            .or_else(|| window.app_user_model_id());
-
-        let get_info_from = match &umid {
-            Some(umid) => {
-                let _ = extract_and_save_icon_umid(umid);
-                if WindowsApi::is_uwp_package_id(umid) {
-                    ShouldGetInfoFrom::Package(umid.clone())
-                } else {
-                    ShouldGetInfoFrom::WindowPropertyStore(umid.clone())
-                }
-            }
-            None => ShouldGetInfoFrom::Process,
-        };
-
-        let mut pin_disabled = false;
+        let umid = window.app_user_model_id();
         let mut display_name = window
             .app_display_name()
             .unwrap_or_else(|_| String::from("Unknown"));
 
-        let relaunch_command;
-        match get_info_from {
-            ShouldGetInfoFrom::Package(umid) => {
-                display_name = WindowsApi::get_uwp_app_info(&umid)?
-                    .DisplayInfo()?
-                    .DisplayName()?
-                    .to_string_lossy();
-                relaunch_command = format!("\"explorer.exe\" shell:AppsFolder\\{umid}");
-            }
-            ShouldGetInfoFrom::WindowPropertyStore(umid) => {
-                let shortcut = START_MENU_MANAGER
-                    .load()
-                    .search_shortcut_with_same_umid(&umid);
-                if let Some(shortcut) = shortcut {
-                    path = shortcut.clone();
-                    display_name = path
-                        .file_stem()
-                        .unwrap_or_else(|| OsStr::new("Unknown"))
-                        .to_string_lossy()
-                        .to_string();
-                } else {
-                    log_error!(extract_and_save_icon_from_file(&path));
+        let relaunch_command = if let Some(umid) = &umid {
+            // pre-extraction to avoid flickering on the ui
+            let _ = extract_and_save_icon_umid(umid);
+            match umid {
+                AppUserModelId::Appx(umid) => {
+                    format!("\"explorer.exe\" shell:AppsFolder\\{umid}")
                 }
-                // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
-                // must always be set together. If one of those properties is not set, then neither is used.
-                // https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
-                if let (Some(win_relaunch_command), Some(relaunch_display_name)) =
-                    (window.relaunch_command(), window.relaunch_display_name())
-                {
-                    relaunch_command = win_relaunch_command;
-                    display_name = relaunch_display_name;
-                } else {
-                    pin_disabled = window.prevent_pinning();
-                    relaunch_command = path.to_string_lossy().to_string();
+                AppUserModelId::PropertyStore(umid) => {
+                    let shortcut = START_MENU_MANAGER
+                        .load()
+                        .search_shortcut_with_same_umid(umid);
+
+                    // some apps like librewolf don't have a shortcut with the same umid
+                    if let Some(shortcut) = &shortcut {
+                        path = shortcut.clone();
+                        display_name = path
+                            .file_stem()
+                            .unwrap_or_else(|| OsStr::new("Unknown"))
+                            .to_string_lossy()
+                            .to_string();
+                    } else {
+                        // pre-extraction to avoid flickering on the ui
+                        let _ = extract_and_save_icon_from_file(&path);
+                    }
+
+                    // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
+                    // must always be set together. If one of those properties is not set, then neither is used.
+                    // https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
+                    if let (Some(relaunch_command), Some(relaunch_display_name)) =
+                        (window.relaunch_command(), window.relaunch_display_name())
+                    {
+                        display_name = relaunch_display_name;
+                        relaunch_command
+                    } else if shortcut.is_some() {
+                        format!("\"explorer.exe\" shell:AppsFolder\\{umid}")
+                    } else {
+                        // process program path
+                        path.to_string_lossy().to_string()
+                    }
                 }
             }
-            ShouldGetInfoFrom::Process => {
-                log_error!(extract_and_save_icon_from_file(&path));
-                relaunch_command = path.to_string_lossy().to_string();
-            }
+        } else {
+            // pre-extraction to avoid flickering on the ui
+            let _ = extract_and_save_icon_from_file(&path);
+            path.to_string_lossy().to_string()
         };
 
+        let umid = umid.map(|umid| umid.to_string());
         // groups order documented on https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
         // group should be by umid, if not present then the groups are done by relaunch command
         // and in last case the groups are done by process id/path
@@ -253,16 +233,18 @@ impl WegItemsImpl {
 
         let data = PinnedWegItemData {
             id: uuid::Uuid::new_v4().to_string(),
+            subtype: WegItemSubtype::App,
             umid,
             path,
             relaunch_command,
+            relaunch_in: None,
             display_name,
             is_dir: false,
             windows: vec![WegAppGroupItem {
                 title: window.title(),
                 handle: window.address(),
             }],
-            pin_disabled,
+            pin_disabled: window.prevent_pinning(),
         };
         self.items.center.push(WegItem::Temporal(data));
         Ok(())
@@ -324,29 +306,26 @@ impl WegItemsImpl {
             }
             let temporal_mode = state.get_weg_temporal_item_visibility(&monitor_id);
             let pinned_mode = state.get_weg_pinned_item_visibility(&monitor_id);
-            let pinned_visible = pinned_mode == WegPinnedItemsVisibility::Always
-                || (pinned_mode == WegPinnedItemsVisibility::WhenPrimary && monitor.is_primary());
+            let pinned_visible = match pinned_mode {
+                WegPinnedItemsVisibility::Always => true,
+                WegPinnedItemsVisibility::WhenPrimary => monitor.is_primary(),
+            };
 
-            match (temporal_mode, pinned_visible) {
-                (WegTemporalItemsVisibility::All, true) => {
-                    result.insert(monitor_id, self.items.clone());
+            match temporal_mode {
+                WegTemporalItemsVisibility::All => {
+                    let mut items = self.items.clone();
+                    if !pinned_visible {
+                        temporalise(&mut items);
+                        items.sanitize();
+                    }
+                    result.insert(monitor_id, items);
                 }
-                (WegTemporalItemsVisibility::All, false) => {
-                    let mut weg_items = self.clone();
-                    temporalise(&mut weg_items.items);
-                    weg_items.items.sanitize();
-                    result.insert(monitor_id, weg_items.items);
-                }
-                (WegTemporalItemsVisibility::OnMonitor, true) => {
-                    let mut weg_items = self.clone();
-                    weg_items.filter_by_monitor(&monitor_id);
-                    weg_items.items.sanitize();
-                    result.insert(monitor_id, weg_items.items);
-                }
-                (WegTemporalItemsVisibility::OnMonitor, false) => {
+                WegTemporalItemsVisibility::OnMonitor => {
                     let mut weg_items = self.clone();
                     weg_items.filter_by_monitor(&monitor_id);
-                    temporalise(&mut weg_items.items);
+                    if !pinned_visible {
+                        temporalise(&mut weg_items.items);
+                    }
                     weg_items.items.sanitize();
                     result.insert(monitor_id, weg_items.items);
                 }

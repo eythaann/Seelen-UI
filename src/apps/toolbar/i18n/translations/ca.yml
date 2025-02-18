@@ -24,6 +24,11 @@ network:
   saved: Xarxes guardades
   scanning: Escaneig de xarxes
   secured: Xarxa xifrada
+notifications:
+  clear: Esborrar tot
+  empty: Sense notificacions
+  settings: Més configuració de notificacions
+  title: Notificacions
 placeholder:
   battery_remaining: '% restant'
   bluetooth_devices: Bluetooth i dispositius

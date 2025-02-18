@@ -43,19 +43,26 @@ const ActionsScope = {
   open(path: string) {
     invoke(SeelenCommand.OpenFile, { path }).catch(console.error);
   },
-  run(program: string, ...args: string[]) {
-    invoke(SeelenCommand.Run, { program, args }).catch(console.error);
+  run(program: string, args: string[], workingDir: string) {
+    invoke(SeelenCommand.Run, { program, args, workingDir }).catch(console.error);
   },
   copyClipboard(text: string) {
     navigator.clipboard.writeText(text);
   },
 };
 
-export function safeEval(expression: string, scope: Scope) {
+type Result = { ok: any; err?: never } | { err: any; ok?: never };
+export function safeEval(expression: string, scope: Scope): Result {
   try {
-    evaluate(expression, scope);
+    return {
+      ok: evaluate(expression, scope),
+    };
   } catch (error) {
+    console.error('Error evaluating: ', expression);
     console.error(error);
+    return {
+      err: error,
+    };
   }
 }
 

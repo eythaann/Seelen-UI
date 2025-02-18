@@ -84,6 +84,10 @@ devtools:
   settings_file: پرونده تنظیمات
   simulate_fullscreen: شبیه سازی رویداد تمام صفحه
 extras:
+  clear_icons: حافظه نهان سیستم را پاک کنید
+  clear_icons_tooltip: >-
+    یک راه اندازی مجدد می تواند مورد نیاز باشد تا به طور کامل در همه ویجت ها
+    تأثیر بگذارد
   discord: اختلاف
   exit: ترک/خروج
   github: گیتوب

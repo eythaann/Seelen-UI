@@ -12,7 +12,7 @@ use crate::{
         notifications::infrastructure::{
             register_notification_events, release_notification_events,
         },
-        power::infrastructure::PowerManager,
+        power::infrastructure::{release_power_events, PowerManager},
         system_settings::infrastructure::{register_colors_events, release_colors_events},
         tray::infrastructure::register_tray_events,
         user::infrastructure::register_user_events,
@@ -55,6 +55,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
 
 pub fn release_system_events_handlers() {
     release_media_events();
+    release_power_events();
     release_notification_events();
     release_colors_events();
 }

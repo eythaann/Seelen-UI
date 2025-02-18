@@ -84,6 +84,10 @@ devtools:
   settings_file: Plik ustawień
   simulate_fullscreen: Symuluj wydarzenie na pełnym ekranie
 extras:
+  clear_icons: Wyczyść pamięć podręczną ikon systemowych
+  clear_icons_tooltip: >-
+    Do pełnego uruchomienia wszystkich widżetów może być wymagane ponowne
+    uruchomienie systemu
   discord: Niezgoda
   exit: Wyjdź/wyjdź
   github: Github

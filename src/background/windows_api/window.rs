@@ -15,6 +15,7 @@ use crate::{
     error_handler::Result,
     modules::{
         cli::{ServiceClient, SvcAction},
+        start::application::START_MENU_MANAGER,
         virtual_desk::{get_vd_manager, VirtualDesktop},
     },
     seelen_bar::FancyToolbar,
@@ -24,7 +25,9 @@ use crate::{
     seelen_wm_v2::instance::WindowManagerV2,
 };
 
-use super::{monitor::Monitor, process::Process, WindowEnumerator, WindowsApi};
+use super::{
+    monitor::Monitor, process::Process, types::AppUserModelId, WindowEnumerator, WindowsApi,
+};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Window(HWND);
@@ -70,12 +73,34 @@ impl Window {
         self.0 .0 as isize
     }
 
-    /// App user model id asigned to the window via property-store
-    /// To get UWP app user model id use `self.process().package_app_user_model_id()`
+    pub fn is_electron(&self) -> bool {
+        self.class() == "Chrome_WidgetWin_1"
+    }
+
+    /// Application user model id asigned to the window via property-store or inherited from the process
     ///
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
-    pub fn app_user_model_id(&self) -> Option<String> {
-        WindowsApi::get_window_app_user_model_id(self.0).ok()
+    pub fn app_user_model_id(&self) -> Option<AppUserModelId> {
+        if let Ok(umid) = WindowsApi::get_window_app_user_model_id(self.0) {
+            return match WindowsApi::is_uwp_package_id(&umid) {
+                true => Some(AppUserModelId::Appx(umid)),
+                false => Some(AppUserModelId::PropertyStore(umid)),
+            };
+        }
+
+        let process = self.process();
+        if let Ok(umid) = process.package_app_user_model_id() {
+            return Some(umid);
+        }
+
+        if self.is_electron() {
+            let path = process.program_path().ok()?;
+            let guard = START_MENU_MANAGER.load();
+            let item = guard.get_by_target(&path)?;
+            Some(AppUserModelId::PropertyStore(item.umid.clone()?))
+        } else {
+            None
+        }
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-preventpinning

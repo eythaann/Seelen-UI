@@ -48,13 +48,6 @@ export function WidgetSettingsModal({ widgetId, monitorId, settings: declaration
   };
 
   if (!monitorConfig || !widgetConfig) {
-    console.log({
-      settingsByMonitor,
-      monitorConfig,
-      widgetConfig,
-      widgetId,
-      monitorId,
-    });
     return null;
   }
 

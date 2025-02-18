@@ -1,6 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
-import { path } from '@tauri-apps/api';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Menu } from 'antd';
 import { memo } from 'react';
@@ -8,21 +7,17 @@ import { useTranslation } from 'react-i18next';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
-import { useIcon } from 'src/apps/shared/hooks';
+import { FileIcon } from 'src/apps/shared/components/Icon';
 
 import { StartMenuApp } from '../../shared/store/domain';
 
 import { AnimatedDropdown } from '../../../../shared/components/AnimatedWrappers';
 import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 
-const MISSING_ICON_SRC = convertFileSrc(await path.resolveResource('static/icons/missing.png'));
-
 export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolean }) => {
   const { path, umid } = item;
 
   const { t } = useTranslation();
-
-  const icon = useIcon({ path, umid: umid });
 
   function onClick() {
     invoke(SeelenCommand.OpenFile, { path });
@@ -78,7 +73,7 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
         className="launcher-item"
         onClick={onClick}
       >
-        <img className="launcher-item-icon" src={icon || MISSING_ICON_SRC} />
+        <FileIcon className="launcher-item-icon" path={path} umid={umid} />
         <OverflowTooltip className="launcher-item-label" text={displayName} />
         <OverflowTooltip className="launcher-item-path" text={shortPath} />
       </button>

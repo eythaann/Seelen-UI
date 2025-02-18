@@ -1,6 +1,6 @@
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::state::SeelenWegSide;
+use seelen_core::state::{FancyToolbarSide, SeelenWegSide};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT},
     UI::Shell::{
@@ -30,6 +30,15 @@ impl From<SeelenWegSide> for AppBarDataEdge {
             SeelenWegSide::Top => AppBarDataEdge::Top,
             SeelenWegSide::Right => AppBarDataEdge::Right,
             SeelenWegSide::Bottom => AppBarDataEdge::Bottom,
+        }
+    }
+}
+
+impl From<FancyToolbarSide> for AppBarDataEdge {
+    fn from(val: FancyToolbarSide) -> Self {
+        match val {
+            FancyToolbarSide::Top => AppBarDataEdge::Top,
+            FancyToolbarSide::Bottom => AppBarDataEdge::Bottom,
         }
     }
 }

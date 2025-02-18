@@ -81,6 +81,8 @@ devtools:
   settings_file: ไฟล์การตั้งค่า
   simulate_fullscreen: จำลองเหตุการณ์แบบเต็มหน้าจอ
 extras:
+  clear_icons: ล้างไอคอนระบบแคช
+  clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
   discord: ความไม่ลงรอยกัน
   exit: ออก/ออก
   github: คนอื่น ๆ

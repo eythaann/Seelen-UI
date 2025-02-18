@@ -2,7 +2,7 @@ import { ToolbarItem } from '@seelen-ui/lib/types';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { cloneDeep } from 'lodash';
-import { evaluate, isResultSet } from 'mathjs';
+import { isResultSet } from 'mathjs';
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -94,7 +94,11 @@ export function InnerItem(props: InnerItemProps) {
   function parseStringToElements(text: string) {
     /// backward compatibility with v1 icon object
     let expr = text.replaceAll(/icon\.(\w+)/g, 'getIcon("$1")');
-    return ElementsFromEvaluated(evaluate(expr, scope.current));
+    let result = safeEval(expr, scope.current);
+    if (result.err) {
+      return [];
+    }
+    return ElementsFromEvaluated(result.ok);
   }
 
   const elements = template ? parseStringToElements(template) : [];

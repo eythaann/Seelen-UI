@@ -84,6 +84,10 @@ devtools:
   settings_file: Archivo de configuración
   simulate_fullscreen: Simular evento de pantalla completa
 extras:
+  clear_icons: Borrar caché de iconos del sistema
+  clear_icons_tooltip: >-
+    Podría ser necesario reiniciar el sistema para que surta efecto en todos los
+    widgets.
   discord: Discordia
   exit: Salir
   github: GitHub

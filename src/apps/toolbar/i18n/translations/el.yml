@@ -24,6 +24,11 @@ network:
   saved: Αποθηκευμένα δίκτυα
   scanning: Σάρωση για δίκτυα
   secured: Κρυπτογραφημένο δίκτυο
+notifications:
+  clear: Εκκαθάριση όλων
+  empty: Δεν υπάρχουν ειδοποιήσεις
+  settings: Περισσότερες ρυθμίσεις ειδοποιήσεων
+  title: Ειδοποιήσεις
 placeholder:
   battery_remaining: '% υπόλοιπο'
   bluetooth_devices: Bluetooth & συσκευές

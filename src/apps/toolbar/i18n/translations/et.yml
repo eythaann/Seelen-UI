@@ -24,6 +24,11 @@ network:
   saved: Salvestatud võrgud
   scanning: Võrkude otsimine
   secured: Krüpteeritud võrk
+notifications:
+  clear: Tühjenda kõik
+  empty: Teated puuduvad
+  settings: Rohkem teavituste seadistusi
+  title: Teated
 placeholder:
   battery_remaining: '% järelejäänud'
   bluetooth_devices: Bluetooth ja seadmed

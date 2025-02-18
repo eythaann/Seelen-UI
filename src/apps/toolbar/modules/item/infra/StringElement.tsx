@@ -1,26 +1,10 @@
 import { convertFileSrc } from '@tauri-apps/api/core';
 import React from 'react';
 
-import { LAZY_CONSTANTS } from '../../shared/utils/infra';
-
-import { useIcon } from 'src/apps/shared/hooks';
-
-import { Icon } from '../../../../shared/components/Icon';
+import { FileIcon, Icon } from '../../../../shared/components/Icon';
 
 interface StringToElementProps {
   text: string;
-}
-
-interface ExeIconProps {
-  path?: string | null;
-  umid?: string | null;
-  size: number;
-}
-
-function ExeIcon({ path, umid, size }: ExeIconProps) {
-  const icon = useIcon({ path, umid }) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
-
-  return <img src={icon} style={{ width: size }} />;
 }
 
 export class StringToElement extends React.PureComponent<StringToElementProps> {
@@ -77,7 +61,7 @@ export class StringToElement extends React.PureComponent<StringToElementProps> {
       const json = this.props.text.slice(StringToElement.exePrefix.length);
       const { path, umid, size } = JSON.parse(json);
 
-      return <ExeIcon path={path} umid={umid} size={size} />;
+      return <FileIcon path={path} umid={umid} style={{ width: size }} />;
     }
 
     if (this.isImg()) {

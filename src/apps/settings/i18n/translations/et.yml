@@ -83,6 +83,8 @@ devtools:
   settings_file: Seadete fail
   simulate_fullscreen: Täisekraanil toimuva sündmuse simuleerimine
 extras:
+  clear_icons: Tühjenda süsteemi ikoonide vahemälu
+  clear_icons_tooltip: Kõigi vidinate täielikuks jõustumiseks võib olla vajalik taaskäivitamine.
   discord: Ebakõla
   exit: Lõpeta/väljumine
   github: Github

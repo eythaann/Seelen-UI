@@ -22,48 +22,38 @@
 
 <table align="center">
   <tr>
-    <td align="center">
+    <td align="center" width="33%">
       <a
         href="https://apps.microsoft.com/detail/Seelen%20UI/9p67c2d4t9fb?mode=full"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Seelen UI from Microsoft Store">
-        <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250px" alt="Download Seelen UI from Microsoft Store">
+        <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="100%" alt="Download Seelen UI from Microsoft Store">
       </a>
     </td>
-    <td align="center">
+    <td align="center" width="33%">
       <a
         href="https://discord.gg/ABfASx5ZAJ"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Join the Seelen UI Discord community">
-        <img src="./documentation/images/discord.png" width="230px" alt="Join the Seelen UI Discord community">
+        <img src="./documentation/images/discord.png" width="100%" alt="Join the Seelen UI Discord community">
+      </a>
+    </td>
+    <td align="center" width="33%">
+      <a
+        href='https://ko-fi.com/O4O41ADV7D'
+        target='_blank'
+        rel="noopener noreferrer"
+        aria-label="Buy me a coffee">
+        <img src='https://storage.ko-fi.com/cdn/kofi1.png?v=6' width="100%" alt='Buy Me a Coffee at ko-fi.com' />
       </a>
     </td>
   </tr>
 </table>
 
-## Table of Contents
-- [Overview](#overview)
-- [Installation](#installation)
-  - [Microsoft Store (recommended)](#microsoft-store-emrecommendedem)
-  - [Winget](#winget)
-  - [.msix Installer](#msix-installer)
-  - [.exe Installer](#exe-installer)
-- [Usage](#usage)
-- [Upcoming Features](#upcoming-features)
-- [Documentation](#documentation)
-  - [Languages](./documentation/languages.md)
-  - [Toolbar](./documentation/toolbar.md)
-  - [Themes](./documentation/themes.md)
-  - [Window Manager](./documentation/window_manager.md)
-  - [Project](./documentation/project.md)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
 ## Overview
-Seelen UI is a tool designed to enhance your Windows desktop experience with a focus on customization and productivity. It integrates smoothly into your system, providing a range of features that allow you to personalize your desktop and optimize your workflow.
+[Seelen UI](https://seelen.io) is a tool designed to enhance your Windows desktop experience with a focus on customization and productivity. It integrates smoothly into your system, providing a range of features that allow you to personalize your desktop and optimize your workflow.
 
 * **Be Creative**: Seelen UI lets you tailor your desktop to fit your style and needs. You can adjust menus, widgets, icons, and other elements to create a personalized and visually appealing desktop environment.
 

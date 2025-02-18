@@ -84,6 +84,10 @@ devtools:
   settings_file: Sozlamalar fayli
   simulate_fullscreen: Toʻliq ekranli hodisani simulyatsiya qilish
 extras:
+  clear_icons: Tozalash tizimi piktogrammalari kesh
+  clear_icons_tooltip: >-
+    Barcha vidjetlarga to'liq ta'sir qilish uchun qayta boshlash talab qilinishi
+    mumkin
   discord: Kelishmovchilik
   exit: Chiqish / chiqish
   github: Gitul

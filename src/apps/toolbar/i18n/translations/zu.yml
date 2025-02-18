@@ -24,6 +24,11 @@ network:
   saved: Amanethiwekhi alondoloziwe
   scanning: Iskenela amanethiwekhi
   secured: Inethiwekhi ebethelwe
+notifications:
+  clear: Sula konke
+  empty: Azikho izaziso
+  settings: Izilungiselelo zezaziso eziningi
+  title: Izaziso
 placeholder:
   battery_remaining: '% okusele'
   bluetooth_devices: I-Bluetooth & Amadivayisi

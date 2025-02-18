@@ -15,7 +15,7 @@ import {
 } from '@seelen-ui/lib';
 import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 
-import { RootState } from './domain';
+import { PowerPlan, RootState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
@@ -47,6 +47,7 @@ const initialState: RootState = {
     batteryLifeTime: -1,
     batteryFullLifeTime: -1,
   },
+  powerPlan: PowerPlan.Balanced,
   batteries: [],
   workspaces: [],
   activeWorkspace: null,

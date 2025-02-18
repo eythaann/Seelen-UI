@@ -24,6 +24,11 @@ network:
   saved: የተቀመጡ አውታረ መረቦች
   scanning: አውታረ መረቦችን በመቃኘት ላይ
   secured: የተመሰጠረ አውታረ መረብ
+notifications:
+  clear: ሁሉንም አጥራ
+  empty: ማስታወቂያዎች የሉም
+  settings: ተጨማሪ የማሳወቂያዎች ቅንብሮች
+  title: ማሳወቂያዎች
 placeholder:
   battery_remaining: '% ይቀራል'
   bluetooth_devices: ብሉቱዝ እና መሣሪያዎች

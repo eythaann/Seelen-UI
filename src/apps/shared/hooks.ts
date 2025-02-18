@@ -1,6 +1,5 @@
-import { GetIconArgs, IconPackManager } from '@seelen-ui/lib';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function useWindowFocusChange(cb: (focused: boolean) => void) {
   useEffect(() => {
@@ -40,23 +39,4 @@ export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
     ref.current = window.setTimeout(cb, ms);
     return clearLastTimeout;
   }, [ms, ...deps]);
-}
-
-const iconPackManager = await IconPackManager.create();
-export function useIcon(args: GetIconArgs): string | null {
-  const [iconSrc, setIconSrc] = useState<string | null>(() => iconPackManager.getIcon(args));
-
-  useEffect(() => {
-    iconPackManager.onChange(() => setIconSrc(iconPackManager.getIcon(args)));
-    if (!iconSrc) {
-      // this will run asynchronously and then `iconPackManager.onChange` will be triggered
-      IconPackManager.extractIcon(args);
-    }
-  }, []);
-
-  useEffect(() => {
-    setIconSrc(iconPackManager.getIcon(args));
-  }, [args.path, args.umid]);
-
-  return iconSrc;
 }

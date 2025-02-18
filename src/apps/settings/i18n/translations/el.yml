@@ -85,6 +85,8 @@ devtools:
   settings_file: Αρχείο ρυθμίσεων
   simulate_fullscreen: Προσομοίωση συμβάντος πλήρους οθόνης
 extras:
+  clear_icons: Εκκαθάριση προσωρινής μνήμης εικονιδίων συστήματος
+  clear_icons_tooltip: Μπορεί να απαιτηθεί επανεκκίνηση για να ισχύσει πλήρως σε όλα τα widgets
   discord: Διχόνοια
   exit: Εγκατάλειψη/έξοδο
   github: Github

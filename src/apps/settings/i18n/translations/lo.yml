@@ -82,6 +82,8 @@ devtools:
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
   simulate_fullscreen: ຈຳລອງເຫດການເຕັມຈໍ
 extras:
+  clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
+  clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
   discord: ຄວາມຂັດແຍ້ງ
   exit: ອອກ/ອອກ
   github: GitHub

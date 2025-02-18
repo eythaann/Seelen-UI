@@ -211,8 +211,9 @@ impl NotificationManager {
             body.push(text.Text()?.to_string());
         }
 
-        let umid = app_info.AppUserModelId()?.to_string_lossy();
-        let _ = extract_and_save_icon_umid(umid.clone());
+        let umid = app_info.AppUserModelId()?.to_string();
+        // pre-extraction to avoid flickering on the ui
+        let _ = extract_and_save_icon_umid(&umid.clone().into());
 
         self.notifications.push(AppNotification {
             id: u_notification.Id()?,

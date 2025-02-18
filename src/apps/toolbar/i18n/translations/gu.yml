@@ -24,6 +24,11 @@ network:
   saved: સાચવેલા નેટવર્ક્સ
   scanning: નેટવર્ક્સ માટે સ્કેનિંગ
   secured: એન્ક્રિપ્ટેડ નેટવર્ક
+notifications:
+  clear: બધુ સાફ કરવું
+  empty: કોઈ સૂચનાઓ
+  settings: વધુ સૂચનાઓ સેટિંગ્સ
+  title: સૂચના
 placeholder:
   battery_remaining: બાકી %
   bluetooth_devices: બ્લૂટૂથ અને ઉપકરણો

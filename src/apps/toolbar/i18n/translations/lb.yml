@@ -24,6 +24,11 @@ network:
   saved: Gespäichert Netzwierker
   scanning: Scannen fir Netzwierker
   secured: Verschlësselte Reseau
+notifications:
+  clear: Emlotzen alleng
+  empty: Keng Notifikatiounen
+  settings: Méi Notifikatiounen Astellunge
+  title: Notifikatiounen
 placeholder:
   battery_remaining: '% bleiwen'
   bluetooth_devices: Bluetooth & Apparater

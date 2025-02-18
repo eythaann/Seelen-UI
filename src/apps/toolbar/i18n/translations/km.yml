@@ -24,6 +24,11 @@ network:
   saved: បណ្តាញដែលបានរក្សាទុក
   scanning: កំពុងស្កេនរកបណ្តាញ
   secured: បណ្តាញដែលបានអ៊ិនគ្រីប
+notifications:
+  clear: ជម្រះទាំងអស់
+  empty: គ្មានការជូនដំណឹង
+  settings: ការកំណត់ការជូនដំណឹងបន្ថែម
+  title: ការជូនដំណឹង
 placeholder:
   battery_remaining: នៅសល់%
   bluetooth_devices: ប៊្លូធូសនិងឧបករណ៍

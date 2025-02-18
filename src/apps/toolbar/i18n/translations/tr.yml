@@ -24,6 +24,11 @@ network:
   saved: Kayıtlı ağlar
   scanning: Ağlar taranıyor
   secured: Şifreli ağ
+notifications:
+  clear: Tümünü temizle
+  empty: Bildirim yok
+  settings: Daha Fazla Bildirim Ayarı
+  title: Bildirimler
 placeholder:
   battery_remaining: '% kalan'
   bluetooth_devices: Bluetooth ve Cihazlar

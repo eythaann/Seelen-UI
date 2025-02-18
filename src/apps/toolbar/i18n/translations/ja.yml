@@ -24,6 +24,11 @@ network:
   saved: 保存されたネットワーク
   scanning: ネットワークのスキャン
   secured: 暗号化されたネットワーク
+notifications:
+  clear: すべてクリア
+  empty: 通知なし
+  settings: その他の通知設定
+  title: お知らせ
 placeholder:
   battery_remaining: ％ 残り
   bluetooth_devices: Bluetoothとデバイス

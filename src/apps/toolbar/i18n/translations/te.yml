@@ -24,6 +24,11 @@ network:
   saved: సేవ్ చేసిన నెట్‌వర్క్‌లు
   scanning: నెట్‌వర్క్‌ల కోసం స్కాన్ చేస్తోంది
   secured: ఎన్‌క్రిప్టెడ్ నెట్‌వర్క్
+notifications:
+  clear: అన్నీ క్లియర్ చేయండి
+  empty: నోటిఫికేషన్‌లు లేవు
+  settings: మరిన్ని నోటిఫికేషన్ సెట్టింగులు
+  title: నోటిఫికేషన్‌లు
 placeholder:
   battery_remaining: '% మిగిలి ఉంది'
   bluetooth_devices: బ్లూటూత్ & పరికరాలు

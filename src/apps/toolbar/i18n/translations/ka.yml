@@ -24,6 +24,11 @@ network:
   saved: შენახული ქსელები
   scanning: სკანირება ქსელებისთვის
   secured: დაშიფრული ქსელი
+notifications:
+  clear: გასუფთავება
+  empty: შეტყობინებები არ არის
+  settings: მეტი შეტყობინებების პარამეტრები
+  title: შეტყობინებები
 placeholder:
   battery_remaining: დარჩენილი
   bluetooth_devices: Bluetooth & მოწყობილობები

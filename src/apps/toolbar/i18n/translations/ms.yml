@@ -24,6 +24,11 @@ network:
   saved: Rangkaian yang disimpan
   scanning: Mengimbas untuk rangkaian
   secured: Rangkaian yang disulitkan
+notifications:
+  clear: Kosongkan semua
+  empty: Tiada pemberitahuan
+  settings: Lebih banyak tetapan pemberitahuan
+  title: Pemberitahuan
 placeholder:
   battery_remaining: '% tinggal'
   bluetooth_devices: Bluetooth & peranti

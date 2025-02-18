@@ -24,6 +24,11 @@ network:
   saved: Išsaugoti tinklai
   scanning: Tinklų nuskaitymas
   secured: Šifruotas tinklas
+notifications:
+  clear: Išvalyti viską
+  empty: Jokių pranešimų
+  settings: Daugiau pranešimų nustatymų
+  title: Pranešimai
 placeholder:
   battery_remaining: '% liko'
   bluetooth_devices: „Bluetooth“ ir įrenginiai

@@ -550,26 +550,50 @@
 }
 
 .notifications {
+  @extend %list;
   margin: var(--popups-margin);
   width: 350px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
 
   .bg-layer-1 {
-    opacity: 0.4;
-    filter: saturate(0);
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-size: cover;
+    background-color: var(--color-gray-50);
     border-radius: 12px;
   }
 
-  .bg-layer-2 {
-    opacity: 0.95;
-    background-color: var(--color-gray-50);
-    border-radius: 12px;
+  .notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .notifications-clear-button {
+      @extend %actionable-button;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+  }
+
+  .notifications-body {
+    @extend %list;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10px;
+    margin: 0 -10px;
+  }
+
+  .notifications-footer {
+    .notifications-settings-button {
+      @extend %actionable-button;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+  }
+
+  .notifications-empty {
+    @extend %flex-centered;
+    color: var(--color-gray-500);
+    font-weight: 600;
+    font-size: 0.8rem;
   }
 }
 
@@ -586,11 +610,9 @@
 }
 
 .notification-arrival {
+  @extend %list;
   margin: var(--popups-margin);
   width: 350px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
 
   .notification-header-info {
@@ -600,38 +622,6 @@
   &:not(:has(.notification)) {
     display: none;
   }
-}
-
-.notifications-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 600;
-}
-
-.notifications-body {
-  overflow-y: auto;
-  padding: 5px 10px;
-  margin: 0 -10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.notifications-footer {
-  > button {
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-}
-
-.notifications-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-gray-500);
-  font-weight: 600;
-  font-size: 0.8rem;
 }
 
 .notification {

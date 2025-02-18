@@ -84,6 +84,8 @@ devtools:
   settings_file: Datoteka postavki
   simulate_fullscreen: Simulirajte događaj preko cijelog zaslona
 extras:
+  clear_icons: Očistite predmemoriju ikona sustava
+  clear_icons_tooltip: Ponovno pokretanje moglo bi se u potpunosti stupiti na sve widgete
   discord: Nesklad
   exit: Prestati/izaći
   github: Ždrijeb

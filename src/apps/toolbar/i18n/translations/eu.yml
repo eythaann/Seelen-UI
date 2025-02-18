@@ -24,6 +24,11 @@ network:
   saved: Gordetako sareak
   scanning: Sareak bilatzen
   secured: Sare zifratua
+notifications:
+  clear: Garbitu guztiak
+  empty: Ez da jakinarazpenik
+  settings: Jakinarazpen gehiago ezarpenak
+  title: Jakinarazpenak
 placeholder:
   battery_remaining: '% geratzen'
   bluetooth_devices: Bluetooth eta gailuak

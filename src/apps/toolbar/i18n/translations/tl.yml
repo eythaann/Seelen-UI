@@ -24,6 +24,11 @@ network:
   saved: Mga naka-save na network
   scanning: Pag-scan para sa mga network
   secured: Naka-encrypt na network
+notifications:
+  clear: Malinaw ang lahat
+  empty: Walang mga abiso
+  settings: Marami pang Mga Setting ng Mga Abiso
+  title: Mga abiso
 placeholder:
   battery_remaining: Nananatili
   bluetooth_devices: Bluetooth at mga aparato

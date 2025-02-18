@@ -24,6 +24,11 @@ network:
   saved: Jaringan yang disimpan
   scanning: Memindai jaringan
   secured: Jaringan terenkripsi
+notifications:
+  clear: Hapus semua
+  empty: Tidak ada pemberitahuan
+  settings: Pengaturan Pemberitahuan Lainnya
+  title: Pemberitahuan
 placeholder:
   battery_remaining: '% tersisa'
   bluetooth_devices: Bluetooth & perangkat

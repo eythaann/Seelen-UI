@@ -24,6 +24,11 @@ network:
   saved: Uložené siete
   scanning: Skenovanie sietí
   secured: Šifrovaná sieť
+notifications:
+  clear: Vymazať všetko
+  empty: Žiadne oznámenia
+  settings: Ďalšie nastavenia oznámení
+  title: Oznámenia
 placeholder:
   battery_remaining: zostávajúci % %
   bluetooth_devices: Bluetooth a zariadenia

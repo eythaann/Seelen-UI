@@ -84,6 +84,10 @@ devtools:
   settings_file: सेटिंग संचिका
   simulate_fullscreen: फ़ुलस्क्रीन ईवेंट का अनुकरण करें
 extras:
+  clear_icons: स्पष्ट प्रणाली आइकन कैश
+  clear_icons_tooltip: >-
+    सभी विजेट पर पूरी तरह से प्रभावी होने के लिए एक पुनरारंभ की आवश्यकता हो सकती
+    है
   discord: कलह
   exit: छोड़ देना/बाहर निकलना
   github: GitHub

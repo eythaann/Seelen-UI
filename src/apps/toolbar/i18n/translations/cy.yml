@@ -24,6 +24,11 @@ network:
   saved: Rhwydweithiau wedi'u cadw
   scanning: Sganio am rwydweithiau
   secured: Rhwydwaith wedi'i amgryptio
+notifications:
+  clear: Clirio popeth
+  empty: Dim Hysbysiadau
+  settings: Gosodiadau Mwy o Hysbysiadau
+  title: Hysbysiadau
 placeholder:
   battery_remaining: '% yn weddill'
   bluetooth_devices: Bluetooth a Dyfeisiau

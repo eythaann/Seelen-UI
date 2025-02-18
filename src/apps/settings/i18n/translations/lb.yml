@@ -84,6 +84,8 @@ devtools:
   settings_file: Settytout-Datei
   simulate_fullscreen: Simuléiert Vollbild Event
 extras:
+  clear_icons: Kloer System Symboler Cache
+  clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
   discord: Diskord
   exit: Ophalen / erausfannen
   github: Github

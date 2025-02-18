@@ -84,6 +84,8 @@ devtools:
   settings_file: პარამეტრების ფაილი
   simulate_fullscreen: სრულეკრანიანი მოვლენის სიმულაცია
 extras:
+  clear_icons: სუფთა სისტემის ხატები ქეში
+  clear_icons_tooltip: გადატვირთვა შეიძლება საჭირო გახდეს, რომ სრულად იმოქმედოს ყველა ვიჯეტზე
   discord: უთანასწორობა
   exit: დატოვება/გასვლა
   github: გითუბ

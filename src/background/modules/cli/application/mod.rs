@@ -2,13 +2,11 @@ mod debugger;
 
 use std::ffi::OsStr;
 use std::path::PathBuf;
-use std::sync::Arc;
+use std::sync::atomic::Ordering;
 
 use clap::{Arg, ArgAction, Command};
 use debugger::CliDebugger;
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
-use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_PROCESS};
+use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
 use crate::modules::virtual_desk::{VirtualDesktopManager, VIRTUAL_DESKTOP_MANAGER};
@@ -18,6 +16,8 @@ use crate::seelen_rofi::SeelenRofi;
 use crate::seelen_weg::SeelenWeg;
 use crate::seelen_wm_v2::instance::WindowManagerV2;
 use crate::trace_lock;
+
+use super::AppClient;
 
 #[macro_export]
 macro_rules! get_subcommands {
@@ -75,91 +75,94 @@ macro_rules! get_subcommands {
     }
 }
 
-lazy_static! {
-    pub static ref SEELEN_COMMAND_LINE: Arc<Mutex<Command>> = Arc::new(Mutex::new(
-        Command::new("Seelen UI")
-            .author("eythaann")
-            .about("Seelen Command Line Interface.")
-            .long_about("Seelen Command Line Interface.")
-            .before_help("")
-            .after_help("To read more about Seelen visit https://github.com/eythaann/seelen-ui.git")
-            .args([
-                Arg::new("silent")
-                    .short('s')
-                    .long("silent")
-                    .action(ArgAction::SetTrue)
-                    .help("Start only background processes."),
-                Arg::new("verbose")
-                    .short('V')
-                    .long("verbose")
-                    .action(ArgAction::SetTrue)
-                    .help("Prints some extra process on the console."),
-                Arg::new("version")
-                    .short('v')
-                    .long("version")
-                    .action(ArgAction::SetTrue)
-                    .help("Prints the current version of Seelen."),
-                Arg::new("uri")
-                    .help("Path or URI to load.")
-                    .long_help("Path or URI to load. (example: 'C:\\path\\to\\file.slu' or 'seelen-ui.uri:example')")
-                    .value_parser(clap::value_parser!(std::string::String))
-                    .action(clap::ArgAction::Set)
-            ])
-            .subcommands([
-                Command::new("settings").about("Opens the Seelen settings gui."),
-                VirtualDesktopManager::get_cli(),
-                CliDebugger::get_cli(),
-                FancyToolbar::get_cli(),
-                WindowManagerV2::get_cli(),
-                SeelenWeg::get_cli(),
-                SeelenRofi::get_cli(),
-            ])
-    ));
+pub fn get_app_command() -> Command {
+    Command::new("Seelen UI")
+        .author("eythaann")
+        .about("Seelen Command Line Interface.")
+        .long_about("Seelen Command Line Interface.")
+        .before_help("")
+        .after_help("To read more about Seelen visit https://github.com/eythaann/seelen-ui.git")
+        .args([
+            // we maintain this flag for backwards compatibility
+            Arg::new("silent")
+                .short('s')
+                .long("silent")
+                .action(ArgAction::SetTrue)
+                .help("Unused flag"),
+            Arg::new("verbose")
+                .short('V')
+                .long("verbose")
+                .action(ArgAction::SetTrue)
+                .help("Prints some extra process on the console."),
+            Arg::new("version")
+                .short('v')
+                .long("version")
+                .action(ArgAction::SetTrue)
+                .help("Prints the current version of Seelen."),
+            Arg::new("uri")
+                .help("Path or URI to load.")
+                .value_parser(clap::value_parser!(std::string::String))
+                .action(clap::ArgAction::Set),
+        ])
+        .subcommands([
+            Command::new("settings").about("Opens the Seelen settings gui."),
+            VirtualDesktopManager::get_cli(),
+            CliDebugger::get_cli(),
+            FancyToolbar::get_cli(),
+            WindowManagerV2::get_cli(),
+            SeelenWeg::get_cli(),
+            SeelenRofi::get_cli(),
+        ])
 }
 
-pub fn attach_console() -> Result<()> {
-    if !tauri::is_dev() {
-        unsafe { AttachConsole(ATTACH_PARENT_PROCESS)? };
+// attach console could fail if not console to attach is present
+pub fn attach_console() -> bool {
+    let already_attached = unsafe { !GetConsoleWindow().is_invalid() };
+    already_attached || unsafe { AttachConsole(ATTACH_PARENT_PROCESS).is_ok() }
+}
+
+/// Handles the CLI and will exit the process if needed.\
+/// Performs redirection to the instance if needed too, will fail if no instance is running.
+pub fn handle_console_cli() -> Result<()> {
+    let matches = match get_app_command().try_get_matches() {
+        Ok(m) => m,
+        Err(e) => {
+            // (help, --help or -h) and other sugestions are managed as error
+            attach_console();
+            e.exit();
+        }
+    };
+
+    if matches.get_flag("silent") {
+        crate::SILENT.store(true, Ordering::SeqCst);
     }
-    Ok(())
-}
-
-pub fn detach_console() -> Result<()> {
-    if !tauri::is_dev() {
-        unsafe { FreeConsole()? };
-    }
-    Ok(())
-}
-
-pub fn is_just_getting_info(matches: &clap::ArgMatches) -> Result<bool> {
-    let mut r = false;
 
     if matches.get_flag("verbose") {
-        attach_console()?;
-        println!("{:?}", matches);
-        detach_console()?;
+        crate::VERBOSE.store(true, Ordering::SeqCst);
     }
 
     if matches.get_flag("version") {
-        attach_console()?;
+        attach_console();
         println!("{}", env!("CARGO_PKG_VERSION"));
-        detach_console()?;
-        r = true;
+        std::process::exit(0);
     }
 
-    Ok(r)
+    if matches.subcommand().is_some() || matches.get_one::<String>("uri").is_some() {
+        attach_console();
+        AppClient::redirect_cli_to_instance()?;
+        std::process::exit(0);
+    }
+
+    Ok(())
 }
 
 pub const URI: &str = "seelen-ui.uri:";
-pub const URI_MSIX: &str = "seelen-ui-msix.uri:";
 
 pub fn process_uri(uri: &str) -> Result<()> {
     log::trace!("Loading URI: {}", uri);
 
     let _contents = if uri.starts_with(URI) {
         uri.trim_start_matches(URI).to_string()
-    } else if uri.starts_with(URI_MSIX) {
-        uri.trim_start_matches(URI_MSIX).to_string()
     } else {
         let path = PathBuf::from(uri);
         if path.is_file() && path.extension() == Some(OsStr::new("slu")) && path.exists() {
@@ -225,7 +228,5 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
         }
         return Ok(());
     }
-
-    Seelen::show_settings()?;
     Ok(())
 }

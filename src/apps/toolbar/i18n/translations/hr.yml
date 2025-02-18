@@ -24,6 +24,11 @@ network:
   saved: Spremljene mreže
   scanning: Traženje mreža
   secured: Šifrirana mreža
+notifications:
+  clear: Očisti sve
+  empty: Nema obavijesti
+  settings: Više postavki obavijesti
+  title: Obavijesti
 placeholder:
   battery_remaining: '% Ostali'
   bluetooth_devices: Bluetooth i uređaji

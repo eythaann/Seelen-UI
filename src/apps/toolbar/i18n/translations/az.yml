@@ -24,6 +24,11 @@ network:
   saved: Saxlanan şəbəkələr
   scanning: Şəbəkələrin skan edilməsi
   secured: Şifrələnmiş şəbəkə
+notifications:
+  clear: Hamısını təmizləmək
+  empty: Bildiriş yoxdur
+  settings: Daha çox bildiriş parametrləri
+  title: Bildirişlər
 placeholder:
   battery_remaining: Qalan
   bluetooth_devices: Bluetooth və Cihazlar

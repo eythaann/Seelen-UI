@@ -21,10 +21,10 @@ impl SluServiceLogger {
     const REG_BASEKEY: &str = r"SYSTEM\CurrentControlSet\Services\EventLog\Application";
 
     pub fn install() -> Result<()> {
-        let current_exe = std::env::current_exe()?;
+        let program = std::env::current_exe()?;
         let key = RegKey::predef(HKEY_LOCAL_MACHINE).open_subkey(Self::REG_BASEKEY)?;
         let (app_key, _) = key.create_subkey(SERVICE_DISPLAY_NAME.to_string())?;
-        app_key.set_value("EventMessageFile", &current_exe.as_os_str())?;
+        app_key.set_value("EventMessageFile", &program.as_os_str())?;
         Ok(())
     }
 

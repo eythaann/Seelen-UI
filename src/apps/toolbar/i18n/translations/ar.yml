@@ -24,6 +24,11 @@ network:
   saved: الشبكات المحفوظة
   scanning: البحث عن شبكات
   secured: شبكة مشفرة
+notifications:
+  clear: مسح الكل
+  empty: لا توجد إخطارات
+  settings: المزيد من إعدادات الإشعارات
+  title: الإشعارات
 placeholder:
   battery_remaining: ٪ متبقي
   bluetooth_devices: بلوتوث

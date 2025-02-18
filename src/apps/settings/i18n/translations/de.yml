@@ -84,6 +84,10 @@ devtools:
   settings_file: Einstellungsdatei
   simulate_fullscreen: Vollbildereignis simulieren
 extras:
+  clear_icons: System-Symbol-Cache löschen
+  clear_icons_tooltip: >-
+    Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu
+    aktivieren.
   discord: Discord
   exit: Beenden
   github: GitHub

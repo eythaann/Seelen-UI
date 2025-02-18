@@ -24,6 +24,11 @@ network:
   saved: شبکه های ذخیره شده
   scanning: اسکن شبکه ها
   secured: شبکه رمزگذاری شده
+notifications:
+  clear: همه را پاک کنید
+  empty: بدون اعلان
+  settings: تنظیمات اعلان بیشتر
+  title: اعلان ها
 placeholder:
   battery_remaining: ٪ باقی مانده
   bluetooth_devices: بلوتوث و دستگاه

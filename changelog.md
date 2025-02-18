@@ -1,6 +1,40 @@
 # Changelog
 
 ## [Unreleased]
+## [2.1.9]
+### fix
+- shortcuts not working on MSIX.
+- empty username for local accounts.
+
+## [2.1.8]
+### features
+- add button to clear the cached icons on settings.
+
+### enhancements
+- allow custom icons by extension on icon packs.
+
+### fix
+- error on file icons.
+- fix blue screen on toolbar when errors on template evaluation.
+
+## [2.1.7]
+### fix
+- power module not clickable on toolbar.
+- pinned items not working correctly for some apps.
+- electron apps without aumid.
+
+## [2.1.6]
+### fix
+- missing translations.
+- fullscreen match not beeing removed.
+
+## [2.1.5]
+### fix
+- devices and battery not clickables on toolbar.
+- missing icon on dock media module while not playing.
+- msix store not showing admin prompt.
+- links on settings not opening.
+
 ## [2.1.4]
 ### fix
 - crash on user module.

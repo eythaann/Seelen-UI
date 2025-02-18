@@ -84,6 +84,8 @@ devtools:
   settings_file: Nastavení souboru
   simulate_fullscreen: Simulovat událost na celou obrazovku
 extras:
+  clear_icons: Vymazání mezipaměti systémových ikon
+  clear_icons_tooltip: Aby se plně projevily všechny widgety, mohlo by být nutné restartování.
   discord: Svár
   exit: Ukončit/ukončit
   github: GitHub

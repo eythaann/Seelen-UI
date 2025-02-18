@@ -1,6 +1,6 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { TrayToolbarItem } from '@seelen-ui/lib/types';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,10 +8,10 @@ import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra/infra';
-import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
 import { Selectors } from '../shared/store/app';
-import { useIcon, useWindowFocusChange } from 'src/apps/shared/hooks';
+import { FileIcon } from 'src/apps/shared/components/Icon';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { TrayInfo } from '../shared/store/domain';
 
@@ -26,14 +26,12 @@ function TrayItem(props: { tray: TrayInfo }) {
   const [disabled, setDisabled] = useState(false);
   const { tray } = props;
 
-  let iconSrc =
-    useIcon({ path: tray.registry.executablePath }) ||
-    convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
   const { t } = useTranslation();
 
+  let base64Icon: string | null = null;
   if (tray.registry.executablePath.endsWith('explorer.exe') && tray.registry.iconSnapshot) {
     const base64String = btoa(String.fromCharCode(...tray.registry.iconSnapshot));
-    iconSrc = `data:image/png;base64,${base64String}`;
+    base64Icon = `data:image/png;base64,${base64String}`;
   }
 
   return (
@@ -57,7 +55,11 @@ function TrayItem(props: { tray: TrayInfo }) {
       }}
     >
       <div className="tray-item-icon-container">
-        <img className="tray-item-icon" src={iconSrc} />
+        {base64Icon ? (
+          <img className="tray-item-icon" src={base64Icon} />
+        ) : (
+          <FileIcon className="tray-item-icon" path={tray.registry.executablePath} />
+        )}
       </div>
       <OverflowTooltip
         rootClassName="tray-item-label-tooltip"

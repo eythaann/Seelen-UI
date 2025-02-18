@@ -24,6 +24,11 @@ network:
   saved: Gemte netværk
   scanning: Scanning efter netværk
   secured: Krypteret netværk
+notifications:
+  clear: Ryd alle
+  empty: Ingen meddelelser
+  settings: Flere indstillinger for notifikationer
+  title: Meddelelser
 placeholder:
   battery_remaining: '% resterende'
   bluetooth_devices: Bluetooth & enheder

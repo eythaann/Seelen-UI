@@ -303,6 +303,17 @@ impl WinEvent {
     pub fn get_synthetics(&self, origin: HWND) -> Result<Vec<WinEvent>> {
         let mut synthetics = Vec::new();
         match self {
+            Self::ObjectDestroy => {
+                let mut latest_fullscreened = trace_lock!(FULLSCREENED);
+                match *latest_fullscreened {
+                    Some(latest) if latest.handle == origin => {
+                        // exiting fullscreen
+                        *latest_fullscreened = None;
+                        synthetics.push(Self::SyntheticFullscreenEnd(latest));
+                    }
+                    _ => {}
+                }
+            }
             Self::SystemForeground | Self::ObjectLocationChange => {
                 if origin == WindowsApi::get_foreground_window() {
                     let mut latest_fullscreened = trace_lock!(FULLSCREENED);
@@ -324,11 +335,13 @@ impl WinEvent {
                         }
                         _ => {
                             // remove fullscreen of latest when foregrounding another window on the same monitor
-                            if let Some(old) = latest_fullscreened.take() {
+                            if let Some(old) = *latest_fullscreened {
                                 if old.monitor == WindowsApi::monitor_from_window(origin) {
                                     synthetics.push(Self::SyntheticFullscreenEnd(old));
+                                    *latest_fullscreened = None;
                                 }
                             }
+
                             // if new foregrounded window is fullscreen emit it
                             if is_origin_fullscreen {
                                 log::trace!("Fullscreened: {:?}", window);

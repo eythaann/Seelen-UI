@@ -84,6 +84,10 @@ devtools:
   settings_file: Fichier de paramètres
   simulate_fullscreen: Simuler un événement en plein écran
 extras:
+  clear_icons: Effacer le cache des icônes du système
+  clear_icons_tooltip: >-
+    Un redémarrage pourrait être nécessaire pour que tous les widgets soient
+    pleinement pris en compte.
   discord: Discorde
   exit: Quitter/Quitter
   github: GitHub
