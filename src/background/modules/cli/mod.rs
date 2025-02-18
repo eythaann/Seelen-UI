@@ -12,7 +12,7 @@ use application::{get_app_command, handle_cli_events};
 pub use domain::SvcAction;
 use domain::SvcMessage;
 use itertools::Itertools;
-use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use windows::Win32::{
     System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler},
     UI::Shell::FOLDERID_LocalAppData,
@@ -198,7 +198,9 @@ impl ServiceClient {
                     .message(t!("service.not_running_description"))
                     .title(t!("service.not_running"))
                     .kind(MessageDialogKind::Info)
-                    .ok_button_label(t!("service.not_running_ok"))
+                    .buttons(MessageDialogButtons::OkCustom(
+                        t!("service.not_running_ok").to_string(),
+                    ))
                     .blocking_show();
                 if try_again {
                     script.execute().await?;

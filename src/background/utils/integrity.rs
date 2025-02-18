@@ -2,7 +2,7 @@ use std::sync::atomic::{AtomicBool, Ordering};
 
 use base64::Engine;
 use tauri::webview_version;
-use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
@@ -95,7 +95,9 @@ pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<(
             .message(message)
             .title(title)
             .kind(MessageDialogKind::Error)
-            .ok_button_label(t!("runtime.download"))
+            .buttons(MessageDialogButtons::OkCustom(
+                t!("runtime.download").to_string(),
+            ))
             .blocking_show();
         if ok_pressed {
             let url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download";
