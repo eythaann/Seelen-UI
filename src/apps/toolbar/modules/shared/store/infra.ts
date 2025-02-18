@@ -27,6 +27,7 @@ import {
   MediaChannelTransportData,
   MediaDevice,
   NetworkAdapter,
+  PowerPlan,
   PowerStatus,
   TrayInfo,
   Workspace,
@@ -67,6 +68,10 @@ export async function registerStoreEvents() {
 
   await listenGlobal<PowerStatus>('power-status', (event) => {
     store.dispatch(RootActions.setPowerStatus(event.payload));
+  });
+
+  await listenGlobal<PowerPlan>('power-plan', (event) => {
+    store.dispatch(RootActions.setPowerPlan(event.payload));
   });
 
   await listenGlobal<Battery[]>('batteries-status', (event) => {

@@ -1,5 +1,5 @@
 use serde::Serialize;
-use windows::Win32::System::Power::SYSTEM_POWER_STATUS;
+use windows::Win32::System::Power::{EFFECTIVE_POWER_MODE, SYSTEM_POWER_STATUS};
 
 use crate::error_handler::{AppError, Result};
 
@@ -25,6 +25,34 @@ impl From<SYSTEM_POWER_STATUS> for PowerStatus {
             battery_life_time: power_status.BatteryLifeTime,
             battery_full_life_time: power_status.BatteryFullLifeTime,
         }
+    }
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub enum PowerPlan {
+    Balanced,
+    BatterySaver,
+    BetterBattery,
+    GameMode,
+    HighPerformance,
+    MaxPerformance,
+    MixedReality,
+}
+
+impl TryFrom<EFFECTIVE_POWER_MODE> for PowerPlan {
+    type Error = AppError;
+    fn try_from(mode: EFFECTIVE_POWER_MODE) -> Result<Self> {
+        // https://learn.microsoft.com/en-us/windows/win32/api/powersetting/ne-powersetting-effective_power_mode
+        Ok(match mode.0 {
+            2i32 => PowerPlan::Balanced,
+            0i32 => PowerPlan::BatterySaver,
+            1i32 => PowerPlan::BetterBattery,
+            5i32 => PowerPlan::GameMode,
+            3i32 => PowerPlan::HighPerformance,
+            4i32 => PowerPlan::MaxPerformance,
+            6i32 => PowerPlan::MixedReality,
+            _ => return Err("Not awaited windows state!".into()),
+        })
     }
 }
 

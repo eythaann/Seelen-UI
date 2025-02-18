@@ -17,6 +17,16 @@ export interface PowerStatus {
   batteryFullLifeTime: number;
 }
 
+export enum PowerPlan {
+  Balanced = 'Balanced',
+  BatterySaver = 'BatterySaver',
+  BetterBattery = 'BetterBattery',
+  GameMode = 'GameMode',
+  HighPerformance = 'HighPerformance',
+  MaxPerformance = 'MaxPerformance',
+  MixedReality = 'MixedReality',
+}
+
 export interface Battery {
   // Static info
   vendor: string | null;
@@ -127,6 +137,7 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   focused: FocusedApp | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
+  powerPlan: PowerPlan;
   batteries: Battery[];
   workspaces: Workspace[];
   activeWorkspace: WorkspaceId | null;
