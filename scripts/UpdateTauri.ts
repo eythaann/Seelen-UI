@@ -13,7 +13,8 @@ for (let key in dependencies) {
   }
 }
 
-let command = `npm update ${toUpdate.join(' ')}`;
+// run install instead update to get the latest version
+let command = `npm install ${toUpdate.join(' ')}`;
 console.info(`${command}\n`);
 execSync(command, { stdio: 'inherit' });
 

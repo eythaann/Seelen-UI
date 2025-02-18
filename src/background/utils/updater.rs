@@ -26,7 +26,7 @@ pub async fn check_for_updates() -> Result<Option<Update>> {
                 "https://github.com/eythaann/Seelen-UI/releases/download/nightly/latest.json"
                     .try_into()
                     .expect("Failed to parse url"),
-            ])
+            ])?
             .build()?;
         update = updater.check().await?;
     }
@@ -39,7 +39,7 @@ pub async fn check_for_updates() -> Result<Option<Update>> {
                 "https://github.com/eythaann/Seelen-UI/releases/latest/download/latest.json"
                     .try_into()
                     .expect("Failed to parse url"),
-            ])
+            ])?
             .build()?;
         update = updater.check().await?;
     }
