@@ -27,10 +27,7 @@ mod winevent;
 extern crate rust_i18n;
 i18n!("src/background/i18n", fallback = "en");
 
-use std::sync::{
-    atomic::{AtomicBool, Ordering},
-    OnceLock,
-};
+use std::sync::{atomic::AtomicBool, OnceLock};
 
 use error_handler::Result;
 use exposed::register_invoke_handler;
@@ -76,10 +73,6 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
 
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());
-
-    if !tauri::is_dev() && !SILENT.load(Ordering::SeqCst) {
-        Seelen::show_settings()?;
-    }
 
     trace_lock!(SEELEN).start()?;
     log_error!(try_register_tray_icon(app));

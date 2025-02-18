@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 ### enhancements
+- settings shown each time on startup.
+
+### enhancements
 - expand power module with power plan.
 
 ### features
