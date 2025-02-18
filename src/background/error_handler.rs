@@ -33,6 +33,7 @@ define_app_errors!(
     Custom(String);
     Io(std::io::Error);
     Tauri(tauri::Error);
+    Lib(seelen_core::SeelenLibError);
     TauriShell(tauri_plugin_shell::Error);
     Windows(windows::core::Error);
     SerdeJson(serde_json::Error);
