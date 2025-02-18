@@ -24,11 +24,12 @@ import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
   item: PinnedWegItem | TemporalWegItem;
+  drag: boolean;
   // This will be triggered in case preview or context menu is opened from this item, or both of them closed.
   onAssociatedViewOpenChanged?: (isOpen: boolean) => void;
 }
 
-export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
+export const UserApplication = memo(({ item, drag, onAssociatedViewOpenChanged }: Props) => {
   const [openPreview, setOpenPreview] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [blockUntil, setBlockUntil] = useState(moment(new Date()));
@@ -83,6 +84,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   return (
     <DraggableItem
       item={item}
+      drag={drag}
       className={cx({ 'associated-view-open': openPreview || openContextMenu })}
     >
       <WithContextMenu

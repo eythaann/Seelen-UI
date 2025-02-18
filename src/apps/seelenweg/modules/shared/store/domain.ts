@@ -33,6 +33,7 @@ export interface RootState extends IRootState<SeelenWegSettings> {
   itemsOnLeft: SwItem[];
   itemsOnCenter: SwItem[];
   itemsOnRight: SwItem[];
+  reorderDisabled: boolean;
   // ----------------------
   focusedApp: FocusedApp | null;
   isOverlaped: boolean;
