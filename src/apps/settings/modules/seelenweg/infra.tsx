@@ -174,6 +174,7 @@ export const SeelenWegSettings = () => {
             <Switch
               checked={settings.thumbnailGenerationEnabled}
               onChange={(value) => dispatch(SeelenWegActions.setThumbnailGenerationEnabled(value))}
+            />
           </SettingsOption>
           <SettingsOption>
             <div>{t('weg.items.show_instance_counter')}</div>
