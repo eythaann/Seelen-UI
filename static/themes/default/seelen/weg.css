@@ -245,6 +245,14 @@
     background-color: var(--color-gray-100);
     border-radius: 10px;
   }
+
+  .weg-item-preview-scrollbar {
+    &:has( .weg-item-preview-thumbnail-disabled) {
+     display: flex; 
+     flex-direction: column;
+     gap: 6px
+    }
+  }
 }
 
 @keyframes PreviewContainerAnimation {
@@ -275,6 +283,10 @@
 
 .weg-item-preview-topbar {
   margin: 0 0 8px 0;
+  
+  .weg-item-preview-thumbnail-disabled & {
+    margin: 0;
+  }
 }
 
 .weg-item-preview-title {
