@@ -1,5 +1,5 @@
-import { HideMode } from '@seelen-ui/lib';
-import { InputNumber, Select, Switch } from 'antd';
+import { FancyToolbarSide, HideMode } from '@seelen-ui/lib';
+import { Button, InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,6 +7,7 @@ import { newSelectors } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';
 import { OptionsFromEnum } from '../shared/utils/app';
 import { FancyToolbarActions } from './app';
+import { Icon } from 'src/apps/shared/components/Icon';
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
@@ -40,6 +41,20 @@ export function FancyToolbarSettings() {
               onChange={(value) => dispatch(FancyToolbarActions.setHeight(value || 0))}
               min={0}
             />
+          </SettingsOption>
+          <SettingsOption>
+            <div>{t('toolbar.dock_side')}</div>
+            <Button.Group style={{ width: '60px' }}>
+              {Object.values(FancyToolbarSide).map((side) => (
+                <Button
+                  key={side}
+                  type={side === settings.position ? 'primary' : 'default'}
+                  onClick={() => dispatch(FancyToolbarActions.setPosition(side))}
+                >
+                  <Icon iconName={`CgToolbar${side}`} size={18} />
+                </Button>
+              ))}
+            </Button.Group>
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>

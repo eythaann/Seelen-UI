@@ -226,6 +226,7 @@ toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
+  dock_side: Position
   enable: Enable Fancy Toolbar
   height: Height
   hide_mode:
