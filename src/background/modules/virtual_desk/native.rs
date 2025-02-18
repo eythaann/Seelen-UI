@@ -1,5 +1,4 @@
 use parking_lot::Mutex;
-use windows::Win32::Foundation::HWND;
 use winvd::{Desktop, DesktopEvent, DesktopEventThread};
 
 use crate::{error_handler::Result, trace_lock};
@@ -62,8 +61,9 @@ impl VirtualDesktopManagerTrait for NativeVirtualDesktopManager {
         Ok(desktop)
     }
 
-    fn get_by_window(&self, window: isize) -> Result<VirtualDesktop> {
-        Ok(winvd::get_desktop_by_window(HWND(window as _))?.into())
+    fn get_by_window(&self, _hwnd: isize) -> Result<VirtualDesktop> {
+        // Ok(winvd::get_desktop_by_window(HWND(window as _))?.into())
+        Err("Not implemented".into())
     }
 
     fn get_all(&self) -> Result<Vec<VirtualDesktop>> {
@@ -86,23 +86,24 @@ impl VirtualDesktopManagerTrait for NativeVirtualDesktopManager {
         Ok(())
     }
 
-    fn send_to(&self, idx: usize, hwnd: isize) -> Result<()> {
-        winvd::move_window_to_desktop(idx as u32, &HWND(hwnd as _))?;
-        Ok(())
+    fn send_to(&self, _idx: usize, _hwnd: isize) -> Result<()> {
+        // winvd::move_window_to_desktop(idx as u32, &HWND(hwnd as _))?;
+        Err("Not implemented".into())
     }
 
-    fn pin_window(&self, hwnd: isize) -> Result<()> {
-        winvd::pin_window(HWND(hwnd as _))?;
-        Ok(())
+    fn pin_window(&self, _hwnd: isize) -> Result<()> {
+        // winvd::pin_window(HWND(hwnd as _))?;
+        Err("Not implemented".into())
     }
 
-    fn unpin_window(&self, hwnd: isize) -> Result<()> {
-        winvd::unpin_window(HWND(hwnd as _))?;
-        Ok(())
+    fn unpin_window(&self, _hwnd: isize) -> Result<()> {
+        // winvd::unpin_window(HWND(hwnd as _))?;
+        Err("Not implemented".into())
     }
 
-    fn is_pinned_window(&self, hwnd: isize) -> Result<bool> {
-        Ok(winvd::is_pinned_window(HWND(hwnd as _))?)
+    fn is_pinned_window(&self, _hwnd: isize) -> Result<bool> {
+        // Ok(winvd::is_pinned_window(HWND(hwnd as _))?)
+        Err("Not implemented".into())
     }
 
     fn listen_events(&self, sender: std::sync::mpsc::Sender<VirtualDesktopEvent>) -> Result<()> {

@@ -29,7 +29,7 @@ impl WindowEnumerator {
         ptr: LPARAM,
     ) -> Result<()> {
         if let Some(parent) = self.parent {
-            unsafe { EnumChildWindows(parent, Some(enum_proc), ptr).ok()? };
+            unsafe { EnumChildWindows(Some(parent), Some(enum_proc), ptr).ok()? };
         } else {
             unsafe { EnumWindows(Some(enum_proc), ptr)? };
         }

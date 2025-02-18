@@ -4,6 +4,7 @@ use std::path::PathBuf;
 use seelen_core::command_handler_list;
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
+use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
 use crate::hook::HookManager;
@@ -135,7 +136,7 @@ fn is_virtual_desktop_supported() -> bool {
 
 #[tauri::command(async)]
 fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Result<()> {
-    let handle = webview.hwnd()?;
+    let handle = HWND(webview.hwnd()?.0);
     let monitor = WindowsApi::monitor_from_window(handle);
     let event = if value {
         WinEvent::SyntheticFullscreenStart(SyntheticFullscreenData { handle, monitor })

@@ -35,7 +35,7 @@ pub struct SeelenWeg {
 impl Drop for SeelenWeg {
     fn drop(&mut self) {
         log::info!("Dropping {}", self.window.label());
-        if let Ok(hwnd) = self.window.hwnd() {
+        if let Ok(hwnd) = self.hwnd() {
             AppBarData::from_handle(hwnd).unregister_bar();
         }
         log_error!(self.window.destroy());
@@ -45,6 +45,10 @@ impl Drop for SeelenWeg {
 impl SeelenWeg {
     pub const TITLE: &'static str = "SeelenWeg";
     pub const TARGET: &'static str = "@seelen/weg";
+
+    pub fn hwnd(&self) -> Result<HWND> {
+        Ok(HWND(self.window.hwnd()?.0))
+    }
 
     pub fn get_label(monitor_id: &str) -> String {
         base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(format!(
@@ -131,7 +135,7 @@ impl SeelenWeg {
             } else if let Some(past_window) = self.last_overlapped_window {
                 if past_window != window
                     && past_window.monitor() != monitor
-                    && Window::from(self.window.hwnd()?).monitor() != monitor
+                    && Window::from(self.hwnd()?).monitor() != monitor
                 {
                     return Ok(());
                 }
@@ -144,7 +148,7 @@ impl SeelenWeg {
     }
 
     pub fn hide(&mut self) -> Result<()> {
-        WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
+        WindowsApi::show_window_async(self.hwnd()?, SW_HIDE)?;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
@@ -154,7 +158,7 @@ impl SeelenWeg {
     }
 
     pub fn show(&mut self) -> Result<()> {
-        WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
+        WindowsApi::show_window_async(self.hwnd()?, SW_SHOWNOACTIVATE)?;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
@@ -165,7 +169,7 @@ impl SeelenWeg {
 
     pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
         let rc_work = FancyToolbar::get_work_area_by_monitor(monitor)?;
-        let hwnd = HWND(self.window.hwnd()?.0);
+        let hwnd = HWND(self.hwnd()?.0);
 
         let state = FULL_STATE.load();
         let settings = state.settings().seelenweg();

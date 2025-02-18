@@ -65,9 +65,13 @@ impl SeelenWall {
         Ok(window)
     }
 
+    pub fn hwnd(&self) -> Result<HWND> {
+        Ok(HWND(self.window.hwnd()?.0))
+    }
+
     pub fn update_position(&self) -> Result<()> {
         let mut rect = WindowsApi::virtual_screen_rect()?;
-        let main_hwnd = HWND(self.window.hwnd()?.0);
+        let main_hwnd = self.hwnd()?;
 
         if Self::try_set_inside_workerw(main_hwnd).is_ok() {
             // rect relative to the parent
@@ -91,7 +95,7 @@ impl SeelenWall {
 
         // Send 0x052C to Progman. This message directs Progman to spawn a WorkerW
         // behind the desktop icons. If it is already there, nothing happens.
-        unsafe { PostMessageW(progman, 0x052C, WPARAM(0xD), LPARAM(0x1))? };
+        unsafe { PostMessageW(Some(progman), 0x052C, WPARAM(0xD), LPARAM(0x1))? };
 
         // CASE 1:
         // 0x00010190 "" WorkerW
@@ -104,9 +108,9 @@ impl SeelenWall {
 
         WindowEnumerator::new().for_each(|current| unsafe {
             // check if current contains SHELLDLL_DefView
-            if FindWindowExA(current, None, pcstr!("SHELLDLL_DefView"), None).is_ok() {
+            if FindWindowExA(Some(current), None, pcstr!("SHELLDLL_DefView"), None).is_ok() {
                 // find next worker after the current one
-                if let Ok(_worker) = FindWindowExA(None, current, pcstr!("WorkerW"), None) {
+                if let Ok(_worker) = FindWindowExA(None, Some(current), pcstr!("WorkerW"), None) {
                     worker = Some(_worker);
                 }
             }
@@ -121,20 +125,18 @@ impl SeelenWall {
         //   0x00100B8A "" WorkerW       <-- This is the WorkerW instance we are after!
         if worker.is_none() {
             let mut attempts = 0;
-            worker =
-                unsafe { FindWindowExA(progman, HWND::default(), pcstr!("WorkerW"), None).ok() };
+            worker = unsafe { FindWindowExA(Some(progman), None, pcstr!("WorkerW"), None).ok() };
             while worker.is_none() && attempts < 10 {
                 attempts += 1;
                 std::thread::sleep(std::time::Duration::from_millis(100));
-                worker = unsafe {
-                    FindWindowExA(progman, HWND::default(), pcstr!("WorkerW"), None).ok()
-                };
+                worker =
+                    unsafe { FindWindowExA(Some(progman), None, pcstr!("WorkerW"), None).ok() };
             }
         }
 
         match worker {
             Some(worker) => {
-                unsafe { SetParent(hwnd, worker)? };
+                unsafe { SetParent(hwnd, Some(worker))? };
                 Ok(())
             }
             None => Err("Failed to find/create progman worker window".into()),
@@ -146,9 +148,9 @@ impl SeelenWall {
         unsafe {
             let progman = FindWindowA(pcstr!("Progman"), None)?;
             if let Ok(shell_view) =
-                FindWindowExA(progman, HWND::default(), pcstr!("SHELLDLL_DefView"), None)
+                FindWindowExA(Some(progman), None, pcstr!("SHELLDLL_DefView"), None)
             {
-                InvalidateRect(shell_view, None, true).ok()?;
+                InvalidateRect(Some(shell_view), None, true).ok()?;
                 UpdateWindow(shell_view).ok()?;
             }
         }

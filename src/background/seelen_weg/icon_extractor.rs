@@ -62,8 +62,8 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
             return Err("Failed to get icon info".into());
         }
         let hdc_screen = CreateCompatibleDC(None);
-        let hdc_mem = CreateCompatibleDC(hdc_screen);
-        let hbm_old = SelectObject(hdc_mem, icon_info.hbmColor);
+        let hdc_mem = CreateCompatibleDC(Some(hdc_screen));
+        let hbm_old = SelectObject(hdc_mem, icon_info.hbmColor.into());
 
         let mut bmp_info = BITMAPINFO {
             bmiHeader: BITMAPINFOHEADER {
@@ -98,8 +98,8 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
         SelectObject(hdc_mem, hbm_old);
         DeleteDC(hdc_mem).ok()?;
         DeleteDC(hdc_screen).ok()?;
-        DeleteObject(icon_info.hbmColor).ok()?;
-        DeleteObject(icon_info.hbmMask).ok()?;
+        DeleteObject(icon_info.hbmColor.into()).ok()?;
+        DeleteObject(icon_info.hbmMask.into()).ok()?;
 
         if bmp_info.bmiHeader.biBitCount != 32 {
             return Err("Icon is not 32 bit".into());

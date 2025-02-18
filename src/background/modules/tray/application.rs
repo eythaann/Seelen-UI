@@ -54,23 +54,17 @@ pub fn get_tray_overflow_handle() -> Option<HWND> {
 pub fn get_tray_overflow_content_handle() -> Option<HWND> {
     let tray_overflow = get_tray_overflow_handle()?;
     unsafe {
-        if is_windows_10() {
-            FindWindowExA(
-                tray_overflow,
-                HWND::default(),
-                pcstr!("ToolbarWindow32"),
-                None,
-            )
-            .ok()
-        } else {
-            FindWindowExA(
-                tray_overflow,
-                HWND::default(),
-                pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
-                None,
-            )
-            .ok()
-        }
+        FindWindowExA(
+            Some(tray_overflow),
+            None,
+            if is_windows_10() {
+                pcstr!("ToolbarWindow32")
+            } else {
+                pcstr!("Windows.UI.Composition.DesktopWindowContentBridge")
+            },
+            None,
+        )
+        .ok()
     }
 }
 
@@ -246,7 +240,7 @@ impl TrayIconManager {
                 let guid = icon.trim_start_matches("{").trim_end_matches("}");
                 let identifier = NOTIFYICONIDENTIFIER {
                     cbSize: std::mem::size_of::<NOTIFYICONIDENTIFIER>() as u32,
-                    guidItem: GUID::from(guid),
+                    guidItem: GUID::try_from(guid)?,
                     ..Default::default()
                 };
                 item.is_running = unsafe { Shell_NotifyIconGetRect(&identifier).is_ok() };

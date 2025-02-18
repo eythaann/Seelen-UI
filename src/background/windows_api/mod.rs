@@ -4,6 +4,7 @@ mod iterator;
 pub mod monitor;
 pub mod process;
 pub mod string_utils;
+pub mod traits;
 pub mod types;
 pub mod window;
 
@@ -40,8 +41,8 @@ use windows::{
             PHYSICAL_MONITOR,
         },
         Foundation::{
-            CloseHandle, FALSE, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT,
-            STATUS_SUCCESS, WPARAM,
+            CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT, STATUS_SUCCESS,
+            WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -52,7 +53,7 @@ use windows::{
             Gdi::{
                 EnumDisplayDevicesW, EnumDisplayMonitors, EnumDisplaySettingsW, GetMonitorInfoW,
                 MonitorFromPoint, MonitorFromWindow, DEVMODEW, DISPLAY_DEVICEW,
-                ENUM_CURRENT_SETTINGS, HDC, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
+                ENUM_CURRENT_SETTINGS, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
                 MONITOR_DEFAULTTOPRIMARY,
             },
         },
@@ -148,14 +149,9 @@ impl WindowsApi {
         callback_data_address: isize,
     ) -> Result<()> {
         unsafe {
-            EnumDisplayMonitors(
-                HDC::default(),
-                None,
-                callback,
-                LPARAM(callback_data_address),
-            )
-            .ok()
-            .filter_fake_error()?;
+            EnumDisplayMonitors(None, None, callback, LPARAM(callback_data_address))
+                .ok()
+                .filter_fake_error()?;
         }
         Ok(())
     }
@@ -166,7 +162,7 @@ impl WindowsApi {
     }
 
     pub fn post_message(hwnd: HWND, message: u32, wparam: usize, lparam: isize) -> Result<()> {
-        unsafe { PostMessageW(hwnd, message, WPARAM(wparam), LPARAM(lparam))? };
+        unsafe { PostMessageW(Some(hwnd), message, WPARAM(wparam), LPARAM(lparam))? };
         Ok(())
     }
 
@@ -220,7 +216,7 @@ impl WindowsApi {
     }
 
     pub fn is_window(hwnd: HWND) -> bool {
-        unsafe { IsWindow(hwnd) }.into()
+        unsafe { IsWindow(Some(hwnd)) }.into()
     }
 
     pub fn is_window_visible(hwnd: HWND) -> bool {
@@ -298,7 +294,7 @@ impl WindowsApi {
 
     fn _set_position(
         hwnd: HWND,
-        order: HWND,
+        order: Option<HWND>,
         rect: RECT,
         flags: SET_WINDOW_POS_FLAGS,
     ) -> Result<()> {
@@ -330,7 +326,7 @@ impl WindowsApi {
             Some(_) => flags,
             None => SWP_NOZORDER | flags,
         } | SWP_NOACTIVATE;
-        Self::_set_position(hwnd, order.unwrap_or_default(), *rect, flags)
+        Self::_set_position(hwnd, order, *rect, flags)
     }
 
     pub fn move_window(hwnd: HWND, rect: &RECT) -> Result<()> {
@@ -419,7 +415,7 @@ impl WindowsApi {
         tkp.Privileges[0].Luid = Self::get_luid(PCWSTR::null(), name)?;
         tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
-        unsafe { AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)? };
+        unsafe { AdjustTokenPrivileges(token_handle, false, Some(&tkp), 0, None, None)? };
         Ok(())
     }
 
@@ -916,7 +912,7 @@ impl WindowsApi {
     }
 
     pub fn set_suspend_state() -> Result<()> {
-        let success = unsafe { SetSuspendState(false, true, false).as_bool() };
+        let success = unsafe { SetSuspendState(false, true, false) };
         if !success {
             return Err("Failed to set suspend state".into());
         }
@@ -987,14 +983,19 @@ impl WindowsApi {
 
     // get current thread owner username
     pub fn get_username(format: EXTENDED_NAME_FORMAT) -> Result<String> {
-        let mut name = WindowsString::new_to_fill(1024);
-        unsafe { GetUserNameExW(format, name.as_pwstr(), &mut 1024).ok()? };
+        let mut size = 0;
+        unsafe { GetUserNameExW(format, None, &mut size) };
+        let mut name = WindowsString::new_to_fill(size as usize);
+        let sucess = unsafe { GetUserNameExW(format, Some(name.as_pwstr()), &mut size) };
+        if !sucess {
+            return Err("Failed to get username".into());
+        }
         Ok(name.to_string())
     }
 
     pub fn get_computer_name(format: COMPUTER_NAME_FORMAT) -> Result<String> {
         let mut name = WindowsString::new_to_fill(1024);
-        unsafe { GetComputerNameExW(format, name.as_pwstr(), &mut 1024)? };
+        unsafe { GetComputerNameExW(format, Some(name.as_pwstr()), &mut 1024)? };
         Ok(name.to_string())
     }
 

@@ -10,7 +10,8 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use serde::Serialize;
 use windows::{
-    Foundation::{EventRegistrationToken, TypedEventHandler},
+    Foundation::TypedEventHandler,
+    Win32::System::WinRT::EventRegistrationToken,
     UI::Notifications::{
         KnownNotificationBindings,
         Management::{UserNotificationListener, UserNotificationListenerAccessStatus},
@@ -129,7 +130,7 @@ impl NotificationManager {
 
     pub fn release(&mut self) -> Result<()> {
         if let Some(token) = self.event_token.take() {
-            self.listener.RemoveNotificationChanged(token)?;
+            self.listener.RemoveNotificationChanged(token.value)?;
         }
         RELEASED.store(true, Ordering::Release);
         Ok(())

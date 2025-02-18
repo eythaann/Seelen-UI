@@ -22,7 +22,7 @@ impl FancyToolbar {
                 self.handle_overlaped_status(origin)?;
             }
             WinEvent::ObjectLocationChange => {
-                if window.hwnd() == self.window.hwnd()? {
+                if window.hwnd() == self.hwnd()? {
                     self.set_position(window.monitor().handle())?;
                 }
                 if origin == WindowsApi::get_foreground_window() {
@@ -30,13 +30,13 @@ impl FancyToolbar {
                 }
             }
             WinEvent::SyntheticFullscreenStart(event_data) => {
-                let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
+                let monitor = WindowsApi::monitor_from_window(self.hwnd()?);
                 if monitor == event_data.monitor {
                     self.hide()?;
                 }
             }
             WinEvent::SyntheticFullscreenEnd(event_data) => {
-                let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
+                let monitor = WindowsApi::monitor_from_window(self.hwnd()?);
                 if monitor == event_data.monitor {
                     self.show()?;
                 }

@@ -4,7 +4,7 @@ use std::{ffi::OsString, os::windows::ffi::OsStringExt, path::PathBuf};
 
 use com::Com;
 use windows::Win32::{
-    Foundation::{FALSE, HANDLE, HWND, LUID},
+    Foundation::{HANDLE, HWND, LUID},
     Security::{
         AdjustTokenPrivileges, LookupPrivilegeValueW, SE_PRIVILEGE_ENABLED,
         TOKEN_ADJUST_PRIVILEGES, TOKEN_PRIVILEGES, TOKEN_QUERY,
@@ -108,7 +108,7 @@ impl WindowsApi {
         unsafe {
             SetWindowPos(
                 HWND(hwnd as _),
-                HWND::default(),
+                None,
                 x,
                 y,
                 width,
@@ -168,7 +168,7 @@ impl WindowsApi {
         tkp.Privileges[0].Luid = Self::get_luid(PCWSTR::null(), name)?;
         tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
-        unsafe { AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)? };
+        unsafe { AdjustTokenPrivileges(token_handle, false, Some(&tkp), 0, None, None)? };
         Ok(())
     }
 

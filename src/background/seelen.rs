@@ -256,7 +256,12 @@ impl Seelen {
     pub fn is_auto_start_enabled() -> Result<bool> {
         Com::run_with_context(|| unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(None, None, None, None)?;
+            task_service.Connect(
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+            )?;
             let is_task_enabled = task_service
                 .GetFolder(&"\\Seelen".into())
                 .and_then(|folder| folder.GetTask(&"Seelen UI Service".into()))

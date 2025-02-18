@@ -72,7 +72,7 @@ sysinfo = "0.30.12"
 battery = "0.7.8"
 winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 winreg = "0.52.0"
-windows-core = "=0.58.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-core = "0.59.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
 win-screenshot = "4.0.8"
 base64 = "0.22.1"
 arc-swap = "1.7.1"
@@ -89,7 +89,7 @@ git = "https://github.com/Seelen-Inc/slu-lib.git" # for release/pre-release/nigh
 # path = "../slu-lib"                               # for local development
 
 [dependencies.windows]
-version = "=0.58.0"
+version = "0.59.0"
 features = [
     "Win32_Foundation",
     "ApplicationModel",
@@ -103,8 +103,16 @@ features = [
     "Win32_UI_Shell",
     "Win32_UI_Shell_PropertiesSystem",
     "Win32_UI_Accessibility",
+    "Win32_UI_Controls",
     "Win32_Graphics_Dwm",
+    "Win32_Graphics_Gdi",
+    "Win32_UI_HiDpi",
+    "Win32_System_Ole",
     "Win32_System_Com",
+    "Win32_System_Com_StructuredStorage",
+    "Win32_System_Variant",
+    "Win32_System_LibraryLoader",
+    "Win32_System_SystemInformation",
     "Win32_System_Console",                # required to attach to console on cli mode
     "Win32_System_Registry",               # required for system tray icon module
     "Win32_Security",                      # required for power management (shutdown, reboot)
@@ -139,6 +147,7 @@ features = [
     "UI_Core",
     "UI_Notifications_Management",         # required for notifications
     "UI_ViewManagement",                   # required for colors UISettings
+    "deprecated",                          # (UI_ViewManagement) https://github.com/microsoft/windows-rs/issues/3425 remove on update to ^0.60.0
     "Win32_NetworkManagement_IpHelper",    # required for network manager
     "Win32_NetworkManagement_Ndis",        # required for network manager
     "Win32_Networking_WinSock",            # required for network manager

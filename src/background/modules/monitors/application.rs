@@ -124,7 +124,7 @@ impl MonitorManager {
                 0,
                 None,
                 None,
-                h_module,
+                Some(wnd_class.hInstance),
                 None,
             )?
         };
@@ -138,13 +138,13 @@ impl MonitorManager {
         };
 
         RegisterDeviceNotificationW(
-            hwnd,
+            hwnd.into(),
             &mut notification_filter as *mut _ as *mut _,
             DEVICE_NOTIFY_WINDOW_HANDLE,
         )?;
 
         let mut msg = MSG::default();
-        while GetMessageW(&mut msg, hwnd, 0, 0).as_bool() {
+        while GetMessageW(&mut msg, Some(hwnd), 0, 0).as_bool() {
             let _ = TranslateMessage(&msg);
             DispatchMessageW(&msg);
         }

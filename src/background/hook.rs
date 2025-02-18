@@ -368,7 +368,7 @@ pub fn register_win_hook() -> Result<()> {
         SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
         let mut msg: MSG = MSG::default();
         loop {
-            if !GetMessageW(&mut msg, HWND::default(), 0, 0).as_bool() {
+            if !GetMessageW(&mut msg, None, 0, 0).as_bool() {
                 break;
             };
             let _ = TranslateMessage(&msg);

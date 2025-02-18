@@ -52,7 +52,7 @@ impl WindowsString {
     }
 
     pub fn to_bstr(&self) -> BSTR {
-        BSTR::from_wide(&self.inner[..self.len()]).unwrap()
+        BSTR::from_wide(&self.inner[..self.len()])
     }
 
     pub fn to_os_string(&self) -> std::ffi::OsString {

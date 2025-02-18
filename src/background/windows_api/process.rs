@@ -62,7 +62,7 @@ impl Process {
         let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;
         let mut family_name = WindowsString::new_to_fill(len as usize);
-        unsafe { GetPackageFamilyName(hprocess, &mut len, family_name.as_pwstr()).ok()? };
+        unsafe { GetPackageFamilyName(hprocess, &mut len, Some(family_name.as_pwstr())).ok()? };
         Ok(family_name.to_string())
     }
 
@@ -70,7 +70,7 @@ impl Process {
         let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;
         let mut family_name = WindowsString::new_to_fill(len as usize);
-        unsafe { GetPackageFullName(hprocess, &mut len, family_name.as_pwstr()).ok()? };
+        unsafe { GetPackageFullName(hprocess, &mut len, Some(family_name.as_pwstr())).ok()? };
         Ok(family_name.to_string())
     }
 
@@ -79,7 +79,7 @@ impl Process {
         let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;
         let mut id = WindowsString::new_to_fill(len as usize);
-        unsafe { GetApplicationUserModelId(hprocess, &mut len, id.as_pwstr()).ok()? };
+        unsafe { GetApplicationUserModelId(hprocess, &mut len, Some(id.as_pwstr())).ok()? };
         Ok(AppUserModelId::Appx(id.to_string()))
     }
 

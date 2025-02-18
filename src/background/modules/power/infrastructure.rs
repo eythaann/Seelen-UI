@@ -118,7 +118,7 @@ impl PowerManager {
                 0,
                 None,
                 None,
-                h_module,
+                Some(wnd_class.hInstance),
                 None,
             )?
         };
@@ -127,7 +127,7 @@ impl PowerManager {
         spawn_named_thread("Power Manager Message Loop", move || unsafe {
             let hwnd = HWND(addr as _);
             let mut msg = MSG::default();
-            while GetMessageW(&mut msg, hwnd, 0, 0).into() {
+            while GetMessageW(&mut msg, Some(hwnd), 0, 0).into() {
                 let _ = TranslateMessage(&msg);
                 DispatchMessageW(&msg);
             }

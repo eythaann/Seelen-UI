@@ -1,11 +1,14 @@
 use std::sync::Arc;
 
-use crate::{error_handler::Result, log_error, trace_lock};
+use crate::{
+    error_handler::Result, log_error, trace_lock, windows_api::traits::EventRegistrationTokenExt,
+};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::system_state::UIColors;
 use windows::{
-    Foundation::{EventRegistrationToken, TypedEventHandler},
+    Foundation::TypedEventHandler,
+    Win32::System::WinRT::EventRegistrationToken,
     UI::ViewManagement::{UIColorType, UISettings},
 };
 use windows_core::IInspectable;
@@ -53,7 +56,8 @@ impl SystemSettings {
     fn init(&mut self) -> Result<()> {
         self.color_event_token = Some(
             self.settings
-                .ColorValuesChanged(&self.color_event_handler)?,
+                .ColorValuesChanged(&self.color_event_handler)?
+                .as_event_token(),
         );
         Ok(())
     }
@@ -61,7 +65,7 @@ impl SystemSettings {
     pub fn release(&mut self) -> Result<()> {
         self.color_client_callbacks.clear();
         if let Some(token) = self.color_event_token.take() {
-            self.settings.RemoveColorValuesChanged(token)?;
+            self.settings.RemoveColorValuesChanged(token.value)?;
         }
         Ok(())
     }

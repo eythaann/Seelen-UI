@@ -26,7 +26,7 @@ use parking_lot::Mutex;
 use windows::{
     core::GUID,
     Win32::{
-        Foundation::{HANDLE, RECT},
+        Foundation::RECT,
         UI::Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
     },
 };
@@ -96,10 +96,9 @@ pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
     for (idx, part) in parts.into_iter().enumerate() {
         if part.starts_with("{") && part.ends_with("}") {
             let guid = part.trim_start_matches('{').trim_end_matches('}');
-            let rfid = GUID::from(guid);
-            let string_path = unsafe {
-                SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, HANDLE::default())?.to_string()?
-            };
+            let rfid = GUID::try_from(guid)?;
+            let string_path =
+                unsafe { SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, None)?.to_string()? };
 
             path_buf.push(string_path);
         } else if idx == 0 {

@@ -6,8 +6,10 @@ use windows::Win32::Foundation::POINT;
 use seelen_core::rect::Rect;
 
 /// A Point type stores the x and y position.
-#[derive(Clone, Copy, PartialEq, Eq, Default)]
+#[derive(Clone, Copy, PartialEq, Default)]
 pub struct Point(POINT);
+
+impl Eq for Point {}
 
 impl Point {
     /// Creates a new position.

@@ -19,7 +19,7 @@ use crate::{
     },
     seelen_weg::icon_extractor::extract_and_save_icon_umid,
     trace_lock,
-    windows_api::{types::AppUserModelId, WindowsApi},
+    windows_api::{traits::EventRegistrationTokenExt, types::AppUserModelId, WindowsApi},
 };
 
 use super::{MediaManagerEvents, MEDIA_MANAGER};
@@ -157,8 +157,12 @@ impl MediaManager {
         self.media_player_event_tokens.insert(
             source_app_umid.to_string(),
             (
-                session.MediaPropertiesChanged(&self.media_player_properties_event_handler)?,
-                session.PlaybackInfoChanged(&self.media_player_playback_event_handler)?,
+                session
+                    .MediaPropertiesChanged(&self.media_player_properties_event_handler)?
+                    .as_event_token(),
+                session
+                    .PlaybackInfoChanged(&self.media_player_playback_event_handler)?
+                    .as_event_token(),
             ),
         );
         self.media_players
@@ -179,8 +183,8 @@ impl MediaManager {
             if let Some((properties_token, playback_token)) =
                 self.media_player_event_tokens.remove(player_id)
             {
-                session.RemoveMediaPropertiesChanged(properties_token)?;
-                session.RemovePlaybackInfoChanged(playback_token)?;
+                session.RemoveMediaPropertiesChanged(properties_token.value)?;
+                session.RemovePlaybackInfoChanged(playback_token.value)?;
             }
         }
         self.playing.retain(|player| player.umid != player_id);

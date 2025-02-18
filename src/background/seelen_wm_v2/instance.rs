@@ -3,7 +3,9 @@ use getset::{Getters, MutGetters};
 use seelen_core::handlers::SeelenEvent;
 use std::sync::Arc;
 use tauri::{Emitter, Listener, WebviewWindow};
-use windows::Win32::{Graphics::Gdi::HMONITOR, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS};
+use windows::Win32::{
+    Foundation::HWND, Graphics::Gdi::HMONITOR, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS,
+};
 
 use crate::{
     error_handler::Result, log_error, modules::virtual_desk::get_vd_manager,
@@ -31,6 +33,10 @@ impl WindowManagerV2 {
         Ok(Self {
             window: Self::create_window(monitor_id)?,
         })
+    }
+
+    pub fn hwnd(&self) -> Result<HWND> {
+        Ok(HWND(self.window.hwnd()?.0))
     }
 
     pub fn get_label(monitor_id: &str) -> String {
@@ -99,7 +105,7 @@ impl WindowManagerV2 {
 
     pub fn set_position(&self, monitor: HMONITOR) -> Result<()> {
         let work_area = FancyToolbar::get_work_area_by_monitor(monitor)?;
-        let main_hwnd = self.window.hwnd()?;
+        let main_hwnd = self.hwnd()?;
         WindowsApi::move_window(main_hwnd, &work_area)?;
         WindowsApi::set_position(main_hwnd, None, &work_area, SWP_ASYNCWINDOWPOS)?;
         Ok(())

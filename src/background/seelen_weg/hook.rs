@@ -62,7 +62,7 @@ impl SeelenWeg {
                 self.handle_overlaped_status(origin)?;
             }
             WinEvent::ObjectLocationChange => {
-                if window.hwnd() == self.window.hwnd()? {
+                if window.hwnd() == self.hwnd()? {
                     self.set_position(window.monitor().handle())?;
                 }
                 if origin == WindowsApi::get_foreground_window() {
@@ -70,13 +70,13 @@ impl SeelenWeg {
                 }
             }
             WinEvent::SyntheticFullscreenStart(event_data) => {
-                let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
+                let monitor = WindowsApi::monitor_from_window(self.hwnd()?);
                 if monitor == event_data.monitor {
                     self.hide()?;
                 }
             }
             WinEvent::SyntheticFullscreenEnd(event_data) => {
-                let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
+                let monitor = WindowsApi::monitor_from_window(self.hwnd()?);
                 if monitor == event_data.monitor {
                     self.show()?;
                 }
@@ -103,8 +103,8 @@ impl SeelenWeg {
                 if class.eq("XamlExplorerHostIslandWindow") && origin.title().is_empty() {
                     let content_hwnd = unsafe {
                         FindWindowExA(
-                            origin_hwnd,
-                            HWND::default(),
+                            Some(origin_hwnd),
+                            None,
                             pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
                             None,
                         )
@@ -114,8 +114,8 @@ impl SeelenWeg {
                     if !content_hwnd.is_invalid() {
                         let input_hwnd = unsafe {
                             FindWindowExA(
-                                content_hwnd,
-                                HWND::default(),
+                                Some(content_hwnd),
+                                None,
                                 pcstr!("Windows.UI.Input.InputSite.WindowClass"),
                                 None,
                             )

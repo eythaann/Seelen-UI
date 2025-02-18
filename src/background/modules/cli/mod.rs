@@ -157,7 +157,12 @@ impl ServiceClient {
     fn start_service_task() -> Result<()> {
         Com::run_with_context(|| unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(None, None, None, None)?;
+            task_service.Connect(
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+            )?;
             let folder = task_service.GetFolder(&"\\Seelen".into())?;
             let task = folder.GetTask(&"Seelen UI Service".into())?;
 
@@ -170,7 +175,7 @@ impl ServiceClient {
             let service_path = Self::service_path()?.to_string_lossy().to_lowercase();
             match action_path.to_string().to_lowercase() == service_path {
                 true => {
-                    task.Run(None)?;
+                    task.Run(&Default::default())?;
                     Ok(())
                 }
                 false => {

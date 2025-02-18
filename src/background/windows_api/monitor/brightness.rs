@@ -52,7 +52,7 @@ impl From<&DISPLAY_DEVICEW> for DisplayDevice {
             description: WindowsString::from_slice(&device.DeviceString),
             id: WindowsString::from_slice(&device.DeviceID),
             key: WindowsString::from_slice(&device.DeviceKey),
-            flags: device.StateFlags,
+            flags: device.StateFlags.0,
         }
     }
 }

@@ -24,7 +24,12 @@ static SERVICE_TASK_NAME: &str = "Seelen UI Service";
 impl TaskSchedulerHelper {
     unsafe fn get_task_service() -> Result<ITaskService> {
         let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-        task_service.Connect(None, None, None, None)?;
+        task_service.Connect(
+            &Default::default(),
+            &Default::default(),
+            &Default::default(),
+            &Default::default(),
+        )?;
         Ok(task_service)
     }
 
@@ -33,10 +38,10 @@ impl TaskSchedulerHelper {
             &task_name.into(),
             task_xml,
             TASK_CREATE_OR_UPDATE.0,
-            None,
-            None,
+            &Default::default(),
+            &Default::default(),
             TASK_LOGON_INTERACTIVE_TOKEN,
-            None,
+            &Default::default(),
         )?;
         Ok(())
     }
@@ -113,7 +118,12 @@ impl TaskSchedulerHelper {
     pub fn remove_service_task() -> Result<()> {
         Com::run_with_context(|| unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(None, None, None, None)?;
+            task_service.Connect(
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+            )?;
             if let Ok(seelen_folder) = task_service.GetFolder(&GROUP_FOLDER.into()) {
                 let _ = seelen_folder.DeleteTask(&SERVICE_TASK_NAME.into(), 0);
             }

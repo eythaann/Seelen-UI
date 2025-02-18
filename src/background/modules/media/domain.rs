@@ -3,12 +3,12 @@ use std::{ffi::c_void, mem::zeroed, path::PathBuf};
 use serde::Serialize;
 
 use windows::{
-    core::{Interface, Param, Result, GUID, HRESULT, PCWSTR, PROPVARIANT},
+    core::{Interface, Param, Result, GUID, HRESULT, PCWSTR},
     Devices::Custom::DeviceSharingMode,
     Win32::{
-        Foundation::BOOL,
+        Foundation::{BOOL, PROPERTYKEY},
         Media::Audio::{ERole, WAVEFORMATEX},
-        UI::Shell::PropertiesSystem::PROPERTYKEY,
+        System::Com::StructuredStorage::PROPVARIANT,
     },
 };
 
@@ -181,7 +181,7 @@ impl IPolicyConfig {
             key,
             &mut result__,
         )
-        .and_then(|| windows_core::Type::from_abi(result__))
+        .map(|| result__)
     }
 
     pub unsafe fn SetPropertyValue(
@@ -196,10 +196,7 @@ impl IPolicyConfig {
             device_id.param().abi(),
             bFxStore.into().0,
             key,
-            std::mem::transmute::<
-                *const windows_core::PROPVARIANT,
-                *const std::mem::MaybeUninit<windows_core::PROPVARIANT>,
-            >(propvar),
+            propvar,
         )
         .ok()
     }
@@ -264,14 +261,14 @@ pub struct IPolicyConfig_Vtbl {
         PCWSTR,
         i32,
         *const PROPERTYKEY,
-        *mut std::mem::MaybeUninit<PROPVARIANT>,
+        *mut PROPVARIANT,
     ) -> HRESULT,
     pub SetPropertyValue: unsafe extern "system" fn(
         this: *mut c_void,
         PCWSTR,
         i32,
         *const PROPERTYKEY,
-        *const std::mem::MaybeUninit<PROPVARIANT>,
+        *const PROPVARIANT,
     ) -> HRESULT,
     pub SetDefaultEndpoint: unsafe extern "system" fn(this: *mut c_void, PCWSTR, ERole) -> HRESULT,
     pub SetEndpointVisibility: unsafe extern "system" fn(this: *mut c_void, PCWSTR, i32) -> HRESULT,

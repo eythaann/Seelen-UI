@@ -6,7 +6,7 @@ use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use windows::{
-    Foundation::{EventRegistrationToken, TypedEventHandler},
+    Foundation::TypedEventHandler,
     Media::Control::{
         GlobalSystemMediaTransportControlsSession,
         GlobalSystemMediaTransportControlsSessionManager, MediaPropertiesChangedEventArgs,
@@ -14,6 +14,7 @@ use windows::{
     },
     Win32::{
         Devices::FunctionDiscovery::PKEY_Device_FriendlyName,
+        Foundation::PROPERTYKEY,
         Media::Audio::{
             eAll, eCapture, eCommunications, eConsole, eMultimedia, eRender, EDataFlow, ERole,
             Endpoints::{
@@ -26,8 +27,10 @@ use windows::{
             IMMNotificationClient, IMMNotificationClient_Impl, ISimpleAudioVolume,
             MMDeviceEnumerator, DEVICE_STATE_ACTIVE,
         },
-        System::Com::{CLSCTX_ALL, STGM_READ},
-        UI::Shell::PropertiesSystem::PROPERTYKEY,
+        System::{
+            Com::{CLSCTX_ALL, STGM_READ},
+            WinRT::EventRegistrationToken,
+        },
     },
 };
 use windows_core::Interface;
@@ -158,8 +161,8 @@ impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler_Impl {
 impl IAudioSessionNotification_Impl for MediaDeviceEventHandler_Impl {
     fn OnSessionCreated(
         &self,
-        _new_session: Option<&IAudioSessionControl>,
-    ) -> windows::core::Result<()> {
+        _newsession: windows_core::Ref<'_, IAudioSessionControl>,
+    ) -> windows_core::Result<()> {
         // println!("SESSION CREATED!")
         Ok(())
     }
@@ -462,9 +465,7 @@ impl MediaManager {
             self.device_enumerator
                 .GetDefaultAudioEndpoint(dataflow, role)
                 .and_then(|d| d.GetId())
-                .and_then(|id| id.to_hstring())
-                .map(|id| id.to_string())
-                .map(|id| id == device_id)
+                .map(|id| id.to_hstring() == device_id)
                 .unwrap_or(false)
         }
     }
