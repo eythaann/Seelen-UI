@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- expand power module with power plan.
+
+### features
+- add option to disable app thumbnail generation (dock).
+- allow lock the dock/toolbar items.
+- show instances counter of the same app on dock.
+- allow set the toolbar on different positions.
+
 ## [2.1.9]
 ### fix
 - shortcuts not working on MSIX.
