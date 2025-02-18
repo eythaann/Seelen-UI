@@ -159,6 +159,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             <BackgroundByLayersV2 prefix="item" />
             <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
             {notificationsCount > 0 && <div className="weg-item-badge">{notificationsCount}</div>}
+            {settings.showInstanceCounter && item.windows.length > 1 && <div className="weg-item-instance-counter">{item.windows.length}</div>}
             <div
               className={cx('weg-item-open-sign', {
                 'weg-item-open-sign-active': !!item.windows.length,

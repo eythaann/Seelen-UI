@@ -130,6 +130,23 @@
     font-weight: 600;
     border-radius: 8px;
   }
+
+  .weg-item-instance-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(25%, 25%);
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-900);
+    height: 16px;
+    min-width: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 8px;
+  }
 }
 
 .weg-item-icon {
