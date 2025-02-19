@@ -19,8 +19,6 @@ import { PowerPlan, RootState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
-const settings = await Settings.default();
-
 const initialState: RootState = {
   version: 0,
   items: await invoke(SeelenCommand.StateGetToolbarItems),
@@ -36,7 +34,7 @@ const initialState: RootState = {
   userVideosFolder: [],
   userMusicFolder: [],
   focused: null,
-  settings: settings.fancyToolbar,
+  settings: (await Settings.default()).fancyToolbar,
   env: (await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>,
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {

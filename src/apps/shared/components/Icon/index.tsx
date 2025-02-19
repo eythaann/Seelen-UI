@@ -93,10 +93,10 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
   }
 
   render(): React.ReactNode {
-    const { path: _path, umid: _umid, ...imgProps } = this.props;
+    const { path: _path, umid: _umid, noFallback, ...imgProps } = this.props;
 
     let src = this.state.src;
-    if (!src && !this.props.noFallback) {
+    if (!src && !noFallback) {
       src = MISSING_ICON_SRC;
     }
 

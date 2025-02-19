@@ -1,11 +1,12 @@
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
 use arc_swap::ArcSwap;
 use lazy_static::lazy_static;
 use tauri::{path::BaseDirectory, Manager};
 
 use crate::{
-    error_handler::Result, seelen::get_app_handle, utils::constants::SEELEN_COMMON,
+    error_handler::Result, log_error, seelen::get_app_handle, utils::constants::SEELEN_COMMON,
     windows_api::WindowsApi,
 };
 
@@ -49,6 +50,12 @@ impl StartMenuManager {
     fn init(&mut self) -> Result<()> {
         if self.cache_path.exists() {
             self.load_cache()?;
+            std::thread::spawn(|| {
+                let mut menu = StartMenuManager::new();
+                log_error!(menu.read_start_menu_folders());
+                log_error!(menu.store_cache());
+                START_MENU_MANAGER.swap(Arc::new(menu));
+            });
         } else {
             self.read_start_menu_folders()?;
             self.store_cache()?;
@@ -67,6 +74,10 @@ impl StartMenuManager {
         let item = self.list.iter().find(|item| {
             if let Some(item_umid) = &item.umid {
                 return item_umid == umid;
+            }
+            if let Some(target) = &item.target {
+                // some apps registered as media player as example use the process name as umid
+                return target.ends_with(umid);
             }
             false
         });
