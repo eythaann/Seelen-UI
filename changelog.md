@@ -15,6 +15,9 @@
 ### refactor
 - update windows-rs crate to 0.59.0.
 
+### fix
+- showing domain on username for local accounts.
+
 ## [2.1.9]
 ### fix
 - shortcuts not working on MSIX.

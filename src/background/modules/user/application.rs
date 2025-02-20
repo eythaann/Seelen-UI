@@ -159,7 +159,7 @@ impl UserManager {
                 // A legacy account name (for example, Engineering\JSmith).
                 // The domain-only version includes trailing backslashes (\).
                 let name = WindowsApi::get_username(NameSamCompatible)?;
-                let name = name.trim_start_matches(&format!("{}\\", domain));
+                let name = name.split("\\").last().unwrap_or_default();
                 match name.is_empty() {
                     true => Err("Empty username".into()),
                     false => Ok(name.to_string()),
