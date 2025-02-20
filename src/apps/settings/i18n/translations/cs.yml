@@ -227,6 +227,7 @@ toolbar:
   auto_hide: Automatická skrýt
   delay_to_hide: Odložit se schovat
   delay_to_show: Zpoždění zobrazení
+  dock_side: Pozice
   enable: Povolte ozdobný panel nástrojů
   height: Výška
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Vždy
       label: Viditelnost připnutých položek
       when_primary: Když je monitor primární
+    show_instance_counter: Zobrazení počítadla otevřených oken
     size: Velikost položky
     temporal_visibility:
       all: Vše
       label: Viditelnost nepřipnutých položek
       on_monitor: Na monitoru
+    thumbnail_generation_enabled: Generování miniatur při najetí na položku
     visible_separators: Viditelné separátory
     zoom_size: Zvětšená velikost (použitá pro témata)
   label: Dock/TaskBar

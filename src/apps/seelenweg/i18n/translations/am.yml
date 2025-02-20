@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: በቀኝ በኩል ፒን
   run_as: እንደ አስተዳዳሪ ይሮጡ
   unpin: እየቀነሰ ይሄዳል
+context_menu:
+  reorder_disable: የተግባር አሞሌ
+  reorder_enable: የተካሄደውን ሥራ ይክፈቱ
 media:
   not_playing: ምንም የሚጫወት የለም
 media_menu:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Иловаи модул
   remove: Модулро хориҷ кунед
+  reorder_disable: Лок
+  reorder_enable: Ворид кардани панели асбобҳо
   settings: Танзимотҳо
   task_manager: Менеҷери вазифа
 media:

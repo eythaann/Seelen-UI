@@ -1,6 +1,8 @@
 context_menu:
   add_module: Модулийг нэмэх
   remove: Модулийг зайлуулах
+  reorder_disable: Цонхны түгжээ
+  reorder_enable: Хэрэгслийн самбарыг нээнэ үү
   settings: Тохиргоо
   task_manager: Ажлын менежер
 media:

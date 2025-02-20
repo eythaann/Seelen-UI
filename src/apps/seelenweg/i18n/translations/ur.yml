@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: دائیں سے پن
   run_as: انتظامیہ کے طورپر چلانا
   unpin: انپن
+context_menu:
+  reorder_disable: لاک ٹاسک بار
+  reorder_enable: ٹاسک بار کو غیر مقفل کریں
 media:
   not_playing: کچھ نہیں کھیل رہا ہے
 media_menu:

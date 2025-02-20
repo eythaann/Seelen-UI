@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Fissa a Destra
   run_as: Esegui come Amministratore
   unpin: Rimuovi
+context_menu:
+  reorder_disable: Blocco della barra delle applicazioni
+  reorder_enable: Sbloccare la barra delle applicazioni
 media:
   not_playing: Nulla in riproduzione
 media_menu:

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Закріпити зправа
   run_as: Запустити від імені адміністратора
   unpin: Відкріпити
+context_menu:
+  reorder_disable: Блокування панелі завдань
+  reorder_enable: Розблокувати панель завдань
 media:
   not_playing: Аудіо не відтворюється
 media_menu:

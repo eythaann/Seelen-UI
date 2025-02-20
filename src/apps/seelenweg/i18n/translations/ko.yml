@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: 오른쪽에 고정
   run_as: 관리자 권한으로 실행
   unpin: 고정 해제
+context_menu:
+  reorder_disable: 작업 표시줄 잠금
+  reorder_enable: 작업 표시줄 잠금 해제
 media:
   not_playing: 재생 중인 항목 없음
 media_menu:

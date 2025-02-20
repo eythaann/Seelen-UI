@@ -1,6 +1,8 @@
 context_menu:
   add_module: モジュールを追加します
   remove: モジュールを削除します
+  reorder_disable: ツールバーのロック
+  reorder_enable: ツールバーのロック解除
   settings: 設定
   task_manager: タスクマネージャー
 media:

@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Auto paslēpt
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
+  dock_side: Pozīcija
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Vienmēr
       label: Piesprausto vienumu redzamība
       when_primary: Kad monitors ir primārais
+    show_instance_counter: Parādīt atvērto logu skaitītāju
     size: Vienuma izmērs
     temporal_visibility:
       all: Visi
       label: Atsprausto vienumu redzamība
       on_monitor: Uz monitora
+    thumbnail_generation_enabled: Ģenerēt sīktēlus, kad vienums tiek novietots ar kursoru
     visible_separators: Redzami atdalītāji
     zoom_size: Tuvināta izmēra (izmanto tēmām)
   label: Doks/uzdevumjosla

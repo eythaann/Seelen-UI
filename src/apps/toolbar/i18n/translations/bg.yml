@@ -1,6 +1,8 @@
 context_menu:
   add_module: Добавете модул
   remove: Премахване на модула
+  reorder_disable: Заключване на лентата с инструменти
+  reorder_enable: Отключване на лентата с инструменти
   settings: Настройки
   task_manager: Диспечер на задачите
 media:

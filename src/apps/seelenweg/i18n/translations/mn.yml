@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Баруун тийш зүү
   run_as: Администратороор ажиллуулах
   unpin: Нууц
+context_menu:
+  reorder_disable: Түгжих ажлын самбар
+  reorder_enable: Taskbar түгжээг тайл
 media:
   not_playing: Юу ч тоглоогүй байна
 media_menu:

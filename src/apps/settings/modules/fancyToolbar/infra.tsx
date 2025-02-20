@@ -35,7 +35,7 @@ export function FancyToolbarSettings() {
       <SettingsGroup>
         <SettingsSubGroup label={t('toolbar.label')}>
           <SettingsOption>
-            <b>{t('toolbar.height')}</b>
+            <span>{t('toolbar.height')}</span>
             <InputNumber
               value={settings.height}
               onChange={(value) => dispatch(FancyToolbarActions.setHeight(value || 0))}
@@ -43,7 +43,7 @@ export function FancyToolbarSettings() {
             />
           </SettingsOption>
           <SettingsOption>
-            <div>{t('toolbar.dock_side')}</div>
+            <span>{t('toolbar.dock_side')}</span>
             <Button.Group style={{ width: '60px' }}>
               {Object.values(FancyToolbarSide).map((side) => (
                 <Button
@@ -82,7 +82,7 @@ export function FancyToolbarSettings() {
             />
           </SettingsOption>
           <SettingsOption>
-            <b>{t('toolbar.delay_to_show')} (ms)</b>
+            <span>{t('toolbar.delay_to_show')} (ms)</span>
             <InputNumber
               value={delayToShow}
               min={0}
@@ -93,7 +93,7 @@ export function FancyToolbarSettings() {
             />
           </SettingsOption>
           <SettingsOption>
-            <b>{t('toolbar.delay_to_hide')} (ms)</b>
+            <span>{t('toolbar.delay_to_hide')} (ms)</span>
             <InputNumber
               value={delayToHide}
               min={0}

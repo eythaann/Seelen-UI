@@ -1,6 +1,8 @@
 context_menu:
   add_module: தொகுதி சேர்க்கவும்
   remove: தொகுதியை அகற்று
+  reorder_disable: பூட்டு கருவிப்பட்டி
+  reorder_enable: கருவிப்பட்டியைத் திறக்கவும்
   settings: அமைப்புகள்
   task_manager: பணி மேலாளர்
 media:

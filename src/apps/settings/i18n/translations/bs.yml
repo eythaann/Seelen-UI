@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Auto se sakrio
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
+  dock_side: Položaj
   enable: Omogući fantastičnu alatnu traku
   height: Visina
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Uvijek
       label: Vidljivost zakačenih stavki
       when_primary: Kada je monitor primarni
+    show_instance_counter: Prikaži brojač za otvorene prozore
     size: Veličina predmeta
     temporal_visibility:
       all: Sve
       label: Vidljivost nezakačenih stavki
       on_monitor: Na monitoru
+    thumbnail_generation_enabled: Generirajte sličice na povuci
     visible_separators: Vidljivi separatori
     zoom_size: Povećana veličina (koristi se za teme)
   label: Dock / programska traka

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Bættu við einingu
   remove: Fjarlægðu eininguna
+  reorder_disable: Læsa tækjastiku
+  reorder_enable: Opnaðu tækjastiku
   settings: Stillingar
   task_manager: Verkefnastjóri
 media:

@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Auto Ocultar
   delay_to_hide: Retrasar para ocultar
   delay_to_show: Retraso para mostrar
+  dock_side: Posición
   enable: Activar la barra de herramientas Fancy
   height: Altura
   hide_mode:
@@ -283,11 +284,13 @@ weg:
       always: Siempre
       label: Visibilidad de los elementos anclados
       when_primary: Cuando el monitor es primario
+    show_instance_counter: Mostrar contador de ventanas abiertas
     size: Tamaño del artículo
     temporal_visibility:
       all: Todos
       label: Visibilidad de los elementos no fijados
       on_monitor: En monitor
+    thumbnail_generation_enabled: Generar miniaturas al pasar el ratón por encima de un elemento
     visible_separators: Separadores visibles
     zoom_size: Tamaño ampliado (utilizado para temas)
   label: Muelle/Barra de Muelle

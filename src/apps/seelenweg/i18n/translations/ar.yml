@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: ثبت الملف على اليمين
   run_as: تشغيل كمسؤول
   unpin: إزالة التثبيت
+context_menu:
+  reorder_disable: قفل شريط المهام
+  reorder_enable: فتح شريط المهام
 media:
   not_playing: لا توجد ملفات
 media_menu:

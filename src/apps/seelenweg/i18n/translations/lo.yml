@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: PIN ກັບຂວາ
   run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
   unpin: unppin
+context_menu:
+  reorder_disable: ລັອກ task task
+  reorder_enable: ປົດລ taskbar taskbar
 media:
   not_playing: ບໍ່ມີຫຍັງຫຼີ້ນ
 media_menu:

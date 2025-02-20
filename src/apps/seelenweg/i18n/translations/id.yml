@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin ke kanan
   run_as: Jalankan sebagai administrator
   unpin: Membuka peniti
+context_menu:
+  reorder_disable: Mengunci bilah tugas
+  reorder_enable: Buka kunci bilah tugas
 media:
   not_playing: Tidak ada yang bermain
 media_menu:

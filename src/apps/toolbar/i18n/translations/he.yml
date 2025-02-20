@@ -1,6 +1,8 @@
 context_menu:
   add_module: הוסף מודול
   remove: הסר את המודול
+  reorder_disable: סרגל הכלים לנעול
+  reorder_enable: בטל את סרגל הכלים
   settings: הגדרות
   task_manager: מנהל משימות
 media:

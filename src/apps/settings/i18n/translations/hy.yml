@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Ավտոմատ թաքցնել
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
+  dock_side: Դիրք
   enable: Միացնել Fancy Toolbar- ը
   height: Բարձրություն
   hide_mode:
@@ -279,11 +280,13 @@ weg:
       always: Միշտ
       label: Ամրացված տարրերի տեսանելիություն
       when_primary: Երբ մոնիտորը առաջնային է
+    show_instance_counter: Counter ույց տալ հաշվիչ բաց պատուհանների համար
     size: Ապրանքի չափը
     temporal_visibility:
       all: Բոլորը
       label: Չամրացված տարրերի տեսանելիություն
       on_monitor: Մոնիտորի վրա
+    thumbnail_generation_enabled: Ստեղծեք մանրապատկերներ Hover իրերի վրա
     visible_separators: Տեսանելի տարանջատիչներ
     zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
   label: Dock / Taskbar

@@ -224,6 +224,7 @@ toolbar:
   auto_hide: Ibi ipamọ aifọwọyi
   delay_to_hide: Idaduro lati tọju
   delay_to_show: Idaduro lati ṣafihan
+  dock_side: Ipo
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
   height: Giga
   hide_mode:
@@ -270,11 +271,13 @@ weg:
       always: Nigbagbogbo
       label: Pini Awọn nkan Hihan
       when_primary: Nigbati atẹle jẹ akọkọ
+    show_instance_counter: Fihan counter fun awọn Windows ṣiṣi
     size: Iwọn nkan
     temporal_visibility:
       all: Gbogbo
       label: Hihan Awọn nkan ti a ko pin
       on_monitor: Lori Atẹle
+    thumbnail_generation_enabled: Ṣe agbekalẹ awọn eekanna atanpako lori rababa nkan
     visible_separators: Awọn iyatọ ti o han
     zoom_size: Iwọn sisun (ti a lo fun awọn akori)
   label: Dock / forkbar

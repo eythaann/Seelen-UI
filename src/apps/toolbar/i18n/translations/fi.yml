@@ -1,6 +1,8 @@
 context_menu:
   add_module: Lisää moduuli
   remove: Poista moduuli
+  reorder_disable: Lukitse työkalurivi
+  reorder_enable: Avaa työkalurivi
   settings: Asetukset
   task_manager: Tehtävienhallinta
 media:

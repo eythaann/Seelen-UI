@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Kaištis į dešinę
   run_as: Vykdykite kaip administratorius
   unpin: Unpin
+context_menu:
+  reorder_disable: Užrakinti užduočių juostą
+  reorder_enable: Užduočių juostos atrakinimas
 media:
   not_playing: Niekas nežaidžia
 media_menu:

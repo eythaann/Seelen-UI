@@ -1,6 +1,8 @@
 context_menu:
   add_module: បន្ថែមម៉ូឌុល
   remove: យកម៉ូឌុលចេញ
+  reorder_disable: ចាក់សោរបារឧបករណ៍
+  reorder_enable: ដោះសោរបារឧបករណ៍ដោះសោរបារឧបករណ៍
   settings: ការកំណត់
   task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
 media:

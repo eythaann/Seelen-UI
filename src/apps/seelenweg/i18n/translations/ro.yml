@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin la dreapta
   run_as: Rulat ca administrator
   unpin: Unpin
+context_menu:
+  reorder_disable: Blocarea barei de activități
+  reorder_enable: Deblocați bara de activități
 media:
   not_playing: Nimic nu se joacă
 media_menu:

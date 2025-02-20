@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin til højre
   run_as: Kør som administrator
   unpin: Unpin
+context_menu:
+  reorder_disable: Lås proceslinjen
+  reorder_enable: Lås proceslinjen op
 media:
   not_playing: Intet spiller
 media_menu:

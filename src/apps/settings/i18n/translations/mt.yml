@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
+  dock_side: Pożizzjoni
   enable: Jippermetti toolbar tal-fancy
   height: Għoli
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: Dejjem
       label: Oġġetti Pinnjati Viżibilità
       when_primary: Meta l-monitor huwa primarju
+    show_instance_counter: Uri Counter Għal Windows Miftuħa
     size: Daqs tal-oġġett
     temporal_visibility:
       all: Kollha
       label: Oġġetti Unpinned Viżibilità
       on_monitor: Fuq Monitor
+    thumbnail_generation_enabled: Iġġenera minjaturi fuq l-oġġett li jtellgħu
     visible_separators: Separaturi viżibbli
     zoom_size: Daqs miżjud (użat għat-temi)
   label: Dock / Taskbar

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Modul əlavə edin
   remove: Modulu çıxarın
+  reorder_disable: Lövhə
+  reorder_enable: Toolbar kilidini açın
   settings: Parametrlər
   task_manager: Tapşırıq meneceri
 media:

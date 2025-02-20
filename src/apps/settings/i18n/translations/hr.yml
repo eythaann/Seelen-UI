@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Auto sakrij
   delay_to_hide: Odgoda za skrivanje
   delay_to_show: Odgoditi prikaz
+  dock_side: Položaj
   enable: Omogućite maštovitu alatnu traku
   height: Visina
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: Uvijek
       label: Vidljivost prikvačenih stavki
       when_primary: Kada je monitor primarni
+    show_instance_counter: Prikaži brojač za otvorene prozore
     size: Veličina predmeta
     temporal_visibility:
       all: Sve
       label: Vidljivost otkvačenih stavki
       on_monitor: Na monitoru
+    thumbnail_generation_enabled: Generirati sličice na predmetu lebde
     visible_separators: Vidljivi separatori
     zoom_size: Zumirana veličina (koristi se za teme)
   label: Pristanište/trag

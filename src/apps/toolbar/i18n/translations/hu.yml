@@ -1,6 +1,8 @@
 context_menu:
   add_module: Adjon hozzá modult
   remove: Távolítsa el a modult
+  reorder_disable: Eszköztár zárolása
+  reorder_enable: Eszköztár feloldása
   settings: Beállítások elemre
   task_manager: Feladatkezelő
 media:

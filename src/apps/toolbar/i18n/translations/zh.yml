@@ -1,6 +1,8 @@
 context_menu:
   add_module: 添加模块
   remove: 删除模块
+  reorder_disable: 锁定工具栏
+  reorder_enable: 解锁工具栏
   settings: 设置
   task_manager: 任务管理器
 media:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Pievienot moduli
   remove: Noņemt moduli
+  reorder_disable: Instrumentu joslas bloķēšana
+  reorder_enable: Rīkjoslas atbloķēšana
   settings: Iestatījumi
   task_manager: Uzdevumu pārvaldnieks
 media:

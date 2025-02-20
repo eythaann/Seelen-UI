@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin doprava
   run_as: Spustit jako administrátor
   unpin: Unlin
+context_menu:
+  reorder_disable: Uzamčení hlavního panelu
+  reorder_enable: Odemknutí hlavního panelu
 media:
   not_playing: Nic nehraje
 media_menu:

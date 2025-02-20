@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Automatisch ausblenden
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
+  dock_side: Position
   enable: Elegante Werkzeugleiste aktivieren
   height: Höhe
   hide_mode:
@@ -279,11 +280,13 @@ weg:
       always: Stets
       label: Sichtbarkeit angehefteter Elemente
       when_primary: Wenn der Monitor primär ist
+    show_instance_counter: Zähler für offene Fenster anzeigen
     size: Elementgröße
     temporal_visibility:
       all: Alle
       label: Sichtbarkeit nicht angehefteter Elemente
       on_monitor: Auf dem Monitor
+    thumbnail_generation_enabled: Erzeugen von Miniaturbildern beim Hovern eines Artikels
     visible_separators: Sichtbare Trennzeichen
     zoom_size: Vergrößerte Größe (für Themen verwendet)
   label: Dock/Taskleiste

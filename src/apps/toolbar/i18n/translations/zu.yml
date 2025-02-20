@@ -1,6 +1,8 @@
 context_menu:
   add_module: Engeza imodyuli
   remove: Susa module
+  reorder_disable: Khiya i-Toolbar
+  reorder_enable: Vula ithuluzi lamathuluzi
   settings: Izilungiselelo
   task_manager: Umphathi Womsebenzi
 media:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: মডিউল যুক্ত করুন
   remove: মডিউল সরান
+  reorder_disable: লক টুলবার
+  reorder_enable: সরঞ্জামদণ্ড আনলক করুন
   settings: সেটিংস
   task_manager: টাস্ক ম্যানেজার
 media:

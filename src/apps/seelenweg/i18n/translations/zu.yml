@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin kwesokudla
   run_as: Gijima njengomlawuli
   unpin: Unpin
+context_menu:
+  reorder_disable: Khiya i-taskbar
+  reorder_enable: Vula i-Taskbar
 media:
   not_playing: Akukho okudlalayo
 media_menu:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Thêm mô -đun
   remove: Xóa mô -đun
+  reorder_disable: Thanh công cụ khóa
+  reorder_enable: Mở khóa thanh công cụ
   settings: Cài đặt
   task_manager: Trình quản lý tác vụ
 media:

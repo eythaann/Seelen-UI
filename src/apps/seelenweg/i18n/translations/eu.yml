@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: PIN eskuin
   run_as: Exekutatu administratzaile gisa
   unpin: Desjendu
+context_menu:
+  reorder_disable: Blokeatu ataza barra
+  reorder_enable: Desblokeatu ataza barra
 media:
   not_playing: Ez da ezer jolasten
 media_menu:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Dodaj moduł
   remove: Usuń moduł
+  reorder_disable: Blokada paska narzędzi
+  reorder_enable: Odblokuj pasek narzędzi
   settings: Ustawienia
   task_manager: Menedżer zadań
 media:

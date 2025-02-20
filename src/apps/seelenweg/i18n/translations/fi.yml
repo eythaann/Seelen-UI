@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pistä oikealle
   run_as: Suorita järjestelmänvalvojana
   unpin: Purkaa
+context_menu:
+  reorder_disable: Lukitse tehtäväpalkki
+  reorder_enable: Tehtäväpalkin lukituksen avaaminen
 media:
   not_playing: Mikään ei pelaa
 media_menu:

@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Автоматско скриј
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
+  dock_side: Позиција
   enable: Овозможете фенси лента со алатки
   height: Висина
   hide_mode:
@@ -279,11 +280,13 @@ weg:
       always: Секогаш
       label: Видливост на закачени ставки
       when_primary: Кога мониторот е примарен
+    show_instance_counter: Покажете бројач за отворени прозорци
     size: Големина на артикалот
     temporal_visibility:
       all: Сите
       label: Видливост на откачени ставки
       on_monitor: На монитор
+    thumbnail_generation_enabled: Генерираат сликички на лебди на артикли
     visible_separators: Видливи сепаратори
     zoom_size: Зумирана големина (се користи за теми)
   label: Док/лента со задачи

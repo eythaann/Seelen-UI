@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: 固定到右侧
   run_as: 以管理员身份运行
   unpin: 取消固定
+context_menu:
+  reorder_disable: 锁定任务栏
+  reorder_enable: 解锁任务栏
 media:
   not_playing: 未播放任何内容
 media_menu:

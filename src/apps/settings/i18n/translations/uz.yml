@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Avtomatik yashirish
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
+  dock_side: Pozitsiya
   enable: Fashr asboblar panelini yoqing
   height: Balandlik
   hide_mode:
@@ -279,11 +280,13 @@ weg:
       always: Har doim
       label: Belgilangan elementlarning ko'rinishi
       when_primary: Monitor asosiy bo'lganda
+    show_instance_counter: Ochiq derazalarga peshtaxtalarni ko'rsatish
     size: Element hajmi
     temporal_visibility:
       all: Hammasi
       label: Ochilmagan elementlarning ko'rinishi
       on_monitor: Monitorda
+    thumbnail_generation_enabled: Hover Hover-da eskizlarni yarating
     visible_separators: Ko'rinadigan ajratuvchi
     zoom_size: Zomed o'lchami (mavzular uchun ishlatiladi)
   label: Dok / vazifalar paneli

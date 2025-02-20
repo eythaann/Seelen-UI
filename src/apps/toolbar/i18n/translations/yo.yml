@@ -1,6 +1,8 @@
 context_menu:
   add_module: Fikun module
   remove: Yọ module
+  reorder_disable: Ọpa irinṣẹ Titiipa
+  reorder_enable: Ṣii bọtini irinṣẹ
   settings: Eto
   task_manager: Oluṣakoso iṣẹ-ṣiṣe
 media:

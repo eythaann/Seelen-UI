@@ -227,6 +227,7 @@ toolbar:
   auto_hide: Авто гүнд
   delay_to_hide: Нуухыг хойшлуулах
   delay_to_show: Үзүүлэхийг хойшлуулсан
+  dock_side: Байрлал
   enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
   height: Өндөрлөг
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Үргэлж
       label: Тогтсон зүйлсийн харагдах байдал
       when_primary: Монитор анхдагч байх үед
+    show_instance_counter: Нээлттэй цонхны тоолуурыг харуул
     size: Зүйлийн хэмжээ
     temporal_visibility:
       all: Бүгд
       label: Тодруулаагүй зүйлсийн харагдах байдал
       on_monitor: Монитор дээр
+    thumbnail_generation_enabled: Барааны Hover дээр Thumbnails үүсгэх
     visible_separators: Харагдах тусгаарлагч
     zoom_size: Томруулсан хэмжээ (сэдэвт ашигладаг)
   label: Док / Taskbar

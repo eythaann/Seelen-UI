@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: જમણી બાજુ
   run_as: વહીવટકર્તા તરીકે ચલાવો
   unpin: ખોળવું
+context_menu:
+  reorder_disable: ટાસ્કબાર
+  reorder_enable: ટાસ્કબારને અનલ lock ક કરો
 media:
   not_playing: કંઈ રમી રહ્યું નથી
 media_menu:

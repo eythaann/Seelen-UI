@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Rechts anheften
   run_as: Als Administrator ausführen
   unpin: Lösen
+context_menu:
+  reorder_disable: Taskleiste sperren
+  reorder_enable: Taskleiste entsperren
 media:
   not_playing: Nichts spielt
 media_menu:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Modul hinzufügen
   remove: Modul entfernen
+  reorder_disable: Symbolleiste sperren
+  reorder_enable: Symbolleiste entsperren
   settings: Einstellungen
   task_manager: Task-Manager
 media:

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Игла надесно
   run_as: Работи како администратор
   unpin: Unpin
+context_menu:
+  reorder_disable: Заклучете ја лентата со задачи
+  reorder_enable: Отклучете ја лентата со задачи
 media:
   not_playing: Ништо не игра
 media_menu:

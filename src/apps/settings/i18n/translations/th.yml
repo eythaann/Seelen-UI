@@ -223,6 +223,7 @@ toolbar:
   auto_hide: ซ่อนอัตโนมัติ
   delay_to_hide: ล่าช้าในการซ่อน
   delay_to_show: ล่าช้าในการแสดง
+  dock_side: ตำแหน่ง
   enable: เปิดใช้งานแถบเครื่องมือแฟนซี
   height: ความสูง
   hide_mode:
@@ -269,11 +270,13 @@ weg:
       always: เสมอ
       label: การมองเห็นรายการที่ปักหมุด
       when_primary: เมื่อมอนิเตอร์เป็นเครื่องหลัก
+    show_instance_counter: แสดงเคาน์เตอร์สำหรับ Windows ที่เปิดอยู่
     size: ขนาดรายการ
     temporal_visibility:
       all: ทั้งหมด
       label: การมองเห็นรายการที่เลิกปักหมุด
       on_monitor: บนจอภาพ
+    thumbnail_generation_enabled: สร้างภาพขนาดย่อบนรายการโฮเวอร์
     visible_separators: ตัวแยกที่มองเห็นได้
     zoom_size: ขนาดซูม (ใช้สำหรับธีม)
   label: แท่นวาง/บาร์

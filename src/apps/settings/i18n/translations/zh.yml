@@ -218,6 +218,7 @@ toolbar:
   auto_hide: 自动隐藏
   delay_to_hide: 延迟隐藏
   delay_to_show: 延迟显示
+  dock_side: 职位
   enable: 启用精美工具栏
   height: 高度
   hide_mode:
@@ -264,11 +265,13 @@ weg:
       always: 总是
       label: 固定项目可见性
       when_primary: 当显示器为主要显示器时
+    show_instance_counter: 显示打开窗口的计数器
     size: 项目大小
     temporal_visibility:
       all: 全部
       label: 未固定项目的可见性
       on_monitor: 在监视器上
+    thumbnail_generation_enabled: 项目悬停时生成缩略图
     visible_separators: 可见分隔符
     zoom_size: 缩放尺寸（用于主题）
   label: Dock / 任务栏

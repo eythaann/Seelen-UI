@@ -1,6 +1,8 @@
 context_menu:
   add_module: Lägg till modul
   remove: Ta bort modulen
+  reorder_disable: Lås verktygsfältet
+  reorder_enable: Lås upp verktygsfältet
   settings: Inställningar
   task_manager: Task Manager
 media:

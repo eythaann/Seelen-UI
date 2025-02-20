@@ -1,6 +1,8 @@
 context_menu:
   add_module: මොඩියුලය එක් කරන්න
   remove: මොඩියුලය ඉවත් කරන්න
+  reorder_disable: අගුළු මෙවලම් තීරුව
+  reorder_enable: මෙවලම් තීරුව අගුළු ඇරීම
   settings: සැකසීම්
   task_manager: කාර්ය කළමනාකරු
 media:

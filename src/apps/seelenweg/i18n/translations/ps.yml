@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: ښیې خوا ته
   run_as: د مدیر په توګه چلول
   unpin: غیر رنګ
+context_menu:
+  reorder_disable: ټاسک بار
+  reorder_enable: د ټاسلف بار
 media:
   not_playing: هیڅ شی نه لوبیږی
 media_menu:

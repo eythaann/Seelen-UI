@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin i'r dde
   run_as: Rhedeg fel Gweinyddwr
   unpin: Dadleuon
+context_menu:
+  reorder_disable: Bar tasgau clo
+  reorder_enable: Datgloi Bar Tasg
 media:
   not_playing: Nid oes dim yn chwarae
 media_menu:

@@ -227,6 +227,7 @@ toolbar:
   auto_hide: Automatesch
   delay_to_hide: Verspéidung ze verstoppen
   delay_to_show: Verspéidung fir ze weisen
+  dock_side: Positioun un
   enable: Aktivéiert Fore Toolbar
   height: Héicht
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Ëmmer
       label: Pinned Elementer Visibilitéit
       when_primary: Wann de Monitor primär ass
+    show_instance_counter: Show Konter fir oppenen Fensteren
     size: Telefonsgrouss
     temporal_visibility:
       all: All
       label: Unpinned Elementer Visibilitéit
       on_monitor: Op Monitor
+    thumbnail_generation_enabled: Generéiere Miniatur op Artikel Hover
     visible_separators: Sechsi seichtbar Seperure
     zoom_size: Zoomed Gréisst (benotzt fir Themen)
   label: Dock / Taskbar

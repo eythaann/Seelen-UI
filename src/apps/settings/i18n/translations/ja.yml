@@ -221,6 +221,7 @@ toolbar:
   auto_hide: 自動的に隠す
   delay_to_hide: 隠れるまでの遅延
   delay_to_show: 表示が遅れる
+  dock_side: ポジション
   enable: ツールバーを有効にする
   height: 高さ
   hide_mode:
@@ -267,11 +268,13 @@ weg:
       always: いつも
       label: ピン留めされたアイテムの表示設定
       when_primary: モニターがプライマリの場合
+    show_instance_counter: 開いているウィンドウのカウンターを表示する
     size: アイテムのサイズ
     temporal_visibility:
       all: 全て
       label: 固定されていないアイテムの表示設定
       on_monitor: モニター上
+    thumbnail_generation_enabled: アイテムのホバー時にサムネイルを生成
     visible_separators: セパレーターを表示する
     zoom_size: ズームされたときのサイズ（一部のテーマで使用）
   label: ドック（タスクバー）

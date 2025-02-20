@@ -1,6 +1,8 @@
 context_menu:
   add_module: Lisage moodul
   remove: Eemaldage moodul
+  reorder_disable: Tööriistariba lukustamine
+  reorder_enable: Tööriistariba avamine
   settings: Seaded
   task_manager: Tegumihaldur
 media:

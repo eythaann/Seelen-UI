@@ -227,6 +227,7 @@ toolbar:
   auto_hide: Automaticky skryť
   delay_to_hide: Odložiť skryť
   delay_to_show: Oneskorenie zobrazenia
+  dock_side: Pozícia
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Vždy
       label: Viditeľnosť pripnutých položiek
       when_primary: Keď je monitor primárny
+    show_instance_counter: Zobrazenie počítadla otvorených okien
     size: Veľkosť položky
     temporal_visibility:
       all: Všetky
       label: Viditeľnosť nepripnutých položiek
       on_monitor: Na monitore
+    thumbnail_generation_enabled: Generovanie miniatúr pri umiestnení položky na myši
     visible_separators: Viditeľné oddeľovače
     zoom_size: Zväčšená veľkosť (používa sa na témy)
   label: Prístavný panel

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Špendlík
   run_as: Spustiť ako správca
   unpin: Zaniknúť
+context_menu:
+  reorder_disable: Uzamknutie panela úloh
+  reorder_enable: Odomknutie panela úloh
 media:
   not_playing: Nič nehrá
 media_menu:

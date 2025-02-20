@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Persembunyian otomatis
   delay_to_hide: Penundaan untuk bersembunyi
   delay_to_show: Keterlambatan untuk ditampilkan
+  dock_side: Posisi
   enable: Aktifkan toolbar mewah
   height: Tinggi
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: Selalu
       label: Visibilitas Item yang Disematkan
       when_primary: Saat monitor menjadi yang utama
+    show_instance_counter: Tampilkan penghitung untuk jendela yang terbuka
     size: Ukuran item
     temporal_visibility:
       all: Semua
       label: Visibilitas Item yang Tidak Disematkan
       on_monitor: Di Monitor
+    thumbnail_generation_enabled: Menghasilkan gambar mini pada hover item
     visible_separators: Pemisah yang terlihat
     zoom_size: Ukuran zoom (digunakan untuk tema)
   label: Dock/Taskbar

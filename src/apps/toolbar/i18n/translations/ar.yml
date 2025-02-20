@@ -1,6 +1,8 @@
 context_menu:
   add_module: إضافة الوحدة النمطية
   remove: إزالة الوحدة النمطية
+  reorder_disable: قفل شريط الأدوات
+  reorder_enable: فتح شريط الأدوات
   settings: إعدادات
   task_manager: مدير المهام
 media:

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin a la dreta
   run_as: Executa com administrador
   unpin: Desfeta
+context_menu:
+  reorder_disable: Barra de tasques de bloqueig
+  reorder_enable: Desbloqueja la barra de tasques
 media:
   not_playing: Res està jugant
 media_menu:

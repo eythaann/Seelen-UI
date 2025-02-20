@@ -1,6 +1,8 @@
 context_menu:
   add_module: Modül ekle
   remove: Modülü Kaldır
+  reorder_disable: Araç çubuğunu kilitle
+  reorder_enable: Araç çubuğunun kilidini aç
   settings: Ayarlar
   task_manager: Görev Yöneticisi
 media:

@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Auto qaraha
   delay_to_hide: Dib u dhig si loo qariyo
   delay_to_show: Dib u dhig si loo muujiyo
+  dock_side: Meel
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
   hide_mode:
@@ -281,11 +282,13 @@ weg:
       always: Had iyo jeer
       label: Shayga Ku dheggan Muuqaal
       when_primary: Marka kormeeruhu uu yahay aasaasiga
+    show_instance_counter: Muuji miiska loo yaqaan daaqadaha furan
     size: Shayga cabirka
     temporal_visibility:
       all: Dhammaan
       label: Aragtida Shayada Furan
       on_monitor: On Monitor
+    thumbnail_generation_enabled: Abuur thumbnails on sheyga
     visible_separators: Kala-sooca muuqda
     zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
   label: Dock / Tootshar

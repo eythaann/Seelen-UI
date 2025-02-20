@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: PIN op riets
   run_as: Lafen als Administrator
   unpin: Net unsträichen
+context_menu:
+  reorder_disable: Lock Taskbar
+  reorder_enable: Spär Taskbar
 media:
   not_playing: Näischt spillt
 media_menu:

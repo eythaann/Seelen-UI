@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: ডান পিন
   run_as: প্রশাসক হিসাবে চালান
   unpin: আনপিন
+context_menu:
+  reorder_disable: লক টাস্কবার
+  reorder_enable: টাস্কবার আনলক করুন
 media:
   not_playing: কিছুই খেলছে না
 media_menu:

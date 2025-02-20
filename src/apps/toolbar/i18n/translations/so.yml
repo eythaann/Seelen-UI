@@ -1,6 +1,8 @@
 context_menu:
   add_module: Ku dar module
   remove: Ka saar cutubka
+  reorder_disable: Quful aalad
+  reorder_enable: Fur furaha aaladda
   settings: Dejinta
   task_manager: Maareeyaha Hawsha
 media:

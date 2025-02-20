@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dröjsmål att gömma sig
   delay_to_show: Fördröjning att visa
+  dock_side: Position
   enable: Aktivera snyggt verktygsfält
   height: Höjd
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: Alltid
       label: Synlighet för fästa objekt
       when_primary: När monitorn är primär
+    show_instance_counter: Visa räknare för öppna fönster
     size: Objektstorlek
     temporal_visibility:
       all: Alla
       label: Synlighet för lossade objekt
       on_monitor: På bildskärm
+    thumbnail_generation_enabled: Generera miniatyrbilder när objektet rör sig
     visible_separators: Synliga separatorer
     zoom_size: Zoomad storlek (används för teman)
   label: Docka/arbetsfält

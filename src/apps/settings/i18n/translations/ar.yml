@@ -224,6 +224,7 @@ toolbar:
   auto_hide: الأخفاء التلقائي
   delay_to_hide: تأخير الأخفاء
   delay_to_show: تأخير الظهور
+  dock_side: المنصب
   enable: فعل شريط الأدوات الفاخر
   height: الارتفاع
   hide_mode:
@@ -270,11 +271,13 @@ weg:
       always: دائماً
       label: رؤية العناصر المثبتة
       when_primary: عندما تكون الشاشة أساسية
+    show_instance_counter: إظهار العداد للنوافذ المفتوحة
     size: حجم العنصر
     temporal_visibility:
       all: الجميع
       label: رؤية العناصر غير المثبتة
       on_monitor: على الشاشة
+    thumbnail_generation_enabled: إنشاء صور مصغرة عند تحريك العنصر
     visible_separators: الفواصل المرئية
     zoom_size: حجم المكبر (يستخدم للموضوعات)
   label: قفص الاتهام / شريط المهام

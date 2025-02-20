@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Քորոց աջից
   run_as: Գործարկել որպես ադմինիստրատոր
   unpin: Անապաղում
+context_menu:
+  reorder_disable: Կողպեք առաջադրանքներիբար
+  reorder_enable: Բացել աշխատանքային գիծը
 media:
   not_playing: Ոչինչ չի խաղում
 media_menu:

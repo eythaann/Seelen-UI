@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: PIN na desno
   run_as: Pokreni kao administrator
   unpin: Raskoš
+context_menu:
+  reorder_disable: Zaključajte zadaću
+  reorder_enable: Otključajte zadaću
 media:
   not_playing: Ništa se ne igra
 media_menu:

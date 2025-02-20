@@ -1,6 +1,8 @@
 context_menu:
   add_module: Добавить модуль
   remove: Удалить модуль
+  reorder_disable: Блокировка панели инструментов
+  reorder_enable: Разблокировать панель инструментов
   settings: Настройки
   task_manager: Диспетчер задач
 media:

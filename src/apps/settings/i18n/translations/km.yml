@@ -227,6 +227,7 @@ toolbar:
   auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
   delay_to_hide: ពន្យារពេលដើម្បីលាក់
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
+  dock_side: តីតាមង
   enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
   height: កម្ពស់
   hide_mode:
@@ -273,11 +274,13 @@ weg:
       always: ជានិច្ច
       label: ភាពមើលឃើញធាតុដែលបានខ្ទាស់
       when_primary: នៅពេលដែលម៉ូនីទ័រគឺបឋម
+    show_instance_counter: បង្ហាញការប្រឆាំងសម្រាប់បង្អួចបើកចំហ
     size: ទំហំធាតុ
     temporal_visibility:
       all: ទាំងអស់។
       label: ភាពមើលឃើញធាតុដែលមិនបានខ្ទាស់
       on_monitor: នៅលើម៉ូនីទ័រ
+    thumbnail_generation_enabled: បង្កើតរូបភាពតូចលើការសំកាំងរបស់ធាតុ
     visible_separators: សញ្ញាបំបែកដែលអាចមើលឃើញ
     zoom_size: ទំហំពង្រីក (ប្រើសម្រាប់ស្បែក)
   label: ចត/របារភារកិច្ច

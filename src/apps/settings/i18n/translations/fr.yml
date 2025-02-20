@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Cachette automatique
   delay_to_hide: Retarder pour se cacher
   delay_to_show: Retard à afficher
+  dock_side: Position
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
   hide_mode:
@@ -279,11 +280,13 @@ weg:
       always: Toujours
       label: Visibilité des éléments épinglés
       when_primary: Lorsque le moniteur est principal
+    show_instance_counter: Afficher le compteur des fenêtres ouvertes
     size: Taille de l'article
     temporal_visibility:
       all: Tous
       label: Visibilité des éléments non épinglés
       on_monitor: Sur le moniteur
+    thumbnail_generation_enabled: Générer des vignettes au survol de l'article
     visible_separators: Séparateurs visibles
     zoom_size: Taille agrandie (utilisée pour les thèmes)
   label: Dock/Barre des tâches

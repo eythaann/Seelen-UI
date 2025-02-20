@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Ghim sang phải
   run_as: Chạy như quản trị viên
   unpin: Giải nén
+context_menu:
+  reorder_disable: Khóa thanh tác vụ
+  reorder_enable: Mở khóa Thanh nhiệm vụ
 media:
   not_playing: Không có gì đang chơi
 media_menu:

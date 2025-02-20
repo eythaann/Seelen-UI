@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: 右にピン留め
   run_as: 管理者として実行
   unpin: ピン留めを解除
+context_menu:
+  reorder_disable: タスクバーをロックする
+  reorder_enable: タスクバーのロック解除
 media:
   not_playing: 何も遊んでいません
 media_menu:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Füügt Modul
   remove: Ewechzehuelen Modul
+  reorder_disable: Lock Toolbar
+  reorder_enable: Spär Toolbar
   settings: Astellungen
   task_manager: Aufgab Manager
 media:

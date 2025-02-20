@@ -1,6 +1,8 @@
 context_menu:
   add_module: Afegiu el mòdul
   remove: Elimina el mòdul
+  reorder_disable: Barra d’eines de bloqueig
+  reorder_enable: Desbloqueja la barra d’eines
   settings: Configuració
   task_manager: Gestor de tasques
 media:

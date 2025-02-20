@@ -1,6 +1,8 @@
 context_menu:
   add_module: ماڈیول شامل کریں
   remove: ماڈیول کو ہٹا دیں
+  reorder_disable: لاک ٹول بار
+  reorder_enable: ٹول بار کو انلاک کریں
   settings: ترتیبات
   task_manager: ٹاسک مینیجر
 media:

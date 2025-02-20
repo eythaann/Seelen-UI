@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Пин вдясно
   run_as: Изпълни като администратор
   unpin: Unpin
+context_menu:
+  reorder_disable: Заключване на лентата на задачите
+  reorder_enable: Отключване на лентата на задачите
 media:
   not_playing: Нищо не играе
 media_menu:

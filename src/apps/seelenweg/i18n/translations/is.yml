@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pinna til hægri
   run_as: Hlaupa sem stjórnandi
   unpin: Taka úr
+context_menu:
+  reorder_disable: Læstu verkstiku
+  reorder_enable: Opnaðu verkefnastiku
 media:
   not_playing: Ekkert er að spila
 media_menu:

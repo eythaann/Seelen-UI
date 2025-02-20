@@ -1,6 +1,8 @@
 context_menu:
   add_module: موډل اضافه کړئ
   remove: موډول لرې کړئ
+  reorder_disable: لاک توکپټه
+  reorder_enable: تواکاره توکپټه
   settings: ترتیبات
   task_manager: د دندې مدیر
 media:

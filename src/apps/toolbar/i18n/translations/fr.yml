@@ -1,6 +1,8 @@
 context_menu:
   add_module: Ajouter le module
   remove: Retirer le module
+  reorder_disable: Verrouiller la barre d'outils
+  reorder_enable: Déverrouiller la barre d'outils
   settings: Paramètres
   task_manager: Gestionnaire de tâches
 media:

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin berbi rast
   run_as: Wek Rêvebir bisekinin
   unpin: Unpin
+context_menu:
+  reorder_disable: Taskbar Lock
+  reorder_enable: Taskbar Unlock
 media:
   not_playing: Tiştek nayê lîstin
 media_menu:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: ਮੋਡੀ module ਲ ਸ਼ਾਮਲ ਕਰੋ
   remove: ਮੋਡੀ module ਲ ਹਟਾਓ
+  reorder_disable: ਲਾਕ ਟੂਲਬਾਰ
+  reorder_enable: ਅਨਲੌਕ ਟੂਲਬਾਰ
   settings: ਸੈਟਿੰਗਾਂ
   task_manager: ਟਾਸਕ ਮੈਨੇਜਰ
 media:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: ເພີ່ມໂມດູນ
   remove: ດຶງອອກຈາກໂມດູນ
+  reorder_disable: ແຖບເຄື່ອງມືລັອກ
+  reorder_enable: ແຖບເຄື່ອງມືປົດລັອກ
   settings: ການຕັ້ງຄ່າ
   task_manager: Task Manager
 media:

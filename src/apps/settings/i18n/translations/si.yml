@@ -228,6 +228,7 @@ toolbar:
   auto_hide: ස්වයංක්රීය සැඟවීම
   delay_to_hide: සැඟවීමට ප්රමාද
   delay_to_show: පෙන්වීමට ප්‍රමාදය
+  dock_side: තනතුර
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
   height: උස
   hide_mode:
@@ -274,11 +275,13 @@ weg:
       always: සෑම විටම
       label: අමුණන ලද අයිතම දෘශ්‍යතාව
       when_primary: මොනිටරය ප්රාථමික වන විට
+    show_instance_counter: විවෘත කවුළු සඳහා කවුන්ටරය පෙන්වන්න
     size: අයිතමයේ ප්රමාණය
     temporal_visibility:
       all: සියල්ල
       label: ඇමුණුම් නොකළ අයිතම දෘශ්‍යතාව
       on_monitor: මොනිටරය මත
+    thumbnail_generation_enabled: අයිතමයේ සැරිසරන සිඟිති රූප ජනනය කරන්න
     visible_separators: දෘශ්‍ය බෙදුම්කරුවන්
     zoom_size: විශාලනය කළ ප්‍රමාණය (තේමා සඳහා භාවිතා වේ)
   label: ඩොක්/කාර්ය තීරුව

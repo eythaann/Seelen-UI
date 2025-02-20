@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Épingler à droite
   run_as: Exécuter en tant qu'administrateur
   unpin: Détacher
+context_menu:
+  reorder_disable: Verrouiller la barre des tâches
+  reorder_enable: Déverrouiller la barre des tâches
 media:
   not_playing: Rien ne joue
 media_menu:

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: வலதுபுறம் முள்
   run_as: நிர்வாகியாக செயல்படுங்கள்
   unpin: Unpin
+context_menu:
+  reorder_disable: பணிப்பட்டியைப் பூட்டவும்
+  reorder_enable: பணிப்பட்டியைத் திறக்கவும்
 media:
   not_playing: எதுவும் விளையாடுவதில்லை
 media_menu:

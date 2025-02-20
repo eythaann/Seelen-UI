@@ -231,6 +231,7 @@ toolbar:
   auto_hide: অটো আড়াল
   delay_to_hide: আড়াল করতে বিলম্ব
   delay_to_show: দেখাতে বিলম্ব
+  dock_side: অবস্থান
   enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
   height: উচ্চতা
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: সর্বদা
       label: পিন করা আইটেম দৃশ্যমানতা
       when_primary: যখন মনিটর প্রাথমিক হয়
+    show_instance_counter: খোলা উইন্ডোজের জন্য কাউন্টার দেখান
     size: আইটেমের আকার
     temporal_visibility:
       all: সব
       label: আনপিন করা আইটেম দৃশ্যমানতা
       on_monitor: মনিটরে
+    thumbnail_generation_enabled: আইটেম হোভারে থাম্বনেইল তৈরি করুন
     visible_separators: দৃশ্যমান বিভাজক
     zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
   label: ডক/টাস্কবার

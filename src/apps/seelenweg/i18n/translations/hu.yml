@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin jobbra
   run_as: Futtatás rendszergazdaként
   unpin: Kibont
+context_menu:
+  reorder_disable: Feladatsáv zárolása
+  reorder_enable: Feloldja a tálcát
 media:
   not_playing: Semmi sem játszik
 media_menu:

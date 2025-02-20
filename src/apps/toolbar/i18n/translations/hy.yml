@@ -1,6 +1,8 @@
 context_menu:
   add_module: Ավելացնել մոդուլ
   remove: Հեռացրեք մոդուլը
+  reorder_disable: Կողպեք գործիքագոտին
+  reorder_enable: Բացել գործիքագոտին
   settings: Կարգավորումներ
   task_manager: Առաջադրանքների կառավարիչ
 media:

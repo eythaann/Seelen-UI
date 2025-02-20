@@ -229,6 +229,7 @@ toolbar:
   auto_hide: ఆటో దాచు
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
+  dock_side: స్థానం
   enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
   height: ఎత్తు
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: ఎల్లప్పుడూ
       label: పిన్ చేయబడిన అంశాల దృశ్యమానత
       when_primary: మానిటర్ ప్రాథమికంగా ఉన్నప్పుడు
+    show_instance_counter: ఓపెన్ విండోస్ కోసం కౌంటర్ చూపించు
     size: అంశం పరిమాణం
     temporal_visibility:
       all: అన్నీ
       label: అన్‌పిన్ చేయబడిన అంశాల దృశ్యమానత
       on_monitor: మానిటర్‌లో
+    thumbnail_generation_enabled: ఐటెమ్ హోవర్‌పై సూక్ష్మచిత్రాలను రూపొందించండి
     visible_separators: కనిపించే సెపరేటర్లు
     zoom_size: జూమ్ చేసిన పరిమాణం (థీమ్‌ల కోసం ఉపయోగించబడుతుంది)
   label: డాక్/టాస్క్‌బార్

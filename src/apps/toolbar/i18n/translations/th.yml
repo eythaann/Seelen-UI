@@ -1,6 +1,8 @@
 context_menu:
   add_module: เพิ่มโมดูล
   remove: ลบโมดูล
+  reorder_disable: ล็อคแถบเครื่องมือ
+  reorder_enable: ปลดล็อคแถบเครื่องมือ
   settings: การตั้งค่า
   task_manager: ตัวจัดการงาน
 media:

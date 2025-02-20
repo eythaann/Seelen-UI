@@ -230,6 +230,7 @@ toolbar:
   auto_hide: Autóbizalom
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
+  dock_side: Pozíció
   enable: Engedélyezze a divatos eszköztárat
   height: Magasság
   hide_mode:
@@ -276,11 +277,13 @@ weg:
       always: Mindig
       label: Rögzített elemek láthatósága
       when_primary: Amikor a monitor az elsődleges
+    show_instance_counter: A nyitott ablakok számlálójának megjelenítése
     size: Elemméret
     temporal_visibility:
       all: Minden
       label: Rögzített elemek láthatósága
       on_monitor: Monitoron
+    thumbnail_generation_enabled: Miniatűrök létrehozása az elem lebegtetésekor
     visible_separators: Látható elválasztók
     zoom_size: Nagyított méret (a témákhoz használt)
   label: Dokk/tálca

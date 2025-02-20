@@ -227,6 +227,7 @@ toolbar:
   auto_hide: Automatinis slėptuvė
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
+  dock_side: Pozicija
   enable: Įgalinkite išgalvotą įrankių juostą
   height: Ūgis
   hide_mode:
@@ -273,11 +274,13 @@ weg:
       always: Visada
       label: Prisegtų elementų matomumas
       when_primary: Kai monitorius yra pagrindinis
+    show_instance_counter: Rodyti atidarytų langų skaitiklį
     size: Prekės dydis
     temporal_visibility:
       all: Visi
       label: Atsegtų elementų matomumas
       on_monitor: Ant monitoriaus
+    thumbnail_generation_enabled: Generuoti miniatiūras, kai elementas užvedamas ant pelės žymeklio
     visible_separators: Matomi separatoriai
     zoom_size: Mastelio dydis (naudojamas temoms)
   label: „Dock“/„Taskbar“

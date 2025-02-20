@@ -1,6 +1,8 @@
 context_menu:
   add_module: მოდულის დამატება
   remove: ამოიღეთ მოდული
+  reorder_disable: ჩაკეტეთ პანელი
+  reorder_enable: განბლოკეთ პანელი
   settings: პარამეტრები
   task_manager: სამუშაო მენეჯერი
 media:

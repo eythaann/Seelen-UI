@@ -1,6 +1,8 @@
 context_menu:
   add_module: Żid il-modulu
   remove: Neħħi l-modulu
+  reorder_disable: Lock Toolbar
+  reorder_enable: Nisfruttaw toolbar
   settings: Settings
   task_manager: Task Manager
 media:

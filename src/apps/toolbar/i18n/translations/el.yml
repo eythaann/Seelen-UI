@@ -1,6 +1,8 @@
 context_menu:
   add_module: Προσθήκη ενότητας
   remove: Αφαιρέστε την ενότητα
+  reorder_disable: Κλείδωμα γραμμής εργαλείων
+  reorder_enable: Ξεκλείδωμα γραμμής εργαλείων
   settings: Ρυθμίσεις
   task_manager: Task Manager
 media:

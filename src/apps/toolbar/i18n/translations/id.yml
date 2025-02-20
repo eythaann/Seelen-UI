@@ -1,6 +1,8 @@
 context_menu:
   add_module: Tambahkan modul
   remove: Hapus modul
+  reorder_disable: Mengunci bilah alat
+  reorder_enable: Buka kunci bilah alat
   settings: Pengaturan
   task_manager: Manajer Tugas
 media:

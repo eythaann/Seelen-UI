@@ -1,6 +1,8 @@
 context_menu:
   add_module: Додадете модул
   remove: Отстранете го модулот
+  reorder_disable: Заклучете ја лентата со алатки
+  reorder_enable: Отклучете ја лентата со алатки
   settings: Поставки
   task_manager: Управувач со задачи
 media:

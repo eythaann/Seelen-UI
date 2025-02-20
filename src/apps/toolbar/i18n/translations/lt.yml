@@ -1,6 +1,8 @@
 context_menu:
   add_module: Pridėti modulį
   remove: Pašalinkite modulį
+  reorder_disable: Užrakinti įrankių juostą
+  reorder_enable: Atrakinti įrankių juostą
   settings: Nustatymai
   task_manager: Užduočių tvarkyklė
 media:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Tilføj modul
   remove: Fjern modulet
+  reorder_disable: Lås værktøjslinjen
+  reorder_enable: Lås værktøjslinjen op
   settings: Indstillinger
   task_manager: Task Manager
 media:

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin მარჯვნივ
   run_as: Ადმინისტრატორის სახელით გაშვება
   unpin: გაუქმება
+context_menu:
+  reorder_disable: ჩაკეტეთ დავალების პანელი
+  reorder_enable: განბლოკეთ დავალების ზოლი
 media:
   not_playing: არაფერი თამაშობს
 media_menu:

@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: PIN ilaa midig
   run_as: U ordo sidii maamule
   unpin: Aan qarin
+context_menu:
+  reorder_disable: Qufulka Qufulka
+  reorder_enable: Unlock Taskbarbar
 media:
   not_playing: Ma jiraan wax ciyaaraya
 media_menu:

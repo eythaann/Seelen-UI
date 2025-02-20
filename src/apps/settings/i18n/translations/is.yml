@@ -227,6 +227,7 @@ toolbar:
   auto_hide: Sjálfvirk fela
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
+  dock_side: Staða
   enable: Virkja Fancy tækjastiku
   height: Hæð
   hide_mode:
@@ -273,11 +274,13 @@ weg:
       always: Alltaf
       label: Sýnileiki festra hluta
       when_primary: Þegar skjárinn er aðal
+    show_instance_counter: Sýna teljara fyrir opna glugga
     size: Stærð hlutar
     temporal_visibility:
       all: Allt
       label: Sýnileiki ófestra hluta
       on_monitor: Á Skjár
+    thumbnail_generation_enabled: Búðu til smámyndir á hlutnum sveima
     visible_separators: Sýnilegir skilju
     zoom_size: Aðdráttarstærð (notuð fyrir þemu)
   label: Bryggju/verkefnabar

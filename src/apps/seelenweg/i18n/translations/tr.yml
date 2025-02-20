@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Sağa Sabitle
   run_as: Yönetici Olarak Çalıştır
   unpin: Sabitlenmeyi Kaldır
+context_menu:
+  reorder_disable: Görev çubuğunu kilitle
+  reorder_enable: Görev çubuğunun kilidini aç
 media:
   not_playing: Hiçbir şey oynamıyor
 media_menu:

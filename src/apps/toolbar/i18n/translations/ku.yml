@@ -1,6 +1,8 @@
 context_menu:
   add_module: Modulê zêde bikin
   remove: Modulê rakirin
+  reorder_disable: Toolbar tool
+  reorder_enable: Vebijêrin Toolbar
   settings: Settings
   task_manager: Gerînendetiya Peywiran
 media:

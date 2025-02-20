@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin naar rechts
   run_as: Als administrator uitvoeren
   unpin: Losmaken
+context_menu:
+  reorder_disable: Taakbalk vergrendelen
+  reorder_enable: Taakbalk ontgrendelen
 media:
   not_playing: Niets speelt
 media_menu:

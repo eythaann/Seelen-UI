@@ -225,6 +225,7 @@ toolbar:
   auto_hide: ਆਟੋ ਓਹਲੇ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
+  dock_side: ਸਥਿਤੀ
   enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   height: ਉਚਾਈ
   hide_mode:
@@ -271,11 +272,13 @@ weg:
       always: ਹਮੇਸ਼ਾ
       label: ਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ
       when_primary: ਜਦੋਂ ਮਾਨੀਟਰ ਪ੍ਰਾਇਮਰੀ ਹੁੰਦਾ ਹੈ
+    show_instance_counter: ਖੁੱਲੇ ਵਿੰਡੋਜ਼ ਲਈ ਕਾ counter ਂਟਰ ਦਿਖਾਓ
     size: ਆਈਟਮ ਦਾ ਆਕਾਰ
     temporal_visibility:
       all: ਸਾਰੇ
       label: ਅਨਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ
       on_monitor: ਮਾਨੀਟਰ 'ਤੇ
+    thumbnail_generation_enabled: ਆਈਟਮ ਹੋਵਰ 'ਤੇ ਥੰਬਨੇਲ ਤਿਆਰ ਕਰੋ
     visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
     zoom_size: ਜ਼ੂਮ ਕੀਤਾ ਆਕਾਰ (ਥੀਮਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ)
   label: ਡੌਕ/ਟਾਸਕਬਾਰ

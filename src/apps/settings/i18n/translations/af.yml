@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Outomatiese vel
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
+  dock_side: Posisie
   enable: Aktiveer Fancy Toolbar
   height: Hoogte
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: Altyd
       label: Vasgespelde items sigbaarheid
       when_primary: Wanneer die monitor primêr is
+    show_instance_counter: Wys toonbank vir oop vensters
     size: Itemgrootte
     temporal_visibility:
       all: Almal
       label: Sigbaarheid van ontspelde items
       on_monitor: Op Monitor
+    thumbnail_generation_enabled: Genereer duimnaels op die item hover
     visible_separators: Sigbare skeiers
     zoom_size: Ingezoomde grootte (gebruik vir temas)
   label: Dock/Taakbalk

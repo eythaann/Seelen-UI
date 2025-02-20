@@ -1,6 +1,8 @@
 context_menu:
   add_module: मॉड्यूल जोड़ें
   remove: मॉड्यूल निकालें
+  reorder_disable: लॉक टूलबार
+  reorder_enable: अनलॉक टूलबार
   settings: सेटिंग्स
   task_manager: कार्य प्रबंधक
 media:

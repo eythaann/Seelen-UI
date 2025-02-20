@@ -619,10 +619,6 @@
     animation: text-highlight 5s ease-in-out infinite;
   }
 
-  .notification {
-    max-height: unset;
-  }
-
   &:not(:has(.notification)) {
     display: none;
   }
@@ -633,13 +629,6 @@
   background-color: var(--color-gray-100);
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.4);
   padding: 10px;
-  overflow: hidden;
-  max-height: 8.5em;
-  transition: max-height 0.4s;
-
-  &:hover {
-    max-height: 20vh;
-  }
 }
 
 .notification-header {
@@ -666,6 +655,13 @@
 
 .notification-body {
   word-break: break-word;
+  overflow: hidden;
+  max-height: 8.5em;
+  transition: max-height 0.4s;
+
+  &:hover {
+    max-height: 20vh;
+  }
 
   .notification-body-title {
     font-weight: 600;

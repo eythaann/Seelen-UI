@@ -226,6 +226,7 @@ toolbar:
   auto_hide: Худкор Пинҳон кардани
   delay_to_hide: Таъхир барои пинҳон кардан
   delay_to_show: Таъхир барои нишон додан
+  dock_side: Вазъият
   enable: Дастрас кардани панели футболи
   height: Баландӣ
   hide_mode:
@@ -272,11 +273,13 @@ weg:
       always: Ҳамеша
       label: Намоиши ашёҳои маҳкамшуда
       when_primary: Вақте ки монитор ибтидоӣ аст
+    show_instance_counter: Ҳисобкуниро барои тирезаҳои кушод
     size: Андозаи ашё
     temporal_visibility:
       all: Ҳама
       label: Намоиши ҷузъҳои ҷудонашуда
       on_monitor: Дар Монитор
+    thumbnail_generation_enabled: Обунаи ангур дар болои ашё
     visible_separators: Бандиаткунандагони намоён
     zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)
   label: Dock / супоришҳо

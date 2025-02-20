@@ -1,6 +1,8 @@
 context_menu:
   add_module: మాడ్యూల్ జోడించండి
   remove: మాడ్యూల్ తొలగించండి
+  reorder_disable: లాక్ టూల్‌బార్
+  reorder_enable: అన్‌లాక్ టూల్‌బార్
   settings: సెట్టింగ్‌లు
   task_manager: టాస్క్ మేనేజర్
 media:

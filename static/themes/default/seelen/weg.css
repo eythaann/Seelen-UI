@@ -112,7 +112,7 @@
     }
   }
 
-  .weg-item-badge {
+  .weg-item-notification-badge {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,7 +129,7 @@
     border-radius: 8px;
   }
 
-  .weg-item-instance-counter {
+  .weg-item-instance-counter-badge {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -137,8 +137,8 @@
     bottom: 0;
     right: 0;
     transform: translate(25%, 25%);
-    background-color: var(--color-gray-100);
-    color: var(--color-gray-900);
+    background-color: var(--color-gray-400);
+    color: var(--color-gray-100);
     height: 16px;
     min-width: 16px;
     font-size: 10px;

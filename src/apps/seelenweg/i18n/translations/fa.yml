@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: پین به راست
   run_as: به عنوان مدیر اجرا کنید
   unpin: باز کردن
+context_menu:
+  reorder_disable: نوار وظیفه قفل
+  reorder_enable: نوار کار را باز کنید
 media:
   not_playing: هیچ چیز بازی نمی کند
 media_menu:

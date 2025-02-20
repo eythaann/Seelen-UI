@@ -1,6 +1,8 @@
 context_menu:
   add_module: 모듈 추가
   remove: 모듈 제거
+  reorder_disable: 잠금 도구 모음
+  reorder_enable: 도구 모음 잠금 해제
   settings: 설정
   task_manager: 작업 관리자
 media:

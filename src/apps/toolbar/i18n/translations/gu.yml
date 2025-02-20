@@ -1,6 +1,8 @@
 context_menu:
   add_module: મોડ્યુલ ઉમેરો
   remove: મોડ્યુલ દૂર કરો
+  reorder_disable: તલવાર
+  reorder_enable: ટૂલબારને અનલ lock ક કરો
   settings: સેટિંગ્સ
   task_manager: ટાસ્ક મેનેજર
 media:

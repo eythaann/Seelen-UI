@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: סיכה לימין
   run_as: הפעל כמנהל
   unpin: לְהוֹצִיא סִיכָּה
+context_menu:
+  reorder_disable: מנעול שורת המשימות
+  reorder_enable: ביטול נעילת שורת המשימות
 media:
   not_playing: שום דבר לא משחק
 media_menu:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: ماژول را اضافه کنید
   remove: ماژول را حذف کنید
+  reorder_disable: نوار ابزار قفل
+  reorder_enable: نوار ابزار را باز کنید
   settings: تنظیمات
   task_manager: Task Manager
 media:

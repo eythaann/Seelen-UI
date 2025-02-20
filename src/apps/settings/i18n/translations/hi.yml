@@ -230,6 +230,7 @@ toolbar:
   auto_hide: खुद से छिपना
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
+  dock_side: पद
   enable: फैंसी टूलबार सक्षम करें
   height: ऊंचाई
   hide_mode:
@@ -276,11 +277,13 @@ weg:
       always: हमेशा
       label: पिन किए गए आइटम दृश्यता
       when_primary: जब मॉनिटर प्राइमरी हो
+    show_instance_counter: खुली खिड़कियों के लिए काउंटर दिखाएं
     size: आइटम आकार
     temporal_visibility:
       all: सभी
       label: अनपिन किए गए आइटम दृश्यता
       on_monitor: मॉनिटर पर
+    thumbnail_generation_enabled: आइटम होवर पर थंबनेल उत्पन्न करें
     visible_separators: दृश्य विभाजक
     zoom_size: ज़ूमेड आकार (विषयों के लिए उपयोग किया जाता है)
   label: डॉक/टास्टरबार

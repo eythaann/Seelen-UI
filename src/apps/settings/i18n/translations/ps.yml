@@ -225,6 +225,7 @@ toolbar:
   auto_hide: آٹو پټول
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
+  dock_side: موقعیت
   enable: د فینسي تورې پټه وړتیا وړ کړئ
   height: لوړوالی
   hide_mode:
@@ -271,11 +272,13 @@ weg:
       always: تل
       label: د پینډ شوي توکو لید
       when_primary: کله چې څارونکی لومړنی وي
+    show_instance_counter: د خلاصې وینډوز لپاره ضد
     size: د توکي اندازه
     temporal_visibility:
       all: ټول
       label: د ناپاک شوي توکو لید لید
       on_monitor: په مانیټر کې
+    thumbnail_generation_enabled: د توکو هورټ کې تمبینونه پیدا کړئ
     visible_separators: لیدلي جلا کونکي
     zoom_size: زوم شوی اندازه (د موضوعاتو لپاره کارول کیږي)
   label: ډیک / ټاسک بار

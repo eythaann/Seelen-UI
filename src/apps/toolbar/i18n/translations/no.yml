@@ -1,6 +1,8 @@
 context_menu:
   add_module: Legg til modul
   remove: Fjern modulen
+  reorder_disable: Lås verktøylinje
+  reorder_enable: Lås opp verktøylinje
   settings: Innstillinger
   task_manager: Oppgavebehandling
 media:

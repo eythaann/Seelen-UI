@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin sa kanan
   run_as: Tumakbo bilang Administrator
   unpin: Unpin
+context_menu:
+  reorder_disable: I -lock ang taskbar
+  reorder_enable: I -unlock ang taskbar
 media:
   not_playing: Walang naglalaro
 media_menu:

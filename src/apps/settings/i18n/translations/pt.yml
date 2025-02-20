@@ -227,6 +227,7 @@ toolbar:
   auto_hide: Esconder automaticamente
   delay_to_hide: Demora para esconder
   delay_to_show: Demora para mostrar
+  dock_side: Posição
   enable: Ativar barra de ferramentas sofisticada
   height: Altura
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Sempre
       label: Visibilidade dos itens fixados
       when_primary: Quando o monitor é primário
+    show_instance_counter: Mostrar contador para janelas abertas
     size: Tamanho do item
     temporal_visibility:
       all: Todos
       label: Visibilidade de itens não fixados
       on_monitor: No monitor
+    thumbnail_generation_enabled: Gerar miniaturas no itens pairar
     visible_separators: Separadores Visíveis
     zoom_size: Tamanho ampliado (usado para temas)
   label: Dock/barra de tarefas

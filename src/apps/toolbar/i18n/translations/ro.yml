@@ -1,6 +1,8 @@
 context_menu:
   add_module: Adăugați modul
   remove: Scoateți modulul
+  reorder_disable: Blocați bara de instrumente
+  reorder_enable: Deblocați bara de instrumente
   settings: Setări
   task_manager: Manager de activități
 media:

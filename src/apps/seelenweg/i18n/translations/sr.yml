@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Пин удесно
   run_as: Покрени као администратор
   unpin: Развелити
+context_menu:
+  reorder_disable: Закључајте траку задатака
+  reorder_enable: Откључајте траку задатака
 media:
   not_playing: Ништа се не игра
 media_menu:

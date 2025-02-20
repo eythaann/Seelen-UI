@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: दाईं ओर पिन करना
   run_as: व्यवस्थापक के रूप में चलाएं
   unpin: अनपिन
+context_menu:
+  reorder_disable: लॉक टास्कबार
+  reorder_enable: टास्कबार अनलॉक करें
 media:
   not_playing: कुछ भी नहीं खेल रहा है
 media_menu:

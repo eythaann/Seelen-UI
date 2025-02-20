@@ -230,6 +230,7 @@ toolbar:
   auto_hide: Αυτόματη απόκρυψη
   delay_to_hide: Καθυστέρηση για απόκρυψη
   delay_to_show: Καθυστέρηση εμφάνισης
+  dock_side: Θέση
   enable: Ενεργοποίηση φανταχτερά εργαλεία εργαλείων
   height: Υψος
   hide_mode:
@@ -278,11 +279,13 @@ weg:
       always: Πάντοτε
       label: Ορατότητα καρφιτσωμένων αντικειμένων
       when_primary: Όταν η οθόνη είναι κύρια
+    show_instance_counter: Εμφάνιση μετρητή για ανοιχτά παράθυρα
     size: Μέγεθος αντικειμένου
     temporal_visibility:
       all: Ολοι
       label: Ορατότητα ξεκαρφιτσωμένων αντικειμένων
       on_monitor: Στην οθόνη
+    thumbnail_generation_enabled: Δημιουργία μικρογραφιών κατά το hover του στοιχείου
     visible_separators: Ορατοί διαχωριστές
     zoom_size: Μέγεθος μεγέθυνσης (χρησιμοποιείται για θέματα)
   label: Λέσχη εργασιών

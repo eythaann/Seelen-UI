@@ -1,6 +1,8 @@
 context_menu:
   add_module: Pridať modul
   remove: Odstrániť modul
+  reorder_disable: Uzamknutie panela nástrojov
+  reorder_enable: Odomknutie panela nástrojov
   settings: Nastavenia
   task_manager: Správca úloh
 media:

@@ -1,6 +1,8 @@
 context_menu:
   add_module: Module toevoegen
   remove: Verwijder de module
+  reorder_disable: Werkbalk vergrendelen
+  reorder_enable: Werkbalk ontgrendelen
   settings: Instellingen
   task_manager: Taakbeheer
 media:

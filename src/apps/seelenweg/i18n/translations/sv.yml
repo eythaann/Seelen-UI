@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Nöja sig till höger
   run_as: Kör som administratör
   unpin: Lutande
+context_menu:
+  reorder_disable: Lås aktivitetsfältet
+  reorder_enable: Lås upp aktivitetsfältet
 media:
   not_playing: Ingenting spelar
 media_menu:

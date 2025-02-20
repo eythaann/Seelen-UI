@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Otomatik Gizle
   delay_to_hide: Gizlenmeyi geciktir
   delay_to_show: Gösterme gecikmesi
+  dock_side: Pozisyon
   enable: Şık Araç Çubuğunu Etkinleştir
   height: Yükseklik
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Her zaman
       label: Sabitlenmiş Öğelerin Görünürlüğü
       when_primary: Monitör birincil olduğunda
+    show_instance_counter: Açık pencereler için sayaç göster
     size: Öğe Boyutu
     temporal_visibility:
       all: Tüm
       label: Sabitlenmemiş Öğelerin Görünürlüğü
       on_monitor: Monitörde
+    thumbnail_generation_enabled: Öğenin üzerine gelindiğinde küçük resimler oluştur
     visible_separators: Görünür Ayırıcılar
     zoom_size: Yakınlaştırılmış Boyut (temalar için kullanılır)
   label: Dock/Görev Çubuğu

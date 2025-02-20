@@ -228,6 +228,7 @@ toolbar:
   auto_hide: آٹو چھپائیں
   delay_to_hide: چھپانے میں تاخیر
   delay_to_show: دکھانے میں تاخیر
+  dock_side: پوزیشن
   enable: فینسی ٹول بار کو فعال کریں
   height: اونچائی
   hide_mode:
@@ -274,11 +275,13 @@ weg:
       always: ہمیشہ
       label: پن کی ہوئی اشیاء کی مرئیت
       when_primary: جب مانیٹر پرائمری ہو۔
+    show_instance_counter: کھلی کھڑکیوں کے لئے کاؤنٹر دکھائیں
     size: آئٹم کا سائز
     temporal_visibility:
       all: تمام
       label: ان پن کردہ آئٹمز کی مرئیت
       on_monitor: مانیٹر پر
+    thumbnail_generation_enabled: آئٹم ہوور پر تھمب نیل تیار کریں
     visible_separators: مرئی جداکار
     zoom_size: زوم سائز (تھیمز کے لئے استعمال کیا جاتا ہے)
   label: ٹاسک بار

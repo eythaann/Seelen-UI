@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Anclar a la derecha
   run_as: Ejecutar como administrador
   unpin: Desanclar
+context_menu:
+  reorder_disable: Bloquear la barra de tareas
+  reorder_enable: Desbloquear la barra de tareas
 media:
   not_playing: Nada esta jugando
 media_menu:

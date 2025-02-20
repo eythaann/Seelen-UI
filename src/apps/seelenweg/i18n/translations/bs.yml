@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin na desno
   run_as: Trčite kao administrator
   unpin: Otrcati
+context_menu:
+  reorder_disable: Zaključavanje zadataka
+  reorder_enable: Otključajte traku zadataka
 media:
   not_playing: Ništa se ne igra
 media_menu:

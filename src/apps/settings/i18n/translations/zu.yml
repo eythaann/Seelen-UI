@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Fihla okuzenzakalelayo
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
+  dock_side: Ukuma
   enable: Nika amandla amathuluzi e-fancy
   height: Ubude
   hide_mode:
@@ -279,11 +280,13 @@ weg:
       always: Njalo
       label: Ukubonakala Kwezinto Eziphiniwe
       when_primary: Lapho imonitha iyinhloko
+    show_instance_counter: Khombisa i-counter yamafasitela avulekile
     size: Usayizi wento
     temporal_visibility:
       all: Konke
       label: Ukubonakala Kwezinto Ezingaphiniwe
       on_monitor: Ku-Monitor
+    thumbnail_generation_enabled: Khiqiza izithonjana entweni hover
     visible_separators: Abahlukanisi ababonakalayo
     zoom_size: Usayizi osondeza (osetshenziselwa izingqikithi)
   label: Dock / taskbar

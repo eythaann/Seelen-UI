@@ -228,6 +228,7 @@ toolbar:
   auto_hide: Tự động ẩn
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
+  dock_side: Chức vụ
   enable: Kích hoạt thanh công cụ ưa thích
   height: Chiều cao
   hide_mode:
@@ -276,11 +277,13 @@ weg:
       always: Luôn luôn
       label: Hiển thị các mục được ghim
       when_primary: Khi màn hình là chính
+    show_instance_counter: Hiển thị quầy cho các cửa sổ mở
     size: Kích thước mục
     temporal_visibility:
       all: Tất cả
       label: Hiển thị các mục đã được bỏ ghim
       on_monitor: Trên màn hình
+    thumbnail_generation_enabled: Tạo hình thu nhỏ trên vật phẩm di chuột
     visible_separators: Phân tách có thể nhìn thấy
     zoom_size: Kích thước phóng to (được sử dụng cho chủ đề)
   label: Dock/Thanh tác vụ

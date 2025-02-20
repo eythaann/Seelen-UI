@@ -228,6 +228,7 @@ toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
+  dock_side: Rewş
   enable: Vebijêrkek Fancy Vebijêrin
   height: Bilindî
   hide_mode:
@@ -274,11 +275,13 @@ weg:
       always: Herdem
       label: Dîtina Tiştên Pînekirî
       when_primary: Dema ku çavdêriya sereke ye
+    show_instance_counter: Ji bo pencereyên vekirî pêşkeş bikin
     size: Mezinahiya tiştê
     temporal_visibility:
       all: Gişt
       label: Dîtina Tiştên Nepînekirî
       on_monitor: Li ser Monitor
+    thumbnail_generation_enabled: Thumbnails li ser tiştên hover bikin
     visible_separators: Dabeşên Visible
     zoom_size: Mezinahiya zoomed (ji bo mijaran tê bikar anîn)
   label: Dock / Taskbar

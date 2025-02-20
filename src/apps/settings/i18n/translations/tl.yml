@@ -233,6 +233,7 @@ toolbar:
   auto_hide: Auto itago
   delay_to_hide: Delay sa pagtatago
   delay_to_show: Pagkaantala sa pagpapakita
+  dock_side: Posisyon
   enable: Paganahin ang magarbong toolbar
   height: Taas
   hide_mode:
@@ -281,11 +282,13 @@ weg:
       always: Laging
       label: Visibility ng Mga Naka-pin na Item
       when_primary: Kapag ang monitor ay pangunahin
+    show_instance_counter: Ipakita ang counter para sa bukas na mga bintana
     size: Laki ng item
     temporal_visibility:
       all: Lahat
       label: Visibility ng Mga Na-unpin na Item
       on_monitor: Sa Monitor
+    thumbnail_generation_enabled: Bumuo ng mga thumbnail sa item hover
     visible_separators: Visible Separator
     zoom_size: Zoom na laki (ginamit para sa mga tema)
   label: Dock/Taskbar

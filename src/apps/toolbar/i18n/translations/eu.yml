@@ -1,6 +1,8 @@
 context_menu:
   add_module: Gehitu modulua
   remove: Kendu modulua
+  reorder_disable: Blokeatu tresna barra
+  reorder_enable: Desblokeatu tresna barra
   settings: Ezarpenak
   task_manager: Zereginen kudeatzailea
 media:

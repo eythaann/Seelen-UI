@@ -228,6 +228,7 @@ toolbar:
   auto_hide: Avtomatik gizlətmək
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
+  dock_side: Mövqe
   enable: Zərif alət çubuğunu aktivləşdirin
   height: Hündürlük
   hide_mode:
@@ -274,11 +275,13 @@ weg:
       always: Həmişə
       label: Saxlanmış Elementlərin Görünüşü
       when_primary: Monitor əsas olduqda
+    show_instance_counter: Açıq pəncərələr üçün sayğac edin
     size: Maddə ölçüsü
     temporal_visibility:
       all: Hamısı
       label: Saxlanmamış Elementlərin Görünüşü
       on_monitor: Monitorda
+    thumbnail_generation_enabled: Hover-də eskizlər yaradın
     visible_separators: Görünən ayırıcılar
     zoom_size: Böyüdülmüş ölçü (mövzular üçün istifadə olunur)
   label: Dock / tapşırıq çubuğu

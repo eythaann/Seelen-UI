@@ -1,6 +1,8 @@
 context_menu:
   add_module: Dodajte modul
   remove: Uklonite modul
+  reorder_disable: Alatna traka za zaključavanje
+  reorder_enable: Otključavanje alatne trake
   settings: postavke
   task_manager: Upravitelj zadataka
 media:

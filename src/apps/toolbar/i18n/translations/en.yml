@@ -1,9 +1,9 @@
 context_menu:
   add_module: Add Module
   remove: Remove Module
-  settings: Settings
   reorder_disable: Lock toolbar
   reorder_enable: Unlock toolbar
+  settings: Settings
   task_manager: Task Manager
 media:
   device:

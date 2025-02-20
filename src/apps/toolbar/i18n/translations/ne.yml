@@ -1,6 +1,8 @@
 context_menu:
   add_module: मोड्युल थप्नुहोस्
   remove: मोड्युल हटाउनुहोस्
+  reorder_disable: लक उपकरणपट्टी
+  reorder_enable: अनलक उपकरणपट्टी
   settings: सेटिङहरू
   task_manager: कार्य प्रबन्धक
 media:

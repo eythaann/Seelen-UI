@@ -230,6 +230,7 @@ toolbar:
   auto_hide: پنهان خودکار
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
+  dock_side: موقعیت
   enable: نوار ابزار فانتزی را فعال کنید
   height: قد
   hide_mode:
@@ -276,11 +277,13 @@ weg:
       always: همیشه
       label: قابلیت مشاهده موارد پین شده
       when_primary: وقتی مانیتور اولیه است
+    show_instance_counter: نمایش پیشخوان برای ویندوز باز
     size: اندازه مورد
     temporal_visibility:
       all: همه
       label: قابلیت مشاهده موارد پین نشده
       on_monitor: روی مانیتور
+    thumbnail_generation_enabled: ریز عکسها را در شناور آیتم ایجاد کنید
     visible_separators: جداکننده های قابل مشاهده
     zoom_size: اندازه بزرگنمایی (برای مضامین استفاده می شود)
   label: اسکله/نوار وظیفه

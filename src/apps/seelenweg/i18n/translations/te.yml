@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: కుడి నుండి పిన్
   run_as: నిర్వాహకుడిగా అమలు చేయండి
   unpin: అన్పిన్
+context_menu:
+  reorder_disable: టాస్క్‌బార్ లాక్
+  reorder_enable: టాస్క్‌బార్‌ను అన్‌లాక్ చేయండి
 media:
   not_playing: ఏమీ ఆడటం లేదు
 media_menu:

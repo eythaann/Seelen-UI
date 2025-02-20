@@ -1,6 +1,8 @@
 context_menu:
   add_module: ሞዱል ያክሉ
   remove: ሞጁሎችን ያስወግዱ
+  reorder_disable: የመሳሪያ አሞሌ
+  reorder_enable: የመሣሪያ አሞሌን ይክፈቱ
   settings: ቅንብሮች
   task_manager: ተግባር አስተዳዳሪ
 media:

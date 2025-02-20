@@ -1,6 +1,8 @@
 context_menu:
   add_module: Adicione módulo
   remove: Remova o módulo
+  reorder_disable: Barra de ferramentas de bloqueio
+  reorder_enable: Desbloqueie a barra de ferramentas
   settings: Configurações
   task_manager: Gerenciador de tarefas
 media:

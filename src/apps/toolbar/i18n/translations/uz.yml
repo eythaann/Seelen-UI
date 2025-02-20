@@ -1,6 +1,8 @@
 context_menu:
   add_module: Modul qo'shing
   remove: Modulni olib tashlash
+  reorder_disable: Asboblar paneli
+  reorder_enable: Asboblar panelini oching
   settings: Sozlamalar
   task_manager: Vazifa menejeri
 media:

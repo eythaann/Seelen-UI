@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: พินไปทางขวา
   run_as: เรียกใช้เป็นผู้ดูแลระบบ
   unpin: คลาย
+context_menu:
+  reorder_disable: ล็อคแถบงาน
+  reorder_enable: ปลดล็อกแถบงาน
 media:
   not_playing: ไม่มีอะไรเล่น
 media_menu:

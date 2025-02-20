@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: दायाँ राख्न पिन
   run_as: प्रशासक रूपमा चलाउन
   unpin: चुस्नु
+context_menu:
+  reorder_disable: लक टकबार लक
+  reorder_enable: टास्कबार अनलक गर्नुहोस्
 media:
   not_playing: केहि खेल्दैन
 media_menu:

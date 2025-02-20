@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Pin po prawej
   run_as: Uruchom jako administrator
   unpin: Odpiąć
+context_menu:
+  reorder_disable: Blokada paska zadań
+  reorder_enable: Odblokowanie paska zadań
 media:
   not_playing: Nic nie gra
 media_menu:

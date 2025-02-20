@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Tihvt paremal
   run_as: Joosta administraatorina
   unpin: Lahti keelama
+context_menu:
+  reorder_disable: Ülesanderiba lukustamine
+  reorder_enable: Avage tegumiriba avamine
 media:
   not_playing: Miski ei mängi
 media_menu:

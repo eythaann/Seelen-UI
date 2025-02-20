@@ -1,6 +1,8 @@
 context_menu:
   add_module: Ongeza moduli
   remove: Ondoa moduli
+  reorder_disable: Kufunga zana
+  reorder_enable: Fungua zana ya zana
   settings: Mipangilio
   task_manager: Meneja wa Kazi
 media:

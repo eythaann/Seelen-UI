@@ -225,6 +225,7 @@ toolbar:
   auto_hide: Kujificha kiotomatiki
   delay_to_hide: Kuchelewa kujificha
   delay_to_show: Kuchelewa kuonyesha
+  dock_side: Msimamo
   enable: Wezesha zana ya dhana
   height: Urefu
   hide_mode:
@@ -271,11 +272,13 @@ weg:
       always: Daima
       label: Mwonekano wa Vipengee Vilivyobandikwa
       when_primary: Wakati kufuatilia ni msingi
+    show_instance_counter: Onyesha kukabiliana na windows wazi
     size: Saizi ya bidhaa
     temporal_visibility:
       all: Wote
       label: Mwonekano wa Vipengee Vilivyobanduliwa
       on_monitor: Kwenye Monitor
+    thumbnail_generation_enabled: Tengeneza vijipicha kwenye hover ya bidhaa
     visible_separators: Watenganisho unaoonekana
     zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
   label: Dock/Taskbar

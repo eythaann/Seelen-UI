@@ -11,6 +11,9 @@ app_menu:
   pin_to_right: Справа
   run_as: Запустить от имени администратора
   unpin: Открепить
+context_menu:
+  reorder_disable: Блокировка панели задач
+  reorder_enable: Разблокировать панель задач
 media:
   not_playing: Ничто не играет
 media_menu:

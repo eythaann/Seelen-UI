@@ -229,6 +229,7 @@ toolbar:
   auto_hide: ავტო დამალვა
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
+  dock_side: პოზიცია
   enable: ჩართეთ ლამაზი პანელი
   height: სიმაღლე
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: ყოველთვის
       label: ჩამაგრებული ელემენტების ხილვადობა
       when_primary: როცა მონიტორი პირველადია
+    show_instance_counter: აჩვენეთ მრიცხველი ღია ფანჯრებისთვის
     size: ნივთის ზომა
     temporal_visibility:
       all: ყველა
       label: ჩამაგრებული ერთეულების ხილვადობა
       on_monitor: მონიტორზე
+    thumbnail_generation_enabled: წარმოქმენით მინიატურები
     visible_separators: ხილული გამყოფი
     zoom_size: მასშტაბური ზომა (გამოიყენება თემებისთვის)
   label: დოკ/დავალების ზოლი

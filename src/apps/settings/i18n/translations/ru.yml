@@ -231,6 +231,7 @@ toolbar:
   auto_hide: Автоскрытие
   delay_to_hide: Задержка, чтобы скрыть
   delay_to_show: Задержка показа
+  dock_side: Позиция
   enable: Включить
   height: Высота
   hide_mode:
@@ -279,11 +280,13 @@ weg:
       always: Всегда
       label: Видимость закрепленных элементов
       when_primary: Когда монитор является основным
+    show_instance_counter: Показать счетчик открытых окон
     size: Размер иконок
     temporal_visibility:
       all: Все
       label: Видимость незакрепленных элементов
       on_monitor: На мониторе
+    thumbnail_generation_enabled: Создание миниатюр при наведении на элемент
     visible_separators: Разделители
     zoom_size: Увеличенный размер (используется для тем)
   label: Панель задач

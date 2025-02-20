@@ -224,6 +224,7 @@ toolbar:
   auto_hide: הסתר אוטומטי
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
+  dock_side: מַצָב
   enable: אפשר סרגל כלים מפואר
   height: גוֹבַה
   hide_mode:
@@ -270,11 +271,13 @@ weg:
       always: תָמִיד
       label: נראות פריטים מוצמדים
       when_primary: כאשר המוניטור הוא ראשי
+    show_instance_counter: הצג מונה עבור חלונות פתוחים
     size: גודל פריט
     temporal_visibility:
       all: כֹּל
       label: נראות פריטים לא מוצמדים
       on_monitor: במוניטור
+    thumbnail_generation_enabled: צור תמונות ממוזערות על ריחוף פריט
     visible_separators: מפרידים גלויים
     zoom_size: גודל מתקרב (משמש לנושאים)
   label: שורת המזח/המשימות

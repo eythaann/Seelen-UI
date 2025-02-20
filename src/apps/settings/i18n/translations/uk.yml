@@ -227,6 +227,7 @@ toolbar:
   auto_hide: Автоматично приховувати
   delay_to_hide: Затримка приховання
   delay_to_show: Затримка показу
+  dock_side: Посада
   enable: Увімкнути панель інструментів
   height: Висота
   hide_mode:
@@ -275,11 +276,13 @@ weg:
       always: Завжди
       label: Видимість закріплених елементів
       when_primary: Коли монітор є основним
+    show_instance_counter: Показати лічильник відкритих вікон
     size: Розмір піктограм
     temporal_visibility:
       all: всі
       label: Видимість незакріплених елементів
       on_monitor: На моніторі
+    thumbnail_generation_enabled: Генерувати мініатюри при наведенні на елемент
     visible_separators: Видимі розділювачі
     zoom_size: Збільшений розмір (використовується для тем)
   label: Панель завдань

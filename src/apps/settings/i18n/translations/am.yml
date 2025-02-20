@@ -223,6 +223,7 @@ toolbar:
   auto_hide: ራስ-ሰር መደበቅ
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
+  dock_side: አቀማመጥ
   enable: Fangance የመሳሪያ አሞሌን ያንቁ
   height: ቁመት
   hide_mode:
@@ -269,11 +270,13 @@ weg:
       always: ሁሌም
       label: የተሰኩ ዕቃዎች ታይነት
       when_primary: መቆጣጠሪያው ቀዳሚ ሲሆን
+    show_instance_counter: ለተከፈቱ መስኮቶች ለመክፈት ቆጣሪ አሳይ
     size: የንጥል መጠን
     temporal_visibility:
       all: ሁሉም
       label: ያልተሰካ እቃዎች ታይነት
       on_monitor: በሞኒተር ላይ
+    thumbnail_generation_enabled: በንጥል ላይ ያሉ ድንክዬዎችን ማመንጨት
     visible_separators: የሚታዩ መለያዎች
     zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
   label: Dock / Accorbar

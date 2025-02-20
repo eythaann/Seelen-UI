@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Cuddio awto
   delay_to_hide: Oedi i guddio
   delay_to_show: Oedi i ddangos
+  dock_side: Safle
   enable: Galluogi bar offer ffansi
   height: Uchder
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: Bob amser
       label: Eitemau wedi'u Pinio Gwelededd
       when_primary: Pan fydd y monitor yn gynradd
+    show_instance_counter: Dangos cownter ar gyfer ffenestri agored
     size: Maint eitem
     temporal_visibility:
       all: Pawb
       label: Eitemau heb eu Pinio Gwelededd
       on_monitor: Ar Fonitor
+    thumbnail_generation_enabled: Cynhyrchu mân -luniau ar hofran eitem
     visible_separators: Gwahanyddion gweladwy
     zoom_size: Maint chwyddo (a ddefnyddir ar gyfer themâu)
   label: Doc/bar tasgau

@@ -229,6 +229,7 @@ toolbar:
   auto_hide: Auto skjul
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
+  dock_side: Position
   enable: Aktivér fancy værktøjslinje
   height: Højde
   hide_mode:
@@ -277,11 +278,13 @@ weg:
       always: Altid
       label: Fastgjorte elementers synlighed
       when_primary: Når monitoren er primær
+    show_instance_counter: Vis tæller for åbne vinduer
     size: Varestørrelse
     temporal_visibility:
       all: Alle
       label: Synlighed af frigjorte elementer
       on_monitor: På monitor
+    thumbnail_generation_enabled: Generer miniaturebilleder, når du holder musen over et element
     visible_separators: Synlige separatorer
     zoom_size: Zoomet størrelse (brugt til temaer)
   label: Dock/proceslinje

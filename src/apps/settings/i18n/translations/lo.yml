@@ -226,6 +226,7 @@ toolbar:
   auto_hide: ຊ່ອນອັດຕະໂນມັດ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
+  dock_side: ຕໍາແຫນ່ງ
   enable: ເປີດໃຊ້ແຖບເຄື່ອງມື Fancy
   height: ຄວາມສູງ
   hide_mode:
@@ -272,11 +273,13 @@ weg:
       always: ສະເໝີ
       label: ການເບິ່ງເຫັນລາຍການທີ່ປັກໝຸດໄວ້
       when_primary: ເມື່ອຈໍພາບແມ່ນປະຖົມ
+    show_instance_counter: ສະແດງວຽກງານຕ້ານການສໍາລັບເປີດປ່ອງຢ້ຽມ
     size: ຂະໜາດລາຍການ
     temporal_visibility:
       all: ທັງໝົດ
       label: ການເບິ່ງເຫັນລາຍການທີ່ບໍ່ໄດ້ປັກໝຸດ
       on_monitor: ໃນ Monitor
+    thumbnail_generation_enabled: ສ້າງຮູບຫຍໍ້ກ່ຽວກັບສິນຄ້າ
     visible_separators: ຕົວແຍກທີ່ເບິ່ງເຫັນໄດ້
     zoom_size: ຂະຫຍາຍຂະໜາດ (ໃຊ້ສຳລັບຮູບແບບສີສັນ)
   label: Dock/Taskbar
