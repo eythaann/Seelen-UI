@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
+import { SpecificIcon } from 'src/apps/shared/components/Icon';
 
 import { StartMenuWegItem } from '../../shared/store/domain';
 
@@ -41,9 +42,7 @@ export const StartMenu = memo(({ item, drag }: Props) => {
           onContextMenu={(e) => e.stopPropagation()}
         >
           <BackgroundByLayersV2 prefix="item" />
-          <div className="weg-item-icon">
-            <div className="weg-item-icon-start" />
-          </div>
+          <SpecificIcon className="weg-item-icon weg-item-start-icon" name={'@seelen/weg::start-menu'} />
         </div>
       </WithContextMenu>
     </DraggableItem>

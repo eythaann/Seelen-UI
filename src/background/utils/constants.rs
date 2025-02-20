@@ -5,13 +5,11 @@ use std::{
 
 use itertools::Itertools;
 use lazy_static::lazy_static;
-use tauri::{path::BaseDirectory, Manager};
+use tauri::Manager;
 
-use crate::{error_handler::Result, seelen::get_app_handle};
+use crate::seelen::get_app_handle;
 
 lazy_static! {
-    static ref ICONS: Icons = Icons::instance().expect("Failed to load icons paths");
-
     pub static ref SEELEN_COMMON: Arc<SeelenCommon> = Arc::new(SeelenCommon::new());
 
     /**
@@ -38,25 +36,6 @@ pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 6] = [
     "GameBar.exe",      // Windows Xbox Game Bar
     "SnippingTool.exe", // Windows Snipping Tool
 ];
-
-pub struct Icons {
-    missing_app: PathBuf,
-}
-
-impl Icons {
-    fn instance() -> Result<Self> {
-        let handle = get_app_handle();
-        Ok(Self {
-            missing_app: handle
-                .path()
-                .resolve("static/icons/missing.png", BaseDirectory::Resource)?,
-        })
-    }
-
-    pub fn missing_app() -> PathBuf {
-        ICONS.missing_app.clone()
-    }
-}
 
 pub struct SeelenCommon {
     // general
