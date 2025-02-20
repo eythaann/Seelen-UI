@@ -52,7 +52,7 @@ body {
   }
 }
 
-.fancy-toolbar {
+#root {
   .ft-bar {
     position: relative;
     width: 100%;

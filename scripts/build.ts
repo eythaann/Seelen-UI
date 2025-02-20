@@ -101,6 +101,8 @@ const entryPoints = appFolders
   })
   .filter((file) => !!file);
 
+entryPoints.push('./src/apps/shared/integrity.ts');
+
 const copyPublicByEntry: esbuild.Plugin = {
   name: 'copy-public-by-entry',
   setup(build) {
