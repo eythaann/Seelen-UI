@@ -5,9 +5,7 @@ import { convertFileSrc } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { LAZY_CONSTANTS } from '../../shared/utils/infra';
-
-import { Icon } from 'src/apps/shared/components/Icon';
+import { Icon, MissingIcon } from 'src/apps/shared/components/Icon';
 
 interface Props {
   user: User;
@@ -19,16 +17,12 @@ export function UserProfile({ user }: Props) {
   return (
     <div className="userhome-profile-container">
       <div className="userhome-profile-picture-container">
-        <img
-          className="userhome-profile-picture"
-          src={convertFileSrc(user.profilePicturePath ?? LAZY_CONSTANTS.MISSING_ICON_PATH)}
-        />
-        <Tooltip
-          mouseLeaveDelay={0}
-          arrow={false}
-          title={t('settings.log_out')}
-          placement="bottom"
-        >
+        {user.profilePicturePath ? (
+          <img className="userhome-profile-picture" src={convertFileSrc(user.profilePicturePath)} />
+        ) : (
+          <MissingIcon />
+        )}
+        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.log_out')} placement="bottom">
           <button
             className="userhome-profile-lock-button"
             onClick={() => invoke(SeelenCommand.LogOut)}

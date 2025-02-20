@@ -2,6 +2,7 @@ import { UnlistenFn } from '@tauri-apps/api/event';
 import React, { ImgHTMLAttributes } from 'react';
 
 import { iconPackManager } from './common';
+import cs from './index.module.css';
 
 interface SpecificIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   name: string;
@@ -52,7 +53,7 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
 
     return (
       <figure {...imgProps} style={style}>
-        <img src={this.state.src} style={{ height: '100%' }} />
+        <img src={this.state.src} className={cs.inner} />
       </figure>
     );
   }

@@ -18,7 +18,7 @@ export function Icon(props: ReactIconProps) {
     <InlineSVG
       {...rest}
       src={`../icons/${iconName}.svg`}
-      className={cx('slu-icon', cs.icon, className)}
+      className={cx('slu-icon', cs.reactIcon, className)}
       style={{ height: size, color }}
     />
   );

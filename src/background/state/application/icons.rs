@@ -118,7 +118,7 @@ impl IconPacksManager {
         Ok(())
     }
 
-    pub fn sanitize_system_icon_pack(&mut self) -> Result<()> {
+    pub fn sanitize_system_icon_pack(&mut self, initial: bool) -> Result<()> {
         // add default icon pack if not exists
         if !self.0.contains_key("system") {
             let mut icon_pack = IconPack {
@@ -137,9 +137,12 @@ impl IconPacksManager {
 
         let system_pack = self.get_system_mut();
         let missing_path = SEELEN_COMMON.icons_path().join("system/missing-icon.png");
-        let start_path = SEELEN_COMMON.icons_path().join("system/start-menu.svg");
+        let start_path = SEELEN_COMMON
+            .icons_path()
+            .join("system/start-menu-icon.svg");
+        let folder_path = SEELEN_COMMON.icons_path().join("system/folder-icon.svg");
 
-        if !missing_path.exists() {
+        if !missing_path.exists() || initial {
             std::fs::copy(
                 SEELEN_COMMON
                     .app_resource_dir()
@@ -148,7 +151,7 @@ impl IconPacksManager {
             )?;
         }
 
-        if !start_path.exists() {
+        if !start_path.exists() || initial {
             std::fs::copy(
                 SEELEN_COMMON
                     .app_resource_dir()
@@ -157,10 +160,23 @@ impl IconPacksManager {
             )?;
         }
 
+        if !folder_path.exists() || initial {
+            std::fs::copy(
+                SEELEN_COMMON
+                    .app_resource_dir()
+                    .join("static/icons/folder.svg"),
+                folder_path,
+            )?;
+        }
+
         system_pack.missing = Some(Icon::Simple(PathBuf::from("missing-icon.png")));
         system_pack.specific.insert(
             "@seelen/weg::start-menu".to_string(),
-            Icon::Simple(PathBuf::from("start-menu.svg")),
+            Icon::Simple(PathBuf::from("start-menu-icon.svg")),
+        );
+        system_pack.specific.insert(
+            "@seelen/weg::folder".to_string(),
+            Icon::Simple(PathBuf::from("folder-icon.svg")),
         );
 
         Ok(())
@@ -198,7 +214,7 @@ impl FullState {
         Ok(serde_yaml::from_str(&std::fs::read_to_string(&file)?)?)
     }
 
-    pub(super) fn load_icons_packs(&mut self) -> Result<()> {
+    pub(super) fn load_icons_packs(&mut self, initial: bool) -> Result<()> {
         let entries = std::fs::read_dir(SEELEN_COMMON.icons_path())?;
         let mut icon_packs_manager = trace_lock!(self.icon_packs);
         icon_packs_manager.0.clear();
@@ -223,7 +239,7 @@ impl FullState {
                 .insert(icon_pack.metadata.filename.clone(), icon_pack);
         }
 
-        icon_packs_manager.sanitize_system_icon_pack()?;
+        icon_packs_manager.sanitize_system_icon_pack(initial)?;
         Ok(())
     }
 }

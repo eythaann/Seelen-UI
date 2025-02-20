@@ -1,4 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button, Slider, Tooltip } from 'antd';
 import { debounce } from 'lodash';
@@ -7,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
-import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
 import { calcLuminance, selectDefaultOutput } from '../application';
@@ -25,12 +25,17 @@ const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
 const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
+const DEFAULT_THUMBNAIL = await path.resolve(
+  await path.resourceDir(),
+  'static',
+  'icons',
+  'music_thumbnail.jpg',
+);
+
 function MediaSession({ session }: { session: MediaChannelTransportData }) {
   const [luminance, setLuminance] = useState(0);
 
-  let thumbnailSrc = convertFileSrc(
-    session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
-  );
+  let thumbnailSrc = convertFileSrc(session?.thumbnail ? session.thumbnail : DEFAULT_THUMBNAIL);
 
   useEffect(() => {
     calcLuminance(thumbnailSrc).then(setLuminance).catch(console.error);

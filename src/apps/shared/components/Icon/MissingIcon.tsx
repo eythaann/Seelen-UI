@@ -2,6 +2,7 @@ import { UnlistenFn } from '@tauri-apps/api/event';
 import React, { ImgHTMLAttributes } from 'react';
 
 import { iconPackManager } from './common';
+import cs from './index.module.css';
 
 interface MissingIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {}
 
@@ -44,7 +45,7 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
 
     return (
       <figure {...this.props} style={style}>
-        <img src={this.state.src || ''} style={{ height: '100%' }} />
+        <img src={this.state.src || ''} className={cs.inner} />
       </figure>
     );
   }

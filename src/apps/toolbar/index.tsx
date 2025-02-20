@@ -4,7 +4,6 @@ import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
 import { registerStoreEvents, store } from './modules/shared/store/infra';
-import { loadConstants } from './modules/shared/utils/infra';
 
 import { App } from './app';
 
@@ -19,7 +18,6 @@ import './styles/global.css';
 
 wrapConsole();
 await declareDocumentAsLayeredHitbox();
-await loadConstants();
 await registerStoreEvents();
 await loadTranslations();
 

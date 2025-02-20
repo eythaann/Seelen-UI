@@ -4,6 +4,7 @@ import React, { ImgHTMLAttributes } from 'react';
 
 import { iconPackManager } from './common';
 import { MissingIcon } from './MissingIcon';
+import cs from './index.module.css';
 
 interface FileIconProps extends GetIconArgs, Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   /** if true, no missing icon will be rendered in case no icon found */
@@ -72,7 +73,7 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
 
       return (
         <figure {...imgProps} style={style}>
-          <img src={this.state.src} style={{ height: '100%' }} />
+          <img src={this.state.src} className={cs.inner} />
         </figure>
       );
     }

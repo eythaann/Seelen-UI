@@ -1,5 +1,4 @@
-<svg viewBox="0 0 940 800" version="1.1" fill="inherit" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 0 195 H 460 L 460 95 l -95 -95 H 95 c -47 0 -95 38 -95 95" fill="inherit" />
-  <path d="M 0 195 H 460 L 460 95 l -95 -95 H 95 c -47 0 -95 38 -95 95" fill="#0004" />
-  <rect y="95" rx="13%" width="100%" height="705" fill="inherit" />
+<svg viewBox="0 0 940 800" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 0 220 H 460 L 460 95 l -95 -95 H 95 c -47 0 -95 38 -95 95" fill="#ccc" />
+  <rect y="95" rx="13%" width="100%" height="705" fill="#fff" />
 </svg>

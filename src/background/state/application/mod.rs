@@ -128,7 +128,7 @@ impl FullState {
         if is_changing_icons_metadata {
             if !is_only_changing_system_icons {
                 log::info!("Icons Packs changed");
-                self.load_icons_packs()?;
+                self.load_icons_packs(false)?;
             }
             self.emit_icon_packs()?;
         }
@@ -322,7 +322,7 @@ impl FullState {
         self.read_weg_items()?;
         self.read_toolbar_items()?;
         self.load_themes()?;
-        self.load_icons_packs()?;
+        self.load_icons_packs(true)?;
         self.load_settings_by_app()?;
         self.load_history()?;
         self.load_plugins()?;

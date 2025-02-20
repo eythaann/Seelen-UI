@@ -1,12 +1,11 @@
 import { SeelenWegSide } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
+import { resolve, resourceDir } from '@tauri-apps/api/path';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-
-import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { calcLuminance } from '../../../../toolbar/modules/media/application';
 import { Selectors } from '../../shared/store/app';
@@ -25,6 +24,13 @@ const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
 const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
+const DEFAULT_THUMBNAIL = await resolve(
+  await resourceDir(),
+  'static',
+  'icons',
+  'music_thumbnail.jpg',
+);
+
 export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean }) {
   const [luminance, setLuminance] = useState(0);
 
@@ -32,9 +38,7 @@ export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean
   const sessions = useSelector(Selectors.mediaSessions);
   const session = sessions.find((s) => s.default);
 
-  let thumbnailSrc = convertFileSrc(
-    session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
-  );
+  let thumbnailSrc = convertFileSrc(session?.thumbnail ? session.thumbnail : DEFAULT_THUMBNAIL);
 
   const { t } = useTranslation();
 

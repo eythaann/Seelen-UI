@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
-import { updatePreviews } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
 import { parseCommand } from 'src/apps/shared/Command';
@@ -70,7 +69,9 @@ export const UserApplication = memo(({ item, drag, onAssociatedViewOpenChanged }
 
   useEffect(() => {
     if (openPreview && settings.thumbnailGenerationEnabled) {
-      updatePreviews(item.windows.map((w) => w.handle));
+      invoke(SeelenCommand.WegRequestUpdatePreviews, {
+        handles: item.windows.map((w) => w.handle),
+      });
     }
   }, [openPreview]);
 
@@ -161,7 +162,9 @@ export const UserApplication = memo(({ item, drag, onAssociatedViewOpenChanged }
             <BackgroundByLayersV2 prefix="item" />
             <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
             {notificationsCount > 0 && <div className="weg-item-badge">{notificationsCount}</div>}
-            {settings.showInstanceCounter && item.windows.length > 1 && <div className="weg-item-instance-counter">{item.windows.length}</div>}
+            {settings.showInstanceCounter && item.windows.length > 1 && (
+              <div className="weg-item-instance-counter">{item.windows.length}</div>
+            )}
             <div
               className={cx('weg-item-open-sign', {
                 'weg-item-open-sign-active': !!item.windows.length,

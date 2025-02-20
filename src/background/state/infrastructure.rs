@@ -132,7 +132,7 @@ pub fn state_delete_cached_icons() -> Result<()> {
     let mutex = FULL_STATE.load().icon_packs().clone();
     let mut icon_manager = trace_lock!(mutex);
     icon_manager.clear_system_icons()?;
-    icon_manager.sanitize_system_icon_pack()?;
+    icon_manager.sanitize_system_icon_pack(false)?;
     icon_manager.write_system_icon_pack()?;
     Ok(())
 }

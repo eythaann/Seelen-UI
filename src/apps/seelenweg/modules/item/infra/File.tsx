@@ -1,12 +1,11 @@
 import { SeelenCommand } from '@seelen-ui/lib';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { memo, useEffect, useState } from 'react';
+import { invoke } from '@tauri-apps/api/core';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
-import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
-import InlineSVG from 'src/apps/seelenweg/components/InlineSvg';
+import { FileIcon, SpecificIcon } from 'src/apps/shared/components/Icon';
 
 import { PinnedWegItem } from '../../shared/store/domain';
 
@@ -19,20 +18,7 @@ interface Props {
 }
 
 export const FileOrFolder = memo(({ item }: Props) => {
-  const [iconSrc, setIconSrc] = useState<string>(
-    item.subtype === 'Folder' ? convertFileSrc(LAZY_CONSTANTS.FOLDER_ICON_PATH) : '',
-  );
-
   const { t } = useTranslation();
-
-  useEffect(() => {
-    // we can improve this later to use the useIcon hook properly
-    if (item.path.endsWith('lnk')) {
-      invoke<string | null>(SeelenCommand.GetIcon, { path: item.path }).then((icon) => {
-        setIconSrc(convertFileSrc(icon || LAZY_CONSTANTS.MISSING_ICON_PATH));
-      });
-    }
-  }, [item]);
 
   return (
     <DraggableItem item={item}>
@@ -45,10 +31,10 @@ export const FileOrFolder = memo(({ item }: Props) => {
           onContextMenu={(e) => e.stopPropagation()}
         >
           <BackgroundByLayersV2 prefix="item" />
-          {iconSrc.endsWith('.svg') ? (
-            <InlineSVG className="weg-item-icon" src={iconSrc} />
+          {item.subtype === 'Folder' ? (
+            <SpecificIcon className="weg-item-icon weg-item-folder-icon" name="@seelen/weg::folder" />
           ) : (
-            <img className="weg-item-icon" src={iconSrc} />
+            <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
           )}
         </div>
       </WithContextMenu>
