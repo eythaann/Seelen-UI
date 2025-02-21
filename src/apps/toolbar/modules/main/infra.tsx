@@ -6,6 +6,7 @@ import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'r
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
+import { BluetoothModule } from '../bluetooth/infra/Module';
 import { DateModule } from '../Date/infra';
 import { DeviceModule } from '../Device/infra';
 import { GenericItem, Item } from '../item/infra/infra';
@@ -38,6 +39,7 @@ const modulesByType: Record<
   [ToolbarItemType.Settings]: SettingsModule,
   [ToolbarItemType.Workspaces]: WorkspacesModule,
   [ToolbarItemType.Tray]: TrayModule,
+  [ToolbarItemType.Bluetooth]: BluetoothModule,
   [ToolbarItemType.Network]: NetworkModule,
   [ToolbarItemType.Media]: MediaModule,
   [ToolbarItemType.Device]: DeviceModule,

@@ -1,5 +1,7 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import {
+  BluetoothDevices,
+  BluetoothRadio,
   DesktopFolder,
   DocumentsFolder,
   DownloadsFolder,
@@ -36,6 +38,9 @@ const initialState: RootState = {
   focused: null,
   settings: (await Settings.default()).fancyToolbar,
   env: (await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>,
+  bluetoothDevices: (await BluetoothDevices.getAsync()).all(),
+  discoveredBluetoothDevices: (BluetoothDevices.default()).all(),
+  bluetoothRadioState: (await BluetoothRadio.getAsync()).state,
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
     acLineStatus: 255,
