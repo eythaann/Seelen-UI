@@ -1,5 +1,6 @@
 mod app_bar;
 mod com;
+pub mod event_window;
 mod iterator;
 pub mod monitor;
 pub mod process;

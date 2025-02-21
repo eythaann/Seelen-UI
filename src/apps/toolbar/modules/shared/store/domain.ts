@@ -18,13 +18,14 @@ export interface PowerStatus {
 }
 
 export enum PowerPlan {
-  Balanced = 'Balanced',
   BatterySaver = 'BatterySaver',
+  Balanced = 'Balanced',
   BetterBattery = 'BetterBattery',
-  GameMode = 'GameMode',
   HighPerformance = 'HighPerformance',
   MaxPerformance = 'MaxPerformance',
+  GameMode = 'GameMode',
   MixedReality = 'MixedReality',
+  Unknown = 'Unknown',
 }
 
 export interface Battery {

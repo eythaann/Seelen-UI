@@ -127,16 +127,20 @@ impl From<AppError> for tauri::ipc::InvokeError {
 impl From<tauri_plugin_shell::process::Output> for AppError {
     fn from(output: tauri_plugin_shell::process::Output) -> Self {
         let msg = if !output.stderr.is_empty() {
-            // let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stderr);
-            // cow.to_string().into()
-            String::from_utf8_lossy(&output.stderr).to_string()
+            let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stderr);
+            cow.to_string().to_owned()
         } else {
-            // let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
-            // cow.to_string().into()
-            String::from_utf8_lossy(&output.stdout).to_string()
+            let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
+            cow.to_string().to_owned()
         };
         let backtrace = backtrace::Backtrace::new();
         AppError { msg, backtrace }
+    }
+}
+
+impl<T> From<crossbeam_channel::SendError<T>> for AppError {
+    fn from(_err: crossbeam_channel::SendError<T>) -> Self {
+        "Crossbeam channel disconnected".into()
     }
 }
 

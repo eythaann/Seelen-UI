@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 #![feature(never_type)]
 
+mod context;
 mod error_handler;
 mod exposed;
 mod hook;

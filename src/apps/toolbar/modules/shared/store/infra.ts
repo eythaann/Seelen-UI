@@ -66,15 +66,15 @@ export async function registerStoreEvents() {
   Settings.getAsync().then(loadSettings);
   Settings.onChange(loadSettings);
 
-  await listenGlobal<PowerStatus>('power-status', (event) => {
+  await listenGlobal<PowerStatus>(SeelenEvent.PowerStatus, (event) => {
     store.dispatch(RootActions.setPowerStatus(event.payload));
   });
 
-  await listenGlobal<PowerPlan>('power-plan', (event) => {
+  await listenGlobal<PowerPlan>(SeelenEvent.PowerPlan, (event) => {
     store.dispatch(RootActions.setPowerPlan(event.payload));
   });
 
-  await listenGlobal<Battery[]>('batteries-status', (event) => {
+  await listenGlobal<Battery[]>(SeelenEvent.BatteriesStatus, (event) => {
     store.dispatch(RootActions.setBatteries(event.payload));
   });
 

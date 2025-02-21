@@ -28,31 +28,32 @@ impl From<SYSTEM_POWER_STATUS> for PowerStatus {
     }
 }
 
+// https://learn.microsoft.com/en-us/windows/win32/api/powersetting/ne-powersetting-effective_power_mode
 #[derive(Debug, Clone, Serialize)]
-pub enum PowerPlan {
-    Balanced,
+#[repr(i32)]
+pub enum PowerMode {
     BatterySaver,
     BetterBattery,
-    GameMode,
+    Balanced,
     HighPerformance,
     MaxPerformance,
+    GameMode,
     MixedReality,
+    Unknown = i32::MAX,
 }
 
-impl TryFrom<EFFECTIVE_POWER_MODE> for PowerPlan {
-    type Error = AppError;
-    fn try_from(mode: EFFECTIVE_POWER_MODE) -> Result<Self> {
-        // https://learn.microsoft.com/en-us/windows/win32/api/powersetting/ne-powersetting-effective_power_mode
-        Ok(match mode.0 {
-            2i32 => PowerPlan::Balanced,
-            0i32 => PowerPlan::BatterySaver,
-            1i32 => PowerPlan::BetterBattery,
-            5i32 => PowerPlan::GameMode,
-            3i32 => PowerPlan::HighPerformance,
-            4i32 => PowerPlan::MaxPerformance,
-            6i32 => PowerPlan::MixedReality,
-            _ => return Err("Not awaited windows state!".into()),
-        })
+impl From<EFFECTIVE_POWER_MODE> for PowerMode {
+    fn from(mode: EFFECTIVE_POWER_MODE) -> Self {
+        match mode.0 {
+            0 => PowerMode::BatterySaver,
+            1 => PowerMode::BetterBattery,
+            2 => PowerMode::Balanced,
+            3 => PowerMode::HighPerformance,
+            4 => PowerMode::MaxPerformance,
+            5 => PowerMode::GameMode,
+            6 => PowerMode::MixedReality,
+            _ => PowerMode::Unknown,
+        }
     }
 }
 
