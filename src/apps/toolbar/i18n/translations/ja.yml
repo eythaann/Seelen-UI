@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: ツールバーのロック解除
   settings: 設定
   task_manager: タスクマネージャー
+keyboard:
+  more: その他のキーボード設定
+  title: キーボードレイアウト
 media:
   device:
     comunications: コミュニケーション

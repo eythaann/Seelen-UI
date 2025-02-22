@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Lås upp verktygsfältet
   settings: Inställningar
   task_manager: Task Manager
+keyboard:
+  more: Fler inställningar för tangentbord
+  title: Layout för tangentbord
 media:
   device:
     comunications: Kommunikation

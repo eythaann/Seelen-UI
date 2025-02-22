@@ -54,6 +54,7 @@ define_app_errors!(
     WinScreenshot(win_screenshot::capture::WSError);
     EvalExpr(evalexpr::EvalexprError);
     TryFromSliceError(std::array::TryFromSliceError);
+    ParseIntError(std::num::ParseIntError);
 );
 
 impl std::fmt::Debug for AppError {

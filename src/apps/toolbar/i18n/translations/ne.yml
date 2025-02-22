@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: अनलक उपकरणपट्टी
   settings: सेटिङहरू
   task_manager: कार्य प्रबन्धक
+keyboard:
+  more: अधिक कुञ्जीपाटी सेटिंग्स
+  title: कीबोर्ड लेआउट
 media:
   device:
     comunications: संचार

@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: فتح شريط الأدوات
   settings: إعدادات
   task_manager: مدير المهام
+keyboard:
+  more: المزيد من إعدادات لوحة المفاتيح
+  title: تخطيط لوحة المفاتيح
 media:
   device:
     comunications: مجال الاتصالات

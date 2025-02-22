@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Odemknutí panelu nástrojů
   settings: Nastavení
   task_manager: Správce úloh
+keyboard:
+  more: Další nastavení klávesnice
+  title: Rozložení klávesnice
 media:
   device:
     comunications: komunikace

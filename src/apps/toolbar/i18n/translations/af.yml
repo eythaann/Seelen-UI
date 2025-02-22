@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Ontsluit werkbalk
   settings: Instellings
   task_manager: Taakbestuurder
+keyboard:
+  more: Meer sleutelbordinstellings
+  title: Sleutelborduitleg
 media:
   device:
     comunications: Kommunikasie

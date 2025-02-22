@@ -10,20 +10,33 @@ export interface AnimatedPopoverProps extends PopoverProps {
   animationDescription: CustomAnimationProps;
 }
 
-export function AnimatedPopover({ children, open, onOpenChange, content, animationDescription, ...popoverProps }: AnimatedPopoverProps) {
+export function AnimatedPopover({
+  children,
+  open,
+  onOpenChange,
+  content,
+  animationDescription,
+  ...popoverProps
+}: AnimatedPopoverProps) {
   const [delayedOpenPopover, setDelayedOpenPopover] = useState(false);
   const [openReplacement, setOpenReplacement] = useState(false);
 
-  useTimeout(() => {
-    setDelayedOpenPopover((open || openReplacement));
-  }, animationDescription.maxAnimationTimeMs, [open || openReplacement]);
+  useTimeout(
+    () => {
+      setDelayedOpenPopover(open || openReplacement);
+    },
+    animationDescription.maxAnimationTimeMs ?? 500,
+    [open || openReplacement],
+  );
 
   const animationObject: Record<string, boolean> = {};
   if (animationDescription.openAnimationName) {
-    animationObject[animationDescription.openAnimationName] = (open || openReplacement) && !delayedOpenPopover;
+    animationObject[animationDescription.openAnimationName] =
+      (open || openReplacement) && !delayedOpenPopover;
   }
   if (animationDescription.closeAnimationName) {
-    animationObject[animationDescription.closeAnimationName] = delayedOpenPopover && !(open || openReplacement);
+    animationObject[animationDescription.closeAnimationName] =
+      delayedOpenPopover && !(open || openReplacement);
   }
 
   return (
@@ -37,10 +50,12 @@ export function AnimatedPopover({ children, open, onOpenChange, content, animati
         }
       }}
       {...popoverProps}
-      content={content &&
-        <div className={cx(animationObject)}>
-          <>{content}</>
-        </div>
+      content={
+        content && (
+          <div className={cx(animationObject)}>
+            <>{content}</>
+          </div>
+        )
       }
     >
       {children}

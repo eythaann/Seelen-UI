@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Sbloccare la barra degli strumenti
   settings: Impostazioni
   task_manager: Gestione Attività
+keyboard:
+  more: Altre impostazioni della tastiera
+  title: Layout della tastiera
 media:
   device:
     comunications: Comunicazioni

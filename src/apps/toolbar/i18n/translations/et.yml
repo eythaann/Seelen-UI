@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Tööriistariba avamine
   settings: Seaded
   task_manager: Tegumihaldur
+keyboard:
+  more: Rohkem klaviatuuri seadeid
+  title: Klaviatuuri paigutus
 media:
   device:
     comunications: Suhtlus

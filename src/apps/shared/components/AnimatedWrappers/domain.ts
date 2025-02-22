@@ -1,5 +1,5 @@
 export interface CustomAnimationProps {
-  maxAnimationTimeMs: number;
+  maxAnimationTimeMs?: number;
   openAnimationName: string;
   closeAnimationName: string;
 }

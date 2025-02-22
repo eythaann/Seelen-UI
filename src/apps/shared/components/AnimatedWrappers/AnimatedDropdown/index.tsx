@@ -16,7 +16,7 @@ export function AnimatedDropdown({ children, open, onOpenChange, dropdownRender,
 
   useTimeout(() => {
     setDelayedOpenPopover((open || openReplacement));
-  }, animationDescription.maxAnimationTimeMs, [open || openReplacement]);
+  }, animationDescription.maxAnimationTimeMs || 500, [open || openReplacement]);
 
   const animationClassnames: Record<string, boolean> = {};
   if (animationDescription.openAnimationName) {

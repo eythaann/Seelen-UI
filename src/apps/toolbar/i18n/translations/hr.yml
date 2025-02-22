@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Otključavanje alatne trake
   settings: postavke
   task_manager: Upravitelj zadataka
+keyboard:
+  more: Više postavki tipkovnice
+  title: Izgled tipkovnice
 media:
   device:
     comunications: Komunikacija

@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Atrakinti įrankių juostą
   settings: Nustatymai
   task_manager: Užduočių tvarkyklė
+keyboard:
+  more: Daugiau klaviatūros nustatymų
+  title: Klaviatūros išdėstymas
 media:
   device:
     comunications: Ryšiai

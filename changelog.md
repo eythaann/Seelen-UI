@@ -7,6 +7,7 @@
 - show instances counter of the same app on dock.
 - allow set the toolbar on different positions.
 - allow set custom start menu icon.
+- language selector for toolbar.
 
 ### enhancements
 - settings shown each time on startup.

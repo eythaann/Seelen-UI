@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Buka kunci bar alat
   settings: tetapan
   task_manager: Pengurus Tugas
+keyboard:
+  more: Lebih banyak tetapan papan kekunci
+  title: Susun atur papan kekunci
 media:
   device:
     comunications: Komunikasi

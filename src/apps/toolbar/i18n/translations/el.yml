@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Ξεκλείδωμα γραμμής εργαλείων
   settings: Ρυθμίσεις
   task_manager: Task Manager
+keyboard:
+  more: Περισσότερες ρυθμίσεις πληκτρολογίου
+  title: Διάταξη πληκτρολογίου
 media:
   device:
     comunications: Διαβιβάσεις

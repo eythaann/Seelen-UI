@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Symbolleiste entsperren
   settings: Einstellungen
   task_manager: Task-Manager
+keyboard:
+  more: Weitere Tastatur-Einstellungen
+  title: Tastatur-Layout
 media:
   device:
     comunications: Kommunikation

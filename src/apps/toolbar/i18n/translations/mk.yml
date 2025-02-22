@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Отклучете ја лентата со алатки
   settings: Поставки
   task_manager: Управувач со задачи
+keyboard:
+  more: Повеќе поставки за тастатура
+  title: Распоред на тастатура
 media:
   device:
     comunications: Комуникации

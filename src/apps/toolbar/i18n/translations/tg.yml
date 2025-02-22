@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Ворид кардани панели асбобҳо
   settings: Танзимотҳо
   task_manager: Менеҷери вазифа
+keyboard:
+  more: Танзимоти клавиатура
+  title: Тарҳбандии клавиатура
 media:
   device:
     comunications: Иртибот

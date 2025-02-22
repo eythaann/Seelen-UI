@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Unlock toolbar
   settings: Settings
   task_manager: Task Manager
+keyboard:
+  more: More Keyboard Settings
+  title: Keyboard Layout
 media:
   device:
     comunications: Communications

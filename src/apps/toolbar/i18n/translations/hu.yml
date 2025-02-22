@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Eszköztár feloldása
   settings: Beállítások elemre
   task_manager: Feladatkezelő
+keyboard:
+  more: További billentyűzetbeállítások
+  title: Billentyűzet elrendezése
 media:
   device:
     comunications: Kommunikáció

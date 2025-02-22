@@ -6,6 +6,7 @@ use crate::{
     error_handler::Result,
     log_error,
     modules::{
+        language::register_language_events,
         media::infrastructure::{register_media_events, release_media_events},
         monitors::infrastructure::register_monitor_webview_events,
         network::infrastructure::register_network_events,
@@ -45,6 +46,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
     register_monitor_webview_events();
     register_colors_events();
     register_power_events();
+    register_language_events();
     Ok(())
 }
 

@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Otključajte alatnu traku
   settings: Postavke
   task_manager: Task Manager
+keyboard:
+  more: Više postavki tastature
+  title: Izgled tastature
 media:
   device:
     comunications: Komunikacije

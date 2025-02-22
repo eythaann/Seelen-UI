@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
   DocumentsFolder,
   DownloadsFolder,
+  LanguageList,
   MusicFolder,
   PicturesFolder,
   PluginList,
@@ -143,6 +144,8 @@ export async function registerStoreEvents() {
       onFocusChanged.flush();
     }
   });
+
+  LanguageList.onChange((list) => store.dispatch(RootActions.setLanguages(list.asArray())));
 
   UserDetails.onChange((details) => store.dispatch(RootActions.setUser(details.user)));
   RecentFolder.onChange((details) =>

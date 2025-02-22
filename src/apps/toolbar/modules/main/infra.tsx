@@ -9,6 +9,7 @@ import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundBy
 import { DateModule } from '../Date/infra';
 import { DeviceModule } from '../Device/infra';
 import { GenericItem, Item } from '../item/infra/infra';
+import { KeyboardModule } from '../Keyboard/infra';
 import { MediaModule } from '../media/infra/Module';
 import { NetworkModule } from '../network/infra/Module';
 import { NotificationsModule } from '../Notifications/infra/Module';
@@ -35,6 +36,7 @@ const modulesByType: Record<
   [ToolbarItemType.User]: UserModule,
   [ToolbarItemType.Date]: DateModule,
   [ToolbarItemType.Power]: PowerModule,
+  [ToolbarItemType.Keyboard]: KeyboardModule,
   [ToolbarItemType.Settings]: SettingsModule,
   [ToolbarItemType.Workspaces]: WorkspacesModule,
   [ToolbarItemType.Tray]: TrayModule,
@@ -139,7 +141,6 @@ export function ToolBar() {
   return (
     <AnimatedDropdown
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'ft-bar-context-menu-open',
         closeAnimationName: 'ft-bar-context-menu-close',
       }}

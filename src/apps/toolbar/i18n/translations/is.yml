@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Opnaðu tækjastiku
   settings: Stillingar
   task_manager: Verkefnastjóri
+keyboard:
+  more: Fleiri lyklaborðsstillingar
+  title: Lyklaborð skipulag
 media:
   device:
     comunications: Samskipti

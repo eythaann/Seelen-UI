@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: ដោះសោរបារឧបករណ៍ដោះសោរបារឧបករណ៍
   settings: ការកំណត់
   task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
+keyboard:
+  more: ការកំណត់ក្តារចុចបន្ថែមទៀត
+  title: ប្លង់ក្តារចុច
 media:
   device:
     comunications: ការអាេយអាេយរយការត្យេដ្ឋ

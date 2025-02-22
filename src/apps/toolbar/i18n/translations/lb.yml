@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Spär Toolbar
   settings: Astellungen
   task_manager: Aufgab Manager
+keyboard:
+  more: Méi Keyboard Astellunge
+  title: Keyboard Layout
 media:
   device:
     comunications: Kommunikatiounen

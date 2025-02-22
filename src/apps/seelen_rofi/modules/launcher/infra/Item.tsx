@@ -33,7 +33,6 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
   return (
     <AnimatedDropdown
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'launcher-item-context-menu-open',
         closeAnimationName: 'launcher-item-context-menu-close',
       }}

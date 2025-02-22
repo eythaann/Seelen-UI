@@ -1,0 +1,22 @@
+id: '@default/keyboard'
+icon: FaRegKeyboard
+target: '@seelen/fancy-toolbar'
+plugin:
+  type: keyboard
+  tooltip: >-
+    concat(
+      activeLang.name,
+      " - ",
+      activeKeyboard.displayName
+    )
+  template: >-
+    inputsLenght = count(activeLang.inputMethods);
+    concat(
+      activeLangPrefix,
+      inputsLenght > 1 ? " - " : "",
+      inputsLenght > 1 ? activeKeyboardPrefix : ""
+    )
+  style:
+    flexShrink: 0
+    width: min-content
+    fontWeight: 600

@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Vebijêrin Toolbar
   settings: Settings
   task_manager: Gerînendetiya Peywiran
+keyboard:
+  more: Mîhengên bêtir klavyeyê
+  title: Bişkojka Keyboard
 media:
   device:
     comunications: Têkilî

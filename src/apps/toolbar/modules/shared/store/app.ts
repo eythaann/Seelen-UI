@@ -3,6 +3,7 @@ import {
   DesktopFolder,
   DocumentsFolder,
   DownloadsFolder,
+  LanguageList,
   MusicFolder,
   PicturesFolder,
   RecentFolder,
@@ -59,6 +60,7 @@ const initialState: RootState = {
   mediaInputs: [],
   notifications: [],
   colors: UIColors.default().inner,
+  languages: [],
 };
 
 export const RootSlice = createSlice({
@@ -120,9 +122,15 @@ export const Selectors = StateBuilder.compositeSelector(initialState);
 
 // no core things that can be lazy loaded to improve performance
 export async function lazySlice(d: Dispatch) {
-  invoke<PowerStatus>(SeelenCommand.GetPowerStatus).then((status) => d(RootActions.setPowerStatus(status)));
+  invoke<PowerStatus>(SeelenCommand.GetPowerStatus).then((status) =>
+    d(RootActions.setPowerStatus(status)),
+  );
   invoke<PowerPlan>(SeelenCommand.GetPowerMode).then((plan) => d(RootActions.setPowerPlan(plan)));
-  invoke<Battery[]>(SeelenCommand.GetBatteries).then((batteries) => d(RootActions.setBatteries(batteries)));
+  invoke<Battery[]>(SeelenCommand.GetBatteries).then((batteries) =>
+    d(RootActions.setBatteries(batteries)),
+  );
+
+  LanguageList.getAsync().then((list) => d(RootActions.setLanguages(list.asArray())));
 
   const obj = {
     userRecentFolder: (await RecentFolder.getAsync()).asArray(),

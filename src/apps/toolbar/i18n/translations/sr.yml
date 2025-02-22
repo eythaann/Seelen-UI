@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Откључајте траку са алаткама
   settings: Подешавања
   task_manager: Таск Манагер
+keyboard:
+  more: Више подешавања тастатуре
+  title: Изглед тастатуре
 media:
   device:
     comunications: Комуникација

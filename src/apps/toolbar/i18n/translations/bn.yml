@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: সরঞ্জামদণ্ড আনলক করুন
   settings: সেটিংস
   task_manager: টাস্ক ম্যানেজার
+keyboard:
+  more: আরও কীবোর্ড সেটিংস
+  title: কীবোর্ড লেআউট
 media:
   device:
     comunications: যোগাযোগ

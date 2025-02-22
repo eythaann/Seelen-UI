@@ -127,9 +127,9 @@ function WlanSelector({ open }: { open: boolean }) {
       </div>
 
       <div className="wlan-selector-footer">
-        <span onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:network' })}>
+        <button className="wlan-selector-footer-button" onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:network' })}>
           {t('network.more')}
-        </span>
+        </button>
       </div>
     </div>
   );
@@ -169,7 +169,6 @@ export function WithWlanSelector({ setActive, children }: WlanSelectorProperties
   return (
     <AnimatedPopover
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'wlan-open',
         closeAnimationName: 'wlan-close',
       }}

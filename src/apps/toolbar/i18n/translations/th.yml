@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: ปลดล็อคแถบเครื่องมือ
   settings: การตั้งค่า
   task_manager: ตัวจัดการงาน
+keyboard:
+  more: การตั้งค่าแป้นพิมพ์เพิ่มเติม
+  title: เค้าโครงแป้นพิมพ์
 media:
   device:
     comunications: การสื่อสาร

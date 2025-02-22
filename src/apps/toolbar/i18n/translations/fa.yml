@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: نوار ابزار را باز کنید
   settings: تنظیمات
   task_manager: Task Manager
+keyboard:
+  more: تنظیمات صفحه کلید بیشتر
+  title: چیدمان صفحه کلید
 media:
   device:
     comunications: ارتباطات

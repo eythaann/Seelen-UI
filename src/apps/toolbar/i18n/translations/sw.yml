@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Fungua zana ya zana
   settings: Mipangilio
   task_manager: Meneja wa Kazi
+keyboard:
+  more: Mipangilio ya kibodi zaidi
+  title: Mpangilio wa kibodi
 media:
   device:
     comunications: Mawasiliano

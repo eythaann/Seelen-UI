@@ -24,7 +24,6 @@ export function WithContextMenu({ children, items, onOpenChange }: Props) {
   return (
     <AnimatedDropdown
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'weg-context-menu-container-open',
         closeAnimationName: 'weg-context-menu-container-close',
       }}

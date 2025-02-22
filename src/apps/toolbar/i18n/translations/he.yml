@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: בטל את סרגל הכלים
   settings: הגדרות
   task_manager: מנהל משימות
+keyboard:
+  more: הגדרות מקלדת נוספות
+  title: פריסת מקלדת
 media:
   device:
     comunications: תקשורת

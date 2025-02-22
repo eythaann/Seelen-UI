@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Разблокировать панель инструментов
   settings: Настройки
   task_manager: Диспетчер задач
+keyboard:
+  more: Другие настройки клавиатуры
+  title: Раскладка клавиатуры
 media:
   device:
     comunications: Коммуникации

@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: கருவிப்பட்டியைத் திறக்கவும்
   settings: அமைப்புகள்
   task_manager: பணி மேலாளர்
+keyboard:
+  more: மேலும் விசைப்பலகை அமைப்புகள்
+  title: விசைப்பலகை தளவமைப்பு
 media:
   device:
     comunications: தகவல்தொடர்புகள்

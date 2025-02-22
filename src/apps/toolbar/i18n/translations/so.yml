@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Fur furaha aaladda
   settings: Dejinta
   task_manager: Maareeyaha Hawsha
+keyboard:
+  more: Meelo badan oo keyboard ah
+  title: Qaabka Keyboard
 media:
   device:
     comunications: Isgaar isgaar
