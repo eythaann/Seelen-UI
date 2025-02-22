@@ -57,7 +57,7 @@ function setMonitorsOnState(list: ConnectedMonitorList) {
 
 async function initUIColors() {
   function loadColors(colors: UIColors) {
-    colors.setAssCssVariables();
+    colors.setAsCssVariables();
     store.dispatch(RootActions.setColors(colors.inner));
   }
   loadColors(await UIColors.getAsync());

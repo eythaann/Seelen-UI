@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
+  Color,
   DocumentsFolder,
   DownloadsFolder,
+  IColor,
   LanguageList,
   MusicFolder,
   PicturesFolder,
   PluginList,
   RecentFolder,
+  SeelenCommand,
   SeelenEvent,
   Settings,
   UIColors,
@@ -14,6 +17,7 @@ import {
   VideosFolder,
 } from '@seelen-ui/lib';
 import { FancyToolbarSettings, Placeholder } from '@seelen-ui/lib/types';
+import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
@@ -135,13 +139,33 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));
   });
 
-  const onFocusChanged = debounce((app: FocusedApp) => {
+  const setFocused = debounce((app: FocusedApp) => {
     store.dispatch(RootActions.setFocused(app));
   }, 200);
+
+  const updateFocusedColor = debounce(async () => {
+    let color = new Color(await invoke<IColor>(SeelenCommand.SystemGetForegroundWindowColor));
+    if (color.inner.a === 0) {
+      document.documentElement.style.removeProperty('--color-focused-app-background');
+      document.documentElement.style.removeProperty('--color-focused-app-foreground');
+      return;
+    }
+    document.documentElement.style.setProperty('--color-focused-app-background', color.asHex());
+    let luminance = color.calcLuminance();
+    document.documentElement.style.setProperty(
+      '--color-focused-app-foreground',
+      luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)',
+    );
+  }, 250);
+
   await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
-    onFocusChanged(e.payload);
-    if (e.payload.name != 'Seelen UI') {
-      onFocusChanged.flush();
+    setFocused(e.payload);
+    // avoid change color when focusing the bar
+    if (e.payload.title !== 'Seelen Fancy Toolbar') {
+      updateFocusedColor();
+    }
+    if (e.payload.name == 'Seelen UI') {
+      setFocused.flush();
     }
   });
 

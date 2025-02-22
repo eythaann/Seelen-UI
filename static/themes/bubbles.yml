@@ -14,18 +14,17 @@ styles:
     }
 
     .ft-bar-item {
-      background-color: rgba(40, 40, 40, 0.8);
+      color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
+      background-color: var(--color-focused-app-background, var(--color-persist-gray-900));
       border-radius: 10px;
       padding: 2px 8px;
       height: 25px;
-      transition: background-color 300ms ease-in-out;
+      transition-property: color, background-color;
+      transition-duration: 200ms;
+      transition-timing-function: linear;
 
       &.ft-bar-item-clickable {
         padding: 2px 8px;
         border-radius: 10px;
-
-        &:hover {
-          background-color: rgba(50, 50, 50, 1);
-        }
       }
     }

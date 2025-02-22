@@ -104,8 +104,8 @@ export async function StartThemingTool() {
     loadThemes(allThemes, selected);
   });
 
-  (await UIColors.getAsync()).setAssCssVariables();
-  UIColors.onChange((colors) => colors.setAssCssVariables());
+  (await UIColors.getAsync()).setAsCssVariables();
+  UIColors.onChange((colors) => colors.setAsCssVariables());
 
   loadThemes(allThemes, selected);
 }

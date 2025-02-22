@@ -242,15 +242,17 @@ impl Window {
 
     /// this means all windows that are part of the UI desktop not the real desktop window
     pub fn is_desktop(&self) -> bool {
-        let class = self.class();
-        WindowsApi::get_desktop_window() == self.0
-            || class == "Progman"
-            || (class == "WorkerW"
-                && self.children().is_ok_and(|children| {
-                    children
-                        .iter()
-                        .any(|child| child.class() == "SHELLDLL_DefView")
-                }))
+        WindowsApi::get_desktop_window() == self.0 || {
+            let class = self.class();
+            class == "Progman" || {
+                class == "WorkerW"
+                    && self.children().is_ok_and(|children| {
+                        children
+                            .iter()
+                            .any(|child| child.class() == "SHELLDLL_DefView")
+                    })
+            }
+        }
     }
 
     pub fn is_seelen_overlay(&self) -> bool {

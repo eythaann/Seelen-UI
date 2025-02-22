@@ -8,6 +8,7 @@
 - allow set the toolbar on different positions.
 - allow set custom start menu icon.
 - language selector for toolbar.
+- add dynamic color by focused app on toolbar.
 
 ### enhancements
 - settings shown each time on startup.
