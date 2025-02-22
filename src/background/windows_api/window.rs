@@ -4,10 +4,14 @@ use std::{
     path::PathBuf,
 };
 
-use windows::Win32::{
-    Foundation::{HWND, RECT},
-    UI::WindowsAndMessaging::{
-        SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+use windows::{
+    ApplicationModel::AppInfo,
+    Win32::{
+        Foundation::{HWND, RECT},
+        UI::WindowsAndMessaging::{
+            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
+            WS_EX_TOOLWINDOW,
+        },
     },
 };
 
@@ -142,7 +146,8 @@ impl Window {
     }
 
     pub fn app_display_name(&self) -> Result<String> {
-        if let Ok(info) = self.process().package_app_info() {
+        if let Some(AppUserModelId::Appx(umid)) = self.app_user_model_id() {
+            let info = AppInfo::GetFromAppUserModelId(&umid.into())?;
             return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
         }
         self.process().program_display_name()

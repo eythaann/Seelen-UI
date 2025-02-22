@@ -18,6 +18,7 @@
 
 ### fix
 - showing domain on username for local accounts.
+- showing application frame host instead real app name.
 
 ## [2.1.9]
 ### fix
