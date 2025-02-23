@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Pengaturan aplikasi
   brightness: Kecerahan
+  hibernate: Hibernasi
   lock: Mengunci
   log_out: Keluar
   power: Kekuatan

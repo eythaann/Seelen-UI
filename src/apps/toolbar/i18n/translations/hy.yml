@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Ծրագրի կարգավորումներ
   brightness: Պայծառություն
+  hibernate: Ձմեռել
   lock: Կողպել
   log_out: Դուրս գալ
   power: Հզորություն

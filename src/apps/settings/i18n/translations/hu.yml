@@ -239,6 +239,7 @@ toolbar:
     on_overlap: Az átfedésben
   label: Eszköztár
   placeholder: {}
+  show_hibernate: Hibernálás gomb megjelenítése a bekapcsolási menüben
   use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
 update:
   available: A frissítés elérhető!

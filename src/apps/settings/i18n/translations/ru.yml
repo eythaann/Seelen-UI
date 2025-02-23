@@ -240,6 +240,7 @@ toolbar:
     on_overlap: При перекрытии
   label: Верхняя панель
   placeholder: {}
+  show_hibernate: Показать кнопку перехода в спящий режим в меню питания
   use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
 update:
   available: Обновление доступно!

@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Programos nustatymai
   brightness: Ryškumas
+  hibernate: Hibernate
   lock: Užraktas
   log_out: Atsijungti
   power: Galia

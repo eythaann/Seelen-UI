@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: การตั้งค่าแอป
   brightness: ความสว่าง
+  hibernate: โภชนาการ
   lock: ล็อค
   log_out: ออกจากระบบ
   power: พลัง

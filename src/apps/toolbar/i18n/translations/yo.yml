@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Eto App
   brightness: Didan
+  hibernate: Hibernate
   lock: Tiipa
   log_out: Wọle
   power: Agbara

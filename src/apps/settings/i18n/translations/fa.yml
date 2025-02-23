@@ -239,6 +239,7 @@ toolbar:
     on_overlap: روی همپوشانی
   label: نوار ابزار
   placeholder: {}
+  show_hibernate: دکمه Hibernate را در منوی Power نشان دهید
   use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
 update:
   available: بروزرسانی موجود!

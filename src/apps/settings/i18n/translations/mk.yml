@@ -240,6 +240,7 @@ toolbar:
     on_overlap: На преклопување
   label: Лента со алатки
   placeholder: {}
+  show_hibernate: Покажете го копчето Hibernate на менито за напојување
   use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
 update:
   available: Ажурирање достапно!

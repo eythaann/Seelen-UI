@@ -237,6 +237,7 @@ toolbar:
     on_overlap: اوورلیپ پر
   label: ٹول بار
   placeholder: {}
+  show_hibernate: پاور مینو پر ہائبرنیٹ بٹن دکھائیں
   use_multiple_monitor_overlap_logic: سنگل فوکس لاجک کے بجائے ڈسپلے مخصوص استعمال کریں۔
 update:
   available: تازہ کاری دستیاب!

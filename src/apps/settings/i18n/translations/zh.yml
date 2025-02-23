@@ -227,6 +227,7 @@ toolbar:
     on_overlap: 关于重叠
   label: 工具栏
   placeholder: {}
+  show_hibernate: 在电源菜单上显示休眠按钮
   use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
 update:
   available: 更新可用！

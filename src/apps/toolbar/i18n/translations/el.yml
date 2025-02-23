@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Ρυθμίσεις εφαρμογής
   brightness: Φωτεινότητα
+  hibernate: Αδρανοποίηση
   lock: Κλείδωμα
   log_out: Αποσύνδεση
   power: Εξουσία

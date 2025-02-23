@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Настройки приложения
   brightness: Яркость
+  hibernate: Hibernate
   lock: Замок
   log_out: Выход из системы
   power: Питание

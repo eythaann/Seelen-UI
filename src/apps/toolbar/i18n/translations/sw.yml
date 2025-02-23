@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Mipangilio ya programu
   brightness: Mwangaza
+  hibernate: Hibernate
   lock: Funga
   log_out: Ingia nje
   power: Nguvu

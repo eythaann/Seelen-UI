@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Op overlap
   label: Werkbalk
   placeholder: {}
+  show_hibernate: Toon slaapstandknop in energiemenu
   use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
 update:
   available: Update beschikbaar!

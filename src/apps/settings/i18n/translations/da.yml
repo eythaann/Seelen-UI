@@ -238,6 +238,7 @@ toolbar:
     on_overlap: På overlapning
   label: Værktøjslinje
   placeholder: {}
+  show_hibernate: Vis dvale-knap i strøm-menuen
   use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
 update:
   available: Opdatering tilgængelig!

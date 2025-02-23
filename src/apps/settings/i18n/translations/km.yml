@@ -236,6 +236,7 @@ toolbar:
     on_overlap: នៅលើការត្រួតស៊ីគ្នា។
   label: របាររបន៍របយ័ត្ន។ រប
   placeholder: {}
+  show_hibernate: បង្ហាញប៊ូតុង hibernate នៅលើ menu enu
   use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
 update:
   available: មានបច្ចុប្បន្នភាព!

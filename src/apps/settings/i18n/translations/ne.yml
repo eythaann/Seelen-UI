@@ -237,6 +237,7 @@ toolbar:
     on_overlap: ओभरल्यापमा
   label: औजारपरो
   placeholder: {}
+  show_hibernate: पावर मेनूमा हाइबरनेट बटन देखाउनुहोस्
   use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
 update:
   available: अपडेट उपलब्ध!

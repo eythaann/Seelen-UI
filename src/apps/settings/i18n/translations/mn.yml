@@ -236,6 +236,7 @@ toolbar:
     on_overlap: Давхардсан дээр
   label: Балтсний хайрцагны хэрэгсэл
   placeholder: {}
+  show_hibernate: Power цэс дээр Hibernate товчийг харуул
   use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
 update:
   available: Шинэчлэх боломжтой!

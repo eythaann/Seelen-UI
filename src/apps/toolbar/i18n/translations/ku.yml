@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Mîhengên App
   brightness: Biriqîn
+  hibernate: Hibernate
   lock: Qesr
   log_out: Derkeve
   power: Erk

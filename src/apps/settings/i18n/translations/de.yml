@@ -240,6 +240,7 @@ toolbar:
     on_overlap: Auf Überlappung
   label: Symbolleiste
   placeholder: {}
+  show_hibernate: Schaltfläche "Ruhezustand" im Menü "Energie" anzeigen
   use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
 update:
   available: Update verfügbar!

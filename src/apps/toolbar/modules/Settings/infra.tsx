@@ -41,6 +41,7 @@ export function SettingsModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
   const [brightness, setBrightness] = useState<Brightness | null>(null);
 
+  const showHibernate = useSelector(Selectors.settings.showHibernateButton);
   const defaultInput = useSelector((state: RootState) =>
     Selectors.mediaInputs(state).find((d) => d.is_default_multimedia),
   );
@@ -168,6 +169,16 @@ export function SettingsModule({ module }: Props) {
                 <Icon iconName="BiMoon" />
               </button>
             </Tooltip>
+            {showHibernate && (
+              <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.hibernate')}>
+                <button
+                  className="fast-settings-item-button"
+                  onClick={() => invoke(SeelenCommand.Hibernate)}
+                >
+                  <Icon iconName="FiClock" />
+                </button>
+              </Tooltip>
+            )}
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.restart')}>
               <button
                 className="fast-settings-item-button"

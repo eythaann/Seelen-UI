@@ -236,6 +236,7 @@ toolbar:
     on_overlap: Gainjartzean
   label: Tresna barra
   placeholder: {}
+  show_hibernate: Erakutsi Hibernate botoia Power Menuan
   use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
 update:
   available: Eguneratu eskuragarri!

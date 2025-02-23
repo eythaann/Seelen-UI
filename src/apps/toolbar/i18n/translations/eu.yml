@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Aplikazioaren ezarpenak
   brightness: Distira
+  hibernate: Hibernatu
   lock: Morroilo
   log_out: Saioa amaitu
   power: Botere

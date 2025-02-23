@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Cài đặt ứng dụng
   brightness: Độ sáng
+  hibernate: Ngủ đông
   lock: Khóa
   log_out: Đăng xuất
   power: Quyền lực

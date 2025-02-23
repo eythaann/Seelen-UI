@@ -236,6 +236,7 @@ toolbar:
     on_overlap: Ant persidengimo
   label: Įrankių juosta
   placeholder: {}
+  show_hibernate: Rodyti užmigdymo režimo mygtuką maitinimo meniu
   use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
 update:
   available: Galima atnaujinti!

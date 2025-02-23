@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Fuq koinċidenza
   label: Toolbar
   placeholder: {}
+  show_hibernate: Uri buttuna Hibernate fuq il-menu tal-qawwa
   use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
 update:
   available: Aġġornament disponibbli!

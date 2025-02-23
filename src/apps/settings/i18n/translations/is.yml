@@ -236,6 +236,7 @@ toolbar:
     on_overlap: Á skörun
   label: Tækjastikur
   placeholder: {}
+  show_hibernate: Sýna dvalahnappinn í Power valmyndinni
   use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í staðinn fyrir stakan fókusrökfræði
 update:
   available: Uppfærsla í boði!

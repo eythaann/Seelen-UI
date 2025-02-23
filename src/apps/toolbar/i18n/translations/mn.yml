@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Дуулахын тохиргоо
   brightness: Тод
+  hibernate: Хусах
   lock: Түгжих
   log_out: Гарах
   power: Хүч чадал

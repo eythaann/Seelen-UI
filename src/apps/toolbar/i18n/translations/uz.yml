@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Ilova sozlamalari
   brightness: Yorqinlik
+  hibernate: Xunlamoq
   lock: Qulflamoq
   log_out: Chiqish
   power: Kuch

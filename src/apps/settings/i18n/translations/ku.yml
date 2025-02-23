@@ -237,6 +237,7 @@ toolbar:
     on_overlap: Li ser hevgirtinê
   label: Toolbar
   placeholder: {}
+  show_hibernate: Bişkojka Hibernate li ser menuya hêzê nîşan bide
   use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
 update:
   available: Nûvekirin!

@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: הגדרות אפליקציה
   brightness: בְּהִירוּת
+  hibernate: שינה
   lock: לִנְעוֹל
   log_out: להתנתק
   power: כּוֹחַ

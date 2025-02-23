@@ -236,6 +236,7 @@ toolbar:
     on_overlap: Na sobreposição
   label: Barra de ferramentas
   placeholder: {}
+  show_hibernate: Mostre o botão Hibernate no menu Power
   use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
 update:
   available: Atualização disponível!

@@ -231,6 +231,7 @@ toolbar:
     on_overlap: 오버랩 시
   label: 도구 모음
   placeholder: {}
+  show_hibernate: 전원 메뉴에 최대 절전 모드 버튼 표시
   use_multiple_monitor_overlap_logic: 단일 초점 대신 디스플레이별 로직 사용
 update:
   available: 사용 가능한 업데이트가 존재합니다

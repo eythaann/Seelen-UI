@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Rakenduse sätted
   brightness: Heledus
+  hibernate: Hibernate
   lock: Lock
   log_out: Logi välja
   power: Võimsus

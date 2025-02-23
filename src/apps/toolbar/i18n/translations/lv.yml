@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Lietotņu iestatījumi
   brightness: Spilgtums
+  hibernate: Hibernate
   lock: Bloķēt
   log_out: Izlogoties
   power: Spēks

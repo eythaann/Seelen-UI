@@ -235,6 +235,7 @@ toolbar:
     on_overlap: ທັບຊ້ອນກັນ
   label: ແຖບເຄື່ອງມື
   placeholder: {}
+  show_hibernate: ສະແດງປຸ່ມ hibernate ໃນເມນູພະລັງງານ
   use_multiple_monitor_overlap_logic: ໃຊ້ການສະແດງຜົນສະເພາະແທນທີ່ຈະເປັນເຫດຜົນຈຸດສຸມດຽວ
 update:
   available: ປັບປຸງໃຫ້ທັນສະໄຫມ!

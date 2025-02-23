@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: ការកំណត់កម្មវិធី
   brightness: ពន្លឺ
+  hibernate: សមលាក់សម្ងួរ
   lock: សោ
   log_out: ចាកចេញ
   power: អមនាច

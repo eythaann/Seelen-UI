@@ -240,6 +240,7 @@ toolbar:
     on_overlap: ওভারল্যাপে
   label: সরঞ্জামদণ্ড
   placeholder: {}
+  show_hibernate: পাওয়ার মেনুতে হাইবারনেট বোতাম দেখান
   use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
 update:
   available: আপডেট উপলব্ধ!

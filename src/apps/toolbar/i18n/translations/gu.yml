@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: એપ્લિકેશન સેટિંગ્સ
   brightness: ઉદ્ધતાઈ
+  hibernate: સ્તુતિ
   lock: તાળ
   log_out: લૉગ આઉટ
   power: શક્તિ

@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Appinstellings
   brightness: Helderheid
+  hibernate: Hibernate
   lock: Slot
   log_out: Teken uit
   power: Mag

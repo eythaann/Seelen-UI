@@ -240,6 +240,7 @@ toolbar:
     on_overlap: Di tumpang tindih
   label: Toolbar
   placeholder: {}
+  show_hibernate: Menampilkan tombol hibernasi pada menu daya
   use_multiple_monitor_overlap_logic: Gunakan tampilan spesifik, bukan logika fokus tunggal
 update:
   available: Perbarui Tersedia!

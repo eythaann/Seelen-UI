@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Подешавања апликација
   brightness: Светлина
+  hibernate: Хибернација
   lock: Закључати
   log_out: Одјавити се
   power: Моћ

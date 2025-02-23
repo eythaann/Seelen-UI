@@ -235,6 +235,7 @@ toolbar:
     on_overlap: On overlap
   label: Toolbar
   placeholder: {}
+  show_hibernate: Show hibernate button on power menu
   use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
 update:
   available: Update Available!

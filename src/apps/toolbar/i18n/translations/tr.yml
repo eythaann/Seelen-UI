@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Uygulama Ayarları
   brightness: Parlaklık
+  hibernate: Hazırda Beklet
   lock: Kilit
   log_out: Çıkış Yap
   power: Güç

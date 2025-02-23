@@ -230,6 +230,7 @@ toolbar:
     on_overlap: オーバーラップ時
   label: ツールバーの設定
   placeholder: {}
+  show_hibernate: 電源メニューにハイバネートボタンを表示する
   use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
 update:
   available: 更新が利用可能です！

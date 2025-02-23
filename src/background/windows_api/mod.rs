@@ -913,8 +913,8 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn set_suspend_state() -> Result<()> {
-        let success = unsafe { SetSuspendState(false, true, false) };
+    pub fn set_suspend_state(hibernate: bool) -> Result<()> {
+        let success = unsafe { SetSuspendState(hibernate, false, false) };
         if !success {
             return Err("Failed to set suspend state".into());
         }

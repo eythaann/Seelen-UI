@@ -236,6 +236,7 @@ toolbar:
     on_overlap: Na prekrytí
   label: Panel s nástrojmi
   placeholder: {}
+  show_hibernate: Zobrazenie tlačidla hibernácie v ponuke napájania
   use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
 update:
   available: Aktualizácia k dispozícii!

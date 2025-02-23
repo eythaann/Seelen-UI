@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Uz pārklāšanās
   label: Rīkjosla
   placeholder: {}
+  show_hibernate: Rādīt hibernēšanas pogu barošanas izvēlnē
   use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
 update:
   available: Pieejams atjauninājums!

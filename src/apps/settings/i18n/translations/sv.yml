@@ -238,6 +238,7 @@ toolbar:
     on_overlap: På överlappning
   label: Verktygsfält
   placeholder: {}
+  show_hibernate: Visa knappen för viloläge i Power-menyn
   use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
 update:
   available: Uppdatering tillgänglig!

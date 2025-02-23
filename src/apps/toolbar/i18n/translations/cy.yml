@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Gosodiadau App
   brightness: Disgleirdeb
+  hibernate: Gaeafgysgo
   lock: Gloiff
   log_out: Allgofnodi
   power: Bwerau

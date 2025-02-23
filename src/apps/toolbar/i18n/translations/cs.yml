@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Nastavení aplikace
   brightness: Jas
+  hibernate: Hibernace
   lock: Zámek
   log_out: Odhlásit se
   power: Moc

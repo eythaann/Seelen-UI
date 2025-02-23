@@ -56,6 +56,7 @@ export interface UserHomeFolder {
 function UserHome({}: UserHomeProps) {
   const [categoryOpen, setCategoryOpen] = useState<FolderType>('Unknown');
 
+  const showHibernate = useSelector(Selectors.settings.showHibernateButton);
   const user = useSelector(Selectors.user);
   const folders: UserHomeFolder[] = [
     { ...folderTypeToIcon('Recent'), content: useSelector(Selectors.userRecentFolder) },
@@ -122,6 +123,16 @@ function UserHome({}: UserHomeProps) {
             <Icon iconName="BiMoon" />
           </button>
         </Tooltip>
+        {showHibernate && (
+          <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.hibernate')}>
+            <button
+              className="userhome-power-button"
+              onClick={() => invoke(SeelenCommand.Hibernate)}
+            >
+              <Icon iconName="FiClock" />
+            </button>
+          </Tooltip>
+        )}
         <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.restart')}>
           <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.Restart)}>
             <Icon iconName="VscDebugRestart" />

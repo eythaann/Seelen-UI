@@ -232,6 +232,7 @@ toolbar:
     on_overlap: เมื่อทับซ้อนกัน
   label: แถบเครื่องมือ
   placeholder: {}
+  show_hibernate: แสดงปุ่มไฮเบอร์เนตบนเมนูพลังงาน
   use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
 update:
   available: อัปเดตพร้อมใช้งาน!

@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: अनुप्रयोग सेटिंग्स
   brightness: काठको जग
+  hibernate: हाइबरनेट
   lock: ताला लगाउनु
   log_out: बाहिर निस्कनु
   power: बल

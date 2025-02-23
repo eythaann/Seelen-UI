@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: SeelenUIの設定
   brightness: 明るさ
+  hibernate: ハイバーネート
   lock: ロック
   log_out: ログアウト
   power: 電源

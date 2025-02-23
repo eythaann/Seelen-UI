@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: إعدادات التطبيقات
   brightness: السطوع
+  hibernate: السبات
   lock: القفل
   log_out: تسجيل خروج
   power: الطاقة

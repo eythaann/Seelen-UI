@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: د ایپ امستنې
   brightness: روښانه کول
+  hibernate: سپړنه
   lock: لاک
   log_out: وتل
   power: ځواک

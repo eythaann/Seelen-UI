@@ -236,6 +236,7 @@ toolbar:
     on_overlap: Op Iwwerlappung
   label: TO-tcstar
   placeholder: {}
+  show_hibernate: Show Hibernate Knäppchen op Power Menu
   use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
 update:
   available: Update verfügbar!

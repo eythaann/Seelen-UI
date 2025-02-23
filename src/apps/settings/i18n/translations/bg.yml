@@ -258,6 +258,7 @@ toolbar:
     on_overlap: При припокриване
   label: Лента с инструменти
   placeholder: {}
+  show_hibernate: Показване на бутона за хибернация в менюто на захранването
   use_multiple_monitor_overlap_logic: Използвайте специфична за дисплея вместо логика на единичен фокус
 update:
   available: Налична актуализация!

@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Üst üste binme durumunda
   label: Araç Çubuğu
   placeholder: {}
+  show_hibernate: Güç menüsünde hazırda beklet düğmesini göster
   use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
 update:
   available: Güncelleme Mevcut!

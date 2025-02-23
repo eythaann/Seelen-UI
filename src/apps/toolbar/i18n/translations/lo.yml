@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: ການຕັ້ງຄ່າແອັບ app
   brightness: ຄວາມສະຫວ່າງ
+  hibernate: ຮູດ
   lock: ກະແຈ
   log_out: ອອກ​ຈາກ​ລະ​ບົບ
   power: ພະເດດ

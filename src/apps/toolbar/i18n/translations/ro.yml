@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Setări aplicație
   brightness: Luminozitate
+  hibernate: Hibernare
   lock: Încuietoare
   log_out: Deconectați -vă
   power: Putere

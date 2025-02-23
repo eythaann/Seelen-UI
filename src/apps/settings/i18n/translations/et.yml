@@ -235,6 +235,7 @@ toolbar:
     on_overlap: Kattumises
   label: Tööriistariba
   placeholder: {}
+  show_hibernate: Näita hibernatsiooni nuppu toite menüüs
   use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
 update:
   available: Värskendage saadaval!

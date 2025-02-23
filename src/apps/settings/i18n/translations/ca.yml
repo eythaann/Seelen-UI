@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Sobre la superposició
   label: Barra d’eines
   placeholder: {}
+  show_hibernate: Mostra el botó hibernat al menú d'alimentació
   use_multiple_monitor_overlap_logic: >-
     Utilitzeu la lògica específica de la pantalla en lloc de la lògica
     d'enfocament únic

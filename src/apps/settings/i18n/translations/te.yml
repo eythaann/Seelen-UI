@@ -238,6 +238,7 @@ toolbar:
     on_overlap: అతివ్యాప్తిపై
   label: టూల్‌బార్
   placeholder: {}
+  show_hibernate: పవర్ మెనులో హైబర్నేట్ బటన్‌ను చూపించు
   use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
 update:
   available: నవీకరణ అందుబాటులో ఉంది!

@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Sur chevauchement
   label: Barre d'outils
   placeholder: {}
+  show_hibernate: Afficher le bouton d'hibernation dans le menu d'alimentation
   use_multiple_monitor_overlap_logic: >-
     Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au
     point unique

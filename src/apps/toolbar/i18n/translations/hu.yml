@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Alkalmazásbeállítások
   brightness: Fényerő
+  hibernate: Hibernálás
   lock: Lock
   log_out: Kijelentkezés
   power: Hatalom

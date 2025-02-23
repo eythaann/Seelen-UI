@@ -233,6 +233,7 @@ toolbar:
     on_overlap: על חפיפה
   label: סרגל כלים
   placeholder: {}
+  show_hibernate: הצג כפתור שינה בתפריט ההפעלה
   use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
 update:
   available: עדכון זמין!

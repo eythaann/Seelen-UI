@@ -238,6 +238,7 @@ toolbar:
     on_overlap: გადახურვაზე
   label: ინსტრუმენტთა პანელი
   placeholder: {}
+  show_hibernate: აჩვენეთ ღილაკი Hibernate ღილაკზე დენის მენიუში
   use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
 update:
   available: განახლება ხელმისაწვდომია!

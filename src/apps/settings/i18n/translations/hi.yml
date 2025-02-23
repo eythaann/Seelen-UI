@@ -239,6 +239,7 @@ toolbar:
     on_overlap: ओवरलैप पर
   label: उपकरण पट्टी
   placeholder: {}
+  show_hibernate: पावर मेनू पर हाइबरनेट बटन दिखाएं
   use_multiple_monitor_overlap_logic: एकल फोकस तर्क के बजाय प्रदर्शन विशिष्ट का उपयोग करें
 update:
   available: उपलब्ध अद्यतन!

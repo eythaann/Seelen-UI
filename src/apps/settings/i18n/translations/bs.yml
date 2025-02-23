@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Na preklapanje
   label: Alatna traka
   placeholder: {}
+  show_hibernate: Prikaži dugme Hibernate na meniju napajanja
   use_multiple_monitor_overlap_logic: Koristite specifičan prikaz umjesto logike jednog fokusa
 update:
   available: Ažuriraj dostupno!

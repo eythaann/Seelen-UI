@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Settings tal-App
   brightness: Luminożità
+  hibernate: Hibernate
   lock: Lock
   log_out: Oħroġ
   power: Qawwa

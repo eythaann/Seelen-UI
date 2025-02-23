@@ -240,6 +240,7 @@ toolbar:
     on_overlap: Pe suprapunere
   label: Bara de instrumente
   placeholder: {}
+  show_hibernate: Afișați butonul de hibernare în meniul de pornire
   use_multiple_monitor_overlap_logic: Utilizați logica specifică afișajului în loc de logica de focalizare unică
 update:
   available: Actualizare disponibilă!

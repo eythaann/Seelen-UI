@@ -9,6 +9,7 @@
 - allow set custom start menu icon.
 - language selector for toolbar.
 - add dynamic color by focused app on toolbar.
+- add hibernate button on toolbar power menu.
 
 ### enhancements
 - settings shown each time on startup.

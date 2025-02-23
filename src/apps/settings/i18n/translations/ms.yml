@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Bertindih
   label: Bar alat
   placeholder: {}
+  show_hibernate: Tunjukkan butang hibernate pada menu kuasa
   use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
 update:
   available: Kemas kini tersedia!

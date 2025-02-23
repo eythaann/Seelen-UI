@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Appindstillinger
   brightness: Lysstyrke
+  hibernate: Dvale
   lock: Lås
   log_out: Log ud
   power: Magt

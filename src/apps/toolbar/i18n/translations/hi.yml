@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: एप्लिकेशन सेटिंग
   brightness: चमक
+  hibernate: हाइबरनेट
   lock: ताला
   log_out: लॉग आउट
   power: शक्ति

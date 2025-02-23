@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Ar gorgyffwrdd
   label: Bariau
   placeholder: {}
+  show_hibernate: Dangos botwm gaeafgysgu ar y ddewislen pŵer
   use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
 update:
   available: Diweddariad ar gael!

@@ -240,6 +240,7 @@ toolbar:
     on_overlap: Päällekkäin
   label: Työkalurivi
   placeholder: {}
+  show_hibernate: Näytä lepotilapainike virtapainikkeessa
   use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
 update:
   available: Päivitä saatavilla!

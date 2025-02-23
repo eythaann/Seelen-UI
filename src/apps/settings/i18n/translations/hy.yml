@@ -240,6 +240,7 @@ toolbar:
     on_overlap: Համընկնման վրա
   label: Գործիքագոտու
   placeholder: {}
+  show_hibernate: Show ույց տալ ձմեռել կոճակը էներգիայի ցանկում
   use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
 update:
   available: 'Թարմացրեք մատչելի:'

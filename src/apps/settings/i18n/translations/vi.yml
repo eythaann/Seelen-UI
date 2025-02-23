@@ -237,6 +237,7 @@ toolbar:
     on_overlap: Trên sự chồng chéo
   label: Thanh công cụ
   placeholder: {}
+  show_hibernate: Hiển thị nút Hibernate trên Menu Power
   use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
 update:
   available: Cập nhật có sẵn!

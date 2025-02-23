@@ -239,6 +239,7 @@ toolbar:
     on_overlap: Σε επικάλυψη
   label: Γραμμή εργαλείων
   placeholder: {}
+  show_hibernate: Εμφάνιση κουμπιού αδρανοποίησης στο μενού λειτουργίας
   use_multiple_monitor_overlap_logic: Χρησιμοποιήστε συγκεκριμένα την οθόνη αντί για λογική εστίασης
 update:
   available: Διαθέσιμη ενημέρωση!

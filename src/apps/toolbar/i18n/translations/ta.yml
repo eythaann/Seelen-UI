@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: பயன்பாட்டு அமைப்புகள்
   brightness: பிரகாசம்
+  hibernate: ஹைபர்னேட்
   lock: பூட்டு
   log_out: வெளியேறு
   power: சக்தி

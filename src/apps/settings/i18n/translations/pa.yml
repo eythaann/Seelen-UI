@@ -234,6 +234,7 @@ toolbar:
     on_overlap: ਓਵਰਲੈਪ 'ਤੇ
   label: ਟੂਲਬਾਰ
   placeholder: {}
+  show_hibernate: ਪਾਵਰ ਮੇਨੂ 'ਤੇ ਹਾਈਬਰਨੇਟ ਬਟਨ ਦਿਖਾਓ
   use_multiple_monitor_overlap_logic: ਸਿੰਗਲ ਫੋਕਸ ਤਰਕ ਦੀ ਬਜਾਏ ਡਿਸਪਲੇ ਵਿਸ਼ੇਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ
 update:
   available: ਅਪਡੇਟ ਉਪਲਬਧ!

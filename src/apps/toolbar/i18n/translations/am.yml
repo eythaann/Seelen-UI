@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: የመተግበሪያ ቅንጅቶች
   brightness: ብሩህነት
+  hibernate: ጩኸት
   lock: መቆለፊያ
   log_out: ውጣ
   power: ኃይል

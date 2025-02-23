@@ -240,6 +240,7 @@ toolbar:
     on_overlap: Ngokugqagqana
   label: Indawo yamathuluzi
   placeholder: {}
+  show_hibernate: Khombisa inkinobho ye-hibernate kwimenyu yamandla
   use_multiple_monitor_overlap_logic: Sebenzisa isibonisi esiqondile esikhundleni sokugxilisa ingqondo eyodwa
 update:
   available: Ukuvuselelwa Kuyatholakala!

@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: تنظیمات برنامه
   brightness: روشنایی
+  hibernate: زمستان
   lock: قفل
   log_out: خروج
   power: قدرت

@@ -78,7 +78,9 @@ export function FancyToolbarSettings() {
             <Switch
               disabled={settings.hideMode != HideMode.OnOverlap}
               checked={settings.useMultiMonitorOverlapLogic}
-              onChange={(value) => dispatch(FancyToolbarActions.setUseMultiMonitorOverlapLogic(value))}
+              onChange={(value) =>
+                dispatch(FancyToolbarActions.setUseMultiMonitorOverlapLogic(value))
+              }
             />
           </SettingsOption>
           <SettingsOption>
@@ -104,6 +106,16 @@ export function FancyToolbarSettings() {
             />
           </SettingsOption>
         </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <b>{t('toolbar.show_hibernate')}</b>
+          <Switch
+            checked={settings.showHibernateButton}
+            onChange={(value) => dispatch(FancyToolbarActions.setShowHibernateButton(value))}
+          />
+        </SettingsOption>
       </SettingsGroup>
     </>
   );

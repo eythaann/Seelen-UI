@@ -43,7 +43,12 @@ pub fn log_out() {
 
 #[tauri::command(async)]
 pub fn suspend() {
-    log_error!(WindowsApi::set_suspend_state());
+    log_error!(WindowsApi::set_suspend_state(false));
+}
+
+#[tauri::command(async)]
+pub fn hibernate() {
+    log_error!(WindowsApi::set_suspend_state(true));
 }
 
 #[tauri::command(async)]

@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Налаштування додатку
   brightness: Яскравість
+  hibernate: Сплячий режим.
   lock: Блокування.
   log_out: Вийти
   power: Живлення

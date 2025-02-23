@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: ایپ کی ترتیبات
   brightness: چمک
+  hibernate: ہائبرنیٹ
   lock: لاک
   log_out: لاگ آوٹ
   power: پاور

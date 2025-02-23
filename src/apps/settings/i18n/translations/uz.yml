@@ -240,6 +240,7 @@ toolbar:
     on_overlap: Bir-biriga yopishgan holda
   label: Asboblar paneli
   placeholder: {}
+  show_hibernate: Quvvat menyusidagi Xolernate tugmasini bosing
   use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
 update:
   available: Yangilanish mavjud!

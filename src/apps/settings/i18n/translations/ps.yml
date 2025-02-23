@@ -234,6 +234,7 @@ toolbar:
     on_overlap: پر اوورلیپ
   label: توکپټه
   placeholder: {}
+  show_hibernate: د بریښنا مینو کې د هایبرټ ت button ۍ ښودل
   use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
 update:
   available: اوسمهالول شتون لري!

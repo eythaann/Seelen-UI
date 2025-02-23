@@ -232,6 +232,7 @@ toolbar:
     on_overlap: መደራረብ ላይ
   label: የመሣሪያ አሞሌ
   placeholder: {}
+  show_hibernate: በሀይል ምናሌ ላይ የ Heberberate ቁልፍን አሳይ
   use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
 update:
   available: ዝመና ይገኛል!

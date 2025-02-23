@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: App Astellunge
   brightness: Hellegkeet
+  hibernate: Hibernate
   lock: Spock
   log_out: Ausloggen
   power: Kraaftbeldscht

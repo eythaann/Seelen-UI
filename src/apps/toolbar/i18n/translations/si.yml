@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: යෙදුම් සැකසුම්
   brightness: දීප්තිය
+  hibernate: ශිශිරත්වය
   lock: අගුල
   log_out: ඉවත් වන්න
   power: බලය

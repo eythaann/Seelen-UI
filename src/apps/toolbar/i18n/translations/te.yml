@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: అనువర్తన సెట్టింగులు
   brightness: ప్రకాశం
+  hibernate: హైబర్నేట్
   lock: లాక్
   log_out: లాగ్ అవుట్
   power: శక్తి

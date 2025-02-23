@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: App Settings
   brightness: Brightness
+  hibernate: Hibernate
   lock: Lock
   log_out: Log Out
   power: Power

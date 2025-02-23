@@ -238,6 +238,7 @@ toolbar:
     on_overlap: På overlapping
   label: Verktøylinje
   placeholder: {}
+  show_hibernate: Vis dvalemodus på strømmenyen
   use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
 update:
   available: Oppdatering tilgjengelig!

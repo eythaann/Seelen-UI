@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Configurações do aplicativo
   brightness: Brilho
+  hibernate: Hibernado
   lock: Trancar
   log_out: Sair
   power: Energia

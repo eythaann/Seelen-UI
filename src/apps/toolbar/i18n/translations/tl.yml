@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Mga Setting ng App
   brightness: Ningning
+  hibernate: Hibernate
   lock: I -lock
   log_out: Mag -log out
   power: Kapangyarihan

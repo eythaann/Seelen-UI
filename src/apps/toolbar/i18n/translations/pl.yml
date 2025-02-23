@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Ustawienia aplikacji
   brightness: Jasność
+  hibernate: Hibernacja
   lock: Blokada
   log_out: Wyloguj
   power: Moc

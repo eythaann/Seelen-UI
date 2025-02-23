@@ -237,6 +237,7 @@ toolbar:
     on_overlap: Üst-üstə düşür
   label: Alət çubuğu
   placeholder: {}
+  show_hibernate: Güc menyusunda Hibernate düyməsini göstərin
   use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
 update:
   available: YENİLƏNİB!

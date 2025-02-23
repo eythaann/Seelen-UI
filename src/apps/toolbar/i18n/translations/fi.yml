@@ -47,6 +47,7 @@ placeholder:
 settings:
   app_settings: Sovellusasetukset
   brightness: Kirkkaus
+  hibernate: Hibernate
   lock: Lukitus
   log_out: Kirjautua ulos
   power: Voima

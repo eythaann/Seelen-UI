@@ -238,6 +238,7 @@ toolbar:
     on_overlap: Na zakładkę
   label: Pasek narzędzi
   placeholder: {}
+  show_hibernate: Wyświetlanie przycisku hibernacji w menu zasilania
   use_multiple_monitor_overlap_logic: Użyj logiki specyficznej dla wyświetlacza zamiast logiki pojedynczego fokusu
 update:
   available: Aktualizacja dostępna!
