@@ -55,18 +55,17 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn process_individual_win_event(&mut self, event: WinEvent, origin: HWND) -> Result<()> {
-        let window = Window::from(origin);
+    pub fn process_individual_win_event(&mut self, event: WinEvent, window: &Window) -> Result<()> {
         match event {
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
-                self.handle_overlaped_status(origin)?;
+                self.handle_overlaped_status(window.hwnd())?;
             }
             WinEvent::ObjectLocationChange => {
                 if window.hwnd() == self.hwnd()? {
                     self.set_position(window.monitor().handle())?;
                 }
-                if origin == WindowsApi::get_foreground_window() {
-                    self.handle_overlaped_status(origin)?;
+                if window.is_focused() {
+                    self.handle_overlaped_status(window.hwnd())?;
                 }
             }
             WinEvent::SyntheticFullscreenStart(event_data) => {

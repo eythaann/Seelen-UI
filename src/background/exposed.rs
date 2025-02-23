@@ -146,7 +146,7 @@ fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Resul
     } else {
         WinEvent::SyntheticFullscreenEnd(SyntheticFullscreenData { handle, monitor })
     };
-    HookManager::emit_event(event, handle);
+    HookManager::event_tx().send((event, Window::from(handle)))?;
     Ok(())
 }
 
@@ -158,7 +158,11 @@ async fn check_for_updates() -> Result<bool> {
 #[tauri::command(async)]
 async fn get_foreground_window_color() -> Result<Color> {
     let window = Window::from(WindowsApi::get_foreground_window());
-    if !window.is_visible() || window.is_minimized() || window.is_desktop() {
+    if !window.is_visible()
+        || !window.is_maximized()
+        || window.is_minimized()
+        || window.is_desktop()
+    {
         return Ok(Color::default());
     }
     let hdc = DeviceContext::create(None);

@@ -54,9 +54,9 @@ impl Debug for Window {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("Window")
             .field("handle", &self.0 .0)
-            .field("title", &self.title())
-            .field("class", &self.class())
             .field("exe", &self.process().program_exe_name())
+            .field("class", &self.class())
+            .field("title", &self.title())
             .finish()
     }
 }
@@ -69,6 +69,10 @@ impl Display for Window {
 
 pub const APP_FRAME_HOST_PATH: &str = "C:\\Windows\\System32\\ApplicationFrameHost.exe";
 impl Window {
+    pub fn get_foregrounded() -> Window {
+        Window(WindowsApi::get_foreground_window())
+    }
+
     pub fn hwnd(&self) -> HWND {
         self.0
     }

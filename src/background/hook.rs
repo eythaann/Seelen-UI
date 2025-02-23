@@ -1,8 +1,7 @@
 use std::{
-    collections::HashMap,
     path::PathBuf,
     sync::{
-        atomic::{AtomicBool, AtomicIsize, Ordering},
+        atomic::{AtomicBool, Ordering},
         Arc,
     },
     thread::JoinHandle,
@@ -18,7 +17,7 @@ use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
     UI::{
-        Accessibility::{SetWinEventHook, UnhookWinEvent, HWINEVENTHOOK},
+        Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, MSG,
         },
@@ -27,7 +26,7 @@ use windows::Win32::{
 
 use crate::{
     error_handler::Result,
-    log_error,
+    event_manager, log_error,
     modules::{
         input::{domain::Point, Mouse},
         virtual_desk::{get_vd_manager, VirtualDesktopEvent, VirtualDesktopManager},
@@ -57,6 +56,7 @@ pub struct FocusedApp {
     name: String,
     exe: Option<PathBuf>,
     umid: Option<String>,
+    is_maximized: bool,
 }
 
 #[derive(Debug)]
@@ -92,9 +92,9 @@ impl HookManagerSkipper {
 
     fn should_skip(&mut self, event: WinEvent, hwnd: HWND) -> bool {
         // skip foreground on invisible windows
-        if event == WinEvent::SystemForeground && !WindowsApi::is_window_visible(hwnd) {
+        /* if event == WinEvent::SystemForeground && !WindowsApi::is_window_visible(hwnd) {
             return true;
-        }
+        } */
 
         let hwnd = hwnd.0 as isize;
         if let Some(skipper) = self
@@ -110,6 +110,9 @@ impl HookManagerSkipper {
 }
 
 pub struct HookManager;
+
+event_manager!(HookManager, (WinEvent, Window));
+
 impl HookManager {
     pub fn run_with_async<F, T>(f: F) -> JoinHandle<T>
     where
@@ -126,8 +129,8 @@ impl HookManager {
         }
     }
 
-    fn log_event(event: WinEvent, origin: HWND) {
-        if !LOG_WIN_EVENTS.load(Ordering::Relaxed) || event == WinEvent::ObjectLocationChange {
+    fn log_event(event: WinEvent, origin: Window) {
+        if event == WinEvent::ObjectLocationChange || !LOG_WIN_EVENTS.load(Ordering::Acquire) {
             return;
         }
         let event_value = {
@@ -141,110 +144,70 @@ impl HookManager {
                 &event
             }
         };
-
-        log::debug!(
-            "{:?}({:?}) || {} || {} || {}",
-            event_value,
-            origin.0,
-            WindowsApi::exe(origin).unwrap_or_default(),
-            WindowsApi::get_class(origin).unwrap_or_default(),
-            WindowsApi::get_window_text(origin),
-        );
+        log::debug!("{:?} | {:?}", event_value, origin,);
     }
 
-    fn _event(event: WinEvent, origin: HWND) {
+    fn process_event(event: WinEvent, origin: Window) {
         Self::log_event(event, origin);
 
         {
             let mut hook_manager = trace_lock!(HOOK_MANAGER_SKIPPER);
-            if hook_manager.should_skip(event, origin) {
+            if hook_manager.should_skip(event, origin.hwnd()) {
                 Self::log_skipped(event);
                 hook_manager.cleanup();
                 return;
             }
         }
 
-        let window = Window::from(origin);
-
-        if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
-            let process = window.process();
+        if event == WinEvent::SystemForeground {
+            let process = origin.process();
             let result = get_app_handle().emit(
                 SeelenEvent::GlobalFocusChanged,
                 FocusedApp {
-                    hwnd: origin.0 as _,
-                    title: window.title(),
-                    name: window
+                    hwnd: origin.address(),
+                    title: origin.title(),
+                    name: origin
                         .app_display_name()
                         .unwrap_or(String::from("Error on App Name")),
                     exe: process.program_path().ok(),
-                    umid: window.app_user_model_id().map(|umid| umid.to_string()),
+                    umid: origin.app_user_model_id().map(|umid| umid.to_string()),
+                    is_maximized: origin.is_maximized(),
                 },
             );
             log_error!(result);
         }
 
-        let log_error_event = move |name: &str, result: Result<()>| {
-            if let Err(err) = result {
-                log::error!(
-                    "{} => Event: {:?} Error: {:?} Window: {:?}",
-                    name,
-                    event,
-                    err,
-                    window
-                );
-            }
-        };
-
         if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
-            log_error_event("Virtual Desk", vd.on_win_event(event, &window));
+            log_error!(vd.on_win_event(event, &origin), event);
         }
 
         let app_state = FULL_STATE.load();
         if app_state.is_weg_enabled() {
             std::thread::spawn(move || {
-                log_error_event(
-                    "Weg Global",
-                    SeelenWeg::process_global_win_event(event, &window),
-                );
+                log_error!(SeelenWeg::process_global_win_event(event, &origin), event);
             });
         }
 
         if app_state.is_window_manager_enabled() {
             std::thread::spawn(move || {
-                log_error_event(
-                    "WM Global",
-                    WindowManagerV2::process_win_event(event, &window),
-                );
+                log_error!(WindowManagerV2::process_win_event(event, &origin), event);
             });
         }
 
         {
             let mut seelen = trace_lock!(SEELEN);
             if let Some(wall) = seelen.wall_mut() {
-                log_error_event("Wall Instance", wall.process_win_event(event, &window));
+                log_error!(wall.process_win_event(event, &origin), event);
             }
         };
 
         let mut seelen = trace_lock!(SEELEN);
         for instance in seelen.instances_mut() {
             if let Some(toolbar) = instance.toolbar_mut() {
-                log_error_event("Toolbar Instance", toolbar.process_win_event(event, origin));
+                log_error!(toolbar.process_win_event(event, &origin), event);
             }
-
             if let Some(weg) = instance.weg_mut() {
-                log_error_event(
-                    "Weg Instance",
-                    weg.process_individual_win_event(event, origin),
-                );
-            }
-        }
-    }
-
-    pub fn emit_event(event: WinEvent, origin: HWND) {
-        HookManager::_event(event, origin);
-        if let Ok(synthetics) = event.get_synthetics(origin) {
-            for synthetic_event in synthetics {
-                HookManager::_event(synthetic_event, origin)
+                log_error!(weg.process_individual_win_event(event, &origin), event);
             }
         }
     }
@@ -297,39 +260,10 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
     Ok(())
 }
 
-lazy_static! {
-    static ref DICT: Arc<Mutex<HashMap<isize, Instant>>> = Arc::new(Mutex::new(HashMap::new()));
-}
-static LAST_LOCATION_CHANGED: AtomicIsize = AtomicIsize::new(0);
-
-pub fn location_delay_completed(origin: HWND) -> bool {
-    let last = LAST_LOCATION_CHANGED.load(Ordering::Acquire);
-    let mut dict = trace_lock!(DICT);
-
-    let should_continue = match dict.entry(origin.0 as _) {
-        std::collections::hash_map::Entry::Occupied(mut entry) => {
-            if last != origin.0 as isize || entry.get().elapsed() > Duration::from_millis(50) {
-                entry.insert(Instant::now());
-                true
-            } else {
-                false
-            }
-        }
-        std::collections::hash_map::Entry::Vacant(entry) => {
-            entry.insert(Instant::now());
-            true
-        }
-    };
-
-    if should_continue {
-        LAST_LOCATION_CHANGED.store(origin.0 as _, Ordering::Release);
-    }
-
-    should_continue
-}
-
-pub extern "system" fn win_event_hook(
-    hook_handle: HWINEVENTHOOK,
+/// this will be called without waiting for the event to be processed
+/// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook#remarks
+extern "system" fn raw_win_event_hook_recv(
+    _hook_handle: HWINEVENTHOOK,
     event: u32,
     origin: HWND,
     id_object: i32,
@@ -337,36 +271,45 @@ pub extern "system" fn win_event_hook(
     _id_event_thread: u32,
     _dwms_event_time: u32,
 ) {
-    let hook_was_invalidated = hook_handle.is_invalid();
-    if !Seelen::is_running() {
-        if !hook_was_invalidated {
-            log::trace!("Exiting WinEventHook");
-            let _ = unsafe { UnhookWinEvent(hook_handle) };
-        }
+    if id_object != 0 || !Seelen::is_running() {
         return;
     }
 
-    if id_object != 0 {
-        return;
-    }
+    log_error!(HookManager::event_tx().send((WinEvent::from(event), Window::from(origin))));
 
     if FULL_STATE.load().is_weg_enabled() {
         // raw events should be only used for a fastest and immediately processing
         log_error!(SeelenWeg::process_raw_win_event(event, origin));
     }
-
-    let event = WinEvent::from(event);
-    if event == WinEvent::ObjectLocationChange && !location_delay_completed(origin) {
-        return;
-    }
-    HookManager::emit_event(event, origin)
 }
 
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
 
     spawn_named_thread("WinEventHook", move || unsafe {
-        SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
+        SetWinEventHook(
+            EVENT_MIN,
+            EVENT_MAX,
+            None,
+            Some(raw_win_event_hook_recv),
+            0,
+            0,
+            0,
+        );
+
+        HookManager::subscribe(|(event, mut origin)| {
+            if event == WinEvent::SystemForeground {
+                origin = Window::get_foregrounded();
+            }
+
+            HookManager::process_event(event, origin);
+            if let Ok(synthetics) = event.get_synthetics(origin.hwnd()) {
+                for synthetic_event in synthetics {
+                    HookManager::process_event(synthetic_event, origin)
+                }
+            }
+        });
+
         let mut msg: MSG = MSG::default();
         loop {
             if !GetMessageW(&mut msg, None, 0, 0).as_bool() {

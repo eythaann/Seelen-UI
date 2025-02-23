@@ -65,7 +65,7 @@ impl Seelen {
     }
 
     pub fn is_running() -> bool {
-        SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Relaxed)
+        SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Acquire)
     }
 
     pub fn focused_monitor(&self) -> Option<&SeelenInstanceContainer> {

@@ -4,4 +4,5 @@ export interface FocusedApp {
   title: string;
   exe: string | null;
   umid: string | null;
+  isMaximized: boolean;
 }

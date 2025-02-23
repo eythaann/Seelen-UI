@@ -143,11 +143,20 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setFocused(app));
   }, 200);
 
-  const updateFocusedColor = debounce(async () => {
+  const removeFocusedColorCssVars = () => {
+    document.documentElement.style.removeProperty('--color-focused-app-background');
+    document.documentElement.style.removeProperty('--color-focused-app-foreground');
+  };
+
+  let lastFocusedWasMaximized = false;
+  const updateFocusedColor = async () => {
+    if (!lastFocusedWasMaximized) {
+      return;
+    }
+
     let color = new Color(await invoke<IColor>(SeelenCommand.SystemGetForegroundWindowColor));
     if (color.inner.a === 0) {
-      document.documentElement.style.removeProperty('--color-focused-app-background');
-      document.documentElement.style.removeProperty('--color-focused-app-foreground');
+      removeFocusedColorCssVars();
       return;
     }
     document.documentElement.style.setProperty('--color-focused-app-background', color.asHex());
@@ -156,15 +165,22 @@ export async function registerStoreEvents() {
       '--color-focused-app-foreground',
       luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)',
     );
-  }, 250);
+  };
+
+  setInterval(updateFocusedColor, 350);
 
   await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
-    setFocused(e.payload);
-    // avoid change color when focusing the bar
-    if (e.payload.title !== 'Seelen Fancy Toolbar') {
+    const app = e.payload;
+    lastFocusedWasMaximized = app.isMaximized;
+    setFocused(app);
+
+    if (app.isMaximized) {
       updateFocusedColor();
+    } else if (app.title !== 'Seelen Fancy Toolbar') {
+      removeFocusedColorCssVars();
     }
-    if (e.payload.name == 'Seelen UI') {
+
+    if (app.name !== 'Seelen UI') {
       setFocused.flush();
     }
   });
