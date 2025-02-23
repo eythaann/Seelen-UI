@@ -97,11 +97,15 @@ impl LanguageManager {
                 for current_klid in &available_klids {
                     let reg_layout = reg_layouts.open_subkey(current_klid)?;
                     if let Ok(layout_id) = reg_layout.get_value::<String, _>("Layout Id") {
-                        if layout_id_to_search == layout_id {
+                        // Layout Id stored using case insensitive
+                        if layout_id_to_search == layout_id.to_uppercase() {
                             klid = Some(current_klid.clone());
                             break;
                         }
                     }
+                }
+                if klid.is_none() {
+                    return Err(format!("klid not found for {hkl:?}").into());
                 }
             } else {
                 // Use language id only if keyboard layout language is not available. This
