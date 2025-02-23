@@ -4895,7 +4895,7 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 [[package]]
 name = "seelen-core"
 version = "2.1.8"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#ddbec3bf2b7c26bd142c368429d68fc5ef1e9e02"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#310efe90a50ae04a6899a0a59e56325339f432d3"
 dependencies = [
  "base64 0.22.1",
  "grass",
@@ -6370,7 +6370,7 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 [[package]]
 name = "ts-rs"
 version = "10.1.0"
-source = "git+https://github.com/eythaann/ts-rs.git#b737ddfe115211b284b99efdcb9480ecf9a890d2"
+source = "git+https://github.com/eythaann/ts-rs.git#618f5ab9b02f73dfc76f72e4f18cfb52989da99e"
 dependencies = [
  "lazy_static",
  "serde_json",
@@ -6383,7 +6383,7 @@ dependencies = [
 [[package]]
 name = "ts-rs-macros"
 version = "10.1.0"
-source = "git+https://github.com/eythaann/ts-rs.git#b737ddfe115211b284b99efdcb9480ecf9a890d2"
+source = "git+https://github.com/eythaann/ts-rs.git#618f5ab9b02f73dfc76f72e4f18cfb52989da99e"
 dependencies = [
  "proc-macro2",
  "quote",
