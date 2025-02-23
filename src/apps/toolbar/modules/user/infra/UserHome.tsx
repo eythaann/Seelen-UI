@@ -155,7 +155,6 @@ export function WithUserHome({ setOpen, children }: UserHomeModuleProps) {
   return (
     <AnimatedPopover
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'userhome-open',
         closeAnimationName: 'userhome-close',
       }}

@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Desblokeatu tresna barra
   settings: Ezarpenak
   task_manager: Zereginen kudeatzailea
+keyboard:
+  more: Teklatuaren ezarpen gehiago
+  title: Teklatuko diseinua
 media:
   device:
     comunications: Komunikazioak

@@ -335,7 +335,6 @@ export function WithMediaControls({ children, setActive }: MediaControlProps) {
   return (
     <AnimatedPopover
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'media-open',
         closeAnimationName: 'media-close',
       }}
@@ -353,7 +352,6 @@ export function WithMediaControls({ children, setActive }: MediaControlProps) {
     >
       <AnimatedPopover
         animationDescription={{
-          maxAnimationTimeMs: 500,
           openAnimationName: 'media-notifier-open',
           closeAnimationName: 'media-notifier-close',
         }}

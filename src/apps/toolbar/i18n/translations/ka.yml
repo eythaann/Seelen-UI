@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: განბლოკეთ პანელი
   settings: პარამეტრები
   task_manager: სამუშაო მენეჯერი
+keyboard:
+  more: კლავიშების მეტი პარამეტრები
+  title: კლავიშის განლაგება
 media:
   device:
     comunications: კომუნიკაცია

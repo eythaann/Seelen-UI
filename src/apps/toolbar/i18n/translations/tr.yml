@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Araç çubuğunun kilidini aç
   settings: Ayarlar
   task_manager: Görev Yöneticisi
+keyboard:
+  more: Daha Fazla Klavye Ayarı
+  title: Klavye Düzeni
 media:
   device:
     comunications: İletişim

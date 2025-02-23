@@ -1,20 +1,18 @@
-id: "@default/power"
-icon: "PiBatteryMediumFill"
-target: "@seelen/fancy-toolbar"
+id: '@default/power'
+icon: 'PiBatteryMediumFill'
+target: '@seelen/fancy-toolbar'
 plugin:
   type: power
   tooltip: >-
     concat(string(battery.percentage), t("placeholder.battery_remaining"), battery.smartCharging ? t("placeholder.smart_charge") : "")
   template: >-
     concat(
-      string(equalText(battery.state, "charging") ? concat(getIcon("MdOutlineElectricBolt", 12), " ") : ""),
+      string(power.acLineStatus == 1 or equalText(battery.state, "charging") ? concat(getIcon("BsFillLightningChargeFill", 12), " ") : ""),
       string(
-        equalText(powerPlan, "BetterBattery") 
+        power.systemStatusFlag == 1 or equalText(powerPlan, "BetterBattery")
         ? concat(getIcon("FaLeaf", 12), " ") 
-        : equalText(powerPlan, "HighPerformance")
-        ? concat(getIcon("PiSpeedometer", 12), " ") 
-        : equalText(powerPlan, "MaxPerformance")
-        ? concat(getIcon("PiSpeedometer", 12), " ") 
+        : equalText(powerPlan, "HighPerformance") or equalText(powerPlan, "MaxPerformance")
+        ? concat(getIcon("IoSpeedometer", 12), " ") 
         : ""
       ),
       string(battery.smartCharging ? concat(getIcon("FaHeart", 12), " ") : ""),

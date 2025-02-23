@@ -99,7 +99,6 @@ export const UserApplication = memo(({ item, drag, onAssociatedViewOpenChanged }
       >
         <AnimatedPopover
           animationDescription={{
-            maxAnimationTimeMs: 500,
             openAnimationName: 'weg-item-preview-container-open',
             closeAnimationName: 'weg-item-preview-container-close',
           }}
@@ -161,7 +160,9 @@ export const UserApplication = memo(({ item, drag, onAssociatedViewOpenChanged }
           >
             <BackgroundByLayersV2 prefix="item" />
             <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
-            {notificationsCount > 0 && <div className="weg-item-notification-badge">{notificationsCount}</div>}
+            {notificationsCount > 0 && (
+              <div className="weg-item-notification-badge">{notificationsCount}</div>
+            )}
             {settings.showInstanceCounter && item.windows.length > 1 && (
               <div className="weg-item-instance-counter-badge">{item.windows.length}</div>
             )}

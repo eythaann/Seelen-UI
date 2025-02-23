@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: अनलॉक टूलबार
   settings: सेटिंग्स
   task_manager: कार्य प्रबंधक
+keyboard:
+  more: अधिक कीबोर्ड सेटिंग्स
+  title: कीबोर्ड विन्यास
 media:
   device:
     comunications: संचार

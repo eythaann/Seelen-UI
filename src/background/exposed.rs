@@ -1,7 +1,8 @@
 use std::collections::HashMap;
 use std::path::PathBuf;
 
-use seelen_core::command_handler_list;
+use seelen_core::{command_handler_list, system_state::Color};
+
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Foundation::HWND;
@@ -18,6 +19,8 @@ use crate::seelen_weg::icon_extractor::{
 
 use crate::utils::pwsh::PwshScript;
 use crate::utils::{is_running_as_appx, is_virtual_desktop_supported as virtual_desktop_supported};
+use crate::windows_api::hdc::DeviceContext;
+use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
 use crate::winevent::{SyntheticFullscreenData, WinEvent};
 use crate::{log_error, utils};
@@ -150,6 +153,18 @@ fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Resul
 #[tauri::command(async)]
 async fn check_for_updates() -> Result<bool> {
     Ok(utils::updater::check_for_updates().await?.is_some())
+}
+
+#[tauri::command(async)]
+async fn get_foreground_window_color() -> Result<Color> {
+    let window = Window::from(WindowsApi::get_foreground_window());
+    if !window.is_visible() || window.is_minimized() || window.is_desktop() {
+        return Ok(Color::default());
+    }
+    let hdc = DeviceContext::create(None);
+    let rect = window.inner_rect()?;
+    let x = rect.left + (rect.right - rect.left) / 2;
+    Ok(hdc.get_pixel(x, rect.top + 2))
 }
 
 #[tauri::command(async)]

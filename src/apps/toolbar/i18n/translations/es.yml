@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Desbloquear la barra de herramientas
   settings: Ajustes
   task_manager: Administrador de tareas
+keyboard:
+  more: Más ajustes del teclado
+  title: Disposición del teclado
 media:
   device:
     comunications: Comunicaciones

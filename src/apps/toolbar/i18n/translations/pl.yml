@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Odblokuj pasek narzędzi
   settings: Ustawienia
   task_manager: Menedżer zadań
+keyboard:
+  more: Więcej ustawień klawiatury
+  title: Układ klawiatury
 media:
   device:
     comunications: Komunikacja

@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Datgloi Bar Offer
   settings: Gosodiadau
   task_manager: Rheolwr Tasg
+keyboard:
+  more: Mwy o osodiadau bysellfwrdd
+  title: Cynllun Allweddell
 media:
   device:
     comunications: Gyfathrebiadau

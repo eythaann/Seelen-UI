@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Отключване на лентата с инструменти
   settings: Настройки
   task_manager: Диспечер на задачите
+keyboard:
+  more: Още настройки на клавиатурата
+  title: Разположение на клавиатурата
 media:
   device:
     comunications: Комуникации

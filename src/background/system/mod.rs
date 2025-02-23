@@ -7,13 +7,14 @@ use crate::{
     log_error,
     modules::{
         bluetooth::{infrastructure::register_bluetooth_events, release_bluetooth_events},
+        language::register_language_events,
         media::infrastructure::{register_media_events, release_media_events},
         monitors::infrastructure::register_monitor_webview_events,
         network::infrastructure::register_network_events,
         notifications::infrastructure::{
             register_notification_events, release_notification_events,
         },
-        power::infrastructure::{release_power_events, PowerManager},
+        power::infrastructure::{register_power_events, release_power_events},
         system_settings::infrastructure::{register_colors_events, release_colors_events},
         tray::infrastructure::register_tray_events,
         user::infrastructure::register_user_events,
@@ -23,12 +24,6 @@ use crate::{
 
 pub fn declare_system_events_handlers() -> Result<()> {
     let handle = get_app_handle();
-
-    // todo change this to current implementation pattern
-    handle.listen("register-power-events", move |_| {
-        log_error!(PowerManager::register_power_events());
-        log_error!(PowerManager::emit_system_power_info());
-    });
 
     // todo change this to current implementation pattern
     handle.listen("register-tray-events", move |_| register_tray_events());
@@ -52,6 +47,8 @@ pub fn declare_system_events_handlers() -> Result<()> {
     register_bluetooth_events();
     register_monitor_webview_events();
     register_colors_events();
+    register_power_events();
+    register_language_events();
     Ok(())
 }
 

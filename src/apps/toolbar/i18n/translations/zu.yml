@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Vula ithuluzi lamathuluzi
   settings: Izilungiselelo
   task_manager: Umphathi Womsebenzi
+keyboard:
+  more: Izilungiselelo eziningi zekhibhodi
+  title: Ukuhlelwa kwekhibhodi
 media:
   device:
     comunications: Ukuxoxisana

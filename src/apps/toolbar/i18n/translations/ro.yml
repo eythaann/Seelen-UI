@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Deblocați bara de instrumente
   settings: Setări
   task_manager: Manager de activități
+keyboard:
+  more: Mai multe setări ale tastaturii
+  title: Layout tastatură
 media:
   device:
     comunications: Comunicări

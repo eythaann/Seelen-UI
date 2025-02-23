@@ -50,6 +50,7 @@ lazy_static! {
 pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
 
 #[derive(Serialize, Clone)]
+#[serde(rename_all = "camelCase")]
 pub struct FocusedApp {
     hwnd: isize,
     title: String,

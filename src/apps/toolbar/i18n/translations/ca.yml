@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Desbloqueja la barra d’eines
   settings: Configuració
   task_manager: Gestor de tasques
+keyboard:
+  more: Més configuració del teclat
+  title: Disposició del teclat
 media:
   device:
     comunications: Comunicacions

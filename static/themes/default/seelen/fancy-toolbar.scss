@@ -110,6 +110,7 @@
   }
 }
 
+.keyboard-selector-open,
 .notification-open,
 .settings-open,
 .calendar-open,
@@ -120,7 +121,11 @@
 .ft-bar-item-context-menu-open,
 .ft-bar-context-menu-open,
 .userhome-open,
-.userhome-quicksettings-open,
+.userhome-quicksettings-open {
+  animation: PopupBaseAnimation 0.2s linear forwards;
+}
+
+.keyboard-selector-close,
 .notification-close,
 .settings-close,
 .calendar-close,
@@ -133,33 +138,16 @@
 .userhome-close,
 .userhome-quicksettings-close {
   animation: PopupBaseAnimation 0.2s linear forwards;
-}
-
-.notification-close,
-.settings-close,
-.calendar-close,
-.tray-close,
-.wlan-close,
-.media-close,
-.ft-bar-item-context-menu-close,
-.ft-bar-context-menu-close,
-.userhome-close,
-.userhome-quicksettings-close {
   animation-direction: reverse;
 }
 
 .ft-bar {
-  color: #fefefe;
-
-  .ft-bar-bg-layer-1 {
-    opacity: 0.3;
-    filter: saturate(0);
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-size: cover;
-  }
-
-  .ft-bar-bg-layer-2 {
-    background-color: #121212bb;
+  transition: background-color 0.2s linear;
+  color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
+  // we skip the first layer, to avoid break user themes, as before v2.2 the first layer was a noise layer
+  .bg-layer-2 {
+    transition: background-color 0.2s linear;
+    background-color: var(--color-focused-app-background, var(--color-persist-gray-900));
   }
 }
 
@@ -168,7 +156,7 @@
     width: 6px;
     height: 6px;
     border-radius: 3px;
-    background-color: #efefef;
+    background-color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
     transition-property: width, border-radius, background-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
@@ -389,16 +377,9 @@
 
 .wlan-selector-footer {
   padding: 8px;
-  font-weight: 600;
-  font-size: 0.8rem;
 
-  > span {
-    padding: 2px 6px;
-    border-radius: 4px;
-
-    &:hover {
-      background-color: var(--color-gray-200);
-    }
+  .wlan-selector-footer-button {
+    @extend %actionable-button;
   }
 }
 
@@ -909,6 +890,70 @@
       border: 1px solid var(--color-gray-600);
       border-radius: 8px;
       padding: 8px 12px;
+    }
+  }
+}
+
+.keyboard-selector {
+  @extend %list;
+  margin: var(--popups-margin);
+  width: 300px;
+  padding: 10px;
+  box-shadow: 0 0 10px 10px #0001;
+  gap: 10px;
+  border-radius: 10px;
+
+  .bg-layer-1 {
+    background-color: var(--color-gray-50);
+    border-radius: 10px;
+  }
+
+  .keyboard-selector-header {
+    @extend %section-title;
+  }
+
+  .keyboard-selector-body {
+    @extend %list;
+
+    .keyboard-selector-entry {
+      @extend %actionable-button;
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+
+      &.keyboard-selector-entry-active {
+        background-color: rgba(var(--config-accent-color-rgb), 0.4);
+      }
+
+      .keyboard-selector-entry-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .keyboard-selector-entry-lang {
+          font-weight: 600;
+          @extend %overflowable-text;
+        }
+
+        .keyboard-selector-entry-keyboard {
+          font-size: 0.7em;
+          line-height: 1.2em;
+          font-weight: 600;
+          color: var(--color-gray-600);
+          @extend %overflowable-text;
+        }
+      }
+    }
+  }
+
+  .keyboard-selector-footer {
+    .keyboard-selector-footer-button {
+      @extend %actionable-button;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-gray-600);
     }
   }
 }

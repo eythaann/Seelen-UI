@@ -34,14 +34,9 @@ export function NotificationsModule({ module }: Props) {
   }, []);
 
   return (
-    <Popover
-      open={!openPreview}
-      arrow={false}
-      content={<ArrivalPreview />}
-    >
+    <Popover open={!openPreview} arrow={false} content={<ArrivalPreview />}>
       <AnimatedPopover
         animationDescription={{
-          maxAnimationTimeMs: 500,
           openAnimationName: 'notification-open',
           closeAnimationName: 'notification-close',
         }}

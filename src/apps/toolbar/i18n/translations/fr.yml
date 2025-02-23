@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Déverrouiller la barre d'outils
   settings: Paramètres
   task_manager: Gestionnaire de tâches
+keyboard:
+  more: Autres paramètres du clavier
+  title: Disposition du clavier
 media:
   device:
     comunications: Communications

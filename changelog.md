@@ -7,6 +7,8 @@
 - show instances counter of the same app on dock.
 - allow set the toolbar on different positions.
 - allow set custom start menu icon.
+- language selector for toolbar.
+- add dynamic color by focused app on toolbar.
 
 ### enhancements
 - settings shown each time on startup.
@@ -17,6 +19,7 @@
 
 ### fix
 - showing domain on username for local accounts.
+- showing application frame host instead real app name.
 
 ## [2.1.9]
 ### fix

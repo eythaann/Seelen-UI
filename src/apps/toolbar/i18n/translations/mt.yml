@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Nisfruttaw toolbar
   settings: Settings
   task_manager: Task Manager
+keyboard:
+  more: Aktar settings tat-tastiera
+  title: Tqassim tat-tastiera
 media:
   device:
     comunications: Komunikazzjonijiet

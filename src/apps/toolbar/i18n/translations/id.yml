@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Buka kunci bilah alat
   settings: Pengaturan
   task_manager: Manajer Tugas
+keyboard:
+  more: Pengaturan Papan Ketik Lainnya
+  title: Tata Letak Papan Ketik
 media:
   device:
     comunications: Komunikasi

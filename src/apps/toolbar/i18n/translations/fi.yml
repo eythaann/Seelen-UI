@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Avaa työkalurivi
   settings: Asetukset
   task_manager: Tehtävienhallinta
+keyboard:
+  more: Lisää näppäimistön asetuksia
+  title: Näppäimistön asettelu
 media:
   device:
     comunications: Viitaus

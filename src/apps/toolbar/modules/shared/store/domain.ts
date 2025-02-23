@@ -1,4 +1,13 @@
-import { BluetoothDevice, FancyToolbarSettings, File, Placeholder, Plugin, Settings, User } from '@seelen-ui/lib/types';
+import { SystemLanguage } from '@seelen-ui/lib';
+import {
+  BluetoothDevice,
+  FancyToolbarSettings,
+  File,
+  Placeholder,
+  Plugin,
+  Settings,
+  User,
+} from '@seelen-ui/lib/types';
 import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -18,13 +27,14 @@ export interface PowerStatus {
 }
 
 export enum PowerPlan {
-  Balanced = 'Balanced',
   BatterySaver = 'BatterySaver',
+  Balanced = 'Balanced',
   BetterBattery = 'BetterBattery',
-  GameMode = 'GameMode',
   HighPerformance = 'HighPerformance',
   MaxPerformance = 'MaxPerformance',
+  GameMode = 'GameMode',
   MixedReality = 'MixedReality',
+  Unknown = 'Unknown',
 }
 
 export interface Battery {
@@ -124,7 +134,6 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   version: number;
   items: Placeholder;
   plugins: Plugin[];
-
   isOverlaped: boolean;
   user: User | null;
   userRecentFolder: File[];
@@ -153,4 +162,5 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   mediaOutputs: MediaDevice[];
   mediaInputs: MediaDevice[];
   notifications: AppNotification[];
+  languages: SystemLanguage[];
 }

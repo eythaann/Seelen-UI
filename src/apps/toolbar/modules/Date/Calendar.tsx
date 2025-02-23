@@ -184,7 +184,6 @@ export function WithDateCalendar({ children }: PropsWithChildren) {
   return (
     <AnimatedPopover
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'calendar-open',
         closeAnimationName: 'calendar-close',
       }}

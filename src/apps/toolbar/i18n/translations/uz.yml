@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Asboblar panelini oching
   settings: Sozlamalar
   task_manager: Vazifa menejeri
+keyboard:
+  more: Ko'proq klaviatura sozlamalari
+  title: Klaviatura tartibi
 media:
   device:
     comunications: Aloqa

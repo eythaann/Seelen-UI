@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Toolbar kilidini açın
   settings: Parametrlər
   task_manager: Tapşırıq meneceri
+keyboard:
+  more: Daha çox klaviatura parametrləri
+  title: Klaviatura düzeni
 media:
   device:
     comunications: Rabitə

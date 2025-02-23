@@ -1,4 +1,7 @@
-use std::os::windows::ffi::{OsStrExt, OsStringExt};
+use std::{
+    ffi::{OsStr, OsString},
+    os::windows::ffi::{OsStrExt, OsStringExt},
+};
 
 use windows_core::{PCWSTR, PWSTR};
 
@@ -24,7 +27,7 @@ impl WindowsString {
         }
     }
 
-    pub fn from_os_string(s: &std::ffi::OsStr) -> Self {
+    pub fn from_os_string(s: &OsStr) -> Self {
         Self {
             inner: s.encode_wide().chain(Some(0)).collect(),
         }
@@ -33,7 +36,7 @@ impl WindowsString {
     pub fn len(&self) -> usize {
         self.inner
             .iter()
-            .position(|c| *c == 0)
+            .position(|c| c == &0)
             .expect("Invalid UTF16 Windows String")
     }
 
@@ -63,7 +66,37 @@ impl std::fmt::Display for WindowsString {
         write!(
             f,
             "{}",
-            String::from_utf16_lossy(&self.inner).trim_end_matches("\0")
+            String::from_utf16_lossy(&self.inner[..self.len()]).trim_end_matches("\0")
         )
+    }
+}
+
+impl From<&str> for WindowsString {
+    fn from(value: &str) -> Self {
+        Self::from_str(value)
+    }
+}
+
+impl From<String> for WindowsString {
+    fn from(value: String) -> Self {
+        Self::from_str(&value)
+    }
+}
+
+impl From<&OsStr> for WindowsString {
+    fn from(value: &OsStr) -> Self {
+        Self::from_os_string(value)
+    }
+}
+
+impl From<OsString> for WindowsString {
+    fn from(value: OsString) -> Self {
+        Self::from_os_string(&value)
+    }
+}
+
+impl From<&[u16]> for WindowsString {
+    fn from(value: &[u16]) -> Self {
+        Self::from_slice(value)
     }
 }

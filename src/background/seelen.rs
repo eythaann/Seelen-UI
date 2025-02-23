@@ -28,7 +28,7 @@ use crate::{
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::{ahk::AutoHotKey, pwsh::PwshScript},
-    windows_api::{Com, WindowsApi},
+    windows_api::{event_window::create_background_window, Com, WindowsApi},
     APP_HANDLE,
 };
 
@@ -217,6 +217,7 @@ impl Seelen {
             WindowManagerV2::enumerate_all_windows()?;
         }
 
+        create_background_window()?;
         register_win_hook()?;
         Ok(())
     }

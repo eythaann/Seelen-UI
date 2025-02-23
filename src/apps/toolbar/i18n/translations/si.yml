@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: මෙවලම් තීරුව අගුළු ඇරීම
   settings: සැකසීම්
   task_manager: කාර්ය කළමනාකරු
+keyboard:
+  more: තවත් යතුරුපුවරු සැකසුම්
+  title: යතුරුපුවරු පිරිසැලසුම
 media:
   device:
     comunications: සන්නිවේදනය

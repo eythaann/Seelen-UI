@@ -28,7 +28,6 @@ export function Item(props: InnerItemProps) {
   return (
     <AnimatedDropdown
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'ft-bar-item-context-menu-open',
         closeAnimationName: 'ft-bar-item-context-menu-close',
       }}

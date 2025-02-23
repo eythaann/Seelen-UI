@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Werkbalk ontgrendelen
   settings: Instellingen
   task_manager: Taakbeheer
+keyboard:
+  more: Meer toetsenbordinstellingen
+  title: Toetsenbordindeling
 media:
   device:
     comunications: Communicatie

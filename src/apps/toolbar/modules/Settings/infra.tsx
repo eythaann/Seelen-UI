@@ -74,7 +74,6 @@ export function SettingsModule({ module }: Props) {
   return (
     <AnimatedPopover
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'settings-open',
         closeAnimationName: 'settings-close',
       }}

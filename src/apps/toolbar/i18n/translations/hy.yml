@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Բացել գործիքագոտին
   settings: Կարգավորումներ
   task_manager: Առաջադրանքների կառավարիչ
+keyboard:
+  more: Ստեղնաշարի ավելի շատ պարամետրեր
+  title: Ստեղնաշարի դասավորություն
 media:
   device:
     comunications: Կապի

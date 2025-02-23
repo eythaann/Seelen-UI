@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Rīkjoslas atbloķēšana
   settings: Iestatījumi
   task_manager: Uzdevumu pārvaldnieks
+keyboard:
+  more: Vairāk tastatūras iestatījumu
+  title: Tastatūras izkārtojums
 media:
   device:
     comunications: Sakari

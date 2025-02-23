@@ -108,7 +108,6 @@ export function TrayModule({ module }: Props) {
   return (
     <AnimatedPopover
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'tray-open',
         closeAnimationName: 'tray-close',
       }}

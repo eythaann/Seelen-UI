@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: Lås opp verktøylinje
   settings: Innstillinger
   task_manager: Oppgavebehandling
+keyboard:
+  more: Flere tastaturinnstillinger
+  title: Tastaturoppsett
 media:
   device:
     comunications: Kommunikasjon

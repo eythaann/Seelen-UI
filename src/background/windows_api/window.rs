@@ -4,10 +4,14 @@ use std::{
     path::PathBuf,
 };
 
-use windows::Win32::{
-    Foundation::{HWND, RECT},
-    UI::WindowsAndMessaging::{
-        SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+use windows::{
+    ApplicationModel::AppInfo,
+    Win32::{
+        Foundation::{HWND, RECT},
+        UI::WindowsAndMessaging::{
+            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
+            WS_EX_TOOLWINDOW,
+        },
     },
 };
 
@@ -142,7 +146,8 @@ impl Window {
     }
 
     pub fn app_display_name(&self) -> Result<String> {
-        if let Ok(info) = self.process().package_app_info() {
+        if let Some(AppUserModelId::Appx(umid)) = self.app_user_model_id() {
+            let info = AppInfo::GetFromAppUserModelId(&umid.into())?;
             return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
         }
         self.process().program_display_name()
@@ -237,15 +242,17 @@ impl Window {
 
     /// this means all windows that are part of the UI desktop not the real desktop window
     pub fn is_desktop(&self) -> bool {
-        let class = self.class();
-        WindowsApi::get_desktop_window() == self.0
-            || class == "Progman"
-            || (class == "WorkerW"
-                && self.children().is_ok_and(|children| {
-                    children
-                        .iter()
-                        .any(|child| child.class() == "SHELLDLL_DefView")
-                }))
+        WindowsApi::get_desktop_window() == self.0 || {
+            let class = self.class();
+            class == "Progman" || {
+                class == "WorkerW"
+                    && self.children().is_ok_and(|children| {
+                        children
+                            .iter()
+                            .any(|child| child.class() == "SHELLDLL_DefView")
+                    })
+            }
+        }
     }
 
     pub fn is_seelen_overlay(&self) -> bool {

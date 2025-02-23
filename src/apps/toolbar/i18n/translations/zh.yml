@@ -5,6 +5,9 @@ context_menu:
   reorder_enable: 解锁工具栏
   settings: 设置
   task_manager: 任务管理器
+keyboard:
+  more: 更多键盘设置
+  title: 键盘布局
 media:
   device:
     comunications: 通信
