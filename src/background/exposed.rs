@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::os::windows::process::CommandExt;
 use std::path::PathBuf;
 
 use seelen_core::{command_handler_list, system_state::Color};
@@ -37,10 +38,8 @@ fn select_file_on_explorer(path: String) -> Result<()> {
 
 #[tauri::command(async)]
 fn open_file(path: String) -> Result<()> {
-    get_app_handle()
-        .shell()
-        .command("explorer")
-        .arg(&path)
+    std::process::Command::new("explorer.exe")
+        .raw_arg(format!("\"{}\"", path))
         .spawn()?;
     Ok(())
 }

@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
+  SeelenCommand,
   SeelenEvent,
   SeelenWegSide,
   Settings,
@@ -7,6 +8,7 @@ import {
   WegItems,
 } from '@seelen-ui/lib';
 import { SeelenWegSettings } from '@seelen-ui/lib/types';
+import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
@@ -122,4 +124,5 @@ export async function loadStore() {
   loadSettingsToStore(await Settings.getAsync());
   loadWegItemsToStore(await WegItems.forCurrentWidget());
   loadColorsToStore(await UIColors.getAsync());
+  store.dispatch(RootActions.setMediaSessions(await invoke(SeelenCommand.GetMediaSessions)));
 }

@@ -16,7 +16,7 @@ import {
 import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 
-import { Battery, PowerPlan, PowerStatus, RootState } from './domain';
+import { Battery, MediaChannelTransportData, MediaDevice, PowerPlan, PowerStatus, RootState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
@@ -128,6 +128,18 @@ export async function lazySlice(d: Dispatch) {
   invoke<PowerPlan>(SeelenCommand.GetPowerMode).then((plan) => d(RootActions.setPowerPlan(plan)));
   invoke<Battery[]>(SeelenCommand.GetBatteries).then((batteries) =>
     d(RootActions.setBatteries(batteries)),
+  );
+
+  invoke<[MediaDevice[], MediaDevice[]]>(SeelenCommand.GetMediaDevices).then(
+    ([inputs, outputs]) => {
+      console.log({ inputs, outputs });
+      d(RootActions.setMediaInputs(inputs));
+      d(RootActions.setMediaOutputs(outputs));
+    },
+  );
+
+  invoke<MediaChannelTransportData[]>(SeelenCommand.GetMediaSessions).then((sessions) =>
+    d(RootActions.setMediaSessions(sessions)),
   );
 
   LanguageList.getAsync().then((list) => d(RootActions.setLanguages(list.asArray())));

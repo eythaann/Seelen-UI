@@ -76,9 +76,9 @@ impl HookManagerSkipper {
     /// this function is intended to be called before ejecuting a actions that will
     /// trigger some window event, so the skipper will be removed after 1 second
     /// if no event is emitted in that interval
-    pub fn skip(&mut self, event: WinEvent, hwnd: HWND) {
+    pub fn skip(&mut self, event: WinEvent, hwnd: isize) {
         self.to_skip.push(HookManagerSkipperItem {
-            hwnd: hwnd.0 as _,
+            hwnd,
             event,
             expiry: Instant::now() + Duration::from_millis(1000),
             skipped: false,
@@ -90,19 +90,14 @@ impl HookManagerSkipper {
             .retain(|s| !s.skipped && s.expiry > Instant::now());
     }
 
-    fn should_skip(&mut self, event: WinEvent, hwnd: HWND) -> bool {
-        // skip foreground on invisible windows
-        /* if event == WinEvent::SystemForeground && !WindowsApi::is_window_visible(hwnd) {
-            return true;
-        } */
-
-        let hwnd = hwnd.0 as isize;
-        if let Some(skipper) = self
+    /// returns true if the event should be skipped
+    fn should_skip(&mut self, event: WinEvent, hwnd: isize) -> bool {
+        if let Some(item) = self
             .to_skip
             .iter_mut()
             .find(|s| s.hwnd == hwnd && s.event == event && !s.skipped && s.expiry > Instant::now())
         {
-            skipper.skipped = true;
+            item.skipped = true;
             return true;
         }
         false
@@ -114,6 +109,29 @@ pub struct HookManager;
 event_manager!(HookManager, (WinEvent, Window));
 
 impl HookManager {
+    /// this will be called without waiting for the event to be processed
+    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook#remarks
+    extern "system" fn raw_win_event_hook_recv(
+        _hook_handle: HWINEVENTHOOK,
+        event: u32,
+        origin: HWND,
+        id_object: i32,
+        _id_child: i32,
+        _id_event_thread: u32,
+        _dwms_event_time: u32,
+    ) {
+        if id_object != 0 || !Seelen::is_running() {
+            return;
+        }
+
+        log_error!(Self::event_tx().send((WinEvent::from(event), Window::from(origin))));
+
+        if FULL_STATE.load().is_weg_enabled() {
+            // raw events should be only used for a fastest and immediately processing
+            log_error!(SeelenWeg::process_raw_win_event(event, origin));
+        }
+    }
+
     pub fn run_with_async<F, T>(f: F) -> JoinHandle<T>
     where
         F: FnOnce(&mut HookManagerSkipper) -> T,
@@ -121,12 +139,6 @@ impl HookManager {
         T: Send + 'static,
     {
         std::thread::spawn(move || f(&mut *trace_lock!(HOOK_MANAGER_SKIPPER)))
-    }
-
-    fn log_skipped(event: WinEvent) {
-        if LOG_WIN_EVENTS.load(Ordering::Relaxed) {
-            log::debug!("Skipping WinEvent::{:?}", event);
-        }
     }
 
     fn log_event(event: WinEvent, origin: Window) {
@@ -151,10 +163,12 @@ impl HookManager {
         Self::log_event(event, origin);
 
         {
-            let mut hook_manager = trace_lock!(HOOK_MANAGER_SKIPPER);
-            if hook_manager.should_skip(event, origin.hwnd()) {
-                Self::log_skipped(event);
-                hook_manager.cleanup();
+            let mut skipper = trace_lock!(HOOK_MANAGER_SKIPPER);
+            if skipper.should_skip(event, origin.address()) {
+                if LOG_WIN_EVENTS.load(Ordering::Acquire) {
+                    log::debug!("Skipping WinEvent::{:?}", event);
+                }
+                skipper.cleanup();
                 return;
             }
         }
@@ -260,29 +274,6 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
     Ok(())
 }
 
-/// this will be called without waiting for the event to be processed
-/// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook#remarks
-extern "system" fn raw_win_event_hook_recv(
-    _hook_handle: HWINEVENTHOOK,
-    event: u32,
-    origin: HWND,
-    id_object: i32,
-    _id_child: i32,
-    _id_event_thread: u32,
-    _dwms_event_time: u32,
-) {
-    if id_object != 0 || !Seelen::is_running() {
-        return;
-    }
-
-    log_error!(HookManager::event_tx().send((WinEvent::from(event), Window::from(origin))));
-
-    if FULL_STATE.load().is_weg_enabled() {
-        // raw events should be only used for a fastest and immediately processing
-        log_error!(SeelenWeg::process_raw_win_event(event, origin));
-    }
-}
-
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
 
@@ -291,7 +282,7 @@ pub fn register_win_hook() -> Result<()> {
             EVENT_MIN,
             EVENT_MAX,
             None,
-            Some(raw_win_event_hook_recv),
+            Some(HookManager::raw_win_event_hook_recv),
             0,
             0,
             0,
@@ -299,7 +290,7 @@ pub fn register_win_hook() -> Result<()> {
 
         HookManager::subscribe(|(event, mut origin)| {
             if event == WinEvent::SystemForeground {
-                origin = Window::get_foregrounded();
+                origin = Window::get_foregrounded(); // sometimes event is emited with wrong origin
             }
 
             HookManager::process_event(event, origin);
@@ -311,10 +302,7 @@ pub fn register_win_hook() -> Result<()> {
         });
 
         let mut msg: MSG = MSG::default();
-        loop {
-            if !GetMessageW(&mut msg, None, 0, 0).as_bool() {
-                break;
-            };
+        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
             let _ = TranslateMessage(&msg);
             DispatchMessageW(&msg);
         }

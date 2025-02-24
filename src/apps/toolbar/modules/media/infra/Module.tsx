@@ -1,7 +1,6 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { MediaToolbarItem } from '@seelen-ui/lib/types';
-import { emit } from '@tauri-apps/api/event';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Item } from '../../item/infra/infra';
@@ -21,13 +20,12 @@ function MediaModuleItem({ module, active, ...rest }: Props) {
     volume = 0,
     muted: isMuted = true,
   } = useSelector((state: any) =>
-    Selectors.mediaOutputs(state).find((d) => d.is_default_multimedia),
+    Selectors.mediaOutputs(state).find((d) => d.isDefaultMultimedia),
   ) || {};
 
   const { volume: inputVolume = 0, muted: inputIsMuted = true } =
-    useSelector((state: any) =>
-      Selectors.mediaInputs(state).find((d) => d.is_default_multimedia),
-    ) || {};
+    useSelector((state: any) => Selectors.mediaInputs(state).find((d) => d.isDefaultMultimedia)) ||
+    {};
 
   const mediaSession =
     useSelector((state: any) => Selectors.mediaSessions(state).find((d) => d.default)) || null;
@@ -50,11 +48,7 @@ function MediaModuleItem({ module, active, ...rest }: Props) {
 }
 
 export function MediaModule({ module }: Props) {
-  const [ open, setOpen ] = useState(false);
-
-  useEffect(() => {
-    emit('register-media-events');
-  }, []);
+  const [open, setOpen] = useState(false);
 
   return module.withMediaControls ? (
     <WithMediaControls setActive={setOpen}>

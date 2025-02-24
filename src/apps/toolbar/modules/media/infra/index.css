@@ -1,6 +1,7 @@
 .media-control-volume {
   .ant-slider {
     flex: 1;
+    margin: 0 6px;
   }
 }
 

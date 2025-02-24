@@ -41,6 +41,8 @@ export function AnimatedPopover({
 
   return (
     <Popover
+      {...popoverProps}
+      arrow={false}
       open={open || delayedOpenPopover}
       onOpenChange={(open, info) => {
         if (onOpenChange) {
@@ -49,7 +51,6 @@ export function AnimatedPopover({
           setOpenReplacement(open);
         }
       }}
-      {...popoverProps}
       content={
         content && (
           <div className={cx(animationObject)}>

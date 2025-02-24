@@ -1,57 +1,49 @@
 use seelen_core::handlers::SeelenEvent;
-use std::sync::atomic::{AtomicBool, Ordering};
 use tauri::Emitter;
-use windows::core::GUID;
+use windows::{core::GUID, Win32::Media::Audio::ISimpleAudioVolume};
 
 use crate::{
-    error_handler::Result, modules::media::application::MEDIA_MANAGER, seelen::get_app_handle,
-    trace_lock,
+    error_handler::Result, log_error, modules::media::application::MEDIA_MANAGER,
+    seelen::get_app_handle, trace_lock,
 };
 
-use super::domain::{Device, MediaPlayer};
+use super::{application::MediaManager, domain::MediaPlayer};
 
-fn emit_media_sessions(playing: &Vec<MediaPlayer>) {
-    let app = get_app_handle();
-    app.emit(SeelenEvent::MediaSessions, playing)
-        .expect("failed to emit");
-}
-
-fn emit_media_devices(inputs: &Vec<Device>, outputs: &Vec<Device>) {
-    let app = get_app_handle();
-    app.emit(SeelenEvent::MediaInputs, inputs)
-        .expect("failed to emit");
-    app.emit(SeelenEvent::MediaOutputs, outputs)
-        .expect("failed to emit");
-}
-
-static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_media_events() {
-    let was_registered = REGISTERED.load(Ordering::Acquire);
-    if !was_registered {
-        REGISTERED.store(true, Ordering::Release);
-    }
-    std::thread::spawn(move || {
+    std::thread::spawn(|| {
         let mut manager = trace_lock!(MEDIA_MANAGER);
-        if !was_registered {
-            log::trace!("Registering media events");
-            manager.on_change_devices(emit_media_devices);
-            manager.on_change_players(emit_media_sessions);
-        }
-        emit_media_devices(manager.inputs(), manager.outputs());
-        emit_media_sessions(manager.playing());
+        manager.on_change_devices(|inputs, outputs| {
+            let app = get_app_handle();
+            log_error!(app.emit(SeelenEvent::MediaInputs, inputs));
+            log_error!(app.emit(SeelenEvent::MediaOutputs, outputs));
+        });
+        manager.on_change_players(|playing| {
+            log_error!(get_app_handle().emit(SeelenEvent::MediaSessions, playing));
+        });
     });
 }
 
 pub fn release_media_events() {
-    if REGISTERED.load(Ordering::Acquire) {
-        trace_lock!(MEDIA_MANAGER).release();
-    }
+    trace_lock!(MEDIA_MANAGER).release();
+}
+
+#[tauri::command(async)]
+pub fn get_media_devices() -> Result<(serde_json::Value, serde_json::Value)> {
+    let manager = trace_lock!(MEDIA_MANAGER);
+    let inputs = serde_json::to_value(manager.inputs())?;
+    let outputs = serde_json::to_value(manager.outputs())?;
+    Ok((inputs, outputs))
+}
+
+#[tauri::command(async)]
+pub fn get_media_sessions() -> Result<Vec<MediaPlayer>> {
+    let manager = trace_lock!(MEDIA_MANAGER);
+    Ok(manager.playing().clone())
 }
 
 #[tauri::command(async)]
 pub fn media_set_default_device(id: String, role: String) -> Result<()> {
-    trace_lock!(MEDIA_MANAGER).set_default_device(&id, &role)?;
-    Ok(())
+    MediaManager::set_default_device(&id, &role)
 }
 
 #[tauri::command(async)]
@@ -88,24 +80,55 @@ pub fn media_toggle_play_pause(id: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn media_toggle_mute(id: String, _session_id: Option<String>) -> Result<()> {
+pub fn media_toggle_mute(device_id: String, session_id: Option<String>) -> Result<()> {
     let manager = trace_lock!(MEDIA_MANAGER);
-    let endpoints = manager.devices_audio_endpoint();
-    if let Some((endpoint, _)) = endpoints.get(&id) {
-        unsafe {
-            endpoint.SetMute(!endpoint.GetMute()?.as_bool(), &GUID::zeroed())?;
+    if let Some(device) = manager.device(&device_id) {
+        if session_id.is_none() {
+            unsafe {
+                device.volume_endpoint.SetMute(
+                    !device.volume_endpoint.GetMute()?.as_bool(),
+                    &GUID::zeroed(),
+                )?;
+            }
+            return Ok(());
+        }
+
+        if let Some(session) = device.session(&session_id.unwrap()) {
+            unsafe {
+                use windows_core::Interface;
+                let volume: ISimpleAudioVolume = session.controls.cast()?;
+                volume.SetMute(!volume.GetMute()?.as_bool(), &GUID::zeroed())?;
+            }
         }
     }
     Ok(())
 }
 
 #[tauri::command(async)]
-pub fn set_volume_level(id: String, _session_id: Option<String>, level: f32) -> Result<()> {
+pub fn set_volume_level(
+    device_id: String,
+    session_id: Option<String>,
+    mut level: f32,
+) -> Result<()> {
     let manager = trace_lock!(MEDIA_MANAGER);
-    let endpoints = manager.devices_audio_endpoint();
-    if let Some((endpoint, _)) = endpoints.get(&id) {
-        unsafe {
-            endpoint.SetMasterVolumeLevelScalar(level, &GUID::zeroed())?;
+    level = level.clamp(0.0, 1.0); // ensure valid value
+
+    if let Some(device) = manager.device(&device_id) {
+        if session_id.is_none() {
+            unsafe {
+                device
+                    .volume_endpoint
+                    .SetMasterVolumeLevelScalar(level, &GUID::zeroed())?;
+            }
+            return Ok(());
+        }
+
+        if let Some(session) = device.session(&session_id.unwrap()) {
+            unsafe {
+                use windows_core::Interface;
+                let volume: ISimpleAudioVolume = session.controls.cast()?;
+                volume.SetMasterVolume(level, &GUID::zeroed())?;
+            }
         }
     }
     Ok(())

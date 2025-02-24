@@ -7,18 +7,23 @@ use windows::{
     Devices::Custom::DeviceSharingMode,
     Win32::{
         Foundation::{BOOL, PROPERTYKEY},
-        Media::Audio::{ERole, WAVEFORMATEX},
+        Media::Audio::{
+            ERole,
+            Endpoints::{IAudioEndpointVolume, IAudioEndpointVolumeCallback},
+            IAudioSessionControl2, IAudioSessionEvents, IAudioSessionManager2,
+            IAudioSessionNotification, WAVEFORMATEX,
+        },
         System::Com::StructuredStorage::PROPVARIANT,
     },
 };
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MediaPlayerOwner {
     pub name: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MediaPlayer {
     pub umid: String,
@@ -30,25 +35,48 @@ pub struct MediaPlayer {
     pub default: bool,
 }
 
-#[derive(Debug, Serialize)]
-pub struct DeviceChannel {
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct MediaDeviceSession {
+    #[serde(skip)]
+    pub controls: IAudioSessionControl2,
+    #[serde(skip)]
+    pub events_callback: IAudioSessionEvents,
+    // ---
     pub id: String,
     pub instance_id: String,
     pub process_id: u32,
     pub name: String,
-    pub icon_path: Option<String>,
+    pub icon_path: Option<PathBuf>,
     pub is_system: bool,
     pub volume: f32,
     pub muted: bool,
 }
 
-#[derive(Debug, Serialize)]
-pub struct Device {
+#[derive(Debug, Clone, Serialize)]
+pub enum MediaDeviceType {
+    Input,
+    Output,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct MediaDevice {
+    #[serde(skip)]
+    pub volume_endpoint: IAudioEndpointVolume,
+    #[serde(skip)]
+    pub volume_callback: IAudioEndpointVolumeCallback,
+    #[serde(skip)]
+    pub session_manager: IAudioSessionManager2,
+    #[serde(skip)]
+    pub session_created_callback: IAudioSessionNotification,
+    // ---
     pub id: String,
     pub name: String,
+    pub r#type: MediaDeviceType,
     pub is_default_multimedia: bool,
     pub is_default_communications: bool,
-    pub sessions: Vec<DeviceChannel>,
+    pub sessions: Vec<MediaDeviceSession>,
     pub volume: f32,
     pub muted: bool,
 }

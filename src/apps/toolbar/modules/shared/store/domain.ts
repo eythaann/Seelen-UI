@@ -104,11 +104,11 @@ export interface MediaChannelTransportData {
 
 export interface MediaDeviceChannel {
   id: string;
-  instance_id: string;
-  process_id: number;
+  instanceId: string;
+  processId: number;
   name: string;
-  icon_path: string | null;
-  is_system: boolean;
+  iconPath: string | null;
+  isSystem: boolean;
   volume: number;
   muted: boolean;
 }
@@ -116,8 +116,8 @@ export interface MediaDeviceChannel {
 export interface MediaDevice {
   id: string;
   name: string;
-  is_default_multimedia: boolean;
-  is_default_communications: boolean;
+  isDefaultMultimedia: boolean;
+  isDefaultCommunications: boolean;
   sessions: MediaDeviceChannel[];
   volume: number;
   muted: boolean;

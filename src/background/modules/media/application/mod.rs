@@ -1,4 +1,6 @@
+mod device;
 mod players;
+mod session;
 
 use std::{collections::HashMap, path::PathBuf, sync::Arc, time::Duration};
 
@@ -13,33 +15,23 @@ use windows::{
         PlaybackInfoChangedEventArgs, SessionsChangedEventArgs,
     },
     Win32::{
-        Devices::FunctionDiscovery::PKEY_Device_FriendlyName,
         Foundation::PROPERTYKEY,
         Media::Audio::{
             eAll, eCapture, eCommunications, eConsole, eMultimedia, eRender, EDataFlow, ERole,
-            Endpoints::{
-                IAudioEndpointVolume, IAudioEndpointVolumeCallback,
-                IAudioEndpointVolumeCallback_Impl,
-            },
-            IAudioSessionControl, IAudioSessionControl2, IAudioSessionEvents,
-            IAudioSessionEvents_Impl, IAudioSessionManager2, IAudioSessionNotification,
-            IAudioSessionNotification_Impl, IMMDevice, IMMDeviceEnumerator, IMMEndpoint,
-            IMMNotificationClient, IMMNotificationClient_Impl, ISimpleAudioVolume,
+            IMMDevice, IMMDeviceEnumerator, IMMNotificationClient, IMMNotificationClient_Impl,
             MMDeviceEnumerator, DEVICE_STATE_ACTIVE,
         },
-        System::{
-            Com::{CLSCTX_ALL, STGM_READ},
-            WinRT::EventRegistrationToken,
-        },
+        System::WinRT::EventRegistrationToken,
     },
 };
-use windows_core::Interface;
 
 use crate::{
     error_handler::Result, event_manager, log_error, trace_lock, utils::pcwstr, windows_api::Com,
 };
 
-use super::domain::{Device, DeviceChannel, IPolicyConfig, MediaPlayer, PolicyConfig};
+use super::domain::{
+    IPolicyConfig, MediaDevice, MediaDeviceSession, MediaDeviceType, MediaPlayer, PolicyConfig,
+};
 
 lazy_static! {
     pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> = Arc::new(Mutex::new(
@@ -63,6 +55,22 @@ pub enum MediaEvent {
         volume: f32,
         muted: bool,
     },
+    // == sessions ==
+    DeviceSessionAdded {
+        device_id: String,
+        session: MediaDeviceSession,
+    },
+    DeviceSessionRemoved {
+        device_id: String,
+        session_id: String,
+    },
+    DeviceSessionVolumeChanged {
+        device_id: String,
+        session_id: String,
+        volume: f32,
+        muted: bool,
+    },
+    // == players ==
     MediaPlayerAdded(GlobalSystemMediaTransportControlsSession),
     MediaPlayerRemoved(String),
     MediaPlayerPropertiesChanged {
@@ -76,6 +84,8 @@ pub enum MediaEvent {
         playing: bool,
     },
 }
+
+unsafe impl Send for MediaEvent {}
 
 #[windows_core::implement(IMMNotificationClient)]
 struct MediaManagerEvents;
@@ -135,113 +145,11 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
     }
 }
 
-#[windows::core::implement(IAudioEndpointVolumeCallback, IAudioSessionNotification)]
-struct MediaDeviceEventHandler {
-    device_id: String,
-}
-
-impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler_Impl {
-    fn OnNotify(
-        &self,
-        data: *mut windows::Win32::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA,
-    ) -> windows_core::Result<()> {
-        if let Some(data) = unsafe { data.as_ref() } {
-            let tx = MediaManager::event_tx();
-            let result = tx.send(MediaEvent::DeviceVolumeChanged {
-                device_id: self.device_id.clone(),
-                volume: data.fMasterVolume,
-                muted: data.bMuted.as_bool(),
-            });
-            log_error!(result);
-        }
-        Ok(())
-    }
-}
-
-impl IAudioSessionNotification_Impl for MediaDeviceEventHandler_Impl {
-    fn OnSessionCreated(
-        &self,
-        _newsession: windows_core::Ref<'_, IAudioSessionControl>,
-    ) -> windows_core::Result<()> {
-        // println!("SESSION CREATED!")
-        Ok(())
-    }
-}
-
-#[windows::core::implement(IAudioSessionEvents)]
-struct MediaSessionEventHandler;
-
-impl IAudioSessionEvents_Impl for MediaSessionEventHandler_Impl {
-    fn OnChannelVolumeChanged(
-        &self,
-        _channel_count: u32,
-        _new_channel_volume_array: *const f32,
-        _changed_channel: u32,
-        _event_context: *const windows::core::GUID,
-    ) -> windows::core::Result<()> {
-        // println!("CHANNEL VOLUME CHANGED!");
-        Ok(())
-    }
-
-    fn OnDisplayNameChanged(
-        &self,
-        _new_display_name: &windows::core::PCWSTR,
-        _event_context: *const windows::core::GUID,
-    ) -> windows::core::Result<()> {
-        // println!("DISPLAY NAME CHANGED!");
-        Ok(())
-    }
-
-    fn OnGroupingParamChanged(
-        &self,
-        _new_grouping_param: *const windows::core::GUID,
-        _event_context: *const windows::core::GUID,
-    ) -> windows::core::Result<()> {
-        // println!("GROUPING PARAM CHANGED!");
-        Ok(())
-    }
-
-    fn OnIconPathChanged(
-        &self,
-        _new_icon_path: &windows::core::PCWSTR,
-        _event_context: *const windows::core::GUID,
-    ) -> windows::core::Result<()> {
-        // println!("ICON PATH CHANGED!");
-        Ok(())
-    }
-
-    fn OnSessionDisconnected(
-        &self,
-        _disconnect_reason: windows::Win32::Media::Audio::AudioSessionDisconnectReason,
-    ) -> windows::core::Result<()> {
-        // println!("SESSION DISCONNECTED!");
-        Ok(())
-    }
-
-    fn OnSimpleVolumeChanged(
-        &self,
-        _new_volume: f32,
-        _new_mute: windows::Win32::Foundation::BOOL,
-        _event_context: *const windows::core::GUID,
-    ) -> windows::core::Result<()> {
-        // println!("SIMPLE VOLUME CHANGED!");
-        Ok(())
-    }
-
-    fn OnStateChanged(
-        &self,
-        _new_state: windows::Win32::Media::Audio::AudioSessionState,
-    ) -> windows::core::Result<()> {
-        // println!("STATE CHANGED! {:?}", _new_state);
-        Ok(())
-    }
-}
-
-type OnDevicesChange = Box<dyn Fn(&Vec<Device>, &Vec<Device>) + Send + Sync>;
+type OnDevicesChange = Box<dyn Fn(&Vec<MediaDevice>, &Vec<MediaDevice>) + Send + Sync>;
 type OnPlayersChange = Box<dyn Fn(&Vec<MediaPlayer>) + Send + Sync>;
 pub struct MediaManager {
-    inputs: Vec<Device>,
-    outputs: Vec<Device>,
+    inputs: Vec<MediaDevice>,
+    outputs: Vec<MediaDevice>,
     playing: Vec<MediaPlayer>,
 
     registered_devices_callbacks: Vec<OnDevicesChange>,
@@ -249,7 +157,6 @@ pub struct MediaManager {
 
     device_enumerator: IMMDeviceEnumerator,
     mm_notification_client: IMMNotificationClient,
-    devices_audio_endpoint: HashMap<String, (IAudioEndpointVolume, IAudioEndpointVolumeCallback)>,
 
     media_player_manager: GlobalSystemMediaTransportControlsSessionManager,
     media_player_manager_event_handler: TypedEventHandler<
@@ -272,11 +179,11 @@ unsafe impl Send for MediaManager {}
 
 // getters/setters
 impl MediaManager {
-    pub fn inputs(&self) -> &Vec<Device> {
+    pub fn inputs(&self) -> &Vec<MediaDevice> {
         &self.inputs
     }
 
-    pub fn outputs(&self) -> &Vec<Device> {
+    pub fn outputs(&self) -> &Vec<MediaDevice> {
         &self.outputs
     }
 
@@ -284,7 +191,14 @@ impl MediaManager {
         &self.playing
     }
 
-    pub fn device_mut(&mut self, id: &str) -> Option<&mut Device> {
+    pub fn device(&self, id: &str) -> Option<&MediaDevice> {
+        self.inputs
+            .iter()
+            .chain(self.outputs.iter())
+            .find(|d| d.id == id)
+    }
+
+    pub fn device_mut(&mut self, id: &str) -> Option<&mut MediaDevice> {
         self.inputs
             .iter_mut()
             .chain(self.outputs.iter_mut())
@@ -297,12 +211,6 @@ impl MediaManager {
 
     pub fn get_raw_device(&self, device_id: &str) -> Option<IMMDevice> {
         unsafe { self.device_enumerator.GetDevice(pcwstr(device_id)) }.ok()
-    }
-
-    pub fn devices_audio_endpoint(
-        &self,
-    ) -> &HashMap<String, (IAudioEndpointVolume, IAudioEndpointVolumeCallback)> {
-        &self.devices_audio_endpoint
     }
 }
 
@@ -319,7 +227,6 @@ impl MediaManager {
             registered_players_callbacks: Vec::new(),
 
             // unsafe com objects
-            devices_audio_endpoint: HashMap::new(),
             device_enumerator: Com::create_instance(&MMDeviceEnumerator)?,
             mm_notification_client: MediaManagerEvents.into(),
 
@@ -350,7 +257,7 @@ impl MediaManager {
 
     pub fn on_change_devices<F>(&mut self, callback: F)
     where
-        F: Fn(&Vec<Device>, &Vec<Device>) + Send + Sync + 'static,
+        F: Fn(&Vec<MediaDevice>, &Vec<MediaDevice>) + Send + Sync + 'static,
     {
         self.registered_devices_callbacks.push(Box::new(callback));
     }
@@ -378,94 +285,44 @@ impl MediaManager {
         Ok(())
     }
 
-    unsafe fn load_device(&mut self, device: &IMMDevice) -> Result<()> {
-        let device_id = device.GetId()?.to_string()?;
-        let device_volume: IAudioEndpointVolume = device.Activate(CLSCTX_ALL, None)?;
-        let device_session_manager: IAudioSessionManager2 = device.Activate(CLSCTX_ALL, None)?;
-
-        // create Serializable Device object
-        let mut sessions = Vec::new();
-        let enumerator = device_session_manager.GetSessionEnumerator()?;
-        for session_idx in 0..enumerator.GetCount()? {
-            let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
-            let volume: ISimpleAudioVolume = session.cast()?;
-            // let process = Process::from_id(session.GetProcessId()?);
-            let name = String::new(); // todo on media mixer feature
-            let icon_path = None; // todo on media mixer feature
-
-            sessions.push(DeviceChannel {
-                id: session.GetSessionIdentifier()?.to_string()?,
-                instance_id: session.GetSessionInstanceIdentifier()?.to_string()?,
-                process_id: session.GetProcessId()?,
-                name,
-                icon_path,
-                is_system: session.IsSystemSoundsSession().0 == 0,
-                volume: volume.GetMasterVolume()?,
-                muted: volume.GetMute()?.as_bool(),
-            });
-        }
-
-        let is_input = device.cast::<IMMEndpoint>()?.GetDataFlow()? == eCapture;
-        let properties = device.OpenPropertyStore(STGM_READ)?;
-
-        let (is_default_multimedia, is_default_communications) = if is_input {
-            (
-                self.is_default_device(&device_id, eCapture, eMultimedia),
-                self.is_default_device(&device_id, eCapture, eCommunications),
-            )
-        } else {
-            (
-                self.is_default_device(&device_id, eRender, eMultimedia),
-                self.is_default_device(&device_id, eRender, eCommunications),
-            )
+    fn load_device(&mut self, device: &IMMDevice) -> Result<()> {
+        let mut device = unsafe { MediaDevice::load(device)? };
+        device.is_default_multimedia = self.is_default_device(&device, eMultimedia);
+        device.is_default_communications = self.is_default_device(&device, eCommunications);
+        match device.r#type {
+            MediaDeviceType::Input => self.inputs.push(device),
+            MediaDeviceType::Output => self.outputs.push(device),
         };
+        Ok(())
+    }
 
-        let device = Device {
-            id: device_id.clone(),
-            name: properties.GetValue(&PKEY_Device_FriendlyName)?.to_string(),
-            is_default_multimedia,
-            is_default_communications,
-            sessions,
-            volume: device_volume.GetMasterVolumeLevelScalar()?,
-            muted: device_volume.GetMute()?.as_bool(),
-        };
-
-        if is_input {
+    fn remove_device(&mut self, device_id: &str) {
+        for device in std::mem::take(&mut self.inputs) {
+            if device.id == device_id {
+                device.release();
+                continue;
+            }
             self.inputs.push(device);
-        } else {
+        }
+        for device in std::mem::take(&mut self.outputs) {
+            if device.id == device_id {
+                device.release();
+                continue;
+            }
             self.outputs.push(device);
         }
-
-        // listen for device events
-        let device_volume_callback = IAudioEndpointVolumeCallback::from(MediaDeviceEventHandler {
-            device_id: device_id.clone(),
-        });
-
-        device_volume.RegisterControlChangeNotify(&device_volume_callback)?;
-        self.devices_audio_endpoint
-            .insert(device_id, (device_volume, device_volume_callback));
-        Ok(())
     }
 
-    fn release_device(&mut self, device_id: &str) -> Result<()> {
-        if let Some((endpoint, callback)) = self.devices_audio_endpoint.remove(device_id) {
-            unsafe { endpoint.UnregisterControlChangeNotify(&callback)? };
-            // avoid call drop and IUnknown::Release because the COM object was removed on device disconnection
-            // and call Release on a unexciting object can produce a deadlock
-            std::mem::forget(endpoint);
-            std::mem::forget(callback);
-        }
-        self.inputs.retain(|d| d.id != device_id);
-        self.outputs.retain(|d| d.id != device_id);
-        Ok(())
-    }
-
-    fn is_default_device(&self, device_id: &str, dataflow: EDataFlow, role: ERole) -> bool {
+    fn is_default_device(&self, device: &MediaDevice, role: ERole) -> bool {
+        let dataflow = match device.r#type {
+            MediaDeviceType::Input => eCapture,
+            MediaDeviceType::Output => eRender,
+        };
         unsafe {
             self.device_enumerator
                 .GetDefaultAudioEndpoint(dataflow, role)
                 .and_then(|d| d.GetId())
-                .map(|id| id.to_hstring() == device_id)
+                .map(|id| id.to_hstring() == device.id)
                 .unwrap_or(false)
         }
     }
@@ -500,11 +357,11 @@ impl MediaManager {
         match event {
             MediaEvent::DeviceAdded(device_id) => {
                 if let Some(device) = self.get_raw_device(&device_id) {
-                    unsafe { self.load_device(&device)? };
+                    self.load_device(&device)?;
                 }
             }
             MediaEvent::DeviceRemoved(device_id) => {
-                self.release_device(&device_id)?;
+                self.remove_device(&device_id);
             }
             MediaEvent::DefaultDeviceChanged {
                 flow,
@@ -533,6 +390,32 @@ impl MediaManager {
                 if let Some(device) = self.device_mut(&device_id) {
                     device.volume = volume;
                     device.muted = muted;
+                }
+            }
+            MediaEvent::DeviceSessionAdded { device_id, session } => {
+                if let Some(device) = self.device_mut(&device_id) {
+                    device.sessions.push(session);
+                }
+            }
+            MediaEvent::DeviceSessionRemoved {
+                device_id,
+                session_id,
+            } => {
+                if let Some(device) = self.device_mut(&device_id) {
+                    device.remove_session(&session_id);
+                }
+            }
+            MediaEvent::DeviceSessionVolumeChanged {
+                device_id,
+                session_id,
+                volume,
+                muted,
+            } => {
+                if let Some(device) = self.device_mut(&device_id) {
+                    if let Some(session) = device.session_mut(&session_id) {
+                        session.volume = volume;
+                        session.muted = muted;
+                    }
                 }
             }
             MediaEvent::MediaPlayerAdded(session) => {
@@ -569,7 +452,7 @@ impl MediaManager {
         Ok(())
     }
 
-    pub fn set_default_device(&mut self, id: &str, role: &str) -> Result<()> {
+    pub fn set_default_device(id: &str, role: &str) -> Result<()> {
         let role = match role {
             "multimedia" => eMultimedia,
             "communications" => eCommunications,
@@ -593,15 +476,11 @@ impl MediaManager {
             log_error!(self.release_media_transport_session(&player_id));
         }
 
-        let device_ids = self
-            .inputs
-            .iter()
-            .map(|d| d.id.clone())
-            .chain(self.outputs.iter().map(|d| d.id.clone()))
-            .collect_vec();
-
-        for device_id in device_ids {
-            log_error!(self.release_device(&device_id));
+        for device in std::mem::take(&mut self.inputs) {
+            device.release();
+        }
+        for device in std::mem::take(&mut self.outputs) {
+            device.release();
         }
     }
 }

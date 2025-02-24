@@ -2,11 +2,13 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use std::sync::Arc;
 use windows::Win32::{
+    Devices::Display::GUID_DEVINTERFACE_MONITOR,
     Foundation::{HWND, LPARAM, LRESULT, WPARAM},
     UI::WindowsAndMessaging::{
         CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
-        RegisterClassW, TranslateMessage, MSG, WINDOW_EX_STYLE, WINDOW_STYLE, WM_DESTROY,
-        WNDCLASSW,
+        RegisterClassW, RegisterDeviceNotificationW, TranslateMessage, DBT_DEVTYP_DEVICEINTERFACE,
+        DEVICE_NOTIFY_WINDOW_HANDLE, DEV_BROADCAST_DEVICEINTERFACE_W, MSG, WINDOW_EX_STYLE,
+        WINDOW_STYLE, WM_DESTROY, WNDCLASSW,
     },
 };
 
@@ -69,6 +71,22 @@ unsafe fn _create_background_window() -> Result<()> {
         Some(wnd_class.hInstance),
         None,
     )?;
+
+    // register window to recieve device notifications for monitor changes
+    {
+        let mut notification_filter = DEV_BROADCAST_DEVICEINTERFACE_W {
+            dbcc_size: std::mem::size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>() as u32,
+            dbcc_devicetype: DBT_DEVTYP_DEVICEINTERFACE.0,
+            dbcc_reserved: 0,
+            dbcc_classguid: GUID_DEVINTERFACE_MONITOR,
+            dbcc_name: [0; 1],
+        };
+        RegisterDeviceNotificationW(
+            hwnd.into(),
+            &mut notification_filter as *mut _ as *mut _,
+            DEVICE_NOTIFY_WINDOW_HANDLE,
+        )?;
+    }
 
     let mut msg = MSG::default();
     // GetMessageW will run until PostQuitMessage(0) is called

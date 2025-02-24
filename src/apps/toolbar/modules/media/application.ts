@@ -47,5 +47,5 @@ export function calcLuminance(imageUrl: string): Promise<number> {
 }
 
 export const selectDefaultOutput = createSelector(Selectors.mediaOutputs, (mediaOutputs) =>
-  mediaOutputs.find((d) => d.is_default_multimedia),
+  mediaOutputs.find((d) => d.isDefaultMultimedia),
 );

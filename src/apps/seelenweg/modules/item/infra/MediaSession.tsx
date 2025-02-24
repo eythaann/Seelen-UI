@@ -1,6 +1,5 @@
 import { SeelenWegSide } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { emit } from '@tauri-apps/api/event';
 import { resolve, resourceDir } from '@tauri-apps/api/path';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
@@ -45,10 +44,6 @@ export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean
   useEffect(() => {
     calcLuminance(thumbnailSrc).then(setLuminance).catch(console.error);
   }, [thumbnailSrc]);
-
-  useEffect(() => {
-    emit('register-media-events');
-  }, []);
 
   const filteredLuminance = Math.max(
     Math.min(luminance * BRIGHTNESS_MULTIPLIER, MAX_LUMINANCE),

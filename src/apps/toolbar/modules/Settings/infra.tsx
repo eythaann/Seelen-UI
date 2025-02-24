@@ -1,16 +1,15 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { SettingsToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
-import { emit } from '@tauri-apps/api/event';
 import { Button, Slider, Tooltip } from 'antd';
 import { throttle } from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra/infra';
-import { VolumeControl } from '../media/infra/MediaControls';
+import { VolumeControl } from '../media/infra/VolumeControl';
 
 import { Selectors } from '../shared/store/app';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
@@ -43,17 +42,13 @@ export function SettingsModule({ module }: Props) {
 
   const showHibernate = useSelector(Selectors.settings.showHibernateButton);
   const defaultInput = useSelector((state: RootState) =>
-    Selectors.mediaInputs(state).find((d) => d.is_default_multimedia),
+    Selectors.mediaInputs(state).find((d) => d.isDefaultMultimedia),
   );
   const defaultOutput = useSelector((state: RootState) =>
-    Selectors.mediaOutputs(state).find((d) => d.is_default_multimedia),
+    Selectors.mediaOutputs(state).find((d) => d.isDefaultMultimedia),
   );
 
   const { t } = useTranslation();
-
-  useEffect(() => {
-    emit('register-media-events');
-  }, []);
 
   useEffect(() => {
     invoke<Brightness | null>('get_main_monitor_brightness').then(setBrightness);
@@ -138,6 +133,7 @@ export function SettingsModule({ module }: Props) {
                     iconName={defaultOutput.muted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'}
                   />
                 }
+                // onRightAction={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:sound' })}
               />
             </div>
           )}

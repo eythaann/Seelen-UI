@@ -33,15 +33,11 @@ pub fn declare_system_events_handlers() -> Result<()> {
     });
 
     // todo change this to current implementation pattern
-    handle.listen("register-media-events", move |_| {
-        register_media_events();
-    });
-
-    // todo change this to current implementation pattern
     handle.listen("register-notifications-events", move |_| {
         register_notification_events();
     });
 
+    register_media_events();
     register_user_events();
     register_monitor_webview_events();
     register_colors_events();

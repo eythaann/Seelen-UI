@@ -67,7 +67,7 @@ impl SeelenWorkspace {
         let window = Window::from(address);
         self.windows.retain(|w| *w != address);
         HookManager::run_with_async(move |hook_manager| {
-            hook_manager.skip(WinEvent::SystemMinimizeStart, window.hwnd());
+            hook_manager.skip(WinEvent::SystemMinimizeStart, window.address());
             log_error!(window.show_window_async(SW_FORCEMINIMIZE))
         });
     }
@@ -78,7 +78,7 @@ impl SeelenWorkspace {
             for addr in win_address {
                 let window = Window::from(addr);
                 if window.is_window() {
-                    hook_manager.skip(WinEvent::SystemMinimizeStart, window.hwnd());
+                    hook_manager.skip(WinEvent::SystemMinimizeStart, window.address());
                     log_error!(window.show_window_async(SW_MINIMIZE));
                 }
             }
@@ -92,7 +92,7 @@ impl SeelenWorkspace {
                 let window = Window::from(*addr);
                 // if is switching by restored window on other workspace it will be already shown
                 if window.is_window() && window.is_minimized() {
-                    hook_manager.skip(WinEvent::SystemMinimizeEnd, window.hwnd());
+                    hook_manager.skip(WinEvent::SystemMinimizeEnd, window.address());
                     // use normal show instead async cuz it will keep the order of restoring
                     log_error!(window.show_window(SW_RESTORE));
                 }

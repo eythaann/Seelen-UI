@@ -10,6 +10,7 @@
 - language selector for toolbar.
 - add dynamic color by focused app on toolbar.
 - add hibernate button on toolbar power menu.
+- add media volume mixer by apps and by device.
 
 ### enhancements
 - settings shown each time on startup.

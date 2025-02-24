@@ -12,6 +12,12 @@ media:
   device:
     comunications: Communications
     multimedia: Multimedia
+    missing: Missing Device
+    spacial: Spacial Sound
+    mixer: Volume Mixer
+    channel:
+      system: System sounds
+    settings: More Media Device Settings
   input_device: Input device
   master_volume: Master Volume
   output_device: Output device
