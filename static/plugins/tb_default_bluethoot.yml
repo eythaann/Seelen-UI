@@ -2,7 +2,7 @@ id: "@default/bluetooth"
 icon: "TbBluetooth"
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: device
+  type: bluetooth
   template: icon.TbBluetoothConnected
-  onClickV2: open("ms-settings:connecteddevices")
   tooltip: t("placeholder.bluetooth_devices")
+  withBluetoothSelector: true

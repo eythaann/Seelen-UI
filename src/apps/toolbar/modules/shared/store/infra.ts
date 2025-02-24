@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
+  BluetoothDevices,
+  BluetoothRadio,
   Color,
   DocumentsFolder,
   DownloadsFolder,
@@ -204,6 +206,10 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setUserVideosFolder(details.all())),
   );
   MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
+
+  BluetoothDevices.onChange((devices) => store.dispatch(RootActions.setBluetoothDevices(devices.all())));
+  BluetoothDevices.onDiscoveredDevicesChange((devices) => store.dispatch(RootActions.setDiscoveredBluetoothDevices(devices.all())));
+  BluetoothRadio.onChange((radio) => store.dispatch(RootActions.setBluetoothRadioState(radio.state)));
 
   await initUIColors();
   await StartThemingTool();

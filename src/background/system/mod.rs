@@ -6,6 +6,7 @@ use crate::{
     error_handler::Result,
     log_error,
     modules::{
+        bluetooth::{infrastructure::register_bluetooth_events, release_bluetooth_events},
         language::register_language_events,
         media::infrastructure::{register_media_events, release_media_events},
         monitors::infrastructure::register_monitor_webview_events,
@@ -43,6 +44,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
     });
 
     register_user_events();
+    register_bluetooth_events();
     register_monitor_webview_events();
     register_colors_events();
     register_power_events();
@@ -53,6 +55,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
 pub fn release_system_events_handlers() {
     release_media_events();
     release_power_events();
+    release_bluetooth_events();
     release_notification_events();
     release_colors_events();
 }
