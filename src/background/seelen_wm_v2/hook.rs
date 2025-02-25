@@ -126,13 +126,16 @@ impl WindowManagerV2 {
                     Self::set_overlay_visibility(true)?;
                 }
             }
-            WinEvent::ObjectLocationChange => {
-                if window.is_focused() && window.is_maximized() {
-                    Self::set_overlay_visibility(false)?;
-                }
+            WinEvent::SyntheticMaximizeStart => {
+                // todo make this by monitor
+                Self::set_overlay_visibility(false)?;
             }
-            WinEvent::SyntheticFullscreenStart(_) => Self::set_overlay_visibility(false)?,
-            WinEvent::SyntheticFullscreenEnd(_) => Self::set_overlay_visibility(true)?,
+            WinEvent::SyntheticMaximizeEnd => {
+                // todo make this by monitor
+                Self::set_overlay_visibility(true)?;
+            }
+            WinEvent::SyntheticFullscreenStart => Self::set_overlay_visibility(false)?,
+            WinEvent::SyntheticFullscreenEnd => Self::set_overlay_visibility(true)?,
             _ => {}
         };
         Ok(())

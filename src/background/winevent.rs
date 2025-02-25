@@ -1,116 +1,10 @@
-#![allow(clippy::use_self)]
-
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
-
-use windows::Win32::Foundation::HWND;
-use windows::Win32::Graphics::Gdi::HMONITOR;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_AIA_END;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_AIA_START;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_CARET;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_END;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_END_APPLICATION;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_LAYOUT;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_START_APPLICATION;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_UPDATE_REGION;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_UPDATE_SCROLL;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_UPDATE_SIMPLE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_ACCELERATORCHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_CLOAKED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_CONTENTSCROLLED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_CREATE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DEFACTIONCHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DESCRIPTIONCHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DESTROY;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DRAGCANCEL;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DRAGCOMPLETE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DRAGDROPPED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DRAGENTER;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DRAGLEAVE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_DRAGSTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_END;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_FOCUS;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_HELPCHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_HIDE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_HOSTEDOBJECTSINVALIDATED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_IME_CHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_IME_HIDE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_IME_SHOW;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_INVOKED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_LIVEREGIONCHANGED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_LOCATIONCHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_NAMECHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_PARENTCHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_REORDER;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_SELECTION;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_SELECTIONADD;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_SELECTIONREMOVE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_SELECTIONWITHIN;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_SHOW;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_STATECHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_TEXTEDIT_CONVERSIONTARGETCHANGED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_TEXTSELECTIONCHANGED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_UNCLOAKED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OBJECT_VALUECHANGE;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OEM_DEFINED_END;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_OEM_DEFINED_START;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_ALERT;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_ARRANGMENTPREVIEW;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_CAPTUREEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_CAPTURESTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_CONTEXTHELPEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_CONTEXTHELPSTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_DESKTOPSWITCH;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_DIALOGEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_DIALOGSTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_DRAGDROPEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_DRAGDROPSTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_END;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_FOREGROUND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_IME_KEY_NOTIFICATION;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MENUEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MENUPOPUPEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MENUPOPUPSTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MENUSTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MINIMIZEEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MINIMIZESTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MOVESIZEEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MOVESIZESTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SCROLLINGEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SCROLLINGSTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SOUND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHER_APPGRABBED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHER_APPOVERTARGET;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHER_CANCELLED;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHSTART;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_UIA_EVENTID_END;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_UIA_EVENTID_START;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_UIA_PROPID_END;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_UIA_PROPID_START;
-use windows::Win32::UI::WindowsAndMessaging::{
-    EVENT_SYSTEM_SWITCHEND, EVENT_SYSTEM_SWITCHER_APPDROPPED,
-};
-
 use crate::error_handler::Result;
+use crate::hook::{WindowCachedData, WINDOW_DICT};
 use crate::trace_lock;
-use crate::utils::constants::NATIVE_UI_POPUP_CLASSES;
-use crate::utils::constants::OVERLAP_BLACK_LIST_BY_EXE;
 use crate::windows_api::window::Window;
-use crate::windows_api::WindowsApi;
+use windows::Win32::UI::WindowsAndMessaging::*;
 
-lazy_static! {
-    static ref FULLSCREENED: Mutex<Option<SyntheticFullscreenData>> = Mutex::new(None);
-}
-
-#[derive(Clone, Copy, PartialEq, Eq, Debug)]
-pub struct SyntheticFullscreenData {
-    pub handle: HWND,
-    pub monitor: HMONITOR,
-}
-
-unsafe impl Send for SyntheticFullscreenData {}
-
-#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u32)]
 #[allow(dead_code)]
 pub enum WinEvent {
@@ -201,8 +95,12 @@ pub enum WinEvent {
     /// Fallback for unknown/missing Win32 events
     Unknown(u32),
     // ================== Synthetic events ==================
-    SyntheticFullscreenStart(SyntheticFullscreenData),
-    SyntheticFullscreenEnd(SyntheticFullscreenData),
+    /// intended to reduce the amount of events processed by other listeners
+    SyntheticForegroundLocationChange,
+    SyntheticFullscreenStart,
+    SyntheticFullscreenEnd,
+    SyntheticMaximizeStart,
+    SyntheticMaximizeEnd,
 }
 
 impl From<u32> for WinEvent {
@@ -300,64 +198,29 @@ impl From<u32> for WinEvent {
 }
 
 impl WinEvent {
-    pub fn get_synthetics(&self, origin: HWND) -> Result<Vec<WinEvent>> {
+    pub fn get_synthetics(&self, origin: &Window) -> Result<Vec<WinEvent>> {
         let mut synthetics = Vec::new();
-        match self {
-            Self::ObjectDestroy => {
-                let mut latest_fullscreened = trace_lock!(FULLSCREENED);
-                match *latest_fullscreened {
-                    Some(latest) if latest.handle == origin => {
-                        // exiting fullscreen
-                        *latest_fullscreened = None;
-                        synthetics.push(Self::SyntheticFullscreenEnd(latest));
-                    }
-                    _ => {}
-                }
-            }
-            Self::SystemForeground | Self::ObjectLocationChange => {
-                if origin == WindowsApi::get_foreground_window() {
-                    let mut latest_fullscreened = trace_lock!(FULLSCREENED);
-                    let window = Window::from(origin);
-                    let is_origin_fullscreen = window.is_fullscreen()
-                        && !window.is_desktop()
-                        && !window.is_seelen_overlay()
-                        && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str())
-                        && !OVERLAP_BLACK_LIST_BY_EXE
-                            .contains(&WindowsApi::exe(origin).unwrap_or_default().as_str());
+        if self == &Self::ObjectLocationChange && origin.is_focused() {
+            synthetics.push(Self::SyntheticForegroundLocationChange);
 
-                    match *latest_fullscreened {
-                        Some(latest) if latest.handle == origin => {
-                            // exiting fullscreen
-                            if !is_origin_fullscreen {
-                                *latest_fullscreened = None;
-                                synthetics.push(Self::SyntheticFullscreenEnd(latest));
-                            }
-                        }
-                        _ => {
-                            // remove fullscreen of latest when foregrounding another window on the same monitor
-                            if let Some(old) = *latest_fullscreened {
-                                if old.monitor == WindowsApi::monitor_from_window(origin) {
-                                    synthetics.push(Self::SyntheticFullscreenEnd(old));
-                                    *latest_fullscreened = None;
-                                }
-                            }
-
-                            // if new foregrounded window is fullscreen emit it
-                            if is_origin_fullscreen {
-                                log::trace!("Fullscreened: {:?}", window);
-                                let data = SyntheticFullscreenData {
-                                    handle: origin,
-                                    monitor: WindowsApi::monitor_from_window(origin),
-                                };
-                                *latest_fullscreened = Some(data);
-                                synthetics.push(Self::SyntheticFullscreenStart(data));
-                            }
-                        }
-                    }
+            let mut dict = trace_lock!(WINDOW_DICT);
+            if let Some(old) = dict.get_mut(&origin.address()) {
+                let new = WindowCachedData::from(origin);
+                if old.maximized != new.maximized {
+                    synthetics.push(match old.maximized {
+                        true => Self::SyntheticMaximizeEnd,
+                        false => Self::SyntheticMaximizeStart,
+                    });
                 }
+                if old.fullscreen != new.fullscreen {
+                    synthetics.push(match old.fullscreen {
+                        true => Self::SyntheticFullscreenEnd,
+                        false => Self::SyntheticFullscreenStart,
+                    });
+                }
+                *old = new;
             }
-            _ => {}
-        };
+        }
         Ok(synthetics)
     }
 }

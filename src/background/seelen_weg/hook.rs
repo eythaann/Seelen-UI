@@ -47,9 +47,6 @@ impl SeelenWeg {
                     Self::add(window)?;
                 }
             }
-            WinEvent::SystemForeground | WinEvent::ObjectFocus => {
-                // Self::set_active_window(window)?;
-            }
             _ => {}
         }
         Ok(())
@@ -57,27 +54,12 @@ impl SeelenWeg {
 
     pub fn process_individual_win_event(&mut self, event: WinEvent, window: &Window) -> Result<()> {
         match event {
-            WinEvent::SystemForeground | WinEvent::ObjectFocus => {
-                self.handle_overlaped_status(window.hwnd())?;
+            WinEvent::SystemForeground | WinEvent::SyntheticForegroundLocationChange => {
+                self.handle_overlaped_status(window)?;
             }
             WinEvent::ObjectLocationChange => {
                 if window.hwnd() == self.hwnd()? {
                     self.set_position(window.monitor().handle())?;
-                }
-                if window.is_focused() {
-                    self.handle_overlaped_status(window.hwnd())?;
-                }
-            }
-            WinEvent::SyntheticFullscreenStart(event_data) => {
-                let monitor = WindowsApi::monitor_from_window(self.hwnd()?);
-                if monitor == event_data.monitor {
-                    self.hide()?;
-                }
-            }
-            WinEvent::SyntheticFullscreenEnd(event_data) => {
-                let monitor = WindowsApi::monitor_from_window(self.hwnd()?);
-                if monitor == event_data.monitor {
-                    self.show()?;
                 }
             }
             _ => {}

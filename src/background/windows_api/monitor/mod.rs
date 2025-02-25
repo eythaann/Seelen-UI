@@ -39,6 +39,10 @@ impl Monitor {
         self.0
     }
 
+    pub fn address(&self) -> usize {
+        self.0 .0 as _
+    }
+
     pub fn at(index: usize) -> Option<Monitor> {
         let monitors = MonitorEnumerator::get_all_v2().ok()?;
         monitors.get(index).copied()

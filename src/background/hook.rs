@@ -1,4 +1,5 @@
 use std::{
+    collections::HashMap,
     path::PathBuf,
     sync::{
         atomic::{AtomicBool, Ordering},
@@ -37,16 +38,37 @@ use crate::{
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
     utils::spawn_named_thread,
-    windows_api::{window::Window, WindowsApi},
+    windows_api::{window::Window, WindowEnumerator, WindowsApi},
     winevent::WinEvent,
 };
 
 lazy_static! {
     static ref HOOK_MANAGER_SKIPPER: Arc<Mutex<HookManagerSkipper>> =
         Arc::new(Mutex::new(HookManagerSkipper::default()));
+    pub static ref WINDOW_DICT: Arc<Mutex<HashMap<isize, WindowCachedData>>> =
+        Arc::new(Mutex::new(HashMap::new()));
 }
 
 pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct WindowCachedData {
+    pub hwnd: isize,
+    pub monitor: usize,
+    pub maximized: bool,
+    pub fullscreen: bool,
+}
+
+impl From<&Window> for WindowCachedData {
+    fn from(w: &Window) -> Self {
+        WindowCachedData {
+            hwnd: w.address(),
+            monitor: w.monitor().address(),
+            maximized: w.is_maximized(),
+            fullscreen: w.is_fullscreen(),
+        }
+    }
+}
 
 #[derive(Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
@@ -227,6 +249,89 @@ impl HookManager {
     }
 }
 
+pub fn init_win_event_hook_sanitizer() -> Result<()> {
+    let mut dict = trace_lock!(WINDOW_DICT);
+    dict.clear();
+    WindowEnumerator::new().for_each_v2(|w| {
+        dict.insert(w.address(), WindowCachedData::from(&w));
+    })?;
+
+    // this should be the first subscription or it will not work correctly
+    HookManager::subscribe(|(event, origin)| match event {
+        WinEvent::ObjectCreate => {
+            let mut dict = trace_lock!(WINDOW_DICT);
+            dict.insert(origin.address(), WindowCachedData::from(&origin));
+        }
+        WinEvent::ObjectDestroy => {
+            let mut dict = trace_lock!(WINDOW_DICT);
+            dict.remove(&origin.address());
+        }
+        _ => {}
+    });
+    Ok(())
+}
+
+pub fn register_win_hook() -> Result<()> {
+    log::trace!("Registering Windows and Virtual Desktop Hooks");
+
+    spawn_named_thread("WinEventHook", move || unsafe {
+        SetWinEventHook(
+            EVENT_MIN,
+            EVENT_MAX,
+            None,
+            Some(HookManager::raw_win_event_hook_recv),
+            0,
+            0,
+            0,
+        );
+
+        init_win_event_hook_sanitizer().expect("Failed to init win event hook sanitizer");
+
+        HookManager::subscribe(|(event, mut origin)| {
+            if event == WinEvent::SystemForeground {
+                origin = Window::get_foregrounded(); // sometimes event is emited with wrong origin
+            }
+
+            HookManager::process_event(event, origin);
+            if let Ok(synthetics) = event.get_synthetics(&origin) {
+                for synthetic_event in synthetics {
+                    HookManager::process_event(synthetic_event, origin)
+                }
+            }
+        });
+
+        let mut msg: MSG = MSG::default();
+        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
+            let _ = TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
+    })?;
+
+    let (sender, receiver) = std::sync::mpsc::channel::<VirtualDesktopEvent>();
+    get_vd_manager().listen_events(sender)?;
+    spawn_named_thread("VirtualDesktopEventHook", move || {
+        for event in receiver {
+            log_error!(process_vd_event(event))
+        }
+    })?;
+
+    spawn_named_thread("MouseEventHook", || {
+        let handle = get_app_handle();
+        let mut last_pos = Point::default();
+        loop {
+            if let Ok(pos) = Mouse::get_cursor_pos() {
+                if last_pos != pos {
+                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.get_x(), pos.get_y()]);
+                    last_pos = pos;
+                }
+            }
+            std::thread::sleep(Duration::from_millis(66)); // 15 FPS
+        }
+    })?;
+
+    Ok(())
+}
+
 pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
     if FULL_STATE.load().is_window_manager_enabled() {
         log_error!(WindowManagerV2::process_vd_event(&event));
@@ -270,65 +375,6 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
         }
         _ => {}
     }
-
-    Ok(())
-}
-
-pub fn register_win_hook() -> Result<()> {
-    log::trace!("Registering Windows and Virtual Desktop Hooks");
-
-    spawn_named_thread("WinEventHook", move || unsafe {
-        SetWinEventHook(
-            EVENT_MIN,
-            EVENT_MAX,
-            None,
-            Some(HookManager::raw_win_event_hook_recv),
-            0,
-            0,
-            0,
-        );
-
-        HookManager::subscribe(|(event, mut origin)| {
-            if event == WinEvent::SystemForeground {
-                origin = Window::get_foregrounded(); // sometimes event is emited with wrong origin
-            }
-
-            HookManager::process_event(event, origin);
-            if let Ok(synthetics) = event.get_synthetics(origin.hwnd()) {
-                for synthetic_event in synthetics {
-                    HookManager::process_event(synthetic_event, origin)
-                }
-            }
-        });
-
-        let mut msg: MSG = MSG::default();
-        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
-            let _ = TranslateMessage(&msg);
-            DispatchMessageW(&msg);
-        }
-    })?;
-
-    let (sender, receiver) = std::sync::mpsc::channel::<VirtualDesktopEvent>();
-    get_vd_manager().listen_events(sender)?;
-    spawn_named_thread("VirtualDesktopEventHook", move || {
-        for event in receiver {
-            log_error!(process_vd_event(event))
-        }
-    })?;
-
-    spawn_named_thread("MouseEventHook", || {
-        let handle = get_app_handle();
-        let mut last_pos = Point::default();
-        loop {
-            if let Ok(pos) = Mouse::get_cursor_pos() {
-                if last_pos != pos {
-                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.get_x(), pos.get_y()]);
-                    last_pos = pos;
-                }
-            }
-            std::thread::sleep(Duration::from_millis(66)); // 15 FPS
-        }
-    })?;
 
     Ok(())
 }

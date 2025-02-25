@@ -6,7 +6,6 @@ use seelen_core::{command_handler_list, system_state::Color};
 
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
-use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
 use crate::hook::HookManager;
@@ -23,7 +22,7 @@ use crate::utils::{is_running_as_appx, is_virtual_desktop_supported as virtual_d
 use crate::windows_api::hdc::DeviceContext;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
-use crate::winevent::{SyntheticFullscreenData, WinEvent};
+use crate::winevent::WinEvent;
 use crate::{log_error, utils};
 
 #[tauri::command(async)]
@@ -138,14 +137,12 @@ fn is_virtual_desktop_supported() -> bool {
 
 #[tauri::command(async)]
 fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Result<()> {
-    let handle = HWND(webview.hwnd()?.0);
-    let monitor = WindowsApi::monitor_from_window(handle);
-    let event = if value {
-        WinEvent::SyntheticFullscreenStart(SyntheticFullscreenData { handle, monitor })
-    } else {
-        WinEvent::SyntheticFullscreenEnd(SyntheticFullscreenData { handle, monitor })
+    let window = Window::from(webview.hwnd()?.0 as isize);
+    let event = match value {
+        true => WinEvent::SyntheticFullscreenStart,
+        false => WinEvent::SyntheticFullscreenEnd,
     };
-    HookManager::event_tx().send((event, Window::from(handle)))?;
+    HookManager::event_tx().send((event, window))?;
     Ok(())
 }
 

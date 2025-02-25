@@ -74,16 +74,6 @@ export function FancyToolbarSettings() {
           }
         >
           <SettingsOption>
-            <span>{t('toolbar.use_multiple_monitor_overlap_logic')}</span>
-            <Switch
-              disabled={settings.hideMode != HideMode.OnOverlap}
-              checked={settings.useMultiMonitorOverlapLogic}
-              onChange={(value) =>
-                dispatch(FancyToolbarActions.setUseMultiMonitorOverlapLogic(value))
-              }
-            />
-          </SettingsOption>
-          <SettingsOption>
             <span>{t('toolbar.delay_to_show')} (ms)</span>
             <InputNumber
               value={delayToShow}

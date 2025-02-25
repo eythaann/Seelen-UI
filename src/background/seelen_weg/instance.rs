@@ -26,10 +26,10 @@ use crate::{
 
 pub struct SeelenWeg {
     pub window: WebviewWindow<Wry>,
-    pub overlaped: bool,
-    pub last_overlapped_window: Option<Window>,
     /// Is the rect that the dock should have when it isn't hidden
     pub theoretical_rect: RECT,
+    pub overlaped_by: Option<Window>,
+    pub hidden: bool,
 }
 
 impl Drop for SeelenWeg {
@@ -90,9 +90,9 @@ impl SeelenWeg {
     pub fn new(postfix: &str) -> Result<Self> {
         let weg = Self {
             window: Self::create_window(postfix)?,
-            overlaped: false,
-            last_overlapped_window: None,
+            overlaped_by: None,
             theoretical_rect: RECT::default(),
+            hidden: false,
         };
         Ok(weg)
     }
@@ -102,53 +102,56 @@ impl SeelenWeg {
         Ok(())
     }
 
-    fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
-        let window_rect = WindowsApi::get_inner_window_rect(hwnd)?;
+    fn is_overlapping(&self, window: &Window) -> Result<bool> {
+        let window_rect = WindowsApi::get_inner_window_rect(window.hwnd())?;
         Ok(are_overlaped(&self.theoretical_rect, &window_rect))
     }
 
-    fn set_overlaped_status(&mut self, is_overlaped: bool) -> Result<()> {
-        if self.overlaped == is_overlaped {
-            return Ok(());
+    pub fn set_overlaped(&mut self, overlaped_by: Option<Window>) -> Result<()> {
+        if self.overlaped_by != overlaped_by {
+            self.emit(SeelenEvent::WegOverlaped, overlaped_by.is_some())?;
         }
-        self.overlaped = is_overlaped;
-        self.emit(SeelenEvent::WegOverlaped, self.overlaped)?;
+        self.overlaped_by = overlaped_by;
+        let is_fullscreen = self.overlaped_by.is_some_and(|w| w.is_fullscreen());
+        if is_fullscreen {
+            self.hide()?;
+        } else {
+            self.show()?;
+        }
         Ok(())
     }
 
-    pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
-        let window = Window::from(hwnd);
-        let monitor = window.monitor();
-        let is_overlaped = self.is_overlapping(hwnd)?
+    pub fn handle_overlaped_status(&mut self, window: &Window) -> Result<()> {
+        let is_overlaped = self.is_overlapping(window)?
             && !window.is_desktop()
             && !window.is_seelen_overlay()
             && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str())
-            && !OVERLAP_BLACK_LIST_BY_EXE
-                .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
+            && !OVERLAP_BLACK_LIST_BY_EXE.contains(
+                &window
+                    .process()
+                    .program_exe_name()
+                    .unwrap_or_default()
+                    .as_str(),
+            );
 
-        let state = FULL_STATE.load();
-        let settings = state.settings().seelenweg();
-
-        if settings.use_multi_monitor_overlap_logic {
-            if is_overlaped {
-                self.last_overlapped_window = Some(window);
-            } else if let Some(past_window) = self.last_overlapped_window {
-                if past_window != window
-                    && past_window.monitor() != monitor
-                    && Window::from(self.hwnd()?).monitor() != monitor
-                {
-                    return Ok(());
-                }
-            }
-        } else {
-            self.last_overlapped_window = None;
+        if is_overlaped {
+            return self.set_overlaped(Some(*window));
         }
 
-        self.set_overlaped_status(is_overlaped)
+        if self.overlaped_by.is_some()
+            && WindowsApi::monitor_from_window(self.hwnd()?) == window.monitor().handle()
+        {
+            self.set_overlaped(None)?;
+        }
+        Ok(())
     }
 
     pub fn hide(&mut self) -> Result<()> {
+        if self.hidden {
+            return Ok(());
+        }
         WindowsApi::show_window_async(self.hwnd()?, SW_HIDE)?;
+        self.hidden = true;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
@@ -158,7 +161,11 @@ impl SeelenWeg {
     }
 
     pub fn show(&mut self) -> Result<()> {
+        if !self.hidden {
+            return Ok(());
+        }
         WindowsApi::show_window_async(self.hwnd()?, SW_SHOWNOACTIVATE)?;
+        self.hidden = false;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,

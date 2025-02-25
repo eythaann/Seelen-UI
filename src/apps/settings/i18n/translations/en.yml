@@ -236,7 +236,6 @@ toolbar:
   label: Toolbar
   placeholder: {}
   show_hibernate: Show hibernate button on power menu
-  use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
 update:
   available: Update Available!
   channel: Update Channel
@@ -289,7 +288,6 @@ weg:
     full_width: Full screen width
     min_content: Small as can be
   padding: Padding
-  use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
   width: Width
 wm:
   author: Author

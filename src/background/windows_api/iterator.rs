@@ -101,35 +101,29 @@ impl WindowEnumerator {
         Ok(wrapper.processed)
     }
 
-    /// Will return the first window that matches the condition specified by the callback.
-    /// If no window matches the condition, it will return None.
-    pub fn find<F>(&self, cb: F) -> Result<Option<Window>>
+    pub fn map_v2<F, T>(&self, cb: F) -> Result<Vec<T>>
     where
-        F: FnMut(Window) -> bool,
+        F: FnMut(Window) -> T,
     {
-        struct FindCallbackWrapper<'a> {
-            cb: Box<dyn FnMut(Window) -> bool + 'a>,
-            result: Option<Window>,
+        struct MapCallbackWrapper<'a, T> {
+            cb: Box<dyn FnMut(Window) -> T + 'a>,
+            processed: Vec<T>,
         }
 
-        unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
-            if let Some(wrapper) = (lparam.0 as *mut FindCallbackWrapper).as_mut() {
-                if wrapper.result.is_none() && (wrapper.cb)(Window::from(hwnd)) {
-                    wrapper.result = Some(Window::from(hwnd));
-                    // for some reason returning false is not stopping the enumeration
-                    // return false.into();
-                }
+        unsafe extern "system" fn enum_proc<T>(hwnd: HWND, lparam: LPARAM) -> BOOL {
+            if let Some(wrapper) = (lparam.0 as *mut MapCallbackWrapper<T>).as_mut() {
+                wrapper.processed.push((wrapper.cb)(Window::from(hwnd)));
             }
             true.into()
         }
 
-        let mut wrapper = FindCallbackWrapper {
+        let mut wrapper = MapCallbackWrapper {
             cb: Box::new(cb),
-            result: None,
+            processed: Vec::new(),
         };
 
-        self.enumerate(enum_proc, LPARAM(&mut wrapper as *mut _ as isize))?;
-        Ok(wrapper.result)
+        self.enumerate(enum_proc::<T>, LPARAM(&mut wrapper as *mut _ as isize))?;
+        Ok(wrapper.processed)
     }
 }
 
