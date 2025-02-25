@@ -9,12 +9,18 @@ keyboard:
   more: Rohkem klaviatuuri seadeid
   title: Klaviatuuri paigutus
 media:
+  default_multimedia_volume: Multimeedia maht
   device:
+    channel:
+      system: Süsteemi helid
     comunications: Suhtlus
+    missing: Puuduv seade
+    mixer: Helitugevuse segisti
     multimedia: Multimeedia
-  input_device: Sisendseade
-  master_volume: Kaptenimaht
-  output_device: Väljundseade
+    settings: Rohkem seadme seaded
+    volume: Seadme maht
+  input_devices: Sisendseadmed
+  output_devices: Väljundseadmed
   players: Meediamängijad
 network:
   available: Saadaolevad võrgud

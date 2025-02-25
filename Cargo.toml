@@ -135,10 +135,16 @@ features = [
     "Win32_Storage_FileSystem",            # PKEYS and Devices/Storage/etc
     "Win32_Storage_EnhancedStorage",       # PKEYS and Devices/Storage/etc
     "Win32_Storage_Packaging_Appx",        # UWP apps
-    "Win32_Media_Audio_Endpoints",         # required for audio module
-    "Win32_Media_DeviceManager",           # required for audio module
     "Win32_Security_Authentication_Identity",
+    "Win32_Media_KernelStreaming",         # required for audio module
+    "Win32_Media_Audio_Endpoints",         # required for audio module
+    "Win32_Media_Audio_Apo",               # required for audio module
+    "Win32_Media_DeviceManager",           # required for audio module
     "Media",                               # required for audio module
+    "Media_Audio",                         # required for audio module
+    "Media_Render",                        # required for audio module
+    "Media_Capture",                       # required for audio module
+    "Media_Effects",                       # required for audio module
     "Media_Control",                       # required for audio module
     "Storage_Streams",                     # required for audio module
     "Win32_Devices_Display",               # required for display (brightness, etc)

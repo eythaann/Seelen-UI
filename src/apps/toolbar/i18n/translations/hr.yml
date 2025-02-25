@@ -9,12 +9,18 @@ keyboard:
   more: Više postavki tipkovnice
   title: Izgled tipkovnice
 media:
+  default_multimedia_volume: Multimedijski volumen
   device:
+    channel:
+      system: Zvukovi sustava
     comunications: Komunikacija
+    missing: Nedostaje uređaj
+    mixer: Mikser
     multimedia: Multimedija
-  input_device: Ulazni uređaj
-  master_volume: Glasnoća
-  output_device: Izlazni uređaj
+    settings: Više postavki uređaja
+    volume: Glasnoća uređaja
+  input_devices: Ulazni uređaji
+  output_devices: Izlazni uređaji
   players: Medijski igrači
 network:
   available: Dostupne mreže

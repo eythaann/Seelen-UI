@@ -8,7 +8,13 @@ import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
 
 import { MediaDevice } from '../../shared/store/domain';
 
-export function Device({ device }: { device: MediaDevice }) {
+export function Device({
+  device,
+  setViewDeviceId,
+}: {
+  device: MediaDevice;
+  setViewDeviceId: (id: string) => void;
+}) {
   const { t } = useTranslation();
 
   const onClickMultimedia = () => {
@@ -48,15 +54,24 @@ export function Device({ device }: { device: MediaDevice }) {
         </Tooltip>
       </Button.Group>
       <OverflowTooltip text={device.name} />
+      <button className="media-device-action" onClick={() => setViewDeviceId(device.id)}>
+        <Icon iconName="RiEqualizerLine" />
+      </button>
     </div>
   );
 }
 
-export function DeviceGroup({ devices }: { devices: MediaDevice[] }) {
+export function DeviceGroup({
+  devices,
+  setViewDeviceId,
+}: {
+  devices: MediaDevice[];
+  setViewDeviceId: (id: string) => void;
+}) {
   return (
     <div className="media-device-group">
       {devices.map((d) => (
-        <Device key={d.id} device={d} />
+        <Device key={d.id} device={d} setViewDeviceId={setViewDeviceId} />
       ))}
     </div>
   );

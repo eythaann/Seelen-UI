@@ -9,12 +9,18 @@ keyboard:
   more: その他のキーボード設定
   title: キーボードレイアウト
 media:
+  default_multimedia_volume: マルチメディア・ボリューム
   device:
+    channel:
+      system: システム音
     comunications: コミュニケーション
+    missing: 欠落しているデバイス
+    mixer: ボリューム・ミキサー
     multimedia: マルチメディア
-  input_device: 入力デバイス
-  master_volume: ボリューム
-  output_device: 出力デバイス
+    settings: その他のデバイス設定
+    volume: デバイス・ボリューム
+  input_devices: 入力装置
+  output_devices: 出力機器
   players: メディアプレーヤー
 network:
   available: 利用可能なネットワーク

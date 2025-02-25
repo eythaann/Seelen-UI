@@ -403,8 +403,13 @@
     .media-device {
       display: grid;
       align-items: center;
-      grid-template-columns: 50px 1fr;
-      gap: 6px;
+      grid-template-columns: 50px 1fr 50px;
+      gap: 8px;
+
+      .media-device-action {
+        @extend %actionable-button;
+        justify-content: center;
+      }
     }
   }
 
@@ -412,6 +417,7 @@
     display: flex;
     gap: 6px;
     align-items: center;
+    padding-bottom: 10px;
 
     .media-device-back {
       @extend %actionable-button;

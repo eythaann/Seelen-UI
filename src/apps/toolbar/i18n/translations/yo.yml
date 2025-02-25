@@ -9,12 +9,18 @@ keyboard:
   more: Diẹ Eto Eto
   title: Ifilapada Key Keyboard
 media:
+  default_multimedia_volume: Iwọn didun Multimedia
   device:
+    channel:
+      system: Awọn ohun eto
     comunications: Awọn ibaraẹnisọrọ
+    missing: Ẹrọ sonu
+    mixer: Ipọpọ iwọn didun
     multimedia: Multimedia
-  input_device: Ẹrọ titẹ
-  master_volume: Ohun elo
-  output_device: Ẹrọ iṣelọpọ
+    settings: Eto ẹrọ diẹ sii
+    volume: Iwọn didun ẹrọ
+  input_devices: Ẹrọ titẹ sii
+  output_devices: Awọn ẹrọ iṣelọpọ
   players: Awọn oṣere Media
 network:
   available: Awọn nẹtiwọki ti o wa

@@ -9,12 +9,18 @@ keyboard:
   more: තවත් යතුරුපුවරු සැකසුම්
   title: යතුරුපුවරු පිරිසැලසුම
 media:
+  default_multimedia_volume: බහුමාධ්ය පරිමාව
   device:
+    channel:
+      system: පද්ධති ශබ්ද
     comunications: සන්නිවේදනය
+    missing: නැතිවූ උපාංගය
+    mixer: වෙළුම් මික්සර්
     multimedia: බහුමාධ්ය
-  input_device: ආදාන උපාංගය
-  master_volume: මාස්ටර් පරිමාව
-  output_device: ප්රතිදාන උපාංගය
+    settings: තවත් උපාංග සැකසුම්
+    volume: උපාංග පරිමාව
+  input_devices: ආදාන උපාංග
+  output_devices: නිමැවුම් උපාංග
   players: මාධ්ය වාදකයන්
 network:
   available: පවතින ජාල

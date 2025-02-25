@@ -9,12 +9,18 @@ keyboard:
   more: ተጨማሪ የቁልፍ ሰሌዳ ቅንብሮች
   title: የቁልፍ ሰሌዳ አቀማመጥ
 media:
+  default_multimedia_volume: መልቲሚዲያ መጠን
   device:
+    channel:
+      system: የስርዓት ድምጾች
     comunications: ግንኙነቶች
+    missing: የመሳሪያ መሣሪያ
+    mixer: ጥራዝ ድብልቅ
     multimedia: መልቲሚዲያ
-  input_device: የግቤት መሣሪያ
-  master_volume: ዋና መጠን
-  output_device: የውጤት መሣሪያ
+    settings: ተጨማሪ የመሣሪያ ቅንብሮች
+    volume: የመሣሪያ መጠን
+  input_devices: የግቤት መሣሪያዎች
+  output_devices: የውጤት መሣሪያዎች
   players: የሚዲያ ተጫዋቾች
 network:
   available: የሚገኙ አውታረ መረቦች

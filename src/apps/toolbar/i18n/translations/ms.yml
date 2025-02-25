@@ -9,12 +9,18 @@ keyboard:
   more: Lebih banyak tetapan papan kekunci
   title: Susun atur papan kekunci
 media:
+  default_multimedia_volume: Jumlah multimedia
   device:
+    channel:
+      system: Sistem bunyi
     comunications: Komunikasi
+    missing: Peranti yang hilang
+    mixer: Pengadun kelantangan
     multimedia: Multimedia
-  input_device: Peranti input
-  master_volume: Volume Master
-  output_device: Peranti output
+    settings: Lebih banyak tetapan peranti
+    volume: Jumlah peranti
+  input_devices: Peranti input
+  output_devices: Peranti output
   players: Pemain media
 network:
   available: Rangkaian yang tersedia

@@ -9,12 +9,18 @@ keyboard:
   more: Mîhengên bêtir klavyeyê
   title: Bişkojka Keyboard
 media:
+  default_multimedia_volume: Volume Multimedia
   device:
+    channel:
+      system: Dengên pergalê
     comunications: Têkilî
+    missing: Cîhaza wenda
+    mixer: Mixer mixer
     multimedia: Multimedia
-  input_device: Cîhaza têketinê
-  master_volume: Qumarê masterê
-  output_device: Devera deriyê
+    settings: Mîhengên bêtir amûrê
+    volume: Qumarê amûrê
+  input_devices: Amûrên input
+  output_devices: Amûrên deriyê
   players: Lîstikên Medyayê
 network:
   available: Torên berdest

@@ -9,12 +9,18 @@ keyboard:
   more: Higit pang mga setting ng keyboard
   title: Layout ng keyboard
 media:
+  default_multimedia_volume: Dami ng multimedia
   device:
+    channel:
+      system: Tunog ng system
     comunications: Komunikasyon
+    missing: Nawawalang aparato
+    mixer: Dami ng panghalo
     multimedia: Multimedia
-  input_device: Aparato ng pag -input
-  master_volume: Dami ng master
-  output_device: Aparato ng output
+    settings: Higit pang mga setting ng aparato
+    volume: Dami ng aparato
+  input_devices: Mga aparato sa pag -input
+  output_devices: Mga aparato ng output
   players: Mga manlalaro ng media
 network:
   available: Magagamit na mga network

@@ -9,12 +9,18 @@ keyboard:
   more: Més configuració del teclat
   title: Disposició del teclat
 media:
+  default_multimedia_volume: Volum multimèdia
   device:
+    channel:
+      system: Sona del sistema
     comunications: Comunicacions
+    missing: Falta el dispositiu
+    mixer: Mesclador de volum
     multimedia: Multimèdia
-  input_device: Dispositiu d'entrada
-  master_volume: Volum de domini
-  output_device: Dispositiu de sortida
+    settings: Més configuració del dispositiu
+    volume: Volum del dispositiu
+  input_devices: Dispositius d'entrada
+  output_devices: Dispositius de sortida
   players: Reproductors de mitjans de comunicació
 network:
   available: Xarxes disponibles

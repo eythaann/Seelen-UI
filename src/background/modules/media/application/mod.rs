@@ -1,4 +1,5 @@
 mod device;
+mod effects;
 mod players;
 mod session;
 

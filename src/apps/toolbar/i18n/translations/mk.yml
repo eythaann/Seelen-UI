@@ -9,12 +9,18 @@ keyboard:
   more: Повеќе поставки за тастатура
   title: Распоред на тастатура
 media:
+  default_multimedia_volume: Мултимедијален волумен
   device:
+    channel:
+      system: Звучи на системот
     comunications: Комуникации
+    missing: Уред што недостасува
+    mixer: Миксер за волумен
     multimedia: Мултимедија
-  input_device: Влезен уред
-  master_volume: Господар волумен
-  output_device: Излезен уред
+    settings: Повеќе поставки на уредот
+    volume: Волумен на уредот
+  input_devices: Внесување уреди
+  output_devices: Излезни уреди
   players: Медиа плеери
 network:
   available: Достапни мрежи

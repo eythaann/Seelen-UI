@@ -9,12 +9,18 @@ keyboard:
   more: Flere tastaturinnstillinger
   title: Tastaturoppsett
 media:
+  default_multimedia_volume: Multimedia -volum
   device:
+    channel:
+      system: Systemet høres ut
     comunications: Kommunikasjon
+    missing: Manglende enhet
+    mixer: Volummikser
     multimedia: Multimedia
-  input_device: Inngangsenhet
-  master_volume: Hovedvolum
-  output_device: Utgangsenhet
+    settings: Flere enhetsinnstillinger
+    volume: Enhetsvolum
+  input_devices: Inngangsenheter
+  output_devices: Utgangsenheter
   players: Mediespillere
 network:
   available: Tilgjengelige nettverk

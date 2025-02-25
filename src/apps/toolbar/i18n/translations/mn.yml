@@ -9,12 +9,18 @@ keyboard:
   more: Илүү олон гарын тохиргоо
   title: Товчлоггоо өмуур
 media:
+  default_multimedia_volume: Мультимедиа муж
   device:
+    channel:
+      system: Синик систем
     comunications: Харилцаа
+    missing: Төхөөрөмж байхгүй байна
+    mixer: Буугийн холимог
     multimedia: Multimiedia
-  input_device: Оролтын төхөөрөмж
-  master_volume: Мэргэжч
-  output_device: Гаралтын төхөөрөмж
+    settings: Илүү олон төхөөрөмжийн тохиргоо
+    volume: Оффис
+  input_devices: Дурсгал дурсгалын төхөөрөмж
+  output_devices: Гаралтын төхөөрөмжүүд
   players: Хэвлэл хэвлэл тоглогч
 network:
   available: Боломжтой сүлжээнүүд

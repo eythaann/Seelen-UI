@@ -9,12 +9,18 @@ keyboard:
   more: Mais configurações de teclado
   title: Layout do teclado
 media:
+  default_multimedia_volume: Volume multimídia
   device:
+    channel:
+      system: Sons do sistema
     comunications: Comunicações
+    missing: Dispositivo ausente
+    mixer: Misturador de volume
     multimedia: Multimídia
-  input_device: Dispositivo de entrada
-  master_volume: Volume principal
-  output_device: Dispositivo de saída
+    settings: Mais configurações de dispositivo
+    volume: Volume do dispositivo
+  input_devices: Dispositivos de entrada
+  output_devices: Dispositivos de saída
   players: Reprodutores de mídia
 network:
   available: Redes disponíveis

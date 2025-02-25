@@ -9,12 +9,18 @@ keyboard:
   more: Daugiau klaviatūros nustatymų
   title: Klaviatūros išdėstymas
 media:
+  default_multimedia_volume: Daugialypės terpės apimtis
   device:
+    channel:
+      system: Sistemos garsai
     comunications: Ryšiai
+    missing: Trūkstamas įrenginys
+    mixer: Garsumo maišytuvas
     multimedia: Multimedija
-  input_device: Įvesties įrenginys
-  master_volume: Pagrindinis garsas
-  output_device: Išvesties įrenginys
+    settings: Daugiau įrenginio nustatymų
+    volume: Įrenginio tūris
+  input_devices: Įvesties įrenginiai
+  output_devices: Išvesties įrenginiai
   players: Žiniasklaidos žaidėjai
 network:
   available: Galimi tinklai

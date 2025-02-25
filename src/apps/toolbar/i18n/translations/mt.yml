@@ -9,12 +9,18 @@ keyboard:
   more: Aktar settings tat-tastiera
   title: Tqassim tat-tastiera
 media:
+  default_multimedia_volume: Volum multimedjali
   device:
+    channel:
+      system: Ħsejjes tas-sistema
     comunications: Komunikazzjonijiet
+    missing: Apparat nieqes
+    mixer: Volum Mixer
     multimedia: Multimedja
-  input_device: Apparat ta 'input
-  master_volume: Volum Master
-  output_device: Apparat tal-ħruġ
+    settings: Aktar settings tal-apparat
+    volume: Volum tal-Apparat
+  input_devices: Apparat ta 'input
+  output_devices: Apparat tal-ħruġ
   players: Plejers tal-midja
 network:
   available: Netwerks disponibbli

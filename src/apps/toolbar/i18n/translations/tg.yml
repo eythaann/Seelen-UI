@@ -9,12 +9,18 @@ keyboard:
   more: Танзимоти клавиатура
   title: Тарҳбандии клавиатура
 media:
+  default_multimedia_volume: Ҳаҷми мултимедиявӣ
   device:
+    channel:
+      system: Садо медиҳад
     comunications: Иртибот
+    missing: Дастгоҳи гумшуда
+    mixer: Миксер
     multimedia: Мултимедиявӣ
-  input_device: Дастгоҳи воридшавӣ
-  master_volume: Ҳаҷми усто
-  output_device: Дастгоҳи баромад
+    settings: Танзимоти телефон
+    volume: Ҳаҷми дастгоҳ
+  input_devices: Дастгоҳҳои вуруд
+  output_devices: Дастгоҳҳои баромад
   players: Бозингарони ВАО
 network:
   available: Шабакаҳои дастрас

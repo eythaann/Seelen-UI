@@ -9,12 +9,18 @@ keyboard:
   more: הגדרות מקלדת נוספות
   title: פריסת מקלדת
 media:
+  default_multimedia_volume: נפח מולטימדיה
   device:
+    channel:
+      system: צלילי מערכת
     comunications: תקשורת
+    missing: מכשיר חסר
+    mixer: מערבל עוצמת קול
     multimedia: מולטימדיה
-  input_device: מכשיר קלט
-  master_volume: נפח אמן
-  output_device: מכשיר פלט
+    settings: הגדרות מכשירים נוספות
+    volume: נפח המכשיר
+  input_devices: מכשירי קלט
+  output_devices: מכשירי פלט
   players: שחקני מדיה
 network:
   available: רשתות זמינות

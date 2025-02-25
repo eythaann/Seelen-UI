@@ -9,12 +9,18 @@ keyboard:
   more: مزید کی بورڈ کی ترتیبات
   title: کی بورڈ لے آؤٹ
 media:
+  default_multimedia_volume: ملٹی میڈیا حجم
   device:
+    channel:
+      system: سسٹم کی آوازیں
     comunications: کمیونیکیشن
+    missing: لاپتہ آلہ
+    mixer: حجم مکسر
     multimedia: ملٹی میڈیا
-  input_device: ان پٹ ڈیوائس
-  master_volume: ماسٹر والیم
-  output_device: آؤٹ پٹ ڈیوائس
+    settings: مزید آلہ کی ترتیبات
+    volume: ڈیوائس کا حجم
+  input_devices: ان پٹ ڈیوائسز
+  output_devices: آؤٹ پٹ ڈیوائسز
   players: میڈیا پلیئرز
 network:
   available: دستیاب نیٹ ورکس

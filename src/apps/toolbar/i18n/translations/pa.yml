@@ -9,12 +9,18 @@ keyboard:
   more: ਹੋਰ ਕੀਬੋਰਡ ਸੈਟਿੰਗਾਂ
   title: ਕੀਬੋਰਡ ਲੇਆਉਟ
 media:
+  default_multimedia_volume: ਮਲਟੀਮੀਡੀਆ ਵਾਲੀਅਮ
   device:
+    channel:
+      system: ਸਿਸਟਮ ਆਵਾਜ਼
     comunications: ਸੰਚਾਰ
+    missing: ਗੁੰਮ ਗਈ ਡਿਵਾਈਸ
+    mixer: ਵਾਲੀਅਮ ਮਿਕਸਰ
     multimedia: ਮਲਟੀਮੀਡੀਆ
-  input_device: ਇਨਪੁਟ ਡਿਵਾਈਸ
-  master_volume: ਮਾਸਟਰ ਵਾਲੀਅਮ
-  output_device: ਆਉਟਪੁੱਟ ਜੰਤਰ
+    settings: ਹੋਰ ਜੰਤਰ ਸੈਟਿੰਗ
+    volume: ਜੰਤਰ ਵਾਲੀਅਮ
+  input_devices: ਇਨਪੁਟ ਜੰਤਰ
+  output_devices: ਆਉਟਪੁੱਟ ਜੰਤਰ
   players: ਮੀਡੀਆ ਪਲੇਅਰ
 network:
   available: ਉਪਲਬਧ ਨੈੱਟਵਰਕ

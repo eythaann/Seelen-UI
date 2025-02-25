@@ -9,12 +9,18 @@ keyboard:
   more: ការកំណត់ក្តារចុចបន្ថែមទៀត
   title: ប្លង់ក្តារចុច
 media:
+  default_multimedia_volume: បរិមាណពហុព័ត៌មាន
   device:
+    channel:
+      system: សំឡេងប្រព័ន្ធ
     comunications: ការអាេយអាេយរយការត្យេដ្ឋ
+    missing: ឧបករណ៍ដែលបាត់
+    mixer: ឧបករណ៍លាយកម្រិតសំឡេង
     multimedia: ពហុមេឌា
-  input_device: ឧបករណ៍បញ្ចូល
-  master_volume: កម្រិតសំឡេងមេ
-  output_device: ឧបករណ៍ទិន្នផល
+    settings: ការកំណត់ឧបករណ៍ច្រើនទៀត
+    volume: បរិមាណឧបករណ៍
+  input_devices: ឧបករណ៍បញ្ចូល
+  output_devices: ឧបករណ៍លទ្ធផល
   players: អ្នកលេងប្រព័ន្ធផ្សព្វផ្សាយ
 network:
   available: បណ្តាញដែលមាន

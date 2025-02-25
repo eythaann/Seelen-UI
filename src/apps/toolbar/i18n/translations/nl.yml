@@ -9,12 +9,18 @@ keyboard:
   more: Meer toetsenbordinstellingen
   title: Toetsenbordindeling
 media:
+  default_multimedia_volume: Multimedia-volume
   device:
+    channel:
+      system: Systeemgeluiden
     comunications: Communicatie
+    missing: Ontbrekend apparaat
+    mixer: Volumemixer
     multimedia: Multimedia
-  input_device: Invoerapparaat
-  master_volume: Hoofdvolume
-  output_device: Uitvoerapparaat
+    settings: Meer apparaatinstellingen
+    volume: Apparaat Volume
+  input_devices: Invoerapparaten
+  output_devices: Uitvoerapparaten
   players: Mediaspelers
 network:
   available: Beschikbare netwerken

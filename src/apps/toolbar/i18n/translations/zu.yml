@@ -9,12 +9,18 @@ keyboard:
   more: Izilungiselelo eziningi zekhibhodi
   title: Ukuhlelwa kwekhibhodi
 media:
+  default_multimedia_volume: Ivolumu yemultimedia
   device:
+    channel:
+      system: Umsindo wesistimu
     comunications: Ukuxoxisana
+    missing: Idivayisi elahlekile
+    mixer: I-Movolur Mixer
     multimedia: Multimedia
-  input_device: Idivayisi yokufaka
-  master_volume: '-Nqubenzi'
-  output_device: I-Output deturment
+    settings: Izilungiselelo Eziningi Zedivayisi
+    volume: Ivolumu yedivayisi
+  input_devices: Amadivayisi wokufaka
+  output_devices: Amadivayisi okukhipha
   players: Abadlali beMedia
 network:
   available: Amanethiwekhi atholakalayo

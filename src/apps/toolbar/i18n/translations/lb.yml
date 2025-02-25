@@ -9,12 +9,18 @@ keyboard:
   more: Méi Keyboard Astellunge
   title: Keyboard Layout
 media:
+  default_multimedia_volume: Multimedia Volumen
   device:
+    channel:
+      system: System kléngt
     comunications: Kommunikatiounen
+    missing: Vermësste Gerät
+    mixer: Volumenmëschung
     multimedia: Multimedia
-  input_device: Input Apparat
-  master_volume: Master Volumen
-  output_device: Ausgangsapparat
+    settings: Méi Apparat Astellunge
+    volume: Apparat Volumen
+  input_devices: Input Apparater
+  output_devices: Ausgangsapparater
   players: Media Spiller
 network:
   available: Verfügbar Netzwierker

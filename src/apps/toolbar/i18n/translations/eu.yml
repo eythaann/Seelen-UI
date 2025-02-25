@@ -9,12 +9,18 @@ keyboard:
   more: Teklatuaren ezarpen gehiago
   title: Teklatuko diseinua
 media:
+  default_multimedia_volume: Multimedia bolumena
   device:
+    channel:
+      system: Sistema soinuak
     comunications: Komunikazioak
+    missing: Gailua falta da
+    mixer: Bolumen-nahastea
     multimedia: Multimedia
-  input_device: Sarrera gailua
-  master_volume: Bolumen maisua
-  output_device: Irteerako gailua
+    settings: Gailuaren ezarpen gehiago
+    volume: Gailuaren bolumena
+  input_devices: Sarrerako gailuak
+  output_devices: Irteerako gailuak
   players: Komunikabideetako jokalariak
 network:
   available: Eskuragarri dauden sareak

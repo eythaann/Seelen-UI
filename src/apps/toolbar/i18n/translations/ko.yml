@@ -9,12 +9,18 @@ keyboard:
   more: 더 많은 키보드 설정
   title: 키보드 레이아웃
 media:
+  default_multimedia_volume: 멀티미디어 볼륨
   device:
+    channel:
+      system: 시스템 사운드
     comunications: 통신 장치
+    missing: 누락된 장치
+    mixer: 볼륨 믹서
     multimedia: 멀티미디어 장치
-  input_device: 입력 장치
-  master_volume: 마스터 볼륨
-  output_device: 출력 장치
+    settings: 더 많은 장치 설정
+    volume: 장치 볼륨
+  input_devices: 입력 장치
+  output_devices: 출력 장치
   players: 미디어 플레이어
 network:
   available: 사용 가능한 네트워크

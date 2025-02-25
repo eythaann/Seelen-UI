@@ -9,12 +9,18 @@ keyboard:
   more: Weitere Tastatur-Einstellungen
   title: Tastatur-Layout
 media:
+  default_multimedia_volume: Multimedia-Volumen
   device:
+    channel:
+      system: Systemtöne
     comunications: Kommunikation
+    missing: Fehlendes Gerät
+    mixer: Lautstärkemischer
     multimedia: Multimedia
-  input_device: Eingabegerät
-  master_volume: Hauptlautstärke
-  output_device: Ausgabegerät
+    settings: Weitere Geräteeinstellungen
+    volume: Gerät Volumen
+  input_devices: Eingabegeräte
+  output_devices: Ausgabegeräte
   players: Medienplayer
 network:
   available: Verfügbare Netzwerke

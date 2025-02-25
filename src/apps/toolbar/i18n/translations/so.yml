@@ -9,12 +9,18 @@ keyboard:
   more: Meelo badan oo keyboard ah
   title: Qaabka Keyboard
 media:
+  default_multimedia_volume: Mugga mugga badan
   device:
+    channel:
+      system: Nidaamka Nidaamka
     comunications: Isgaar isgaar
+    missing: Qalabka la waayey
+    mixer: Isku-darka mugga
     multimedia: Urur badan
-  input_device: Qalabka gelinta
-  master_volume: Mugga Master
-  output_device: Aaladda wax soo saarka
+    settings: Meelo badan oo qalab ah
+    volume: Mugga aaladda
+  input_devices: Aaladaha wax soo galida
+  output_devices: Qalabka wax soo saarka
   players: Ciyaartoyda warbaahinta
 network:
   available: Shabakado la heli karo

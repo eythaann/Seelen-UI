@@ -9,12 +9,18 @@ keyboard:
   more: Flere tastaturindstillinger
   title: Tastaturlayout
 media:
+  default_multimedia_volume: Multimedievolumen
   device:
+    channel:
+      system: Systemets lyde
     comunications: Kommunikation
+    missing: Manglende enhed
+    mixer: Volumenmixer
     multimedia: Multimedia
-  input_device: Inputenhed
-  master_volume: Mastervolumen
-  output_device: Outputenhed
+    settings: Flere enhedsindstillinger
+    volume: Enhedens volumen
+  input_devices: Input-enheder
+  output_devices: Output-enheder
   players: Medieafspillere
 network:
   available: Tilgængelige netværk

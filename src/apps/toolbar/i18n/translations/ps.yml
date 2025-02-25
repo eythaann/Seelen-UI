@@ -9,12 +9,18 @@ keyboard:
   more: نور د کی بورډ امستنې
   title: کیبورډ ترتیب
 media:
+  default_multimedia_volume: ملټي میډیا حجم
   device:
+    channel:
+      system: سیسټم غږونه
     comunications: مخابرات
+    missing: ورک شوی وسیله
+    mixer: حجم مکسر
     multimedia: ملټي میډیا
-  input_device: ننوتنی وسیله
-  master_volume: ماسټر برابره
-  output_device: د محصول وسیله
+    settings: د آلې امستنې
+    volume: د وسیلې حجم
+  input_devices: ننوت وسایل
+  output_devices: وتستۍ وسایل
   players: د میډیا لوبغاړي
 network:
   available: شته شبکې

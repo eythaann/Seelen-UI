@@ -9,12 +9,18 @@ keyboard:
   more: மேலும் விசைப்பலகை அமைப்புகள்
   title: விசைப்பலகை தளவமைப்பு
 media:
+  default_multimedia_volume: மல்டிமீடியா தொகுதி
   device:
+    channel:
+      system: கணினி ஒலிகள்
     comunications: தகவல்தொடர்புகள்
+    missing: சாதனம் இல்லை
+    mixer: தொகுதி மிக்சர்
     multimedia: மல்டிமீடியா
-  input_device: உள்ளீட்டு சாதனம்
-  master_volume: முதன்மை தொகுதி
-  output_device: வெளியீடு சாதனம்
+    settings: மேலும் சாதன அமைப்புகள்
+    volume: சாதன தொகுதி
+  input_devices: உள்ளீட்டு சாதனங்கள்
+  output_devices: வெளியீட்டு சாதனங்கள்
   players: மீடியா பிளேயர்கள்
 network:
   available: கிடைக்கும் நெட்வொர்க்குகள்

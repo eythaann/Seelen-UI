@@ -9,12 +9,18 @@ keyboard:
   more: Fler inställningar för tangentbord
   title: Layout för tangentbord
 media:
+  default_multimedia_volume: Multimedia Volym
   device:
+    channel:
+      system: Systemljud
     comunications: Kommunikation
+    missing: Saknad enhet
+    mixer: Volymmixer
     multimedia: Multimedia
-  input_device: Inmatningsapparat
-  master_volume: Mastervolym
-  output_device: Utmatningsanordning
+    settings: Fler enhetsinställningar
+    volume: Enhetens volym
+  input_devices: Inmatningsenheter
+  output_devices: Utmatningsenheter
   players: Mediaspelare
 network:
   available: Tillgängliga nätverk

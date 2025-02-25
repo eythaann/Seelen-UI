@@ -9,12 +9,18 @@ keyboard:
   more: વધુ કીબોર્ડ સેટિંગ્સ
   title: પાટિયું લેઆઉટ
 media:
+  default_multimedia_volume: બહુમાળ વોલ્યુમ
   device:
+    channel:
+      system: સિસ્ટમ અવાજો
     comunications: સંચાર
+    missing: ખૂટેલું ઉપકરણ
+    mixer: વોલ્યુમ મિક્સર
     multimedia: બહુમાળી
-  input_device: ઇનપુટ ઉપકરણ
-  master_volume: મુખ્ય જમતિસ
-  output_device: આઉટપુટ
+    settings: વધુ ઉપકરણ સેટિંગ્સ
+    volume: ઉપકરણનું પ્રમાણ
+  input_devices: ઇનપુટ ઉપકરણો
+  output_devices: ઉત્પાદન
   players: માધ્યમો ખેલાડીઓ
 network:
   available: ઉપલબ્ધ નેટવર્ક્સ

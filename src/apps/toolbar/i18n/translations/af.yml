@@ -9,12 +9,18 @@ keyboard:
   more: Meer sleutelbordinstellings
   title: Sleutelborduitleg
 media:
+  default_multimedia_volume: Multimedia volume
   device:
+    channel:
+      system: Stelselklanke
     comunications: Kommunikasie
+    missing: Ontbrekende toestel
+    mixer: Volume menger
     multimedia: Multimedia
-  input_device: Insetapparaat
-  master_volume: Meestervolume
-  output_device: Uitsettoestel
+    settings: Meer toestelinstellings
+    volume: Toestelvolume
+  input_devices: Insettoestelle
+  output_devices: Uitsettoestelle
   players: Mediaspelers
 network:
   available: Beskikbare netwerke

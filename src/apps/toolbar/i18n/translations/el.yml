@@ -9,12 +9,18 @@ keyboard:
   more: Περισσότερες ρυθμίσεις πληκτρολογίου
   title: Διάταξη πληκτρολογίου
 media:
+  default_multimedia_volume: Όγκος πολυμέσων
   device:
+    channel:
+      system: Ήχοι συστήματος
     comunications: Διαβιβάσεις
+    missing: Λείπει η συσκευή
+    mixer: Μίξερ έντασης ήχου
     multimedia: ΠΟΛΥΜΕΣΑ
-  input_device: Συσκευή εισόδου
-  master_volume: Κύριος όγκος
-  output_device: Συσκευή εξόδου
+    settings: Περισσότερες ρυθμίσεις συσκευής
+    volume: Όγκος συσκευής
+  input_devices: Συσκευές εισόδου
+  output_devices: Συσκευές εξόδου
   players: Media players
 network:
   available: Διαθέσιμα δίκτυα

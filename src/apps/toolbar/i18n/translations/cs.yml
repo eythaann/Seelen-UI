@@ -9,12 +9,18 @@ keyboard:
   more: Další nastavení klávesnice
   title: Rozložení klávesnice
 media:
+  default_multimedia_volume: Multimediální hlasitost
   device:
+    channel:
+      system: Zvuky systému
     comunications: komunikace
+    missing: Chybějící zařízení
+    mixer: Směšovač hlasitosti
     multimedia: Multimédia
-  input_device: Vstupní zařízení
-  master_volume: Hlavní hlasitost
-  output_device: Výstupní zařízení
+    settings: Další nastavení zařízení
+    volume: Objem zařízení
+  input_devices: Vstupní zařízení
+  output_devices: Výstupní zařízení
   players: Přehrávače médií
 network:
   available: Dostupné sítě

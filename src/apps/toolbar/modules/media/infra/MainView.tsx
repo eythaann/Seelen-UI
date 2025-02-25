@@ -25,7 +25,7 @@ export function MediaMainView({ setViewDeviceId }: Props) {
 
   return (
     <>
-      <span className="media-control-label">{t('media.master_volume')}</span>
+      <span className="media-control-label">{t('media.default_multimedia_volume')}</span>
       {!!defaultOutput && (
         <VolumeControl
           value={defaultOutput.volume}
@@ -48,15 +48,15 @@ export function MediaMainView({ setViewDeviceId }: Props) {
 
       {outputs.length > 0 && (
         <>
-          <span className="media-control-label">{t('media.output_device')}</span>
-          <DeviceGroup devices={outputs} />
+          <span className="media-control-label">{t('media.output_devices')}</span>
+          <DeviceGroup devices={outputs} setViewDeviceId={setViewDeviceId} />
         </>
       )}
 
       {inputs.length > 0 && (
         <>
-          <span className="media-control-label">{t('media.input_device')}</span>
-          <DeviceGroup devices={inputs} />
+          <span className="media-control-label">{t('media.input_devices')}</span>
+          <DeviceGroup devices={inputs} setViewDeviceId={setViewDeviceId} />
         </>
       )}
 

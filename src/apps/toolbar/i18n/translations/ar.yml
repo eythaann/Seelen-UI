@@ -9,12 +9,18 @@ keyboard:
   more: المزيد من إعدادات لوحة المفاتيح
   title: تخطيط لوحة المفاتيح
 media:
+  default_multimedia_volume: حجم الوسائط المتعددة
   device:
+    channel:
+      system: أصوات النظام
     comunications: مجال الاتصالات
+    missing: الجهاز المفقود
+    mixer: خلاط الصوت
     multimedia: الوسائط المتعددة
-  input_device: جهاز الإدخال
-  master_volume: الصوت الرئيسي
-  output_device: جهاز الإخراج
+    settings: المزيد من إعدادات الجهاز
+    volume: حجم الجهاز
+  input_devices: أجهزة الإدخال
+  output_devices: أجهزة الإخراج
   players: مشغلات الوسائط
 network:
   available: الشبكات المتاحة

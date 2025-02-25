@@ -9,12 +9,18 @@ keyboard:
   more: Daha çox klaviatura parametrləri
   title: Klaviatura düzeni
 media:
+  default_multimedia_volume: Multimedia həcmi
   device:
+    channel:
+      system: Sistem səsləri
     comunications: Rabitə
+    missing: İtkin cihaz
+    mixer: Həcm qarışdırıcı
     multimedia: Multimedia
-  input_device: Giriş cihazı
-  master_volume: Magistral həcm
-  output_device: Çıxış cihazı
+    settings: Daha çox cihaz parametrləri
+    volume: Cihaz həcmi
+  input_devices: Giriş cihazları
+  output_devices: Çıxış cihazları
   players: Media oyunçuları
 network:
   available: Mövcud şəbəkələr

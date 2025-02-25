@@ -9,12 +9,18 @@ keyboard:
   more: अधिक कीबोर्ड सेटिंग्स
   title: कीबोर्ड विन्यास
 media:
+  default_multimedia_volume: बहुरूपी मात्रा
   device:
+    channel:
+      system: सिस्टम लगता है
     comunications: संचार
+    missing: गरीब युक्ति
+    mixer: वॉल्यूम मिक्सर
     multimedia: बहुतायत
-  input_device: इनपुट डिवाइस
-  master_volume: मूल संस्करण
-  output_device: आउटपुट डिवाइस
+    settings: अधिक डिवाइस सेटिंग्स
+    volume: युक्ति मात्रा
+  input_devices: आगत यंत्र
+  output_devices: आउटपुट डिवाइस
   players: मीडिया -खिलाड़ी
 network:
   available: उपलब्ध नेटवर्क

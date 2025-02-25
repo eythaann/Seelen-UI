@@ -9,12 +9,18 @@ keyboard:
   more: Другие настройки клавиатуры
   title: Раскладка клавиатуры
 media:
+  default_multimedia_volume: Объем мультимедиа
   device:
+    channel:
+      system: Системные звуки
     comunications: Коммуникации
+    missing: Отсутствующее устройство
+    mixer: Микшер громкости
     multimedia: Мультимедиа
-  input_device: Устройство ввода
-  master_volume: Основная громкость
-  output_device: Устройство вывода
+    settings: Другие настройки устройства
+    volume: Объем устройства
+  input_devices: Устройства ввода
+  output_devices: Устройства вывода
   players: Медиаплееры
 network:
   available: Доступные сети

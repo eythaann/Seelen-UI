@@ -9,12 +9,18 @@ keyboard:
   more: Pengaturan Papan Ketik Lainnya
   title: Tata Letak Papan Ketik
 media:
+  default_multimedia_volume: Volume Multimedia
   device:
+    channel:
+      system: Suara sistem
     comunications: Komunikasi
+    missing: Perangkat Hilang
+    mixer: Pengaduk Volume
     multimedia: Multimedia
-  input_device: Alat input
-  master_volume: Volume utama
-  output_device: Perangkat output
+    settings: Pengaturan Perangkat Lainnya
+    volume: Volume Perangkat
+  input_devices: Perangkat input
+  output_devices: Perangkat keluaran
   players: Pemain Media
 network:
   available: Jaringan yang tersedia

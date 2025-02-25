@@ -9,12 +9,18 @@ keyboard:
   more: Vairāk tastatūras iestatījumu
   title: Tastatūras izkārtojums
 media:
+  default_multimedia_volume: Multivides apjoms
   device:
+    channel:
+      system: Sistēmas skaņas
     comunications: Sakari
+    missing: Trūkst ierīces
+    mixer: Tilpuma mikseris
     multimedia: Multimedija
-  input_device: Ievades ierīce
-  master_volume: Master tilpums
-  output_device: Izvades ierīce
+    settings: Vairāk ierīces iestatījumu
+    volume: Ierīces tilpums
+  input_devices: Ievadierīces
+  output_devices: Izejas ierīces
   players: Plašsaziņas līdzekļu spēlētāji
 network:
   available: Pieejamie tīkli

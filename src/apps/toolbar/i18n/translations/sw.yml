@@ -9,12 +9,18 @@ keyboard:
   more: Mipangilio ya kibodi zaidi
   title: Mpangilio wa kibodi
 media:
+  default_multimedia_volume: Kiasi cha multimedia
   device:
+    channel:
+      system: Mfumo unasikika
     comunications: Mawasiliano
+    missing: Kifaa kinachokosekana
+    mixer: Mchanganyiko wa kiasi
     multimedia: Multimedia
-  input_device: Kifaa cha Kuingiza
-  master_volume: Kiasi cha Mwalimu
-  output_device: Kifaa cha pato
+    settings: Mipangilio zaidi ya kifaa
+    volume: Kiasi cha kifaa
+  input_devices: Vifaa vya pembejeo
+  output_devices: Vifaa vya pato
   players: Wachezaji wa media
 network:
   available: Mitandao inayopatikana

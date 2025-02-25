@@ -9,12 +9,18 @@ keyboard:
   more: Още настройки на клавиатурата
   title: Разположение на клавиатурата
 media:
+  default_multimedia_volume: Обем на мултимедията
   device:
+    channel:
+      system: Системни звуци
     comunications: Комуникации
+    missing: Липсващо устройство
+    mixer: Смесител за обем
     multimedia: Мултимедия
-  input_device: Вход устройство
-  master_volume: Главен обем
-  output_device: Изходно устройство
+    settings: Още настройки на устройството
+    volume: Обем на устройството
+  input_devices: Входни устройства
+  output_devices: Изходни устройства
   players: Медийни играчи
 network:
   available: Налични мрежи

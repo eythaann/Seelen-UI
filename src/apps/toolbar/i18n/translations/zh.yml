@@ -9,12 +9,18 @@ keyboard:
   more: 更多键盘设置
   title: 键盘布局
 media:
+  default_multimedia_volume: 多媒体音量
   device:
+    channel:
+      system: 系统声音
     comunications: 通信
+    missing: 丢失的设备
+    mixer: 音量混合器
     multimedia: 多媒体
-  input_device: 输入设备
-  master_volume: 主音量
-  output_device: 输出设备
+    settings: 更多设备设置
+    volume: 设备容量
+  input_devices: 输入设备
+  output_devices: 输出设备
   players: 媒体播放器
 network:
   available: 可用网络

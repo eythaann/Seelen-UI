@@ -9,12 +9,18 @@ keyboard:
   more: Ստեղնաշարի ավելի շատ պարամետրեր
   title: Ստեղնաշարի դասավորություն
 media:
+  default_multimedia_volume: Մուլտիմեդիա ծավալը
   device:
+    channel:
+      system: Համակարգային հնչյուններ
     comunications: Կապի
+    missing: Բացակայում է սարքը
+    mixer: Ծավալային խառնիչ
     multimedia: Մուլտիմեդիա
-  input_device: Մուտքային սարք
-  master_volume: Վարպետի ծավալը
-  output_device: Արդյունքային սարք
+    settings: Ավելի շատ սարքի պարամետրեր
+    volume: Սարքի ծավալը
+  input_devices: Մուտքային սարքեր
+  output_devices: Արդյունքային սարքեր
   players: Մեդիա նվագարկիչներ
 network:
   available: Հասանելի ցանցեր

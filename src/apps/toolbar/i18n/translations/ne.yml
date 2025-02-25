@@ -9,12 +9,18 @@ keyboard:
   more: अधिक कुञ्जीपाटी सेटिंग्स
   title: कीबोर्ड लेआउट
 media:
+  default_multimedia_volume: मल्टिमेडिया भोल्युम
   device:
+    channel:
+      system: प्रणाली ध्वनिहरू
     comunications: संचार
+    missing: हराइरहेको उपकरण
+    mixer: भोल्युम मिक्सर
     multimedia: मल्टिमेडिया
-  input_device: इनपुट उपकरण
-  master_volume: मास्टर भोल्युम
-  output_device: आउटपुट उपकरण
+    settings: अधिक उपकरण सेटिंग्स
+    volume: उपकरण भोल्युम
+  input_devices: इनपुट उपकरणहरू
+  output_devices: आउटपुट उपकरणहरू
   players: मिडिया खेलाडीहरु
 network:
   available: उपलब्ध नेटवर्कहरू

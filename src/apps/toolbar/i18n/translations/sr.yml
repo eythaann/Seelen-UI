@@ -9,12 +9,18 @@ keyboard:
   more: Више подешавања тастатуре
   title: Изглед тастатуре
 media:
+  default_multimedia_volume: Мултимедијална количина
   device:
+    channel:
+      system: Систем звукови
     comunications: Комуникација
+    missing: Недостаје уређај
+    mixer: Миксер за јачину звука
     multimedia: Мултимедијални
-  input_device: Улазни уређај
-  master_volume: Главна јачина
-  output_device: Излазни уређај
+    settings: Више подешавања уређаја
+    volume: Запремина уређаја
+  input_devices: Улазни уређаји
+  output_devices: Излазни уређаји
   players: Медиа Играчи
 network:
   available: Доступне мреже

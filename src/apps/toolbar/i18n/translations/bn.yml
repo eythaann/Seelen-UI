@@ -9,12 +9,18 @@ keyboard:
   more: আরও কীবোর্ড সেটিংস
   title: কীবোর্ড লেআউট
 media:
+  default_multimedia_volume: মাল্টিমিডিয়া ভলিউম
   device:
+    channel:
+      system: সিস্টেম শব্দ
     comunications: যোগাযোগ
+    missing: অনুপস্থিত ডিভাইস
+    mixer: ভলিউম মিক্সার
     multimedia: মাল্টিমিডিয়া
-  input_device: প্রেরণকারী যন্ত্র
-  master_volume: মাস্টার ভলিউম
-  output_device: আউটপুট ডিভাইস
+    settings: আরও ডিভাইস সেটিংস
+    volume: ডিভাইস ভলিউম
+  input_devices: ইনপুট ডিভাইস
+  output_devices: আউটপুট ডিভাইস
   players: মিডিয়া প্লেয়ার
 network:
   available: উপলব্ধ নেটওয়ার্ক

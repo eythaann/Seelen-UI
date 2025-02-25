@@ -9,12 +9,18 @@ keyboard:
   more: Lisää näppäimistön asetuksia
   title: Näppäimistön asettelu
 media:
+  default_multimedia_volume: Multimedian äänenvoimakkuus
   device:
+    channel:
+      system: Järjestelmän äänet
     comunications: Viitaus
+    missing: Puuttuva laite
+    mixer: Äänenvoimakkuuden sekoitin
     multimedia: Multimedia
-  input_device: Syöttölaite
-  master_volume: Pää-äänenvoimakkuus
-  output_device: Lähtölaite
+    settings: Lisää laiteasetuksia
+    volume: Laitteen tilavuus
+  input_devices: Syöttölaitteet
+  output_devices: Lähtölaitteet
   players: Mediapelaajat
 network:
   available: Käytettävissä olevat verkot

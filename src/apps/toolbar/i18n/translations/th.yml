@@ -9,12 +9,18 @@ keyboard:
   more: การตั้งค่าแป้นพิมพ์เพิ่มเติม
   title: เค้าโครงแป้นพิมพ์
 media:
+  default_multimedia_volume: ปริมาณมัลติมีเดีย
   device:
+    channel:
+      system: เสียงของระบบ
     comunications: การสื่อสาร
+    missing: อุปกรณ์ที่หายไป
+    mixer: เครื่องผสมระดับเสียง
     multimedia: มัลติมีเดีย
-  input_device: อุปกรณ์อินพุต
-  master_volume: ระดับปริญญาโท
-  output_device: อุปกรณ์ส่งออก
+    settings: การตั้งค่าอุปกรณ์เพิ่มเติม
+    volume: ปริมาณอุปกรณ์
+  input_devices: อุปกรณ์อินพุต
+  output_devices: อุปกรณ์เอาต์พุต
   players: เครื่องเล่นสื่อ
 network:
   available: เครือข่ายที่มีอยู่

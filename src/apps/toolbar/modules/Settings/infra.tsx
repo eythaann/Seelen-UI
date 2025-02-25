@@ -121,7 +121,7 @@ export function SettingsModule({ module }: Props) {
           )}
 
           {!!(defaultInput || defaultOutput) && (
-            <span className="fast-settings-label">{t('media.master_volume')}</span>
+            <span className="fast-settings-label">{t('media.default_multimedia_volume')}</span>
           )}
           {!!defaultOutput && (
             <div className="fast-settings-item">

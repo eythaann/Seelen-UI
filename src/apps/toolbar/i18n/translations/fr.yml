@@ -9,12 +9,18 @@ keyboard:
   more: Autres paramètres du clavier
   title: Disposition du clavier
 media:
+  default_multimedia_volume: Volume multimédia
   device:
+    channel:
+      system: Sons du système
     comunications: Communications
+    missing: Dispositif manquant
+    mixer: Mélangeur de volume
     multimedia: Multimédia
-  input_device: Dispositif d'entrée
-  master_volume: Volume principal
-  output_device: Dispositif de sortie
+    settings: Autres paramètres de l'appareil
+    volume: Volume de l'appareil
+  input_devices: Dispositifs d'entrée
+  output_devices: Dispositifs de sortie
   players: Lecteurs multimédias
 network:
   available: Réseaux disponibles

@@ -9,12 +9,18 @@ keyboard:
   more: Więcej ustawień klawiatury
   title: Układ klawiatury
 media:
+  default_multimedia_volume: Głośność multimediów
   device:
+    channel:
+      system: Dźwięki systemowe
     comunications: Komunikacja
+    missing: Brakujące urządzenie
+    mixer: Mikser głośności
     multimedia: Multimedia
-  input_device: Urządzenie wejściowe
-  master_volume: Głośność
-  output_device: Urządzenie wyjściowe
+    settings: Więcej ustawień urządzenia
+    volume: Pojemność urządzenia
+  input_devices: Urządzenia wejściowe
+  output_devices: Urządzenia wyjściowe
   players: Gracze multimedialni
 network:
   available: Dostępne sieci

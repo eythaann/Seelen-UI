@@ -9,12 +9,18 @@ keyboard:
   more: تنظیمات صفحه کلید بیشتر
   title: چیدمان صفحه کلید
 media:
+  default_multimedia_volume: حجم چند رسانه ای
   device:
+    channel:
+      system: صداهای سیستم
     comunications: ارتباطات
+    missing: دستگاه گمشده
+    mixer: میکسر حجم
     multimedia: چند رسانه ای
-  input_device: دستگاه ورودی
-  master_volume: جلد استاد
-  output_device: دستگاه خروجی
+    settings: تنظیمات بیشتر دستگاه
+    volume: حجم دستگاه
+  input_devices: دستگاه های ورودی
+  output_devices: دستگاه های خروجی
   players: بازیکنان رسانه ای
 network:
   available: شبکه های موجود

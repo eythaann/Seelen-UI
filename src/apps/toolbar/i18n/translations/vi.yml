@@ -9,12 +9,18 @@ keyboard:
   more: Thêm cài đặt bàn phím
   title: Bố cục bàn phím
 media:
+  default_multimedia_volume: Khối lượng đa phương tiện
   device:
+    channel:
+      system: Âm thanh hệ thống
     comunications: Truyền thông
+    missing: Thiếu thiết bị
+    mixer: Máy trộn khối lượng
     multimedia: Đa phương tiện
-  input_device: Thiết bị đầu vào
-  master_volume: Khối lượng tổng thể
-  output_device: Thiết bị đầu ra
+    settings: Nhiều cài đặt thiết bị hơn
+    volume: Khối lượng thiết bị
+  input_devices: Thiết bị đầu vào
+  output_devices: Thiết bị đầu ra
   players: Người chơi truyền thông
 network:
   available: Mạng có sẵn

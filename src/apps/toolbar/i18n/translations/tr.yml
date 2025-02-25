@@ -9,12 +9,18 @@ keyboard:
   more: Daha Fazla Klavye Ayarı
   title: Klavye Düzeni
 media:
+  default_multimedia_volume: Multimedya Hacmi
   device:
+    channel:
+      system: Sistem sesleri
     comunications: İletişim
+    missing: Kayıp Cihaz
+    mixer: Ses Mikseri
     multimedia: Multimedya
-  input_device: Giriş aygıtı
-  master_volume: Ana Ses
-  output_device: Çıkış aygıtı
+    settings: Daha Fazla Cihaz Ayarı
+    volume: Cihaz Hacmi
+  input_devices: Giriş cihazları
+  output_devices: Çıkış cihazları
   players: Medya Oynatıcıları
 network:
   available: Mevcut ağlar

@@ -119,6 +119,7 @@ export interface MediaDevice {
   isDefaultMultimedia: boolean;
   isDefaultCommunications: boolean;
   sessions: MediaDeviceChannel[];
+  type: 'input' | 'output';
   volume: number;
   muted: boolean;
 }

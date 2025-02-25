@@ -8,7 +8,14 @@ use windows::{
     Win32::{
         Foundation::{BOOL, PROPERTYKEY},
         Media::Audio::{
-            ERole,
+            AudioObjectType, AudioObjectType_BackCenter, AudioObjectType_BackLeft,
+            AudioObjectType_BackRight, AudioObjectType_BottomBackLeft,
+            AudioObjectType_BottomBackRight, AudioObjectType_BottomFrontLeft,
+            AudioObjectType_BottomFrontRight, AudioObjectType_FrontCenter,
+            AudioObjectType_FrontLeft, AudioObjectType_FrontRight, AudioObjectType_LowFrequency,
+            AudioObjectType_SideLeft, AudioObjectType_SideRight, AudioObjectType_TopBackLeft,
+            AudioObjectType_TopBackRight, AudioObjectType_TopFrontLeft,
+            AudioObjectType_TopFrontRight, ERole,
             Endpoints::{IAudioEndpointVolume, IAudioEndpointVolumeCallback},
             IAudioSessionControl2, IAudioSessionEvents, IAudioSessionManager2,
             IAudioSessionNotification, WAVEFORMATEX,
@@ -16,6 +23,55 @@ use windows::{
         System::Com::StructuredStorage::PROPVARIANT,
     },
 };
+
+pub struct ChannelMask {}
+
+#[allow(non_upper_case_globals)]
+impl ChannelMask {
+    pub const Mono: AudioObjectType = AudioObjectType_FrontCenter;
+    pub const Stereo: AudioObjectType =
+        AudioObjectType(AudioObjectType_FrontLeft.0 | AudioObjectType_FrontRight.0);
+
+    pub const Spatial_2_1: AudioObjectType =
+        AudioObjectType(Self::Stereo.0 | AudioObjectType_LowFrequency.0);
+    pub const Quad: AudioObjectType =
+        AudioObjectType(Self::Stereo.0 | AudioObjectType_BackLeft.0 | AudioObjectType_BackRight.0);
+    pub const Spatial_4_1: AudioObjectType =
+        AudioObjectType(Self::Quad.0 | AudioObjectType_LowFrequency.0);
+    pub const Spatial_5_1: AudioObjectType = AudioObjectType(
+        Self::Stereo.0
+            | AudioObjectType_FrontCenter.0
+            | AudioObjectType_LowFrequency.0
+            | AudioObjectType_SideLeft.0
+            | AudioObjectType_SideRight.0,
+    );
+
+    pub const Spatial_7_1: AudioObjectType = AudioObjectType(
+        Self::Spatial_5_1.0 | AudioObjectType_BackLeft.0 | AudioObjectType_BackRight.0,
+    );
+
+    pub const MaxStaticObjectCount_7_1_4: u32 = 12;
+    pub const Spatial_7_1_4: AudioObjectType = AudioObjectType(
+        Self::Spatial_7_1.0
+            | AudioObjectType_TopFrontLeft.0
+            | AudioObjectType_TopFrontRight.0
+            | AudioObjectType_TopBackLeft.0
+            | AudioObjectType_TopBackRight.0,
+    );
+
+    pub const MaxStaticObjectCount_7_1_4_4: u32 = 16;
+    pub const Spatial_7_1_4_4: AudioObjectType = AudioObjectType(
+        Self::Spatial_7_1_4.0
+            | AudioObjectType_BottomFrontLeft.0
+            | AudioObjectType_BottomFrontRight.0
+            | AudioObjectType_BottomBackLeft.0
+            | AudioObjectType_BottomBackRight.0,
+    );
+
+    pub const MaxStaticObjectCount_8_1_4_4: u32 = 17;
+    pub const Spatial_8_1_4_4: AudioObjectType =
+        AudioObjectType(Self::Spatial_7_1_4_4.0 | AudioObjectType_BackCenter.0);
+}
 
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -53,7 +109,8 @@ pub struct MediaDeviceSession {
     pub muted: bool,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub enum MediaDeviceType {
     Input,
     Output,

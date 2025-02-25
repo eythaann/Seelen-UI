@@ -9,12 +9,18 @@ keyboard:
   more: Ko'proq klaviatura sozlamalari
   title: Klaviatura tartibi
 media:
+  default_multimedia_volume: Multimedia hajmi
   device:
+    channel:
+      system: Tizim tovushlari
     comunications: Aloqa
+    missing: Yo'qolgan qurilma
+    mixer: Mikroavtobus
     multimedia: Multimedia
-  input_device: Kirish moslamasi
-  master_volume: Master hajmi
-  output_device: Chiqish moslamasi
+    settings: Qo'shimcha qurilma sozlamalari
+    volume: Qurilma hajmi
+  input_devices: Kirish moslamalari
+  output_devices: Chiqish moslamalari
   players: Media pleerlari
 network:
   available: Mavjud tarmoqlar

@@ -9,12 +9,18 @@ keyboard:
   more: További billentyűzetbeállítások
   title: Billentyűzet elrendezése
 media:
+  default_multimedia_volume: Multimédia hangerő
   device:
+    channel:
+      system: Rendszerhangok
     comunications: Kommunikáció
+    missing: Hiányzó eszköz
+    mixer: Hangerő keverő
     multimedia: Multimédia
-  input_device: Beviteli eszköz
-  master_volume: Fő kötet
-  output_device: Kimeneti eszköz
+    settings: További eszközbeállítások
+    volume: Eszköz hangereje
+  input_devices: Bemeneti eszközök
+  output_devices: Kimeneti eszközök
   players: Médialejátszók
 network:
   available: Elérhető hálózatok

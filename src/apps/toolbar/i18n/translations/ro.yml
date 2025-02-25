@@ -9,12 +9,18 @@ keyboard:
   more: Mai multe setări ale tastaturii
   title: Layout tastatură
 media:
+  default_multimedia_volume: Volum multimedia
   device:
+    channel:
+      system: Sunete de sistem
     comunications: Comunicări
+    missing: Dispozitiv lipsă
+    mixer: Mixer de volum
     multimedia: Multimedia
-  input_device: Dispozitiv de intrare
-  master_volume: Volumul principal
-  output_device: Dispozitiv de ieșire
+    settings: Mai multe setări ale dispozitivului
+    volume: Volumul dispozitivului
+  input_devices: Dispozitive de intrare
+  output_devices: Dispozitive de ieșire
   players: Playere media
 network:
   available: Rețele disponibile

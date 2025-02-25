@@ -9,12 +9,18 @@ keyboard:
   more: మరిన్ని కీబోర్డ్ సెట్టింగులు
   title: కీబోర్డ్ లేఅవుట్
 media:
+  default_multimedia_volume: మల్టీమీడియా వాల్యూమ్
   device:
+    channel:
+      system: సిస్టమ్ శబ్దాలు
     comunications: కమ్యూనికేషన్స్
+    missing: తప్పిపోయిన పరికరం
+    mixer: వాల్యూమ్ మిక్సర్
     multimedia: మల్టీమీడియా
-  input_device: ఇన్పుట్ పరికరం
-  master_volume: మాస్టర్ వాల్యూమ్
-  output_device: అవుట్పుట్ పరికరం
+    settings: మరిన్ని పరికర సెట్టింగులు
+    volume: పరికర వాల్యూమ్
+  input_devices: ఇన్పుట్ పరికరాలు
+  output_devices: అవుట్పుట్ పరికరాలు
   players: మీడియా ప్లేయర్స్
 network:
   available: అందుబాటులో ఉన్న నెట్‌వర్క్‌లు

@@ -9,12 +9,18 @@ keyboard:
   more: Більше налаштувань клавіатури
   title: Розкладка клавіатури
 media:
+  default_multimedia_volume: Мультимедійна гучність
   device:
+    channel:
+      system: Звуки системи
     comunications: Комунікація
+    missing: Відсутній пристрій
+    mixer: Змішувач гучності
     multimedia: Мультимедіа
-  input_device: Пристрій вводу
-  master_volume: Рівень гучності
-  output_device: Пристрій виводу
+    settings: Більше налаштувань пристрою
+    volume: Гучність пристрою
+  input_devices: Пристрої введення
+  output_devices: Пристрої виводу
   players: Медіаплеєри
 network:
   available: Доступні мережі

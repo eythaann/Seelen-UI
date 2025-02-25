@@ -9,12 +9,18 @@ keyboard:
   more: კლავიშების მეტი პარამეტრები
   title: კლავიშის განლაგება
 media:
+  default_multimedia_volume: მულტიმედიური მოცულობა
   device:
+    channel:
+      system: სისტემის ჟღერადობა
     comunications: კომუნიკაცია
+    missing: დაკარგული მოწყობილობა
+    mixer: მოცულობის მიქსერი
     multimedia: მულტიმედია
-  input_device: შეყვანის მოწყობილობა
-  master_volume: სამაგისტრო ტომი
-  output_device: გამომავალი მოწყობილობა
+    settings: მეტი მოწყობილობის პარამეტრები
+    volume: მოწყობილობის მოცულობა
+  input_devices: შეყვანის მოწყობილობები
+  output_devices: გამომავალი მოწყობილობები
   players: მედიის მოთამაშეები
 network:
   available: ხელმისაწვდომი ქსელები

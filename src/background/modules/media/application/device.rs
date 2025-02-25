@@ -66,10 +66,10 @@ impl IAudioSessionNotification_Impl for MediaDeviceEventHandler_Impl {
 }
 
 impl MediaDevice {
-    pub unsafe fn load(device: &IMMDevice) -> Result<Self> {
-        let device_id = device.GetId()?.to_string()?;
-        let volume_endpoint: IAudioEndpointVolume = device.Activate(CLSCTX_ALL, None)?;
-        let session_manager: IAudioSessionManager2 = device.Activate(CLSCTX_ALL, None)?;
+    pub unsafe fn load(raw_device: &IMMDevice) -> Result<Self> {
+        let device_id = raw_device.GetId()?.to_string()?;
+        let volume_endpoint: IAudioEndpointVolume = raw_device.Activate(CLSCTX_ALL, None)?;
+        let session_manager: IAudioSessionManager2 = raw_device.Activate(CLSCTX_ALL, None)?;
 
         let mut sessions = Vec::new();
         let enumerator = session_manager.GetSessionEnumerator()?;
@@ -81,8 +81,8 @@ impl MediaDevice {
             }
         }
 
-        let properties = device.OpenPropertyStore(STGM_READ)?;
-        let data_flow = if device.cast::<IMMEndpoint>()?.GetDataFlow()? == eCapture {
+        let properties = raw_device.OpenPropertyStore(STGM_READ)?;
+        let data_flow = if raw_device.cast::<IMMEndpoint>()?.GetDataFlow()? == eCapture {
             MediaDeviceType::Input
         } else {
             MediaDeviceType::Output

@@ -9,12 +9,18 @@ keyboard:
   more: Mwy o osodiadau bysellfwrdd
   title: Cynllun Allweddell
 media:
+  default_multimedia_volume: Cyfrol amlgyfrwng
   device:
+    channel:
+      system: SYLFAEN SYSTEM
     comunications: Gyfathrebiadau
+    missing: Dyfais ar goll
+    mixer: Cymysgydd Cyfrol
     multimedia: Amlgyfrwng
-  input_device: Dyfais fewnbwn
-  master_volume: Meistr
-  output_device: Dyfais allbwn
+    settings: Mwy o osodiadau dyfeisiau
+    volume: Cyfaint dyfeisiau
+  input_devices: Dyfeisiau Mewnbwn
+  output_devices: Dyfeisiau Allbwn
   players: Chwaraewyr cyfryngau
 network:
   available: Rhwydweithiau sydd ar gael

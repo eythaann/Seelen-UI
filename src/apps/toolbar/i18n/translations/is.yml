@@ -9,12 +9,18 @@ keyboard:
   more: Fleiri lyklaborðsstillingar
   title: Lyklaborð skipulag
 media:
+  default_multimedia_volume: Margmiðlunarrúmmál
   device:
+    channel:
+      system: Kerfishljóð
     comunications: Samskipti
+    missing: Vantar tæki
+    mixer: Bindi blöndunartæki
     multimedia: Margmiðlun
-  input_device: Inntakstæki
-  master_volume: Master bindi
-  output_device: Framleiðsla tæki
+    settings: Fleiri tækjastillingar
+    volume: Tæki rúmmál
+  input_devices: Inntakstæki
+  output_devices: Framleiðsla tæki
   players: Fjölmiðla leikmenn
 network:
   available: Tiltæk netkerfi
