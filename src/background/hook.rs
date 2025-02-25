@@ -195,7 +195,10 @@ impl HookManager {
             }
         }
 
-        if event == WinEvent::SystemForeground {
+        if event == WinEvent::SystemForeground
+            || event == WinEvent::SyntheticMaximizeStart
+            || event == WinEvent::SyntheticMaximizeEnd
+        {
             let process = origin.process();
             let result = get_app_handle().emit(
                 SeelenEvent::GlobalFocusChanged,

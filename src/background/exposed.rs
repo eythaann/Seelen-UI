@@ -152,17 +152,20 @@ async fn check_for_updates() -> Result<bool> {
 }
 
 #[tauri::command(async)]
-async fn get_foreground_window_color() -> Result<Color> {
-    let window = Window::from(WindowsApi::get_foreground_window());
-    if !window.is_visible()
-        || !window.is_maximized()
-        || window.is_minimized()
-        || window.is_desktop()
-    {
+async fn get_foreground_window_color(webview: WebviewWindow<tauri::Wry>) -> Result<Color> {
+    let webview = Window::from(webview.hwnd()?.0 as isize);
+    let foreground = Window::get_foregrounded();
+
+    if webview.monitor() != foreground.monitor() {
         return Ok(Color::default());
     }
+
+    if !foreground.is_visible() || foreground.is_desktop() {
+        return Ok(Color::default());
+    }
+
     let hdc = DeviceContext::create(None);
-    let rect = window.inner_rect()?;
+    let rect = foreground.inner_rect()?;
     let x = rect.left + (rect.right - rect.left) / 2;
     Ok(hdc.get_pixel(x, rect.top + 2))
 }
