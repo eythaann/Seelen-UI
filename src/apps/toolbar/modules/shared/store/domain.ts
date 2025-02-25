@@ -1,5 +1,6 @@
 import { SystemLanguage } from '@seelen-ui/lib';
 import {
+  BluetoothDevice,
   FancyToolbarSettings,
   File,
   Placeholder,
@@ -145,6 +146,9 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   userMusicFolder: File[];
   focused: FocusedApp | null;
   env: Record<string, string>;
+  bluetoothDevices: BluetoothDevice[];
+  discoveredBluetoothDevices: BluetoothDevice[];
+  bluetoothRadioState: boolean;
   powerStatus: PowerStatus;
   powerPlan: PowerPlan;
   batteries: Battery[];
