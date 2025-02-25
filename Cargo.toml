@@ -77,7 +77,7 @@ win-screenshot = "4.0.8"
 base64 = "0.22.1"
 arc-swap = "1.7.1"
 notify-debouncer-full = "0.3.1"
-encoding_rs = "0.8.34"
+encoding_rs = "0.8.35"
 evalexpr = "=11.3.0"
 quick-xml = { version = "0.36.2", features = ["serialize", "encoding"] }
 backtrace = "0.3.71"
