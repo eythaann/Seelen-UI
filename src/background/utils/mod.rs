@@ -46,7 +46,9 @@ pub fn are_overlaped(a: &RECT, b: &RECT) -> bool {
     if a == &zeroed || b == &zeroed {
         return false;
     }
-    if a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom {
+    // The edge pixel overlapping do not matters. This resolves the shared pixel in between the monitors,
+    // hereby a fullscreened app shared pixel collision does not hide other monitor windows.
+    if a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom {
         return false;
     }
     true
