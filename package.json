@@ -43,7 +43,7 @@
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.2.2",
     "@reduxjs/toolkit": "^2.5.0",
-    "@seelen-ui/lib": "^2.1.8-next.20250225220823",
+    "@seelen-ui/lib": "^2.1.8-next.20250228194009",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@types/d3": "^7.4.3",
     "@types/express": "^5.0.0",
