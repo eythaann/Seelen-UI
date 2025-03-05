@@ -21,7 +21,7 @@ export function BluetoothSelectorEntry(props: {
   let [passphrase, setPassphrase] = useState('');
   let [showErrors, setShowErrors] = useState(false);
   let [confirmationPhase, setConfirmationPhase] = useState(false);
-  let [unsubscribtion, setUnsubscribtion] = useState<UnlistenFn | undefined>(undefined);
+  let [unsubscribtion, setUnsubscribtion] = useState<UnlistenFn | null>(null);
 
   const { t } = useTranslation();
 
@@ -30,9 +30,9 @@ export function BluetoothSelectorEntry(props: {
     setShowErrors(false);
     setPassphrase('');
     setLoading(false);
-    if (unsubscribtion !== undefined) {
+    if (unsubscribtion !== null) {
       unsubscribtion();
-      setUnsubscribtion(undefined);
+      setUnsubscribtion(null);
     }
     setConfirmationPhase(false);
   }, [selected]);
@@ -71,13 +71,14 @@ export function BluetoothSelectorEntry(props: {
     }
   };
 
-  const onPairRequest = (param) => {
+  // idk what that hell void was added as type on a argument, remove that after change it on the library.
+  const onPairRequest = (param: BluetoothDevicePairShowPinRequest | void) => {
     if (unsubscribtion) {
       unsubscribtion();
     }
-    setUnsubscribtion(undefined);
+    setUnsubscribtion(null);
 
-    if (param.pin !== undefined) {
+    if (param && param.pin !== undefined) {
       setPassphrase(param.pin);
       setShowFields(true);
       setConfirmationPhase(param.confirmationNeeded);
