@@ -41,6 +41,7 @@ pub enum PowerManagerEvent {
 
 #[derive(Debug, Default)]
 pub struct PowerManager {
+    pub current_power_mode: Option<PowerMode>,
     power_mode_event_token: Option<isize>,
 }
 
@@ -49,7 +50,11 @@ impl PowerManager {
         mode: EFFECTIVE_POWER_MODE,
         _ctx: *const std::ffi::c_void,
     ) {
-        log_error!(Self::event_tx().send(PowerManagerEvent::PowerModeChanged(mode.into())));
+        let state: PowerMode = mode.into();
+        {
+            trace_lock!(POWER_MANAGER).current_power_mode = Some(state.clone())
+        }
+        log_error!(Self::event_tx().send(PowerManagerEvent::PowerModeChanged(state)));
     }
 
     pub fn init(&mut self) -> Result<()> {
@@ -61,6 +66,7 @@ impl PowerManager {
         unsafe {
             let mut unregister_token_ptr = std::ptr::null_mut();
             // will fail before windows 10 version 10.0.18363 (1909).
+            // On first call it immediatelly callback with the current state to the registered callback!
             PowerRegisterForEffectivePowerModeNotifications(
                 EFFECTIVE_POWER_MODE_V2,
                 Some(Self::on_effective_power_mode_change),

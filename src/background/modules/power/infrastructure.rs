@@ -27,8 +27,10 @@ pub fn get_power_status() -> Result<PowerStatus> {
 
 #[tauri::command(async)]
 pub fn get_power_mode() -> Result<PowerMode> {
-    // TODO find a way to get the current power plan
-    Ok(PowerMode::Unknown)
+    Ok(trace_lock!(POWER_MANAGER)
+        .current_power_mode
+        .clone()
+        .unwrap_or(PowerMode::Unknown))
 }
 
 #[tauri::command(async)]
