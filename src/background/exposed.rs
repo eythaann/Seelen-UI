@@ -181,6 +181,11 @@ async fn install_last_available_update() -> Result<()> {
     Ok(())
 }
 
+#[tauri::command(async)]
+async fn show_desktop() -> Result<()> {
+    todo!()
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::seelen_rofi::handler::*;
     use crate::seelen_weg::handler::*;

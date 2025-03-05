@@ -134,8 +134,7 @@ impl BluetoothPairManager {
                             log_error!(rs.send((accept, pair_passphrase)));
                         }
                     });
-                    //Await for pair response
-                    for (accept, pair_passphrase) in rx {
+                    if let Some((accept, pair_passphrase)) = rx.into_iter().next() {
                         if accept {
                             match pair_kind {
                                 DevicePairingKinds::ProvidePin => {
@@ -148,7 +147,6 @@ impl BluetoothPairManager {
                             }
                         }
                         collect_pin_deferral.Complete()?;
-                        break;
                     }
                 }
                 //DevicePairingKinds::ProvideAddress | DevicePairingKinds::ProvidePasswordCredential => { got no idea what to do or mising implementation! }
