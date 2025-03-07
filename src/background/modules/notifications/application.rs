@@ -1,9 +1,6 @@
-use std::{
-    sync::{
-        atomic::{AtomicBool, Ordering},
-        Arc,
-    },
-    time::Duration,
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    Arc,
 };
 
 use lazy_static::lazy_static;
@@ -21,7 +18,7 @@ use windows::{
 
 use crate::{
     error_handler::Result, log_error, seelen_weg::icon_extractor::extract_and_save_icon_umid,
-    utils::spawn_named_thread,
+    trace_lock, utils::spawn_named_thread,
 };
 
 lazy_static! {
@@ -140,9 +137,7 @@ impl NotificationManager {
         _listener: &Option<UserNotificationListener>,
         _args: &Option<UserNotificationChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        let mut manager = NOTIFICATION_MANAGER
-            .try_lock_for(Duration::from_secs(5))
-            .expect("Failed to lock");
+        let mut manager = trace_lock!(NOTIFICATION_MANAGER);
         let mut current_list = manager.notifications_ids.clone();
 
         for u_notification in manager
