@@ -23,35 +23,36 @@ use crate::{
 };
 
 pub fn declare_system_events_handlers() -> Result<()> {
-    let handle = get_app_handle();
+    // avoid binding interfaces to main thread
+    std::thread::spawn(move || {
+        let handle = get_app_handle();
 
-    // todo change this to current implementation pattern
-    handle.listen("register-tray-events", move |_| register_tray_events());
+        // todo change this to current implementation pattern
+        handle.listen("register-tray-events", move |_| register_tray_events());
 
-    // todo change this to current implementation pattern
-    handle.listen("register-network-events", move |_| {
-        log_error!(register_network_events());
-    });
+        // todo change this to current implementation pattern
+        handle.listen("register-network-events", move |_| {
+            log_error!(register_network_events());
+        });
 
-    // todo change this to current implementation pattern
-    handle.listen("register-notifications-events", move |_| {
         register_notification_events();
-    });
-
-    register_media_events();
-    register_user_events();
-    register_bluetooth_events();
-    register_monitor_webview_events();
-    register_colors_events();
-    register_power_events();
-    register_language_events();
+        register_media_events();
+        register_user_events();
+        register_bluetooth_events();
+        register_monitor_webview_events();
+        register_colors_events();
+        register_power_events();
+        register_language_events();
+    })
+    .join()
+    .expect("Failed to register system events");
     Ok(())
 }
 
 pub fn release_system_events_handlers() {
+    release_notification_events();
     release_media_events();
     release_power_events();
     release_bluetooth_events();
-    release_notification_events();
     release_colors_events();
 }

@@ -1,7 +1,6 @@
 import { NotificationsToolbarItem } from '@seelen-ui/lib/types';
-import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Item } from '../../item/infra/infra';
@@ -28,10 +27,6 @@ export function NotificationsModule({ module }: Props) {
       setOpenPreview(false);
     }
   });
-
-  useEffect(() => {
-    emit('register-notifications-events');
-  }, []);
 
   return (
     <Popover open={!openPreview} arrow={false} content={<ArrivalPreview />}>

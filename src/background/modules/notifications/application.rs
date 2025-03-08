@@ -1,11 +1,13 @@
-use std::sync::{
-    atomic::{AtomicBool, Ordering},
-    Arc,
+use std::{
+    collections::HashSet,
+    sync::{
+        atomic::{AtomicBool, Ordering},
+        Arc,
+    },
 };
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use serde::Serialize;
 use windows::{
     Foundation::TypedEventHandler,
     Win32::System::WinRT::EventRegistrationToken,
@@ -17,9 +19,12 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result, log_error, seelen_weg::icon_extractor::extract_and_save_icon_umid,
-    trace_lock, utils::spawn_named_thread,
+    error_handler::Result, event_manager, log_error,
+    seelen_weg::icon_extractor::extract_and_save_icon_umid, trace_lock, utils::spawn_named_thread,
+    windows_api::traits::EventRegistrationTokenExt,
 };
+
+use super::domain::AppNotification;
 
 lazy_static! {
     pub static ref NOTIFICATION_MANAGER: Arc<Mutex<NotificationManager>> = Arc::new(Mutex::new(
@@ -27,91 +32,78 @@ lazy_static! {
     ));
 }
 
-#[derive(Debug, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct AppNotification {
-    pub id: u32,
-    app_umid: String,
-    app_name: String,
-    app_description: String,
-    body: Vec<String>,
-    date: i64,
-}
+static RELEASED: AtomicBool = AtomicBool::new(true);
 
-enum NotificationEvent {
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum NotificationEvent {
     Added(u32),
     Removed(u32),
 }
 
-type OnNotificationsChange = Box<dyn Fn(&Vec<AppNotification>) + Send + Sync>;
-
 pub struct NotificationManager {
-    listener: UserNotificationListener,
     notifications: Vec<AppNotification>,
-    notifications_ids: Vec<u32>,
-    callbacks: Vec<OnNotificationsChange>,
-    #[allow(dead_code)]
+    listener: UserNotificationListener,
     event_handler: TypedEventHandler<UserNotificationListener, UserNotificationChangedEventArgs>,
     event_token: Option<EventRegistrationToken>,
 }
 
 unsafe impl Send for NotificationManager {}
 
-impl NotificationManager {
-    pub fn notifications(&self) -> &Vec<AppNotification> {
-        &self.notifications
-    }
-}
-
-static RELEASED: AtomicBool = AtomicBool::new(true);
+event_manager!(NotificationManager, NotificationEvent);
 
 impl NotificationManager {
     fn new() -> Result<Self> {
-        let mut manager = Self {
+        Ok(Self {
             listener: UserNotificationListener::Current()?,
-            callbacks: Vec::new(),
             notifications: Vec::new(),
-            notifications_ids: Vec::new(),
             event_handler: TypedEventHandler::new(Self::internal_notifications_change),
             event_token: None,
-        };
-        manager.initialize()?;
-        Ok(manager)
+        })
+    }
+
+    pub fn notifications(&self) -> &Vec<AppNotification> {
+        &self.notifications
     }
 
     pub fn remove_notification(&mut self, id: u32) -> Result<()> {
-        self.notifications.retain(|n| n.id != id);
-        self.notify_changes();
         self.listener.RemoveNotification(id)?;
+        Self::event_tx().send(NotificationEvent::Removed(id))?;
         Ok(())
     }
 
     pub fn clear_notifications(&mut self) -> Result<()> {
-        self.notifications.clear();
-        self.notify_changes();
         for notification in self.notifications() {
             self.listener.RemoveNotification(notification.id)?;
+            Self::event_tx().send(NotificationEvent::Removed(notification.id))?;
         }
         Ok(())
     }
 
-    fn initialize(&mut self) -> Result<()> {
+    pub fn initialize(&mut self) -> Result<()> {
         let access = self.listener.RequestAccessAsync()?.get()?;
         if access != UserNotificationListenerAccessStatus::Allowed {
             return Err("Failed to get notification access".into());
         }
 
         // TODO: this only works on MSIX/APPX/UWP builds so idk how to make it work on win32 apps
-        // self.listener.NotificationChanged(&self.event_handler)?;
-        // intead we use a thread
-        spawn_named_thread("Notification Manager", || -> Result<()> {
-            RELEASED.store(false, Ordering::SeqCst);
-            while !RELEASED.load(Ordering::Acquire) {
-                log_error!(Self::internal_notifications_change(&None, &None));
-                std::thread::sleep(std::time::Duration::from_secs(1));
+        match self.listener.NotificationChanged(&self.event_handler) {
+            Ok(token) => self.event_token = Some(token.as_event_token()),
+            Err(error) => {
+                log::warn!(
+                    "Failed to register winrt notification change handler: {}",
+                    error
+                );
+                // intead we use a thread
+                spawn_named_thread("Notification Manager", || -> Result<()> {
+                    RELEASED.store(false, Ordering::SeqCst);
+                    while !RELEASED.load(Ordering::Acquire) {
+                        log_error!(Self::internal_notifications_change(&None, &None));
+                        std::thread::sleep(std::time::Duration::from_secs(1));
+                    }
+                    Ok(())
+                })?;
             }
-            Ok(())
-        })?;
+        }
 
         let u_notifications = self
             .listener
@@ -122,6 +114,7 @@ impl NotificationManager {
             log_error!(self.load_notification(u_notification));
         }
 
+        Self::subscribe(|e| log_error!(Self::process_event(e)));
         Ok(())
     }
 
@@ -137,57 +130,44 @@ impl NotificationManager {
         _listener: &Option<UserNotificationListener>,
         _args: &Option<UserNotificationChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        let mut manager = trace_lock!(NOTIFICATION_MANAGER);
-        let mut current_list = manager.notifications_ids.clone();
+        let listener = { UserNotificationListener::Current()? };
+        let mut old_toasts: HashSet<u32> = {
+            trace_lock!(NOTIFICATION_MANAGER)
+                .notifications
+                .iter()
+                .map(|n| n.id)
+                .collect()
+        };
 
-        for u_notification in manager
-            .listener
+        for u_notification in listener
             .GetNotificationsAsync(NotificationKinds::Toast)?
             .get()?
         {
             let id = u_notification.Id()?;
-            if !current_list.contains(&id) {
-                manager.emit_event(NotificationEvent::Added(id));
+            if !old_toasts.contains(&id) {
+                log_error!(Self::event_tx().send(NotificationEvent::Added(id)));
             }
-            current_list.retain(|x| *x != id);
+            old_toasts.remove(&id);
         }
 
-        for id in current_list {
-            manager.emit_event(NotificationEvent::Removed(id));
+        for id in old_toasts {
+            log_error!(Self::event_tx().send(NotificationEvent::Removed(id)));
         }
         Ok(())
     }
 
-    pub fn notify_changes(&self) {
-        for callback in &self.callbacks {
-            callback(self.notifications());
-        }
-    }
-
-    fn emit_event(&mut self, event: NotificationEvent) {
-        log_error!(self.process_event(event));
-        self.notify_changes();
-    }
-
-    fn process_event(&mut self, event: NotificationEvent) -> Result<()> {
+    fn process_event(event: NotificationEvent) -> Result<()> {
         match event {
             NotificationEvent::Added(id) => {
-                let u_notification = self.listener.GetNotification(id)?;
-                self.load_notification(u_notification)?;
+                let u_notification = UserNotificationListener::Current()?.GetNotification(id)?;
+                trace_lock!(NOTIFICATION_MANAGER).load_notification(u_notification)?;
             }
             NotificationEvent::Removed(id) => {
-                self.notifications.retain(|n| n.id != id);
-                self.notifications_ids.retain(|x| *x != id);
+                let mut manager = trace_lock!(NOTIFICATION_MANAGER);
+                manager.notifications.retain(|n| n.id != id);
             }
         }
         Ok(())
-    }
-
-    pub fn on_notifications_change<F>(&mut self, callback: F)
-    where
-        F: Fn(&Vec<AppNotification>) + Send + Sync + 'static,
-    {
-        self.callbacks.push(Box::new(callback));
     }
 
     fn load_notification(&mut self, u_notification: UserNotification) -> Result<()> {
@@ -219,7 +199,6 @@ impl NotificationManager {
             body,
             date: u_notification.CreationTime()?.UniversalTime,
         });
-        self.notifications_ids.push(u_notification.Id()?);
         Ok(())
     }
 }

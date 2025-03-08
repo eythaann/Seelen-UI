@@ -18,6 +18,7 @@ import {
 import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 
+import { AppNotification } from '../../Notifications/domain';
 import { Battery, MediaChannelTransportData, MediaDevice, PowerPlan, PowerStatus, RootState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
@@ -127,6 +128,10 @@ export const Selectors = StateBuilder.compositeSelector(initialState);
 
 // no core things that can be lazy loaded to improve performance
 export async function lazySlice(d: Dispatch) {
+  invoke<AppNotification[]>(SeelenCommand.GetNotifications).then((notifications) =>
+    d(RootActions.setNotifications(notifications)),
+  );
+
   invoke<PowerStatus>(SeelenCommand.GetPowerStatus).then((status) =>
     d(RootActions.setPowerStatus(status)),
   );

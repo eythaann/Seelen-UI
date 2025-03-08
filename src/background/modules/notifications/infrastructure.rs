@@ -1,38 +1,30 @@
-use std::sync::atomic::{AtomicBool, Ordering};
-
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
-use crate::{error_handler::Result, log_error, seelen::get_app_handle, trace_lock};
+use crate::{
+    error_handler::Result, log_error, modules::notifications::application::NotificationManager,
+    seelen::get_app_handle, trace_lock,
+};
 
-use super::application::{AppNotification, NOTIFICATION_MANAGER};
+use super::{application::NOTIFICATION_MANAGER, domain::AppNotification};
 
-fn emit_notifications(notifications: &Vec<AppNotification>) {
-    get_app_handle()
-        .emit(SeelenEvent::Notifications, notifications)
-        .expect("failed to emit");
-}
-
-static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_notification_events() {
-    let was_registered = REGISTERED.load(Ordering::Acquire);
-    if !was_registered {
-        REGISTERED.store(true, Ordering::Release);
-    }
-    std::thread::spawn(move || {
-        let mut manager = trace_lock!(NOTIFICATION_MANAGER);
-        if !was_registered {
-            log::trace!("Registering notifications events");
-            manager.on_notifications_change(emit_notifications);
-        }
-        emit_notifications(manager.notifications());
+    log_error!(trace_lock!(NOTIFICATION_MANAGER).initialize());
+    NotificationManager::subscribe(|_event| {
+        log_error!(get_app_handle().emit(
+            SeelenEvent::Notifications,
+            trace_lock!(NOTIFICATION_MANAGER).notifications(),
+        ));
     });
 }
 
 pub fn release_notification_events() {
-    if REGISTERED.load(Ordering::Acquire) {
-        log_error!(trace_lock!(NOTIFICATION_MANAGER).release());
-    }
+    log_error!(trace_lock!(NOTIFICATION_MANAGER).release());
+}
+
+#[tauri::command(async)]
+pub fn get_notifications() -> Vec<AppNotification> {
+    trace_lock!(NOTIFICATION_MANAGER).notifications().clone()
 }
 
 #[tauri::command(async)]
