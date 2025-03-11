@@ -129,17 +129,5 @@ pub async fn wlan_connect(ssid: String, password: Option<String>, hidden: bool) 
 
 #[tauri::command(async)]
 pub async fn wlan_disconnect() -> Result<()> {
-    let handle = get_app_handle();
-    let output = handle
-        .shell()
-        .command("netsh")
-        .args(["wlan", "disconnect"])
-        .output()
-        .await?;
-
-    if output.status.success() {
-        Ok(())
-    } else {
-        Err(output.into())
-    }
+    NetworkManager::disconnect_all()
 }

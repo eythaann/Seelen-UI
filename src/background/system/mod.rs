@@ -15,21 +15,23 @@ use crate::{
             register_notification_events, release_notification_events,
         },
         power::infrastructure::{register_power_events, release_power_events},
+        shared::radio::RADIO_MANAGER,
         system_settings::infrastructure::{register_colors_events, release_colors_events},
         tray::infrastructure::register_tray_events,
         user::infrastructure::register_user_events,
     },
     seelen::get_app_handle,
+    trace_lock,
 };
 
 pub fn declare_system_events_handlers() -> Result<()> {
     // avoid binding interfaces to main thread
     std::thread::spawn(move || {
-        let handle = get_app_handle();
+        log_error!(trace_lock!(RADIO_MANAGER).initialize());
 
+        let handle = get_app_handle();
         // todo change this to current implementation pattern
         handle.listen("register-tray-events", move |_| register_tray_events());
-
         // todo change this to current implementation pattern
         handle.listen("register-network-events", move |_| {
             log_error!(register_network_events());

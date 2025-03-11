@@ -92,6 +92,11 @@
   </Applications>
 
   <Capabilities>
+    <Capability Name="userNotificationListener" />
+    <uap:Capability Name="userAccountInformation" />
+    <DeviceCapability Name="radios" />
+    <DeviceCapability Name="bluetooth" />
+    <DeviceCapability Name="wiFiControl" />
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
 </Package>

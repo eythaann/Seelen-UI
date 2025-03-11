@@ -149,7 +149,6 @@ features = [
     "Storage_Streams",                     # required for audio module
     "Win32_Devices_Display",               # required for display (brightness, etc)
     "Win32_Devices_FunctionDiscovery",     # PKEYS for Devices
-    "Devices_Custom",
     "UI_Core",
     "UI_Notifications_Management",         # required for notifications
     "UI_ViewManagement",                   # required for colors UISettings
@@ -159,9 +158,14 @@ features = [
     "Win32_Networking_WinSock",            # required for network manager
     "Win32_Networking_NetworkListManager", # required for network manager // events
     "Win32_NetworkManagement_WiFi",        # required for network manager // wifi
-    "Devices_Bluetooth",                   # required for bluetooth handling // bluetooth
-    "Devices_Enumeration",                 # required for bluetooth handling // bluetooth
-    "Devices_Radios",                      # required for bluetooth handling // bluetooth
+    "Networking_NetworkOperators",
+    "Networking_Connectivity",
+    "Security_Credentials",
+    "Devices_Custom",
+    "Devices_Bluetooth",                   # required for bluetooth handling
+    "Devices_Enumeration",                 # required for bluetooth handling
+    "Devices_Radios",                      # required for bluetooth/wifi/mobile etc any radio
+    "Devices_WiFi",                        # required for wifi
 ]
 
 [features]

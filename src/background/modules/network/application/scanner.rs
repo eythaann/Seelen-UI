@@ -59,7 +59,7 @@ impl From<&WLAN_BSS_ENTRY> for WlanBssEntry {
 static SCANNING: AtomicBool = AtomicBool::new(false);
 
 impl NetworkManager {
-    fn open_wlan() -> Result<HANDLE> {
+    pub fn open_wlan() -> Result<HANDLE> {
         let mut client_handle = HANDLE::default();
         let mut negotiated_version = 0;
 
@@ -170,7 +170,7 @@ impl NetworkManager {
         Ok(())
     }
 
-    fn get_wlan_interfaces(client_handle: HANDLE) -> Result<Vec<WLAN_INTERFACE_INFO>> {
+    pub fn get_wlan_interfaces(client_handle: HANDLE) -> Result<Vec<WLAN_INTERFACE_INFO>> {
         unsafe {
             let mut interface_list_ptr: *mut WLAN_INTERFACE_INFO_LIST = std::ptr::null_mut();
             let result = WlanEnumInterfaces(client_handle, None, &mut interface_list_ptr);

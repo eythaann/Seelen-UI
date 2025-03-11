@@ -1,4 +1,5 @@
 pub mod scanner;
+pub mod v2;
 
 use std::{
     env::temp_dir,
@@ -7,9 +8,12 @@ use std::{
 
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::{
-    NetworkManagement::IpHelper::{
-        GetAdaptersAddresses, GAA_FLAG_INCLUDE_GATEWAYS, GAA_FLAG_INCLUDE_PREFIX,
-        IP_ADAPTER_ADDRESSES_LH,
+    NetworkManagement::{
+        IpHelper::{
+            GetAdaptersAddresses, GAA_FLAG_INCLUDE_GATEWAYS, GAA_FLAG_INCLUDE_PREFIX,
+            IP_ADAPTER_ADDRESSES_LH,
+        },
+        WiFi::WlanDisconnect,
     },
     Networking::{
         NetworkListManager::{
@@ -49,6 +53,58 @@ impl NetworkAdapter {
 pub struct NetworkManager {}
 
 impl NetworkManager {
+    /* fn dot11_ssid_from_string(ssid: &str) -> Result<DOT11_SSID> {
+        if ssid.len() > 32 {
+            return Err("SSID too long (max 32 bytes)".into());
+        }
+        // Convert the &str to a byte array
+        let mut ssid_bytes = [0u8; 32];
+        let ssid_slice = ssid.as_bytes();
+        let len = ssid_slice.len();
+        ssid_bytes[..len].copy_from_slice(ssid_slice);
+        Ok(DOT11_SSID {
+            uSSIDLength: len as u32,
+            ucSSID: ssid_bytes,
+        })
+    } */
+
+    /* pub fn connect(entry: &WlanBssEntry) -> Result<()> {
+        let profile = WindowsString::from(entry.ssid.unwrap_or_default());
+        let mut ssid = Self::dot11_ssid_from_string(&entry.ssid.unwrap_or_default())?;
+
+        let client_handle = Self::open_wlan()?;
+
+        let attributes = WLAN_CONNECTION_PARAMETERS {
+            wlanConnectionMode: wlan_connection_mode_auto,
+            strProfile: profile.as_pcwstr(),
+            pDot11Ssid: &mut ssid,
+
+            ..Default::default()
+        };
+
+        for interface in Self::get_wlan_interfaces(client_handle)? {
+            unsafe {
+                let result =
+                    WlanConnect(client_handle, &interface.InterfaceGuid, &attributes, None);
+                if result == 0 {
+                    break;
+                }
+            }
+        }
+
+        Ok(())
+    } */
+
+    pub fn disconnect_all() -> Result<()> {
+        let client_handle = Self::open_wlan()?;
+        for interface in Self::get_wlan_interfaces(client_handle)? {
+            unsafe {
+                WlanDisconnect(client_handle, &interface.InterfaceGuid, None);
+            }
+        }
+        Ok(())
+    }
+
     pub fn get_adapters() -> Result<Vec<NetworkAdapter>> {
         let adapters = unsafe {
             let family = AF_UNSPEC.0 as u32;

@@ -3,9 +3,12 @@ pub mod types;
 use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 use types::InterfaceType;
-use windows::Win32::{
-    NetworkManagement::{IpHelper::IP_ADAPTER_ADDRESSES_LH, Ndis::IfOperStatusUp},
-    Networking::WinSock::{inet_ntop, AF_INET, AF_INET6, SOCKADDR_IN, SOCKADDR_IN6},
+use windows::{
+    Networking::NetworkOperators::TetheringOperationalState,
+    Win32::{
+        NetworkManagement::{IpHelper::IP_ADAPTER_ADDRESSES_LH, Ndis::IfOperStatusUp},
+        Networking::WinSock::{inet_ntop, AF_INET, AF_INET6, SOCKADDR_IN, SOCKADDR_IN6},
+    },
 };
 
 use crate::error_handler::{AppError, Result};
@@ -172,4 +175,36 @@ pub struct WlanBssEntry {
     pub connected: bool,
     /// true if the interface is connected to this network and is using this channel frequency
     pub connected_channel: bool,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Hotspot {
+    pub clients: u32,
+    pub max_clients: u32,
+    pub state: HotspotState,
+    pub ssid: Option<String>,
+    pub passphrase: Option<String>,
+    pub band: String,
+    pub encryption: String,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum HotspotState {
+    Unknown,
+    On,
+    Off,
+    InTransition,
+}
+
+impl From<TetheringOperationalState> for HotspotState {
+    fn from(state: TetheringOperationalState) -> Self {
+        match state {
+            TetheringOperationalState::On => HotspotState::On,
+            TetheringOperationalState::Off => HotspotState::Off,
+            TetheringOperationalState::InTransition => HotspotState::InTransition,
+            _ => HotspotState::Unknown,
+        }
+    }
 }
