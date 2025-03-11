@@ -1,15 +1,15 @@
 context_menu:
   add_module: Добавить модуль
   remove: Удалить модуль
-  reorder_disable: Блокировка панели инструментов
-  reorder_enable: Разблокировать панель инструментов
+  reorder_disable: Заблокировать панели
+  reorder_enable: Разблокировать панель
   settings: Настройки
   task_manager: Диспетчер задач
 keyboard:
   more: Другие настройки клавиатуры
   title: Раскладка клавиатуры
 media:
-  default_multimedia_volume: Объем мультимедиа
+  default_multimedia_volume: Громкость устройств мультимедиа
   device:
     channel:
       system: Системные звуки
@@ -18,7 +18,7 @@ media:
     mixer: Микшер громкости
     multimedia: Мультимедиа
     settings: Другие настройки устройства
-    volume: Объем устройства
+    volume: Громкость устройства
   input_devices: Устройства ввода
   output_devices: Устройства вывода
   players: Медиаплееры
