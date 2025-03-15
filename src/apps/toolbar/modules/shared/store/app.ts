@@ -142,7 +142,6 @@ export async function lazySlice(d: Dispatch) {
 
   invoke<[MediaDevice[], MediaDevice[]]>(SeelenCommand.GetMediaDevices).then(
     ([inputs, outputs]) => {
-      console.log({ inputs, outputs });
       d(RootActions.setMediaInputs(inputs));
       d(RootActions.setMediaOutputs(outputs));
     },

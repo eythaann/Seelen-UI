@@ -4952,6 +4952,7 @@ dependencies = [
  "tauri-plugin-process",
  "tauri-plugin-shell",
  "tauri-plugin-updater",
+ "url",
  "uuid",
  "widestring",
  "win-screenshot",

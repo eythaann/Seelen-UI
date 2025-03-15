@@ -6,10 +6,6 @@ pub mod updater;
 pub mod virtual_desktop;
 mod winver;
 
-use winreg::{
-    enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, KEY_ALL_ACCESS},
-    RegKey,
-};
 pub use winver::*;
 
 use std::{
@@ -200,17 +196,13 @@ pub fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> Result<()> 
     Ok(())
 }
 
+/// intended to work as converFileToSrc in JS side using tauri library
 #[allow(dead_code)]
-pub fn open_machine_enviroment() -> Result<RegKey> {
-    let hkcr = RegKey::predef(HKEY_LOCAL_MACHINE);
-    let enviroment =
-        hkcr.open_subkey(r"SYSTEM\CurrentControlSet\Control\Session Manager\Environment")?;
-    Ok(enviroment)
-}
-
-#[allow(dead_code)]
-pub fn open_user_enviroment() -> Result<RegKey> {
-    let hkcr = RegKey::predef(HKEY_CURRENT_USER);
-    let enviroment = hkcr.open_subkey_with_flags("Environment", KEY_ALL_ACCESS)?;
-    Ok(enviroment)
+pub fn convert_file_to_src(path: &str) -> String {
+    #[cfg(any(windows, target_os = "android"))]
+    let base = "http://asset.localhost/";
+    #[cfg(not(any(windows, target_os = "android")))]
+    let base = "asset://localhost/";
+    let encoded: String = url::form_urlencoded::byte_serialize(path.as_bytes()).collect();
+    format!("{base}{encoded}")
 }

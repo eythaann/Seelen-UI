@@ -1,4 +1,4 @@
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{handlers::SeelenEvent, system_state::AppNotification};
 use tauri::Emitter;
 
 use crate::{
@@ -6,7 +6,7 @@ use crate::{
     seelen::get_app_handle, trace_lock,
 };
 
-use super::{application::NOTIFICATION_MANAGER, domain::AppNotification};
+use super::application::NOTIFICATION_MANAGER;
 
 pub fn register_notification_events() {
     log_error!(trace_lock!(NOTIFICATION_MANAGER).initialize());

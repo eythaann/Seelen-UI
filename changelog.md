@@ -11,6 +11,7 @@
 - add dynamic color by focused app on toolbar.
 - add hibernate button on toolbar power menu.
 - add media volume mixer by apps and by device.
+- add clickable notifications, images, and more.
 
 ### enhancements
 - settings shown each time on startup.
