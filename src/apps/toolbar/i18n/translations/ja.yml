@@ -1,33 +1,33 @@
 context_menu:
-  add_module: モジュールを追加します
-  remove: モジュールを削除します
-  reorder_disable: ツールバーのロック
+  add_module: モジュールを追加
+  remove: モジュールを削除
+  reorder_disable: ツールバーをロック
   reorder_enable: ツールバーのロック解除
-  settings: 設定
+  settings: SeelenUIの設定
   task_manager: タスクマネージャー
 keyboard:
   more: その他のキーボード設定
   title: キーボードレイアウト
 media:
-  default_multimedia_volume: マルチメディア・ボリューム
+  default_multimedia_volume: デフォルトの音量
   device:
     channel:
-      system: システム音
+      system: システム音量
     comunications: コミュニケーション
-    missing: 欠落しているデバイス
-    mixer: ボリューム・ミキサー
-    multimedia: マルチメディア
-    settings: その他のデバイス設定
-    volume: デバイス・ボリューム
-  input_devices: 入力装置
-  output_devices: 出力機器
+    missing: デバイスが見つかりません
+    mixer: ミキサー
+    multimedia: マルチメディアの音量
+    settings: その他のデバイスの設定
+    volume: デバイスの音量
+  input_devices: 入力デバイス
+  output_devices: 出力デバイス
   players: メディアプレーヤー
 network:
   available: 利用可能なネットワーク
   connect: 接続
-  connected: に接続されています
+  connected: 接続されています
   disconnect: 切断
-  hidden: 隠れたネットワーク
+  hidden: 非表示のネットワーク
   more: 詳しい設定
   not_found: ネットワークが見つかりません
   placeholder:
@@ -39,21 +39,21 @@ notifications:
   clear: すべてクリア
   empty: 通知なし
   settings: その他の通知設定
-  title: お知らせ
+  title: 通知
 placeholder:
-  battery_remaining: ％ 残り
+  battery_remaining: ％
   bluetooth_devices: Bluetoothとデバイス
-  ethernet_connected: インターネットアクセス
-  ethernet_disconnected: インターネットアクセスなし
+  ethernet_connected: 接続されています
+  ethernet_disconnected: 接続されていません
   notifications: 通知
-  open_system_tray: システムトレイを開く
+  open_system_tray: システムトレイ
   settings: SeelenUIの設定
-  smart_charge: '- スマートチャージ'
+  smart_charge: '- スマートチャージが有効'
   volume: 音量
 settings:
   app_settings: SeelenUIの設定
   brightness: 明るさ
-  hibernate: ハイバーネート
+  hibernate: 休止状態
   lock: ロック
   log_out: ログアウト
   power: 電源
@@ -63,23 +63,23 @@ settings:
   title: 設定
 unlabelled_tray: ラベル無し
 userhome:
-  empty_list: 商品なし
+  empty_list: アイテムがありません
   folders:
     desktop: デスクトップ
-    documents: 資料
+    documents: ドキュメント
     downloads: ダウンロード
-    more_items: もっと見る...
-    music: 音楽
-    pictures: 写真
+    more_items: もっと見る…
+    music: ミュージック
+    pictures: ピクチャ
     recent: 最近使用されたもの
     reduce_items: もっと見る
-    title: ユーザー・ディレクトリ
+    title: フォルダ
     videos: ビデオ
   profile:
-    accounts: 口座開設の設定
-    open_onedrive: OneDriveのディレクトリを開く
-    open_user_folder: ユーザーディレクトリを開く
+    accounts: アカウント設定
+    open_onedrive: OneDriveのフォルダを開く
+    open_user_folder: ユーザーフォルダを開く
   seelen_options:
     open_installation_folder: Seelenの設定フォルダを開く
     open_log_folder: Seelenのログフォルダを開く
-    title: セレンのディレクトリ
+    title: Seelenのフォルダ

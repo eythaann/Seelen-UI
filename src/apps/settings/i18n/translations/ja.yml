@@ -1,13 +1,13 @@
 app_launcher:
   enable: アプリランチャーを有効にする
   launch_on:
-    mouse_over: マウスオーバー
-    primary: 主要な
+    mouse_over: マウスのあるモニター
+    primary: プライマリモニター
   monitor: 表示するモニター
   runners:
     cmd: コマンド プロンプト
     explorer: エクスプローラー
-    label: ランチャー
+    label: アプリ
 apps_configurations:
   app:
     bindings: バインディング（両方のオプションが必要です）

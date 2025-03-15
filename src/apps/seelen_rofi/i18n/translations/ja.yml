@@ -5,7 +5,7 @@ app_launcher:
 footer:
   shortcuts: ショートカットを表示
 header:
-  search: アプリ、コマンド、またはパス
+  search: 検索…
 item:
   open_location: ファイルの場所を開く
   pin: ドックにピン留め

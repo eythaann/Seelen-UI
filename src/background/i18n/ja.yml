@@ -1,14 +1,14 @@
 runtime:
-  download: ダウンロードページへ行く
+  download: ダウンロードページを開く
   not_found: WebView2 ランタイムが見つかりません
   not_found_description: Seelen UI には Webview2 ランタイムが必要です。インストールしてください。
-  outdated: WebView2 ランタイムが古い
+  outdated: WebView2 ランタイムが古いです
   outdated_description: Seelen UI には、Webview2 ランタイム %{min_version} 以降が必要です。更新してください。
 service:
   not_running: Seelen UI サービスが実行されていません
   not_running_description: Seelen UI サービス (slu-service) は、アプリが適切に動作するための依存関係/ヘルパーです。
-  not_running_ok: サービス開始
+  not_running_ok: サービスを開始する
 tray:
-  quit: やめる
-  restart: UIを再起動する
-  settings: 設定
+  quit: SeelenUIを終了
+  restart: SeelenUIを再起動
+  settings: SeelenUIの設定
