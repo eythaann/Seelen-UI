@@ -94,9 +94,9 @@
   <Capabilities>
     <uap:Capability Name="userAccountInformation" />
     <uap3:Capability Name="userNotificationListener" />
+    <rescap:Capability Name="runFullTrust" />
     <DeviceCapability Name="radios" />
     <DeviceCapability Name="bluetooth" />
     <DeviceCapability Name="wiFiControl" />
-    <rescap:Capability Name="runFullTrust" />
   </Capabilities>
 </Package>
