@@ -1,9 +1,9 @@
 app_menu:
   close: 閉じる
-  close_multiple: すべてを閉じる
+  close_multiple: すべて閉じる
   copy_handles: ハンドルをコピー
-  kill: プロセスを強制終了する
-  kill_multiple: すべてのプロセスを強制終了する
+  kill: プロセスを強制終了
+  kill_multiple: すべてのプロセスを強制終了
   open_file_location: ファイルの場所を開く
   pin: ピン留め
   pin_to_center: 中央にピン留め
@@ -12,10 +12,10 @@ app_menu:
   run_as: 管理者として実行
   unpin: ピン留めを解除
 context_menu:
-  reorder_disable: タスクバーをロックする
+  reorder_disable: タスクバーをロック
   reorder_enable: タスクバーのロック解除
 media:
-  not_playing: 何も遊んでいません
+  not_playing: 何も再生されていません
 media_menu:
   remove: メディアモジュールを削除
 start_menu:
