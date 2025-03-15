@@ -37,9 +37,9 @@ export function BluetoothSelectorEntry(props: {
     setConfirmationPhase(false);
   }, [selected]);
 
-  const onAction = async (device: BluetoothDevice, accept?: boolean) => {
+  const onAction = async (accept: boolean) => {
     setLoading(true);
-    if (confirmationPhase && accept !== undefined) {
+    if (confirmationPhase) {
       try {
         await BluetoothDevices.confirmPair(accept, passphrase);
       } catch {
@@ -48,26 +48,28 @@ export function BluetoothSelectorEntry(props: {
         setLoading(false);
         setConfirmationPhase(false);
       }
-    } else {
-      if (device.paired) {
-        try {
-          await BluetoothDevices.forgetDevice(device.id);
-        } catch {
-          setShowErrors(true);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        try {
-          setUnsubscribtion(await BluetoothDevices.onPairRequest(onPairRequest));
-          //TODO(Eythaan): from here I can not test the process. It should send this event to the UI, but it not arrives!
-          await BluetoothDevices.pairDevice(device.address);
-        } catch {
-          setShowErrors(true);
-        } finally {
-          setLoading(false);
-        }
+      return;
+    }
+
+    if (device.paired) {
+      try {
+        await BluetoothDevices.forgetDevice(device.id);
+      } catch {
+        setShowErrors(true);
+      } finally {
+        setLoading(false);
       }
+      return;
+    }
+
+    try {
+      setUnsubscribtion(await BluetoothDevices.onPairRequest(onPairRequest));
+      //TODO(Eythaan): from here I can not test the process. It should send this event to the UI, but it not arrives!
+      await BluetoothDevices.pairDevice(device.address);
+    } catch {
+      setShowErrors(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,60 +95,68 @@ export function BluetoothSelectorEntry(props: {
   return (
     <div
       key={device.id}
-      className={cx('wlan-entry', {
-        'wlan-entry-selected': selected,
+      className={cx('bluethooth-entry', {
+        'bluethooth-entry-selected': selected,
       })}
       onClick={onClick}
     >
-      <div className="wlan-entry-info">
-        <Icon iconName={device.connected ? 'TbBluetoothConnected' : 'TbBluetooth' } size={20} />
-        <span className="wlan-entry-info-ssid">{device.name}</span>
-        <Tooltip title={`${device.majorClass} \\ ${device.minorSubClass == 'Uncategorized' ? device.minorMainClass : `${device.minorMainClass}, ${device.minorSubClass}`}`}>
+      <div className="bluethooth-entry-info">
+        <Icon iconName={device.connected ? 'TbBluetoothConnected' : 'TbBluetooth'} size={20} />
+        <span className="bluethooth-entry-info-label">{device.name}</span>
+        <Tooltip
+          title={`${device.majorClass} \\ ${
+            device.minorSubClass == 'Uncategorized'
+              ? device.minorMainClass
+              : `${device.minorMainClass}, ${device.minorSubClass}`
+          }`}
+        >
           {device.iconPath ? (
             <img className="bluetooth-entry-info-img" src={convertFileSrc(device.iconPath)} />
           ) : (
             <MissingIcon />
           )}
         </Tooltip>
-        { device.isBluetoothLoweenergy &&
+        {device.isBluetoothLoweenergy && (
           <Tooltip title={t('bluetooth.lowenergy')}>
             <Icon iconName="MdOutlineEnergySavingsLeaf" size={20} />
           </Tooltip>
-        }
+        )}
       </div>
+
       {showFields && (
-        <form className="wlan-entry-fields">
+        <form className="bluethooth-entry-fields">
           <Input
             type="text"
             placeholder={t('bluetooth.placeholder.passphrase')}
             value={passphrase}
             status={showErrors ? 'error' : undefined}
             onChange={(e) => setPassphrase(e.target.value)}
-            onPressEnter={() => onAction(device, confirmationPhase ? true : undefined)}
+            onPressEnter={() => onAction(true)}
             autoFocus={showFields}
           />
         </form>
       )}
+
       {selected && (
-        <div className="wlan-entry-actions">
+        <div className="bluethooth-entry-actions">
           <Button
             type={device.paired ? 'default' : 'primary'}
-            onClick={() => onAction(device, confirmationPhase ? true : undefined)}
+            onClick={() => onAction(true)}
             loading={loading}
             disabled={loading}
           >
             {device.paired ? t('bluetooth.forget') : t('bluetooth.pair')}
           </Button>
-          { confirmationPhase &&
+          {confirmationPhase && (
             <Button
               type="default"
-              onClick={() => onAction(device, false)}
+              onClick={() => onAction(false)}
               loading={loading}
               disabled={loading}
             >
               {t('bluetooth.cancel')}
             </Button>
-          }
+          )}
         </div>
       )}
     </div>

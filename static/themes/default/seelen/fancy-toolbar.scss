@@ -1,3 +1,7 @@
+:root {
+  --popups-margin: 4px;
+}
+
 @keyframes leftToRight {
   0%,
   25% {
@@ -58,6 +62,25 @@
   line-height: 1.2em;
   font-weight: 600;
   color: var(--color-gray-600);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%popup {
+  @extend %list;
+  gap: 10px;
+  margin: var(--popups-margin);
+  width: 300px;
+  max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
+  padding: 10px;
+  box-shadow: 0 0 10px 10px #0001;
+  border-radius: 10px;
+
+  .bg-layer-1 {
+    background-color: var(--color-gray-50);
+    border-radius: 10px;
+  }
 }
 
 .chevron {
@@ -67,21 +90,7 @@
   }
 }
 
-#root,
-.fast-settings,
-.tray,
-.wlan-selector,
-.media-control,
-.notifications,
-.notification-arrival,
-.calendar-container,
-.userhome,
-.userhome-quicksettings {
-  font-size: 0.8rem;
-  font-weight: 500;
-
-  --popups-margin: 4px;
-
+* {
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -99,6 +108,11 @@
   ::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-gray-500);
   }
+}
+
+#root {
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 @keyframes PopupBaseAnimation {
@@ -302,84 +316,71 @@
 }
 
 .wlan-selector {
-  margin: var(--popups-margin);
-  width: 260px;
-  box-shadow: 0 0 10px 10px #0001;
-  display: flex;
-  flex-direction: column;
-
-  .wlan-selector-bg-layer-1 {
-    background-color: var(--color-gray-50);
-    border-radius: 10px;
-  }
+  @extend %popup;
 
   .wlan-selector-title {
-    font-size: 0.8rem;
-    color: var(--color-gray-600);
-    font-weight: 600;
-    padding: 8px 14px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @extend %section-title;
   }
 
   .wlan-selector-refresh {
-    animation: rotate 1s linear infinite;
-  }
-}
-
-.wlan-selector-entries {
-  padding: 8px;
-  overflow-y: auto;
-  border-bottom: 1px solid var(--color-gray-300);
-  max-height: 30vh;
-
-  .wlan-selector-empty {
-    font-style: italic;
-  }
-}
-
-.wlan-entry {
-  min-height: min-content;
-  padding: 12px 10px;
-  border-radius: 8px;
-  gap: 10px;
-
-  &:hover {
-    background-color: var(--color-gray-200);
-  }
-
-  &.wlan-entry-selected {
-    background-color: rgba(var(--config-accent-color-rgb), 0.2);
-  }
-}
-
-.wlan-entry-info {
-  font-weight: 600;
-  gap: 8px;
-
-  .wlan-entry-info-ssid {
-    flex: 1;
-    color: var(--color-gray-800);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  .wlan-entry-info-channel {
-    font-size: 0.5rem;
-    color: var(--color-gray-600);
-    border: 1px solid var(--color-gray-600);
-    border-radius: 4px;
-    padding: 2px 4px;
-  }
-}
-
-.wlan-selector-footer {
-  padding: 8px;
-
-  .wlan-selector-footer-button {
     @extend %actionable-button;
+    .slu-icon {
+      color: var(--color-gray-900);
+      animation: rotate 1s linear infinite;
+    }
+  }
+
+  .wlan-selector-entries {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-gray-300);
+    overflow-y: auto;
+    max-height: 30vh;
+
+    .wlan-selector-empty {
+      font-style: italic;
+    }
+
+    .wlan-entry {
+      min-height: min-content;
+      padding: 12px 10px;
+      border-radius: 8px;
+      gap: 10px;
+
+      &:hover {
+        background-color: var(--color-gray-200);
+      }
+
+      &.wlan-entry-selected {
+        background-color: rgba(var(--config-accent-color-rgb), 0.2);
+      }
+
+      .wlan-entry-info {
+        font-weight: 600;
+        gap: 8px;
+
+        .wlan-entry-info-ssid {
+          flex: 1;
+          color: var(--color-gray-800);
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .wlan-entry-info-channel {
+          font-size: 0.5rem;
+          color: var(--color-gray-600);
+          border: 1px solid var(--color-gray-600);
+          border-radius: 4px;
+          padding: 2px 4px;
+        }
+      }
+    }
+  }
+
+  .wlan-selector-footer {
+    .wlan-selector-footer-button {
+      @extend %actionable-button;
+    }
   }
 }
 
@@ -585,16 +586,7 @@
 }
 
 .notifications {
-  @extend %list;
-  margin: var(--popups-margin);
-  width: 350px;
-  padding: 10px;
-  max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
-
-  .bg-layer-1 {
-    background-color: var(--color-gray-50);
-    border-radius: 12px;
-  }
+  @extend %popup;
 
   .notifications-header {
     display: flex;
@@ -665,7 +657,7 @@
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.4);
   padding: 10px;
   transition: scale 0.1s ease-in-out;
-  
+
   &:active:not(:has(.notification-header-close:active, .notification-action:active)) {
     scale: 0.9;
   }
@@ -983,18 +975,7 @@
 }
 
 .keyboard-selector {
-  @extend %list;
-  margin: var(--popups-margin);
-  width: 300px;
-  padding: 10px;
-  box-shadow: 0 0 10px 10px #0001;
-  gap: 10px;
-  border-radius: 10px;
-
-  .bg-layer-1 {
-    background-color: var(--color-gray-50);
-    border-radius: 10px;
-  }
+  @extend %popup;
 
   .keyboard-selector-header {
     @extend %section-title;
@@ -1038,6 +1019,84 @@
 
   .keyboard-selector-footer {
     .keyboard-selector-footer-button {
+      @extend %actionable-button;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-gray-600);
+    }
+  }
+}
+
+.bluethooth {
+  @extend %popup;
+
+  .bluethooth-title {
+    @extend %section-title;
+
+    .bluethooth-refresh {
+      @extend %actionable-button;
+      .slu-icon {
+        color: var(--color-gray-900);
+        animation: rotate 1s linear infinite;
+      }
+    }
+  }
+
+  .bluethooth-entries {
+    @extend %list;
+    border-bottom: 1px solid var(--color-gray-300);
+    padding-bottom: 10px;
+    overflow-y: auto;
+    max-height: 30vh;
+
+    .bluethooth-entry {
+      @extend %list;
+      align-items: flex-end;
+      padding: 12px 10px;
+      border-radius: 8px;
+      gap: 10px;
+
+      &:hover {
+        background-color: var(--color-gray-200);
+      }
+
+      &.bluethooth-entry-selected {
+        background-color: rgba(var(--config-accent-color-rgb), 0.2);
+      }
+
+      .bluethooth-entry-info {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .bluethooth-entry-info-label {
+          @extend %overflowable-text;
+          flex: 1;
+        }
+
+        .bluetooth-entry-info-img {
+          height: 1rem;
+          width: 1rem;
+          object-fit: contain;
+          filter: invert(1);
+
+          @media (prefers-color-scheme: dark) {
+            filter: invert(0);
+          }
+        }
+      }
+    }
+
+    .bluethooth-empty {
+      @extend %flex-centered;
+      height: 200px;
+      font-style: italic;
+    }
+  }
+
+  .bluethooth-footer {
+    .bluethooth-footer-more-button {
       @extend %actionable-button;
       font-size: 0.8rem;
       font-weight: 600;

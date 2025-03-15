@@ -1,6 +1,6 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
-import { Button, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -96,9 +96,9 @@ function WlanSelector({ open }: { open: boolean }) {
       <div className="wlan-selector-title">
         <span>{t('network.available')}</span>
         <Tooltip title={t('network.scanning')}>
-          <Button type="text" size="small">
-            <Icon iconName="TfiReload" className="wlan-selector-refresh" size={12} />
-          </Button>
+          <button className="wlan-selector-refresh">
+            <Icon iconName="TfiReload" size={12} />
+          </button>
         </Tooltip>
       </div>
       <div className="wlan-selector-entries">
@@ -127,7 +127,10 @@ function WlanSelector({ open }: { open: boolean }) {
       </div>
 
       <div className="wlan-selector-footer">
-        <button className="wlan-selector-footer-button" onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:network' })}>
+        <button
+          className="wlan-selector-footer-button"
+          onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:network' })}
+        >
           {t('network.more')}
         </button>
       </div>
