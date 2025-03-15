@@ -92,8 +92,8 @@
   </Applications>
 
   <Capabilities>
-    <Capability Name="userNotificationListener" />
     <uap:Capability Name="userAccountInformation" />
+    <uap3:Capability Name="userNotificationListener" />
     <DeviceCapability Name="radios" />
     <DeviceCapability Name="bluetooth" />
     <DeviceCapability Name="wiFiControl" />

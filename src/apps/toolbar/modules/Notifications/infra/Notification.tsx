@@ -137,10 +137,9 @@ export function Notification({ notification }: Props) {
             {actions.map((entry, index) => {
               if ('action' in entry) {
                 return (
-                  <Tooltip title={entry.action['@hint-toolTip']}>
+                  <Tooltip key={index} title={entry.action['@hint-toolTip']}>
                     <button
                       className="notification-action"
-                      key={index}
                       onClick={(e) => {
                         e.stopPropagation();
                         if (entry.action['@activationType'] === 'Protocol') {
