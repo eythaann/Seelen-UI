@@ -239,7 +239,6 @@ toolbar:
   label: Bariau
   placeholder: {}
   show_hibernate: Dangos botwm gaeafgysgu ar y ddewislen pŵer
-  use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
 update:
   available: Diweddariad ar gael!
   channel: Diweddaru Sianel
@@ -294,7 +293,6 @@ weg:
     full_width: Lled sgrin lawn
     min_content: Bach ag y gall fod
   padding: Padin
-  use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
   width: Lled
 wm:
   author: Awduron

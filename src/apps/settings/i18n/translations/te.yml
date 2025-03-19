@@ -239,7 +239,6 @@ toolbar:
   label: టూల్‌బార్
   placeholder: {}
   show_hibernate: పవర్ మెనులో హైబర్నేట్ బటన్‌ను చూపించు
-  use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
 update:
   available: నవీకరణ అందుబాటులో ఉంది!
   channel: ఛానెల్‌ను నవీకరించండి
@@ -292,7 +291,6 @@ weg:
     full_width: పూర్తి స్క్రీన్ వెడల్పు
     min_content: వీలైనంత చిన్నది
   padding: పాడింగ్
-  use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
   width: వెడల్పు
 wm:
   author: రచయిత

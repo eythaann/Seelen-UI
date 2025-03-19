@@ -237,7 +237,6 @@ toolbar:
   label: Панель інструментів
   placeholder: {}
   show_hibernate: Показати кнопку переходу в сплячий режим у меню живлення
-  use_multiple_monitor_overlap_logic: Використовувати логіку специфічну до монітора замість однофокусної
 update:
   available: Доступне оновлення!
   channel: Канал оновлення
@@ -292,7 +291,6 @@ weg:
     full_width: На всю ширину екрана
     min_content: Якнайменший
   padding: Внутрішній відступ
-  use_multiple_monitor_overlap_logic: Використовувати логіку специфічну до монітора замість однофокусної
   width: Ширина
 wm:
   author: Автор

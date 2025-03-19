@@ -239,7 +239,6 @@ toolbar:
   label: Pasek narzędzi
   placeholder: {}
   show_hibernate: Wyświetlanie przycisku hibernacji w menu zasilania
-  use_multiple_monitor_overlap_logic: Użyj logiki specyficznej dla wyświetlacza zamiast logiki pojedynczego fokusu
 update:
   available: Aktualizacja dostępna!
   channel: Kanał aktualizacji
@@ -294,7 +293,6 @@ weg:
     full_width: Pełna szerokość ekranu
     min_content: Mały, jak to tylko możliwe
   padding: Wyściółka
-  use_multiple_monitor_overlap_logic: Użyj logiki specyficznej dla wyświetlacza zamiast logiki pojedynczego fokusu
   width: Szerokość
 wm:
   author: Autor

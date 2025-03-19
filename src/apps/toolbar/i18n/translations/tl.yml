@@ -1,3 +1,16 @@
+bluetooth:
+  available: Mga magagamit na aparato (hindi ipinares)
+  cancel: Kanselahin
+  connected: Mga konektadong aparato
+  forget: Kalimutan
+  lowenergy: Mababang enerhiya
+  more: Marami pang mga setting ng Bluetooth
+  not_found: Walang nahanap na mga aparato ng Bluetooth
+  pair: Pares
+  paired: Nai -save na mga aparato
+  placeholder:
+    passphrase: Passphrase, code o pin
+  scanning: Pag -scan para sa mga aparato
 context_menu:
   add_module: Magdagdag ng module
   remove: Alisin ang module

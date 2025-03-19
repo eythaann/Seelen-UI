@@ -237,7 +237,6 @@ toolbar:
   label: Балтсний хайрцагны хэрэгсэл
   placeholder: {}
   show_hibernate: Power цэс дээр Hibernate товчийг харуул
-  use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
 update:
   available: Шинэчлэх боломжтой!
   channel: Суваг шинэчлэх
@@ -292,7 +291,6 @@ weg:
     full_width: Бүтэн дэлгэцийн өргөн
     min_content: Аль болох жижиг
   padding: Дэвсгэр
-  use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
   width: Өргөн
 wm:
   author: Зохиолч

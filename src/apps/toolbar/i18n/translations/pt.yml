@@ -1,3 +1,16 @@
+bluetooth:
+  available: Dispositivos disponíveis (não emparelhados)
+  cancel: Cancelar
+  connected: Dispositivos conectados
+  forget: Esquecer
+  lowenergy: Baixa energia
+  more: Mais configurações do Bluetooth
+  not_found: Nenhum dispositivo Bluetooth encontrado
+  pair: Par
+  paired: Dispositivos salvos
+  placeholder:
+    passphrase: Senha, código ou pino
+  scanning: Digitalização para dispositivos
 context_menu:
   add_module: Adicione módulo
   remove: Remova o módulo

@@ -241,7 +241,6 @@ toolbar:
   label: Symbolleiste
   placeholder: {}
   show_hibernate: Schaltfläche "Ruhezustand" im Menü "Energie" anzeigen
-  use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
 update:
   available: Update verfügbar!
   channel: Update-Kanal
@@ -296,7 +295,6 @@ weg:
     full_width: Volle Bildschirmbreite
     min_content: So klein wie möglich
   padding: Polsterung
-  use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
   width: Breite
 wm:
   author: Autor

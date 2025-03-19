@@ -1,3 +1,16 @@
+bluetooth:
+  available: Aaladda la heli karo (ma aha mid lammaane)
+  cancel: Burin
+  connected: Aaladda ku xidhan
+  forget: Hilmaamid
+  lowenergy: Tamar hooseeya
+  more: Meelo badan oo Bluetooth ah
+  not_found: Ma jiro aaladaha Bluetooth ee la helay
+  pair: Labo
+  paired: Aaladda badbaadisay
+  placeholder:
+    passphrase: Passphrase, koodh ama PIN
+  scanning: Iskaanka aaladaha
 context_menu:
   add_module: Ku dar module
   remove: Ka saar cutubka

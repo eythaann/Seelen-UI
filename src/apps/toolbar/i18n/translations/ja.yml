@@ -1,3 +1,16 @@
+bluetooth:
+  available: 利用可能なデバイス（ペアリングされていない）
+  cancel: キャンセル
+  connected: コネクテッド・デバイス
+  forget: 忘れる
+  lowenergy: 低エネルギー
+  more: その他のBluetooth設定
+  not_found: Bluetoothデバイスが見つかりません
+  pair: ペア
+  paired: 保存されたデバイス
+  placeholder:
+    passphrase: パスフレーズ、コードまたはPIN
+  scanning: デバイスのスキャン
 context_menu:
   add_module: モジュールを追加
   remove: モジュールを削除

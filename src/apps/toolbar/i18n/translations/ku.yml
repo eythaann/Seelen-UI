@@ -1,3 +1,16 @@
+bluetooth:
+  available: Amûrên berdest (ne paldan)
+  cancel: Bişûndekirin
+  connected: Amûrên girêdayî
+  forget: Jibîrkirin
+  lowenergy: Enerjiya kêm
+  more: Mîhengên bêtir Bluetooth
+  not_found: Amûrên Bluetooth-ê nehat dîtin
+  pair: Cot
+  paired: Amûrên hilanîn
+  placeholder:
+    passphrase: Passphrase, kod an pin
+  scanning: Ji bo amûrên şehîn
 context_menu:
   add_module: Modulê zêde bikin
   remove: Modulê rakirin

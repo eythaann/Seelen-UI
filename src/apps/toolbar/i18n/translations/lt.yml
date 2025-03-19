@@ -1,3 +1,16 @@
+bluetooth:
+  available: Turimi įrenginiai (nesuporuoti)
+  cancel: Atšaukti
+  connected: Prijungti įrenginiai
+  forget: Pamirškite
+  lowenergy: Mažai energijos
+  more: Daugiau "Bluetooth" nustatymų
+  not_found: '"Bluetooth" įrenginių nerasta'
+  pair: Pora
+  paired: Išsaugoti įrenginiai
+  placeholder:
+    passphrase: Slaptažodžių frazė, kodas arba PIN kodas
+  scanning: Įrenginių nuskaitymas
 context_menu:
   add_module: Pridėti modulį
   remove: Pašalinkite modulį

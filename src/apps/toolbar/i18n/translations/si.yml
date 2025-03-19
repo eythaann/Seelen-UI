@@ -1,3 +1,16 @@
+bluetooth:
+  available: ලබා ගත හැකි උපාංග (යුගලනය නොවේ)
+  cancel: අවලංගු කරන්න
+  connected: සම්බන්ධිත උපාංග
+  forget: අමතක කරන්න
+  lowenergy: අඩු ශක්තිය
+  more: වඩා බ්ලූටූත් සැකසුම්
+  not_found: බ්ලූටූත් උපාංග කිසිවක් හමු නොවීය
+  pair: යුගලය
+  paired: සුරකින ලද උපාංග
+  placeholder:
+    passphrase: මුරපදය, කේතය හෝ පින්
+  scanning: උපාංග සඳහා පරිලෝකනය කිරීම
 context_menu:
   add_module: මොඩියුලය එක් කරන්න
   remove: මොඩියුලය ඉවත් කරන්න

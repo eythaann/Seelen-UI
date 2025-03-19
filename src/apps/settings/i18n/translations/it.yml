@@ -237,9 +237,6 @@ toolbar:
   label: Barra
   placeholder: {}
   show_hibernate: Mostra il pulsante di ibernazione nel menu di alimentazione
-  use_multiple_monitor_overlap_logic: >-
-    Utilizza la logica di visualizzazione specifica anziché quella di focus
-    singolo
 update:
   available: Aggiornamento Disponibile!
   channel: Canale di Aggiornamento
@@ -294,9 +291,6 @@ weg:
     full_width: Larghezza dello schermo intero
     min_content: Piccolo quanto può essere
   padding: Spaziatura
-  use_multiple_monitor_overlap_logic: >-
-    Utilizza la logica di visualizzazione specifica anziché quella di focus
-    singolo
   width: Larghezza
 wm:
   author: Autore

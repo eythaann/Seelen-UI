@@ -1,3 +1,16 @@
+bluetooth:
+  available: Dostupná zařízení (nespárovaná)
+  cancel: Zrušit
+  connected: Připojená zařízení
+  forget: Zapomeňte na
+  lowenergy: Nízká spotřeba energie
+  more: Další nastavení Bluetooth
+  not_found: Nebyla nalezena žádná zařízení Bluetooth
+  pair: Pár
+  paired: Uložená zařízení
+  placeholder:
+    passphrase: Fráze, kód nebo PIN
+  scanning: Skenování zařízení
 context_menu:
   add_module: Přidat modul
   remove: Odebrat modul

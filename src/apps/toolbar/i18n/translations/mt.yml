@@ -1,3 +1,16 @@
+bluetooth:
+  available: Apparat disponibbli (mhux imqabbad)
+  cancel: Ikkanċella
+  connected: Apparat konness
+  forget: Tinsa
+  lowenergy: Enerġija baxxa
+  more: Aktar settings Bluetooth
+  not_found: L-ebda apparat Bluetooth ma nstab
+  pair: Par
+  paired: Apparat salvat
+  placeholder:
+    passphrase: Passphrase, kodiċi jew pin
+  scanning: Skennjar għal apparati
 context_menu:
   add_module: Żid il-modulu
   remove: Neħħi l-modulu

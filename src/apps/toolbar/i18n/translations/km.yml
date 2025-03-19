@@ -1,3 +1,16 @@
+bluetooth:
+  available: ឧបករណ៍ដែលអាចប្រើបាន (មិនមានគូ)
+  cancel: លប់ចោល
+  connected: ឧបករណ៍ដែលបានភ្ជាប់
+  forget: ផ្លេច
+  lowenergy: ថាមពលទាប
+  more: ការកំណត់ប៊្លូធូសច្រើនទៀត
+  not_found: រកមិនឃើញឧបករណ៍ប៊្លូធូសទេ
+  pair: មយយកុ
+  paired: ឧបករណ៍ដែលបានរក្សាទុក
+  placeholder:
+    passphrase: ឃ្លាសម្ងាត់កូដឬលេខសម្ងាត់
+  scanning: ស្កេនរកឧបករណ៍
 context_menu:
   add_module: បន្ថែមម៉ូឌុល
   remove: យកម៉ូឌុលចេញ

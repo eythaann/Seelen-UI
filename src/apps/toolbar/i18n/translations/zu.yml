@@ -1,3 +1,16 @@
+bluetooth:
+  available: Amadivayisi atholakalayo (angabhangqwa)
+  cancel: Hlikihla
+  connected: Amadivayisi axhunyiwe
+  forget: Khohlwa
+  lowenergy: Amandla aphansi
+  more: Izilungiselelo eziningi ze-Bluetooth
+  not_found: Awekho amadivaysi e-Bluetooth atholakele
+  pair: Okubili
+  paired: Amadivayisi alondoloziwe
+  placeholder:
+    passphrase: I-Passphase, ikhodi noma iPIN
+  scanning: Ukuskena kwamadivayisi
 context_menu:
   add_module: Engeza imodyuli
   remove: Susa module

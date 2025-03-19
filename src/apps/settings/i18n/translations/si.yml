@@ -238,7 +238,6 @@ toolbar:
   label: මෙවලම් තීරුව
   placeholder: {}
   show_hibernate: බල මෙනුවෙහි ශිශිරතාංක බොත්තම පෙන්වන්න
-  use_multiple_monitor_overlap_logic: තනි නාභිගත තර්කය වෙනුවට සංදර්ශකය විශේෂිත භාවිතා කරන්න
 update:
   available: යාවත්කාලීන කිරීම!
   channel: නාලිකාව යාවත්කාලීන කරන්න
@@ -291,7 +290,6 @@ weg:
     full_width: සම්පූර්ණ තිර පළල
     min_content: හැකි තරම් කුඩා
   padding: පෑඩිං
-  use_multiple_monitor_overlap_logic: තනි නාභිගත තර්කය වෙනුවට සංදර්ශකය විශේෂිත භාවිතා කරන්න
   width: පළල
 wm:
   author: කර්තෘ

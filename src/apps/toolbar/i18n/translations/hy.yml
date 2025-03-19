@@ -1,3 +1,16 @@
+bluetooth:
+  available: Առկա սարքեր (զույգը չեն)
+  cancel: Չեղարկել
+  connected: Միացված սարքեր
+  forget: Մոռանալ
+  lowenergy: Ցածր էներգիա
+  more: Ավելի շատ Bluetooth պարամետրեր
+  not_found: Bluetooth սարքեր չեն գտնվել
+  pair: Զույգ
+  paired: Պահպանված սարքեր
+  placeholder:
+    passphrase: Անհատական, կոդ կամ քորոց
+  scanning: Սարքավորումների սկանավորում
 context_menu:
   add_module: Ավելացնել մոդուլ
   remove: Հեռացրեք մոդուլը

@@ -1,3 +1,16 @@
+bluetooth:
+  available: دستیاب آلات (جوڑا نہیں)
+  cancel: منسوخ کریں
+  connected: منسلک آلات
+  forget: بھول جاؤ
+  lowenergy: کم توانائی
+  more: مزید بلوٹوتھ کی ترتیبات
+  not_found: کوئی بلوٹوتھ ڈیوائس نہیں ملا
+  pair: جوڑی
+  paired: محفوظ شدہ آلات
+  placeholder:
+    passphrase: پاسفریز ، کوڈ یا پن
+  scanning: آلات کے لئے اسکیننگ
 context_menu:
   add_module: ماڈیول شامل کریں
   remove: ماڈیول کو ہٹا دیں

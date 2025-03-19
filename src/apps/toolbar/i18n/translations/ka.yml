@@ -1,3 +1,16 @@
+bluetooth:
+  available: ხელმისაწვდომი მოწყობილობები (არ არის დაწყვილებული)
+  cancel: გაუქმება
+  connected: დაკავშირებული მოწყობილობები
+  forget: დავიწყება
+  lowenergy: დაბალი ენერგია
+  more: მეტი Bluetooth პარამეტრები
+  not_found: Bluetooth მოწყობილობები ვერ მოიძებნა
+  pair: წყვილი
+  paired: შენახული მოწყობილობები
+  placeholder:
+    passphrase: პასფაზის, კოდის ან პინის
+  scanning: მოწყობილობების სკანირება
 context_menu:
   add_module: მოდულის დამატება
   remove: ამოიღეთ მოდული

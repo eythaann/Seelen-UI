@@ -259,7 +259,6 @@ toolbar:
   label: Лента с инструменти
   placeholder: {}
   show_hibernate: Показване на бутона за хибернация в менюто на захранването
-  use_multiple_monitor_overlap_logic: Използвайте специфична за дисплея вместо логика на единичен фокус
 update:
   available: Налична актуализация!
   channel: Канал за актуализиране
@@ -312,7 +311,6 @@ weg:
     full_width: Пълна ширина на екрана
     min_content: Малък, колкото може да бъде
   padding: Подплънки
-  use_multiple_monitor_overlap_logic: Използвайте специфична за дисплея вместо логика на единичен фокус
   width: Ширина
 wm:
   author: Автор

@@ -236,7 +236,6 @@ toolbar:
   label: Tööriistariba
   placeholder: {}
   show_hibernate: Näita hibernatsiooni nuppu toite menüüs
-  use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
 update:
   available: Värskendage saadaval!
   channel: Värskenduskanal
@@ -291,7 +290,6 @@ weg:
     full_width: Täisekraani laius
     min_content: Nii väike kui olla saab
   padding: Polsterdamine
-  use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
   width: Laius
 wm:
   author: Autor

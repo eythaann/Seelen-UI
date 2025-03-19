@@ -95,14 +95,14 @@ export function BluetoothSelectorEntry(props: {
   return (
     <div
       key={device.id}
-      className={cx('bluethooth-entry', {
-        'bluethooth-entry-selected': selected,
+      className={cx('bluetooth-entry', {
+        'bluetooth-entry-selected': selected,
       })}
       onClick={onClick}
     >
-      <div className="bluethooth-entry-info">
+      <div className="bluetooth-entry-info">
         <Icon iconName={device.connected ? 'TbBluetoothConnected' : 'TbBluetooth'} size={20} />
-        <span className="bluethooth-entry-info-label">{device.name}</span>
+        <span className="bluetooth-entry-info-label">{device.name}</span>
         <Tooltip
           title={`${device.majorClass} \\ ${
             device.minorSubClass == 'Uncategorized'
@@ -124,7 +124,7 @@ export function BluetoothSelectorEntry(props: {
       </div>
 
       {showFields && (
-        <form className="bluethooth-entry-fields">
+        <form className="bluetooth-entry-fields">
           <Input
             type="text"
             placeholder={t('bluetooth.placeholder.passphrase')}
@@ -138,7 +138,7 @@ export function BluetoothSelectorEntry(props: {
       )}
 
       {selected && (
-        <div className="bluethooth-entry-actions">
+        <div className="bluetooth-entry-actions">
           <Button
             type={device.paired ? 'default' : 'primary'}
             onClick={() => onAction(true)}

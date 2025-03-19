@@ -1,3 +1,16 @@
+bluetooth:
+  available: Dispozitive disponibile (neperecheate)
+  cancel: Anulează
+  connected: Dispozitive conectate
+  forget: Uită
+  lowenergy: Energie redusă
+  more: Mai multe setări Bluetooth
+  not_found: Nu s-au găsit dispozitive Bluetooth
+  pair: Pereche
+  paired: Dispozitive salvate
+  placeholder:
+    passphrase: Frază de acces, cod sau PIN
+  scanning: Scanarea pentru dispozitive
 context_menu:
   add_module: Adăugați modul
   remove: Scoateți modulul

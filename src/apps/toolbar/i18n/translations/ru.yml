@@ -1,3 +1,16 @@
+bluetooth:
+  available: Доступные устройства (не сопряженные)
+  cancel: Отмена
+  connected: Подключенные устройства
+  forget: Забудьте о
+  lowenergy: Низкая энергия
+  more: Другие настройки Bluetooth
+  not_found: Устройства Bluetooth не найдены
+  pair: Пара
+  paired: Сохраненные устройства
+  placeholder:
+    passphrase: Пароль, код или PIN-код
+  scanning: Сканирование для поиска устройств
 context_menu:
   add_module: Добавить модуль
   remove: Удалить модуль

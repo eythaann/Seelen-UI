@@ -1,3 +1,16 @@
+bluetooth:
+  available: Các thiết bị có sẵn (không được ghép nối)
+  cancel: Hủy bỏ
+  connected: Các thiết bị được kết nối
+  forget: Quên
+  lowenergy: Năng lượng thấp
+  more: Thêm cài đặt Bluetooth
+  not_found: Không tìm thấy thiết bị Bluetooth
+  pair: Đôi
+  paired: Thiết bị lưu
+  placeholder:
+    passphrase: Cụm mật khẩu, mã hoặc pin
+  scanning: Quét cho các thiết bị
 context_menu:
   add_module: Thêm mô -đun
   remove: Xóa mô -đun

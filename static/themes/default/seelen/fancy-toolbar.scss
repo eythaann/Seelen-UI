@@ -1027,13 +1027,13 @@
   }
 }
 
-.bluethooth {
+.bluetooth {
   @extend %popup;
 
-  .bluethooth-title {
+  .bluetooth-title {
     @extend %section-title;
 
-    .bluethooth-refresh {
+    .bluetooth-refresh {
       @extend %actionable-button;
       .slu-icon {
         color: var(--color-gray-900);
@@ -1042,14 +1042,14 @@
     }
   }
 
-  .bluethooth-entries {
+  .bluetooth-entries {
     @extend %list;
     border-bottom: 1px solid var(--color-gray-300);
     padding-bottom: 10px;
     overflow-y: auto;
     max-height: 30vh;
 
-    .bluethooth-entry {
+    .bluetooth-entry {
       @extend %list;
       align-items: flex-end;
       padding: 12px 10px;
@@ -1060,17 +1060,17 @@
         background-color: var(--color-gray-200);
       }
 
-      &.bluethooth-entry-selected {
+      &.bluetooth-entry-selected {
         background-color: rgba(var(--config-accent-color-rgb), 0.2);
       }
 
-      .bluethooth-entry-info {
+      .bluetooth-entry-info {
         width: 100%;
         display: flex;
         align-items: center;
         gap: 8px;
 
-        .bluethooth-entry-info-label {
+        .bluetooth-entry-info-label {
           @extend %overflowable-text;
           flex: 1;
         }
@@ -1088,15 +1088,15 @@
       }
     }
 
-    .bluethooth-empty {
+    .bluetooth-empty {
       @extend %flex-centered;
       height: 200px;
       font-style: italic;
     }
   }
 
-  .bluethooth-footer {
-    .bluethooth-footer-more-button {
+  .bluetooth-footer {
+    .bluetooth-footer-more-button {
       @extend %actionable-button;
       font-size: 0.8rem;
       font-weight: 600;

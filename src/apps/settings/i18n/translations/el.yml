@@ -240,7 +240,6 @@ toolbar:
   label: Γραμμή εργαλείων
   placeholder: {}
   show_hibernate: Εμφάνιση κουμπιού αδρανοποίησης στο μενού λειτουργίας
-  use_multiple_monitor_overlap_logic: Χρησιμοποιήστε συγκεκριμένα την οθόνη αντί για λογική εστίασης
 update:
   available: Διαθέσιμη ενημέρωση!
   channel: Κανάλι ενημέρωσης
@@ -295,7 +294,6 @@ weg:
     full_width: Πλάτος πλήρους οθόνης
     min_content: Όσο μικρό μπορεί να είναι
   padding: Υλικό παραγεμίσματος
-  use_multiple_monitor_overlap_logic: Χρησιμοποιήστε συγκεκριμένα την οθόνη αντί για λογική εστίασης
   width: Πλάτος
 wm:
   author: Συγγραφέας

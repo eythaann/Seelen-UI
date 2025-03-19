@@ -1,3 +1,16 @@
+bluetooth:
+  available: Mavjud qurilmalar (biriktirilmagan)
+  cancel: Bekor qilmoq
+  connected: Ulangan qurilmalar
+  forget: Unutmoq
+  lowenergy: Kam energiya
+  more: Bluetooth sozlamalari
+  not_found: Bluetooth moslamalari topilmadi
+  pair: Juftlik
+  paired: Saqlangan qurilmalar
+  placeholder:
+    passphrase: Passprase, kod yoki PIN
+  scanning: Qurilmalar uchun skanerlash
 context_menu:
   add_module: Modul qo'shing
   remove: Modulni olib tashlash

@@ -239,7 +239,6 @@ toolbar:
   label: Araç Çubuğu
   placeholder: {}
   show_hibernate: Güç menüsünde hazırda beklet düğmesini göster
-  use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
 update:
   available: Güncelleme Mevcut!
   channel: Güncelleme kanalı
@@ -292,7 +291,6 @@ weg:
     full_width: Tam ekran genişliği
     min_content: Olabildiğince küçük
   padding: İç Boşluk
-  use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
   width: Genişlik
 wm:
   author: Yazar

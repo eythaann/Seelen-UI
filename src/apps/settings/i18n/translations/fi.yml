@@ -241,7 +241,6 @@ toolbar:
   label: Työkalurivi
   placeholder: {}
   show_hibernate: Näytä lepotilapainike virtapainikkeessa
-  use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
 update:
   available: Päivitä saatavilla!
   channel: Päivityskanava
@@ -296,7 +295,6 @@ weg:
     full_width: Koko näytön leveys
     min_content: Niin pieni kuin voi olla
   padding: Pehmuste
-  use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
   width: Leveys
 wm:
   author: Kirjoittaja

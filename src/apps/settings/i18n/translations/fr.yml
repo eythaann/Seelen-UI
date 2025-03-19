@@ -239,9 +239,6 @@ toolbar:
   label: Barre d'outils
   placeholder: {}
   show_hibernate: Afficher le bouton d'hibernation dans le menu d'alimentation
-  use_multiple_monitor_overlap_logic: >-
-    Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au
-    point unique
 update:
   available: Mise à jour disponible!
   channel: Mettre à jour le canal
@@ -296,9 +293,6 @@ weg:
     full_width: Largeur plein écran
     min_content: Aussi petit que possible
   padding: Rembourrage
-  use_multiple_monitor_overlap_logic: >-
-    Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au
-    point unique
   width: Largeur
 wm:
   author: Auteur

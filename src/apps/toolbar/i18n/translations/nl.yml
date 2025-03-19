@@ -1,3 +1,16 @@
+bluetooth:
+  available: Beschikbare apparaten (niet gekoppeld)
+  cancel: Annuleren
+  connected: Aangesloten apparaten
+  forget: Vergeet
+  lowenergy: Lage energie
+  more: Meer Bluetooth-instellingen
+  not_found: Geen Bluetooth-apparaten gevonden
+  pair: Paar
+  paired: Opgeslagen apparaten
+  placeholder:
+    passphrase: Wachtzin, code of pincode
+  scanning: Scannen naar apparaten
 context_menu:
   add_module: Module toevoegen
   remove: Verwijder de module

@@ -240,7 +240,6 @@ toolbar:
   label: نوار ابزار
   placeholder: {}
   show_hibernate: دکمه Hibernate را در منوی Power نشان دهید
-  use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
 update:
   available: بروزرسانی موجود!
   channel: کانال
@@ -293,7 +292,6 @@ weg:
     full_width: عرض تمام صفحه
     min_content: کوچک که می تواند باشد
   padding: لایه گذاری
-  use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
   width: عرض
 wm:
   author: نویسنده

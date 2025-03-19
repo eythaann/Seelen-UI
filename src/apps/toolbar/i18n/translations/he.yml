@@ -1,3 +1,16 @@
+bluetooth:
+  available: מכשירים זמינים (לא מזווגים)
+  cancel: לְבַטֵל
+  connected: מכשירים מחוברים
+  forget: לִשְׁכּוֹחַ
+  lowenergy: אנרגיה נמוכה
+  more: הגדרות Bluetooth נוספות
+  not_found: לא נמצאו מכשירי Bluetooth
+  pair: זוּג
+  paired: מכשירים שנשמרו
+  placeholder:
+    passphrase: משפט סיסמה, קוד או סיכה
+  scanning: סריקה למכשירים
 context_menu:
   add_module: הוסף מודול
   remove: הסר את המודול

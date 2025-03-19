@@ -241,9 +241,6 @@ toolbar:
   label: Qalab argamiye
   placeholder: {}
   show_hibernate: Tus badhanka Hibernate ee ku yaal menuska Power
-  use_multiple_monitor_overlap_logic: >-
-    Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda
-    kaliya
 update:
   available: Cusboonaysiinta la heli karo!
   channel: Cusboonaysiinta Kanaalka
@@ -298,9 +295,6 @@ weg:
     full_width: Ballaca shaashadda oo dhan
     min_content: Yaryar sida ay noqon karto
   padding: Suur
-  use_multiple_monitor_overlap_logic: >-
-    Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda
-    kaliya
   width: Ballac
 wm:
   author: Qoraa

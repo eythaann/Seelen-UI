@@ -239,7 +239,6 @@ toolbar:
   label: Verktygsfält
   placeholder: {}
   show_hibernate: Visa knappen för viloläge i Power-menyn
-  use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
 update:
   available: Uppdatering tillgänglig!
   channel: Uppdateringskanal
@@ -294,7 +293,6 @@ weg:
     full_width: Helskärmsbredd
     min_content: Liten som kan vara
   padding: Stoppning
-  use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
   width: Bredd
 wm:
   author: Författare

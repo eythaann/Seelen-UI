@@ -1,3 +1,16 @@
+bluetooth:
+  available: Gailu erabilgarriak (ez da parekatuta)
+  cancel: Indargabetu
+  connected: Konektatutako gailuak
+  forget: Ahaztu
+  lowenergy: Energia baxua
+  more: Bluetooth ezarpen gehiago
+  not_found: Ez da Bluetooth gailurik aurkitu
+  pair: Pare
+  paired: Gorde diren gailuak
+  placeholder:
+    passphrase: Pasahitza, kodea edo PINa
+  scanning: Gailuetarako eskaneatzea
 context_menu:
   add_module: Gehitu modulua
   remove: Kendu modulua

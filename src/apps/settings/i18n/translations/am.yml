@@ -233,7 +233,6 @@ toolbar:
   label: የመሣሪያ አሞሌ
   placeholder: {}
   show_hibernate: በሀይል ምናሌ ላይ የ Heberberate ቁልፍን አሳይ
-  use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
 update:
   available: ዝመና ይገኛል!
   channel: ጣቢያውን አዘምን
@@ -286,7 +285,6 @@ weg:
     full_width: የሙሉ ማያ ገጽ ስፋት
     min_content: በተቻለ መጠን ትንሽ
   padding: ፓድ
-  use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
   width: ስፋት
 wm:
   author: ደራሲ ደራሲ

@@ -1,3 +1,16 @@
+bluetooth:
+  available: Tilgjengelige enheter (ikke sammenkoblet)
+  cancel: Kansellere
+  connected: Tilkoblede enheter
+  forget: Glemme
+  lowenergy: Lav energi
+  more: Flere Bluetooth -innstillinger
+  not_found: Ingen Bluetooth -enheter funnet
+  pair: Par
+  paired: Lagrede enheter
+  placeholder:
+    passphrase: Passfrase, kode eller pinne
+  scanning: Skanning etter enheter
 context_menu:
   add_module: Legg til modul
   remove: Fjern modulen

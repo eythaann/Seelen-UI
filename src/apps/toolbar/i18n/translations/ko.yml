@@ -1,3 +1,16 @@
+bluetooth:
+  available: 사용 가능한 장치(페어링되지 않음)
+  cancel: 취소
+  connected: 연결된 장치
+  forget: 잊어버림
+  lowenergy: 저에너지
+  more: 추가 블루투스 설정
+  not_found: 블루투스 장치를 찾을 수 없습니다.
+  pair: 페어
+  paired: 저장된 장치
+  placeholder:
+    passphrase: 비밀번호, 코드 또는 PIN
+  scanning: 디바이스 검색
 context_menu:
   add_module: 모듈 추가
   remove: 모듈 제거

@@ -48,11 +48,11 @@ function BluetoothSelector({ open }: { open: boolean }) {
   }, [open]);
 
   return (
-    <BackgroundByLayersV2 className="bluethooth" onContextMenu={(e) => e.stopPropagation()}>
+    <BackgroundByLayersV2 className="bluetooth" onContextMenu={(e) => e.stopPropagation()}>
       {connectedDevices.length > 0 && (
         <>
-          <div className="bluethooth-title">{t('bluetooth.connected')}</div>
-          <div className="bluethooth-entries">
+          <div className="bluetooth-title">{t('bluetooth.connected')}</div>
+          <div className="bluetooth-entries">
             {connectedDevices.map((item) => {
               return (
                 <BluetoothSelectorEntry
@@ -69,8 +69,8 @@ function BluetoothSelector({ open }: { open: boolean }) {
 
       {disconnectedDevices.length > 0 && (
         <>
-          <div className="bluethooth-title">{t('bluetooth.paired')}</div>
-          <div className="bluethooth-entries">
+          <div className="bluetooth-title">{t('bluetooth.paired')}</div>
+          <div className="bluetooth-entries">
             {disconnectedDevices.map((item) => {
               return (
                 <BluetoothSelectorEntry
@@ -85,15 +85,15 @@ function BluetoothSelector({ open }: { open: boolean }) {
         </>
       )}
 
-      <div className="bluethooth-title">
+      <div className="bluetooth-title">
         <span>{t('bluetooth.available')}</span>
         <Tooltip title={t('bluetooth.scanning')}>
-          <button className="bluethooth-refresh">
+          <button className="bluetooth-refresh">
             <Icon iconName="TfiReload" size={12} />
           </button>
         </Tooltip>
       </div>
-      <div className="bluethooth-entries">
+      <div className="bluetooth-entries">
         {discovered_entries.length ? (
           discovered_entries.map((item) => {
             return (
@@ -106,13 +106,13 @@ function BluetoothSelector({ open }: { open: boolean }) {
             );
           })
         ) : (
-          <div className="bluethooth-empty">{t('bluetooth.not_found')}</div>
+          <div className="bluetooth-empty">{t('bluetooth.not_found')}</div>
         )}
       </div>
 
-      <div className="bluethooth-footer">
+      <div className="bluetooth-footer">
         <button
-          className="bluethooth-footer-more-button"
+          className="bluetooth-footer-more-button"
           onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:devices' })}
         >
           {t('bluetooth.more')}
@@ -157,8 +157,8 @@ export function WithBluetoothSelector({ setActive, children }: BluetoothSelector
     <AnimatedPopover
       animationDescription={{
         maxAnimationTimeMs: 500,
-        openAnimationName: 'bluethooth-open',
-        closeAnimationName: 'bluethooth-close',
+        openAnimationName: 'bluetooth-open',
+        closeAnimationName: 'bluetooth-close',
       }}
       open={openPreview}
       trigger="click"

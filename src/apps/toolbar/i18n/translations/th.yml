@@ -1,3 +1,16 @@
+bluetooth:
+  available: อุปกรณ์ที่มีอยู่ (ไม่จับคู่)
+  cancel: ยกเลิก
+  connected: อุปกรณ์ที่เชื่อมต่อ
+  forget: ลืม
+  lowenergy: พลังงานต่ำ
+  more: การตั้งค่าบลูทู ธ เพิ่มเติม
+  not_found: ไม่พบอุปกรณ์บลูทู ธ
+  pair: คู่
+  paired: อุปกรณ์ที่บันทึกไว้
+  placeholder:
+    passphrase: รหัสผ่านรหัสหรือพิน
+  scanning: การสแกนสำหรับอุปกรณ์
 context_menu:
   add_module: เพิ่มโมดูล
   remove: ลบโมดูล

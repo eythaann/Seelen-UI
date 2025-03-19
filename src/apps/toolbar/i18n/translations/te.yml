@@ -1,3 +1,16 @@
+bluetooth:
+  available: అందుబాటులో ఉన్న పరికరాలు (జత చేయబడలేదు)
+  cancel: రద్దు చేయండి
+  connected: కనెక్ట్ చేయబడిన పరికరాలు
+  forget: మర్చిపో
+  lowenergy: తక్కువ శక్తి
+  more: మరిన్ని బ్లూటూత్ సెట్టింగులు
+  not_found: బ్లూటూత్ పరికరాలు కనుగొనబడలేదు
+  pair: జత
+  paired: సేవ్ చేసిన పరికరాలు
+  placeholder:
+    passphrase: పాస్‌ఫ్రేజ్, కోడ్ లేదా పిన్
+  scanning: పరికరాల కోసం స్కానింగ్
 context_menu:
   add_module: మాడ్యూల్ జోడించండి
   remove: మాడ్యూల్ తొలగించండి

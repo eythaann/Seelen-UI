@@ -1,3 +1,16 @@
+bluetooth:
+  available: Доступні пристрої (не в парі)
+  cancel: Скасувати
+  connected: Підключені пристрої
+  forget: Забудь.
+  lowenergy: Низька енергія
+  more: Більше налаштувань Bluetooth
+  not_found: Пристроїв Bluetooth не знайдено
+  pair: Пара
+  paired: Збережені пристрої
+  placeholder:
+    passphrase: Пароль, код або PIN-код
+  scanning: Сканування на наявність пристроїв
 context_menu:
   add_module: Додати модуль
   remove: Видалити модуль

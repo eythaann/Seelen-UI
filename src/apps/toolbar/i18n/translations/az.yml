@@ -1,3 +1,16 @@
+bluetooth:
+  available: Mövcud qurğular (qoşululmur)
+  cancel: Ləğv etmək
+  connected: Bağlı qurğular
+  forget: Unutmaq
+  lowenergy: Aşağı enerji
+  more: Daha çox bluetooth parametrləri
+  not_found: Bluetooth cihazları tapılmadı
+  pair: Cütləşdirmək
+  paired: Qurtaran qurğular
+  placeholder:
+    passphrase: Passphrase, kod və ya pin
+  scanning: Cihazlar üçün tarama
 context_menu:
   add_module: Modul əlavə edin
   remove: Modulu çıxarın

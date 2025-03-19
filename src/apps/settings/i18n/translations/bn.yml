@@ -241,7 +241,6 @@ toolbar:
   label: সরঞ্জামদণ্ড
   placeholder: {}
   show_hibernate: পাওয়ার মেনুতে হাইবারনেট বোতাম দেখান
-  use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
 update:
   available: আপডেট উপলব্ধ!
   channel: আপডেট চ্যানেল
@@ -294,7 +293,6 @@ weg:
     full_width: পূর্ণ পর্দা প্রস্থ
     min_content: যতটা সম্ভব ছোট
   padding: প্যাডিং
-  use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
   width: প্রস্থ
 wm:
   author: লেখক

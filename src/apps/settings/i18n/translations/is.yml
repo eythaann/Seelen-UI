@@ -237,7 +237,6 @@ toolbar:
   label: Tækjastikur
   placeholder: {}
   show_hibernate: Sýna dvalahnappinn í Power valmyndinni
-  use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í staðinn fyrir stakan fókusrökfræði
 update:
   available: Uppfærsla í boði!
   channel: Uppfæra rás
@@ -290,7 +289,6 @@ weg:
     full_width: Full skjábreidd
     min_content: Lítið eins og hægt er
   padding: Padding
-  use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í stað eins fókus rökfræði
   width: Breidd
 wm:
   author: Höfundur

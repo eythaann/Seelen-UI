@@ -241,7 +241,6 @@ toolbar:
   label: Верхняя панель
   placeholder: {}
   show_hibernate: Показать кнопку перехода в спящий режим в меню питания
-  use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
 update:
   available: Обновление доступно!
   channel: Обновить канал
@@ -296,7 +295,6 @@ weg:
     full_width: Полная ширина экрана
     min_content: Маленький, насколько это возможно
   padding: Внутренний отступ
-  use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
   width: Ширина
 wm:
   author: Автор

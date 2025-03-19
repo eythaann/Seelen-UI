@@ -238,7 +238,6 @@ toolbar:
   label: Toolbar
   placeholder: {}
   show_hibernate: Bişkojka Hibernate li ser menuya hêzê nîşan bide
-  use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
 update:
   available: Nûvekirin!
   channel: Kanala Nûve
@@ -291,7 +290,6 @@ weg:
     full_width: Firehiya ekrana tevahî
     min_content: Biçûk ku dikare bibe
   padding: Padding
-  use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
   width: Berî
 wm:
   author: Nivîskar

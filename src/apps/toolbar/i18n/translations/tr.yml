@@ -1,3 +1,16 @@
+bluetooth:
+  available: Mevcut Cihazlar (Eşleştirilmemiş)
+  cancel: İptal
+  connected: Bağlantılı Cihazlar
+  forget: Unutmak
+  lowenergy: Düşük Enerji
+  more: Daha Fazla Bluetooth Ayarı
+  not_found: Bluetooth cihazı bulunamadı
+  pair: Çift
+  paired: Kaydedilen Cihazlar
+  placeholder:
+    passphrase: Parola, Kod veya PIN
+  scanning: Cihazlar için tarama
 context_menu:
   add_module: Modül ekle
   remove: Modülü Kaldır

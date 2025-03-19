@@ -1,3 +1,16 @@
+bluetooth:
+  available: Διαθέσιμες συσκευές (χωρίς ζεύξη)
+  cancel: Ακύρωση
+  connected: Συνδεδεμένες συσκευές
+  forget: Ξεχάστε το
+  lowenergy: Χαμηλή ενέργεια
+  more: Περισσότερες ρυθμίσεις Bluetooth
+  not_found: Δεν βρέθηκαν συσκευές Bluetooth
+  pair: Ζευγάρι
+  paired: Αποθηκευμένες συσκευές
+  placeholder:
+    passphrase: Συνθηματική φράση, κωδικός ή PIN
+  scanning: Σάρωση για συσκευές
 context_menu:
   add_module: Προσθήκη ενότητας
   remove: Αφαιρέστε την ενότητα

@@ -1,3 +1,16 @@
+bluetooth:
+  available: ਉਪਲਬਧ ਜੰਤਰ (ਪੇਅਰਡ ਨਹੀਂ)
+  cancel: ਰੱਦ ਕਰੋ
+  connected: ਜੁੜੇ ਜੰਤਰ
+  forget: ਭੁੱਲ ਜਾਓ
+  lowenergy: ਘੱਟ energy ਰਜਾ
+  more: ਹੋਰ ਬਲਿ Bluetooth ਟੁੱਥ ਸੈਟਿੰਗਜ਼
+  not_found: ਕੋਈ ਬਲੂਟੂਥ ਉਪਕਰਣ ਨਹੀਂ ਮਿਲਿਆ
+  pair: ਜੋੜੀ
+  paired: ਸੁਰੱਖਿਅਤ ਜੰਤਰ
+  placeholder:
+    passphrase: ਪ੍ਹੈਰਾ, ਕੋਡ ਜਾਂ ਪਿੰਨ
+  scanning: ਡਿਵਾਈਸਾਂ ਲਈ ਸਕੈਨ ਕਰਨਾ
 context_menu:
   add_module: ਮੋਡੀ module ਲ ਸ਼ਾਮਲ ਕਰੋ
   remove: ਮੋਡੀ module ਲ ਹਟਾਓ

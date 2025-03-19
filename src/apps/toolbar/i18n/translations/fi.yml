@@ -1,3 +1,16 @@
+bluetooth:
+  available: Käytettävissä olevat laitteet (ei paritettu)
+  cancel: Peruuta
+  connected: Liitetyt laitteet
+  forget: Unohda
+  lowenergy: Matalaenergia
+  more: Lisää Bluetooth-asetuksia
+  not_found: Bluetooth-laitteita ei löytynyt
+  pair: Pari
+  paired: Tallennetut laitteet
+  placeholder:
+    passphrase: Salasana, koodi tai PIN-koodi
+  scanning: Laitteiden skannaus
 context_menu:
   add_module: Lisää moduuli
   remove: Poista moduuli

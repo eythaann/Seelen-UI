@@ -238,7 +238,6 @@ toolbar:
   label: Thanh công cụ
   placeholder: {}
   show_hibernate: Hiển thị nút Hibernate trên Menu Power
-  use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
 update:
   available: Cập nhật có sẵn!
   channel: Cập nhật kênh
@@ -293,7 +292,6 @@ weg:
     full_width: Chiều rộng toàn màn hình
     min_content: Nhỏ nhất có thể
   padding: Đệm
-  use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
   width: Chiều rộng
 wm:
   author: Tác giả

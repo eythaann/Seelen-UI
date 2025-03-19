@@ -239,7 +239,6 @@ toolbar:
   label: Toolbar
   placeholder: {}
   show_hibernate: Uri buttuna Hibernate fuq il-menu tal-qawwa
-  use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
 update:
   available: Aġġornament disponibbli!
   channel: Aġġorna l-kanal
@@ -294,7 +293,6 @@ weg:
     full_width: Wisa 'tal-iskrin sħiħ
     min_content: Żgħir kemm jista’ jkun
   padding: Ikkuttunar
-  use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
   width: Wisa '
 wm:
   author: Awtur

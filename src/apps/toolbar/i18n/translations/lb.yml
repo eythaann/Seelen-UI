@@ -1,3 +1,16 @@
+bluetooth:
+  available: Verfügbaren Apparater (net gepaart)
+  cancel: Ofbriechen
+  connected: Verbonne Geräter
+  forget: Vergiess
+  lowenergy: Wéineg Energie
+  more: Méi Bluetooth Astellunge
+  not_found: Keng Bluetooth Geräter fonnt
+  pair: Pabeier
+  paired: Gerett Geräter
+  placeholder:
+    passphrase: Passphrase, Code oder PIN
+  scanning: Scannen fir Apparater
 context_menu:
   add_module: Füügt Modul
   remove: Ewechzehuelen Modul

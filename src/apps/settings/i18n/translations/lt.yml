@@ -237,7 +237,6 @@ toolbar:
   label: Įrankių juosta
   placeholder: {}
   show_hibernate: Rodyti užmigdymo režimo mygtuką maitinimo meniu
-  use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
 update:
   available: Galima atnaujinti!
   channel: Atnaujinkite kanalą
@@ -290,7 +289,6 @@ weg:
     full_width: Visas ekrano plotis
     min_content: Mažas kaip gali būti
   padding: Paminkštinimas
-  use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
   width: Plotis
 wm:
   author: Autorius

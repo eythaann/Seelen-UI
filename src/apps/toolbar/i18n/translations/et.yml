@@ -1,3 +1,16 @@
+bluetooth:
+  available: Saadaval olevad seadmed (ei ole ühendatud)
+  cancel: Tühista
+  connected: Ühendatud seadmed
+  forget: Unustage
+  lowenergy: Madal energia
+  more: Rohkem Bluetooth-seadistusi
+  not_found: Bluetooth-seadmeid ei leitud
+  pair: Paar
+  paired: Salvestatud seadmed
+  placeholder:
+    passphrase: Salasõna, kood või PIN-kood
+  scanning: Seadmete skaneerimine
 context_menu:
   add_module: Lisage moodul
   remove: Eemaldage moodul

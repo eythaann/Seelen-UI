@@ -1,3 +1,16 @@
+bluetooth:
+  available: Vifaa vinavyopatikana (sio paired)
+  cancel: Ghairi
+  connected: Vifaa vilivyounganishwa
+  forget: Kusahau
+  lowenergy: Nishati ya chini
+  more: Mipangilio zaidi ya Bluetooth
+  not_found: Hakuna vifaa vya Bluetooth vilivyopatikana
+  pair: Jozi
+  paired: Vifaa vilivyookolewa
+  placeholder:
+    passphrase: Passphrase, msimbo au pini
+  scanning: Skanning kwa vifaa
 context_menu:
   add_module: Ongeza moduli
   remove: Ondoa moduli

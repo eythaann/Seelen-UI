@@ -1,3 +1,16 @@
+bluetooth:
+  available: 可用设备（未配对）
+  cancel: 取消
+  connected: 联网设备
+  forget: 忘记
+  lowenergy: 低能耗
+  more: 更多蓝牙设置
+  not_found: 未找到蓝牙设备
+  pair: 成对
+  paired: 保存的设备
+  placeholder:
+    passphrase: 密码口令、代码或 PIN 码
+  scanning: 扫描设备
 context_menu:
   add_module: 添加模块
   remove: 删除模块

@@ -1,3 +1,16 @@
+bluetooth:
+  available: دستگاه های موجود (جفت نشده)
+  cancel: لغو کردن
+  connected: دستگاه های متصل
+  forget: فراموش کردن
+  lowenergy: کم انرژی
+  more: تنظیمات بلوتوث بیشتر
+  not_found: هیچ دستگاه بلوتوث یافت نشده است
+  pair: جفت
+  paired: دستگاه های ذخیره شده
+  placeholder:
+    passphrase: عارضه ، کد یا پین
+  scanning: اسکن برای دستگاه ها
 context_menu:
   add_module: ماژول را اضافه کنید
   remove: ماژول را حذف کنید

@@ -241,9 +241,6 @@ toolbar:
   label: Barra de herramientas
   placeholder: {}
   show_hibernate: Mostrar el botón de hibernación en el menú de encendido
-  use_multiple_monitor_overlap_logic: >-
-    Utilizar una lógica específica para cada pantalla en lugar de una lógica de
-    enfoque único
 update:
   available: Actualización disponible
   channel: Canal de actualización
@@ -300,9 +297,6 @@ weg:
     full_width: Ancho de pantalla completo
     min_content: Más pequeño imposible
   padding: Acolchado
-  use_multiple_monitor_overlap_logic: >-
-    Utilizar una lógica específica para cada pantalla en lugar de una lógica de
-    enfoque único
   width: Anchura
 wm:
   author: Autor

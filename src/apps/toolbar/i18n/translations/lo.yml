@@ -1,3 +1,16 @@
+bluetooth:
+  available: ອຸປະກອນທີ່ມີຢູ່ (ບໍ່ໄດ້ຈັບຄູ່ກັນ)
+  cancel: ຍົກເລີກ
+  connected: ອຸປະກອນເຊື່ອມຕໍ່
+  forget: ລືມ
+  lowenergy: ພະລັງງານຕ່ໍາ
+  more: ການຕັ້ງຄ່າ Bluetooth ເພີ່ມເຕີມ
+  not_found: ບໍ່ພົບອຸປະກອນ Bluetooth
+  pair: ຄູ່
+  paired: ອຸປະກອນທີ່ບັນທຶກໄວ້
+  placeholder:
+    passphrase: passphrase, ລະຫັດຫຼື PIN
+  scanning: ການສະແກນສໍາລັບອຸປະກອນຕ່າງໆ
 context_menu:
   add_module: ເພີ່ມໂມດູນ
   remove: ດຶງອອກຈາກໂມດູນ

@@ -238,7 +238,6 @@ toolbar:
   label: Alət çubuğu
   placeholder: {}
   show_hibernate: Güc menyusunda Hibernate düyməsini göstərin
-  use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
 update:
   available: YENİLƏNİB!
   channel: Kanal yeniləmə
@@ -291,7 +290,6 @@ weg:
     full_width: Tam ekran eni
     min_content: Ola bildiyi qədər kiçik
   padding: Paddend
-  use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
   width: Geniştəhər
 wm:
   author: Müəllif

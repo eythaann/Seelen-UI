@@ -239,7 +239,6 @@ toolbar:
   label: Verktøylinje
   placeholder: {}
   show_hibernate: Vis dvalemodus på strømmenyen
-  use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
 update:
   available: Oppdatering tilgjengelig!
   channel: Oppdateringskanal
@@ -294,7 +293,6 @@ weg:
     full_width: Full skjermbredde
     min_content: Liten som kan være
   padding: Polstring
-  use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
   width: Bredde
 wm:
   author: Forfatter

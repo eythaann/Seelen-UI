@@ -1,3 +1,16 @@
+bluetooth:
+  available: Peranti yang ada (tidak dipasangkan)
+  cancel: Batalkan
+  connected: Peranti yang disambungkan
+  forget: Lupa
+  lowenergy: Tenaga rendah
+  more: Lebih banyak tetapan Bluetooth
+  not_found: Tiada peranti Bluetooth dijumpai
+  pair: Pasangan
+  paired: Peranti yang disimpan
+  placeholder:
+    passphrase: Frasa, kod atau pin
+  scanning: Mengimbas peranti
 context_menu:
   add_module: Tambah modul
   remove: Keluarkan modul

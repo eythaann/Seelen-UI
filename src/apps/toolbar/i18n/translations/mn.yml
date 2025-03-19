@@ -1,3 +1,16 @@
+bluetooth:
+  available: Боломжтой төхөөрөмжүүд (хосолсонгүй)
+  cancel: Цуаах
+  connected: Холбогдсон төхөөрөмжүүд
+  forget: Мартах
+  lowenergy: Бага эрчим хүч
+  more: Илүү их Bluetooth Settings
+  not_found: Блютүүт төхөөрөмж байхгүй байна
+  pair: Хос
+  paired: Хадгалсан төхөөрөмж
+  placeholder:
+    passphrase: Нэвтрэх, код, код эсвэл PIN
+  scanning: Төхөөрөмжийг скан хийх
 context_menu:
   add_module: Модулийг нэмэх
   remove: Модулийг зайлуулах

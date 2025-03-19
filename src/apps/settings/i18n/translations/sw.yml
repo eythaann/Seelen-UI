@@ -235,7 +235,6 @@ toolbar:
   label: Zana
   placeholder: {}
   show_hibernate: Onyesha kitufe cha Hibernate kwenye menyu ya nguvu
-  use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
 update:
   available: Sasisha inapatikana!
   channel: Sasisha kituo
@@ -288,7 +287,6 @@ weg:
     full_width: Upana kamili wa skrini
     min_content: Ndogo kama inaweza kuwa
   padding: Padding
-  use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
   width: Upana
 wm:
   author: Mwandishi

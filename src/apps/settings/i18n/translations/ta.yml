@@ -240,7 +240,6 @@ toolbar:
   label: கருவிப்பட்டி
   placeholder: {}
   show_hibernate: சக்தி மெனுவில் ஹைபர்னேட் பொத்தானைக் காட்டு
-  use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
 update:
   available: புதுப்பிப்பு கிடைக்கிறது!
   channel: சேனலைப் புதுப்பிக்கவும்
@@ -293,7 +292,6 @@ weg:
     full_width: முழு திரை அகலம்
     min_content: முடிந்தவரை சிறியது
   padding: திணிப்பு
-  use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
   width: அகலம்
 wm:
   author: நூலாசிரியர்

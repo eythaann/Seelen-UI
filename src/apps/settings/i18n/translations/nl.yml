@@ -239,7 +239,6 @@ toolbar:
   label: Werkbalk
   placeholder: {}
   show_hibernate: Toon slaapstandknop in energiemenu
-  use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
 update:
   available: Update beschikbaar!
   channel: Updatekanaal
@@ -296,7 +295,6 @@ weg:
     full_width: Volledige schermbreedte
     min_content: Klein als het maar kan zijn
   padding: Vulling
-  use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
   width: Breedte
 wm:
   author: Auteur

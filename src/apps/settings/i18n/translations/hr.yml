@@ -239,7 +239,6 @@ toolbar:
   label: Alatna traka
   placeholder: {}
   show_hibernate: Prikaži gumb hibernate na izborniku napajanja
-  use_multiple_monitor_overlap_logic: Koristite specifičnu za prikaz umjesto logike jednog fokusa
 update:
   available: Ažuriranje dostupno!
   channel: Kanal za ažuriranje
@@ -294,7 +293,6 @@ weg:
     full_width: Puna širina zaslona
     min_content: Mali koliko može biti
   padding: Jadnja
-  use_multiple_monitor_overlap_logic: Koristite specifičnu za prikaz umjesto logike jednog fokusa
   width: Širina
 wm:
   author: Autor

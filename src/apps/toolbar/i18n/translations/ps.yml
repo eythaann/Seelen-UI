@@ -1,3 +1,16 @@
+bluetooth:
+  available: موجود وسایل (جوړ شوی ندی)
+  cancel: لغوه کول
+  connected: تړلي وسایل
+  forget: هیر یی کړه
+  lowenergy: ټیټ انرژي
+  more: نور بلوتوث بیا تنظیمات
+  not_found: هیڅ بلوتوث توکي وموندل شول
+  pair: جوړه
+  paired: خوندي شوي وسیلې
+  placeholder:
+    passphrase: پاسفراس، کوډ یا پن
+  scanning: د وسیلو لپاره سکین کول
 context_menu:
   add_module: موډل اضافه کړئ
   remove: موډول لرې کړئ

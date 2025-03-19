@@ -228,7 +228,6 @@ toolbar:
   label: 工具栏
   placeholder: {}
   show_hibernate: 在电源菜单上显示休眠按钮
-  use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
 update:
   available: 更新可用！
   channel: 更新频道
@@ -281,7 +280,6 @@ weg:
     full_width: 全屏宽度
     min_content: 尽可能小
   padding: 内边距
-  use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
   width: 宽度
 wm:
   author: 作者

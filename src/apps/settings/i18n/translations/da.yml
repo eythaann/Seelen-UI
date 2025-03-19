@@ -239,7 +239,6 @@ toolbar:
   label: Værktøjslinje
   placeholder: {}
   show_hibernate: Vis dvale-knap i strøm-menuen
-  use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
 update:
   available: Opdatering tilgængelig!
   channel: Opdateringskanal
@@ -294,7 +293,6 @@ weg:
     full_width: Fuld skærmbredde
     min_content: Så lille som det kan være
   padding: Polstring
-  use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
   width: Bredde
 wm:
   author: Forfatter

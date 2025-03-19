@@ -237,7 +237,6 @@ toolbar:
   label: របាររបន៍របយ័ត្ន។ រប
   placeholder: {}
   show_hibernate: បង្ហាញប៊ូតុង hibernate នៅលើ menu enu
-  use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
 update:
   available: មានបច្ចុប្បន្នភាព!
   channel: ឆានែលធ្វើបច្ចុប្បន្នភាព
@@ -290,7 +289,6 @@ weg:
     full_width: ទទឹងពេញអេក្រង់
     min_content: តូចតាមដែលអាចធ្វើបាន
   padding: ទ្រនាប់
-  use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
   width: ទទឹង
 wm:
   author: អ្នកនិពន្ធ

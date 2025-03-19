@@ -238,7 +238,6 @@ toolbar:
   label: વમળ
   placeholder: {}
   show_hibernate: પાવર મેનૂ પર હાઇબરનેટ બટન બતાવો
-  use_multiple_monitor_overlap_logic: સિંગલ ફોકસ લોજિકને બદલે ડિસ્પ્લે સ્પેસિફિકનો ઉપયોગ કરો
 update:
   available: અપડેટ ઉપલબ્ધ!
   channel: અપડેટ
@@ -291,7 +290,6 @@ weg:
     full_width: પૂર્ણ સ્ક્રીનની પહોળાઈ
     min_content: બની શકે તેટલું નાનું
   padding: ગાદી
-  use_multiple_monitor_overlap_logic: સિંગલ ફોકસ લોજિકને બદલે ડિસ્પ્લે સ્પેસિફિકનો ઉપયોગ કરો
   width: પહોળાઈ
 wm:
   author: લેખક

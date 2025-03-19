@@ -241,7 +241,6 @@ toolbar:
   label: Bara de instrumente
   placeholder: {}
   show_hibernate: Afișați butonul de hibernare în meniul de pornire
-  use_multiple_monitor_overlap_logic: Utilizați logica specifică afișajului în loc de logica de focalizare unică
 update:
   available: Actualizare disponibilă!
   channel: Actualizare canal
@@ -296,7 +295,6 @@ weg:
     full_width: Lățimea ecranului complet
     min_content: Cât de mic poate fi
   padding: Căptușeală
-  use_multiple_monitor_overlap_logic: Utilizați logica specifică afișajului în loc de logica de focalizare unică
   width: Lăţime
 wm:
   author: Autor

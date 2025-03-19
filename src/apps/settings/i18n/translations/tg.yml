@@ -236,7 +236,6 @@ toolbar:
   label: Асбобу
   placeholder: {}
   show_hibernate: Тугмаи Hibernate -ро дар менюи энергетикӣ нишон диҳед
-  use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
 update:
   available: Навсозӣ!
   channel: Навсозӣ канал
@@ -289,7 +288,6 @@ weg:
     full_width: Паҳнои пурраи экран
     min_content: То ҳадди имкон хурд
   padding: Тахтача
-  use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
   width: Васеъ
 wm:
   author: Муаллиф

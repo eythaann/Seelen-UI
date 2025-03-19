@@ -239,7 +239,6 @@ toolbar:
   label: Bar alat
   placeholder: {}
   show_hibernate: Tunjukkan butang hibernate pada menu kuasa
-  use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
 update:
   available: Kemas kini tersedia!
   channel: Kemas kini saluran
@@ -292,7 +291,6 @@ weg:
     full_width: Lebar skrin penuh
     min_content: Kecil yang boleh
   padding: Padding
-  use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
   width: Lebar
 wm:
   author: Pengarang

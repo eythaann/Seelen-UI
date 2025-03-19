@@ -1,3 +1,16 @@
+bluetooth:
+  available: Perangkat yang Tersedia (Tidak Dipasangkan)
+  cancel: Batal
+  connected: Perangkat yang Terhubung
+  forget: Lupakan.
+  lowenergy: Energi Rendah
+  more: Pengaturan Bluetooth lainnya
+  not_found: Tidak ditemukan perangkat Bluetooth
+  pair: Pasangan
+  paired: Perangkat yang Disimpan
+  placeholder:
+    passphrase: Frasa Sandi, Kode atau PIN
+  scanning: Memindai perangkat
 context_menu:
   add_module: Tambahkan modul
   remove: Hapus modul

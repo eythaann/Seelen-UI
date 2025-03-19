@@ -236,7 +236,6 @@ toolbar:
   label: ແຖບເຄື່ອງມື
   placeholder: {}
   show_hibernate: ສະແດງປຸ່ມ hibernate ໃນເມນູພະລັງງານ
-  use_multiple_monitor_overlap_logic: ໃຊ້ການສະແດງຜົນສະເພາະແທນທີ່ຈະເປັນເຫດຜົນຈຸດສຸມດຽວ
 update:
   available: ປັບປຸງໃຫ້ທັນສະໄຫມ!
   channel: ຊ່ອງທາງການປັບປຸງ
@@ -289,7 +288,6 @@ weg:
     full_width: ຄວາມກວ້າງເຕັມຈໍ
     min_content: ຂະຫນາດນ້ອຍເທົ່າທີ່ສາມາດເຮັດໄດ້
   padding: padding
-  use_multiple_monitor_overlap_logic: ໃຊ້ການສະແດງຜົນສະເພາະແທນທີ່ຈະເປັນເຫດຜົນຈຸດສຸມດຽວ
   width: ກວ້າງ
 wm:
   author: ຜູ້ຂຽນ

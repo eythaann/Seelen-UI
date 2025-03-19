@@ -235,7 +235,6 @@ toolbar:
   label: توکپټه
   placeholder: {}
   show_hibernate: د بریښنا مینو کې د هایبرټ ت button ۍ ښودل
-  use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
 update:
   available: اوسمهالول شتون لري!
   channel: چینل تازه کول
@@ -288,7 +287,6 @@ weg:
     full_width: د بشپړ سکرین پلنوالی
     min_content: کوچني لکه څنګه چې کیدی شي
   padding: غالۍ
-  use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
   width: پلنوالی
 wm:
   author: لیکوال

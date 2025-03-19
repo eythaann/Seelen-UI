@@ -1,3 +1,16 @@
+bluetooth:
+  available: Дастгоҳҳои дастрас (ҷуфтнашаванда нестанд)
+  cancel: Манъ кардан
+  connected: Дастгоҳҳои пайвастшуда
+  forget: Фаромӯш кардан
+  lowenergy: Энергияи паст
+  more: Танзимоти бештар Bluetooth
+  not_found: Не таҳлили Bluetooth ёфт нашуд
+  pair: Ьуфт
+  paired: Дастгоҳҳои захирашуда
+  placeholder:
+    passphrase: Гузарвожа, рамз ё PIN
+  scanning: Ҷустуҷӯи дастгоҳҳо
 context_menu:
   add_module: Иловаи модул
   remove: Модулро хориҷ кунед

@@ -232,7 +232,6 @@ toolbar:
   label: 도구 모음
   placeholder: {}
   show_hibernate: 전원 메뉴에 최대 절전 모드 버튼 표시
-  use_multiple_monitor_overlap_logic: 단일 초점 대신 디스플레이별 로직 사용
 update:
   available: 사용 가능한 업데이트가 존재합니다
   channel: 업데이트 채널
@@ -285,7 +284,6 @@ weg:
     full_width: 전체 화면 너비
     min_content: 가능한 한 작은
   padding: 안쪽 여백
-  use_multiple_monitor_overlap_logic: 단일 초점 논리 대신 디스플레이별 사용
   width: 너비
 wm:
   author: 작성자

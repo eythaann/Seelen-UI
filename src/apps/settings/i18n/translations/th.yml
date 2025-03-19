@@ -233,7 +233,6 @@ toolbar:
   label: แถบเครื่องมือ
   placeholder: {}
   show_hibernate: แสดงปุ่มไฮเบอร์เนตบนเมนูพลังงาน
-  use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
 update:
   available: อัปเดตพร้อมใช้งาน!
   channel: อัปเดตช่อง
@@ -286,7 +285,6 @@ weg:
     full_width: ความกว้างเต็มหน้าจอ
     min_content: เล็กเท่าที่จะทำได้
   padding: การขยายความ
-  use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
   width: ความกว้าง
 wm:
   author: ผู้เขียน

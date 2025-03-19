@@ -243,7 +243,6 @@ toolbar:
   label: Toolbar
   placeholder: {}
   show_hibernate: Ipakita ang pindutan ng hibernate sa menu ng kuryente
-  use_multiple_monitor_overlap_logic: Gumamit ng partikular na display sa halip na iisang focus logic
 update:
   available: Mag -update Magagamit!
   channel: I -update ang channel
@@ -298,7 +297,6 @@ weg:
     full_width: Buong lapad ng screen
     min_content: Maliit hangga't maaari
   padding: Padding
-  use_multiple_monitor_overlap_logic: Gumamit ng partikular na display sa halip na iisang focus logic
   width: Lapad
 wm:
   author: May -akda

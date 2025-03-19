@@ -241,7 +241,6 @@ toolbar:
   label: Գործիքագոտու
   placeholder: {}
   show_hibernate: Show ույց տալ ձմեռել կոճակը էներգիայի ցանկում
-  use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
 update:
   available: 'Թարմացրեք մատչելի:'
   channel: Թարմացրեք ալիքը
@@ -296,7 +295,6 @@ weg:
     full_width: Ամբողջ էկրանի լայնությունը
     min_content: Փոքր, որքան կարող է լինել
   padding: Լիցք
-  use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
   width: Լայնություն
 wm:
   author: Հեղինակ

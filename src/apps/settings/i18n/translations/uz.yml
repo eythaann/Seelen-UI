@@ -241,7 +241,6 @@ toolbar:
   label: Asboblar paneli
   placeholder: {}
   show_hibernate: Quvvat menyusidagi Xolernate tugmasini bosing
-  use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
 update:
   available: Yangilanish mavjud!
   channel: Kanalni yangilash
@@ -296,7 +295,6 @@ weg:
     full_width: To'liq ekran kengligi
     min_content: Iloji boricha kichik
   padding: Plomba
-  use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
   width: Kenglik
 wm:
   author: Muallif

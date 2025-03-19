@@ -239,7 +239,6 @@ toolbar:
   label: Werkbalk
   placeholder: {}
   show_hibernate: Wys Hibernate -knoppie op Power Menu
-  use_multiple_monitor_overlap_logic: Gebruik vertoonspesifieke in plaas van enkelfokuslogika
 update:
   available: Opdatering beskikbaar!
   channel: Update Channel
@@ -294,7 +293,6 @@ weg:
     full_width: Volle skerm breedte
     min_content: Klein soos kan wees
   padding: Opvulling
-  use_multiple_monitor_overlap_logic: Gebruik vertoonspesifieke in plaas van enkelfokuslogika
   width: Wydte
 wm:
   author: Outeur

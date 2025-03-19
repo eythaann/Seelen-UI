@@ -240,7 +240,6 @@ toolbar:
   label: उपकरण पट्टी
   placeholder: {}
   show_hibernate: पावर मेनू पर हाइबरनेट बटन दिखाएं
-  use_multiple_monitor_overlap_logic: एकल फोकस तर्क के बजाय प्रदर्शन विशिष्ट का उपयोग करें
 update:
   available: उपलब्ध अद्यतन!
   channel: अद्यतन चैनल
@@ -293,7 +292,6 @@ weg:
     full_width: पूर्ण स्क्रीन चौड़ाई
     min_content: जितना छोटा हो सकता है
   padding: गद्दी
-  use_multiple_monitor_overlap_logic: एकल फोकस तर्क के बजाय प्रदर्शन विशिष्ट का उपयोग करें
   width: चौड़ाई
 wm:
   author: लेखक

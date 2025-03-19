@@ -231,7 +231,6 @@ toolbar:
   label: ツールバーの設定
   placeholder: {}
   show_hibernate: 電源メニューにハイバネートボタンを表示する
-  use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
 update:
   available: 更新が利用可能です！
   channel: 更新チャンネル
@@ -284,7 +283,6 @@ weg:
     full_width: 全画面幅
     min_content: できるだけ小さく
   padding: 余白
-  use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
   width: ドックの幅
 wm:
   author: 製作者

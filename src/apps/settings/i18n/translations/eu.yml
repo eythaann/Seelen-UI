@@ -237,7 +237,6 @@ toolbar:
   label: Tresna barra
   placeholder: {}
   show_hibernate: Erakutsi Hibernate botoia Power Menuan
-  use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
 update:
   available: Eguneratu eskuragarri!
   channel: Eguneratu kanala
@@ -292,7 +291,6 @@ weg:
     full_width: Pantaila osoko zabalera
     min_content: Txikia izan daitekeen bezala
   padding: Betegarri
-  use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
   width: Zabalera
 wm:
   author: Idazle

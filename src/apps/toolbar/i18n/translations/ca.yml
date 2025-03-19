@@ -1,3 +1,16 @@
+bluetooth:
+  available: Dispositius disponibles (no emparellats)
+  cancel: Cancel·lar
+  connected: Dispositius connectats
+  forget: Oblidar
+  lowenergy: Baixa energia
+  more: Més configuració Bluetooth
+  not_found: No es troben dispositius Bluetooth
+  pair: Parella
+  paired: Dispositius desats
+  placeholder:
+    passphrase: Passphrase, codi o pin
+  scanning: Escaneig per a dispositius
 context_menu:
   add_module: Afegiu el mòdul
   remove: Elimina el mòdul

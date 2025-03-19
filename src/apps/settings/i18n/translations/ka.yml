@@ -239,7 +239,6 @@ toolbar:
   label: ინსტრუმენტთა პანელი
   placeholder: {}
   show_hibernate: აჩვენეთ ღილაკი Hibernate ღილაკზე დენის მენიუში
-  use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
 update:
   available: განახლება ხელმისაწვდომია!
   channel: განაახლეთ არხი
@@ -294,7 +293,6 @@ weg:
     full_width: სრული ეკრანის სიგანე
     min_content: რაც შეიძლება პატარა იყოს
   padding: ბადება
-  use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
   width: სიგანე
 wm:
   author: ავტორი

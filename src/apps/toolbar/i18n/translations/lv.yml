@@ -1,3 +1,16 @@
+bluetooth:
+  available: Pieejamās ierīces (nav savienotas pārī)
+  cancel: Atcelt
+  connected: Saistītās ierīces
+  forget: Aizmirstiet
+  lowenergy: Zems enerģijas patēriņš
+  more: Vairāk Bluetooth iestatījumu
+  not_found: Bluetooth ierīces nav atrastas
+  pair: Pāris
+  paired: Saglabātās ierīces
+  placeholder:
+    passphrase: Frāze, kods vai PIN kods
+  scanning: Ierīču skenēšana
 context_menu:
   add_module: Pievienot moduli
   remove: Noņemt moduli

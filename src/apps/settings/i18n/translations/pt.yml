@@ -237,7 +237,6 @@ toolbar:
   label: Barra de ferramentas
   placeholder: {}
   show_hibernate: Mostre o botão Hibernate no menu Power
-  use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
 update:
   available: Atualização disponível!
   channel: Atualizar canal
@@ -292,7 +291,6 @@ weg:
     full_width: Largura de tela inteira
     min_content: Pequeno como pode ser
   padding: Preenchimento
-  use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
   width: Largura
 wm:
   author: Autor

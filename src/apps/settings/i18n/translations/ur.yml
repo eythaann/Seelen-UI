@@ -238,7 +238,6 @@ toolbar:
   label: ٹول بار
   placeholder: {}
   show_hibernate: پاور مینو پر ہائبرنیٹ بٹن دکھائیں
-  use_multiple_monitor_overlap_logic: سنگل فوکس لاجک کے بجائے ڈسپلے مخصوص استعمال کریں۔
 update:
   available: تازہ کاری دستیاب!
   channel: چینل کو اپ ڈیٹ کریں
@@ -291,7 +290,6 @@ weg:
     full_width: پوری سکرین کی چوڑائی
     min_content: جتنا چھوٹا ہو سکتا ہے۔
   padding: بھرتی
-  use_multiple_monitor_overlap_logic: سنگل فوکس لاجک کے بجائے ڈسپلے مخصوص استعمال کریں۔
   width: چوڑائی
 wm:
   author: مصنف

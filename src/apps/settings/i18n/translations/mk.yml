@@ -241,7 +241,6 @@ toolbar:
   label: Лента со алатки
   placeholder: {}
   show_hibernate: Покажете го копчето Hibernate на менито за напојување
-  use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
 update:
   available: Ажурирање достапно!
   channel: Ажурирање на каналот
@@ -296,7 +295,6 @@ weg:
     full_width: Ширина на цел екран
     min_content: Мала колку што може
   padding: Подлога
-  use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
   width: Ширина
 wm:
   author: Автор

@@ -1,3 +1,16 @@
+bluetooth:
+  available: Dyfeisiau sydd ar gael (heb baru)
+  cancel: Chansliff
+  connected: Dyfeisiau Cysylltiedig
+  forget: Hanghofion
+  lowenergy: Egni isel
+  more: Mwy o osodiadau bluetooth
+  not_found: Ni ddarganfuwyd unrhyw ddyfeisiau Bluetooth
+  pair: Phâr
+  paired: Dyfeisiau a arbedwyd
+  placeholder:
+    passphrase: Passphrase, cod neu pin
+  scanning: Sganio am ddyfeisiau
 context_menu:
   add_module: Ychwanegu Modiwl
   remove: Tynnwch y modiwl

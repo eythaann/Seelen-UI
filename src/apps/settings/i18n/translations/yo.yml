@@ -234,7 +234,6 @@ toolbar:
   label: Ọpa irinṣẹ
   placeholder: {}
   show_hibernate: Fihan bọtini Hibernate lori Akojọ Akojọ
-  use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
 update:
   available: Imudojuiwọn wa!
   channel: Ohun elo imudojuiwọn
@@ -287,7 +286,6 @@ weg:
     full_width: Iboju kikun iwọn
     min_content: Kekere bi o ti le jẹ
   padding: Fidigọdi silẹ
-  use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
   width: Fifẹ
 wm:
   author: Onkọwe ọkunrin

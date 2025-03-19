@@ -1,3 +1,16 @@
+bluetooth:
+  available: Beskikbare toestelle (nie gepaar nie)
+  cancel: Kanselleer
+  connected: Gekoppelde toestelle
+  forget: Vergeet
+  lowenergy: Lae energie
+  more: Meer Bluetooth -instellings
+  not_found: Geen Bluetooth -toestelle gevind nie
+  pair: Paar
+  paired: Gestoorde toestelle
+  placeholder:
+    passphrase: Passfrase, kode of PIN
+  scanning: Skandering vir toestelle
 context_menu:
   add_module: Voeg module by
   remove: Verwyder die module

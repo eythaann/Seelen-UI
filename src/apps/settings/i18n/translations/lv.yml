@@ -239,7 +239,6 @@ toolbar:
   label: Rīkjosla
   placeholder: {}
   show_hibernate: Rādīt hibernēšanas pogu barošanas izvēlnē
-  use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
 update:
   available: Pieejams atjauninājums!
   channel: Atjaunināt kanālu
@@ -292,7 +291,6 @@ weg:
     full_width: Pilna ekrāna platums
     min_content: Cik mazs var būt
   padding: Polsterējums
-  use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
   width: Platums
 wm:
   author: Autors

@@ -1,3 +1,16 @@
+bluetooth:
+  available: Достапни уреди (не спарени)
+  cancel: Откажи
+  connected: Поврзани уреди
+  forget: Заборавете
+  lowenergy: Ниска енергија
+  more: Повеќе поставки за Bluetooth
+  not_found: Не се пронајдени уреди со Bluetooth
+  pair: Пар
+  paired: Зачувани уреди
+  placeholder:
+    passphrase: Фраза, код или игла
+  scanning: Скенирање за уреди
 context_menu:
   add_module: Додадете модул
   remove: Отстранете го модулот

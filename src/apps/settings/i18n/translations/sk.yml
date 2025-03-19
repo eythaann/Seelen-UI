@@ -237,7 +237,6 @@ toolbar:
   label: Panel s nástrojmi
   placeholder: {}
   show_hibernate: Zobrazenie tlačidla hibernácie v ponuke napájania
-  use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
 update:
   available: Aktualizácia k dispozícii!
   channel: Kanál
@@ -292,7 +291,6 @@ weg:
     full_width: Celá šírka obrazovky
     min_content: Malý ako len môže byť
   padding: Vypchávka
-  use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
   width: Šírka
 wm:
   author: Autor

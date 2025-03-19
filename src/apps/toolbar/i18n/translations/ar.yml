@@ -1,3 +1,16 @@
+bluetooth:
+  available: الأجهزة المتوفرة (غير مقترنة)
+  cancel: إلغاء
+  connected: الأجهزة المتصلة
+  forget: انسى
+  lowenergy: طاقة منخفضة
+  more: المزيد من إعدادات البلوتوث
+  not_found: لم يتم العثور على أجهزة بلوتوث
+  pair: زوج
+  paired: الأجهزة المحفوظة
+  placeholder:
+    passphrase: عبارة المرور أو الرمز أو رقم التعريف الشخصي
+  scanning: المسح الضوئي للأجهزة
 context_menu:
   add_module: إضافة الوحدة النمطية
   remove: إزالة الوحدة النمطية

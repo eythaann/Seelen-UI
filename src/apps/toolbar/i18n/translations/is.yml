@@ -1,3 +1,16 @@
+bluetooth:
+  available: Laus tæki (ekki parað)
+  cancel: Hætta við
+  connected: Tengd tæki
+  forget: Gleymdu
+  lowenergy: Lítil orka
+  more: Fleiri Bluetooth stillingar
+  not_found: Engin Bluetooth tæki fundust
+  pair: Par
+  paired: Vistað tæki
+  placeholder:
+    passphrase: Passphrase, kóða eða pinna
+  scanning: Skönnun fyrir tæki
 context_menu:
   add_module: Bættu við einingu
   remove: Fjarlægðu eininguna

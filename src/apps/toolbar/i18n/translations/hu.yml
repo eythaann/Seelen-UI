@@ -1,3 +1,16 @@
+bluetooth:
+  available: Elérhető eszközök (nem párosítva)
+  cancel: Törölje
+  connected: Csatlakoztatott eszközök
+  forget: Felejtsd el
+  lowenergy: Alacsony energia
+  more: További Bluetooth-beállítások
+  not_found: Nem talált Bluetooth-eszköz
+  pair: Pár
+  paired: Mentett eszközök
+  placeholder:
+    passphrase: Jelszó, kód vagy PIN-kód
+  scanning: Eszközök keresése
 context_menu:
   add_module: Adjon hozzá modult
   remove: Távolítsa el a modult

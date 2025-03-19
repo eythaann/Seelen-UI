@@ -240,7 +240,6 @@ toolbar:
   label: Алатна трака
   placeholder: {}
   show_hibernate: Прикажи дугме Хибернате на менију на напајању
-  use_multiple_monitor_overlap_logic: Користите специфичан приказ уместо логике једног фокуса
 update:
   available: Ажурирање доступно!
   channel: Ажурирај канал
@@ -295,7 +294,6 @@ weg:
     full_width: Пуна ширина екрана
     min_content: Мала колико може бити
   padding: Подлокнути
-  use_multiple_monitor_overlap_logic: Користите специфичан приказ уместо логике једног фокуса
   width: Ширина
 wm:
   author: Аутор

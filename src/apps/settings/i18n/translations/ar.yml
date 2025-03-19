@@ -234,7 +234,6 @@ toolbar:
   label: شريط الأدوات
   placeholder: {}
   show_hibernate: إظهار زر السبات في قائمة الطاقة
-  use_multiple_monitor_overlap_logic: استخدم العرض الخاص بدلاً من منطق التركيز الفردي
 update:
   available: تحديث متاح!
   channel: تحديث قناة
@@ -287,7 +286,6 @@ weg:
     full_width: عرض كامل الشاشة
     min_content: صغيرة كما يمكن أن تكون
   padding: المساحه
-  use_multiple_monitor_overlap_logic: استخدم نمط تعدد الشاشات
   width: العرض
 wm:
   author: المؤلف

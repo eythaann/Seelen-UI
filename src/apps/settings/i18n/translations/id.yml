@@ -241,7 +241,6 @@ toolbar:
   label: Toolbar
   placeholder: {}
   show_hibernate: Menampilkan tombol hibernasi pada menu daya
-  use_multiple_monitor_overlap_logic: Gunakan tampilan spesifik, bukan logika fokus tunggal
 update:
   available: Perbarui Tersedia!
   channel: Perbarui saluran
@@ -294,7 +293,6 @@ weg:
     full_width: Lebar layar penuh
     min_content: Sekecil mungkin
   padding: Lapisan
-  use_multiple_monitor_overlap_logic: Gunakan tampilan spesifik, bukan logika fokus tunggal
   width: Lebar
 wm:
   author: Pengarang
