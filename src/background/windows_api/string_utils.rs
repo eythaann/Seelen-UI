@@ -83,6 +83,12 @@ impl From<String> for WindowsString {
     }
 }
 
+impl From<&String> for WindowsString {
+    fn from(value: &String) -> Self {
+        Self::from_str(value)
+    }
+}
+
 impl From<&OsStr> for WindowsString {
     fn from(value: &OsStr) -> Self {
         Self::from_os_string(value)

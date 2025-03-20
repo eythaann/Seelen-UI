@@ -197,12 +197,16 @@ pub fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> Result<()> 
 }
 
 /// intended to work as converFileToSrc in JS side using tauri library
-#[allow(dead_code)]
-pub fn convert_file_to_src(path: &str) -> String {
+pub fn convert_file_to_src(path: &Path) -> String {
     #[cfg(any(windows, target_os = "android"))]
     let base = "http://asset.localhost/";
     #[cfg(not(any(windows, target_os = "android")))]
     let base = "asset://localhost/";
-    let encoded: String = url::form_urlencoded::byte_serialize(path.as_bytes()).collect();
+    let path = path
+        .canonicalize()
+        .unwrap_or_else(|_| path.to_path_buf())
+        .to_string_lossy()
+        .to_string();
+    let encoded = urlencoding::encode(&path);
     format!("{base}{encoded}")
 }

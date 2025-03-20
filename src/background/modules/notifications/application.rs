@@ -1,5 +1,6 @@
 use std::{
     collections::HashSet,
+    path::PathBuf,
     sync::{
         atomic::{AtomicBool, Ordering},
         Arc,
@@ -10,7 +11,8 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::system_state::{AppNotification, Toast, ToastBindingEntry};
 use windows::{
-    Foundation::TypedEventHandler,
+    ApplicationModel::AppInfo,
+    Foundation::{TypedEventHandler, Uri},
     Win32::System::WinRT::EventRegistrationToken,
     UI::Notifications::{
         KnownNotificationBindings,
@@ -21,8 +23,12 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result, event_manager, log_error,
-    seelen_weg::icon_extractor::extract_and_save_icon_umid, trace_lock, utils::spawn_named_thread,
+    error_handler::Result,
+    event_manager, log_error,
+    modules::uwp::get_hightest_quality_posible,
+    seelen_weg::icon_extractor::extract_and_save_icon_umid,
+    trace_lock,
+    utils::{convert_file_to_src, spawn_named_thread},
     windows_api::traits::EventRegistrationTokenExt,
 };
 
@@ -170,6 +176,46 @@ impl NotificationManager {
         Ok(())
     }
 
+    fn clean_toast(toast: &mut Toast, umid: &str) -> Result<()> {
+        let package_path = AppInfo::GetFromAppUserModelId(&umid.into())
+            .and_then(|info| info.Package())
+            .and_then(|package| package.InstalledPath())
+            .map(|path| PathBuf::from(path.to_os_string()));
+
+        for entry in &mut toast.visual.binding.entries {
+            if let ToastBindingEntry::Image(image) = entry {
+                let uri = Uri::CreateUri(&image.src.clone().into())?;
+                let scheme = uri.SchemeName()?.to_string_lossy();
+                let path = PathBuf::from(
+                    Uri::UnescapeComponent(&uri.Path()?)?
+                        .to_string_lossy()
+                        .trim_start_matches('/'),
+                );
+
+                log::debug!("  Scheme: {} | Path: {}", scheme, path.display());
+                // https://learn.microsoft.com/en-us/windows/uwp/app-resources/uri-schemes
+                // https://learn.microsoft.com/en-us/uwp/schemas/tiles/toastschema/element-image
+                match scheme.as_str() {
+                    "http" | "https" => {}
+                    "ms-appx" | "ms-appx-web" => {
+                        let path = package_path.clone()?.join(path);
+                        if let Some(path) = get_hightest_quality_posible(&path) {
+                            log::debug!("  Resolved Path: {}", path.display());
+                            image.src = convert_file_to_src(&path);
+                        } else {
+                            log::warn!("  Unable to resolve path {}", path.display());
+                        }
+                    }
+                    "file" => {
+                        image.src = convert_file_to_src(&path);
+                    }
+                    _ => {}
+                }
+            }
+        }
+        Ok(())
+    }
+
     // this function an in general all the notification system can still be improved on usability and performance
     fn load_notification(&mut self, u_notification: UserNotification) -> Result<()> {
         self.notifications_id.insert(u_notification.Id()?);
@@ -202,7 +248,7 @@ impl NotificationManager {
             // this can be null when the notification count is bigger than the max allowed by default 20
             if let Ok(content) = toast_notification.Content() {
                 let data = content.GetXml()?.to_string();
-                let toast: Toast = quick_xml::de::from_str(&data)?;
+                let mut toast: Toast = quick_xml::de::from_str(&data)?;
 
                 let mut toast_text = Vec::new();
                 for entry in &toast.visual.binding.entries {
@@ -212,6 +258,7 @@ impl NotificationManager {
                 }
 
                 if notification_text == toast_text {
+                    Self::clean_toast(&mut toast, &app_umid.to_string())?;
                     notification_content = Some(toast);
                     break;
                 }

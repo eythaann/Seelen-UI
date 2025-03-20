@@ -84,6 +84,7 @@ backtrace = "0.3.71"
 owo-colors = "4.1.0"
 rust-i18n = "3.1.2"
 url = "2.5.4"
+urlencoding = "=2.1.3"
 
 [dependencies.seelen-core]
 git = "https://github.com/Seelen-Inc/slu-lib.git" # for release/pre-release/nightly

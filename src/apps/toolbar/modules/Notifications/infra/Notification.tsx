@@ -1,11 +1,12 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { ToastBindingEntry, ToastImage } from '@seelen-ui/lib/types';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { Tooltip } from 'antd';
+import { invoke } from '@tauri-apps/api/core';
+import { Select, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 
 import { FileIcon, Icon } from 'src/apps/shared/components/Icon';
+import { cx } from 'src/apps/shared/styles';
 
 import { AppNotification } from '../domain';
 
@@ -18,20 +19,6 @@ const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
 
 function WindowsDateFileTimeToDate(fileTime: bigint) {
   return new Date(Number(fileTime / 10000n - EPOCH_DIFF_MILLISECONDS));
-}
-
-function parseUriToSrc(uri: string) {
-  if (uri.startsWith('http://') || uri.startsWith('https://')) {
-    return uri;
-  }
-
-  if (uri.startsWith('file:///')) {
-    const encodedPath = uri.slice('file:///'.length);
-    const decoded = decodeURIComponent(encodedPath);
-    return convertFileSrc(decoded);
-  }
-
-  return convertFileSrc(uri);
 }
 
 export function Notification({ notification }: Props) {
@@ -98,9 +85,11 @@ export function Notification({ notification }: Props) {
         <div className="notification-body">
           {logoImage && (
             <img
-              src={parseUriToSrc(logoImage['@src'])}
+              src={logoImage['@src']}
               alt={logoImage['@alt'] || ''}
-              className="notification-body-logo-image"
+              className={cx('notification-body-logo-image', {
+                'notification-body-logo-image-circle': logoImage['@hint-crop'] === 'Circle',
+              })}
             />
           )}
 
@@ -114,7 +103,7 @@ export function Notification({ notification }: Props) {
                 return (
                   <img
                     key={index}
-                    src={parseUriToSrc(entry.image['@src'])}
+                    src={entry.image['@src']}
                     alt={entry.image['@alt'] ?? undefined}
                   />
                 );
@@ -126,7 +115,7 @@ export function Notification({ notification }: Props) {
 
           {heroImage && (
             <img
-              src={parseUriToSrc(heroImage['@src'])}
+              src={heroImage['@src']}
               alt={heroImage['@alt'] || ''}
               className="notification-body-hero-image"
             />
@@ -135,7 +124,39 @@ export function Notification({ notification }: Props) {
         {!!actions.length && (
           <div className="notification-actions">
             {actions.map((entry, index) => {
-              if ('action' in entry) {
+              if ('input' in entry) {
+                const input = entry.input;
+                switch (input['@type']) {
+                  case 'Text':
+                    return (
+                      <input
+                        className="notification-input"
+                        key={index}
+                        placeholder={input['@placeHolderContent'] || ''}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      />
+                    );
+                  case 'Selection':
+                    return (
+                      <Select
+                        key={index}
+                        size="small"
+                        placeholder={input['@placeHolderContent'] || ''}
+                        options={input.selection.map((opt) => ({
+                          id: opt['@id'],
+                          value: opt['@content'],
+                        }))}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      />
+                    );
+                }
+              }
+
+              if ('action' in entry && entry.action['@placement'] !== 'ContextMenu') {
                 return (
                   <Tooltip key={index} title={entry.action['@hint-toolTip']}>
                     <button
@@ -152,6 +173,7 @@ export function Notification({ notification }: Props) {
                   </Tooltip>
                 );
               }
+
               return null;
             })}
           </div>
