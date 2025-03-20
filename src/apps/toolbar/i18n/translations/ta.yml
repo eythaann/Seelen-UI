@@ -74,7 +74,9 @@ settings:
   shutdown: பணிநிறுத்தம்
   sleep: தூங்கு
   title: அமைப்புகள்
-unlabelled_tray: பெயரிடப்படாத தட்டு ஐகான்
+tray:
+  empty: 'தட்டு உருப்படிகள் இல்லை (குறிப்பு: விண்டோஸ் 10 செயல்படுத்தப்படவில்லை)'
+  unlabeled: பெயரிடப்படாத தட்டு ஐகான்
 userhome:
   empty_list: உருப்படிகள் இல்லை
   folders:

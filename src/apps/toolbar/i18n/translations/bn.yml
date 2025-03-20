@@ -74,7 +74,9 @@ settings:
   shutdown: শাটডাউন
   sleep: ঘুম
   title: সেটিংস
-unlabelled_tray: লেবেলযুক্ত ট্রে আইকন
+tray:
+  empty: 'কোনও ট্রে আইটেম নেই (দ্রষ্টব্য: উইন্ডোজ 10 প্রয়োগ করা হয়নি)'
+  unlabeled: লেবেলযুক্ত ট্রে আইকন
 userhome:
   empty_list: কোনও আইটেম নেই
   folders:

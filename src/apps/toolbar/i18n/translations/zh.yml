@@ -74,7 +74,9 @@ settings:
   shutdown: 关机
   sleep: 睡眠
   title: 设置
-unlabelled_tray: 未标记的托盘图标
+tray:
+  empty: 无托盘项目（注：Windows 10 未实施）
+  unlabeled: 无标签托盘图标
 userhome:
   empty_list: 无项目
   folders:

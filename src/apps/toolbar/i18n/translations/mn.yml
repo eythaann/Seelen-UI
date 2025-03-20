@@ -74,7 +74,9 @@ settings:
   shutdown: Унтраах
   sleep: Нойр
   title: Тохиргоо
-unlabelled_tray: Unlabelled Tray дүрс
+tray:
+  empty: 'Тавиурын зүйл байхгүй (тэмдэглэл: Windows 10-ийг хэрэгжүүлээгүй)'
+  unlabeled: Unlabelled Tray дүрс
 userhome:
   empty_list: Зүйл байхгүй
   folders:

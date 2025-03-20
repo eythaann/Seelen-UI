@@ -74,7 +74,9 @@ settings:
   shutdown: Tancar
   sleep: Dormir
   title: Configuració
-unlabelled_tray: Icona de la safata no etiquetada
+tray:
+  empty: 'No hi ha articles de safata (nota: Windows 10 no està implementat)'
+  unlabeled: Icona de la safata no etiquetada
 userhome:
   empty_list: Sense articles
   folders:

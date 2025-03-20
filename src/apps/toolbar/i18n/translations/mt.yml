@@ -74,7 +74,9 @@ settings:
   shutdown: Għalaq
   sleep: Irqad
   title: Settings
-unlabelled_tray: Ikona tat-trej mhux immarkata
+tray:
+  empty: 'L-ebda oġġetti tat-trej (Nota: Windows 10 mhux implimentat)'
+  unlabeled: Ikona tat-trej mhux immarkata
 userhome:
   empty_list: L-ebda oġġetti
   folders:

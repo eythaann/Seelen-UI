@@ -74,7 +74,9 @@ settings:
   shutdown: Išjungti
   sleep: Miegas
   title: Nustatymai
-unlabelled_tray: Nepaženklinta dėklo piktograma
+tray:
+  empty: 'Nėra dėklo elementų (Pastaba: "Windows 10" neįdiegta)'
+  unlabeled: Nepažymėta dėklo piktograma
 userhome:
   empty_list: Jokių daiktų
   folders:

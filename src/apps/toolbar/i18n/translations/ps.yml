@@ -74,7 +74,9 @@ settings:
   shutdown: ‍‍‍بندول
   sleep: ویده شه
   title: امستنې
-unlabelled_tray: بې بنسټه ټری عکس
+tray:
+  empty: 'هیڅ ټرای توکي ندي (یادونه: وینډوز 10 ندي پلي شوي)'
+  unlabeled: بې بنسټه ټری عکس
 userhome:
   empty_list: هیڅ توکي نشته
   folders:

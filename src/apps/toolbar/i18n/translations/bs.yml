@@ -74,7 +74,9 @@ settings:
   shutdown: Ugasiti
   sleep: Spavati
   title: Postavke
-unlabelled_tray: Ikona neobrađene ladice
+tray:
+  empty: 'Nema predmeta za ladicu (Napomena: Windows 10 se ne primjenjuje)'
+  unlabeled: Ikona neobrađene ladice
 userhome:
   empty_list: Nema predmeta
   folders:

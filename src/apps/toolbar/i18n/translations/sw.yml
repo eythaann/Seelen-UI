@@ -74,7 +74,9 @@ settings:
   shutdown: Kuzimisha
   sleep: Kulala
   title: Mipangilio
-unlabelled_tray: Icon isiyo na msingi ya tray
+tray:
+  empty: 'Hakuna Vitu vya Tray (Kumbuka: Windows 10 haijatekelezwa)'
+  unlabeled: Icon isiyo na msingi ya tray
 userhome:
   empty_list: Hakuna vitu
   folders:

@@ -74,7 +74,9 @@ settings:
   shutdown: Temirandin
   sleep: Xew
   title: Mîhengan
-unlabelled_tray: Îkonê tray a bêpergal
+tray:
+  empty: 'Tiştên tray (Nîşe: Windows 10 nayê pêkanîn)'
+  unlabeled: Îkonê tray a bêpergal
 userhome:
   empty_list: Tiştek tune
   folders:

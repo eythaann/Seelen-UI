@@ -74,7 +74,9 @@ settings:
   shutdown: Vypnout
   sleep: Spát
   title: Nastavení
-unlabelled_tray: Ikona neznačené podnosy
+tray:
+  empty: 'Žádné položky na liště (Poznámka: systém Windows 10 není implementován)'
+  unlabeled: Ikona zásobníku bez štítku
 userhome:
   empty_list: Žádné položky
   folders:

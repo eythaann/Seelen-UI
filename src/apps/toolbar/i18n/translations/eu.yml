@@ -74,7 +74,9 @@ settings:
   shutdown: Itzali
   sleep: Lo
   title: Ezarpen
-unlabelled_tray: Nahitaezko erretilua ikonoa
+tray:
+  empty: 'Erretilurik ez (Oharra: Windows 10 ez da inplementatu)'
+  unlabeled: Nahitaezko erretilua ikonoa
 userhome:
   empty_list: Ez dago elementurik
   folders:

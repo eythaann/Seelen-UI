@@ -74,7 +74,9 @@ settings:
   shutdown: Исклучи
   sleep: Спиење
   title: Поставки
-unlabelled_tray: Икона за обележување на послужавник
+tray:
+  empty: 'Без предмети за послужавник (белешка: Windows 10 не се спроведува)'
+  unlabeled: Икона за обележување на послужавник
 userhome:
   empty_list: Нема предмети
   folders:

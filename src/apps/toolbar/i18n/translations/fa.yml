@@ -74,7 +74,9 @@ settings:
   shutdown: تعطیل
   sleep: خواب
   title: تنظیمات
-unlabelled_tray: نماد سینی بدون نام
+tray:
+  empty: 'بدون موارد سینی (توجه: ویندوز 10 پیاده سازی نشده است)'
+  unlabeled: نماد سینی بدون برچسب
 userhome:
   empty_list: هیچ موردی
   folders:

@@ -74,7 +74,9 @@ settings:
   shutdown: Skru av
   sleep: Sove
   title: Innstillinger
-unlabelled_tray: Umerket brettikon
+tray:
+  empty: 'Ingen brettelementer (Merk: Windows 10 er ikke implementert)'
+  unlabeled: Umerket brettikon
 userhome:
   empty_list: Ingen ting
   folders:

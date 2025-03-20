@@ -74,7 +74,9 @@ settings:
   shutdown: O'chirish; yopish
   sleep: Uyqu
   title: Sozlash
-unlabelled_tray: Bojavelilmagan aşınma ikonka
+tray:
+  empty: 'Patnis buyumlari yo''q (Izoh: Windows 10 amalga oshirilmagan)'
+  unlabeled: Bojavelilmagan aşınma ikonka
 userhome:
   empty_list: Hech narsa yo'q
   folders:

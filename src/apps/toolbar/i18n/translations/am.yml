@@ -74,7 +74,9 @@ settings:
   shutdown: ዝጋው
   sleep: እንቅልፍ
   title: ቅንብሮች
-unlabelled_tray: ያልተስተካከለ ትሪ አዶ
+tray:
+  empty: 'ምንም ትሪ ዕቃዎች የሉም (ማስታወሻ: ዊንዶውስ 10 ተተግብሯል)'
+  unlabeled: ያልተስተካከለ ትሪ አዶ
 userhome:
   empty_list: ምንም ዕቃዎች የሉም
   folders:

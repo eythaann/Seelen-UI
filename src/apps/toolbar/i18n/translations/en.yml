@@ -74,7 +74,9 @@ settings:
   shutdown: Shutdown
   sleep: Sleep
   title: Settings
-unlabelled_tray: Unlabelled Tray Icon
+tray:
+  empty: 'No tray items (Note: Windows 10 is not implemented)'
+  unlabeled: Unlabelled Tray Icon
 userhome:
   empty_list: No items
   folders:

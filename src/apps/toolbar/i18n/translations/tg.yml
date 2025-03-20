@@ -74,7 +74,9 @@ settings:
   shutdown: Пӯшида шудан
   sleep: Хоб
   title: Танзимот
-unlabelled_tray: Тасвири табақаи ғайриқонунӣ
+tray:
+  empty: 'Ягон ҷузъҳои табақе (Эзоҳ: Windows 10 иҷро карда намешавад)'
+  unlabeled: Тасвири табақаи ғайриқонунӣ
 userhome:
   empty_list: Ҳеҷ чиз нест
   folders:

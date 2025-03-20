@@ -74,7 +74,9 @@ settings:
   shutdown: Matikan
   sleep: Tidur
   title: Pengaturan
-unlabelled_tray: Ikon baki tanpa label
+tray:
+  empty: 'Tidak ada item baki (Catatan: Windows 10 tidak diimplementasikan)'
+  unlabeled: Ikon Baki Tanpa Label
 userhome:
   empty_list: Tidak ada item
   folders:

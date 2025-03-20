@@ -74,7 +74,9 @@ settings:
   shutdown: වසා දමන්න
   sleep: නිදාගන්න
   title: සැකසුම්
-unlabelled_tray: ලැජ්ජාවේ තැටි නිරූපකය
+tray:
+  empty: 'තැටි අයිතම නැත (සටහන: වින්ඩෝස් 10 ක්රියාත්මක නොවේ)'
+  unlabeled: ලැජ්ජාවේ තැටි නිරූපකය
 userhome:
   empty_list: අයිතම නැත
   folders:

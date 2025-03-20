@@ -74,7 +74,9 @@ settings:
   shutdown: Herunterfahren
   sleep: Ruhezustand
   title: Einstellungen
-unlabelled_tray: Entlebte Tablettikone
+tray:
+  empty: 'Keine Tray Items (Hinweis: Windows 10 ist nicht implementiert)'
+  unlabeled: Unbeschriftetes Tablett-Symbol
 userhome:
   empty_list: Keine Artikel
   folders:

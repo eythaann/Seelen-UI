@@ -74,7 +74,9 @@ settings:
   shutdown: शट डाउन
   sleep: नींद
   title: समायोजन
-unlabelled_tray: अनबेल्ड ट्रे आइकन
+tray:
+  empty: 'कोई ट्रे आइटम नहीं (नोट: विंडोज 10 लागू नहीं किया गया है)'
+  unlabeled: अनबेल्ड ट्रे आइकन
 userhome:
   empty_list: कोई आइटम नहीं
   folders:

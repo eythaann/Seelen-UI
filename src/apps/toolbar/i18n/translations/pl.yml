@@ -74,7 +74,9 @@ settings:
   shutdown: Zamknięcie
   sleep: Spać
   title: Ustawienia
-unlabelled_tray: Ikona nieznakowanej tacki
+tray:
+  empty: 'Brak elementów w zasobniku (Uwaga: Windows 10 nie jest zaimplementowany)'
+  unlabeled: Ikona zasobnika bez etykiety
 userhome:
   empty_list: Brak przedmiotów
   folders:

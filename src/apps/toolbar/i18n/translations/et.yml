@@ -74,7 +74,9 @@ settings:
   shutdown: Lülita välja
   sleep: Magama
   title: Sätted
-unlabelled_tray: Märgistamata salveikoon
+tray:
+  empty: 'Puuduvad salveelemendid (Märkus: Windows 10 ei ole rakendatud)'
+  unlabeled: Märkimata salve ikoon
 userhome:
   empty_list: Puuduvad esemed
   folders:

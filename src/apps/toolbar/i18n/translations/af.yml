@@ -74,7 +74,9 @@ settings:
   shutdown: Stilstand
   sleep: Slaap
   title: Instellings
-unlabelled_tray: Ongeslote skinkbord -ikoon
+tray:
+  empty: 'Geen skinkborditems nie (let wel: Windows 10 word nie geïmplementeer nie)'
+  unlabeled: Ongeslote skinkbord -ikoon
 userhome:
   empty_list: Geen items nie
   folders:

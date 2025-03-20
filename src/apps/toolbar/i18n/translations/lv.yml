@@ -74,7 +74,9 @@ settings:
   shutdown: Izslēgt
   sleep: Gulēt
   title: Iestatījumi
-unlabelled_tray: Neiezīmēta paplātes ikona
+tray:
+  empty: 'Nav paplātes elementu (Piezīme: Windows 10 nav ieviesta)'
+  unlabeled: Ikona bez etiķetes paplātes ikona
 userhome:
   empty_list: Nav vienību
   folders:

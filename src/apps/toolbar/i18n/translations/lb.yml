@@ -74,7 +74,9 @@ settings:
   shutdown: Ausmaachen
   sleep: Schlolof
   title: Astellunge
-unlabelled_tray: Onbau Take Ikon
+tray:
+  empty: 'Keng Schachtartikelen (Notiz: Windows 10 ass net implementéiert)'
+  unlabeled: Onbau Take Ikon
 userhome:
   empty_list: Keng Saachen
   folders:

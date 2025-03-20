@@ -74,7 +74,9 @@ settings:
   shutdown: ΤΕΡΜΑΤΙΣΜΟΣ ΛΕΙΤΟΥΡΓΙΑΣ
   sleep: Υπνος
   title: Ρυθμίσεις
-unlabelled_tray: Εικονίδιο δίσκων χωρίς
+tray:
+  empty: 'Δεν υπάρχουν στοιχεία στο δίσκο (Σημείωση: τα Windows 10 δεν εφαρμόζονται)'
+  unlabeled: Εικονίδιο δίσκου χωρίς ετικέτα
 userhome:
   empty_list: Δεν υπάρχουν αντικείμενα
   folders:

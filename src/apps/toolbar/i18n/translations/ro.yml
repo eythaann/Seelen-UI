@@ -74,7 +74,9 @@ settings:
   shutdown: Închide
   sleep: Dormi
   title: Setări
-unlabelled_tray: Pictograma tăvii nemarcate
+tray:
+  empty: 'Nu există elemente în tavă (Notă: Windows 10 nu este implementat)'
+  unlabeled: Pictograma tavă fără etichetă
 userhome:
   empty_list: Nu există articole
   folders:

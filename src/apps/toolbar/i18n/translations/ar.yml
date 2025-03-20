@@ -74,7 +74,9 @@ settings:
   shutdown: اطفاء الجهاز
   sleep: النوم
   title: إعدادات
-unlabelled_tray: أيقونة غير مسماة
+tray:
+  empty: 'لا توجد عناصر صينية (ملاحظة: لم يتم تنفيذ نظام التشغيل Windows 10)'
+  unlabeled: أيقونة الدرج غير المسمى
 userhome:
   empty_list: لا توجد عناصر
   folders:

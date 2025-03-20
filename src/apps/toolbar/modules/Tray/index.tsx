@@ -67,7 +67,7 @@ function TrayItem(props: { tray: TrayInfo }) {
           tray.label ||
           tray.registry.initialTooltip ||
           tray.registry.executablePath.split('\\').pop() ||
-          t('unlabelled_tray')
+          t('tray.unlabeled')
         }
         placement="left"
         arrow={false}
@@ -80,6 +80,7 @@ export function TrayModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
 
   const trayList = useSelector(Selectors.systemTray);
+  const { t } = useTranslation();
 
   useWindowFocusChange((focused) => {
     if (!focused) {
@@ -108,6 +109,7 @@ export function TrayModule({ module }: Props) {
               <TrayItem key={tray.registry.key} tray={tray} />
             ))}
           </ul>
+          {trayList.length === 0 && <div className="tray-empty">{t('tray.empty')}</div>}
         </BackgroundByLayersV2>
       }
     >

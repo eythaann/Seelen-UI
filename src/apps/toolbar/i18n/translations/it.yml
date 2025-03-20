@@ -74,7 +74,9 @@ settings:
   shutdown: Spegni
   sleep: Sospendi
   title: Impostazioni
-unlabelled_tray: Icona di Tray senza etichetta
+tray:
+  empty: 'Nessun elemento nella tray (Nota: Windows 10 non è implementato)'
+  unlabeled: Icona Vassoio senza etichetta
 userhome:
   empty_list: Nessun articolo
   folders:

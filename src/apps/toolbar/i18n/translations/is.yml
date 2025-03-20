@@ -74,7 +74,9 @@ settings:
   shutdown: Lokun
   sleep: Sofðu
   title: Stillingar
-unlabelled_tray: Ómerkt bakkatákn
+tray:
+  empty: 'Engir bakkar hlutir (Athugið: Windows 10 er ekki útfærður)'
+  unlabeled: Ómerkt bakkatákn
 userhome:
   empty_list: Engir hlutir
   folders:

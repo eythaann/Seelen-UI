@@ -74,7 +74,9 @@ settings:
   shutdown: Menutup
   sleep: Tidur
   title: Tetapan
-unlabelled_tray: Ikon dulang yang tidak dilabel
+tray:
+  empty: 'Tiada item dulang (Nota: Windows 10 tidak dilaksanakan)'
+  unlabeled: Ikon dulang yang tidak dilabel
 userhome:
   empty_list: Tiada barang
   folders:

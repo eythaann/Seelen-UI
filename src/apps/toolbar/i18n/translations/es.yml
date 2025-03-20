@@ -74,7 +74,9 @@ settings:
   shutdown: Apagar
   sleep: Suspender
   title: Configuraciones
-unlabelled_tray: Ícono de la bandeja sin etiqueta
+tray:
+  empty: 'Sin elementos en la bandeja (Nota: Windows 10 no está implementado)'
+  unlabeled: Icono de bandeja sin etiqueta
 userhome:
   empty_list: No hay artículos
   folders:

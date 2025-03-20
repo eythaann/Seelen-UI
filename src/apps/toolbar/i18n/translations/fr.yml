@@ -74,7 +74,11 @@ settings:
   shutdown: Fermer
   sleep: Dormir
   title: Paramètres
-unlabelled_tray: Icône de plateau non étiquetée
+tray:
+  empty: >-
+    Pas d'éléments dans la zone de notification (Note : Windows 10 n'est pas
+    implémenté)
+  unlabeled: Icône de plateau sans étiquette
 userhome:
   empty_list: Aucun élément
   folders:

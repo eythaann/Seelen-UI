@@ -74,7 +74,9 @@ settings:
   shutdown: Bakhtii
   sleep: Seexo
   title: Dejinta
-unlabelled_tray: UNIBLEMEMEMED TRAY
+tray:
+  empty: 'Majiro alaabo saxanka (Xusuusin: Windows 10 lama fulinayo)'
+  unlabeled: UNIBLEMEMEMED TRAY
 userhome:
   empty_list: Wax walboo ah
   folders:

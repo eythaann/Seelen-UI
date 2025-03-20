@@ -74,7 +74,9 @@ settings:
   shutdown: షట్డౌన్
   sleep: నిద్ర
   title: సెట్టింగులు
-unlabelled_tray: లేబుల్ చేయని ట్రే చిహ్నం
+tray:
+  empty: 'ట్రే అంశాలు లేవు (గమనిక: విండోస్ 10 అమలు చేయబడలేదు)'
+  unlabeled: లేబుల్ చేయని ట్రే చిహ్నం
 userhome:
   empty_list: అంశాలు లేవు
   folders:

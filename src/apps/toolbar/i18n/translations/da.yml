@@ -74,7 +74,9 @@ settings:
   shutdown: Lukke ned
   sleep: Søvn
   title: Indstillinger
-unlabelled_tray: Umnæret bakkeikon
+tray:
+  empty: 'Ingen elementer i bakken (Bemærk: Windows 10 er ikke implementeret)'
+  unlabeled: Ikon for ubemærket bakke
 userhome:
   empty_list: Ingen genstande
   folders:

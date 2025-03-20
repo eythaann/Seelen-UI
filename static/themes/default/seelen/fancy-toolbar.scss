@@ -15,6 +15,15 @@
   }
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 %actionable-button {
   padding: 4px;
   border-radius: 6px;
@@ -254,64 +263,64 @@
 
 .tray {
   margin: var(--popups-margin);
+  padding: 10px;
 
   .tray-bg-layer-1 {
     background-color: var(--color-gray-50);
     border-radius: 10px;
     box-shadow: 0 0 10px 10px #0001;
   }
-}
 
-.tray-list {
-  padding: 10px;
-  max-height: 50vh;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  gap: 4px;
-}
+  .tray-list {
+    @extend %list;
+    overflow-y: auto;
+    max-height: 50vh;
 
-.tray-item {
-  display: grid;
-  grid-template-columns: 20px 1fr;
-  align-items: center;
-  gap: 8px;
-  border-radius: 8px;
-  padding: 8px;
-  gap: 6px;
-  height: min-content;
+    .tray-item {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      align-items: center;
+      gap: 8px;
+      border-radius: 8px;
+      padding: 8px;
+      gap: 6px;
+      height: min-content;
 
-  &:hover {
-    background-color: rgba(var(--config-accent-color-rgb), 0.2);
-  }
+      &:hover {
+        background-color: rgba(var(--config-accent-color-rgb), 0.2);
+      }
 
-  .tray-item-icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+      .tray-item-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    .tray-item-icon {
-      height: 1rem;
-      object-fit: contain;
+        .tray-item-icon {
+          height: 1rem;
+          object-fit: contain;
+        }
+      }
+
+      .tray-item-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+
+      .tray-item-label-tooltip {
+        padding: 0 40px;
+      }
     }
   }
 
-  .tray-item-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-  }
-
-  .tray-item-label-tooltip {
-    padding: 0 40px;
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  .tray-empty {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-gray-600);
   }
 }
 

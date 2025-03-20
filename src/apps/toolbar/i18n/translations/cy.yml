@@ -74,7 +74,9 @@ settings:
   shutdown: Chaead
   sleep: Chysger
   title: Gosodiadau
-unlabelled_tray: Eicon hambwrdd heb ei labelu
+tray:
+  empty: 'Dim eitemau hambwrdd (nodyn: ni weithredir Windows 10)'
+  unlabeled: Eicon hambwrdd heb ei labelu
 userhome:
   empty_list: Dim eitemau
   folders:

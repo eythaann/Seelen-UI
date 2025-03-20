@@ -74,7 +74,9 @@ settings:
   shutdown: シャットダウン
   sleep: スリープ
   title: 設定
-unlabelled_tray: ラベル無し
+tray:
+  empty: トレイ項目なし（注：Windows 10には実装されていません）
+  unlabeled: ラベルなしトレイアイコン
 userhome:
   empty_list: アイテムがありません
   folders:

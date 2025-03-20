@@ -74,7 +74,9 @@ settings:
   shutdown: شٹ ڈاؤن
   sleep: سلیپ
   title: عنوان
-unlabelled_tray: غیر لیبلڈ ٹرے آئیکن
+tray:
+  empty: 'ٹرے آئٹمز نہیں (نوٹ: ونڈوز 10 پر عمل درآمد نہیں ہوا ہے)'
+  unlabeled: غیر لیبلڈ ٹرے آئیکن
 userhome:
   empty_list: کوئی اشیاء نہیں
   folders:

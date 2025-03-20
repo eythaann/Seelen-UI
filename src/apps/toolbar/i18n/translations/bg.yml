@@ -74,7 +74,9 @@ settings:
   shutdown: Изключвам
   sleep: Сън
   title: Настройки
-unlabelled_tray: Необичана икона на таблата
+tray:
+  empty: 'Няма елементи в таблата (Забележка: Windows 10 не е въведена)'
+  unlabeled: Икона на тава без етикет
 userhome:
   empty_list: Няма артикули
   folders:

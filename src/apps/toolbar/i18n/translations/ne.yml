@@ -74,7 +74,9 @@ settings:
   shutdown: बन्द गर
   sleep: निदाउनु
   title: बतंग
-unlabelled_tray: अनलिसर गरिएको ट्रे आइकन
+tray:
+  empty: 'कुनै ट्रे आईटमहरू (नोट: विन्डोज 10 कार्यान्वयन छैन)'
+  unlabeled: अनलिसर गरिएको ट्रे आइकन
 userhome:
   empty_list: वस्तुहरू छैनन्
   folders:

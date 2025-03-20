@@ -74,7 +74,9 @@ settings:
   shutdown: Söndür
   sleep: Yatmaq
   title: Parametrlər
-unlabelled_tray: Qeyri-çapsız tepsik nişanı
+tray:
+  empty: 'Lövhə əşyaları yoxdur (Qeyd: Windows 10 tətbiq olunmur)'
+  unlabeled: Qeyri-çapsız tepsik nişanı
 userhome:
   empty_list: Nəhəng
   folders:

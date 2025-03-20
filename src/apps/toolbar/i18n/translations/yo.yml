@@ -74,7 +74,9 @@ settings:
   shutdown: Paade
   sleep: Sun
   title: Ètò
-unlabelled_tray: Alailowaya ti ko ni ile-iwe
+tray:
+  empty: 'Ko si awọn ohun atẹ (akọsilẹ: Windows 10 ko mu)'
+  unlabeled: Alailowaya ti ko ni ile-iwe
 userhome:
   empty_list: Ko si awọn ohun kan
   folders:

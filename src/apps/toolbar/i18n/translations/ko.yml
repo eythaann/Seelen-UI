@@ -74,7 +74,9 @@ settings:
   shutdown: 종료
   sleep: 절전
   title: 설정
-unlabelled_tray: 텍스트가 없는 트레이
+tray:
+  empty: '트레이 항목 없음(참고: Windows 10은 구현되지 않음)'
+  unlabeled: 레이블이 없는 트레이 아이콘
 userhome:
   empty_list: 항목 없음
   folders:

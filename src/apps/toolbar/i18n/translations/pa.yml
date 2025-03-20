@@ -74,7 +74,9 @@ settings:
   shutdown: ਸ਼ਟ ਡਾਉਨ
   sleep: ਨੀਂਦ
   title: ਸੈਟਿੰਗਜ਼
-unlabelled_tray: ਬਿਨਾਲੇ ਟਰੇ ਆਈਕਨ
+tray:
+  empty: 'ਕੋਈ ਟਰੇ ਆਈਟਮਾਂ (ਨੋਟ: ਵਿੰਡੋਜ਼ 10 ਲਾਗੂ ਨਹੀਂ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ)'
+  unlabeled: ਬਿਨਾਲੇ ਟਰੇ ਆਈਕਨ
 userhome:
   empty_list: ਕੋਈ ਚੀਜ਼ਾਂ ਨਹੀਂ
   folders:

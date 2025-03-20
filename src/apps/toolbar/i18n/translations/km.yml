@@ -74,7 +74,9 @@ settings:
   shutdown: បិទ
   sleep: ដមនេក
   title: ការកំណត់
-unlabelled_tray: រូបតំណាងថាឡៃដែលមិនស្មោះត្រង់
+tray:
+  empty: 'មិនមានធាតុថាស (ចំណាំ: វីនដូ 10 មិនត្រូវបានអនុវត្តទេ)'
+  unlabeled: រូបតំណាងថាឡៃដែលមិនស្មោះត្រង់
 userhome:
   empty_list: មិនមានធាតុ
   folders:

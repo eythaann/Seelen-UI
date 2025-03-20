@@ -74,7 +74,9 @@ settings:
   shutdown: Გათიშვა
   sleep: ძილი
   title: პარამეტრები
-unlabelled_tray: არასასურველი უჯრის ხატი
+tray:
+  empty: 'არ არის უჯრის ელემენტები (შენიშვნა: Windows 10 არ არის განხორციელებული)'
+  unlabeled: არასასურველი უჯრის ხატი
 userhome:
   empty_list: არ არის ნივთები
   folders:

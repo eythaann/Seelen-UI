@@ -74,7 +74,9 @@ settings:
   shutdown: Stänga av
   sleep: Sova
   title: inställningar
-unlabelled_tray: Omärkta fackikon
+tray:
+  empty: 'Inga objekt i facket (Obs: Windows 10 är inte implementerat)'
+  unlabeled: Ikon för obemärkt fack
 userhome:
   empty_list: Inga föremål
   folders:

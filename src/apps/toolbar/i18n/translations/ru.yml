@@ -74,7 +74,9 @@ settings:
   shutdown: Завершение работы
   sleep: Спящий режим
   title: Настройки
-unlabelled_tray: Иконка трея без надписи
+tray:
+  empty: 'Отсутствие элементов в трее (Примечание: в Windows 10 не реализовано)'
+  unlabeled: Значок лотка без надписи
 userhome:
   empty_list: Нет предметов
   folders:

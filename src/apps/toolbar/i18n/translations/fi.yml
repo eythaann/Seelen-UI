@@ -74,7 +74,9 @@ settings:
   shutdown: Sammuttaa
   sleep: Nukkua
   title: asetukset
-unlabelled_tray: Leimaton lokerokuvake
+tray:
+  empty: 'Ei lokeron kohteita (Huomautus: Windows 10:tä ei ole toteutettu).'
+  unlabeled: Merkitsemätön lokeron kuvake
 userhome:
   empty_list: Ei kohteita
   folders:

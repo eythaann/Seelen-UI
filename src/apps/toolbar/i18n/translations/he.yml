@@ -74,7 +74,9 @@ settings:
   shutdown: לכבות
   sleep: לִישׁוֹן
   title: הגדרות
-unlabelled_tray: אייקון מגש ללא תווית
+tray:
+  empty: 'אין פריטי מגש (הערה: Windows 10 אינו מיושם)'
+  unlabeled: אייקון מגש ללא תווית
 userhome:
   empty_list: אין פריטים
   folders:

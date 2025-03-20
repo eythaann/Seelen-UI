@@ -74,7 +74,9 @@ settings:
   shutdown: Tắt
   sleep: Ngủ
   title: Cài đặt
-unlabelled_tray: Biểu tượng khay không ghi nhãn
+tray:
+  empty: 'Không có mục Khay (Lưu ý: Windows 10 không được triển khai)'
+  unlabeled: Biểu tượng khay không ghi nhãn
 userhome:
   empty_list: Không có mặt hàng
   folders:

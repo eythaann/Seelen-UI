@@ -74,7 +74,9 @@ settings:
   shutdown: Ugasiti
   sleep: Spavati
   title: Postavke
-unlabelled_tray: Ikona neobilježene ladice
+tray:
+  empty: 'Nema stavki za ladicu (NAPOMENA: Windows 10 nije implementiran)'
+  unlabeled: Ikona neobilježene ladice
 userhome:
   empty_list: Nema predmeta
   folders:

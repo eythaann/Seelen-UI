@@ -74,7 +74,9 @@ settings:
   shutdown: Leállitás
   sleep: Alvás
   title: Beállítások
-unlabelled_tray: Jelöletlen tálca ikon
+tray:
+  empty: 'Nincsenek tálcaelemek (Megjegyzés: a Windows 10 nem implementált)'
+  unlabeled: Címkézetlen tálca ikon
 userhome:
   empty_list: Nincsenek tételek
   folders:

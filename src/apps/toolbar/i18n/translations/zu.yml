@@ -74,7 +74,9 @@ settings:
   shutdown: Vala shaqa
   sleep: Ukulala
   title: Amasethingi
-unlabelled_tray: Isithonjana se-tray esingafundile
+tray:
+  empty: 'Azikho izinto zetay (Qaphela: IWindows 10 ayisebenzi)'
+  unlabeled: Isithonjana se-tray esingafundile
 userhome:
   empty_list: Azikho izinto
   folders:

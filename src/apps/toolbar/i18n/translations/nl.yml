@@ -74,7 +74,9 @@ settings:
   shutdown: Afsluiten
   sleep: Slaap
   title: Instellingen
-unlabelled_tray: Niet-gelabeld systeemvakpictogram
+tray:
+  empty: 'Geen lade-items (Opmerking: Windows 10 is niet geïmplementeerd)'
+  unlabeled: Pictogram Lade zonder label
 userhome:
   empty_list: Geen items
   folders:

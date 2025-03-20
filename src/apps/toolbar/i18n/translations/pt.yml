@@ -74,7 +74,9 @@ settings:
   shutdown: Desligar
   sleep: Dormir
   title: Configurações
-unlabelled_tray: Ícone de bandeja não marcada
+tray:
+  empty: 'Não há itens de bandeja (Nota: o Windows 10 não é implementado)'
+  unlabeled: Ícone de bandeja não marcada
 userhome:
   empty_list: Sem itens
   folders:
