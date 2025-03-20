@@ -180,6 +180,9 @@ impl Seelen {
     pub fn start(&mut self) -> Result<()> {
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         RestorationAndMigration::run_full()?;
+
+        // order is important
+        create_background_window()?;
         declare_system_events_handlers()?;
 
         let state = FULL_STATE.load();
@@ -217,7 +220,6 @@ impl Seelen {
             WindowManagerV2::enumerate_all_windows()?;
         }
 
-        create_background_window()?;
         register_win_hook()?;
         Ok(())
     }

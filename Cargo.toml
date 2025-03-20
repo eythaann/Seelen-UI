@@ -108,6 +108,7 @@ features = [
     "Win32_Graphics_Dwm",
     "Win32_Graphics_Gdi",
     "Win32_UI_HiDpi",
+    "Win32_System_DataExchange",           # messages between processes/windows
     "Win32_System_Ole",
     "Win32_System_Com",
     "Win32_System_Com_StructuredStorage",

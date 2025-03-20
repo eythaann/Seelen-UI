@@ -14,7 +14,6 @@ use super::application::UserManager;
 use seelen_core::system_state::{File, FolderChangedArgs, FolderType, User};
 
 pub fn register_user_events() {
-    log::trace!("Register for user profile events!");
     UserManager::subscribe(|event| match event {
         UserManagerEvent::UserUpdated() => {
             let guard = trace_lock!(USER_MANAGER);

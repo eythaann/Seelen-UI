@@ -1,13 +1,22 @@
+use parking_lot::Mutex;
+use std::{collections::HashMap, sync::Arc};
 use windows::Win32::{
     Foundation::{HWND, POINT, RECT},
+    System::DataExchange::COPYDATASTRUCT,
     UI::{
         Accessibility::{
             CUIAutomation, IUIAutomation, IUIAutomationCondition, IUIAutomationElement,
             IUIAutomationElement3, IUIAutomationInvokePattern, TreeScope, TreeScope_Children,
             TreeScope_Subtree, UIA_InvokePatternId,
         },
-        Shell::{Shell_NotifyIconGetRect, NOTIFYICONIDENTIFIER},
-        WindowsAndMessaging::{FindWindowA, FindWindowExA, GetCursorPos, SW_HIDE, SW_SHOW},
+        Shell::{
+            Shell_NotifyIconGetRect, NIM_ADD, NIM_DELETE, NIM_MODIFY, NIM_SETVERSION,
+            NOTIFYICONIDENTIFIER,
+        },
+        WindowsAndMessaging::{
+            FindWindowA, FindWindowExA, GetCursorPos, RegisterWindowMessageW, SendNotifyMessageW,
+            HWND_BROADCAST, SW_HIDE, SW_SHOW, WM_COPYDATA,
+        },
     },
 };
 use windows_core::{Interface, GUID};
@@ -18,179 +27,181 @@ use winreg::{
 
 use crate::{
     error_handler::Result,
-    pcstr,
+    event_manager, pcstr, trace_lock,
     utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
-    windows_api::{AppBarData, AppBarDataState, Com, WindowEnumerator, WindowsApi},
+    windows_api::{
+        event_window::{get_native_shell_hwnd, subscribe_to_background_window},
+        string_utils::WindowsString,
+        AppBarData, AppBarDataState, Com, WindowEnumerator, WindowsApi,
+    },
 };
 
-use super::domain::{RegistryNotifyIcon, TrayIcon};
+use super::domain::{
+    NotifyIconIdentifier, RegistryNotifyIcon, ShellTrayMessage, TrayIcon, TrayIconId, TrayIconV2,
+};
 
-pub fn get_sub_tree(
-    element: &IUIAutomationElement,
-    condition: &IUIAutomationCondition,
-    scope: TreeScope,
-) -> Result<Vec<IUIAutomationElement>> {
-    let mut elements = Vec::new();
-    unsafe {
-        let element_array = element.FindAll(scope, condition)?;
-        for index in 0..element_array.Length()? {
-            let element = element_array.GetElement(index)?;
-            elements.push(element);
-        }
-    }
-    Ok(elements)
+lazy_static! {
+    pub static ref TRAY_ICON_MANAGER: Arc<Mutex<TrayIconManager>> =
+        Arc::new(Mutex::new(TrayIconManager::new()));
 }
 
-pub fn get_tray_overflow_handle() -> Option<HWND> {
-    unsafe {
-        if is_windows_10() {
-            FindWindowA(pcstr!("NotifyIconOverFlowWindow"), None).ok()
-        } else {
-            FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None).ok()
-        }
-    }
+pub struct TrayIconManager {
+    pub icons: Vec<TrayIcon>,
+    pub automation_by_key: HashMap<String, TrayIconUIElement>,
+    pub icons_v2: HashMap<TrayIconId, TrayIconV2>,
 }
 
-pub fn get_tray_overflow_content_handle() -> Option<HWND> {
-    let tray_overflow = get_tray_overflow_handle()?;
-    unsafe {
-        FindWindowExA(
-            Some(tray_overflow),
-            None,
-            if is_windows_10() {
-                pcstr!("ToolbarWindow32")
-            } else {
-                pcstr!("Windows.UI.Composition.DesktopWindowContentBridge")
-            },
-            None,
-        )
-        .ok()
-    }
+unsafe impl Send for TrayIconManager {}
+
+#[derive(Debug, Clone)]
+pub enum TrayIconEvent {
+    Added(TrayIconV2),
+    Updated(TrayIconV2),
+    Removed(TrayIconId),
 }
 
-pub fn ensure_tray_overflow_creation() -> Result<()> {
-    if !is_windows_11() || get_tray_overflow_content_handle().is_some() {
-        return Ok(());
-    }
+unsafe impl Send for TrayIconEvent {}
 
-    TrayIconManager::enable_chevron()?;
+event_manager!(TrayIconManager, TrayIconEvent);
 
-    Com::run_with_context(|| unsafe {
-        let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None)?;
-
-        let tray_bar = AppBarData::from_handle(tray_hwnd);
-        let tray_bar_state = tray_bar.state();
-        // This function will fail if taskbar is hidden
-        tray_bar.set_state(AppBarDataState::AlwaysOnTop);
-        WindowsApi::show_window_async(tray_hwnd, SW_SHOW)?;
-
-        let automation: IUIAutomation = Com::create_instance(&CUIAutomation)?;
-        let condition = automation.CreateTrueCondition()?;
-        let element: IUIAutomationElement = automation.ElementFromHandle(tray_hwnd)?;
-
-        let element_array = element.FindAll(TreeScope_Subtree, &condition)?;
-        for index in 0..element_array.Length().unwrap_or(0) {
-            let element = element_array.GetElement(index)?;
-            if element.CurrentAutomationId()? == "SystemTrayIcon"
-                && element.CurrentClassName()? == "SystemTray.NormalButton"
-            {
-                let invoker = element
-                    .GetCurrentPatternAs::<IUIAutomationInvokePattern>(UIA_InvokePatternId)?;
-                // open and close the tray to force the creation of the overflow list
-                invoker.Invoke()?;
-                sleep_millis(10);
-                invoker.Invoke()?;
-                break;
-            }
-        }
-
-        tray_bar.set_state(tray_bar_state);
-        Ok(())
-    })?;
-    if get_tray_overflow_content_handle().is_none() {
-        return Err("Failed to create tray overflow".into());
-    }
-    Ok(())
-}
-
-pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
-    ensure_tray_overflow_creation()?;
-    let tray_from_registry = TrayIconManager::enum_from_registry()?;
-
-    Com::run_with_context(|| unsafe {
-        let mut tray_elements = Vec::new();
-
-        let automation: IUIAutomation = Com::create_instance(&CUIAutomation)?;
-        let condition = automation.CreateTrueCondition()?;
-
-        let mut children = Vec::new();
-        if let Some(tray_overflow) = get_tray_overflow_content_handle() {
-            let element: IUIAutomationElement = automation.ElementFromHandle(tray_overflow)?;
-            children.extend(get_sub_tree(&element, &condition, TreeScope_Children)?);
-        }
-
-        let mut idx = 0;
-        for element in children {
-            // running items got from the registry should be the same amount as the ones in the tray overflow
-            // and in the same order
-            if let Some(item_on_reg) = tray_from_registry.get(idx) {
-                tray_elements.push(TrayIcon {
-                    label: element
-                        .CurrentName()
-                        .map(|s| s.to_string())
-                        .unwrap_or_default(),
-                    registry: item_on_reg.clone(),
-                    ui_automation: element,
-                });
-                idx += 1;
-            }
-        }
-        Ok(tray_elements)
-    })
-}
-
-impl TrayIcon {
-    pub fn invoke(&self) -> Result<()> {
-        unsafe {
-            let invoker = self
-                .ui_automation
-                .GetCurrentPatternAs::<IUIAutomationInvokePattern>(UIA_InvokePatternId)?;
-            invoker.Invoke()?;
-        }
-        Ok(())
-    }
-
-    pub fn context_menu(&self) -> Result<()> {
-        let element: IUIAutomationElement3 = self.ui_automation.cast()?;
-
-        let mut cursor_pos = POINT::default();
-        unsafe { GetCursorPos(&mut cursor_pos as *mut POINT)? };
-
-        if let Some(hwnd) = get_tray_overflow_handle() {
-            WindowsApi::show_window_async(hwnd, SW_SHOW)?;
-            let rect = WindowsApi::get_outer_window_rect(hwnd)?;
-
-            WindowsApi::move_window(
-                hwnd,
-                &RECT {
-                    top: cursor_pos.y - (rect.bottom - rect.top),
-                    left: cursor_pos.x - (rect.right - rect.left),
-                    right: 0,
-                    bottom: 0,
-                },
-            )?;
-
-            unsafe { element.ShowContextMenu()? };
-            sleep_millis(500);
-            WindowsApi::show_window_async(hwnd, SW_HIDE)?;
-        }
-
-        Ok(())
-    }
-}
-
-pub struct TrayIconManager {}
 impl TrayIconManager {
+    fn new() -> Self {
+        Self {
+            icons: Vec::new(),
+            icons_v2: HashMap::new(),
+            automation_by_key: HashMap::new(),
+        }
+    }
+
+    pub fn init(&mut self) -> Result<()> {
+        subscribe_to_background_window(Self::on_bg_window_proc);
+        Self::subscribe(|event| match event {
+            TrayIconEvent::Added(data) => {
+                log::trace!("Tray icon added {}", data.id);
+                let mut manager = trace_lock!(TRAY_ICON_MANAGER);
+                manager.icons_v2.insert(data.id.clone(), data);
+                if let Ok((icons, elements)) = Self::get_tray_icons() {
+                    manager.icons = icons;
+                    manager.automation_by_key = elements;
+                }
+            }
+            TrayIconEvent::Updated(data) => {
+                log::trace!("Tray icon updated {}", data.id);
+                let mut manager = trace_lock!(TRAY_ICON_MANAGER);
+                manager.icons_v2.insert(data.id.clone(), data);
+            }
+            TrayIconEvent::Removed(id) => {
+                log::trace!("Tray icon removed {}", id);
+                let mut manager = trace_lock!(TRAY_ICON_MANAGER);
+                manager.icons_v2.remove(&id);
+                if let Ok((icons, elements)) = Self::get_tray_icons() {
+                    manager.icons = icons;
+                    manager.automation_by_key = elements;
+                }
+            }
+        });
+        Self::refresh_icons()?;
+
+        let (icons, elements) = Self::get_tray_icons()?;
+        self.icons = icons;
+        self.automation_by_key = elements;
+        Ok(())
+    }
+
+    fn on_bg_window_proc(msg: u32, _w_param: usize, l_param: isize) -> Result<()> {
+        if msg == WM_COPYDATA {
+            let data = match unsafe { (l_param as *const COPYDATASTRUCT).as_ref() } {
+                Some(data) => data,
+                None => return Ok(()),
+            };
+
+            match data.dwData {
+                1 => {
+                    let message = match unsafe { (data.lpData as *mut ShellTrayMessage).as_mut() } {
+                        Some(message) => message,
+                        None => return Ok(()),
+                    };
+
+                    let data: TrayIconV2 = message.data.into();
+
+                    let event = match message.message {
+                        NIM_ADD => Some(TrayIconEvent::Added(data)),
+                        NIM_MODIFY | NIM_SETVERSION => Some(TrayIconEvent::Updated(data)),
+                        NIM_DELETE => Some(TrayIconEvent::Removed(data.id)),
+                        _ => None,
+                    };
+
+                    if let Some(event) = event {
+                        Self::event_tx().send(event)?;
+                    }
+                }
+                3 => {
+                    let _message =
+                        match unsafe { (data.lpData as *mut NotifyIconIdentifier).as_mut() } {
+                            Some(message) => message,
+                            None => return Ok(()),
+                        };
+                }
+                _ => {}
+            }
+        }
+        Ok(())
+    }
+
+    /// Refreshes the icons of the tray.
+    ///
+    /// Simulates the Windows taskbar being re-created. Some windows fail to
+    /// re-add their icons, in which case it's an implementation error on
+    /// their side. These windows that fail also do not re-add their icons
+    /// to the Windows taskbar when `explorer.exe` is restarted ordinarily.
+    pub fn refresh_icons() -> Result<()> {
+        log::info!("Refreshing icons by sending `TaskbarCreated` message.");
+        let msg = WindowsString::from("TaskbarCreated");
+        let msg = unsafe { RegisterWindowMessageW(msg.as_pcwstr()) };
+        if msg == 0 {
+            return Err(windows::core::Error::from_win32().into());
+        }
+        unsafe { SendNotifyMessageW(HWND_BROADCAST, msg, std::mem::zeroed(), std::mem::zeroed()) }?;
+        Ok(())
+    }
+
+    pub fn get_tray_icons() -> Result<(Vec<TrayIcon>, HashMap<String, TrayIconUIElement>)> {
+        ensure_tray_overflow_creation()?;
+        let tray_from_registry = Self::enum_from_registry()?;
+
+        Com::run_with_context(|| unsafe {
+            let mut tray_elements = Vec::new();
+            let mut automation_by_key = HashMap::new();
+
+            let automation: IUIAutomation = Com::create_instance(&CUIAutomation)?;
+            let condition = automation.CreateTrueCondition()?;
+
+            let mut children = Vec::new();
+            if let Some(tray_overflow) = get_tray_overflow_content_handle() {
+                let element: IUIAutomationElement = automation.ElementFromHandle(tray_overflow)?;
+                children.extend(get_sub_tree(&element, &condition, TreeScope_Children)?);
+            }
+
+            let mut idx = 0;
+            for element in children {
+                // running items got from the registry should be the same amount as the ones in the tray overflow
+                // and in the same order
+                if let Some(item_on_reg) = tray_from_registry.get(idx) {
+                    tray_elements.push(TrayIcon {
+                        label: element
+                            .CurrentName()
+                            .map(|s| s.to_string())
+                            .unwrap_or_default(),
+                        registry: item_on_reg.clone(),
+                    });
+                    automation_by_key.insert(item_on_reg.key.clone(), TrayIconUIElement(element));
+                    idx += 1;
+                }
+            }
+            Ok((tray_elements, automation_by_key))
+        })
+    }
+
     pub fn enable_chevron() -> Result<()> {
         let hkcr = RegKey::predef(HKEY_CURRENT_USER);
         let settings = hkcr.open_subkey_with_flags(
@@ -271,5 +282,140 @@ impl TrayIconManager {
             }
         }
         Ok(registers)
+    }
+}
+
+pub fn get_sub_tree(
+    element: &IUIAutomationElement,
+    condition: &IUIAutomationCondition,
+    scope: TreeScope,
+) -> Result<Vec<IUIAutomationElement>> {
+    let mut elements = Vec::new();
+    unsafe {
+        let element_array = element.FindAll(scope, condition)?;
+        for index in 0..element_array.Length()? {
+            let element = element_array.GetElement(index)?;
+            elements.push(element);
+        }
+    }
+    Ok(elements)
+}
+
+pub fn get_tray_overflow_handle() -> Option<HWND> {
+    unsafe {
+        FindWindowA(
+            if is_windows_10() {
+                pcstr!("NotifyIconOverflowWindow")
+            } else {
+                pcstr!("TopLevelWindowForOverflowXamlIsland")
+            },
+            None,
+        )
+        .ok()
+    }
+}
+
+pub fn get_tray_overflow_content_handle() -> Option<HWND> {
+    let tray_overflow = get_tray_overflow_handle()?;
+    unsafe {
+        FindWindowExA(
+            Some(tray_overflow),
+            None,
+            if is_windows_10() {
+                pcstr!("ToolbarWindow32")
+            } else {
+                pcstr!("Windows.UI.Composition.DesktopWindowContentBridge")
+            },
+            None,
+        )
+        .ok()
+    }
+}
+
+pub fn ensure_tray_overflow_creation() -> Result<()> {
+    if !is_windows_11() || get_tray_overflow_content_handle().is_some() {
+        return Ok(());
+    }
+
+    TrayIconManager::enable_chevron()?;
+
+    Com::run_with_context(|| unsafe {
+        let tray_hwnd = get_native_shell_hwnd()?;
+
+        let tray_bar = AppBarData::from_handle(tray_hwnd);
+        let tray_bar_state = tray_bar.state();
+        // This function will fail if taskbar is hidden
+        tray_bar.set_state(AppBarDataState::AlwaysOnTop);
+        WindowsApi::show_window_async(tray_hwnd, SW_SHOW)?;
+
+        let automation: IUIAutomation = Com::create_instance(&CUIAutomation)?;
+        let condition = automation.CreateTrueCondition()?;
+        let element: IUIAutomationElement = automation.ElementFromHandle(tray_hwnd)?;
+
+        let element_array = element.FindAll(TreeScope_Subtree, &condition)?;
+        for index in 0..element_array.Length().unwrap_or(0) {
+            let element = element_array.GetElement(index)?;
+            if element.CurrentAutomationId()? == "SystemTrayIcon"
+                && element.CurrentClassName()? == "SystemTray.NormalButton"
+            {
+                let invoker = element
+                    .GetCurrentPatternAs::<IUIAutomationInvokePattern>(UIA_InvokePatternId)?;
+                // open and close the tray to force the creation of the overflow list
+                invoker.Invoke()?;
+                sleep_millis(10);
+                invoker.Invoke()?;
+                break;
+            }
+        }
+
+        tray_bar.set_state(tray_bar_state);
+        Ok(())
+    })?;
+
+    if get_tray_overflow_content_handle().is_none() {
+        return Err("Failed to create tray overflow".into());
+    }
+    Ok(())
+}
+
+pub struct TrayIconUIElement(IUIAutomationElement);
+
+impl TrayIconUIElement {
+    pub fn invoke(&self) -> Result<()> {
+        unsafe {
+            let invoker = self
+                .0
+                .GetCurrentPatternAs::<IUIAutomationInvokePattern>(UIA_InvokePatternId)?;
+            invoker.Invoke()?;
+        }
+        Ok(())
+    }
+
+    pub fn context_menu(&self) -> Result<()> {
+        let element: IUIAutomationElement3 = self.0.cast()?;
+
+        let mut cursor_pos = POINT::default();
+        unsafe { GetCursorPos(&mut cursor_pos as *mut POINT)? };
+
+        if let Some(hwnd) = get_tray_overflow_handle() {
+            WindowsApi::show_window_async(hwnd, SW_SHOW)?;
+            let rect = WindowsApi::get_outer_window_rect(hwnd)?;
+
+            WindowsApi::move_window(
+                hwnd,
+                &RECT {
+                    top: cursor_pos.y - (rect.bottom - rect.top),
+                    left: cursor_pos.x - (rect.right - rect.left),
+                    right: 0,
+                    bottom: 0,
+                },
+            )?;
+
+            unsafe { element.ShowContextMenu()? };
+            sleep_millis(500);
+            WindowsApi::show_window_async(hwnd, SW_HIDE)?;
+        }
+
+        Ok(())
     }
 }

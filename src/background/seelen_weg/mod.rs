@@ -7,7 +7,7 @@ pub mod weg_items_impl;
 
 pub use instance::SeelenWeg;
 
-use std::{collections::HashMap, thread::JoinHandle};
+use std::{collections::HashMap, sync::atomic::Ordering, thread::JoinHandle};
 
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
@@ -26,7 +26,10 @@ use crate::{
     state::application::FULL_STATE,
     trace_lock,
     utils::sleep_millis,
-    windows_api::{window::Window, AppBarData, AppBarDataState, WindowEnumerator, WindowsApi},
+    windows_api::{
+        event_window::BACKGROUND_HWND, window::Window, AppBarData, AppBarDataState,
+        WindowEnumerator, WindowsApi,
+    },
 };
 
 lazy_static! {
@@ -109,10 +112,11 @@ lazy_static! {
 
 pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
     let mut founds = Vec::new();
-    WindowEnumerator::new().for_each(|hwnd| {
-        let class = WindowsApi::get_class(hwnd).unwrap_or_default();
-        if TASKBAR_CLASS.contains(&class.as_str()) {
-            founds.push(hwnd);
+    let seelen_shell = BACKGROUND_HWND.load(Ordering::Acquire);
+    WindowEnumerator::new().for_each_v2(|w| {
+        let class = w.class();
+        if TASKBAR_CLASS.contains(&class.as_str()) && w.address() != seelen_shell {
+            founds.push(w.hwnd());
         }
     })?;
     Ok(founds)

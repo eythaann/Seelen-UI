@@ -1,42 +1,35 @@
-use std::sync::atomic::{AtomicBool, Ordering};
-
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
 use crate::{
-    error_handler::Result, log_error, modules::tray::application::get_tray_icons,
+    error_handler::Result,
+    log_error,
+    modules::tray::application::{TrayIconManager, TRAY_ICON_MANAGER},
     seelen::get_app_handle,
+    trace_lock,
 };
 
-fn emit_tray_info() -> Result<()> {
-    get_app_handle().emit(SeelenEvent::TrayInfo, get_tray_icons()?)?;
-    Ok(())
+use super::domain::TrayIcon;
+
+pub fn register_tray_icons_events() {
+    log_error!(trace_lock!(TRAY_ICON_MANAGER).init());
+    TrayIconManager::subscribe(|_event| {
+        let manager = trace_lock!(TRAY_ICON_MANAGER);
+        log_error!(get_app_handle().emit(SeelenEvent::TrayInfo, &manager.icons));
+    });
 }
 
-static REGISTERED: AtomicBool = AtomicBool::new(false);
-pub fn register_tray_events() {
-    if !REGISTERED.load(Ordering::Acquire) {
-        log::trace!("Registering tray events");
-        // TODO: add event listener for tray events
-        REGISTERED.store(true, Ordering::Release);
-    }
-    // Eythan: I don't know why but it doesn't work without the thread::spawn
-    // it makes a deadlock and app crashes
-    std::thread::spawn(|| log_error!(emit_tray_info()));
-}
-
-// TODO: remove when add event listener for tray events
 #[tauri::command(async)]
-pub fn temp_get_by_event_tray_info() {
-    log_error!(emit_tray_info());
+pub fn get_tray_icons() -> Vec<TrayIcon> {
+    trace_lock!(TRAY_ICON_MANAGER).icons.clone()
 }
 
 #[tauri::command(async)]
 pub fn on_click_tray_icon(key: String) -> Result<()> {
-    let icons = get_tray_icons()?;
-    let tray_icon = icons
-        .iter()
-        .find(|i| i.registry.key == key)
+    let manager = trace_lock!(TRAY_ICON_MANAGER);
+    let tray_icon = manager
+        .automation_by_key
+        .get(&key)
         .ok_or("tray icon not found")?;
     tray_icon.invoke()?;
     Ok(())
@@ -44,10 +37,10 @@ pub fn on_click_tray_icon(key: String) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn on_context_menu_tray_icon(key: String) -> Result<()> {
-    let icons = get_tray_icons()?;
-    let tray_icon = icons
-        .iter()
-        .find(|i| i.registry.key == key)
+    let manager = trace_lock!(TRAY_ICON_MANAGER);
+    let tray_icon = manager
+        .automation_by_key
+        .get(&key)
         .ok_or("tray icon not found")?;
     tray_icon.context_menu()?;
     Ok(())

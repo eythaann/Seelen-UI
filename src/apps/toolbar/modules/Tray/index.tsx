@@ -1,8 +1,7 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { TrayToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
-import { emit } from '@tauri-apps/api/event';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -81,29 +80,12 @@ export function TrayModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
 
   const trayList = useSelector(Selectors.systemTray);
-  let intervalId = useRef<any>(null);
-
-  useEffect(() => {
-    emit('register-tray-events');
-  }, []);
 
   useWindowFocusChange((focused) => {
     if (!focused) {
       setOpenPreview(false);
     }
   });
-
-  useEffect(() => {
-    if (openPreview) {
-      intervalId.current = setInterval(() => {
-        invoke(SeelenCommand.TempGetByEventTrayInfo);
-      }, 1000);
-    } else if (intervalId) {
-      clearInterval(intervalId.current);
-      intervalId.current = null;
-    }
-    return () => clearInterval(intervalId.current);
-  }, [openPreview]);
 
   return (
     <AnimatedPopover

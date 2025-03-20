@@ -19,7 +19,15 @@ import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 
 import { AppNotification } from '../../Notifications/domain';
-import { Battery, MediaChannelTransportData, MediaDevice, PowerPlan, PowerStatus, RootState } from './domain';
+import {
+  Battery,
+  MediaChannelTransportData,
+  MediaDevice,
+  PowerPlan,
+  PowerStatus,
+  RootState,
+  TrayInfo,
+} from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
@@ -41,7 +49,7 @@ const initialState: RootState = {
   settings: (await Settings.default()).fancyToolbar,
   env: (await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>,
   bluetoothDevices: (await BluetoothDevices.getAsync()).all(),
-  discoveredBluetoothDevices: (BluetoothDevices.default()).all(),
+  discoveredBluetoothDevices: BluetoothDevices.default().all(),
   bluetoothRadioState: (await BluetoothRadio.getAsync()).state,
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
@@ -150,6 +158,8 @@ export async function lazySlice(d: Dispatch) {
   invoke<MediaChannelTransportData[]>(SeelenCommand.GetMediaSessions).then((sessions) =>
     d(RootActions.setMediaSessions(sessions)),
   );
+
+  invoke<TrayInfo[]>(SeelenCommand.GetTrayIcons).then((info) => d(RootActions.setSystemTray(info)));
 
   LanguageList.getAsync().then((list) => d(RootActions.setLanguages(list.asArray())));
 

@@ -191,7 +191,7 @@ impl NotificationManager {
         let history = self.manager.History()?;
         let toast_notifications = history.GetHistoryWithId(&app_umid)?;
 
-        log::debug!(
+        log::trace!(
             "Loading notification, ID: {}, AppID: {}",
             u_notification.Id()?,
             app_umid

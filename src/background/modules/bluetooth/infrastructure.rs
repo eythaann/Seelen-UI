@@ -20,7 +20,6 @@ use crate::{
 use crate::error_handler::Result;
 
 pub fn register_bluetooth_events() {
-    log::trace!("Register for bluetooth events!");
     BluetoothManager::subscribe(|event| match event {
         BluetoothEvent::DevicesChanged(items) => {
             log_error!(get_app_handle().emit(
