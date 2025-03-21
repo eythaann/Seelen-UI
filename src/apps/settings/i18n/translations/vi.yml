@@ -99,6 +99,7 @@ general:
   icon_pack:
     available: Gói biểu tượng có sẵn
     label: Gói biểu tượng
+    open_folder: Mở thư mục gói biểu tượng
     selected: Gói biểu tượng hoạt động
   language: Ngôn ngữ
   resource:
@@ -109,6 +110,7 @@ general:
   theme:
     available: Chủ đề có sẵn
     label: Chủ đề
+    open_folder: Mở thư mục chủ đề
     selected: Chủ đề đang hoạt động
   wallpaper:
     select: Chọn hình nền

@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: అందుబాటులో ఉన్న ఐకాన్ ప్యాక్‌లు
     label: ఐకాన్ ప్యాక్‌లు
+    open_folder: ఓపెన్ ఐకాన్ ప్యాక్స్ ఫోల్డర్
     selected: సక్రియ ఐకాన్ ప్యాక్‌లు
   language: భాష
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: అందుబాటులో ఉన్న థీమ్‌లు
     label: థీమ్స్
+    open_folder: థీమ్స్ ఫోల్డర్ తెరవండి
     selected: క్రియాశీల థీమ్‌లు
   wallpaper:
     select: వాల్‌పేపర్‌ను ఎంచుకోండి

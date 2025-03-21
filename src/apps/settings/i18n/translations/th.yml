@@ -95,6 +95,7 @@ general:
   icon_pack:
     available: ชุดไอคอนที่มีอยู่
     label: ไอคอนแพ็ค
+    open_folder: โฟลเดอร์เปิดไอคอน
     selected: ชุดไอคอนที่ใช้งานอยู่
   language: ภาษา
   resource:
@@ -105,6 +106,7 @@ general:
   theme:
     available: ธีมที่มีจำหน่าย
     label: ธีมส์
+    open_folder: เปิดโฟลเดอร์ธีม
     selected: ธีมที่ใช้งานอยู่
   wallpaper:
     select: เลือกวอลล์เปเปอร์

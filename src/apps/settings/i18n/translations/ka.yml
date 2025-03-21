@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: ხელმისაწვდომი ხატების პაკეტები
     label: ხატის პაკეტები
+    open_folder: გახსენით ხატი პაკეტების საქაღალდე
     selected: აქტიური ხატების პაკეტები
   language: Ენა
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: ხელმისაწვდომი თემები
     label: თემები
+    open_folder: გახსენით თემები საქაღალდე
     selected: აქტიური თემები
   wallpaper:
     select: აირჩიეთ ფონი

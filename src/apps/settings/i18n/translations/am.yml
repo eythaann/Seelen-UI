@@ -96,6 +96,7 @@ general:
   icon_pack:
     available: የሚገኙ የአዶ ጥቅሎች
     label: አዶዎች ፓኬጆች
+    open_folder: ክፍት አዶዎች ፓኬኮች አቃፊ
     selected: ንቁ አዶ ጥቅሎች
   language: ቋንቋ
   resource:
@@ -106,6 +107,7 @@ general:
   theme:
     available: የሚገኙ ገጽታዎች
     label: ገጽታዎች
+    open_folder: የመክፈያ ገጽታዎች አቃፊ
     selected: ንቁ ገጽታዎች
   wallpaper:
     select: የግድግዳ ወረቀት ይምረጡ

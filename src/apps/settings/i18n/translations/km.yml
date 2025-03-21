@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: កញ្ចប់រូបតំណាងដែលមាន
     label: រូបតំណាងកញ្ចប់
+    open_folder: បើករូបតំណាងកញ្ចប់កញ្ចប់
     selected: កញ្ចប់រូបតំណាងសកម្ម
   language: ភាសា
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: ស្បែកដែលអាចប្រើបាន
     label: ស្បែក
+    open_folder: បើកថតឯកសារស្បែក
     selected: ស្បែកសកម្ម
   wallpaper:
     select: ជ្រើសរើសផ្ទាំងរូបភាព

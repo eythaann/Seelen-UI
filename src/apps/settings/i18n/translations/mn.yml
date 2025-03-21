@@ -99,6 +99,7 @@ general:
   icon_pack:
     available: Боломжтой Icon багцууд
     label: Icon багц
+    open_folder: Нээлттэй ICON багц хавтас хавтас
     selected: Идэвхтэй дүрсний багцууд
   language: Хэл
   resource:
@@ -109,6 +110,7 @@ general:
   theme:
     available: Боломжтой загварууд
     label: Сэдвүүд
+    open_folder: Нээлттэй сэдэвчилсэн хавтас
     selected: Идэвхтэй сэдэв
   wallpaper:
     select: Ханын зураг сонгох

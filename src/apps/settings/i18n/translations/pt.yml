@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Pacotes de ícones disponíveis
     label: Pacotes de ícones
+    open_folder: Pasta de pacotes de ícones abertos
     selected: Pacotes de ícones ativos
   language: Idioma
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Temas disponíveis
     label: Temas
+    open_folder: Abra a pasta de temas
     selected: Temas ativos
   wallpaper:
     select: Selecione papel de parede

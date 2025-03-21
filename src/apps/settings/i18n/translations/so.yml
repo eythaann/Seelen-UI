@@ -101,6 +101,7 @@ general:
   icon_pack:
     available: Xirmooyinka Icon ee la heli karo
     label: Xirmooyinka icon
+    open_folder: Furaha Furaha Furan
     selected: Xirmooyinka Astaanta Firfircoon
   language: Af
   resource:
@@ -111,6 +112,7 @@ general:
   theme:
     available: Mawduucyada la heli karo
     label: Mawduucyada
+    open_folder: Faylka farqiga u furan
     selected: Mawduucyada Firfircoon
   wallpaper:
     select: Xulo warqadda

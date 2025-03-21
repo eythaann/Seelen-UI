@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Dostupné balíčky ikon
     label: Ikona balíčky
+    open_folder: Otevřete složku balíčků ikon
     selected: Aktivní balíčky ikon
   language: Jazyk
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Dostupné motivy
     label: Témata
+    open_folder: Otevřete složku s motivy
     selected: Aktivní motivy
   wallpaper:
     select: Vyberte tapetu

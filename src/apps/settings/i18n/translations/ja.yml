@@ -94,6 +94,7 @@ general:
   icon_pack:
     available: 利用可能なアイコン パック
     label: アイコンパック
+    open_folder: アイコンパックフォルダを開く
     selected: アクティブなアイコン パック
   language: 言語
   resource:
@@ -104,6 +105,7 @@ general:
   theme:
     available: 利用可能なテーマ
     label: テーマ
+    open_folder: テーマフォルダを開く
     selected: アクティブなテーマ
   wallpaper:
     select: 壁紙を選択

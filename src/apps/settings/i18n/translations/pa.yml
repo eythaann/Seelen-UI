@@ -94,6 +94,7 @@ general:
   icon_pack:
     available: ਉਪਲਬਧ ਆਈਕਨ ਪੈਕ
     label: ਆਈਕਾਨ ਪੈਕ
+    open_folder: ਆਈਕਾਨ ਪੈਕ ਫੋਲਡਰ
     selected: ਐਕਟਿਵ ਆਈਕਨ ਪੈਕ
   language: ਭਾਸ਼ਾ
   resource:
@@ -104,6 +105,7 @@ general:
   theme:
     available: ਉਪਲਬਧ ਥੀਮ
     label: ਥੀਮ
+    open_folder: ਓਪਨ ਥੀਮ ਫੋਲਡਰ
     selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ
   wallpaper:
     select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ

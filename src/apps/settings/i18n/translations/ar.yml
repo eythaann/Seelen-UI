@@ -96,6 +96,7 @@ general:
   icon_pack:
     available: حزم الأيقونات المتوفرة
     label: حزم الأيقونة
+    open_folder: افتح مجلد حزم الأيقونات
     selected: حزم الأيقونات النشطة
   language: اللغات
   resource:
@@ -106,6 +107,7 @@ general:
   theme:
     available: السمات المتاحة
     label: المواضيع
+    open_folder: افتح مجلد السمات
     selected: المواضيع النشطة
   wallpaper:
     select: حدد الخلفية

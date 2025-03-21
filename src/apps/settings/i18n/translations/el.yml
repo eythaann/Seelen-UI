@@ -99,6 +99,7 @@ general:
   icon_pack:
     available: Διαθέσιμα πακέτα εικονιδίων
     label: Εικονίδια
+    open_folder: Ανοίξτε το φάκελο icon packs
     selected: Ενεργά πακέτα εικονιδίων
   language: Γλώσσα
   resource:
@@ -109,6 +110,7 @@ general:
   theme:
     available: Διαθέσιμα θέματα
     label: Θέματα
+    open_folder: Ανοίξτε το φάκελο themes
     selected: Ενεργά θέματα
   wallpaper:
     select: Επιλέξτε ταπετσαρία

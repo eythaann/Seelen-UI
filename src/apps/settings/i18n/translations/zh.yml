@@ -91,6 +91,7 @@ general:
   icon_pack:
     available: 可用的图标包
     label: 图标包
+    open_folder: 打开图标包文件夹
     selected: 活动图标包
   language: 语言
   resource:
@@ -101,6 +102,7 @@ general:
   theme:
     available: 可用主题
     label: 主题
+    open_folder: 打开主题文件夹
     selected: 活跃主题
   wallpaper:
     select: 选择壁纸

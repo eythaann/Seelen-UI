@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Paket Ikon yang Tersedia
     label: Paket Ikon
+    open_folder: Buka folder paket ikon
     selected: Paket Ikon Aktif
   language: Bahasa
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Tema yang Tersedia
     label: Tema
+    open_folder: Buka folder tema
     selected: Tema Aktif
   wallpaper:
     select: Pilih wallpaper

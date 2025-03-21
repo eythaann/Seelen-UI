@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Paquets d'icones disponibles
     label: Paquets d’icones
+    open_folder: Obriu la carpeta de paquets d'icones
     selected: Paquets d'icones actius
   language: Llenguatge
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Temes disponibles
     label: Temes
+    open_folder: Obriu la carpeta de temes
     selected: Temes actius
   wallpaper:
     select: Seleccioneu fons de pantalla

@@ -96,6 +96,7 @@ general:
   icon_pack:
     available: ໄອຄອນຊອງທີ່ມີໃຫ້
     label: icon ຊອງ
+    open_folder: Open Icon Packs Folder
     selected: ຊຸດໄອຄອນທີ່ໃຊ້ໄດ້
   language: ພາສາ
   resource:
@@ -106,6 +107,7 @@ general:
   theme:
     available: ຮູບແບບສີສັນທີ່ມີຢູ່
     label: ຫົວຂໍ້
+    open_folder: ເປີດຫົວຂໍ້
     selected: ຮູບແບບການເຄື່ອນໄຫວ
   wallpaper:
     select: ເລືອກຮູບວໍເປເປີ

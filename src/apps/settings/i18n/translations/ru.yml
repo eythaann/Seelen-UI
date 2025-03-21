@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Доступные пакеты значков
     label: Наборы иконок
+    open_folder: Откройте папку с пакетами иконок
     selected: Активные пакеты значков
   language: Язык
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Доступные темы
     label: Темы
+    open_folder: Откройте папку с темами
     selected: Активные темы
   wallpaper:
     select: Выберите обои

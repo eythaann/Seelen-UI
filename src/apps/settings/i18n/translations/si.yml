@@ -99,6 +99,7 @@ general:
   icon_pack:
     available: පවතින අයිකන ඇසුරුම්
     label: අයිකන ඇසුරුම්
+    open_folder: විවෘත අයිකන ඇසුරුම් ෆෝල්ඩරය
     selected: ක්‍රියාකාරී අයිකන ඇසුරුම්
   language: භාෂාව
   resource:
@@ -109,6 +110,7 @@ general:
   theme:
     available: පවතින තේමා
     label: තේමා
+    open_folder: තේමාවන් ෆෝල්ඩරය විවෘත කරන්න
     selected: ක්රියාකාරී තේමාවන්
   wallpaper:
     select: බිතුපත තෝරන්න

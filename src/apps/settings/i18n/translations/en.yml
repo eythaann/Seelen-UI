@@ -97,6 +97,7 @@ general:
   icon_pack:
     available: Available Icon Packs
     label: Icon Packs
+    open_folder: Open icon packs folder
     selected: Active Icon Packs
   language: Language
   resource:
@@ -107,6 +108,7 @@ general:
   theme:
     available: Available Themes
     label: Themes
+    open_folder: Open themes folder
     selected: Active Themes
   wallpaper:
     select: Select Wallpaper

@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Saatavilla kuvakepaketit
     label: Kuvakepakkaukset
+    open_folder: Avaa kuvakepaketit-kansio
     selected: Aktiiviset kuvakepaketit
   language: Kieli
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Käytettävissä olevat teemat
     label: Teemat
+    open_folder: Avaa teemat-kansio
     selected: Aktiiviset teemat
   wallpaper:
     select: Valitse taustakuva

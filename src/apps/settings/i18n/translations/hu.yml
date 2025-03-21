@@ -99,6 +99,7 @@ general:
   icon_pack:
     available: Elérhető ikoncsomagok
     label: Ikoncsomagok
+    open_folder: Nyissa meg az ikoncsomagok mappát
     selected: Aktív ikoncsomagok
   language: Nyelv
   resource:
@@ -109,6 +110,7 @@ general:
   theme:
     available: Elérhető témák
     label: Témák
+    open_folder: Témák mappa megnyitása
     selected: Aktív témák
   wallpaper:
     select: Válassza ki a háttérképet

@@ -95,6 +95,7 @@ general:
   icon_pack:
     available: 사용 가능한 아이콘 팩
     label: 아이콘 팩
+    open_folder: 아이콘 팩 폴더 열기
     selected: 활성 아이콘 팩
   language: 언어
   resource:
@@ -105,6 +106,7 @@ general:
   theme:
     available: 사용 가능한 테마
     label: 테마
+    open_folder: 테마 폴더 열기
     selected: 현재 테마
   wallpaper:
     select: 배경화면 선택

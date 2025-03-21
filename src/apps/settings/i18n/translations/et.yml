@@ -97,6 +97,7 @@ general:
   icon_pack:
     available: Saadaval ikoonipaketid
     label: Ikoonipakid
+    open_folder: Avage ikoonipakettide kaust
     selected: Aktiivsed ikoonipaketid
   language: Keel
   resource:
@@ -107,6 +108,7 @@ general:
   theme:
     available: Saadaolevad teemad
     label: Teemad
+    open_folder: Avage teemade kaust
     selected: Aktiivsed teemad
   wallpaper:
     select: Valige tapeet

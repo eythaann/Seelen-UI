@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Dostupni paketi ikona
     label: Ikona pakiranja
+    open_folder: Otvoreni ikona pakira mapa
     selected: Aktivni paketi ikona
   language: Jezik
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Dostupne teme
     label: Teme
+    open_folder: Otvori mapu teme
     selected: Aktivne teme
   wallpaper:
     select: Odaberite Pozadina

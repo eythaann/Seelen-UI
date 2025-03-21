@@ -1,5 +1,7 @@
-import { SupportedLanguages } from '@seelen-ui/lib';
-import { Input, Select, Switch, Tooltip } from 'antd';
+import { SeelenCommand, SupportedLanguages } from '@seelen-ui/lib';
+import { path } from '@tauri-apps/api';
+import { invoke } from '@tauri-apps/api/core';
+import { Button, Input, Select, Switch, Tooltip } from 'antd';
 import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -101,16 +103,38 @@ export function General() {
       <Colors />
 
       <SettingsGroup>
-        <div style={{ marginBottom: '6px' }}>
+        <SettingsOption>
           <b>{t('general.theme.label')}</b>
-        </div>
+          <Tooltip title={t('general.theme.open_folder')}>
+            <Button
+              type="default"
+              onClick={async () => {
+                const dataDir = await path.appDataDir();
+                invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'themes') });
+              }}
+            >
+              <Icon iconName="PiFoldersDuotone" />
+            </Button>
+          </Tooltip>
+        </SettingsOption>
         <Themes />
       </SettingsGroup>
 
       <SettingsGroup>
-        <div style={{ marginBottom: '6px' }}>
+        <SettingsOption>
           <b>{t('general.icon_pack.label')}</b>
-        </div>
+          <Tooltip title={t('general.icon_pack.open_folder')}>
+            <Button
+              type="default"
+              onClick={async () => {
+                const dataDir = await path.appDataDir();
+                invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'icons') });
+              }}
+            >
+              <Icon iconName="PiFoldersDuotone" />
+            </Button>
+          </Tooltip>
+        </SettingsOption>
         <IconPacks />
       </SettingsGroup>
     </>

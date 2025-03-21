@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Mevcut Simge Paketleri
     label: İkon Paketleri
+    open_folder: Simge paketleri klasörünü açın
     selected: Aktif Simge Paketleri
   language: Dil
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Mevcut Temalar
     label: Temalar
+    open_folder: Temalar klasörünü açın
     selected: Aktif Temalar
   wallpaper:
     select: Duvar Kağıdı Seç

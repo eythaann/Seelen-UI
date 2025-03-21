@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Verfügbare Icon-Pakete
     label: Icon Packs
+    open_folder: Ordner "Icon Packs" öffnen
     selected: Aktive Icon-Pakete
   language: Sprache
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Verfügbare Themen
     label: Themen
+    open_folder: Ordner "Themen" öffnen
     selected: Aktive Themen
   wallpaper:
     select: Wählen Sie Hintergrundbild

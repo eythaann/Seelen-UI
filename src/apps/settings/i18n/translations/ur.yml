@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: دستیاب آئیکن پیک
     label: آئیکن پیک
+    open_folder: آئیکن پیک فولڈر کھولیں
     selected: ایکٹو آئیکن پیک
   language: زبان
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: دستیاب تھیمز
     label: تھیمز
+    open_folder: تھیمز فولڈر کھولیں
     selected: ایکٹو تھیمز
   wallpaper:
     select: وال پیپر منتخب کریں

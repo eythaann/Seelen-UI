@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Verfügbar Ikon Packs
     label: ICON Tass
+    open_folder: Oppen Ikon Packagen Dossier
     selected: Aktiv Ikon Packs
   language: Sprooche
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Verfügbar Themen
     label: Themen
+    open_folder: Open Themes Dossier
     selected: Aktiv Themen
   wallpaper:
     select: Wielt Wallpaper

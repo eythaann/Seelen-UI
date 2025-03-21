@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Հասանելի պատկերակների փաթեթներ
     label: Սրբապատկերներ
+    open_folder: Բաց պատկերակների տուփերի թղթապանակ
     selected: Ակտիվ պատկերակների փաթեթներ
   language: Լեզու
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Հասանելի թեմաներ
     label: Թեմաներ
+    open_folder: Բաց թեմաների թղթապանակ
     selected: Ակտիվ թեմաներ
   wallpaper:
     select: Ընտրեք Պաստառ

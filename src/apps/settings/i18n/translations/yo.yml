@@ -96,6 +96,7 @@ general:
   icon_pack:
     available: Awọn akopọ Aami ti o wa
     label: Awọn akopọ aami
+    open_folder: Ṣii folda Awọn akopọ Awọn akopọ
     selected: Awọn akopọ Aami ti nṣiṣe lọwọ
   language: Ede
   resource:
@@ -106,6 +107,7 @@ general:
   theme:
     available: Awọn akori to wa
     label: Awọn akori
+    open_folder: Ṣii folda Awọn ẹka
     selected: Awọn akori ti nṣiṣe lọwọ
   wallpaper:
     select: Yan Iṣẹṣọ ogiri

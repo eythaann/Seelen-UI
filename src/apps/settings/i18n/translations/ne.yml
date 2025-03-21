@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: उपलब्ध आइकन प्याकहरू
     label: आइकन प्याक
+    open_folder: खोल्ने आइकन प्याक फोल्डर
     selected: सक्रिय आइकन प्याकहरू
   language: भाषा
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: उपलब्ध विषयवस्तुहरू
     label: विषयवस्तुहरू
+    open_folder: थिमहरू फोल्डर खोल्नुहोस्
     selected: सक्रिय विषयवस्तुहरू
   wallpaper:
     select: वालपेपर चयन गर्नुहोस्

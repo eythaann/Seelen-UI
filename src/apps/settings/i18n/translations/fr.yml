@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Packs d'icônes disponibles
     label: Packs d'icônes
+    open_folder: Ouvrir le dossier icon packs
     selected: Packs d'icônes actifs
   language: Langue
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Thèmes disponibles
     label: Thèmes
+    open_folder: Ouvrir le dossier themes
     selected: Thèmes actifs
   wallpaper:
     select: Sélectionner le papier peint

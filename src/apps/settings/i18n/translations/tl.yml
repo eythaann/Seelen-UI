@@ -102,6 +102,7 @@ general:
   icon_pack:
     available: Magagamit na Mga Icon Pack
     label: Icon pack
+    open_folder: Buksan ang folder ng Icon Packs
     selected: Mga Aktibong Icon Pack
   language: Wika
   resource:
@@ -112,6 +113,7 @@ general:
   theme:
     available: Magagamit na Mga Tema
     label: Mga tema
+    open_folder: Buksan ang folder ng mga tema
     selected: Mga Aktibong Tema
   wallpaper:
     select: Piliin ang wallpaper

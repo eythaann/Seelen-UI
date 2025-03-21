@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Достапни пакети со икони
     label: Икони пакувања
+    open_folder: Отворете ја папката со пакувања со икони
     selected: Пакети со активни икони
   language: Јазик
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Достапни теми
     label: Теми
+    open_folder: Отворете ја папката со теми
     selected: Активни теми
   wallpaper:
     select: Изберете позадина

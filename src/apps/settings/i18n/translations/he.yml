@@ -96,6 +96,7 @@ general:
   icon_pack:
     available: חבילות אייקונים זמינות
     label: חבילות אייקונים
+    open_folder: פתח את תיקיית חבילות אייקון
     selected: ערכות אייקונים פעילות
   language: שפה
   resource:
@@ -106,6 +107,7 @@ general:
   theme:
     available: ערכות נושא זמינות
     label: ערכות נושא
+    open_folder: פתח את תיקיית הנושאים
     selected: ערכות נושא פעילות
   wallpaper:
     select: בחר טפט

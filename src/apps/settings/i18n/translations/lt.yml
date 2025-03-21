@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Galimi piktogramų paketai
     label: ICON PACKS
+    open_folder: Atidarykite piktogramų paketų aplanką
     selected: Aktyvūs piktogramų paketai
   language: Kalba
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Galimos temos
     label: Temos
+    open_folder: Atidarykite temų aplanką
     selected: Aktyvios temos
   wallpaper:
     select: Pasirinkite tapetai

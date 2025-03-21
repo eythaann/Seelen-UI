@@ -97,6 +97,7 @@ general:
   icon_pack:
     available: Vifurushi vya ikoni vinavyopatikana
     label: Pakiti za ikoni
+    open_folder: Fungua folda ya pakiti za icon
     selected: Vifurushi vya ikoni zinazotumika
   language: Lugha
   resource:
@@ -107,6 +108,7 @@ general:
   theme:
     available: Mandhari Zinazopatikana
     label: Mandhari
+    open_folder: Fungua folda ya Mada
     selected: Mandhari Inayotumika
   wallpaper:
     select: Chagua Ukuta

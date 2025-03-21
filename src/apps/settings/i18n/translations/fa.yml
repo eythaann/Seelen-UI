@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: بسته‌های آیکون موجود
     label: بسته های نماد
+    open_folder: پوشه بسته های نماد را باز کنید
     selected: بسته های آیکون فعال
   language: زبان
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: تم های موجود
     label: تم ها
+    open_folder: پوشه مضامین را باز کنید
     selected: تم های فعال
   wallpaper:
     select: تصویر زمینه را انتخاب کنید

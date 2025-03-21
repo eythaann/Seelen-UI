@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Pakêtên îkonê yên berdest
     label: Packon icon
+    open_folder: Peldanka Packs Packs Open
     selected: Pakêtên Îkonên Çalak
   language: Ziman
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Mijarên Berdest
     label: Themes
+    open_folder: Peldanka mijaran vekin
     selected: Mijarên Çalak
   wallpaper:
     select: Hilbijêre Wallpaper

@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Lausir táknpakkar
     label: Táknpakkar
+    open_folder: Opna tákn pakka möppu
     selected: Virkir táknpakkar
   language: Tungumál
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Þemu í boði
     label: Þemu
+    open_folder: Opnaðu þemamöppu
     selected: Virk þemu
   wallpaper:
     select: Veldu veggfóður

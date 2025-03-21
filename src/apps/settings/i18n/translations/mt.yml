@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Pakketti ta' Ikoni Disponibbli
     label: Pakketti tal-ikona
+    open_folder: Folder tal-pakketti tal-ikona miftuħa
     selected: Pakketti tal-Ikoni Attivi
   language: Lingwa
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Temi Disponibbli
     label: Temi
+    open_folder: Folder tat-Temi Iftaħ
     selected: Temi Attivi
   wallpaper:
     select: Agħżel Wallpaper

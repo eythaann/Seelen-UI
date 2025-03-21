@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Tillgängliga ikonpaket
     label: Ikonförpackningar
+    open_folder: Öppna mappen Icon Packs
     selected: Aktiva ikonpaket
   language: Språk
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Tillgängliga teman
     label: teman
+    open_folder: Öppna mappen med teman
     selected: Aktiva teman
   wallpaper:
     select: Välj tapeter

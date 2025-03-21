@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Amaphekhi esithonjana atholakalayo
     label: I-Icon Packs
+    open_folder: Vula Icon Pack Folder
     selected: Amaphekhi Wesithonjana Asebenzayo
   language: Ulimi
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Izingqikithi Ezitholakalayo
     label: Izindikimba
+    open_folder: Vula amafolda wezindikimba
     selected: Izindikimba ezisebenzayo
   wallpaper:
     select: Khetha iphepha lokunamathisela odongeni

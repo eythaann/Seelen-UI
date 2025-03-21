@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: उपलब्ध चिह्न पैक
     label: आइकन पैक
+    open_folder: आइकन पैक फ़ोल्डर खोलें
     selected: सक्रिय चिह्न पैक
   language: भाषा
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: उपलब्ध थीम्स
     label: विषय-वस्तु
+    open_folder: थीम्स फ़ोल्डर खोलें
     selected: सक्रिय विषय-वस्तु
   wallpaper:
     select: वॉलपेपर का चयन करें

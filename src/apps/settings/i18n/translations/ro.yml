@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Pachete de pictograme disponibile
     label: Pachete de pictograme
+    open_folder: Deschideți dosarul icon packs
     selected: Pachete de pictograme active
   language: Limba
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Teme disponibile
     label: Teme
+    open_folder: Deschideți folderul themes
     selected: Teme active
   wallpaper:
     select: Selectați tapet

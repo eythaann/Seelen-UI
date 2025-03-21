@@ -94,7 +94,7 @@ function UserHome({}: UserHomeProps) {
           className="userhome-seelen-option-item"
           onClick={async () => invoke(SeelenCommand.OpenFile, { path: await path.appDataDir() })}
         >
-          <Icon iconName="MdOutlineInstallDesktop" />
+          <Icon iconName="TbFolderCog" />
           <span className="userhome-seelen-option-item-title">
             {t('userhome.seelen_options.open_installation_folder')}
           </span>

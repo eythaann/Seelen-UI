@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Доступни пакети икона
     label: Паковање икона
+    open_folder: Отворите икону Пакети Фолдер
     selected: Активни пакети икона
   language: Језик
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Доступне теме
     label: Теме
+    open_folder: Мапа отворене теме
     selected: Активне теме
   wallpaper:
     select: Изаберите Позадина

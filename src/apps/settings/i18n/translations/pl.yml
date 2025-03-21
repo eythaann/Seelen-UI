@@ -100,6 +100,7 @@ general:
   icon_pack:
     available: Dostępne pakiety ikon
     label: Pakiety ikony
+    open_folder: Otwórz folder pakietów ikon
     selected: Aktywne pakiety ikon
   language: Język
   resource:
@@ -110,6 +111,7 @@ general:
   theme:
     available: Dostępne motywy
     label: Motywy
+    open_folder: Otwórz folder motywów
     selected: Aktywne motywy
   wallpaper:
     select: Wybierz tapetę

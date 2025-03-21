@@ -97,6 +97,7 @@ general:
   icon_pack:
     available: د آیکون کڅوړې شتون لري
     label: آیکون کڅوړه
+    open_folder: خلاص
     selected: د فعال آیکون بسته
   language: ژبه
   resource:
@@ -107,6 +108,7 @@ general:
   theme:
     available: شته موضوعات
     label: موضوعات
+    open_folder: د موضوعاتو فولډر خلاص کړئ
     selected: فعال موضوعات
   wallpaper:
     select: وال پیپر غوره کړئ

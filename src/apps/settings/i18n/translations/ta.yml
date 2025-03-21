@@ -99,6 +99,7 @@ general:
   icon_pack:
     available: கிடைக்கும் ஐகான் பேக்குகள்
     label: ஐகான் பொதிகள்
+    open_folder: ஐகான் பேக்ஸ் கோப்புறையைத் திறக்கவும்
     selected: செயலில் உள்ள ஐகான் பேக்குகள்
   language: மொழி
   resource:
@@ -109,6 +110,7 @@ general:
   theme:
     available: கிடைக்கும் தீம்கள்
     label: தீம்கள்
+    open_folder: தீம்கள் கோப்புறையைத் திறக்கவும்
     selected: செயலில் உள்ள தீம்கள்
   wallpaper:
     select: வால்பேப்பரைத் தேர்ந்தெடுக்கவும்

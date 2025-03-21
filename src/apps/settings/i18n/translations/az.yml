@@ -97,6 +97,7 @@ general:
   icon_pack:
     available: Mövcud İkon Paketləri
     label: Icon paketləri
+    open_folder: Açıq Icon Paketləri qovluğu
     selected: Aktiv İkon Paketləri
   language: Dil
   resource:
@@ -107,6 +108,7 @@ general:
   theme:
     available: Mövcud Mövzular
     label: Mövzular
+    open_folder: Açıq mövzular qovluğu
     selected: Aktiv Mövzular
   wallpaper:
     select: Divar kağızı seçin

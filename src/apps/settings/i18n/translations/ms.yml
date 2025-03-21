@@ -98,6 +98,7 @@ general:
   icon_pack:
     available: Pek Ikon Tersedia
     label: Pek ikon
+    open_folder: Folder Pek Ikon Buka
     selected: Pek Ikon Aktif
   language: Bahasa
   resource:
@@ -108,6 +109,7 @@ general:
   theme:
     available: Tema yang Tersedia
     label: Tema
+    open_folder: Buka Folder Tema
     selected: Tema Aktif
   wallpaper:
     select: Pilih kertas dinding
