@@ -28,7 +28,7 @@ pub fn get_tray_icons() -> Vec<TrayIcon> {
 pub fn on_click_tray_icon(key: String) -> Result<()> {
     let manager = trace_lock!(TRAY_ICON_MANAGER);
     let tray_icon = manager
-        .automation_by_key
+        .au_element_by_key
         .get(&key)
         .ok_or("tray icon not found")?;
     tray_icon.invoke()?;
@@ -39,7 +39,7 @@ pub fn on_click_tray_icon(key: String) -> Result<()> {
 pub fn on_context_menu_tray_icon(key: String) -> Result<()> {
     let manager = trace_lock!(TRAY_ICON_MANAGER);
     let tray_icon = manager
-        .automation_by_key
+        .au_element_by_key
         .get(&key)
         .ok_or("tray icon not found")?;
     tray_icon.context_menu()?;

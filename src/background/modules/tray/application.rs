@@ -1,5 +1,12 @@
 use parking_lot::Mutex;
-use std::{collections::HashMap, sync::Arc};
+use std::{
+    collections::HashMap,
+    sync::{
+        atomic::{AtomicU32, Ordering},
+        Arc,
+    },
+};
+use tauri::Listener;
 use windows::Win32::{
     Foundation::{HWND, POINT, RECT},
     System::DataExchange::COPYDATASTRUCT,
@@ -27,7 +34,9 @@ use winreg::{
 
 use crate::{
     error_handler::Result,
-    event_manager, pcstr, trace_lock,
+    event_manager, pcstr,
+    seelen::get_app_handle,
+    trace_lock,
     utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
     windows_api::{
         event_window::{get_native_shell_hwnd, subscribe_to_background_window},
@@ -47,7 +56,7 @@ lazy_static! {
 
 pub struct TrayIconManager {
     pub icons: Vec<TrayIcon>,
-    pub automation_by_key: HashMap<String, TrayIconUIElement>,
+    pub au_element_by_key: HashMap<String, TrayIconUIElement>,
     pub icons_v2: HashMap<TrayIconId, TrayIconV2>,
 }
 
@@ -58,6 +67,7 @@ pub enum TrayIconEvent {
     Added(TrayIconV2),
     Updated(TrayIconV2),
     Removed(TrayIconId),
+    ForceUpdate,
 }
 
 unsafe impl Send for TrayIconEvent {}
@@ -69,7 +79,7 @@ impl TrayIconManager {
         Self {
             icons: Vec::new(),
             icons_v2: HashMap::new(),
-            automation_by_key: HashMap::new(),
+            au_element_by_key: HashMap::new(),
         }
     }
 
@@ -80,9 +90,9 @@ impl TrayIconManager {
                 log::trace!("Tray icon added {}", data.id);
                 let mut manager = trace_lock!(TRAY_ICON_MANAGER);
                 manager.icons_v2.insert(data.id.clone(), data);
-                if let Ok((icons, elements)) = Self::get_tray_icons() {
+                if let Ok((icons, elements)) = manager.load_all_tray_icons() {
                     manager.icons = icons;
-                    manager.automation_by_key = elements;
+                    manager.au_element_by_key = elements;
                 }
             }
             TrayIconEvent::Updated(data) => {
@@ -94,17 +104,28 @@ impl TrayIconManager {
                 log::trace!("Tray icon removed {}", id);
                 let mut manager = trace_lock!(TRAY_ICON_MANAGER);
                 manager.icons_v2.remove(&id);
-                if let Ok((icons, elements)) = Self::get_tray_icons() {
+                if let Ok((icons, elements)) = manager.load_all_tray_icons() {
                     manager.icons = icons;
-                    manager.automation_by_key = elements;
+                    manager.au_element_by_key = elements;
+                }
+            }
+            TrayIconEvent::ForceUpdate => {
+                let mut manager = trace_lock!(TRAY_ICON_MANAGER);
+                if let Ok((icons, elements)) = manager.load_all_tray_icons() {
+                    manager.icons = icons;
+                    manager.au_element_by_key = elements;
                 }
             }
         });
         Self::refresh_icons()?;
 
-        let (icons, elements) = Self::get_tray_icons()?;
+        get_app_handle().listen("hidden::tray-force-refresh", |_| {
+            let _ = Self::event_tx().send(TrayIconEvent::ForceUpdate);
+        });
+
+        let (icons, elements) = self.load_all_tray_icons()?;
         self.icons = icons;
-        self.automation_by_key = elements;
+        self.au_element_by_key = elements;
         Ok(())
     }
 
@@ -165,7 +186,9 @@ impl TrayIconManager {
         Ok(())
     }
 
-    pub fn get_tray_icons() -> Result<(Vec<TrayIcon>, HashMap<String, TrayIconUIElement>)> {
+    pub fn load_all_tray_icons(
+        &self,
+    ) -> Result<(Vec<TrayIcon>, HashMap<String, TrayIconUIElement>)> {
         ensure_tray_overflow_creation()?;
         let tray_from_registry = Self::enum_from_registry()?;
 
@@ -200,6 +223,19 @@ impl TrayIconManager {
             }
             Ok((tray_elements, automation_by_key))
         })
+    }
+
+    fn send_all_to_tray_overflow() -> Result<()> {
+        let hkcr = RegKey::predef(HKEY_CURRENT_USER);
+        let settings =
+            hkcr.open_subkey_with_flags("Control Panel\\NotifyIconSettings", KEY_ALL_ACCESS)?;
+        let list = settings.get_raw_value("UIOrderList")?.bytes;
+        for chunk in list.chunks(8) {
+            let key = u64::from_le_bytes(chunk.try_into()?).to_string();
+            let regkey = settings.open_subkey_with_flags(&key, KEY_ALL_ACCESS)?;
+            regkey.set_value("IsPromoted", &0u32)?;
+        }
+        Ok(())
     }
 
     pub fn enable_chevron() -> Result<()> {
@@ -332,12 +368,24 @@ pub fn get_tray_overflow_content_handle() -> Option<HWND> {
     }
 }
 
+static TRAY_CREATION_ATTEMPTS: AtomicU32 = AtomicU32::new(0);
 pub fn ensure_tray_overflow_creation() -> Result<()> {
     if !is_windows_11() || get_tray_overflow_content_handle().is_some() {
         return Ok(());
     }
 
+    let attempts = TRAY_CREATION_ATTEMPTS.load(Ordering::Acquire) + 1;
+    if attempts > 10 {
+        return Err("Maximum tray creation attempts reached".into());
+    }
+
+    TRAY_CREATION_ATTEMPTS.store(attempts, Ordering::Release);
+    if attempts >= 10 {
+        log::warn!("Tray overflow not created, and maximum attemps reached");
+    }
+
     TrayIconManager::enable_chevron()?;
+    TrayIconManager::send_all_to_tray_overflow()?;
 
     Com::run_with_context(|| unsafe {
         let tray_hwnd = get_native_shell_hwnd()?;

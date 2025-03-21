@@ -1,6 +1,7 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { TrayToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
+import { emit } from '@tauri-apps/api/event';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ import { Item } from '../item/infra/infra';
 
 import { Selectors } from '../shared/store/app';
 import { FileIcon } from 'src/apps/shared/components/Icon';
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
+import { useInterval, useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { TrayInfo } from '../shared/store/domain';
 
@@ -87,6 +88,16 @@ export function TrayModule({ module }: Props) {
       setOpenPreview(false);
     }
   });
+
+  useInterval(
+    () => {
+      if (openPreview) {
+        emit('hidden::tray-force-refresh');
+      }
+    },
+    1000,
+    [openPreview],
+  );
 
   return (
     <AnimatedPopover

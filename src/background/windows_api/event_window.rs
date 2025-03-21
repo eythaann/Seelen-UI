@@ -9,11 +9,10 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, RECT, WPARAM},
     UI::WindowsAndMessaging::{
         CreateWindowExW, DefWindowProcW, DispatchMessageW, FindWindowExW, GetMessageW,
-        PostMessageW, PostQuitMessage, RegisterClassW, RegisterDeviceNotificationW, SendMessageW,
-        TranslateMessage, DBT_DEVTYP_DEVICEINTERFACE, DEVICE_NOTIFY_WINDOW_HANDLE,
-        DEV_BROADCAST_DEVICEINTERFACE_W, HWND_TOPMOST, MSG, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
-        WINDOW_EX_STYLE, WINDOW_STYLE, WM_ACTIVATEAPP, WM_COMMAND, WM_COPYDATA, WM_DESTROY,
-        WM_USER, WNDCLASSW,
+        PostQuitMessage, RegisterClassW, RegisterDeviceNotificationW, TranslateMessage,
+        DBT_DEVTYP_DEVICEINTERFACE, DEVICE_NOTIFY_WINDOW_HANDLE, DEV_BROADCAST_DEVICEINTERFACE_W,
+        HWND_TOPMOST, MSG, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, WINDOW_EX_STYLE, WINDOW_STYLE,
+        WM_DESTROY, WNDCLASSW,
     },
 };
 
@@ -33,10 +32,6 @@ lazy_static! {
 
 pub static BACKGROUND_HWND: AtomicIsize = AtomicIsize::new(0);
 
-fn should_forward_message(msg: u32) -> bool {
-    msg == WM_COPYDATA || msg == WM_ACTIVATEAPP || msg == WM_COMMAND || msg >= WM_USER
-}
-
 unsafe extern "system" fn window_proc(
     hwnd: HWND,
     msg: u32,
@@ -52,27 +47,14 @@ unsafe extern "system" fn window_proc(
         log_error!(callback(msg, w_param.0, l_param.0));
     }
 
-    // Forwards a message to the real tray window.
-    if should_forward_message(msg) {
-        let Ok(real_tray) = get_native_shell_hwnd() else {
-            return DefWindowProcW(hwnd, msg, w_param, l_param);
-        };
-
-        return if msg > WM_USER {
-            let _ = PostMessageW(Some(real_tray), msg, w_param, l_param);
-            DefWindowProcW(hwnd, msg, w_param, l_param)
-        } else {
-            SendMessageW(real_tray, msg, Some(w_param), Some(l_param))
-        };
-    }
-
     DefWindowProcW(hwnd, msg, w_param, l_param)
 }
 
 /// will lock until the window is closed
 unsafe fn _create_background_window(done: &crossbeam_channel::Sender<()>) -> Result<()> {
     let title = WindowsString::from("Seelen UI Background Window");
-    let class = WindowsString::from("Shell_TrayWnd"); // interset native shell messages
+    let class = WindowsString::from("SeelenBackgroundWindow");
+    // let class = WindowsString::from("Shell_TrayWnd"); // interset native shell messages
 
     let h_module = WindowsApi::module_handle_w()?;
 
@@ -160,19 +142,9 @@ where
 }
 
 pub fn get_native_shell_hwnd() -> Result<HWND> {
-    let own_shell = BACKGROUND_HWND.load(Ordering::Acquire);
     let hwnd = unsafe {
         let class = WindowsString::from("Shell_TrayWnd");
-        FindWindowExW(
-            None,
-            if own_shell == 0 {
-                None
-            } else {
-                Some(HWND(own_shell as _))
-            },
-            class.as_pcwstr(),
-            None,
-        )?
+        FindWindowExW(None, None, class.as_pcwstr(), None)?
     };
     Ok(hwnd)
 }
