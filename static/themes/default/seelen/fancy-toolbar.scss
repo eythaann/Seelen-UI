@@ -953,6 +953,7 @@
       display: grid;
       grid-template-columns: 1rem 1fr;
       align-items: center;
+      font-weight: 600;
 
       .userhome-directory-header-collapse-button {
         @extend %actionable-button, %flex-centered;
@@ -978,8 +979,10 @@
 
   .userhome-seelen-options {
     @extend %list;
+
     .userhome-seelen-option-item {
       @extend %actionable-button;
+      font-weight: 600;
     }
   }
 
