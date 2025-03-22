@@ -6,7 +6,7 @@ Seelen UI allows you to fully customize your desktop environment, including the 
 
 ## Placeholders
 
-The toolbar layout, referred to as the "placeholder," is defined in a YAML file that follows the [placeholder schema](https://github.com/Seelen-Inc/slu-lib/blob/master/gen/schemas/placeholder.schema.json). It can be personalized using Themes.
+The toolbar layout, referred to as the "placeholder," is defined in a YAML file that follows the [placeholder schema](https://github.com/Seelen-Inc/slu-lib/blob/master/gen/schemas/toolbar_items.schema.json). It can be personalized using Themes.
 
 Example:
 
@@ -43,7 +43,7 @@ Seelen UI allows you to display dynamic information in the toolbar using placeho
 
 ### Base Structure of a Toolbar Item
 
-All toolbar items share a base structure that includes properties like `id`, `template`, `tooltip`, `badge`, `onClick`, `onClickV2`, and `style`, other specific properties are available for each item type, declared in the [placeholder schema](https://github.com/Seelen-Inc/slu-lib/blob/master/gen/schemas/placeholder.schema.json).
+All toolbar items share a base structure that includes properties like `id`, `template`, `tooltip`, `badge`, `onClick`, `onClickV2`, and `style`, other specific properties are available for each item type, declared in the [placeholder schema](https://github.com/Seelen-Inc/slu-lib/blob/master/gen/schemas/toolbar_items.schema.json).
 
 > **Deprecated**: The `onClick` property is deprecated and will be removed in future versions. Please use `onClickV2` instead.
 
