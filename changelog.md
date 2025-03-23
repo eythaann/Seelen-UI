@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.2.0]
 ### features
 - add option to disable app thumbnail generation (dock).
 - allow lock the dock/toolbar items.
