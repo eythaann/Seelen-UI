@@ -92,7 +92,6 @@
   </Applications>
 
   <Capabilities>
-    <uap:Capability Name="userAccountInformation" />
     <uap3:Capability Name="userNotificationListener" />
     <rescap:Capability Name="runFullTrust" />
     <rescap:Capability Name="unvirtualizedResources" />
