@@ -1,0 +1,79 @@
+$wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C!-- %3Crect width='100%25' height='100%25' fill='green' /%3E --%3E%3Cpath fill='%23fff' d='M0 20 C30 20, 45 10, 75 10 S120 20, 150 20 V150 H0 Z' /%3E%3C/svg%3E");
+
+.weg-item-start-icon {
+  display: none;
+}
+
+.weg-item:has(.weg-item-start-icon) {
+  .bg-layer-6, .bg-layer-7, .bg-layer-8, .bg-layer-9 {
+    width: 75% !important;
+    height: 75% !important;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .bg-layer-6, .bg-layer-7, .bg-layer-8 {
+    width: 60% !important;
+    height: 60% !important;
+    mask-image: $wave;
+    mask-repeat: repeat-x;
+    mask-position: bottom;
+    mask-size: 90%;
+    animation: move-forever 5s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+  }
+
+  .bg-layer-6 {
+    background-color: var(--config-accent-dark-color);
+    animation-delay: -2s;
+    animation-duration: 7s;
+    animation-name: move-forever-1;
+  }
+
+  .bg-layer-7 {
+    background-color: var(--config-accent-light-color);
+    animation-delay: -3s;
+    animation-duration: 10s;
+    animation-name: move-forever-2;
+  }
+
+  .bg-layer-8 {
+    background-color: var(--config-accent-lighter-color);
+    animation-delay: -4s;
+    animation-duration: 13s;
+    animation-name: move-forever-3;
+  }
+
+  .bg-layer-9 {
+    border: 1.5px solid black; 
+  }
+}
+
+@keyframes move-forever-1 {
+  0% {
+    mask-position: -900% 300%;
+  }
+  100% {
+    mask-position: 900% 300%;
+  }
+}
+
+@keyframes move-forever-2 {
+  0% {
+    mask-position: -900% 350%;
+  }
+  100% {
+    mask-position: 900% 350%;
+  }
+}
+
+@keyframes move-forever-3 {
+  0% {
+    mask-position: -900% 400%;
+  }
+  100% {
+    mask-position: 900% 400%;
+  }
+}

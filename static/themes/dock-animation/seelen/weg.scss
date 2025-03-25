@@ -1,5 +1,6 @@
 .weg-item {
   transition: width, height, 100ms cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 
 @mixin dock-item-style($multiplier) {

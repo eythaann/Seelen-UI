@@ -154,6 +154,11 @@
   object-fit: contain;
   fill: var(--config-accent-lighter-color);
 
+  &.weg-item-start-icon {
+    width: 75%;
+    height: 75%;
+  }
+
   &.weg-item-start-icon, &.weg-item-folder-icon {
     position: relative;
     filter: none;
