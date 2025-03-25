@@ -1,52 +1,52 @@
 app_launcher:
-  enable: Activer le lanceur d'applications
+  enable: Activer le Lanceur d’Applications
   launch_on:
     mouse_over: Passez la souris
     primary: Primaire
-  monitor: Surveiller à montrer
+  monitor: Moniteur à afficher
   runners:
     cmd: Commande
-    explorer: Courir
-    label: Coureuses
+    explorer: Exécuter
+    label: Exécuteurs
 apps_configurations:
   app:
-    bindings: Reliure (notez que les deux options sont obligatoires)
+    bindings: Raccourcis (notez que les deux options sont nécessaires)
     category: Catégorie
     category_placeholder: Aucun
     monitor: Moniteur
     monitor_placeholder: Aucun
     name: Nom
     ok_create: Créer
-    ok_edit: Mise à jour
-    ok_readonly: Modifier comme nouveau
+    ok_edit: Mettre à jour
+    ok_readonly: Modifier en tant que nouveau
     options:
-      float: Flotter
+      float: Flottant
       force: Forcer la gestion
-      hidden: Masquer à Dock / Taskbar
+      hidden: Masquer du dock/de la barre des tâches
       pinned: Épinglé
-      unmanage: Annuler la gestion
-    options_label: Des options supplémentaires
+      unmanage: Ne pas gérer
+    options_label: Options supplémentaires
     title_create: Création de {{name}}
-    title_edit: Édition {{nom}}
-    title_readonly: Affichage de {{name}}
-    weg_options_label: Options de quai / barre des tâches
-    wm_options_label: Options du gestionnaire de fenêtres
+    title_edit: Modification de {{nom}}
+    title_readonly: Visualisation de {{name}}
+    weg_options_label: Options Dock/Barre des tâches
+    wm_options_label: Options gestionnaire de fenêtres
     workspace: Espace de travail
     workspace_placeholder: Aucun
   bundled_msg: >-
     Ces configurations groupées ne sont pas modifiables et sont conçues pour
     vous offrir la meilleure expérience sans personnalisation. Ils configurent
     automatiquement pour vous les applications les plus courantes.
-  bundled_title: Configuration de l'application fournie avec Seelen
-  confirm_delete: "Êtes-vous sûr de vouloir supprimer cette ou ces configurations\_?"
-  confirm_delete_title: Confirmation de la suppression
+  bundled_title: Configuration des applications groupées avec Seelen
+  confirm_delete: "Êtes-vous sûr de vouloir supprimer cette/ces configuration(s) ?"
+  confirm_delete_title: Confirmer la suppression
   delete: Supprimer
   export: Exporter
   extra_info: >-
-    Seelen UI utilise un seul identifiant par application (premier match
-    trouvé), donc l'ordre dans How Are Speciteated est important, le dernier
-    ajouté sera prioritaire, car le tableau est trié par défaut du dernier à
-    l'ancien.
+    Seelen UI utilise un seul identifiant par application (premier correspondant
+    trouvé), donc l'ordre dans lequel ils sont spécifiés est important, le dernier
+    ajouté sera priorisée, car le tableau est trié par défaut du plus récent au
+    plus ancien.
   identifier:
     add_block: Ajouter un bloc
     and: ET
@@ -69,68 +69,68 @@ apps_configurations:
       title: Titre
   import: Importer
   new: Nouveau
-  search: Recherche
+  search: Rechercher
   swap: Échanger
 cancel: Annuler
 close: Fermer
 delete: Supprimer
 devtools:
-  app_folders: Dossiers d'applications
-  custom_config_file: Charger le fichier de configuration personnalisé
+  app_folders: Dossiers d’applications
+  custom_config_file: Charger un fichier de configuration personnalisé
   data_folder: Dossier de données
   enable: Activer les outils de développement
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
-  simulate_fullscreen: Simuler un événement en plein écran
+  simulate_fullscreen: Simuler l'événement plein écran
 extras:
   clear_icons: Effacer le cache des icônes du système
   clear_icons_tooltip: >-
-    Un redémarrage pourrait être nécessaire pour que tous les widgets soient
-    pleinement pris en compte.
-  discord: Discorde
-  exit: Quitter/Quitter
+    Un redémarrage peut être nécessaire pour que cela prenne effet sur
+    tous les widgets
+  discord: Discord
+  exit: Quitter
   github: GitHub
   links: Liens officiels
   relaunch: Relance
   version: Version
 general:
-  accent_color: Couleur accent
-  date_format: Format de date
+  accent_color: Couleur d’accent
+  date_format: Format de la date
   icon_pack:
     available: Packs d'icônes disponibles
     label: Packs d'icônes
-    open_folder: Ouvrir le dossier icon packs
+    open_folder: Ouvrir le dossier des packs d’icônes
     selected: Packs d'icônes actifs
   language: Langue
   resource:
     author: Auteur
     description: Description
-    tags: Balises
-  startup: Exécuter au démarrage?
+    tags: Tags
+  startup: Lancer au démarrage ?
   theme:
     available: Thèmes disponibles
     label: Thèmes
-    open_folder: Ouvrir le dossier themes
+    open_folder: Ouvrir le dossier des thèmes
     selected: Thèmes actifs
   wallpaper:
-    select: Sélectionner le papier peint
+    select: Sélectionner un fond d’écran
 header:
   labels:
     developer: Développeur
     general: Général
     home: Accueil
-    info: Information
-    mods: Plugins et widgets
+    info: Informations
+    mods: Plugins & Widgets
     monitors: Moniteurs
     seelen_bar: Barre d'outils sophistiquée
     seelen_rofi: Lanceur d'applications
-    seelen_wall: Directeur de papier peint
+    seelen_wall: Gestionnaire de fonds d'écran
     seelen_weg: Dock/Barre des tâches
     seelen_wm: Gestionnaire de fenêtres
     shortcuts: Raccourcis
     specific_apps: Applications spécifiques
-    virtual_desk: Desktops virtuels
+    virtual_desk: Bureaux virtuels
 inherit: Hériter
 inProgress: En cours...
 insert: Insérer
@@ -147,52 +147,51 @@ open: Ouvrir
 quit: Quitter
 remove: Retirer
 save: Sauvegarder
-save_and_restart: Enregistrer et redémarrer
+save_and_restart: Sauvegarder et redémarrer
 shortcuts:
   enable: Activer les raccourcis intégrés (ahk)
   enable_tooltip: >-
-    Désactivez si vous implémentez vos propres raccourcis à l'aide de l'API
-    Seelen Core
+    Désactivez si vous implémentez vos propres raccourcis via l’API Seelen Core
   labels:
     decrease_height: Diminuer la hauteur
     decrease_width: Diminuer la largeur
     focus_bottom: Focus en bas
-    focus_latest: Focus sur les dernières
-    focus_left: Concentrez-vous à gauche
-    focus_right: Concentrez-vous à droite
-    focus_top: Focus Haut
+    focus_latest: Focus le dernier
+    focus_left: Focus à gauche
+    focus_right: Focus à droit
+    focus_top: Focus en haut
     increase_height: Augmenter la hauteur
     increase_width: Augmenter la largeur
-    misc_open_settings: Paramètres ouvrir
-    misc_toggle_lock_tracing: Togue de verrouillage (journaux)
-    misc_toggle_win_event_tracing: Togle Win Event Traçage (journaux)
-    move_to_workspace_0: Déplacer vers l'espace de travail 0
-    move_to_workspace_1: Déplacer vers l'espace de travail 1
-    move_to_workspace_2: Déplacer vers l'espace de travail 2
-    move_to_workspace_3: Déplacer vers l'espace de travail 3
-    move_to_workspace_4: Déplacer vers l'espace de travail 4
-    move_to_workspace_5: Déplacer vers l'espace de travail 5
-    move_to_workspace_6: Déplacer vers l'espace de travail 6
-    move_to_workspace_7: Déplacer vers l'espace de travail 7
-    move_to_workspace_8: Déplacer vers l'espace de travail 8
-    move_to_workspace_9: Déplacer vers l'espace de travail 9
-    reserve_bottom: Fond de réserve
-    reserve_float: Flotteur de réserve
+    misc_open_settings: Ouvrir les paramètres
+    misc_toggle_lock_tracing: Basculer le verrouillage du traçage (logs)
+    misc_toggle_win_event_tracing: Basculer le traçage des événements Windows (logs)
+    move_to_workspace_0: Déplacer vers le bureau virtuel 0
+    move_to_workspace_1: Déplacer vers le bureau virtuel 1
+    move_to_workspace_2: Déplacer vers le bureau virtuel 2
+    move_to_workspace_3: Déplacer vers le bureau virtuel 3
+    move_to_workspace_4: Déplacer vers le bureau virtuel 4
+    move_to_workspace_5: Déplacer vers le bureau virtuel 5
+    move_to_workspace_6: Déplacer vers le bureau virtuel 6
+    move_to_workspace_7: Déplacer vers le bureau virtuel 7
+    move_to_workspace_8: Déplacer vers le bureau virtuel 8
+    move_to_workspace_9: Déplacer vers le bureau virtuel 9
+    reserve_bottom: Réserver en bas
+    reserve_float: Réserver flottant
     reserve_left: Réserver à gauche
-    reserve_right: Droit de réserve
+    reserve_right: Réserver à droite
     reserve_stack: Pile de réserve
-    reserve_top: Réserver Haut
+    reserve_top: Réserver en haut
     restore_sizes: Restaurer les tailles
-    send_to_workspace_0: Envoyer à l'espace de travail 0
-    send_to_workspace_1: Envoyer à l'espace de travail 1
-    send_to_workspace_2: Envoyer à l'espace de travail 2
-    send_to_workspace_3: Envoyer à l'espace de travail 3
-    send_to_workspace_4: Envoyer à l'espace de travail 4
-    send_to_workspace_5: Envoyer à l'espace de travail 5
-    send_to_workspace_6: Envoyer à l'espace de travail 6
-    send_to_workspace_7: Envoyer à Workspace 7
-    send_to_workspace_8: Envoyer à l'espace de travail 8
-    send_to_workspace_9: Envoyer à l'espace de travail 9
+    send_to_workspace_0: Envoyer au bureau virtuel 0
+    send_to_workspace_1: Envoyer au bureau virtuel 1
+    send_to_workspace_2: Envoyer au bureau virtuel 2
+    send_to_workspace_3: Envoyer au bureau virtuel 3
+    send_to_workspace_4: Envoyer au bureau virtuel 4
+    send_to_workspace_5: Envoyer au bureau virtuel 5
+    send_to_workspace_6: Envoyer au bureau virtuel 6
+    send_to_workspace_7: Envoyer au bureau virtuel 7
+    send_to_workspace_8: Envoyer au bureau virtuel 8
+    send_to_workspace_9: Envoyer au bureau virtuel 9
     start_weg_app_0: >-
       Focus ou démarrage de l'application sur la position de la barre des tâches
       1
@@ -217,20 +216,20 @@ shortcuts:
     switch_workspace_9: Passer à l'espace de travail 9
     toggle_launcher: Basculer
   readonly_tooltip: Ceci est un raccourci en lecture seule
-  reset: Réinitialiser les valeurs par défaut
+  reset: Réinitialiser aux paramètres par défaut
 sides:
   bottom: Bas
   left: Gauche
   right: Droite
   top: Haut
 start:
-  message: "Bienvenue dans Seelen UI, l'environnement de bureau ultime avec un gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience Windows\_! Explorez une nouvelle ère d'efficacité et de multitâche avec notre interface intuitive et nos fonctionnalités avancées."
+  message: "Bienvenue sur Seelen UI, l’environnement de bureau ultime avec un gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience Windows ! Découvrez une nouvelle ère d’efficacité et de multitâche avec notre interface intuitive et ses fonctionnalités avancées."
   message_accent: Optimisez votre productivité avec style !
-  title: Accueillir!
+  title: Bienvenue !
 toolbar:
-  auto_hide: Cachette automatique
-  delay_to_hide: Retarder pour se cacher
-  delay_to_show: Retard à afficher
+  auto_hide: Masquage automatique
+  delay_to_hide: Délai avant masquage
+  delay_to_show: Délai avant affichage
   dock_side: Position
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
@@ -242,7 +241,7 @@ toolbar:
   placeholder: {}
   show_hibernate: Afficher le bouton d'hibernation dans le menu d'alimentation
 update:
-  available: Mise à jour disponible!
+  available: Mise à jour disponible !
   channel: Mettre à jour le canal
   downloading: Téléchargement...
 vd:
@@ -250,24 +249,24 @@ vd:
     La stratégie de bureau virtuelle native n'est pas disponible pour votre
     version Windows.
   strategy:
-    label: Stratégie de bureau virtuelle
-    native: Indigène
+    label: Stratégie de bureau virtuel
+    native: Native
     seelen: Seelen
 wall:
-  backgrounds: Fonds d'écran
-  enable: Activer le gestionnaire de papier peint
+  backgrounds: Fonds d’écran
+  enable: Activer le gestionnaire de fonds d’écran
   hours: heures
-  interval: Changer de papier peint à chaque
+  interval: Changer l’arrière-plan toutes les
   minutes: minutes
-  no_background: Vide de diaporama, en utilisant à la place l'arrière-plan du thème.
-  random: Randomiser le diaporama
+  no_background: Diaporama vide, utilisant le fond d’écran du thème à la place.
+  random: Diaporama aléatoire
   seconds: secondes
 weg:
   auto_hide: Masquage automatique
-  delay_to_hide: Retarder pour se cacher
-  delay_to_show: Retard à afficher
+  delay_to_hide: Délai avant masquage
+  delay_to_show: Délai avant affichage
   dock_side: Position
-  enable: Activer le Dock/la barre des tâches
+  enable: Activer le Dock/Barre des tâches
   gap: Écart
   hide_mode:
     always: Toujours
@@ -281,7 +280,7 @@ weg:
       label: Visibilité des éléments épinglés
       when_primary: Lorsque le moniteur est principal
     show_instance_counter: Afficher le compteur des fenêtres ouvertes
-    size: Taille de l'article
+    size: Taille des éléments
     temporal_visibility:
       all: Tous
       label: Visibilité des éléments non épinglés
@@ -299,13 +298,13 @@ weg:
 wm:
   author: Auteur
   border:
-    enable: Activer la bordure de la fenêtre
+    enable: Activer la bordure de fenêtre
     offset: Décalage de bordure
     width: Largeur de la bordure
   description: Description
-  enable: Activer le gestionnaire de fenêtres en carrelage
-  layout: Mise en page
-  resize_delta: Redimensionner le Delta (%)
-  space_between_containers: Espace entre les conteneurs
-  workspace_offset: Décalage des espaces de travail (marges)
-  workspace_padding: Rembourrage des espaces de travail
+  enable: Activer le gestionnaire de fenêtres en mosaïque
+  layout: Disposition
+  resize_delta: Delta de redimensionnement (%)
+  space_between_containers: Espacement entre les conteneurs
+  workspace_offset: Décalage des bureaux virtuels (Marges)
+  workspace_padding: Rembourrage(Padding) des bureaux virtuels
