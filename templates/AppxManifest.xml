@@ -1,30 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
   xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+  xmlns:uap7="http://schemas.microsoft.com/appx/manifest/uap/windows10/7"
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
   xmlns:desktop7="http://schemas.microsoft.com/appx/manifest/desktop/windows10/7"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap uap3 uap10 rescap uap5">
-  <Identity Name="Seelen.SeelenUI" Publisher="CN=7E60225C-94CB-4B2E-B17F-0159A11074CB"
-    Version="{{version}}" ProcessorArchitecture="x64" />
+  xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
+  IgnorableNamespaces="uap uap3 uap5 uap7 uap10 desktop6 desktop7 rescap virtualization">
+  <Identity
+    Name="Seelen.SeelenUI"
+    Publisher="CN=7E60225C-94CB-4B2E-B17F-0159A11074CB"
+    Version="{{version}}"
+    ProcessorArchitecture="x64" />
+
   <Properties>
     <DisplayName>Seelen UI</DisplayName>
     <PublisherDisplayName>Seelen</PublisherDisplayName>
     <Description>Fully Customizable Desktop Enviroment for Windows.</Description>
     <Logo>static\icons\256x256.png</Logo>
+
     <uap10:PackageIntegrity>
       <uap10:Content Enforcement="on" />
     </uap10:PackageIntegrity>
+    <!-- will be used on versions older than 21H1 -->
+    <desktop6:FileSystemWriteVirtualization>disabled</desktop6:FileSystemWriteVirtualization>
+    <!-- will be used on versions 21H1 and newer -->
+    <virtualization:FileSystemWriteVirtualization>
+      <virtualization:ExcludedDirectories>
+        <virtualization:ExcludedDirectory>$(KnownFolder:LocalAppData)\com.seelen.seelen-ui\logs</virtualization:ExcludedDirectory>
+        <virtualization:ExcludedDirectory>$(KnownFolder:RoamingAppData)\com.seelen.seelen-ui</virtualization:ExcludedDirectory>
+      </virtualization:ExcludedDirectories>
+    </virtualization:FileSystemWriteVirtualization>
+
+    <!-- will be used on versions older than 21H1 -->
+    <desktop6:RegistryWriteVirtualization>disabled</desktop6:RegistryWriteVirtualization>
+    <!-- will be used on versions 21H1 and newer -->
+    <virtualization:RegistryWriteVirtualization>
+      <virtualization:ExcludedKeys>
+        <virtualization:ExcludedKey>HKEY_CURRENT_USER\Control Panel\NotifyIconSettings</virtualization:ExcludedKey>
+      </virtualization:ExcludedKeys>
+    </virtualization:RegistryWriteVirtualization>
   </Properties>
+
   <Resources>
     <Resource Language="en-us" />
   </Resources>
+
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0"
       MaxVersionTested="10.0.22000.1" />
   </Dependencies>
+
   <Applications>
     <Application Id="App" Executable="seelen-ui.exe" EntryPoint="Windows.FullTrustApplication">
       <uap3:VisualElements
@@ -93,6 +123,7 @@
 
   <Capabilities>
     <uap3:Capability Name="userNotificationListener" />
+    <uap7:Capability Name="globalMediaControl" />
     <rescap:Capability Name="runFullTrust" />
     <rescap:Capability Name="unvirtualizedResources" />
     <DeviceCapability Name="radios" />

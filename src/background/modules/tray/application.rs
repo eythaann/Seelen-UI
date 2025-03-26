@@ -238,6 +238,7 @@ impl TrayIconManager {
         Ok(())
     }
 
+    // TODO: remove this, instead hide sys tray module in case of disabled
     pub fn enable_chevron() -> Result<()> {
         let hkcr = RegKey::predef(HKEY_CURRENT_USER);
         let settings = hkcr.open_subkey_with_flags(
