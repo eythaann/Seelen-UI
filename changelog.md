@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.2.1]
 ### enhancements
 - add new bundled theme as example of animated icons with css.
 
