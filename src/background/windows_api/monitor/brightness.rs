@@ -1,16 +1,19 @@
-use windows::Win32::{
-    Devices::Display::{
-        GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness, DISPLAYPOLICY_AC,
-        DISPLAYPOLICY_DC, DISPLAY_BRIGHTNESS, IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS,
-        IOCTL_VIDEO_SET_DISPLAY_BRIGHTNESS, PHYSICAL_MONITOR,
+use windows::{
+    Devices::Enumeration::DeviceInformation,
+    Win32::{
+        Devices::Display::{
+            GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness, DISPLAYPOLICY_AC,
+            DISPLAYPOLICY_DC, DISPLAY_BRIGHTNESS, IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS,
+            IOCTL_VIDEO_SET_DISPLAY_BRIGHTNESS, PHYSICAL_MONITOR,
+        },
+        Foundation::{BOOL, HANDLE},
+        Graphics::Gdi::DISPLAY_DEVICEW,
+        Storage::FileSystem::{
+            CreateFileW, FILE_GENERIC_READ, FILE_GENERIC_WRITE, FILE_SHARE_READ, FILE_SHARE_WRITE,
+            OPEN_EXISTING,
+        },
+        System::IO::DeviceIoControl,
     },
-    Foundation::{BOOL, HANDLE},
-    Graphics::Gdi::DISPLAY_DEVICEW,
-    Storage::FileSystem::{
-        CreateFileW, FILE_GENERIC_READ, FILE_GENERIC_WRITE, FILE_SHARE_READ, FILE_SHARE_WRITE,
-        OPEN_EXISTING,
-    },
-    System::IO::DeviceIoControl,
 };
 
 use crate::{
@@ -59,10 +62,12 @@ impl From<&DISPLAY_DEVICEW> for DisplayDevice {
 
 impl DisplayDevice {
     pub fn id(&self) -> String {
-        self.id
-            .to_string()
-            .trim_start_matches("\\\\.\\")
-            .to_string()
+        self.id.to_string()
+    }
+
+    pub fn is_enabled(&self) -> Result<bool> {
+        let information = DeviceInformation::CreateFromIdAsync(&self.id.to_hstring())?.get()?;
+        Ok(information.IsEnabled()?)
     }
 
     /// Opens and returns a file handle for a display device using its DOS device path.\

@@ -169,6 +169,7 @@ features = [
     "Devices_Enumeration",                 # required for bluetooth handling
     "Devices_Radios",                      # required for bluetooth/wifi/mobile etc any radio
     "Devices_WiFi",                        # required for wifi
+    "Devices_Display",                     # required for displays
     "Data_Xml_Dom",                        # required for xml parsing
 ]
 

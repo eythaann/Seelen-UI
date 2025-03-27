@@ -79,9 +79,13 @@ impl Monitor {
 
     /// the first display device is the primary
     pub fn main_display_device(&self) -> Result<DisplayDevice> {
-        let devices = WindowsApi::get_display_devices(self.0)?;
-        let device = devices.first().ok_or("no display device")?;
-        Ok(DisplayDevice::from(device))
+        let diplay_devices = self.diplay_devices()?;
+        for device in diplay_devices {
+            if device.is_enabled()? {
+                return Ok(device);
+            }
+        }
+        Err("No enabled display device for this monitor".into())
     }
 
     pub fn rect(&self) -> Result<Rect> {

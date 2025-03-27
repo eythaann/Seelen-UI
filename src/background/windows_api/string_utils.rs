@@ -3,7 +3,7 @@ use std::{
     os::windows::ffi::{OsStrExt, OsStringExt},
 };
 
-use windows_core::{PCWSTR, PWSTR};
+use windows_core::{HSTRING, PCWSTR, PWSTR};
 
 #[derive(Debug, Clone)]
 pub struct WindowsString {
@@ -54,6 +54,10 @@ impl WindowsString {
 
     pub fn as_pwstr(&mut self) -> PWSTR {
         PWSTR(self.inner.as_mut_ptr())
+    }
+
+    pub fn to_hstring(&self) -> HSTRING {
+        HSTRING::from_wide(&self.inner[..self.len()])
     }
 
     pub fn to_os_string(&self) -> std::ffi::OsString {
