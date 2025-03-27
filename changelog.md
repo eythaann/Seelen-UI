@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- not showing some notifications.
+- crash when disabling a monitor on windows native settings.
+
 ## [2.2.1]
 ### enhancements
 - add new bundled theme as example of animated icons with css.

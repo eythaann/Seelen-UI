@@ -10,6 +10,7 @@ use std::{
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::system_state::{AppNotification, Toast, ToastBindingEntry};
+use tauri::Manager;
 use windows::{
     ApplicationModel::AppInfo,
     Foundation::{TypedEventHandler, Uri},
@@ -26,6 +27,7 @@ use crate::{
     error_handler::Result,
     event_manager, log_error,
     modules::uwp::get_hightest_quality_posible,
+    seelen::get_app_handle,
     seelen_weg::icon_extractor::extract_and_save_icon_umid,
     trace_lock,
     utils::{convert_file_to_src, spawn_named_thread},
@@ -183,34 +185,72 @@ impl NotificationManager {
             .map(|path| PathBuf::from(path.to_os_string()));
 
         for entry in &mut toast.visual.binding.entries {
-            if let ToastBindingEntry::Image(image) = entry {
-                let uri = Uri::CreateUri(&image.src.clone().into())?;
-                let scheme = uri.SchemeName()?.to_string_lossy();
-                let path = PathBuf::from(
-                    Uri::UnescapeComponent(&uri.Path()?)?
-                        .to_string_lossy()
-                        .trim_start_matches('/'),
-                );
+            let ToastBindingEntry::Image(image) = entry else {
+                continue;
+            };
 
-                log::debug!("  Scheme: {} | Path: {}", scheme, path.display());
-                // https://learn.microsoft.com/en-us/windows/uwp/app-resources/uri-schemes
-                // https://learn.microsoft.com/en-us/uwp/schemas/tiles/toastschema/element-image
-                match scheme.as_str() {
-                    "http" | "https" => {}
-                    "ms-appx" | "ms-appx-web" => {
-                        let path = package_path.clone()?.join(path);
-                        if let Some(path) = get_hightest_quality_posible(&path) {
-                            log::debug!("  Resolved Path: {}", path.display());
-                            image.src = convert_file_to_src(&path);
-                        } else {
-                            log::warn!("  Unable to resolve path {}", path.display());
-                        }
-                    }
-                    "file" => {
+            if image.src.is_empty() {
+                continue;
+            }
+
+            let uri = Uri::CreateUri(&image.src.clone().into())?;
+            let scheme = uri.SchemeName()?.to_string_lossy();
+            let uri_path = PathBuf::from(
+                Uri::UnescapeComponent(&uri.Path()?)?
+                    .to_string_lossy()
+                    .trim_start_matches('/'),
+            );
+
+            // https://learn.microsoft.com/en-us/windows/uwp/app-resources/uri-schemes
+            // https://learn.microsoft.com/en-us/uwp/schemas/tiles/toastschema/element-image
+            match scheme.as_str() {
+                "http" | "https" => {}
+                "ms-appx" | "ms-appx-web" => {
+                    let path = package_path.clone()?.join(uri_path);
+                    if let Some(path) = get_hightest_quality_posible(&path) {
+                        log::debug!("  Resolved path: {}", path.display());
                         image.src = convert_file_to_src(&path);
+                    } else {
+                        log::warn!("  Unable to resolve path {}", path.display());
                     }
-                    _ => {}
                 }
+                "ms-appdata" => {
+                    let parent = if uri_path.starts_with("local") {
+                        "LocalState"
+                    } else if uri_path.starts_with("roaming") {
+                        "LocalCache"
+                    } else {
+                        continue;
+                    };
+
+                    let uri_path = PathBuf::from(
+                        Uri::UnescapeComponent(&uri.Path()?)?
+                            .to_string_lossy()
+                            .to_lowercase()
+                            .trim_start_matches('/')
+                            .trim_start_matches("local/")
+                            .trim_start_matches("roaming/"),
+                    );
+
+                    let package_family_name = AppInfo::GetFromAppUserModelId(&umid.into())?
+                        .PackageFamilyName()?
+                        .to_string_lossy();
+
+                    let path = get_app_handle()
+                        .path()
+                        .local_data_dir()?
+                        .join("Packages")
+                        .join(package_family_name)
+                        .join(parent)
+                        .join(uri_path);
+
+                    log::debug!("  Resolved path: {}", path.display());
+                    image.src = convert_file_to_src(&path);
+                }
+                "file" => {
+                    image.src = convert_file_to_src(&uri_path);
+                }
+                _ => {}
             }
         }
         Ok(())
@@ -221,7 +261,15 @@ impl NotificationManager {
         self.notifications_id.insert(u_notification.Id()?);
         let notification = u_notification.Notification()?;
 
-        let app_info = u_notification.AppInfo()?;
+        let app_info = match u_notification.AppInfo() {
+            Ok(info) => info,
+            Err(_) => {
+                // will fail if the notification was added by an uninstalled app
+                // log::error!("Unable to get app info: {}", error);
+                return Ok(());
+            }
+        };
+
         let display_info = app_info.DisplayInfo()?;
         let app_umid = app_info.AppUserModelId()?;
 
@@ -231,7 +279,10 @@ impl NotificationManager {
             .GetTextElements()?;
         let mut notification_text = Vec::new();
         for text in text_sequence {
-            notification_text.push(text.Text()?.to_string());
+            let text = text.Text()?.to_string_lossy().trim().to_string();
+            if !text.is_empty() {
+                notification_text.push(text);
+            }
         }
 
         let history = self.manager.History()?;
@@ -253,7 +304,9 @@ impl NotificationManager {
                 let mut toast_text = Vec::new();
                 for entry in &toast.visual.binding.entries {
                     if let ToastBindingEntry::Text(text) = entry {
-                        toast_text.push(text.content.clone());
+                        if !text.content.is_empty() {
+                            toast_text.push(text.content.clone().replace("\r\n", "\n"));
+                        }
                     }
                 }
 
@@ -263,6 +316,10 @@ impl NotificationManager {
                     break;
                 }
             }
+        }
+
+        if notification_content.is_none() {
+            log::debug!("NONE FOR {:#?}", notification_text);
         }
 
         // pre-extraction to avoid flickering on the ui

@@ -99,7 +99,11 @@ export function Notification({ notification }: Props) {
                 return <p key={index}>{entry.text.$value}</p>;
               }
 
-              if ('image' in entry && !entry.image['@placement']) {
+              if (
+                'image' in entry &&
+                entry.image['@placement'] != 'AppLogoOverride' &&
+                entry.image['@placement'] != 'Hero'
+              ) {
                 return (
                   <img
                     key={index}

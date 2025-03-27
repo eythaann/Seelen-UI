@@ -10,7 +10,8 @@
         "scope": [
           "$RESOURCE/**/*",
           "$TEMP/**/*",
-          "$DATA/**/*",
+          "$APPDATA/**/*",
+          "$LOCALDATA/Packages/**/*",
           "**/*.jpg",
           "**/*.jpeg",
           "**/*.png",
