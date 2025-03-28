@@ -8,6 +8,7 @@
 ### fix
 - not showing some notifications.
 - crash when disabling a monitor on windows native settings.
+- unsyncronized clock on toolbar.
 
 ## [2.2.1]
 ### enhancements
