@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.2.2]
 ### enhancements
 - add option to disable dynamic colors on toolbar.
 - reduce notification arrival time on screen from 10 seconds to 5 seconds.
