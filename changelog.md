@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- wrap webview console as soon as posible to avoid missing errors on logs.
+
 ## [2.2.2]
 ### enhancements
 - add option to disable dynamic colors on toolbar.

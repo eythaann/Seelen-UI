@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { initStore, store } from './modules/shared/store/infra';
 
 import { getRootContainer } from '../shared';
-import { wrapConsole } from '../shared/ConsoleWrapper';
 import { App } from './App';
 import { registerDocumentEvents } from './events';
 import i18n, { loadTranslations } from './i18n';
@@ -15,7 +14,6 @@ import '../shared/styles/reset.css';
 import '../shared/styles/colors.css';
 
 async function Main() {
-  wrapConsole();
   await declareDocumentAsLayeredHitbox();
   await loadTranslations();
   await initStore();
