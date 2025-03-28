@@ -120,7 +120,7 @@ header:
     monitors: 모니터
     seelen_bar: 툴바
     seelen_rofi: 앱 런처
-    seelen_wall: 벽지 관리자
+    seelen_wall: 배경화면 관리자
     seelen_weg: 독/작업 표시줄
     seelen_wm: 윈도우 매니저
     shortcuts: 단축키
@@ -228,18 +228,18 @@ toolbar:
   enable: 툴바 활성화
   height: 높이
   hide_mode:
-    always: 언제나
+    always: 항상
     never: 절대
     on_overlap: 오버랩 시
   label: 도구 모음
   placeholder: {}
   show_hibernate: 전원 메뉴에 최대 절전 모드 버튼 표시
 update:
-  available: 사용 가능한 업데이트가 존재합니다
+  available: 사용 가능한 업데이트가 존재합니다!
   channel: 업데이트 채널
   downloading: 다운로드 중...
 vd:
-  disabled_windows_version: Windows 버전에는 시스템 기본 가상 데스크톱 모드를 사용할 수 없습니다.
+  disabled_windows_version: 현재 Windows 버전에서는 시스템 기본 가상 데스크톱 모드를 사용할 수 없습니다.
   strategy:
     label: 가상 데스크탑 모드
     native: 시스템 기본
@@ -262,7 +262,7 @@ weg:
   gap: 간격
   hide_mode:
     always: 언제나
-    never: 절대
+    never: 안 함
     on_overlap: 오버랩 시
   items:
     gap: 항목 간 간격
