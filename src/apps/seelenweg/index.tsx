@@ -17,8 +17,6 @@ import './styles/variables.css';
 import '../shared/styles/reset.css';
 import './styles/global.css';
 
-throw new Error('Not implemented');
-
 await declareDocumentAsLayeredHitbox();
 await loadStore();
 await registerStoreEvents();
