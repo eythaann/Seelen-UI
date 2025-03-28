@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### enhancements
 - add option to disable dynamic colors on toolbar.
+- reduce notification arrival time on screen from 10 seconds to 5 seconds.
 
 ### fix
 - not showing some notifications.
