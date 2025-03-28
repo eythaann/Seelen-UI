@@ -8,7 +8,6 @@ import { registerStoreEvents, store } from './modules/shared/store/infra';
 import { App } from './app';
 
 import { getRootContainer } from '../shared';
-import { wrapConsole } from '../shared/ConsoleWrapper';
 import i18n, { loadTranslations } from './i18n';
 
 import '../shared/styles/colors.css';
@@ -16,7 +15,6 @@ import './styles/variables.css';
 import '../shared/styles/reset.css';
 import './styles/global.css';
 
-wrapConsole();
 await declareDocumentAsLayeredHitbox();
 await registerStoreEvents();
 await loadTranslations();

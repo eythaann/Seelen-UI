@@ -231,6 +231,10 @@ toolbar:
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
+  dynamic_color: Rengê dînamîkî
+  dynamic_color_tooltip: >-
+    Backgroundavdêriya Dînamîk û rengên pêşîn ên li ser bingeha pencereya
+    mijûlkirî çalak bikin. (Colors dikare ji hêla mijaran ve were şandin)
   enable: Vebijêrkek Fancy Vebijêrin
   height: Bilindî
   hide_mode:

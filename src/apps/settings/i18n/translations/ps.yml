@@ -228,6 +228,10 @@ toolbar:
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
+  dynamic_color: متحرک رنګ
+  dynamic_color_tooltip: >-
+    د متمرکز کړکۍ پراساس د متحرک شالید او مخکیني رنګونو فعال کړئ. (رنګونه کولی
+    شي د موضوعاتو لخوا پراخه شي)
   enable: د فینسي تورې پټه وړتیا وړ کړئ
   height: لوړوالی
   hide_mode:

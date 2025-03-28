@@ -231,6 +231,10 @@ toolbar:
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
+  dynamic_color: Dinamik rəng
+  dynamic_color_tooltip: >-
+    Diqqət edilmiş pəncərəyə əsaslanan dinamik fon və ön rəngləri aktivləşdirin.
+    (Rənglər mövzular tərəfindən ləğv edilə bilər)
   enable: Zərif alət çubuğunu aktivləşdirin
   height: Hündürlük
   hide_mode:

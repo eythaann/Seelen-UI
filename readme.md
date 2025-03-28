@@ -53,7 +53,7 @@
 </table>
 
 ## Overview
-[Seelen UI](https://seelen.io) is a tool designed to enhance your Windows desktop experience with a focus on customization and productivity. It integrates smoothly into your system, providing a range of features that allow you to personalize your desktop and optimize your workflow.
+[Seelen UI](https://seelen.io/apps/seelen-ui) is a tool designed to enhance your Windows desktop experience with a focus on customization and productivity. It integrates smoothly into your system, providing a range of features that allow you to personalize your desktop and optimize your workflow.
 
 * **Be Creative**: Seelen UI lets you tailor your desktop to fit your style and needs. You can adjust menus, widgets, icons, and other elements to create a personalized and visually appealing desktop environment.
 
@@ -199,3 +199,7 @@ For inquiries and support, please contact me on [Discord](https://discord.gg/ABf
                  0&&&&&&&&&&&&&&&&&&&0         Seelen
                       0&&&&&&&&&0
 ```
+---
+📌 **Official Website**: [https://seelen.io](https://seelen.io)
+
+Seelen Inc © 2024 - All rights reserved

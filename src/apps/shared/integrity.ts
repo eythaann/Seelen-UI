@@ -1,3 +1,5 @@
+import { wrapConsoleV2 } from './ConsoleWrapper';
+
 async function WaitForTauriInternals(): Promise<void> {
   await new Promise<void>((resolve) => {
     const checkInterval = setInterval(() => {
@@ -10,6 +12,7 @@ async function WaitForTauriInternals(): Promise<void> {
 }
 
 await WaitForTauriInternals();
+wrapConsoleV2();
 
 const script = document.createElement('script');
 script.src = './index.js';

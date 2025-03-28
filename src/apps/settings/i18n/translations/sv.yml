@@ -232,6 +232,10 @@ toolbar:
   delay_to_hide: Dröjsmål att gömma sig
   delay_to_show: Fördröjning att visa
   dock_side: Position
+  dynamic_color: Dynamisk färg
+  dynamic_color_tooltip: >-
+    Aktivera dynamiska bakgrunds- och förgrundsfärger baserat på fokuserat
+    fönster. (Färgerna kan åsidosättas av teman)
   enable: Aktivera snyggt verktygsfält
   height: Höjd
   hide_mode:

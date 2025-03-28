@@ -234,6 +234,10 @@ toolbar:
   delay_to_hide: Penundaan untuk bersembunyi
   delay_to_show: Keterlambatan untuk ditampilkan
   dock_side: Posisi
+  dynamic_color: Warna Dinamis
+  dynamic_color_tooltip: >-
+    Aktifkan warna latar belakang dan latar depan yang dinamis berdasarkan
+    jendela terfokus. (Warna dapat ditimpa oleh tema)
   enable: Aktifkan toolbar mewah
   height: Tinggi
   hide_mode:

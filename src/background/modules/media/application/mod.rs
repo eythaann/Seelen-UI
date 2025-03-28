@@ -269,7 +269,8 @@ impl MediaManager {
             .EnumAudioEndpoints(eAll, DEVICE_STATE_ACTIVE)?;
 
         for idx in 0..collection.GetCount()? {
-            self.load_device(&collection.Item(idx)?)?;
+            // avoid panic if just some device fail to load
+            log_error!(self.load_device(&collection.Item(idx)?));
         }
 
         self.device_enumerator

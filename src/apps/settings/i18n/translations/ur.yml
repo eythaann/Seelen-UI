@@ -231,6 +231,10 @@ toolbar:
   delay_to_hide: چھپانے میں تاخیر
   delay_to_show: دکھانے میں تاخیر
   dock_side: پوزیشن
+  dynamic_color: متحرک رنگ
+  dynamic_color_tooltip: >-
+    مرکوز ونڈو پر مبنی متحرک پس منظر اور پیش منظر کے رنگوں کو فعال کریں۔ (رنگوں
+    کو تھیمز کے ذریعہ زیر کیا جاسکتا ہے)
   enable: فینسی ٹول بار کو فعال کریں
   height: اونچائی
   hide_mode:

@@ -28,25 +28,25 @@ pub fn declare_system_events_handlers() -> Result<()> {
     // avoid binding interfaces to main thread
     std::thread::spawn(move || {
         log_error!(trace_lock!(RADIO_MANAGER).initialize());
-
-        // todo change this to current implementation pattern
-        let handle = get_app_handle();
-        handle.listen("register-network-events", move |_| {
-            log_error!(register_network_events());
-        });
-
-        register_tray_icons_events();
-        register_notification_events();
-        register_media_events();
-        register_user_events();
-        register_bluetooth_events();
-        register_monitor_webview_events();
-        register_colors_events();
-        register_power_events();
-        register_language_events();
     })
     .join()
     .expect("Failed to register system events");
+
+    // todo change this to current implementation pattern
+    let handle = get_app_handle();
+    handle.listen("register-network-events", move |_| {
+        log_error!(register_network_events());
+    });
+
+    register_tray_icons_events();
+    register_notification_events();
+    register_media_events();
+    register_user_events();
+    register_bluetooth_events();
+    register_monitor_webview_events();
+    register_colors_events();
+    register_power_events();
+    register_language_events();
     Ok(())
 }
 

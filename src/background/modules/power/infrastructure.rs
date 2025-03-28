@@ -11,9 +11,11 @@ use super::{
 };
 
 pub fn register_power_events() {
-    trace_lock!(POWER_MANAGER)
-        .init()
-        .expect("Failed to initialize power manager");
+    std::thread::spawn(|| {
+        trace_lock!(POWER_MANAGER)
+            .init()
+            .expect("Failed to initialize power manager");
+    });
 }
 
 pub fn release_power_events() {

@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # Run the action every 6 hours
+    - cron: "0 0 * * *" # Run the action every day
   workflow_dispatch: # Manually run the action
 
 jobs:
@@ -27,11 +27,13 @@ jobs:
 
             if (msixAsset) {
               console.info('MSIX file exists.');
-              return 'true';
+              core.setOutput('result', 'true');
             } else {
               console.info('No MSIX file found in the latest release.');
-              return 'false';
+              core.setOutput('result', 'false');
             }
+      - name: Debug output
+        run: echo "MSIX_ALREADY_EXIST value is ${{ needs.check-msix.outputs.MSIX_ALREADY_EXIST }}"
 
   upload-store-msix-to-release:
     name: Upload Signed MSIX to release

@@ -230,6 +230,10 @@ toolbar:
   delay_to_hide: Odložiť skryť
   delay_to_show: Oneskorenie zobrazenia
   dock_side: Pozícia
+  dynamic_color: Dynamická farba
+  dynamic_color_tooltip: >-
+    Povolenie dynamických farieb pozadia a popredia na základe zameraného okna.
+    (Farby môžu byť prepísané témami)
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
   hide_mode:

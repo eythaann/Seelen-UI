@@ -234,6 +234,10 @@ toolbar:
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya
+  dynamic_color: Dinamik rang
+  dynamic_color_tooltip: >-
+    Fokuslangan oynada dinamik fon va oldingi ranglarni yoqish. (Ranglar
+    mavzular tomonidan bekor qilinishi mumkin)
   enable: Fashr asboblar panelini yoqing
   height: Balandlik
   hide_mode:

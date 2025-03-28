@@ -1,10 +1,10 @@
 import { AnimatePresence } from 'framer-motion';
+import { debounce } from 'lodash';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../shared/store/app';
-import { useTimeout } from 'src/apps/shared/hooks';
 
 import { AppNotification } from '../domain';
 
@@ -12,7 +12,7 @@ import { Notification } from './Notification';
 
 // Difference between Windows epoch (1601) and Unix epoch (1970) in milliseconds
 const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
-const notificationArrivalViewTime = 10 * 1000;
+const notificationArrivalViewTime = 5 * 1000;
 
 function WindowsDateFileTimeToDate(fileTime: bigint) {
   return new Date(Number(fileTime / 10000n - EPOCH_DIFF_MILLISECONDS));
@@ -20,38 +20,31 @@ function WindowsDateFileTimeToDate(fileTime: bigint) {
 
 export function ArrivalPreview() {
   const notifications = useSelector(Selectors.notifications);
-  const [currentNotificationPreviewSet, setCurrentNotificationPreviewSet] = useState<
-    AppNotification[]
-  >([]);
+  const [arrivals, setArrivals] = useState<AppNotification[]>([]);
 
-  useTimeout(
-    () => {
-      setCurrentNotificationPreviewSet(
-        notifications.filter((notification) => {
-          const arrivalDate = WindowsDateFileTimeToDate(BigInt(notification.date));
+  const updateArrivals = useCallback(() => {
+    setArrivals(
+      notifications.filter((notification) => {
+        const arrivalDate = WindowsDateFileTimeToDate(BigInt(notification.date));
+        return moment(Date.now()).diff(arrivalDate, 'seconds') < 5;
+      }),
+    );
+  }, [notifications, setArrivals]);
 
-          return moment(Date.now()).diff(arrivalDate, 'seconds') < 10;
-        }),
-      );
-    },
-    notificationArrivalViewTime,
-    [currentNotificationPreviewSet],
+  const cleanArrivals = useCallback(
+    debounce(() => setArrivals([]), notificationArrivalViewTime),
+    [setArrivals],
   );
 
   useEffect(() => {
-    setCurrentNotificationPreviewSet(
-      notifications.filter((notification) => {
-        const arrivalDate = WindowsDateFileTimeToDate(BigInt(notification.date));
-
-        return moment(Date.now()).diff(arrivalDate, 'seconds') < 10;
-      }),
-    );
+    updateArrivals();
+    cleanArrivals();
   }, [notifications]);
 
   return (
     <div className="notification-arrival" onContextMenu={(e) => e.stopPropagation()}>
       <AnimatePresence>
-        {currentNotificationPreviewSet.map((notification) => (
+        {arrivals.map((notification) => (
           <Notification key={notification.id} notification={notification} />
         ))}
       </AnimatePresence>

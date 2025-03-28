@@ -234,6 +234,11 @@ toolbar:
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
+  dynamic_color: Dynamische Farbe
+  dynamic_color_tooltip: >-
+    Aktivieren Sie dynamische Hintergrund- und Vordergrundfarben, die auf dem
+    fokussierten Fenster basieren. (Farben können von Themes überschrieben
+    werden)
   enable: Elegante Werkzeugleiste aktivieren
   height: Höhe
   hide_mode:

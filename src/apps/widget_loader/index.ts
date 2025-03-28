@@ -1,10 +1,6 @@
 import { WidgetList } from '@seelen-ui/lib';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
-import { wrapConsole } from '../shared/ConsoleWrapper';
-
-wrapConsole();
-
 const webview = getCurrentWebviewWindow();
 const base64Label = webview.label;
 const decodedLabel = atob(base64Label);

@@ -9,9 +9,11 @@ use super::{
 };
 
 pub fn register_language_events() {
-    trace_lock!(LANGUAGE_MANAGER)
-        .init()
-        .expect("Failed to initialize power manager");
+    std::thread::spawn(move || {
+        trace_lock!(LANGUAGE_MANAGER)
+            .init()
+            .expect("Failed to initialize power manager");
+    });
 
     LanguageManager::subscribe(|event| match event {
         LanguageEvent::KeyboardLayoutChanged(hkl) => {

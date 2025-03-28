@@ -10,3 +10,13 @@ declare module '*.yml' {
 interface ObjectConstructor {
   keys<T>(o: T): (keyof T)[];
 }
+
+interface Window {
+  __TAURI_INTERNALS__?: {
+    metadata?: {
+      currentWebview?: {
+        label?: string;
+      };
+    };
+  };
+}

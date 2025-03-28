@@ -232,6 +232,10 @@ toolbar:
   delay_to_hide: Oedi i guddio
   delay_to_show: Oedi i ddangos
   dock_side: Safle
+  dynamic_color: Lliw deinamig
+  dynamic_color_tooltip: >-
+    Galluogi cefndir deinamig a lliwiau blaendir yn seiliedig ar ffenestr â
+    ffocws. (Gellir diystyru lliwiau gan themâu)
   enable: Galluogi bar offer ffansi
   height: Uchder
   hide_mode:

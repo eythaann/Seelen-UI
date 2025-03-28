@@ -227,6 +227,10 @@ toolbar:
   delay_to_hide: تأخير الأخفاء
   delay_to_show: تأخير الظهور
   dock_side: المنصب
+  dynamic_color: لون ديناميكي
+  dynamic_color_tooltip: >-
+    قم بتمكين ألوان الخلفية والمقدمة الديناميكية بناءً على النافذة المركزة.
+    (يمكن تجاوز الألوان حسب القوالب)
   enable: فعل شريط الأدوات الفاخر
   height: الارتفاع
   hide_mode:

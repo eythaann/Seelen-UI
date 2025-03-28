@@ -227,6 +227,10 @@ toolbar:
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
   dock_side: מַצָב
+  dynamic_color: צבע דינמי
+  dynamic_color_tooltip: >-
+    אפשר צבעי רקע דינאמי וצבעי חזית המבוססים על חלון ממוקד. (צבעים יכולים להתבגר
+    על ידי נושאים)
   enable: אפשר סרגל כלים מפואר
   height: גוֹבַה
   hide_mode:

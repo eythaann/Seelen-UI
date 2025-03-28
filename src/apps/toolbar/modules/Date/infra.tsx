@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { Item } from '../item/infra/infra';
 
 import { Selectors } from '../shared/store/app';
-import { useInterval } from 'src/apps/shared/hooks';
+import { useSyncClockInterval } from 'src/apps/shared/hooks';
 
 import { WithDateCalendar } from './Calendar';
 
@@ -29,12 +29,11 @@ export function DateModule({ module }: Props) {
     setDate(moment().locale(language).format(dateFormat));
   }, [dateFormat, language]);
 
-  let interval = dateFormat.includes('ss') ? 1000 : 1000 * 60;
-  useInterval(
+  useSyncClockInterval(
     () => {
       setDate(moment().locale(language).format(dateFormat));
     },
-    interval,
+    dateFormat.includes('ss') ? 'seconds' : 'minutes',
     [dateFormat, language],
   );
 

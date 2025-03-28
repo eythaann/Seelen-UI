@@ -232,6 +232,10 @@ toolbar:
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
   dock_side: Position
+  dynamic_color: Dynamisk farve
+  dynamic_color_tooltip: >-
+    Aktivér dynamiske baggrunds- og forgrundsfarver baseret på det fokuserede
+    vindue. (Farver kan tilsidesættes af temaer)
   enable: Aktivér fancy værktøjslinje
   height: Højde
   hide_mode:

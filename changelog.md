@@ -1,9 +1,21 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- wrap webview console as soon as posible to avoid missing errors on logs.
+
+### fix
+- panic on media module when loading initial devices.
+
+## [2.2.2]
+### enhancements
+- add option to disable dynamic colors on toolbar.
+- reduce notification arrival time on screen from 10 seconds to 5 seconds.
+
 ### fix
 - not showing some notifications.
 - crash when disabling a monitor on windows native settings.
+- unsyncronized clock on toolbar.
 
 ## [2.2.1]
 ### enhancements
