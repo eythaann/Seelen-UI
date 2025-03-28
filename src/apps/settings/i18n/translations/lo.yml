@@ -229,6 +229,10 @@ toolbar:
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
+  dynamic_color: ສີແບບເຄື່ອນໄຫວ
+  dynamic_color_tooltip: >-
+    ເປີດໃຊ້ພື້ນຫລັງແບບເຄື່ອນໄຫວແລະສີພື້ນຖານໂດຍອີງໃສ່ຫນ້າຕ່າງທີ່ສຸມໃສ່.
+    (ສີສາມາດຖືກໂອນໂດຍຫົວຂໍ້)
   enable: ເປີດໃຊ້ແຖບເຄື່ອງມື Fancy
   height: ຄວາມສູງ
   hide_mode:

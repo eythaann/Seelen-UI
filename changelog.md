@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add option to disable dynamic colors on toolbar.
+
 ### fix
 - not showing some notifications.
 - crash when disabling a monitor on windows native settings.

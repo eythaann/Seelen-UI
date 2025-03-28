@@ -227,6 +227,10 @@ toolbar:
   delay_to_hide: Idaduro lati tọju
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo
+  dynamic_color: Awọ ti o ni agbara
+  dynamic_color_tooltip: >-
+    Mu ipilẹ pada sile ati awọn awọ iwaju ti o da lori window aifọwọyi. (Awọn
+    awọ le ṣe ni agbara nipasẹ awọn akori)
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
   height: Giga
   hide_mode:

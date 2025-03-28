@@ -230,6 +230,10 @@ toolbar:
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija
+  dynamic_color: Dinaminė spalva
+  dynamic_color_tooltip: >-
+    Įgalinkite dinamines fono ir pirmojo plano spalvas pagal sufokusuotą langą.
+    (Spalvas galima pakeisti temomis)
   enable: Įgalinkite išgalvotą įrankių juostą
   height: Ūgis
   hide_mode:

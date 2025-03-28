@@ -38,15 +38,15 @@ apps_configurations:
     vous offrir la meilleure expérience sans personnalisation. Ils configurent
     automatiquement pour vous les applications les plus courantes.
   bundled_title: Configuration des applications groupées avec Seelen
-  confirm_delete: "Êtes-vous sûr de vouloir supprimer cette/ces configuration(s) ?"
+  confirm_delete: Êtes-vous sûr de vouloir supprimer cette/ces configuration(s) ?
   confirm_delete_title: Confirmer la suppression
   delete: Supprimer
   export: Exporter
   extra_info: >-
     Seelen UI utilise un seul identifiant par application (premier correspondant
-    trouvé), donc l'ordre dans lequel ils sont spécifiés est important, le dernier
-    ajouté sera priorisée, car le tableau est trié par défaut du plus récent au
-    plus ancien.
+    trouvé), donc l'ordre dans lequel ils sont spécifiés est important, le
+    dernier ajouté sera priorisée, car le tableau est trié par défaut du plus
+    récent au plus ancien.
   identifier:
     add_block: Ajouter un bloc
     and: ET
@@ -86,8 +86,8 @@ devtools:
 extras:
   clear_icons: Effacer le cache des icônes du système
   clear_icons_tooltip: >-
-    Un redémarrage peut être nécessaire pour que cela prenne effet sur
-    tous les widgets
+    Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les
+    widgets
   discord: Discord
   exit: Quitter
   github: GitHub
@@ -150,8 +150,7 @@ save: Sauvegarder
 save_and_restart: Sauvegarder et redémarrer
 shortcuts:
   enable: Activer les raccourcis intégrés (ahk)
-  enable_tooltip: >-
-    Désactivez si vous implémentez vos propres raccourcis via l’API Seelen Core
+  enable_tooltip: Désactivez si vous implémentez vos propres raccourcis via l’API Seelen Core
   labels:
     decrease_height: Diminuer la hauteur
     decrease_width: Diminuer la largeur
@@ -223,7 +222,11 @@ sides:
   right: Droite
   top: Haut
 start:
-  message: "Bienvenue sur Seelen UI, l’environnement de bureau ultime avec un gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience Windows ! Découvrez une nouvelle ère d’efficacité et de multitâche avec notre interface intuitive et ses fonctionnalités avancées."
+  message: >-
+    Bienvenue sur Seelen UI, l’environnement de bureau ultime avec un
+    gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience
+    Windows ! Découvrez une nouvelle ère d’efficacité et de multitâche avec
+    notre interface intuitive et ses fonctionnalités avancées.
   message_accent: Optimisez votre productivité avec style !
   title: Bienvenue !
 toolbar:
@@ -231,6 +234,10 @@ toolbar:
   delay_to_hide: Délai avant masquage
   delay_to_show: Délai avant affichage
   dock_side: Position
+  dynamic_color: Couleur dynamique
+  dynamic_color_tooltip: >-
+    Active les couleurs dynamiques d'arrière-plan et d'avant-plan en fonction de
+    la fenêtre ciblée. (Les couleurs peuvent être remplacées par des thèmes)
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
   hide_mode:

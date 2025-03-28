@@ -232,6 +232,10 @@ toolbar:
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
   dock_side: Posició
+  dynamic_color: Color dinàmic
+  dynamic_color_tooltip: >-
+    Activa els colors dinàmics de fons i en primer pla basats en la finestra
+    centrada. (Els colors es poden anul·lar per temes)
   enable: Activa la barra d’eines de luxe
   height: Altura
   hide_mode:

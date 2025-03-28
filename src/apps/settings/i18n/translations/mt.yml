@@ -232,6 +232,10 @@ toolbar:
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
+  dynamic_color: Kulur dinamiku
+  dynamic_color_tooltip: >-
+    Ippermetti l-isfond dinamiku u l-kuluri tat-tagħrif miksub ibbażati fuq
+    tieqa ffokata. (Il-kuluri jistgħu jiġu mwarrba bit-temi)
   enable: Jippermetti toolbar tal-fancy
   height: Għoli
   hide_mode:

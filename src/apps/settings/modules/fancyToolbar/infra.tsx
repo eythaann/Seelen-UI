@@ -1,5 +1,5 @@
 import { FancyToolbarSide, HideMode } from '@seelen-ui/lib';
-import { Button, InputNumber, Select, Switch } from 'antd';
+import { Button, InputNumber, Select, Switch, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -55,6 +55,18 @@ export function FancyToolbarSettings() {
                 </Button>
               ))}
             </Button.Group>
+          </SettingsOption>
+          <SettingsOption>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              {t('toolbar.dynamic_color')}
+              <Tooltip title={t('toolbar.dynamic_color_tooltip')}>
+                <Icon iconName="LuCircleHelp" />
+              </Tooltip>
+            </span>
+            <Switch
+              checked={settings.dynamicColor}
+              onChange={(value) => dispatch(FancyToolbarActions.setDynamicColor(value))}
+            />
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>

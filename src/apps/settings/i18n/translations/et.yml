@@ -229,6 +229,10 @@ toolbar:
   delay_to_hide: Viivitage peitmine
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
+  dynamic_color: Dünaamiline värv
+  dynamic_color_tooltip: >-
+    Võimaldab dünaamilise tausta- ja esiplaanivärvi, mis põhineb fookustatud
+    aknal. (Värve saab teemade abil muuta)
   enable: Luba väljamõeldud tööriistariba
   height: Kõrgus
   hide_mode:

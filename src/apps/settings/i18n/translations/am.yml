@@ -226,6 +226,8 @@ toolbar:
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
   dock_side: አቀማመጥ
+  dynamic_color: ተለዋዋጭ ቀለም
+  dynamic_color_tooltip: በተተኮረ መስኮት ላይ በመመርኮዝ ተለዋዋጭ ዳራ እና የፊት ቀለሞችን ያንቁ. (ቀለሞች በግምቶች መካተት ይችላሉ)
   enable: Fangance የመሳሪያ አሞሌን ያንቁ
   height: ቁመት
   hide_mode:

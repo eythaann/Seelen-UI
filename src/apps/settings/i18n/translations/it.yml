@@ -230,6 +230,10 @@ toolbar:
   delay_to_hide: Ritardo per nascondere
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
+  dynamic_color: Colore dinamico
+  dynamic_color_tooltip: >-
+    Abilita i colori dinamici di sfondo e primo piano in base alla finestra
+    focalizzata. (I colori possono essere sovrascritti dai temi).
   enable: Abilita Barra Fancy
   height: Altezza
   hide_mode:

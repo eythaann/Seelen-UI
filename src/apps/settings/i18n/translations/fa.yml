@@ -233,6 +233,10 @@ toolbar:
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
+  dynamic_color: رنگ پویا
+  dynamic_color_tooltip: >-
+    پس زمینه پویا و رنگهای پیش زمینه را بر اساس پنجره متمرکز فعال کنید. (رنگ ها
+    را می توان با مضامین نادیده گرفت)
   enable: نوار ابزار فانتزی را فعال کنید
   height: قد
   hide_mode:

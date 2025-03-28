@@ -232,6 +232,10 @@ toolbar:
   delay_to_hide: Odgoda za skrivanje
   delay_to_show: Odgoditi prikaz
   dock_side: Položaj
+  dynamic_color: Dinamična boja
+  dynamic_color_tooltip: >-
+    Omogućite dinamičke pozadine i boje u prvom planu na temelju fokusiranog
+    prozora. (Boje se mogu nadjačati temama)
   enable: Omogućite maštovitu alatnu traku
   height: Visina
   hide_mode:

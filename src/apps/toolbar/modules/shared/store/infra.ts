@@ -63,6 +63,11 @@ async function initUIColors() {
   await UIColors.onChange(loadColors);
 }
 
+const removeFocusedColorCssVars = () => {
+  document.documentElement.style.removeProperty('--color-focused-app-background');
+  document.documentElement.style.removeProperty('--color-focused-app-foreground');
+};
+
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
 
@@ -145,14 +150,9 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setFocused(app));
   }, 200);
 
-  const removeFocusedColorCssVars = () => {
-    document.documentElement.style.removeProperty('--color-focused-app-background');
-    document.documentElement.style.removeProperty('--color-focused-app-foreground');
-  };
-
   let lastFocusedWasMaximized = false;
   const updateFocusedColor = async () => {
-    if (!lastFocusedWasMaximized) {
+    if (!lastFocusedWasMaximized || !store.getState().settings.dynamicColor) {
       return;
     }
 
@@ -207,9 +207,15 @@ export async function registerStoreEvents() {
   );
   MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
 
-  BluetoothDevices.onChange((devices) => store.dispatch(RootActions.setBluetoothDevices(devices.all())));
-  BluetoothDevices.onDiscoveredDevicesChange((devices) => store.dispatch(RootActions.setDiscoveredBluetoothDevices(devices.all())));
-  BluetoothRadio.onChange((radio) => store.dispatch(RootActions.setBluetoothRadioState(radio.state)));
+  BluetoothDevices.onChange((devices) =>
+    store.dispatch(RootActions.setBluetoothDevices(devices.all())),
+  );
+  BluetoothDevices.onDiscoveredDevicesChange((devices) =>
+    store.dispatch(RootActions.setDiscoveredBluetoothDevices(devices.all())),
+  );
+  BluetoothRadio.onChange((radio) =>
+    store.dispatch(RootActions.setBluetoothRadioState(radio.state)),
+  );
 
   await initUIColors();
   await StartThemingTool();
@@ -225,7 +231,12 @@ function loadSettingsCSS(settings: FancyToolbarSettings) {
 
 async function loadSettings(settings: Settings) {
   i18n.changeLanguage(settings.inner.language || undefined);
-  loadSettingsCSS(settings.fancyToolbar);
+
   store.dispatch(RootActions.setSettings(settings.fancyToolbar));
   store.dispatch(RootActions.setDateFormat(settings.inner.dateFormat));
+
+  loadSettingsCSS(settings.fancyToolbar);
+  if (!settings.fancyToolbar.dynamicColor) {
+    removeFocusedColorCssVars();
+  }
 }

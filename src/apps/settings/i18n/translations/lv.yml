@@ -232,6 +232,10 @@ toolbar:
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
+  dynamic_color: Dinamiskā krāsa
+  dynamic_color_tooltip: >-
+    Iespēja izmantot dinamiskas fona un priekšplāna krāsas atkarībā no fokusētā
+    loga. (Krāsas var pārspēt ar tēmām)
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
   hide_mode:

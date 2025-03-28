@@ -232,6 +232,10 @@ toolbar:
   delay_to_hide: Gizlenmeyi geciktir
   delay_to_show: Gösterme gecikmesi
   dock_side: Pozisyon
+  dynamic_color: Dinamik Renk
+  dynamic_color_tooltip: >-
+    Odaklanılan pencereye göre dinamik arka plan ve ön plan renklerini
+    etkinleştirin. (Renkler temalar tarafından geçersiz kılınabilir)
   enable: Şık Araç Çubuğunu Etkinleştir
   height: Yükseklik
   hide_mode:
