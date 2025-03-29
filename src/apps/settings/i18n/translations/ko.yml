@@ -133,7 +133,7 @@ loading: 로딩 중...
 miscellaneous: 기타
 mods:
   plugins: 플러그인
-  target: 목표
+  target: 대상
   widgets: 위젯
 monitors_configurations:
   label: 모니터 {{index}}
@@ -231,7 +231,7 @@ toolbar:
   height: 높이
   hide_mode:
     always: 항상
-    never: 절대
+    never: 안 함
     on_overlap: 오버랩 시
   label: 도구 모음
   placeholder: {}
@@ -263,14 +263,14 @@ weg:
   enable: 독/작업 표시줄 활성화
   gap: 간격
   hide_mode:
-    always: 언제나
+    always: 항상
     never: 안 함
     on_overlap: 오버랩 시
   items:
     gap: 항목 간 간격
     label: 항목
     pinned_visibility:
-      always: 언제나
+      always: 항상
       label: 고정된 항목 가시성
       when_primary: 모니터가 기본인 경우
     show_instance_counter: 열린 창에 카운터 표시
@@ -286,7 +286,7 @@ weg:
   margin: 바깥 여백
   mode:
     full_width: 전체 화면 너비
-    min_content: 가능한 한 작은
+    min_content: 최대한 작게
   padding: 안쪽 여백
   width: 너비
 wm:
