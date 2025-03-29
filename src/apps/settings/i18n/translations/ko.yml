@@ -133,7 +133,7 @@ loading: 로딩 중...
 miscellaneous: 기타
 mods:
   plugins: 플러그인
-  target: 목표
+  target: 대상
   widgets: 위젯
 monitors_configurations:
   label: 모니터 {{index}}
@@ -231,7 +231,7 @@ toolbar:
   height: 높이
   hide_mode:
     always: 항상
-    never: 절대
+    never: 안 함
     on_overlap: 오버랩 시
   label: 도구 모음
   placeholder: {}
@@ -286,7 +286,7 @@ weg:
   margin: 바깥 여백
   mode:
     full_width: 전체 화면 너비
-    min_content: 가능한 한 작은
+    min_content: 최대한 작게
   padding: 안쪽 여백
   width: 너비
 wm:
