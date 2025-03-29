@@ -1,9 +1,9 @@
 app_launcher:
   enable: Включить лаунчер приложений
   launch_on:
-    mouse_over: Наведите курсор мыши
-    primary: Начальный
-  monitor: Монитор, чтобы показать
+    mouse_over: Местоположение курсора
+    primary: Основной
+  monitor: Монитор для отображения
   runners:
     cmd: Командная строка
     explorer: Проводник
@@ -22,7 +22,7 @@ apps_configurations:
     options:
       float: Плавающее
       force: Управлять принудительно
-      hidden: Скрыть из панели задач
+      hidden: Скрыть с панели задач
       pinned: Закреплено
       unmanage: Неуправляемое
     options_label: Дополнительные параметры
@@ -63,7 +63,7 @@ apps_configurations:
     or: ИЛИ
     remove: Удалить блок
     type:
-      class: Сорт
+      class: Класс окна
       exe: Exe
       path: Путь
       title: Заголовок
@@ -158,8 +158,8 @@ shortcuts:
     decrease_width: Уменьшить ширину
     focus_bottom: Фокус низа
     focus_latest: Фокус последнего
-    focus_left: Фокус лева
-    focus_right: Фокус права
+    focus_left: Фокус слева
+    focus_right: Фокус справа
     focus_top: Фокус верха
     increase_height: Увеличить высоты
     increase_width: Увеличить ширину
@@ -177,7 +177,7 @@ shortcuts:
     move_to_workspace_8: Перейти в рабочую область 8
     move_to_workspace_9: Перейти в рабочую область 9
     reserve_bottom: Зарезервировать низ
-    reserve_float: Зарезервировать плавующее
+    reserve_float: Резервировать плавающее
     reserve_left: Зарезервировать лево
     reserve_right: Зарезервировать право
     reserve_stack: Зарезервировать стек
@@ -203,16 +203,16 @@ shortcuts:
     start_weg_app_7: Фокусировать или запустить приложение на 8 позиции панели задач
     start_weg_app_8: Фокусировать или запустить приложение на 9 позиции панели задач
     start_weg_app_9: Фокусировать или запустить приложение на 10 позиции панели задач
-    switch_workspace_0: Переключитесь на рабочее пространство 1
-    switch_workspace_1: Переключитесь на рабочую область 2
-    switch_workspace_2: Переключиться на рабочую область 2
-    switch_workspace_3: Переключиться на рабочую область 3
-    switch_workspace_4: Переключиться на рабочую область 4
-    switch_workspace_5: Переключиться на рабочую область 5
-    switch_workspace_6: Переключиться на рабочую область 6
-    switch_workspace_7: Переключиться на рабочую область 7
-    switch_workspace_8: Переключиться на рабочую область 8
-    switch_workspace_9: Переключиться на рабочую область 9
+    switch_workspace_0: Переключить на рабочую область 0
+    switch_workspace_1: Переключить на рабочую область 1
+    switch_workspace_2: Переключить на рабочую область 2
+    switch_workspace_3: Переключить на рабочую область 3
+    switch_workspace_4: Переключить на рабочую область 4
+    switch_workspace_5: Переключить на рабочую область 5
+    switch_workspace_6: Переключить на рабочую область 6
+    switch_workspace_7: Переключить на рабочую область 7
+    switch_workspace_8: Переключить на рабочую область 8
+    switch_workspace_9: Переключить на рабочую область 9
     toggle_launcher: Переключать
   readonly_tooltip: Это ярлык только для чтения
   reset: Сбросить по умолчанию
@@ -236,8 +236,7 @@ toolbar:
   dock_side: Позиция
   dynamic_color: Динамический цвет
   dynamic_color_tooltip: >-
-    Включите динамические цвета фона и переднего плана в зависимости от
-    фокусировки окна. (Цвета могут быть переопределены темами)
+    Динамическая подстройка цвета под активное окно (темы могут переопределять цвета).
   enable: Включить
   height: Высота
   hide_mode:
@@ -263,10 +262,10 @@ wall:
   backgrounds: Обои
   enable: Включить менеджер обоев
   hours: часы
-  interval: Измените обои каждый
+  interval: Менять обои через
   minutes: минуты
-  no_background: Пустое слайд -шоу, используя фон темы.
-  random: Рандомизируйте слайд -шоу
+  no_background: Пустое слайд-шоу (используется фон темы)
+  random: Случайный порядок
   seconds: секунды
 weg:
   auto_hide: Автоскрытие
@@ -285,7 +284,7 @@ weg:
     pinned_visibility:
       always: Всегда
       label: Видимость закрепленных элементов
-      when_primary: Когда монитор является основным
+      when_primary: Если монитор основной
     show_instance_counter: Показать счетчик открытых окон
     size: Размер иконок
     temporal_visibility:
@@ -298,8 +297,8 @@ weg:
   label: Панель задач
   margin: Внешний отступ
   mode:
-    full_width: Полная ширина экрана
-    min_content: Маленький, насколько это возможно
+    full_width: По ширине экрана
+    min_content: Минимальная
   padding: Внутренний отступ
   width: Ширина
 wm:
@@ -311,7 +310,7 @@ wm:
   description: Описание
   enable: Включить менеджер по плитке окна
   layout: Макет
-  resize_delta: Изменить размер дельты (%)
+  resize_delta: Шаг изменения размера (%)
   space_between_containers: Пространство между контейнерами
   workspace_offset: Внешний отступ рабочего пространства
   workspace_padding: Внутренний отступ рабочего пространства

@@ -2,12 +2,12 @@ bluetooth:
   available: Доступные устройства (не сопряженные)
   cancel: Отмена
   connected: Подключенные устройства
-  forget: Забудьте о
-  lowenergy: Низкая энергия
+  forget: Удалить
+  lowenergy: Низкое энергопотребление
   more: Другие настройки Bluetooth
   not_found: Устройства Bluetooth не найдены
-  pair: Пара
-  paired: Сохраненные устройства
+  pair: Сопрячь
+  paired: Сопряжённые устройства
   placeholder:
     passphrase: Пароль, код или PIN-код
   scanning: Сканирование для поиска устройств
@@ -26,7 +26,7 @@ media:
   device:
     channel:
       system: Системные звуки
-    comunications: Коммуникации
+    comunications: Связь
     missing: Отсутствующее устройство
     mixer: Микшер громкости
     multimedia: Мультимедиа
@@ -41,20 +41,20 @@ network:
   connected: Подключено к
   disconnect: Отключить
   hidden: Скрытая сеть
-  more: Больше настроек сети
-  not_found: Не найдено ни одной сети
+  more: Дополнительные сетевые параметры
+  not_found: Сети Wi-Fi не найдены
   placeholder:
     password: Пароль
   saved: Сохраненные сети
   scanning: Сканирование сетей
-  secured: Зашифрованная сеть
+  secured: Защищённая сеть
 notifications:
   clear: Очистить все
   empty: Нет уведомлений
   settings: Другие настройки уведомлений
   title: Уведомления
 placeholder:
-  battery_remaining: Осталось %
+  battery_remaining: '% осталось'
   bluetooth_devices: Bluetooth и устройства
   ethernet_connected: Сеть
   ethernet_disconnected: Нет сети
@@ -66,8 +66,8 @@ placeholder:
 settings:
   app_settings: Настройки приложения
   brightness: Яркость
-  hibernate: Hibernate
-  lock: Замок
+  hibernate: Гибернация
+  lock: Заблокировать
   log_out: Выход из системы
   power: Питание
   restart: Перезагрузка
@@ -75,8 +75,8 @@ settings:
   sleep: Спящий режим
   title: Настройки
 tray:
-  empty: 'Отсутствие элементов в трее (Примечание: в Windows 10 не реализовано)'
-  unlabeled: Значок лотка без надписи
+  empty: 'Нет элементов в трее (Примечание: в Windows 10 не реализовано)'
+  unlabeled: Значок в трее без метки
 userhome:
   empty_list: Нет предметов
   folders:
@@ -88,13 +88,13 @@ userhome:
     pictures: Изображения
     recent: Недавно использованные
     reduce_items: Показать меньше...
-    title: Папки пользователей
+    title: Пользовательские папки
     videos: Видео
   profile:
     accounts: Настройки учетной записи
     open_onedrive: Открыть папку OneDrive
-    open_user_folder: Откройте папку пользователя
+    open_user_folder: Открыть пользовательскую папку
   seelen_options:
-    open_installation_folder: Откройте папку настроек Seelen
-    open_log_folder: Откройте папку журнала Seelen
+    open_installation_folder: Открыть папку настроек Seelen
+    open_log_folder: Открыть папку журнала Seelen
     title: Каталоги Seelen

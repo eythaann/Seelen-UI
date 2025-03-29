@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    cmd: Командование
-    explorer: Бегать
+    cmd: Консоль
+    explorer: Проводник
 footer:
-  shortcuts: Показать ярлыки
+  shortcuts: Сочетания клавиш
 header:
   search: Приложение, команда или путь
 item:
-  open_location: Откройте местоположение файла
-  pin: Прикованная к пристани
+  open_location: Открыть местоположение файла
+  pin: Закрепить на панели задач
