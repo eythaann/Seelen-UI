@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # Run the action every 6 hours
+    - cron: "0 0 * * *" # Run the action every day
   workflow_dispatch: # Manually run the action
 
 jobs:
