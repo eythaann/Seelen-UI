@@ -6,6 +6,7 @@
 
 ### fix
 - panic on media module when loading initial devices.
+- discord window without umid (for now umid was hardcoded).
 
 ## [2.2.2]
 ### enhancements

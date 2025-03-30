@@ -69,6 +69,9 @@ export function wrapConsoleV2() {
   });
 
   window.addEventListener('error', (event) => {
-    console.error('Uncaught Error', event.error);
+    // could be undefined on fetch errors
+    if (event.error || event.message) {
+      console.error('Uncaught Error', event.error || event.message);
+    }
   }, true);
 }

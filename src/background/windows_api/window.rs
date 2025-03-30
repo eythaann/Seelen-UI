@@ -103,6 +103,14 @@ impl Window {
 
         if self.is_electron() {
             let path = process.program_path().ok()?;
+
+            // special manual case like there's no way to call GetCurrentProcessExplicitAppUserModelID without code injection
+            if path.file_name()?.to_string_lossy().to_lowercase() == "discord.exe" {
+                return Some(AppUserModelId::PropertyStore(
+                    "com.squirrel.Discord.Discord".to_string(),
+                ));
+            }
+
             let guard = START_MENU_MANAGER.load();
             let item = guard.get_by_target(&path)?;
             Some(AppUserModelId::PropertyStore(item.umid.clone()?))
