@@ -10,15 +10,17 @@ import { ErrorBoundary } from './components/Error';
 import { SeelenWeg } from './modules/bar';
 
 async function onMount() {
-  let view = getCurrentWebviewWindow();
+  const view = getCurrentWebviewWindow();
   await view.show();
 }
+
 export function App() {
   const isDarkMode = useDarkMode();
   const colors = useSelector(Selectors.colors);
 
   useEffect(() => {
     onMount();
+    console.debug('Seelen Weg app mounted');
   }, []);
 
   return (

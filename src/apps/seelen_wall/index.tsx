@@ -1,3 +1,4 @@
+import { disableWebviewShortcutsAndContextMenu } from '@seelen-ui/lib';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
@@ -11,15 +12,12 @@ import '../shared/styles/colors.css';
 import '../shared/styles/reset.css';
 import './styles/global.css';
 
-async function Main() {
-  await initStore();
+disableWebviewShortcutsAndContextMenu();
+await initStore();
 
-  const container = getRootContainer();
-  createRoot(container).render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-  );
-}
-
-Main();
+const container = getRootContainer();
+createRoot(container).render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+);

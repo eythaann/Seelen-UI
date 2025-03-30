@@ -1,4 +1,4 @@
-import { declareDocumentAsLayeredHitbox } from '@seelen-ui/lib';
+import { declareDocumentAsLayeredHitbox, disableWebviewShortcutsAndContextMenu } from '@seelen-ui/lib';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -15,6 +15,7 @@ import './styles/variables.css';
 import '../shared/styles/reset.css';
 import './styles/global.css';
 
+disableWebviewShortcutsAndContextMenu();
 await declareDocumentAsLayeredHitbox();
 await registerStoreEvents();
 await loadTranslations();
