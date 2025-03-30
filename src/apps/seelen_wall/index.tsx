@@ -1,4 +1,4 @@
-import { disableWebviewShortcutsAndContextMenu } from '@seelen-ui/lib';
+import { disableWebviewShortcutsAndContextMenu } from '@shared/setup';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 

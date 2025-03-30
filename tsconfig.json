@@ -24,7 +24,10 @@
       "jest"
     ],
     "skipLibCheck": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["./src/apps/shared/*"],
+    }
   },
   "exclude": [
     "node_modules",

@@ -4,7 +4,6 @@
  */
 body {
   overflow: hidden;
-  cursor: default;
   background: transparent;
   display: flex;
   justify-content: var(--config-by-position-justify-content);

@@ -16,8 +16,19 @@
     outline: none;
     box-sizing: border-box;
     vertical-align: baseline;
+  }
+
+  /* these are unique for desktop apps using webview */
+  :not(input):not(textarea),
+  :not(input):not(textarea)::after,
+  :not(input):not(textarea)::before {
     -webkit-user-select: none;
     user-select: none;
+  }
+
+  /* these are unique for desktop apps using webview */
+  :not(a):not(input):not(textarea) {
+    cursor: default !important;
   }
 
   img,

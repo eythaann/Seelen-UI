@@ -1,8 +1,5 @@
-import {
-  declareDocumentAsLayeredHitbox,
-  disableWebviewShortcutsAndContextMenu,
-  SeelenCommand,
-} from '@seelen-ui/lib';
+import { SeelenCommand } from '@seelen-ui/lib';
+import { declareDocumentAsLayeredHitbox, disableWebviewShortcutsAndContextMenu } from '@shared/setup';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { createRoot } from 'react-dom/client';
