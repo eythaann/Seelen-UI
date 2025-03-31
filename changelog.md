@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.2.3]
 ### enhancements
 - wrap webview console as soon as posible to avoid missing errors on logs.
 - wait some seconds before remove media players to avoid shifting on chrome.
