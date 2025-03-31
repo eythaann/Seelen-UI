@@ -13,6 +13,7 @@
 - discord window without umid (for now umid was hardcoded).
 - focused app not updating on title change.
 - not considerating accesibility text scale factor on toolbar and dock.
+- wheel not changing volume level.
 
 ## [2.2.2]
 ### enhancements
