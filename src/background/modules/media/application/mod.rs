@@ -74,6 +74,7 @@ pub enum MediaEvent {
     // == players ==
     MediaPlayerAdded(GlobalSystemMediaTransportControlsSession),
     MediaPlayerRemoved(String),
+    MediaPlayerPendingsRemoved,
     MediaPlayerPropertiesChanged {
         id: String,
         title: String,
@@ -146,15 +147,10 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
     }
 }
 
-type OnDevicesChange = Box<dyn Fn(&Vec<MediaDevice>, &Vec<MediaDevice>) + Send + Sync>;
-type OnPlayersChange = Box<dyn Fn(&Vec<MediaPlayer>) + Send + Sync>;
 pub struct MediaManager {
     inputs: Vec<MediaDevice>,
     outputs: Vec<MediaDevice>,
-    playing: Vec<MediaPlayer>,
-
-    registered_devices_callbacks: Vec<OnDevicesChange>,
-    registered_players_callbacks: Vec<OnPlayersChange>,
+    playing: HashMap<String, MediaPlayer>,
 
     device_enumerator: IMMDeviceEnumerator,
     mm_notification_client: IMMNotificationClient,
@@ -188,8 +184,8 @@ impl MediaManager {
         &self.outputs
     }
 
-    pub fn playing(&self) -> &Vec<MediaPlayer> {
-        &self.playing
+    pub fn playing(&self) -> Vec<&MediaPlayer> {
+        self.playing.values().collect_vec()
     }
 
     pub fn device(&self, id: &str) -> Option<&MediaDevice> {
@@ -207,7 +203,7 @@ impl MediaManager {
     }
 
     pub fn player_mut(&mut self, id: &str) -> Option<&mut MediaPlayer> {
-        self.playing.iter_mut().find(|p| p.umid == id)
+        self.playing.get_mut(id)
     }
 
     pub fn get_raw_device(&self, device_id: &str) -> Option<IMMDevice> {
@@ -220,12 +216,10 @@ impl MediaManager {
         let media_player_manager =
             GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?.get()?;
 
-        let mut manager = Self {
+        let manager = Self {
             inputs: Vec::new(),
             outputs: Vec::new(),
-            playing: Vec::new(),
-            registered_devices_callbacks: Vec::new(),
-            registered_players_callbacks: Vec::new(),
+            playing: HashMap::new(),
 
             // unsafe com objects
             device_enumerator: Com::create_instance(&MMDeviceEnumerator)?,
@@ -244,26 +238,10 @@ impl MediaManager {
                 MediaManagerEvents::on_media_player_playback_changed,
             ),
         };
-
-        unsafe { manager.initialize()? };
         Ok(manager)
     }
 
-    pub fn on_change_players<F>(&mut self, callback: F)
-    where
-        F: Fn(&Vec<MediaPlayer>) + Send + Sync + 'static,
-    {
-        self.registered_players_callbacks.push(Box::new(callback));
-    }
-
-    pub fn on_change_devices<F>(&mut self, callback: F)
-    where
-        F: Fn(&Vec<MediaDevice>, &Vec<MediaDevice>) + Send + Sync + 'static,
-    {
-        self.registered_devices_callbacks.push(Box::new(callback));
-    }
-
-    unsafe fn initialize(&mut self) -> Result<()> {
+    pub unsafe fn initialize(&mut self) -> Result<()> {
         let collection = self
             .device_enumerator
             .EnumAudioEndpoints(eAll, DEVICE_STATE_ACTIVE)?;
@@ -283,7 +261,26 @@ impl MediaManager {
         self.update_recommended_player();
         self.media_player_manager
             .SessionsChanged(&self.media_player_manager_event_handler)?;
-        Self::start_event_loop();
+
+        Self::subscribe(|event| {
+            log::debug!("Media event: {event:?}");
+
+            let is_changing_players = matches!(
+                event,
+                MediaEvent::MediaPlayerAdded(_)
+                    | MediaEvent::MediaPlayerRemoved(_)
+                    | MediaEvent::MediaPlayerPropertiesChanged { .. }
+                    | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
+            );
+
+            let mut media_manager = trace_lock!(MEDIA_MANAGER);
+            log_error!(media_manager.process_event(event));
+
+            if is_changing_players {
+                media_manager.update_recommended_player();
+            }
+        });
+
         Ok(())
     }
 
@@ -327,32 +324,6 @@ impl MediaManager {
                 .map(|id| id.to_hstring() == device.id)
                 .unwrap_or(false)
         }
-    }
-
-    fn start_event_loop() {
-        Self::subscribe(|event| {
-            let is_changing_players = matches!(
-                event,
-                MediaEvent::MediaPlayerAdded(_)
-                    | MediaEvent::MediaPlayerRemoved(_)
-                    | MediaEvent::MediaPlayerPropertiesChanged { .. }
-                    | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
-            );
-
-            let mut media_manager = trace_lock!(MEDIA_MANAGER);
-            log_error!(media_manager.process_event(event));
-
-            if is_changing_players {
-                media_manager.update_recommended_player();
-                for callback in &media_manager.registered_players_callbacks {
-                    callback(media_manager.playing());
-                }
-            } else {
-                for callback in &media_manager.registered_devices_callbacks {
-                    callback(media_manager.inputs(), media_manager.outputs());
-                }
-            }
-        });
     }
 
     fn process_event(&mut self, event: MediaEvent) -> Result<()> {
@@ -431,8 +402,16 @@ impl MediaManager {
                 self.load_media_transport_session(session)?;
             }
             MediaEvent::MediaPlayerRemoved(id) => {
-                self.release_media_transport_session(&id)?;
+                if let Some(player) = self.player_mut(&id) {
+                    player.pending_remove = true;
+                    std::thread::spawn(move || {
+                        std::thread::sleep(Duration::from_millis(1500));
+                        log_error!(trace_lock!(MEDIA_MANAGER).release_pending_players());
+                        let _ = Self::event_tx().send(MediaEvent::MediaPlayerPendingsRemoved);
+                    });
+                }
             }
+            MediaEvent::MediaPlayerPendingsRemoved => {}
             MediaEvent::MediaPlayerPropertiesChanged {
                 id,
                 title,
@@ -443,11 +422,13 @@ impl MediaManager {
                     player.title = title;
                     player.author = author;
                     player.thumbnail = thumbnail;
+                    player.pending_remove = false;
                 }
             }
             MediaEvent::MediaPlayerPlaybackStatusChanged { id, playing } => {
                 if let Some(player) = self.player_mut(&id) {
                     player.playing = playing;
+                    player.pending_remove = false;
                 }
             }
         }
@@ -472,10 +453,9 @@ impl MediaManager {
     /// Release all resources
     /// should be called on application exit
     pub fn release(&mut self) {
-        let player_ids = self.playing.iter().map(|p| p.umid.clone()).collect_vec();
-
-        for player_id in player_ids {
-            log_error!(self.release_media_transport_session(&player_id));
+        let keys = self.playing.keys().cloned().collect_vec();
+        for id in keys {
+            log_error!(self.release_media_transport_session(&id));
         }
 
         for device in std::mem::take(&mut self.inputs) {

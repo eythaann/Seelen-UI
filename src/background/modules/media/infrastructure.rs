@@ -7,18 +7,30 @@ use crate::{
     seelen::get_app_handle, trace_lock,
 };
 
-use super::{application::MediaManager, domain::MediaPlayer};
+use super::{
+    application::{MediaEvent, MediaManager},
+    domain::MediaPlayer,
+};
 
 pub fn register_media_events() {
-    std::thread::spawn(|| {
-        let mut manager = trace_lock!(MEDIA_MANAGER);
-        manager.on_change_devices(|inputs, outputs| {
-            let app = get_app_handle();
-            log_error!(app.emit(SeelenEvent::MediaInputs, inputs));
-            log_error!(app.emit(SeelenEvent::MediaOutputs, outputs));
-        });
-        manager.on_change_players(|playing| {
-            log_error!(get_app_handle().emit(SeelenEvent::MediaSessions, playing));
+    std::thread::spawn(|| unsafe {
+        log_error!(trace_lock!(MEDIA_MANAGER).initialize());
+
+        MediaManager::subscribe(|event| match event {
+            MediaEvent::MediaPlayerAdded(_)
+            | MediaEvent::MediaPlayerRemoved(_)
+            | MediaEvent::MediaPlayerPendingsRemoved
+            | MediaEvent::MediaPlayerPropertiesChanged { .. }
+            | MediaEvent::MediaPlayerPlaybackStatusChanged { .. } => {
+                let manager = trace_lock!(MEDIA_MANAGER);
+                log_error!(get_app_handle().emit(SeelenEvent::MediaSessions, manager.playing()));
+            }
+            _ => {
+                let manager = trace_lock!(MEDIA_MANAGER);
+                let app = get_app_handle();
+                log_error!(app.emit(SeelenEvent::MediaInputs, manager.inputs()));
+                log_error!(app.emit(SeelenEvent::MediaOutputs, manager.outputs()));
+            }
         });
     });
 }
@@ -38,7 +50,7 @@ pub fn get_media_devices() -> Result<(serde_json::Value, serde_json::Value)> {
 #[tauri::command(async)]
 pub fn get_media_sessions() -> Result<Vec<MediaPlayer>> {
     let manager = trace_lock!(MEDIA_MANAGER);
-    Ok(manager.playing().clone())
+    Ok(manager.playing().into_iter().cloned().collect())
 }
 
 #[tauri::command(async)]

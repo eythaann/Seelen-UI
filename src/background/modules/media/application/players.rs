@@ -140,18 +140,22 @@ impl MediaManager {
 
         // pre-extraction to avoid flickering on the ui
         let _ = extract_and_save_icon_umid(&source_app_umid);
-        self.playing.push(MediaPlayer {
-            umid: source_app_umid.to_string(),
-            title: properties.Title().unwrap_or_default().to_string_lossy(),
-            author: properties.Artist().unwrap_or_default().to_string_lossy(),
-            owner: MediaPlayerOwner { name: display_name },
-            thumbnail: properties
-                .Thumbnail()
-                .ok()
-                .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
-            playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
-            default: false,
-        });
+        self.playing.insert(
+            source_app_umid.to_string(),
+            MediaPlayer {
+                umid: source_app_umid.to_string(),
+                title: properties.Title().unwrap_or_default().to_string_lossy(),
+                author: properties.Artist().unwrap_or_default().to_string_lossy(),
+                owner: MediaPlayerOwner { name: display_name },
+                thumbnail: properties
+                    .Thumbnail()
+                    .ok()
+                    .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
+                playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
+                default: false,
+                pending_remove: false,
+            },
+        );
 
         // listen for media transport events
         self.media_player_event_tokens.insert(
@@ -172,10 +176,24 @@ impl MediaManager {
 
     pub(super) fn update_recommended_player(&mut self) {
         if let Ok(recommended) = self.get_recommended_player_id() {
-            for player in &mut self.playing {
+            for (_id, player) in self.playing.iter_mut() {
                 player.default = player.umid == recommended;
             }
         }
+    }
+
+    pub(super) fn release_pending_players(&mut self) -> Result<()> {
+        let ids = self
+            .playing
+            .iter()
+            .filter(|(_id, player)| player.pending_remove)
+            .map(|(id, _)| id.clone())
+            .collect_vec();
+
+        for id in ids {
+            self.release_media_transport_session(&id)?;
+        }
+        Ok(())
     }
 
     pub(super) fn release_media_transport_session(&mut self, player_id: &str) -> Result<()> {
@@ -187,7 +205,7 @@ impl MediaManager {
                 session.RemovePlaybackInfoChanged(playback_token.value)?;
             }
         }
-        self.playing.retain(|player| player.umid != player_id);
+        self.playing.remove(player_id);
         Ok(())
     }
 }

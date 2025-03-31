@@ -89,6 +89,8 @@ pub struct MediaPlayer {
     pub owner: MediaPlayerOwner,
     pub playing: bool,
     pub default: bool,
+    #[serde(skip)]
+    pub pending_remove: bool,
 }
 
 #[derive(Debug, Clone, Serialize)]
