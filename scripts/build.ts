@@ -1,4 +1,5 @@
 import esbuild from 'esbuild';
+import CssModulesPlugin from 'esbuild-css-modules-plugin';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
@@ -103,7 +104,7 @@ const entryPoints = appFolders
 
 entryPoints.push('./src/apps/shared/integrity.ts');
 
-const copyPublicByEntry: esbuild.Plugin = {
+const OwnPlugin: esbuild.Plugin = {
   name: 'copy-public-by-entry',
   setup(build) {
     build.onStart(() => {
@@ -116,6 +117,15 @@ const copyPublicByEntry: esbuild.Plugin = {
         let target = `dist/${folder}`;
         fs.cpSync(source, target, { recursive: true, force: true });
       });
+
+      // move nested folders to root
+      fs.readdirSync('dist/src/apps').forEach((folder) => {
+        let source = `dist/src/apps/${folder}`;
+        let target = `dist/${folder}`;
+        fs.cpSync(source, target, { recursive: true, force: true });
+      });
+      fs.rmSync('dist/src', { recursive: true, force: true });
+
       console.timeEnd('build');
     });
   },
@@ -129,16 +139,16 @@ function startDevServer() {
   });
 }
 
-void (async function main() {
+(async function main() {
   const { isProd, serve } = await getArgs();
 
   await extractIconsIfNecessary();
 
   console.info('Removing old artifacts');
-  appFolders.forEach((folder) => {
-    const filePath = path.join('dist', folder);
-    if (fs.existsSync(filePath)) {
-      fs.rmSync(filePath, { recursive: true, force: true });
+  // delete all in dist less icons
+  fs.readdirSync('dist').forEach((folder) => {
+    if (folder !== 'icons') {
+      fs.rmSync(path.join('dist', folder), { recursive: true, force: true });
     }
   });
 
@@ -158,7 +168,7 @@ void (async function main() {
     loader: {
       '.yml': 'text',
     },
-    plugins: [copyPublicByEntry],
+    plugins: [CssModulesPlugin({ localsConvention: 'camelCase', pattern: 'do-not-use-on-themes-[local]-[hash]' }), OwnPlugin],
   });
 
   if (serve) {

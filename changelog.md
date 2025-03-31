@@ -5,6 +5,9 @@
 - wrap webview console as soon as posible to avoid missing errors on logs.
 - wait some seconds before remove media players to avoid shifting on chrome.
 
+### refactor
+- remove minified classnames and add do-not-use prefix to be clear to users.
+
 ### fix
 - panic on media module when loading initial devices.
 - discord window without umid (for now umid was hardcoded).

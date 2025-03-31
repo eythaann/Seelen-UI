@@ -143,8 +143,7 @@
 .media-notifier-open,
 .ft-bar-item-context-menu-open,
 .ft-bar-context-menu-open,
-.userhome-open,
-.userhome-quicksettings-open {
+.userhome-open {
   animation: PopupBaseAnimation 0.2s linear forwards;
 }
 
@@ -158,8 +157,7 @@
 .media-notifier-close,
 .ft-bar-item-context-menu-close,
 .ft-bar-context-menu-close,
-.userhome-close,
-.userhome-quicksettings-close {
+.userhome-close {
   animation: PopupBaseAnimation 0.2s linear forwards;
   animation-direction: reverse;
 }
@@ -239,37 +237,60 @@
 }
 
 .fast-settings {
-  padding: 12px 16px;
-  margin: var(--popups-margin);
+  @extend %popup;
+  width: 300px;
+  position: relative;
+  gap: 4px;
 
-  .fast-settings-bg-layer-1 {
-    background-color: var(--color-gray-50);
-    border-radius: 10px;
+  .fast-settings-title {
+    z-index: 1;
+    font-weight: 600;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .fast-settings-item-title-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 6px;
+      border-radius: 6px;
+
+      &:hover {
+        backdrop-filter: brightness(0.8);
+      }
+    }
   }
-}
 
-.fast-settings-power {
-  display: flex;
-  gap: 6px;
+  .fast-settings-item {
+    z-index: 1;
+    display: flex;
+    gap: 6px;
+    align-items: center;
 
-  .fast-settings-item-button {
-    @extend %actionable-button, %flex-centered;
-    flex: 1;
-    border: 1px solid var(--color-gray-600);
-    border-radius: 8px;
-    padding: 8px 12px;
+    .ant-slider {
+      flex: 1;
+    }
+  }
+
+  .fast-settings-power {
+    display: flex;
+    gap: 6px;
+
+    .fast-settings-item-button {
+      @extend %actionable-button, %flex-centered;
+      flex: 1;
+      border: 1px solid var(--color-gray-600);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
   }
 }
 
 .tray {
-  margin: var(--popups-margin);
-  padding: 10px;
-
-  .tray-bg-layer-1 {
-    background-color: var(--color-gray-50);
-    border-radius: 10px;
-    box-shadow: 0 0 10px 10px #0001;
-  }
+  @extend %popup;
+  width: 250px;
 
   .tray-list {
     @extend %list;
@@ -340,16 +361,23 @@
   }
 
   .wlan-selector-entries {
+    @extend %list;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--color-gray-300);
     overflow-y: auto;
     max-height: 30vh;
 
     .wlan-selector-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
       font-style: italic;
     }
 
     .wlan-entry {
+      display: flex;
+      flex-direction: column;
       min-height: min-content;
       padding: 12px 10px;
       border-radius: 8px;
@@ -364,6 +392,9 @@
       }
 
       .wlan-entry-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font-weight: 600;
         gap: 8px;
 
@@ -383,6 +414,17 @@
           padding: 2px 4px;
         }
       }
+
+      .wlan-entry-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .wlan-entry-actions {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
 
@@ -394,14 +436,8 @@
 }
 
 .media-control {
-  margin: var(--popups-margin);
-  width: 300px;
-  padding: 10px;
-
-  .bg-layer-1 {
-    background-color: var(--color-gray-50);
-    border-radius: 10px;
-  }
+  @extend %popup;
+  gap: 0px;
 
   .media-device-group {
     display: flex;
@@ -754,14 +790,8 @@
 }
 
 .calendar-container {
-  margin: var(--popups-margin);
+  @extend %popup;
   width: 350px;
-  padding: 10px;
-
-  .bg-layer-1 {
-    background-color: var(--color-gray-50);
-    border-radius: 12px;
-  }
 
   .calendar-header {
     display: flex;
@@ -836,17 +866,8 @@
 }
 
 .userhome {
-  @extend %list;
-  margin: var(--popups-margin);
-  width: 300px;
-  box-shadow: 0 0 10px 10px #0001;
-  padding: 10px;
-  max-height: calc(99vh - var(--config-height));
-
-  .userhome-bg-layer-1 {
-    background-color: var(--color-gray-50);
-    border-radius: 10px;
-  }
+  @extend %popup;
+  gap: 4px;
 
   .userhome-label {
     @extend %section-title;

@@ -78,8 +78,11 @@ export function SettingsModule({ module }: Props) {
       onOpenChange={setOpenPreview}
       arrow={false}
       content={
-        <div className="fast-settings" onContextMenu={(e) => e.stopPropagation()}>
-          <BackgroundByLayersV2 prefix="fast-settings" />
+        <BackgroundByLayersV2
+          className="fast-settings"
+          prefix="fast-settings"
+          onContextMenu={(e) => e.stopPropagation()}
+        >
           <div className="fast-settings-title">
             <span>{t('settings.title')}</span>
             <Tooltip
@@ -192,7 +195,7 @@ export function SettingsModule({ module }: Props) {
               </button>
             </Tooltip>
           </div>
-        </div>
+        </BackgroundByLayersV2>
       }
     >
       <Item module={module} active={openPreview} />
