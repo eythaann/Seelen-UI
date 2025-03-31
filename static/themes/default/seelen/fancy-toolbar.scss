@@ -15,12 +15,12 @@
   }
 }
 
-@keyframes rotate {
+@keyframes rotateToTheLeft {
   from {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 }
 
@@ -335,7 +335,7 @@
     @extend %actionable-button;
     .slu-icon {
       color: var(--color-gray-900);
-      animation: rotate 1s linear infinite;
+      animation: rotateToTheLeft 1s linear infinite;
     }
   }
 
@@ -1063,7 +1063,7 @@
       @extend %actionable-button;
       .slu-icon {
         color: var(--color-gray-900);
-        animation: rotate 1s linear infinite;
+        animation: rotateToTheLeft 1s linear infinite;
       }
     }
   }
