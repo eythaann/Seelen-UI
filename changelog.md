@@ -8,6 +8,7 @@
 ### fix
 - panic on media module when loading initial devices.
 - discord window without umid (for now umid was hardcoded).
+- focused app not updating on title change.
 
 ## [2.2.2]
 ### enhancements
