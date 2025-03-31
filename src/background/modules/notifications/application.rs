@@ -84,10 +84,16 @@ impl NotificationManager {
     }
 
     pub fn clear_notifications(&mut self) -> Result<()> {
-        for notification in self.notifications() {
-            self.listener.RemoveNotification(notification.id)?;
-            Self::event_tx().send(NotificationEvent::Removed(notification.id))?;
+        let mut umids = HashSet::new();
+        for n in self.notifications() {
+            umids.insert(n.app_umid.clone());
         }
+        for umid in umids {
+            let history = self.manager.History()?;
+            history.ClearWithId(&umid.into())?;
+        }
+        self.notifications_id.clear();
+        self.notifications.clear();
         Ok(())
     }
 

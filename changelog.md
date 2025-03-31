@@ -14,6 +14,7 @@
 - focused app not updating on title change.
 - not considerating accesibility text scale factor on toolbar and dock.
 - wheel not changing volume level.
+- clear all notifications button not working correctly.
 
 ## [2.2.2]
 ### enhancements
