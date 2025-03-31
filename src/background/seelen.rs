@@ -18,6 +18,7 @@ use crate::{
     modules::{
         cli::{ServiceClient, SvcAction},
         monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
+        system_settings::application::{SystemSettings, SystemSettingsEvent},
     },
     restoration_and_migrations::RestorationAndMigration,
     seelen_rofi::SeelenRofi,
@@ -172,6 +173,12 @@ impl Seelen {
         }
     }
 
+    fn on_system_settings_change(event: SystemSettingsEvent) {
+        if event == SystemSettingsEvent::TextScaleChanged {
+            log_error!(trace_lock!(SEELEN).refresh_windows_positions());
+        }
+    }
+
     async fn start_async() -> Result<()> {
         Self::start_ahk_shortcuts().await?;
         Ok(())
@@ -204,7 +211,9 @@ impl Seelen {
         for (_name, id) in monitors {
             self.add_monitor(id)?;
         }
+
         MonitorManager::subscribe(Self::on_monitor_event);
+        SystemSettings::subscribe(Self::on_system_settings_change);
 
         tauri::async_runtime::spawn(async {
             log_error!(Self::start_async().await);

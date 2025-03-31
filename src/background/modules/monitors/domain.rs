@@ -11,7 +11,7 @@ pub struct PhysicalMonitor {
     pub name: String,
     pub width: u32,
     pub height: u32,
-    pub dpi: f32,
+    pub dpi: f64,
 }
 
 impl TryFrom<Monitor> for PhysicalMonitor {
@@ -19,7 +19,7 @@ impl TryFrom<Monitor> for PhysicalMonitor {
     fn try_from(m: Monitor) -> Result<Self, Self::Error> {
         let device = m.main_display_device()?;
         let rect = m.rect()?;
-        let dpi = WindowsApi::get_device_pixel_ratio(m.handle())?;
+        let dpi = WindowsApi::get_monitor_scale_factor(m.handle())?;
         Ok(Self {
             id: device.id(),
             name: device.description.to_string(),

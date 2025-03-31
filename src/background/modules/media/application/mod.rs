@@ -263,8 +263,6 @@ impl MediaManager {
             .SessionsChanged(&self.media_player_manager_event_handler)?;
 
         Self::subscribe(|event| {
-            log::debug!("Media event: {event:?}");
-
             let is_changing_players = matches!(
                 event,
                 MediaEvent::MediaPlayerAdded(_)

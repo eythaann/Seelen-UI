@@ -1,8 +1,6 @@
 use std::sync::Arc;
 
-use crate::{
-    error_handler::Result, log_error, trace_lock, windows_api::traits::EventRegistrationTokenExt,
-};
+use crate::{error_handler::Result, event_manager, windows_api::traits::EventRegistrationTokenExt};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::system_state::UIColors;
@@ -26,46 +24,56 @@ fn color_to_string(color: windows::UI::Color) -> String {
     )
 }
 
-enum SettingsEvent {
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SystemSettingsEvent {
     ColorChanged,
+    TextScaleChanged,
 }
-
-type ColorChangeCallback = Box<dyn Fn(&UIColors) + Send + Sync>;
 
 pub struct SystemSettings {
     settings: UISettings,
     color_event_handler: TypedEventHandler<UISettings, IInspectable>,
     color_event_token: Option<EventRegistrationToken>,
-    color_client_callbacks: Vec<ColorChangeCallback>,
+    text_scale_event_handler: TypedEventHandler<UISettings, IInspectable>,
+    text_scale_event_token: Option<EventRegistrationToken>,
 }
 
 unsafe impl Send for SystemSettings {}
 
+event_manager!(SystemSettings, SystemSettingsEvent);
+
 impl SystemSettings {
     fn new() -> Result<Self> {
-        let mut settings = Self {
+        let settings = Self {
             settings: UISettings::new()?,
             color_event_handler: TypedEventHandler::new(Self::internal_on_colors_change),
             color_event_token: None,
-            color_client_callbacks: Vec::new(),
+            text_scale_event_handler: TypedEventHandler::new(Self::internal_on_text_scale_change),
+            text_scale_event_token: None,
         };
-        settings.init()?;
         Ok(settings)
     }
 
-    fn init(&mut self) -> Result<()> {
+    pub fn initialize(&mut self) -> Result<()> {
         self.color_event_token = Some(
             self.settings
                 .ColorValuesChanged(&self.color_event_handler)?
+                .as_event_token(),
+        );
+        self.text_scale_event_token = Some(
+            self.settings
+                .TextScaleFactorChanged(&self.text_scale_event_handler)?
                 .as_event_token(),
         );
         Ok(())
     }
 
     pub fn release(&mut self) -> Result<()> {
-        self.color_client_callbacks.clear();
         if let Some(token) = self.color_event_token.take() {
             self.settings.RemoveColorValuesChanged(token.value)?;
+        }
+        if let Some(token) = self.text_scale_event_token.take() {
+            self.settings.RemoveTextScaleFactorChanged(token.value)?;
         }
         Ok(())
     }
@@ -74,7 +82,15 @@ impl SystemSettings {
         _listener: &Option<UISettings>,
         _args: &Option<IInspectable>,
     ) -> windows_core::Result<()> {
-        log_error!(trace_lock!(SYSTEM_SETTINGS).on_change(SettingsEvent::ColorChanged));
+        let _ = Self::event_tx().send(SystemSettingsEvent::ColorChanged);
+        Ok(())
+    }
+
+    fn internal_on_text_scale_change(
+        _listener: &Option<UISettings>,
+        _args: &Option<IInspectable>,
+    ) -> windows_core::Result<()> {
+        let _ = Self::event_tx().send(SystemSettingsEvent::TextScaleChanged);
         Ok(())
     }
 
@@ -93,21 +109,5 @@ impl SystemSettings {
             // https://learn.microsoft.com/is-is/uwp/api/windows.ui.viewmanagement.uisettings.getcolorvalue?view=winrt-19041#remarks
             complement: None,
         })
-    }
-
-    pub fn on_colors_change(&mut self, callback: ColorChangeCallback) {
-        self.color_client_callbacks.push(callback);
-    }
-
-    fn on_change(&mut self, event: SettingsEvent) -> Result<()> {
-        match event {
-            SettingsEvent::ColorChanged => {
-                let colors = self.get_colors()?;
-                for callback in self.color_client_callbacks.iter() {
-                    callback(&colors);
-                }
-            }
-        }
-        Ok(())
     }
 }

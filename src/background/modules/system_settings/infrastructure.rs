@@ -1,7 +1,13 @@
 use seelen_core::{handlers::SeelenEvent, system_state::UIColors};
 use tauri::Emitter;
 
-use crate::{error_handler::Result, log_error, seelen::get_app_handle, trace_lock};
+use crate::{
+    error_handler::Result,
+    log_error,
+    modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
+    seelen::get_app_handle,
+    trace_lock,
+};
 
 use super::application::SYSTEM_SETTINGS;
 
@@ -13,8 +19,14 @@ fn emit_colors(colors: &UIColors) {
 
 pub fn register_colors_events() {
     std::thread::spawn(move || {
-        let mut manager = trace_lock!(SYSTEM_SETTINGS);
-        manager.on_colors_change(Box::new(emit_colors));
+        log_error!(trace_lock!(SYSTEM_SETTINGS).initialize());
+        SystemSettings::subscribe(|event| {
+            if event == SystemSettingsEvent::ColorChanged {
+                if let Ok(colors) = trace_lock!(SYSTEM_SETTINGS).get_colors() {
+                    emit_colors(&colors);
+                }
+            }
+        });
     });
 }
 

@@ -180,27 +180,24 @@ impl SeelenWeg {
 
         let state = FULL_STATE.load();
         let settings = state.settings().seelenweg();
-        let monitor_dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
-        let total_size = (settings.total_size() as f32 * monitor_dpi) as i32;
+        let monitor_dpi = WindowsApi::get_monitor_scale_factor(monitor)?;
+        let text_scale_factor = WindowsApi::get_text_scale_factor()?;
+
+        let total_size = (settings.total_size() as f64 * monitor_dpi * text_scale_factor) as i32;
 
         self.theoretical_rect = rc_work;
-        let mut hidden_rect = rc_work;
         match settings.position {
             SeelenWegSide::Left => {
                 self.theoretical_rect.right = self.theoretical_rect.left + total_size;
-                hidden_rect.right = hidden_rect.left + 1;
             }
             SeelenWegSide::Right => {
                 self.theoretical_rect.left = self.theoretical_rect.right - total_size;
-                hidden_rect.left = hidden_rect.right - 1;
             }
             SeelenWegSide::Top => {
                 self.theoretical_rect.bottom = self.theoretical_rect.top + total_size;
-                hidden_rect.bottom = hidden_rect.top + 1;
             }
             SeelenWegSide::Bottom => {
                 self.theoretical_rect.top = self.theoretical_rect.bottom - total_size;
-                hidden_rect.top = hidden_rect.bottom - 1;
             }
         }
 
