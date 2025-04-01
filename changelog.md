@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- not restoring native taskbar on close/crash.
+
 ## [2.2.3]
 ### enhancements
 - wrap webview console as soon as posible to avoid missing errors on logs.

@@ -17,7 +17,7 @@ use crate::seelen_weg::SeelenWeg;
 use crate::seelen_wm_v2::instance::WindowManagerV2;
 use crate::trace_lock;
 
-use super::AppClient;
+use super::TcpBgApp;
 
 #[macro_export]
 macro_rules! get_subcommands {
@@ -149,7 +149,7 @@ pub fn handle_console_cli() -> Result<()> {
 
     if matches.subcommand().is_some() || matches.get_one::<String>("uri").is_some() {
         attach_console();
-        AppClient::redirect_cli_to_instance()?;
+        TcpBgApp::redirect_cli_to_instance()?;
         std::process::exit(0);
     }
 

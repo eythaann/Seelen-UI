@@ -7,11 +7,10 @@ pub mod weg_items_impl;
 
 pub use instance::SeelenWeg;
 
-use std::{collections::HashMap, thread::JoinHandle};
+use std::thread::JoinHandle;
 
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
-use parking_lot::Mutex;
 use seelen_core::state::AppExtraFlag;
 use weg_items_impl::WEG_ITEMS_IMPL;
 use win_screenshot::capture::capture_window;
@@ -100,12 +99,7 @@ impl SeelenWeg {
 // TASKBAR HIDDEN LOGIC
 // ====================
 
-lazy_static! {
-    pub static ref TASKBAR_STATE_ON_INIT: Mutex<HashMap<isize, AppBarDataState>> =
-        Mutex::new(HashMap::new());
-    pub static ref TASKBAR_CLASS: Vec<&'static str> =
-        Vec::from(["Shell_TrayWnd", "Shell_SecondaryTrayWnd",]);
-}
+pub static TASKBAR_CLASS: [&str; 2] = ["Shell_TrayWnd", "Shell_SecondaryTrayWnd"];
 
 pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
     let mut founds = Vec::new();
@@ -125,8 +119,6 @@ impl SeelenWeg {
                 while attempts < 10 && FULL_STATE.load().is_weg_enabled() {
                     for handle in &handles {
                         let app_bar = AppBarData::from_handle(*handle);
-                        trace_lock!(TASKBAR_STATE_ON_INIT)
-                            .insert(handle.0 as isize, app_bar.state());
                         app_bar.set_state(AppBarDataState::AutoHide);
                         let _ = WindowsApi::show_window_async(*handle, SW_HIDE);
                     }
@@ -140,11 +132,7 @@ impl SeelenWeg {
 
     pub fn restore_taskbar() -> Result<()> {
         for hwnd in get_taskbars_handles()? {
-            AppBarData::from_handle(hwnd).set_state(
-                *trace_lock!(TASKBAR_STATE_ON_INIT)
-                    .get(&(hwnd.0 as isize))
-                    .unwrap_or(&AppBarDataState::AlwaysOnTop),
-            );
+            AppBarData::from_handle(hwnd).set_state(AppBarDataState::AlwaysOnTop);
             WindowsApi::show_window_async(hwnd, SW_SHOWNORMAL)?;
         }
         Ok(())

@@ -11,7 +11,7 @@
           "$RESOURCE/**/*",
           "$TEMP/**/*",
           "$APPDATA/**/*",
-          "$LOCALDATA/Packages/**/*",
+          "$LOCALDATA/**/*",
           "**/*.jpg",
           "**/*.jpeg",
           "**/*.png",

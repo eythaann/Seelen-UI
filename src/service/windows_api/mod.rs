@@ -1,4 +1,6 @@
+pub mod app_bar;
 pub mod com;
+pub mod iterator;
 
 use std::{ffi::OsString, os::windows::ffi::OsStringExt, path::PathBuf};
 
@@ -18,9 +20,9 @@ use windows::Win32::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
         Shell::{IShellLinkW, SHGetKnownFolderPath, ShellLink, KF_FLAG_DEFAULT},
         WindowsAndMessaging::{
-            BringWindowToTop, GetForegroundWindow, GetWindowThreadProcessId, IsIconic,
-            SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-            SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
+            BringWindowToTop, GetClassNameW, GetForegroundWindow, GetWindowThreadProcessId,
+            IsIconic, SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS,
+            SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
         },
     },
 };
@@ -198,5 +200,12 @@ impl WindowsApi {
         Ok(PathBuf::from(OsString::from_wide(unsafe {
             path.as_wide()
         })))
+    }
+
+    pub fn get_class(hwnd: HWND) -> String {
+        let mut text: [u16; 512] = [0; 512];
+        let len = unsafe { GetClassNameW(hwnd, &mut text) };
+        let length = usize::try_from(len).unwrap_or(0);
+        String::from_utf16_lossy(&text[..length])
     }
 }

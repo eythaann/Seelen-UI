@@ -37,7 +37,7 @@ use error_handler::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
 use modules::{
-    cli::{application::handle_console_cli, AppClient, ServiceClient, SvcAction},
+    cli::{application::handle_console_cli, SvcAction, TcpBgApp, TcpService},
     tray::application::ensure_tray_overflow_creation,
 };
 use plugins::register_plugins;
@@ -65,12 +65,12 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     validate_webview_runtime_is_installed(app.handle())?;
 
-    if !ServiceClient::is_running() {
-        tauri::async_runtime::block_on(ServiceClient::start_service())?;
+    if !TcpService::is_running() {
+        tauri::async_runtime::block_on(TcpService::start_service())?;
     }
 
     check_for_webview_optimal_state(app.handle())?;
-    AppClient::listen_tcp()?;
+    TcpBgApp::listen_tcp()?;
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
@@ -90,7 +90,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             Some(code) => {
                 // if exit code is 0 it means that the app was closed by the user
                 if code == 0 {
-                    log_error!(ServiceClient::request(SvcAction::Stop));
+                    log_error!(TcpService::request(SvcAction::Stop));
                 }
             }
             // prevent close background on webview windows closing
@@ -122,7 +122,7 @@ fn main() -> Result<()> {
     handle_console_cli()?;
 
     if is_already_runnning() {
-        AppClient::open_settings()?;
+        TcpBgApp::open_settings()?;
         return Ok(());
     }
 

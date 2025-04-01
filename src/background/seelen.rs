@@ -16,7 +16,7 @@ use crate::{
     instance::SeelenInstanceContainer,
     log_error,
     modules::{
-        cli::{ServiceClient, SvcAction},
+        cli::{SvcAction, TcpService},
         monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
         system_settings::application::{SystemSettings, SystemSettingsEvent},
     },
@@ -236,12 +236,8 @@ impl Seelen {
     /// Stop and release all resources
     pub fn stop(&self) {
         SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
-        let state = FULL_STATE.load();
-
         release_system_events_handlers();
-        if state.is_weg_enabled() {
-            log_error!(SeelenWeg::restore_taskbar());
-        }
+        let state = FULL_STATE.load();
         if state.is_ahk_enabled() {
             tauri::async_runtime::spawn(async {
                 log_error!(Self::kill_ahk_shortcuts().await);
@@ -286,7 +282,7 @@ impl Seelen {
     }
 
     pub fn set_auto_start(enabled: bool) -> Result<()> {
-        ServiceClient::request(SvcAction::SetStartup(enabled))
+        TcpService::request(SvcAction::SetStartup(enabled))
     }
 
     // TODO: split ahk logic into another file/module

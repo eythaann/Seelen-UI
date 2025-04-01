@@ -5,7 +5,7 @@ mod cli;
 mod enviroment;
 mod error;
 mod logger;
-// mod native_service;
+mod shutdown;
 mod string_utils;
 mod task_scheduler;
 mod windows_api;
@@ -17,6 +17,7 @@ use error::Result;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use logger::SluServiceLogger;
+use shutdown::restore_native_taskbar;
 use std::process::Command;
 use string_utils::WindowsString;
 use task_scheduler::TaskSchedulerHelper;
@@ -53,7 +54,7 @@ fn is_seelen_ui_running() -> bool {
 
 fn launch_seelen_ui() -> Result<()> {
     if was_installed_using_msix() {
-        std::process::Command::new("explorer")
+        Command::new("explorer")
             .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
             .status()?;
         return Ok(());
@@ -114,12 +115,15 @@ pub fn setup() -> Result<()> {
     Ok(())
 }
 
-fn is_already_runnning() -> bool {
+fn is_svc_already_running() -> bool {
     let mut sys = sysinfo::System::new();
     sys.refresh_processes();
     sys.processes()
         .values()
-        .filter(|p| p.exe().is_some_and(|path| path.ends_with("seelen-ui.exe")))
+        .filter(|p| {
+            p.exe()
+                .is_some_and(|path| path.ends_with("slu-service.exe"))
+        })
         .collect_vec()
         .len()
         > 1
@@ -130,7 +134,7 @@ fn main() -> Result<()> {
         WindowsApi::show_window(WindowsApi::get_console_window().0 as _, SW_MINIMIZE.0)?;
     }
     handle_console_client()?;
-    if is_already_runnning() {
+    if is_svc_already_running() {
         return Ok(());
     }
 
@@ -140,7 +144,12 @@ fn main() -> Result<()> {
 
     log::info!("Starting Seelen UI Service");
     setup()?;
+
+    // wait for stop signal
     STOP_CHANNEL.1.recv().unwrap();
+
+    // shutdown tasks:
+    restore_native_taskbar()?;
     log::info!("Seelen UI Service stopped");
     Ok(())
 }

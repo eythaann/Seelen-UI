@@ -18,7 +18,7 @@ use windows::{
 use crate::{
     error_handler::Result,
     modules::{
-        cli::{ServiceClient, SvcAction},
+        cli::{SvcAction, TcpService},
         start::application::START_MENU_MANAGER,
         virtual_desk::{get_vd_manager, VirtualDesktop},
     },
@@ -329,7 +329,7 @@ impl Window {
         if self.process().open_handle().is_ok() {
             WindowsApi::show_window(self.hwnd(), command)
         } else {
-            ServiceClient::request(SvcAction::ShowWindow {
+            TcpService::request(SvcAction::ShowWindow {
                 hwnd: self.address(),
                 command: command.0,
             })
@@ -340,7 +340,7 @@ impl Window {
         if self.process().open_handle().is_ok() {
             WindowsApi::show_window_async(self.hwnd(), command)
         } else {
-            ServiceClient::request(SvcAction::ShowWindowAsync {
+            TcpService::request(SvcAction::ShowWindowAsync {
                 hwnd: self.address(),
                 command: command.0,
             })
@@ -351,7 +351,7 @@ impl Window {
         if self.process().open_handle().is_ok() {
             WindowsApi::set_position(self.hwnd(), None, rect, flags)
         } else {
-            ServiceClient::request(SvcAction::SetWindowPosition {
+            TcpService::request(SvcAction::SetWindowPosition {
                 hwnd: self.address(),
                 x: rect.left,
                 y: rect.top,
@@ -366,7 +366,7 @@ impl Window {
         if self.process().open_handle().is_ok() {
             WindowsApi::set_foreground(self.hwnd())
         } else {
-            ServiceClient::request(SvcAction::SetForeground(self.address()))
+            TcpService::request(SvcAction::SetForeground(self.address()))
         }
     }
 }

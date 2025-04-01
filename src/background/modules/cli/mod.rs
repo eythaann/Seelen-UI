@@ -27,8 +27,8 @@ use crate::{
     windows_api::{Com, WindowsApi},
 };
 
-pub struct AppClient;
-impl AppClient {
+pub struct TcpBgApp;
+impl TcpBgApp {
     fn socket_path() -> Result<PathBuf> {
         let dir = std::env::temp_dir().join("com.seelen.seelen-ui");
         if !dir.exists() {
@@ -91,8 +91,8 @@ impl AppClient {
     }
 }
 
-pub struct ServiceClient;
-impl ServiceClient {
+pub struct TcpService;
+impl TcpService {
     fn token() -> &'static str {
         std::env!("SLU_SERVICE_CONNECTION_TOKEN")
     }

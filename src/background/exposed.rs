@@ -37,7 +37,7 @@ fn select_file_on_explorer(path: String) -> Result<()> {
 
 #[tauri::command(async)]
 fn open_file(path: String) -> Result<()> {
-    std::process::Command::new("explorer.exe")
+    std::process::Command::new("explorer")
         .raw_arg(format!("\"{}\"", path))
         .spawn()?;
     Ok(())
