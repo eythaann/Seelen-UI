@@ -46,6 +46,7 @@ static RELEASED: AtomicBool = AtomicBool::new(true);
 pub enum NotificationEvent {
     Added(u32),
     Removed(u32),
+    Cleared,
 }
 
 pub struct NotificationManager {
@@ -92,8 +93,7 @@ impl NotificationManager {
             let history = self.manager.History()?;
             history.ClearWithId(&umid.into())?;
         }
-        self.notifications_id.clear();
-        self.notifications.clear();
+        Self::event_tx().send(NotificationEvent::Cleared)?;
         Ok(())
     }
 
@@ -170,15 +170,19 @@ impl NotificationManager {
     }
 
     fn process_event(event: NotificationEvent) -> Result<()> {
+        let mut manager = trace_lock!(NOTIFICATION_MANAGER);
         match event {
             NotificationEvent::Added(id) => {
                 let u_notification = UserNotificationListener::Current()?.GetNotification(id)?;
-                trace_lock!(NOTIFICATION_MANAGER).load_notification(u_notification)?;
+                manager.load_notification(u_notification)?;
             }
             NotificationEvent::Removed(id) => {
-                let mut manager = trace_lock!(NOTIFICATION_MANAGER);
                 manager.notifications_id.remove(&id);
                 manager.notifications.retain(|n| n.id != id);
+            }
+            NotificationEvent::Cleared => {
+                manager.notifications_id.clear();
+                manager.notifications.clear();
             }
         }
         Ok(())

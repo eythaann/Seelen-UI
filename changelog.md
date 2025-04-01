@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### fix
 - not restoring native taskbar on close/crash.
+- clear all notifications button not updating UI.
 
 ## [2.2.3]
 ### enhancements
