@@ -15,12 +15,18 @@ interface Props {
   module: DateToolbarItem;
 }
 
+const momentJsLangMap: { [key: string]: string } = {
+  'no': 'nb',
+  'zh': 'zh-cn',
+};
+
 export function DateModule({ module }: Props) {
   const dateFormat = useSelector(Selectors.dateFormat);
 
   const {
-    i18n: { language },
+    i18n: { language: lang },
   } = useTranslation();
+  let language = momentJsLangMap[lang] || lang;
 
   const [date, setDate] = useState(moment().locale(language).format(dateFormat));
 
