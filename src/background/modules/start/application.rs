@@ -85,13 +85,15 @@ impl StartMenuManager {
     }
 
     pub fn store_cache(&self) -> Result<()> {
-        let writer = std::fs::File::create(&self.cache_path)?;
-        serde_json::to_writer(writer, &self.list)?;
+        let file = std::fs::File::create(&self.cache_path)?;
+        let writer = std::io::BufWriter::new(file);
+        serde_json::to_writer_pretty(writer, &self.list)?;
         Ok(())
     }
 
     pub fn load_cache(&mut self) -> Result<()> {
-        let reader = std::fs::File::open(&self.cache_path)?;
+        let file = std::fs::File::open(&self.cache_path)?;
+        let reader = std::io::BufReader::new(file);
         self.list = serde_json::from_reader(reader)?;
         Ok(())
     }
