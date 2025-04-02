@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{sync::Arc, time::Instant};
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -10,7 +10,10 @@ use windows::Win32::{
         PowerUnregisterFromEffectivePowerModeNotifications, EFFECTIVE_POWER_MODE,
         EFFECTIVE_POWER_MODE_V2,
     },
-    UI::WindowsAndMessaging::{PBT_APMPOWERSTATUSCHANGE, WM_POWERBROADCAST},
+    UI::WindowsAndMessaging::{
+        PBT_APMPOWERSTATUSCHANGE, PBT_APMRESUMEAUTOMATIC, PBT_APMRESUMESUSPEND, PBT_APMSUSPEND,
+        WM_POWERBROADCAST,
+    },
 };
 
 use crate::{
@@ -42,6 +45,7 @@ pub enum PowerManagerEvent {
 #[derive(Debug, Default)]
 pub struct PowerManager {
     pub current_power_mode: Option<PowerMode>,
+    pub last_suspend: Option<Instant>,
     power_mode_event_token: Option<isize>,
 }
 
@@ -106,10 +110,34 @@ impl PowerManager {
     }
 
     fn on_bg_window_proc(msg: u32, w_param: usize, _l_param: isize) -> Result<()> {
-        if msg == WM_POWERBROADCAST && w_param == PBT_APMPOWERSTATUSCHANGE as usize {
-            Self::event_tx().send(PowerManagerEvent::PowerStatusChanged(
-                WindowsApi::get_system_power_status()?.into(),
-            ))?;
+        if msg == WM_POWERBROADCAST {
+            match w_param as u32 {
+                PBT_APMPOWERSTATUSCHANGE => {
+                    Self::event_tx().send(PowerManagerEvent::PowerStatusChanged(
+                        WindowsApi::get_system_power_status()?.into(),
+                    ))?;
+                }
+                PBT_APMSUSPEND => {
+                    log::info!("System suspended");
+                    trace_lock!(POWER_MANAGER).last_suspend = Some(Instant::now());
+                }
+                PBT_APMRESUMESUSPEND => {
+                    log::info!("System resumed (PBT_APMRESUMESUSPEND)");
+                }
+                PBT_APMRESUMEAUTOMATIC => {
+                    let last_suspend = trace_lock!(POWER_MANAGER).last_suspend.take();
+                    let elapsed = last_suspend.unwrap_or_else(Instant::now).elapsed();
+                    log::info!(
+                        "System resumed (PBT_APMRESUMEAUTOMATIC) after {}s",
+                        elapsed.as_secs()
+                    );
+                    // Restart if suspended for more than 30 minutes
+                    if elapsed.as_secs() > 60 * 30 {
+                        get_app_handle().restart();
+                    }
+                }
+                _ => {}
+            }
         }
         Ok(())
     }

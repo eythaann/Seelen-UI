@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add suspend/resume logic.
+
 ### fix
 - not restoring native taskbar on close/crash.
 - clear all notifications button not updating UI.
