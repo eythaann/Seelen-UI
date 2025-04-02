@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.2.4]
 ### enhancements
 - add suspend/resume logic.
 
