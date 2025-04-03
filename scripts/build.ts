@@ -26,7 +26,7 @@ async function getArgs() {
 }
 
 async function extractIconsIfNecessary() {
-  if (fs.existsSync('./dist/icons') && fs.existsSync('./src/icons.ts')) {
+  if (fs.existsSync('./dist/icons')) {
     return;
   }
 
@@ -55,8 +55,9 @@ async function extractIconsIfNecessary() {
       const element = ElementConstructor({ size: '1em' });
       const svg = renderToStaticMarkup(element);
       fs.writeFileSync(`./dist/icons/${name}.svg`, svg);
-      tsFile += `\n  | '${name}'`;
     }
+
+    tsFile += `\n  | keyof typeof import('react-icons/${entry}')`;
   }
 
   tsFile += ';\n';
