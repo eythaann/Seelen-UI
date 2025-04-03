@@ -26,6 +26,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@icons": ["./src/icons.ts"],
       "@shared/*": ["./src/apps/shared/*"],
     }
   },

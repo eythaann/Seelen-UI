@@ -1,3 +1,4 @@
+import { IconName } from '@icons';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { File, FolderType } from '@seelen-ui/lib/types';
 import { path } from '@tauri-apps/api';
@@ -18,7 +19,7 @@ import { UserProfile } from './UserProfile';
 
 interface UserHomeProps {}
 
-function folderTypeToIcon(folderType: FolderType): { icon: string; category: FolderType } {
+function folderTypeToIcon(folderType: FolderType): { icon: IconName; category: FolderType } {
   switch (folderType) {
     case 'Recent': {
       return { category: folderType, icon: 'MdOutlineHistory' };
@@ -50,7 +51,7 @@ function folderTypeToIcon(folderType: FolderType): { icon: string; category: Fol
 export interface UserHomeFolder {
   category: FolderType;
   content: File[];
-  icon: string;
+  icon: IconName;
 }
 
 function UserHome({}: UserHomeProps) {

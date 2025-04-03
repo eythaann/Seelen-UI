@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add custom icons to bluetooth devices.
+
 ## [2.2.4]
 ### enhancements
 - add suspend/resume logic.

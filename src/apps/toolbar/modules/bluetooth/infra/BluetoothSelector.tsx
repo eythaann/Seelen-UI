@@ -23,7 +23,7 @@ function BluetoothSelector({ open }: { open: boolean }) {
     (item) =>
       !storeEntries.find(
         (current) =>
-          current.name == item.name && current.id != item.id && !current.isBluetoothLoweenergy,
+          current.name == item.name && current.id != item.id && !current.isLowEnergy,
       ),
   );
   const connectedDevices = entries.filter((item) => item.connected);
@@ -35,7 +35,7 @@ function BluetoothSelector({ open }: { open: boolean }) {
     (item) =>
       !store_discovered_entries.find(
         (current) =>
-          current.name == item.name && current.id != item.id && !current.isBluetoothLoweenergy,
+          current.name == item.name && current.id != item.id && !current.isLowEnergy,
       ),
   );
 

@@ -10,3 +10,6 @@ gen
 # Submission Files
 /scripts/SBTemp
 monitoring.ps1
+
+# generated files
+/src/icons.ts

@@ -1,12 +1,13 @@
 import { BluetoothDevices } from '@seelen-ui/lib';
 import { BluetoothDevice, BluetoothDevicePairShowPinRequest } from '@seelen-ui/lib/types';
-import { convertFileSrc } from '@tauri-apps/api/core';
 import { UnlistenFn } from '@tauri-apps/api/event';
 import { Button, Input, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Icon, MissingIcon } from '../../../../shared/components/Icon';
+import { getIconForBTDevice, getMinorAsString } from '../application';
+
+import { Icon } from '../../../../shared/components/Icon';
 import { cx } from '../../../../shared/styles';
 
 export function BluetoothSelectorEntry(props: {
@@ -89,9 +90,11 @@ export function BluetoothSelectorEntry(props: {
     setLoading(false);
   };
 
-  // TODO(Eythaan): the style left the copy from wlan so you can modify it to your desire!
-  // TODO(Eythaan): Also the confirmation process did not caried to the end anytime - just teoretically works. Please note that there are 3 run through possible!
-  // !!! DevicePairingKinds::ConfirmPinMatch (both side see same and click ok) | DevicePairingKinds::ProvidePin (one side gives pin for auth other side confirm, so the item will disappear after pair success) | DevicePairingKinds::DisplayPin (other side confirm) !!!
+  // TODO(Eythaan): Also the confirmation process did not caried to the end anytime - just teoretically works.
+  // Please note that there are 3 run through possible!
+  // !!! DevicePairingKinds::ConfirmPinMatch (both side see same and click ok)
+  // | DevicePairingKinds::ProvidePin (one side gives pin for auth other side confirm, so the item will disappear after pair success)
+  // | DevicePairingKinds::DisplayPin (other side confirm) !!!
   return (
     <div
       key={device.id}
@@ -104,19 +107,15 @@ export function BluetoothSelectorEntry(props: {
         <Icon iconName={device.connected ? 'TbBluetoothConnected' : 'TbBluetooth'} size={20} />
         <span className="bluetooth-entry-info-label">{device.name}</span>
         <Tooltip
-          title={`${device.majorClass} \\ ${
-            device.minorSubClass == 'Uncategorized'
-              ? device.minorMainClass
-              : `${device.minorMainClass}, ${device.minorSubClass}`
-          }`}
+          title={
+            device.appearance
+              ? `${device.appearance.category} - ${device.appearance.subcategory}`
+              : `${device.majorClass} - ${getMinorAsString(device.minorClass)}`
+          }
         >
-          {device.iconPath ? (
-            <img className="bluetooth-entry-info-img" src={convertFileSrc(device.iconPath)} />
-          ) : (
-            <MissingIcon />
-          )}
+          <Icon iconName={getIconForBTDevice(device)} size={20} />
         </Tooltip>
-        {device.isBluetoothLoweenergy && (
+        {device.isLowEnergy && (
           <Tooltip title={t('bluetooth.lowenergy')}>
             <Icon iconName="MdOutlineEnergySavingsLeaf" size={20} />
           </Tooltip>

@@ -1,3 +1,4 @@
+import { IconName } from '@icons';
 import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Input, Tooltip } from 'antd';
@@ -80,7 +81,7 @@ export function WlanSelectorEntry(props: {
       .catch(onrejected);
   }
 
-  let signalIcon = 'GrWifiNone';
+  let signalIcon: IconName = 'GrWifiNone';
   if (entry.signal > 75) {
     signalIcon = 'GrWifi';
   } else if (entry.signal > 50) {

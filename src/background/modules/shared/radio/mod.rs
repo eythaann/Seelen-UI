@@ -21,7 +21,7 @@ pub enum RadioManagerEvent {
 }
 
 pub struct RadioManager {
-    pub radios: Vec<Radio>,
+    pub radios: Vec<(Radio, i64)>,
     watcher: Option<DeviceWatcher>,
     radio_added_handler: (
         TypedEventHandler<DeviceWatcher, DeviceInformation>,
@@ -35,6 +35,7 @@ pub struct RadioManager {
         TypedEventHandler<DeviceWatcher, DeviceInformationUpdate>,
         Option<i64>,
     ),
+    radio_state_changed_handler: TypedEventHandler<Radio, windows_core::IInspectable>,
 }
 
 unsafe impl Send for RadioManager {}
@@ -49,11 +50,24 @@ impl RadioManager {
             radio_added_handler: (TypedEventHandler::new(on_radio_added), None),
             radio_updated_handler: (TypedEventHandler::new(on_radio_updated), None),
             radio_removed_handler: (TypedEventHandler::new(on_radio_removed), None),
+            radio_state_changed_handler: TypedEventHandler::new(on_radio_state_changed),
         }
     }
 
-    fn get_all_radios(&self) -> Result<Vec<Radio>> {
-        Ok(Radio::GetRadiosAsync()?.get()?.into_iter().collect())
+    pub fn is_enabled(&self, kind: RadioKind) -> bool {
+        self.radios.iter().any(|(radio, _)| {
+            radio.Kind().is_ok_and(|k| k == kind)
+                && radio.State().is_ok_and(|s| s == RadioState::On)
+        })
+    }
+
+    fn get_all_radios(&mut self) -> Result<Vec<(Radio, i64)>> {
+        let mut radios = Vec::new();
+        for radio in Radio::GetRadiosAsync()?.get()? {
+            let token = radio.StateChanged(&self.radio_state_changed_handler)?;
+            radios.push((radio, token));
+        }
+        Ok(radios)
     }
 
     pub fn initialize(&mut self) -> Result<()> {
@@ -74,11 +88,12 @@ impl RadioManager {
         match event {
             RadioManagerEvent::Added(id) => {
                 let radio = Radio::FromIdAsync(&id.into())?.get()?;
-                self.radios.push(radio);
+                let token = radio.StateChanged(&self.radio_state_changed_handler)?;
+                self.radios.push((radio, token));
             }
             RadioManagerEvent::Updated(_id) => {}
             RadioManagerEvent::Removed(_id) => {
-                self.radios.retain(|radio| {
+                self.radios.retain(|(radio, _)| {
                     radio
                         .State()
                         .is_ok_and(|state| state != RadioState::Unknown)
@@ -89,7 +104,7 @@ impl RadioManager {
     }
 
     pub fn turn_on_radios(&self, kind: RadioKind) -> Result<()> {
-        for radio in &self.radios {
+        for (radio, _) in &self.radios {
             if radio.Kind()? == kind {
                 radio.SetStateAsync(RadioState::On)?.get()?;
             }
@@ -98,7 +113,7 @@ impl RadioManager {
     }
 
     pub fn turn_off_radios(&self, kind: RadioKind) -> Result<()> {
-        for radio in &self.radios {
+        for (radio, _) in &self.radios {
             if radio.Kind()? == kind {
                 radio.SetStateAsync(RadioState::Off)?.get()?;
             }
@@ -118,6 +133,10 @@ impl RadioManager {
                 log_error!(watcher.RemoveRemoved(token));
             }
             log_error!(watcher.Stop());
+        }
+
+        for (radio, token) in self.radios.drain(..) {
+            log_error!(radio.RemoveStateChanged(token));
         }
     }
 }
@@ -152,5 +171,12 @@ fn on_radio_removed(
         let id = device.Id()?.to_string_lossy();
         log_error!(RadioManager::event_tx().send(RadioManagerEvent::Removed(id)));
     }
+    Ok(())
+}
+
+fn on_radio_state_changed(
+    _sender: &Option<Radio>,
+    _args: &Option<windows_core::IInspectable>,
+) -> windows_core::Result<()> {
     Ok(())
 }

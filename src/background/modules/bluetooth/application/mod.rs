@@ -7,10 +7,11 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use windows::Devices::Bluetooth::{BluetoothDevice, BluetoothLEDevice};
 use windows::Devices::Enumeration::{DeviceInformation, DeviceInformationUpdate, DeviceWatcher};
-use windows::Devices::Radios::{Radio, RadioKind, RadioState};
+use windows::Devices::Radios::RadioKind;
 use windows::Foundation::TypedEventHandler;
 use windows_core::HSTRING;
 
+use crate::modules::shared::radio::RADIO_MANAGER;
 use crate::{event_manager, hstring, log_error, trace_lock};
 
 use crate::error_handler::Result;
@@ -28,7 +29,6 @@ lazy_static! {
 pub enum BluetoothEvent {
     DevicesChanged(Vec<BluetoothDeviceInfo>),
     DiscoveredDevicesChanged(Vec<BluetoothDeviceInfo>),
-    RadioStateChanged(bool),
 }
 
 #[derive(Debug)]
@@ -37,19 +37,6 @@ pub struct BluetoothManager {
     pub discovered_items: HashMap<u64, BluetoothDeviceInfo>,
 
     enumeration_completed: bool,
-
-    // COM radio object & handlers
-    radios: HashMap<String, Radio>,
-    radio_watcher: Option<DeviceWatcher>,
-    radio_added_handler: TypedEventHandler<DeviceWatcher, DeviceInformation>,
-    radio_added_registration: Option<i64>,
-    radio_updated_handler: TypedEventHandler<DeviceWatcher, DeviceInformationUpdate>,
-    radio_updated_registration: Option<i64>,
-    radio_removed_handler: TypedEventHandler<DeviceWatcher, DeviceInformationUpdate>,
-    radio_removed_registration: Option<i64>,
-
-    radio_state_changed_handler: TypedEventHandler<Radio, windows_core::IInspectable>,
-    radio_state_changed_registration_handlers: HashMap<String, i64>,
 
     // COM device object & handlers
     device_watcher: Option<DeviceWatcher>,
@@ -83,26 +70,13 @@ pub fn release_bluetooth_events() {
     let mut manager = trace_lock!(BLUETOOTH_MANAGER);
     log_error!(manager.stop_discovery());
     log_error!(manager.deregister_for_bt_devices());
-    log_error!(manager.release_radios());
 }
 
 impl BluetoothManager {
     pub fn new() -> Result<Self> {
-        let mut instance = Self {
+        let instance = Self {
             known_items: HashMap::new(),
             discovered_items: HashMap::new(),
-            radios: HashMap::new(),
-            radio_watcher: None,
-            radio_added_handler: TypedEventHandler::new(BluetoothManager::on_radio_added),
-            radio_added_registration: None,
-            radio_updated_handler: TypedEventHandler::new(BluetoothManager::on_radio_updated),
-            radio_updated_registration: None,
-            radio_removed_handler: TypedEventHandler::new(BluetoothManager::on_radio_removed),
-            radio_removed_registration: None,
-            radio_state_changed_handler: TypedEventHandler::new(
-                BluetoothManager::on_radio_state_changed,
-            ),
-            radio_state_changed_registration_handlers: HashMap::new(),
             enumeration_completed: false,
             device_watcher: None,
             device_added_handler: TypedEventHandler::new(BluetoothManager::on_device_added),
@@ -126,92 +100,20 @@ impl BluetoothManager {
             ),
             inquery_enumeration_completed_registration: None,
         };
-
-        instance.prepare_radios()?;
-
         Ok(instance)
     }
 
-    fn prepare_radios(&mut self) -> Result<()> {
-        if self.radio_watcher.is_some() {
-            return Ok(());
-        }
-
-        let watcher = DeviceInformation::CreateWatcherAqsFilter(&Radio::GetDeviceSelector()?)?;
-        self.radio_added_registration = watcher.Added(&self.radio_added_handler).ok();
-        self.radio_updated_registration = watcher.Updated(&self.radio_updated_handler).ok();
-        self.radio_removed_registration = watcher.Removed(&self.radio_removed_handler).ok();
-        watcher.Start()?;
-        self.radio_watcher = Some(watcher);
-        Ok(())
-    }
-
-    pub fn release_radios(&mut self) -> Result<()> {
-        if let Some(watcher) = &self.radio_watcher {
-            if let Some(token) = self.radio_added_registration {
-                watcher.RemoveAdded(token)?;
-                self.device_added_registration = None;
-            }
-            if let Some(token) = self.radio_updated_registration {
-                watcher.RemoveUpdated(token)?;
-                self.device_updated_registration = None;
-            }
-            if let Some(token) = self.radio_removed_registration {
-                watcher.RemoveRemoved(token)?;
-                self.device_removed_registration = None;
-            }
-            watcher.Stop()?;
-
-            self.radio_watcher = None;
-
-            for (key, _) in self.known_items.clone() {
-                if let Some(radio) = self.radios.remove(&key) {
-                    if let Some(registration) =
-                        self.radio_state_changed_registration_handlers.remove(&key)
-                    {
-                        radio.RemoveStateChanged(registration)?;
-                    }
-                }
-            }
-
-            self.radios.clear();
-        }
-        Ok(())
-    }
-
-    pub fn get_radio_state(&self) -> Result<bool> {
-        Ok(self
-            .radios
-            .iter()
-            .any(|(_, value)| value.State().unwrap_or(RadioState::On) == RadioState::On))
-    }
-
-    pub fn set_radio_state(&self, enable: bool) -> Result<()> {
-        for value in self.radios.values() {
-            value
-                .SetStateAsync(if enable {
-                    RadioState::On
-                } else {
-                    RadioState::Off
-                })?
-                .get()?;
-        }
-        Ok(())
+    pub fn is_bluetooth_enabled() -> bool {
+        trace_lock!(RADIO_MANAGER).is_enabled(RadioKind::Bluetooth)
     }
 
     pub fn register_for_bt_devices(&mut self) -> Result<()> {
         if self.device_watcher.is_some() {
             return Ok(());
         }
-        if self
-            .radios
-            .iter()
-            .all(|(_, value)| value.State().unwrap_or(RadioState::Off) == RadioState::Off)
-        {
-            return Err(
-                "Bluetooth enumeration can not be started because no radio can be activated!"
-                    .into(),
-            );
+
+        if !Self::is_bluetooth_enabled() {
+            return Err("There's no bluetooth radio enabled!".into());
         }
 
         // log::trace!("({0}) OR ({1})", BluetoothDevice.GetDeviceSelector(), BluetoothLEDevice.GetDeviceSelector())
@@ -350,15 +252,8 @@ impl BluetoothManager {
     }
 
     pub fn discover(&mut self) -> Result<()> {
-        if self
-            .radios
-            .iter()
-            .all(|(_, value)| value.State().unwrap_or(RadioState::Off) == RadioState::Off)
-        {
-            return Err(
-                "Bluetooth enumeration can not be started because no radio can be activated!"
-                    .into(),
-            );
+        if !Self::is_bluetooth_enabled() {
+            return Err("There's no bluetooth radio enabled!".into());
         }
 
         if self.inquery_watcher.is_some() {
@@ -435,96 +330,6 @@ impl BluetoothManager {
         );
         log_error!(manager.discover());
 
-        Ok(())
-    }
-
-    pub(super) fn on_radio_added(
-        _sender: &Option<DeviceWatcher>,
-        args: &Option<DeviceInformation>,
-    ) -> windows_core::Result<()> {
-        if let Some(device) = args {
-            let id = device.Id()?;
-            let radio = Radio::FromIdAsync(&id)?.get()?;
-            if radio.Kind()? == RadioKind::Bluetooth {
-                let mut manager = trace_lock!(BLUETOOTH_MANAGER);
-                let registration = radio.StateChanged(&manager.radio_state_changed_handler)?;
-                manager
-                    .radio_state_changed_registration_handlers
-                    .insert(id.to_string(), registration);
-                manager.radios.insert(id.to_string(), radio);
-                if let Ok(state) = manager.get_radio_state() {
-                    log_error!(Self::event_tx().send(BluetoothEvent::RadioStateChanged(state)));
-                }
-                log_error!(manager.register_for_bt_devices());
-            }
-        }
-        Ok(())
-    }
-
-    pub(super) fn on_radio_updated(
-        _sender: &Option<DeviceWatcher>,
-        args: &Option<DeviceInformationUpdate>,
-    ) -> windows_core::Result<()> {
-        if let Some(device) = args {
-            let id = device.Id()?;
-            let radio = Radio::FromIdAsync(&id)?.get()?;
-            if radio.Kind()? == RadioKind::Bluetooth {
-                {
-                    let mut manager = trace_lock!(BLUETOOTH_MANAGER);
-                    manager.radios.insert(id.to_string(), radio);
-                }
-                log_error!(Self::handle_radio_state_change());
-            }
-        }
-        Ok(())
-    }
-
-    pub(super) fn on_radio_removed(
-        _sender: &Option<DeviceWatcher>,
-        args: &Option<DeviceInformationUpdate>,
-    ) -> windows_core::Result<()> {
-        if let Some(device) = args {
-            let id = device.Id()?;
-            let radio = Radio::FromIdAsync(&id)?.get()?;
-            if radio.Kind()? == RadioKind::Bluetooth {
-                {
-                    let mut manager = trace_lock!(BLUETOOTH_MANAGER);
-                    if let Some(token) = manager
-                        .radio_state_changed_registration_handlers
-                        .remove(&id.to_string())
-                    {
-                        radio.RemoveStateChanged(token)?;
-                    }
-                    manager.radios.remove(&id.to_string());
-                }
-                log_error!(Self::handle_radio_state_change());
-            }
-        }
-        Ok(())
-    }
-
-    pub(super) fn on_radio_state_changed(
-        _sender: &Option<Radio>,
-        _args: &Option<windows_core::IInspectable>,
-    ) -> windows_core::Result<()> {
-        log_error!(Self::handle_radio_state_change());
-        Ok(())
-    }
-
-    fn handle_radio_state_change() -> Result<()> {
-        let mut manager = trace_lock!(BLUETOOTH_MANAGER);
-        if let Ok(state) = manager.get_radio_state() {
-            manager.enumeration_completed = false;
-
-            if state {
-                manager.register_for_bt_devices()?;
-            } else {
-                manager.deregister_for_bt_devices()?;
-                manager.stop_discovery()?;
-            }
-
-            log_error!(Self::event_tx().send(BluetoothEvent::RadioStateChanged(state)));
-        }
         Ok(())
     }
 

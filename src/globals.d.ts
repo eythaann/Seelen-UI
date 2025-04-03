@@ -8,7 +8,7 @@ declare module '*.yml' {
 }
 
 interface ObjectConstructor {
-  keys<T>(o: T): (keyof T)[];
+  keys<T>(o: T): (T extends any ? keyof T : PropertyKey)[];
 }
 
 interface Window {

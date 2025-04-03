@@ -1,3 +1,4 @@
+import { IconName } from '@icons';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { PluginId } from '@seelen-ui/lib/types';
 import { Flex, Menu, Popover } from 'antd';
@@ -44,7 +45,7 @@ export function MainContextMenu() {
                         const added = isAlreadyAdded(plugin.id);
                         return {
                           key: plugin.id,
-                          icon: <Icon iconName={plugin.icon} />,
+                          icon: <Icon iconName={plugin.icon as IconName} />,
                           label: added ? `✓ ${plugin.id}` : plugin.id,
                           onClick: () => {
                             if (added) {
