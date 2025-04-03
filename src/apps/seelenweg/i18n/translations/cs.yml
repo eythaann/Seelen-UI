@@ -1,16 +1,16 @@
 app_menu:
   close: Zavřít
-  close_multiple: Zavřete všechny
+  close_multiple: Zavřít všechny
   copy_handles: Kopírovat úchyty
-  kill: Zabít proces
-  kill_multiple: Zabijte všechny procesy
+  kill: Ukončit proces
+  kill_multiple: Ukončit všechny procesy
   open_file_location: Otevřít umístění souboru
-  pin: Kolík
-  pin_to_center: Pin do středu
-  pin_to_left: Pin doleva
-  pin_to_right: Pin doprava
+  pin: Připnout
+  pin_to_center: Připnout na střed
+  pin_to_left: Připnout doleva
+  pin_to_right: Připnout doprava
   run_as: Spustit jako administrátor
-  unpin: Unlin
+  unpin: Odepnout
 context_menu:
   reorder_disable: Uzamčení hlavního panelu
   reorder_enable: Odemknutí hlavního panelu
@@ -19,10 +19,10 @@ media:
 media_menu:
   remove: Odebrat mediální modul
 start_menu:
-  remove: Odstraňte startovací modul
+  remove: Odstranit startovací modul
 taskbar_menu:
-  add_file: Pin vlastní soubor
-  add_folder: Pin vlastní složka
+  add_file: Připnout vlastní soubor
+  add_folder: Připnout vlastní složku
   media: Přidat mediální modul
   settings: Nastavení
   start: Přidat startovací modul
