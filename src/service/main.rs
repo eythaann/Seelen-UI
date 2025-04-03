@@ -18,10 +18,13 @@ use itertools::Itertools;
 use lazy_static::lazy_static;
 use logger::SluServiceLogger;
 use shutdown::restore_native_taskbar;
-use std::process::Command;
+use std::{process::Command, sync::atomic::AtomicBool};
 use string_utils::WindowsString;
 use task_scheduler::TaskSchedulerHelper;
-use windows::Win32::{Security::SE_TCB_NAME, UI::WindowsAndMessaging::SW_MINIMIZE};
+use windows::Win32::{
+    Security::SE_TCB_NAME,
+    UI::{Shell::FOLDERID_LocalAppData, WindowsAndMessaging::SW_MINIMIZE},
+};
 use windows_api::WindowsApi;
 
 lazy_static! {
@@ -29,6 +32,12 @@ lazy_static! {
     pub static ref SERVICE_DISPLAY_NAME: WindowsString =
         WindowsString::from_str("Seelen UI Service");
     static ref STOP_CHANNEL: (Sender<()>, Receiver<()>) = crossbeam_channel::unbounded();
+}
+
+pub static STARTUP: AtomicBool = AtomicBool::new(false);
+
+pub fn was_started_from_startup_action() -> bool {
+    STARTUP.load(std::sync::atomic::Ordering::SeqCst)
 }
 
 pub fn is_local_dev() -> bool {
@@ -53,19 +62,24 @@ fn is_seelen_ui_running() -> bool {
 }
 
 fn launch_seelen_ui() -> Result<()> {
-    if was_installed_using_msix() {
-        Command::new("explorer")
-            .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
-            .status()?;
-        return Ok(());
+    let app_path = if was_installed_using_msix() {
+        WindowsApi::known_folder(FOLDERID_LocalAppData)?
+            .join("Microsoft\\WindowsApps\\seelen-ui.exe")
+    } else {
+        std::env::current_exe()?.with_file_name("seelen-ui.exe")
+    };
+
+    let mut args = Vec::new();
+    if was_started_from_startup_action() {
+        args.push("--startup".to_string());
     }
 
-    let program = std::env::current_exe()?
-        .with_file_name("seelen-ui.exe")
-        .to_string_lossy()
-        .to_string();
+    let lnk_file = WindowsApi::create_temp_shortcut(&app_path, &args.join(" "))?;
     // start it using explorer to spawn it as unelevated
-    Command::new("explorer").arg(&program).status()?;
+    Command::new("C:\\Windows\\explorer.exe")
+        .arg(&lnk_file)
+        .status()?;
+    std::fs::remove_file(&lnk_file)?;
     Ok(())
 }
 
@@ -143,11 +157,11 @@ fn main() -> Result<()> {
     TaskSchedulerHelper::create_service_task()?;
 
     log::info!("Starting Seelen UI Service");
+    log::info!("Arguments: {:?}", std::env::args().collect_vec());
     setup()?;
 
     // wait for stop signal
     STOP_CHANNEL.1.recv().unwrap();
-
     // shutdown tasks:
     restore_native_taskbar()?;
     log::info!("Seelen UI Service stopped");

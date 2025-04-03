@@ -162,7 +162,7 @@ impl WegItemsImpl {
             let _ = extract_and_save_icon_umid(umid);
             match umid {
                 AppUserModelId::Appx(umid) => {
-                    format!("\"explorer.exe\" shell:AppsFolder\\{umid}")
+                    format!("\"C:\\Windows\\explorer.exe\" shell:AppsFolder\\{umid}")
                 }
                 AppUserModelId::PropertyStore(umid) => {
                     let shortcut = START_MENU_MANAGER
@@ -191,7 +191,7 @@ impl WegItemsImpl {
                         display_name = relaunch_display_name;
                         relaunch_command
                     } else if shortcut.is_some() {
-                        format!("\"explorer.exe\" shell:AppsFolder\\{umid}")
+                        format!("\"C:\\Windows\\explorer.exe\" shell:AppsFolder\\{umid}")
                     } else {
                         // process program path
                         path.to_string_lossy().to_string()

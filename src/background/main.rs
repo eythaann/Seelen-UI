@@ -55,6 +55,7 @@ use windows_api::WindowsApi;
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static SILENT: AtomicBool = AtomicBool::new(false);
+static STARTUP: AtomicBool = AtomicBool::new(false);
 static VERBOSE: AtomicBool = AtomicBool::new(false);
 
 pub fn is_local_dev() -> bool {
@@ -86,6 +87,9 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
 
 fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
     match event {
+        tauri::RunEvent::Ready => {
+            log::info!("Setup was completed, app is ready.");
+        }
         tauri::RunEvent::ExitRequested { api, code, .. } => match code {
             Some(code) => {
                 // if exit code is 0 it means that the app was closed by the user

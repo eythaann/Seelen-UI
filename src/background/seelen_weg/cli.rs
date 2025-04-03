@@ -106,7 +106,7 @@ impl SeelenWeg {
                         tauri::async_runtime::block_on(async move {
                             get_app_handle()
                                 .shell()
-                                .command("explorer")
+                                .command("C:\\Windows\\explorer.exe")
                                 .arg(&path)
                                 .status()
                                 .await

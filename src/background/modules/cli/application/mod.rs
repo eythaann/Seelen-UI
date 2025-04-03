@@ -83,6 +83,11 @@ pub fn get_app_command() -> Command {
         .before_help("")
         .after_help("To read more about Seelen visit https://github.com/eythaann/seelen-ui.git")
         .args([
+            Arg::new("startup")
+                .short('S')
+                .long("startup")
+                .action(ArgAction::SetTrue)
+                .help("Indicates that the app was invoked from the start up action."),
             // we maintain this flag for backwards compatibility
             Arg::new("silent")
                 .short('s')
@@ -132,6 +137,10 @@ pub fn handle_console_cli() -> Result<()> {
             e.exit();
         }
     };
+
+    if matches.get_flag("startup") {
+        crate::STARTUP.store(true, Ordering::SeqCst);
+    }
 
     if matches.get_flag("silent") {
         crate::SILENT.store(true, Ordering::SeqCst);

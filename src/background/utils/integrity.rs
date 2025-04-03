@@ -1,6 +1,7 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use base64::Engine;
+use itertools::Itertools;
 use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
@@ -55,6 +56,7 @@ pub fn print_initial_information() {
     );
     let os = os_info::get();
     let sys_locale = seelen_core::state::Settings::get_locale();
+    log::info!("Arguments       : {:?}", std::env::args().collect_vec());
     log::info!("Operating System: {}", os.os_type());
     log::info!("  version       : {}", os.version());
     log::info!("  edition       : {}", os.edition().unwrap_or("None"));
@@ -148,7 +150,7 @@ pub fn start_integrity_thread(app: tauri::AppHandle) {
 }
 
 pub fn restart_as_appx() -> Result<!> {
-    std::process::Command::new("explorer")
+    std::process::Command::new("C:\\Windows\\explorer.exe")
         .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
         .spawn()?;
     std::process::exit(0);

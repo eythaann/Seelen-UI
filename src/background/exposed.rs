@@ -29,7 +29,7 @@ use crate::{log_error, utils};
 fn select_file_on_explorer(path: String) -> Result<()> {
     get_app_handle()
         .shell()
-        .command("explorer")
+        .command("C:\\Windows\\explorer.exe")
         .args(["/select,", &path])
         .spawn()?;
     Ok(())
@@ -37,7 +37,7 @@ fn select_file_on_explorer(path: String) -> Result<()> {
 
 #[tauri::command(async)]
 fn open_file(path: String) -> Result<()> {
-    std::process::Command::new("explorer")
+    std::process::Command::new("C:\\Windows\\explorer.exe")
         .raw_arg(format!("\"{}\"", path))
         .spawn()?;
     Ok(())
@@ -68,7 +68,7 @@ async fn run(program: PathBuf, args: Vec<String>, working_dir: Option<PathBuf>) 
         WindowsApi::create_temp_shortcut(&program, &args.join(" "), working_dir.as_deref())?;
     get_app_handle()
         .shell()
-        .command("explorer")
+        .command("C:\\Windows\\explorer.exe")
         .arg(&lnk_file)
         .status()
         .await?;

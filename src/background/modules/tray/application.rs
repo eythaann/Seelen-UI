@@ -176,7 +176,7 @@ impl TrayIconManager {
     /// their side. These windows that fail also do not re-add their icons
     /// to the Windows taskbar when `explorer.exe` is restarted ordinarily.
     pub fn refresh_icons() -> Result<()> {
-        log::info!("Refreshing icons by sending `TaskbarCreated` message.");
+        log::trace!("Refreshing icons by sending `TaskbarCreated` message.");
         let msg = WindowsString::from("TaskbarCreated");
         let msg = unsafe { RegisterWindowMessageW(msg.as_pcwstr()) };
         if msg == 0 {

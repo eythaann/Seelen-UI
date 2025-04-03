@@ -68,7 +68,7 @@ impl TaskSchedulerHelper {
             task.Principal()?.SetRunLevel(TASK_RUNLEVEL_HIGHEST)?;
 
             let settings = task.Settings()?;
-            settings.SetPriority(4)?;
+            settings.SetPriority(2)?;
             settings.SetHidden(VARIANT_TRUE)?;
             settings.SetAllowDemandStart(VARIANT_TRUE)?;
             settings.SetDisallowStartIfOnBatteries(VARIANT_FALSE)?;
@@ -85,6 +85,7 @@ impl TaskSchedulerHelper {
             let actions = task.Actions()?;
             let exec_action: IExecAction2 = actions.Create(TASK_ACTION_EXEC)?.cast()?;
             exec_action.SetPath(&service_path.to_string_lossy().to_string().into())?;
+            exec_action.SetArguments(&"--startup".into())?;
 
             let mut task_xml = BSTR::new();
             task.XmlText(&mut task_xml)?;

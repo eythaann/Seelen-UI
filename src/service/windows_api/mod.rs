@@ -2,7 +2,11 @@ pub mod app_bar;
 pub mod com;
 pub mod iterator;
 
-use std::{ffi::OsString, os::windows::ffi::OsStringExt, path::PathBuf};
+use std::{
+    ffi::OsString,
+    os::windows::ffi::OsStringExt,
+    path::{Path, PathBuf},
+};
 
 use com::Com;
 use windows::Win32::{
@@ -174,11 +178,11 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn create_temp_shortcut(program: &str, args: &str) -> Result<PathBuf> {
+    pub fn create_temp_shortcut(program: &Path, args: &str) -> Result<PathBuf> {
         Com::run_with_context(|| unsafe {
             let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
 
-            let program = WindowsString::from_str(program);
+            let program = WindowsString::from_os_string(program.as_os_str());
             shell_link.SetPath(program.as_pcwstr())?;
 
             let arguments = WindowsString::from_str(args);

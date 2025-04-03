@@ -1,9 +1,11 @@
 mod actions;
 mod tcp;
 
+use std::sync::atomic::Ordering;
+
 pub use tcp::TcpService;
 
-use clap::Command;
+use clap::{Arg, ArgAction, Command};
 
 use crate::{
     enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
@@ -18,6 +20,7 @@ impl ServiceSubcommands {
     pub const INSTALL: &str = "install";
     pub const UNINSTALL: &str = "uninstall";
     pub const STOP: &str = "stop";
+    pub const STARTUP: &str = "startup";
 }
 
 pub fn get_cli() -> Command {
@@ -34,12 +37,22 @@ pub fn get_cli() -> Command {
                 .about("Uninstalls the service (elevation required)."),
             Command::new(ServiceSubcommands::STOP).about("Stops the service."),
         ])
+        .args([Arg::new("startup")
+            .short('S')
+            .long("startup")
+            .action(ArgAction::SetTrue)
+            .help("Indicates that the app was invoked from the start up action.")])
 }
 
 /// Handles the CLI and exits the process with 0 if it should
 pub fn handle_console_client() -> Result<()> {
     let matches = get_cli().get_matches();
     let subcommand = matches.subcommand();
+
+    if matches.get_flag("startup") {
+        crate::STARTUP.store(true, Ordering::SeqCst);
+    }
+
     match subcommand {
         Some((ServiceSubcommands::INSTALL, _)) => {
             SluServiceLogger::install()?;
@@ -56,6 +69,7 @@ pub fn handle_console_client() -> Result<()> {
         }
         _ => {}
     }
+
     if subcommand.is_some() {
         std::process::exit(0);
     }
