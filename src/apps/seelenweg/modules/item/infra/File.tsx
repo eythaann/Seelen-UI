@@ -32,7 +32,10 @@ export const FileOrFolder = memo(({ item }: Props) => {
         >
           <BackgroundByLayersV2 prefix="item" />
           {item.subtype === 'Folder' ? (
-            <SpecificIcon className="weg-item-icon weg-item-folder-icon" name="@seelen/weg::folder" />
+            <SpecificIcon
+              className="weg-item-icon weg-item-folder-icon"
+              name="@seelen/weg::folder"
+            />
           ) : (
             <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
           )}

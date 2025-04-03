@@ -1,5 +1,8 @@
 import { Reorder } from 'framer-motion';
 import { PropsWithChildren, useRef } from 'react';
+import { useSelector } from 'react-redux';
+
+import { Selectors } from '../../shared/store/app';
 
 import { SwItem } from '../../shared/store/domain';
 
@@ -8,10 +11,11 @@ import { cx } from '../../../../shared/styles';
 interface Props extends PropsWithChildren {
   item: SwItem;
   className?: String;
-  drag?: boolean;
 }
 
-export function DraggableItem({ children, item, className, drag }: Props) {
+export function DraggableItem({ children, item, className }: Props) {
+  let isReorderDisabled = useSelector(Selectors.reorderDisabled);
+
   const ref = useRef<HTMLDivElement>(null);
 
   return (
@@ -19,7 +23,7 @@ export function DraggableItem({ children, item, className, drag }: Props) {
       as="div"
       ref={ref}
       value={item}
-      drag={drag}
+      drag={!isReorderDisabled}
       className={cx('weg-item-drag-container', className)}
       onDragStart={() => {
         ref.current?.classList.add('dragging');

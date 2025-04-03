@@ -4,6 +4,9 @@
 ### enhancements
 - add custom icons to bluetooth devices.
 
+### fix
+- no dragable dock files and folders.
+
 ## [2.2.4]
 ### enhancements
 - add suspend/resume logic.

@@ -17,12 +17,11 @@ import { getMenuForItem } from './Menu';
 
 interface Props {
   item: StartMenuWegItem;
-  drag: boolean;
 }
 
 const startMenuExes = ['SearchHost.exe', 'StartMenuExperienceHost.exe'];
 
-export const StartMenu = memo(({ item, drag }: Props) => {
+export const StartMenu = memo(({ item }: Props) => {
   const focused = useSelector(Selectors.focusedApp);
 
   const { t } = useTranslation();
@@ -30,7 +29,7 @@ export const StartMenu = memo(({ item, drag }: Props) => {
   const isStartMenuOpen = startMenuExes.some((program) => (focused?.exe || '').endsWith(program));
 
   return (
-    <DraggableItem item={item} drag={drag}>
+    <DraggableItem item={item}>
       <WithContextMenu items={getMenuForItem(t, item)}>
         <div
           className="weg-item"
@@ -42,7 +41,10 @@ export const StartMenu = memo(({ item, drag }: Props) => {
           onContextMenu={(e) => e.stopPropagation()}
         >
           <BackgroundByLayersV2 prefix="item" />
-          <SpecificIcon className="weg-item-icon weg-item-start-icon" name={'@seelen/weg::start-menu'} />
+          <SpecificIcon
+            className="weg-item-icon weg-item-start-icon"
+            name={'@seelen/weg::start-menu'}
+          />
         </div>
       </WithContextMenu>
     </DraggableItem>
