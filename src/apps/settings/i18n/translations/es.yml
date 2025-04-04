@@ -88,7 +88,7 @@ extras:
   clear_icons_tooltip: >-
     Podría ser necesario reiniciar el sistema para que surta efecto en todos los
     widgets.
-  discord: Discordia
+  discord: Discord
   exit: Salir
   github: GitHub
   links: Enlaces oficiales
@@ -107,7 +107,7 @@ general:
     author: Autor
     description: Descripción
     tags: Etiquetas
-  startup: ¿Se ejecuta al arrancar?
+  startup: ¿Se ejecuta al iniciar con Windows?
   theme:
     available: Temas disponibles
     label: Temas
@@ -266,9 +266,9 @@ wall:
   interval: Cambia el fondo de pantalla cada
   minutes: minutos
   no_background: >-
-    Presentación de diapositivas vacía, utilizando el fondo del tema en su
+    Presentación de fondos vacía, utilizando el fondo del tema en su
     lugar.
-  random: Pase de diapositivas aleatorio
+  random: Cambio de fondo aleatorio
   seconds: segundos
 weg:
   auto_hide: Auto Ocultar
@@ -282,14 +282,14 @@ weg:
     never: Nunca
     on_overlap: Sobre el solapamiento
   items:
-    gap: Espacio entre artículos
-    label: Artículos
+    gap: Espacio entre elementos
+    label: Elementos
     pinned_visibility:
       always: Siempre
       label: Visibilidad de los elementos anclados
       when_primary: Cuando el monitor es primario
     show_instance_counter: Mostrar contador de ventanas abiertas
-    size: Tamaño del artículo
+    size: Tamaño del elemento
     temporal_visibility:
       all: Todos
       label: Visibilidad de los elementos no fijados
