@@ -266,7 +266,7 @@ wall:
   interval: Cambia el fondo de pantalla cada
   minutes: minutos
   no_background: >-
-    Presentación de diapositivas vacía, utilizando el fondo del tema en su
+    Presentación de fondos vacía, utilizando el fondo del tema en su
     lugar.
   random: Cambio de fondo aleatorio
   seconds: segundos
