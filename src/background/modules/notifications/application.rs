@@ -38,6 +38,8 @@ lazy_static! {
     pub static ref NOTIFICATION_MANAGER: Arc<Mutex<NotificationManager>> = Arc::new(Mutex::new(
         NotificationManager::new().expect("Failed to create notification manager")
     ));
+    pub static ref LOADED_NOTIFICATIONS: Arc<Mutex<HashSet<u32>>> =
+        Arc::new(Mutex::new(HashSet::new()));
 }
 
 static RELEASED: AtomicBool = AtomicBool::new(true);
@@ -51,7 +53,6 @@ pub enum NotificationEvent {
 
 pub struct NotificationManager {
     notifications: Vec<AppNotification>,
-    notifications_id: HashSet<u32>,
     manager: ToastNotificationManagerForUser,
     listener: UserNotificationListener,
     event_handler: TypedEventHandler<UserNotificationListener, UserNotificationChangedEventArgs>,
@@ -66,7 +67,6 @@ impl NotificationManager {
     fn new() -> Result<Self> {
         Ok(Self {
             notifications: Vec::new(),
-            notifications_id: HashSet::new(),
             manager: ToastNotificationManager::GetDefault()?,
             listener: UserNotificationListener::Current()?,
             event_handler: TypedEventHandler::new(Self::internal_notifications_change),
@@ -149,8 +149,7 @@ impl NotificationManager {
         _args: &Option<UserNotificationChangedEventArgs>,
     ) -> windows_core::Result<()> {
         let listener = { UserNotificationListener::Current()? };
-        let mut old_toasts: HashSet<u32> =
-            { trace_lock!(NOTIFICATION_MANAGER).notifications_id.clone() };
+        let mut old_toasts = { trace_lock!(LOADED_NOTIFICATIONS).clone() };
 
         for u_notification in listener
             .GetNotificationsAsync(NotificationKinds::Toast)?
@@ -177,12 +176,12 @@ impl NotificationManager {
                 manager.load_notification(u_notification)?;
             }
             NotificationEvent::Removed(id) => {
-                manager.notifications_id.remove(&id);
                 manager.notifications.retain(|n| n.id != id);
+                trace_lock!(LOADED_NOTIFICATIONS).remove(&id);
             }
             NotificationEvent::Cleared => {
-                manager.notifications_id.clear();
                 manager.notifications.clear();
+                trace_lock!(LOADED_NOTIFICATIONS).clear();
             }
         }
         Ok(())
@@ -268,7 +267,9 @@ impl NotificationManager {
 
     // this function an in general all the notification system can still be improved on usability and performance
     fn load_notification(&mut self, u_notification: UserNotification) -> Result<()> {
-        self.notifications_id.insert(u_notification.Id()?);
+        {
+            trace_lock!(LOADED_NOTIFICATIONS).insert(u_notification.Id()?);
+        }
         let notification = u_notification.Notification()?;
 
         let app_info = match u_notification.AppInfo() {
