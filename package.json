@@ -36,7 +36,7 @@
     "@tauri-apps/plugin-fs": "^2.2.0",
     "@tauri-apps/plugin-log": "^2.2.1",
     "@tauri-apps/plugin-process": "^2.2.0",
-    "@tauri-apps/plugin-shell": "^2.2.0",
+    "@tauri-apps/plugin-shell": "^2.2.1",
     "@tauri-apps/plugin-updater": "^2.5.0"
   },
   "devDependencies": {
