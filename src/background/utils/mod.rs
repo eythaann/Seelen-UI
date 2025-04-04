@@ -1,5 +1,6 @@
 pub mod ahk;
 pub mod constants;
+pub mod icon_extractor;
 pub mod integrity;
 pub mod pwsh;
 pub mod updater;

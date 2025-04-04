@@ -15,13 +15,11 @@ use crate::{
     modules::start::application::START_MENU_MANAGER,
     seelen::get_app_handle,
     state::application::FULL_STATE,
+    utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
 };
 
-use super::{
-    icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
-    SeelenWeg,
-};
+use super::SeelenWeg;
 
 lazy_static! {
     pub static ref WEG_ITEMS_IMPL: Arc<Mutex<WegItemsImpl>> =

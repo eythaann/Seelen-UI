@@ -1,7 +1,6 @@
 pub mod cli;
 pub mod handler;
 pub mod hook;
-pub mod icon_extractor;
 pub mod instance;
 pub mod weg_items_impl;
 

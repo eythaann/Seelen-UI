@@ -12,6 +12,15 @@ interface SpecificIconState {
   src: string | null;
 }
 
+const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+function getSpecificIcon(name: string): string | null {
+  const icon = iconPackManager.getSpecificIcon(name);
+  if (icon && typeof icon === 'object') {
+    return darkModeQuery.matches ? icon.dark : icon.light;
+  }
+  return icon;
+}
+
 export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIconState> {
   unlistener: UnlistenFn | null = null;
 
@@ -20,9 +29,10 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
     this.updateSrc = this.updateSrc.bind(this);
 
     this.state = {
-      src: iconPackManager.getSpecificIcon(this.props.name),
+      src: getSpecificIcon(this.props.name),
     };
 
+    darkModeQuery.addEventListener('change', this.updateSrc);
     iconPackManager.onChange(this.updateSrc).then((unlistener) => {
       this.unlistener = unlistener;
     });
@@ -36,7 +46,7 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
 
   updateSrc(): void {
     this.setState({
-      src: iconPackManager.getSpecificIcon(this.props.name),
+      src: getSpecificIcon(this.props.name),
     });
   }
 

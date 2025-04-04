@@ -36,17 +36,19 @@ export const cx = (...args: Args[]): string => {
     .join(' ');
 };
 
+export function isDarkModeEnabled() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
 export function useDarkMode() {
-  const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches,
-  );
+  const [isDarkMode, setIsDarkMode] = useState(isDarkModeEnabled());
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const listener = () => setIsDarkMode(mediaQuery.matches);
     mediaQuery.addEventListener('change', listener);
     return () => mediaQuery.removeEventListener('change', listener);
-  });
+  }, []);
 
   return isDarkMode;
 }

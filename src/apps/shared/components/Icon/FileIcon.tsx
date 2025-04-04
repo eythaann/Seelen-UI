@@ -15,6 +15,15 @@ interface FileIconState {
   src: string | null;
 }
 
+const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+function getIcon(args: GetIconArgs): string | null {
+  const icon = iconPackManager.getIcon(args);
+  if (icon && typeof icon === 'object') {
+    return darkModeQuery.matches ? icon.dark : icon.light;
+  }
+  return icon;
+}
+
 export class FileIcon extends React.Component<FileIconProps, FileIconState> {
   unlistener: UnlistenFn | null = null;
 
@@ -23,11 +32,13 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
     this.updateSrc = this.updateSrc.bind(this);
 
     this.state = {
-      src: iconPackManager.getIcon({ path: this.props.path, umid: this.props.umid }),
+      src: getIcon({ path: this.props.path, umid: this.props.umid }),
     };
 
+    darkModeQuery.addEventListener('change', this.updateSrc);
     iconPackManager.onChange(this.updateSrc).then((unlistener) => {
       this.unlistener = unlistener;
+      // initial extranction request if no icon found
       if (!this.state.src) {
         this.requestIconExtraction();
       }
@@ -58,7 +69,7 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
 
   updateSrc(): void {
     this.setState({
-      src: iconPackManager.getIcon({ path: this.props.path, umid: this.props.umid }),
+      src: getIcon({ path: this.props.path, umid: this.props.umid }),
     });
   }
 

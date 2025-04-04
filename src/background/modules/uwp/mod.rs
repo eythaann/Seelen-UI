@@ -9,7 +9,6 @@ use windows::ApplicationModel::{AppInfo, Package};
 use crate::error_handler::Result;
 
 pub static UWP_LIGHTUNPLATED_POSTFIX: &str = "_altform-lightunplated";
-#[allow(dead_code)]
 pub static UWP_UNPLATED_POSTFIX: &str = "_altform-unplated";
 
 lazy_static! {
@@ -29,7 +28,8 @@ lazy_static! {
     ];
 }
 
-pub fn get_hightest_quality_posible(icon_path: &Path) -> Option<PathBuf> {
+// returns light and dark icons
+pub fn get_hightest_quality_posible(icon_path: &Path) -> Option<(PathBuf, PathBuf)> {
     let filename = icon_path.file_stem()?.to_str()?;
     let extension = icon_path.extension()?.to_str()?;
 
@@ -38,25 +38,36 @@ pub fn get_hightest_quality_posible(icon_path: &Path) -> Option<PathBuf> {
         .chain((*UWP_SCALE_POSTFIXES).iter());
 
     for size_postfix in size_postfixes {
-        let maybe_icon_path = icon_path.with_file_name(format!(
+        let light_icon = icon_path.with_file_name(format!(
             "{}{}{}.{}",
             filename, size_postfix, UWP_LIGHTUNPLATED_POSTFIX, extension
         ));
-        if maybe_icon_path.exists() {
-            return Some(maybe_icon_path);
-        }
 
-        let maybe_icon_path =
+        let dark_icon = icon_path.with_file_name(format!(
+            "{}{}{}.{}",
+            filename, size_postfix, UWP_UNPLATED_POSTFIX, extension
+        ));
+
+        let unthemed_icon =
             icon_path.with_file_name(format!("{}{}.{}", filename, size_postfix, extension));
-        if maybe_icon_path.exists() {
-            return Some(maybe_icon_path);
+
+        match (
+            light_icon.exists(),
+            dark_icon.exists(),
+            unthemed_icon.exists(),
+        ) {
+            (true, true, _) => return Some((light_icon, dark_icon)),
+            (true, false, _) => return Some((light_icon.clone(), light_icon)),
+            (false, true, true) => return Some((unthemed_icon, dark_icon)),
+            (false, false, true) => return Some((unthemed_icon.clone(), unthemed_icon)),
+            _ => {}
         }
     }
 
     // Some apps only adds one icon and without any postfix
     // but we prefer the light/dark specific icon
     if icon_path.exists() {
-        return Some(icon_path.to_path_buf());
+        return Some((icon_path.to_path_buf(), icon_path.to_path_buf()));
     }
 
     None
@@ -102,7 +113,8 @@ impl UwpManager {
         Err(format!("App path not found for {app_umid}").into())
     }
 
-    pub fn get_high_quality_icon_path(app_umid: &str) -> Result<PathBuf> {
+    // returns light and dark icons
+    pub fn get_high_quality_icon_path(app_umid: &str) -> Result<(PathBuf, PathBuf)> {
         let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
         let package = app_info.Package()?;
         let manifest = Self::manifest_from_package(&package)?;

@@ -17,8 +17,8 @@ use crate::{
         },
         start::application::START_MENU_MANAGER,
     },
-    seelen_weg::icon_extractor::extract_and_save_icon_umid,
     trace_lock,
+    utils::icon_extractor::extract_and_save_icon_umid,
     windows_api::{traits::EventRegistrationTokenExt, types::AppUserModelId, WindowsApi},
 };
 

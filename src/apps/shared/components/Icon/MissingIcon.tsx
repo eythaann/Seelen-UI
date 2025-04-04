@@ -10,6 +10,15 @@ interface MissingIconState {
   src: string | null;
 }
 
+const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+function getMissingIconSrc(): string | null {
+  const icon = iconPackManager.getMissingIcon();
+  if (icon && typeof icon === 'object') {
+    return darkModeQuery.matches ? icon.dark : icon.light;
+  }
+  return icon;
+}
+
 export class MissingIcon extends React.Component<MissingIconProps, MissingIconState> {
   unlistener: UnlistenFn | null = null;
 
@@ -18,9 +27,10 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
     this.updateSrc = this.updateSrc.bind(this);
 
     this.state = {
-      src: iconPackManager.getMissingIcon(),
+      src: getMissingIconSrc(),
     };
 
+    darkModeQuery.addEventListener('change', this.updateSrc);
     iconPackManager.onChange(this.updateSrc).then((unlistener) => {
       this.unlistener = unlistener;
     });
@@ -29,11 +39,12 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
   componentWillUnmount(): void {
     this.unlistener?.();
     this.unlistener = null;
+    darkModeQuery.removeEventListener('change', this.updateSrc);
   }
 
   updateSrc(): void {
     this.setState({
-      src: iconPackManager.getMissingIcon(),
+      src: getMissingIconSrc(),
     });
   }
 

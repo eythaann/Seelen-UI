@@ -1,8 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### feature
+- icons on icon packs now can declare a mask that could be used by themes.
+
 ### enhancements
 - add custom icons to bluetooth devices.
+- allow set different icons by color scheme (light or dark) on icon packs.
 
 ### fix
 - no dragable dock files and folders.

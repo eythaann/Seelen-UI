@@ -13,10 +13,7 @@ use crate::modules::input::Keyboard;
 use crate::modules::virtual_desk::get_vd_manager;
 use crate::seelen::{get_app_handle, Seelen};
 
-use crate::seelen_weg::icon_extractor::{
-    extract_and_save_icon_from_file, extract_and_save_icon_umid,
-};
-
+use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 use crate::utils::pwsh::PwshScript;
 use crate::utils::{is_running_as_appx, is_virtual_desktop_supported as virtual_desktop_supported};
 use crate::windows_api::hdc::DeviceContext;
@@ -118,16 +115,18 @@ fn send_keys(keys: String) -> Result<()> {
     Keyboard::new().send_keys(&keys)
 }
 
+// used to request icon extraction
 #[tauri::command(async)]
-fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Option<PathBuf> {
-    let mut icon = None;
+fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Result<()> {
     if let Some(umid) = umid {
-        icon = extract_and_save_icon_umid(&umid.into()).ok();
+        if extract_and_save_icon_umid(&umid.into()).is_ok() {
+            return Ok(());
+        }
     }
-    match path {
-        Some(path) if icon.is_none() => extract_and_save_icon_from_file(&path).ok(),
-        _ => icon,
+    if let Some(path) = path {
+        return extract_and_save_icon_from_file(&path);
     }
+    Ok(())
 }
 
 #[tauri::command(async)]
