@@ -105,9 +105,12 @@ export function TrayModule({ module }: Props) {
         openAnimationName: 'tray-open',
         closeAnimationName: 'tray-close',
       }}
-      open={openPreview}
       trigger="click"
-      onOpenChange={setOpenPreview}
+      open={openPreview}
+      onOpenChange={(open) => {
+        if (open) emit('hidden::tray-force-refresh');
+        setOpenPreview(open);
+      }}
       arrow={false}
       content={
         <BackgroundByLayersV2
