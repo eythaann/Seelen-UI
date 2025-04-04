@@ -1121,17 +1121,6 @@
           @extend %overflowable-text;
           flex: 1;
         }
-
-        .bluetooth-entry-info-img {
-          height: 1rem;
-          width: 1rem;
-          object-fit: contain;
-          filter: invert(1);
-
-          @media (prefers-color-scheme: dark) {
-            filter: invert(0);
-          }
-        }
       }
     }
 
