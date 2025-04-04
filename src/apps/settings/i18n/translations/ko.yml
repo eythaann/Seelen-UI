@@ -96,7 +96,7 @@ general:
     available: 사용 가능한 아이콘 팩
     label: 아이콘 팩
     open_folder: 아이콘 팩 폴더 열기
-    selected: 활성 아이콘 팩
+    selected: 현재 아이콘 팩
   language: 언어
   resource:
     author: 작가
@@ -140,7 +140,7 @@ monitors_configurations:
 more: 더보기
 open: 열기
 quit: 종료
-remove: 제거하다
+remove: 제거
 save: 저장
 save_and_restart: 저장 및 재시작
 shortcuts:
