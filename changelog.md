@@ -6,6 +6,7 @@
 
 ### fix
 - no dragable dock files and folders.
+- focusing widgets on creation.
 
 ## [2.2.4]
 ### enhancements

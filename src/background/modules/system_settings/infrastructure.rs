@@ -17,7 +17,7 @@ fn emit_colors(colors: &UIColors) {
         .expect("failed to emit");
 }
 
-pub fn register_colors_events() {
+pub fn register_system_settings_events() {
     std::thread::spawn(move || {
         log_error!(trace_lock!(SYSTEM_SETTINGS).initialize());
         SystemSettings::subscribe(|event| {

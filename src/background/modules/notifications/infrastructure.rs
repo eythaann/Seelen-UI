@@ -11,12 +11,13 @@ use super::application::NOTIFICATION_MANAGER;
 pub fn register_notification_events() {
     std::thread::spawn(|| {
         log_error!(trace_lock!(NOTIFICATION_MANAGER).initialize());
-    });
-    NotificationManager::subscribe(|_event| {
-        log_error!(get_app_handle().emit(
-            SeelenEvent::Notifications,
-            trace_lock!(NOTIFICATION_MANAGER).notifications(),
-        ));
+
+        NotificationManager::subscribe(|_event| {
+            log_error!(get_app_handle().emit(
+                SeelenEvent::Notifications,
+                trace_lock!(NOTIFICATION_MANAGER).notifications(),
+            ));
+        });
     });
 }
 

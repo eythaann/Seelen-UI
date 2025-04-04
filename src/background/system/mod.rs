@@ -16,7 +16,7 @@ use crate::{
         },
         power::infrastructure::{register_power_events, release_power_events},
         shared::radio::RADIO_MANAGER,
-        system_settings::infrastructure::{register_colors_events, release_colors_events},
+        system_settings::infrastructure::{register_system_settings_events, release_colors_events},
         tray::infrastructure::register_tray_icons_events,
         user::infrastructure::register_user_events,
     },
@@ -26,6 +26,7 @@ use crate::{
 
 pub fn declare_system_events_handlers() -> Result<()> {
     // avoid binding interfaces to main thread
+    // others like bluetooth or wi-fi, bandwidth, etc depends on this.
     std::thread::spawn(move || {
         log_error!(trace_lock!(RADIO_MANAGER).initialize());
     })
@@ -44,7 +45,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
     register_user_events();
     register_bluetooth_events();
     register_monitor_webview_events();
-    register_colors_events();
+    register_system_settings_events();
     register_power_events();
     register_language_events();
     Ok(())

@@ -103,6 +103,14 @@ impl NotificationManager {
             return Err("Failed to get notification access".into());
         }
 
+        let u_notifications = self
+            .listener
+            .GetNotificationsAsync(NotificationKinds::Toast)?
+            .get()?;
+        for u_notification in u_notifications {
+            log_error!(self.load_notification(u_notification));
+        }
+
         // TODO: this only works on MSIX/APPX/UWP builds so idk how to make it work on win32 apps
         match self.listener.NotificationChanged(&self.event_handler) {
             Ok(token) => self.event_token = Some(token.as_event_token()),
@@ -121,15 +129,6 @@ impl NotificationManager {
                     Ok(())
                 })?;
             }
-        }
-
-        let u_notifications = self
-            .listener
-            .GetNotificationsAsync(NotificationKinds::Toast)?
-            .get()?;
-
-        for u_notification in u_notifications {
-            log_error!(self.load_notification(u_notification));
         }
 
         Self::subscribe(|e| log_error!(Self::process_event(e)));

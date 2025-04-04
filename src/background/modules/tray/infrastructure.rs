@@ -14,10 +14,10 @@ use super::domain::TrayIcon;
 pub fn register_tray_icons_events() {
     std::thread::spawn(|| {
         log_error!(trace_lock!(TRAY_ICON_MANAGER).init());
-    });
-    TrayIconManager::subscribe(|_event| {
-        let manager = trace_lock!(TRAY_ICON_MANAGER);
-        log_error!(get_app_handle().emit(SeelenEvent::TrayInfo, &manager.icons));
+        TrayIconManager::subscribe(|_event| {
+            let manager = trace_lock!(TRAY_ICON_MANAGER);
+            log_error!(get_app_handle().emit(SeelenEvent::TrayInfo, &manager.icons));
+        });
     });
 }
 

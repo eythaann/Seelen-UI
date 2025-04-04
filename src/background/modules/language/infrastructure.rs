@@ -13,24 +13,24 @@ pub fn register_language_events() {
         trace_lock!(LANGUAGE_MANAGER)
             .init()
             .expect("Failed to initialize power manager");
-    });
 
-    LanguageManager::subscribe(|event| match event {
-        LanguageEvent::KeyboardLayoutChanged(hkl) => {
-            let mut lang_manager = trace_lock!(LANGUAGE_MANAGER);
-            if !lang_manager.update_active(hkl) {
-                lang_manager.languages = match LanguageManager::enum_langs() {
-                    Ok(languages) => languages,
-                    Err(e) => {
-                        log::error!("Failed to enumerate languages: {}", e);
-                        return;
-                    }
-                };
+        LanguageManager::subscribe(|event| match event {
+            LanguageEvent::KeyboardLayoutChanged(hkl) => {
+                let mut lang_manager = trace_lock!(LANGUAGE_MANAGER);
+                if !lang_manager.update_active(hkl) {
+                    lang_manager.languages = match LanguageManager::enum_langs() {
+                        Ok(languages) => languages,
+                        Err(e) => {
+                            log::error!("Failed to enumerate languages: {}", e);
+                            return;
+                        }
+                    };
+                }
+                get_app_handle()
+                    .emit(SeelenEvent::SystemLanguagesChanged, &lang_manager.languages)
+                    .unwrap();
             }
-            get_app_handle()
-                .emit(SeelenEvent::SystemLanguagesChanged, &lang_manager.languages)
-                .unwrap();
-        }
+        });
     });
 }
 
