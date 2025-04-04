@@ -2,8 +2,8 @@ app_menu:
   close: Cerrar
   close_multiple: Cerrar todo
   copy_handles: Copiar identificadores
-  kill: Proceso de matar
-  kill_multiple: Matar todos los procesos
+  kill: Finalizar proceso
+  kill_multiple: Finalizar todos los procesos
   open_file_location: Abrir ubicación del archivo
   pin: Anclar
   pin_to_center: Anclar al centro
@@ -15,7 +15,7 @@ context_menu:
   reorder_disable: Bloquear la barra de tareas
   reorder_enable: Desbloquear la barra de tareas
 media:
-  not_playing: Nada esta jugando
+  not_playing: Nada en reproducción
 media_menu:
   remove: Eliminar módulo de medios
 start_menu:
