@@ -103,14 +103,11 @@ jobs:
           includeDebug: true
           args: ${{ matrix.args }}
 
-      - name: Install winget
-        if: matrix.platform == 'windows-latest'
-        uses: Cyberboss/install-winget@v1
-
       - name: Install MSIX dependencies
         if: matrix.platform == 'windows-latest'
         shell: powershell
         run: |
+          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity
           winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
