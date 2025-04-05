@@ -126,7 +126,7 @@ fn main() -> Result<()> {
     handle_console_cli()?;
 
     if is_already_runnning() {
-        TcpBgApp::open_settings()?;
+        TcpBgApp::request_open_settings()?;
         return Ok(());
     }
 

@@ -77,9 +77,15 @@ impl TcpBgApp {
         Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
     }
 
-    pub fn open_settings() -> Result<()> {
+    pub fn request_open_settings() -> Result<()> {
         let stream = Self::connect_tcp()?;
-        serde_json::to_writer(stream, &["settings"])?;
+        serde_json::to_writer(
+            stream,
+            &[
+                std::env::current_exe()?.to_string_lossy().to_string(),
+                "settings".to_owned(),
+            ],
+        )?;
         Ok(())
     }
 

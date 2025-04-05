@@ -11,6 +11,7 @@
 ### fix
 - no dragable dock files and folders.
 - focusing widgets on creation.
+- not opening settings window when starting the app with an instance already running.
 
 ## [2.2.4]
 ### enhancements
