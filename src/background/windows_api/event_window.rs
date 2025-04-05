@@ -43,7 +43,7 @@ unsafe extern "system" fn window_proc(
         return LRESULT(0);
     }
 
-    for callback in CALLBACKS.lock().iter() {
+    for callback in trace_lock!(CALLBACKS).iter() {
         log_error!(callback(msg, w_param.0, l_param.0));
     }
 

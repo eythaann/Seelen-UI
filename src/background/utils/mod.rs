@@ -126,7 +126,9 @@ macro_rules! trace_lock {
         match guard {
             Some(guard) => {
                 if $crate::utils::TRACE_LOCK_ENABLED.load(std::sync::atomic::Ordering::Acquire) {
-                    let mut map = $crate::utils::LAST_SUCCESSFUL_LOCK.lock();
+                    let mut map = $crate::utils::LAST_SUCCESSFUL_LOCK
+                        .try_lock_for(std::time::Duration::from_secs(5))
+                        .unwrap();
                     let location = format!("{}:{}", file!(), line!());
                     log::trace!("{} lock acquired at {}", guard_name, location);
                     map.insert(guard_name.to_owned(), location);
@@ -135,7 +137,11 @@ macro_rules! trace_lock {
             }
             None => {
                 let mut panic_msg = format!("{} mutex is deadlocked", guard_name);
-                if let Some(path) = $crate::utils::LAST_SUCCESSFUL_LOCK.lock().get(guard_name) {
+                if let Some(path) = $crate::utils::LAST_SUCCESSFUL_LOCK
+                    .try_lock_for(std::time::Duration::from_secs(5))
+                    .unwrap()
+                    .get(guard_name)
+                {
                     panic_msg = format!("{}, last successful aquire was at {}", panic_msg, path);
                 }
                 panic!("{:?}", $crate::error_handler::AppError::from(panic_msg));

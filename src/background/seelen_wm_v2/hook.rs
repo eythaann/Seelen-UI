@@ -44,7 +44,7 @@ impl WindowManagerV2 {
             return Ok(());
         }
 
-        if *SystemMoveSizeStartMonitor.lock() != window.monitor() {
+        if *trace_lock!(SystemMoveSizeStartMonitor) != window.monitor() {
             log::trace!("window moved of monitor");
             Self::remove(window)?;
             Self::add(window)?;
@@ -52,7 +52,7 @@ impl WindowManagerV2 {
             return Ok(());
         }
 
-        let initial_rect = SystemMoveSizeStartRect.lock();
+        let initial_rect = trace_lock!(SystemMoveSizeStartRect);
         let initial_width = (initial_rect.right - initial_rect.left) as f32;
         let initial_height = (initial_rect.bottom - initial_rect.top) as f32;
 
@@ -96,8 +96,8 @@ impl WindowManagerV2 {
             WinEvent::SystemMoveSizeStart => {
                 if Self::is_managed(window) {
                     Self::set_overlay_visibility(false)?;
-                    *SystemMoveSizeStartRect.lock() = window.inner_rect()?;
-                    *SystemMoveSizeStartMonitor.lock() = window.monitor();
+                    *trace_lock!(SystemMoveSizeStartRect) = window.inner_rect()?;
+                    *trace_lock!(SystemMoveSizeStartMonitor) = window.monitor();
                 }
             }
             WinEvent::SystemMoveSizeEnd => Self::system_move_size_end(window)?,
