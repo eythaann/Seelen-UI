@@ -162,11 +162,19 @@ impl IconPacksManager {
         system_pack.missing = Some(Icon::Static(PathBuf::from("missing-icon.png")));
         system_pack.specific.insert(
             "@seelen/weg::start-menu".to_string(),
-            Icon::Static(PathBuf::from("start-menu-icon.svg")),
+            Icon::Dynamic {
+                light: PathBuf::from("start-menu-icon.svg"),
+                dark: PathBuf::from("start-menu-icon.svg"),
+                mask: Some(PathBuf::from("start-menu-icon.svg")),
+            },
         );
         system_pack.specific.insert(
             "@seelen/weg::folder".to_string(),
-            Icon::Static(PathBuf::from("folder-icon.svg")),
+            Icon::Dynamic {
+                light: PathBuf::from("folder-icon.svg"),
+                dark: PathBuf::from("folder-icon.svg"),
+                mask: Some(PathBuf::from("folder-icon.svg")),
+            },
         );
 
         Ok(())

@@ -1,4 +1,5 @@
 import { GetIconArgs, IconPackManager } from '@seelen-ui/lib';
+import { cx } from '@shared/styles';
 import { UnlistenFn } from '@tauri-apps/api/event';
 import React, { ImgHTMLAttributes } from 'react';
 
@@ -13,17 +14,23 @@ interface FileIconProps extends GetIconArgs, Omit<ImgHTMLAttributes<HTMLImageEle
 
 interface FileIconState {
   src: string | null;
+  mask?: string | null;
 }
 
 const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-function getIcon(args: GetIconArgs): string | null {
+function getIcon(args: GetIconArgs): {
+  src: string | null;
+  mask?: string | null;
+} {
   const icon = iconPackManager.getIcon(args);
   if (icon && typeof icon === 'object') {
-    return darkModeQuery.matches ? icon.dark : icon.light;
+    return {
+      src: darkModeQuery.matches ? icon.dark : icon.light,
+      mask: icon.mask,
+    };
   }
-  return icon;
+  return { src: icon };
 }
-
 export class FileIcon extends React.Component<FileIconProps, FileIconState> {
   unlistener: UnlistenFn | null = null;
 
@@ -31,9 +38,7 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
     super(props);
     this.updateSrc = this.updateSrc.bind(this);
 
-    this.state = {
-      src: getIcon({ path: this.props.path, umid: this.props.umid }),
-    };
+    this.state = getIcon({ path: this.props.path, umid: this.props.umid });
 
     darkModeQuery.addEventListener('change', this.updateSrc);
     iconPackManager.onChange(this.updateSrc).then((unlistener) => {
@@ -69,7 +74,7 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
 
   updateSrc(): void {
     this.setState({
-      src: getIcon({ path: this.props.path, umid: this.props.umid }),
+      ...getIcon({ path: this.props.path, umid: this.props.umid }),
     });
   }
 
@@ -77,14 +82,15 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
     const { path: _path, umid: _umid, noFallback, ...imgProps } = this.props;
 
     if (this.state.src) {
-      const style = {
-        ...(imgProps.style || {}),
-        '--icon-url': `url('${this.state.src}')`,
-      } as React.CSSProperties;
-
       return (
-        <figure {...imgProps} style={style}>
+        <figure {...imgProps} className={cx(cs.outer, imgProps.className)}>
           <img src={this.state.src} className={cs.inner} />
+          {this.state.mask && (
+            <div
+              className={cx(cs.mask, 'sl-mask')}
+              style={{ maskImage: `url('${this.state.mask}')` }}
+            />
+          )}
         </figure>
       );
     }

@@ -1,3 +1,4 @@
+import { cx } from '@shared/styles';
 import { UnlistenFn } from '@tauri-apps/api/event';
 import React, { ImgHTMLAttributes } from 'react';
 
@@ -8,15 +9,22 @@ interface MissingIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'sr
 
 interface MissingIconState {
   src: string | null;
+  mask?: string | null;
 }
 
 const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-function getMissingIconSrc(): string | null {
+function getMissingIcon(): {
+  src: string | null;
+  mask?: string | null;
+} {
   const icon = iconPackManager.getMissingIcon();
   if (icon && typeof icon === 'object') {
-    return darkModeQuery.matches ? icon.dark : icon.light;
+    return {
+      src: darkModeQuery.matches ? icon.dark : icon.light,
+      mask: icon.mask,
+    };
   }
-  return icon;
+  return { src: icon };
 }
 
 export class MissingIcon extends React.Component<MissingIconProps, MissingIconState> {
@@ -26,9 +34,7 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
     super(props);
     this.updateSrc = this.updateSrc.bind(this);
 
-    this.state = {
-      src: getMissingIconSrc(),
-    };
+    this.state = getMissingIcon();
 
     darkModeQuery.addEventListener('change', this.updateSrc);
     iconPackManager.onChange(this.updateSrc).then((unlistener) => {
@@ -44,19 +50,20 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
 
   updateSrc(): void {
     this.setState({
-      src: getMissingIconSrc(),
+      ...getMissingIcon(),
     });
   }
 
   render(): React.ReactNode {
-    const style = {
-      ...(this.props.style || {}),
-      '--icon-url': `url('${this.state.src}')`,
-    } as React.CSSProperties;
-
     return (
-      <figure {...this.props} style={style}>
+      <figure {...this.props} className={cx(cs.outer, this.props.className)}>
         <img src={this.state.src || ''} className={cs.inner} />
+        {this.state.mask && (
+          <div
+            className={cx(cs.mask, 'sl-mask')}
+            style={{ maskImage: `url('${this.state.mask}')` }}
+          />
+        )}
       </figure>
     );
   }

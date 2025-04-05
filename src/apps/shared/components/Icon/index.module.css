@@ -5,6 +5,23 @@
   }
 }
 
+.outer {
+  position: relative;
+
+  .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: center;
+    mask-mode: luminance;
+    background-color: var(--config-accent-light-color);
+  }
+}
+
 .inner {
   height: 100%;
   object-fit: contain;
