@@ -24,16 +24,11 @@ jobs:
 
             // Check if .msix file exists in the release assets
             const msixAsset = latestRelease.data.assets.find(asset => asset.name.toLowerCase().endsWith('.msix'));
+            return msixAsset ? 'true' : 'false';
+          result-encoding: string
 
-            if (msixAsset) {
-              console.info('MSIX file exists.');
-              core.setOutput('result', 'true');
-            } else {
-              console.info('No MSIX file found in the latest release.');
-              core.setOutput('result', 'false');
-            }
       - name: Debug output
-        run: echo "MSIX_ALREADY_EXIST value is ${{ needs.check-msix.outputs.MSIX_ALREADY_EXIST }}"
+        run: echo "MSIX_ALREADY_EXIST value is ${{ steps.check_msix.outputs.result }}"
 
   upload-store-msix-to-release:
     name: Upload Signed MSIX to release
