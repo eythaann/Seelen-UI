@@ -1,7 +1,7 @@
 {
   "name": "seelen-ui",
   "productName": "seelen-ui",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Seelen UI Project",
   "type": "module",
   "scripts": {
