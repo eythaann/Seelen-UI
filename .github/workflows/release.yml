@@ -86,7 +86,7 @@ jobs:
           args: ${{ matrix.args }}
 
       - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-2025'
         shell: powershell
         run: |
           winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity
@@ -95,7 +95,7 @@ jobs:
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
       - name: Bundle MSIX
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-2025'
         run: npx tsx scripts/bundle.msix.ts
 
       - name: Upload artifacts
@@ -110,7 +110,7 @@ jobs:
 
   microsoft-store-submission:
     needs: build-installers
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
         with:

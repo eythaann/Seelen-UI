@@ -1,7 +1,6 @@
 # Changelog
 
 ## [Unreleased]
-## [2.2.5]
 ### feature
 - icons on icon packs now can declare a mask that could be used by themes.
 
