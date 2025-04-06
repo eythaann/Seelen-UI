@@ -1,8 +1,7 @@
 use std::{ops::Index, path::PathBuf};
 
 use clap::Command;
-use regex::Regex;
-use seelen_core::state::WegItem;
+use seelen_core::state::{RelaunchArguments, WegItem};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
 
@@ -68,46 +67,28 @@ impl SeelenWeg {
                             window.focus()?;
                         }
                     } else {
-                        // TODO: move all this block to a reuseable function
-                        let regex = Regex::new("\"(.*?)\"|'(.*?)'|(\\S+)").unwrap();
-                        let mut matches = vec![];
-                        for (_, [finds]) in regex
-                            .captures_iter(&inner_data.relaunch_command)
-                            .map(|c| c.extract())
-                        {
-                            matches.push(finds);
-                        }
-
-                        let special_regex = Regex::new("/^[a-zA-Z]:\\/").unwrap();
-                        let mut program = "".to_owned();
-                        if matches.len() > 1 && special_regex.is_match(matches[0]) {
-                            for item in matches.clone() {
-                                if !item.starts_with("-") && !item.contains("=") {
-                                    program.push_str(item);
-                                    _ = matches.pop();
-                                } else {
-                                    break;
-                                }
-                            }
-                        } else {
-                            program = matches.remove(0).to_owned();
-                        }
+                        let args = match &inner_data.relaunch_args {
+                            Some(args) => match args {
+                                RelaunchArguments::String(args) => args.clone(),
+                                RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
+                            },
+                            None => String::new(),
+                        };
 
                         // we create a link file to trick with explorer into a separated process
                         // and without elevation in case Seelen UI was running as admin
                         // this could take some delay like is creating a file but just are some milliseconds
                         // and this exposed funtion is intended to just run certain times
                         let lnk_file = WindowsApi::create_temp_shortcut(
-                            &PathBuf::from(program),
-                            &matches.join(" "),
+                            &PathBuf::from(&inner_data.relaunch_program),
+                            &args,
                             inner_data.relaunch_in.as_deref(),
                         )?;
-                        let path = lnk_file.clone();
-                        tauri::async_runtime::block_on(async move {
+                        tauri::async_runtime::block_on(async {
                             get_app_handle()
                                 .shell()
                                 .command("C:\\Windows\\explorer.exe")
-                                .arg(&path)
+                                .arg(&lnk_file)
                                 .status()
                                 .await
                                 .unwrap();

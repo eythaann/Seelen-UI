@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
-import { parseCommand } from 'src/apps/shared/Command';
 import { FileIcon } from 'src/apps/shared/components/Icon';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
@@ -139,8 +138,11 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             onClick={() => {
               let window = item.windows[0];
               if (!window) {
-                const { program, args } = parseCommand(item.relaunchCommand);
-                invoke(SeelenCommand.Run, { program, args, workingDir: item.relaunchIn });
+                invoke(SeelenCommand.Run, {
+                  program: item.relaunchProgram,
+                  args: item.relaunchArgs,
+                  workingDir: item.relaunchIn,
+                });
               } else {
                 invoke(SeelenCommand.WegToggleWindowState, {
                   hwnd: window.handle,

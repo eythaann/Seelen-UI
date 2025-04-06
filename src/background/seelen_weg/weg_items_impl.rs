@@ -3,7 +3,7 @@ use parking_lot::Mutex;
 use seelen_core::{
     handlers::SeelenEvent,
     state::{
-        PinnedWegItemData, WegAppGroupItem, WegItem, WegItemSubtype, WegItems,
+        PinnedWegItemData, RelaunchArguments, WegAppGroupItem, WegItem, WegItemSubtype, WegItems,
         WegPinnedItemsVisibility, WegTemporalItemsVisibility,
     },
 };
@@ -68,6 +68,26 @@ fn temporalise(items: &mut WegItems) {
     items.left = temporalise_collection(&items.left);
     items.center = temporalise_collection(&items.center);
     items.right = temporalise_collection(&items.right);
+}
+
+fn get_parts_of_inline_command(cmd: &str) -> (String, Option<String>) {
+    let start_double_quoted = cmd.starts_with("\"");
+    if start_double_quoted || cmd.starts_with("'") {
+        let delimiter = if start_double_quoted { '"' } else { '\'' };
+        let mut parts = cmd.split(['"', '\'']).filter(|s| !s.is_empty());
+
+        let program = parts.next().unwrap_or_default().trim().to_owned();
+        let args = cmd
+            .trim_start_matches(&format!("{delimiter}{program}{delimiter}"))
+            .trim()
+            .to_owned();
+        (program, if args.is_empty() { None } else { Some(args) })
+    } else {
+        let mut parts = cmd.split(" ").filter(|s| !s.is_empty());
+        let program = parts.next().unwrap_or_default().trim().to_owned();
+        let args = cmd.trim_start_matches(&program).trim().to_owned();
+        (program, if args.is_empty() { None } else { Some(args) })
+    }
 }
 
 impl WegItemsImpl {
@@ -138,6 +158,7 @@ impl WegItemsImpl {
             .any(|item| item_contains_window(item, searching))
     }
 
+    #[allow(deprecated)]
     pub fn add(&mut self, window: &Window) -> Result<()> {
         if self.contains(window) {
             return Ok(());
@@ -155,13 +176,14 @@ impl WegItemsImpl {
             .app_display_name()
             .unwrap_or_else(|_| String::from("Unknown"));
 
-        let relaunch_command = if let Some(umid) = &umid {
+        let (relaunch_program, relaunch_args) = if let Some(umid) = &umid {
             // pre-extraction to avoid flickering on the ui
             let _ = extract_and_save_icon_umid(umid);
             match umid {
-                AppUserModelId::Appx(umid) => {
-                    format!("\"C:\\Windows\\explorer.exe\" shell:AppsFolder\\{umid}")
-                }
+                AppUserModelId::Appx(umid) => (
+                    "C:\\Windows\\explorer.exe".to_owned(),
+                    Some(format!("shell:AppsFolder\\{umid}")),
+                ),
                 AppUserModelId::PropertyStore(umid) => {
                     let shortcut = START_MENU_MANAGER
                         .load()
@@ -187,38 +209,38 @@ impl WegItemsImpl {
                         (window.relaunch_command(), window.relaunch_display_name())
                     {
                         display_name = relaunch_display_name;
-                        relaunch_command
+                        get_parts_of_inline_command(&relaunch_command)
                     } else if shortcut.is_some() {
-                        format!("\"C:\\Windows\\explorer.exe\" shell:AppsFolder\\{umid}")
+                        (
+                            "C:\\Windows\\explorer.exe".to_owned(),
+                            Some(format!("shell:AppsFolder\\{umid}")),
+                        )
                     } else {
                         // process program path
-                        path.to_string_lossy().to_string()
+                        (path.to_string_lossy().to_string(), None)
                     }
                 }
             }
         } else {
             // pre-extraction to avoid flickering on the ui
             let _ = extract_and_save_icon_from_file(&path);
-            path.to_string_lossy().to_string()
+            (path.to_string_lossy().to_string(), None)
         };
 
         let umid = umid.map(|umid| umid.to_string());
+        let relaunch_args = relaunch_args.map(RelaunchArguments::String);
         // groups order documented on https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
         // group should be by umid, if not present then the groups are done by relaunch command
         // and in last case the groups are done by process id/path
         for item in self.iter_all_mut() {
             match item {
-                WegItem::Pinned(data) | WegItem::Temporal(data) => {
-                    if data.umid.is_some() && umid == data.umid {
-                        data.windows.push(WegAppGroupItem {
-                            title: window.title(),
-                            handle: window.address(),
-                        });
-                        return Ok(());
-                    }
-
-                    if data.relaunch_command == relaunch_command {
-                        data.windows.push(WegAppGroupItem {
+                WegItem::Pinned(current) | WegItem::Temporal(current) => {
+                    if (current.umid.is_some() && current.umid == umid)
+                        || (current.relaunch_program.to_lowercase()
+                            == relaunch_program.to_lowercase()
+                            && current.relaunch_args == relaunch_args)
+                    {
+                        current.windows.push(WegAppGroupItem {
                             title: window.title(),
                             handle: window.address(),
                         });
@@ -234,7 +256,9 @@ impl WegItemsImpl {
             subtype: WegItemSubtype::App,
             umid,
             path,
-            relaunch_command,
+            relaunch_command: None,
+            relaunch_program,
+            relaunch_args,
             relaunch_in: None,
             display_name,
             is_dir: false,

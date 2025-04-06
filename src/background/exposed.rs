@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use std::os::windows::process::CommandExt;
 use std::path::PathBuf;
 
+use seelen_core::state::RelaunchArguments;
 use seelen_core::{command_handler_list, system_state::Color};
 
 use tauri::{Builder, WebviewWindow, Wry};
@@ -41,14 +42,23 @@ fn open_file(path: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
-async fn run_as_admin(program: String, args: Vec<String>) -> Result<()> {
+async fn run_as_admin(program: PathBuf, args: Option<RelaunchArguments>) -> Result<()> {
+    let args = match args {
+        Some(args) => match args {
+            RelaunchArguments::String(args) => args,
+            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
+        },
+        None => String::new(),
+    };
+    log::trace!("Running as admin: {:?} {}", program, args);
+
     let command = if args.is_empty() {
-        format!("Start-Process '{}' -Verb runAs", program)
+        format!("Start-Process '{}' -Verb runAs", program.display())
     } else {
         format!(
             "Start-Process '{}' -Verb runAs -ArgumentList '{}'",
-            program,
-            args.join(" ")
+            program.display(),
+            args
         )
     };
     PwshScript::new(command).execute().await?;
@@ -56,13 +66,25 @@ async fn run_as_admin(program: String, args: Vec<String>) -> Result<()> {
 }
 
 #[tauri::command(async)]
-async fn run(program: PathBuf, args: Vec<String>, working_dir: Option<PathBuf>) -> Result<()> {
+async fn run(
+    program: PathBuf,
+    args: Option<RelaunchArguments>,
+    working_dir: Option<PathBuf>,
+) -> Result<()> {
+    let args = match args {
+        Some(args) => match args {
+            RelaunchArguments::String(args) => args,
+            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
+        },
+        None => String::new(),
+    };
+    log::trace!("Running: {:?} {} in {:?}", program, args, working_dir);
+
     // we create a link file to trick with explorer into a separated process
     // and without elevation in case Seelen UI was running as admin
     // this could take some delay like is creating a file but just are some milliseconds
     // and this exposed funtion is intended to just run certain times
-    let lnk_file =
-        WindowsApi::create_temp_shortcut(&program, &args.join(" "), working_dir.as_deref())?;
+    let lnk_file = WindowsApi::create_temp_shortcut(&program, &args, working_dir.as_deref())?;
     get_app_handle()
         .shell()
         .command("C:\\Windows\\explorer.exe")

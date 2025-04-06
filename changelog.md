@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- dock items not opening correctly.
+
 ## [2.2.6]
 ### feature
 - icons on icon packs now can declare a mask that could be used by themes.
