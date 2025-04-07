@@ -1,13 +1,13 @@
 bluetooth:
   available: 可用设备（未配对）
   cancel: 取消
-  connected: 联网设备
-  forget: 忘记
+  connected: 已连接设备
+  forget: 忘记设备
   lowenergy: 低能耗
   more: 更多蓝牙设置
   not_found: 未找到蓝牙设备
-  pair: 成对
-  paired: 保存的设备
+  pair: 配对
+  paired: 已配对设备
   placeholder:
     passphrase: 密码口令、代码或 PIN 码
   scanning: 扫描设备
@@ -31,7 +31,7 @@ media:
     mixer: 音量混合器
     multimedia: 多媒体
     settings: 更多设备设置
-    volume: 设备容量
+    volume: 设备音量
   input_devices: 输入设备
   output_devices: 输出设备
   players: 媒体播放器
@@ -56,8 +56,8 @@ notifications:
 placeholder:
   battery_remaining: '% 剩余电量'
   bluetooth_devices: 蓝牙和设备
-  ethernet_connected: 互联网访问
-  ethernet_disconnected: 无法访问互联网
+  ethernet_connected: 已连接到互联网
+  ethernet_disconnected: 未连接到互联网
   notifications: 通知
   open_system_tray: 打开系统托盘
   settings: 快速设置
@@ -66,7 +66,7 @@ placeholder:
 settings:
   app_settings: 应用设置
   brightness: 亮度
-  hibernate: 冬眠
+  hibernate: 休眠
   lock: 锁
   log_out: 注销
   power: 电源
@@ -80,7 +80,7 @@ tray:
 userhome:
   empty_list: 无项目
   folders:
-    desktop: 台式机
+    desktop: 桌面
     documents: 文件
     downloads: 下载
     more_items: 显示更多...
