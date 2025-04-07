@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.2.7]
 ### fix
 - dock items not opening correctly.
 
