@@ -1,0 +1,20 @@
+name: Test Winget
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-winget:
+    runs-on: windows-2025
+    steps:
+      - name: Install MSIX dependencies
+        shell: pwsh
+        run: |
+          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
+          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+      
+      - name: Success
+        run: |
+          echo "Success???"
