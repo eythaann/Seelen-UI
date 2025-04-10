@@ -55,12 +55,11 @@ pub fn handle_console_client() -> Result<()> {
 
     match subcommand {
         Some((ServiceSubcommands::INSTALL, _)) => {
-            SluServiceLogger::install()?;
             add_installation_dir_to_path()?;
             TaskSchedulerHelper::create_service_task()?;
         }
         Some((ServiceSubcommands::UNINSTALL, _)) => {
-            SluServiceLogger::uninstall()?;
+            SluServiceLogger::uninstall_old_logging()?;
             remove_installation_dir_from_path()?;
             TaskSchedulerHelper::remove_service_task()?;
         }

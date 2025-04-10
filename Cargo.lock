@@ -4924,6 +4924,7 @@ dependencies = [
  "crossbeam-channel",
  "encoding_rs",
  "evalexpr",
+ "fern",
  "getset",
  "image",
  "itertools 0.12.1",

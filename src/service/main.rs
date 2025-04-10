@@ -152,7 +152,7 @@ fn main() -> Result<()> {
         return Ok(());
     }
 
-    SluServiceLogger::install()?;
+    let _ = SluServiceLogger::uninstall_old_logging();
     SluServiceLogger::init()?;
     TaskSchedulerHelper::create_service_task()?;
 

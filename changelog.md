@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- store service logs in a file to help debugging.
+
 ## [2.2.7]
 ### fix
 - dock items not opening correctly.
