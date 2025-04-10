@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.2.8]
 ### enhancements
 - store service logs in a file to help debugging.
 - wait for native shell on startup before start seelen ui.
