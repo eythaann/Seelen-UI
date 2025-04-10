@@ -107,7 +107,7 @@ jobs:
         if: matrix.platform == 'windows-2025'
         shell: powershell
         run: |
-          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity
+          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity || & { "ignore failure"; $global:LASTEXITCODE = 0 }
           winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
