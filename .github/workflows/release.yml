@@ -76,6 +76,15 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
+      - name: Install MSIX dependencies
+        if: matrix.platform == 'windows-2025'
+        shell: pwsh
+        run: |
+          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity || & { "ignore failure"; $global:LASTEXITCODE = 0 }
+          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+
       - uses: tauri-apps/tauri-action@v0.5.16
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -84,15 +93,6 @@ jobs:
         with:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           args: ${{ matrix.args }}
-
-      - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-2025'
-        shell: powershell
-        run: |
-          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity || & { "ignore failure"; $global:LASTEXITCODE = 0 }
-          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
       - name: Bundle MSIX
         if: matrix.platform == 'windows-2025'

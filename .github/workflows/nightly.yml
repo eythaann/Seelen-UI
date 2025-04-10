@@ -5,9 +5,9 @@ on:
     branches:
       - master
     paths-ignore:
-      - '**.md'
-      - 'documentation/**'
-      - '.github/**'
+      - "**.md"
+      - "documentation/**"
+      - ".github/**"
   workflow_dispatch:
 
 concurrency:
@@ -90,6 +90,15 @@ jobs:
 
             return nightlyVersion;
 
+      - name: Install MSIX dependencies
+        if: matrix.platform == 'windows-2025'
+        shell: pwsh
+        run: |
+          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity || & { "ignore failure"; $global:LASTEXITCODE = 0 }
+          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
       - uses: tauri-apps/tauri-action@v0.5.16
         env:
@@ -102,15 +111,6 @@ jobs:
           prerelease: true
           includeDebug: true
           args: ${{ matrix.args }}
-
-      - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-2025'
-        shell: powershell
-        run: |
-          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity || & { "ignore failure"; $global:LASTEXITCODE = 0 }
-          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
       - name: Bundle MSIX
         if: matrix.platform == 'windows-2025'
