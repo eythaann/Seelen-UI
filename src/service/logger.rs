@@ -18,6 +18,39 @@ impl SluServiceLogger {
         Ok(())
     }
 
+    pub fn register_panic_hook() {
+        let base_hook = std::panic::take_hook();
+        std::panic::set_hook(Box::new(move |info| {
+            let cause = info
+                .payload()
+                .downcast_ref::<String>()
+                .map(|s| s.to_string())
+                .unwrap_or_else(|| {
+                    info.payload()
+                        .downcast_ref::<&str>()
+                        .unwrap_or(&"<cause unknown>")
+                        .to_string()
+                });
+
+            let mut string_location = String::from("<location unknown>");
+            if let Some(location) = info.location() {
+                string_location = format!(
+                    "{}:{}:{}",
+                    location.file(),
+                    location.line(),
+                    location.column()
+                );
+            }
+
+            log::error!(
+                "A panic occurred:\n  Cause: {}\n  Location: {}",
+                cause,
+                string_location
+            );
+            base_hook(info);
+        }));
+    }
+
     pub fn init() -> Result<()> {
         fern::Dispatch::new()
             .format(|out, message, record| {
@@ -34,6 +67,7 @@ impl SluServiceLogger {
                     .join("com.seelen.seelen-ui/logs/SLU Service.log"),
             )?)
             .apply()?;
+        Self::register_panic_hook();
         Ok(())
     }
 }

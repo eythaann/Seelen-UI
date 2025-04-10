@@ -114,7 +114,8 @@ pub fn setup() -> Result<()> {
     WindowsApi::enable_privilege(SE_TCB_NAME)?;
     TcpService::listen_tcp()?;
 
-    if !is_seelen_ui_running() {
+    if was_started_from_startup_action() {
+        WindowsApi::wait_for_native_shell();
         launch_seelen_ui()?;
     }
 

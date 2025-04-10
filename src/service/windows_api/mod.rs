@@ -24,9 +24,9 @@ use windows::Win32::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
         Shell::{IShellLinkW, SHGetKnownFolderPath, ShellLink, KF_FLAG_DEFAULT},
         WindowsAndMessaging::{
-            BringWindowToTop, GetClassNameW, GetForegroundWindow, GetWindowThreadProcessId,
-            IsIconic, SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS,
-            SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
+            BringWindowToTop, FindWindowW, GetClassNameW, GetForegroundWindow,
+            GetWindowThreadProcessId, IsIconic, SetWindowPos, ShowWindow, ShowWindowAsync,
+            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
         },
     },
 };
@@ -211,5 +211,22 @@ impl WindowsApi {
         let len = unsafe { GetClassNameW(hwnd, &mut text) };
         let length = usize::try_from(len).unwrap_or(0);
         String::from_utf16_lossy(&text[..length])
+    }
+
+    pub fn wait_for_native_shell() {
+        log::info!("Waiting for native shell...");
+        let mut attempt = 0;
+        let class = WindowsString::from_str("Shell_TrayWnd");
+        unsafe {
+            // wait for native shell until 50 attempts or 5 seconds
+            while FindWindowW(class.as_pcwstr(), None).is_err() && attempt < 50 {
+                std::thread::sleep(std::time::Duration::from_millis(100));
+                attempt += 1;
+            }
+        }
+        if attempt == 10 {
+            panic!("Native shell not found");
+        }
+        log::info!("Native shell found, continueing setup...");
     }
 }

@@ -10,6 +10,7 @@ use clap::{Arg, ArgAction, Command};
 use crate::{
     enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
     error::Result,
+    is_seelen_ui_running,
     logger::SluServiceLogger,
     task_scheduler::TaskSchedulerHelper,
     SERVICE_DISPLAY_NAME,
@@ -50,7 +51,10 @@ pub fn handle_console_client() -> Result<()> {
     let subcommand = matches.subcommand();
 
     if matches.get_flag("startup") {
-        crate::STARTUP.store(true, Ordering::SeqCst);
+        // --startup flag is added when service is invoked from task scheduler
+        // but this can be invoked by the main app too, so we only considerate as startup if
+        // the main app is not running and flag is present
+        crate::STARTUP.store(!is_seelen_ui_running(), Ordering::SeqCst);
     }
 
     match subcommand {
