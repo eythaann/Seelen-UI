@@ -2,20 +2,20 @@ bluetooth:
   available: Dostupná zařízení (nespárovaná)
   cancel: Zrušit
   connected: Připojená zařízení
-  forget: Zapomeňte na
+  forget: Zapomenout
   lowenergy: Nízká spotřeba energie
   more: Další nastavení Bluetooth
   not_found: Nebyla nalezena žádná zařízení Bluetooth
-  pair: Pár
+  pair: Párovat
   paired: Uložená zařízení
   placeholder:
-    passphrase: Fráze, kód nebo PIN
+    passphrase: Heslo, kód nebo PIN
   scanning: Skenování zařízení
 context_menu:
   add_module: Přidat modul
   remove: Odebrat modul
   reorder_disable: Zamknout panel nástrojů
-  reorder_enable: Odemknutí panelu nástrojů
+  reorder_enable: Odemknout panel nástrojů
   settings: Nastavení
   task_manager: Správce úloh
 keyboard:
@@ -26,12 +26,12 @@ media:
   device:
     channel:
       system: Zvuky systému
-    comunications: komunikace
+    comunications: Komunikace
     missing: Chybějící zařízení
     mixer: Směšovač hlasitosti
     multimedia: Multimédia
     settings: Další nastavení zařízení
-    volume: Objem zařízení
+    volume: Hlasitost zařízení
   input_devices: Vstupní zařízení
   output_devices: Výstupní zařízení
   players: Přehrávače médií
@@ -42,7 +42,7 @@ network:
   disconnect: Odpojit
   hidden: Skrytá síť
   more: Více nastavení sítě
-  not_found: Nalezeny žádné sítě
+  not_found: Žádné sítě nenalezeny
   placeholder:
     password: Heslo
   saved: Uložené sítě
@@ -50,18 +50,18 @@ network:
   secured: Šifrovaná síť
 notifications:
   clear: Vymazat vše
-  empty: Žádná oznámení
+  empty: Žádné oznámení
   settings: Další nastavení oznámení
   title: Oznámení
 placeholder:
-  battery_remaining: zbývající %
+  battery_remaining: '% zbývá'
   bluetooth_devices: Bluetooth & zařízení
   ethernet_connected: Přístup na internet
-  ethernet_disconnected: Žádný přístup k internetu
+  ethernet_disconnected: Žádný přístup na internet
   notifications: Oznámení
   open_system_tray: Otevřený systémový zásobník
   settings: Rychlé nastavení
-  smart_charge: '- Chytrý poplatek'
+  smart_charge: '- Chytré nabíjení'
   volume: Hlasitost
 settings:
   app_settings: Nastavení aplikace
@@ -69,20 +69,20 @@ settings:
   hibernate: Hibernace
   lock: Zámek
   log_out: Odhlásit se
-  power: Moc
+  power: Napájení
   restart: Restart
   shutdown: Vypnout
   sleep: Spát
   title: Nastavení
 tray:
-  empty: 'Žádné položky na liště (Poznámka: systém Windows 10 není implementován)'
-  unlabeled: Ikona zásobníku bez štítku
+  empty: 'Žádné položky (Poznámka: systém Windows 10 není implementován)'
+  unlabeled: Ikona bez štítku
 userhome:
   empty_list: Žádné položky
   folders:
-    desktop: Stolní počítač
+    desktop: Plocha
     documents: Dokumenty
-    downloads: Ke stažení na
+    downloads: Stažené soubory
     more_items: Zobrazit více...
     music: Hudba
     pictures: Obrázky
@@ -96,5 +96,5 @@ userhome:
     open_user_folder: Otevření uživatelského adresáře
   seelen_options:
     open_installation_folder: Otevřete složku nastavení Seelen
-    open_log_folder: Otevřete složku protokolu Seelen
+    open_log_folder: Otevřete složku logů Seelen
     title: Adresáře Seelen
