@@ -565,69 +565,69 @@
   padding: 8px;
   gap: 8px;
   height: min-content;
-}
 
-.media-session-thumbnail-container {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-}
+  .media-session-thumbnail-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
 
-.media-session-app-icon {
-  position: absolute;
-  z-index: 3;
-  width: 25%;
-  aspect-ratio: 1/1;
-  right: 5%;
-  bottom: 5%;
-  object-fit: contain;
-}
+    .media-session-app-icon {
+      position: absolute;
+      z-index: 3;
+      width: 25%;
+      aspect-ratio: 1/1;
+      right: 5%;
+      bottom: 5%;
+      object-fit: contain;
+    }
 
-.media-session-thumbnail {
-  border-radius: 8px;
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: contain;
-  background: #0004;
-}
+    .media-session-thumbnail {
+      border-radius: 8px;
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: contain;
+      background: #0004;
+    }
+  }
 
-.media-session-blurred-thumbnail {
-  filter: blur(15px) brightness(125%) contrast(125%);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-}
+  .media-session-blurred-thumbnail {
+    filter: blur(15px) brightness(125%) contrast(125%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
 
-.media-session-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  white-space: nowrap;
-}
+  .media-session-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
 
-.media-session-title,
-.media-session-author {
-  position: relative;
-  align-self: flex-start;
-  font-size: 0.7rem;
-  text-align: center;
-  min-width: 100%;
-  animation: leftToRight 5s infinite alternate ease-in-out;
-}
+    .media-session-title,
+    .media-session-author {
+      position: relative;
+      align-self: flex-start;
+      font-size: 0.7rem;
+      text-align: center;
+      min-width: 100%;
+      animation: leftToRight 5s infinite alternate ease-in-out;
+    }
 
-.media-session-title {
-  font-weight: 600;
-  font-size: 1rem;
-}
+    .media-session-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
 
-.media-session-actions {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 4px;
+    .media-session-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+  }
 }
 
 .notifications {

@@ -57,7 +57,7 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
   render(): React.ReactNode {
     return (
       <figure {...this.props} className={cx(cs.outer, this.props.className)}>
-        <img src={this.state.src || ''} className={cs.inner} />
+        <img src={this.state.src || ''} />
         {this.state.mask && (
           <div
             className={cx(cs.mask, 'sl-mask')}

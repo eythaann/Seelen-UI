@@ -66,7 +66,7 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
 
     return (
       <figure {...imgProps} className={cx(cs.outer, imgProps.className)}>
-        <img src={this.state.src} className={cs.inner} />
+        <img src={this.state.src} />
         {this.state.mask && (
           <div
             className={cx(cs.mask, 'sl-mask')}

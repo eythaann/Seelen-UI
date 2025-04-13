@@ -84,7 +84,7 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
     if (this.state.src) {
       return (
         <figure {...imgProps} className={cx(cs.outer, imgProps.className)}>
-          <img src={this.state.src} className={cs.inner} />
+          <img src={this.state.src} />
           {this.state.mask && (
             <div
               className={cx(cs.mask, 'sl-mask')}

@@ -92,9 +92,7 @@ export function WithMediaControls({ children, setActive }: MediaControlProps) {
           setOpenNotifier(false);
         }
       }}
-      arrow={false}
       content={<MediaControls />}
-      destroyTooltipOnHide
     >
       <AnimatedPopover
         animationDescription={{

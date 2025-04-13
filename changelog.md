@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- media player styles on toolbar.
+
 ## [2.2.9]
 ### enhancements
 - store service logs in a file to help debugging.
