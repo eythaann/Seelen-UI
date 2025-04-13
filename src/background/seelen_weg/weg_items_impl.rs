@@ -7,7 +7,7 @@ use seelen_core::{
         WegPinnedItemsVisibility, WegTemporalItemsVisibility,
     },
 };
-use std::{collections::HashMap, ffi::OsStr, sync::Arc};
+use std::{collections::HashMap, ffi::OsStr, path::PathBuf, sync::Arc};
 use tauri::Emitter;
 
 use crate::{
@@ -81,13 +81,19 @@ fn get_parts_of_inline_command(cmd: &str) -> (String, Option<String>) {
             .trim_start_matches(&format!("{delimiter}{program}{delimiter}"))
             .trim()
             .to_owned();
-        (program, if args.is_empty() { None } else { Some(args) })
-    } else {
-        let mut parts = cmd.split(" ").filter(|s| !s.is_empty());
-        let program = parts.next().unwrap_or_default().trim().to_owned();
-        let args = cmd.trim_start_matches(&program).trim().to_owned();
-        (program, if args.is_empty() { None } else { Some(args) })
+        return (program, if args.is_empty() { None } else { Some(args) });
     }
+
+    let cmd_as_path = PathBuf::from(cmd);
+    if cmd_as_path.exists() {
+        let program = cmd_as_path.to_string_lossy().to_string();
+        return (program, None);
+    }
+
+    let mut parts = cmd.split(" ").filter(|s| !s.is_empty());
+    let program = parts.next().unwrap_or_default().trim().to_owned();
+    let args = cmd.trim_start_matches(&program).trim().to_owned();
+    (program, if args.is_empty() { None } else { Some(args) })
 }
 
 impl WegItemsImpl {

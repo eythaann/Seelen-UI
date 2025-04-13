@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### fix
 - media player styles on toolbar.
+- steam pin item on dock not working properly.
 
 ## [2.2.9]
 ### enhancements
