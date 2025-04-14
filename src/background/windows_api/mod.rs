@@ -98,16 +98,16 @@ use windows::{
             },
             WindowsAndMessaging::{
                 BringWindowToTop, EnumWindows, GetClassNameW, GetDesktopWindow,
-                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindowLongW, GetWindowRect,
-                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
-                IsZoomed, PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
+                GetForegroundWindow, GetParent, GetSystemMetrics, GetTitleBarInfo, GetWindowLongW,
+                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
+                IsWindowVisible, IsZoomed, PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
                 GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
                 SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
                 SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
                 SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
-                WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, TITLEBARINFO, WINDOW_EX_STYLE,
+                WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -493,6 +493,15 @@ impl WindowsApi {
         let len = unsafe { GetClassNameW(hwnd, &mut text) };
         let length = usize::try_from(len).unwrap_or(0);
         Ok(String::from_utf16(&text[..length])?)
+    }
+
+    pub fn get_title_bar_info(hwnd: HWND) -> Result<TITLEBARINFO> {
+        let mut info = TITLEBARINFO {
+            cbSize: std::mem::size_of::<TITLEBARINFO>() as u32,
+            ..Default::default()
+        };
+        unsafe { GetTitleBarInfo(hwnd, &mut info)? };
+        Ok(info)
     }
 
     pub fn get_shell_item(path: &Path) -> Result<IShellItem2> {

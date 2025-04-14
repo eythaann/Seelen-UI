@@ -34,12 +34,7 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
     for addr in handles {
         let window = Window::from(addr);
 
-        if !window.is_visible() {
-            SeelenWeg::remove_hwnd(&window)?;
-            continue;
-        }
-
-        if window.is_minimized() {
+        if !window.is_visible() || window.is_minimized() {
             continue;
         }
 
@@ -67,36 +62,24 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
 #[tauri::command(async)]
 pub fn weg_close_app(hwnd: isize) -> Result<()> {
     let window = Window::from(hwnd);
-    if !window.is_visible() {
-        SeelenWeg::remove_hwnd(&window)?;
-    } else {
-        WindowsApi::post_message(window.hwnd(), WM_CLOSE, 0, 0)?;
-    }
+    WindowsApi::post_message(window.hwnd(), WM_CLOSE, 0, 0)?;
     Ok(())
 }
 
 #[tauri::command(async)]
 pub fn weg_kill_app(hwnd: isize) -> Result<()> {
     let window = Window::from(hwnd);
-    if !window.is_visible() {
-        SeelenWeg::remove_hwnd(&window)?;
-    } else {
-        get_app_handle()
-            .shell()
-            .command("taskkill.exe")
-            .args(["/F", "/PID", &window.process().id().to_string()])
-            .spawn()?;
-    }
+    get_app_handle()
+        .shell()
+        .command("taskkill.exe")
+        .args(["/F", "/PID", &window.process().id().to_string()])
+        .spawn()?;
     Ok(())
 }
 
 #[tauri::command(async)]
 pub fn weg_toggle_window_state(hwnd: isize, was_focused: bool) -> Result<()> {
     let window = Window::from(hwnd);
-    if !window.is_visible() {
-        SeelenWeg::remove_hwnd(&window)?;
-        return Ok(());
-    }
     // was_focused is intented to know if the window was focused before click on the dock item
     // on click the items makes the dock being focused.
     if was_focused {

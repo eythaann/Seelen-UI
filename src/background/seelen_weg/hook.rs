@@ -40,13 +40,13 @@ impl SeelenWeg {
                     Self::update_app(window)?;
                 }
             }
-            WinEvent::ObjectNameChange => {
+            /* WinEvent::ObjectNameChange => {
                 if Self::contains_app(window) {
                     Self::update_app(window)?;
                 } else if Self::should_be_added(window) {
                     Self::add(window)?;
                 }
-            }
+            } */
             _ => {}
         }
         Ok(())

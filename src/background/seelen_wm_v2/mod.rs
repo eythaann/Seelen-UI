@@ -169,9 +169,8 @@ impl WindowManagerV2 {
     }
 
     pub fn enumerate_all_windows() -> Result<()> {
-        WindowEnumerator::new().for_each(|hwnd| {
-            let window = Window::from(hwnd);
-            if !Self::is_managed(&window) && Self::should_be_managed(hwnd) {
+        WindowEnumerator::new().for_each(|window| {
+            if !Self::is_managed(&window) && Self::should_be_managed(window.hwnd()) {
                 log_error!(Self::add(&window));
             }
         })

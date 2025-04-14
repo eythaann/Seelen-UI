@@ -54,7 +54,10 @@ impl Debug for Window {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("Window")
             .field("handle", &self.0 .0)
-            .field("exe", &self.process().program_exe_name())
+            .field(
+                "exe",
+                &self.process().program_exe_name().unwrap_or_default(),
+            )
             .field("class", &self.class())
             .field("title", &self.title())
             .finish()

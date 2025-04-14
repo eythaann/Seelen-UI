@@ -29,17 +29,11 @@ impl SeelenWorkspacesManager {
 
     /// TODO: try to move windows on others native virtual desktops to only one.
     pub fn enumerate(&self) -> Result<()> {
-        WindowEnumerator::new()
-            .map(|hwnd| hwnd)?
-            .into_iter()
-            .rev()
-            .for_each(|hwnd| {
-                let window = Window::from(hwnd);
-                if Self::should_be_added(&window) {
-                    self.add(&window);
-                }
-            });
-        Ok(())
+        WindowEnumerator::new().for_each(|window| {
+            if Self::should_be_added(&window) {
+                self.add(&window);
+            }
+        })
     }
 
     pub fn on_win_event(&self, event: WinEvent, window: &Window) -> Result<()> {

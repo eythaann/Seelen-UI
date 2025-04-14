@@ -49,8 +49,7 @@ impl SeelenWeg {
     }
 
     pub fn enumerate_all_windows() -> Result<()> {
-        WindowEnumerator::new().for_each(|hwnd| {
-            let window = Window::from(hwnd);
+        WindowEnumerator::new().for_each(|window| {
             if Self::should_be_added(&window) {
                 log_error!(Self::add(&window));
             }
@@ -102,7 +101,7 @@ pub static TASKBAR_CLASS: [&str; 2] = ["Shell_TrayWnd", "Shell_SecondaryTrayWnd"
 
 pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
     let mut founds = Vec::new();
-    WindowEnumerator::new().for_each_v2(|w| {
+    WindowEnumerator::new().for_each(|w| {
         if TASKBAR_CLASS.contains(&w.class().as_str()) {
             founds.push(w.hwnd());
         }

@@ -109,9 +109,11 @@ impl SeelenWall {
 
         WindowEnumerator::new().for_each(|current| unsafe {
             // check if current contains SHELLDLL_DefView
-            if FindWindowExA(Some(current), None, pcstr!("SHELLDLL_DefView"), None).is_ok() {
+            if FindWindowExA(Some(current.hwnd()), None, pcstr!("SHELLDLL_DefView"), None).is_ok() {
                 // find next worker after the current one
-                if let Ok(_worker) = FindWindowExA(None, Some(current), pcstr!("WorkerW"), None) {
+                if let Ok(_worker) =
+                    FindWindowExA(None, Some(current.hwnd()), pcstr!("WorkerW"), None)
+                {
                     worker = Some(_worker);
                 }
             }

@@ -258,7 +258,7 @@ impl TrayIconManager {
         let list = settings.get_raw_value("UIOrderList")?.bytes;
 
         let mut windows = Vec::new();
-        WindowEnumerator::new().for_each_v2(|w| {
+        WindowEnumerator::new().for_each(|w| {
             if let Ok(path) = w.process().program_path() {
                 windows.push((w.address(), path.to_string_lossy().to_lowercase()));
             }

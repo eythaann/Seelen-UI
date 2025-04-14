@@ -40,25 +40,6 @@ impl WindowEnumerator {
     /// If enumeration fails it will return error.
     pub fn for_each<F>(&self, cb: F) -> Result<()>
     where
-        F: FnMut(HWND),
-    {
-        type ForEachCallback<'a> = Box<dyn FnMut(HWND) + 'a>;
-        let mut callback: ForEachCallback = Box::new(cb);
-
-        unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
-            if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
-                (*boxed)(hwnd);
-            }
-            true.into()
-        }
-
-        self.enumerate(enum_proc, LPARAM(&mut callback as *mut _ as isize))
-    }
-
-    /// Will call the callback for each window while enumerating.
-    /// If enumeration fails it will return error.
-    pub fn for_each_v2<F>(&self, cb: F) -> Result<()>
-    where
         F: FnMut(Window),
     {
         type ForEachCallback<'a> = Box<dyn FnMut(Window) + 'a>;
@@ -72,6 +53,27 @@ impl WindowEnumerator {
         }
 
         self.enumerate(enum_proc, LPARAM(&mut callback as *mut _ as isize))
+    }
+
+    pub fn for_each_and_descendants<F>(&self, cb: F) -> Result<()>
+    where
+        F: FnMut(Window),
+    {
+        let mut cb = cb;
+        self.for_each_and_descendants_impl(&mut cb)
+    }
+
+    fn for_each_and_descendants_impl<F>(&self, cb: &mut F) -> Result<()>
+    where
+        F: FnMut(Window),
+    {
+        self.for_each(|window| {
+            cb(window);
+            // ignore errors on recursive children enums
+            let _ = Self::new()
+                .with_parent(window.hwnd())
+                .for_each_and_descendants_impl(cb);
+        })
     }
 
     /// Will call the callback for each window while enumerating.
@@ -88,31 +90,6 @@ impl WindowEnumerator {
         unsafe extern "system" fn enum_proc<T>(hwnd: HWND, lparam: LPARAM) -> BOOL {
             if let Some(wrapper) = (lparam.0 as *mut MapCallbackWrapper<T>).as_mut() {
                 wrapper.processed.push((wrapper.cb)(hwnd));
-            }
-            true.into()
-        }
-
-        let mut wrapper = MapCallbackWrapper {
-            cb: Box::new(cb),
-            processed: Vec::new(),
-        };
-
-        self.enumerate(enum_proc::<T>, LPARAM(&mut wrapper as *mut _ as isize))?;
-        Ok(wrapper.processed)
-    }
-
-    pub fn map_v2<F, T>(&self, cb: F) -> Result<Vec<T>>
-    where
-        F: FnMut(Window) -> T,
-    {
-        struct MapCallbackWrapper<'a, T> {
-            cb: Box<dyn FnMut(Window) -> T + 'a>,
-            processed: Vec<T>,
-        }
-
-        unsafe extern "system" fn enum_proc<T>(hwnd: HWND, lparam: LPARAM) -> BOOL {
-            if let Some(wrapper) = (lparam.0 as *mut MapCallbackWrapper<T>).as_mut() {
-                wrapper.processed.push((wrapper.cb)(Window::from(hwnd)));
             }
             true.into()
         }
