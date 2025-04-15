@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- reduce CPU usage on slu-service process.
+
 ### fix
 - media player styles on toolbar.
 - steam pin item on dock not working properly.

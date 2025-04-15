@@ -38,8 +38,12 @@ impl TcpService {
         std::env!("SLU_SERVICE_CONNECTION_TOKEN")
     }
 
-    fn socket_path() -> PathBuf {
-        std::env::temp_dir().join("slu_service_tcp_socket")
+    fn socket_path() -> Result<PathBuf> {
+        let dir = std::env::temp_dir().join("com.seelen.seelen-ui");
+        if !dir.exists() {
+            std::fs::create_dir(&dir)?;
+        }
+        Ok(dir.join("slu_service_tcp_socket"))
     }
 
     fn handle_message(stream: TcpStream) -> Result<()> {
@@ -74,7 +78,7 @@ impl TcpService {
         let port = socket_addr.port();
 
         log::info!("TCP server listening on 127.0.0.1:{}", port);
-        std::fs::write(Self::socket_path(), port.to_string())?;
+        std::fs::write(Self::socket_path()?, port.to_string())?;
 
         std::thread::spawn(move || {
             for stream in listener.incoming() {
@@ -92,7 +96,7 @@ impl TcpService {
     }
 
     pub fn connect_tcp() -> Result<TcpStream> {
-        let port = std::fs::read_to_string(Self::socket_path())?;
+        let port = std::fs::read_to_string(Self::socket_path()?)?;
         Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
     }
 
@@ -111,5 +115,24 @@ impl TcpService {
 
     pub fn emit_stop_signal() -> Result<()> {
         Self::send(SvcAction::Stop)
+    }
+}
+
+pub struct TcpBgApp;
+impl TcpBgApp {
+    fn socket_path() -> PathBuf {
+        std::env::temp_dir().join("com.seelen.seelen-ui\\slu_tcp_socket")
+    }
+
+    pub fn connect_tcp() -> Result<TcpStream> {
+        let port = std::fs::read_to_string(Self::socket_path())?;
+        Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
+    }
+
+    pub fn is_running() -> bool {
+        if let Ok(stream) = Self::connect_tcp() {
+            return serde_json::to_writer(stream, &serde_json::json!([])).is_ok();
+        }
+        false
     }
 }

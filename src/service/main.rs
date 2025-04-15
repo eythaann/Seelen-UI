@@ -10,7 +10,7 @@ mod string_utils;
 mod task_scheduler;
 mod windows_api;
 
-use cli::{handle_console_client, TcpService};
+use cli::{handle_console_client, TcpBgApp, TcpService};
 use crossbeam_channel::{Receiver, Sender};
 use enviroment::was_installed_using_msix;
 use error::Result;
@@ -50,15 +50,6 @@ pub fn is_development() -> bool {
 
 pub fn stop() {
     STOP_CHANNEL.0.send(()).unwrap();
-}
-
-fn is_seelen_ui_running() -> bool {
-    let mut system = sysinfo::System::new();
-    system.refresh_processes();
-    system
-        .processes()
-        .values()
-        .any(|p| p.exe().is_some_and(|path| path.ends_with("seelen-ui.exe")))
 }
 
 fn launch_seelen_ui() -> Result<()> {
@@ -102,7 +93,7 @@ fn restart_gui_on_crash(max_attempts: u32) {
 #[cfg(debug_assertions)]
 fn stop_service_on_seelen_ui_closed() {
     std::thread::spawn(move || {
-        while is_seelen_ui_running() {
+        while TcpBgApp::is_running() {
             std::thread::sleep(std::time::Duration::from_secs(2));
         }
         stop();
@@ -119,6 +110,7 @@ pub fn setup() -> Result<()> {
         launch_seelen_ui()?;
     }
 
+    std::thread::sleep(std::time::Duration::from_secs(2));
     #[cfg(debug_assertions)]
     {
         stop_service_on_seelen_ui_closed();

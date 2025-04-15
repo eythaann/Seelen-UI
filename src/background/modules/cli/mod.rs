@@ -37,9 +37,11 @@ impl TcpBgApp {
         Ok(dir.join("slu_tcp_socket"))
     }
 
-    // const BUFFER_SIZE: usize = 5 * 1024 * 1024; // 5 MB
     fn handle_message(stream: TcpStream) -> Result<()> {
         let argv: Vec<String> = serde_json::from_reader(stream)?;
+        if argv.is_empty() {
+            return Ok(());
+        }
         log::trace!(target: "slu::cli", "{}", argv[1..].join(" "));
         if let Ok(matches) = get_app_command().try_get_matches_from(argv) {
             handle_cli_events(&matches)?;
@@ -56,6 +58,11 @@ impl TcpBgApp {
         fs::write(Self::socket_path()?, port.to_string())?;
 
         spawn_named_thread("TCP Listener", move || {
+            // wait for app fully started before trying to handle messages
+            while !Seelen::is_running() {
+                std::thread::sleep(std::time::Duration::from_millis(10));
+            }
+
             for stream in listener.incoming() {
                 if !Seelen::is_running() {
                     log::trace!("Exiting TCP Listener");
@@ -104,7 +111,7 @@ impl TcpService {
     }
 
     fn socket_path() -> PathBuf {
-        std::env::temp_dir().join("slu_service_tcp_socket")
+        std::env::temp_dir().join("com.seelen.seelen-ui\\slu_service_tcp_socket")
     }
 
     fn connect_tcp() -> Result<TcpStream> {

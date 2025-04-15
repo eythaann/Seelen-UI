@@ -179,13 +179,7 @@ impl Seelen {
         }
     }
 
-    async fn start_async() -> Result<()> {
-        Self::start_ahk_shortcuts().await?;
-        Ok(())
-    }
-
     pub fn start(&mut self) -> Result<()> {
-        SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         RestorationAndMigration::run_full()?;
 
         // order is important
@@ -215,10 +209,6 @@ impl Seelen {
         MonitorManager::subscribe(Self::on_monitor_event);
         SystemSettings::subscribe(Self::on_system_settings_change);
 
-        tauri::async_runtime::spawn(async {
-            log_error!(Self::start_async().await);
-        });
-
         self.refresh_windows_positions()?;
 
         if FULL_STATE.load().is_weg_enabled() {
@@ -230,6 +220,11 @@ impl Seelen {
         }
 
         register_win_hook()?;
+        tauri::async_runtime::spawn(async {
+            log_error!(Self::start_ahk_shortcuts().await);
+        });
+
+        SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }
 

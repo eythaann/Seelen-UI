@@ -65,13 +65,13 @@ pub fn is_local_dev() -> bool {
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     validate_webview_runtime_is_installed(app.handle())?;
+    TcpBgApp::listen_tcp()?;
 
     if !TcpService::is_running() {
         tauri::async_runtime::block_on(TcpService::start_service())?;
     }
 
     check_for_webview_optimal_state(app.handle())?;
-    TcpBgApp::listen_tcp()?;
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
