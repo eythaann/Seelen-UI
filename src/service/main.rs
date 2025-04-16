@@ -80,7 +80,7 @@ fn restart_gui_on_crash(max_attempts: u32) {
     std::thread::spawn(move || {
         let mut attempts = 0;
         while attempts < max_attempts {
-            if !is_seelen_ui_running() {
+            if !TcpBgApp::is_running() {
                 attempts += 1;
                 launch_seelen_ui().expect("Failed to launch Seelen UI");
             }
