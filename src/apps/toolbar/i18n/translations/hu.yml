@@ -1,100 +1,109 @@
 bluetooth:
-  available: Elérhető eszközök (nem párosítva)
-  cancel: Törölje
+  available: Elérhető eszközök (nem párosított)
+  cancel: Mégse
   connected: Csatlakoztatott eszközök
-  forget: Felejtsd el
-  lowenergy: Alacsony energia
+  forget: Eszköz elfelejtése
+  lowenergy: Alacsony energiafogyasztás
   more: További Bluetooth-beállítások
-  not_found: Nem talált Bluetooth-eszköz
-  pair: Pár
-  paired: Mentett eszközök
+  not_found: Nincs elérhető Bluetooth-eszköz
+  pair: Párosítás
+  paired: Párosított eszközök
   placeholder:
-    passphrase: Jelszó, kód vagy PIN-kód
+    passphrase: Jelszó, kód vagy PIN
   scanning: Eszközök keresése
+
 context_menu:
-  add_module: Adjon hozzá modult
-  remove: Távolítsa el a modult
+  add_module: Modul hozzáadása
+  remove: Modul eltávolítása
   reorder_disable: Eszköztár zárolása
   reorder_enable: Eszköztár feloldása
-  settings: Beállítások elemre
+  settings: Beállítások
   task_manager: Feladatkezelő
+
 keyboard:
-  more: További billentyűzetbeállítások
-  title: Billentyűzet elrendezése
+  more: További billentyűzet-beállítások
+  title: Billentyűzetkiosztás
+
 media:
-  default_multimedia_volume: Multimédia hangerő
+  default_multimedia_volume: Alapértelmezett médiakötet
   device:
     channel:
       system: Rendszerhangok
     comunications: Kommunikáció
     missing: Hiányzó eszköz
-    mixer: Hangerő keverő
+    mixer: Hangerő-keverő
     multimedia: Multimédia
     settings: További eszközbeállítások
-    volume: Eszköz hangereje
+    volume: Eszköz hangerő
   input_devices: Bemeneti eszközök
   output_devices: Kimeneti eszközök
   players: Médialejátszók
+
 network:
   available: Elérhető hálózatok
-  connect: Összekapcsol
-  connected: Csatlakozva a következőhöz
-  disconnect: Leválaszt
+  connect: Csatlakozás
+  connected: Csatlakozva ehhez
+  disconnect: Kapcsolat bontása
   hidden: Rejtett hálózat
   more: További hálózati beállítások
-  not_found: Nincsenek hálózatok nem találtak
+  not_found: Nem találhatók Wi-Fi hálózatok
   placeholder:
     password: Jelszó
   saved: Mentett hálózatok
   scanning: Hálózatok keresése
   secured: Titkosított hálózat
+
 notifications:
-  clear: Mindent törölni
+  clear: Összes törlése
   empty: Nincsenek értesítések
-  settings: További értesítések beállításai
+  settings: További értesítési beállítások
   title: Értesítések
+
 placeholder:
-  battery_remaining: '% megmaradt'
-  bluetooth_devices: Bluetooth & eszközök
-  ethernet_connected: internet-hozzáférés
-  ethernet_disconnected: Nincs internet hozzaferes
+  battery_remaining: '% van hátra'
+  bluetooth_devices: Bluetooth és eszközök
+  ethernet_connected: Internet-hozzáférés
+  ethernet_disconnected: Nincs internet-hozzáférés
   notifications: Értesítések
-  open_system_tray: Nyitott rendszer tálca
-  settings: Gyors beállítások
-  smart_charge: '- Intelligens töltés'
+  open_system_tray: Rendszertálca megnyitása
+  settings: Gyorsbeállítások
+  smart_charge: ' - Intelligens töltés'
   volume: Hangerő
+
 settings:
   app_settings: Alkalmazásbeállítások
   brightness: Fényerő
   hibernate: Hibernálás
-  lock: Lock
+  lock: Zárolás
   log_out: Kijelentkezés
-  power: Hatalom
-  restart: Újrakezd
-  shutdown: Leállitás
-  sleep: Alvás
+  power: Kikapcsolás
+  restart: Újraindítás
+  shutdown: Leállítás
+  sleep: Alvó mód
   title: Beállítások
+
 tray:
-  empty: 'Nincsenek tálcaelemek (Megjegyzés: a Windows 10 nem implementált)'
-  unlabeled: Címkézetlen tálca ikon
+  empty: 'Nincsenek tálcaelemek (Megjegyzés: Windows 10 nem támogatott)'
+  unlabeled: Címkézetlen tálcaikon
+
 userhome:
-  empty_list: Nincsenek tételek
+  empty_list: Nincs megjeleníthető elem
   folders:
-    desktop: Asztali
+    desktop: Asztal
     documents: Dokumentumok
     downloads: Letöltések
-    more_items: További részletek...
+    more_items: További elemek...
     music: Zene
     pictures: Képek
-    recent: Nemrégiben használt
-    reduce_items: Kevesebb mutatása...
-    title: Felhasználói könyvtárak
+    recent: Legutóbb használt
+    reduce_items: Kevesebb elem...
+    title: Felhasználói mappák
     videos: Videók
   profile:
-    accounts: Nyitott számla beállításai
-    open_onedrive: OneDrive könyvtár megnyitása
-    open_user_folder: Felhasználói könyvtár megnyitása
+    accounts: Fiókbeállítások megnyitása
+    open_onedrive: OneDrive mappa megnyitása
+    open_user_folder: Felhasználói mappa megnyitása
   seelen_options:
-    open_installation_folder: Nyissa meg a Seelen beállítások mappát
-    open_log_folder: Nyissa meg a Seelen log mappát
-    title: Seelen könyvtárak
+    open_installation_folder: Seelen beállítások mappájának megnyitása
+    open_log_folder: Seelen napló mappájának megnyitása
+    title: Seelen mappák
