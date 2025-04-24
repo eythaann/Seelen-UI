@@ -57,7 +57,6 @@ impl SeelenWall {
         .visible(false)
         .disable_drag_drop_handler()
         .skip_taskbar(true)
-        .focused(false)
         // idk why I add this but lively wallpaper has it XD
         // .additional_browser_args("--disk-cache-size=1 --disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection")
         .build()?;

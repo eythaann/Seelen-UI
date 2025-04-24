@@ -126,7 +126,6 @@ pub fn check_for_webview_optimal_state(app: &tauri::AppHandle) -> Result<()> {
         tauri::WebviewUrl::App("integrity/index.html".into()),
     )
     .visible(false)
-    .focused(false)
     .build()?;
     window.hwnd()?; // build could not fail so we check for the handle.
     window.destroy()?; // close the fake window

@@ -78,7 +78,6 @@ impl SeelenRofi {
         .skip_taskbar(true)
         .drag_and_drop(false)
         .always_on_top(true)
-        .focused(false)
         .build()?;
 
         Ok(window)

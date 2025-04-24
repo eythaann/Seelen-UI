@@ -69,7 +69,6 @@ impl WindowManagerV2 {
         .skip_taskbar(true)
         .drag_and_drop(false)
         .always_on_top(true)
-        .focused(false)
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
