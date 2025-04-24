@@ -131,6 +131,8 @@ header:
     shortcuts: Amashoshothi
     specific_apps: Izinhlelo zokusebenza ezikhethekile
     virtual_desk: Ama-Virtual Desktops
+home:
+  new_resources: Izinsizakusebenza ezintsha
 inherit: Dla ifa
 inProgress: Kuyaqhubeka...
 insert: Faka
@@ -148,6 +150,7 @@ quit: Yeka
 remove: Susa
 save: Hlenga
 save_and_restart: Gcina futhi Qalisa kabusha
+see_more: Buka Okuningi
 shortcuts:
   enable: Nika amandla izinqamuleli ezihlanganisiwe (Ahk)
   enable_tooltip: >-

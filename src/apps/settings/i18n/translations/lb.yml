@@ -129,6 +129,8 @@ header:
     shortcuts: Ofkierpsen
     specific_apps: Spezifesch Apps
     virtual_desk: Virtuell Desktops
+home:
+  new_resources: Nei Insidder
 inherit: Ontherrit
 inProgress: A Beaarbechtung...
 insert: INor andafen
@@ -146,6 +148,7 @@ quit: Ness
 remove: Ofwäschen
 save: Spuerwäit
 save_and_restart: Spuert & nei starten
+see_more: Méi gesinn
 shortcuts:
   enable: Aktivéiert integréiert Ofkiirzungen (AHK)
   enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API

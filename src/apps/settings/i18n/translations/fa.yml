@@ -131,6 +131,8 @@ header:
     shortcuts: میانبرها
     specific_apps: برنامه های خاص
     virtual_desk: دسک تاپ مجازی
+home:
+  new_resources: منابع جدید
 inherit: ارث
 inProgress: در حال پیش رفت...
 insert: درج کردن
@@ -148,6 +150,7 @@ quit: ترک
 remove: برداشتن
 save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
+see_more: بیشتر ببینید
 shortcuts:
   enable: میانبرهای یکپارچه (AHK) را فعال کنید
   enable_tooltip: >-

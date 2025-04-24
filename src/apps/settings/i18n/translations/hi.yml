@@ -131,6 +131,8 @@ header:
     shortcuts: शॉर्टकट
     specific_apps: विशिष्ट ऐप्स
     virtual_desk: आभासी डेस्कटॉप्स
+home:
+  new_resources: नए संसाधन
 inherit: इनहेरिट
 inProgress: प्रगति पर है...
 insert: डालना
@@ -148,6 +150,7 @@ quit: छोड़ना
 remove: निकालना
 save: बचाना
 save_and_restart: सहेजें और पुनरारंभ करें
+see_more: और देखें
 shortcuts:
   enable: एकीकृत शॉर्टकट (AHK) सक्षम करें
   enable_tooltip: >-

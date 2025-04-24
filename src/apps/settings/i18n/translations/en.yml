@@ -128,6 +128,8 @@ header:
     shortcuts: Shortcuts
     specific_apps: Specific Apps
     virtual_desk: Virtual Desktops
+home:
+  new_resources: New Resources
 inherit: Inherit
 inProgress: In Progress...
 insert: Insert
@@ -145,6 +147,7 @@ quit: Quit
 remove: Remove
 save: Save
 save_and_restart: Save & Restart
+see_more: See More
 shortcuts:
   enable: Enable Integrated Shortcuts (ahk)
   enable_tooltip: Disable if you will implement your own shortcuts using the Seelen Core Api

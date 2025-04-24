@@ -129,6 +129,8 @@ header:
     shortcuts: شارٹ کٹ
     specific_apps: مخصوص ایپس
     virtual_desk: ورچوئل ڈیسک ٹاپس
+home:
+  new_resources: نئے وسائل
 inherit: وراثت
 inProgress: کام جاری ہے...
 insert: داخل کریں
@@ -146,6 +148,7 @@ quit: چھوڑ دیں
 remove: ہٹا دیں
 save: محفوظ کریں
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
+see_more: مزید دیکھیں
 shortcuts:
   enable: مربوط شارٹ کٹ (اے ایچ کے) کو فعال کریں
   enable_tooltip: >-

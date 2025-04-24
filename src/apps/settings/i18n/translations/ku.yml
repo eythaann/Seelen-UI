@@ -129,6 +129,8 @@ header:
     shortcuts: Kurtefîlm
     specific_apps: Serlêdanên taybetî
     virtual_desk: Desktopên Virtual
+home:
+  new_resources: Resourcesavkaniyên nû
 inherit: Mîratgirtin
 inProgress: Ez teslîm nabim...
 insert: Lêzêdekirin
@@ -146,6 +148,7 @@ quit: Devjêberdan
 remove: Dûrxistin
 save: Rizgarkirin
 save_and_restart: Save & Restart
+see_more: Bêtir bibînin
 shortcuts:
   enable: Kurtefîlmên entegre (AHK) çalak bikin
   enable_tooltip: >-

@@ -125,6 +125,8 @@ header:
     shortcuts: ショートカットキー
     specific_apps: アプリごとの設定
     virtual_desk: 仮想デスクトップ
+home:
+  new_resources: 新しいリソース
 inherit: 継承
 inProgress: 近日実装予定...
 insert: 挿入
@@ -142,6 +144,7 @@ quit: 終了
 remove: 取り除く
 save: 保存
 save_and_restart: 保存して再起動
+see_more: もっと見る
 shortcuts:
   enable: AutoHotkeyを使用した統合ショートカットを有効にする
   enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください。

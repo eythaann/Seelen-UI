@@ -133,6 +133,8 @@ header:
     shortcuts: Mga shortcut
     specific_apps: Tukoy na apps
     virtual_desk: Mga Virtual Desktop
+home:
+  new_resources: Mga bagong mapagkukunan
 inherit: Magmana
 inProgress: Sa pag -unlad ...
 insert: Ipasok
@@ -150,6 +152,7 @@ quit: Huminto ka
 remove: Alisin
 save: I -save
 save_and_restart: I -save at i -restart
+see_more: Makita pa
 shortcuts:
   enable: Paganahin ang Integrated Shortcut (AHK)
   enable_tooltip: >-

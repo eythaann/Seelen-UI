@@ -129,6 +129,8 @@ header:
     shortcuts: Genveje
     specific_apps: Specifikke apps
     virtual_desk: Virtuelle desktops
+home:
+  new_resources: Nye ressourcer
 inherit: Arve
 inProgress: I gang...
 insert: Indsæt
@@ -146,6 +148,7 @@ quit: Afslut
 remove: Fjerne
 save: Gemme
 save_and_restart: Gem & genstart
+see_more: Se mere
 shortcuts:
   enable: Aktivér integrerede genveje (AHK)
   enable_tooltip: >-

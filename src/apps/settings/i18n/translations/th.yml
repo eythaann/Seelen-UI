@@ -126,6 +126,8 @@ header:
     shortcuts: ทางลัด
     specific_apps: แอพเฉพาะ
     virtual_desk: เดสก์ท็อปเสมือนจริง
+home:
+  new_resources: ทรัพยากรใหม่
 inherit: สืบทอด
 inProgress: กำลังดำเนินการ...
 insert: แทรก
@@ -143,6 +145,7 @@ quit: ล้มเลิก
 remove: ลบ
 save: บันทึก
 save_and_restart: บันทึกและรีสตาร์ท
+see_more: ดูเพิ่มเติม
 shortcuts:
   enable: เปิดใช้งานทางลัดแบบบูรณาการ (AHK)
   enable_tooltip: ปิดการใช้งานหากคุณจะใช้ทางลัดของคุณเองโดยใช้ Seelen Core API

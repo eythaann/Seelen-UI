@@ -129,6 +129,8 @@ header:
     shortcuts: მალსახმობები
     specific_apps: კონკრეტული პროგრამები
     virtual_desk: ვირტუალური სამუშაო მაგიდა
+home:
+  new_resources: ახალი რესურსები
 inherit: მემკვიდრეობით მიღება
 inProgress: Პროგრესირებს...
 insert: ჩასმა
@@ -146,6 +148,7 @@ quit: მიტოვება
 remove: ამოღება
 save: Გადარჩენა
 save_and_restart: შენახვა და გადატვირთვა
+see_more: იხილეთ მეტი
 shortcuts:
   enable: ინტეგრირებული მალსახმობების ჩართვა (AHK)
   enable_tooltip: >-

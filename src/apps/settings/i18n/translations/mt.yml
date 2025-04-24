@@ -131,6 +131,8 @@ header:
     shortcuts: Shortcuts
     specific_apps: Applikazzjonijiet speċifiċi
     virtual_desk: Desktops virtwali
+home:
+  new_resources: Riżorsi ġodda
 inherit: Jirtu
 inProgress: Fil-progress...
 insert: Daħħal
@@ -148,6 +150,7 @@ quit: Nieqaf
 remove: Neħħi
 save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
+see_more: Ara aktar
 shortcuts:
   enable: Enable Shortcuts Integrati (AHK)
   enable_tooltip: Itfi jekk timplimenta s-shortcuts tiegħek stess billi tuża l-API Seelen Core

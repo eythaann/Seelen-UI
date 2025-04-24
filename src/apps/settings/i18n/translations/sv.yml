@@ -129,6 +129,8 @@ header:
     shortcuts: Genvägar
     specific_apps: Specifika appar
     virtual_desk: Virtuella stationära datorer
+home:
+  new_resources: Nya resurser
 inherit: Ärva
 inProgress: Pågående...
 insert: Infoga
@@ -146,6 +148,7 @@ quit: Sluta
 remove: Ta bort
 save: Spara
 save_and_restart: Spara och starta om
+see_more: Se mer
 shortcuts:
   enable: Aktivera integrerade genvägar (AHK)
   enable_tooltip: >-

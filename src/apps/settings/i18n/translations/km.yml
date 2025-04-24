@@ -129,6 +129,8 @@ header:
     shortcuts: ផ្លូវកាត់
     specific_apps: កម្មវិធីជាក់លាក់
     virtual_desk: ផ្ទៃតុនិម្មិត
+home:
+  new_resources: ធនធានថ្មី
 inherit: តតយលមរតក
 inProgress: កំពុង​ដំណើរការ...
 insert: រចក
@@ -146,6 +148,7 @@ quit: ឈប់
 remove: រមកមិ avad ចេញ
 save: រក្សាទុក
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
+see_more: មើលច្រើនទៀត
 shortcuts:
   enable: បើកផ្លូវកាត់រួមបញ្ចូលគ្នា (ahk)
   enable_tooltip: បិទប្រសិនបើអ្នកនឹងអនុវត្តផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើ Seelen Core Api

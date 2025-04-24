@@ -129,6 +129,8 @@ header:
     shortcuts: Kortpaaie
     specific_apps: Spesifieke programme
     virtual_desk: Virtuele tafelrekenaars
+home:
+  new_resources: Nuwe hulpbronne
 inherit: Erf
 inProgress: Aan die gang ...
 insert: Invoeg
@@ -146,6 +148,7 @@ quit: Laat vaar
 remove: Verwyder
 save: Red
 save_and_restart: Stoor en herbegin
+see_more: Sien meer
 shortcuts:
   enable: Aktiveer geïntegreerde kortpaaie (AHK)
   enable_tooltip: >-

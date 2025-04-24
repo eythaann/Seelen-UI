@@ -131,6 +131,8 @@ header:
     shortcuts: Saīsnes
     specific_apps: Īpašas lietotnes
     virtual_desk: Virtuālās galddatori
+home:
+  new_resources: Jauni resursi
 inherit: Mantot
 inProgress: Notiek ...
 insert: Ievietot
@@ -148,6 +150,7 @@ quit: Atmest
 remove: Noņemt
 save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
+see_more: Skatīt vairāk
 shortcuts:
   enable: Iespējot integrētus saīsnes (AHK)
   enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API

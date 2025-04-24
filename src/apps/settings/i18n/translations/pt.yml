@@ -129,6 +129,8 @@ header:
     shortcuts: Atalhos
     specific_apps: Aplicativos específicos
     virtual_desk: Desktops virtuais
+home:
+  new_resources: Novos recursos
 inherit: Herdar
 inProgress: Em andamento...
 insert: Inserir
@@ -146,6 +148,7 @@ quit: Desistir
 remove: Remover
 save: Salvar
 save_and_restart: Salve e reinicie
+see_more: Veja mais
 shortcuts:
   enable: Habilitar atalhos integrados (ahk)
   enable_tooltip: Desative se você implementar seus próprios atalhos usando a API Seelen Core

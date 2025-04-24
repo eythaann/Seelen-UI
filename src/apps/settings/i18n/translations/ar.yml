@@ -127,6 +127,8 @@ header:
     shortcuts: الاختصارات
     specific_apps: تطبيقات محددة
     virtual_desk: الكمبيوتر الافتراضي
+home:
+  new_resources: الموارد الجديدة
 inherit: ورث
 inProgress: قيد التنفيذ...
 insert: أدخل
@@ -144,6 +146,7 @@ quit: الخروج
 remove: الحذف
 save: حفظ
 save_and_restart: حفظ وإعد التشغيل
+see_more: شاهد المزيد
 shortcuts:
   enable: فعل الاختصارات (ahk)
   enable_tooltip: قم بتعطيله إذا كنت ستستخدم الاختصارات الخاصة بك باستخدام Seelen Core Api

@@ -129,6 +129,8 @@ header:
     shortcuts: Skratky
     specific_apps: Konkrétne aplikácie
     virtual_desk: Virtuálne stolné počítače
+home:
+  new_resources: Nové zdroje
 inherit: Zdediť
 inProgress: Prebieha ...
 insert: Vložiť
@@ -146,6 +148,7 @@ quit: Prestať
 remove: Odložiť
 save: Uložiť
 save_and_restart: Uložiť a reštartovať
+see_more: Pozri viac
 shortcuts:
   enable: Povoliť integrované skratky (AHK)
   enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky

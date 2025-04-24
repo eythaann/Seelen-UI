@@ -131,6 +131,8 @@ header:
     shortcuts: Преки пътища
     specific_apps: Конкретни приложения
     virtual_desk: Виртуални настолни компютри
+home:
+  new_resources: Нови ресурси
 inherit: Наследяване
 inProgress: В ход ...
 insert: Вмъкнете
@@ -148,6 +150,7 @@ quit: Напусна
 remove: Извадете
 save: Запазете
 save_and_restart: Запазване и рестартиране
+see_more: Вижте повече
 shortcuts:
   enable: Активиране на интегрирани преки пътища (AHK)
   enable_tooltip: >-

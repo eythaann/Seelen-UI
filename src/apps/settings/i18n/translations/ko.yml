@@ -126,6 +126,8 @@ header:
     shortcuts: 단축키
     specific_apps: 개별 앱 설정
     virtual_desk: 가상 데스크톱
+home:
+  new_resources: 새로운 리소스
 inherit: 상속
 inProgress: 진행 중...
 insert: 추가
@@ -143,6 +145,7 @@ quit: 종료
 remove: 제거
 save: 저장
 save_and_restart: 저장 및 재시작
+see_more: 자세히 보기
 shortcuts:
   enable: 통합 단축키 (ahk) 활성화
   enable_tooltip: Seelen Core API를 사용하여 자체 단축키를 구현할 경우 비활성화하세요

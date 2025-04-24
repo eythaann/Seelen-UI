@@ -35,8 +35,8 @@ apps_configurations:
     workspace_placeholder: Žádný
   bundled_msg: >-
     Tyto sdružené konfigurace nejsou upravitelné a jsou navrženy tak, aby vám
-    poskytly nejlepší zkušenost bez přizpůsobení. Automaticky pro 
-    Vás nakonfigurují nejběžnější aplikace.
+    poskytly nejlepší zkušenost bez přizpůsobení. Automaticky pro  Vás
+    nakonfigurují nejběžnější aplikace.
   bundled_title: Konfigurace aplikace spojená s Seelen
   confirm_delete: Určitě chcete tuto konfiguraci smazat?
   confirm_delete_title: Potvrďte smazání
@@ -44,9 +44,9 @@ apps_configurations:
   export: Exportovat
   extra_info: >-
     SEELEN UI používá pouze jeden identifikátor na aplikaci (první nalezený), 
-    takže pořadí v tom, jak jsou specifikovány, je důležité, nejnovější
-    přidaná bude upřednostňována, protože tabulka je ve výchozím
-    nastavení tříděna od nejnovější po nejstarší.
+    takže pořadí v tom, jak jsou specifikovány, je důležité, nejnovější přidaná
+    bude upřednostňována, protože tabulka je ve výchozím nastavení tříděna od
+    nejnovější po nejstarší.
   identifier:
     add_block: Přidat blok
     and: A
@@ -129,6 +129,8 @@ header:
     shortcuts: Zkratky
     specific_apps: Konkrétní aplikace
     virtual_desk: Virtuální stolní počítače
+home:
+  new_resources: Nové zdroje
 inherit: Zdědit
 inProgress: Probíhá ...
 insert: Vložit
@@ -146,6 +148,7 @@ quit: Přestat
 remove: Odstranit
 save: Uložit
 save_and_restart: Uložit a restartovat
+see_more: Viz více
 shortcuts:
   enable: Povolit integrované zkratky (AHK)
   enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí Seelen Core API
@@ -219,10 +222,10 @@ sides:
   top: Svršek
 start:
   message: >-
-    Vítejte v SEELEN UI, Ultimate Desktop Environment s začleněným
-    manažerem oken, aby se zlepšil Vaší zkušenost se systémem Windows!
-    Objevte novou éru účinnosti a multitaskingu s naším intuitivním
-    rozhraním a pokročilými funkcemi.
+    Vítejte v SEELEN UI, Ultimate Desktop Environment s začleněným manažerem
+    oken, aby se zlepšil Vaší zkušenost se systémem Windows! Objevte novou éru
+    účinnosti a multitaskingu s naším intuitivním rozhraním a pokročilými
+    funkcemi.
   message_accent: Optimalizujte svou produktivitu se stylem!
   title: Vítejte!
 toolbar:
@@ -248,9 +251,7 @@ update:
   channel: Aktualizovat kanál
   downloading: Stahování ...
 vd:
-  disabled_windows_version: >-
-    Nativní strategie virtuální plochy není pro vaši verzi Windows
-    k dispozici.
+  disabled_windows_version: Nativní strategie virtuální plochy není pro vaši verzi Windows k dispozici.
   strategy:
     label: Strategie virtuální plochy
     native: Nativní

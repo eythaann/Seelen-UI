@@ -130,6 +130,8 @@ header:
     shortcuts: Phím tắt
     specific_apps: Ứng dụng cụ thể
     virtual_desk: Máy tính để bàn ảo
+home:
+  new_resources: Tài nguyên mới
 inherit: Kế thừa
 inProgress: Trong tiến trình...
 insert: Chèn
@@ -147,6 +149,7 @@ quit: Từ bỏ
 remove: Di dời
 save: Cứu
 save_and_restart: Lưu & Khởi động lại
+see_more: Xem thêm
 shortcuts:
   enable: Bật các phím tắt tích hợp (AHK)
   enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core

@@ -128,6 +128,8 @@ header:
     shortcuts: لنډوکونه
     specific_apps: ځانګړي اطلاقات
     virtual_desk: مجازی ډیسټاپونه
+home:
+  new_resources: نوې سرچينې
 inherit: میراث
 inProgress: د پرمختګ په حال کې...
 insert: دننه کړئ
@@ -145,6 +147,7 @@ quit: پرېښودل
 remove: لرې کول
 save: خوندي کړئ
 save_and_restart: خوندي کول او بیا پیل کړئ
+see_more: نور وګوره
 shortcuts:
   enable: مدغم شوي لنډیزونه (اه)
   enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ

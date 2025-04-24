@@ -129,6 +129,8 @@ header:
     shortcuts: సత్వరమార్గాలు
     specific_apps: నిర్దిష్ట యాప్‌లు
     virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
+home:
+  new_resources: కొత్త వనరులు
 inherit: వారసత్వంగా
 inProgress: పురోగతిలో ఉంది...
 insert: చొప్పించండి
@@ -146,6 +148,7 @@ quit: నిష్క్రమించు
 remove: తొలగించండి
 save: సేవ్ చేయండి
 save_and_restart: సేవ్ & పున art ప్రారంభించండి
+see_more: మరిన్ని చూడండి
 shortcuts:
   enable: ఇంటిగ్రేటెడ్ షార్ట్‌కట్‌లను ప్రారంభించండి (ahk)
   enable_tooltip: >-

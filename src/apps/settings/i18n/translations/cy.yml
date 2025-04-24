@@ -129,6 +129,8 @@ header:
     shortcuts: Llwybrau byr
     specific_apps: Apiau penodol
     virtual_desk: Penbyrddau Rhithwir
+home:
+  new_resources: Adnoddau Newydd
 inherit: Hetifedd
 inProgress: Ar y gweill...
 insert: Mewnosodem
@@ -146,6 +148,7 @@ quit: Gadawen
 remove: Godon
 save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
+see_more: Gweld mwy
 shortcuts:
   enable: Galluogi llwybrau byr integredig (AHK)
   enable_tooltip: >-

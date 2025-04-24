@@ -130,6 +130,8 @@ header:
     shortcuts: Parancsikonok
     specific_apps: Konkrét alkalmazások
     virtual_desk: Virtuális asztali számítógépek
+home:
+  new_resources: Új források
 inherit: Örököl
 inProgress: Folyamatban...
 insert: Beilleszt
@@ -147,6 +149,7 @@ quit: Kilépés
 remove: Eltávolítás
 save: Megment
 save_and_restart: Mentés és újraindítás
+see_more: Lásd még
 shortcuts:
   enable: Engedélyezze az integrált parancsikonokat (AHK)
   enable_tooltip: >-

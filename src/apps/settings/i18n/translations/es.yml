@@ -131,6 +131,8 @@ header:
     shortcuts: Atajos
     specific_apps: Aplicaciones específicas
     virtual_desk: Escritorios virtuales
+home:
+  new_resources: Nuevos recursos
 inherit: Heredar
 inProgress: En curso...
 insert: Inserte
@@ -148,6 +150,7 @@ quit: Deje de
 remove: Eliminar
 save: Guardar
 save_and_restart: Guardar y reiniciar
+see_more: Ver más
 shortcuts:
   enable: Activar accesos directos integrados (ahk)
   enable_tooltip: >-
@@ -265,9 +268,7 @@ wall:
   hours: horas
   interval: Cambia el fondo de pantalla cada
   minutes: minutos
-  no_background: >-
-    Presentación de fondos vacía, utilizando el fondo del tema en su
-    lugar.
+  no_background: Presentación de fondos vacía, utilizando el fondo del tema en su lugar.
   random: Cambio de fondo aleatorio
   seconds: segundos
 weg:

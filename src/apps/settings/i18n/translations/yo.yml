@@ -127,6 +127,8 @@ header:
     shortcuts: Awọn ọna abuja
     specific_apps: Apps Pataki
     virtual_desk: Awọn orisun itẹwe foju
+home:
+  new_resources: Awọn orisun Tuntun
 inherit: Jogun
 inProgress: Ni ilọsiwaju ...
 insert: Fisi
@@ -144,6 +146,7 @@ quit: Lọ kuro
 remove: Yọkuro
 save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
+see_more: Wo diẹ sii
 shortcuts:
   enable: Mu awọn ọna abuja ti o sopọ mọ (Ahk)
   enable_tooltip: Muu Ti o ba yoo ṣe awọn ọna abuja tirẹ nipa lilo APEN mojuto API

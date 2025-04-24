@@ -131,6 +131,8 @@ header:
     shortcuts: Yorliqlar
     specific_apps: Muayyan ilovalar
     virtual_desk: Virtual ish stollari
+home:
+  new_resources: Yangi manbalar
 inherit: Meros qilib olmoq
 inProgress: Jarayonda...
 insert: Qo'shmoq
@@ -148,6 +150,7 @@ quit: Ketmoq
 remove: Olib tashlamoq
 save: Tejash
 save_and_restart: Saqlang va qayta yoqing
+see_more: Ko'proq ko'rish
 shortcuts:
   enable: Birlashtirilgan yorliqlarni yoqish (AHK)
   enable_tooltip: >-

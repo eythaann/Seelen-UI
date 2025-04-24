@@ -127,6 +127,8 @@ header:
     shortcuts: ທາງລັດ
     specific_apps: ແອັບສະເພາະ
     virtual_desk: virtual desktops
+home:
+  new_resources: ຊັບພະຍາກອນໃຫມ່
 inherit: ມູນມໍລະດົກ
 inProgress: ຢູ່ໃນຄວາມຄືບໜ້າ...
 insert: ຊອນເຂົ້າ
@@ -144,6 +146,7 @@ quit: ເຊົາ
 remove: ເອົາອອກ
 save: ບັນທຶກ
 save_and_restart: ບັນທຶກແລະ Restart
+see_more: ເບິ່ງເພີ່ມເຕີມ
 shortcuts:
   enable: ເປີດໃຊ້ທາງລັດປະສົມປະສານ (ahk)
   enable_tooltip: ປິດໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ Seelen Core Api

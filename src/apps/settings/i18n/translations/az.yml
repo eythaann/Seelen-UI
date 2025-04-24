@@ -128,6 +128,8 @@ header:
     shortcuts: Qısaylıq
     specific_apps: Xüsusi tətbiqlər
     virtual_desk: Virtual masaüstü
+home:
+  new_resources: Yeni mənbələr
 inherit: Varis olmaq
 inProgress: Davam edir ...
 insert: Daxil etmək
@@ -145,6 +147,7 @@ quit: Çıxmaq
 remove: Çıxarmaq
 save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
+see_more: Daha çoxuna baxın
 shortcuts:
   enable: İnteqrasiya edilmiş qısa yolları (AHK) aktivləşdirin
   enable_tooltip: >-

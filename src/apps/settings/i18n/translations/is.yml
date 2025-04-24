@@ -129,6 +129,8 @@ header:
     shortcuts: Flýtileiðir
     specific_apps: Sérstök forrit
     virtual_desk: Sýndarskjáborð
+home:
+  new_resources: Ný úrræði
 inherit: Erfa
 inProgress: Í vinnslu...
 insert: Settu inn
@@ -146,6 +148,7 @@ quit: Hættu
 remove: Fjarlægðu
 save: Vista
 save_and_restart: Vista og endurræsa
+see_more: Sjáðu meira
 shortcuts:
   enable: Virkja samþætta flýtileiðir (AHK)
   enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API

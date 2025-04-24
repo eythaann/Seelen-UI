@@ -129,6 +129,8 @@ header:
     shortcuts: Миёнбурҳо
     specific_apps: Барномаҳои мушаххас
     virtual_desk: Мизи кории виртуалӣ
+home:
+  new_resources: Захираҳои нав
 inherit: Мерос гирифтан
 inProgress: Дар ҷараён...
 insert: Илова кардан
@@ -146,6 +148,7 @@ quit: Баромадан
 remove: Дур кардан
 save: Пул захира кардан
 save_and_restart: Наҷот ва бозоғоз
+see_more: Бештар нигаред
 shortcuts:
   enable: Миёнабурҳои ҳамгирошударо фаъол созед (AHK)
   enable_tooltip: Агар шумо миёнабурҳои худро бо истифода аз Seelen Cear Secten истифода баред

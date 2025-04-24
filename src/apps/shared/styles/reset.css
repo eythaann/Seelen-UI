@@ -27,7 +27,7 @@
   }
 
   /* these are unique for desktop apps using webview */
-  :not(a):not(input):not(textarea) {
+  :not(a):not(a *):not(input):not(textarea) {
     cursor: default !important;
   }
 

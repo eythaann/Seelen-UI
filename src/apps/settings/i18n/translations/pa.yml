@@ -125,6 +125,8 @@ header:
     shortcuts: ਸ਼ਾਰਟਕੱਟ
     specific_apps: ਖਾਸ ਐਪਸ
     virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
+home:
+  new_resources: ਨਵੇਂ ਸਰੋਤ
 inherit: ਵਿਰਾਸਤ
 inProgress: ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ...
 insert: ਸੰਮਿਲਿਤ ਕਰੋ
@@ -142,6 +144,7 @@ quit: ਛੱਡੋ
 remove: ਹਟਾਓ
 save: ਸੇਵ ਕਰੋ
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
+see_more: ਹੋਰ ਦੇਖੋ
 shortcuts:
   enable: ਏਕੀਕ੍ਰਿਤ ਸ਼ਾਰਟਕੱਟ (ahk) ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   enable_tooltip: >-

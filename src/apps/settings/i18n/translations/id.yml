@@ -131,6 +131,8 @@ header:
     shortcuts: Pintasan
     specific_apps: Aplikasi tertentu
     virtual_desk: Desktop virtual
+home:
+  new_resources: Sumber Daya Baru
 inherit: Mewarisi
 inProgress: Sedang berlangsung...
 insert: Menyisipkan
@@ -148,6 +150,7 @@ quit: Berhenti
 remove: Menghapus
 save: Menyimpan
 save_and_restart: Simpan & restart
+see_more: Lihat Lebih Lanjut
 shortcuts:
   enable: Aktifkan pintasan terintegrasi (AHK)
   enable_tooltip: >-

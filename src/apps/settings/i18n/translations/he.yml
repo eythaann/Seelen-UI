@@ -127,6 +127,8 @@ header:
     shortcuts: קיצורי דרך
     specific_apps: אפליקציות ספציפיות
     virtual_desk: שולחנות עבודה וירטואליים
+home:
+  new_resources: משאבים חדשים
 inherit: לָרֶשֶׁת
 inProgress: בתהליך...
 insert: לְהַכנִיס
@@ -144,6 +146,7 @@ quit: לְהַפְסִיק
 remove: לְהַסִיר
 save: להציל
 save_and_restart: שמור והפעלה מחדש
+see_more: ראה עוד
 shortcuts:
   enable: אפשר קיצורי דרך משולבים (AHK)
   enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core

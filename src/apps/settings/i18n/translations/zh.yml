@@ -122,6 +122,8 @@ header:
     shortcuts: 快捷键
     specific_apps: 特定应用程序
     virtual_desk: 虚拟桌面
+home:
+  new_resources: 新资源
 inherit: 继承
 inProgress: 进行中...
 insert: 插入
@@ -139,6 +141,7 @@ quit: 退出
 remove: 消除
 save: 保存
 save_and_restart: 保存并重启应用
+see_more: 查看更多
 shortcuts:
   enable: 启用集成快捷键 (ahk)
   enable_tooltip: 如果您要使用 Seelen Core API 实现自定义快捷键，请禁用此项。

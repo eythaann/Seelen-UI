@@ -130,6 +130,8 @@ header:
     shortcuts: குறுக்குவழிகள்
     specific_apps: குறிப்பிட்ட பயன்பாடுகள்
     virtual_desk: மெய்நிகர் டெஸ்க்டாப்புகள்
+home:
+  new_resources: புதிய வளங்கள்
 inherit: மரபு
 inProgress: செயல்பாட்டில் உள்ளது...
 insert: செருகவும்
@@ -147,6 +149,7 @@ quit: விட்டுவிட
 remove: அகற்று
 save: சேமிக்கவும்
 save_and_restart: சேமிக்கவும் மறுதொடக்கம் செய்யவும்
+see_more: மேலும் காண்க
 shortcuts:
   enable: ஒருங்கிணைந்த குறுக்குவழிகளை இயக்கு (ahk)
   enable_tooltip: >-

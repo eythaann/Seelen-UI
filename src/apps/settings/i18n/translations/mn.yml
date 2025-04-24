@@ -130,6 +130,8 @@ header:
     shortcuts: Хэв хаягдал
     specific_apps: ТУСГАЙ АЖИЛЛАГАА
     virtual_desk: Виржопын ширээний гутал
+home:
+  new_resources: Шинэ нөөц
 inherit: Удамших
 inProgress: Явагдаж байна ...
 insert: Оруулах
@@ -147,6 +149,7 @@ quit: Орхих
 remove: Зөөх
 save: Аврах
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
+see_more: Дэлгэрэнгүйг үзэх
 shortcuts:
   enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
   enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго

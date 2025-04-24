@@ -129,6 +129,8 @@ header:
     shortcuts: Snarveier
     specific_apps: Spesifikke apper
     virtual_desk: Virtuelle stasjonære maskiner
+home:
+  new_resources: Nye ressurser
 inherit: Arve
 inProgress: I prosess...
 insert: Sett inn
@@ -146,6 +148,7 @@ quit: Slutte
 remove: Fjerne
 save: Lagre
 save_and_restart: Lagre og start på nytt
+see_more: Se mer
 shortcuts:
   enable: Aktiver integrerte snarveier (AHK)
   enable_tooltip: >-

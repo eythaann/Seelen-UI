@@ -132,6 +132,8 @@ header:
     shortcuts: Gaaban
     specific_apps: Barnaamijyo gaar ah
     virtual_desk: Desktops Virtual
+home:
+  new_resources: Kheyraadka cusub
 inherit: Dhaxlid
 inProgress: Horusocod ...
 insert: Gelin
@@ -149,6 +151,7 @@ quit: Joojin
 remove: Ka qaadid
 save: Badbaadin
 save_and_restart: Badbaadin & Dib u bilow
+see_more: Arag in dheeraad ah
 shortcuts:
   enable: U fududee fulinta isku dhafan ee isku dhafan (Ahk)
   enable_tooltip: >-

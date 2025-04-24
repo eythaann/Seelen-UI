@@ -127,6 +127,8 @@ header:
     shortcuts: አቋራጮች
     specific_apps: የተወሰኑ መተግበሪያዎች
     virtual_desk: ምናባዊ ዴስክቶፕስ
+home:
+  new_resources: አዲስ ሀብቶች
 inherit: ውርስ
 inProgress: በሂደት ላይ...
 insert: ያስገቡ
@@ -144,6 +146,7 @@ quit: አቁም
 remove: ያስወግዱ
 save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
+see_more: ተጨማሪ ይመልከቱ
 shortcuts:
   enable: የተቀናጁ አቋራጮችን (AHK)
   enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ

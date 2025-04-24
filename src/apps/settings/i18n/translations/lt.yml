@@ -129,6 +129,8 @@ header:
     shortcuts: Nuorodos
     specific_apps: Konkrečios programos
     virtual_desk: Virtualūs staliniai kompiuteriai
+home:
+  new_resources: Nauji ištekliai
 inherit: Paveldėti
 inProgress: Vyksta ...
 insert: Įterpti
@@ -146,6 +148,7 @@ quit: Mesti
 remove: Pašalinti
 save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
+see_more: Žiūrėti daugiau
 shortcuts:
   enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“

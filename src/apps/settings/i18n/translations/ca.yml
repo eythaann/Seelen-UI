@@ -129,6 +129,8 @@ header:
     shortcuts: Dreceres
     specific_apps: Aplicacions específiques
     virtual_desk: Desktops virtuals
+home:
+  new_resources: Recursos nous
 inherit: Heretar
 inProgress: En progrés...
 insert: Inserir
@@ -146,6 +148,7 @@ quit: Abandonar
 remove: Treure
 save: Estalviar
 save_and_restart: Desar i reiniciar
+see_more: Veure més
 shortcuts:
   enable: Activa les dreceres integrades (AHK)
   enable_tooltip: >-

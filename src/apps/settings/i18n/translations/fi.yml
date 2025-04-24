@@ -131,6 +131,8 @@ header:
     shortcuts: Pikakuvakkeet
     specific_apps: Erityiset sovellukset
     virtual_desk: Virtuaalinen työpöytä
+home:
+  new_resources: Uudet resurssit
 inherit: Periä
 inProgress: Käynnissä...
 insert: Lisätä
@@ -148,6 +150,7 @@ quit: Lopettaa
 remove: Poistaa
 save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
+see_more: Katso lisää
 shortcuts:
   enable: Ota integroidut pikakuvakkeet käyttöön (AHK)
   enable_tooltip: >-

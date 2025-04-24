@@ -128,6 +128,8 @@ header:
     shortcuts: Njia za mkato
     specific_apps: Programu maalum
     virtual_desk: Dawati za kweli
+home:
+  new_resources: Rasilimali mpya
 inherit: Urithi
 inProgress: Inaendelea...
 insert: Ingiza
@@ -145,6 +147,7 @@ quit: Acha
 remove: Ondoa
 save: Kuokoa
 save_and_restart: Okoa na uanze tena
+see_more: Tazama zaidi
 shortcuts:
   enable: Wezesha njia za mkato zilizojumuishwa (AHK)
   enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core

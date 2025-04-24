@@ -130,6 +130,8 @@ header:
     shortcuts: කෙටිමං
     specific_apps: විශේෂිත යෙදුම්
     virtual_desk: අතථ්ය ඩෙස්ක්ටොප්
+home:
+  new_resources: නව සම්පත්
 inherit: උරුම වේ
 inProgress: ප්රගතියේ...
 insert: ඇතුළු කරන්න
@@ -147,6 +149,7 @@ quit: ඉවත්
 remove: ඉවත් කරන්න
 save: සුරකින්න
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
+see_more: තවත් බලන්න
 shortcuts:
   enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
   enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න

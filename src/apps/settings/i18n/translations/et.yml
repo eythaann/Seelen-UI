@@ -128,6 +128,8 @@ header:
     shortcuts: Otseteed
     specific_apps: Konkreetsed rakendused
     virtual_desk: Virtuaalsed töölauad
+home:
+  new_resources: Uued ressursid
 inherit: Pärima
 inProgress: Pooleli ...
 insert: Sisestama
@@ -145,6 +147,7 @@ quit: Loobuma
 remove: Eemaldama
 save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
+see_more: Vaata lähemalt
 shortcuts:
   enable: Lubage integreeritud otseteed (AHK)
   enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d

@@ -129,6 +129,8 @@ header:
     shortcuts: Scorciatoie
     specific_apps: App Specifiche
     virtual_desk: Desktop Virtuali
+home:
+  new_resources: Nuove risorse
 inherit: Eredita
 inProgress: In corso...
 insert: Inserisci
@@ -146,6 +148,7 @@ quit: Esci
 remove: Rimuovi
 save: Salva
 save_and_restart: Salva e Riavvia
+see_more: Per saperne di più
 shortcuts:
   enable: Abilita Scorciatoie Integrate (ahk)
   enable_tooltip: Disabilita se implementerete le vostre scorciatoie usando l'API Seelen Core

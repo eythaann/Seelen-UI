@@ -131,6 +131,8 @@ header:
     shortcuts: Сочетания клавиш
     specific_apps: Приложения
     virtual_desk: Виртуальные рабочие столы
+home:
+  new_resources: Новые ресурсы
 inherit: Наследовать
 inProgress: В процессе...
 insert: Вставить
@@ -148,6 +150,7 @@ quit: Закрыть
 remove: Удалить
 save: Сохранить
 save_and_restart: Сохранить и перезапустить
+see_more: См. подробнее
 shortcuts:
   enable: Включить встроенные сочетания клавиши (ahk)
   enable_tooltip: >-
@@ -236,7 +239,8 @@ toolbar:
   dock_side: Позиция
   dynamic_color: Динамический цвет
   dynamic_color_tooltip: >-
-    Динамическая подстройка цвета под активное окно (темы могут переопределять цвета).
+    Динамическая подстройка цвета под активное окно (темы могут переопределять
+    цвета).
   enable: Включить
   height: Высота
   hide_mode:

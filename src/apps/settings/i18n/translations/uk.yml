@@ -129,6 +129,8 @@ header:
     shortcuts: Сполучення клавіш
     specific_apps: Конкретні програми
     virtual_desk: Віртуальні робочі столи
+home:
+  new_resources: Нові ресурси
 inherit: Успадкувати
 inProgress: В процесі...
 insert: Вставити
@@ -146,6 +148,7 @@ quit: Вийти
 remove: Видалити
 save: Зберегти
 save_and_restart: Зберегти та перезапустити
+see_more: Побачити більше
 shortcuts:
   enable: Увімкнути інтегровані сполучення клавіш (ahk)
   enable_tooltip: Вимкніть, якщо ви реалізуєте власні сполучення за допомогою API Seelen Core

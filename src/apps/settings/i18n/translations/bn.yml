@@ -131,6 +131,8 @@ header:
     shortcuts: শর্টকাটস
     specific_apps: নির্দিষ্ট অ্যাপ্লিকেশন
     virtual_desk: ভার্চুয়াল ডেস্কটপস
+home:
+  new_resources: নতুন সংস্থান
 inherit: উত্তরাধিকারী
 inProgress: চলমান...
 insert: .োকান
@@ -148,6 +150,7 @@ quit: প্রস্থান
 remove: সরান
 save: সংরক্ষণ
 save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
+see_more: আরও দেখুন
 shortcuts:
   enable: ইন্টিগ্রেটেড শর্টকাটগুলি সক্ষম করুন (এএইচকে)
   enable_tooltip: >-

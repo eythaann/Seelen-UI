@@ -129,6 +129,8 @@ header:
     shortcuts: Prečac
     specific_apps: Određene aplikacije
     virtual_desk: Virtualna radna računala
+home:
+  new_resources: Novi resursi
 inherit: Naslijediti
 inProgress: U nastajanju...
 insert: Umetnuti
@@ -146,6 +148,7 @@ quit: Prestati
 remove: Ukloniti
 save: Uštedjeti
 save_and_restart: Spremi i ponovno pokrenite
+see_more: Pogledajte više
 shortcuts:
   enable: Omogućite integrirane prečace (AHK)
   enable_tooltip: >-

@@ -11,7 +11,6 @@ bluetooth:
   placeholder:
     passphrase: Jelszó, kód vagy PIN
   scanning: Eszközök keresése
-
 context_menu:
   add_module: Modul hozzáadása
   remove: Modul eltávolítása
@@ -19,11 +18,9 @@ context_menu:
   reorder_enable: Eszköztár feloldása
   settings: Beállítások
   task_manager: Feladatkezelő
-
 keyboard:
   more: További billentyűzet-beállítások
   title: Billentyűzetkiosztás
-
 media:
   default_multimedia_volume: Alapértelmezett médiakötet
   device:
@@ -38,7 +35,6 @@ media:
   input_devices: Bemeneti eszközök
   output_devices: Kimeneti eszközök
   players: Médialejátszók
-
 network:
   available: Elérhető hálózatok
   connect: Csatlakozás
@@ -52,13 +48,11 @@ network:
   saved: Mentett hálózatok
   scanning: Hálózatok keresése
   secured: Titkosított hálózat
-
 notifications:
   clear: Összes törlése
   empty: Nincsenek értesítések
   settings: További értesítési beállítások
   title: Értesítések
-
 placeholder:
   battery_remaining: '% van hátra'
   bluetooth_devices: Bluetooth és eszközök
@@ -69,7 +63,6 @@ placeholder:
   settings: Gyorsbeállítások
   smart_charge: ' - Intelligens töltés'
   volume: Hangerő
-
 settings:
   app_settings: Alkalmazásbeállítások
   brightness: Fényerő
@@ -81,11 +74,9 @@ settings:
   shutdown: Leállítás
   sleep: Alvó mód
   title: Beállítások
-
 tray:
   empty: 'Nincsenek tálcaelemek (Megjegyzés: Windows 10 nem támogatott)'
   unlabeled: Címkézetlen tálcaikon
-
 userhome:
   empty_list: Nincs megjeleníthető elem
   folders:

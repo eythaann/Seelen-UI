@@ -129,6 +129,8 @@ header:
     shortcuts: Pintasan
     specific_apps: Aplikasi khusus
     virtual_desk: Desktop maya
+home:
+  new_resources: Sumber baru
 inherit: Mewarisi
 inProgress: Dalam proses ...
 insert: Masukkan
@@ -146,6 +148,7 @@ quit: Berhenti
 remove: Keluarkan
 save: Simpan
 save_and_restart: Jimat & mulakan semula
+see_more: Lihat lagi
 shortcuts:
   enable: Dayakan Pintasan Bersepadu (AHK)
   enable_tooltip: >-

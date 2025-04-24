@@ -1,6 +1,7 @@
 import { Button, Skeleton } from 'antd';
 import { useAnimate } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useInterval } from 'src/apps/shared/hooks';
 import { cx } from 'src/apps/shared/styles';
@@ -46,6 +47,7 @@ export function NoticeSlider() {
   const [currentIdx, setCurrentIdx] = useState<number>(0);
 
   const [scope, animate] = useAnimate<HTMLDivElement>();
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchData() {
@@ -80,7 +82,7 @@ export function NoticeSlider() {
               <p className={cs.message}>{current.message}</p>
               <div className={cs.linkButton}>
                 <Button href={current.url} target="_blank" type="primary">
-                  See More
+                  {t('see_more')}
                 </Button>
               </div>
             </div>

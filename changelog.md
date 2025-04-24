@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add resources endpoint to home tab on settings.
+
 ### enhancements
 - reduce CPU usage on slu-service process.
 

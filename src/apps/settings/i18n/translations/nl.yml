@@ -129,6 +129,8 @@ header:
     shortcuts: Snelkoppelingen
     specific_apps: Specifieke apps
     virtual_desk: Virtuele desktops
+home:
+  new_resources: Nieuwe bronnen
 inherit: Erven
 inProgress: Bezig...
 insert: Invoegen
@@ -146,6 +148,7 @@ quit: Afsluiten
 remove: Verwijderen
 save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
+see_more: Meer zien
 shortcuts:
   enable: Geïntegreerde snelkoppelingen inschakelen (AHK)
   enable_tooltip: >-

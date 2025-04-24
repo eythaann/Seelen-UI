@@ -131,6 +131,8 @@ header:
     shortcuts: Comitete rapide
     specific_apps: Aplicații specifice
     virtual_desk: Desktop -uri virtuale
+home:
+  new_resources: Resurse noi
 inherit: Moşteni
 inProgress: În curs...
 insert: Introduce
@@ -148,6 +150,7 @@ quit: Părăsi
 remove: Elimina
 save: Salvați
 save_and_restart: Salvați și reporniți
+see_more: A se vedea mai mult
 shortcuts:
   enable: Activați comenzi rapide integrate (AHK)
   enable_tooltip: >-

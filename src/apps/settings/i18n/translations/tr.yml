@@ -129,6 +129,8 @@ header:
     shortcuts: Kısayollar
     specific_apps: Belirli Uygulamalar
     virtual_desk: Sanal Masaüstleri
+home:
+  new_resources: Yeni Kaynaklar
 inherit: Devral
 inProgress: Devam Ediyor...
 insert: Ekle
@@ -146,6 +148,7 @@ quit: Çıkış
 remove: Kaldırmak
 save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
+see_more: Daha Fazla Gör
 shortcuts:
   enable: Entegre Kısayolları Etkinleştir (ahk)
   enable_tooltip: >-

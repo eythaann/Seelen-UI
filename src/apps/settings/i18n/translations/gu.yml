@@ -129,6 +129,8 @@ header:
     shortcuts: શૉર્ટકટ્સ
     specific_apps: વિશિષ્ટ એપ્લિકેશનો
     virtual_desk: વર્ચ્યુઅલ ડેસ્કટ .પ
+home:
+  new_resources: નવી સાધનો
 inherit: વારસો મેળવવો
 inProgress: ચાલુ છે...
 insert: દાખલ કરવું
@@ -146,6 +148,7 @@ quit: છોડો
 remove: દૂર કરવું
 save: સાચવો
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
+see_more: વધુ જુઓ
 shortcuts:
   enable: સંકલિત શૉર્ટકટ્સ સક્ષમ કરો (ahk)
   enable_tooltip: >-
