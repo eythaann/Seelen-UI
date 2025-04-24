@@ -66,10 +66,6 @@ export function IconPacks() {
                       <h2 className={cs.title}>
                         <ResourceText text={pack.metadata.displayName} />
                       </h2>
-                      <p>
-                        <b>{t('general.resource.author')}: </b>
-                        <ResourceText text={pack.metadata.author} />
-                      </p>
                       <div className={cs.tagList}>
                         <div>
                           <b>{t('general.resource.tags')}:</b>

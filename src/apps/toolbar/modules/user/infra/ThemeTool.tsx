@@ -1,5 +1,5 @@
 // TODO(lurius): use this file on another module
-import { ResourceMetadata } from '@seelen-ui/lib';
+import { ResourceMetadata } from '@seelen-ui/lib/types';
 import { IconPack, Theme } from '@seelen-ui/lib/types';
 import { Checkbox, Tooltip, Transfer } from 'antd';
 import { TransferItem } from 'antd/es/transfer';
@@ -67,10 +67,6 @@ export function ThemeTool({ dataSource, usingThemes, setSelectedThemes }: ThemeT
                       <h2 className="userhome-quicksettings-themetool-title">
                         <ResourceText text={theme.metadata.displayName} />
                       </h2>
-                      <p>
-                        <b>{t('userhome.seelen_options.theme_selector.author')}: </b>
-                        <ResourceText text={theme.metadata.author} />
-                      </p>
                       <div className="userhome-quicksettings-themetool-tags">
                         <div>
                           <b>{t('userhome.seelen_options.theme_selector.tags')}:</b>

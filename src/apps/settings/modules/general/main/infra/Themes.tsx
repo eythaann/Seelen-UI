@@ -68,10 +68,6 @@ export function Themes() {
                       <h2 className={cs.title}>
                         <ResourceText text={theme.metadata.displayName} />
                       </h2>
-                      <p>
-                        <b>{t('general.resource.author')}: </b>
-                        <ResourceText text={theme.metadata.author} />
-                      </p>
                       <div className={cs.tagList}>
                         <div>
                           <b>{t('general.resource.tags')}:</b>

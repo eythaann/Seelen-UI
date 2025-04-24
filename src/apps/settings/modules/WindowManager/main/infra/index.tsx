@@ -110,10 +110,6 @@ export function WindowManagerSettings() {
           </SettingsOption>
           <div>
             <p>
-              <b>{t('wm.author')}: </b>
-              <ResourceText text={usingLayout?.metadata.author || '-'} />,
-            </p>
-            <p>
               <b>{t('wm.description')}: </b>
               <ResourceText text={usingLayout?.metadata.description || '-'} />,
             </p>
