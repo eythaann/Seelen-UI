@@ -6,6 +6,7 @@ use std::sync::atomic::Ordering;
 
 use clap::{Arg, ArgAction, Command};
 use debugger::CliDebugger;
+use itertools::Itertools;
 use seelen_core::resource::{ResourceKind, SluResourceFile};
 use uuid::Uuid;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
@@ -201,17 +202,27 @@ pub fn process_uri(uri: &str) -> Result<()> {
         return Ok(());
     }
 
-    let raw_content = uri
-        .trim_start_matches(URI)
-        .trim_start_matches("/")
-        .trim_end_matches("/")
-        .to_string();
+    let path = uri.trim_start_matches(URI).trim_start_matches("/");
+    let parts = path.split("/").map(|s| s.to_string()).collect_vec();
 
-    let Ok(resource_id) = Uuid::parse_str(&raw_content) else {
+    if parts.len() != 3 {
+        return Err("Invalid URI format".into());
+    }
+
+    let [_method, enviroment, resource_id] = parts.as_slice() else {
+        return Err("Invalid URI format".into());
+    };
+    let Ok(resource_id) = Uuid::parse_str(resource_id) else {
         return Err("Invalid URI format".into());
     };
 
-    let url = format!("https://product.staging.seelen.io/resource/download/{resource_id}");
+    let env_prefix = if enviroment == "production" {
+        "".to_string()
+    } else {
+        format!(".{enviroment}")
+    };
+
+    let url = format!("https://product{env_prefix}.seelen.io/resource/download/{resource_id}");
     tauri::async_runtime::block_on(async move {
         let res = reqwest::get(url).await?;
         let file = res.json::<SluResourceFile>().await?;
