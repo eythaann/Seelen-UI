@@ -13,14 +13,14 @@ interface ReactIconProps extends HTMLAttributes<HTMLElement> {
 
 /** React Icons */
 export function Icon(props: ReactIconProps) {
-  const { iconName, size, color, className, ...rest } = props;
+  const { iconName, size, color, className, style, ...rest } = props;
 
   return (
     <InlineSVG
       {...rest}
       src={`../icons/${iconName}.svg`}
       className={cx('slu-icon', cs.reactIcon, className)}
-      style={{ height: size, color }}
+      style={{ height: size, color, ...(style || {}) }}
     />
   );
 }

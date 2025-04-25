@@ -6,7 +6,9 @@ use std::collections::HashMap;
 
 use application::FullState;
 use domain::AhkVar;
-use seelen_core::state::{PluginId, WegPinnedItemsVisibility, WegTemporalItemsVisibility};
+use seelen_core::state::{
+    PluginId, Settings, WegPinnedItemsVisibility, WegTemporalItemsVisibility,
+};
 
 use crate::windows_api::monitor::Monitor;
 
@@ -107,5 +109,12 @@ impl FullState {
             Some(config) => config.weg().pinned_items_visibility.unwrap_or(default),
             None => default,
         }
+    }
+
+    pub fn locale(&self) -> String {
+        self.settings()
+            .language
+            .clone()
+            .unwrap_or_else(Settings::get_system_language)
     }
 }

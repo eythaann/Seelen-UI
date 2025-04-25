@@ -9,6 +9,7 @@ mod hook;
 mod instance;
 mod modules;
 mod plugins;
+mod popups;
 mod restoration_and_migrations;
 mod seelen;
 mod seelen_bar;

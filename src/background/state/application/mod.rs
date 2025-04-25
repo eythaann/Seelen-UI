@@ -117,7 +117,7 @@ impl FullState {
         let mut is_only_changing_system_icons = true;
 
         for path in changed.iter() {
-            if path.starts_with(SEELEN_COMMON.icons_path()) && path.ends_with("metadata.yml") {
+            if path.starts_with(SEELEN_COMMON.user_icons_path()) && path.ends_with("metadata.yml") {
                 is_changing_icons_metadata = true;
                 if !path.ends_with("system\\metadata.yml") {
                     is_only_changing_system_icons = false;
@@ -235,7 +235,7 @@ impl FullState {
             SEELEN_COMMON.toolbar_items_path(),
             SEELEN_COMMON.user_app_configs_path(),
             SEELEN_COMMON.history_path(),
-            SEELEN_COMMON.icons_path(),
+            SEELEN_COMMON.user_icons_path(),
             SEELEN_COMMON.user_themes_path(),
             SEELEN_COMMON.user_plugins_path(),
             SEELEN_COMMON.user_widgets_path(),

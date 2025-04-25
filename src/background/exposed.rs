@@ -208,6 +208,7 @@ async fn show_desktop() -> Result<()> {
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
+    use crate::popups::handlers::*;
     use crate::seelen_rofi::handler::*;
     use crate::seelen_weg::handler::*;
     use crate::seelen_wm_v2::handler::*;

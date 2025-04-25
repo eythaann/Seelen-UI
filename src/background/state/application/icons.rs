@@ -50,7 +50,7 @@ impl IconPacksManager {
 
     fn icon_exists(&self, icon: &Icon) -> bool {
         let root = SEELEN_COMMON
-            .icons_path()
+            .user_icons_path()
             .join(&self.get_system().metadata.filename);
         match icon {
             Icon::Static(path) => root.join(path).exists(),
@@ -98,7 +98,7 @@ impl IconPacksManager {
         system_pack.files.clear();
         system_pack.specific.clear();
         let meta = std::ffi::OsStr::new("metadata.yml");
-        for entry in std::fs::read_dir(SEELEN_COMMON.icons_path().join("system"))?.flatten() {
+        for entry in std::fs::read_dir(SEELEN_COMMON.user_icons_path().join("system"))?.flatten() {
             if entry.file_type()?.is_dir() {
                 std::fs::remove_dir_all(entry.path())?;
             } else if entry.file_name() != meta {
@@ -126,11 +126,15 @@ impl IconPacksManager {
         }
 
         let system_pack = self.get_system_mut();
-        let missing_path = SEELEN_COMMON.icons_path().join("system/missing-icon.png");
+        let missing_path = SEELEN_COMMON
+            .user_icons_path()
+            .join("system/missing-icon.png");
         let start_path = SEELEN_COMMON
-            .icons_path()
+            .user_icons_path()
             .join("system/start-menu-icon.svg");
-        let folder_path = SEELEN_COMMON.icons_path().join("system/folder-icon.svg");
+        let folder_path = SEELEN_COMMON
+            .user_icons_path()
+            .join("system/folder-icon.svg");
 
         if !missing_path.exists() || initial {
             std::fs::copy(
@@ -181,7 +185,7 @@ impl IconPacksManager {
     }
 
     pub fn write_system_icon_pack(&self) -> Result<()> {
-        let folder = SEELEN_COMMON.icons_path().join("system");
+        let folder = SEELEN_COMMON.user_icons_path().join("system");
         std::fs::create_dir_all(&folder)?;
         let file_path = folder.join("metadata.yml");
         let mut file = OpenOptions::new()
@@ -213,7 +217,7 @@ impl FullState {
     }
 
     pub(super) fn load_icons_packs(&mut self, initial: bool) -> Result<()> {
-        let entries = std::fs::read_dir(SEELEN_COMMON.icons_path())?;
+        let entries = std::fs::read_dir(SEELEN_COMMON.user_icons_path())?;
         let mut icon_packs_manager = trace_lock!(self.icon_packs);
         icon_packs_manager.0.clear();
 

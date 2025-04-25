@@ -1,21 +1,25 @@
 mod debugger;
 
 use std::ffi::OsStr;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::sync::atomic::Ordering;
 
 use clap::{Arg, ArgAction, Command};
 use debugger::CliDebugger;
+use seelen_core::resource::{ResourceKind, SluResourceFile};
+use uuid::Uuid;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
 use crate::modules::virtual_desk::{VirtualDesktopManager, VIRTUAL_DESKTOP_MANAGER};
+use crate::popups::POPUPS_MANAGER;
 use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_bar::FancyToolbar;
 use crate::seelen_rofi::SeelenRofi;
 use crate::seelen_weg::SeelenWeg;
 use crate::seelen_wm_v2::instance::WindowManagerV2;
 use crate::trace_lock;
+use crate::utils::constants::SEELEN_COMMON;
 
 use super::TcpBgApp;
 
@@ -167,34 +171,64 @@ pub fn handle_console_cli() -> Result<()> {
 
 pub const URI: &str = "seelen-ui.uri:";
 
+fn path_by_resource_kind(kind: &ResourceKind) -> &Path {
+    match kind {
+        ResourceKind::Theme => SEELEN_COMMON.user_themes_path(),
+        ResourceKind::IconPack => SEELEN_COMMON.user_icons_path(),
+        ResourceKind::Widget => SEELEN_COMMON.user_widgets_path(),
+        ResourceKind::Plugin => SEELEN_COMMON.user_plugins_path(),
+        ResourceKind::Wallpaper => SEELEN_COMMON.user_wallpapers_path(),
+        ResourceKind::SoundPack => SEELEN_COMMON.user_sounds_path(),
+    }
+}
+
 pub fn process_uri(uri: &str) -> Result<()> {
     log::trace!("Loading URI: {}", uri);
 
-    let _contents = if uri.starts_with(URI) {
-        uri.trim_start_matches(URI).to_string()
-    } else {
+    if !uri.starts_with(URI) {
         let path = PathBuf::from(uri);
-        if path.is_file() && path.extension() == Some(OsStr::new("slu")) && path.exists() {
-            std::fs::read_to_string(path)?
-        } else {
-            return Err("Invalid URI format".into());
+        if !path.is_file() || path.extension() != Some(OsStr::new("slu")) || !path.exists() {
+            return Err("Invalid file to load".into());
         }
+
+        let file = SluResourceFile::load(&path)?;
+        let path_to_store =
+            path_by_resource_kind(&file.resource.kind).join(format!("{}.slu", file.resource.id));
+        file.store(&path_to_store)?;
+        POPUPS_MANAGER
+            .lock()
+            .create_added_resource(&file.resource)?;
+        return Ok(());
+    }
+
+    let raw_content = uri
+        .trim_start_matches(URI)
+        .trim_start_matches("/")
+        .trim_end_matches("/")
+        .to_string();
+
+    let Ok(resource_id) = Uuid::parse_str(&raw_content) else {
+        return Err("Invalid URI format".into());
     };
 
-    /* let engine = base64::engine::general_purpose::URL_SAFE_NO_PAD;
-    let decoded = engine.decode(contents.as_bytes())?;
-    let resource: Resource = serde_yaml::from_slice(&decoded)?;
-    FULL_STATE.rcu(|state| {
-        let mut state = state.cloned();
-        let _ = state.load_resource(resource.clone());
-        state
-    }); */
+    let url = format!("https://product.staging.seelen.io/resource/download/{resource_id}");
+    tauri::async_runtime::block_on(async move {
+        let res = reqwest::get(url).await?;
+        let file = res.json::<SluResourceFile>().await?;
+        let path_to_store =
+            path_by_resource_kind(&file.resource.kind).join(format!("{}.slu", file.resource.id));
+        file.store(&path_to_store)?;
+        POPUPS_MANAGER
+            .lock()
+            .create_added_resource(&file.resource)?;
+        Result::Ok(())
+    })?;
     Ok(())
 }
 
 pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
     if let Some(uri) = matches.get_one::<String>("uri") {
-        return process_uri(uri).map_err(|e| format!("Corrupted SLU file: {}", e).into());
+        return process_uri(uri);
     }
 
     if let Some((subcommand, matches)) = matches.subcommand() {

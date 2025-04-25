@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - add resources endpoint to home tab on settings.
+- add customizable adn reusable popups implementation.
 
 ### enhancements
 - reduce CPU usage on slu-service process.

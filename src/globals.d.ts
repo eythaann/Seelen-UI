@@ -3,6 +3,11 @@ declare module '*.module.css' {
   export default classnames;
 }
 
+declare module '*.module.scss' {
+  const classnames: Record<string, string>;
+  export default classnames;
+}
+
 declare module '*.yml' {
   export default string;
 }

@@ -278,7 +278,7 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<()> {
 
     let to_store_filename = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
     let to_store_path = SEELEN_COMMON
-        .icons_path()
+        .user_icons_path()
         .join("system")
         .join(&to_store_filename);
 
@@ -336,7 +336,7 @@ pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
     match aumid {
         AppUserModelId::Appx(aumid) => {
             let (light, dark) = UwpManager::get_high_quality_icon_path(aumid)?;
-            let root = SEELEN_COMMON.icons_path().join("system");
+            let root = SEELEN_COMMON.user_icons_path().join("system");
             let name = uuid::Uuid::new_v4();
             std::fs::copy(light, root.join(&format!("{}_light.png", name)))?;
             std::fs::copy(dark, root.join(&format!("{}_dark.png", name)))?;

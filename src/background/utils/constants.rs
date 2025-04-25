@@ -55,11 +55,12 @@ pub struct SeelenCommon {
     bundled_plugins: PathBuf,
     user_app_configs: PathBuf,
     bundled_app_configs: PathBuf,
+    wallpapers: PathBuf,
+    sounds: PathBuf,
     /// @deprecated since v2.1.0
     user_placeholders: PathBuf,
     widgets: PathBuf,
     bundled_widgets: PathBuf,
-    wallpapers: PathBuf,
     profiles: PathBuf,
     bundled_profiles: PathBuf,
 }
@@ -81,6 +82,7 @@ impl SeelenCommon {
             weg_items: data_dir.join("seelenweg_items_v2.yml"),
             toolbar_items: data_dir.join("toolbar_items.yml"),
             icons: data_dir.join("icons"),
+            sounds: data_dir.join("sounds"),
             user_themes: data_dir.join("themes"),
             bundled_themes: resource_dir.join("static/themes"),
             user_plugins: data_dir.join("plugins"),
@@ -133,8 +135,12 @@ impl SeelenCommon {
         &self.history
     }
 
-    pub fn icons_path(&self) -> &Path {
+    pub fn user_icons_path(&self) -> &Path {
         &self.icons
+    }
+
+    pub fn user_sounds_path(&self) -> &Path {
+        &self.sounds
     }
 
     pub fn user_themes_path(&self) -> &Path {
@@ -174,7 +180,7 @@ impl SeelenCommon {
         &self.bundled_widgets
     }
 
-    pub fn wallpapers_path(&self) -> &Path {
+    pub fn user_wallpapers_path(&self) -> &Path {
         &self.wallpapers
     }
 
