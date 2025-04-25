@@ -45,7 +45,7 @@ export function RemoteResources() {
           if (!resource.metadata.portrait) return null;
           return (
             <a
-              key={resource._id}
+              key={resource.id}
               href={`https://seelen.io/resources/${resource.friendlyId.replace('@', '')}`}
               target="_blank"
               className={cs.resource}
