@@ -1,3 +1,6 @@
+resource:
+  added: አዲስ ሀብት ታክሏል
+  enable: አንቃ
 runtime:
   download: ወደ ማውረድ ገጽ ይሂዱ
   not_found: WebView2 Runtime አልተገኘም።

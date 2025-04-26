@@ -1,3 +1,6 @@
+resource:
+  added: Pridėtas naujas išteklius
+  enable: Įjungti
 runtime:
   download: Eikite į atsisiuntimo puslapį
   not_found: WebView2 vykdymo laikas nerastas

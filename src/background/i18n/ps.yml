@@ -1,3 +1,6 @@
+resource:
+  added: یو نوی سرچینه اضافه شوې
+  enable: وړ
 runtime:
   download: د ډاونلوډ پاڼې ته لاړ شئ
   not_found: WebView2 د چلولو وخت ونه موندل شو

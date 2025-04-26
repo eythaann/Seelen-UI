@@ -1,3 +1,6 @@
+resource:
+  added: Як манбаи нав илова карда шуд
+  enable: Имконият додан
 runtime:
   download: Ба саҳифаи зеркашӣ гузаред
   not_found: Вақти иҷрои WebView2 ёфт нашуд

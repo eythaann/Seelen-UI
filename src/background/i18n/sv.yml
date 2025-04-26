@@ -1,3 +1,6 @@
+resource:
+  added: En ny resurs har lagts till
+  enable: Aktivera
 runtime:
   download: Gå till nedladdningssidan
   not_found: WebView2 Runtime hittades inte

@@ -1,3 +1,6 @@
+resource:
+  added: Bol pridaný nový zdroj
+  enable: Povolenie stránky
 runtime:
   download: Prejdite na stránku sťahovania
   not_found: WebView2 Runtime sa nenašlo

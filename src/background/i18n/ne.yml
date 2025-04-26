@@ -1,3 +1,6 @@
+resource:
+  added: एक नयाँ स्रोत थपियो
+  enable: समर्थ बनाउनु
 runtime:
   download: डाउनलोड पृष्ठमा जानुहोस्
   not_found: WebView2 रनटाइम फेला परेन

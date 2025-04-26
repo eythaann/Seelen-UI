@@ -1,3 +1,6 @@
+resource:
+  added: ਇੱਕ ਨਵਾਂ ਸਰੋਤ ਜੋੜਿਆ ਗਿਆ ਹੈ
+  enable: ਯੋਗ
 runtime:
   download: ਡਾਊਨਲੋਡ ਪੰਨੇ 'ਤੇ ਜਾਓ
   not_found: WebView2 ਰਨਟਾਈਮ ਨਹੀਂ ਮਿਲਿਆ

@@ -1,3 +1,6 @@
+resource:
+  added: O nouă resursă a fost adăugată
+  enable: Activare
 runtime:
   download: Accesați pagina de descărcare
   not_found: WebView2 Runtime nu a fost găsit

@@ -1,3 +1,6 @@
+resource:
+  added: కొత్త వనరు జోడించబడింది
+  enable: ఎనేబుల్
 runtime:
   download: డౌన్‌లోడ్ పేజీకి వెళ్లండి
   not_found: WebView2 రన్‌టైమ్ కనుగొనబడలేదు

@@ -1,3 +1,6 @@
+resource:
+  added: Uusi resurssi on lisätty
+  enable: Ota käyttöön
 runtime:
   download: Siirry lataussivulle
   not_found: WebView2:n suoritusaikaa ei löydy

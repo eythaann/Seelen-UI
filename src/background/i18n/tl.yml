@@ -1,3 +1,6 @@
+resource:
+  added: Ang isang bagong mapagkukunan ay naidagdag
+  enable: Paganahin
 runtime:
   download: Pumunta sa pahina ng pag-download
   not_found: Hindi nahanap ang WebView2 Runtime

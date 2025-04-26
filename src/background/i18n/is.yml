@@ -1,3 +1,6 @@
+resource:
+  added: Nýjum auðlind hefur verið bætt við
+  enable: Virkja
 runtime:
   download: Farðu á niðurhalssíðuna
   not_found: WebView2 Runtime fannst ekki

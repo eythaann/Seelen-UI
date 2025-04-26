@@ -1,3 +1,6 @@
+resource:
+  added: නව සම්පතක් එකතු කර ඇත
+  enable: සක්රීය කරන්න
 runtime:
   download: බාගැනීම් පිටුවට යන්න
   not_found: WebView2 ධාවන කාලය හමු නොවීය

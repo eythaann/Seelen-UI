@@ -1,3 +1,6 @@
+resource:
+  added: Yeni bir kaynak eklendi
+  enable: Etkinleştir
 runtime:
   download: İndirme sayfasına git
   not_found: WebView2 Çalışma Zamanı bulunamadı

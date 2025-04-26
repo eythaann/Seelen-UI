@@ -1,3 +1,6 @@
+resource:
+  added: ຊັບພະຍາກອນໃຫມ່ໄດ້ຖືກເພີ່ມເຂົ້າມາແລ້ວ
+  enable: ເປີດໃຊ້
 runtime:
   download: ໄປທີ່ໜ້າດາວໂຫຼດ
   not_found: ບໍ່ພົບ WebView2 Runtime

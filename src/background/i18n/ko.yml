@@ -1,3 +1,6 @@
+resource:
+  added: 새로운 리소스가 추가되었습니다.
+  enable: 사용
 runtime:
   download: 다운로드 페이지로 이동
   not_found: WebView2 런타임을 찾을 수 없습니다.

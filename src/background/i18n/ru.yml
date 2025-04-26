@@ -1,3 +1,6 @@
+resource:
+  added: Добавлен новый ресурс
+  enable: Включить
 runtime:
   download: Перейти на страницу загрузки
   not_found: Среда выполнения WebView2 не найдена

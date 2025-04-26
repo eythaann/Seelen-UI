@@ -1,3 +1,6 @@
+resource:
+  added: Ġiet miżjuda riżorsa ġdida
+  enable: Jippermetti
 runtime:
   download: Mur fil-paġna tat-tniżżil
   not_found: WebView2 Runtime ma nstabx

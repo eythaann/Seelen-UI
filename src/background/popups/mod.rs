@@ -136,7 +136,7 @@ fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
                 styles: None,
             },
             SluPopupContent::Text {
-                value: "New resource added".to_string(),
+                value: t!("resource.added").to_string(),
                 styles: None,
             },
         ],
@@ -192,7 +192,7 @@ fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
 
     popup.footer = vec![SluPopupContent::Button {
         inner: vec![SluPopupContent::Text {
-            value: "Enable".to_string(),
+            value: t!("resource.enable").to_string(),
             styles: None,
         }],
         on_click: format!("resource::{}::enable", resource.id),

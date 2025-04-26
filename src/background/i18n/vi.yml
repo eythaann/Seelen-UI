@@ -1,3 +1,6 @@
+resource:
+  added: Một tài nguyên mới đã được thêm vào
+  enable: Cho phép
 runtime:
   download: Đi tới trang tải xuống
   not_found: Không tìm thấy thời gian chạy WebView2

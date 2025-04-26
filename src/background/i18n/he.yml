@@ -1,3 +1,6 @@
+resource:
+  added: נוסף משאב חדש
+  enable: לְאַפשֵׁר
 runtime:
   download: עבור לדף ההורדות
   not_found: זמן ריצה של WebView2 לא נמצא

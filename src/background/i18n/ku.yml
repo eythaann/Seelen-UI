@@ -1,3 +1,6 @@
+resource:
+  added: Resavkaniyek nû hatiye zêdekirin
+  enable: Bikêrkirin
 runtime:
   download: Biçe rûpela daxistinê
   not_found: WebView2 Runtime nehat dîtin

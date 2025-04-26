@@ -1,3 +1,6 @@
+resource:
+  added: มีการเพิ่มทรัพยากรใหม่
+  enable: เปิดใช้งาน
 runtime:
   download: ไปที่หน้าดาวน์โหลด
   not_found: ไม่พบรันไทม์ WebView2

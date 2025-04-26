@@ -1,3 +1,6 @@
+resource:
+  added: 新しいリソースが追加されました
+  enable: 有効にする
 runtime:
   download: ダウンロードページを開く
   not_found: WebView2 ランタイムが見つかりません

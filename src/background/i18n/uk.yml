@@ -1,3 +1,6 @@
+resource:
+  added: Додано новий ресурс
+  enable: Увімкнути
 runtime:
   download: Перейдіть на сторінку завантаження
   not_found: WebView2 Runtime не знайдено

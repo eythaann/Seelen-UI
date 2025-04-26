@@ -1,3 +1,6 @@
+resource:
+  added: ایک نیا وسیلہ شامل کیا گیا ہے
+  enable: قابل بنائیں
 runtime:
   download: ڈاؤن لوڈ صفحہ پر جائیں۔
   not_found: WebView2 رن ٹائم نہیں ملا

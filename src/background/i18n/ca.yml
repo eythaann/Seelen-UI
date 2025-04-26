@@ -1,3 +1,6 @@
+resource:
+  added: S'ha afegit un nou recurs
+  enable: Capacitar
 runtime:
   download: Aneu a la pàgina de descàrrega
   not_found: No s'ha trobat el temps d'execució de WebView2

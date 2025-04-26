@@ -1,3 +1,6 @@
+resource:
+  added: Sumber baru telah ditambah
+  enable: Membolehkan
 runtime:
   download: Pergi ke halaman muat turun
   not_found: WebView2 Runtime tidak ditemui

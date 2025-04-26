@@ -1,3 +1,6 @@
+resource:
+  added: Yangi manba qo'shildi
+  enable: Yoqib yubormoq
 runtime:
   download: Yuklab olish sahifasiga o'ting
   not_found: WebView2 ish vaqti topilmadi

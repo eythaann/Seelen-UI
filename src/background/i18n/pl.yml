@@ -1,3 +1,6 @@
+resource:
+  added: Dodano nowy zasób
+  enable: Włącz
 runtime:
   download: Przejdź do strony pobierania
   not_found: Nie znaleziono środowiska uruchomieniowego WebView2

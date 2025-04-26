@@ -1,3 +1,6 @@
+resource:
+  added: Шинэ нөөц нэмэгдсэн
+  enable: Болоцоо огох
 runtime:
   download: Татаж авах хуудас руу очно уу
   not_found: WebView2 Ажиллах цаг олдсонгүй

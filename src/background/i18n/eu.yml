@@ -1,3 +1,6 @@
+resource:
+  added: Baliabide berri bat gehitu da
+  enable: Ahalbidetu
 runtime:
   download: Joan deskarga orrira
   not_found: WebView2 Runtime ez da aurkitu

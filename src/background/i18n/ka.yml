@@ -1,3 +1,6 @@
+resource:
+  added: დაემატა ახალი რესურსი
+  enable: შესაძლებლობის მიცემა
 runtime:
   download: გადადით ჩამოტვირთვის გვერდზე
   not_found: WebView2 Runtime ვერ მოიძებნა

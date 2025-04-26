@@ -1,3 +1,6 @@
+resource:
+  added: Ychwanegwyd adnodd newydd
+  enable: Galluoga
 runtime:
   download: Ewch i'r dudalen lawrlwytho
   not_found: WebView2 Runtime heb ei ganfod

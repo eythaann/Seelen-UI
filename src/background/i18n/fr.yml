@@ -1,3 +1,6 @@
+resource:
+  added: Une nouvelle ressource a été ajoutée
+  enable: Activer
 runtime:
   download: Aller à la page de téléchargement
   not_found: Le moteur d'exécution WebView2 est introuvable

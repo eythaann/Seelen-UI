@@ -1,3 +1,6 @@
+resource:
+  added: Yeni bir qaynaq əlavə edildi
+  enable: Aktivləşdirmək
 runtime:
   download: Yükləmə səhifəsinə keçin
   not_found: WebView2 İcra vaxtı tapılmadı

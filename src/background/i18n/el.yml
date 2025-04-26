@@ -1,3 +1,6 @@
+resource:
+  added: Προστέθηκε ένας νέος πόρος
+  enable: Ενεργοποίηση
 runtime:
   download: Μεταβείτε στη σελίδα λήψης
   not_found: Ο χρόνος εκτέλεσης WebView2 δεν βρέθηκε

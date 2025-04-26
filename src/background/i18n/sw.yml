@@ -1,3 +1,6 @@
+resource:
+  added: Rasilimali mpya imeongezwa
+  enable: Wezesha
 runtime:
   download: Nenda kwenye ukurasa wa kupakua
   not_found: Muda wa utekelezaji wa WebView2 haujapatikana

@@ -1,3 +1,6 @@
+resource:
+  added: Kufakwe insiza entsha
+  enable: Nika amandla
 runtime:
   download: Iya ekhasini lokulanda
   not_found: Isikhathi sokusebenza se-WebView2 asitholakali

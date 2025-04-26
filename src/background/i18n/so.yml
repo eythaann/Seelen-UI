@@ -1,3 +1,6 @@
+resource:
+  added: Kheyraad Cusub ayaa lagu daray
+  enable: Karsiin
 runtime:
   download: Tag bogga soo dejinta
   not_found: WebView2 Runtime lama helin

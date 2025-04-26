@@ -1,3 +1,6 @@
+resource:
+  added: '''N Nuwe hulpbron is bygevoeg'
+  enable: In staat stel
 runtime:
   download: Gaan na die aflaai bladsy
   not_found: WebView2 Looptyd nie gevind nie

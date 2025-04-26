@@ -1,3 +1,6 @@
+resource:
+  added: Добавен е нов ресурс
+  enable: Активиране на
 runtime:
   download: Отидете на страницата за изтегляне
   not_found: WebView2 Runtime не е намерен

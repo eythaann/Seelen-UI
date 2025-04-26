@@ -1,3 +1,6 @@
+resource:
+  added: Ավելացվել է նոր ռեսուրս
+  enable: Միացնել
 runtime:
   download: Գնացեք ներբեռնման էջ
   not_found: WebView2 Runtime-ը չի գտնվել

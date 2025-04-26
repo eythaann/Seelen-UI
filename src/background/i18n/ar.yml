@@ -1,3 +1,6 @@
+resource:
+  added: تمت إضافة مورد جديد
+  enable: التمكين
 runtime:
   download: انتقل إلى صفحة التنزيل
   not_found: لم يتم العثور على وقت تشغيل WebView2

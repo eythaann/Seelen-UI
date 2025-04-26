@@ -1,3 +1,6 @@
+resource:
+  added: Er is een nieuwe bron toegevoegd
+  enable: inschakelen
 runtime:
   download: Ga naar de downloadpagina
   not_found: WebView2 Runtime niet gevonden

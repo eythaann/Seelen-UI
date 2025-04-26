@@ -1,3 +1,6 @@
+resource:
+  added: ធនធានថ្មីត្រូវបានបន្ថែម
+  enable: បើកដៃ
 runtime:
   download: ចូលទៅកាន់ទំព័រទាញយក
   not_found: WebView2 Runtime រកមិនឃើញទេ។

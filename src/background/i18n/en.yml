@@ -1,3 +1,6 @@
+resource:
+  added: A new resource has been added
+  enable: Enable
 runtime:
   download: Go to download page
   not_found: WebView2 Runtime not found

@@ -1,3 +1,6 @@
+resource:
+  added: A ti ṣafikun awọn orisun titun
+  enable: Mu ṣiṣẹ
 runtime:
   download: Lọ si oju-iwe igbasilẹ
   not_found: WebView2 asiko isise ko ri

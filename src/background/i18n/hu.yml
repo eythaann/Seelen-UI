@@ -1,3 +1,6 @@
+resource:
+  added: Egy új erőforrás került hozzáadásra
+  enable: Engedélyezze a
 runtime:
   download: Menjen a letöltési oldalra
   not_found: A WebView2 futási környezet nem található

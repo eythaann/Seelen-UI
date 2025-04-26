@@ -1,3 +1,6 @@
+resource:
+  added: একটি নতুন সংস্থান যুক্ত করা হয়েছে
+  enable: সক্ষম করুন
 runtime:
   download: ডাউনলোড পেজে যান
   not_found: WebView2 রানটাইম পাওয়া যায়নি

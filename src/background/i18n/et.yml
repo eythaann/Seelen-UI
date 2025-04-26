@@ -1,3 +1,6 @@
+resource:
+  added: Lisatud on uus ressurss
+  enable: Lubage
 runtime:
   download: Minge allalaadimislehele
   not_found: WebView2 käitusaega ei leitud

@@ -1,3 +1,6 @@
+resource:
+  added: Додаден е нов ресурс
+  enable: Овозможи
 runtime:
   download: Одете на страницата за преземање
   not_found: WebView2 Runtime не е пронајдено

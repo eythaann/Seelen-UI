@@ -1,5 +1,6 @@
 body {
   background-color: transparent !important;
+  overflow: hidden;
 }
 
 #root {
@@ -22,7 +23,12 @@ body {
     background-color: #fffa;
     padding: 6px 6px 6px 10px;
     font-weight: 600;
+    app-region: drag;
 
+    button {
+      app-region: no-drag;
+    }
+    
     .header-content {
       display: flex;
       flex-direction: column;

@@ -114,6 +114,7 @@ impl Seelen {
 
     pub fn on_settings_change(&mut self) -> Result<()> {
         let state = FULL_STATE.load();
+        rust_i18n::set_locale(&state.locale());
 
         tauri::async_runtime::spawn(async {
             let state = FULL_STATE.load();
@@ -187,6 +188,7 @@ impl Seelen {
         declare_system_events_handlers()?;
 
         let state = FULL_STATE.load();
+        rust_i18n::set_locale(&state.locale());
 
         if state.is_rofi_enabled() {
             self.add_rofi()?;

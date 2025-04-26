@@ -1,3 +1,6 @@
+resource:
+  added: یک منبع جدید اضافه شده است
+  enable: فعال کردن
 runtime:
   download: به صفحه دانلود بروید
   not_found: WebView2 Runtime یافت نشد

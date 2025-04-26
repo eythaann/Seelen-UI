@@ -7,6 +7,11 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  app-region: drag;
+
+  button {
+    app-region: no-drag;
+  }
 
   .title {
     font-size: 1.2rem;
