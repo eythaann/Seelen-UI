@@ -3,5 +3,5 @@ icon: "TbCalendar"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: date
-  template: date
+  template: return date
   withMiniCalendar: true

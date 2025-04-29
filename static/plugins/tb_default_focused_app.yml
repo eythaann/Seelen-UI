@@ -3,6 +3,6 @@ icon: "MdCenterFocusStrong"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: generic
-  template: concat(imgFromExe(window.exe, window.umid), "  ", window.name)
+  template: return [imgFromExe(window.exe, window.umid), "  ", window.name]
   style:
     flexShrink: 0

@@ -1,14 +1,13 @@
 import { ToolbarItem } from '@seelen-ui/lib/types';
+import useDeepCompareEffect from '@shared/hooks';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
-import { cloneDeep } from 'lodash';
-import { isResultSet } from 'mathjs';
-import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../shared/store/app';
-import { safeEval, Scope } from '../app';
+import { EvaluateAction, SanboxedComponent } from '../app';
 
 import { cx } from '../../../../shared/styles';
 import { StringToElement } from './StringElement';
@@ -24,30 +23,17 @@ export interface InnerItemProps extends PropsWithChildren {
   onKeydown?: (e: React.KeyboardEvent) => void;
 }
 
-export function ElementsFromEvaluated(content: any) {
-  let text: string = '';
-
-  if (typeof content === 'string') {
-    text = content;
-  } else if (isResultSet(content)) {
-    text = content.entries.reduce((acc: string, current: any) => {
-      return `${acc}${typeof current === 'string' ? current : JSON.stringify(current)}`;
-    }, '');
-  } else {
-    text = JSON.stringify(content);
-  }
-
-  const parts: string[] = text.split(/\[|\]/g).filter((part: string) => part);
-  const result: React.ReactNode[] = parts.map((part: string, index: number) => {
-    return <StringToElement key={index} text={part} />;
-  });
-
-  return result;
-}
+const commonScope = {
+  icon: StringToElement.getIcon,
+  getIcon: StringToElement.getIcon,
+  imgFromUrl: StringToElement.imgFromUrl,
+  imgFromPath: StringToElement.imgFromPath,
+  imgFromExe: StringToElement.imgFromExe,
+};
 
 export function InnerItem(props: InnerItemProps) {
   const {
-    extraVars,
+    extraVars = {},
     module,
     active,
     onClick: onClickProp,
@@ -59,93 +45,63 @@ export function InnerItem(props: InnerItemProps) {
   } = props;
   const { template, tooltip, onClickV2, style, id, badge } = module;
 
-  const structure = useSelector(Selectors.items);
-
-  const [mounted, setMounted] = React.useState(false);
+  const isReorderDisabled = useSelector(Selectors.items.isReorderDisabled);
   const env = useSelector(Selectors.env);
 
   const { t } = useTranslation();
-  const scope = useRef(new Scope());
+
+  const [scope, setScope] = useState<Record<string, any>>({ ...commonScope, env, t, ...extraVars });
 
   useEffect(() => {
-    scope.current.loadInvokeActions();
+    setScope((s) => ({ ...s, env, t }));
+  }, [env, t]);
 
-    scope.current.set('env', cloneDeep(env));
-
-    scope.current.set('getIcon', StringToElement.getIcon);
-    scope.current.set('imgFromUrl', StringToElement.imgFromUrl);
-    scope.current.set('imgFromPath', StringToElement.imgFromPath);
-    scope.current.set('imgFromExe', StringToElement.imgFromExe);
-
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  scope.current.set('t', t);
-  if (extraVars) {
-    Object.keys(extraVars).forEach((key) => {
-      scope.current.set(key, extraVars[key]);
-    });
-  }
-
-  function parseStringToElements(text: string) {
-    /// backward compatibility with v1 icon object
-    let expr = text.replaceAll(/icon\.(\w+)/g, 'getIcon("$1")');
-    let result = safeEval(expr, scope.current);
-    if (result.err) {
-      return [];
-    }
-    return ElementsFromEvaluated(result.ok);
-  }
-
-  const elements = template ? parseStringToElements(template) : [];
-  if (!elements.length && !children) {
-    return null;
-  }
-
-  const badgeContent = badge ? parseStringToElements(badge) : null;
+  useDeepCompareEffect(() => {
+    setScope((s) => ({ ...s, ...extraVars }));
+  }, [extraVars]);
 
   return (
-    <Tooltip
-      arrow={false}
-      mouseLeaveDelay={0}
-      classNames={{ root: 'ft-bar-item-tooltip' }}
-      title={tooltip ? parseStringToElements(tooltip) : undefined}
+    <Reorder.Item
+      {...rest}
+      id={id}
+      drag={!isReorderDisabled}
+      value={(module as any).__value__ || module}
+      style={style}
+      className={cx('ft-bar-item', {
+        // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
+        'ft-bar-item-clickable': clickable || onClickV2,
+        'ft-bar-item-active': active,
+      })}
+      onWheel={onWheelProp}
+      onKeyDown={onKeydownProp}
+      onClick={(e) => {
+        onClickProp?.(e);
+        if (onClickV2) {
+          EvaluateAction(onClickV2, scope);
+        }
+      }}
+      as="div"
+      transition={{ duration: 0.15 }}
+      onContextMenu={(e) => {
+        e.stopPropagation();
+        (rest as any).onContextMenu?.(e);
+      }}
     >
-      <Reorder.Item
-        {...rest}
-        id={id}
-        drag={!structure.isReorderDisabled}
-        value={(module as any).__value__ || module}
-        style={style}
-        className={cx('ft-bar-item', {
-          // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
-          'ft-bar-item-clickable': clickable || onClickV2,
-          'ft-bar-item-active': active,
-        })}
-        onWheel={onWheelProp}
-        onKeyDown={onKeydownProp}
-        onClick={(e) => {
-          onClickProp?.(e);
-          if (onClickV2) {
-            safeEval(onClickV2, scope.current);
-          }
-        }}
-        as="div"
-        transition={{ duration: 0.15 }}
-        onContextMenu={(e) => {
-          e.stopPropagation();
-          (rest as any).onContextMenu?.(e);
-        }}
+      <Tooltip
+        arrow={false}
+        mouseLeaveDelay={0}
+        classNames={{ root: 'ft-bar-item-tooltip' }}
+        title={tooltip ? <SanboxedComponent code={tooltip} scope={scope} /> : undefined}
       >
         <div className="ft-bar-item-content">
-          {children || elements}
-          {!!badgeContent?.length && <div className="ft-bar-item-badge">{badgeContent}</div>}
+          {children || <SanboxedComponent code={template} scope={scope} />}
+          {!!badge && (
+            <div className="ft-bar-item-badge">
+              <SanboxedComponent code={badge} scope={scope} />
+            </div>
+          )}
         </div>
-      </Reorder.Item>
-    </Tooltip>
+      </Tooltip>
+    </Reorder.Item>
   );
 }

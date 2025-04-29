@@ -1,9 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+### breaking changes
+- remove mathjs eval by an more accurated eval for js code in toolbar plugins. This will break any plugin created before v2.2.10.
+
 ### features
 - add resources endpoint to home tab on settings.
 - add customizable adn reusable popups implementation.
+- improvements on toolbar plugins system.
 
 ### enhancements
 - reduce CPU usage on slu-service process.

@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
-import { CommonItemContextMenu } from '../app';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { AnimatedDropdown } from '../../../../shared/components/AnimatedWrappers';
+import { CommonItemContextMenu } from './ContextMenu';
 import { InnerItem, InnerItemProps } from './Inner';
 
 export function Item(props: InnerItemProps) {

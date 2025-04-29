@@ -8,22 +8,22 @@ interface StringToElementProps {
 }
 
 export class StringToElement extends React.PureComponent<StringToElementProps> {
-  static imgPrefix = 'IMG:';
   static iconPrefix = 'ICON:';
+  static imgPrefix = 'IMG:';
   static exePrefix = 'EXE:';
 
   static getIcon(name: string, size = 16) {
     if (!name) {
       return '';
     }
-    return `[ICON:${JSON.stringify({ name, size })}]`;
+    return `${StringToElement.iconPrefix}${JSON.stringify({ name, size })}`;
   }
 
   static imgFromUrl(url: string, size = 16) {
     if (!url) {
       return '';
     }
-    return `[IMG:${JSON.stringify({ url, size })}]`;
+    return `${StringToElement.imgPrefix}${JSON.stringify({ url, size })}`;
   }
 
   static imgFromPath(path?: string | null, size = 16) {
@@ -37,7 +37,7 @@ export class StringToElement extends React.PureComponent<StringToElementProps> {
     if (!path) {
       return '';
     }
-    return `[EXE:${JSON.stringify({ path, umid, size })}]`;
+    return `${StringToElement.exePrefix}${JSON.stringify({ path, umid, size })}`;
   }
 
   constructor(props: StringToElementProps) {

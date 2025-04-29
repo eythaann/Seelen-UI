@@ -4,18 +4,14 @@ target: '@seelen/fancy-toolbar'
 plugin:
   type: keyboard
   tooltip: >-
-    concat(
-      activeLang.name,
-      " - ",
-      activeKeyboard.displayName
-    )
+    return [activeLang.name, " - ", activeKeyboard.displayName]
   template: >-
-    inputsLenght = count(activeLang.inputMethods);
-    concat(
+    const inputsLenght = activeLang.inputMethods.length;
+    return [
       activeLangPrefix,
       inputsLenght > 1 ? " - " : "",
       inputsLenght > 1 ? activeKeyboardPrefix : ""
-    )
+    ]
   style:
     flexShrink: 0
     width: min-content

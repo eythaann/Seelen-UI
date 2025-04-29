@@ -7,9 +7,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { CommonItemContextMenu } from '../item/infra/ContextMenu';
 import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
 
-import { CommonItemContextMenu } from '../item/app';
 import { Selectors } from '../shared/store/app';
 import { AnimatedDropdown } from 'src/apps/shared/components/AnimatedWrappers';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';

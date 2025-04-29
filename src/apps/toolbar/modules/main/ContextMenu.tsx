@@ -41,22 +41,24 @@ export function MainContextMenu() {
                   <BackgroundByLayersV2 className="tb-context-menu-container">
                     <Menu
                       className="tb-context-menu"
-                      items={plugins.map((plugin) => {
-                        const added = isAlreadyAdded(plugin.id);
-                        return {
-                          key: plugin.id,
-                          icon: <Icon iconName={plugin.icon as IconName} />,
-                          label: added ? `✓ ${plugin.id}` : plugin.id,
-                          onClick: () => {
-                            if (added) {
-                              dispatch(RootActions.removeItem(plugin.id));
-                            } else {
-                              dispatch(RootActions.addItem(plugin.id));
-                            }
-                            SaveToolbarItems();
-                          },
-                        };
-                      })}
+                      items={plugins
+                        .toSorted((p1, p2) => p1.id.localeCompare(p2.id))
+                        .map((plugin) => {
+                          const added = isAlreadyAdded(plugin.id);
+                          return {
+                            key: plugin.id,
+                            icon: <Icon iconName={plugin.icon as IconName} />,
+                            label: added ? `✓ ${plugin.id}` : plugin.id,
+                            onClick: () => {
+                              if (added) {
+                                dispatch(RootActions.removeItem(plugin.id));
+                              } else {
+                                dispatch(RootActions.addItem(plugin.id));
+                              }
+                              SaveToolbarItems();
+                            },
+                          };
+                        })}
                     />
                   </BackgroundByLayersV2>
                 }
@@ -73,8 +75,12 @@ export function MainContextMenu() {
           },
           {
             key: 'reoder',
-            icon: <Icon iconName={!items.isReorderDisabled ? 'VscLock' : 'VscUnlock' } />,
-            label: t(!items.isReorderDisabled ? 'context_menu.reorder_disable' : 'context_menu.reorder_enable' ),
+            icon: <Icon iconName={!items.isReorderDisabled ? 'VscLock' : 'VscUnlock'} />,
+            label: t(
+              !items.isReorderDisabled
+                ? 'context_menu.reorder_disable'
+                : 'context_menu.reorder_enable',
+            ),
             onClick() {
               dispatch(RootActions.setToolbarReorderDisabled(!items.isReorderDisabled));
               SaveToolbarItems();

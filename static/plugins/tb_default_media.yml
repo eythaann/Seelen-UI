@@ -1,18 +1,18 @@
-id: "@default/media"
-icon: "IoVolumeMediumOutline"
-target: "@seelen/fancy-toolbar"
+id: '@default/media'
+icon: 'IoVolumeMediumOutline'
+target: '@seelen/fancy-toolbar'
 plugin:
   type: media
   withMediaControls: true
   template: >-
-    isMuted
-    ? icon.IoVolumeMuteOutline
-    : volume >= 0.66
-    ? icon.IoVolumeHighOutline
-    : volume >= 0.33
-    ? icon.IoVolumeMediumOutline
-    : volume != 0
-    ? icon.IoVolumeLowOutline
-    : icon.IoVolumeOffOutline
+    return isMuted
+      ? icon("IoVolumeMuteOutline")
+      : volume >= 0.66
+        ? icon("IoVolumeHighOutline")
+        : volume >= 0.33
+          ? icon("IoVolumeMediumOutline")
+          : volume != 0
+            ? icon("IoVolumeLowOutline")
+            : icon("IoVolumeOffOutline")
   tooltip: >-
-    concat(t("placeholder.volume"), ": ", string(round(volume * 100)), "%")
+    return [t("placeholder.volume"), ": ", (volume * 100).toFixed(0), "%"]

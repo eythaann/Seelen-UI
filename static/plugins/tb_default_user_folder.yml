@@ -5,10 +5,6 @@ plugin:
   type: user
   withUserFolder: true
   template: |-
-    concat(
-      imgFromPath(user.profilePicturePath),
-      " ",
-      user.name
-    )
+    return [imgFromPath(user.profilePicturePath), ' ', user.name];
   style:
     flexShrink: 0

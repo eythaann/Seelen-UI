@@ -3,6 +3,6 @@ icon: "MdCenterFocusWeak"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: generic
-  template: window.title
+  template: return window.title
   style:
     flexShrink: 2

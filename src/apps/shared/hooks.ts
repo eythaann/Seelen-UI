@@ -1,4 +1,5 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { isEqual } from 'lodash';
 import { useEffect, useRef } from 'react';
 
 export function useWindowFocusChange(cb: (focused: boolean) => void) {
@@ -70,4 +71,12 @@ export function useSyncClockInterval(cb: () => void, on: 'minutes' | 'seconds', 
 
     return clearLastInterval;
   }, [on, ...deps]);
+}
+
+export default function useDeepCompareEffect(callback: () => void, dependencies: any[]) {
+  const currentDependenciesRef = useRef<any[]>();
+  if (!isEqual(currentDependenciesRef.current, dependencies)) {
+    currentDependenciesRef.current = dependencies;
+  }
+  useEffect(callback, [currentDependenciesRef.current]);
 }

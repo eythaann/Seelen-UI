@@ -11,7 +11,13 @@ function StringifyParams(params: any[]): string {
     }
 
     if (typeof current === 'object') {
-      return acc + ' ' + JSON.stringify(current, null, 2);
+      let stringObj = '';
+      try {
+        stringObj = JSON.stringify(current, null, 2);
+      } catch (_e) {
+        stringObj = `${current}`;
+      }
+      return acc + ' ' + stringObj;
     }
 
     return acc + ' ' + `${current}`;

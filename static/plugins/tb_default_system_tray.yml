@@ -1,7 +1,7 @@
-id: "@default/system-tray"
-icon: "IoFileTrayFullOutline"
-target: "@seelen/fancy-toolbar"
+id: '@default/system-tray'
+icon: 'IoFileTrayFullOutline'
+target: '@seelen/fancy-toolbar'
 plugin:
   type: tray
-  template: icon.BsThreeDots
+  template: return icon("BsThreeDots")
   tooltip: t("placeholder.open_system_tray")

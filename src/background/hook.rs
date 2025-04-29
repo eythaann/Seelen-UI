@@ -263,12 +263,6 @@ impl HookManager {
 }
 
 pub fn init_self_windows_registry() -> Result<()> {
-    let mut dict = trace_lock!(WINDOW_DICT);
-    dict.clear();
-    WindowEnumerator::new().for_each_and_descendants(|window| {
-        dict.insert(window.address(), WindowCachedData::from(&window));
-    })?;
-
     // this should be the first subscription or it will not work correctly
     HookManager::subscribe(|(event, origin)| match event {
         WinEvent::ObjectCreate => {
@@ -293,6 +287,15 @@ pub fn init_self_windows_registry() -> Result<()> {
                 });
             }
         }
+    });
+
+    std::thread::spawn(|| {
+        let result = WindowEnumerator::new().for_each_and_descendants(|window| {
+            let mut dict = trace_lock!(WINDOW_DICT);
+            dict.entry(window.address())
+                .or_insert_with(|| WindowCachedData::from(&window));
+        });
+        log_error!(result);
     });
 
     // Spawns a background thread that periodically checks for "zombie windows" - windows

@@ -1,82 +1,68 @@
+import Sandbox from '@nyariv/sandboxjs';
 import { SeelenCommand } from '@seelen-ui/lib';
-import { ToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
-import { TFunction } from 'i18next';
-import { evaluate } from 'mathjs';
-import { Dispatch } from 'redux';
+import { memo, useEffect, useRef } from 'react';
 
-import { SaveToolbarItems } from '../main/application';
-import { RootActions } from '../shared/store/app';
-import { Icon } from 'src/apps/shared/components/Icon';
+import { StringToElement } from './infra/StringElement';
 
-export class Scope {
-  scope: Map<string, any>;
+interface SanboxedComponentProps {
+  code: string;
+  scope: Record<string, any>;
+}
 
-  constructor() {
-    this.scope = new Map();
+function _SanboxedComponent({ code, scope }: SanboxedComponentProps) {
+  const sandbox = useRef(new Sandbox());
+  const executor = useRef(sandbox.current.compile(code));
+
+  useEffect(() => {
+    sandbox.current = new Sandbox();
+    executor.current = sandbox.current.compile(code);
+  }, [code]);
+
+  try {
+    const content = executor.current({ ...scope }).run();
+    return <ElementsFromEvaluated content={content} />;
+  } catch (error) {
+    console.error(error, { scope });
+    return <span>!?</span>;
   }
+}
 
-  get(key: string) {
-    return this.scope.get(key);
-  }
+export const SanboxedComponent = memo(_SanboxedComponent);
 
-  set(key: string, value: any) {
-    return this.scope.set(key, value);
-  }
-
-  has(key: string) {
-    return this.scope.has(key);
-  }
-
-  keys(): string[] | IterableIterator<string> {
-    return this.scope.keys();
-  }
-
-  loadInvokeActions() {
-    for (const [key, value] of Object.entries(ActionsScope)) {
-      this.set(key, value);
-    }
+export function ElementsFromEvaluated({ content }: { content: any }) {
+  switch (typeof content) {
+    case 'string':
+      return <StringToElement text={content} />;
+    case 'number':
+    case 'boolean':
+    case 'bigint':
+      return <StringToElement text={content.toString()} />;
+    case 'object':
+      if (Array.isArray(content)) {
+        return content.map((item: any, index: number) => {
+          return <ElementsFromEvaluated key={index} content={item} />;
+        });
+      }
+    default:
+      return null;
   }
 }
 
 const ActionsScope = {
   open(path: string) {
-    invoke(SeelenCommand.OpenFile, { path }).catch(console.error);
+    invoke(SeelenCommand.OpenFile, { path });
   },
   run(program: string, args: string[], workingDir: string) {
-    invoke(SeelenCommand.Run, { program, args, workingDir }).catch(console.error);
+    invoke(SeelenCommand.Run, { program, args, workingDir });
   },
-  copyClipboard(text: string) {
+  copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
   },
 };
 
-type Result = { ok: any; err?: never } | { err: any; ok?: never };
-export function safeEval(expression: string, scope: Scope): Result {
-  try {
-    return {
-      ok: evaluate(expression, scope),
-    };
-  } catch (error) {
-    console.error('Error evaluating: ', expression);
-    console.error(error);
-    return {
-      err: error,
-    };
-  }
-}
-
-export function CommonItemContextMenu(t: TFunction, d: Dispatch, item: Omit<ToolbarItem, 'type'>) {
-  return [
-    {
-      key: 'remove',
-      label: t('context_menu.remove'),
-      icon: <Icon iconName="CgExtensionRemove" />,
-      className: 'ft-bar-item-context-menu-item',
-      onClick() {
-        d(RootActions.removeItem(item.id));
-        SaveToolbarItems()?.catch(console.error);
-      },
-    },
-  ];
+export async function EvaluateAction(code: string, scope: Record<string, any>) {
+  const sandbox = new Sandbox();
+  const executor = sandbox.compileAsync(code);
+  await executor({ ...scope, ...ActionsScope }).run();
 }

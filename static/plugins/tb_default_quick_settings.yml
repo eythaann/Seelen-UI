@@ -3,5 +3,5 @@ icon: "LuSettings2"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: settings
-  template: icon.LuSettings2
+  template: return icon("LuSettings2")
   tooltip: t("placeholder.settings")
