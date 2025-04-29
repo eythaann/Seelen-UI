@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Frasa, kod atau pin
   scanning: Mengimbas peranti
 context_menu:
-  add_module: Tambah modul
+  modules: Modul
   remove: Keluarkan modul
   reorder_disable: Kunci Toolbar
   reorder_enable: Buka kunci bar alat
+  restore: Pulihkan ke lalai
   settings: tetapan
   task_manager: Pengurus Tugas
 keyboard:

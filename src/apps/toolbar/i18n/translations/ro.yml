@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Frază de acces, cod sau PIN
   scanning: Scanarea pentru dispozitive
 context_menu:
-  add_module: Adăugați modul
+  modules: Module
   remove: Scoateți modulul
   reorder_disable: Blocați bara de instrumente
   reorder_enable: Deblocați bara de instrumente
+  restore: Restaurarea la setările implicite
   settings: Setări
   task_manager: Manager de activități
 keyboard:

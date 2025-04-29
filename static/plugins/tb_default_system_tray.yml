@@ -4,4 +4,4 @@ target: '@seelen/fancy-toolbar'
 plugin:
   type: tray
   template: return icon("BsThreeDots")
-  tooltip: t("placeholder.open_system_tray")
+  tooltip: return t("placeholder.open_system_tray")

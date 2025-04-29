@@ -12,10 +12,11 @@ bluetooth:
     passphrase: ឃ្លាសម្ងាត់កូដឬលេខសម្ងាត់
   scanning: ស្កេនរកឧបករណ៍
 context_menu:
-  add_module: បន្ថែមម៉ូឌុល
+  modules: ម៉ូឌុល
   remove: យកម៉ូឌុលចេញ
   reorder_disable: ចាក់សោរបារឧបករណ៍
   reorder_enable: ដោះសោរបារឧបករណ៍ដោះសោរបារឧបករណ៍
+  restore: ស្តារទៅលំនាំដើមវិញ
   settings: ការកំណត់
   task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
 keyboard:

@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Парола, код или ПИН код
   scanning: Сканиране за устройства
 context_menu:
-  add_module: Добавете модул
+  modules: Модули
   remove: Премахване на модула
   reorder_disable: Заключване на лентата с инструменти
   reorder_enable: Отключване на лентата с инструменти
+  restore: Възстановяване на настройките по подразбиране
   settings: Настройки
   task_manager: Диспечер на задачите
 keyboard:

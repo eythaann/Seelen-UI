@@ -16,12 +16,12 @@ impl FullState {
             left: vec![
                 ToolbarItem2::Plugin("@default/user-folder".into()),
                 ToolbarItem2::Inline(ToolbarItem::Text(TextToolbarItem {
-                    template: "\"|\"".into(),
+                    template: "return \"|\"".into(),
                     ..Default::default()
                 })),
                 ToolbarItem2::Plugin("@default/focused-app".into()),
                 ToolbarItem2::Inline(ToolbarItem::Generic(GenericToolbarItem {
-                    template: "window.title ? \"-\" : \"\"".into(),
+                    template: "return window.title ? \"-\" : \"\"".into(),
                     ..Default::default()
                 })),
                 ToolbarItem2::Plugin("@default/focused-app-title".into()),

@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, msimbo au pini
   scanning: Skanning kwa vifaa
 context_menu:
-  add_module: Ongeza moduli
+  modules: Moduli
   remove: Ondoa moduli
   reorder_disable: Kufunga zana
   reorder_enable: Fungua zana ya zana
+  restore: Rejesha kwa chaguo -msingi
   settings: Mipangilio
   task_manager: Meneja wa Kazi
 keyboard:

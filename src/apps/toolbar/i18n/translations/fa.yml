@@ -12,10 +12,11 @@ bluetooth:
     passphrase: عارضه ، کد یا پین
   scanning: اسکن برای دستگاه ها
 context_menu:
-  add_module: ماژول را اضافه کنید
+  modules: ماژول
   remove: ماژول را حذف کنید
   reorder_disable: نوار ابزار قفل
   reorder_enable: نوار ابزار را باز کنید
+  restore: بازگرداندن به طور پیش فرض
   settings: تنظیمات
   task_manager: Task Manager
 keyboard:

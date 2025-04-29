@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Pasahitza, kodea edo PINa
   scanning: Gailuetarako eskaneatzea
 context_menu:
-  add_module: Gehitu modulua
+  modules: Modulu
   remove: Kendu modulua
   reorder_disable: Blokeatu tresna barra
   reorder_enable: Desblokeatu tresna barra
+  restore: Lehenetsitako lehenetsia
   settings: Ezarpenak
   task_manager: Zereginen kudeatzailea
 keyboard:

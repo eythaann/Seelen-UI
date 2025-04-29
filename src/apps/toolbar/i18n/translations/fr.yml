@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Phrase de passe, code ou PIN
   scanning: Recherche de dispositifs
 context_menu:
-  add_module: Ajouter le module
+  modules: Modules
   remove: Retirer le module
   reorder_disable: Verrouiller la barre d'outils
   reorder_enable: Déverrouiller la barre d'outils
+  restore: Rétablir la valeur par défaut
   settings: Paramètres
   task_manager: Gestionnaire de tâches
 keyboard:

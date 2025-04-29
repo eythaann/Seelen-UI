@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Wachtzin, code of pincode
   scanning: Scannen naar apparaten
 context_menu:
-  add_module: Module toevoegen
+  modules: Modules
   remove: Verwijder de module
   reorder_disable: Werkbalk vergrendelen
   reorder_enable: Werkbalk ontgrendelen
+  restore: Terugzetten naar standaard
   settings: Instellingen
   task_manager: Taakbeheer
 keyboard:

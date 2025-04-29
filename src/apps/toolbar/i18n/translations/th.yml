@@ -12,10 +12,11 @@ bluetooth:
     passphrase: รหัสผ่านรหัสหรือพิน
   scanning: การสแกนสำหรับอุปกรณ์
 context_menu:
-  add_module: เพิ่มโมดูล
+  modules: โมดูล
   remove: ลบโมดูล
   reorder_disable: ล็อคแถบเครื่องมือ
   reorder_enable: ปลดล็อคแถบเครื่องมือ
+  restore: คืนค่าเป็นค่าเริ่มต้น
   settings: การตั้งค่า
   task_manager: ตัวจัดการงาน
 keyboard:

@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Jelszó, kód vagy PIN
   scanning: Eszközök keresése
 context_menu:
-  add_module: Modul hozzáadása
+  modules: Modulok
   remove: Modul eltávolítása
   reorder_disable: Eszköztár zárolása
   reorder_enable: Eszköztár feloldása
+  restore: Alapértelmezett állapot visszaállítása
   settings: Beállítások
   task_manager: Feladatkezelő
 keyboard:

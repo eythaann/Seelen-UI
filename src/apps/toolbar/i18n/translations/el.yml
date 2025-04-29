@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Συνθηματική φράση, κωδικός ή PIN
   scanning: Σάρωση για συσκευές
 context_menu:
-  add_module: Προσθήκη ενότητας
+  modules: Ενότητες
   remove: Αφαιρέστε την ενότητα
   reorder_disable: Κλείδωμα γραμμής εργαλείων
   reorder_enable: Ξεκλείδωμα γραμμής εργαλείων
+  restore: Επαναφορά στην προεπιλογή
   settings: Ρυθμίσεις
   task_manager: Task Manager
 keyboard:

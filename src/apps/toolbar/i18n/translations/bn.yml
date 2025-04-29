@@ -12,10 +12,11 @@ bluetooth:
     passphrase: পাসফ্রেজ, কোড বা পিন
   scanning: ডিভাইসগুলির জন্য স্ক্যানিং
 context_menu:
-  add_module: মডিউল যুক্ত করুন
+  modules: মডিউল
   remove: মডিউল সরান
   reorder_disable: লক টুলবার
   reorder_enable: সরঞ্জামদণ্ড আনলক করুন
+  restore: ডিফল্ট পুনরুদ্ধার
   settings: সেটিংস
   task_manager: টাস্ক ম্যানেজার
 keyboard:

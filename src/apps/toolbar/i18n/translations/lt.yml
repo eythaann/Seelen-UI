@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Slaptažodžių frazė, kodas arba PIN kodas
   scanning: Įrenginių nuskaitymas
 context_menu:
-  add_module: Pridėti modulį
+  modules: Moduliai
   remove: Pašalinkite modulį
   reorder_disable: Užrakinti įrankių juostą
   reorder_enable: Atrakinti įrankių juostą
+  restore: Atkurti numatytąjį nustatymą
   settings: Nustatymai
   task_manager: Užduočių tvarkyklė
 keyboard:

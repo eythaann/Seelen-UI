@@ -12,10 +12,11 @@ bluetooth:
     passphrase: ਪ੍ਹੈਰਾ, ਕੋਡ ਜਾਂ ਪਿੰਨ
   scanning: ਡਿਵਾਈਸਾਂ ਲਈ ਸਕੈਨ ਕਰਨਾ
 context_menu:
-  add_module: ਮੋਡੀ module ਲ ਸ਼ਾਮਲ ਕਰੋ
+  modules: ਮੋਡੀ ules ਲ
   remove: ਮੋਡੀ module ਲ ਹਟਾਓ
   reorder_disable: ਲਾਕ ਟੂਲਬਾਰ
   reorder_enable: ਅਨਲੌਕ ਟੂਲਬਾਰ
+  restore: ਡਿਫੌਲਟ ਤੇ ਰੀਸਟੋਰ ਕਰੋ
   settings: ਸੈਟਿੰਗਾਂ
   task_manager: ਟਾਸਕ ਮੈਨੇਜਰ
 keyboard:

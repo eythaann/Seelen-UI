@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Гузарвожа, рамз ё PIN
   scanning: Ҷустуҷӯи дастгоҳҳо
 context_menu:
-  add_module: Иловаи модул
+  modules: Модулҳо
   remove: Модулро хориҷ кунед
   reorder_disable: Лок
   reorder_enable: Ворид кардани панели асбобҳо
+  restore: Барқарор кардан
   settings: Танзимотҳо
   task_manager: Менеҷери вазифа
 keyboard:

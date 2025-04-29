@@ -12,10 +12,11 @@ bluetooth:
     passphrase: पासफ्रेज, कोड वा पिन
   scanning: उपकरणहरूको लागि स्क्यान गर्दै
 context_menu:
-  add_module: मोड्युल थप्नुहोस्
+  modules: मोड्युलहरू
   remove: मोड्युल हटाउनुहोस्
   reorder_disable: लक उपकरणपट्टी
   reorder_enable: अनलक उपकरणपट्टी
+  restore: पूर्वनिर्धारित गर्न पुनर्स्थापना
   settings: सेटिङहरू
   task_manager: कार्य प्रबन्धक
 keyboard:

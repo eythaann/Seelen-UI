@@ -12,10 +12,11 @@ bluetooth:
     passphrase: パスフレーズ、コードまたはPIN
   scanning: デバイスのスキャン
 context_menu:
-  add_module: モジュールを追加
+  modules: モジュール
   remove: モジュールを削除
   reorder_disable: ツールバーをロック
   reorder_enable: ツールバーのロック解除
+  restore: デフォルトに戻す
   settings: SeelenUIの設定
   task_manager: タスクマネージャー
 keyboard:

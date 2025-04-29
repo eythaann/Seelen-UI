@@ -12,10 +12,11 @@ bluetooth:
     passphrase: கடவுச்சொல், குறியீடு அல்லது முள்
   scanning: சாதனங்களுக்கான ஸ்கேன்
 context_menu:
-  add_module: தொகுதி சேர்க்கவும்
+  modules: தொகுதிகள்
   remove: தொகுதியை அகற்று
   reorder_disable: பூட்டு கருவிப்பட்டி
   reorder_enable: கருவிப்பட்டியைத் திறக்கவும்
+  restore: இயல்புநிலைக்கு மீட்டமைக்கவும்
   settings: அமைப்புகள்
   task_manager: பணி மேலாளர்
 keyboard:

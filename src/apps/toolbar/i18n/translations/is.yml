@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, kóða eða pinna
   scanning: Skönnun fyrir tæki
 context_menu:
-  add_module: Bættu við einingu
+  modules: Einingar
   remove: Fjarlægðu eininguna
   reorder_disable: Læsa tækjastiku
   reorder_enable: Opnaðu tækjastiku
+  restore: Endurheimta í sjálfgefið
   settings: Stillingar
   task_manager: Verkefnastjóri
 keyboard:

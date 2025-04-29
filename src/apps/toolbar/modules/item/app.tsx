@@ -1,7 +1,8 @@
 import Sandbox from '@nyariv/sandboxjs';
-import { SeelenCommand } from '@seelen-ui/lib';
+import { SeelenCommand, SeelenEvent } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
-import { memo, useEffect, useRef } from 'react';
+import { emit, emitTo } from '@tauri-apps/api/event';
+import { memo, useEffect, useRef, useState } from 'react';
 
 import { StringToElement } from './infra/StringElement';
 
@@ -12,18 +13,20 @@ interface SanboxedComponentProps {
 
 function _SanboxedComponent({ code, scope }: SanboxedComponentProps) {
   const sandbox = useRef(new Sandbox());
-  const executor = useRef(sandbox.current.compile(code));
+  const [executor, setExecutor] = useState(() => sandbox.current.compile(code));
 
   useEffect(() => {
     sandbox.current = new Sandbox();
-    executor.current = sandbox.current.compile(code);
+    const newExecutor = sandbox.current.compile(code);
+    setExecutor(() => newExecutor);
   }, [code]);
 
   try {
-    const content = executor.current({ ...scope }).run();
+    const content = executor({ ...scope }).run();
     return <ElementsFromEvaluated content={content} />;
   } catch (error) {
-    console.error(error, { scope });
+    const { env: _, ...rest } = scope;
+    console.error(error, { scope: rest });
     return <span>!?</span>;
   }
 }
@@ -59,6 +62,17 @@ const ActionsScope = {
   copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
   },
+  invoke(command: SeelenCommand, args?: any) {
+    invoke(command, args);
+  },
+  emit(event: SeelenEvent, payload?: unknown) {
+    emit(event, payload);
+  },
+  emitTo(target: string, event: SeelenEvent, payload?: unknown) {
+    emitTo(target, event, payload);
+  },
+  SeelenCommand,
+  SeelenEvent,
 };
 
 export async function EvaluateAction(code: string, scope: Record<string, any>) {

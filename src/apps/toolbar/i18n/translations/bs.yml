@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, kod ili pin
   scanning: Skeniranje za uređaje
 context_menu:
-  add_module: Dodajte modul
+  modules: Moduli
   remove: Ukloni modul
   reorder_disable: Zaključana alatna traka
   reorder_enable: Otključajte alatnu traku
+  restore: Vratite do zadane vrijednosti
   settings: Postavke
   task_manager: Task Manager
 keyboard:

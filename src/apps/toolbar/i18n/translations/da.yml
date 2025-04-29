@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Adgangssætning, kode eller PIN-kode
   scanning: Scanning efter enheder
 context_menu:
-  add_module: Tilføj modul
+  modules: Moduler
   remove: Fjern modulet
   reorder_disable: Lås værktøjslinjen
   reorder_enable: Lås værktøjslinjen op
+  restore: Gendan til standard
   settings: Indstillinger
   task_manager: Task Manager
 keyboard:

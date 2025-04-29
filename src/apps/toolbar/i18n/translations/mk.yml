@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Фраза, код или игла
   scanning: Скенирање за уреди
 context_menu:
-  add_module: Додадете модул
+  modules: Модули
   remove: Отстранете го модулот
   reorder_disable: Заклучете ја лентата со алатки
   reorder_enable: Отклучете ја лентата со алатки
+  restore: Враќање на стандардно
   settings: Поставки
   task_manager: Управувач со задачи
 keyboard:

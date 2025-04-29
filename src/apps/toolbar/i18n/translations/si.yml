@@ -12,10 +12,11 @@ bluetooth:
     passphrase: මුරපදය, කේතය හෝ පින්
   scanning: උපාංග සඳහා පරිලෝකනය කිරීම
 context_menu:
-  add_module: මොඩියුලය එක් කරන්න
+  modules: මොඩියුල
   remove: මොඩියුලය ඉවත් කරන්න
   reorder_disable: අගුළු මෙවලම් තීරුව
   reorder_enable: මෙවලම් තීරුව අගුළු ඇරීම
+  restore: පෙරනිමියට ප්රතිස්ථාපනය කරන්න
   settings: සැකසීම්
   task_manager: කාර්ය කළමනාකරු
 keyboard:

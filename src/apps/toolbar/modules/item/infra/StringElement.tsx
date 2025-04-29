@@ -1,6 +1,8 @@
 import { convertFileSrc } from '@tauri-apps/api/core';
 import React from 'react';
 
+import { EvaluateAction } from '../app';
+
 import { FileIcon, Icon } from '../../../../shared/components/Icon';
 
 interface StringToElementProps {
@@ -8,6 +10,7 @@ interface StringToElementProps {
 }
 
 export class StringToElement extends React.PureComponent<StringToElementProps> {
+  static buttonPrefix = 'BUTTON:';
   static iconPrefix = 'ICON:';
   static imgPrefix = 'IMG:';
   static exePrefix = 'EXE:';
@@ -17,6 +20,10 @@ export class StringToElement extends React.PureComponent<StringToElementProps> {
       return '';
     }
     return `${StringToElement.iconPrefix}${JSON.stringify({ name, size })}`;
+  }
+
+  static getButton(opt: { onClick: string; content: string }) {
+    return `${StringToElement.buttonPrefix}${JSON.stringify(opt)}`;
   }
 
   static imgFromUrl(url: string, size = 16) {
@@ -33,8 +40,8 @@ export class StringToElement extends React.PureComponent<StringToElementProps> {
     return StringToElement.imgFromUrl(convertFileSrc(path), size);
   }
 
-  static imgFromExe(path?: string | null, umid?: string | null, size = 16) {
-    if (!path) {
+  static imgFromApp(path?: string | null, umid?: string | null, size = 16) {
+    if (!path && !umid) {
       return '';
     }
     return `${StringToElement.exePrefix}${JSON.stringify({ path, umid, size })}`;
@@ -50,6 +57,10 @@ export class StringToElement extends React.PureComponent<StringToElementProps> {
 
   isIcon() {
     return this.props.text.startsWith(StringToElement.iconPrefix);
+  }
+
+  isButton() {
+    return this.props.text.startsWith(StringToElement.buttonPrefix);
   }
 
   isExe() {
@@ -74,6 +85,15 @@ export class StringToElement extends React.PureComponent<StringToElementProps> {
       const json = this.props.text.slice(StringToElement.iconPrefix.length);
       const { name, size } = JSON.parse(json);
       return <Icon iconName={name} size={size} />;
+    }
+
+    if (this.isButton()) {
+      const json = this.props.text.slice(StringToElement.buttonPrefix.length);
+      const { onClick, content } = JSON.parse(json);
+
+      return <button onClick={() => EvaluateAction(onClick, {})}>
+        <StringToElement text={content} />
+      </button>;
     }
 
     return <span>{this.props.text}</span>;

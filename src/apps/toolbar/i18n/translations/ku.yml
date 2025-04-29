@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, kod an pin
   scanning: Ji bo amûrên şehîn
 context_menu:
-  add_module: Modulê zêde bikin
+  modules: Modules
   remove: Modulê rakirin
   reorder_disable: Toolbar tool
   reorder_enable: Vebijêrin Toolbar
+  restore: Restore to Default
   settings: Settings
   task_manager: Gerînendetiya Peywiran
 keyboard:

@@ -12,10 +12,11 @@ bluetooth:
     passphrase: పాస్‌ఫ్రేజ్, కోడ్ లేదా పిన్
   scanning: పరికరాల కోసం స్కానింగ్
 context_menu:
-  add_module: మాడ్యూల్ జోడించండి
+  modules: గుణకాలు
   remove: మాడ్యూల్ తొలగించండి
   reorder_disable: లాక్ టూల్‌బార్
   reorder_enable: అన్‌లాక్ టూల్‌బార్
+  restore: డిఫాల్ట్‌కు పునరుద్ధరించండి
   settings: సెట్టింగ్‌లు
   task_manager: టాస్క్ మేనేజర్
 keyboard:

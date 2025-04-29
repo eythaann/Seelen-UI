@@ -12,10 +12,11 @@ bluetooth:
     passphrase: 비밀번호, 코드 또는 PIN
   scanning: 디바이스 검색
 context_menu:
-  add_module: 모듈 추가
+  modules: 모듈
   remove: 모듈 제거
   reorder_disable: 잠금 도구 모음
   reorder_enable: 도구 모음 잠금 해제
+  restore: 기본값으로 복원
   settings: 설정
   task_manager: 작업 관리자
 keyboard:

@@ -12,10 +12,11 @@ bluetooth:
     passphrase: પાસફ્રેઝ, કોડ અથવા પિન
   scanning: ઉપકરણો માટે સ્કેન કરવું
 context_menu:
-  add_module: મોડ્યુલ ઉમેરો
+  modules: અંતલો
   remove: મોડ્યુલ દૂર કરો
   reorder_disable: તલવાર
   reorder_enable: ટૂલબારને અનલ lock ક કરો
+  restore: ડિફ default લ્ટ પર પુન restore સ્થાપિત કરો
   settings: સેટિંગ્સ
   task_manager: ટાસ્ક મેનેજર
 keyboard:

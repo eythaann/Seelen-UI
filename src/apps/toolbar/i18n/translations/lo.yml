@@ -12,10 +12,11 @@ bluetooth:
     passphrase: passphrase, ລະຫັດຫຼື PIN
   scanning: ການສະແກນສໍາລັບອຸປະກອນຕ່າງໆ
 context_menu:
-  add_module: ເພີ່ມໂມດູນ
+  modules: ໂມດູນ
   remove: ດຶງອອກຈາກໂມດູນ
   reorder_disable: ແຖບເຄື່ອງມືລັອກ
   reorder_enable: ແຖບເຄື່ອງມືປົດລັອກ
+  restore: ຟື້ນຟູໃຫ້ເປັນຄ່າເລີ່ມຕົ້ນ
   settings: ການຕັ້ງຄ່າ
   task_manager: Task Manager
 keyboard:

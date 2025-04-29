@@ -12,10 +12,11 @@ bluetooth:
     passphrase: پاسفریز ، کوڈ یا پن
   scanning: آلات کے لئے اسکیننگ
 context_menu:
-  add_module: ماڈیول شامل کریں
+  modules: ماڈیولز
   remove: ماڈیول کو ہٹا دیں
   reorder_disable: لاک ٹول بار
   reorder_enable: ٹول بار کو انلاک کریں
+  restore: ڈیفالٹ میں بحال کریں
   settings: ترتیبات
   task_manager: ٹاسک مینیجر
 keyboard:

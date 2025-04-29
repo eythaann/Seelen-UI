@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Hasło, kod lub PIN
   scanning: Skanowanie w poszukiwaniu urządzeń
 context_menu:
-  add_module: Dodaj moduł
+  modules: Moduły
   remove: Usuń moduł
   reorder_disable: Blokada paska narzędzi
   reorder_enable: Odblokuj pasek narzędzi
+  restore: Przywróć domyślne
   settings: Ustawienia
   task_manager: Menedżer zadań
 keyboard:

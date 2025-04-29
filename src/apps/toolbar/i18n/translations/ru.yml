@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Пароль, код или PIN-код
   scanning: Сканирование для поиска устройств
 context_menu:
-  add_module: Добавить модуль
+  modules: Модули
   remove: Удалить модуль
   reorder_disable: Заблокировать панели
   reorder_enable: Разблокировать панель
+  restore: Восстановить по умолчанию
   settings: Настройки
   task_manager: Диспетчер задач
 keyboard:

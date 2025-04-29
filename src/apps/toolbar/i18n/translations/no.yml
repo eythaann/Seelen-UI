@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passfrase, kode eller pinne
   scanning: Skanning etter enheter
 context_menu:
-  add_module: Legg til modul
+  modules: Moduler
   remove: Fjern modulen
   reorder_disable: Lås verktøylinje
   reorder_enable: Lås opp verktøylinje
+  restore: Gjenopprett til standard
   settings: Innstillinger
   task_manager: Oppgavebehandling
 keyboard:

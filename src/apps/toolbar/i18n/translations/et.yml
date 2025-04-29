@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Salasõna, kood või PIN-kood
   scanning: Seadmete skaneerimine
 context_menu:
-  add_module: Lisage moodul
+  modules: Moodulid
   remove: Eemaldage moodul
   reorder_disable: Tööriistariba lukustamine
   reorder_enable: Tööriistariba avamine
+  restore: Taastada vaikimisi
   settings: Seaded
   task_manager: Tegumihaldur
 keyboard:

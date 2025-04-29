@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, koodh ama PIN
   scanning: Iskaanka aaladaha
 context_menu:
-  add_module: Ku dar module
+  modules: Moduleles
   remove: Ka saar cutubka
   reorder_disable: Quful aalad
   reorder_enable: Fur furaha aaladda
+  restore: Dib u soo celinta
   settings: Dejinta
   task_manager: Maareeyaha Hawsha
 keyboard:

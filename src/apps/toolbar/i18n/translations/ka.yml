@@ -12,10 +12,11 @@ bluetooth:
     passphrase: პასფაზის, კოდის ან პინის
   scanning: მოწყობილობების სკანირება
 context_menu:
-  add_module: მოდულის დამატება
+  modules: მოდულები
   remove: ამოიღეთ მოდული
   reorder_disable: ჩაკეტეთ პანელი
   reorder_enable: განბლოკეთ პანელი
+  restore: აღადგინეთ ნაგულისხმევი
   settings: პარამეტრები
   task_manager: სამუშაო მენეჯერი
 keyboard:

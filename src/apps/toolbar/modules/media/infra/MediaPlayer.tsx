@@ -1,3 +1,4 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button, Tooltip } from 'antd';
@@ -57,16 +58,16 @@ export function MediaPlayerSession({ session }: { session: MediaChannelTransport
         <h4 className="media-session-title">{session.title}</h4>
         <span className="media-session-author">{session.author}</span>
         <div className="media-session-actions">
-          <Button type="text" onClick={onClickBtn.bind(null, 'media_prev')}>
+          <Button type="text" onClick={onClickBtn.bind(null, SeelenCommand.MediaPrev)}>
             <Icon iconName="TbPlayerSkipBackFilled" color={color} />
           </Button>
-          <Button type="text" onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}>
+          <Button type="text" onClick={onClickBtn.bind(null, SeelenCommand.MediaTogglePlayPause)}>
             <Icon
               iconName={session.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
               color={color}
             />
           </Button>
-          <Button type="text" onClick={onClickBtn.bind(null, 'media_next')}>
+          <Button type="text" onClick={onClickBtn.bind(null, SeelenCommand.MediaNext)}>
             <Icon iconName="TbPlayerSkipForwardFilled" color={color} />
           </Button>
         </div>

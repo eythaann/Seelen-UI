@@ -24,11 +24,15 @@ export interface InnerItemProps extends PropsWithChildren {
 }
 
 const commonScope = {
+  button: StringToElement.getButton,
   icon: StringToElement.getIcon,
   getIcon: StringToElement.getIcon,
   imgFromUrl: StringToElement.imgFromUrl,
   imgFromPath: StringToElement.imgFromPath,
-  imgFromExe: StringToElement.imgFromExe,
+  imgFromExe: StringToElement.imgFromApp, // backward compatibility
+  imgFromApp: (opt: { path?: string | null; umid?: string | null; size?: number }) => {
+    return StringToElement.imgFromApp(opt.path, opt.umid, opt.size);
+  },
 };
 
 export function InnerItem(props: InnerItemProps) {

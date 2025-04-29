@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, Code or PIN
   scanning: Scanning for devices
 context_menu:
-  add_module: Add Module
+  modules: Modules
   remove: Remove Module
   reorder_disable: Lock toolbar
   reorder_enable: Unlock toolbar
+  restore: Restore to Default
   settings: Settings
   task_manager: Task Manager
 keyboard:

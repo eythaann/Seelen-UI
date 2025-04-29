@@ -12,10 +12,11 @@ bluetooth:
     passphrase: عبارة المرور أو الرمز أو رقم التعريف الشخصي
   scanning: المسح الضوئي للأجهزة
 context_menu:
-  add_module: إضافة الوحدة النمطية
+  modules: الوحدات النمطية
   remove: إزالة الوحدة النمطية
   reorder_disable: قفل شريط الأدوات
   reorder_enable: فتح شريط الأدوات
+  restore: الاستعادة إلى الوضع الافتراضي
   settings: إعدادات
   task_manager: مدير المهام
 keyboard:

@@ -12,10 +12,11 @@ bluetooth:
     passphrase: የይለፍ ሐረግ, ኮድ ወይም ፒን
   scanning: ለመሣሪያዎች መቃኘት
 context_menu:
-  add_module: ሞዱል ያክሉ
+  modules: ሞጁሎች
   remove: ሞጁሎችን ያስወግዱ
   reorder_disable: የመሳሪያ አሞሌ
   reorder_enable: የመሣሪያ አሞሌን ይክፈቱ
+  restore: ወደ ነባሪነት ይመልሱ
   settings: ቅንብሮች
   task_manager: ተግባር አስተዳዳሪ
 keyboard:

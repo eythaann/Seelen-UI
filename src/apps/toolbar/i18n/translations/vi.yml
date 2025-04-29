@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Cụm mật khẩu, mã hoặc pin
   scanning: Quét cho các thiết bị
 context_menu:
-  add_module: Thêm mô -đun
+  modules: Mô -đun
   remove: Xóa mô -đun
   reorder_disable: Thanh công cụ khóa
   reorder_enable: Mở khóa thanh công cụ
+  restore: Khôi phục về mặc định
   settings: Cài đặt
   task_manager: Trình quản lý tác vụ
 keyboard:

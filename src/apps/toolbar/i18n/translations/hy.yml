@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Անհատական, կոդ կամ քորոց
   scanning: Սարքավորումների սկանավորում
 context_menu:
-  add_module: Ավելացնել մոդուլ
+  modules: Մոդուլներ
   remove: Հեռացրեք մոդուլը
   reorder_disable: Կողպեք գործիքագոտին
   reorder_enable: Բացել գործիքագոտին
+  restore: Վերականգնել լռելյայն
   settings: Կարգավորումներ
   task_manager: Առաջադրանքների կառավարիչ
 keyboard:

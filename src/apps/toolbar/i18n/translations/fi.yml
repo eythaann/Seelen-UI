@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Salasana, koodi tai PIN-koodi
   scanning: Laitteiden skannaus
 context_menu:
-  add_module: Lisää moduuli
+  modules: Moduulit
   remove: Poista moduuli
   reorder_disable: Lukitse työkalurivi
   reorder_enable: Avaa työkalurivi
+  restore: Palauta oletusasetukset
   settings: Asetukset
   task_manager: Tehtävienhallinta
 keyboard:

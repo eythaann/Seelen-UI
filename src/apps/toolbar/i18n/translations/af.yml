@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passfrase, kode of PIN
   scanning: Skandering vir toestelle
 context_menu:
-  add_module: Voeg module by
+  modules: Modules
   remove: Verwyder die module
   reorder_disable: Sluitbalk
   reorder_enable: Ontsluit werkbalk
+  restore: Herstel na standaard
   settings: Instellings
   task_manager: Taakbestuurder
 keyboard:

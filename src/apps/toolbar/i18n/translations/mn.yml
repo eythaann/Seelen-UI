@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Нэвтрэх, код, код эсвэл PIN
   scanning: Төхөөрөмжийг скан хийх
 context_menu:
-  add_module: Модулийг нэмэх
+  modules: Барилгын
   remove: Модулийг зайлуулах
   reorder_disable: Цонхны түгжээ
   reorder_enable: Хэрэгслийн самбарыг нээнэ үү
+  restore: Анхдагч болгож сэргээнэ үү
   settings: Тохиргоо
   task_manager: Ажлын менежер
 keyboard:

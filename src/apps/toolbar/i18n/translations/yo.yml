@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Ọrọ kukuru, koodu tabi PIN
   scanning: Sisọnu fun awọn ẹrọ
 context_menu:
-  add_module: Fikun module
+  modules: Awọn modulu
   remove: Yọ module
   reorder_disable: Ọpa irinṣẹ Titiipa
   reorder_enable: Ṣii bọtini irinṣẹ
+  restore: Mu pada si aiyipada
   settings: Eto
   task_manager: Oluṣakoso iṣẹ-ṣiṣe
 keyboard:

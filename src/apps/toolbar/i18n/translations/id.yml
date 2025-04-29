@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Frasa Sandi, Kode atau PIN
   scanning: Memindai perangkat
 context_menu:
-  add_module: Tambahkan modul
+  modules: Modul
   remove: Hapus modul
   reorder_disable: Mengunci bilah alat
   reorder_enable: Buka kunci bilah alat
+  restore: Kembalikan ke Default
   settings: Pengaturan
   task_manager: Manajer Tugas
 keyboard:

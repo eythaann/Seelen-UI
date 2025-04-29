@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, kod və ya pin
   scanning: Cihazlar üçün tarama
 context_menu:
-  add_module: Modul əlavə edin
+  modules: Modullar
   remove: Modulu çıxarın
   reorder_disable: Lövhə
   reorder_enable: Toolbar kilidini açın
+  restore: Defolt olaraq bərpa edin
   settings: Parametrlər
   task_manager: Tapşırıq meneceri
 keyboard:

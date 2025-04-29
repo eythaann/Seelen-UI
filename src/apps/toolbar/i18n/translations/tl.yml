@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, code o pin
   scanning: Pag -scan para sa mga aparato
 context_menu:
-  add_module: Magdagdag ng module
+  modules: Mga module
   remove: Alisin ang module
   reorder_disable: I -lock ang toolbar
   reorder_enable: I -unlock ang toolbar
+  restore: Ibalik sa default
   settings: Mga setting
   task_manager: Task Manager
 keyboard:

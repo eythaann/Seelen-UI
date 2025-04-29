@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, kodiċi jew pin
   scanning: Skennjar għal apparati
 context_menu:
-  add_module: Żid il-modulu
+  modules: Moduli
   remove: Neħħi l-modulu
   reorder_disable: Lock Toolbar
   reorder_enable: Nisfruttaw toolbar
+  restore: Irrestawra lil Default
   settings: Settings
   task_manager: Task Manager
 keyboard:

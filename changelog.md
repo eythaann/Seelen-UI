@@ -8,9 +8,12 @@
 - add resources endpoint to home tab on settings.
 - add customizable adn reusable popups implementation.
 - improvements on toolbar plugins system.
+- allow set buttons with custom actions on toolbar, via toolbar plugins.
+- add restore to default button for toolbar structure.
 
 ### enhancements
 - reduce CPU usage on slu-service process.
+- improve ui on toolbar modules.
 
 ### fix
 - media player styles on toolbar.

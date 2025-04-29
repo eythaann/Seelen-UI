@@ -290,12 +290,13 @@ pub fn init_self_windows_registry() -> Result<()> {
     });
 
     std::thread::spawn(|| {
+        let mut dict = unsafe { WINDOW_DICT.make_guard_unchecked() };
         let result = WindowEnumerator::new().for_each_and_descendants(|window| {
-            let mut dict = trace_lock!(WINDOW_DICT);
             dict.entry(window.address())
                 .or_insert_with(|| WindowCachedData::from(&window));
         });
         log_error!(result);
+        std::mem::forget(dict);
     });
 
     // Spawns a background thread that periodically checks for "zombie windows" - windows

@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Passphrase, cod neu pin
   scanning: Sganio am ddyfeisiau
 context_menu:
-  add_module: Ychwanegu Modiwl
+  modules: Modiwlau
   remove: Tynnwch y modiwl
   reorder_disable: Bar offer cloi
   reorder_enable: Datgloi Bar Offer
+  restore: Adfer i Ddiffyg
   settings: Gosodiadau
   task_manager: Rheolwr Tasg
 keyboard:

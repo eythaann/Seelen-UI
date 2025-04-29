@@ -12,10 +12,11 @@ bluetooth:
     passphrase: Fráza, kód alebo PIN
   scanning: Skenovanie zariadení
 context_menu:
-  add_module: Pridať modul
+  modules: Moduly
   remove: Odstrániť modul
   reorder_disable: Uzamknutie panela nástrojov
   reorder_enable: Odomknutie panela nástrojov
+  restore: Obnovenie predvoleného nastavenia
   settings: Nastavenia
   task_manager: Správca úloh
 keyboard:
