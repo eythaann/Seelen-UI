@@ -11,6 +11,7 @@
 ### fix
 - media player styles on toolbar.
 - steam pin item on dock not working properly.
+- plugins not being updated on toolbar.
 
 ## [2.2.9]
 ### enhancements

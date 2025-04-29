@@ -1,5 +1,6 @@
 use std::path::Path;
 
+use itertools::Itertools;
 use seelen_core::{
     handlers::SeelenEvent,
     resource::{ConcreteResource, SluResourceFile},
@@ -13,7 +14,10 @@ use super::FullState;
 
 impl FullState {
     pub(super) fn emit_plugins(&self) -> Result<()> {
-        get_app_handle().emit(SeelenEvent::StatePluginsChanged, &self.plugins)?;
+        get_app_handle().emit(
+            SeelenEvent::StatePluginsChanged,
+            &self.plugins.values().collect_vec(),
+        )?;
         Ok(())
     }
 
