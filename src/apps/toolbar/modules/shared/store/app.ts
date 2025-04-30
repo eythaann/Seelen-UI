@@ -15,7 +15,7 @@ import {
   UserDetails,
   VideosFolder,
 } from '@seelen-ui/lib';
-import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
+import { Placeholder, ToolbarItem2 } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 
 import { AppNotification } from '../../Notifications/domain';
@@ -83,22 +83,22 @@ export const RootSlice = createSlice({
   reducers: {
     ...StateBuilder.reducersFor(initialState),
     setPlaceholder(state, action: PayloadAction<Placeholder>) {
-      state.items = action.payload;
+      state.items = action.payload as any;
       state.version++;
     },
-    setItemsOnLeft(state, action: PayloadAction<ToolbarItem[]>) {
+    setItemsOnLeft(state, action: PayloadAction<ToolbarItem2[]>) {
       if (state.items) {
-        state.items.left = action.payload;
+        state.items.left = action.payload as any;
       }
     },
-    setItemsOnCenter(state, action: PayloadAction<ToolbarItem[]>) {
+    setItemsOnCenter(state, action: PayloadAction<ToolbarItem2[]>) {
       if (state.items) {
-        state.items.center = action.payload;
+        state.items.center = action.payload as any;
       }
     },
-    setItemsOnRight(state, action: PayloadAction<ToolbarItem[]>) {
+    setItemsOnRight(state, action: PayloadAction<ToolbarItem2[]>) {
       if (state.items) {
-        state.items.right = action.payload;
+        state.items.right = action.payload as any;
       }
     },
     addItem(state, action: PayloadAction<string>) {

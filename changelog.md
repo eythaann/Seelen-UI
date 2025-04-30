@@ -10,6 +10,7 @@
 - improvements on toolbar plugins system.
 - allow set buttons with custom actions on toolbar, via toolbar plugins.
 - add restore to default button for toolbar structure.
+- allow fetching remote data on toolbar plugins.
 
 ### enhancements
 - reduce CPU usage on slu-service process.

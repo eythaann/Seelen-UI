@@ -15,15 +15,15 @@ impl FullState {
         Placeholder {
             left: vec![
                 ToolbarItem2::Plugin("@default/user-folder".into()),
-                ToolbarItem2::Inline(ToolbarItem::Text(TextToolbarItem {
+                ToolbarItem2::Inline(Box::new(ToolbarItem::Text(TextToolbarItem {
                     template: "return \"|\"".into(),
                     ..Default::default()
-                })),
+                }))),
                 ToolbarItem2::Plugin("@default/focused-app".into()),
-                ToolbarItem2::Inline(ToolbarItem::Generic(GenericToolbarItem {
+                ToolbarItem2::Inline(Box::new(ToolbarItem::Generic(GenericToolbarItem {
                     template: "return window.title ? \"-\" : \"\"".into(),
                     ..Default::default()
-                })),
+                }))),
                 ToolbarItem2::Plugin("@default/focused-app-title".into()),
             ],
             center: vec![ToolbarItem2::Plugin("@default/date".into())],
