@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.0]
 ### breaking changes
 - remove mathjs eval by an more accurated eval for js code in toolbar plugins. This will break any plugin created before v2.2.10.
 
