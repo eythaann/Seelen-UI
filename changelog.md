@@ -6,7 +6,7 @@
 
 ### features
 - add resources endpoint to home tab on settings.
-- add customizable adn reusable popups implementation.
+- add customizable and reusable popups implementation.
 - improvements on toolbar plugins system.
 - allow set buttons with custom actions on toolbar, via toolbar plugins.
 - add restore to default button for toolbar structure.
