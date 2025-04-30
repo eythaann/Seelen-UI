@@ -303,14 +303,17 @@ pub fn init_self_windows_registry() -> Result<()> {
     // that have been destroyed (e.g., through task kill or abnormal termination) but didn't
     // properly emit the ObjectDestroy event. This thread detects such windows
     // and emits the missing destruction events to ensure proper cleanup.
-    spawn_named_thread("Zombie Window Exterminator", move || loop {
-        std::thread::sleep(std::time::Duration::from_secs(1));
-        let registered = trace_lock!(WINDOW_DICT).keys().cloned().collect_vec();
-        for addr in registered {
-            let window = Window::from(addr);
-            if !window.is_window() {
-                log::trace!("Reaping window: {:0x}", window.address());
-                log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
+    spawn_named_thread("Zombie Window Exterminator", move || {
+        std::thread::sleep(std::time::Duration::from_secs(9));
+        loop {
+            std::thread::sleep(std::time::Duration::from_secs(1));
+            let registered = trace_lock!(WINDOW_DICT).keys().cloned().collect_vec();
+            for addr in registered {
+                let window = Window::from(addr);
+                if !window.is_window() {
+                    log::trace!("Reaping window: {:0x}", window.address());
+                    log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
+                }
             }
         }
     })?;
