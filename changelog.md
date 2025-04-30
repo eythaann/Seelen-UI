@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- mini performance improve on dock.
+
 ## [2.3.1]
 ### breaking changes
 - rename scope variables for toolbar plugins.

@@ -97,29 +97,6 @@ export function SeelenWeg() {
     }
   }, [isOverlaped, settings]);
 
-  const getSeparatorComplementarySize = useCallback(
-    (sideElements: number, centerElements: number) => {
-      let size = '1px';
-
-      if (settings.mode === SeelenWegMode.FullWidth) {
-        size = `calc(50% - (${settings.size + settings.spaceBetweenItems}px * ${
-          sideElements + centerElements / 2
-        }) - ${settings.spaceBetweenItems}px)`;
-      }
-
-      if (settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom) {
-        return {
-          width: size,
-        };
-      }
-
-      return {
-        height: size,
-      };
-    },
-    [settings],
-  );
-
   const onReorderPinned = useCallback((apps: SwItem[]) => {
     let extractedPinned: SwItem[] = [];
 
@@ -205,7 +182,6 @@ export function SeelenWeg() {
                 visible: settings.visibleSeparators,
               })}
               drag={false}
-              style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
             />,
             ...pinnedOnCenter.map(projectSwItem),
             <Reorder.Item
@@ -216,7 +192,6 @@ export function SeelenWeg() {
                 visible: settings.visibleSeparators,
               })}
               drag={false}
-              style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
             />,
             ...pinnedOnRight.map(projectSwItem),
           ]}

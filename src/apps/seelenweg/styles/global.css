@@ -129,6 +129,12 @@ body {
     pointer-events: none;
   }
 
+  &.full-width {
+    .weg-separator {
+      flex: 1;
+    }
+  }
+
   .weg-separator {
     z-index: 1 !important; /* Override inline style */
 
@@ -170,7 +176,7 @@ body {
   position: relative;
   max-width: 100vw;
   gap: var(--config-space-between-items);
-  
+
   .weg-item-preview-scrollbar {
     display: flex;
     overflow-x: auto;
