@@ -1,5 +1,7 @@
 # Seelen UI Toolbar - Layouts and Customization
 
+> **Warning:** Deprecated documentation.
+
 > **Warning:** Do not modify the files in the installation directory. These files are overwritten with each update. To make custom changes, please follow the next guide.
 
 Seelen UI allows you to fully customize your desktop environment, including the toolbar. The toolbar, also known as the "placeholder," can be configured using YAML files and tailored to your needs with various dynamic elements. This document guides you through customizing and managing toolbar items, outlining the available scopes, and providing examples.

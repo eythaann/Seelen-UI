@@ -122,7 +122,7 @@ Once installed or extracted, simply open the program. The easy-to-use and intuit
 For in-depth details on various aspects of Seelen UI, explore the following documents:
 - [Languages](./documentation/languages.md) - Information regarding translations.
 - [Toolbar](./documentation/toolbar.md) - Details about customizing and using the toolbar.
-- [Themes](./documentation/themes.md) - Guidance on creating and applying themes.
+- [Themes](https://seelen.io/blog/seelen-ui-theme-tutorial) - Guidance on creating and applying themes.
 - [Window Manager](./documentation/window_manager.md) - Instructions on configuring the window manager.
 - [Project](./documentation/project.md) - General information about the project and its structure.
 
