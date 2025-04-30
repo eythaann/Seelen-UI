@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../shared/store/app';
-import { EvaluateAction, SanboxedComponent } from '../app';
+import { EvaluateAction } from '../app';
 
 import { cx } from '../../../../shared/styles';
-import { StringToElement } from './StringElement';
+import { SanboxedComponent } from './EvaluatedComponents';
 
 export interface InnerItemProps extends PropsWithChildren {
   module: Omit<ToolbarItem, 'type'>;
@@ -22,18 +22,6 @@ export interface InnerItemProps extends PropsWithChildren {
   onClick?: (e: React.MouseEvent) => void;
   onKeydown?: (e: React.KeyboardEvent) => void;
 }
-
-const commonScope = {
-  button: StringToElement.getButton,
-  icon: StringToElement.getIcon,
-  getIcon: StringToElement.getIcon,
-  imgFromUrl: StringToElement.imgFromUrl,
-  imgFromPath: StringToElement.imgFromPath,
-  imgFromExe: StringToElement.imgFromApp, // backward compatibility
-  imgFromApp: (opt: { path?: string | null; umid?: string | null; size?: number }) => {
-    return StringToElement.imgFromApp(opt.path, opt.umid, opt.size);
-  },
-};
 
 export function InnerItem(props: InnerItemProps) {
   const {
@@ -56,7 +44,6 @@ export function InnerItem(props: InnerItemProps) {
   const { t } = useTranslation();
 
   const [scope, setScope] = useState<Record<string, any>>({
-    ...commonScope,
     env,
     t,
     ...extraVars,
@@ -72,37 +59,37 @@ export function InnerItem(props: InnerItemProps) {
   }, [extraVars, fetchedData]);
 
   return (
-    <Reorder.Item
-      {...rest}
-      id={id}
-      drag={!isReorderDisabled}
-      value={(module as any).__value__ || module}
-      style={style}
-      className={cx('ft-bar-item', {
-        // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
-        'ft-bar-item-clickable': clickable || onClickV2,
-        'ft-bar-item-active': active,
-      })}
-      onWheel={onWheelProp}
-      onKeyDown={onKeydownProp}
-      onClick={(e) => {
-        onClickProp?.(e);
-        if (onClickV2) {
-          EvaluateAction(onClickV2, scope);
-        }
-      }}
-      as="div"
-      transition={{ duration: 0.15 }}
-      onContextMenu={(e) => {
-        e.stopPropagation();
-        (rest as any).onContextMenu?.(e);
-      }}
+    <Tooltip
+      arrow={false}
+      mouseLeaveDelay={0}
+      classNames={{ root: 'ft-bar-item-tooltip' }}
+      title={tooltip ? <SanboxedComponent code={tooltip} scope={scope} /> : undefined}
     >
-      <Tooltip
-        arrow={false}
-        mouseLeaveDelay={0}
-        classNames={{ root: 'ft-bar-item-tooltip' }}
-        title={tooltip ? <SanboxedComponent code={tooltip} scope={scope} /> : undefined}
+      <Reorder.Item
+        {...rest}
+        id={id}
+        drag={!isReorderDisabled}
+        value={(module as any).__value__ || module}
+        style={style}
+        className={cx('ft-bar-item', {
+          // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
+          'ft-bar-item-clickable': clickable || onClickV2,
+          'ft-bar-item-active': active,
+        })}
+        onWheel={onWheelProp}
+        onKeyDown={onKeydownProp}
+        onClick={(e) => {
+          onClickProp?.(e);
+          if (onClickV2) {
+            EvaluateAction(onClickV2, scope);
+          }
+        }}
+        as="div"
+        transition={{ duration: 0.15 }}
+        onContextMenu={(e) => {
+          e.stopPropagation();
+          (rest as any).onContextMenu?.(e);
+        }}
       >
         <div className="ft-bar-item-content">
           {children || <SanboxedComponent code={template} scope={scope} />}
@@ -112,8 +99,8 @@ export function InnerItem(props: InnerItemProps) {
             </div>
           )}
         </div>
-      </Tooltip>
-    </Reorder.Item>
+      </Reorder.Item>
+    </Tooltip>
   );
 }
 

@@ -6,6 +6,6 @@ plugin:
   template: >-
     return count > 0 ? icon("MdNotificationsActive") : icon("MdOutlineNotifications")
   badge: >-
-    return count > 0 ? count : ""
+    return count > 0 ? count : null
   tooltip: >-
     return [t("placeholder.notifications"), ": ", count]

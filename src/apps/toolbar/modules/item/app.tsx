@@ -2,55 +2,6 @@ import Sandbox from '@nyariv/sandboxjs';
 import { SeelenCommand, SeelenEvent } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { emit, emitTo } from '@tauri-apps/api/event';
-import { memo, useEffect, useRef, useState } from 'react';
-
-import { StringToElement } from './infra/StringElement';
-
-interface SanboxedComponentProps {
-  code: string;
-  scope: Record<string, any>;
-}
-
-function _SanboxedComponent({ code, scope }: SanboxedComponentProps) {
-  const sandbox = useRef(new Sandbox());
-  const [executor, setExecutor] = useState(() => sandbox.current.compile(code));
-
-  useEffect(() => {
-    sandbox.current = new Sandbox();
-    const newExecutor = sandbox.current.compile(code);
-    setExecutor(() => newExecutor);
-  }, [code]);
-
-  try {
-    const content = executor({ ...scope }).run();
-    return <ElementsFromEvaluated content={content} />;
-  } catch (error) {
-    const { env: _, ...rest } = scope;
-    console.error(error, { scope: rest });
-    return <span>!?</span>;
-  }
-}
-
-export const SanboxedComponent = memo(_SanboxedComponent);
-
-export function ElementsFromEvaluated({ content }: { content: any }) {
-  switch (typeof content) {
-    case 'string':
-      return <StringToElement text={content} />;
-    case 'number':
-    case 'boolean':
-    case 'bigint':
-      return <StringToElement text={content.toString()} />;
-    case 'object':
-      if (Array.isArray(content)) {
-        return content.map((item: any, index: number) => {
-          return <ElementsFromEvaluated key={index} content={item} />;
-        });
-      }
-    default:
-      return null;
-  }
-}
 
 const ActionsScope = {
   open(path: string) {

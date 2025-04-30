@@ -5,6 +5,6 @@ plugin:
   type: user
   withUserFolder: true
   template: |-
-    return [imgFromPath(user.profilePicturePath), ' ', user.name];
+    return [Image({ path: user.profilePicturePath }), ' ', user.name];
   style:
     flexShrink: 0

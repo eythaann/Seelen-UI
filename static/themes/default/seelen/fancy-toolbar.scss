@@ -243,6 +243,10 @@
   min-width: 12px;
   font-size: 10px;
   border-radius: 8px;
+
+  &:empty {
+    display: none;
+  }
 }
 
 .fast-settings {

@@ -4,6 +4,6 @@ target: "@seelen/fancy-toolbar"
 plugin:
   type: generic
   template: |- 
-    return [imgFromApp({ path: window.exe, umid: window.umid }), "  ", window.name]
+    return [AppIcon({ path: window.exe, umid: window.umid }), "  ", window.name]
   style:
     flexShrink: 0

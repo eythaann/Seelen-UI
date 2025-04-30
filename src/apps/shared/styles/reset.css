@@ -179,3 +179,7 @@
 .ant-picker-cell {
   padding: 0 !important;
 }
+
+.ant-tooltip:has(.ant-tooltip-inner:empty) {
+  display: none;
+}

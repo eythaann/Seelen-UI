@@ -11,7 +11,6 @@ use std::{
 
 use itertools::Itertools;
 use lazy_static::lazy_static;
-use owo_colors::OwoColorize;
 use parking_lot::Mutex;
 use seelen_core::handlers::SeelenEvent;
 use serde::Serialize;
@@ -284,7 +283,7 @@ pub fn init_self_windows_registry() -> Result<()> {
             dict.remove(&origin.address());
         }
         _ => {
-            #[cfg(debug_assertions)]
+            /* #[cfg(debug_assertions)]
             {
                 let mut dict = trace_lock!(WINDOW_DICT);
                 dict.entry(origin.address()).or_insert_with(|| {
@@ -295,7 +294,7 @@ pub fn init_self_windows_registry() -> Result<()> {
                     );
                     WindowCachedData::from(&origin)
                 });
-            }
+            } */
         }
     });
 
