@@ -263,6 +263,16 @@ impl HookManager {
 }
 
 pub fn init_self_windows_registry() -> Result<()> {
+    std::thread::spawn(|| {
+        let mut dict = HashMap::new();
+        let result = WindowEnumerator::new().for_each_and_descendants(|window| {
+            dict.entry(window.address())
+                .or_insert_with(|| WindowCachedData::from(&window));
+        });
+        log_error!(result);
+        trace_lock!(WINDOW_DICT).extend(dict);
+    });
+
     // this should be the first subscription or it will not work correctly
     HookManager::subscribe(|(event, origin)| match event {
         WinEvent::ObjectCreate => {
@@ -289,25 +299,15 @@ pub fn init_self_windows_registry() -> Result<()> {
         }
     });
 
-    std::thread::spawn(|| {
-        let mut dict = unsafe { WINDOW_DICT.make_guard_unchecked() };
-        let result = WindowEnumerator::new().for_each_and_descendants(|window| {
-            dict.entry(window.address())
-                .or_insert_with(|| WindowCachedData::from(&window));
-        });
-        log_error!(result);
-        std::mem::forget(dict);
-    });
-
     // Spawns a background thread that periodically checks for "zombie windows" - windows
     // that have been destroyed (e.g., through task kill or abnormal termination) but didn't
     // properly emit the ObjectDestroy event. This thread detects such windows
     // and emits the missing destruction events to ensure proper cleanup.
     spawn_named_thread("Zombie Window Exterminator", move || loop {
         std::thread::sleep(std::time::Duration::from_secs(1));
-        let dict = trace_lock!(WINDOW_DICT);
-        for (w, _) in dict.iter() {
-            let window = Window::from(*w);
+        let registered = trace_lock!(WINDOW_DICT).keys().cloned().collect_vec();
+        for addr in registered {
+            let window = Window::from(addr);
             if !window.is_window() {
                 log::trace!("Reaping window: {:0x}", window.address());
                 log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
