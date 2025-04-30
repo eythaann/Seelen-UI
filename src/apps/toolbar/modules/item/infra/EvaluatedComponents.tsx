@@ -2,7 +2,7 @@ import { IconName } from '@icons';
 import Sandbox from '@nyariv/sandboxjs';
 import { FileIcon, Icon } from '@shared/components/Icon';
 import { convertFileSrc } from '@tauri-apps/api/core';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { z } from 'zod';
 
 import { EvaluateAction } from '../app';
@@ -25,23 +25,37 @@ const ComponentCreatorScope = {
   Button: (arg: unknown) => EvaluatedButtonPropsSchema.parse(arg),
 };
 
+function compileCode(code: string) {
+  try {
+    const sandbox = new Sandbox();
+    return {
+      sandbox,
+      executor: sandbox.compile(code),
+    };
+  } catch (e) {
+    console.error('Error compiling code: ', e);
+    return null;
+  }
+}
+
 export const SanboxedComponent = memo(_SanboxedComponent);
 function _SanboxedComponent({ code, scope }: SanboxedComponentProps) {
-  const sandbox = useRef(new Sandbox());
-  const [executor, setExecutor] = useState(() => sandbox.current.compile(code));
+  const [compiled, setCompiled] = useState(() => compileCode(code));
 
   useEffect(() => {
-    sandbox.current = new Sandbox();
-    const newExecutor = sandbox.current.compile(code);
-    setExecutor(() => newExecutor);
+    setCompiled(compileCode(code));
   }, [code]);
 
+  if (!compiled) {
+    return <span>!?</span>;
+  }
+
   try {
-    const content = executor({ ...scope, ...ComponentCreatorScope }).run();
+    const content = compiled.executor({ ...scope, ...ComponentCreatorScope }).run();
     return <ElementsFromEvaluated content={content} />;
   } catch (error) {
     const { env: _, ...rest } = scope;
-    console.error(error, { scope: rest });
+    console.error('Error executing component:', { scope: rest });
     return <span>!?</span>;
   }
 }
