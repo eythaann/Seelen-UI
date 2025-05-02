@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.2]
 ### enhancements
 - mini performance improve on dock.
 
