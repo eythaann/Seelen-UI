@@ -16,6 +16,7 @@ impl FullState {
     }
 
     pub(super) fn load_themes(&mut self) -> Result<()> {
+        self.themes.clear();
         let entries = std::fs::read_dir(SEELEN_COMMON.bundled_themes_path())?
             .chain(std::fs::read_dir(SEELEN_COMMON.user_themes_path())?);
         for entry in entries.flatten() {

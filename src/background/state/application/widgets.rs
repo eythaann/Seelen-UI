@@ -28,6 +28,7 @@ impl FullState {
     pub(super) fn load_widgets(&mut self) -> Result<()> {
         let user_path = SEELEN_COMMON.user_widgets_path();
         let bundled_path = SEELEN_COMMON.bundled_widgets_path();
+        self.widgets.clear();
 
         let entries = std::fs::read_dir(bundled_path)?.chain(std::fs::read_dir(user_path)?);
         for entry in entries.flatten() {

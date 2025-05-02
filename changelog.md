@@ -4,6 +4,9 @@
 ### enhancements
 - mini performance improve on dock.
 
+### fix
+- resources not being updated correctly.
+
 ## [2.3.1]
 ### breaking changes
 - rename scope variables for toolbar plugins.

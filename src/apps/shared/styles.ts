@@ -77,13 +77,13 @@ function loadThemes(allThemes: Theme[], selected: string[]) {
   element.textContent = '';
 
   for (const theme of themes) {
-    let layerName = theme.metadata.filename.replace(/[\.]/g, '-') + '-theme';
     const oldKey = OLD_THEME_KEYS_BY_WIDGET_ID[widget.id];
     const cssFileContent =
       theme.styles[widget.id] || (oldKey ? theme.styles[oldKey as WidgetId] : undefined);
     if (!cssFileContent) {
       continue;
     }
+    let layerName = 'theme-' + theme.metadata.filename.replace(/[\.]/g, '_');
     element.textContent += `@layer ${layerName} {\n${cssFileContent}\n}\n`;
   }
 
