@@ -1,8 +1,8 @@
 resource:
   added: נוסף משאב חדש
-  enable: לְאַפשֵׁר
+  enable: אפשר
 runtime:
-  download: עבור לדף ההורדות
+  download: הורדות
   not_found: זמן ריצה של WebView2 לא נמצא
   not_found_description: ממשק המשתמש של Seelen דורש זמן ריצה של Webview2. נא להתקין אותו.
   outdated: זמן ריצה של WebView2 מיושן
@@ -14,6 +14,6 @@ service:
   not_running_description: Seelen UI Service (slu-service) הוא תלות/עוזר כדי שהאפליקציה תפעל כראוי.
   not_running_ok: התחל שירות
 tray:
-  quit: לְהַפְסִיק
+  quit: צא
   restart: הפעל מחדש את UI
   settings: הגדרות
