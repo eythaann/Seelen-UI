@@ -24,9 +24,11 @@ use windows::{
     },
 };
 
+#[allow(dead_code)]
 pub struct ChannelMask {}
 
 #[allow(non_upper_case_globals)]
+#[allow(dead_code)]
 impl ChannelMask {
     pub const Mono: AudioObjectType = AudioObjectType_FrontCenter;
     pub const Stereo: AudioObjectType =

@@ -15,6 +15,7 @@ impl WindowEnumerator {
         Self { parent: None }
     }
 
+    #[allow(dead_code)]
     pub fn with_parent(mut self, parent: HWND) -> Self {
         self.parent = Some(parent);
         self

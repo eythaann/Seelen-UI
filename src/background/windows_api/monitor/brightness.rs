@@ -141,6 +141,7 @@ impl DisplayDevice {
     }
 }
 
+#[allow(dead_code)]
 impl Monitor {
     fn main_physical(&self) -> Result<PHYSICAL_MONITOR> {
         let physical_monitors = WindowsApi::get_physical_monitors(self.handle())?;

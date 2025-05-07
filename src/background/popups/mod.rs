@@ -107,10 +107,10 @@ impl PopupsManager {
                     let mut state = state.cloned();
                     match kind {
                         ResourceKind::Theme => {
-                            state.settings.selected_themes.push(format!("{}.slu", id));
+                            state.settings.selected_themes.push(format!("{id}.slu"));
                         }
                         ResourceKind::IconPack => {
-                            state.settings.icon_packs.push(format!("{}.slu", id));
+                            state.settings.icon_packs.push(format!("{id}.slu"));
                         }
                         _ => {}
                     }

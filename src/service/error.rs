@@ -66,13 +66,13 @@ impl std::fmt::Debug for ServiceError {
                     continue;
                 }
 
-                writeln!(f, "    {}: {}", index, name)?;
+                writeln!(f, "    {index}: {name}")?;
                 if let Some(file) = symbol.filename() {
                     write!(f, "        at: \"{}", file.to_string_lossy())?;
                     if let Some(line) = symbol.lineno() {
-                        write!(f, ":{}", line)?;
+                        write!(f, ":{line}")?;
                         if let Some(col) = symbol.colno() {
-                            write!(f, ":{}", col)?;
+                            write!(f, ":{col}")?;
                         }
                     }
                     writeln!(f, "\"")?;
@@ -89,7 +89,7 @@ impl std::fmt::Debug for ServiceError {
 
 impl std::fmt::Display for ServiceError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:?}", self)
+        write!(f, "{self:?}")
     }
 }
 

@@ -144,6 +144,7 @@ impl Window {
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
+    #[allow(dead_code)]
     pub fn relaunch_icon(&self) -> Option<String> {
         WindowsApi::get_window_relaunch_icon_resource(self.0).ok()
     }
@@ -168,6 +169,7 @@ impl Window {
         self.process().program_display_name()
     }
 
+    #[allow(dead_code)]
     pub fn outer_rect(&self) -> Result<Rect> {
         let rect = WindowsApi::get_outer_window_rect(self.hwnd())?;
         Ok(Rect {

@@ -319,10 +319,6 @@ impl WegItemsImpl {
         }
     }
 
-    pub fn get(&self) -> WegItems {
-        self.items.clone()
-    }
-
     pub fn get_filtered_by_monitor(&self) -> Result<HashMap<String, WegItems>> {
         let mut result = HashMap::new();
         let state = FULL_STATE.load();

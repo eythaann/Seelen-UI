@@ -68,7 +68,7 @@ async fn try_connect_to_profile(ssid: &str) -> Result<bool> {
     let output = handle
         .shell()
         .command("netsh")
-        .args(["wlan", "connect", &format!("name={}", ssid)])
+        .args(["wlan", "connect", &format!("name={ssid}")])
         .output()
         .await?;
 

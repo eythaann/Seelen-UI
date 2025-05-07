@@ -338,15 +338,15 @@ pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
             let (light, dark) = UwpManager::get_high_quality_icon_path(aumid)?;
             let root = SEELEN_COMMON.user_icons_path().join("system");
             let name = uuid::Uuid::new_v4();
-            std::fs::copy(light, root.join(&format!("{}_light.png", name)))?;
-            std::fs::copy(dark, root.join(&format!("{}_dark.png", name)))?;
+            std::fs::copy(light, root.join(format!("{name}_light.png")))?;
+            std::fs::copy(dark, root.join(format!("{name}_dark.png")))?;
 
             let mut icon_manager = trace_lock!(icon_manager_mutex);
             icon_manager.add_system_app_icon(
                 aumid,
                 Icon::Dynamic {
-                    light: format!("{}_light.png", name).into(),
-                    dark: format!("{}_dark.png", name).into(),
+                    light: format!("{name}_light.png").into(),
+                    dark: format!("{name}_dark.png").into(),
                     mask: None,
                 },
             );

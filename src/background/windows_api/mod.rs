@@ -20,7 +20,7 @@ use widestring::U16CStr;
 use windows_core::Interface;
 
 use std::{
-    ffi::{c_void, OsString},
+    ffi::OsString,
     os::windows::ffi::{OsStrExt, OsStringExt},
     path::{Path, PathBuf},
     thread::sleep,
@@ -53,9 +53,8 @@ use windows::{
                 DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
-                EnumDisplayDevicesW, EnumDisplayMonitors, EnumDisplaySettingsW, GetMonitorInfoW,
-                MonitorFromPoint, MonitorFromWindow, DEVMODEW, DISPLAY_DEVICEW,
-                ENUM_CURRENT_SETTINGS, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
+                EnumDisplayDevicesW, EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint,
+                MonitorFromWindow, DISPLAY_DEVICEW, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
                 MONITOR_DEFAULTTOPRIMARY,
             },
         },
@@ -92,22 +91,20 @@ use windows::{
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
-                SHCreateItemFromParsingName, SHGetKnownFolderPath, SHLoadIndirectString,
-                SHQueryUserNotificationState, ShellLink, VirtualDesktopManager, KF_FLAG_DEFAULT,
-                QUERY_USER_NOTIFICATION_STATE, QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
+                SHCreateItemFromParsingName, SHGetKnownFolderPath, SHLoadIndirectString, ShellLink,
+                VirtualDesktopManager, KF_FLAG_DEFAULT, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                BringWindowToTop, EnumWindows, GetClassNameW, GetDesktopWindow,
-                GetForegroundWindow, GetParent, GetSystemMetrics, GetTitleBarInfo, GetWindowLongW,
-                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
-                IsWindowVisible, IsZoomed, PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
-                GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
-                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                BringWindowToTop, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
+                GetSystemMetrics, GetWindowLongW, GetWindowRect, GetWindowTextW,
+                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
+                PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW,
+                EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
+                SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN,
+                SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER,
                 SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, TITLEBARINFO, WINDOW_EX_STYLE,
-                WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
+                WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -156,11 +153,6 @@ impl WindowsApi {
                 .ok()
                 .filter_fake_error()?;
         }
-        Ok(())
-    }
-
-    pub fn enum_windows(callback: WNDENUMPROC, callback_data_address: isize) -> Result<()> {
-        unsafe { EnumWindows(callback, LPARAM(callback_data_address))? };
         Ok(())
     }
 
@@ -236,14 +228,6 @@ impl WindowsApi {
 
     pub fn is_maximized(hwnd: HWND) -> bool {
         unsafe { IsZoomed(hwnd) }.into()
-    }
-
-    pub fn get_notification_state() -> Result<QUERY_USER_NOTIFICATION_STATE> {
-        Ok(unsafe { SHQueryUserNotificationState()? })
-    }
-
-    pub fn is_gaming_mode() -> Result<bool> {
-        Ok(Self::get_notification_state()? == QUNS_RUNNING_D3D_FULL_SCREEN)
     }
 
     pub fn is_fullscreen(hwnd: HWND) -> Result<bool> {
@@ -389,6 +373,7 @@ impl WindowsApi {
         Ok(token_handle)
     }
 
+    #[allow(dead_code)]
     pub fn get_current_process_info() -> Result<()> {
         let token_handle = Self::open_current_process_token()?;
         let mut returnlength = 0;
@@ -471,37 +456,11 @@ impl WindowsApi {
         Ok(String::from_utf16(&path[..len as usize])?)
     }
 
-    pub fn exe_path_v2(hwnd: HWND) -> Result<PathBuf> {
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
-        let path_string = Self::exe_path_by_process(process_id)?;
-        if path_string.is_empty() {
-            return Err("exe path is empty".into());
-        }
-        Ok(PathBuf::from(path_string))
-    }
-
-    pub fn exe(hwnd: HWND) -> Result<String> {
-        Ok(Self::exe_path_v2(hwnd)?
-            .file_name()
-            .ok_or("there is no file name")?
-            .to_string_lossy()
-            .to_string())
-    }
-
     pub fn get_class(hwnd: HWND) -> Result<String> {
         let mut text: [u16; 512] = [0; 512];
         let len = unsafe { GetClassNameW(hwnd, &mut text) };
         let length = usize::try_from(len).unwrap_or(0);
         Ok(String::from_utf16(&text[..length])?)
-    }
-
-    pub fn get_title_bar_info(hwnd: HWND) -> Result<TITLEBARINFO> {
-        let mut info = TITLEBARINFO {
-            cbSize: std::mem::size_of::<TITLEBARINFO>() as u32,
-            ..Default::default()
-        };
-        unsafe { GetTitleBarInfo(hwnd, &mut info)? };
-        Ok(info)
     }
 
     pub fn get_shell_item(path: &Path) -> Result<IShellItem2> {
@@ -719,10 +678,6 @@ impl WindowsApi {
         Ok(rect)
     }
 
-    pub fn desktop_window() -> HWND {
-        unsafe { GetDesktopWindow() }
-    }
-
     pub fn monitor_from_window(hwnd: HWND) -> HMONITOR {
         unsafe { MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY) }
     }
@@ -776,19 +731,6 @@ impl WindowsApi {
             devices.push(device);
         }
         Ok(devices)
-    }
-
-    pub fn get_display_device_settings(monitor: HMONITOR) -> Result<DEVMODEW> {
-        let info = Self::monitor_info(monitor)?;
-        let lpdevice = PCWSTR::from_raw(info.szDevice.as_ptr());
-        let mut devmode = DEVMODEW {
-            dmSize: std::mem::size_of::<DEVMODEW>() as u16,
-            ..DEVMODEW::default()
-        };
-        unsafe {
-            EnumDisplaySettingsW(lpdevice, ENUM_CURRENT_SETTINGS, &mut devmode).ok()?;
-        }
-        Ok(devmode)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen
@@ -881,42 +823,6 @@ impl WindowsApi {
                 MAX_PATH,
                 Some(path.as_mut_ptr() as _),
                 SPIF_SENDCHANGE | SPIF_UPDATEINIFILE,
-            )?;
-        }
-        Ok(())
-    }
-
-    pub fn refresh_desktop() -> Result<()> {
-        unsafe { SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, None, SPIF_UPDATEINIFILE)? };
-        Ok(())
-    }
-
-    pub fn get_min_animation_info() -> Result<ANIMATIONINFO> {
-        let mut anim_info: ANIMATIONINFO = unsafe { core::mem::zeroed() };
-        anim_info.cbSize = core::mem::size_of::<ANIMATIONINFO>() as u32;
-        let uiparam = anim_info.cbSize;
-        unsafe {
-            SystemParametersInfoW(
-                SPI_GETANIMATION,
-                uiparam,
-                Some(&mut anim_info as *mut ANIMATIONINFO as *mut c_void),
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS(0),
-            )?;
-        }
-        Ok(anim_info)
-    }
-
-    pub fn set_minimize_animation(enable: bool) -> Result<()> {
-        let mut anim_info = ANIMATIONINFO {
-            cbSize: core::mem::size_of::<ANIMATIONINFO>() as u32,
-            iMinAnimate: enable.into(),
-        };
-        unsafe {
-            SystemParametersInfoW(
-                SPI_SETANIMATION,
-                anim_info.cbSize,
-                Some(&mut anim_info as *mut ANIMATIONINFO as *mut c_void),
-                SPIF_SENDCHANGE,
             )?;
         }
         Ok(())

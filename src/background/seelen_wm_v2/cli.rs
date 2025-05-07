@@ -80,16 +80,6 @@ impl WindowManagerV2 {
             .subcommands(SubCommand::commands())
     }
 
-    pub fn reserve(&self, _side: AllowedReservations) -> Result<()> {
-        // self.emit(SeelenEvent::WMSetReservation, side)?;
-        Ok(())
-    }
-
-    pub fn discard_reservation(&self) -> Result<()> {
-        // self.emit(SeelenEvent::WMSetReservation, ())?;
-        Ok(())
-    }
-
     pub fn process(matches: &clap::ArgMatches) -> Result<()> {
         let subcommand = SubCommand::try_from(matches)?;
         match subcommand {

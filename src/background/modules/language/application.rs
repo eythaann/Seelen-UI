@@ -115,7 +115,7 @@ impl LanguageManager {
                 if device == 0 {
                     device = language_id;
                 }
-                klid = Some(format!("{:08X}", device));
+                klid = Some(format!("{device:08X}"));
             }
 
             let klid = match klid {
@@ -153,7 +153,7 @@ impl LanguageManager {
                         Some(native_name.as_mut_slice()),
                     );
                     languages.push(Language {
-                        id: format!("{:04X}", language_id),
+                        id: format!("{language_id:04X}"),
                         code: lang_code_str.clone(),
                         name: display_name.to_string(),
                         native_name: native_name.to_string(),
@@ -191,7 +191,7 @@ impl LanguageManager {
     /// Returns true if keyboard layout was changed\
     /// Returns false if keyboard layout wasn't found
     pub fn update_active(&mut self, hkl: usize) -> bool {
-        let hkl = format!("{:08X}", hkl);
+        let hkl = format!("{hkl:08X}");
         let mut found = false;
         for lang in self.languages.iter_mut() {
             for keyboard in lang.input_methods.iter_mut() {

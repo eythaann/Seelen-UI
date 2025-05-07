@@ -78,7 +78,7 @@ impl AutoHotKey {
         let mut replaced = template.clone();
 
         for (key, value) in vars.iter() {
-            let pattern = Regex::new(&format!(";{}\\s*x::", key)).unwrap();
+            let pattern = Regex::new(&format!(";{key}\\s*x::")).unwrap();
             replaced = pattern
                 .replace_all(&replaced, format!("{}::", value.ahk))
                 .to_string();

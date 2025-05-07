@@ -37,7 +37,7 @@ pub fn add_installation_dir_to_path() -> Result<()> {
         .to_string();
     if !env_path.contains(&install_folder) {
         log::trace!("Adding installation directory to PATH environment variable");
-        enviroment.set_value("Path", &format!("{};{}", install_folder, env_path))?;
+        enviroment.set_value("Path", &format!("{install_folder};{env_path}"))?;
     }
     Ok(())
 }

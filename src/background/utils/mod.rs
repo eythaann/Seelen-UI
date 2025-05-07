@@ -184,9 +184,9 @@ where
     T: Send + 'static,
 {
     std::thread::Builder::new()
-        .name(format!("Seelen Thread - {}", id))
+        .name(format!("Seelen Thread - {id}"))
         .spawn(cb)
-        .map_err(|e| format!("Failed to spawn thread: {}", e).into())
+        .map_err(|e| format!("Failed to spawn thread: {e}").into())
 }
 
 pub fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> Result<()> {

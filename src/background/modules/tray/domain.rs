@@ -72,8 +72,8 @@ pub enum TrayIconId {
 impl std::fmt::Display for TrayIconId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            TrayIconId::HandleUid(handle, uid) => write!(f, "{:x}:{}", handle, uid),
-            TrayIconId::Guid(guid) => write!(f, "{}", guid),
+            TrayIconId::HandleUid(handle, uid) => write!(f, "{handle:x}:{uid}"),
+            TrayIconId::Guid(guid) => write!(f, "{guid}"),
         }
     }
 }

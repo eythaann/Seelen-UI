@@ -4,9 +4,7 @@ use windows::{
     ApplicationModel::AppInfo,
     Win32::{
         Foundation::HANDLE,
-        Storage::Packaging::Appx::{
-            GetApplicationUserModelId, GetPackageFamilyName, GetPackageFullName,
-        },
+        Storage::Packaging::Appx::GetApplicationUserModelId,
         System::Threading::{PROCESS_QUERY_INFORMATION, PROCESS_QUERY_LIMITED_INFORMATION},
     },
 };
@@ -58,22 +56,6 @@ impl Process {
         WindowsApi::is_process_frozen(self.0)
     }
 
-    pub fn package_family_name(&self) -> Result<String> {
-        let hprocess = self.open_limited_handle()?;
-        let mut len = 1024_u32;
-        let mut family_name = WindowsString::new_to_fill(len as usize);
-        unsafe { GetPackageFamilyName(hprocess, &mut len, Some(family_name.as_pwstr())).ok()? };
-        Ok(family_name.to_string())
-    }
-
-    pub fn package_full_name(&self) -> Result<String> {
-        let hprocess = self.open_limited_handle()?;
-        let mut len = 1024_u32;
-        let mut family_name = WindowsString::new_to_fill(len as usize);
-        unsafe { GetPackageFullName(hprocess, &mut len, Some(family_name.as_pwstr())).ok()? };
-        Ok(family_name.to_string())
-    }
-
     /// package app user model id, (appx, eg: "Microsoft.WindowsTerminal_8wekyb3d8bbwe!TerminalApp")
     pub fn package_app_user_model_id(&self) -> Result<AppUserModelId> {
         let hprocess = self.open_limited_handle()?;
@@ -83,6 +65,7 @@ impl Process {
         Ok(AppUserModelId::Appx(id.to_string()))
     }
 
+    #[allow(dead_code)]
     pub fn package_app_info(&self) -> Result<AppInfo> {
         let app_info = AppInfo::GetFromAppUserModelId(&self.package_app_user_model_id()?.into())?;
         Ok(app_info)

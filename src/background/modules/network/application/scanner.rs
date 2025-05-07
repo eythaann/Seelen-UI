@@ -39,7 +39,7 @@ impl From<&WLAN_BSS_ENTRY> for WlanBssEntry {
         let bssid = entry
             .dot11Bssid
             .iter()
-            .map(|b| format!("{:02x}", b))
+            .map(|b| format!("{b:02x}"))
             .join(":");
 
         Self {
@@ -73,7 +73,7 @@ impl NetworkManager {
         };
 
         if result != 0 {
-            return Err(format!("Failed to open Wlan, error code: {}", result).into());
+            return Err(format!("Failed to open Wlan, error code: {result}").into());
         }
 
         Ok(client_handle)
@@ -134,7 +134,7 @@ impl NetworkManager {
             let result =
                 WlanGetProfileList(client_handle, interface_guid, None, &mut profile_list_ptr);
             if result != 0 || profile_list_ptr.is_null() {
-                return Err(format!("Failed to get profile list, error code: {}", result).into());
+                return Err(format!("Failed to get profile list, error code: {result}").into());
             }
 
             let profile_list = &*profile_list_ptr;
@@ -157,13 +157,13 @@ impl NetworkManager {
                 );
 
                 if result != 0 {
-                    return Err(format!("Failed to get profile, error code: {}", result).into());
+                    return Err(format!("Failed to get profile, error code: {result}").into());
                 }
 
                 if !profile_xml.is_null() {
                     let profile: serde_json::Value =
                         quick_xml::de::from_str(&profile_xml.to_string()?)?;
-                    println!("{:#?}", profile)
+                    println!("{profile:#?}")
                 }
             }
         }
@@ -176,7 +176,7 @@ impl NetworkManager {
             let result = WlanEnumInterfaces(client_handle, None, &mut interface_list_ptr);
 
             if result != 0 || interface_list_ptr.is_null() {
-                return Err(format!("Failed to get interface list, error code: {}", result).into());
+                return Err(format!("Failed to get interface list, error code: {result}").into());
             }
 
             let interface_list = &*interface_list_ptr;
@@ -204,7 +204,7 @@ impl NetworkManager {
             );
 
             if result != 0 || network_list_ptr.is_null() {
-                return Err(format!("Failed to get network list, error code: {}", result).into());
+                return Err(format!("Failed to get network list, error code: {result}").into());
             }
 
             let network_list = &*network_list_ptr;
@@ -233,7 +233,7 @@ impl NetworkManager {
             );
 
             if result != 0 || bss_list_ptr.is_null() {
-                return Err(format!("Failed to get bss list, error code: {}", result).into());
+                return Err(format!("Failed to get bss list, error code: {result}").into());
             }
 
             let bss_list = &*bss_list_ptr;
@@ -255,7 +255,7 @@ impl NetworkManager {
                 let result = WlanScan(client_handle, &interface_guid, None, None, None);
 
                 if result != 0 {
-                    return Err(format!("Failed to scan, error code: {}", result).into());
+                    return Err(format!("Failed to scan, error code: {result}").into());
                 }
 
                 let available_networks =

@@ -7,11 +7,10 @@ use super::is_windows_10;
 
 pub struct RegistryVirtualDesktopManager {}
 
+#[allow(dead_code)]
 pub struct RegistryVirtualDesktop {
-    #[allow(dead_code)]
     id: [u8; 16],
     guid: GUID,
-    #[allow(dead_code)]
     name: String,
 }
 
@@ -46,6 +45,7 @@ impl From<Vec<u8>> for RegistryVirtualDesktop {
     }
 }
 
+#[allow(dead_code)]
 impl RegistryVirtualDesktop {
     pub fn id(&self) -> String {
         format!("{:?}", self.guid)
@@ -56,6 +56,7 @@ impl RegistryVirtualDesktop {
     }
 }
 
+#[allow(dead_code)]
 impl RegistryVirtualDesktopManager {
     fn get_virtual_desktops_folder() -> Result<RegKey> {
         let hkcu = RegKey::predef(HKEY_CURRENT_USER);

@@ -81,7 +81,7 @@ impl TcpBgApp {
 
     pub fn connect_tcp() -> Result<TcpStream> {
         let port = fs::read_to_string(Self::socket_path()?)?;
-        Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
+        Ok(TcpStream::connect(format!("127.0.0.1:{port}"))?)
     }
 
     pub fn request_open_settings() -> Result<()> {
@@ -116,7 +116,7 @@ impl TcpService {
 
     fn connect_tcp() -> Result<TcpStream> {
         let port = fs::read_to_string(Self::socket_path())?;
-        Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
+        Ok(TcpStream::connect(format!("127.0.0.1:{port}"))?)
     }
 
     /// will ignore any response
@@ -135,6 +135,7 @@ impl TcpService {
     }
 
     /// will wait for a response
+    #[allow(dead_code)]
     pub fn request_response(message: SvcAction) -> Result<Vec<u8>> {
         let stream = Self::connect_tcp()?;
         stream.set_read_timeout(Some(std::time::Duration::from_millis(1000)))?;

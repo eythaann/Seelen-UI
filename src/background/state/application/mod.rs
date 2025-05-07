@@ -28,7 +28,7 @@ use std::{
     time::Duration,
 };
 
-use crate::{error_handler::Result, log_error, trace_lock, utils::constants::SEELEN_COMMON};
+use crate::{error_handler::Result, log_error, utils::constants::SEELEN_COMMON};
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};
 
@@ -37,8 +37,6 @@ lazy_static! {
         log::trace!("Creating new State Manager");
         FullState::new().expect("Failed to create State Manager")
     }));
-    static ref MODIFICATIONS_TO_SKIP: Arc<Mutex<HashSet<PathBuf>>> =
-        Arc::new(Mutex::new(HashSet::new()));
 }
 
 pub type LauncherHistory = HashMap<String, Vec<String>>;
@@ -91,13 +89,8 @@ impl FullState {
         self.clone()
     }
 
-    pub fn skip_modification(&self, path: PathBuf) {
-        trace_lock!(MODIFICATIONS_TO_SKIP).insert(path);
-    }
-
     fn join_and_filter_debounced_changes(events: Vec<DebouncedEvent>) -> HashSet<PathBuf> {
         let mut result = HashSet::new();
-        let mut to_skip = trace_lock!(MODIFICATIONS_TO_SKIP);
         for event in events {
             for path in event.event.paths {
                 if !path.is_dir() {
@@ -105,11 +98,7 @@ impl FullState {
                 }
             }
         }
-
-        let final_result = result.difference(&to_skip).cloned().collect();
-        *to_skip = to_skip.difference(&result).cloned().collect();
-
-        final_result
+        result
     }
 
     fn process_changes(&mut self, changed: &HashSet<PathBuf>) -> Result<()> {

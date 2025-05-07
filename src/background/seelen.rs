@@ -57,20 +57,12 @@ pub struct Seelen {
 
 /* ============== Getters ============== */
 impl Seelen {
-    pub fn instances(&self) -> &Vec<SeelenInstanceContainer> {
-        &self.instances
-    }
-
     pub fn instances_mut(&mut self) -> &mut Vec<SeelenInstanceContainer> {
         &mut self.instances
     }
 
     pub fn is_running() -> bool {
         SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Acquire)
-    }
-
-    pub fn focused_monitor(&self) -> Option<&SeelenInstanceContainer> {
-        self.instances.iter().find(|m| m.is_focused())
     }
 
     pub fn focused_monitor_mut(&mut self) -> Option<&mut SeelenInstanceContainer> {

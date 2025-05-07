@@ -39,17 +39,15 @@ pub fn get_hightest_quality_posible(icon_path: &Path) -> Option<(PathBuf, PathBu
 
     for size_postfix in size_postfixes {
         let light_icon = icon_path.with_file_name(format!(
-            "{}{}{}.{}",
-            filename, size_postfix, UWP_LIGHTUNPLATED_POSTFIX, extension
+            "{filename}{size_postfix}{UWP_LIGHTUNPLATED_POSTFIX}.{extension}"
         ));
 
         let dark_icon = icon_path.with_file_name(format!(
-            "{}{}{}.{}",
-            filename, size_postfix, UWP_UNPLATED_POSTFIX, extension
+            "{filename}{size_postfix}{UWP_UNPLATED_POSTFIX}.{extension}"
         ));
 
         let unthemed_icon =
-            icon_path.with_file_name(format!("{}{}.{}", filename, size_postfix, extension));
+            icon_path.with_file_name(format!("{filename}{size_postfix}.{extension}"));
 
         match (
             light_icon.exists(),

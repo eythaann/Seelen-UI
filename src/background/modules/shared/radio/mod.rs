@@ -42,6 +42,7 @@ unsafe impl Send for RadioManager {}
 
 event_manager!(RadioManager, RadioManagerEvent);
 
+#[allow(dead_code)]
 impl RadioManager {
     fn new() -> Self {
         Self {

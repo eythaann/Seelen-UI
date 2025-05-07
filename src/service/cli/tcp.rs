@@ -97,7 +97,7 @@ impl TcpService {
 
     pub fn connect_tcp() -> Result<TcpStream> {
         let port = std::fs::read_to_string(Self::socket_path()?)?;
-        Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
+        Ok(TcpStream::connect(format!("127.0.0.1:{port}"))?)
     }
 
     fn send(message: SvcAction) -> Result<()> {
@@ -126,7 +126,7 @@ impl TcpBgApp {
 
     pub fn connect_tcp() -> Result<TcpStream> {
         let port = std::fs::read_to_string(Self::socket_path())?;
-        Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
+        Ok(TcpStream::connect(format!("127.0.0.1:{port}"))?)
     }
 
     pub fn is_running() -> bool {

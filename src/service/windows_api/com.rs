@@ -10,6 +10,8 @@ use windows::{
 };
 
 pub struct Com {}
+
+#[allow(dead_code)]
 impl Com {
     fn initialize() -> Result<()> {
         let result = unsafe { CoInitializeEx(None, COINIT_APARTMENTTHREADED) };

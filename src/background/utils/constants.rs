@@ -65,6 +65,7 @@ pub struct SeelenCommon {
     bundled_profiles: PathBuf,
 }
 
+#[allow(dead_code)]
 impl SeelenCommon {
     pub fn new() -> Self {
         let resolver = get_app_handle().path();

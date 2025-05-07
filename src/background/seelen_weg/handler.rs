@@ -52,8 +52,8 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
                 height as u32,
             );
 
-            image.save_with_format(temp_dir.join(format!("{}.png", addr)), ImageFormat::Png)?;
-            get_app_handle().emit(format!("weg-preview-update-{}", addr).as_str(), ())?;
+            image.save_with_format(temp_dir.join(format!("{addr}.png")), ImageFormat::Png)?;
+            get_app_handle().emit(format!("weg-preview-update-{addr}").as_str(), ())?;
         }
     }
     Ok(())

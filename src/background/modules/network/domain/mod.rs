@@ -123,7 +123,7 @@ impl TryFrom<&IP_ADAPTER_ADDRESSES_LH> for NetworkAdapter {
             let mac_address = adapter
                 .PhysicalAddress
                 .iter()
-                .map(|b| format!("{:02x}", b))
+                .map(|b| format!("{b:02x}"))
                 .join(":");
 
             let status = if adapter.OperStatus == IfOperStatusUp {

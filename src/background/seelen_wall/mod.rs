@@ -86,7 +86,7 @@ impl SeelenWall {
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(main_hwnd, &rect)?;
         WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
-        log_error!(Self::refresh_desktop().map_err(|e| format!("Failed to refresh desktop: {}", e)));
+        log_error!(Self::refresh_desktop().map_err(|e| format!("Failed to refresh desktop: {e}")));
         Ok(())
     }
 

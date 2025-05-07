@@ -134,11 +134,8 @@ impl UserManager {
     fn get_user_profile_picture_path(sid: &str, quality: PictureQuality) -> Result<PathBuf> {
         let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
         let settings = hklm.open_subkey(
-            format!(
-                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\{}",
-                sid
-            )
-            .as_str(),
+            format!("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\{sid}")
+                .as_str(),
         )?;
         let path: String = settings.get_value(quality.as_str())?;
         Ok(path.into())

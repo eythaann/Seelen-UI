@@ -20,7 +20,6 @@ impl ServiceSubcommands {
     pub const INSTALL: &str = "install";
     pub const UNINSTALL: &str = "uninstall";
     pub const STOP: &str = "stop";
-    pub const STARTUP: &str = "startup";
 }
 
 pub fn get_cli() -> Command {

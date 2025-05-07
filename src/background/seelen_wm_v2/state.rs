@@ -44,6 +44,7 @@ pub struct WmV2State {
     pub monitors: HashMap<String, WmV2StateMonitor>,
 }
 
+#[allow(dead_code)]
 impl WmV2StateWorkspace {
     pub fn new(monitor: &Monitor, workspace_idx: usize) -> Self {
         let mut workspace = Self {
@@ -91,7 +92,7 @@ impl WmV2StateWorkspace {
     }
 
     pub fn contains(&self, window: &Window) -> bool {
-        self.root.as_ref().map_or(false, |n| n.contains(window))
+        self.root.as_ref().is_some_and(|n| n.contains(window))
     }
 
     pub fn trace_to(&self, window: &Window) -> Vec<&WmNode> {
@@ -106,6 +107,7 @@ impl WmV2StateWorkspace {
     }
 }
 
+#[allow(dead_code)]
 impl WmV2StateMonitor {
     pub fn create_workspace(monitor: &Monitor, workspace_id: &str) -> Result<WmV2StateWorkspace> {
         for (workspace_idx, w) in get_vd_manager().get_all()?.iter().enumerate() {
@@ -143,6 +145,7 @@ impl WmV2StateMonitor {
     }
 }
 
+#[allow(dead_code)]
 impl WmV2State {
     /// will enumarate all monitors and workspaces
     pub fn init(&mut self) -> Result<()> {

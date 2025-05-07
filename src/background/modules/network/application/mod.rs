@@ -196,7 +196,7 @@ impl NetworkManager {
                 .replace("{hidden}", if hidden { "true" } else { "false" })
         };
 
-        let profile_path = temp_dir().join(format!("slu-{}-profile.xml", ssid));
+        let profile_path = temp_dir().join(format!("slu-{ssid}-profile.xml"));
 
         std::fs::write(&profile_path, profile_xml)?;
 
@@ -230,7 +230,7 @@ impl NetworkManager {
         let output = handle
             .shell()
             .command("netsh")
-            .args(["wlan", "delete", "profile", &format!("name={}", ssid)])
+            .args(["wlan", "delete", "profile", &format!("name={ssid}")])
             .output()
             .await?;
 

@@ -27,6 +27,7 @@ trait VirtualDesktopTrait: std::fmt::Debug + Clone {
     fn name(&self) -> Option<String>;
 }
 
+#[allow(dead_code)]
 trait VirtualDesktopManagerTrait {
     fn create_desktop(&self) -> Result<()>;
 
@@ -91,6 +92,7 @@ pub enum VirtualDesktopManager {
     Seelen(workspaces::SeelenWorkspacesManager),
 }
 
+#[allow(dead_code)]
 impl VirtualDesktopManager {
     pub fn create_desktop(&self) -> Result<()> {
         match self {

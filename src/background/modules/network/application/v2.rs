@@ -16,6 +16,7 @@ use crate::{
 };
 
 #[derive(Debug)]
+#[allow(dead_code)]
 pub struct NetworkManagerV2 {}
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -23,6 +24,7 @@ pub enum NetworkManagerEventV2 {}
 
 // event_manager!(NetworkManagerV2, NetworkManagerEventV2);
 
+#[allow(dead_code)]
 impl NetworkManagerV2 {
     pub fn new() -> Self {
         Self {}

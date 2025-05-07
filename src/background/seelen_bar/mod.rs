@@ -219,7 +219,7 @@ impl FancyToolbar {
     fn create_window(monitor: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
 
-        let label = format!("{}?monitor={}", Self::TARGET, monitor);
+        let label = Self::get_label(monitor);
         log::info!("Creating {}", label);
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
 
