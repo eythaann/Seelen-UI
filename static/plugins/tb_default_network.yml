@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: '@default/network'
 icon: 'FaWifi'
 target: '@seelen/fancy-toolbar'

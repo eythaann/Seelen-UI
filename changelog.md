@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- not removing old icons mask on icon pack change.
+
 ## [2.3.2]
 ### enhancements
 - mini performance improve on dock.

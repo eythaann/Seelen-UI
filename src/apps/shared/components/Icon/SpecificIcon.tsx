@@ -54,6 +54,7 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
 
   updateSrc(): void {
     this.setState({
+      mask: null,
       ...getSpecificIcon(this.props.name),
     });
   }

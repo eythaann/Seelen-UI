@@ -9,18 +9,20 @@
 }
 
 .taskbar {
-  .taskbar-bg-layer-1 {
-    opacity: 0.3;
-    filter: saturate(0);
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-size: cover;
-    border-radius: 15px;
-  }
+  > .bg-layers {
+    > .bg-layer-1 {
+      opacity: 0.3;
+      filter: saturate(0);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      background-size: cover;
+      border-radius: 15px;
+    }
 
-  .taskbar-bg-layer-2 {
-    opacity: 0.8;
-    background-color: var(--color-gray-100);
-    border-radius: 15px;
+    > .bg-layer-2 {
+      opacity: 0.8;
+      background-color: var(--color-gray-100);
+      border-radius: 15px;
+    }
   }
 
   &.temporal-only {
@@ -66,15 +68,17 @@
   width: var(--config-item-size);
   height: var(--config-item-size);
 
-  .bg-layer-1 {
-    background-color: var(--color-gray-100);
-    border-radius: 25%;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
-  }
+  > .bg-layers {
+    > .bg-layer-1 {
+      background-color: var(--color-gray-100);
+      border-radius: 25%;
+      box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
+    }
 
-  .bg-layer-2 {
-    border-radius: 25%;
-    transition: background-color 0.2s ease-out;
+    > .bg-layer-2 {
+      border-radius: 25%;
+      transition: background-color 0.2s ease-out;
+    }
   }
 
   &.media-session-container {
@@ -87,13 +91,13 @@
   }
 
   &:hover {
-    .bg-layer-2 {
+    > .bg-layers > .bg-layer-2 {
       background-color: var(--dock-item-hover-color);
     }
   }
 
   &:active {
-    .bg-layer-1 {
+    > .bg-layers > .bg-layer-1 {
       filter: brightness(0.8);
     }
 
@@ -103,7 +107,7 @@
   }
 
   &:not(:active) {
-    .bg-layer-1 {
+    > .bg-layers > .bg-layer-1 {
       transition: filter 0.2s linear;
     }
 
@@ -220,9 +224,11 @@
 .weg-context-menu-container {
   padding: 3px;
 
-  .menu-bg-layer-1 {
-    background-color: var(--color-gray-100);
-    border-radius: 10px;
+  > .bg-layers {
+    > .bg-layer-1 {
+      background-color: var(--color-gray-100);
+      border-radius: 10px;
+    }
   }
 
   .weg-context-menu {
@@ -238,9 +244,11 @@
   padding: 10px;
   border-radius: 10px;
 
-  .preview-bg-layer-1 {
-    background-color: var(--color-gray-100);
-    border-radius: 10px;
+  > .bg-layers {
+    > .bg-layer-1 {
+      background-color: var(--color-gray-100);
+      border-radius: 10px;
+    }
   }
 
   .weg-item-preview-scrollbar {

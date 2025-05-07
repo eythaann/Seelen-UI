@@ -74,6 +74,7 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
 
   updateSrc(): void {
     this.setState({
+      mask: null,
       ...getIcon({ path: this.props.path, umid: this.props.umid }),
     });
   }

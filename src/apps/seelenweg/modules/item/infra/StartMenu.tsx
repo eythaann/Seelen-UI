@@ -32,7 +32,7 @@ export const StartMenu = memo(({ item }: Props) => {
     <DraggableItem item={item}>
       <WithContextMenu items={getMenuForItem(t, item)}>
         <div
-          className="weg-item"
+          className="weg-item weg-item-start"
           onClick={() => {
             if (!isStartMenuOpen) {
               invoke(SeelenCommand.SendKeys, { keys: '{win}' });
@@ -40,7 +40,7 @@ export const StartMenu = memo(({ item }: Props) => {
           }}
           onContextMenu={(e) => e.stopPropagation()}
         >
-          <BackgroundByLayersV2 prefix="item" />
+          <BackgroundByLayersV2 />
           <SpecificIcon
             className="weg-item-icon weg-item-start-icon"
             name={'@seelen/weg::start-menu'}

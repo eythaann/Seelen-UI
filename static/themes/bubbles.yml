@@ -1,5 +1,5 @@
 id: "@eythaann/bubbles"
-info:
+metadata:
   displayName: Bubbles
   description: Bubbles says pop.
   tags: ["toolbar"]

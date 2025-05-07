@@ -12,7 +12,7 @@ interface PropsV2 extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {
 
 export function BackgroundByLayersV2({ children, className, prefix, ...divProps }: PropsV2) {
   let background = (
-    <div className={cs.background}>
+    <div className={cx(cs.background, 'bg-layers')}>
       {Array.from({ length: 10 }, (_, index) => (
         <div
           key={index}

@@ -50,6 +50,7 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
 
   updateSrc(): void {
     this.setState({
+      mask: null,
       ...getMissingIcon(),
     });
   }
