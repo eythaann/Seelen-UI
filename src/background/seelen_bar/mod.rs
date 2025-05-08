@@ -142,12 +142,12 @@ impl FancyToolbar {
     pub const TITLE: &'static str = "Seelen Fancy Toolbar";
     pub const TARGET: &'static str = "@seelen/fancy-toolbar";
 
-    pub fn get_label(monitor_id: &str) -> String {
-        base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(format!(
-            "{}?monitor={}",
-            Self::TARGET,
-            monitor_id
-        ))
+    pub fn decoded_label(monitor_id: &str) -> String {
+        format!("{}?monitor={}", Self::TARGET, monitor_id)
+    }
+
+    pub fn label(monitor_id: &str) -> String {
+        base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::decoded_label(monitor_id))
     }
 
     /// Work area no works fine on multiple monitors
@@ -216,16 +216,14 @@ impl FancyToolbar {
         Ok(())
     }
 
-    fn create_window(monitor: &str) -> Result<WebviewWindow> {
+    fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
 
-        let label = Self::get_label(monitor);
-        log::info!("Creating {}", label);
-        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
+        log::info!("Creating {}", Self::decoded_label(monitor_id));
 
         let window = tauri::WebviewWindowBuilder::new(
             manager,
-            label,
+            Self::label(monitor_id),
             tauri::WebviewUrl::App("toolbar/index.html".into()),
         )
         .title(Self::TITLE)
