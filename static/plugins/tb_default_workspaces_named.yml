@@ -1,6 +1,9 @@
-id: "@default/workspaces-named"
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
+id: '@default/workspaces-named'
+metadata:
+  displayName: Named Workspaces
 icon: TbAbc
-target: "@seelen/fancy-toolbar"
+target: '@seelen/fancy-toolbar'
 plugin:
   type: workspaces
   mode: named

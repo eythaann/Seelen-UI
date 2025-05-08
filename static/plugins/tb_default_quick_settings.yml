@@ -1,4 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: "@default/quick-settings"
+metadata:
+  displayName: Quick Settings
 icon: "LuSettings2"
 target: "@seelen/fancy-toolbar"
 plugin:

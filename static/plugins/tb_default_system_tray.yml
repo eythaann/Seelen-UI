@@ -1,4 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: '@default/system-tray'
+metadata:
+  displayName: System Tray
 icon: 'IoFileTrayFullOutline'
 target: '@seelen/fancy-toolbar'
 plugin:

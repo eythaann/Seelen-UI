@@ -1,4 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: '@default/keyboard'
+metadata:
+  displayName: Keyboard Layout
 icon: FaRegKeyboard
 target: '@seelen/fancy-toolbar'
 plugin:

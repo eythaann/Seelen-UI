@@ -1,8 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: "@default/wm-bspwm"
-target: "@seelen/window-manager"
 metadata:
   displayName: BSPWM Layout
   description: default bspwm tile layout.
+target: "@seelen/window-manager"
 plugin:
   no_fallback_behavior: Float
   structure:
