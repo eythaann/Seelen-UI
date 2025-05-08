@@ -12,6 +12,7 @@ bluetooth:
     passphrase: パスフレーズ、コードまたはPIN
   scanning: デバイスのスキャン
 context_menu:
+  add_custom_text: カスタムテキスト項目の追加
   modules: モジュール
   remove: モジュールを削除
   reorder_disable: ツールバーをロック

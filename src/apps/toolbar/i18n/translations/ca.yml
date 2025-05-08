@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, codi o pin
   scanning: Escaneig per a dispositius
 context_menu:
+  add_custom_text: Afegiu un element de text personalitzat
   modules: Mòduls
   remove: Elimina el mòdul
   reorder_disable: Barra d’eines de bloqueig

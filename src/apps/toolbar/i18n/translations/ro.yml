@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Frază de acces, cod sau PIN
   scanning: Scanarea pentru dispozitive
 context_menu:
+  add_custom_text: Adăugați un element de text personalizat
   modules: Module
   remove: Scoateți modulul
   reorder_disable: Blocați bara de instrumente

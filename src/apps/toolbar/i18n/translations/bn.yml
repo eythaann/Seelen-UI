@@ -12,6 +12,7 @@ bluetooth:
     passphrase: পাসফ্রেজ, কোড বা পিন
   scanning: ডিভাইসগুলির জন্য স্ক্যানিং
 context_menu:
+  add_custom_text: কাস্টম পাঠ্য আইটেম যুক্ত করুন
   modules: মডিউল
   remove: মডিউল সরান
   reorder_disable: লক টুলবার

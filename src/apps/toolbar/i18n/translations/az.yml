@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, kod və ya pin
   scanning: Cihazlar üçün tarama
 context_menu:
+  add_custom_text: Xüsusi mətn elementi əlavə edin
   modules: Modullar
   remove: Modulu çıxarın
   reorder_disable: Lövhə

@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, msimbo au pini
   scanning: Skanning kwa vifaa
 context_menu:
+  add_custom_text: Ongeza kipengee cha maandishi ya kawaida
   modules: Moduli
   remove: Ondoa moduli
   reorder_disable: Kufunga zana

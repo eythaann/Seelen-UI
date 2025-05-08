@@ -12,6 +12,7 @@ bluetooth:
     passphrase: ਪ੍ਹੈਰਾ, ਕੋਡ ਜਾਂ ਪਿੰਨ
   scanning: ਡਿਵਾਈਸਾਂ ਲਈ ਸਕੈਨ ਕਰਨਾ
 context_menu:
+  add_custom_text: ਕਸਟਮ ਟੈਕਸਟ ਆਈਟਮ ਸ਼ਾਮਲ ਕਰੋ
   modules: ਮੋਡੀ ules ਲ
   remove: ਮੋਡੀ module ਲ ਹਟਾਓ
   reorder_disable: ਲਾਕ ਟੂਲਬਾਰ

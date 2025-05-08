@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Ọrọ kukuru, koodu tabi PIN
   scanning: Sisọnu fun awọn ẹrọ
 context_menu:
+  add_custom_text: Ṣafikun Nkan Nkan Nkan
   modules: Awọn modulu
   remove: Yọ module
   reorder_disable: Ọpa irinṣẹ Titiipa

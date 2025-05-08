@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Frasa, kod atau pin
   scanning: Mengimbas peranti
 context_menu:
+  add_custom_text: Tambahkan item teks tersuai
   modules: Modul
   remove: Keluarkan modul
   reorder_disable: Kunci Toolbar

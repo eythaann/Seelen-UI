@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Нэвтрэх, код, код эсвэл PIN
   scanning: Төхөөрөмжийг скан хийх
 context_menu:
+  add_custom_text: Захиалгат текстийг нэмж оруулна уу
   modules: Барилгын
   remove: Модулийг зайлуулах
   reorder_disable: Цонхны түгжээ

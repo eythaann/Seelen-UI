@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Frāze, kods vai PIN kods
   scanning: Ierīču skenēšana
 context_menu:
+  add_custom_text: Pievienot pielāgotu teksta elementu
   modules: Moduļi
   remove: Noņemt moduli
   reorder_disable: Instrumentu joslas bloķēšana

@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passfrase, kode eller pinne
   scanning: Skanning etter enheter
 context_menu:
+  add_custom_text: Legg til tilpasset tekstelement
   modules: Moduler
   remove: Fjern modulen
   reorder_disable: Lås verktøylinje

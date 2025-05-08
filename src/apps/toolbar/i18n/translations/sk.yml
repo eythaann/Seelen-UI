@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Fráza, kód alebo PIN
   scanning: Skenovanie zariadení
 context_menu:
+  add_custom_text: Pridanie vlastnej textovej položky
   modules: Moduly
   remove: Odstrániť modul
   reorder_disable: Uzamknutie panela nástrojov

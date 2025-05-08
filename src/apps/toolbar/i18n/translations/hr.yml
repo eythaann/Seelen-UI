@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Prolaznu frazu, kod ili pin
   scanning: Skeniranje za uređaje
 context_menu:
+  add_custom_text: Dodajte prilagođenu tekstualnu stavku
   modules: Moduli
   remove: Uklonite modul
   reorder_disable: Alatna traka za zaključavanje

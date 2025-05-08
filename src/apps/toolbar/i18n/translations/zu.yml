@@ -12,6 +12,7 @@ bluetooth:
     passphrase: I-Passphase, ikhodi noma iPIN
   scanning: Ukuskena kwamadivayisi
 context_menu:
+  add_custom_text: Engeza into yombhalo wangokwezifiso
   modules: Amashumane
   remove: Susa module
   reorder_disable: Khiya i-Toolbar

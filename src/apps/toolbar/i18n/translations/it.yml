@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, codice o PIN
   scanning: Scansione dei dispositivi
 context_menu:
+  add_custom_text: Aggiungere un elemento di testo personalizzato
   modules: Moduli
   remove: Rimuovi Modulo
   reorder_disable: Blocco della barra degli strumenti

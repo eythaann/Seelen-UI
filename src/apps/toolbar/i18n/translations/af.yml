@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passfrase, kode of PIN
   scanning: Skandering vir toestelle
 context_menu:
+  add_custom_text: Voeg pasgemaakte teksitem by
   modules: Modules
   remove: Verwyder die module
   reorder_disable: Sluitbalk

@@ -12,6 +12,7 @@ bluetooth:
     passphrase: የይለፍ ሐረግ, ኮድ ወይም ፒን
   scanning: ለመሣሪያዎች መቃኘት
 context_menu:
+  add_custom_text: ብጁ ጽሑፍን ንጥል ያክሉ
   modules: ሞጁሎች
   remove: ሞጁሎችን ያስወግዱ
   reorder_disable: የመሳሪያ አሞሌ

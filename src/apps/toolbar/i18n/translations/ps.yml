@@ -12,6 +12,7 @@ bluetooth:
     passphrase: پاسفراس، کوډ یا پن
   scanning: د وسیلو لپاره سکین کول
 context_menu:
+  add_custom_text: د دودیز متن توکي اضافه کړئ
   modules: موډلونه
   remove: موډول لرې کړئ
   reorder_disable: لاک توکپټه

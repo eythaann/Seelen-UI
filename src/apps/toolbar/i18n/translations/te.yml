@@ -12,6 +12,7 @@ bluetooth:
     passphrase: పాస్‌ఫ్రేజ్, కోడ్ లేదా పిన్
   scanning: పరికరాల కోసం స్కానింగ్
 context_menu:
+  add_custom_text: అనుకూల వచన అంశాన్ని జోడించండి
   modules: గుణకాలు
   remove: మాడ్యూల్ తొలగించండి
   reorder_disable: లాక్ టూల్‌బార్

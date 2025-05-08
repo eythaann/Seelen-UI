@@ -12,6 +12,7 @@ bluetooth:
     passphrase: پاسفریز ، کوڈ یا پن
   scanning: آلات کے لئے اسکیننگ
 context_menu:
+  add_custom_text: کسٹم ٹیکسٹ آئٹم شامل کریں
   modules: ماڈیولز
   remove: ماڈیول کو ہٹا دیں
   reorder_disable: لاک ٹول بار

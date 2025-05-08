@@ -12,6 +12,7 @@ bluetooth:
     passphrase: මුරපදය, කේතය හෝ පින්
   scanning: උපාංග සඳහා පරිලෝකනය කිරීම
 context_menu:
+  add_custom_text: අභිරුචි පෙළ අයිතමය එක් කරන්න
   modules: මොඩියුල
   remove: මොඩියුලය ඉවත් කරන්න
   reorder_disable: අගුළු මෙවලම් තීරුව

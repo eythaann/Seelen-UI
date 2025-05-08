@@ -12,6 +12,7 @@ bluetooth:
     passphrase: عارضه ، کد یا پین
   scanning: اسکن برای دستگاه ها
 context_menu:
+  add_custom_text: مورد متن سفارشی را اضافه کنید
   modules: ماژول
   remove: ماژول را حذف کنید
   reorder_disable: نوار ابزار قفل

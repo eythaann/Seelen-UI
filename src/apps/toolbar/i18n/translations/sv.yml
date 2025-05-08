@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Lösenfras, kod eller PIN-kod
   scanning: Skanning efter enheter
 context_menu:
+  add_custom_text: Lägg till anpassat textobjekt
   modules: Moduler
   remove: Ta bort modulen
   reorder_disable: Lås verktygsfältet

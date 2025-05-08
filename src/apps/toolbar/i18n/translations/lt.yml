@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Slaptažodžių frazė, kodas arba PIN kodas
   scanning: Įrenginių nuskaitymas
 context_menu:
+  add_custom_text: Pridėti pasirinktinį teksto elementą
   modules: Moduliai
   remove: Pašalinkite modulį
   reorder_disable: Užrakinti įrankių juostą

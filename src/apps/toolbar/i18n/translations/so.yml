@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, koodh ama PIN
   scanning: Iskaanka aaladaha
 context_menu:
+  add_custom_text: Ku dar sheyga qoraalka ee caadada ah
   modules: Moduleles
   remove: Ka saar cutubka
   reorder_disable: Quful aalad

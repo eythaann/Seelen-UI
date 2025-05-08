@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - add open window label on dock for app items (configurable).
+- add input to write custom text items on the toolbar.
 
 ### fix
 - not removing old icons mask on icon pack change.

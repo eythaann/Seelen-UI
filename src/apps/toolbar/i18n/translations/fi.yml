@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Salasana, koodi tai PIN-koodi
   scanning: Laitteiden skannaus
 context_menu:
+  add_custom_text: Lisää mukautettu tekstikohta
   modules: Moduulit
   remove: Poista moduuli
   reorder_disable: Lukitse työkalurivi

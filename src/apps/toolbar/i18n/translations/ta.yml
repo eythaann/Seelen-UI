@@ -12,6 +12,7 @@ bluetooth:
     passphrase: கடவுச்சொல், குறியீடு அல்லது முள்
   scanning: சாதனங்களுக்கான ஸ்கேன்
 context_menu:
+  add_custom_text: தனிப்பயன் உரை உருப்படியைச் சேர்க்கவும்
   modules: தொகுதிகள்
   remove: தொகுதியை அகற்று
   reorder_disable: பூட்டு கருவிப்பட்டி

@@ -101,6 +101,14 @@ export const RootSlice = createSlice({
         state.items.right = action.payload as any;
       }
     },
+    addTextItem(state, action: PayloadAction<string>) {
+      const cleaned = action.payload.trim().replace(/"/g, '\\"');
+      state.items.right.push({
+        id: window.crypto.randomUUID(),
+        type: 'text',
+        template: `return "${cleaned}"`,
+      } as any);
+    },
     addItem(state, action: PayloadAction<string>) {
       if (!state.items) {
         return;

@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passprase, kod yoki PIN
   scanning: Qurilmalar uchun skanerlash
 context_menu:
+  add_custom_text: Maxsus matn elementini qo'shing
   modules: Modullar
   remove: Modulni olib tashlash
   reorder_disable: Asboblar paneli

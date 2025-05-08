@@ -12,6 +12,7 @@ bluetooth:
     passphrase: ឃ្លាសម្ងាត់កូដឬលេខសម្ងាត់
   scanning: ស្កេនរកឧបករណ៍
 context_menu:
+  add_custom_text: បន្ថែមធាតុអត្ថបទផ្ទាល់ខ្លួន
   modules: ម៉ូឌុល
   remove: យកម៉ូឌុលចេញ
   reorder_disable: ចាក់សោរបារឧបករណ៍

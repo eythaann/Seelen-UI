@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Salasõna, kood või PIN-kood
   scanning: Seadmete skaneerimine
 context_menu:
+  add_custom_text: Lisa kohandatud tekstielement
   modules: Moodulid
   remove: Eemaldage moodul
   reorder_disable: Tööriistariba lukustamine

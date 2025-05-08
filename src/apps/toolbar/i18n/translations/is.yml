@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, kóða eða pinna
   scanning: Skönnun fyrir tæki
 context_menu:
+  add_custom_text: Bættu við sérsniðnum textahluta
   modules: Einingar
   remove: Fjarlægðu eininguna
   reorder_disable: Læsa tækjastiku

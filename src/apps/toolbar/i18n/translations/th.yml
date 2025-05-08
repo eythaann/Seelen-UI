@@ -12,6 +12,7 @@ bluetooth:
     passphrase: รหัสผ่านรหัสหรือพิน
   scanning: การสแกนสำหรับอุปกรณ์
 context_menu:
+  add_custom_text: เพิ่มรายการข้อความที่กำหนดเอง
   modules: โมดูล
   remove: ลบโมดูล
   reorder_disable: ล็อคแถบเครื่องมือ

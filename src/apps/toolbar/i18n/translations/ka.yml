@@ -12,6 +12,7 @@ bluetooth:
     passphrase: პასფაზის, კოდის ან პინის
   scanning: მოწყობილობების სკანირება
 context_menu:
+  add_custom_text: დაამატეთ პერსონალური ტექსტის ელემენტი
   modules: მოდულები
   remove: ამოიღეთ მოდული
   reorder_disable: ჩაკეტეთ პანელი

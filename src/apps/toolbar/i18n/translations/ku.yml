@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, kod an pin
   scanning: Ji bo amûrên şehîn
 context_menu:
+  add_custom_text: Tiştê nivîsê ya xwerû zêde bikin
   modules: Modules
   remove: Modulê rakirin
   reorder_disable: Toolbar tool

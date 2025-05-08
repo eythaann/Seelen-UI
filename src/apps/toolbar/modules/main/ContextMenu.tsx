@@ -1,8 +1,9 @@
 import { IconName } from '@icons';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { PluginId } from '@seelen-ui/lib/types';
-import { Checkbox, Flex, Menu, Popover } from 'antd';
+import { Button, Checkbox, Flex, Input, Menu, Popover, Space } from 'antd';
 import { MenuItemType } from 'antd/es/menu/interface';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,6 +14,8 @@ import { RestoreToDefault, SaveToolbarItems } from './application';
 import { Icon } from 'src/apps/shared/components/Icon';
 
 export function MainContextMenu() {
+  const [customText, setCustomText] = useState('');
+
   const items = useSelector(Selectors.items);
   const plugins = useSelector(Selectors.plugins);
 
@@ -24,6 +27,12 @@ export function MainContextMenu() {
   const isAlreadyAdded = (id: PluginId) => {
     return allItems.some((item) => item === id);
   };
+
+  function addCustomTextToToolbar() {
+    dispatch(RootActions.addTextItem(customText));
+    setCustomText('');
+    SaveToolbarItems();
+  }
 
   return (
     <BackgroundByLayersV2 className="tb-context-menu-container">
@@ -50,6 +59,29 @@ export function MainContextMenu() {
                           onClick() {
                             RestoreToDefault();
                           },
+                        },
+                        {
+                          type: 'divider',
+                        },
+                        {
+                          key: 'custom-text',
+                          label: (
+                            <Space.Compact block>
+                              <Input
+                                placeholder={t('context_menu.add_custom_text')}
+                                value={customText}
+                                onChange={(e) => setCustomText(e.target.value)}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') {
+                                    addCustomTextToToolbar();
+                                  }
+                                }}
+                              />
+                              <Button type="primary" onClick={addCustomTextToToolbar}>
+                                <Icon iconName="MdOutlineTextFields" />
+                              </Button>
+                            </Space.Compact>
+                          ),
                         },
                         {
                           type: 'divider',

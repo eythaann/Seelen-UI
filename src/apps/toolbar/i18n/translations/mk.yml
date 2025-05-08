@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Фраза, код или игла
   scanning: Скенирање за уреди
 context_menu:
+  add_custom_text: Додадете сопствена ставка за текст
   modules: Модули
   remove: Отстранете го модулот
   reorder_disable: Заклучете ја лентата со алатки

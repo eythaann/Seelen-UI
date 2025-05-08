@@ -12,6 +12,7 @@ bluetooth:
     passphrase: पासफ्रेज, कोड वा पिन
   scanning: उपकरणहरूको लागि स्क्यान गर्दै
 context_menu:
+  add_custom_text: कस्टम पाठ वस्तु थप्नुहोस्
   modules: मोड्युलहरू
   remove: मोड्युल हटाउनुहोस्
   reorder_disable: लक उपकरणपट्टी

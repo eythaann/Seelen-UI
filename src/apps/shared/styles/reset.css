@@ -155,6 +155,14 @@
     line-height: 12px !important;
     margin: 0 !important;
     border-radius: 8px !important;
+
+    &:active {
+      background-color: transparent !important;
+    }
+  }
+
+  .ant-menu-item-selected {
+    background-color: transparent !important;
   }
 
   .ant-menu-item:not(.ant-menu-item-danger),
@@ -162,13 +170,13 @@
     color: inherit !important;
 
     &:hover {
-      backdrop-filter: brightness(0.6) !important;
+      backdrop-filter: brightness(0.7) !important;
     }
   }
 
   .ant-menu-item-divider,
   .ant-dropdown-menu-item-divider {
-    backdrop-filter: brightness(0.85) !important;
+    backdrop-filter: brightness(0.9) !important;
   }
 
   .ant-dropdown-menu-submenu-title {

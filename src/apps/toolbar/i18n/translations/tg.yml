@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Гузарвожа, рамз ё PIN
   scanning: Ҷустуҷӯи дастгоҳҳо
 context_menu:
+  add_custom_text: Ададҳои матнии фармоишӣ илова кунед
   modules: Модулҳо
   remove: Модулро хориҷ кунед
   reorder_disable: Лок

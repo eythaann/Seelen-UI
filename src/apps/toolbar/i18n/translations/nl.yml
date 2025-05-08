@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Wachtzin, code of pincode
   scanning: Scannen naar apparaten
 context_menu:
+  add_custom_text: Aangepast tekstitem toevoegen
   modules: Modules
   remove: Verwijder de module
   reorder_disable: Werkbalk vergrendelen

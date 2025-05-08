@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, code o pin
   scanning: Pag -scan para sa mga aparato
 context_menu:
+  add_custom_text: Magdagdag ng pasadyang item ng teksto
   modules: Mga module
   remove: Alisin ang module
   reorder_disable: I -lock ang toolbar

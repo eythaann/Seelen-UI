@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Συνθηματική φράση, κωδικός ή PIN
   scanning: Σάρωση για συσκευές
 context_menu:
+  add_custom_text: Προσθήκη προσαρμοσμένου στοιχείου κειμένου
   modules: Ενότητες
   remove: Αφαιρέστε την ενότητα
   reorder_disable: Κλείδωμα γραμμής εργαλείων

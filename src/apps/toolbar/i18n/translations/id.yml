@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Frasa Sandi, Kode atau PIN
   scanning: Memindai perangkat
 context_menu:
+  add_custom_text: Menambahkan item teks khusus
   modules: Modul
   remove: Hapus modul
   reorder_disable: Mengunci bilah alat

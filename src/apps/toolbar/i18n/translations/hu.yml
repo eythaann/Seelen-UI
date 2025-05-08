@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Jelszó, kód vagy PIN
   scanning: Eszközök keresése
 context_menu:
+  add_custom_text: Egyéni szövegelem hozzáadása
   modules: Modulok
   remove: Modul eltávolítása
   reorder_disable: Eszköztár zárolása

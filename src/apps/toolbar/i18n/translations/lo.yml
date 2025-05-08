@@ -12,6 +12,7 @@ bluetooth:
     passphrase: passphrase, ລະຫັດຫຼື PIN
   scanning: ການສະແກນສໍາລັບອຸປະກອນຕ່າງໆ
 context_menu:
+  add_custom_text: ເພີ່ມລາຍການຕົວຫນັງສືທີ່ກໍານົດເອງ
   modules: ໂມດູນ
   remove: ດຶງອອກຈາກໂມດູນ
   reorder_disable: ແຖບເຄື່ອງມືລັອກ

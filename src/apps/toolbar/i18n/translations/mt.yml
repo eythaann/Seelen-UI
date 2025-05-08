@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, kodiċi jew pin
   scanning: Skennjar għal apparati
 context_menu:
+  add_custom_text: Żid oġġett tat-test tad-dwana
   modules: Moduli
   remove: Neħħi l-modulu
   reorder_disable: Lock Toolbar

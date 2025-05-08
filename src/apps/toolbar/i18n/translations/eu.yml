@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Pasahitza, kodea edo PINa
   scanning: Gailuetarako eskaneatzea
 context_menu:
+  add_custom_text: Gehitu testu-elementu pertsonalizatua
   modules: Modulu
   remove: Kendu modulua
   reorder_disable: Blokeatu tresna barra

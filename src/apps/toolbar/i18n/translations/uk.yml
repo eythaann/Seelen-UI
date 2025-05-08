@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Пароль, код або PIN-код
   scanning: Сканування на наявність пристроїв
 context_menu:
+  add_custom_text: Додати власний текстовий елемент
   modules: Модулі
   remove: Видалити модуль
   reorder_disable: Заблокувати панель інструментів

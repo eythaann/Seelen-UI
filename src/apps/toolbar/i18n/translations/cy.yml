@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Passphrase, cod neu pin
   scanning: Sganio am ddyfeisiau
 context_menu:
+  add_custom_text: Ychwanegu Eitem Testun Custom
   modules: Modiwlau
   remove: Tynnwch y modiwl
   reorder_disable: Bar offer cloi

@@ -12,6 +12,7 @@ bluetooth:
     passphrase: 비밀번호, 코드 또는 PIN
   scanning: 디바이스 검색
 context_menu:
+  add_custom_text: 사용자 지정 텍스트 항목 추가
   modules: 모듈
   remove: 모듈 제거
   reorder_disable: 잠금 도구 모음

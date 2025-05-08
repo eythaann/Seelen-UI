@@ -12,6 +12,7 @@ bluetooth:
     passphrase: משפט סיסמה, קוד או סיכה
   scanning: סריקה למכשירים
 context_menu:
+  add_custom_text: הוסף פריט טקסט מותאם אישית
   modules: מודולים
   remove: הסר את המודול
   reorder_disable: סרגל הכלים לנעול

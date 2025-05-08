@@ -12,6 +12,7 @@ bluetooth:
     passphrase: પાસફ્રેઝ, કોડ અથવા પિન
   scanning: ઉપકરણો માટે સ્કેન કરવું
 context_menu:
+  add_custom_text: કસ્ટમ ટેક્સ્ટ આઇટમ ઉમેરો
   modules: અંતલો
   remove: મોડ્યુલ દૂર કરો
   reorder_disable: તલવાર

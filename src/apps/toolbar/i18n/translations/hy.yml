@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Անհատական, կոդ կամ քորոց
   scanning: Սարքավորումների սկանավորում
 context_menu:
+  add_custom_text: Ավելացնել սովորական տեքստային կետ
   modules: Մոդուլներ
   remove: Հեռացրեք մոդուլը
   reorder_disable: Կողպեք գործիքագոտին

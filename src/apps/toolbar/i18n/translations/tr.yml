@@ -12,6 +12,7 @@ bluetooth:
     passphrase: Parola, Kod veya PIN
   scanning: Cihazlar için tarama
 context_menu:
+  add_custom_text: Özel metin öğesi ekleme
   modules: Modüller
   remove: Modülü Kaldır
   reorder_disable: Araç çubuğunu kilitle
