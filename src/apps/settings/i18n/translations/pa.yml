@@ -269,6 +269,7 @@ weg:
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   dock_side: ਸਥਿਤੀ
   enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  filtering: ਆਈਟਮ ਫਿਲਟਰਿੰਗ
   gap: ਪਾੜਾ
   hide_mode:
     always: ਹਮੇਸ਼ਾ
@@ -281,7 +282,8 @@ weg:
       always: ਹਮੇਸ਼ਾ
       label: ਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ
       when_primary: ਜਦੋਂ ਮਾਨੀਟਰ ਪ੍ਰਾਇਮਰੀ ਹੁੰਦਾ ਹੈ
-    show_instance_counter: ਖੁੱਲੇ ਵਿੰਡੋਜ਼ ਲਈ ਕਾ counter ਂਟਰ ਦਿਖਾਓ
+    show_instance_counter: ਓਪਨ ਵਿੰਡੋਜ਼ ਕਾਉਂਟਰ ਦਿਖਾਓ
+    show_window_title: ਓਪਨ ਵਿੰਡੋ ਦਾ ਸਿਰਲੇਖ ਦਿਖਾਓ (ਸਿਰਫ ਖਿਤਿਜੀ)
     size: ਆਈਟਮ ਦਾ ਆਕਾਰ
     temporal_visibility:
       all: ਸਾਰੇ

@@ -274,6 +274,7 @@ weg:
   delay_to_show: காட்ட தாமதம்
   dock_side: நிலை
   enable: டாக்/டாஸ்க்பாரை இயக்கவும்
+  filtering: பொருள் வடிகட்டுதல்
   gap: இடைவெளி
   hide_mode:
     always: எப்போதும்
@@ -286,7 +287,8 @@ weg:
       always: எப்போதும்
       label: பின் செய்யப்பட்ட பொருட்களின் தெரிவுநிலை
       when_primary: மானிட்டர் முதன்மையாக இருக்கும்போது
-    show_instance_counter: திறந்த சாளரங்களுக்கான கவுண்டரைக் காட்டு
+    show_instance_counter: திறந்த விண்டோஸ் கவுண்டரைக் காட்டு
+    show_window_title: திறந்த சாளர தலைப்பைக் காட்டு (கிடைமட்டமாக மட்டுமே)
     size: பொருளின் அளவு
     temporal_visibility:
       all: அனைத்து

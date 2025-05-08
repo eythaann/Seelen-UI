@@ -273,6 +273,7 @@ weg:
   delay_to_show: Oneskorenie zobrazenia
   dock_side: Pozícia
   enable: Povoliť prístavisko/panel úloh
+  filtering: Filtrovanie položiek
   gap: Priepasť
   hide_mode:
     always: Vždy
@@ -286,6 +287,7 @@ weg:
       label: Viditeľnosť pripnutých položiek
       when_primary: Keď je monitor primárny
     show_instance_counter: Zobrazenie počítadla otvorených okien
+    show_window_title: Zobrazenie názvu otvoreného okna (len horizontálne)
     size: Veľkosť položky
     temporal_visibility:
       all: Všetky

@@ -271,6 +271,7 @@ weg:
   delay_to_show: Seinkun á sýningu
   dock_side: Staða
   enable: Virkja bryggju/verkefnastiku
+  filtering: Hlut síun
   gap: Bil
   hide_mode:
     always: Alltaf
@@ -283,7 +284,8 @@ weg:
       always: Alltaf
       label: Sýnileiki festra hluta
       when_primary: Þegar skjárinn er aðal
-    show_instance_counter: Sýna teljara fyrir opna glugga
+    show_instance_counter: Sýna opinn Windows teljara
+    show_window_title: Sýna opinn glugga titil (aðeins lárétt)
     size: Stærð hlutar
     temporal_visibility:
       all: Allt

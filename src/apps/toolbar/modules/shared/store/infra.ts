@@ -141,6 +141,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setPlaceholder(event.payload));
   });
 
+  console.log(await PluginList.getAsync());
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).forCurrentWidget()));
   await PluginList.onChange((list) => {
     store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));

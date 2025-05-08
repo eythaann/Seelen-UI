@@ -263,6 +263,7 @@ weg:
   delay_to_show: 表示が遅れる
   dock_side: 位置
   enable: ドック（タスクバー）を有効にする
+  filtering: アイテムのフィルタリング
   gap: アイテム間のスペース
   hide_mode:
     always: いつも
@@ -276,6 +277,7 @@ weg:
       label: ピン留めされたアイテムの表示設定
       when_primary: モニターがプライマリの場合
     show_instance_counter: 開いているウィンドウのカウンターを表示する
+    show_window_title: 開いているウィンドウのタイトルを表示する（水平方向のみ）
     size: アイテムのサイズ
     temporal_visibility:
       all: 全て

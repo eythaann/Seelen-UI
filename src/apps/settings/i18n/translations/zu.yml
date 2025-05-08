@@ -277,6 +277,7 @@ weg:
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
   enable: Nika amandla i-Dock / Taskbar
+  filtering: Ukuhlunga kwento
   gap: Insungubezi
   hide_mode:
     always: Njalo
@@ -289,7 +290,8 @@ weg:
       always: Njalo
       label: Ukubonakala Kwezinto Eziphiniwe
       when_primary: Lapho imonitha iyinhloko
-    show_instance_counter: Khombisa i-counter yamafasitela avulekile
+    show_instance_counter: Khombisa i-Windows Counter
+    show_window_title: Khombisa isihloko esivulekile sewindi (okuvundlile)
     size: Usayizi wento
     temporal_visibility:
       all: Konke

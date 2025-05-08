@@ -278,6 +278,7 @@ weg:
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
   enable: Dock/Taskleiste aktivieren
+  filtering: Element-Filterung
   gap: Abstand
   hide_mode:
     always: Stets
@@ -291,6 +292,7 @@ weg:
       label: Sichtbarkeit angehefteter Elemente
       when_primary: Wenn der Monitor primär ist
     show_instance_counter: Zähler für offene Fenster anzeigen
+    show_window_title: Titel des geöffneten Fensters anzeigen (nur horizontal)
     size: Elementgröße
     temporal_visibility:
       all: Alle

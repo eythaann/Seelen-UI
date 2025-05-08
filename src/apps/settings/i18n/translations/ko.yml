@@ -264,6 +264,7 @@ weg:
   delay_to_show: 표시 지연
   dock_side: 위치
   enable: 독/작업 표시줄 활성화
+  filtering: 항목 필터링
   gap: 간격
   hide_mode:
     always: 항상
@@ -276,7 +277,8 @@ weg:
       always: 항상
       label: 고정된 항목 가시성
       when_primary: 모니터가 기본인 경우
-    show_instance_counter: 열린 창에 카운터 표시
+    show_instance_counter: 열린 창 카운터 표시
+    show_window_title: 열린 창 제목 표시(가로만)
     size: 항목 크기
     temporal_visibility:
       all: 모두

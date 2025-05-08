@@ -275,6 +275,7 @@ weg:
   delay_to_show: Odgoditi prikaz
   dock_side: Položaj
   enable: Omogućite pristanište/zadaću
+  filtering: Filtriranje predmeta
   gap: Jaz
   hide_mode:
     always: Uvijek
@@ -287,7 +288,8 @@ weg:
       always: Uvijek
       label: Vidljivost prikvačenih stavki
       when_primary: Kada je monitor primarni
-    show_instance_counter: Prikaži brojač za otvorene prozore
+    show_instance_counter: Prikaži otvoreni prozorni brojač
+    show_window_title: Prikaži naslov otvorenog prozora (samo vodoravni)
     size: Veličina predmeta
     temporal_visibility:
       all: Sve

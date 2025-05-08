@@ -272,6 +272,7 @@ weg:
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
   enable: Luba dokk/ülesanderiba
+  filtering: Objektide filtreerimine
   gap: Lüngad
   hide_mode:
     always: Alati
@@ -285,6 +286,7 @@ weg:
       label: Kinnitatud üksuste nähtavus
       when_primary: Kui monitor on esmane
     show_instance_counter: Näita avatud akende loendurit
+    show_window_title: Näita avatud akna pealkirja (ainult horisontaalne)
     size: Üksuse suurus
     temporal_visibility:
       all: Kõik

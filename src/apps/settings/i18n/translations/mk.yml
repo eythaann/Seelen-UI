@@ -277,6 +277,7 @@ weg:
   delay_to_show: Одложување за прикажување
   dock_side: Позиција
   enable: Овозможете пристаниште/лента со задачи
+  filtering: Филтрирање на артикли
   gap: Јаз
   hide_mode:
     always: Секогаш
@@ -289,7 +290,8 @@ weg:
       always: Секогаш
       label: Видливост на закачени ставки
       when_primary: Кога мониторот е примарен
-    show_instance_counter: Покажете бројач за отворени прозорци
+    show_instance_counter: Покажете бројач на отворени прозорци
+    show_window_title: Покажете го насловот на отворен прозорец (само хоризонтално)
     size: Големина на артикалот
     temporal_visibility:
       all: Сите

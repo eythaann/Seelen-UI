@@ -270,6 +270,7 @@ weg:
   delay_to_show: Delay to show
   dock_side: Position
   enable: Enable Dock/Taskbar
+  filtering: Item Filtering
   gap: Gap
   hide_mode:
     always: Always
@@ -282,7 +283,8 @@ weg:
       always: Always
       label: Pinned Items Visibility
       when_primary: When the monitor is primary
-    show_instance_counter: Show counter for open windows
+    show_instance_counter: Show open windows counter
+    show_window_title: Show open window title (only horizontal)
     size: Item Size
     temporal_visibility:
       all: All

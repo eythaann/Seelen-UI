@@ -275,6 +275,7 @@ weg:
   delay_to_show: Oedi i ddangos
   dock_side: Safle
   enable: Galluogi doc/bar tasg
+  filtering: Hidlo Eitem
   gap: Bwlch
   hide_mode:
     always: Bob amser
@@ -287,7 +288,8 @@ weg:
       always: Bob amser
       label: Eitemau wedi'u Pinio Gwelededd
       when_primary: Pan fydd y monitor yn gynradd
-    show_instance_counter: Dangos cownter ar gyfer ffenestri agored
+    show_instance_counter: Dangos cownter ffenestri agored
+    show_window_title: Dangos teitl ffenestr agored (dim ond llorweddol)
     size: Maint eitem
     temporal_visibility:
       all: Pawb

@@ -268,6 +268,7 @@ weg:
   delay_to_show: עיכוב להצגה
   dock_side: מַצָב
   enable: הפעל את המזח/שורת המשימות
+  filtering: סינון פריטים
   gap: פער
   hide_mode:
     always: תָמִיד
@@ -280,7 +281,8 @@ weg:
       always: תָמִיד
       label: נראות פריטים מוצמדים
       when_primary: כאשר המוניטור הוא ראשי
-    show_instance_counter: הצג מונה עבור חלונות פתוחים
+    show_instance_counter: הצג דלפק Windows פתוח
+    show_window_title: הצג כותרת חלון פתוחה (אופקית בלבד)
     size: גודל פריט
     temporal_visibility:
       all: כֹּל

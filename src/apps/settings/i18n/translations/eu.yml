@@ -273,6 +273,7 @@ weg:
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
   enable: Gaitu kaia / ataza barra
+  filtering: Elementua iragaztea
   gap: Tarte
   hide_mode:
     always: Beti
@@ -285,7 +286,8 @@ weg:
       always: Beti
       label: Ainguratutako elementuen ikusgaitasuna
       when_primary: Monitorea nagusia denean
-    show_instance_counter: Erakutsi Counter Windows irekitzeko
+    show_instance_counter: Erakutsi irekitako leihoen kontagailua
+    show_window_title: Erakutsi leiho irekiko titulua (horizontala bakarrik)
     size: Elementuen tamaina
     temporal_visibility:
       all: Denak

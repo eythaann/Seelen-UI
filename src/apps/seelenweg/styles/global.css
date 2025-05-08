@@ -20,6 +20,8 @@ body {
   position: absolute;
   height: min-content;
   width: min-content;
+  max-width: 100vw;
+  max-height: 100vh;
   transition-property: top, left, right, bottom;
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
@@ -97,22 +99,40 @@ body {
 
 /** Taskbar Styles */
 .taskbar {
+  --max-taskbar-width: calc(100vw - var(--config-margin) * 2);
+  --max-taskbar-height: calc(100vh - var(--config-margin) * 2);
+
   position: relative;
   overflow: visible;
-  padding: var(--config-padding);
   margin: var(--config-margin);
-  display: flex;
-  justify-content: var(--config-by-position-justify-content);
-  align-items: var(--config-by-position-align-items);
-  flex-direction: var(--config-by-position-flex-direction);
-  gap: var(--config-space-between-items);
+  max-width: var(--max-taskbar-width);
+  max-height: var(--max-taskbar-height);
+
+  .weg-items-container {
+    overflow: auto;
+    padding: var(--config-padding);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .weg-items {
+      width: min-content;
+      height: min-content;
+      display: flex;
+      justify-content: var(--config-by-position-justify-content);
+      align-items: var(--config-by-position-align-items);
+      flex-direction: var(--config-by-position-flex-direction);
+      gap: var(--config-space-between-items);
+    }
+  }
 
   &.horizontal {
     height: calc(var(--config-item-size) + var(--config-padding) * 2);
     width: min-content;
 
     &.full-width {
-      width: calc(100vw - var(--config-margin) * 2);
+      width: var(--max-taskbar-width);
     }
   }
 
@@ -121,7 +141,7 @@ body {
     height: min-content;
 
     &.full-width {
-      height: calc(100vh - var(--config-margin) * 2);
+      height: var(--max-taskbar-height);
     }
   }
 

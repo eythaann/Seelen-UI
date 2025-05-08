@@ -267,6 +267,7 @@ weg:
   delay_to_show: ล่าช้าในการแสดง
   dock_side: ตำแหน่ง
   enable: เปิดใช้งาน Dock/Task -Babar
+  filtering: การกรองรายการ
   gap: ช่องว่าง
   hide_mode:
     always: เสมอ
@@ -279,7 +280,8 @@ weg:
       always: เสมอ
       label: การมองเห็นรายการที่ปักหมุด
       when_primary: เมื่อมอนิเตอร์เป็นเครื่องหลัก
-    show_instance_counter: แสดงเคาน์เตอร์สำหรับ Windows ที่เปิดอยู่
+    show_instance_counter: แสดงตัวนับ Windows Open
+    show_window_title: แสดงชื่อเปิดหน้าต่าง (แนวนอนเท่านั้น)
     size: ขนาดรายการ
     temporal_visibility:
       all: ทั้งหมด

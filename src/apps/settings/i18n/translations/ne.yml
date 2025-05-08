@@ -272,6 +272,7 @@ weg:
   delay_to_show: देखाउन ढिलाइ
   dock_side: स्थिति
   enable: डक / टास्कबार सक्षम गर्नुहोस्
+  filtering: वस्तु फिल्टरिंग
   gap: अन्तराल
   hide_mode:
     always: सधैं
@@ -284,7 +285,8 @@ weg:
       always: सधैं
       label: पिन गरिएका वस्तुहरू दृश्यता
       when_primary: जब मनिटर प्राथमिक छ
-    show_instance_counter: खुला विन्डोजको लागि काउन्टर देखाउनुहोस्
+    show_instance_counter: खुला विन्डोज काउन्टर देखाउनुहोस्
+    show_window_title: खुला विन्डो शीर्षक देखाउनुहोस् (केवल क्षैतिज)
     size: वस्तुको आकार
     temporal_visibility:
       all: सबै

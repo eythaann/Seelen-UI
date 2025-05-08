@@ -277,6 +277,7 @@ weg:
   delay_to_show: Задержка показа
   dock_side: Расположение
   enable: Включить
+  filtering: Фильтрация элементов
   gap: Расстояние
   hide_mode:
     always: Всегда
@@ -290,6 +291,7 @@ weg:
       label: Видимость закрепленных элементов
       when_primary: Если монитор основной
     show_instance_counter: Показать счетчик открытых окон
+    show_window_title: Показать заголовок открытого окна (только горизонтально)
     size: Размер иконок
     temporal_visibility:
       all: Все

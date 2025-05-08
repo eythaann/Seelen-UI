@@ -293,6 +293,7 @@ weg:
   delay_to_show: Забавяне за показване
   dock_side: Позиция
   enable: Активирайте док/лента на задачите
+  filtering: Филтриране на елементи
   gap: Пропаст
   hide_mode:
     always: Винаги
@@ -305,7 +306,8 @@ weg:
       always: Винаги
       label: Видимост на фиксираните елементи
       when_primary: Когато мониторът е основен
-    show_instance_counter: Показване на брояч за отворени прозорци
+    show_instance_counter: Показване на брояча на отворените прозорци
+    show_window_title: Показване на заглавието на отворения прозорец (само хоризонтално)
     size: Размер на артикула
     temporal_visibility:
       all: Всички

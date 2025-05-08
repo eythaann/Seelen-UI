@@ -271,6 +271,7 @@ weg:
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija
   enable: Įgalinti doką/užduočių juostą
+  filtering: Elementų filtravimas
   gap: Tarpas
   hide_mode:
     always: Visada
@@ -283,7 +284,8 @@ weg:
       always: Visada
       label: Prisegtų elementų matomumas
       when_primary: Kai monitorius yra pagrindinis
-    show_instance_counter: Rodyti atidarytų langų skaitiklį
+    show_instance_counter: Rodyti atvirų langų skaitiklį
+    show_window_title: Rodyti atidaryto lango pavadinimą (tik horizontaliai)
     size: Prekės dydis
     temporal_visibility:
       all: Visi

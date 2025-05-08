@@ -8,6 +8,24 @@
   }
 }
 
+@keyframes shadow-on-horizontal-scroll {
+  from {
+    box-shadow: inset -20px 0 15px -10px rgb(0 0 0 / 0.5);
+  }
+  to {
+    box-shadow: inset 20px 0 15px -10px rgb(0 0 0 / 0.5);
+  }
+}
+
+@keyframes shadow-on-vertical-scroll {
+  from {
+    box-shadow: inset 0 -20px 15px -10px rgb(0 0 0 / 0.5);
+  }
+  to {
+    box-shadow: inset 0 20px 0 15px -10px rgb(0 0 0 / 0.5);
+  }
+}
+
 .taskbar {
   > .bg-layers {
     > .bg-layer-1 {
@@ -22,6 +40,24 @@
       opacity: 0.8;
       background-color: var(--color-gray-100);
       border-radius: 15px;
+    }
+  }
+
+  > .weg-items-container {
+    border-radius: 15px;
+  }
+
+  &.horizontal {
+    > .weg-items-container {
+      animation: shadow-on-horizontal-scroll linear;
+      animation-timeline: scroll(self inline);
+    }
+  }
+
+  &.vertical {
+    > .weg-items-container {
+      animation: shadow-on-vertical-scroll linear;
+      animation-timeline: scroll(self inline);
     }
   }
 
@@ -61,39 +97,59 @@
 }
 
 .weg-item {
+  --icon-ratio: 0.7;
+  --padding-ratio: 0.15; /* this count as x2 like there is a padding on each side */
+
+  --inner-spacing: calc(var(--config-item-size) * var(--padding-ratio));
+
+  /* this represent the max item size as 3 items to follow simetry */
+  --max-item-size: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+  /* same as use 25% but this works for rectangles */
+  --border-radius: calc(var(--config-item-size) * 0.25);
+
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--config-item-size);
+  gap: var(--inner-spacing);
+  padding: var(--inner-spacing);
+  min-width: var(--config-item-size);
+  max-width: var(--max-item-size);
   height: var(--config-item-size);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
 
   > .bg-layers {
     > .bg-layer-1 {
       background-color: var(--color-gray-100);
-      border-radius: 25%;
-      box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
+      border-radius: var(--border-radius);
     }
 
     > .bg-layer-2 {
-      border-radius: 25%;
+      border-radius: var(--border-radius);
       transition: background-color 0.2s ease-out;
     }
   }
 
   &.media-session-container {
+    padding: 0;
+
     &.media-session-container-horizontal {
-      width: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+      width: var(--max-item-size);
     }
+
     &.media-session-container-vertical {
-      height: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+      height: var(--max-item-size);
+    }
+
+    .media-session {
+      border-radius: var(--border-radius);
+      overflow: hidden;
     }
   }
 
-  &:hover {
-    > .bg-layers > .bg-layer-2 {
-      background-color: var(--dock-item-hover-color);
-    }
+  &:hover > .bg-layers > .bg-layer-2 {
+    background-color: var(--dock-item-hover-color);
   }
 
   &:active {
@@ -113,6 +169,32 @@
 
     .weg-item-icon {
       transition: transform 0.2s linear;
+    }
+  }
+
+  .weg-item-icon {
+    width: calc(var(--config-item-size) * var(--icon-ratio));
+    height: calc(var(--config-item-size) * var(--icon-ratio));
+    filter: drop-shadow(0px 0px 1px #0000009a);
+    object-fit: contain;
+    fill: var(--config-accent-lighter-color);
+
+    &.weg-item-start-icon,
+    &.weg-item-folder-icon {
+      filter: none;
+    }
+  }
+
+  .weg-item-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    font-size: max(calc(var(--config-item-size) / 3), 12px);
+    font-weight: 600;
+
+    .vertical & {
+      display: none;
     }
   }
 
@@ -149,74 +231,56 @@
     font-weight: 600;
     border-radius: 8px;
   }
-}
 
-.weg-item-icon {
-  width: 70%;
-  height: 70%;
-  filter: drop-shadow(0px 0px 1px #0000009a);
-  object-fit: contain;
-  fill: var(--config-accent-lighter-color);
-
-  &.weg-item-start-icon {
-    width: 75%;
-    height: 75%;
-  }
-
-  &.weg-item-start-icon,
-  &.weg-item-folder-icon {
-    filter: none;
-  }
-}
-
-.weg-item-open-sign {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 6px;
-  background-color: var(--color-gray-600);
-  opacity: 0;
-  transition-property: width, height, transform, opacity, background-color, border-radius;
-  transition-duration: 0.2s;
-  transition-timing-function: linear;
-
-  .vertical & {
-    transform: translateX(-50%);
-  }
-
-  .horizontal & {
-    transform: translateY(-50%);
-  }
-
-  .top & {
-    bottom: calc(100% + var(--config-padding) / 2);
-  }
-
-  .bottom & {
-    top: calc(100% + var(--config-padding) / 2);
-  }
-
-  .left & {
-    right: calc(100% + var(--config-padding) / 2);
-  }
-
-  .right & {
-    left: calc(100% + var(--config-padding) / 2);
-  }
-
-  &.weg-item-open-sign-active {
-    opacity: 1;
-  }
-
-  &.weg-item-open-sign-focused {
-    background-color: var(--config-accent-color);
+  .weg-item-open-sign {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 6px;
+    background-color: var(--color-gray-600);
+    opacity: 0;
+    transition-property: width, height, transform, opacity, background-color, border-radius;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
 
     .vertical & {
-      height: 50%;
+      transform: translateX(-50%);
     }
 
     .horizontal & {
-      width: 50%;
+      transform: translateY(-50%);
+    }
+
+    .top & {
+      bottom: calc(100% + var(--config-padding) / 2);
+    }
+
+    .bottom & {
+      top: calc(100% + var(--config-padding) / 2);
+    }
+
+    .left & {
+      right: calc(100% + var(--config-padding) / 2);
+    }
+
+    .right & {
+      left: calc(100% + var(--config-padding) / 2);
+    }
+
+    &.weg-item-open-sign-active {
+      opacity: 1;
+    }
+
+    &.weg-item-open-sign-focused {
+      background-color: var(--config-accent-color);
+
+      .vertical & {
+        height: 50%;
+      }
+
+      .horizontal & {
+        width: 50%;
+      }
     }
   }
 }

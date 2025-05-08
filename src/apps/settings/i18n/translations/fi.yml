@@ -277,6 +277,7 @@ weg:
   delay_to_show: Viive näyttöön
   dock_side: Sijainti
   enable: Ota Dock/tehtäväpalkki käyttöön
+  filtering: Kohteen suodatus
   gap: Kuilu
   hide_mode:
     always: Aina
@@ -290,6 +291,7 @@ weg:
       label: Kiinnitettyjen kohteiden näkyvyys
       when_primary: Kun näyttö on ensisijainen
     show_instance_counter: Näytä avoimien ikkunoiden laskuri
+    show_window_title: Näytä avoimen ikkunan otsikko (vain vaakasuora)
     size: Esineen koko
     temporal_visibility:
       all: Kaikki

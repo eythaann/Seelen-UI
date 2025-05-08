@@ -277,6 +277,7 @@ weg:
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya
   enable: Dock / vazifalar panelini yoqing
+  filtering: Mahsulotni filtrlash
   gap: Bo'shliq
   hide_mode:
     always: Har doim
@@ -289,7 +290,8 @@ weg:
       always: Har doim
       label: Belgilangan elementlarning ko'rinishi
       when_primary: Monitor asosiy bo'lganda
-    show_instance_counter: Ochiq derazalarga peshtaxtalarni ko'rsatish
+    show_instance_counter: Ochiq Windows hisoblagichini ko'rsatish
+    show_window_title: Ochiq deraza nomini ko'rsatish (faqat gorizontal)
     size: Element hajmi
     temporal_visibility:
       all: Hammasi

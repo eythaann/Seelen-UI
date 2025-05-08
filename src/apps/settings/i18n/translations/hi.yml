@@ -274,6 +274,7 @@ weg:
   delay_to_show: दिखाने में देरी
   dock_side: पद
   enable: डॉक/टास्कबार सक्षम करें
+  filtering: आइटम फ़िल्टरिंग
   gap: अंतर
   hide_mode:
     always: हमेशा
@@ -286,7 +287,8 @@ weg:
       always: हमेशा
       label: पिन किए गए आइटम दृश्यता
       when_primary: जब मॉनिटर प्राइमरी हो
-    show_instance_counter: खुली खिड़कियों के लिए काउंटर दिखाएं
+    show_instance_counter: ओपन विंडोज काउंटर दिखाएं
+    show_window_title: ओपन विंडो शीर्षक दिखाएं (केवल क्षैतिज)
     size: आइटम आकार
     temporal_visibility:
       all: सभी

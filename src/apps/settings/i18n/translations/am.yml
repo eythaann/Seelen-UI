@@ -265,6 +265,7 @@ weg:
   delay_to_show: ለማሳየት መዘግየት
   dock_side: አቀማመጥ
   enable: መትከያ / ተግባር አሞሌን ያንቁ
+  filtering: ዕቃ ማጣሪያ
   gap: ክፍተት
   hide_mode:
     always: ሁሌም
@@ -277,7 +278,8 @@ weg:
       always: ሁሌም
       label: የተሰኩ ዕቃዎች ታይነት
       when_primary: መቆጣጠሪያው ቀዳሚ ሲሆን
-    show_instance_counter: ለተከፈቱ መስኮቶች ለመክፈት ቆጣሪ አሳይ
+    show_instance_counter: ክፍት የመስኮቶች ቆጣሪ አሳይ
+    show_window_title: ክፍት የመስኮት ርዕስ አሳይ (አግድም ብቻ)
     size: የንጥል መጠን
     temporal_visibility:
       all: ሁሉም

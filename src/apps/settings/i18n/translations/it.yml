@@ -273,6 +273,7 @@ weg:
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
   enable: Abilita Dock/Barra delle Attività
+  filtering: Filtraggio degli articoli
   gap: Spazio
   hide_mode:
     always: Sempre
@@ -286,6 +287,7 @@ weg:
       label: Visibilità degli elementi appuntati
       when_primary: Quando il monitor è primario
     show_instance_counter: Mostra il contatore delle finestre aperte
+    show_window_title: Mostra il titolo della finestra aperta (solo in orizzontale)
     size: Dimensione Elementi
     temporal_visibility:
       all: Tutto

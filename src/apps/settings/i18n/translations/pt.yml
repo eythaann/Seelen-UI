@@ -273,6 +273,7 @@ weg:
   delay_to_show: Demora para mostrar
   dock_side: Posição
   enable: Habilitar Dock/Barra de Tarefas
+  filtering: Filtragem de itens
   gap: Espaçamento
   hide_mode:
     always: Sempre
@@ -285,7 +286,8 @@ weg:
       always: Sempre
       label: Visibilidade dos itens fixados
       when_primary: Quando o monitor é primário
-    show_instance_counter: Mostrar contador para janelas abertas
+    show_instance_counter: Mostre o balcão do Windows aberto
+    show_window_title: Mostrar título de janela aberta (apenas horizontal)
     size: Tamanho do item
     temporal_visibility:
       all: Todos

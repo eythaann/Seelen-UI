@@ -275,6 +275,7 @@ weg:
   delay_to_show: দেখাতে বিলম্ব
   dock_side: অবস্থান
   enable: ডক/টাস্কবার সক্ষম করুন
+  filtering: আইটেম ফিল্টারিং
   gap: ফাঁক
   hide_mode:
     always: সর্বদা
@@ -287,7 +288,8 @@ weg:
       always: সর্বদা
       label: পিন করা আইটেম দৃশ্যমানতা
       when_primary: যখন মনিটর প্রাথমিক হয়
-    show_instance_counter: খোলা উইন্ডোজের জন্য কাউন্টার দেখান
+    show_instance_counter: ওপেন উইন্ডোজ কাউন্টার দেখান
+    show_window_title: ওপেন উইন্ডো শিরোনাম দেখান (কেবল অনুভূমিক)
     size: আইটেমের আকার
     temporal_visibility:
       all: সব

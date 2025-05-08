@@ -275,6 +275,7 @@ weg:
   delay_to_show: Opóźnienie w pokazie
   dock_side: Pozycja
   enable: Włącz dok/pasek zadań
+  filtering: Filtrowanie pozycji
   gap: Luka
   hide_mode:
     always: Zawsze
@@ -288,6 +289,7 @@ weg:
       label: Widoczność przypiętych elementów
       when_primary: Gdy monitor jest głównym
     show_instance_counter: Pokaż licznik otwartych okien
+    show_window_title: Pokaż tytuł otwartego okna (tylko poziomo)
     size: Rozmiar elementu
     temporal_visibility:
       all: Wszystko

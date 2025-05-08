@@ -272,6 +272,7 @@ weg:
   delay_to_show: دکھانے میں تاخیر
   dock_side: پوزیشن
   enable: ٹاسک بار کو فعال کریں
+  filtering: آئٹم فلٹرنگ
   gap: گیپ
   hide_mode:
     always: ہمیشہ
@@ -284,7 +285,8 @@ weg:
       always: ہمیشہ
       label: پن کی ہوئی اشیاء کی مرئیت
       when_primary: جب مانیٹر پرائمری ہو۔
-    show_instance_counter: کھلی کھڑکیوں کے لئے کاؤنٹر دکھائیں
+    show_instance_counter: کھلی ونڈوز کاؤنٹر دکھائیں
+    show_window_title: کھلی ونڈو ٹائٹل دکھائیں (صرف افقی)
     size: آئٹم کا سائز
     temporal_visibility:
       all: تمام

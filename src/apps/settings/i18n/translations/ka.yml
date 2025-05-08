@@ -275,6 +275,7 @@ weg:
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
   enable: ჩართეთ dock/taskbar
+  filtering: ნივთის ფილტრაცია
   gap: ხარპი
   hide_mode:
     always: ყოველთვის
@@ -287,7 +288,8 @@ weg:
       always: ყოველთვის
       label: ჩამაგრებული ელემენტების ხილვადობა
       when_primary: როცა მონიტორი პირველადია
-    show_instance_counter: აჩვენეთ მრიცხველი ღია ფანჯრებისთვის
+    show_instance_counter: აჩვენეთ ღია Windows Counter
+    show_window_title: აჩვენეთ ღია ფანჯრის სათაური (მხოლოდ ჰორიზონტალური)
     size: ნივთის ზომა
     temporal_visibility:
       all: ყველა

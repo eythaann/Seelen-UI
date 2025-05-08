@@ -268,6 +268,7 @@ weg:
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo
   enable: Muu dock / forkbar
+  filtering: Sisẹ Nkan
   gap: Alafo
   hide_mode:
     always: Nigbagbogbo
@@ -280,7 +281,8 @@ weg:
       always: Nigbagbogbo
       label: Pini Awọn nkan Hihan
       when_primary: Nigbati atẹle jẹ akọkọ
-    show_instance_counter: Fihan counter fun awọn Windows ṣiṣi
+    show_instance_counter: Fihan ṣiṣi Windows
+    show_window_title: Ṣe afihan akọle window (petele nikan)
     size: Iwọn nkan
     temporal_visibility:
       all: Gbogbo

@@ -1,8 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add open window label on dock for app items (configurable).
+
 ### fix
 - not removing old icons mask on icon pack change.
+- styles for dock media item.
+- not scrollable dock on overflow (many items).
 
 ## [2.3.2]
 ### enhancements

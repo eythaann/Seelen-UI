@@ -269,6 +269,7 @@ weg:
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
   enable: دوک / ټاسک بار فعال کړئ
+  filtering: توکی فلټر کول
   gap: تشې
   hide_mode:
     always: تل
@@ -281,7 +282,8 @@ weg:
       always: تل
       label: د پینډ شوي توکو لید
       when_primary: کله چې څارونکی لومړنی وي
-    show_instance_counter: د خلاصې وینډوز لپاره ضد
+    show_instance_counter: د خلاصې وینډوز کاونټر وښایاست
+    show_window_title: د خلاص کړکۍ سرلیک وښایاست (یوازې افقی)
     size: د توکي اندازه
     temporal_visibility:
       all: ټول

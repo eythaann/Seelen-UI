@@ -260,6 +260,7 @@ weg:
   delay_to_show: 显示延迟
   dock_side: 位置
   enable: 启用 Dock / 任务栏
+  filtering: 项目筛选
   gap: 间距
   hide_mode:
     always: 总是
@@ -272,7 +273,8 @@ weg:
       always: 总是
       label: 固定项目可见性
       when_primary: 当显示器为主要显示器时
-    show_instance_counter: 显示打开窗口的计数器
+    show_instance_counter: 显示打开窗口计数器
+    show_window_title: 显示打开的窗口标题（仅限横向）
     size: 项目大小
     temporal_visibility:
       all: 全部

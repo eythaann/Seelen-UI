@@ -269,6 +269,7 @@ weg:
   delay_to_show: Kuchelewa kuonyesha
   dock_side: Msimamo
   enable: Wezesha Dock/Taskbar
+  filtering: Kuchuja kwa bidhaa
   gap: Pengo
   hide_mode:
     always: Daima
@@ -281,7 +282,8 @@ weg:
       always: Daima
       label: Mwonekano wa Vipengee Vilivyobandikwa
       when_primary: Wakati kufuatilia ni msingi
-    show_instance_counter: Onyesha kukabiliana na windows wazi
+    show_instance_counter: Onyesha wazi Windows Counter
+    show_window_title: Onyesha kichwa wazi cha windows (usawa tu)
     size: Saizi ya bidhaa
     temporal_visibility:
       all: Wote

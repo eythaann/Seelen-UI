@@ -114,7 +114,7 @@ export const SeelenWegSettings = () => {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('weg.items.label')}>
+        <SettingsSubGroup label={t('weg.items.filtering')}>
           <SettingsOption>
             <div>{t('weg.items.temporal_visibility.label')}</div>
             <Select
@@ -139,7 +139,11 @@ export const SeelenWegSettings = () => {
               onChange={(value) => dispatch(SeelenWegActions.setPinnedItemsVisibility(value))}
             />
           </SettingsOption>
+        </SettingsSubGroup>
+      </SettingsGroup>
 
+      <SettingsGroup>
+        <SettingsSubGroup label={t('weg.items.label')}>
           <SettingsOption>
             <div>{t('weg.items.size')}</div>
             <InputNumber
@@ -166,6 +170,13 @@ export const SeelenWegSettings = () => {
             <Switch
               checked={settings.thumbnailGenerationEnabled}
               onChange={(value) => dispatch(SeelenWegActions.setThumbnailGenerationEnabled(value))}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <div>{t('weg.items.show_window_title')}</div>
+            <Switch
+              checked={settings.showWindowTitle}
+              onChange={(value) => dispatch(SeelenWegActions.setShowWindowTitle(value))}
             />
           </SettingsOption>
           <SettingsOption>

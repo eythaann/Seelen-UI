@@ -276,6 +276,7 @@ weg:
   delay_to_show: Καθυστέρηση εμφάνισης
   dock_side: Θέση
   enable: Ενεργοποίηση λίστα/γραμμή εργασιών
+  filtering: Φιλτράρισμα στοιχείων
   gap: Χάσμα
   hide_mode:
     always: Πάντοτε
@@ -288,7 +289,8 @@ weg:
       always: Πάντοτε
       label: Ορατότητα καρφιτσωμένων αντικειμένων
       when_primary: Όταν η οθόνη είναι κύρια
-    show_instance_counter: Εμφάνιση μετρητή για ανοιχτά παράθυρα
+    show_instance_counter: Εμφάνιση μετρητή ανοιχτών παραθύρων
+    show_window_title: Εμφάνιση τίτλου ανοιχτού παραθύρου (μόνο οριζόντια)
     size: Μέγεθος αντικειμένου
     temporal_visibility:
       all: Ολοι

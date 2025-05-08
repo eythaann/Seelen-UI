@@ -275,6 +275,7 @@ weg:
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
   enable: Enable Dock / Taskbar
+  filtering: Iffiltrar tal-Oġġett
   gap: Vojt
   hide_mode:
     always: Dejjem
@@ -287,7 +288,8 @@ weg:
       always: Dejjem
       label: Oġġetti Pinnjati Viżibilità
       when_primary: Meta l-monitor huwa primarju
-    show_instance_counter: Uri Counter Għal Windows Miftuħa
+    show_instance_counter: Uri Open Windows Counter
+    show_window_title: Uri t-titlu tat-tieqa miftuħa (orizzontali biss)
     size: Daqs tal-oġġett
     temporal_visibility:
       all: Kollha

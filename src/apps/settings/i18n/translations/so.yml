@@ -277,6 +277,7 @@ weg:
   delay_to_show: Dib u dhig si loo muujiyo
   dock_side: Meel
   enable: Kartida DOCK / Turniinka
+  filtering: Shaandhaynta sheyga
   gap: Dalool
   hide_mode:
     always: Had iyo jeer
@@ -289,7 +290,8 @@ weg:
       always: Had iyo jeer
       label: Shayga Ku dheggan Muuqaal
       when_primary: Marka kormeeruhu uu yahay aasaasiga
-    show_instance_counter: Muuji miiska loo yaqaan daaqadaha furan
+    show_instance_counter: Muuji miiska daaqadaha furan
+    show_window_title: Muuji cinwaanka daaqadda furan (oo kaliya toosan)
     size: Shayga cabirka
     temporal_visibility:
       all: Dhammaan

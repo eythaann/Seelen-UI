@@ -63,11 +63,12 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
     <DraggableItem item={item}>
       <WithContextMenu items={getMenuForItem(t, item)}>
         <div
-          className={cx('weg-item media-session-container', {
+          className={cx('weg-item', 'media-session-container', {
             'media-session-container-horizontal': isHorizontal,
             'media-session-container-vertical': !isHorizontal,
           })}
           onContextMenu={(e) => e.stopPropagation()}
+          style={{ zIndex: -1 }} // I don't known why the fuck this item is overlapping but this fixes it
         >
           <div
             className="media-session"
@@ -75,12 +76,13 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
               backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
             }}
           >
-            <div className="media-session-thumbnail-container">
-              <FileIcon className="media-session-app-icon" umid={session?.umid} noFallback />
-              <img className="media-session-thumbnail" src={thumbnailSrc} />
+            <div className="media-session-blurred-thumbnail-container">
+              <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />
             </div>
-            <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />
-
+            <div className="media-session-thumbnail-container">
+              <img className="media-session-thumbnail" src={thumbnailSrc} />
+              <FileIcon className="media-session-app-icon" umid={session?.umid} noFallback />
+            </div>
             <div className="media-session-info">
               <span
                 className={cx('media-session-title', {

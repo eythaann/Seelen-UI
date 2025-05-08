@@ -275,6 +275,7 @@ weg:
   delay_to_show: Vertraag om te wys
   dock_side: Posisie
   enable: Aktiveer dok/taakbalk
+  filtering: Itemfiltering
   gap: Gat
   hide_mode:
     always: Altyd
@@ -287,7 +288,8 @@ weg:
       always: Altyd
       label: Vasgespelde items sigbaarheid
       when_primary: Wanneer die monitor primêr is
-    show_instance_counter: Wys toonbank vir oop vensters
+    show_instance_counter: Wys oop Windows -toonbank
+    show_window_title: Toon oop venstertitel (slegs horisontaal)
     size: Itemgrootte
     temporal_visibility:
       all: Almal

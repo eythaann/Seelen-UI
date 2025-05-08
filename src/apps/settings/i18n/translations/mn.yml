@@ -273,6 +273,7 @@ weg:
   delay_to_show: Үзүүлэхийг хойшлуулсан
   dock_side: Байрлал
   enable: Док / Taskbar-г идэвхжүүлэх
+  filtering: Барааны шүүлтүүр
   gap: Цонх
   hide_mode:
     always: Үргэлж
@@ -285,7 +286,8 @@ weg:
       always: Үргэлж
       label: Тогтсон зүйлсийн харагдах байдал
       when_primary: Монитор анхдагч байх үед
-    show_instance_counter: Нээлттэй цонхны тоолуурыг харуул
+    show_instance_counter: Нээлттэй Windows тоолуурыг харуул
+    show_window_title: Нээлттэй цонхны гарчигыг харуул (зөвхөн хэвтээ)
     size: Зүйлийн хэмжээ
     temporal_visibility:
       all: Бүгд

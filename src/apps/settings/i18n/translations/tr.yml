@@ -273,6 +273,7 @@ weg:
   delay_to_show: Gösterme gecikmesi
   dock_side: Konum
   enable: Dock/Görev Çubuğunu Etkinleştir
+  filtering: Öğe Filtreleme
   gap: Boşluk
   hide_mode:
     always: Her zaman
@@ -285,7 +286,8 @@ weg:
       always: Her zaman
       label: Sabitlenmiş Öğelerin Görünürlüğü
       when_primary: Monitör birincil olduğunda
-    show_instance_counter: Açık pencereler için sayaç göster
+    show_instance_counter: Açık pencere sayacını göster
+    show_window_title: Açık pencere başlığını göster (sadece yatay)
     size: Öğe Boyutu
     temporal_visibility:
       all: Tüm

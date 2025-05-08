@@ -272,6 +272,7 @@ weg:
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
   enable: ડોક/ટાસ્કબારને સક્ષમ કરો
+  filtering: બાબત
   gap: ગેપ
   hide_mode:
     always: હંમેશા
@@ -284,7 +285,8 @@ weg:
       always: હંમેશા
       label: પિન કરેલી વસ્તુઓની દૃશ્યતા
       when_primary: જ્યારે મોનિટર પ્રાથમિક છે
-    show_instance_counter: ખુલ્લી વિંડોઝ માટે કાઉન્ટર બતાવો
+    show_instance_counter: ખુલ્લા વિંડોઝ કાઉન્ટર બતાવો
+    show_window_title: ખુલ્લી વિંડો શીર્ષક બતાવો (ફક્ત આડી)
     size: વસ્તુનું કદ
     temporal_visibility:
       all: બધા

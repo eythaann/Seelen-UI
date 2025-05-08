@@ -273,6 +273,7 @@ weg:
   delay_to_show: Затримка показу
   dock_side: Позиція панелі
   enable: Увімкнути панель завдань
+  filtering: Фільтрація елементів
   gap: Відступ від краю
   hide_mode:
     always: Завжди
@@ -286,6 +287,7 @@ weg:
       label: Видимість закріплених елементів
       when_primary: Коли монітор є основним
     show_instance_counter: Показати лічильник відкритих вікон
+    show_window_title: Показувати заголовок відкритого вікна (тільки горизонтально)
     size: Розмір піктограм
     temporal_visibility:
       all: всі

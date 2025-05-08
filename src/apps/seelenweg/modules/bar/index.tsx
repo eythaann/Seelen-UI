@@ -163,38 +163,42 @@ export function SeelenWeg() {
         })}
       >
         <BackgroundByLayersV2 prefix="taskbar" />
-        {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 && (
-          <span className="weg-empty-state-label">{t('weg.empty')}</span>
-        )}
-        {isTemporalOnlyWegBar
-          ? [
-            ...pinnedOnLeft.map(projectSwItem),
-            ...pinnedOnCenter.map(projectSwItem),
-            ...pinnedOnRight.map(projectSwItem),
-          ]
-          : [
-            ...pinnedOnLeft.map(projectSwItem),
-            <Reorder.Item
-              as="div"
-              key="separator1"
-              value={Separator1}
-              className={cx('weg-separator weg-separator-1', {
-                visible: settings.visibleSeparators,
-              })}
-              drag={false}
-            />,
-            ...pinnedOnCenter.map(projectSwItem),
-            <Reorder.Item
-              as="div"
-              key="separator2"
-              value={Separator2}
-              className={cx('weg-separator weg-separator-2', {
-                visible: settings.visibleSeparators,
-              })}
-              drag={false}
-            />,
-            ...pinnedOnRight.map(projectSwItem),
-          ]}
+        <div className="weg-items-container">
+          <div className="weg-items">
+            {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 && (
+              <span className="weg-empty-state-label">{t('weg.empty')}</span>
+            )}
+            {isTemporalOnlyWegBar
+              ? [
+                ...pinnedOnLeft.map(projectSwItem),
+                ...pinnedOnCenter.map(projectSwItem),
+                ...pinnedOnRight.map(projectSwItem),
+              ]
+              : [
+                ...pinnedOnLeft.map(projectSwItem),
+                <Reorder.Item
+                  as="div"
+                  key="separator1"
+                  value={Separator1}
+                  className={cx('weg-separator weg-separator-1', {
+                    visible: settings.visibleSeparators,
+                  })}
+                  drag={false}
+                />,
+                ...pinnedOnCenter.map(projectSwItem),
+                <Reorder.Item
+                  as="div"
+                  key="separator2"
+                  value={Separator2}
+                  className={cx('weg-separator weg-separator-2', {
+                    visible: settings.visibleSeparators,
+                  })}
+                  drag={false}
+                />,
+                ...pinnedOnRight.map(projectSwItem),
+              ]}
+          </div>
+        </div>
       </Reorder.Group>
     </WithContextMenu>
   );

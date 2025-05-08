@@ -273,6 +273,7 @@ weg:
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
   enable: Iespējot doku/uzdevumjoslu
+  filtering: Vienumu filtrēšana
   gap: Plaisa
   hide_mode:
     always: Vienmēr
@@ -285,7 +286,8 @@ weg:
       always: Vienmēr
       label: Piesprausto vienumu redzamība
       when_primary: Kad monitors ir primārais
-    show_instance_counter: Parādīt atvērto logu skaitītāju
+    show_instance_counter: Rādīt atvērto logu skaitītāju
+    show_window_title: Rādīt atvērta loga virsrakstu (tikai horizontāli)
     size: Vienuma izmērs
     temporal_visibility:
       all: Visi

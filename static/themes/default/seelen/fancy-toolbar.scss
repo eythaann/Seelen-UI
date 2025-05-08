@@ -581,12 +581,10 @@
 
   .media-session-thumbnail-container {
     position: relative;
-    z-index: 2;
     width: 100%;
 
     .media-session-app-icon {
       position: absolute;
-      z-index: 3;
       width: 25%;
       aspect-ratio: 1/1;
       right: 5%;

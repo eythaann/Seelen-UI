@@ -273,6 +273,7 @@ weg:
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం
   enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
+  filtering: అంశం వడపోత
   gap: గ్యాప్
   hide_mode:
     always: ఎల్లప్పుడూ
@@ -285,7 +286,8 @@ weg:
       always: ఎల్లప్పుడూ
       label: పిన్ చేయబడిన అంశాల దృశ్యమానత
       when_primary: మానిటర్ ప్రాథమికంగా ఉన్నప్పుడు
-    show_instance_counter: ఓపెన్ విండోస్ కోసం కౌంటర్ చూపించు
+    show_instance_counter: ఓపెన్ విండోస్ కౌంటర్ చూపించు
+    show_window_title: ఓపెన్ విండో శీర్షికను చూపించు (క్షితిజ సమాంతర మాత్రమే)
     size: అంశం పరిమాణం
     temporal_visibility:
       all: అన్నీ

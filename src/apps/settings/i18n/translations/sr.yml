@@ -276,6 +276,7 @@ weg:
   delay_to_show: Одлагање приказивања
   dock_side: Положај
   enable: Омогући прикључак / траку задатака
+  filtering: Филтрирање предмета
   gap: Празнина
   hide_mode:
     always: Увек
@@ -288,7 +289,8 @@ weg:
       always: Увек
       label: Видљивост закачених ставки
       when_primary: Када је монитор примарни
-    show_instance_counter: Прикажи шалтер за Отвори Виндовс
+    show_instance_counter: Прикажи отворите прозори
+    show_window_title: Прикажи назив отвореног прозора (само хоризонтално)
     size: Величина предмета
     temporal_visibility:
       all: Све

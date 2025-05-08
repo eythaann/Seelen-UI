@@ -272,6 +272,7 @@ weg:
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
   enable: Dock / Taskbar çalak bikin
+  filtering: Filterkirina tiştê
   gap: Qelîştok
   hide_mode:
     always: Herdem
@@ -284,7 +285,8 @@ weg:
       always: Herdem
       label: Dîtina Tiştên Pînekirî
       when_primary: Dema ku çavdêriya sereke ye
-    show_instance_counter: Ji bo pencereyên vekirî pêşkeş bikin
+    show_instance_counter: Counter Windows-ê vekirî nîşan bikin
+    show_window_title: Sernavê pencereyê vekirî nîşan bide (tenê horizontî)
     size: Mezinahiya tiştê
     temporal_visibility:
       all: Gişt

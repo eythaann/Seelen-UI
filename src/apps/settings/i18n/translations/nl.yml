@@ -277,6 +277,7 @@ weg:
   delay_to_show: Vertraging om te tonen
   dock_side: Positie
   enable: Schakel dock/taakbalk in
+  filtering: Item filteren
   gap: Gat
   hide_mode:
     always: Altijd
@@ -289,7 +290,8 @@ weg:
       always: Altijd
       label: Zichtbaarheid van vastgezette items
       when_primary: Wanneer de monitor primair is
-    show_instance_counter: Toon teller voor geopende vensters
+    show_instance_counter: Toon open vensters teller
+    show_window_title: Titel van geopend venster tonen (alleen horizontaal)
     size: Item grootte
     temporal_visibility:
       all: Alle

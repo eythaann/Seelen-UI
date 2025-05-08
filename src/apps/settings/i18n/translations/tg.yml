@@ -270,6 +270,7 @@ weg:
   delay_to_show: Таъхир барои нишон додан
   dock_side: Вазъият
   enable: Dock / Travelar
+  filtering: Фортинги ашё
   gap: Фосила
   hide_mode:
     always: Ҳамеша
@@ -282,7 +283,8 @@ weg:
       always: Ҳамеша
       label: Намоиши ашёҳои маҳкамшуда
       when_primary: Вақте ки монитор ибтидоӣ аст
-    show_instance_counter: Ҳисобкуниро барои тирезаҳои кушод
+    show_instance_counter: Counter Counter Counter
+    show_window_title: Сарлавҳаи тирезаро нишон диҳед (танҳо уфуқӣ)
     size: Андозаи ашё
     temporal_visibility:
       all: Ҳама

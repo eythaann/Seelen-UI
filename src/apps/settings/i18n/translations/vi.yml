@@ -274,6 +274,7 @@ weg:
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
   enable: Bật Dock/Thanh tác vụ
+  filtering: Lọc vật phẩm
   gap: Khoảng cách
   hide_mode:
     always: Luôn luôn
@@ -286,7 +287,8 @@ weg:
       always: Luôn luôn
       label: Hiển thị các mục được ghim
       when_primary: Khi màn hình là chính
-    show_instance_counter: Hiển thị quầy cho các cửa sổ mở
+    show_instance_counter: Hiển thị bộ đếm Windows mở
+    show_window_title: Hiển thị tiêu đề cửa sổ mở (chỉ ngang)
     size: Kích thước mục
     temporal_visibility:
       all: Tất cả

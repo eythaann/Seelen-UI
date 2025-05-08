@@ -279,6 +279,7 @@ weg:
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon
   enable: Paganahin ang pantalan/taskbar
+  filtering: Pag -filter ng item
   gap: Gap
   hide_mode:
     always: Laging
@@ -291,7 +292,8 @@ weg:
       always: Laging
       label: Visibility ng Mga Naka-pin na Item
       when_primary: Kapag ang monitor ay pangunahin
-    show_instance_counter: Ipakita ang counter para sa bukas na mga bintana
+    show_instance_counter: Ipakita ang bukas na counter ng windows
+    show_window_title: Ipakita ang Buksan ang Pamagat ng Window (Pahalang lamang)
     size: Laki ng item
     temporal_visibility:
       all: Lahat

@@ -275,6 +275,7 @@ weg:
   delay_to_show: Retard per mostrar
   dock_side: Posició
   enable: Activa el moll/la barra de tasques
+  filtering: Filtratge d'elements
   gap: Escletxa
   hide_mode:
     always: Sempre
@@ -287,7 +288,8 @@ weg:
       always: Sempre
       label: Visibilitat dels elements fixats
       when_primary: Quan el monitor és principal
-    show_instance_counter: Mostra el comptador per a finestres obertes
+    show_instance_counter: Mostra el comptador de Windows obert
+    show_window_title: Mostra el títol de la finestra oberta (només horitzontal)
     size: Mida de l'article
     temporal_visibility:
       all: Tots

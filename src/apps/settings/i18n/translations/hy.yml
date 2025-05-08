@@ -277,6 +277,7 @@ weg:
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք
   enable: Միացնել Dock / Taskbar
+  filtering: Նյութի զտիչ
   gap: Բացվածք
   hide_mode:
     always: Միշտ
@@ -289,7 +290,8 @@ weg:
       always: Միշտ
       label: Ամրացված տարրերի տեսանելիություն
       when_primary: Երբ մոնիտորը առաջնային է
-    show_instance_counter: Counter ույց տալ հաշվիչ բաց պատուհանների համար
+    show_instance_counter: Show ույց տալ բաց պատուհանների հաշվիչ
+    show_window_title: Show ույց տալ բաց պատուհանի վերնագիրը (միայն հորիզոնական)
     size: Ապրանքի չափը
     temporal_visibility:
       all: Բոլորը

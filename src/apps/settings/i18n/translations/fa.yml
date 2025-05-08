@@ -274,6 +274,7 @@ weg:
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
   enable: Dock/TaskBar را فعال کنید
+  filtering: فیلتر کردن مورد
   gap: شکاف
   hide_mode:
     always: همیشه
@@ -286,7 +287,8 @@ weg:
       always: همیشه
       label: قابلیت مشاهده موارد پین شده
       when_primary: وقتی مانیتور اولیه است
-    show_instance_counter: نمایش پیشخوان برای ویندوز باز
+    show_instance_counter: پیشخوان ویندوز باز را نشان دهید
+    show_window_title: عنوان پنجره باز (فقط افقی)
     size: اندازه مورد
     temporal_visibility:
       all: همه

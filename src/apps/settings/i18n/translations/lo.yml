@@ -270,6 +270,7 @@ weg:
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
   enable: ເປີດໃຊ້ Dock/Taskbar
+  filtering: ການກັ່ນຕອງລາຍການ
   gap: ຊ່ອງຫວ່າງ
   hide_mode:
     always: ສະເໝີ
@@ -282,7 +283,8 @@ weg:
       always: ສະເໝີ
       label: ການເບິ່ງເຫັນລາຍການທີ່ປັກໝຸດໄວ້
       when_primary: ເມື່ອຈໍພາບແມ່ນປະຖົມ
-    show_instance_counter: ສະແດງວຽກງານຕ້ານການສໍາລັບເປີດປ່ອງຢ້ຽມ
+    show_instance_counter: ສະແດງວຽກງານຕ້ານການເປີດ
+    show_window_title: ສະແດງຫົວຂໍ້ເປີດປ່ອງຢ້ຽມ (ພຽງແຕ່ແນວນອນ)
     size: ຂະໜາດລາຍການ
     temporal_visibility:
       all: ທັງໝົດ

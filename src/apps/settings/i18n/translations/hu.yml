@@ -274,6 +274,7 @@ weg:
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció
   enable: Engedélyezze a dokkolót/tálcát
+  filtering: Elemszűrés
   gap: Rés
   hide_mode:
     always: Mindig
@@ -286,7 +287,8 @@ weg:
       always: Mindig
       label: Rögzített elemek láthatósága
       when_primary: Amikor a monitor az elsődleges
-    show_instance_counter: A nyitott ablakok számlálójának megjelenítése
+    show_instance_counter: Megnyílt ablakok számlálójának megjelenítése
+    show_window_title: Megnyílt ablak címének megjelenítése (csak vízszintes)
     size: Elemméret
     temporal_visibility:
       all: Minden

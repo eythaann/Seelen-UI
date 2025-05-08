@@ -277,6 +277,7 @@ weg:
   delay_to_show: Délai avant affichage
   dock_side: Position
   enable: Activer le Dock/Barre des tâches
+  filtering: Filtrage des articles
   gap: Écart
   hide_mode:
     always: Toujours
@@ -289,7 +290,8 @@ weg:
       always: Toujours
       label: Visibilité des éléments épinglés
       when_primary: Lorsque le moniteur est principal
-    show_instance_counter: Afficher le compteur des fenêtres ouvertes
+    show_instance_counter: Compteur de fenêtres ouvertes
+    show_window_title: Afficher le titre de la fenêtre ouverte (uniquement à l'horizontale)
     size: Taille des éléments
     temporal_visibility:
       all: Tous

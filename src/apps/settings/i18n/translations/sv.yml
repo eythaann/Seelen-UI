@@ -275,6 +275,7 @@ weg:
   delay_to_show: Fördröjning att visa
   dock_side: Placera
   enable: Aktivera bryggor/aktivitetsfält
+  filtering: Filtrering av objekt
   gap: Glipa
   hide_mode:
     always: Alltid
@@ -288,6 +289,7 @@ weg:
       label: Synlighet för fästa objekt
       when_primary: När monitorn är primär
     show_instance_counter: Visa räknare för öppna fönster
+    show_window_title: Visa titel på öppet fönster (endast horisontellt)
     size: Objektstorlek
     temporal_visibility:
       all: Alla

@@ -271,6 +271,7 @@ weg:
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
   dock_side: តីតាមង
   enable: បើកដំណើរការ Dock/Taskbar
+  filtering: ការត្រងធាតុ
   gap: គម្លាត
   hide_mode:
     always: ជានិច្ច
@@ -283,7 +284,8 @@ weg:
       always: ជានិច្ច
       label: ភាពមើលឃើញធាតុដែលបានខ្ទាស់
       when_primary: នៅពេលដែលម៉ូនីទ័រគឺបឋម
-    show_instance_counter: បង្ហាញការប្រឆាំងសម្រាប់បង្អួចបើកចំហ
+    show_instance_counter: បង្ហាញការបើកខ្សែវីនដូ
+    show_window_title: បង្ហាញចំណងជើងបើកបង្អួច (មានតែផ្តេកប៉ុណ្ណោះ)
     size: ទំហំធាតុ
     temporal_visibility:
       all: ទាំងអស់។

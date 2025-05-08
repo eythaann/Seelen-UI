@@ -275,6 +275,7 @@ weg:
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
   enable: Aktiver dock/oppgavelinje
+  filtering: Varen filtrering
   gap: Mellomrom
   hide_mode:
     always: Alltid
@@ -287,7 +288,8 @@ weg:
       always: Alltid
       label: Festede elementers synlighet
       when_primary: Når monitoren er primær
-    show_instance_counter: Vis teller for åpne vinduer
+    show_instance_counter: Vis åpne Windows -teller
+    show_window_title: Vis Open Window Title (bare horisontalt)
     size: Varestørrelse
     temporal_visibility:
       all: Alle

@@ -80,6 +80,8 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   }, [openPreview || openContextMenu]);
 
   const notificationsCount = notifications.filter((n) => n.appUmid === item.umid).length;
+  const itemLabel = settings.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;
+
   return (
     <DraggableItem
       item={item}
@@ -160,20 +162,25 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           >
             <BackgroundByLayersV2 prefix="item" />
             <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
+            {itemLabel && (
+              <div className="weg-item-title">{itemLabel}</div>
+            )}
             {notificationsCount > 0 && (
               <div className="weg-item-notification-badge">{notificationsCount}</div>
             )}
             {settings.showInstanceCounter && item.windows.length > 1 && (
               <div className="weg-item-instance-counter-badge">{item.windows.length}</div>
             )}
-            <div
-              className={cx('weg-item-open-sign', {
-                'weg-item-open-sign-active': !!item.windows.length,
-                'weg-item-open-sign-focused': item.windows.some(
-                  (w) => w.handle === focusedApp?.hwnd,
-                ),
-              })}
-            />
+            {!settings.showWindowTitle && (
+              <div
+                className={cx('weg-item-open-sign', {
+                  'weg-item-open-sign-active': !!item.windows.length,
+                  'weg-item-open-sign-focused': item.windows.some(
+                    (w) => w.handle === focusedApp?.hwnd,
+                  ),
+                })}
+              />
+            )}
           </div>
         </AnimatedPopover>
       </WithContextMenu>

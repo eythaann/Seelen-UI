@@ -275,6 +275,7 @@ weg:
   delay_to_show: Keterlambatan untuk ditampilkan
   dock_side: Posisi
   enable: Aktifkan Dock/Taskbar
+  filtering: Pemfilteran Item
   gap: Celah
   hide_mode:
     always: Selalu
@@ -287,7 +288,8 @@ weg:
       always: Selalu
       label: Visibilitas Item yang Disematkan
       when_primary: Saat monitor menjadi yang utama
-    show_instance_counter: Tampilkan penghitung untuk jendela yang terbuka
+    show_instance_counter: Tampilkan penghitung jendela yang terbuka
+    show_window_title: Menampilkan judul jendela yang terbuka (hanya horizontal)
     size: Ukuran item
     temporal_visibility:
       all: Semua

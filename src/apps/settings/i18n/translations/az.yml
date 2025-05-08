@@ -272,6 +272,7 @@ weg:
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
   enable: Dock / tapşırıq çubuğunu aktivləşdirin
+  filtering: Element süzgəci
   gap: Gap
   hide_mode:
     always: Həmişə
@@ -284,7 +285,8 @@ weg:
       always: Həmişə
       label: Saxlanmış Elementlərin Görünüşü
       when_primary: Monitor əsas olduqda
-    show_instance_counter: Açıq pəncərələr üçün sayğac edin
+    show_instance_counter: Açıq pəncərələrin sayğacını göstərin
+    show_window_title: Açıq pəncərə başlığını göstər (yalnız üfüqi)
     size: Maddə ölçüsü
     temporal_visibility:
       all: Hamısı
