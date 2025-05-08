@@ -22,7 +22,7 @@
     box-shadow: inset 0 -20px 15px -10px rgb(0 0 0 / 0.5);
   }
   to {
-    box-shadow: inset 0 20px 0 15px -10px rgb(0 0 0 / 0.5);
+    box-shadow: inset 0 20px 15px -10px rgb(0 0 0 / 0.5);
   }
 }
 
@@ -50,14 +50,14 @@
   &.horizontal {
     > .weg-items-container {
       animation: shadow-on-horizontal-scroll linear;
-      animation-timeline: scroll(self inline);
+      animation-timeline: scroll(x self);
     }
   }
 
   &.vertical {
     > .weg-items-container {
       animation: shadow-on-vertical-scroll linear;
-      animation-timeline: scroll(self inline);
+      animation-timeline: scroll(y self);
     }
   }
 

@@ -1,12 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  SeelenCommand,
-  SeelenEvent,
-  SeelenWegSide,
-  Settings,
-  UIColors,
-  WegItems,
-} from '@seelen-ui/lib';
+import { SeelenCommand, SeelenEvent, Settings, UIColors, WegItems } from '@seelen-ui/lib';
 import { SeelenWegSettings } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
@@ -81,29 +74,6 @@ function loadSettingsCSS(settings: SeelenWegSettings) {
   styles.setProperty('--config-item-size', `${settings.size}px`);
   styles.setProperty('--config-item-zoom-size', `${settings.zoomSize}px`);
   styles.setProperty('--config-space-between-items', `${settings.spaceBetweenItems}px`);
-
-  switch (settings.position) {
-    case SeelenWegSide.Top:
-      styles.setProperty('--config-by-position-justify-content', 'center');
-      styles.setProperty('--config-by-position-align-items', 'flex-start');
-      styles.setProperty('--config-by-position-flex-direction', 'row');
-      break;
-    case SeelenWegSide.Bottom:
-      styles.setProperty('--config-by-position-justify-content', 'center');
-      styles.setProperty('--config-by-position-align-items', 'flex-end');
-      styles.setProperty('--config-by-position-flex-direction', 'row');
-      break;
-    case SeelenWegSide.Left:
-      styles.setProperty('--config-by-position-justify-content', 'flex-start');
-      styles.setProperty('--config-by-position-align-items', 'center');
-      styles.setProperty('--config-by-position-flex-direction', 'column');
-      break;
-    case SeelenWegSide.Right:
-      styles.setProperty('--config-by-position-justify-content', 'flex-end');
-      styles.setProperty('--config-by-position-align-items', 'center');
-      styles.setProperty('--config-by-position-flex-direction', 'column');
-      break;
-  }
 }
 
 function loadSettingsToStore(settings: Settings) {

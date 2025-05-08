@@ -6,10 +6,26 @@ body {
   overflow: hidden;
   background: transparent;
   display: flex;
-  justify-content: var(--config-by-position-justify-content);
-  align-items: var(--config-by-position-align-items);
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
+
+  &:has(.taskbar.left) {
+    justify-content: flex-start;
+  }
+
+  &:has(.taskbar.right) {
+    justify-content: flex-end;
+  }
+
+  &:has(.taskbar.top) {
+    align-items: flex-start;
+  }
+
+  &:has(.taskbar.bottom) {
+    align-items: flex-end;
+  }
 }
 
 /** Root Styles */
@@ -22,6 +38,7 @@ body {
   width: min-content;
   max-width: 100vw;
   max-height: 100vh;
+  will-change: contents;
   transition-property: top, left, right, bottom;
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
@@ -110,6 +127,8 @@ body {
 
   .weg-items-container {
     overflow: auto;
+    width: 100%;
+    height: 100%;
     padding: var(--config-padding);
 
     &::-webkit-scrollbar {
@@ -117,22 +136,51 @@ body {
     }
 
     .weg-items {
-      width: min-content;
-      height: min-content;
       display: flex;
-      justify-content: var(--config-by-position-justify-content);
-      align-items: var(--config-by-position-align-items);
-      flex-direction: var(--config-by-position-flex-direction);
       gap: var(--config-space-between-items);
     }
   }
 
+  .weg-separator {
+    z-index: 1 !important; /* Override inline style */
+
+    &:first-child,
+    &:last-child,
+    &:not(.visible) {
+      opacity: 0;
+    }
+  }
+
+  &.full-width {
+    .weg-separator {
+      flex: 1;
+    }
+  }
+
   &.horizontal {
-    height: calc(var(--config-item-size) + var(--config-padding) * 2);
     width: min-content;
+    height: calc(var(--config-item-size) + var(--config-padding) * 2);
 
     &.full-width {
       width: var(--max-taskbar-width);
+    }
+
+    .weg-items {
+      flex-direction: row;
+      min-width: 100%;
+      width: max-content;
+    }
+
+    .weg-separator {
+      height: var(--config-item-size);
+
+      &:first-child {
+        margin-left: calc(var(--config-space-between-items) * -1);
+      }
+
+      &:last-child {
+        margin-right: calc(var(--config-space-between-items) * -1);
+      }
     }
   }
 
@@ -143,32 +191,17 @@ body {
     &.full-width {
       height: var(--max-taskbar-height);
     }
-  }
 
-  &:has(.weg-item-drag-container.dragging) {
-    pointer-events: none;
-  }
+    .weg-items {
+      flex-direction: column;
+      min-height: 100%;
+      height: max-content;
+    }
 
-  &.full-width {
     .weg-separator {
-      flex: 1;
-    }
-  }
+      width: var(--config-item-size);
 
-  .weg-separator {
-    z-index: 1 !important; /* Override inline style */
-
-    &:nth-child(2),
-    &:last-child,
-    &:not(.visible) {
-      opacity: 0;
-    }
-
-    .vertical & {
-      width: 100%;
-
-      /* first child always is the background */
-      &:nth-child(2) {
+      &:first-child {
         margin-top: calc(var(--config-space-between-items) * -1);
       }
 
@@ -176,19 +209,10 @@ body {
         margin-bottom: calc(var(--config-space-between-items) * -1);
       }
     }
+  }
 
-    .horizontal & {
-      height: 100%;
-
-      /* first child always is the background */
-      &:nth-child(2) {
-        margin-left: calc(var(--config-space-between-items) * -1);
-      }
-
-      &:last-child {
-        margin-right: calc(var(--config-space-between-items) * -1);
-      }
-    }
+  &:has(.weg-item-drag-container.dragging) {
+    pointer-events: none;
   }
 }
 
