@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Загрузить пользовательский файл конфигурации
   data_folder: Папка данных
   enable: Включить инструменты разработчика
+  export_resource: Экспортный ресурс
   install_folder: Папка установки
   load: Загрузить
   settings_file: Файл настроек

@@ -79,6 +79,7 @@ devtools:
   custom_config_file: ჩატვირთეთ პერსონალური კონფიგურაციის ფაილი
   data_folder: მონაცემთა საქაღალდე
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
+  export_resource: ექსპორტის რესურსი
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი

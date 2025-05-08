@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Ladda anpassad konfigurationsfil
   data_folder: Datarmapp
   enable: Aktivera utvecklarverktyg
+  export_resource: Exportera resurs
   install_folder: Installationsmapp
   load: Ladda
   settings_file: Inställningsfil

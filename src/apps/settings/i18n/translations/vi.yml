@@ -78,6 +78,7 @@ devtools:
   custom_config_file: Tải tệp cấu hình tùy chỉnh
   data_folder: Thư mục dữ liệu
   enable: Kích hoạt các công cụ nhà phát triển
+  export_resource: Tài nguyên xuất khẩu
   install_folder: Thư mục cài đặt
   load: Trọng tải
   settings_file: Cài đặt tập tin

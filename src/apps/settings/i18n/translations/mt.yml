@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Tagħbija Fajl tal-Konfigurazzjoni Custom
   data_folder: Folder tad-dejta
   enable: Ippermetti għodod għall-iżviluppaturi
+  export_resource: Riżorsa ta 'esportazzjoni
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
   settings_file: Settings Fajl

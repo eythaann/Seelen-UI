@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Benutzerdefinierte Konfigurationsdatei laden
   data_folder: Datenordner
   enable: Entwicklerwerkzeuge aktivieren
+  export_resource: Ressource exportieren
   install_folder: Installationsordner
   load: Laden
   settings_file: Einstellungsdatei

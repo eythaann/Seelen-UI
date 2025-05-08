@@ -77,6 +77,7 @@ devtools:
   custom_config_file: Pelê Config-ê ya xwerû barkirin
   data_folder: Peldanka daneyê
   enable: Amûrên Pêşdebir çalak bikin
+  export_resource: Resouravkaniya Export
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
   settings_file: Pelê Mîhengan

@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Özel Yapılandırma Dosyası Yükle
   data_folder: Veri Klasörü
   enable: Geliştirici Araçlarını Etkinleştir
+  export_resource: Kaynak İhracatı
   install_folder: Kurulum Klasörü
   load: Yükle
   settings_file: Ayarlar Dosyası

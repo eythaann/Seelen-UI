@@ -11,7 +11,10 @@ export async function saveJsonSettings(settings: Settings) {
   await invoke(SeelenCommand.StateWriteSettings, { settings });
 }
 
-export async function saveUserSettings(settings: { jsonSettings: Settings; yamlSettings: AppConfig[] }) {
+export async function saveUserSettings(settings: {
+  jsonSettings: Settings;
+  yamlSettings: AppConfig[];
+}) {
   const yaml_route = await resolveDataPath('applications.yml');
   await fs.writeTextFile(
     yaml_route,
@@ -50,5 +53,24 @@ export async function ExportApps(apps: any[]) {
   });
   if (pathToSave) {
     fs.writeTextFile(pathToSave, yaml.dump(apps));
+  }
+}
+
+export async function ExportResource(resource: { id: string }) {
+  const parts = resource.id.split('/');
+  const resourceName = parts.pop();
+  if (!resourceName) {
+    console.error('No resource name when exporting');
+    return;
+  }
+  const date = new Date();
+  const filename = resourceName + '.' + date.toISOString().split('T')[0] + '.yml';
+  const pathToSave = await dialog.save({
+    title: 'Exporting Resource',
+    defaultPath: await path.join(await path.downloadDir(), filename),
+    filters: [{ name: 'resource', extensions: ['yaml', 'yml'] }],
+  });
+  if (pathToSave) {
+    fs.writeTextFile(pathToSave, yaml.dump(resource));
   }
 }

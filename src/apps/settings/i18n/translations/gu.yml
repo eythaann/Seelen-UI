@@ -79,6 +79,7 @@ devtools:
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો
   data_folder: ડેટા ફોલ્ડર
   enable: વિકાસકર્તા સાધનો સક્ષમ કરો
+  export_resource: નિકાસ સાધન
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   load: લોડ
   settings_file: સેટિંગ્સ ફાઇલ

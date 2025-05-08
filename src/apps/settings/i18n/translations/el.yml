@@ -80,6 +80,7 @@ devtools:
   custom_config_file: Φόρτωση προσαρμοσμένου αρχείου ρυθμίσεων
   data_folder: Φάκελος δεδομένων
   enable: Ενεργοποίηση εργαλείων προγραμματιστή
+  export_resource: Πόρος εξαγωγής
   install_folder: Φάκελος εγκατάστασης
   load: Φορτώνω
   settings_file: Αρχείο ρυθμίσεων

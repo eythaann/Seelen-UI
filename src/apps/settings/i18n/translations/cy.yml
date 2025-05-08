@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Llwythwch ffeil ffurfweddu arfer
   data_folder: Ffolder data
   enable: Galluogi Offer Datblygwr
+  export_resource: Adnodd Allforio
   install_folder: Ffolder gosod
   load: Lwythet
   settings_file: Ffeil Gosodiadau

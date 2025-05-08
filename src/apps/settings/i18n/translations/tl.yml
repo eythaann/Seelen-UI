@@ -81,6 +81,7 @@ devtools:
   custom_config_file: I -load ang pasadyang config file
   data_folder: Folder ng data
   enable: Paganahin ang mga tool ng developer
+  export_resource: Mapagkukunan ng pag -export
   install_folder: Folder ng pag -install
   load: Mag -load
   settings_file: File ng mga setting

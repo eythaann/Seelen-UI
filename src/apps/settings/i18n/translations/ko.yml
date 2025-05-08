@@ -76,6 +76,7 @@ devtools:
   custom_config_file: 사용자 정의 구성 파일 로드
   data_folder: 데이터 폴더
   enable: 개발자 도구 활성화
+  export_resource: 리소스 내보내기
   install_folder: 설치 폴더
   load: 로드
   settings_file: 설정 파일

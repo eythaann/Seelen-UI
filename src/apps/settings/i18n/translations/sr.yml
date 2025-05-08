@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Учитајте прилагођену конфигуријску датотеку
   data_folder: Мапа података
   enable: Омогућите алате за програмере
+  export_resource: Извозни ресурс
   install_folder: Инсталациона мапа
   load: Оптеретити
   settings_file: Подешавања

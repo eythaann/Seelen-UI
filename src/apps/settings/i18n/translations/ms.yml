@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Muatkan fail konfigurasi tersuai
   data_folder: Folder Data
   enable: Dayakan alat pemaju
+  export_resource: Sumber Eksport
   install_folder: Folder pemasangan
   load: Beban
   settings_file: Fail tetapan

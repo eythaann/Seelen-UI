@@ -79,6 +79,7 @@ devtools:
   custom_config_file: بارگیری پرونده پیکربندی سفارشی
   data_folder: پوشه داده ها
   enable: ابزارهای توسعه دهنده را فعال کنید
+  export_resource: منبع صادراتی
   install_folder: پوشه نصب
   load: بار
   settings_file: پرونده تنظیمات

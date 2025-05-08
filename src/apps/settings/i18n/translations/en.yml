@@ -78,6 +78,7 @@ devtools:
   custom_config_file: Load Custom Config File
   data_folder: Data Folder
   enable: Enable Developer Tools
+  export_resource: Export Resource
   install_folder: Installation Folder
   load: Load
   settings_file: Settings File

@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Custom Config faylini yuklang
   data_folder: Ma'lumotlar papkasi
   enable: Ishlab chiqaruvchi vositalarni yoqish
+  export_resource: Eksport manbai
   install_folder: O'rnatish papkasini o'rnatish
   load: Yuklamoq
   settings_file: Sozlamalar fayli

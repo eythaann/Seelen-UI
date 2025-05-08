@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Încărcați fișierul de configurare personalizat
   data_folder: Folder de date
   enable: Activați instrumentele pentru dezvoltatori
+  export_resource: Export de resurse
   install_folder: Folder de instalare
   load: Sarcină
   settings_file: Fișier de setări

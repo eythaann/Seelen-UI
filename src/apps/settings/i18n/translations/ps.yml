@@ -78,6 +78,7 @@ devtools:
   custom_config_file: د دودیز ترتیب فایل پورته کړئ
   data_folder: د معلوماتو فولډر
   enable: د پراختیا کونکي وسیلې فعال کړئ
+  export_resource: د صادراتو سرچینې
   install_folder: لګول فولډر
   load: بار
   settings_file: د امستنې دوتنه

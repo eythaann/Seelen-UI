@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Laai Custom Config -lêer
   data_folder: Datapap
   enable: Aktiveer ontwikkelaarsgereedskap
+  export_resource: Uitvoerhulpbron
   install_folder: Installasie -lêergids
   load: Vrag
   settings_file: Instellingslêer

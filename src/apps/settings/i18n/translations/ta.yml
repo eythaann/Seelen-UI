@@ -80,6 +80,7 @@ devtools:
   custom_config_file: தனிப்பயன் கட்டமைப்பு கோப்பை ஏற்றவும்
   data_folder: தரவு கோப்புறை
   enable: டெவலப்பர் கருவிகளை இயக்கு
+  export_resource: ஏற்றுமதி வள
   install_folder: நிறுவல் கோப்புறை
   load: ஏற்றவும்
   settings_file: அமைப்புகள் கோப்பு

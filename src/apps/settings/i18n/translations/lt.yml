@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą
   data_folder: Duomenų aplankas
   enable: Įgalinkite kūrėjo įrankius
+  export_resource: Eksporto ištekliai
   install_folder: Diegimo aplankas
   load: Įkelti
   settings_file: Nustatymų failas

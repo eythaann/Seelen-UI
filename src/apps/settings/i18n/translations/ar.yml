@@ -77,6 +77,7 @@ devtools:
   custom_config_file: تحميل ملف الأعدادات المخصص
   data_folder: مجلد البيانات
   enable: تفعيل أدوات المطور
+  export_resource: موارد التصدير
   install_folder: مجلد التثبيت
   load: تحميل
   settings_file: ملف الإعدادات

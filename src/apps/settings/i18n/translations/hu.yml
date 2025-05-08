@@ -78,6 +78,7 @@ devtools:
   custom_config_file: Töltse be az egyéni konfigurációs fájlt
   data_folder: Adatmappa
   enable: Engedélyezze a fejlesztői eszközöket
+  export_resource: Export erőforrás
   install_folder: Telepítési mappa
   load: Betöltés
   settings_file: Beállítási fájl

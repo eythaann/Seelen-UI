@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Kargatu Config fitxategi pertsonalizatua
   data_folder: Datu karpeta
   enable: Gaitu garatzaileen tresnak
+  export_resource: Esportatu baliabidea
   install_folder: Instalazio karpeta
   load: Zamatu
   settings_file: Ezarpenak fitxategia

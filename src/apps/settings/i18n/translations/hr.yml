@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku
   data_folder: Mapa podataka
   enable: Omogućite alate za razvojne programere
+  export_resource: Izvozni resurs
   install_folder: Mapa za instalaciju
   load: Opterećenje
   settings_file: Datoteka postavki

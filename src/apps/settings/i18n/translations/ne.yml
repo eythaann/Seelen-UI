@@ -79,6 +79,7 @@ devtools:
   custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्
   data_folder: डेटा फोल्डर
   enable: विकासकर्ता उपकरणहरू सक्षम गर्नुहोस्
+  export_resource: निर्यातको स्रोत
   install_folder: स्थापना फोल्डर
   load: बोभ्क
   settings_file: सेटिंग्स फाइल

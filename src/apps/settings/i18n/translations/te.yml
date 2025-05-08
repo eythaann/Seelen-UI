@@ -79,6 +79,7 @@ devtools:
   custom_config_file: కస్టమ్ కాన్ఫిగర్ ఫైల్‌ను లోడ్ చేయండి
   data_folder: డేటా ఫోల్డర్
   enable: డెవలపర్ సాధనాలను ప్రారంభించండి
+  export_resource: ఎగుమతి వనరు
   install_folder: ఇన్‌స్టాలేషన్ ఫోల్డర్
   load: లోడ్ చేయండి
   settings_file: సెట్టింగుల ఫైల్

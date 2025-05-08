@@ -80,6 +80,7 @@ devtools:
   custom_config_file: Xamuul faylka caadiga ah ee config
   data_folder: Faylka xogta
   enable: U oggolow qalabka horumarinta
+  export_resource: Ilaha dhoofinta
   install_folder: Xeerka rakibaadda
   load: Xammuul
   settings_file: Faylka Dejinta

@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Luede personaliséiert Konfiguratiounsdatei
   data_folder: Etabond Dossier
   enable: Aktivéiert Entwéckler Tools
+  export_resource: Export Ressource
   install_folder: Installatioun Dossier
   load: Lueden
   settings_file: Settytout-Datei

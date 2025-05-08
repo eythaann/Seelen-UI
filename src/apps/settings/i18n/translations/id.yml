@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Muat file konfigurasi khusus
   data_folder: Folder Data
   enable: Aktifkan alat pengembang
+  export_resource: Sumber Daya Ekspor
   install_folder: Folder Instalasi
   load: Memuat
   settings_file: File Pengaturan

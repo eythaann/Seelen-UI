@@ -75,6 +75,7 @@ devtools:
   custom_config_file: ਕਸਟਮ ਕੌਂਫਿਗ ਫਾਈਲ ਲੋਡ ਕਰੋ
   data_folder: ਡਾਟਾ ਫੋਲਡਰ
   enable: ਡਿਵੈਲਪਰ ਟੂਲਸ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  export_resource: ਨਿਰਯਾਤ ਸਰੋਤ
   install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ

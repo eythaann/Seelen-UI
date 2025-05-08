@@ -76,6 +76,7 @@ devtools:
   custom_config_file: โหลดไฟล์กำหนดค่าที่กำหนดเอง
   data_folder: โฟลเดอร์ข้อมูล
   enable: เปิดใช้งานเครื่องมือนักพัฒนาซอฟต์แวร์
+  export_resource: ทรัพยากรส่งออก
   install_folder: โฟลเดอร์การติดตั้ง
   load: โหลด
   settings_file: ไฟล์การตั้งค่า

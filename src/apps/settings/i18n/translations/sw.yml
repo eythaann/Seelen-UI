@@ -78,6 +78,7 @@ devtools:
   custom_config_file: Pakia faili ya usanidi wa kawaida
   data_folder: Folda ya data
   enable: Wezesha zana za msanidi programu
+  export_resource: Rasilimali ya kuuza nje
   install_folder: Folda ya usanikishaji
   load: Mzigo
   settings_file: Faili ya mipangilio

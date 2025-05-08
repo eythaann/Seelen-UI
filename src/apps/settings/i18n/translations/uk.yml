@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Імпортувати файл конфігурації
   data_folder: Папка даних
   enable: Увімкнути інструменти розробника
+  export_resource: Експортний ресурс
   install_folder: Папка встановлення
   load: Відкрити
   settings_file: Файл налаштувань

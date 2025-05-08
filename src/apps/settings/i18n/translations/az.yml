@@ -78,6 +78,7 @@ devtools:
   custom_config_file: Xüsusi konfiqurasiya faylını yükləyin
   data_folder: Məlumat qovluğu
   enable: Developer alətlərini aktivləşdirin
+  export_resource: İxracat mənbəyi
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
   settings_file: Parametrlər faylı

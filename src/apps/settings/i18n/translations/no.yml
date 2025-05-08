@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Last inn tilpasset konfigurasjonsfil
   data_folder: Datamappen
   enable: Aktiver utviklerverktøy
+  export_resource: Eksportressurs
   install_folder: Installasjonsmappe
   load: Laste
   settings_file: Innstillingsfilen

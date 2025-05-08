@@ -78,6 +78,7 @@ devtools:
   custom_config_file: Laadige kohandatud konfiguratsioonifail
   data_folder: Andmekaust
   enable: Luba arendaja tööriistad
+  export_resource: Ekspordi ressurss
   install_folder: Installi kaust
   load: Laadima
   settings_file: Seadete fail

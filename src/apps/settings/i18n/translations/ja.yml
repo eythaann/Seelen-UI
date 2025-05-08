@@ -75,6 +75,7 @@ devtools:
   custom_config_file: カスタム構成ファイルをロードする
   data_folder: データのフォルダー
   enable: 開発者ツールを有効にする
+  export_resource: 輸出リソース
   install_folder: アプリのフォルダー
   load: ロード
   settings_file: 設定ファイル

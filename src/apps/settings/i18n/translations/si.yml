@@ -78,6 +78,7 @@ devtools:
   custom_config_file: අභිරුචි වින්‍යාස ගොනුව පූරණය කරන්න
   data_folder: දත්ත ෆෝල්ඩරය
   enable: සංවර්ධක මෙවලම් සබල කරන්න
+  export_resource: අපනයන සම්පත
   install_folder: ස්ථාපන ෆෝල්ඩරය
   load: පැටවීම
   settings_file: සැකසුම් ගොනුව

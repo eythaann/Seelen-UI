@@ -78,6 +78,7 @@ devtools:
   custom_config_file: ផ្ទុកឯកសារកំណត់រចនាសម្ព័ន្ធផ្ទាល់ខ្លួន
   data_folder: ថតទិន្នន័យ
   enable: បើកឧបករណ៍អ្នកអភិវឌ្ឍន៍
+  export_resource: ធនធាននាំចេញ
   install_folder: ថតឯកសារដំឡើង
   load: ផ្ទុក
   settings_file: ឯកសារការកំណត់

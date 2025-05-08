@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Ielādēt pielāgotu konfigurācijas failu
   data_folder: Datu mape
   enable: Iespējot izstrādātāju rīkus
+  export_resource: Eksporta resurss
   install_folder: Instalēšanas mape
   load: Slodze
   settings_file: Iestatīšanas fails

@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Hlaða sérsniðna config skrá
   data_folder: Gagnamappa
   enable: Virkja verktaki verktaki
+  export_resource: Útflutningsauðlind
   install_folder: Uppsetningarmöppu
   load: Hlaða
   settings_file: Stillingarskrá

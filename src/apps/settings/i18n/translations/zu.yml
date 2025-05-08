@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Layisha ifayela le-config yangokwezifiso
   data_folder: Ifolda yedatha
   enable: Nika amandla amathuluzi onjiniyela
+  export_resource: Ukuthumela impahla
   install_folder: Ifolda yokufaka
   load: Thwala
   settings_file: Ifayela lezilungiselelo

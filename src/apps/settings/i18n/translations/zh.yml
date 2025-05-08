@@ -72,6 +72,7 @@ devtools:
   custom_config_file: 加载自定义配置文件
   data_folder: 数据文件夹
   enable: 启用开发工具
+  export_resource: 出口资源
   install_folder: 安装文件夹
   load: 加载
   settings_file: 设置文件

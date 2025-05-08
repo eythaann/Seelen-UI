@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Načíst vlastní konfigurační soubor
   data_folder: Datová složka
   enable: Povolit vývojové nástroje
+  export_resource: Exportní zdroj
   install_folder: Instalační složka
   load: Načíst
   settings_file: Nastavení souboru

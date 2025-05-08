@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Вчитајте ја датотеката за прилагодена конфигурација
   data_folder: Папка со податоци
   enable: Овозможете алатки за развивачи
+  export_resource: Извоз ресурс
   install_folder: Папка за инсталација
   load: Оптоварување
   settings_file: Датотека за поставки

@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Załaduj niestandardowy plik konfiguracyjny
   data_folder: Folder danych
   enable: Włącz narzędzia programistów
+  export_resource: Zasoby eksportowe
   install_folder: Folder instalacyjny
   load: Obciążenie
   settings_file: Plik ustawień

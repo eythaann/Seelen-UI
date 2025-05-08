@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Carregueu el fitxer de configuració personalitzada
   data_folder: Carpeta de dades
   enable: Activa les eines de desenvolupadors
+  export_resource: Els recursos d’exportació
   install_folder: Carpeta d'instal·lació
   load: Carregar
   settings_file: Arxiu de configuració

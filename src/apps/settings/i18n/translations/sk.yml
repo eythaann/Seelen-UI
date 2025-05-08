@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Načítať vlastný konfiguračný súbor
   data_folder: Priečinok
   enable: Povoľte vývojárskym nástrojom
+  export_resource: Vývozný zdroj
   install_folder: Inštalačný priečinok
   load: Naložiť
   settings_file: Nastavovací súbor

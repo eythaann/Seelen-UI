@@ -77,6 +77,7 @@ devtools:
   custom_config_file: ብጁ ውቅያ ፋይልን ይጫኑ
   data_folder: የውሂብ አቃፊ
   enable: የገንቢ መሳሪያዎችን ያንቁ
+  export_resource: ወደ ውጭ የመላክ ሀብት
   install_folder: የመጫን አቃፊ
   load: ጭነት
   settings_file: የቅንብሮች ፋይል

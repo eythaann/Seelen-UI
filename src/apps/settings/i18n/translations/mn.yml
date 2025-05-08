@@ -78,6 +78,7 @@ devtools:
   custom_config_file: Custom Compigh файлыг ачаалах
   data_folder: Д код хавтас
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
+  export_resource: Нөөцийг экспортлох
   install_folder: Суулгалах хүрээ
   load: Ачих
   settings_file: Тохиргооын нэр

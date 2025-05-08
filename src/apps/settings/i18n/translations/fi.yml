@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Lataa mukautettu konfigurointitiedosto
   data_folder: Tietokansio
   enable: Ota kehittäjätyökalut käyttöön
+  export_resource: Vientiresurssi
   install_folder: Asennuskansio
   load: Ladata
   settings_file: Asetustiedosto

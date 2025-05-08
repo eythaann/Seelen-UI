@@ -79,6 +79,7 @@ devtools:
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر
   enable: ڈویلپر ٹولز کو فعال کریں
+  export_resource: برآمدی وسائل
   install_folder: انسٹالیشن فولڈر
   load: لوڈ
   settings_file: سیٹنگ فاعل

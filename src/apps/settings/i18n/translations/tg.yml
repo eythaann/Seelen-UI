@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Файли танзимоти танзими фармоишӣ
   data_folder: Папкаи додаҳо
   enable: Воситаҳои таҳиягарро фаъол кунед
+  export_resource: Манбаъ
   install_folder: Феҳристи насб
   load: Сарборӣ
   settings_file: Файлҳои танзимот

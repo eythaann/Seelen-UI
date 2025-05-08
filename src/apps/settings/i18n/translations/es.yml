@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Cargar archivo de configuración personalizado
   data_folder: Carpeta de datos
   enable: Activar las herramientas para desarrolladores
+  export_resource: Recursos para la exportación
   install_folder: Carpeta de instalación
   load: Carga
   settings_file: Archivo de configuración

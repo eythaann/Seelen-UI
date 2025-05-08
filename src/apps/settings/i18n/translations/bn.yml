@@ -79,6 +79,7 @@ devtools:
   custom_config_file: কাস্টম কনফিগার ফাইল লোড করুন
   data_folder: ডেটা ফোল্ডার
   enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
+  export_resource: রফতানি সংস্থান
   install_folder: ইনস্টলেশন ফোল্ডার
   load: বোঝা
   settings_file: সেটিংস ফাইল

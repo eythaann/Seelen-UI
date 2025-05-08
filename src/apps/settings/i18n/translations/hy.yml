@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ
   enable: Միացնել մշակողի գործիքները
+  export_resource: Արտահանման ռեսուրս
   install_folder: Տեղադրման պանակ
   load: Բեռ
   settings_file: Կարգավորումներ ֆայլ

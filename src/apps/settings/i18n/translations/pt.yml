@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Carregar arquivo de configuração personalizado
   data_folder: Pasta de dados
   enable: Habilitar ferramentas para desenvolvedores
+  export_resource: Recurso de exportação
   install_folder: Pasta de instalação
   load: Carregar
   settings_file: Arquivo de configurações

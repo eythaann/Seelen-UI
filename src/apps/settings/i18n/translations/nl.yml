@@ -79,6 +79,7 @@ devtools:
   custom_config_file: Laad het aangepaste configuratiebestand
   data_folder: Gegevensmap
   enable: Schakel ontwikkelaarstools in
+  export_resource: Exporteren
   install_folder: Installatiemap
   load: Laden
   settings_file: Instellingenbestand
