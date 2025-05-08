@@ -28,14 +28,6 @@
 
 .taskbar {
   > .bg-layers {
-    > .bg-layer-1 {
-      opacity: 0.3;
-      filter: saturate(0);
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      background-size: cover;
-      border-radius: 15px;
-    }
-
     > .bg-layer-2 {
       opacity: 0.8;
       background-color: var(--color-gray-100);
@@ -96,17 +88,16 @@
   margin: 0 calc(var(--config-padding) * 2);
 }
 
-.weg-item {
-  --icon-ratio: 0.7;
+:root {
   --padding-ratio: 0.15; /* this count as x2 like there is a padding on each side */
-
   --inner-spacing: calc(var(--config-item-size) * var(--padding-ratio));
-
   /* this represent the max item size as 3 items to follow simetry */
   --max-item-size: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
   /* same as use 25% but this works for rectangles */
   --border-radius: calc(var(--config-item-size) * 0.25);
+}
 
+.weg-item {
   position: relative;
   display: flex;
   justify-content: center;
@@ -173,11 +164,11 @@
   }
 
   .weg-item-icon {
-    width: calc(var(--config-item-size) * var(--icon-ratio));
-    height: calc(var(--config-item-size) * var(--icon-ratio));
+    height: 100%;
+    width: unset;
+    aspect-ratio: 1/1;
     filter: drop-shadow(0px 0px 1px #0000009a);
     object-fit: contain;
-    fill: var(--config-accent-lighter-color);
 
     &.weg-item-start-icon,
     &.weg-item-folder-icon {

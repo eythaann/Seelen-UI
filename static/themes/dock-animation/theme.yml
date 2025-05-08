@@ -1,4 +1,4 @@
-id: "@default/dock-animation"
+id: "@deprecated/dock-animation"
 metadata:
   displayName: Wave Animation
   description: Wave animation for the dock/taskbar

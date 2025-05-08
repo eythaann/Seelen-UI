@@ -23,6 +23,9 @@ impl FullState {
             let path = entry.path();
             match Theme::load(&path) {
                 Ok(mut theme) => {
+                    if theme.id.starts_with("@deprecated") {
+                        continue;
+                    }
                     theme.metadata.filename = entry.file_name().to_string_lossy().to_string();
                     self.themes.insert(theme.metadata.filename.clone(), theme);
                 }
