@@ -5,4 +5,5 @@ export interface FocusedApp {
   exe: string | null;
   umid: string | null;
   isMaximized: boolean;
+  isSeelenOverlay: boolean;
 }

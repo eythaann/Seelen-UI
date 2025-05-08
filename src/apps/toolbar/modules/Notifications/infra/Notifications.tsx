@@ -15,8 +15,6 @@ import { Notification } from './Notification';
 export function Notifications() {
   const notifications = useSelector(Selectors.notifications);
 
-  console.log(notifications);
-
   const { t } = useTranslation();
 
   return (

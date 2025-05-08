@@ -141,7 +141,6 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setPlaceholder(event.payload));
   });
 
-  console.log(await PluginList.getAsync());
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).forCurrentWidget()));
   await PluginList.onChange((list) => {
     store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));
@@ -151,9 +150,9 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setFocused(app));
   }, 200);
 
-  let lastFocusedWasMaximized = false;
   const updateFocusedColor = async () => {
-    if (!lastFocusedWasMaximized || !store.getState().settings.dynamicColor) {
+    const { settings } = store.getState();
+    if (!settings.dynamicColor) {
       return;
     }
 
@@ -162,30 +161,26 @@ export async function registerStoreEvents() {
       removeFocusedColorCssVars();
       return;
     }
-    document.documentElement.style.setProperty('--color-focused-app-background', color.asHex());
+
     let luminance = color.calcLuminance();
+    document.documentElement.style.setProperty('--color-focused-app-background', color.asHex());
     document.documentElement.style.setProperty(
       '--color-focused-app-foreground',
       luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)',
     );
   };
 
-  setInterval(updateFocusedColor, 350);
-
+  window.setInterval(updateFocusedColor, 350);
   await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
     const app = e.payload;
-    lastFocusedWasMaximized = app.isMaximized;
-    setFocused(app);
-
-    if (app.isMaximized) {
-      updateFocusedColor();
-    } else if (app.title !== 'Seelen Fancy Toolbar') {
-      removeFocusedColorCssVars();
-    }
-
-    if (app.name !== 'Seelen UI') {
+    setFocused({
+      ...app,
+      isMaximized: app.isMaximized || app.isSeelenOverlay,
+    });
+    if (!app.isSeelenOverlay) {
       setFocused.flush();
     }
+    updateFocusedColor();
   });
 
   LanguageList.onChange((list) => store.dispatch(RootActions.setLanguages(list.asArray())));

@@ -80,6 +80,7 @@ pub struct FocusedApp {
     exe: Option<PathBuf>,
     umid: Option<String>,
     is_maximized: bool,
+    is_seelen_overlay: bool,
 }
 
 #[derive(Debug)]
@@ -220,6 +221,7 @@ impl HookManager {
                     exe: process.program_path().ok(),
                     umid: origin.app_user_model_id().map(|umid| umid.to_string()),
                     is_maximized: origin.is_maximized(),
+                    is_seelen_overlay: origin.is_seelen_overlay(),
                 },
             );
             log_error!(result);

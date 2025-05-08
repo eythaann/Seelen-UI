@@ -163,12 +163,26 @@
 }
 
 .ft-bar {
-  transition: background-color 0.2s linear;
-  color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
-  // we skip the first layer, to avoid break user themes, as before v2.2 the first layer was a noise layer
-  .bg-layer-2 {
-    transition: background-color 0.2s linear;
-    background-color: var(--color-focused-app-background, var(--color-persist-gray-900));
+  color: var(--color-persist-gray-100);
+
+  > .bg-layers {
+    // we skip the first layer, to avoid break user themes, as before v2.2 the first layer was a noise layer
+    > .bg-layer-2 {
+      transition: background-color 0.2s linear;
+      background-color: var(--color-persist-gray-900);
+    }
+  }
+
+  &[data-focused-is-maximized="true"] {
+    &[data-dynamic-color="true"] {
+      color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
+
+      > .bg-layers {
+        > .bg-layer-2 {
+          background-color: var(--color-focused-app-background, var(--color-persist-gray-900));
+        }
+      }
+    }
   }
 }
 

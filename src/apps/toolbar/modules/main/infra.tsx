@@ -77,20 +77,20 @@ function componentByModule(plugins: Plugin[], item: PluginId | ToolbarItem) {
 export function ToolBar() {
   const structure = useSelector(Selectors.items);
 
-  const [isAppFocused, setAppFocus] = useState(false);
+  const [isToolbarFocused, setToolbarFocused] = useState(false);
   const [delayed, setDelayed] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
+  const focusedWindow = useSelector(Selectors.focused);
   const plugins = useSelector(Selectors.plugins);
   const isOverlaped = useSelector(Selectors.isOverlaped);
-  const hideMode = useSelector(Selectors.settings.hideMode);
-  const position = useSelector(Selectors.settings.position);
+  const { hideMode, position, dynamicColor } = useSelector(Selectors.settings);
 
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
 
   useWindowFocusChange((focused) => {
-    setAppFocus(focused);
+    setToolbarFocused(focused);
     if (!focused) {
       setOpenContextMenu(false);
     }
@@ -138,7 +138,9 @@ export function ToolBar() {
   }, []);
 
   const shouldBeHidden =
-    !isAppFocused && hideMode !== HideMode.Never && (isOverlaped || hideMode === HideMode.Always);
+    !isToolbarFocused &&
+    hideMode !== HideMode.Never &&
+    (isOverlaped || hideMode === HideMode.Always);
 
   return (
     <AnimatedDropdown
@@ -164,6 +166,8 @@ export function ToolBar() {
           'ft-bar-hidden': shouldBeHidden,
           'ft-bar-delayed': delayed,
         })}
+        data-focused-is-maximized={!!focusedWindow?.isMaximized}
+        data-dynamic-color={dynamicColor}
         axis="x"
         as="div"
       >
