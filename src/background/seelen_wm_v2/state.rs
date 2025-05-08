@@ -6,7 +6,10 @@ use std::{
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::state::{NoFallbackBehavior, WindowManagerLayout, WmNode};
+use seelen_core::state::{
+    value::{KnownPlugin, PluginValue},
+    NoFallbackBehavior, WmNode,
+};
 
 use crate::{
     error_handler::Result,
@@ -56,14 +59,18 @@ impl WmV2StateWorkspace {
         let layout_id = settings.get_wm_layout_id(monitor, workspace_idx);
 
         let plugin_with_layout = settings.plugins().values().find(|p| p.id == layout_id);
+        let Some(plugin) = plugin_with_layout else {
+            return workspace;
+        };
+        let PluginValue::Known(plugin) = &plugin.plugin else {
+            return workspace;
+        };
+        let KnownPlugin::WManager(layout) = plugin else {
+            return workspace;
+        };
 
-        if let Some(p) = plugin_with_layout {
-            if let Ok(layout) = serde_json::from_value::<WindowManagerLayout>(p.plugin.clone()) {
-                workspace.root = Some(WmNodeImpl::new(layout.structure));
-                workspace.no_fallback_behavior = layout.no_fallback_behavior;
-            }
-        }
-
+        workspace.root = Some(WmNodeImpl::new(layout.structure.clone()));
+        workspace.no_fallback_behavior = layout.no_fallback_behavior.clone();
         workspace
     }
 

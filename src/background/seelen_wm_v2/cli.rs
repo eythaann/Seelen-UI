@@ -107,8 +107,8 @@ impl WindowManagerV2 {
             SubCommand::Width(action) => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
                 let percentage = match action {
-                    Sizing::Increase => FULL_STATE.load().settings.window_manager().resize_delta,
-                    Sizing::Decrease => -FULL_STATE.load().settings.window_manager().resize_delta,
+                    Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
+                    Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
                 };
 
                 let state = trace_lock!(WM_STATE);
@@ -122,8 +122,8 @@ impl WindowManagerV2 {
             SubCommand::Height(action) => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
                 let percentage = match action {
-                    Sizing::Increase => FULL_STATE.load().settings.window_manager().resize_delta,
-                    Sizing::Decrease => -FULL_STATE.load().settings.window_manager().resize_delta,
+                    Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
+                    Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
                 };
 
                 let state = trace_lock!(WM_STATE);

@@ -179,7 +179,7 @@ impl SeelenWeg {
         let hwnd = HWND(self.hwnd()?.0);
 
         let state = FULL_STATE.load();
-        let settings = state.settings().seelenweg();
+        let settings = &state.settings.by_widget.weg;
         let monitor_dpi = WindowsApi::get_monitor_scale_factor(monitor)?;
         let text_scale_factor = WindowsApi::get_text_scale_factor()?;
 

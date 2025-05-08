@@ -1,5 +1,6 @@
 // This file is for testing, not final implementation yet.
 
+import { MonitorConfiguration, MonitorSettingsByWidget } from '@seelen-ui/lib/types';
 import { Button, Modal, Select, Switch } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -30,26 +31,34 @@ export function WidgetSettingsModal({ widgetId, monitorId, settings: declaration
 
   const dispatch = useDispatch();
 
-  const onChangeItem = (key: string, value: any) => {
+  if (!monitorConfig || !widgetConfig) {
+    return null;
+  }
+
+  const patchMonitor = (monitor: Partial<MonitorConfiguration>) => {
     dispatch(
       RootActions.setMonitors({
         ...settingsByMonitor,
         [monitorId]: {
-          ...monitorConfig!,
-          byWidget: {
-            [widgetId]: {
-              ...widgetConfig!,
-              [key]: value,
-            },
-          },
+          ...monitorConfig,
+          ...monitor,
         },
       }),
     );
   };
 
-  if (!monitorConfig || !widgetConfig) {
-    return null;
-  }
+  const patchWidgetSettings = (settings: Partial<MonitorSettingsByWidget>) => {
+    patchMonitor({
+      byWidget: {
+        ...widgetConfig,
+        ...settings,
+      } as MonitorSettingsByWidget,
+    });
+  };
+
+  const onChangeItem = (key: string, value: any) => {
+    patchWidgetSettings({ [key]: value });
+  };
 
   return (
     <>

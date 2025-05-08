@@ -154,7 +154,7 @@ impl FancyToolbar {
     /// so we use this functions that only takes the toolbar in account
     pub fn get_work_area_by_monitor(monitor: HMONITOR) -> Result<RECT> {
         let state = FULL_STATE.load();
-        let settings = state.settings().fancy_toolbar();
+        let settings = &state.settings.by_widget.fancy_toolbar;
 
         let monitor_info = WindowsApi::monitor_info(monitor)?;
         let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(monitor)?;
@@ -181,7 +181,7 @@ impl FancyToolbar {
         let hwnd = HWND(self.hwnd()?.0);
 
         let state = FULL_STATE.load();
-        let settings = &state.settings().fancy_toolbar();
+        let settings = &state.settings.by_widget.fancy_toolbar;
 
         let monitor_info = WindowsApi::monitor_info(monitor)?;
         let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(monitor)?;
