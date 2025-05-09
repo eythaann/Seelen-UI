@@ -1,10 +1,10 @@
-id: "@eythaann/bubbles"
+id: '@eythaann/bubbles'
 metadata:
   displayName: Bubbles
   description: Bubbles says pop.
-  tags: ["toolbar"]
+  tags: ['toolbar']
 styles:
-  "@seelen/fancy-toolbar": |
+  '@seelen/fancy-toolbar': |
     .ft-bar-bg-layer-1 {
       display: none;
     }
@@ -14,8 +14,8 @@ styles:
     }
 
     .ft-bar-item {
-      color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
-      background-color: var(--color-focused-app-background, var(--color-persist-gray-900));
+      color: var(--color-persist-gray-100);
+      background-color: var(--color-persist-gray-900);
       border-radius: 10px;
       padding: 2px 8px;
       height: 25px;

@@ -173,7 +173,8 @@
     }
   }
 
-  &[data-focused-is-maximized="true"] {
+  &[data-focused-is-maximized="true"],
+  &[data-focused-is-overlay="true"] {
     &[data-dynamic-color="true"] {
       color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
 

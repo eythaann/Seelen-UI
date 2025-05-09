@@ -83,8 +83,8 @@ pub fn weg_toggle_window_state(hwnd: isize, was_focused: bool) -> Result<()> {
     // was_focused is intented to know if the window was focused before click on the dock item
     // on click the items makes the dock being focused.
     if was_focused {
-        //Got to prevent the activation, because the click initialed as Seelen in focus, and the
-        //activation here will make this assigned to an app, which is not properly focused, just activated.
+        // Got to prevent the activation, because the click initialed as Seelen in focus, and the
+        // activation here will make this assigned to an app, which is not properly focused, just activated.
         window.show_window_async(SW_SHOWMINNOACTIVE)?;
     } else {
         window.focus()?;

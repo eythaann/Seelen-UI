@@ -68,6 +68,51 @@ const removeFocusedColorCssVars = () => {
   document.documentElement.style.removeProperty('--color-focused-app-foreground');
 };
 
+async function initFocusedColorSystem() {
+  let optimisticFocused: FocusedApp | null = null;
+  const setFocused = debounce((app: FocusedApp) => {
+    store.dispatch(RootActions.setFocused(app));
+  }, 200);
+
+  const updateFocusedColor = async () => {
+    const { settings } = store.getState();
+    if (!settings.dynamicColor || optimisticFocused?.isSeelenOverlay) {
+      return;
+    }
+
+    let color = new Color(await invoke<IColor>(SeelenCommand.SystemGetForegroundWindowColor));
+    if (color.inner.a === 0) {
+      removeFocusedColorCssVars();
+      return;
+    }
+
+    // like this is an async operation sometimes this is not skiped on first condition
+    if (optimisticFocused?.isSeelenOverlay) {
+      return;
+    }
+
+    let luminance = color.calcLuminance();
+    document.documentElement.style.setProperty('--color-focused-app-background', color.asHex());
+    document.documentElement.style.setProperty(
+      '--color-focused-app-foreground',
+      luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)',
+    );
+  };
+
+  await listenGlobal('hidden::remove-focused-color', removeFocusedColorCssVars);
+
+  window.setInterval(updateFocusedColor, 350);
+  await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
+    const app = e.payload;
+    optimisticFocused = app;
+    setFocused(app);
+    if (!app.isSeelenOverlay) {
+      setFocused.flush();
+    }
+    updateFocusedColor();
+  });
+}
+
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
 
@@ -146,43 +191,6 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));
   });
 
-  const setFocused = debounce((app: FocusedApp) => {
-    store.dispatch(RootActions.setFocused(app));
-  }, 200);
-
-  const updateFocusedColor = async () => {
-    const { settings } = store.getState();
-    if (!settings.dynamicColor) {
-      return;
-    }
-
-    let color = new Color(await invoke<IColor>(SeelenCommand.SystemGetForegroundWindowColor));
-    if (color.inner.a === 0) {
-      removeFocusedColorCssVars();
-      return;
-    }
-
-    let luminance = color.calcLuminance();
-    document.documentElement.style.setProperty('--color-focused-app-background', color.asHex());
-    document.documentElement.style.setProperty(
-      '--color-focused-app-foreground',
-      luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)',
-    );
-  };
-
-  window.setInterval(updateFocusedColor, 350);
-  await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
-    const app = e.payload;
-    setFocused({
-      ...app,
-      isMaximized: app.isMaximized || app.isSeelenOverlay,
-    });
-    if (!app.isSeelenOverlay) {
-      setFocused.flush();
-    }
-    updateFocusedColor();
-  });
-
   LanguageList.onChange((list) => store.dispatch(RootActions.setLanguages(list.asArray())));
 
   UserDetails.onChange((details) => store.dispatch(RootActions.setUser(details.user)));
@@ -212,6 +220,8 @@ export async function registerStoreEvents() {
   BluetoothRadio.onChange((radio) =>
     store.dispatch(RootActions.setBluetoothRadioState(radio.state)),
   );
+
+  await initFocusedColorSystem();
 
   await initUIColors();
   await StartThemingTool();

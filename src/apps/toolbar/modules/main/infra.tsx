@@ -167,6 +167,7 @@ export function ToolBar() {
           'ft-bar-delayed': delayed,
         })}
         data-focused-is-maximized={!!focusedWindow?.isMaximized}
+        data-focused-is-overlay={!!focusedWindow?.isSeelenOverlay}
         data-dynamic-color={dynamicColor}
         axis="x"
         as="div"
