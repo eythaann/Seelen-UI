@@ -19,7 +19,7 @@ pub fn register_media_events() {
         MediaManager::subscribe(|event| match event {
             MediaEvent::MediaPlayerAdded(_)
             | MediaEvent::MediaPlayerRemoved(_)
-            | MediaEvent::MediaPlayerPendingsRemoved
+            | MediaEvent::MediaPlayerCleanRequested
             | MediaEvent::MediaPlayerPropertiesChanged { .. }
             | MediaEvent::MediaPlayerPlaybackStatusChanged { .. } => {
                 let manager = trace_lock!(MEDIA_MANAGER);

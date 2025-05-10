@@ -158,6 +158,11 @@ pub trait WindowsResultExt {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error>;
 }
 
+pub trait ResultLogger {
+    /// Take the result and log it if there is an error
+    fn log_error(self);
+}
+
 impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error> {
         match self {
@@ -172,6 +177,14 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
                     Err(error)
                 }
             }
+        }
+    }
+}
+
+impl<T, E: std::fmt::Debug> ResultLogger for core::result::Result<T, E> {
+    fn log_error(self) {
+        if let Err(err) = self {
+            log::error!("{:?}", err);
         }
     }
 }

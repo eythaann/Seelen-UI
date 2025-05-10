@@ -70,6 +70,7 @@ impl MediaManagerEvents {
                 trace_lock!(MEDIA_MANAGER)
                     .playing()
                     .iter()
+                    .filter(|s| s.removed_at.is_none())
                     .map(|session| session.umid.clone())
                     .collect_vec()
             };
@@ -153,7 +154,7 @@ impl MediaManager {
                     .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
                 playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
                 default: false,
-                pending_remove: false,
+                removed_at: None,
             },
         );
 
@@ -186,10 +187,13 @@ impl MediaManager {
         let ids = self
             .playing
             .iter()
-            .filter(|(_id, player)| player.pending_remove)
+            .filter(|(_id, player)| {
+                player
+                    .removed_at
+                    .is_some_and(|t| t.elapsed().as_millis() > 1500)
+            })
             .map(|(id, _)| id.clone())
             .collect_vec();
-
         for id in ids {
             self.release_media_transport_session(&id)?;
         }

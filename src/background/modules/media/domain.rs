@@ -1,4 +1,4 @@
-use std::{ffi::c_void, mem::zeroed, path::PathBuf};
+use std::{ffi::c_void, mem::zeroed, path::PathBuf, time::Instant};
 
 use serde::Serialize;
 
@@ -92,7 +92,7 @@ pub struct MediaPlayer {
     pub playing: bool,
     pub default: bool,
     #[serde(skip)]
-    pub pending_remove: bool,
+    pub removed_at: Option<Instant>,
 }
 
 #[derive(Debug, Clone, Serialize)]

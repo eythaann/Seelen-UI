@@ -13,6 +13,7 @@
 - not removing old icons mask on icon pack change.
 - styles for dock media item.
 - not scrollable dock on overflow (many items).
+- media player not being correctly updated on player close event.
 
 ## [2.3.2]
 ### enhancements

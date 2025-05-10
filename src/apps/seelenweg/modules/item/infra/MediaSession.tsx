@@ -68,7 +68,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
             'media-session-container-vertical': !isHorizontal,
           })}
           onContextMenu={(e) => e.stopPropagation()}
-          style={{ zIndex: -1 }} // I don't known why the fuck this item is overlapping but this fixes it
+          // style={{ zIndex: -1 }} // I don't known why the fuck this item is overlapping but this fixes it
         >
           <div
             className="media-session"

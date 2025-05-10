@@ -27,7 +27,10 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result, event_manager, log_error, trace_lock, utils::pcwstr, windows_api::Com,
+    error_handler::{Result, ResultLogger},
+    event_manager, trace_lock,
+    utils::pcwstr,
+    windows_api::Com,
 };
 
 use super::domain::{
@@ -74,7 +77,7 @@ pub enum MediaEvent {
     // == players ==
     MediaPlayerAdded(GlobalSystemMediaTransportControlsSession),
     MediaPlayerRemoved(String),
-    MediaPlayerPendingsRemoved,
+    MediaPlayerCleanRequested,
     MediaPlayerPropertiesChanged {
         id: String,
         title: String,
@@ -100,26 +103,26 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
         device_id: &windows_core::PCWSTR,
     ) -> windows_core::Result<()> {
         let tx = MediaManager::event_tx();
-        let result = tx.send(MediaEvent::DefaultDeviceChanged {
+        tx.send(MediaEvent::DefaultDeviceChanged {
             flow,
             role,
             device_id: unsafe { device_id.to_string()? },
-        });
-        log_error!(result);
+        })
+        .log_error();
         Ok(())
     }
 
     fn OnDeviceAdded(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
         let tx = MediaManager::event_tx();
-        let result = tx.send(MediaEvent::DeviceAdded(unsafe { device_id.to_string()? }));
-        log_error!(result);
+        tx.send(MediaEvent::DeviceAdded(unsafe { device_id.to_string()? }))
+            .log_error();
         Ok(())
     }
 
     fn OnDeviceRemoved(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
         let tx = MediaManager::event_tx();
-        let result = tx.send(MediaEvent::DeviceRemoved(unsafe { device_id.to_string()? }));
-        log_error!(result);
+        tx.send(MediaEvent::DeviceRemoved(unsafe { device_id.to_string()? }))
+            .log_error();
         Ok(())
     }
 
@@ -130,11 +133,11 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
     ) -> windows_core::Result<()> {
         let device_id = unsafe { device_id.to_string()? };
         let tx = MediaManager::event_tx();
-        let result = match new_device_state {
+        match new_device_state {
             DEVICE_STATE_ACTIVE => tx.send(MediaEvent::DeviceAdded(device_id)),
             _ => tx.send(MediaEvent::DeviceRemoved(device_id)),
-        };
-        log_error!(result);
+        }
+        .log_error();
         Ok(())
     }
 
@@ -247,8 +250,8 @@ impl MediaManager {
             .EnumAudioEndpoints(eAll, DEVICE_STATE_ACTIVE)?;
 
         for idx in 0..collection.GetCount()? {
-            // avoid panic if just some device fail to load
-            log_error!(self.load_device(&collection.Item(idx)?));
+            // log instead propagate error to avoid panic if just some device fail to load
+            self.load_device(&collection.Item(idx)?).log_error();
         }
 
         self.device_enumerator
@@ -272,7 +275,7 @@ impl MediaManager {
             );
 
             let mut media_manager = trace_lock!(MEDIA_MANAGER);
-            log_error!(media_manager.process_event(event));
+            media_manager.process_event(event).log_error();
 
             if is_changing_players {
                 media_manager.update_recommended_player();
@@ -390,6 +393,12 @@ impl MediaManager {
                 }
             }
             MediaEvent::MediaPlayerAdded(session) => {
+                if let Some(player) =
+                    self.player_mut(&session.SourceAppUserModelId()?.to_string_lossy())
+                {
+                    player.removed_at = None;
+                    return Ok(());
+                }
                 // load_media_transport_session could fail with 0x80070015 "The device is not ready."
                 // when trying to load a recently added player so we retry a few times
                 let mut max_attempts = 0;
@@ -401,15 +410,18 @@ impl MediaManager {
             }
             MediaEvent::MediaPlayerRemoved(id) => {
                 if let Some(player) = self.player_mut(&id) {
-                    player.pending_remove = true;
+                    player.removed_at = Some(std::time::Instant::now());
                     std::thread::spawn(move || {
                         std::thread::sleep(Duration::from_millis(1500));
-                        log_error!(trace_lock!(MEDIA_MANAGER).release_pending_players());
-                        let _ = Self::event_tx().send(MediaEvent::MediaPlayerPendingsRemoved);
+                        Self::event_tx()
+                            .send(MediaEvent::MediaPlayerCleanRequested)
+                            .log_error();
                     });
                 }
             }
-            MediaEvent::MediaPlayerPendingsRemoved => {}
+            MediaEvent::MediaPlayerCleanRequested => {
+                self.release_pending_players()?;
+            }
             MediaEvent::MediaPlayerPropertiesChanged {
                 id,
                 title,
@@ -420,13 +432,11 @@ impl MediaManager {
                     player.title = title;
                     player.author = author;
                     player.thumbnail = thumbnail;
-                    player.pending_remove = false;
                 }
             }
             MediaEvent::MediaPlayerPlaybackStatusChanged { id, playing } => {
                 if let Some(player) = self.player_mut(&id) {
                     player.playing = playing;
-                    player.pending_remove = false;
                 }
             }
         }
@@ -453,7 +463,7 @@ impl MediaManager {
     pub fn release(&mut self) {
         let keys = self.playing.keys().cloned().collect_vec();
         for id in keys {
-            log_error!(self.release_media_transport_session(&id));
+            self.release_media_transport_session(&id).log_error();
         }
 
         for device in std::mem::take(&mut self.inputs) {

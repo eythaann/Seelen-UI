@@ -46,13 +46,13 @@ export function MediaPlayerSession({ session }: { session: MediaChannelTransport
         backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
       }}
     >
+      <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />
       <div className="media-session-thumbnail-container">
         <Tooltip title={session.owner.name} placement="bottom">
           <FileIcon className="media-session-app-icon" umid={session.umid} />
         </Tooltip>
         <img className="media-session-thumbnail" src={thumbnailSrc} />
       </div>
-      <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />
 
       <div className="media-session-info" style={{ color }}>
         <h4 className="media-session-title">{session.title}</h4>
