@@ -98,38 +98,28 @@ general:
   date_format: Datum Format
   icon_pack:
     available: Verfügbar Ikon Packs
-    label: ICON Tass
-    open_folder: Oppen Ikon Packagen Dossier
     selected: Aktiv Ikon Packs
   language: Sprooche
-  resource:
-    author: Auteur
-    description: Beschreiwung
-    tags: Tags
   startup: Run op Startup?
   theme:
     available: Verfügbar Themen
-    label: Themen
-    open_folder: Open Themes Dossier
     selected: Aktiv Themen
-  wallpaper:
-    select: Wielt Wallpaper
 header:
   labels:
     developer: Entwéckler
+    extras: Extras
     general: Generol
     home: Doheem
-    info: Informatioun
-    mods: Plugins & Widgets
+    iconpack: ICON Tass
     monitors: Iwwerschwannegkeeten
-    seelen_bar: Fantastesch Toolbar
-    seelen_rofi: App launcher
-    seelen_wall: Wallpaper Manager
-    seelen_weg: Dock / Taskbar
-    seelen_wm: Fënter Manager
+    plugin: Plugins
+    resources: Ressourcen
     shortcuts: Ofkierpsen
+    soundpack: Tounpacken
     specific_apps: Spezifesch Apps
-    virtual_desk: Virtuell Desktops
+    theme: Themen
+    wallpaper: Wallpapers
+    widget: Widgets
 home:
   new_resources: Nei Insidder
 inherit: Ontherrit
@@ -137,16 +127,18 @@ inProgress: A Beaarbechtung...
 insert: INor andafen
 loading: Lueden ...
 miscellaneous: Erleeën
-mods:
-  plugins: Plugins
-  target: Zilrät
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Méi kleng
 open: Ëmen e gratis
 quit: Ness
 remove: Ofwäschen
+resources:
+  app_outdated: Dës Ressource brauch eng nei Versioun vu Seelen Ui fir richteg ze schaffen.
+  open_folder: Open Reseau Dossier
+  outdated: >-
+    Dës Ressource gouf fir eng méi al Versioun vu seelen UI entworf a sech net
+    richteg schaffen.
 save: Spuerwäit
 save_and_restart: Spuert & nei starten
 see_more: Méi gesinn

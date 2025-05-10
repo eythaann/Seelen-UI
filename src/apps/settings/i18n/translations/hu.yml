@@ -99,38 +99,28 @@ general:
   date_format: Dátum formátum
   icon_pack:
     available: Elérhető ikoncsomagok
-    label: Ikoncsomagok
-    open_folder: Nyissa meg az ikoncsomagok mappát
     selected: Aktív ikoncsomagok
   language: Nyelv
-  resource:
-    author: Szerző
-    description: Leírás
-    tags: Címkék
   startup: Futtatni indításkor?
   theme:
     available: Elérhető témák
-    label: Témák
-    open_folder: Témák mappa megnyitása
     selected: Aktív témák
-  wallpaper:
-    select: Válassza ki a háttérképet
 header:
   labels:
     developer: Fejlesztő
+    extras: Extrák
     general: Tábornok
     home: Otthon
-    info: Információ
-    mods: Bővítmények és widgetek
+    iconpack: Ikon csomagok
     monitors: Monitorok
-    seelen_bar: Divatos eszköztár
-    seelen_rofi: Alkalmazásindító
-    seelen_wall: Háttérképkezelő
-    seelen_weg: Dokk/tálca
-    seelen_wm: Ablakvezető
+    plugin: Plugins
+    resources: Források
     shortcuts: Parancsikonok
+    soundpack: Hang csomagok
     specific_apps: Konkrét alkalmazások
-    virtual_desk: Virtuális asztali számítógépek
+    theme: Témák
+    wallpaper: Háttérképek
+    widget: Widgetek
 home:
   new_resources: Új források
 inherit: Örököl
@@ -138,16 +128,18 @@ inProgress: Folyamatban...
 insert: Beilleszt
 loading: Betöltés...
 miscellaneous: Különféle
-mods:
-  plugins: Plugins
-  target: Cél
-  widgets: Kütyü
 monitors_configurations:
   label: Monitor {{index}}
 more: Több
 open: Nyisd ki
 quit: Kilépés
 remove: Eltávolítás
+resources:
+  app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
+  open_folder: Nyissa meg az erőforrás mappát
+  outdated: >-
+    Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,
+    hogy nem működik megfelelően.
 save: Megment
 save_and_restart: Mentés és újraindítás
 see_more: Lásd még

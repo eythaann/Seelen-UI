@@ -96,38 +96,28 @@ general:
   date_format: Ọna kika ọjọ
   icon_pack:
     available: Awọn akopọ Aami ti o wa
-    label: Awọn akopọ aami
-    open_folder: Ṣii folda Awọn akopọ Awọn akopọ
     selected: Awọn akopọ Aami ti nṣiṣe lọwọ
   language: Ede
-  resource:
-    author: Onkọwe
-    description: Apejuwe
-    tags: Awọn afi
   startup: Ṣiṣe lori ibẹrẹ?
   theme:
     available: Awọn akori to wa
-    label: Awọn akori
-    open_folder: Ṣii folda Awọn ẹka
     selected: Awọn akori ti nṣiṣe lọwọ
-  wallpaper:
-    select: Yan Iṣẹṣọ ogiri
 header:
   labels:
     developer: Olugbekun
+    extras: Imurarẹ
     general: Gbogboogbo
     home: Ile
-    info: Alaye
-    mods: Awọn afikun & Awọn ẹrọ ailorukọ
+    iconpack: Awọn akopọ aami
     monitors: Awọn diirarito
-    seelen_bar: Ọpa irinṣẹ Fancy
-    seelen_rofi: Ifilọlẹ app
-    seelen_wall: Oluṣakoso ogiri
-    seelen_weg: Dock / forkbar
-    seelen_wm: Oluṣakoso window
+    plugin: Afikun
+    resources: Awọn orisun
     shortcuts: Awọn ọna abuja
+    soundpack: Awọn akopọ ohun
     specific_apps: Apps Pataki
-    virtual_desk: Awọn orisun itẹwe foju
+    theme: Awọn akori
+    wallpaper: Ogiri ogiri
+    widget: Ẹrọ ẹrọ
 home:
   new_resources: Awọn orisun Tuntun
 inherit: Jogun
@@ -135,16 +125,16 @@ inProgress: Ni ilọsiwaju ...
 insert: Fisi
 loading: Loading ...
 miscellaneous: Oriṣiriṣi
-mods:
-  plugins: Afikun
-  target: Ibi-afẹde
-  widgets: Ẹrọ ẹrọ
 monitors_configurations:
   label: Adirẹsi {{Ṣe atọka}}
 more: Diẹ sii
 open: Ṣii
 quit: Lọ kuro
 remove: Yọkuro
+resources:
+  app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
+  open_folder: Ṣi folda Resouce
+  outdated: A ṣe orisun yii fun ẹya atijọ ti Silen Ui ati pe ko le ma ṣiṣẹ daradara.
 save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
 see_more: Wo diẹ sii

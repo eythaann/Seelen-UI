@@ -100,38 +100,28 @@ general:
   date_format: Format de la date
   icon_pack:
     available: Packs d'icônes disponibles
-    label: Packs d'icônes
-    open_folder: Ouvrir le dossier des packs d’icônes
     selected: Packs d'icônes actifs
   language: Langue
-  resource:
-    author: Auteur
-    description: Description
-    tags: Tags
   startup: Lancer au démarrage ?
   theme:
     available: Thèmes disponibles
-    label: Thèmes
-    open_folder: Ouvrir le dossier des thèmes
     selected: Thèmes actifs
-  wallpaper:
-    select: Sélectionner un fond d’écran
 header:
   labels:
     developer: Développeur
+    extras: Extras
     general: Général
     home: Accueil
-    info: Informations
-    mods: Plugins & Widgets
+    iconpack: Packs d'icônes
     monitors: Moniteurs
-    seelen_bar: Barre d'outils sophistiquée
-    seelen_rofi: Lanceur d'applications
-    seelen_wall: Gestionnaire de fonds d'écran
-    seelen_weg: Dock/Barre des tâches
-    seelen_wm: Gestionnaire de fenêtres
+    plugin: Plugins
+    resources: Ressources
     shortcuts: Raccourcis
+    soundpack: Paquets de sons
     specific_apps: Applications spécifiques
-    virtual_desk: Bureaux virtuels
+    theme: Thèmes
+    wallpaper: Fonds d'écran
+    widget: Widgets
 home:
   new_resources: Nouvelles ressources
 inherit: Hériter
@@ -139,16 +129,20 @@ inProgress: En cours...
 insert: Insérer
 loading: Chargement...
 miscellaneous: Divers
-mods:
-  plugins: Plugins
-  target: Cible
-  widgets: Widgets
 monitors_configurations:
   label: Moniteur {{index}}
 more: Plus
 open: Ouvrir
 quit: Quitter
 remove: Retirer
+resources:
+  app_outdated: >-
+    Cette ressource nécessite une version plus récente de Seelen UI pour
+    fonctionner correctement.
+  open_folder: Ouvrir le dossier des ressources
+  outdated: >-
+    Cette ressource a été conçue pour une ancienne version de Seelen UI et peut
+    ne pas fonctionner correctement.
 save: Sauvegarder
 save_and_restart: Sauvegarder et redémarrer
 see_more: Voir plus

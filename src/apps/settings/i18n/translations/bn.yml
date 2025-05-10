@@ -100,38 +100,28 @@ general:
   date_format: তারিখ ফর্ম্যাট
   icon_pack:
     available: উপলব্ধ আইকন প্যাক
-    label: আইকন প্যাকস
-    open_folder: আইকন প্যাকস ফোল্ডারটি খুলুন
     selected: সক্রিয় আইকন প্যাক
   language: ভাষা
-  resource:
-    author: লেখক
-    description: বর্ণনা
-    tags: ট্যাগ
   startup: প্রারম্ভকালে চালানো?
   theme:
     available: উপলব্ধ থিম
-    label: থিম
-    open_folder: থিম ফোল্ডারটি খুলুন
     selected: সক্রিয় থিম
-  wallpaper:
-    select: ওয়ালপেপার নির্বাচন করুন
 header:
   labels:
     developer: বিকাশকারী
+    extras: অতিরিক্ত
     general: সাধারণ
     home: বাড়ি
-    info: তথ্য
-    mods: প্লাগইন এবং উইজেট
+    iconpack: আইকন প্যাকস
     monitors: মনিটর
-    seelen_bar: অভিনব সরঞ্জামদণ্ড
-    seelen_rofi: অ্যাপ লঞ্চার
-    seelen_wall: ওয়ালপেপার ম্যানেজার
-    seelen_weg: ডক/টাস্কবার
-    seelen_wm: উইন্ডো ম্যানেজার
+    plugin: প্লাগইন
+    resources: সংস্থান
     shortcuts: শর্টকাটস
+    soundpack: সাউন্ড প্যাকস
     specific_apps: নির্দিষ্ট অ্যাপ্লিকেশন
-    virtual_desk: ভার্চুয়াল ডেস্কটপস
+    theme: থিম
+    wallpaper: ওয়ালপেপার
+    widget: উইজেটস
 home:
   new_resources: নতুন সংস্থান
 inherit: উত্তরাধিকারী
@@ -139,16 +129,20 @@ inProgress: চলমান...
 insert: .োকান
 loading: লোড হচ্ছে ...
 miscellaneous: বিবিধ
-mods:
-  plugins: প্লাগইন
-  target: লক্ষ্য
-  widgets: উইজেটস
 monitors_configurations:
   label: '{{সূচক}} মনিটর'
 more: আরও
 open: খোলা
 quit: প্রস্থান
 remove: সরান
+resources:
+  app_outdated: >-
+    এই সংস্থানটির জন্য সঠিকভাবে কাজ করার জন্য সিলেন ইউআইয়ের একটি নতুন সংস্করণ
+    প্রয়োজন।
+  open_folder: রিসোউস ফোল্ডারটি খুলুন
+  outdated: >-
+    এই সংস্থানটি সিলেন ইউআইয়ের একটি পুরানো সংস্করণের জন্য ডিজাইন করা হয়েছিল
+    এবং এটি সঠিকভাবে কাজ নাও করতে পারে।
 save: সংরক্ষণ
 save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
 see_more: আরও দেখুন

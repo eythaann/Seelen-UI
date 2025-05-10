@@ -98,38 +98,28 @@ general:
   date_format: Datoformat
   icon_pack:
     available: Tilgjengelige ikonpakker
-    label: Ikonpakker
-    open_folder: Åpne ikonpakker mappe
     selected: Aktive ikonpakker
   language: Språk
-  resource:
-    author: Forfatter
-    description: Beskrivelse
-    tags: Tagger
   startup: Kjør ved oppstart?
   theme:
     available: Tilgjengelige temaer
-    label: Temaer
-    open_folder: Åpne tema -mappe
     selected: Aktive temaer
-  wallpaper:
-    select: Velg bakgrunnsbilde
 header:
   labels:
     developer: Utvikler
+    extras: Ekstrautstyr
     general: Generell
     home: Hjem
-    info: Informasjon
-    mods: Plugins og widgets
+    iconpack: Ikonpakker
     monitors: Skjermer
-    seelen_bar: Fancy verktøylinje
-    seelen_rofi: App Launcher
-    seelen_wall: Bakgrunnssjef
-    seelen_weg: Dock/oppgavelinje
-    seelen_wm: Vindusleder
+    plugin: Plugins
+    resources: Ressurser
     shortcuts: Snarveier
+    soundpack: Lydpakker
     specific_apps: Spesifikke apper
-    virtual_desk: Virtuelle stasjonære maskiner
+    theme: Temaer
+    wallpaper: Bakgrunnsbilder
+    widget: Widgets
 home:
   new_resources: Nye ressurser
 inherit: Arve
@@ -137,16 +127,20 @@ inProgress: I prosess...
 insert: Sett inn
 loading: Laster ...
 miscellaneous: Diverse
-mods:
-  plugins: Plugins
-  target: Mål
-  widgets: Widgets
 monitors_configurations:
   label: Overvåke {{indeks}}
 more: Flere
 open: Åpen
 quit: Slutte
 remove: Fjerne
+resources:
+  app_outdated: >-
+    Denne ressursen krever en nyere versjon av Seelen UI for å fungere
+    ordentlig.
+  open_folder: Åpne Resouce -mappen
+  outdated: >-
+    Denne ressursen ble designet for en eldre versjon av Seelen UI og fungerer
+    kanskje ikke ordentlig.
 save: Lagre
 save_and_restart: Lagre og start på nytt
 see_more: Se mer

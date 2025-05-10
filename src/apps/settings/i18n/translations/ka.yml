@@ -98,38 +98,28 @@ general:
   date_format: თარიღის ფორმატი
   icon_pack:
     available: ხელმისაწვდომი ხატების პაკეტები
-    label: ხატის პაკეტები
-    open_folder: გახსენით ხატი პაკეტების საქაღალდე
     selected: აქტიური ხატების პაკეტები
   language: Ენა
-  resource:
-    author: ავტორი
-    description: აღწერა
-    tags: ტეგები
   startup: გაშვებით გაშვებით?
   theme:
     available: ხელმისაწვდომი თემები
-    label: თემები
-    open_folder: გახსენით თემები საქაღალდე
     selected: აქტიური თემები
-  wallpaper:
-    select: აირჩიეთ ფონი
 header:
   labels:
     developer: დეველოპერი ქალი
+    extras: ზედმეტი
     general: გენერალი
     home: სახლი
-    info: ინფორმაცია
-    mods: დანამატები და ვიჯეტები
+    iconpack: ხატის პაკეტები
     monitors: მონიტორები
-    seelen_bar: ლამაზი პანელი
-    seelen_rofi: აპლიკაციის გამშვები
-    seelen_wall: ფონი მენეჯერი
-    seelen_weg: დოკ/დავალების ზოლი
-    seelen_wm: ფანჯრის მენეჯერი
+    plugin: ამხებო
+    resources: რესურსები
     shortcuts: მალსახმობები
+    soundpack: ხმის პაკეტები
     specific_apps: კონკრეტული პროგრამები
-    virtual_desk: ვირტუალური სამუშაო მაგიდა
+    theme: თემები
+    wallpaper: ფონები
+    widget: ვიჯეტები
 home:
   new_resources: ახალი რესურსები
 inherit: მემკვიდრეობით მიღება
@@ -137,16 +127,18 @@ inProgress: Პროგრესირებს...
 insert: ჩასმა
 loading: Ჩატვირთვა...
 miscellaneous: შერეული
-mods:
-  plugins: ამხებო
-  target: სამიზნე
-  widgets: ვიჯეტები
 monitors_configurations:
   label: მონიტორი {{ინდექსი}}
 more: მეტი
 open: გახსნა
 quit: მიტოვება
 remove: ამოღება
+resources:
+  app_outdated: ეს რესურსი მოითხოვს Seelen UI– ს ახალ ვერსიას, რომ სწორად იმუშაოს.
+  open_folder: გახსენით Resouce საქაღალდე
+  outdated: >-
+    ეს რესურსი შეიქმნა Seelen UI- ს ძველი ვერსიისთვის და შესაძლოა არ იმუშაოს
+    სწორად.
 save: Გადარჩენა
 save_and_restart: შენახვა და გადატვირთვა
 see_more: იხილეთ მეტი

@@ -98,38 +98,28 @@ general:
   date_format: Dagsetningarsnið
   icon_pack:
     available: Lausir táknpakkar
-    label: Táknpakkar
-    open_folder: Opna tákn pakka möppu
     selected: Virkir táknpakkar
   language: Tungumál
-  resource:
-    author: Höfundur
-    description: Lýsing
-    tags: Merki
   startup: Hlaupa í gangsetningu?
   theme:
     available: Þemu í boði
-    label: Þemu
-    open_folder: Opnaðu þemamöppu
     selected: Virk þemu
-  wallpaper:
-    select: Veldu veggfóður
 header:
   labels:
     developer: Hönnuður
+    extras: Aukahlutir
     general: Almennt
     home: Heim
-    info: Upplýsingar
-    mods: Viðbætur og búnaður
+    iconpack: Táknpakkar
     monitors: Fylgist með
-    seelen_bar: Fancy tækjastikan
-    seelen_rofi: App Launcher
-    seelen_wall: Veggfóður framkvæmdastjóri
-    seelen_weg: Bryggju/verkefnabar
-    seelen_wm: Gluggastjóri
+    plugin: Viðbætur
+    resources: Auðlindir
     shortcuts: Flýtileiðir
+    soundpack: Hljóðpakkar
     specific_apps: Sérstök forrit
-    virtual_desk: Sýndarskjáborð
+    theme: Þemu
+    wallpaper: Veggfóður
+    widget: Búnaður
 home:
   new_resources: Ný úrræði
 inherit: Erfa
@@ -137,16 +127,18 @@ inProgress: Í vinnslu...
 insert: Settu inn
 loading: Hleðsla ...
 miscellaneous: Ýmislegt
-mods:
-  plugins: Viðbætur
-  target: Miðaðu
-  widgets: Búnaður
 monitors_configurations:
   label: Monitor {{Index}}
 more: Meira
 open: Opið
 quit: Hættu
 remove: Fjarlægðu
+resources:
+  app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
+  open_folder: Opið Resouce möppu
+  outdated: >-
+    Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað
+    rétt.
 save: Vista
 save_and_restart: Vista og endurræsa
 see_more: Sjáðu meira

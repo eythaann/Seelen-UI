@@ -100,38 +100,28 @@ general:
   date_format: Формат даты
   icon_pack:
     available: Доступные пакеты значков
-    label: Наборы иконок
-    open_folder: Откройте папку с пакетами иконок
     selected: Активные пакеты значков
   language: Язык
-  resource:
-    author: Автор
-    description: Описание
-    tags: Теги
   startup: Автозапуск при включении системы
   theme:
     available: Доступные темы
-    label: Темы
-    open_folder: Откройте папку с темами
     selected: Активные темы
-  wallpaper:
-    select: Выберите обои
 header:
   labels:
     developer: Разработчик
+    extras: Доп. информация
     general: Общее
     home: Главная страница
-    info: Информация
-    mods: Плагины и виджеты
+    iconpack: Пакеты иконок
     monitors: Мониторы
-    seelen_bar: Верхняя панель
-    seelen_rofi: Лаунчер приложений
-    seelen_wall: Менеджер обоев
-    seelen_weg: Панель задач
-    seelen_wm: Менеджер окон
+    plugin: Плагины
+    resources: Ресурсы
     shortcuts: Сочетания клавиш
+    soundpack: Звуковые пакеты
     specific_apps: Приложения
-    virtual_desk: Виртуальные рабочие столы
+    theme: Темы
+    wallpaper: Обои
+    widget: Виджеты
 home:
   new_resources: Новые ресурсы
 inherit: Наследовать
@@ -139,16 +129,18 @@ inProgress: В процессе...
 insert: Вставить
 loading: Загрузка...
 miscellaneous: Разное
-mods:
-  plugins: Плагины
-  target: Цель
-  widgets: Виджеты
 monitors_configurations:
   label: Монитор {{index}}
 more: Подробнее
 open: Открыть
 quit: Закрыть
 remove: Удалить
+resources:
+  app_outdated: Для корректной работы этого ресурса требуется более новая версия Seelen UI.
+  open_folder: Откройте папку с ресурсами
+  outdated: >-
+    Этот ресурс был разработан для старой версии Seelen UI и может работать
+    некорректно.
 save: Сохранить
 save_and_restart: Сохранить и перезапустить
 see_more: См. подробнее

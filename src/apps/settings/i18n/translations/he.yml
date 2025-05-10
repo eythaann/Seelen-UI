@@ -96,38 +96,28 @@ general:
   date_format: פורמט תאריך
   icon_pack:
     available: חבילות אייקונים זמינות
-    label: חבילות אייקונים
-    open_folder: פתח את תיקיית חבילות אייקון
     selected: ערכות אייקונים פעילות
   language: שפה
-  resource:
-    author: מְחַבֵּר
-    description: תֵאוּר
-    tags: תגים
   startup: לרוץ בהפעלה?
   theme:
     available: ערכות נושא זמינות
-    label: ערכות נושא
-    open_folder: פתח את תיקיית הנושאים
     selected: ערכות נושא פעילות
-  wallpaper:
-    select: בחר טפט
 header:
   labels:
     developer: מפתח
+    extras: תוספות
     general: כללי
     home: בַּיִת
-    info: מֵידָע
-    mods: תוספים ווידג'טים
+    iconpack: חבילות אייקון
     monitors: צגים
-    seelen_bar: סרגל כלים מפואר
-    seelen_rofi: משגר אפליקציות
-    seelen_wall: מנהל טפטים
-    seelen_weg: שורת המזח/המשימות
-    seelen_wm: מנהל חלונות
+    plugin: תוספים
+    resources: אֶמְצָעִי
     shortcuts: קיצורי דרך
+    soundpack: חבילות סאונד
     specific_apps: אפליקציות ספציפיות
-    virtual_desk: שולחנות עבודה וירטואליים
+    theme: נושאים
+    wallpaper: טפטים
+    widget: ווידג'טים
 home:
   new_resources: משאבים חדשים
 inherit: לָרֶשֶׁת
@@ -135,16 +125,16 @@ inProgress: בתהליך...
 insert: לְהַכנִיס
 loading: טוען...
 miscellaneous: שונות
-mods:
-  plugins: תוספים
-  target: יַעַד
-  widgets: ווידג'טים
 monitors_configurations:
   label: צג {{index}}
 more: יוֹתֵר
 open: לִפְתוֹחַ
 quit: לְהַפְסִיק
 remove: לְהַסִיר
+resources:
+  app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
+  open_folder: פתח את התיקיה מחדש
+  outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.
 save: להציל
 save_and_restart: שמור והפעלה מחדש
 see_more: ראה עוד

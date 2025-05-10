@@ -12,9 +12,5 @@ export function ResourceText({ text }: Props) {
   if (typeof text === 'string') {
     return <span>{text}</span>;
   }
-  const text2 = text[language] || text['en'];
-  if (!text2) {
-    return null;
-  }
-  return <span>{text2}</span>;
+  return <span>{text[language] || text['en'] || 'null!?'}</span>;
 }

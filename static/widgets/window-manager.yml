@@ -1,1 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/widget.schema.json
 id: '@seelen/window-manager'
+icon: BsGrid1X2Fill
+metadata:
+  displayName:
+    en: Window Manager

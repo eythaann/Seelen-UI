@@ -98,38 +98,28 @@ general:
   date_format: تاریخ کی شکل
   icon_pack:
     available: دستیاب آئیکن پیک
-    label: آئیکن پیک
-    open_folder: آئیکن پیک فولڈر کھولیں
     selected: ایکٹو آئیکن پیک
   language: زبان
-  resource:
-    author: مصنف
-    description: تفصیل
-    tags: ٹیگز
   startup: اسٹارٹ اپ پر چلائیں؟
   theme:
     available: دستیاب تھیمز
-    label: تھیمز
-    open_folder: تھیمز فولڈر کھولیں
     selected: ایکٹو تھیمز
-  wallpaper:
-    select: وال پیپر منتخب کریں
 header:
   labels:
     developer: ڈویلپر
+    extras: ایکسٹرا
     general: جنرل
     home: گھر
-    info: معلومات
-    mods: پلگ انز اور وجیٹس
+    iconpack: آئیکن پیک
     monitors: مانیٹر
-    seelen_bar: فینسی ٹول بار
-    seelen_rofi: ایپ لانچر
-    seelen_wall: وال پیپر منیجر
-    seelen_weg: ٹاسک بار
-    seelen_wm: ونڈو مینیجر
+    plugin: پلگ ان
+    resources: وسائل
     shortcuts: شارٹ کٹ
+    soundpack: ساؤنڈ پیک
     specific_apps: مخصوص ایپس
-    virtual_desk: ورچوئل ڈیسک ٹاپس
+    theme: موضوعات
+    wallpaper: وال پیپر
+    widget: ویجٹ
 home:
   new_resources: نئے وسائل
 inherit: وراثت
@@ -137,16 +127,20 @@ inProgress: کام جاری ہے...
 insert: داخل کریں
 loading: لوڈنگ ...
 miscellaneous: متفرق
-mods:
-  plugins: پلگ ان
-  target: ہدف
-  widgets: ویجٹ
 monitors_configurations:
   label: مانیٹر {{انڈیکس}}
 more: زیادہ
 open: کھلا
 quit: چھوڑ دیں
 remove: ہٹا دیں
+resources:
+  app_outdated: >-
+    اس وسیلہ کے لئے مناسب طریقے سے کام کرنے کے لئے سیلین UI کا ایک نیا ورژن
+    درکار ہے۔
+  open_folder: ریزاؤس فولڈر کھولیں
+  outdated: >-
+    یہ وسیلہ سیلین UI کے پرانے ورژن کے لئے ڈیزائن کیا گیا تھا اور ہوسکتا ہے کہ
+    وہ صحیح طریقے سے کام نہ کرے۔
 save: محفوظ کریں
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
 see_more: مزید دیکھیں

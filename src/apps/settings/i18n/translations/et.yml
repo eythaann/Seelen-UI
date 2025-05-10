@@ -97,38 +97,28 @@ general:
   date_format: Kuupäeva vorming
   icon_pack:
     available: Saadaval ikoonipaketid
-    label: Ikoonipakid
-    open_folder: Avage ikoonipakettide kaust
     selected: Aktiivsed ikoonipaketid
   language: Keel
-  resource:
-    author: Autor
-    description: Kirjeldus
-    tags: Sildid
   startup: Kas joosta startup?
   theme:
     available: Saadaolevad teemad
-    label: Teemad
-    open_folder: Avage teemade kaust
     selected: Aktiivsed teemad
-  wallpaper:
-    select: Valige tapeet
 header:
   labels:
     developer: Arendaja
+    extras: Lisad
     general: Üld-
     home: Kodu
-    info: Teave
-    mods: Pluginad ja vidinad
+    iconpack: Ikoonipaketid
     monitors: Monitorid
-    seelen_bar: Väljamõeldud tööriistariba
-    seelen_rofi: Rakenduse käivitaja
-    seelen_wall: Tapeedijuht
-    seelen_weg: Dokk/ülesanderiba
-    seelen_wm: Aknahaldur
+    plugin: Plugins
+    resources: Ressursid
     shortcuts: Otseteed
+    soundpack: Helipaketid
     specific_apps: Konkreetsed rakendused
-    virtual_desk: Virtuaalsed töölauad
+    theme: Teemad
+    wallpaper: Taustapildid
+    widget: Vidinad
 home:
   new_resources: Uued ressursid
 inherit: Pärima
@@ -136,16 +126,18 @@ inProgress: Pooleli ...
 insert: Sisestama
 loading: Laadimine ...
 miscellaneous: Mitmesuguseid
-mods:
-  plugins: Pistikprogrammid
-  target: Sihtmärk
-  widgets: Vidinad
 monitors_configurations:
   label: Monitor {{indeks}}
 more: Rohkem
 open: Avatud
 quit: Loobuma
 remove: Eemaldama
+resources:
+  app_outdated: Selle ressursi korralikuks kasutamiseks on vaja Seelen UI uuemat versiooni.
+  open_folder: Avage ressursside kaust
+  outdated: >-
+    See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi
+    korralikult töötada.
 save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
 see_more: Vaata lähemalt

@@ -100,38 +100,28 @@ general:
   date_format: Ifomethi yosuku
   icon_pack:
     available: Amaphekhi esithonjana atholakalayo
-    label: I-Icon Packs
-    open_folder: Vula Icon Pack Folder
     selected: Amaphekhi Wesithonjana Asebenzayo
   language: Ulimi
-  resource:
-    author: Umbhali
-    description: Incazelo
-    tags: Omaka
   startup: Gijima ekuqaleni?
   theme:
     available: Izingqikithi Ezitholakalayo
-    label: Izindikimba
-    open_folder: Vula amafolda wezindikimba
     selected: Izindikimba ezisebenzayo
-  wallpaper:
-    select: Khetha iphepha lokunamathisela odongeni
 header:
   labels:
     developer: Konjiniyela
+    extras: Okungatha
     general: Jwayelekile
     home: Ikhaya
-    info: Ulwazi
-    mods: Ama-plugin namawijethi
+    iconpack: I-Icon Packs
     monitors: Ukuqapha
-    seelen_bar: I-Fancy Toolbar
-    seelen_rofi: Isiqalisi sohlelo lokusebenza
-    seelen_wall: Umphathi Wallpaper
-    seelen_weg: Dock / taskbar
-    seelen_wm: Imenenja yewindows
+    plugin: Amaplithi
+    resources: Izinsizakusebenza
     shortcuts: Amashoshothi
+    soundpack: Amaphakethe omsindo
     specific_apps: Izinhlelo zokusebenza ezikhethekile
-    virtual_desk: Ama-Virtual Desktops
+    theme: Izingqizi
+    wallpaper: Ama-Wallpaper
+    widget: Amawijethi
 home:
   new_resources: Izinsizakusebenza ezintsha
 inherit: Dla ifa
@@ -139,16 +129,18 @@ inProgress: Kuyaqhubeka...
 insert: Faka
 loading: Iyalayisha ...
 miscellaneous: '-Nhlobonhlobo'
-mods:
-  plugins: Amaplithi
-  target: Okuqondiwe
-  widgets: Amawijethi
 monitors_configurations:
   label: Qapha {{inkomba}}
 more: Okuningi
 open: Vula
 quit: Yeka
 remove: Susa
+resources:
+  app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
+  open_folder: Ifolda evulekile yokuvulwa kabusha
+  outdated: >-
+    Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze
+    kahle.
 save: Hlenga
 save_and_restart: Gcina futhi Qalisa kabusha
 see_more: Buka Okuningi

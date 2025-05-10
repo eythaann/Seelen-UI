@@ -7,20 +7,24 @@ import cs from './infra.module.css';
 import { RoutePath } from '../../components/navigation/routes';
 import { ResourceKindIcon } from './common';
 import { IconPacksView } from './IconPacks';
+import { PluginsView } from './Plugins';
+import { SoundPacksView } from './SoundPacks';
 import { ThemesView } from './Themes';
+import { WallpapersView } from './Wallpapers';
+import { WidgetsView } from './Widgets';
 
-const kinds: ResourceKind[] = ['Theme', 'Plugin', 'Widget', 'Wallpaper', 'IconPack', 'SoundPack'];
+const kinds: ResourceKind[] = ['Theme', 'Plugin', 'Widget', 'IconPack', 'Wallpaper', 'SoundPack'];
 
 export function ResourcesView() {
   return (
     <Routes>
       <Route index Component={KindSelector} />
       <Route path="theme" Component={ThemesView} />
-      <Route path="plugin" Component={Todo} />
-      <Route path="widget" Component={Todo} />
-      <Route path="wallpaper" Component={Todo} />
+      <Route path="plugin" Component={PluginsView} />
+      <Route path="widget" Component={WidgetsView} />
+      <Route path="wallpaper" Component={WallpapersView} />
       <Route path="iconpack" Component={IconPacksView} />
-      <Route path="soundpack" Component={Todo} />
+      <Route path="soundpack" Component={SoundPacksView} />
     </Routes>
   );
 }
@@ -38,8 +42,4 @@ function KindSelector() {
       ))}
     </div>
   );
-}
-
-function Todo() {
-  return <div>Todo</div>;
 }

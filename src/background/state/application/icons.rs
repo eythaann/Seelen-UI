@@ -235,6 +235,7 @@ impl FullState {
                 }
             };
 
+            icon_pack.metadata.bundled = entry.file_name() == "system";
             icon_pack.metadata.filename = entry.file_name().to_string_lossy().to_string();
             icon_packs_manager
                 .0

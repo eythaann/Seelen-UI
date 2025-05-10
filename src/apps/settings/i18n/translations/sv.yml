@@ -98,38 +98,28 @@ general:
   date_format: Datumformat
   icon_pack:
     available: Tillgängliga ikonpaket
-    label: Ikonförpackningar
-    open_folder: Öppna mappen Icon Packs
     selected: Aktiva ikonpaket
   language: Språk
-  resource:
-    author: Författare
-    description: Beskrivning
-    tags: Taggar
   startup: Köras vid start?
   theme:
     available: Tillgängliga teman
-    label: teman
-    open_folder: Öppna mappen med teman
     selected: Aktiva teman
-  wallpaper:
-    select: Välj tapeter
 header:
   labels:
     developer: Utvecklare
+    extras: Extramaterial
     general: Allmän
     home: Hem
-    info: Information
-    mods: Plugins och widgets
+    iconpack: Ikonpaket
     monitors: Monitorer
-    seelen_bar: Fint verktygsfält
-    seelen_rofi: Appstart
-    seelen_wall: Tapetchef
-    seelen_weg: Docka/arbetsfält
-    seelen_wm: Fönsterchef
+    plugin: Plugins
+    resources: Resurser
     shortcuts: Genvägar
+    soundpack: Ljudpaket
     specific_apps: Specifika appar
-    virtual_desk: Virtuella stationära datorer
+    theme: Teman
+    wallpaper: Bakgrundsbilder
+    widget: Widgetar
 home:
   new_resources: Nya resurser
 inherit: Ärva
@@ -137,16 +127,18 @@ inProgress: Pågående...
 insert: Infoga
 loading: Läser in...
 miscellaneous: Diverse
-mods:
-  plugins: Plugins
-  target: Mål
-  widgets: Widget
 monitors_configurations:
   label: Monitor {{index}}
 more: Mer
 open: Öppen
 quit: Sluta
 remove: Ta bort
+resources:
+  app_outdated: Denna resurs kräver en nyare version av Seelen UI för att fungera korrekt.
+  open_folder: Öppna resursmappen
+  outdated: >-
+    Den här resursen är utformad för en äldre version av Seelen UI och kanske
+    inte fungerar korrekt.
 save: Spara
 save_and_restart: Spara och starta om
 see_more: Se mer

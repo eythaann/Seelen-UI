@@ -99,38 +99,28 @@ general:
   date_format: Огноо формат
   icon_pack:
     available: Боломжтой Icon багцууд
-    label: Icon багц
-    open_folder: Нээлттэй ICON багц хавтас хавтас
     selected: Идэвхтэй дүрсний багцууд
   language: Хэл
-  resource:
-    author: Зохиогч
-    description: Тодорхойлолт
-    tags: Шошго
   startup: Эхлэх үед гүйх үү?
   theme:
     available: Боломжтой загварууд
-    label: Сэдвүүд
-    open_folder: Нээлттэй сэдэвчилсэн хавтас
     selected: Идэвхтэй сэдэв
-  wallpaper:
-    select: Ханын зураг сонгох
 header:
   labels:
     developer: Хөгжчин
+    extras: Мөр өгөх
     general: Жанжин
     home: Гэр
-    info: Мэдээлэл
-    mods: Plugins & Widgets
+    iconpack: Icon багц
     monitors: Хэлэлт авагч
-    seelen_bar: Уран зөгнөлийн багаж самбар
-    seelen_rofi: Програм идэвхжсэн
-    seelen_wall: Хувьцааны төлөөлөгчний менежер
-    seelen_weg: Док / Taskbar
-    seelen_wm: Цонхны менежер
+    plugin: Гарын үсэг
+    resources: Ажил
     shortcuts: Хэв хаягдал
+    soundpack: Дууны багц
     specific_apps: ТУСГАЙ АЖИЛЛАГАА
-    virtual_desk: Виржопын ширээний гутал
+    theme: Сэдэвүүд
+    wallpaper: Ханын цаас
+    widget: Аялалын мэдээ
 home:
   new_resources: Шинэ нөөц
 inherit: Удамших
@@ -138,16 +128,18 @@ inProgress: Явагдаж байна ...
 insert: Оруулах
 loading: Ачаалах ...
 miscellaneous: Олон төрлийн
-mods:
-  plugins: Гарын үсэг
-  target: Даалгавар
-  widgets: Аялалын мэдээ
 monitors_configurations:
   label: Хяналт {{индекс}}
 more: Илүү / их олон
 open: Нээлттэй
 quit: Орхих
 remove: Зөөх
+resources:
+  app_outdated: Энэ нөөц нь Seelen Ui-ийн шинэ хувилбарыг зөв ажиллахыг шаарддаг.
+  open_folder: Нээлттэй Resoucce хавтас
+  outdated: >-
+    Энэ нөөц нь Seelen Ui-ийн хуучин хувилбарт зориулагдсан бөгөөд зөв
+    ажиллахгүй байж магадгүй юм.
 save: Аврах
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
 see_more: Дэлгэрэнгүйг үзэх

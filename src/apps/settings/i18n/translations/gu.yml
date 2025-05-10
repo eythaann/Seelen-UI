@@ -98,38 +98,28 @@ general:
   date_format: તારીખ ફોર્મેટ
   icon_pack:
     available: ઉપલબ્ધ આઇકન પેક
-    label: ચિહ્ન
-    open_folder: આઇકોન પેક ફોલ્ડર ખોલો
     selected: સક્રિય આઇકન પેક્સ
   language: ભાષા
-  resource:
-    author: લેખક
-    description: વર્ણન
-    tags: ટૅગ્સ
   startup: સ્ટાર્ટઅપ પર ચલાવો?
   theme:
     available: ઉપલબ્ધ થીમ્સ
-    label: થીમ્સ
-    open_folder: થીમ્સ ફોલ્ડર ખોલો
     selected: સક્રિય થીમ્સ
-  wallpaper:
-    select: વ wallp લપેપર પસંદ કરો
 header:
   labels:
     developer: વિકાસકર્તા
+    extras: વધારાની રકમ
     general: જનરલ
     home: ઘર
-    info: માહિતી
-    mods: પ્લગઇન્સ અને વિજેટ્સ
+    iconpack: ચિહ્ન
     monitors: મોનિટર
-    seelen_bar: ફેન્સી ટૂલબાર
-    seelen_rofi: હાથ
-    seelen_wall: વ wallpaper લપેપર મેનેજર
-    seelen_weg: ડોક/ટાસ્કબાર
-    seelen_wm: વિન્ડો મેનેજર
+    plugin: તૃણ
+    resources: સાધનો
     shortcuts: શૉર્ટકટ્સ
+    soundpack: સાચા પેક
     specific_apps: વિશિષ્ટ એપ્લિકેશનો
-    virtual_desk: વર્ચ્યુઅલ ડેસ્કટ .પ
+    theme: થીમ
+    wallpaper: વ wallpapers લપેપર્સ
+    widget: વિજેટો
 home:
   new_resources: નવી સાધનો
 inherit: વારસો મેળવવો
@@ -137,16 +127,18 @@ inProgress: ચાલુ છે...
 insert: દાખલ કરવું
 loading: લોડ કરી રહ્યું છે...
 miscellaneous: પરચુરણ
-mods:
-  plugins: તૃણ
-  target: નિશાન
-  widgets: વિજેટો
 monitors_configurations:
   label: મોનિટર કરો {{અનુક્રમણિકા}}
 more: વધારે
 open: ખુલ્લા
 quit: છોડો
 remove: દૂર કરવું
+resources:
+  app_outdated: આ સંસાધનને યોગ્ય રીતે કાર્ય કરવા માટે સીલેન યુઆઈનું નવું સંસ્કરણ જરૂરી છે.
+  open_folder: રિસોસ ફોલ્ડર ખોલો
+  outdated: >-
+    આ સંસાધન સીલેન UI ના જૂના સંસ્કરણ માટે બનાવવામાં આવ્યું હતું અને કદાચ યોગ્ય
+    રીતે કાર્ય કરશે નહીં.
 save: સાચવો
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
 see_more: વધુ જુઓ

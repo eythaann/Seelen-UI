@@ -100,38 +100,28 @@ general:
   date_format: Datumsformat
   icon_pack:
     available: Verfügbare Icon-Pakete
-    label: Icon Packs
-    open_folder: Ordner "Icon Packs" öffnen
     selected: Aktive Icon-Pakete
   language: Sprache
-  resource:
-    author: Autor
-    description: Beschreibung
-    tags: Schlagworte
   startup: Beim Hochfahren ausführen?
   theme:
     available: Verfügbare Themen
-    label: Themen
-    open_folder: Ordner "Themen" öffnen
     selected: Aktive Themen
-  wallpaper:
-    select: Wählen Sie Hintergrundbild
 header:
   labels:
     developer: Entwickler
+    extras: Extras
     general: Allgemein
     home: Home
-    info: Information
-    mods: Plugins und Widgets
+    iconpack: Icon Packs
     monitors: Monitore
-    seelen_bar: Werkzeugleiste
-    seelen_rofi: App Launcher
-    seelen_wall: Tapetenmanager
-    seelen_weg: Dock/Taskleiste
-    seelen_wm: Tiling Window Manager
+    plugin: Plugins
+    resources: Ressourcen
     shortcuts: Kurzbefehle
+    soundpack: Sound Packs
     specific_apps: Spezifische Apps
-    virtual_desk: Virtuelle Desktops
+    theme: Themen
+    wallpaper: Bildschirmhintergründe
+    widget: Widgets
 home:
   new_resources: Neue Ressourcen
 inherit: Erben
@@ -139,16 +129,20 @@ inProgress: In Bearbeitung...
 insert: Einfügen
 loading: Am Laden...
 miscellaneous: Verschiedenes
-mods:
-  plugins: Plugins
-  target: Ziel
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Mehr
 open: Öffnen
 quit: Beenden
 remove: Entfernen
+resources:
+  app_outdated: >-
+    Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
+    funktionieren.
+  open_folder: Ordner "Ressourcen" öffnen
+  outdated: >-
+    Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und
+    funktioniert möglicherweise nicht richtig.
 save: Speichern
 save_and_restart: Speichern & neu starten
 see_more: Mehr sehen

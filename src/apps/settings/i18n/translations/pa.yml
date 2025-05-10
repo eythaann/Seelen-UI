@@ -94,38 +94,28 @@ general:
   date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
   icon_pack:
     available: ਉਪਲਬਧ ਆਈਕਨ ਪੈਕ
-    label: ਆਈਕਾਨ ਪੈਕ
-    open_folder: ਆਈਕਾਨ ਪੈਕ ਫੋਲਡਰ
     selected: ਐਕਟਿਵ ਆਈਕਨ ਪੈਕ
   language: ਭਾਸ਼ਾ
-  resource:
-    author: ਲੇਖਕ
-    description: ਵਰਣਨ
-    tags: ਟੈਗਸ
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
   theme:
     available: ਉਪਲਬਧ ਥੀਮ
-    label: ਥੀਮ
-    open_folder: ਓਪਨ ਥੀਮ ਫੋਲਡਰ
     selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ
-  wallpaper:
-    select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ
 header:
   labels:
     developer: ਵਿਕਾਸਕਾਰ
+    extras: ਵਾਧੂ
     general: ਜਨਰਲ
     home: ਘਰ
-    info: ਜਾਣਕਾਰੀ
-    mods: ਪਲੱਗਇਨ ਅਤੇ ਵਿਜੇਟਸ
+    iconpack: ਆਈਕਾਨ ਪੈਕ
     monitors: ਨਿਗਰਾਨੀ ਕਰਦਾ ਹੈ
-    seelen_bar: ਫੈਂਸੀ ਟੂਲਬਾਰ
-    seelen_rofi: ਐਪ ਲਾਂਚਰ
-    seelen_wall: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ
-    seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
-    seelen_wm: ਵਿੰਡੋ ਮੈਨੇਜਰ
+    plugin: ਪਲੱਗਇਨ
+    resources: ਸਰੋਤ
     shortcuts: ਸ਼ਾਰਟਕੱਟ
+    soundpack: ਧੁਨੀ ਪੈਕ
     specific_apps: ਖਾਸ ਐਪਸ
-    virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
+    theme: ਥੀਮ
+    wallpaper: ਵਾਲਪੇਪਰ
+    widget: ਵਿਜੇਟਸ
 home:
   new_resources: ਨਵੇਂ ਸਰੋਤ
 inherit: ਵਿਰਾਸਤ
@@ -133,16 +123,18 @@ inProgress: ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ...
 insert: ਸੰਮਿਲਿਤ ਕਰੋ
 loading: ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 miscellaneous: ਫੁਟਕਲ
-mods:
-  plugins: ਪਲੱਗਇਨ
-  target: ਟੀਚਾ
-  widgets: ਵਿਜੇਟਸ
 monitors_configurations:
   label: ਨਿਗਰਾਨੀ {{ਇੰਡੈਕਸ}
 more: ਹੋਰ
 open: ਖੋਲ੍ਹੋ
 quit: ਛੱਡੋ
 remove: ਹਟਾਓ
+resources:
+  app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
+  open_folder: ਰੀਜਨਜ਼ ਫੋਲਡਰ ਖੋਲ੍ਹੋ
+  outdated: >-
+    ਇਹ ਸਰੋਤ ਸੰਸਥ UI ਦੇ ਪੁਰਾਣੇ ਸੰਸਕਰਣ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਸੀ ਅਤੇ ਸ਼ਾਇਦ ਸਹੀ ਤਰ੍ਹਾਂ
+    ਕੰਮ ਨਾ ਕਰੇ.
 save: ਸੇਵ ਕਰੋ
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
 see_more: ਹੋਰ ਦੇਖੋ

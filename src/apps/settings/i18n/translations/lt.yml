@@ -98,38 +98,28 @@ general:
   date_format: Datos formatas
   icon_pack:
     available: Galimi piktogramų paketai
-    label: ICON PACKS
-    open_folder: Atidarykite piktogramų paketų aplanką
     selected: Aktyvūs piktogramų paketai
   language: Kalba
-  resource:
-    author: Autorius
-    description: Aprašymas
-    tags: Žymos
   startup: Paleisti paleidimą?
   theme:
     available: Galimos temos
-    label: Temos
-    open_folder: Atidarykite temų aplanką
     selected: Aktyvios temos
-  wallpaper:
-    select: Pasirinkite tapetai
 header:
   labels:
     developer: Programuotojas
+    extras: Priedai
     general: Bendrasis
     home: Namai
-    info: Informacija
-    mods: Papildiniai ir valdikliai
+    iconpack: Ikonų paketai
     monitors: Monitoriai
-    seelen_bar: Išgalvota įrankių juosta
-    seelen_rofi: Programos paleidimo priemonė
-    seelen_wall: Tapetų vadovas
-    seelen_weg: „Dock“/„Taskbar“
-    seelen_wm: Lango vadovas
+    plugin: Įskiepiai
+    resources: Ištekliai
     shortcuts: Nuorodos
+    soundpack: Garso paketai
     specific_apps: Konkrečios programos
-    virtual_desk: Virtualūs staliniai kompiuteriai
+    theme: Temos
+    wallpaper: Užsklandos
+    widget: Valdikliai
 home:
   new_resources: Nauji ištekliai
 inherit: Paveldėti
@@ -137,16 +127,18 @@ inProgress: Vyksta ...
 insert: Įterpti
 loading: Pakrovimas ...
 miscellaneous: Įvairūs
-mods:
-  plugins: Papildiniai
-  target: Taikinys
-  widgets: Valdikliai
 monitors_configurations:
   label: Monitorius {{index}}
 more: Daugiau
 open: Atviras
 quit: Mesti
 remove: Pašalinti
+resources:
+  app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
+  open_folder: Atidarykite išteklių aplanką
+  outdated: >-
+    Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
+    tinkamai.
 save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 see_more: Žiūrėti daugiau

@@ -100,38 +100,28 @@ general:
   date_format: Formatul datei
   icon_pack:
     available: Pachete de pictograme disponibile
-    label: Pachete de pictograme
-    open_folder: Deschideți dosarul icon packs
     selected: Pachete de pictograme active
   language: Limba
-  resource:
-    author: Autor
-    description: Descriere
-    tags: Etichete
   startup: Rulați la pornire?
   theme:
     available: Teme disponibile
-    label: Teme
-    open_folder: Deschideți folderul themes
     selected: Teme active
-  wallpaper:
-    select: Selectați tapet
 header:
   labels:
     developer: Dezvoltator
+    extras: Extras
     general: General
     home: Acasă
-    info: informație
-    mods: Pluginuri și widget-uri
+    iconpack: Pachete de pictograme
     monitors: Monitoare
-    seelen_bar: Bara de instrumente fantezistă
-    seelen_rofi: Lansator de aplicații
-    seelen_wall: Manager de tapet
-    seelen_weg: Dock/Bara de activități
-    seelen_wm: Manager de ferestre
+    plugin: Plugin-uri
+    resources: Resurse
     shortcuts: Comitete rapide
+    soundpack: Pachete de sunet
     specific_apps: Aplicații specifice
-    virtual_desk: Desktop -uri virtuale
+    theme: Teme
+    wallpaper: Imagini de fundal
+    widget: Widget-uri
 home:
   new_resources: Resurse noi
 inherit: Moşteni
@@ -139,16 +129,20 @@ inProgress: În curs...
 insert: Introduce
 loading: Se încarcă...
 miscellaneous: Diverse
-mods:
-  plugins: Pluginuri
-  target: Ţintă
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Mai mult
 open: Deschis
 quit: Părăsi
 remove: Elimina
+resources:
+  app_outdated: >-
+    Această resursă necesită o versiune mai recentă a Seelen UI pentru a
+    funcționa corect.
+  open_folder: Deschideți folderul Resurse
+  outdated: >-
+    Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și
+    este posibil să nu funcționeze corect.
 save: Salvați
 save_and_restart: Salvați și reporniți
 see_more: A se vedea mai mult

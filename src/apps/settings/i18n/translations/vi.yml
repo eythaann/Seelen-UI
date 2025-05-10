@@ -99,38 +99,28 @@ general:
   date_format: Định dạng ngày
   icon_pack:
     available: Gói biểu tượng có sẵn
-    label: Gói biểu tượng
-    open_folder: Mở thư mục gói biểu tượng
     selected: Gói biểu tượng hoạt động
   language: Ngôn ngữ
-  resource:
-    author: Tác giả
-    description: Sự miêu tả
-    tags: Thẻ
   startup: Chạy khi khởi động?
   theme:
     available: Chủ đề có sẵn
-    label: Chủ đề
-    open_folder: Mở thư mục chủ đề
     selected: Chủ đề đang hoạt động
-  wallpaper:
-    select: Chọn hình nền
 header:
   labels:
     developer: Nhà phát triển
+    extras: Bổ sung
     general: Tổng quan
     home: Trang chủ
-    info: Thông tin
-    mods: Plugin & Widget
+    iconpack: Gói biểu tượng
     monitors: Màn hình
-    seelen_bar: Thanh công cụ ưa thích
-    seelen_rofi: Ứng dụng Launcher
-    seelen_wall: Quản lý hình nền
-    seelen_weg: Dock/Thanh tác vụ
-    seelen_wm: Quản lý cửa sổ
+    plugin: Plugin
+    resources: Tài nguyên
     shortcuts: Phím tắt
+    soundpack: Gói âm thanh
     specific_apps: Ứng dụng cụ thể
-    virtual_desk: Máy tính để bàn ảo
+    theme: Chủ đề
+    wallpaper: Hình nền
+    widget: Widgets
 home:
   new_resources: Tài nguyên mới
 inherit: Kế thừa
@@ -138,16 +128,18 @@ inProgress: Trong tiến trình...
 insert: Chèn
 loading: Đang tải...
 miscellaneous: Linh tinh
-mods:
-  plugins: Plugin
-  target: Mục tiêu
-  widgets: Widgets
 monitors_configurations:
   label: Màn hình {{index}}
 more: Hơn
 open: Mở
 quit: Từ bỏ
 remove: Di dời
+resources:
+  app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
+  open_folder: Mở thư mục Resouce
+  outdated: >-
+    Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không
+    hoạt động đúng.
 save: Cứu
 save_and_restart: Lưu & Khởi động lại
 see_more: Xem thêm

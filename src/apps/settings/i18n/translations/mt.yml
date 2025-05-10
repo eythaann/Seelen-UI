@@ -100,38 +100,28 @@ general:
   date_format: Format tad-data
   icon_pack:
     available: Pakketti ta' Ikoni Disponibbli
-    label: Pakketti tal-ikona
-    open_folder: Folder tal-pakketti tal-ikona miftuħa
     selected: Pakketti tal-Ikoni Attivi
   language: Lingwa
-  resource:
-    author: Awtur
-    description: Deskrizzjoni
-    tags: Tikketti
   startup: Mexxi fuq l-istartjar?
   theme:
     available: Temi Disponibbli
-    label: Temi
-    open_folder: Folder tat-Temi Iftaħ
     selected: Temi Attivi
-  wallpaper:
-    select: Agħżel Wallpaper
 header:
   labels:
     developer: Żviluppatur
+    extras: Ekstras
     general: Ġenerali
     home: Id-dar
-    info: Informazzjoni
-    mods: Plugins u Widgets
+    iconpack: Pakketti tal-ikona
     monitors: Monitors
-    seelen_bar: Toolbar tal-Fancy
-    seelen_rofi: APP Lancher
-    seelen_wall: Maniġer tal-Wallpaper
-    seelen_weg: Dock / Taskbar
-    seelen_wm: Window Manager
+    plugin: Plugins
+    resources: Riżorsi
     shortcuts: Shortcuts
+    soundpack: Pakketti tal-ħoss
     specific_apps: Applikazzjonijiet speċifiċi
-    virtual_desk: Desktops virtwali
+    theme: Temi
+    wallpaper: Wallpapers
+    widget: Widgets
 home:
   new_resources: Riżorsi ġodda
 inherit: Jirtu
@@ -139,16 +129,18 @@ inProgress: Fil-progress...
 insert: Daħħal
 loading: Tagħbija...
 miscellaneous: Varji
-mods:
-  plugins: Plugins
-  target: Mira
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{indiċi}}
 more: Aktar
 open: Miftuħa
 quit: Nieqaf
 remove: Neħħi
+resources:
+  app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
+  open_folder: Folder ta 'resouce miftuħ
+  outdated: >-
+    Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u
+    tista' ma taħdimx sew.
 save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
 see_more: Ara aktar

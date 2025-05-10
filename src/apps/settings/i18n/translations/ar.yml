@@ -96,38 +96,28 @@ general:
   date_format: تنسيق التاريخ
   icon_pack:
     available: حزم الأيقونات المتوفرة
-    label: حزم الأيقونة
-    open_folder: افتح مجلد حزم الأيقونات
     selected: حزم الأيقونات النشطة
   language: اللغات
-  resource:
-    author: مؤلف
-    description: وصف
-    tags: العلامات
   startup: تفعيل عند تشغيل الكمبيوتر؟
   theme:
     available: السمات المتاحة
-    label: المواضيع
-    open_folder: افتح مجلد السمات
     selected: المواضيع النشطة
-  wallpaper:
-    select: حدد الخلفية
 header:
   labels:
     developer: المطور
+    extras: الإضافات
     general: عام
     home: المنزل
-    info: معلومات
-    mods: الإضافات
+    iconpack: حزم الأيقونات
     monitors: الشاشات
-    seelen_bar: شريط الأدوات
-    seelen_rofi: مشغل التطبيقات
-    seelen_wall: مدير الخلفيات
-    seelen_weg: دائرة المهام/شريط المهام
-    seelen_wm: مدير النوافذ
+    plugin: المكونات الإضافية
+    resources: الموارد
     shortcuts: الاختصارات
+    soundpack: حزم الصوت
     specific_apps: تطبيقات محددة
-    virtual_desk: الكمبيوتر الافتراضي
+    theme: الموضوعات
+    wallpaper: خلفيات
+    widget: الأدوات
 home:
   new_resources: الموارد الجديدة
 inherit: ورث
@@ -135,16 +125,16 @@ inProgress: قيد التنفيذ...
 insert: أدخل
 loading: جاري التحميل...
 miscellaneous: متنوع
-mods:
-  plugins: الإضافات
-  target: الهدف
-  widgets: الأيقونات
 monitors_configurations:
   label: شاشة {{index}}
 more: أكثر
 open: فتح
 quit: الخروج
 remove: الحذف
+resources:
+  app_outdated: يتطلب هذا المورد إصدارًا أحدث من Seelen UI ليعمل بشكل صحيح.
+  open_folder: فتح مجلد الموارد المفتوحة
+  outdated: تم تصميم هذا المورد لإصدار أقدم من Seelen UI وقد لا يعمل بشكل صحيح.
 save: حفظ
 save_and_restart: حفظ وإعد التشغيل
 see_more: شاهد المزيد

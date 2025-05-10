@@ -98,38 +98,28 @@ general:
   date_format: Шакли сана
   icon_pack:
     available: Бастаҳои нишонаи дастрас
-    label: ICon бастаҳои
-    open_folder: Папкаи бастаи тасвирӣ
     selected: Бастаҳои нишонаи фаъол
   language: Забон
-  resource:
-    author: Муаллиф
-    description: Тавсифи
-    tags: Тегҳо
   startup: Оғози кор?
   theme:
     available: Мавзӯъҳои дастрас
-    label: Мавзӯъҳо
-    open_folder: Папкаи мавзӯъҳои кушод
     selected: Мавзӯъҳои фаъол
-  wallpaper:
-    select: Обер-ро интихоб кунед
 header:
   labels:
     developer: Таҳиякунанда
+    extras: Иловаҳо
     general: Генерал
     home: Хона
-    info: Ахбор
-    mods: Плагинҳо ва виджетҳо
+    iconpack: ICon бастаҳои
     monitors: Мониторҳо
-    seelen_bar: Панели футбол
-    seelen_rofi: Барномасоз
-    seelen_wall: Обои Менеҷери
-    seelen_weg: Dock / супоришҳо
-    seelen_wm: Менеҷери тиреза
+    plugin: Плагинҳо
+    resources: Захираҳо
     shortcuts: Миёнбурҳо
+    soundpack: Пойафзолҳои садо
     specific_apps: Барномаҳои мушаххас
-    virtual_desk: Мизи кории виртуалӣ
+    theme: Мавзӯъҳо
+    wallpaper: Обои обу
+    widget: Виджетҳо
 home:
   new_resources: Захираҳои нав
 inherit: Мерос гирифтан
@@ -137,16 +127,18 @@ inProgress: Дар ҷараён...
 insert: Илова кардан
 loading: Боркунӣ ...
 miscellaneous: Дигар
-mods:
-  plugins: Плагинҳо
-  target: Мащсад
-  widgets: Виджетҳо
 monitors_configurations:
   label: Монитор {Индекс}}
 more: Бештар
 open: Кушодан
 quit: Баромадан
 remove: Дур кардан
+resources:
+  app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.
+  open_folder: Папкаи кушода
+  outdated: >-
+    Ин манбаъ барои нусхаи кӯҳна аз YELEINS тарҳрезӣ шудааст ва метавонад дуруст
+    кор кунад.
 save: Пул захира кардан
 save_and_restart: Наҷот ва бозоғоз
 see_more: Бештар нигаред

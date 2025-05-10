@@ -98,38 +98,28 @@ general:
   date_format: Tarih Biçimi
   icon_pack:
     available: Mevcut Simge Paketleri
-    label: İkon Paketleri
-    open_folder: Simge paketleri klasörünü açın
     selected: Aktif Simge Paketleri
   language: Dil
-  resource:
-    author: Yazar
-    description: Tanım
-    tags: Etiketler
   startup: Başlangıçta çalışsın mı?
   theme:
     available: Mevcut Temalar
-    label: Temalar
-    open_folder: Temalar klasörünü açın
     selected: Aktif Temalar
-  wallpaper:
-    select: Duvar Kağıdı Seç
 header:
   labels:
     developer: Geliştirici
+    extras: Ekstralar
     general: Genel
     home: Ana Sayfa
-    info: Bilgi
-    mods: Eklentiler ve Widget'lar
+    iconpack: Simge Paketleri
     monitors: Monitörler
-    seelen_bar: Şık Araç Çubuğu
-    seelen_rofi: Uygulama Başlatıcısı
-    seelen_wall: Duvar Kağıdı Yöneticisi
-    seelen_weg: Dock/Görev Çubuğu
-    seelen_wm: Pencere Yöneticisi
+    plugin: Eklentiler
+    resources: Kaynaklar
     shortcuts: Kısayollar
+    soundpack: Ses Paketleri
     specific_apps: Belirli Uygulamalar
-    virtual_desk: Sanal Masaüstleri
+    theme: Temalar
+    wallpaper: Duvar Kağıtları
+    widget: Widget'lar
 home:
   new_resources: Yeni Kaynaklar
 inherit: Devral
@@ -137,16 +127,20 @@ inProgress: Devam Ediyor...
 insert: Ekle
 loading: Yükleniyor...
 miscellaneous: Çeşitli
-mods:
-  plugins: Eklentiler
-  target: Hedef
-  widgets: Widget'lar
 monitors_configurations:
   label: Monitör {{index}}
 more: Daha Fazla
 open: Aç
 quit: Çıkış
 remove: Kaldırmak
+resources:
+  app_outdated: >-
+    Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
+    gerekir.
+  open_folder: Resouce klasörünü açın
+  outdated: >-
+    Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün
+    çalışmayabilir.
 save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 see_more: Daha Fazla Gör

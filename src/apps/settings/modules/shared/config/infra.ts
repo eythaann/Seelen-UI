@@ -1,7 +1,7 @@
 import { path } from '@tauri-apps/api';
 
 export const EnvConfig = {
-  version: process.env.packageVersion,
+  version: process.env.packageVersion!,
 };
 
 export async function resolveDataPath(...sub: string[]) {

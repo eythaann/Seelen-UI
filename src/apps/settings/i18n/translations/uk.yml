@@ -98,38 +98,28 @@ general:
   date_format: Формат дати та часу
   icon_pack:
     available: Доступні пакети іконок
-    label: Пакети іконок
-    open_folder: Відкрийте папку з пакетами іконок
     selected: Активні пакети іконки
   language: Мова
-  resource:
-    author: Автор
-    description: Опис
-    tags: Теги
   startup: Запускати разом з Windows?
   theme:
     available: Доступні теми
-    label: Теми
-    open_folder: Відкрийте папку з темами
     selected: Активні теми
-  wallpaper:
-    select: Виберіть шпалери
 header:
   labels:
     developer: Інструменти розробника
+    extras: Додатково
     general: Загальні налаштування
     home: Домашня сторінка
-    info: Інформація
-    mods: Плагіни та віджети
+    iconpack: Пакети іконок
     monitors: Монітори
-    seelen_bar: Панель інструментів
-    seelen_rofi: Швидкий запуск
-    seelen_wall: Менеджер шпалер
-    seelen_weg: Панель завдань
-    seelen_wm: Менеджер вікон
+    plugin: Плагіни
+    resources: Ресурси
     shortcuts: Сполучення клавіш
+    soundpack: Звукові пакети
     specific_apps: Конкретні програми
-    virtual_desk: Віртуальні робочі столи
+    theme: Теми
+    wallpaper: Шпалери
+    widget: Віджети
 home:
   new_resources: Нові ресурси
 inherit: Успадкувати
@@ -137,16 +127,18 @@ inProgress: В процесі...
 insert: Вставити
 loading: Завантаження...
 miscellaneous: Різне
-mods:
-  plugins: Плагіни
-  target: Джерело
-  widgets: Віджети
 monitors_configurations:
   label: Монітор {{index}}
 more: Більше
 open: Відкрити
 quit: Вийти
 remove: Видалити
+resources:
+  app_outdated: Для коректної роботи цього ресурсу потрібна новіша версія інтерфейсу Seelen.
+  open_folder: Відкрийте папку resouce
+  outdated: >-
+    Цей ресурс був розроблений для старої версії інтерфейсу Seelen і може не
+    працювати належним чином.
 save: Зберегти
 save_and_restart: Зберегти та перезапустити
 see_more: Побачити більше

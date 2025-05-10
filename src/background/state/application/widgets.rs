@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::path::Path;
 
 use seelen_core::{handlers::SeelenEvent, state::Widget};
 use tauri::Emitter;
@@ -13,12 +13,12 @@ impl FullState {
         Ok(())
     }
 
-    fn load_widget_from_file(path: PathBuf) -> Result<Widget> {
-        Ok(serde_yaml::from_str(&std::fs::read_to_string(&path)?)?)
+    fn load_widget_from_file(path: &Path) -> Result<Widget> {
+        Ok(serde_yaml::from_str(&std::fs::read_to_string(path)?)?)
     }
 
-    fn load_widget_from_folder(path: PathBuf) -> Result<Widget> {
-        let mut widget = Self::load_widget_from_file(path.join("metadata.yml"))?;
+    fn load_widget_from_folder(path: &Path) -> Result<Widget> {
+        let mut widget = Self::load_widget_from_file(&path.join("metadata.yml"))?;
         widget.js = Some(std::fs::read_to_string(path.join("index.js"))?);
         widget.css = Some(std::fs::read_to_string(path.join("index.css"))?);
         widget.html = Some(std::fs::read_to_string(path.join("index.html"))?);
@@ -34,12 +34,14 @@ impl FullState {
         for entry in entries.flatten() {
             let path = entry.path();
             let widget = if path.is_dir() {
-                Self::load_widget_from_folder(path)
+                Self::load_widget_from_folder(&path)
             } else {
-                Self::load_widget_from_file(path)
+                Self::load_widget_from_file(&path)
             };
             match widget {
-                Ok(widget) => {
+                Ok(mut widget) => {
+                    widget.metadata.bundled = path.starts_with(bundled_path);
+                    widget.metadata.filename = entry.file_name().to_string_lossy().to_string();
                     self.widgets.insert(widget.id.clone(), widget);
                 }
                 Err(e) => {

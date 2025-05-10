@@ -1,9 +1,10 @@
+import { ResourceText } from '@shared/components/ResourceText';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { relaunch } from '@tauri-apps/plugin-process';
 import { Button } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 
 import { SaveStore } from '../../modules/shared/store/infra';
@@ -17,13 +18,13 @@ import { UpdateButton } from './UpdateButton';
 import cs from './index.module.css';
 
 export const Header = () => {
-  let location = useLocation();
-  let hasChanges = useAppSelector(RootSelectors.toBeSaved);
-  let shouldRestart = useAppSelector(RootSelectors.toBeRestarted);
+  const widgets = useSelector(RootSelectors.widgets);
+  const hasChanges = useAppSelector(RootSelectors.toBeSaved);
+  const shouldRestart = useAppSelector(RootSelectors.toBeRestarted);
 
-  const { t } = useTranslation();
-
+  const location = useLocation();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const cancelChanges = () => {
     dispatch(RootActions.restoreToLastLoaded());
@@ -40,20 +41,31 @@ export const Header = () => {
     }
   };
 
-  const saveLabel = shouldRestart ? t('save_and_restart') : t('save');
-  const ExtraInfo = RouteExtraInfo[location.pathname];
+  const saveBtnLabel = shouldRestart ? t('save_and_restart') : t('save');
 
+  let label: React.ReactNode = <span>null!?</span>;
   const parts = location.pathname === '/' ? ['home'] : location.pathname.split('/').filter(Boolean);
+
+  if (parts[0] === 'widget') {
+    const [_, username, resourceName] = parts;
+    const widgetId = `@${username}/${resourceName}`;
+    const widget = widgets.find((w) => w.id === widgetId);
+    label = widget ? <ResourceText text={widget.metadata.displayName} /> : <span>{widgetId}</span>;
+  } else {
+    label = parts.map((part, idx) => (
+      <React.Fragment key={part}>
+        <span className={cs.part}>{t(`header.labels.${part}`)}</span>
+        {++idx < parts.length ? '>' : ''}
+      </React.Fragment>
+    ));
+  }
+
+  const ExtraInfo = RouteExtraInfo[location.pathname];
 
   return (
     <div className={cs.Header} data-tauri-drag-region>
       <div className={cs.title}>
-        {parts.map((part, idx) => (
-          <React.Fragment key={part}>
-            <span>{t(`header.labels.${part}`)}</span>
-            {++idx < parts.length ? '>' : ''}
-          </React.Fragment>
-        ))}
+        {label}
         {ExtraInfo && <ExtraInfo />}
       </div>
       <div className={cs.actions}>
@@ -68,7 +80,7 @@ export const Header = () => {
         />
         <Button
           style={{ minWidth: 60 }}
-          children={hasChanges ? saveLabel : t('close')}
+          children={hasChanges ? saveBtnLabel : t('close')}
           type="primary"
           danger={!hasChanges}
           onClick={SaveOrQuit}

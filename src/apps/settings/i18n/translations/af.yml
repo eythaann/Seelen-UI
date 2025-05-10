@@ -98,38 +98,28 @@ general:
   date_format: Datumformaat
   icon_pack:
     available: Beskikbare ikoonpakkette
-    label: Ikoonpakkies
-    open_folder: Open Icon Packs -lêergids
     selected: Aktiewe ikoonpakkette
   language: Taal
-  resource:
-    author: Skrywer
-    description: Beskrywing
-    tags: Merkers
   startup: Hardloop met opstart?
   theme:
     available: Beskikbare temas
-    label: Temas
-    open_folder: Maak temas -lêergids oop
     selected: Aktiewe temas
-  wallpaper:
-    select: Kies Wallpaper
 header:
   labels:
     developer: Ontwikkelaar
+    extras: Ekstra's
     general: Generaal
     home: Tuiste
-    info: Informasie
-    mods: Inproppe en widgets
+    iconpack: Ikoonpakkies
     monitors: Monitors
-    seelen_bar: Fancy -werkbalk
-    seelen_rofi: App -lanseerder
-    seelen_wall: Agtergrondbestuurder
-    seelen_weg: Dock/Taakbalk
-    seelen_wm: Vensterbestuurder
+    plugin: Plugins
+    resources: Hulpbronne
     shortcuts: Kortpaaie
+    soundpack: Klankpakkies
     specific_apps: Spesifieke programme
-    virtual_desk: Virtuele tafelrekenaars
+    theme: Temas
+    wallpaper: Agtergronde
+    widget: Widgets
 home:
   new_resources: Nuwe hulpbronne
 inherit: Erf
@@ -137,16 +127,20 @@ inProgress: Aan die gang ...
 insert: Invoeg
 loading: Laai ...
 miscellaneous: Verskillend
-mods:
-  plugins: Plugins
-  target: Teiken
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Meer
 open: Oopmaak
 quit: Laat vaar
 remove: Verwyder
+resources:
+  app_outdated: >-
+    Hierdie hulpbron vereis dat 'n nuwer weergawe van Seelen UI behoorlik moet
+    werk.
+  open_folder: Open Resouce -lêergids
+  outdated: >-
+    Hierdie hulpbron is ontwerp vir 'n ouer weergawe van Seelen UI en werk
+    moontlik nie behoorlik nie.
 save: Red
 save_and_restart: Stoor en herbegin
 see_more: Sien meer

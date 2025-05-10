@@ -100,38 +100,28 @@ general:
   date_format: Формат на дата
   icon_pack:
     available: Налични пакети с икони
-    label: Икони пакети
-    open_folder: Отворете папката с пакети с икони
     selected: Активни пакети с икони
   language: Език
-  resource:
-    author: Автор
-    description: Описание
-    tags: Етикети
   startup: Да се ​​стартирате при стартиране?
   theme:
     available: Налични теми
-    label: Теми
-    open_folder: Отворете папката с темите
     selected: Активни теми
-  wallpaper:
-    select: Изберете тапет
 header:
   labels:
     developer: Разработчик
+    extras: Екстри
     general: Общ
     home: Начало
-    info: Информация
-    mods: Плъгини и джаджи
+    iconpack: Пакети с икони
     monitors: Монитори
-    seelen_bar: Фантастична лента с инструменти
-    seelen_rofi: Изстрелване на приложението
-    seelen_wall: Мениджър на тапети
-    seelen_weg: Док/лента на задачите
-    seelen_wm: Мениджър на прозорци
+    plugin: Плъгини
+    resources: Ресурси
     shortcuts: Преки пътища
+    soundpack: Звукови пакети
     specific_apps: Конкретни приложения
-    virtual_desk: Виртуални настолни компютри
+    theme: Теми
+    wallpaper: Тапети
+    widget: Уиджети
 home:
   new_resources: Нови ресурси
 inherit: Наследяване
@@ -139,16 +129,18 @@ inProgress: В ход ...
 insert: Вмъкнете
 loading: Зареждане...
 miscellaneous: Разни
-mods:
-  plugins: Приставки
-  target: Цел
-  widgets: Джаджи
 monitors_configurations:
   label: Монитор {{index}}
 more: Още
 open: Отворен
 quit: Напусна
 remove: Извадете
+resources:
+  app_outdated: Този ресурс изисква по-нова версия на Seelen UI, за да работи правилно.
+  open_folder: Отворете папката Resouce
+  outdated: >-
+    Този ресурс е разработен за по-стара версия на Seelen UI и може да не работи
+    правилно.
 save: Запазете
 save_and_restart: Запазване и рестартиране
 see_more: Вижте повече

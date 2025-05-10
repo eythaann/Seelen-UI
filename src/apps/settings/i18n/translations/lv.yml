@@ -100,38 +100,28 @@ general:
   date_format: Datuma formāts
   icon_pack:
     available: Pieejamie ikonu komplekti
-    label: Ikonu paketes
-    open_folder: Atveriet ikonu paku mapi
     selected: Aktīvās ikonu pakotnes
   language: Valoda
-  resource:
-    author: Autors
-    description: Apraksts
-    tags: Tagi
   startup: Skriet startup?
   theme:
     available: Pieejamie motīvi
-    label: Tēmas
-    open_folder: Atveriet tēmu mapi
     selected: Aktīvās tēmas
-  wallpaper:
-    select: Atlasiet fona attēlu
 header:
   labels:
     developer: Attīstītājs
+    extras: Papildaprīkojums
     general: Ģenerāldirektors
     home: Mājas
-    info: Informācija
-    mods: Spraudņi un logrīki
+    iconpack: Ikonu paketes
     monitors: Monitori
-    seelen_bar: Izdomāta rīkjosla
-    seelen_rofi: Lietotņu palaišana
-    seelen_wall: Tapešu vadītājs
-    seelen_weg: Doks/uzdevumjosla
-    seelen_wm: Logu vadītājs
+    plugin: Spraudņi
+    resources: Resursi
     shortcuts: Saīsnes
+    soundpack: Skaņu paketes
     specific_apps: Īpašas lietotnes
-    virtual_desk: Virtuālās galddatori
+    theme: Tēmas
+    wallpaper: Tapetes
+    widget: Logrīki
 home:
   new_resources: Jauni resursi
 inherit: Mantot
@@ -139,16 +129,18 @@ inProgress: Notiek ...
 insert: Ievietot
 loading: Iekraušana ...
 miscellaneous: Dažāds
-mods:
-  plugins: Spraudņi
-  target: Tēlot
-  widgets: Logrīki
 monitors_configurations:
   label: Monitors {{indekss}}
 more: Vairāk
 open: Atvērt
 quit: Atmest
 remove: Noņemt
+resources:
+  app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
+  open_folder: Atveriet mapi Resouce
+  outdated: >-
+    Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties
+    pareizi.
 save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 see_more: Skatīt vairāk

@@ -94,38 +94,28 @@ general:
   date_format: 日付形式
   icon_pack:
     available: 利用可能なアイコン パック
-    label: アイコンパック
-    open_folder: アイコンパックフォルダを開く
     selected: アクティブなアイコン パック
   language: 言語
-  resource:
-    author: 著者
-    description: 説明
-    tags: タグ
   startup: 起動時に実行する
   theme:
     available: 利用可能なテーマ
-    label: テーマ
-    open_folder: テーマフォルダを開く
     selected: アクティブなテーマ
-  wallpaper:
-    select: 壁紙を選択
 header:
   labels:
     developer: 開発者向け
+    extras: エクストラ
     general: 全般
     home: ホーム
-    info: このアプリについて
-    mods: プラグインとウィジェット
+    iconpack: アイコンパック
     monitors: モニター
-    seelen_bar: ツールバー
-    seelen_rofi: アプリランチャー
-    seelen_wall: 壁紙マネージャー
-    seelen_weg: ドック（タスクバー）
-    seelen_wm: ウィンドウマネージャー
+    plugin: プラグイン
+    resources: リソース
     shortcuts: ショートカットキー
+    soundpack: サウンドパック
     specific_apps: アプリごとの設定
-    virtual_desk: 仮想デスクトップ
+    theme: テーマ
+    wallpaper: 壁紙
+    widget: ウィジェット
 home:
   new_resources: 新しいリソース
 inherit: 継承
@@ -133,16 +123,16 @@ inProgress: 近日実装予定...
 insert: 挿入
 loading: 読み込み中...
 miscellaneous: その他
-mods:
-  plugins: プラグイン
-  target: ターゲット
-  widgets: ウィジェット
 monitors_configurations:
   label: モニター{{index}}
 more: もっと
 open: 開く
 quit: 終了
 remove: 取り除く
+resources:
+  app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
+  open_folder: リソースフォルダを開く
+  outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
 save: 保存
 save_and_restart: 保存して再起動
 see_more: もっと見る

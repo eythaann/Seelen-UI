@@ -100,38 +100,28 @@ general:
   date_format: Päiväysmuoto
   icon_pack:
     available: Saatavilla kuvakepaketit
-    label: Kuvakepakkaukset
-    open_folder: Avaa kuvakepaketit-kansio
     selected: Aktiiviset kuvakepaketit
   language: Kieli
-  resource:
-    author: Tekijä
-    description: Kuvaus
-    tags: Tunnisteet
   startup: Suorittaa käynnistyksen yhteydessä?
   theme:
     available: Käytettävissä olevat teemat
-    label: Teemat
-    open_folder: Avaa teemat-kansio
     selected: Aktiiviset teemat
-  wallpaper:
-    select: Valitse taustakuva
 header:
   labels:
     developer: Kehittäjä
+    extras: Lisävarusteet
     general: Yleinen
     home: Kotiin
-    info: Tiedot
-    mods: Lisäosat ja widgetit
+    iconpack: Kuvakepaketit
     monitors: Näytöt
-    seelen_bar: Hieno työkalurivi
-    seelen_rofi: Sovelluskäynnistys
-    seelen_wall: Taustakuvan johtaja
-    seelen_weg: Telakka/tehtäväpalkki
-    seelen_wm: Ikkunanhallinta
+    plugin: Liitännäiset
+    resources: Resurssit
     shortcuts: Pikakuvakkeet
+    soundpack: Sound Packit
     specific_apps: Erityiset sovellukset
-    virtual_desk: Virtuaalinen työpöytä
+    theme: Teemat
+    wallpaper: Taustakuvat
+    widget: Widgetit
 home:
   new_resources: Uudet resurssit
 inherit: Periä
@@ -139,16 +129,18 @@ inProgress: Käynnissä...
 insert: Lisätä
 loading: Ladataan...
 miscellaneous: Sekalainen
-mods:
-  plugins: Plugins
-  target: Kohde
-  widgets: Widgetit
 monitors_configurations:
   label: Monitor {{hakemisto}}
 more: Lisää
 open: Avata
 quit: Lopettaa
 remove: Poistaa
+resources:
+  app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
+  open_folder: Avaa resurssikansio
+  outdated: >-
+    Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se
+    välttämättä toimi oikein.
 save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 see_more: Katso lisää

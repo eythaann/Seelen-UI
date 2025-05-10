@@ -6,6 +6,9 @@
 - add input to write custom text items on the toolbar.
 - add export resource button on developer tools.
 
+### enhancements
+- Settings UI refactor to follow the new resources ecosystem.
+
 ### fix
 - not removing old icons mask on icon pack change.
 - styles for dock media item.

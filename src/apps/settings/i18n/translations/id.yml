@@ -100,38 +100,28 @@ general:
   date_format: Format tanggal
   icon_pack:
     available: Paket Ikon yang Tersedia
-    label: Paket Ikon
-    open_folder: Buka folder paket ikon
     selected: Paket Ikon Aktif
   language: Bahasa
-  resource:
-    author: Pengarang
-    description: Keterangan
-    tags: Tag
   startup: Jalankan saat startup?
   theme:
     available: Tema yang Tersedia
-    label: Tema
-    open_folder: Buka folder tema
     selected: Tema Aktif
-  wallpaper:
-    select: Pilih wallpaper
 header:
   labels:
     developer: Pengembang
+    extras: Ekstra
     general: Umum
     home: Rumah
-    info: Informasi
-    mods: Plugin & Widget
+    iconpack: Paket Ikon
     monitors: Monitor
-    seelen_bar: Toolbar mewah
-    seelen_rofi: Peluncur Aplikasi
-    seelen_wall: Manajer Wallpaper
-    seelen_weg: Dock/Taskbar
-    seelen_wm: Manajer Jendela
+    plugin: Plugin
+    resources: Sumber daya
     shortcuts: Pintasan
+    soundpack: Paket Suara
     specific_apps: Aplikasi tertentu
-    virtual_desk: Desktop virtual
+    theme: Tema
+    wallpaper: Wallpaper
+    widget: Widget
 home:
   new_resources: Sumber Daya Baru
 inherit: Mewarisi
@@ -139,16 +129,20 @@ inProgress: Sedang berlangsung...
 insert: Menyisipkan
 loading: Memuat...
 miscellaneous: Aneka ragam
-mods:
-  plugins: Plugin
-  target: Target
-  widgets: Widget
 monitors_configurations:
   label: Monitor {{index}}
 more: Lagi
 open: Membuka
 quit: Berhenti
 remove: Menghapus
+resources:
+  app_outdated: >-
+    Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat
+    berfungsi dengan baik.
+  open_folder: Buka folder sumber daya
+  outdated: >-
+    Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak
+    berfungsi dengan baik.
 save: Menyimpan
 save_and_restart: Simpan & restart
 see_more: Lihat Lebih Lanjut

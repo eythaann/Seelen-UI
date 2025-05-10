@@ -2,7 +2,7 @@ import { SeelenCommand } from '@seelen-ui/lib';
 import { Icon } from '@shared/components/Icon';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
-import { Button, Switch, Tooltip } from 'antd';
+import { Button, Switch } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,23 +43,21 @@ export function ThemesView() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('general.theme.label')}</b>
-          <Tooltip title={t('general.theme.open_folder')}>
-            <Button
-              type="default"
-              onClick={async () => {
-                const dataDir = await path.appDataDir();
-                invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'themes') });
-              }}
-            >
-              <Icon iconName="PiFoldersDuotone" />
-            </Button>
-          </Tooltip>
+          <b>{t('resources.open_folder')}</b>
+          <Button
+            type="default"
+            onClick={async () => {
+              const dataDir = await path.appDataDir();
+              invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'themes') });
+            }}
+          >
+            <Icon iconName="PiFoldersDuotone" />
+          </Button>
         </SettingsOption>
       </SettingsGroup>
 
       <div className={cs.list}>
-        <b>Enabled</b>
+        <b>{t('general.theme.selected')}</b>
         <Reorder.Group values={_active} onReorder={onReorder} className={cs.reorderGroup}>
           {enabled.map((theme) => (
             <Reorder.Item key={theme.id} value={theme.metadata.filename}>
@@ -79,7 +77,7 @@ export function ThemesView() {
           ))}
         </Reorder.Group>
 
-        <b>Disabled</b>
+        <b>{t('general.theme.available')}</b>
         {disabled.map((theme) => (
           <ResourceCard
             key={theme.id}

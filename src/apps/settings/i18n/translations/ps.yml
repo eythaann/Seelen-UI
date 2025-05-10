@@ -97,38 +97,28 @@ general:
   date_format: د نیټې ب .ه
   icon_pack:
     available: د آیکون کڅوړې شتون لري
-    label: آیکون کڅوړه
-    open_folder: خلاص
     selected: د فعال آیکون بسته
   language: ژبه
-  resource:
-    author: لیکوال
-    description: تفصیل
-    tags: ټګونه
   startup: په پیل کې چلول؟
   theme:
     available: شته موضوعات
-    label: موضوعات
-    open_folder: د موضوعاتو فولډر خلاص کړئ
     selected: فعال موضوعات
-  wallpaper:
-    select: وال پیپر غوره کړئ
 header:
   labels:
     developer: پراختیا کونکی
+    extras: اضافي
     general: عمومي
     home: کور
-    info: معلومات
-    mods: پلگ انونه او ویجټونه
+    iconpack: آیکون کڅوړه
     monitors: څارونکي
-    seelen_bar: د فینسي توکپټه
-    seelen_rofi: د اپلیکیشن لانچر
-    seelen_wall: د وال پیپر سمبالګر
-    seelen_weg: ډیک / ټاسک بار
-    seelen_wm: د کړکۍ مدیر
+    plugin: فلګونه
+    resources: سرچینې
     shortcuts: لنډوکونه
+    soundpack: غږ کڅوړه
     specific_apps: ځانګړي اطلاقات
-    virtual_desk: مجازی ډیسټاپونه
+    theme: موضوعات
+    wallpaper: والپيپرونه
+    widget: ویجټونه
 home:
   new_resources: نوې سرچينې
 inherit: میراث
@@ -136,16 +126,16 @@ inProgress: د پرمختګ په حال کې...
 insert: دننه کړئ
 loading: بارول ...
 miscellaneous: متفرقه
-mods:
-  plugins: فلګونه
-  target: هدف
-  widgets: ویجټونه
 monitors_configurations:
   label: د {{{پلس} نظارت وکړئ}
 more: نور
 open: خلاص
 quit: پرېښودل
 remove: لرې کول
+resources:
+  app_outdated: دا سرچینه د سم کار کولو لپاره یو نوي نسخه ته اړتیا لري.
+  open_folder: د جنګیال فولډر خلاص کړئ
+  outdated: دا سرچینه د ښایسته UI زاړه نسخه لپاره ډیزاین شوې وه او شاید سم کار ونه کړي.
 save: خوندي کړئ
 save_and_restart: خوندي کول او بیا پیل کړئ
 see_more: نور وګوره

@@ -100,38 +100,28 @@ general:
   date_format: قالب تاریخ
   icon_pack:
     available: بسته‌های آیکون موجود
-    label: بسته های نماد
-    open_folder: پوشه بسته های نماد را باز کنید
     selected: بسته های آیکون فعال
   language: زبان
-  resource:
-    author: نویسنده
-    description: توضیحات
-    tags: برچسب ها
   startup: در راه اندازی اجرا می شود؟
   theme:
     available: تم های موجود
-    label: تم ها
-    open_folder: پوشه مضامین را باز کنید
     selected: تم های فعال
-  wallpaper:
-    select: تصویر زمینه را انتخاب کنید
 header:
   labels:
     developer: توسعه دهنده
+    extras: اضافی
     general: عمومی
     home: خانه
-    info: اطلاعات
-    mods: پلاگین ها و ابزارک ها
+    iconpack: بسته های نماد
     monitors: مانیتور
-    seelen_bar: نوار ابزار فانتزی
-    seelen_rofi: پرتاب برنامه
-    seelen_wall: مدیر کاغذ دیواری
-    seelen_weg: اسکله/نوار وظیفه
-    seelen_wm: مدیر پنجره
+    plugin: پلاگین
+    resources: منابع
     shortcuts: میانبرها
+    soundpack: بسته های صدا
     specific_apps: برنامه های خاص
-    virtual_desk: دسک تاپ مجازی
+    theme: مضامین
+    wallpaper: تصاویر پس زمینه
+    widget: ویراچه
 home:
   new_resources: منابع جدید
 inherit: ارث
@@ -139,16 +129,18 @@ inProgress: در حال پیش رفت...
 insert: درج کردن
 loading: بارگذاری...
 miscellaneous: متفاوتی
-mods:
-  plugins: پلاگین
-  target: هدف
-  widgets: ویراچه
 monitors_configurations:
   label: مانیتور {{فهرست}}
 more: بیشتر
 open: باز کن
 quit: ترک
 remove: برداشتن
+resources:
+  app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
+  open_folder: پوشه Resouce را باز کنید
+  outdated: >-
+    این منبع برای نسخه قدیمی تر Seelen UI طراحی شده است و ممکن است به درستی کار
+    نکند.
 save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
 see_more: بیشتر ببینید

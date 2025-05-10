@@ -99,38 +99,28 @@ general:
   date_format: දිනය ආකෘතිය
   icon_pack:
     available: පවතින අයිකන ඇසුරුම්
-    label: අයිකන ඇසුරුම්
-    open_folder: විවෘත අයිකන ඇසුරුම් ෆෝල්ඩරය
     selected: ක්‍රියාකාරී අයිකන ඇසුරුම්
   language: භාෂාව
-  resource:
-    author: කර්තෘ
-    description: විස්තරය
-    tags: ටැග්
   startup: ආරම්භයේදී ධාවනය කරන්නද?
   theme:
     available: පවතින තේමා
-    label: තේමා
-    open_folder: තේමාවන් ෆෝල්ඩරය විවෘත කරන්න
     selected: ක්රියාකාරී තේමාවන්
-  wallpaper:
-    select: බිතුපත තෝරන්න
 header:
   labels:
     developer: සංවර්ධකයා
+    extras: අමතර
     general: ජනරාල්
     home: මුල් පිටුව
-    info: විස්තර
-    mods: ප්ලගින සහ විජට්
+    iconpack: අයිකන ඇසුරුම්
     monitors: නිරීක්ෂකයින්
-    seelen_bar: විසිතුරු මෙවලම් තීරුව
-    seelen_rofi: යෙදුම් දියත් කිරීම
-    seelen_wall: බිතුපත් කළමනාකරු
-    seelen_weg: ඩොක්/කාර්ය තීරුව
-    seelen_wm: කවුළු කළමනාකරු
+    plugin: ප්ලගීන
+    resources: සම්පත්
     shortcuts: කෙටිමං
+    soundpack: ශබ්ද ඇසුරුම්
     specific_apps: විශේෂිත යෙදුම්
-    virtual_desk: අතථ්ය ඩෙස්ක්ටොප්
+    theme: තේමාවන්
+    wallpaper: බිතුපත්
+    widget: විජට්
 home:
   new_resources: නව සම්පත්
 inherit: උරුම වේ
@@ -138,16 +128,18 @@ inProgress: ප්රගතියේ...
 insert: ඇතුළු කරන්න
 loading: පූරණය වෙමින්...
 miscellaneous: විවිධ
-mods:
-  plugins: ප්ලගීන
-  target: ඉලක්කය
-  widgets: විජට්
 monitors_configurations:
   label: '{{දර්ශකය} u අධීක්ෂණය කරන්න'
 more: තව
 open: විවෘත
 quit: ඉවත්
 remove: ඉවත් කරන්න
+resources:
+  app_outdated: මෙම සම්පතට සින්ලන් යූඅයි හි නවතම අනුවාදයක් නිසියාකාරව වැඩ කිරීමට අවශ්ය වේ.
+  open_folder: විවෘත පෙරමුණ ෆෝල්ඩරය
+  outdated: >-
+    මෙම සම්පත නිර්මාණය කර ඇත්තේ සීලන් UI හි පැරණි අනුවාදයක් සඳහා වන අතර නිසි ලෙස
+    ක්රියා නොකරනු ඇත.
 save: සුරකින්න
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
 see_more: තවත් බලන්න

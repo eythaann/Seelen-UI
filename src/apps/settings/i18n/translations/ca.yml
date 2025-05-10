@@ -98,38 +98,28 @@ general:
   date_format: Format de la data
   icon_pack:
     available: Paquets d'icones disponibles
-    label: Paquets d’icones
-    open_folder: Obriu la carpeta de paquets d'icones
     selected: Paquets d'icones actius
   language: Llenguatge
-  resource:
-    author: Autor
-    description: Descripció
-    tags: Etiquetes
   startup: Executeu la posada en marxa?
   theme:
     available: Temes disponibles
-    label: Temes
-    open_folder: Obriu la carpeta de temes
     selected: Temes actius
-  wallpaper:
-    select: Seleccioneu fons de pantalla
 header:
   labels:
     developer: Desenvolupador
+    extras: Extres
     general: General
     home: Casa
-    info: Informació
-    mods: Connectors i widgets
+    iconpack: Paquets d’icones
     monitors: Monitors
-    seelen_bar: Barra d’eines de luxe
-    seelen_rofi: Llançador d'aplicacions
-    seelen_wall: Gestor de fons de pantalla
-    seelen_weg: Moll/barra de tasques
-    seelen_wm: Gestor de finestres
+    plugin: Tapins
+    resources: Recursos
     shortcuts: Dreceres
+    soundpack: Paquets de son
     specific_apps: Aplicacions específiques
-    virtual_desk: Desktops virtuals
+    theme: Temes
+    wallpaper: Fons de pantalla
+    widget: Widgets
 home:
   new_resources: Recursos nous
 inherit: Heretar
@@ -137,16 +127,20 @@ inProgress: En progrés...
 insert: Inserir
 loading: Carregant ...
 miscellaneous: Divers
-mods:
-  plugins: Tapins
-  target: Objectiu
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Més
 open: Obrir
 quit: Abandonar
 remove: Treure
+resources:
+  app_outdated: >-
+    Aquest recurs requereix una versió més recent de la interfície d'usuari de
+    Seelen per funcionar correctament.
+  open_folder: Obriu la carpeta de resouce
+  outdated: >-
+    Aquest recurs va ser dissenyat per a una versió anterior de la interfície
+    d'usuari de Seelen i pot no funcionar correctament.
 save: Estalviar
 save_and_restart: Desar i reiniciar
 see_more: Veure més

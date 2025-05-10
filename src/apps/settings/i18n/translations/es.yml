@@ -100,38 +100,28 @@ general:
   date_format: Formato de fecha
   icon_pack:
     available: Paquetes de iconos disponibles
-    label: Paquetes de iconos
-    open_folder: Abrir la carpeta de paquetes de iconos
     selected: Packs de iconos activos
   language: Idioma
-  resource:
-    author: Autor
-    description: Descripción
-    tags: Etiquetas
   startup: ¿Se ejecuta al iniciar con Windows?
   theme:
     available: Temas disponibles
-    label: Temas
-    open_folder: Abrir la carpeta de temas
     selected: Temas activos
-  wallpaper:
-    select: Seleccionar papel tapiz
 header:
   labels:
     developer: Desarrollador
+    extras: Extras
     general: General
     home: Inicio
-    info: Información
-    mods: Plugins y widgets
+    iconpack: Paquetes de iconos
     monitors: Monitores
-    seelen_bar: Barra de herramientas Fancy
-    seelen_rofi: Lanzador de aplicaciones
-    seelen_wall: Gestor de fondos de pantalla
-    seelen_weg: Muelle/Barra de Muelle
-    seelen_wm: Gestor de ventanas
+    plugin: Plugins
+    resources: Recursos
     shortcuts: Atajos
+    soundpack: Paquetes de sonido
     specific_apps: Aplicaciones específicas
-    virtual_desk: Escritorios virtuales
+    theme: Temas
+    wallpaper: Fondos de pantalla
+    widget: Widgets
 home:
   new_resources: Nuevos recursos
 inherit: Heredar
@@ -139,16 +129,20 @@ inProgress: En curso...
 insert: Inserte
 loading: Cargando...
 miscellaneous: Varios
-mods:
-  plugins: Plugins
-  target: Objetivo
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Más
 open: Abrir
 quit: Deje de
 remove: Eliminar
+resources:
+  app_outdated: >-
+    Este recurso requiere una versión más reciente de Seelen UI para funcionar
+    correctamente.
+  open_folder: Abrir carpeta de recursos
+  outdated: >-
+    Este recurso fue diseñado para una versión anterior de Seelen UI y podría no
+    funcionar correctamente.
 save: Guardar
 save_and_restart: Guardar y reiniciar
 see_more: Ver más

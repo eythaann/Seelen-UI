@@ -101,38 +101,28 @@ general:
   date_format: Taariikh format
   icon_pack:
     available: Xirmooyinka Icon ee la heli karo
-    label: Xirmooyinka icon
-    open_folder: Furaha Furaha Furan
     selected: Xirmooyinka Astaanta Firfircoon
   language: Af
-  resource:
-    author: Qore
-    description: Sharaxaada
-    tags: Tags
   startup: Ku orod bilowga?
   theme:
     available: Mawduucyada la heli karo
-    label: Mawduucyada
-    open_folder: Faylka farqiga u furan
     selected: Mawduucyada Firfircoon
-  wallpaper:
-    select: Xulo warqadda
 header:
   labels:
     developer: Abuuris
+    extras: Ka duwan daro
     general: Guud
     home: Guri
-    info: War
-    mods: Plugins & Widgets
+    iconpack: Xirmooyinka icon
     monitors: Kormeerayaasha
-    seelen_bar: Qalabka Fancy Toolbar
-    seelen_rofi: App furaha
-    seelen_wall: Maamulaha Wareegtada
-    seelen_weg: Dock / Tootshar
-    seelen_wm: Maamulaha daaqada
+    plugin: Pluins
+    resources: Kheyraadka
     shortcuts: Gaaban
+    soundpack: Xirmooyinka dhawaaqa
     specific_apps: Barnaamijyo gaar ah
-    virtual_desk: Desktops Virtual
+    theme: Mowduucyada
+    wallpaper: Darf-biyoodka
+    widget: Widgetts
 home:
   new_resources: Kheyraadka cusub
 inherit: Dhaxlid
@@ -140,16 +130,20 @@ inProgress: Horusocod ...
 insert: Gelin
 loading: Loading ...
 miscellaneous: Kala duduwan
-mods:
-  plugins: Pluins
-  target: Bar shiish
-  widgets: Widgetts
 monitors_configurations:
   label: Kormeer {{tus ind ind}}
 more: Ka badan
 open: Furid
 quit: Joojin
 remove: Ka qaadid
+resources:
+  app_outdated: >-
+    Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah
+    u shaqeynaya.
+  open_folder: Faylka reare-ka furan
+  outdated: >-
+    Kheyraadkan waxaa loogu talagalay in nooc ka weyn oo ah Selelel Ui oo laga
+    yaabo inuu si sax ah u shaqeyn.
 save: Badbaadin
 save_and_restart: Badbaadin & Dib u bilow
 see_more: Arag in dheeraad ah

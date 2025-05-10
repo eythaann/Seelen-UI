@@ -91,38 +91,28 @@ general:
   date_format: 日期格式
   icon_pack:
     available: 可用的图标包
-    label: 图标包
-    open_folder: 打开图标包文件夹
     selected: 活动图标包
   language: 语言
-  resource:
-    author: 作者
-    description: 描述
-    tags: 标签
   startup: 开机自启
   theme:
     available: 可用主题
-    label: 主题
-    open_folder: 打开主题文件夹
     selected: 活跃主题
-  wallpaper:
-    select: 选择壁纸
 header:
   labels:
     developer: 开发者工具
+    extras: 额外内容
     general: 常规设置
     home: 首页
-    info: 信息
-    mods: 插件和小组件
+    iconpack: 图标包
     monitors: 显示器
-    seelen_bar: 精美工具栏
-    seelen_rofi: 应用程序启动器
-    seelen_wall: 壁纸管理器
-    seelen_weg: Dock / 任务栏
-    seelen_wm: 窗口管理器
+    plugin: 插件
+    resources: 资源
     shortcuts: 快捷键
+    soundpack: 音效包
     specific_apps: 特定应用程序
-    virtual_desk: 虚拟桌面
+    theme: 主题
+    wallpaper: 壁纸
+    widget: 小工具
 home:
   new_resources: 新资源
 inherit: 继承
@@ -130,16 +120,16 @@ inProgress: 进行中...
 insert: 插入
 loading: 正在加载...
 miscellaneous: 杂项
-mods:
-  plugins: 插件
-  target: 目标
-  widgets: 小部件
 monitors_configurations:
   label: 监视 {{index}}
 more: 更多
 open: 打开
 quit: 退出
 remove: 消除
+resources:
+  app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
+  open_folder: 打开资源文件夹
+  outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
 save: 保存
 save_and_restart: 保存并重启应用
 see_more: 查看更多

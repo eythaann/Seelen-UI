@@ -98,38 +98,28 @@ general:
   date_format: తేదీ ఆకృతి
   icon_pack:
     available: అందుబాటులో ఉన్న ఐకాన్ ప్యాక్‌లు
-    label: ఐకాన్ ప్యాక్‌లు
-    open_folder: ఓపెన్ ఐకాన్ ప్యాక్స్ ఫోల్డర్
     selected: సక్రియ ఐకాన్ ప్యాక్‌లు
   language: భాష
-  resource:
-    author: రచయిత
-    description: వివరణ
-    tags: ట్యాగ్‌లు
   startup: స్టార్టప్‌లో అమలు చేయాలా?
   theme:
     available: అందుబాటులో ఉన్న థీమ్‌లు
-    label: థీమ్స్
-    open_folder: థీమ్స్ ఫోల్డర్ తెరవండి
     selected: క్రియాశీల థీమ్‌లు
-  wallpaper:
-    select: వాల్‌పేపర్‌ను ఎంచుకోండి
 header:
   labels:
     developer: డెవలపర్
+    extras: ఎక్స్‌ట్రాలు
     general: జనరల్
     home: హోమ్
-    info: సమాచారం
-    mods: ప్లగిన్‌లు & విడ్జెట్‌లు
+    iconpack: ఐకాన్ ప్యాక్‌లు
     monitors: మానిటర్లు
-    seelen_bar: ఫ్యాన్సీ టూల్‌బార్
-    seelen_rofi: అనువర్తన లాంచర్
-    seelen_wall: వాల్పేపర్ మేనేజర్
-    seelen_weg: డాక్/టాస్క్‌బార్
-    seelen_wm: విండో మేనేజర్
+    plugin: ప్లగిన్లు
+    resources: వనరులు
     shortcuts: సత్వరమార్గాలు
+    soundpack: సౌండ్ ప్యాక్‌లు
     specific_apps: నిర్దిష్ట యాప్‌లు
-    virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
+    theme: థీమ్స్
+    wallpaper: వాల్‌పేపర్లు
+    widget: విడ్జెట్లు
 home:
   new_resources: కొత్త వనరులు
 inherit: వారసత్వంగా
@@ -137,16 +127,18 @@ inProgress: పురోగతిలో ఉంది...
 insert: చొప్పించండి
 loading: లోడ్...
 miscellaneous: ఇతరాలు
-mods:
-  plugins: ప్లగిన్లు
-  target: లక్ష్యం
-  widgets: విడ్జెట్లు
 monitors_configurations:
   label: మానిటర్ {{సూచిక}}
 more: మరిన్ని
 open: తెరవండి
 quit: నిష్క్రమించు
 remove: తొలగించండి
+resources:
+  app_outdated: ఈ వనరు సరిగ్గా పనిచేయడానికి సీలెన్ UI యొక్క క్రొత్త వెర్షన్ అవసరం.
+  open_folder: ఓపెన్ రీసౌస్ ఫోల్డర్
+  outdated: >-
+    ఈ వనరు సీలెన్ UI యొక్క పాత వెర్షన్ కోసం రూపొందించబడింది మరియు సరిగ్గా
+    పనిచేయకపోవచ్చు.
 save: సేవ్ చేయండి
 save_and_restart: సేవ్ & పున art ప్రారంభించండి
 see_more: మరిన్ని చూడండి

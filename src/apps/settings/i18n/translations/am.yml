@@ -96,38 +96,28 @@ general:
   date_format: የቀን ቅርጸት
   icon_pack:
     available: የሚገኙ የአዶ ጥቅሎች
-    label: አዶዎች ፓኬጆች
-    open_folder: ክፍት አዶዎች ፓኬኮች አቃፊ
     selected: ንቁ አዶ ጥቅሎች
   language: ቋንቋ
-  resource:
-    author: ደራሲ
-    description: መግለጫ
-    tags: መለያዎች
   startup: ጅምር ላይ ይሮጡ?
   theme:
     available: የሚገኙ ገጽታዎች
-    label: ገጽታዎች
-    open_folder: የመክፈያ ገጽታዎች አቃፊ
     selected: ንቁ ገጽታዎች
-  wallpaper:
-    select: የግድግዳ ወረቀት ይምረጡ
 header:
   labels:
     developer: ገንቢ
+    extras: ተጨማሪዎች
     general: አጠቃላይ
     home: ቤት
-    info: መረጃ
-    mods: ተሰኪዎች እና መግብሮች
+    iconpack: አዶዎች ፓኬጆች
     monitors: ተቆጣጣሪዎች
-    seelen_bar: Fancy የመሣሪያ አሞሌ
-    seelen_rofi: የመተግበሪያ አስጀማሪ
-    seelen_wall: የግድግዳ ወረቀት ሥራ አስኪያጅ
-    seelen_weg: Dock / Accorbar
-    seelen_wm: የመስኮት አቀናባሪ
+    plugin: ተሰኪዎች
+    resources: ሀብቶች
     shortcuts: አቋራጮች
+    soundpack: የድምፅ ማካካሻዎች
     specific_apps: የተወሰኑ መተግበሪያዎች
-    virtual_desk: ምናባዊ ዴስክቶፕስ
+    theme: ገጽታዎች
+    wallpaper: የግድግዳ ወረቀቶች
+    widget: ፍርግሞች
 home:
   new_resources: አዲስ ሀብቶች
 inherit: ውርስ
@@ -135,16 +125,16 @@ inProgress: በሂደት ላይ...
 insert: ያስገቡ
 loading: በመጫን ላይ ...
 miscellaneous: ልዩነቶች
-mods:
-  plugins: ተሰኪዎች
-  target: Target ላማ
-  widgets: ፍርግሞች
 monitors_configurations:
   label: ይቆጣጠሩ {{አው.ፊ.}}}}
 more: ተጨማሪ
 open: ክፈት
 quit: አቁም
 remove: ያስወግዱ
+resources:
+  app_outdated: ይህ ሀብት በአግባቡ እንዲሠራ አዲስ የአዲስ ስሪት ይፈልጋል.
+  open_folder: ክፍት የሆነ የመዝናኛ አቃፊ
+  outdated: ይህ የመረጃ ሀብት ለተረጋጋሪ ዌይ ስሪት ለተጨማሪ ስሪት የተሰራ ሲሆን በትክክል ላይሰራ ይችላል.
 save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
 see_more: ተጨማሪ ይመልከቱ

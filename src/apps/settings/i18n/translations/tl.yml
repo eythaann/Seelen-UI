@@ -102,38 +102,28 @@ general:
   date_format: Format ng petsa
   icon_pack:
     available: Magagamit na Mga Icon Pack
-    label: Icon pack
-    open_folder: Buksan ang folder ng Icon Packs
     selected: Mga Aktibong Icon Pack
   language: Wika
-  resource:
-    author: May-akda
-    description: Paglalarawan
-    tags: Mga tag
   startup: Patakbuhin sa Startup?
   theme:
     available: Magagamit na Mga Tema
-    label: Mga tema
-    open_folder: Buksan ang folder ng mga tema
     selected: Mga Aktibong Tema
-  wallpaper:
-    select: Piliin ang wallpaper
 header:
   labels:
     developer: Developer
+    extras: Extras
     general: Pangkalahatan
     home: Home
-    info: Impormasyon
-    mods: Mga Plugin at Widget
+    iconpack: Icon pack
     monitors: Monitor
-    seelen_bar: Fancy Toolbar
-    seelen_rofi: App launcher
-    seelen_wall: Tagapamahala ng Wallpaper
-    seelen_weg: Dock/Taskbar
-    seelen_wm: Window Manager
+    plugin: Plugins
+    resources: Mga mapagkukunan
     shortcuts: Mga shortcut
+    soundpack: Mga tunog pack
     specific_apps: Tukoy na apps
-    virtual_desk: Mga Virtual Desktop
+    theme: Mga tema
+    wallpaper: Wallpaper
+    widget: Mga widget
 home:
   new_resources: Mga bagong mapagkukunan
 inherit: Magmana
@@ -141,16 +131,20 @@ inProgress: Sa pag -unlad ...
 insert: Ipasok
 loading: Naglo -load ...
 miscellaneous: Miscellaneous
-mods:
-  plugins: Plugins
-  target: Target
-  widgets: Mga widget
 monitors_configurations:
   label: Subaybayan {{index}}
 more: Higit pa
 open: Buksan
 quit: Huminto ka
 remove: Alisin
+resources:
+  app_outdated: >-
+    Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
+    Seelen UI upang gumana nang maayos.
+  open_folder: Buksan ang folder ng resouce
+  outdated: >-
+    Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
+    Seelen UI at maaaring hindi gumana nang maayos.
 save: I -save
 save_and_restart: I -save at i -restart
 see_more: Makita pa

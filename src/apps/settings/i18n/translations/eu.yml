@@ -98,38 +98,28 @@ general:
   date_format: Data formatua
   icon_pack:
     available: Eskuragarri dauden ikono paketeak
-    label: Ikono paketeak
-    open_folder: Ireki ikono paketeak karpeta
     selected: Ikono pakete aktiboak
   language: Mintzaira
-  resource:
-    author: Egilea
-    description: Deskribapena
-    tags: Etiketak
   startup: Korrika abiaraztean?
   theme:
     available: Eskuragarri dauden gaiak
-    label: Gaiak
-    open_folder: Ireki Gaiak Karpeta
     selected: Gai aktiboak
-  wallpaper:
-    select: Hautatu horma-irudia
 header:
   labels:
     developer: Garatzaile
+    extras: Aput
     general: Jeneral
     home: Etxe
-    info: Informazio
-    mods: Pluginak eta widgetak
+    iconpack: Ikono paketeak
     monitors: Monitore
-    seelen_bar: Fancy tresna barra
-    seelen_rofi: App Launcher
-    seelen_wall: Wallpaper Manager
-    seelen_weg: Dock / ataza barra
-    seelen_wm: Leiho kudeatzailea
+    plugin: Plakins
+    resources: Baliabide
     shortcuts: Lasterbideak
+    soundpack: Soinu paketeak
     specific_apps: Aplikazio espezifikoak
-    virtual_desk: Mahaigain birtualak
+    theme: Haibideak
+    wallpaper: Horma-irudiak
+    widget: Widgets
 home:
   new_resources: Baliabide berriak
 inherit: Jarauntsi
@@ -137,16 +127,20 @@ inProgress: Abian ...
 insert: Txertatu
 loading: Kargatzen ...
 miscellaneous: Heterogeneo
-mods:
-  plugins: Plakins
-  target: Jomuga
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Gehiago
 open: Ireki
 quit: Laga
 remove: Atera
+resources:
+  app_outdated: >-
+    Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona
+    dezan.
+  open_folder: Ireki Reseacce karpeta
+  outdated: >-
+    Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala
+    funtzionatuko.
 save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
 see_more: Ikusi gehiago

@@ -98,38 +98,28 @@ general:
   date_format: Formato de data
   icon_pack:
     available: Pacotes de ícones disponíveis
-    label: Pacotes de ícones
-    open_folder: Pasta de pacotes de ícones abertos
     selected: Pacotes de ícones ativos
   language: Idioma
-  resource:
-    author: Autor
-    description: Descrição
-    tags: Etiquetas
   startup: Executar ao iniciar?
   theme:
     available: Temas disponíveis
-    label: Temas
-    open_folder: Abra a pasta de temas
     selected: Temas ativos
-  wallpaper:
-    select: Selecione papel de parede
 header:
   labels:
     developer: Desenvolvedor
+    extras: Extras
     general: Em geral
     home: Início
-    info: Informação
-    mods: Plug-ins e widgets
+    iconpack: Pacotes de ícones
     monitors: Monitores
-    seelen_bar: Barra de ferramentas sofisticada
-    seelen_rofi: Lançador de aplicativos
-    seelen_wall: Gerente de papel de parede
-    seelen_weg: Dock/barra de tarefas
-    seelen_wm: Gerenciador de janelas
+    plugin: Plugins
+    resources: Recursos
     shortcuts: Atalhos
+    soundpack: Pacotes de som
     specific_apps: Aplicativos específicos
-    virtual_desk: Desktops virtuais
+    theme: Temas
+    wallpaper: Papéis de parede
+    widget: Widgets
 home:
   new_resources: Novos recursos
 inherit: Herdar
@@ -137,16 +127,20 @@ inProgress: Em andamento...
 insert: Inserir
 loading: Carregando...
 miscellaneous: Miscelânea
-mods:
-  plugins: Plugins
-  target: Alvo
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Mais
 open: Abrir
 quit: Desistir
 remove: Remover
+resources:
+  app_outdated: >-
+    Esse recurso requer uma versão mais recente da interface do usuário da
+    Seelen para funcionar corretamente.
+  open_folder: Abrir a pasta de recursos
+  outdated: >-
+    Esse recurso foi projetado para uma versão mais antiga da interface do
+    usuário da Seelen e pode não funcionar corretamente.
 save: Salvar
 save_and_restart: Salve e reinicie
 see_more: Veja mais

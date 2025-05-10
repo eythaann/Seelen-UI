@@ -100,38 +100,28 @@ general:
   date_format: तारिख का प्रारूप
   icon_pack:
     available: उपलब्ध चिह्न पैक
-    label: आइकन पैक
-    open_folder: आइकन पैक फ़ोल्डर खोलें
     selected: सक्रिय चिह्न पैक
   language: भाषा
-  resource:
-    author: लेखक
-    description: विवरण
-    tags: टैग
   startup: स्टार्टअप पर चलाएं?
   theme:
     available: उपलब्ध थीम्स
-    label: विषय-वस्तु
-    open_folder: थीम्स फ़ोल्डर खोलें
     selected: सक्रिय विषय-वस्तु
-  wallpaper:
-    select: वॉलपेपर का चयन करें
 header:
   labels:
     developer: डेवलपर
+    extras: अतिरिक्त
     general: सामान्य
     home: घर
-    info: जानकारी
-    mods: प्लगइन्स और विजेट
+    iconpack: आइकन पैक
     monitors: पर नज़र रखता है
-    seelen_bar: फैंसी टूलबार
-    seelen_rofi: ऐप लॉन्चर
-    seelen_wall: वॉलपेपर प्रबंधक
-    seelen_weg: डॉक/टास्टरबार
-    seelen_wm: खिड़की प्रबंधक
+    plugin: प्लग-इन
+    resources: संसाधन
     shortcuts: शॉर्टकट
+    soundpack: साउंड पैक
     specific_apps: विशिष्ट ऐप्स
-    virtual_desk: आभासी डेस्कटॉप्स
+    theme: विषय-वस्तु
+    wallpaper: वॉलपेपर
+    widget: विजेट
 home:
   new_resources: नए संसाधन
 inherit: इनहेरिट
@@ -139,16 +129,20 @@ inProgress: प्रगति पर है...
 insert: डालना
 loading: लोड हो रहा है...
 miscellaneous: मिश्रित
-mods:
-  plugins: प्लग-इन
-  target: लक्ष्य
-  widgets: विजेट
 monitors_configurations:
   label: मॉनिटर {{इंडेक्स}}
 more: अधिक
 open: खुला
 quit: छोड़ना
 remove: निकालना
+resources:
+  app_outdated: >-
+    इस संसाधन को ठीक से काम करने के लिए सेलेन यूआई के एक नए संस्करण की आवश्यकता
+    होती है।
+  open_folder: Resouce फ़ोल्डर खोलें
+  outdated: >-
+    यह संसाधन सीलेन यूआई के पुराने संस्करण के लिए डिज़ाइन किया गया था और ठीक से
+    काम नहीं कर सकता है।
 save: बचाना
 save_and_restart: सहेजें और पुनरारंभ करें
 see_more: और देखें

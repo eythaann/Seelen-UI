@@ -98,38 +98,28 @@ general:
   date_format: Formata Date
   icon_pack:
     available: Pakêtên îkonê yên berdest
-    label: Packon icon
-    open_folder: Peldanka Packs Packs Open
     selected: Pakêtên Îkonên Çalak
   language: Ziman
-  resource:
-    author: Nivîskar
-    description: Terîf
-    tags: Tags
   startup: Li ser destpêka bisekinin?
   theme:
     available: Mijarên Berdest
-    label: Themes
-    open_folder: Peldanka mijaran vekin
     selected: Mijarên Çalak
-  wallpaper:
-    select: Hilbijêre Wallpaper
 header:
   labels:
     developer: Pêşvebirin
+    extras: Ekstras
     general: Giştî
     home: Xane
-    info: Agahî
-    mods: Plugin & Widgets
+    iconpack: Packon icon
     monitors: Çavdêr
-    seelen_bar: Fancy Toolbar
-    seelen_rofi: App launcher
-    seelen_wall: Gerînendeyê Wallpaper
-    seelen_weg: Dock / Taskbar
-    seelen_wm: Rêvebirê pencereyê
+    plugin: Pêçanin
+    resources: Resourcesavkaniyên
     shortcuts: Kurtefîlm
+    soundpack: Pakêtên deng
     specific_apps: Serlêdanên taybetî
-    virtual_desk: Desktopên Virtual
+    theme: Temas
+    wallpaper: Wallpapers
+    widget: Widgets
 home:
   new_resources: Resourcesavkaniyên nû
 inherit: Mîratgirtin
@@ -137,16 +127,20 @@ inProgress: Ez teslîm nabim...
 insert: Lêzêdekirin
 loading: Loading ...
 miscellaneous: Lihevket
-mods:
-  plugins: Pêçanin
-  target: Armanc
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{Index-}
 more: Zêde
 open: Vekirî
 quit: Devjêberdan
 remove: Dûrxistin
+resources:
+  app_outdated: >-
+    Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş
+    bixebite.
+  open_folder: Peldanka Resouce vekin
+  outdated: >-
+    Vê çavkaniyê ji bo guhertoyek kevn a Seelen UI hate çêkirin û dibe ku bi
+    rengek baş kar neke.
 save: Rizgarkirin
 save_and_restart: Save & Restart
 see_more: Bêtir bibînin

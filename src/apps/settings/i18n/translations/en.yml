@@ -97,44 +97,28 @@ general:
   date_format: Date Format
   icon_pack:
     available: Available Icon Packs
-    label: Icon Packs
-    open_folder: Open icon packs folder
     selected: Active Icon Packs
   language: Language
-  resource:
-    author: Author
-    description: Description
-    tags: Tags
   startup: Run on startup?
   theme:
     available: Available Themes
-    label: Themes
-    open_folder: Open themes folder
     selected: Active Themes
-  wallpaper:
-    select: Select Wallpaper
 header:
   labels:
     developer: Developer
+    extras: Extras
     general: General
     home: Home
-    mods: Plugins & Widgets
-    monitors: Monitors
-    seelen_bar: Fancy Toolbar
-    seelen_rofi: App Launcher
-    seelen_wall: Wallpaper Manager
-    seelen_weg: Dock/Taskbar
-    seelen_wm: Window Manager
-    shortcuts: Shortcuts
-    specific_apps: Specific Apps
-    extras: Extras
-    resources: Resources
-    theme: Themes
-    plugin: Plugins
-    widget: Widgets
     iconpack: Icon Packs
-    wallpaper: Wallpapers
+    monitors: Monitors
+    plugin: Plugins
+    resources: Resources
+    shortcuts: Shortcuts
     soundpack: Sound Packs
+    specific_apps: Specific Apps
+    theme: Themes
+    wallpaper: Wallpapers
+    widget: Widgets
 home:
   new_resources: New Resources
 inherit: Inherit
@@ -142,16 +126,18 @@ inProgress: In Progress...
 insert: Insert
 loading: Loading...
 miscellaneous: Miscellaneous
-mods:
-  plugins: Plugins
-  target: Target
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: More
 open: Open
 quit: Quit
 remove: Remove
+resources:
+  app_outdated: This resource requires a newer version of Seelen UI to work properly.
+  open_folder: Open resouce folder
+  outdated: >-
+    This resource was designed for an older version of Seelen UI and might not
+    work properly.
 save: Save
 save_and_restart: Save & Restart
 see_more: See More

@@ -100,38 +100,28 @@ general:
   date_format: Sana formati
   icon_pack:
     available: Mavjud piktogramma to'plamlari
-    label: Ikonka paketlari
-    open_folder: Ochiq ikonkali papka papkasini oching
     selected: Faol piktogramma to'plamlari
   language: Til
-  resource:
-    author: Muallif
-    description: Tavsif
-    tags: Teglar
   startup: Ishga tushirishda ishlaydimi?
   theme:
     available: Mavjud mavzular
-    label: Mavzular
-    open_folder: Ochiq mavzular papkasini oching
     selected: Faol mavzular
-  wallpaper:
-    select: Fon rasmini tanlang
 header:
   labels:
     developer: Ishlab chiqaruvchi
+    extras: Ekstraza
     general: Umumiy
     home: Uy
-    info: Ma `lumot
-    mods: Plaginlar va vidjetlar
+    iconpack: Ikonka paketlari
     monitors: Monitorlar
-    seelen_bar: Fashion asboblar paneli
-    seelen_rofi: Ilovani ishga tushirish vositasi
-    seelen_wall: Fon rasmi menejeri
-    seelen_weg: Dok / vazifalar paneli
-    seelen_wm: Oyna menejeri
+    plugin: Plaginlar
+    resources: Resurslar
     shortcuts: Yorliqlar
+    soundpack: Ovozli paketlar
     specific_apps: Muayyan ilovalar
-    virtual_desk: Virtual ish stollari
+    theme: Mavzular
+    wallpaper: Fon rasmlari
+    widget: Vidjetlar
 home:
   new_resources: Yangi manbalar
 inherit: Meros qilib olmoq
@@ -139,16 +129,18 @@ inProgress: Jarayonda...
 insert: Qo'shmoq
 loading: Yuklash ...
 miscellaneous: Har xil
-mods:
-  plugins: Plaginlar
-  target: Maqsad
-  widgets: Vidjetlar
 monitors_configurations:
   label: '{{Indeks}}'
 more: Ko'proq
 open: Ochiq
 quit: Ketmoq
 remove: Olib tashlamoq
+resources:
+  app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
+  open_folder: Ochiq qayta ishlash papkasini oching
+  outdated: >-
+    Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri
+    ishlamasligi mumkin.
 save: Tejash
 save_and_restart: Saqlang va qayta yoqing
 see_more: Ko'proq ko'rish

@@ -96,38 +96,28 @@ general:
   date_format: ຮູບແບບວັນທີ
   icon_pack:
     available: ໄອຄອນຊອງທີ່ມີໃຫ້
-    label: icon ຊອງ
-    open_folder: Open Icon Packs Folder
     selected: ຊຸດໄອຄອນທີ່ໃຊ້ໄດ້
   language: ພາສາ
-  resource:
-    author: ຜູ້ຂຽນ
-    description: ລາຍລະອຽດ
-    tags: ປ້າຍກຳກັບ
   startup: ດໍາເນີນການກ່ຽວກັບການເລີ່ມຕົ້ນ?
   theme:
     available: ຮູບແບບສີສັນທີ່ມີຢູ່
-    label: ຫົວຂໍ້
-    open_folder: ເປີດຫົວຂໍ້
     selected: ຮູບແບບການເຄື່ອນໄຫວ
-  wallpaper:
-    select: ເລືອກຮູບວໍເປເປີ
 header:
   labels:
     developer: ນັກພັດທະນາ
+    extras: ພິເສດ
     general: ທົ່ວໄປ
     home: ບ້ານ
-    info: ຂໍ້ມູນ
-    mods: ປລັກອິນ & ວິດເຈັດ
+    iconpack: icon ຊອງ
     monitors: ຈໍພາບ
-    seelen_bar: ແຖບເຄື່ອງມືແຟນຊີ
-    seelen_rofi: App Launcher
-    seelen_wall: ຜູ້ຈັດການ Wallpaper
-    seelen_weg: Dock/Taskbar
-    seelen_wm: ຜູ້ຈັດການປ່ອງຢ້ຽມ
+    plugin: Plugins
+    resources: ຊັບພະຍາກອນ
     shortcuts: ທາງລັດ
+    soundpack: ຊອງສຽງ
     specific_apps: ແອັບສະເພາະ
-    virtual_desk: virtual desktops
+    theme: ຫົວຂໍ້
+    wallpaper: ຮູບວໍເປເປີ
+    widget: widgets
 home:
   new_resources: ຊັບພະຍາກອນໃຫມ່
 inherit: ມູນມໍລະດົກ
@@ -135,16 +125,18 @@ inProgress: ຢູ່ໃນຄວາມຄືບໜ້າ...
 insert: ຊອນເຂົ້າ
 loading: ກຳລັງໂຫລດ...
 miscellaneous: ຫຼາຢ
-mods:
-  plugins: Plugins
-  target: ເປົ້າ
-  widgets: widgets
 monitors_configurations:
   label: Monitor {{{{ດັດສະນີ}}
 more: ຫຼາຍ
 open: ເປີດ
 quit: ເຊົາ
 remove: ເອົາອອກ
+resources:
+  app_outdated: ຊັບພະຍາກອນນີ້ຮຽກຮ້ອງໃຫ້ມີ Searen ລຸ້ນໃຫມ່ UI ໃຫ້ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
+  open_folder: ແວ່ນຕາ Sherge
+  outdated: >-
+    ຊັບພະຍາກອນນີ້ໄດ້ຖືກອອກແບບມາສໍາລັບ Apen ຂອງ Searen UI
+    ແລະອາດຈະບໍ່ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
 save: ບັນທຶກ
 save_and_restart: ບັນທຶກແລະ Restart
 see_more: ເບິ່ງເພີ່ມເຕີມ

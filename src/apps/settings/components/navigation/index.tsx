@@ -1,6 +1,8 @@
+import { ResourceText } from '@shared/components/ResourceText';
 import { Tooltip } from 'antd';
-import { memo, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router';
 
 import { useAppSelector } from '../../modules/shared/utils/infra';
@@ -12,30 +14,27 @@ import { Icon } from 'src/apps/shared/components/Icon';
 import { RouteIcons, RoutePath } from './routes';
 import cs from './index.module.css';
 
-const general = [
-  RoutePath.Home,
-  RoutePath.General,
-  RoutePath.Resource,
-  RoutePath.FancyToolbar,
-  RoutePath.WindowManager,
-  RoutePath.SeelenWeg,
-  RoutePath.WallpaperManager,
-  RoutePath.AppLauncher,
-  RoutePath.Shortcuts,
-];
-const advanced = [RoutePath.SettingsByMonitor, RoutePath.SettingsByApplication];
-const developer = [RoutePath.Mods, RoutePath.DevTools];
-
 export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);
 
-  let location = useLocation();
-  let devTools = useAppSelector(RootSelectors.devTools);
+  const widgets = useSelector(RootSelectors.widgets);
+  const devTools = useAppSelector(RootSelectors.devTools);
 
-  console.log(location);
-  const Mapper = (route: RoutePath) => (
-    <Item key={route} route={route} isActive={location.pathname === route} collapsed={collapsed} />
-  );
+  const { t } = useTranslation();
+  const location = useLocation();
+
+  const Mapper = (route: RoutePath) => {
+    return (
+      <Item
+        key={route}
+        route={route}
+        isActive={location.pathname.startsWith(route)}
+        collapsed={collapsed}
+        label={t(`header.labels.${route.replace('/', '')}`)}
+        icon={RouteIcons[route]}
+      />
+    );
+  };
 
   return (
     <div
@@ -53,39 +52,57 @@ export const Navigation = memo(() => {
         />
       </div>
       <div className={cs.body}>
-        <div className={cs.group}>{general.map(Mapper)}</div>
+        <div className={cs.group}>
+          <Item
+            route={RoutePath.Home}
+            isActive={location.pathname === '/'}
+            label={t('header.labels.home')}
+            icon={<Icon iconName="TbHome" />}
+            collapsed={collapsed}
+          />
+          {[RoutePath.General, RoutePath.Resource, RoutePath.Shortcuts].map(Mapper)}
+        </div>
+
         <div className={cs.separator} />
-        <div className={cs.group}>{advanced.map(Mapper)}</div>
+        <div className={cs.group}>
+          {widgets.map((widget) => (
+            <Item
+              key={widget.id}
+              route={`/widget/${widget.id.replace('@', '')}`}
+              isActive={location.pathname.startsWith(`/widget/${widget.id.replace('@', '')}`)}
+              collapsed={collapsed}
+              label={<ResourceText text={widget.metadata.displayName} />}
+              icon={<Icon iconName={widget.icon as any || 'BiSolidWidget'} />}
+            />
+          ))}
+        </div>
+
+        <div className={cs.separator} />
+        <div className={cs.group}>
+          {[RoutePath.SettingsByMonitor, RoutePath.SettingsByApplication].map(Mapper)}
+        </div>
+
         {devTools && (
           <>
             <div className={cs.separator} />
-            <div className={cs.group}>{developer.map(Mapper)}</div>
+            <div className={cs.group}>{[RoutePath.DevTools].map(Mapper)}</div>
           </>
         )}
       </div>
-      <div className={cs.footer}>
-        <Item
-          key={RoutePath.Extras}
-          route={RoutePath.Extras}
-          isActive={location.pathname === RoutePath.Extras}
-          collapsed={collapsed}
-        />
-      </div>
+      <div className={cs.footer}>{[RoutePath.Extras].map(Mapper)}</div>
     </div>
   );
 });
 
 interface ItemProps {
-  route: RoutePath;
+  route: string;
   isActive: boolean;
   collapsed: boolean;
+  icon?: React.ReactNode;
+  label: React.ReactNode;
 }
 
-const Item = ({ route, isActive, collapsed }: ItemProps) => {
-  const { t } = useTranslation();
-
-  const key = route === '/' ? 'home' : route.replace('/', '');
-  const label = t(`header.labels.${key}`);
+const Item = ({ route, icon, label, isActive, collapsed }: ItemProps) => {
   return (
     <Tooltip placement="right" title={collapsed ? label : null}>
       <NavLink
@@ -94,7 +111,7 @@ const Item = ({ route, isActive, collapsed }: ItemProps) => {
           [cs.active!]: isActive,
         })}
       >
-        {RouteIcons[route]}
+        {icon}
         <span className={cs.label}>{label}</span>
       </NavLink>
     </Tooltip>

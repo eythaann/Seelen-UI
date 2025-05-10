@@ -100,38 +100,28 @@ general:
   date_format: Ամսաթիվ ձեւաչափ
   icon_pack:
     available: Հասանելի պատկերակների փաթեթներ
-    label: Սրբապատկերներ
-    open_folder: Բաց պատկերակների տուփերի թղթապանակ
     selected: Ակտիվ պատկերակների փաթեթներ
   language: Լեզու
-  resource:
-    author: Հեղինակ
-    description: Նկարագրություն
-    tags: Պիտակներ
   startup: 'Գործարկման վրա գործարկեք:'
   theme:
     available: Հասանելի թեմաներ
-    label: Թեմաներ
-    open_folder: Բաց թեմաների թղթապանակ
     selected: Ակտիվ թեմաներ
-  wallpaper:
-    select: Ընտրեք Պաստառ
 header:
   labels:
     developer: Մշակող
+    extras: Լրացուցիչ նյութեր
     general: Ընդհանուր
     home: Տուն
-    info: Տեղեկություն
-    mods: Փլագիններ և վիդջեթներ
+    iconpack: Սրբապատկերներ
     monitors: Մոնիտորներ
-    seelen_bar: Fancy Toolbar
-    seelen_rofi: Ծրագրի գործարկիչ
-    seelen_wall: Պաստառների կառավարիչ
-    seelen_weg: Dock / Taskbar
-    seelen_wm: Պատուհանների կառավարիչ
+    plugin: Plugins
+    resources: Ռեսուրսներ
     shortcuts: Դյուրանցումներ
+    soundpack: Ձայնային փաթեթներ
     specific_apps: Հատուկ ծրագրեր
-    virtual_desk: Վիրտուալ աշխատասեղաններ
+    theme: Թեմաներ
+    wallpaper: Պաստառներ
+    widget: Widgets
 home:
   new_resources: Նոր ռեսուրսներ
 inherit: Ժառանգել
@@ -139,16 +129,18 @@ inProgress: Ընթացքի մեջ է...
 insert: Տեղադրել
 loading: Բեռնում ...
 miscellaneous: Զանազան
-mods:
-  plugins: Plugins
-  target: Թիրախ
-  widgets: Widgets
 monitors_configurations:
   label: Մոնիտոր {{ինդեքս}
 more: Ավելի շատ
 open: Բաց անել
 quit: Թողնել
 remove: Հեռացնել
+resources:
+  app_outdated: 'Այս ռեսուրսը պահանջում է Seelen UI- ի նոր տարբերակը `ճիշտ աշխատելու համար:'
+  open_folder: Բացեք Resouce թղթապանակը
+  outdated: >-
+    Այս ռեսուրսը նախատեսված էր Seelen UI- ի ավելի հին տարբերակի համար եւ կարող է
+    պատշաճ կերպով չաշխատել:
 save: Խնայել
 save_and_restart: Պահել եւ վերագործարկել
 see_more: Տեսնել ավելին

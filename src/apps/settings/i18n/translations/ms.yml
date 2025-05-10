@@ -98,38 +98,28 @@ general:
   date_format: Format tarikh
   icon_pack:
     available: Pek Ikon Tersedia
-    label: Pek ikon
-    open_folder: Folder Pek Ikon Buka
     selected: Pek Ikon Aktif
   language: Bahasa
-  resource:
-    author: Pengarang
-    description: Penerangan
-    tags: Tag
   startup: Jalankan permulaan?
   theme:
     available: Tema yang Tersedia
-    label: Tema
-    open_folder: Buka Folder Tema
     selected: Tema Aktif
-  wallpaper:
-    select: Pilih kertas dinding
 header:
   labels:
     developer: Pemaju
+    extras: Tambahan
     general: Umum
     home: Rumah
-    info: Maklumat
-    mods: Pemalam & Widget
+    iconpack: Pek ikon
     monitors: Monitor
-    seelen_bar: Bar alat mewah
-    seelen_rofi: Pelancar App
-    seelen_wall: Pengurus Wallpaper
-    seelen_weg: Dock/Taskbar
-    seelen_wm: Pengurus tetingkap
+    plugin: Plugin
+    resources: Sumber
     shortcuts: Pintasan
+    soundpack: Pek bunyi
     specific_apps: Aplikasi khusus
-    virtual_desk: Desktop maya
+    theme: Tema
+    wallpaper: Kertas dinding
+    widget: Widget
 home:
   new_resources: Sumber baru
 inherit: Mewarisi
@@ -137,16 +127,20 @@ inProgress: Dalam proses ...
 insert: Masukkan
 loading: Memuatkan ...
 miscellaneous: Pelbagai
-mods:
-  plugins: Plugin
-  target: Sasaran
-  widgets: Widget
 monitors_configurations:
   label: Monitor {{index}}
 more: Lebih
 open: Buka
 quit: Berhenti
 remove: Keluarkan
+resources:
+  app_outdated: >-
+    Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan
+    baik.
+  open_folder: Buka Folder Resouce
+  outdated: >-
+    Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi
+    dengan baik.
 save: Simpan
 save_and_restart: Jimat & mulakan semula
 see_more: Lihat lagi

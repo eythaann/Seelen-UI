@@ -98,38 +98,28 @@ general:
   date_format: Formát datumu
   icon_pack:
     available: Dostupné balíčky ikon
-    label: Balíčky ikon
-    open_folder: Otevřete složku balíčků ikon
     selected: Aktivní balíčky ikon
   language: Jazyk
-  resource:
-    author: Autor
-    description: Popis
-    tags: Tagy
   startup: Spoustit při každém startu?
   theme:
     available: Dostupné motivy
-    label: Motivy
-    open_folder: Otevřete složku s motivy
     selected: Aktivní motivy
-  wallpaper:
-    select: Vyberte tapetu
 header:
   labels:
     developer: Vývojář
+    extras: Doplňky
     general: Všeobecné
     home: Domov
-    info: Informace
-    mods: Pluginy a widgety
+    iconpack: Balíčky ikon
     monitors: Monitory
-    seelen_bar: Ozdobný panel nástrojů
-    seelen_rofi: Spouštěč aplikací
-    seelen_wall: Správce tapet
-    seelen_weg: Lišta/Hlavní panel
-    seelen_wm: Správce oken
+    plugin: Zásuvné moduly
+    resources: Zdroje
     shortcuts: Zkratky
+    soundpack: Zvukové balíčky
     specific_apps: Konkrétní aplikace
-    virtual_desk: Virtuální stolní počítače
+    theme: Témata
+    wallpaper: Tapety na plochu
+    widget: Widgety
 home:
   new_resources: Nové zdroje
 inherit: Zdědit
@@ -137,16 +127,20 @@ inProgress: Probíhá ...
 insert: Vložit
 loading: Načítání...
 miscellaneous: Smíšený
-mods:
-  plugins: Pluginy
-  target: Cíl
-  widgets: Widgety
 monitors_configurations:
   label: Monitor {{index}}
 more: Více
 open: Otevřeno
 quit: Přestat
 remove: Odstranit
+resources:
+  app_outdated: >-
+    Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského
+    rozhraní Seelen.
+  open_folder: Otevřete složku Resouce
+  outdated: >-
+    Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a
+    nemusí fungovat správně.
 save: Uložit
 save_and_restart: Uložit a restartovat
 see_more: Viz více

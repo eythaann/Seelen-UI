@@ -98,38 +98,28 @@ general:
   date_format: Fformat dyddiad
   icon_pack:
     available: Pecynnau Eicon Ar Gael
-    label: Pecynnau eicon
-    open_folder: Ffolder pecynnau eicon agored
     selected: Pecynnau Eicon Actif
   language: Iaith
-  resource:
-    author: Awdur
-    description: Disgrifiad
-    tags: Tagiau
   startup: Rhedeg ar gychwyn?
   theme:
     available: Themâu sydd ar Gael
-    label: Themâu
-    open_folder: Ffolder Themâu Agored
     selected: Themâu Gweithredol
-  wallpaper:
-    select: Dewis papur wal
 header:
   labels:
     developer: Natblygwr
+    extras: Hetiau
     general: Gyffredinol
     home: Nghartrefi
-    info: Ngwybodaeth
-    mods: Ategion & Widgets
+    iconpack: Pecynnau eicon
     monitors: Monitorau
-    seelen_bar: Bar offer ffansi
-    seelen_rofi: Lansiwr ap
-    seelen_wall: Rheolwr papur wal
-    seelen_weg: Doc/bar tasgau
-    seelen_wm: Rheolwr Ffenestr
+    plugin: Ategion
+    resources: Adnoddau
     shortcuts: Llwybrau byr
+    soundpack: Pecynnau sain
     specific_apps: Apiau penodol
-    virtual_desk: Penbyrddau Rhithwir
+    theme: Themâu
+    wallpaper: Papurau Wal
+    widget: Widgets
 home:
   new_resources: Adnoddau Newydd
 inherit: Hetifedd
@@ -137,16 +127,20 @@ inProgress: Ar y gweill...
 insert: Mewnosodem
 loading: Llwytho ...
 miscellaneous: Hamddenol
-mods:
-  plugins: Ategion
-  target: Targedon
-  widgets: Widgets
 monitors_configurations:
   label: Monitro {{mynegai}}
 more: Mwy
 open: Ymagorant
 quit: Gadawen
 remove: Godon
+resources:
+  app_outdated: >-
+    Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
+    iawn.
+  open_folder: Ffolder Resouce Agored
+  outdated: >-
+    Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na
+    fyddai'n gweithio'n iawn.
 save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 see_more: Gweld mwy

@@ -100,38 +100,28 @@ general:
   date_format: Format daty
   icon_pack:
     available: Dostępne pakiety ikon
-    label: Pakiety ikony
-    open_folder: Otwórz folder pakietów ikon
     selected: Aktywne pakiety ikon
   language: Język
-  resource:
-    author: Autor
-    description: Opis
-    tags: Tagi
   startup: Biegać na startup?
   theme:
     available: Dostępne motywy
-    label: Motywy
-    open_folder: Otwórz folder motywów
     selected: Aktywne motywy
-  wallpaper:
-    select: Wybierz tapetę
 header:
   labels:
     developer: Deweloper
+    extras: Dodatki
     general: Ogólny
     home: Dom
-    info: Informacja
-    mods: Wtyczki i widżety
+    iconpack: Pakiety ikon
     monitors: Monitory
-    seelen_bar: Fancy narzędzi
-    seelen_rofi: Uruchamianie aplikacji
-    seelen_wall: Menedżer tapety
-    seelen_weg: Dock/Pasek zadań
-    seelen_wm: Menedżer okien
+    plugin: Wtyczki
+    resources: Zasoby
     shortcuts: Skróty
+    soundpack: Pakiety dźwiękowe
     specific_apps: Określone aplikacje
-    virtual_desk: Wirtualne komputery stacjonarne
+    theme: Tematy
+    wallpaper: Tapety
+    widget: Widżety
 home:
   new_resources: Nowe zasoby
 inherit: Dziedziczyć
@@ -139,16 +129,18 @@ inProgress: W trakcie...
 insert: Wstawić
 loading: Ładowanie...
 miscellaneous: Różnorodny
-mods:
-  plugins: Wtyczki
-  target: Cel
-  widgets: Widżety
 monitors_configurations:
   label: Monitor {{indeks}}
 more: Więcej
 open: otwarty
 quit: Zrezygnować
 remove: Usunąć
+resources:
+  app_outdated: Ten zasób wymaga nowszej wersji Seelen UI do poprawnego działania.
+  open_folder: Otwórz folder zasobów
+  outdated: >-
+    Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
+    działać poprawnie.
 save: Ratować
 save_and_restart: Zapisz i uruchom ponownie
 see_more: Zobacz więcej

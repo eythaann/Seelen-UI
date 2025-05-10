@@ -7,7 +7,6 @@ import { DeveloperTools } from './modules/developer/infra';
 import { FancyToolbarSettings } from './modules/fancyToolbar/infra';
 import { General } from './modules/general/main/infra';
 import { Information } from './modules/information/infrastructure';
-import { ModsManager } from './modules/Mods/infra';
 import { ResourcesView } from './modules/resources/infra';
 import { SeelenWegSettings } from './modules/seelenweg/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
@@ -35,7 +34,7 @@ export function Routing() {
         <Route path={RoutePath.WindowManager} Component={WindowManagerSettings} />
         <Route path={RoutePath.FancyToolbar} Component={FancyToolbarSettings} />
         <Route path={RoutePath.DevTools} Component={DeveloperTools} />
-        <Route path={RoutePath.Mods} Component={ModsManager} />
+        <Route path="widget/:username/:resourceName" Component={() => '🏗️🚧'} />
       </Route>
     </Routes>
   );

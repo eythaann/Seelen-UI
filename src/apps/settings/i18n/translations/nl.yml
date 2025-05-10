@@ -98,38 +98,28 @@ general:
   date_format: Datumformaat
   icon_pack:
     available: Beschikbare pictogrampakketten
-    label: Pictogrampakketten
-    open_folder: Map met icoonpakketten openen
     selected: Actieve pictogrampakketten
   language: Taal
-  resource:
-    author: Auteur
-    description: Beschrijving
-    tags: Labels
   startup: Uitvoeren bij het starten?
   theme:
     available: Beschikbare thema's
-    label: Thema's
-    open_folder: Map thema's openen
     selected: Actieve thema's
-  wallpaper:
-    select: Selecteer wallpaper
 header:
   labels:
     developer: Ontwikkelaar
+    extras: Extra's
     general: Algemeen
     home: Thuis
-    info: Informatie
-    mods: Plug-ins en widgets
+    iconpack: Pictogrammenpakketten
     monitors: Monitors
-    seelen_bar: Fancy werkbalk
-    seelen_rofi: Appstarter
-    seelen_wall: Wallpaper manager
-    seelen_weg: Dock/taakbalk
-    seelen_wm: Window Manager
+    plugin: Plugins
+    resources: Bronnen
     shortcuts: Snelkoppelingen
+    soundpack: Geluidspakketten
     specific_apps: Specifieke apps
-    virtual_desk: Virtuele desktops
+    theme: Thema's
+    wallpaper: Behang
+    widget: Widgets
 home:
   new_resources: Nieuwe bronnen
 inherit: Erven
@@ -137,16 +127,18 @@ inProgress: Bezig...
 insert: Invoegen
 loading: Bezig met laden...
 miscellaneous: Gemengd
-mods:
-  plugins: Plug -ins
-  target: Doel
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Meer
 open: Open
 quit: Afsluiten
 remove: Verwijderen
+resources:
+  app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
+  open_folder: Map met bestanden openen
+  outdated: >-
+    Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
+    mogelijk niet goed.
 save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 see_more: Meer zien

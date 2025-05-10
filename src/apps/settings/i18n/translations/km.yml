@@ -98,38 +98,28 @@ general:
   date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ
   icon_pack:
     available: កញ្ចប់រូបតំណាងដែលមាន
-    label: រូបតំណាងកញ្ចប់
-    open_folder: បើករូបតំណាងកញ្ចប់កញ្ចប់
     selected: កញ្ចប់រូបតំណាងសកម្ម
   language: ភាសា
-  resource:
-    author: អ្នកនិពន្ធ
-    description: ការពិពណ៌នា
-    tags: ស្លាក
   startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
   theme:
     available: ស្បែកដែលអាចប្រើបាន
-    label: ស្បែក
-    open_folder: បើកថតឯកសារស្បែក
     selected: ស្បែកសកម្ម
-  wallpaper:
-    select: ជ្រើសរើសផ្ទាំងរូបភាព
 header:
   labels:
     developer: អ្នកអភិវឌ្ឍន៍
+    extras: ការបន្ថែម
     general: ទូទៅ
     home: ផ្ទហ
-    info: ព័ត៌មាន
-    mods: កម្មវិធីជំនួយ និងធាតុក្រាហ្វិក
+    iconpack: រូបតំណាងកញ្ចប់
     monitors: ម៉ូនីទ័រ
-    seelen_bar: របារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
-    seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
-    seelen_wall: កម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
-    seelen_weg: ចត/របារភារកិច្ច
-    seelen_wm: កម្មវិធីគ្រប់គ្រងបង្អួច
+    plugin: រអារ
+    resources: ធនធាន
     shortcuts: ផ្លូវកាត់
+    soundpack: កញ្ចប់សំលេង
     specific_apps: កម្មវិធីជាក់លាក់
-    virtual_desk: ផ្ទៃតុនិម្មិត
+    theme: ស្បែក
+    wallpaper: ផាបផេច
+    widget: ធាតុក្រាហ្វិក
 home:
   new_resources: ធនធានថ្មី
 inherit: តតយលមរតក
@@ -137,16 +127,18 @@ inProgress: កំពុង​ដំណើរការ...
 insert: រចក
 loading: កំពុង​ផ្ទុក...
 miscellaneous: ដេលមានផ្នេកខុសក្នា
-mods:
-  plugins: រអារ
-  target: តមរុយសរមាប់បាញ់
-  widgets: ធាតុក្រាហ្វិក
 monitors_configurations:
   label: ម៉ូនីទ័រ {{សន្ទស្សន៍}}
 more: រេចីនចាង
 open: បើក
 quit: ឈប់
 remove: រមកមិ avad ចេញ
+resources:
+  app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
+  open_folder: បើកថត Rewouce
+  outdated: >-
+    ធនធាននេះត្រូវបានរចនាឡើងសម្រាប់កំណែចាស់របស់ Seeen UI
+    ហើយប្រហែលជាមិនដំណើរការត្រឹមត្រូវទេ។
 save: រក្សាទុក
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
 see_more: មើលច្រើនទៀត

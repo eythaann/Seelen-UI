@@ -97,38 +97,28 @@ general:
   date_format: Muundo wa tarehe
   icon_pack:
     available: Vifurushi vya ikoni vinavyopatikana
-    label: Pakiti za ikoni
-    open_folder: Fungua folda ya pakiti za icon
     selected: Vifurushi vya ikoni zinazotumika
   language: Lugha
-  resource:
-    author: Mwandishi
-    description: Maelezo
-    tags: Lebo
   startup: Kuendesha kuanza?
   theme:
     available: Mandhari Zinazopatikana
-    label: Mandhari
-    open_folder: Fungua folda ya Mada
     selected: Mandhari Inayotumika
-  wallpaper:
-    select: Chagua Ukuta
 header:
   labels:
     developer: Msanidi programu
+    extras: Ziada
     general: Mkuu
     home: Nyumbani
-    info: Habari
-    mods: Plugins & Widgets
+    iconpack: Pakiti za ikoni
     monitors: Wachunguzi
-    seelen_bar: Zana ya Dhana
-    seelen_rofi: Kizindua programu
-    seelen_wall: Meneja wa Ukuta
-    seelen_weg: Dock/Taskbar
-    seelen_wm: Meneja wa Window
+    plugin: Programu -jalizi
+    resources: Rasilimali
     shortcuts: Njia za mkato
+    soundpack: Pakiti za sauti
     specific_apps: Programu maalum
-    virtual_desk: Dawati za kweli
+    theme: Mada
+    wallpaper: Wallpapers
+    widget: Vilivyoandikwa
 home:
   new_resources: Rasilimali mpya
 inherit: Urithi
@@ -136,16 +126,18 @@ inProgress: Inaendelea...
 insert: Ingiza
 loading: Inapakia ...
 miscellaneous: Miscellaneous
-mods:
-  plugins: Programu -jalizi
-  target: Lengo
-  widgets: Vilivyoandikwa
 monitors_configurations:
   label: Monitor {{index}}
 more: Zaidi
 open: Wazi
 quit: Acha
 remove: Ondoa
+resources:
+  app_outdated: Rasilimali hii inahitaji toleo jipya la Seelen UI kufanya kazi vizuri.
+  open_folder: Fungua folda ya Resouce
+  outdated: >-
+    Rasilimali hii ilibuniwa kwa toleo la zamani la Seelen UI na linaweza
+    kufanya kazi vizuri.
 save: Kuokoa
 save_and_restart: Okoa na uanze tena
 see_more: Tazama zaidi

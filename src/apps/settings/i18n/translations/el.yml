@@ -99,38 +99,28 @@ general:
   date_format: Μορφή ημερομηνίας
   icon_pack:
     available: Διαθέσιμα πακέτα εικονιδίων
-    label: Εικονίδια
-    open_folder: Ανοίξτε το φάκελο icon packs
     selected: Ενεργά πακέτα εικονιδίων
   language: Γλώσσα
-  resource:
-    author: Συγγραφέας
-    description: Περιγραφή
-    tags: Ετικέτες
   startup: Εκτέλεση κατά την εκκίνηση;
   theme:
     available: Διαθέσιμα θέματα
-    label: Θέματα
-    open_folder: Ανοίξτε το φάκελο themes
     selected: Ενεργά θέματα
-  wallpaper:
-    select: Επιλέξτε ταπετσαρία
 header:
   labels:
     developer: Προγραμματιστής
+    extras: Πρόσθετα
     general: Γενικός
     home: Σπίτι
-    info: Πληροφορίες
-    mods: Πρόσθετα & Widgets
+    iconpack: Πακέτα εικονιδίων
     monitors: Παρακολουθεί
-    seelen_bar: Φανταχτερή γραμμή εργαλείων
-    seelen_rofi: Εκτοξευτής εφαρμογών
-    seelen_wall: Διευθυντής ταπετσαρίας
-    seelen_weg: Λέσχη εργασιών
-    seelen_wm: Διαχειριστής παραθύρων
+    plugin: Plugins
+    resources: Πόροι
     shortcuts: Συντομεύσεις
+    soundpack: Πακέτα ήχου
     specific_apps: Συγκεκριμένες εφαρμογές
-    virtual_desk: Εικονικοί επιτραπέζιοι
+    theme: Θέματα
+    wallpaper: Ταπετσαρίες
+    widget: Widgets
 home:
   new_resources: Νέοι πόροι
 inherit: Κληρονομώ
@@ -138,16 +128,20 @@ inProgress: Σε εξέλιξη...
 insert: Εισάγω
 loading: Φόρτωση...
 miscellaneous: Ανάμικτος
-mods:
-  plugins: Πρόσθετα
-  target: Στόχος
-  widgets: Widgets
 monitors_configurations:
   label: Monitor {{index}}
 more: Περισσότερο
 open: Ανοιξε
 quit: Εγκαταλείπω
 remove: Αφαιρώ
+resources:
+  app_outdated: >-
+    Αυτός ο πόρος απαιτεί μια νεότερη έκδοση του Seelen UI για να λειτουργήσει
+    σωστά.
+  open_folder: Ανοίξτε το φάκελο resouce
+  outdated: >-
+    Αυτός ο πόρος σχεδιάστηκε για μια παλαιότερη έκδοση του Seelen UI και
+    ενδέχεται να μην λειτουργεί σωστά.
 save: Αποθηκεύσετε
 save_and_restart: Αποθήκευση & επανεκκίνηση
 see_more: Δείτε περισσότερα
