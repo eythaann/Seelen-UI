@@ -9,10 +9,12 @@ export function ResourceText({ text }: Props) {
   const {
     i18n: { language },
   } = useTranslation();
-
   if (typeof text === 'string') {
-    return text;
+    return <span>{text}</span>;
   }
-
-  return text[language] || text['en'] || null;
+  const text2 = text[language] || text['en'];
+  if (!text2) {
+    return null;
+  }
+  return <span>{text2}</span>;
 }

@@ -97,4 +97,11 @@ impl Monitor {
             bottom: rect.bottom,
         })
     }
+
+    #[allow(dead_code)]
+    pub fn scale_factor(&self) -> Result<f64> {
+        let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(self.0)?;
+        let text_scale_factor = WindowsApi::get_text_scale_factor()?;
+        Ok(monitor_scale_factor * text_scale_factor)
+    }
 }

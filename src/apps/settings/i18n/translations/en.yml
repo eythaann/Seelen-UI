@@ -118,7 +118,6 @@ header:
     developer: Developer
     general: General
     home: Home
-    info: Information
     mods: Plugins & Widgets
     monitors: Monitors
     seelen_bar: Fancy Toolbar
@@ -128,7 +127,14 @@ header:
     seelen_wm: Window Manager
     shortcuts: Shortcuts
     specific_apps: Specific Apps
-    virtual_desk: Virtual Desktops
+    extras: Extras
+    resources: Resources
+    theme: Themes
+    plugin: Plugins
+    widget: Widgets
+    iconpack: Icon Packs
+    wallpaper: Wallpapers
+    soundpack: Sound Packs
 home:
   new_resources: New Resources
 inherit: Inherit

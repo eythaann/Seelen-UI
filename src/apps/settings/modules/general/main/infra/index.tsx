@@ -1,7 +1,5 @@
-import { SeelenCommand, SupportedLanguages } from '@seelen-ui/lib';
-import { path } from '@tauri-apps/api';
-import { invoke } from '@tauri-apps/api/core';
-import { Button, Input, Select, Switch, Tooltip } from 'antd';
+import { SupportedLanguages } from '@seelen-ui/lib';
+import { Input, Select, Switch, Tooltip } from 'antd';
 import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -15,8 +13,6 @@ import { Icon } from 'src/apps/shared/components/Icon';
 
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
-import { IconPacks } from './IconPacks';
-import { Themes } from './Themes';
 
 export function General() {
   const [changingAutostart, setChangingAutostart] = useState(false);
@@ -101,42 +97,6 @@ export function General() {
       </SettingsGroup>
 
       <Colors />
-
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t('general.theme.label')}</b>
-          <Tooltip title={t('general.theme.open_folder')}>
-            <Button
-              type="default"
-              onClick={async () => {
-                const dataDir = await path.appDataDir();
-                invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'themes') });
-              }}
-            >
-              <Icon iconName="PiFoldersDuotone" />
-            </Button>
-          </Tooltip>
-        </SettingsOption>
-        <Themes />
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t('general.icon_pack.label')}</b>
-          <Tooltip title={t('general.icon_pack.open_folder')}>
-            <Button
-              type="default"
-              onClick={async () => {
-                const dataDir = await path.appDataDir();
-                invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'icons') });
-              }}
-            >
-              <Icon iconName="PiFoldersDuotone" />
-            </Button>
-          </Tooltip>
-        </SettingsOption>
-        <IconPacks />
-      </SettingsGroup>
     </>
   );
 }

@@ -52,9 +52,7 @@ export function RemoteResources() {
             >
               <img src={resource.metadata.portrait} />
               <div className={cs.text}>
-                <span>
-                  <ResourceText text={resource.metadata.displayName} />
-                </span>
+                <ResourceText text={resource.metadata.displayName} />
               </div>
             </a>
           );

@@ -1,8 +1,10 @@
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { relaunch } from '@tauri-apps/plugin-process';
 import { Button } from 'antd';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router';
 
 import { SaveStore } from '../../modules/shared/store/infra';
 import { useAppSelector } from '../../modules/shared/utils/infra';
@@ -15,7 +17,7 @@ import { UpdateButton } from './UpdateButton';
 import cs from './index.module.css';
 
 export const Header = () => {
-  let route = useAppSelector(RootSelectors.route);
+  let location = useLocation();
   let hasChanges = useAppSelector(RootSelectors.toBeSaved);
   let shouldRestart = useAppSelector(RootSelectors.toBeRestarted);
 
@@ -39,12 +41,19 @@ export const Header = () => {
   };
 
   const saveLabel = shouldRestart ? t('save_and_restart') : t('save');
-  const ExtraInfo = RouteExtraInfo[route];
+  const ExtraInfo = RouteExtraInfo[location.pathname];
+
+  const parts = location.pathname === '/' ? ['home'] : location.pathname.split('/').filter(Boolean);
 
   return (
     <div className={cs.Header} data-tauri-drag-region>
       <div className={cs.title}>
-        {t(`header.labels.${route}`)}
+        {parts.map((part, idx) => (
+          <React.Fragment key={part}>
+            <span>{t(`header.labels.${part}`)}</span>
+            {++idx < parts.length ? '>' : ''}
+          </React.Fragment>
+        ))}
         {ExtraInfo && <ExtraInfo />}
       </div>
       <div className={cs.actions}>

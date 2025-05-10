@@ -3,6 +3,7 @@ import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router';
 
 import { LoadSettingsToStore, registerStoreEvents, store } from './modules/shared/store/infra';
 
@@ -27,7 +28,9 @@ const container = getRootContainer();
 createRoot(container).render(
   <Provider store={store}>
     <I18nextProvider i18n={i18n}>
-      <App />
+      <HashRouter>
+        <App />
+      </HashRouter>
     </I18nextProvider>
   </Provider>,
 );

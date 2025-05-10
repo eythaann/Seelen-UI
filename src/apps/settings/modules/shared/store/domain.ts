@@ -14,11 +14,8 @@ import {
   WindowManagerSettings,
 } from '@seelen-ui/lib/types';
 
-import { Route } from '../../../components/navigation/routes';
-
 export interface RootState extends Settings {
   lastLoaded: this | null;
-  route: Route;
   toBeSaved: boolean;
   toBeRestarted: boolean;
   appsConfigurations: AppConfig[];

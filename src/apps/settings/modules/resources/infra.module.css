@@ -1,0 +1,92 @@
+.kindSelector {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+
+  .kind {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid var(--color-gray-300);
+    border-radius: 8px;
+
+    &:hover {
+      background-color: var(--color-blue-100);
+      border: 2px solid var(--color-blue-400);
+      color: var(--color-blue-800);
+    }
+
+    .kindIcon {
+      height: 25%;
+    }
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .reorderGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: 100px 1fr min-content;
+    padding: 10px;
+    border-radius: 18px;
+    gap: 10px;
+    background-color: var(--color-gray-50);
+    cursor: grab;
+
+    .portrait {
+      background-color: var(--color-gray-200);
+      border-radius: 8px;
+      aspect-ratio: 1/1;
+
+      > img {
+        border-radius: 8px;
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow: hidden;
+
+      > span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      a {
+        color: var(--color-blue-800);
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+  }
+}

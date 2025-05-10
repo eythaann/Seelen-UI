@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 
 import { newSelectors } from '../../modules/shared/store/app/reducer';
 
-import { Route } from '../navigation/routes';
+import { RoutePath } from '../navigation/routes';
 
-export const RouteExtraInfo: { [key in Route]?: React.JSXElementConstructor<any> } = {
-  [Route.SPECIFIC_APPS]: () => {
+export const RouteExtraInfo: { [key: string]: React.JSXElementConstructor<any> } = {
+  [RoutePath.SettingsByApplication]: () => {
     const { t } = useTranslation();
     return (
       <Tooltip title={t('apps_configurations.extra_info')}>
@@ -15,7 +15,7 @@ export const RouteExtraInfo: { [key in Route]?: React.JSXElementConstructor<any>
       </Tooltip>
     );
   },
-  [Route.SEELEN_ROFI]: () => {
+  [RoutePath.AppLauncher]: () => {
     const shortcut = useSelector(newSelectors.ahkVariables.toggleLauncher);
     return (
       <span style={{ fontSize: '0.9rem', color: 'var(--color-gray-500)' }}>({shortcut.fancy})</span>

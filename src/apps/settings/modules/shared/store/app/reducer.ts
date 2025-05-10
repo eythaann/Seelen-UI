@@ -16,14 +16,12 @@ import { matcher, reducersFor, selectorsFor } from '../../utils/app';
 import { RootState } from '../domain';
 
 import { StateBuilder } from '../../../../../shared/StateBuilder';
-import { Route } from '../../../../components/navigation/routes';
 import i18n from '../../../../i18n';
 import { defaultSettings } from './default';
 
 const initialState: RootState = {
   lastLoaded: null,
   autostart: null,
-  route: Route.HOME,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
   seelenweg: defaultSettings.seelenweg,
   wall: defaultSettings.wall,
