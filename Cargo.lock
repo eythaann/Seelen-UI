@@ -3468,7 +3468,7 @@ version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "af1844ef2428cc3e1cb900be36181049ef3d3193c63e43026cfe202983b27a56"
 dependencies = [
- "proc-macro-crate 2.0.0",
+ "proc-macro-crate 1.3.1",
  "proc-macro2",
  "quote",
  "syn 2.0.90",
@@ -5052,7 +5052,7 @@ dependencies = [
 [[package]]
 name = "seelen-core"
 version = "2.2.6"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#fc1f8256d31a37f722341468ee64aea866c39b22"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#aab46dabe8150741a2dd210e75300d54f683b0c3"
 dependencies = [
  "base64 0.22.1",
  "chrono",
