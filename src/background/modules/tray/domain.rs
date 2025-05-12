@@ -1,5 +1,3 @@
-use std::path::PathBuf;
-
 use serde::Serialize;
 use windows::Win32::UI::Shell::{
     NOTIFYICONDATAW_0, NOTIFY_ICON_DATA_FLAGS, NOTIFY_ICON_INFOTIP_FLAGS, NOTIFY_ICON_MESSAGE,
@@ -101,26 +99,4 @@ impl From<NotifyIconData> for TrayIconV2 {
             title: WindowsString::from_slice(&data.info_title).to_string(),
         }
     }
-}
-
-#[derive(Debug, Clone, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct TrayIcon {
-    pub label: String,
-    pub registry: RegistryNotifyIcon,
-}
-
-#[derive(Debug, Clone, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct RegistryNotifyIcon {
-    /// can be used as a unique identifier of the registered tray icon
-    pub key: String,
-    pub executable_path: PathBuf,
-    pub initial_tooltip: Option<String>,
-    /// PNG image of the cached icon
-    pub icon_snapshot: Option<Vec<u8>>,
-    pub icon_guid: Option<String>,
-    pub icon_uid: Option<u32>,
-    pub is_promoted: bool,
-    pub is_running: bool,
 }

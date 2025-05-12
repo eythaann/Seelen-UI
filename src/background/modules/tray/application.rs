@@ -1,4 +1,5 @@
 use parking_lot::Mutex;
+use seelen_core::system_state::{RegistryNotifyIcon, TrayIcon};
 use std::{
     collections::HashMap,
     sync::{
@@ -45,9 +46,7 @@ use crate::{
     },
 };
 
-use super::domain::{
-    NotifyIconIdentifier, RegistryNotifyIcon, ShellTrayMessage, TrayIcon, TrayIconId, TrayIconV2,
-};
+use super::domain::{NotifyIconIdentifier, ShellTrayMessage, TrayIconId, TrayIconV2};
 
 lazy_static! {
     pub static ref TRAY_ICON_MANAGER: Arc<Mutex<TrayIconManager>> =

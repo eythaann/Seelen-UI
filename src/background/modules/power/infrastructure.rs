@@ -1,3 +1,4 @@
+use seelen_core::system_state::{Battery, PowerMode, PowerStatus};
 use windows::Win32::System::Shutdown::{EWX_LOGOFF, EWX_REBOOT, EWX_SHUTDOWN, SHTDN_REASON_NONE};
 
 use crate::{
@@ -5,10 +6,7 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-use super::{
-    application::PowerManager,
-    domain::{Battery, PowerMode, PowerStatus},
-};
+use super::{application::PowerManager, domain::power_status_to_serializable};
 
 pub fn register_power_events() {
     std::thread::spawn(|| {
@@ -24,7 +22,9 @@ pub fn release_power_events() {
 
 #[tauri::command(async)]
 pub fn get_power_status() -> Result<PowerStatus> {
-    Ok(WindowsApi::get_system_power_status()?.into())
+    Ok(power_status_to_serializable(
+        WindowsApi::get_system_power_status()?,
+    ))
 }
 
 #[tauri::command(async)]

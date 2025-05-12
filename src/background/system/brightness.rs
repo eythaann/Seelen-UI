@@ -1,13 +1,6 @@
-use serde::Serialize;
+use seelen_core::system_state::Brightness;
 
 use crate::{error_handler::Result, windows_api::monitor::Monitor};
-
-#[derive(Debug, Serialize)]
-pub struct Brightness {
-    min: u32,
-    max: u32,
-    current: u32,
-}
 
 #[tauri::command(async)]
 pub fn get_main_monitor_brightness() -> Result<Option<Brightness>> {

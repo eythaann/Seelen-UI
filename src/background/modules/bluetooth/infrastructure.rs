@@ -78,16 +78,6 @@ pub fn get_connected_bluetooth_devices() -> Result<Vec<BluetoothDevice>> {
 }
 
 #[tauri::command(async)]
-pub fn get_bluetooth_radio_state() -> Result<bool> {
-    Ok(true)
-}
-
-#[tauri::command(async)]
-pub fn set_bluetooth_radio_state(_state: bool) -> Result<()> {
-    Ok(())
-}
-
-#[tauri::command(async)]
 pub fn start_bluetooth_scanning() -> Result<()> {
     let mut manager = trace_lock!(BLUETOOTH_MANAGER);
     manager.discover()?;

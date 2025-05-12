@@ -1,14 +1,11 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { ToastBindingEntry, ToastImage } from '@seelen-ui/lib/types';
-import { invoke } from '@tauri-apps/api/core';
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
+import { AppNotification, ToastBindingEntry, ToastImage } from '@seelen-ui/lib/types';
 import { Select, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 
 import { FileIcon, Icon } from 'src/apps/shared/components/Icon';
 import { cx } from 'src/apps/shared/styles';
-
-import { AppNotification } from '../domain';
 
 interface Props {
   notification: AppNotification;

@@ -4,8 +4,7 @@ mod workspaces;
 
 use arc_swap::ArcSwap;
 use lazy_static::lazy_static;
-use seelen_core::state::VirtualDesktopStrategy;
-use serde::Serialize;
+use seelen_core::state::{DesktopWorkspace, VirtualDesktopStrategy};
 use std::sync::Arc;
 
 use crate::{error_handler::Result, state::application::FULL_STATE};
@@ -57,12 +56,6 @@ pub enum VirtualDesktop {
     Seelen(workspaces::SeelenWorkspace),
 }
 
-#[derive(Serialize)]
-pub struct SerializableVirtualDesktop {
-    id: String,
-    name: Option<String>,
-}
-
 impl VirtualDesktop {
     pub fn id(&self) -> String {
         match self {
@@ -78,9 +71,9 @@ impl VirtualDesktop {
         }
     }
 
-    pub fn as_serializable(&self) -> SerializableVirtualDesktop {
-        SerializableVirtualDesktop {
-            id: self.id(),
+    pub fn as_serializable(&self) -> DesktopWorkspace {
+        DesktopWorkspace {
+            id: self.id().into(),
             name: self.name().clone(),
         }
     }

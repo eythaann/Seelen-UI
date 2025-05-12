@@ -1,4 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { MediaPlayer } from '@seelen-ui/lib/types';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button, Tooltip } from 'antd';
@@ -6,8 +7,6 @@ import { useEffect, useState } from 'react';
 
 import { calcLuminance } from '../application';
 import { FileIcon, Icon } from 'src/apps/shared/components/Icon';
-
-import { MediaChannelTransportData } from '../../shared/store/domain';
 
 const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
@@ -20,7 +19,7 @@ const DEFAULT_THUMBNAIL = await path.resolve(
   'music_thumbnail.jpg',
 );
 
-export function MediaPlayerSession({ session }: { session: MediaChannelTransportData }) {
+export function MediaPlayerSession({ session }: { session: MediaPlayer }) {
   const [luminance, setLuminance] = useState(0);
 
   let thumbnailSrc = convertFileSrc(session?.thumbnail ? session.thumbnail : DEFAULT_THUMBNAIL);

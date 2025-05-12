@@ -1,11 +1,9 @@
 import { IconName } from '@icons';
-import { SeelenCommand } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
+import { WlanBssEntry } from '@seelen-ui/lib/types';
 import { Button, Input, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { WlanBssEntry, WlanProfile } from '../domain';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { cx } from '../../../../shared/styles';
@@ -56,14 +54,14 @@ export function WlanSelectorEntry(props: {
     }
 
     if (showFields) {
-      invoke<boolean>('wlan_connect', { ssid, password, hidden: !entry.ssid }).then(
+      invoke(SeelenCommand.WlanConnect, { ssid, password, hidden: !entry.ssid }).then(
         onfulfilled,
         onrejected,
       );
       return;
     }
 
-    invoke<WlanProfile[]>('wlan_get_profiles')
+    invoke(SeelenCommand.WlanGetProfiles)
       .then((profiles) => {
         let profile = profiles.find((profile) => profile.ssid === entry.ssid);
         if (!profile) {
@@ -72,7 +70,7 @@ export function WlanSelectorEntry(props: {
           return;
         }
 
-        invoke<boolean>('wlan_connect', {
+        invoke(SeelenCommand.WlanConnect, {
           ssid: profile.ssid,
           password: profile.password,
           hidden: !entry.ssid,

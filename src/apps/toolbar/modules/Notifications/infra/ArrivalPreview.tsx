@@ -1,3 +1,4 @@
+import { AppNotification } from '@seelen-ui/lib/types';
 import { AnimatePresence } from 'framer-motion';
 import { debounce } from 'lodash';
 import moment from 'moment';
@@ -5,8 +6,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../shared/store/app';
-
-import { AppNotification } from '../domain';
 
 import { Notification } from './Notification';
 

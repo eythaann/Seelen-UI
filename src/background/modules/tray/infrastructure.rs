@@ -1,4 +1,4 @@
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{handlers::SeelenEvent, system_state::TrayIcon};
 use tauri::Emitter;
 
 use crate::{
@@ -8,8 +8,6 @@ use crate::{
     seelen::get_app_handle,
     trace_lock,
 };
-
-use super::domain::TrayIcon;
 
 pub fn register_tray_icons_events() {
     std::thread::spawn(|| {

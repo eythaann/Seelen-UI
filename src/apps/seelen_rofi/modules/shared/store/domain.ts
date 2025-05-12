@@ -8,5 +8,5 @@ export interface StartMenuApp {
 
 export interface LauncherState extends IRootState<SeelenLauncherSettings> {
   apps: StartMenuApp[];
-  history: { [key: string]: string[] };
+  history: { [key in string]?: string[] };
 }

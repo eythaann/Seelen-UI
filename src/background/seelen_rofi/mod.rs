@@ -2,15 +2,13 @@ pub mod cli;
 pub mod handler;
 
 use base64::Engine;
+use seelen_core::system_state::StartMenuItem;
 use tauri::WebviewWindow;
 use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS};
 
 use crate::{
-    error_handler::Result,
-    log_error,
-    modules::start::{application::START_MENU_MANAGER, domain::StartMenuItem},
-    seelen::get_app_handle,
-    windows_api::WindowsApi,
+    error_handler::Result, log_error, modules::start::application::START_MENU_MANAGER,
+    seelen::get_app_handle, windows_api::WindowsApi,
 };
 
 pub struct SeelenRofi {

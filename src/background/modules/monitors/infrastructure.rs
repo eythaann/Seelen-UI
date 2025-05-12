@@ -1,11 +1,11 @@
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{handlers::SeelenEvent, system_state::PhysicalMonitor};
 use tauri::Emitter;
 
 use crate::{
     error_handler::Result, log_error, seelen::get_app_handle, windows_api::MonitorEnumerator,
 };
 
-use super::{domain::PhysicalMonitor, MonitorManager};
+use super::MonitorManager;
 
 fn _get_connected_monitors() -> Result<Vec<PhysicalMonitor>> {
     let mut monitors = Vec::new();

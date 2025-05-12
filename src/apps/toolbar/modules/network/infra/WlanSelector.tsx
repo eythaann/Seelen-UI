@@ -1,4 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { WlanBssEntry } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
@@ -10,8 +11,6 @@ import { BackgroundByLayersV2 } from '../../../../seelenweg/components/Backgroun
 import { Selectors } from '../../shared/store/app';
 import { Icon } from 'src/apps/shared/components/Icon';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
-
-import { WlanBssEntry } from '../domain';
 
 import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { WlanSelectorEntry } from './WlanSelectorEntry';

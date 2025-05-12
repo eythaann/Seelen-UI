@@ -1,12 +1,11 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { MediaDevice } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { Icon } from 'src/apps/shared/components/Icon';
 import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
-
-import { MediaDevice } from '../../shared/store/domain';
 
 export function Device({
   device,

@@ -75,7 +75,7 @@ export function BluetoothSelectorEntry(props: {
   };
 
   // idk what that hell void was added as type on a argument, remove that after change it on the library.
-  const onPairRequest = (param: BluetoothDevicePairShowPinRequest | void) => {
+  const onPairRequest = (param: BluetoothDevicePairShowPinRequest | null) => {
     if (unsubscribtion) {
       unsubscribtion();
     }

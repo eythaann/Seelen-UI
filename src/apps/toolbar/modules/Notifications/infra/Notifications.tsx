@@ -1,5 +1,5 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
+import { AppNotification } from '@seelen-ui/lib/types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -7,8 +7,6 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
-
-import { AppNotification } from '../domain';
 
 import { Notification } from './Notification';
 

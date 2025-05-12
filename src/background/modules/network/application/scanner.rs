@@ -4,6 +4,7 @@ use std::{
 };
 
 use itertools::Itertools;
+use seelen_core::system_state::WlanBssEntry;
 use windows::{
     core::GUID,
     Win32::{
@@ -24,38 +25,35 @@ use windows::{
 };
 use windows_core::{PCWSTR, PWSTR};
 
-use crate::{error_handler::Result, modules::network::domain::WlanBssEntry};
+use crate::error_handler::Result;
 
 use super::NetworkManager;
 
-impl From<&WLAN_BSS_ENTRY> for WlanBssEntry {
-    fn from(entry: &WLAN_BSS_ENTRY) -> Self {
-        let ssid = String::from_utf8_lossy(&entry.dot11Ssid.ucSSID)
-            .replace("\0", "")
-            .to_string();
+fn from_raw_entry(entry: &WLAN_BSS_ENTRY) -> WlanBssEntry {
+    let ssid = String::from_utf8_lossy(&entry.dot11Ssid.ucSSID)
+        .replace("\0", "")
+        .to_string();
 
-        let ssid = if ssid.is_empty() { None } else { Some(ssid) };
+    let ssid = if ssid.is_empty() { None } else { Some(ssid) };
 
-        let bssid = entry
-            .dot11Bssid
-            .iter()
-            .map(|b| format!("{b:02x}"))
-            .join(":");
+    let bssid = entry
+        .dot11Bssid
+        .iter()
+        .map(|b| format!("{b:02x}"))
+        .join(":");
 
-        Self {
-            ssid,
-            bssid,
-            channel_frequency: entry.ulChCenterFrequency,
-            signal: entry.uLinkQuality,
-            connected: false,
-            connected_channel: false,
-            secured: entry.usCapabilityInformation as u32 & DOT11_CAPABILITY_INFO_PRIVACY
-                == DOT11_CAPABILITY_INFO_PRIVACY,
-            known: false,
-        }
+    WlanBssEntry {
+        ssid,
+        bssid,
+        channel_frequency: entry.ulChCenterFrequency,
+        signal: entry.uLinkQuality,
+        connected: false,
+        connected_channel: false,
+        secured: entry.usCapabilityInformation as u32 & DOT11_CAPABILITY_INFO_PRIVACY
+            == DOT11_CAPABILITY_INFO_PRIVACY,
+        known: false,
     }
 }
-
 static SCANNING: AtomicBool = AtomicBool::new(false);
 
 impl NetworkManager {
@@ -271,7 +269,7 @@ impl NetworkManager {
 
                 let connection = Self::get_connected_wlan(client_handle, &interface_guid);
                 for entry in bss_entries {
-                    let mut wrapped_entry = WlanBssEntry::from(&entry);
+                    let mut wrapped_entry = from_raw_entry(&entry);
 
                     if let Some(connection) = connection {
                         if connection.wlanAssociationAttributes.dot11Ssid.ucSSID

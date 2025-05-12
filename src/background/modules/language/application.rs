@@ -6,6 +6,7 @@ use std::sync::{
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::system_state::{KeyboardLayout, SystemLanguage};
 use windows::Win32::{
     Globalization::{
         GetLocaleInfoEx, LCIDToLocaleName, LOCALE_SLOCALIZEDDISPLAYNAME, LOCALE_SNATIVELANGUAGENAME,
@@ -24,8 +25,6 @@ use crate::{
     windows_api::{string_utils::WindowsString, WindowsApi},
 };
 
-use super::domain::{KeyboardLayout, Language};
-
 lazy_static! {
     pub static ref LANGUAGE_MANAGER: Arc<Mutex<LanguageManager>> =
         Arc::new(Mutex::new(LanguageManager::default()));
@@ -42,7 +41,7 @@ pub enum LanguageEvent {
 
 #[derive(Debug, Default)]
 pub struct LanguageManager {
-    pub languages: Vec<Language>,
+    pub languages: Vec<SystemLanguage>,
 }
 
 impl LanguageManager {
@@ -76,13 +75,13 @@ impl LanguageManager {
         }
     }
 
-    pub fn enum_langs() -> Result<Vec<Language>> {
+    pub fn enum_langs() -> Result<Vec<SystemLanguage>> {
         let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
         let reg_layouts = hklm.open_subkey(r"SYSTEM\CurrentControlSet\Control\Keyboard Layouts")?;
         let available_klids = reg_layouts.enum_keys().flatten().collect_vec();
 
         let active_hkl = unsafe { GetKeyboardLayout(0) };
-        let mut languages: Vec<Language> = Vec::new();
+        let mut languages: Vec<SystemLanguage> = Vec::new();
 
         for hkl in Self::get_hkl_list() {
             // https://learn.microsoft.com/en-us/windows/win32/intl/language-identifiers
@@ -152,7 +151,7 @@ impl LanguageManager {
                         LOCALE_SNATIVELANGUAGENAME,
                         Some(native_name.as_mut_slice()),
                     );
-                    languages.push(Language {
+                    languages.push(SystemLanguage {
                         id: format!("{language_id:04X}"),
                         code: lang_code_str.clone(),
                         name: display_name.to_string(),

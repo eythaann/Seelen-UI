@@ -1,12 +1,9 @@
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{handlers::SeelenEvent, system_state::SystemLanguage};
 use tauri::Emitter;
 
 use crate::{error_handler::Result, seelen::get_app_handle, trace_lock};
 
-use super::{
-    application::{LanguageEvent, LanguageManager, LANGUAGE_MANAGER},
-    domain::Language,
-};
+use super::application::{LanguageEvent, LanguageManager, LANGUAGE_MANAGER};
 
 pub fn register_language_events() {
     std::thread::spawn(move || {
@@ -35,7 +32,7 @@ pub fn register_language_events() {
 }
 
 #[tauri::command(async)]
-pub fn get_system_languages() -> Result<Vec<Language>> {
+pub fn get_system_languages() -> Result<Vec<SystemLanguage>> {
     LanguageManager::enum_langs()
 }
 

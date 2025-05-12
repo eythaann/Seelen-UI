@@ -1,4 +1,5 @@
-import { GetIconArgs, IconPackManager } from '@seelen-ui/lib';
+import { IconPackManager } from '@seelen-ui/lib';
+import { SeelenCommandGetIconArgs } from '@seelen-ui/lib/types';
 import { cx } from '@shared/styles';
 import { UnlistenFn } from '@tauri-apps/api/event';
 import React, { ImgHTMLAttributes } from 'react';
@@ -7,7 +8,7 @@ import { iconPackManager } from './common';
 import { MissingIcon } from './MissingIcon';
 import cs from './index.module.css';
 
-interface FileIconProps extends GetIconArgs, Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+interface FileIconProps extends SeelenCommandGetIconArgs, Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   /** if true, no missing icon will be rendered in case no icon found */
   noFallback?: boolean;
 }
@@ -18,7 +19,7 @@ interface FileIconState {
 }
 
 const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-function getIcon(args: GetIconArgs): {
+function getIcon(args: SeelenCommandGetIconArgs): {
   src: string | null;
   mask?: string | null;
 } {

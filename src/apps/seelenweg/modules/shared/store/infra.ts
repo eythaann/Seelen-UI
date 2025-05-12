@@ -1,15 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { SeelenCommand, SeelenEvent, Settings, UIColors, WegItems } from '@seelen-ui/lib';
+import { SeelenCommand, SeelenEvent, Settings, subscribe, UIColors, WegItems } from '@seelen-ui/lib';
 import { SeelenWegSettings } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
-import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
 
 import { RootActions, RootSlice } from './app';
-import { AppNotification } from 'src/apps/toolbar/modules/Notifications/domain';
-
-import { MediaSession } from './domain';
 
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
@@ -45,12 +41,12 @@ export async function registerStoreEvents() {
     }
   });
 
-  await listenGlobal<MediaSession[]>(SeelenEvent.MediaSessions, (event) => {
+  await subscribe(SeelenEvent.MediaSessions, (event) => {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
-  await listenGlobal<AppNotification[]>(SeelenEvent.Notifications, (event) => {
-    store.dispatch(RootActions.setNotifications(event.payload.sort((a, b) => b.date - a.date)));
+  await subscribe(SeelenEvent.Notifications, (event) => {
+    store.dispatch(RootActions.setNotifications(event.payload));
   });
 
   await Settings.onChange(loadSettingsToStore);

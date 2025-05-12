@@ -1,6 +1,5 @@
 use std::{
     collections::HashMap,
-    path::PathBuf,
     sync::{
         atomic::{AtomicBool, Ordering},
         Arc,
@@ -12,8 +11,7 @@ use std::{
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::handlers::SeelenEvent;
-use serde::Serialize;
+use seelen_core::{handlers::SeelenEvent, system_state::FocusedApp};
 use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
@@ -69,18 +67,6 @@ impl From<&Window> for WindowCachedData {
             fullscreen: w.is_fullscreen(),
         }
     }
-}
-
-#[derive(Serialize, Clone)]
-#[serde(rename_all = "camelCase")]
-pub struct FocusedApp {
-    hwnd: isize,
-    title: String,
-    name: String,
-    exe: Option<PathBuf>,
-    umid: Option<String>,
-    is_maximized: bool,
-    is_seelen_overlay: bool,
 }
 
 #[derive(Debug)]

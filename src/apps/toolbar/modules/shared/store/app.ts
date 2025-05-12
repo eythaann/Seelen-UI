@@ -1,10 +1,10 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import {
   BluetoothDevices,
-  BluetoothRadio,
   DesktopFolder,
   DocumentsFolder,
   DownloadsFolder,
+  invoke,
   LanguageList,
   MusicFolder,
   PicturesFolder,
@@ -16,18 +16,8 @@ import {
   VideosFolder,
 } from '@seelen-ui/lib';
 import { Placeholder, ToolbarItem2 } from '@seelen-ui/lib/types';
-import { invoke } from '@tauri-apps/api/core';
 
-import { AppNotification } from '../../Notifications/domain';
-import {
-  Battery,
-  MediaChannelTransportData,
-  MediaDevice,
-  PowerPlan,
-  PowerStatus,
-  RootState,
-  TrayInfo,
-} from './domain';
+import { RootState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
@@ -50,7 +40,6 @@ const initialState: RootState = {
   env: (await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>,
   bluetoothDevices: (await BluetoothDevices.getAsync()).all(),
   discoveredBluetoothDevices: BluetoothDevices.default().all(),
-  bluetoothRadioState: (await BluetoothRadio.getAsync()).state,
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
     acLineStatus: 255,
@@ -60,7 +49,7 @@ const initialState: RootState = {
     batteryLifeTime: -1,
     batteryFullLifeTime: -1,
   },
-  powerPlan: PowerPlan.Unknown,
+  powerPlan: 'Unknown',
   batteries: [],
   workspaces: [],
   activeWorkspace: null,
@@ -144,30 +133,30 @@ export const Selectors = StateBuilder.compositeSelector(initialState);
 
 // no core things that can be lazy loaded to improve performance
 export async function lazySlice(d: Dispatch) {
-  invoke<AppNotification[]>(SeelenCommand.GetNotifications).then((notifications) =>
+  invoke(SeelenCommand.GetNotifications).then((notifications) =>
     d(RootActions.setNotifications(notifications)),
   );
 
-  invoke<PowerStatus>(SeelenCommand.GetPowerStatus).then((status) =>
+  invoke(SeelenCommand.GetPowerStatus).then((status) =>
     d(RootActions.setPowerStatus(status)),
   );
-  invoke<PowerPlan>(SeelenCommand.GetPowerMode).then((plan) => d(RootActions.setPowerPlan(plan)));
-  invoke<Battery[]>(SeelenCommand.GetBatteries).then((batteries) =>
+  invoke(SeelenCommand.GetPowerMode).then((plan) => d(RootActions.setPowerPlan(plan)));
+  invoke(SeelenCommand.GetBatteries).then((batteries) =>
     d(RootActions.setBatteries(batteries)),
   );
 
-  invoke<[MediaDevice[], MediaDevice[]]>(SeelenCommand.GetMediaDevices).then(
+  invoke(SeelenCommand.GetMediaDevices).then(
     ([inputs, outputs]) => {
       d(RootActions.setMediaInputs(inputs));
       d(RootActions.setMediaOutputs(outputs));
     },
   );
 
-  invoke<MediaChannelTransportData[]>(SeelenCommand.GetMediaSessions).then((sessions) =>
+  invoke(SeelenCommand.GetMediaSessions).then((sessions) =>
     d(RootActions.setMediaSessions(sessions)),
   );
 
-  invoke<TrayInfo[]>(SeelenCommand.GetTrayIcons).then((info) => d(RootActions.setSystemTray(info)));
+  invoke(SeelenCommand.GetTrayIcons).then((info) => d(RootActions.setSystemTray(info)));
 
   LanguageList.getAsync().then((list) => d(RootActions.setLanguages(list.asArray())));
 

@@ -2,7 +2,10 @@ use std::{sync::Arc, time::Instant};
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{
+    handlers::SeelenEvent,
+    system_state::{Battery, PowerMode, PowerStatus},
+};
 use tauri::Emitter;
 use windows::Win32::{
     System::Power::{
@@ -19,13 +22,14 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     event_manager, log_error,
+    modules::power::domain::power_mode_to_serializable,
     seelen::get_app_handle,
     trace_lock,
     utils::spawn_named_thread,
     windows_api::{event_window::subscribe_to_background_window, WindowsApi},
 };
 
-use super::domain::{Battery, PowerMode, PowerStatus};
+use super::domain::{battery_to_slu_battery, power_status_to_serializable};
 
 lazy_static! {
     pub static ref POWER_MANAGER: Arc<Mutex<PowerManager>> =
@@ -54,7 +58,7 @@ impl PowerManager {
         mode: EFFECTIVE_POWER_MODE,
         _ctx: *const std::ffi::c_void,
     ) {
-        let state: PowerMode = mode.into();
+        let state: PowerMode = power_mode_to_serializable(mode);
         {
             trace_lock!(POWER_MANAGER).current_power_mode = Some(state.clone())
         }
@@ -104,7 +108,7 @@ impl PowerManager {
         let mut batteries: Vec<Battery> = Vec::new();
         let manager = battery::Manager::new()?;
         for battery in manager.batteries()?.flatten() {
-            batteries.push(battery.try_into()?);
+            batteries.push(battery_to_slu_battery(battery)?);
         }
         Ok(batteries)
     }
@@ -114,7 +118,7 @@ impl PowerManager {
             match w_param as u32 {
                 PBT_APMPOWERSTATUSCHANGE => {
                     Self::event_tx().send(PowerManagerEvent::PowerStatusChanged(
-                        WindowsApi::get_system_power_status()?.into(),
+                        power_status_to_serializable(WindowsApi::get_system_power_status()?),
                     ))?;
                 }
                 PBT_APMSUSPEND => {
@@ -152,9 +156,9 @@ impl PowerManager {
                 let handle = get_app_handle();
                 handle.emit(SeelenEvent::BatteriesStatus, batteries)?;
             }
-            PowerManagerEvent::PowerModeChanged(plan) => {
+            PowerManagerEvent::PowerModeChanged(mode) => {
                 let handle = get_app_handle();
-                handle.emit(SeelenEvent::PowerPlan, plan)?;
+                handle.emit(SeelenEvent::PowerMode, mode)?;
             }
         }
         Ok(())

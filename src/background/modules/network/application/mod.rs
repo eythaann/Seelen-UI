@@ -6,6 +6,7 @@ use std::{
     net::{IpAddr, UdpSocket},
 };
 
+use seelen_core::system_state::{NetworkAdapter, WlanProfile};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::{
     NetworkManagement::{
@@ -31,18 +32,20 @@ use crate::{
     windows_api::Com,
 };
 
-use super::domain::{NetworkAdapter, WlanProfile};
+use super::domain::adapter_to_slu_net_adapter;
 
-impl NetworkAdapter {
-    pub unsafe fn iter_from_raw(
-        raw: *const IP_ADAPTER_ADDRESSES_LH,
-    ) -> Result<Vec<NetworkAdapter>> {
+trait IterFromRaw {
+    unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<NetworkAdapter>>;
+}
+
+impl IterFromRaw for NetworkAdapter {
+    unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<NetworkAdapter>> {
         let mut adapters = Vec::new();
 
         let mut raw_adapter = raw;
         while !raw_adapter.is_null() {
             let adapter = &*raw_adapter;
-            adapters.push(adapter.try_into()?);
+            adapters.push(adapter_to_slu_net_adapter(adapter)?);
             raw_adapter = adapter.Next;
         }
 

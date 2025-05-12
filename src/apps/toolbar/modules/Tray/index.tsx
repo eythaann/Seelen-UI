@@ -1,5 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
-import { TrayToolbarItem } from '@seelen-ui/lib/types';
+import { TrayIcon, TrayToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { useState } from 'react';
@@ -13,8 +13,6 @@ import { Selectors } from '../shared/store/app';
 import { FileIcon } from 'src/apps/shared/components/Icon';
 import { useInterval, useWindowFocusChange } from 'src/apps/shared/hooks';
 
-import { TrayInfo } from '../shared/store/domain';
-
 import { AnimatedPopover } from '../../../shared/components/AnimatedWrappers';
 import { OverflowTooltip } from '../../../shared/components/OverflowTooltip';
 
@@ -22,7 +20,7 @@ interface Props {
   module: TrayToolbarItem;
 }
 
-function TrayItem(props: { tray: TrayInfo }) {
+function TrayItem(props: { tray: TrayIcon }) {
   const [disabled, setDisabled] = useState(false);
   const { tray } = props;
 

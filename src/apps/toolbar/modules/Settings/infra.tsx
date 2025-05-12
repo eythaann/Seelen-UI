@@ -1,6 +1,5 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { SettingsToolbarItem } from '@seelen-ui/lib/types';
-import { invoke } from '@tauri-apps/api/core';
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
+import { Brightness, SettingsToolbarItem } from '@seelen-ui/lib/types';
 import { Button, Slider, Tooltip } from 'antd';
 import { throttle } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
@@ -21,12 +20,6 @@ import { Icon } from '../../../shared/components/Icon';
 
 interface Props {
   module: SettingsToolbarItem;
-}
-
-interface Brightness {
-  min: number;
-  max: number;
-  current: number;
 }
 
 function brightnessIcon(brightness: number) {
@@ -51,7 +44,7 @@ export function SettingsModule({ module }: Props) {
   const { t } = useTranslation();
 
   useEffect(() => {
-    invoke<Brightness | null>('get_main_monitor_brightness').then(setBrightness);
+    invoke(SeelenCommand.GetMainMonitorBrightness).then(setBrightness);
   }, [openPreview]);
 
   useWindowFocusChange((focused) => {
@@ -62,7 +55,7 @@ export function SettingsModule({ module }: Props) {
 
   const setBrightnessExternal = useCallback(
     throttle((brightness: number) => {
-      invoke('set_main_monitor_brightness', { brightness });
+      invoke(SeelenCommand.SetMainMonitorBrightness, { brightness });
     }, 100),
     [],
   );

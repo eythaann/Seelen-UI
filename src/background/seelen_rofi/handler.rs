@@ -1,4 +1,6 @@
-use crate::{modules::start::domain::StartMenuItem, seelen::SEELEN, trace_lock};
+use seelen_core::system_state::StartMenuItem;
+
+use crate::{seelen::SEELEN, trace_lock};
 
 #[tauri::command(async)]
 pub fn launcher_get_apps() -> Vec<StartMenuItem> {

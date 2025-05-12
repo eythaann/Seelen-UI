@@ -1,5 +1,14 @@
-import { ConnectedMonitor, SeelenToolbarWidgetId, SeelenWallWidgetId, SeelenWegWidgetId, SeelenWindowManagerWidgetId } from '@seelen-ui/lib';
-import { MonitorConfiguration as IMonitorConfiguration, WidgetId } from '@seelen-ui/lib/types';
+import {
+  SeelenToolbarWidgetId,
+  SeelenWallWidgetId,
+  SeelenWegWidgetId,
+  SeelenWindowManagerWidgetId,
+} from '@seelen-ui/lib';
+import {
+  MonitorConfiguration as IMonitorConfiguration,
+  PhysicalMonitor,
+  WidgetId,
+} from '@seelen-ui/lib/types';
 import { Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +22,7 @@ import { WidgetSettingsModal } from './WidgetSettingsModal';
 import cs from './index.module.css';
 
 interface MonitorConfigProps {
-  device: ConnectedMonitor;
+  device: PhysicalMonitor;
   config: IMonitorConfiguration;
   onChange: (monitor: IMonitorConfiguration) => void;
 }
@@ -38,7 +47,10 @@ export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) 
       <div className={cs.itemContainer}>
         <div className={cs.itemLeft}>
           <div className={cs.label}>{device.name}</div>
-          <Monitor width={device.width} height={device.height} />
+          <Monitor
+            width={device.rect.right - device.rect.left}
+            height={device.rect.bottom - device.rect.top}
+          />
           {/* <div className={cs.actions}>
             <Button type="primary" danger>
               {t('delete')}
@@ -51,11 +63,18 @@ export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) 
           <SettingsGroup>
             <SettingsOption>
               <b>{t('toolbar.enable')}</b>
-              <Switch value={!!config.byWidget[SeelenToolbarWidgetId]?.enabled} onChange={(v) => onToggle(SeelenToolbarWidgetId, v)} />
+              <Switch
+                value={!!config.byWidget[SeelenToolbarWidgetId]?.enabled}
+                onChange={(v) => onToggle(SeelenToolbarWidgetId, v)}
+              />
             </SettingsOption>
             <SettingsOption>
               <b>{t('wm.enable')}</b>
-              <Switch value={!!config.byWidget[SeelenWindowManagerWidgetId]?.enabled} onChange={(v) => onToggle(SeelenWindowManagerWidgetId, v)} disabled />
+              <Switch
+                value={!!config.byWidget[SeelenWindowManagerWidgetId]?.enabled}
+                onChange={(v) => onToggle(SeelenWindowManagerWidgetId, v)}
+                disabled
+              />
             </SettingsOption>
             <SettingsOption>
               <b>{t('header.labels.seelen_weg')}</b>
@@ -67,7 +86,11 @@ export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) 
             </SettingsOption>
             <SettingsOption>
               <b>{t('wall.enable')}</b>
-              <Switch value={!!config.byWidget[SeelenWallWidgetId]?.enabled} onChange={(v) => onToggle(SeelenWallWidgetId, v)} disabled />
+              <Switch
+                value={!!config.byWidget[SeelenWallWidgetId]?.enabled}
+                onChange={(v) => onToggle(SeelenWallWidgetId, v)}
+                disabled
+              />
             </SettingsOption>
           </SettingsGroup>
         </div>

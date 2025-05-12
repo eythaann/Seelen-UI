@@ -16,13 +16,11 @@ interface Props {
 function BluetoothModuleItem({ module, active, ...rest }: Props) {
   const bluetoothDevices: BluetoothDevice[] = useSelector(Selectors.bluetoothDevices);
   const connectedDevices = bluetoothDevices.filter((item) => item.connected);
-  const bluetoothState = useSelector(Selectors.bluetoothRadioState);
 
   return (
     <Item
       {...rest}
       extraVars={{
-        bluetoothState,
         devices: bluetoothDevices,
         connectedDevices,
       }}

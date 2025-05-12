@@ -71,7 +71,7 @@ impl FancyToolbar {
 
     pub fn set_overlaped(&mut self, overlaped_by: Option<Window>) -> Result<()> {
         if self.overlaped_by != overlaped_by {
-            self.emit(SeelenEvent::WegOverlaped, overlaped_by.is_some())?;
+            self.emit(SeelenEvent::ToolbarOverlaped, overlaped_by.is_some())?;
         }
         self.overlaped_by = overlaped_by;
         let is_fullscreen = self.overlaped_by.is_some_and(|w| w.is_fullscreen());

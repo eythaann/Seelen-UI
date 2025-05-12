@@ -1,7 +1,8 @@
 pub mod types;
 
 use itertools::Itertools;
-use serde::{Deserialize, Serialize};
+use seelen_core::system_state::{AdapterStatus, NetworkAdapter};
+use serde::Serialize;
 use types::InterfaceType;
 use windows::{
     Networking::NetworkOperators::TetheringOperationalState,
@@ -11,31 +12,7 @@ use windows::{
     },
 };
 
-use crate::error_handler::{AppError, Result};
-
-#[derive(Debug, Clone, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub enum AdapterStatus {
-    Up,
-    Down,
-}
-
-#[derive(Debug, Clone, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct NetworkAdapter {
-    // General information
-    name: String,
-    description: String,
-    status: AdapterStatus,
-    dns_suffix: String,
-    #[serde(rename = "type")]
-    interface_type: String,
-    // Address information
-    ipv6: Option<String>,
-    ipv4: Option<String>,
-    gateway: Option<String>,
-    mac: String,
-}
+use crate::error_handler::Result;
 
 #[derive(PartialEq, Eq)]
 enum Address {
@@ -116,65 +93,34 @@ unsafe fn get_address(adapter: &IP_ADAPTER_ADDRESSES_LH, address: Address) -> Op
     None
 }
 
-impl TryFrom<&IP_ADAPTER_ADDRESSES_LH> for NetworkAdapter {
-    type Error = AppError;
-    fn try_from(adapter: &IP_ADAPTER_ADDRESSES_LH) -> Result<Self> {
-        unsafe {
-            let mac_address = adapter
-                .PhysicalAddress
-                .iter()
-                .map(|b| format!("{b:02x}"))
-                .join(":");
+pub fn adapter_to_slu_net_adapter(adapter: &IP_ADAPTER_ADDRESSES_LH) -> Result<NetworkAdapter> {
+    unsafe {
+        let mac_address = adapter
+            .PhysicalAddress
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .join(":");
 
-            let status = if adapter.OperStatus == IfOperStatusUp {
-                AdapterStatus::Up
-            } else {
-                AdapterStatus::Down
-            };
+        let status = if adapter.OperStatus == IfOperStatusUp {
+            AdapterStatus::Up
+        } else {
+            AdapterStatus::Down
+        };
 
-            Ok(Self {
-                dns_suffix: adapter.DnsSuffix.to_string()?,
-                name: adapter.FriendlyName.to_string()?,
-                description: adapter.Description.to_string()?,
-                mac: mac_address,
-                status,
-                ipv4: get_address(adapter, Address::Ipv4),
-                gateway: get_address(adapter, Address::Gateway),
-                ipv6: get_address(adapter, Address::Ipv6),
-                interface_type: InterfaceType::from(adapter.IfType)
-                    .to_string()
-                    .replace("IF_TYPE_", ""),
-            })
-        }
+        Ok(NetworkAdapter {
+            dns_suffix: adapter.DnsSuffix.to_string()?,
+            name: adapter.FriendlyName.to_string()?,
+            description: adapter.Description.to_string()?,
+            mac: mac_address,
+            status,
+            ipv4: get_address(adapter, Address::Ipv4),
+            gateway: get_address(adapter, Address::Gateway),
+            ipv6: get_address(adapter, Address::Ipv6),
+            interface_type: InterfaceType::from(adapter.IfType)
+                .to_string()
+                .replace("IF_TYPE_", ""),
+        })
     }
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(rename_all(serialize = "camelCase", deserialize = "PascalCase"))]
-pub struct WlanProfile {
-    profile_name: String,
-    #[serde(rename(deserialize = "SSID"))]
-    ssid: String,
-    authentication: String,
-    encryption: String,
-    password: Option<String>,
-}
-
-#[derive(Debug, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct WlanBssEntry {
-    pub ssid: Option<String>,
-    pub bssid: String,
-    pub channel_frequency: u32,
-    pub signal: u32,
-    /// true if the network is a saved profile
-    pub known: bool,
-    /// true if the network is encrypted like WEP, WPA, or WPA2
-    pub secured: bool,
-    /// true if the interface is connected to this network
-    pub connected: bool,
-    /// true if the interface is connected to this network and is using this channel frequency
-    pub connected_channel: bool,
 }
 
 #[derive(Debug, Serialize)]

@@ -3,14 +3,13 @@ use std::sync::Arc;
 
 use arc_swap::ArcSwap;
 use lazy_static::lazy_static;
+use seelen_core::system_state::StartMenuItem;
 use tauri::{path::BaseDirectory, Manager};
 
 use crate::{
     error_handler::Result, log_error, seelen::get_app_handle, utils::constants::SEELEN_COMMON,
     windows_api::WindowsApi,
 };
-
-use super::domain::StartMenuItem;
 
 lazy_static! {
     pub static ref START_MENU_MANAGER: ArcSwap<StartMenuManager> = ArcSwap::from_pointee({

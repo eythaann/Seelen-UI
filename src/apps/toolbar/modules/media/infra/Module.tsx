@@ -33,7 +33,9 @@ function MediaModuleItem({ module, active, ...rest }: Props) {
   function onWheel(e: React.WheelEvent) {
     const isUp = e.deltaY < 0;
     const level = Math.max(0, Math.min(1, volume + (isUp ? 0.02 : -0.02)));
-    invoke(SeelenCommand.SetVolumeLevel, { deviceId: id, level });
+    if (id) {
+      invoke(SeelenCommand.SetVolumeLevel, { deviceId: id, level, sessionId: null });
+    }
   }
 
   return (

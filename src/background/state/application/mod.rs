@@ -20,7 +20,7 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::state::{Plugin, PluginId, Profile, WegItems, Widget, WidgetId};
+use seelen_core::state::{LauncherHistory, Plugin, PluginId, Profile, WegItems, Widget, WidgetId};
 use std::{
     collections::{HashMap, HashSet, VecDeque},
     path::{Path, PathBuf},
@@ -38,8 +38,6 @@ lazy_static! {
         FullState::new().expect("Failed to create State Manager")
     }));
 }
-
-pub type LauncherHistory = HashMap<String, Vec<String>>;
 
 #[derive(Getters, Debug, Clone)]
 #[getset(get = "pub")]
@@ -73,7 +71,7 @@ impl FullState {
             icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
             weg_items: WegItems::default(),
             toolbar_items: Placeholder::default(),
-            launcher_history: HashMap::new(),
+            launcher_history: LauncherHistory::default(),
             plugins: HashMap::new(),
             widgets: HashMap::new(),
         };

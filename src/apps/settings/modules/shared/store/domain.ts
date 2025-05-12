@@ -1,8 +1,8 @@
-import { ConnectedMonitor, IUIColors } from '@seelen-ui/lib';
 import {
   AppConfig,
   FancyToolbarSettings,
   IconPack,
+  PhysicalMonitor,
   Plugin,
   Profile,
   SeelenLauncherSettings,
@@ -10,6 +10,7 @@ import {
   SeelenWegSettings,
   Settings,
   Theme,
+  UIColors,
   Widget,
   WindowManagerSettings,
 } from '@seelen-ui/lib/types';
@@ -22,11 +23,11 @@ export interface RootState extends Settings {
   availableThemes: Theme[];
   availableIconPacks: IconPack[];
   autostart: boolean | null;
-  colors: IUIColors;
+  colors: UIColors;
   plugins: Plugin[];
   widgets: Widget[];
   profiles: Profile[];
-  connectedMonitors: ConnectedMonitor[];
+  connectedMonitors: PhysicalMonitor[];
   // migrated since v2.1.0
   fancyToolbar: FancyToolbarSettings;
   seelenweg: SeelenWegSettings;

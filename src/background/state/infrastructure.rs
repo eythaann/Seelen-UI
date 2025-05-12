@@ -2,7 +2,8 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    IconPack, MonitorConfiguration, Plugin, Profile, WegItems, WegPinnedItemsVisibility, Widget,
+    IconPack, LauncherHistory, MonitorConfiguration, Plugin, Profile, WegItems,
+    WegPinnedItemsVisibility, Widget,
 };
 
 use crate::{
@@ -12,7 +13,7 @@ use crate::{
 };
 
 use super::{
-    application::{FullState, LauncherHistory, FULL_STATE},
+    application::{FullState, FULL_STATE},
     domain::{AppConfig, Placeholder, Settings, Theme},
 };
 

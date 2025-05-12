@@ -1,6 +1,9 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{
+    handlers::SeelenEvent,
+    system_state::{NetworkAdapter, WlanProfile},
+};
 use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Networking::NetworkListManager::{
@@ -12,10 +15,7 @@ use crate::{
     error_handler::Result, log_error, seelen::get_app_handle, utils::sleep_millis, windows_api::Com,
 };
 
-use super::{
-    application::{get_local_ip_address, NetworkManager},
-    domain::{NetworkAdapter, WlanProfile},
-};
+use super::application::{get_local_ip_address, NetworkManager};
 
 fn emit_networks(ip: String, adapters: Vec<NetworkAdapter>, has_internet: bool) {
     let handle = get_app_handle();

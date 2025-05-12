@@ -75,7 +75,11 @@ export function UserProfile({ user }: Props) {
         >
           <button
             className="userhome-profile-action-button"
-            onClick={() => invoke(SeelenCommand.OpenFile, { path: user.oneDrivePath })}
+            onClick={() => {
+              if (user.oneDrivePath) {
+                invoke(SeelenCommand.OpenFile, { path: user.oneDrivePath });
+              }
+            }}
           >
             <Icon iconName="ImOnedrive" />
             <span>OneDrive</span>
