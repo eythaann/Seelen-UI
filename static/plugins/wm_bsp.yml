@@ -1,9 +1,148 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
-id: "@default/wm-bspwm"
+id: '@default/wm-bspwm'
 metadata:
-  displayName: BSPWM Layout
-  description: default bspwm tile layout.
-target: "@seelen/window-manager"
+  displayName:
+    en: BSPWM Layout
+    cs: Rozložení BSPWM
+    da: BSPWM-layout
+    de: BSPWM-Layout
+    af: BSPWM -uitleg
+    et: BSPWM paigutus
+    az: Bspwm layout
+    bs: Izgled bspwm
+    es: Disposición BSPWM
+    ca: Disposició bspwm
+    cy: Cynllun BSPWM
+    fr: Mise en page BSPWM
+    id: Tata Letak BSPWM
+    it: Layout BSPWM
+    eu: BSPWM diseinua
+    tl: Layout ng BSPWM
+    hr: BSPWM izgled
+    lv: BSPWM izkārtojums
+    zu: Ukuhlelwa kwe-BSPWM
+    hu: BSPWM elrendezés
+    lt: BSPWM išdėstymas
+    nl: BSPWM-indeling
+    is: BSPWM skipulag
+    ku: Bspwm Layout
+    sw: Mpangilio wa BSPWM
+    lb: Bspwm Layout
+    pl: Układ BSPWM
+    pt: Layout BSPWM
+    ro: Layout BSPWM
+    sk: Rozloženie BSPWM
+    mt: Tqassim BSPWM
+    fi: BSPWM-asettelu
+    'no': BSPWM -oppsett
+    ms: Susun atur BSPWM
+    sv: BSPWM Layout
+    uz: Bscwm tartibi
+    tr: BSPWM Düzeni
+    el: Διάταξη BSPWM
+    bg: BSPWM оформление
+    so: Bispwm
+    ru: Макет BSPWM
+    vi: Bố cục BSPWM
+    uk: Макет BSPWM
+    yo: Ifilelẹ BSPWM
+    mn: Bspwm байрлал
+    ar: تخطيط BSPWM
+    mk: Распоред на BSPWM
+    sr: БСПВМ изглед
+    tg: Suruty BSPWM
+    ka: BSPWM განლაგება
+    he: פריסת BSPWM
+    hy: BSPWM դասավորություն
+    ur: BSPWM لے آؤٹ
+    ps: د BSPWM ترتیب
+    fa: طرح BSPWM
+    am: BSPWM አቀማመጥ
+    ne: BSPWM लेट
+    hi: BSPWM लेआउट
+    ko: BSPWM 레이아웃
+    ta: Bspwm தளவமைப்பு
+    gu: બીએસપીડબલ્યુએમ લેઆઉટ
+    zh: BSPWM 布局
+    pa: ਬਸਵਾਸ ਲੇਆਉਟ
+    te: BSPWM లేఅవుట్
+    bn: বিএসপিডাব্লুএম লেআউট
+    ja: BSPWMレイアウト
+    si: BSPWM පිරිසැලසුම
+    lo: ຮູບແບບ BSPWM
+    th: เค้าโครง BSPWM
+    km: ប្លង់ BSPWM
+  description:
+    en: default bspwm tile layout.
+    da: standard bspwm fliselayout.
+    cs: výchozí rozložení dlaždic bspwm.
+    af: Standaard BSPWM -teëluitleg.
+    az: Defolt BSPWM kafel sxemi.
+    et: vaikimisi bspwm plaatide paigutus.
+    es: diseño de baldosas bspwm por defecto.
+    bs: Zadani raspored pločica BSPWM.
+    de: Standard-Bspwm-Kachel-Layout.
+    ca: Disposició per defecte de rajoles BSPWM.
+    cy: Cynllun teils bspwm diofyn.
+    fr: la disposition par défaut des tuiles bspwm.
+    id: tata letak ubin bspwm default.
+    eu: BSPWM fitxa lehenetsia.
+    it: layout predefinito delle piastrelle bspwm.
+    tl: default na layout ng tile ng BSPWM.
+    hr: Zadana BSPWM izgled pločica.
+    lv: noklusējuma bspwm flīžu izkārtojums.
+    hu: alapértelmezett bspwm csempe elrendezés.
+    is: Sjálfgefið BSPWM flísarskipulag.
+    lt: numatytasis bspwm plytelių išdėstymas.
+    zu: Ukuhlelwa kwe-tile ye-BSPWM.
+    nl: standaard bspwm tile layout.
+    sw: Mpangilio wa tile wa BSPWM.
+    ku: Default BSPWM Tile Layout.
+    pl: domyślny układ kafelków bspwm.
+    pt: layout padrão de ladrilho do bspwm.
+    lb: Standard Bspwm Tile Layout.
+    ms: Susun atur jubin BSPWM lalai.
+    ro: aspectul implicit al plăcilor bspwm.
+    mt: Tqassim tal-madum BSPWM default.
+    fi: bspwm-laattojen oletusasettelu.
+    sk: predvolené rozloženie dlaždíc bspwm.
+    'no': Standard BSPWM Tile Layout.
+    uz: Bswwm plitka tartibi.
+    tr: varsayılan bspwm karo düzeni.
+    sv: standardlayout för bspwm-kakel.
+    el: προεπιλεγμένη διάταξη πλακιδίων bspwm.
+    bg: оформление на плочките по подразбиране на bspwm.
+    ru: Раскладка плитки bspwm по умолчанию.
+    vi: Bố cục gạch BSPWM mặc định.
+    so: Xaraashka 'BSPWM'
+    yo: aiyipada BSPWM Tilebuble.
+    uk: за замовчуванням bspwm компонування плиток.
+    mk: Стандарден распоред на плочки BSPWM.
+    mn: Үндсэн BSPWM плитлийн байрлал.
+    ar: تخطيط بلاط bspwm الافتراضي.
+    tg: Нуқтаи ноболиғи BSPWM.
+    sr: Подразумевано Изглед плочица БСПВМ.
+    ka: ნაგულისხმევი BSPWM ფილების განლაგება.
+    he: פריסת אריחי ברירת מחדל של BSPWM.
+    hy: 'Default BSPWM սալիկների դասավորությունը:'
+    ur: پہلے سے طے شدہ BSPWM ٹائل لے آؤٹ۔
+    ps: د بیضیف ډسمه د ټیل ټایل ترکیب.
+    fa: طرح کاشی BSPWM پیش فرض.
+    ne: पूर्वनिर्धारित BSPWWM टाइल लेआउट।
+    hi: डिफ़ॉल्ट BSPWM टाइल लेआउट।
+    am: ነባሪ BPSPWMANANENETOUTOUTOUTET.
+    bn: ডিফল্ট বিএসপিডাব্লুএম টাইল লেআউট।
+    pa: ਮੂਲ ਬਸਵਾਸ ਟਾਈਲ ਲੇਆਉਟ.
+    ko: 기본 BSPWM 타일 레이아웃.
+    gu: ડિફ default લ્ટ BSPWM ટાઇલ લેઆઉટ.
+    zh: 默认 bspwm 瓦片布局。
+    ta: இயல்புநிலை BSPWM ஓடு தளவமைப்பு.
+    si: පෙරනිමි BSPWM ටයිල් පිරිසැලසුම.
+    te: డిఫాల్ట్ BSPWM టైల్ లేఅవుట్.
+    lo: Default BSPWM Layout.
+    ja: デフォルトのbspwmタイルレイアウト。
+    km: ប្លង់ក្បឿង bspwm លំនាំដើម។
+    th: เค้าโครงกระเบื้อง BSPWM เริ่มต้น
+target: '@seelen/window-manager'
 plugin:
   no_fallback_behavior: Float
   structure:

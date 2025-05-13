@@ -1,6 +1,74 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/widget.schema.json
 id: '@seelen/fancy-toolbar'
 icon: BiSolidDockTop
 metadata:
   displayName:
     en: Fancy Toolbar
+    af: Fancy -werkbalk
+    az: Xülya alətlər paneli
+    bs: Fancy alatna traka
+    ca: Barra d’eines de luxe
+    cs: Pás nástrojů Fancy Toolbar
+    cy: Bar offer ffansi
+    da: Fancy værktøjslinje
+    de: Ausgefallene Symbolleiste
+    et: Fancy tööriistariba
+    es: Barra de herramientas Fancy
+    eu: Fancy tresna barra
+    tl: Fancy Toolbar
+    fr: Barre d'outils fantaisie
+    hr: Fantastična alatna traka
+    id: Bilah Alat Mewah
+    zu: I-Fancy Toolbar
+    is: Fancy tækjastikan
+    it: Barra degli strumenti di fantasia
+    sw: Zana ya Dhana
+    ku: Fancy Toolbar
+    lv: Fancy Toolbar
+    lb: Fantastesch Toolbar
+    lt: Išgalvota įrankių juosta
+    hu: Fancy eszköztár
+    ms: Bar alat mewah
+    mt: Toolbar tal-Fancy
+    nl: Fancy werkbalk
+    'no': Fancy verktøylinje
+    uz: Fashion asboblar paneli
+    pl: Fantazyjny pasek narzędzi
+    pt: Barra de ferramentas sofisticada
+    ro: Bara de instrumente Fancy
+    sk: Panely nástrojov Fancy Toolbar
+    so: Qalabka Fancy Toolbar
+    fi: Fancy-työkalurivi
+    sv: Fancy verktygsfält
+    vi: Thanh công cụ ưa thích
+    tr: Süslü Araç Çubuğu
+    yo: Ọpa irinṣẹ Fancy
+    el: Φανταχτερή γραμμή εργαλείων
+    bg: Fancy Toolbar
+    mk: Фенси лента со алатки
+    mn: Уран зөгнөлийн багаж самбар
+    ru: Причудливая панель инструментов
+    sr: Фанци алатна трака
+    tg: Панели футбол
+    uk: Вигадлива панель інструментів
+    ka: ლამაზი პანელი
+    hy: Fancy Toolbar
+    he: סרגל כלים מפואר
+    ur: فینسی ٹول بار
+    ar: شريط أدوات فاخر
+    ps: د فینسي توکپټه
+    fa: نوار ابزار فانتزی
+    am: Fancy የመሣሪያ አሞሌ
+    ne: फेन्सी उपकरणपट्टी
+    hi: फैंसी टूलबार
+    bn: অভিনব সরঞ্জামদণ্ড
+    pa: ਫੈਨਸੀ ਟੂਲਬਾਰ
+    gu: ફેન્સી ટૂલબાર
+    ta: ஆடம்பரமான கருவிப்பட்டி
+    te: ఫాన్సీ టూల్‌బార్
+    si: විසිතුරු මෙවලම් තීරුව
+    th: แถบเครื่องมือแฟนซี
+    lo: ແຖບເຄື່ອງມື fancy
+    km: របារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
+    ko: 멋진 도구 모음
+    zh: 花式工具栏
+    ja: ファンシーツールバー

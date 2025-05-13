@@ -1,9 +1,148 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
-id: "@default/wm-tall"
-target: "@seelen/window-manager"
+id: '@default/wm-tall'
+target: '@seelen/window-manager'
 metadata:
-  displayName: Tall Layout
-  description: Tall layout for vertical monitors.
+  displayName:
+    en: Tall Layout
+    cs: Vysoké rozložení
+    da: Højt layout
+    de: Großes Layout
+    af: Hoë uitleg
+    et: Kõrge paigutus
+    bs: Visok raspored
+    az: Hündür layout
+    es: Diseño alto
+    ca: Disseny alt
+    fr: Grand format
+    cy: Cynllun tal
+    id: Tata Letak Tinggi
+    tl: Matangkad na layout
+    it: Layout alto
+    eu: Diseinu altua
+    lv: Augsts izkārtojums
+    zu: Ukuhlelwa Okude
+    sw: Mpangilio mrefu
+    hr: Visok raspored
+    lt: Aukštas išdėstymas
+    hu: Magas elrendezés
+    is: Háu skipulagi
+    nl: Grote lay-out
+    ku: Şêwaza dirêj
+    pl: Wysoki układ
+    lb: Grouss Layout
+    sk: Vysoké rozloženie
+    ro: Layout înalt
+    ms: Susun atur tinggi
+    mt: Tqassim għoli
+    pt: Layout alto
+    'no': Høy layout
+    sv: Hög layout
+    fi: Tall Layout
+    uz: Uzun bo'yli tartib
+    tr: Uzun Düzen
+    el: Ψηλή διάταξη
+    bg: Високо оформление
+    so: Qaabeynta dhaadheer
+    vi: Bố cục cao
+    ru: Высокий макет
+    uk: Високе розташування
+    yo: Giga giga
+    mk: Висок распоред
+    mn: Дээд дэлх
+    ar: تخطيط طويل القامة
+    sr: Високи распоред
+    tg: Тарҳбандии баланд
+    hy: Բարձրահասակ դասավորություն
+    ka: მაღალი განლაგება
+    fa: طرح بلند
+    he: פריסה גבוהה
+    ur: لمبا ترتیب
+    ps: اوږد ترتیب
+    am: ረዣዥም አቀማመጥ
+    ne: अग्लो लेआउट
+    hi: लम्बा लेआउट
+    ta: உயரமான தளவமைப்பு
+    bn: লম্বা লেআউট
+    gu: Tallંચું લેઆઉટ
+    zh: 高布局
+    ja: トールレイアウト
+    pa: ਲੰਬਾ ਖਾਕਾ
+    ko: 키가 큰 레이아웃
+    te: పొడవైన లేఅవుట్
+    si: උස පිරිසැලසුම
+    th: เค้าโครงสูง
+    lo: ຮູບແບບສູງ
+    km: ប្លង់ខ្ពស់
+  description:
+    en: Tall layout for vertical monitors.
+    cs: Vysoké uspořádání pro svislé monitory.
+    da: Højt layout til lodrette skærme.
+    az: Şaquli monitorlar üçün hündür layout.
+    de: Hohes Layout für vertikale Monitore.
+    et: Kõrge paigutus vertikaalsete monitoride jaoks.
+    af: Hoë uitleg vir vertikale monitors.
+    bs: Visok raspored za vertikalne monitore.
+    ca: Disseny alt per a monitors verticals.
+    es: Disposición alta para monitores verticales.
+    fr: Disposition en hauteur pour les moniteurs verticaux.
+    cy: Cynllun tal ar gyfer monitorau fertigol.
+    id: Tata letak tinggi untuk monitor vertikal.
+    eu: Monitore bertikaletarako diseinu altua.
+    it: Layout alto per monitor verticali.
+    tl: Matangkad na layout para sa mga vertical na monitor.
+    hr: Visok izgled za vertikalne monitore.
+    lv: Augsts izkārtojums vertikāliem monitoriem.
+    lt: Aukštas vertikalių monitorių išdėstymas.
+    zu: Ukwakheka okumunwe kwabaqaphi mpo.
+    is: Hátt skipulag fyrir lóðrétta skjái.
+    hu: Magas elrendezés függőleges monitorokhoz.
+    nl: Hoge layout voor verticale monitors.
+    sw: Mpangilio mrefu kwa wachunguzi wa wima.
+    ku: Dirûvê dirêj ji bo çavdêrên vertical.
+    pl: Wysoki układ dla pionowych monitorów.
+    pt: Layout alto para monitores verticais.
+    lb: Grouss Layout fir vertikal Monitore.
+    ro: Dispunere înaltă pentru monitoare verticale.
+    sk: Vysoké rozloženie pre vertikálne monitory.
+    ms: Susun atur tinggi untuk monitor menegak.
+    fi: Pitkä asettelu pystysuorille näytöille.
+    'no': Høy oppsett for vertikale skjermer.
+    sv: Hög layout för vertikala bildskärmar.
+    mt: Tqassim għoli għal monitors vertikali.
+    tr: Dikey monitörler için uzun düzen.
+    uz: Vertikal monitorlar uchun baland bo'yli tartib.
+    el: Ψηλή διάταξη για κάθετες οθόνες.
+    bg: Високо оформление за вертикални монитори.
+    so: Qaab-dhismeedka dhaadheer ee kormeerayaasha toosan.
+    vi: Bố cục cao cho màn hình thẳng đứng.
+    ru: Высокий макет для вертикальных мониторов.
+    yo: Giga giga fun awọn digi inaro.
+    uk: Висока розкладка для вертикальних моніторів.
+    mn: Босоо мониторын өндөр байрлал.
+    mk: Висок распоред за вертикални монитори.
+    ar: تصميم طويل للشاشات العمودية.
+    sr: Висок распоред вертикалних монитора.
+    tg: Тарҳбандии баланд барои мониторҳои амудӣ.
+    ka: მაღალი განლაგება ვერტიკალური მონიტორებისთვის.
+    ps: د عمودینو څارونکو لپاره اوږد ترتیب.
+    he: פריסה גבוהה למסכים אנכיים.
+    hy: 'Ուղղահայաց մոնիտորների բարձրահասակ դասավորություն:'
+    ur: عمودی مانیٹر کے لئے لمبا ترتیب۔
+    am: ረዣዥም አቀማመጥ ለአቀባዊ መቆጣጠሪያዎች.
+    bn: উল্লম্ব মনিটরের জন্য লম্বা বিন্যাস।
+    fa: طرح بلند برای مانیتورهای عمودی.
+    ne: ठाडो मोनिटरहरूको लागि अग्लो सजावट।
+    hi: ऊर्ध्वाधर मॉनिटर के लिए लंबा लेआउट।
+    ko: 세로형 모니터를 위한 세로형 레이아웃.
+    pa: ਲੰਬਕਾਰੀ ਮਾਨੀਟਰਾਂ ਲਈ ਲੰਬਾ ਖਾਕਾ.
+    zh: 立式显示器的高布局
+    gu: Vert ભી મોનિટર માટે tall ંચા લેઆઉટ.
+    ja: 縦長モニター用の背の高いレイアウト。
+    te: నిలువు మానిటర్ల కోసం పొడవైన లేఅవుట్.
+    ta: செங்குத்து மானிட்டர்களுக்கான உயரமான தளவமைப்பு.
+    th: เลย์เอาต์สูงสำหรับจอภาพแนวตั้ง
+    si: සිරස් මොනිටර සඳහා උස පිරිසැලසුම.
+    lo: ຮູບແບບສູງສໍາລັບຈໍຕິດຕາມຕັ້ງ.
+    km: ប្លង់ខ្ពស់សម្រាប់ម៉ូនីទ័របញ្ឈរ។
 plugin:
   no_fallback_behavior: Float
   structure:

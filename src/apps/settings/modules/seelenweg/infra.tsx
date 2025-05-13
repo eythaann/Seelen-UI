@@ -114,7 +114,7 @@ export const SeelenWegSettings = () => {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('weg.items.filtering')}>
+        <SettingsSubGroup label={t('weg.filtering')}>
           <SettingsOption>
             <div>{t('weg.items.temporal_visibility.label')}</div>
             <Select

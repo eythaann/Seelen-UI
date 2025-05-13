@@ -1,14 +1,82 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: '@default/notifications'
 metadata:
-  displayName: Notifications
-icon: 'MdOutlineNotifications'
+  displayName:
+    en: Notifications
+    af: Kennisgewings
+    az: Bildirişlər
+    bs: Obavijesti
+    cs: Oznámení
+    da: Meddelelser
+    ca: Notificacions
+    de: Benachrichtigungen
+    et: Teated
+    es: Notificaciones
+    fr: Notifications
+    cy: Hysbysiadau
+    id: Pemberitahuan
+    tl: Mga abiso
+    it: Notifiche
+    eu: Jakinarazpenak
+    sw: Arifa
+    hr: Obavijesti
+    is: Tilkynningar
+    lv: Paziņojumi
+    lt: Pranešimai
+    zu: Izaziso
+    hu: Értesítések
+    nl: Meldingen
+    ku: Notifications
+    ms: Pemberitahuan
+    'no': Varsler
+    pl: Powiadomienia
+    lb: Notifikatiounen
+    uz: Bildirishnoma
+    pt: Notificações
+    ro: Notificări
+    mt: Notifiki
+    sv: Meddelanden
+    sk: Oznámenia
+    so: Ogeysiisyada
+    tr: Bildirimler
+    fi: Ilmoitukset
+    bg: Известия
+    vi: Thông báo
+    el: Ειδοποιήσεις
+    ru: Уведомления
+    uk: Сповіщення
+    sr: Обавештења
+    mk: Известувања
+    yo: Awọn iwifunni
+    mn: Мэдэгдэл
+    ar: الإشعارات
+    hy: Ծանուցումներ
+    ka: შეტყობინებები
+    ur: اطلاعات
+    tg: Огоҳиҳо
+    fa: اعلان ها
+    he: התראות
+    ne: सूचना
+    ps: خبرتیاوې
+    am: ማሳወቂያዎች
+    ta: அறிவிப்புகள்
+    bn: বিজ্ঞপ্তি
+    si: දැනුම්දීම්
+    th: การแจ้งเตือน
+    hi: अधिसूचना
+    ko: 알림
+    pa: ਸੂਚਨਾਵਾਂ
+    km: ការជូនដំណឹង
+    zh: 通知
+    te: నోటిఫికేషన్‌లు
+    ja: お知らせ
+    gu: સૂચના
+    lo: ແຈ້ງການ
+icon: MdOutlineNotifications
 target: '@seelen/fancy-toolbar'
 plugin:
   type: notifications
   template: >-
-    return count > 0 ? icon("MdNotificationsActive") : icon("MdOutlineNotifications")
-  badge: >-
-    return count > 0 ? count : null
-  tooltip: >-
-    return [t("placeholder.notifications"), ": ", count]
+    return count > 0 ? icon("MdNotificationsActive") :
+    icon("MdOutlineNotifications")
+  badge: 'return count > 0 ? count : null'
+  tooltip: 'return [t("placeholder.notifications"), ": ", count]'

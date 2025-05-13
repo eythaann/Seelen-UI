@@ -1,9 +1,148 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
-id: "@default/wm-wide"
-target: "@seelen/window-manager"
+id: '@default/wm-wide'
+target: '@seelen/window-manager'
 metadata:
-  displayName: Wide Layout
-  description: Wide layout for horizontal monitors.
+  displayName:
+    en: Wide Layout
+    cs: Široké rozvržení
+    da: Bredt layout
+    de: Breites Layout
+    af: Wye uitleg
+    et: Lai paigutus
+    az: Geniş nizam
+    es: Diseño ancho
+    bs: Širok raspored
+    ca: Disseny ampli
+    fr: Disposition large
+    cy: Cynllun eang
+    id: Tata Letak Lebar
+    tl: Malawak na layout
+    eu: Diseinu zabala
+    it: Layout ampio
+    lv: Plašs izkārtojums
+    hr: Široki izgled
+    lt: Platus išdėstymas
+    hu: Széles elrendezés
+    zu: Ukwakheka okubanzi
+    is: Breitt skipulag
+    nl: Brede lay-out
+    sw: Mpangilio mpana
+    ku: Dirûvê fireh
+    pl: Szeroki układ
+    pt: Layout amplo
+    lb: Breet Layout
+    ms: Susun atur lebar
+    sk: Široké rozloženie
+    ro: Layout larg
+    mt: Tqassim wiesa '
+    fi: Laaja asettelu
+    sv: Bred layout
+    'no': Bred layout
+    uz: Keng tartib
+    tr: Geniş Düzen
+    el: Ευρεία διάταξη
+    bg: Широко оформление
+    so: Qaab-dhismeedka ballaaran
+    ru: Широкий макет
+    mn: Дотуур хувь зүй
+    uk: Широка розкладка
+    vi: Bố cục rộng
+    yo: Aipẹ
+    mk: Широк распоред
+    ar: تخطيط عريض
+    he: פריסה רחבה
+    sr: Широк распоред
+    tg: Тарҳбандии васеъ
+    ka: ფართო განლაგება
+    hy: Լայն դասավորություն
+    ur: وسیع ترتیب
+    fa: چیدمان گسترده
+    am: ሰፊ አቀማመጥ
+    ps: پراخه ترتیب
+    ne: चौडाई लेआउट
+    bn: প্রশস্ত বিন্যাস
+    hi: चौड़ी लेआउट
+    ko: 와이드 레이아웃
+    gu: વિશાળ
+    zh: 宽幅布局
+    ta: பரந்த தளவமைப்பு
+    ja: ワイドレイアウト
+    pa: ਵਾਈਡ ਲੇਆਉਟ
+    te: విస్తృత లేఅవుట్
+    lo: ຮູບແບບກ້ວາງ
+    si: පුළුල් පිරිසැලසුම
+    th: เค้าโครงกว้าง
+    km: ប្លង់ធំទូលាយ
+  description:
+    en: Wide layout for horizontal monitors.
+    cs: Široké rozložení pro vodorovné monitory.
+    da: Bredt layout til vandrette skærme.
+    de: Breites Layout für horizontale Monitore.
+    et: Lai paigutus horisontaalsete monitoride jaoks.
+    es: Disposición ancha para monitores horizontales.
+    az: Üfüqi monitorlar üçün geniş plan.
+    bs: Širok raspored za horizontalne monitore.
+    af: Wye uitleg vir horisontale monitors.
+    ca: Disseny ampli per a monitors horitzontals.
+    fr: Disposition large pour les moniteurs horizontaux.
+    id: Tata letak lebar untuk monitor horizontal.
+    cy: Cynllun eang ar gyfer monitorau llorweddol.
+    tl: Malawak na layout para sa pahalang na monitor.
+    it: Layout ampio per monitor orizzontali.
+    eu: Monitore horizontaletarako diseinu zabala.
+    lv: Plašs izkārtojums horizontāliem monitoriem.
+    lt: Platus išdėstymas horizontaliems monitoriams.
+    zu: Ukwakheka okubanzi kwabaqaphi abavundlile.
+    hu: Széles elrendezés vízszintes monitorokhoz.
+    hr: Širok izgled za horizontalne monitore.
+    is: Breitt skipulag fyrir lárétta skjái.
+    sw: Mpangilio mpana kwa wachunguzi wa usawa.
+    nl: Brede lay-out voor horizontale monitoren.
+    ku: Ji bo çavdêrên horizontî şêwaza berbiçav.
+    lb: Breet Layout fir horizontale Monitore.
+    pt: Layout amplo para monitores horizontais.
+    pl: Szeroki układ dla monitorów poziomych.
+    sk: Široké rozloženie pre horizontálne monitory.
+    ms: Susun atur lebar untuk monitor mendatar.
+    mt: Tqassim wiesa 'għal monitors orizzontali.
+    ro: Dispunere largă pentru monitoare orizontale.
+    fi: Leveä asettelu vaakasuorille näytöille.
+    'no': Bred utforming for horisontale skjermer.
+    sv: Bred layout för horisontella bildskärmar.
+    uz: Gorizontal monitorlar uchun keng tayyorlang.
+    tr: Yatay monitörler için geniş düzen.
+    el: Ευρεία διάταξη για οριζόντιες οθόνες.
+    bg: Широко оформление за хоризонтални монитори.
+    so: Qaab-dhismeedka ballaaran ee kormeerayaasha toosan.
+    ru: Широкий макет для горизонтальных мониторов.
+    vi: Bố cục rộng cho màn hình ngang.
+    yo: Jakejado akọkọ fun awọn diigi pere.
+    uk: Широка розкладка для горизонтальних моніторів.
+    mk: Широк распоред за хоризонтални монитори.
+    ar: تخطيط عريض للشاشات الأفقية.
+    sr: Широки распоред за хоризонталне мониторе.
+    mn: Хэвтээ мониторын өргөн байрлал.
+    tg: Тарҳбандии васеъ барои мониторҳои уфуқӣ.
+    ka: ფართო განლაგება ჰორიზონტალური მონიტორებისთვის.
+    he: פריסה רחבה למסכים אופקיים.
+    ur: افقی مانیٹر کے لئے وسیع ترتیب۔
+    hy: 'Հորիզոնական մոնիտորների լայն դասավորություն:'
+    ps: پراخه ترتیب د افقی څارونکو لپاره.
+    fa: طرح گسترده برای مانیتورهای افقی.
+    hi: क्षैतिज मॉनिटर के लिए वाइड लेआउट।
+    ne: तेर्सो मोनिटरहरूको लागि फराकिलो सजावट।
+    am: ለአግድመት መቆጣጠሪያዎች ሰፊ አቀማመጥ.
+    ko: 가로 모니터를 위한 와이드 레이아웃.
+    zh: 宽大的布局，适用于横向显示器。
+    pa: ਖਿਤਿਜੀ ਮਾਨੀਟਰਾਂ ਲਈ ਵਾਈਡ ਲੇਆਉਟ.
+    bn: অনুভূমিক মনিটরের জন্য প্রশস্ত বিন্যাস।
+    ja: 横長モニター用のワイドレイアウト。
+    te: క్షితిజ సమాంతర మానిటర్ల కోసం విస్తృత లేఅవుట్.
+    gu: આડી મોનિટર માટે વિશાળ લેઆઉટ.
+    ta: கிடைமட்ட மானிட்டர்களுக்கான பரந்த தளவமைப்பு.
+    si: තිරස් මොනිටර සඳහා පුළුල් පිරිසැලසුම.
+    th: เค้าโครงกว้างสำหรับจอภาพแนวนอน
+    lo: ຮູບແບບກ້ວາງສໍາລັບຈໍຕິດຕາມແນວນອນ.
+    km: ប្លង់ធំទូលាយសម្រាប់ម៉ូនីទ័រផ្ដេក។
 plugin:
   no_fallback_behavior: Float
   structure:

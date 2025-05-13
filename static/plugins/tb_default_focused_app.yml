@@ -1,12 +1,80 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
-id: "@default/focused-app"
+id: '@default/focused-app'
 metadata:
-  displayName: Focused App Display Name
-icon: "MdCenterFocusStrong"
-target: "@seelen/fancy-toolbar"
+  displayName:
+    en: Focused App Display Name
+    cs: Zobrazení názvu zaměřené aplikace
+    da: Fokuseret app-skærmnavn
+    af: Gefokusde app -vertoonnaam
+    de: Fokussierte App Anzeigename
+    et: Focused App Display Name
+    es: Nombre de la aplicación
+    az: Fokuslanmış tətbiqin adı
+    bs: Fokusirano ime aplikacije
+    ca: Nom de la visualització de l'aplicació centrada
+    fr: Nom d'affichage de l'application ciblée
+    cy: Enw Arddangos Ap Ffocws
+    id: Nama Tampilan Aplikasi yang Difokuskan
+    it: Nome visualizzato dell'app focalizzata
+    eu: Fokatutako aplikazioaren bistaratzeko izena
+    tl: Nakatuon ang pangalan ng pagpapakita ng app
+    lv: Mērķtiecīgas lietojumprogrammas Rādīt nosaukumu
+    hr: Usredotočeno ime za prikaz aplikacija
+    lt: Koncentruotos programėlės rodomas pavadinimas
+    zu: IGAMA LOKUTHOLAKALA KWE-APP ESISEKELWE
+    hu: Fókuszált alkalmazás kijelzőnév
+    sw: Jina la kuonyesha la programu
+    is: Einbeitt forrit Nafn forrits
+    nl: Gerichte app Weergavenaam
+    ku: Navê Display App Focused
+    pl: Nazwa wyświetlana aplikacji Focused
+    lb: Fokusséiert App Display Numm
+    pt: Nome de exibição do aplicativo focalizado
+    ro: Nume afișare aplicație focalizată
+    ms: Nama paparan aplikasi yang difokuskan
+    sk: Zobrazenie názvu aplikácie so zameraním
+    mt: Isem tal-wiri tal-app iffokat
+    fi: Keskitetty sovellus Näyttönimi
+    'no': Fokusert app visningsnavn
+    sv: Fokuserad app Visningsnamn
+    uz: Fokus qilingan ilovaning displey nomi
+    tr: Odaklanmış Uygulama Görünen Adı
+    el: Όνομα εμφάνισης εστιασμένης εφαρμογής
+    bg: Фокусирано име на приложението
+    so: Magaca Muujinta Muuqaalka App
+    vi: Tên hiển thị ứng dụng tập trung
+    yo: Ti dojukọ orukọ ifihan app
+    uk: Сфокусоване відображення назви програми
+    mk: Фокусирано име на приказ на апликација
+    ru: Отображаемое имя приложения Focused App
+    ar: اسم عرض التطبيق المركّز
+    mn: Төвлөрсөн апп-ын дэлгэцийн нэр
+    sr: Фокусирано име апликације
+    tg: Номи намоишгоҳи барнома
+    hy: Կենտրոնացված հավելվածի անունը
+    ka: ფოკუსირებული აპლიკაციის ჩვენების სახელი
+    he: שם תצוגת אפליקציה ממוקדת
+    ur: مرکوز ایپ ڈسپلے کا نام
+    fa: نام نمایش برنامه متمرکز
+    bn: ফোকাসড অ্যাপ ডিসপ্লে নাম
+    hi: केंद्रित ऐप प्रदर्शन नाम
+    am: የትኩረት መተግበሪያ የማሳያ ስም
+    ps: د ایپ انکشافي نوم
+    gu: કેન્દ્રિત એપ્લિકેશન પ્રદર્શન નામ
+    ne: फोकस गरिएको अनुप्रयोग प्रदर्शन नाम
+    zh: 聚焦应用程序显示名称
+    ko: 집중 앱 표시 이름
+    pa: ਫੋਕਸ ਐਪ ਡਿਸਪਲੇਅ ਦਾ ਨਾਮ
+    ja: フォーカスアプリ表示名
+    ta: கவனம் செலுத்திய பயன்பாட்டு காட்சி பெயர்
+    te: కేంద్రీకృత అనువర్తన ప్రదర్శన పేరు
+    th: ชื่อการแสดงแอพที่เน้น
+    km: ឈ្មោះបង្ហាញកម្មវិធីដែលផ្តោតអារម្មណ៍
+    si: අවධානය යොමු කළ යෙදුම් දර්ශන නාමය
+    lo: ຊື່ການສະແດງແອັບ App ທີ່ສຸມໃສ່
+icon: MdCenterFocusStrong
+target: '@seelen/fancy-toolbar'
 plugin:
   type: generic
-  template: |- 
-    return [AppIcon({ path: window.exe, umid: window.umid }), "  ", window.name]
+  template: 'return [AppIcon({ path: window.exe, umid: window.umid }), "  ", window.name]'
   style:
     flexShrink: 0

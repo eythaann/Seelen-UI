@@ -1,4 +1,10 @@
+import {
+  SeelenLauncherWidgetId,
+  SeelenWegWidgetId,
+  SeelenWindowManagerWidgetId,
+} from '@seelen-ui/lib';
 import { AhkVarList } from '@seelen-ui/lib/types';
+import { ResourceText } from '@shared/components/ResourceText';
 import { Button, Input, Switch, Tooltip } from 'antd';
 import { pick } from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -45,6 +51,7 @@ function AhkOptions({ variables, onChangeVar }: AhkOptionsProps) {
 }
 
 export function Shortcuts() {
+  const widgets = useSelector(RootSelectors.widgets);
   const ahkEnable = useSelector(RootSelectors.ahkEnabled);
 
   const dispatch = useDispatch();
@@ -65,6 +72,10 @@ export function Shortcuts() {
   function onReset() {
     dispatch(AhkVariablesActions.reset());
   }
+
+  const launcher = widgets.find((w) => w.id === SeelenLauncherWidgetId);
+  const weg = widgets.find((w) => w.id === SeelenWegWidgetId);
+  const wm = widgets.find((w) => w.id === SeelenWindowManagerWidgetId);
 
   return (
     <div>
@@ -87,13 +98,13 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('header.labels.seelen_rofi')}>
+        <SettingsSubGroup label={<ResourceText text={launcher?.metadata.displayName} />}>
           <AhkOptions variables={['toggleLauncher']} onChangeVar={onChangeVar} />
         </SettingsSubGroup>
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('header.labels.seelen_wm')}>
+        <SettingsSubGroup label={<ResourceText text={wm?.metadata.displayName} />}>
           <AhkOptions
             variables={['focusLeft', 'focusRight', 'focusTop', 'focusBottom']}
             onChangeVar={onChangeVar}
@@ -102,7 +113,7 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('header.labels.seelen_wm')}>
+        <SettingsSubGroup label={<ResourceText text={wm?.metadata.displayName} />}>
           <AhkOptions
             variables={[
               'increaseWidth',
@@ -117,7 +128,7 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('header.labels.seelen_wm')}>
+        <SettingsSubGroup label={<ResourceText text={wm?.metadata.displayName} />}>
           <AhkOptions
             variables={[
               'reserveLeft',
@@ -193,7 +204,7 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('header.labels.seelen_weg')}>
+        <SettingsSubGroup label={<ResourceText text={weg?.metadata.displayName} />}>
           <AhkOptions
             variables={[
               'startWegApp0',

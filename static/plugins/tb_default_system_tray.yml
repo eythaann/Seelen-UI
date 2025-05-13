@@ -1,8 +1,77 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: '@default/system-tray'
 metadata:
-  displayName: System Tray
-icon: 'IoFileTrayFullOutline'
+  displayName:
+    en: System Tray
+    cs: Systémová lišta
+    da: Systembakke
+    de: Systemablage
+    af: Stelselbak
+    et: Süsteemiriiul
+    az: Sistem tepsisi
+    es: Bandeja del sistema
+    bs: Sistemska ladica
+    fr: Plateau système
+    ca: Safata del sistema
+    id: Baki Sistem
+    cy: Hambwrdd System
+    eu: Sistemaren erretilua
+    tl: System tray
+    lv: Sistēmas teknes
+    it: Vassoio di sistema
+    lt: Sistemos dėklas
+    hr: Pladanj
+    zu: Ugqoko wesistimu
+    hu: Rendszertálca
+    is: Kerfisbakki
+    nl: Systeemvak
+    sw: Tray ya mfumo
+    ku: Tray Pergalê
+    pl: Zasobnik systemowy
+    lb: Sécherheetsich
+    pt: Bandeja do sistema
+    ro: Tray de sistem
+    sk: Systémová lišta
+    ms: Dulang sistem
+    mt: Tray tas-Sistema
+    fi: Järjestelmätarjotin
+    sv: Systemfack
+    'no': Systembrett
+    uz: Tizim patnis
+    tr: Sistem Tepsisi
+    el: Δίσκος συστήματος
+    bg: Системна лента
+    so: Nidaamka Tray
+    vi: Khay hệ thống
+    ru: Системный лоток
+    yo: Atẹ eto
+    uk: Системний лоток
+    mk: Системска лента
+    ar: علبة النظام
+    mn: Нь хуваалтын үнэгүйз
+    sr: Систем
+    tg: Санки система
+    ur: سسٹم ٹرے
+    ka: სისტემის უჯრა
+    he: מגש מערכת
+    ps: د سیستم ټری
+    hy: Համակարգի սկուտեղ
+    am: የስርዓት ትሪ
+    bn: সিস্টেম ট্রে
+    ne: प्रणाली ट्रे
+    hi: तंत्र ट्रे
+    fa: سینی سیستم
+    pa: ਸਿਸਟਮ ਟਰੇ
+    ko: 시스템 트레이
+    te: సిస్టమ్ ట్రే
+    zh: 系统托盘
+    gu: પદ્ધતિસર ટ્રે
+    ja: システムトレイ
+    si: පද්ධති තැටි
+    ta: கணினி தட்டு
+    th: ถาดระบบ
+    lo: ຖາດລະບົບ
+    km: ថាសប្រព័ន្ធ
+icon: IoFileTrayFullOutline
 target: '@seelen/fancy-toolbar'
 plugin:
   type: tray

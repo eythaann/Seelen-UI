@@ -1,9 +1,78 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
-id: "@default/focused-app-title"
+id: '@default/focused-app-title'
 metadata:
-  displayName: Focused App Title
-icon: "MdCenterFocusWeak"
-target: "@seelen/fancy-toolbar"
+  displayName:
+    en: Focused App Title
+    cs: Název zaměřené aplikace
+    da: Fokuseret app-titel
+    de: Fokussierter App-Titel
+    et: Fookustatud rakenduse pealkiri
+    af: Gefokusde app -titel
+    es: Título de la aplicación
+    az: Fokuslanmış Tətbiq Başlığı
+    bs: Fokusirana naslov aplikacije
+    ca: Títol de l'aplicació centrat
+    fr: Titre de l'application ciblée
+    cy: Teitl ap wedi'i ffocws
+    id: Judul Aplikasi Terfokus
+    it: Titolo dell'applicazione focalizzata
+    tl: Nakatuon ang pamagat ng app
+    eu: Aplikazioaren izenburua bideratua
+    lv: Mērķtiecīga lietotnes nosaukums
+    hr: Usredotočeni naslov aplikacije
+    lt: Koncentruotos programos pavadinimas
+    hu: Fókuszált alkalmazás címe
+    zu: Isihloko sohlelo lokusebenza esigxile
+    sw: Kichwa cha programu kilicholenga
+    is: Einbeittur forrit titill
+    nl: Gerichte app-titel
+    ku: Sernavê sernavê Focused
+    pl: Skoncentrowany tytuł aplikacji
+    lb: Fokusséiert App Titel
+    pt: Título do aplicativo focalizado
+    ro: Titlul aplicației focalizate
+    sk: Názov aplikácie so zameraním
+    mt: Titolu tal-app iffokat
+    fi: Keskittynyt sovelluksen otsikko
+    ms: Tajuk aplikasi yang difokuskan
+    uz: FOCKES sarlavhasi
+    sv: Fokuserad app-titel
+    'no': Fokusert apptittel
+    tr: Odaklanmış Uygulama Başlığı
+    el: Εστιασμένη εφαρμογή Τίτλος
+    bg: Заглавие на фокусираното приложение
+    so: Cinwaanka app
+    vi: Tiêu đề ứng dụng tập trung
+    ru: Название приложения с фокусом
+    yo: Akọkọ ti o ni idojukọ
+    uk: Сфокусована назва програми
+    ar: عنوان التطبيق المركّز
+    mn: Төвлөрсөн апп гарчиг
+    mk: Фокусиран наслов на апликација
+    sr: Фокусирана назив апликације
+    tg: Номи барнома
+    ka: ფოკუსირებული აპლიკაციების სათაური
+    hy: Կենտրոնացված ծրագրի վերնագիրը
+    hi: केंद्रित ऐप शीर्षक
+    ps: د اپل شوي ایپ سرلیک
+    ur: توجہ مرکوز ایپ کا عنوان
+    he: כותרת אפליקציה ממוקדת
+    fa: عنوان برنامه متمرکز
+    am: የታተመ የመተግበሪያ ርዕስ
+    bn: ফোকাসড অ্যাপের শিরোনাম
+    gu: કેન્દ્રિત એપ્લિકેશન શીર્ષક
+    ne: केन्द्रित अनुप्रयोग शीर्षक
+    pa: ਫੋਕਸਡ ਐਪ ਦਾ ਸਿਰਲੇਖ
+    ta: கவனம் செலுத்திய பயன்பாட்டு தலைப்பு
+    ko: 집중된 앱 제목
+    zh: 重点应用程序标题
+    te: ఫోకస్డ్ యాప్ టైటిల్
+    si: අවධානය යොමු කළ යෙදුම් මාතෘකාව
+    ja: フォーカスアプリのタイトル
+    th: ชื่อแอพที่มุ่งเน้น
+    lo: ເອົາຫົວຂໍ້ app ທີ່ສຸມໃສ່
+    km: ចំណងជើងកម្មវិធីផ្តោតអារម្មណ៍
+icon: MdCenterFocusWeak
+target: '@seelen/fancy-toolbar'
 plugin:
   type: generic
   template: return window.title

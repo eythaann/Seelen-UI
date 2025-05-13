@@ -1,6 +1,74 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/widget.schema.json
 id: '@seelen/launcher'
 icon: MdRocketLaunch
 metadata:
   displayName:
-    en: App Launcher
+    en: Application Launcher
+    cs: Spouštěč aplikací
+    da: Lancering af applikationer
+    et: Rakenduse käivitaja
+    af: Aansoeker Launcher
+    de: Startprogramm für Anwendungen
+    es: Lanzador de aplicaciones
+    az: Tətbiq başlatıcısı
+    bs: Pokretanje aplikacija
+    fr: Lanceur d'application
+    ca: Llançador d'aplicacions
+    id: Peluncur Aplikasi
+    cy: Lansiwr Cais
+    it: Lanciatore di applicazioni
+    eu: Aplikazio abiarazlea
+    tl: Application launcher
+    lv: Lietojumprogrammu palaišanas palaidējs
+    lt: Programos paleidimo programa
+    hr: Pokretač aplikacija
+    hu: Alkalmazás indító
+    sw: Kizindua cha Maombi
+    nl: Applicatie Launcher
+    ku: Serlêdana Destpêkê
+    is: Laun á forrita
+    lb: Applikatioun Launcher
+    zu: Isiqalisi sohlelo lokusebenza
+    ms: Pelancar Aplikasi
+    pl: Program uruchamiający aplikacje
+    pt: Iniciador de aplicativos
+    ro: Lansator de aplicații
+    sk: Spúšťač aplikácií
+    fi: Sovelluksen käynnistin
+    mt: Launcher tal-Applikazzjoni
+    sv: Applikationsstartare
+    'no': Søknadsstart
+    uz: Ilovani ishga tushirish xizmati
+    tr: Uygulama Başlatıcı
+    el: Εκτοξευτής εφαρμογών
+    bg: Стартиране на приложения
+    so: Bilaabista Codsiga
+    ru: Запускатель приложений
+    vi: Trình khởi chạy ứng dụng
+    uk: Засіб запуску додатків
+    mn: Програм сурталчилалт
+    yo: Ifilole ohun elo
+    mk: Фрлач на апликации
+    ar: مُشغِّل التطبيقات
+    sr: Покретач апликација
+    tg: Ариза оғозкунанда
+    ka: განაცხადის გამშვები
+    he: משגר יישומים
+    fa: پرتاب کننده درخواست
+    hy: Դիմումի գործարկիչ
+    ur: درخواست لانچر
+    ps: د غوښتنلیک لانچلور
+    am: የትግበራ አስጀማሪ
+    ne: अनुप्रयोग सुरुवातकर्ता
+    bn: অ্যাপ্লিকেশন লঞ্চার
+    pa: ਐਪਲੀਕੇਸ਼ਨ ਲਾਂਚਰ
+    hi: अनुप्रयोग प्रक्षेपक
+    ko: 애플리케이션 런처
+    zh: 应用程序启动器
+    ja: アプリケーションランチャー
+    ta: பயன்பாட்டு துவக்கி
+    gu: અરજી -પ્રહાર કરનાર
+    te: అప్లికేషన్ లాంచర్
+    si: යෙදුම් දියත් කිරීම
+    th: แอปพลิเคชัน Launcher
+    lo: Launcher ໃບສະຫມັກ
+    km: កម្មវិធីដំណើរការដាក់ពាក្យសុំ

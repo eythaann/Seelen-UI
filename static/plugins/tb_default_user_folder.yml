@@ -1,13 +1,81 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
-id: "@default/user-folder"
+id: '@default/user-folder'
 metadata:
-  displayName: User Folder
+  displayName:
+    en: User Folder
+    cs: Složka uživatele
+    da: Brugermappe
+    de: Benutzerordner
+    et: Kasutaja kaust
+    af: Gebruikersmap
+    es: Carpeta de usuario
+    az: İstifadəçi qovluğu
+    bs: Korisnička mapa
+    ca: Carpeta d'usuari
+    fr: Dossier de l'utilisateur
+    cy: Ffolder defnyddiwr
+    id: Folder Pengguna
+    it: Cartella utente
+    lv: Lietotāja mape
+    tl: Folder ng gumagamit
+    hr: Korisnička mapa
+    eu: Erabiltzaile karpeta
+    lt: Naudotojo aplankas
+    zu: Ifada lomsebenzisi
+    hu: Felhasználói mappa
+    nl: Gebruikersmap
+    is: Notendamappa
+    ku: Peldanka bikarhêner
+    sw: Folda ya watumiaji
+    lb: Benotzer Folden
+    pl: Folder użytkownika
+    pt: Pasta do usuário
+    sk: Priečinok používateľa
+    ro: Folder utilizator
+    mt: Folder tal-utent
+    ms: Folder pengguna
+    fi: Käyttäjän kansio
+    sv: Användarmapp
+    tr: Kullanıcı Klasörü
+    uz: Foydalanuvchi papkasi
+    el: Φάκελος χρήστη
+    bg: Потребителска папка
+    'no': Brukermappe
+    so: Faylka isticmaale
+    ru: Папка пользователя
+    vi: Thư mục người dùng
+    yo: Ti olumulo Olumulo
+    uk: Папка користувача
+    mk: Папка за корисници
+    mn: Вотт хавтас
+    ar: مجلد المستخدم
+    sr: Корисничка мапа
+    ka: მომხმარებლის საქაღალდე
+    he: תיקיית משתמש
+    hy: Օգտագործողի թղթապանակ
+    tg: Ҷузвдон
+    ur: صارف فولڈر
+    fa: پوشه کاربر
+    bn: ব্যবহারকারী ফোল্ডার
+    ps: کارن فولډر
+    am: የተጠቃሚ አቃፊ
+    hi: उपयोगकर्ता फ़ोल्डर
+    ne: प्रयोगकर्ता फोल्डर
+    gu: વપરાશકર્તા ફોલ્ડર
+    ko: 사용자 폴더
+    zh: 用户文件夹
+    pa: ਯੂਜ਼ਰ ਫੋਲਡਰ
+    ja: ユーザーフォルダ
+    ta: பயனர் கோப்புறை
+    te: వినియోగదారు ఫోల్డర్
+    th: โฟลเดอร์ผู้ใช้
+    si: පරිශීලක ෆෝල්ඩරය
+    lo: ໂຟນເດີຂອງຜູ້ໃຊ້
+    km: ថតអ្នកប្រើ
 icon: FaRegCircleUser
-target: "@seelen/fancy-toolbar"
+target: '@seelen/fancy-toolbar'
 plugin:
   type: user
   withUserFolder: true
-  template: |-
-    return [Image({ path: user.profilePicturePath }), ' ', user.name];
+  template: 'return [Image({ path: user.profilePicturePath }), '' '', user.name];'
   style:
     flexShrink: 0

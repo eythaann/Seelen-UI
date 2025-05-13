@@ -1,9 +1,78 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
-id: "@default/date"
+id: '@default/date'
 metadata:
-  displayName: Date
-icon: "TbCalendar"
-target: "@seelen/fancy-toolbar"
+  displayName:
+    en: Date
+    cs: Datum
+    da: Dato
+    et: Kuupäev
+    az: Tarix
+    es: Fecha
+    af: Datum
+    bs: Datum
+    ca: Data
+    cy: Dyddid
+    fr: Date
+    id: Tanggal
+    hr: Datum
+    de: Datum
+    eu: Datil
+    tl: Petsa
+    lv: Datums
+    ku: Rojek
+    lt: Data
+    it: Data
+    zu: Isundu
+    hu: Dátum
+    nl: Datum
+    is: Dagsetning
+    sw: Tarehe
+    lb: Datum un
+    pl: Data
+    'no': Dato
+    pt: Data
+    ms: Tarikh
+    sk: Dátum
+    mt: Data
+    ro: Data
+    fi: Päivämäärä
+    sv: Datum
+    uz: Sana
+    tr: Tarih
+    vi: Ngày
+    el: Ημερομηνία
+    bg: Дата
+    so: Taariikh
+    ru: Дата
+    uk: Дата
+    yo: Ọjọ
+    mk: Датум
+    mn: Огноо
+    ar: التاريخ
+    he: תַאֲרִיך
+    sr: Датум
+    tg: Таърих
+    fa: تاریخ
+    ur: تاریخ
+    hi: तारीख
+    hy: Ժամադրություն
+    ps: نېټه
+    gu: તારીખ
+    am: ቀን
+    ka: თარიღი
+    ne: खजुर
+    bn: তারিখ
+    th: วันที่
+    ko: 날짜
+    pa: ਤਾਰੀਖ
+    ta: தேதி
+    zh: 日期
+    ja: 日付
+    te: తేదీ
+    km: កាលកមនត់
+    si: දිනය
+    lo: ວັນທີ
+icon: TbCalendar
+target: '@seelen/fancy-toolbar'
 plugin:
   type: date
   template: return date

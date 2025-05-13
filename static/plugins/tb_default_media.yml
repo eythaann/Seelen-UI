@@ -1,13 +1,82 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: '@default/media'
 metadata:
-  displayName: Media
-icon: 'IoVolumeMediumOutline'
+  displayName:
+    en: Media
+    cs: Média
+    da: Medier
+    de: Medien
+    af: Media
+    bs: Mediji
+    az: Media
+    ca: Medis de comunicació
+    et: Meedia
+    es: Medios de comunicación
+    fr: Les médias
+    cy: Media
+    id: Media
+    it: Media
+    eu: Komunikabideak
+    lv: Mediji
+    tl: Media
+    hr: Medija
+    zu: Okokuhambisa
+    is: Fjölmiðlar
+    hu: Média
+    ku: Medya
+    lt: Žiniasklaida
+    nl: Media
+    sw: Media
+    lb: Medienen
+    pl: Media
+    'no': Media
+    ro: Media
+    pt: Mídia
+    sk: Médiá
+    mt: Midja
+    ms: Media
+    sv: Media
+    fi: Media
+    uz: Ommaviy axborot vositalari
+    tr: Medya
+    vi: Phương tiện truyền thông
+    so: Warbaahinta
+    el: Μέσα ενημέρωσης
+    bg: Медии
+    ru: СМИ
+    yo: Awọn media
+    uk: Медіа
+    mn: Арга хэрэгсэл
+    ar: وسائل الإعلام
+    mk: Медиуми
+    he: כְּלֵי תִקְשׁוֹרֶת
+    sr: Медији
+    ur: میڈیا
+    tg: Мӯҳит
+    hy: Լրատվամիջոց
+    ka: მასალა
+    fa: رسانه ها
+    hi: मिडिया
+    ps: میډیا
+    am: ሚዲያ
+    bn: মিডিয়া
+    ne: संन्चारका साधन
+    pa: ਮੀਡੀਆ
+    ko: 미디어
+    th: สื่อ
+    zh: 媒体
+    gu: માધ્યમ
+    ta: ஊடகங்கள்
+    ja: メディア
+    te: మీడియా
+    si: මාධ්ය
+    km: ឧបករន៍ផសាយប៍តមាន
+    lo: ສື່ມວນຊົນ
+icon: IoVolumeMediumOutline
 target: '@seelen/fancy-toolbar'
 plugin:
   type: media
   withMediaControls: true
-  template: >-
+  template: |-
     return isMuted
       ? icon("IoVolumeMuteOutline")
       : volume >= 0.66
@@ -17,5 +86,4 @@ plugin:
           : volume != 0
             ? icon("IoVolumeLowOutline")
             : icon("IoVolumeOffOutline")
-  tooltip: >-
-    return [t("placeholder.volume"), ": ", (volume * 100).toFixed(0), "%"]
+  tooltip: 'return [t("placeholder.volume"), ": ", (volume * 100).toFixed(0), "%"]'

@@ -1,9 +1,148 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
-id: "@default/wm-grid"
-target: "@seelen/window-manager"
+id: '@default/wm-grid'
+target: '@seelen/window-manager'
 metadata:
-  displayName: Grid
-  description: Grid Layout, useful for big monitors.
+  displayName:
+    en: Grid
+    cs: Síť
+    da: Gitter
+    de: Raster
+    af: Rooster
+    et: Võrk
+    es: Rejilla
+    bs: Rešetka
+    ca: Graella
+    fr: Grille
+    az: Tor
+    id: Grid
+    cy: Grid
+    it: Griglia
+    eu: Harbera
+    tl: Grid
+    lv: Tīkls
+    zu: Igridi
+    hr: Rešetka
+    hu: Rács
+    lt: Tinklelis
+    is: Rist
+    nl: Rooster
+    sw: Gridi ya taifa
+    ku: Grid
+    pl: Siatka
+    lb: Den Gëtter
+    pt: Grade
+    ro: Rețea
+    ms: Grid
+    sk: Sieť
+    mt: Grilja
+    fi: Ruutu
+    'no': Rutenett
+    sv: Rutnät
+    uz: Panjara
+    tr: Izgara
+    el: Πλέγμα
+    bg: Мрежа
+    so: Shiirid
+    vi: Lưới
+    ru: Сетка
+    uk: Сітка
+    yo: Akoj
+    mn: Дэвэрсэн усан
+    ar: الشبكة
+    mk: Решетка
+    he: רֶשֶׁת
+    tg: Шабака
+    sr: Мрежа
+    fa: شبکه
+    ka: ბადე
+    hy: Ցանց
+    ur: گرڈ
+    hi: ग्रिड
+    ps: گردش
+    am: ፍርግርግ
+    ne: ग्रिड
+    pa: ਗਰਿੱਡ
+    te: గ్రిడ్
+    bn: গ্রিড
+    zh: 网格
+    gu: ગ્રીક ગ્રિડ
+    ja: グリッド
+    ta: கட்டம்
+    ko: 그리드
+    si: ජාලකය
+    lo: ຕາຂ່າຍໄຟຟ້າ
+    th: กริด
+    km: បប្យេសី
+  description:
+    en: Grid Layout, useful for big monitors.
+    cs: Rozložení mřížky, užitečné pro velké monitory.
+    da: Gitterlayout, nyttigt til store skærme.
+    de: Rasterlayout, nützlich für große Monitore.
+    af: Roosteruitleg, nuttig vir groot monitors.
+    et: Ruudustiku paigutus, kasulik suurte monitoride puhul.
+    es: Diseño de cuadrícula, útil para monitores grandes.
+    az: Grid düzeni, böyük monitorlar üçün faydalıdır.
+    bs: Izgled rešetke, koristan za velike monitore.
+    fr: Disposition en grille, utile pour les grands écrans.
+    ca: Disseny de quadrícules, útil per a grans monitors.
+    cy: Cynllun grid, yn ddefnyddiol ar gyfer monitorau mawr.
+    id: Tata Letak Grid, berguna untuk monitor besar.
+    it: Layout a griglia, utile per i monitor di grandi dimensioni.
+    eu: Grid diseinua, monitore handientzako erabilgarria.
+    tl: Layout ng grid, kapaki -pakinabang para sa malaking monitor.
+    lv: Režģa izkārtojums, kas noder lieliem monitoriem.
+    hr: Izgled mreže, koristan za velike monitore.
+    lt: Tinklelio išdėstymas, naudingas dideliems monitoriams.
+    hu: Rácsos elrendezés, hasznos nagy monitorok esetén.
+    zu: Isakhiwo segridi, ewusizo kubaqaphi abakhulu.
+    is: Skipulag rist, gagnlegt fyrir stóra skjái.
+    sw: Mpangilio wa gridi ya taifa, muhimu kwa wachunguzi wakubwa.
+    nl: Rasterindeling, handig voor grote monitors.
+    ku: Rêzeya Grid, ji bo çavdêrên mezin kêrhatî ye.
+    lb: Grid Layout, nëtzlech fir grouss Méint.
+    pl: Układ siatki, przydatny w przypadku dużych monitorów.
+    pt: Layout de grade, útil para monitores grandes.
+    ro: Layout grilă, util pentru monitoare mari.
+    mt: Tqassim tal-grilja, utli għal monitors kbar.
+    sk: Rozloženie mriežky, užitočné pre veľké monitory.
+    ms: Susun atur grid, berguna untuk monitor besar.
+    fi: Ruudukkoasettelu, hyödyllinen suurille näytöille.
+    sv: Grid Layout, användbart för stora bildskärmar.
+    'no': Nettoppsett, nyttig for store skjermer.
+    uz: Katta monitorlar uchun foydali bo'lgan panjara.
+    tr: Izgara Düzeni, büyük monitörler için kullanışlıdır.
+    vi: Bố cục lưới, hữu ích cho màn hình lớn.
+    el: Διάταξη πλέγματος, χρήσιμη για μεγάλες οθόνες.
+    bg: Мрежово оформление, полезно за големи монитори.
+    so: Qaab-dhismeedka Grid, waxtar u leh kormeerayaasha waaweyn.
+    ru: Сетчатый макет, полезный для больших мониторов.
+    yo: Ifilelẹ Grid, wulo fun awọn diigion nla.
+    uk: Сітчаста розкладка, корисна для великих моніторів.
+    mk: Распоред на решетки, корисно за големи монитори.
+    ar: تخطيط الشبكة، مفيد للشاشات الكبيرة.
+    mn: Big Monitors-д хэрэгтэй сүлжээ, хэрэгтэй.
+    tg: Тарҳбандии Grid, барои мониторҳои калон муфид аст.
+    sr: Грид изглед, користан за велике мониторе.
+    ka: ქსელის განლაგება, სასარგებლოა დიდი მონიტორებისთვის.
+    hy: 'Gr անցի դասավորություն, օգտակար մեծ մոնիտորների համար:'
+    ur: گرڈ لے آؤٹ ، بڑے مانیٹر کے لئے مفید ہے۔
+    he: פריסת רשת, שימושית למסכים גדולים.
+    hi: ग्रिड लेआउट, बड़े मॉनिटर के लिए उपयोगी।
+    ps: د بریښنا ترتیب، د لوی څارونکو لپاره ګټور.
+    fa: طرح شبکه ، برای مانیتورهای بزرگ مفید است.
+    ne: ग्रिड लेआउट, ठूला मोनिटरहरूको लागि उपयोगी।
+    am: ለትላልቅ መቆጣጠሪያዎች ጠቃሚ, የፍርግርግ አቀማመጥ.
+    bn: গ্রিড লেআউট, বড় মনিটরের জন্য দরকারী।
+    ko: 그리드 레이아웃은 대형 모니터에 유용합니다.
+    pa: ਗਰਿੱਡ ਲੇਆਉਟ, ਵੱਡੇ ਮਾਨੀਟਰਾਂ ਲਈ ਲਾਭਦਾਇਕ.
+    zh: 网格布局，适用于大显示器。
+    ja: 大きなモニターに便利なグリッドレイアウト。
+    gu: ગ્રીડ લેઆઉટ, મોટા મોનિટર માટે ઉપયોગી.
+    ta: கட்டம் தளவமைப்பு, பெரிய மானிட்டர்களுக்கு பயனுள்ளதாக இருக்கும்.
+    te: గ్రిడ్ లేఅవుట్, పెద్ద మానిటర్లకు ఉపయోగపడుతుంది.
+    th: เลย์เอาต์กริดมีประโยชน์สำหรับจอภาพขนาดใหญ่
+    si: විශාල මොනිටර සඳහා ප්රයෝජනවත් ග්රිඩ් පිරිසැලසුම.
+    lo: ຮູບແບບຕາຂ່າຍໄຟຟ້າ, ມີປະໂຫຍດສໍາລັບຜູ້ຕິດຕາມຂ່າວໃຫຍ່.
+    km: ប្លង់ក្រឡាចត្រង្គមានប្រយោជន៍សម្រាប់ម៉ូនីទ័រធំ ៗ ។
 plugin:
   no_fallback_behavior: Float
   structure:
@@ -27,7 +166,9 @@ plugin:
           - type: Leaf
             priority: 1
           - type: Leaf
-            condition: if(is_reindexing, managed == 4 || managed >= 6, managed == 3 || managed >= 5)
+            condition: >-
+              if(is_reindexing, managed == 4 || managed >= 6, managed == 3 ||
+              managed >= 5)
             priority: 2
       - type: Vertical
         priority: 2

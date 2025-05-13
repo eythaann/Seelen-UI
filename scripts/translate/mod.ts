@@ -1,7 +1,10 @@
 import { AutoTranslator, ObjectTranslator } from '@seelen/translation-toolkit';
 import { SupportedLanguages } from '@seelen-ui/lib';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { readdir } from 'fs/promises';
 import yaml from 'js-yaml';
+
+import { completeResourceTranslations } from './resource';
 
 const API_KEY = process.env.DEEPL_API_KEY;
 
@@ -57,3 +60,19 @@ await completeTranslationsFor('src/apps/settings/i18n/translations');
 await completeTranslationsFor('src/apps/seelen_rofi/i18n/translations');
 
 await completeTranslationsFor('src/background/i18n');
+
+const widgets = await readdir('./static/widgets');
+for (const widget of widgets) {
+  console.log(`Translating resource ${widget}`);
+  await completeResourceTranslations(`./static/widgets/${widget}`, translator);
+}
+
+const plugins = await readdir('./static/plugins');
+for (const plugin of plugins) {
+  console.log(`Translating resource ${plugin}`);
+  await completeResourceTranslations(`./static/plugins/${plugin}`, translator);
+}
+
+await completeResourceTranslations('./static/themes/default/theme.yml', translator);
+await completeResourceTranslations('./static/themes/animated-start-icon/theme.yml', translator);
+await completeResourceTranslations('./static/themes/bubbles.yml', translator);

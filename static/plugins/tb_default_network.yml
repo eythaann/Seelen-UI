@@ -1,15 +1,84 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/plugin.schema.json
 id: '@default/network'
 metadata:
-  displayName: Network
-icon: 'FaWifi'
+  displayName:
+    en: Network
+    da: Netværk
+    cs: Síť
+    de: Netzwerk
+    af: Netwerk
+    az: Şəbəkə
+    es: Red
+    bs: Mreža
+    et: Võrk
+    fr: Réseau
+    ca: Xarxa
+    id: Jaringan
+    tl: Network
+    cy: Rhwydweithiwyd
+    eu: Sare
+    it: Rete
+    hr: Mreža
+    lv: Tīkls
+    lt: Tinklas
+    is: Net
+    zu: Inethiwekhi
+    sw: Mtandao
+    hu: Hálózat
+    nl: Netwerk
+    ku: Tort
+    ms: Rangkaian
+    pl: Sieć
+    pt: Rede
+    lb: Netffaechnung
+    ro: Rețea
+    mt: Netwerk
+    sv: Nätverk
+    'no': Nettverk
+    uz: Tarmog'i
+    sk: Sieť
+    tr: Şebeke
+    vi: Mạng
+    fi: Verkko
+    el: Δίκτυο
+    bg: Мрежа
+    so: Goob ka mid ah
+    ru: Сеть
+    uk: Мережа
+    mk: Мрежа
+    yo: Nẹtiwọọki
+    mn: Сүлжээ
+    ar: الشبكة
+    he: רֶשֶׁת
+    sr: Мрежа
+    tg: Шабака
+    ka: ქსელი
+    hy: Ցանց
+    fa: شبکه
+    ur: نیٹ ورک
+    hi: नेटवर्क
+    ps: جال
+    am: አውታረ መረብ
+    ne: नेटवर्क
+    bn: নেটওয়ার্ক
+    ko: 네트워크
+    pa: ਨੈੱਟਵਰਕ
+    zh: 网络
+    gu: નેટવર્ક
+    ja: ネットワーク
+    te: నెట్‌వర్క్
+    ta: நெட்வொர்க்
+    si: ජාලය
+    km: បណ្តាញ
+    th: เครือข่าย
+    lo: ເຄືອຂ່າຍ
+icon: FaWifi
 target: '@seelen/fancy-toolbar'
 plugin:
   type: network
   withWlanSelector: true
   tooltip: >-
-    return online ? t("placeholder.ethernet_connected") : t("placeholder.ethernet_disconnected")
+    return online ? t("placeholder.ethernet_connected") :
+    t("placeholder.ethernet_disconnected")
   template: >-
-    if (!online) return icon("TbWorldCancel");
-    if (usingInterface?.type === "IEEE80211") return icon("FaWifi");
-    return icon("FaComputer");
+    if (!online) return icon("TbWorldCancel"); if (usingInterface?.type ===
+    "IEEE80211") return icon("FaWifi"); return icon("FaComputer");
