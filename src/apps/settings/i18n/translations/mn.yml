@@ -292,7 +292,6 @@ weg:
       on_monitor: Монитор дээр
     thumbnail_generation_enabled: Барааны Hover дээр Thumbnails үүсгэх
     visible_separators: Харагдах тусгаарлагч
-    zoom_size: Томруулсан хэмжээ (сэдэвт ашигладаг)
   label: Док / Taskbar
   margin: Саруулган өвс
   mode:

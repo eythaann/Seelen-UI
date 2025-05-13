@@ -293,7 +293,6 @@ weg:
       on_monitor: روی مانیتور
     thumbnail_generation_enabled: ریز عکسها را در شناور آیتم ایجاد کنید
     visible_separators: جداکننده های قابل مشاهده
-    zoom_size: اندازه بزرگنمایی (برای مضامین استفاده می شود)
   label: اسکله/نوار وظیفه
   margin: لبه
   mode:

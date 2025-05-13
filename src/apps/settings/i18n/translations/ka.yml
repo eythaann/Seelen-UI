@@ -294,7 +294,6 @@ weg:
       on_monitor: მონიტორზე
     thumbnail_generation_enabled: წარმოქმენით მინიატურები
     visible_separators: ხილული გამყოფი
-    zoom_size: მასშტაბური ზომა (გამოიყენება თემებისთვის)
   label: დოკ/დავალების ზოლი
   margin: ზღვარი
   mode:

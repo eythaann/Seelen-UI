@@ -291,7 +291,6 @@ weg:
       on_monitor: මොනිටරය මත
     thumbnail_generation_enabled: අයිතමයේ සැරිසරන සිඟිති රූප ජනනය කරන්න
     visible_separators: දෘශ්‍ය බෙදුම්කරුවන්
-    zoom_size: විශාලනය කළ ප්‍රමාණය (තේමා සඳහා භාවිතා වේ)
   label: ඩොක්/කාර්ය තීරුව
   margin: ආන්තිකය
   mode:

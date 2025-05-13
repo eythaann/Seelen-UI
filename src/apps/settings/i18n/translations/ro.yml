@@ -298,7 +298,6 @@ weg:
       on_monitor: Pe monitor
     thumbnail_generation_enabled: Generarea de miniaturi la trecerea elementului
     visible_separators: Separatoare vizibile
-    zoom_size: Dimensiunea zoomată (folosită pentru teme)
   label: Dock/Bara de activități
   margin: Marjă
   mode:

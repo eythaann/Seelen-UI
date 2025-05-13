@@ -288,7 +288,6 @@ weg:
       on_monitor: Kwenye Monitor
     thumbnail_generation_enabled: Tengeneza vijipicha kwenye hover ya bidhaa
     visible_separators: Watenganisho unaoonekana
-    zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
   label: Dock/Taskbar
   margin: Margin
   mode:

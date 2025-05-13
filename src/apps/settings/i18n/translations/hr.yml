@@ -296,7 +296,6 @@ weg:
       on_monitor: Na monitoru
     thumbnail_generation_enabled: Generirati sličice na predmetu lebde
     visible_separators: Vidljivi separatori
-    zoom_size: Zumirana veličina (koristi se za teme)
   label: Pristanište/trag
   margin: Margina
   mode:

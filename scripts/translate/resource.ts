@@ -32,6 +32,16 @@ export async function completeResourceTranslations(
     );
   }
 
+  // this is unique for themes
+  if (resource.settings) {
+    for (const setting of resource.settings) {
+      const label: ResourceText | undefined = setting.label;
+      if (label) {
+        setting.label = await completeTranslationsForResourceText(label, translator);
+      }
+    }
+  }
+
   await writeFile(resourceFile, yaml.dump(resource));
 }
 

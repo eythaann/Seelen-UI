@@ -277,7 +277,6 @@ weg:
       on_monitor: 在监视器上
     thumbnail_generation_enabled: 项目悬停时生成缩略图
     visible_separators: 可见分隔符
-    zoom_size: 缩放尺寸（用于主题）
   label: Dock / 任务栏
   margin: 边距
   mode:

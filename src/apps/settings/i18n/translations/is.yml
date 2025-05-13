@@ -290,7 +290,6 @@ weg:
       on_monitor: Á Skjár
     thumbnail_generation_enabled: Búðu til smámyndir á hlutnum sveima
     visible_separators: Sýnilegir skilju
-    zoom_size: Aðdráttarstærð (notuð fyrir þemu)
   label: Bryggju/verkefnabar
   margin: Framlegð
   mode:

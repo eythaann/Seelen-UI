@@ -300,7 +300,6 @@ weg:
       on_monitor: Sa Monitor
     thumbnail_generation_enabled: Bumuo ng mga thumbnail sa item hover
     visible_separators: Visible Separator
-    zoom_size: Zoom na laki (ginamit para sa mga tema)
   label: Dock/Taskbar
   margin: Margin
   mode:

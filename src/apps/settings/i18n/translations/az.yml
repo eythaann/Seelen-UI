@@ -293,7 +293,6 @@ weg:
       on_monitor: Monitorda
     thumbnail_generation_enabled: Hover-də eskizlər yaradın
     visible_separators: Görünən ayırıcılar
-    zoom_size: Böyüdülmüş ölçü (mövzular üçün istifadə olunur)
   label: Dock / tapşırıq çubuğu
   margin: Kənarə
   mode:

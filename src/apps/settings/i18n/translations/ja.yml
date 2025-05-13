@@ -280,7 +280,6 @@ weg:
       on_monitor: モニター上
     thumbnail_generation_enabled: アイテムのホバー時にサムネイルを生成
     visible_separators: セパレーターを表示する
-    zoom_size: ズームされたときのサイズ（一部のテーマで使用）
   label: ドック（タスクバー）
   margin: ドックの隙間
   mode:

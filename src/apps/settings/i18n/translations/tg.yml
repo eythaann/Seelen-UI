@@ -289,7 +289,6 @@ weg:
       on_monitor: Дар Монитор
     thumbnail_generation_enabled: Обунаи ангур дар болои ашё
     visible_separators: Бандиаткунандагони намоён
-    zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)
   label: Dock / супоришҳо
   margin: Маржа
   mode:

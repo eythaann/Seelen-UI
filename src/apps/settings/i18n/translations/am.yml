@@ -282,7 +282,6 @@ weg:
       on_monitor: በሞኒተር ላይ
     thumbnail_generation_enabled: በንጥል ላይ ያሉ ድንክዬዎችን ማመንጨት
     visible_separators: የሚታዩ መለያዎች
-    zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
   label: Dock / Accorbar
   margin: ህዳግ
   mode:

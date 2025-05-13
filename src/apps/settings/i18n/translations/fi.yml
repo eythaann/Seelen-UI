@@ -296,7 +296,6 @@ weg:
       on_monitor: Monitorissa
     thumbnail_generation_enabled: Luo pikkukuvia kohteen leijailun yhteydessä
     visible_separators: Näkyvät erottimet
-    zoom_size: Zoomoitu koko (käytetty teemoihin)
   label: Telakka/tehtäväpalkki
   margin: Marginaali
   mode:

@@ -294,7 +294,6 @@ weg:
       on_monitor: Na monitore
     thumbnail_generation_enabled: Generovanie miniatúr pri umiestnení položky na myši
     visible_separators: Viditeľné oddeľovače
-    zoom_size: Zväčšená veľkosť (používa sa na témy)
   label: Prístavný panel
   margin: Okraj
   mode:

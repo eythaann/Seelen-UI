@@ -293,7 +293,6 @@ weg:
       on_monitor: Monitoron
     thumbnail_generation_enabled: Miniatűrök létrehozása az elem lebegtetésekor
     visible_separators: Látható elválasztók
-    zoom_size: Nagyított méret (a témákhoz használt)
   label: Dokk/tálca
   margin: Árrés
   mode:

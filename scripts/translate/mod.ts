@@ -76,3 +76,6 @@ for (const plugin of plugins) {
 await completeResourceTranslations('./static/themes/default/theme.yml', translator);
 await completeResourceTranslations('./static/themes/animated-start-icon/theme.yml', translator);
 await completeResourceTranslations('./static/themes/bubbles.yml', translator);
+
+// temporal for translate self resources
+// await completeResourceTranslations('C:/Users/dlmqc/AppData/Roaming/com.seelen.seelen-ui/themes/dock-animation/theme.yml', translator);

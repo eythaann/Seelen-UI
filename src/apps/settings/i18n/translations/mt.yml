@@ -294,7 +294,6 @@ weg:
       on_monitor: Fuq Monitor
     thumbnail_generation_enabled: Iġġenera minjaturi fuq l-oġġett li jtellgħu
     visible_separators: Separaturi viżibbli
-    zoom_size: Daqs miżjud (użat għat-temi)
   label: Dock / Taskbar
   margin: Marġni
   mode:

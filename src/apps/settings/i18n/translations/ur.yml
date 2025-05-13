@@ -293,7 +293,6 @@ weg:
       on_monitor: مانیٹر پر
     thumbnail_generation_enabled: آئٹم ہوور پر تھمب نیل تیار کریں
     visible_separators: مرئی جداکار
-    zoom_size: زوم سائز (تھیمز کے لئے استعمال کیا جاتا ہے)
   label: ٹاسک بار
   margin: مارجن
   mode:

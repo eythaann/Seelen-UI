@@ -291,7 +291,6 @@ weg:
       on_monitor: મોનિટર પર
     thumbnail_generation_enabled: આઇટમ હોવર પર થંબનેલ્સ બનાવો
     visible_separators: દૃશ્યમાન વિભાજક
-    zoom_size: ઝૂમ કરેલ કદ (થીમ્સ માટે વપરાયેલ)
   label: ડોક/ટાસ્કબાર
   margin: માર્જિન
   mode:

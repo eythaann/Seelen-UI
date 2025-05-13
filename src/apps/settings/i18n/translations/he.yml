@@ -285,7 +285,6 @@ weg:
       on_monitor: במוניטור
     thumbnail_generation_enabled: צור תמונות ממוזערות על ריחוף פריט
     visible_separators: מפרידים גלויים
-    zoom_size: גודל מתקרב (משמש לנושאים)
   label: שורת המזח/המשימות
   margin: שולים
   mode:

@@ -289,7 +289,6 @@ weg:
       on_monitor: On Monitor
     thumbnail_generation_enabled: Generate thumbnails on item hover
     visible_separators: Visible Separators
-    zoom_size: Zoomed Size (used for themes)
   label: Dock/Taskbar
   margin: Margin
   mode:

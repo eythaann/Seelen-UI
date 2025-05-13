@@ -294,7 +294,6 @@ weg:
       on_monitor: Monitörde
     thumbnail_generation_enabled: Öğenin üzerine gelindiğinde küçük resimler oluştur
     visible_separators: Görünür Ayırıcılar
-    zoom_size: Yakınlaştırılmış Boyut (temalar için kullanılır)
   label: Dock/Görev Çubuğu
   margin: Kenar Boşluğu
   mode:

@@ -291,7 +291,6 @@ weg:
       on_monitor: Monitoril
     thumbnail_generation_enabled: Loo pisipildid objekti hõljumisel
     visible_separators: Nähtavad eraldajad
-    zoom_size: Suumendatud suurus (kasutatud teemade jaoks)
   label: Dokk/ülesanderiba
   margin: Marginaal
   mode:

@@ -292,7 +292,6 @@ weg:
       on_monitor: Na monitoru
     thumbnail_generation_enabled: Generirajte sličice na povuci
     visible_separators: Vidljivi separatori
-    zoom_size: Povećana veličina (koristi se za teme)
   label: Dock / programska traka
   margin: Marža
   mode:

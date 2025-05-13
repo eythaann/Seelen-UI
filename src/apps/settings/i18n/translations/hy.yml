@@ -296,7 +296,6 @@ weg:
       on_monitor: Մոնիտորի վրա
     thumbnail_generation_enabled: Ստեղծեք մանրապատկերներ Hover իրերի վրա
     visible_separators: Տեսանելի տարանջատիչներ
-    zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
   label: Dock / Taskbar
   margin: Լուսանցք
   mode:

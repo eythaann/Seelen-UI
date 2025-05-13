@@ -152,13 +152,6 @@ export const SeelenWegSettings = () => {
             />
           </SettingsOption>
           <SettingsOption>
-            <div>{t('weg.items.zoom_size')}</div>
-            <InputNumber
-              value={settings.zoomSize}
-              onChange={(value) => dispatch(SeelenWegActions.setZoomSize(value || 0))}
-            />
-          </SettingsOption>
-          <SettingsOption>
             <div>{t('weg.items.gap')}</div>
             <InputNumber
               value={settings.spaceBetweenItems}

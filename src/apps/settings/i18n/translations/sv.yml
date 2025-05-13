@@ -294,7 +294,6 @@ weg:
       on_monitor: På bildskärm
     thumbnail_generation_enabled: Generera miniatyrbilder när objektet rör sig
     visible_separators: Synliga separatorer
-    zoom_size: Zoomad storlek (används för teman)
   label: Docka/arbetsfält
   margin: Marginal
   mode:

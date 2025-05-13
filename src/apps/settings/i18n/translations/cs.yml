@@ -292,7 +292,6 @@ weg:
       on_monitor: Na monitoru
     thumbnail_generation_enabled: Generování miniatur při najetí na položku
     visible_separators: Viditelné oddělovače
-    zoom_size: Zvětšená velikost (použitá pro motivy)
   label: Lišta/Hlavní panel
   margin: Okraj
   mode:

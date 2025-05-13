@@ -294,7 +294,6 @@ weg:
       on_monitor: Pada Monitor
     thumbnail_generation_enabled: Menjana gambar kecil pada hover item
     visible_separators: Pemisah yang kelihatan
-    zoom_size: Saiz zum (digunakan untuk tema)
   label: Dock/Taskbar
   margin: Margin
   mode:

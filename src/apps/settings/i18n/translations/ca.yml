@@ -296,7 +296,6 @@ weg:
       on_monitor: Al monitor
     thumbnail_generation_enabled: Generar miniatures a l'article que es pot fer
     visible_separators: Separadors visibles
-    zoom_size: Mida zoom (usada per a temes)
   label: Moll/barra de tasques
   margin: Marge
   mode:

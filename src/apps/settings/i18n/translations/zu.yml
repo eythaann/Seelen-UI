@@ -296,7 +296,6 @@ weg:
       on_monitor: Ku-Monitor
     thumbnail_generation_enabled: Khiqiza izithonjana entweni hover
     visible_separators: Abahlukanisi ababonakalayo
-    zoom_size: Usayizi osondeza (osetshenziselwa izingqikithi)
   label: Dock / taskbar
   margin: Image
   mode:

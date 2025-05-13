@@ -289,7 +289,6 @@ weg:
       on_monitor: ໃນ Monitor
     thumbnail_generation_enabled: ສ້າງຮູບຫຍໍ້ກ່ຽວກັບສິນຄ້າ
     visible_separators: ຕົວແຍກທີ່ເບິ່ງເຫັນໄດ້
-    zoom_size: ຂະຫຍາຍຂະໜາດ (ໃຊ້ສຳລັບຮູບແບບສີສັນ)
   label: Dock/Taskbar
   margin: ຂອບ
   mode:

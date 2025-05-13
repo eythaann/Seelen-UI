@@ -294,7 +294,6 @@ weg:
       on_monitor: No monitor
     thumbnail_generation_enabled: Gerar miniaturas no itens pairar
     visible_separators: Separadores Visíveis
-    zoom_size: Tamanho ampliado (usado para temas)
   label: Dock/barra de tarefas
   margin: Margem
   mode:

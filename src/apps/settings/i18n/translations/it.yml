@@ -294,7 +294,6 @@ weg:
       on_monitor: Sul monitor
     thumbnail_generation_enabled: Generare miniature al passaggio del mouse sugli elementi
     visible_separators: Separatori Visibili
-    zoom_size: Dimensione Zoom (usato per i temi)
   label: Dock/Barra delle Attività
   margin: Margine
   mode:

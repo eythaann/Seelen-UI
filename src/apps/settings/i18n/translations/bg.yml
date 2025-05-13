@@ -312,7 +312,6 @@ weg:
       on_monitor: На монитора
     thumbnail_generation_enabled: Генериране на миниатюри при преминаване върху елемента
     visible_separators: Видими разделители
-    zoom_size: Размерът на мащабиране (използван за теми)
   label: Док/лента на задачите
   margin: Марж
   mode:

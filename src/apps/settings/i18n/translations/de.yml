@@ -299,7 +299,6 @@ weg:
       on_monitor: Auf dem Monitor
     thumbnail_generation_enabled: Erzeugen von Miniaturbildern beim Hovern eines Artikels
     visible_separators: Sichtbare Trennzeichen
-    zoom_size: Vergrößerte Größe (für Themen verwendet)
   label: Dock/Taskleiste
   margin: Rand
   mode:

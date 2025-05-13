@@ -295,7 +295,6 @@ weg:
       on_monitor: मॉनिटर पर
     thumbnail_generation_enabled: आइटम होवर पर थंबनेल उत्पन्न करें
     visible_separators: दृश्य विभाजक
-    zoom_size: ज़ूमेड आकार (विषयों के लिए उपयोग किया जाता है)
   label: डॉक/टास्टरबार
   margin: अंतर
   mode:

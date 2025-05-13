@@ -298,7 +298,6 @@ weg:
       on_monitor: Sur le moniteur
     thumbnail_generation_enabled: Générer des vignettes au survol de l'article
     visible_separators: Séparateurs visibles
-    zoom_size: Taille agrandie (utilisée pour les thèmes)
   label: Dock/Barre des tâches
   margin: Marge
   mode:

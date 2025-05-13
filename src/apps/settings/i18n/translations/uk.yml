@@ -292,7 +292,6 @@ weg:
       on_monitor: На моніторі
     thumbnail_generation_enabled: Генерувати мініатюри при наведенні на елемент
     visible_separators: Видимі розділювачі
-    zoom_size: Збільшений розмір (використовується для тем)
   label: Панель завдань
   margin: Зовнішній відступ
   mode:

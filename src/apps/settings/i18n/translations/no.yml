@@ -296,7 +296,6 @@ weg:
       on_monitor: På monitor
     thumbnail_generation_enabled: Generer miniatyrbilder på varen sveve
     visible_separators: Synlige separatorer
-    zoom_size: Zoomet størrelse (brukt til temaer)
   label: Dock/oppgavelinje
   margin: Margin
   mode:

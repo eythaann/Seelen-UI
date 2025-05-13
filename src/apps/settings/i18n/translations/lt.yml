@@ -290,7 +290,6 @@ weg:
       on_monitor: Ant monitoriaus
     thumbnail_generation_enabled: Generuoti miniatiūras, kai elementas užvedamas ant pelės žymeklio
     visible_separators: Matomi separatoriai
-    zoom_size: Mastelio dydis (naudojamas temoms)
   label: „Dock“/„Taskbar“
   margin: Paraštė
   mode:

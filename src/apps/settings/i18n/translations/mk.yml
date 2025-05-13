@@ -296,7 +296,6 @@ weg:
       on_monitor: На монитор
     thumbnail_generation_enabled: Генерираат сликички на лебди на артикли
     visible_separators: Видливи сепаратори
-    zoom_size: Зумирана големина (се користи за теми)
   label: Док/лента со задачи
   margin: Маргина
   mode:

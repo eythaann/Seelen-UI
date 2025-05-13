@@ -297,7 +297,6 @@ weg:
       on_monitor: Στην οθόνη
     thumbnail_generation_enabled: Δημιουργία μικρογραφιών κατά το hover του στοιχείου
     visible_separators: Ορατοί διαχωριστές
-    zoom_size: Μέγεθος μεγέθυνσης (χρησιμοποιείται για θέματα)
   label: Λέσχη εργασιών
   margin: Περιθώριο
   mode:

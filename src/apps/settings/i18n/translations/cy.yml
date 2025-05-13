@@ -296,7 +296,6 @@ weg:
       on_monitor: Ar Fonitor
     thumbnail_generation_enabled: Cynhyrchu mân -luniau ar hofran eitem
     visible_separators: Gwahanyddion gweladwy
-    zoom_size: Maint chwyddo (a ddefnyddir ar gyfer themâu)
   label: Doc/bar tasgau
   margin: Ngherlong
   mode:

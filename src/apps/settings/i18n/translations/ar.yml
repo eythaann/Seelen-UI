@@ -285,7 +285,6 @@ weg:
       on_monitor: على الشاشة
     thumbnail_generation_enabled: إنشاء صور مصغرة عند تحريك العنصر
     visible_separators: الفواصل المرئية
-    zoom_size: حجم المكبر (يستخدم للموضوعات)
   label: قفص الاتهام / شريط المهام
   margin: الهامش
   mode:

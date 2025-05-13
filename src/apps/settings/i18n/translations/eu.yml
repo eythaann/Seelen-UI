@@ -294,7 +294,6 @@ weg:
       on_monitor: Monitorean
     thumbnail_generation_enabled: Sortu miniatura igotzeko elementuan
     visible_separators: Ikusgai bereizgailuak
-    zoom_size: Zoom tamaina (gaietarako erabiltzen da)
   label: Dock / ataza barra
   margin: Emandar
   mode:
