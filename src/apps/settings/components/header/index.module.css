@@ -16,6 +16,7 @@
 
   .title {
     font-size: 1.2rem;
+    line-height: 1.8rem;
     font-weight: 600;
     display: flex;
     align-items: center;

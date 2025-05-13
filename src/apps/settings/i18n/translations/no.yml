@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Bekreft slett
   delete: Slett
   export: Eksport
+  export_full: Eksportinnstillinger etter søknad
   extra_info: >-
     Seelen-brukergrensesnittet bruker kun én identifikator per app (første treff
     funnet), så rekkefølgen i hvordan spesifikasjonene er viktig, det siste lagt
@@ -68,6 +69,7 @@ apps_configurations:
       path: Sti
       title: Tittel
   import: Import
+  import_full: Importer innstillinger etter søknad
   new: Ny
   search: Søk
   swap: Bytte
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Last inn tilpasset konfigurasjonsfil
   data_folder: Datamappen
   enable: Aktiver utviklerverktøy
-  export_resource: Eksportressurs
   install_folder: Installasjonsmappe
   load: Laste
   settings_file: Innstillingsfilen
@@ -116,7 +117,7 @@ header:
     resources: Ressurser
     shortcuts: Snarveier
     soundpack: Lydpakker
-    specific_apps: Spesifikke apper
+    specific_apps: Innstillinger etter søknad
     theme: Temaer
     wallpaper: Bakgrunnsbilder
     widget: Widgets
@@ -138,6 +139,7 @@ resources:
     Denne ressursen krever en nyere versjon av Seelen UI for å fungere
     ordentlig.
   discover: Oppdag flere ressurser
+  export: Eksportressurs
   open_folder: Åpne ressursmappe
   outdated: >-
     Denne ressursen ble designet for en eldre versjon av Seelen UI og fungerer

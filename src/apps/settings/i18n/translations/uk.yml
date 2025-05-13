@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Підтвердити видалення
   delete: Видалити
   export: Експорт
+  export_full: Експорт налаштувань за додатками
   extra_info: >-
     Seelen UI використовує лише один ідентифікатор для кожного додатка (перший
     знайдений збіг), тому важливим є порядок, у якому вони вказуються. Останні
@@ -68,6 +69,7 @@ apps_configurations:
       path: Шлях
       title: Назва
   import: Імпорт
+  import_full: Імпорт налаштувань за додатками
   new: Новий
   search: Пошук
   swap: Замінити
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Імпортувати файл конфігурації
   data_folder: Папка даних
   enable: Увімкнути інструменти розробника
-  export_resource: Експортний ресурс
   install_folder: Папка встановлення
   load: Відкрити
   settings_file: Файл налаштувань
@@ -116,7 +117,7 @@ header:
     resources: Ресурси
     shortcuts: Сполучення клавіш
     soundpack: Звукові пакети
-    specific_apps: Конкретні програми
+    specific_apps: Налаштування за додатками
     theme: Теми
     wallpaper: Шпалери
     widget: Віджети
@@ -136,6 +137,7 @@ remove: Видалити
 resources:
   app_outdated: Для коректної роботи цього ресурсу потрібна новіша версія інтерфейсу Seelen.
   discover: Відкрийте для себе більше ресурсів
+  export: Експортний ресурс
   open_folder: Відкрийте папку з ресурсами
   outdated: >-
     Цей ресурс був розроблений для старої версії інтерфейсу Seelen і може не

@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: ຢືນຢັນການລຶບ
   delete: ລຶບ
   export: ສົ່ງອອກ
+  export_full: ການຕັ້ງຄ່າການສົ່ງອອກໂດຍສະຫມັກ
   extra_info: >-
     SEVENEN UI ໃຊ້ພຽງແຕ່ຕົວລະບຸຕົວລະບຸ 1 (ທີ່ພົບໃນລະດັບທໍາອິດ)
     ສະນັ້ນຄໍາສັ່ງທີ່ມີຄວາມສໍາຄັນ, ເຊັ່ນວ່າຕາຕະລາງຖືກຈັດຮຽງຕາມລໍາດັບເດີມ
@@ -66,6 +67,7 @@ apps_configurations:
       path: ເສັ້ນທາງ
       title: ຫົວຂໍ້
   import: ນໍາເຂົ້າ
+  import_full: ການຕັ້ງຄ່ານໍາເຂົ້າໂດຍການສະຫມັກ
   new: ໃຫມ່
   search: ຊອກຫາ
   swap: ແລກປ່ຽນ
@@ -77,7 +79,6 @@ devtools:
   custom_config_file: ໂຫຼດໄຟລ໌ການຕັ້ງຄ່າແບບກຳນົດເອງ
   data_folder: ແຟ້ມຂໍ້ມູນ
   enable: ເປີດໃຊ້ເຄື່ອງມືນັກພັດທະນາ
-  export_resource: ຊັບພະຍາກອນການສົ່ງອອກ
   install_folder: ໂຟນເດີການຕິດຕັ້ງ
   load: ໂຫຼດ
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
@@ -114,7 +115,7 @@ header:
     resources: ຊັບພະຍາກອນ
     shortcuts: ທາງລັດ
     soundpack: ຊອງສຽງ
-    specific_apps: ແອັບສະເພາະ
+    specific_apps: ການຕັ້ງຄ່າໂດຍການສະຫມັກ
     theme: ຫົວຂໍ້
     wallpaper: ຮູບວໍເປເປີ
     widget: widgets
@@ -134,6 +135,7 @@ remove: ເອົາອອກ
 resources:
   app_outdated: ຊັບພະຍາກອນນີ້ຮຽກຮ້ອງໃຫ້ມີ Searen ລຸ້ນໃຫມ່ UI ໃຫ້ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
   discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ
+  export: ຊັບພະຍາກອນການສົ່ງອອກ
   open_folder: Open Opence Folder
   outdated: >-
     ຊັບພະຍາກອນນີ້ໄດ້ຖືກອອກແບບມາສໍາລັບ Apen ຂອງ Searen UI

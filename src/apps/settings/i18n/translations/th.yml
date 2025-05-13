@@ -41,6 +41,7 @@ apps_configurations:
   confirm_delete_title: ยืนยันการลบ
   delete: ลบ
   export: ส่งออก
+  export_full: การตั้งค่าการส่งออกโดยแอปพลิเคชัน
   extra_info: >-
     SEELEN UI ใช้ตัวระบุเพียงหนึ่งตัวต่อแอป (พบนัดแรก)
     ดังนั้นคำสั่งซื้อเฉพาะนั้นมีความสำคัญการเพิ่มล่าสุดจะได้รับการจัดลำดับความสำคัญเนื่องจากหมายเหตุตารางจะถูกเรียงลำดับโดยค่าเริ่มต้นจากล่าสุดถึงเก่า
@@ -65,6 +66,7 @@ apps_configurations:
       path: เส้นทาง
       title: ชื่อ
   import: นำเข้า
+  import_full: นำเข้าการตั้งค่าโดยแอปพลิเคชัน
   new: ใหม่
   search: ค้นหา
   swap: แลกเปลี่ยน
@@ -76,7 +78,6 @@ devtools:
   custom_config_file: โหลดไฟล์กำหนดค่าที่กำหนดเอง
   data_folder: โฟลเดอร์ข้อมูล
   enable: เปิดใช้งานเครื่องมือนักพัฒนาซอฟต์แวร์
-  export_resource: ทรัพยากรส่งออก
   install_folder: โฟลเดอร์การติดตั้ง
   load: โหลด
   settings_file: ไฟล์การตั้งค่า
@@ -113,7 +114,7 @@ header:
     resources: ทรัพยากร
     shortcuts: ทางลัด
     soundpack: ชุดเสียง
-    specific_apps: แอพเฉพาะ
+    specific_apps: การตั้งค่าโดยแอปพลิเคชัน
     theme: ธีม
     wallpaper: วอลเปเปอร์
     widget: วิดเจ็ต
@@ -133,6 +134,7 @@ remove: ลบ
 resources:
   app_outdated: ทรัพยากรนี้ต้องการ Seelen UI รุ่นใหม่กว่าเพื่อทำงานอย่างถูกต้อง
   discover: ค้นพบทรัพยากรเพิ่มเติม
+  export: ทรัพยากรส่งออก
   open_folder: เปิดโฟลเดอร์ทรัพยากร
   outdated: ทรัพยากรนี้ได้รับการออกแบบมาสำหรับ Seelen UI รุ่นเก่าและอาจทำงานไม่ถูกต้อง
 save: บันทึก

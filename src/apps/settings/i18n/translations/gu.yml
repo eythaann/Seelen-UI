@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: કાઢી નાખવાની પુષ્ટિ કરો
   delete: કાઢી નાખો
   export: નિકાસ કરો
+  export_full: અરજી દ્વારા નિકાસ સેટિંગ્સ
   extra_info: >-
     સીલેન યુઆઈ એપ્લિકેશન દીઠ માત્ર એક ઓળખકર્તાનો ઉપયોગ કરે છે (પ્રથમ મેચ મળી)
     તેથી કેવી રીતે વિશિષ્ટ છે તે ક્રમમાં મહત્વપૂર્ણ છે, નવીનતમ ઉમેરવામાં
@@ -68,6 +69,7 @@ apps_configurations:
       path: પાથ
       title: શીર્ષક
   import: આયાત કરો
+  import_full: અરજી દ્વારા આયાત સેટિંગ્સ
   new: નવી
   search: શોધો
   swap: સ્વેપ
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો
   data_folder: ડેટા ફોલ્ડર
   enable: વિકાસકર્તા સાધનો સક્ષમ કરો
-  export_resource: નિકાસ સાધન
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   load: લોડ
   settings_file: સેટિંગ્સ ફાઇલ
@@ -116,7 +117,7 @@ header:
     resources: સાધનો
     shortcuts: શૉર્ટકટ્સ
     soundpack: સાચા પેક
-    specific_apps: વિશિષ્ટ એપ્લિકેશનો
+    specific_apps: અરજી દ્વારા સેટિંગ્સ
     theme: થીમ
     wallpaper: વ wallpapers લપેપર્સ
     widget: વિજેટો
@@ -136,6 +137,7 @@ remove: દૂર કરવું
 resources:
   app_outdated: આ સંસાધનને યોગ્ય રીતે કાર્ય કરવા માટે સીલેન યુઆઈનું નવું સંસ્કરણ જરૂરી છે.
   discover: વધુ સંસાધનો શોધો
+  export: નિકાસ સાધન
   open_folder: ખુલ્લા સંસાધન ફોલ્ડર
   outdated: >-
     આ સંસાધન સીલેન UI ના જૂના સંસ્કરણ માટે બનાવવામાં આવ્યું હતું અને કદાચ યોગ્ય

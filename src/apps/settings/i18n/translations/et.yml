@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Kinnitage kustutamine
   delete: Kustutama
   export: Ekspordi-
+  export_full: Ekspordi seaded rakenduste kaupa
   extra_info: >-
     Seeleni kasutajaliides kasutab rakenduse kohta ainult ühte identifikaatorit
     (leiti esimene vaste), seega on määramise järjekord oluline, viimati lisatud
@@ -67,6 +68,7 @@ apps_configurations:
       path: Tee
       title: Pealkiri
   import: Import
+  import_full: Impordi seaded rakenduste kaupa
   new: Uus
   search: Otsing
   swap: Vahetama
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: Laadige kohandatud konfiguratsioonifail
   data_folder: Andmekaust
   enable: Luba arendaja tööriistad
-  export_resource: Ekspordi ressurss
   install_folder: Installi kaust
   load: Laadima
   settings_file: Seadete fail
@@ -115,7 +116,7 @@ header:
     resources: Ressursid
     shortcuts: Otseteed
     soundpack: Helipaketid
-    specific_apps: Konkreetsed rakendused
+    specific_apps: Seadistused rakenduse järgi
     theme: Teemad
     wallpaper: Taustapildid
     widget: Vidinad
@@ -135,6 +136,7 @@ remove: Eemaldama
 resources:
   app_outdated: Selle ressursi korralikuks kasutamiseks on vaja Seelen UI uuemat versiooni.
   discover: Avasta rohkem ressursse
+  export: Ekspordi ressurss
   open_folder: Avage ressursside kaust
   outdated: >-
     See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi

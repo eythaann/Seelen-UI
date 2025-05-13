@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Sahkan padam
   delete: Padam
   export: Eksport
+  export_full: Tetapan eksport melalui permohonan
   extra_info: >-
     UI Seelen hanya menggunakan satu pengecam bagi setiap apl (padanan pertama
     ditemui) jadi susunan cara dikhususkan adalah penting, penambahan terkini
@@ -68,6 +69,7 @@ apps_configurations:
       path: Laluan
       title: Tajuk
   import: Import
+  import_full: Tetapan import melalui permohonan
   new: Baru
   search: Cari
   swap: Bertukar
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Muatkan fail konfigurasi tersuai
   data_folder: Folder Data
   enable: Dayakan alat pemaju
-  export_resource: Sumber Eksport
   install_folder: Folder pemasangan
   load: Beban
   settings_file: Fail tetapan
@@ -116,7 +117,7 @@ header:
     resources: Sumber
     shortcuts: Pintasan
     soundpack: Pek bunyi
-    specific_apps: Aplikasi khusus
+    specific_apps: Tetapan dengan permohonan
     theme: Tema
     wallpaper: Kertas dinding
     widget: Widget
@@ -138,6 +139,7 @@ resources:
     Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan
     baik.
   discover: Cari lebih banyak sumber
+  export: Sumber Eksport
   open_folder: Buka Folder Sumber
   outdated: >-
     Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi

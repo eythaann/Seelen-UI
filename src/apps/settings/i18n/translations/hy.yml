@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Հաստատեք ջնջել
   delete: Ջնջել
   export: Արտահանում
+  export_full: Արտահանման պարամետրերը ըստ դիմումի
   extra_info: >-
     Seelen UI-ն օգտագործում է միայն մեկ նույնացուցիչ յուրաքանչյուր հավելվածի
     համար (գտնվել է առաջին համընկնումը), այնպես որ կարևոր է ճշգրտման կարգը,
@@ -68,6 +69,7 @@ apps_configurations:
       path: Ճանապարհ
       title: Վերնագիր
   import: Ներմուծում
+  import_full: Ներմուծման պարամետրերը ըստ դիմումի
   new: Նոր
   search: Որոնել
   swap: Փոխանակել
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ
   enable: Միացնել մշակողի գործիքները
-  export_resource: Արտահանման ռեսուրս
   install_folder: Տեղադրման պանակ
   load: Բեռ
   settings_file: Կարգավորումներ ֆայլ
@@ -118,7 +119,7 @@ header:
     resources: Ռեսուրսներ
     shortcuts: Դյուրանցումներ
     soundpack: Ձայնային փաթեթներ
-    specific_apps: Հատուկ ծրագրեր
+    specific_apps: Կարգավորումներ ըստ դիմումի
     theme: Թեմաներ
     wallpaper: Պաստառներ
     widget: Widgets
@@ -138,6 +139,7 @@ remove: Հեռացնել
 resources:
   app_outdated: 'Այս ռեսուրսը պահանջում է Seelen UI- ի նոր տարբերակը `ճիշտ աշխատելու համար:'
   discover: Բացահայտեք ավելի շատ ռեսուրսներ
+  export: Արտահանման ռեսուրս
   open_folder: Բացեք ռեսուրսների թղթապանակ
   outdated: >-
     Այս ռեսուրսը նախատեսված էր Seelen UI- ի ավելի հին տարբերակի համար եւ կարող է

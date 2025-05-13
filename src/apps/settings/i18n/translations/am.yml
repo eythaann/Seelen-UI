@@ -41,6 +41,7 @@ apps_configurations:
   confirm_delete_title: መሰረዝ ያረጋግጡ
   delete: ሰርዝ
   export: ወደ ውጭ ይላኩ
+  export_full: ቅንብሮችን በመላክ በትግበራ
   extra_info: >-
     Seelen UI በአንድ መተግበሪያ አንድ መለያ ብቻ ነው የሚጠቀመው (የመጀመሪያው ግጥሚያ ተገኝቷል) ስለዚህ እንዴት
     እንደሚገለጹ ቅደም ተከተላቸው አስፈላጊ ነው፣ የቅርብ ጊዜዎቹ የተጨመሩት ቅድሚያ ይሰጣቸዋል፣ ምክንያቱም ሰንጠረዡ ከቅርቡ
@@ -66,6 +67,7 @@ apps_configurations:
       path: መንገድ
       title: ርዕስ
   import: ማስመጣት
+  import_full: በትግበራ ​​ቅንብሮች ያስመጡ
   new: አዲስ
   search: ፍለጋ
   swap: መቀያየር
@@ -77,7 +79,6 @@ devtools:
   custom_config_file: ብጁ ውቅያ ፋይልን ይጫኑ
   data_folder: የውሂብ አቃፊ
   enable: የገንቢ መሳሪያዎችን ያንቁ
-  export_resource: ወደ ውጭ የመላክ ሀብት
   install_folder: የመጫን አቃፊ
   load: ጭነት
   settings_file: የቅንብሮች ፋይል
@@ -114,7 +115,7 @@ header:
     resources: ሀብቶች
     shortcuts: አቋራጮች
     soundpack: የድምፅ ማካካሻዎች
-    specific_apps: የተወሰኑ መተግበሪያዎች
+    specific_apps: በቅንብሮች በትግበራ
     theme: ገጽታዎች
     wallpaper: የግድግዳ ወረቀቶች
     widget: ፍርግሞች
@@ -134,6 +135,7 @@ remove: ያስወግዱ
 resources:
   app_outdated: ይህ ሀብት በአግባቡ እንዲሠራ አዲስ የአዲስ ስሪት ይፈልጋል.
   discover: ተጨማሪ ሀብቶችን ያግኙ
+  export: ወደ ውጭ የመላክ ሀብት
   open_folder: ክፍት የመረጃ ምንጭ አቃፊ
   outdated: ይህ የመረጃ ሀብት ለተረጋጋሪ ዌይ ስሪት ለተጨማሪ ስሪት የተሰራ ሲሆን በትክክል ላይሰራ ይችላል.
 save: አስቀምጥ

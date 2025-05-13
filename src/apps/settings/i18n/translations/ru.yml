@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Подтверждение удаления
   delete: Удалить
   export: Экспорт
+  export_full: Экспорт настроек по приложениям
   extra_info: >-
     Пользовательский интерфейс SEELEN Используйте только один идентификатор на
     приложение (первое совпадение), поэтому важен порядок в том, как
@@ -68,6 +69,7 @@ apps_configurations:
       path: Путь
       title: Заголовок
   import: Импорт
+  import_full: Импорт настроек по приложениям
   new: Новый
   search: Поиск
   swap: Сменить
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Загрузить пользовательский файл конфигурации
   data_folder: Папка данных
   enable: Включить инструменты разработчика
-  export_resource: Экспортный ресурс
   install_folder: Папка установки
   load: Загрузить
   settings_file: Файл настроек
@@ -118,7 +119,7 @@ header:
     resources: Ресурсы
     shortcuts: Сочетания клавиш
     soundpack: Звуковые пакеты
-    specific_apps: Приложения
+    specific_apps: Настройки по приложениям
     theme: Темы
     wallpaper: Обои
     widget: Виджеты
@@ -138,6 +139,7 @@ remove: Удалить
 resources:
   app_outdated: Для корректной работы этого ресурса требуется более новая версия Seelen UI.
   discover: Откройте для себя больше ресурсов
+  export: Экспортный ресурс
   open_folder: Откройте папку с ресурсами
   outdated: >-
     Этот ресурс был разработан для старой версии Seelen UI и может работать

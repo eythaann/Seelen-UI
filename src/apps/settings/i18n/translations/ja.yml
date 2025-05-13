@@ -41,6 +41,7 @@ apps_configurations:
   confirm_delete_title: 削除の確認
   delete: 消去
   export: エクスポート
+  export_full: アプリケーションごとに設定をエクスポート
   extra_info: >-
     SeelenUIは、アプリごとに1つの識別子のみを使用します（最初に一致したものが使用されます）。そのため、識別方法の順序が重要であり、最新の追加が優先されます。
   identifier:
@@ -64,6 +65,7 @@ apps_configurations:
       path: パス
       title: タイトル
   import: インポート
+  import_full: アプリケーション別設定のインポート
   new: 新規
   search: 検索
   swap: 入れ替え
@@ -75,7 +77,6 @@ devtools:
   custom_config_file: カスタム構成ファイルをロードする
   data_folder: データのフォルダー
   enable: 開発者ツールを有効にする
-  export_resource: 輸出リソース
   install_folder: アプリのフォルダー
   load: ロード
   settings_file: 設定ファイル
@@ -112,7 +113,7 @@ header:
     resources: リソース
     shortcuts: ショートカットキー
     soundpack: サウンドパック
-    specific_apps: アプリごとの設定
+    specific_apps: アプリケーション別設定
     theme: テーマ
     wallpaper: 壁紙
     widget: ウィジェット
@@ -132,6 +133,7 @@ remove: 取り除く
 resources:
   app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
   discover: その他のリソース
+  export: 輸出リソース
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
 save: 保存

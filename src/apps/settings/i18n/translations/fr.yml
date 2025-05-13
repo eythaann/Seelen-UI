@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Confirmer la suppression
   delete: Supprimer
   export: Exporter
+  export_full: Exporter les paramètres par application
   extra_info: >-
     Seelen UI utilise un seul identifiant par application (premier correspondant
     trouvé), donc l'ordre dans lequel ils sont spécifiés est important, le
@@ -68,6 +69,7 @@ apps_configurations:
       path: Chemin
       title: Titre
   import: Importer
+  import_full: Importer des paramètres par application
   new: Nouveau
   search: Rechercher
   swap: Échanger
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Charger un fichier de configuration personnalisé
   data_folder: Dossier de données
   enable: Activer les outils de développement
-  export_resource: Ressource d'exportation
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
@@ -118,7 +119,7 @@ header:
     resources: Ressources
     shortcuts: Raccourcis
     soundpack: Paquets de sons
-    specific_apps: Applications spécifiques
+    specific_apps: Paramètres par application
     theme: Thèmes
     wallpaper: Fonds d'écran
     widget: Widgets
@@ -140,6 +141,7 @@ resources:
     Cette ressource nécessite une version plus récente de Seelen UI pour
     fonctionner correctement.
   discover: Découvrez d'autres ressources
+  export: Ressource d'exportation
   open_folder: Ouvrir le dossier des ressources
   outdated: >-
     Cette ressource a été conçue pour une ancienne version de Seelen UI et peut

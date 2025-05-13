@@ -3,11 +3,16 @@ import { ResourceId, ResourceKind, ResourceMetadata } from '@seelen-ui/lib/types
 import { Icon } from '@shared/components/Icon';
 import { ResourceText } from '@shared/components/ResourceText';
 import { cx } from '@shared/styles';
-import { Tooltip } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { EnvConfig } from '../shared/config/infra';
 import cs from './infra.module.css';
+
+import { RootSelectors } from '../shared/store/app/selectors';
+
+import { ExportResource } from '../shared/store/storeApi';
 
 type AnyResource = {
   id: ResourceId;
@@ -21,6 +26,8 @@ interface ResourceCardProps {
 }
 
 export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
+  const isDevToolsEnabled = useSelector(RootSelectors.devTools);
+
   const { t } = useTranslation();
 
   const [major = 0, minor = 0, patch = 0] = EnvConfig.version.split('.').map(Number);
@@ -78,7 +85,23 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
           )}
         </p>
       </div>
-      <div className={cs.actions}>{actions}</div>
+      <div className={cs.actions}>
+        <div className={cs.actionsTop}>
+          {actions}
+        </div>
+        {isDevToolsEnabled && (
+          <Tooltip title={t('resources.export')} placement="left">
+            <Button
+              type="text"
+              onClick={() => {
+                ExportResource(resource);
+              }}
+            >
+              <Icon iconName="BiExport" />
+            </Button>
+          </Tooltip>
+        )}
+      </div>
     </div>
   );
 }

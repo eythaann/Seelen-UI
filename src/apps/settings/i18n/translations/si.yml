@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: මකා දැමීම තහවුරු කරන්න
   delete: මකන්න
   export: අපනයන
+  export_full: අයදුම්පත මගින් සැකසුම් අපනයනය කරන්න
   extra_info: >-
     Applow Applay Apan Applen UI යෙදුමට එක් අනන්යතාවයක් භාවිතා කරන්න (පළමු තරගය
     හමු විය) එබැවින් නිශ්චිතව දක්වන අනුපිළිවෙල වැදගත් ය, නවතම එකතු කරන ලද නවතම
@@ -67,6 +68,7 @@ apps_configurations:
       path: මාර්ගය
       title: මාතෘකාව
   import: ආනයන
+  import_full: අයදුම්පත අනුව සැකසුම් ආයාත කරන්න
   new: අලුත්
   search: සෙවීම
   swap: හුවමාරු කරන්න
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: අභිරුචි වින්‍යාස ගොනුව පූරණය කරන්න
   data_folder: දත්ත ෆෝල්ඩරය
   enable: සංවර්ධක මෙවලම් සබල කරන්න
-  export_resource: අපනයන සම්පත
   install_folder: ස්ථාපන ෆෝල්ඩරය
   load: පැටවීම
   settings_file: සැකසුම් ගොනුව
@@ -117,7 +118,7 @@ header:
     resources: සම්පත්
     shortcuts: කෙටිමං
     soundpack: ශබ්ද ඇසුරුම්
-    specific_apps: විශේෂිත යෙදුම්
+    specific_apps: අයදුම්පත අනුව සැකසුම්
     theme: තේමාවන්
     wallpaper: බිතුපත්
     widget: විජට්
@@ -137,6 +138,7 @@ remove: ඉවත් කරන්න
 resources:
   app_outdated: මෙම සම්පතට සින්ලන් යූඅයි හි නවතම අනුවාදයක් නිසියාකාරව වැඩ කිරීමට අවශ්ය වේ.
   discover: තවත් සම්පත් සොයා ගන්න
+  export: අපනයන සම්පත
   open_folder: සම්පත් ෆෝල්ඩරය විවෘත කරන්න
   outdated: >-
     මෙම සම්පත නිර්මාණය කර ඇත්තේ සීලන් UI හි පැරණි අනුවාදයක් සඳහා වන අතර නිසි ලෙස

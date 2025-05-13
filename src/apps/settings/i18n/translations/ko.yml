@@ -41,6 +41,7 @@ apps_configurations:
   confirm_delete_title: 삭제하시겠습니까?
   delete: 삭제
   export: 내보내기
+  export_full: 애플리케이션별 설정 내보내기
   extra_info: >-
     Seelen UI는 앱당 (가장 먼저 일치한) 하나의 식별자만 사용하므로 식별된 순서는 중요합니다. 가장 최근에 추가된 항목이 우선순위를
     정합니다. 참고로 테이블은 기본적으로 최신순 부터 오래된 순서로 정렬됩니다.
@@ -65,6 +66,7 @@ apps_configurations:
       path: 길
       title: 제목
   import: 가져오기
+  import_full: 애플리케이션별 설정 가져오기
   new: 신규
   search: 검색
   swap: 교체
@@ -76,7 +78,6 @@ devtools:
   custom_config_file: 사용자 정의 구성 파일 로드
   data_folder: 데이터 폴더
   enable: 개발자 도구 활성화
-  export_resource: 리소스 내보내기
   install_folder: 설치 폴더
   load: 로드
   settings_file: 설정 파일
@@ -113,7 +114,7 @@ header:
     resources: 리소스
     shortcuts: 단축키
     soundpack: 사운드 팩
-    specific_apps: 개별 앱 설정
+    specific_apps: 애플리케이션별 설정
     theme: 테마
     wallpaper: 배경 화면
     widget: 위젯
@@ -133,6 +134,7 @@ remove: 제거
 resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
   discover: 더 많은 리소스 살펴보기
+  export: 리소스 내보내기
   open_folder: 리소스 폴더 열기
   outdated: 이 리소스는 이전 버전의 Seelen UI용으로 설계되었으며 제대로 작동하지 않을 수 있습니다.
 save: 저장

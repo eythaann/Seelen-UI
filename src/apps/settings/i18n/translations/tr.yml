@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Silmeyi Onayla
   delete: Sil
   export: Dışa Aktar
+  export_full: Ayarları uygulamaya göre dışa aktarma
   extra_info: >-
     Seelen UI, uygulama başına yalnızca bir tanımlayıcı kullanır (ilk eşleşme
     bulundu), bu nedenle nasıl belirlendiği sırası önemlidir, tablonun
@@ -68,6 +69,7 @@ apps_configurations:
       path: Yol
       title: Başlık
   import: İçe Aktar
+  import_full: Ayarları uygulamaya göre içe aktarma
   new: Yeni
   search: Ara
   swap: Değiştir
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Özel Yapılandırma Dosyası Yükle
   data_folder: Veri Klasörü
   enable: Geliştirici Araçlarını Etkinleştir
-  export_resource: Kaynak İhracatı
   install_folder: Kurulum Klasörü
   load: Yükle
   settings_file: Ayarlar Dosyası
@@ -116,7 +117,7 @@ header:
     resources: Kaynaklar
     shortcuts: Kısayollar
     soundpack: Ses Paketleri
-    specific_apps: Belirli Uygulamalar
+    specific_apps: Uygulamaya Göre Ayarlar
     theme: Temalar
     wallpaper: Duvar Kağıtları
     widget: Widget'lar
@@ -138,6 +139,7 @@ resources:
     Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
     gerekir.
   discover: Daha fazla kaynak keşfedin
+  export: Kaynak İhracatı
   open_folder: Kaynak klasörünü açın
   outdated: >-
     Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün

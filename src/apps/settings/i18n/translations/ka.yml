@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: დაადასტურეთ წაშლა
   delete: წაშლა
   export: ექსპორტი
+  export_full: ექსპორტის პარამეტრები განაცხადით
   extra_info: >-
     Seelen ui გამოიყენეთ მხოლოდ ერთი იდენტიფიკატორი თითო აპლიკაციაში (პირველი
     მატჩი ნაპოვნი), ასე რომ, თუ როგორ არის სპეციფიკურია სპეციფიკური, შეკვეთა,
@@ -68,6 +69,7 @@ apps_configurations:
       path: ბილიკი
       title: სათაური
   import: იმპორტი
+  import_full: იმპორტის პარამეტრები განაცხადის საშუალებით
   new: ახალი
   search: ძებნა
   swap: გაცვლა
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: ჩატვირთეთ პერსონალური კონფიგურაციის ფაილი
   data_folder: მონაცემთა საქაღალდე
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
-  export_resource: ექსპორტის რესურსი
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
@@ -116,7 +117,7 @@ header:
     resources: რესურსები
     shortcuts: მალსახმობები
     soundpack: ხმის პაკეტები
-    specific_apps: კონკრეტული პროგრამები
+    specific_apps: პარამეტრები აპლიკაციით
     theme: თემები
     wallpaper: ფონები
     widget: ვიჯეტები
@@ -136,6 +137,7 @@ remove: ამოღება
 resources:
   app_outdated: ეს რესურსი მოითხოვს Seelen UI– ს ახალ ვერსიას, რომ სწორად იმუშაოს.
   discover: აღმოაჩინეთ მეტი რესურსი
+  export: ექსპორტის რესურსი
   open_folder: ღია რესურსების საქაღალდე
   outdated: >-
     ეს რესურსი შეიქმნა Seelen UI- ს ძველი ვერსიისთვის და შესაძლოა არ იმუშაოს

@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Potvrďte smazání
   delete: Smazat
   export: Exportovat
+  export_full: Export nastavení podle aplikace
   extra_info: >-
     SEELEN UI používá pouze jeden identifikátor na aplikaci (první nalezený), 
     takže pořadí v tom, jak jsou specifikovány, je důležité, nejnovější přidaná
@@ -68,6 +69,7 @@ apps_configurations:
       path: Cesta
       title: Titulek
   import: Importovat
+  import_full: Import nastavení podle aplikace
   new: Nový
   search: Vyhledat
   swap: Prohodit
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Načíst vlastní konfigurační soubor
   data_folder: Datová složka
   enable: Povolit vývojové nástroje
-  export_resource: Exportní zdroj
   install_folder: Instalační složka
   load: Načíst
   settings_file: Nastavení souboru
@@ -116,7 +117,7 @@ header:
     resources: Zdroje
     shortcuts: Zkratky
     soundpack: Zvukové balíčky
-    specific_apps: Konkrétní aplikace
+    specific_apps: Nastavení podle aplikace
     theme: Témata
     wallpaper: Tapety na plochu
     widget: Widgety
@@ -138,6 +139,7 @@ resources:
     Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského
     rozhraní Seelen.
   discover: Objevte další zdroje
+  export: Exportní zdroj
   open_folder: Otevření složky se zdroji
   outdated: >-
     Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a

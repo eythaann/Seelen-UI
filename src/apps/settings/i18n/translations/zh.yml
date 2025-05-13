@@ -39,6 +39,7 @@ apps_configurations:
   confirm_delete_title: 确认删除
   delete: 删除
   export: 导出
+  export_full: 按应用程序导出设置
   extra_info: Seelen UI  对每个应用程序只使用一个标识符（找到的第一个匹配），因此“如何指定”的顺序很重要，最新添加的将优先，注册表默认从新到旧排序。
   identifier:
     add_block: 添加块
@@ -61,6 +62,7 @@ apps_configurations:
       path: 小路
       title: 标题
   import: 导入
+  import_full: 按应用程序导入设置
   new: 新增
   search: 搜索
   swap: 交换
@@ -72,7 +74,6 @@ devtools:
   custom_config_file: 加载自定义配置文件
   data_folder: 数据文件夹
   enable: 启用开发工具
-  export_resource: 出口资源
   install_folder: 安装文件夹
   load: 加载
   settings_file: 设置文件
@@ -109,7 +110,7 @@ header:
     resources: 资源
     shortcuts: 快捷键
     soundpack: 音效包
-    specific_apps: 特定应用程序
+    specific_apps: 按应用程序设置
     theme: 主题
     wallpaper: 壁纸
     widget: 小工具
@@ -129,6 +130,7 @@ remove: 消除
 resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
   discover: 发现更多资源
+  export: 出口资源
   open_folder: 打开资源文件夹
   outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
 save: 保存

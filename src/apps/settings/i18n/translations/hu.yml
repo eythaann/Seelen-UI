@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Törlés jóváhagyása
   delete: Töröl
   export: Export
+  export_full: Beállítások exportálása alkalmazásonként
   extra_info: >-
     A Seelen UI alkalmazásonként csak egy azonosítót használ (az első egyezés
     található), ezért fontos a sorrend, a legutolsó hozzáadott lesz prioritás,
@@ -67,6 +68,7 @@ apps_configurations:
       path: Útvonal
       title: Cím
   import: Behozatal
+  import_full: Beállítások importálása alkalmazásonként
   new: Új
   search: Keresés
   swap: Csere
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: Töltse be az egyéni konfigurációs fájlt
   data_folder: Adatmappa
   enable: Engedélyezze a fejlesztői eszközöket
-  export_resource: Export erőforrás
   install_folder: Telepítési mappa
   load: Betöltés
   settings_file: Beállítási fájl
@@ -117,7 +118,7 @@ header:
     resources: Források
     shortcuts: Parancsikonok
     soundpack: Hang csomagok
-    specific_apps: Konkrét alkalmazások
+    specific_apps: Alkalmazásonkénti beállítások
     theme: Témák
     wallpaper: Háttérképek
     widget: Widgetek
@@ -137,6 +138,7 @@ remove: Eltávolítás
 resources:
   app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
   discover: További források felfedezése
+  export: Export erőforrás
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
     Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,

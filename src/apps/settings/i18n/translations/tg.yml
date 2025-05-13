@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Тасдиқро тасдиқ кунед
   delete: Нест
   export: Содирот
+  export_full: Танзимоти содиротиро тавассути ариза
   extra_info: >-
     Seelen UI дар як барнома танҳо як идентификаторро истифода мебарад (мувофиқи
     аввал пайдо шуд), аз ин рӯ тартиби муайян кардани он муҳим аст, ба охирин
@@ -68,6 +69,7 @@ apps_configurations:
       path: Роҳ
       title: Унвон
   import: Воридот
+  import_full: Танзимоти воридот тавассути ариза
   new: Нав
   search: Кофтуков
   swap: Своп
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Файли танзимоти танзими фармоишӣ
   data_folder: Папкаи додаҳо
   enable: Воситаҳои таҳиягарро фаъол кунед
-  export_resource: Манбаъ
   install_folder: Феҳристи насб
   load: Сарборӣ
   settings_file: Файлҳои танзимот
@@ -116,7 +117,7 @@ header:
     resources: Захираҳо
     shortcuts: Миёнбурҳо
     soundpack: Пойафзолҳои садо
-    specific_apps: Барномаҳои мушаххас
+    specific_apps: Танзимот тавассути барнома
     theme: Мавзӯъҳо
     wallpaper: Обои обу
     widget: Виджетҳо
@@ -136,6 +137,7 @@ remove: Дур кардан
 resources:
   app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.
   discover: Нахуст захираҳои бештарро кашф кунед
+  export: Манбаъ
   open_folder: Папкаи захираҳо
   outdated: >-
     Ин манбаъ барои нусхаи кӯҳна аз YELEINS тарҳрезӣ шудааст ва метавонад дуруст

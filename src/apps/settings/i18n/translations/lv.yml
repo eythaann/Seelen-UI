@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Apstipriniet izdzēst
   delete: Dzēst
   export: Eksportēt
+  export_full: Eksportēt iestatījumus pēc lietojumprogrammas
   extra_info: >-
     Seelen lietotāja saskarnē katrai lietotnei tiek izmantots tikai viens
     identifikators (atrasta pirmā atbilstība), tāpēc ir svarīga secība, kādā tie
@@ -68,6 +69,7 @@ apps_configurations:
       path: Ceļš
       title: Nosaukums
   import: Importēt
+  import_full: Iestatījumu importēšana pēc lietojumprogrammas
   new: Jauns
   search: Meklēt
   swap: Apmaiņa
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Ielādēt pielāgotu konfigurācijas failu
   data_folder: Datu mape
   enable: Iespējot izstrādātāju rīkus
-  export_resource: Eksporta resurss
   install_folder: Instalēšanas mape
   load: Slodze
   settings_file: Iestatīšanas fails
@@ -118,7 +119,7 @@ header:
     resources: Resursi
     shortcuts: Saīsnes
     soundpack: Skaņu paketes
-    specific_apps: Īpašas lietotnes
+    specific_apps: Iestatījumi pēc lietojumprogrammas
     theme: Tēmas
     wallpaper: Tapetes
     widget: Logrīki
@@ -138,6 +139,7 @@ remove: Noņemt
 resources:
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
   discover: Atklājiet vairāk resursu
+  export: Eksporta resursi
   open_folder: Atvērt resursu mapi
   outdated: >-
     Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties

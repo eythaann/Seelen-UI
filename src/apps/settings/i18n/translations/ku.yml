@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: DELETE piştrast bikin
   delete: Lûleêkirin
   export: Eksport
+  export_full: Mîhengên bi serîlêdanê re bikin
   extra_info: >-
     Selen UI tenê yek nasnameyê bikar tînin (yekem maça ku tê dîtin) ji ber vê
     yekê fermanê girîng e.
@@ -66,6 +67,7 @@ apps_configurations:
       path: Şop
       title: Nav
   import: Anîn
+  import_full: Mîhengên Import bi serîlêdanê
   new: Nşh
   search: Gerr
   swap: Sofet
@@ -77,7 +79,6 @@ devtools:
   custom_config_file: Pelê Config-ê ya xwerû barkirin
   data_folder: Peldanka daneyê
   enable: Amûrên Pêşdebir çalak bikin
-  export_resource: Resouravkaniya Export
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
   settings_file: Pelê Mîhengan
@@ -116,7 +117,7 @@ header:
     resources: Resourcesavkaniyên
     shortcuts: Kurtefîlm
     soundpack: Pakêtên deng
-    specific_apps: Serlêdanên taybetî
+    specific_apps: Mîhengên bi serîlêdanê
     theme: Temas
     wallpaper: Wallpapers
     widget: Widgets
@@ -138,6 +139,7 @@ resources:
     Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş
     bixebite.
   discover: Zêdetir çavkaniyên kifş bikin
+  export: Resouravkaniya Export
   open_folder: Peldanka çavkaniya vekirî
   outdated: >-
     Vê çavkaniyê ji bo guhertoyek kevn a Seelen UI hate çêkirin û dibe ku bi

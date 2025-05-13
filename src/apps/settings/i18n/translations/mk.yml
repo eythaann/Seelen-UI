@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Потврдете го Избриши
   delete: Избриши
   export: Извоз
+  export_full: Извезувајте ги поставките по апликација
   extra_info: >-
     UI UI Користете само еден идентификатор по апликација (пронајден прв
     натпревар), така што нарачката за тоа е важна е важна, најновиот додаден ќе
@@ -68,6 +69,7 @@ apps_configurations:
       path: Пат
       title: Наслов
   import: Увоз
+  import_full: Увезете ги поставките по апликација
   new: Ново
   search: Пребарување
   swap: Разменување
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Вчитајте ја датотеката за прилагодена конфигурација
   data_folder: Папка со податоци
   enable: Овозможете алатки за развивачи
-  export_resource: Извоз ресурс
   install_folder: Папка за инсталација
   load: Оптоварување
   settings_file: Датотека за поставки
@@ -118,7 +119,7 @@ header:
     resources: Ресурси
     shortcuts: Кратенки
     soundpack: Звучни пакувања
-    specific_apps: Специфични апликации
+    specific_apps: Поставки по апликација
     theme: Теми
     wallpaper: Позадини
     widget: Додатоци
@@ -138,6 +139,7 @@ remove: Отстранете
 resources:
   app_outdated: Овој ресурс бара понова верзија на Seelen UI да работи правилно.
   discover: Откријте повеќе ресурси
+  export: Извоз ресурс
   open_folder: Отворена папка со ресурси
   outdated: >-
     Овој ресурс беше дизајниран за постара верзија на Seelen UI и можеби нема да

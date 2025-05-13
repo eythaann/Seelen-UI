@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Bevestig delete
   delete: Verwyder
   export: Uitvoer
+  export_full: Uitvoerinstellings volgens aansoek
   extra_info: >-
     Seelen UI gebruik slegs een identifiseerder per app (eerste wedstryd
     gevind), dus die volgorde in hoe dit gespesifiseer is, is belangrik, die
@@ -68,6 +69,7 @@ apps_configurations:
       path: Pad
       title: Titel
   import: Invoerproduk
+  import_full: Voer instellings volgens aansoek in
   new: Nuut
   search: Soek
   swap: Ruil
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Laai Custom Config -lêer
   data_folder: Datapap
   enable: Aktiveer ontwikkelaarsgereedskap
-  export_resource: Uitvoerhulpbron
   install_folder: Installasie -lêergids
   load: Vrag
   settings_file: Instellingslêer
@@ -116,7 +117,7 @@ header:
     resources: Hulpbronne
     shortcuts: Kortpaaie
     soundpack: Klankpakkies
-    specific_apps: Spesifieke programme
+    specific_apps: Instellings volgens aansoek
     theme: Temas
     wallpaper: Agtergronde
     widget: Widgets
@@ -138,6 +139,7 @@ resources:
     Hierdie hulpbron vereis dat 'n nuwer weergawe van Seelen UI behoorlik moet
     werk.
   discover: Ontdek meer bronne
+  export: Uitvoerhulpbron
   open_folder: Open Resource Folder
   outdated: >-
     Hierdie hulpbron is ontwerp vir 'n ouer weergawe van Seelen UI en werk

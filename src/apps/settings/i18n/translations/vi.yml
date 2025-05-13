@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Xác nhận xóa
   delete: Xóa bỏ
   export: Xuất khẩu
+  export_full: Cài đặt xuất theo ứng dụng
   extra_info: >-
     Seelen UI chỉ sử dụng một định danh cho mỗi ứng dụng (tìm thấy trận đấu đầu
     tiên) vì vậy thứ tự được cụ thể là quan trọng, phần được thêm mới nhất sẽ
@@ -67,6 +68,7 @@ apps_configurations:
       path: Con đường
       title: Tiêu đề
   import: Nhập khẩu
+  import_full: Nhập cài đặt theo ứng dụng
   new: Mới
   search: Tìm kiếm
   swap: Tráo đổi
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: Tải tệp cấu hình tùy chỉnh
   data_folder: Thư mục dữ liệu
   enable: Kích hoạt các công cụ nhà phát triển
-  export_resource: Tài nguyên xuất khẩu
   install_folder: Thư mục cài đặt
   load: Trọng tải
   settings_file: Cài đặt tập tin
@@ -117,7 +118,7 @@ header:
     resources: Tài nguyên
     shortcuts: Phím tắt
     soundpack: Gói âm thanh
-    specific_apps: Ứng dụng cụ thể
+    specific_apps: Cài đặt theo ứng dụng
     theme: Chủ đề
     wallpaper: Hình nền
     widget: Widgets
@@ -137,6 +138,7 @@ remove: Di dời
 resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
   discover: Khám phá thêm tài nguyên
+  export: Tài nguyên xuất khẩu
   open_folder: Mở thư mục tài nguyên
   outdated: >-
     Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không

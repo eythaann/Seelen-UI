@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Cadarnhau Dileu
   delete: Croeswn
   export: Allforiff
+  export_full: Gosodiadau Allforio yn ôl Cais
   extra_info: >-
     Mae Seelen UI yn defnyddio dim ond un dynodwr i bob app (y gêm gyntaf a
     ddarganfuwyd) felly mae'r gorchymyn yn sut yn cael ei nodi yn bwysig, bydd
@@ -68,6 +69,7 @@ apps_configurations:
       path: Llwybr
       title: Teitl
   import: Mewnforied
+  import_full: Gosodiadau mewnforio yn ôl cais
   new: Newydd
   search: Chwiloon
   swap: Trwciff
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Llwythwch ffeil ffurfweddu arfer
   data_folder: Ffolder data
   enable: Galluogi Offer Datblygwr
-  export_resource: Adnodd Allforio
   install_folder: Ffolder gosod
   load: Lwythet
   settings_file: Ffeil Gosodiadau
@@ -116,7 +117,7 @@ header:
     resources: Adnoddau
     shortcuts: Llwybrau byr
     soundpack: Pecynnau sain
-    specific_apps: Apiau penodol
+    specific_apps: Gosodiadau yn ôl cais
     theme: Themâu
     wallpaper: Papurau Wal
     widget: Widgets
@@ -138,6 +139,7 @@ resources:
     Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
     iawn.
   discover: Darganfyddwch fwy o adnoddau
+  export: Adnodd Allforio
   open_folder: Ffolder Adnoddau Agored
   outdated: >-
     Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na

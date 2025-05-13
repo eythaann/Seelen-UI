@@ -41,6 +41,7 @@ apps_configurations:
   confirm_delete_title: Thibitisha Futa
   delete: Futa
   export: Kuuza nje
+  export_full: Mipangilio ya kuuza nje na Maombi
   extra_info: >-
     Seelen UI hutumia kitambulisho kimoja tu kwa kila programu (kwanza
     kupatikana) kwa hivyo mpangilio wa jinsi ulivyobainishwa ni muhimu, ya hivi
@@ -67,6 +68,7 @@ apps_configurations:
       path: Njia
       title: Kichwa
   import: Kuagiza
+  import_full: Ingiza Mipangilio na Maombi
   new: Mpya
   search: Tafuta
   swap: Kubadilishana
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: Pakia faili ya usanidi wa kawaida
   data_folder: Folda ya data
   enable: Wezesha zana za msanidi programu
-  export_resource: Rasilimali ya kuuza nje
   install_folder: Folda ya usanikishaji
   load: Mzigo
   settings_file: Faili ya mipangilio
@@ -115,7 +116,7 @@ header:
     resources: Rasilimali
     shortcuts: Njia za mkato
     soundpack: Pakiti za sauti
-    specific_apps: Programu maalum
+    specific_apps: Mipangilio na Maombi
     theme: Mada
     wallpaper: Wallpapers
     widget: Vilivyoandikwa
@@ -135,6 +136,7 @@ remove: Ondoa
 resources:
   app_outdated: Rasilimali hii inahitaji toleo jipya la Seelen UI kufanya kazi vizuri.
   discover: Gundua rasilimali zaidi
+  export: Rasilimali ya kuuza nje
   open_folder: Fungua folda ya rasilimali
   outdated: >-
     Rasilimali hii ilibuniwa kwa toleo la zamani la Seelen UI na linaweza

@@ -106,7 +106,6 @@ function ThemeItem({ theme, checked, onToggle }: ThemeItemProps) {
       kind="Theme"
       actions={
         <>
-          {theme.id !== '@default/theme' && <Switch value={checked} onChange={onToggle} />}
           {theme.settings.length > 0 && (
             <NavLink to={`/theme/${theme.id.replace('@', '')}`}>
               <Button type="text">
@@ -114,6 +113,7 @@ function ThemeItem({ theme, checked, onToggle }: ThemeItemProps) {
               </Button>
             </NavLink>
           )}
+          {theme.id !== '@default/theme' && <Switch value={checked} onChange={onToggle} />}
         </>
       }
     />

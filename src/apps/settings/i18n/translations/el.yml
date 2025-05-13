@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Επιβεβαιώστε τη διαγραφή
   delete: Διαγράφω
   export: Εξαγωγή
+  export_full: Εξαγωγή ρυθμίσεων ανά εφαρμογή
   extra_info: >-
     Η διεπαφή χρήστη Seelen χρησιμοποιεί μόνο ένα αναγνωριστικό ανά εφαρμογή
     (βρέθηκε η πρώτη αντιστοίχιση), επομένως η σειρά στον τρόπο καθορισμού είναι
@@ -69,6 +70,7 @@ apps_configurations:
       path: Μονοπάτι
       title: Τίτλος
   import: Εισαγωγή
+  import_full: Εισαγωγή ρυθμίσεων ανά εφαρμογή
   new: Νέος
   search: Αναζήτηση
   swap: Ανταλαγή
@@ -80,7 +82,6 @@ devtools:
   custom_config_file: Φόρτωση προσαρμοσμένου αρχείου ρυθμίσεων
   data_folder: Φάκελος δεδομένων
   enable: Ενεργοποίηση εργαλείων προγραμματιστή
-  export_resource: Πόρος εξαγωγής
   install_folder: Φάκελος εγκατάστασης
   load: Φορτώνω
   settings_file: Αρχείο ρυθμίσεων
@@ -117,7 +118,7 @@ header:
     resources: Πόροι
     shortcuts: Συντομεύσεις
     soundpack: Πακέτα ήχου
-    specific_apps: Συγκεκριμένες εφαρμογές
+    specific_apps: Ρυθμίσεις ανά εφαρμογή
     theme: Θέματα
     wallpaper: Ταπετσαρίες
     widget: Widgets
@@ -139,6 +140,7 @@ resources:
     Αυτός ο πόρος απαιτεί μια νεότερη έκδοση του Seelen UI για να λειτουργήσει
     σωστά.
   discover: Ανακαλύψτε περισσότερους πόρους
+  export: Πόρος εξαγωγής
   open_folder: Άνοιγμα φακέλου πόρων
   outdated: >-
     Αυτός ο πόρος σχεδιάστηκε για μια παλαιότερη έκδοση του Seelen UI και

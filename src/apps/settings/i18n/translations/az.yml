@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Silmək təsdiqləyin
   delete: Silmək
   export: İxrac etmək
+  export_full: Tətbiq tərəfindən parametrləri ixrac edin
   extra_info: >-
     Seelen UI, bir tətbiq başına yalnız bir identifikatordan istifadə edir (ilk
     matç tapıldı), buna görə əmiklər necə vacibdir, ən son əlavə olaraq,
@@ -67,6 +68,7 @@ apps_configurations:
       path: Yol
       title: Başlıq
   import: İdxal etmək
+  import_full: Tətbiqlə Parametrləri İdxal edin
   new: Yeni
   search: Axtarış
   swap: Dəyişdirmək
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: Xüsusi konfiqurasiya faylını yükləyin
   data_folder: Məlumat qovluğu
   enable: Developer alətlərini aktivləşdirin
-  export_resource: İxracat mənbəyi
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
   settings_file: Parametrlər faylı
@@ -115,7 +116,7 @@ header:
     resources: Resurslar
     shortcuts: Qısaylıq
     soundpack: Səs paketləri
-    specific_apps: Xüsusi tətbiqlər
+    specific_apps: Tətbiq tərəfindən parametrlər
     theme: Mövzular
     wallpaper: Divar kağızları
     widget: Vidjetlər
@@ -137,6 +138,7 @@ resources:
     Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını
     tələb edir.
   discover: Daha çox mənbəyi kəşf edin
+  export: İxracat mənbəyi
   open_folder: Açıq Resurs qovluğu
   outdated: >-
     Bu qaynaq Seelen UI-nin köhnə bir versiyası üçün hazırlanmış və düzgün

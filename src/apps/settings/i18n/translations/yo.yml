@@ -41,6 +41,7 @@ apps_configurations:
   confirm_delete_title: Jẹrisi paarẹ
   delete: Paarẹ
   export: Firanṣẹ si ilẹ okeere
+  export_full: Awọn eto okeere nipasẹ ohun elo
   extra_info: >-
     Sisen UI Nikan idakan kan fun app (ere akọkọ ti a rii) nitorinaa ni alaye ni
     pataki, bi a ṣe le ṣe akiyesi tabili ti o wa ni lẹsẹsẹ nipasẹ aiyipada si
@@ -66,6 +67,7 @@ apps_configurations:
       path: Ona
       title: Akọle
   import: Aṣagbewọle lati ilẹ okeere
+  import_full: Awọn Eto Wọle sii nipasẹ ohun elo
   new: Tuntun
   search: Ṣewadii
   swap: Eepo
@@ -77,7 +79,6 @@ devtools:
   custom_config_file: Fifuye faili atunto aṣa
   data_folder: Folda data
   enable: Mu awọn irinṣẹ Oláàmúdà ṣiṣẹ
-  export_resource: Si ilẹkan ta
   install_folder: Filese Fifi sori ẹrọ
   load: Ẹru
   settings_file: Faili eto
@@ -114,7 +115,7 @@ header:
     resources: Awọn orisun
     shortcuts: Awọn ọna abuja
     soundpack: Awọn akopọ ohun
-    specific_apps: Apps Pataki
+    specific_apps: Eto nipasẹ ohun elo
     theme: Awọn akori
     wallpaper: Ogiri ogiri
     widget: Ẹrọ ẹrọ
@@ -134,6 +135,7 @@ remove: Yọkuro
 resources:
   app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
   discover: Ṣawari awọn orisun diẹ sii
+  export: Si ilẹkan ta
   open_folder: Ṣii folda Ipilẹṣẹ
   outdated: A ṣe orisun yii fun ẹya atijọ ti Silen Ui ati pe ko le ma ṣiṣẹ daradara.
 save: Fipamọ

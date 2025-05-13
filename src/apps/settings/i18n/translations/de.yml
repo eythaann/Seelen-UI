@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Löschen bestätigen
   delete: Löschen
   export: Exportieren
+  export_full: Einstellungen nach Anwendung exportieren
   extra_info: >-
     Seelen UI Verwenden Sie nur einen Kenner pro App (zuerst übereinstimmend
     gefunden). Die Reihenfolge, in der spezifisch ist, ist wichtig. Die neueste
@@ -68,6 +69,7 @@ apps_configurations:
       path: Weg
       title: Titel
   import: Importieren
+  import_full: Einstellungen nach Anwendung importieren
   new: Neu
   search: Suchen
   swap: Austauschen
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Benutzerdefinierte Konfigurationsdatei laden
   data_folder: Datenordner
   enable: Entwicklerwerkzeuge aktivieren
-  export_resource: Ressource exportieren
   install_folder: Installationsordner
   load: Laden
   settings_file: Einstellungsdatei
@@ -118,7 +119,7 @@ header:
     resources: Ressourcen
     shortcuts: Kurzbefehle
     soundpack: Sound Packs
-    specific_apps: Spezifische Apps
+    specific_apps: Einstellungen nach Anwendung
     theme: Themen
     wallpaper: Bildschirmhintergründe
     widget: Widgets
@@ -140,6 +141,7 @@ resources:
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
     funktionieren.
   discover: Weitere Ressourcen entdecken
+  export: Ressource exportieren
   open_folder: Ressourcenordner öffnen
   outdated: >-
     Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und

@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Устгахыг баталгаажуулна уу
   delete: Эдгээх
   export: Гадаадад гаргах
+  export_full: Програмаар экспортлох тохиргоо
   extra_info: >-
     Seelen ui нь App тутамд зөвхөн нэг танигчийг ашигладаг (эхний тоглолт
     олдсон) нь хамгийн чухал нь хамгийн чухал бөгөөд хүснэгтийг хуучин
@@ -67,6 +68,7 @@ apps_configurations:
       path: Зам
       title: Гарчиг
   import: Импортлох
+  import_full: Програмаар тохиргоог импортлох
   new: Шинэ
   search: Эрэл хайгуул хийх
   swap: Түлхэх
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: Custom Compigh файлыг ачаалах
   data_folder: Д код хавтас
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
-  export_resource: Нөөцийг экспортлох
   install_folder: Суулгалах хүрээ
   load: Ачих
   settings_file: Тохиргооын нэр
@@ -117,7 +118,7 @@ header:
     resources: Ажил
     shortcuts: Хэв хаягдал
     soundpack: Дууны багц
-    specific_apps: ТУСГАЙ АЖИЛЛАГАА
+    specific_apps: Програмын тохиргоо
     theme: Сэдэвүүд
     wallpaper: Ханын цаас
     widget: Аялалын мэдээ
@@ -137,6 +138,7 @@ remove: Зөөх
 resources:
   app_outdated: Энэ нөөц нь Seelen Ui-ийн шинэ хувилбарыг зөв ажиллахыг шаарддаг.
   discover: Илүү их нөөцийг олж мэдэх
+  export: Нөөцийг экспортлох
   open_folder: Нээлттэй зөөврийн
   outdated: >-
     Энэ нөөц нь Seelen Ui-ийн хуучин хувилбарт зориулагдсан бөгөөд зөв

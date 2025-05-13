@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Xaqiiji Delete
   delete: Tirtirid
   export: Dhoofin
+  export_full: Dejinta Dhoofinta Codsiga
   extra_info: >-
     Seelen UI waxay isticmaashaa hal aqoonsi oo app kasta ah (ciyaartii ugu
     horaysay ee la helay) markaa siday u kala horreeyaan sida loo cayimay ayaa
@@ -69,6 +70,7 @@ apps_configurations:
       path: Jidka
       title: Ciwaanka
   import: Soo dejin
+  import_full: Soo dejinta goobaha codsashada
   new: Cusub
   search: Raadin
   swap: Isku beddelo
@@ -80,7 +82,6 @@ devtools:
   custom_config_file: Xamuul faylka caadiga ah ee config
   data_folder: Faylka xogta
   enable: U oggolow qalabka horumarinta
-  export_resource: Ilaha dhoofinta
   install_folder: Xeerka rakibaadda
   load: Xammuul
   settings_file: Faylka Dejinta
@@ -119,7 +120,7 @@ header:
     resources: Kheyraadka
     shortcuts: Gaaban
     soundpack: Xirmooyinka dhawaaqa
-    specific_apps: Barnaamijyo gaar ah
+    specific_apps: Dejinta Codsi
     theme: Mowduucyada
     wallpaper: Darf-biyoodka
     widget: Widgetts
@@ -141,6 +142,7 @@ resources:
     Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah
     u shaqeynaya.
   discover: Soo hel ilo badan
+  export: Ilaha dhoofinta
   open_folder: Fur faylka furan
   outdated: >-
     Kheyraadkan waxaa loogu talagalay in nooc ka weyn oo ah Selelel Ui oo laga

@@ -7,6 +7,8 @@ import yaml from 'js-yaml';
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
 
+import i18n from '../../../i18n';
+
 export async function saveJsonSettings(settings: Settings) {
   await invoke(SeelenCommand.StateWriteSettings, { settings });
 }
@@ -29,8 +31,8 @@ export async function ImportApps() {
   const files = await dialog.open({
     defaultPath: await path.resolveResource('static/apps_templates'),
     multiple: true,
-    title: 'Select template',
-    filters: [{ name: 'apps', extensions: ['yaml', 'yml'] }],
+    title: i18n.t('apps_configurations.import_full'),
+    filters: [{ name: 'YAML', extensions: ['yaml', 'yml'] }],
   });
 
   if (!files) {
@@ -47,9 +49,9 @@ export async function ImportApps() {
 
 export async function ExportApps(apps: any[]) {
   const pathToSave = await dialog.save({
-    title: 'Exporting Apps',
+    title: i18n.t('apps_configurations.export_full'),
     defaultPath: await path.join(await path.homeDir(), 'downloads/apps.yml'),
-    filters: [{ name: 'apps', extensions: ['yaml', 'yml'] }],
+    filters: [{ name: 'YAML', extensions: ['yaml', 'yml'] }],
   });
   if (pathToSave) {
     fs.writeTextFile(pathToSave, yaml.dump(apps));
@@ -66,9 +68,9 @@ export async function ExportResource(resource: { id: string }) {
   const date = new Date();
   const filename = resourceName + '.' + date.toISOString().split('T')[0] + '.yml';
   const pathToSave = await dialog.save({
-    title: 'Exporting Resource',
+    title: i18n.t('resources.export'),
     defaultPath: await path.join(await path.downloadDir(), filename),
-    filters: [{ name: 'resource', extensions: ['yaml', 'yml'] }],
+    filters: [{ name: 'YAML', extensions: ['yaml', 'yml'] }],
   });
   if (pathToSave) {
     fs.writeTextFile(pathToSave, yaml.dump(resource));

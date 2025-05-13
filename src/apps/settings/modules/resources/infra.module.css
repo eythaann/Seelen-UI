@@ -119,8 +119,14 @@
     .actions {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       align-items: flex-end;
-      gap: 8px;
+
+      .actionsTop {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
     }
   }
 }

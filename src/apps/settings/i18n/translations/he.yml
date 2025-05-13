@@ -41,6 +41,7 @@ apps_configurations:
   confirm_delete_title: אשר מחק
   delete: לִמְחוֹק
   export: יְצוּא
+  export_full: הגדרות ייצוא לפי יישום
   extra_info: >-
     ממשק המשתמש של Seelen משתמש רק במזהה אחד לכל אפליקציה (נמצאה התאמה ראשונה),
     כך שסדר האופן שבו הם מוגדרים הוא חשוב, העדיפות האחרונה שנוספה תהיה בסדר
@@ -66,6 +67,7 @@ apps_configurations:
       path: נָתִיב
       title: כּוֹתֶרֶת
   import: יְבוּא
+  import_full: ייבא הגדרות לפי יישום
   new: חָדָשׁ
   search: לחפש
   swap: לְהַחלִיף
@@ -77,7 +79,6 @@ devtools:
   custom_config_file: טען קובץ תצורה מותאם אישית
   data_folder: תיקיית נתונים
   enable: אפשר כלי מפתחים
-  export_resource: משאב ייצוא
   install_folder: תיקיית התקנה
   load: לִטעוֹן
   settings_file: קובץ הגדרות
@@ -114,7 +115,7 @@ header:
     resources: אֶמְצָעִי
     shortcuts: קיצורי דרך
     soundpack: חבילות סאונד
-    specific_apps: אפליקציות ספציפיות
+    specific_apps: הגדרות לפי יישום
     theme: נושאים
     wallpaper: טפטים
     widget: ווידג'טים
@@ -134,6 +135,7 @@ remove: לְהַסִיר
 resources:
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
   discover: לגלות משאבים נוספים
+  export: משאב ייצוא
   open_folder: פתיחת תיקיית משאבים
   outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.
 save: להציל

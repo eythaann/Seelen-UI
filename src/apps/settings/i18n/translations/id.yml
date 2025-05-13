@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Konfirmasi hapus
   delete: Menghapus
   export: Ekspor
+  export_full: Pengaturan ekspor menurut aplikasi
   extra_info: >-
     Seelen UI Gunakan hanya satu pengidentifikasi per aplikasi (Pertandingan
     Pertama Ditemukan) sehingga pesanan dalam bagaimana spesifisasi itu penting,
@@ -68,6 +69,7 @@ apps_configurations:
       path: Jalur
       title: Judul
   import: Impor
+  import_full: Mengimpor pengaturan berdasarkan aplikasi
   new: Baru
   search: Mencari
   swap: Menukar
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Muat file konfigurasi khusus
   data_folder: Folder Data
   enable: Aktifkan alat pengembang
-  export_resource: Sumber Daya Ekspor
   install_folder: Folder Instalasi
   load: Memuat
   settings_file: File Pengaturan
@@ -118,7 +119,7 @@ header:
     resources: Sumber daya
     shortcuts: Pintasan
     soundpack: Paket Suara
-    specific_apps: Aplikasi tertentu
+    specific_apps: Pengaturan berdasarkan Aplikasi
     theme: Tema
     wallpaper: Wallpaper
     widget: Widget
@@ -140,6 +141,7 @@ resources:
     Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat
     berfungsi dengan baik.
   discover: Temukan lebih banyak sumber daya
+  export: Sumber Daya Ekspor
   open_folder: Buka folder sumber daya
   outdated: >-
     Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak

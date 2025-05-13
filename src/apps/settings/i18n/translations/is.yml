@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Staðfestu að eyða
   delete: Eyða
   export: Flytja út
+  export_full: Útflutningsstillingar eftir umsókn
   extra_info: >-
     Seelen UI Notaðu aðeins eitt auðkenni á hvert forrit (fyrsta samsvörun sem
     fannst) þannig að röðin í því hvernig eru sértæk er mikilvæg, nýjasta bætt
@@ -68,6 +69,7 @@ apps_configurations:
       path: Slóð
       title: Titill
   import: Flytja inn
+  import_full: Innflutningsstillingar eftir umsókn
   new: Nýtt
   search: Leitaðu
   swap: Skiptu um
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Hlaða sérsniðna config skrá
   data_folder: Gagnamappa
   enable: Virkja verktaki verktaki
-  export_resource: Útflutningsauðlind
   install_folder: Uppsetningarmöppu
   load: Hlaða
   settings_file: Stillingarskrá
@@ -116,7 +117,7 @@ header:
     resources: Auðlindir
     shortcuts: Flýtileiðir
     soundpack: Hljóðpakkar
-    specific_apps: Sérstök forrit
+    specific_apps: Stillingar eftir umsókn
     theme: Þemu
     wallpaper: Veggfóður
     widget: Búnaður
@@ -136,6 +137,7 @@ remove: Fjarlægðu
 resources:
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
   discover: Uppgötvaðu fleiri úrræði
+  export: Útflutningsauðlind
   open_folder: Opin auðlindamappa
   outdated: >-
     Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað

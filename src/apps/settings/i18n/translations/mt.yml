@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Ikkonferma Ħassar
   delete: Ħassar
   export: Esportazzjoni
+  export_full: Settings tal-Esportazzjoni skont l-Applikazzjoni
   extra_info: >-
     Seelen UI tuża identifikatur wieħed biss għal kull app (l-ewwel tqabbil
     misjub) sabiex l-ordni ta 'kif huma speċifikati hija importanti, l-aħħar
@@ -68,6 +69,7 @@ apps_configurations:
       path: Mogħdija
       title: Titolu
   import: Importa
+  import_full: Settings tal-importazzjoni skont l-applikazzjoni
   new: Ġdid
   search: Tfittxija
   swap: Tpartit
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Tagħbija Fajl tal-Konfigurazzjoni Custom
   data_folder: Folder tad-dejta
   enable: Ippermetti għodod għall-iżviluppaturi
-  export_resource: Riżorsa ta 'esportazzjoni
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
   settings_file: Settings Fajl
@@ -118,7 +119,7 @@ header:
     resources: Riżorsi
     shortcuts: Shortcuts
     soundpack: Pakketti tal-ħoss
-    specific_apps: Applikazzjonijiet speċifiċi
+    specific_apps: Settings skont l-applikazzjoni
     theme: Temi
     wallpaper: Wallpapers
     widget: Widgets
@@ -138,6 +139,7 @@ remove: Neħħi
 resources:
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
   discover: Skopri aktar riżorsi
+  export: Riżorsa ta 'esportazzjoni
   open_folder: Folder tar-Riżorsi Miftuħa
   outdated: >-
     Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u

@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: تایید حذف
   delete: حذف
   export: صادر کردن
+  export_full: تنظیمات صادرات توسط برنامه
   extra_info: >-
     رابط کاربری Seelen تنها از یک شناسه برای هر برنامه استفاده می کند (اولین
     تطابق پیدا شد) بنابراین ترتیب نحوه مشخص شدن مهم است، آخرین موارد اضافه شده
@@ -68,6 +69,7 @@ apps_configurations:
       path: مسیر
       title: عنوان
   import: وارد كردن
+  import_full: وارد کردن تنظیمات توسط برنامه
   new: جدید
   search: جستجو کردن
   swap: مبادله کردن
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: بارگیری پرونده پیکربندی سفارشی
   data_folder: پوشه داده ها
   enable: ابزارهای توسعه دهنده را فعال کنید
-  export_resource: منبع صادراتی
   install_folder: پوشه نصب
   load: بار
   settings_file: پرونده تنظیمات
@@ -118,7 +119,7 @@ header:
     resources: منابع
     shortcuts: میانبرها
     soundpack: بسته های صدا
-    specific_apps: برنامه های خاص
+    specific_apps: تنظیمات توسط برنامه
     theme: مضامین
     wallpaper: تصاویر پس زمینه
     widget: ویراچه
@@ -138,6 +139,7 @@ remove: برداشتن
 resources:
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
   discover: منابع بیشتری را کشف کنید
+  export: منبع صادراتی
   open_folder: پوشه منبع باز
   outdated: >-
     این منبع برای نسخه قدیمی تر Seelen UI طراحی شده است و ممکن است به درستی کار

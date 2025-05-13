@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Потврдити брисање
   delete: Избрисати
   export: Извоз
+  export_full: Подешавања извоза по апликацији
   extra_info: >-
     СЕЕЛЕН УИ Користите само један идентификатор по апликацији (први меч
     пронађен), тако да је налог у начину на који је специфичан, приоритет ће
@@ -68,6 +69,7 @@ apps_configurations:
       path: Пут
       title: Наслов
   import: Увоз
+  import_full: Подешавања увоза по апликацији
   new: Нова
   search: Претрага
   swap: Замена
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Учитајте прилагођену конфигуријску датотеку
   data_folder: Мапа података
   enable: Омогућите алате за програмере
-  export_resource: Извозни ресурс
   install_folder: Инсталациона мапа
   load: Оптеретити
   settings_file: Подешавања
@@ -118,7 +119,7 @@ header:
     resources: Ресурси
     shortcuts: Пречице
     soundpack: Звучна паковања
-    specific_apps: Специфичне апликације
+    specific_apps: Подешавања по апликацији
     theme: Тема
     wallpaper: Позадине
     widget: Видгети
@@ -138,6 +139,7 @@ remove: Скинути
 resources:
   app_outdated: Овај ресурс захтева новију верзију СЕЕЛЕН-а да ради правилно.
   discover: Откријте више ресурса
+  export: Извозни ресурс
   open_folder: Отворите мапу ресурса
   outdated: >-
     Овај ресурс је дизајниран за старију верзију СЕЕЛЕН УИ и можда неће радити

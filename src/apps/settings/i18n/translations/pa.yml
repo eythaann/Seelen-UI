@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: ਮਿਟਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
   delete: ਮਿਟਾਓ
   export: ਨਿਰਯਾਤ
+  export_full: ਐਪਲੀਕੇਸ਼ਨ ਦੁਆਰਾ ਸੈਟਿੰਗਜ਼ ਨਿਰਯਾਤ ਕਰੋ
   extra_info: ਵੇਖਣਯੋਗ UI ਪ੍ਰਤੀ ਐਪ ਨੂੰ ਸਿਰਫ ਇਕ ਪਛਾਣਕਰਤਾ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਨ
   identifier:
     add_block: ਬਲਾਕ ਸ਼ਾਮਲ ਕਰੋ
@@ -64,6 +65,7 @@ apps_configurations:
       path: ਮਾਰਗ
       title: ਸਿਰਲੇਖ
   import: ਆਯਾਤ ਕਰੋ
+  import_full: ਐਪਲੀਕੇਸ਼ਨ ਦੁਆਰਾ ਸੈਟਿੰਗਾਂ ਆਯਾਤ ਕਰੋ
   new: ਨਵਾਂ
   search: ਖੋਜ
   swap: ਸਵੈਪ
@@ -75,7 +77,6 @@ devtools:
   custom_config_file: ਕਸਟਮ ਕੌਂਫਿਗ ਫਾਈਲ ਲੋਡ ਕਰੋ
   data_folder: ਡਾਟਾ ਫੋਲਡਰ
   enable: ਡਿਵੈਲਪਰ ਟੂਲਸ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
-  export_resource: ਨਿਰਯਾਤ ਸਰੋਤ
   install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
@@ -112,7 +113,7 @@ header:
     resources: ਸਰੋਤ
     shortcuts: ਸ਼ਾਰਟਕੱਟ
     soundpack: ਧੁਨੀ ਪੈਕ
-    specific_apps: ਖਾਸ ਐਪਸ
+    specific_apps: ਐਪਲੀਕੇਸ਼ਨ ਦੁਆਰਾ ਸੈਟਿੰਗਾਂ
     theme: ਥੀਮ
     wallpaper: ਵਾਲਪੇਪਰ
     widget: ਵਿਜੇਟਸ
@@ -132,6 +133,7 @@ remove: ਹਟਾਓ
 resources:
   app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ
+  export: ਨਿਰਯਾਤ ਸਰੋਤ
   open_folder: ਓਪਨ ਸਰੋਤ ਫੋਲਡਰ
   outdated: >-
     ਇਹ ਸਰੋਤ ਸੰਸਥ UI ਦੇ ਪੁਰਾਣੇ ਸੰਸਕਰਣ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਸੀ ਅਤੇ ਸ਼ਾਇਦ ਸਹੀ ਤਰ੍ਹਾਂ

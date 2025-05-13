@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: हटाने की पुष्टि करें
   delete: मिटाना
   export: निर्यात
+  export_full: आवेदन द्वारा निर्यात सेटिंग्स
   extra_info: >-
     Seelen UI प्रति ऐप केवल एक पहचानकर्ता का उपयोग करता है (पहला मैच मिला) इसलिए
     कि कैसे विशिष्ट है, इसका क्रम महत्वपूर्ण है, नवीनतम जोड़ा को प्राथमिकता दी
@@ -68,6 +69,7 @@ apps_configurations:
       path: पथ
       title: शीर्षक
   import: आयात
+  import_full: आवेदन द्वारा आयात सेटिंग्स
   new: नया
   search: खोज
   swap: बदलना
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: कस्टम कॉन्फ़िगर फ़ाइल लोड करें
   data_folder: डेटा फ़ोल्डर
   enable: डेवलपर टूल सक्षम करें
-  export_resource: निर्यात संसाधन
   install_folder: स्थापना फ़ोल्डर
   load: भार
   settings_file: सेटिंग संचिका
@@ -118,7 +119,7 @@ header:
     resources: संसाधन
     shortcuts: शॉर्टकट
     soundpack: साउंड पैक
-    specific_apps: विशिष्ट ऐप्स
+    specific_apps: आवेदन द्वारा सेटिंग्स
     theme: विषय-वस्तु
     wallpaper: वॉलपेपर
     widget: विजेट
@@ -140,6 +141,7 @@ resources:
     इस संसाधन को ठीक से काम करने के लिए सेलेन यूआई के एक नए संस्करण की आवश्यकता
     होती है।
   discover: अधिक संसाधनों की खोज करें
+  export: निर्यात संसाधन
   open_folder: संसाधन फ़ोल्डर खोलें
   outdated: >-
     यह संसाधन सीलेन यूआई के पुराने संस्करण के लिए डिज़ाइन किया गया था और ठीक से

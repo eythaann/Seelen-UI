@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Patvirtinkite ištrynti
   delete: Ištrinti
   export: Eksportas
+  export_full: Eksportuoti nustatymus pagal programą
   extra_info: >-
     „Seelen“ vartotojo sąsaja naudoja tik vieną identifikatorių vienai programai
     (rasta pirmoji atitiktis), todėl svarbi tvarka, kaip nurodyta, bus teikiama
@@ -68,6 +69,7 @@ apps_configurations:
       path: Kelias
       title: Pavadinimas
   import: Importuoti
+  import_full: Nustatymų importavimas pagal programą
   new: Nauja
   search: Paieška
   swap: Apsikeitimas
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą
   data_folder: Duomenų aplankas
   enable: Įgalinkite kūrėjo įrankius
-  export_resource: Eksporto ištekliai
   install_folder: Diegimo aplankas
   load: Įkelti
   settings_file: Nustatymų failas
@@ -116,7 +117,7 @@ header:
     resources: Ištekliai
     shortcuts: Nuorodos
     soundpack: Garso paketai
-    specific_apps: Konkrečios programos
+    specific_apps: Nustatymai pagal programą
     theme: Temos
     wallpaper: Užsklandos
     widget: Valdikliai
@@ -136,6 +137,7 @@ remove: Pašalinti
 resources:
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
   discover: Atraskite daugiau išteklių
+  export: Eksporto ištekliai
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti

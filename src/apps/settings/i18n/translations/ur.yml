@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: حذف کرنے کی تصدیق کریں
   delete: حذف کریں
   export: برآمد
+  export_full: درخواست کے ذریعہ ترتیبات برآمد کریں
   extra_info: >-
     Seelen UI فی ایپ صرف ایک شناخت کنندہ کا استعمال کرتا ہے (پہلا میچ ملا) لہذا
     ترتیب کس طرح مخصوص کی گئی ہے اہم ہے، تازہ ترین شامل کو ترجیح دی جائے گی،
@@ -68,6 +69,7 @@ apps_configurations:
       path: راستہ
       title: عنوان
   import: درآمد
+  import_full: درخواست کے ذریعہ ترتیبات درآمد کریں
   new: نئی
   search: تلاش
   swap: تبادلہ
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر
   enable: ڈویلپر ٹولز کو فعال کریں
-  export_resource: برآمدی وسائل
   install_folder: انسٹالیشن فولڈر
   load: لوڈ
   settings_file: سیٹنگ فاعل
@@ -116,7 +117,7 @@ header:
     resources: وسائل
     shortcuts: شارٹ کٹ
     soundpack: ساؤنڈ پیک
-    specific_apps: مخصوص ایپس
+    specific_apps: درخواست کے ذریعہ ترتیبات
     theme: موضوعات
     wallpaper: وال پیپر
     widget: ویجٹ
@@ -138,6 +139,7 @@ resources:
     اس وسیلہ کے لئے مناسب طریقے سے کام کرنے کے لئے سیلین UI کا ایک نیا ورژن
     درکار ہے۔
   discover: مزید وسائل دریافت کریں
+  export: برآمدی وسائل
   open_folder: اوپن ریسورس فولڈر
   outdated: >-
     یہ وسیلہ سیلین UI کے پرانے ورژن کے لئے ڈیزائن کیا گیا تھا اور ہوسکتا ہے کہ

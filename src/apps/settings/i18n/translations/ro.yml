@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Confirmă ștergerea
   delete: Șterge
   export: Export
+  export_full: Exportul setărilor în funcție de aplicație
   extra_info: >-
     Seelen UI folosește un singur identificator pe aplicație (prima potrivire
     găsită), astfel încât ordinea în modul în care este specificată este
@@ -68,6 +69,7 @@ apps_configurations:
       path: Cale
       title: Titlu
   import: Import
+  import_full: Importul setărilor în funcție de aplicație
   new: Nou
   search: Căutare
   swap: Swap
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Încărcați fișierul de configurare personalizat
   data_folder: Folder de date
   enable: Activați instrumentele pentru dezvoltatori
-  export_resource: Export de resurse
   install_folder: Folder de instalare
   load: Sarcină
   settings_file: Fișier de setări
@@ -118,7 +119,7 @@ header:
     resources: Resurse
     shortcuts: Comitete rapide
     soundpack: Pachete de sunet
-    specific_apps: Aplicații specifice
+    specific_apps: Setări în funcție de aplicație
     theme: Teme
     wallpaper: Imagini de fundal
     widget: Widget-uri
@@ -140,6 +141,7 @@ resources:
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a
     funcționa corect.
   discover: Descoperiți mai multe resurse
+  export: Export de resurse
   open_folder: Deschideți folderul de resurse
   outdated: >-
     Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și

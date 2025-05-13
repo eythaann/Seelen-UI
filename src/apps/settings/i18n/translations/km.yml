@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: បញ្ជាក់ការលុប
   delete: លុប
   export: នាំចេញ
+  export_full: ការនាំចេញការនាំចេញតាមពាក្យសុំ
   extra_info: >-
     Seeen UI ប្រើគ្រឿងសម្គាល់តែមួយប៉ុណ្ណោះក្នុងមួយកម្មវិធីមួយ
     (រកឃើញការប្រកួតដំបូង)
@@ -67,6 +68,7 @@ apps_configurations:
       path: ផ្លូវ
       title: ចំណងជើង
   import: នាំចូល
+  import_full: ការកំណត់នាំចូលតាមពាក្យសុំ
   new: ថ្មី។
   search: ស្វែងរក
   swap: ប្តូរ
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: ផ្ទុកឯកសារកំណត់រចនាសម្ព័ន្ធផ្ទាល់ខ្លួន
   data_folder: ថតទិន្នន័យ
   enable: បើកឧបករណ៍អ្នកអភិវឌ្ឍន៍
-  export_resource: ធនធាននាំចេញ
   install_folder: ថតឯកសារដំឡើង
   load: ផ្ទុក
   settings_file: ឯកសារការកំណត់
@@ -116,7 +117,7 @@ header:
     resources: ធនធាន
     shortcuts: ផ្លូវកាត់
     soundpack: កញ្ចប់សំលេង
-    specific_apps: កម្មវិធីជាក់លាក់
+    specific_apps: ការកំណត់តាមពាក្យសុំ
     theme: ស្បែក
     wallpaper: ផាបផេច
     widget: ធាតុក្រាហ្វិក
@@ -136,6 +137,7 @@ remove: រមកមិ avad ចេញ
 resources:
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
   discover: ស្វែងយល់ពីធនធានបន្ថែម
+  export: ធនធាននាំចេញ
   open_folder: បើកថតធនធាន
   outdated: >-
     ធនធាននេះត្រូវបានរចនាឡើងសម្រាប់កំណែចាស់របស់ Seeen UI

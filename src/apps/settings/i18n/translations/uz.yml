@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: O'chirishni tasdiqlang
   delete: O'chirmoq
   export: Eksport
+  export_full: Ilova orqali eksport sozlamalari
   extra_info: >-
     Seelen UI har bir ilovada faqat bitta identifikatordan foydalanadi (birinchi
     moslik topildi), shuning uchun qanday belgilanish tartibi muhim, oxirgi
@@ -68,6 +69,7 @@ apps_configurations:
       path: Yo'l
       title: Sarlavha
   import: Import
+  import_full: Ilova orqali import sozlamalari
   new: Yangi
   search: Qidirmoq
   swap: Almashmoq
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Custom Config faylini yuklang
   data_folder: Ma'lumotlar papkasi
   enable: Ishlab chiqaruvchi vositalarni yoqish
-  export_resource: Eksport manbai
   install_folder: O'rnatish papkasini o'rnatish
   load: Yuklamoq
   settings_file: Sozlamalar fayli
@@ -118,7 +119,7 @@ header:
     resources: Resurslar
     shortcuts: Yorliqlar
     soundpack: Ovozli paketlar
-    specific_apps: Muayyan ilovalar
+    specific_apps: Ilova orqali sozlash
     theme: Mavzular
     wallpaper: Fon rasmlari
     widget: Vidjetlar
@@ -138,6 +139,7 @@ remove: Olib tashlamoq
 resources:
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
   discover: Ko'proq resurslarni kashf eting
+  export: Eksport manbai
   open_folder: Resurslar jildini oching
   outdated: >-
     Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri

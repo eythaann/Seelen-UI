@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Qinisekisa ukususa
   delete: Cisha
   export: Thumela kwamanye amazwe
+  export_full: Thumela Amasethingi okuthumela ngaphandle ngesicelo
   extra_info: >-
     I-Seelen UI isebenzisa kuphela isikhombi esisodwa sohlelo lokusebenza
     ngalunye (umdlalo wokuqala otholakala) ngakho-ke i-oda lokuthi libalulekile
@@ -68,6 +69,7 @@ apps_configurations:
       path: Indlela
       title: Isihloko
   import: Ngenisa ezweni
+  import_full: Ngenisa amasethingi ngohlelo lokusebenza
   new: '-Kwanamuhla'
   search: Sesha
   swap: Shintshela
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Layisha ifayela le-config yangokwezifiso
   data_folder: Ifolda yedatha
   enable: Nika amandla amathuluzi onjiniyela
-  export_resource: Ukuthumela impahla
   install_folder: Ifolda yokufaka
   load: Thwala
   settings_file: Ifayela lezilungiselelo
@@ -118,7 +119,7 @@ header:
     resources: Izinsizakusebenza
     shortcuts: Amashoshothi
     soundpack: Amaphakethe omsindo
-    specific_apps: Izinhlelo zokusebenza ezikhethekile
+    specific_apps: Izilungiselelo ngesicelo
     theme: Izingqizi
     wallpaper: Ama-Wallpaper
     widget: Amawijethi
@@ -138,6 +139,7 @@ remove: Susa
 resources:
   app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
   discover: Thola izinsiza ezengeziwe
+  export: Ukuthumela impahla
   open_folder: Ifolda Yezisetshenziswa
   outdated: >-
     Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze

@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Potvrďte odstránenie
   delete: Vymazať
   export: Export
+  export_full: Export nastavení podľa aplikácie
   extra_info: >-
     Používateľské rozhranie Seelen používa iba jeden identifikátor na aplikáciu
     (prvá nájdená zhoda), takže poradie, v akom sú špecifikované, je dôležité.
@@ -68,6 +69,7 @@ apps_configurations:
       path: Cesta
       title: Názov
   import: Dovoz
+  import_full: Import nastavení podľa aplikácie
   new: Nový
   search: Vyhľadávanie
   swap: Vymeniť
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Načítať vlastný konfiguračný súbor
   data_folder: Priečinok
   enable: Povoľte vývojárskym nástrojom
-  export_resource: Vývozný zdroj
   install_folder: Inštalačný priečinok
   load: Naložiť
   settings_file: Nastavovací súbor
@@ -116,7 +117,7 @@ header:
     resources: Zdroje
     shortcuts: Skratky
     soundpack: Zvukové balíky
-    specific_apps: Konkrétne aplikácie
+    specific_apps: Nastavenia podľa aplikácie
     theme: Témy
     wallpaper: Tapety na plochu
     widget: Widgety
@@ -138,6 +139,7 @@ resources:
     Tento zdroj si na správne fungovanie vyžaduje novšiu verziu používateľského
     rozhrania Seelen.
   discover: Objavte ďalšie zdroje
+  export: Vývozný zdroj
   open_folder: Otvorenie priečinka so zdrojmi
   outdated: >-
     Tento zdroj bol navrhnutý pre staršiu verziu používateľského rozhrania

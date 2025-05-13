@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Потвърдете изтриването
   delete: Изтрий
   export: Експорт
+  export_full: Експортиране на настройки по приложения
   extra_info: >-
     Потребителският интерфейс на Seelen използва само един идентификатор за
     приложение (първото намерено съвпадение), така че редът на посочване е
@@ -68,6 +69,7 @@ apps_configurations:
       path: Пътека
       title: Заглавие
   import: Импортиране
+  import_full: Импортиране на настройки по приложения
   new: Ново
   search: Търсене
   swap: Размяна
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Заредете персонализиран конфигурационен файл
   data_folder: Папка с данни
   enable: Активирайте инструментите за разработчици
-  export_resource: Износ на ресурси
   install_folder: Инсталационна папка
   load: Зареждане
   settings_file: Файл за настройки
@@ -118,7 +119,7 @@ header:
     resources: Ресурси
     shortcuts: Преки пътища
     soundpack: Звукови пакети
-    specific_apps: Конкретни приложения
+    specific_apps: Настройки по приложение
     theme: Теми
     wallpaper: Тапети
     widget: Уиджети
@@ -138,6 +139,7 @@ remove: Извадете
 resources:
   app_outdated: Този ресурс изисква по-нова версия на Seelen UI, за да работи правилно.
   discover: Открийте още ресурси
+  export: Износ на ресурси
   open_folder: Отваряне на папката с ресурси
   outdated: >-
     Този ресурс е разработен за по-стара версия на Seelen UI и може да не работи

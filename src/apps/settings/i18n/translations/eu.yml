@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Berretsi Ezabatu
   delete: Ezabatu
   export: Esportagai
+  export_full: Esportatu ezarpenak aplikazioaren arabera
   extra_info: >-
     Seelen UIk aplikazio bakoitzeko identifikatzaile bakarra erabili (lehen
     partidua aurkitu da), beraz, zehatz-mehatz azaltzen da, azken erantsia
@@ -68,6 +69,7 @@ apps_configurations:
       path: Bidea
       title: Izenburua
   import: Inportatu
+  import_full: Inportatu ezarpenak aplikazioaren arabera
   new: Berri
   search: Araketa
   swap: Tratu
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Kargatu Config fitxategi pertsonalizatua
   data_folder: Datu karpeta
   enable: Gaitu garatzaileen tresnak
-  export_resource: Esportatu baliabidea
   install_folder: Instalazio karpeta
   load: Zamatu
   settings_file: Ezarpenak fitxategia
@@ -116,7 +117,7 @@ header:
     resources: Baliabide
     shortcuts: Lasterbideak
     soundpack: Soinu paketeak
-    specific_apps: Aplikazio espezifikoak
+    specific_apps: Ezarpenak aplikazioaren arabera
     theme: Haibideak
     wallpaper: Horma-irudiak
     widget: Widgets
@@ -138,6 +139,7 @@ resources:
     Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona
     dezan.
   discover: Ezagutu baliabide gehiago
+  export: Esportatu baliabidea
   open_folder: Baliabide irekiko karpeta
   outdated: >-
     Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala

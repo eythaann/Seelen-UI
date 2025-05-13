@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Confirmeu Suprimeix
   delete: Esborrar
   export: Exportar
+  export_full: Exporta la configuració per sol·licitud
   extra_info: >-
     La interfície d'usuari de Seelen només utilitza un identificador per
     aplicació (primer partit que es troba), de manera que l'ordre de com
@@ -68,6 +69,7 @@ apps_configurations:
       path: Camí
       title: Títol
   import: Importar
+  import_full: Importa la configuració per sol·licitud
   new: Nou
   search: Cerca
   swap: Canviar
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Carregueu el fitxer de configuració personalitzada
   data_folder: Carpeta de dades
   enable: Activa les eines de desenvolupadors
-  export_resource: Els recursos d’exportació
   install_folder: Carpeta d'instal·lació
   load: Carregar
   settings_file: Arxiu de configuració
@@ -116,7 +117,7 @@ header:
     resources: Recursos
     shortcuts: Dreceres
     soundpack: Paquets de son
-    specific_apps: Aplicacions específiques
+    specific_apps: Configuració per aplicació
     theme: Temes
     wallpaper: Fons de pantalla
     widget: Widgets
@@ -138,6 +139,7 @@ resources:
     Aquest recurs requereix una versió més recent de la interfície d'usuari de
     Seelen per funcionar correctament.
   discover: Descobriu més recursos
+  export: Els recursos d’exportació
   open_folder: Obrir la carpeta de recursos
   outdated: >-
     Aquest recurs va ser dissenyat per a una versió anterior de la interfície

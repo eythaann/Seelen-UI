@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Confirm Delete
   delete: Delete
   export: Export
+  export_full: Export settings by application
   extra_info: >-
     Seelen UI use only one identifier per app (first match found) so the order
     in how are specificated is important, the latest added will be prioritized,
@@ -67,6 +68,7 @@ apps_configurations:
       path: Path
       title: Title
   import: Import
+  import_full: Import settings by application
   new: New
   search: Search
   swap: Swap
@@ -78,7 +80,6 @@ devtools:
   custom_config_file: Load Custom Config File
   data_folder: Data Folder
   enable: Enable Developer Tools
-  export_resource: Export Resource
   install_folder: Installation Folder
   load: Load
   settings_file: Settings File
@@ -115,7 +116,7 @@ header:
     resources: Resources
     shortcuts: Shortcuts
     soundpack: Sound Packs
-    specific_apps: Specific Apps
+    specific_apps: Settings by Application
     theme: Themes
     wallpaper: Wallpapers
     widget: Widgets
@@ -135,6 +136,7 @@ remove: Remove
 resources:
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
   discover: Discover more resources
+  export: Export Resource
   open_folder: Open resource folder
   outdated: >-
     This resource was designed for an older version of Seelen UI and might not

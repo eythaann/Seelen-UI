@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Potvrdi Delete
   delete: Izbrisati
   export: Izvoz
+  export_full: Postavke izvoza putem aplikacije
   extra_info: >-
     Seelen UI koristi samo jedan identifikator po aplikaciji (prvo pronađeno
     podudaranje) tako da je redoslijed u načinu na koji su specificirani važan,
@@ -68,6 +69,7 @@ apps_configurations:
       path: Put
       title: Titula
   import: Uvoz
+  import_full: Postavke uvoza putem aplikacije
   new: Novi
   search: traži
   swap: Mijenjati
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku
   data_folder: Mapa podataka
   enable: Omogućite alate za razvojne programere
-  export_resource: Izvozni resurs
   install_folder: Mapa za instalaciju
   load: Opterećenje
   settings_file: Datoteka postavki
@@ -116,7 +117,7 @@ header:
     resources: Resursi
     shortcuts: Prečac
     soundpack: Zvučni paketi
-    specific_apps: Određene aplikacije
+    specific_apps: Postavke prema aplikaciji
     theme: Teme
     wallpaper: Pozadine
     widget: Widgeti
@@ -138,6 +139,7 @@ resources:
     Ovaj resurs zahtijeva da novija verzija Seelen korisničkog sučelja radi
     ispravno.
   discover: Otkrijte više resursa
+  export: Izvozni resurs
   open_folder: Mapa otvorenih resursa
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju seelen korisničkog sučelja i

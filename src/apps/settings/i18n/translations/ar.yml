@@ -41,6 +41,7 @@ apps_configurations:
   confirm_delete_title: تأكيد الحذف
   delete: حذف
   export: صدر
+  export_full: إعدادات التصدير حسب التطبيق
   extra_info: >-
     تستخدم واجهة Seelen معرف واحد  فقط لكل تطبيق (تم العثور على أول تطابق) فإن
     الترتيب في كيفية التحديد مهم، وسيتم إعطاء الأولوية لآخر إضافة، كما تلاحظ أنه
@@ -66,6 +67,7 @@ apps_configurations:
       path: طريق
       title: عنوان
   import: استيراد
+  import_full: استيراد الإعدادات حسب التطبيق
   new: جديد
   search: البحث
   swap: تبديل
@@ -77,7 +79,6 @@ devtools:
   custom_config_file: تحميل ملف الأعدادات المخصص
   data_folder: مجلد البيانات
   enable: تفعيل أدوات المطور
-  export_resource: موارد التصدير
   install_folder: مجلد التثبيت
   load: تحميل
   settings_file: ملف الإعدادات
@@ -114,7 +115,7 @@ header:
     resources: الموارد
     shortcuts: الاختصارات
     soundpack: حزم الصوت
-    specific_apps: تطبيقات محددة
+    specific_apps: الإعدادات حسب التطبيق
     theme: الموضوعات
     wallpaper: خلفيات
     widget: الأدوات
@@ -134,6 +135,7 @@ remove: الحذف
 resources:
   app_outdated: يتطلب هذا المورد إصدارًا أحدث من Seelen UI ليعمل بشكل صحيح.
   discover: اكتشف المزيد من الموارد
+  export: موارد التصدير
   open_folder: فتح مجلد الموارد
   outdated: تم تصميم هذا المورد لإصدار أقدم من Seelen UI وقد لا يعمل بشكل صحيح.
 save: حفظ

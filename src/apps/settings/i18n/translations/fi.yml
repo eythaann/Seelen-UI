@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Vahvista poistaminen
   delete: Poistaa
   export: Viedä
+  export_full: Vie asetukset sovelluksittain
   extra_info: >-
     Seelen -käyttöliittymä käyttää vain yhtä tunnistetta sovellusta kohden
     (ensimmäinen ottelu löydetty), joten tilaus kuinka spesifikaatio on tärkeä,
@@ -68,6 +69,7 @@ apps_configurations:
       path: Polku
       title: Otsikko
   import: Tuonti
+  import_full: Tuo asetukset sovelluksittain
   new: Uusi
   search: Hae
   swap: Vaihtaa
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Lataa mukautettu konfigurointitiedosto
   data_folder: Tietokansio
   enable: Ota kehittäjätyökalut käyttöön
-  export_resource: Vientiresurssi
   install_folder: Asennuskansio
   load: Ladata
   settings_file: Asetustiedosto
@@ -118,7 +119,7 @@ header:
     resources: Resurssit
     shortcuts: Pikakuvakkeet
     soundpack: Sound Packit
-    specific_apps: Erityiset sovellukset
+    specific_apps: Asetukset sovelluksen mukaan
     theme: Teemat
     wallpaper: Taustakuvat
     widget: Widgetit
@@ -138,6 +139,7 @@ remove: Poistaa
 resources:
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
   discover: Löydä lisää resursseja
+  export: Vientiresurssi
   open_folder: Avaa resurssikansio
   outdated: >-
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se

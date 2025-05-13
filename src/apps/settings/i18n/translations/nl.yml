@@ -42,6 +42,7 @@ apps_configurations:
   confirm_delete_title: Bevestig verwijderen
   delete: Verwijderen
   export: Exporteren
+  export_full: Instellingen exporteren per toepassing
   extra_info: >-
     Seelen UI gebruikt slechts één ID per app (eerste gevonden match), dus de
     volgorde waarin ze worden gespecificeerd is belangrijk. De laatst
@@ -68,6 +69,7 @@ apps_configurations:
       path: Pad
       title: Titel
   import: Importeren
+  import_full: Instellingen importeren per toepassing
   new: Nieuw
   search: Zoekopdracht
   swap: Ruilen
@@ -79,7 +81,6 @@ devtools:
   custom_config_file: Laad het aangepaste configuratiebestand
   data_folder: Gegevensmap
   enable: Schakel ontwikkelaarstools in
-  export_resource: Exporteren
   install_folder: Installatiemap
   load: Laden
   settings_file: Instellingenbestand
@@ -116,7 +117,7 @@ header:
     resources: Bronnen
     shortcuts: Snelkoppelingen
     soundpack: Geluidspakketten
-    specific_apps: Specifieke apps
+    specific_apps: Instellingen per toepassing
     theme: Thema's
     wallpaper: Behang
     widget: Widgets
@@ -136,6 +137,7 @@ remove: Verwijderen
 resources:
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
   discover: Ontdek meer bronnen
+  export: Exporteren
   open_folder: Map met bronnen openen
   outdated: >-
     Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
