@@ -28,7 +28,7 @@ use std::{
 };
 
 use windows::{
-    core::{BSTR, GUID, PCWSTR, PWSTR},
+    core::{BSTR, GUID, PCWSTR},
     ApplicationModel::AppInfo,
     Storage::Streams::{
         DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
@@ -445,15 +445,13 @@ impl WindowsApi {
         Ok(is_frozen)
     }
 
-    pub fn exe_path_by_process(process_id: u32) -> Result<String> {
-        let mut len = 512_u32;
-        let mut path: Vec<u16> = vec![0; len as usize];
-        let text_ptr = path.as_mut_ptr();
+    pub fn exe_path_by_process(process_id: u32) -> Result<OsString> {
+        let mut path = WindowsString::new_to_fill(1024);
         let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
         unsafe {
-            QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
+            QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, path.as_pwstr(), &mut 1024)?;
         }
-        Ok(String::from_utf16(&path[..len as usize])?)
+        Ok(path.to_os_string())
     }
 
     pub fn get_class(hwnd: HWND) -> Result<String> {

@@ -15,6 +15,7 @@
 - styles for dock media item.
 - not scrollable dock on overflow (many items).
 - media player not being correctly updated on player close event.
+- (#636) input experience and another background process appearing on dock.
 
 ## [2.3.2]
 ### enhancements

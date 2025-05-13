@@ -1,21 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/settings_by_app.schema.json
 - name: Pinetry
   identifier:
     id: pinentry.exe
     kind: Exe
-    matching_strategy: Legacy
+    matchingStrategy: Equals
   options:
     - unmanage
 - name: TaskManagerWindow
   identifier:
     id: TaskManagerWindow
     kind: Class
-    matching_strategy: Legacy
+    matchingStrategy: Equals
   options:
     - float
 - name: AutoHotkeyUX.exe
   identifier:
     id: AutoHotkeyUX.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage

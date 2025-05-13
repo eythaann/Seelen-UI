@@ -1,12 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/settings_by_app.schema.json
 - name: Steam
   identifier:
     id: (steamwebhelper.exe)|(steam.exe)
     kind: Exe
-    matching_strategy: Regex
+    matchingStrategy: Regex
     and:
       - id: Steam
         kind: Title
-        matching_strategy: equals
+        matchingStrategy: Equals
         negation: true
   options:
     - unmanage
@@ -14,8 +15,8 @@
 - name: Steam Apps/Games
   identifier:
     id: steamapps
-    kind: path
-    matching_strategy: contains
+    kind: Path
+    matchingStrategy: Contains
   options:
     - unmanage
 
@@ -23,7 +24,7 @@
   identifier:
     id: GameBar.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - hidden
 
@@ -31,6 +32,6 @@
   identifier:
     id: XboxGameBarWidgets.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - hidden

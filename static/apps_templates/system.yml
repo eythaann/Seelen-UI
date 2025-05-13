@@ -1,8 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/settings_by_app.schema.json
 - name: Snipping Tool
   identifier:
     id: SnippingTool.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 
@@ -10,7 +11,7 @@
   identifier:
     id: Calculator
     kind: Title
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 
@@ -18,7 +19,7 @@
   identifier:
     id: Dropbox.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 
@@ -26,7 +27,7 @@
   identifier:
     id: OneDrive.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 
@@ -34,41 +35,59 @@
   identifier:
     id: PowerToys.ColorPickerUI.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 - name: PowerToys CropAndLock
   identifier:
     id: PowerToys.CropAndLock.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 - name: PowerToys ImageResizer
   identifier:
     id: PowerToys.ImageResizer.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 - name: PowerToys Peek UI
   identifier:
     id: PowerToys.Peek.UI.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 - name: PowerToys PowerLauncher
   identifier:
     id: PowerToys.PowerLauncher.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage
 - name: PowerToys PowerAccent
   identifier:
     id: PowerToys.PowerAccent.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
+    - unmanage
+
+- name: System Background Apps
+  identifier:
+    id: C:\Windows\SystemApps
+    kind: Path
+    matchingStrategy: StartsWith
+  options:
+    - hidden
+    - unmanage
+
+- name: Idle Windows Settings
+  identifier:
+    id: C:\Windows\ImmersiveControlPanel
+    kind: Path
+    matchingStrategy: StartsWith
+  options:
+    - hidden
     - unmanage

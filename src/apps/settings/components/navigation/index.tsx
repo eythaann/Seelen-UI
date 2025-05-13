@@ -66,7 +66,7 @@ export const Navigation = memo(() => {
           {[RoutePath.General, RoutePath.Resource, RoutePath.Shortcuts].map(Mapper)}
         </div>
 
-        {themesWithSettings.length && (
+        {!!themesWithSettings.length && (
           <>
             <div className={cs.separator} />
             <div className={cs.group}>

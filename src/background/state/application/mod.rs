@@ -290,7 +290,7 @@ impl FullState {
 
         self.settings_by_app
             .iter_mut()
-            .for_each(|app| app.identifier.cache_regex());
+            .for_each(|app| app.identifier.perform_cache());
         Ok(())
     }
 

@@ -1,7 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/settings_by_app.schema.json
 - name: Zoom.exe
   identifier:
     id: Zoom.exe
     kind: Exe
-    matching_strategy: Equals
+    matchingStrategy: Equals
   options:
     - unmanage

@@ -1,14 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/settings_by_app.schema.json
 - name: Base
   identifier:
     id: (?i)((install)|(setup)|(complete)|(menu)|(notification))
     kind: Title
-    matching_strategy: Regex
+    matchingStrategy: Regex
   options:
     - unmanage
 - name: Seelen
   identifier:
     id: seelen-ui.exe
-    kind: exe
-    matching_strategy: equals
+    kind: Exe
+    matchingStrategy: Equals
   options:
     - unmanage

@@ -1,8 +1,5 @@
 use seelen_core::rect::Rect;
-use std::{
-    fmt::{Debug, Display},
-    path::PathBuf,
-};
+use std::fmt::{Debug, Display};
 
 use windows::{
     ApplicationModel::AppInfo,
@@ -241,7 +238,11 @@ impl Window {
 
     /// is the window an Application Frame Host
     pub fn is_frame(&self) -> Result<bool> {
-        Ok(self.process().program_path()? == PathBuf::from(APP_FRAME_HOST_PATH))
+        Ok(self
+            .process()
+            .program_path()?
+            .as_os_str()
+            .eq_ignore_ascii_case(APP_FRAME_HOST_PATH))
     }
 
     /// will fail if the window is not a frame
@@ -288,17 +289,12 @@ impl Window {
     }
 
     pub fn is_real_window(&self) -> bool {
-        let path = match self.process().program_path() {
-            Ok(path) => path,
-            Err(_) => return false,
-        };
+        // unmanageable window
+        if self.process().open_limited_handle().is_err() {
+            return false;
+        }
 
-        if !self.is_visible()
-            || path.starts_with("C:\\Windows\\SystemApps")
-            || path.starts_with("C:\\Windows\\ImmersiveControlPanel")
-            || self.parent().is_some()
-            || self.is_seelen_overlay()
-        {
+        if !self.is_visible() || self.parent().is_some() || self.is_seelen_overlay() {
             return false;
         }
 
