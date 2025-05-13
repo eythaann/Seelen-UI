@@ -23,6 +23,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'virtualDesktopStrategy',
     'updater',
     'byWidget',
+    'byTheme',
   ]);
 
   // migration since v2.1.0

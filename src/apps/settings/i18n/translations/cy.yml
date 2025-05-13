@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
     iawn.
-  open_folder: Ffolder Resouce Agored
+  discover: Darganfyddwch fwy o adnoddau
+  open_folder: Ffolder Adnoddau Agored
   outdated: >-
     Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na
     fyddai'n gweithio'n iawn.

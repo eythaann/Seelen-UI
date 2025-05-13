@@ -136,7 +136,8 @@ resources:
   app_outdated: >-
     Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını
     tələb edir.
-  open_folder: Açıq Resouze qovluğu
+  discover: Daha çox mənbəyi kəşf edin
+  open_folder: Açıq Resurs qovluğu
   outdated: >-
     Bu qaynaq Seelen UI-nin köhnə bir versiyası üçün hazırlanmış və düzgün
     işləməyə bilər.

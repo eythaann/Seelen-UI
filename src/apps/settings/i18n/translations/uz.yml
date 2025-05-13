@@ -137,7 +137,8 @@ quit: Ketmoq
 remove: Olib tashlamoq
 resources:
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
-  open_folder: Ochiq qayta ishlash papkasini oching
+  discover: Ko'proq resurslarni kashf eting
+  open_folder: Resurslar jildini oching
   outdated: >-
     Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri
     ishlamasligi mumkin.

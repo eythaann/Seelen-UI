@@ -135,7 +135,8 @@ quit: Afslut
 remove: Fjerne
 resources:
   app_outdated: Denne ressource kræver en nyere version af Seelen UI for at fungere korrekt.
-  open_folder: Åbn resouce-mappen
+  discover: Opdag flere ressourcer
+  open_folder: Åbn ressourcemappen
   outdated: >-
     Denne ressource er designet til en ældre version af Seelen UI og fungerer
     muligvis ikke korrekt.

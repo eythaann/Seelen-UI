@@ -134,7 +134,8 @@ quit: Acha
 remove: Ondoa
 resources:
   app_outdated: Rasilimali hii inahitaji toleo jipya la Seelen UI kufanya kazi vizuri.
-  open_folder: Fungua folda ya Resouce
+  discover: Gundua rasilimali zaidi
+  open_folder: Fungua folda ya rasilimali
   outdated: >-
     Rasilimali hii ilibuniwa kwa toleo la zamani la Seelen UI na linaweza
     kufanya kazi vizuri.

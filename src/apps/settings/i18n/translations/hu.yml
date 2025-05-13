@@ -136,6 +136,7 @@ quit: Kilépés
 remove: Eltávolítás
 resources:
   app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
+  discover: További források felfedezése
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
     Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,

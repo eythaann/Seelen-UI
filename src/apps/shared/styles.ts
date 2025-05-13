@@ -9,7 +9,7 @@ import {
   ThemeList,
   UIColors,
 } from '@seelen-ui/lib';
-import { Theme, WidgetId } from '@seelen-ui/lib/types';
+import { WidgetId } from '@seelen-ui/lib/types';
 import { useEffect, useState } from 'react';
 
 type Args = undefined | string | { [x: string]: any };
@@ -62,8 +62,15 @@ const OLD_THEME_KEYS_BY_WIDGET_ID = {
   [SeelenWallWidgetId]: 'wall',
 } as Record<WidgetId, string>;
 
-function loadThemes(allThemes: Theme[], selected: string[]) {
+function isValidCssVariableName(name: string) {
+  return /^--[\w\d-]*$/.test(name);
+}
+
+function loadThemes(allThemes: ThemeList, settings: Settings) {
+  const variablesByTheme = settings.inner.byTheme;
+  const selected = settings.inner.selectedThemes;
   const themes = allThemes
+    .asArray()
     .filter((theme) => selected.includes(theme.metadata.filename))
     .sort((a, b) => {
       return selected.indexOf(a.metadata.filename) - selected.indexOf(b.metadata.filename);
@@ -83,31 +90,51 @@ function loadThemes(allThemes: Theme[], selected: string[]) {
     if (!cssFileContent) {
       continue;
     }
+
+    for (const def of theme.settings) {
+      if (isValidCssVariableName(def.name)) {
+        try {
+          CSS.registerProperty({
+            name: def.name,
+            syntax: def.syntax,
+            inherits: true,
+            initialValue: `${def.initialValue}${
+              'initialValueUnit' in def ? def.initialValueUnit : ''
+            }`,
+          });
+        } catch (_e) {}
+      }
+    }
+
+    const variableValues = variablesByTheme[theme.id] ?? {};
+    const variablesContent = Object.entries(variableValues)
+      .filter(([name]) => isValidCssVariableName(name))
+      .map(([name, value]) => `${name}: ${value || ''};`)
+      .join('\n');
+
     let layerName = 'theme-' + theme.metadata.filename.replace(/[\.]/g, '_');
-    element.textContent += `@layer ${layerName} {\n${cssFileContent}\n}\n`;
+    element.textContent += `@layer ${layerName} {\n:root {${variablesContent}}\n${cssFileContent}\n}\n`;
   }
 
   document.head.appendChild(element);
 }
 
 export async function StartThemingTool() {
-  const settings = await Settings.getAsync();
+  let settings = await Settings.getAsync();
+  let themes = await ThemeList.getAsync();
 
-  let allThemes = (await ThemeList.getAsync()).asArray();
-  let selected = settings.inner.selectedThemes;
-
-  await ThemeList.onChange((list) => {
-    allThemes = list.asArray();
-    loadThemes(allThemes, selected);
+  await ThemeList.onChange((newThemes) => {
+    themes = newThemes;
+    loadThemes(themes, settings);
   });
 
-  await Settings.onChange((settings) => {
-    selected = settings.inner.selectedThemes;
-    loadThemes(allThemes, selected);
+  await Settings.onChange((newSettings) => {
+    settings = newSettings;
+    loadThemes(themes, settings);
   });
 
   (await UIColors.getAsync()).setAsCssVariables();
-  UIColors.onChange((colors) => colors.setAsCssVariables());
+  await UIColors.onChange((colors) => colors.setAsCssVariables());
 
-  loadThemes(allThemes, selected);
+  loadThemes(themes, settings);
 }

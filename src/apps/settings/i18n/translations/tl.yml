@@ -141,7 +141,8 @@ resources:
   app_outdated: >-
     Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
     Seelen UI upang gumana nang maayos.
-  open_folder: Buksan ang folder ng resouce
+  discover: Tuklasin ang higit pang mga mapagkukunan
+  open_folder: Buksan ang folder ng mapagkukunan
   outdated: >-
     Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
     Seelen UI at maaaring hindi gumana nang maayos.

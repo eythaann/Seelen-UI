@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan
     baik.
-  open_folder: Buka Folder Resouce
+  discover: Cari lebih banyak sumber
+  open_folder: Buka Folder Sumber
   outdated: >-
     Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi
     dengan baik.

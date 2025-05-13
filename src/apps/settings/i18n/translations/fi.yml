@@ -137,6 +137,7 @@ quit: Lopettaa
 remove: Poistaa
 resources:
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
+  discover: Löydä lisää resursseja
   open_folder: Avaa resurssikansio
   outdated: >-
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se

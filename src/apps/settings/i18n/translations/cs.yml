@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského
     rozhraní Seelen.
-  open_folder: Otevřete složku Resouce
+  discover: Objevte další zdroje
+  open_folder: Otevření složky se zdroji
   outdated: >-
     Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a
     nemusí fungovat správně.

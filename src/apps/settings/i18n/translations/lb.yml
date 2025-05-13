@@ -135,7 +135,8 @@ quit: Ness
 remove: Ofwäschen
 resources:
   app_outdated: Dës Ressource brauch eng nei Versioun vu Seelen Ui fir richteg ze schaffen.
-  open_folder: Open Reseau Dossier
+  discover: Entdeckt méi Ressourcen
+  open_folder: Oppen Ressource Dossier
   outdated: >-
     Dës Ressource gouf fir eng méi al Versioun vu seelen UI entworf a sech net
     richteg schaffen.

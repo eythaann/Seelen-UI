@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Denne ressursen krever en nyere versjon av Seelen UI for å fungere
     ordentlig.
-  open_folder: Åpne Resouce -mappen
+  discover: Oppdag flere ressurser
+  open_folder: Åpne ressursmappe
   outdated: >-
     Denne ressursen ble designet for en eldre versjon av Seelen UI og fungerer
     kanskje ikke ordentlig.

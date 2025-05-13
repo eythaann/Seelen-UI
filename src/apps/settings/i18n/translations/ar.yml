@@ -133,7 +133,8 @@ quit: الخروج
 remove: الحذف
 resources:
   app_outdated: يتطلب هذا المورد إصدارًا أحدث من Seelen UI ليعمل بشكل صحيح.
-  open_folder: فتح مجلد الموارد المفتوحة
+  discover: اكتشف المزيد من الموارد
+  open_folder: فتح مجلد الموارد
   outdated: تم تصميم هذا المورد لإصدار أقدم من Seelen UI وقد لا يعمل بشكل صحيح.
 save: حفظ
 save_and_restart: حفظ وإعد التشغيل

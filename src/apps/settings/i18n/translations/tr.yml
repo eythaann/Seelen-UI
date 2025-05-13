@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
     gerekir.
-  open_folder: Resouce klasörünü açın
+  discover: Daha fazla kaynak keşfedin
+  open_folder: Kaynak klasörünü açın
   outdated: >-
     Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün
     çalışmayabilir.

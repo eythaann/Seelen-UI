@@ -135,7 +135,8 @@ quit: Hættu
 remove: Fjarlægðu
 resources:
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
-  open_folder: Opið Resouce möppu
+  discover: Uppgötvaðu fleiri úrræði
+  open_folder: Opin auðlindamappa
   outdated: >-
     Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað
     rétt.

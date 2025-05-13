@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Hierdie hulpbron vereis dat 'n nuwer weergawe van Seelen UI behoorlik moet
     werk.
-  open_folder: Open Resouce -lêergids
+  discover: Ontdek meer bronne
+  open_folder: Open Resource Folder
   outdated: >-
     Hierdie hulpbron is ontwerp vir 'n ouer weergawe van Seelen UI en werk
     moontlik nie behoorlik nie.

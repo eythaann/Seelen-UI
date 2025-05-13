@@ -137,7 +137,8 @@ quit: Atmest
 remove: Noņemt
 resources:
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
-  open_folder: Atveriet mapi Resouce
+  discover: Atklājiet vairāk resursu
+  open_folder: Atvērt resursu mapi
   outdated: >-
     Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties
     pareizi.

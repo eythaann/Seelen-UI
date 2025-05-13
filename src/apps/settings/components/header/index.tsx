@@ -19,6 +19,8 @@ import cs from './index.module.css';
 
 export const Header = () => {
   const widgets = useSelector(RootSelectors.widgets);
+  const themes = useSelector(RootSelectors.availableThemes);
+
   const hasChanges = useAppSelector(RootSelectors.toBeSaved);
   const shouldRestart = useAppSelector(RootSelectors.toBeRestarted);
 
@@ -51,6 +53,11 @@ export const Header = () => {
     const widgetId = `@${username}/${resourceName}`;
     const widget = widgets.find((w) => w.id === widgetId);
     label = widget ? <ResourceText text={widget.metadata.displayName} /> : <span>{widgetId}</span>;
+  } else if (parts[0] === 'theme') {
+    const [_, username, resourceName] = parts;
+    const themeId = `@${username}/${resourceName}`;
+    const theme = themes.find((t) => t.id === themeId);
+    label = theme ? <ResourceText text={theme.metadata.displayName} /> : <span>{themeId}</span>;
   } else {
     label = parts.map((part, idx) => (
       <React.Fragment key={part}>

@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona
     dezan.
-  open_folder: Ireki Reseacce karpeta
+  discover: Ezagutu baliabide gehiago
+  open_folder: Baliabide irekiko karpeta
   outdated: >-
     Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala
     funtzionatuko.

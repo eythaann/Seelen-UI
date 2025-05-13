@@ -137,7 +137,8 @@ quit: ترک
 remove: برداشتن
 resources:
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
-  open_folder: پوشه Resouce را باز کنید
+  discover: منابع بیشتری را کشف کنید
+  open_folder: پوشه منبع باز
   outdated: >-
     این منبع برای نسخه قدیمی تر Seelen UI طراحی شده است و ممکن است به درستی کار
     نکند.

@@ -139,7 +139,8 @@ resources:
   app_outdated: >-
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a
     funcționa corect.
-  open_folder: Deschideți folderul Resurse
+  discover: Descoperiți mai multe resurse
+  open_folder: Deschideți folderul de resurse
   outdated: >-
     Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și
     este posibil să nu funcționeze corect.

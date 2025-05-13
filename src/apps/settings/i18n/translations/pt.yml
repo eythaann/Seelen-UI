@@ -137,6 +137,7 @@ resources:
   app_outdated: >-
     Esse recurso requer uma versão mais recente da interface do usuário da
     Seelen para funcionar corretamente.
+  discover: Descubra mais recursos
   open_folder: Abrir a pasta de recursos
   outdated: >-
     Esse recurso foi projetado para uma versão mais antiga da interface do

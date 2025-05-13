@@ -139,7 +139,8 @@ resources:
   app_outdated: >-
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
     funktionieren.
-  open_folder: Ordner "Ressourcen" öffnen
+  discover: Weitere Ressourcen entdecken
+  open_folder: Ressourcenordner öffnen
   outdated: >-
     Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und
     funktioniert möglicherweise nicht richtig.

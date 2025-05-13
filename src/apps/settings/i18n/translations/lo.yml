@@ -133,7 +133,8 @@ quit: ເຊົາ
 remove: ເອົາອອກ
 resources:
   app_outdated: ຊັບພະຍາກອນນີ້ຮຽກຮ້ອງໃຫ້ມີ Searen ລຸ້ນໃຫມ່ UI ໃຫ້ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
-  open_folder: ແວ່ນຕາ Sherge
+  discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ
+  open_folder: Open Opence Folder
   outdated: >-
     ຊັບພະຍາກອນນີ້ໄດ້ຖືກອອກແບບມາສໍາລັບ Apen ຂອງ Searen UI
     ແລະອາດຈະບໍ່ເຮັດວຽກຢ່າງຖືກຕ້ອງ.

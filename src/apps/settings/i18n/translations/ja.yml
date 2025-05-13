@@ -131,6 +131,7 @@ quit: 終了
 remove: 取り除く
 resources:
   app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
+  discover: その他のリソース
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
 save: 保存

@@ -134,6 +134,7 @@ quit: Loobuma
 remove: Eemaldama
 resources:
   app_outdated: Selle ressursi korralikuks kasutamiseks on vaja Seelen UI uuemat versiooni.
+  discover: Avasta rohkem ressursse
   open_folder: Avage ressursside kaust
   outdated: >-
     See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi

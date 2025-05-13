@@ -135,6 +135,7 @@ quit: Sluta
 remove: Ta bort
 resources:
   app_outdated: Denna resurs kräver en nyare version av Seelen UI för att fungera korrekt.
+  discover: Upptäck fler resurser
   open_folder: Öppna resursmappen
   outdated: >-
     Den här resursen är utformad för en äldre version av Seelen UI och kanske

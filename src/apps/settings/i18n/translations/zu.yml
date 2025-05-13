@@ -137,7 +137,8 @@ quit: Yeka
 remove: Susa
 resources:
   app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
-  open_folder: Ifolda evulekile yokuvulwa kabusha
+  discover: Thola izinsiza ezengeziwe
+  open_folder: Ifolda Yezisetshenziswa
   outdated: >-
     Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze
     kahle.

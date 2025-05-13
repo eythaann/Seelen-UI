@@ -18,6 +18,7 @@ export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);
 
   const widgets = useSelector(RootSelectors.widgets);
+  const themes = useAppSelector(RootSelectors.availableThemes);
   const devTools = useAppSelector(RootSelectors.devTools);
 
   const { t } = useTranslation();
@@ -35,6 +36,8 @@ export const Navigation = memo(() => {
       />
     );
   };
+
+  const themesWithSettings = themes.filter((theme) => theme.settings.length);
 
   return (
     <div
@@ -63,18 +66,40 @@ export const Navigation = memo(() => {
           {[RoutePath.General, RoutePath.Resource, RoutePath.Shortcuts].map(Mapper)}
         </div>
 
+        {themesWithSettings.length && (
+          <>
+            <div className={cs.separator} />
+            <div className={cs.group}>
+              {themesWithSettings
+                .toSorted((a, b) => a.id.localeCompare(b.id))
+                .map((theme) => (
+                  <Item
+                    key={theme.id}
+                    route={`/theme/${theme.id.replace('@', '')}`}
+                    isActive={location.pathname === `/theme/${theme.id.replace('@', '')}`}
+                    collapsed={collapsed}
+                    label={<ResourceText text={theme.metadata.displayName} />}
+                    icon={<Icon iconName="BiSolidPalette" />}
+                  />
+                ))}
+            </div>
+          </>
+        )}
+
         <div className={cs.separator} />
         <div className={cs.group}>
-          {widgets.map((widget) => (
-            <Item
-              key={widget.id}
-              route={`/widget/${widget.id.replace('@', '')}`}
-              isActive={location.pathname.startsWith(`/widget/${widget.id.replace('@', '')}`)}
-              collapsed={collapsed}
-              label={<ResourceText text={widget.metadata.displayName} />}
-              icon={<Icon iconName={widget.icon as any || 'BiSolidWidget'} />}
-            />
-          ))}
+          {widgets
+            .toSorted((a, b) => a.id.localeCompare(b.id))
+            .map((widget) => (
+              <Item
+                key={widget.id}
+                route={`/widget/${widget.id.replace('@', '')}`}
+                isActive={location.pathname === `/widget/${widget.id.replace('@', '')}`}
+                collapsed={collapsed}
+                label={<ResourceText text={widget.metadata.displayName} />}
+                icon={<Icon iconName={(widget.icon as any) || 'BiSolidWidget'} />}
+              />
+            ))}
         </div>
 
         <div className={cs.separator} />

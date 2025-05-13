@@ -62,14 +62,6 @@ b {
   font-weight: 600;
 }
 
-.ant-select {
-  min-width: 100px;
-}
-
-.ant-input {
-  min-width: 90px;
-}
-
 .ant-color-picker-trigger {
   min-width: 90px !important;
 }

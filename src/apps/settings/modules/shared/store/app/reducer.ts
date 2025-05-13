@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  UIColors,
-  UpdateChannel,
-  VirtualDesktopStrategy,
-} from '@seelen-ui/lib';
+import { UIColors, UpdateChannel, VirtualDesktopStrategy } from '@seelen-ui/lib';
 import { cloneDeep, pick } from 'lodash';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
@@ -50,6 +46,7 @@ const initialState: RootState = {
   widgets: [],
   profiles: [],
   byWidget: defaultSettings.inner.byWidget,
+  byTheme: {},
 };
 
 function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {
@@ -113,6 +110,21 @@ export const RootSlice = createSlice({
     removeTheme: (state, action: PayloadAction<string>) => {
       state.toBeSaved = true;
       state.selectedThemes = state.selectedThemes.filter((x) => x !== action.payload);
+    },
+    setThemeVariable: (
+      state,
+      action: PayloadAction<{ themeId: string; name: string; value: string }>,
+    ) => {
+      const { themeId, name, value } = action.payload;
+      state.byTheme[themeId] ??= {};
+      state.byTheme[themeId]![name] = value;
+      state.toBeSaved = true;
+    },
+    deleteThemeVariable: (state, action: PayloadAction<{ themeId: string; name: string }>) => {
+      const { themeId, name } = action.payload;
+      state.byTheme[themeId] ??= {};
+      delete state.byTheme[themeId]![name];
+      state.toBeSaved = true;
     },
   },
   selectors: selectorsFor(initialState),

@@ -135,7 +135,8 @@ quit: Prestati
 remove: Ukloniti
 resources:
   app_outdated: Ovaj resurs zahtijeva noviju verziju Seelen Ui da radi pravilno.
-  open_folder: Otvorena mapa Resouce
+  discover: Otkrijte više resursa
+  open_folder: Otvorite mapu resursa
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju Seelena UI-a i možda neće
     raditi ispravno.

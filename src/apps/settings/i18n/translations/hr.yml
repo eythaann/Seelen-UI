@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Ovaj resurs zahtijeva da novija verzija Seelen korisničkog sučelja radi
     ispravno.
-  open_folder: Otvorena mapa Resouce
+  discover: Otkrijte više resursa
+  open_folder: Mapa otvorenih resursa
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju seelen korisničkog sučelja i
     možda neće raditi ispravno.

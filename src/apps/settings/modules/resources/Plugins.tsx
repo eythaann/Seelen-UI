@@ -58,6 +58,12 @@ export function PluginsView() {
             <Icon iconName="PiFoldersDuotone" />
           </Button>
         </SettingsOption>
+        <SettingsOption>
+          <span>{t('resources.discover')}:</span>
+          <Button href="https://seelen.io/resources/s?category=Plugin" target="_blank" type="link">
+            https://seelen.io/resources/s?category=Plugin
+          </Button>
+        </SettingsOption>
       </SettingsGroup>
 
       <div className={cs.list}>

@@ -128,6 +128,7 @@ quit: 退出
 remove: 消除
 resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
+  discover: 发现更多资源
   open_folder: 打开资源文件夹
   outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
 save: 保存

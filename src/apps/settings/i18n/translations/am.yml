@@ -133,7 +133,8 @@ quit: አቁም
 remove: ያስወግዱ
 resources:
   app_outdated: ይህ ሀብት በአግባቡ እንዲሠራ አዲስ የአዲስ ስሪት ይፈልጋል.
-  open_folder: ክፍት የሆነ የመዝናኛ አቃፊ
+  discover: ተጨማሪ ሀብቶችን ያግኙ
+  open_folder: ክፍት የመረጃ ምንጭ አቃፊ
   outdated: ይህ የመረጃ ሀብት ለተረጋጋሪ ዌይ ስሪት ለተጨማሪ ስሪት የተሰራ ሲሆን በትክክል ላይሰራ ይችላል.
 save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ

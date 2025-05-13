@@ -1,4 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { Theme } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
@@ -6,6 +7,7 @@ import { Button, Switch } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router';
 
 import cs from './infra.module.css';
 
@@ -54,6 +56,12 @@ export function ThemesView() {
             <Icon iconName="PiFoldersDuotone" />
           </Button>
         </SettingsOption>
+        <SettingsOption>
+          <span>{t('resources.discover')}:</span>
+          <Button href="https://seelen.io/resources/s?category=Theme" target="_blank" type="link">
+            https://seelen.io/resources/s?category=Theme
+          </Button>
+        </SettingsOption>
       </SettingsGroup>
 
       <div className={cs.list}>
@@ -61,17 +69,11 @@ export function ThemesView() {
         <Reorder.Group values={_active} onReorder={onReorder} className={cs.reorderGroup}>
           {enabled.map((theme) => (
             <Reorder.Item key={theme.id} value={theme.metadata.filename}>
-              <ResourceCard
-                resource={theme}
-                kind="Theme"
-                actions={
-                  theme.id === '@default/theme' ? undefined : (
-                    <Switch
-                      defaultChecked={true}
-                      onChange={() => toggleTheme(theme.metadata.filename)}
-                    />
-                  )
-                }
+              <ThemeItem
+                key={theme.id}
+                theme={theme}
+                onToggle={() => toggleTheme(theme.metadata.filename)}
+                checked={true}
               />
             </Reorder.Item>
           ))}
@@ -79,19 +81,41 @@ export function ThemesView() {
 
         <b>{t('general.theme.available')}</b>
         {disabled.map((theme) => (
-          <ResourceCard
+          <ThemeItem
             key={theme.id}
-            resource={theme}
-            kind="Theme"
-            actions={
-              <Switch
-                defaultChecked={false}
-                onChange={() => toggleTheme(theme.metadata.filename)}
-              />
-            }
+            theme={theme}
+            onToggle={() => toggleTheme(theme.metadata.filename)}
+            checked={false}
           />
         ))}
       </div>
     </>
+  );
+}
+
+interface ThemeItemProps {
+  theme: Theme;
+  onToggle: () => void;
+  checked: boolean;
+}
+
+function ThemeItem({ theme, checked, onToggle }: ThemeItemProps) {
+  return (
+    <ResourceCard
+      resource={theme}
+      kind="Theme"
+      actions={
+        <>
+          {theme.id !== '@default/theme' && <Switch value={checked} onChange={onToggle} />}
+          {theme.settings.length > 0 && (
+            <NavLink to={`/theme/${theme.id.replace('@', '')}`}>
+              <Button type="text">
+                <Icon iconName="RiSettings4Fill" />
+              </Button>
+            </NavLink>
+          )}
+        </>
+      }
+    />
   );
 }

@@ -136,7 +136,8 @@ quit: Từ bỏ
 remove: Di dời
 resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
-  open_folder: Mở thư mục Resouce
+  discover: Khám phá thêm tài nguyên
+  open_folder: Mở thư mục tài nguyên
   outdated: >-
     Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không
     hoạt động đúng.

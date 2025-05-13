@@ -64,6 +64,7 @@ impl RestorationAndMigration {
         create_if_needed("themes")?;
         create_if_needed("icons")?;
         create_if_needed("wallpapers")?;
+        create_if_needed("sounds")?;
         create_if_needed("plugins")?;
         create_if_needed("widgets")?;
         Self::recreate_profiles()?;

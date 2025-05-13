@@ -135,7 +135,8 @@ quit: ឈប់
 remove: រមកមិ avad ចេញ
 resources:
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
-  open_folder: បើកថត Rewouce
+  discover: ស្វែងយល់ពីធនធានបន្ថែម
+  open_folder: បើកថតធនធាន
   outdated: >-
     ធនធាននេះត្រូវបានរចនាឡើងសម្រាប់កំណែចាស់របស់ Seeen UI
     ហើយប្រហែលជាមិនដំណើរការត្រឹមត្រូវទេ។

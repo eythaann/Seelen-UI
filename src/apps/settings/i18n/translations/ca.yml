@@ -137,7 +137,8 @@ resources:
   app_outdated: >-
     Aquest recurs requereix una versió més recent de la interfície d'usuari de
     Seelen per funcionar correctament.
-  open_folder: Obriu la carpeta de resouce
+  discover: Descobriu més recursos
+  open_folder: Obrir la carpeta de recursos
   outdated: >-
     Aquest recurs va ser dissenyat per a una versió anterior de la interfície
     d'usuari de Seelen i pot no funcionar correctament.

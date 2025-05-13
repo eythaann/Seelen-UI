@@ -134,7 +134,8 @@ quit: Quit
 remove: Remove
 resources:
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
-  open_folder: Open resouce folder
+  discover: Discover more resources
+  open_folder: Open resource folder
   outdated: >-
     This resource was designed for an older version of Seelen UI and might not
     work properly.

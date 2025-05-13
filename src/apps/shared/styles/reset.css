@@ -128,7 +128,7 @@
 }
 
 /* Antd reset */
-.ant-popover {
+.ant-popover:not(.ant-color-picker) {
   .ant-popover-inner {
     background: transparent !important;
     border-radius: 0 !important;

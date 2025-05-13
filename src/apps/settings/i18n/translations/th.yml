@@ -132,7 +132,8 @@ quit: ล้มเลิก
 remove: ลบ
 resources:
   app_outdated: ทรัพยากรนี้ต้องการ Seelen UI รุ่นใหม่กว่าเพื่อทำงานอย่างถูกต้อง
-  open_folder: เปิดโฟลเดอร์ Resouce
+  discover: ค้นพบทรัพยากรเพิ่มเติม
+  open_folder: เปิดโฟลเดอร์ทรัพยากร
   outdated: ทรัพยากรนี้ได้รับการออกแบบมาสำหรับ Seelen UI รุ่นเก่าและอาจทำงานไม่ถูกต้อง
 save: บันทึก
 save_and_restart: บันทึกและรีสตาร์ท

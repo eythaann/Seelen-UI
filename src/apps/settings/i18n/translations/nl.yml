@@ -135,7 +135,8 @@ quit: Afsluiten
 remove: Verwijderen
 resources:
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
-  open_folder: Map met bestanden openen
+  discover: Ontdek meer bronnen
+  open_folder: Map met bronnen openen
   outdated: >-
     Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
     mogelijk niet goed.

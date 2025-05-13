@@ -135,6 +135,7 @@ quit: Mesti
 remove: Pašalinti
 resources:
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
+  discover: Atraskite daugiau išteklių
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti

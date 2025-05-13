@@ -49,6 +49,14 @@
       padding-left: 10px;
     }
   }
+
+  :global(.ant-select) {
+    min-width: 100px;
+  }
+
+  :global(.ant-input) {
+    min-width: 90px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

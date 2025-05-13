@@ -137,7 +137,8 @@ quit: Nieqaf
 remove: Neħħi
 resources:
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
-  open_folder: Folder ta 'resouce miftuħ
+  discover: Skopri aktar riżorsi
+  open_folder: Folder tar-Riżorsi Miftuħa
   outdated: >-
     Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u
     tista' ma taħdimx sew.

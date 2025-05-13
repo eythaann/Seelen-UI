@@ -137,6 +137,7 @@ quit: Zrezygnować
 remove: Usunąć
 resources:
   app_outdated: Ten zasób wymaga nowszej wersji Seelen UI do poprawnego działania.
+  discover: Odkryj więcej zasobów
   open_folder: Otwórz folder zasobów
   outdated: >-
     Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
