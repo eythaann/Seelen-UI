@@ -10,14 +10,14 @@ runtime:
   outdated: Środowisko wykonawcze WebView2 jest nieaktualne
   outdated_description: >-
     Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2
-    %{min_version} lub nowszego. Zaktualizuj to.
+    %{min_version} lub nowszego. Zaktualizuj je i spróbuj ponownie.
 service:
-  not_running: Usługa Seelen UI nie działa
+  not_running: Usługa Seelen UI nie działa prawidłowo
   not_running_description: >-
-    Usługa Seelen UI Service (slu-service) jest zależnością/pomocą umożliwiającą
+    Usługa Seelen UI Service (slu-service) jest zależnością umożliwiającą
     prawidłowe działanie aplikacji.
   not_running_ok: Uruchom usługę
 tray:
-  quit: Odejdź
-  restart: Uruchom ponownie interfejs użytkownika
+  quit: Wyjdź
+  restart: Zrestartuj interfejs
   settings: Ustawienia
