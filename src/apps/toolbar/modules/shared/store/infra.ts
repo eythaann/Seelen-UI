@@ -17,14 +17,13 @@ import {
   UserDetails,
   VideosFolder,
 } from '@seelen-ui/lib';
-import { FancyToolbarSettings } from '@seelen-ui/lib/types';
+import { FancyToolbarSettings, FocusedApp } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
 
 import { lazySlice, RootActions, RootSlice } from './app';
-import { FocusedApp } from 'src/apps/shared/interfaces/common';
 
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
@@ -55,13 +54,14 @@ const removeFocusedColorCssVars = () => {
 
 async function initFocusedColorSystem() {
   let optimisticFocused: FocusedApp | null = null;
+
   const setFocused = debounce((app: FocusedApp) => {
     store.dispatch(RootActions.setFocused(app));
   }, 200);
 
   const updateFocusedColor = async () => {
     const { settings } = store.getState();
-    if (!settings.dynamicColor || optimisticFocused?.isSeelenOverlay) {
+    if (!optimisticFocused || !settings.dynamicColor) {
       return;
     }
 
@@ -71,16 +71,16 @@ async function initFocusedColorSystem() {
       return;
     }
 
-    // like this is an async operation sometimes this is not skiped on first condition
-    if (optimisticFocused?.isSeelenOverlay) {
-      return;
-    }
+    const luminance = color.calcLuminance();
+    const background = color.asHex();
+    const foreground =
+      luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)';
 
-    let luminance = color.calcLuminance();
-    document.documentElement.style.setProperty('--color-focused-app-background', color.asHex());
-    document.documentElement.style.setProperty(
-      '--color-focused-app-foreground',
-      luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)',
+    document.documentElement.style.setProperty('--color-focused-app-background', background);
+    document.documentElement.style.setProperty('--color-focused-app-foreground', foreground);
+
+    store.dispatch(
+      RootActions.addWindowColor([optimisticFocused.hwnd, { background, foreground }]),
     );
   };
 
@@ -90,10 +90,12 @@ async function initFocusedColorSystem() {
   await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
     const app = e.payload;
     optimisticFocused = app;
+
     setFocused(app);
     if (!app.isSeelenOverlay) {
       setFocused.flush();
     }
+
     updateFocusedColor();
   });
 }
@@ -148,7 +150,9 @@ export async function registerStoreEvents() {
   });
 
   await subscribe(SeelenEvent.Notifications, (event) => {
-    store.dispatch(RootActions.setNotifications(event.payload.sort((a, b) => Number(b.date - a.date))));
+    store.dispatch(
+      RootActions.setNotifications(event.payload.sort((a, b) => Number(b.date - a.date))),
+    );
   });
 
   await subscribe(SeelenEvent.NetworkAdapters, (event) => {

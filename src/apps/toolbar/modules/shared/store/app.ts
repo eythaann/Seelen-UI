@@ -14,6 +14,7 @@ import {
   UIColors,
   UserDetails,
   VideosFolder,
+  WegItems,
 } from '@seelen-ui/lib';
 import { Placeholder, ToolbarItem2 } from '@seelen-ui/lib/types';
 
@@ -64,6 +65,8 @@ const initialState: RootState = {
   notifications: [],
   colors: UIColors.default().inner,
   languages: [],
+  openApps: [],
+  windowColorByHandle: {},
 };
 
 export const RootSlice = createSlice({
@@ -125,6 +128,12 @@ export const RootSlice = createSlice({
         state.items.isReorderDisabled = enabled;
       }
     },
+    addWindowColor(state, action: PayloadAction<[number, { background: string; foreground: string }]>) {
+      state.windowColorByHandle[`${action.payload[0]}`] = action.payload[1];
+    },
+    removeWindowColor(state, action: PayloadAction<number>) {
+      delete state.windowColorByHandle[`${action.payload}`];
+    },
   },
 });
 
@@ -137,20 +146,14 @@ export async function lazySlice(d: Dispatch) {
     d(RootActions.setNotifications(notifications)),
   );
 
-  invoke(SeelenCommand.GetPowerStatus).then((status) =>
-    d(RootActions.setPowerStatus(status)),
-  );
+  invoke(SeelenCommand.GetPowerStatus).then((status) => d(RootActions.setPowerStatus(status)));
   invoke(SeelenCommand.GetPowerMode).then((plan) => d(RootActions.setPowerPlan(plan)));
-  invoke(SeelenCommand.GetBatteries).then((batteries) =>
-    d(RootActions.setBatteries(batteries)),
-  );
+  invoke(SeelenCommand.GetBatteries).then((batteries) => d(RootActions.setBatteries(batteries)));
 
-  invoke(SeelenCommand.GetMediaDevices).then(
-    ([inputs, outputs]) => {
-      d(RootActions.setMediaInputs(inputs));
-      d(RootActions.setMediaOutputs(outputs));
-    },
-  );
+  invoke(SeelenCommand.GetMediaDevices).then(([inputs, outputs]) => {
+    d(RootActions.setMediaInputs(inputs));
+    d(RootActions.setMediaOutputs(outputs));
+  });
 
   invoke(SeelenCommand.GetMediaSessions).then((sessions) =>
     d(RootActions.setMediaSessions(sessions)),
@@ -159,6 +162,22 @@ export async function lazySlice(d: Dispatch) {
   invoke(SeelenCommand.GetTrayIcons).then((info) => d(RootActions.setSystemTray(info)));
 
   LanguageList.getAsync().then((list) => d(RootActions.setLanguages(list.asArray())));
+
+  const onGetWegItems = (items: WegItems) => {
+    const apps = items.inner.left
+      .concat(items.inner.center)
+      .concat(items.inner.right)
+      .map((d) => {
+        if ('windows' in d) {
+          return d.windows;
+        }
+        return [];
+      })
+      .flat();
+    d(RootActions.setOpenApps(apps));
+  };
+  WegItems.forCurrentWidget().then(onGetWegItems);
+  WegItems.forCurrentWidgetChange(onGetWegItems);
 
   const obj = {
     userRecentFolder: (await RecentFolder.getAsync()).asArray(),

@@ -1,7 +1,6 @@
-import { AppNotification, MediaPlayer, SeelenWegSettings, WegItem } from '@seelen-ui/lib/types';
+import { AppNotification, FocusedApp, MediaPlayer, SeelenWegSettings, WegItem } from '@seelen-ui/lib/types';
 
 import { IRootState } from '../../../../../shared.interfaces';
-import { FocusedApp } from '../../../../shared/interfaces/common';
 
 export type HWND = number & {};
 

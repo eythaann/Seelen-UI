@@ -14,6 +14,7 @@ use crate::{
     error_handler::Result,
     modules::start::application::START_MENU_MANAGER,
     seelen::get_app_handle,
+    seelen_bar::FancyToolbar,
     state::application::FULL_STATE,
     utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
@@ -114,7 +115,13 @@ impl WegItemsImpl {
                     handle.emit_to(
                         SeelenWeg::get_label(monitor_id),
                         SeelenEvent::WegInstanceChanged,
-                        items.clone(),
+                        items,
+                    )?;
+                    // temporal solution, weg events needs an refactor to allow be used by any widget
+                    handle.emit_to(
+                        FancyToolbar::label(monitor_id),
+                        SeelenEvent::WegInstanceChanged,
+                        items,
                     )?;
                 }
             }
@@ -249,6 +256,8 @@ impl WegItemsImpl {
                         current.windows.push(WegAppGroupItem {
                             title: window.title(),
                             handle: window.address(),
+                            is_iconic: window.is_minimized(),
+                            is_zoomed: window.is_maximized(),
                         });
                         return Ok(());
                     }
@@ -271,6 +280,8 @@ impl WegItemsImpl {
             windows: vec![WegAppGroupItem {
                 title: window.title(),
                 handle: window.address(),
+                is_iconic: window.is_minimized(),
+                is_zoomed: window.is_maximized(),
             }],
             pin_disabled: window.prevent_pinning(),
         };
@@ -296,6 +307,8 @@ impl WegItemsImpl {
                 let maybe_window = data.windows.iter_mut().find(|w| w.handle == searching);
                 if let Some(app_window) = maybe_window {
                     app_window.title = window.title();
+                    app_window.is_iconic = window.is_minimized();
+                    app_window.is_zoomed = window.is_maximized();
                     break;
                 }
             }

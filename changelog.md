@@ -9,6 +9,7 @@
 
 ### enhancements
 - Settings UI refactor to follow the new resources ecosystem.
+- (#838) Improve dynamic color behavior on toolbar.
 
 ### fix
 - not removing old icons mask on icon pack change.

@@ -2,6 +2,7 @@ import { HideMode } from '@seelen-ui/lib';
 import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
 import { Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
+import { isEqual } from 'lodash';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -75,17 +76,18 @@ function componentByModule(plugins: Plugin[], item: PluginId | ToolbarItem) {
 }
 
 export function ToolBar() {
-  const structure = useSelector(Selectors.items);
-
   const [isToolbarFocused, setToolbarFocused] = useState(false);
   const [delayed, setDelayed] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
+  const structure = useSelector(Selectors.items);
   const focusedWindow = useSelector(Selectors.focused);
   const plugins = useSelector(Selectors.plugins);
   const isOverlaped = useSelector(Selectors.isOverlaped);
+
   const { hideMode, position, dynamicColor } = useSelector(Selectors.settings);
 
+  const data = useBarData();
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
 
@@ -154,6 +156,8 @@ export function ToolBar() {
       dropdownRender={() => <MainContextMenu />}
     >
       <Reorder.Group
+        as="div"
+        axis="x"
         values={[
           ...structure.left,
           DividerStart,
@@ -166,11 +170,10 @@ export function ToolBar() {
           'ft-bar-hidden': shouldBeHidden,
           'ft-bar-delayed': delayed,
         })}
+        data-there-is-maximized-on-background={data.thereIsMaximizedOnBg}
         data-focused-is-maximized={!!focusedWindow?.isMaximized}
         data-focused-is-overlay={!!focusedWindow?.isSeelenOverlay}
         data-dynamic-color={dynamicColor}
-        axis="x"
-        as="div"
       >
         <BackgroundByLayersV2 prefix="ft-bar" />
         <div className="ft-bar-left">
@@ -187,4 +190,34 @@ export function ToolBar() {
       </Reorder.Group>
     </AnimatedDropdown>
   );
+}
+
+function useBarData() {
+  const openApps = useSelector(Selectors.openApps);
+  const colors = useSelector(Selectors.windowColorByHandle, isEqual);
+
+  const maximizedOnBg = openApps.find((app) => {
+    return app.is_zoomed && !app.is_iconic;
+  });
+
+  const color = maximizedOnBg ? colors[String(maximizedOnBg.handle)] : undefined;
+
+  if (color) {
+    document.documentElement.style.setProperty(
+      '--color-maximized-on-bg-background',
+      color.background,
+    );
+    document.documentElement.style.setProperty(
+      '--color-maximized-on-bg-foreground',
+      color.foreground,
+    );
+  } else {
+    document.documentElement.style.removeProperty('--color-maximized-on-bg-background');
+    document.documentElement.style.removeProperty('--color-maximized-on-bg-foreground');
+  }
+
+  return {
+    thereIsMaximizedOnBg: !!maximizedOnBg,
+    dynamicBarColor: color,
+  };
 }

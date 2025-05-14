@@ -226,7 +226,7 @@ impl WindowsApi {
         unsafe { IsIconic(hwnd) }.into()
     }
 
-    pub fn is_maximized(hwnd: HWND) -> bool {
+    pub fn is_zoomed(hwnd: HWND) -> bool {
         unsafe { IsZoomed(hwnd) }.into()
     }
 

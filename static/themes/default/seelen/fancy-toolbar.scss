@@ -173,15 +173,18 @@
     }
   }
 
-  &[data-focused-is-maximized="true"],
-  &[data-focused-is-overlay="true"] {
-    &[data-dynamic-color="true"] {
-      color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
+  // &[data-there-is-maximized-on-background="true"] {} (this attribute exist but is unused)
+  // &[data-focused-is-maximized="true"] {} (this attribute exist but is unused)
+  // &[data-focused-is-overlay="true"] {} (this attribute exist but is unused)
 
-      > .bg-layers {
-        > .bg-layer-2 {
-          background-color: var(--color-focused-app-background, var(--color-persist-gray-900));
-        }
+  &[data-dynamic-color="true"] {
+    // --color-focused-app-background (this var exist but is unused)
+    color: var(--color-maximized-on-bg-foreground, var(--color-persist-gray-100));
+
+    > .bg-layers {
+      > .bg-layer-2 {
+        // --color-focused-app-foreground (this var exist but is unused)
+        background-color: var(--color-maximized-on-bg-background, var(--color-persist-gray-900));
       }
     }
   }

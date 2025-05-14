@@ -6,6 +6,7 @@ import {
   DesktopWorkspace,
   FancyToolbarSettings,
   File,
+  FocusedApp,
   MediaDevice,
   MediaPlayer,
   NetworkAdapter,
@@ -16,12 +17,12 @@ import {
   Settings,
   TrayIcon,
   User,
+  WegAppGroupItem,
   WlanBssEntry,
   WorkspaceId,
 } from '@seelen-ui/lib/types';
 
 import { IRootState } from '../../../../../shared.interfaces';
-import { FocusedApp } from '../../../../shared/interfaces/common';
 
 export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settings, 'dateFormat'> {
   version: number;
@@ -55,4 +56,6 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   mediaInputs: MediaDevice[];
   notifications: AppNotification[];
   languages: SystemLanguage[];
+  openApps: WegAppGroupItem[];
+  windowColorByHandle: Record<string, { background: string; foreground: string }>;
 }
