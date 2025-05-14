@@ -1,7 +1,144 @@
 id: '@eythaann/animated-start-icon'
-info:
-  displayName: Animated Start Icon
-  description: Replace start icon by an animated version
-  tags:
-    - weg
-metadata: {}
+metadata:
+  displayName:
+    en: Animated Start Icon
+    cs: Animovaná ikona Start
+    af: Geanimeerde begin -ikoon
+    da: Animeret start-ikon
+    et: Animeeritud Start ikoon
+    de: Animiertes Start-Symbol
+    es: Icono de inicio animado
+    az: Animated Start Icon
+    ca: Icona d'inici animat
+    bs: Ikona za početak animirane
+    fr: Icône de démarrage animée
+    cy: Eicon cychwyn animeiddiedig
+    id: Ikon Mulai Beranimasi
+    it: Icona Animata Avvio
+    eu: Animated Start ikonoa
+    tl: Animated Start icon
+    lv: Animēta sākuma ikona
+    hr: Ikona animiranog početka
+    lt: Animuota pradžios piktograma
+    hu: Animált Start ikon
+    zu: Isithonjana sokuqala
+    is: Teiknimynd upphafstákn
+    sw: Icon ya kuanza michoro
+    ku: Îkonê destpêkê ya animated
+    pl: Animowana ikona startowa
+    lb: Animéiert Start Ikon
+    pt: Ícone de início animado
+    ro: Iconiță de pornire animată
+    sk: Animovaná ikona Štart
+    mt: Ikona tal-bidu animata
+    ms: Ikon permulaan animasi
+    fi: Animoitu käynnistyskuvake
+    sv: Animerad start-ikon
+    'no': Animert startikon
+    uz: Animated boshlanish belgisi
+    nl: Geanimeerd startpictogram
+    el: Κινούμενο εικονίδιο έναρξης
+    bg: Анимирана начална икона
+    so: Animated bilowga sumadda
+    tr: Animasyonlu Başlangıç Simgesi
+    ru: Анимированный значок запуска
+    vi: Biểu tượng bắt đầu hoạt hình
+    yo: Aami ere idaraya bẹrẹ
+    mk: Анимирана икона за почеток
+    mn: Хөдөлгөөнт эхлүүлэх дүрс
+    ar: أيقونة البدء المتحرك
+    sr: Анимирани почетак икона
+    tg: Оғози аниматсионӣ
+    uk: Анімована піктограма запуску
+    hy: Անիմացիոն սկիզբ պատկերակ
+    ka: ანიმაციური დაწყების ხატი
+    he: סמל התחלה מונפש
+    ur: متحرک اسٹارٹ آئیکن
+    ps: متحرک د پیل کولو عکس
+    fa: نماد شروع انیمیشن
+    am: የታተሙ ጅምር አዶ
+    ne: एनिमेटेड सुरु आइकन
+    hi: एनिमेटेड स्टार्ट आइकन
+    bn: অ্যানিমেটেড স্টার্ট আইকন
+    ko: 애니메이션 시작 아이콘
+    pa: ਐਨੀਮੇਟਡ ਸਟਾਰਟ ਆਈਕਾਨ
+    th: ไอคอนเริ่มต้นเคลื่อนไหว
+    gu: એનિમેટેડ પ્રારંભ ચિહ્ન
+    ja: アニメーションスタートアイコン
+    ta: அனிமேஷன் தொடக்க ஐகான்
+    zh: 动画启动图标
+    te: యానిమేటెడ్ ప్రారంభ చిహ్నం
+    si: සජීවිකරණ ආරම්භක නිරූපකය
+    lo: ຮູບສັນຍາລັກເລີ່ມຕົ້ນເຄື່ອນໄຫວ
+    km: រូបតំណាងចាប់ផ្តើមមានចលនា
+  description:
+    en: Replace start icon by an animated version
+    cs: Nahrazení ikony spuštění animovanou verzí
+    da: Udskift start-ikonet med en animeret version
+    de: Ersetzen des Startsymbols durch eine animierte Version
+    af: Vervang Start -ikoon deur 'n geanimeerde weergawe
+    et: Asendage stardi ikoon animeeritud versiooniga
+    es: Sustituir el icono de inicio por una versión animada
+    az: Başlanğıc simgesini cizgi versiyası ilə əvəz edin
+    bs: Zamijenite ikonu Start pomoću animirane verzije
+    ca: Substituïu la icona d'inici per una versió animada
+    fr: Remplacer l'icône de démarrage par une version animée
+    cy: Amnewid eicon cychwyn gan fersiwn wedi'i animeiddio
+    id: Mengganti ikon mulai dengan versi animasi
+    it: Sostituire l'icona di avvio con una versione animata
+    eu: Ordeztu hasteko ikonoa animaziozko bertsio baten bidez
+    hr: Zamijenite ikonu Start animiranom verzijom
+    tl: Palitan ang icon ng Start sa pamamagitan ng isang animated na bersyon
+    lv: Aizstāt sākuma ikonu ar animētu versiju
+    lt: Pakeiskite pradžios piktogramą animuotu variantu
+    zu: Faka esikhundleni sesithonjana sokuqala yinguqulo enezithombe
+    hu: Start ikon cseréje animált verzióra
+    sw: Badilisha icon ya kuanza na toleo lenye michoro
+    ku: Îkonê destpêkê ji hêla guhertoyek anîmasyon ve veguherînin
+    is: Skiptu um upphafstákn með teiknimyndútgáfu
+    nl: Startpictogram vervangen door een geanimeerde versie
+    pl: Zastąp ikonę startu animowaną wersją
+    pt: Substituir o ícone de início por uma versão animada
+    ro: Înlocuiți pictograma de pornire cu o versiune animată
+    ms: Ganti ikon Mula dengan versi animasi
+    lb: Ersatz Start Ikon duerch eng animéiert Versioun
+    sk: Nahradenie ikony štartu animovanou verziou
+    uz: Boshlash belgisini jonlantirilgan versiya orqali almashtiring
+    'no': Erstatt Start -ikonet med en animert versjon
+    mt: Ibdel l-ikona tal-bidu b'verżjoni animata
+    sv: Ersätt startikonen med en animerad version
+    fi: Korvaa käynnistyskuvake animoidulla versiolla
+    tr: Başlat simgesini animasyonlu bir sürümle değiştirme
+    el: Αντικαταστήστε το εικονίδιο έναρξης με μια κινούμενη έκδοση
+    bg: Замяна на стартовата икона с анимирана версия
+    so: Ku beddelo bilowga icon nooc firfircoon
+    ru: Замените значок запуска на анимированный вариант
+    vi: Thay thế biểu tượng Bắt đầu bằng phiên bản hoạt hình
+    yo: Rọpo aami Ibẹrẹ nipasẹ ẹya ere idaraya
+    uk: Замінити іконку запуску на анімовану версію
+    mk: Заменете ја иконата за почеток со анимирана верзија
+    mn: Эхлэх дүрсийг хөдөлгөөнт хувилбараар солих
+    ar: استبدال أيقونة البدء بنسخة متحركة
+    sr: Замените икону Старт Анимираном верзијом
+    ur: ایک متحرک ورژن کے ذریعہ اسٹارٹ آئیکن کو تبدیل کریں
+    tg: Тасвири оғозро бо нусхаи аниматалӣ иваз кунед
+    ka: შეცვალეთ დაწყების ხატი ანიმაციური ვერსიით
+    hy: Փոխեք մեկնարկի պատկերակը անիմացիոն տարբերակի միջոցով
+    fa: نماد شروع را با یک نسخه متحرک جایگزین کنید
+    he: החלף את סמל START בגרסת אנימציה
+    ps: د متحرک نسخې لخوا د پیل کاپي بدل کړئ
+    am: በተነቃቃ ስሪት የመጀመር አዶን ይተኩ
+    hi: एक एनिमेटेड संस्करण द्वारा प्रारंभ आइकन को बदलें
+    bn: একটি অ্যানিমেটেড সংস্করণ দ্বারা শুরু আইকন প্রতিস্থাপন করুন
+    ne: एनिमेटेड संस्करण द्वारा सुरू आइकन बदल्नुहोस्
+    pa: ਸਟਾਰਟ ਆਈਕਨ ਨੂੰ ਐਨੀਮੇਟਡ ਵਰਜ਼ਨ ਦੁਆਰਾ ਬਦਲੋ
+    ta: தொடக்க ஐகானை அனிமேஷன் பதிப்பால் மாற்றவும்
+    gu: એનિમેટેડ સંસ્કરણ દ્વારા પ્રારંભ ચિહ્નને બદલો
+    zh: 将开始图标替换为动画版本
+    ko: 시작 아이콘을 애니메이션 버전으로 바꾸기
+    ja: スタートアイコンをアニメーションに置き換える
+    th: แทนที่ไอคอน Start ด้วยเวอร์ชันภาพเคลื่อนไหว
+    te: ప్రారంభ చిహ్నాన్ని యానిమేటెడ్ వెర్షన్ ద్వారా మార్చండి
+    si: සජීවිකරණ අනුවාදයකින් ආරම්භක නිරූපකය ආදේශ කරන්න
+    lo: ປ່ຽນໄອຄອນເລີ່ມຕົ້ນໂດຍສະບັບເຄື່ອນໄຫວ
+    km: ជំនួសរូបតំណាងចាប់ផ្តើមដោយកំណែដែលមានចលនា
