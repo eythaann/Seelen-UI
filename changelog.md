@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- duplicated themes on settings GUI.
+
 ## [2.3.3]
 ### features
 - add open window label on dock for app items (configurable).
