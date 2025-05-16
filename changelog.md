@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.5]
 ### fix
 - settings by monitor not working correctly.
 
