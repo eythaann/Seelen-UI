@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- settings by monitor not working correctly.
+
 ## [2.3.4]
 ### enhancements
 - sort windows on dock by activation order.

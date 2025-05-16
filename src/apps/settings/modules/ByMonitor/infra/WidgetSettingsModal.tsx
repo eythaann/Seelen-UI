@@ -47,12 +47,21 @@ export function WidgetSettingsModal({ widgetId, monitorId, settings: declaration
     );
   };
 
-  const patchWidgetSettings = (settings: Partial<MonitorSettingsByWidget>) => {
+  const patchByWidgetSettings = (patch: Partial<MonitorSettingsByWidget>) => {
     patchMonitor({
       byWidget: {
+        ...monitorConfig.byWidget,
+        ...patch,
+      },
+    });
+  };
+
+  const patchWidgetSettings = (patch: Record<string, any>) => {
+    patchByWidgetSettings({
+      [widgetId]: {
         ...widgetConfig,
-        ...settings,
-      } as MonitorSettingsByWidget,
+        ...patch,
+      },
     });
   };
 
