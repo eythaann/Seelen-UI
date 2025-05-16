@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.4]
 ### enhancements
 - sort windows on dock by activation order.
 
