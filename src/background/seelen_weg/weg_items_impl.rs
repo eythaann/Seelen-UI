@@ -7,7 +7,13 @@ use seelen_core::{
         WegPinnedItemsVisibility, WegTemporalItemsVisibility,
     },
 };
-use std::{collections::HashMap, ffi::OsStr, path::PathBuf, sync::Arc};
+use std::{
+    collections::HashMap,
+    ffi::OsStr,
+    path::PathBuf,
+    sync::Arc,
+    time::{SystemTime, UNIX_EPOCH},
+};
 use tauri::Emitter;
 
 use crate::{
@@ -258,6 +264,7 @@ impl WegItemsImpl {
                             handle: window.address(),
                             is_iconic: window.is_minimized(),
                             is_zoomed: window.is_maximized(),
+                            last_active: 0,
                         });
                         return Ok(());
                     }
@@ -282,6 +289,7 @@ impl WegItemsImpl {
                 handle: window.address(),
                 is_iconic: window.is_minimized(),
                 is_zoomed: window.is_maximized(),
+                last_active: 0,
             }],
             pin_disabled: window.prevent_pinning(),
         };
@@ -300,18 +308,40 @@ impl WegItemsImpl {
         self.items.sanitize();
     }
 
-    pub fn update_window(&mut self, window: &Window) {
+    pub fn get_window_mut(&mut self, window: &Window) -> Option<&mut WegAppGroupItem> {
         let searching = window.address();
-        for item in self.iter_all_mut() {
-            if let WegItem::Pinned(data) | WegItem::Temporal(data) = item {
-                let maybe_window = data.windows.iter_mut().find(|w| w.handle == searching);
-                if let Some(app_window) = maybe_window {
-                    app_window.title = window.title();
-                    app_window.is_iconic = window.is_minimized();
-                    app_window.is_zoomed = window.is_maximized();
-                    break;
-                }
+        self.iter_all_mut().find_map(|item| match item {
+            WegItem::Pinned(data) | WegItem::Temporal(data) => {
+                data.windows.iter_mut().find(|w| w.handle == searching)
             }
+            _ => None,
+        })
+    }
+
+    pub fn update_window_activation(&mut self, window: &Window) {
+        if let Some(app_window) = self.get_window_mut(window) {
+            app_window.last_active = SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .expect("Time went backwards")
+                .as_millis() as u64;
+        }
+        // sort
+        for item in self.iter_all_mut() {
+            match item {
+                WegItem::Pinned(data) | WegItem::Temporal(data) => {
+                    data.windows
+                        .sort_by(|a, b| b.last_active.cmp(&a.last_active));
+                }
+                _ => {}
+            }
+        }
+    }
+
+    pub fn update_window(&mut self, window: &Window) {
+        if let Some(app_window) = self.get_window_mut(window) {
+            app_window.title = window.title();
+            app_window.is_iconic = window.is_minimized();
+            app_window.is_zoomed = window.is_maximized();
         }
     }
 

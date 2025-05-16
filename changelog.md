@@ -1,8 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- sort windows on dock by activation order.
+
 ### fix
 - duplicated themes on settings GUI.
+- bad toolbar color on multiple maximized windows.
 
 ## [2.3.3]
 ### features

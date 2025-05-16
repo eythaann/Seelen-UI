@@ -41,6 +41,13 @@ impl SeelenWeg {
         trace_lock!(WEG_ITEMS_IMPL).contains(window)
     }
 
+    pub fn foregrounded_app(window: &Window) -> Result<()> {
+        let mut weg = trace_lock!(WEG_ITEMS_IMPL);
+        weg.update_window_activation(window);
+        weg.emit_to_webview()?;
+        Ok(())
+    }
+
     pub fn update_app(window: &Window) -> Result<()> {
         let mut weg = trace_lock!(WEG_ITEMS_IMPL);
         weg.update_window(window);

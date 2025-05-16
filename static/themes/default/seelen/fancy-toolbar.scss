@@ -164,12 +164,14 @@
 
 .ft-bar {
   color: var(--color-persist-gray-100);
+  transition: color 0.2s linear;
 
   > .bg-layers {
     // we skip the first layer, to avoid break user themes, as before v2.2 the first layer was a noise layer
     > .bg-layer-2 {
-      transition: background-color 0.2s linear;
       background-color: var(--color-persist-gray-900);
+      transition: background-color 0.2s linear;
+      will-change: background-color;
     }
   }
 
@@ -195,7 +197,7 @@
     width: 6px;
     height: 6px;
     border-radius: 3px;
-    background-color: var(--color-focused-app-foreground, var(--color-persist-gray-100));
+    background-color: currentColor;
     transition-property: width, border-radius, background-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;

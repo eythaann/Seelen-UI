@@ -40,6 +40,11 @@ impl SeelenWeg {
                     Self::update_app(window)?;
                 }
             }
+            WinEvent::SystemForeground => {
+                if Self::contains_app(window) {
+                    Self::foregrounded_app(window)?;
+                }
+            }
             WinEvent::ObjectNameChange
             | WinEvent::SystemMinimizeStart
             | WinEvent::SystemMinimizeEnd

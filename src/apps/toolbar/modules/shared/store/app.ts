@@ -128,7 +128,10 @@ export const RootSlice = createSlice({
         state.items.isReorderDisabled = enabled;
       }
     },
-    addWindowColor(state, action: PayloadAction<[number, { background: string; foreground: string }]>) {
+    addWindowColor(
+      state,
+      action: PayloadAction<[number, { background: string; foreground: string }]>,
+    ) {
       state.windowColorByHandle[`${action.payload[0]}`] = action.payload[1];
     },
     removeWindowColor(state, action: PayloadAction<number>) {
@@ -173,7 +176,8 @@ export async function lazySlice(d: Dispatch) {
         }
         return [];
       })
-      .flat();
+      .flat()
+      .toSorted((a, b) => Number(b.lastActive - a.lastActive));
     d(RootActions.setOpenApps(apps));
   };
   WegItems.forCurrentWidget().then(onGetWegItems);

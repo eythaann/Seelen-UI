@@ -3,7 +3,14 @@ import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
 import { Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { isEqual } from 'lodash';
-import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
+import {
+  JSXElementConstructor,
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
@@ -22,6 +29,8 @@ import { UserModule } from '../user/infra/Module';
 import { RootActions, Selectors } from '../shared/store/app';
 import { SaveToolbarItems } from './application';
 
+import { RootState } from '../shared/store/domain';
+
 import { AnimatedDropdown } from '../../../shared/components/AnimatedWrappers';
 import { useWindowFocusChange } from '../../../shared/hooks';
 import { cx } from '../../../shared/styles';
@@ -33,20 +42,20 @@ const modulesByType: Record<
   ToolbarItem['type'],
   JSXElementConstructor<{ module: any; value: any }>
 > = {
-  [ToolbarItemType.Text]: Item,
-  [ToolbarItemType.Generic]: GenericItem,
-  [ToolbarItemType.User]: UserModule,
-  [ToolbarItemType.Date]: DateModule,
-  [ToolbarItemType.Power]: PowerModule,
-  [ToolbarItemType.Keyboard]: KeyboardModule,
-  [ToolbarItemType.Settings]: SettingsModule,
-  [ToolbarItemType.Workspaces]: WorkspacesModule,
-  [ToolbarItemType.Tray]: TrayModule,
-  [ToolbarItemType.Bluetooth]: BluetoothModule,
-  [ToolbarItemType.Network]: NetworkModule,
-  [ToolbarItemType.Media]: MediaModule,
-  [ToolbarItemType.Device]: DeviceModule,
-  [ToolbarItemType.Notifications]: NotificationsModule,
+  [ToolbarItemType.Text]: memo(Item),
+  [ToolbarItemType.Generic]: memo(GenericItem),
+  [ToolbarItemType.User]: memo(UserModule),
+  [ToolbarItemType.Date]: memo(DateModule),
+  [ToolbarItemType.Power]: memo(PowerModule),
+  [ToolbarItemType.Keyboard]: memo(KeyboardModule),
+  [ToolbarItemType.Settings]: memo(SettingsModule),
+  [ToolbarItemType.Workspaces]: memo(WorkspacesModule),
+  [ToolbarItemType.Tray]: memo(TrayModule),
+  [ToolbarItemType.Bluetooth]: memo(BluetoothModule),
+  [ToolbarItemType.Network]: memo(NetworkModule),
+  [ToolbarItemType.Media]: memo(MediaModule),
+  [ToolbarItemType.Device]: memo(DeviceModule),
+  [ToolbarItemType.Notifications]: memo(NotificationsModule),
 };
 
 const DividerStart = 'CenterStart';
@@ -88,6 +97,7 @@ export function ToolBar() {
   const { hideMode, position, dynamicColor } = useSelector(Selectors.settings);
 
   const data = useBarData();
+
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
 
@@ -193,28 +203,28 @@ export function ToolBar() {
 }
 
 function useBarData() {
-  const openApps = useSelector(Selectors.openApps);
-  const colors = useSelector(Selectors.windowColorByHandle, isEqual);
-
-  const maximizedOnBg = openApps.find((app) => {
-    return app.is_zoomed && !app.is_iconic;
+  const maximizedOnBg = useSelector((state: RootState) => {
+    return state.openApps.find((app) => app.isZoomed && !app.isIconic);
   });
 
+  const colors = useSelector(Selectors.windowColorByHandle, isEqual);
   const color = maximizedOnBg ? colors[String(maximizedOnBg.handle)] : undefined;
 
-  if (color) {
-    document.documentElement.style.setProperty(
-      '--color-maximized-on-bg-background',
-      color.background,
-    );
-    document.documentElement.style.setProperty(
-      '--color-maximized-on-bg-foreground',
-      color.foreground,
-    );
-  } else {
-    document.documentElement.style.removeProperty('--color-maximized-on-bg-background');
-    document.documentElement.style.removeProperty('--color-maximized-on-bg-foreground');
-  }
+  useEffect(() => {
+    if (color) {
+      document.documentElement.style.setProperty(
+        '--color-maximized-on-bg-background',
+        color.background,
+      );
+      document.documentElement.style.setProperty(
+        '--color-maximized-on-bg-foreground',
+        color.foreground,
+      );
+    } else {
+      document.documentElement.style.removeProperty('--color-maximized-on-bg-background');
+      document.documentElement.style.removeProperty('--color-maximized-on-bg-foreground');
+    }
+  }, [color]);
 
   return {
     thereIsMaximizedOnBg: !!maximizedOnBg,
