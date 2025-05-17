@@ -11,12 +11,12 @@ use windows::Win32::{
 };
 
 use crate::{
+    cli::{ServicePipe, SvcAction},
     error_handler::Result,
     hook::register_win_hook,
     instance::SeelenInstanceContainer,
     log_error,
     modules::{
-        cli::{SvcAction, TcpService},
         monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
         system_settings::application::{SystemSettings, SystemSettingsEvent},
     },
@@ -271,7 +271,7 @@ impl Seelen {
     }
 
     pub fn set_auto_start(enabled: bool) -> Result<()> {
-        TcpService::request(SvcAction::SetStartup(enabled))
+        ServicePipe::request(SvcAction::SetStartup(enabled))
     }
 
     // TODO: split ahk logic into another file/module

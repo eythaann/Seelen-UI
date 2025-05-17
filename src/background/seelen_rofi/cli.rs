@@ -1,27 +1,24 @@
-use clap::Command;
+use serde::{Deserialize, Serialize};
 
-use crate::{error_handler::Result, get_subcommands};
+use crate::error_handler::Result;
 
 use super::SeelenRofi;
+/// Seelen's App Launcher
+#[derive(Debug, Serialize, Deserialize, clap::Args)]
+pub struct AppLauncherCli {
+    #[command(subcommand)]
+    subcommand: SubCommand,
+}
 
-get_subcommands![
+#[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
+pub enum SubCommand {
     /// Shows/Hides the App Launcher
     Toggle,
-];
+}
 
 impl SeelenRofi {
-    pub const CLI_IDENTIFIER: &'static str = "launcher";
-
-    pub fn get_cli() -> Command {
-        Command::new(Self::CLI_IDENTIFIER)
-            .about("Seelen's App Launcher")
-            .arg_required_else_help(true)
-            .subcommands(SubCommand::commands())
-    }
-
-    pub fn process(&mut self, matches: &clap::ArgMatches) -> Result<()> {
-        let subcommand = SubCommand::try_from(matches)?;
-        match subcommand {
+    pub fn process(&mut self, matches: AppLauncherCli) -> Result<()> {
+        match matches.subcommand {
             SubCommand::Toggle => {
                 if self.window.is_visible()? {
                     self.hide()?;

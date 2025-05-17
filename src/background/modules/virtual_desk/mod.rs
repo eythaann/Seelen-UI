@@ -1,4 +1,4 @@
-mod cli;
+pub mod cli;
 mod native;
 mod workspaces;
 

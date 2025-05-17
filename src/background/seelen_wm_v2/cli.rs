@@ -1,4 +1,4 @@
-use clap::{Command, ValueEnum};
+use clap::ValueEnum;
 use seelen_core::handlers::SeelenEvent;
 use serde::{Deserialize, Serialize};
 use tauri::Emitter;
@@ -6,9 +6,9 @@ use tauri::Emitter;
 use crate::error_handler::Result;
 use crate::seelen::get_app_handle;
 use crate::state::application::FULL_STATE;
+use crate::trace_lock;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
-use crate::{get_subcommands, trace_lock};
 
 use super::instance::WindowManagerV2;
 use super::state::WM_STATE;
@@ -48,41 +48,51 @@ pub enum Axis {
     Right,
 }
 
-get_subcommands![
-    /** Open Dev Tools (only works if the app is running in dev mode) */
+/// Manage the Seelen Window Manager.
+#[derive(Debug, Serialize, Deserialize, clap::Args)]
+#[command(alias = "wm")]
+pub struct WindowManagerCli {
+    #[command(subcommand)]
+    subcommand: SubCommand,
+}
+
+#[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
+pub enum SubCommand {
+    /// Open Dev Tools (only works if the app is running in dev mode)
     Debug,
-    /** Pause the Seelen Window Manager. */
+    /// Pause the Seelen Window Manager.
     Pause,
-    /** Resume the Seelen Window Manager. */
+    /// Resume the Seelen Window Manager.
     Resume,
-    /** Reserve space for a incoming window. */
-    Reserve(side: AllowedReservations => "The position of the new window."),
-    /** Cancels the current reservation */
+    /// Reserve space for a incoming window.
+    Reserve {
+        /// The position of the new window.
+        side: AllowedReservations,
+    },
+    /// Cancels the current reservation
     CancelReservation,
-    /** Increases or decreases the size of the window */
-    Width(action: Sizing => "What to do with the width."),
-    /** Increases or decreases the size of the window */
-    Height(action: Sizing => "What to do with the height."),
-    /** Resets the size of the containers in current workspace to the default size. */
+    /// Increases or decreases the size of the window
+    Width {
+        /// What to do with the width.
+        action: Sizing,
+    },
+    /// Increases or decreases the size of the window
+    Height {
+        /// What to do with the height.
+        action: Sizing,
+    },
+    /// Resets the size of the containers in current workspace to the default size.
     ResetWorkspaceSize,
-    /** Focuses the window in the specified position. */
-    Focus(side: AllowedFocus => "The position of the window to focus."),
-];
+    /// Focuses the window in the specified position.
+    Focus {
+        /// The position of the window to focus.
+        side: AllowedFocus,
+    },
+}
 
-impl WindowManagerV2 {
-    pub const CLI_IDENTIFIER: &'static str = "manager";
-
-    pub fn get_cli() -> Command {
-        Command::new(Self::CLI_IDENTIFIER)
-            .about("Manage the Seelen Window Manager.")
-            .visible_alias("wm")
-            .arg_required_else_help(true)
-            .subcommands(SubCommand::commands())
-    }
-
-    pub fn process(matches: &clap::ArgMatches) -> Result<()> {
-        let subcommand = SubCommand::try_from(matches)?;
-        match subcommand {
+impl WindowManagerCli {
+    pub fn process(self) -> Result<()> {
+        match self.subcommand {
             SubCommand::Pause => {
                 // self.pause(true, true)?;
             }
@@ -90,7 +100,7 @@ impl WindowManagerV2 {
                 // self.pause(false, true)?;
                 // Seelen::start_ahk_shortcuts()?;
             }
-            SubCommand::Reserve(_side) => {
+            SubCommand::Reserve { .. } => {
                 // self.reserve(side)?;
             }
             SubCommand::CancelReservation => {
@@ -104,7 +114,7 @@ impl WindowManagerV2 {
                     }
                 }
             }
-            SubCommand::Width(action) => {
+            SubCommand::Width { action } => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
                 let percentage = match action {
                     Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
@@ -114,12 +124,12 @@ impl WindowManagerV2 {
                 let state = trace_lock!(WM_STATE);
                 let (m, w) = state.update_size(&foreground, Axis::Horizontal, percentage, false)?;
                 get_app_handle().emit_to(
-                    Self::get_label(&m.id),
+                    WindowManagerV2::get_label(&m.id),
                     SeelenEvent::WMSetLayout,
                     w.get_root_node(),
                 )?;
             }
-            SubCommand::Height(action) => {
+            SubCommand::Height { action } => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
                 let percentage = match action {
                     Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
@@ -129,7 +139,7 @@ impl WindowManagerV2 {
                 let state = trace_lock!(WM_STATE);
                 let (m, w) = state.update_size(&foreground, Axis::Vertical, percentage, false)?;
                 get_app_handle().emit_to(
-                    Self::get_label(&m.id),
+                    WindowManagerV2::get_label(&m.id),
                     SeelenEvent::WMSetLayout,
                     w.get_root_node(),
                 )?;
@@ -137,7 +147,7 @@ impl WindowManagerV2 {
             SubCommand::ResetWorkspaceSize => {
                 // self.emit(SeelenEvent::WMResetWorkspaceSize, ())?;
             }
-            SubCommand::Focus(_side) => {
+            SubCommand::Focus { .. } => {
                 // self.emit(SeelenEvent::WMFocus, side)?;
             }
         };

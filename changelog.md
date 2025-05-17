@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- allow load/unload widgets via command line client.
+
+### refactor
+- improve internal code quality related to app console client.
+
 ## [2.3.5]
 ### fix
 - settings by monitor not working correctly.

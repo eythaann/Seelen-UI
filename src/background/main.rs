@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 #![feature(never_type)]
 
+mod cli;
 mod context;
 mod error_handler;
 mod exposed;
@@ -35,13 +36,11 @@ extern crate lazy_static;
 
 use std::sync::{atomic::AtomicBool, OnceLock};
 
+use cli::{application::handle_console_client, SelfPipe, ServicePipe, SvcAction};
 use error_handler::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
-use modules::{
-    cli::{application::handle_console_cli, SvcAction, TcpBgApp, TcpService},
-    tray::application::ensure_tray_overflow_creation,
-};
+use modules::tray::application::ensure_tray_overflow_creation;
 use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
 use tray::try_register_tray_icon;
@@ -67,10 +66,10 @@ pub fn is_local_dev() -> bool {
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     validate_webview_runtime_is_installed(app.handle())?;
-    TcpBgApp::listen_tcp()?;
+    SelfPipe::listen_tcp()?;
 
-    if !TcpService::is_running() {
-        tauri::async_runtime::block_on(TcpService::start_service())?;
+    if !ServicePipe::is_running() {
+        tauri::async_runtime::block_on(ServicePipe::start_service())?;
     }
 
     check_for_webview_optimal_state(app.handle())?;
@@ -96,7 +95,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             Some(code) => {
                 // if exit code is 0 it means that the app was closed by the user
                 if code == 0 {
-                    log_error!(TcpService::request(SvcAction::Stop));
+                    log_error!(ServicePipe::request(SvcAction::Stop));
                 }
             }
             // prevent close background on webview windows closing
@@ -125,10 +124,10 @@ fn is_already_runnning() -> bool {
 
 fn main() -> Result<()> {
     register_panic_hook();
-    handle_console_cli()?;
+    handle_console_client()?;
 
     if is_already_runnning() {
-        TcpBgApp::request_open_settings()?;
+        SelfPipe::request_open_settings()?;
         return Ok(());
     }
 
