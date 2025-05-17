@@ -29,7 +29,7 @@
   "license": "Polyform Strict License",
   "dependencies": {
     "@tauri-apps/api": "^2.2.0",
-    "@tauri-apps/cli": "^2.2.7",
+    "@tauri-apps/cli": "^2.5.0",
     "@tauri-apps/plugin-autostart": "^2.2.0",
     "@tauri-apps/plugin-deep-link": "^2.2.0",
     "@tauri-apps/plugin-dialog": "^2.2.0",
