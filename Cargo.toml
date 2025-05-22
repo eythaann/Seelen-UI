@@ -44,7 +44,7 @@ tauri = { version = "2.0.0", features = [
     "image-png",
 ] }
 tauri-plugin-fs = "2.0.0"
-tauri-plugin-dialog = "2.0.0"
+tauri-plugin-dialog = "2.2.1"
 tauri-plugin-autostart = "2.0.0"
 tauri-plugin-shell = "2.2.1"
 tauri-plugin-process = "2.0.0"
