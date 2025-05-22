@@ -3468,7 +3468,7 @@ version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "af1844ef2428cc3e1cb900be36181049ef3d3193c63e43026cfe202983b27a56"
 dependencies = [
- "proc-macro-crate 2.0.0",
+ "proc-macro-crate 1.3.1",
  "proc-macro2",
  "quote",
  "syn 2.0.90",
@@ -5052,7 +5052,7 @@ dependencies = [
 [[package]]
 name = "seelen-core"
 version = "2.2.6"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#e9987d6d4c9b6650822fb4162c2888dfa6dd69f0"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#813a574aa77248b61630bbf21ac5368e73aeae2e"
 dependencies = [
  "base64 0.22.1",
  "chrono",
@@ -6536,10 +6536,9 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 [[package]]
 name = "ts-rs"
 version = "10.1.0"
-source = "git+https://github.com/eythaann/ts-rs.git#618f5ab9b02f73dfc76f72e4f18cfb52989da99e"
+source = "git+https://github.com/eythaann/ts-rs.git#e09e6894d5520a61333121e2b0c5093edee3904e"
 dependencies = [
  "chrono",
- "lazy_static",
  "serde_json",
  "thiserror 2.0.8",
  "ts-rs-macros",
@@ -6550,7 +6549,7 @@ dependencies = [
 [[package]]
 name = "ts-rs-macros"
 version = "10.1.0"
-source = "git+https://github.com/eythaann/ts-rs.git#618f5ab9b02f73dfc76f72e4f18cfb52989da99e"
+source = "git+https://github.com/eythaann/ts-rs.git#e09e6894d5520a61333121e2b0c5093edee3904e"
 dependencies = [
  "proc-macro2",
  "quote",
