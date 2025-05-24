@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    cmd: Rozkaz
-    explorer: Uruchomić
+    cmd: Wymuś
+    explorer: Uruchom
 footer:
   shortcuts: Pokaż skróty
 header:
   search: Aplikacja, polecenie lub ścieżka
 item:
   open_location: Otwórz lokalizację pliku
-  pin: Pin do Dock
+  pin: Przypnij do docka/paska zadań
