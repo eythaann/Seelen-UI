@@ -1,31 +1,31 @@
 app_menu:
-  close: Zamknąć
+  close: Zamknij
   close_multiple: Zamknij wszystko
-  copy_handles: Kopiuj uchwyty
-  kill: Zabij proces
-  kill_multiple: Zabij wszystkie procesy
+  copy_handles: Kopiuj
+  kill: Wymuś zamknięcie
+  kill_multiple: Wymuś zamknięcie wszystkich procesów
   open_file_location: Otwórz lokalizację pliku
-  pin: Szpilka
-  pin_to_center: Pin do środka
-  pin_to_left: Szpilka do lewej
-  pin_to_right: Pin po prawej
+  pin: Przypnij
+  pin_to_center: Przypnij na środku
+  pin_to_left: Przypnij po lewej
+  pin_to_right: Przypnij po prawej
   run_as: Uruchom jako administrator
-  unpin: Odpiąć
+  unpin: Odepnij
 context_menu:
-  reorder_disable: Blokada paska zadań
-  reorder_enable: Odblokowanie paska zadań
+  reorder_disable: Zablokuj pasek zadań
+  reorder_enable: Odblokuj pasek zadań
 media:
   not_playing: Nic nie gra
 media_menu:
   remove: Usuń moduł multimediów
 start_menu:
-  remove: Usuń moduł startowy
+  remove: Usuń przycisk start
 taskbar_menu:
-  add_file: Plik niestandardowy
-  add_folder: Pin Custom Folder
-  media: Dodaj moduł nośnika
+  add_file: Dodaj skrót
+  add_folder: Dodaj folder
+  media: Dodaj moduł multimediów
   settings: Ustawienia
-  start: Dodaj moduł Start
+  start: Dodaj przycisk Start
   task_manager: Menedżer zadań
 weg:
   empty: Brak elementów do pokazania
