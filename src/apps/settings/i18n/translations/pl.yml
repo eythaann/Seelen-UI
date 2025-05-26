@@ -1,23 +1,23 @@
 app_launcher:
-  enable: Włącz uruchamianie aplikacji
+  enable: Włącz launcher
   launch_on:
-    mouse_over: Najedź kursorem
-    primary: Podstawowy
-  monitor: Monitor, aby pokazać
+    mouse_over: Tam gdzie kursor
+    primary: Główny
+  monitor: Ekran na którym się uruchomi
   runners:
-    cmd: Rozkaz
-    explorer: Uruchomić
-    label: Biegacze
+    cmd: Wymuś
+    explorer: Uruchom
+    label: Opcje uruchamiania
 apps_configurations:
   app:
-    bindings: Wiązanie (wymagane są obie opcje)
+    bindings: Skrót klawiszowy (wymagane są obie opcje)
     category: Kategoria
     category_placeholder: Nic
-    monitor: Monitor
+    monitor: Ekran
     monitor_placeholder: Nic
     name: Nazwa
-    ok_create: Tworzyć
-    ok_edit: Aktualizacja
+    ok_create: Utwórz
+    ok_edit: Edytuj
     ok_readonly: Edytuj jako nowy
     options:
       float: Platforma
@@ -29,34 +29,34 @@ apps_configurations:
     title_create: Tworzenie {{nazwa}}
     title_edit: Edycja {{nazwa}}
     title_readonly: Przeglądanie {{Nazwa}}
-    weg_options_label: Opcje DOCK/PASKTA
-    wm_options_label: Opcje menedżera okien
+    weg_options_label: Ustawienia docka/paska zadań
+    wm_options_label: Ustawienia menadżera okien
     workspace: Obszar roboczy
     workspace_placeholder: Nic
   bundled_msg: >-
     Te konfiguracje pakietowe nie są edytowalne i mają na celu zapewnienie
     najlepszych wrażeń bez dostosowywania. Automatycznie konfigurują dla Ciebie
-    najczęstsze aplikacje.
+    najczęściej używane aplikacje.
   bundled_title: App Config w pakiecie z Seelen
-  confirm_delete: Czy na pewno chcesz usunąć tę konfigurację/s?
+  confirm_delete: Czy na pewno chcesz usunąć tę konfigurację?
   confirm_delete_title: Potwierdź usunięcie
-  delete: Usuwać
-  export: Eksport
+  delete: Usuń
+  export: Eksportuj
   export_full: Eksport ustawień według aplikacji
   extra_info: >-
     Interfejs użytkownika Seelen używa tylko jednego identyfikatora na aplikację
-    (znaleziono pierwsze dopasowanie), dlatego ważna jest kolejność podawania.
+    (znaleziono pierwsze dopasowanie), dlatego ważna jest kolejność dodawania.
     Priorytet będzie mieć najnowszy dodany, ponieważ tabela jest domyślnie
-    sortowana od najnowszego do starego.
+    sortowana od najnowszego do najstarszego.
   identifier:
     add_block: Dodaj blok
     and: I
     id: Identyfikator
-    kind: Identyfikować się przez
-    matching_strategy: Strategia dopasowywania
+    kind: Identyfikuj poprzez
+    matching_strategy: Sposób dopasowania
     matching_strategy_option:
       contains: Zawiera
-      ends_with: Kończy się z
+      ends_with: Kończy się na
       equals: Równe
       regex: Wyrażenie regularne
       starts_with: Zaczyna się od
@@ -68,14 +68,14 @@ apps_configurations:
       exe: Ex
       path: Ścieżka
       title: Tytuł
-  import: Import
+  import: Importuj
   import_full: Importowanie ustawień według aplikacji
   new: Nowy
   search: Szukaj
-  swap: Zamieniać
-cancel: Anulować
-close: Zamknąć
-delete: Usuwać
+  swap: Zamień
+cancel: Anuluj
+close: Zamknij
+delete: Usuń
 devtools:
   app_folders: Foldery aplikacji
   custom_config_file: Załaduj niestandardowy plik konfiguracyjny
@@ -88,13 +88,13 @@ devtools:
 extras:
   clear_icons: Wyczyść pamięć podręczną ikon systemowych
   clear_icons_tooltip: >-
-    Do pełnego uruchomienia wszystkich widżetów może być wymagane ponowne
+    Do poprawnego uruchomienia wszystkich widżetów może być wymagane ponowne
     uruchomienie systemu
-  discord: Niezgoda
-  exit: Wyjdź/wyjdź
+  discord: Odrzuć
+  exit: Wyjdź
   github: Github
   links: Oficjalne linki
-  relaunch: Wznowienie
+  relaunch: Wznów
   version: Wersja
 general:
   accent_color: Kolor akcentu
@@ -103,7 +103,7 @@ general:
     available: Dostępne pakiety ikon
     selected: Aktywne pakiety ikon
   language: Język
-  startup: Biegać na startup?
+  startup: Uruchomić przy starcie systemu?
   theme:
     available: Dostępne motywy
     selected: Aktywne motywy
@@ -111,13 +111,13 @@ header:
   labels:
     developer: Deweloper
     extras: Dodatki
-    general: Ogólny
-    home: Dom
+    general: Ogólne
+    home: Strona główna
     iconpack: Pakiety ikon
-    monitors: Monitory
+    monitors: Ekrany
     plugin: Wtyczki
     resources: Zasoby
-    shortcuts: Skróty
+    shortcuts: Skróty klawiszowe
     soundpack: Pakiety dźwiękowe
     specific_apps: Ustawienia według aplikacji
     theme: Tematy
@@ -145,161 +145,161 @@ resources:
   outdated: >-
     Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
     działać poprawnie.
-save: Ratować
-save_and_restart: Zapisz i uruchom ponownie
+save: Zastosuj
+save_and_restart: Zastosuj i uruchom ponownie
 see_more: Zobacz więcej
 shortcuts:
   enable: Włącz zintegrowane skróty (AHK)
   enable_tooltip: Wyłącz, jeśli zaimplementujesz własne skróty za pomocą API Seelen Core
   labels:
-    decrease_height: Zmniejszyć wysokość
-    decrease_width: Zmniejszyć szerokość
-    focus_bottom: Focus Dim
-    focus_latest: Focus najnowszy
-    focus_left: Skup się na lewej
-    focus_right: Skup się dobrze
-    focus_top: Focus Top
-    increase_height: Zwiększyć wysokość
-    increase_width: Zwiększyć szerokość
+    decrease_height: Zmniejsz wysokość
+    decrease_width: Zmniejsz szerokość
+    focus_bottom: Przełącz na okno pod spodem
+    focus_latest: Przełącz na ostatnie okno
+    focus_left: Przełącz na lewe okno
+    focus_right: Przełącz na prawe okno
+    focus_top: Przełącz na okno na wierzchu
+    increase_height: Zwiększ wysokość
+    increase_width: Zwiększ szerokość
     misc_open_settings: Otwórz ustawienia
-    misc_toggle_lock_tracing: Przełączanie śledzenia blokady (dzienniki)
-    misc_toggle_win_event_tracing: Przełączanie zdarzeń wygranych (dzienniki)
-    move_to_workspace_0: Przenieś się do obszaru roboczego 0
-    move_to_workspace_1: Przenieś się do obszaru roboczego 1
-    move_to_workspace_2: Przenieś się do obszaru roboczego 2
-    move_to_workspace_3: Przenieś się do obszaru roboczego 3
-    move_to_workspace_4: Przenieś się do obszaru roboczego 4
-    move_to_workspace_5: Przenieś się do obszaru roboczego 5
-    move_to_workspace_6: Przenieś się do obszaru roboczego 6
-    move_to_workspace_7: Przenieś się do obszaru roboczego 7
-    move_to_workspace_8: Przenieś się do obszaru roboczego 8
-    move_to_workspace_9: Przenieś się do obszaru roboczego 9
+    misc_toggle_lock_tracing: Przełącz śledzenie blokady (dzienniki)
+    misc_toggle_win_event_tracing: Przełącz śledzenie zdarzeń systemu Windows (dzienniki)
+    move_to_workspace_0: Przenieś na pulpit 0
+    move_to_workspace_1: Przenieś na pulpit 1
+    move_to_workspace_2: Przenieś na pulpit 2
+    move_to_workspace_3: Przenieś na pulpit 3
+    move_to_workspace_4: Przenieś na pulpit 4
+    move_to_workspace_5: Przenieś na pulpit 5
+    move_to_workspace_6: Przenieś na pulpit 6
+    move_to_workspace_7: Przenieś na pulpit 7
+    move_to_workspace_8: Przenieś na pulpit 8
+    move_to_workspace_9: Przenieś na pulpit 9
     reserve_bottom: Rezerwować dno
     reserve_float: Rezerwować pływak
     reserve_left: Rezerwa w lewo
     reserve_right: Rezerwuj prawnie
     reserve_stack: Stos rezerwowy
     reserve_top: Rezerwuj top
-    restore_sizes: Przywróć rozmiary
-    send_to_workspace_0: Wyślij do obszaru roboczego 0
-    send_to_workspace_1: Wyślij do obszaru roboczego 1
-    send_to_workspace_2: Wyślij na przestrzeń roboczą 2
-    send_to_workspace_3: Wyślij do obszaru roboczego 3
-    send_to_workspace_4: Wyślij na przestrzeń roboczą 4
-    send_to_workspace_5: Wyślij do obszaru roboczego 5
-    send_to_workspace_6: Wyślij do obszaru roboczego 6
-    send_to_workspace_7: Wyślij na przestrzeń roboczą 7
-    send_to_workspace_8: Wyślij na przestrzeń roboczą 8
-    send_to_workspace_9: Wyślij do obszaru roboczego 9
-    start_weg_app_0: Focus lub uruchom aplikację na pozycji paska zadań 1
-    start_weg_app_1: Focus lub uruchom aplikację na pozycji paska zadań 2
-    start_weg_app_2: Focus lub uruchom aplikację na pozycji paska zadań 3
-    start_weg_app_3: Focus lub uruchom aplikację na pozycji paska zadań 4
-    start_weg_app_4: Focus lub uruchom aplikację na pozycji paska zadań 5
-    start_weg_app_5: Focus lub uruchom aplikację na pozycji paska zadań 6
-    start_weg_app_6: Focus lub uruchom aplikację na pozycji paska zadań 7
-    start_weg_app_7: Focus lub uruchom aplikację na pozycji paska zadań 8
-    start_weg_app_8: Focus lub uruchom aplikację na pozycji paska zadań 9
-    start_weg_app_9: Focus lub uruchom aplikację na pozycji paska zadań 10
-    switch_workspace_0: Przejdź na obszar roboczy 1
-    switch_workspace_1: Przełącz się na przestrzeń roboczą 2
-    switch_workspace_2: Przełącz się na przestrzeń roboczą 2
-    switch_workspace_3: Przełącz się na przestrzeń roboczą 3
-    switch_workspace_4: Przełącz się na przestrzeń roboczą 4
-    switch_workspace_5: Przełącz się na przestrzeń roboczą 5
-    switch_workspace_6: Przejdź na przestrzeń roboczą 6
-    switch_workspace_7: Przełącz się na przestrzeń roboczą 7
-    switch_workspace_8: Przełącz się na przestrzeń roboczą 8
-    switch_workspace_9: Przejdź na obszar roboczy 9
-    toggle_launcher: Dźwignia kolankowa
-  readonly_tooltip: To jest skrót tylko do odczytu
-  reset: Zresetuj do domyślnych
+    restore_sizes: Przywróć rozmiar
+    send_to_workspace_0: Wyślij na pulpit 0
+    send_to_workspace_1: Wyślij na pulpit 1
+    send_to_workspace_2: Wyślij na pulpit 2
+    send_to_workspace_3: Wyślij na pulpit 3
+    send_to_workspace_4: Wyślij na pulpit 4
+    send_to_workspace_5: Wyślij na pulpit 5
+    send_to_workspace_6: Wyślij na pulpit 6
+    send_to_workspace_7: Wyślij na pulpit 7
+    send_to_workspace_8: Wyślij na pulpit 8
+    send_to_workspace_9: Wyślij na pulpit 9
+    start_weg_app_0: Uruchom lub przełącz się na aplikację z pozycji 1 paska zadań
+    start_weg_app_1: Uruchom lub przełącz się na aplikację z pozycji 2 paska zadań
+    start_weg_app_2: Uruchom lub przełącz się na aplikację z pozycji 3 paska zadań
+    start_weg_app_3: Uruchom lub przełącz się na aplikację z pozycji 4 paska zadań
+    start_weg_app_4: Uruchom lub przełącz się na aplikację z pozycji 5 paska zadań
+    start_weg_app_5: Uruchom lub przełącz się na aplikację z pozycji 6 paska zadań
+    start_weg_app_6: Uruchom lub przełącz się na aplikację z pozycji 7 paska zadań
+    start_weg_app_7: Uruchom lub przełącz się na aplikację z pozycji 8 paska zadań
+    start_weg_app_8: Uruchom lub przełącz się na aplikację z pozycji 9 paska zadań
+    start_weg_app_9: Uruchom lub przełącz się na aplikację z pozycji 10 paska zadań
+    switch_workspace_0: Przejdź na pulpit 1
+    switch_workspace_1: Przejdź na pulpit 2
+    switch_workspace_2: Przejdź na pulpit 2
+    switch_workspace_3: Przejdź na pulpit 3
+    switch_workspace_4: Przejdź na pulpit 4
+    switch_workspace_5: Przejdź na pulpit 5
+    switch_workspace_6: Przejdź na pulpit 6
+    switch_workspace_7: Przejdź na pulpit 7
+    switch_workspace_8: Przejdź na pulpit 8
+    switch_workspace_9: Przejdź na pulpit 9
+    toggle_launcher: Uruchom launcher
+  readonly_tooltip: Ten skrót nie może zostać zmieniony
+  reset: Przywróć ustawienia domyślne
 sides:
-  bottom: Spód
-  left: Lewy
-  right: Prawidłowy
-  top: Szczyt
+  bottom: Dół
+  left: Lewo
+  right: Prawo
+  top: Góra
 start:
   message: >-
-    Witamy w Seelen UI, ostatecznym środowisku komputerowym z włączonym
-    menedżerem Windows Windows, aby poprawić Twoje wrażenia z systemu Windows !
-    Przeglądaj nową erę wydajności i wielozadaniowości z naszym intuicyjnym
-    interfejsem i zaawansowanymi funkcjami.
-  message_accent: Zoptymalizuj swoją wydajność za pomocą stylu!
-  title: Powitanie!
+    Witamy w Seelen UI, kompletnym środowisku pulpitu zawierającym menadżer
+    rozmieszczenia okien, który sprawi że korzystanie z systemu Windows stanie
+    się przyjemniejsze! Przejdź na wyższy poziom produktywności dzięki naszemu
+    intuicyjnemu interfejsowi i zaawansowanym funkcjom.
+  message_accent: Zwiększ swoją produktywność w świetnym stylu!
+  title: Witaj!
 toolbar:
-  auto_hide: Auto Hide
-  delay_to_hide: Opóźnienie w ukryciu
-  delay_to_show: Opóźnienie w pokazie
+  auto_hide: Automatyczne ukrywanie
+  delay_to_hide: Opóźnienie ukrycia
+  delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja
   dynamic_color: Dynamiczny kolor
   dynamic_color_tooltip: >-
     Włącz dynamiczne kolory tła i pierwszego planu w oparciu o okno, na którym
     skupiono uwagę. (Kolory mogą być zastępowane przez motywy)
-  enable: Włącz fantazyjny pasek narzędzi
+  enable: Włącz pasek narzędzi
   height: Wysokość
   hide_mode:
     always: Zawsze
     never: Nigdy
-    on_overlap: Na zakładkę
+    on_overlap: Kiedy zasłania
   label: Pasek narzędzi
   placeholder: {}
   show_hibernate: Wyświetlanie przycisku hibernacji w menu zasilania
 update:
-  available: Aktualizacja dostępna!
+  available: Dostępna aktualizacja!
   channel: Kanał aktualizacji
-  downloading: Ściąganie...
+  downloading: Pobieranie...
 vd:
   disabled_windows_version: >-
-    Native Virtual Desktop Strategy nie jest dostępna dla wersji systemu
+    Strategia wirtualnych pulpitów nie jest dostępna dla tej wersji systemu
     Windows.
   strategy:
-    label: Strategia wirtualnego komputera stacjonarnego
-    native: Rodzinny
+    label: Strategia wirtualnych pulpitów
+    native: Natywny
     seelen: Seelen
 wall:
   backgrounds: Tapety
-  enable: Włącz menedżer tapety
-  hours: godziny
-  interval: Zmień tapetę każdą
-  minutes: protokół
-  no_background: Pusty pokaz slajdów, zamiast tego używając tła motywu.
-  random: Losowe slajd
-  seconds: towary drugiej jakości
+  enable: Włącz menedżer tapet
+  hours: godzin
+  interval: Zmień tapetę co
+  minutes: minut
+  no_background: Brak tapet, używane są tapety motywu systemu Windows.
+  random: Losowa kolejność
+  seconds: sekund
 weg:
-  auto_hide: Automatyczne chowanie
-  delay_to_hide: Opóźnienie w ukryciu
-  delay_to_show: Opóźnienie w pokazie
+  auto_hide: Automatyczne ukrywanie
+  delay_to_hide: Opóźnienie ukrycia
+  delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja
   enable: Włącz dok/pasek zadań
   filtering: Filtrowanie pozycji
-  gap: Luka
+  gap: Przerwa
   hide_mode:
     always: Zawsze
     never: Nigdy
-    on_overlap: Na zakładkę
+    on_overlap: Kiedy zasłania
   items:
-    gap: Przestrzeń między przedmiotami
-    label: Rzeczy
+    gap: Przerwa między elementami
+    label: Elementy
     pinned_visibility:
       always: Zawsze
       label: Widoczność przypiętych elementów
-      when_primary: Gdy monitor jest głównym
-    show_instance_counter: Pokaż licznik otwartych okien
-    show_window_title: Pokaż tytuł otwartego okna (tylko poziomo)
-    size: Rozmiar elementu
+      when_primary: Główny ekran
+    show_instance_counter: Wyświetl liczbę otwartych okien
+    show_window_title: Wyświetl tytuł otwartego okna (tylko poziomo)
+    size: Rozmiar elementów
     temporal_visibility:
-      all: Wszystko
-      label: Widoczność nieprzypiętych elementów
-      on_monitor: Na Monitorze
-    thumbnail_generation_enabled: Generowanie miniatur po najechaniu na element
+      all: Wszystkie ekrany
+      label: Widoczność uruchomionych aplikacji
+      on_monitor: Jeden ekran
+    thumbnail_generation_enabled: Miniatury po najechaniu na element
     visible_separators: Widoczne separatory
   label: Dock/Pasek zadań
   margin: Margines
   mode:
     full_width: Pełna szerokość ekranu
-    min_content: Mały, jak to tylko możliwe
-  padding: Wyściółka
+    min_content: Jak najmniejszy
+  padding: Wysokość tła
   width: Szerokość
 wm:
   author: Autor
@@ -308,9 +308,9 @@ wm:
     offset: Przesunięcie granic
     width: Szerokość granicy
   description: Opis
-  enable: Włącz menedżer okien kafelków
+  enable: Włącz menedżer rozmieszczenia okien
   layout: Układ
-  resize_delta: Zmień rozmiar Delta (%)
-  space_between_containers: Przestrzeń między pojemnikami
-  workspace_offset: Przestrzenie robocze przesunięte (marginesy)
-  workspace_padding: Wypadki przestrzeni roboczej
+  resize_delta: Delta rozmiaru (%)
+  space_between_containers: Przestrzeń między oknami
+  workspace_offset: Marginesy przestrzeni roboczych
+  workspace_padding: Wysokość tła przestrzeni roboczych
