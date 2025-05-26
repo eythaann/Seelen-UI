@@ -2,20 +2,20 @@ bluetooth:
   available: Dostępne urządzenia (niesparowane)
   cancel: Anuluj
   connected: Połączone urządzenia
-  forget: Zapomnieć
-  lowenergy: Niski poziom energii
+  forget: Zapomnij
+  lowenergy: Niski poziom baterii
   more: Więcej ustawień Bluetooth
   not_found: Nie znaleziono urządzeń Bluetooth
-  pair: Para
+  pair: Sparuj
   paired: Zapisane urządzenia
   placeholder:
-    passphrase: Hasło, kod lub PIN
+    passphrase: Hasło lub kod PIN
   scanning: Skanowanie w poszukiwaniu urządzeń
 context_menu:
   add_custom_text: Dodaj niestandardowy element tekstowy
   modules: Moduły
   remove: Usuń moduł
-  reorder_disable: Blokada paska narzędzi
+  reorder_disable: Zablokuj pasek narzędzi
   reorder_enable: Odblokuj pasek narzędzi
   restore: Przywróć domyślne
   settings: Ustawienia
@@ -24,24 +24,24 @@ keyboard:
   more: Więcej ustawień klawiatury
   title: Układ klawiatury
 media:
-  default_multimedia_volume: Głośność multimediów
+  default_multimedia_volume: Poziomy głośności
   device:
     channel:
       system: Dźwięki systemowe
     comunications: Komunikacja
-    missing: Brakujące urządzenie
+    missing: Brak urządzenia
     mixer: Mikser głośności
     multimedia: Multimedia
     settings: Więcej ustawień urządzenia
-    volume: Pojemność urządzenia
+    volume: Głośność urządzenia
   input_devices: Urządzenia wejściowe
   output_devices: Urządzenia wyjściowe
-  players: Gracze multimedialni
+  players: Odtwarzacze multimedialne
 network:
   available: Dostępne sieci
-  connect: Łączyć
+  connect: Połącz
   connected: Połączony z
-  disconnect: Rozłączyć się
+  disconnect: Rozłącz
   hidden: Ukryta sieć
   more: Więcej ustawień sieciowych
   not_found: Nie znaleziono sieci
@@ -49,51 +49,51 @@ network:
     password: Hasło
   saved: Zapisane sieci
   scanning: Skanowanie w poszukiwaniu sieci
-  secured: Szyfrowana sieć
+  secured: Sieć szyfrowana
 notifications:
   clear: Wyczyść wszystko
   empty: Brak powiadomień
   settings: Więcej ustawień powiadomień
   title: Powiadomienia
 placeholder:
-  battery_remaining: '% pozostały'
+  battery_remaining: '% pozostało'
   bluetooth_devices: Bluetooth i urządzenia
   ethernet_connected: dostęp do Internetu
   ethernet_disconnected: Brak dostępu do internetu
   notifications: Powiadomienia
-  open_system_tray: Otwórz tacę systemową
+  open_system_tray: Ukryte ikony
   settings: Szybkie ustawienia
-  smart_charge: '- Inteligentny ładunek'
-  volume: Tom
+  smart_charge: '- Inteligentne ładowanie'
+  volume: Głośność
 settings:
   app_settings: Ustawienia aplikacji
   brightness: Jasność
-  hibernate: Hibernacja
-  lock: Blokada
+  hibernate: Hibernuj
+  lock: Blokuj
   log_out: Wyloguj
-  power: Moc
+  power: Zasilanie
   restart: Uruchom ponownie
-  shutdown: Zamknięcie
-  sleep: Spać
+  shutdown: Zamknij
+  sleep: Uśpij
   title: Ustawienia
 tray:
-  empty: 'Brak elementów w zasobniku (Uwaga: Windows 10 nie jest zaimplementowany)'
-  unlabeled: Ikona zasobnika bez etykiety
+  empty: 'Brak elementów w zasobniku (Uwaga: Windows 10 nie jest obsługiwany)'
+  unlabeled: Ikona bez etykiety
 userhome:
   empty_list: Brak przedmiotów
   folders:
     desktop: Pulpit
     documents: Dokumenty
-    downloads: Pliki do pobrania
+    downloads: Pobrane
     more_items: Pokaż więcej...
     music: Muzyka
-    pictures: Zdjęcia
+    pictures: Obrazy
     recent: Ostatnio używane
     reduce_items: Pokaż mniej...
-    title: Katalogi użytkowników
-    videos: Filmy
+    title: Katalog użytkownika
+    videos: Wideo
   profile:
-    accounts: Ustawienia otwartego konta
+    accounts: Ustawienia konta
     open_onedrive: Otwórz katalog OneDrive
     open_user_folder: Otwórz katalog użytkownika
   seelen_options:
