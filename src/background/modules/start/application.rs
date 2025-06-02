@@ -48,17 +48,25 @@ impl StartMenuManager {
 
     fn init(&mut self) -> Result<()> {
         if self.cache_path.exists() {
-            self.load_cache()?;
-            std::thread::spawn(|| {
-                let mut menu = StartMenuManager::new();
-                log_error!(menu.read_start_menu_folders());
-                log_error!(menu.store_cache());
-                START_MENU_MANAGER.swap(Arc::new(menu));
-            });
-        } else {
-            self.read_start_menu_folders()?;
-            self.store_cache()?;
+            match self.load_cache() {
+                Ok(_) => {
+                    // refresh without blocking
+                    std::thread::spawn(|| {
+                        let mut menu = StartMenuManager::new();
+                        log_error!(menu.read_start_menu_folders());
+                        log_error!(menu.store_cache());
+                        START_MENU_MANAGER.swap(Arc::new(menu));
+                    });
+                    return Ok(());
+                }
+                Err(e) => {
+                    log::error!("Failed to load start menu cache: {}", e);
+                }
+            }
         }
+
+        self.read_start_menu_folders()?;
+        self.store_cache()?;
         Ok(())
     }
 

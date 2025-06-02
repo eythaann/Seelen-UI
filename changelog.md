@@ -8,6 +8,9 @@
 ### refactor
 - improve internal code quality related to app console client.
 
+### fix
+- app not starting on start-menu cache corruption.
+
 ## [2.3.5]
 ### fix
 - settings by monitor not working correctly.
