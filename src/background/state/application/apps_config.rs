@@ -9,10 +9,10 @@ impl FullState {
         let window = Window::from(hwnd);
 
         let path = window.process().program_path().ok()?;
+        let exe = path.file_name()?.to_string_lossy().to_uppercase();
+        let path = path.to_string_lossy().to_uppercase();
         let title = window.title();
         let class = window.class();
-        let exe = path.file_name()?.to_string_lossy().to_string();
-        let path = path.to_string_lossy().to_uppercase();
 
         self.settings_by_app
             .iter()
