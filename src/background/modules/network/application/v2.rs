@@ -20,6 +20,7 @@ use crate::{
 pub struct NetworkManagerV2 {}
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[allow(dead_code)]
 pub enum NetworkManagerEventV2 {}
 
 // event_manager!(NetworkManagerV2, NetworkManagerEventV2);
