@@ -2,11 +2,10 @@ pub mod handlers;
 
 use std::{collections::HashMap, sync::LazyLock};
 
-use base64::Engine;
 use parking_lot::Mutex;
 use seelen_core::{
-    resource::{Resource, ResourceKind, ResourceText},
-    state::{CssStyles, SluPopupConfig, SluPopupContent},
+    resource::{Resource, ResourceKind},
+    state::{CssStyles, SluPopupConfig, SluPopupContent, WidgetId},
 };
 use tauri::{
     utils::{config::WindowEffectsConfig, WindowEffect},
@@ -16,6 +15,7 @@ use uuid::Uuid;
 
 use crate::{
     error_handler::Result, log_error, seelen::get_app_handle, state::application::FULL_STATE,
+    utils::WidgetWebviewLabel,
 };
 
 pub static POPUPS_MANAGER: LazyLock<Mutex<PopupsManager>> = LazyLock::new(|| {
@@ -35,13 +35,12 @@ pub struct PopupsManager {
 impl PopupsManager {
     pub fn create(&mut self, config: SluPopupConfig) -> Result<Uuid> {
         let popup_id = Uuid::new_v4();
-        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD
-            .encode(format!("@seelen/popup?instanceId={popup_id}"));
+        let label = WidgetWebviewLabel::new(&WidgetId::known_popup(), None, Some(&popup_id));
 
         let manager = get_app_handle();
         let window = WebviewWindowBuilder::new(
             manager,
-            label,
+            label.raw,
             tauri::WebviewUrl::App("popup/index.html".into()),
         )
         .center()
@@ -165,13 +164,15 @@ fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
         }
     };
 
+    let state = FULL_STATE.load();
+    let locale = state.locale();
     popup.content = vec![SluPopupContent::Group {
         items: vec![
             image,
             SluPopupContent::Group {
                 items: vec![
                     SluPopupContent::Text {
-                        value: resource_text_to_string(&resource.metadata.display_name),
+                        value: resource.metadata.display_name.get(locale).to_owned(),
                         styles: Some(
                             CssStyles::new()
                                 .add("fontWeight", "bold")
@@ -180,7 +181,7 @@ fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
                         ),
                     },
                     SluPopupContent::Text {
-                        value: resource_text_to_string(&resource.metadata.description),
+                        value: resource.metadata.description.get(locale).to_owned(),
                         styles: None,
                     },
                 ],
@@ -200,17 +201,4 @@ fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
     }];
 
     Ok(popup)
-}
-
-fn resource_text_to_string(text: &ResourceText) -> String {
-    match text {
-        ResourceText::En(s) => s.to_string(),
-        ResourceText::Localized(m) => {
-            let locale = FULL_STATE.load().locale();
-            m.get(&locale)
-                .or_else(|| m.get("en"))
-                .map(|s| s.to_string())
-                .unwrap_or_else(|| "Unknown".to_owned())
-        }
-    }
 }

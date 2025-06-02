@@ -16,7 +16,7 @@ use super::FullState;
 impl FullState {
     pub(super) fn emit_settings(&self) -> Result<()> {
         get_app_handle().emit(SeelenEvent::StateSettingsChanged, self.settings())?;
-        trace_lock!(SEELEN).on_settings_change()?;
+        trace_lock!(SEELEN).on_settings_change(self)?;
         trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }

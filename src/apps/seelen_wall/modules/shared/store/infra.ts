@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { SeelenEvent, Settings } from '@seelen-ui/lib';
+import { StartThemingTool } from '@shared/ThemeLoader';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 
 import { Actions, RootSlice } from './app';
-import { StartThemingTool } from 'src/apps/shared/styles';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

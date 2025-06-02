@@ -17,7 +17,7 @@ use windows::Win32::Graphics::Gdi::HMONITOR;
 
 #[derive(Getters, MutGetters)]
 #[getset(get = "pub", get_mut = "pub")]
-pub struct SeelenInstanceContainer {
+pub struct SluMonitorInstance {
     monitor: Monitor,
     id: String,
     toolbar: Option<FancyToolbar>,
@@ -27,9 +27,9 @@ pub struct SeelenInstanceContainer {
     widgets: HashMap<WidgetId, WidgetInstance>,
 }
 
-unsafe impl Send for SeelenInstanceContainer {}
+unsafe impl Send for SluMonitorInstance {}
 
-impl SeelenInstanceContainer {
+impl SluMonitorInstance {
     pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
         let monitor = Monitor::from(hmonitor);
         let mut instance = Self {
@@ -84,34 +84,45 @@ impl SeelenInstanceContainer {
         Ok(())
     }
 
-    pub fn load_settings(&mut self, settings: &FullState) -> Result<()> {
-        if settings.is_bar_enabled_on_monitor(self.monitor()) {
+    pub fn reload_widgets(&mut self, state: &FullState) -> Result<()> {
+        // unload uninstalled widgets
+        self.widgets.retain(|id, _| state.widgets.contains_key(id));
+
+        let third_party_widgets = state.widgets.iter().filter(|(_, w)| !w.metadata.bundled);
+        for (id, widget) in third_party_widgets {
+            if !state.is_widget_enable(widget, &self.monitor) {
+                self.widgets.remove(id); // unload disabled widgets
+                continue;
+            }
+
+            if !self.widgets.contains_key(id) {
+                self.widgets
+                    .insert(id.clone(), WidgetInstance::load(widget.clone(), &self.id)?);
+            }
+        }
+        Ok(())
+    }
+
+    pub fn load_settings(&mut self, state: &FullState) -> Result<()> {
+        if state.is_bar_enabled_on_monitor(self.monitor()) {
             self.add_toolbar()?;
         } else {
             self.toolbar = None;
         }
 
-        if settings.is_weg_enabled_on_monitor(&self.monitor.device_id()?) {
+        if state.is_weg_enabled_on_monitor(&self.monitor.device_id()?) {
             self.add_weg()?;
         } else {
             self.weg = None;
         }
 
-        if settings.is_window_manager_enabled() {
+        if state.is_window_manager_enabled() {
             self.add_wm()?;
         } else {
             self.wm = None;
         }
 
-        for (id, widget) in &settings.widgets {
-            // Todo: filter by widget settings (enabled state)
-            if self.widgets.contains_key(id) || widget.html.is_none() {
-                continue;
-            }
-            self.widgets
-                .insert(id.clone(), WidgetInstance::load(widget.clone())?);
-        }
-
+        self.reload_widgets(state)?;
         Ok(())
     }
 

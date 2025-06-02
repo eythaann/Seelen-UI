@@ -41,14 +41,14 @@ impl WindowManagerV2 {
 
     pub fn get_label(monitor_id: &str) -> String {
         base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(format!(
-            "{}?monitor={}",
+            "{}?monitorId={}",
             Self::TARGET,
             monitor_id
         ))
     }
 
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
-        let label = format!("{}?monitor={}", Self::TARGET, monitor_id);
+        let label = format!("{}?monitorId={}", Self::TARGET, monitor_id);
         log::info!("Creating {}", label);
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
 

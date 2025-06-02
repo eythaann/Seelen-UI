@@ -18,6 +18,7 @@ import {
   VideosFolder,
 } from '@seelen-ui/lib';
 import { FancyToolbarSettings, FocusedApp } from '@seelen-ui/lib/types';
+import { StartThemingTool } from '@shared/ThemeLoader';
 import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -25,7 +26,6 @@ import { debounce, throttle } from 'lodash';
 
 import { lazySlice, RootActions, RootSlice } from './app';
 
-import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
 
 export const store = configureStore({
@@ -72,7 +72,7 @@ async function initFocusedColorSystem() {
     }
 
     const luminance = color.calcLuminance();
-    const background = color.asHex();
+    const background = color.toHexString();
     const foreground =
       luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)';
 

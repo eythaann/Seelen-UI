@@ -1,8 +1,7 @@
 import { IconName } from '@icons';
-import { getCurrentWidget, SeelenCommand } from '@seelen-ui/lib';
+import { invoke, SeelenCommand, Widget } from '@seelen-ui/lib';
 import { SluPopupConfig, SluPopupContent } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
-import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useEffect, useState } from 'react';
 
@@ -45,6 +44,8 @@ function SluPopupContent({ entry }: { entry: SluPopupContent }) {
   }
 }
 
+const currentWidget = await Widget.getCurrentAsync();
+
 export function App() {
   const [state, setState] = useState<SluPopupConfig>({
     title: [],
@@ -53,7 +54,7 @@ export function App() {
   });
 
   useEffect(() => {
-    invoke<SluPopupConfig>(SeelenCommand.GetPopupConfig, { id: getCurrentWidget().params.instanceId })
+    invoke(SeelenCommand.GetPopupConfig, { instanceId: currentWidget.decoded.instanceId! })
       .then((data) => {
         setState(data);
         getCurrentWindow().show();

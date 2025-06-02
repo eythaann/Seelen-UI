@@ -1,3 +1,4 @@
+import { dialog } from '@seelen-ui/lib/tauri';
 import { SeelenWallWallpaper } from '@seelen-ui/lib/types';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { Button, InputNumber, Switch } from 'antd';
@@ -5,8 +6,6 @@ import { Reorder } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { dialog } from '../shared/tauri/infra';
 
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 import { Icon } from 'src/apps/shared/components/Icon';

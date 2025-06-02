@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { LauncherHistory, SeelenCommand, Settings, UIColors } from '@seelen-ui/lib';
+import { StartThemingTool } from '@shared/ThemeLoader';
 import { invoke } from '@tauri-apps/api/core';
 
 import { Actions, RootSlice } from './app';
 
-import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
 
 export const store = configureStore({

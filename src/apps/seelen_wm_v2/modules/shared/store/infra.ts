@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { SeelenEvent, Settings, UIColors } from '@seelen-ui/lib';
 import { WmNode } from '@seelen-ui/lib/types';
+import { StartThemingTool } from '@shared/ThemeLoader';
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 
 import { Actions, RootSlice } from './app';
-
-import { StartThemingTool } from '../../../../shared/styles';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### features
+- widgets implementation.
 - allow load/unload widgets via command line client.
 
 ### refactor

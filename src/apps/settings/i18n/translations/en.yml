@@ -1,3 +1,6 @@
+widget:
+  enable: Enable this widget
+  instances: Instances
 app_launcher:
   enable: Enable App Launcher
   launch_on:

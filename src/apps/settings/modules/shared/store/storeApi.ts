@@ -1,11 +1,11 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { dialog, fs } from '@seelen-ui/lib/tauri';
 import { AppConfig, Settings } from '@seelen-ui/lib/types';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
 
 import { resolveDataPath } from '../config/infra';
-import { dialog, fs } from '../tauri/infra';
 
 import i18n from '../../../i18n';
 

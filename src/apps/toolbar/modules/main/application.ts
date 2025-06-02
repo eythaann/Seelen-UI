@@ -1,6 +1,6 @@
+import { fs } from '@seelen-ui/lib/tauri';
 import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 import { path } from '@tauri-apps/api';
-import { writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { cloneDeep, debounce, throttle } from 'lodash';
 
@@ -10,7 +10,7 @@ export const SaveToolbarItems = debounce(async () => {
   const { items: placeholder } = store.getState();
   const toBeSaved = cloneDeep(placeholder);
   const filePath = await path.join(await path.appDataDir(), 'toolbar_items.yml');
-  await writeTextFile(filePath, yaml.dump(toBeSaved));
+  await fs.writeTextFile(filePath, yaml.dump(toBeSaved));
 }, 1000);
 
 export const RestoreToDefault = throttle(async () => {
@@ -46,5 +46,5 @@ export const RestoreToDefault = throttle(async () => {
   };
 
   const filePath = await path.join(await path.appDataDir(), 'toolbar_items.yml');
-  await writeTextFile(filePath, yaml.dump(toBeSaved));
+  await fs.writeTextFile(filePath, yaml.dump(toBeSaved));
 }, 2000);

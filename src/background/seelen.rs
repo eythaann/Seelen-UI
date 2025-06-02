@@ -14,7 +14,7 @@ use crate::{
     cli::{ServicePipe, SvcAction},
     error_handler::Result,
     hook::register_win_hook,
-    instance::SeelenInstanceContainer,
+    instance::SluMonitorInstance,
     log_error,
     modules::{
         monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
@@ -25,7 +25,7 @@ use crate::{
     seelen_wall::SeelenWall,
     seelen_weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
     seelen_wm_v2::instance::WindowManagerV2,
-    state::application::FULL_STATE,
+    state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::{ahk::AutoHotKey, pwsh::PwshScript},
@@ -48,7 +48,7 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
 /** Struct should be initialized first before calling any other methods */
 #[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
-    instances: Vec<SeelenInstanceContainer>,
+    instances: Vec<SluMonitorInstance>,
     #[getset(get = "pub", get_mut = "pub")]
     rofi: Option<SeelenRofi>,
     #[getset(get = "pub", get_mut = "pub")]
@@ -57,7 +57,7 @@ pub struct Seelen {
 
 /* ============== Getters ============== */
 impl Seelen {
-    pub fn instances_mut(&mut self) -> &mut Vec<SeelenInstanceContainer> {
+    pub fn instances_mut(&mut self) -> &mut Vec<SluMonitorInstance> {
         &mut self.instances
     }
 
@@ -65,11 +65,11 @@ impl Seelen {
         SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Acquire)
     }
 
-    pub fn focused_monitor_mut(&mut self) -> Option<&mut SeelenInstanceContainer> {
+    pub fn focused_monitor_mut(&mut self) -> Option<&mut SluMonitorInstance> {
         self.instances.iter_mut().find(|m| m.is_focused())
     }
 
-    pub fn monitor_by_device_id_mut(&mut self, id: &str) -> Option<&mut SeelenInstanceContainer> {
+    pub fn monitor_by_device_id_mut(&mut self, id: &str) -> Option<&mut SluMonitorInstance> {
         self.instances.iter_mut().find(|m| m.id() == id)
     }
 }
@@ -104,9 +104,15 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn on_settings_change(&mut self) -> Result<()> {
-        let state = FULL_STATE.load();
-        rust_i18n::set_locale(&state.locale());
+    pub fn on_widgets_change(&mut self, state: &FullState) -> Result<()> {
+        for monitor in &mut self.instances {
+            monitor.reload_widgets(state)?;
+        }
+        Ok(())
+    }
+
+    pub fn on_settings_change(&mut self, state: &FullState) -> Result<()> {
+        rust_i18n::set_locale(state.locale());
 
         tauri::async_runtime::spawn(async {
             let state = FULL_STATE.load();
@@ -141,7 +147,7 @@ impl Seelen {
         }
 
         for monitor in &mut self.instances {
-            monitor.load_settings(&state)?;
+            monitor.load_settings(state)?;
         }
 
         self.refresh_windows_positions()?;
@@ -180,7 +186,7 @@ impl Seelen {
         declare_system_events_handlers()?;
 
         let state = FULL_STATE.load();
-        rust_i18n::set_locale(&state.locale());
+        rust_i18n::set_locale(state.locale());
 
         if state.is_rofi_enabled() {
             self.add_rofi()?;
@@ -237,7 +243,7 @@ impl Seelen {
     fn add_monitor(&mut self, handle: HMONITOR) -> Result<()> {
         let state = FULL_STATE.load();
         self.instances
-            .push(SeelenInstanceContainer::new(handle, &state)?);
+            .push(SluMonitorInstance::new(handle, &state)?);
         self.refresh_windows_positions()?;
         trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())

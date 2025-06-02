@@ -7,6 +7,8 @@ pub mod updater;
 pub mod virtual_desktop;
 mod winver;
 
+use base64::Engine;
+use uuid::Uuid;
 pub use winver::*;
 
 use std::{
@@ -182,4 +184,33 @@ pub fn convert_file_to_src(path: &Path) -> String {
         .to_string();
     let encoded = urlencoding::encode(&path);
     format!("{base}{encoded}")
+}
+
+pub struct WidgetWebviewLabel {
+    /// this should be used as the real webview label
+    pub raw: String,
+    /// this is the decoded label, useful for debugging and logging
+    pub decoded: String,
+}
+
+impl WidgetWebviewLabel {
+    pub fn new(widget_id: &str, monitor_id: Option<&str>, instance_id: Option<&Uuid>) -> Self {
+        let mut label = format!("{widget_id}?");
+
+        if let Some(monitor_id) = monitor_id {
+            label.push_str(&format!("monitorId={}&", urlencoding::encode(monitor_id)));
+        }
+
+        if let Some(instance_id) = instance_id {
+            label.push_str(&format!(
+                "instanceId={}",
+                urlencoding::encode(&instance_id.to_string())
+            ));
+        }
+
+        Self {
+            raw: base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label),
+            decoded: label,
+        }
+    }
 }

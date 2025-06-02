@@ -1,10 +1,10 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { dialog } from '@seelen-ui/lib/tauri';
 import { invoke } from '@tauri-apps/api/core';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
 
 import { store } from '../shared/store/infra';
-import { dialog } from 'src/apps/settings/modules/shared/tauri/infra';
 
 import { RootActions } from '../shared/store/app';
 

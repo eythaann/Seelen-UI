@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, UpdateChannel } from '@seelen-ui/lib';
-import { exit, relaunch } from '@tauri-apps/plugin-process';
+import { process } from '@seelen-ui/lib/tauri';
 import { Button, Select, Switch, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -105,13 +105,13 @@ export function Information() {
       <SettingsGroup>
         <SettingsOption>
           <b>{t('extras.relaunch')}</b>
-          <Button type="dashed" onClick={relaunch} style={{ width: '50px' }}>
+          <Button type="dashed" onClick={() => process.relaunch()} style={{ width: '50px' }}>
             <Icon iconName="IoReload" size={12} />
           </Button>
         </SettingsOption>
         <SettingsOption>
           <b>{t('extras.exit')}</b>
-          <Button type="dashed" danger onClick={() => exit(0)} style={{ width: '50px' }}>
+          <Button type="dashed" danger onClick={() => process.exit(0)} style={{ width: '50px' }}>
             <Icon iconName="IoClose" />
           </Button>
         </SettingsOption>

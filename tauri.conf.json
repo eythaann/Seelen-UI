@@ -22,7 +22,8 @@
           "**/*.wav"
         ]
       }
-    }
+    },
+    "withGlobalTauri": false
   },
   "build": {
     "beforeDevCommand": "npm run build:ui -- --serve",

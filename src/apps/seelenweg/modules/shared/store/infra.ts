@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { SeelenCommand, SeelenEvent, Settings, subscribe, UIColors, WegItems } from '@seelen-ui/lib';
 import { FocusedApp, SeelenWegSettings } from '@seelen-ui/lib/types';
+import { StartThemingTool } from '@shared/ThemeLoader';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
 
 import { RootActions, RootSlice } from './app';
 
-import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
 
 export const store = configureStore({

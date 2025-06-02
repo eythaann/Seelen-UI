@@ -1,4 +1,4 @@
-import * as Logger from '@tauri-apps/plugin-log';
+import { logger } from '@seelen-ui/lib/tauri';
 
 function StringifyParams(params: any[]): string {
   return params.reduce((acc, current) => {
@@ -65,10 +65,10 @@ export function wrapConsoleV2() {
   }
 
   // forwardConsole('log', trace);
-  forwardConsole('debug', Logger.debug);
-  forwardConsole('info', Logger.info);
-  forwardConsole('warn', Logger.warn);
-  forwardConsole('error', Logger.error);
+  forwardConsole('debug', logger.debug);
+  forwardConsole('info', logger.info);
+  forwardConsole('warn', logger.warn);
+  forwardConsole('error', logger.error);
 
   window.addEventListener('unhandledrejection', (event) => {
     console.error('Unhandled Rejection', event.reason);

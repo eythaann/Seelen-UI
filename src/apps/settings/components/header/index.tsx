@@ -1,6 +1,6 @@
+import { process } from '@seelen-ui/lib/tauri';
 import { ResourceText } from '@shared/components/ResourceText';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { relaunch } from '@tauri-apps/plugin-process';
 import { Button } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -36,7 +36,7 @@ export const Header = () => {
     if (hasChanges) {
       await SaveStore();
       if (shouldRestart) {
-        await relaunch();
+        await process.relaunch();
       }
     } else {
       await getCurrentWebviewWindow().close();

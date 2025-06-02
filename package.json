@@ -30,14 +30,6 @@
   "dependencies": {
     "@tauri-apps/api": "^2.2.0",
     "@tauri-apps/cli": "^2.2.7",
-    "@tauri-apps/plugin-autostart": "^2.2.0",
-    "@tauri-apps/plugin-deep-link": "^2.2.0",
-    "@tauri-apps/plugin-dialog": "^2.2.0",
-    "@tauri-apps/plugin-fs": "^2.2.0",
-    "@tauri-apps/plugin-log": "^2.2.1",
-    "@tauri-apps/plugin-process": "^2.2.0",
-    "@tauri-apps/plugin-shell": "^2.2.1",
-    "@tauri-apps/plugin-updater": "^2.5.0",
     "react-router": "^7.6.0"
   },
   "devDependencies": {
@@ -45,7 +37,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@nyariv/sandboxjs": "^0.8.24",
     "@reduxjs/toolkit": "^2.5.0",
-    "@seelen-ui/lib": "^2.2.6-next.20250531204325",
+    "@seelen-ui/lib": "^2.2.6-next.20250602004526",
     "@seelen/translation-toolkit": "^1.1.10",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@types/d3": "^7.4.3",

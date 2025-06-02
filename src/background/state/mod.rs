@@ -7,8 +7,10 @@ use std::collections::HashMap;
 use application::FullState;
 use domain::AhkVar;
 use seelen_core::state::{
-    PluginId, Settings, WegPinnedItemsVisibility, WegTemporalItemsVisibility,
+    PluginId, WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetId,
+    WidgetInstanceType,
 };
+use uuid::Uuid;
 
 use crate::windows_api::monitor::Monitor;
 
@@ -38,6 +40,46 @@ impl FullState {
         match self.settings.monitors_v2.get(&device_id) {
             Some(config) => is_global_enabled && config.by_widget.fancy_toolbar.enabled,
             None => is_global_enabled,
+        }
+    }
+
+    pub fn is_widget_enable(&self, widget: &Widget, monitor: &Monitor) -> bool {
+        // new widgets are enabled by default
+        let is_globally_enabled = self
+            .settings
+            .by_widget
+            .others
+            .get(&widget.id)
+            .map_or(true, |config| config.enabled);
+
+        if !is_globally_enabled {
+            return false;
+        }
+
+        match widget.instances {
+            WidgetInstanceType::ReplicaByMonitor => {
+                let Ok(device_id) = monitor.main_display_device().map(|device| device.id()) else {
+                    return false;
+                };
+
+                self.settings
+                    .monitors_v2
+                    .get(&device_id)
+                    .and_then(|monitor_config| monitor_config.by_widget.others.get(&widget.id))
+                    .map_or(true, |config| config.enabled)
+            }
+            _ => monitor.is_primary(),
+        }
+    }
+
+    pub fn get_widget_instances_ids(&self, widget_id: &WidgetId) -> Vec<Uuid> {
+        let config = self.settings.by_widget.others.get(widget_id);
+        match config {
+            Some(config) => config
+                .instances
+                .as_ref()
+                .map_or_else(Default::default, |i| i.keys().cloned().collect()),
+            None => Vec::new(),
         }
     }
 
@@ -119,10 +161,8 @@ impl FullState {
         }
     }
 
-    pub fn locale(&self) -> String {
-        self.settings()
-            .language
-            .clone()
-            .unwrap_or_else(Settings::get_system_language)
+    pub fn locale(&self) -> &String {
+        // always should be filled
+        self.settings().language.as_ref().unwrap()
     }
 }

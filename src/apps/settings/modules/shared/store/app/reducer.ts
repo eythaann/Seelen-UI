@@ -111,6 +111,81 @@ export const RootSlice = createSlice({
       state.toBeSaved = true;
       state.selectedThemes = state.selectedThemes.filter((x) => x !== action.payload);
     },
+    patchWidgetConfig(
+      state,
+      action: PayloadAction<{ widgetId: string; config: Record<string, unknown> }>,
+    ) {
+      const { widgetId, config } = action.payload;
+
+      state.toBeSaved = true;
+      state.byWidget[widgetId] ??= { enabled: true };
+      state.byWidget[widgetId] = {
+        ...state.byWidget[widgetId]!,
+        ...config,
+      };
+    },
+    patchWidgetInstanceConfig: (
+      state,
+      action: PayloadAction<{
+        widgetId: string;
+        instanceId: string;
+        config: Record<string, any>;
+      }>,
+    ) => {
+      const { widgetId, instanceId, config } = action.payload;
+
+      state.toBeSaved = true;
+      state.byWidget[widgetId] ??= { enabled: true };
+      const widget = state.byWidget[widgetId]!;
+
+      widget.$instances ??= {};
+      widget.$instances[instanceId] ??= {};
+      const instance = widget.$instances![instanceId]!;
+
+      widget.$instances[instanceId] = {
+        ...instance,
+        ...config,
+      };
+    },
+    patchWidgetMonitorConfig: (
+      state,
+      action: PayloadAction<{
+        widgetId: string;
+        monitorId: string;
+        config: Record<string, any>;
+      }>,
+    ) => {
+      const { widgetId, monitorId, config } = action.payload;
+
+      let monitor = state.monitorsV2[monitorId];
+      if (!monitor) {
+        return;
+      }
+
+      state.toBeSaved = true;
+      monitor.byWidget[widgetId] ??= { enabled: true };
+      monitor.byWidget[widgetId] = {
+        ...monitor.byWidget[widgetId]!,
+        ...config,
+      };
+    },
+    removeWidgetInstance: (
+      state,
+      action: PayloadAction<{ widgetId: string; instanceId: string }>,
+    ) => {
+      const { widgetId, instanceId } = action.payload;
+      if (!state.byWidget[widgetId]) {
+        return;
+      }
+
+      state.toBeSaved = true;
+      const widget = state.byWidget[widgetId]!;
+      delete widget.$instances?.[instanceId];
+
+      if (Object.keys(widget.$instances || {}).length === 0) {
+        delete widget.$instances;
+      }
+    },
     setThemeVariable: (
       state,
       action: PayloadAction<{ themeId: string; name: string; value: string }>,

@@ -145,11 +145,6 @@ function startDevServer() {
     format: 'esm',
     outdir: './dist',
     jsx: 'automatic',
-    define: {
-      'process.env': JSON.stringify({
-        packageVersion: JSON.parse(fs.readFileSync('package.json', 'utf-8')).version,
-      }),
-    },
     loader: {
       '.yml': 'text',
     },

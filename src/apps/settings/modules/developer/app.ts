@@ -1,5 +1,5 @@
+import { dialog } from '@seelen-ui/lib/tauri';
 import { path } from '@tauri-apps/api';
-import * as dialog from '@tauri-apps/plugin-dialog';
 
 import { LoadSettingsToStore } from '../shared/store/infra';
 

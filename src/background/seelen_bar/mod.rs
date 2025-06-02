@@ -143,7 +143,7 @@ impl FancyToolbar {
     pub const TARGET: &'static str = "@seelen/fancy-toolbar";
 
     pub fn decoded_label(monitor_id: &str) -> String {
-        format!("{}?monitor={}", Self::TARGET, monitor_id)
+        format!("{}?monitorId={}", Self::TARGET, monitor_id)
     }
 
     pub fn label(monitor_id: &str) -> String {
