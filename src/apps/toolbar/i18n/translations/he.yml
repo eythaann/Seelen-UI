@@ -1,16 +1,16 @@
 bluetooth:
-  available: מכשירים זמינים (לא מזווגים)
-  cancel: לְבַטֵל
+  available: מכשירים זמינים 
+  cancel: ביטול
   connected: מכשירים מחוברים
-  forget: לִשְׁכּוֹחַ
-  lowenergy: אנרגיה נמוכה
+  forget: הסר התקן
+  lowenergy: סוללה נמוכה
   more: הגדרות Bluetooth נוספות
   not_found: לא נמצאו מכשירי Bluetooth
-  pair: זוּג
+  pair: הוסף התקן
   paired: מכשירים שנשמרו
   placeholder:
     passphrase: משפט סיסמה, קוד או סיכה
-  scanning: סריקה למכשירים
+  scanning: סריקה לאיתור מכשירים
 context_menu:
   add_custom_text: הוסף פריט טקסט מותאם אישית
   modules: מודולים
@@ -24,7 +24,7 @@ keyboard:
   more: הגדרות מקלדת נוספות
   title: פריסת מקלדת
 media:
-  default_multimedia_volume: נפח מולטימדיה
+  default_multimedia_volume: עוצמת קול מולטימדיה
   device:
     channel:
       system: צלילי מערכת
@@ -36,12 +36,12 @@ media:
     volume: נפח המכשיר
   input_devices: מכשירי קלט
   output_devices: מכשירי פלט
-  players: שחקני מדיה
+  players: נגני מדיה
 network:
   available: רשתות זמינות
-  connect: לְחַבֵּר
+  connect: התחבר
   connected: מחובר ל
-  disconnect: לְנַתֵק
+  disconnect: התנתק
   hidden: רשת נסתרת
   more: הגדרות רשת נוספות
   not_found: לא נמצאו רשתות
@@ -51,7 +51,7 @@ network:
   scanning: סריקה לאיתור רשתות
   secured: רשת מוצפנת
 notifications:
-  clear: לנקות הכל
+  clear: נקה הכל
   empty: אין התראות
   settings: הגדרות התראות נוספות
   title: התראות
@@ -64,17 +64,17 @@ placeholder:
   open_system_tray: מגש מערכת פתוח
   settings: הגדרות מהירות
   smart_charge: '- חיוב חכם'
-  volume: כרך
+  volume: עוצמת קול
 settings:
   app_settings: הגדרות אפליקציה
-  brightness: בְּהִירוּת
+  brightness: בהירות
   hibernate: שינה
-  lock: לִנְעוֹל
-  log_out: להתנתק
-  power: כּוֹחַ
-  restart: איתחול
-  shutdown: לכבות
-  sleep: לִישׁוֹן
+  lock: נעילה
+  log_out: צא
+  power: סוללה
+  restart: הפעל מחדש
+  shutdown: כבה
+  sleep: שינה
   title: הגדרות
 tray:
   empty: 'אין פריטי מגש (הערה: Windows 10 אינו מיושם)'
@@ -86,7 +86,7 @@ userhome:
     documents: מסמכים
     downloads: הורדות
     more_items: הראה עוד ...
-    music: מוּסִיקָה
+    music: מוזיקה
     pictures: תמונות
     recent: לאחרונה נעשה שימוש
     reduce_items: הראה פחות ...
