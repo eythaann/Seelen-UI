@@ -139,7 +139,7 @@ impl FancyToolbar {
 
 // statics
 impl FancyToolbar {
-    pub const TITLE: &'static str = "Seelen Fancy Toolbar";
+    pub const TITLE: &'static str = ".Seelen Fancy Toolbar";
     pub const TARGET: &'static str = "@seelen/fancy-toolbar";
 
     pub fn decoded_label(monitor_id: &str) -> String {

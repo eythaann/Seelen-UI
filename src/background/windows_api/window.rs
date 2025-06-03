@@ -294,7 +294,14 @@ impl Window {
             return false;
         }
 
-        if !self.is_visible() || self.parent().is_some() || self.is_seelen_overlay() {
+        if !self.is_visible() || self.parent().is_some() {
+            return false;
+        }
+
+        // ignore windows without a title or that start with a dot
+        // this is a seelen ui behavior, not present on other desktop environments
+        let title = self.title();
+        if title.is_empty() || title.starts_with('.') {
             return false;
         }
 

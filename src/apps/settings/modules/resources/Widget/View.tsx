@@ -121,7 +121,7 @@ export function WidgetConfiguration({
 
       <RenderBySettingsDeclaration
         definitions={widget.settings}
-        config={config}
+        values={config}
         onConfigChange={onConfigChange}
         isByMonitor={!!monitorId}
       />

@@ -9,10 +9,11 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, RECT, WPARAM},
     UI::WindowsAndMessaging::{
         CreateWindowExW, DefWindowProcW, DispatchMessageW, FindWindowExW, GetMessageW,
-        PostQuitMessage, RegisterClassW, RegisterDeviceNotificationW, TranslateMessage,
-        DBT_DEVTYP_DEVICEINTERFACE, DEVICE_NOTIFY_WINDOW_HANDLE, DEV_BROADCAST_DEVICEINTERFACE_W,
-        HWND_TOPMOST, MSG, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, WINDOW_EX_STYLE, WINDOW_STYLE,
-        WM_DESTROY, WNDCLASSW,
+        PostQuitMessage, RegisterClassW, RegisterDeviceNotificationW, RegisterShellHookWindow,
+        RegisterWindowMessageW, TranslateMessage, DBT_DEVTYP_DEVICEINTERFACE,
+        DEVICE_NOTIFY_WINDOW_HANDLE, DEV_BROADCAST_DEVICEINTERFACE_W, HWND_TOPMOST, MSG,
+        SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, WINDOW_EX_STYLE, WINDOW_STYLE, WM_DESTROY,
+        WNDCLASSW,
     },
 };
 
@@ -30,6 +31,7 @@ lazy_static! {
     static ref CALLBACKS: Arc<Mutex<Vec<Callback>>> = Arc::new(Mutex::new(Vec::new()));
 }
 
+pub static mut WM_SHELLHOOKMESSAGE: u32 = u32::MAX;
 pub static BACKGROUND_HWND: AtomicIsize = AtomicIsize::new(0);
 
 unsafe extern "system" fn window_proc(
@@ -41,6 +43,11 @@ unsafe extern "system" fn window_proc(
     if msg == WM_DESTROY {
         PostQuitMessage(0);
         return LRESULT(0);
+    }
+
+    if msg == WM_SHELLHOOKMESSAGE {
+        // TODO use this.
+        // println!("WM_SHELLHOOKMESSAGE");
     }
 
     for callback in trace_lock!(CALLBACKS).iter() {
@@ -109,6 +116,13 @@ unsafe fn _create_background_window(done: &crossbeam_channel::Sender<()>) -> Res
             &mut notification_filter as *mut _ as *mut _,
             DEVICE_NOTIFY_WINDOW_HANDLE,
         )?;
+    }
+
+    // register window to recieve shell events
+    {
+        RegisterShellHookWindow(hwnd).ok().filter_fake_error()?;
+        let msg = WindowsString::from("SHELLHOOK");
+        WM_SHELLHOOKMESSAGE = RegisterWindowMessageW(msg.as_pcwstr());
     }
 
     done.send(())?;

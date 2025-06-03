@@ -10,6 +10,7 @@
 
 ### fix
 - app not starting on start-menu cache corruption.
+- widgets being reloaded on ctrl + r.
 
 ## [2.3.5]
 ### fix

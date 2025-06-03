@@ -1,4 +1,5 @@
-import { declareDocumentAsLayeredHitbox, disableWebviewShortcutsAndContextMenu } from '@shared/setup';
+import { declareDocumentAsLayeredHitbox } from '@shared/layered';
+import { removeDefaultWebviewActions } from '@shared/setup';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -13,7 +14,7 @@ import i18n, { loadTranslations } from './i18n';
 import '../shared/styles/reset.css';
 import '../shared/styles/colors.css';
 
-disableWebviewShortcutsAndContextMenu();
+removeDefaultWebviewActions();
 await declareDocumentAsLayeredHitbox();
 await loadTranslations();
 await initStore();

@@ -12,19 +12,19 @@ interface Props {
   // settings definitions
   definitions: WidgetSettingsDeclarationList;
   // config values set by the user
-  config: Record<string, any>;
+  values: Record<string, any>;
   // callback to update the config
   onConfigChange: (key: string, value: any) => void;
   // whether the widget is being configured by monitor
   isByMonitor?: boolean;
 }
 
-export function RenderBySettingsDeclaration({ definitions, config, onConfigChange }: Props) {
+export function RenderBySettingsDeclaration({ definitions, values, onConfigChange }: Props) {
   return definitions.map(({ group }, idx) => {
     return (
       <SettingsGroup key={idx}>
         {group.map((entry, idx) => (
-          <WSGroupEntry key={idx} entry={entry} config={config} onConfigChange={onConfigChange} />
+          <WSGroupEntry key={idx} entry={entry} values={values} onConfigChange={onConfigChange} />
         ))}
       </SettingsGroup>
     );
@@ -35,51 +35,42 @@ export function RenderBySettingsDeclaration({ definitions, config, onConfigChang
 
 interface WSGroupEntryProps {
   entry: WsdGroupEntry;
-  config: Record<string, any>;
+  values: Record<string, any>;
   onConfigChange: (key: string, value: any) => void;
 }
 
 function WSGroupEntry(props: WSGroupEntryProps) {
-  const { config, onConfigChange } = props;
+  const { entry, values, onConfigChange } = props;
 
-  if ('subgroup' in props.entry) {
-    const {
-      subgroup: { header, content },
-    } = props.entry;
-
+  if (entry.children.length > 0) {
     return (
       <SettingsSubGroup
-        label={
-          header ? <WSItem def={header} config={config} onConfigChange={onConfigChange} /> : ''
-        }
+        label={<WSItem def={entry.config} values={values} onConfigChange={onConfigChange} />}
       >
-        {content.map((entry, idx) => {
-          return (
-            <WSGroupEntry key={idx} entry={entry} config={config} onConfigChange={onConfigChange} />
-          );
-        })}
+        {entry.children.map((entry, idx) => (
+          <WSGroupEntry key={idx} entry={entry} values={values} onConfigChange={onConfigChange} />
+        ))}
       </SettingsSubGroup>
     );
   }
 
-  const { config: definition } = props.entry;
-  return <WSItem def={definition} config={config} onConfigChange={onConfigChange} />;
+  return <WSItem def={entry.config} values={values} onConfigChange={onConfigChange} />;
 }
 
 // ================================================
 
 interface WSItemProps {
   def: WsdItem;
-  config: Record<string, any>;
+  values: Record<string, any>;
   onConfigChange: (key: string, value: any) => void;
 }
 
-function WSItem({ def, config, onConfigChange }: WSItemProps) {
+function WSItem({ def, values, onConfigChange }: WSItemProps) {
   let action: React.ReactNode = null;
 
   const commonProps = {
     defaultValue: def.defaultValue as any,
-    value: config[def.key],
+    value: values[def.key],
     onChange: (value: any) => onConfigChange(def.key, value),
   };
 

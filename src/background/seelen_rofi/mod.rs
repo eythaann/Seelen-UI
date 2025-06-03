@@ -24,7 +24,7 @@ impl Drop for SeelenRofi {
 }
 
 impl SeelenRofi {
-    pub const TITLE: &str = "Seelen App Launcher";
+    pub const TITLE: &str = ".Seelen App Launcher";
     pub const TARGET: &str = "@seelen/launcher";
 
     pub fn new() -> Result<Self> {

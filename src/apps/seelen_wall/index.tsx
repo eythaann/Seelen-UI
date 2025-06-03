@@ -1,4 +1,4 @@
-import { disableWebviewShortcutsAndContextMenu } from '@shared/setup';
+import { removeDefaultWebviewActions } from '@shared/setup';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
@@ -12,7 +12,7 @@ import '../shared/styles/colors.css';
 import '../shared/styles/reset.css';
 import './styles/global.css';
 
-disableWebviewShortcutsAndContextMenu();
+removeDefaultWebviewActions();
 await initStore();
 
 const container = getRootContainer();

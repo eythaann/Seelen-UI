@@ -1,5 +1,7 @@
 import { Widget } from '@seelen-ui/lib';
+import { removeDefaultWebviewActions } from '@shared/setup';
 
+removeDefaultWebviewActions();
 const widget = await Widget.getCurrentAsync();
 
 const { js, css, html } = widget.def;
