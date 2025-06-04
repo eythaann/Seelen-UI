@@ -87,6 +87,7 @@ url = "2.5.4"
 urlencoding = "=2.1.3"
 fern = "0.7.1"
 reqwest = "0.12.15"
+translators = { version = "0.1.5", features = ["google", "tokio-async"] }
 
 [dependencies.seelen-core]
 git = "https://github.com/Seelen-Inc/slu-lib.git" # for release/pre-release/nightly

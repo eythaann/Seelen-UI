@@ -58,6 +58,7 @@ define_app_errors!(
     EvalExpr(evalexpr::EvalexprError);
     TryFromSliceError(std::array::TryFromSliceError);
     ParseIntError(std::num::ParseIntError);
+    Translator(translators::Error);
 );
 
 impl std::fmt::Debug for AppError {

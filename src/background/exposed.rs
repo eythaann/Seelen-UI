@@ -7,6 +7,7 @@ use seelen_core::{command_handler_list, system_state::Color};
 
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
+use translators::Translator;
 
 use crate::error_handler::Result;
 use crate::hook::HookManager;
@@ -173,7 +174,7 @@ async fn check_for_updates() -> Result<bool> {
 }
 
 #[tauri::command(async)]
-async fn get_foreground_window_color(webview: WebviewWindow<tauri::Wry>) -> Result<Color> {
+fn get_foreground_window_color(webview: WebviewWindow<tauri::Wry>) -> Result<Color> {
     let webview = Window::from(webview.hwnd()?.0 as isize);
     let foreground = Window::get_foregrounded();
 
@@ -203,8 +204,22 @@ async fn install_last_available_update() -> Result<()> {
 }
 
 #[tauri::command(async)]
-async fn show_desktop() -> Result<()> {
+fn show_desktop() -> Result<()> {
     todo!()
+}
+
+#[tauri::command(async)]
+async fn translate_text(
+    source: String,
+    source_lang: String,
+    target_lang: String,
+) -> Result<String> {
+    use translators::GoogleTranslator;
+    let translator = GoogleTranslator::default();
+    let translated = translator
+        .translate_async(&source, &source_lang, &target_lang)
+        .await?;
+    Ok(translated)
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
