@@ -212,10 +212,15 @@ fn show_desktop() -> Result<()> {
 async fn translate_text(
     source: String,
     source_lang: String,
-    target_lang: String,
+    mut target_lang: String,
 ) -> Result<String> {
     use translators::GoogleTranslator;
     let translator = GoogleTranslator::default();
+
+    if target_lang == "zh" {
+        target_lang = "zh-CN".to_string();
+    }
+
     let translated = translator
         .translate_async(&source, &source_lang, &target_lang)
         .await?;
