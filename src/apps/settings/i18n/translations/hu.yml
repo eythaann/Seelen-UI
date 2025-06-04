@@ -300,6 +300,10 @@ weg:
     min_content: Amennyire csak lehet
   padding: Párnázás
   width: Szélesség
+widget:
+  enable: Engedélyezze ezt a widgetet
+  enable_for_monitor: Engedélyezés ezen a monitoron
+  instances: Instances
 wm:
   author: Szerző
   border:

@@ -303,6 +303,10 @@ weg:
     min_content: Iloji boricha kichik
   padding: Plomba
   width: Kenglik
+widget:
+  enable: Bu vidjetni yoqing
+  enable_for_monitor: Ushbu monitorga yoqish
+  instances: Mustaqil holatlar
 wm:
   author: Muallif
   border:

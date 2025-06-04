@@ -305,6 +305,10 @@ weg:
     min_content: Aussi petit que possible
   padding: Rembourrage
   width: Largeur
+widget:
+  enable: Activer ce widget
+  enable_for_monitor: Activer sur ce moniteur
+  instances: Instances
 wm:
   author: Auteur
   border:

@@ -307,6 +307,10 @@ weg:
     min_content: Maliit hangga't maaari
   padding: Padding
   width: Lapad
+widget:
+  enable: Paganahin ang widget na ito
+  enable_for_monitor: Paganahin sa monitor na ito
+  instances: Mga pagkakataon
 wm:
   author: May -akda
   border:

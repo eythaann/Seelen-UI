@@ -301,6 +301,10 @@ weg:
     min_content: Malý ako len môže byť
   padding: Vypchávka
   width: Šírka
+widget:
+  enable: Povolenie tohto widgetu
+  enable_for_monitor: Povolenie na tomto monitore
+  instances: Inštancie
 wm:
   author: Autor
   border:

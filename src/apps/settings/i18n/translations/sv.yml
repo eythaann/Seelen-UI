@@ -301,6 +301,10 @@ weg:
     min_content: Liten som kan vara
   padding: Stoppning
   width: Bredd
+widget:
+  enable: Aktivera denna widget
+  enable_for_monitor: Aktivera på denna bildskärm
+  instances: Instanser
 wm:
   author: Författare
   border:

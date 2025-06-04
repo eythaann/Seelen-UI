@@ -303,6 +303,10 @@ weg:
     min_content: Kuncane njengoba kungaba
   padding: Idilidi
   width: Ububanzi
+widget:
+  enable: Nika amandla lewijethi
+  enable_for_monitor: Nika amandla kulo mqaphi
+  instances: Izimo
 wm:
   author: Umlobi
   border:

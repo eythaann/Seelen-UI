@@ -298,6 +298,10 @@ weg:
     min_content: બની શકે તેટલું નાનું
   padding: ગાદી
   width: પહોળાઈ
+widget:
+  enable: આ વિજેટને સક્ષમ કરો
+  enable_for_monitor: આ મોનિટર પર સક્ષમ કરો
+  instances: દાખલા
 wm:
   author: લેખક
   border:

@@ -301,6 +301,10 @@ weg:
     min_content: Jak najmniejszy
   padding: Wysokość tła
   width: Szerokość
+widget:
+  enable: Włącz ten widżet
+  enable_for_monitor: Włącz na tym monitorze
+  instances: Wystąpienia
 wm:
   author: Autor
   border:

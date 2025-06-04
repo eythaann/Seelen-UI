@@ -306,6 +306,10 @@ weg:
     min_content: So klein wie möglich
   padding: Polsterung
   width: Breite
+widget:
+  enable: Aktivieren Sie dieses Widget
+  enable_for_monitor: Auf diesem Monitor aktivieren
+  instances: Instanzen
 wm:
   author: Autor
   border:

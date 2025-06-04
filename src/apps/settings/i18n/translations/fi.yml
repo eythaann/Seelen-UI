@@ -303,6 +303,10 @@ weg:
     min_content: Niin pieni kuin voi olla
   padding: Pehmuste
   width: Leveys
+widget:
+  enable: Ota tämä widget käyttöön
+  enable_for_monitor: Ota käyttöön tällä näytöllä
+  instances: Instanssit
 wm:
   author: Kirjoittaja
   border:

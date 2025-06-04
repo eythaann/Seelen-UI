@@ -305,6 +305,10 @@ weg:
     min_content: Más pequeño imposible
   padding: Acolchado
   width: Anchura
+widget:
+  enable: Activar este widget
+  enable_for_monitor: Activar en este monitor
+  instances: Instancias
 wm:
   author: Autor
   border:

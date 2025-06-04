@@ -301,6 +301,10 @@ weg:
     min_content: რაც შეიძლება პატარა იყოს
   padding: ბადება
   width: სიგანე
+widget:
+  enable: ჩართეთ ეს ვიჯეტი
+  enable_for_monitor: ჩართეთ ამ მონიტორზე
+  instances: შემთხვევები
 wm:
   author: ავტორი
   border:

@@ -288,6 +288,10 @@ weg:
     min_content: 최대한 작게
   padding: 안쪽 여백
   width: 너비
+widget:
+  enable: 이 위젯 활성화
+  enable_for_monitor: 이 모니터에서 활성화
+  instances: 인스턴스
 wm:
   author: 작성자
   border:

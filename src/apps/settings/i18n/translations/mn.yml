@@ -299,6 +299,10 @@ weg:
     min_content: Аль болох жижиг
   padding: Дэвсгэр
   width: Өргөн
+widget:
+  enable: Энэ виджетийг идэвхжүүлэх
+  enable_for_monitor: Энэ монитор дээр идэвхжүүлэх
+  instances: Саналууд
 wm:
   author: Зохиолч
   border:

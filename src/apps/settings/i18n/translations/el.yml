@@ -304,6 +304,10 @@ weg:
     min_content: Όσο μικρό μπορεί να είναι
   padding: Υλικό παραγεμίσματος
   width: Πλάτος
+widget:
+  enable: Ενεργοποιήστε αυτό το widget
+  enable_for_monitor: Ενεργοποίηση σε αυτή την οθόνη
+  instances: Περιπτώσεις
 wm:
   author: Συγγραφέας
   border:

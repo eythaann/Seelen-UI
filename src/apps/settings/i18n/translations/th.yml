@@ -291,6 +291,10 @@ weg:
     min_content: เล็กเท่าที่จะทำได้
   padding: การขยายความ
   width: ความกว้าง
+widget:
+  enable: เปิดใช้งานวิดเจ็ตนี้
+  enable_for_monitor: เปิดใช้งานบนจอภาพนี้
+  instances: อินสแตนซ์
 wm:
   author: ผู้เขียน
   border:

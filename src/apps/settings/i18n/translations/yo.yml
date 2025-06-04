@@ -292,6 +292,10 @@ weg:
     min_content: Kekere bi o ti le jẹ
   padding: Fidigọdi silẹ
   width: Fifẹ
+widget:
+  enable: Mu ẹrọ ailorukọ yii ṣiṣẹ
+  enable_for_monitor: Mu ṣiṣẹ lori atẹle yii
+  instances: Awọn iṣẹlẹ
 wm:
   author: Onkọwe ọkunrin
   border:

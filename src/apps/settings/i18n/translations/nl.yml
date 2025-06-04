@@ -303,6 +303,10 @@ weg:
     min_content: Klein als het maar kan zijn
   padding: Vulling
   width: Breedte
+widget:
+  enable: Deze widget inschakelen
+  enable_for_monitor: Inschakelen op deze monitor
+  instances: Instanties
 wm:
   author: Auteur
   border:

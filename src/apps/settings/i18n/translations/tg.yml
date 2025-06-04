@@ -296,6 +296,10 @@ weg:
     min_content: То ҳадди имкон хурд
   padding: Тахтача
   width: Васеъ
+widget:
+  enable: Ин виджетро фаъол кунед
+  enable_for_monitor: Дар ин монитор фаъол кунед
+  instances: Ҳолатҳо
 wm:
   author: Муаллиф
   border:

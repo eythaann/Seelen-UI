@@ -303,6 +303,10 @@ weg:
     min_content: Bach ag y gall fod
   padding: Padin
   width: Lled
+widget:
+  enable: Galluogi'r teclyn hwn
+  enable_for_monitor: Galluogi ar y monitor hwn
+  instances: Achosion
 wm:
   author: Awduron
   border:

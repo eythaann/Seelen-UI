@@ -300,6 +300,10 @@ weg:
     min_content: முடிந்தவரை சிறியது
   padding: திணிப்பு
   width: அகலம்
+widget:
+  enable: இந்த விட்ஜெட்டை இயக்கவும்
+  enable_for_monitor: இந்த மானிட்டரில் இயக்கவும்
+  instances: நிகழ்வுகள்
 wm:
   author: நூலாசிரியர்
   border:

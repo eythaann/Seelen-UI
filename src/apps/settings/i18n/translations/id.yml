@@ -303,6 +303,10 @@ weg:
     min_content: Sekecil mungkin
   padding: Lapisan
   width: Lebar
+widget:
+  enable: Aktifkan widget ini
+  enable_for_monitor: Aktifkan pada monitor ini
+  instances: Contoh
 wm:
   author: Pengarang
   border:

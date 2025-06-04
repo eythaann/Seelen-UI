@@ -295,6 +295,10 @@ weg:
     min_content: ਛੋਟਾ ਜਿੰਨਾ ਹੋ ਸਕਦਾ ਹੈ
   padding: ਪੈਡਿੰਗ
   width: ਚੌੜਾਈ
+widget:
+  enable: ਇਸ ਵਿਦਜਿਟ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  enable_for_monitor: ਇਸ ਮਾਨੀਟਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  instances: ਉਦਾਹਰਣ
 wm:
   author: ਲੇਖਕ
   border:

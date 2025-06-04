@@ -300,6 +300,10 @@ weg:
     min_content: Nhỏ nhất có thể
   padding: Đệm
   width: Chiều rộng
+widget:
+  enable: Kích hoạt tiện ích này
+  enable_for_monitor: Bật trên màn hình này
+  instances: Trường hợp
 wm:
   author: Tác giả
   border:

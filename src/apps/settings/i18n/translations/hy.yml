@@ -303,6 +303,10 @@ weg:
     min_content: Փոքր, որքան կարող է լինել
   padding: Լիցք
   width: Լայնություն
+widget:
+  enable: Միացրեք այս հարմարանքը
+  enable_for_monitor: Միացնել այս մոնիտորի վրա
+  instances: Դեպքեր
 wm:
   author: Հեղինակ
   border:

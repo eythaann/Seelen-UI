@@ -305,6 +305,10 @@ weg:
     min_content: Yaryar sida ay noqon karto
   padding: Suur
   width: Ballac
+widget:
+  enable: U oggolow widget-kaan
+  enable_for_monitor: U oggolow kormeerkan
+  instances: Tusaca
 wm:
   author: Qoraa
   border:

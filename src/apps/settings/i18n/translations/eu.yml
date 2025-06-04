@@ -301,6 +301,10 @@ weg:
     min_content: Txikia izan daitekeen bezala
   padding: Betegarri
   width: Zabalera
+widget:
+  enable: Gaitu widget hau
+  enable_for_monitor: Gaitu monitore honetan
+  instances: Makineria
 wm:
   author: Idazle
   border:

@@ -296,6 +296,10 @@ weg:
     min_content: ຂະຫນາດນ້ອຍເທົ່າທີ່ສາມາດເຮັດໄດ້
   padding: padding
   width: ກວ້າງ
+widget:
+  enable: ເປີດໃຊ້ widget ນີ້
+  enable_for_monitor: ເປີດໃຊ້ງານຕິດຕາມກວດການີ້
+  instances: ຖານະ
 wm:
   author: ຜູ້ຂຽນ
   border:

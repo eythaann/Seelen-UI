@@ -295,6 +295,10 @@ weg:
     min_content: Ndogo kama inaweza kuwa
   padding: Padding
   width: Upana
+widget:
+  enable: Wezesha widget hii
+  enable_for_monitor: Wezesha kwenye mfuatiliaji huu
+  instances: Matukio
 wm:
   author: Mwandishi
   border:

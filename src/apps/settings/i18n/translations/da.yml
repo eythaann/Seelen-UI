@@ -301,6 +301,10 @@ weg:
     min_content: Så lille som det kan være
   padding: Polstring
   width: Bredde
+widget:
+  enable: Aktivér denne widget
+  enable_for_monitor: Aktiver på denne skærm
+  instances: Forekomster
 wm:
   author: Forfatter
   border:

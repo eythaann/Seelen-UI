@@ -1,6 +1,3 @@
-widget:
-  enable: Enable this widget
-  instances: Instances
 app_launcher:
   enable: Enable App Launcher
   launch_on:
@@ -299,6 +296,10 @@ weg:
     min_content: Small as can be
   padding: Padding
   width: Width
+widget:
+  enable: Enable this widget
+  enable_for_monitor: Enable on this monitor
+  instances: Instances
 wm:
   author: Author
   border:

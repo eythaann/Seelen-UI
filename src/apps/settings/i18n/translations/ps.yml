@@ -293,6 +293,10 @@ weg:
     min_content: کوچني لکه څنګه چې کیدی شي
   padding: غالۍ
   width: پلنوالی
+widget:
+  enable: دې ویجیټ وړ کړئ
+  enable_for_monitor: پدې څارنه کې وړ کړئ
+  instances: مثالونه
 wm:
   author: لیکوال
   border:

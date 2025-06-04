@@ -305,6 +305,10 @@ weg:
     min_content: Cât de mic poate fi
   padding: Căptușeală
   width: Lăţime
+widget:
+  enable: Activați acest widget
+  enable_for_monitor: Activați pe acest monitor
+  instances: Instanțe
 wm:
   author: Autor
   border:

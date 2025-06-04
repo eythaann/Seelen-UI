@@ -319,6 +319,10 @@ weg:
     min_content: Малък, колкото може да бъде
   padding: Подплънки
   width: Ширина
+widget:
+  enable: Активиране на тази джаджа
+  enable_for_monitor: Разрешаване на този монитор
+  instances: Инстанции
 wm:
   author: Автор
   border:

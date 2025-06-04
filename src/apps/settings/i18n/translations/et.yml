@@ -298,6 +298,10 @@ weg:
     min_content: Nii väike kui olla saab
   padding: Polsterdamine
   width: Laius
+widget:
+  enable: Võta see vidin kasutusele
+  enable_for_monitor: Lubatud sellel monitoril
+  instances: Instants
 wm:
   author: Autor
   border:

@@ -289,6 +289,10 @@ weg:
     min_content: በተቻለ መጠን ትንሽ
   padding: ፓድ
   width: ስፋት
+widget:
+  enable: ይህን ንዑስ ፕሮግራም ያንቁ
+  enable_for_monitor: በዚህ መቆጣጠሪያ ላይ ያንቁ
+  instances: ሁኔታዎች
 wm:
   author: ደራሲ ደራሲ
   border:

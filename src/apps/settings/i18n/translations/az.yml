@@ -300,6 +300,10 @@ weg:
     min_content: Ola bildiyi qədər kiçik
   padding: Paddend
   width: Geniştəhər
+widget:
+  enable: Bu widgetı aktivləşdirin
+  enable_for_monitor: Bu monitorda aktivləşdirin
+  instances: Hal
 wm:
   author: Müəllif
   border:

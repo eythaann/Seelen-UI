@@ -292,6 +292,10 @@ weg:
     min_content: קטן ככל שניתן
   padding: ריפוד
   width: רוחב
+widget:
+  enable: אפשר יישומון זה
+  enable_for_monitor: אפשר בצג זה
+  instances: מקרים
 wm:
   author: מחבר
   border:
@@ -304,4 +308,4 @@ wm:
   resize_delta: שינוי גודל דלתא (%)
   space_between_containers: רווח בין מיכלים
   workspace_offset: הסטת שולי סביבת עבודה
-  workspace_padding: ריפוד סביבת עבודה 
+  workspace_padding: ריפוד סביבת עבודה

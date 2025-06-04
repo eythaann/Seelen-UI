@@ -24,7 +24,8 @@ export const Navigation = memo(() => {
   const { t } = useTranslation();
   const location = useLocation();
 
-  const Mapper = (route: RoutePath) => {
+  const Mapper = (route: RoutePath | null) => {
+    if (!route) return null;
     return (
       <Item
         key={route}
@@ -63,7 +64,23 @@ export const Navigation = memo(() => {
             icon={<Icon iconName="TbHome" />}
             collapsed={collapsed}
           />
-          {[RoutePath.General, RoutePath.Resource, RoutePath.Shortcuts].map(Mapper)}
+          {[RoutePath.General, RoutePath.Resource].map(Mapper)}
+        </div>
+
+        <div className={cs.separator} />
+        <div className={cs.group}>
+          {widgets
+            .toSorted((a, b) => a.id.localeCompare(b.id))
+            .map((widget) => (
+              <Item
+                key={widget.id}
+                route={`/widget/${widget.id.replace('@', '')}`}
+                isActive={location.pathname === `/widget/${widget.id.replace('@', '')}`}
+                collapsed={collapsed}
+                label={<ResourceText text={widget.metadata.displayName} />}
+                icon={<Icon iconName={(widget.icon as any) || 'BiSolidWidget'} />}
+              />
+            ))}
         </div>
 
         {!!themesWithSettings.length && (
@@ -88,29 +105,17 @@ export const Navigation = memo(() => {
 
         <div className={cs.separator} />
         <div className={cs.group}>
-          {widgets
-            .toSorted((a, b) => a.id.localeCompare(b.id))
-            .map((widget) => (
-              <Item
-                key={widget.id}
-                route={`/widget/${widget.id.replace('@', '')}`}
-                isActive={location.pathname === `/widget/${widget.id.replace('@', '')}`}
-                collapsed={collapsed}
-                label={<ResourceText text={widget.metadata.displayName} />}
-                icon={<Icon iconName={(widget.icon as any) || 'BiSolidWidget'} />}
-              />
-            ))}
-        </div>
-
-        <div className={cs.separator} />
-        <div className={cs.group}>
-          {[RoutePath.SettingsByMonitor, RoutePath.SettingsByApplication].map(Mapper)}
+          {[RoutePath.SettingsByMonitor, RoutePath.SettingsByApplication, RoutePath.Shortcuts].map(
+            Mapper,
+          )}
         </div>
 
         {devTools && (
           <>
             <div className={cs.separator} />
-            <div className={cs.group}>{[RoutePath.DevTools].map(Mapper)}</div>
+            <div className={cs.group}>
+              {[devTools ? RoutePath.DevTools : null].map(Mapper)}
+            </div>
           </>
         )}
       </div>

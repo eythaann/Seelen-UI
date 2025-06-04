@@ -297,6 +297,10 @@ weg:
     min_content: តូចតាមដែលអាចធ្វើបាន
   padding: ទ្រនាប់
   width: ទទឹង
+widget:
+  enable: បើកដំណើរការធាតុក្រាហ្វិកនេះ
+  enable_for_monitor: បើកដំណើរការម៉ូនីទ័រនេះ
+  instances: ករណីបុម
 wm:
   author: អ្នកនិពន្ធ
   border:

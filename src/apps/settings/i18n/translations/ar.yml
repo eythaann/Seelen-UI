@@ -292,6 +292,10 @@ weg:
     min_content: صغيرة كما يمكن أن تكون
   padding: المساحه
   width: العرض
+widget:
+  enable: تمكين هذه الأداة
+  enable_for_monitor: التمكين على هذه الشاشة
+  instances: المثيلات
 wm:
   author: المؤلف
   border:

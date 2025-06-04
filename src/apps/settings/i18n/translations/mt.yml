@@ -301,6 +301,10 @@ weg:
     min_content: Żgħir kemm jista’ jkun
   padding: Ikkuttunar
   width: Wisa '
+widget:
+  enable: Ippermetti dan il-widget
+  enable_for_monitor: Jippermetti fuq dan il-monitor
+  instances: Każijiet
 wm:
   author: Awtur
   border:

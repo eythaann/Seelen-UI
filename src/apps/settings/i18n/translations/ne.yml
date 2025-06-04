@@ -300,6 +300,10 @@ weg:
     min_content: हुनसक्ने सानो
   padding: प्याडडि .्वन
   width: चौडाई
+widget:
+  enable: यो विजेट सक्षम गर्नुहोस्
+  enable_for_monitor: यस मोनिटरमा सक्षम गर्नुहोस्
+  instances: संकेतहरू
 wm:
   author: लेखिका
   border:

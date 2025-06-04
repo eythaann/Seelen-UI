@@ -301,6 +301,10 @@ weg:
     min_content: Piccolo quanto può essere
   padding: Spaziatura
   width: Larghezza
+widget:
+  enable: Abilitare questo widget
+  enable_for_monitor: Abilita su questo monitor
+  instances: Istanze
 wm:
   author: Autore
   border:

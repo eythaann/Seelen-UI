@@ -38,7 +38,7 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
 
           <SettingsGroup>
             {widgets
-              // .filter((widget) => widget.instances === 'ReplicaByMonitor')
+              .filter((widget) => widget.instances === 'ReplicaByMonitor')
               .map((widget) => {
                 return (
                   <SettingsOption key={widget.id}>

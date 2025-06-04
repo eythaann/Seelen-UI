@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 import { RootActions } from '../../shared/store/app/reducer';
+import { RootSelectors } from '../../shared/store/app/selectors';
 import {
   SettingsGroup,
   SettingsOption,
@@ -44,6 +45,7 @@ export function WidgetConfiguration({
   const widget = useSelector(selectWidgetDeclaration(widgetId));
   const rootConfig = useSelector(selectWidgetConfig(widgetId)) || { enabled: true };
   const monitorConfig = useSelector(selectMonitorWidgetConfig(widgetId, monitorId));
+  const areDevToolsEnabled = useSelector(RootSelectors.devTools);
 
   const { t } = useTranslation();
   const d = useDispatch();
@@ -95,7 +97,7 @@ export function WidgetConfiguration({
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('widget.enable')}</b>
+          <b>{monitorId ? t('widget.enable_for_monitor') : t('widget.enable')}</b>
           <Switch
             checked={config.enabled}
             onChange={(value) => {
@@ -126,16 +128,18 @@ export function WidgetConfiguration({
         isByMonitor={!!monitorId}
       />
 
-      <SettingsGroup>
-        <SettingsSubGroup label={<b>Raw view</b>}>
-          <pre>{JSON.stringify(rootConfig, null, 2)}</pre>
-        </SettingsSubGroup>
-        {!!monitorId && (
-          <SettingsSubGroup label={<b>Monitor Raw view</b>}>
-            <pre>{monitorConfig ? JSON.stringify(monitorConfig, null, 2) : 'Inherited'}</pre>
+      {areDevToolsEnabled && (
+        <SettingsGroup>
+          <SettingsSubGroup label={<b>Raw Config</b>}>
+            <pre>{JSON.stringify(rootConfig, null, 2)}</pre>
           </SettingsSubGroup>
-        )}
-      </SettingsGroup>
+          {!!monitorId && (
+            <SettingsSubGroup label={<b>Raw Monitor Patch</b>}>
+              <pre>{monitorConfig ? JSON.stringify(monitorConfig, null, 2) : 'Inherited'}</pre>
+            </SettingsSubGroup>
+          )}
+        </SettingsGroup>
+      )}
     </>
   );
 }

@@ -301,6 +301,10 @@ weg:
     min_content: Pequeno como pode ser
   padding: Preenchimento
   width: Largura
+widget:
+  enable: Ativar esse widget
+  enable_for_monitor: Ativar neste monitor
+  instances: Instâncias
 wm:
   author: Autor
   border:

@@ -299,6 +299,10 @@ weg:
     min_content: వీలైనంత చిన్నది
   padding: పాడింగ్
   width: వెడల్పు
+widget:
+  enable: ఈ విడ్జెట్‌ను ప్రారంభించండి
+  enable_for_monitor: ఈ మానిటర్‌లో ప్రారంభించండి
+  instances: ఉదాహరణలు
 wm:
   author: రచయిత
   border:

@@ -302,6 +302,10 @@ weg:
     min_content: जितना छोटा हो सकता है
   padding: गद्दी
   width: चौड़ाई
+widget:
+  enable: इस विजेट को सक्षम करें
+  enable_for_monitor: इस मॉनिटर पर सक्षम करें
+  instances: उदाहरण
 wm:
   author: लेखक
   border:

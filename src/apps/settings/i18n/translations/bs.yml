@@ -299,6 +299,10 @@ weg:
     min_content: Manji koliko može
   padding: Obloga
   width: Širina
+widget:
+  enable: Omogući ovaj widget
+  enable_for_monitor: Omogući na ovom monitoru
+  instances: Slučajevi
 wm:
   author: Autor
   border:

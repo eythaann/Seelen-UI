@@ -284,6 +284,10 @@ weg:
     min_content: 尽可能小
   padding: 内边距
   width: 宽度
+widget:
+  enable: 启用此部件
+  enable_for_monitor: 在此显示器上启用
+  instances: 实例
 wm:
   author: 作者
   border:

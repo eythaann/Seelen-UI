@@ -299,6 +299,10 @@ weg:
     min_content: Kleng wéi méiglech
   padding: Padding
   width: Breet
+widget:
+  enable: Aktivéiert dëse Widget
+  enable_for_monitor: Aktivéiert op dësem Monitor
+  instances: Instanzen
 wm:
   author: Auteur
   border:

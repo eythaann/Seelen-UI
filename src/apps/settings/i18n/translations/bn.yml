@@ -303,6 +303,10 @@ weg:
     min_content: যতটা সম্ভব ছোট
   padding: প্যাডিং
   width: প্রস্থ
+widget:
+  enable: এই উইজেট সক্ষম করুন
+  enable_for_monitor: এই মনিটরে সক্ষম করুন
+  instances: উদাহরণ
 wm:
   author: লেখক
   border:

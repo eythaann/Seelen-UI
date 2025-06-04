@@ -301,6 +301,10 @@ weg:
     min_content: Olabildiğince küçük
   padding: İç Boşluk
   width: Genişlik
+widget:
+  enable: Bu widget'ı etkinleştirin
+  enable_for_monitor: Bu monitörde etkinleştir
+  instances: Örnekler
 wm:
   author: Yazar
   border:

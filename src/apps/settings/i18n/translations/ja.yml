@@ -287,6 +287,10 @@ weg:
     min_content: できるだけ小さく
   padding: 余白
   width: ドックの幅
+widget:
+  enable: このウィジェットを有効にする
+  enable_for_monitor: このモニターで有効にする
+  instances: インスタンス
 wm:
   author: 製作者
   border:

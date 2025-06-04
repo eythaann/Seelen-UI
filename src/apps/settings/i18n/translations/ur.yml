@@ -300,6 +300,10 @@ weg:
     min_content: جتنا چھوٹا ہو سکتا ہے۔
   padding: بھرتی
   width: چوڑائی
+widget:
+  enable: اس ویجیٹ کو فعال کریں
+  enable_for_monitor: اس مانیٹر کو قابل بنائیں
+  instances: مثال کے طور پر
 wm:
   author: مصنف
   border:

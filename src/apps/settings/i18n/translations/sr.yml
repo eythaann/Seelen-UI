@@ -302,6 +302,10 @@ weg:
     min_content: Мала колико може бити
   padding: Подлокнути
   width: Ширина
+widget:
+  enable: Омогућите овај виџет
+  enable_for_monitor: Омогући на овом монитору
+  instances: Случајеви
 wm:
   author: Аутор
   border:

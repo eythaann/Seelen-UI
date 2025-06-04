@@ -297,6 +297,10 @@ weg:
     min_content: Mažas kaip gali būti
   padding: Paminkštinimas
   width: Plotis
+widget:
+  enable: Įjungti šį valdiklį
+  enable_for_monitor: Įjungti šiame monitoriuje
+  instances: Atvejai
 wm:
   author: Autorius
   border:

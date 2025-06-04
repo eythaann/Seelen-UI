@@ -303,6 +303,10 @@ weg:
     min_content: Petit com pot ser
   padding: Encoir
   width: Amplada
+widget:
+  enable: Activa aquest widget
+  enable_for_monitor: Activa en aquest monitor
+  instances: Instàncies
 wm:
   author: Autora
   border:

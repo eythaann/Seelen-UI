@@ -299,6 +299,10 @@ weg:
     min_content: Якнайменший
   padding: Внутрішній відступ
   width: Ширина
+widget:
+  enable: Увімкніть цей віджет
+  enable_for_monitor: Увімкнути на цьому моніторі
+  instances: Екземпляри
 wm:
   author: Автор
   border:

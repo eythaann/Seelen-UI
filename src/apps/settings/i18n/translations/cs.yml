@@ -299,6 +299,10 @@ weg:
     min_content: Malý jak jen může být
   padding: Padding
   width: Šířka
+widget:
+  enable: Povolení tohoto widgetu
+  enable_for_monitor: Povolit na tomto monitoru
+  instances: Instance
 wm:
   author: Autor
   border:

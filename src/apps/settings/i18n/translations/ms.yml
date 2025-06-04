@@ -301,6 +301,10 @@ weg:
     min_content: Kecil yang boleh
   padding: Padding
   width: Lebar
+widget:
+  enable: Dayakan widget ini
+  enable_for_monitor: Dayakan di monitor ini
+  instances: Contoh
 wm:
   author: Pengarang
   border:

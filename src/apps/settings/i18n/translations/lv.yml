@@ -299,6 +299,10 @@ weg:
     min_content: Cik mazs var būt
   padding: Polsterējums
   width: Platums
+widget:
+  enable: Ieslēgt šo logrīku
+  enable_for_monitor: Ieslēgt šajā monitorā
+  instances: Instances
 wm:
   author: Autors
   border:

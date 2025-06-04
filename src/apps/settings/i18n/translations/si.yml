@@ -298,6 +298,10 @@ weg:
     min_content: හැකි තරම් කුඩා
   padding: පෑඩිං
   width: පළල
+widget:
+  enable: මෙම විජට් සක්රීය කරන්න
+  enable_for_monitor: මෙම මොනිටරය මත සක්රීය කරන්න
+  instances: අවස්ථා
 wm:
   author: කර්තෘ
   border:

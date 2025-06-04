@@ -300,6 +300,10 @@ weg:
     min_content: Biçûk ku dikare bibe
   padding: Padding
   width: Berî
+widget:
+  enable: Vê widgetê çalak bikin
+  enable_for_monitor: Li ser vê çavdêriyê çalak bikin
+  instances: Mînak
 wm:
   author: Nivîskar
   border:

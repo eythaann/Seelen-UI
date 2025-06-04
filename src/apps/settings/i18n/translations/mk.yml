@@ -303,6 +303,10 @@ weg:
     min_content: Мала колку што може
   padding: Подлога
   width: Ширина
+widget:
+  enable: Овозможете го овој додаток
+  enable_for_monitor: Овозможете на овој монитор
+  instances: Примери
 wm:
   author: Автор
   border:

@@ -300,6 +300,10 @@ weg:
     min_content: کوچک که می تواند باشد
   padding: لایه گذاری
   width: عرض
+widget:
+  enable: این ویجت را فعال کنید
+  enable_for_monitor: این مانیتور را فعال کنید
+  instances: نمونه
 wm:
   author: نویسنده
   border:

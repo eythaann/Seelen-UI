@@ -297,6 +297,10 @@ weg:
     min_content: Lítið eins og hægt er
   padding: Padding
   width: Breidd
+widget:
+  enable: Virkja þennan búnað
+  enable_for_monitor: Virkja á þessum skjá
+  instances: Dæmi
 wm:
   author: Höfundur
   border:

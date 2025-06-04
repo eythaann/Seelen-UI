@@ -30,7 +30,13 @@ export function RemoteResources() {
   useEffect(() => {
     fetch('https://product.seelen.io/resources/featured')
       .then((res) => res.json())
-      .then((data: Featured) => setResources(data.top))
+      .then((data: Featured) =>
+        setResources(
+          data.newArrivals.filter((r) => {
+            return !r.metadata.portrait?.includes('cloudinary');
+          }),
+        ),
+      )
       .catch(() => {});
   }, []);
 
