@@ -44,11 +44,13 @@ export function WidgetsView() {
             kind="Widget"
             actions={
               <>
-                <NavLink to={`/widget/${widget.id.replace('@', '')}`}>
-                  <Button type="text">
-                    <Icon iconName="RiSettings4Fill" />
-                  </Button>
-                </NavLink>
+                {!['@seelen/settings', '@seelen/popup'].includes(widget.id) && (
+                  <NavLink to={`/widget/${widget.id.replace('@', '')}`}>
+                    <Button type="text">
+                      <Icon iconName="RiSettings4Fill" />
+                    </Button>
+                  </NavLink>
+                )}
               </>
             }
           />

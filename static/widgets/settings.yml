@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/widget.schema.json
+id: '@seelen/settings'
+icon: RiSettings4Fill
+metadata:
+  displayName:
+    en: Seelen UI Settings
+    af: Seelen UI -instellings
+    az: SEELEN UI Parametrləri
+    bs: Seelen UI postavke
+    ca: Configuració de la UI de Seelen
+    cs: Nastavení uživatelského rozhraní Seelen
+    cy: Gosodiadau Seelen UI
+    da: Seelen UI -indstillinger
+    de: Seelen UI -Einstellungen
+    et: Seeleni kasutajaliidese sätted
+    es: Configuración de UI de Seelen
+    eu: Seelen UI ezarpenak
+    tl: Mga setting ng Seelen UI
+    fr: Paramètres d'interface utilisateur Seelen
+    hr: Seelen UI postavke
+    id: Pengaturan Seelen UI
+    zu: Izilungiselelo ze-Seelen UI
+    is: Seelen UI stillingar
+    it: Impostazioni dell'interfaccia utente Seelen
+    sw: Mipangilio ya Seelen UI
+    ku: Mîhengên Seelen Ui
+    lv: SEELEN UI iestatījumi
+    lb: Seelen Ui Astellunge
+    lt: SEELEN UI nustatymai
+    hu: Seelen ui beállítások
+    ms: Tetapan Seelen UI
+    mt: Seelen UI Settings
+    nl: Selen UI -instellingen
+    'no': Seelen UI -innstillinger
+    uz: Seelen UI sozlamalari
+    pl: Ustawienia UI Seelen
+    pt: SEELEN UI Configurações
+    ro: Seelen UI setări
+    sk: Nastavenia používateľského rozhrania Seelen
+    so: Selelen Ui Ui
+    fi: Seelen UI -asetukset
+    sv: Seelen UI -inställningar
+    vi: Cài đặt UI Seelen
+    tr: Seelen UI Ayarları
+    yo: Awọn eto Sisen UI
+    el: Ρυθμίσεις Seelen UI
+    bg: Настройки на Seelen UI
+    mk: Поставки за UI на Seelen
+    mn: Seelen ui тохиргоо
+    ru: Seelen настройки пользовательского интерфейса
+    sr: Сеелен УИ подешавања
+    tg: Танзимоти ui ui
+    uk: Налаштування інтерфейсу SEELEN
+    ka: Seelen UI პარამეტრები
+    hy: Seelen UI- ի պարամետրերը
+    he: הגדרות ממשק המשתמש של Seelen
+    ur: سیلین UI کی ترتیبات
+    ar: إعدادات واجهة المستخدم Seelen
+    ps: د متحده ایالاتو تنظیمات وګورئ
+    fa: تنظیمات Seelen UI
+    am: ዌይን ኡኒ ቅንብሮች
+    ne: नजर बटिंग हेर्नुहोस्
+    hi: सेलेन यूआई सेटिंग्स
+    bn: সিলেন ইউআই সেটিংস
+    pa: ਅਯੂ ਆਈ ਸੈਟਿੰਗਜ਼
+    gu: સીલેન યુઆઈ સેટિંગ્સ
+    ta: சீலன் UI அமைப்புகள்
+    te: సీలెన్ UI సెట్టింగులు
+    si: සීලන් යූ සැකසුම්
+    th: การตั้งค่า Seelen UI
+    lo: ການຕັ້ງຄ່າ SEELEN UI
+    km: ការកំណត់ UI UI UI
+    ko: Seelen UI 설정
+    zh: Seelen UI设置
+    ja: Seelen UI設定
+instances: Single

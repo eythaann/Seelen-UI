@@ -51,7 +51,7 @@ impl PopupsManager {
         .always_on_top(true)
         .decorations(false)
         .transparent(true)
-        .inner_size(450.0, 240.0)
+        .inner_size(480.0, 260.0)
         .effects(WindowEffectsConfig {
             color: None,
             radius: None,
@@ -101,7 +101,6 @@ impl PopupsManager {
         let event = format!("resource::{id}::enable");
         let token = handle.once(event, move |_e| {
             std::thread::spawn(move || {
-                println!("add_to_active");
                 FULL_STATE.rcu(move |state| {
                     let mut state = state.cloned();
                     match kind {
