@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.6]
 ### features
 - widgets implementation.
 - allow load/unload widgets via command line client.
