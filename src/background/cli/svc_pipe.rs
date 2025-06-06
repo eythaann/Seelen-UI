@@ -120,7 +120,7 @@ impl ServicePipe {
     // so if the service is not running, we need to start it (common on msix setup)
     pub async fn start_service() -> Result<()> {
         if let Err(err) = Self::start_service_task() {
-            log::debug!("Can not start service via task scheduler: {}", err);
+            log::debug!("Can not start service via task scheduler: {err}");
             let script = PwshScript::new(format!(
                 "Start-Process '{}' -Verb runAs",
                 Self::service_path()?.display()

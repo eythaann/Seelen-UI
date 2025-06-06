@@ -292,8 +292,7 @@ impl WmV2State {
 
             if siblins.is_empty() {
                 log::warn!(
-                    "Can't change size at {:?} if there are no other windows on that side",
-                    axis
+                    "Can't change size at {axis:?} if there are no other windows on that side"
                 );
                 return Ok((m, w));
             }

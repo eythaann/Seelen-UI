@@ -116,7 +116,7 @@ impl AppCli {
     pub const URI: &str = "seelen-ui.uri:";
 
     pub fn process_uri(uri: &str) -> Result<()> {
-        log::trace!("Loading URI: {}", uri);
+        log::trace!("Loading URI: {uri}");
 
         if !uri.starts_with(Self::URI) {
             let path = PathBuf::from(uri);

@@ -58,7 +58,7 @@ impl FullState {
                     self.plugins.insert(plugin.id.clone(), plugin);
                 }
                 Err(e) => {
-                    log::error!("Failed to load plugin: {}", e);
+                    log::error!("Failed to load plugin: {e}");
                 }
             }
         }

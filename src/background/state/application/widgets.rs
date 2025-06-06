@@ -36,7 +36,7 @@ impl FullState {
                     self.widgets.insert(widget.id.clone(), widget);
                 }
                 Err(e) => {
-                    log::error!("Failed to load widget: {}", e);
+                    log::error!("Failed to load widget: {e}");
                 }
             }
         }

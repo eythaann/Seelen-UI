@@ -36,11 +36,7 @@ pub fn register_panic_hook() {
             );
         }
 
-        log::error!(
-            "A panic occurred:\n  Cause: {}\n  Location: {}",
-            cause,
-            string_location
-        );
+        log::error!("A panic occurred:\n  Cause: {cause}\n  Location: {string_location}");
         base_hook(info);
     }));
 }

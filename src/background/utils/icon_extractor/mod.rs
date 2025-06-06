@@ -282,7 +282,7 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<()> {
         .join("system")
         .join(&to_store_filename);
 
-    log::trace!("Extracting icon for {:?}", file_name);
+    log::trace!("Extracting icon for {file_name:?}");
 
     // Special case for url files, these can have a custom icon, but to simplicity we use a single one for every .url
     if is_url_file {
@@ -332,7 +332,7 @@ pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
         }
     }
 
-    log::trace!("Extracting icon for {:?}", aumid);
+    log::trace!("Extracting icon for {aumid:?}");
     match aumid {
         AppUserModelId::Appx(aumid) => {
             let (light, dark) = UwpManager::get_high_quality_icon_path(aumid)?;

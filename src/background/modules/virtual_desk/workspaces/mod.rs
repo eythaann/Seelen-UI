@@ -147,7 +147,7 @@ impl SeelenWorkspacesManager {
     }
 
     fn create_many_desktop(&self, count: usize) -> Result<()> {
-        log::trace!("Creating {} seelen workspaces", count);
+        log::trace!("Creating {count} seelen workspaces");
         for _ in 0..count {
             self.create_desktop()?;
         }

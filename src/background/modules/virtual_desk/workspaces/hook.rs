@@ -58,7 +58,7 @@ impl SeelenWorkspacesManager {
             WinEvent::ObjectDestroy | WinEvent::ObjectHide | WinEvent::SystemMinimizeStart => {
                 if let Some(workspace) = trace_lock!(self.workspaces).get_mut(self.current_idx()) {
                     if workspace.windows.contains(&addr) {
-                        log::trace!("removing window: {}", addr);
+                        log::trace!("removing window: {addr}");
                         workspace.windows.retain(|w| *w != addr);
                     }
                 }

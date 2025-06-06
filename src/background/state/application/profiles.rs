@@ -17,7 +17,7 @@ impl FullState {
                     self.profiles.push(profile);
                 }
                 Err(e) => {
-                    log::error!("Failed to load profile: {}", e);
+                    log::error!("Failed to load profile: {e}");
                 }
             }
         }

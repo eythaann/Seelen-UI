@@ -38,7 +38,7 @@ impl SelfPipe {
         let socket_addr = listener.local_addr()?;
         let port = socket_addr.port();
 
-        log::info!("TCP server listening on 127.0.0.1:{}", port);
+        log::info!("TCP server listening on 127.0.0.1:{port}");
         fs::write(Self::socket_path()?, port.to_string())?;
 
         spawn_named_thread("TCP Listener", move || {
@@ -56,7 +56,7 @@ impl SelfPipe {
                     Ok(stream) => {
                         std::thread::spawn(move || log_error!(Self::handle_message(stream)));
                     }
-                    Err(e) => log::error!("Failed to accept connection: {}", e),
+                    Err(e) => log::error!("Failed to accept connection: {e}"),
                 }
             }
         })?;

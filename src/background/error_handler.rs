@@ -185,7 +185,7 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
 impl<T, E: std::fmt::Debug> ResultLogger for core::result::Result<T, E> {
     fn log_error(self) {
         if let Err(err) = self {
-            log::error!("{:?}", err);
+            log::error!("{err:?}");
         }
     }
 }

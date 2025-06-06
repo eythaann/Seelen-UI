@@ -211,7 +211,7 @@ impl FullState {
                 }
                 Err(errors) => errors
                     .iter()
-                    .for_each(|e| log::error!("File Watcher Error: {:?}", e)),
+                    .for_each(|e| log::error!("File Watcher Error: {e:?}")),
             },
         )?;
 

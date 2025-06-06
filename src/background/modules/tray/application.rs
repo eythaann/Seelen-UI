@@ -100,7 +100,7 @@ impl TrayIconManager {
                 manager.icons_v2.insert(data.id.clone(), data);
             }
             TrayIconEvent::Removed(id) => {
-                log::trace!("Tray icon removed {}", id);
+                log::trace!("Tray icon removed {id}");
                 let mut manager = trace_lock!(TRAY_ICON_MANAGER);
                 manager.icons_v2.remove(&id);
                 if let Ok((icons, elements)) = manager.load_all_tray_icons() {

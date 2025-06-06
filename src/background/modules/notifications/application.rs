@@ -114,10 +114,7 @@ impl NotificationManager {
         match self.listener.NotificationChanged(&self.event_handler) {
             Ok(token) => self.event_token = Some(token.as_event_token()),
             Err(error) => {
-                log::warn!(
-                    "Failed to register winrt notification change handler: {}",
-                    error
-                );
+                log::warn!("Failed to register winrt notification change handler: {error}");
                 // intead we use a thread
                 spawn_named_thread("Notification Manager", || -> Result<()> {
                     RELEASED.store(false, Ordering::SeqCst);
@@ -328,7 +325,7 @@ impl NotificationManager {
         }
 
         if notification_content.is_none() {
-            log::debug!("NONE FOR {:#?}", notification_text);
+            log::debug!("NONE FOR {notification_text:#?}");
         }
 
         // pre-extraction to avoid flickering on the ui

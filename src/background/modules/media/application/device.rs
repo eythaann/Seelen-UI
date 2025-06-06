@@ -58,7 +58,7 @@ impl IAudioSessionNotification_Impl for MediaDeviceEventHandler_Impl {
                         session
                     }))
                 }
-                Err(e) => log::error!("Failed to load session: {:?}", e),
+                Err(e) => log::error!("Failed to load session: {e:?}"),
             }
         }
         Ok(())
@@ -77,7 +77,7 @@ impl MediaDevice {
             let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
             match MediaDeviceSession::load(session, &device_id) {
                 Ok(session) => sessions.push(session),
-                Err(e) => log::error!("Failed to load session: {:?}", e),
+                Err(e) => log::error!("Failed to load session: {e:?}"),
             }
         }
 

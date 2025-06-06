@@ -18,7 +18,7 @@ pub fn register_language_events() {
                     lang_manager.languages = match LanguageManager::enum_langs() {
                         Ok(languages) => languages,
                         Err(e) => {
-                            log::error!("Failed to enumerate languages: {}", e);
+                            log::error!("Failed to enumerate languages: {e}");
                             return;
                         }
                     };

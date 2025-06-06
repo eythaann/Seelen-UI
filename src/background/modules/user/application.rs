@@ -222,7 +222,7 @@ impl UserManager {
                     log_error!(Self::on_files_changed(paths));
                 }
                 Err(errors) => {
-                    log::error!("RecentFile Watcher Error: {:?}", errors)
+                    log::error!("RecentFile Watcher Error: {errors:?}")
                 }
             },
         )?;

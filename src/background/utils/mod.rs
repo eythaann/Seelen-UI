@@ -130,7 +130,7 @@ pub struct PerformanceHelper {
 
 impl PerformanceHelper {
     pub fn start(&mut self, name: &str) {
-        log::debug!("{} start", name);
+        log::debug!("{name} start");
         self.time.insert(name.to_string(), Instant::now());
     }
 

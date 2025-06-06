@@ -60,7 +60,7 @@ impl StartMenuManager {
                     return Ok(());
                 }
                 Err(e) => {
-                    log::error!("Failed to load start menu cache: {}", e);
+                    log::error!("Failed to load start menu cache: {e}");
                 }
             }
         }

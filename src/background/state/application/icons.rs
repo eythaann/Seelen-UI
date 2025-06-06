@@ -230,7 +230,7 @@ impl FullState {
             let mut icon_pack = match Self::load_icon_pack_from_dir(&path) {
                 Ok(icon_pack) => icon_pack,
                 Err(err) => {
-                    log::error!("Failed to load icon pack ({:?}): {:?}", path, err);
+                    log::error!("Failed to load icon pack ({path:?}): {err:?}");
                     continue;
                 }
             };

@@ -57,7 +57,7 @@ impl LanguageManager {
                 let current = unsafe { GetKeyboardLayout(focused_thread) }.0 as usize;
                 if current != LAST_LOADED_HKL.load(Ordering::Acquire) {
                     LAST_LOADED_HKL.store(current, Ordering::Relaxed);
-                    log::info!("Keyboard layout changed to {:08X?}", current);
+                    log::info!("Keyboard layout changed to {current:08X?}");
                     log_error!(Self::event_tx().send(LanguageEvent::KeyboardLayoutChanged(current)));
                 }
                 std::thread::sleep(std::time::Duration::from_secs(1));

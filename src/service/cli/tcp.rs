@@ -77,7 +77,7 @@ impl TcpService {
         let socket_addr = listener.local_addr()?;
         let port = socket_addr.port();
 
-        log::info!("TCP server listening on 127.0.0.1:{}", port);
+        log::info!("TCP server listening on 127.0.0.1:{port}");
         std::fs::write(Self::socket_path()?, port.to_string())?;
 
         std::thread::spawn(move || {
@@ -85,10 +85,10 @@ impl TcpService {
                 match stream {
                     Ok(stream) => {
                         if let Err(e) = Self::handle_message(stream) {
-                            log::error!("Failed to handle message: {}", e);
+                            log::error!("Failed to handle message: {e}");
                         }
                     }
-                    Err(e) => log::error!("Failed to accept connection: {}", e),
+                    Err(e) => log::error!("Failed to accept connection: {e}"),
                 }
             }
         });

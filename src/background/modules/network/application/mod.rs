@@ -170,7 +170,7 @@ impl NetworkManager {
                 }
             });
 
-            log::warn!("Network loop finished: {:?}", result);
+            log::warn!("Network loop finished: {result:?}");
         })
         .expect("Failed to spawn network manager loop");
     }
@@ -185,7 +185,7 @@ impl NetworkManager {
     }
 
     pub async fn add_profile(ssid: &str, password: &str, hidden: bool) -> Result<()> {
-        log::trace!("Adding profile {}", ssid);
+        log::trace!("Adding profile {ssid}");
         let profile_xml = if password.is_empty() {
             // Be sure that xml is using tabs instead of spaces for indentation
             include_str!("passwordless_profile.template.xml")
@@ -227,7 +227,7 @@ impl NetworkManager {
     }
 
     pub async fn remove_profile(ssid: &str) -> Result<()> {
-        log::trace!("Removing profile {}", ssid);
+        log::trace!("Removing profile {ssid}");
 
         let handle = get_app_handle();
         let output = handle

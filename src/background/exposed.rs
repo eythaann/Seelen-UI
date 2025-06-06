@@ -51,7 +51,7 @@ async fn run_as_admin(program: PathBuf, args: Option<RelaunchArguments>) -> Resu
         },
         None => String::new(),
     };
-    log::trace!("Running as admin: {:?} {}", program, args);
+    log::trace!("Running as admin: {program:?} {args}");
 
     let command = if args.is_empty() {
         format!("Start-Process '{}' -Verb runAs", program.display())
@@ -79,7 +79,7 @@ async fn run(
         },
         None => String::new(),
     };
-    log::trace!("Running: {:?} {} in {:?}", program, args, working_dir);
+    log::trace!("Running: {program:?} {args} in {working_dir:?}");
 
     // we create a link file to trick with explorer into a separated process
     // and without elevation in case Seelen UI was running as admin

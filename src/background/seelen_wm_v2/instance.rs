@@ -49,7 +49,7 @@ impl WindowManagerV2 {
 
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let label = format!("{}?monitorId={}", Self::TARGET, monitor_id);
-        log::info!("Creating {}", label);
+        log::info!("Creating {label}");
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
 
         let window = tauri::WebviewWindowBuilder::new(

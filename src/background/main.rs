@@ -145,7 +145,7 @@ fn main() -> Result<()> {
         .setup(|app| {
             APP_HANDLE.set(app.handle().to_owned()).unwrap();
             if let Err(err) = setup(app) {
-                log::error!("Error while setting up: {:?}", err);
+                log::error!("Error while setting up: {err:?}");
                 app.handle().exit(1);
             }
             Ok(())

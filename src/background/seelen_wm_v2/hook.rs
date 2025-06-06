@@ -29,7 +29,7 @@ impl WindowManagerV2 {
             VirtualDesktopEvent::WindowChanged(window) => {
                 let window = &Window::from(*window);
                 if Self::is_managed(window) {
-                    log::trace!("window changed: {:?}", window);
+                    log::trace!("window changed: {window:?}");
                     Self::remove(window)?;
                     Self::add(window)?;
                 }
@@ -67,7 +67,7 @@ impl WindowManagerV2 {
             } else {
                 Axis::Left
             };
-            log::trace!("window width changed by: {}%", percentage_diff);
+            log::trace!("window width changed by: {percentage_diff}%");
             let state = trace_lock!(WM_STATE);
             let (m, w) = state.update_size(window, axis, percentage_diff, true)?;
             Self::render_workspace(&m.id, w)?;
@@ -80,7 +80,7 @@ impl WindowManagerV2 {
             } else {
                 Axis::Top
             };
-            log::trace!("window height changed by: {}%", percentage_diff);
+            log::trace!("window height changed by: {percentage_diff}%");
             let state = trace_lock!(WM_STATE);
             let (m, w) = state.update_size(window, axis, percentage_diff, true)?;
             Self::render_workspace(&m.id, w)?;

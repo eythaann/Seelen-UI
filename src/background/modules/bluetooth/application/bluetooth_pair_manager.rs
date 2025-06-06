@@ -123,7 +123,7 @@ impl BluetoothPairManager {
                         }
                         _ => return Ok(()), //Impossible
                     };
-                    log::trace!("Event: {:?} for kind: {:?}", event, pair_kind);
+                    log::trace!("Event: {event:?} for kind: {pair_kind:?}");
                     //Send pair request
                     log_error!(Self::event_tx().send(event));
 

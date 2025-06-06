@@ -325,7 +325,7 @@ impl NetworkManager {
                         }
                     }
                     Err(err) => {
-                        log::error!("{}", err);
+                        log::error!("{err}");
                     }
                 }
 

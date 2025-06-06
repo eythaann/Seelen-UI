@@ -169,7 +169,7 @@ impl HookManager {
         if event == WinEvent::ObjectDestroy {
             return log::debug!("{:?}({:0x})", event_value, origin.address());
         }
-        log::debug!("{:?} | {:?}", event_value, origin);
+        log::debug!("{event_value:?} | {origin:?}");
     }
 
     fn process_event(event: WinEvent, origin: Window) {
@@ -179,7 +179,7 @@ impl HookManager {
             let mut skipper = trace_lock!(HOOK_MANAGER_SKIPPER);
             if skipper.should_skip(event, origin.address()) {
                 if LOG_WIN_EVENTS.load(Ordering::Acquire) {
-                    log::debug!("Skipping WinEvent::{:?}", event);
+                    log::debug!("Skipping WinEvent::{event:?}");
                 }
                 skipper.cleanup();
                 return;

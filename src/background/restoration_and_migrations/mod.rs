@@ -41,7 +41,7 @@ impl RestorationAndMigration {
         // migration of user settings files below v1.8.3
         let old_path = path.resolve(".config/seelen", BaseDirectory::Home)?;
         if old_path.exists() {
-            log::trace!("Migrating user settings from {:?}", old_path);
+            log::trace!("Migrating user settings from {old_path:?}");
             for entry in std::fs::read_dir(&old_path)?.flatten() {
                 if entry.file_type()?.is_dir() {
                     continue;

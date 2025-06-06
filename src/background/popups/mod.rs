@@ -63,7 +63,7 @@ impl PopupsManager {
 
         window.on_window_event(move |e| {
             if let WindowEvent::Destroyed = e {
-                log::trace!("popup destroyed: {}", popup_id);
+                log::trace!("popup destroyed: {popup_id}");
                 std::thread::spawn(move || {
                     let mut popups = POPUPS_MANAGER.lock();
                     popups.webviews.remove(&popup_id);

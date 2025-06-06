@@ -62,7 +62,7 @@ impl SeelenWeg {
         let manager = get_app_handle();
 
         let label = format!("{}?monitorId={}", Self::TARGET, postfix);
-        log::info!("Creating {}", label);
+        log::info!("Creating {label}");
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
 
         let window = tauri::WebviewWindowBuilder::new(

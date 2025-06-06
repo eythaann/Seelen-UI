@@ -84,7 +84,7 @@ impl SeelenWeg {
 
         if let Some(config) = FULL_STATE.load().get_app_config_by_window(window.hwnd()) {
             if config.options.contains(&AppExtraFlag::Hidden) {
-                log::trace!("Skipping by config: {:?}", window);
+                log::trace!("Skipping by config: {window:?}");
                 return false;
             }
         }
@@ -131,7 +131,7 @@ impl SeelenWeg {
                     sleep_millis(50);
                 }
             }
-            Err(err) => log::error!("Failed to get taskbars handles: {:?}", err),
+            Err(err) => log::error!("Failed to get taskbars handles: {err:?}"),
         })
     }
 
