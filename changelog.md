@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- expose timeline on media players.
+
 ## [2.3.6]
 ### features
 - widgets implementation.

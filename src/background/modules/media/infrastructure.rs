@@ -21,11 +21,18 @@ pub fn register_media_events() {
             | MediaEvent::MediaPlayerRemoved(_)
             | MediaEvent::MediaPlayerCleanRequested
             | MediaEvent::MediaPlayerPropertiesChanged { .. }
-            | MediaEvent::MediaPlayerPlaybackStatusChanged { .. } => {
+            | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
+            | MediaEvent::MediaPlayerTimelineChanged { .. } => {
                 let manager = trace_lock!(MEDIA_MANAGER);
                 log_error!(get_app_handle().emit(SeelenEvent::MediaSessions, manager.playing()));
             }
-            _ => {
+            MediaEvent::DeviceAdded(_)
+            | MediaEvent::DeviceRemoved(_)
+            | MediaEvent::DefaultDeviceChanged { .. }
+            | MediaEvent::DeviceVolumeChanged { .. }
+            | MediaEvent::DeviceSessionAdded { .. }
+            | MediaEvent::DeviceSessionRemoved { .. }
+            | MediaEvent::DeviceSessionVolumeChanged { .. } => {
                 let manager = trace_lock!(MEDIA_MANAGER);
                 let app = get_app_handle();
                 log_error!(app.emit(SeelenEvent::MediaInputs, manager.inputs()));

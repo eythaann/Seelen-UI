@@ -8,12 +8,13 @@ use std::{collections::HashMap, path::PathBuf, sync::Arc, time::Duration};
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::system_state::MediaPlayerTimeline;
 use windows::{
     Foundation::TypedEventHandler,
     Media::Control::{
         GlobalSystemMediaTransportControlsSession,
         GlobalSystemMediaTransportControlsSessionManager, MediaPropertiesChangedEventArgs,
-        PlaybackInfoChangedEventArgs, SessionsChangedEventArgs,
+        PlaybackInfoChangedEventArgs, SessionsChangedEventArgs, TimelinePropertiesChangedEventArgs,
     },
     Win32::{
         Foundation::PROPERTYKEY,
@@ -87,6 +88,10 @@ pub enum MediaEvent {
     MediaPlayerPlaybackStatusChanged {
         id: String,
         playing: bool,
+    },
+    MediaPlayerTimelineChanged {
+        id: String,
+        timeline: MediaPlayerTimeline,
     },
 }
 
@@ -171,8 +176,19 @@ pub struct MediaManager {
     >,
     media_player_playback_event_handler:
         TypedEventHandler<GlobalSystemMediaTransportControlsSession, PlaybackInfoChangedEventArgs>,
+    media_player_timeline_event_handler: TypedEventHandler<
+        GlobalSystemMediaTransportControlsSession,
+        TimelinePropertiesChangedEventArgs,
+    >,
     /// session id -> (media properties changed event, playback info changed event)
-    media_player_event_tokens: HashMap<String, (EventRegistrationToken, EventRegistrationToken)>,
+    media_player_event_tokens: HashMap<
+        String,
+        (
+            EventRegistrationToken,
+            EventRegistrationToken,
+            EventRegistrationToken,
+        ),
+    >,
 }
 
 unsafe impl Send for MediaManager {}
@@ -237,6 +253,9 @@ impl MediaManager {
             media_player_properties_event_handler: TypedEventHandler::new(
                 MediaManagerEvents::on_media_player_properties_changed,
             ),
+            media_player_timeline_event_handler: TypedEventHandler::new(
+                MediaManagerEvents::on_media_player_timeline_changed,
+            ),
             media_player_playback_event_handler: TypedEventHandler::new(
                 MediaManagerEvents::on_media_player_playback_changed,
             ),
@@ -272,6 +291,7 @@ impl MediaManager {
                     | MediaEvent::MediaPlayerRemoved(_)
                     | MediaEvent::MediaPlayerPropertiesChanged { .. }
                     | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
+                    | MediaEvent::MediaPlayerTimelineChanged { .. }
             );
 
             let mut media_manager = trace_lock!(MEDIA_MANAGER);
@@ -437,6 +457,11 @@ impl MediaManager {
             MediaEvent::MediaPlayerPlaybackStatusChanged { id, playing } => {
                 if let Some(player) = self.player_mut(&id) {
                     player.playing = playing;
+                }
+            }
+            MediaEvent::MediaPlayerTimelineChanged { id, timeline } => {
+                if let Some(player) = self.player_mut(&id) {
+                    player.timeline = timeline;
                 }
             }
         }

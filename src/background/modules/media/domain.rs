@@ -1,5 +1,6 @@
 use std::{ffi::c_void, mem::zeroed, path::PathBuf, time::Instant};
 
+use seelen_core::system_state::{MediaPlayerOwner, MediaPlayerTimeline};
 use serde::Serialize;
 
 use windows::{
@@ -77,18 +78,13 @@ impl ChannelMask {
 
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct MediaPlayerOwner {
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct MediaPlayer {
     pub umid: String,
     pub title: String,
     pub author: String,
     pub thumbnail: Option<PathBuf>,
     pub owner: MediaPlayerOwner,
+    pub timeline: MediaPlayerTimeline,
     pub playing: bool,
     pub default: bool,
     #[serde(skip)]
