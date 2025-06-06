@@ -28,6 +28,6 @@ for (let key in dependencies) {
   }
 }
 
-command = `cargo update ${toUpdate.join(' ')}`;
+command = `cargo upgrade -p ${toUpdate.join(' -p ')}`;
 console.info(`${command}\n`);
 execSync(command, { stdio: 'inherit' });
