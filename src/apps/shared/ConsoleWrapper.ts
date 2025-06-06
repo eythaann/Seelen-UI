@@ -1,4 +1,5 @@
-import { logger } from '@seelen-ui/lib/tauri';
+import * as logger from './_ConsoleWrapper';
+import { WebviewInformation } from './_tauri';
 
 function StringifyParams(params: any[]): string {
   return params.reduce((acc, current) => {
@@ -22,27 +23,7 @@ function StringifyParams(params: any[]): string {
 
     return acc + ' ' + `${current}`;
   }, '');
-};
-
-function decodeUrlSafeBase64(base64Str: string) {
-  let standardBase64 = base64Str.replace(/-/g, '+').replace(/_/g, '/');
-  const padLength = (4 - (standardBase64.length % 4)) % 4;
-  standardBase64 += '='.repeat(padLength);
-  return atob(standardBase64);
 }
-
-class WebviewInformation {
-  _label: string | null = null;
-  get label() {
-    if (this._label) {
-      return this._label;
-    }
-
-    const viewLabel = window.__TAURI_INTERNALS__?.metadata?.currentWebview?.label;
-    this._label = viewLabel ? decodeUrlSafeBase64(viewLabel) : 'Unknown';
-    return this._label;
-  }
-};
 
 export function wrapConsoleV2() {
   const WebConsole = {
@@ -74,10 +55,14 @@ export function wrapConsoleV2() {
     console.error('Unhandled Rejection', event.reason);
   });
 
-  window.addEventListener('error', (event) => {
-    // could be undefined on fetch errors
-    if (event.error || event.message) {
-      console.error('Uncaught Error', event.error || event.message);
-    }
-  }, true);
+  window.addEventListener(
+    'error',
+    (event) => {
+      // could be undefined on fetch errors
+      if (event.error || event.message) {
+        console.error('Uncaught Error', event.error || event.message);
+      }
+    },
+    true,
+  );
 }

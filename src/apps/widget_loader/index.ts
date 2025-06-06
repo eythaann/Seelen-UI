@@ -1,10 +1,14 @@
-import { Widget } from '@seelen-ui/lib';
+import type { Widget } from '@seelen-ui/lib/types';
+import { _invoke, WebviewInformation } from '@shared/_tauri';
 import { removeDefaultWebviewActions } from '@shared/setup';
 
-removeDefaultWebviewActions();
-const widget = await Widget.getCurrentAsync();
+const currentWidgetId = new WebviewInformation().widgetId;
+const widgetList = await _invoke<Widget[]>('state_get_widgets');
+const widget = widgetList.find((widget) => widget.id === currentWidgetId)!;
 
-const { js, css, html } = widget.def;
+removeDefaultWebviewActions();
+
+const { js, css, html } = widget;
 
 if (html) {
   document.body.innerHTML = html;

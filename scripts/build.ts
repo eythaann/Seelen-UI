@@ -126,6 +126,7 @@ function startDevServer() {
 
 (async function main() {
   const { isProd, serve } = await getArgs();
+  console.log(`isProd: ${isProd}, serve: ${serve}`);
 
   await extractIconsIfNecessary();
 
@@ -142,6 +143,7 @@ function startDevServer() {
     bundle: true,
     minify: isProd,
     sourcemap: !isProd,
+    treeShaking: true,
     format: 'esm',
     outdir: './dist',
     jsx: 'automatic',

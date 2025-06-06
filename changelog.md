@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### enhancements
 - expose timeline on media players.
+- reduce bundled size of js code.
 
 ## [2.3.6]
 ### features

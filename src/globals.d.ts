@@ -17,11 +17,12 @@ interface ObjectConstructor {
 }
 
 interface Window {
-  __TAURI_INTERNALS__?: {
+  __TAURI_INTERNALS__: {
     metadata?: {
       currentWebview?: {
         label?: string;
       };
     };
+    invoke: any;
   };
 }

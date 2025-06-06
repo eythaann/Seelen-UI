@@ -26,8 +26,8 @@
     "withGlobalTauri": false
   },
   "build": {
-    "beforeDevCommand": "npm run build:ui -- --serve",
-    "beforeBuildCommand": "npm run build:ui -- --production",
+    "beforeDevCommand": "npm run build:ui:watch",
+    "beforeBuildCommand": "npm run build:ui:production",
     "devUrl": "http://localhost:3579",
     "frontendDist": "dist",
     "features": []
