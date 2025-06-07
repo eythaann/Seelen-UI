@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.7]
 ### enhancements
 - expose timeline on media players.
 - reduce bundled size of js code.
