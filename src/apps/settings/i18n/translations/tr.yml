@@ -1,16 +1,16 @@
 app_launcher:
   enable: Uygulama Başlatıcısını Etkinleştir
   launch_on:
-    mouse_over: Farenin üzerine gelin
-    primary: Öncelik
+    mouse_over: Fare üzerine gelince
+    primary: Birincil
   monitor: Gösterilecek Monitör
   runners:
     cmd: Komut İstemi
-    explorer: Çalıştır
-    label: Çalıştırıcılar
+    explorer: Dosya Gezgini
+    label: Başlatıcılar
 apps_configurations:
   app:
-    bindings: Tuş Atama (her iki seçenek de gereklidir)
+    bindings: Tuş Ataması (her iki seçenek de gereklidir)
     category: Kategori
     category_placeholder: Yok
     monitor: Monitör
@@ -22,12 +22,12 @@ apps_configurations:
     options:
       float: Yüzer
       force: Zorla Yönet
-      hidden: Dock/Görev Çubuğundan Gizle
+      hidden: Dock/Görev Çubuğunda Gizle
       pinned: Sabitlenmiş
-      unmanage: Yönetimden Çıkar
+      unmanage: Yönetim Dışında Tut
     options_label: Ekstra Seçenekler
     title_create: '{{Name}} Oluşturuluyor'
-    title_edit: Düzenleme {{name}}
+    title_edit: '{{name}} Düzenleniyor'
     title_readonly: '{{name}} Görüntüleniyor'
     weg_options_label: Dock/Görev Çubuğu Seçenekleri
     wm_options_label: Pencere Yöneticisi Seçenekleri
@@ -35,17 +35,17 @@ apps_configurations:
     workspace_placeholder: Yok
   bundled_msg: >-
     Bu paketlenmiş yapılandırmalar düzenlenemez ve özelleştirme olmadan size en
-    iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları sizin için
-    otomatik olarak yapılandırır.
+    iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları otomatik 
+    olarak yapılandırır.
   bundled_title: Seelen ile Birlikte Gelen Uygulama Yapılandırması
   confirm_delete: Bu yapılandırmayı silmek istediğinizden emin misiniz?
   confirm_delete_title: Silmeyi Onayla
   delete: Sil
   export: Dışa Aktar
-  export_full: Ayarları uygulamaya göre dışa aktarma
+  export_full: Ayarları uygulamaya göre dışa aktar
   extra_info: >-
     Seelen UI, uygulama başına yalnızca bir tanımlayıcı kullanır (ilk eşleşme
-    bulundu), bu nedenle nasıl belirlendiği sırası önemlidir, tablonun
+    bulundu), bu nedenle nasıl belirlendiği sırası önemlidir. Tablonun
     varsayılan olarak en yeniden eskiye doğru sıralandığını unutmayın, en son
     eklenenlere öncelik verilecektir.
   identifier:
@@ -56,10 +56,10 @@ apps_configurations:
     matching_strategy: Eşleştirme Stratejisi
     matching_strategy_option:
       contains: İçerir
-      ends_with: 'Şununla biter:'
+      ends_with: Şununla biter
       equals: Eşittir
       regex: Düzenli ifade
-      starts_with: 'Şununla başlar:'
+      starts_with: Şununla başlar
     negation: Eşleşmeyi Geçersiz Kıl
     or: VEYA
     remove: Bloğu Sil
@@ -69,7 +69,7 @@ apps_configurations:
       path: Yol
       title: Başlık
   import: İçe Aktar
-  import_full: Ayarları uygulamaya göre içe aktarma
+  import_full: Ayarları uygulamaya göre içe aktar
   new: Yeni
   search: Ara
   swap: Değiştir
@@ -101,7 +101,7 @@ general:
     available: Mevcut Simge Paketleri
     selected: Aktif Simge Paketleri
   language: Dil
-  startup: Başlangıçta çalışsın mı?
+  startup: Başlangıçta çalıştır
   theme:
     available: Mevcut Temalar
     selected: Aktif Temalar
@@ -134,14 +134,14 @@ monitors_configurations:
 more: Daha Fazla
 open: Aç
 quit: Çıkış
-remove: Kaldırmak
+remove: Kaldır
 resources:
   app_outdated: >-
     Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
     gerekir.
   discover: Daha fazla kaynak keşfedin
-  export: Kaynak İhracatı
-  open_folder: Kaynak klasörünü açın
+  export: Kaynak Dışa Aktarımı
+  open_folder: Kaynak klasörünü aç
   outdated: >-
     Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün
     çalışmayabilir.
@@ -149,7 +149,7 @@ save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 see_more: Daha Fazla Gör
 shortcuts:
-  enable: Entegre Kısayolları Etkinleştir (ahk)
+  enable: Entegre Kısayolları Etkinleştir (AHK)
   enable_tooltip: >-
     Seelen Core API kullanarak kendi kısayollarınızı uygulayacaksanız devre dışı
     bırakın
@@ -163,10 +163,10 @@ shortcuts:
     focus_top: Üste Odaklan
     increase_height: Yüksekliği Artır
     increase_width: Genişliği Artır
-    misc_open_settings: Ayarlar Aç
-    misc_toggle_lock_tracing: Kilit izleme (kütükler)
-    misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
-    move_to_workspace_0: Çalışma Alanı 0'a Taşı
+    misc_open_settings: Ayarları Aç
+    misc_toggle_lock_tracing: Kilit izlemeyi değiştir (günlükler)
+    misc_toggle_win_event_tracing: Win olay izlemeyi değiştir (günlükler)
+    move_to_workspace_0: Çalışma Alanı 1'e Taşı
     move_to_workspace_1: Çalışma Alanı 2'ye Taşı
     move_to_workspace_2: Çalışma Alanı 3'e Taşı
     move_to_workspace_3: Çalışma Alanı 4'e Taşı
@@ -174,10 +174,10 @@ shortcuts:
     move_to_workspace_5: Çalışma Alanı 6'ya Taşı
     move_to_workspace_6: Çalışma Alanı 7'ye Taşı
     move_to_workspace_7: Çalışma Alanı 8'e Taşı
-    move_to_workspace_8: Çalışma Alanı 8'e Taşı
+    move_to_workspace_8: Çalışma Alanı 9'a Taşı
     move_to_workspace_9: Çalışma Alanı 10'a Taşı
     reserve_bottom: Altı Rezerve Et
-    reserve_float: Yüzeri Rezerve Et
+    reserve_float: Yüzeni Rezerve Et
     reserve_left: Solu Rezerve Et
     reserve_right: Sağı Rezerve Et
     reserve_stack: Yığını Rezerve Et
@@ -187,33 +187,33 @@ shortcuts:
     send_to_workspace_1: Çalışma Alanı 2'ye Gönder
     send_to_workspace_2: Çalışma Alanı 3'e Gönder
     send_to_workspace_3: Çalışma Alanı 4'e Gönder
-    send_to_workspace_4: Çalışma Alanı 4'e Gönder
+    send_to_workspace_4: Çalışma Alanı 5'e Gönder
     send_to_workspace_5: Çalışma Alanı 6'ya Gönder
     send_to_workspace_6: Çalışma Alanı 7'ye Gönder
     send_to_workspace_7: Çalışma Alanı 8'e Gönder
     send_to_workspace_8: Çalışma Alanı 9'a Gönder
-    send_to_workspace_9: Çalışma Alanı 9'a Gönder
-    start_weg_app_0: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 1'e
-    start_weg_app_1: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 2
-    start_weg_app_2: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonuna 3
-    start_weg_app_3: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 4
-    start_weg_app_4: Odak veya Başlat Uygulamayı Görev Çubuğu Konumu 5'e
-    start_weg_app_5: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 6
-    start_weg_app_6: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 7
-    start_weg_app_7: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 8'e
-    start_weg_app_8: Odak veya Başlat Uygulamayı Görev Çubuğu Pozisyonu 9
-    start_weg_app_9: Odak veya Başlat Uygulamayı Görev Çubuğu Konumu 10
+    send_to_workspace_9: Çalışma Alanı 10'a Gönder
+    start_weg_app_0: Odakla veya Başlat - Görev Çubuğu Pozisyonu 1
+    start_weg_app_1: Odakla veya Başlat - Görev Çubuğu Pozisyonu 2
+    start_weg_app_2: Odakla veya Başlat - Görev Çubuğu Pozisyonu 3
+    start_weg_app_3: Odakla veya Başlat - Görev Çubuğu Pozisyonu 4
+    start_weg_app_4: Odakla veya Başlat - Görev Çubuğu Pozisyonu 5
+    start_weg_app_5: Odakla veya Başlat - Görev Çubuğu Pozisyonu 6
+    start_weg_app_6: Odakla veya Başlat - Görev Çubuğu Pozisyonu 7
+    start_weg_app_7: Odakla veya Başlat - Görev Çubuğu Pozisyonu 8
+    start_weg_app_8: Odakla veya Başlat - Görev Çubuğu Pozisyonu 9
+    start_weg_app_9: Odakla veya Başlat - Görev Çubuğu Pozisyonu 10
     switch_workspace_0: Çalışma Alanı 1'e Geç
     switch_workspace_1: Çalışma Alanı 2'ye Geç
     switch_workspace_2: Çalışma Alanı 3'e Geç
-    switch_workspace_3: Çalışma Alanı 3'e Geç
+    switch_workspace_3: Çalışma Alanı 4'e Geç
     switch_workspace_4: Çalışma Alanı 5'e Geç
     switch_workspace_5: Çalışma Alanı 6'ya Geç
     switch_workspace_6: Çalışma Alanı 7'ye Geç
     switch_workspace_7: Çalışma Alanı 8'e Geç
     switch_workspace_8: Çalışma Alanı 9'a Geç
     switch_workspace_9: Çalışma Alanı 10'a Geç
-    toggle_launcher: Geçiş yapmak
+    toggle_launcher: Başlatıcıyı Aç/Kapat
   readonly_tooltip: Bu salt okunur bir kısayol
   reset: Varsayılanlara Sıfırla
 sides:
@@ -223,22 +223,22 @@ sides:
   top: Üst
 start:
   message: >-
-    Seelen UI'a hoş geldiniz, Windows deneyiminizi geliştirmek için entegre bir
-    döşeme pencere yöneticisi ile en iyi masaüstü ortamı! Kullanıcı dostu
-    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevlerde yeni
+    Seelen UI'a hoş geldiniz! Windows deneyiminizi geliştirmek için entegre 
+    döşeme pencere yöneticisi ile en iyi masaüstü ortamı. Kullanıcı dostu
+    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevde yeni
     bir çağı keşfedin.
   message_accent: Verimliliğinizi stil ile optimize edin!
   title: Hoş Geldiniz!
 toolbar:
   auto_hide: Otomatik Gizle
-  delay_to_hide: Gizlenmeyi geciktir
+  delay_to_hide: Gizleme gecikmesi
   delay_to_show: Gösterme gecikmesi
   dock_side: Pozisyon
   dynamic_color: Dinamik Renk
   dynamic_color_tooltip: >-
     Odaklanılan pencereye göre dinamik arka plan ve ön plan renklerini
     etkinleştirin. (Renkler temalar tarafından geçersiz kılınabilir)
-  enable: Şık Araç Çubuğunu Etkinleştir
+  enable: Araç Çubuğunu Etkinleştir
   height: Yükseklik
   hide_mode:
     always: Her zaman
@@ -246,11 +246,11 @@ toolbar:
     on_overlap: Üst üste binme durumunda
   label: Araç Çubuğu
   placeholder: {}
-  show_hibernate: Güç menüsünde hazırda beklet düğmesini göster
+  show_hibernate: Güç menüsünde hazırda bekletme düğmesini göster
 update:
   available: Güncelleme Mevcut!
   channel: Güncelleme kanalı
-  downloading: İndirme ...
+  downloading: İndiriliyor...
 vd:
   disabled_windows_version: Yerli Sanal Masaüstü Stratejisi Windows sürümünüz için mevcut değil.
   strategy:
@@ -261,14 +261,14 @@ wall:
   backgrounds: Duvar Kağıtları
   enable: Duvar Kağıdı Yöneticisini Etkinleştir
   hours: saat
-  interval: Duvar kağıdını her şeyi değiştir
-  minutes: dakikalar
+  interval: Duvar kağıdı değiştirme aralığı
+  minutes: dakika
   no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
-  random: Slayt gösterisini rastgele
+  random: Rastgele slayt gösterisi
   seconds: saniye
 weg:
   auto_hide: Otomatik Gizle
-  delay_to_hide: Gizlenmeyi geciktir
+  delay_to_hide: Gizleme gecikmesi
   delay_to_show: Gösterme gecikmesi
   dock_side: Konum
   enable: Dock/Görev Çubuğunu Etkinleştir
@@ -289,7 +289,7 @@ weg:
     show_window_title: Açık pencere başlığını göster (sadece yatay)
     size: Öğe Boyutu
     temporal_visibility:
-      all: Tüm
+      all: Tümü
       label: Sabitlenmemiş Öğelerin Görünürlüğü
       on_monitor: Monitörde
     thumbnail_generation_enabled: Öğenin üzerine gelindiğinde küçük resimler oluştur
@@ -302,13 +302,13 @@ weg:
   padding: İç Boşluk
   width: Genişlik
 widget:
-  enable: Bu widget'ı etkinleştirin
+  enable: Bu widget'ı etkinleştir
   enable_for_monitor: Bu monitörde etkinleştir
   instances: Örnekler
 wm:
   author: Yazar
   border:
-    enable: Pencere Kenraını Etkinleştir
+    enable: Pencere Kenarlığını Etkinleştir
     offset: Kenar Ofseti
     width: Kenar Genişliği
   description: Açıklama
