@@ -4,6 +4,7 @@
 ### enhancements
 - expose timeline on media players.
 - reduce bundled size of js code.
+- reduce verbosity on logs comming from widgets.
 
 ## [2.3.6]
 ### features

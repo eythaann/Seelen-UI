@@ -1,5 +1,4 @@
 import * as logger from './_ConsoleWrapper';
-import { WebviewInformation } from './_tauri';
 
 function StringifyParams(params: any[]): string {
   return params.reduce((acc, current) => {
@@ -26,26 +25,18 @@ function StringifyParams(params: any[]): string {
 }
 
 export function wrapConsoleV2() {
-  const WebConsole = {
-    info: console.info,
-    warn: console.warn,
-    error: console.error,
-    debug: console.debug,
-    trace: console.trace,
-  };
-
   function forwardConsole(
-    fnName: keyof typeof WebConsole,
+    fnName: 'log' | 'trace' | 'debug' | 'info' | 'warn' | 'error',
     logger: (message: string) => Promise<void>,
   ) {
     const original = console[fnName];
     console[fnName] = (...params: any[]) => {
       original(...params);
-      logger(`[${new WebviewInformation().label}]: ` + StringifyParams(params));
+      logger(StringifyParams(params));
     };
   }
 
-  // forwardConsole('log', trace);
+  forwardConsole('trace', logger.trace);
   forwardConsole('debug', logger.debug);
   forwardConsole('info', logger.info);
   forwardConsole('warn', logger.warn);
