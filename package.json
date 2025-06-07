@@ -41,7 +41,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "@seelen-ui/lib": "^2.3.6-next.20250605212630",
     "@seelen/translation-toolkit": "^1.1.10",
-    "@stylistic/eslint-plugin": "^1.6.2",
+    "@stylistic/eslint-plugin": "^4.4.1",
     "@types/d3": "^7.4.3",
     "@types/express": "^5.0.0",
     "@types/glob": "^8.1.0",
