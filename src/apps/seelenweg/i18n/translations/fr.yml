@@ -1,11 +1,11 @@
 app_menu:
   close: Fermer
-  close_multiple: Ferme tout
-  copy_handles: Poignées de copie
-  kill: Processus de mise à mort
-  kill_multiple: Tuez tous les processus
-  open_file_location: Lieu de fichier ouvert
-  pin: Épingle
+  close_multiple: Tout fermer
+  copy_handles: Copier l'ID du processus
+  kill: Terminer le processus
+  kill_multiple: Terminer tous les processus
+  open_file_location: Ouvrir l'emplacement du fichier
+  pin: Épingler
   pin_to_center: Épingler au centre
   pin_to_left: Épingler à gauche
   pin_to_right: Épingler à droite
@@ -15,17 +15,17 @@ context_menu:
   reorder_disable: Verrouiller la barre des tâches
   reorder_enable: Déverrouiller la barre des tâches
 media:
-  not_playing: Rien ne joue
+  not_playing: Vide
 media_menu:
-  remove: Supprimer le module multimédia
+  remove: Masquer le module multimédia
 start_menu:
-  remove: Supprimer le module de démarrage
+  remove: Masquer le module "Menu démarrer"
 taskbar_menu:
-  add_file: Fichier personnalisé d'épingle
-  add_folder: PIN FOLDER CUSTOM
-  media: Ajouter un module multimédia
+  add_file: Épingler un fichier
+  add_folder: Épingler un dossier
+  media: Afficher le module multimédia
   settings: Paramètres
-  start: Ajouter un module de démarrage
-  task_manager: Gestionnaire de tâches
+  start: Afficher le module "Menu démarrer"
+  task_manager: Gestionnaire des tâches
 weg:
   empty: Aucun élément à afficher
