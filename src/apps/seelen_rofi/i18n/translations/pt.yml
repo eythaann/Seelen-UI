@@ -3,9 +3,9 @@ app_launcher:
     cmd: Comando
     explorer: Executar
 footer:
-  shortcuts: Mostrar atalhos
+  shortcuts: Mostrar Atalhos
 header:
-  search: Aplicativo, comando ou caminho
+  search: Aplicativo, Comando ou Caminho
 item:
-  open_location: Localização do arquivo aberto
-  pin: Fixar na doca
+  open_location: Abrir local do arquivo
+  pin: Fixar na Dock

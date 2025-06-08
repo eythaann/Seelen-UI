@@ -3,19 +3,19 @@ resource:
   enable: Habilitar
 runtime:
   download: Vá para a página de download
-  not_found: Tempo de execução do WebView2 não encontrado
-  not_found_description: A UI Seelen requer o tempo de execução Webview2. Por favor instale-o.
-  outdated: Tempo de execução do WebView2 desatualizado
+  not_found: WebView2 Runtime não encontrado
+  not_found_description: A Seelen UI requer o WebView2 Runtime. Por favor, instale-o.
+  outdated: WebView2 Runtime desatualizado
   outdated_description: >-
     A UI Seelen requer Webview2 Runtime %{min_version} ou superior. Por favor
     atualize-o.
 service:
-  not_running: O serviço Seelen UI não está em execução
+  not_running: Seelen UI Service não está em execução
   not_running_description: >-
     Seelen UI Service (slu-service) é uma dependência/ajudante para o aplicativo
     funcionar corretamente.
   not_running_ok: Iniciar serviço
 tray:
-  quit: Desistir
-  restart: Reinicie a interface do usuário
+  quit: Sair
+  restart: Reiniciar UI
   settings: Configurações
