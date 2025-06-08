@@ -258,7 +258,7 @@ vd:
     La gestion de bureau virtuelle native n'est pas disponible pour votre
     version de Windows.
   strategy:
-    label: Gestion de bureau virtuel
+    label: Gestionnaire de bureau virtuel
     native: Native
     seelen: Seelen
 wall:
