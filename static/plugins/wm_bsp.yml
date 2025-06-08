@@ -12,7 +12,7 @@ metadata:
     es: Disposición BSPWM
     ca: Disposició bspwm
     cy: Cynllun BSPWM
-    fr: Mise en page BSPWM
+    fr: Disposition BSPWM
     id: Tata Letak BSPWM
     it: Layout BSPWM
     eu: BSPWM diseinua
@@ -83,7 +83,7 @@ metadata:
     de: Standard-Bspwm-Kachel-Layout.
     ca: Disposició per defecte de rajoles BSPWM.
     cy: Cynllun teils bspwm diofyn.
-    fr: la disposition par défaut des tuiles bspwm.
+    fr: Disposition par défaut des tuiles BSPWM.
     id: tata letak ubin bspwm default.
     eu: BSPWM fitxa lehenetsia.
     it: layout predefinito delle piastrelle bspwm.
