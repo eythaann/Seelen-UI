@@ -202,4 +202,4 @@ For inquiries and support, please contact me on [Discord](https://discord.gg/ABf
 ---
 📌 **Official Website**: [https://seelen.io](https://seelen.io)
 
-Seelen Inc © 2024 - All rights reserved
+Seelen Inc © 2025 - All rights reserved
