@@ -1,6 +1,8 @@
 use windows::Win32::{
     Foundation::HWND,
-    UI::WindowsAndMessaging::{FindWindowExA, EVENT_OBJECT_CREATE, EVENT_OBJECT_SHOW, SW_HIDE},
+    UI::WindowsAndMessaging::{
+        FindWindowExA, EVENT_OBJECT_CREATE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, SW_HIDE,
+    },
 };
 
 use crate::{
@@ -74,9 +76,23 @@ impl SeelenWeg {
         Ok(())
     }
 
+    // move this to independent function as this should work independently if dock is enabled or not
     pub fn process_raw_win_event(event: u32, origin_hwnd: HWND) -> Result<()> {
         let origin = Window::from(origin_hwnd);
         match event {
+            EVENT_OBJECT_UNCLOAKED => {
+                let class = origin.class();
+                // this will hide native notification center and notifications preview
+                if class == "Windows.UI.Core.CoreWindow"
+                    && origin
+                        .process()
+                        .program_exe_name()
+                        .is_ok_and(|n| n == "ShellExperienceHost.exe")
+                {
+                    let _ = WindowsApi::show_window_async(origin_hwnd, SW_HIDE);
+                    return Ok(());
+                }
+            }
             EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
                 let class = origin.class();
                 let parent_class = origin.parent().map(|p| p.class()).unwrap_or_default();

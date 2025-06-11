@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- (#897) stucked arrival notifications.
+- showing native notifications preview with the seelen ones (now only seelen arrival will be shown).
+
 ## [2.3.7]
 ### enhancements
 - expose timeline on media players.

@@ -9,6 +9,7 @@ import { cx } from 'src/apps/shared/styles';
 
 interface Props {
   notification: AppNotification;
+  onClose?: () => void;
 }
 
 // Difference between Windows epoch (1601) and Unix epoch (1970) in milliseconds
@@ -18,7 +19,7 @@ function WindowsDateFileTimeToDate(fileTime: bigint) {
   return new Date(Number(fileTime / 10000n - EPOCH_DIFF_MILLISECONDS));
 }
 
-export function Notification({ notification }: Props) {
+export function Notification({ notification, onClose }: Props) {
   const toast = notification.content;
   const template = toast.visual.binding['@template'];
   const actions = toast.actions?.$value || [];
@@ -74,6 +75,7 @@ export function Notification({ notification }: Props) {
               invoke(SeelenCommand.NotificationsClose, { id: notification.id }).catch(
                 console.error,
               );
+              onClose?.();
             }}
           >
             <Icon iconName="IoClose" />
