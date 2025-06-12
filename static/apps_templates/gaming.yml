@@ -35,3 +35,11 @@
     matchingStrategy: Equals
   options:
     - hidden
+
+- name: Edge Game Assist
+  identifier:
+    id: EdgeGameAssist.exe
+    kind: Exe
+    matchingStrategy: Equals
+  options:
+    - hidden
