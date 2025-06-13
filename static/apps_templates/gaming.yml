@@ -36,6 +36,14 @@
   options:
     - hidden
 
+- name: Spotify Game Bar Widget
+  identifier:
+    id: XboxGameBarSpotify.exe
+    kind: Exe
+    matchingStrategy: Equals
+  options:
+    - hidden
+
 - name: Edge Game Assist
   identifier:
     id: EdgeGameAssist.exe

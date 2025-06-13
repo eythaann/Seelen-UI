@@ -8,6 +8,7 @@
 - (#897) stucked arrival notifications.
 - showing native notifications preview with the seelen ones (now only seelen arrival will be shown).
 - (#934) invisible edge window on dock.
+- (#925) invisible spotify widget on dock.
 
 ## [2.3.7]
 ### enhancements
