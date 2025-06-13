@@ -8,6 +8,25 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from '../../../../shared/components/Icon';
 import { cx } from '../../../../shared/styles';
 
+const getTextFrequencies = (frequencies: number[]) => {
+  const FREQUENCY_BANDS = [
+    { name: '2.4G', min: 2_400_000, max: 2_484_000 },
+    { name: '5G', min: 5_000_000, max: 5_850_000 },
+    { name: '6G', min: 5_925_000, max: 7_125_000 },
+  ];
+
+  const detectedBands = new Set<string>();
+  for (const freq of frequencies) {
+    for (const band of FREQUENCY_BANDS) {
+      if (freq >= band.min && freq <= band.max) {
+        detectedBands.add(band.name);
+        break;
+      }
+    }
+  }
+  return Array.from(detectedBands);
+};
+
 export function WlanSelectorEntry(props: {
   group: [WlanBssEntry, ...WlanBssEntry[]];
   selected: boolean;
@@ -88,13 +107,7 @@ export function WlanSelectorEntry(props: {
     signalIcon = 'GrWifiLow';
   }
 
-  let frequencies: string[] = [];
-  if (group.some((e) => e.channelFrequency < 5_000_000)) {
-    frequencies.push('2.4G');
-  }
-  if (group.some((e) => e.channelFrequency > 5_000_000)) {
-    frequencies.push('5G');
-  }
+  const frequencies = getTextFrequencies(group.map((e) => e.channelFrequency));
 
   return (
     <div
@@ -106,7 +119,9 @@ export function WlanSelectorEntry(props: {
     >
       <div className="wlan-entry-info">
         <Icon iconName={signalIcon} size={20} />
-        <span className="wlan-entry-info-ssid">{entry.ssid || `${t('network.hidden')} (${group.length})`}</span>
+        <span className="wlan-entry-info-ssid">
+          {entry.ssid || `${t('network.hidden')} (${group.length})`}
+        </span>
         {!isHiddenGroup && <div className="wlan-entry-info-channel">{frequencies.join('/')}</div>}
         {!isHiddenGroup && entry.secured && (
           <Tooltip title={t('network.secured')}>
