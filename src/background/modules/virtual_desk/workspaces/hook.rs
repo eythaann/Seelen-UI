@@ -39,8 +39,8 @@ impl SeelenWorkspacesManager {
     pub fn on_win_event(&self, event: WinEvent, window: &Window) -> Result<()> {
         let addr = window.address();
         match event {
-            WinEvent::ObjectCreate | WinEvent::ObjectShow => {
-                if Self::should_be_added(window) && !self.contains(window) {
+            WinEvent::ObjectCreate | WinEvent::ObjectShow | WinEvent::ObjectNameChange => {
+                if !self.contains(window) && Self::should_be_added(window) {
                     self.add(window);
                 }
             }

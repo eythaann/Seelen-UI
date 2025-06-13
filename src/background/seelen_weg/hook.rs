@@ -47,8 +47,14 @@ impl SeelenWeg {
                     Self::foregrounded_app(window)?;
                 }
             }
-            WinEvent::ObjectNameChange
-            | WinEvent::SystemMinimizeStart
+            WinEvent::ObjectNameChange => {
+                if Self::contains_app(window) {
+                    Self::update_app(window)?;
+                } else if Self::should_be_added(window) {
+                    Self::add(window)?;
+                }
+            }
+            WinEvent::SystemMinimizeStart
             | WinEvent::SystemMinimizeEnd
             | WinEvent::SyntheticMaximizeStart
             | WinEvent::SyntheticMaximizeEnd => {

@@ -169,10 +169,7 @@ impl HookManager {
         if event == WinEvent::ObjectDestroy {
             return log::debug!("{:?}({:0x})", event_value, origin.address());
         }
-
-        if origin.class() == "Windows.UI.Core.CoreWindow" {
-            log::debug!("{event_value:?} | {origin:?}");
-        }
+        log::debug!("{event_value:?} | {origin:?}");
     }
 
     fn process_event(event: WinEvent, origin: Window) {

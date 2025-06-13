@@ -10,7 +10,8 @@
 - showing native notifications preview with the seelen ones (now only seelen arrival will be shown).
 - (#934) invisible edge window on dock.
 - (#925) invisible spotify widget on dock.
-- (#938) listing 6ghz networks as 5g networks
+- (#938) listing 6ghz networks as 5g networks.
+- (#962) JetBrains software isn't showing in dock.
 
 ## [2.3.7]
 ### enhancements
