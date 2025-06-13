@@ -1,3 +1,9 @@
+drivers:
+  got_it: Ik heb het
+  monitor_disabled: >-
+    Het lijkt erop dat sommige beeldschermstuurprogramma's zijn uitgeschakeld.
+    Schakel deze in om Seelen UI goed te laten werken.
+  monitor_disabled_title: Monitorstuurprogramma's zijn uitgeschakeld
 resource:
   added: Er is een nieuwe bron toegevoegd
   enable: inschakelen

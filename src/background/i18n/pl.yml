@@ -1,3 +1,9 @@
+drivers:
+  got_it: Rozumiem
+  monitor_disabled: >-
+    Wygląda na to, że niektóre sterowniki monitora są wyłączone. Włącz je, aby
+    Seelen UI działał poprawnie.
+  monitor_disabled_title: Sterowniki monitora są wyłączone
 resource:
   added: Dodano nowy zasób
   enable: Włącz

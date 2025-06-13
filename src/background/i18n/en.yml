@@ -1,3 +1,9 @@
+drivers:
+  got_it: Got it
+  monitor_disabled: >-
+    It appears that some monitor drivers are disabled. Please enable them to let
+    Seelen UI work properly.
+  monitor_disabled_title: Monitor drivers are disabled
 resource:
   added: A new resource has been added
   enable: Enable

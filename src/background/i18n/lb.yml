@@ -1,3 +1,9 @@
+drivers:
+  got_it: Krut et
+  monitor_disabled: >-
+    Et schéngt, datt e puer Monitor Chauffeuren behënnert ginn. Aktivéiert
+    hinnen hinnen ze gesinn ze gesinn.
+  monitor_disabled_title: Monitor Chauffeuren sinn ausgeschalt
 resource:
   added: Eng nei Ressource gouf bäigefüügt
   enable: Erméiglecher zréck

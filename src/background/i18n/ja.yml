@@ -1,3 +1,7 @@
+drivers:
+  got_it: 了解
+  monitor_disabled: 一部のモニタドライバが無効になっているようです。Seelen UIを正しく動作させるには、これらのドライバを有効にしてください。
+  monitor_disabled_title: モニタドライバが無効
 resource:
   added: 新しいリソースが追加されました
   enable: 有効にする

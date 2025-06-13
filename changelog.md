@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- show a warning to users with monitors drivers disabled.
+
 ### fix
 - (#897) stucked arrival notifications.
 - showing native notifications preview with the seelen ones (now only seelen arrival will be shown).

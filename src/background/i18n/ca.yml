@@ -1,3 +1,9 @@
+drivers:
+  got_it: Ho tinc
+  monitor_disabled: >-
+    Sembla que alguns controladors de monitor estan desactivats. Si us plau,
+    permeteu -los que Seelen Ui funcioni correctament.
+  monitor_disabled_title: Els controladors de monitorització estan desactivats
 resource:
   added: S'ha afegit un nou recurs
   enable: Capacitar

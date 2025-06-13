@@ -1,3 +1,9 @@
+drivers:
+  got_it: Fékk það
+  monitor_disabled: >-
+    Svo virðist sem sumir eftirlitsbílstjórar séu óvirkir. Vinsamlegast gerðu
+    þeim kleift að láta Seelen UI virka almennilega.
+  monitor_disabled_title: Fylgstu ökumenn eru óvirkir
 resource:
   added: Nýjum auðlind hefur verið bætt við
   enable: Virkja

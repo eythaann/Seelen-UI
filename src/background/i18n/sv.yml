@@ -1,3 +1,9 @@
+drivers:
+  got_it: Jag har den
+  monitor_disabled: >-
+    Det verkar som om vissa bildskärmsdrivrutiner är inaktiverade. Vänligen
+    aktivera dem så att Seelen UI fungerar korrekt.
+  monitor_disabled_title: Drivrutiner för bildskärm är inaktiverade
 resource:
   added: En ny resurs har lagts till
   enable: Aktivera

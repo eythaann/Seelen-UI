@@ -1,3 +1,9 @@
+drivers:
+  got_it: GOT IT
+  monitor_disabled: >-
+    Mae'n ymddangos bod rhai gyrwyr monitro yn anabl. Os gwelwch yn dda eu
+    galluogi i adael i Seelen UI weithio'n iawn.
+  monitor_disabled_title: Monitro gyrwyr yn anabl
 resource:
   added: Ychwanegwyd adnodd newydd
   enable: Galluoga

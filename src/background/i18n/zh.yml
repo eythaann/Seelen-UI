@@ -1,3 +1,7 @@
+drivers:
+  got_it: 明白
+  monitor_disabled: 某些显示器驱动程序似乎被禁用。请启用它们，以便 Seelen UI 正常工作。
+  monitor_disabled_title: 显示器驱动程序已禁用
 resource:
   added: 新增资源
   enable: 启用

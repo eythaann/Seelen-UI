@@ -1,3 +1,9 @@
+drivers:
+  got_it: Hiểu rồi
+  monitor_disabled: >-
+    Có vẻ như một số trình điều khiển màn hình bị vô hiệu hóa. Vui lòng cho phép
+    họ để Seelen UI hoạt động đúng.
+  monitor_disabled_title: Trình điều khiển theo dõi bị vô hiệu hóa
 resource:
   added: Một tài nguyên mới đã được thêm vào
   enable: Cho phép

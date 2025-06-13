@@ -1,3 +1,9 @@
+drivers:
+  got_it: Shvatio sam
+  monitor_disabled: >-
+    Izgleda da su neki vozači monitora onemogućeni. Molimo vas da im omogućite
+    da se SEELEN UI pravilno radi.
+  monitor_disabled_title: Vozači monitora su onemogućeni
 resource:
   added: Dodan je novi resurs
   enable: Omogućiti

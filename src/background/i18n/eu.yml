@@ -1,3 +1,9 @@
+drivers:
+  got_it: Lortu dut
+  monitor_disabled: >-
+    Badirudi kontrolatzaile batzuk desgaituta daudela. Mesedez, gaitu Seelen Ui
+    behar bezala funtziona dezan.
+  monitor_disabled_title: Kontrolatzaile kontrolatzaileak desgaituta daude
 resource:
   added: Baliabide berri bat gehitu da
   enable: Ahalbidetu

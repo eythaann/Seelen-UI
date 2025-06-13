@@ -1,3 +1,9 @@
+drivers:
+  got_it: حصلت عليه
+  monitor_disabled: >-
+    يبدو أن بعض برامج تشغيل الشاشة معطلة. يرجى تمكينها للسماح لواجهة Seelen UI
+    بالعمل بشكل صحيح.
+  monitor_disabled_title: تم تعطيل برامج تشغيل الشاشة
 resource:
   added: تمت إضافة مورد جديد
   enable: التمكين

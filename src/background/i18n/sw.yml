@@ -1,3 +1,9 @@
+drivers:
+  got_it: Nimepata
+  monitor_disabled: >-
+    Inatokea kwamba madereva wengine wa kuangalia ni walemavu. Tafadhali
+    wawezeshe kuruhusu Seelen UI ifanye kazi vizuri.
+  monitor_disabled_title: Madereva wa kufuatilia ni walemavu
 resource:
   added: Rasilimali mpya imeongezwa
   enable: Wezesha

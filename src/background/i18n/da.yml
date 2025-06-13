@@ -1,3 +1,9 @@
+drivers:
+  got_it: Jeg har det
+  monitor_disabled: >-
+    Det ser ud til, at nogle skærmdrivere er deaktiveret. Aktivér dem venligst,
+    så Seelen UI kan fungere korrekt.
+  monitor_disabled_title: Skærmdrivere er deaktiveret
 resource:
   added: En ny ressource er blevet tilføjet
   enable: Gør det muligt

@@ -1,3 +1,9 @@
+drivers:
+  got_it: Sapratu.
+  monitor_disabled: >-
+    Šķiet, ka daži monitora draiveri ir atspējoti. Lūdzu, iespējojiet tos, lai
+    Seelen UI darbotos pareizi.
+  monitor_disabled_title: Monitora draiveri ir atspējoti
 resource:
   added: Ir pievienots jauns resurss
   enable: Ieslēgt

@@ -1,3 +1,9 @@
+drivers:
+  got_it: Je l'ai
+  monitor_disabled: >-
+    Il semble que certains pilotes de moniteur soient désactivés. Veuillez les
+    activer pour permettre à Seelen UI de fonctionner correctement.
+  monitor_disabled_title: Les pilotes de moniteur sont désactivés
 resource:
   added: Une nouvelle ressource a été ajoutée
   enable: Activer

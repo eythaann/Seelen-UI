@@ -1,3 +1,9 @@
+drivers:
+  got_it: Tushundim
+  monitor_disabled: >-
+    Ko'rinib turibdiki, ba'zi haydovchilar o'chirilgan. Iltimos, ularni Seelen
+    Ui to'g'ri ishlashga imkon berish imkoniyatini bering.
+  monitor_disabled_title: Monitor drayverlari o'chirilgan
 resource:
   added: Yangi manba qo'shildi
   enable: Yoqib yubormoq

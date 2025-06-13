@@ -1,3 +1,9 @@
+drivers:
+  got_it: Sain sen
+  monitor_disabled: >-
+    Näyttää siltä, että jotkin näytönohjaimet on poistettu käytöstä. Ota ne
+    käyttöön, jotta Seelen UI toimisi oikein.
+  monitor_disabled_title: Näytön ohjaimet on poistettu käytöstä
 resource:
   added: Uusi resurssi on lisätty
   enable: Ota käyttöön

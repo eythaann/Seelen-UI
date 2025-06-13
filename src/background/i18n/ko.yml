@@ -1,3 +1,7 @@
+drivers:
+  got_it: 알겠습니다.
+  monitor_disabled: 일부 모니터 드라이버가 비활성화되어 있는 것 같습니다. Seelen UI가 제대로 작동하도록 활성화해 주세요.
+  monitor_disabled_title: 모니터 드라이버가 비활성화됨
 resource:
   added: 새로운 리소스가 추가되었습니다.
   enable: 사용

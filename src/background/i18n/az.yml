@@ -1,3 +1,9 @@
+drivers:
+  got_it: Alıb içmək
+  monitor_disabled: >-
+    Bəzi monitor sürücülərin əlil olduğu görünür. Zəhmət olmasa, Seelen UI'nin
+    düzgün işləməsinə imkan verin.
+  monitor_disabled_title: Monitor sürücülər deaktivdir
 resource:
   added: Yeni bir qaynaq əlavə edildi
   enable: Aktivləşdirmək

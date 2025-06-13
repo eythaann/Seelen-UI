@@ -1,3 +1,9 @@
+drivers:
+  got_it: Turiu
+  monitor_disabled: >-
+    Atrodo, kad kai kurios monitoriaus tvarkyklės yra išjungtos. Įjunkite jas,
+    kad "Seelen UI" veiktų tinkamai.
+  monitor_disabled_title: Monitoriaus tvarkyklės yra išjungtos
 resource:
   added: Pridėtas naujas išteklius
   enable: Įjungti

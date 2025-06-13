@@ -1,3 +1,9 @@
+drivers:
+  got_it: קיבלתי את זה
+  monitor_disabled: >-
+    נראה כי נהגי צג מסוימים מושבתים. אנא אפשר להם לאפשר לממשק המשתמש של Seelen
+    לעבוד כמו שצריך.
+  monitor_disabled_title: נהגי המוניטור מושבתים
 resource:
   added: נוסף משאב חדש
   enable: אפשר

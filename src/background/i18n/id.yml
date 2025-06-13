@@ -1,3 +1,9 @@
+drivers:
+  got_it: Mengerti.
+  monitor_disabled: >-
+    Tampaknya beberapa driver monitor dinonaktifkan. Aktifkan driver tersebut
+    agar Seelen UI dapat berfungsi dengan baik.
+  monitor_disabled_title: Driver monitor dinonaktifkan
 resource:
   added: Sumber daya baru telah ditambahkan
   enable: Aktifkan

@@ -1,3 +1,9 @@
+drivers:
+  got_it: Sain selle
+  monitor_disabled: >-
+    Tundub, et mõned monitori draiverid on välja lülitatud. Palun lubage need,
+    et Seelen UI töötaks korralikult.
+  monitor_disabled_title: Monitori draiverid on välja lülitatud
 resource:
   added: Lisatud on uus ressurss
   enable: Lubage

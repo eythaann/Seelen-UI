@@ -1,3 +1,9 @@
+drivers:
+  got_it: Entendido.
+  monitor_disabled: >-
+    Parece que algunos controladores de monitor están deshabilitados. Por favor,
+    actívalos para que Seelen UI funcione correctamente.
+  monitor_disabled_title: Los controladores de monitor están desactivados
 resource:
   added: Se ha añadido un nuevo recurso
   enable: Activar

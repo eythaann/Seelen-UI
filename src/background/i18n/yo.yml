@@ -1,3 +1,9 @@
+drivers:
+  got_it: Ṣe o ri
+  monitor_disabled: >-
+    O han pe diẹ ninu awọn awakọ atẹle ni alaabo. Jọwọ jẹ ki wọn jẹ ki wọn jẹ ki
+    wọn jẹ ki wọn ṣiṣẹ daradara.
+  monitor_disabled_title: Atẹle awọn awakọ jẹ alaabo
 resource:
   added: A ti ṣafikun awọn orisun titun
   enable: Mu ṣiṣẹ

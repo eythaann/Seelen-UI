@@ -1,3 +1,7 @@
+drivers:
+  got_it: ገባኝ
+  monitor_disabled: አንዳንድ የተቆጣጠረ ሾፌሮች ተሰናክለዋል. እባክዎን እንዲተኩልዎት እንዲፈቅድላቸው ያነቃቸዋል.
+  monitor_disabled_title: ተቆጣጣሪ ነጂዎች ተሰናክለዋል
 resource:
   added: አዲስ ሀብት ታክሏል
   enable: አንቃ

@@ -1,3 +1,9 @@
+drivers:
+  got_it: Anladım.
+  monitor_disabled: >-
+    Bazı monitör sürücülerinin devre dışı bırakıldığı görülüyor. Seelen UI'nin
+    düzgün çalışması için lütfen bunları etkinleştirin.
+  monitor_disabled_title: Monitör sürücüleri devre dışı bırakıldı
 resource:
   added: Yeni bir kaynak eklendi
   enable: Etkinleştir

@@ -1,3 +1,9 @@
+drivers:
+  got_it: Har det
+  monitor_disabled: >-
+    Det ser ut til at noen overvåkningsførere er deaktivert. La dem gjøre dem i
+    stand til å la Seelen UI fungere ordentlig.
+  monitor_disabled_title: Monitor drivere er deaktivert
 resource:
   added: En ny ressurs er lagt til
   enable: Aktiver

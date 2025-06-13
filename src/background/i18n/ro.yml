@@ -1,3 +1,9 @@
+drivers:
+  got_it: Am înțeles
+  monitor_disabled: >-
+    Se pare că unele drivere de monitor sunt dezactivate. Vă rugăm să le
+    activați pentru ca Seelen UI să funcționeze corect.
+  monitor_disabled_title: Driverele monitorului sunt dezactivate
 resource:
   added: O nouă resursă a fost adăugată
   enable: Activare

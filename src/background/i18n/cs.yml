@@ -1,3 +1,9 @@
+drivers:
+  got_it: Mám to
+  monitor_disabled: >-
+    Zdá se, že některé ovladače monitoru jsou zakázány. Povolte je, aby
+    uživatelské rozhraní Seelen fungovalo správně.
+  monitor_disabled_title: Ovladače monitoru jsou zakázány
 resource:
   added: Byl přidán nový zdroj
   enable: Povolit

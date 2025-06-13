@@ -1,3 +1,9 @@
+drivers:
+  got_it: Het dit
+  monitor_disabled: >-
+    Dit wil voorkom asof sommige monitorbestuurders gedeaktiveer is. Stel hulle
+    in staat om Seelen UI behoorlik te laat werk.
+  monitor_disabled_title: Monitorbestuurders is gedeaktiveer
 resource:
   added: '''N Nuwe hulpbron is bygevoeg'
   enable: In staat stel

@@ -1,3 +1,9 @@
+drivers:
+  got_it: Ngiyitholile
+  monitor_disabled: >-
+    Kubonakala sengathi abanye abashayeli abaqashile bakhutshaziwe. Sicela
+    ubanikeze amandla okuvumela i-Seelen UI isebenze kahle.
+  monitor_disabled_title: Abaqaphi abashayeli bayakhutshazwa
 resource:
   added: Kufakwe insiza entsha
   enable: Nika amandla

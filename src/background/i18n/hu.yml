@@ -1,3 +1,9 @@
+drivers:
+  got_it: Megvan.
+  monitor_disabled: >-
+    Úgy tűnik, hogy egyes monitorillesztők le vannak tiltva. Kérjük,
+    engedélyezze őket, hogy a Seelen UI megfelelően működjön.
+  monitor_disabled_title: A monitor illesztőprogramok letiltva
 resource:
   added: Egy új erőforrás került hozzáadásra
   enable: Engedélyezze a

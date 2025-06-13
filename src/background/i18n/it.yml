@@ -1,3 +1,9 @@
+drivers:
+  got_it: Capito
+  monitor_disabled: >-
+    Sembra che alcuni driver del monitor siano disabilitati. Abilitarli per
+    consentire il corretto funzionamento di Seelen UI.
+  monitor_disabled_title: I driver del monitor sono disabilitati
 resource:
   added: È stata aggiunta una nuova risorsa
   enable: Abilitazione

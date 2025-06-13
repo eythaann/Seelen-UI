@@ -1,3 +1,9 @@
+drivers:
+  got_it: Helay
+  monitor_disabled: >-
+    Waxay umuuqataa in qaar ka mid ah darawalada kormeeraha ay naafo yihiin.
+    Fadlan u oggolow inay u oggolaadaan in Selen Ui si sax ah u shaqeynayo.
+  monitor_disabled_title: Darawalada kormeeraha ayaa naafo ah
 resource:
   added: Kheyraad Cusub ayaa lagu daray
   enable: Karsiin

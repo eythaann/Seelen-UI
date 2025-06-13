@@ -1,3 +1,9 @@
+drivers:
+  got_it: Dobio sam
+  monitor_disabled: >-
+    Čini se da su neki pokretači monitora onemogućeni. Molimo vas da im
+    omogućite da seelen sučelja radi ispravno.
+  monitor_disabled_title: Pokretači monitora su onemogućeni
 resource:
   added: Dodan je novi resurs
   enable: Omogućiti

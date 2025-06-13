@@ -1,3 +1,9 @@
+drivers:
+  got_it: Verstanden
+  monitor_disabled: >-
+    Es scheint, dass einige Monitortreiber deaktiviert sind. Bitte aktivieren
+    Sie diese, damit Seelen UI richtig funktioniert.
+  monitor_disabled_title: Monitortreiber sind deaktiviert
 resource:
   added: Es wurde eine neue Ressource hinzugefügt
   enable: Aktivieren Sie

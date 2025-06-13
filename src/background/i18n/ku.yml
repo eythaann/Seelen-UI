@@ -1,3 +1,9 @@
+drivers:
+  got_it: Min girt
+  monitor_disabled: >-
+    Ew xuya dike ku hin ajokarên çavdêriyê neçalak in. Ji kerema xwe wan çalak
+    bikin da ku dev ji SEELEN UI bi rengek baş bixebitin.
+  monitor_disabled_title: Ajokarên çavdêriyê neçalak in
 resource:
   added: Resavkaniyek nû hatiye zêdekirin
   enable: Bikêrkirin

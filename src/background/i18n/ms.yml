@@ -1,3 +1,9 @@
+drivers:
+  got_it: Mendapatnya
+  monitor_disabled: >-
+    Nampaknya beberapa pemandu monitor dilumpuhkan. Sila membolehkan mereka
+    membiarkan Seelen UI berfungsi dengan baik.
+  monitor_disabled_title: Pemantauan pemantauan dilumpuhkan
 resource:
   added: Sumber baru telah ditambah
   enable: Membolehkan

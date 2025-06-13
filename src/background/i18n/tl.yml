@@ -1,3 +1,9 @@
+drivers:
+  got_it: Nakuha mo na
+  monitor_disabled: >-
+    Lumilitaw na ang ilang mga driver ng monitor ay hindi pinagana. Mangyaring
+    paganahin ang mga ito upang hayaan ang Seelen UI na gumana nang maayos.
+  monitor_disabled_title: Ang mga driver ng monitor ay hindi pinagana
 resource:
   added: Ang isang bagong mapagkukunan ay naidagdag
   enable: Paganahin
