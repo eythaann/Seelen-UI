@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.8]
 ### enhancements
 - show a warning to users with monitors drivers disabled.
 - allow change workspace using wheel on toolbar.
