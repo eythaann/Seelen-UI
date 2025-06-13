@@ -1,13 +1,13 @@
 app_launcher:
-  enable: Activer le Lanceur d’Applications
+  enable: Activer le lanceur d'applications
   launch_on:
     mouse_over: Passez la souris
     primary: Primaire
   monitor: Moniteur à afficher
   runners:
     cmd: Commande
-    explorer: Exécuter
-    label: Exécuteurs
+    explorer: Explorateur
+    label: Lanceurs
 apps_configurations:
   app:
     bindings: Raccourcis (notez que les deux options sont nécessaires)
@@ -77,9 +77,9 @@ cancel: Annuler
 close: Fermer
 delete: Supprimer
 devtools:
-  app_folders: Dossiers d’applications
+  app_folders: Dossiers de Seelen UI
   custom_config_file: Charger un fichier de configuration personnalisé
-  data_folder: Dossier de données
+  data_folder: Dossier des données de l'application
   enable: Activer les outils de développement
   install_folder: Dossier d'installation
   load: Charger
@@ -94,10 +94,10 @@ extras:
   exit: Quitter
   github: GitHub
   links: Liens officiels
-  relaunch: Relance
+  relaunch: Redémarrer Seelen UI
   version: Version
 general:
-  accent_color: Couleur d’accent
+  accent_color: Couleur d'accentuation
   date_format: Format de la date
   icon_pack:
     available: Packs d'icônes disponibles
@@ -142,17 +142,17 @@ resources:
     Cette ressource nécessite une version plus récente de Seelen UI pour
     fonctionner correctement.
   discover: Découvrez d'autres ressources
-  export: Ressource d'exportation
+  export: Exporter la ressource
   open_folder: Ouvrir le dossier des ressources
   outdated: >-
     Cette ressource a été conçue pour une ancienne version de Seelen UI et peut
     ne pas fonctionner correctement.
-save: Sauvegarder
-save_and_restart: Sauvegarder et redémarrer
+save: Enregistrer
+save_and_restart: Enregistrer et redémarrer
 see_more: Voir plus
 shortcuts:
   enable: Activer les raccourcis intégrés (ahk)
-  enable_tooltip: Désactivez si vous implémentez vos propres raccourcis via l’API Seelen Core
+  enable_tooltip: Désactivez si vous implémentez vos propres raccourcis via l'API Seelen Core
   labels:
     decrease_height: Diminuer la hauteur
     decrease_width: Diminuer la largeur
@@ -215,7 +215,7 @@ shortcuts:
     switch_workspace_7: Passer à Workspace 7
     switch_workspace_8: Passer à l'espace de travail 8
     switch_workspace_9: Passer à l'espace de travail 9
-    toggle_launcher: Basculer
+    toggle_launcher: Afficher
   readonly_tooltip: Ceci est un raccourci en lecture seule
   reset: Réinitialiser aux paramètres par défaut
 sides:
@@ -225,18 +225,18 @@ sides:
   top: Haut
 start:
   message: >-
-    Bienvenue sur Seelen UI, l’environnement de bureau ultime avec un
+    Bienvenue sur Seelen UI, l'environnement de bureau ultime avec un
     gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience
-    Windows ! Découvrez une nouvelle ère d’efficacité et de multitâche avec
+    Windows ! Découvrez une nouvelle ère d'efficacité et de multitâche avec
     notre interface intuitive et ses fonctionnalités avancées.
   message_accent: Optimisez votre productivité avec style !
   title: Bienvenue !
 toolbar:
-  auto_hide: Masquage automatique
-  delay_to_hide: Délai avant masquage
-  delay_to_show: Délai avant affichage
+  auto_hide: Masquer automatiquement
+  delay_to_hide: Délai avant de masquer
+  delay_to_show: Délai avant d'afficher
   dock_side: Position
-  dynamic_color: Couleur dynamique
+  dynamic_color: Couleurs dynamiques
   dynamic_color_tooltip: >-
     Active les couleurs dynamiques d'arrière-plan et d'avant-plan en fonction de
     la fenêtre ciblée. (Les couleurs peuvent être remplacées par des thèmes)
@@ -248,26 +248,26 @@ toolbar:
     on_overlap: Sur chevauchement
   label: Barre d'outils
   placeholder: {}
-  show_hibernate: Afficher le bouton d'hibernation dans le menu d'alimentation
+  show_hibernate: Afficher la veille prolongée dans le menu Marche/Arrêt
 update:
   available: Mise à jour disponible !
-  channel: Mettre à jour le canal
+  channel: Canal de mise à jour
   downloading: Téléchargement...
 vd:
   disabled_windows_version: >-
-    La stratégie de bureau virtuelle native n'est pas disponible pour votre
-    version Windows.
+    La gestion de bureau virtuelle native n'est pas disponible pour votre
+    version de Windows.
   strategy:
-    label: Stratégie de bureau virtuel
+    label: Gestionnaire de bureau virtuel
     native: Native
     seelen: Seelen
 wall:
-  backgrounds: Fonds d’écran
-  enable: Activer le gestionnaire de fonds d’écran
+  backgrounds: Fonds d'écran
+  enable: Activer le gestionnaire de fonds d'écran
   hours: heures
-  interval: Changer l’arrière-plan toutes les
+  interval: Changer de fond d'écran toutes les
   minutes: minutes
-  no_background: Diaporama vide, utilisant le fond d’écran du thème à la place.
+  no_background: Liste vide, le fond d'écran du thème sera utilisé.
   random: Diaporama aléatoire
   seconds: secondes
 weg:
@@ -276,15 +276,15 @@ weg:
   delay_to_show: Délai avant affichage
   dock_side: Position
   enable: Activer le Dock/Barre des tâches
-  filtering: Filtrage des articles
+  filtering: Filtrage des applications
   gap: Écart
   hide_mode:
     always: Toujours
     never: Jamais
-    on_overlap: Sur chevauchement
+    on_overlap: Si chevauchement
   items:
     gap: Espace entre les éléments
-    label: Articles
+    label: Applications
     pinned_visibility:
       always: Toujours
       label: Visibilité des éléments épinglés
@@ -301,9 +301,9 @@ weg:
   label: Dock/Barre des tâches
   margin: Marge
   mode:
-    full_width: Largeur plein écran
+    full_width: Pleine largeur
     min_content: Aussi petit que possible
-  padding: Rembourrage
+  padding: Hauteur
   width: Largeur
 widget:
   enable: Activer ce widget

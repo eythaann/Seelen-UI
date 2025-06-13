@@ -1,16 +1,16 @@
 bluetooth:
-  available: Appareils disponibles (non appariés)
+  available: Appareils disponibles (non appairés)
   cancel: Annuler
   connected: Appareils connectés
   forget: Oublier
   lowenergy: Faible énergie
   more: Autres paramètres Bluetooth
   not_found: Aucun appareil Bluetooth n'a été trouvé
-  pair: Paire
-  paired: Dispositifs sauvegardés
+  pair: Appairer
+  paired: Appareils sauvegardés
   placeholder:
-    passphrase: Phrase de passe, code ou PIN
-  scanning: Recherche de dispositifs
+    passphrase: Passphrase, code ou PIN
+  scanning: Recherche d'appareils
 context_menu:
   add_custom_text: Ajouter un texte personnalisé
   modules: Modules
@@ -19,7 +19,7 @@ context_menu:
   reorder_enable: Déverrouiller la barre d'outils
   restore: Rétablir la valeur par défaut
   settings: Paramètres
-  task_manager: Gestionnaire de tâches
+  task_manager: Gestionnaire des tâches
 keyboard:
   more: Autres paramètres du clavier
   title: Disposition du clavier
@@ -56,9 +56,9 @@ notifications:
   settings: Autres paramètres de notification
   title: Notifications
 placeholder:
-  battery_remaining: '% restant'
+  battery_remaining: '% restants'
   bluetooth_devices: Bluetooth
-  ethernet_connected: accès Internet
+  ethernet_connected: Accès Internet
   ethernet_disconnected: Pas d'accès Internet
   notifications: Notifications
   open_system_tray: Ouvrir la barre d'état système
@@ -68,18 +68,18 @@ placeholder:
 settings:
   app_settings: Paramètres de l'application
   brightness: Luminosité
-  hibernate: Hibernation
+  hibernate: Veille prolongée
   lock: Verrouiller
   log_out: Se déconnecter
-  power: Pouvoir
-  restart: Redémarrage
-  shutdown: Fermer
-  sleep: Dormir
+  power: Marche/Arrêt
+  restart: Redémarrer
+  shutdown: Arrêter
+  sleep: Mettre en veille
   title: Paramètres
 tray:
   empty: >-
     Pas d'éléments dans la zone de notification (Note : Windows 10 n'est pas
-    implémenté)
+    supporté)
   unlabeled: Icône de plateau sans étiquette
 userhome:
   empty_list: Aucun élément
@@ -89,16 +89,16 @@ userhome:
     downloads: Téléchargements
     more_items: Afficher plus...
     music: Musique
-    pictures: Photos
-    recent: Récemment utilisé
+    pictures: Images
+    recent: Documents récents
     reduce_items: Montrer moins...
-    title: Répertoires d'utilisateurs
+    title: Dossiers utilisateur
     videos: Vidéos
   profile:
     accounts: Ouvrir les paramètres du compte
-    open_onedrive: Ouvrir le répertoire OneDrive
-    open_user_folder: Ouvrir le répertoire des utilisateurs
+    open_onedrive: Ouvrir le dossier OneDrive
+    open_user_folder: Ouvrir le dossier utilisateur
   seelen_options:
-    open_installation_folder: Ouvrir le dossier des paramètres de Seelen
-    open_log_folder: Ouvrir le dossier Seelen log
-    title: Annuaires Seelen
+    open_installation_folder: Dossier d'installation de Seelen
+    open_log_folder: Dossier des logs de Seelen
+    title: Dossiers Seelen
