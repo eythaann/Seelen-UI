@@ -1,6 +1,13 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { isEqual } from 'lodash';
-import { useEffect, useRef } from 'react';
+import {
+  debounce,
+  DebouncedFunc,
+  DebouncedFuncLeading,
+  isEqual,
+  throttle,
+  ThrottleSettings,
+} from 'lodash';
+import { useEffect, useMemo, useRef } from 'react';
 
 export function useWindowFocusChange(cb: (focused: boolean) => void) {
   useEffect(() => {
@@ -73,10 +80,51 @@ export function useSyncClockInterval(cb: () => void, on: 'minutes' | 'seconds', 
   }, [on, ...deps]);
 }
 
-export default function useDeepCompareEffect(callback: () => void, dependencies: any[]) {
+export function useDeepCompareEffect(callback: () => void, dependencies: any[]) {
   const currentDependenciesRef = useRef<any[]>();
   if (!isEqual(currentDependenciesRef.current, dependencies)) {
     currentDependenciesRef.current = dependencies;
   }
   useEffect(callback, [currentDependenciesRef.current]);
+}
+
+export function useDebounce<F extends (...args: any[]) => void>(
+  callback: F,
+  ms: number,
+): DebouncedFunc<F> {
+  const ref = useRef<F>();
+
+  useEffect(() => {
+    ref.current = callback;
+  }, [callback]);
+
+  const debouncedCallback = useMemo(() => {
+    const func = (...args: Parameters<F>) => {
+      ref.current?.(...args);
+    };
+    return debounce(func, ms);
+  }, []);
+
+  return debouncedCallback;
+}
+
+export function useThrottle<F extends (...args: any[]) => void>(
+  callback: F,
+  ms: number,
+  options?: ThrottleSettings,
+): DebouncedFuncLeading<F> {
+  const ref = useRef<F>();
+
+  useEffect(() => {
+    ref.current = callback;
+  }, [callback]);
+
+  const throttledCallback = useMemo(() => {
+    const func = (...args: Parameters<F>) => {
+      ref.current?.(...args);
+    };
+    return throttle(func, ms, options);
+  }, []);
+
+  return throttledCallback;
 }

@@ -12,7 +12,7 @@ import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundBy
 
 import { Selectors } from '../shared/store/app';
 import { AnimatedDropdown } from 'src/apps/shared/components/AnimatedWrappers';
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
+import { useThrottle, useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { cx } from '../../../shared/styles';
 
@@ -32,6 +32,18 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
     e.stopPropagation();
   }
 
+  const onWheel = useThrottle(
+    (isUp: boolean) => {
+      const index = workspaces.findIndex((w) => w.id === activeWorkspace);
+      const newIndex = isUp ? index - 1 : index + 1;
+      if (newIndex >= 0 && newIndex < workspaces.length) {
+        invoke(SeelenCommand.SwitchWorkspace, { idx: newIndex });
+      }
+    },
+    500,
+    { trailing: false },
+  );
+
   if (mode === WorkspaceToolbarItemMode.Dotted) {
     return (
       <Reorder.Item
@@ -40,6 +52,10 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
         className="ft-bar-item"
         style={module.style}
         onContextMenu={onContextMenu}
+        onWheel={(e) => {
+          e.stopPropagation();
+          onWheel(e.deltaY < 0);
+        }}
       >
         <ul className="ft-bar-item-content workspaces">
           {workspaces.map((w, idx) => (
@@ -63,6 +79,10 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
       value={(module as any).__value__ || module}
       className="ft-bar-group"
       onContextMenu={onContextMenu}
+      onWheel={(e) => {
+        e.stopPropagation();
+        onWheel(e.deltaY < 0);
+      }}
     >
       {workspaces.map((w, idx) => {
         return (

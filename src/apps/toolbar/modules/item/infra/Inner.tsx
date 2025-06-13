@@ -1,5 +1,5 @@
 import { RemoteDataDeclaration, ToolbarItem } from '@seelen-ui/lib/types';
-import useDeepCompareEffect from '@shared/hooks';
+import { useDeepCompareEffect } from '@shared/hooks';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';

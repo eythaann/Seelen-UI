@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### enhancements
 - show a warning to users with monitors drivers disabled.
+- allow change workspace using wheel on toolbar.
 
 ### fix
 - (#897) stucked arrival notifications.

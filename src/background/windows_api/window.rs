@@ -1,4 +1,4 @@
-use seelen_core::rect::Rect;
+use seelen_core::{rect::Rect, state::AppExtraFlag};
 use std::fmt::{Debug, Display};
 
 use windows::{
@@ -24,6 +24,7 @@ use crate::{
     seelen_wall::SeelenWall,
     seelen_weg::instance::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
+    state::application::FULL_STATE,
 };
 
 use super::{
@@ -328,6 +329,14 @@ impl Window {
 
         if self.process().is_frozen().unwrap_or(false) {
             return false;
+        }
+
+        // I don't like to determine if a window is real filtering by this configs, but will be here
+        // as a workaround in meantime we find a way to filter better, as native taskbar does.
+        if let Some(config) = FULL_STATE.load().get_app_config_by_window(self.hwnd()) {
+            if config.options.contains(&AppExtraFlag::Hidden) {
+                return false;
+            }
         }
 
         true

@@ -9,8 +9,6 @@ pub use instance::SeelenWeg;
 use std::thread::JoinHandle;
 
 use image::{DynamicImage, RgbaImage};
-use lazy_static::lazy_static;
-use seelen_core::state::AppExtraFlag;
 use weg_items_impl::WEG_ITEMS_IMPL;
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
@@ -26,15 +24,6 @@ use crate::{
     utils::sleep_millis,
     windows_api::{window::Window, AppBarData, AppBarDataState, WindowEnumerator, WindowsApi},
 };
-
-lazy_static! {
-    static ref TITLE_BLACK_LIST: Vec<&'static str> = Vec::from([
-        "",
-        "Task Switching",
-        "DesktopWindowXamlSource",
-        "Program Manager",
-    ]);
-}
 
 impl SeelenWeg {
     pub fn contains_app(window: &Window) -> bool {
@@ -78,18 +67,7 @@ impl SeelenWeg {
     }
 
     pub fn should_be_added(window: &Window) -> bool {
-        if !window.is_real_window() {
-            return false;
-        }
-
-        if let Some(config) = FULL_STATE.load().get_app_config_by_window(window.hwnd()) {
-            if config.options.contains(&AppExtraFlag::Hidden) {
-                log::trace!("Skipping by config: {window:?}");
-                return false;
-            }
-        }
-
-        !TITLE_BLACK_LIST.contains(&window.title().as_str())
+        window.is_real_window()
     }
 
     pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {
