@@ -1,0 +1,303 @@
+app_launcher:
+  enable: 啟用應用程式啟動器
+  launch_on:
+    mouse_over: 游標所在的顯示器
+    primary: 主顯示器
+  monitor: 要顯示的螢幕
+  runners:
+    cmd: 命令提示字元
+    explorer: 執行
+    label: 程式
+apps_configurations:
+  app:
+    bindings: 綁定（兩個選項皆為必填）
+    category: 類別
+    category_placeholder: 無
+    monitor: 顯示器
+    monitor_placeholder: 无無
+    name: 名稱
+    ok_create: 建立
+    ok_edit: 更新
+    ok_readonly: 建立新設定
+    options:
+      float: 浮動
+      force: 強制管理
+      hidden: 從 Dock / 工作列 隱藏
+      pinned: 固定
+      unmanage: 取消管理
+    options_label: 其他選項
+    title_create: 建立 {{name}}
+    title_edit: 編輯 {{name}}
+    title_readonly: 檢視 {{name}}
+    weg_options_label: Dock / 工作列 選項
+    wm_options_label: 視窗管理器選項
+    workspace: 工作區
+    workspace_placeholder: 無
+  bundled_msg: 這些預設設定為最佳化體驗所設，無法編輯，並會自動幫您設定最常用的應用程式。
+  bundled_title: 與 Seelen 綁定的應用程式設定
+  confirm_delete: 您確定要刪除此設定嗎？
+  confirm_delete_title: 確認刪除
+  delete: 刪除
+  export: 匯出
+  export_full: 按應用程式導出設定
+  extra_info: Seelen UI 每個應用只會使用一個識別器（找到的第一個匹配），因此識別方式的順序很重要，後新增的優先，登錄檔預設從新到舊排序。
+  identifier:
+    add_block: 新增區塊
+    and: 與
+    id: 識別碼
+    kind: 識別方式
+    matching_strategy: 匹配策略
+    matching_strategy_option:
+      contains: 包含
+      ends_with: 結束於
+      equals: 等於
+      regex: 正則表達式
+      starts_with: 開始於
+    negation: 反向匹配
+    or: 或
+    remove: 移除區塊
+    type:
+      class: 類別
+      exe: EXE
+      path: 路徑
+      title: 標題
+  import: 匯入
+  import_full: 以應用程式匯入設定
+  new: 新增
+  search: 搜尋
+  swap: 交換
+cancel: 取消
+close: 關閉
+delete: 刪除
+devtools:
+  app_folders: 應用程式資料夾
+  custom_config_file: 載入自訂設定檔
+  data_folder: 資料夾
+  enable: 啟用開發工具
+  install_folder: 安裝資料夾
+  load: 載入
+  settings_file: 設定檔案
+  simulate_fullscreen: 模擬全螢幕事件
+extras:
+  clear_icons: 清除系統圖示快取
+  clear_icons_tooltip: 可能需要重新啟動才能在所有組件上生效
+  discord: Discord
+  exit: 離開 / 關閉
+  github: GitHub
+  links: 官方連結
+  relaunch: 重新啟動應用程式
+  version: 版本
+general:
+  accent_color: 主色調
+  date_format: 日期格式
+  icon_pack:
+    available: 可用的圖示包
+    selected: 使用中的圖示包
+  language: 語言
+  startup: 開機自動啟動
+  theme:
+    available: 可用主題
+    selected: 使用中的主題
+header:
+  labels:
+    developer: 開發者工具
+    extras: 額外功能
+    general: 一般設定
+    home: 首頁
+    iconpack: 圖示包
+    monitors: 顯示器
+    plugin: 外掛
+    resources: 資源
+    shortcuts: 快捷鍵
+    soundpack: 音效包
+    specific_apps: 應用程式設定
+    theme: 主題
+    virtual_desk: 虛擬桌面
+    wallpaper: 桌布
+    widget: 小工具
+home:
+  new_resources: 新資源
+inherit: 繼承
+inProgress: 處理中...
+insert: 插入
+loading: 載入中...
+miscellaneous: 其他
+monitors_configurations:
+  label: 顯示器 {{index}}
+more: 更多
+open: 開啟
+quit: 離開
+remove: 移除
+resources:
+  app_outdated: 此資源需要更新版 Seelen UI 才能正常使用。
+  discover: 探索更多資源
+  export: 匯出資源
+  open_folder: 開啟資源資料夾
+  outdated: 此資源是為舊版設計，可能無法正常使用。
+save: 儲存
+save_and_restart: 儲存並重新啟動
+see_more: 查看更多
+shortcuts:
+  enable: 啟用整合快捷鍵 (ahk)
+  enable_tooltip: 若要使用 Seelen Core API 自訂快捷鍵，請停用此選項。
+  labels:
+    decrease_height: 縮減高度
+    decrease_width: 縮減寬度
+    focus_bottom: 聚焦底部
+    focus_latest: 聚焦最新
+    focus_left: 聚焦左側
+    focus_right: 聚焦右側
+    focus_top: 聚焦頂部
+    increase_height: 增加高度
+    increase_width: 增加寬度
+    misc_open_settings: 開啟設定
+    misc_toggle_lock_tracing: 切換鎖定追蹤（日誌）
+    misc_toggle_win_event_tracing: 切換 Windows 事件追蹤（日誌）
+    move_to_workspace_0: 移至工作區 0
+    move_to_workspace_1: 移至工作區 1
+    move_to_workspace_2: 移至工作區 2
+    move_to_workspace_3: 移至工作區 3
+    move_to_workspace_4: 移至工作區 4
+    move_to_workspace_5: 移至工作區 5
+    move_to_workspace_6: 移至工作區 6
+    move_to_workspace_7: 移至工作區 7
+    move_to_workspace_8: 移至工作區 8
+    move_to_workspace_9: 移至工作區 9
+    reserve_bottom: 保留底部
+    reserve_float: 浮動保留
+    reserve_left: 保留左側
+    reserve_right: 保留右側
+    reserve_stack: 堆疊保留
+    reserve_top: 保留頂部
+    restore_sizes: 恢復尺寸
+    send_to_workspace_0: 傳送至工作區 0
+    send_to_workspace_1: 傳送至工作區 1
+    send_to_workspace_2: 傳送至工作區 2
+    send_to_workspace_3: 傳送至工作區 3
+    send_to_workspace_4: 傳送至工作區 4
+    send_to_workspace_5: 傳送至工作區 5
+    send_to_workspace_6: 傳送至工作區 6
+    send_to_workspace_7: 傳送至工作區 7
+    send_to_workspace_8: 傳送至工作區 8
+    send_to_workspace_9: 傳送至工作區 9
+    start_weg_app_0: 啟動或聚焦應用程式於工作列位置 1
+    start_weg_app_1: 啟動或聚焦應用程式於工作列位置 2
+    start_weg_app_2: 啟動或聚焦應用程式於工作列位置 3
+    start_weg_app_3: 啟動或聚焦應用程式於工作列位置 4
+    start_weg_app_4: 啟動或聚焦應用程式於工作列位置 5
+    start_weg_app_5: 啟動或聚焦應用程式於工作列位置 6
+    start_weg_app_6: 啟動或聚焦應用程式於工作列位置 7
+    start_weg_app_7: 啟動或聚焦應用程式於工作列位置 8
+    start_weg_app_8: 啟動或聚焦應用程式於工作列位置 9
+    start_weg_app_9: 啟動或聚焦應用程式於工作列位置 10
+    switch_workspace_0: 切換至工作區 0
+    switch_workspace_1: 切換至工作區 1
+    switch_workspace_2: 切換至工作區 2
+    switch_workspace_3: 切換至工作區 3
+    switch_workspace_4: 切換至工作區 4
+    switch_workspace_5: 切換至工作區 5
+    switch_workspace_6: 切換至工作區 6
+    switch_workspace_7: 切換至工作區 7
+    switch_workspace_8: 切換至工作區 8
+    switch_workspace_9: 切換至工作區 9
+    toggle_launcher: 切換
+  readonly_tooltip: 此為唯讀快捷鍵
+  reset: 重設為預設值
+sides:
+  bottom: 底部
+  left: 左側
+  right: 右側
+  top: 頂部
+start:
+  message: >-
+    歡迎使用 Seelen UI，這是一款終極桌面環境，內建平鋪視窗管理器，讓您的 Windows 使用體驗再升級！
+    探索效率與多工的新紀元，享受我們直覺的介面與先進功能。
+  message_accent: 用風格提升您的工作效率！
+  title: 歡迎！
+toolbar:
+  auto_hide: 自動隱藏
+  delay_to_hide: 隱藏延遲
+  delay_to_show: 顯示延遲
+  dock_side: 位置
+  dynamic_color: 動態色彩
+  dynamic_color_tooltip: 根據焦點視窗變更背景與前景色（主題可能會覆蓋）
+  enable: 啟用精美工具列
+  height: 高度
+  hide_mode:
+    always: 總是
+    never: 永不
+    on_overlap: 重疊時
+  label: 工具列
+  placeholder: {}
+  show_hibernate: 在電源選單顯示休眠按鈕
+update:
+  available: 有可用更新！
+  channel: 更新頻道
+  downloading: 下載中...
+vd:
+  disabled_windows_version: 本機虛擬桌面策略不支援此 Windows 版本。
+  strategy:
+    label: 虛擬桌面策略
+    native: 原生
+    seelen: Seelen
+wall:
+  backgrounds: 桌布
+  enable: 啟用桌布管理器
+  hours: 小時
+  interval: 更換桌布時間間隔
+  minutes: 分鐘
+  no_background: 空投影片，使用主題背景。
+  random: 隨機變換桌布
+  seconds: 秒
+weg:
+  auto_hide: 自動隱藏
+  delay_to_hide: 隱藏延遲
+  delay_to_show: 顯示延遲
+  dock_side: 位置
+  enable: 啟用 Dock / 工作列
+  filtering: 項目篩選
+  gap: 間距
+  hide_mode:
+    always: 總是
+    never: 永不
+    on_overlap: 重疊時
+  items:
+    gap: 項目間距
+    label: 項目
+    pinned_visibility:
+      always: 總是
+      label: 固定項目的可見性
+      when_primary: 當顯示器為為主螢幕時
+    show_instance_counter: 顯示視窗數量
+    show_window_title: 顯示視窗標題（限橫向）
+    size: 項目大小
+    temporal_visibility:
+      all: 全部
+      label: 非固定項目的可見性
+      on_monitor: 所在螢幕
+    thumbnail_generation_enabled: 在項目懸停時產生縮圖
+    visible_separators: 可見分隔符
+  label: Dock / 工作列
+  margin: 邊距
+  mode:
+    full_width: 全螢幕寬度
+    min_content: 最小寬度
+  padding: 內距
+  width: 寬度
+widget:
+  enable: 啟用小工具
+  enable_for_monitor: 在此螢幕啟用
+  instances: 實例
+wm:
+  author: 作者
+  border:
+    enable: 啟用視窗邊框
+    offset: 邊框偏移
+    width: 邊框寬度
+  description: 描述
+  enable: 啟用平鋪視窗管理器
+  layout: 版面配置
+  resize_delta: 大小調整增幅（%）
+  space_between_containers: 容器間距
+  workspace_offset: 工作區邊距
+  workspace_padding: 工作區內距

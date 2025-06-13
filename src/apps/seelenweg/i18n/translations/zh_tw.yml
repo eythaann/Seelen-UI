@@ -1,0 +1,37 @@
+app_menu:
+  close: 關閉
+  close_multiple: 全部關閉
+  copy_handles: 複製控制程式碼
+  kill: 終止行程
+  kill_multiple: 終止所有行程
+  open_file_location: 開啟檔案位置
+  pin: 固定
+  pin_to_center: 固定在中間
+  pin_to_left: 固定在左側
+  pin_to_right: 固定在右側
+  run_as: 以系統管理員身分執行
+  unpin: 取消固定
+
+context_menu:
+  reorder_disable: 鎖定工作列
+  reorder_enable: 解鎖工作列
+
+media:
+  not_playing: 尚未播放任何內容
+
+media_menu:
+  remove: 移除媒體模組
+
+start_menu:
+  remove: 移除開始模組
+
+taskbar_menu:
+  add_file: 固定自訂檔案
+  add_folder: 固定自訂資料夾
+  media: 新增媒體模組
+  settings: 設定
+  start: 新增開始模組
+  task_manager: 工作管理員
+
+weg:
+  empty: 沒有可顯示的項目

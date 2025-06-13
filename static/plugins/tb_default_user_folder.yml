@@ -63,6 +63,7 @@ metadata:
     gu: વપરાશકર્તા ફોલ્ડર
     ko: 사용자 폴더
     zh: 用户文件夹
+    zh_tw: 使用者資料夾
     pa: ਯੂਜ਼ਰ ਫੋਲਡਰ
     ja: ユーザーフォルダ
     ta: பயனர் கோப்புறை
@@ -76,6 +77,6 @@ target: '@seelen/fancy-toolbar'
 plugin:
   type: user
   withUserFolder: true
-  template: 'return [Image({ path: user.profilePicturePath }), '' '', user.name];'
+  template: "return [Image({ path: user.profilePicturePath }), ' ', user.name];"
   style:
     flexShrink: 0
