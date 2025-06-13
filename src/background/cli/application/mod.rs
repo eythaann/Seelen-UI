@@ -1,5 +1,6 @@
 mod debugger;
 mod resources;
+mod win32;
 
 use std::{
     ffi::OsStr,
@@ -14,6 +15,7 @@ use resources::WidgetCli;
 use seelen_core::resource::{ResourceKind, SluResourceFile};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
+use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::{
@@ -58,6 +60,7 @@ pub enum AppCliCommand {
     WindowManager(WindowManagerCli),
     Weg(WegCli),
     Widget(WidgetCli),
+    Win32(Win32Cli),
 }
 
 // attach console could fail if not console to attach is present
@@ -90,6 +93,12 @@ pub fn handle_console_client() -> Result<()> {
         crate::VERBOSE.store(true, Ordering::SeqCst);
         println!("Received {:#?}", std::env::args());
         println!("Parsed {matches:#?}");
+    }
+
+    // win32 commands are handled separately, as this should run on a win32 context.
+    if let Some(AppCliCommand::Win32(ctx)) = &matches.command {
+        ctx.process()?;
+        std::process::exit(0);
     }
 
     if matches.command.is_some() || matches.uri.is_some() {
@@ -169,6 +178,7 @@ impl AppCli {
         Ok(())
     }
 
+    /// intended to be called on the main instance
     pub fn process(self) -> Result<()> {
         if let Some(uri) = self.uri {
             return Self::process_uri(&uri);
@@ -202,6 +212,7 @@ impl AppCli {
             AppCliCommand::Widget(command) => {
                 command.process()?;
             }
+            AppCliCommand::Win32(_) => {}
         }
         Ok(())
     }

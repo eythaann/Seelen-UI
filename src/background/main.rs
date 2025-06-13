@@ -52,8 +52,6 @@ use utils::{
     },
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
-use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
-use windows_api::WindowsApi;
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static SILENT: AtomicBool = AtomicBool::new(false);
@@ -75,9 +73,6 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
 
     show_monitor_drivers_disabled_warning(app.handle())?;
     check_for_webview_optimal_state(app.handle())?;
-
-    log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
-    log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
 
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());

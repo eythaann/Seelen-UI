@@ -19,8 +19,8 @@ use windows::{
     Win32::{
         Foundation::PROPERTYKEY,
         Media::Audio::{
-            eAll, eCapture, eCommunications, eConsole, eMultimedia, eRender, EDataFlow, ERole,
-            IMMDevice, IMMDeviceEnumerator, IMMNotificationClient, IMMNotificationClient_Impl,
+            eAll, eCapture, eCommunications, eMultimedia, eRender, EDataFlow, ERole, IMMDevice,
+            IMMDeviceEnumerator, IMMNotificationClient, IMMNotificationClient_Impl,
             MMDeviceEnumerator, DEVICE_STATE_ACTIVE,
         },
         System::WinRT::EventRegistrationToken,
@@ -34,9 +34,7 @@ use crate::{
     windows_api::Com,
 };
 
-use super::domain::{
-    IPolicyConfig, MediaDevice, MediaDeviceSession, MediaDeviceType, MediaPlayer, PolicyConfig,
-};
+use super::domain::{MediaDevice, MediaDeviceSession, MediaDeviceType, MediaPlayer};
 
 lazy_static! {
     pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> = Arc::new(Mutex::new(
@@ -464,21 +462,6 @@ impl MediaManager {
                     player.timeline = timeline;
                 }
             }
-        }
-        Ok(())
-    }
-
-    pub fn set_default_device(id: &str, role: &str) -> Result<()> {
-        let role = match role {
-            "multimedia" => eMultimedia,
-            "communications" => eCommunications,
-            "console" => eConsole,
-            _ => return Err("invalid role".into()),
-        };
-
-        let policy: IPolicyConfig = Com::create_instance(&PolicyConfig)?;
-        unsafe {
-            policy.SetDefaultEndpoint(pcwstr(id), role)?;
         }
         Ok(())
     }

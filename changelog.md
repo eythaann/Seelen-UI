@@ -12,6 +12,7 @@
 - (#925) invisible spotify widget on dock.
 - (#938) listing 6ghz networks as 5g networks.
 - (#962) JetBrains software isn't showing in dock.
+- (#923) Can't change media device on MSIX version.
 
 ## [2.3.7]
 ### enhancements

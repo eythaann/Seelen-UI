@@ -8,6 +8,7 @@ pub mod process;
 pub mod string_utils;
 pub mod traits;
 pub mod types;
+pub mod undocumented;
 pub mod window;
 
 pub use app_bar::*;
@@ -62,8 +63,8 @@ use windows::{
             AdjustTokenPrivileges,
             Authentication::Identity::{GetUserNameExW, EXTENDED_NAME_FORMAT},
             GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TokenLogonSid,
-            SE_PRIVILEGE_ENABLED, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_GROUPS,
-            TOKEN_PRIVILEGES, TOKEN_QUERY,
+            SE_PRIVILEGE_ENABLED, SE_SHUTDOWN_NAME, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION,
+            TOKEN_GROUPS, TOKEN_PRIVILEGES, TOKEN_QUERY,
         },
         Storage::{
             EnhancedStorage::{
@@ -826,12 +827,16 @@ impl WindowsApi {
         Ok(())
     }
 
+    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-exitwindowsex
     pub fn exit_windows(flags: EXIT_WINDOWS_FLAGS, reason: SHUTDOWN_REASON) -> Result<()> {
+        WindowsApi::enable_privilege(SE_SHUTDOWN_NAME)?;
         unsafe { ExitWindowsEx(flags, reason) }?;
         Ok(())
     }
 
+    /// https://learn.microsoft.com/en-us/windows/win32/api/powrprof/nf-powrprof-setsuspendstate
     pub fn set_suspend_state(hibernate: bool) -> Result<()> {
+        WindowsApi::enable_privilege(SE_SHUTDOWN_NAME)?;
         let success = unsafe { SetSuspendState(hibernate, false, false) };
         if !success {
             return Err("Failed to set suspend state".into());

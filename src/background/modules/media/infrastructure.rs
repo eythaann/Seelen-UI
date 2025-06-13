@@ -4,7 +4,7 @@ use windows::{core::GUID, Win32::Media::Audio::ISimpleAudioVolume};
 
 use crate::{
     error_handler::Result, log_error, modules::media::application::MEDIA_MANAGER,
-    seelen::get_app_handle, trace_lock,
+    seelen::get_app_handle, trace_lock, windows_api::WindowsApi,
 };
 
 use super::{
@@ -61,8 +61,16 @@ pub fn get_media_sessions() -> Result<Vec<MediaPlayer>> {
 }
 
 #[tauri::command(async)]
-pub fn media_set_default_device(id: String, role: String) -> Result<()> {
-    MediaManager::set_default_device(&id, &role)
+pub async fn media_set_default_device(id: String, role: String) -> Result<()> {
+    WindowsApi::set_default_audio_device(&id, &role)?;
+    /* let program = std::env::current_exe()?;
+    get_app_handle()
+        .shell()
+        .command(program)
+        .args(["win32", "set-default-audio-device", &id, &role])
+        .status()
+        .await?; */
+    Ok(())
 }
 
 #[tauri::command(async)]
