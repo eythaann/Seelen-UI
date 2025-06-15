@@ -39,7 +39,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@nyariv/sandboxjs": "^0.8.24",
     "@reduxjs/toolkit": "^2.5.0",
-    "@seelen-ui/lib": "^2.3.6-next.20250605212630",
+    "@seelen-ui/lib": "^2.3.6-next.20250615120542",
     "@seelen/translation-toolkit": "^1.1.10",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@types/d3": "^7.4.3",

@@ -329,7 +329,7 @@ impl NotificationManager {
         }
 
         // pre-extraction to avoid flickering on the ui
-        let _ = extract_and_save_icon_umid(&app_umid.to_string().into());
+        extract_and_save_icon_umid(&app_umid.to_string().into());
 
         self.notifications.push(AppNotification {
             id: u_notification.Id()?,

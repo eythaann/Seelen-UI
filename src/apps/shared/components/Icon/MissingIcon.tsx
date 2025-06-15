@@ -9,22 +9,21 @@ interface MissingIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'sr
 
 interface MissingIconState {
   src: string | null;
-  mask?: string | null;
+  mask: string | null;
+  isAproximatelySquare: boolean;
 }
 
 const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-function getMissingIcon(): {
-  src: string | null;
-  mask?: string | null;
-} {
+function getMissingIcon(): MissingIconState {
   const icon = iconPackManager.getMissingIcon();
-  if (icon && typeof icon === 'object') {
+  if (icon) {
     return {
-      src: darkModeQuery.matches ? icon.dark : icon.light,
+      src: (darkModeQuery.matches ? icon.dark : icon.light) || icon.base,
       mask: icon.mask,
+      isAproximatelySquare: icon.isAproximatelySquare,
     };
   }
-  return { src: icon };
+  return { src: null, mask: null, isAproximatelySquare: false };
 }
 
 export class MissingIcon extends React.Component<MissingIconProps, MissingIconState> {
@@ -49,10 +48,7 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
   }
 
   updateSrc(): void {
-    this.setState({
-      mask: null,
-      ...getMissingIcon(),
-    });
+    this.setState(getMissingIcon());
   }
 
   render(): React.ReactNode {

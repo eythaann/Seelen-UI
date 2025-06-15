@@ -4,6 +4,7 @@ import { IRootState } from 'src/shared.interfaces';
 export interface StartMenuApp {
   path: string;
   umid: string | null;
+  target: string | null;
 }
 
 export interface LauncherState extends IRootState<SeelenLauncherSettings> {

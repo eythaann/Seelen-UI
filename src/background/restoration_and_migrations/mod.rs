@@ -34,6 +34,20 @@ impl RestorationAndMigration {
         Ok(())
     }
 
+    pub fn migrate_old_folders() -> Result<()> {
+        let handle = get_app_handle();
+        let data_path = handle.path().app_data_dir()?;
+        let old_soundpacks = data_path.join("sounds");
+        let old_iconpacks = data_path.join("icons");
+        if old_soundpacks.exists() {
+            std::fs::remove_dir_all(old_soundpacks)?;
+        }
+        if old_iconpacks.exists() {
+            std::fs::rename(old_iconpacks, data_path.join("old_iconpacks"))?;
+        }
+        Ok(())
+    }
+
     pub fn recreate_user_folders() -> Result<()> {
         let path = get_app_handle().path();
         let data_path = path.app_data_dir()?;
@@ -62,9 +76,9 @@ impl RestorationAndMigration {
             Ok(())
         };
         create_if_needed("themes")?;
-        create_if_needed("icons")?;
+        create_if_needed("iconpacks")?;
         create_if_needed("wallpapers")?;
-        create_if_needed("sounds")?;
+        create_if_needed("soundpacks")?;
         create_if_needed("plugins")?;
         create_if_needed("widgets")?;
         Self::recreate_profiles()?;
@@ -75,6 +89,7 @@ impl RestorationAndMigration {
     pub fn run_full() -> Result<()> {
         Self::recreate_user_folders()?;
         Self::migrate_old_toolbar_items()?;
+        Self::migrate_old_folders()?;
         Ok(())
     }
 }

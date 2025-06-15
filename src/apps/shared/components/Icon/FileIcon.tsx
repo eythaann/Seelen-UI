@@ -8,29 +8,30 @@ import { iconPackManager } from './common';
 import { MissingIcon } from './MissingIcon';
 import cs from './index.module.css';
 
-interface FileIconProps extends SeelenCommandGetIconArgs, Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+interface FileIconProps
+  extends SeelenCommandGetIconArgs,
+  Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   /** if true, no missing icon will be rendered in case no icon found */
   noFallback?: boolean;
 }
 
 interface FileIconState {
   src: string | null;
-  mask?: string | null;
+  mask: string | null;
+  isAproximatelySquare: boolean;
 }
 
 const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-function getIcon(args: SeelenCommandGetIconArgs): {
-  src: string | null;
-  mask?: string | null;
-} {
+function getIcon(args: SeelenCommandGetIconArgs): FileIconState {
   const icon = iconPackManager.getIcon(args);
-  if (icon && typeof icon === 'object') {
+  if (icon) {
     return {
-      src: darkModeQuery.matches ? icon.dark : icon.light,
+      src: (darkModeQuery.matches ? icon.dark : icon.light) || icon.base,
       mask: icon.mask,
+      isAproximatelySquare: icon.isAproximatelySquare,
     };
   }
-  return { src: icon };
+  return { src: null, mask: null, isAproximatelySquare: false };
 }
 export class FileIcon extends React.Component<FileIconProps, FileIconState> {
   unlistener: UnlistenFn | null = null;
@@ -54,6 +55,7 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
   componentWillUnmount(): void {
     this.unlistener?.();
     this.unlistener = null;
+    darkModeQuery.removeEventListener('change', this.updateSrc);
   }
 
   componentDidUpdate(prevProps: Readonly<FileIconProps>, prevState: Readonly<FileIconState>): void {
@@ -67,17 +69,14 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
   }
 
   requestIconExtraction(): void {
-    IconPackManager.extractIcon({
+    IconPackManager.requestIconExtraction({
       path: this.props.path,
       umid: this.props.umid,
     });
   }
 
   updateSrc(): void {
-    this.setState({
-      mask: null,
-      ...getIcon({ path: this.props.path, umid: this.props.umid }),
-    });
+    this.setState(getIcon({ path: this.props.path, umid: this.props.umid }));
   }
 
   render(): React.ReactNode {
@@ -85,7 +84,11 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
 
     if (this.state.src) {
       return (
-        <figure {...imgProps} className={cx(cs.outer, imgProps.className)}>
+        <figure
+          {...imgProps}
+          className={cx(cs.outer, imgProps.className)}
+          data-shape={this.state.isAproximatelySquare ? 'square' : 'unknown'}
+        >
           <img src={this.state.src} />
           {this.state.mask && (
             <div

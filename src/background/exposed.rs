@@ -142,12 +142,10 @@ fn send_keys(keys: String) -> Result<()> {
 #[tauri::command(async)]
 fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Result<()> {
     if let Some(umid) = umid {
-        if extract_and_save_icon_umid(&umid.into()).is_ok() {
-            return Ok(());
-        }
+        extract_and_save_icon_umid(&umid.into());
     }
     if let Some(path) = path {
-        return extract_and_save_icon_from_file(&path);
+        extract_and_save_icon_from_file(&path);
     }
     Ok(())
 }

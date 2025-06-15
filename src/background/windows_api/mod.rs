@@ -76,6 +76,7 @@ use windows::{
         },
         System::{
             Com::{IPersistFile, STGM_READ},
+            Environment::ExpandEnvironmentStringsW,
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
             RemoteDesktop::ProcessIdToSessionId,
@@ -577,22 +578,57 @@ impl WindowsApi {
             let mut target_path = WindowsString::new_to_fill(1024);
             let mut idk = WIN32_FIND_DATAW::default();
             unsafe { shell_link.GetPath(target_path.as_mut_slice(), &mut idk, 0)? };
+            target_path = Self::resolve_environment_variables(&target_path)?;
 
             let mut arguments = WindowsString::new_to_fill(1024);
             unsafe { shell_link.GetArguments(arguments.as_mut_slice())? };
 
-            Ok((
-                PathBuf::from(target_path.to_os_string()),
-                arguments.to_os_string(),
-            ))
+            Ok((target_path.to_os_string().into(), arguments.to_os_string()))
         })
     }
 
+    pub fn resolve_lnk_custom_icon_path(lnk_path: &Path) -> Result<PathBuf> {
+        Com::run_with_context(|| {
+            let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
+            let lnk_wide = lnk_path
+                .as_os_str()
+                .encode_wide()
+                .chain(Some(0))
+                .collect_vec();
+
+            let persist_file: IPersistFile = shell_link.cast()?;
+            unsafe { persist_file.Load(PCWSTR(lnk_wide.as_ptr()), STGM_READ)? };
+
+            let mut icon_path = WindowsString::new_to_fill(1024);
+            let mut icon_idx = 0;
+            unsafe { shell_link.GetIconLocation(icon_path.as_mut_slice(), &mut icon_idx)? };
+
+            if icon_path.is_empty() {
+                return Err("There is no custom icon for this link file".into());
+            }
+
+            icon_path = Self::resolve_environment_variables(&icon_path)?;
+            Ok(PathBuf::from(icon_path.to_os_string()))
+        })
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-shloadindirectstring
+    /// Extracts a specified text resource when given that resource in the form of an indirect string
+    /// (a string that begins with the '@' symbol).
     pub fn resolve_indirect_string(text: &str) -> Result<String> {
         let source = WindowsString::from_str(text);
         let mut out = WindowsString::new_to_fill(1024);
         unsafe { SHLoadIndirectString(source.as_pcwstr(), out.as_mut_slice(), None)? };
         Ok(out.to_string())
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/api/processenv/nf-processenv-expandenvironmentstringsw
+    /// Expands all environment variables in a string (for example, %PATH%).
+    pub fn resolve_environment_variables(source: &WindowsString) -> Result<WindowsString> {
+        let len = unsafe { ExpandEnvironmentStringsW(source.as_pcwstr(), None) };
+        let mut out = WindowsString::new_to_fill(len as usize);
+        unsafe { ExpandEnvironmentStringsW(source.as_pcwstr(), Some(out.as_mut_slice())) };
+        Ok(out)
     }
 
     pub fn get_executable_display_name(path: &Path) -> Result<String> {

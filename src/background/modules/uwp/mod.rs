@@ -73,8 +73,10 @@ pub fn get_hightest_quality_posible(icon_path: &Path) -> Option<(PathBuf, PathBu
 
 impl PackageManifest {
     pub fn get_app(&self, id: &str) -> Option<&ManifestApplication> {
-        let apps = self.applications.as_ref()?;
-        apps.application.iter().find(|app| app.id == id)
+        self.applications
+            .application
+            .iter()
+            .find(|app| app.id == id)
     }
 }
 
@@ -91,24 +93,29 @@ impl UwpManager {
         Ok(quick_xml::de::from_reader(&mut reader)?)
     }
 
-    pub fn get_app_path(app_umid: &str) -> Result<PathBuf> {
+    /// Some apps like PWA on edge can be stored as UWP apps and don't have an executable path,
+    /// so in that cases the function will return None
+    pub fn get_app_path(app_umid: &str) -> Result<Option<PathBuf>> {
         let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
+
         let package = app_info.Package()?;
+        let package_family_name = app_info.PackageFamilyName()?;
+
         let manifest = Self::manifest_from_package(&package)?;
-        let apps = manifest
-            .applications
-            .map(|apps| apps.application)
-            .unwrap_or_default();
+        let apps = &manifest.applications.application;
+
         for app in apps {
-            if app_umid != app.id {
+            if format!("{package_family_name}!{}", app.id) != app_umid {
                 continue;
             }
-            if let Some(executable) = app.executable {
+            if let Some(executable) = &app.executable {
                 let package_path = PathBuf::from(package.InstalledPath()?.to_os_string());
-                return Ok(package_path.join(executable));
+                return Ok(Some(package_path.join(executable)));
             }
         }
-        Err(format!("App path not found for {app_umid}").into())
+
+        // println!("Manifest {manifest:#?}, package_family_name {package_family_name}");
+        Ok(None)
     }
 
     // returns light and dark icons

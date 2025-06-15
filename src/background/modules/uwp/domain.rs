@@ -5,7 +5,8 @@ use serde::{Deserialize, Serialize};
 pub struct PackageManifest {
     pub identity: ManifestIdentity,
     pub properties: ManifestProperties,
-    pub applications: Option<ManifestApplications>,
+    #[serde(default)]
+    pub applications: ManifestApplications,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -27,8 +28,8 @@ pub struct ManifestProperties {
 
 /// This struct makes reference to:
 /// https://learn.microsoft.com/en-us/uwp/schemas/appxpackage/uapmanifestschema/element-applications
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "PascalCase")]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[serde(default, rename_all = "PascalCase")]
 pub struct ManifestApplications {
     pub application: Vec<ManifestApplication>,
 }

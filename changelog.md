@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### refactor
+- icon packs implementation.
+
 ## [2.3.8]
 ### enhancements
 - show a warning to users with monitors drivers disabled.

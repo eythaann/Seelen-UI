@@ -40,6 +40,10 @@ impl WindowsString {
             .expect("Invalid UTF16 Windows String")
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+
     pub fn as_mut_slice(&mut self) -> &mut [u16] {
         &mut self.inner
     }

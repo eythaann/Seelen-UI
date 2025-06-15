@@ -158,11 +158,11 @@ impl MediaManager {
                 .DisplayName()?
                 .to_string_lossy(),
             AppUserModelId::PropertyStore(umid) => {
-                let shortcut = START_MENU_MANAGER
-                    .load()
-                    .search_shortcut_with_same_umid(umid);
+                let start = START_MENU_MANAGER.load();
+                let shortcut = start.get_by_file_umid(umid);
                 match shortcut {
                     Some(shortcut) => shortcut
+                        .path
                         .file_stem()
                         .unwrap_or_else(|| OsStr::new("Unknown"))
                         .to_string_lossy()
@@ -173,7 +173,7 @@ impl MediaManager {
         };
 
         // pre-extraction to avoid flickering on the ui
-        let _ = extract_and_save_icon_umid(&source_app_umid);
+        extract_and_save_icon_umid(&source_app_umid);
         self.playing.insert(
             source_app_umid.to_string(),
             MediaPlayer {

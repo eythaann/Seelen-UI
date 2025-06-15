@@ -117,6 +117,7 @@ features = [
     "Win32_System_SystemInformation",
     "Win32_System_Console",                # required to attach to console on cli mode
     "Win32_System_Registry",               # required for system tray icon module
+    "Win32_System_Environment",
     "Win32_Security",                      # required for power management (shutdown, reboot)
     "Win32_Security_Authorization",        # required to change security on services
     "Win32_System_Kernel",

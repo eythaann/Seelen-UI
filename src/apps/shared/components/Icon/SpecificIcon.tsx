@@ -11,22 +11,21 @@ interface SpecificIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 's
 
 interface SpecificIconState {
   src: string | null;
-  mask?: string | null;
+  mask: string | null;
+  isAproximatelySquare: boolean;
 }
 
 const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-function getSpecificIcon(name: string): {
-  src: string | null;
-  mask?: string | null;
-} {
-  const icon = iconPackManager.getSpecificIcon(name);
-  if (icon && typeof icon === 'object') {
+function getSpecificIcon(name: string): SpecificIconState {
+  const icon = iconPackManager.getCustomIcon(name);
+  if (icon) {
     return {
-      src: darkModeQuery.matches ? icon.dark : icon.light,
+      src: (darkModeQuery.matches ? icon.dark : icon.light) || icon.base,
       mask: icon.mask,
+      isAproximatelySquare: icon.isAproximatelySquare,
     };
   }
-  return { src: icon };
+  return { src: null, mask: null, isAproximatelySquare: false };
 }
 
 export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIconState> {
@@ -52,11 +51,14 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
     }
   }
 
+  componentWillUnmount(): void {
+    this.unlistener?.();
+    this.unlistener = null;
+    darkModeQuery.removeEventListener('change', this.updateSrc);
+  }
+
   updateSrc(): void {
-    this.setState({
-      mask: null,
-      ...getSpecificIcon(this.props.name),
-    });
+    this.setState(getSpecificIcon(this.props.name));
   }
 
   render(): React.ReactNode {

@@ -1,5 +1,7 @@
+mod queue;
 use image::{GenericImageView, ImageBuffer, RgbaImage};
 use itertools::Itertools;
+use queue::{IconExtractor, IconExtractorRequest};
 use windows::core::PCWSTR;
 use windows::Win32::{
     Graphics::Gdi::{
@@ -20,7 +22,6 @@ use std::arch::x86_64::{
     __m128i, _mm_loadu_si128, _mm_setr_epi8, _mm_shuffle_epi8, _mm_storeu_si128,
 };
 use std::io::BufRead;
-use std::os::windows::ffi::OsStrExt;
 use std::path::{Path, PathBuf};
 
 use crate::error_handler::Result;
@@ -191,7 +192,12 @@ pub fn crop_transparent_borders(rgba_image: &RgbaImage) -> RgbaImage {
 
 pub fn get_icon_from_file(path: &Path) -> Result<RgbaImage> {
     unsafe {
-        let path_str = path.as_os_str().encode_wide().chain(Some(0)).collect_vec();
+        let normalized = path
+            .canonicalize()?
+            .to_string_lossy()
+            .trim_start_matches(r"\\?\")
+            .to_owned();
+        let path_str = normalized.encode_utf16().chain(Some(0)).collect_vec();
 
         let mut file_info = SHFILEINFOW::default();
         let result = SHGetFileInfoW(
@@ -202,10 +208,14 @@ pub fn get_icon_from_file(path: &Path) -> Result<RgbaImage> {
             SHGFI_SYSICONINDEX,
         );
 
+        if result == 0 {
+            return Err("Failed to get file information".into());
+        }
+
         // file_info.iIcon = 0 is a valid icon but it is the default icon for files on Windows
         // so we will handle this as no icon to avoid generate unnecessary artifacts
-        if result == 0 || file_info.iIcon == 0 {
-            return Err("Failed to get icon".into());
+        if file_info.iIcon == 0 {
+            return Err("Icon index is 0".into());
         }
 
         let image_list: IImageList = SHGetImageList(SHIL_JUMBO as i32)?;
@@ -218,6 +228,43 @@ pub fn get_icon_from_file(path: &Path) -> Result<RgbaImage> {
         DestroyIcon(icon)?;
         Ok(image)
     }
+}
+
+const SQUARE_MARGIN: f32 = 0.1;
+const ASPECT_TOLERANCE: f32 = 0.05;
+const OPACITY_THRESHOLD: u8 = 254;
+
+pub fn is_aproximately_a_square(rgba_image: &RgbaImage) -> bool {
+    let (width, height) = rgba_image.dimensions();
+
+    // verify if the image is not empty
+    if width == 0 || height == 0 {
+        return false;
+    }
+
+    // verify if the image is a square
+    let aspect_ratio = width as f32 / height as f32;
+    if (aspect_ratio - 1.0).abs() > ASPECT_TOLERANCE {
+        return false;
+    }
+
+    // Calculate margin
+    let margin_x = (width as f32 * SQUARE_MARGIN) as u32;
+    let margin_y = (height as f32 * SQUARE_MARGIN) as u32;
+    let inner_width = width - 2 * margin_x;
+    let inner_height = height - 2 * margin_y;
+
+    // verify if the image is a square
+    for y in margin_y..margin_y + inner_height {
+        for x in margin_x..margin_x + inner_width {
+            let pixel = rgba_image.get_pixel(x, y);
+            if pixel.0[3] < OPACITY_THRESHOLD {
+                return false;
+            }
+        }
+    }
+
+    true
 }
 
 // maintain this function as documentation for url files
@@ -243,13 +290,26 @@ fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     get_icon_from_file(&path)
 }
 
+fn date_based_hex_id() -> String {
+    let since_epoch = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_millis();
+    format!("{since_epoch:x}")
+}
+
+pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) {
+    IconExtractor::request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
+}
+
 /// returns the path of the icon extracted from the executable or copied if is an UWP app.
 ///
 /// If the icon already exists, it returns the path instead overriding, this is needed for allow user custom icons.
-pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<()> {
-    let origin = path.as_ref();
+///
+/// umid on this case only applys to Property Store umid
+pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> Result<()> {
     if !origin.exists() || origin.is_dir() {
-        return Err("Path is not a file".into());
+        return Err(format!("File not found: {}", origin.display()).into());
     }
 
     let origin_ext = match origin.extension() {
@@ -258,7 +318,10 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<()> {
         None => return Ok(()),
     };
 
-    let key = origin.to_string_lossy().to_string();
+    // ico files are by itself an icon
+    if origin_ext == "ico" {
+        return Ok(());
+    }
 
     let is_exe_file = origin_ext == "exe";
     let is_lnk_file = origin_ext == "lnk";
@@ -266,8 +329,8 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<()> {
 
     let mutex = FULL_STATE.load().icon_packs().clone();
     let mut icon_manager = trace_lock!(mutex);
-    if is_exe_file || is_lnk_file {
-        if icon_manager.get_app_icon(&key).is_some() {
+    if is_exe_file || is_lnk_file || is_url_file {
+        if icon_manager.has_app_icon(None, Some(origin)) {
             return Ok(());
         }
     } else if icon_manager.get_file_icon(origin).is_some() {
@@ -275,95 +338,139 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<()> {
     }
 
     let file_name = origin.file_name().ok_or("Failed to get file name")?;
+    let filestem = origin.file_stem().ok_or("Failed to get file stem")?;
 
-    let to_store_filename = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
-    let to_store_path = SEELEN_COMMON
-        .user_icons_path()
-        .join("system")
-        .join(&to_store_filename);
+    let root = SEELEN_COMMON.user_icons_path().join("system");
+    let gen_icon_filename = PathBuf::from(format!(
+        "{}_{}.png",
+        filestem.to_string_lossy(),
+        date_based_hex_id()
+    ));
+    let mut gen_icon = Icon {
+        base: Some(gen_icon_filename.clone()),
+        ..Default::default()
+    };
 
     log::trace!("Extracting icon for {file_name:?}");
 
-    // Special case for url files, these can have a custom icon, but to simplicity we use a single one for every .url
-    if is_url_file {
-        let url_placeholder_icon = SEELEN_COMMON.app_resource_dir().join("icons/url.png");
-        std::fs::copy(&url_placeholder_icon, &to_store_path)?;
-        icon_manager.add_system_file_icon("url", Icon::Static(to_store_filename));
-        icon_manager.write_system_icon_pack()?;
-        return Ok(());
-    }
-
-    // try get the icon directly from the file
-    if let Ok(icon) = get_icon_from_file(origin) {
-        icon.save(&to_store_path)?;
-        if is_exe_file || is_lnk_file {
-            icon_manager.add_system_app_icon(&key, Icon::Static(to_store_filename));
-        } else {
-            icon_manager.add_system_file_icon(&origin_ext, Icon::Static(to_store_filename));
+    if origin_ext == "url" {
+        if let Ok(icon) = get_icon_from_url_file(origin) {
+            gen_icon.is_aproximately_square = is_aproximately_a_square(&icon);
+            icon.save(root.join(&gen_icon_filename))?;
+            icon_manager.add_system_app_icon(None, Some(origin), gen_icon);
+            icon_manager.write_system_icon_pack()?;
         }
-        icon_manager.write_system_icon_pack()?;
         return Ok(());
     }
 
-    // if the lnk don't have an icon, try to extract it from the target
     if is_lnk_file {
-        drop(icon_manager);
-        let (target, _) = WindowsApi::resolve_lnk_target(origin)?;
-        extract_and_save_icon_from_file(&target)?;
+        let lnk_icon_path = match WindowsApi::resolve_lnk_custom_icon_path(origin) {
+            Ok(icon_path) => icon_path,
+            Err(_) => {
+                let (target, _) = WindowsApi::resolve_lnk_target(origin)?;
+                target
+            }
+        };
 
-        let target_key = target.to_string_lossy().to_string();
-        let mut icon_manager = trace_lock!(mutex);
-        let target_icon = icon_manager.get_app_icon(&target_key).ok_or("Ups")?.clone();
-        icon_manager.add_system_app_icon(&key, target_icon);
-        icon_manager.write_system_icon_pack()?;
-        return Ok(());
-    }
-
-    Err("Failed to extract icon".into())
-}
-
-/// returns the path of the icon extracted from the app with the specified package app user model id.
-pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
-    let icon_manager_mutex = FULL_STATE.load().icon_packs().clone();
-    {
-        let manager = trace_lock!(icon_manager_mutex);
-        if manager.get_app_icon(aumid.as_ref()).is_some() {
+        if lnk_icon_path
+            .extension()
+            .is_some_and(|ext| ext.to_string_lossy().to_lowercase() != "ico")
+        {
+            drop(icon_manager);
+            _extract_and_save_icon_from_file(&lnk_icon_path, None)?;
+            let mut icon_manager = trace_lock!(mutex);
+            icon_manager.add_system_icon_redirect(umid, origin, &lnk_icon_path);
+            icon_manager.write_system_icon_pack()?;
             return Ok(());
         }
     }
 
-    log::trace!("Extracting icon for {aumid:?}");
+    // try get the icon directly from the file
+    let icon = match get_icon_from_file(origin) {
+        Ok(icon) => icon,
+        Err(_) => {
+            log::trace!("Icon not found for {}", origin.display());
+            return Ok(());
+        }
+    };
+
+    gen_icon.is_aproximately_square = is_aproximately_a_square(&icon);
+
+    if is_exe_file || is_lnk_file {
+        icon.save(root.join(&gen_icon_filename))?;
+        icon_manager.add_system_app_icon(umid.as_deref(), Some(origin), gen_icon);
+    } else {
+        let gen_icon_filename = format!("{}_{}.png", origin_ext, date_based_hex_id()).into();
+        icon.save(root.join(&gen_icon_filename))?;
+        gen_icon.base = Some(gen_icon_filename);
+        icon_manager.add_system_file_icon(&origin_ext, gen_icon);
+    }
+    icon_manager.write_system_icon_pack()?;
+
+    Ok(())
+}
+
+pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) {
+    IconExtractor::request(IconExtractorRequest::AppUMID(aumid.clone()));
+}
+
+/// returns the path of the icon extracted from the app with the specified package app user model id.
+pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
+    let icon_manager_mutex = FULL_STATE.load().icon_packs().clone();
     match aumid {
-        AppUserModelId::Appx(aumid) => {
-            let (light, dark) = UwpManager::get_high_quality_icon_path(aumid)?;
+        AppUserModelId::Appx(app_umid) => {
+            let path = UwpManager::get_app_path(app_umid)?;
+            {
+                let manager = trace_lock!(icon_manager_mutex);
+                if manager.has_app_icon(Some(aumid.as_str()), path.as_deref()) {
+                    return Ok(());
+                }
+            }
+
+            log::trace!("Extracting icon for {app_umid:?}");
+            let mut gen_icon = Icon::default();
+            let (light_path, dark_path) = UwpManager::get_high_quality_icon_path(app_umid)?;
+
             let root = SEELEN_COMMON.user_icons_path().join("system");
-            let name = uuid::Uuid::new_v4();
-            std::fs::copy(light, root.join(format!("{name}_light.png")))?;
-            std::fs::copy(dark, root.join(format!("{name}_dark.png")))?;
+            let name = date_based_hex_id();
+
+            let light_rgba = image::open(&light_path)?.to_rgba8();
+            let light_rgba = crop_transparent_borders(&light_rgba);
+
+            if light_path != dark_path {
+                let dark_rgba = image::open(&dark_path)?.to_rgba8();
+                let dark_rgba = crop_transparent_borders(&dark_rgba);
+
+                light_rgba.save(root.join(format!("{name}_light.png")))?;
+                dark_rgba.save(root.join(format!("{name}_dark.png")))?;
+
+                gen_icon.light = Some(format!("{name}_light.png").into());
+                gen_icon.dark = Some(format!("{name}_dark.png").into());
+            } else {
+                light_rgba.save(root.join(format!("{name}.png")))?;
+                gen_icon.base = Some(format!("{name}.png").into());
+            }
+
+            gen_icon.is_aproximately_square = is_aproximately_a_square(&light_rgba);
 
             let mut icon_manager = trace_lock!(icon_manager_mutex);
-            icon_manager.add_system_app_icon(
-                aumid,
-                Icon::Dynamic {
-                    light: format!("{name}_light.png").into(),
-                    dark: format!("{name}_dark.png").into(),
-                    mask: None,
-                },
-            );
+            icon_manager.add_system_app_icon(Some(app_umid), path.as_deref(), gen_icon);
             icon_manager.write_system_icon_pack()
         }
-        AppUserModelId::PropertyStore(aumid) => {
-            let lnk = START_MENU_MANAGER
-                .load()
-                .search_shortcut_with_same_umid(aumid)
-                .ok_or("No shortcut found for umid")?;
-            extract_and_save_icon_from_file(&lnk)?;
+        AppUserModelId::PropertyStore(app_umid) => {
+            let start = START_MENU_MANAGER.load();
+            let lnk = start
+                .get_by_file_umid(app_umid)
+                .ok_or(format!("No shortcut found for umid {app_umid}"))?;
 
-            let mut icon_manager = trace_lock!(icon_manager_mutex);
-            let lnk_key = lnk.to_string_lossy().to_string();
-            let target_icon = icon_manager.get_app_icon(&lnk_key).ok_or("Ups")?.clone();
-            icon_manager.add_system_app_icon(aumid, target_icon);
-            icon_manager.write_system_icon_pack()?;
+            {
+                let manager = trace_lock!(icon_manager_mutex);
+                if manager.has_app_icon(Some(aumid.as_str()), Some(&lnk.path)) {
+                    return Ok(());
+                }
+            }
+
+            _extract_and_save_icon_from_file(&lnk.path, Some(app_umid.clone()))?;
             Ok(())
         }
     }

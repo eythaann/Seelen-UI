@@ -19,7 +19,7 @@ impl FullState {
             match item {
                 WegItem::Pinned(data) | WegItem::Temporal(data) => {
                     if let Some(umid) = &data.umid {
-                        if let Ok(app_path) = UwpManager::get_app_path(umid) {
+                        if let Ok(Some(app_path)) = UwpManager::get_app_path(umid) {
                             data.path = app_path;
                         }
                     }

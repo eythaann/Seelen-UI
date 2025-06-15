@@ -77,8 +77,8 @@ impl StartMenuManager {
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
-    pub fn search_shortcut_with_same_umid(&self, umid: &str) -> Option<PathBuf> {
-        let item = self.list.iter().find(|item| {
+    pub fn get_by_file_umid(&self, umid: &str) -> Option<&StartMenuItem> {
+        self.list.iter().find(|item| {
             if let Some(item_umid) = &item.umid {
                 return item_umid == umid;
             }
@@ -87,8 +87,7 @@ impl StartMenuManager {
                 return target.ends_with(umid);
             }
             false
-        });
-        item.map(|item| item.path.clone())
+        })
     }
 
     pub fn store_cache(&self) -> Result<()> {

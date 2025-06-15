@@ -196,21 +196,24 @@ impl WegItemsImpl {
             .unwrap_or_else(|_| String::from("Unknown"));
 
         let (relaunch_program, relaunch_args) = if let Some(umid) = &umid {
-            // pre-extraction to avoid flickering on the ui
-            let _ = extract_and_save_icon_umid(umid);
             match umid {
-                AppUserModelId::Appx(umid) => (
-                    "C:\\Windows\\explorer.exe".to_owned(),
-                    Some(format!("shell:AppsFolder\\{umid}")),
-                ),
+                AppUserModelId::Appx(umid) => {
+                    // pre-extraction to avoid flickering on the ui
+                    extract_and_save_icon_umid(&AppUserModelId::Appx(umid.clone()));
+                    (
+                        "C:\\Windows\\explorer.exe".to_owned(),
+                        Some(format!("shell:AppsFolder\\{umid}")),
+                    )
+                }
                 AppUserModelId::PropertyStore(umid) => {
-                    let shortcut = START_MENU_MANAGER
-                        .load()
-                        .search_shortcut_with_same_umid(umid);
+                    let start_menu_manager = START_MENU_MANAGER.load();
+                    let shortcut = start_menu_manager.get_by_file_umid(umid);
 
                     // some apps like librewolf don't have a shortcut with the same umid
                     if let Some(shortcut) = &shortcut {
-                        path = shortcut.clone();
+                        // pre-extraction to avoid flickering on the ui
+                        extract_and_save_icon_umid(&AppUserModelId::PropertyStore(umid.clone()));
+                        path = shortcut.path.clone();
                         display_name = path
                             .file_stem()
                             .unwrap_or_else(|| OsStr::new("Unknown"))
@@ -218,7 +221,7 @@ impl WegItemsImpl {
                             .to_string();
                     } else {
                         // pre-extraction to avoid flickering on the ui
-                        let _ = extract_and_save_icon_from_file(&path);
+                        extract_and_save_icon_from_file(&path);
                     }
 
                     // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
@@ -242,7 +245,7 @@ impl WegItemsImpl {
             }
         } else {
             // pre-extraction to avoid flickering on the ui
-            let _ = extract_and_save_icon_from_file(&path);
+            extract_and_save_icon_from_file(&path);
             (path.to_string_lossy().to_string(), None)
         };
 

@@ -44,12 +44,12 @@ export function Launcher() {
   useEffect(() => {
     async function loadIcons() {
       for (const app of apps) {
-        await IconPackManager.extractIcon(app);
+        await IconPackManager.requestIconExtraction(app);
       }
     }
     // we load all icons one by one first to avoid load all icons at the same time and block the UI
     loadIcons().finally(() => setLoading(false));
-  });
+  }, []);
 
   const command = _command.trim().toLowerCase();
   const selectedRunner = runners[usingRunnerIdx];
