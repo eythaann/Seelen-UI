@@ -12,7 +12,8 @@ pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
         .level_for("tao", log::LevelFilter::Off)
         .level_for("os_info", log::LevelFilter::Off)
         .level_for("notify", log::LevelFilter::Off)
-        .level_for("notify_debouncer_full", log::LevelFilter::Off);
+        .level_for("notify_debouncer_full", log::LevelFilter::Off)
+        .level_for("discord_presence", log::LevelFilter::Off);
 
     let log_plugin = {
         #[cfg(not(dev))]

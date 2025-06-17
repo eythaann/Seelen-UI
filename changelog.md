@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- discord rich presence.
+
 ### refactor
 - icon packs implementation.
 

@@ -19,16 +19,10 @@ use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::{
-    cli::SelfPipe,
-    error_handler::Result,
-    modules::virtual_desk::cli::VirtualDesktopCli,
-    popups::POPUPS_MANAGER,
-    seelen::{Seelen, SEELEN},
-    seelen_rofi::cli::AppLauncherCli,
-    seelen_weg::cli::WegCli,
-    seelen_wm_v2::cli::WindowManagerCli,
-    trace_lock,
-    utils::constants::SEELEN_COMMON,
+    cli::SelfPipe, error_handler::Result, modules::virtual_desk::cli::VirtualDesktopCli,
+    popups::POPUPS_MANAGER, seelen::SEELEN, seelen_rofi::cli::AppLauncherCli,
+    seelen_weg::cli::WegCli, seelen_wm_v2::cli::WindowManagerCli, trace_lock,
+    utils::constants::SEELEN_COMMON, widgets::show_settings,
 };
 
 /// Seelen Command Line Interface
@@ -190,7 +184,7 @@ impl AppCli {
 
         match command {
             AppCliCommand::Settings => {
-                Seelen::show_settings()?;
+                show_settings()?;
             }
             AppCliCommand::VirtualDesk(command) => {
                 command.process()?;

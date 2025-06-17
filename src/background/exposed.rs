@@ -18,6 +18,7 @@ use crate::seelen::{get_app_handle, Seelen};
 use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 use crate::utils::pwsh::PwshScript;
 use crate::utils::{is_running_as_appx, is_virtual_desktop_supported as virtual_desktop_supported};
+use crate::widgets::show_settings;
 use crate::windows_api::hdc::DeviceContext;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
@@ -115,7 +116,7 @@ pub fn get_user_envs() -> HashMap<String, String> {
 // https://github.com/tauri-apps/wry/issues/583
 #[tauri::command(async)]
 fn show_app_settings() {
-    log_error!(Seelen::show_settings());
+    log_error!(show_settings());
 }
 
 #[tauri::command(async)]

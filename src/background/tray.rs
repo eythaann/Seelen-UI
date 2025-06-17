@@ -10,8 +10,8 @@ use tauri::{
 
 use crate::error_handler::Result;
 use crate::log_error;
-use crate::seelen::Seelen;
 use crate::utils::sleep_millis;
+use crate::widgets::show_settings;
 
 pub fn try_register_tray_icon(app: &mut App) -> Result<()> {
     log::trace!("registering tray icon");
@@ -53,7 +53,7 @@ fn register_tray_icon(app: &mut App) -> Result<()> {
         .on_menu_event(
             move |app: &AppHandle, event: MenuEvent| match event.id().as_ref() {
                 "settings" => {
-                    log_error!(Seelen::show_settings());
+                    log_error!(show_settings());
                 }
                 "restart" => app.restart(),
                 "quit" => app.exit(0),
@@ -70,7 +70,7 @@ fn register_tray_icon(app: &mut App) -> Result<()> {
             } = event
             {
                 if button == MouseButton::Left && button_state == MouseButtonState::Up {
-                    log_error!(Seelen::show_settings());
+                    log_error!(show_settings());
                 }
             }
         })

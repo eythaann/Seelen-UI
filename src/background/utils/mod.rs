@@ -1,5 +1,6 @@
 pub mod ahk;
 pub mod constants;
+pub mod discord;
 pub mod icon_extractor;
 pub mod integrity;
 pub mod pwsh;
@@ -16,7 +17,7 @@ use std::{
     fs,
     path::{Path, PathBuf},
     sync::atomic::AtomicBool,
-    time::{Duration, Instant},
+    time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
 use itertools::Itertools;
@@ -195,13 +196,21 @@ pub struct WidgetWebviewLabel {
 
 impl WidgetWebviewLabel {
     pub fn new(widget_id: &str, monitor_id: Option<&str>, instance_id: Option<&Uuid>) -> Self {
-        let mut label = format!("{widget_id}?");
+        let mut label = widget_id.to_string();
+        let with_monitor_id = monitor_id.is_some();
+        let with_instance_id = instance_id.is_some();
+        if with_monitor_id || with_instance_id {
+            label.push('?');
+        }
 
         if let Some(monitor_id) = monitor_id {
-            label.push_str(&format!("monitorId={}&", urlencoding::encode(monitor_id)));
+            label.push_str(&format!("monitorId={}", urlencoding::encode(monitor_id)));
         }
 
         if let Some(instance_id) = instance_id {
+            if with_monitor_id {
+                label.push('&');
+            }
             label.push_str(&format!(
                 "instanceId={}",
                 urlencoding::encode(&instance_id.to_string())
@@ -213,4 +222,13 @@ impl WidgetWebviewLabel {
             decoded: label,
         }
     }
+}
+
+#[allow(dead_code)]
+pub fn now_timestamp_as_millis() -> u64 {
+    let start = SystemTime::now();
+    let since_the_epoch = start
+        .duration_since(UNIX_EPOCH)
+        .expect("Time went backwards");
+    since_the_epoch.as_secs() * 1000 + since_the_epoch.subsec_nanos() as u64 / 1_000_000
 }

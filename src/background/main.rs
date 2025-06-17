@@ -3,7 +3,6 @@
 #![feature(never_type)]
 
 mod cli;
-mod context;
 mod error_handler;
 mod exposed;
 mod hook;
@@ -24,6 +23,7 @@ mod tauri_context;
 mod tray;
 mod utils;
 mod widget_loader;
+mod widgets;
 mod windows_api;
 mod winevent;
 

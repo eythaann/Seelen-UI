@@ -1,10 +1,9 @@
 use std::sync::{atomic::AtomicBool, Arc};
 
-use base64::Engine;
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use tauri::{AppHandle, Manager, Wry};
+use tauri::{AppHandle, Wry};
 use windows::Win32::{
     Graphics::Gdi::HMONITOR,
     System::TaskScheduler::{ITaskService, TaskScheduler},
@@ -28,7 +27,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, pwsh::PwshScript},
+    utils::{ahk::AutoHotKey, discord::start_discord_rpc, pwsh::PwshScript},
     windows_api::{event_window::create_background_window, Com, WindowsApi},
     APP_HANDLE,
 };
@@ -224,6 +223,7 @@ impl Seelen {
             log_error!(Self::start_ahk_shortcuts().await);
         });
 
+        start_discord_rpc()?;
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }
@@ -333,33 +333,6 @@ impl Seelen {
         PwshScript::new(
             r"Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*static\redis\AutoHotkey.exe*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }"
         ).execute().await?;
-        Ok(())
-    }
-
-    pub fn show_settings() -> Result<()> {
-        log::trace!("Show settings window");
-        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode("@seelen/settings");
-        let handle = get_app_handle();
-        match handle.get_webview_window(&label) {
-            Some(window) => {
-                window.unminimize()?;
-                window.set_focus()?;
-            }
-            None => {
-                tauri::WebviewWindowBuilder::new(
-                    handle,
-                    label,
-                    tauri::WebviewUrl::App("settings/index.html".into()),
-                )
-                .title("Settings")
-                .inner_size(800.0, 500.0)
-                .min_inner_size(600.0, 400.0)
-                .visible(false)
-                .decorations(false)
-                .center()
-                .build()?;
-            }
-        }
         Ok(())
     }
 }
