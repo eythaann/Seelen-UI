@@ -42,7 +42,7 @@ metadata:
     el: Ευρεία διάταξη
     bg: Широко оформление
     so: Qaab-dhismeedka ballaaran
-    ru: Широкий макет
+    ru: Горизонтальная раскладка окон
     mn: Дотуур хувь зүй
     uk: Широка розкладка
     vi: Bố cục rộng
@@ -113,7 +113,7 @@ metadata:
     el: Ευρεία διάταξη για οριζόντιες οθόνες.
     bg: Широко оформление за хоризонтални монитори.
     so: Qaab-dhismeedka ballaaran ee kormeerayaasha toosan.
-    ru: Широкий макет для горизонтальных мониторов.
+    ru: Макет раскладки окон для горизонтальных мониторов.
     vi: Bố cục rộng cho màn hình ngang.
     yo: Jakejado akọkọ fun awọn diigi pere.
     uk: Широка розкладка для горизонтальних моніторів.
