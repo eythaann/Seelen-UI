@@ -224,7 +224,6 @@ impl WidgetWebviewLabel {
     }
 }
 
-#[allow(dead_code)]
 pub fn now_timestamp_as_millis() -> u64 {
     let start = SystemTime::now();
     let since_the_epoch = start

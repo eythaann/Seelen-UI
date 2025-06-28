@@ -89,10 +89,7 @@ devtools:
 extras:
   clear_icons: Εκκαθάριση προσωρινής μνήμης εικονιδίων συστήματος
   clear_icons_tooltip: Μπορεί να απαιτηθεί επανεκκίνηση για να ισχύσει πλήρως σε όλα τα widgets
-  discord: Διχόνοια
-  discord_rpc: Discord Rich Presence
   exit: Εγκατάλειψη/έξοδο
-  github: Github
   links: Επίσημοι σύνδεσμοι
   relaunch: Ξεκίνησα ξανά
   version: Εκδοχή

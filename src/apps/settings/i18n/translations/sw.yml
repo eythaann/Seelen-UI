@@ -87,10 +87,7 @@ devtools:
 extras:
   clear_icons: Kashe ya icons za mfumo wazi
   clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
-  discord: Ugomvi
-  discord_rpc: Uwezo wa ubishani
   exit: Acha/exit
-  github: GitHub
   links: Viungo rasmi
   relaunch: Kuzindua tena
   version: Toleo

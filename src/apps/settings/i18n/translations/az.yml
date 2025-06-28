@@ -87,10 +87,7 @@ devtools:
 extras:
   clear_icons: Sistem nişanlar önbelleği təmizləyin
   clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
-  discord: Nifaq
-  discord_rpc: DİQQƏT DİQQƏT
   exit: Çıxmaq / çıxmaq
-  github: Gitub
   links: Rəsmi bağlantılar
   relaunch: Başsız
   version: Versiya

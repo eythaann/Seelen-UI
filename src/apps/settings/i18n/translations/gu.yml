@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: સ્પષ્ટ સિસ્ટમ ચિહ્નો કેશ
   clear_icons_tooltip: બધા વિજેટો પર સંપૂર્ણ અસર કરવા માટે ફરીથી પ્રારંભ કરવાની જરૂર પડી શકે છે
-  discord: વિખવાદ
-  discord_rpc: અસંગત હાજરી
   exit: છોડો/બહાર નીકળો
-  github: GitHub
   links: સત્તાવાર લિંક્સ
   relaunch: ફરીથી લોંચ કરો
   version: સંસ્કરણ

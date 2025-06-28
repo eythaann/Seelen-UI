@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les
     widgets
-  discord: Discord
-  discord_rpc: Présence riche en discorde
   exit: Quitter
-  github: GitHub
   links: Liens officiels
   relaunch: Redémarrer Seelen UI
   version: Version

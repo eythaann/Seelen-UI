@@ -92,10 +92,7 @@ extras:
   clear_icons_tooltip: >-
     Ang isang pag -restart ay maaaring kailanganin upang ganap na maisakatuparan
     ang lahat ng mga widget
-  discord: Discord
-  discord_rpc: Discord rich presence
   exit: Huminto/exit
-  github: Github
   links: Opisyal na mga link
   relaunch: Muling pagsasaayos
   version: Bersyon

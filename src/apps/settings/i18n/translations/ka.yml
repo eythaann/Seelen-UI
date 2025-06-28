@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: სუფთა სისტემის ხატები ქეში
   clear_icons_tooltip: გადატვირთვა შეიძლება საჭირო გახდეს, რომ სრულად იმოქმედოს ყველა ვიჯეტზე
-  discord: უთანასწორობა
-  discord_rpc: უთანხმოება მდიდარი ყოფნა
   exit: დატოვება/გასვლა
-  github: გითუბ
   links: ოფიციალური ბმულები
   relaunch: გაუქმება
   version: ვერსია

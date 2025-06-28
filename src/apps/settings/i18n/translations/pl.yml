@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     Do poprawnego uruchomienia wszystkich widżetów może być wymagane ponowne
     uruchomienie systemu
-  discord: Odrzuć
-  discord_rpc: Discord Rich Presence
   exit: Wyjdź
-  github: Github
   links: Oficjalne linki
   relaunch: Wznów
   version: Wersja

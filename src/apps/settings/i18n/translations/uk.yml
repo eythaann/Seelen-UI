@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Очистити кеш системних іконок
   clear_icons_tooltip: Може знадобитися перезапуск для повного набрання чинності для всіх віджетів
-  discord: Discord
-  discord_rpc: Багата на розбрат присутність
   exit: Закрити програму
-  github: GitHub
   links: Офіційні посилання
   relaunch: Перезапустити
   version: Версія

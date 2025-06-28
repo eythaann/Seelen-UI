@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Limpar cache de ícones do sistema
   clear_icons_tooltip: Pode ser necessário reiniciar para aplicar a todos os widgets
-  discord: Discord
-  discord_rpc: Presença rica em discórdia
   exit: Sair
-  github: GitHub
   links: Links Oficiais
   relaunch: Reiniciar
   version: Versão

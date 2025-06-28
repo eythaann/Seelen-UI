@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Sistem Simgeleri Önbelleğini Temizle
   clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
-  discord: Discord
-  discord_rpc: Uyumsuzluk Zengin Varlık
   exit: Çık
-  github: GitHub
   links: Resmi Bağlantılar
   relaunch: Yeniden Başlat
   version: Sürüm

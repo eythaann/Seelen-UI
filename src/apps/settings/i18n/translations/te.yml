@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: క్లియర్ సిస్టమ్ చిహ్నాలు కాష్
   clear_icons_tooltip: అన్ని విడ్జెట్లపై పూర్తిగా అమలులోకి రావడానికి పున art ప్రారంభం అవసరం
-  discord: అసమ్మతి
-  discord_rpc: అసమ్మతి గొప్ప ఉనికి
   exit: నిష్క్రమించు/నిష్క్రమించు
-  github: GitHub
   links: అధికారిక లింకులు
   relaunch: పునఃప్రారంభించండి
   version: 'సంస్కరణ: Telugu'

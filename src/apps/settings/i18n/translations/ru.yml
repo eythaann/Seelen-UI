@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     Для полного вступления в силу всех виджетов может потребоваться
     перезагрузка.
-  discord: Discord
-  discord_rpc: Богатое присутствие раздора
   exit: Выйти
-  github: GitHub
   links: Официальные ссылки
   relaunch: Перезапустить
   version: Версия

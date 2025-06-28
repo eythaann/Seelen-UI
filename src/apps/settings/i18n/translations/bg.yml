@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     Може да се наложи рестартиране, за да се прояви напълно ефектът върху всички
     джаджи.
-  discord: Раздор
-  discord_rpc: Богато присъствие на Discord
   exit: QUIT/EXIT
-  github: Github
   links: Официални връзки
   relaunch: Рестартиране
   version: Версия

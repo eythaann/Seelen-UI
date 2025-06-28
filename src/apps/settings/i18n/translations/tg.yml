@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Нишондиҳандаи системаи тозагӣ
   clear_icons_tooltip: Бозоғоз кардан мумкин аст, ки ба ҳама виджет пурра таъсир расонад
-  discord: Ихтисор
-  discord_rpc: Диаграммаи ҳузури сарватмандон
   exit: Курат / баромадан
-  github: Github
   links: Истеҳсоли расмӣ
   relaunch: Радкунӣ
   version: Версия

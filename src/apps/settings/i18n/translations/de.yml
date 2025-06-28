@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu
     aktivieren.
-  discord: Discord
-  discord_rpc: Diskursreiche Präsenz
   exit: Beenden
-  github: GitHub
   links: Offizielle Links
   relaunch: Neu starten
   version: Version

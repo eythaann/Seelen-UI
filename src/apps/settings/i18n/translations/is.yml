@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Hreinsa kerfistákn skyndiminni
   clear_icons_tooltip: Endurræsing gæti verið nauðsynleg til að taka gildi að fullu á allar búnaðir
-  discord: Ósamræmi
-  discord_rpc: Mismunandi rík nærvera
   exit: Hætta/hætta
-  github: GitHub
   links: Opinberir hlekkir
   relaunch: Fylgdu aftur
   version: Útgáfa

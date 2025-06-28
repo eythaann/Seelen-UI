@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Očistite predmemoriju ikona sustava
   clear_icons_tooltip: Ponovno pokretanje moglo bi se u potpunosti stupiti na sve widgete
-  discord: Nesklad
-  discord_rpc: Nesklad bogata prisutnost
   exit: Prestati/izaći
-  github: Ždrijeb
   links: Službene veze
   relaunch: Ponovno pokretanje
   version: Verzija

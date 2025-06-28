@@ -81,10 +81,7 @@ devtools:
 extras:
   clear_icons: 清除系统图标缓存
   clear_icons_tooltip: 可能需要重新启动才能对所有部件完全生效
-  discord: Discord
-  discord_rpc: 不和谐的丰富存在
   exit: 退出 / 关闭
-  github: GitHub
   links: 官方链接
   relaunch: 重启应用
   version: 版本

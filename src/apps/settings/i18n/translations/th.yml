@@ -85,10 +85,7 @@ devtools:
 extras:
   clear_icons: ล้างไอคอนระบบแคช
   clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
-  discord: ความไม่ลงรอยกัน
-  discord_rpc: ความไม่ลงรอยกันที่อุดมไปด้วย
   exit: ออก/ออก
-  github: คนอื่น ๆ
   links: ลิงค์อย่างเป็นทางการ
   relaunch: เปิดใหม่
   version: รุ่น

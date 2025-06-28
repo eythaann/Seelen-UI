@@ -80,6 +80,7 @@ export const RootSlice = createSlice({
     setLauncher: toBeSaved(reducers.setLauncher),
     setDevTools: toBeSaved(reducers.setDevTools),
     setUpdater: toBeSavedAndRestarted(reducers.setUpdater),
+    setDrpc: toBeSavedAndRestarted(reducers.setDrpc),
     setMonitors: toBeSaved(reducers.setMonitorsV2),
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;

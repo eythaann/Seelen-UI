@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Garbitu sistemaren ikonoak cachea
   clear_icons_tooltip: Berrabiarazi behar da widget guztietan erabat indarrean egon dadin
-  discord: Deskudun
-  discord_rpc: Discord aberatsaren presentzia
   exit: Irten / irten
-  github: Github
   links: Lotura Ofizialak
   relaunch: Errorefrika
   version: Bertsio

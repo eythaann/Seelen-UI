@@ -84,10 +84,7 @@ devtools:
 extras:
   clear_icons: ਸਿਸਟਮ ਆਈਕਾਨ ਕੈਚੇ ਸਾਫ਼ ਕਰੋ
   clear_icons_tooltip: ਸਾਰੇ ਵਿਜੇਟਸ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਹੋਣ ਲਈ ਇੱਕ ਰੀਸਟਾਰਟ ਦੀ ਜ਼ਰੂਰਤ ਹੋ ਸਕਦੀ ਹੈ
-  discord: ਵਿਵਾਦ
-  discord_rpc: ਡਿਸਪਲੇਅ ਅਮੀਰ ਮੌਜੂਦਗੀ
   exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
-  github: GitHub
   links: ਅਧਿਕਾਰਤ ਲਿੰਕ
   relaunch: ਮੁੜ-ਲਾਂਚ ਕਰੋ
   version: ਸੰਸਕਰਣ

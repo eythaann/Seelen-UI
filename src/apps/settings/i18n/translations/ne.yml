@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: स्पष्ट प्रणाली आइकनहरू क्यास
   clear_icons_tooltip: 'सबै विजेटहरूमा पूर्ण रूपमा प्रभाव लिनको लागि एक पुन: सुरू गर्न आवश्यक पर्दछ'
-  discord: छलफल दिनु
-  discord_rpc: निहित उपस्थिति
   exit: छोड्नुहोस् / बाहिर निस्कनुहोस्
-  github: Github
   links: आधिकारिक लिंकहरू
   relaunch: पुनःस्था
   version: रुपान्तर

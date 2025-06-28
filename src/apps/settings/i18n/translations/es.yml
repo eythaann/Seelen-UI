@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     Podría ser necesario reiniciar el sistema para que surta efecto en todos los
     widgets.
-  discord: Discord
-  discord_rpc: Presencia rica en discordia
   exit: Salir
-  github: GitHub
   links: Enlaces oficiales
   relaunch: Relanzamiento
   version: Versión

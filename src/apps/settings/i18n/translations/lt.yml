@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Išvalyti sistemos piktogramų talpyklą
   clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
-  discord: Nesantaika
-  discord_rpc: Nesutarimų turtingas buvimas
   exit: Mesti/išeiti
-  github: Github
   links: Oficialios nuorodos
   relaunch: Atsikrauti
   version: Versija

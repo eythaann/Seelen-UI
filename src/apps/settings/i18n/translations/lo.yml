@@ -86,10 +86,7 @@ devtools:
 extras:
   clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
   clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
-  discord: ຄວາມຂັດແຍ້ງ
-  discord_rpc: ການມີຄວາມຮັ່ງມີທີ່ປະທັບໃຈ
   exit: ອອກ/ອອກ
-  github: GitHub
   links: ການເຊື່ອມຕໍ່ຢ່າງເປັນທາງການ
   relaunch: ເປີດຄືນໃໝ່
   version: ຮຸ່ນ

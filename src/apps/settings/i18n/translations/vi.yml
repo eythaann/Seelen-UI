@@ -89,10 +89,7 @@ extras:
   clear_icons_tooltip: >-
     Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các
     tiện ích
-  discord: Bất hòa
-  discord_rpc: Sự hiện diện phong phú
   exit: Thoát/Thoát
-  github: GitHub
   links: Liên kết chính thức
   relaunch: Khởi động lại
   version: Phiên bản

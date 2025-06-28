@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Kloer System Symboler Cache
   clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
-  discord: Diskord
-  discord_rpc: Discord räich Präsenz
   exit: Ophalen / erausfannen
-  github: Github
   links: Offiziell Linken
   relaunch: Relatioun
   version: Erëm

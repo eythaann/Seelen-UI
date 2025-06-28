@@ -87,10 +87,7 @@ devtools:
 extras:
   clear_icons: Tühjenda süsteemi ikoonide vahemälu
   clear_icons_tooltip: Kõigi vidinate täielikuks jõustumiseks võib olla vajalik taaskäivitamine.
-  discord: Ebakõla
-  discord_rpc: Diskordia rikkalik kohalolek
   exit: Lõpeta/väljumine
-  github: Github
   links: Ametlikud lingid
   relaunch: Taaskäivitama
   version: Versioon

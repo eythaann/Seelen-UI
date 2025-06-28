@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat
     täysin voimaan.
-  discord: Erimielisyys
-  discord_rpc: Discord Rich Läsnäolo
   exit: Lopettaa/poistua
-  github: Github
   links: Viralliset linkit
   relaunch: Käynnistää uudelleen
   version: Versio

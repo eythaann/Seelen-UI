@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Storfa eiconau system glir
   clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
-  discord: Anghytgord
-  discord_rpc: Presenoldeb Cyfoethog Discord
   exit: Rhoi'r gorau iddi/allanfa
-  github: Github
   links: Dolenni Swyddogol
   relaunch: Hail -deirion
   version: Fersiwn

@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: صاف نظام شبیہیں کیشے
   clear_icons_tooltip: دوبارہ شروع کرنے کے لئے تمام ویجٹوں پر مکمل اثر ڈالنے کی ضرورت ہوسکتی ہے
-  discord: ڈسکارڈ
-  discord_rpc: ڈسکارڈ بھرپور موجودگی
   exit: چھوڑ دیں/باہر نکلیں
-  github: گٹ ہب
   links: لنکس
   relaunch: دوبارہ لانچ
   version: ورژن

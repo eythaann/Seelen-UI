@@ -1,15 +1,22 @@
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    LazyLock,
+};
 
 use discord_rich_presence::{
     activity::{Activity, Assets, Button, Party, Timestamps},
     DiscordIpc, DiscordIpcClient,
 };
 
-use crate::{error_handler::Result, is_local_dev};
+use crate::{
+    error_handler::Result, is_local_dev, state::application::FULL_STATE,
+    utils::now_timestamp_as_millis,
+};
 
 use super::spawn_named_thread;
 
 static DISCORD_IPC_CONNECTED: AtomicBool = AtomicBool::new(false);
+static START_TIME: LazyLock<i64> = LazyLock::new(|| now_timestamp_as_millis() as i64);
 
 static DETAILS: [&str; 22] = [
     "Personalizing my desktop",
@@ -60,6 +67,10 @@ static STATUSES: [&str; 20] = [
 ];
 
 pub fn start_discord_rpc() -> Result<()> {
+    if !FULL_STATE.load().settings().drpc {
+        return Ok(());
+    }
+
     spawn_named_thread("Discord IPC", || {
         let retry_conection_time = if is_local_dev() {
             std::time::Duration::from_secs(5)
@@ -118,7 +129,7 @@ pub fn get_activity() -> Activity<'static> {
                 .small_image("seelen_corp_logo2")
                 .small_text("Made by Seelen Corp."),
         )
-        .timestamps(Timestamps::new().start(1).end(261))
+        .timestamps(Timestamps::new().start(*START_TIME))
         .party(Party::new().id("seelen-ui-party").size([10, 10]))
         .buttons(vec![
             Button::new("🚀 Download Now!", "https://seelen.io/apps/seelen-ui"),

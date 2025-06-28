@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
-  discord: Perselisihan
-  discord_rpc: Percakapan kehadiran kaya
   exit: Berhenti/keluar
-  github: Github
   links: Pautan Rasmi
   relaunch: Pelancaran semula
   version: Versi

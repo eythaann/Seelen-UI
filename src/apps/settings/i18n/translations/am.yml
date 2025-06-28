@@ -86,10 +86,7 @@ devtools:
 extras:
   clear_icons: የስርዓት አዶዎች መሸጎጫ
   clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
-  discord: አለመግባባት
-  discord_rpc: ልዩ መገኘቱ
   exit: ማቆም / መውጣት
-  github: Github
   links: ኦፊሴላዊ አገናኞች
   relaunch: እንደገና መነገር
   version: ስሪት

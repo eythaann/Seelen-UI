@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Rensa cachen för systemikoner
   clear_icons_tooltip: En omstart kan krävas för att få full effekt på alla widgets
-  discord: Disharmoni
-  discord_rpc: Discord Rich Presence
   exit: Sluta/avsluta
-  github: Github
   links: Officiella länkar
   relaunch: Omstart
   version: Version

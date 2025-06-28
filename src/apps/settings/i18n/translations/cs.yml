@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Vymazání mezipaměti systémových ikon
   clear_icons_tooltip: Aby se plně projevily všechny widgety, mohlo by být nutné restartování.
-  discord: Discord
-  discord_rpc: Bohatý diskord Přítomnost
   exit: Ukončit
-  github: GitHub
   links: Oficiální odkazy
   relaunch: Znovu spustit
   version: Verze

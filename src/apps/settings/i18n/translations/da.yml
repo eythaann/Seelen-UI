@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Ryd cache for systemikoner
   clear_icons_tooltip: En genstart kan være nødvendig for at få fuld effekt på alle widgets
-  discord: Uenighed
-  discord_rpc: Discord Rich Presence
   exit: Afslut/exit
-  github: GitHub
   links: Officielle links
   relaunch: Relancering
   version: Version

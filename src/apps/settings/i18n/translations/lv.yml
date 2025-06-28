@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos
     logrīkos.
-  discord: Nesaskaņas
-  discord_rpc: Nesaskaņas Bagātīga klātbūtne
   exit: Atmest/iziet
-  github: Github
   links: Oficiālas saites
   relaunch: Atsākšana
   version: Versija

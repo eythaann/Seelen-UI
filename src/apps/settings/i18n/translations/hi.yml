@@ -90,10 +90,7 @@ extras:
   clear_icons_tooltip: >-
     सभी विजेट पर पूरी तरह से प्रभावी होने के लिए एक पुनरारंभ की आवश्यकता हो सकती
     है
-  discord: कलह
-  discord_rpc: समृद्ध उपस्थिति
   exit: छोड़ देना/बाहर निकलना
-  github: GitHub
   links: आधिकारिक संबंध
   relaunch: 'पुन: लॉन्च'
   version: संस्करण

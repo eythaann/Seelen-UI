@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Cancella la cache delle icone di sistema
   clear_icons_tooltip: Potrebbe essere necessario un riavvio per avere effetto su tutti i widget.
-  discord: Discord
-  discord_rpc: Presenza ricca di discordia
   exit: Esci
-  github: GitHub
   links: Link Ufficiali
   relaunch: Riavvia
   version: Versione

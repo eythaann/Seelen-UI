@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Systeempictogrammen cache wissen
   clear_icons_tooltip: Er kan een herstart nodig zijn om volledig effect te hebben op alle widgets
-  discord: Discord
-  discord_rpc: Discord Rijke Aanwezigheid
   exit: Stop/exit
-  github: GitHub
   links: Officiële links
   relaunch: Opnieuw starten
   version: Versie

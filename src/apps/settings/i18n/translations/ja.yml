@@ -84,10 +84,7 @@ devtools:
 extras:
   clear_icons: システムアイコンキャッシュをクリアする
   clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
-  discord: Discordコミュニティー
-  discord_rpc: 不協和音の豊かな存在感
   exit: SeelenUIを終了
-  github: GitHubレポジトリ
   links: リンク
   relaunch: SeelenUIを再起動
   version: バージョン

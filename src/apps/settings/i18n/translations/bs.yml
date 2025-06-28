@@ -88,10 +88,7 @@ devtools:
 extras:
   clear_icons: Clear System Icons predmemorija
   clear_icons_tooltip: Može se ponovo pokrenuti za u potpunosti stupiti na snagu na svim widgetima
-  discord: Nesklad
-  discord_rpc: Discord bogata prisustvo
   exit: Prestanite / izlaz
-  github: Github
   links: Službene veze
   relaunch: Ponovno pokretanje
   version: Verzija

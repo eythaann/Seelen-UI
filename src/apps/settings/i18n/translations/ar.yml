@@ -86,10 +86,7 @@ devtools:
 extras:
   clear_icons: مسح ذاكرة التخزين المؤقت لأيقونات النظام
   clear_icons_tooltip: قد تكون إعادة التشغيل مطلوبة لتدخل جميع الأدوات حيز التنفيذ بالكامل
-  discord: ديسكورد
-  discord_rpc: التواجد الغني بالخلافات
   exit: إنهاء/خروج
-  github: جيت هب
   links: الروابط الرسمية
   relaunch: إعادة التشغيل
   version: الإصدار
