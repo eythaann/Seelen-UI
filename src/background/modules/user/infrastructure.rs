@@ -24,7 +24,7 @@ pub fn register_user_events() {
                 SeelenEvent::UserFolderChanged,
                 FolderChangedArgs {
                     of_folder: folder,
-                    content: get_user_folder_content(folder).ok(),
+                    content: Some(get_user_folder_content(folder)),
                 }
             ));
         }
@@ -37,11 +37,11 @@ pub fn get_user() -> User {
 }
 
 #[tauri::command(async)]
-pub fn get_user_folder_content(folder_type: FolderType) -> Result<Vec<File>> {
+pub fn get_user_folder_content(folder_type: FolderType) -> Vec<File> {
     let manager = trace_lock!(USER_MANAGER);
     match manager.folders.get(&folder_type) {
-        Some(details) => Ok(details.content.clone()),
-        None => Err("Invalid folder type".into()),
+        Some(details) => details.content.clone(),
+        None => Vec::new(),
     }
 }
 

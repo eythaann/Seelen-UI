@@ -243,15 +243,21 @@ impl UserManager {
         };
 
         for folder in FolderType::values() {
-            let folder_path = Self::get_path_from_folder(folder)?;
-            instance.folders.insert(
-                *folder,
-                UserFolderDetails {
-                    path: folder_path.clone(),
-                    limit: 20,
-                    content: Self::get_folder_content(folder_path, 20)?,
-                },
-            );
+            match Self::get_path_from_folder(folder) {
+                Ok(folder_path) => {
+                    instance.folders.insert(
+                        *folder,
+                        UserFolderDetails {
+                            path: folder_path.clone(),
+                            limit: 20,
+                            content: Self::get_folder_content(folder_path, 20)?,
+                        },
+                    );
+                }
+                Err(err) => {
+                    log::error!("Failed to get path for folder {folder:?}: {err:?}");
+                }
+            }
         }
 
         instance.folder_watcher = Some(instance.create_file_watcher()?);

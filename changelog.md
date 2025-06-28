@@ -7,6 +7,9 @@
 ### refactor
 - icon packs implementation.
 
+### fix
+- app crashing on start by missing user folder (desktop, pictures, etc).
+
 ## [2.3.8]
 ### enhancements
 - show a warning to users with monitors drivers disabled.
