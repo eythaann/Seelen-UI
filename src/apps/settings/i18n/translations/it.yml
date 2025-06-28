@@ -89,6 +89,7 @@ extras:
   clear_icons: Cancella la cache delle icone di sistema
   clear_icons_tooltip: Potrebbe essere necessario un riavvio per avere effetto su tutti i widget.
   discord: Discord
+  discord_rpc: Presenza ricca di discordia
   exit: Esci
   github: GitHub
   links: Link Ufficiali
@@ -107,10 +108,11 @@ general:
     selected: Temi attivi
 header:
   labels:
-    developer: Sviluppatore
+    developer: Per gli sviluppatori
     extras: Extra
     general: Generale
     home: Home
+    icon_pack_editor: Icone in cache
     iconpack: Pacchetti di icone
     monitors: Monitor
     plugin: Plugin
@@ -300,6 +302,7 @@ weg:
     full_width: Larghezza dello schermo intero
     min_content: Piccolo quanto può essere
   padding: Spaziatura
+  show_end_task: Mostra la fine dell'attività nella barra delle applicazioni
   width: Larghezza
 widget:
   enable: Abilitare questo widget

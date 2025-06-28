@@ -88,6 +88,7 @@ extras:
   clear_icons: Sistem nişanlar önbelleği təmizləyin
   clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
   discord: Nifaq
+  discord_rpc: DİQQƏT DİQQƏT
   exit: Çıxmaq / çıxmaq
   github: Gitub
   links: Rəsmi bağlantılar
@@ -106,10 +107,11 @@ general:
     selected: Aktiv Mövzular
 header:
   labels:
-    developer: İnkişaf etdirici
+    developer: Yaradıcılar üçün
     extras: Əlavələr
     general: General
     home: Evdə
+    icon_pack_editor: Keşişli nişanlar
     iconpack: Icon paketləri
     monitors: Monitorlar
     plugin: Plaginlər
@@ -299,6 +301,7 @@ weg:
     full_width: Tam ekran eni
     min_content: Ola bildiyi qədər kiçik
   padding: Paddend
+  show_end_task: Tapşırıq çubuğunda son tapşırığı göstərin
   width: Geniştəhər
 widget:
   enable: Bu widgetı aktivləşdirin

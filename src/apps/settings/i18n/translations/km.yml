@@ -89,6 +89,7 @@ extras:
   clear_icons_tooltip: >-
     ការចាប់ផ្តើមឡើងវិញអាចត្រូវបានតម្រូវឱ្យមានប្រសិទ្ធិភាពពេញលេញលើធាតុក្រាហ្វិកទាំងអស់
   discord: ការមិនចុះសម្រុងគ្នា។
+  discord_rpc: វត្តមានសម្បូរបែប
   exit: ចេញ/ចេញ
   github: GitHub
   links: តំណភ្ជាប់ផ្លូវការ
@@ -107,10 +108,11 @@ general:
     selected: ស្បែកសកម្ម
 header:
   labels:
-    developer: អ្នកអភិវឌ្ឍន៍
+    developer: សម្រាប់អ្នកអភិវឌ្ឍន៍
     extras: ការបន្ថែម
     general: ទូទៅ
     home: ផ្ទហ
+    icon_pack_editor: រូបតំណាងឃ្លាំងសម្ងាត់
     iconpack: រូបតំណាងកញ្ចប់
     monitors: ម៉ូនីទ័រ
     plugin: រអារ
@@ -296,6 +298,7 @@ weg:
     full_width: ទទឹងពេញអេក្រង់
     min_content: តូចតាមដែលអាចធ្វើបាន
   padding: ទ្រនាប់
+  show_end_task: បង្ហាញភារកិច្ចបញ្ចប់នៅក្នុងរបារភារកិច្ច
   width: ទទឹង
 widget:
   enable: បើកដំណើរការធាតុក្រាហ្វិកនេះ

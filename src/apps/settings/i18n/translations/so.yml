@@ -92,6 +92,7 @@ extras:
     Dib-u-bilaabi kara ayaa loo baahan karaa inuu si buuxda u dhaqan geliyo
     dhammaan waxyaabaha widgets
   discord: Huf
+  discord_rpc: Jooji Jooji Joog
   exit: Jooji / bixitaan
   github: GitHub
   links: Xiriirinta rasmiga ah
@@ -110,10 +111,11 @@ general:
     selected: Mawduucyada Firfircoon
 header:
   labels:
-    developer: Abuuris
+    developer: Loogu talagalay horumarka
     extras: Ka duwan daro
     general: Guud
     home: Guri
+    icon_pack_editor: Calaamadaha lagu dhejiyay
     iconpack: Xirmooyinka icon
     monitors: Kormeerayaasha
     plugin: Pluins
@@ -304,6 +306,7 @@ weg:
     full_width: Ballaca shaashadda oo dhan
     min_content: Yaryar sida ay noqon karto
   padding: Suur
+  show_end_task: Muuji shaqada dhamaadka ee Tooska
   width: Ballac
 widget:
   enable: U oggolow widget-kaan

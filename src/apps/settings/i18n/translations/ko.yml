@@ -86,6 +86,7 @@ extras:
   clear_icons: 시스템 아이콘 캐시 지우기
   clear_icons_tooltip: 모든 위젯에 완전히 적용하려면 다시 시작해야 할 수 있습니다.
   discord: 디스코드
+  discord_rpc: 불협화음 풍부한 존재감
   exit: 종료/나가기
   github: 깃허브
   links: 공식 링크
@@ -104,10 +105,11 @@ general:
     selected: 현재 테마
 header:
   labels:
-    developer: 개발자
+    developer: 개발자용
     extras: 추가 정보
     general: 일반
     home: 홈
+    icon_pack_editor: 캐시된 아이콘
     iconpack: 아이콘 팩
     monitors: 모니터
     plugin: 플러그인
@@ -287,6 +289,7 @@ weg:
     full_width: 전체 화면 너비
     min_content: 최대한 작게
   padding: 안쪽 여백
+  show_end_task: 작업 표시줄에 종료 작업 표시
   width: 너비
 widget:
   enable: 이 위젯 활성화

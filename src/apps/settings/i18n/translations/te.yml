@@ -89,6 +89,7 @@ extras:
   clear_icons: క్లియర్ సిస్టమ్ చిహ్నాలు కాష్
   clear_icons_tooltip: అన్ని విడ్జెట్లపై పూర్తిగా అమలులోకి రావడానికి పున art ప్రారంభం అవసరం
   discord: అసమ్మతి
+  discord_rpc: అసమ్మతి గొప్ప ఉనికి
   exit: నిష్క్రమించు/నిష్క్రమించు
   github: GitHub
   links: అధికారిక లింకులు
@@ -107,10 +108,11 @@ general:
     selected: క్రియాశీల థీమ్‌లు
 header:
   labels:
-    developer: డెవలపర్
+    developer: డెవలపర్‌ల కోసం
     extras: ఎక్స్‌ట్రాలు
     general: జనరల్
     home: హోమ్
+    icon_pack_editor: కాష్ చేసిన చిహ్నాలు
     iconpack: ఐకాన్ ప్యాక్‌లు
     monitors: మానిటర్లు
     plugin: ప్లగిన్లు
@@ -298,6 +300,7 @@ weg:
     full_width: పూర్తి స్క్రీన్ వెడల్పు
     min_content: వీలైనంత చిన్నది
   padding: పాడింగ్
+  show_end_task: టాస్క్‌బార్‌లో ముగింపు పనిని చూపించు
   width: వెడల్పు
 widget:
   enable: ఈ విడ్జెట్‌ను ప్రారంభించండి

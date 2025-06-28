@@ -91,6 +91,7 @@ extras:
     Для полного вступления в силу всех виджетов может потребоваться
     перезагрузка.
   discord: Discord
+  discord_rpc: Богатое присутствие раздора
   exit: Выйти
   github: GitHub
   links: Официальные ссылки
@@ -109,10 +110,11 @@ general:
     selected: Активные темы
 header:
   labels:
-    developer: Разработчик
+    developer: Для разработчиков
     extras: Доп. информация
     general: Общее
     home: Главная страница
+    icon_pack_editor: Кэшированные иконки
     iconpack: Пакеты иконок
     monitors: Мониторы
     plugin: Плагины
@@ -302,6 +304,7 @@ weg:
     full_width: По ширине экрана
     min_content: Минимальная
   padding: Внутренний отступ
+  show_end_task: Показать завершение задачи на панели задач
   width: Ширина
 widget:
   enable: Включите этот виджет

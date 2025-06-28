@@ -89,6 +89,7 @@ extras:
   clear_icons: სუფთა სისტემის ხატები ქეში
   clear_icons_tooltip: გადატვირთვა შეიძლება საჭირო გახდეს, რომ სრულად იმოქმედოს ყველა ვიჯეტზე
   discord: უთანასწორობა
+  discord_rpc: უთანხმოება მდიდარი ყოფნა
   exit: დატოვება/გასვლა
   github: გითუბ
   links: ოფიციალური ბმულები
@@ -107,10 +108,11 @@ general:
     selected: აქტიური თემები
 header:
   labels:
-    developer: დეველოპერი ქალი
+    developer: დეველოპერებისთვის
     extras: ზედმეტი
     general: გენერალი
     home: სახლი
+    icon_pack_editor: დაცული ხატები
     iconpack: ხატის პაკეტები
     monitors: მონიტორები
     plugin: ამხებო
@@ -300,6 +302,7 @@ weg:
     full_width: სრული ეკრანის სიგანე
     min_content: რაც შეიძლება პატარა იყოს
   padding: ბადება
+  show_end_task: აჩვენეთ საბოლოო დავალება დავალების ზოლში
   width: სიგანე
 widget:
   enable: ჩართეთ ეს ვიჯეტი

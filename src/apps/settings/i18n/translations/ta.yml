@@ -90,6 +90,7 @@ extras:
   clear_icons: கணினி ஐகான்கள் தற்காலிக சேமிப்பை அழிக்கவும்
   clear_icons_tooltip: அனைத்து விட்ஜெட்களிலும் முழுமையாக நடைமுறைக்கு வர மறுதொடக்கம் தேவைப்படலாம்
   discord: கருத்து வேறுபாடு
+  discord_rpc: முரண்பாடு பணக்கார இருப்பு
   exit: வெளியேறு/வெளியேறு
   github: கிட்ஹப்
   links: அதிகாரப்பூர்வ இணைப்புகள்
@@ -108,10 +109,11 @@ general:
     selected: செயலில் உள்ள தீம்கள்
 header:
   labels:
-    developer: டெவலப்பர்
+    developer: டெவலப்பர்களுக்கு
     extras: கூடுதல்
     general: பொது
     home: வீடு
+    icon_pack_editor: தற்காலிக சேமிப்பு சின்னங்கள்
     iconpack: ஐகான் பொதிகள்
     monitors: கண்காணிப்பாளர்கள்
     plugin: செருகுநிரல்கள்
@@ -299,6 +301,7 @@ weg:
     full_width: முழு திரை அகலம்
     min_content: முடிந்தவரை சிறியது
   padding: திணிப்பு
+  show_end_task: பணிப்பட்டியில் இறுதி பணியைக் காட்டு
   width: அகலம்
 widget:
   enable: இந்த விட்ஜெட்டை இயக்கவும்

@@ -91,6 +91,7 @@ extras:
     Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq
     il-widgets kollha
   discord: Diskordja
+  discord_rpc: Preżenza rikka fid-diskordja
   exit: Nieqaf / ħruġ
   github: Github
   links: Rabtiet uffiċjali
@@ -109,10 +110,11 @@ general:
     selected: Temi Attivi
 header:
   labels:
-    developer: Żviluppatur
+    developer: Għall-iżviluppaturi
     extras: Ekstras
     general: Ġenerali
     home: Id-dar
+    icon_pack_editor: Ikoni cache
     iconpack: Pakketti tal-ikona
     monitors: Monitors
     plugin: Plugins
@@ -300,6 +302,7 @@ weg:
     full_width: Wisa 'tal-iskrin sħiħ
     min_content: Żgħir kemm jista’ jkun
   padding: Ikkuttunar
+  show_end_task: Uri l-kompitu finali fit-taskbar
   width: Wisa '
 widget:
   enable: Ippermetti dan il-widget

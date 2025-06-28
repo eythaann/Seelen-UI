@@ -90,6 +90,7 @@ extras:
     Újraindítás szükséges lehet ahhoz, hogy az összes widget teljes mértékben
     érvénybe lépjen.
   discord: Viszály
+  discord_rpc: Diszharmónia gazdag jelenlét
   exit: Kilépés/kilépés
   github: Github
   links: Hivatalos linkek
@@ -108,10 +109,11 @@ general:
     selected: Aktív témák
 header:
   labels:
-    developer: Fejlesztő
+    developer: Fejlesztők számára
     extras: Extrák
     general: Tábornok
     home: Otthon
+    icon_pack_editor: Cache-olt ikonok
     iconpack: Ikon csomagok
     monitors: Monitorok
     plugin: Plugins
@@ -299,6 +301,7 @@ weg:
     full_width: Teljes képernyő szélesség
     min_content: Amennyire csak lehet
   padding: Párnázás
+  show_end_task: A feladat befejezésének megjelenítése a feladatsorban
   width: Szélesség
 widget:
   enable: Engedélyezze ezt a widgetet

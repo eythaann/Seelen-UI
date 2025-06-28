@@ -89,6 +89,7 @@ extras:
   clear_icons: Clear System Icons predmemorija
   clear_icons_tooltip: Može se ponovo pokrenuti za u potpunosti stupiti na snagu na svim widgetima
   discord: Nesklad
+  discord_rpc: Discord bogata prisustvo
   exit: Prestanite / izlaz
   github: Github
   links: Službene veze
@@ -107,10 +108,11 @@ general:
     selected: Aktivne teme
 header:
   labels:
-    developer: Programer
+    developer: Za programere
     extras: Dodaci
     general: Opći
     home: Dom
+    icon_pack_editor: Keširane ikone
     iconpack: Paketa ikona
     monitors: Monitori
     plugin: Dodaci
@@ -298,6 +300,7 @@ weg:
     full_width: Cijela širina ekrana
     min_content: Manji koliko može
   padding: Obloga
+  show_end_task: Prikaži krajnji zadatak u traci zadataka
   width: Širina
 widget:
   enable: Omogući ovaj widget

@@ -91,6 +91,7 @@ extras:
     Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu
     aktivieren.
   discord: Discord
+  discord_rpc: Diskursreiche Präsenz
   exit: Beenden
   github: GitHub
   links: Offizielle Links
@@ -109,10 +110,11 @@ general:
     selected: Aktive Themen
 header:
   labels:
-    developer: Entwickler
+    developer: Für Entwickler
     extras: Extras
     general: Allgemein
     home: Home
+    icon_pack_editor: Zwischengespeicherte Icons
     iconpack: Icon Packs
     monitors: Monitore
     plugin: Plugins
@@ -305,6 +307,7 @@ weg:
     full_width: Volle Bildschirmbreite
     min_content: So klein wie möglich
   padding: Polsterung
+  show_end_task: Beendete Aufgabe in der Taskleiste anzeigen
   width: Breite
 widget:
   enable: Aktivieren Sie dieses Widget

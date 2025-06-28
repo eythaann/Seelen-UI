@@ -35,6 +35,7 @@ const initialState: RootState = {
   iconPacks: [],
   selectedThemes: [],
   devTools: false,
+  drpc: true,
   language: navigator.language.split('-')[0] || 'en',
   dateFormat: 'ddd D MMM, hh:mm A',
   colors: UIColors.default().inner,

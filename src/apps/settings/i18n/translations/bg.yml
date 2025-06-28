@@ -91,6 +91,7 @@ extras:
     Може да се наложи рестартиране, за да се прояви напълно ефектът върху всички
     джаджи.
   discord: Раздор
+  discord_rpc: Богато присъствие на Discord
   exit: QUIT/EXIT
   github: Github
   links: Официални връзки
@@ -109,10 +110,11 @@ general:
     selected: Активни теми
 header:
   labels:
-    developer: Разработчик
+    developer: За разработчици
     extras: Екстри
     general: Общ
     home: Начало
+    icon_pack_editor: Икони в кеша
     iconpack: Пакети с икони
     monitors: Монитори
     plugin: Плъгини
@@ -318,6 +320,7 @@ weg:
     full_width: Пълна ширина на екрана
     min_content: Малък, колкото може да бъде
   padding: Подплънки
+  show_end_task: Показване на крайната задача в лентата на задачите
   width: Ширина
 widget:
   enable: Активиране на тази джаджа

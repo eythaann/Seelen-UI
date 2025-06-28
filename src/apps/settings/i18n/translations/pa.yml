@@ -85,6 +85,7 @@ extras:
   clear_icons: ਸਿਸਟਮ ਆਈਕਾਨ ਕੈਚੇ ਸਾਫ਼ ਕਰੋ
   clear_icons_tooltip: ਸਾਰੇ ਵਿਜੇਟਸ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਹੋਣ ਲਈ ਇੱਕ ਰੀਸਟਾਰਟ ਦੀ ਜ਼ਰੂਰਤ ਹੋ ਸਕਦੀ ਹੈ
   discord: ਵਿਵਾਦ
+  discord_rpc: ਡਿਸਪਲੇਅ ਅਮੀਰ ਮੌਜੂਦਗੀ
   exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
   github: GitHub
   links: ਅਧਿਕਾਰਤ ਲਿੰਕ
@@ -103,10 +104,11 @@ general:
     selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ
 header:
   labels:
-    developer: ਵਿਕਾਸਕਾਰ
+    developer: ਡਿਵੈਲਪਰਾਂ ਲਈ
     extras: ਵਾਧੂ
     general: ਜਨਰਲ
     home: ਘਰ
+    icon_pack_editor: ਕੈਸ਼ਡ ਆਈਕਾਨ
     iconpack: ਆਈਕਾਨ ਪੈਕ
     monitors: ਨਿਗਰਾਨੀ ਕਰਦਾ ਹੈ
     plugin: ਪਲੱਗਇਨ
@@ -294,6 +296,7 @@ weg:
     full_width: ਪੂਰੀ ਸਕ੍ਰੀਨ ਚੌੜਾਈ
     min_content: ਛੋਟਾ ਜਿੰਨਾ ਹੋ ਸਕਦਾ ਹੈ
   padding: ਪੈਡਿੰਗ
+  show_end_task: ਟਾਸਕਬਾਰ ਵਿੱਚ ਅੰਤ ਦਾ ਕੰਮ ਵੇਖੋ
   width: ਚੌੜਾਈ
 widget:
   enable: ਇਸ ਵਿਦਜਿਟ ਨੂੰ ਸਮਰੱਥ ਕਰੋ

@@ -89,6 +89,7 @@ extras:
   clear_icons: Sistem Simgeleri Önbelleğini Temizle
   clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
   discord: Discord
+  discord_rpc: Uyumsuzluk Zengin Varlık
   exit: Çık
   github: GitHub
   links: Resmi Bağlantılar
@@ -107,10 +108,11 @@ general:
     selected: Aktif Temalar
 header:
   labels:
-    developer: Geliştirici
+    developer: Geliştiriciler için
     extras: Ekstralar
     general: Genel
     home: Ana Sayfa
+    icon_pack_editor: Önbelleğe Alınmış Simgeler
     iconpack: Simge Paketleri
     monitors: Monitörler
     plugin: Eklentiler
@@ -225,8 +227,8 @@ start:
   message: >-
     Seelen UI'a hoş geldiniz! Windows deneyiminizi geliştirmek için entegre 
     döşeme pencere yöneticisi ile en iyi masaüstü ortamı. Kullanıcı dostu
-    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevde yeni
-    bir çağı keşfedin.
+    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevde yeni bir
+    çağı keşfedin.
   message_accent: Verimliliğinizi stil ile optimize edin!
   title: Hoş Geldiniz!
 toolbar:
@@ -300,6 +302,7 @@ weg:
     full_width: Tam ekran genişliği
     min_content: Olabildiğince küçük
   padding: İç Boşluk
+  show_end_task: Görev çubuğunda görevi sonlandırmayı göster
   width: Genişlik
 widget:
   enable: Bu widget'ı etkinleştir

@@ -91,6 +91,7 @@ extras:
     सभी विजेट पर पूरी तरह से प्रभावी होने के लिए एक पुनरारंभ की आवश्यकता हो सकती
     है
   discord: कलह
+  discord_rpc: समृद्ध उपस्थिति
   exit: छोड़ देना/बाहर निकलना
   github: GitHub
   links: आधिकारिक संबंध
@@ -109,10 +110,11 @@ general:
     selected: सक्रिय विषय-वस्तु
 header:
   labels:
-    developer: डेवलपर
+    developer: डेवलपर्स के लिए
     extras: अतिरिक्त
     general: सामान्य
     home: घर
+    icon_pack_editor: कैश्ड आइकन
     iconpack: आइकन पैक
     monitors: पर नज़र रखता है
     plugin: प्लग-इन
@@ -301,6 +303,7 @@ weg:
     full_width: पूर्ण स्क्रीन चौड़ाई
     min_content: जितना छोटा हो सकता है
   padding: गद्दी
+  show_end_task: टास्कबार में अंतिम कार्य दिखाएं
   width: चौड़ाई
 widget:
   enable: इस विजेट को सक्षम करें

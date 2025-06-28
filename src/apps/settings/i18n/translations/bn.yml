@@ -91,6 +91,7 @@ extras:
     সমস্ত উইজেটগুলিতে পুরোপুরি কার্যকর করার জন্য একটি পুনঃসূচনা প্রয়োজন হতে
     পারে
   discord: মতবিরোধ
+  discord_rpc: বিশৃঙ্খলা সমৃদ্ধ উপস্থিতি
   exit: প্রস্থান/প্রস্থান
   github: গিথুব
   links: অফিসিয়াল লিঙ্ক
@@ -109,10 +110,11 @@ general:
     selected: সক্রিয় থিম
 header:
   labels:
-    developer: বিকাশকারী
+    developer: বিকাশকারীদের জন্য
     extras: অতিরিক্ত
     general: সাধারণ
     home: বাড়ি
+    icon_pack_editor: ক্যাশেড আইকন
     iconpack: আইকন প্যাকস
     monitors: মনিটর
     plugin: প্লাগইন
@@ -302,6 +304,7 @@ weg:
     full_width: পূর্ণ পর্দা প্রস্থ
     min_content: যতটা সম্ভব ছোট
   padding: প্যাডিং
+  show_end_task: টাস্কবারে শেষ টাস্ক দেখান
   width: প্রস্থ
 widget:
   enable: এই উইজেট সক্ষম করুন

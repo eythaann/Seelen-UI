@@ -89,6 +89,7 @@ extras:
   clear_icons: Storfa eiconau system glir
   clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
   discord: Anghytgord
+  discord_rpc: Presenoldeb Cyfoethog Discord
   exit: Rhoi'r gorau iddi/allanfa
   github: Github
   links: Dolenni Swyddogol
@@ -107,10 +108,11 @@ general:
     selected: Themâu Gweithredol
 header:
   labels:
-    developer: Natblygwr
+    developer: Ar gyfer datblygwyr
     extras: Hetiau
     general: Gyffredinol
     home: Nghartrefi
+    icon_pack_editor: Eiconau wedi'u storio
     iconpack: Pecynnau eicon
     monitors: Monitorau
     plugin: Ategion
@@ -302,6 +304,7 @@ weg:
     full_width: Lled sgrin lawn
     min_content: Bach ag y gall fod
   padding: Padin
+  show_end_task: Dangos tasg diwedd yn y bar tasgau
   width: Lled
 widget:
   enable: Galluogi'r teclyn hwn

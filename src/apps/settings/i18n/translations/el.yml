@@ -90,6 +90,7 @@ extras:
   clear_icons: Εκκαθάριση προσωρινής μνήμης εικονιδίων συστήματος
   clear_icons_tooltip: Μπορεί να απαιτηθεί επανεκκίνηση για να ισχύσει πλήρως σε όλα τα widgets
   discord: Διχόνοια
+  discord_rpc: Discord Rich Presence
   exit: Εγκατάλειψη/έξοδο
   github: Github
   links: Επίσημοι σύνδεσμοι
@@ -108,10 +109,11 @@ general:
     selected: Ενεργά θέματα
 header:
   labels:
-    developer: Προγραμματιστής
+    developer: Για προγραμματιστές
     extras: Πρόσθετα
     general: Γενικός
     home: Σπίτι
+    icon_pack_editor: Αποθηκευμένα εικονίδια
     iconpack: Πακέτα εικονιδίων
     monitors: Παρακολουθεί
     plugin: Plugins
@@ -303,6 +305,7 @@ weg:
     full_width: Πλάτος πλήρους οθόνης
     min_content: Όσο μικρό μπορεί να είναι
   padding: Υλικό παραγεμίσματος
+  show_end_task: Εμφάνιση της εργασίας τέλους στη γραμμή εργασιών
   width: Πλάτος
 widget:
   enable: Ενεργοποιήστε αυτό το widget

@@ -73,7 +73,6 @@ apps_configurations:
   new: Novo
   search: Pesquisar
   swap: Trocar
-
 cancel: Cancelar
 close: Fechar
 delete: Excluir
@@ -90,6 +89,7 @@ extras:
   clear_icons: Limpar cache de ícones do sistema
   clear_icons_tooltip: Pode ser necessário reiniciar para aplicar a todos os widgets
   discord: Discord
+  discord_rpc: Presença rica em discórdia
   exit: Sair
   github: GitHub
   links: Links Oficiais
@@ -108,10 +108,11 @@ general:
     selected: Temas ativos
 header:
   labels:
-    developer: Desenvolvedor
+    developer: Para desenvolvedores
     extras: Extras
     general: Geral
     home: Início
+    icon_pack_editor: Ícones em cache
     iconpack: Pacotes de Ícones
     monitors: Monitores
     plugin: Plugins
@@ -301,6 +302,7 @@ weg:
     full_width: Largura de tela inteira
     min_content: Pequeno como pode ser
   padding: Preenchimento
+  show_end_task: Mostrar tarefa final na barra de tarefas
   width: Largura
 widget:
   enable: Ativar esse widget

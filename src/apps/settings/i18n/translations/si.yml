@@ -90,6 +90,7 @@ extras:
     සියලුම විජට් සඳහා සම්පූර්ණයෙන්ම බලාත්මක වීමට නැවත ආරම්භ කිරීම අවශ්ය විය
     හැකිය
   discord: අසමගිය
+  discord_rpc: Discore පොහොසත් පැමිණීම
   exit: පිටවීම/පිටවීම
   github: GitHub
   links: නිල සබැඳි
@@ -108,10 +109,11 @@ general:
     selected: ක්රියාකාරී තේමාවන්
 header:
   labels:
-    developer: සංවර්ධකයා
+    developer: සංවර්ධකයින් සඳහා
     extras: අමතර
     general: ජනරාල්
     home: මුල් පිටුව
+    icon_pack_editor: හැඹිලි අයිකන
     iconpack: අයිකන ඇසුරුම්
     monitors: නිරීක්ෂකයින්
     plugin: ප්ලගීන
@@ -297,6 +299,7 @@ weg:
     full_width: සම්පූර්ණ තිර පළල
     min_content: හැකි තරම් කුඩා
   padding: පෑඩිං
+  show_end_task: කාර්ය තීරුවේ අවසන් කාර්යය පෙන්වන්න
   width: පළල
 widget:
   enable: මෙම විජට් සක්රීය කරන්න

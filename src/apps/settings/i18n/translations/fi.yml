@@ -91,6 +91,7 @@ extras:
     Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat
     täysin voimaan.
   discord: Erimielisyys
+  discord_rpc: Discord Rich Läsnäolo
   exit: Lopettaa/poistua
   github: Github
   links: Viralliset linkit
@@ -109,10 +110,11 @@ general:
     selected: Aktiiviset teemat
 header:
   labels:
-    developer: Kehittäjä
+    developer: Kehittäjille
     extras: Lisävarusteet
     general: Yleinen
     home: Kotiin
+    icon_pack_editor: Välimuistissa olevat kuvakkeet
     iconpack: Kuvakepaketit
     monitors: Näytöt
     plugin: Liitännäiset
@@ -302,6 +304,7 @@ weg:
     full_width: Koko näytön leveys
     min_content: Niin pieni kuin voi olla
   padding: Pehmuste
+  show_end_task: Näyttää lopetetun tehtävän tehtäväpalkissa
   width: Leveys
 widget:
   enable: Ota tämä widget käyttöön

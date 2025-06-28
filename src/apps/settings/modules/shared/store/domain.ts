@@ -28,7 +28,7 @@ export interface RootState extends Settings {
   widgets: Widget[];
   profiles: Profile[];
   connectedMonitors: PhysicalMonitor[];
-  // migrated since v2.1.0
+  // migrated since v2.1.0 check src\apps\settings\modules\shared\store\app\StateBridge.ts
   fancyToolbar: FancyToolbarSettings;
   seelenweg: SeelenWegSettings;
   wall: SeelenWallSettings;

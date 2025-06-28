@@ -89,6 +89,7 @@ extras:
   clear_icons: Очистити кеш системних іконок
   clear_icons_tooltip: Може знадобитися перезапуск для повного набрання чинності для всіх віджетів
   discord: Discord
+  discord_rpc: Багата на розбрат присутність
   exit: Закрити програму
   github: GitHub
   links: Офіційні посилання
@@ -107,10 +108,11 @@ general:
     selected: Активні теми
 header:
   labels:
-    developer: Інструменти розробника
+    developer: Для розробників
     extras: Додатково
     general: Загальні налаштування
     home: Домашня сторінка
+    icon_pack_editor: Кешовані іконки
     iconpack: Пакети іконок
     monitors: Монітори
     plugin: Плагіни
@@ -298,6 +300,7 @@ weg:
     full_width: На всю ширину екрана
     min_content: Якнайменший
   padding: Внутрішній відступ
+  show_end_task: Показати завершене завдання на панелі завдань
   width: Ширина
 widget:
   enable: Увімкніть цей віджет

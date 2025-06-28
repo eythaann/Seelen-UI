@@ -91,6 +91,7 @@ extras:
     یک راه اندازی مجدد می تواند مورد نیاز باشد تا به طور کامل در همه ویجت ها
     تأثیر بگذارد
   discord: اختلاف
+  discord_rpc: حضور غنی از اختلاف
   exit: ترک/خروج
   github: گیتوب
   links: پیوندهای رسمی
@@ -109,10 +110,11 @@ general:
     selected: تم های فعال
 header:
   labels:
-    developer: توسعه دهنده
+    developer: برای توسعه دهندگان
     extras: اضافی
     general: عمومی
     home: خانه
+    icon_pack_editor: نمادهای ذخیره شده
     iconpack: بسته های نماد
     monitors: مانیتور
     plugin: پلاگین
@@ -299,6 +301,7 @@ weg:
     full_width: عرض تمام صفحه
     min_content: کوچک که می تواند باشد
   padding: لایه گذاری
+  show_end_task: نمایش پایان کار در نوار وظیفه
   width: عرض
 widget:
   enable: این ویجت را فعال کنید

@@ -89,6 +89,7 @@ extras:
   clear_icons: Systeempictogrammen cache wissen
   clear_icons_tooltip: Er kan een herstart nodig zijn om volledig effect te hebben op alle widgets
   discord: Discord
+  discord_rpc: Discord Rijke Aanwezigheid
   exit: Stop/exit
   github: GitHub
   links: Officiële links
@@ -107,10 +108,11 @@ general:
     selected: Actieve thema's
 header:
   labels:
-    developer: Ontwikkelaar
+    developer: Voor ontwikkelaars
     extras: Extra's
     general: Algemeen
     home: Thuis
+    icon_pack_editor: Gecachte pictogrammen
     iconpack: Pictogrammenpakketten
     monitors: Monitors
     plugin: Plugins
@@ -302,6 +304,7 @@ weg:
     full_width: Volledige schermbreedte
     min_content: Klein als het maar kan zijn
   padding: Vulling
+  show_end_task: Taak beëindigen in taakbalk weergeven
   width: Breedte
 widget:
   enable: Deze widget inschakelen

@@ -89,6 +89,7 @@ extras:
   clear_icons: Rensa cachen för systemikoner
   clear_icons_tooltip: En omstart kan krävas för att få full effekt på alla widgets
   discord: Disharmoni
+  discord_rpc: Discord Rich Presence
   exit: Sluta/avsluta
   github: Github
   links: Officiella länkar
@@ -107,10 +108,11 @@ general:
     selected: Aktiva teman
 header:
   labels:
-    developer: Utvecklare
+    developer: För utvecklare
     extras: Extramaterial
     general: Allmän
     home: Hem
+    icon_pack_editor: Cachade ikoner
     iconpack: Ikonpaket
     monitors: Monitorer
     plugin: Plugins
@@ -300,6 +302,7 @@ weg:
     full_width: Helskärmsbredd
     min_content: Liten som kan vara
   padding: Stoppning
+  show_end_task: Visa slutuppgift i aktivitetsfältet
   width: Bredd
 widget:
   enable: Aktivera denna widget

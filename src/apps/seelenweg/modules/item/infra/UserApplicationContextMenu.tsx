@@ -16,6 +16,7 @@ export function getUserApplicationContextMenu(
   t: TFunction,
   item: PinnedWegItem | TemporalWegItem,
   devTools: boolean,
+  showEndTask: boolean,
 ): ItemType[] {
   const isPinned = isPinnedApp(item);
 
@@ -114,7 +115,7 @@ export function getUserApplicationContextMenu(
     danger: true,
   });
 
-  if (devTools) {
+  if (showEndTask) {
     menu.push({
       key: 'weg_kill_app',
       label: item.windows.length > 1 ? t('app_menu.kill_multiple') : t('app_menu.kill'),

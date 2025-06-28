@@ -89,6 +89,7 @@ extras:
   clear_icons: Klare systemikoner cache
   clear_icons_tooltip: Det kan kreves en omstart for å tre i kraft alle widgeter
   discord: Uenighet
+  discord_rpc: Uenighets rik tilstedeværelse
   exit: Avslutt/avslutte
   github: Github
   links: Offisielle lenker
@@ -107,10 +108,11 @@ general:
     selected: Aktive temaer
 header:
   labels:
-    developer: Utvikler
+    developer: For utviklere
     extras: Ekstrautstyr
     general: Generell
     home: Hjem
+    icon_pack_editor: Bufrede ikoner
     iconpack: Ikonpakker
     monitors: Skjermer
     plugin: Plugins
@@ -302,6 +304,7 @@ weg:
     full_width: Full skjermbredde
     min_content: Liten som kan være
   padding: Polstring
+  show_end_task: Vis sluttoppgave i oppgavelinjen
   width: Bredde
 widget:
   enable: Aktiver denne widgeten

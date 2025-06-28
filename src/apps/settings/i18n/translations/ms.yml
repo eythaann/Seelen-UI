@@ -89,6 +89,7 @@ extras:
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
   discord: Perselisihan
+  discord_rpc: Percakapan kehadiran kaya
   exit: Berhenti/keluar
   github: Github
   links: Pautan Rasmi
@@ -107,10 +108,11 @@ general:
     selected: Tema Aktif
 header:
   labels:
-    developer: Pemaju
+    developer: Untuk pemaju
     extras: Tambahan
     general: Umum
     home: Rumah
+    icon_pack_editor: Ikon cache
     iconpack: Pek ikon
     monitors: Monitor
     plugin: Plugin
@@ -300,6 +302,7 @@ weg:
     full_width: Lebar skrin penuh
     min_content: Kecil yang boleh
   padding: Padding
+  show_end_task: Tunjukkan tugas akhir di bar tugas
   width: Lebar
 widget:
   enable: Dayakan widget ini

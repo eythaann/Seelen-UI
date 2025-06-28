@@ -91,6 +91,7 @@ extras:
     Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos
     logrīkos.
   discord: Nesaskaņas
+  discord_rpc: Nesaskaņas Bagātīga klātbūtne
   exit: Atmest/iziet
   github: Github
   links: Oficiālas saites
@@ -109,10 +110,11 @@ general:
     selected: Aktīvās tēmas
 header:
   labels:
-    developer: Attīstītājs
+    developer: Izstrādātājiem
     extras: Papildaprīkojums
     general: Ģenerāldirektors
     home: Mājas
+    icon_pack_editor: Ikonas kešatmiņā
     iconpack: Ikonu paketes
     monitors: Monitori
     plugin: Spraudņi
@@ -298,6 +300,7 @@ weg:
     full_width: Pilna ekrāna platums
     min_content: Cik mazs var būt
   padding: Polsterējums
+  show_end_task: Parādīt beigu uzdevumu uzdevumjoslā
   width: Platums
 widget:
   enable: Ieslēgt šo logrīku

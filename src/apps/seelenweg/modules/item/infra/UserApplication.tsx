@@ -89,7 +89,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
       className={cx({ 'associated-view-open': openPreview || openContextMenu })}
     >
       <WithContextMenu
-        items={getUserApplicationContextMenu(t, item, devTools) || []}
+        items={getUserApplicationContextMenu(t, item, devTools, settings.showEndTask) || []}
         onOpenChange={(isOpen) => {
           setOpenContextMenu(isOpen);
           if (openPreview && isOpen) {

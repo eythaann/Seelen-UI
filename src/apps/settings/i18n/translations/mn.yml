@@ -90,6 +90,7 @@ extras:
     Бүх виджет дээр хүчин төгөлдөр болохын тулд дахин эхлүүлэх шаардлагатай байж
     болно
   discord: Холор
+  discord_rpc: Баяртай байх
   exit: Гарах / гарах
   github: Github
   links: Албан ёсны холбоос
@@ -108,10 +109,11 @@ general:
     selected: Идэвхтэй сэдэв
 header:
   labels:
-    developer: Хөгжчин
+    developer: Хөгжүүлэгчдэд зориулсан
     extras: Мөр өгөх
     general: Жанжин
     home: Гэр
+    icon_pack_editor: Кэшлэсэн дүрсүүд
     iconpack: Icon багц
     monitors: Хэлэлт авагч
     plugin: Гарын үсэг
@@ -298,6 +300,7 @@ weg:
     full_width: Бүтэн дэлгэцийн өргөн
     min_content: Аль болох жижиг
   padding: Дэвсгэр
+  show_end_task: ТЕХНИКИЙН ТОНОГ ТӨХӨӨРӨМЖИЙН ТӨЛӨВЛӨГӨӨ
   width: Өргөн
 widget:
   enable: Энэ виджетийг идэвхжүүлэх

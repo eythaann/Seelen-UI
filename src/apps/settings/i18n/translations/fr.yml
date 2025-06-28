@@ -91,6 +91,7 @@ extras:
     Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les
     widgets
   discord: Discord
+  discord_rpc: Présence riche en discorde
   exit: Quitter
   github: GitHub
   links: Liens officiels
@@ -109,10 +110,11 @@ general:
     selected: Thèmes actifs
 header:
   labels:
-    developer: Développeur
+    developer: Pour les développeurs
     extras: Extras
     general: Général
     home: Accueil
+    icon_pack_editor: Icônes en cache
     iconpack: Packs d'icônes
     monitors: Moniteurs
     plugin: Plugins
@@ -304,6 +306,7 @@ weg:
     full_width: Pleine largeur
     min_content: Aussi petit que possible
   padding: Hauteur
+  show_end_task: Afficher la tâche finale dans la barre des tâches
   width: Largeur
 widget:
   enable: Activer ce widget

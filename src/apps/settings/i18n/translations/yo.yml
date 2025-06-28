@@ -87,6 +87,7 @@ extras:
   clear_icons: Ko awọn ilana eto kuro
   clear_icons_tooltip: A le nilo atunbere lati ṣe ipa ni kikun lori gbogbo awọn ẹrọ ailorukọ
   discord: Di eniyan
+  discord_rpc: DISD FUN OVE
   exit: Duro / Jade
   github: Gitter
   links: Awọn ọna asopọ osise
@@ -105,10 +106,11 @@ general:
     selected: Awọn akori ti nṣiṣe lọwọ
 header:
   labels:
-    developer: Olugbekun
+    developer: Fun Awọn Difelopa
     extras: Imurarẹ
     general: Gbogboogbo
     home: Ile
+    icon_pack_editor: Awọn aami ti a kọ silẹ
     iconpack: Awọn akopọ aami
     monitors: Awọn diirarito
     plugin: Afikun
@@ -291,6 +293,7 @@ weg:
     full_width: Iboju kikun iwọn
     min_content: Kekere bi o ti le jẹ
   padding: Fidigọdi silẹ
+  show_end_task: Fihan iṣẹ ṣiṣe ni iṣẹ-ṣiṣe
   width: Fifẹ
 widget:
   enable: Mu ẹrọ ailorukọ yii ṣiṣẹ

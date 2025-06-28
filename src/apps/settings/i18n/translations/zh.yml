@@ -82,6 +82,7 @@ extras:
   clear_icons: 清除系统图标缓存
   clear_icons_tooltip: 可能需要重新启动才能对所有部件完全生效
   discord: Discord
+  discord_rpc: 不和谐的丰富存在
   exit: 退出 / 关闭
   github: GitHub
   links: 官方链接
@@ -100,10 +101,11 @@ general:
     selected: 活跃主题
 header:
   labels:
-    developer: 开发者工具
+    developer: 针对开发人员
     extras: 额外内容
     general: 常规设置
     home: 首页
+    icon_pack_editor: 缓存图标
     iconpack: 图标包
     monitors: 显示器
     plugin: 插件
@@ -283,6 +285,7 @@ weg:
     full_width: 全屏宽度
     min_content: 尽可能小
   padding: 内边距
+  show_end_task: 在任务栏中显示结束任务
   width: 宽度
 widget:
   enable: 启用此部件

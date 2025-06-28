@@ -89,6 +89,7 @@ extras:
   clear_icons: Esborrar la memòria cau de les icones del sistema
   clear_icons_tooltip: Es pot requerir un reinici per tenir efecte sobre tots els ginys
   discord: Discòrdia
+  discord_rpc: Presència rica en discordança
   exit: Deixar/sortir
   github: Github
   links: Enllaços oficials
@@ -107,10 +108,11 @@ general:
     selected: Temes actius
 header:
   labels:
-    developer: Desenvolupador
+    developer: Per als desenvolupadors
     extras: Extres
     general: General
     home: Casa
+    icon_pack_editor: Icones en memòria cau
     iconpack: Paquets d’icones
     monitors: Monitors
     plugin: Tapins
@@ -302,6 +304,7 @@ weg:
     full_width: Amplada de pantalla completa
     min_content: Petit com pot ser
   padding: Encoir
+  show_end_task: Mostra la tasca final a la barra de tasques
   width: Amplada
 widget:
   enable: Activa aquest widget

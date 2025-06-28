@@ -18,7 +18,7 @@ export function Information() {
   const [isMsixBuild, setIsMsixBuild] = useState(true);
   const [isDevMode, setIsDevMode] = useState(false);
 
-  const devTools = useSelector(newSelectors.devTools);
+  const drpc = useSelector(newSelectors.drpc);
   const updaterSettings = useSelector(newSelectors.updater);
 
   const dispatch = useDispatch();
@@ -29,8 +29,8 @@ export function Information() {
     isDev().then(setIsDevMode);
   }, []);
 
-  function onToggleDevTools(value: boolean) {
-    dispatch(RootActions.setDevTools(value));
+  function onToggleDrpc(value: boolean) {
+    dispatch(RootActions.setDrpc(value));
   }
 
   function onChangeUpdateChannel(channel: UpdateChannel) {
@@ -78,8 +78,8 @@ export function Information() {
 
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('devtools.enable')}</b>
-          <Switch value={devTools} onChange={onToggleDevTools} />
+          <b>{t('extras.discord_rpc')}</b>
+          <Switch value={drpc} onChange={onToggleDrpc} />
         </SettingsOption>
       </SettingsGroup>
 

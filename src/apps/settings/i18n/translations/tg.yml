@@ -89,6 +89,7 @@ extras:
   clear_icons: Нишондиҳандаи системаи тозагӣ
   clear_icons_tooltip: Бозоғоз кардан мумкин аст, ки ба ҳама виджет пурра таъсир расонад
   discord: Ихтисор
+  discord_rpc: Диаграммаи ҳузури сарватмандон
   exit: Курат / баромадан
   github: Github
   links: Истеҳсоли расмӣ
@@ -107,10 +108,11 @@ general:
     selected: Мавзӯъҳои фаъол
 header:
   labels:
-    developer: Таҳиякунанда
+    developer: Барои таҳиягарон
     extras: Иловаҳо
     general: Генерал
     home: Хона
+    icon_pack_editor: Нишони кэш
     iconpack: ICon бастаҳои
     monitors: Мониторҳо
     plugin: Плагинҳо
@@ -295,6 +297,7 @@ weg:
     full_width: Паҳнои пурраи экран
     min_content: То ҳадди имкон хурд
   padding: Тахтача
+  show_end_task: Вазифаи хотимаро дар панели супоришҳо нишон диҳед
   width: Васеъ
 widget:
   enable: Ин виджетро фаъол кунед

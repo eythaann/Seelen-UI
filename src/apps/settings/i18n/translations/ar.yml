@@ -87,6 +87,7 @@ extras:
   clear_icons: مسح ذاكرة التخزين المؤقت لأيقونات النظام
   clear_icons_tooltip: قد تكون إعادة التشغيل مطلوبة لتدخل جميع الأدوات حيز التنفيذ بالكامل
   discord: ديسكورد
+  discord_rpc: التواجد الغني بالخلافات
   exit: إنهاء/خروج
   github: جيت هب
   links: الروابط الرسمية
@@ -105,10 +106,11 @@ general:
     selected: المواضيع النشطة
 header:
   labels:
-    developer: المطور
+    developer: للمطورين
     extras: الإضافات
     general: عام
     home: المنزل
+    icon_pack_editor: الأيقونات المخزنة مؤقتاً
     iconpack: حزم الأيقونات
     monitors: الشاشات
     plugin: المكونات الإضافية
@@ -291,6 +293,7 @@ weg:
     full_width: عرض كامل الشاشة
     min_content: صغيرة كما يمكن أن تكون
   padding: المساحه
+  show_end_task: إظهار مهمة النهاية في شريط المهام
   width: العرض
 widget:
   enable: تمكين هذه الأداة

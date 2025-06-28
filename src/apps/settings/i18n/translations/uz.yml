@@ -91,6 +91,7 @@ extras:
     Barcha vidjetlarga to'liq ta'sir qilish uchun qayta boshlash talab qilinishi
     mumkin
   discord: Kelishmovchilik
+  discord_rpc: Maslahatlar boy bo'lish
   exit: Chiqish / chiqish
   github: Gitul
   links: Rasmiy havolalar
@@ -109,10 +110,11 @@ general:
     selected: Faol mavzular
 header:
   labels:
-    developer: Ishlab chiqaruvchi
+    developer: Ishlab chiquvchilar uchun
     extras: Ekstraza
     general: Umumiy
     home: Uy
+    icon_pack_editor: Keshlangan piktogrammalar
     iconpack: Ikonka paketlari
     monitors: Monitorlar
     plugin: Plaginlar
@@ -302,6 +304,7 @@ weg:
     full_width: To'liq ekran kengligi
     min_content: Iloji boricha kichik
   padding: Plomba
+  show_end_task: Vazifalar panelida tugatish vazifasini ko'rsating
   width: Kenglik
 widget:
   enable: Bu vidjetni yoqing

@@ -88,6 +88,7 @@ extras:
   clear_icons: د ایکسین عکس کې کیچ
   clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
   discord: ډارول
+  discord_rpc: بډایه شتون
   exit: پریښودل / وتل
   github: ګیتوب
   links: رسمي اړیکې
@@ -106,10 +107,11 @@ general:
     selected: فعال موضوعات
 header:
   labels:
-    developer: پراختیا کونکی
+    developer: د پراختیا کونکو لپاره
     extras: اضافي
     general: عمومي
     home: کور
+    icon_pack_editor: د
     iconpack: آیکون کڅوړه
     monitors: څارونکي
     plugin: فلګونه
@@ -292,6 +294,7 @@ weg:
     full_width: د بشپړ سکرین پلنوالی
     min_content: کوچني لکه څنګه چې کیدی شي
   padding: غالۍ
+  show_end_task: په ټاسکبار کې د پای دنده ښودل
   width: پلنوالی
 widget:
   enable: دې ویجیټ وړ کړئ

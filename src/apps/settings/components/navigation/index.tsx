@@ -40,6 +40,17 @@ export const Navigation = memo(() => {
 
   const themesWithSettings = themes.filter((theme) => theme.settings.length);
 
+  const advanceGroup = [
+    RoutePath.SettingsByMonitor,
+    RoutePath.SettingsByApplication,
+    RoutePath.Shortcuts,
+  ];
+  const devGroup = [RoutePath.DevTools];
+
+  if (devTools) {
+    devGroup.push(RoutePath.IconPackEditor);
+  }
+
   return (
     <div
       className={cx(cs.navigation, {
@@ -55,6 +66,7 @@ export const Navigation = memo(() => {
           onClick={() => setCollapsed(!collapsed)}
         />
       </div>
+
       <div className={cs.body}>
         <div className={cs.group}>
           <Item
@@ -105,21 +117,12 @@ export const Navigation = memo(() => {
         )}
 
         <div className={cs.separator} />
-        <div className={cs.group}>
-          {[RoutePath.SettingsByMonitor, RoutePath.SettingsByApplication, RoutePath.Shortcuts].map(
-            Mapper,
-          )}
-        </div>
+        <div className={cs.group}>{advanceGroup.map(Mapper)}</div>
 
-        {devTools && (
-          <>
-            <div className={cs.separator} />
-            <div className={cs.group}>
-              {(devTools ? [RoutePath.DevTools, RoutePath.IconPackEditor] : []).map(Mapper)}
-            </div>
-          </>
-        )}
+        <div className={cs.separator} />
+        <div className={cs.group}>{devGroup.map(Mapper)}</div>
       </div>
+
       <div className={cs.footer}>{[RoutePath.Extras].map(Mapper)}</div>
     </div>
   );

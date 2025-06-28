@@ -91,6 +91,7 @@ extras:
     Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în
     vigoare
   discord: Discordie
+  discord_rpc: Discordie Prezență bogată
   exit: Renunță/ieșire
   github: Github
   links: Link -uri oficiale
@@ -109,10 +110,11 @@ general:
     selected: Teme active
 header:
   labels:
-    developer: Dezvoltator
+    developer: Pentru dezvoltatori
     extras: Extras
     general: General
     home: Acasă
+    icon_pack_editor: Icoane în cache
     iconpack: Pachete de pictograme
     monitors: Monitoare
     plugin: Plugin-uri
@@ -304,6 +306,7 @@ weg:
     full_width: Lățimea ecranului complet
     min_content: Cât de mic poate fi
   padding: Căptușeală
+  show_end_task: Afișarea sarcinii finale în bara de activități
   width: Lăţime
 widget:
   enable: Activați acest widget

@@ -91,6 +91,7 @@ extras:
     Do poprawnego uruchomienia wszystkich widżetów może być wymagane ponowne
     uruchomienie systemu
   discord: Odrzuć
+  discord_rpc: Discord Rich Presence
   exit: Wyjdź
   github: Github
   links: Oficjalne linki
@@ -109,10 +110,11 @@ general:
     selected: Aktywne motywy
 header:
   labels:
-    developer: Deweloper
+    developer: Dla deweloperów
     extras: Dodatki
     general: Ogólne
     home: Strona główna
+    icon_pack_editor: Ikony w pamięci podręcznej
     iconpack: Pakiety ikon
     monitors: Ekrany
     plugin: Wtyczki
@@ -300,6 +302,7 @@ weg:
     full_width: Pełna szerokość ekranu
     min_content: Jak najmniejszy
   padding: Wysokość tła
+  show_end_task: Pokaż zadanie końcowe na pasku zadań
   width: Szerokość
 widget:
   enable: Włącz ten widżet

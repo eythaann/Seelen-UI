@@ -89,6 +89,7 @@ extras:
     Pêdivî ye ku ji nû ve destpêkirinê were xwestin ku bi tevahî li ser hemî
     widgetan bandor bike
   discord: Nakemala
+  discord_rpc: Hebûna dewlemend a nakokî
   exit: Qut / derketin
   github: Github
   links: Girêdanên fermî
@@ -107,10 +108,11 @@ general:
     selected: Mijarên Çalak
 header:
   labels:
-    developer: Pêşvebirin
+    developer: Ji bo pêşdebiran
     extras: Ekstras
     general: Giştî
     home: Xane
+    icon_pack_editor: Îkonên cached
     iconpack: Packon icon
     monitors: Çavdêr
     plugin: Pêçanin
@@ -299,6 +301,7 @@ weg:
     full_width: Firehiya ekrana tevahî
     min_content: Biçûk ku dikare bibe
   padding: Padding
+  show_end_task: Di peywira peywirê de peywira dawiyê nîşan bide
   width: Berî
 widget:
   enable: Vê widgetê çalak bikin

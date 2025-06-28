@@ -91,6 +91,7 @@ extras:
     Pengaktifan ulang mungkin diperlukan untuk menerapkan efek sepenuhnya pada
     semua widget
   discord: Perselisihan
+  discord_rpc: Kehadiran yang Kaya Perselisihan
   exit: Berhenti/keluar
   github: GitHub
   links: Tautan resmi
@@ -109,10 +110,11 @@ general:
     selected: Tema Aktif
 header:
   labels:
-    developer: Pengembang
+    developer: Untuk pengembang
     extras: Ekstra
     general: Umum
     home: Rumah
+    icon_pack_editor: Ikon Cache
     iconpack: Paket Ikon
     monitors: Monitor
     plugin: Plugin
@@ -302,6 +304,7 @@ weg:
     full_width: Lebar layar penuh
     min_content: Sekecil mungkin
   padding: Lapisan
+  show_end_task: Menampilkan tugas akhir di bilah tugas
   width: Lebar
 widget:
   enable: Aktifkan widget ini

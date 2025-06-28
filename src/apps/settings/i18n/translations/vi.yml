@@ -90,6 +90,7 @@ extras:
     Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các
     tiện ích
   discord: Bất hòa
+  discord_rpc: Sự hiện diện phong phú
   exit: Thoát/Thoát
   github: GitHub
   links: Liên kết chính thức
@@ -108,10 +109,11 @@ general:
     selected: Chủ đề đang hoạt động
 header:
   labels:
-    developer: Nhà phát triển
+    developer: Cho các nhà phát triển
     extras: Bổ sung
     general: Tổng quan
     home: Trang chủ
+    icon_pack_editor: Biểu tượng bộ nhớ cache
     iconpack: Gói biểu tượng
     monitors: Màn hình
     plugin: Plugin
@@ -299,6 +301,7 @@ weg:
     full_width: Chiều rộng toàn màn hình
     min_content: Nhỏ nhất có thể
   padding: Đệm
+  show_end_task: Hiển thị nhiệm vụ kết thúc trong thanh tác vụ
   width: Chiều rộng
 widget:
   enable: Kích hoạt tiện ích này

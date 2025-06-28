@@ -89,6 +89,7 @@ extras:
   clear_icons: स्पष्ट प्रणाली आइकनहरू क्यास
   clear_icons_tooltip: 'सबै विजेटहरूमा पूर्ण रूपमा प्रभाव लिनको लागि एक पुन: सुरू गर्न आवश्यक पर्दछ'
   discord: छलफल दिनु
+  discord_rpc: निहित उपस्थिति
   exit: छोड्नुहोस् / बाहिर निस्कनुहोस्
   github: Github
   links: आधिकारिक लिंकहरू
@@ -107,10 +108,11 @@ general:
     selected: सक्रिय विषयवस्तुहरू
 header:
   labels:
-    developer: विकासकर्ता
+    developer: विकासकर्ताहरूको लागि
     extras: अतिरिक्त
     general: जर्नेल
     home: घर
+    icon_pack_editor: Comed आईकनहरू
     iconpack: आइकन प्याक
     monitors: मोनिटरहरू
     plugin: निशम्न
@@ -299,6 +301,7 @@ weg:
     full_width: पूर्ण स्क्रिन चौडाइ
     min_content: हुनसक्ने सानो
   padding: प्याडडि .्वन
+  show_end_task: कार्यबारमा अन्त कार्य देखाउनुहोस्
   width: चौडाई
 widget:
   enable: यो विजेट सक्षम गर्नुहोस्

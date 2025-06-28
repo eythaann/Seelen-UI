@@ -89,6 +89,7 @@ extras:
   clear_icons: સ્પષ્ટ સિસ્ટમ ચિહ્નો કેશ
   clear_icons_tooltip: બધા વિજેટો પર સંપૂર્ણ અસર કરવા માટે ફરીથી પ્રારંભ કરવાની જરૂર પડી શકે છે
   discord: વિખવાદ
+  discord_rpc: અસંગત હાજરી
   exit: છોડો/બહાર નીકળો
   github: GitHub
   links: સત્તાવાર લિંક્સ
@@ -107,10 +108,11 @@ general:
     selected: સક્રિય થીમ્સ
 header:
   labels:
-    developer: વિકાસકર્તા
+    developer: વિકાસકર્તાઓ માટે
     extras: વધારાની રકમ
     general: જનરલ
     home: ઘર
+    icon_pack_editor: કેશ ચિહ્નો
     iconpack: ચિહ્ન
     monitors: મોનિટર
     plugin: તૃણ
@@ -297,6 +299,7 @@ weg:
     full_width: પૂર્ણ સ્ક્રીનની પહોળાઈ
     min_content: બની શકે તેટલું નાનું
   padding: ગાદી
+  show_end_task: ટાસ્કબારમાં અંતિમ કાર્ય બતાવો
   width: પહોળાઈ
 widget:
   enable: આ વિજેટને સક્ષમ કરો

@@ -89,6 +89,7 @@ extras:
   clear_icons: Hreinsa kerfistákn skyndiminni
   clear_icons_tooltip: Endurræsing gæti verið nauðsynleg til að taka gildi að fullu á allar búnaðir
   discord: Ósamræmi
+  discord_rpc: Mismunandi rík nærvera
   exit: Hætta/hætta
   github: GitHub
   links: Opinberir hlekkir
@@ -107,10 +108,11 @@ general:
     selected: Virk þemu
 header:
   labels:
-    developer: Hönnuður
+    developer: Fyrir verktaki
     extras: Aukahlutir
     general: Almennt
     home: Heim
+    icon_pack_editor: Skyndimennd tákn
     iconpack: Táknpakkar
     monitors: Fylgist með
     plugin: Viðbætur
@@ -296,6 +298,7 @@ weg:
     full_width: Full skjábreidd
     min_content: Lítið eins og hægt er
   padding: Padding
+  show_end_task: Sýna lokverkefni í verkstikunni
   width: Breidd
 widget:
   enable: Virkja þennan búnað

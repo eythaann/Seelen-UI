@@ -87,6 +87,7 @@ extras:
   clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
   clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
   discord: ຄວາມຂັດແຍ້ງ
+  discord_rpc: ການມີຄວາມຮັ່ງມີທີ່ປະທັບໃຈ
   exit: ອອກ/ອອກ
   github: GitHub
   links: ການເຊື່ອມຕໍ່ຢ່າງເປັນທາງການ
@@ -105,10 +106,11 @@ general:
     selected: ຮູບແບບການເຄື່ອນໄຫວ
 header:
   labels:
-    developer: ນັກພັດທະນາ
+    developer: ສໍາລັບນັກພັດທະນາ
     extras: ພິເສດ
     general: ທົ່ວໄປ
     home: ບ້ານ
+    icon_pack_editor: ຮູບສັນຍາລັກຂອງຖານ
     iconpack: icon ຊອງ
     monitors: ຈໍພາບ
     plugin: Plugins
@@ -295,6 +297,7 @@ weg:
     full_width: ຄວາມກວ້າງເຕັມຈໍ
     min_content: ຂະຫນາດນ້ອຍເທົ່າທີ່ສາມາດເຮັດໄດ້
   padding: padding
+  show_end_task: ສະແດງວຽກທີ່ສຸດໃນຫນ້າວຽກ
   width: ກວ້າງ
 widget:
   enable: ເປີດໃຊ້ widget ນີ້

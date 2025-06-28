@@ -88,6 +88,7 @@ extras:
   clear_icons: Kashe ya icons za mfumo wazi
   clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
   discord: Ugomvi
+  discord_rpc: Uwezo wa ubishani
   exit: Acha/exit
   github: GitHub
   links: Viungo rasmi
@@ -106,10 +107,11 @@ general:
     selected: Mandhari Inayotumika
 header:
   labels:
-    developer: Msanidi programu
+    developer: Kwa watengenezaji
     extras: Ziada
     general: Mkuu
     home: Nyumbani
+    icon_pack_editor: Icons zilizowekwa
     iconpack: Pakiti za ikoni
     monitors: Wachunguzi
     plugin: Programu -jalizi
@@ -294,6 +296,7 @@ weg:
     full_width: Upana kamili wa skrini
     min_content: Ndogo kama inaweza kuwa
   padding: Padding
+  show_end_task: Onyesha kazi ya mwisho katika Taskbar
   width: Upana
 widget:
   enable: Wezesha widget hii

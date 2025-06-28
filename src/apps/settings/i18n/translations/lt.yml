@@ -89,6 +89,7 @@ extras:
   clear_icons: Išvalyti sistemos piktogramų talpyklą
   clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
   discord: Nesantaika
+  discord_rpc: Nesutarimų turtingas buvimas
   exit: Mesti/išeiti
   github: Github
   links: Oficialios nuorodos
@@ -107,10 +108,11 @@ general:
     selected: Aktyvios temos
 header:
   labels:
-    developer: Programuotojas
+    developer: Kūrėjams
     extras: Priedai
     general: Bendrasis
     home: Namai
+    icon_pack_editor: Ikonos talpyklose
     iconpack: Ikonų paketai
     monitors: Monitoriai
     plugin: Įskiepiai
@@ -296,6 +298,7 @@ weg:
     full_width: Visas ekrano plotis
     min_content: Mažas kaip gali būti
   padding: Paminkštinimas
+  show_end_task: Užduoties juostoje rodyti pabaigos užduotį
   width: Plotis
 widget:
   enable: Įjungti šį valdiklį

@@ -87,6 +87,7 @@ extras:
   clear_icons: מטמון סמלי מערכת נקה
   clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
   discord: דיסכורד
+  discord_rpc: נוכחות עשירה
   exit: צא
   github: גיטהאב
   links: קישורים רשמיים
@@ -105,10 +106,11 @@ general:
     selected: ערכות נושא פעילות
 header:
   labels:
-    developer: מפתח
+    developer: למפתחים
     extras: תוספות
     general: כללי
     home: בַּיִת
+    icon_pack_editor: אייקונים במטמון
     iconpack: חבילות אייקון
     monitors: צגים
     plugin: תוספים
@@ -291,6 +293,7 @@ weg:
     full_width: רוחב מסך מלא
     min_content: קטן ככל שניתן
   padding: ריפוד
+  show_end_task: הצג את משימת הסיום בשורת המשימות
   width: רוחב
 widget:
   enable: אפשר יישומון זה

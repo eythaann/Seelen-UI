@@ -89,6 +89,7 @@ extras:
   clear_icons: صاف نظام شبیہیں کیشے
   clear_icons_tooltip: دوبارہ شروع کرنے کے لئے تمام ویجٹوں پر مکمل اثر ڈالنے کی ضرورت ہوسکتی ہے
   discord: ڈسکارڈ
+  discord_rpc: ڈسکارڈ بھرپور موجودگی
   exit: چھوڑ دیں/باہر نکلیں
   github: گٹ ہب
   links: لنکس
@@ -107,10 +108,11 @@ general:
     selected: ایکٹو تھیمز
 header:
   labels:
-    developer: ڈویلپر
+    developer: ڈویلپرز کے لئے
     extras: ایکسٹرا
     general: جنرل
     home: گھر
+    icon_pack_editor: کیشڈ شبیہیں
     iconpack: آئیکن پیک
     monitors: مانیٹر
     plugin: پلگ ان
@@ -299,6 +301,7 @@ weg:
     full_width: پوری سکرین کی چوڑائی
     min_content: جتنا چھوٹا ہو سکتا ہے۔
   padding: بھرتی
+  show_end_task: ٹاسک بار میں اختتامی کام دکھائیں
   width: چوڑائی
 widget:
   enable: اس ویجیٹ کو فعال کریں

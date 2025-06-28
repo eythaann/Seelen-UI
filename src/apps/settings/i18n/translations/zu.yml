@@ -91,6 +91,7 @@ extras:
     Ukuqalisa kabusha kungadingeka ukuthi kusebenze ngokuphelele kuwo wonke
     amawijethi
   discord: Ukunqaba
+  discord_rpc: Ukuba khona okunothile
   exit: Quit / Phuma
   github: Umuthi othile kiki
   links: Izixhumanisi ezisemthethweni
@@ -109,10 +110,11 @@ general:
     selected: Izindikimba ezisebenzayo
 header:
   labels:
-    developer: Konjiniyela
+    developer: Obathuthukisi
     extras: Okungatha
     general: Jwayelekile
     home: Ikhaya
+    icon_pack_editor: Izithonjana ezihlodliwe
     iconpack: I-Icon Packs
     monitors: Ukuqapha
     plugin: Amaplithi
@@ -302,6 +304,7 @@ weg:
     full_width: Ububanzi besikrini esigcwele
     min_content: Kuncane njengoba kungaba
   padding: Idilidi
+  show_end_task: Khombisa umsebenzi wokugcina kubha yomsebenzi
   width: Ububanzi
 widget:
   enable: Nika amandla lewijethi

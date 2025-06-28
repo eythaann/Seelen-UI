@@ -89,6 +89,7 @@ extras:
   clear_icons: Vymazání mezipaměti systémových ikon
   clear_icons_tooltip: Aby se plně projevily všechny widgety, mohlo by být nutné restartování.
   discord: Discord
+  discord_rpc: Bohatý diskord Přítomnost
   exit: Ukončit
   github: GitHub
   links: Oficiální odkazy
@@ -107,10 +108,11 @@ general:
     selected: Aktivní motivy
 header:
   labels:
-    developer: Vývojář
+    developer: Pro vývojáře
     extras: Doplňky
     general: Všeobecné
     home: Domov
+    icon_pack_editor: Ikony v mezipaměti
     iconpack: Balíčky ikon
     monitors: Monitory
     plugin: Zásuvné moduly
@@ -298,6 +300,7 @@ weg:
     full_width: Celá šířka obrazovky
     min_content: Malý jak jen může být
   padding: Padding
+  show_end_task: Zobrazení koncové úlohy na hlavním panelu
   width: Šířka
 widget:
   enable: Povolení tohoto widgetu

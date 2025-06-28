@@ -87,6 +87,7 @@ extras:
   clear_icons: የስርዓት አዶዎች መሸጎጫ
   clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
   discord: አለመግባባት
+  discord_rpc: ልዩ መገኘቱ
   exit: ማቆም / መውጣት
   github: Github
   links: ኦፊሴላዊ አገናኞች
@@ -105,10 +106,11 @@ general:
     selected: ንቁ ገጽታዎች
 header:
   labels:
-    developer: ገንቢ
+    developer: ለገንቢዎች
     extras: ተጨማሪዎች
     general: አጠቃላይ
     home: ቤት
+    icon_pack_editor: የተሸጡ አዶዎች
     iconpack: አዶዎች ፓኬጆች
     monitors: ተቆጣጣሪዎች
     plugin: ተሰኪዎች
@@ -288,6 +290,7 @@ weg:
     full_width: የሙሉ ማያ ገጽ ስፋት
     min_content: በተቻለ መጠን ትንሽ
   padding: ፓድ
+  show_end_task: በተግባር አሞሌ ውስጥ የመጨረሻውን ተግባር ያሳዩ
   width: ስፋት
 widget:
   enable: ይህን ንዑስ ፕሮግራም ያንቁ

@@ -86,6 +86,7 @@ extras:
   clear_icons: ล้างไอคอนระบบแคช
   clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
   discord: ความไม่ลงรอยกัน
+  discord_rpc: ความไม่ลงรอยกันที่อุดมไปด้วย
   exit: ออก/ออก
   github: คนอื่น ๆ
   links: ลิงค์อย่างเป็นทางการ
@@ -104,10 +105,11 @@ general:
     selected: ธีมที่ใช้งานอยู่
 header:
   labels:
-    developer: ผู้พัฒนา
+    developer: สำหรับนักพัฒนา
     extras: ความพิเศษ
     general: ทั่วไป
     home: บ้าน
+    icon_pack_editor: ไอคอนแคช
     iconpack: ไอคอนแพ็ค
     monitors: จอภาพ
     plugin: ปลั๊กอิน
@@ -290,6 +292,7 @@ weg:
     full_width: ความกว้างเต็มหน้าจอ
     min_content: เล็กเท่าที่จะทำได้
   padding: การขยายความ
+  show_end_task: แสดงงานสิ้นสุดในแถบงาน
   width: ความกว้าง
 widget:
   enable: เปิดใช้งานวิดเจ็ตนี้

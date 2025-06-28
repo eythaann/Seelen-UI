@@ -89,6 +89,7 @@ extras:
   clear_icons: Kloer System Symboler Cache
   clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
   discord: Diskord
+  discord_rpc: Discord räich Präsenz
   exit: Ophalen / erausfannen
   github: Github
   links: Offiziell Linken
@@ -107,10 +108,11 @@ general:
     selected: Aktiv Themen
 header:
   labels:
-    developer: Entwéckler
+    developer: Fir Entwéckler
     extras: Extras
     general: Generol
     home: Doheem
+    icon_pack_editor: Cacked Symboler
     iconpack: ICON Tass
     monitors: Iwwerschwannegkeeten
     plugin: Plugins
@@ -298,6 +300,7 @@ weg:
     full_width: Voll Écran Breet
     min_content: Kleng wéi méiglech
   padding: Padding
+  show_end_task: Show Enn Aufgab an der Taskbar
   width: Breet
 widget:
   enable: Aktivéiert dëse Widget

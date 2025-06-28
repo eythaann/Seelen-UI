@@ -85,6 +85,7 @@ extras:
   clear_icons: システムアイコンキャッシュをクリアする
   clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
   discord: Discordコミュニティー
+  discord_rpc: 不協和音の豊かな存在感
   exit: SeelenUIを終了
   github: GitHubレポジトリ
   links: リンク
@@ -107,6 +108,7 @@ header:
     extras: エクストラ
     general: 全般
     home: ホーム
+    icon_pack_editor: キャッシュされたアイコン
     iconpack: アイコンパック
     monitors: モニター
     plugin: プラグイン
@@ -286,6 +288,7 @@ weg:
     full_width: 全画面幅
     min_content: できるだけ小さく
   padding: 余白
+  show_end_task: タスクバーに終了タスクを表示する
   width: ドックの幅
 widget:
   enable: このウィジェットを有効にする

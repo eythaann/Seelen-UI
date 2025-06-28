@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { resolveDataPath } from '../shared/config/infra';
 
+import { SeelenWegActions } from '../seelenweg/app';
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 import { LoadCustomConfigFile } from './app';
 
@@ -14,6 +15,7 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../component
 
 export function DeveloperTools() {
   const devTools = useSelector(newSelectors.devTools);
+  const showEndTask = useSelector(newSelectors.seelenweg.showEndTask);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -48,6 +50,16 @@ export function DeveloperTools() {
       </SettingsGroup>
 
       <SettingsGroup>
+        <SettingsOption>
+          <b>{t('weg.show_end_task')}</b>
+          <Switch
+            checked={showEndTask}
+            onChange={(value) => dispatch(SeelenWegActions.setShowEndTask(value))}
+          />
+        </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
         <SettingsSubGroup label={t('devtools.app_folders')}>
           <SettingsOption>
             <span>{t('devtools.install_folder')}</span>
@@ -73,7 +85,7 @@ export function DeveloperTools() {
 
       <SettingsGroup>
         <SettingsOption>
-          <span>{t('devtools.simulate_fullscreen')}</span>
+          <b>{t('devtools.simulate_fullscreen')}</b>
           <Switch onChange={simulateFullscreen} />
         </SettingsOption>
       </SettingsGroup>

@@ -89,6 +89,7 @@ extras:
   clear_icons: Maak stelselikone kas uit
   clear_icons_tooltip: '''N Herbegin kan nodig wees om alle widgets ten volle in werking te stel'
   discord: Teenstrydigheid
+  discord_rpc: Discord ryk teenwoordigheid
   exit: Hou op/uitgang
   github: Github
   links: Amptelike skakels
@@ -107,10 +108,11 @@ general:
     selected: Aktiewe temas
 header:
   labels:
-    developer: Ontwikkelaar
+    developer: Vir ontwikkelaars
     extras: Ekstra's
     general: Generaal
     home: Tuiste
+    icon_pack_editor: Cache -ikone
     iconpack: Ikoonpakkies
     monitors: Monitors
     plugin: Plugins
@@ -302,6 +304,7 @@ weg:
     full_width: Volle skerm breedte
     min_content: Klein soos kan wees
   padding: Opvulling
+  show_end_task: Toon eindtaak in die taakbalk
   width: Wydte
 widget:
   enable: Aktiveer hierdie widget

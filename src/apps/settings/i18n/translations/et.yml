@@ -88,6 +88,7 @@ extras:
   clear_icons: Tühjenda süsteemi ikoonide vahemälu
   clear_icons_tooltip: Kõigi vidinate täielikuks jõustumiseks võib olla vajalik taaskäivitamine.
   discord: Ebakõla
+  discord_rpc: Diskordia rikkalik kohalolek
   exit: Lõpeta/väljumine
   github: Github
   links: Ametlikud lingid
@@ -106,10 +107,11 @@ general:
     selected: Aktiivsed teemad
 header:
   labels:
-    developer: Arendaja
+    developer: Arendajatele
     extras: Lisad
     general: Üld-
     home: Kodu
+    icon_pack_editor: Vaikimisi salvestatud ikoonid
     iconpack: Ikoonipaketid
     monitors: Monitorid
     plugin: Plugins
@@ -297,6 +299,7 @@ weg:
     full_width: Täisekraani laius
     min_content: Nii väike kui olla saab
   padding: Polsterdamine
+  show_end_task: Ülesande lõpuülesande kuvamine tegumiribal
   width: Laius
 widget:
   enable: Võta see vidin kasutusele

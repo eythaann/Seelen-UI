@@ -91,6 +91,7 @@ extras:
     Վերագործարկումը կարող է պահանջվել բոլոր վիդջեթների վրա լիարժեք ուժի մեջ
     մտնելու համար
   discord: Տարաձայնություն
+  discord_rpc: DiscorD հարուստ ներկայություն
   exit: Հանգստացեք / Ելք
   github: Գյուտ
   links: Պաշտոնական հղումներ
@@ -109,10 +110,11 @@ general:
     selected: Ակտիվ թեմաներ
 header:
   labels:
-    developer: Մշակող
+    developer: Մշակողների համար
     extras: Լրացուցիչ նյութեր
     general: Ընդհանուր
     home: Տուն
+    icon_pack_editor: Պահված սրբապատկերներ
     iconpack: Սրբապատկերներ
     monitors: Մոնիտորներ
     plugin: Plugins
@@ -302,6 +304,7 @@ weg:
     full_width: Ամբողջ էկրանի լայնությունը
     min_content: Փոքր, որքան կարող է լինել
   padding: Լիցք
+  show_end_task: Show ույց տալ ավարտի առաջադրանքը առաջադրանքի մեջ
   width: Լայնություն
 widget:
   enable: Միացրեք այս հարմարանքը
