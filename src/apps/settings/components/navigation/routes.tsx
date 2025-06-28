@@ -15,6 +15,7 @@ export enum RoutePath {
   SettingsByMonitor = '/monitors',
   SettingsByApplication = '/specific_apps',
   DevTools = '/developer',
+  IconPackEditor = '/icon_pack_editor',
   Extras = '/extras',
 }
 
@@ -27,4 +28,5 @@ export const RouteIcons: { [key in RoutePath]?: React.ReactNode } = {
   [RoutePath.Shortcuts]: <Icon iconName="MdLaunch" />,
   [RoutePath.Extras]: <Icon iconName="PiInfoFill" />,
   [RoutePath.DevTools]: <Icon iconName="PiCodeBold" />,
+  [RoutePath.IconPackEditor]: <Icon iconName="PiCodeBold" />,
 };

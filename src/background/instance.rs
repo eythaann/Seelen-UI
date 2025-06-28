@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use getset::{Getters, MutGetters};
-use seelen_core::state::WidgetId;
+use seelen_core::resource::WidgetId;
 
 use crate::{
     error_handler::Result,

@@ -232,3 +232,11 @@ pub fn now_timestamp_as_millis() -> u64 {
         .expect("Time went backwards");
     since_the_epoch.as_secs() * 1000 + since_the_epoch.subsec_nanos() as u64 / 1_000_000
 }
+
+pub fn date_based_hex_id() -> String {
+    let since_epoch = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_millis();
+    format!("{since_epoch:x}")
+}

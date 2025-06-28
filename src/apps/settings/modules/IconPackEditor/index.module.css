@@ -1,0 +1,27 @@
+.iconGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .iconContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    .iconBox {
+      width: 128px;
+      height: 128px;
+      border-radius: 20px;
+      padding: 20px;
+      background-color: #9c9c9c;
+      box-shadow: 1px 1px 1px #0005;
+
+      img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

@@ -20,7 +20,10 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::state::{LauncherHistory, Plugin, PluginId, Profile, WegItems, Widget, WidgetId};
+use seelen_core::{
+    resource::{PluginId, WidgetId},
+    state::{LauncherHistory, Plugin, Profile, WegItems, Widget},
+};
 use std::{
     collections::{HashMap, HashSet, VecDeque},
     path::{Path, PathBuf},

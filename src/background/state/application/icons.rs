@@ -1,19 +1,24 @@
 use std::{
     collections::HashMap,
-    fs::OpenOptions,
     path::{Path, PathBuf},
 };
 
 use itertools::Itertools;
 use seelen_core::{
     handlers::SeelenEvent,
-    resource::ResourceText,
-    state::{AppIconPackEntry, CustomIconPackEntry, FileIconPackEntry, Icon, IconPack},
+    resource::{ResourceText, SluResource},
+    state::{
+        CustomIconPackEntry, Icon, IconPack, IconPackEntry, SharedIconPackEntry,
+        UniqueIconPackEntry,
+    },
 };
 use tauri::Emitter;
 
 use crate::{
-    error_handler::Result, seelen::get_app_handle, trace_lock, utils::constants::SEELEN_COMMON,
+    error_handler::Result,
+    seelen::get_app_handle,
+    trace_lock,
+    utils::{constants::SEELEN_COMMON, date_based_hex_id},
 };
 
 use super::FullState;
@@ -43,12 +48,12 @@ impl IconPacksManager {
             return;
         }
         let system_pack = self.get_system_mut();
-        system_pack.app_entries.push(AppIconPackEntry {
+        system_pack.add_entry(IconPackEntry::Unique(UniqueIconPackEntry {
             umid: umid.map(|s| s.to_string()),
             path: path.map(|p| p.to_path_buf()),
             redirect: None,
             icon: Some(icon),
-        });
+        }));
     }
 
     pub fn add_system_icon_redirect(
@@ -58,20 +63,20 @@ impl IconPacksManager {
         redirect: &Path,
     ) {
         let system_pack = self.get_system_mut();
-        system_pack.app_entries.push(AppIconPackEntry {
+        system_pack.add_entry(IconPackEntry::Unique(UniqueIconPackEntry {
             umid,
             path: Some(origin.to_path_buf()),
             redirect: Some(redirect.to_path_buf()),
             icon: None,
-        });
+        }));
     }
 
     pub fn add_system_file_icon(&mut self, origin_extension: &str, icon: Icon) {
         let system_pack = self.get_system_mut();
-        system_pack.file_entries.push(FileIconPackEntry {
+        system_pack.add_entry(IconPackEntry::Shared(SharedIconPackEntry {
             extension: origin_extension.to_string(),
             icon,
-        });
+        }));
     }
 
     fn icon_exists(&self, icon: &Icon) -> bool {
@@ -86,7 +91,11 @@ impl IconPacksManager {
         let icon_pack = self.get_system();
         let lower_path = path.map(|p| p.to_string_lossy().to_lowercase());
 
-        for entry in &icon_pack.app_entries {
+        for entry in &icon_pack.entries {
+            let IconPackEntry::Unique(entry) = entry else {
+                continue;
+            };
+
             let mut found = None;
             if let (Some(entry_umid), Some(umid)) = (&entry.umid, umid) {
                 if entry_umid == umid {
@@ -123,13 +132,14 @@ impl IconPacksManager {
     pub fn get_file_icon(&self, path: &Path) -> Option<&Icon> {
         let extension = path.extension()?.to_string_lossy().to_lowercase();
         let icon_pack = self.get_system();
-        if let Some(entry) = icon_pack
-            .file_entries
-            .iter()
-            .find(|e| e.extension.to_lowercase() == extension)
-        {
-            if self.icon_exists(&entry.icon) {
-                return Some(&entry.icon);
+        for entry in &icon_pack.entries {
+            match entry {
+                IconPackEntry::Shared(entry) if entry.extension.to_lowercase() == extension => {
+                    if self.icon_exists(&entry.icon) {
+                        return Some(&entry.icon);
+                    }
+                }
+                _ => {}
             }
         }
         None
@@ -137,9 +147,7 @@ impl IconPacksManager {
 
     pub fn clear_system_icons(&mut self) -> Result<()> {
         let system_pack = self.get_system_mut();
-        system_pack.app_entries.clear();
-        system_pack.file_entries.clear();
-        system_pack.custom_entries.clear();
+        system_pack.entries.clear();
         let meta = std::ffi::OsStr::new("metadata.yml");
         for entry in std::fs::read_dir(SEELEN_COMMON.user_icons_path().join("system"))?.flatten() {
             if entry.file_type()?.is_dir() {
@@ -217,53 +225,36 @@ impl IconPacksManager {
         }
 
         system_pack.missing = Some(Icon {
-            base: Some(PathBuf::from("missing-icon.png")),
+            base: Some("missing-icon.png".to_owned()),
             ..Default::default()
         });
 
-        if !system_pack
-            .file_entries
-            .iter()
-            .any(|e| e.extension == "url")
-        {
-            system_pack.file_entries.push(FileIconPackEntry {
-                extension: "url".to_string(),
+        system_pack.add_entry(IconPackEntry::Shared(SharedIconPackEntry {
+            extension: "url".to_string(),
+            icon: Icon {
+                base: Some("url.png".to_owned()),
+                ..Default::default()
+            },
+        }));
+
+        let mut add_custom = |key: &str, value: &str| {
+            system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+                key: key.to_owned(),
                 icon: Icon {
-                    base: Some(PathBuf::from("url.png")),
+                    base: Some(value.to_owned()),
+                    mask: Some(value.to_owned()),
                     ..Default::default()
                 },
-            });
-        }
-
-        let mut add_if_none = |key: &str, value: &str| {
-            if !system_pack.custom_entries.iter().any(|e| e.key == key) {
-                system_pack.custom_entries.push(CustomIconPackEntry {
-                    key: key.to_owned(),
-                    icon: Icon {
-                        base: Some(PathBuf::from(value)),
-                        mask: Some(PathBuf::from(value)),
-                        ..Default::default()
-                    },
-                });
-            };
+            }));
         };
 
-        add_if_none("@seelen/weg::start-menu", "start-menu-icon.svg");
-        add_if_none("@seelen/weg::folder", "folder-icon.svg");
+        add_custom("@seelen/weg::start-menu", "start-menu-icon.svg");
+        add_custom("@seelen/weg::folder", "folder-icon.svg");
         Ok(())
     }
 
     pub fn write_system_icon_pack(&self) -> Result<()> {
-        let folder = SEELEN_COMMON.user_icons_path().join("system");
-        std::fs::create_dir_all(&folder)?;
-        let file_path = folder.join("metadata.yml");
-        let mut file = OpenOptions::new()
-            .write(true)
-            .create(true)
-            .truncate(true)
-            .open(&file_path)?;
-        let system_pack = self.get_system();
-        serde_yaml::to_writer(&mut file, system_pack)?;
+        self.get_system().save()?;
         Ok(())
     }
 }
@@ -274,6 +265,81 @@ impl FullState {
             SeelenEvent::StateIconPacksChanged,
             trace_lock!(self.icon_packs()).list(),
         )?;
+        Ok(())
+    }
+
+    // download remote icon url and save it on the parent path + random hash.
+    fn load_remote_icon(icon: &Icon, folder_to_store: &Path) -> Result<Icon> {
+        let mut resolved = icon.clone();
+
+        if let Some(url) = &icon.base {
+            resolved.base = Some(
+                download_remote_icon_and_validate_it(url, folder_to_store)?
+                    .to_string_lossy()
+                    .to_string(),
+            );
+        }
+
+        if let Some(url) = &icon.light {
+            resolved.light = Some(
+                download_remote_icon_and_validate_it(url, folder_to_store)?
+                    .to_string_lossy()
+                    .to_string(),
+            );
+        }
+
+        if let Some(url) = &icon.dark {
+            resolved.dark = Some(
+                download_remote_icon_and_validate_it(url, folder_to_store)?
+                    .to_string_lossy()
+                    .to_string(),
+            );
+        }
+
+        if let Some(url) = &icon.mask {
+            resolved.mask = Some(
+                download_remote_icon_and_validate_it(url, folder_to_store)?
+                    .to_string_lossy()
+                    .to_string(),
+            );
+        }
+
+        Ok(resolved)
+    }
+
+    fn load_remote_icons(pack: &mut IconPack) -> Result<()> {
+        if pack.remote_entries.is_empty() || pack.downloaded {
+            return Ok(());
+        }
+
+        let folder_to_store = SEELEN_COMMON
+            .user_icons_path()
+            .join(&pack.metadata.filename);
+        let mut entries = Vec::new();
+
+        for entry in &pack.remote_entries {
+            let mut new_entry = entry.clone();
+
+            match &mut new_entry {
+                IconPackEntry::Unique(entry) => {
+                    if let Some(icon) = &mut entry.icon {
+                        *icon = Self::load_remote_icon(icon, &folder_to_store)?;
+                    }
+                }
+                IconPackEntry::Shared(entry) => {
+                    entry.icon = Self::load_remote_icon(&entry.icon, &folder_to_store)?;
+                }
+                IconPackEntry::Custom(entry) => {
+                    entry.icon = Self::load_remote_icon(&entry.icon, &folder_to_store)?;
+                }
+            }
+
+            entries.push(new_entry);
+        }
+
+        pack.entries = entries;
+        pack.downloaded = true;
+        pack.save()?;
         Ok(())
     }
 
@@ -291,8 +357,15 @@ impl FullState {
                     continue;
                 }
             };
+
             icon_pack.metadata.bundled = entry.file_name() == "system";
             icon_pack.metadata.filename = entry.file_name().to_string_lossy().to_string();
+
+            if let Err(err) = Self::load_remote_icons(&mut icon_pack) {
+                log::error!("Failed to load remote icons for icon pack ({path:?}): {err:?}");
+                continue;
+            }
+
             icon_packs_manager
                 .0
                 .insert(icon_pack.metadata.filename.clone(), icon_pack);
@@ -301,4 +374,23 @@ impl FullState {
         icon_packs_manager.sanitize_system_icon_pack(initial)?;
         Ok(())
     }
+}
+
+/// returns a path to the downloaded icon
+fn download_remote_icon_and_validate_it(url: &str, folder_to_store: &Path) -> Result<PathBuf> {
+    let bytes = tauri::async_runtime::block_on(async move {
+        let res = reqwest::get(url).await?;
+        res.bytes().await
+    })?;
+
+    let format = image::guess_format(&bytes)?;
+    let icon = image::load_from_memory_with_format(&bytes, format)?;
+    let extension = format
+        .extensions_str()
+        .first()
+        .ok_or("Could not get extension")?;
+
+    let icon_path = folder_to_store.join(format!("{}.{}", date_based_hex_id(), extension));
+    icon.save(&icon_path)?;
+    Ok(icon_path)
 }

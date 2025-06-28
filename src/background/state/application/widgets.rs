@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use seelen_core::{handlers::SeelenEvent, state::Widget};
+use seelen_core::{handlers::SeelenEvent, resource::SluResource, state::Widget};
 use tauri::Emitter;
 
 use crate::{

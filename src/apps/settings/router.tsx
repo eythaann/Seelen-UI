@@ -16,6 +16,7 @@ import { WindowManagerSettings } from './modules/WindowManager/main/infra';
 import { Layout } from './components/layout';
 import { RoutePath } from './components/navigation/routes';
 import { Home } from './modules/Home';
+import { IconPackEditorView } from './modules/IconPackEditor';
 import { ThemeView } from './modules/resources/Theme/View';
 import { WidgetView } from './modules/resources/Widget/View';
 
@@ -36,6 +37,7 @@ export function Routing() {
         <Route path={RoutePath.WindowManager} Component={WindowManagerSettings} />
         <Route path={RoutePath.FancyToolbar} Component={FancyToolbarSettings} />
         <Route path={RoutePath.DevTools} Component={DeveloperTools} />
+        <Route path={RoutePath.IconPackEditor} Component={IconPackEditorView} />
         <Route path="widget/:username/:resourceName" Component={WidgetView} />
         <Route path="theme/:username/:resourceName" Component={ThemeView} />
       </Route>

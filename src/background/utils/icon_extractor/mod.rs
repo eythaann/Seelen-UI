@@ -30,6 +30,7 @@ use crate::modules::uwp::UwpManager;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 use crate::utils::constants::SEELEN_COMMON;
+use crate::utils::date_based_hex_id;
 use crate::windows_api::types::AppUserModelId;
 use crate::windows_api::WindowsApi;
 
@@ -290,14 +291,6 @@ fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     get_icon_from_file(&path)
 }
 
-fn date_based_hex_id() -> String {
-    let since_epoch = std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
-        .unwrap()
-        .as_millis();
-    format!("{since_epoch:x}")
-}
-
 pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) {
     IconExtractor::request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
 }
@@ -341,11 +334,7 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
     let filestem = origin.file_stem().ok_or("Failed to get file stem")?;
 
     let root = SEELEN_COMMON.user_icons_path().join("system");
-    let gen_icon_filename = PathBuf::from(format!(
-        "{}_{}.png",
-        filestem.to_string_lossy(),
-        date_based_hex_id()
-    ));
+    let gen_icon_filename = format!("{}_{}.png", filestem.to_string_lossy(), date_based_hex_id());
     let mut gen_icon = Icon {
         base: Some(gen_icon_filename.clone()),
         ..Default::default()
@@ -377,7 +366,7 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
             .is_some_and(|ext| ext.to_string_lossy().to_lowercase() != "ico")
         {
             drop(icon_manager);
-            _extract_and_save_icon_from_file(&lnk_icon_path, None)?;
+            _extract_and_save_icon_from_file(&lnk_icon_path, umid.clone())?;
             let mut icon_manager = trace_lock!(mutex);
             icon_manager.add_system_icon_redirect(umid, origin, &lnk_icon_path);
             icon_manager.write_system_icon_pack()?;
@@ -400,7 +389,7 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
         icon.save(root.join(&gen_icon_filename))?;
         icon_manager.add_system_app_icon(umid.as_deref(), Some(origin), gen_icon);
     } else {
-        let gen_icon_filename = format!("{}_{}.png", origin_ext, date_based_hex_id()).into();
+        let gen_icon_filename = format!("{}_{}.png", origin_ext, date_based_hex_id());
         icon.save(root.join(&gen_icon_filename))?;
         gen_icon.base = Some(gen_icon_filename);
         icon_manager.add_system_file_icon(&origin_ext, gen_icon);
@@ -444,11 +433,11 @@ pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
                 light_rgba.save(root.join(format!("{name}_light.png")))?;
                 dark_rgba.save(root.join(format!("{name}_dark.png")))?;
 
-                gen_icon.light = Some(format!("{name}_light.png").into());
-                gen_icon.dark = Some(format!("{name}_dark.png").into());
+                gen_icon.light = Some(format!("{name}_light.png"));
+                gen_icon.dark = Some(format!("{name}_dark.png"));
             } else {
                 light_rgba.save(root.join(format!("{name}.png")))?;
-                gen_icon.base = Some(format!("{name}.png").into());
+                gen_icon.base = Some(format!("{name}.png"));
             }
 
             gen_icon.is_aproximately_square = is_aproximately_a_square(&light_rgba);

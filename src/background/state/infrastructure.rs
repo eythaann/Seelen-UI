@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    IconPack, LauncherHistory, MonitorConfiguration, Plugin, Profile, WegItems,
+    IconPack, IconPackEntry, LauncherHistory, MonitorConfiguration, Plugin, Profile, WegItems,
     WegPinnedItemsVisibility, Widget,
 };
 
@@ -136,4 +136,9 @@ pub fn state_delete_cached_icons() -> Result<()> {
     icon_manager.sanitize_system_icon_pack(false)?;
     icon_manager.write_system_icon_pack()?;
     Ok(())
+}
+
+#[tauri::command(async)]
+pub fn state_add_icon_to_custom_icon_pack(_icon: IconPackEntry) -> Result<()> {
+    todo!()
 }

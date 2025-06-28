@@ -1,8 +1,8 @@
-import { ResourceText } from '@seelen-ui/lib/types';
+import { ResourceText as IResourceText } from '@seelen-ui/lib/types';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
-  text?: ResourceText;
+  text?: IResourceText;
 }
 
 export function ResourceText({ text }: Props) {

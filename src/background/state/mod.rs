@@ -6,9 +6,9 @@ use std::collections::HashMap;
 
 use application::FullState;
 use domain::AhkVar;
-use seelen_core::state::{
-    PluginId, WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetId,
-    WidgetInstanceType,
+use seelen_core::{
+    resource::{PluginId, WidgetId},
+    state::{WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetInstanceType},
 };
 use uuid::Uuid;
 

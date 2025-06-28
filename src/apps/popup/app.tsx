@@ -1,11 +1,11 @@
 import { IconName } from '@icons';
 import { invoke, SeelenCommand, Widget } from '@seelen-ui/lib';
-import { SluPopupConfig, SluPopupContent } from '@seelen-ui/lib/types';
+import { SluPopupConfig, SluPopupContent as ISluPopupContent } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useEffect, useState } from 'react';
 
-function SluPopupContent({ entry }: { entry: SluPopupContent }) {
+function SluPopupContent({ entry }: { entry: ISluPopupContent }) {
   switch (entry.type) {
     case 'text':
       return (

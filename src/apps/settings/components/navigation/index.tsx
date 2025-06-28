@@ -114,7 +114,9 @@ export const Navigation = memo(() => {
         {devTools && (
           <>
             <div className={cs.separator} />
-            <div className={cs.group}>{[devTools ? RoutePath.DevTools : null].map(Mapper)}</div>
+            <div className={cs.group}>
+              {(devTools ? [RoutePath.DevTools, RoutePath.IconPackEditor] : []).map(Mapper)}
+            </div>
           </>
         )}
       </div>

@@ -4,8 +4,8 @@ use std::{collections::HashMap, sync::LazyLock};
 
 use parking_lot::Mutex;
 use seelen_core::{
-    resource::{Resource, ResourceKind},
-    state::{CssStyles, SluPopupConfig, SluPopupContent, WidgetId},
+    resource::{Resource, ResourceKind, WidgetId},
+    state::{CssStyles, SluPopupConfig, SluPopupContent},
 };
 use tauri::{
     utils::{config::WindowEffectsConfig, WindowEffect},
