@@ -169,6 +169,7 @@ impl IconPacksManager {
             icon_pack.metadata.display_name = ResourceText::En("System".to_string());
             icon_pack.metadata.description =
                 ResourceText::En("Icons from Windows and Program Files".to_string());
+            icon_pack.metadata.path = SEELEN_COMMON.user_icons_path().join("system");
             icon_pack.metadata.filename = "system".to_string();
 
             self.0

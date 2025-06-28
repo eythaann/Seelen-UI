@@ -76,7 +76,7 @@ impl RestorationAndMigration {
             Ok(())
         };
         create_if_needed("themes")?;
-        create_if_needed("iconpacks")?;
+        create_if_needed("iconpacks/system")?;
         create_if_needed("wallpapers")?;
         create_if_needed("soundpacks")?;
         create_if_needed("plugins")?;
