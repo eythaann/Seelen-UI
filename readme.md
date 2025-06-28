@@ -37,16 +37,17 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Join the Seelen UI Discord community">
-        <img src="./documentation/images/discord.png" width="100%" alt="Join the Seelen UI Discord community">
+        <img src="./documentation/images/discord-alt.png" width="100%" alt="Join the Seelen UI Discord community">
       </a>
     </td>
     <td align="center" width="33%">
       <a
-        href='https://ko-fi.com/O4O41ADV7D'
+        href='https://www.digitalocean.com/?refcode=955c7335abf5&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge'
         target='_blank'
         rel="noopener noreferrer"
-        aria-label="Buy me a coffee">
-        <img src='https://storage.ko-fi.com/cdn/kofi1.png?v=6' width="100%" alt='Buy Me a Coffee at ko-fi.com' />
+        aria-label="DigitalOcean Referral Badge"
+      >
+        <img src='https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg' width="100%" alt='DigitalOcean Referral Badge' />
       </a>
     </td>
   </tr>
