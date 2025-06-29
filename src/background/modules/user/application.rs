@@ -63,29 +63,31 @@ unsafe impl Send for UserManagerEvent {}
 event_manager!(UserManager, UserManagerEvent);
 
 impl UserManager {
-    fn get_path_from_folder(folder_type: &FolderType) -> Result<PathBuf> {
+    fn get_path_from_folder(folder_type: &FolderType) -> Option<PathBuf> {
         let resolver = get_app_handle().path();
-        Ok(match folder_type {
-            FolderType::Recent => resolver.data_dir()?.join("Microsoft\\Windows\\Recent"),
-            FolderType::Desktop => resolver.desktop_dir()?,
-            FolderType::Downloads => resolver.download_dir()?,
-            FolderType::Documents => resolver.document_dir()?,
-            FolderType::Pictures => resolver.picture_dir()?,
-            FolderType::Videos => resolver.video_dir()?,
-            FolderType::Music => resolver.audio_dir()?,
-            FolderType::Unknown => {
-                return Err("There is no such folder could be handled!".into());
+        match folder_type {
+            FolderType::Recent => {
+                Some(resolver.data_dir().ok()?.join("Microsoft\\Windows\\Recent"))
             }
-        })
+            FolderType::Desktop => resolver.desktop_dir().ok(),
+            FolderType::Downloads => resolver.download_dir().ok(),
+            FolderType::Documents => resolver.document_dir().ok(),
+            FolderType::Pictures => resolver.picture_dir().ok(),
+            FolderType::Videos => resolver.video_dir().ok(),
+            FolderType::Music => resolver.audio_dir().ok(),
+            FolderType::Unknown => None,
+        }
     }
 
-    fn get_folder_from_path(path: &Path) -> Result<FolderType> {
+    fn get_folder_from_path(path: &Path) -> FolderType {
         for folder_type in FolderType::values() {
-            if path.starts_with(Self::get_path_from_folder(folder_type)?) {
-                return Ok(*folder_type);
+            if let Some(folder_path) = Self::get_path_from_folder(folder_type) {
+                if path.starts_with(folder_path) {
+                    return *folder_type;
+                }
             }
         }
-        Ok(FolderType::Unknown)
+        FolderType::Unknown
     }
 
     fn get_logged_on_user_sid() -> Result<String> {
@@ -197,10 +199,11 @@ impl UserManager {
 
     fn on_files_changed(changed: HashSet<PathBuf>) -> Result<()> {
         for path in changed {
-            let folder_type = Self::get_folder_from_path(&path)?;
+            let folder_type = Self::get_folder_from_path(&path);
             if folder_type == FolderType::Unknown {
                 continue;
             }
+
             let mut guard = trace_lock!(USER_MANAGER);
             if let Some(model) = guard.folders.get_mut(&folder_type) {
                 model.content = Self::get_folder_content(model.path.clone(), model.limit)?;
@@ -244,7 +247,7 @@ impl UserManager {
 
         for folder in FolderType::values() {
             match Self::get_path_from_folder(folder) {
-                Ok(folder_path) => {
+                Some(folder_path) => {
                     instance.folders.insert(
                         *folder,
                         UserFolderDetails {
@@ -254,8 +257,8 @@ impl UserManager {
                         },
                     );
                 }
-                Err(err) => {
-                    log::error!("Failed to get path for folder {folder:?}: {err:?}");
+                None => {
+                    log::error!("Failed to get path for known user folder: {folder:?}");
                 }
             }
         }
