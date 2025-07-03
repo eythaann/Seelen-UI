@@ -1,7 +1,6 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, path::PathBuf};
 
 use getset::{Getters, MutGetters};
-use seelen_core::resource::WidgetId;
 
 use crate::{
     error_handler::Result,
@@ -24,7 +23,7 @@ pub struct SluMonitorInstance {
     weg: Option<SeelenWeg>,
     wm: Option<WindowManagerV2>,
     /// third party widgets
-    widgets: HashMap<WidgetId, WidgetInstance>,
+    widgets: HashMap<PathBuf, WidgetInstance>,
 }
 
 unsafe impl Send for SluMonitorInstance {}

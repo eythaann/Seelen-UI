@@ -97,6 +97,7 @@ impl PopupsManager {
         let popup_id = self.create(config)?;
 
         let id = resource.id;
+        let friendly_id = resource.friendly_id.to_string();
         let kind = resource.kind.clone();
         let event = format!("resource::{id}::enable");
         let token = handle.once(event, move |_e| {
@@ -105,10 +106,16 @@ impl PopupsManager {
                     let mut state = state.cloned();
                     match kind {
                         ResourceKind::Theme => {
-                            state.settings.selected_themes.push(format!("{id}.slu"));
+                            state
+                                .settings
+                                .active_themes
+                                .push(friendly_id.clone().into());
                         }
                         ResourceKind::IconPack => {
-                            state.settings.icon_packs.push(format!("{id}.slu"));
+                            state
+                                .settings
+                                .active_icon_packs
+                                .push(friendly_id.clone().into());
                         }
                         _ => {}
                     }

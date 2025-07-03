@@ -115,6 +115,19 @@ fn path_by_resource_kind(kind: &ResourceKind) -> &Path {
     }
 }
 
+fn store_file_on_respective_user_folder(file: &SluResourceFile) -> Result<()> {
+    let mut path_to_store = path_by_resource_kind(&file.resource.kind).to_path_buf();
+    if file.resource.kind == ResourceKind::IconPack {
+        path_to_store.push(file.resource.id.to_string());
+        std::fs::create_dir_all(&path_to_store)?;
+        path_to_store.push("metadata.slu");
+    } else {
+        path_to_store.push(format!("{}.slu", file.resource.id));
+    }
+    file.store(&path_to_store)?;
+    Ok(())
+}
+
 impl AppCli {
     pub const URI: &str = "seelen-ui.uri:";
 
@@ -128,9 +141,7 @@ impl AppCli {
             }
 
             let file = SluResourceFile::load(&path)?;
-            let path_to_store = path_by_resource_kind(&file.resource.kind)
-                .join(format!("{}.slu", file.resource.id));
-            file.store(&path_to_store)?;
+            store_file_on_respective_user_folder(&file)?;
             POPUPS_MANAGER
                 .lock()
                 .create_added_resource(&file.resource)?;
@@ -147,6 +158,7 @@ impl AppCli {
         let [_method, enviroment, resource_id] = parts.as_slice() else {
             return Err("Invalid URI format".into());
         };
+
         let Ok(resource_id) = Uuid::parse_str(resource_id) else {
             return Err("Invalid URI format".into());
         };
@@ -161,14 +173,13 @@ impl AppCli {
         tauri::async_runtime::block_on(async move {
             let res = reqwest::get(url).await?;
             let file = res.json::<SluResourceFile>().await?;
-            let path_to_store = path_by_resource_kind(&file.resource.kind)
-                .join(format!("{}.slu", file.resource.id));
-            file.store(&path_to_store)?;
+            store_file_on_respective_user_folder(&file)?;
             POPUPS_MANAGER
                 .lock()
                 .create_added_resource(&file.resource)?;
             Result::Ok(())
         })?;
+
         Ok(())
     }
 

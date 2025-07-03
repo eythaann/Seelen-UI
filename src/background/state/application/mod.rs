@@ -20,10 +20,7 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::{
-    resource::{PluginId, WidgetId},
-    state::{LauncherHistory, Plugin, Profile, WegItems, Widget},
-};
+use seelen_core::state::{LauncherHistory, Plugin, Profile, WegItems, Widget};
 use std::{
     collections::{HashMap, HashSet, VecDeque},
     path::{Path, PathBuf},
@@ -50,14 +47,14 @@ pub struct FullState {
     pub profiles: Vec<Profile>,
     pub settings: Settings,
     pub settings_by_app: VecDeque<AppConfig>,
-    pub themes: HashMap<String, Theme>,
-    pub icon_packs: Arc<Mutex<IconPacksManager>>,
     pub weg_items: WegItems,
     pub toolbar_items: Placeholder,
     pub launcher_history: LauncherHistory,
 
-    pub plugins: HashMap<PluginId, Plugin>,
-    pub widgets: HashMap<WidgetId, Widget>,
+    pub themes: HashMap<PathBuf, Theme>,
+    pub plugins: HashMap<PathBuf, Plugin>,
+    pub widgets: HashMap<PathBuf, Widget>,
+    pub icon_packs: Arc<Mutex<IconPacksManager>>,
 }
 
 unsafe impl Sync for FullState {}
@@ -70,13 +67,13 @@ impl FullState {
             profiles: Vec::new(),
             settings: Settings::default(),
             settings_by_app: VecDeque::new(),
-            themes: HashMap::new(),
-            icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
             weg_items: WegItems::default(),
             toolbar_items: Placeholder::default(),
             launcher_history: LauncherHistory::default(),
+            themes: HashMap::new(),
             plugins: HashMap::new(),
             widgets: HashMap::new(),
+            icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
         };
         manager.load_all()?; // ScaDaned log shows a deadlock here.
         manager.start_listeners()?;
@@ -103,27 +100,77 @@ impl FullState {
     }
 
     fn process_changes(&mut self, changed: &HashSet<PathBuf>) -> Result<()> {
-        let mut is_changing_icons_metadata = false;
-        let mut is_only_changing_system_icons = true;
+        let mut icons_metadata_changed = false;
+        let mut weg_items_changed = false;
+        let mut toolbar_items_changed = false;
+        let mut history_changed = false;
+        let mut themes_changed = false;
+        let mut app_configs_changed = false;
+        let mut plugins_changed = false;
+        let mut widgets_changed = false;
+        let mut settings_changed = false;
 
-        for path in changed.iter() {
-            if path.starts_with(SEELEN_COMMON.user_icons_path()) && path.ends_with("metadata.yml") {
-                is_changing_icons_metadata = true;
-                if !path.ends_with("system\\metadata.yml") {
-                    is_only_changing_system_icons = false;
-                }
+        // Single iteration over the changed paths
+        for path in changed {
+            if !icons_metadata_changed
+                && path.starts_with(SEELEN_COMMON.user_icons_path())
+                && path.file_stem().is_some_and(|s| s == "metadata")
+            {
+                icons_metadata_changed = true;
+            }
+
+            if !weg_items_changed && path == SEELEN_COMMON.weg_items_path() {
+                weg_items_changed = true;
+            }
+
+            if !toolbar_items_changed && path == SEELEN_COMMON.toolbar_items_path() {
+                toolbar_items_changed = true;
+            }
+
+            if !history_changed && path == SEELEN_COMMON.history_path() {
+                history_changed = true;
+            }
+
+            if !themes_changed
+                && (path.starts_with(SEELEN_COMMON.user_themes_path())
+                    || path.starts_with(SEELEN_COMMON.bundled_themes_path()))
+            {
+                themes_changed = true;
+            }
+
+            if !app_configs_changed
+                && (path == SEELEN_COMMON.user_app_configs_path()
+                    || path.starts_with(SEELEN_COMMON.bundled_app_configs_path()))
+            {
+                app_configs_changed = true;
+            }
+
+            if !plugins_changed
+                && (path.starts_with(SEELEN_COMMON.user_plugins_path())
+                    || path.starts_with(SEELEN_COMMON.bundled_plugins_path()))
+            {
+                plugins_changed = true;
+            }
+
+            if !widgets_changed
+                && (path.starts_with(SEELEN_COMMON.user_widgets_path())
+                    || path.starts_with(SEELEN_COMMON.bundled_widgets_path()))
+            {
+                widgets_changed = true;
+            }
+
+            if !settings_changed && path == SEELEN_COMMON.settings_path() {
+                settings_changed = true;
             }
         }
 
-        if is_changing_icons_metadata {
-            if !is_only_changing_system_icons {
-                log::info!("Icons Packs changed");
-                self.load_icons_packs(false)?;
-            }
+        if icons_metadata_changed {
+            log::info!("Icon Packs changed");
+            self.load_icons_packs(false)?;
             self.emit_icon_packs()?;
         }
 
-        if changed.iter().any(|p| p == SEELEN_COMMON.weg_items_path()) {
+        if weg_items_changed {
             let old = self.weg_items.clone();
             self.read_weg_items()?;
             if old != self.weg_items {
@@ -132,10 +179,7 @@ impl FullState {
             }
         }
 
-        if changed
-            .iter()
-            .any(|p| p == SEELEN_COMMON.toolbar_items_path())
-        {
+        if toolbar_items_changed {
             let old = self.toolbar_items.clone();
             self.read_toolbar_items()?;
             if old != self.toolbar_items {
@@ -144,43 +188,31 @@ impl FullState {
             }
         }
 
-        if changed.iter().any(|p| p == SEELEN_COMMON.history_path()) {
+        if history_changed {
             log::info!("History changed");
             self.load_history()?;
             self.emit_history()?;
         }
 
-        if changed.iter().any(|p| {
-            p.starts_with(SEELEN_COMMON.user_themes_path())
-                || p.starts_with(SEELEN_COMMON.bundled_themes_path())
-        }) {
+        if themes_changed {
             log::info!("Theme changed");
             self.load_themes()?;
             self.emit_themes()?;
         }
 
-        if changed.iter().any(|p| {
-            p == SEELEN_COMMON.user_app_configs_path()
-                || p.starts_with(SEELEN_COMMON.bundled_app_configs_path())
-        }) {
+        if app_configs_changed {
             log::info!("Specific App Configuration changed");
             self.load_settings_by_app()?;
             self.emit_settings_by_app()?;
         }
 
-        if changed.iter().any(|p| {
-            p.starts_with(SEELEN_COMMON.user_plugins_path())
-                || p.starts_with(SEELEN_COMMON.bundled_plugins_path())
-        }) {
+        if plugins_changed {
             log::info!("Plugins changed");
             self.load_plugins()?;
             self.emit_plugins()?;
         }
 
-        if changed.iter().any(|p| {
-            p.starts_with(SEELEN_COMMON.user_widgets_path())
-                || p.starts_with(SEELEN_COMMON.bundled_widgets_path())
-        }) {
+        if widgets_changed {
             log::info!("Widgets changed");
             self.load_widgets()?;
             self.emit_widgets()?;
@@ -188,7 +220,7 @@ impl FullState {
 
         // important: settings changed should be the last one to avoid use unexisting state
         // like new recently added theme, plugin, widget, etc
-        if changed.iter().any(|p| p == SEELEN_COMMON.settings_path()) {
+        if settings_changed {
             log::info!("Seelen Settings changed");
             self.read_settings()?;
             self.emit_settings()?;
@@ -309,6 +341,9 @@ impl FullState {
 
     /// We log each step on this cuz for some reason a deadlock is happening somewhere.
     fn load_all(&mut self) -> Result<()> {
+        log::trace!("Initial load: themes");
+        self.load_themes()?; // themes needs to be loaded before settings, for a needed migration since v2.3.8
+
         log::trace!("Initial load: settings");
         self.read_settings()?;
 
@@ -317,9 +352,6 @@ impl FullState {
 
         log::trace!("Initial load: toolbar items");
         self.read_toolbar_items()?;
-
-        log::trace!("Initial load: themes");
-        self.load_themes()?;
 
         log::trace!("Initial load: icons packs");
         self.load_icons_packs(true)?;

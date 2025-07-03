@@ -29,7 +29,7 @@ impl FullState {
             match Plugin::load(&path) {
                 Ok(mut plugin) => {
                     plugin.metadata.bundled = path.starts_with(bundled_path);
-                    self.plugins.insert(plugin.id.clone(), plugin);
+                    self.plugins.insert(plugin.metadata.path.clone(), plugin);
                 }
                 Err(e) => {
                     log::error!("Failed to load plugin: {e}");

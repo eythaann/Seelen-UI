@@ -1,4 +1,5 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
+import { IconPack, IconPackId } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
 import { path } from '@tauri-apps/api';
 import { Button, Switch } from 'antd';
@@ -15,28 +16,34 @@ import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { ResourceCard } from './common';
 
 export function IconPacksView() {
-  const _active = useSelector(RootSelectors.iconPacks);
+  const activeIds = useSelector(RootSelectors.activeIconPacks);
   const allIconPacks = useSelector(RootSelectors.availableIconPacks);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  function toggleIconPack(filename: string) {
-    if (_active.includes(filename)) {
-      dispatch(RootActions.setIconPacks(_active.filter((x) => x !== filename)));
+  function toggleIconPack(id: IconPackId) {
+    if (activeIds.includes(id)) {
+      dispatch(RootActions.setActiveIconPacks(activeIds.filter((x) => x !== id)));
     } else {
-      dispatch(RootActions.setIconPacks([..._active, filename]));
+      dispatch(RootActions.setActiveIconPacks([...activeIds, id]));
     }
   }
 
-  function onReorder(activeIconPacks: string[]) {
-    dispatch(RootActions.setIconPacks(activeIconPacks));
+  function onReorder(activeIconPacks: IconPackId[]) {
+    dispatch(RootActions.setActiveIconPacks(activeIconPacks));
   }
 
-  const disabled = allIconPacks.filter((x) => !_active.includes(x.metadata.filename));
-  const enabled = _active
-    .map((x) => allIconPacks.find((y) => y.metadata.filename === x)!)
-    .filter(Boolean);
+  const disabled: IconPack[] = [];
+  const enabled: IconPack[] = [];
+  for (const pack of allIconPacks) {
+    if (activeIds.includes(pack.id)) {
+      enabled.push(pack);
+    } else {
+      disabled.push(pack);
+    }
+  }
+  enabled.sort((a, b) => activeIds.indexOf(a.id) - activeIds.indexOf(b.id));
 
   return (
     <div className={cs.list}>
@@ -56,18 +63,15 @@ export function IconPacksView() {
       </SettingsGroup>
 
       <b>{t('general.icon_pack.selected')}</b>
-      <Reorder.Group values={_active} onReorder={onReorder} className={cs.reorderGroup}>
+      <Reorder.Group values={activeIds} onReorder={onReorder} className={cs.reorderGroup}>
         {enabled.map((iconPack) => (
-          <Reorder.Item key={iconPack.id} value={iconPack.metadata.filename}>
+          <Reorder.Item key={iconPack.id} value={iconPack.id}>
             <ResourceCard
               resource={iconPack}
               kind="IconPack"
               actions={
                 iconPack.id === '@system/icon-pack' ? undefined : (
-                  <Switch
-                    defaultChecked={true}
-                    onChange={() => toggleIconPack(iconPack.metadata.filename)}
-                  />
+                  <Switch defaultChecked={true} onChange={() => toggleIconPack(iconPack.id)} />
                 )
               }
             />
@@ -81,12 +85,7 @@ export function IconPacksView() {
           key={iconPack.id}
           resource={iconPack}
           kind="IconPack"
-          actions={
-            <Switch
-              defaultChecked={false}
-              onChange={() => toggleIconPack(iconPack.metadata.filename)}
-            />
-          }
+          actions={<Switch defaultChecked={false} onChange={() => toggleIconPack(iconPack.id)} />}
         />
       ))}
     </div>

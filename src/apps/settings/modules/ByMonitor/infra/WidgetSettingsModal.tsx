@@ -1,5 +1,6 @@
 // This file is for testing, not final implementation yet.
 
+import { WidgetId } from '@seelen-ui/lib/types';
 import { Button, Modal } from 'antd';
 import { ReactNode, useState } from 'react';
 
@@ -8,7 +9,7 @@ import { Icon } from 'src/apps/shared/components/Icon';
 import { WidgetConfiguration } from '../../resources/Widget/View';
 
 interface Props {
-  widgetId: string;
+  widgetId: WidgetId;
   monitorId: string;
   title: ReactNode;
 }

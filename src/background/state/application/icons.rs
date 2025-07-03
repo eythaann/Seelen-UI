@@ -1,6 +1,7 @@
 use std::{
     collections::HashMap,
     path::{Path, PathBuf},
+    sync::LazyLock,
 };
 
 use itertools::Itertools;
@@ -23,8 +24,11 @@ use crate::{
 
 use super::FullState;
 
+static SYSTEM_ICONS: LazyLock<PathBuf> =
+    LazyLock::new(|| SEELEN_COMMON.user_icons_path().join("system"));
+
 #[derive(Debug, Clone, Default)]
-pub struct IconPacksManager(HashMap<String, IconPack>);
+pub struct IconPacksManager(HashMap<PathBuf, IconPack>);
 
 impl IconPacksManager {
     pub fn list(&self) -> Vec<&IconPack> {
@@ -36,11 +40,11 @@ impl IconPacksManager {
     }
 
     pub fn get_system(&self) -> &IconPack {
-        self.0.get("system").unwrap()
+        self.0.get(SYSTEM_ICONS.as_path()).unwrap()
     }
 
     pub fn get_system_mut(&mut self) -> &mut IconPack {
-        self.0.get_mut("system").unwrap()
+        self.0.get_mut(SYSTEM_ICONS.as_path()).unwrap()
     }
 
     pub fn add_system_app_icon(&mut self, umid: Option<&str>, path: Option<&Path>, icon: Icon) {
@@ -80,10 +84,17 @@ impl IconPacksManager {
     }
 
     fn icon_exists(&self, icon: &Icon) -> bool {
-        let root = SEELEN_COMMON.user_icons_path().join("system");
-        icon.base.as_ref().is_some_and(|p| root.join(p).exists())
-            || (icon.light.as_ref().is_some_and(|p| root.join(p).exists())
-                && icon.dark.as_ref().is_some_and(|p| root.join(p).exists()))
+        icon.base
+            .as_ref()
+            .is_some_and(|p| SYSTEM_ICONS.join(p).exists())
+            || (icon
+                .light
+                .as_ref()
+                .is_some_and(|p| SYSTEM_ICONS.join(p).exists())
+                && icon
+                    .dark
+                    .as_ref()
+                    .is_some_and(|p| SYSTEM_ICONS.join(p).exists()))
     }
 
     /// Get icon pack by app user model id, filename or path
@@ -149,7 +160,7 @@ impl IconPacksManager {
         let system_pack = self.get_system_mut();
         system_pack.entries.clear();
         let meta = std::ffi::OsStr::new("metadata.yml");
-        for entry in std::fs::read_dir(SEELEN_COMMON.user_icons_path().join("system"))?.flatten() {
+        for entry in std::fs::read_dir(SYSTEM_ICONS.as_path())?.flatten() {
             if entry.file_type()?.is_dir() {
                 std::fs::remove_dir_all(entry.path())?;
             } else if entry.file_name() != meta {
@@ -161,7 +172,7 @@ impl IconPacksManager {
 
     pub fn sanitize_system_icon_pack(&mut self, initial: bool) -> Result<()> {
         // add default icon pack if not exists
-        if !self.0.contains_key("system") {
+        if !self.0.contains_key(SYSTEM_ICONS.as_path()) {
             let mut icon_pack = IconPack {
                 id: "@system/icon-pack".into(),
                 ..Default::default()
@@ -169,25 +180,17 @@ impl IconPacksManager {
             icon_pack.metadata.display_name = ResourceText::En("System".to_string());
             icon_pack.metadata.description =
                 ResourceText::En("Icons from Windows and Program Files".to_string());
-            icon_pack.metadata.path = SEELEN_COMMON.user_icons_path().join("system");
-            icon_pack.metadata.filename = "system".to_string();
+            icon_pack.metadata.path = SYSTEM_ICONS.to_path_buf();
 
-            self.0
-                .insert(icon_pack.metadata.filename.clone(), icon_pack);
+            self.0.insert(icon_pack.metadata.path.clone(), icon_pack);
             self.write_system_icon_pack()?;
         }
 
         let system_pack = self.get_system_mut();
-        let missing_path = SEELEN_COMMON
-            .user_icons_path()
-            .join("system/missing-icon.png");
-        let start_path = SEELEN_COMMON
-            .user_icons_path()
-            .join("system/start-menu-icon.svg");
-        let folder_path = SEELEN_COMMON
-            .user_icons_path()
-            .join("system/folder-icon.svg");
-        let url_path = SEELEN_COMMON.user_icons_path().join("system/url.png");
+        let missing_path = SYSTEM_ICONS.join("missing-icon.png");
+        let start_path = SYSTEM_ICONS.join("start-menu-icon.svg");
+        let folder_path = SYSTEM_ICONS.join("folder-icon.svg");
+        let url_path = SYSTEM_ICONS.join("url.png");
 
         if !missing_path.exists() || initial {
             std::fs::copy(
@@ -273,36 +276,28 @@ impl FullState {
     fn load_remote_icon(icon: &Icon, folder_to_store: &Path) -> Result<Icon> {
         let mut resolved = icon.clone();
 
+        let download_filename = |url: &str| -> Result<String> {
+            Ok(download_remote_icon_and_validate_it(url, folder_to_store)?
+                .file_name()
+                .ok_or("Could not get file name")?
+                .to_string_lossy()
+                .to_string())
+        };
+
         if let Some(url) = &icon.base {
-            resolved.base = Some(
-                download_remote_icon_and_validate_it(url, folder_to_store)?
-                    .to_string_lossy()
-                    .to_string(),
-            );
+            resolved.base = download_filename(url).ok();
         }
 
         if let Some(url) = &icon.light {
-            resolved.light = Some(
-                download_remote_icon_and_validate_it(url, folder_to_store)?
-                    .to_string_lossy()
-                    .to_string(),
-            );
+            resolved.light = download_filename(url).ok();
         }
 
         if let Some(url) = &icon.dark {
-            resolved.dark = Some(
-                download_remote_icon_and_validate_it(url, folder_to_store)?
-                    .to_string_lossy()
-                    .to_string(),
-            );
+            resolved.dark = download_filename(url).ok()
         }
 
         if let Some(url) = &icon.mask {
-            resolved.mask = Some(
-                download_remote_icon_and_validate_it(url, folder_to_store)?
-                    .to_string_lossy()
-                    .to_string(),
-            );
+            resolved.mask = download_filename(url).ok();
         }
 
         Ok(resolved)
@@ -313,9 +308,6 @@ impl FullState {
             return Ok(());
         }
 
-        let folder_to_store = SEELEN_COMMON
-            .user_icons_path()
-            .join(&pack.metadata.filename);
         let mut entries = Vec::new();
 
         for entry in &pack.remote_entries {
@@ -324,14 +316,14 @@ impl FullState {
             match &mut new_entry {
                 IconPackEntry::Unique(entry) => {
                     if let Some(icon) = &mut entry.icon {
-                        *icon = Self::load_remote_icon(icon, &folder_to_store)?;
+                        *icon = Self::load_remote_icon(icon, &pack.metadata.path)?;
                     }
                 }
                 IconPackEntry::Shared(entry) => {
-                    entry.icon = Self::load_remote_icon(&entry.icon, &folder_to_store)?;
+                    entry.icon = Self::load_remote_icon(&entry.icon, &pack.metadata.path)?;
                 }
                 IconPackEntry::Custom(entry) => {
-                    entry.icon = Self::load_remote_icon(&entry.icon, &folder_to_store)?;
+                    entry.icon = Self::load_remote_icon(&entry.icon, &pack.metadata.path)?;
                 }
             }
 
@@ -360,8 +352,6 @@ impl FullState {
             };
 
             icon_pack.metadata.bundled = entry.file_name() == "system";
-            icon_pack.metadata.filename = entry.file_name().to_string_lossy().to_string();
-
             if let Err(err) = Self::load_remote_icons(&mut icon_pack) {
                 log::error!("Failed to load remote icons for icon pack ({path:?}): {err:?}");
                 continue;
@@ -369,7 +359,7 @@ impl FullState {
 
             icon_packs_manager
                 .0
-                .insert(icon_pack.metadata.filename.clone(), icon_pack);
+                .insert(icon_pack.metadata.path.clone(), icon_pack);
         }
 
         icon_packs_manager.sanitize_system_icon_pack(initial)?;
@@ -379,6 +369,10 @@ impl FullState {
 
 /// returns a path to the downloaded icon
 fn download_remote_icon_and_validate_it(url: &str, folder_to_store: &Path) -> Result<PathBuf> {
+    if !folder_to_store.is_dir() {
+        return Err("Folder to store is not a directory".into());
+    }
+
     let bytes = tauri::async_runtime::block_on(async move {
         let res = reqwest::get(url).await?;
         res.bytes().await

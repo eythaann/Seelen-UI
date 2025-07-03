@@ -1,4 +1,5 @@
 import { SeelenWindowManagerWidgetId, VirtualDesktopStrategy } from '@seelen-ui/lib';
+import { PluginId } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { Alert, Button, ConfigProvider, Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
@@ -41,7 +42,7 @@ export function WindowManagerSettings() {
     dispatch(WManagerSettingsActions.setEnabled(value));
   };
 
-  const onSelectLayout = (value: string) => {
+  const onSelectLayout = (value: PluginId) => {
     dispatch(WManagerSettingsActions.setDefaultLayout(value));
   };
 

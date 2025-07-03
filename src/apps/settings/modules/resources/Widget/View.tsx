@@ -146,7 +146,6 @@ export function WidgetConfiguration({
 
 export function WidgetView() {
   const { username, resourceName } = useParams<'username' | 'resourceName'>();
-  const widgetId = `@${username}/${resourceName}`;
-
+  const widgetId = `@${username}/${resourceName}` as WidgetId;
   return <WidgetConfiguration widgetId={widgetId} />;
 }

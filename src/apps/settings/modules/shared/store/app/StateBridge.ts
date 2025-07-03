@@ -12,8 +12,9 @@ import { RootState } from '../domain';
 
 export const StateToJsonSettings = (state: RootState): Settings => {
   let settings = pick(cloneDeep(state), [
-    'iconPacks',
-    'selectedThemes',
+    'activeIconPacks',
+    'oldActiveThemes',
+    'activeThemes',
     'monitorsV2',
     'ahkEnabled',
     'ahkVariables',

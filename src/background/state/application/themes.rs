@@ -27,8 +27,7 @@ impl FullState {
                         continue;
                     }
                     theme.metadata.bundled = path.starts_with(SEELEN_COMMON.bundled_themes_path());
-                    theme.metadata.filename = entry.file_name().to_string_lossy().to_string();
-                    self.themes.insert(theme.metadata.filename.clone(), theme);
+                    self.themes.insert(theme.metadata.path.clone(), theme);
                 }
                 Err(err) => log::error!("Failed to load theme ({:?}): {:?}", entry.path(), err),
             }

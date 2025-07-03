@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UIColors, UpdateChannel, VirtualDesktopStrategy } from '@seelen-ui/lib';
+import { IconPackId, ThemeId, WidgetId } from '@seelen-ui/lib/types';
 import { cloneDeep, pick } from 'lodash';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
@@ -32,8 +33,9 @@ const initialState: RootState = {
   ahkVariables: AhkVariablesSlice.getInitialState(),
   availableThemes: [],
   availableIconPacks: [],
-  iconPacks: [],
-  selectedThemes: [],
+  oldActiveThemes: [],
+  activeIconPacks: [],
+  activeThemes: [],
   devTools: false,
   drpc: true,
   language: navigator.language.split('-')[0] || 'en',
@@ -100,22 +102,35 @@ export const RootSlice = createSlice({
       }
       return state;
     },
-    setIconPacks: toBeSaved(reducers.setIconPacks),
-    setSelectedThemes: (state, action: PayloadAction<string[]>) => {
-      let themes = new Set(action.payload);
-      if (!themes.has('default')) {
-        themes.add('default');
+    setActiveIconPacks: (state, action: PayloadAction<IconPackId[]>) => {
+      let iconPacks = new Set(action.payload);
+      // remove missing
+      for (const id of action.payload) {
+        if (!state.availableIconPacks.some((x) => x.id === id)) {
+          iconPacks.delete(id);
+        }
       }
       state.toBeSaved = true;
-      state.selectedThemes = Array.from(themes);
+      state.activeIconPacks = Array.from(iconPacks);
+    },
+    setSelectedThemes: (state, action: PayloadAction<ThemeId[]>) => {
+      let themes = new Set(action.payload);
+      // remove missing
+      for (const id of action.payload) {
+        if (!state.availableThemes.some((x) => x.id === id)) {
+          themes.delete(id);
+        }
+      }
+      state.toBeSaved = true;
+      state.activeThemes = Array.from(themes);
     },
     removeTheme: (state, action: PayloadAction<string>) => {
       state.toBeSaved = true;
-      state.selectedThemes = state.selectedThemes.filter((x) => x !== action.payload);
+      state.activeThemes = state.activeThemes.filter((x) => x !== action.payload);
     },
     patchWidgetConfig(
       state,
-      action: PayloadAction<{ widgetId: string; config: Record<string, unknown> }>,
+      action: PayloadAction<{ widgetId: WidgetId; config: Record<string, unknown> }>,
     ) {
       const { widgetId, config } = action.payload;
 
@@ -129,7 +144,7 @@ export const RootSlice = createSlice({
     patchWidgetInstanceConfig: (
       state,
       action: PayloadAction<{
-        widgetId: string;
+        widgetId: WidgetId;
         instanceId: string;
         config: Record<string, any>;
       }>,
@@ -152,7 +167,7 @@ export const RootSlice = createSlice({
     patchWidgetMonitorConfig: (
       state,
       action: PayloadAction<{
-        widgetId: string;
+        widgetId: WidgetId;
         monitorId: string;
         config: Record<string, any>;
       }>,
@@ -173,7 +188,7 @@ export const RootSlice = createSlice({
     },
     removeWidgetInstance: (
       state,
-      action: PayloadAction<{ widgetId: string; instanceId: string }>,
+      action: PayloadAction<{ widgetId: WidgetId; instanceId: string }>,
     ) => {
       const { widgetId, instanceId } = action.payload;
       if (!state.byWidget[widgetId]) {
@@ -190,14 +205,14 @@ export const RootSlice = createSlice({
     },
     setThemeVariable: (
       state,
-      action: PayloadAction<{ themeId: string; name: string; value: string }>,
+      action: PayloadAction<{ themeId: ThemeId; name: string; value: string }>,
     ) => {
       const { themeId, name, value } = action.payload;
       state.byTheme[themeId] ??= {};
       state.byTheme[themeId]![name] = value;
       state.toBeSaved = true;
     },
-    deleteThemeVariable: (state, action: PayloadAction<{ themeId: string; name: string }>) => {
+    deleteThemeVariable: (state, action: PayloadAction<{ themeId: ThemeId; name: string }>) => {
       const { themeId, name } = action.payload;
       state.byTheme[themeId] ??= {};
       delete state.byTheme[themeId]![name];

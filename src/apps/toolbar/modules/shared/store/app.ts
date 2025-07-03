@@ -16,7 +16,7 @@ import {
   VideosFolder,
   WegItems,
 } from '@seelen-ui/lib';
-import { Placeholder, ToolbarItem2 } from '@seelen-ui/lib/types';
+import { Placeholder, PluginId, ToolbarItem2 } from '@seelen-ui/lib/types';
 
 import { RootState } from './domain';
 
@@ -101,7 +101,7 @@ export const RootSlice = createSlice({
         template: `return "${cleaned}"`,
       } as any);
     },
-    addItem(state, action: PayloadAction<string>) {
+    addItem(state, action: PayloadAction<PluginId>) {
       if (!state.items) {
         return;
       }

@@ -9,13 +9,11 @@ const CURRENT_WIDGET_ID = Widget.getCurrentWidgetId();
 
 async function loadThemes(allThemes: ThemeList, settings: Settings) {
   const variablesByTheme = settings.inner.byTheme;
-  const selected = settings.inner.selectedThemes;
+  const activeIds = settings.inner.activeThemes;
   const themes = allThemes
     .asArray()
-    .filter((theme) => selected.includes(theme.metadata.filename))
-    .sort((a, b) => {
-      return selected.indexOf(a.metadata.filename) - selected.indexOf(b.metadata.filename);
-    });
+    .filter((theme) => activeIds.includes(theme.id))
+    .sort((a, b) => activeIds.indexOf(a.id) - activeIds.indexOf(b.id));
 
   document.getElementById(THEMES_STYLES_ID)?.remove();
   let element = document.createElement('style');
@@ -49,7 +47,7 @@ async function loadThemes(allThemes: ThemeList, settings: Settings) {
       .map(([name, value]) => `${name}: ${value || ''};`)
       .join('\n');
 
-    let layerName = 'theme-' + theme.metadata.filename.replace(/[\.]/g, '_');
+    let layerName = 'theme-' + theme.metadata.path.toLowerCase().replaceAll(/[^a-zA-Z0-9]/g, '_');
     element.textContent += `@layer ${layerName} {\n:root {${variablesContent}}\n${cssFileContent}\n}\n`;
   }
 

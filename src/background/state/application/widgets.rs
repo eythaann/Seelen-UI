@@ -15,7 +15,7 @@ impl FullState {
     pub(super) fn emit_widgets(&self) -> Result<()> {
         get_app_handle().emit(
             SeelenEvent::StateWidgetsChanged,
-            &self.widgets.values().collect_vec(),
+            self.widgets().values().collect_vec(),
         )?;
         trace_lock!(SEELEN).on_widgets_change(self)?;
         Ok(())
@@ -32,8 +32,7 @@ impl FullState {
             match Widget::load(&path) {
                 Ok(mut widget) => {
                     widget.metadata.bundled = path.starts_with(bundled_path);
-                    widget.metadata.filename = entry.file_name().to_string_lossy().to_string();
-                    self.widgets.insert(widget.id.clone(), widget);
+                    self.widgets.insert(widget.metadata.path.clone(), widget);
                 }
                 Err(e) => {
                     log::error!("Failed to load widget: {e}");

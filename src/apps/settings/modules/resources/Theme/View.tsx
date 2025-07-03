@@ -1,4 +1,4 @@
-import { ThemeVariableDefinition } from '@seelen-ui/lib/types';
+import { ThemeId, ThemeVariableDefinition } from '@seelen-ui/lib/types';
 import { ResourceText } from '@shared/components/ResourceText';
 import { ColorPicker, Input, InputNumber, Select, Space } from 'antd';
 import { ReactNode } from 'react';
@@ -36,7 +36,7 @@ export function ThemeView() {
 }
 
 interface ThemeSettingProps {
-  themeId: string;
+  themeId: ThemeId;
   definition: ThemeVariableDefinition;
 }
 

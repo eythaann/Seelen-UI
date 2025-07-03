@@ -1,5 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
-import { Theme } from '@seelen-ui/lib/types';
+import { Theme, ThemeId } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
@@ -18,28 +18,34 @@ import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { ResourceCard } from './common';
 
 export function ThemesView() {
-  const _active = useSelector(RootSelectors.selectedThemes);
+  const activeIds = useSelector(RootSelectors.activeThemes);
   const allThemes = useSelector(RootSelectors.availableThemes);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  function toggleTheme(theme: string) {
-    if (_active.includes(theme)) {
-      dispatch(RootActions.setSelectedThemes(_active.filter((x) => x !== theme)));
+  function toggleTheme(themeId: ThemeId) {
+    if (activeIds.includes(themeId)) {
+      dispatch(RootActions.setSelectedThemes(activeIds.filter((x) => x !== themeId)));
     } else {
-      dispatch(RootActions.setSelectedThemes([..._active, theme]));
+      dispatch(RootActions.setSelectedThemes([...activeIds, themeId]));
     }
   }
 
-  function onReorder(themes: string[]) {
+  function onReorder(themes: ThemeId[]) {
     dispatch(RootActions.setSelectedThemes(themes));
   }
 
-  const disabled = allThemes.filter((x) => !_active.includes(x.metadata.filename));
-  const enabled = _active
-    .map((x) => allThemes.find((y) => y.metadata.filename === x)!)
-    .filter(Boolean);
+  const disabled: Theme[] = [];
+  const enabled: Theme[] = [];
+  for (const theme of allThemes) {
+    if (activeIds.includes(theme.id)) {
+      enabled.push(theme);
+    } else {
+      disabled.push(theme);
+    }
+  }
+  enabled.sort((a, b) => activeIds.indexOf(a.id) - activeIds.indexOf(b.id));
 
   return (
     <>
@@ -66,13 +72,13 @@ export function ThemesView() {
 
       <div className={cs.list}>
         <b>{t('general.theme.selected')}</b>
-        <Reorder.Group values={_active} onReorder={onReorder} className={cs.reorderGroup}>
+        <Reorder.Group values={activeIds} onReorder={onReorder} className={cs.reorderGroup}>
           {enabled.map((theme) => (
-            <Reorder.Item key={theme.id} value={theme.metadata.filename}>
+            <Reorder.Item key={theme.id} value={theme.id}>
               <ThemeItem
                 key={theme.id}
                 theme={theme}
-                onToggle={() => toggleTheme(theme.metadata.filename)}
+                onToggle={() => toggleTheme(theme.id)}
                 checked={true}
               />
             </Reorder.Item>
@@ -84,7 +90,7 @@ export function ThemesView() {
           <ThemeItem
             key={theme.id}
             theme={theme}
-            onToggle={() => toggleTheme(theme.metadata.filename)}
+            onToggle={() => toggleTheme(theme.id)}
             checked={false}
           />
         ))}
