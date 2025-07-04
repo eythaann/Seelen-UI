@@ -1,6 +1,5 @@
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { motion, useAnimationControls } from 'framer-motion';
-import { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 
 import { newSelectors } from '../../modules/shared/store/app/reducer';
@@ -8,7 +7,7 @@ import { newSelectors } from '../../modules/shared/store/app/reducer';
 import { cx } from '../../../shared/styles';
 import cs from './index.module.css';
 
-interface Props extends PropsWithChildren, React.HTMLAttributes<HTMLDivElement> {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   width?: number;
   height?: number;
 }

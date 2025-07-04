@@ -48,7 +48,7 @@ export function IconPackEditorView() {
           <b>Search</b>
           <Input
             value={filterValue}
-            onChange={(e) => setFilterValue(e.target.value)}
+            onChange={(e) => setFilterValue(e.currentTarget.value)}
             placeholder="example: discord..."
           />
         </SettingsOption>

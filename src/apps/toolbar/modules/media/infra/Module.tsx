@@ -30,7 +30,7 @@ function MediaModuleItem({ module, active, ...rest }: Props) {
   const mediaSession =
     useSelector((state: any) => Selectors.mediaSessions(state).find((d) => d.default)) || null;
 
-  function onWheel(e: React.WheelEvent) {
+  function onWheel(e: WheelEvent) {
     const isUp = e.deltaY < 0;
     const level = Math.max(0, Math.min(1, volume + (isUp ? 0.02 : -0.02)));
     if (id) {

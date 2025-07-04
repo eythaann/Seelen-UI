@@ -31,7 +31,7 @@ export const VolumeSlider = memo(({ value, deviceId, sessionId }: Props) => {
     onExternalChange(value);
   };
 
-  function onWheel(e: React.WheelEvent) {
+  function onWheel(e: WheelEvent) {
     const isUp = e.deltaY < 0;
     const level = Math.max(0, Math.min(1, internalValue + (isUp ? 0.02 : -0.02)));
     onInternalChange(level);

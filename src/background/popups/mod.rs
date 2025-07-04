@@ -4,12 +4,13 @@ use std::{collections::HashMap, sync::LazyLock};
 
 use parking_lot::Mutex;
 use seelen_core::{
+    handlers::SeelenEvent,
     resource::{Resource, ResourceKind, WidgetId},
     state::{CssStyles, SluPopupConfig, SluPopupContent},
 };
 use tauri::{
     utils::{config::WindowEffectsConfig, WindowEffect},
-    Listener, WebviewWindow, WebviewWindowBuilder, WindowEvent,
+    Emitter, Listener, WebviewWindow, WebviewWindowBuilder, WindowEvent,
 };
 use uuid::Uuid;
 
@@ -80,6 +81,14 @@ impl PopupsManager {
         self.configs.insert(popup_id, config);
         self.webviews.insert(popup_id, window);
         Ok(popup_id)
+    }
+
+    pub fn update_popup(&mut self, id: Uuid, config: SluPopupConfig) -> Result<()> {
+        if let Some(webview) = self.webviews.get(&id) {
+            webview.emit(SeelenEvent::PopupContentChanged, &config)?;
+        }
+        self.configs.insert(id, config);
+        Ok(())
     }
 
     pub fn close_popup(&mut self, id: Uuid) -> Result<()> {

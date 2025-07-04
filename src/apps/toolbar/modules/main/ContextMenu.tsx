@@ -70,7 +70,7 @@ export function MainContextMenu() {
                               <Input
                                 placeholder={t('context_menu.add_custom_text')}
                                 value={customText}
-                                onChange={(e) => setCustomText(e.target.value)}
+                                onChange={(e) => setCustomText(e.currentTarget.value)}
                                 onKeyDown={(e) => {
                                   if (e.key === 'Enter') {
                                     addCustomTextToToolbar();

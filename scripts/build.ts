@@ -3,7 +3,7 @@ import CssModulesPlugin from 'esbuild-css-modules-plugin';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToString } from 'preact-render-to-string';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
@@ -53,7 +53,7 @@ async function extractIconsIfNecessary() {
         continue;
       }
       const element = ElementConstructor({ size: '1em' });
-      const svg = renderToStaticMarkup(element);
+      const svg = renderToString(element);
       fs.writeFileSync(`./dist/icons/${name}.svg`, svg);
     }
 
@@ -157,6 +157,12 @@ function startDevServer() {
       }),
       OwnPlugin,
     ],
+    alias: {
+      react: './node_modules/preact/compat/',
+      'react/jsx-runtime': './node_modules/preact/jsx-runtime',
+      'react-dom': './node_modules/preact/compat/',
+      'react-dom/*': './node_modules/preact/compat/*',
+    },
   });
 
   if (serve) {

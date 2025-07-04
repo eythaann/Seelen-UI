@@ -9,6 +9,7 @@ interface ReactIconProps extends HTMLAttributes<HTMLElement> {
   iconName: IconName;
   size?: string | number;
   color?: string;
+  style?: React.CSSProperties;
 }
 
 /** React Icons */

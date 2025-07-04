@@ -3,7 +3,7 @@ import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { tempDir } from '@tauri-apps/api/path';
 import { Spin } from 'antd';
-import { MouseEvent, useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../shared/store/app';
@@ -30,14 +30,14 @@ export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps)
   useEffect(() => {
     const unlisten = listen(`weg-preview-update-${hwnd}`, () => {
       setImageSrc(imageUrl);
-      forceUpdate();
+      forceUpdate(_);
     });
     return () => {
       unlisten.then((unlisten) => unlisten()).catch(console.error);
     };
   }, []);
 
-  const onClose = (e: MouseEvent) => {
+  const onClose = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     invoke(SeelenCommand.WegCloseApp, { hwnd });
   };

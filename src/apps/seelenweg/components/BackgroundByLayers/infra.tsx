@@ -1,10 +1,10 @@
-import { HTMLAttributes, PropsWithChildren } from 'react';
+import { HTMLAttributes } from 'react';
 
 import cs from './infra.module.css';
 
 import { cx } from '../../../shared/styles';
 
-interface PropsV2 extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {
+interface PropsV2 extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   /** for backward compatibility */
   prefix?: string;

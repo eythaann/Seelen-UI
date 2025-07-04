@@ -137,7 +137,7 @@ export function WlanSelectorEntry(props: {
               placeholder="SSID"
               value={ssid}
               status={showErrors ? 'error' : undefined}
-              onChange={(e) => setSsid(e.target.value)}
+              onChange={(e) => setSsid(e.currentTarget.value)}
               autoFocus
               onPressEnter={(e) => (e.currentTarget.nextSibling as HTMLInputElement)?.focus()}
             />
@@ -147,7 +147,7 @@ export function WlanSelectorEntry(props: {
             placeholder={t('network.placeholder.password')}
             value={password}
             status={showErrors ? 'error' : undefined}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.currentTarget.value)}
             onPressEnter={onConnection}
             autoFocus={!!entry.ssid}
           />

@@ -206,7 +206,7 @@ export function AppsConfiguration() {
 
   const onSearch = useCallback(
     debounce((e: ChangeEvent<HTMLInputElement>) => {
-      setSearched(e.target.value.toLowerCase());
+      setSearched(e.currentTarget.value.toLowerCase());
     }, 200),
     [],
   );

@@ -2,7 +2,7 @@ import { Calendar, Row } from 'antd';
 import { CalendarMode, HeaderRender } from 'antd/es/calendar/generateCalendar';
 import moment from 'moment';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
-import { PropsWithChildren, useCallback, useEffect, useState, WheelEvent } from 'react';
+import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import './infra.css';
@@ -110,7 +110,7 @@ function DateCalendar() {
     ];
   }, [i18n.language]);
 
-  const onWheel = useCallback((e: WheelEvent<HTMLDivElement>) => {
+  const onWheel = useCallback((e: WheelEvent) => {
     e.preventDefault();
     e.stopPropagation();
 

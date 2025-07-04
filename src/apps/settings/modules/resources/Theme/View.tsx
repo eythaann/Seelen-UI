@@ -118,7 +118,7 @@ function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
           value={variableValue}
           defaultValue={definition.initialValue}
           onChange={(e) => {
-            onChangeVarValue(e.target.value);
+            onChangeVarValue(e.currentTarget.value);
           }}
         />
       );
@@ -130,7 +130,7 @@ function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
           value={variableValue}
           defaultValue={definition.initialValue}
           onChange={(e) => {
-            onChangeVarValue(e.target.value);
+            onChangeVarValue(e.currentTarget.value);
           }}
         />
       );

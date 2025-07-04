@@ -17,10 +17,10 @@ export interface InnerItemProps extends PropsWithChildren {
   extraVars?: Record<string, any>;
   active?: boolean;
   clickable?: boolean;
-  onWheel?: (e: React.WheelEvent) => void;
+  onWheel?: (e: WheelEvent) => void;
   // needed for dropdown/popup wrappers
-  onClick?: (e: React.MouseEvent) => void;
-  onKeydown?: (e: React.KeyboardEvent) => void;
+  onClick?: (e: MouseEvent) => void;
+  onKeydown?: (e: KeyboardEvent) => void;
 }
 
 export function InnerItem(props: InnerItemProps) {
@@ -78,7 +78,7 @@ export function InnerItem(props: InnerItemProps) {
         })}
         onWheel={onWheelProp}
         onKeyDown={onKeydownProp}
-        onClick={(e) => {
+        onClick={(e: MouseEvent) => {
           onClickProp?.(e);
           if (onClickV2) {
             EvaluateAction(onClickV2, scope);
@@ -86,7 +86,7 @@ export function InnerItem(props: InnerItemProps) {
         }}
         as="div"
         transition={{ duration: 0.15 }}
-        onContextMenu={(e) => {
+        onContextMenu={(e: MouseEvent) => {
           e.stopPropagation();
           (rest as any).onContextMenu?.(e);
         }}

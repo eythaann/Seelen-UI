@@ -18,7 +18,7 @@ import { cx } from '../../../shared/styles';
 
 interface Props {
   module: WorkspaceToolbarItem;
-  onContextMenu?: (e: React.MouseEvent) => void;
+  onContextMenu?: (e: MouseEvent) => void;
 }
 
 function InnerWorkspacesModule({ module, ...rest }: Props) {
@@ -27,7 +27,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
 
   const { mode } = module;
 
-  function onContextMenu(e: React.MouseEvent) {
+  function onContextMenu(e: MouseEvent) {
     rest.onContextMenu?.(e);
     e.stopPropagation();
   }
@@ -52,7 +52,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
         className="ft-bar-item"
         style={module.style}
         onContextMenu={onContextMenu}
-        onWheel={(e) => {
+        onWheel={(e: WheelEvent) => {
           e.stopPropagation();
           onWheel(e.deltaY < 0);
         }}
@@ -79,7 +79,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
       value={(module as any).__value__ || module}
       className="ft-bar-group"
       onContextMenu={onContextMenu}
-      onWheel={(e) => {
+      onWheel={(e: WheelEvent) => {
         e.stopPropagation();
         onWheel(e.deltaY < 0);
       }}

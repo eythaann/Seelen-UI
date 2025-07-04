@@ -40,7 +40,7 @@ export function General() {
   };
 
   const onDateFormatChange = (e: ChangeEvent<HTMLInputElement>) =>
-    dispatch(RootActions.setDateFormat(e.target.value));
+    dispatch(RootActions.setDateFormat(e.currentTarget.value));
 
   return (
     <>

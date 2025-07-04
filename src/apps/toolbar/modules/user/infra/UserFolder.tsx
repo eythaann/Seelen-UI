@@ -36,7 +36,7 @@ export function UserFolder({ folderProps, setCategoryOpen, categoryOpen }: UserF
     invoke(SeelenCommand.OpenFile, { path: pathByCategory[category] });
   };
 
-  const onClickChevron = (e: React.MouseEvent) => {
+  const onClickChevron = (e: MouseEvent) => {
     e.stopPropagation();
     setCategoryOpen(categoryOpen == category ? 'Unknown' : category);
   };

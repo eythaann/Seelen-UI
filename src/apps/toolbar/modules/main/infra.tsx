@@ -3,14 +3,8 @@ import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
 import { Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { isEqual } from 'lodash';
-import {
-  JSXElementConstructor,
-  memo,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from 'react';
+import { AnyComponent } from 'preact';
+import { memo, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
@@ -40,7 +34,7 @@ import { MainContextMenu } from './ContextMenu';
 
 const modulesByType: Record<
   ToolbarItem['type'],
-  JSXElementConstructor<{ module: any; value: any }>
+  AnyComponent<{ module: any; value: any }>
 > = {
   [ToolbarItemType.Text]: memo(Item),
   [ToolbarItemType.Generic]: memo(GenericItem),

@@ -6,6 +6,7 @@
 
 ### refactor
 - icon packs implementation.
+- changed react to preact.
 
 ### fix
 - app crashing on start by missing user folder (desktop, pictures, etc).

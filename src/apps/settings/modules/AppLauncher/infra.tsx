@@ -95,13 +95,13 @@ export function AppLauncherSettings() {
                 }
                 placeholder="-"
                 disabled={runner.readonly}
-                onChange={(e) => onChangeRunnerLabel(idx, e.target.value)}
+                onChange={(e) => onChangeRunnerLabel(idx, e.currentTarget.value)}
               />
               <Input
                 value={runner.program}
                 placeholder="C:\...\program.exe"
                 disabled={runner.readonly}
-                onChange={(e) => onChangeRunnerProgram(idx, e.target.value)}
+                onChange={(e) => onChangeRunnerProgram(idx, e.currentTarget.value)}
               />
               <Button type="primary" onClick={() => onRemoveRunner(idx)} disabled={runner.readonly}>
                 <Icon iconName="IoTrash" size={14} />

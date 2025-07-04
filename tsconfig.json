@@ -17,6 +17,7 @@
     "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "types": [
       "react",
       "readable-types",
@@ -28,6 +29,10 @@
     "paths": {
       "@icons": ["./src/icons.ts"],
       "@shared/*": ["./src/apps/shared/*"],
+      "react": ["./node_modules/preact/compat/"],
+      "react/jsx-runtime": ["./node_modules/preact/jsx-runtime"],
+      "react-dom": ["./node_modules/preact/compat/"],
+      "react-dom/*": ["./node_modules/preact/compat/*"]
     }
   },
   "exclude": [

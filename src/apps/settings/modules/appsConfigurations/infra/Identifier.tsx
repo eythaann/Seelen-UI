@@ -23,7 +23,7 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
   const { t } = useTranslation();
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange({ ...identifier, id: e.target.value });
+    onChange({ ...identifier, id: e.currentTarget.value });
   };
 
   const onSelectKind = (value: AppIdentifierType) => {

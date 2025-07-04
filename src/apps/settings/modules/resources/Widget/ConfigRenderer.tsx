@@ -79,7 +79,7 @@ function WSItem({ def, values, onConfigChange }: WSItemProps) {
   } else if (def.type === 'select') {
     action = <Select {...commonProps} options={def.options} />;
   } else if (def.type === 'input-text') {
-    action = <Input {...commonProps} onChange={(e) => onConfigChange(def.key, e.target.value)} />;
+    action = <Input {...commonProps} onChange={(e) => onConfigChange(def.key, e.currentTarget.value)} />;
   } else if (def.type === 'input-number') {
     action = <InputNumber {...commonProps} />;
   } else if (def.type === 'range') {

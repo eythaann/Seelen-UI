@@ -54,9 +54,9 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   };
 
   const updateName = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setApp({ ...app, name: e.target.value });
+    setApp({ ...app, name: e.currentTarget.value });
   const updateCategory = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setApp({ ...app, category: e.target.value || null });
+    setApp({ ...app, category: e.currentTarget.value || null });
 
   const onChangeIdentifier = (identifier: AppIdentifier) => setApp({ ...app, identifier });
 

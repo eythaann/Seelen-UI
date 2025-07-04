@@ -1,4 +1,5 @@
 import { Tooltip } from 'antd';
+import { AnyComponent } from 'preact';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -6,7 +7,7 @@ import { newSelectors } from '../../modules/shared/store/app/reducer';
 
 import { RoutePath } from '../navigation/routes';
 
-export const RouteExtraInfo: { [key: string]: React.JSXElementConstructor<any> } = {
+export const RouteExtraInfo: { [key: string]: AnyComponent } = {
   [RoutePath.SettingsByApplication]: () => {
     const { t } = useTranslation();
     return (

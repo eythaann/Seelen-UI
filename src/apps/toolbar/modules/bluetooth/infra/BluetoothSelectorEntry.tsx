@@ -129,7 +129,7 @@ export function BluetoothSelectorEntry(props: {
             placeholder={t('bluetooth.placeholder.passphrase')}
             value={passphrase}
             status={showErrors ? 'error' : undefined}
-            onChange={(e) => setPassphrase(e.target.value)}
+            onChange={(e) => setPassphrase(e.currentTarget.value)}
             onPressEnter={() => onAction(true)}
             autoFocus={showFields}
           />
