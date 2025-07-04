@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.9]
 ### features
 - discord rich presence.
 
