@@ -68,7 +68,7 @@ sysinfo = "0.30.12"
 battery = "0.7.8"
 winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 winreg = "0.55.0"
-windows-core = "0.59.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-core = "0.61.2" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
 win-screenshot = "4.0.8"
 base64 = "0.22.1"
 arc-swap = "1.7.1"
