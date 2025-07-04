@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Sterowniki monitora są wyłączone
 resource:
   added: Dodano nowy zasób
+  download_failed_body: >-
+    Coś poszło nie tak podczas pobierania zasobu, zgłoś to zespołowi deweloperów
+    Seelen.
+  download_failed_title: Pobieranie zasobów nie powiodło się
+  downloading: Pobieranie zasobów...
+  downloading_body: Może to potrwać kilka sekund, nie zamykaj okna.
   enable: Włącz
 runtime:
   download: Przejdź do strony pobierania

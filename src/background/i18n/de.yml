@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitortreiber sind deaktiviert
 resource:
   added: Es wurde eine neue Ressource hinzugefügt
+  download_failed_body: >-
+    Beim Herunterladen der Ressource ist ein Fehler aufgetreten. Bitte melden
+    Sie dies dem Seelen-Entwicklerteam.
+  download_failed_title: Ressourcendownload fehlgeschlagen
+  downloading: Herunterladen von Assets...
+  downloading_body: Dies kann ein paar Sekunden dauern, bitte schließen Sie das Fenster nicht.
   enable: Aktivieren Sie
 runtime:
   download: Gehen Sie zur Download-Seite

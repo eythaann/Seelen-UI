@@ -17,12 +17,12 @@ pub fn create_popup(config: SluPopupConfig) -> Result<Uuid> {
 
 #[tauri::command(async)]
 pub fn update_popup(instance_id: Uuid, config: SluPopupConfig) -> Result<()> {
-    POPUPS_MANAGER.lock().update_popup(instance_id, config)?;
+    POPUPS_MANAGER.lock().update(&instance_id, config)?;
     Ok(())
 }
 
 #[tauri::command(async)]
 pub fn close_popup(instance_id: Uuid) -> Result<()> {
-    POPUPS_MANAGER.lock().close_popup(instance_id)?;
+    POPUPS_MANAGER.lock().close_popup(&instance_id)?;
     Ok(())
 }

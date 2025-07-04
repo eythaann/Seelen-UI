@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Kontrolatzaile kontrolatzaileak desgaituta daude
 resource:
   added: Baliabide berri bat gehitu da
+  download_failed_body: >-
+    Zerbait gaizki joan da baliabidea deskargatzean, jakinarazi Seelen
+    garatzaileen taldeari.
+  download_failed_title: Baliabideen deskargak huts egin du
+  downloading: Aktiboak deskargatzen ...
+  downloading_body: Honek segundo batzuk iraun ditzake, mesedez, ez itxi leihoa.
   enable: Ahalbidetu
 runtime:
   download: Joan deskarga orrira

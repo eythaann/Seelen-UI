@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitorbestuurders is gedeaktiveer
 resource:
   added: '''N Nuwe hulpbron is bygevoeg'
+  download_failed_body: >-
+    Iets het verkeerd geloop tydens die aflaai van die bron, meld dit asseblief
+    aan die Seelen -ontwikkelaarspan.
+  download_failed_title: Aflaai van hulpbronne misluk
+  downloading: Aflaai bates ...
+  downloading_body: Dit kan 'n paar sekondes duur, moenie die venster toemaak nie.
   enable: In staat stel
 runtime:
   download: Gaan na die aflaai bladsy

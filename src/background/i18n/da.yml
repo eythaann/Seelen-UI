@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Skærmdrivere er deaktiveret
 resource:
   added: En ny ressource er blevet tilføjet
+  download_failed_body: >-
+    Noget gik galt under download af ressourcen, rapporter det venligst til
+    Seelen-udviklerteamet.
+  download_failed_title: Download af ressourcer mislykkedes
+  downloading: Download af aktiver...
+  downloading_body: Det kan tage et par sekunder, så lad være med at lukke vinduet.
   enable: Gør det muligt
 runtime:
   download: Gå til downloadsiden

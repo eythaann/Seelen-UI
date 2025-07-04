@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: A monitor illesztőprogramok letiltva
 resource:
   added: Egy új erőforrás került hozzáadásra
+  download_failed_body: >-
+    Az erőforrás letöltése közben valami rosszul ment, kérjük, jelezze a Seelen
+    fejlesztői csapatának.
+  download_failed_title: Az erőforrás letöltése sikertelen
+  downloading: Eszközök letöltése...
+  downloading_body: Ez eltarthat néhány másodpercig, kérjük, ne zárja be az ablakot.
   enable: Engedélyezze a
 runtime:
   download: Menjen a letöltési oldalra

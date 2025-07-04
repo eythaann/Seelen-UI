@@ -272,70 +272,6 @@ impl FullState {
         Ok(())
     }
 
-    // download remote icon url and save it on the parent path + random hash.
-    fn load_remote_icon(icon: &Icon, folder_to_store: &Path) -> Result<Icon> {
-        let mut resolved = icon.clone();
-
-        let download_filename = |url: &str| -> Result<String> {
-            Ok(download_remote_icon_and_validate_it(url, folder_to_store)?
-                .file_name()
-                .ok_or("Could not get file name")?
-                .to_string_lossy()
-                .to_string())
-        };
-
-        if let Some(url) = &icon.base {
-            resolved.base = download_filename(url).ok();
-        }
-
-        if let Some(url) = &icon.light {
-            resolved.light = download_filename(url).ok();
-        }
-
-        if let Some(url) = &icon.dark {
-            resolved.dark = download_filename(url).ok()
-        }
-
-        if let Some(url) = &icon.mask {
-            resolved.mask = download_filename(url).ok();
-        }
-
-        Ok(resolved)
-    }
-
-    fn load_remote_icons(pack: &mut IconPack) -> Result<()> {
-        if pack.remote_entries.is_empty() || pack.downloaded {
-            return Ok(());
-        }
-
-        let mut entries = Vec::new();
-
-        for entry in &pack.remote_entries {
-            let mut new_entry = entry.clone();
-
-            match &mut new_entry {
-                IconPackEntry::Unique(entry) => {
-                    if let Some(icon) = &mut entry.icon {
-                        *icon = Self::load_remote_icon(icon, &pack.metadata.path)?;
-                    }
-                }
-                IconPackEntry::Shared(entry) => {
-                    entry.icon = Self::load_remote_icon(&entry.icon, &pack.metadata.path)?;
-                }
-                IconPackEntry::Custom(entry) => {
-                    entry.icon = Self::load_remote_icon(&entry.icon, &pack.metadata.path)?;
-                }
-            }
-
-            entries.push(new_entry);
-        }
-
-        pack.entries = entries;
-        pack.downloaded = true;
-        pack.save()?;
-        Ok(())
-    }
-
     pub(super) fn load_icons_packs(&mut self, initial: bool) -> Result<()> {
         let entries = std::fs::read_dir(SEELEN_COMMON.user_icons_path())?;
         let mut icon_packs_manager = trace_lock!(self.icon_packs);
@@ -352,11 +288,6 @@ impl FullState {
             };
 
             icon_pack.metadata.bundled = entry.file_name() == "system";
-            if let Err(err) = Self::load_remote_icons(&mut icon_pack) {
-                log::error!("Failed to load remote icons for icon pack ({path:?}): {err:?}");
-                continue;
-            }
-
             icon_packs_manager
                 .0
                 .insert(icon_pack.metadata.path.clone(), icon_pack);
@@ -367,16 +298,82 @@ impl FullState {
     }
 }
 
+pub async fn download_remote_icons(pack: &mut IconPack) -> Result<()> {
+    if pack.remote_entries.is_empty() || pack.downloaded {
+        return Ok(());
+    }
+
+    let mut entries = Vec::new();
+
+    for entry in &pack.remote_entries {
+        let mut new_entry = entry.clone();
+
+        match &mut new_entry {
+            IconPackEntry::Unique(entry) => {
+                if let Some(icon) = &mut entry.icon {
+                    *icon = download_entry_icons(icon, &pack.metadata.path).await?;
+                }
+            }
+            IconPackEntry::Shared(entry) => {
+                entry.icon = download_entry_icons(&entry.icon, &pack.metadata.path).await?;
+            }
+            IconPackEntry::Custom(entry) => {
+                entry.icon = download_entry_icons(&entry.icon, &pack.metadata.path).await?;
+            }
+        }
+
+        entries.push(new_entry);
+    }
+
+    pack.entries = entries;
+    pack.downloaded = true;
+    pack.save()?;
+    Ok(())
+}
+
+// download remote icon url and save it on the parent path + random hash.
+async fn download_entry_icons(icon: &Icon, folder_to_store: &Path) -> Result<Icon> {
+    let mut resolved = icon.clone();
+
+    let download_filename = async |url: &str| -> Result<String> {
+        Ok(download_remote_icon_and_validate_it(url, folder_to_store)
+            .await?
+            .file_name()
+            .ok_or("Could not get file name")?
+            .to_string_lossy()
+            .to_string())
+    };
+
+    if let Some(url) = &icon.base {
+        resolved.base = download_filename(url).await.ok();
+    }
+
+    if let Some(url) = &icon.light {
+        resolved.light = download_filename(url).await.ok();
+    }
+
+    if let Some(url) = &icon.dark {
+        resolved.dark = download_filename(url).await.ok()
+    }
+
+    if let Some(url) = &icon.mask {
+        resolved.mask = download_filename(url).await.ok();
+    }
+
+    Ok(resolved)
+}
+
 /// returns a path to the downloaded icon
-fn download_remote_icon_and_validate_it(url: &str, folder_to_store: &Path) -> Result<PathBuf> {
+async fn download_remote_icon_and_validate_it(
+    url: &str,
+    folder_to_store: &Path,
+) -> Result<PathBuf> {
     if !folder_to_store.is_dir() {
         return Err("Folder to store is not a directory".into());
     }
 
-    let bytes = tauri::async_runtime::block_on(async move {
-        let res = reqwest::get(url).await?;
-        res.bytes().await
-    })?;
+    let res = reqwest::get(url).await?;
+    let bytes = res.bytes().await?;
 
     let format = image::guess_format(&bytes)?;
     let icon = image::load_from_memory_with_format(&bytes, format)?;

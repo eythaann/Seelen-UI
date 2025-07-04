@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Ang mga driver ng monitor ay hindi pinagana
 resource:
   added: Ang isang bagong mapagkukunan ay naidagdag
+  download_failed_body: >-
+    May mali habang nag -download ng mapagkukunan, mangyaring iulat ito sa
+    koponan ng developer ng Seelen.
+  download_failed_title: Nabigo ang pag -download ng mapagkukunan
+  downloading: Pag -download ng mga assets ...
+  downloading_body: Maaaring tumagal ito ng ilang segundo, mangyaring huwag isara ang window.
   enable: Paganahin
 runtime:
   download: Pumunta sa pahina ng pag-download

@@ -6,6 +6,10 @@ drivers:
   monitor_disabled_title: ไดรเวอร์ตรวจสอบถูกปิดใช้งาน
 resource:
   added: มีการเพิ่มทรัพยากรใหม่
+  download_failed_body: มีบางอย่างผิดปกติในขณะที่ดาวน์โหลดทรัพยากรโปรดรายงานไปยังทีมนักพัฒนา Seelen
+  download_failed_title: การดาวน์โหลดทรัพยากรล้มเหลว
+  downloading: ดาวน์โหลดสินทรัพย์ ...
+  downloading_body: อาจใช้เวลาสองสามวินาทีโปรดอย่าปิดหน้าต่าง
   enable: เปิดใช้งาน
 runtime:
   download: ไปที่หน้าดาวน์โหลด

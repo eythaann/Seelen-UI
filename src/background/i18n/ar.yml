@@ -6,6 +6,10 @@ drivers:
   monitor_disabled_title: تم تعطيل برامج تشغيل الشاشة
 resource:
   added: تمت إضافة مورد جديد
+  download_failed_body: حدث خطأ ما أثناء تنزيل المورد، يُرجى إبلاغ فريق مطوري سيلين بذلك.
+  download_failed_title: فشل تنزيل الموارد
+  downloading: تنزيل الأصول...
+  downloading_body: قد يستغرق ذلك بضع ثوانٍ، يُرجى عدم إغلاق النافذة.
   enable: التمكين
 runtime:
   download: انتقل إلى صفحة التنزيل

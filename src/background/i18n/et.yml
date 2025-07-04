@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitori draiverid on välja lülitatud
 resource:
   added: Lisatud on uus ressurss
+  download_failed_body: >-
+    Midagi läks ressursi allalaadimisel valesti, palun teatage sellest Seeleni
+    arendusmeeskonnale.
+  download_failed_title: Ressursi allalaadimine ebaõnnestus
+  downloading: Varade allalaadimine...
+  downloading_body: See võib võtta paar sekundit, palun ärge sulgege akent.
   enable: Lubage
 runtime:
   download: Minge allalaadimislehele

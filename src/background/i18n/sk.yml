@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Ovládače monitora sú vypnuté
 resource:
   added: Bol pridaný nový zdroj
+  download_failed_body: >-
+    Pri sťahovaní zdroja sa niečo pokazilo, nahláste to prosím vývojárskemu tímu
+    Seelen.
+  download_failed_title: Stiahnutie zdroja sa nepodarilo
+  downloading: Sťahovanie aktív...
+  downloading_body: Môže to trvať niekoľko sekúnd, nezatvárajte okno.
   enable: Povolenie stránky
 runtime:
   download: Prejdite na stránku sťahovania

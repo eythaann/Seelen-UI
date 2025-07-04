@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Pemantauan pemantauan dilumpuhkan
 resource:
   added: Sumber baru telah ditambah
+  download_failed_body: >-
+    Sesuatu yang tidak kena semasa memuat turun sumber, sila laporkan kepada
+    pasukan pemaju Seelen.
+  download_failed_title: Muat turun sumber gagal
+  downloading: Memuat turun aset ...
+  downloading_body: Ini mungkin mengambil masa beberapa saat, jangan menutup tetingkap.
   enable: Membolehkan
 runtime:
   download: Pergi ke halaman muat turun

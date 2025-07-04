@@ -4,6 +4,10 @@ drivers:
   monitor_disabled_title: 显示器驱动程序已禁用
 resource:
   added: 新增资源
+  download_failed_body: 下载资源时出现问题，请向 Seelen 开发团队报告。
+  download_failed_title: 资源下载失败
+  downloading: 下载资产...
+  downloading_body: 这可能需要几秒钟，请不要关闭窗口。
   enable: 启用
 runtime:
   download: 前往下载页面

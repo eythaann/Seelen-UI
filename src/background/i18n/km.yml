@@ -6,6 +6,10 @@ drivers:
   monitor_disabled_title: កម្មវិធីបញ្ជាត្រួតពិនិត្យត្រូវបានបិទ
 resource:
   added: ធនធានថ្មីត្រូវបានបន្ថែម
+  download_failed_body: មានអ្វីមួយមិនប្រក្រតីនៅពេលទាញយកធនធានសូមរាយការណ៍ទៅក្រុមអ្នកអភិវឌ្ឍន៍ Seeen ។
+  download_failed_title: ការទាញយកធនធានបានបរាជ័យ
+  downloading: ទាញយកទ្រព្យសម្បត្តិ ...
+  downloading_body: វាអាចចំណាយពេលពីរបីវិនាទីសូមកុំបិទបង្អួច។
   enable: បើកដៃ
 runtime:
   download: ចូលទៅកាន់ទំព័រទាញយក

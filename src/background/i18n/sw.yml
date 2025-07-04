@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Madereva wa kufuatilia ni walemavu
 resource:
   added: Rasilimali mpya imeongezwa
+  download_failed_body: >-
+    Kitu kilienda vibaya wakati wa kupakua rasilimali, tafadhali ripoti kwa timu
+    ya wasanidi programu wa Seelen.
+  download_failed_title: Upakuaji wa rasilimali umeshindwa
+  downloading: Kupakua mali ...
+  downloading_body: Hii inaweza kuchukua sekunde chache, tafadhali usifunge dirisha.
   enable: Wezesha
 runtime:
   download: Nenda kwenye ukurasa wa kupakua

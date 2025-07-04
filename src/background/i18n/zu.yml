@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Abaqaphi abashayeli bayakhutshazwa
 resource:
   added: Kufakwe insiza entsha
+  download_failed_body: >-
+    Kukhona okungahambanga kahle ngenkathi elanda insiza, sicela ubike kwiqembu
+    le-Seelen Developer.
+  download_failed_title: Ukulanda izinsiza kwehlulekile
+  downloading: Ukulanda Amafa ...
+  downloading_body: Lokhu kungathatha imizuzwana embalwa, ngicela ungavali iwindi.
   enable: Nika amandla
 runtime:
   download: Iya ekhasini lokulanda

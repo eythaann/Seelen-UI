@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Драйверы монитора отключены
 resource:
   added: Добавлен новый ресурс
+  download_failed_body: >-
+    Что-то пошло не так при загрузке ресурса, пожалуйста, сообщите об этом
+    команде разработчиков Seelen.
+  download_failed_title: Загрузка ресурса не удалась
+  downloading: Загрузка активов...
+  downloading_body: Это может занять несколько секунд, пожалуйста, не закрывайте окно.
   enable: Включить
 runtime:
   download: Перейти на страницу загрузки

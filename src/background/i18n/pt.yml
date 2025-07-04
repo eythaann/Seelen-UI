@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Os drivers do monitor estão desativados
 resource:
   added: Um novo recurso foi adicionado
+  download_failed_body: >-
+    Algo deu errado durante o download do recurso. Informe à equipe de
+    desenvolvedores da Seelen.
+  download_failed_title: Falha no download do recurso
+  downloading: Download de ativos...
+  downloading_body: Isso pode levar alguns segundos, mas não feche a janela.
   enable: Habilitar
 runtime:
   download: Vá para a página de download

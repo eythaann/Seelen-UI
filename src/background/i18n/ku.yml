@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Ajokarên çavdêriyê neçalak in
 resource:
   added: Resavkaniyek nû hatiye zêdekirin
+  download_failed_body: >-
+    Di dema dakêşandina çavkaniyê de tiştek çewt derbas bû, ji kerema xwe ew ji
+    tîmê pêşdebirên Seelen re ragihînin.
+  download_failed_title: Daxistina çavkaniyê têk çû
+  downloading: Daxistina Assets ...
+  downloading_body: Ev dibe ku çend hûrdeman bigire, ji kerema xwe pencereyê bigire.
   enable: Bikêrkirin
 runtime:
   download: Biçe rûpela daxistinê

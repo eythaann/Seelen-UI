@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: د چلوونکو څارنه معلولیت لري
 resource:
   added: یو نوی سرچینه اضافه شوې
+  download_failed_body: >-
+    یو څه د سرچینې ډاونلوډ پر مهال غلط شوي، مهرباني وکړئ دا د اصلي پراختیا کونکي
+    ټیم ته راپور کړئ.
+  download_failed_title: د سرچینې ډاونلوډ ونشو
+  downloading: د شتمنیو ډاونلوډ کول ...
+  downloading_body: دا ممکن یو څو ثانیې ونیسي، مهرباني وکړئ کړکۍ بند کړئ.
   enable: وړ
 runtime:
   download: د ډاونلوډ پاڼې ته لاړ شئ

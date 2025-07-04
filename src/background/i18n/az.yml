@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitor sürücülər deaktivdir
 resource:
   added: Yeni bir qaynaq əlavə edildi
+  download_failed_body: >-
+    Resursu yükləyərkən bir şey səhv oldu, xahiş edirəm Seelen geliştirici
+    komandasına bildirin.
+  download_failed_title: Resurs yükləmə uğursuz oldu
+  downloading: Aktivləri yükləmək ...
+  downloading_body: Bu bir neçə saniyə çəkə bilər, xahiş edirəm pəncərəni bağlamayın.
   enable: Aktivləşdirmək
 runtime:
   download: Yükləmə səhifəsinə keçin

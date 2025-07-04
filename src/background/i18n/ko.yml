@@ -4,6 +4,10 @@ drivers:
   monitor_disabled_title: 모니터 드라이버가 비활성화됨
 resource:
   added: 새로운 리소스가 추가되었습니다.
+  download_failed_body: 리소스를 다운로드하는 동안 문제가 발생했습니다. Seelen 개발자 팀에 신고해 주세요.
+  download_failed_title: 리소스 다운로드 실패
+  downloading: 에셋 다운로드...
+  downloading_body: 몇 초 정도 소요될 수 있으니 창을 닫지 마세요.
   enable: 사용
 runtime:
   download: 다운로드 페이지로 이동

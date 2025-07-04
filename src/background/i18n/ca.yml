@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Els controladors de monitorització estan desactivats
 resource:
   added: S'ha afegit un nou recurs
+  download_failed_body: >-
+    Alguna cosa va passar malament mentre descarregueu el recurs, informeu -lo a
+    l'equip de desenvolupadors de Seelen.
+  download_failed_title: Descàrrega de recursos ha fallat
+  downloading: Descarregar actius ...
+  downloading_body: Això pot trigar uns segons, si us plau, no tanqueu la finestra.
   enable: Capacitar
 runtime:
   download: Aneu a la pàgina de descàrrega

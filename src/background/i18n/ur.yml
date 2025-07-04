@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: مانیٹر ڈرائیور غیر فعال ہیں
 resource:
   added: ایک نیا وسیلہ شامل کیا گیا ہے
+  download_failed_body: >-
+    وسائل کو ڈاؤن لوڈ کرتے وقت کچھ غلط ہو گیا ، براہ کرم اسے سیلن ڈویلپر ٹیم کو
+    رپورٹ کریں۔
+  download_failed_title: وسائل ڈاؤن لوڈ ناکام
+  downloading: اثاثوں کو ڈاؤن لوڈ کرنا ...
+  downloading_body: اس میں کچھ سیکنڈ لگ سکتے ہیں ، براہ کرم ونڈو کو بند نہ کریں۔
   enable: قابل بنائیں
 runtime:
   download: ڈاؤن لوڈ صفحہ پر جائیں۔

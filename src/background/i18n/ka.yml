@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: მონიტორის მძღოლები გამორთულია
 resource:
   added: დაემატა ახალი რესურსი
+  download_failed_body: >-
+    რესურსის ჩამოტვირთვისას რამე არასწორედ დასრულდა, გთხოვთ, შეატყობინოთ მას
+    Seelen Developer- ის გუნდს.
+  download_failed_title: რესურსის ჩამოტვირთვა ვერ მოხერხდა
+  downloading: აქტივების ჩამოტვირთვა ...
+  downloading_body: ამას შეიძლება რამდენიმე წამი დასჭირდეს, გთხოვთ, არ დახუროთ ფანჯარა.
   enable: შესაძლებლობის მიცემა
 runtime:
   download: გადადით ჩამოტვირთვის გვერდზე

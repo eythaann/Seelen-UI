@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitora draiveri ir atspējoti
 resource:
   added: Ir pievienots jauns resurss
+  download_failed_body: >-
+    Lejupielādējot resursu, kaut kas notika nepareizi, lūdzu, ziņojiet par to
+    Seelen izstrādātāju komandai.
+  download_failed_title: Resursu lejupielāde neizdevās
+  downloading: Aktīvu lejupielāde...
+  downloading_body: Tas var aizņemt dažas sekundes, lūdzu, neaizveriet logu.
   enable: Ieslēgt
 runtime:
   download: Dodieties uz lejupielādes lapu

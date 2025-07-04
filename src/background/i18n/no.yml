@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitor drivere er deaktivert
 resource:
   added: En ny ressurs er lagt til
+  download_failed_body: >-
+    Noe gikk galt mens du lastet ned ressursen, vennligst rapporter den til
+    Seelen -utviklerteamet.
+  download_failed_title: Ressursnedlasting mislyktes
+  downloading: Last ned eiendeler ...
+  downloading_body: Dette kan ta noen sekunder, ikke lukk vinduet.
   enable: Aktiver
 runtime:
   download: Gå til nedlastingssiden

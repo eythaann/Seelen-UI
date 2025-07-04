@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Atẹle awọn awakọ jẹ alaabo
 resource:
   added: A ti ṣafikun awọn orisun titun
+  download_failed_body: >-
+    Ohunkan ti o jẹ aṣiṣe lakoko gbigba awọn orisun, jọwọ jabo o si ẹgbẹ oludalu
+    ti o yẹ fun Silen.
+  download_failed_title: Igbasilẹ Igbasilẹ kuna
+  downloading: Gbigba awọn ohun-ini ...
+  downloading_body: Eyi le gba iṣẹju diẹ, jọwọ maṣe pa window naa.
   enable: Mu ṣiṣẹ
 runtime:
   download: Lọ si oju-iwe igbasilẹ

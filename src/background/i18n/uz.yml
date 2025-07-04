@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitor drayverlari o'chirilgan
 resource:
   added: Yangi manba qo'shildi
+  download_failed_body: >-
+    Resursni yuklayotganda biron bir narsa noto'g'ri ketdi, iltimos, Seelen
+    ishlab chiqaruvchi jamoasiga xabar bering.
+  download_failed_title: Resurslarni yuklab olish amalga oshmadi
+  downloading: Aktivlarni yuklab olish ...
+  downloading_body: Bu bir necha soniya davom etishi mumkin, iltimos derazani yopmang.
   enable: Yoqib yubormoq
 runtime:
   download: Yuklab olish sahifasiga o'ting

@@ -6,6 +6,14 @@ drivers:
   monitor_disabled_title: Pokretači monitora su onemogućeni
 resource:
   added: Dodan je novi resurs
+  download_failed_body: >-
+    Nešto je pošlo po zlu prilikom preuzimanja resursa, molimo da ga prijavite
+    timu za razvojne programere Seelen.
+  download_failed_title: Preuzimanje resursa nije uspjelo
+  downloading: Preuzimanje imovine ...
+  downloading_body: >-
+    Ovo bi moglo potrajati nekoliko sekundi, molim vas, nemojte zatvoriti
+    prozor.
   enable: Omogućiti
 runtime:
   download: Idi na stranicu za preuzimanje

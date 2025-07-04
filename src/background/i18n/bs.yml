@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Vozači monitora su onemogućeni
 resource:
   added: Dodan je novi resurs
+  download_failed_body: >-
+    Nešto je pošlo po zlu prilikom preuzimanja resursa, prijavite ga u Timu
+    SEELEN programera.
+  download_failed_title: Preuzimanje resursa nije uspjelo
+  downloading: Preuzimanje imovine ...
+  downloading_body: Ovo bi moglo potrajati nekoliko sekundi, molim vas nemojte zatvoriti prozor.
   enable: Omogućiti
 runtime:
   download: Idite na stranicu za preuzimanje

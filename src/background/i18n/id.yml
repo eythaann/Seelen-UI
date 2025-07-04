@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Driver monitor dinonaktifkan
 resource:
   added: Sumber daya baru telah ditambahkan
+  download_failed_body: >-
+    Terjadi kesalahan saat mengunduh sumber daya, silakan laporkan ke tim
+    pengembang Seelen.
+  download_failed_title: Pengunduhan sumber daya gagal
+  downloading: Mengunduh aset...
+  downloading_body: Ini mungkin memerlukan waktu beberapa detik, mohon jangan menutup jendela.
   enable: Aktifkan
 runtime:
   download: Buka halaman unduh

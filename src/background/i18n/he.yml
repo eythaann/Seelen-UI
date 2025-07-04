@@ -6,6 +6,10 @@ drivers:
   monitor_disabled_title: נהגי המוניטור מושבתים
 resource:
   added: נוסף משאב חדש
+  download_failed_body: משהו השתבש בזמן הורדת המשאב, אנא דווח עליו לצוות המפתחים של Seelen.
+  download_failed_title: הורדת משאבים נכשלה
+  downloading: הורדת נכסים ...
+  downloading_body: זה עשוי לקחת מספר שניות, אנא אל תסגור את החלון.
   enable: אפשר
 runtime:
   download: הורדות

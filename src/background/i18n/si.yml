@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: අධීක්ෂණ රියදුරන් අක්රීය කර ඇත
 resource:
   added: නව සම්පතක් එකතු කර ඇත
+  download_failed_body: >-
+    සම්පත බාගත කිරීමේදී යම් දෙයක් වැරදී ඇති අතර කරුණාකර එය සීලෙන්ග් සංවර්ධක
+    කණ්ඩායමට වාර්තා කරන්න.
+  download_failed_title: සම්පත් බාගත කිරීම අසාර්ථක විය
+  downloading: වත්කම් බාගත කිරීම ...
+  downloading_body: මේ සඳහා තත්පර කිහිපයක් ගතවනු ඇත, කරුණාකර කවුළුව වසා නොගන්න.
   enable: සක්රීය කරන්න
 runtime:
   download: බාගැනීම් පිටුවට යන්න

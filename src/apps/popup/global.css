@@ -20,7 +20,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fffa;
+    background-color: #fff9;
     padding: 6px 6px 6px 10px;
     font-weight: 600;
     app-region: drag;
@@ -51,7 +51,7 @@ body {
 
   .content {
     width: 100%;
-    padding: 10px;
+    padding: 12px 16px;
     overflow: auto;
 
     &::-webkit-scrollbar {

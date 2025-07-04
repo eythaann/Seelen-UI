@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitoriaus tvarkyklės yra išjungtos
 resource:
   added: Pridėtas naujas išteklius
+  download_failed_body: >-
+    Atsisiunčiant išteklių kažkas nepavyko, praneškite apie tai "Seelen" kūrėjų
+    komandai.
+  download_failed_title: Išteklių atsisiuntimas nepavyko
+  downloading: Turto atsisiuntimas...
+  downloading_body: Tai gali užtrukti kelias sekundes, todėl neuždarykite lango.
   enable: Įjungti
 runtime:
   download: Eikite į atsisiuntimo puslapį

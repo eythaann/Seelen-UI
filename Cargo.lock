@@ -4845,7 +4845,7 @@ dependencies = [
 [[package]]
 name = "seelen-core"
 version = "2.3.6"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#ce0f1a2e73838330c64f67d954dee5632b4a11d3"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#52e6723c8a2eb5e6a8ba923de1e176c9e4e3e6b4"
 dependencies = [
  "base64 0.22.1",
  "chrono",

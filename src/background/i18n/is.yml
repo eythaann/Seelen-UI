@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Fylgstu ökumenn eru óvirkir
 resource:
   added: Nýjum auðlind hefur verið bætt við
+  download_failed_body: >-
+    Eitthvað fór úrskeiðis þegar hún halaði niður auðlindinni, vinsamlegast
+    tilkynntu það til Seelen Developer teymisins.
+  download_failed_title: Auðlind niðurhal mistókst
+  downloading: Að hlaða niður eignum ...
+  downloading_body: Þetta gæti tekið nokkrar sekúndur, vinsamlegast ekki loka glugganum.
   enable: Virkja
 runtime:
   download: Farðu á niðurhalssíðuna

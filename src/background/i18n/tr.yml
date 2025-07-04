@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitör sürücüleri devre dışı bırakıldı
 resource:
   added: Yeni bir kaynak eklendi
+  download_failed_body: >-
+    Kaynak indirilirken bir şeyler ters gitti, lütfen bunu Seelen geliştirici
+    ekibine bildirin.
+  download_failed_title: Kaynak indirme başarısız oldu
+  downloading: Varlıklar indiriliyor...
+  downloading_body: Bu işlem birkaç saniye sürebilir, lütfen pencereyi kapatmayın.
   enable: Etkinleştir
 runtime:
   download: İndirme sayfasına git

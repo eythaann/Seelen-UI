@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitorstuurprogramma's zijn uitgeschakeld
 resource:
   added: Er is een nieuwe bron toegevoegd
+  download_failed_body: >-
+    Er is iets misgegaan tijdens het downloaden van de bron, meld dit
+    alstublieft aan het ontwikkelteam van Seelen.
+  download_failed_title: Downloaden van bronnen mislukt
+  downloading: Bedrijfsmiddelen downloaden...
+  downloading_body: Dit kan enkele seconden duren, sluit het venster niet.
   enable: inschakelen
 runtime:
   download: Ga naar de downloadpagina

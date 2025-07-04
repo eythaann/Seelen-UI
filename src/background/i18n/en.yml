@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitor drivers are disabled
 resource:
   added: A new resource has been added
+  download_failed_body: >-
+    Something went wrong while downloading the resource, please report it to the
+    Seelen developer team.
+  download_failed_title: Resource download failed
+  downloading: Downloading assets...
+  downloading_body: This might take a few seconds, please don't close the window.
   enable: Enable
 runtime:
   download: Go to download page

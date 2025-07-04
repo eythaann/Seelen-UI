@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: ਡਰਾਈਵਰਾਂ ਦੀ ਨਿਗਰਾਨੀ ਅਯੋਗ ਹੈ
 resource:
   added: ਇੱਕ ਨਵਾਂ ਸਰੋਤ ਜੋੜਿਆ ਗਿਆ ਹੈ
+  download_failed_body: >-
+    ਸਰੋਤ ਨੂੰ ਡਾ ing ਨਲੋਡ ਕਰਨ ਵੇਲੇ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ, ਕਿਰਪਾ ਕਰਕੇ ਇਸ ਨੂੰ ਸਹਿਤ ਡਿਵੈਲਪਰ
+    ਟੀਮ ਵਿੱਚ ਰਿਪੋਰਟ ਕਰੋ.
+  download_failed_title: ਸਰੋਤ ਡਾਉਨਲੋਡ ਅਸਫਲ
+  downloading: ਸੰਪਤੀ ਨੂੰ ਡਾ ing ਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ ...
+  downloading_body: ਇਹ ਕੁਝ ਸਕਿੰਟ ਲੈ ਸਕਦਾ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ ਵਿੰਡੋ ਨੂੰ ਬੰਦ ਨਾ ਕਰੋ.
   enable: ਯੋਗ
 runtime:
   download: ਡਾਊਨਲੋਡ ਪੰਨੇ 'ਤੇ ਜਾਓ

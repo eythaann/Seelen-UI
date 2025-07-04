@@ -9,6 +9,8 @@ mod toolbar_items;
 mod weg_items;
 mod widgets;
 
+pub use icons::download_remote_icons;
+
 use arc_swap::ArcSwap;
 use getset::Getters;
 use icons::IconPacksManager;

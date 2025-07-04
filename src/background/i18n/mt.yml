@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Is-sewwieqa tal-monitoraġġ huma diżattivati
 resource:
   added: Ġiet miżjuda riżorsa ġdida
+  download_failed_body: >-
+    Xi ħaġa marret ħażin waqt li tniżżel ir-riżorsa, jekk jogħġbok irrapportaha
+    lit-tim tal-iżviluppatur Seelen.
+  download_failed_title: It-tniżżil tar-riżorsi falla
+  downloading: Tniżżil ta 'assi ...
+  downloading_body: Dan jista 'jieħu ftit sekondi, jekk jogħġbok ma tagħlaqx it-tieqa.
   enable: Jippermetti
 runtime:
   download: Mur fil-paġna tat-tniżżil

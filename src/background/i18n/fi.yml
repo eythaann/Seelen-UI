@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Näytön ohjaimet on poistettu käytöstä
 resource:
   added: Uusi resurssi on lisätty
+  download_failed_body: >-
+    Jotain meni pieleen resurssin lataamisen aikana, ilmoita siitä Seelenin
+    kehittäjätiimille.
+  download_failed_title: Resurssien lataus epäonnistui
+  downloading: Varojen lataaminen...
+  downloading_body: Tämä saattaa kestää muutaman sekunnin, älä sulje ikkunaa.
   enable: Ota käyttöön
 runtime:
   download: Siirry lataussivulle

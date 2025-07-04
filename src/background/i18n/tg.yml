@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Мониторинги ронандагон хомӯш карда мешаванд
 resource:
   added: Як манбаи нав илова карда шуд
+  download_failed_body: >-
+    Ҳангоми зеркашии манбаъ хато рафт, лутфан онро ба дастаи таҳиякунандаи
+    SELEDENTER хабар диҳед.
+  download_failed_title: Захира зеркашӣ ноком шуд
+  downloading: Зеркашии дороиҳо ...
+  downloading_body: Ин метавонад якчанд сонияро талаб кунад, лутфан тирезаро пӯшед.
   enable: Имконият додан
 runtime:
   download: Ба саҳифаи зеркашӣ гузаред

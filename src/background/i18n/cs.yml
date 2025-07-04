@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Ovladače monitoru jsou zakázány
 resource:
   added: Byl přidán nový zdroj
+  download_failed_body: >-
+    Při stahování zdroje se něco pokazilo, nahlaste to prosím týmu vývojářů
+    Seelenu.
+  download_failed_title: Stažení prostředků se nezdařilo
+  downloading: Stahování aktiv...
+  downloading_body: To může trvat několik sekund, nezavírejte proto okno.
   enable: Povolit
 runtime:
   download: Přejděte na stránku stahování

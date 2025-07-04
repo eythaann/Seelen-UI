@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitro gyrwyr yn anabl
 resource:
   added: Ychwanegwyd adnodd newydd
+  download_failed_body: >-
+    Aeth rhywbeth o'i le wrth lawrlwytho'r adnodd, rhowch wybod iddo i dîm
+    datblygwyr Seelen.
+  download_failed_title: Methodd Lawrlwytho Adnoddau
+  downloading: Lawrlwytho asedau ...
+  downloading_body: Efallai y bydd hyn yn cymryd ychydig eiliadau, peidiwch â chau'r ffenestr.
   enable: Galluoga
 runtime:
   download: Ewch i'r dudalen lawrlwytho

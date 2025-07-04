@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Drivrutiner för bildskärm är inaktiverade
 resource:
   added: En ny resurs har lagts till
+  download_failed_body: >-
+    Något gick fel när du laddade ner resursen, vänligen rapportera det till
+    Seelen-utvecklarteamet.
+  download_failed_title: Nedladdning av resurs misslyckades
+  downloading: Nedladdning av tillgångar...
+  downloading_body: Det kan ta några sekunder, men stäng inte fönstret.
   enable: Aktivera
 runtime:
   download: Gå till nedladdningssidan

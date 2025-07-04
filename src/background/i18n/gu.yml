@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: મોનિટર ડ્રાઇવરો અક્ષમ છે
 resource:
   added: એક નવો સ્રોત ઉમેરવામાં આવ્યો છે
+  download_failed_body: >-
+    સંસાધન ડાઉનલોડ કરતી વખતે કંઈક ખોટું થયું, કૃપા કરીને તેને સીલેન ડેવલપર ટીમને
+    જાણ કરો.
+  download_failed_title: સંસાધન ડાઉનલોડ નિષ્ફળ
+  downloading: અસ્કયામતો ડાઉનલોડ કરી રહ્યા છીએ ...
+  downloading_body: આને થોડી સેકંડ લાગી શકે છે, કૃપા કરીને વિંડો બંધ ન કરો.
   enable: સક્ષમ કરવું
 runtime:
   download: ડાઉનલોડ પૃષ્ઠ પર જાઓ

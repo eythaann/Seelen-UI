@@ -6,6 +6,14 @@ drivers:
   monitor_disabled_title: Darawalada kormeeraha ayaa naafo ah
 resource:
   added: Kheyraad Cusub ayaa lagu daray
+  download_failed_body: >-
+    Waxbaa khaldamay iyagoo soo dejinaya kheyraadka, fadlan u sheeg kooxda
+    horumarinta Selelen ee Selen.
+  download_failed_title: Soo-dejiyeyaasha Kheyraadka ayaa ku guuldareystay
+  downloading: Soo dejisashada hantida ...
+  downloading_body: >-
+    Tani waxay qaadan kartaa dhowr ilbidhiqsi, fadlan ha xiri ka dhigin
+    daaqadda.
   enable: Karsiin
 runtime:
   download: Tag bogga soo dejinta

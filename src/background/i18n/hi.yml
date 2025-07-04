@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: मॉनिटर ड्राइवर अक्षम हैं
 resource:
   added: एक नया संसाधन जोड़ा गया है
+  download_failed_body: >-
+    संसाधन डाउनलोड करते समय कुछ गलत हो गया, कृपया इसे सेलेन डेवलपर टीम को
+    रिपोर्ट करें।
+  download_failed_title: संसाधन डाउनलोड विफल
+  downloading: संपत्ति डाउनलोड करना ...
+  downloading_body: इसमें कुछ सेकंड लग सकते हैं, कृपया खिड़की बंद न करें।
   enable: सक्षम
 runtime:
   download: डाउनलोड पेज पर जाएं

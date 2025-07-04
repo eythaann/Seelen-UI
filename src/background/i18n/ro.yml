@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Driverele monitorului sunt dezactivate
 resource:
   added: O nouă resursă a fost adăugată
+  download_failed_body: >-
+    Ceva nu a mers bine în timpul descărcării resursei, vă rugăm să raportați
+    acest lucru echipei de dezvoltatori Seelen.
+  download_failed_title: Descărcarea resurselor a eșuat
+  downloading: Descărcarea activelor...
+  downloading_body: Aceasta poate dura câteva secunde, vă rugăm să nu închideți fereastra.
   enable: Activare
 runtime:
   download: Accesați pagina de descărcare

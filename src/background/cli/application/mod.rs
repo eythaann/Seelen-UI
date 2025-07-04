@@ -1,28 +1,27 @@
 mod debugger;
 mod resources;
+mod uri;
 mod win32;
 
-use std::{
-    ffi::OsStr,
-    path::{Path, PathBuf},
-    sync::atomic::Ordering,
-};
+use std::sync::atomic::Ordering;
 
 use clap::Parser;
 use debugger::DebuggerCli;
-use itertools::Itertools;
 use resources::WidgetCli;
-use seelen_core::resource::{ResourceKind, SluResourceFile};
 use serde::{Deserialize, Serialize};
-use uuid::Uuid;
 use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::{
-    cli::SelfPipe, error_handler::Result, modules::virtual_desk::cli::VirtualDesktopCli,
-    popups::POPUPS_MANAGER, seelen::SEELEN, seelen_rofi::cli::AppLauncherCli,
-    seelen_weg::cli::WegCli, seelen_wm_v2::cli::WindowManagerCli, trace_lock,
-    utils::constants::SEELEN_COMMON, widgets::show_settings,
+    cli::{application::uri::process_uri, SelfPipe},
+    error_handler::Result,
+    modules::virtual_desk::cli::VirtualDesktopCli,
+    seelen::SEELEN,
+    seelen_rofi::cli::AppLauncherCli,
+    seelen_weg::cli::WegCli,
+    seelen_wm_v2::cli::WindowManagerCli,
+    trace_lock,
+    widgets::show_settings,
 };
 
 /// Seelen Command Line Interface
@@ -104,89 +103,11 @@ pub fn handle_console_client() -> Result<()> {
     Ok(())
 }
 
-fn path_by_resource_kind(kind: &ResourceKind) -> &Path {
-    match kind {
-        ResourceKind::Theme => SEELEN_COMMON.user_themes_path(),
-        ResourceKind::IconPack => SEELEN_COMMON.user_icons_path(),
-        ResourceKind::Widget => SEELEN_COMMON.user_widgets_path(),
-        ResourceKind::Plugin => SEELEN_COMMON.user_plugins_path(),
-        ResourceKind::Wallpaper => SEELEN_COMMON.user_wallpapers_path(),
-        ResourceKind::SoundPack => SEELEN_COMMON.user_sounds_path(),
-    }
-}
-
-fn store_file_on_respective_user_folder(file: &SluResourceFile) -> Result<()> {
-    let mut path_to_store = path_by_resource_kind(&file.resource.kind).to_path_buf();
-    if file.resource.kind == ResourceKind::IconPack {
-        path_to_store.push(file.resource.id.to_string());
-        std::fs::create_dir_all(&path_to_store)?;
-        path_to_store.push("metadata.slu");
-    } else {
-        path_to_store.push(format!("{}.slu", file.resource.id));
-    }
-    file.store(&path_to_store)?;
-    Ok(())
-}
-
 impl AppCli {
-    pub const URI: &str = "seelen-ui.uri:";
-
-    pub fn process_uri(uri: &str) -> Result<()> {
-        log::trace!("Loading URI: {uri}");
-
-        if !uri.starts_with(Self::URI) {
-            let path = PathBuf::from(uri);
-            if !path.is_file() || path.extension() != Some(OsStr::new("slu")) || !path.exists() {
-                return Err("Invalid file to load".into());
-            }
-
-            let file = SluResourceFile::load(&path)?;
-            store_file_on_respective_user_folder(&file)?;
-            POPUPS_MANAGER
-                .lock()
-                .create_added_resource(&file.resource)?;
-            return Ok(());
-        }
-
-        let path = uri.trim_start_matches(Self::URI).trim_start_matches("/");
-        let parts = path.split("/").map(|s| s.to_string()).collect_vec();
-
-        if parts.len() != 3 {
-            return Err("Invalid URI format".into());
-        }
-
-        let [_method, enviroment, resource_id] = parts.as_slice() else {
-            return Err("Invalid URI format".into());
-        };
-
-        let Ok(resource_id) = Uuid::parse_str(resource_id) else {
-            return Err("Invalid URI format".into());
-        };
-
-        let env_prefix = if enviroment == "production" {
-            "".to_string()
-        } else {
-            format!(".{enviroment}")
-        };
-
-        let url = format!("https://product{env_prefix}.seelen.io/resource/download/{resource_id}");
-        tauri::async_runtime::block_on(async move {
-            let res = reqwest::get(url).await?;
-            let file = res.json::<SluResourceFile>().await?;
-            store_file_on_respective_user_folder(&file)?;
-            POPUPS_MANAGER
-                .lock()
-                .create_added_resource(&file.resource)?;
-            Result::Ok(())
-        })?;
-
-        Ok(())
-    }
-
     /// intended to be called on the main instance
     pub fn process(self) -> Result<()> {
         if let Some(uri) = self.uri {
-            return Self::process_uri(&uri);
+            return process_uri(&uri);
         }
 
         let Some(command) = self.command else {

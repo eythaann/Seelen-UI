@@ -4,6 +4,10 @@ drivers:
   monitor_disabled_title: モニタドライバが無効
 resource:
   added: 新しいリソースが追加されました
+  download_failed_body: リソースのダウンロード中に何か問題が発生しました。
+  download_failed_title: リソースのダウンロードに失敗しました
+  downloading: 資産のダウンロード...
+  downloading_body: ウィンドウを閉じないでください。
   enable: 有効にする
 runtime:
   download: ダウンロードページを開く

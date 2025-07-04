@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: رانندگان مانیتور غیرفعال هستند
 resource:
   added: یک منبع جدید اضافه شده است
+  download_failed_body: >-
+    هنگام بارگیری منبع ، مشکلی پیش آمد ، لطفاً آن را به تیم توسعه دهنده Seelen
+    گزارش دهید.
+  download_failed_title: بارگیری منابع ناموفق است
+  downloading: بارگیری دارایی ...
+  downloading_body: این ممکن است چند ثانیه طول بکشد ، لطفاً پنجره را ببندید.
   enable: فعال کردن
 runtime:
   download: به صفحه دانلود بروید

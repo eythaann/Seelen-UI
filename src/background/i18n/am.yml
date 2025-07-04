@@ -4,6 +4,10 @@ drivers:
   monitor_disabled_title: ተቆጣጣሪ ነጂዎች ተሰናክለዋል
 resource:
   added: አዲስ ሀብት ታክሏል
+  download_failed_body: ሀብቱን በማወጅበት ጊዜ አንድ ነገር ተሳስቷል, እባክዎን ለታና ancer ቡድን ያሳውቁ.
+  download_failed_title: የሀብት ማውረድ አልተሳካም
+  downloading: ንብረቶችን ማውረድ ...
+  downloading_body: ይህ ደግሞ ጥቂት ሰኮንዶች ሊወስድ ይችላል, እባክዎን መስኮቱን አይዝጉ.
   enable: አንቃ
 runtime:
   download: ወደ ማውረድ ገጽ ይሂዱ

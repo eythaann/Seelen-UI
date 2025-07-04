@@ -6,6 +6,12 @@ drivers:
   monitor_disabled_title: Monitor Chauffeuren sinn ausgeschalt
 resource:
   added: Eng nei Ressource gouf bäigefüügt
+  download_failed_body: >-
+    Eppes ass falsch gaang wärend Dir d'Ressource eroflueden, mellt Iech w.e.g.
+    an de Seeper Entwéckler Team.
+  download_failed_title: Ressource Download ass net gescheitert
+  downloading: Eruppes-Opstellung erofgeluedenen ...
+  downloading_body: Dëst kann e puer Sekonnen da daach, wann ech net zou d'Found sinn.
   enable: Erméiglecher zréck
 runtime:
   download: Gitt op d'Download Säit

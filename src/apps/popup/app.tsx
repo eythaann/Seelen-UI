@@ -3,32 +3,49 @@ import { signal } from '@preact/signals';
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from '@seelen-ui/lib';
 import { SluPopupConfig, SluPopupContent as ISluPopupContent } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
-import { getCurrentWindow } from '@tauri-apps/api/window';
+import { emit } from '@tauri-apps/api/event';
+import { LogicalPosition, LogicalSize } from '@tauri-apps/api/window';
 
 const currentWidget = await Widget.getCurrentAsync();
 
 const state = signal<SluPopupConfig>({
+  width: 0,
+  height: 0,
   title: [],
   content: [],
   footer: [],
 });
 
 invoke(SeelenCommand.GetPopupConfig, { instanceId: currentWidget.decoded.instanceId! })
-  .then((data) => {
+  .then(async (data) => {
     state.value = data;
-    getCurrentWindow().show();
+    currentWidget.webview.setTitle(getOnlyText(data.title));
+    await currentWidget.webview.show();
+    await currentWidget.webview.setFocus();
   })
-  .catch((e) => {
-    console.error(e);
+  .catch((err) => {
+    console.error(err);
     closePopup();
   });
 
-subscribe(SeelenEvent.PopupContentChanged, (e) => {
+subscribe(SeelenEvent.PopupContentChanged, async (e) => {
+  const oldWidth = state.value.width;
+  const oldHeight = state.value.height;
+
+  const widthDiff = e.payload.width - oldWidth;
+  const heightDiff = e.payload.height - oldHeight;
+
+  const newX = window.screenLeft - widthDiff / 2;
+  const newY = window.screenTop - heightDiff / 2;
+
   state.value = e.payload;
+  currentWidget.webview.setTitle(getOnlyText(e.payload.title));
+  currentWidget.webview.setPosition(new LogicalPosition(newX, newY));
+  currentWidget.webview.setSize(new LogicalSize(e.payload.width, e.payload.height));
 });
 
 function closePopup() {
-  getCurrentWindow().close();
+  currentWidget.webview.close();
 }
 
 export function App() {
@@ -77,7 +94,7 @@ function SluPopupContent({ entry }: { entry: ISluPopupContent }) {
         <button
           className="button"
           onClick={() => {
-            getCurrentWindow().emit(`${entry.onClick}`);
+            emit(`${entry.onClick}`);
           }}
           style={entry.styles || {}}
         >
@@ -97,4 +114,19 @@ function SluPopupContent({ entry }: { entry: ISluPopupContent }) {
     default:
       return null;
   }
+}
+
+function getOnlyText(content: ISluPopupContent[]) {
+  let text = '';
+  for (const entry of content) {
+    if (entry.type === 'text') {
+      text += `${entry.value} `;
+    }
+
+    if (entry.type === 'group') {
+      text += getOnlyText(entry.items);
+      text += ' ';
+    }
+  }
+  return text;
 }
