@@ -1,0 +1,111 @@
+bluetooth:
+  available: 可用裝置（尚未配對）
+  cancel: 取消
+  connected: 已連線裝置
+  forget: 忘記裝置
+  lowenergy: 低功耗
+  more: 更多藍牙設定
+  not_found: 找不到藍牙裝置
+  pair: 配對
+  paired: 已配對裝置
+  placeholder:
+    passphrase: 密碼、配對碼或 PIN 碼
+  scanning: 掃描裝置
+
+context_menu:
+  add_custom_text: 新增自訂文字項目
+  modules: 模組
+  remove: 移除模組
+  reorder_disable: 鎖定工具列
+  reorder_enable: 解鎖工具列
+  restore: 還原為預設值
+  settings: 設定
+  task_manager: 工作管理員
+
+keyboard:
+  more: 更多鍵盤設定
+  title: 鍵盤佈局
+
+media:
+  default_multimedia_volume: 多媒體音量
+  device:
+    channel:
+      system: 系統音效
+    comunications: 通訊
+    missing: 裝置遺失
+    mixer: 音量混音器
+    multimedia: 多媒體
+    settings: 更多裝置設定
+    volume: 裝置音量
+  input_devices: 輸入裝置
+  output_devices: 輸出裝置
+  players: 媒體播放器
+
+network:
+  available: 可用網路
+  connect: 連線
+  connected: 已連線
+  disconnect: 中斷連線
+  hidden: 隱藏網路
+  more: 更多網路設定
+  not_found: 找不到 Wi-Fi 網路
+  placeholder:
+    password: 密碼
+  saved: 已儲存的網路
+  scanning: 掃描中
+  secured: 加密網路
+
+notifications:
+  clear: 清除全部
+  empty: 沒有通知
+  settings: 更多通知設定
+  title: 通知
+
+placeholder:
+  battery_remaining: '% 剩餘電量'
+  bluetooth_devices: 藍牙與裝置
+  ethernet_connected: 已連接網際網路
+  ethernet_disconnected: 未連接網際網路
+  notifications: 通知
+  open_system_tray: 開啟系統匣
+  settings: 快速設定
+  smart_charge: ' - 智慧充電'
+  volume: 音量
+
+settings:
+  app_settings: 應用程式設定
+  brightness: 螢幕亮度
+  hibernate: 休眠
+  lock: 鎖定
+  log_out: 登出
+  power: 電源選項
+  restart: 重新啟動
+  shutdown: 關機
+  sleep: 睡眠
+  title: 系統設定
+
+tray:
+  empty: 沒有系統匣項目（註：Windows 10 尚未支援）
+  unlabeled: 無標籤圖示
+
+userhome:
+  empty_list: 沒有項目
+  folders:
+    desktop: 桌面
+    documents: 文件
+    downloads: 下載
+    more_items: 顯示更多...
+    music: 音樂
+    pictures: 圖片
+    recent: 最近使用
+    reduce_items: 顯示較少...
+    title: 使用者目錄
+    videos: 影片
+  profile:
+    accounts: 開啟帳戶設定
+    open_onedrive: 開啟 OneDrive 資料夾
+    open_user_folder: 開啟使用者資料夾
+  seelen_options:
+    open_installation_folder: 開啟 Seelen 安裝資料夾
+    open_log_folder: 開啟 Seelen 日誌資料夾
+    title: Seelen 資料夾
