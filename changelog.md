@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### hotfix
+- missing react icons.
+
 ## [2.3.9]
 ### features
 - discord rich presence.

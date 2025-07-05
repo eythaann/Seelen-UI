@@ -3,7 +3,7 @@ import CssModulesPlugin from 'esbuild-css-modules-plugin';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import { renderToString } from 'preact-render-to-string';
+import { renderToStaticMarkup } from 'real-react-dom/server'; // preact compat doesn't work for extracting icons
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
@@ -53,7 +53,10 @@ async function extractIconsIfNecessary() {
         continue;
       }
       const element = ElementConstructor({ size: '1em' });
-      const svg = renderToString(element);
+      const svg = renderToStaticMarkup(element);
+      if (!svg.startsWith('<svg')) {
+        throw new Error(`Invalid SVG: ${svg}`);
+      }
       fs.writeFileSync(`./dist/icons/${name}.svg`, svg);
     }
 
