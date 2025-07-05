@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.3.10]
 ### hotfix
 - missing react icons.
 
