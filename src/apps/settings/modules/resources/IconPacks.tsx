@@ -54,7 +54,7 @@ export function IconPacksView() {
             type="default"
             onClick={async () => {
               const dataDir = await path.appDataDir();
-              invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'icons') });
+              invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'iconpacks') });
             }}
           >
             <Icon iconName="PiFoldersDuotone" />
