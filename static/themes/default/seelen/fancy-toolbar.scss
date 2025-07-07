@@ -133,35 +133,6 @@
   }
 }
 
-.keyboard-selector-open,
-.notification-open,
-.settings-open,
-.calendar-open,
-.tray-open,
-.wlan-open,
-.media-open,
-.media-notifier-open,
-.ft-bar-item-context-menu-open,
-.ft-bar-context-menu-open,
-.userhome-open {
-  animation: PopupBaseAnimation 0.2s linear forwards;
-}
-
-.keyboard-selector-close,
-.notification-close,
-.settings-close,
-.calendar-close,
-.tray-close,
-.wlan-close,
-.media-close,
-.media-notifier-close,
-.ft-bar-item-context-menu-close,
-.ft-bar-context-menu-close,
-.userhome-close {
-  animation: PopupBaseAnimation 0.2s linear forwards;
-  animation-direction: reverse;
-}
-
 .ft-bar {
   color: var(--color-persist-gray-100);
   transition: color 0.2s linear;

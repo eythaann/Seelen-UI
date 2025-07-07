@@ -1,19 +1,15 @@
+import { $system_colors } from '@shared/signals';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
 import { ToolBar } from './modules/main/infra';
-
-import { Selectors } from './modules/shared/store/app';
 
 import { ErrorBoundary } from '../seelenweg/components/Error';
 import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
 
 export function App() {
-  const colors = useSelector(Selectors.colors);
-
   const isDarkMode = useDarkMode();
 
   useEffect(() => {
@@ -24,8 +20,9 @@ export function App() {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: isDarkMode ? colors.accent_light : colors.accent_dark,
-          motion: false,
+          colorPrimary: isDarkMode
+            ? $system_colors.value.accent_light
+            : $system_colors.value.accent_dark,
         },
         components: {
           Calendar: {

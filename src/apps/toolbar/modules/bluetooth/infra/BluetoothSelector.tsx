@@ -2,7 +2,8 @@ import { BluetoothDevices, SeelenCommand } from '@seelen-ui/lib';
 import { BluetoothDevice } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { VNode } from 'preact';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -122,8 +123,9 @@ function BluetoothSelector({ open }: { open: boolean }) {
   );
 }
 
-export interface BluetoothSelectorProperties extends PropsWithChildren {
+export interface BluetoothSelectorProperties {
   setActive: (value: boolean) => void;
+  children: VNode;
 }
 
 export function WithBluetoothSelector({ setActive, children }: BluetoothSelectorProperties) {
@@ -156,16 +158,13 @@ export function WithBluetoothSelector({ setActive, children }: BluetoothSelector
   return (
     <AnimatedPopover
       animationDescription={{
-        maxAnimationTimeMs: 500,
         openAnimationName: 'bluetooth-open',
         closeAnimationName: 'bluetooth-close',
       }}
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
-      arrow={false}
       content={<BluetoothSelector open={openPreview} />}
-      destroyTooltipOnHide
     >
       {children}
     </AnimatedPopover>

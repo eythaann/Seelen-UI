@@ -1,3 +1,4 @@
+import { useComputed } from '@preact/signals';
 import { SeelenWegSide } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { resolve, resourceDir } from '@tauri-apps/api/path';
@@ -14,6 +15,7 @@ import { MediaWegItem } from '../../shared/store/domain';
 
 import { FileIcon, Icon } from '../../../../shared/components/Icon';
 import { WithContextMenu } from '../../../components/WithContextMenu';
+import { $settings } from '../../shared/state/mod';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
 
@@ -33,7 +35,7 @@ const DEFAULT_THUMBNAIL = await resolve(
 export function MediaSession({ item }: { item: MediaWegItem }) {
   const [luminance, setLuminance] = useState(0);
 
-  const dockPosition = useSelector(Selectors.settings.position);
+  const $dock_position = useComputed(() => $settings.value.position);
   const sessions = useSelector(Selectors.mediaSessions);
   const session = sessions.find((s) => s.default);
 
@@ -57,7 +59,8 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
     }
   };
 
-  const isHorizontal = dockPosition === SeelenWegSide.Bottom || dockPosition === SeelenWegSide.Top;
+  const isHorizontal =
+    $dock_position.value === SeelenWegSide.Bottom || $dock_position.value === SeelenWegSide.Top;
 
   return (
     <DraggableItem item={item}>

@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { SeelenEvent, Settings, UIColors } from '@seelen-ui/lib';
+import { SeelenEvent, Settings, startThemingTool, UIColors } from '@seelen-ui/lib';
 import { WmNode } from '@seelen-ui/lib/types';
-import { StartThemingTool } from '@shared/ThemeLoader';
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 
@@ -66,5 +65,5 @@ export async function loadStore() {
     store.dispatch(Actions.setActiveWindow(payload));
   });
 
-  await StartThemingTool();
+  await startThemingTool();
 }

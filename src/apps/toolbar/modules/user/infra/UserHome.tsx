@@ -1,10 +1,12 @@
 import { IconName } from '@icons';
+import { useComputed } from '@preact/signals';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { File, FolderType } from '@seelen-ui/lib/types';
 import { path } from '@tauri-apps/api';
 import { Tooltip } from 'antd';
 import { t } from 'i18next';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { VNode } from 'preact';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
@@ -14,6 +16,7 @@ import { AnimatedPopover } from 'src/apps/shared/components/AnimatedWrappers';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { useWindowFocusChange } from '../../../../shared/hooks';
+import { $settings } from '../../shared/state/mod';
 import { UserFolder } from './UserFolder';
 import { UserProfile } from './UserProfile';
 
@@ -57,7 +60,7 @@ export interface UserHomeFolder {
 function UserHome({}: UserHomeProps) {
   const [categoryOpen, setCategoryOpen] = useState<FolderType>('Unknown');
 
-  const showHibernate = useSelector(Selectors.settings.showHibernateButton);
+  const showHibernate = useComputed(() => $settings.value.showHibernateButton);
   const user = useSelector(Selectors.user);
   const folders: UserHomeFolder[] = [
     { ...folderTypeToIcon('Recent'), content: useSelector(Selectors.userRecentFolder) },
@@ -149,8 +152,9 @@ function UserHome({}: UserHomeProps) {
   );
 }
 
-export interface UserHomeModuleProps extends PropsWithChildren {
+export interface UserHomeModuleProps {
   setOpen: (open: boolean) => void;
+  children: VNode;
 }
 
 export function WithUserHome({ setOpen, children }: UserHomeModuleProps) {
@@ -173,7 +177,6 @@ export function WithUserHome({ setOpen, children }: UserHomeModuleProps) {
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
-      arrow={false}
       content={<UserHome />}
       // destroyTooltipOnHide
     >

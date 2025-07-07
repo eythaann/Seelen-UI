@@ -43,13 +43,6 @@ body {
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
 
-  &:has(.taskbar.delayed) {
-    transition-delay: var(--config-time-before-hide);
-    &:hover {
-      transition-delay: var(--config-time-before-show);
-    }
-  }
-
   &:has(.taskbar.hidden)::after {
     content: "";
     position: fixed;
@@ -95,22 +88,20 @@ body {
     }
   }
 
-  &:not(:hover) {
-    &:has(.taskbar.hidden.left) {
-      left: var(--position-when-hidden);
-    }
+  &:has(.taskbar.hidden.left) {
+    left: var(--position-when-hidden);
+  }
 
-    &:has(.taskbar.hidden.right) {
-      right: var(--position-when-hidden);
-    }
+  &:has(.taskbar.hidden.right) {
+    right: var(--position-when-hidden);
+  }
 
-    &:has(.taskbar.hidden.top) {
-      top: var(--position-when-hidden);
-    }
+  &:has(.taskbar.hidden.top) {
+    top: var(--position-when-hidden);
+  }
 
-    &:has(.taskbar.hidden.bottom) {
-      bottom: var(--position-when-hidden);
-    }
+  &:has(.taskbar.hidden.bottom) {
+    bottom: var(--position-when-hidden);
   }
 }
 

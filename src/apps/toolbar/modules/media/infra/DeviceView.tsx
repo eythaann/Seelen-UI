@@ -99,7 +99,6 @@ export function MediaMixerView({ onBack, deviceId }: Props) {
         <button
           className="media-device-footer-button"
           onClick={() => {
-            console.debug(`ms-settings:sound-properties?endpointId=${deviceId}`);
             invoke(SeelenCommand.OpenFile, {
               path: `ms-settings:sound-properties?endpointId=${deviceId}`,
             });

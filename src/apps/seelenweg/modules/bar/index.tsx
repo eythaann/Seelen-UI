@@ -1,6 +1,6 @@
-import { HideMode, SeelenWegMode, SeelenWegSide, WegItemType } from '@seelen-ui/lib';
+import { SeelenWegMode, SeelenWegSide, WegItemType } from '@seelen-ui/lib';
 import { Reorder } from 'framer-motion';
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,12 +11,12 @@ import { StartMenu } from '../item/infra/StartMenu';
 import { UserApplication } from '../item/infra/UserApplication';
 
 import { RootActions, Selectors } from '../shared/store/app';
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { SeparatorWegItem, SwItem } from '../shared/store/domain';
 
 import { cx } from '../../../shared/styles';
 import { WithContextMenu } from '../../components/WithContextMenu';
+import { $dock_should_be_hidden, $settings } from '../shared/state/mod';
 import { savePinnedItems } from '../shared/store/storeApi';
 import { getSeelenWegMenu } from './menu';
 
@@ -30,40 +30,7 @@ const Separator2: SeparatorWegItem = {
   type: WegItemType.Separator,
 };
 
-function shouldBeHidden(
-  hideMode: HideMode,
-  isActive: boolean,
-  isOverlaped: boolean,
-  associatedViewCounter: number,
-) {
-  let shouldBeHidden = false;
-  switch (hideMode) {
-    case HideMode.Always:
-      shouldBeHidden = !isActive && associatedViewCounter == 0;
-      break;
-    case HideMode.Never:
-      shouldBeHidden = false;
-      break;
-    case HideMode.OnOverlap:
-      shouldBeHidden = !isActive && isOverlaped && associatedViewCounter == 0;
-  }
-  return shouldBeHidden;
-}
-
-function calculateAssociatedViewCounter(currentValue: number, currentChange: boolean): number {
-  const newValue = currentValue + (currentChange ? 1 : -1);
-  return newValue >= 0 ? newValue : currentValue;
-}
-
 export function SeelenWeg() {
-  const [isActive, setActive] = useState(false);
-  const [delayed, setDelayed] = useState(false);
-  // Counts every associated window in the bar and will act as a reverse mutex for the hide functionality
-  const [associatedViewCounter, setAssociatedViewCounter] = useState(0);
-
-  const settings = useSelector(Selectors.settings);
-  const isOverlaped = useSelector(Selectors.isOverlaped);
-
   const isReorderDisabled = useSelector(Selectors.reorderDisabled);
   const pinnedOnLeft = useSelector(Selectors.itemsOnLeft);
   const pinnedOnCenter = useSelector(Selectors.itemsOnCenter);
@@ -71,31 +38,6 @@ export function SeelenWeg() {
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
-
-  useWindowFocusChange((focused) => {
-    if (focused) setAssociatedViewCounter(0);
-    setActive(focused);
-  });
-
-  useLayoutEffect(() => {
-    switch (settings.hideMode) {
-      case HideMode.Always:
-        setDelayed(true);
-        break;
-      case HideMode.Never:
-        setDelayed(false);
-        break;
-      case HideMode.OnOverlap:
-        if (!isOverlaped) {
-          setDelayed(false);
-          break;
-        }
-        setTimeout(() => {
-          setDelayed(true);
-        }, 300);
-        break;
-    }
-  }, [isOverlaped, settings]);
 
   const onReorderPinned = useCallback((apps: SwItem[]) => {
     let extractedPinned: SwItem[] = [];
@@ -133,14 +75,9 @@ export function SeelenWeg() {
     pinnedOnRight.some((item) => 'pinDisabled' in item && !item.pinDisabled)
   );
 
+  const settings = $settings.value;
   const isHorizontal =
     settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
-
-  const idkWhatDoesThis = useCallback((isOpen: boolean) => {
-    setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen));
-  }, []);
-
-  const projectSwItem = (item: SwItem) => ItemByType(item, idkWhatDoesThis);
 
   return (
     <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar, isReorderDisabled)}>
@@ -158,8 +95,7 @@ export function SeelenWeg() {
           vertical: !isHorizontal,
           'temporal-only': isTemporalOnlyWegBar,
           'full-width': settings.mode === SeelenWegMode.FullWidth,
-          hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped, associatedViewCounter),
-          delayed,
+          hidden: $dock_should_be_hidden.value,
         })}
       >
         <BackgroundByLayersV2 prefix="taskbar" />
@@ -170,12 +106,12 @@ export function SeelenWeg() {
             )}
             {isTemporalOnlyWegBar
               ? [
-                ...pinnedOnLeft.map(projectSwItem),
-                ...pinnedOnCenter.map(projectSwItem),
-                ...pinnedOnRight.map(projectSwItem),
+                ...pinnedOnLeft.map(ItemByType),
+                ...pinnedOnCenter.map(ItemByType),
+                ...pinnedOnRight.map(ItemByType),
               ]
               : [
-                ...pinnedOnLeft.map(projectSwItem),
+                ...pinnedOnLeft.map(ItemByType),
                 <Reorder.Item
                   as="div"
                   key="separator1"
@@ -185,7 +121,7 @@ export function SeelenWeg() {
                   })}
                   drag={false}
                 />,
-                ...pinnedOnCenter.map(projectSwItem),
+                ...pinnedOnCenter.map(ItemByType),
                 <Reorder.Item
                   as="div"
                   key="separator2"
@@ -195,7 +131,7 @@ export function SeelenWeg() {
                   })}
                   drag={false}
                 />,
-                ...pinnedOnRight.map(projectSwItem),
+                ...pinnedOnRight.map(ItemByType),
               ]}
           </div>
         </div>
@@ -204,16 +140,16 @@ export function SeelenWeg() {
   );
 }
 
-function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
+function ItemByType(item: SwItem) {
   if (item.type === WegItemType.Pinned) {
     if (item.subtype === 'App') {
-      return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
+      return <UserApplication key={item.id} item={item} />;
     }
     return <FileOrFolder key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.Temporal) {
-    return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
+    return <UserApplication key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.Media) {

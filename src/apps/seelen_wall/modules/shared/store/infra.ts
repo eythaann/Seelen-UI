@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { SeelenEvent, Settings } from '@seelen-ui/lib';
-import { StartThemingTool } from '@shared/ThemeLoader';
+import { SeelenEvent, Settings, startThemingTool } from '@seelen-ui/lib';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 
 import { Actions, RootSlice } from './app';
@@ -32,5 +31,5 @@ export async function initStore() {
     store.dispatch(Actions.setVersion(version + 1));
   });
 
-  StartThemingTool();
+  startThemingTool();
 }

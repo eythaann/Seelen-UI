@@ -38,7 +38,6 @@ export function NotificationsModule({ module }: Props) {
         open={openPreview}
         trigger="click"
         onOpenChange={setOpenPreview}
-        arrow={false}
         content={<Notifications />}
       >
         <Item extraVars={{ count }} module={module} active={openPreview} />

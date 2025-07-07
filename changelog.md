@@ -1,6 +1,20 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- allow add shared styles on themes to be applied to all the widgets.
+
+### enhancements
+- dock and toolbar autohide behaviors.
+- animations on popups and start of the own component library.
+
+### refactor
+- start migrating to preact signals.
+
+### fix
+- (#1019) maximized windows being detected as fullscreen.
+- icorrect resource id regex.
+
 ## [2.3.10]
 ### hotfix
 - missing react icons.

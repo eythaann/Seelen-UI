@@ -317,27 +317,6 @@
   }
 }
 
-@keyframes PreviewContainerAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.weg-item-preview-container-open,
-.weg-context-menu-container-open,
-.weg-item-preview-container-close,
-.weg-context-menu-container-close {
-  animation: PreviewContainerAnimation 0.2s linear forwards;
-}
-
-.weg-item-preview-container-close,
-.weg-context-menu-container-close {
-  animation-direction: reverse;
-}
-
 .weg-item-preview {
   padding: 6px 10px 10px 10px;
   border-radius: 10px;

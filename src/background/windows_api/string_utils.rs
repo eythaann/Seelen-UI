@@ -3,7 +3,7 @@ use std::{
     os::windows::ffi::{OsStrExt, OsStringExt},
 };
 
-use windows_core::{HSTRING, PCWSTR, PWSTR};
+use windows::core::{HSTRING, PCWSTR, PWSTR};
 
 #[derive(Debug, Clone)]
 pub struct WindowsString {

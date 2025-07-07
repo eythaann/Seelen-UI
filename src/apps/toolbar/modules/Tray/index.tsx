@@ -109,7 +109,6 @@ export function TrayModule({ module }: Props) {
         if (open) emit('hidden::tray-force-refresh');
         setOpenPreview(open);
       }}
-      arrow={false}
       content={
         <BackgroundByLayersV2
           className="tray"

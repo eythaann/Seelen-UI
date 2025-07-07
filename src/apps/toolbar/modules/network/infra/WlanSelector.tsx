@@ -2,7 +2,8 @@ import { SeelenCommand } from '@seelen-ui/lib';
 import { WlanBssEntry } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { VNode } from 'preact';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -139,8 +140,9 @@ function WlanSelector({ open }: { open: boolean }) {
   );
 }
 
-export interface WlanSelectorProperties extends PropsWithChildren {
+export interface WlanSelectorProperties {
   setActive: (value: boolean) => void;
+  children: VNode;
 }
 
 export function WithWlanSelector({ setActive, children }: WlanSelectorProperties) {
@@ -179,9 +181,7 @@ export function WithWlanSelector({ setActive, children }: WlanSelectorProperties
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
-      arrow={false}
       content={<WlanSelector open={openPreview} />}
-      destroyTooltipOnHide
     >
       {children}
     </AnimatedPopover>

@@ -17,24 +17,22 @@ import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
 import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { cx } from '../../../../shared/styles';
 import { WithContextMenu } from '../../../components/WithContextMenu';
+import { $settings } from '../../shared/state/mod';
 import { DraggableItem } from './DraggableItem';
 import { getUserApplicationContextMenu } from './UserApplicationContextMenu';
 import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
   item: PinnedWegItem | TemporalWegItem;
-  // This will be triggered in case preview or context menu is opened from this item, or both of them closed.
-  onAssociatedViewOpenChanged?: (isOpen: boolean) => void;
 }
 
-export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
+export const UserApplication = memo(({ item }: Props) => {
   const [openPreview, setOpenPreview] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [blockUntil, setBlockUntil] = useState(moment(new Date()));
 
   const notifications = useSelector(Selectors.notifications);
   const devTools = useSelector(Selectors.devTools);
-  const settings = useSelector(Selectors.settings);
   const focusedApp = useSelector(Selectors.focusedApp);
 
   const { t } = useTranslation();
@@ -67,21 +65,15 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   });
 
   useEffect(() => {
-    if (openPreview && settings.thumbnailGenerationEnabled) {
+    if (openPreview && $settings.value.thumbnailGenerationEnabled) {
       invoke(SeelenCommand.WegRequestUpdatePreviews, {
         handles: item.windows.map((w) => w.handle),
       });
     }
   }, [openPreview]);
 
-  useEffect(() => {
-    if (onAssociatedViewOpenChanged) {
-      onAssociatedViewOpenChanged(openPreview || openContextMenu);
-    }
-  }, [openPreview || openContextMenu]);
-
   const notificationsCount = notifications.filter((n) => n.appUmid === item.umid).length;
-  const itemLabel = settings.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;
+  const itemLabel = $settings.value.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;
 
   return (
     <DraggableItem
@@ -89,7 +81,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
       className={cx({ 'associated-view-open': openPreview || openContextMenu })}
     >
       <WithContextMenu
-        items={getUserApplicationContextMenu(t, item, devTools, settings.showEndTask) || []}
+        items={getUserApplicationContextMenu(t, item, devTools, $settings.value.showEndTask) || []}
         onOpenChange={(isOpen) => {
           setOpenContextMenu(isOpen);
           if (openPreview && isOpen) {
@@ -104,15 +96,14 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           }}
           open={openPreview}
           mouseEnterDelay={0.4}
-          placement={calculatePlacement(settings.position)}
+          placement={calculatePlacement($settings.value.position)}
           onOpenChange={(open) =>
             setOpenPreview(open && !openContextMenu && moment(new Date()) > blockUntil)
           }
           trigger="hover"
-          arrow={false}
           content={
             <BackgroundByLayersV2
-              className={cx('weg-item-preview-container', settings.position.toLowerCase())}
+              className={cx('weg-item-preview-container', $settings.value.position.toLowerCase())}
               onMouseMoveCapture={(e) => e.stopPropagation()}
               onContextMenu={(e) => {
                 e.stopPropagation();
@@ -174,10 +165,10 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             {notificationsCount > 0 && (
               <div className="weg-item-notification-badge">{notificationsCount}</div>
             )}
-            {settings.showInstanceCounter && item.windows.length > 1 && (
+            {$settings.value.showInstanceCounter && item.windows.length > 1 && (
               <div className="weg-item-instance-counter-badge">{item.windows.length}</div>
             )}
-            {!settings.showWindowTitle && (
+            {!$settings.value.showWindowTitle && (
               <div
                 className={cx('weg-item-open-sign', {
                   'weg-item-open-sign-active': !!item.windows.length,

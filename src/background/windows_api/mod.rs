@@ -233,6 +233,11 @@ impl WindowsApi {
     }
 
     pub fn is_fullscreen(hwnd: HWND) -> Result<bool> {
+        let styles = WindowsApi::get_styles(hwnd);
+        if styles.contains(WS_THICKFRAME) {
+            return Ok(false);
+        }
+
         let rc_monitor = WindowsApi::monitor_rect(WindowsApi::monitor_from_window(hwnd))?;
         let window_rect = WindowsApi::get_inner_window_rect(hwnd)?;
         Ok(window_rect.left <= rc_monitor.left

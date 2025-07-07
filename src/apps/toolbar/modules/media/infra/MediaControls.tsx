@@ -1,5 +1,6 @@
 import { debounce } from 'lodash';
-import { PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
+import { VNode } from 'preact';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
@@ -35,8 +36,9 @@ function MediaControls() {
   );
 }
 
-export interface MediaControlProps extends PropsWithChildren {
+export interface MediaControlProps {
   setActive: (value: boolean) => void;
+  children: VNode;
 }
 
 export function WithMediaControls({ children, setActive }: MediaControlProps) {
@@ -81,47 +83,42 @@ export function WithMediaControls({ children, setActive }: MediaControlProps) {
   return (
     <AnimatedPopover
       animationDescription={{
-        openAnimationName: 'media-open',
-        closeAnimationName: 'media-close',
+        openAnimationName: 'media-notifier-open',
+        closeAnimationName: 'media-notifier-close',
       }}
-      open={openControls}
-      trigger="click"
-      onOpenChange={(open) => {
-        setOpenControls(open);
-        if (open) {
-          setOpenNotifier(false);
-        }
-      }}
-      content={<MediaControls />}
+      open={openNotifier}
+      trigger="manual"
+      content={
+        <BackgroundByLayersV2 className="media-notifier" onContextMenu={(e) => e.stopPropagation()}>
+          {defaultOutput && (
+            <VolumeControl
+              value={defaultOutput.volume}
+              deviceId={defaultOutput.id}
+              icon={
+                <Icon
+                  iconName={defaultOutput.muted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'}
+                />
+              }
+              withPercentage={true}
+            />
+          )}
+        </BackgroundByLayersV2>
+      }
     >
       <AnimatedPopover
         animationDescription={{
-          openAnimationName: 'media-notifier-open',
-          closeAnimationName: 'media-notifier-close',
+          openAnimationName: 'media-open',
+          closeAnimationName: 'media-close',
         }}
-        open={openNotifier}
-        arrow={false}
-        trigger={[]}
-        destroyTooltipOnHide
-        content={
-          <BackgroundByLayersV2
-            className="media-notifier"
-            onContextMenu={(e) => e.stopPropagation()}
-          >
-            {defaultOutput && (
-              <VolumeControl
-                value={defaultOutput.volume}
-                deviceId={defaultOutput.id}
-                icon={
-                  <Icon
-                    iconName={defaultOutput.muted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'}
-                  />
-                }
-                withPercentage={true}
-              />
-            )}
-          </BackgroundByLayersV2>
-        }
+        open={openControls}
+        trigger="click"
+        onOpenChange={(open) => {
+          setOpenControls(open);
+          if (open) {
+            setOpenNotifier(false);
+          }
+        }}
+        content={<MediaControls />}
       >
         {children}
       </AnimatedPopover>

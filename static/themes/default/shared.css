@@ -1,0 +1,29 @@
+.sl-popup {
+  &.sl-popup-open {
+    animation: fade-in 0.1s linear;
+  }
+
+  &.sl-popup-closed {
+    animation: fade-out 0.1s linear;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    display: block; /* this is important to correctly handle the out animation */
+    opacity: 1;
+  }
+  to {
+    display: none; /* this is important to correctly handle the out animation */
+    opacity: 0;
+  }
+}

@@ -1,5 +1,6 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { PropsWithChildren, useState } from 'react';
+import { VNode } from 'preact';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -59,7 +60,7 @@ function KeyboardSelector() {
   );
 }
 
-export function WithKeyboardSelector({ children }: PropsWithChildren) {
+export function WithKeyboardSelector({ children }: { children: VNode }) {
   const [openPreview, setOpenPreview] = useState(false);
 
   useWindowFocusChange((focused) => {
@@ -77,7 +78,6 @@ export function WithKeyboardSelector({ children }: PropsWithChildren) {
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
-      arrow={false}
       content={<KeyboardSelector />}
     >
       {children}

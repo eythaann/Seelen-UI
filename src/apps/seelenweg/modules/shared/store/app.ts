@@ -1,5 +1,5 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-import { Settings, UIColors, WegItemType } from '@seelen-ui/lib';
+import { WegItemType } from '@seelen-ui/lib';
 import { WegItem } from '@seelen-ui/lib/types';
 
 import { PinnedWegItem, RootState, SwItem, TemporalWegItem } from './domain';
@@ -14,11 +14,8 @@ const initialState: RootState = {
   itemsOnRight: [],
   reorderDisabled: false,
   focusedApp: null,
-  isOverlaped: false,
-  settings: (await Settings.default()).seelenweg,
   mediaSessions: [],
   notifications: [],
-  colors: UIColors.default().inner,
 };
 
 function findApp(state: RootState, id: string): WegItem | null {

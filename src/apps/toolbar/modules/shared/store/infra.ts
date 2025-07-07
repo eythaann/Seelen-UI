@@ -12,13 +12,12 @@ import {
   SeelenCommand,
   SeelenEvent,
   Settings,
+  startThemingTool,
   subscribe,
-  UIColors,
   UserDetails,
   VideosFolder,
 } from '@seelen-ui/lib';
 import { FancyToolbarSettings, FocusedApp } from '@seelen-ui/lib/types';
-import { StartThemingTool } from '@shared/ThemeLoader';
 import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -27,6 +26,7 @@ import { debounce, throttle } from 'lodash';
 import { lazySlice, RootActions, RootSlice } from './app';
 
 import i18n from '../../../i18n';
+import { $settings } from '../state/mod';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -38,14 +38,6 @@ export const store = configureStore({
 });
 
 lazySlice(store.dispatch);
-
-async function initUIColors() {
-  function loadColors(colors: UIColors) {
-    store.dispatch(RootActions.setColors(colors.inner));
-  }
-  loadColors(await UIColors.getAsync());
-  await UIColors.onChange(loadColors);
-}
 
 const removeFocusedColorCssVars = () => {
   document.documentElement.style.removeProperty('--color-focused-app-background');
@@ -60,8 +52,7 @@ async function initFocusedColorSystem() {
   }, 200);
 
   const updateFocusedColor = async () => {
-    const { settings } = store.getState();
-    if (!optimisticFocused || !settings.dynamicColor) {
+    if (!optimisticFocused || !$settings.value.dynamicColor) {
       return;
     }
 
@@ -102,10 +93,6 @@ async function initFocusedColorSystem() {
 
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
-
-  await view.listen<boolean>('set-auto-hide', (event) => {
-    store.dispatch(RootActions.setIsOverlaped(event.payload));
-  });
 
   Settings.getAsync().then(loadSettings);
   Settings.onChange(loadSettings);
@@ -209,8 +196,7 @@ export async function registerStoreEvents() {
 
   await initFocusedColorSystem();
 
-  await initUIColors();
-  await StartThemingTool();
+  await startThemingTool();
   await view.emitTo(view.label, 'store-events-ready');
 }
 
@@ -223,10 +209,6 @@ function loadSettingsCSS(settings: FancyToolbarSettings) {
 
 async function loadSettings(settings: Settings) {
   i18n.changeLanguage(settings.inner.language || undefined);
-
-  store.dispatch(RootActions.setSettings(settings.fancyToolbar));
-  store.dispatch(RootActions.setDateFormat(settings.inner.dateFormat));
-
   loadSettingsCSS(settings.fancyToolbar);
   if (!settings.fancyToolbar.dynamicColor) {
     removeFocusedColorCssVars();

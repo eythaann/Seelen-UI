@@ -1,6 +1,4 @@
-import { AppNotification, FocusedApp, MediaPlayer, SeelenWegSettings, WegItem } from '@seelen-ui/lib/types';
-
-import { IRootState } from '../../../../../shared.interfaces';
+import { AppNotification, FocusedApp, MediaPlayer, WegItem } from '@seelen-ui/lib/types';
 
 export type HWND = number & {};
 
@@ -13,7 +11,7 @@ export type StartMenuWegItem = Extract<WegItem, { type: 'StartMenu' }>;
 /** @alias */
 export type SwItem = WegItem;
 
-export interface RootState extends IRootState<SeelenWegSettings> {
+export interface RootState {
   devTools: boolean;
   itemsOnLeft: SwItem[];
   itemsOnCenter: SwItem[];
@@ -21,7 +19,6 @@ export interface RootState extends IRootState<SeelenWegSettings> {
   reorderDisabled: boolean;
   // ----------------------
   focusedApp: FocusedApp | null;
-  isOverlaped: boolean;
   mediaSessions: MediaPlayer[];
   notifications: AppNotification[];
 }

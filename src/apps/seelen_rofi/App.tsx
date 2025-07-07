@@ -15,7 +15,6 @@ export function App() {
     theme={{
       token: {
         colorPrimary: isDarkMode ? colors.accent_light : colors.accent_dark,
-        motion: false,
       },
       algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
     }}

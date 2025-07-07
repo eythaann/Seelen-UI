@@ -1,46 +1,71 @@
 import { Dropdown, DropdownProps } from 'antd';
-import { useState } from 'react';
+import { ComponentChild } from 'preact';
+import { useEffect, useState } from 'react';
 
-import { CustomAnimationProps } from '../domain';
+import { LegacyCustomAnimationProps } from '../domain';
 
-import { useTimeout } from '../../../hooks';
+import { useDebounce } from '../../../hooks';
 import { cx } from '../../../styles';
 
 export interface AnimatedDropwonProps extends DropdownProps {
-  animationDescription: CustomAnimationProps;
+  animationDescription: LegacyCustomAnimationProps;
+  children: ComponentChild;
 }
 
-export function AnimatedDropdown({ children, open, onOpenChange, dropdownRender, animationDescription, ...dropdownProps }: AnimatedDropwonProps) {
-  const [delayedOpenPopover, setDelayedOpenPopover] = useState(false);
-  const [openReplacement, setOpenReplacement] = useState(false);
+export function AnimatedDropdown({
+  children,
+  open: openProp,
+  onOpenChange,
+  dropdownRender,
+  animationDescription,
+  ...dropdownProps
+}: AnimatedDropwonProps) {
+  const [innerOpen, setInnerOpen] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
 
-  useTimeout(() => {
-    setDelayedOpenPopover((open || openReplacement));
-  }, animationDescription.maxAnimationTimeMs || 500, [open || openReplacement]);
+  const open = openProp ?? innerOpen;
 
-  const animationClassnames: Record<string, boolean> = {};
-  if (animationDescription.openAnimationName) {
-    animationClassnames[animationDescription.openAnimationName] = (open || openReplacement) && !delayedOpenPopover;
+  const { maxAnimationTimeMs = 500, openAnimationName, closeAnimationName } = animationDescription;
+
+  const unrenderPopup = useDebounce(() => {
+    setShouldRender(false);
+  }, maxAnimationTimeMs);
+
+  useEffect(() => {
+    if (open) {
+      setShouldRender(true);
+      unrenderPopup.cancel();
+    } else {
+      unrenderPopup();
+    }
+  }, [open]);
+
+  const classnames: Record<string, boolean> = {
+    'sl-popup-open': open,
+    'sl-popup-close': !open,
+  };
+
+  if (openAnimationName) {
+    classnames[openAnimationName] = open;
   }
-  if (animationDescription.closeAnimationName) {
-    animationClassnames[animationDescription.closeAnimationName] = delayedOpenPopover && !(open || openReplacement);
+
+  if (closeAnimationName) {
+    classnames[closeAnimationName] = !open;
   }
 
   return (
     <Dropdown
-      open={open || openReplacement || delayedOpenPopover}
-      onOpenChange={(open, info) => {
-        if (onOpenChange) {
-          onOpenChange(open, info);
-        } else {
-          setOpenReplacement(open);
+      open={open || shouldRender}
+      onOpenChange={(open, event) => {
+        if (open) {
+          setShouldRender(open);
         }
+        setInnerOpen(open);
+        onOpenChange?.(open, event);
       }}
       {...dropdownProps}
-      dropdownRender={(origin) => dropdownRender &&
-        <div className={cx(animationClassnames)}>
-          {dropdownRender(origin)}
-        </div>
+      dropdownRender={(origin) =>
+        dropdownRender && <div className={cx(classnames)}>{dropdownRender(origin)}</div>
       }
     >
       {children}

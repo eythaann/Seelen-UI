@@ -14,22 +14,6 @@ body {
   width: 100vw;
   transition: top 0.2s ease-in-out;
 
-  &:has(.ft-bar-delayed) {
-    transition-delay: var(--config-time-before-hide);
-    &:hover {
-      transition-delay: var(--config-time-before-show);
-    }
-  }
-
-  &:has(.ft-bar-hidden.top):not(:hover) {
-    top: calc(var(--config-height) * -1 + 1px);
-    border-bottom: 1px solid transparent;
-  }
-  &:has(.ft-bar-hidden.bottom):not(:hover) {
-    bottom: calc(var(--config-height) * -1 + 1px);
-    border-bottom: 1px solid transparent;
-  }
-
   &:has(.ft-bar.top) {
     top: 0;
     &::after {
@@ -49,45 +33,53 @@ body {
       height: 1px;
     }
   }
+
+  &:has(.ft-bar-hidden.top) {
+    top: calc(var(--config-height) * -1 + 1px);
+    border-bottom: 1px solid transparent;
+  }
+
+  &:has(.ft-bar-hidden.bottom) {
+    bottom: calc(var(--config-height) * -1 + 1px);
+    border-bottom: 1px solid transparent;
+  }
 }
 
-#root {
-  .ft-bar {
-    position: relative;
-    width: 100%;
-    height: var(--config-height);
+.ft-bar {
+  position: relative;
+  width: 100%;
+  height: var(--config-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--config-padding-at-side);
+
+  .ft-bar-left,
+  .ft-bar-center,
+  .ft-bar-right {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 var(--config-padding-at-side);
+    align-items: stretch;
+    height: min-content;
+    gap: 6px;
+  }
 
-    .ft-bar-left,
-    .ft-bar-center,
-    .ft-bar-right {
-      display: flex;
-      align-items: stretch;
-      height: min-content;
-      gap: 6px;
-    }
+  .ft-bar-left {
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
+    justify-content: flex-start;
+  }
 
-    .ft-bar-left {
-      max-width: 50%;
-      width: 50%;
-      overflow: hidden;
-      justify-content: flex-start;
-    }
+  .ft-bar-center {
+    justify-content: center;
+    padding: 0 6px;
+  }
 
-    .ft-bar-center {
-      justify-content: center;
-      padding: 0 6px;
-    }
-
-    .ft-bar-right {
-      max-width: 50%;
-      width: 50%;
-      overflow: hidden;
-      justify-content: flex-end;
-    }
+  .ft-bar-right {
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
+    justify-content: flex-end;
   }
 }
 

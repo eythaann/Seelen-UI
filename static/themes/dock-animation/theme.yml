@@ -1,6 +1,0 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/theme.schema.json
-id: "@deprecated/dock-animation"
-metadata:
-  displayName: Wave Animation
-  description: Wave animation for the dock/taskbar
-  tags: ['weg']

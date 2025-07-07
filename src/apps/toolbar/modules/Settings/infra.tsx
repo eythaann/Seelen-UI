@@ -1,3 +1,4 @@
+import { useComputed } from '@preact/signals';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { Brightness, SettingsToolbarItem } from '@seelen-ui/lib/types';
 import { Button, Slider, Tooltip } from 'antd';
@@ -17,6 +18,7 @@ import { RootState } from '../shared/store/domain';
 
 import { AnimatedPopover } from '../../../shared/components/AnimatedWrappers';
 import { Icon } from '../../../shared/components/Icon';
+import { $settings } from '../shared/state/mod';
 
 interface Props {
   module: SettingsToolbarItem;
@@ -33,7 +35,7 @@ export function SettingsModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
   const [brightness, setBrightness] = useState<Brightness | null>(null);
 
-  const showHibernate = useSelector(Selectors.settings.showHibernateButton);
+  const showHibernate = useComputed(() => $settings.value.showHibernateButton);
   const defaultInput = useSelector((state: RootState) =>
     Selectors.mediaInputs(state).find((d) => d.isDefaultMultimedia),
   );
@@ -69,7 +71,6 @@ export function SettingsModule({ module }: Props) {
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
-      arrow={false}
       content={
         <BackgroundByLayersV2
           className="fast-settings"

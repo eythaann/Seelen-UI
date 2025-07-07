@@ -1,10 +1,9 @@
-import { HideMode } from '@seelen-ui/lib';
 import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
 import { Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { isEqual } from 'lodash';
 import { AnyComponent } from 'preact';
-import { memo, useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
@@ -28,14 +27,12 @@ import { RootState } from '../shared/store/domain';
 import { AnimatedDropdown } from '../../../shared/components/AnimatedWrappers';
 import { useWindowFocusChange } from '../../../shared/hooks';
 import { cx } from '../../../shared/styles';
+import { $bar_should_be_hidden, $settings } from '../shared/state/mod';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
 import { MainContextMenu } from './ContextMenu';
 
-const modulesByType: Record<
-  ToolbarItem['type'],
-  AnyComponent<{ module: any; value: any }>
-> = {
+const modulesByType: Record<ToolbarItem['type'], AnyComponent<{ module: any; value: any }>> = {
   [ToolbarItemType.Text]: memo(Item),
   [ToolbarItemType.Generic]: memo(GenericItem),
   [ToolbarItemType.User]: memo(UserModule),
@@ -79,16 +76,11 @@ function componentByModule(plugins: Plugin[], item: PluginId | ToolbarItem) {
 }
 
 export function ToolBar() {
-  const [isToolbarFocused, setToolbarFocused] = useState(false);
-  const [delayed, setDelayed] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
   const structure = useSelector(Selectors.items);
   const focusedWindow = useSelector(Selectors.focused);
   const plugins = useSelector(Selectors.plugins);
-  const isOverlaped = useSelector(Selectors.isOverlaped);
-
-  const { hideMode, position, dynamicColor } = useSelector(Selectors.settings);
 
   const data = useBarData();
 
@@ -96,31 +88,10 @@ export function ToolBar() {
   const [forceUpdate] = useForceUpdate();
 
   useWindowFocusChange((focused) => {
-    setToolbarFocused(focused);
     if (!focused) {
       setOpenContextMenu(false);
     }
   });
-
-  useLayoutEffect(() => {
-    switch (hideMode) {
-      case HideMode.Always:
-        setDelayed(true);
-        break;
-      case HideMode.Never:
-        setDelayed(false);
-        break;
-      case HideMode.OnOverlap:
-        if (!isOverlaped) {
-          setDelayed(false);
-          break;
-        }
-        setTimeout(() => {
-          setDelayed(true);
-        }, 300);
-        break;
-    }
-  }, [isOverlaped, hideMode]);
 
   const onReorderPinned = useCallback((apps: (ToolbarItem | string)[]) => {
     let dividerStart = apps.indexOf(DividerStart);
@@ -142,11 +113,6 @@ export function ToolBar() {
 
     SaveToolbarItems()?.catch(console.error);
   }, []);
-
-  const shouldBeHidden =
-    !isToolbarFocused &&
-    hideMode !== HideMode.Never &&
-    (isOverlaped || hideMode === HideMode.Always);
 
   return (
     <AnimatedDropdown
@@ -170,14 +136,13 @@ export function ToolBar() {
           ...structure.right,
         ]}
         onReorder={onReorderPinned}
-        className={cx('ft-bar', position.toLowerCase(), {
-          'ft-bar-hidden': shouldBeHidden,
-          'ft-bar-delayed': delayed,
+        className={cx('ft-bar', $settings.value.position.toLowerCase(), {
+          'ft-bar-hidden': $bar_should_be_hidden.value,
         })}
         data-there-is-maximized-on-background={data.thereIsMaximizedOnBg}
         data-focused-is-maximized={!!focusedWindow?.isMaximized}
         data-focused-is-overlay={!!focusedWindow?.isSeelenOverlay}
-        data-dynamic-color={dynamicColor}
+        data-dynamic-color={$settings.value.dynamicColor}
       >
         <BackgroundByLayersV2 prefix="ft-bar" />
         <div className="ft-bar-left">

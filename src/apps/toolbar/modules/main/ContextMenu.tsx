@@ -1,7 +1,8 @@
 import { IconName } from '@icons';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { PluginId } from '@seelen-ui/lib/types';
-import { Button, Checkbox, Flex, Input, Menu, Popover, Space } from 'antd';
+import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
+import { Button, Checkbox, Flex, Input, Menu, Space } from 'antd';
 import { MenuItemType } from 'antd/es/menu/interface';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -43,10 +44,9 @@ export function MainContextMenu() {
             key: 'add_module',
             icon: <Icon iconName="CgExtensionAdd" />,
             label: (
-              <Popover
-                trigger={['hover']}
-                placement="rightBottom"
-                arrow={false}
+              <AnimatedPopover
+                trigger={'hover'}
+                placement="right"
                 content={
                   <BackgroundByLayersV2 className="tb-context-menu-container">
                     <Menu
@@ -113,7 +113,7 @@ export function MainContextMenu() {
                   {t('context_menu.modules')}
                   <Icon iconName="FaChevronRight" size={12} />
                 </Flex>
-              </Popover>
+              </AnimatedPopover>
             ),
           },
           {

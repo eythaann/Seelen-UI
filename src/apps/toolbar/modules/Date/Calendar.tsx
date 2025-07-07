@@ -1,8 +1,9 @@
 import { Calendar, Row } from 'antd';
 import { CalendarMode, HeaderRender } from 'antd/es/calendar/generateCalendar';
 import moment from 'moment';
+import { VNode } from 'preact';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
-import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import './infra.css';
@@ -172,7 +173,7 @@ function DateCalendar() {
   );
 }
 
-export function WithDateCalendar({ children }: PropsWithChildren) {
+export function WithDateCalendar({ children }: { children: VNode }) {
   const [openPreview, setOpenPreview] = useState(false);
 
   useWindowFocusChange((focused) => {
@@ -187,11 +188,9 @@ export function WithDateCalendar({ children }: PropsWithChildren) {
         openAnimationName: 'calendar-open',
         closeAnimationName: 'calendar-close',
       }}
-      style={{ width: 300 }}
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
-      arrow={false}
       content={<DateCalendar />}
     >
       {children}

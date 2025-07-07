@@ -1,9 +1,7 @@
+import { $system_colors } from '@shared/signals';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
-import { Selectors } from './modules/shared/store/app';
 
 import { useDarkMode } from '../shared/styles';
 import { ErrorBoundary } from './components/Error';
@@ -16,7 +14,6 @@ async function onMount() {
 
 export function App() {
   const isDarkMode = useDarkMode();
-  const colors = useSelector(Selectors.colors);
 
   useEffect(() => {
     onMount();
@@ -28,8 +25,9 @@ export function App() {
       componentSize="small"
       theme={{
         token: {
-          colorPrimary: isDarkMode ? colors.accent_light : colors.accent_dark,
-          motion: false,
+          colorPrimary: isDarkMode
+            ? $system_colors.value.accent_light
+            : $system_colors.value.accent_dark,
         },
         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}

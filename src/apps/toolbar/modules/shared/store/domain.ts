@@ -4,7 +4,6 @@ import {
   Battery,
   BluetoothDevice,
   DesktopWorkspace,
-  FancyToolbarSettings,
   File,
   FocusedApp,
   MediaDevice,
@@ -14,7 +13,6 @@ import {
   Plugin,
   PowerMode,
   PowerStatus,
-  Settings,
   TrayIcon,
   User,
   WegAppGroupItem,
@@ -22,13 +20,10 @@ import {
   WorkspaceId,
 } from '@seelen-ui/lib/types';
 
-import { IRootState } from '../../../../../shared.interfaces';
-
-export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settings, 'dateFormat'> {
+export interface RootState {
   version: number;
   items: Placeholder;
   plugins: Plugin[];
-  isOverlaped: boolean;
   user: User | null;
   userRecentFolder: File[];
   userDesktopFolder: File[];
