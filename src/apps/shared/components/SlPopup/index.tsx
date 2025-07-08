@@ -4,26 +4,40 @@ import { useDebounce } from '@shared/hooks';
 import { $is_this_webview_focused } from '@shared/signals';
 import { cx } from '@shared/styles';
 import { cloneElement, ComponentChild, VNode } from 'preact';
-import { createPortal, CSSProperties, useCallback, useEffect, useRef } from 'preact/compat';
+import { JSX } from 'preact/compat';
+import {
+  createPortal,
+  CSSProperties,
+  HTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'preact/compat';
 
 import { LegacyCustomAnimationProps } from '../AnimatedWrappers/domain';
 
 import { calculateElementPosition } from './positioning';
 
-export interface SlPopupProps {
+import './base.css';
+
+type BasicElementProps = HTMLAttributes<HTMLElement> & { [x in `data-${string}`]: string };
+
+export interface SlPopupProps<TriggerProps extends BasicElementProps> extends BasicElementProps {
+  debug?: boolean;
   animationDescription?: LegacyCustomAnimationProps;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   content: ComponentChild;
-  children: VNode<any>;
+  children: VNode<TriggerProps>;
   placement?: 'bottom' | 'top' | 'left' | 'right';
   trigger?: 'click' | 'hover' | 'manual';
   mouseEnterDelay?: number;
 }
 
-export function SlPopup(props: SlPopupProps) {
+export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TProps>) {
   const {
     open: openProp,
+    debug: _debug,
     onOpenChange: onOpenChangeProp,
     content,
     children: trigger,
@@ -31,8 +45,10 @@ export function SlPopup(props: SlPopupProps) {
     mouseEnterDelay = 0.4,
     animationDescription = {},
     placement: preferredPosition = 'bottom',
+    ...rest
   } = props;
   const { openAnimationName, closeAnimationName } = animationDescription;
+  const isExternallyHandled = openProp !== undefined;
 
   const unique_id = useRef(crypto.randomUUID());
 
@@ -46,12 +62,12 @@ export function SlPopup(props: SlPopupProps) {
   const mouseDelayedAction = useDebounce((cb: () => void) => cb(), mouseEnterDelay * 1000);
   const onOpenChange = useCallback(
     (open: boolean) => {
-      if (openProp !== undefined) {
+      if (!isExternallyHandled) {
         $is_open.value = open;
       }
       onOpenChangeProp?.(open);
     },
-    [onOpenChangeProp, openProp !== undefined],
+    [onOpenChangeProp, isExternallyHandled],
   );
 
   useEffect(() => {
@@ -97,7 +113,7 @@ export function SlPopup(props: SlPopupProps) {
   });
 
   const updatePopupPosition = () => {
-    if (!$was_open.value || !$triggerRef.current || !popupRef.current) return;
+    if (!$was_open.value || !$is_open.value || !$triggerRef.current || !popupRef.current) return;
 
     const position = calculateElementPosition(
       $triggerRef.current,
@@ -106,10 +122,8 @@ export function SlPopup(props: SlPopupProps) {
     );
 
     const newStyles = {
-      position: 'fixed',
       top: `${position.top}px`,
       left: `${position.left}px`,
-      zIndex: 1000,
     };
 
     // Only update if styles actually changed
@@ -140,26 +154,45 @@ export function SlPopup(props: SlPopupProps) {
     }
   }
 
+  const { className: _className, ...toForwardDown } = rest;
+  const triggerProps = {
+    ...toForwardDown,
+    ...trigger.props,
+    'data-popup-id': unique_id.current as string,
+    onClick(e: JSX.TargetedMouseEvent<HTMLElement>) {
+      console.log('clicked');
+      trigger.props.onClick?.(e);
+      console.log('clicked2');
+      if (triggerType === 'click') {
+        onOpenChange(!$is_open.value);
+      }
+      toForwardDown.onClick?.(e);
+    },
+    onMouseEnter(e: JSX.TargetedMouseEvent<HTMLElement>) {
+      trigger.props.onMouseEnter?.(e);
+      if (triggerType === 'hover') {
+        onMouseEnter();
+      }
+      toForwardDown.onMouseEnter?.(e);
+    },
+    onMouseLeave(e: JSX.TargetedMouseEvent<HTMLElement>) {
+      trigger.props.onMouseLeave?.(e);
+      if (triggerType === 'hover') {
+        onMouseLeave();
+      }
+      toForwardDown.onMouseLeave?.(e);
+    },
+    ref(_element: HTMLElement) {
+      const element = document.querySelector(`[data-popup-id="${unique_id.current}"]`);
+      if (element && $triggerRef.current !== element) {
+        $triggerRef.current = element as HTMLElement;
+      }
+    },
+  };
+
   return (
     <>
-      {cloneElement(trigger, {
-        'data-popup-id': unique_id.current,
-        onClick() {
-          if (triggerType === 'click') {
-            onOpenChange(!$is_open.value);
-          }
-          trigger.props.onClick?.();
-        },
-        onMouseEnter,
-        onMouseLeave,
-        ref(_element: HTMLElement) {
-          const element = document.querySelector(`[data-popup-id="${unique_id.current}"]`);
-          if (element && $triggerRef.current !== element) {
-            $triggerRef.current = element as HTMLElement;
-          }
-          trigger.props.ref?.(_element);
-        },
-      })}
+      {cloneElement(trigger, triggerProps)}
       {$was_open.value &&
         createPortal(
           <div>
@@ -168,9 +201,6 @@ export function SlPopup(props: SlPopupProps) {
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
               style={{
-                display: $is_open.value ? 'block' : 'none',
-                height: 'min-content',
-                width: 'min-content',
                 ...$popup_position_styles.value,
               }}
               className={cx('sl-popup', {

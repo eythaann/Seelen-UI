@@ -155,7 +155,6 @@ export const UserApplication = memo(({ item }: Props) => {
                 invoke(SeelenCommand.WegCloseApp, { hwnd: window.handle });
               }
             }}
-            onContextMenu={(e) => e.stopPropagation()}
           >
             <BackgroundByLayersV2 prefix="item" />
             <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />

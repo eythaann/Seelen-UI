@@ -1,0 +1,11 @@
+.sl-popup {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  width: min-content;
+  height: min-content;
+
+  &.sl-popup-open {
+    display: block;
+  }
+}

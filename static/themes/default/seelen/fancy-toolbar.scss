@@ -207,6 +207,21 @@
     > li {
       min-height: min-content;
     }
+
+    .tb-context-menu-module-item {
+      width: 240px;
+      display: grid;
+      grid-template-columns: 1rem 1rem 1fr;
+      align-items: center;
+      gap: 6px;
+
+      .tb-context-menu-module-item-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 1.4em;
+      }
+    }
   }
 }
 

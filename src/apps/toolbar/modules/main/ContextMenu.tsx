@@ -45,7 +45,7 @@ export function MainContextMenu() {
             icon: <Icon iconName="CgExtensionAdd" />,
             label: (
               <AnimatedPopover
-                trigger={'hover'}
+                trigger="hover"
                 placement="right"
                 content={
                   <BackgroundByLayersV2 className="tb-context-menu-container">
@@ -92,8 +92,15 @@ export function MainContextMenu() {
                           const added = isAlreadyAdded(plugin.id);
                           return {
                             key: plugin.id,
-                            icon: <Icon iconName={plugin.icon as IconName} />,
-                            label: <Checkbox checked={added}>{plugin.id}</Checkbox>,
+                            label: (
+                              <div className="tb-context-menu-module-item">
+                                <Icon iconName={plugin.icon as IconName} />
+                                <Checkbox checked={added} />
+                                <span className="tb-context-menu-module-item-text">
+                                  {plugin.id}
+                                </span>
+                              </div>
+                            ),
                             onClick: () => {
                               if (added) {
                                 dispatch(RootActions.removeItem(plugin.id));

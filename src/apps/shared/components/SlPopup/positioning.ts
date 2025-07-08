@@ -12,9 +12,6 @@ export function calculateElementPosition(
   follower: HTMLElement,
   preferredPosition: 'bottom' | 'top' | 'left' | 'right',
 ): { top: number; left: number } {
-  console.log('base', base);
-  console.log('follower', follower);
-
   // Get bounding rectangles and viewport dimensions
   const baseRect = base.getBoundingClientRect();
   const followerRect = follower.getBoundingClientRect();
