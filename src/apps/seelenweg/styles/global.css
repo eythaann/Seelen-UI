@@ -111,7 +111,6 @@ body {
   --max-taskbar-height: calc(100vh - var(--config-margin) * 2);
 
   position: relative;
-  overflow: visible;
   margin: var(--config-margin);
   max-width: var(--max-taskbar-width);
   max-height: var(--max-taskbar-height);
@@ -132,18 +131,8 @@ body {
     }
   }
 
-  .weg-separator {
-    z-index: 1 !important; /* Override inline style */
-
-    &:first-child,
-    &:last-child,
-    &:not(.visible) {
-      opacity: 0;
-    }
-  }
-
   &.full-width {
-    .weg-separator {
+    .weg-item-drag-container:has(.weg-separator) {
       flex: 1;
     }
   }
@@ -161,18 +150,6 @@ body {
       min-width: 100%;
       width: max-content;
     }
-
-    .weg-separator {
-      height: var(--config-item-size);
-
-      &:first-child {
-        margin-left: calc(var(--config-space-between-items) * -1);
-      }
-
-      &:last-child {
-        margin-right: calc(var(--config-space-between-items) * -1);
-      }
-    }
   }
 
   &.vertical {
@@ -188,22 +165,48 @@ body {
       min-height: 100%;
       height: max-content;
     }
-
-    .weg-separator {
-      width: var(--config-item-size);
-
-      &:first-child {
-        margin-top: calc(var(--config-space-between-items) * -1);
-      }
-
-      &:last-child {
-        margin-bottom: calc(var(--config-space-between-items) * -1);
-      }
-    }
   }
 
   &:has(.weg-item-drag-container.dragging) {
     pointer-events: none;
+  }
+}
+
+.weg-separator {
+  opacity: 0;
+
+  .vertical & {
+    width: var(--config-item-size);
+  }
+
+  .horizontal & {
+    height: var(--config-item-size);
+  }
+
+  .weg-item-drag-container:not(:first-child):not(:last-child) > & {
+    &.visible {
+      opacity: 1;
+    }
+  }
+
+  .weg-item-drag-container:first-child > & {
+    .vertical & {
+      margin-top: calc(var(--config-space-between-items) * -1);
+    }
+
+    .horizontal & {
+      margin-left: calc(var(--config-space-between-items) * -1);
+    }
+  }
+
+  .weg-item-drag-container:last-child > & {
+    .vertical & {
+      margin-bottom: calc(var(--config-space-between-items) * -1);
+    }
+
+    .horizontal & {
+      margin-right: calc(var(--config-space-between-items) * -1);
+    }
   }
 }
 

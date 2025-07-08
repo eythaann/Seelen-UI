@@ -3,13 +3,10 @@ import { invoke } from '@tauri-apps/api/core';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
 
-import { store } from '../../shared/store/infra';
-
-import { RootActions } from '../../shared/store/app';
-
 import { SwItem } from '../../shared/store/domain';
 
 import { Icon } from '../../../../shared/components/Icon';
+import { $dock_state_actions } from '../../shared/state/items';
 
 export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
   if (item.type === WegItemType.Media) {
@@ -19,7 +16,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
         label: t('media_menu.remove'),
         icon: <Icon iconName="CgExtensionRemove" />,
         onClick() {
-          store.dispatch(RootActions.remove(item.id));
+          $dock_state_actions.remove(item.id);
         },
       },
     ];
@@ -32,7 +29,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
         label: t('start_menu.remove'),
         icon: <Icon iconName="CgExtensionRemove" />,
         onClick() {
-          store.dispatch(RootActions.remove(item.id));
+          $dock_state_actions.remove(item.id);
         },
       },
     ];
@@ -46,7 +43,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
         label: t('app_menu.unpin'),
         icon: <Icon iconName="RiUnpinLine" />,
         onClick() {
-          store.dispatch(RootActions.remove(item.id));
+          $dock_state_actions.remove(item.id);
         },
       },
       {

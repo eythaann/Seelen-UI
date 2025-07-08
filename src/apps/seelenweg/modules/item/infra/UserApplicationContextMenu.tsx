@@ -4,13 +4,12 @@ import { MenuProps } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
 
-import { store } from '../../shared/store/infra';
-
-import { isPinnedApp, RootActions } from '../../shared/store/app';
+import { isPinnedApp } from '../../shared/store/app';
 
 import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
 
 import { FileIcon, Icon } from '../../../../shared/components/Icon';
+import { $dock_state_actions } from '../../shared/state/items';
 
 export function getUserApplicationContextMenu(
   t: TFunction,
@@ -30,9 +29,9 @@ export function getUserApplicationContextMenu(
         icon: <Icon iconName="RiUnpinLine" />,
         onClick: () => {
           if (item.windows.length) {
-            store.dispatch(RootActions.unPinApp(item.id));
+            $dock_state_actions.unpinApp(item.id);
           } else {
-            store.dispatch(RootActions.remove(item.id));
+            $dock_state_actions.remove(item.id);
           }
         },
       });
@@ -45,7 +44,9 @@ export function getUserApplicationContextMenu(
             {t('app_menu.pin')}
           </div>
         ),
-        onClick: () => store.dispatch(RootActions.pinApp(item.id)),
+        onClick: () => {
+          $dock_state_actions.pinApp(item.id);
+        },
       });
     }
 

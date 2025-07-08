@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { SeelenCommand, SeelenEvent, Settings, startThemingTool, subscribe, WegItems } from '@seelen-ui/lib';
+import { SeelenCommand, SeelenEvent, Settings, startThemingTool, subscribe } from '@seelen-ui/lib';
 import { FocusedApp, SeelenWegSettings } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -41,8 +41,6 @@ export async function registerStoreEvents() {
 
   await Settings.onChange(loadSettingsToStore);
 
-  await WegItems.forCurrentWidgetChange(loadWegItemsToStore);
-
   await startThemingTool();
 }
 
@@ -63,15 +61,7 @@ function loadSettingsToStore(settings: Settings) {
   loadSettingsCSS(settings.seelenweg);
 }
 
-function loadWegItemsToStore(items: WegItems) {
-  store.dispatch(RootActions.setReorderDisabled(items.inner.isReorderDisabled));
-  store.dispatch(RootActions.setItemsOnLeft(items.inner.left));
-  store.dispatch(RootActions.setItemsOnCenter(items.inner.center));
-  store.dispatch(RootActions.setItemsOnRight(items.inner.right));
-}
-
 export async function loadStore() {
   loadSettingsToStore(await Settings.getAsync());
-  loadWegItemsToStore(await WegItems.forCurrentWidget());
   store.dispatch(RootActions.setMediaSessions(await invoke(SeelenCommand.GetMediaSessions)));
 }

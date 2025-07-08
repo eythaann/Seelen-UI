@@ -12,7 +12,6 @@ import { SpecificIcon } from 'src/apps/shared/components/Icon';
 import { StartMenuWegItem } from '../../shared/store/domain';
 
 import { WithContextMenu } from '../../../components/WithContextMenu';
-import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
 
 interface Props {
@@ -29,24 +28,22 @@ export const StartMenu = memo(({ item }: Props) => {
   const isStartMenuOpen = startMenuExes.some((program) => (focused?.exe || '').endsWith(program));
 
   return (
-    <DraggableItem item={item}>
-      <WithContextMenu items={getMenuForItem(t, item)}>
-        <div
-          className="weg-item weg-item-start"
-          onClick={() => {
-            if (!isStartMenuOpen) {
-              invoke(SeelenCommand.SendKeys, { keys: '{win}' });
-            }
-          }}
-          onContextMenu={(e) => e.stopPropagation()}
-        >
-          <BackgroundByLayersV2 />
-          <SpecificIcon
-            className="weg-item-icon weg-item-start-icon"
-            name={'@seelen/weg::start-menu'}
-          />
-        </div>
-      </WithContextMenu>
-    </DraggableItem>
+    <WithContextMenu items={getMenuForItem(t, item)}>
+      <div
+        className="weg-item weg-item-start"
+        onClick={() => {
+          if (!isStartMenuOpen) {
+            invoke(SeelenCommand.SendKeys, { keys: '{win}' });
+          }
+        }}
+        onContextMenu={(e) => e.stopPropagation()}
+      >
+        <BackgroundByLayersV2 />
+        <SpecificIcon
+          className="weg-item-icon weg-item-start-icon"
+          name={'@seelen/weg::start-menu'}
+        />
+      </div>
+    </WithContextMenu>
   );
 });

@@ -16,7 +16,6 @@ import { MediaWegItem } from '../../shared/store/domain';
 import { FileIcon, Icon } from '../../../../shared/components/Icon';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { $settings } from '../../shared/state/mod';
-import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
 
 import './MediaSession.css';
@@ -33,7 +32,7 @@ const DEFAULT_THUMBNAIL = await resolve(
 );
 
 export function MediaSession({ item }: { item: MediaWegItem }) {
-  const [luminance, setLuminance] = useState(0);
+  const [luminance, setLuminance] = useState(150);
 
   const $dock_position = useComputed(() => $settings.value.position);
   const sessions = useSelector(Selectors.mediaSessions);
@@ -63,63 +62,61 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
     $dock_position.value === SeelenWegSide.Bottom || $dock_position.value === SeelenWegSide.Top;
 
   return (
-    <DraggableItem item={item}>
-      <WithContextMenu items={getMenuForItem(t, item)}>
+    <WithContextMenu items={getMenuForItem(t, item)}>
+      <div
+        className={cx('weg-item', 'media-session-container', {
+          'media-session-container-horizontal': isHorizontal,
+          'media-session-container-vertical': !isHorizontal,
+        })}
+        onContextMenu={(e) => e.stopPropagation()}
+        // style={{ zIndex: -1 }} // I don't known why the fuck this item is overlapping but this fixes it
+      >
         <div
-          className={cx('weg-item', 'media-session-container', {
-            'media-session-container-horizontal': isHorizontal,
-            'media-session-container-vertical': !isHorizontal,
-          })}
-          onContextMenu={(e) => e.stopPropagation()}
-          // style={{ zIndex: -1 }} // I don't known why the fuck this item is overlapping but this fixes it
+          className="media-session"
+          style={{
+            backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
+          }}
         >
-          <div
-            className="media-session"
-            style={{
-              backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
-            }}
-          >
-            <div className="media-session-blurred-thumbnail-container">
-              <img className="media-session-blurred-thumbnail" src={thumbnailSrc} />
-            </div>
-            <div className="media-session-thumbnail-container">
-              <img className="media-session-thumbnail" src={thumbnailSrc} />
-              <FileIcon className="media-session-app-icon" umid={session?.umid} noFallback />
-            </div>
-            <div className="media-session-info">
-              <span
-                className={cx('media-session-title', {
-                  'media-session-title-default': !session,
-                })}
-                style={{ color }}
-              >
-                {session ? session.title : t('media.not_playing')}
-              </span>
-              {session && (
-                <div className="media-session-actions">
-                  <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_prev')}>
-                    <Icon iconName="TbPlayerSkipBackFilled" color={color} size={12} />
-                  </Button>
-                  <Button
-                    type="text"
-                    size="small"
-                    onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
-                  >
-                    <Icon
-                      iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
-                      color={color}
-                      size={12}
-                    />
-                  </Button>
-                  <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_next')}>
-                    <Icon iconName="TbPlayerSkipForwardFilled" color={color} size={12} />
-                  </Button>
-                </div>
-              )}
-            </div>
+          <div className="media-session-blurred-thumbnail-container">
+            <img className="media-session-blurred-thumbnail" src={thumbnailSrc} loading="lazy" />
+          </div>
+          <div className="media-session-thumbnail-container">
+            <img className="media-session-thumbnail" src={thumbnailSrc} loading="lazy" />
+            <FileIcon className="media-session-app-icon" umid={session?.umid} noFallback />
+          </div>
+          <div className="media-session-info">
+            <span
+              className={cx('media-session-title', {
+                'media-session-title-default': !session,
+              })}
+              style={{ color }}
+            >
+              {session ? session.title : t('media.not_playing')}
+            </span>
+            {session && (
+              <div className="media-session-actions">
+                <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_prev')}>
+                  <Icon iconName="TbPlayerSkipBackFilled" color={color} size={12} />
+                </Button>
+                <Button
+                  type="text"
+                  size="small"
+                  onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
+                >
+                  <Icon
+                    iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
+                    color={color}
+                    size={12}
+                  />
+                </Button>
+                <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_next')}>
+                  <Icon iconName="TbPlayerSkipForwardFilled" color={color} size={12} />
+                </Button>
+              </div>
+            )}
           </div>
         </div>
-      </WithContextMenu>
-    </DraggableItem>
+      </div>
+    </WithContextMenu>
   );
 }

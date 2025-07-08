@@ -1,21 +1,18 @@
-import { SeelenCommand } from '@seelen-ui/lib';
+import { SeelenCommand, WegItemType } from '@seelen-ui/lib';
 import { dialog } from '@seelen-ui/lib/tauri';
 import { invoke } from '@tauri-apps/api/core';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
 
-import { store } from '../shared/store/infra';
-
-import { RootActions } from '../shared/store/app';
-
 import { Icon } from '../../../shared/components/Icon';
+import { $dock_state, $dock_state_actions } from '../shared/state/items';
 
-export function getSeelenWegMenu(
-  t: TFunction,
-  restrictedBar?: boolean,
-  isReorderDisabled?: boolean,
-): ItemType[] {
-  if (!!restrictedBar) {
+export function getSeelenWegMenu(t: TFunction): ItemType[] {
+  const isRestrictedBar =
+    $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length > 0 &&
+    $dock_state.value.items.every((item) => item.type === WegItemType.Temporal && item.pinDisabled);
+
+  if (!!isRestrictedBar) {
     return [
       {
         key: 'task_manager',
@@ -35,13 +32,14 @@ export function getSeelenWegMenu(
       },
     ];
   }
+
   return [
     {
       key: 'add-media-module',
       label: t('taskbar_menu.media'),
       icon: <Icon iconName="PiMusicNotesPlusFill" />,
       onClick() {
-        store.dispatch(RootActions.addMediaModule());
+        $dock_state_actions.addMediaModule();
       },
     },
     {
@@ -49,7 +47,7 @@ export function getSeelenWegMenu(
       label: t('taskbar_menu.start'),
       icon: <Icon iconName="BsWindows" size={14} />,
       onClick() {
-        store.dispatch(RootActions.addStartModule());
+        $dock_state_actions.addStartModule();
       },
     },
     {
@@ -92,10 +90,17 @@ export function getSeelenWegMenu(
     },
     {
       key: 'reoder',
-      icon: <Icon iconName={!isReorderDisabled ? 'CgLock' : 'CgLockUnlock'} />,
-      label: t(!isReorderDisabled ? 'context_menu.reorder_disable' : 'context_menu.reorder_enable'),
+      icon: <Icon iconName={$dock_state.value.isReorderDisabled ? 'CgLockUnlock' : 'CgLock'} />,
+      label: t(
+        $dock_state.value.isReorderDisabled
+          ? 'context_menu.reorder_enable'
+          : 'context_menu.reorder_disable',
+      ),
       onClick() {
-        store.dispatch(RootActions.setWegReorderDisabled(!isReorderDisabled));
+        $dock_state.value = {
+          ...$dock_state.value,
+          isReorderDisabled: !$dock_state.value.isReorderDisabled,
+        };
       },
     },
     {

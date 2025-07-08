@@ -14,6 +14,7 @@
 ### fix
 - (#1019) maximized windows being detected as fullscreen.
 - icorrect resource id regex.
+- sorting of items on dock and toolbar.
 
 ## [2.3.10]
 ### hotfix

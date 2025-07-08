@@ -10,7 +10,6 @@ import { FileIcon, SpecificIcon } from 'src/apps/shared/components/Icon';
 import { PinnedWegItem } from '../../shared/store/domain';
 
 import { WithContextMenu } from '../../../components/WithContextMenu';
-import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
 
 interface Props {
@@ -21,26 +20,24 @@ export const FileOrFolder = memo(({ item }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <DraggableItem item={item}>
-      <WithContextMenu items={getMenuForItem(t, item)}>
-        <div
-          className="weg-item"
-          onClick={() => {
-            invoke(SeelenCommand.OpenFile, { path: item.path });
-          }}
-          onContextMenu={(e) => e.stopPropagation()}
-        >
-          <BackgroundByLayersV2 prefix="item" />
-          {item.subtype === 'Folder' ? (
-            <SpecificIcon
-              className="weg-item-icon weg-item-folder-icon"
-              name="@seelen/weg::folder"
-            />
-          ) : (
-            <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
-          )}
-        </div>
-      </WithContextMenu>
-    </DraggableItem>
+    <WithContextMenu items={getMenuForItem(t, item)}>
+      <div
+        className="weg-item"
+        onClick={() => {
+          invoke(SeelenCommand.OpenFile, { path: item.path });
+        }}
+        onContextMenu={(e) => e.stopPropagation()}
+      >
+        <BackgroundByLayersV2 prefix="item" />
+        {item.subtype === 'Folder' ? (
+          <SpecificIcon
+            className="weg-item-icon weg-item-folder-icon"
+            name="@seelen/weg::folder"
+          />
+        ) : (
+          <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
+        )}
+      </div>
+    </WithContextMenu>
   );
 });

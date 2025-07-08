@@ -13,10 +13,6 @@ export type SwItem = WegItem;
 
 export interface RootState {
   devTools: boolean;
-  itemsOnLeft: SwItem[];
-  itemsOnCenter: SwItem[];
-  itemsOnRight: SwItem[];
-  reorderDisabled: boolean;
   // ----------------------
   focusedApp: FocusedApp | null;
   mediaSessions: MediaPlayer[];

@@ -87,9 +87,11 @@ export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TP
       }
     };
     window.addEventListener('click', cb);
+    window.addEventListener('contextmenu', cb);
 
     return () => {
       window.removeEventListener('click', cb);
+      window.removeEventListener('contextmenu', cb);
     };
   }, [onOpenChange]);
 
@@ -160,9 +162,7 @@ export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TP
     ...trigger.props,
     'data-popup-id': unique_id.current as string,
     onClick(e: JSX.TargetedMouseEvent<HTMLElement>) {
-      console.log('clicked');
       trigger.props.onClick?.(e);
-      console.log('clicked2');
       if (triggerType === 'click') {
         onOpenChange(!$is_open.value);
       }
