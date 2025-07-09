@@ -59,7 +59,7 @@ image = { version = "0.25.5", features = ["ico"] }
 widestring = "1.0.2"
 itertools = "0.12.1"
 clap = { version = "4.5.4", features = ["derive", "string"] }
-os_info = "3.9.2"
+os_info = "3.12.0"
 crossbeam-channel = "0.5.15"
 regex = "1.11.1"
 getset = "0.1.3"
