@@ -1,11 +1,13 @@
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { useComputed } from '@preact/signals';
 import { SeelenCommand, WorkspaceToolbarItemMode } from '@seelen-ui/lib';
 import { WorkspaceToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { Menu, Tooltip } from 'antd';
-import { Reorder } from 'framer-motion';
-import { useState } from 'react';
+import { HTMLAttributes, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { CommonItemContextMenu } from '../item/infra/ContextMenu';
 import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
@@ -15,6 +17,7 @@ import { AnimatedDropdown } from 'src/apps/shared/components/AnimatedWrappers';
 import { useThrottle, useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { cx } from '../../../shared/styles';
+import { $toolbar_state } from '../shared/state/items';
 
 interface Props {
   module: WorkspaceToolbarItem;
@@ -22,10 +25,29 @@ interface Props {
 }
 
 function InnerWorkspacesModule({ module, ...rest }: Props) {
+  const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: module.id,
+    disabled: isReorderDisabled.value,
+    animateLayoutChanges: () => false,
+  });
+
   const workspaces = useSelector(Selectors.workspaces);
   const activeWorkspace = useSelector(Selectors.activeWorkspace);
 
   const { mode } = module;
+  const commonProps = {
+    ref: setNodeRef,
+    id: module.id,
+    ...listeners,
+    ...(attributes as HTMLAttributes<HTMLDivElement>),
+    style: {
+      ...module.style,
+      transform: CSS.Translate.toString(transform),
+      transition,
+      opacity: isDragging ? 0.3 : 1,
+    },
+  };
 
   function onContextMenu(e: MouseEvent) {
     rest.onContextMenu?.(e);
@@ -46,11 +68,9 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
 
   if (mode === WorkspaceToolbarItemMode.Dotted) {
     return (
-      <Reorder.Item
-        as="div"
-        value={(module as any).__value__ || module}
+      <div
+        {...commonProps}
         className="ft-bar-item"
-        style={module.style}
         onContextMenu={onContextMenu}
         onWheel={(e: WheelEvent) => {
           e.stopPropagation();
@@ -68,15 +88,13 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
             />
           ))}
         </ul>
-      </Reorder.Item>
+      </div>
     );
   }
 
   return (
-    <Reorder.Item
-      as="div"
-      id={module.id}
-      value={(module as any).__value__ || module}
+    <div
+      {...commonProps}
       className="ft-bar-group"
       onContextMenu={onContextMenu}
       onWheel={(e: WheelEvent) => {
@@ -112,7 +130,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
           </Tooltip>
         );
       })}
-    </Reorder.Item>
+    </div>
   );
 }
 
@@ -120,7 +138,6 @@ export function WorkspacesModule({ module }: Props) {
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const workspaces = useSelector(Selectors.workspaces);
 
-  const d = useDispatch();
   const { t } = useTranslation();
 
   useWindowFocusChange((focused) => {
@@ -144,7 +161,7 @@ export function WorkspacesModule({ module }: Props) {
       trigger={['contextMenu']}
       dropdownRender={() => (
         <BackgroundByLayersV2 className="ft-bar-item-context-menu-container">
-          <Menu className="ft-bar-item-context-menu" items={CommonItemContextMenu(t, d, module)} />
+          <Menu className="ft-bar-item-context-menu" items={CommonItemContextMenu(t, module)} />
         </BackgroundByLayersV2>
       )}
     >

@@ -9,8 +9,6 @@ import {
   MediaDevice,
   MediaPlayer,
   NetworkAdapter,
-  Placeholder,
-  Plugin,
   PowerMode,
   PowerStatus,
   TrayIcon,
@@ -22,8 +20,6 @@ import {
 
 export interface RootState {
   version: number;
-  items: Placeholder;
-  plugins: Plugin[];
   user: User | null;
   userRecentFolder: File[];
   userDesktopFolder: File[];

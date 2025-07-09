@@ -3,6 +3,7 @@ import {
   DndContext,
   DragEndEvent,
   DragOverlay,
+  DragStartEvent,
   PointerSensor,
   useSensor,
   useSensors,
@@ -42,8 +43,8 @@ export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
   const isEmpty =
     $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length === 0;
 
-  function handleDragStart(e: any) {
-    $active_id.value = e.active.id;
+  function handleDragStart(e: DragStartEvent) {
+    $active_id.value = e.active.id as string;
   }
 
   function handleDragEnd(e: DragEndEvent) {
@@ -70,7 +71,6 @@ export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       sensors={sensors}
-      autoScroll
     >
       <div className="weg-items">
         {isEmpty ? (

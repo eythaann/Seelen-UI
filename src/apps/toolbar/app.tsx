@@ -3,11 +3,10 @@ import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 
-import { ToolBar } from './modules/main/infra';
-
 import { ErrorBoundary } from '../seelenweg/components/Error';
 import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
+import { FancyToolbar } from './modules/main/Toolbar';
 
 export function App() {
   const isDarkMode = useDarkMode();
@@ -35,7 +34,7 @@ export function App() {
       }}
     >
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <ToolBar />
+        <FancyToolbar />
       </ErrorBoundary>
     </ConfigProvider>
   );

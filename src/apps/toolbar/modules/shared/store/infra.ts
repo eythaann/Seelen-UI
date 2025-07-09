@@ -7,7 +7,6 @@ import {
   LanguageList,
   MusicFolder,
   PicturesFolder,
-  PluginList,
   RecentFolder,
   SeelenCommand,
   SeelenEvent,
@@ -156,15 +155,6 @@ export async function registerStoreEvents() {
 
   await subscribe(SeelenEvent.NetworkWlanScanned, (event) => {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
-  });
-
-  await subscribe(SeelenEvent.StateToolbarItemsChanged, (event) => {
-    store.dispatch(RootActions.setPlaceholder(event.payload));
-  });
-
-  store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).forCurrentWidget()));
-  await PluginList.onChange((list) => {
-    store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));
   });
 
   LanguageList.onChange((list) => store.dispatch(RootActions.setLanguages(list.asArray())));

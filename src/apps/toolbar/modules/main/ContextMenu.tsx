@@ -6,33 +6,28 @@ import { Button, Checkbox, Flex, Input, Menu, Space } from 'antd';
 import { MenuItemType } from 'antd/es/menu/interface';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
 
-import { RootActions, Selectors } from '../shared/store/app';
-import { RestoreToDefault, SaveToolbarItems } from './application';
+import { RestoreToDefault } from './application';
 import { Icon } from 'src/apps/shared/components/Icon';
+
+import { $actions, $plugins, $toolbar_state } from '../shared/state/items';
 
 export function MainContextMenu() {
   const [customText, setCustomText] = useState('');
 
-  const items = useSelector(Selectors.items);
-  const plugins = useSelector(Selectors.plugins);
-
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const allItems = [...items.left, ...items.center, ...items.right];
+  const allItems = [...$toolbar_state.value.left, ...$toolbar_state.value.center, ...$toolbar_state.value.right];
 
   const isAlreadyAdded = (id: PluginId) => {
     return allItems.some((item) => item === id);
   };
 
   function addCustomTextToToolbar() {
-    dispatch(RootActions.addTextItem(customText));
+    $actions.addTextItem(customText);
     setCustomText('');
-    SaveToolbarItems();
   }
 
   return (
@@ -86,7 +81,7 @@ export function MainContextMenu() {
                         {
                           type: 'divider',
                         },
-                        ...plugins
+                        ...$plugins.value
                           .toSorted((p1, p2) => p1.id.localeCompare(p2.id))
                           .map<MenuItemType>((plugin) => {
                           const added = isAlreadyAdded(plugin.id);
@@ -103,11 +98,10 @@ export function MainContextMenu() {
                             ),
                             onClick: () => {
                               if (added) {
-                                dispatch(RootActions.removeItem(plugin.id));
+                                $actions.removeItem(plugin.id);
                               } else {
-                                dispatch(RootActions.addItem(plugin.id));
+                                $actions.addItem(plugin.id);
                               }
-                              SaveToolbarItems();
                             },
                           };
                         }),
@@ -128,15 +122,17 @@ export function MainContextMenu() {
           },
           {
             key: 'reoder',
-            icon: <Icon iconName={!items.isReorderDisabled ? 'VscLock' : 'VscUnlock'} />,
+            icon: <Icon iconName={$toolbar_state.value.isReorderDisabled ? 'VscUnlock' : 'VscLock'} />,
             label: t(
-              !items.isReorderDisabled
-                ? 'context_menu.reorder_disable'
-                : 'context_menu.reorder_enable',
+              $toolbar_state.value.isReorderDisabled
+                ? 'context_menu.reorder_enable'
+                : 'context_menu.reorder_disable',
             ),
             onClick() {
-              dispatch(RootActions.setToolbarReorderDisabled(!items.isReorderDisabled));
-              SaveToolbarItems();
+              $toolbar_state.value = {
+                ...$toolbar_state.value,
+                isReorderDisabled: !$toolbar_state.value.isReorderDisabled,
+              };
             },
           },
           {

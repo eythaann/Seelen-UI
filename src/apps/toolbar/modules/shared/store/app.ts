@@ -14,7 +14,6 @@ import {
   VideosFolder,
   WegItems,
 } from '@seelen-ui/lib';
-import { Placeholder, PluginId, ToolbarItem2 } from '@seelen-ui/lib/types';
 
 import { RootState } from './domain';
 
@@ -22,8 +21,6 @@ import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
   version: 0,
-  items: await invoke(SeelenCommand.StateGetToolbarItems),
-  plugins: [],
   user: (await UserDetails.getAsync()).user,
   userRecentFolder: [],
   userDesktopFolder: [],
@@ -68,60 +65,6 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    setPlaceholder(state, action: PayloadAction<Placeholder>) {
-      state.items = action.payload as any;
-      state.version++;
-    },
-    setItemsOnLeft(state, action: PayloadAction<ToolbarItem2[]>) {
-      if (state.items) {
-        state.items.left = action.payload as any;
-      }
-    },
-    setItemsOnCenter(state, action: PayloadAction<ToolbarItem2[]>) {
-      if (state.items) {
-        state.items.center = action.payload as any;
-      }
-    },
-    setItemsOnRight(state, action: PayloadAction<ToolbarItem2[]>) {
-      if (state.items) {
-        state.items.right = action.payload as any;
-      }
-    },
-    addTextItem(state, action: PayloadAction<string>) {
-      const cleaned = action.payload.trim().replace(/"/g, '\\"');
-      state.items.right.push({
-        id: window.crypto.randomUUID(),
-        type: 'text',
-        template: `return "${cleaned}"`,
-      } as any);
-    },
-    addItem(state, action: PayloadAction<PluginId>) {
-      if (!state.items) {
-        return;
-      }
-      const alreadyExists =
-        state.items.left.includes(action.payload) ||
-        state.items.right.includes(action.payload) ||
-        state.items.center.includes(action.payload);
-      if (!alreadyExists) {
-        state.items.right.push(action.payload);
-      }
-    },
-    removeItem(state, action: PayloadAction<string>) {
-      let id = action.payload;
-      if (state.items) {
-        let filter = (d: any) => d !== id && d.id !== id;
-        state.items.left = state.items.left.filter(filter);
-        state.items.center = state.items.center.filter(filter);
-        state.items.right = state.items.right.filter(filter);
-      }
-    },
-    setToolbarReorderDisabled(state, action: PayloadAction<boolean>) {
-      let enabled = action.payload;
-      if (state.items) {
-        state.items.isReorderDisabled = enabled;
-      }
-    },
     addWindowColor(
       state,
       action: PayloadAction<[number, { background: string; foreground: string }]>,

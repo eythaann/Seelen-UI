@@ -1,8 +1,10 @@
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { useComputed } from '@preact/signals';
 import { RemoteDataDeclaration, ToolbarItem } from '@seelen-ui/lib/types';
 import { useDeepCompareEffect } from '@shared/hooks';
 import { Tooltip } from 'antd';
-import { Reorder } from 'framer-motion';
-import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from 'preact/compat';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -10,6 +12,7 @@ import { Selectors } from '../../shared/store/app';
 import { EvaluateAction } from '../app';
 
 import { cx } from '../../../../shared/styles';
+import { $toolbar_state } from '../../shared/state/items';
 import { SanboxedComponent } from './EvaluatedComponents';
 
 export interface InnerItemProps extends PropsWithChildren {
@@ -35,11 +38,18 @@ export function InnerItem(props: InnerItemProps) {
     clickable = true,
     ...rest
   } = props;
+
   const { template, tooltip, onClickV2, style, id, badge, remoteData = {} } = module;
 
   const fetchedData = useRemoteData(remoteData);
-  const isReorderDisabled = useSelector(Selectors.items.isReorderDisabled);
+  const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
   const env = useSelector(Selectors.env);
+
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id,
+    disabled: isReorderDisabled.value,
+    animateLayoutChanges: () => false,
+  });
 
   const { t } = useTranslation();
 
@@ -65,12 +75,13 @@ export function InnerItem(props: InnerItemProps) {
       classNames={{ root: 'ft-bar-item-tooltip' }}
       title={tooltip ? <SanboxedComponent code={tooltip} scope={scope} /> : undefined}
     >
-      <Reorder.Item
+      <div
+        ref={setNodeRef}
+        {...listeners}
+        {...(attributes as HTMLAttributes<HTMLDivElement>)}
         {...rest}
         id={id}
-        drag={!isReorderDisabled}
-        value={(module as any).__value__ || module}
-        style={style}
+        style={{ ...style, transform: CSS.Translate.toString(transform), transition, opacity: isDragging ? 0.3 : 1 }}
         className={cx('ft-bar-item', {
           // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
           'ft-bar-item-clickable': clickable || onClickV2,
@@ -84,8 +95,6 @@ export function InnerItem(props: InnerItemProps) {
             EvaluateAction(onClickV2, scope);
           }
         }}
-        as="div"
-        transition={{ duration: 0.15 }}
         onContextMenu={(e: MouseEvent) => {
           e.stopPropagation();
           (rest as any).onContextMenu?.(e);
@@ -99,7 +108,7 @@ export function InnerItem(props: InnerItemProps) {
             </div>
           )}
         </div>
-      </Reorder.Item>
+      </div>
     </Tooltip>
   );
 }

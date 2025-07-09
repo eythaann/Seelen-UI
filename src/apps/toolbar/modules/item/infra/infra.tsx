@@ -2,7 +2,7 @@ import { GenericToolbarItem } from '@seelen-ui/lib/types';
 import { Menu } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
@@ -16,7 +16,6 @@ import { InnerItem, InnerItemProps } from './Inner';
 export function Item(props: InnerItemProps) {
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
-  const d = useDispatch();
   const { t } = useTranslation();
 
   useWindowFocusChange((focused) => {
@@ -38,7 +37,7 @@ export function Item(props: InnerItemProps) {
         <BackgroundByLayersV2 className="ft-bar-item-context-menu-container">
           <Menu
             className="ft-bar-item-context-menu"
-            items={CommonItemContextMenu(t, d, props.module)}
+            items={CommonItemContextMenu(t, props.module)}
           />
         </BackgroundByLayersV2>
       )}

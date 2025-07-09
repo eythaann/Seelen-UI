@@ -1,24 +1,20 @@
 import { fs } from '@seelen-ui/lib/tauri';
-import { Placeholder, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
+import { PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { path } from '@tauri-apps/api';
 import yaml from 'js-yaml';
-import { cloneDeep, debounce, throttle } from 'lodash';
+import { debounce } from 'lodash';
 
-import { store } from '../shared/store/infra';
+import { $toolbar_state } from '../shared/state/items';
 
-export const SaveToolbarItems = debounce(async () => {
-  const { items: placeholder } = store.getState();
-  const toBeSaved = cloneDeep(placeholder);
+$toolbar_state.subscribe(debounce (async (value) => {
   const filePath = await path.join(await path.appDataDir(), 'toolbar_items.yml');
-  await fs.writeTextFile(filePath, yaml.dump(toBeSaved));
-}, 1000);
+  await fs.writeTextFile(filePath, yaml.dump(value));
+}, 1000));
 
-export const RestoreToDefault = throttle(async () => {
-  const { items: placeholder } = store.getState();
-
+export function RestoreToDefault() {
   // based on src\background\state\application\toolbar_items.rs
-  const toBeSaved: Placeholder = {
-    ...placeholder,
+  $toolbar_state.value = {
+    ...$toolbar_state.value,
     left: [
       '@default/user-folder' as PluginId,
       { id: crypto.randomUUID(), type: 'text', template: 'return "|"' } as ToolbarItem,
@@ -42,7 +38,4 @@ export const RestoreToDefault = throttle(async () => {
       '@default/quick-settings' as PluginId,
     ],
   };
-
-  const filePath = await path.join(await path.appDataDir(), 'toolbar_items.yml');
-  await fs.writeTextFile(filePath, yaml.dump(toBeSaved));
-}, 2000);
+};
