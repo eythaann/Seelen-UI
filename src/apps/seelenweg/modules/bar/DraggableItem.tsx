@@ -1,5 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { cx } from '@shared/styles';
 import { HTMLAttributes, PropsWithChildren } from 'preact/compat';
 
 import { SwItem } from '../shared/store/domain';
@@ -25,15 +26,12 @@ export function DraggableItem({ children, item }: Props) {
         transition,
         opacity: isDragging ? 0.3 : 1,
       }}
-      className="weg-item-drag-container"
-      /* onDragStart={() => {
-        ref.current?.classList.add('dragging');
-      }}
-      onDragEnd={() => {
-        setTimeout(() => {
-          ref.current?.classList.remove('dragging');
-        }, 150);
-      }} */
+      className={cx('weg-item-drag-container', {
+        dragging: isDragging,
+      })}
+      // this was added here to avoid need to pass it to all the items types,
+      // this avoid the double context menu of dock menu and dock items.
+      onContextMenu={item.type === 'Separator' ? undefined : (e) => e.stopPropagation()}
     >
       {children}
     </div>
