@@ -1,10 +1,13 @@
 @layer reset {
   :root {
-    font-size: 100%;
     --main-typo: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
       Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     --primary-color: var(--color-gray-900);
     --secondary-color: var(--color-gray-50);
+
+    interpolate-size: allow-keywords; /* This enables animations between keywords (auto, min-content, etc) */
+    scroll-behavior: smooth;
+    font-size: 100%;
   }
 
   *,
@@ -18,7 +21,7 @@
     vertical-align: baseline;
   }
 
-  /* these are unique for desktop apps using webview */
+  /* Avoid selection of text on desktop, mobile apps */
   :not(input):not(textarea),
   :not(input):not(textarea)::after,
   :not(input):not(textarea)::before {
@@ -26,7 +29,7 @@
     user-select: none;
   }
 
-  /* these are unique for desktop apps using webview */
+  /* Show normal cursor on desktop, mobile apps except links and inputs */
   :not(a):not(a *):not(input):not(textarea) {
     cursor: default !important;
   }
@@ -53,10 +56,6 @@
 
   li {
     list-style-type: none;
-  }
-
-  html {
-    scroll-behavior: smooth;
   }
 
   h1,
