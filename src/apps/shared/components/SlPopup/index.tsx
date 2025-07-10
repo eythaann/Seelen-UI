@@ -1,10 +1,9 @@
 import { useSignal, useSignalEffect } from '@preact/signals';
-import { useSignalRef } from '@preact/signals/utils';
 import { useDebounce } from '@shared/hooks';
 import { $is_this_webview_focused } from '@shared/signals';
 import { cx } from '@shared/styles';
 import { cloneElement, ComponentChild, VNode } from 'preact';
-import { JSX } from 'preact/compat';
+import { ForwardedRef, forwardRef, JSX } from 'preact/compat';
 import {
   createPortal,
   CSSProperties,
@@ -16,6 +15,7 @@ import {
 
 import { LegacyCustomAnimationProps } from '../AnimatedWrappers/domain';
 
+import { mergeRefs } from '../mergeRefs';
 import { calculateElementPosition } from './positioning';
 
 import './base.css';
@@ -34,10 +34,13 @@ export interface SlPopupProps<TriggerProps extends BasicElementProps> extends Ba
   mouseEnterDelay?: number;
 }
 
-export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TProps>) {
+function _SlPopup<TProps extends BasicElementProps>(
+  props: SlPopupProps<TProps>,
+  forwardedRef: ForwardedRef<HTMLElement>,
+) {
   const {
     open: openProp,
-    debug: _debug,
+    debug,
     onOpenChange: onOpenChangeProp,
     content,
     children: trigger,
@@ -50,13 +53,13 @@ export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TP
   const { openAnimationName, closeAnimationName } = animationDescription;
   const isExternallyHandled = openProp !== undefined;
 
-  const unique_id = useRef(crypto.randomUUID());
+  const unique_trigger_id = useRef(crypto.randomUUID());
 
   const $was_open = useSignal(false);
   const $is_open = useSignal(openProp);
   const $popup_position_styles = useSignal<CSSProperties>({});
 
-  const $triggerRef = useSignalRef<HTMLElement | null>(null);
+  const triggerRef = useRef<HTMLElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
 
   const mouseDelayedAction = useDebounce((cb: () => void) => cb(), mouseEnterDelay * 1000);
@@ -79,7 +82,7 @@ export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TP
   useEffect(() => {
     const cb = (e: MouseEvent) => {
       const clickedElement = e.target as HTMLElement;
-      const isTrigger = clickedElement.closest(`[data-popup-id="${unique_id.current}"]`);
+      const isTrigger = clickedElement.closest(`[data-sl-trigger-id="${unique_trigger_id.current}"]`);
       const isPopup = clickedElement.closest('.sl-popup');
 
       if (!isTrigger && !isPopup && $is_open.value) {
@@ -115,13 +118,21 @@ export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TP
   });
 
   const updatePopupPosition = () => {
-    if (!$was_open.value || !$is_open.value || !$triggerRef.current || !popupRef.current) return;
+    if (debug) {
+      console.log('updatePopupPosition');
+    }
+
+    if (!$was_open.value || !$is_open.value || !triggerRef.current || !popupRef.current) return;
 
     const position = calculateElementPosition(
-      $triggerRef.current,
+      triggerRef.current,
       popupRef.current,
       preferredPosition,
     );
+
+    if (debug) {
+      console.log('position', position);
+    }
 
     const newStyles = {
       top: `${position.top}px`,
@@ -160,7 +171,7 @@ export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TP
   const triggerProps = {
     ...toForwardDown,
     ...trigger.props,
-    'data-popup-id': unique_id.current as string,
+    'data-sl-trigger-id': unique_trigger_id.current,
     onClick(e: JSX.TargetedMouseEvent<HTMLElement>) {
       trigger.props.onClick?.(e);
       if (triggerType === 'click') {
@@ -182,12 +193,7 @@ export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TP
       }
       toForwardDown.onMouseLeave?.(e);
     },
-    ref(_element: HTMLElement) {
-      const element = document.querySelector(`[data-popup-id="${unique_id.current}"]`);
-      if (element && $triggerRef.current !== element) {
-        $triggerRef.current = element as HTMLElement;
-      }
-    },
+    ref: mergeRefs([trigger.ref, triggerRef, forwardedRef]),
   };
 
   return (
@@ -218,3 +224,5 @@ export function SlPopup<TProps extends BasicElementProps>(props: SlPopupProps<TP
     </>
   );
 }
+
+export const SlPopup = forwardRef(_SlPopup);

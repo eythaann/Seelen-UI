@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- volume changed popup wrong placement.
+
 ## [2.3.11]
 ### features
 - allow add shared styles on themes to be applied to all the widgets.

@@ -1,3 +1,4 @@
+import { Rect } from '@seelen-ui/lib';
 import { Button, InputNumber } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -5,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../../shared/utils/infra';
 
 import { SeelenWmSelectors } from '../../../shared/store/app/selectors';
-import { Rect } from '../../../shared/utils/app/Rect';
 import { WManagerSettingsActions } from '../app';
 import { Icon } from 'src/apps/shared/components/Icon';
 
