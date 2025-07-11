@@ -298,6 +298,7 @@
 }
 
 .weg-item-preview-container {
+  margin: calc(var(--config-padding) * 2);
   padding: 10px;
   border-radius: 10px;
 
@@ -306,6 +307,10 @@
       background-color: var(--color-gray-100);
       border-radius: 10px;
     }
+  }
+
+  .weg-item-display-name {
+    white-space: nowrap;
   }
 
   .weg-item-preview-scrollbar {
