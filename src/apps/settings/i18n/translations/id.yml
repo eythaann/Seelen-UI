@@ -136,6 +136,8 @@ more: Lagi
 open: Membuka
 quit: Berhenti
 remove: Menghapus
+reset_all_to_default: Atur ulang semua ke nilai default
+reset_to_default: Atur ulang ke nilai default
 resources:
   app_outdated: >-
     Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat

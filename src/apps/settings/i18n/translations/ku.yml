@@ -134,6 +134,8 @@ more: Zêde
 open: Vekirî
 quit: Devjêberdan
 remove: Dûrxistin
+reset_all_to_default: Hemî nirxên xwerû resen bikin
+reset_to_default: Reset bi nirxa xwerû
 resources:
   app_outdated: >-
     Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş

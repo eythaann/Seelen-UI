@@ -136,6 +136,8 @@ more: Okuningi
 open: Vula
 quit: Yeka
 remove: Susa
+reset_all_to_default: Setha kabusha konke kumanani azenzakalelayo
+reset_to_default: Setha kabusha ngenani elizenzakalelayo
 resources:
   app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
   discover: Thola izinsiza ezengeziwe

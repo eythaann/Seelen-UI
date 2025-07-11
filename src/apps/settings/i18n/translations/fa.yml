@@ -136,6 +136,8 @@ more: بیشتر
 open: باز کن
 quit: ترک
 remove: برداشتن
+reset_all_to_default: تنظیم مجدد همه به مقادیر پیش فرض
+reset_to_default: تنظیم مجدد به مقدار پیش فرض
 resources:
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
   discover: منابع بیشتری را کشف کنید

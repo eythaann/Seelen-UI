@@ -136,6 +136,8 @@ more: Plus
 open: Ouvrir
 quit: Quitter
 remove: Retirer
+reset_all_to_default: Rétablir les valeurs par défaut
+reset_to_default: Remise à la valeur par défaut
 resources:
   app_outdated: >-
     Cette ressource nécessite une version plus récente de Seelen UI pour

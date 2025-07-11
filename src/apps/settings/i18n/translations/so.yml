@@ -137,6 +137,8 @@ more: Ka badan
 open: Furid
 quit: Joojin
 remove: Ka qaadid
+reset_all_to_default: Dib u dejiso dhammaan qiimayaasha caadiga ah
+reset_to_default: Dib u dejiso qiimaha caadiga ah
 resources:
   app_outdated: >-
     Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah

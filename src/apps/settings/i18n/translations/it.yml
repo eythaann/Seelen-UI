@@ -134,6 +134,8 @@ more: Altro
 open: Apri
 quit: Esci
 remove: Rimuovi
+reset_all_to_default: Ripristinare tutti i valori predefiniti
+reset_to_default: Ripristino del valore predefinito
 resources:
   app_outdated: >-
     Questa risorsa richiede una versione più recente di Seelen UI per funzionare

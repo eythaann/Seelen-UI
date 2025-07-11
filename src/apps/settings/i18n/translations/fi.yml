@@ -136,6 +136,8 @@ more: Lisää
 open: Avata
 quit: Lopettaa
 remove: Poistaa
+reset_all_to_default: Nollaa kaikki oletusarvot
+reset_to_default: Nollaa oletusarvoon
 resources:
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
   discover: Löydä lisää resursseja

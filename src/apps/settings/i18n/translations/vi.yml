@@ -135,6 +135,8 @@ more: Hơn
 open: Mở
 quit: Từ bỏ
 remove: Di dời
+reset_all_to_default: Đặt lại tất cả về giá trị mặc định
+reset_to_default: Đặt lại về giá trị mặc định
 resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
   discover: Khám phá thêm tài nguyên

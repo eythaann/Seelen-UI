@@ -138,6 +138,8 @@ more: Higit pa
 open: Buksan
 quit: Huminto ka
 remove: Alisin
+reset_all_to_default: I -reset ang lahat sa mga default na halaga
+reset_to_default: I -reset sa default na halaga
 resources:
   app_outdated: >-
     Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng

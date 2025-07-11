@@ -100,6 +100,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
       cancelButtonProps={isReadonly ? { style: { display: 'none' } } : undefined}
       centered
       className={cs.editModal}
+      width="90vw"
     >
       <ConfigProvider componentDisabled={isReadonly}>
         {!!readonlyApp && (

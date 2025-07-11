@@ -131,6 +131,8 @@ more: 더보기
 open: 열기
 quit: 종료
 remove: 제거
+reset_all_to_default: 모두 기본값으로 초기화
+reset_to_default: 기본값으로 재설정
 resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
   discover: 더 많은 리소스 살펴보기

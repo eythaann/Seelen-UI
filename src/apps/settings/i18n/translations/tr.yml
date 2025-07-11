@@ -134,6 +134,8 @@ more: Daha Fazla
 open: Aç
 quit: Çıkış
 remove: Kaldır
+reset_all_to_default: Tümünü varsayılan değerlere sıfırla
+reset_to_default: Varsayılan değere sıfırla
 resources:
   app_outdated: >-
     Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü

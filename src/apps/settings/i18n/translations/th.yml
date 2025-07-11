@@ -131,6 +131,8 @@ more: มากกว่า
 open: เปิด
 quit: ล้มเลิก
 remove: ลบ
+reset_all_to_default: รีเซ็ตเป็นค่าเริ่มต้นทั้งหมด
+reset_to_default: รีเซ็ตเป็นค่าเริ่มต้น
 resources:
   app_outdated: ทรัพยากรนี้ต้องการ Seelen UI รุ่นใหม่กว่าเพื่อทำงานอย่างถูกต้อง
   discover: ค้นพบทรัพยากรเพิ่มเติม

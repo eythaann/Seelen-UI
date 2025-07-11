@@ -6,9 +6,35 @@
     }
   }
 
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 60px 0;
+
+    > img {
+      object-fit: contain;
+      width: 150px;
+      aspect-ratio: 1/1;
+    }
+
+    figcaption {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-black);
+    }
+  }
+
   .version {
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--color-black);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .info .logo > img {
+    filter: invert(1);
   }
 }

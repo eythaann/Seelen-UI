@@ -134,6 +134,8 @@ more: Více
 open: Otevřeno
 quit: Přestat
 remove: Odstranit
+reset_all_to_default: Obnovení všech výchozích hodnot
+reset_to_default: Obnovení výchozí hodnoty
 resources:
   app_outdated: >-
     Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského

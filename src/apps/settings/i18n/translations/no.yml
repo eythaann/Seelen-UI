@@ -134,6 +134,8 @@ more: Flere
 open: Åpen
 quit: Slutte
 remove: Fjerne
+reset_all_to_default: Tilbakestill alt til standardverdier
+reset_to_default: Tilbakestill til standardverdi
 resources:
   app_outdated: >-
     Denne ressursen krever en nyere versjon av Seelen UI for å fungere

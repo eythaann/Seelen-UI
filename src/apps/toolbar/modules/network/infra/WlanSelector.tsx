@@ -99,7 +99,7 @@ function WlanSelector({ open }: { open: boolean }) {
         <span>{t('network.available')}</span>
         <Tooltip title={t('network.scanning')}>
           <button className="wlan-selector-refresh">
-            <Icon iconName="TfiReload" size={12} />
+            <Icon iconName="TbRefresh" size={12} />
           </button>
         </Tooltip>
       </div>

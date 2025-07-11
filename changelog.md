@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add new ways of customization for theme settings
+
 ### fix
 - volume changed popup wrong placement.
 

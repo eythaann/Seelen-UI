@@ -92,7 +92,7 @@ export function Shortcuts() {
         <SettingsOption>
           <span>{t('shortcuts.reset')}</span>
           <Button onClick={onReset}>
-            <Icon iconName="TbRefresh" />
+            <Icon iconName="RiResetLeftLine" />
           </Button>
         </SettingsOption>
       </SettingsGroup>

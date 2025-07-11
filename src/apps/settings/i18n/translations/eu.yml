@@ -134,6 +134,8 @@ more: Gehiago
 open: Ireki
 quit: Laga
 remove: Atera
+reset_all_to_default: Berrezarri guztiak balio lehenetsiak
+reset_to_default: Berrezarri lehenetsitako balioa
 resources:
   app_outdated: >-
     Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona

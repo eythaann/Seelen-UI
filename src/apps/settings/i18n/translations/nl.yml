@@ -134,6 +134,8 @@ more: Meer
 open: Open
 quit: Afsluiten
 remove: Verwijderen
+reset_all_to_default: Alles resetten naar standaardwaarden
+reset_to_default: Terugzetten naar standaardwaarde
 resources:
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
   discover: Ontdek meer bronnen

@@ -127,6 +127,8 @@ more: 更多
 open: 打开
 quit: 退出
 remove: 消除
+reset_all_to_default: 全部重置为默认值
+reset_to_default: 重置为默认值
 resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
   discover: 发现更多资源

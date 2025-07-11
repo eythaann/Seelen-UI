@@ -136,6 +136,8 @@ more: Vairāk
 open: Atvērt
 quit: Atmest
 remove: Noņemt
+reset_all_to_default: Visu noklusējuma vērtību atiestatīšana
+reset_to_default: Atiestatīt noklusējuma vērtību
 resources:
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
   discover: Atklājiet vairāk resursu

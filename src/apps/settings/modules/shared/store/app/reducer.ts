@@ -218,6 +218,11 @@ export const RootSlice = createSlice({
       delete state.byTheme[themeId]![name];
       state.toBeSaved = true;
     },
+    resetThemeVariables: (state, action: PayloadAction<{ themeId: ThemeId }>) => {
+      const { themeId } = action.payload;
+      state.byTheme[themeId] = {};
+      state.toBeSaved = true;
+    },
   },
   selectors: selectorsFor(initialState),
   extraReducers: (builder) => {

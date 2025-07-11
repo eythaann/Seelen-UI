@@ -134,6 +134,8 @@ more: Više
 open: Otvoren
 quit: Prestati
 remove: Ukloniti
+reset_all_to_default: Resetirajte sve na zadane vrijednosti
+reset_to_default: Poništite na zadanu vrijednost
 resources:
   app_outdated: >-
     Ovaj resurs zahtijeva da novija verzija Seelen korisničkog sučelja radi

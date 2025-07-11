@@ -134,6 +134,8 @@ more: Mais
 open: Abrir
 quit: Desistir
 remove: Remover
+reset_all_to_default: Redefinir tudo para os valores padrão
+reset_to_default: Redefinir para o valor padrão
 resources:
   app_outdated: >-
     Esse recurso requer uma versão mais recente da interface do usuário da

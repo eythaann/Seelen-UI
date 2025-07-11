@@ -132,6 +132,8 @@ more: ຫຼາຍ
 open: ເປີດ
 quit: ເຊົາ
 remove: ເອົາອອກ
+reset_all_to_default: ປັບຄ່າທັງຫມົດໃຫ້ກັບຄ່າເລີ່ມຕົ້ນ
+reset_to_default: ຕັ້ງຄ່າໃຫມ່ໃຫ້ກັບຄ່າເລີ່ມຕົ້ນ
 resources:
   app_outdated: ຊັບພະຍາກອນນີ້ຮຽກຮ້ອງໃຫ້ມີ Searen ລຸ້ນໃຫມ່ UI ໃຫ້ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
   discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ

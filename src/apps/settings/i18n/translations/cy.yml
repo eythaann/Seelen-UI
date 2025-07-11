@@ -134,6 +134,8 @@ more: Mwy
 open: Ymagorant
 quit: Gadawen
 remove: Godon
+reset_all_to_default: Ailosod popeth i werthoedd diofyn
+reset_to_default: Ailosod i werth diofyn
 resources:
   app_outdated: >-
     Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n

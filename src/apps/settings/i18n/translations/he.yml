@@ -132,6 +132,8 @@ more: יוֹתֵר
 open: לִפְתוֹחַ
 quit: לְהַפְסִיק
 remove: לְהַסִיר
+reset_all_to_default: אפס את כל ערכי ברירת המחדל
+reset_to_default: אפס לערך ברירת המחדל
 resources:
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
   discover: לגלות משאבים נוספים

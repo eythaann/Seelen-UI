@@ -135,6 +135,8 @@ more: Több
 open: Nyisd ki
 quit: Kilépés
 remove: Eltávolítás
+reset_all_to_default: Mindent visszaállít az alapértelmezett értékekre
+reset_to_default: Alapértelmezett értékre visszaállítása
 resources:
   app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
   discover: További források felfedezése

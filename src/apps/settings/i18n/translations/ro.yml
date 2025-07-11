@@ -136,6 +136,8 @@ more: Mai mult
 open: Deschis
 quit: Părăsi
 remove: Elimina
+reset_all_to_default: Resetați toate la valorile implicite
+reset_to_default: Resetare la valoarea implicită
 resources:
   app_outdated: >-
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a

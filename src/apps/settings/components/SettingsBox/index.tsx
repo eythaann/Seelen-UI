@@ -1,4 +1,6 @@
-import { ConfigProvider } from 'antd';
+import { Icon } from '@shared/components/Icon';
+import { ConfigProvider, Tooltip } from 'antd';
+import { ComponentChildren } from 'preact';
 
 import cs from './index.module.css';
 
@@ -7,9 +9,11 @@ interface Props {
 }
 
 export const SettingsGroup = ({ children }: Props) => {
-  return <div className={cs.group}>
-    <div className={cs.content}>{children}</div>
-  </div>;
+  return (
+    <div className={cs.group}>
+      <div className={cs.content}>{children}</div>
+    </div>
+  );
 };
 
 interface SubGroupProps {
@@ -29,24 +33,33 @@ export const SettingsSubGroup = ({ children, label, disabled }: SubGroupProps) =
   );
 };
 
-type OptionProps =
-  | {
-    children: React.ReactNode;
-  }
-  | {
-    label: React.ReactNode;
-    trigger: React.ReactNode;
-  };
+type OptionProps = {
+  label?: ComponentChildren;
+  tip?: ComponentChildren;
+  description?: ComponentChildren;
+  action?: ComponentChildren;
+  children?: ComponentChildren;
+};
 
 export const SettingsOption = (props: OptionProps) => {
   return (
     <div className={cs.setting}>
-      {'children' in props ? (
+      {props.children ? (
         props.children
       ) : (
         <>
-          <span>{props.label}</span>
-          {props.trigger}
+          <div className={cs.info}>
+            <div className={cs.label}>
+              {props.label}
+              {props.tip && (
+                <Tooltip title={props.tip}>
+                  <Icon iconName="HiOutlineInformationCircle" />
+                </Tooltip>
+              )}
+            </div>
+            {props.description && <div className={cs.description}>{props.description}</div>}
+          </div>
+          {props.action}
         </>
       )}
     </div>

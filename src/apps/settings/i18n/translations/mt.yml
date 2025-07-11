@@ -136,6 +136,8 @@ more: Aktar
 open: Miftuħa
 quit: Nieqaf
 remove: Neħħi
+reset_all_to_default: Irrisettja l-valuri kollha tal-inadempjenza
+reset_to_default: Irrisettja għall-valur awtomatiku
 resources:
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
   discover: Skopri aktar riżorsi

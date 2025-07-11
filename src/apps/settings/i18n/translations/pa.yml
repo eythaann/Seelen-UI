@@ -130,6 +130,8 @@ more: ਹੋਰ
 open: ਖੋਲ੍ਹੋ
 quit: ਛੱਡੋ
 remove: ਹਟਾਓ
+reset_all_to_default: ਸਾਰੇ ਡਿਫੌਲਟ ਮੁੱਲਾਂ ਤੇ ਰੀਸੈਟ ਕਰੋ
+reset_to_default: ਡਿਫੌਲਟ ਵੈਲਯੂ ਤੇ ਰੀਸੈਟ ਕਰੋ
 resources:
   app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ

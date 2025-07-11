@@ -39,6 +39,11 @@ export function Information() {
 
   return (
     <div className={cs.info}>
+      <figure className={cs.logo}>
+        <img src="./company_logo.svg" alt="Seelen Corp." />
+        <figcaption>Seelen Corp.</figcaption>
+      </figure>
+
       <SettingsGroup>
         <SettingsSubGroup label="Seelen UI">
           <SettingsOption>

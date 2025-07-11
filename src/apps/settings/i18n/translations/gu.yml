@@ -134,6 +134,8 @@ more: વધારે
 open: ખુલ્લા
 quit: છોડો
 remove: દૂર કરવું
+reset_all_to_default: બધાને ડિફ default લ્ટ મૂલ્યો પર ફરીથી સેટ કરો
+reset_to_default: ડિફ default લ્ટ મૂલ્ય પર ફરીથી સેટ કરો
 resources:
   app_outdated: આ સંસાધનને યોગ્ય રીતે કાર્ય કરવા માટે સીલેન યુઆઈનું નવું સંસ્કરણ જરૂરી છે.
   discover: વધુ સંસાધનો શોધો

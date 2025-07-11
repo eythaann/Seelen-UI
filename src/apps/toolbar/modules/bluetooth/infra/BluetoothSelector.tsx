@@ -90,7 +90,7 @@ function BluetoothSelector({ open }: { open: boolean }) {
         <span>{t('bluetooth.available')}</span>
         <Tooltip title={t('bluetooth.scanning')}>
           <button className="bluetooth-refresh">
-            <Icon iconName="TfiReload" size={12} />
+            <Icon iconName="TbRefresh" size={12} />
           </button>
         </Tooltip>
       </div>

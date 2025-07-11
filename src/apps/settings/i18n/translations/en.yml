@@ -133,6 +133,8 @@ more: More
 open: Open
 quit: Quit
 remove: Remove
+reset_all_to_default: Reset all to default values
+reset_to_default: Reset to default value
 resources:
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
   discover: Discover more resources

@@ -130,6 +130,8 @@ more: もっと
 open: 開く
 quit: 終了
 remove: 取り除く
+reset_all_to_default: すべてをデフォルト値に戻す
+reset_to_default: デフォルト値にリセット
 resources:
   app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
   discover: その他のリソース

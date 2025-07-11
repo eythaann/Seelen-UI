@@ -134,6 +134,8 @@ more: Meira
 open: Opið
 quit: Hættu
 remove: Fjarlægðu
+reset_all_to_default: Endurstilla allt í sjálfgefin gildi
+reset_to_default: Endurstilla í sjálfgefið gildi
 resources:
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
   discover: Uppgötvaðu fleiri úrræði

@@ -1,7 +1,9 @@
-import { ThemeId, ThemeVariableDefinition } from '@seelen-ui/lib/types';
+import { ThemeConfigDefinition, ThemeId, ThemeVariableDefinition } from '@seelen-ui/lib/types';
+import { Icon } from '@shared/components/Icon';
 import { ResourceText } from '@shared/components/ResourceText';
-import { ColorPicker, Input, InputNumber, Select, Space } from 'antd';
+import { Button, ColorPicker, Input, InputNumber, Select, Space, Tooltip } from 'antd';
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -20,19 +22,58 @@ export function ThemeView() {
     return state.availableThemes.find((t) => t.id === `@${username}/${resourceName}`);
   });
 
+  const { t } = useTranslation();
+  const d = useDispatch();
+
+  function onReset() {
+    d(RootActions.resetThemeVariables({ themeId: theme!.id }));
+  }
+
   if (!theme) {
     return <div>wow 404 !?</div>;
   }
 
   return (
-    <SettingsGroup>
-      <SettingsSubGroup label={<b>{theme.id}</b>}>
-        {theme.settings.map((setting) => (
-          <ThemeSetting key={setting.name} themeId={theme.id} definition={setting} />
+    <>
+      <SettingsGroup>
+        <SettingsOption
+          label={t('reset_all_to_default')}
+          action={
+            <Button onClick={onReset}>
+              <Icon iconName="RiResetLeftLine" />
+            </Button>
+          }
+        />
+      </SettingsGroup>
+      {theme.settings.map((def, idx) => (
+        <ThemeConfigDefinition key={idx} themeId={theme.id} def={def} />
+      ))}
+    </>
+  );
+}
+
+interface ThemeConfigDefinitionProps {
+  def: ThemeConfigDefinition;
+  themeId: ThemeId;
+  nestLevel?: number;
+}
+
+function ThemeConfigDefinition({ def, themeId, nestLevel = 0 }: ThemeConfigDefinitionProps) {
+  let subGroupElement: ReactNode = null;
+
+  if ('group' in def) {
+    subGroupElement = (
+      <SettingsSubGroup label={<ResourceText text={def.group.header} />}>
+        {def.group.items.map((item, idx) => (
+          <ThemeConfigDefinition key={idx} themeId={themeId} def={item} nestLevel={nestLevel + 1} />
         ))}
       </SettingsSubGroup>
-    </SettingsGroup>
-  );
+    );
+  } else {
+    subGroupElement = <ThemeSetting themeId={themeId} definition={def} />;
+  }
+
+  return nestLevel === 0 ? <SettingsGroup>{subGroupElement}</SettingsGroup> : subGroupElement;
 }
 
 interface ThemeSettingProps {
@@ -41,10 +82,11 @@ interface ThemeSettingProps {
 }
 
 function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
-  const variableValue = useSelector(
+  const userStoredValue = useSelector(
     (state: RootState) => state.byTheme[themeId]?.[definition.name],
   );
 
+  const { t } = useTranslation();
   const d = useDispatch();
 
   const onChangeVarValue = (value: string) => {
@@ -64,14 +106,14 @@ function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
           onChangeComplete={(v) => {
             onChangeVarValue(v.toHexString());
           }}
-          value={variableValue || definition.initialValue}
+          value={userStoredValue || definition.initialValue}
         />
       );
       break;
     }
     case '<length>': {
-      const value = variableValue ? parseFloat(variableValue) : definition.initialValue;
-      const unit = variableValue?.replace(/[\d\.]+/, '') || definition.initialValueUnit;
+      const value = userStoredValue ? parseFloat(userStoredValue) : definition.initialValue;
+      const unit = userStoredValue?.replace(/[\d\.]+/, '') || definition.initialValueUnit;
       optionInput = (
         <Space.Compact>
           <InputNumber
@@ -97,7 +139,7 @@ function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
       break;
     }
     case '<number>': {
-      const value = variableValue ? parseFloat(variableValue) : definition.initialValue;
+      const value = userStoredValue ? parseFloat(userStoredValue) : definition.initialValue;
       optionInput = (
         <InputNumber
           value={value}
@@ -115,8 +157,7 @@ function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
     case '<url>': {
       optionInput = (
         <Input
-          value={variableValue}
-          defaultValue={definition.initialValue}
+          value={userStoredValue ?? definition.initialValue}
           onChange={(e) => {
             onChangeVarValue(e.currentTarget.value);
           }}
@@ -127,8 +168,7 @@ function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
     case '<string>': {
       optionInput = (
         <Input
-          value={variableValue}
-          defaultValue={definition.initialValue}
+          value={userStoredValue ?? definition.initialValue}
           onChange={(e) => {
             onChangeVarValue(e.currentTarget.value);
           }}
@@ -143,10 +183,23 @@ function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
   }
 
   return (
-    <SettingsOption>
-      <ResourceText text={definition.label} />
-      {optionInput}
-    </SettingsOption>
+    <SettingsOption
+      label={<ResourceText text={definition.label} />}
+      tip={definition.tip ? <ResourceText text={definition.tip} /> : undefined}
+      description={
+        definition.description ? <ResourceText text={definition.description} /> : undefined
+      }
+      action={
+        <Space.Compact>
+          {optionInput}
+          <Tooltip title={t('reset_to_default')}>
+            <Button onClick={onDeleteVarValue}>
+              <Icon iconName="BiReset" />
+            </Button>
+          </Tooltip>
+        </Space.Compact>
+      }
+    />
   );
 }
 

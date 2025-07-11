@@ -134,6 +134,8 @@ more: Viac
 open: OTVORENÉ
 quit: Prestať
 remove: Odložiť
+reset_all_to_default: Obnovenie všetkých predvolených hodnôt
+reset_to_default: Obnovenie predvolenej hodnoty
 resources:
   app_outdated: >-
     Tento zdroj si na správne fungovanie vyžaduje novšiu verziu používateľského

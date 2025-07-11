@@ -133,6 +133,8 @@ more: Daha çox
 open: Açıq-saçıq
 quit: Çıxmaq
 remove: Çıxarmaq
+reset_all_to_default: Hamısını standart dəyərlərə yenidən qurun
+reset_to_default: Defolt dəyərinə yenidən qurun
 resources:
   app_outdated: >-
     Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını

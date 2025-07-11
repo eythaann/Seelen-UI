@@ -134,6 +134,8 @@ more: Més
 open: Obrir
 quit: Abandonar
 remove: Treure
+reset_all_to_default: Restableix tot als valors predeterminats
+reset_to_default: Restableix al valor predeterminat
 resources:
   app_outdated: >-
     Aquest recurs requereix una versió més recent de la interfície d'usuari de

@@ -132,6 +132,8 @@ more: أكثر
 open: فتح
 quit: الخروج
 remove: الحذف
+reset_all_to_default: إعادة تعيين الكل إلى القيم الافتراضية
+reset_to_default: إعادة التعيين إلى القيمة الافتراضية
 resources:
   app_outdated: يتطلب هذا المورد إصدارًا أحدث من Seelen UI ليعمل بشكل صحيح.
   discover: اكتشف المزيد من الموارد

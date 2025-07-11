@@ -132,6 +132,8 @@ more: ተጨማሪ
 open: ክፈት
 quit: አቁም
 remove: ያስወግዱ
+reset_all_to_default: ሁሉንም ወደ ነባሪ እሴቶች ዳግም ያስጀምሩ
+reset_to_default: ወደ ነባሪ እሴት ዳግም ያስጀምሩ
 resources:
   app_outdated: ይህ ሀብት በአግባቡ እንዲሠራ አዲስ የአዲስ ስሪት ይፈልጋል.
   discover: ተጨማሪ ሀብቶችን ያግኙ

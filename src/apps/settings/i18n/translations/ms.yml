@@ -134,6 +134,8 @@ more: Lebih
 open: Buka
 quit: Berhenti
 remove: Keluarkan
+reset_all_to_default: Tetapkan semula semua ke nilai lalai
+reset_to_default: Tetapkan semula ke nilai lalai
 resources:
   app_outdated: >-
     Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan

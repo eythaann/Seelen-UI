@@ -136,6 +136,8 @@ more: Mehr
 open: Öffnen
 quit: Beenden
 remove: Entfernen
+reset_all_to_default: Alles auf Standardwerte zurücksetzen
+reset_to_default: Zurücksetzen auf den Standardwert
 resources:
   app_outdated: >-
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu

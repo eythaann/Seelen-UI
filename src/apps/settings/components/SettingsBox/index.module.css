@@ -1,4 +1,6 @@
 .group {
+  --left-border-color: #0002;
+
   padding: 10px 14px;
   font-size: 0.9rem;
   border-radius: var(--config-border-radius);
@@ -26,27 +28,53 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
   .setting {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
 
     :global(.ant-input) {
       max-width: 150px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        gap: 5px;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+      }
+
+      .description {
+        color: var(--color-gray-600);
+        font-size: 0.8rem;
+        line-height: 1.4em;
+      }
     }
   }
 
   .subgroup {
     .subtitle {
+      margin: 2px 0 8px;
+      font-size: 1rem;
+      line-height: 1.4em;
       font-weight: 600;
-      margin-bottom: 10px;
     }
 
     .content {
       padding-left: 10px;
+      border-left: 1.5px solid var(--left-border-color);
+
+      .label {
+        font-weight: normal;
+      }
     }
   }
 
@@ -62,5 +90,9 @@
 @media (prefers-color-scheme: dark) {
   .group::before {
     backdrop-filter: brightness(0.8);
+  }
+
+  .group {
+    --left-border-color: #fff2;
   }
 }

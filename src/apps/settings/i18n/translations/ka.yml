@@ -134,6 +134,8 @@ more: მეტი
 open: გახსნა
 quit: მიტოვება
 remove: ამოღება
+reset_all_to_default: ყველა ნაგულისხმევი მნიშვნელობებისთვის
+reset_to_default: ნაგულისხმევი მნიშვნელობის გადატვირთვა
 resources:
   app_outdated: ეს რესურსი მოითხოვს Seelen UI– ს ახალ ვერსიას, რომ სწორად იმუშაოს.
   discover: აღმოაჩინეთ მეტი რესურსი
