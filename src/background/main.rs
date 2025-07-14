@@ -47,8 +47,7 @@ use tray::try_register_tray_icon;
 use utils::{
     integrity::{
         check_for_webview_optimal_state, print_initial_information, register_panic_hook,
-        restart_as_appx, show_monitor_drivers_disabled_warning,
-        validate_webview_runtime_is_installed,
+        restart_as_appx, validate_webview_runtime_is_installed,
     },
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
@@ -71,7 +70,6 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
         tauri::async_runtime::block_on(ServicePipe::start_service())?;
     }
 
-    show_monitor_drivers_disabled_warning(app.handle())?;
     check_for_webview_optimal_state(app.handle())?;
 
     // try it at start it on open the program to avoid do it before

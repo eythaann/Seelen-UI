@@ -7,10 +7,7 @@ use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error_handler::Result,
-    is_local_dev,
-    utils::is_running_as_appx,
-    windows_api::{MonitorEnumerator, WindowsApi},
+    error_handler::Result, is_local_dev, utils::is_running_as_appx, windows_api::WindowsApi,
 };
 
 use super::spawn_named_thread;
@@ -106,25 +103,6 @@ pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<(
             app.shell().open(url, None)?;
         }
         return Err("Webview runtime not installed or outdated".into());
-    }
-    Ok(())
-}
-
-// some users disabled the monitors drivers to play some competitive games
-// so we need to check if the drivers are disabled
-pub fn show_monitor_drivers_disabled_warning(app: &tauri::AppHandle) -> Result<()> {
-    for m in MonitorEnumerator::get_all_v2()? {
-        if m.main_display_device().is_err() {
-            app.dialog()
-                .message(t!("drivers.monitor_disabled"))
-                .title(t!("drivers.monitor_disabled_title"))
-                .kind(MessageDialogKind::Warning)
-                .buttons(MessageDialogButtons::OkCustom(
-                    t!("drivers.got_it").to_string(),
-                ))
-                .show(|_| {});
-            break;
-        }
     }
     Ok(())
 }

@@ -7,17 +7,9 @@ use crate::{
 
 use super::MonitorManager;
 
-fn _get_connected_monitors() -> Result<Vec<PhysicalMonitor>> {
-    let mut monitors = Vec::new();
-    for m in MonitorEnumerator::get_all_v2()? {
-        monitors.push(m.try_into()?);
-    }
-    Ok(monitors)
-}
-
 pub fn register_monitor_webview_events() {
     MonitorManager::subscribe(|_event| {
-        if let Ok(monitors) = _get_connected_monitors() {
+        if let Ok(monitors) = get_connected_monitors() {
             log_error!(get_app_handle().emit(SeelenEvent::SystemMonitorsChanged, monitors));
         }
     });
@@ -25,5 +17,9 @@ pub fn register_monitor_webview_events() {
 
 #[tauri::command(async)]
 pub fn get_connected_monitors() -> Result<Vec<PhysicalMonitor>> {
-    _get_connected_monitors()
+    let mut monitors = Vec::new();
+    for m in MonitorEnumerator::get_all_v2()? {
+        monitors.push(m.try_into()?);
+    }
+    Ok(monitors)
 }

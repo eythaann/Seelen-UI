@@ -33,8 +33,8 @@ impl FullState {
 
     pub fn is_bar_enabled_on_monitor(&self, monitor: &Monitor) -> bool {
         let is_global_enabled = self.is_bar_enabled();
-        let device_id = match monitor.main_display_device() {
-            Ok(device) => device.id(),
+        let device_id = match monitor.stable_id() {
+            Ok(id) => id,
             Err(_) => return is_global_enabled,
         };
         match self.settings.monitors_v2.get(&device_id) {
@@ -58,7 +58,7 @@ impl FullState {
 
         match widget.instances {
             WidgetInstanceType::ReplicaByMonitor => {
-                let Ok(device_id) = monitor.main_display_device().map(|device| device.id()) else {
+                let Ok(device_id) = monitor.stable_id() else {
                     return false;
                 };
 
@@ -109,12 +109,11 @@ impl FullState {
             default = "@default/wm-bspwm".into();
         }
 
-        let device_id = match monitor.main_display_device() {
-            Ok(device) => device.id(),
-            Err(_) => return default,
+        let Ok(id) = monitor.stable_id() else {
+            return default;
         };
 
-        let config = match self.settings.monitors_v2.get(&device_id) {
+        let config = match self.settings.monitors_v2.get(&id) {
             Some(config) => config,
             None => return default,
         };

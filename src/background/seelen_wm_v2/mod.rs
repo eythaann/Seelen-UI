@@ -92,13 +92,13 @@ impl WindowManagerV2 {
         let vd_manager = get_vd_manager();
         let current_workspace_id = vd_manager.get_current()?.id();
 
-        let mut monitor_id = window.monitor().device_id()?;
+        let mut monitor_id = window.monitor().stable_id()?;
         let mut workspace_id = window.workspace()?.id();
 
         if let Some(config) = FULL_STATE.load().get_app_config_by_window(window.hwnd()) {
             if let Some(index) = config.bound_monitor {
                 if let Some(monitor) = Monitor::at(index) {
-                    monitor_id = monitor.device_id()?;
+                    monitor_id = monitor.stable_id()?;
                 }
             }
             if let Some(index) = config.bound_workspace {

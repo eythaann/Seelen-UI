@@ -34,7 +34,7 @@ pub struct DdcciBrightnessValues {
 }
 
 /// Represents a display device
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 #[allow(dead_code)]
 pub struct DisplayDevice {
     /// Note: DISPLAYCONFIG_TARGET_DEVICE_NAME.monitorDevicePath == DISPLAY_DEVICEW.DeviceID (with EDD_GET_DEVICE_INTERFACE_NAME)\
@@ -51,12 +51,24 @@ pub struct DisplayDevice {
 impl From<&DISPLAY_DEVICEW> for DisplayDevice {
     fn from(device: &DISPLAY_DEVICEW) -> Self {
         Self {
+            id: WindowsString::from_slice(&device.DeviceID),
             name: WindowsString::from_slice(&device.DeviceName),
             description: WindowsString::from_slice(&device.DeviceString),
-            id: WindowsString::from_slice(&device.DeviceID),
             key: WindowsString::from_slice(&device.DeviceKey),
             flags: device.StateFlags.0,
         }
+    }
+}
+
+impl std::fmt::Debug for DisplayDevice {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("DisplayDevice")
+            .field("id", &self.id.to_os_string())
+            .field("name", &self.name.to_os_string())
+            .field("description", &self.description.to_os_string())
+            .field("key", &self.key.to_os_string())
+            .field("flags", &self.flags)
+            .finish()
     }
 }
 

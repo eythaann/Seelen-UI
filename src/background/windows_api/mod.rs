@@ -31,6 +31,7 @@ use std::{
 use windows::{
     core::{BSTR, GUID, PCWSTR},
     ApplicationModel::AppInfo,
+    Devices::Display::Core::{DisplayManager, DisplayManagerOptions, DisplayTarget},
     Storage::Streams::{
         DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
     },
@@ -748,9 +749,18 @@ impl WindowsApi {
         Ok(p_physical_monitors)
     }
 
+    pub fn get_monitor_target_by_idx(idx: usize) -> Result<DisplayTarget> {
+        let manager = DisplayManager::Create(DisplayManagerOptions::None)?;
+        let state = manager.TryReadCurrentStateForAllTargets()?;
+        let state = state.State()?;
+        let view = state.Views()?.GetAt(idx as u32)?;
+        let target = view.Paths()?.First()?.Current()?.Target()?;
+        Ok(target)
+    }
+
     pub fn get_display_devices(monitor: HMONITOR) -> Result<Vec<DISPLAY_DEVICEW>> {
         let info = Self::monitor_info(monitor)?;
-        let lpdevice = PCWSTR::from_raw(info.szDevice.as_ptr());
+        let str_device = WindowsString::from_slice(&info.szDevice);
         let mut devices = Vec::new();
         for device_idx in 0.. {
             let mut device = DISPLAY_DEVICEW {
@@ -759,7 +769,7 @@ impl WindowsApi {
             };
             if !unsafe {
                 EnumDisplayDevicesW(
-                    lpdevice,
+                    str_device.as_pcwstr(),
                     device_idx,
                     &mut device,
                     EDD_GET_DEVICE_INTERFACE_NAME,
@@ -768,6 +778,7 @@ impl WindowsApi {
             } {
                 break;
             }
+            // maybe we need to check https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesa#remarks
             devices.push(device);
         }
         Ok(devices)

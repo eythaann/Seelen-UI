@@ -356,7 +356,7 @@ impl WegItemsImpl {
                         let window = Window::from(w.handle);
                         window
                             .monitor()
-                            .device_id()
+                            .stable_id()
                             .is_ok_and(|id| id == monitor_id)
                     });
                 }
@@ -370,7 +370,7 @@ impl WegItemsImpl {
         let state = FULL_STATE.load();
 
         for monitor in MonitorEnumerator::get_all_v2()? {
-            let monitor_id = monitor.device_id()?;
+            let monitor_id = monitor.stable_id()?;
             if !state.is_weg_enabled_on_monitor(&monitor_id) {
                 continue;
             }

@@ -32,7 +32,7 @@ impl SluMonitorInstance {
     pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
         let monitor = Monitor::from(hmonitor);
         let mut instance = Self {
-            id: monitor.device_id()?,
+            id: monitor.stable_id()?,
             monitor,
             toolbar: None,
             weg: None,
@@ -109,7 +109,7 @@ impl SluMonitorInstance {
             self.toolbar = None;
         }
 
-        if state.is_weg_enabled_on_monitor(&self.monitor.device_id()?) {
+        if state.is_weg_enabled_on_monitor(&self.monitor.stable_id()?) {
             self.add_weg()?;
         } else {
             self.weg = None;

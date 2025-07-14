@@ -1,6 +1,7 @@
 mod brightness;
 
 use brightness::DisplayDevice;
+use itertools::Itertools;
 use windows::Win32::Graphics::Gdi::HMONITOR;
 
 use crate::{error_handler::Result, modules::input::domain::Point};
@@ -34,6 +35,8 @@ impl From<&Point> for Monitor {
     }
 }
 
+// HMONITOR on win32 is the same concept as DisplayView in winrt
+
 impl Monitor {
     pub fn handle(&self) -> HMONITOR {
         self.0
@@ -48,9 +51,18 @@ impl Monitor {
         monitors.get(index).copied()
     }
 
+    pub fn index(&self) -> Result<usize> {
+        let monitors = MonitorEnumerator::get_all_v2()?;
+        let (idx, _) = monitors
+            .into_iter()
+            .find_position(|monitor| monitor == self)
+            .ok_or("Invalid or expired monitor handle")?;
+        Ok(idx)
+    }
+
     pub fn by_id(id: &str) -> Option<Monitor> {
         for m in MonitorEnumerator::get_all_v2().ok()? {
-            if let Ok(monitor_device_id) = m.device_id() {
+            if let Ok(monitor_device_id) = m.stable_id() {
                 if monitor_device_id == id {
                     return Some(m);
                 }
@@ -67,12 +79,17 @@ impl Monitor {
         self.0 == WindowsApi::primary_monitor()
     }
 
-    /// main display device id
-    pub fn device_id(&self) -> Result<String> {
-        Ok(self.main_display_device()?.id())
+    pub fn name(&self) -> Result<String> {
+        let target = WindowsApi::get_monitor_target_by_idx(self.index()?)?;
+        Ok(target.TryGetMonitor()?.DisplayName()?.to_string())
     }
 
-    pub fn diplay_devices(&self) -> Result<Vec<DisplayDevice>> {
+    pub fn stable_id(&self) -> Result<String> {
+        let target = WindowsApi::get_monitor_target_by_idx(self.index()?)?;
+        Ok(target.StableMonitorId()?.to_string())
+    }
+
+    fn diplay_devices(&self) -> Result<Vec<DisplayDevice>> {
         WindowsApi::get_display_devices(self.0)
             .map(|list| list.iter().map(DisplayDevice::from).collect())
     }

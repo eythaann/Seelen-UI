@@ -21,7 +21,7 @@ use super::SeelenWeg;
 pub fn weg_get_items_for_widget(window: tauri::Window) -> Result<WegItems> {
     let device_id = Window::from(window.hwnd()?.0 as isize)
         .monitor()
-        .device_id()?;
+        .stable_id()?;
     let items = trace_lock!(WEG_ITEMS_IMPL).get_filtered_by_monitor()?;
 
     Ok(items[&device_id].clone())

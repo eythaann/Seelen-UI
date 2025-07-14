@@ -8,11 +8,10 @@ use crate::{
 impl TryFrom<Monitor> for PhysicalMonitor {
     type Error = AppError;
     fn try_from(m: Monitor) -> Result<Self, Self::Error> {
-        let device = m.main_display_device()?;
         let dpi = WindowsApi::get_monitor_scale_factor(m.handle())?;
         Ok(Self {
-            id: device.id(),
-            name: device.description.to_string(),
+            id: m.stable_id()?,
+            name: m.name()?,
             rect: m.rect()?,
             dpi,
         })

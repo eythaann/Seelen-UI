@@ -158,7 +158,7 @@ impl WmV2State {
     pub fn init(&mut self) -> Result<()> {
         let workspaces = get_vd_manager().get_all()?;
         for monitor in MonitorEnumerator::get_all_v2()? {
-            let id = monitor.device_id()?;
+            let id = monitor.stable_id()?;
             if self.monitors.contains_key(&id) {
                 continue;
             }
@@ -201,7 +201,7 @@ impl WmV2State {
 
     pub fn get_node_at_point(&mut self, point: &Point) -> Option<&mut WmNode> {
         let monitor = Monitor::from(point);
-        if let Some(m) = self.monitors.get_mut(&monitor.device_id().ok()?) {
+        if let Some(m) = self.monitors.get_mut(&monitor.stable_id().ok()?) {
             let current_workspace = get_vd_manager().get_current().ok()?.id();
             if let Some(w) = m.workspaces.get_mut(&current_workspace) {
                 return w.get_node_at_point(point);

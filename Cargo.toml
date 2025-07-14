@@ -99,6 +99,7 @@ features = [
     "ApplicationModel_Core",               # uwp apps
     "ApplicationModel_Background",         # background taks
     "Foundation_Collections",              # uwp apps
+    "Foundation_Numerics",
     "Management_Deployment",               # uwp apps
     "Win32_Globalization",
     "Win32_UI_Input_KeyboardAndMouse",
@@ -145,6 +146,7 @@ features = [
     "Win32_Media_Audio_Endpoints",         # required for audio module
     "Win32_Media_Audio_Apo",               # required for audio module
     "Win32_Media_DeviceManager",           # required for audio module
+    "Graphics",
     "Media",                               # required for audio module
     "Media_Audio",                         # required for audio module
     "Media_Render",                        # required for audio module
@@ -153,6 +155,7 @@ features = [
     "Media_Control",                       # required for audio module
     "Storage_Streams",                     # required for audio module
     "Win32_Devices_Display",               # required for display (brightness, etc)
+    "Win32_Devices_DeviceAndDriverInstallation", # required for display drivers
     "Win32_Devices_FunctionDiscovery",     # PKEYS for Devices
     "UI_Core",
     "UI_Notifications_Management",         # required for notifications
@@ -172,6 +175,7 @@ features = [
     "Devices_Radios",                      # required for bluetooth/wifi/mobile etc any radio
     "Devices_WiFi",                        # required for wifi
     "Devices_Display",                     # required for displays
+    "Devices_Display_Core",                # required for displays
     "Data_Xml_Dom",                        # required for xml parsing
 ]
 
