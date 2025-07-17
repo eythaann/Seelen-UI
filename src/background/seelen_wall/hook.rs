@@ -6,12 +6,14 @@ use crate::{error_handler::Result, windows_api::window::Window, winevent::WinEve
 use super::SeelenWall;
 
 impl SeelenWall {
-    pub fn process_win_event(&mut self, event: WinEvent, _origin: &Window) -> Result<()> {
+    pub fn process_win_event(&mut self, event: WinEvent, origin: &Window) -> Result<()> {
         match event {
             WinEvent::SyntheticFullscreenStart => {
-                // todo handle this by monitor
-                self.window
-                    .emit_to(self.window.label(), SeelenEvent::WallStop, true)?;
+                if !origin.is_seelen_overlay() {
+                    // todo handle this by monitor
+                    self.window
+                        .emit_to(self.window.label(), SeelenEvent::WallStop, true)?;
+                }
             }
             WinEvent::SyntheticFullscreenEnd => {
                 // todo handle this by monitor

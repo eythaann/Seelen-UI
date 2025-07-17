@@ -59,7 +59,9 @@ export const SettingsOption = (props: OptionProps) => {
             </div>
             {props.description && <div className={cs.description}>{props.description}</div>}
           </div>
-          {props.action}
+          <div className={cs.action}>
+            {props.action}
+          </div>
         </>
       )}
     </div>

@@ -1,6 +1,9 @@
-use std::{fs::OpenOptions, io::Write};
+use std::{fs::OpenOptions, io::Write, path::Path};
 
-use seelen_core::{handlers::SeelenEvent, state::VirtualDesktopStrategy};
+use seelen_core::{
+    handlers::SeelenEvent,
+    state::{Settings, VirtualDesktopStrategy},
+};
 use tauri::Emitter;
 
 use crate::{
@@ -21,7 +24,16 @@ impl FullState {
         Ok(())
     }
 
-    pub(super) fn read_settings(&mut self) -> Result<()> {
+    pub fn get_settings_from_path(path: &Path) -> Result<Settings> {
+        match path.extension() {
+            Some(ext) if ext == "json" => {
+                Ok(serde_json::from_str(&std::fs::read_to_string(path)?)?)
+            }
+            _ => Err("Invalid settings file extension".into()),
+        }
+    }
+
+    fn _read_settings(&mut self) -> Result<()> {
         let path_exists = SEELEN_COMMON.settings_path().exists();
         let mut should_write_settings = !path_exists;
 
@@ -53,6 +65,13 @@ impl FullState {
         }
 
         Ok(())
+    }
+
+    pub(super) fn read_settings(&mut self) {
+        if let Err(err) = self._read_settings() {
+            log::error!("Failed to read settings: {err}");
+            Self::show_corrupted_state_to_user(SEELEN_COMMON.settings_path());
+        }
     }
 
     pub fn write_settings(&self) -> Result<()> {

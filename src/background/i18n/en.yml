@@ -21,6 +21,10 @@ runtime:
   outdated_description: >-
     Seelen UI requires Webview2 Runtime %{min_version} or higher. Please update
     it.
+  corrupted_data: Corrupted data
+  corrupted_file: >-
+    A configuration file is corrupted, using default values instead.
+  corrupted_file_path: Corrupted file path
 service:
   not_running: Seelen UI Service not running
   not_running_description: >-

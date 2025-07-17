@@ -1,8 +1,10 @@
 import { IconName } from '@icons';
-import { ResourceId, ResourceKind, ResourceMetadata } from '@seelen-ui/lib/types';
+import { SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS } from '@seelen-ui/lib';
+import { ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
 import { ResourceText } from '@shared/components/ResourceText';
 import { cx } from '@shared/styles';
+import { convertFileSrc } from '@tauri-apps/api/core';
 import { Button, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -47,6 +49,39 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
   const showWarning = targetIsOlder && !resource.metadata.bundled;
   const showDanger = targetIsNewer && !resource.metadata.bundled;
 
+  const portrait = () => {
+    if (resource.metadata.portrait) {
+      return <img src={resource.metadata.portrait} />;
+    }
+    if (kind === 'Wallpaper') {
+      const wallpaper = resource as Wallpaper;
+      if (wallpaper.thumbnail_filename) {
+        return (
+          <img
+            src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.thumbnail_filename}`)}
+            style={{ filter: 'blur(0.4px)' }}
+            loading="lazy"
+          />
+        );
+      }
+
+      if (
+        wallpaper.filename &&
+        SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.includes(wallpaper.filename.split('.').pop()!)
+      ) {
+        return (
+          <video
+            src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.filename}`)}
+            controls={false}
+            preload="metadata"
+            style={{ filter: 'blur(0.4px)' }}
+          />
+        );
+      }
+    }
+    return <ResourceKindIcon kind={kind} />;
+  };
+
   return (
     <div
       className={cx(cs.card, {
@@ -55,11 +90,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
       })}
     >
       <figure className={cs.portrait}>
-        {resource.metadata.portrait ? (
-          <img src={resource.metadata.portrait} />
-        ) : (
-          <ResourceKindIcon kind={kind} />
-        )}
+        {portrait()}
         {showWarning && (
           <Tooltip title={t('resources.outdated')}>
             <Icon iconName="IoWarning" className={cs.warning} />
@@ -76,7 +107,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
           <ResourceText text={resource.metadata.displayName} />
         </b>
         <p>
-          {resource.metadata.bundled ? (
+          {resource.metadata.bundled || resource.id.startsWith('@user') ? (
             <span>{resource.id}</span>
           ) : (
             <a href={`https://seelen.io/resources/${resource.id.replace('@', '')}`} target="_blank">
@@ -86,10 +117,8 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
         </p>
       </div>
       <div className={cs.actions}>
-        <div className={cs.actionsTop}>
-          {actions}
-        </div>
-        {isDevToolsEnabled && (
+        <div className={cs.actionsTop}>{actions}</div>
+        {isDevToolsEnabled && kind !== 'Wallpaper' && (
           <Tooltip title={t('resources.export')} placement="left">
             <Button
               type="text"

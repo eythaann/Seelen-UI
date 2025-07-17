@@ -156,6 +156,6 @@ impl SeelenWall {
                 UpdateWindow(shell_view).ok()?;
             }
         }
-        Ok(())
+        WindowsApi::refresh_desktop()
     }
 }

@@ -26,7 +26,7 @@ const initialState: RootState = {
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   toBeRestarted: false,
-  monitorsV2: {},
+  monitorsV3: {},
   connectedMonitors: [],
   appsConfigurations: AppsConfigSlice.getInitialState(),
   ahkEnabled: true,
@@ -48,6 +48,7 @@ const initialState: RootState = {
   plugins: [],
   widgets: [],
   profiles: [],
+  wallpapers: [],
   byWidget: defaultSettings.inner.byWidget,
   byTheme: {},
 };
@@ -83,7 +84,7 @@ export const RootSlice = createSlice({
     setDevTools: toBeSaved(reducers.setDevTools),
     setUpdater: toBeSavedAndRestarted(reducers.setUpdater),
     setDrpc: toBeSavedAndRestarted(reducers.setDrpc),
-    setMonitors: toBeSaved(reducers.setMonitorsV2),
+    setMonitors: toBeSaved(reducers.setMonitorsV3),
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
       state.toBeSaved = true;
@@ -174,7 +175,7 @@ export const RootSlice = createSlice({
     ) => {
       const { widgetId, monitorId, config } = action.payload;
 
-      let monitor = state.monitorsV2[monitorId];
+      let monitor = state.monitorsV3[monitorId];
       if (!monitor) {
         return;
       }

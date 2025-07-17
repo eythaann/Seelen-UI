@@ -66,7 +66,7 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
 
 export function SettingsByMonitor() {
   const devices = useSelector(newSelectors.connectedMonitors);
-  const settingsByMonitor = useSelector(newSelectors.monitorsV2);
+  const settingsByMonitor = useSelector(newSelectors.monitorsV3);
 
   return (
     <>

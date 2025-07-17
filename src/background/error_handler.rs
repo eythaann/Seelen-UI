@@ -45,7 +45,6 @@ define_app_errors!(
     Utf8(std::string::FromUtf8Error);
     Utf16(std::string::FromUtf16Error);
     CrossbeamRecv(crossbeam_channel::RecvError);
-    WinVD(winvd::Error);
     TryFromInt(std::num::TryFromIntError);
     Image(image::ImageError);
     Battery(battery::Error);

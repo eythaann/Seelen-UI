@@ -22,7 +22,7 @@ const selectMonitorWidgetConfig = (id: WidgetId, monitorId?: string) => (state: 
   if (!monitorId) {
     return undefined;
   }
-  return state.monitorsV2[monitorId]?.byWidget[id];
+  return state.monitorsV3[monitorId]?.byWidget[id];
 };
 
 const selectWidgetConfig = (id: WidgetId) => (state: RootState) => {

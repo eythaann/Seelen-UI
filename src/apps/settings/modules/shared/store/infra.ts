@@ -9,6 +9,7 @@ import {
   Settings,
   ThemeList,
   UIColors,
+  WallpaperList,
   WidgetList,
 } from '@seelen-ui/lib';
 import { Modal } from 'antd';
@@ -45,14 +46,14 @@ export type store = {
 const defaultMonitorConfig = await MonitorConfiguration.default();
 function setMonitorsOnState(list: ConnectedMonitorList) {
   const state = store.getState();
-  const monitors = { ...state.monitorsV2 };
+  const monitors = { ...state.monitorsV3 };
   for (const item of list.asArray()) {
     if (!monitors[item.id]) {
       monitors[item.id] = cloneDeep(defaultMonitorConfig.inner);
     }
   }
   store.dispatch(RootActions.setConnectedMonitors(list.all()));
-  store.dispatch(RootActions.setMonitorsV2(monitors));
+  store.dispatch(RootActions.setMonitorsV3(monitors));
 }
 
 async function initUIColors() {
@@ -108,6 +109,10 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWidgets(list.all()));
   });
 
+  await WallpaperList.onChange((list) => {
+    store.dispatch(RootActions.setWallpapers(list.all()));
+  });
+
   await ConnectedMonitorList.onChange(setMonitorsOnState);
 }
 
@@ -140,6 +145,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
   store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));
   store.dispatch(RootActions.setProfiles((await ProfileList.getAsync()).all()));
+  store.dispatch(RootActions.setWallpapers((await WallpaperList.getAsync()).all()));
 
   setMonitorsOnState(await ConnectedMonitorList.getAsync());
 

@@ -35,7 +35,7 @@ impl FullState {
         Ok(())
     }
 
-    pub(super) fn read_weg_items(&mut self) -> Result<()> {
+    fn _read_weg_items(&mut self) -> Result<()> {
         if SEELEN_COMMON.weg_items_path().exists() {
             self.weg_items =
                 serde_yaml::from_str(&std::fs::read_to_string(SEELEN_COMMON.weg_items_path())?)?;
@@ -48,6 +48,13 @@ impl FullState {
             self.write_weg_items(&self.weg_items)?;
         }
         Ok(())
+    }
+
+    pub(super) fn read_weg_items(&mut self) {
+        if let Err(err) = self._read_weg_items() {
+            log::error!("Failed to read weg items: {err}");
+            Self::show_corrupted_state_to_user(SEELEN_COMMON.weg_items_path());
+        }
     }
 
     pub fn write_weg_items(&self, items: &WegItems) -> Result<()> {

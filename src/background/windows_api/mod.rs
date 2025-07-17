@@ -117,7 +117,6 @@ use windows::{
 use crate::{
     error_handler::{Result, WindowsResultExt},
     modules::input::{domain::Point, Mouse},
-    utils::{is_virtual_desktop_supported, is_windows_11},
 };
 
 #[macro_export]
@@ -856,15 +855,16 @@ impl WindowsApi {
         ))
     }
 
+    pub fn refresh_desktop() -> Result<()> {
+        unsafe {
+            SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, None, SPIF_UPDATEINIFILE)?;
+        }
+        Ok(())
+    }
+
     pub fn set_wallpaper(path: String) -> Result<()> {
         if !PathBuf::from(&path).exists() {
             return Err("File not found".into());
-        }
-
-        if is_windows_11() && is_virtual_desktop_supported() {
-            for v_desktop in winvd::get_desktops()? {
-                v_desktop.set_wallpaper(&path)?;
-            }
         }
 
         let mut path = path.encode_utf16().chain(Some(0)).collect_vec();

@@ -1,16 +1,10 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { useAnimate } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-import { ThemedWallpaper, Wallpaper } from './modules/wallpaper/infra';
-
-import { Selectors } from './modules/shared/store/app';
-
-import { useInterval } from '../shared/hooks';
+import { MonitorContainers } from './modules/Monitor/infra';
 
 export function App() {
-  const [scope, animate] = useAnimate<HTMLDivElement>();
+  /* const [scope, animate] = useAnimate<HTMLDivElement>();
 
   const version = useSelector(Selectors.version);
   const { backgrounds, interval, randomize } = useSelector(Selectors.settings);
@@ -34,27 +28,10 @@ export function App() {
     Number((interval < 1 ? 1 : interval) * 1000),
     [randomize, backgrounds.length],
   );
-
+ */
   useEffect(() => {
     getCurrentWindow().show();
   }, []);
 
-  const background = backgrounds[currentBg];
-  if (!background) {
-    return <ThemedWallpaper />;
-  }
-
-  return (
-    <Wallpaper
-      key={version}
-      path={background.path}
-      containerRef={scope}
-      onLoad={() => {
-        animate(scope.current, { opacity: 1 });
-      }}
-      onError={() => {
-        setCurrentBg((currentIdx) => currentIdx + 1);
-      }}
-    />
-  );
+  return <MonitorContainers />;
 }

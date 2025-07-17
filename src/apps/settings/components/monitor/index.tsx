@@ -1,9 +1,3 @@
-import { convertFileSrc } from '@tauri-apps/api/core';
-import { motion, useAnimationControls } from 'framer-motion';
-import { useSelector } from 'react-redux';
-
-import { newSelectors } from '../../modules/shared/store/app/reducer';
-
 import { cx } from '../../../shared/styles';
 import cs from './index.module.css';
 
@@ -13,11 +7,11 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function Monitor({ children, className, width = 1920, height = 1080, ...props }: Props) {
-  const seleenWallpaper = useSelector(newSelectors.wall.backgrounds);
+  // const seleenWallpaper = useSelector(newSelectors.wall.backgrounds);
 
-  const controls = useAnimationControls();
+  // const controls = useAnimationControls();
 
-  const wallpaper = seleenWallpaper[0]?.path;
+  // const wallpaper = seleenWallpaper[0]?.path;
 
   const style: React.CSSProperties = {
     aspectRatio: `${width} / ${height}`,
@@ -35,7 +29,7 @@ export function Monitor({ children, className, width = 1920, height = 1080, ...p
         style={style}
       >
         <div className={cs.screen}>
-          {wallpaper && (
+          {/* {wallpaper && (
             <motion.img
               className={cs.wallpaper}
               src={convertFileSrc(wallpaper)}
@@ -45,7 +39,7 @@ export function Monitor({ children, className, width = 1920, height = 1080, ...p
                 controls.start({ opacity: 1, transition: { duration: 0.3, ease: 'linear' } });
               }}
             />
-          )}
+          )} */}
           {children}
         </div>
       </div>

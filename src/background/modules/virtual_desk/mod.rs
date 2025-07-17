@@ -1,5 +1,5 @@
 pub mod cli;
-mod native;
+// mod native;
 mod workspaces;
 
 use arc_swap::ArcSwap;
@@ -14,7 +14,7 @@ lazy_static! {
         Arc::new(ArcSwap::from_pointee(
             match FULL_STATE.load().settings().virtual_desktop_strategy {
                 VirtualDesktopStrategy::Native =>
-                    VirtualDesktopManager::Native(native::NativeVirtualDesktopManager::new()),
+                    VirtualDesktopManager::Native(workspaces::SeelenWorkspacesManager::new()),
                 VirtualDesktopStrategy::Seelen =>
                     VirtualDesktopManager::Seelen(workspaces::SeelenWorkspacesManager::new()),
             }
@@ -52,7 +52,9 @@ trait VirtualDesktopManagerTrait {
 
 #[derive(Debug, Clone)]
 pub enum VirtualDesktop {
-    Native(native::NativeVirtualDesktop),
+    // Native(native::NativeVirtualDesktop), both are the same to avoid refartor the entire file
+    #[allow(dead_code)]
+    Native(workspaces::SeelenWorkspace),
     Seelen(workspaces::SeelenWorkspace),
 }
 
@@ -81,7 +83,7 @@ impl VirtualDesktop {
 
 #[derive(Debug)]
 pub enum VirtualDesktopManager {
-    Native(native::NativeVirtualDesktopManager),
+    Native(workspaces::SeelenWorkspacesManager),
     Seelen(workspaces::SeelenWorkspacesManager),
 }
 

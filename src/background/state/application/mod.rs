@@ -6,6 +6,7 @@ mod profiles;
 mod settings;
 mod themes;
 mod toolbar_items;
+mod wallpapers;
 mod weg_items;
 mod widgets;
 
@@ -22,7 +23,10 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::state::{LauncherHistory, Plugin, Profile, WegItems, Widget};
+use seelen_core::state::{
+    CssStyles, LauncherHistory, Plugin, Profile, SluPopupConfig, SluPopupContent, Wallpaper,
+    WegItems, Widget,
+};
 use std::{
     collections::{HashMap, HashSet, VecDeque},
     path::{Path, PathBuf},
@@ -30,7 +34,9 @@ use std::{
     time::Duration,
 };
 
-use crate::{error_handler::Result, log_error, utils::constants::SEELEN_COMMON};
+use crate::{
+    error_handler::Result, log_error, popups::POPUPS_MANAGER, utils::constants::SEELEN_COMMON,
+};
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};
 
@@ -57,6 +63,7 @@ pub struct FullState {
     pub plugins: HashMap<PathBuf, Plugin>,
     pub widgets: HashMap<PathBuf, Widget>,
     pub icon_packs: Arc<Mutex<IconPacksManager>>,
+    pub wallpapers: Vec<Wallpaper>,
 }
 
 unsafe impl Sync for FullState {}
@@ -76,6 +83,7 @@ impl FullState {
             plugins: HashMap::new(),
             widgets: HashMap::new(),
             icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
+            wallpapers: Vec::new(),
         };
         manager.load_all()?; // ScaDaned log shows a deadlock here.
         manager.start_listeners()?;
@@ -111,6 +119,7 @@ impl FullState {
         let mut plugins_changed = false;
         let mut widgets_changed = false;
         let mut settings_changed = false;
+        let mut wallpapers_changed = false;
 
         // Single iteration over the changed paths
         for path in changed {
@@ -164,6 +173,10 @@ impl FullState {
             if !settings_changed && path == SEELEN_COMMON.settings_path() {
                 settings_changed = true;
             }
+
+            if !wallpapers_changed && path.starts_with(SEELEN_COMMON.user_wallpapers_path()) {
+                wallpapers_changed = true;
+            }
         }
 
         if icons_metadata_changed {
@@ -174,7 +187,7 @@ impl FullState {
 
         if weg_items_changed {
             let old = self.weg_items.clone();
-            self.read_weg_items()?;
+            self.read_weg_items();
             if old != self.weg_items {
                 log::info!("Weg Items changed");
                 self.emit_weg_items()?;
@@ -183,7 +196,7 @@ impl FullState {
 
         if toolbar_items_changed {
             let old = self.toolbar_items.clone();
-            self.read_toolbar_items()?;
+            self.read_toolbar_items();
             if old != self.toolbar_items {
                 log::info!("Toolbar Items changed");
                 self.emit_toolbar_items()?;
@@ -192,7 +205,7 @@ impl FullState {
 
         if history_changed {
             log::info!("History changed");
-            self.load_history()?;
+            self.load_history();
             self.emit_history()?;
         }
 
@@ -204,7 +217,7 @@ impl FullState {
 
         if app_configs_changed {
             log::info!("Specific App Configuration changed");
-            self.load_settings_by_app()?;
+            self.load_settings_by_app();
             self.emit_settings_by_app()?;
         }
 
@@ -220,11 +233,17 @@ impl FullState {
             self.emit_widgets()?;
         }
 
+        if wallpapers_changed {
+            log::info!("Wallpapers changed");
+            self.load_wallpapers()?;
+            self.emit_wallpapers()?;
+        }
+
         // important: settings changed should be the last one to avoid use unexisting state
         // like new recently added theme, plugin, widget, etc
         if settings_changed {
             log::info!("Seelen Settings changed");
-            self.read_settings()?;
+            self.read_settings();
             self.emit_settings()?;
         }
 
@@ -263,6 +282,7 @@ impl FullState {
             SEELEN_COMMON.user_themes_path(),
             SEELEN_COMMON.user_plugins_path(),
             SEELEN_COMMON.user_widgets_path(),
+            SEELEN_COMMON.user_wallpapers_path(),
             // bundled data
             SEELEN_COMMON.bundled_themes_path(),
             SEELEN_COMMON.bundled_plugins_path(),
@@ -275,15 +295,6 @@ impl FullState {
 
         self.watcher = Arc::new(Some(debouncer));
         Ok(())
-    }
-
-    pub fn get_settings_from_path(path: &Path) -> Result<Settings> {
-        match path.extension() {
-            Some(ext) if ext == "json" => {
-                Ok(serde_json::from_str(&std::fs::read_to_string(path)?)?)
-            }
-            _ => Err("Invalid settings file extension".into()),
-        }
     }
 
     fn save_settings_by_app(&self) -> Result<()> {
@@ -300,7 +311,7 @@ impl FullState {
         Ok(())
     }
 
-    fn load_settings_by_app(&mut self) -> Result<()> {
+    fn _load_settings_by_app(&mut self) -> Result<()> {
         let user_apps_path = SEELEN_COMMON.user_app_configs_path();
         let apps_templates_path = SEELEN_COMMON.bundled_app_configs_path();
 
@@ -331,7 +342,14 @@ impl FullState {
         Ok(())
     }
 
-    fn load_history(&mut self) -> Result<()> {
+    fn load_settings_by_app(&mut self) {
+        if let Err(e) = self._load_settings_by_app() {
+            log::error!("Error loading settings by app: {e}");
+            Self::show_corrupted_state_to_user(SEELEN_COMMON.user_app_configs_path());
+        }
+    }
+
+    fn _load_history(&mut self) -> Result<()> {
         let history_path = SEELEN_COMMON.history_path();
         if history_path.exists() {
             self.launcher_history = serde_yaml::from_str(&std::fs::read_to_string(history_path)?)?;
@@ -341,28 +359,35 @@ impl FullState {
         Ok(())
     }
 
+    fn load_history(&mut self) {
+        if let Err(e) = self._load_history() {
+            log::error!("Error loading history: {e}");
+            Self::show_corrupted_state_to_user(SEELEN_COMMON.history_path());
+        }
+    }
+
     /// We log each step on this cuz for some reason a deadlock is happening somewhere.
     fn load_all(&mut self) -> Result<()> {
         log::trace!("Initial load: themes");
         self.load_themes()?; // themes needs to be loaded before settings, for a needed migration since v2.3.8
 
         log::trace!("Initial load: settings");
-        self.read_settings()?;
+        self.read_settings();
 
         log::trace!("Initial load: weg items");
-        self.read_weg_items()?;
+        self.read_weg_items();
 
         log::trace!("Initial load: toolbar items");
-        self.read_toolbar_items()?;
+        self.read_toolbar_items();
 
         log::trace!("Initial load: icons packs");
         self.load_icons_packs(true)?;
 
-        log::trace!("Initial load: plugins");
-        self.load_settings_by_app()?;
+        log::trace!("Initial load: settings by app");
+        self.load_settings_by_app();
 
         log::trace!("Initial load: history");
-        self.load_history()?;
+        self.load_history();
 
         log::trace!("Initial load: plugins");
         self.load_plugins()?;
@@ -370,8 +395,46 @@ impl FullState {
         log::trace!("Initial load: widgets");
         self.load_widgets()?;
 
+        log::trace!("Initial load: wallpapers");
+        self.load_wallpapers()?;
+
         log::trace!("Initial load: profiles");
         self.load_profiles()?;
         Ok(())
+    }
+
+    fn show_corrupted_state_to_user(path: &Path) {
+        let mut manager = POPUPS_MANAGER.lock();
+        let config = SluPopupConfig {
+            title: vec![SluPopupContent::Group {
+                items: vec![
+                    SluPopupContent::Icon {
+                        name: "BiSolidError".to_string(),
+                        styles: Some(
+                            CssStyles::new()
+                                .add("color", "var(--color-red-800)")
+                                .add("height", "1.2rem"),
+                        ),
+                    },
+                    SluPopupContent::Text {
+                        value: t!("runtime.corrupted_data").to_string(),
+                        styles: None,
+                    },
+                ],
+                styles: Some(CssStyles::new().add("alignItems", "center")),
+            }],
+            content: vec![
+                SluPopupContent::Text {
+                    value: t!("runtime.corrupted_file").to_string(),
+                    styles: None,
+                },
+                SluPopupContent::Text {
+                    value: format!("{}: {:?}", t!("runtime.corrupted_file_path"), path),
+                    styles: None,
+                },
+            ],
+            ..Default::default()
+        };
+        log_error!(manager.create(config));
     }
 }

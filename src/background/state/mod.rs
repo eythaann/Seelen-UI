@@ -21,8 +21,10 @@ impl FullState {
 
     pub fn is_weg_enabled_on_monitor(&self, monitor_id: &str) -> bool {
         let is_global_enabled = self.is_weg_enabled();
-        match self.settings.monitors_v2.get(monitor_id) {
-            Some(config) => is_global_enabled && config.by_widget.weg.enabled,
+        match self.settings.monitors_v3.get(monitor_id) {
+            Some(config) => {
+                is_global_enabled && config.by_widget.is_widget_enabled(&WidgetId::known_weg())
+            }
             None => is_global_enabled,
         }
     }
@@ -37,8 +39,13 @@ impl FullState {
             Ok(id) => id,
             Err(_) => return is_global_enabled,
         };
-        match self.settings.monitors_v2.get(&device_id) {
-            Some(config) => is_global_enabled && config.by_widget.fancy_toolbar.enabled,
+        match self.settings.monitors_v3.get(&device_id) {
+            Some(config) => {
+                is_global_enabled
+                    && config
+                        .by_widget
+                        .is_widget_enabled(&WidgetId::known_toolbar())
+            }
             None => is_global_enabled,
         }
     }
@@ -63,10 +70,11 @@ impl FullState {
                 };
 
                 self.settings
-                    .monitors_v2
+                    .monitors_v3
                     .get(&device_id)
-                    .and_then(|monitor_config| monitor_config.by_widget.others.get(&widget.id))
-                    .map_or(true, |config| config.enabled)
+                    .map_or(true, |monitor_config| {
+                        monitor_config.by_widget.is_widget_enabled(&widget.id)
+                    })
             }
             _ => monitor.is_primary(),
         }
@@ -103,17 +111,17 @@ impl FullState {
         self.settings.ahk_variables.as_hash_map()
     }
 
-    pub fn get_wm_layout_id(&self, monitor: &Monitor, workspace_idx: usize) -> PluginId {
+    pub fn get_wm_layout_id(&self, _monitor: &Monitor, _workspace_idx: usize) -> PluginId {
         let mut default = self.settings.by_widget.wm.default_layout.clone();
         if !default.is_valid() {
             default = "@default/wm-bspwm".into();
         }
 
-        let Ok(id) = monitor.stable_id() else {
+        /* let Ok(id) = monitor.stable_id() else {
             return default;
-        };
+        }; */
 
-        let config = match self.settings.monitors_v2.get(&id) {
+        /* let config = match self.settings.monitors_v3.get(&id) {
             Some(config) => config,
             None => return default,
         };
@@ -133,31 +141,36 @@ impl FullState {
                 }
             }
             None => default,
-        }
+        } */
+
+        default
     }
 
-    pub fn get_weg_temporal_item_visibility(&self, monitor_id: &str) -> WegTemporalItemsVisibility {
-        let default = self.settings.by_widget.weg.temporal_items_visibility;
-        match self.settings.monitors_v2.get(monitor_id) {
+    pub fn get_weg_temporal_item_visibility(
+        &self,
+        _monitor_id: &str,
+    ) -> WegTemporalItemsVisibility {
+        /* match self.settings.monitors_v2.get(monitor_id) {
             Some(config) => config
                 .by_widget
                 .weg
                 .temporal_items_visibility
                 .unwrap_or(default),
             None => default,
-        }
+        } */
+        self.settings.by_widget.weg.temporal_items_visibility
     }
 
-    pub fn get_weg_pinned_item_visibility(&self, monitor_id: &str) -> WegPinnedItemsVisibility {
-        let default = self.settings.by_widget.weg.pinned_items_visibility;
-        match self.settings.monitors_v2.get(monitor_id) {
+    pub fn get_weg_pinned_item_visibility(&self, _monitor_id: &str) -> WegPinnedItemsVisibility {
+        /* match self.settings.monitors_v2.get(monitor_id) {
             Some(config) => config
                 .by_widget
                 .weg
                 .pinned_items_visibility
                 .unwrap_or(default),
             None => default,
-        }
+        } */
+        self.settings.by_widget.weg.pinned_items_visibility
     }
 
     pub fn locale(&self) -> &String {

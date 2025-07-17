@@ -2,13 +2,17 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    IconPack, IconPackEntry, LauncherHistory, MonitorConfiguration, Plugin, Profile, WegItems,
-    WegPinnedItemsVisibility, Widget,
+    IconPack, IconPackEntry, LauncherHistory, MonitorConfiguration, Plugin, Profile, Wallpaper,
+    WegItems, WegPinnedItemsVisibility, Widget,
 };
+use tauri_plugin_dialog::DialogExt;
 
 use crate::{
     error_handler::Result,
+    log_error,
+    seelen::get_app_handle,
     trace_lock,
+    utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::{window::Window, WindowsApi},
 };
 
@@ -104,13 +108,35 @@ pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_wallpaper() -> Result<PathBuf> {
+pub fn get_native_shell_wallpaper() -> Result<PathBuf> {
     WindowsApi::get_wallpaper()
 }
 
 #[tauri::command(async)]
-pub fn state_set_wallpaper(path: String) -> Result<()> {
+pub fn set_native_shell_wallpaper(path: String) -> Result<()> {
     WindowsApi::set_wallpaper(path)
+}
+
+#[tauri::command(async)]
+pub fn state_request_wallpaper_addition() -> Result<()> {
+    get_app_handle()
+        .dialog()
+        .file()
+        .set_title("Pick Wallpapers")
+        .add_filter("video", &Wallpaper::SUPPORTED_VIDEOS)
+        .add_filter("image", &Wallpaper::SUPPORTED_IMAGES)
+        .pick_files(|picked| {
+            let folder_to_store = SEELEN_COMMON
+                .user_wallpapers_path()
+                .join(date_based_hex_id());
+            for path in picked.unwrap_or_default() {
+                if let Ok(path) = path.simplified().into_path() {
+                    let result = Wallpaper::create_from_file(&path, &folder_to_store, true);
+                    log_error!(result);
+                }
+            }
+        });
+    Ok(())
 }
 
 #[tauri::command(async)]
@@ -126,6 +152,11 @@ pub fn state_get_widgets() -> Vec<Widget> {
 #[tauri::command(async)]
 pub fn state_get_profiles() -> Vec<Profile> {
     FULL_STATE.load().profiles.clone()
+}
+
+#[tauri::command(async)]
+pub fn state_get_wallpapers() -> Vec<Wallpaper> {
+    FULL_STATE.load().wallpapers.clone()
 }
 
 #[tauri::command(async)]

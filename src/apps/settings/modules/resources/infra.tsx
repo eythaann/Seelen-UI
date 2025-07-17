@@ -10,7 +10,7 @@ import { IconPacksView } from './IconPacks';
 import { PluginsView } from './Plugins';
 import { SoundPacksView } from './SoundPacks';
 import { ThemesView } from './Themes';
-import { WallpapersView } from './Wallpapers';
+import { WallpapersView } from './Wallpapers/View';
 import { WidgetsView } from './Widgets';
 
 const kinds: ResourceKind[] = ['Theme', 'Plugin', 'Widget', 'IconPack', 'Wallpaper', 'SoundPack'];

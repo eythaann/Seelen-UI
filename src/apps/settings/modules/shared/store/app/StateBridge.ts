@@ -15,7 +15,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'activeIconPacks',
     'oldActiveThemes',
     'activeThemes',
-    'monitorsV2',
+    'monitorsV3',
     'ahkEnabled',
     'ahkVariables',
     'devTools',

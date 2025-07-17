@@ -1,8 +1,16 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- wallpaper resources.
+- filter for wallpapers.
+- tranfomation for wallpapers.
+- wallpaper animations on in/out.
+- unique wallpaper slider per monitor.
+
 ### refactor
 - monitors ids.
+- wallpaper manager.
 
 ## [2.3.12]
 ### enhancements

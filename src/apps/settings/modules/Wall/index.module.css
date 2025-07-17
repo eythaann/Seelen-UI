@@ -44,3 +44,24 @@
     gap: 4px;
   }
 }
+
+
+.wallpaperList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .wallpaperEntry {
+    width: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 20px 1fr 30px;
+    align-items: center;
+    border-radius: 8px;
+    background-color: var(--color-white);
+
+    > span {
+      grid-column: 2/3;
+    }
+  }
+}

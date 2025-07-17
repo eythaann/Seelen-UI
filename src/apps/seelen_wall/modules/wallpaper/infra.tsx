@@ -1,59 +1,96 @@
+import { useSignalEffect } from '@preact/signals';
+import { cx } from '@shared/styles';
 import { convertFileSrc } from '@tauri-apps/api/core';
-import { ReactNode, RefObject, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useRef } from 'react';
 
-import { Selectors } from '../shared/store/app';
+import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
 
-export function ThemedWallpaper() {
-  return <div className="wallpaper-empty" />;
-}
+import { getPlaybackRate, getWallpaperStyles } from './application';
+
+import { SUPPORTED_IMAGES, SUPPORTED_VIDEOS } from '../shared/constants';
+import { $paused } from '../shared/state';
 
 export interface Props {
+  out?: boolean;
   path: string;
-  containerRef: RefObject<HTMLDivElement>;
-  onLoad: () => void;
-  onError: () => void;
+  onLoad?: () => void;
+  onError?: () => void;
 }
 
-export function Wallpaper({ path, containerRef, onLoad, onError }: Props) {
-  let stoped = useSelector(Selectors.stop);
-  let wallpaper: ReactNode = null;
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      if (stoped) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-    }
-  }, [stoped]);
-
-  if (['.png', '.jpg', '.jpeg', '.webp', '.gif'].some((ext) => path.endsWith(ext))) {
-    wallpaper = <img src={convertFileSrc(path)} onLoad={onLoad} onError={onError} />;
+export function Wallpaper(props: Props) {
+  if (SUPPORTED_IMAGES.some((ext) => props.path.endsWith(ext))) {
+    return <ImageWallpaper {...props} />;
   }
 
-  if (['.mp4', '.mkv', '.wav'].some((ext) => path.endsWith(ext))) {
-    wallpaper = (
-      <video
-        ref={videoRef}
-        src={convertFileSrc(path)}
-        onLoadedData={onLoad}
-        onError={onError}
-        autoPlay={!stoped}
-        loop
-        muted
-        playsInline
-        disableRemotePlayback
-      />
-    );
+  if (SUPPORTED_VIDEOS.some((ext) => props.path.endsWith(ext))) {
+    return <VideoWallpaper {...props} />;
+  }
+
+  // fallback in case of unsupported file
+  return <ThemedWallpaper {...props} />;
+}
+
+export function ThemedWallpaper({ out }: { out?: boolean }) {
+  return (
+    <div
+      className={cx('themed-wallpaper', {
+        'wallpaper-out': out,
+      })}
+      style={getWallpaperStyles()}
+    >
+      <BackgroundByLayersV2 />
+    </div>
+  );
+}
+
+function ImageWallpaper({ out, path, onLoad, onError }: Props) {
+  return (
+    <img
+      className={cx('wallpaper', { 'wallpaper-out': out })}
+      style={getWallpaperStyles()}
+      src={convertFileSrc(path)}
+      onLoad={onLoad}
+      onError={onError}
+    />
+  );
+}
+
+function VideoWallpaper({ out, path, onLoad, onError }: Props) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useSignalEffect(() => {
+    if (ref.current) {
+      console.debug('wallpaper state changed:', $paused.value);
+      if ($paused.value) {
+        ref.current.pause();
+      } else {
+        ref.current.play();
+      }
+    }
+  });
+
+  function onWaiting() {
+    if (ref.current) {
+      console.debug('video waiting for data, seeking to 0');
+      ref.current.currentTime = 0;
+    }
   }
 
   return (
-    <div ref={containerRef} className="wallpaper-container">
-      {wallpaper}
-    </div>
+    <video
+      className={cx('wallpaper', { 'wallpaper-out': out })}
+      style={getWallpaperStyles()}
+      ref={ref}
+      src={convertFileSrc(path)}
+      muted
+      autoPlay
+      loop
+      playsInline
+      disableRemotePlayback
+      onWaiting={onWaiting}
+      onLoadedData={onLoad}
+      onError={onError}
+      playbackRate={getPlaybackRate()}
+    />
   );
 }

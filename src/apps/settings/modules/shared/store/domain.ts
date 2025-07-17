@@ -11,6 +11,7 @@ import {
   Settings,
   Theme,
   UIColors,
+  Wallpaper,
   Widget,
   WindowManagerSettings,
 } from '@seelen-ui/lib/types';
@@ -26,6 +27,7 @@ export interface RootState extends Settings {
   colors: UIColors;
   plugins: Plugin[];
   widgets: Widget[];
+  wallpapers: Wallpaper[];
   profiles: Profile[];
   connectedMonitors: PhysicalMonitor[];
   // migrated since v2.1.0 check src\apps\settings\modules\shared\store\app\StateBridge.ts

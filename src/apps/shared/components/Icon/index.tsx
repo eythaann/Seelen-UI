@@ -1,5 +1,5 @@
 import { IconName } from '@icons';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'preact/compat';
 
 import { cx } from '../../styles';
 import InlineSVG from '../InlineSvg';
