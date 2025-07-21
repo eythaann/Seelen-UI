@@ -1,11 +1,11 @@
 import { IconName } from '@icons';
-import { SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS } from '@seelen-ui/lib';
 import { ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
 import { ResourceText } from '@shared/components/ResourceText';
 import { cx } from '@shared/styles';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { Button, Tooltip } from 'antd';
+import { ComponentChildren } from 'preact';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -49,39 +49,6 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
   const showWarning = targetIsOlder && !resource.metadata.bundled;
   const showDanger = targetIsNewer && !resource.metadata.bundled;
 
-  const portrait = () => {
-    if (resource.metadata.portrait) {
-      return <img src={resource.metadata.portrait} />;
-    }
-    if (kind === 'Wallpaper') {
-      const wallpaper = resource as Wallpaper;
-      if (wallpaper.thumbnail_filename) {
-        return (
-          <img
-            src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.thumbnail_filename}`)}
-            style={{ filter: 'blur(0.4px)' }}
-            loading="lazy"
-          />
-        );
-      }
-
-      if (
-        wallpaper.filename &&
-        SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.includes(wallpaper.filename.split('.').pop()!)
-      ) {
-        return (
-          <video
-            src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.filename}`)}
-            controls={false}
-            preload="metadata"
-            style={{ filter: 'blur(0.4px)' }}
-          />
-        );
-      }
-    }
-    return <ResourceKindIcon kind={kind} />;
-  };
-
   return (
     <div
       className={cx(cs.card, {
@@ -89,8 +56,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
         [cs.danger!]: showDanger,
       })}
     >
-      <figure className={cs.portrait}>
-        {portrait()}
+      <ResourcePortrait resource={resource} kind={kind}>
         {showWarning && (
           <Tooltip title={t('resources.outdated')}>
             <Icon iconName="IoWarning" className={cs.warning} />
@@ -101,7 +67,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
             <Icon iconName="IoWarning" className={cs.danger} />
           </Tooltip>
         )}
-      </figure>
+      </ResourcePortrait>
       <div className={cs.info}>
         <b>
           <ResourceText text={resource.metadata.displayName} />
@@ -144,6 +110,56 @@ const icons: Record<ResourceKind, IconName> = {
   SoundPack: 'PiWaveformBold',
 };
 
-export function ResourceKindIcon({ kind }: { kind: ResourceKind }) {
+interface ResourcePortraitProps {
+  resource: AnyResource;
+  kind: ResourceKind;
+  children?: ComponentChildren;
+}
+
+export function ResourceIcon({ kind }: { kind: ResourceKind }) {
   return <Icon className={cs.kindIcon} iconName={icons[kind]} />;
+}
+
+function ResourcePortraitInner({ resource, kind }: ResourcePortraitProps) {
+  if (resource.metadata.portrait) {
+    return <img src={resource.metadata.portrait} />;
+  }
+
+  if (kind === 'Wallpaper') {
+    const wallpaper = resource as Wallpaper;
+    if (wallpaper.thumbnail_filename) {
+      return (
+        <img
+          src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.thumbnail_filename}`)}
+          style={{ filter: 'blur(0.4px)' }}
+          loading="lazy"
+        />
+      );
+    }
+
+    /* if (
+        wallpaper.filename &&
+        SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.includes(wallpaper.filename.split('.').pop()!)
+      ) {
+        return (
+          <video
+            src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.filename}`)}
+            controls={false}
+            preload="metadata"
+            style={{ filter: 'blur(0.4px)' }}
+          />
+        );
+      } */
+  }
+
+  return <ResourceIcon kind={kind} />;
+}
+
+export function ResourcePortrait({ resource, kind, children }: ResourcePortraitProps) {
+  return (
+    <figure className={cs.portrait}>
+      <ResourcePortraitInner resource={resource} kind={kind} />
+      {children}
+    </figure>
+  );
 }

@@ -12,6 +12,9 @@ resource:
   downloading_body: វាអាចចំណាយពេលពីរបីវិនាទីសូមកុំបិទបង្អួច។
   enable: បើកដៃ
 runtime:
+  corrupted_data: ទិន្នន័យខូច
+  corrupted_file: ឯកសារកំណត់រចនាសម្ព័ន្ធត្រូវបានខូចដោយប្រើតម្លៃលំនាំដើមជំនួសវិញ។
+  corrupted_file_path: ផ្លូវឯកសារខូចខូច
   download: ចូលទៅកាន់ទំព័រទាញយក
   not_found: WebView2 Runtime រកមិនឃើញទេ។
   not_found_description: Seelen UI ទាមទារ Webview2 Runtime ។ សូមដំឡើងវា។

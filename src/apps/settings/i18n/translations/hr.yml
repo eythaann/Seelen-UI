@@ -105,6 +105,7 @@ general:
     selected: Aktivne teme
 header:
   labels:
+    config: Konfiguracije
     developer: Za programere
     extras: Dodaci
     general: Općenito
@@ -142,6 +143,7 @@ resources:
     ispravno.
   discover: Otkrijte više resursa
   export: Izvozni resurs
+  import_wallpapers: Uvoz lokalnih pozadina
   open_folder: Mapa otvorenih resursa
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju seelen korisničkog sučelja i
@@ -262,13 +264,34 @@ vd:
     seelen: Izviriti
 wall:
   backgrounds: Pozadine
+  blur: Zamutiti
+  contrast: Kontrast
   enable: Omogući upravitelja pozadina
+  fit:
+    contain: Obuzdati
+    cover: Poklopac
+    fill: Ispuniti
+  flipHorizontal: Okrenuti vodoravni
+  flipVertical: Okrenuti okomit
   hours: sate
   interval: Promijenite pozadinu svaku
   minutes: minute
   no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
+  objectFit: Fit
+  objectPosition: Pozadinski položaj
+  overlayColor: Boja prekrivanja
+  overlayMixBlendMode: Način miješanja preklapanja mješavine
+  playback: Brzina reprodukcije
+  position:
+    bottom: Dno
+    center: Centar
+    left: Lijevo
+    right: Pravo
+    top: Vrh
   random: Randomizirana prezentacija
+  saturation: Zasićenost
   seconds: sekundi
+  withOverlay: S prekrivanjem
 weg:
   auto_hide: Auto sakrij
   delay_to_hide: Odgoda za skrivanje

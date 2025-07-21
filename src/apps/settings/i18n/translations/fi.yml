@@ -107,6 +107,7 @@ general:
     selected: Aktiiviset teemat
 header:
   labels:
+    config: Kokoonpanot
     developer: Kehittäjille
     extras: Lisävarusteet
     general: Yleinen
@@ -142,6 +143,7 @@ resources:
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
   discover: Löydä lisää resursseja
   export: Vientiresurssi
+  import_wallpapers: Tuo paikallisia taustakuvia
   open_folder: Avaa resurssikansio
   outdated: >-
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se
@@ -262,13 +264,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Taustakuvat
+  blur: Sumeus
+  contrast: Kontrasti
   enable: Ota taustakuvan johtaja käyttöön
+  fit:
+    contain: Sisältää
+    cover: Kansi
+    fill: Täytä
+  flipHorizontal: Käännä vaakasuora
+  flipVertical: Flip pystysuora
   hours: tuntia
   interval: Vaihda taustakuva jokainen
   minutes: minuutti
   no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
+  objectFit: Tausta Fit
+  objectPosition: Tausta Asema
+  overlayColor: Päällekkäisväri
+  overlayMixBlendMode: Päällekkäinen sekoitus sekoitustila
+  playback: Toistonopeus
+  position:
+    bottom: Pohja
+    center: Keskusta
+    left: Vasen
+    right: Oikea
+    top: Top
   random: Satunnaista diaesitys
+  saturation: Saturaatio
   seconds: sekunti
+  withOverlay: Päällysteen kanssa
 weg:
   auto_hide: Automaattinen piilo
   delay_to_hide: Viive piilottaa

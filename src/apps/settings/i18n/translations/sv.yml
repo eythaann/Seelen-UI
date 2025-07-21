@@ -105,6 +105,7 @@ general:
     selected: Aktiva teman
 header:
   labels:
+    config: Konfigurationer
     developer: För utvecklare
     extras: Extramaterial
     general: Allmän
@@ -140,6 +141,7 @@ resources:
   app_outdated: Denna resurs kräver en nyare version av Seelen UI för att fungera korrekt.
   discover: Upptäck fler resurser
   export: Exportera resurs
+  import_wallpapers: Importera lokala bakgrundsbilder
   open_folder: Öppna resursmappen
   outdated: >-
     Den här resursen är utformad för en äldre version av Seelen UI och kanske
@@ -260,13 +262,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Tapeter
+  blur: Blur
+  contrast: Kontrast
   enable: Aktivera tapetchef
+  fit:
+    contain: Innehåller
+    cover: Omslag
+    fill: Fylla
+  flipHorizontal: Vänd horisontellt
+  flipVertical: Vänd vertikal
   hours: timme
   interval: Ändra tapeter varje
   minutes: minuter
   no_background: Tomt bildspel, med temas bakgrund istället.
+  objectFit: Bakgrund Passform
+  objectPosition: Bakgrund Position
+  overlayColor: Färg på överlägg
+  overlayMixBlendMode: Overlay Mix Blandningsläge
+  playback: Uppspelningshastighet
+  position:
+    bottom: Botten
+    center: Centrum
+    left: Vänster
+    right: Rätt
+    top: Topp
   random: Slumpmässig bildspel
+  saturation: Mättnad
   seconds: sekunder
+  withOverlay: Med överlägg
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dröjsmål att gömma sig

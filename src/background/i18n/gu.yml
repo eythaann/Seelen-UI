@@ -14,6 +14,9 @@ resource:
   downloading_body: આને થોડી સેકંડ લાગી શકે છે, કૃપા કરીને વિંડો બંધ ન કરો.
   enable: સક્ષમ કરવું
 runtime:
+  corrupted_data: ભ્રષ્ટ આંકડા
+  corrupted_file: તેના બદલે ડિફ default લ્ટ મૂલ્યોનો ઉપયોગ કરીને, એક રૂપરેખાંકન ફાઇલ દૂષિત છે.
+  corrupted_file_path: ભ્રષ્ટ ફાઇલ માર્ગ
   download: ડાઉનલોડ પૃષ્ઠ પર જાઓ
   not_found: WebView2 રનટાઇમ મળ્યો નથી
   not_found_description: Seelen UI ને Webview2 રનટાઇમની જરૂર છે. કૃપા કરીને તેને ઇન્સ્ટોલ કરો.

@@ -105,6 +105,7 @@ general:
     selected: Actieve thema's
 header:
   labels:
+    config: Configuraties
     developer: Voor ontwikkelaars
     extras: Extra's
     general: Algemeen
@@ -140,6 +141,7 @@ resources:
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
   discover: Ontdek meer bronnen
   export: Exporteren
+  import_wallpapers: Lokale achtergronden importeren
   open_folder: Map met bronnen openen
   outdated: >-
     Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
@@ -260,15 +262,36 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Achtergronden
+  blur: Vervagen
+  contrast: Contrast
   enable: Schakel wallpaper manager in
+  fit:
+    contain: Bevat
+    cover: Omslag
+    fill: Vullen
+  flipHorizontal: Flip Horizontaal
+  flipVertical: Verticaal klappen
   hours: uren
   interval: Verander wallpaper elke
   minutes: notulen
   no_background: >-
     Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
     thema.
+  objectFit: Achtergrond
+  objectPosition: Achtergrond Positie
+  overlayColor: Overlay Kleur
+  overlayMixBlendMode: Overlay Mix Mengmodus
+  playback: Afspeelsnelheid
+  position:
+    bottom: Bodem
+    center: Midden
+    left: Links
+    right: Rechts
+    top: Top
   random: Randomize diavoorstelling
+  saturation: Verzadiging
   seconds: seconden
+  withOverlay: Met overlay
 weg:
   auto_hide: Automatisch Verbergen
   delay_to_hide: Vertraging om te verbergen

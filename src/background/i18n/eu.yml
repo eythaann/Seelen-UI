@@ -14,6 +14,11 @@ resource:
   downloading_body: Honek segundo batzuk iraun ditzake, mesedez, ez itxi leihoa.
   enable: Ahalbidetu
 runtime:
+  corrupted_data: Hondatutako datuak
+  corrupted_file: >-
+    Konfigurazio fitxategia hondatuta dago, horren ordez balio lehenetsiak
+    erabiliz.
+  corrupted_file_path: Fitxategiaren bide hondatua
   download: Joan deskarga orrira
   not_found: WebView2 Runtime ez da aurkitu
   not_found_description: Seelen UI-k Webview2 Runtime behar du. Mesedez, instala ezazu.

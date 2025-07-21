@@ -107,6 +107,7 @@ general:
     selected: Izindikimba ezisebenzayo
 header:
   labels:
+    config: Ukulungiswa
     developer: Obathuthukisi
     extras: Okungatha
     general: Jwayelekile
@@ -142,6 +143,7 @@ resources:
   app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
   discover: Thola izinsiza ezengeziwe
   export: Ukuthumela impahla
+  import_wallpapers: Ngenisa amaphephadonga endawo
   open_folder: Ifolda Yezisetshenziswa
   outdated: >-
     Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze
@@ -260,15 +262,36 @@ vd:
     seelen: '-Kwaseshud'
 wall:
   backgrounds: Ama-Wallpaper
+  blur: Impumpula
+  contrast: Ukuqhathanisa
   enable: Nika amandla umphathi wangemuva
+  fit:
+    contain: Qukethe
+    cover: Mbathisa
+    fill: Gcwalisa
+  flipHorizontal: Flip ovundlile
+  flipVertical: Flip mpo
   hours: amahora
   interval: Shintsha iphepha lokunamathisela odongeni
   minutes: imizuzu
   no_background: >-
     Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
     esikhundleni.
+  objectFit: Isendlalelo semuva
+  objectPosition: Isikhundla sangemuva
+  overlayColor: Umbala obheke phambili
+  overlayMixBlendMode: Hlanganisa imodi ehlanganisiwe
+  playback: Ijubane lokudlala
+  position:
+    bottom: Esinqeni
+    center: Indawo yangaphakathi impela
+    left: '-Bunxele'
+    right: Ngakwesokudla
+    top: Isihloko
   random: Nge-slideshow engahleliwe
+  saturation: Ukutacwaba
   seconds: imisa
+  withOverlay: Ngokumbondelana
 weg:
   auto_hide: Fihla okuzenzakalelayo
   delay_to_hide: Libazise ukucasha

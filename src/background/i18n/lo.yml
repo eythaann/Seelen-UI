@@ -14,6 +14,9 @@ resource:
   downloading_body: ມັນອາດໃຊ້ເວລາສອງສາມວິນາທີ, ກະລຸນາຢ່າປິດປ່ອງຢ້ຽມ.
   enable: ເປີດໃຊ້
 runtime:
+  corrupted_data: ຂໍ້ມູນທີ່ເສີຍຫາຍ
+  corrupted_file: ເອກະສານການຕັ້ງຄ່າແມ່ນເສຍຫາຍ, ໂດຍໃຊ້ຄຸນຄ່າເລີ່ມຕົ້ນແທນ.
+  corrupted_file_path: ເສັ້ນທາງເອກະສານທີ່ເສີຍຫາຍ
   download: ໄປທີ່ໜ້າດາວໂຫຼດ
   not_found: ບໍ່ພົບ WebView2 Runtime
   not_found_description: Seelen UI ຕ້ອງການ Webview2 Runtime. ກະລຸນາຕິດຕັ້ງມັນ.

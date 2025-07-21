@@ -14,6 +14,11 @@ resource:
   downloading_body: Bu bir necha soniya davom etishi mumkin, iltimos derazani yopmang.
   enable: Yoqib yubormoq
 runtime:
+  corrupted_data: Buzilgan ma'lumotlar
+  corrupted_file: >-
+    Buning o'rniga standart qiymatlardan foydalangan holda konfiguratsiya fayli
+    buzilgan.
+  corrupted_file_path: Buzilgan fayl yo'li
   download: Yuklab olish sahifasiga o'ting
   not_found: WebView2 ish vaqti topilmadi
   not_found_description: Seelen UI uchun Webview2 Runtime kerak. Iltimos, uni oʻrnating.

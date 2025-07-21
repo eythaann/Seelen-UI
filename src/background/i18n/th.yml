@@ -12,6 +12,9 @@ resource:
   downloading_body: อาจใช้เวลาสองสามวินาทีโปรดอย่าปิดหน้าต่าง
   enable: เปิดใช้งาน
 runtime:
+  corrupted_data: ข้อมูลที่เสียหาย
+  corrupted_file: ไฟล์การกำหนดค่าเสียหายโดยใช้ค่าเริ่มต้นแทน
+  corrupted_file_path: เส้นทางไฟล์ที่เสียหาย
   download: ไปที่หน้าดาวน์โหลด
   not_found: ไม่พบรันไทม์ WebView2
   not_found_description: Seelen UI ต้องการรันไทม์ Webview2 กรุณาติดตั้ง.

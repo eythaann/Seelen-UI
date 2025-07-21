@@ -14,6 +14,11 @@ resource:
   downloading_body: ამას შეიძლება რამდენიმე წამი დასჭირდეს, გთხოვთ, არ დახუროთ ფანჯარა.
   enable: შესაძლებლობის მიცემა
 runtime:
+  corrupted_data: კორუმპირებული მონაცემები
+  corrupted_file: >-
+    კონფიგურაციის ფაილი კორუმპირებულია, ამის ნაცვლად ნაგულისხმევი მნიშვნელობების
+    გამოყენებით.
+  corrupted_file_path: კორუმპირებული ფაილის გზა
   download: გადადით ჩამოტვირთვის გვერდზე
   not_found: WebView2 Runtime ვერ მოიძებნა
   not_found_description: Seelen UI მოითხოვს Webview2 Runtime-ს. გთხოვთ დააინსტალიროთ.

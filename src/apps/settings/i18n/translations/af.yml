@@ -105,6 +105,7 @@ general:
     selected: Aktiewe temas
 header:
   labels:
+    config: Konfigurasies
     developer: Vir ontwikkelaars
     extras: Ekstra's
     general: Generaal
@@ -142,6 +143,7 @@ resources:
     werk.
   discover: Ontdek meer bronne
   export: Uitvoerhulpbron
+  import_wallpapers: Voer plaaslike agtergronde in
   open_folder: Open Resource Folder
   outdated: >-
     Hierdie hulpbron is ontwerp vir 'n ouer weergawe van Seelen UI en werk
@@ -262,13 +264,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Agtergronde
+  blur: Vervaag
+  contrast: Kontras
   enable: Aktiveer agtergrondbestuurder
+  fit:
+    contain: Bedwing
+    cover: Bedekking
+    fill: Vul
+  flipHorizontal: Flip horisontaal
+  flipVertical: Flip vertikaal
   hours: ure
   interval: Verander die muurpapier elke
   minutes: minute
   no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
+  objectFit: Agtergrond pas
+  objectPosition: Agtergrondposisie
+  overlayColor: Oorlegkleur
+  overlayMixBlendMode: Overlay Mix mengmodus
+  playback: Playback Speed
+  position:
+    bottom: Bodem
+    center: Middel
+    left: Links
+    right: Regs
+    top: Kruin
   random: Randomize skyfievertoning
+  saturation: Versadiging
   seconds: sekondes
+  withOverlay: Met oorleg
 weg:
   auto_hide: Outo -vel
   delay_to_hide: Vertraag om weg te steek

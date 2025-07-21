@@ -14,6 +14,9 @@ resource:
   downloading_body: 'Սա կարող է տեւել մի քանի վայրկյան, խնդրում եմ մի փակեք պատուհանը:'
   enable: Միացնել
 runtime:
+  corrupted_data: Կոռումպացված տվյալներ
+  corrupted_file: 'Կազմաձեւման ֆայլը կոռումպացված է, փոխարենը օգտագործելով լռելյայն արժեքներ:'
+  corrupted_file_path: Կոռուպցիոն ֆայլի ուղին
   download: Գնացեք ներբեռնման էջ
   not_found: WebView2 Runtime-ը չի գտնվել
   not_found_description: 'Seelen UI-ն պահանջում է Webview2 Runtime: Խնդրում ենք տեղադրել այն:'

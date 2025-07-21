@@ -16,6 +16,9 @@ resource:
     prozor.
   enable: Omogućiti
 runtime:
+  corrupted_data: Oštećeni podaci
+  corrupted_file: Konfiguracijska datoteka je oštećena, koristeći zadane vrijednosti.
+  corrupted_file_path: Ispravljena staza datoteke
   download: Idi na stranicu za preuzimanje
   not_found: WebView2 Runtime nije pronađen
   not_found_description: Seelen UI zahtijeva Webview2 Runtime. Molimo instalirajte ga.

@@ -106,6 +106,7 @@ general:
     selected: செயலில் உள்ள தீம்கள்
 header:
   labels:
+    config: உள்ளமைவுகள்
     developer: டெவலப்பர்களுக்கு
     extras: கூடுதல்
     general: பொது
@@ -141,6 +142,7 @@ resources:
   app_outdated: இந்த வளத்திற்கு சரியாக வேலை செய்ய சீலன் UI இன் புதிய பதிப்பு தேவைப்படுகிறது.
   discover: மேலும் ஆதாரங்களைக் கண்டறியவும்
   export: ஏற்றுமதி வள
+  import_wallpapers: உள்ளூர் வால்பேப்பர்களை இறக்குமதி செய்யுங்கள்
   open_folder: திறந்த வள கோப்புறை
   outdated: >-
     இந்த ஆதாரம் சீலன் UI இன் பழைய பதிப்பிற்காக வடிவமைக்கப்பட்டுள்ளது, மேலும்
@@ -259,13 +261,34 @@ vd:
     seelen: சைலர்
 wall:
   backgrounds: வால்பேப்பர்கள்
+  blur: மங்கலானது
+  contrast: மாறுபாடு
   enable: வால்பேப்பர் மேலாளரை இயக்கவும்
+  fit:
+    contain: கட்டுப்படுத்தவும்
+    cover: கவர்
+    fill: நிரப்பவும்
+  flipHorizontal: கிடைமட்டமாக புரட்டவும்
+  flipVertical: செங்குத்து புரட்டவும்
   hours: மணி
   interval: ஒவ்வொரு வால்பேப்பரையும் மாற்றவும்
   minutes: நிமிடங்கள்
   no_background: வெற்று ஸ்லைடுஷோ, அதற்கு பதிலாக கருப்பொருளின் பின்னணியைப் பயன்படுத்துகிறது.
+  objectFit: பின்னணி பொருத்தம்
+  objectPosition: பின்னணி நிலை
+  overlayColor: மேலடுக்கு நிறம்
+  overlayMixBlendMode: மேலடுக்கு கலவை கலவை பயன்முறை
+  playback: பின்னணி வேகம்
+  position:
+    bottom: கீழே
+    center: மையம்
+    left: இடது
+    right: சரி
+    top: மேல்
   random: ஸ்லைடுஷோவை சீரற்றதாக்குங்கள்
+  saturation: செறிவு
   seconds: விநாடிகள்
+  withOverlay: மேலடுக்கு
 weg:
   auto_hide: தானாக மறை
   delay_to_hide: மறைக்க தாமதம்

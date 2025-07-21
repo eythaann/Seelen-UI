@@ -105,6 +105,7 @@ general:
     selected: Mijarên Çalak
 header:
   labels:
+    config: Mîhengên
     developer: Ji bo pêşdebiran
     extras: Ekstras
     general: Giştî
@@ -142,6 +143,7 @@ resources:
     bixebite.
   discover: Zêdetir çavkaniyên kifş bikin
   export: Resouravkaniya Export
+  import_wallpapers: Dîwarên herêmî yên import bikin
   open_folder: Peldanka çavkaniya vekirî
   outdated: >-
     Vê çavkaniyê ji bo guhertoyek kevn a Seelen UI hate çêkirin û dibe ku bi
@@ -259,13 +261,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Wallpapers
+  blur: Şîn
+  contrast: Dijîtî
   enable: Gerînendeyê Wallpaper çalak bike
+  fit:
+    contain: Bêdengman
+    cover: Lihêv
+    fill: Tijîkirin
+  flipHorizontal: Flip horizontî
+  flipVertical: Flip Vertical
   hours: demjimêr
   interval: Her kesê biguherînin
   minutes: deqq
   no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
+  objectFit: Background Fit
+  objectPosition: Positiona paşîn
+  overlayColor: Rengê dorpêçkirî
+  overlayMixBlendMode: Overlay Mode Blend
+  playback: Leza Playback
+  position:
+    bottom: Erd
+    center: Navîne
+    left: Çep
+    right: Rast
+    top: Kop
   random: Slideshow Randomize
+  saturation: Satutionation
   seconds: seconds
+  withOverlay: Bi sernav
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dereng ji bo veşartinê

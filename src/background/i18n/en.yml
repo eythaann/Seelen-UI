@@ -14,6 +14,9 @@ resource:
   downloading_body: This might take a few seconds, please don't close the window.
   enable: Enable
 runtime:
+  corrupted_data: Corrupted data
+  corrupted_file: A configuration file is corrupted, using default values instead.
+  corrupted_file_path: Corrupted file path
   download: Go to download page
   not_found: WebView2 Runtime not found
   not_found_description: Seelen UI requires Webview2 Runtime. Please install it.
@@ -21,10 +24,6 @@ runtime:
   outdated_description: >-
     Seelen UI requires Webview2 Runtime %{min_version} or higher. Please update
     it.
-  corrupted_data: Corrupted data
-  corrupted_file: >-
-    A configuration file is corrupted, using default values instead.
-  corrupted_file_path: Corrupted file path
 service:
   not_running: Seelen UI Service not running
   not_running_description: >-

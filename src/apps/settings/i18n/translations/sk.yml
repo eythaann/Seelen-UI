@@ -105,6 +105,7 @@ general:
     selected: Aktívne témy
 header:
   labels:
+    config: Konfigurácie
     developer: Pre vývojárov
     extras: Dodatky
     general: Všeobecný
@@ -142,6 +143,7 @@ resources:
     rozhrania Seelen.
   discover: Objavte ďalšie zdroje
   export: Vývozný zdroj
+  import_wallpapers: Import miestnych tapiet
   open_folder: Otvorenie priečinka so zdrojmi
   outdated: >-
     Tento zdroj bol navrhnutý pre staršiu verziu používateľského rozhrania
@@ -260,13 +262,34 @@ vd:
     seelen: Kabína
 wall:
   backgrounds: Tapety
+  blur: Rozmazanie
+  contrast: Kontrast
   enable: Povoliť manažéra tapiet
+  fit:
+    contain: Obsahuje
+    cover: Obal
+    fill: Naplňte stránku
+  flipHorizontal: Flip Horizontálne
+  flipVertical: Flip Vertical
   hours: hodiny
   interval: Vymeňte tapetu každý
   minutes: minúta
   no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
+  objectFit: Pozadie Fit
+  objectPosition: Pozadie Pozícia
+  overlayColor: Farba prekrytia
+  overlayMixBlendMode: Režim prekrývania Mix
+  playback: Rýchlosť prehrávania
+  position:
+    bottom: Spodná časť
+    center: Stredisko
+    left: Vľavo
+    right: Vpravo
+    top: Top
   random: Randomizovať prezentáciu
+  saturation: Nasýtenie
   seconds: sekundy
+  withOverlay: S prekrytím
 weg:
   auto_hide: Automaticky skryť
   delay_to_hide: Odložiť skryť

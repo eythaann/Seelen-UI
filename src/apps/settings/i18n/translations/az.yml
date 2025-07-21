@@ -104,6 +104,7 @@ general:
     selected: Aktiv Mövzular
 header:
   labels:
+    config: Konfiqurasiya
     developer: Yaradıcılar üçün
     extras: Əlavələr
     general: General
@@ -141,6 +142,7 @@ resources:
     tələb edir.
   discover: Daha çox mənbəyi kəşf edin
   export: İxracat mənbəyi
+  import_wallpapers: Yerli divar kağızları idxal edin
   open_folder: Açıq Resurs qovluğu
   outdated: >-
     Bu qaynaq Seelen UI-nin köhnə bir versiyası üçün hazırlanmış və düzgün
@@ -259,13 +261,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Divar kağızları
+  blur: Sönük
+  contrast: Əksinə
   enable: Divar kağızı menecerini aktivləşdirin
+  fit:
+    contain: Ehtiva etmək
+    cover: Örtük
+    fill: Doldurmaq
+  flipHorizontal: Üfüqi flip
+  flipVertical: Şaquli sürüşmək
   hours: sair
   interval: Divar kağızı hər birini dəyişdirin
   minutes: dəqiqəlik
   no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
+  objectFit: Arxa plan
+  objectPosition: Fon mövqeyi
+  overlayColor: Örtük rəngi
+  overlayMixBlendMode: Qarışıq qarışığı rejimi
+  playback: Sürətini çalın
+  position:
+    bottom: Dibli
+    center: Mərkəzi
+    left: Sol
+    right: Haqlı
+    top: Üst
   random: Slayd şousu
+  saturation: Doydurma
   seconds: saniyə
+  withOverlay: Örtülü ilə
 weg:
   auto_hide: Avtomatik gizlətmək
   delay_to_hide: Gizlətmək üçün gecikmə

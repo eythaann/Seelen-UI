@@ -107,6 +107,7 @@ general:
     selected: Temi Attivi
 header:
   labels:
+    config: Konfigurazzjonijiet
     developer: Għall-iżviluppaturi
     extras: Ekstras
     general: Ġenerali
@@ -142,6 +143,7 @@ resources:
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
   discover: Skopri aktar riżorsi
   export: Riżorsa ta 'esportazzjoni
+  import_wallpapers: Importa wallpapers lokali
   open_folder: Folder tar-Riżorsi Miftuħa
   outdated: >-
     Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u
@@ -260,13 +262,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Wallpapers
+  blur: Ċċajpar
+  contrast: Kuntrast
   enable: Enable Wallpaper Manager
+  fit:
+    contain: Fihom
+    cover: Għata
+    fill: Imla
+  flipHorizontal: Flip orizzontali
+  flipVertical: Flip vertikali
   hours: sigħat
   interval: Ibdel il-wallpaper kull
   minutes: minuti
   no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
+  objectFit: L-isfond jaqbel
+  objectPosition: Pożizzjoni ta 'sfond
+  overlayColor: Kulur overlay
+  overlayMixBlendMode: Modalità ta 'taħlita ta' taħlita overlay
+  playback: Veloċità tad-daqq
+  position:
+    bottom: Qiegħ
+    center: Ċentru
+    left: Xellug
+    right: Dritt
+    top: Quċċata
   random: Randomize slideshow
+  saturation: Saturazzjoni
   seconds: sekondi
+  withOverlay: Bil-overlay
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dewmien biex jinħbew

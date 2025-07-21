@@ -107,6 +107,7 @@ general:
     selected: Активные темы
 header:
   labels:
+    config: Конфигурации
     developer: Для разработчиков
     extras: Доп. информация
     general: Общее
@@ -142,6 +143,7 @@ resources:
   app_outdated: Для корректной работы этого ресурса требуется более новая версия Seelen UI.
   discover: Откройте для себя больше ресурсов
   export: Экспортный ресурс
+  import_wallpapers: Импорт местных обоев
   open_folder: Откройте папку с ресурсами
   outdated: >-
     Этот ресурс был разработан для старой версии Seelen UI и может работать
@@ -262,13 +264,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Обои
+  blur: Пятно
+  contrast: Контраст
   enable: Включить менеджер обоев
+  fit:
+    contain: Содержите
+    cover: Обложка
+    fill: Наполнение
+  flipHorizontal: Переворот по горизонтали
+  flipVertical: Флип вертикальный
   hours: часы
   interval: Менять обои через
   minutes: минуты
   no_background: Пустое слайд-шоу (используется фон темы)
+  objectFit: Фоновая подгонка
+  objectPosition: Фоновая позиция
+  overlayColor: Цвет наложения
+  overlayMixBlendMode: Режим наложения "Перекрытие
+  playback: Скорость воспроизведения
+  position:
+    bottom: Дно
+    center: Центр
+    left: Слева
+    right: Справа
+    top: Топ
   random: Случайный порядок
+  saturation: Насыщенность
   seconds: секунды
+  withOverlay: С накладкой
 weg:
   auto_hide: Автоскрытие
   delay_to_hide: Задержка, чтобы скрыть

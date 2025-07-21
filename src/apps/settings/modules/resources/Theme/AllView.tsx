@@ -9,13 +9,13 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router';
 
-import cs from './infra.module.css';
+import cs from '../infra.module.css';
 
-import { RootActions } from '../shared/store/app/reducer';
-import { RootSelectors } from '../shared/store/app/selectors';
+import { RootActions } from '../../shared/store/app/reducer';
+import { RootSelectors } from '../../shared/store/app/selectors';
 
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { ResourceCard } from './common';
+import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
+import { ResourceCard } from '../ResourceCard';
 
 export function ThemesView() {
   const activeIds = useSelector(RootSelectors.activeThemes);

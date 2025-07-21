@@ -107,6 +107,7 @@ general:
     selected: Активни теми
 header:
   labels:
+    config: Конфигурации
     developer: За разработчици
     extras: Екстри
     general: Общ
@@ -142,6 +143,7 @@ resources:
   app_outdated: Този ресурс изисква по-нова версия на Seelen UI, за да работи правилно.
   discover: Открийте още ресурси
   export: Износ на ресурси
+  import_wallpapers: Импортиране на местни тапети
   open_folder: Отваряне на папката с ресурси
   outdated: >-
     Този ресурс е разработен за по-стара версия на Seelen UI и може да не работи
@@ -278,13 +280,34 @@ vd:
     seelen: Зелен
 wall:
   backgrounds: Тапети
+  blur: Размазване
+  contrast: Контраст
   enable: Активирайте мениджъра на тапети
+  fit:
+    contain: Съдържат
+    cover: Корица
+    fill: Напълнете
+  flipHorizontal: Хоризонтално обръщане
+  flipVertical: Вертикално обръщане
   hours: часове
   interval: Променете тапетите всеки
   minutes: минути
   no_background: Празно слайдшоу, вместо това използвайки фона на темата.
+  objectFit: Подходящ фон
+  objectPosition: Фонова позиция
+  overlayColor: Цвят на наслагване
+  overlayMixBlendMode: Режим на смесване на наслагване
+  playback: Скорост на възпроизвеждане
+  position:
+    bottom: Дъно
+    center: Център
+    left: Вляво
+    right: Вдясно
+    top: Топ
   random: Рандомизиране слайдшоу
+  saturation: Насищане
   seconds: секунди
+  withOverlay: С наслагване
 weg:
   auto_hide: Автоматично скриване
   delay_to_hide: Забавяне, за да се скрие

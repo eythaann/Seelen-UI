@@ -14,6 +14,11 @@ resource:
   downloading_body: Това може да отнеме няколко секунди, моля, не затваряйте прозореца.
   enable: Активиране на
 runtime:
+  corrupted_data: Повредени данни
+  corrupted_file: >-
+    Конфигурационният файл е повреден, като вместо него се използват стойности
+    по подразбиране.
+  corrupted_file_path: Повреден път на файла
   download: Отидете на страницата за изтегляне
   not_found: WebView2 Runtime не е намерен
   not_found_description: Seelen UI изисква Webview2 Runtime. Моля, инсталирайте го.

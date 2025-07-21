@@ -14,6 +14,9 @@ resource:
   downloading_body: Энэ нь хэдэн секунд болж магадгүй бөгөөд цонхыг хааж болохгүй.
   enable: Болоцоо огох
 runtime:
+  corrupted_data: Гэмтсэн өгөгдөл
+  corrupted_file: Тохируулгын файл эвдэрсэн, оронд нь үндсэн утгыг ашиглана.
+  corrupted_file_path: Авлисан файлын зам
   download: Татаж авах хуудас руу очно уу
   not_found: WebView2 Ажиллах цаг олдсонгүй
   not_found_description: Seelen UI нь Webview2 Runtime шаарддаг. Үүнийг суулгана уу.

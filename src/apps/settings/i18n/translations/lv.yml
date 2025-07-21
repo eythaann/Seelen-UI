@@ -107,6 +107,7 @@ general:
     selected: Aktīvās tēmas
 header:
   labels:
+    config: Konfigurācijas
     developer: Izstrādātājiem
     extras: Papildaprīkojums
     general: Ģenerāldirektors
@@ -142,6 +143,7 @@ resources:
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
   discover: Atklājiet vairāk resursu
   export: Eksporta resursi
+  import_wallpapers: Importēt vietējās tapetes
   open_folder: Atvērt resursu mapi
   outdated: >-
     Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties
@@ -258,13 +260,34 @@ vd:
     seelen: Seelēna
 wall:
   backgrounds: Tapetes
+  blur: Blur
+  contrast: Kontrasts
   enable: Iespējot fona attēlu pārvaldnieku
+  fit:
+    contain: Satur
+    cover: Vāks
+    fill: Aizpildiet
+  flipHorizontal: Flip horizontāli
+  flipVertical: Flip vertikālais
   hours: laiks
   interval: Mainiet fona attēlus katru
   minutes: protokols
   no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
+  objectFit: Fona fona atbilstība
+  objectPosition: Pamatinformācija Pozīcija
+  overlayColor: Pārklājuma krāsa
+  overlayMixBlendMode: Pārklājuma sajaukšanas režīms
+  playback: Atskaņošanas ātrums
+  position:
+    bottom: Apakšējā daļa
+    center: Centrs
+    left: Kreisā
+    right: Tiesības
+    top: Top
   random: Randomizējiet slaidrādi
+  saturation: Piesātinājums
   seconds: sekundes
+  withOverlay: Ar pārklājumu
 weg:
   auto_hide: Auto paslēpt
   delay_to_hide: Aizkavē paslēpties

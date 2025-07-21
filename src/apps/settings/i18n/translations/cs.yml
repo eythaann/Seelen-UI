@@ -105,6 +105,7 @@ general:
     selected: Aktivní motivy
 header:
   labels:
+    config: Konfigurace
     developer: Pro vývojáře
     extras: Doplňky
     general: Všeobecné
@@ -142,6 +143,7 @@ resources:
     rozhraní Seelen.
   discover: Objevte další zdroje
   export: Exportní zdroj
+  import_wallpapers: Import místních tapet
   open_folder: Otevření složky se zdroji
   outdated: >-
     Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a
@@ -258,13 +260,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Tapety
+  blur: Rozmazání
+  contrast: Kontrast
   enable: Povolit správce tapet
+  fit:
+    contain: Obsahuje
+    cover: Obálka
+    fill: Naplňte
+  flipHorizontal: Flip Horizontální
+  flipVertical: Flip Vertical
   hours: hodiny
   interval: Změňte tapetu každých
   minutes: minuty
   no_background: Prázdná prezentace, použití pozadí motivu.
+  objectFit: Pozadí Fit
+  objectPosition: Pozice v pozadí
+  overlayColor: Barva překrytí
+  overlayMixBlendMode: Režim prolnutí překryvné směsi
+  playback: Rychlost přehrávání
+  position:
+    bottom: Spodní část
+    center: Středisko
+    left: Vlevo
+    right: Vpravo
+    top: Nahoru
   random: Randomize prezentace
+  saturation: Nasycení
   seconds: sekundy
+  withOverlay: S překrytím
 weg:
   auto_hide: Automatické skrytí
   delay_to_hide: Zpoždění schování

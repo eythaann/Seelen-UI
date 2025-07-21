@@ -14,6 +14,11 @@ resource:
   downloading_body: Bu bir neçə saniyə çəkə bilər, xahiş edirəm pəncərəni bağlamayın.
   enable: Aktivləşdirmək
 runtime:
+  corrupted_data: Zərərli məlumatlar
+  corrupted_file: >-
+    Bunun əvəzinə standart dəyərlərdən istifadə edərək bir konfiqurasiya faylı
+    pozulur.
+  corrupted_file_path: Pozulmuş fayl yolu
   download: Yükləmə səhifəsinə keçin
   not_found: WebView2 İcra vaxtı tapılmadı
   not_found_description: Seelen UI Webview2 Runtime tələb edir. Zəhmət olmasa quraşdırın.

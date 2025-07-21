@@ -5,13 +5,13 @@ import { NavLink, Route, Routes } from 'react-router';
 import cs from './infra.module.css';
 
 import { RoutePath } from '../../components/navigation/routes';
-import { ResourceKindIcon } from './common';
 import { IconPacksView } from './IconPacks';
 import { PluginsView } from './Plugins';
+import { ResourceIcon } from './ResourceCard';
 import { SoundPacksView } from './SoundPacks';
-import { ThemesView } from './Themes';
+import { ThemesView } from './Theme/AllView';
 import { AllWallpapersView } from './Wallpapers/AllView';
-import { WidgetsView } from './Widgets';
+import { WidgetsView } from './Widget/AllView';
 
 const kinds: ResourceKind[] = ['Theme', 'Plugin', 'Widget', 'IconPack', 'Wallpaper', 'SoundPack'];
 
@@ -36,7 +36,7 @@ function KindSelector() {
     <div className={cs.kindSelector}>
       {kinds.map((kind) => (
         <NavLink key={kind} to={`${RoutePath.Resource}/${kind.toLowerCase()}`} className={cs.kind}>
-          <ResourceKindIcon kind={kind} />
+          <ResourceIcon kind={kind} />
           <b>{t(`header.labels.${kind.toLowerCase()}`)}</b>
         </NavLink>
       ))}

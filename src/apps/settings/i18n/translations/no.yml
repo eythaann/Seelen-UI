@@ -105,6 +105,7 @@ general:
     selected: Aktive temaer
 header:
   labels:
+    config: Konfigurasjoner
     developer: For utviklere
     extras: Ekstrautstyr
     general: Generell
@@ -142,6 +143,7 @@ resources:
     ordentlig.
   discover: Oppdag flere ressurser
   export: Eksportressurs
+  import_wallpapers: Importer lokale bakgrunnsbilder
   open_folder: Åpne ressursmappe
   outdated: >-
     Denne ressursen ble designet for en eldre versjon av Seelen UI og fungerer
@@ -262,13 +264,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Bakgrunnsbilder
+  blur: Uskarpe
+  contrast: Kontrast
   enable: Aktiver bakgrunnssjef
+  fit:
+    contain: Inneholde
+    cover: Dekke
+    fill: Fylle
+  flipHorizontal: Flip horisontalt
+  flipVertical: Flip vertikal
   hours: timer
   interval: Endre bakgrunnsbilde hver
   minutes: minutter
   no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
+  objectFit: Bakgrunns passform
+  objectPosition: Bakgrunnsposisjon
+  overlayColor: Overleggsfarge
+  overlayMixBlendMode: Overlegg blandingsmodus
+  playback: Avspillingshastighet
+  position:
+    bottom: Bunn
+    center: Senter
+    left: Igjen
+    right: Høyre
+    top: Topp
   random: Randomiser lysbildefremvisning
+  saturation: Metning
   seconds: sekunder
+  withOverlay: Med overlegg
 weg:
   auto_hide: Skjul automatisk
   delay_to_hide: Utsett å skjule

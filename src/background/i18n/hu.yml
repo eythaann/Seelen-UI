@@ -14,6 +14,9 @@ resource:
   downloading_body: Ez eltarthat néhány másodpercig, kérjük, ne zárja be az ablakot.
   enable: Engedélyezze a
 runtime:
+  corrupted_data: Hibás adatok
+  corrupted_file: Egy konfigurációs fájl sérült, helyette alapértelmezett értékeket használ.
+  corrupted_file_path: Megrongált fájl elérési útvonal
   download: Menjen a letöltési oldalra
   not_found: A WebView2 futási környezet nem található
   not_found_description: >-

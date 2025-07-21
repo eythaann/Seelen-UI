@@ -105,6 +105,7 @@ general:
     selected: క్రియాశీల థీమ్‌లు
 header:
   labels:
+    config: ఆకృతీకరణలు
     developer: డెవలపర్‌ల కోసం
     extras: ఎక్స్‌ట్రాలు
     general: జనరల్
@@ -140,6 +141,7 @@ resources:
   app_outdated: ఈ వనరు సరిగ్గా పనిచేయడానికి సీలెన్ UI యొక్క క్రొత్త వెర్షన్ అవసరం.
   discover: మరిన్ని వనరులను కనుగొనండి
   export: ఎగుమతి వనరు
+  import_wallpapers: స్థానిక వాల్‌పేపర్‌లను దిగుమతి చేయండి
   open_folder: ఓపెన్ రిసోర్స్ ఫోల్డర్
   outdated: >-
     ఈ వనరు సీలెన్ UI యొక్క పాత వెర్షన్ కోసం రూపొందించబడింది మరియు సరిగ్గా
@@ -258,13 +260,34 @@ vd:
     seelen: సీలెన్
 wall:
   backgrounds: వాల్‌పేపర్లు
+  blur: బ్లర్
+  contrast: దీనికి విరుద్ధంగా
   enable: వాల్పేపర్ మేనేజర్‌ను ప్రారంభించండి
+  fit:
+    contain: కలిగి
+    cover: కవర్
+    fill: పూరించండి
+  flipHorizontal: క్షితిజ సమాంతరంగా తిప్పండి
+  flipVertical: ఫ్లిప్ నిలువు
   hours: గంటలు
   interval: ప్రతి వాల్‌పేపర్‌ను మార్చండి
   minutes: నిమిషాలు
   no_background: ఖాళీ స్లైడ్‌షో, బదులుగా థీమ్ యొక్క నేపథ్యాన్ని ఉపయోగించి.
+  objectFit: నేపథ్య సరిపోతుంది
+  objectPosition: నేపథ్య స్థానం
+  overlayColor: అతివ్యాప్తి రంగు
+  overlayMixBlendMode: అతివ్యాప్తి మిక్స్ బ్లెండ్ మోడ్
+  playback: ప్లేబ్యాక్ వేగం
+  position:
+    bottom: దిగువ
+    center: కేంద్రం
+    left: ఎడమ
+    right: కుడి
+    top: టాప్
   random: రాండమైజ్ స్లైడ్‌షో
+  saturation: సంతృప్తత
   seconds: సెకన్లు
+  withOverlay: అతివ్యాప్తితో
 weg:
   auto_hide: ఆటో దాచు
   delay_to_hide: దాచడానికి ఆలస్యం

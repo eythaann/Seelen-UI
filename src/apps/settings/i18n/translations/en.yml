@@ -104,6 +104,7 @@ general:
     selected: Active Themes
 header:
   labels:
+    config: Configurations
     developer: For developers
     extras: Extras
     general: General
@@ -120,7 +121,6 @@ header:
     virtual_desk: Virtual Desktops
     wallpaper: Wallpapers
     widget: Widgets
-    config: Configurations
 home:
   new_resources: New Resources
 inherit: Inherit
@@ -140,6 +140,7 @@ resources:
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
   discover: Discover more resources
   export: Export Resource
+  import_wallpapers: Import local wallpapers
   open_folder: Open resource folder
   outdated: >-
     This resource was designed for an older version of Seelen UI and might not
@@ -256,34 +257,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Wallpapers
-  enable: Enable Wallpaper Manager
-  hours: hours
-  interval: Change wallpaper every
-  minutes: minutes
-  no_background: Empty slideshow, using theme's background instead.
-  random: Randomize slideshow
-  seconds: seconds
-  playback: Playback speed
-  flipHorizontal: Flip Horizontal
-  flipVertical: Flip Vertical
   blur: Blur
-  objectFit: Background Fit
-  objectPosition: Background Position
+  contrast: Contrast
+  enable: Enable Wallpaper Manager
   fit:
     contain: Contain
     cover: Cover
     fill: Fill
+  flipHorizontal: Flip Horizontal
+  flipVertical: Flip Vertical
+  hours: hours
+  interval: Change wallpaper every
+  minutes: minutes
+  no_background: Empty slideshow, using theme's background instead.
+  objectFit: Background Fit
+  objectPosition: Background Position
+  overlayColor: Overlay Color
+  overlayMixBlendMode: Overlay Mix Blend Mode
+  playback: Playback speed
   position:
+    bottom: Bottom
+    center: Center
     left: Left
     right: Right
     top: Top
-    bottom: Bottom
-    center: Center
+  random: Randomize slideshow
   saturation: Saturation
-  contrast: Contrast
+  seconds: seconds
   withOverlay: With Overlay
-  overlayMixBlendMode: Overlay Mix Blend Mode
-  overlayColor: Overlay Color
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide

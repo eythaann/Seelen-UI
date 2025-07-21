@@ -104,6 +104,7 @@ general:
     selected: Aktiivsed teemad
 header:
   labels:
+    config: Konfiguratsioonid
     developer: Arendajatele
     extras: Lisad
     general: Üld-
@@ -139,6 +140,7 @@ resources:
   app_outdated: Selle ressursi korralikuks kasutamiseks on vaja Seelen UI uuemat versiooni.
   discover: Avasta rohkem ressursse
   export: Ekspordi ressurss
+  import_wallpapers: Kohalike taustapiltide importimine
   open_folder: Avage ressursside kaust
   outdated: >-
     See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi
@@ -257,13 +259,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Taustapildid
+  blur: Blur
+  contrast: Kontrast
   enable: Luba tapeedihaldur
+  fit:
+    contain: Sisaldab
+    cover: Kaane
+    fill: Täitke
+  flipHorizontal: Flip Horisontaalne
+  flipVertical: Flip vertikaalne
   hours: tööaeg
   interval: Vahetage tapeeti iga
   minutes: protokoll
   no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
+  objectFit: Taust sobivus
+  objectPosition: Taustapositsioon
+  overlayColor: Kattekihi värv
+  overlayMixBlendMode: Overlay Mix segamisrežiim
+  playback: Taasesituse kiirus
+  position:
+    bottom: Alumine
+    center: Keskus
+    left: Vasakpoolne
+    right: Õigus
+    top: Top
   random: Randoriseeri slaidiseanss
+  saturation: Küllastumine
   seconds: sekundid
+  withOverlay: Koos kattekihiga
 weg:
   auto_hide: Automaatne peida
   delay_to_hide: Viivitage peitmine

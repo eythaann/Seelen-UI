@@ -107,6 +107,7 @@ general:
     selected: Faol mavzular
 header:
   labels:
+    config: Konfiguratsiya
     developer: Ishlab chiquvchilar uchun
     extras: Ekstraza
     general: Umumiy
@@ -142,6 +143,7 @@ resources:
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
   discover: Ko'proq resurslarni kashf eting
   export: Eksport manbai
+  import_wallpapers: Mahalliy fon rasmlarini import qilish
   open_folder: Resurslar jildini oching
   outdated: >-
     Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri
@@ -262,13 +264,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Fon rasmlari
+  blur: Puflamoq
+  contrast: Qarama-qarshilik
   enable: Fon rasmi menejerini yoqing
+  fit:
+    contain: O'z ichiga olgan
+    cover: Qopqoq
+    fill: To'ldirmoq
+  flipHorizontal: Gorizontalental
+  flipVertical: Vertikal vertikal
   hours: soat
   interval: Har bir devor rasmini o'zgartiring
   minutes: daqiqa
   no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
+  objectFit: Fon mos
+  objectPosition: Fon holati
+  overlayColor: Overlay rang
+  overlayMixBlendMode: Ortiqcha aralashtirish rejimini aralashtiring
+  playback: Qayta tinglash tezligi
+  position:
+    bottom: Pastki
+    center: Markaz
+    left: Chapda
+    right: To'g'ri
+    top: Eng yuqori
   random: Tasodifiy slayd-shou
+  saturation: To'yinganlik
   seconds: soniya
+  withOverlay: Qopqoq bilan
 weg:
   auto_hide: Avtomatik yashirish
   delay_to_hide: Yashirish uchun kechikish

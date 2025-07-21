@@ -102,6 +102,7 @@ general:
     selected: 현재 테마
 header:
   labels:
+    config: 구성
     developer: 개발자용
     extras: 추가 정보
     general: 일반
@@ -137,6 +138,7 @@ resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
   discover: 더 많은 리소스 살펴보기
   export: 리소스 내보내기
+  import_wallpapers: 로컬 배경화면 가져오기
   open_folder: 리소스 폴더 열기
   outdated: 이 리소스는 이전 버전의 Seelen UI용으로 설계되었으며 제대로 작동하지 않을 수 있습니다.
 save: 저장
@@ -247,13 +249,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: 배경화면
+  blur: 블러
+  contrast: 대비
   enable: 배경화면 관리자 활성화
+  fit:
+    contain: 포함
+    cover: 커버
+    fill: 채우기
+  flipHorizontal: 가로로 뒤집기
+  flipVertical: 세로로 뒤집기
   hours: 시간
   interval: 배경화면 변경 주기
   minutes: 분
   no_background: 배경화면이 없으면, 테마에 내장된 배경화면을 대신 사용합니다.
+  objectFit: 배경 맞춤
+  objectPosition: 배경 위치
+  overlayColor: 오버레이 색상
+  overlayMixBlendMode: 오버레이 믹스 블렌드 모드
+  playback: 재생 속도
+  position:
+    bottom: 하단
+    center: 센터
+    left: 왼쪽
+    right: 오른쪽
+    top: Top
   random: 슬라이드 쇼 무작위
+  saturation: 채도
   seconds: 초
+  withOverlay: 오버레이 사용
 weg:
   auto_hide: 자동 숨기기
   delay_to_hide: 숨기기 지연

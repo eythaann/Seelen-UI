@@ -14,6 +14,9 @@ resource:
   downloading_body: Cela peut prendre quelques secondes, ne fermez pas la fenêtre.
   enable: Activer
 runtime:
+  corrupted_data: Données corrompues
+  corrupted_file: Un fichier de configuration est corrompu et utilise des valeurs par défaut.
+  corrupted_file_path: Chemin d'accès au fichier corrompu
   download: Aller à la page de téléchargement
   not_found: Le moteur d'exécution WebView2 est introuvable
   not_found_description: >-

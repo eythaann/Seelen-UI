@@ -102,6 +102,7 @@ general:
     selected: ธีมที่ใช้งานอยู่
 header:
   labels:
+    config: การกำหนดค่า
     developer: สำหรับนักพัฒนา
     extras: ความพิเศษ
     general: ทั่วไป
@@ -137,6 +138,7 @@ resources:
   app_outdated: ทรัพยากรนี้ต้องการ Seelen UI รุ่นใหม่กว่าเพื่อทำงานอย่างถูกต้อง
   discover: ค้นพบทรัพยากรเพิ่มเติม
   export: ทรัพยากรส่งออก
+  import_wallpapers: นำเข้าวอลเปเปอร์ในท้องถิ่น
   open_folder: เปิดโฟลเดอร์ทรัพยากร
   outdated: ทรัพยากรนี้ได้รับการออกแบบมาสำหรับ Seelen UI รุ่นเก่าและอาจทำงานไม่ถูกต้อง
 save: บันทึก
@@ -250,13 +252,34 @@ vd:
     seelen: เซเล่น
 wall:
   backgrounds: วอลเปเปอร์
+  blur: เบลอ
+  contrast: ตัดกัน
   enable: เปิดใช้งานผู้จัดการวอลล์เปเปอร์
+  fit:
+    contain: บรรจุ
+    cover: ปิดบัง
+    fill: เติม
+  flipHorizontal: พลิกแนวนอน
+  flipVertical: พลิกแนวตั้ง
   hours: ชั่วโมง
   interval: เปลี่ยนวอลล์เปเปอร์ทุก ๆ
   minutes: นาที
   no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
+  objectFit: พื้นหลังพอดี
+  objectPosition: ตำแหน่งพื้นหลัง
+  overlayColor: สีซ้อนทับ
+  overlayMixBlendMode: โหมดผสมมิกซ์ซ้อนทับ
+  playback: ความเร็วในการเล่น
+  position:
+    bottom: ด้านล่าง
+    center: ศูนย์
+    left: ซ้าย
+    right: ขวา
+    top: สูงสุด
   random: สุ่มสไลด์โชว์
+  saturation: ความอิ่มตัว
   seconds: ไม่กี่วินาที
+  withOverlay: ด้วยการซ้อนทับ
 weg:
   auto_hide: ซ่อนอัตโนมัติ
   delay_to_hide: ล่าช้าในการซ่อน

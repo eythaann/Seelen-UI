@@ -14,6 +14,11 @@ resource:
   downloading_body: Może to potrwać kilka sekund, nie zamykaj okna.
   enable: Włącz
 runtime:
+  corrupted_data: Uszkodzone dane
+  corrupted_file: >-
+    Plik konfiguracyjny jest uszkodzony i zamiast niego używane są wartości
+    domyślne.
+  corrupted_file_path: Uszkodzona ścieżka pliku
   download: Przejdź do strony pobierania
   not_found: Nie znaleziono środowiska uruchomieniowego WebView2
   not_found_description: >-

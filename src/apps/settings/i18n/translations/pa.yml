@@ -101,6 +101,7 @@ general:
     selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ
 header:
   labels:
+    config: ਸੰਰਚਨਾ
     developer: ਡਿਵੈਲਪਰਾਂ ਲਈ
     extras: ਵਾਧੂ
     general: ਜਨਰਲ
@@ -136,6 +137,7 @@ resources:
   app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ
   export: ਨਿਰਯਾਤ ਸਰੋਤ
+  import_wallpapers: ਸਥਾਨਕ ਵਾਲਪੇਪਰ ਆਯਾਤ ਕਰੋ
   open_folder: ਓਪਨ ਸਰੋਤ ਫੋਲਡਰ
   outdated: >-
     ਇਹ ਸਰੋਤ ਸੰਸਥ UI ਦੇ ਪੁਰਾਣੇ ਸੰਸਕਰਣ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਸੀ ਅਤੇ ਸ਼ਾਇਦ ਸਹੀ ਤਰ੍ਹਾਂ
@@ -254,13 +256,34 @@ vd:
     seelen: ਵੇਖਿਆ
 wall:
   backgrounds: ਵਾਲਪੇਪਰ
+  blur: ਧੁੰਦਲਾ
+  contrast: ਇਸ ਦੇ ਉਲਟ
   enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  fit:
+    contain: ਸ਼ਾਮਲ
+    cover: ਕਵਰ
+    fill: ਭਰੋ
+  flipHorizontal: ਹਰੀਜੱਟਲ ਫਲਿੱਪ ਕਰੋ
+  flipVertical: ਲੰਬਕਾਰੀ ਫਲਿੱਪ ਕਰੋ
   hours: ਘੰਟੇ
   interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
   minutes: ਮਿੰਟ
   no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
+  objectFit: ਪਿਛੋਕੜ ਫਿਟ
+  objectPosition: ਪਿਛੋਕੜ ਦੀ ਸਥਿਤੀ
+  overlayColor: ਓਵਰਲੇ ਰੰਗ
+  overlayMixBlendMode: ਓਵਰਲੇਅ ਮਿਕਸ ਬਰੇਂਡ ਮੋਡ
+  playback: ਪਲੇਬੈਕ ਸਪੀਡ
+  position:
+    bottom: ਤਲ
+    center: ਕੇਂਦਰ
+    left: ਖੱਬੇ
+    right: ਸੱਜੇ
+    top: ਸਿਖਰ
   random: ਸਿਲਾਈਡ ਸਲਾਈਡ ਸ਼ੋਅ
+  saturation: ਸੰਤ੍ਰਿਪਤ
   seconds: ਸਕਿੰਟ
+  withOverlay: ਓਵਰਲੇਅ ਦੇ ਨਾਲ
 weg:
   auto_hide: ਆਟੋ ਓਹਲੇ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ

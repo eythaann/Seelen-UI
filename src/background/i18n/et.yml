@@ -14,6 +14,9 @@ resource:
   downloading_body: See võib võtta paar sekundit, palun ärge sulgege akent.
   enable: Lubage
 runtime:
+  corrupted_data: Vigastatud andmed
+  corrupted_file: Konfiguratsioonifail on rikutud, kasutades selle asemel vaikeväärtusi.
+  corrupted_file_path: Vigastatud faili tee
   download: Minge allalaadimislehele
   not_found: WebView2 käitusaega ei leitud
   not_found_description: Seeleni kasutajaliides nõuab Webview2 Runtime'i. Palun installige see.

@@ -104,6 +104,7 @@ general:
     selected: Mandhari Inayotumika
 header:
   labels:
+    config: Usanidi
     developer: Kwa watengenezaji
     extras: Ziada
     general: Mkuu
@@ -139,6 +140,7 @@ resources:
   app_outdated: Rasilimali hii inahitaji toleo jipya la Seelen UI kufanya kazi vizuri.
   discover: Gundua rasilimali zaidi
   export: Rasilimali ya kuuza nje
+  import_wallpapers: Ingiza wallpapers za mitaa
   open_folder: Fungua folda ya rasilimali
   outdated: >-
     Rasilimali hii ilibuniwa kwa toleo la zamani la Seelen UI na linaweza
@@ -254,13 +256,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Wallpapers
+  blur: Blur
+  contrast: Tofauti
   enable: Washa Meneja wa Ukuta
+  fit:
+    contain: Kuwa na
+    cover: Funika
+    fill: Jaza
+  flipHorizontal: Flip usawa
+  flipVertical: Flip wima
   hours: masaa
   interval: Badilisha Ukuta kila
   minutes: dakika
   no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
+  objectFit: Msingi wa kifafa
+  objectPosition: Msimamo wa nyuma
+  overlayColor: Rangi ya juu
+  overlayMixBlendMode: Njia ya mchanganyiko wa mchanganyiko
+  playback: Kasi ya kucheza
+  position:
+    bottom: Chini
+    center: Kituo
+    left: Kushoto
+    right: Kulia
+    top: Juu
   random: Sisitiza slideshow
+  saturation: Kueneza
   seconds: sekunde
+  withOverlay: Na overlay
 weg:
   auto_hide: Kujificha kiotomatiki
   delay_to_hide: Kuchelewa kujificha

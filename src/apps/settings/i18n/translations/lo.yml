@@ -103,6 +103,7 @@ general:
     selected: ຮູບແບບການເຄື່ອນໄຫວ
 header:
   labels:
+    config: ການຕັ້ງຄ່າການຕັ້ງຄ່າ
     developer: ສໍາລັບນັກພັດທະນາ
     extras: ພິເສດ
     general: ທົ່ວໄປ
@@ -138,6 +139,7 @@ resources:
   app_outdated: ຊັບພະຍາກອນນີ້ຮຽກຮ້ອງໃຫ້ມີ Searen ລຸ້ນໃຫມ່ UI ໃຫ້ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
   discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ
   export: ຊັບພະຍາກອນການສົ່ງອອກ
+  import_wallpapers: ນໍາເຂົ້າຮູບວໍເປເປີທ້ອງຖິ່ນ
   open_folder: Open Opence Folder
   outdated: >-
     ຊັບພະຍາກອນນີ້ໄດ້ຖືກອອກແບບມາສໍາລັບ Apen ຂອງ Searen UI
@@ -255,13 +257,34 @@ vd:
     seelen: ຊ່າງຕັດ
 wall:
   backgrounds: ຮູບວໍເປເປີ
+  blur: ມົວ
+  contrast: ຄວາມແຕກຕ່າງ
   enable: ເປີດໃຊ້ Wallpaper Manager
+  fit:
+    contain: ບັນຈຸ
+    cover: ຝາປິດ
+    fill: ຕື່ມຂໍ້ມູນ
+  flipHorizontal: flip ອອກຕາມລວງນອນ
+  flipVertical: ພິກແນວຕັ້ງ
   hours: ຊົ່ວໂມງ
   interval: ປ່ຽນຮູບວໍເປເປີທຸກ
   minutes: ນາທີ
   no_background: ການສະໄລ້ທີ່ເປົ່າ, ໂດຍໃຊ້ພື້ນຫລັງຂອງຫົວຂໍ້ແທນ.
+  objectFit: ປະຫວັດຄວາມເປັນມາ
+  objectPosition: ຕໍາແຫນ່ງພື້ນຫລັງ
+  overlayColor: ສີ Overlay
+  overlayMixBlendMode: ຮູບແບບການຜະສົມຜະສານແບບປະສົມ
+  playback: ຄວາມໄວ PlaySback
+  position:
+    bottom: ດ້ານລຸ່ມ
+    center: ສູນກາງ
+    left: ກ່ໍາ
+    right: ຖືກຕ້ອງ
+    top: ທາງເທີງ
   random: ແບບສະໄລດູນແບບສຸ່ມ
+  saturation: ອີ່ມຕົວ
   seconds: ວິນາທີ
+  withOverlay: ດ້ວຍການຊ້ອນກັນ
 weg:
   auto_hide: ເຊື່ອງອັດຕະໂນມັດ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ

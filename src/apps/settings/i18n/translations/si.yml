@@ -106,6 +106,7 @@ general:
     selected: ක්රියාකාරී තේමාවන්
 header:
   labels:
+    config: වින්යාසයන්
     developer: සංවර්ධකයින් සඳහා
     extras: අමතර
     general: ජනරාල්
@@ -141,6 +142,7 @@ resources:
   app_outdated: මෙම සම්පතට සින්ලන් යූඅයි හි නවතම අනුවාදයක් නිසියාකාරව වැඩ කිරීමට අවශ්ය වේ.
   discover: තවත් සම්පත් සොයා ගන්න
   export: අපනයන සම්පත
+  import_wallpapers: දේශීය බිතුපත් ආනයනය කරන්න
   open_folder: සම්පත් ෆෝල්ඩරය විවෘත කරන්න
   outdated: >-
     මෙම සම්පත නිර්මාණය කර ඇත්තේ සීලන් UI හි පැරණි අනුවාදයක් සඳහා වන අතර නිසි ලෙස
@@ -257,13 +259,34 @@ vd:
     seelen: සීලන්
 wall:
   backgrounds: බිතුපත්
+  blur: බ්ලර්
+  contrast: වෙනස
   enable: බිතුපත් කළමනාකරු සක්රීය කරන්න
+  fit:
+    contain: අඩංගු
+    cover: ආවරණය
+    fill: පුරවන්න
+  flipHorizontal: ෆ්ලිප් හොරයිසොන්ටමල්
+  flipVertical: සිරස් රෝග
   hours: පැය
   interval: සෑම කෙනෙකුම බිතුපත වෙනස් කරන්න
   minutes: මිනිත්තු
   no_background: හිස් විනිවිදක දර්ශනය, ඒ වෙනුවට තේමාවේ පසුබිම භාවිතා කිරීම.
+  objectFit: පසුබිම් යෝග්යතාවය
+  objectPosition: පසුබිම් පිහිටීම
+  overlayColor: ආවරණයේ වර්ණය
+  overlayMixBlendMode: උඩිස් මිශ්ර මිශ්ර කිරීමේ මාදිලිය
+  playback: ප්ලේබැක් වේගය
+  position:
+    bottom: පහළ
+    center: මධ්යස්ථානය
+    left: වමට
+    right: අයිතිය
+    top: ඉහළට
   random: සසම්භාවී විනිවිදක දර්ශනය
+  saturation: සන්තෘප්තිය
   seconds: තත්පර
+  withOverlay: ආවරණය සමඟ
 weg:
   auto_hide: ස්වයංක්‍රීය සඟවන්න
   delay_to_hide: සැඟවීමට ප්රමාද

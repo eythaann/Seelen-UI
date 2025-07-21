@@ -98,6 +98,7 @@ general:
     selected: 活跃主题
 header:
   labels:
+    config: 配置
     developer: 针对开发人员
     extras: 额外内容
     general: 常规设置
@@ -133,6 +134,7 @@ resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
   discover: 发现更多资源
   export: 出口资源
+  import_wallpapers: 导入本地壁纸
   open_folder: 打开资源文件夹
   outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
 save: 保存
@@ -243,13 +245,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: 壁纸
+  blur: 模糊
+  contrast: 对比
   enable: 启用壁纸管理器
+  fit:
+    contain: 包含
+    cover: 封面
+    fill: 填写
+  flipHorizontal: 水平翻转
+  flipVertical: 垂直翻转
   hours: 小时
   interval: 更换壁纸的时间间隔
   minutes: 分钟
   no_background: 空幻灯片，使用主题背景。
+  objectFit: 背景适合
+  objectPosition: 背景职位
+  overlayColor: 叠加颜色
+  overlayMixBlendMode: 叠加混合混合模式
+  playback: 播放速度
+  position:
+    bottom: 底部
+    center: 中心
+    left: 左侧
+    right: 对
+    top: 返回顶部
   random: 随机更改壁纸
+  saturation: 饱和度
   seconds: 秒
+  withOverlay: 带覆盖层
 weg:
   auto_hide: 自动隐藏
   delay_to_hide: 隐藏延迟

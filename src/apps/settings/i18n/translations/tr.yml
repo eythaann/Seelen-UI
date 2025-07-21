@@ -105,6 +105,7 @@ general:
     selected: Aktif Temalar
 header:
   labels:
+    config: Konfigürasyonlar
     developer: Geliştiriciler için
     extras: Ekstralar
     general: Genel
@@ -142,6 +143,7 @@ resources:
     gerekir.
   discover: Daha fazla kaynak keşfedin
   export: Kaynak Dışa Aktarımı
+  import_wallpapers: Yerel duvar kağıtlarını içe aktarma
   open_folder: Kaynak klasörünü aç
   outdated: >-
     Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün
@@ -260,13 +262,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Duvar Kağıtları
+  blur: Bulanıklık
+  contrast: Kontrast
   enable: Duvar Kağıdı Yöneticisini Etkinleştir
+  fit:
+    contain: Konteyner
+    cover: Kapak
+    fill: Doldur
+  flipHorizontal: Yatay Çevirme
+  flipVertical: Dikey Çevirme
   hours: saat
   interval: Duvar kağıdı değiştirme aralığı
   minutes: dakika
   no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
+  objectFit: Arka Plan Uyumu
+  objectPosition: Arka Plan Pozisyonu
+  overlayColor: Kaplama Rengi
+  overlayMixBlendMode: Kaplama Karışım Karışım Modu
+  playback: Oynatma hızı
+  position:
+    bottom: Alt
+    center: Merkez
+    left: Sol
+    right: Doğru.
+    top: Üst
   random: Rastgele slayt gösterisi
+  saturation: Doygunluk
   seconds: saniye
+  withOverlay: Kaplama ile
 weg:
   auto_hide: Otomatik Gizle
   delay_to_hide: Gizleme gecikmesi

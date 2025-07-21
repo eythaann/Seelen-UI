@@ -10,6 +10,9 @@ resource:
   downloading_body: 몇 초 정도 소요될 수 있으니 창을 닫지 마세요.
   enable: 사용
 runtime:
+  corrupted_data: 손상된 데이터
+  corrupted_file: 구성 파일이 손상되어 기본값 대신 기본값을 사용합니다.
+  corrupted_file_path: 손상된 파일 경로
   download: 다운로드 페이지로 이동
   not_found: WebView2 런타임을 찾을 수 없습니다.
   not_found_description: Seelen UI에는 Webview2 런타임이 필요합니다. 설치해 주세요.

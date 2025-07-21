@@ -12,6 +12,9 @@ resource:
   downloading_body: قد يستغرق ذلك بضع ثوانٍ، يُرجى عدم إغلاق النافذة.
   enable: التمكين
 runtime:
+  corrupted_data: بيانات تالفة
+  corrupted_file: ملف التكوين تالف، باستخدام قيم افتراضية بدلاً من ذلك.
+  corrupted_file_path: مسار الملف التالف
   download: انتقل إلى صفحة التنزيل
   not_found: لم يتم العثور على وقت تشغيل WebView2
   not_found_description: تتطلب واجهة مستخدم Seelen وقت تشغيل Webview2. الرجاء تثبيته.

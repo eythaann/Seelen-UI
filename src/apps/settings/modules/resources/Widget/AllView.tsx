@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router';
 
-import cs from './infra.module.css';
+import cs from '../infra.module.css';
 
-import { RootSelectors } from '../shared/store/app/selectors';
+import { RootSelectors } from '../../shared/store/app/selectors';
 
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { ResourceCard } from './common';
+import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
+import { ResourceCard } from '../ResourceCard';
 
 export function WidgetsView() {
   const widgets = useSelector(RootSelectors.widgets);
@@ -32,6 +32,16 @@ export function WidgetsView() {
             }}
           >
             <Icon iconName="PiFoldersDuotone" />
+          </Button>
+        </SettingsOption>
+        <SettingsOption>
+          <span>{t('resources.discover')}:</span>
+          <Button
+            href="https://seelen.io/resources/s?category=Widget"
+            target="_blank"
+            type="link"
+          >
+            https://seelen.io/resources/s?category=Widget
           </Button>
         </SettingsOption>
       </SettingsGroup>

@@ -14,6 +14,11 @@ resource:
   downloading_body: Isso pode levar alguns segundos, mas não feche a janela.
   enable: Habilitar
 runtime:
+  corrupted_data: Dados corrompidos
+  corrupted_file: >-
+    Um arquivo de configuração está corrompido, usando valores padrão em seu
+    lugar.
+  corrupted_file_path: Caminho de arquivo corrompido
   download: Vá para a página de download
   not_found: WebView2 Runtime não encontrado
   not_found_description: A Seelen UI requer o WebView2 Runtime. Por favor, instale-o.

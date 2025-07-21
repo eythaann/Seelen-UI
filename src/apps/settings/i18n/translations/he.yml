@@ -103,6 +103,7 @@ general:
     selected: ערכות נושא פעילות
 header:
   labels:
+    config: תצורות
     developer: למפתחים
     extras: תוספות
     general: כללי
@@ -138,6 +139,7 @@ resources:
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
   discover: לגלות משאבים נוספים
   export: משאב ייצוא
+  import_wallpapers: ייבא טפטים מקומיים
   open_folder: פתיחת תיקיית משאבים
   outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.
 save: להציל
@@ -251,13 +253,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: טפטים
+  blur: לְטַשׁטֵשׁ
+  contrast: לְהַשְׁווֹת
   enable: אפשר מנהל טפטים
+  fit:
+    contain: לְהַכִיל
+    cover: לְכַסוֹת
+    fill: לְמַלֵא
+  flipHorizontal: הפוך אופקי
+  flipVertical: הפוך אנכי
   hours: שעות
   interval: החלף טפטים כל
   minutes: דקות
   no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
+  objectFit: כושר רקע
+  objectPosition: מיקום רקע
+  overlayColor: צבע שכבה
+  overlayMixBlendMode: מצב תערובת תערובת שכבה
+  playback: מהירות ההפעלה
+  position:
+    bottom: תַחתִית
+    center: מֶרְכָּז
+    left: שְׁמֹאל
+    right: יָמִינָה
+    top: רֹאשׁ
   random: מצגת שקופיות אקראית
+  saturation: רִוּוּי
   seconds: שניות
+  withOverlay: עם שכבת -על
 weg:
   auto_hide: הסתר אוטומטי
   delay_to_hide: עיכוב להסתיר

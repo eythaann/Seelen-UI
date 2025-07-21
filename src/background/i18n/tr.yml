@@ -14,6 +14,11 @@ resource:
   downloading_body: Bu işlem birkaç saniye sürebilir, lütfen pencereyi kapatmayın.
   enable: Etkinleştir
 runtime:
+  corrupted_data: Bozuk veriler
+  corrupted_file: >-
+    Bir yapılandırma dosyası bozulmuş, bunun yerine varsayılan değerler
+    kullanılıyor.
+  corrupted_file_path: Bozuk dosya yolu
   download: İndirme sayfasına git
   not_found: WebView2 Çalışma Zamanı bulunamadı
   not_found_description: >-

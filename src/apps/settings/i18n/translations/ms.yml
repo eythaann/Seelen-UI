@@ -105,6 +105,7 @@ general:
     selected: Tema Aktif
 header:
   labels:
+    config: Konfigurasi
     developer: Untuk pemaju
     extras: Tambahan
     general: Umum
@@ -142,6 +143,7 @@ resources:
     baik.
   discover: Cari lebih banyak sumber
   export: Sumber Eksport
+  import_wallpapers: Mengimport kertas dinding tempatan
   open_folder: Buka Folder Sumber
   outdated: >-
     Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi
@@ -260,13 +262,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Kertas dinding
+  blur: Kabur
+  contrast: Kontras
   enable: Dayakan Pengurus Wallpaper
+  fit:
+    contain: Mengandungi
+    cover: Penutup
+    fill: Mengisi
+  flipHorizontal: Flip mendatar
+  flipVertical: Flip menegak
   hours: jam
   interval: Tukar kertas dinding setiap
   minutes: minit
   no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
+  objectFit: Latar belakang sesuai
+  objectPosition: Kedudukan latar belakang
+  overlayColor: Warna overlay
+  overlayMixBlendMode: Mod campuran campuran overlay
+  playback: Kelajuan main balik
+  position:
+    bottom: Bawah
+    center: Pusat
+    left: Kiri
+    right: Betul
+    top: Atas
   random: Rawak tayangan slaid
+  saturation: Ketepuan
   seconds: saat
+  withOverlay: Dengan overlay
 weg:
   auto_hide: Menyembunyikan auto
   delay_to_hide: Bertangguh untuk bersembunyi

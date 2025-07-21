@@ -107,6 +107,7 @@ general:
     selected: Ակտիվ թեմաներ
 header:
   labels:
+    config: Կազմաձեւեր
     developer: Մշակողների համար
     extras: Լրացուցիչ նյութեր
     general: Ընդհանուր
@@ -142,6 +143,7 @@ resources:
   app_outdated: 'Այս ռեսուրսը պահանջում է Seelen UI- ի նոր տարբերակը `ճիշտ աշխատելու համար:'
   discover: Բացահայտեք ավելի շատ ռեսուրսներ
   export: Արտահանման ռեսուրս
+  import_wallpapers: Ներմուծեք տեղական պաստառներ
   open_folder: Բացեք ռեսուրսների թղթապանակ
   outdated: >-
     Այս ռեսուրսը նախատեսված էր Seelen UI- ի ավելի հին տարբերակի համար եւ կարող է
@@ -262,13 +264,34 @@ vd:
     seelen: Սեգեն
 wall:
   backgrounds: Պաստառներ
+  blur: Բութ
+  contrast: Հակադրություն
   enable: Միացրեք Պաստառների կառավարիչը
+  fit:
+    contain: Պարունակել
+    cover: Ծածկոց
+    fill: Լցնել
+  flipHorizontal: Ծխնելույզ հորիզոնական
+  flipVertical: Մատով ուղղահայաց
   hours: ժամ
   interval: Ամեն ինչ փոխեք պաստառ
   minutes: րոպե
   no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
+  objectFit: Ֆոնային տեղավորումը
+  objectPosition: Ֆոնային դիրքը
+  overlayColor: Ծածկույթի գույն
+  overlayMixBlendMode: Ծածկույթի խառնուրդի խառնուրդի ռեժիմ
+  playback: Նվագարկման արագություն
+  position:
+    bottom: Հատակից
+    center: Կենտրոն
+    left: Ձախ
+    right: Իրավունք
+    top: Գագաթ
   random: Պատահականացրեք սլայդերի ցուցադրումը
+  saturation: Հագեցում
   seconds: վայրկյան
+  withOverlay: Ծածկով
 weg:
   auto_hide: Ավտոմատ թաքցնել
   delay_to_hide: Հետաձգել թաքցնելը

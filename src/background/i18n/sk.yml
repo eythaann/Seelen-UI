@@ -14,6 +14,11 @@ resource:
   downloading_body: Môže to trvať niekoľko sekúnd, nezatvárajte okno.
   enable: Povolenie stránky
 runtime:
+  corrupted_data: Poškodené údaje
+  corrupted_file: >-
+    Konfiguračný súbor je poškodený a namiesto neho sa používajú predvolené
+    hodnoty.
+  corrupted_file_path: Poškodená cesta k súboru
   download: Prejdite na stránku sťahovania
   not_found: WebView2 Runtime sa nenašlo
   not_found_description: >-

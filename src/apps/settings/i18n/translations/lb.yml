@@ -105,6 +105,7 @@ general:
     selected: Aktiv Themen
 header:
   labels:
+    config: Konfiguratioun
     developer: Fir Entwéckler
     extras: Extras
     general: Generol
@@ -140,6 +141,7 @@ resources:
   app_outdated: Dës Ressource brauch eng nei Versioun vu Seelen Ui fir richteg ze schaffen.
   discover: Entdeckt méi Ressourcen
   export: Export Ressource
+  import_wallpapers: Import lokal Wallpapers
   open_folder: Oppen Ressource Dossier
   outdated: >-
     Dës Ressource gouf fir eng méi al Versioun vu seelen UI entworf a sech net
@@ -258,13 +260,34 @@ vd:
     seelen: Gesieg
 wall:
   backgrounds: Wallpapers
+  blur: Blour
+  contrast: Kontrad
   enable: Aktivéiert Wallpaper Manager
+  fit:
+    contain: Enthalen
+    cover: Zouzedoen
+    fill: Fëllt
+  flipHorizontal: Flip horizontal
+  flipVertical: Flip vertikal
   hours: Stonnen.
   interval: Änneren Wallpaper all
   minutes: Minutte vun der Minutten
   no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
+  objectFit: Hannergrond fit
+  objectPosition: Hannergrënn Positioun
+  overlayColor: Iwwerlauschteren Faarf
+  overlayMixBlendMode: Overlay Mix vermëschen Modus
+  playback: Spillversuch
+  position:
+    bottom: Siwenn
+    center: Center
+    left: Lénks
+    right: Riets
+    top: Uewen
   random: Zoufälleg Slideshow
+  saturation: Saturatioun
   seconds: Sekonnen
+  withOverlay: Mat Overlay
 weg:
   auto_hide: Automatesch
   delay_to_hide: Verspéidung ze verstoppen

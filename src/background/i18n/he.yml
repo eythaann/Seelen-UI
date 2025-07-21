@@ -12,6 +12,9 @@ resource:
   downloading_body: זה עשוי לקחת מספר שניות, אנא אל תסגור את החלון.
   enable: אפשר
 runtime:
+  corrupted_data: נתונים פגומים
+  corrupted_file: קובץ תצורה פגום, באמצעות ערכי ברירת מחדל במקום זאת.
+  corrupted_file_path: נתיב קובץ פגום
   download: הורדות
   not_found: זמן ריצה של WebView2 לא נמצא
   not_found_description: ממשק המשתמש של Seelen דורש זמן ריצה של Webview2. נא להתקין אותו.

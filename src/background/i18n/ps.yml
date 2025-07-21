@@ -14,6 +14,9 @@ resource:
   downloading_body: دا ممکن یو څو ثانیې ونیسي، مهرباني وکړئ کړکۍ بند کړئ.
   enable: وړ
 runtime:
+  corrupted_data: فاسد ډاټا
+  corrupted_file: د سازونې فایل فاسد شوی، پرځای یې د ډیفالټ ارزښتونو په کارولو سره.
+  corrupted_file_path: فاسد فایل لاره
   download: د ډاونلوډ پاڼې ته لاړ شئ
   not_found: WebView2 د چلولو وخت ونه موندل شو
   not_found_description: Seelen UI د Webview2 Runtime ته اړتیا لري. مهرباني وکړئ دا نصب کړئ.

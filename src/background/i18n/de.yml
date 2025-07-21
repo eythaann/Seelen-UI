@@ -14,6 +14,11 @@ resource:
   downloading_body: Dies kann ein paar Sekunden dauern, bitte schließen Sie das Fenster nicht.
   enable: Aktivieren Sie
 runtime:
+  corrupted_data: Beschädigte Daten
+  corrupted_file: >-
+    Eine Konfigurationsdatei ist beschädigt und verwendet stattdessen
+    Standardwerte.
+  corrupted_file_path: Korrupter Dateipfad
   download: Gehen Sie zur Download-Seite
   not_found: WebView2-Laufzeit nicht gefunden
   not_found_description: >-

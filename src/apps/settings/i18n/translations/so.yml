@@ -108,6 +108,7 @@ general:
     selected: Mawduucyada Firfircoon
 header:
   labels:
+    config: Qaabaynta
     developer: Loogu talagalay horumarka
     extras: Ka duwan daro
     general: Guud
@@ -145,6 +146,7 @@ resources:
     u shaqeynaya.
   discover: Soo hel ilo badan
   export: Ilaha dhoofinta
+  import_wallpapers: Soo dejiso waraaqaha boodhka ee maxalliga ah
   open_folder: Fur faylka furan
   outdated: >-
     Kheyraadkan waxaa loogu talagalay in nooc ka weyn oo ah Selelel Ui oo laga
@@ -264,13 +266,34 @@ vd:
     seelen: Sekelen
 wall:
   backgrounds: Darf-biyoodka
+  blur: Jilicsan
+  contrast: Is barbar dhigidda
   enable: Awood u yeelo maamulaha derbiga
+  fit:
+    contain: Ka koobasho
+    cover: Daboolid
+    fill: Buuxin
+  flipHorizontal: Flip siman
+  flipVertical: Flip vertical
   hours: saacadood
   interval: Beddel wadooyinka si kasta
   minutes: daqiiqo
   no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
+  objectFit: Asalka taam
+  objectPosition: Booska asalka ah
+  overlayColor: Midab ka sarreeya
+  overlayMixBlendMode: Isku-darka iskudarka isku-darka
+  playback: Xawaaraha ciyaarta
+  position:
+    bottom: Hoos
+    center: Dhex
+    left: Bidix
+    right: Sax
+    top: Dusha kore
   random: Kala sooc slideshow
+  saturation: SATION
   seconds: sekan
+  withOverlay: Iyadoo lagu daboolay
 weg:
   auto_hide: Auto qaraha
   delay_to_hide: Dib u dhig si loo qariyo

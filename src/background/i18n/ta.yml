@@ -14,6 +14,11 @@ resource:
   downloading_body: இதற்கு சில வினாடிகள் ஆகலாம், தயவுசெய்து சாளரத்தை மூட வேண்டாம்.
   enable: இயக்கு
 runtime:
+  corrupted_data: சிதைந்த தரவு
+  corrupted_file: >-
+    அதற்கு பதிலாக இயல்புநிலை மதிப்புகளைப் பயன்படுத்தி ஒரு உள்ளமைவு கோப்பு
+    சிதைந்துள்ளது.
+  corrupted_file_path: சிதைந்த கோப்பு பாதை
   download: பதிவிறக்கப் பக்கத்திற்குச் செல்லவும்
   not_found: WebView2 இயக்க நேரம் கிடைக்கவில்லை
   not_found_description: Seelen UIக்கு Webview2 இயக்க நேரம் தேவை. தயவுசெய்து அதை நிறுவவும்.

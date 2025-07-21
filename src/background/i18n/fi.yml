@@ -14,6 +14,9 @@ resource:
   downloading_body: Tämä saattaa kestää muutaman sekunnin, älä sulje ikkunaa.
   enable: Ota käyttöön
 runtime:
+  corrupted_data: Vioittuneet tiedot
+  corrupted_file: Määritystiedosto on vioittunut ja käyttää sen sijaan oletusarvoja.
+  corrupted_file_path: Vioittunut tiedostopolku
   download: Siirry lataussivulle
   not_found: WebView2:n suoritusaikaa ei löydy
   not_found_description: Seelen-käyttöliittymä vaatii Webview2 Runtime -sovelluksen. Asenna se.

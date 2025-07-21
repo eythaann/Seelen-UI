@@ -14,6 +14,11 @@ resource:
   downloading_body: Це може зайняти кілька секунд, будь ласка, не закривайте вікно.
   enable: Увімкнути
 runtime:
+  corrupted_data: Пошкоджені дані
+  corrupted_file: >-
+    Файл конфігурації пошкоджено, замість нього використовуються значення за
+    замовчуванням.
+  corrupted_file_path: Неправильний шлях до файлу
   download: Перейдіть на сторінку завантаження
   not_found: WebView2 Runtime не знайдено
   not_found_description: >-

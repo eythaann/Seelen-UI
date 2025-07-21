@@ -105,6 +105,7 @@ general:
     selected: Virk þemu
 header:
   labels:
+    config: Stillingar
     developer: Fyrir verktaki
     extras: Aukahlutir
     general: Almennt
@@ -140,6 +141,7 @@ resources:
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
   discover: Uppgötvaðu fleiri úrræði
   export: Útflutningsauðlind
+  import_wallpapers: Flytja inn staðbundið veggfóður
   open_folder: Opin auðlindamappa
   outdated: >-
     Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað
@@ -256,13 +258,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Veggfóður
+  blur: Þoka
+  contrast: Andstæður
   enable: Virkja veggfóðursstjóra
+  fit:
+    contain: Inniheldur
+    cover: Cover
+    fill: Fylltu
+  flipHorizontal: Flip Lárétt
+  flipVertical: Flip lóðrétt
   hours: klukkustundir
   interval: Skiptu um veggfóður hvert
   minutes: mínútur
   no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
+  objectFit: Bakgrunnur passa
+  objectPosition: Bakgrunnsstaða
+  overlayColor: Yfirlag litur
+  overlayMixBlendMode: Yfirlagsblöndublöndunarstilling
+  playback: Spilunarhraði
+  position:
+    bottom: Botn
+    center: Miðja
+    left: Vinstri
+    right: Ekki satt
+    top: Efst
   random: Slendandi myndasýning
+  saturation: Mettun
   seconds: sekúndur
+  withOverlay: Með yfirlagi
 weg:
   auto_hide: Sjálfvirk fela
   delay_to_hide: Seinkun á að fela

@@ -105,6 +105,7 @@ general:
     selected: सक्रिय विषयवस्तुहरू
 header:
   labels:
+    config: कन्फिगरेसनहरू
     developer: विकासकर्ताहरूको लागि
     extras: अतिरिक्त
     general: जर्नेल
@@ -142,6 +143,7 @@ resources:
     संस्करण आवश्यक छ।
   discover: अधिक स्रोतहरू पत्ता लगाउनुहोस्
   export: निर्यातको स्रोत
+  import_wallpapers: स्थानीय वालपेपर आयात गर्नुहोस्
   open_folder: ओपन स्रोत फोल्डर
   outdated: >-
     यो स्रोत देख्न नहुने ज्ञात संस्करणको लागि डिजाइन गरिएको हो र राम्रोसँग काम
@@ -259,13 +261,34 @@ vd:
     seelen: सावधानी
 wall:
   backgrounds: वालपेपरहरू
+  blur: स्वरर्नु
+  contrast: विषमता
   enable: वालपेपर प्रबन्धक सक्षम गर्नुहोस्
+  fit:
+    contain: भित्र हुनु
+    cover: आवरण
+    fill: भर्नु
+  flipHorizontal: फ्लिप तेर्सो
+  flipVertical: फ्लिप ठाडो
   hours: घण्टा
   interval: वालपेपर परिवर्तन गर्नुहोस्
   minutes: मिनेट
   no_background: खाली स्लाइडजेशन, यसको सट्टा थिमको पृष्ठभूमि प्रयोग गर्दै।
+  objectFit: पृष्ठभूमि फिट
+  objectPosition: पृष्ठभूमि स्थिति
+  overlayColor: ओभरलाइ रंग
+  overlayMixBlendMode: ओभरले मिक्स मिश्रण मोड
+  playback: प्लेब्याक गति
+  position:
+    bottom: पिंध
+    center: केन्द्र
+    left: देब्रे
+    right: ठिक
+    top: टुप्पो
   random: अनियमित रूपमा स्लाइड्स स्लाइड
+  saturation: संतृप्ति
   seconds: सेकेन्ड
+  withOverlay: ओभरले साथ
 weg:
   auto_hide: 'स्वत: लुकाउने'
   delay_to_hide: लुकाउन ढिलाइ

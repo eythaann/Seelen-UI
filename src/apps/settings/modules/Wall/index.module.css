@@ -1,32 +1,3 @@
-.backgroundList {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 8px;
-
-  .background {
-    display: grid;
-    align-items: center;
-    padding: 8px;
-    gap: 8px;
-    border-radius: 8px;
-    grid-template-columns: 100px 1fr 40px;
-    background-color: var(--color-white);
-
-    .image {
-      border-radius: 8px;
-      height: 60px;
-    }
-
-    .video {
-      height: 60px;
-      padding: 0 40px;
-      border-radius: 8px;
-      background-color: var(--color-gray-200);
-    }
-  }
-}
-
 .backgroundAdd {
   align-self: flex-end;
   width: 40px;
@@ -45,23 +16,23 @@
   }
 }
 
+.entryLabel {
+  display: grid;
+  grid-template-columns: 48px 1fr 30px;
+  align-items: center;
+  gap: 8px;
 
-.wallpaperList {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  .wallpaperEntry {
-    width: 100%;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 20px 1fr 30px;
-    align-items: center;
-    border-radius: 8px;
-    background-color: var(--color-white);
-
-    > span {
-      grid-column: 2/3;
-    }
+  .entryName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
+}
+
+.preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 10px;
 }

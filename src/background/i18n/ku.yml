@@ -14,6 +14,9 @@ resource:
   downloading_body: Ev dibe ku çend hûrdeman bigire, ji kerema xwe pencereyê bigire.
   enable: Bikêrkirin
 runtime:
+  corrupted_data: Daneyên hilweşandî
+  corrupted_file: Pelek mîhengê hilweşandî ye, li şûna nirxên xwerû bikar tîne.
+  corrupted_file_path: Rêya pelê hilweşandî
   download: Biçe rûpela daxistinê
   not_found: WebView2 Runtime nehat dîtin
   not_found_description: Seelen UI hewceyê Webview2 Runtime hewce dike. Ji kerema xwe saz bikin.

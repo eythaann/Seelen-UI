@@ -107,6 +107,7 @@ general:
     selected: Tema Aktif
 header:
   labels:
+    config: Konfigurasi
     developer: Untuk pengembang
     extras: Ekstra
     general: Umum
@@ -144,6 +145,7 @@ resources:
     berfungsi dengan baik.
   discover: Temukan lebih banyak sumber daya
   export: Sumber Daya Ekspor
+  import_wallpapers: Impor wallpaper lokal
   open_folder: Buka folder sumber daya
   outdated: >-
     Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak
@@ -262,13 +264,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Wallpaper
+  blur: Blur
+  contrast: Kontras
   enable: Aktifkan Manajer Wallpaper
+  fit:
+    contain: Berisi
+    cover: Penutup
+    fill: Isi
+  flipHorizontal: Balik Horizontal
+  flipVertical: Balik Vertikal
   hours: jam
   interval: Ubah wallpaper setiap
   minutes: menit
   no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
+  objectFit: Kesesuaian Latar Belakang
+  objectPosition: Posisi Latar Belakang
+  overlayColor: Warna Hamparan
+  overlayMixBlendMode: Mode Campuran Campuran Hamparan
+  playback: Kecepatan pemutaran
+  position:
+    bottom: Bawah
+    center: Pusat
+    left: Kiri
+    right: Benar.
+    top: Atas
   random: Mengacak tayangan slide
+  saturation: Kejenuhan
   seconds: detik
+  withOverlay: Dengan Overlay
 weg:
   auto_hide: Sembunyi otomatis
   delay_to_hide: Penundaan untuk bersembunyi

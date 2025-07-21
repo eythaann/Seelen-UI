@@ -18,7 +18,7 @@ import { RoutePath } from './components/navigation/routes';
 import { Home } from './modules/Home';
 import { IconPackEditorView } from './modules/IconPackEditor';
 import { ThemeView } from './modules/resources/Theme/View';
-import { SingleWallpaperView } from './modules/resources/Wallpapers/SingleView';
+import { SingleWallpaperView } from './modules/resources/Wallpapers/View';
 import { WidgetView } from './modules/resources/Widget/View';
 
 export function Routing() {

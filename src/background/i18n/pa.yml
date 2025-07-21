@@ -14,6 +14,9 @@ resource:
   downloading_body: ਇਹ ਕੁਝ ਸਕਿੰਟ ਲੈ ਸਕਦਾ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ ਵਿੰਡੋ ਨੂੰ ਬੰਦ ਨਾ ਕਰੋ.
   enable: ਯੋਗ
 runtime:
+  corrupted_data: ਖਰਾਬ ਡੇਟਾ
+  corrupted_file: ਇਸ ਦੀ ਬਜਾਏ ਡਿਫਾਲਟ ਮੁੱਲਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਸੰਰਚਨਾ ਫਾਇਲ ਖਰਾਬ ਹੋ ਗਈ ਹੈ.
+  corrupted_file_path: ਖਰਾਬ ਫਾਈਲ ਮਾਰਗ
   download: ਡਾਊਨਲੋਡ ਪੰਨੇ 'ਤੇ ਜਾਓ
   not_found: WebView2 ਰਨਟਾਈਮ ਨਹੀਂ ਮਿਲਿਆ
   not_found_description: Seelen UI ਨੂੰ Webview2 ਰਨਟਾਈਮ ਦੀ ਲੋੜ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰੋ।

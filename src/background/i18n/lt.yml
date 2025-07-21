@@ -14,6 +14,11 @@ resource:
   downloading_body: Tai gali užtrukti kelias sekundes, todėl neuždarykite lango.
   enable: Įjungti
 runtime:
+  corrupted_data: Sugadinti duomenys
+  corrupted_file: >-
+    Konfigūracijos failas sugadintas, vietoj jo naudojamos numatytojo nustatymo
+    reikšmės.
+  corrupted_file_path: Sugadintas failo kelias
   download: Eikite į atsisiuntimo puslapį
   not_found: WebView2 vykdymo laikas nerastas
   not_found_description: „Seelen“ vartotojo sąsajai reikalinga „Webview2 Runtime“. Įdiekite jį.

@@ -105,6 +105,7 @@ general:
     selected: Aktyvios temos
 header:
   labels:
+    config: Konfigūracijos
     developer: Kūrėjams
     extras: Priedai
     general: Bendrasis
@@ -140,6 +141,7 @@ resources:
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
   discover: Atraskite daugiau išteklių
   export: Eksporto ištekliai
+  import_wallpapers: Importuoti vietinius ekrano užsklandas
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
@@ -256,13 +258,34 @@ vd:
     seelen: Seelenas
 wall:
   backgrounds: Tapetai
+  blur: Neryškumas
+  contrast: Kontrastas
   enable: Įgalinkite tapetų tvarkytuvę
+  fit:
+    contain: Sudėtis
+    cover: Viršelis
+    fill: Užpildykite
+  flipHorizontal: Apversti horizontaliai
+  flipVertical: Vertikalus apvertimas
   hours: valandos
   interval: Keiskite tapetų kiekvieną
   minutes: minutės
   no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
+  objectFit: Pagrindinė informacija Pritaikymas
+  objectPosition: Pagrindinė padėtis
+  overlayColor: Perdangos spalva
+  overlayMixBlendMode: Perdangos mišinio režimas
+  playback: Atkūrimo greitis
+  position:
+    bottom: Dugnas
+    center: Centras
+    left: Kairėje pusėje
+    right: Dešinė
+    top: Viršuje
   random: Atsitiktinis skaidrių demonstravimas
+  saturation: Sodrumas
   seconds: sekundės
+  withOverlay: Su perdanga
 weg:
   auto_hide: Automatinis slėptuvė
   delay_to_hide: Vėluoti paslėpti

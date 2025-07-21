@@ -105,6 +105,7 @@ general:
     selected: Активні теми
 header:
   labels:
+    config: Конфігурації
     developer: Для розробників
     extras: Додатково
     general: Загальні налаштування
@@ -140,6 +141,7 @@ resources:
   app_outdated: Для коректної роботи цього ресурсу потрібна новіша версія інтерфейсу Seelen.
   discover: Відкрийте для себе більше ресурсів
   export: Експортний ресурс
+  import_wallpapers: Імпортувати місцеві шпалери
   open_folder: Відкрийте папку з ресурсами
   outdated: >-
     Цей ресурс був розроблений для старої версії інтерфейсу Seelen і може не
@@ -258,13 +260,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Шпалери
+  blur: Плямистість.
+  contrast: Контраст
   enable: Увімкнути менеджер шпалер
+  fit:
+    contain: Містити
+    cover: Обкладинка
+    fill: Заповніть.
+  flipHorizontal: Горизонтальне перевертання
+  flipVertical: Фліп Вертикальний
   hours: години
   interval: Зміна шпалер кожні
   minutes: хвилини
   no_background: Слайдів не знайдено, натомість застосовано фон теми.
+  objectFit: Підгонка фону
+  objectPosition: Вихідна позиція
+  overlayColor: Колір накладання
+  overlayMixBlendMode: Режим змішування з накладанням
+  playback: Швидкість відтворення
+  position:
+    bottom: Дно.
+    center: Центр
+    left: Ліворуч.
+    right: Так.
+    top: Верхня частина
   random: Випадковий порядок слайд-шоу
+  saturation: Насиченість
   seconds: секунди
+  withOverlay: З накладанням
 weg:
   auto_hide: Автоматично приховувати
   delay_to_hide: Затримка приховання

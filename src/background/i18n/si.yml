@@ -14,6 +14,9 @@ resource:
   downloading_body: මේ සඳහා තත්පර කිහිපයක් ගතවනු ඇත, කරුණාකර කවුළුව වසා නොගන්න.
   enable: සක්රීය කරන්න
 runtime:
+  corrupted_data: දූෂිත දත්ත
+  corrupted_file: ඒ වෙනුවට පෙරනිමි අගයන් භාවිතා කරමින් වින්යාස ගොනුවක් දූෂිත වේ.
+  corrupted_file_path: දූෂිත ගොනු මාර්ගය
   download: බාගැනීම් පිටුවට යන්න
   not_found: WebView2 ධාවන කාලය හමු නොවීය
   not_found_description: Seelen UI සඳහා Webview2 ධාවන කාලය අවශ්‍යයි. කරුණාකර එය ස්ථාපනය කරන්න.

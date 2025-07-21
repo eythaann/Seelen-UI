@@ -109,6 +109,7 @@ general:
     selected: Mga Aktibong Tema
 header:
   labels:
+    config: Mga pagsasaayos
     developer: Para sa mga developer
     extras: Extras
     general: Pangkalahatan
@@ -146,6 +147,7 @@ resources:
     Seelen UI upang gumana nang maayos.
   discover: Tuklasin ang higit pang mga mapagkukunan
   export: Mapagkukunan ng pag -export
+  import_wallpapers: Mag -import ng mga lokal na wallpaper
   open_folder: Buksan ang folder ng mapagkukunan
   outdated: >-
     Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
@@ -266,13 +268,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Wallpaper
+  blur: Malabo
+  contrast: Kaibahan
   enable: Paganahin ang manager ng wallpaper
+  fit:
+    contain: Naglalaman
+    cover: Takpan
+    fill: Punan
+  flipHorizontal: I -flip ang pahalang
+  flipVertical: Flip vertical
   hours: oras
   interval: Baguhin ang wallpaper bawat
   minutes: minuto
   no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
+  objectFit: Pagkasyahin sa background
+  objectPosition: Posisyon sa background
+  overlayColor: Kulay ng overlay
+  overlayMixBlendMode: Overlay Mix Blend Mode
+  playback: Bilis ng pag -playback
+  position:
+    bottom: Ilalim
+    center: Sentro
+    left: Kaliwa
+    right: Tama
+    top: Tuktok
   random: Randomize slideshow
+  saturation: Saturation
   seconds: segundo
+  withOverlay: Na may overlay
 weg:
   auto_hide: Auto itago
   delay_to_hide: Delay sa pagtatago

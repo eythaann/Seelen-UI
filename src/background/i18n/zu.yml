@@ -14,6 +14,11 @@ resource:
   downloading_body: Lokhu kungathatha imizuzwana embalwa, ngicela ungavali iwindi.
   enable: Nika amandla
 runtime:
+  corrupted_data: Idatha eyonakalisiwe
+  corrupted_file: >-
+    Ifayela lokucushwa lonakalisiwe, kusetshenziswa amanani azenzakalelayo
+    esikhundleni salokho.
+  corrupted_file_path: Indlela yefayela eyonakele
   download: Iya ekhasini lokulanda
   not_found: Isikhathi sokusebenza se-WebView2 asitholakali
   not_found_description: I-Seelen UI idinga isikhathi sokusebenza se-Webview2. Sicela uyifake.

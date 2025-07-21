@@ -11,7 +11,7 @@ import cs from '../infra.module.css';
 import { newSelectors } from '../../shared/store/app/reducer';
 
 import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
-import { ResourceCard } from '../common';
+import { ResourceCard } from '../ResourceCard';
 
 export function AllWallpapersView() {
   const wallpapers = useSelector(newSelectors.wallpapers);
@@ -42,6 +42,12 @@ export function AllWallpapersView() {
             }}
           >
             <Icon iconName="MdLibraryAdd" />
+          </Button>
+        </SettingsOption>
+        <SettingsOption>
+          <span>{t('resources.discover')}:</span>
+          <Button href="https://seelen.io/resources/s?category=Wallpaper" target="_blank" type="link">
+            https://seelen.io/resources/s?category=Wallpaper
           </Button>
         </SettingsOption>
       </SettingsGroup>

@@ -105,6 +105,7 @@ general:
     selected: ایکٹو تھیمز
 header:
   labels:
+    config: تشکیلات
     developer: ڈویلپرز کے لئے
     extras: ایکسٹرا
     general: جنرل
@@ -142,6 +143,7 @@ resources:
     درکار ہے۔
   discover: مزید وسائل دریافت کریں
   export: برآمدی وسائل
+  import_wallpapers: مقامی وال پیپر درآمد کریں
   open_folder: اوپن ریسورس فولڈر
   outdated: >-
     یہ وسیلہ سیلین UI کے پرانے ورژن کے لئے ڈیزائن کیا گیا تھا اور ہوسکتا ہے کہ
@@ -259,13 +261,34 @@ vd:
     seelen: سیلین
 wall:
   backgrounds: وال پیپر
+  blur: دھندلا
+  contrast: اس کے برعکس
   enable: وال پیپر مینیجر کو فعال کریں
+  fit:
+    contain: مشتمل
+    cover: کور
+    fill: پُر کریں
+  flipHorizontal: افقی پلٹائیں
+  flipVertical: عمودی پلٹائیں
   hours: گھنٹے
   interval: ہر ایک وال پیپر کو تبدیل کریں
   minutes: منٹ
   no_background: اس کے بجائے تھیم کے پس منظر کا استعمال کرتے ہوئے ، خالی سلائیڈ شو۔
+  objectFit: پس منظر فٹ
+  objectPosition: پس منظر کی پوزیشن
+  overlayColor: اوورلے رنگ
+  overlayMixBlendMode: اوورلے مکس مرکب موڈ
+  playback: پلے بیک کی رفتار
+  position:
+    bottom: نیچے
+    center: مرکز
+    left: بائیں
+    right: دائیں
+    top: اوپر
   random: سلائیڈ شو کو بے ترتیب بنائیں
+  saturation: سنترپتی
   seconds: سیکنڈ
+  withOverlay: اوورلے کے ساتھ
 weg:
   auto_hide: خود بخود چھپ جانا
   delay_to_hide: چھپانے میں تاخیر

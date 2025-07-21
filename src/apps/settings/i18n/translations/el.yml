@@ -106,6 +106,7 @@ general:
     selected: Ενεργά θέματα
 header:
   labels:
+    config: Διαμορφώσεις
     developer: Για προγραμματιστές
     extras: Πρόσθετα
     general: Γενικός
@@ -143,6 +144,7 @@ resources:
     σωστά.
   discover: Ανακαλύψτε περισσότερους πόρους
   export: Πόρος εξαγωγής
+  import_wallpapers: Εισαγωγή τοπικών ταπετσαριών
   open_folder: Άνοιγμα φακέλου πόρων
   outdated: >-
     Αυτός ο πόρος σχεδιάστηκε για μια παλαιότερη έκδοση του Seelen UI και
@@ -263,13 +265,34 @@ vd:
     seelen: Σένεν
 wall:
   backgrounds: Ταπετσαρίες
+  blur: Θολούρα
+  contrast: Αντίθεση
   enable: Ενεργοποίηση διαχειριστή ταπετσαρίας
+  fit:
+    contain: Περιέχει
+    cover: Εξώφυλλο
+    fill: Συμπλήρωση
+  flipHorizontal: Αναδίπλωση οριζόντια
+  flipVertical: Flip κάθετα
   hours: ώρες
   interval: Αλλάξτε ταπετσαρία κάθε
   minutes: πρακτικά
   no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
+  objectFit: Φόντο Fit
+  objectPosition: Ιστορικό Θέση
+  overlayColor: Χρώμα επικάλυψης
+  overlayMixBlendMode: Λειτουργία ανάμειξης μίξης επικάλυψης
+  playback: Ταχύτητα αναπαραγωγής
+  position:
+    bottom: Κάτω μέρος
+    center: Κέντρο
+    left: Αριστερά
+    right: Δεξιά
+    top: Κορυφή
   random: Τυχαία παρουσίαση
+  saturation: Κορεσμός
   seconds: δευτερόλεπτα
+  withOverlay: Με επικάλυψη
 weg:
   auto_hide: Αυτόματη απόκρυψη
   delay_to_hide: Καθυστέρηση για απόκρυψη

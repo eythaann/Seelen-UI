@@ -16,6 +16,11 @@ resource:
     daaqadda.
   enable: Karsiin
 runtime:
+  corrupted_data: Xogta musuqmaasuqa
+  corrupted_file: >-
+    Faylka qaabeynta ayaa la musuqmaasuqay, iyadoo la adeegsanayo qiimayaasha
+    caadiga ah halkii.
+  corrupted_file_path: Jidka faylka ee musuqmaasuqa
   download: Tag bogga soo dejinta
   not_found: WebView2 Runtime lama helin
   not_found_description: Seelen UI wuxuu u baahan yahay Webview2 Runtime. Fadlan rakib

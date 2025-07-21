@@ -14,6 +14,9 @@ resource:
   downloading_body: L'operazione potrebbe richiedere alcuni secondi; non chiudere la finestra.
   enable: Abilitazione
 runtime:
+  corrupted_data: Dati corrotti
+  corrupted_file: Un file di configurazione è danneggiato e utilizza valori predefiniti.
+  corrupted_file_path: Percorso del file corrotto
   download: Vai alla pagina di download
   not_found: Runtime WebView2 non trovato
   not_found_description: >-

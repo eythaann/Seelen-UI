@@ -105,6 +105,7 @@ general:
     selected: აქტიური თემები
 header:
   labels:
+    config: კონფიგურაცია
     developer: დეველოპერებისთვის
     extras: ზედმეტი
     general: გენერალი
@@ -140,6 +141,7 @@ resources:
   app_outdated: ეს რესურსი მოითხოვს Seelen UI– ს ახალ ვერსიას, რომ სწორად იმუშაოს.
   discover: აღმოაჩინეთ მეტი რესურსი
   export: ექსპორტის რესურსი
+  import_wallpapers: ადგილობრივი ფონების იმპორტი
   open_folder: ღია რესურსების საქაღალდე
   outdated: >-
     ეს რესურსი შეიქმნა Seelen UI- ს ძველი ვერსიისთვის და შესაძლოა არ იმუშაოს
@@ -260,13 +262,34 @@ vd:
     seelen: სელენი
 wall:
   backgrounds: ფონები
+  blur: დაბენა
+  contrast: წინააღმდეგობა
   enable: ჩართეთ ფონი მენეჯერი
+  fit:
+    contain: დატევა
+    cover: სახურავი
+    fill: გავსება
+  flipHorizontal: Flip Horizontal
+  flipVertical: ფლიპ ვერტიკალური
   hours: საათი
   interval: შეცვალეთ ფონი ყველა
   minutes: წუთი
   no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
+  objectFit: ფონის შესაფერისი
+  objectPosition: ფონის პოზიცია
+  overlayColor: გადახურული ფერი
+  overlayMixBlendMode: Overlay Mix Blend Mode
+  playback: აღწარმოების სიჩქარე
+  position:
+    bottom: ძირი
+    center: ცენტრი
+    left: მარცხენა
+    right: სწორი
+    top: თავი
   random: რანდომიზაცია სლაიდშოუ
+  saturation: გაჯერება
   seconds: წამები
+  withOverlay: გადახურვით
 weg:
   auto_hide: Ავტომატური დამალვა
   delay_to_hide: დაგვიანებით დამალვა

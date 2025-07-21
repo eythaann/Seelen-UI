@@ -14,6 +14,11 @@ resource:
   downloading_body: اس میں کچھ سیکنڈ لگ سکتے ہیں ، براہ کرم ونڈو کو بند نہ کریں۔
   enable: قابل بنائیں
 runtime:
+  corrupted_data: خراب ڈیٹا
+  corrupted_file: >-
+    اس کے بجائے پہلے سے طے شدہ اقدار کا استعمال کرتے ہوئے ، کنفیگریشن فائل خراب
+    ہوگئی ہے۔
+  corrupted_file_path: خراب فائل کا راستہ
   download: ڈاؤن لوڈ صفحہ پر جائیں۔
   not_found: WebView2 رن ٹائم نہیں ملا
   not_found_description: Seelen UI کو Webview2 رن ٹائم کی ضرورت ہے۔ براہ کرم اسے انسٹال کریں۔

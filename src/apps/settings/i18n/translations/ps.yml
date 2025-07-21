@@ -104,6 +104,7 @@ general:
     selected: فعال موضوعات
 header:
   labels:
+    config: تشکیلات
     developer: د پراختیا کونکو لپاره
     extras: اضافي
     general: عمومي
@@ -139,6 +140,7 @@ resources:
   app_outdated: دا سرچینه د سم کار کولو لپاره یو نوي نسخه ته اړتیا لري.
   discover: ډیرې سرچینې ومومئ
   export: د صادراتو سرچینې
+  import_wallpapers: ځایی وال پیپرونه وارد کړئ
   open_folder: د سرچینو پوښۍ خلاصه کړئ
   outdated: دا سرچینه د ښایسته UI زاړه نسخه لپاره ډیزاین شوې وه او شاید سم کار ونه کړي.
 save: خوندي کړئ
@@ -252,13 +254,34 @@ vd:
     seelen: تلل
 wall:
   backgrounds: والپيپرونه
+  blur: روښانه
+  contrast: برعکس
   enable: د وال پیپر مدیر فعال کړئ
+  fit:
+    contain: پکې شامل دي
+    cover: پوښ
+    fill: ډکول
+  flipHorizontal: فلیپ افقي
+  flipVertical: فلیپ عمودي
   hours: ساعتونه
   interval: په وال پیپر بدل کړئ
   minutes: دقیقې
   no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
+  objectFit: شالید فټ
+  objectPosition: شالید وضعیت
+  overlayColor: ډیر رنګ رنګ
+  overlayMixBlendMode: د انکشکې مخلوط حالت
+  playback: د بیا غږولو سرعت
+  position:
+    bottom: ښکته
+    center: مرکز
+    left: کیڼ
+    right: ښي
+    top: سر
   random: تصادفي سلایډ
+  saturation: تړل
   seconds: ثانیې
+  withOverlay: د
 weg:
   auto_hide: آٹو پټول
   delay_to_hide: د پټولو لپاره ځنډ

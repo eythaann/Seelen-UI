@@ -105,6 +105,7 @@ general:
     selected: Temi attivi
 header:
   labels:
+    config: Configurazioni
     developer: Per gli sviluppatori
     extras: Extra
     general: Generale
@@ -142,6 +143,7 @@ resources:
     correttamente.
   discover: Scoprire altre risorse
   export: Esportazione di risorse
+  import_wallpapers: Importazione di sfondi locali
   open_folder: Aprire la cartella delle risorse
   outdated: >-
     Questa risorsa è stata progettata per una versione precedente di Seelen UI e
@@ -260,13 +262,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Sfondi
+  blur: Sfocatura
+  contrast: Contrasto
   enable: Abilita Gestore degli Sfondi
+  fit:
+    contain: Contenere
+    cover: Copertina
+    fill: Riempimento
+  flipHorizontal: Capovolgimento orizzontale
+  flipVertical: Flip verticale
   hours: ore
   interval: Cambia sfondo ogni
   minutes: minuti
   no_background: Slideshow vuoto, usa invece lo sfondo del tema.
+  objectFit: Sfondo adatto
+  objectPosition: Posizione di fondo
+  overlayColor: Colore di sovrapposizione
+  overlayMixBlendMode: Modalità di miscelazione della sovrapposizione
+  playback: Velocità di riproduzione
+  position:
+    bottom: Fondo
+    center: Centro
+    left: A sinistra
+    right: Diritto
+    top: In alto
   random: Slideshow casuale
+  saturation: Saturazione
   seconds: secondi
+  withOverlay: Con sovrapposizione
 weg:
   auto_hide: Nascondi automaticamente
   delay_to_hide: Ritardo per nascondere

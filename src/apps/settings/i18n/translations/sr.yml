@@ -107,6 +107,7 @@ general:
     selected: Активне теме
 header:
   labels:
+    config: Конфигурације
     developer: За програмере
     extras: Додаци
     general: Генерал
@@ -142,6 +143,7 @@ resources:
   app_outdated: Овај ресурс захтева новију верзију СЕЕЛЕН-а да ради правилно.
   discover: Откријте више ресурса
   export: Извозни ресурс
+  import_wallpapers: Увоз локалне позадине
   open_folder: Отворите мапу ресурса
   outdated: >-
     Овај ресурс је дизајниран за старију верзију СЕЕЛЕН УИ и можда неће радити
@@ -261,13 +263,34 @@ vd:
     seelen: Сеелен
 wall:
   backgrounds: Позадине
+  blur: Замутити
+  contrast: Контраст
   enable: Омогућите менаџера позадина
+  fit:
+    contain: Садрзати
+    cover: Покривати
+    fill: Нанети
+  flipHorizontal: Флип хоризонтално
+  flipVertical: Вертикални
   hours: сати
   interval: Промените позадину сваком
   minutes: минут
   no_background: Празан презентацију, уместо тога користећи прибор за тему.
+  objectFit: Позадина погодна
+  objectPosition: Позадински положај
+  overlayColor: Прекривање боје
+  overlayMixBlendMode: Режим прекривене мешавине помешања
+  playback: Брзина репродукције
+  position:
+    bottom: Дно
+    center: Центер
+    left: Лево
+    right: У праву
+    top: На врху
   random: Рандомизе СлидеСхов
+  saturation: Засићење
   seconds: секунди
+  withOverlay: Са прекривањем
 weg:
   auto_hide: Аутоматска кожа
   delay_to_hide: Одложите да бисте се сакрили

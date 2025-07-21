@@ -107,6 +107,7 @@ general:
     selected: Thèmes actifs
 header:
   labels:
+    config: Configurations
     developer: Pour les développeurs
     extras: Extras
     general: Général
@@ -144,6 +145,7 @@ resources:
     fonctionner correctement.
   discover: Découvrez d'autres ressources
   export: Exporter la ressource
+  import_wallpapers: Importer des fonds d'écran locaux
   open_folder: Ouvrir le dossier des ressources
   outdated: >-
     Cette ressource a été conçue pour une ancienne version de Seelen UI et peut
@@ -264,13 +266,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Fonds d'écran
+  blur: Flou
+  contrast: Contraste
   enable: Activer le gestionnaire de fonds d'écran
+  fit:
+    contain: Contenir
+    cover: Couverture
+    fill: Remplir
+  flipHorizontal: Retournement horizontal
+  flipVertical: Flip Vertical
   hours: heures
   interval: Changer de fond d'écran toutes les
   minutes: minutes
   no_background: Liste vide, le fond d'écran du thème sera utilisé.
+  objectFit: Conforme à l'arrière-plan
+  objectPosition: Position d'arrière-plan
+  overlayColor: Couleur de la superposition
+  overlayMixBlendMode: Mode de mélange de la superposition
+  playback: Vitesse de lecture
+  position:
+    bottom: Le fond
+    center: Centre
+    left: Gauche
+    right: Droit
+    top: Haut de page
   random: Diaporama aléatoire
+  saturation: Saturation
   seconds: secondes
+  withOverlay: Avec recouvrement
 weg:
   auto_hide: Masquage automatique
   delay_to_hide: Délai avant masquage

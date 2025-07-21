@@ -10,6 +10,9 @@ resource:
   downloading_body: 这可能需要几秒钟，请不要关闭窗口。
   enable: 启用
 runtime:
+  corrupted_data: 损坏的数据
+  corrupted_file: 配置文件已损坏，使用默认值代替。
+  corrupted_file_path: 文件路径损坏
   download: 前往下载页面
   not_found: 未找到 WebView2 运行时
   not_found_description: Seelen UI 需要 Webview2 运行时。请安装它。

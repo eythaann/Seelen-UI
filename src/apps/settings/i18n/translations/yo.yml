@@ -103,6 +103,7 @@ general:
     selected: Awọn akori ti nṣiṣe lọwọ
 header:
   labels:
+    config: Awọn atunto
     developer: Fun Awọn Difelopa
     extras: Imurarẹ
     general: Gbogboogbo
@@ -138,6 +139,7 @@ resources:
   app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
   discover: Ṣawari awọn orisun diẹ sii
   export: Si ilẹkan ta
+  import_wallpapers: Gbe awọn iṣẹṣọ ogiri agbegbe wọle
   open_folder: Ṣii folda Ipilẹṣẹ
   outdated: A ṣe orisun yii fun ẹya atijọ ti Silen Ui ati pe ko le ma ṣiṣẹ daradara.
 save: Fipamọ
@@ -251,13 +253,34 @@ vd:
     seelen: Sibẹ
 wall:
   backgrounds: Ogiri ogiri
+  blur: Abẹ
+  contrast: Ifiwera
   enable: Mu oluṣakoso ogiri ṣiṣẹ
+  fit:
+    contain: Ni ninu
+    cover: Ideri
+    fill: Kun
+  flipHorizontal: Isipade pejọ
+  flipVertical: Yi inaro
   hours: wakati
   interval: Ayipada ogiri ni gbogbo
   minutes: iṣẹju
   no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
+  objectFit: Abẹla abẹlẹ
+  objectPosition: Ipo abẹlẹ
+  overlayColor: Awọ botay
+  overlayMixBlendMode: Igbẹpọ dapọ Ipo Ipa
+  playback: Iyara ṣiṣiṣẹsẹhin
+  position:
+    bottom: Isalẹ
+    center: Ile-iṣẹ
+    left: Osi
+    right: Titọ
+    top: Oke
   random: Afikun ifaworanhan
+  saturation: Itẹlọrun
   seconds: aaya
+  withOverlay: Pẹlu apọju
 weg:
   auto_hide: Ibi ipamọ aifọwọyi
   delay_to_hide: Idaduro lati tọju

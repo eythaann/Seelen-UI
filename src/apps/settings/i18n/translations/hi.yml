@@ -107,6 +107,7 @@ general:
     selected: सक्रिय विषय-वस्तु
 header:
   labels:
+    config: विन्यास
     developer: डेवलपर्स के लिए
     extras: अतिरिक्त
     general: सामान्य
@@ -144,6 +145,7 @@ resources:
     होती है।
   discover: अधिक संसाधनों की खोज करें
   export: निर्यात संसाधन
+  import_wallpapers: स्थानीय वॉलपेपर आयात करें
   open_folder: संसाधन फ़ोल्डर खोलें
   outdated: >-
     यह संसाधन सीलेन यूआई के पुराने संस्करण के लिए डिज़ाइन किया गया था और ठीक से
@@ -261,13 +263,34 @@ vd:
     seelen: सीलेन
 wall:
   backgrounds: वॉलपेपर
+  blur: कलंक
+  contrast: अंतर
   enable: वॉलपेपर प्रबंधक सक्षम करें
+  fit:
+    contain: रोकना
+    cover: ढकना
+    fill: भरना
+  flipHorizontal: क्षैतिज
+  flipVertical: तलवाड़ा
   hours: घंटे
   interval: वॉलपेपर हर बदलें
   minutes: मिनट
   no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
+  objectFit: पृष्ठभूमि फिट
+  objectPosition: पृष्ठभूमि स्थिति
+  overlayColor: ओवरले रंग
+  overlayMixBlendMode: ओवरले मिश्रण मिश्रण मोड
+  playback: प्लेबैक गति
+  position:
+    bottom: तल
+    center: केंद्र
+    left: बाएं
+    right: सही
+    top: शीर्ष
   random: यादृच्छिक स्लाइड शो
+  saturation: परिपूर्णता
   seconds: सेकंड
+  withOverlay: ओवरले के साथ
 weg:
   auto_hide: खुद से छिपना
   delay_to_hide: छिपाने में देरी

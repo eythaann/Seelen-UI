@@ -14,6 +14,9 @@ resource:
   downloading_body: এটি কয়েক সেকেন্ড সময় নিতে পারে, দয়া করে উইন্ডোটি বন্ধ করবেন না।
   enable: সক্ষম করুন
 runtime:
+  corrupted_data: দূষিত ডেটা
+  corrupted_file: পরিবর্তে ডিফল্ট মানগুলি ব্যবহার করে একটি কনফিগারেশন ফাইল দূষিত হয়।
+  corrupted_file_path: দূষিত ফাইল পাথ
   download: ডাউনলোড পেজে যান
   not_found: WebView2 রানটাইম পাওয়া যায়নি
   not_found_description: Seelen UI এর জন্য Webview2 রানটাইম প্রয়োজন। এটা ইনস্টল করুন.

@@ -14,7 +14,7 @@ import cs from './infra.module.css';
 import { RootSelectors } from '../shared/store/app/selectors';
 
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { ResourceCard } from './common';
+import { ResourceCard } from './ResourceCard';
 
 export function PluginsView() {
   const widgets = useSelector(RootSelectors.widgets);

@@ -107,6 +107,7 @@ general:
     selected: Aktive Themen
 header:
   labels:
+    config: Konfigurationen
     developer: Für Entwickler
     extras: Extras
     general: Allgemein
@@ -144,6 +145,7 @@ resources:
     funktionieren.
   discover: Weitere Ressourcen entdecken
   export: Ressource exportieren
+  import_wallpapers: Lokale Hintergrundbilder importieren
   open_folder: Ressourcenordner öffnen
   outdated: >-
     Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und
@@ -265,13 +267,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Hintergrundbilder
+  blur: Unschärfe
+  contrast: Kontrast
   enable: Tapetenmanager aktivieren
+  fit:
+    contain: Enthält
+    cover: Abdeckung
+    fill: Füllen Sie
+  flipHorizontal: Horizontal spiegeln
+  flipVertical: Vertikal drehen
   hours: Std.
   interval: Wechseln Sie die Hintergrundbild
   minutes: Minuten
   no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
+  objectFit: Hintergrund Passform
+  objectPosition: Hintergrund Position
+  overlayColor: Überlagerungsfarbe
+  overlayMixBlendMode: Mischmodus Überlagerung
+  playback: Wiedergabegeschwindigkeit
+  position:
+    bottom: Unten
+    center: Zentrum
+    left: Links
+    right: Rechts
+    top: Top
   random: Die Diashow randomisieren
+  saturation: Sättigung
   seconds: Sekunden
+  withOverlay: Mit Overlay
 weg:
   auto_hide: Automatisch ausblenden
   delay_to_hide: Verzögerung zum Verstecken

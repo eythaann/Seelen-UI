@@ -107,6 +107,7 @@ general:
     selected: Teme active
 header:
   labels:
+    config: Configurații
     developer: Pentru dezvoltatori
     extras: Extras
     general: General
@@ -144,6 +145,7 @@ resources:
     funcționa corect.
   discover: Descoperiți mai multe resurse
   export: Export de resurse
+  import_wallpapers: Importați imagini de fundal locale
   open_folder: Deschideți folderul de resurse
   outdated: >-
     Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și
@@ -264,13 +266,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Imagini de fundal
+  blur: Ceață
+  contrast: Contrast
   enable: Activați manager de tapet
+  fit:
+    contain: Conține
+    cover: Acoperire
+    fill: Umpleți
+  flipHorizontal: Flip orizontal
+  flipVertical: Flip vertical
   hours: ore
   interval: Schimbați tapet fiecare
   minutes: minute
   no_background: Slideshow gol, folosind în schimb fundalul temei.
+  objectFit: Potrivire în fundal
+  objectPosition: Poziția de fundal
+  overlayColor: Culoare suprapunere
+  overlayMixBlendMode: Mod de amestecare suprapunere Mix
+  playback: Viteza de redare
+  position:
+    bottom: Fund
+    center: Centrul
+    left: Stânga
+    right: Corect
+    top: Sus
   random: Prezentare de diapozitive aleatorie
+  saturation: Saturație
   seconds: secunde
+  withOverlay: Cu suprapunere
 weg:
   auto_hide: Ascundere automată
   delay_to_hide: Întârzie să te ascunzi

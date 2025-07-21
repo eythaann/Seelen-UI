@@ -23,6 +23,11 @@
     gap: 10px;
     overflow: hidden;
 
+    a:hover {
+      color: var(--color-blue-600);
+      cursor: pointer;
+    }
+
     .part {
       overflow: hidden;
       text-overflow: ellipsis;

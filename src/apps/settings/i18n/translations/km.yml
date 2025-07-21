@@ -105,6 +105,7 @@ general:
     selected: ស្បែកសកម្ម
 header:
   labels:
+    config: ការកំណត់រចនាសម្ព័ន្ធ
     developer: សម្រាប់អ្នកអភិវឌ្ឍន៍
     extras: ការបន្ថែម
     general: ទូទៅ
@@ -140,6 +141,7 @@ resources:
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
   discover: ស្វែងយល់ពីធនធានបន្ថែម
   export: ធនធាននាំចេញ
+  import_wallpapers: នាំចូលផ្ទាំងរូបភាពក្នុងស្រុក
   open_folder: បើកថតធនធាន
   outdated: >-
     ធនធាននេះត្រូវបានរចនាឡើងសម្រាប់កំណែចាស់របស់ Seeen UI
@@ -256,13 +258,34 @@ vd:
     seelen: កន្លេងតមខ្ច៉ាត់សែល
 wall:
   backgrounds: ផាបផេច
+  blur: ព្រមម៉ុន
+  contrast: ធេវីអាេយមានផាបផ្ទុយក្នា
   enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
+  fit:
+    contain: មាន
+    cover: រកប
+    fill: ញាត់
+  flipHorizontal: ត្រឡប់ផ្ដេក
+  flipVertical: ត្រឡប់បញ្ឈរ
   hours: ម៉ោង
   interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរៀងរាល់
   minutes: បីតោ
   no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
+  objectFit: សមផ្ទៃខាងក្រោយសមស្រប
+  objectPosition: ទីតាំងផ្ទៃខាងក្រោយ
+  overlayColor: ពណ៌គម្រប
+  overlayMixBlendMode: លាបពណ៌លាយបញ្ចូលគ្នា
+  playback: ល្បឿនចាក់សារថ្មី
+  position:
+    bottom: ក្ដិត / បាត
+    center: ផ្ចិត
+    left: ឆេវង
+    right: ខាងស្ដាម
+    top: ឯផ្ទលើ
   random: ការបញ្ចាំងស្លាយចៃដន្យដោយចៃដន្យ
+  saturation: ផាបថបតរ
   seconds: វិនាទី
+  withOverlay: ជាមួយនឹងការត្រួតលើគ្នា
 weg:
   auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
   delay_to_hide: ពន្យារពេលដើម្បីលាក់

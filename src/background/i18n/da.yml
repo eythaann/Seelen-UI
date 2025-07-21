@@ -14,6 +14,9 @@ resource:
   downloading_body: Det kan tage et par sekunder, så lad være med at lukke vinduet.
   enable: Gør det muligt
 runtime:
+  corrupted_data: Beskadigede data
+  corrupted_file: En konfigurationsfil er beskadiget og bruger standardværdier i stedet.
+  corrupted_file_path: Beskadiget filsti
   download: Gå til downloadsiden
   not_found: WebView2 Runtime ikke fundet
   not_found_description: Seelen UI kræver Webview2 Runtime. Installer det venligst.

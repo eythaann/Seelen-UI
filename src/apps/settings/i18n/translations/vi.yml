@@ -106,6 +106,7 @@ general:
     selected: Chủ đề đang hoạt động
 header:
   labels:
+    config: Cấu hình
     developer: Cho các nhà phát triển
     extras: Bổ sung
     general: Tổng quan
@@ -141,6 +142,7 @@ resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
   discover: Khám phá thêm tài nguyên
   export: Tài nguyên xuất khẩu
+  import_wallpapers: Nhập hình nền địa phương
   open_folder: Mở thư mục tài nguyên
   outdated: >-
     Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không
@@ -259,13 +261,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Hình nền
+  blur: Mờ
+  contrast: Sự tương phản
   enable: Bật trình quản lý hình nền
+  fit:
+    contain: Bao gồm
+    cover: Che phủ
+    fill: Đổ đầy
+  flipHorizontal: Lật ngang
+  flipVertical: Lật dọc
   hours: giờ
   interval: Thay đổi hình nền mỗi
   minutes: phút
   no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
+  objectFit: Phù hợp với nền
+  objectPosition: Vị trí nền
+  overlayColor: Màu lớp phủ
+  overlayMixBlendMode: Chế độ trộn trộn lớp phủ
+  playback: Tốc độ phát lại
+  position:
+    bottom: Đáy
+    center: Trung tâm
+    left: Bên trái
+    right: Phải
+    top: Đứng đầu
   random: Slideshow ngẫu nhiên
+  saturation: Bão hòa
   seconds: giây
+  withOverlay: Với lớp phủ
 weg:
   auto_hide: Tự động ẩn
   delay_to_hide: Trì hoãn việc ẩn giấu

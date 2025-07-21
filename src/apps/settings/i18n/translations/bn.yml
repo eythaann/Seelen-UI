@@ -107,6 +107,7 @@ general:
     selected: সক্রিয় থিম
 header:
   labels:
+    config: কনফিগারেশন
     developer: বিকাশকারীদের জন্য
     extras: অতিরিক্ত
     general: সাধারণ
@@ -144,6 +145,7 @@ resources:
     প্রয়োজন।
   discover: আরও সংস্থান আবিষ্কার করুন
   export: রফতানি সংস্থান
+  import_wallpapers: স্থানীয় ওয়ালপেপার আমদানি করুন
   open_folder: ওপেন রিসোর্স ফোল্ডার
   outdated: >-
     এই সংস্থানটি সিলেন ইউআইয়ের একটি পুরানো সংস্করণের জন্য ডিজাইন করা হয়েছিল
@@ -262,13 +264,34 @@ vd:
     seelen: সিলেন
 wall:
   backgrounds: ওয়ালপেপার
+  blur: অস্পষ্টতা
+  contrast: বিপরীতে
   enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
+  fit:
+    contain: ধারণ করে
+    cover: কভার
+    fill: পূরণ করুন
+  flipHorizontal: অনুভূমিক ফ্লিপ
+  flipVertical: উল্লম্ব ফ্লিপ
   hours: ঘন্টা
   interval: প্রতিটি ওয়ালপেপার পরিবর্তন করুন
   minutes: মিনিট
   no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
+  objectFit: পটভূমি ফিট
+  objectPosition: পটভূমি অবস্থান
+  overlayColor: ওভারলে রঙ
+  overlayMixBlendMode: ওভারলে মিক্স মিশ্রণ মোড
+  playback: প্লেব্যাক গতি
+  position:
+    bottom: নীচে
+    center: কেন্দ্র
+    left: বাম
+    right: ঠিক আছে
+    top: শীর্ষ
   random: এলোমেলোভাবে স্লাইডশো
+  saturation: স্যাচুরেশন
   seconds: সেকেন্ড
+  withOverlay: ওভারলে সহ
 weg:
   auto_hide: স্বয়ং চামড়া
   delay_to_hide: আড়াল করতে বিলম্ব

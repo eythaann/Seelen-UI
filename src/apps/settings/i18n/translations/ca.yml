@@ -105,6 +105,7 @@ general:
     selected: Temes actius
 header:
   labels:
+    config: Configuracions
     developer: Per als desenvolupadors
     extras: Extres
     general: General
@@ -142,6 +143,7 @@ resources:
     Seelen per funcionar correctament.
   discover: Descobriu més recursos
   export: Els recursos d’exportació
+  import_wallpapers: Importa fons de pantalla locals
   open_folder: Obrir la carpeta de recursos
   outdated: >-
     Aquest recurs va ser dissenyat per a una versió anterior de la interfície
@@ -262,13 +264,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Fons de pantalla
+  blur: Borrosa
+  contrast: Contrast
   enable: Activa el gestor de fons de pantalla
+  fit:
+    contain: Contenir
+    cover: Tapa
+    fill: Replenar
+  flipHorizontal: Flipeu horitzontal
+  flipVertical: Flip vertical
   hours: hores
   interval: Canvieu el fons de pantalla cada
   minutes: minuts
   no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
+  objectFit: Fixació de fons
+  objectPosition: Posició de fons
+  overlayColor: Color de superposició
+  overlayMixBlendMode: Mode de barreja de barreja de superposició
+  playback: Velocitat de reproducció
+  position:
+    bottom: Fons
+    center: Centre
+    left: Esquerre
+    right: Dret
+    top: Cim
   random: Randomize Show de diapositives
+  saturation: Saturació
   seconds: segons
+  withOverlay: Amb superposició
 weg:
   auto_hide: Amaga automàtic
   delay_to_hide: Tarda en amagar-se

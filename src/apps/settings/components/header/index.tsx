@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 
 import { SaveStore } from '../../modules/shared/store/infra';
 import { useAppSelector } from '../../modules/shared/utils/infra';
@@ -65,7 +65,13 @@ export const Header = () => {
 
     label = parts.map((part, idx) => (
       <React.Fragment key={part}>
-        <span className={cs.part}>{t(`header.labels.${part}`)}</span>
+        {idx !== parts.length - 1 ? (
+          <NavLink to={`/${parts.slice(0, idx + 1).join('/')}`} className={cs.part}>
+            {t(`header.labels.${part}`)}
+          </NavLink>
+        ) : (
+          <span className={cs.part}>{t(`header.labels.${part}`)}</span>
+        )}
         {++idx < parts.length ? '>' : ''}
       </React.Fragment>
     ));

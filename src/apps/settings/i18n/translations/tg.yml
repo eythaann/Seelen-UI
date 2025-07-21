@@ -105,6 +105,7 @@ general:
     selected: Мавзӯъҳои фаъол
 header:
   labels:
+    config: Конфигуратсия
     developer: Барои таҳиягарон
     extras: Иловаҳо
     general: Генерал
@@ -140,6 +141,7 @@ resources:
   app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.
   discover: Нахуст захираҳои бештарро кашф кунед
   export: Манбаъ
+  import_wallpapers: Объекти маҳаллӣ
   open_folder: Папкаи захираҳо
   outdated: >-
     Ин манбаъ барои нусхаи кӯҳна аз YELEINS тарҳрезӣ шудааст ва метавонад дуруст
@@ -255,13 +257,34 @@ vd:
     seelen: Желен
 wall:
   backgrounds: Обои обу
+  blur: Гул
+  contrast: Зиддият
   enable: Фаъолсозии менеҷери обои
+  fit:
+    contain: Нигоҳубин кардан
+    cover: Пӯшидан
+    fill: Пур кардан
+  flipHorizontal: Flip уфуқ
+  flipVertical: Флип амудӣ
   hours: соат
   interval: Тағйироти ҳар як
   minutes: дақиқа
   no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
+  objectFit: Замина
+  objectPosition: Мавқеи заминавӣ
+  overlayColor: Ранги пурраи
+  overlayMixBlendMode: Реҷаи омехтаи пурраи омехта
+  playback: Суръати бозӣ
+  position:
+    bottom: Тагпо
+    center: Марказ
+    left: Бесоҳибмонда
+    right: Рост
+    top: Боло
   random: Велосипедро тасодуфан
+  saturation: Соф
   seconds: сонияҳо
+  withOverlay: Бо overlay
 weg:
   auto_hide: Худкор Пинҳон кардани
   delay_to_hide: Таъхир барои пинҳон кардан

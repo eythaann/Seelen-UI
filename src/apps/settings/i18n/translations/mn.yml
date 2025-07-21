@@ -106,6 +106,7 @@ general:
     selected: Идэвхтэй сэдэв
 header:
   labels:
+    config: Тохиргоо
     developer: Хөгжүүлэгчдэд зориулсан
     extras: Мөр өгөх
     general: Жанжин
@@ -141,6 +142,7 @@ resources:
   app_outdated: Энэ нөөц нь Seelen Ui-ийн шинэ хувилбарыг зөв ажиллахыг шаарддаг.
   discover: Илүү их нөөцийг олж мэдэх
   export: Нөөцийг экспортлох
+  import_wallpapers: Орон нутгийн ханын цаас импортлох
   open_folder: Нээлттэй зөөврийн
   outdated: >-
     Энэ нөөц нь Seelen Ui-ийн хуучин хувилбарт зориулагдсан бөгөөд зөв
@@ -258,13 +260,34 @@ vd:
     seelen: Сахин суу
 wall:
   backgrounds: Ханын цаас
+  blur: Тайлбарал
+  contrast: Эрс ялгаа
   enable: Wallpaper менежерийг идэвхжүүлэх
+  fit:
+    contain: Агуулах
+    cover: Бутээлэг
+    fill: Дүүрэх
+  flipHorizontal: Хөндлөнгийн хэвтээ
+  flipVertical: Босоо босоо
   hours: цаг
   interval: Ханын цаасыг өөрчлөх
   minutes: хоёр хоног
   no_background: Хоосон слайпешт, оронд нь.
+  objectFit: Суурь тохирох
+  objectPosition: Арын байрлал
+  overlayColor: Давхардсан өнгө
+  overlayMixBlendMode: Холих холимог холимог горим
+  playback: Тоглуулах хурд
+  position:
+    bottom: Ероол
+    center: Тов
+    left: Зүүн
+    right: Зөв байх
+    top: Таг
   random: Санамсаргүй байдлаар Slideshes
+  saturation: Цэнгэхны бэлтгэл, төгсөг
   seconds: хоёр цаг
+  withOverlay: Давхцаж байна
 weg:
   auto_hide: Авто гүнд
   delay_to_hide: Нуухыг хойшлуулах

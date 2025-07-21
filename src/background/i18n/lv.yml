@@ -14,6 +14,11 @@ resource:
   downloading_body: Tas var aizņemt dažas sekundes, lūdzu, neaizveriet logu.
   enable: Ieslēgt
 runtime:
+  corrupted_data: Bojāti dati
+  corrupted_file: >-
+    Konfigurācijas fails ir bojāts, tā vietā tiek izmantotas noklusējuma
+    vērtības.
+  corrupted_file_path: Bojāts faila ceļš
   download: Dodieties uz lejupielādes lapu
   not_found: WebView2 izpildlaiks nav atrasts
   not_found_description: Seelen UI ir nepieciešams Webview2 Runtime. Lūdzu, instalējiet to.

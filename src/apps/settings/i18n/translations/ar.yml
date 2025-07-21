@@ -103,6 +103,7 @@ general:
     selected: المواضيع النشطة
 header:
   labels:
+    config: التكوينات
     developer: للمطورين
     extras: الإضافات
     general: عام
@@ -138,6 +139,7 @@ resources:
   app_outdated: يتطلب هذا المورد إصدارًا أحدث من Seelen UI ليعمل بشكل صحيح.
   discover: اكتشف المزيد من الموارد
   export: موارد التصدير
+  import_wallpapers: استيراد الخلفيات المحلية
   open_folder: فتح مجلد الموارد
   outdated: تم تصميم هذا المورد لإصدار أقدم من Seelen UI وقد لا يعمل بشكل صحيح.
 save: حفظ
@@ -251,13 +253,34 @@ vd:
     seelen: سيلين
 wall:
   backgrounds: خلفيات
+  blur: الضبابية
+  contrast: التباين
   enable: تمكين مدير الخلفيات
+  fit:
+    contain: احتواء
+    cover: الغلاف
+    fill: تعبئة
+  flipHorizontal: قلب أفقي
+  flipVertical: قلب عمودي
   hours: ساعات
   interval: تغيير الخلفية كل
   minutes: دقائق
   no_background: بدون خلفية
+  objectFit: الخلفية الملائمة
+  objectPosition: موقف الخلفية
+  overlayColor: لون التراكب
+  overlayMixBlendMode: وضع مزج مزيج التراكب
+  playback: سرعة التشغيل
+  position:
+    bottom: القاع
+    center: المركز
+    left: يسار
+    right: صحيح
+    top: أعلى
   random: عرض عشوائي للشرائح
+  saturation: التشبع
   seconds: ثوان
+  withOverlay: مع تراكب
 weg:
   auto_hide: الأخفاء التلقائي
   delay_to_hide: تأخير الأخفاء

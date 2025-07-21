@@ -13,7 +13,7 @@ import { RootActions } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';
 
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { ResourceCard } from './common';
+import { ResourceCard } from './ResourceCard';
 
 export function IconPacksView() {
   const activeIds = useSelector(RootSelectors.activeIconPacks);

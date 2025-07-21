@@ -14,6 +14,11 @@ resource:
   downloading_body: Dit kan enkele seconden duren, sluit het venster niet.
   enable: inschakelen
 runtime:
+  corrupted_data: Beschadigde gegevens
+  corrupted_file: >-
+    Een configuratiebestand is beschadigd, waardoor standaardwaarden worden
+    gebruikt.
+  corrupted_file_path: Corrupt bestandspad
   download: Ga naar de downloadpagina
   not_found: WebView2 Runtime niet gevonden
   not_found_description: >-

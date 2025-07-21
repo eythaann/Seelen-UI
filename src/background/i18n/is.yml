@@ -14,6 +14,9 @@ resource:
   downloading_body: Þetta gæti tekið nokkrar sekúndur, vinsamlegast ekki loka glugganum.
   enable: Virkja
 runtime:
+  corrupted_data: Skemmd gögn
+  corrupted_file: Stillingarskrá er skemmd og notar sjálfgefin gildi í staðinn.
+  corrupted_file_path: Skemmd skráarleið
   download: Farðu á niðurhalssíðuna
   not_found: WebView2 Runtime fannst ekki
   not_found_description: Seelen UI krefst Webview2 Runtime. Vinsamlegast settu það upp.

@@ -107,6 +107,7 @@ general:
     selected: Активни теми
 header:
   labels:
+    config: Конфигурации
     developer: За развивачи
     extras: Додатоци
     general: Општо
@@ -142,6 +143,7 @@ resources:
   app_outdated: Овој ресурс бара понова верзија на Seelen UI да работи правилно.
   discover: Откријте повеќе ресурси
   export: Извоз ресурс
+  import_wallpapers: Увезете локални позадини
   open_folder: Отворена папка со ресурси
   outdated: >-
     Овој ресурс беше дизајниран за постара верзија на Seelen UI и можеби нема да
@@ -262,13 +264,34 @@ vd:
     seelen: Селен
 wall:
   backgrounds: Позадини
+  blur: Замаглување
+  contrast: Контраст
   enable: Овозможете менаџер на тапети
+  fit:
+    contain: Содржат
+    cover: Покритие
+    fill: Пополнете
+  flipHorizontal: Флип хоризонтално
+  flipVertical: Флип вертикална
   hours: часови
   interval: Променете ја позадината на секој
   minutes: минути
   no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
+  objectFit: Подготвување на позадината
+  objectPosition: Позиција во позадина
+  overlayColor: Боја на преклопување
+  overlayMixBlendMode: Режим на мешавина од мешавина од преклопување
+  playback: Брзина на репродукција
+  position:
+    bottom: Дно
+    center: Центар
+    left: Лево
+    right: Десно
+    top: Горе
   random: Рандомизирајте го слајдшоу
+  saturation: Заситеност
   seconds: секунди
+  withOverlay: Со преклоп
 weg:
   auto_hide: Автоматско скриј
   delay_to_hide: Одложување за сокривање

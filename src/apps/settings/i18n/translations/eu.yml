@@ -105,6 +105,7 @@ general:
     selected: Gai aktiboak
 header:
   labels:
+    config: Konfigurazio
     developer: Garatzaileentzako
     extras: Aput
     general: Jeneral
@@ -142,6 +143,7 @@ resources:
     dezan.
   discover: Ezagutu baliabide gehiago
   export: Esportatu baliabidea
+  import_wallpapers: Inportatu tokiko horma-irudiak
   open_folder: Baliabide irekiko karpeta
   outdated: >-
     Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala
@@ -260,13 +262,34 @@ vd:
     seelen: Sekelo
 wall:
   backgrounds: Horma-irudiak
+  blur: Lau lauak
+  contrast: Kontraste
   enable: Gaitu horma-kudeatzailea
+  fit:
+    contain: Eduki
+    cover: Estalki
+    fill: Bete
+  flipHorizontal: Flip horizontala
+  flipVertical: Irauli bertikala
   hours: ordire ordu
   interval: Aldatu horma-irudia guztietan
   minutes: minutuak
   no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
+  objectFit: Atzeko planoaren moldaketa
+  objectPosition: Atzeko planoaren posizioa
+  overlayColor: Overlay kolorea
+  overlayMixBlendMode: Overlay nahastu nahasketa modua
+  playback: Erreproduzitzeko abiadura
+  position:
+    bottom: Azpi
+    center: Gune
+    left: Ezker
+    right: Zuzen
+    top: Tontor
   random: Aurkezpen diaporama
+  saturation: Saturazio
   seconds: bizkarbete
+  withOverlay: Gainjartzearekin
 weg:
   auto_hide: Ezkutatu automatikoa
   delay_to_hide: Ezkutatzeko atzeratu

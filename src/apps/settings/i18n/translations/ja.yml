@@ -101,6 +101,7 @@ general:
     selected: アクティブなテーマ
 header:
   labels:
+    config: コンフィギュレーション
     developer: 開発者向け
     extras: エクストラ
     general: 全般
@@ -136,6 +137,7 @@ resources:
   app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
   discover: その他のリソース
   export: 輸出リソース
+  import_wallpapers: ローカル壁紙のインポート
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
 save: 保存
@@ -246,13 +248,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: 壁紙
+  blur: ブラー
+  contrast: コントラスト
   enable: 壁紙マネージャーを有効にします
+  fit:
+    contain: コンテイン
+    cover: カバー
+    fill: 充填
+  flipHorizontal: 水平フリップ
+  flipVertical: 垂直フリップ
   hours: 時間
   interval: 壁紙を毎回変更します
   minutes: 分
   no_background: 壁紙に使用するファイルを選択
+  objectFit: バックグラウンド・フィット
+  objectPosition: バックグラウンド
+  overlayColor: オーバーレイカラー
+  overlayMixBlendMode: オーバーレイミックスブレンドモード
+  playback: 再生速度
+  position:
+    bottom: ボトム
+    center: センター
+    left: 左
+    right: 右
+    top: トップ
   random: スライドショーをランダム化します
+  saturation: 飽和
   seconds: 秒
+  withOverlay: オーバーレイ付き
 weg:
   auto_hide: 自動的に隠す
   delay_to_hide: 隠れるまでの遅延

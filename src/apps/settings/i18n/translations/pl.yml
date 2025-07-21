@@ -107,6 +107,7 @@ general:
     selected: Aktywne motywy
 header:
   labels:
+    config: Konfiguracje
     developer: Dla deweloperów
     extras: Dodatki
     general: Ogólne
@@ -142,6 +143,7 @@ resources:
   app_outdated: Ten zasób wymaga nowszej wersji Seelen UI do poprawnego działania.
   discover: Odkryj więcej zasobów
   export: Zasoby eksportowe
+  import_wallpapers: Import lokalnych tapet
   open_folder: Otwórz folder zasobów
   outdated: >-
     Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
@@ -260,13 +262,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Tapety
+  blur: Rozmycie
+  contrast: Kontrast
   enable: Włącz menedżer tapet
+  fit:
+    contain: Zawierać
+    cover: Okładka
+    fill: Wypełnienie
+  flipHorizontal: Odwróć w poziomie
+  flipVertical: Flip Vertical
   hours: godzin
   interval: Zmień tapetę co
   minutes: minut
   no_background: Brak tapet, używane są tapety motywu systemu Windows.
+  objectFit: Dopasowanie tła
+  objectPosition: Pozycja w tle
+  overlayColor: Kolor nakładki
+  overlayMixBlendMode: Tryb mieszania nakładki
+  playback: Prędkość odtwarzania
+  position:
+    bottom: Dół
+    center: Centrum
+    left: Lewa
+    right: Prawo
+    top: Top
   random: Losowa kolejność
+  saturation: Nasycenie
   seconds: sekund
+  withOverlay: Z nakładką
 weg:
   auto_hide: Automatyczne ukrywanie
   delay_to_hide: Opóźnienie ukrycia

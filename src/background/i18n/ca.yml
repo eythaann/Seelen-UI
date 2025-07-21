@@ -14,6 +14,11 @@ resource:
   downloading_body: Això pot trigar uns segons, si us plau, no tanqueu la finestra.
   enable: Capacitar
 runtime:
+  corrupted_data: Dades corrompudes
+  corrupted_file: >-
+    En canvi, un fitxer de configuració està corromput, utilitzant valors
+    predeterminats.
+  corrupted_file_path: Ruta del fitxer corromput
   download: Aneu a la pàgina de descàrrega
   not_found: No s'ha trobat el temps d'execució de WebView2
   not_found_description: La interfície d'usuari de Seelen requereix Webview2 Runtime. Instal·leu-lo.

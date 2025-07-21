@@ -10,6 +10,9 @@ resource:
   downloading_body: ይህ ደግሞ ጥቂት ሰኮንዶች ሊወስድ ይችላል, እባክዎን መስኮቱን አይዝጉ.
   enable: አንቃ
 runtime:
+  corrupted_data: የተበላሸ ውሂብ
+  corrupted_file: የውቅረት ፋይል ተበላሽቷል, ይልቁንስ ነባሪ እሴቶችን በመጠቀም ተበላሽቷል.
+  corrupted_file_path: የተበላሸ ፋይል መንገድ
   download: ወደ ማውረድ ገጽ ይሂዱ
   not_found: WebView2 Runtime አልተገኘም።
   not_found_description: Seelen UI Webview2 Runtime ያስፈልገዋል። እባክዎ ይጫኑት።

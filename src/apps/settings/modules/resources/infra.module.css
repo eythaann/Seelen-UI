@@ -65,45 +65,6 @@
       color: var(--color-red-1200);
     }
 
-    .portrait {
-      background-color: var(--color-gray-200);
-      border-radius: 8px;
-      aspect-ratio: 1/1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-
-      > video,
-      > img {
-        width: 100%;
-        height: 100%;
-        border-radius: 8px;
-        object-fit: cover;
-      }
-
-      .kindIcon {
-        height: 50%;
-      }
-
-      .warning,
-      .danger {
-        position: absolute;
-        bottom: 8px;
-        right: 8px;
-        height: 20px;
-      }
-
-      .warning {
-        color: var(--color-yellow-500);
-        opacity: 0.6;
-      }
-
-      .danger {
-        color: var(--color-red-900);
-      }
-    }
-
     .info {
       display: flex;
       flex-direction: column;
@@ -133,5 +94,44 @@
         gap: 8px;
       }
     }
+  }
+}
+
+.portrait {
+  background-color: var(--color-gray-200);
+  border-radius: 8px;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  > video,
+  > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .kindIcon {
+    height: 50%;
+  }
+
+  .warning,
+  .danger {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    height: 20px;
+  }
+
+  .warning {
+    color: var(--color-yellow-500);
+    opacity: 0.6;
+  }
+
+  .danger {
+    color: var(--color-red-900);
   }
 }

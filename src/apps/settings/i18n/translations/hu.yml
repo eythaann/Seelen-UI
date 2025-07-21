@@ -106,6 +106,7 @@ general:
     selected: Aktív témák
 header:
   labels:
+    config: Konfigurációk
     developer: Fejlesztők számára
     extras: Extrák
     general: Tábornok
@@ -141,6 +142,7 @@ resources:
   app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
   discover: További források felfedezése
   export: Export erőforrás
+  import_wallpapers: Helyi háttérképek importálása
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
     Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,
@@ -259,13 +261,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Háttérképek
+  blur: Elmosódás
+  contrast: Kontraszt
   enable: Engedélyezze a háttérképkezelőt
+  fit:
+    contain: Tartalmazza a  címet.
+    cover: Borító
+    fill: Töltse ki a  címet.
+  flipHorizontal: Flip vízszintes
+  flipVertical: Flip függőleges
   hours: órák
   interval: Változtasd meg minden háttérképet
   minutes: jegyzőkönyv
   no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
+  objectFit: Háttér illeszkedés
+  objectPosition: Háttér Pozíció
+  overlayColor: Overlay szín
+  overlayMixBlendMode: Overlay Mix keverési mód
+  playback: Lejátszási sebesség
+  position:
+    bottom: Alul
+    center: Központ
+    left: Balra
+    right: Jobbra
+    top: Top
   random: Véletlenszerűsítse a diavetítést
+  saturation: Telítettség
   seconds: másodpercek
+  withOverlay: Overlay-vel
 weg:
   auto_hide: Automatikus elrejtés
   delay_to_hide: Késleltesse az elrejtést

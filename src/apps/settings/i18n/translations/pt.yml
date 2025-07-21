@@ -105,6 +105,7 @@ general:
     selected: Temas ativos
 header:
   labels:
+    config: Configurações
     developer: Para desenvolvedores
     extras: Extras
     general: Geral
@@ -142,6 +143,7 @@ resources:
     Seelen para funcionar corretamente.
   discover: Descubra mais recursos
   export: Recurso de exportação
+  import_wallpapers: Importar papéis de parede locais
   open_folder: Abrir a pasta de recursos
   outdated: >-
     Esse recurso foi projetado para uma versão mais antiga da interface do
@@ -260,13 +262,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Papéis de parede
+  blur: Desfoque
+  contrast: Contraste
   enable: Ativar gerente de papel de parede
+  fit:
+    contain: Conter
+    cover: Capa
+    fill: Preencher
+  flipHorizontal: Virar na horizontal
+  flipVertical: Virar vertical
   hours: horas
   interval: Troque o papel de parede todos
   minutes: minutos
   no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
+  objectFit: Ajuste do plano de fundo
+  objectPosition: Posição de fundo
+  overlayColor: Cor da sobreposição
+  overlayMixBlendMode: Overlay Mix Blend Mode (Modo de mistura de sobreposição)
+  playback: Velocidade de reprodução
+  position:
+    bottom: Parte inferior
+    center: Centro
+    left: Esquerda
+    right: Certo
+    top: Topo
   random: Randomize Slideshow
+  saturation: Saturação
   seconds: segundas
+  withOverlay: Com sobreposição
 weg:
   auto_hide: Ocultar automaticamente
   delay_to_hide: Demora para esconder

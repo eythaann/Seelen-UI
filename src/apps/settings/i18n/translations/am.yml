@@ -103,6 +103,7 @@ general:
     selected: ንቁ ገጽታዎች
 header:
   labels:
+    config: ውቅሮች
     developer: ለገንቢዎች
     extras: ተጨማሪዎች
     general: አጠቃላይ
@@ -138,6 +139,7 @@ resources:
   app_outdated: ይህ ሀብት በአግባቡ እንዲሠራ አዲስ የአዲስ ስሪት ይፈልጋል.
   discover: ተጨማሪ ሀብቶችን ያግኙ
   export: ወደ ውጭ የመላክ ሀብት
+  import_wallpapers: የአካባቢያዊ የግድግዳ ወረቀቶች ያስመጡ
   open_folder: ክፍት የመረጃ ምንጭ አቃፊ
   outdated: ይህ የመረጃ ሀብት ለተረጋጋሪ ዌይ ስሪት ለተጨማሪ ስሪት የተሰራ ሲሆን በትክክል ላይሰራ ይችላል.
 save: አስቀምጥ
@@ -248,13 +250,34 @@ vd:
     seelen: እዩ
 wall:
   backgrounds: የግድግዳ ወረቀቶች
+  blur: ብዥታ
+  contrast: ንፅፅር
   enable: የግድግዳ ወረቀት ሥራ አስኪያጅን ያንቁ
+  fit:
+    contain: መያዝ
+    cover: ሽፋን
+    fill: ሙላ
+  flipHorizontal: አግድም
+  flipVertical: ቀጥ ያለ አቀባዊ
   hours: ሰዓታት
   interval: የግድግዳ ወረቀት እያንዳንዱን ይለውጡ
   minutes: ደቂቃዎች
   no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
+  objectFit: ዳራ ተስማሚ
+  objectPosition: የጀርባ አቀማመጥ
+  overlayColor: የተደራቢ ቀለም
+  overlayMixBlendMode: የተደራቢ ድብልቅ ድብልቅ ድብልቅ ሁኔታ
+  playback: መልሶ ማጫወት ፍጥነት
+  position:
+    bottom: ታች
+    center: ማዕከል
+    left: ግራ
+    right: ቀኝ
+    top: ከላይ
   random: የዘፈቀደ ተንሸራታች ትዕይንት
+  saturation: ማሞቂያ
   seconds: ሰከንዶች
+  withOverlay: በተደራቢ
 weg:
   auto_hide: ራስ-ሰር መደበቅ
   delay_to_hide: ለመደበቅ መዘግየት

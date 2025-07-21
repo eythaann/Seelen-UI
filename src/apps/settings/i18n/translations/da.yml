@@ -105,6 +105,7 @@ general:
     selected: Aktive temaer
 header:
   labels:
+    config: Konfigurationer
     developer: For udviklere
     extras: Ekstramateriale
     general: Generel
@@ -140,6 +141,7 @@ resources:
   app_outdated: Denne ressource kræver en nyere version af Seelen UI for at fungere korrekt.
   discover: Opdag flere ressourcer
   export: Eksporter ressource
+  import_wallpapers: Importer lokale baggrunde
   open_folder: Åbn ressourcemappen
   outdated: >-
     Denne ressource er designet til en ældre version af Seelen UI og fungerer
@@ -260,13 +262,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Baggrunde
+  blur: Sløring
+  contrast: Kontrast
   enable: Aktivér tapet manager
+  fit:
+    contain: Indeholder
+    cover: Omslag
+    fill: Fyld
+  flipHorizontal: Vend vandret
+  flipVertical: Vend lodret
   hours: timer
   interval: Skift tapet hver
   minutes: minutter
   no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
+  objectFit: Baggrundstilpasning
+  objectPosition: Baggrundsposition
+  overlayColor: Overlay-farve
+  overlayMixBlendMode: Overlay Mix Blend Mode
+  playback: Afspilningshastighed
+  position:
+    bottom: I bunden
+    center: Center
+    left: Til venstre
+    right: Til højre
+    top: Til toppen
   random: Randomiser slideshow
+  saturation: Mætning
   seconds: sekunder
+  withOverlay: Med overlay
 weg:
   auto_hide: Auto skjul
   delay_to_hide: Forsink med at skjule

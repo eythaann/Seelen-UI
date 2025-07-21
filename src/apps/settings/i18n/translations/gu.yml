@@ -105,6 +105,7 @@ general:
     selected: સક્રિય થીમ્સ
 header:
   labels:
+    config: ગોઠવણી
     developer: વિકાસકર્તાઓ માટે
     extras: વધારાની રકમ
     general: જનરલ
@@ -140,6 +141,7 @@ resources:
   app_outdated: આ સંસાધનને યોગ્ય રીતે કાર્ય કરવા માટે સીલેન યુઆઈનું નવું સંસ્કરણ જરૂરી છે.
   discover: વધુ સંસાધનો શોધો
   export: નિકાસ સાધન
+  import_wallpapers: સ્થાનિક વ wallp લપેપર્સ આયાત કરો
   open_folder: ખુલ્લા સંસાધન ફોલ્ડર
   outdated: >-
     આ સંસાધન સીલેન UI ના જૂના સંસ્કરણ માટે બનાવવામાં આવ્યું હતું અને કદાચ યોગ્ય
@@ -257,13 +259,34 @@ vd:
     seelen: પીઠ
 wall:
   backgrounds: વ wallpapers લપેપર્સ
+  blur: અસ્પષ્ટતા
+  contrast: વિપરીત
   enable: વ wallp લપેપર મેનેજરને સક્ષમ કરો
+  fit:
+    contain: સમાવવું
+    cover: આવરણ
+    fill: ભરવું
+  flipHorizontal: આડું
+  flipVertical: Verીટી પચે
   hours: સમય
   interval: દરેક વ wallp લપેપર બદલો
   minutes: પ્રકાર
   no_background: તેના બદલે થીમની પૃષ્ઠભૂમિનો ઉપયોગ કરીને ખાલી સ્લાઇડશો.
+  objectFit: પૃષ્ઠભૂમિ
+  objectPosition: પૃષ્ઠભૂમિ
+  overlayColor: Overંચો રંગ
+  overlayMixBlendMode: ઓવરલે મિક્સ બ્લેન્ડ મોડ
+  playback: પ્લેબેક ગતિ
+  position:
+    bottom: તળિયે
+    center: કેન્દ્ર
+    left: ડાબી બાજુ
+    right: અધિકાર
+    top: ટોચ
   random: સ્લાઇડશોને રેન્ડમાઇઝ કરો
+  saturation: સચોટતા
   seconds: સેકન્ડ
+  withOverlay: ઓવરલે સાથે
 weg:
   auto_hide: સ્વતઃ છુપાવો
   delay_to_hide: છુપાવવામાં વિલંબ

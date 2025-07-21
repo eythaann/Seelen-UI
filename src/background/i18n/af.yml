@@ -14,6 +14,9 @@ resource:
   downloading_body: Dit kan 'n paar sekondes duur, moenie die venster toemaak nie.
   enable: In staat stel
 runtime:
+  corrupted_data: Korrupte data
+  corrupted_file: '''N Konfigurasielêer word beskadig, met behulp van standaardwaardes.'
+  corrupted_file_path: Korrupte lêerpad
   download: Gaan na die aflaai bladsy
   not_found: WebView2 Looptyd nie gevind nie
   not_found_description: Seelen UI vereis Webview2 Runtime. Installeer dit asseblief.

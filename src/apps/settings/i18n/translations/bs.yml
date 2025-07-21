@@ -105,6 +105,7 @@ general:
     selected: Aktivne teme
 header:
   labels:
+    config: Konfiguracija
     developer: Za programere
     extras: Dodaci
     general: Opći
@@ -140,6 +141,7 @@ resources:
   app_outdated: Ovaj resurs zahtijeva noviju verziju Seelen Ui da radi pravilno.
   discover: Otkrijte više resursa
   export: Izvozni resurs
+  import_wallpapers: Uvoz lokalnih pozadina
   open_folder: Otvorite mapu resursa
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju Seelena UI-a i možda neće
@@ -258,13 +260,34 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: Pozadine
+  blur: Zamutiti
+  contrast: Kontrast
   enable: Omogućite menadžer pozadina
+  fit:
+    contain: Sadržiti
+    cover: Pokriti
+    fill: Ispuniti
+  flipHorizontal: Flip horizontalni
+  flipVertical: Okrenuti vertikalu
   hours: sati
   interval: Promijenite pozadinu svake
   minutes: minuta
   no_background: Prazno prezentacija, koristeći temu, umjesto toga.
+  objectFit: Pozadina fit
+  objectPosition: Pozadinsko pozicija
+  overlayColor: Boja prekrivanja
+  overlayMixBlendMode: Prekrivač miks mod mješavine
+  playback: Brzina reprodukcije
+  position:
+    bottom: Dno
+    center: Centar
+    left: Lijevo
+    right: Pravo
+    top: Vrh
   random: Randomizirajte prezentaciju
+  saturation: Zasićenje
   seconds: sekundi
+  withOverlay: Sa prekrivanjem
 weg:
   auto_hide: Auto se sakrio
   delay_to_hide: Odložite da se sakrijete

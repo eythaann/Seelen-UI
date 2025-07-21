@@ -10,6 +10,9 @@ resource:
   downloading_body: ウィンドウを閉じないでください。
   enable: 有効にする
 runtime:
+  corrupted_data: 破損したデータ
+  corrupted_file: 設定ファイルが破損し、代わりにデフォルト値が使用されている。
+  corrupted_file_path: 破損したファイルパス
   download: ダウンロードページを開く
   not_found: WebView2 ランタイムが見つかりません
   not_found_description: Seelen UI には Webview2 ランタイムが必要です。インストールしてください。

@@ -107,6 +107,7 @@ general:
     selected: تم های فعال
 header:
   labels:
+    config: تنظیمات
     developer: برای توسعه دهندگان
     extras: اضافی
     general: عمومی
@@ -142,6 +143,7 @@ resources:
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
   discover: منابع بیشتری را کشف کنید
   export: منبع صادراتی
+  import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
   open_folder: پوشه منبع باز
   outdated: >-
     این منبع برای نسخه قدیمی تر Seelen UI طراحی شده است و ممکن است به درستی کار
@@ -259,13 +261,34 @@ vd:
     seelen: بیچاری
 wall:
   backgrounds: تصاویر پس زمینه
+  blur: مبهم
+  contrast: کنتراست
   enable: مدیر تصویر زمینه را فعال کنید
+  fit:
+    contain: حاوی بودن
+    cover: پوشش
+    fill: پر کردن
+  flipHorizontal: تلنگر افقی
+  flipVertical: به صورت عمودی
   hours: ساعت
   interval: کاغذ دیواری را تغییر دهید
   minutes: دقایقی
   no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
+  objectFit: متناسب با پس زمینه
+  objectPosition: موقعیت پس زمینه
+  overlayColor: رنگ روکش
+  overlayMixBlendMode: حالت مخلوط مخلوط روکش
+  playback: سرعت پخش
+  position:
+    bottom: پایین
+    center: مرکز
+    left: چپ
+    right: حق
+    top: بالا
   random: نمایش پرده ای تصادفی
+  saturation: اشباع
   seconds: ثانیه
+  withOverlay: با روکش
 weg:
   auto_hide: پنهان خودکار
   delay_to_hide: تاخیر برای پنهان شدن
