@@ -56,7 +56,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-latest"
+          - platform: "windows-2025"
             args: ""
 
     runs-on: ${{ matrix.platform }}

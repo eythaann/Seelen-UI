@@ -24,7 +24,7 @@ jobs:
       - run: npm run test
 
   rust-linter:
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
         with:
@@ -45,7 +45,7 @@ jobs:
           cargo clippy --locked --all-targets -- -D warnings
 
   rust-test:
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
         with:

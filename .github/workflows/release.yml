@@ -55,7 +55,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-latest"
+          - platform: "windows-2025"
             args: ""
 
     runs-on: ${{ matrix.platform }}
@@ -76,11 +76,8 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
-      - name: Install winget
-        uses: Cyberboss/install-winget@v1
-
       - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-2025'
         shell: pwsh
         run: |
           winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
@@ -98,7 +95,7 @@ jobs:
           args: ${{ matrix.args }}
 
       - name: Bundle MSIX
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-2025'
         run: npx tsx scripts/bundle.msix.ts
 
       - name: Upload artifacts
@@ -113,7 +110,7 @@ jobs:
 
   microsoft-store-submission:
     needs: build-installers
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
         with:

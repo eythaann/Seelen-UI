@@ -44,7 +44,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-latest"
+          - platform: "windows-2025"
             args: ""
     outputs:
       nightly-version: ${{ steps.change-version.outputs.result }}
@@ -90,11 +90,8 @@ jobs:
 
             return nightlyVersion;
 
-      - name: Install winget
-        uses: Cyberboss/install-winget@v1
-
       - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-2025'
         shell: pwsh
         run: |
           winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
@@ -116,11 +113,11 @@ jobs:
           args: ${{ matrix.args }}
 
       - name: Bundle MSIX
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-2025'
         run: npx tsx scripts/bundle.msix.ts
 
       - name: Upload msix to release
-        if: matrix.platform == 'windows-latest'
+        if: matrix.platform == 'windows-2025'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: nightly

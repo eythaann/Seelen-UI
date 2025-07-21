@@ -45,7 +45,7 @@ jobs:
   msix-to-winget:
     name: MSIX to Winget
     needs: upload-store-msix-to-release
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - name: Get Latest Release
         id: get-version
