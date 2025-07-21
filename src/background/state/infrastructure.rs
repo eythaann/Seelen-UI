@@ -131,13 +131,12 @@ pub fn state_request_wallpaper_addition() -> Result<()> {
         .add_filter("video", &Wallpaper::SUPPORTED_VIDEOS)
         .add_filter("image", &Wallpaper::SUPPORTED_IMAGES)
         .pick_files(|picked| {
-            let folder_to_store = SEELEN_COMMON
-                .user_wallpapers_path()
-                .join(date_based_hex_id());
             for path in picked.unwrap_or_default() {
                 if let Ok(path) = path.simplified().into_path() {
-                    let result = Wallpaper::create_from_file(&path, &folder_to_store, true);
-                    log_error!(result);
+                    let folder_to_store = SEELEN_COMMON
+                        .user_wallpapers_path()
+                        .join(date_based_hex_id());
+                    log_error!(Wallpaper::create_from_file(&path, &folder_to_store, true));
                 }
             }
         });
