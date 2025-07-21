@@ -37,7 +37,7 @@ interface Container {
 }
 
 export function FancyToolbar() {
-  const $active_id = useSignal<string | null>(null);
+  const $dragging_id = useSignal<string | null>(null);
   const $containers = useComputed<Container[]>(() => [
     {
       id: 'left',
@@ -82,7 +82,7 @@ export function FancyToolbar() {
   }
 
   function handleDragStart({ active }: DragStartEvent) {
-    $active_id.value = active.id as string;
+    $dragging_id.value = active.id as string;
   }
 
   // this handles the item container change while dragging
@@ -115,7 +115,7 @@ export function FancyToolbar() {
   // this will handle the sorting
   function handleDragEnd({ active, over }: DragEndEvent) {
     if (!over || active.id === over.id) {
-      $active_id.value = null;
+      $dragging_id.value = null;
       return;
     }
 
@@ -123,7 +123,7 @@ export function FancyToolbar() {
     const overContainer = findContainer(over.id as string);
 
     if (!activeContainer || !overContainer || activeContainer.id !== overContainer.id) {
-      $active_id.value = null;
+      $dragging_id.value = null;
       return;
     }
 
@@ -139,8 +139,8 @@ export function FancyToolbar() {
     }
   }
 
-  const activeContainer = $active_id.value ? findContainer($active_id.value) : undefined;
-  const activeItem = activeContainer?.items.find((item) => item === $active_id.value);
+  const activeContainer = $dragging_id.value ? findContainer($dragging_id.value) : undefined;
+  const draggingItem = activeContainer?.items.find((item) => item === $dragging_id.value);
 
   return (
     <AnimatedDropdown
@@ -174,7 +174,7 @@ export function FancyToolbar() {
             <ItemsDropableContainer key={id} id={id} items={items} />
           ))}
           <DragOverlay>
-            {activeItem && componentByModule(activeItem)}
+            {draggingItem && componentByModule(draggingItem)}
           </DragOverlay>
         </DndContext>
       </div>

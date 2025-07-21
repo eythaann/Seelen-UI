@@ -1,9 +1,8 @@
+import { PlaybackSpeed, WallpaperInstanceSettings } from '@seelen-ui/lib/types';
 import { CSSProperties } from 'preact/compat';
 
-import { $settings } from '../shared/state';
-
-export function getPlaybackRate(): number {
-  switch ($settings.value.playbackSpeed) {
+export function getPlaybackRate(speed: PlaybackSpeed): number {
+  switch (speed) {
     case 'xDot25':
       return 0.25;
     case 'xDot5':
@@ -23,13 +22,13 @@ export function getPlaybackRate(): number {
   }
 }
 
-export function getWallpaperStyles() {
+export function getWallpaperStyles(config: WallpaperInstanceSettings) {
   const styles: CSSProperties = {};
   const transforms: string[] = [];
   const filters: string[] = [];
 
   const { flipHorizontal, flipVertical, blur, saturation, contrast, objectFit, objectPosition } =
-    $settings.value;
+    config;
 
   styles.objectFit = objectFit;
   styles.objectPosition = objectPosition;

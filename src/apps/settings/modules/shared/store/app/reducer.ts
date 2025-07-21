@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UIColors, UpdateChannel, VirtualDesktopStrategy } from '@seelen-ui/lib';
-import { IconPackId, ThemeId, WidgetId } from '@seelen-ui/lib/types';
+import { IconPackId, SeelenWallSettings, ThemeId, WallpaperId, WallpaperInstanceSettings, WidgetId } from '@seelen-ui/lib/types';
 import { cloneDeep, pick } from 'lodash';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
@@ -128,6 +128,22 @@ export const RootSlice = createSlice({
     removeTheme: (state, action: PayloadAction<string>) => {
       state.toBeSaved = true;
       state.activeThemes = state.activeThemes.filter((x) => x !== action.payload);
+    },
+    patchWall: (state, action: PayloadAction<Partial<SeelenWallSettings>>) => {
+      state.toBeSaved = true;
+      state.wall = { ...state.wall, ...action.payload };
+    },
+    patchWallpaperSettings: (state, action: PayloadAction<{
+      id: WallpaperId;
+      patch: Partial<WallpaperInstanceSettings>;
+    }>) => {
+      const { id, patch } = action.payload;
+      state.toBeSaved = true;
+      state.wall.byBackground[id] = { ...(state.wall.byBackground[id] || {}), ...patch } as WallpaperInstanceSettings;
+    },
+    resetWallpaperSettings: (state, action: PayloadAction<WallpaperId>) => {
+      state.toBeSaved = true;
+      delete state.wall.byBackground[action.payload];
     },
     patchWidgetConfig(
       state,

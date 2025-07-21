@@ -120,6 +120,7 @@ header:
     virtual_desk: Virtual Desktops
     wallpaper: Wallpapers
     widget: Widgets
+    config: Configurations
 home:
   new_resources: New Resources
 inherit: Inherit
@@ -262,6 +263,27 @@ wall:
   no_background: Empty slideshow, using theme's background instead.
   random: Randomize slideshow
   seconds: seconds
+  playback: Playback speed
+  flipHorizontal: Flip Horizontal
+  flipVertical: Flip Vertical
+  blur: Blur
+  objectFit: Background Fit
+  objectPosition: Background Position
+  fit:
+    contain: Contain
+    cover: Cover
+    fill: Fill
+  position:
+    left: Left
+    right: Right
+    top: Top
+    bottom: Bottom
+    center: Center
+  saturation: Saturation
+  contrast: Contrast
+  withOverlay: With Overlay
+  overlayMixBlendMode: Overlay Mix Blend Mode
+  overlayColor: Overlay Color
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide

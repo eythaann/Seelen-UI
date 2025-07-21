@@ -46,7 +46,7 @@ export const Header = () => {
   const saveBtnLabel = shouldRestart ? t('save_and_restart') : t('save');
 
   let label: React.ReactNode = <span>null!?</span>;
-  const parts = location.pathname === '/' ? ['home'] : location.pathname.split('/').filter(Boolean);
+  let parts = location.pathname === '/' ? ['home'] : location.pathname.split('/').filter(Boolean);
 
   if (parts[0] === 'widget') {
     const [_, username, resourceName] = parts;
@@ -59,6 +59,10 @@ export const Header = () => {
     const theme = themes.find((t) => t.id === themeId);
     label = theme ? <ResourceText text={theme.metadata.displayName} /> : <span>{themeId}</span>;
   } else {
+    if (parts[0] === 'wallpaper') {
+      parts = ['resources', 'wallpaper', 'config'];
+    }
+
     label = parts.map((part, idx) => (
       <React.Fragment key={part}>
         <span className={cs.part}>{t(`header.labels.${part}`)}</span>

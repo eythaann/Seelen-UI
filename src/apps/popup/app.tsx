@@ -6,8 +6,7 @@ import { Icon } from '@shared/components/Icon';
 import { emit } from '@tauri-apps/api/event';
 import { LogicalPosition, LogicalSize } from '@tauri-apps/api/window';
 
-const currentWidget = await Widget.getCurrentAsync();
-
+const currentWidget = Widget.getCurrent();
 const state = signal<SluPopupConfig>({
   width: 0,
   height: 0,

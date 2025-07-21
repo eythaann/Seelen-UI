@@ -10,7 +10,7 @@ import { IconPacksView } from './IconPacks';
 import { PluginsView } from './Plugins';
 import { SoundPacksView } from './SoundPacks';
 import { ThemesView } from './Themes';
-import { WallpapersView } from './Wallpapers/View';
+import { AllWallpapersView } from './Wallpapers/AllView';
 import { WidgetsView } from './Widgets';
 
 const kinds: ResourceKind[] = ['Theme', 'Plugin', 'Widget', 'IconPack', 'Wallpaper', 'SoundPack'];
@@ -22,7 +22,7 @@ export function ResourcesView() {
       <Route path="theme" Component={ThemesView} />
       <Route path="plugin" Component={PluginsView} />
       <Route path="widget" Component={WidgetsView} />
-      <Route path="wallpaper" Component={WallpapersView} />
+      <Route path="wallpaper" Component={AllWallpapersView} />
       <Route path="iconpack" Component={IconPacksView} />
       <Route path="soundpack" Component={SoundPacksView} />
     </Routes>

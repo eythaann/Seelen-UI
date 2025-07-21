@@ -1,36 +1,33 @@
-import {
-  DndContext,
-  DragEndEvent,
-  PointerSensor,
-  TouchSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import { WallpaperId } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
 import { ResourceText } from '@shared/components/ResourceText';
-import { Switch } from 'antd';
-import { ComponentChildren } from 'preact';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { VerticalSortableSelect } from '@shared/components/SortableSelector';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { newSelectors } from '../shared/store/app/reducer';
+import { newSelectors, RootActions } from '../shared/store/app/reducer';
 
-import cs from './index.module.css';
+export function WallpaperList() {
+  const enabled = useSelector(newSelectors.wall.backgroundsV2);
+  const wallpapers = useSelector(newSelectors.wallpapers);
 
-interface Props {
-  enabled: WallpaperId[];
-  onChangeEnabled: (enabled: WallpaperId[]) => void;
+  const d = useDispatch();
+
+  function onChangeEnabled(backgroundsV2: WallpaperId[]) {
+    d(RootActions.patchWall({ backgroundsV2 }));
+  }
+
+  return (
+    <VerticalSortableSelect
+      options={wallpapers.map((w) => ({
+        value: w.id,
+        label: <ResourceText text={w.metadata.displayName} />,
+      }))}
+      enabled={enabled}
+      onChange={onChangeEnabled}
+    />
+  );
 }
-
-export function WallpaperList({ enabled, onChangeEnabled }: Props) {
+/*
+export function _WallpaperList({ enabled, onChangeEnabled }: Props) {
   const wallpapers = useSelector(newSelectors.wallpapers);
 
   const sensors = useSensors(
@@ -124,3 +121,4 @@ function Draggable({ children, id }: { children: ComponentChildren; id: string }
     </li>
   );
 }
+ */

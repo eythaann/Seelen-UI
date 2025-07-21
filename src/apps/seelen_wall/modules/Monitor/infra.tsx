@@ -1,7 +1,7 @@
 import { batch, computed, useSignal, useSignalEffect } from '@preact/signals';
+import { WallpaperConfiguration } from '@seelen-ui/lib';
 import { PhysicalMonitor, WallpaperId } from '@seelen-ui/lib/types';
-
-import { ThemedWallpaper, Wallpaper as WallpaperComponent } from '../wallpaper/infra';
+import { ThemedWallpaper, Wallpaper as WallpaperComponent } from '@shared/components/Wallpaper';
 
 import { $active_wallpapers, $monitors, $settings } from '../shared/state';
 
@@ -29,6 +29,8 @@ const $relativeMonitors = computed(() => {
     };
   });
 });
+
+const defaultWallpaperConfig = await WallpaperConfiguration.default();
 
 export function MonitorContainers() {
   console.log($relativeMonitors.value);
@@ -78,6 +80,7 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
 
   const oldWallpaper = $active_wallpapers.value.find((wallpaper) => wallpaper.id === oldId.value);
   const wallpaper = $active_wallpapers.value.find((wallpaper) => wallpaper.id === currentId.value);
+
   return (
     <div
       className="monitor"
@@ -93,31 +96,27 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
         wallpaper ? (
           <WallpaperComponent
             key={wallpaper.id}
-            path={wallpaper.metadata.path + '/' + wallpaper.filename}
+            definition={wallpaper}
+            config={$settings.value.byBackground[wallpaper.id] || defaultWallpaperConfig}
           />
         ) : (
-          <ThemedWallpaper key={renderOld.value ? 'new' : 'current'} />
+          <ThemedWallpaper
+            key={renderOld.value ? 'new' : 'current'}
+            config={defaultWallpaperConfig}
+          />
         ),
         renderOld.value &&
           (oldWallpaper ? (
             <WallpaperComponent
               key={oldWallpaper.id}
-              path={oldWallpaper.metadata.path + '/' + oldWallpaper.filename}
+              definition={oldWallpaper}
+              config={$settings.value.byBackground[oldWallpaper.id] || defaultWallpaperConfig}
               out
             />
           ) : (
-            <ThemedWallpaper key="current" out />
+            <ThemedWallpaper key="current" config={defaultWallpaperConfig} out />
           )),
       ]}
-      {$settings.value.withOverlay && (
-        <div
-          className="monitor-overlay"
-          style={{
-            mixBlendMode: $settings.value.overlayMixBlendMode,
-            backgroundColor: $settings.value.overlayColor,
-          }}
-        />
-      )}
     </div>
   );
 }

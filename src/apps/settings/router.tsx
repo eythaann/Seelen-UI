@@ -18,6 +18,7 @@ import { RoutePath } from './components/navigation/routes';
 import { Home } from './modules/Home';
 import { IconPackEditorView } from './modules/IconPackEditor';
 import { ThemeView } from './modules/resources/Theme/View';
+import { SingleWallpaperView } from './modules/resources/Wallpapers/SingleView';
 import { WidgetView } from './modules/resources/Widget/View';
 
 export function Routing() {
@@ -40,6 +41,7 @@ export function Routing() {
         <Route path={RoutePath.IconPackEditor} Component={IconPackEditorView} />
         <Route path="widget/:username/:resourceName" Component={WidgetView} />
         <Route path="theme/:username/:resourceName" Component={ThemeView} />
+        <Route path="wallpaper/:username/:resourceName" Component={SingleWallpaperView} />
       </Route>
     </Routes>
   );

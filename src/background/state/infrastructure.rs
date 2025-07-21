@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{
     IconPack, IconPackEntry, LauncherHistory, MonitorConfiguration, Plugin, Profile, Wallpaper,
-    WegItems, WegPinnedItemsVisibility, Widget,
+    WallpaperInstanceSettings, WegItems, WegPinnedItemsVisibility, Widget,
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -85,6 +85,11 @@ pub fn state_get_default_settings() -> Settings {
 #[tauri::command(async)]
 pub fn state_get_default_monitor_settings() -> MonitorConfiguration {
     MonitorConfiguration::default()
+}
+
+#[tauri::command(async)]
+pub fn state_get_default_wallpaper_settings() -> WallpaperInstanceSettings {
+    WallpaperInstanceSettings::default()
 }
 
 #[tauri::command(async)]
