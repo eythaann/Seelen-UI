@@ -1,34 +1,10 @@
-import { batch, computed, useSignal, useSignalEffect } from '@preact/signals';
+import { batch, useSignal, useSignalEffect } from '@preact/signals';
 import { WallpaperConfiguration } from '@seelen-ui/lib';
 import { PhysicalMonitor, WallpaperId } from '@seelen-ui/lib/types';
-import { ThemedWallpaper, Wallpaper as WallpaperComponent } from '@shared/components/Wallpaper';
+import { Wallpaper as WallpaperComponent } from '@shared/components/Wallpaper';
 
-import { $active_wallpapers, $monitors, $settings } from '../shared/state';
-
-const $relativeMonitors = computed(() => {
-  const lower = { x: 0, y: 0 };
-  for (const monitor of $monitors.value) {
-    if (monitor.rect.left < lower.x) {
-      lower.x = monitor.rect.left;
-    }
-    if (monitor.rect.top < lower.y) {
-      lower.y = monitor.rect.top;
-    }
-  }
-
-  return $monitors.value.map((monitor) => {
-    return {
-      ...monitor,
-      rect: {
-        ...monitor.rect,
-        left: monitor.rect.left - lower.x,
-        top: monitor.rect.top - lower.y,
-        right: monitor.rect.right - lower.x,
-        bottom: monitor.rect.bottom - lower.y,
-      },
-    };
-  });
-});
+import { $settings, $wallpapers } from '../shared/state';
+import { $active_wallpapers, $relativeMonitors } from './derived';
 
 const defaultWallpaperConfig = await WallpaperConfiguration.default();
 
@@ -39,47 +15,77 @@ export function MonitorContainers() {
   });
 }
 
+/*
+ * cases:
+ * 1. only one wallpaper:
+ *    - no transitions, no old wallpaper, show themed as fallback
+ * 2. two or more wallpapers:
+ *    - interval change between wallpapers
+ *    - in case of error, old wallpaper will persist until next change
+ */
+
 function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
-  const renderOld = useSignal(false);
-
-  const oldId = useSignal<WallpaperId | null>(null);
-  const currentId = useSignal<WallpaperId | null>($active_wallpapers.value.at(0)?.id || null);
-
-  useSignalEffect(() => {
-    if ($active_wallpapers.value.length < 2) {
-      batch(() => {
-        renderOld.value = false;
-        oldId.value = null;
-        currentId.value = $active_wallpapers.value.at(0)?.id || null;
-      });
-      return;
-    }
-
-    let intervalId = window.setInterval(() => {
-      const index = $active_wallpapers.value.findIndex(
-        (wallpaper) => wallpaper.id === currentId.value,
-      );
-      const nextIndex = (index + 1) % $active_wallpapers.value.length;
-      batch(() => {
-        renderOld.value = true;
-        oldId.value = currentId.value;
-        currentId.value = $active_wallpapers.value[nextIndex]?.id || null;
-      });
-    }, $settings.value.interval * 1000);
-    return () => clearInterval(intervalId);
-  });
+  const $render_old = useSignal(false);
+  const $current_was_loaded = useSignal(false);
 
   // unrender old wallpaper after 1s
   useSignalEffect(() => {
-    if (!renderOld.value) return;
+    if (!$render_old.value || !$current_was_loaded.value) return;
+    // start unrender timeout only after success load of new wallpaper
     let timeoutId = setTimeout(() => {
-      renderOld.value = false;
+      $render_old.value = false;
     }, 1000);
     return () => clearTimeout(timeoutId);
   });
 
-  const oldWallpaper = $active_wallpapers.value.find((wallpaper) => wallpaper.id === oldId.value);
-  const wallpaper = $active_wallpapers.value.find((wallpaper) => wallpaper.id === currentId.value);
+  const $old_id = useSignal<WallpaperId | null>(null);
+  const $current_id = useSignal<WallpaperId | null>($active_wallpapers.value.at(0)?.id || null);
+
+  function changeWallpaper(newId: WallpaperId) {
+    batch(() => {
+      $old_id.value = $current_id.value;
+      $render_old.value = true;
+      $current_id.value = newId;
+      $current_was_loaded.value = false;
+    });
+  }
+
+  function changeToNext() {
+    let currentIdx = $current_id.value
+      ? $active_wallpapers.value.findIndex((w) => w.id === $current_id.value)
+      : 0;
+
+    // if current was removed from actives
+    if (currentIdx === -1) {
+      currentIdx = 0;
+    }
+
+    const nextIdx = (currentIdx + 1) % $active_wallpapers.value.length;
+
+    // if next is same as current (1 wallpaper)
+    if (currentIdx === nextIdx) {
+      return;
+    }
+
+    changeWallpaper($active_wallpapers.value[nextIdx]!.id);
+  }
+
+  useSignalEffect(() => {
+    if ($active_wallpapers.value.length < 2) {
+      batch(() => {
+        $render_old.value = false;
+        $old_id.value = null;
+        $current_id.value = $active_wallpapers.value.at(0)?.id || null;
+      });
+      return;
+    }
+
+    let intervalId = window.setInterval(changeToNext, $settings.value.interval * 1000);
+    return () => clearInterval(intervalId);
+  });
+
+  const oldWallpaper = $wallpapers.value.find((wallpaper) => wallpaper.id === $old_id.value);
+  const wallpaper = $wallpapers.value.find((wallpaper) => wallpaper.id === $current_id.value);
 
   return (
     <div
@@ -93,29 +99,28 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
       }}
     >
       {[
-        wallpaper ? (
+        $render_old.value && (
           <WallpaperComponent
-            key={wallpaper.id}
-            definition={wallpaper}
-            config={$settings.value.byBackground[wallpaper.id] || defaultWallpaperConfig}
-          />
-        ) : (
-          <ThemedWallpaper
-            key={renderOld.value ? 'new' : 'current'}
-            config={defaultWallpaperConfig}
+            key={oldWallpaper?.id || 'themed'}
+            definition={oldWallpaper}
+            config={
+              oldWallpaper
+                ? $settings.value.byBackground[oldWallpaper.id] || defaultWallpaperConfig
+                : defaultWallpaperConfig
+            }
+            out={$current_was_loaded.value}
           />
         ),
-        renderOld.value &&
-          (oldWallpaper ? (
-            <WallpaperComponent
-              key={oldWallpaper.id}
-              definition={oldWallpaper}
-              config={$settings.value.byBackground[oldWallpaper.id] || defaultWallpaperConfig}
-              out
-            />
-          ) : (
-            <ThemedWallpaper key="current" config={defaultWallpaperConfig} out />
-          )),
+        <WallpaperComponent
+          key={wallpaper?.id || 'themed'}
+          definition={wallpaper}
+          config={
+            wallpaper
+              ? $settings.value.byBackground[wallpaper.id] || defaultWallpaperConfig
+              : defaultWallpaperConfig
+          }
+          onLoad={() => ($current_was_loaded.value = true)}
+        />,
       ]}
     </div>
   );

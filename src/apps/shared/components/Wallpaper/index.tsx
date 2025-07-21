@@ -1,3 +1,4 @@
+import { useSignal } from '@preact/signals';
 import {
   SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS,
   SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS,
@@ -13,31 +14,54 @@ import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundBy
 import { getPlaybackRate, getWallpaperStyles } from './utils';
 import cs from './index.module.css';
 
-interface Props {
-  definition: Wallpaper;
+interface BaseProps {
+  definition?: Wallpaper;
   config: WallpaperInstanceSettings;
+  onLoad?: () => void;
   paused?: boolean;
   out?: boolean;
 }
 
-export function Wallpaper(props: Props) {
+export function Wallpaper(props: BaseProps) {
   const { definition, config } = props;
 
-  let element: ComponentChildren = null;
-  if (SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.endsWith(ext))) {
-    element = <ImageWallpaper {...props} />;
+  const $loaded = useSignal(false);
+
+  function onLoad() {
+    $loaded.value = true;
+    props.onLoad?.();
   }
 
-  if (SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.endsWith(ext))) {
-    element = <VideoWallpaper {...props} />;
+  let element: ComponentChildren = null;
+  if (
+    definition &&
+    SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.endsWith(ext))
+  ) {
+    element = <ImageWallpaper {...(props as DefinedWallProps)} onLoad={onLoad} />;
+  }
+
+  if (
+    definition &&
+    SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.endsWith(ext))
+  ) {
+    element = <VideoWallpaper {...(props as DefinedWallProps)} onLoad={onLoad} />;
+  }
+
+  if (!element) {
+    element = <ThemedWallpaper {...props} onLoad={onLoad} />;
   }
 
   return (
-    <div className={cs.container}>
-      {element || <ThemedWallpaper {...props} />}
-      {config.withOverlay && (
+    <div
+      className={cx(cs.container, 'wallpaper-container', {
+        rendering: $loaded.value,
+        'will-unrender': props.out,
+      })}
+    >
+      {element}
+      {config.withOverlay && $loaded.value && (
         <div
-          className={cs.overlay}
+          className={cx(cs.overlay, 'wallpaper-overlay')}
           style={{ mixBlendMode: config.overlayMixBlendMode, backgroundColor: config.overlayColor }}
         />
       )}
@@ -45,30 +69,34 @@ export function Wallpaper(props: Props) {
   );
 }
 
-export function ThemedWallpaper({ out, config }: Pick<Props, 'out' | 'config'>) {
+export function ThemedWallpaper({ config, onLoad }: BaseProps) {
+  useEffect(() => {
+    onLoad?.();
+  }, []);
+
   return (
-    <div
-      className={cx(cs.wallpaper, 'themed-wallpaper', {
-        'wallpaper-out': out,
-      })}
-      style={getWallpaperStyles(config)}
-    >
+    <div className={cx(cs.wallpaper, 'themed-wallpaper')} style={getWallpaperStyles(config)}>
       <BackgroundByLayersV2 />
     </div>
   );
 }
 
-function ImageWallpaper({ definition, config, out }: Props) {
+interface DefinedWallProps extends BaseProps {
+  definition: Wallpaper;
+}
+
+function ImageWallpaper({ definition, config, onLoad }: DefinedWallProps) {
   return (
     <img
-      className={cx(cs.wallpaper, 'wallpaper', { 'wallpaper-out': out })}
+      className={cx(cs.wallpaper, 'wallpaper')}
       style={getWallpaperStyles(config)}
       src={convertFileSrc(definition.metadata.path + '\\' + definition.filename!)}
+      onLoad={onLoad}
     />
   );
 }
 
-function VideoWallpaper({ definition, config, out, paused }: Props) {
+function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -91,7 +119,7 @@ function VideoWallpaper({ definition, config, out, paused }: Props) {
 
   return (
     <video
-      className={cx(cs.wallpaper, 'wallpaper', { 'wallpaper-out': out })}
+      className={cx(cs.wallpaper, 'wallpaper')}
       style={getWallpaperStyles(config)}
       ref={ref}
       src={convertFileSrc(definition.metadata.path + '\\' + definition.filename!)}
@@ -103,6 +131,7 @@ function VideoWallpaper({ definition, config, out, paused }: Props) {
       disableRemotePlayback
       onWaiting={onWaiting}
       playbackRate={getPlaybackRate(config.playbackSpeed)}
+      onLoadedMetadata={onLoad} // mark video as loaded on portrait load
     />
   );
 }

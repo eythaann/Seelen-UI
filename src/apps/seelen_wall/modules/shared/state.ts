@@ -1,4 +1,4 @@
-import { computed, signal } from '@preact/signals';
+import { signal } from '@preact/signals';
 import {
   invoke,
   SeelenCommand,
@@ -8,7 +8,7 @@ import {
   UIColors,
   WallpaperList,
 } from '@seelen-ui/lib';
-import { SeelenWallSettings, Wallpaper } from '@seelen-ui/lib/types';
+import { SeelenWallSettings } from '@seelen-ui/lib/types';
 
 export const $settings = signal<SeelenWallSettings>((await Settings.getAsync()).wall);
 Settings.onChange((settings) => ($settings.value = settings.wall));
@@ -26,14 +26,3 @@ subscribe(SeelenEvent.SystemMonitorsChanged, ({ payload }) => {
 
 export const $wallpapers = signal((await WallpaperList.getAsync()).asArray());
 WallpaperList.onChange((wallpapers) => ($wallpapers.value = wallpapers.asArray()));
-
-export const $active_wallpapers = computed(() => {
-  const active: Wallpaper[] = [];
-  $settings.value.backgroundsV2.forEach((id) => {
-    let current = $wallpapers.value.find((w) => w.id === id);
-    if (current) {
-      active.push(current);
-    }
-  });
-  return active;
-});
