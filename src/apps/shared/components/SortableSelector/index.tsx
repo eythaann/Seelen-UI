@@ -85,15 +85,15 @@ export function VerticalSortableSelect<T extends string>({ options, enabled, onC
 
   const draggingOption = options.find(({ value }) => value === $dragging_id.value) ?? null;
   return (
-    <div className={cs.container}>
-      <DndContext
-        sensors={sensors}
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-        onDragCancel={() => ($dragging_id.value = null)}
-        collisionDetection={closestCorners}
-      >
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+      onDragCancel={() => ($dragging_id.value = null)}
+      collisionDetection={closestCorners}
+    >
+      <div className={cs.container}>
         {containers.map(({ id, items }) => (
           <div className={cs.box}>
             <div className={cs.header}>{id === 'enabled' ? 'Enabled' : 'Disabled'}</div>
@@ -109,8 +109,8 @@ export function VerticalSortableSelect<T extends string>({ options, enabled, onC
         <DragOverlay>
           {draggingOption && <div className={cs.item}>{draggingOption.label}</div>}
         </DragOverlay>
-      </DndContext>
-    </div>
+      </div>
+    </DndContext>
   );
 }
 
@@ -128,11 +128,11 @@ function DndDropableAndSortableContainer({
   const { setNodeRef } = useDroppable({ id });
 
   return (
-    <div ref={setNodeRef} className={className}>
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
+    <SortableContext items={items} strategy={verticalListSortingStrategy}>
+      <div ref={setNodeRef} className={className}>
         {children}
-      </SortableContext>
-    </div>
+      </div>
+    </SortableContext>
   );
 }
 

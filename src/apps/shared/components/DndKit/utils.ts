@@ -5,6 +5,10 @@ export interface DndContainer<T extends UniqueIdentifier> {
   items: T[];
 }
 
+function getContainerIdx(id: UniqueIdentifier, containers: DndContainer<UniqueIdentifier>[]) {
+  return containers.findIndex((c) => c.id === id || c.items.includes(id));
+}
+
 export function genericHandleDragOver<T extends UniqueIdentifier>(
   { active, over }: DragOverEvent,
   containers: DndContainer<T>[],
@@ -12,8 +16,8 @@ export function genericHandleDragOver<T extends UniqueIdentifier>(
 ) {
   if (!over) return;
 
-  const activeContainerIdx = containers.findIndex((c) => c.items.includes(active.id as T));
-  const overContainerIdx = containers.findIndex((c) => c.items.includes(over.id as T));
+  const activeContainerIdx = getContainerIdx(active.id as T, containers);
+  const overContainerIdx = getContainerIdx(over.id as T, containers);
   if (activeContainerIdx === -1 || overContainerIdx === -1) return; // container not found
 
   const activeContainer = containers.at(activeContainerIdx)!;
