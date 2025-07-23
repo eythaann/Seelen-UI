@@ -20,7 +20,6 @@ export function MonitorContainers() {
  *    - interval change between wallpapers
  *    - in case of error, old wallpaper will persist until next change
  */
-
 function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
   const $render_old = useSignal(false);
   const $current_was_loaded = useSignal(false);
@@ -36,9 +35,17 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
   });
 
   const $active_wallpapers = useComputed(() => $get_active_wallpapers(monitor.id));
+  function $get_initial_wall_id() {
+    if ($settings.value.randomize) {
+      const idx = Math.floor(Math.random() * $active_wallpapers.value.length);
+      return $active_wallpapers.value[idx]?.id || null;
+    } else {
+      return $active_wallpapers.value.at(0)?.id || null;
+    }
+  }
 
   const $old_id = useSignal<WallpaperId | null>(null);
-  const $current_id = useSignal<WallpaperId | null>($active_wallpapers.value.at(0)?.id || null);
+  const $current_id = useSignal<WallpaperId | null>($get_initial_wall_id());
 
   function changeWallpaper(newId: WallpaperId) {
     batch(() => {
@@ -59,7 +66,15 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
       currentIdx = 0;
     }
 
-    const nextIdx = (currentIdx + 1) % $active_wallpapers.value.length;
+    let nextIdx = 0;
+    if ($settings.value.randomize && $active_wallpapers.value.length > 2) {
+      do {
+        nextIdx = Math.floor(Math.random() * $active_wallpapers.value.length);
+      } while (nextIdx === currentIdx);
+    } else {
+      // secuential
+      nextIdx = (currentIdx + 1) % $active_wallpapers.value.length;
+    }
 
     // if next is same as current (1 wallpaper)
     if (currentIdx === nextIdx) {
