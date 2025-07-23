@@ -1,12 +1,9 @@
-import { batch, useSignal, useSignalEffect } from '@preact/signals';
-import { WallpaperConfiguration } from '@seelen-ui/lib';
+import { batch, useComputed, useSignal, useSignalEffect } from '@preact/signals';
 import { PhysicalMonitor, WallpaperId } from '@seelen-ui/lib/types';
 import { Wallpaper as WallpaperComponent } from '@shared/components/Wallpaper';
 
 import { $settings, $wallpapers } from '../shared/state';
-import { $active_wallpapers, $relativeMonitors } from './derived';
-
-const defaultWallpaperConfig = await WallpaperConfiguration.default();
+import { $get_active_wallpapers, $relativeMonitors } from './derived';
 
 export function MonitorContainers() {
   console.log($relativeMonitors.value);
@@ -37,6 +34,8 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
     }, 1000);
     return () => clearTimeout(timeoutId);
   });
+
+  const $active_wallpapers = useComputed(() => $get_active_wallpapers(monitor.id));
 
   const $old_id = useSignal<WallpaperId | null>(null);
   const $current_id = useSignal<WallpaperId | null>($active_wallpapers.value.at(0)?.id || null);
@@ -103,22 +102,14 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
           <WallpaperComponent
             key={oldWallpaper?.id || 'themed'}
             definition={oldWallpaper}
-            config={
-              oldWallpaper
-                ? $settings.value.byBackground[oldWallpaper.id] || defaultWallpaperConfig
-                : defaultWallpaperConfig
-            }
+            config={oldWallpaper && $settings.value.byWallpaper[oldWallpaper.id]}
             out={$current_was_loaded.value}
           />
         ),
         <WallpaperComponent
           key={wallpaper?.id || 'themed'}
           definition={wallpaper}
-          config={
-            wallpaper
-              ? $settings.value.byBackground[wallpaper.id] || defaultWallpaperConfig
-              : defaultWallpaperConfig
-          }
+          config={wallpaper && $settings.value.byWallpaper[wallpaper.id]}
           onLoad={() => ($current_was_loaded.value = true)}
         />,
       ]}

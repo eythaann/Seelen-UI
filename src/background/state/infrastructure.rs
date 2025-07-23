@@ -2,8 +2,9 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    IconPack, IconPackEntry, LauncherHistory, MonitorConfiguration, Plugin, Profile, Wallpaper,
-    WallpaperInstanceSettings, WegItems, WegPinnedItemsVisibility, Widget,
+    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPack,
+    IconPackEntry, LauncherHistory, Plugin, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
+    Widget,
 };
 use tauri_plugin_dialog::DialogExt;
 

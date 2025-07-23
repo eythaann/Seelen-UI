@@ -1,8 +1,9 @@
 import { WallpaperConfiguration } from '@seelen-ui/lib';
 import { PlaybackSpeed, WallpaperId, WallpaperInstanceSettings } from '@seelen-ui/lib/types';
+import { Icon } from '@shared/components/Icon';
 import { ResourceText } from '@shared/components/ResourceText';
 import { Wallpaper } from '@shared/components/Wallpaper';
-import { ColorPicker, Select, Slider, Switch } from 'antd';
+import { Button, ColorPicker, Select, Slider, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -38,7 +39,7 @@ export function SingleWallpaperView() {
   const wallpaper = useSelector(newSelectors.wallpapers);
   const editingWallpaper = wallpaper.find((wallpaper) => wallpaper.id === resourceId);
 
-  const storedSettings = useSelector(newSelectors.wall.byBackground);
+  const storedSettings = useSelector(newSelectors.byWallpaper);
   const config = { ...defaultWallpaperConfig, ...(storedSettings[resourceId] || {}) };
 
   const d = useDispatch();
@@ -50,6 +51,10 @@ export function SingleWallpaperView() {
 
   function patchWallSettings(patch: Partial<WallpaperInstanceSettings>) {
     d(RootActions.patchWallpaperSettings({ id: resourceId, patch }));
+  }
+
+  function onReset() {
+    d(RootActions.resetWallpaperSettings(resourceId));
   }
 
   return (
@@ -72,6 +77,14 @@ export function SingleWallpaperView() {
         <b style={{ textAlign: 'center', fontSize: '1.1rem' }}>
           <ResourceText text={editingWallpaper.metadata.displayName} />
         </b>
+        <SettingsOption
+          label={t('reset_all_to_default')}
+          action={
+            <Button onClick={onReset}>
+              <Icon iconName="RiResetLeftLine" />
+            </Button>
+          }
+        />
       </SettingsGroup>
 
       <SettingsGroup>

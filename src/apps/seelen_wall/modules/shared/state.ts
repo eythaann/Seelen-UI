@@ -8,10 +8,22 @@ import {
   UIColors,
   WallpaperList,
 } from '@seelen-ui/lib';
-import { SeelenWallSettings } from '@seelen-ui/lib/types';
 
-export const $settings = signal<SeelenWallSettings>((await Settings.getAsync()).wall);
-Settings.onChange((settings) => ($settings.value = settings.wall));
+const initial = await Settings.getAsync();
+
+export const $settings = signal({
+  ...initial.wall,
+  byWallpaper: initial.byWallpaper,
+  byMonitor: initial.monitorsV3,
+});
+Settings.onChange(
+  (settings) =>
+    ($settings.value = {
+      ...settings.wall,
+      byWallpaper: settings.byWallpaper,
+      byMonitor: settings.monitorsV3,
+    }),
+);
 
 (await UIColors.getAsync()).setAsCssVariables();
 UIColors.onChange((colors) => colors.setAsCssVariables());

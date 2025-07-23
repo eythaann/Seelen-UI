@@ -92,9 +92,9 @@ export function WallSettings() {
             </Button>
           </Link>
         </SettingsOption>
-
-        <WallpaperList />
       </SettingsGroup>
+
+      <WallpaperList />
     </>
   );
 }

@@ -1,4 +1,5 @@
-import { PhysicalMonitor } from '@seelen-ui/lib/types';
+import { SeelenWallWidgetId } from '@seelen-ui/lib';
+import { PhysicalMonitor, Widget } from '@seelen-ui/lib/types';
 import { ResourceText } from '@shared/components/ResourceText';
 import { useSelector } from 'react-redux';
 
@@ -22,6 +23,7 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
         <div className={cs.itemLeft}>
           <div className={cs.label}>{device.name}</div>
           <Monitor
+            monitorId={device.id}
             width={device.rect.right - device.rect.left}
             height={device.rect.bottom - device.rect.top}
           />
@@ -37,26 +39,24 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
           </SettingsGroup>
 
           <SettingsGroup>
-            {widgets
-              .filter((widget) => widget.instances === 'ReplicaByMonitor')
-              .map((widget) => {
-                return (
-                  <SettingsOption key={widget.id}>
-                    <ResourceText text={widget.metadata.displayName} />
-                    <WidgetSettingsModal
-                      widgetId={widget.id}
-                      monitorId={device.id}
-                      title={
-                        <>
-                          {device.name}
-                          {' / '}
-                          <ResourceText text={widget.metadata.displayName} />
-                        </>
-                      }
-                    />
-                  </SettingsOption>
-                );
-              })}
+            {widgets.filter(isConfigurableByMonitor).map((widget) => {
+              return (
+                <SettingsOption key={widget.id}>
+                  <ResourceText text={widget.metadata.displayName} />
+                  <WidgetSettingsModal
+                    widgetId={widget.id}
+                    monitorId={device.id}
+                    title={
+                      <>
+                        {device.name}
+                        {' / '}
+                        <ResourceText text={widget.metadata.displayName} />
+                      </>
+                    }
+                  />
+                </SettingsOption>
+              );
+            })}
           </SettingsGroup>
         </div>
       </div>
@@ -80,4 +80,31 @@ export function SettingsByMonitor() {
       })}
     </>
   );
+}
+
+function isConfigurableByMonitor(widget: Widget) {
+  if (widget.instances === 'ReplicaByMonitor') {
+    return true;
+  }
+
+  // special case
+  if (widget.id === SeelenWallWidgetId) {
+    return true;
+  }
+
+  for (const { group } of widget.settings) {
+    for (const entry of group) {
+      const stack = [entry];
+
+      while (stack.length > 0) {
+        const entry = stack.pop()!;
+        if (entry.config.allowSetByMonitor) {
+          return true;
+        }
+        stack.push(...entry.children);
+      }
+    }
+  }
+
+  return false;
 }

@@ -1,3 +1,4 @@
+import { SeelenWallWidgetId } from '@seelen-ui/lib';
 import { WidgetId } from '@seelen-ui/lib/types';
 import { Switch } from 'antd';
 import { useState } from 'react';
@@ -15,6 +16,7 @@ import {
 
 import { RootState } from '../../shared/store/domain';
 
+import { WallpaperList } from '../../Wall/WallpaperList';
 import { RenderBySettingsDeclaration } from './ConfigRenderer';
 import { WidgetInstanceSelector } from './InstanceSelector';
 
@@ -93,19 +95,23 @@ export function WidgetConfiguration({
     ...(monitorConfig || {}),
   };
 
+  const showToggleEnabled = !monitorId || widget.instances === 'ReplicaByMonitor';
+
   return (
     <>
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{monitorId ? t('widget.enable_for_monitor') : t('widget.enable')}</b>
-          <Switch
-            checked={config.enabled}
-            onChange={(value) => {
-              onConfigChange('enabled', value);
-            }}
-          />
-        </SettingsOption>
-      </SettingsGroup>
+      {showToggleEnabled && (
+        <SettingsGroup>
+          <SettingsOption>
+            <b>{monitorId ? t('widget.enable_for_monitor') : t('widget.enable')}</b>
+            <Switch
+              checked={config.enabled}
+              onChange={(value) => {
+                onConfigChange('enabled', value);
+              }}
+            />
+          </SettingsOption>
+        </SettingsGroup>
+      )}
 
       {widget.instances === 'Multiple' && (
         <SettingsGroup>
@@ -127,6 +133,11 @@ export function WidgetConfiguration({
         onConfigChange={onConfigChange}
         isByMonitor={!!monitorId}
       />
+
+      {/* special case */}
+      {widgetId === SeelenWallWidgetId && (
+        <WallpaperList monitorId={monitorId} />
+      )}
 
       {areDevToolsEnabled && (
         <SettingsGroup>

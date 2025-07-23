@@ -1,5 +1,6 @@
 import { computed } from '@preact/signals';
-import { Wallpaper } from '@seelen-ui/lib/types';
+import { SeelenWallWidgetId } from '@seelen-ui/lib';
+import { Wallpaper, WallpaperId } from '@seelen-ui/lib/types';
 
 import { $monitors, $settings, $wallpapers } from '../shared/state';
 
@@ -29,14 +30,21 @@ export const $relativeMonitors = computed(() => {
 });
 
 // active wallpapers, sorted by user settings and skip missing/removed wallpapers
-export const $active_wallpapers = computed(() => {
+export function $get_active_wallpapers(monitorId: string): Wallpaper[] {
   const active: Wallpaper[] = [];
-  $settings.value.backgroundsV2.forEach((id) => {
+
+  const monitorConfig = $settings.value.byMonitor[monitorId];
+  const bgsInMonitor = monitorConfig?.byWidget?.[SeelenWallWidgetId]?.backgroundsV2 as
+    | WallpaperId[]
+    | undefined;
+
+  for (const id of bgsInMonitor || $settings.value.backgroundsV2) {
     let current = $wallpapers.value.find((w) => w.id === id);
     // if doesn't exist, active wallpaper was removed
     if (current) {
       active.push(current);
     }
-  });
+  }
+
   return active;
-});
+}

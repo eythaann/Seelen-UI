@@ -26,12 +26,18 @@ import { genericHandleDragOver } from '../DndKit/utils';
 import cs from './index.module.css';
 
 interface Props<T> {
+  disabled?: boolean;
   options: { label: ComponentChildren; value: T }[];
   enabled: T[];
   onChange: (enabled: T[]) => void;
 }
 
-export function VerticalSortableSelect<T extends string>({ options, enabled, onChange }: Props<T>) {
+export function VerticalSortableSelect<T extends string>({
+  options,
+  enabled,
+  onChange,
+  disabled = false,
+}: Props<T>) {
   const enabledOpts = options
     .filter(({ value }) => enabled.includes(value))
     .toSorted((a, b) => enabled.indexOf(a.value) - enabled.indexOf(b.value));
@@ -99,7 +105,7 @@ export function VerticalSortableSelect<T extends string>({ options, enabled, onC
             <div className={cs.header}>{id === 'enabled' ? 'Enabled' : 'Disabled'}</div>
             <DndDropableAndSortableContainer key={id} id={id} items={items} className={cs.list}>
               {items.map((id) => (
-                <Entry key={id} value={id}>
+                <Entry key={id} value={id} disabled={disabled}>
                   <div className={cs.item}>{options.find(({ value }) => value === id)?.label}</div>
                 </Entry>
               ))}
@@ -136,11 +142,30 @@ function DndDropableAndSortableContainer({
   );
 }
 
-function Entry({ value, children }: { value: string; children: ComponentChildren }) {
+function Entry({
+  value,
+  children,
+  disabled,
+}: {
+  value: string;
+  children: ComponentChildren;
+  disabled: boolean;
+}) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: value,
+    disabled,
     animateLayoutChanges: () => false,
   });
+
+  let opacity = 1;
+
+  if (isDragging) {
+    opacity = 0.1;
+  }
+
+  if (disabled) {
+    opacity = 0.6;
+  }
 
   return (
     <div
@@ -150,7 +175,7 @@ function Entry({ value, children }: { value: string; children: ComponentChildren
       style={{
         transform: CSS.Translate.toString(transform),
         transition,
-        opacity: isDragging ? 0.1 : 1,
+        opacity,
       }}
     >
       {children}

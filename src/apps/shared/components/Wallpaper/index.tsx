@@ -2,6 +2,7 @@ import { useSignal } from '@preact/signals';
 import {
   SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS,
   SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS,
+  WallpaperConfiguration,
 } from '@seelen-ui/lib';
 import { Wallpaper, WallpaperInstanceSettings } from '@seelen-ui/lib/types';
 import { cx } from '@shared/styles';
@@ -16,14 +17,16 @@ import cs from './index.module.css';
 
 interface BaseProps {
   definition?: Wallpaper;
-  config: WallpaperInstanceSettings;
+  config?: WallpaperInstanceSettings;
   onLoad?: () => void;
   paused?: boolean;
   out?: boolean;
 }
 
+const defaultWallpaperConfig = await WallpaperConfiguration.default();
+
 export function Wallpaper(props: BaseProps) {
-  const { definition, config } = props;
+  const { definition, config = defaultWallpaperConfig } = props;
 
   const $loaded = useSignal(false);
 
@@ -37,18 +40,18 @@ export function Wallpaper(props: BaseProps) {
     definition &&
     SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.endsWith(ext))
   ) {
-    element = <ImageWallpaper {...(props as DefinedWallProps)} onLoad={onLoad} />;
+    element = <ImageWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
   }
 
   if (
     definition &&
     SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.endsWith(ext))
   ) {
-    element = <VideoWallpaper {...(props as DefinedWallProps)} onLoad={onLoad} />;
+    element = <VideoWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
   }
 
   if (!element) {
-    element = <ThemedWallpaper {...props} onLoad={onLoad} />;
+    element = <ThemedWallpaper {...props} onLoad={onLoad} config={config} />;
   }
 
   return (
@@ -69,7 +72,7 @@ export function Wallpaper(props: BaseProps) {
   );
 }
 
-export function ThemedWallpaper({ config, onLoad }: BaseProps) {
+export function ThemedWallpaper({ config, onLoad }: Pick<DefinedWallProps, 'config' | 'onLoad'>) {
   useEffect(() => {
     onLoad?.();
   }, []);
@@ -83,6 +86,7 @@ export function ThemedWallpaper({ config, onLoad }: BaseProps) {
 
 interface DefinedWallProps extends BaseProps {
   definition: Wallpaper;
+  config: WallpaperInstanceSettings;
 }
 
 function ImageWallpaper({ definition, config, onLoad }: DefinedWallProps) {

@@ -51,6 +51,7 @@ const initialState: RootState = {
   wallpapers: [],
   byWidget: defaultSettings.inner.byWidget,
   byTheme: {},
+  byWallpaper: {},
 };
 
 function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {
@@ -139,11 +140,11 @@ export const RootSlice = createSlice({
     }>) => {
       const { id, patch } = action.payload;
       state.toBeSaved = true;
-      state.wall.byBackground[id] = { ...(state.wall.byBackground[id] || {}), ...patch } as WallpaperInstanceSettings;
+      state.byWallpaper[id] = { ...(state.byWallpaper[id] || {}), ...patch } as WallpaperInstanceSettings;
     },
     resetWallpaperSettings: (state, action: PayloadAction<WallpaperId>) => {
       state.toBeSaved = true;
-      delete state.wall.byBackground[action.payload];
+      delete state.byWallpaper[action.payload];
     },
     patchWidgetConfig(
       state,

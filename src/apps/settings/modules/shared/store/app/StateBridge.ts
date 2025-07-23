@@ -26,6 +26,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'byWidget',
     'drpc',
     'byTheme',
+    'byWallpaper',
   ]);
 
   // migration since v2.1.0
