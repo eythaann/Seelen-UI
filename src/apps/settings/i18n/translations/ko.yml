@@ -18,7 +18,7 @@ apps_configurations:
     name: 이름
     ok_create: 만들기
     ok_edit: 수정하기
-    ok_readonly: 복사본으로 편집
+    ok_readonly: 새로 편집
     options:
       float: 플로팅
       force: 강제 관리
@@ -34,11 +34,11 @@ apps_configurations:
     workspace: 작업 공간
     workspace_placeholder: 없음
   bundled_msg: >-
-    이러한 미리 구성된 설정은 편집할 수 없으며, 수정하지 않고 최상의 경험을 제공하도록 설계되었습니다. 자주 사용되는 프로그램을 자동으로
-    구성합니다.
-  bundled_title: Seelen에서 제공한 설정
+    이 번들 구성은 수정할 수 없으며, 사용자 설정 없이 최적의 사용 경험을 제공하도록 구성되어 있습니다.
+    주요 애플리케이션은 자동으로 설정됩니다.
+  bundled_title: Seelen에 포함된 앱 설정 번들
   confirm_delete: 정말로 이 설정을 삭제하시겠습니까?
-  confirm_delete_title: 삭제하시겠습니까?
+  confirm_delete_title: 삭제 확인
   delete: 삭제
   export: 내보내기
   export_full: 애플리케이션별 설정 내보내기
@@ -61,9 +61,9 @@ apps_configurations:
     or: 또는
     remove: 블록 삭제
     type:
-      class: 수업
+      class: 클래스
       exe: exe
-      path: 길
+      path: 경로
       title: 제목
   import: 가져오기
   import_full: 애플리케이션별 설정 가져오기
