@@ -2,10 +2,7 @@ pub mod application;
 pub mod domain;
 pub mod infrastructure;
 
-use std::collections::HashMap;
-
 use application::FullState;
-use domain::AhkVar;
 use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetInstanceType},
@@ -103,12 +100,8 @@ impl FullState {
         self.settings.by_widget.wall.enabled
     }
 
-    pub fn is_ahk_enabled(&self) -> bool {
-        self.settings.ahk_enabled
-    }
-
-    pub fn get_ahk_variables(&self) -> HashMap<String, AhkVar> {
-        self.settings.ahk_variables.as_hash_map()
+    pub fn are_shortcuts_enabled(&self) -> bool {
+        self.settings.shortcuts.enabled
     }
 
     pub fn get_wm_layout_id(&self, _monitor: &Monitor, _workspace_idx: usize) -> PluginId {

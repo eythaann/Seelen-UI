@@ -53,11 +53,11 @@ pub enum Axis {
 #[command(alias = "wm")]
 pub struct WindowManagerCli {
     #[command(subcommand)]
-    subcommand: SubCommand,
+    pub subcommand: WmCommand,
 }
 
 #[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
-pub enum SubCommand {
+pub enum WmCommand {
     /// Open Dev Tools (only works if the app is running in dev mode)
     Debug,
     /// Pause the Seelen Window Manager.
@@ -92,21 +92,27 @@ pub enum SubCommand {
 
 impl WindowManagerCli {
     pub fn process(self) -> Result<()> {
-        match self.subcommand {
-            SubCommand::Pause => {
+        self.subcommand.process()
+    }
+}
+
+impl WmCommand {
+    pub fn process(self) -> Result<()> {
+        match self {
+            WmCommand::Pause => {
                 // self.pause(true, true)?;
             }
-            SubCommand::Resume => {
+            WmCommand::Resume => {
                 // self.pause(false, true)?;
                 // Seelen::start_ahk_shortcuts()?;
             }
-            SubCommand::Reserve { .. } => {
+            WmCommand::Reserve { .. } => {
                 // self.reserve(side)?;
             }
-            SubCommand::CancelReservation => {
+            WmCommand::CancelReservation => {
                 // self.discard_reservation()?;
             }
-            SubCommand::Debug => {
+            WmCommand::Debug => {
                 #[cfg(debug_assertions)]
                 if let Some(monitor) = trace_lock!(crate::seelen::SEELEN).focused_monitor_mut() {
                     if let Some(wm) = monitor.wm() {
@@ -114,7 +120,7 @@ impl WindowManagerCli {
                     }
                 }
             }
-            SubCommand::Width { action } => {
+            WmCommand::Width { action } => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
                 let percentage = match action {
                     Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
@@ -129,7 +135,7 @@ impl WindowManagerCli {
                     w.get_root_node(),
                 )?;
             }
-            SubCommand::Height { action } => {
+            WmCommand::Height { action } => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
                 let percentage = match action {
                     Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
@@ -144,10 +150,10 @@ impl WindowManagerCli {
                     w.get_root_node(),
                 )?;
             }
-            SubCommand::ResetWorkspaceSize => {
+            WmCommand::ResetWorkspaceSize => {
                 // self.emit(SeelenEvent::WMResetWorkspaceSize, ())?;
             }
-            SubCommand::Focus { .. } => {
+            WmCommand::Focus { .. } => {
                 // self.emit(SeelenEvent::WMFocus, side)?;
             }
         };

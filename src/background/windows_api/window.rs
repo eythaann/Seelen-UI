@@ -1,4 +1,5 @@
 use seelen_core::{rect::Rect, state::AppExtraFlag};
+use slu_ipc::messages::SvcAction;
 use std::fmt::{Debug, Display};
 
 use windows::{
@@ -13,7 +14,7 @@ use windows::{
 };
 
 use crate::{
-    cli::{ServicePipe, SvcAction},
+    cli::ServicePipe,
     error_handler::Result,
     modules::{
         start::application::START_MENU_MANAGER,

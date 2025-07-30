@@ -10,7 +10,7 @@ mod string_utils;
 mod task_scheduler;
 mod windows_api;
 
-use cli::{handle_console_client, TcpBgApp, TcpService};
+use cli::{handle_console_client, TcpBgApp};
 use crossbeam_channel::{Receiver, Sender};
 use enviroment::was_installed_using_msix;
 use error::Result;
@@ -18,6 +18,7 @@ use itertools::Itertools;
 use lazy_static::lazy_static;
 use logger::SluServiceLogger;
 use shutdown::restore_native_taskbar;
+use slu_ipc::ServiceIpc;
 use std::{process::Command, sync::atomic::AtomicBool};
 use string_utils::WindowsString;
 use task_scheduler::TaskSchedulerHelper;
@@ -77,14 +78,17 @@ fn launch_seelen_ui() -> Result<()> {
 #[cfg(not(debug_assertions))]
 /// will stop the service after `max_attempts` attempts
 fn restart_gui_on_crash(max_attempts: u32) {
-    std::thread::spawn(move || {
+    tokio::spawn(async {
         let mut attempts = 0;
         while attempts < max_attempts {
             if !TcpBgApp::is_running() {
                 attempts += 1;
-                launch_seelen_ui().expect("Failed to launch Seelen UI");
+                if Err(err) = launch_seelen_ui() {
+                    log::error!("Failed to restart Seelen UI: {}", err);
+                    break;
+                }
             }
-            std::thread::sleep(std::time::Duration::from_secs(2));
+            tokio::time::sleep(std::time::Duration::from_secs(2)).await;
         }
         stop();
     });
@@ -92,9 +96,9 @@ fn restart_gui_on_crash(max_attempts: u32) {
 
 #[cfg(debug_assertions)]
 fn stop_service_on_seelen_ui_closed() {
-    std::thread::spawn(move || {
+    tokio::spawn(async {
         while TcpBgApp::is_running() {
-            std::thread::sleep(std::time::Duration::from_secs(2));
+            tokio::time::sleep(std::time::Duration::from_secs(2)).await;
         }
         stop();
     });
@@ -103,7 +107,7 @@ fn stop_service_on_seelen_ui_closed() {
 pub fn setup() -> Result<()> {
     WindowsApi::set_process_dpi_aware()?;
     WindowsApi::enable_privilege(SE_TCB_NAME)?;
-    TcpService::listen_tcp()?;
+    ServiceIpc::start(crate::cli::processing::process_action)?;
 
     if was_started_from_startup_action() {
         WindowsApi::wait_for_native_shell();
@@ -136,11 +140,13 @@ fn is_svc_already_running() -> bool {
         > 1
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     if is_local_dev() {
         WindowsApi::show_window(WindowsApi::get_console_window().0 as _, SW_MINIMIZE.0)?;
     }
-    handle_console_client()?;
+
+    handle_console_client().await?;
     if is_svc_already_running() {
         return Ok(());
     }

@@ -1,8 +1,9 @@
-mod actions;
+pub mod processing;
 mod tcp;
 
 use std::sync::atomic::Ordering;
 
+use slu_ipc::{messages::SvcAction, ServiceIpc};
 pub use tcp::*;
 
 use clap::{Arg, ArgAction, Command};
@@ -44,7 +45,7 @@ pub fn get_cli() -> Command {
 }
 
 /// Handles the CLI and exits the process with 0 if it should
-pub fn handle_console_client() -> Result<()> {
+pub async fn handle_console_client() -> Result<()> {
     let matches = get_cli().get_matches();
     let subcommand = matches.subcommand();
 
@@ -66,7 +67,7 @@ pub fn handle_console_client() -> Result<()> {
             TaskSchedulerHelper::remove_service_task()?;
         }
         Some((ServiceSubcommands::STOP, _)) => {
-            TcpService::emit_stop_signal()?;
+            ServiceIpc::send(SvcAction::Stop).await?;
         }
         _ => {}
     }

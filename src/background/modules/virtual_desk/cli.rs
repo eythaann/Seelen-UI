@@ -17,11 +17,11 @@ lazy_static! {
 #[command(alias = "vd")]
 pub struct VirtualDesktopCli {
     #[command(subcommand)]
-    subcommand: SubCommand,
+    pub subcommand: VdCommand,
 }
 
 #[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
-enum SubCommand {
+pub enum VdCommand {
     /// Send the window to the specified workspace
     SendToWorkspace {
         /// The index of the workspace to switch to.
@@ -41,26 +41,48 @@ enum SubCommand {
     SwitchNext,
     /// Switch to the previous workspace
     SwitchPrev,
+    /// Destroy the current workspace (will do nothing if there's only one workspace)
+    DestroyCurrentWorkspace,
 }
 
 impl VirtualDesktopCli {
     pub fn process(self) -> Result<()> {
+        self.subcommand.process()
+    }
+}
+
+impl VdCommand {
+    pub fn process(self) -> Result<()> {
         // Lock for the duration of the process to avoid concurrent switching of workspaces
         let _guard = LOCKER.lock();
         let vd = VIRTUAL_DESKTOP_MANAGER.load();
-        match self.subcommand {
-            SubCommand::SendToWorkspace { index } => {
+        match self {
+            VdCommand::SendToWorkspace { index } => {
                 vd.send_to(index, WindowsApi::get_foreground_window().0 as isize)?;
             }
-            SubCommand::SwitchWorkspace { index } => {
+            VdCommand::SwitchWorkspace { index } => {
                 vd.switch_to(index)?;
             }
-            SubCommand::MoveToWorkspace { index } => {
+            VdCommand::MoveToWorkspace { index } => {
                 vd.send_to(index, WindowsApi::get_foreground_window().0 as isize)?;
                 std::thread::sleep(std::time::Duration::from_millis(20));
                 vd.switch_to(index)?;
             }
-            _ => log::warn!("Unimplemented command: {:?}", self.subcommand),
+            VdCommand::SwitchNext => {
+                let idx = vd.get_current_idx()?;
+                let len = vd.get_all()?.len();
+                let next_idx = (idx + 1) % len;
+                vd.switch_to(next_idx)?;
+            }
+            VdCommand::SwitchPrev => {
+                let idx = vd.get_current_idx()?;
+                let len = vd.get_all()?.len();
+                let prev_idx = (idx + len - 1) % len;
+                vd.switch_to(prev_idx)?;
+            }
+            VdCommand::DestroyCurrentWorkspace => {
+                vd.destroy_desktop(vd.get_current_idx()?)?;
+            }
         }
         Ok(())
     }

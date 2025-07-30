@@ -227,6 +227,7 @@ async fn translate_text(
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
+    use crate::cli::*;
     use crate::popups::handlers::*;
     use crate::seelen_rofi::handler::*;
     use crate::seelen_weg::handler::*;

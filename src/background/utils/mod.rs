@@ -1,4 +1,3 @@
-pub mod ahk;
 pub mod constants;
 pub mod discord;
 pub mod icon_extractor;

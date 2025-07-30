@@ -58,6 +58,7 @@ define_app_errors!(
     TryFromSliceError(std::array::TryFromSliceError);
     ParseIntError(std::num::ParseIntError);
     Translator(translators::Error);
+    WinHotkey(win_hotkeys::error::WHKError);
 );
 
 impl std::fmt::Debug for AppError {

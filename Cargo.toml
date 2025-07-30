@@ -12,6 +12,66 @@ edition = "2021"
 rust-version = "1.80"
 build = "scripts/build.rs"
 
+[workspace]
+members = ["slu-ipc"]
+
+[workspace.dependencies]
+tokio = "1.47.0"
+thiserror = "2.0.12"
+serde = "1.0"
+serde_json = "1.0"
+serde_yaml = "0.9.34"
+log = "0.4"
+arc-swap = "1.7.1"
+backtrace = "0.3.71"
+base64 = "0.22.1"
+battery = "0.7.8"
+clap = "4.5.4"
+crossbeam-channel = "0.5.15"
+discord-rich-presence = "0.2.5"
+encoding_rs = "0.8.35"
+evalexpr = "=11.3.0"
+fern = "0.7.1"
+getset = "0.1.3"
+image = "0.25.5"
+interprocess = "2.2.3"
+itertools = "0.12.1"
+lazy_static = "1.4.0"
+notify-debouncer-full = "0.3.1"
+os_info = "3.9.2"
+owo-colors = "4.1.0"
+parking_lot = "0.12.1"
+phf = "0.11.2"
+quick-xml = "0.37.2"
+rand = "0.9.1"
+regex = "1.11.1"
+reqwest = "0.12.15"
+rust-i18n = "3.1.4"
+seelen-core = { git = "https://github.com/Seelen-Inc/slu-lib.git" }
+slu-ipc = { path = "slu-ipc" }
+sysinfo = "0.30.12"
+tauri = "2.5.1"
+tauri-build = "2.2.0"
+tauri-plugin-autostart = "2.3.0"
+tauri-plugin-deep-link = "2.3.0"
+tauri-plugin-dialog = "2.2.2"
+tauri-plugin-fs = "2.3.0"
+tauri-plugin-http = "2.4.4"
+tauri-plugin-log = "2.4.0"
+tauri-plugin-process = "2.2.1"
+tauri-plugin-shell = "2.2.1"
+tauri-plugin-updater = "2.7.1"
+translators = "0.1.5"
+url = "2.5.4"
+urlencoding = "2.1.3"
+uuid = "1.8.0"
+widestring = "1.0.2"
+win-hotkeys = { git = "https://github.com/Seelen-Inc/windows-keyboard-hook.git" }
+win-screenshot = "4.0.8"
+windows = "0.59.0"
+windows-core = "0.59.0"
+winreg = "0.55.0"
+
 [[bin]]
 name = "seelen-ui"
 path = "src/background/main.rs"
@@ -35,72 +95,69 @@ codegen-units = 1
 rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
 [build-dependencies]
-tauri-build = { version = "2.2.0", features = [] }
+tauri-build = { workspace = true, features = [] }
 
 [dependencies]
-tauri = { version = "2.5.1", features = ["protocol-asset", "tray-icon", "image-png"] }
-tauri-plugin-fs = "2.3.0"
-tauri-plugin-dialog = "2.2.2"
-tauri-plugin-autostart = "2.3.0"
-tauri-plugin-shell = "2.2.1"
-tauri-plugin-process = "2.2.1"
-tauri-plugin-log = "2.4.0"
-tauri-plugin-updater = "2.7.1"
-tauri-plugin-deep-link = "2.3.0"
-tauri-plugin-http = "2.4.4"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-serde_yaml = "0.9.34"
-lazy_static = "1.4.0"
-parking_lot = "0.12.1"
-log = "0.4"
-uuid = "1.8.0"
-image = { version = "0.25.5", features = ["ico"] }
-widestring = "1.0.2"
-itertools = "0.12.1"
-clap = { version = "4.5.4", features = ["derive", "string"] }
-os_info = "3.9.2"
-crossbeam-channel = "0.5.15"
-regex = "1.11.1"
-getset = "0.1.3"
-phf = "0.11.2"
-sysinfo = "0.30.12"
-battery = "0.7.8"
+slu-ipc = { workspace = true }
+tauri = { workspace = true, features = ["protocol-asset", "tray-icon", "image-png"] }
+tauri-plugin-fs = { workspace = true }
+tauri-plugin-dialog = { workspace = true }
+tauri-plugin-autostart = { workspace = true }
+tauri-plugin-shell = { workspace = true }
+tauri-plugin-process = { workspace = true }
+tauri-plugin-log = { workspace = true }
+tauri-plugin-updater = { workspace = true }
+tauri-plugin-deep-link = { workspace = true }
+tauri-plugin-http = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+lazy_static = { workspace = true }
+parking_lot = { workspace = true }
+log = { workspace = true }
+uuid = { workspace = true }
+image = { workspace = true, features = ["ico"] }
+widestring = { workspace = true }
+itertools = { workspace = true }
+clap = { workspace = true, features = ["derive", "string"] }
+os_info = { workspace = true }
+crossbeam-channel = { workspace = true }
+regex = { workspace = true }
+getset = { workspace = true }
+phf = { workspace = true }
+sysinfo = { workspace = true }
+battery = { workspace = true }
 # winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
-winreg = "0.55.0"
-windows-core = "0.59.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
-win-screenshot = "4.0.8"
-base64 = "0.22.1"
-arc-swap = "1.7.1"
-notify-debouncer-full = "0.3.1"
-encoding_rs = "0.8.35"
-evalexpr = "=11.3.0"
-quick-xml = { version = "0.37.2", features = ["serialize", "encoding"] }
-backtrace = "0.3.71"
-owo-colors = "4.1.0"
-rust-i18n = "3.1.4"
-url = "2.5.4"
-urlencoding = "2.1.3"
-fern = "0.7.1"
-reqwest = "0.12.15"
-translators = { version = "0.1.5", features = ["google", "tokio-async"] }
-rand = "0.9.1"
-discord-rich-presence = "0.2.5"
-
-[dependencies.seelen-core]
-git = "https://github.com/Seelen-Inc/slu-lib.git" # for release/pre-release/nightly
-# path = "../slu-lib"                               # for local development
-
-[dependencies.windows]
-version = "0.59.0"
-features = [
+winreg = { workspace = true }
+windows-core = { workspace = true } # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+win-screenshot = { workspace = true }
+base64 = { workspace = true }
+arc-swap = { workspace = true }
+notify-debouncer-full = { workspace = true }
+encoding_rs = { workspace = true }
+evalexpr = { workspace = true }
+quick-xml = { workspace = true, features = ["serialize", "encoding"] }
+backtrace = { workspace = true }
+owo-colors = { workspace = true }
+rust-i18n = { workspace = true }
+url = { workspace = true }
+urlencoding = { workspace = true }
+fern = { workspace = true }
+reqwest = { workspace = true }
+translators = { workspace = true, features = ["google", "tokio-async"] }
+rand = { workspace = true }
+discord-rich-presence = { workspace = true }
+win-hotkeys = { workspace = true }
+tokio = { workspace = true }
+seelen-core = { workspace = true }
+windows = { workspace = true, features = [
     "Win32_Foundation",
     "ApplicationModel",
-    "ApplicationModel_Core",               # uwp apps
-    "ApplicationModel_Background",         # background taks
-    "Foundation_Collections",              # uwp apps
+    "ApplicationModel_Core",
+    "ApplicationModel_Background",
+    "Foundation_Collections",
     "Foundation_Numerics",
-    "Management_Deployment",               # uwp apps
+    "Management_Deployment",
     "Win32_Globalization",
     "Win32_UI_Input_KeyboardAndMouse",
     "Win32_UI_WindowsAndMessaging",
@@ -111,73 +168,73 @@ features = [
     "Win32_Graphics_Dwm",
     "Win32_Graphics_Gdi",
     "Win32_UI_HiDpi",
-    "Win32_System_DataExchange",           # messages between processes/windows
+    "Win32_System_DataExchange",
     "Win32_System_Ole",
     "Win32_System_Com",
     "Win32_System_Com_StructuredStorage",
     "Win32_System_Variant",
     "Win32_System_LibraryLoader",
     "Win32_System_SystemInformation",
-    "Win32_System_Console",                # required to attach to console on cli mode
-    "Win32_System_Registry",               # required for system tray icon module
+    "Win32_System_Console",
+    "Win32_System_Registry",
     "Win32_System_Environment",
-    "Win32_Security",                      # required for power management (shutdown, reboot)
-    "Win32_Security_Authorization",        # required to change security on services
+    "Win32_Security",
+    "Win32_Security_Authorization",
     "Win32_System_Kernel",
-    "Win32_System_IO",                     # Input/Output devices
+    "Win32_System_IO",
     "Win32_System_Services",
-    "Win32_System_EventLog",               # needed for logger on service
+    "Win32_System_EventLog",
     "Win32_System_TaskScheduler",
     "Win32_System_Threading",
-    "Win32_System_WinRT",                  # uwp apps
+    "Win32_System_WinRT",
     "Win32_System_StationsAndDesktops",
     "Win32_System_RemoteDesktop",
     "Win32_System_ProcessStatus",
-    "Wdk_System_Threading",                # required to get system info (NtQueryInformationProcess)
-    "Wdk_System_SystemInformation",        # required to get system info (NtQuerySystemInformation)
-    "Wdk_System_SystemServices",           # required to get system info (PROCESS_EXTENDED_BASIC_INFORMATION)
-    "Win32_System_Power",                  # required for power management (battery - AC)
-    "Win32_System_Shutdown",               # required for power management (shutdown)
-    "Win32_Storage_FileSystem",            # PKEYS and Devices/Storage/etc
-    "Win32_Storage_EnhancedStorage",       # PKEYS and Devices/Storage/etc
-    "Win32_Storage_Packaging_Appx",        # UWP apps
+    "Wdk_System_Threading",
+    "Wdk_System_SystemInformation",
+    "Wdk_System_SystemServices",
+    "Win32_System_Power",
+    "Win32_System_Shutdown",
+    "Win32_Storage_FileSystem",
+    "Win32_Storage_EnhancedStorage",
+    "Win32_Storage_Packaging_Appx",
     "Win32_Security_Authentication_Identity",
-    "Win32_Media_KernelStreaming",         # required for audio module
-    "Win32_Media_Audio_Endpoints",         # required for audio module
-    "Win32_Media_Audio_Apo",               # required for audio module
-    "Win32_Media_DeviceManager",           # required for audio module
+    "Win32_Media_KernelStreaming",
+    "Win32_Media_Audio_Endpoints",
+    "Win32_Media_Audio_Apo",
+    "Win32_Media_DeviceManager",
     "Graphics",
-    "Media",                               # required for audio module
-    "Media_Audio",                         # required for audio module
-    "Media_Render",                        # required for audio module
-    "Media_Capture",                       # required for audio module
-    "Media_Effects",                       # required for audio module
-    "Media_Control",                       # required for audio module
-    "Storage_Streams",                     # required for audio module
-    "Win32_Devices_Display",               # required for display (brightness, etc)
-    "Win32_Devices_DeviceAndDriverInstallation", # required for display drivers
-    "Win32_Devices_FunctionDiscovery",     # PKEYS for Devices
+    "Media",
+    "Media_Audio",
+    "Media_Render",
+    "Media_Capture",
+    "Media_Effects",
+    "Media_Control",
+    "Storage_Streams",
+    "Win32_Devices_Display",
+    "Win32_Devices_DeviceAndDriverInstallation",
+    "Win32_Devices_FunctionDiscovery",
     "UI_Core",
-    "UI_Notifications_Management",         # required for notifications
-    "UI_ViewManagement",                   # required for colors UISettings
-    "deprecated",                          # (UI_ViewManagement) https://github.com/microsoft/windows-rs/issues/3425 remove on update to ^0.60.0
-    "Win32_NetworkManagement_IpHelper",    # required for network manager
-    "Win32_NetworkManagement_Ndis",        # required for network manager
-    "Win32_Networking_WinSock",            # required for network manager
-    "Win32_Networking_NetworkListManager", # required for network manager // events
-    "Win32_NetworkManagement_WiFi",        # required for network manager // wifi
+    "UI_Notifications_Management",
+    "UI_ViewManagement",
+    "deprecated",
+    "Win32_NetworkManagement_IpHelper",
+    "Win32_NetworkManagement_Ndis",
+    "Win32_Networking_WinSock",
+    "Win32_Networking_NetworkListManager",
+    "Win32_NetworkManagement_WiFi",
     "Networking_NetworkOperators",
     "Networking_Connectivity",
     "Security_Credentials",
     "Devices_Custom",
-    "Devices_Bluetooth",                   # required for bluetooth handling
-    "Devices_Enumeration",                 # required for bluetooth handling
-    "Devices_Radios",                      # required for bluetooth/wifi/mobile etc any radio
-    "Devices_WiFi",                        # required for wifi
-    "Devices_Display",                     # required for displays
-    "Devices_Display_Core",                # required for displays
-    "Data_Xml_Dom",                        # required for xml parsing
-]
+    "Devices_Bluetooth",
+    "Devices_Enumeration",
+    "Devices_Radios",
+    "Devices_WiFi",
+    "Devices_Display",
+    "Devices_Display_Core",
+    "Data_Xml_Dom",
+] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

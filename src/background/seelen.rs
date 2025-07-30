@@ -3,6 +3,7 @@ use std::sync::{atomic::AtomicBool, Arc};
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use slu_ipc::messages::SvcAction;
 use tauri::{AppHandle, Wry};
 use windows::Win32::{
     Graphics::Gdi::HMONITOR,
@@ -10,7 +11,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    cli::{ServicePipe, SvcAction},
+    cli::{start_app_shortcuts, stop_app_shortcuts, ServicePipe},
     error_handler::Result,
     hook::register_win_hook,
     instance::SluMonitorInstance,
@@ -27,7 +28,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, discord::start_discord_rpc, pwsh::PwshScript},
+    utils::discord::start_discord_rpc,
     windows_api::{event_window::create_background_window, Com, WindowsApi},
     APP_HANDLE,
 };
@@ -113,13 +114,11 @@ impl Seelen {
     pub fn on_settings_change(&mut self, state: &FullState) -> Result<()> {
         rust_i18n::set_locale(state.locale());
 
-        tauri::async_runtime::spawn(async {
-            let state = FULL_STATE.load();
-            match state.is_ahk_enabled() {
-                true => log_error!(Self::start_ahk_shortcuts().await),
-                false => log_error!(Self::kill_ahk_shortcuts().await),
-            }
-        });
+        if state.are_shortcuts_enabled() {
+            start_app_shortcuts()?;
+        } else {
+            stop_app_shortcuts();
+        }
 
         if state.is_weg_enabled() {
             SeelenWeg::hide_taskbar();
@@ -219,11 +218,12 @@ impl Seelen {
         }
 
         register_win_hook()?;
-        tauri::async_runtime::spawn(async {
-            log_error!(Self::start_ahk_shortcuts().await);
-        });
-
         start_discord_rpc()?;
+
+        if state.are_shortcuts_enabled() {
+            start_app_shortcuts()?;
+        }
+
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }
@@ -232,12 +232,7 @@ impl Seelen {
     pub fn stop(&self) {
         SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
         release_system_events_handlers();
-        let state = FULL_STATE.load();
-        if state.is_ahk_enabled() {
-            tauri::async_runtime::spawn(async {
-                log_error!(Self::kill_ahk_shortcuts().await);
-            });
-        }
+        stop_app_shortcuts();
     }
 
     fn add_monitor(&mut self, handle: HMONITOR) -> Result<()> {
@@ -278,61 +273,5 @@ impl Seelen {
 
     pub fn set_auto_start(enabled: bool) -> Result<()> {
         ServicePipe::request(SvcAction::SetStartup(enabled))
-    }
-
-    // TODO: split ahk logic into another file/module
-    pub async fn start_ahk_shortcuts() -> Result<()> {
-        // kill all running shortcuts before starting again
-        Self::kill_ahk_shortcuts().await?;
-
-        let state = FULL_STATE.load();
-        if state.is_ahk_enabled() {
-            log::trace!("Creating AHK shortcuts");
-            let vars = state.get_ahk_variables();
-
-            AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.lib.ahk"))
-                .name("seelen.lib.ahk")
-                .save()?;
-
-            AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.ahk"), &vars)
-                .name("seelen.ahk")
-                .execute()?;
-
-            AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.vd.ahk"), &vars)
-                .name("seelen.vd.ahk")
-                .execute()?;
-
-            if state.is_weg_enabled() {
-                AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.weg.ahk"), &vars)
-                    .name("seelen.weg.ahk")
-                    .execute()?;
-            }
-
-            if state.is_window_manager_enabled() {
-                AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.wm.ahk"), &vars)
-                    .name("seelen.wm.ahk")
-                    .execute()?;
-            }
-
-            if state.is_rofi_enabled() {
-                AutoHotKey::from_template(
-                    include_str!("utils/ahk/mocks/seelen.launcher.ahk"),
-                    &vars,
-                )
-                .name("seelen.launcher.ahk")
-                .execute()?;
-            }
-        }
-        log::trace!("AHK shortcuts started successfully");
-        Ok(())
-    }
-
-    // TODO: split ahk logic into another file/module
-    pub async fn kill_ahk_shortcuts() -> Result<()> {
-        log::trace!("Killing AHK shortcuts");
-        PwshScript::new(
-            r"Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*static\redis\AutoHotkey.exe*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }"
-        ).execute().await?;
-        Ok(())
     }
 }

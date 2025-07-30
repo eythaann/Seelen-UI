@@ -36,6 +36,7 @@ define_app_errors!(
     SerdeJson(serde_json::Error);
     Logger(log::SetLoggerError);
     WideStringNull(widestring::error::MissingNulTerminator);
+    SluIpc(slu_ipc::error::Error);
 );
 
 impl std::fmt::Debug for ServiceError {

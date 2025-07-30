@@ -109,38 +109,10 @@ impl AppCli {
         if let Some(uri) = self.uri {
             return process_uri(&uri);
         }
-
-        let Some(command) = self.command else {
-            return Ok(());
-        };
-
-        match command {
-            AppCliCommand::Settings => {
-                show_settings()?;
-            }
-            AppCliCommand::VirtualDesk(command) => {
-                command.process()?;
-            }
-            AppCliCommand::Debugger(command) => {
-                command.process()?;
-            }
-            AppCliCommand::Launcher(command) => {
-                if let Some(rofi) = trace_lock!(SEELEN).rofi_mut() {
-                    rofi.process(command)?;
-                }
-            }
-            AppCliCommand::WindowManager(command) => {
-                command.process()?;
-            }
-            AppCliCommand::Weg(command) => {
-                command.process()?;
-            }
-            AppCliCommand::Widget(command) => {
-                command.process()?;
-            }
-            AppCliCommand::Win32(_) => {}
+        match self.command {
+            Some(cmd) => cmd.process(),
+            None => Ok(()),
         }
-        Ok(())
     }
 
     /// will fail if no instance is running
@@ -166,6 +138,38 @@ impl AppCli {
 
         let stream = SelfPipe::connect_tcp()?;
         serde_json::to_writer(stream, &args)?;
+        Ok(())
+    }
+}
+
+impl AppCliCommand {
+    pub fn process(self) -> Result<()> {
+        match self {
+            AppCliCommand::Settings => {
+                show_settings()?;
+            }
+            AppCliCommand::VirtualDesk(command) => {
+                command.process()?;
+            }
+            AppCliCommand::Debugger(command) => {
+                command.process()?;
+            }
+            AppCliCommand::Launcher(command) => {
+                if let Some(rofi) = trace_lock!(SEELEN).rofi_mut() {
+                    rofi.process(command)?;
+                }
+            }
+            AppCliCommand::WindowManager(command) => {
+                command.process()?;
+            }
+            AppCliCommand::Weg(command) => {
+                command.process()?;
+            }
+            AppCliCommand::Widget(command) => {
+                command.process()?;
+            }
+            AppCliCommand::Win32(_) => {}
+        }
         Ok(())
     }
 }

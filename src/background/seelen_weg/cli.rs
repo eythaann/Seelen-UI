@@ -18,22 +18,22 @@ use super::SeelenWeg;
 #[derive(Debug, Serialize, Deserialize, clap::Args)]
 pub struct WegCli {
     #[command(subcommand)]
-    subcommand: SubCommand,
+    pub subcommand: WegCommand,
 }
 
 #[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
-pub enum SubCommand {
+pub enum WegCommand {
     /// Set foreground to the application which is idx-nth on the weg. If it is not started, then starts it.
     ForegroundOrRunApp {
         /// Which index should be started on weg.
-        idx: usize,
+        index: usize,
     },
 }
 
 impl WegCli {
     pub fn process(self) -> Result<()> {
         #[allow(irrefutable_let_patterns)]
-        if let SubCommand::ForegroundOrRunApp { idx } = self.subcommand {
+        if let WegCommand::ForegroundOrRunApp { index } = self.subcommand {
             let id = Monitor::from(WindowsApi::monitor_from_cursor_point()).stable_id()?;
 
             let items = trace_lock!(WEG_ITEMS_IMPL).get_filtered_by_monitor()?;
@@ -46,11 +46,11 @@ impl WegCli {
                     .filter(|item| matches!(item, WegItem::Pinned(_) | WegItem::Temporal(_)))
                     .collect();
 
-                if all_items.len() <= idx {
+                if all_items.len() <= index {
                     return Ok(());
                 }
 
-                let item = all_items.index(idx);
+                let item = all_items.index(index);
 
                 if let WegItem::Pinned(inner_data) | WegItem::Temporal(inner_data) = item {
                     if let Some(item) = inner_data.windows.first() {

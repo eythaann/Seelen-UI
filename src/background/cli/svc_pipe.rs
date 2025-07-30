@@ -1,10 +1,6 @@
-use std::{
-    fs,
-    io::{BufRead, Write},
-    net::TcpStream,
-    path::PathBuf,
-};
+use std::path::PathBuf;
 
+use slu_ipc::{messages::SvcAction, ServiceIpc};
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use windows::Win32::{
     System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler},
@@ -14,65 +10,25 @@ use windows_core::Interface;
 
 use crate::{
     error_handler::Result,
+    log_error,
     seelen::get_app_handle,
     utils::{pwsh::PwshScript, was_installed_using_msix},
     windows_api::{Com, WindowsApi},
 };
 
-use super::domain::{SvcAction, SvcMessage};
-
 pub struct ServicePipe;
+
 impl ServicePipe {
-    fn token() -> &'static str {
-        std::env!("SLU_SERVICE_CONNECTION_TOKEN")
-    }
-
-    fn socket_path() -> PathBuf {
-        std::env::temp_dir().join("com.seelen.seelen-ui\\slu_service_tcp_socket")
-    }
-
-    fn connect_tcp() -> Result<TcpStream> {
-        let port = fs::read_to_string(Self::socket_path())?;
-        Ok(TcpStream::connect(format!("127.0.0.1:{port}"))?)
-    }
-
     /// will ignore any response
     pub fn request(message: SvcAction) -> Result<()> {
-        let stream = Self::connect_tcp()?;
-        let mut writter = std::io::BufWriter::new(&stream);
-
-        let data = serde_json::to_vec(&SvcMessage {
-            token: Self::token().to_string(),
-            action: message,
-        })?;
-        writter.write_all(&data)?;
-        writter.write_all(&[0x17])?;
-        writter.flush()?;
+        tokio::spawn(async move {
+            log_error!(ServiceIpc::send(message).await);
+        });
         Ok(())
     }
 
-    /// will wait for a response
-    #[allow(dead_code)]
-    pub fn request_response(message: SvcAction) -> Result<Vec<u8>> {
-        let stream = Self::connect_tcp()?;
-        stream.set_read_timeout(Some(std::time::Duration::from_millis(1000)))?;
-
-        let mut writter = std::io::BufWriter::new(&stream);
-        let mut reader = std::io::BufReader::new(&stream);
-
-        let data = serde_json::to_vec(&message)?;
-        writter.write_all(&data)?;
-        writter.write_all(&[0x17])?;
-        writter.flush()?;
-
-        let mut bytes = Vec::new();
-        reader.read_until(0x17, &mut bytes)?; // Read until end of transmission block
-        bytes.pop(); // Remove end of transmission block
-        Ok(bytes)
-    }
-
     pub fn is_running() -> bool {
-        Self::connect_tcp().is_ok()
+        ServiceIpc::can_stablish_connection()
     }
 
     pub fn service_path() -> Result<PathBuf> {

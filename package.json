@@ -7,7 +7,7 @@
   "scripts": {
     "tauri": "tauri",
     "tauri:update": "tsx scripts/UpdateTauri.ts",
-    "dev": "tauri dev",
+    "dev": "cargo build && tauri dev",
     "test": "jest",
     "build:ui": "tsx scripts/build.ts",
     "build:ui:watch": "tsx scripts/build.ts --serve",

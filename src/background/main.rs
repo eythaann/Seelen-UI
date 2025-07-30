@@ -36,13 +36,14 @@ extern crate lazy_static;
 
 use std::sync::{atomic::AtomicBool, OnceLock};
 
-use cli::{application::handle_console_client, SelfPipe, ServicePipe, SvcAction};
+use cli::{application::handle_console_client, SelfPipe, ServicePipe};
 use error_handler::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
 use modules::tray::application::ensure_tray_overflow_creation;
 use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
+use slu_ipc::messages::SvcAction;
 use tray::try_register_tray_icon;
 use utils::{
     integrity::{

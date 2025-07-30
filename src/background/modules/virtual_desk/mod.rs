@@ -29,6 +29,7 @@ trait VirtualDesktopTrait: std::fmt::Debug + Clone {
 #[allow(dead_code)]
 trait VirtualDesktopManagerTrait {
     fn create_desktop(&self) -> Result<()>;
+    fn destroy_desktop(&self, idx: usize) -> Result<()>;
 
     fn get(&self, idx: usize) -> Result<Option<VirtualDesktop>>;
     fn get_all(&self) -> Result<Vec<VirtualDesktop>>;
@@ -93,6 +94,13 @@ impl VirtualDesktopManager {
         match self {
             VirtualDesktopManager::Native(m) => m.create_desktop(),
             VirtualDesktopManager::Seelen(m) => m.create_desktop(),
+        }
+    }
+
+    pub fn destroy_desktop(&self, idx: usize) -> Result<()> {
+        match self {
+            VirtualDesktopManager::Native(m) => m.destroy_desktop(idx),
+            VirtualDesktopManager::Seelen(m) => m.destroy_desktop(idx),
         }
     }
 

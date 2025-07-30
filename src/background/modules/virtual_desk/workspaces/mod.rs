@@ -168,6 +168,26 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
         Ok(())
     }
 
+    fn destroy_desktop(&self, idx: usize) -> Result<()> {
+        let workspaces = self.get_all()?;
+        let length = workspaces.len();
+        if idx >= length || length < 2 {
+            return Ok(());
+        }
+
+        let prev_idx = (idx + length - 1) % length;
+        let fallback = workspaces[prev_idx].clone();
+        let _destroyed = workspaces[idx].clone();
+
+        // fallback.windows todo handle correctly this
+
+        self.emit(VirtualDesktopEvent::DesktopDestroyed {
+            destroyed: workspaces[idx].clone(),
+            fallback: fallback.clone(),
+        })?;
+        Ok(())
+    }
+
     fn get(&self, idx: usize) -> Result<Option<VirtualDesktop>> {
         if let Some(workspace) = trace_lock!(self.workspaces).get_mut(idx) {
             return Ok(Some(workspace.clone().into()));
