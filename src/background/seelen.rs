@@ -11,7 +11,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    cli::{start_app_shortcuts, stop_app_shortcuts, ServicePipe},
+    cli::ServicePipe,
     error_handler::Result,
     hook::register_win_hook,
     instance::SluMonitorInstance,
@@ -113,12 +113,9 @@ impl Seelen {
 
     pub fn on_settings_change(&mut self, state: &FullState) -> Result<()> {
         rust_i18n::set_locale(state.locale());
-
-        if state.are_shortcuts_enabled() {
-            start_app_shortcuts()?;
-        } else {
-            stop_app_shortcuts();
-        }
+        ServicePipe::request(SvcAction::SetShortcutsConfig(
+            state.settings.shortcuts.clone(),
+        ))?;
 
         if state.is_weg_enabled() {
             SeelenWeg::hide_taskbar();
@@ -209,11 +206,11 @@ impl Seelen {
 
         self.refresh_windows_positions()?;
 
-        if FULL_STATE.load().is_weg_enabled() {
+        if state.is_weg_enabled() {
             SeelenWeg::enumerate_all_windows()?;
         }
 
-        if FULL_STATE.load().is_window_manager_enabled() {
+        if state.is_window_manager_enabled() {
             WindowManagerV2::enumerate_all_windows()?;
         }
 
@@ -221,7 +218,9 @@ impl Seelen {
         start_discord_rpc()?;
 
         if state.are_shortcuts_enabled() {
-            start_app_shortcuts()?;
+            ServicePipe::request(SvcAction::SetShortcutsConfig(
+                state.settings.shortcuts.clone(),
+            ))?;
         }
 
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
@@ -232,7 +231,6 @@ impl Seelen {
     pub fn stop(&self) {
         SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
         release_system_events_handlers();
-        stop_app_shortcuts();
     }
 
     fn add_monitor(&mut self, handle: HMONITOR) -> Result<()> {

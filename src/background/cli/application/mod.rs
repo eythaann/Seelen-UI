@@ -9,19 +9,15 @@ use clap::Parser;
 use debugger::DebuggerCli;
 use resources::WidgetCli;
 use serde::{Deserialize, Serialize};
+use slu_ipc::AppIpc;
 use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::{
-    cli::{application::uri::process_uri, SelfPipe},
-    error_handler::Result,
-    modules::virtual_desk::cli::VirtualDesktopCli,
-    seelen::SEELEN,
-    seelen_rofi::cli::AppLauncherCli,
-    seelen_weg::cli::WegCli,
-    seelen_wm_v2::cli::WindowManagerCli,
-    trace_lock,
-    widgets::show_settings,
+    cli::application::uri::process_uri, error_handler::Result,
+    modules::virtual_desk::cli::VirtualDesktopCli, seelen::SEELEN,
+    seelen_rofi::cli::AppLauncherCli, seelen_weg::cli::WegCli, seelen_wm_v2::cli::WindowManagerCli,
+    trace_lock, widgets::show_settings,
 };
 
 /// Seelen Command Line Interface
@@ -64,7 +60,7 @@ pub fn attach_console() -> bool {
 
 /// Handles the CLI and will exit the process if needed.\
 /// Performs redirection to the instance if needed too, will fail if no instance is running.
-pub fn handle_console_client() -> Result<()> {
+pub async fn handle_console_client() -> Result<()> {
     let matches = match AppCli::try_parse() {
         Ok(cli) => cli,
         Err(e) => {
@@ -96,7 +92,7 @@ pub fn handle_console_client() -> Result<()> {
 
     if matches.command.is_some() || matches.uri.is_some() {
         attach_console();
-        matches.send_to_main_instance()?;
+        matches.send_to_main_instance().await?;
         std::process::exit(0);
     }
 
@@ -116,7 +112,7 @@ impl AppCli {
     }
 
     /// will fail if no instance is running
-    pub fn send_to_main_instance(self) -> Result<()> {
+    pub async fn send_to_main_instance(self) -> Result<()> {
         let mut args = Vec::new();
         let working_dir = std::env::current_dir()?;
 
@@ -136,8 +132,7 @@ impl AppCli {
             println!("Sending {args:#?}");
         }
 
-        let stream = SelfPipe::connect_tcp()?;
-        serde_json::to_writer(stream, &args)?;
+        AppIpc::send(args).await?;
         Ok(())
     }
 }

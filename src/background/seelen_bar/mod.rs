@@ -4,7 +4,7 @@ pub mod hook;
 use crate::{
     error_handler::Result,
     log_error,
-    modules::virtual_desk::get_vd_manager,
+    modules::virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait},
     seelen::get_app_handle,
     state::application::FULL_STATE,
     utils::{

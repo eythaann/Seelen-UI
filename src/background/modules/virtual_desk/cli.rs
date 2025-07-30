@@ -4,7 +4,10 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use serde::{Deserialize, Serialize};
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{
+    error_handler::Result, modules::virtual_desk::VirtualDesktopManagerTrait,
+    windows_api::WindowsApi,
+};
 
 use super::VIRTUAL_DESKTOP_MANAGER;
 
@@ -41,6 +44,8 @@ pub enum VdCommand {
     SwitchNext,
     /// Switch to the previous workspace
     SwitchPrev,
+    /// Create a new workspace
+    CreateNewWorkspace,
     /// Destroy the current workspace (will do nothing if there's only one workspace)
     DestroyCurrentWorkspace,
 }
@@ -71,14 +76,17 @@ impl VdCommand {
             VdCommand::SwitchNext => {
                 let idx = vd.get_current_idx()?;
                 let len = vd.get_all()?.len();
-                let next_idx = (idx + 1) % len;
+                let next_idx = (idx + 1) % len; // next and cycle
                 vd.switch_to(next_idx)?;
             }
             VdCommand::SwitchPrev => {
                 let idx = vd.get_current_idx()?;
                 let len = vd.get_all()?.len();
-                let prev_idx = (idx + len - 1) % len;
+                let prev_idx = (idx + (len - 1)) % len; // prev and cycle
                 vd.switch_to(prev_idx)?;
+            }
+            VdCommand::CreateNewWorkspace => {
+                vd.create_desktop()?;
             }
             VdCommand::DestroyCurrentWorkspace => {
                 vd.destroy_desktop(vd.get_current_idx()?)?;

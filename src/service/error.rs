@@ -15,12 +15,15 @@ macro_rules! define_app_errors {
 
 #[macro_export]
 macro_rules! log_error {
-    ($($result:expr),*) => {
-        $(
-            if let Err(err) = $result {
-                log::error!("{:?}", err);
-            }
-        )*
+    ($result:expr) => {
+        if let Err(err) = $result {
+            log::error!("{:?}", err);
+        }
+    };
+    ($result:expr, $context:expr) => {
+        if let Err(err) = $result {
+            log::error!("Context: {:?} Err: {:?}", $context, err);
+        }
     };
 }
 
@@ -37,6 +40,7 @@ define_app_errors!(
     Logger(log::SetLoggerError);
     WideStringNull(widestring::error::MissingNulTerminator);
     SluIpc(slu_ipc::error::Error);
+    WinHotkeys(win_hotkeys::error::WHKError);
 );
 
 impl std::fmt::Debug for ServiceError {

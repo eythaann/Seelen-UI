@@ -82,16 +82,15 @@ impl WegCli {
                             &args,
                             inner_data.relaunch_in.as_deref(),
                         )?;
-                        tauri::async_runtime::block_on(async {
-                            get_app_handle()
+                        tokio::spawn(async move {
+                            let _ = get_app_handle()
                                 .shell()
                                 .command("C:\\Windows\\explorer.exe")
                                 .arg(&lnk_file)
                                 .status()
-                                .await
-                                .unwrap();
+                                .await;
+                            let _ = std::fs::remove_file(&lnk_file);
                         });
-                        std::fs::remove_file(&lnk_file)?;
                     }
                 }
             }

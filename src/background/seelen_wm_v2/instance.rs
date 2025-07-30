@@ -8,8 +8,13 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result, log_error, modules::virtual_desk::get_vd_manager,
-    seelen::get_app_handle, seelen_bar::FancyToolbar, seelen_wm_v2::state::WM_STATE, trace_lock,
+    error_handler::Result,
+    log_error,
+    modules::virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait},
+    seelen::get_app_handle,
+    seelen_bar::FancyToolbar,
+    seelen_wm_v2::state::WM_STATE,
+    trace_lock,
     windows_api::WindowsApi,
 };
 

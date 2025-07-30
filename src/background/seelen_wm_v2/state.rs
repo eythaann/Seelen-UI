@@ -13,7 +13,10 @@ use seelen_core::state::{
 
 use crate::{
     error_handler::Result,
-    modules::{input::domain::Point, virtual_desk::get_vd_manager},
+    modules::{
+        input::domain::Point,
+        virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait},
+    },
     state::application::FULL_STATE,
     windows_api::{monitor::Monitor, window::Window, MonitorEnumerator},
 };

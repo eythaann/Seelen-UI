@@ -7,6 +7,7 @@
 - tranfomation for wallpapers.
 - wallpaper animations on in/out.
 - unique wallpaper slider per monitor.
+- new shortcuts to create/delete and change virtual desktops.
 
 ### refactor
 - monitors ids.

@@ -1,13 +1,15 @@
+use seelen_core::state::shortcuts::SluShortcutsSettings;
 use serde::{Deserialize, Serialize};
 
 use crate::error::{Error, Result};
 
 /// Seelen UI Service Actions
 #[allow(dead_code)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum SvcAction {
     Stop,
     SetStartup(bool),
+    SetShortcutsConfig(SluShortcutsSettings),
     ShowWindow {
         hwnd: isize,
         command: i32,
@@ -44,16 +46,16 @@ impl SvcMessage {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum SvcResponse {
+pub enum IpcResponse {
     Success,
     Err(String),
 }
 
-impl SvcResponse {
+impl IpcResponse {
     pub fn ok(self) -> Result<()> {
         match self {
-            SvcResponse::Success => Ok(()),
-            SvcResponse::Err(err) => Err(Error::SvcError(err)),
+            IpcResponse::Success => Ok(()),
+            IpcResponse::Err(err) => Err(Error::IpcResponseError(err)),
         }
     }
 }

@@ -59,6 +59,7 @@ define_app_errors!(
     ParseIntError(std::num::ParseIntError);
     Translator(translators::Error);
     WinHotkey(win_hotkeys::error::WHKError);
+    SluIpc(slu_ipc::error::Error);
 );
 
 impl std::fmt::Debug for AppError {

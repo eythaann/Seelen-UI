@@ -7,7 +7,7 @@ pub enum Error {
     #[error("Serde Json Error: {0}")]
     SerdeJson(#[from] serde_json::Error),
     #[error("Service Error: {0}")]
-    SvcError(String),
+    IpcResponseError(String),
 }
 
 pub type Result<T = ()> = core::result::Result<T, Error>;

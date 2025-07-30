@@ -12,7 +12,7 @@ use translators::Translator;
 use crate::error_handler::Result;
 use crate::hook::HookManager;
 use crate::modules::input::Keyboard;
-use crate::modules::virtual_desk::get_vd_manager;
+use crate::modules::virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait};
 use crate::seelen::{get_app_handle, Seelen};
 
 use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};

@@ -29,7 +29,9 @@ use crate::{
     event_manager, log_error,
     modules::{
         input::{domain::Point, Mouse},
-        virtual_desk::{get_vd_manager, VirtualDesktopEvent, VirtualDesktopManager},
+        virtual_desk::{
+            get_vd_manager, VirtualDesktopEvent, VirtualDesktopManager, VirtualDesktopManagerTrait,
+        },
     },
     seelen::{get_app_handle, Seelen, SEELEN},
     seelen_weg::SeelenWeg,
@@ -213,6 +215,7 @@ impl HookManager {
             log_error!(result);
         }
 
+        #[allow(irrefutable_let_patterns)]
         if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
             log_error!(vd.on_win_event(event, &origin), event);
         }
@@ -375,10 +378,7 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
 
     match event {
         VirtualDesktopEvent::DesktopCreated(_)
-        | VirtualDesktopEvent::DesktopDestroyed {
-            destroyed: _,
-            fallback: _,
-        }
+        | VirtualDesktopEvent::DesktopDestroyed { destroyed: _ }
         | VirtualDesktopEvent::DesktopMoved {
             desktop: _,
             old_index: _,
@@ -392,7 +392,6 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
                 .collect_vec();
             get_app_handle().emit(SeelenEvent::WorkspacesChanged, &desktops)?;
         }
-
         VirtualDesktopEvent::DesktopChanged { new, old: _ } => {
             get_app_handle().emit(SeelenEvent::ActiveWorkspaceChanged, new.id())?;
         }

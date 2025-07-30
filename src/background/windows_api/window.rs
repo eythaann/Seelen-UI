@@ -18,7 +18,7 @@ use crate::{
     error_handler::Result,
     modules::{
         start::application::START_MENU_MANAGER,
-        virtual_desk::{get_vd_manager, VirtualDesktop},
+        virtual_desk::{get_vd_manager, VirtualDesktop, VirtualDesktopManagerTrait},
     },
     seelen_bar::FancyToolbar,
     seelen_rofi::SeelenRofi,

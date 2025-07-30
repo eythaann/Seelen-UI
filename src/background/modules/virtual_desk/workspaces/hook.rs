@@ -1,7 +1,7 @@
 use crate::{
     error_handler::Result,
     log_error,
-    modules::virtual_desk::get_vd_manager,
+    modules::virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait},
     trace_lock,
     windows_api::{window::Window, WindowEnumerator},
     winevent::WinEvent,

@@ -53,6 +53,8 @@ use utils::{
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
 
+use crate::seelen::get_app_handle;
+
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static SILENT: AtomicBool = AtomicBool::new(false);
 static STARTUP: AtomicBool = AtomicBool::new(false);
@@ -62,22 +64,22 @@ pub fn is_local_dev() -> bool {
     cfg!(dev)
 }
 
-fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
+async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     print_initial_information();
-    validate_webview_runtime_is_installed(app.handle())?;
-    SelfPipe::listen_tcp()?;
+    validate_webview_runtime_is_installed(app_handle)?;
+    SelfPipe::start_listener()?;
 
     if !ServicePipe::is_running() {
-        tauri::async_runtime::block_on(ServicePipe::start_service())?;
+        ServicePipe::start_service().await?;
     }
 
-    check_for_webview_optimal_state(app.handle())?;
+    check_for_webview_optimal_state(app_handle)?;
 
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());
 
     trace_lock!(SEELEN).start()?;
-    log_error!(try_register_tray_icon(app));
+    log_error!(try_register_tray_icon());
     trace_lock!(PERFORMANCE_HELPER).end("setup");
     Ok(())
 }
@@ -118,9 +120,10 @@ fn is_already_runnning() -> bool {
         > 1
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     register_panic_hook();
-    handle_console_client()?;
+    handle_console_client().await?;
 
     if is_already_runnning() {
         SelfPipe::request_open_settings()?;
@@ -140,15 +143,21 @@ fn main() -> Result<()> {
     let app = app_builder
         .setup(|app| {
             APP_HANDLE.set(app.handle().to_owned()).unwrap();
-            if let Err(err) = setup(app) {
-                log::error!("Error while setting up: {err:?}");
-                app.handle().exit(1);
-            }
+
+            tokio::spawn(async move {
+                let handle = get_app_handle();
+                if let Err(err) = setup(handle).await {
+                    log::error!("Error while setting up: {err:?}");
+                    handle.exit(1);
+                }
+            });
             Ok(())
         })
         .build(tauri_context::get_context())
         .expect("Error while building tauri application");
 
+    // share the current runtime with Tauri
+    tauri::async_runtime::set(tokio::runtime::Handle::current());
     app.run(app_callback);
     Ok(())
 }

@@ -4,13 +4,14 @@
 mod cli;
 mod enviroment;
 mod error;
+mod hotkeys;
 mod logger;
 mod shutdown;
 mod string_utils;
 mod task_scheduler;
 mod windows_api;
 
-use cli::{handle_console_client, TcpBgApp};
+use cli::handle_console_client;
 use crossbeam_channel::{Receiver, Sender};
 use enviroment::was_installed_using_msix;
 use error::Result;
@@ -18,7 +19,7 @@ use itertools::Itertools;
 use lazy_static::lazy_static;
 use logger::SluServiceLogger;
 use shutdown::restore_native_taskbar;
-use slu_ipc::ServiceIpc;
+use slu_ipc::{AppIpc, ServiceIpc, IPC};
 use std::{process::Command, sync::atomic::AtomicBool};
 use string_utils::WindowsString;
 use task_scheduler::TaskSchedulerHelper;
@@ -27,6 +28,8 @@ use windows::Win32::{
     UI::{Shell::FOLDERID_LocalAppData, WindowsAndMessaging::SW_MINIMIZE},
 };
 use windows_api::WindowsApi;
+
+use crate::hotkeys::stop_app_shortcuts;
 
 lazy_static! {
     pub static ref SERVICE_NAME: WindowsString = WindowsString::from_str("slu-service");
@@ -81,7 +84,7 @@ fn restart_gui_on_crash(max_attempts: u32) {
     tokio::spawn(async {
         let mut attempts = 0;
         while attempts < max_attempts {
-            if !TcpBgApp::is_running() {
+            if !AppIpc::is_running() {
                 attempts += 1;
                 if Err(err) = launch_seelen_ui() {
                     log::error!("Failed to restart Seelen UI: {}", err);
@@ -97,7 +100,7 @@ fn restart_gui_on_crash(max_attempts: u32) {
 #[cfg(debug_assertions)]
 fn stop_service_on_seelen_ui_closed() {
     tokio::spawn(async {
-        while TcpBgApp::is_running() {
+        while AppIpc::can_stablish_connection() {
             tokio::time::sleep(std::time::Duration::from_secs(2)).await;
         }
         stop();
@@ -163,6 +166,7 @@ async fn main() -> Result<()> {
     STOP_CHANNEL.1.recv().unwrap();
     // shutdown tasks:
     restore_native_taskbar()?;
+    stop_app_shortcuts();
     log::info!("Seelen UI Service stopped");
     Ok(())
 }

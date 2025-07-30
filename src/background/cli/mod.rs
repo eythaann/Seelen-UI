@@ -1,4 +1,3 @@
-mod hotkeys;
 mod infrastructure;
 mod self_pipe;
 mod svc_pipe;

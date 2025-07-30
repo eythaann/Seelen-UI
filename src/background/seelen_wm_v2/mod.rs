@@ -17,7 +17,7 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     log_error,
-    modules::virtual_desk::{get_vd_manager, VirtualDesktop},
+    modules::virtual_desk::{get_vd_manager, VirtualDesktop, VirtualDesktopManagerTrait},
     seelen::get_app_handle,
     state::application::FULL_STATE,
     trace_lock,

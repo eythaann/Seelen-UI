@@ -14,7 +14,7 @@ lazy_static! {
         Arc::new(ArcSwap::from_pointee(
             match FULL_STATE.load().settings().virtual_desktop_strategy {
                 VirtualDesktopStrategy::Native =>
-                    VirtualDesktopManager::Native(workspaces::SeelenWorkspacesManager::new()),
+                    VirtualDesktopManager::Seelen(workspaces::SeelenWorkspacesManager::new()),
                 VirtualDesktopStrategy::Seelen =>
                     VirtualDesktopManager::Seelen(workspaces::SeelenWorkspacesManager::new()),
             }
@@ -27,7 +27,7 @@ trait VirtualDesktopTrait: std::fmt::Debug + Clone {
 }
 
 #[allow(dead_code)]
-trait VirtualDesktopManagerTrait {
+pub trait VirtualDesktopManagerTrait {
     fn create_desktop(&self) -> Result<()>;
     fn destroy_desktop(&self, idx: usize) -> Result<()>;
 
@@ -53,23 +53,18 @@ trait VirtualDesktopManagerTrait {
 
 #[derive(Debug, Clone)]
 pub enum VirtualDesktop {
-    // Native(native::NativeVirtualDesktop), both are the same to avoid refartor the entire file
-    #[allow(dead_code)]
-    Native(workspaces::SeelenWorkspace),
     Seelen(workspaces::SeelenWorkspace),
 }
 
 impl VirtualDesktop {
     pub fn id(&self) -> String {
         match self {
-            VirtualDesktop::Native(d) => d.id(),
             VirtualDesktop::Seelen(d) => d.id(),
         }
     }
 
     pub fn name(&self) -> Option<String> {
         match self {
-            VirtualDesktop::Native(d) => d.name(),
             VirtualDesktop::Seelen(d) => d.name(),
         }
     }
@@ -84,106 +79,102 @@ impl VirtualDesktop {
 
 #[derive(Debug)]
 pub enum VirtualDesktopManager {
-    Native(workspaces::SeelenWorkspacesManager),
     Seelen(workspaces::SeelenWorkspacesManager),
 }
 
-#[allow(dead_code)]
-impl VirtualDesktopManager {
-    pub fn create_desktop(&self) -> Result<()> {
+impl VirtualDesktopManagerTrait for VirtualDesktopManager {
+    fn create_desktop(&self) -> Result<()> {
         match self {
-            VirtualDesktopManager::Native(m) => m.create_desktop(),
             VirtualDesktopManager::Seelen(m) => m.create_desktop(),
-        }
+        }?;
+        log::trace!("Virtual desktop created");
+        Ok(())
     }
 
-    pub fn destroy_desktop(&self, idx: usize) -> Result<()> {
+    fn destroy_desktop(&self, idx: usize) -> Result<()> {
         match self {
-            VirtualDesktopManager::Native(m) => m.destroy_desktop(idx),
             VirtualDesktopManager::Seelen(m) => m.destroy_desktop(idx),
-        }
+        }?;
+        log::trace!("Virtual desktop destroyed, index: {idx}");
+        Ok(())
     }
 
-    pub fn get(&self, idx: usize) -> Result<Option<VirtualDesktop>> {
+    fn get(&self, idx: usize) -> Result<Option<VirtualDesktop>> {
         match self {
-            VirtualDesktopManager::Native(m) => m.get(idx),
             VirtualDesktopManager::Seelen(m) => m.get(idx),
         }
     }
 
-    pub fn get_all(&self) -> Result<Vec<VirtualDesktop>> {
+    fn get_all(&self) -> Result<Vec<VirtualDesktop>> {
         match self {
-            VirtualDesktopManager::Native(m) => m.get_all(),
             VirtualDesktopManager::Seelen(m) => m.get_all(),
         }
     }
 
-    pub fn get_by_window(&self, window: isize) -> Result<VirtualDesktop> {
+    fn get_by_window(&self, window: isize) -> Result<VirtualDesktop> {
         match self {
-            VirtualDesktopManager::Native(m) => m.get_by_window(window),
             VirtualDesktopManager::Seelen(m) => m.get_by_window(window),
         }
     }
 
-    pub fn get_current(&self) -> Result<VirtualDesktop> {
+    fn get_current(&self) -> Result<VirtualDesktop> {
         match self {
-            VirtualDesktopManager::Native(m) => m.get_current(),
             VirtualDesktopManager::Seelen(m) => m.get_current(),
         }
     }
 
-    pub fn get_current_idx(&self) -> Result<usize> {
+    fn get_current_idx(&self) -> Result<usize> {
         match self {
-            VirtualDesktopManager::Native(m) => m.get_current_idx(),
             VirtualDesktopManager::Seelen(m) => m.get_current_idx(),
         }
     }
 
-    pub fn switch_to(&self, idx: usize) -> Result<()> {
+    fn switch_to(&self, idx: usize) -> Result<()> {
         match self {
-            VirtualDesktopManager::Native(m) => m.switch_to(idx),
             VirtualDesktopManager::Seelen(m) => m.switch_to(idx),
-        }
+        }?;
+        log::trace!("Virtual desktop switched to: {idx}");
+        Ok(())
     }
 
-    pub fn send_to(&self, idx: usize, window: isize) -> Result<()> {
+    fn send_to(&self, idx: usize, window: isize) -> Result<()> {
         match self {
-            VirtualDesktopManager::Native(m) => m.send_to(idx, window),
             VirtualDesktopManager::Seelen(m) => m.send_to(idx, window),
-        }
+        }?;
+        log::trace!("Window({window}) sent to virtual desktop: {idx}");
+        Ok(())
     }
 
-    pub fn pin_window(&self, window: isize) -> Result<()> {
+    fn pin_window(&self, window: isize) -> Result<()> {
         match self {
-            VirtualDesktopManager::Native(m) => m.pin_window(window),
             VirtualDesktopManager::Seelen(m) => m.pin_window(window),
-        }
+        }?;
+        log::trace!("Window({window}) pinned, showing on all workspaces");
+        Ok(())
     }
 
-    pub fn unpin_window(&self, window: isize) -> Result<()> {
+    fn unpin_window(&self, window: isize) -> Result<()> {
         match self {
-            VirtualDesktopManager::Native(m) => m.unpin_window(window),
             VirtualDesktopManager::Seelen(m) => m.unpin_window(window),
-        }
+        }?;
+        log::trace!("Window({window}) unpinned, showing on current workspace");
+        Ok(())
     }
 
-    pub fn is_pinned_window(&self, window: isize) -> Result<bool> {
+    fn is_pinned_window(&self, window: isize) -> Result<bool> {
         match self {
-            VirtualDesktopManager::Native(m) => m.is_pinned_window(window),
             VirtualDesktopManager::Seelen(m) => m.is_pinned_window(window),
         }
     }
 
-    pub fn listen_events(&self, cb: std::sync::mpsc::Sender<VirtualDesktopEvent>) -> Result<()> {
+    fn listen_events(&self, cb: std::sync::mpsc::Sender<VirtualDesktopEvent>) -> Result<()> {
         match self {
-            VirtualDesktopManager::Native(m) => m.listen_events(cb),
             VirtualDesktopManager::Seelen(m) => m.listen_events(cb),
         }
     }
 
-    pub fn uses_cloak(&self) -> bool {
+    fn uses_cloak(&self) -> bool {
         match self {
-            VirtualDesktopManager::Native(m) => m.uses_cloak(),
             VirtualDesktopManager::Seelen(m) => m.uses_cloak(),
         }
     }
@@ -195,7 +186,6 @@ pub enum VirtualDesktopEvent {
     DesktopCreated(VirtualDesktop),
     DesktopDestroyed {
         destroyed: VirtualDesktop,
-        fallback: VirtualDesktop,
     },
     DesktopChanged {
         new: VirtualDesktop,

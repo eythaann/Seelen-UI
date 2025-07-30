@@ -161,7 +161,6 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
     }
 
     fn create_desktop(&self) -> Result<()> {
-        log::trace!("Creating new seelen workspace");
         let desk = SeelenWorkspace::new();
         trace_lock!(self.workspaces).push(desk.clone());
         self.emit(VirtualDesktopEvent::DesktopCreated(desk.into()))?;
@@ -169,21 +168,30 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
     }
 
     fn destroy_desktop(&self, idx: usize) -> Result<()> {
-        let workspaces = self.get_all()?;
-        let length = workspaces.len();
-        if idx >= length || length < 2 {
-            return Ok(());
-        }
+        // preparation step
+        let (new_idx, to_destroy_idx) = {
+            let mut workspaces = trace_lock!(self.workspaces);
 
-        let prev_idx = (idx + length - 1) % length;
-        let fallback = workspaces[prev_idx].clone();
-        let _destroyed = workspaces[idx].clone();
+            let length = workspaces.len();
+            if idx >= length || length < 2 {
+                return Ok(());
+            }
 
-        // fallback.windows todo handle correctly this
+            let new_idx = if idx == 0 { 1 } else { idx - 1 };
+            let mut drained = std::mem::take(&mut workspaces[idx].windows);
+            workspaces[new_idx].windows.append(&mut drained);
+            (new_idx, idx)
+        };
+
+        self.switch_to(new_idx)?;
+
+        let detroyed = {
+            let mut workspaces = trace_lock!(self.workspaces);
+            workspaces.remove(to_destroy_idx)
+        };
 
         self.emit(VirtualDesktopEvent::DesktopDestroyed {
-            destroyed: workspaces[idx].clone(),
-            fallback: fallback.clone(),
+            destroyed: detroyed.into(),
         })?;
         Ok(())
     }

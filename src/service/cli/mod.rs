@@ -1,10 +1,8 @@
 pub mod processing;
-mod tcp;
 
 use std::sync::atomic::Ordering;
 
-use slu_ipc::{messages::SvcAction, ServiceIpc};
-pub use tcp::*;
+use slu_ipc::{messages::SvcAction, AppIpc, ServiceIpc, IPC};
 
 use clap::{Arg, ArgAction, Command};
 
@@ -53,7 +51,7 @@ pub async fn handle_console_client() -> Result<()> {
         // --startup flag is added when service is invoked from task scheduler
         // but this can be invoked by the main app too, so we only considerate as startup if
         // the main app is not running and flag is present
-        crate::STARTUP.store(!TcpBgApp::is_running(), Ordering::SeqCst);
+        crate::STARTUP.store(!AppIpc::can_stablish_connection(), Ordering::SeqCst);
     }
 
     match subcommand {
