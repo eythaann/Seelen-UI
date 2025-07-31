@@ -126,7 +126,7 @@ async fn main() -> Result<()> {
     handle_console_client().await?;
 
     if is_already_runnning() {
-        SelfPipe::request_open_settings()?;
+        SelfPipe::request_open_settings().await?;
         return Ok(());
     }
 

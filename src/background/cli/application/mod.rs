@@ -15,7 +15,7 @@ use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PA
 
 use crate::{
     cli::application::uri::process_uri, error_handler::Result,
-    modules::virtual_desk::cli::VirtualDesktopCli, seelen::SEELEN,
+    modules::virtual_desk::cli::VirtualDesktopCli, popups::cli::PopupsCli, seelen::SEELEN,
     seelen_rofi::cli::AppLauncherCli, seelen_weg::cli::WegCli, seelen_wm_v2::cli::WindowManagerCli,
     trace_lock, widgets::show_settings,
 };
@@ -47,6 +47,7 @@ pub enum AppCliCommand {
     Debugger(DebuggerCli),
     Launcher(AppLauncherCli),
     WindowManager(WindowManagerCli),
+    Popup(PopupsCli),
     Weg(WegCli),
     Widget(WidgetCli),
     Win32(Win32Cli),
@@ -161,6 +162,9 @@ impl AppCliCommand {
                 command.process()?;
             }
             AppCliCommand::Widget(command) => {
+                command.process()?;
+            }
+            AppCliCommand::Popup(command) => {
                 command.process()?;
             }
             AppCliCommand::Win32(_) => {}

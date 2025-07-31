@@ -1,7 +1,7 @@
 use clap::Parser;
 use slu_ipc::{messages::IpcResponse, AppIpc};
 
-use crate::{cli::application::AppCli, error_handler::Result, log_error};
+use crate::{cli::application::AppCli, error_handler::Result};
 
 pub struct SelfPipe;
 impl SelfPipe {
@@ -33,10 +33,8 @@ impl SelfPipe {
         Ok(())
     }
 
-    pub fn request_open_settings() -> Result<()> {
-        tokio::spawn(async move {
-            log_error!(AppIpc::send(vec!["settings".to_owned()]).await);
-        });
+    pub async fn request_open_settings() -> Result<()> {
+        AppIpc::send(vec!["settings".to_owned()]).await?;
         Ok(())
     }
 }

@@ -1353,7 +1353,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cea14ef9355e3beab063703aa9dab15afd25f0667c341310c1e5274bb1d0da18"
 dependencies = [
  "libc",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -4163,7 +4163,7 @@ dependencies = [
  "once_cell",
  "socket2 0.5.10",
  "tracing",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -4707,7 +4707,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -4868,7 +4868,7 @@ dependencies = [
 [[package]]
 name = "seelen-core"
 version = "2.3.6"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#5c3ccc5534d973797934a30213363169184a7251"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#bbe2555f028d6abafac2632c7bbb5bc59a62fc92"
 dependencies = [
  "base64 0.22.1",
  "chrono",
@@ -5971,7 +5971,7 @@ dependencies = [
  "getrandom 0.3.3",
  "once_cell",
  "rustix",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]

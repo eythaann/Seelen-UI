@@ -56,9 +56,10 @@ impl IPC for ServiceIpc {
 }
 
 impl ServiceIpc {
-    pub fn start<F>(cb: F) -> Result<()>
+    pub fn start<R, F>(cb: F) -> Result<()>
     where
-        F: Fn(SvcAction) -> IpcResponse + Send + Sync + 'static,
+        R: Future<Output = IpcResponse> + Send + Sync,
+        F: Fn(SvcAction) -> R + Send + Sync + 'static,
     {
         let mut sd = SecurityDescriptor::new()?;
         unsafe { sd.set_dacl(std::ptr::null_mut(), false)? };
@@ -89,9 +90,10 @@ impl ServiceIpc {
         Ok(())
     }
 
-    async fn process_connection<F>(stream: &DuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
+    async fn process_connection<F, R>(stream: &DuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
     where
-        F: Fn(SvcAction) -> IpcResponse,
+        R: Future<Output = IpcResponse> + Send + Sync,
+        F: Fn(SvcAction) -> R + Send + Sync + 'static,
     {
         let mut reader = BufReader::new(stream);
         let mut data = Vec::new();
@@ -113,7 +115,7 @@ impl ServiceIpc {
         }
 
         log::trace!("IPC command received: {:?}", message.action);
-        Self::response_to_client(stream, cb(message.action)).await?;
+        Self::response_to_client(stream, cb(message.action).await).await?;
         Ok(())
     }
 

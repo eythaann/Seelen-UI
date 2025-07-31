@@ -27,6 +27,8 @@ pub enum SvcAction {
         flags: u32,
     },
     SetForeground(isize),
+    StartShortcutRegistration,
+    StopShortcutRegistration,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

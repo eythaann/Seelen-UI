@@ -15,7 +15,6 @@ use crate::{
     error_handler::Result,
     log_error,
     popups::POPUPS_MANAGER,
-    seelen::get_app_handle,
     state::application::{download_remote_icons, FULL_STATE},
     utils::constants::SEELEN_COMMON,
 };
@@ -146,16 +145,19 @@ async fn _download_resource(url: &str) -> Result<SluResourceFile> {
 
 fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Result<()> {
     let mut pupups_manager = POPUPS_MANAGER.lock();
-    let handle = get_app_handle();
+
     let config = resource_to_popup_config(resource)?;
     pupups_manager.update(popup_id, config)?;
 
     let id = resource.id;
     let friendly_id = resource.friendly_id.to_string();
     let kind = resource.kind.clone();
-    let event = format!("resource::{id}::enable");
     let popup_id = *popup_id;
-    let token = handle.once(event, move |_e| {
+
+    let webview = pupups_manager
+        .get_window_handle(&popup_id)
+        .ok_or("Popup not found")?;
+    let token = webview.once(format!("resource::{id}::enable"), move |_e| {
         std::thread::spawn(move || {
             FULL_STATE.rcu(move |state| {
                 let mut state = state.cloned();

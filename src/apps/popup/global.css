@@ -84,16 +84,21 @@ body {
   }
 
   .button {
+    height: 24px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 4px;
-    padding: 4px 10px;
-    background-color: var(--config-accent-dark-color);
+    padding: 0 8px;
+    background-color: var(--config-accent-color);
     color: var(--color-persist-white);
     border-radius: 6px;
     transition: background-color 0.2s ease-in-out;
+    font-size: 0.9rem;
+    line-height: 1.2em;
 
     &:hover {
-      background-color: var(--config-accent-color);
+      filter: brightness(1.1);
     }
   }
 }

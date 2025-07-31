@@ -1,12 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UIColors, UpdateChannel, VirtualDesktopStrategy } from '@seelen-ui/lib';
-import { IconPackId, SeelenWallSettings, ThemeId, WallpaperId, WallpaperInstanceSettings, WidgetId } from '@seelen-ui/lib/types';
+import {
+  IconPackId,
+  SeelenWallSettings,
+  ThemeId,
+  WallpaperId,
+  WallpaperInstanceSettings,
+  WidgetId,
+} from '@seelen-ui/lib/types';
 import { cloneDeep, pick } from 'lodash';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
 import { SeelenWegSlice } from '../../../seelenweg/app';
-import { AhkVariablesSlice } from '../../../shortcuts/app';
 import { SeelenManagerSlice } from '../../../WindowManager/main/app';
 import { matcher, reducersFor, selectorsFor } from '../../utils/app';
 
@@ -19,6 +25,7 @@ import { defaultSettings } from './default';
 const initialState: RootState = {
   lastLoaded: null,
   autostart: null,
+  shortcuts: defaultSettings.inner.shortcuts,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
   seelenweg: defaultSettings.seelenweg,
   wall: defaultSettings.wall,
@@ -29,8 +36,6 @@ const initialState: RootState = {
   monitorsV3: {},
   connectedMonitors: [],
   appsConfigurations: AppsConfigSlice.getInitialState(),
-  ahkEnabled: true,
-  ahkVariables: AhkVariablesSlice.getInitialState(),
   availableThemes: [],
   availableIconPacks: [],
   oldActiveThemes: [],
@@ -134,13 +139,19 @@ export const RootSlice = createSlice({
       state.toBeSaved = true;
       state.wall = { ...state.wall, ...action.payload };
     },
-    patchWallpaperSettings: (state, action: PayloadAction<{
-      id: WallpaperId;
-      patch: Partial<WallpaperInstanceSettings>;
-    }>) => {
+    patchWallpaperSettings: (
+      state,
+      action: PayloadAction<{
+        id: WallpaperId;
+        patch: Partial<WallpaperInstanceSettings>;
+      }>,
+    ) => {
       const { id, patch } = action.payload;
       state.toBeSaved = true;
-      state.byWallpaper[id] = { ...(state.byWallpaper[id] || {}), ...patch } as WallpaperInstanceSettings;
+      state.byWallpaper[id] = {
+        ...(state.byWallpaper[id] || {}),
+        ...patch,
+      } as WallpaperInstanceSettings;
     },
     resetWallpaperSettings: (state, action: PayloadAction<WallpaperId>) => {
       state.toBeSaved = true;
@@ -260,10 +271,6 @@ export const RootSlice = createSlice({
       .addMatcher(matcher(FancyToolbarSlice), (state, action) => {
         state.toBeSaved = true;
         state.fancyToolbar = FancyToolbarSlice.reducer(state.fancyToolbar, action);
-      })
-      .addMatcher(matcher(AhkVariablesSlice), (state, action) => {
-        state.toBeSaved = true;
-        state.ahkVariables = AhkVariablesSlice.reducer(state.ahkVariables, action);
       });
   },
 });

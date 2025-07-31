@@ -3,8 +3,6 @@ import { signal } from '@preact/signals';
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from '@seelen-ui/lib';
 import { SluPopupConfig, SluPopupContent as ISluPopupContent } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
-import { emit } from '@tauri-apps/api/event';
-import { LogicalPosition, LogicalSize } from '@tauri-apps/api/window';
 
 const currentWidget = Widget.getCurrent();
 const state = signal<SluPopupConfig>({
@@ -28,19 +26,8 @@ invoke(SeelenCommand.GetPopupConfig, { instanceId: currentWidget.decoded.instanc
   });
 
 subscribe(SeelenEvent.PopupContentChanged, async (e) => {
-  const oldWidth = state.value.width;
-  const oldHeight = state.value.height;
-
-  const widthDiff = e.payload.width - oldWidth;
-  const heightDiff = e.payload.height - oldHeight;
-
-  const newX = window.screenLeft - widthDiff / 2;
-  const newY = window.screenTop - heightDiff / 2;
-
   state.value = e.payload;
   currentWidget.webview.setTitle(getOnlyText(e.payload.title));
-  currentWidget.webview.setPosition(new LogicalPosition(newX, newY));
-  currentWidget.webview.setSize(new LogicalSize(e.payload.width, e.payload.height));
 });
 
 function closePopup() {
@@ -93,7 +80,11 @@ function SluPopupContent({ entry }: { entry: ISluPopupContent }) {
         <button
           className="button"
           onClick={() => {
-            emit(`${entry.onClick}`);
+            if (entry.onClick === 'exit') {
+              closePopup();
+              return;
+            }
+            currentWidget.webview.emitTo(currentWidget.webview.label, `${entry.onClick}`);
           }}
           style={entry.styles || {}}
         >

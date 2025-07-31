@@ -1,9 +1,6 @@
 import { Tooltip } from 'antd';
 import { AnyComponent } from 'preact';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-
-import { newSelectors } from '../../modules/shared/store/app/reducer';
 
 import { RoutePath } from '../navigation/routes';
 
@@ -17,9 +14,10 @@ export const RouteExtraInfo: { [key: string]: AnyComponent } = {
     );
   },
   [RoutePath.AppLauncher]: () => {
-    const shortcut = useSelector(newSelectors.ahkVariables.toggleLauncher);
+    /* const shortcut = useSelector(newSelectors.ahkVariables.toggleLauncher);
     return (
       <span style={{ fontSize: '0.9rem', color: 'var(--color-gray-500)' }}>({shortcut.fancy})</span>
-    );
+    ); */
+    return null;
   },
 };

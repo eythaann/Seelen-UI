@@ -2,7 +2,7 @@ use slu_ipc::messages::{IpcResponse, SvcAction};
 
 use crate::{error::Result, task_scheduler::TaskSchedulerHelper, windows_api::WindowsApi};
 
-fn _process_action(command: SvcAction) -> Result<()> {
+async fn _process_action(command: SvcAction) -> Result<()> {
     match command {
         SvcAction::Stop => crate::stop(),
         SvcAction::SetStartup(enabled) => TaskSchedulerHelper::set_run_on_logon(enabled)?,
@@ -26,12 +26,18 @@ fn _process_action(command: SvcAction) -> Result<()> {
                 crate::hotkeys::stop_app_shortcuts();
             }
         }
+        SvcAction::StartShortcutRegistration => {
+            crate::hotkeys::start_shortcut_registration().await?;
+        }
+        SvcAction::StopShortcutRegistration => {
+            crate::hotkeys::stop_shortcut_registration().await?;
+        }
     }
     Ok(())
 }
 
-pub fn process_action(command: SvcAction) -> IpcResponse {
-    match _process_action(command) {
+pub async fn process_action(command: SvcAction) -> IpcResponse {
+    match _process_action(command).await {
         Ok(()) => IpcResponse::Success,
         Err(err) => IpcResponse::Err(err.to_string()),
     }

@@ -1,6 +1,6 @@
 use seelen_core::state::shortcuts::{SluHotkeyAction, SluShortcutsSettings};
 use slu_ipc::AppIpc;
-use win_hotkeys::{error::WHKError, Hotkey, HotkeyManager, VKey};
+use win_hotkeys::{error::WHKError, events::KeyboardInputEvent, Hotkey, HotkeyManager, VKey};
 
 use crate::{error::Result, log_error};
 
@@ -49,7 +49,53 @@ pub fn stop_app_shortcuts() {
     HotkeyManager::stop_keyboard_capturing();
 }
 
-pub fn _request_to_user_input_shortcut() {}
+pub async fn start_shortcut_registration() -> Result<()> {
+    let hkm = HotkeyManager::current();
+
+    let handle = tokio::runtime::Handle::current();
+    let on_free_keyboard = move || {
+        handle.spawn(async {
+            let _ = send_registering_to_app(None).await;
+        });
+        HotkeyManager::current().remove_global_keyboard_listener();
+    };
+
+    let handle = tokio::runtime::Handle::current();
+    let on_keyboard_event = move |event| {
+        handle.spawn(async {
+            match event {
+                KeyboardInputEvent::KeyDown { vk_code, state } => {
+                    if VKey::from_vk_code(vk_code) == VKey::Escape {
+                        return;
+                    }
+                    let keys = state.pressing.iter().map(|vkey| vkey.to_string()).collect();
+                    let _ = send_registering_to_app(Some(keys)).await;
+                }
+                KeyboardInputEvent::KeyUp { .. } => {}
+            }
+        });
+    };
+
+    send_registering_to_app(Some(vec![])).await?;
+    hkm.steal_keyboard(on_free_keyboard);
+    hkm.set_global_keyboard_listener(on_keyboard_event);
+    Ok(())
+}
+
+pub async fn stop_shortcut_registration() -> Result<()> {
+    HotkeyManager::current().free_keyboard();
+    Ok(())
+}
+
+async fn send_registering_to_app(hotkey: Option<Vec<String>>) -> Result<()> {
+    AppIpc::send(vec![
+        "popup".to_owned(),
+        "internal-set-shortcut".to_owned(),
+        serde_json::to_string(&hotkey)?,
+    ])
+    .await?;
+    Ok(())
+}
 
 fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Vec<String> {
     use SluHotkeyAction::*;
