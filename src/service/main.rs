@@ -81,13 +81,13 @@ fn launch_seelen_ui() -> Result<()> {
 #[cfg(not(debug_assertions))]
 /// will stop the service after `max_attempts` attempts
 fn restart_gui_on_crash(max_attempts: u32) {
-    tokio::spawn(async {
+    tokio::spawn(async move {
         let mut attempts = 0;
         while attempts < max_attempts {
-            if !AppIpc::is_running() {
+            if !AppIpc::can_stablish_connection() {
                 attempts += 1;
-                if Err(err) = launch_seelen_ui() {
-                    log::error!("Failed to restart Seelen UI: {}", err);
+                if let Err(err) = launch_seelen_ui() {
+                    log::error!("Failed to restart Seelen UI: {err}");
                     break;
                 }
             }
