@@ -2,7 +2,7 @@ import { batch, useComputed, useSignal, useSignalEffect } from '@preact/signals'
 import { PhysicalMonitor, WallpaperId } from '@seelen-ui/lib/types';
 import { Wallpaper as WallpaperComponent } from '@shared/components/Wallpaper';
 
-import { $settings, $wallpapers } from '../shared/state';
+import { $idle, $paused, $settings, $wallpapers } from '../shared/state';
 import { $get_active_wallpapers, $relativeMonitors } from './derived';
 
 export function MonitorContainers() {
@@ -118,6 +118,7 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
             key={oldWallpaper?.id || 'themed'}
             definition={oldWallpaper}
             config={oldWallpaper && $settings.value.byWallpaper[oldWallpaper.id]}
+            paused={$paused.value || $idle.value}
             out={$current_was_loaded.value}
           />
         ),
@@ -126,6 +127,7 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
           definition={wallpaper}
           config={wallpaper && $settings.value.byWallpaper[wallpaper.id]}
           onLoad={() => ($current_was_loaded.value = true)}
+          paused={$paused.value || $idle.value}
         />,
       ]}
     </div>

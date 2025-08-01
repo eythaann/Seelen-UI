@@ -104,7 +104,7 @@ function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && paused !== undefined) {
       console.debug('wallpaper state changed:', paused);
       if (paused) {
         ref.current.pause();
@@ -129,7 +129,7 @@ function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps
       src={convertFileSrc(definition.metadata.path + '\\' + definition.filename!)}
       controls={false}
       muted
-      autoPlay
+      autoPlay={!paused}
       loop
       playsInline
       disableRemotePlayback

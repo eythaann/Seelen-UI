@@ -8,6 +8,7 @@ import {
   UIColors,
   WallpaperList,
 } from '@seelen-ui/lib';
+import { debounce } from 'lodash';
 
 const initial = await Settings.getAsync();
 
@@ -30,6 +31,18 @@ UIColors.onChange((colors) => colors.setAsCssVariables());
 
 export const $paused = signal(false);
 subscribe(SeelenEvent.WallStop, ({ payload }) => ($paused.value = payload));
+
+export const $idle = signal(false);
+const setAsIdle = debounce(() => {
+  $idle.value = true;
+}, 1000 * 60 * 3); // 3 min
+subscribe(SeelenEvent.GlobalMouseMove, () => {
+  // avoid state change on every mouse move
+  if ($idle.value) {
+    $idle.value = false;
+  }
+  setAsIdle();
+});
 
 export const $monitors = signal(await invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, ({ payload }) => {

@@ -357,6 +357,7 @@ pub fn register_win_hook() -> Result<()> {
     spawn_named_thread("MouseEventHook", || {
         let handle = get_app_handle();
         let mut last_pos = Point::default();
+        let sleep_time = Duration::from_millis(100); // 10fps
         loop {
             if let Ok(pos) = Mouse::get_cursor_pos() {
                 if last_pos != pos {
@@ -364,7 +365,7 @@ pub fn register_win_hook() -> Result<()> {
                     last_pos = pos;
                 }
             }
-            std::thread::sleep(Duration::from_millis(66)); // 15 FPS
+            std::thread::sleep(sleep_time);
         }
     })?;
 
