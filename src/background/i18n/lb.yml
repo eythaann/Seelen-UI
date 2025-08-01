@@ -1,3 +1,5 @@
+cancel: Ofbriechen
+done: Verdataktioun
 drivers:
   got_it: Krut et
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI Service (slu-Service) ass eng Ofhängegkeet / Helfer fir d'App
     richteg ze schaffen.
   not_running_ok: Start Service
+shortcut:
+  register:
+    placeholder: Press all Tastekombinatioun
+    title: Registréiert nei Ofkiirzung
 tray:
   quit: Ness
   restart: Restart ui

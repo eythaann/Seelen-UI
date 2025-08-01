@@ -152,11 +152,19 @@ save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
 see_more: Ikusi gehiago
 shortcuts:
-  enable: Gaitu lasterbide integratuak (Ahk)
-  enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
+  enable: Gaitu zuzeneko lasterbideen sistema
+  enable_tooltip: >-
+    Desgaitu Seelen UI bezeroa erabiliz zure lasterbideen sistema ezartzen
+    baduzu
   labels:
+    create_new_workspace: Sortu laneko espazioa berria
+    cycle_stack_next: Ziklo pila hurrengoa
+    cycle_stack_prev: Ziklo pila Aurrekoa
+    cycle_wallpaper_next: Aldatu hurrengo horma-irudira
+    cycle_wallpaper_prev: Aldatu aurreko horma-irudira
     decrease_height: Altuera gutxitu
     decrease_width: Murriztu zabalera
+    destroy_current_workspace: Destroy uneko lan-eremua
     focus_bottom: Fokua Behean
     focus_latest: Fokua azkena
     focus_left: Focus ezkerrera
@@ -167,16 +175,12 @@ shortcuts:
     misc_open_settings: Ezarpenak irekitzea
     misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
     misc_toggle_win_event_tracing: Txandakatu Gertaeren trazatzea (erregistroak)
-    move_to_workspace_0: Mugitu 0 lanera
-    move_to_workspace_1: Mugitu lan-eremura 1
-    move_to_workspace_2: Mugitu Workspace 2ra
-    move_to_workspace_3: Mugitu lan-eremura 3
-    move_to_workspace_4: Mugitu Workspace 4ra
-    move_to_workspace_5: Mugitu lan-eremura 5
-    move_to_workspace_6: Mugitu lan-eremura 6
-    move_to_workspace_7: Mugitu lan-eremura 7
-    move_to_workspace_8: Mugitu lan-eremura 8
-    move_to_workspace_9: Mugitu Workspace 9ra
+    move_to_workspace: Mugitu lan-eremura {{0}}
+    move_window_down: Mugitu leihoa beherantz
+    move_window_left: Mugitu leihoa ezkerrera
+    move_window_right: Mugitu leihoa eskuinera
+    move_window_up: Mugitu leihoa goitik
+    pause_tiling: Pausatu fitxa leiho kudeatzailea
     reserve_bottom: Erreserbatu behealdea
     reserve_float: Erreserba karroza
     reserve_left: Erreserba ezkerrera
@@ -184,37 +188,14 @@ shortcuts:
     reserve_stack: Erreserba pila
     reserve_top: Erreserba Top
     restore_sizes: Neurriak leheneratu
-    send_to_workspace_0: Bidali lan-eremura 0
-    send_to_workspace_1: Bidali lan-eremura 1
-    send_to_workspace_2: Bidali Workspace 2ra
-    send_to_workspace_3: Bidali lantokira 3
-    send_to_workspace_4: Bidali Workspace 4ra
-    send_to_workspace_5: Bidali lantokira 5
-    send_to_workspace_6: Bidali lantokira 6
-    send_to_workspace_7: Bidali lantokira 7
-    send_to_workspace_8: Bidali lantokira 8
-    send_to_workspace_9: Bidali Workspace 9ra
-    start_weg_app_0: Fokatu edo abiarazi Aplikazioa TASSBAR 1. posizioan
-    start_weg_app_1: Fokatu edo abiarazi aplikazioa ataza barraren 2. postuan
-    start_weg_app_2: Fokua edo abiarazi aplikazioa 3 ataza-barra posizioan
-    start_weg_app_3: Fokatu edo abiarazi aplikazioa zeregin-barran 4. postuan
-    start_weg_app_4: Fokua edo abiarazi aplikazioa 5 ataza-barran
-    start_weg_app_5: Fokua edo abiarazi aplikazioa zeregin-barran 6. postuan
-    start_weg_app_6: Fokua edo abiarazi aplikazioa zeregin-barran 7. postuan
-    start_weg_app_7: Fokatu edo abiarazi aplikazioa zereginen barra 8. postuan
-    start_weg_app_8: Fokatu edo abiarazi aplikazioa zeregin-barran 9. postuan
-    start_weg_app_9: Fokatu edo abiarazi aplikazioa zeregin-barran 10. postuan
-    switch_workspace_0: Aldatu lan-eremura 1
-    switch_workspace_1: Aldatu Workspace 2ra
-    switch_workspace_2: Aldatu Workspace 2ra
-    switch_workspace_3: Aldatu lan-eremura 3
-    switch_workspace_4: Aldatu Workspace 4ra
-    switch_workspace_5: Aldatu Workspace 5era
-    switch_workspace_6: Aldatu lan-eremura 6
-    switch_workspace_7: Aldatu Workspace 7ra
-    switch_workspace_8: Aldatu lan-eremura 8
-    switch_workspace_9: Aldatu Workspace 9ra
-    toggle_launcher: Txandatu
+    send_to_workspace: Bidali lantokiari {{0}}
+    start_weg_app: Fokatu edo abiarazi aplikazioa {{0}}
+    switch_to_next_workspace: Aldatu hurrengo lantokira
+    switch_to_previous_workspace: Aldatu aurreko lan-eremura
+    switch_workspace: Aldatu lan-eremura {{0}}
+    toggle_float: Txandakatu leiho karroza modua
+    toggle_launcher: Txandakatu abiarazlea
+    toggle_monocle: Txandakatu Workspace Monocle modua
   readonly_tooltip: Hau irakurtzeko lasterbidea da
   reset: Berrezarri lehenetsitakoak
 sides:

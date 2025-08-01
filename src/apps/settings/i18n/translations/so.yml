@@ -155,13 +155,19 @@ save: Badbaadin
 save_and_restart: Badbaadin & Dib u bilow
 see_more: Arag in dheeraad ah
 shortcuts:
-  enable: U fududee fulinta isku dhafan ee isku dhafan (Ahk)
+  enable: U fududee nidaamka qaab dhismeedka gaagaaban
   enable_tooltip: >-
-    Disable Haddii aad hirgelin doontid gaagaaban adiga oo adeegsanaya api-ka
-    quruxda badan
+    Disable Haddii aad hirgelin doontid nidaamkaaga gaagaaban ee aad adigu iska
+    leedahay adiga oo adeegsanaya macmiilka SELEN UI
   labels:
+    create_new_workspace: Abuuro shaqooyin cusub
+    cycle_stack_next: Wareegga xidhmada
+    cycle_stack_prev: Wareegga hore
+    cycle_wallpaper_next: U beddelo warqadaha xiga
+    cycle_wallpaper_prev: U beddelo xaashiyaha hore
     decrease_height: Hoos u dhig dhererka
     decrease_width: Ballaadhinta ballac
+    destroy_current_workspace: Burburinta goobta shaqada ee hadda jirta
     focus_bottom: Hoos udhaca hoose
     focus_latest: Diirad saar
     focus_left: Ahrive bidix
@@ -172,16 +178,12 @@ shortcuts:
     misc_open_settings: Meel furan
     misc_toggle_lock_tracing: Ku wareeji raadinta qufulka (logs)
     misc_toggle_win_event_tracing: Ku guuleysta raadinta dhacdada dhacdada (logs)
-    move_to_workspace_0: U dhaqaaq goobta shaqada 0
-    move_to_workspace_1: U dhaqaaq goobta shaqada 1
-    move_to_workspace_2: U dhaqaaq goobta shaqada 2
-    move_to_workspace_3: U dhaqaaq goobta shaqada 3
-    move_to_workspace_4: U dhaqaaq goobta shaqada 4
-    move_to_workspace_5: U dhaqaaq goobta shaqada 5
-    move_to_workspace_6: U dhaqaaq goobta shaqada 6
-    move_to_workspace_7: U dhaqaaq goobta shaqada 7
-    move_to_workspace_8: U dhaqaaqso goobta shaqada 8
-    move_to_workspace_9: U dhaqaaq goobta shaqada 9
+    move_to_workspace: U dhaqaaq goobta shaqada {0}}
+    move_window_down: Daaqadda u dhaqaaq ilaa hoose
+    move_window_left: Daaqadda u dhaqaaq ilaa bidix
+    move_window_right: Daaqadda u dhaqaaq dhanka midig
+    move_window_up: Daaqadda u dhaqaaq ilaa sare
+    pause_tiling: Jooji Maareeyaha Daaqadda Daaqadda
     reserve_bottom: Kaydsanaanta hoose
     reserve_float: Keydka sabuuradda
     reserve_left: Kaydsanaanta bidix
@@ -189,37 +191,14 @@ shortcuts:
     reserve_stack: Reebs Rap
     reserve_top: Keydka sare
     restore_sizes: Soo celinta cabirka
-    send_to_workspace_0: U dir goobta shaqada 0
-    send_to_workspace_1: U dir goobta shaqada 1
-    send_to_workspace_2: U dir goobta shaqada 2
-    send_to_workspace_3: U dir goobta shaqada 3
-    send_to_workspace_4: U dir goobta shaqada 4
-    send_to_workspace_5: U dir goobta shaqada 5
-    send_to_workspace_6: U dir goobta shaqada 6
-    send_to_workspace_7: U dir goobta shaqada 7
-    send_to_workspace_8: U dir goobta shaqada 8
-    send_to_workspace_9: U dir goobta shaqada 9
-    start_weg_app_0: Diirad saarida ama barnaamijka bilowga ah ee ku yaal booska shaqada 1aad
-    start_weg_app_1: Diirad saarida ama ka bilow app-ka ku yaal booska shaqada 2aad
-    start_weg_app_2: Xoogga saar ama bilow app-ka ku yaal booska shaqada 3aad
-    start_weg_app_3: Xoogga saar ama bilowga barnaamijka Tooska ah booska 4aad
-    start_weg_app_4: Diiradda ama bilowga app ee booska shaqada 5
-    start_weg_app_5: Diirad saarida ama ka bilow barnaamijka barnaamijka 'TurkBar' 6
-    start_weg_app_6: Diirad saarida ama bilowga app ee ku yaal booska shaqada 7aad
-    start_weg_app_7: Xoogga saar ama bilowga barnaamijka Tooska ah booska 8aad
-    start_weg_app_8: Diirad saarida ama bilowga app ee ku yaal booska shaqada 9aad
-    start_weg_app_9: Diiradda ama bilowga app ee ku yaal booska shaqada 10aad
-    switch_workspace_0: U beddelo goobta shaqada 1
-    switch_workspace_1: U beddelo goobta shaqada 2
-    switch_workspace_2: U beddelo goobta shaqada 2
-    switch_workspace_3: U beddelo goobta shaqada 3
-    switch_workspace_4: U beddelo goobta shaqada 4
-    switch_workspace_5: U beddelo goobta shaqada 5
-    switch_workspace_6: U beddelo goobta shaqada 6
-    switch_workspace_7: U beddelo goobta shaqada 7
-    switch_workspace_8: U beddelo goobta shaqada 8
-    switch_workspace_9: U beddelo goobta shaqada 9
-    toggle_launcher: Ka wareego
+    send_to_workspace: U dir goobta shaqada {{0}}
+    start_weg_app: Diiradda ama Bilaabashada Arjiga Codsiga {0-}}
+    switch_to_next_workspace: U beddelo goobta shaqada ee xiga
+    switch_to_previous_workspace: U beddelo shaqooyin hore
+    switch_workspace: U beddelo goobta shaqada {{0}}
+    toggle_float: Ku wareeji xarkaha suuqa
+    toggle_launcher: Tirggle Bilaash
+    toggle_monocle: TOGGLE MODOCLE MoCOCLE Mode
   readonly_tooltip: Tani waa gaagaaban oo keliya oo keliya
   reset: Dib u dejiso defafyada
 sides:

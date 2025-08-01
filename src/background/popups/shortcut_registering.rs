@@ -78,7 +78,7 @@ pub fn set_registering_shortcut(shortcut: Option<Vec<String>>) -> Result<()> {
 fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
     let items = if shortcut.is_empty() {
         vec![SluPopupContent::Text {
-            value: "Press any key combination".to_string(),
+            value: t!("shortcut.register.placeholder").to_string(),
             styles: Some(
                 CssStyles::new()
                     .add("color", "#6c6c6c")
@@ -122,19 +122,19 @@ fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
         vec![
             SluPopupContent::Button {
                 inner: vec![SluPopupContent::Text {
-                    value: "Cancel".to_string(),
+                    value: t!("cancel").to_string(),
                     styles: None,
                 }],
                 on_click: "exit".to_string(),
                 styles: Some(
                     CssStyles::new()
-                        .add("backgroundColor", "var(--color-red-600)")
+                        .add("backgroundColor", "var(--color-red-700)")
                         .add("color", "var(--color-white)"),
                 ),
             },
             SluPopupContent::Button {
                 inner: vec![SluPopupContent::Text {
-                    value: "Done".to_string(),
+                    value: t!("done").to_string(),
                     styles: None,
                 }],
                 on_click: "user_shortcut_accepted".to_string(),
@@ -147,7 +147,7 @@ fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
         width: 360.0,
         height: 180.0,
         title: vec![SluPopupContent::Text {
-            value: "Registering new shortcut".to_string(),
+            value: t!("shortcut.register.title").to_string(),
             styles: None,
         }],
         content: vec![keys_box],

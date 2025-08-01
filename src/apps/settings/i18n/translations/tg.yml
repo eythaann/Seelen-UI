@@ -150,11 +150,19 @@ save: Пул захира кардан
 save_and_restart: Наҷот ва бозоғоз
 see_more: Бештар нигаред
 shortcuts:
-  enable: Миёнабурҳои ҳамгирошударо фаъол созед (AHK)
-  enable_tooltip: Агар шумо миёнабурҳои худро бо истифода аз Seelen Cear Secten истифода баред
+  enable: Системаи миёнабурҳои обиро фаъол созед
+  enable_tooltip: >-
+    Агар шумо системаи миёнабурҳои худро бо истифода аз мизоҷи Yoelen истифода
+    баред
   labels:
+    create_new_workspace: Эҷоди фазои нав
+    cycle_stack_next: Стрипка дар паҳлӯи он
+    cycle_stack_prev: Стритинг қаблан
+    cycle_wallpaper_next: Тағирот ба обои нав
+    cycle_wallpaper_prev: Тағирот ба обои қаблӣ
     decrease_height: Баландиро кам мекунад
     decrease_width: Пойафзол коҳиш диҳед
+    destroy_current_workspace: Ҷоизаҳои ҷориро нест кунед
     focus_bottom: Фаъолахш
     focus_latest: Тамаркуз охирин
     focus_left: Тамаркуз ба чап
@@ -165,16 +173,12 @@ shortcuts:
     misc_open_settings: Танзимоти кушода
     misc_toggle_lock_tracing: Todge Cound Tracking (гузоришҳо)
     misc_toggle_win_event_tracing: Гузариш ба ғолиб Tweacing (гузоришҳо)
-    move_to_workspace_0: Ба фазои корпартоӣ ҳаракат кунед
-    move_to_workspace_1: Ба корпартои 1 ҳаракат кунед
-    move_to_workspace_2: Ба фазои кории 2 гузаред
-    move_to_workspace_3: Ба кории 3 ҳаракат кунед
-    move_to_workspace_4: Ба фазои 4 ҳаракат кунед
-    move_to_workspace_5: Ба кории 5 ҳаракат кунед
-    move_to_workspace_6: Ба корпартои 6 ҳаракат кунед
-    move_to_workspace_7: Ба корҳо ҳаракат кунед 7
-    move_to_workspace_8: Ба фазои корӣ ҳаракат кунед
-    move_to_workspace_9: Ба фазои 9 ҳаракат кунед
+    move_to_workspace: Ба кории {{0}} гузаред
+    move_window_down: Тирезаро ба поён ҳаракат кунед
+    move_window_left: Тиреза ба чап
+    move_window_right: Тирезаро ба рост ҳаракат кунед
+    move_window_up: Тиреза ба боло
+    pause_tiling: Менеҷери тирезаи Temple
     reserve_bottom: Поёни захиравӣ
     reserve_float: Шино мекунанд
     reserve_left: Захира
@@ -182,37 +186,14 @@ shortcuts:
     reserve_stack: Стекер захира
     reserve_top: Болои боло
     restore_sizes: Барқарор кардан
-    send_to_workspace_0: Ба кории 0 фиристед
-    send_to_workspace_1: Ба кории 1 фиристед 1
-    send_to_workspace_2: Ба кории 2 фиристед 2
-    send_to_workspace_3: Ба кории 3 фиристед 3
-    send_to_workspace_4: Ба кории 4 фиристед
-    send_to_workspace_5: Ба кории 5 фиристед
-    send_to_workspace_6: Ба корҳо фиристед 6
-    send_to_workspace_7: Ба корҳо фиристед 7
-    send_to_workspace_8: Ба корҳо фиристед 8
-    send_to_workspace_9: Ба кории 9 фиристед
-    start_weg_app_0: Тамаркуз ё оғози барнома оид ба вазифаи панир 1
-    start_weg_app_1: Тамаркуз ё оғози барнома оид ба вазифаи панир 2
-    start_weg_app_2: Тамаркуз ё оғози барнома оид ба вазифаи панир 3
-    start_weg_app_3: Тамаркуз ё оғози барнома оид ба вазифаи панир 4
-    start_weg_app_4: Тамаркуз ё оғози барнома оид ба вазифаи панир 5
-    start_weg_app_5: Тамаркуз ё оғози барнома оид ба вазифаи панир 6
-    start_weg_app_6: Тамаркуз ё оғози барнома оид ба вазифаи панир 7
-    start_weg_app_7: Тамаркуз ё оғози барномаро дар вазифаи панели панелон 8
-    start_weg_app_8: Тамаркуз ё оғози барнома дар вазифаи панир 9
-    start_weg_app_9: Тамаркуз ё оғози барнома оид ба вазифаи панели поён 10
-    switch_workspace_0: Гузариш ба Prowspace 1
-    switch_workspace_1: Гузариш ба корҳо 2
-    switch_workspace_2: Гузариш ба корҳо 2
-    switch_workspace_3: Гузариш ба кории 3
-    switch_workspace_4: Гузариш ба корҳо 4
-    switch_workspace_5: Гузариш ба корҳо 5
-    switch_workspace_6: Гузариш ба корҳо 6
-    switch_workspace_7: Гузариш ба кории 7
-    switch_workspace_8: Гузариш ба корҳо 8
-    switch_workspace_9: Гузариш ба кории 9
+    send_to_workspace: Ба кории rowspace {{0}}
+    start_weg_app: Тамаркуз ё оғози дархост {{0}}
+    switch_to_next_workspace: Гузариш ба фазои оянда
+    switch_to_previous_workspace: Ба фазои пешина гузаред
+    switch_workspace: Гузаштан ба роҳҳои корӣ {{0}}
+    toggle_float: Ҳолати шинокунандаи шино
     toggle_launcher: Гузариш
+    toggle_monocle: Реҷаи монокзори роҳ
   readonly_tooltip: Ин як миёнабурҳои ягона аст
   reset: Аз нав танзимкунии пешфарз
 sides:

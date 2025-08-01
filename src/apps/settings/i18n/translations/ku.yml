@@ -152,13 +152,19 @@ save: Rizgarkirin
 save_and_restart: Save & Restart
 see_more: Bêtir bibînin
 shortcuts:
-  enable: Kurtefîlmên entegre (AHK) çalak bikin
+  enable: Pergala kurtefîlmên çêkirî çalak bikin
   enable_tooltip: >-
-    Heke hûn ê kurteyên xwe bicîh bînin bi karanîna API ya Seelen Core bicîh
-    bikin
+    Heke hûn ê pergala kurteya xwe bi karanîna muwekîlê Seelen UI bikar bînin
+    bicîh bikin
   labels:
+    create_new_workspace: Karê nû nû çêbikin
+    cycle_stack_next: Cycle stack next
+    cycle_stack_prev: Stacka Cycle ya berê
+    cycle_wallpaper_next: Guhertina Wallpaper-ê din
+    cycle_wallpaper_prev: Guhertina Wallpaper ya berê
     decrease_height: Dirêjbûn
     decrease_width: Width kêm bikin
+    destroy_current_workspace: Qada xebata heyî hilweşînin
     focus_bottom: Focus Bottom
     focus_latest: FOCUS Latest
     focus_left: Focus çep
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Mîhengên vekirî
     misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
-    move_to_workspace_0: Move to Workspace 0
-    move_to_workspace_1: Move to Workspace 1
-    move_to_workspace_2: Move to Workspace 2
-    move_to_workspace_3: Move to Workspace 3
-    move_to_workspace_4: Move to Workspace 4
-    move_to_workspace_5: Move to Workspace 5
-    move_to_workspace_6: Move to Workspace 6
-    move_to_workspace_7: Move to Workspace 7
-    move_to_workspace_8: Move to Workspace 8
-    move_to_workspace_9: Move to Workspace 9
+    move_to_workspace: Move to Workspace {{0}}
+    move_window_down: Pencereyê berbi jêr ve biçin
+    move_window_left: Pencereya çepê hilkişînin
+    move_window_right: Pencereya rastê hilkişînin
+    move_window_up: Pencereyê berbi jor ve biçin
+    pause_tiling: Rêvebirê pencereya tiliyê rawestînin
     reserve_bottom: Binê binê
     reserve_float: Float rezervan
     reserve_left: Rezertê çepê
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Stack Reserve
     reserve_top: Top hilînin
     restore_sizes: Mezinan sererast bikin
-    send_to_workspace_0: Ji Workspace 0 re bişînin
-    send_to_workspace_1: Ji bo Workspace 1 bişînin
-    send_to_workspace_2: Ji Workspace 2 re bişînin
-    send_to_workspace_3: Ji bo Workspace 3 bişînin
-    send_to_workspace_4: Ji Workspace 4 re bişînin
-    send_to_workspace_5: Ji Workspace 5 re bişînin
-    send_to_workspace_6: Ji bo Workspace 6 bişînin
-    send_to_workspace_7: Ji bo Workspace 7 bişînin
-    send_to_workspace_8: Ji bo Workspace 8 bişînin
-    send_to_workspace_9: Ji Workspace 9 re bişînin
-    start_weg_app_0: Focus an Destpêka App li ser pozîsyona Taskbar 1
-    start_weg_app_1: Focus an Destpêka App li ser pozîsyona Taskbar 2
-    start_weg_app_2: Li ser pozîsyona peywirê 3 dest pê bikin an dest pê bikin
-    start_weg_app_3: Focus an Destpêka Serîlêdanê li ser pozîsyona Karê 4
-    start_weg_app_4: Focus an Destpêka Serîlêdanê li ser pozîsyona Taskbar 5
-    start_weg_app_5: Focus an Destpêka Serîlêdanê li ser pozîsyona 6-ê ya Destpêkê
-    start_weg_app_6: Li ser pozîsyona 7-ê ya Destpêkê bisekinin an dest pê bikin
-    start_weg_app_7: Focus an Destpêka Serîlêdanê li ser pozîsyona 8-ê ya Destpêkê
-    start_weg_app_8: Focus an Destpêka Serîlêdanê li ser pozîsyona Taskbar 9
-    start_weg_app_9: Focus an Destpêka App li ser pozîsyona Taskbar 10
-    switch_workspace_0: Switch to Workspace 1
-    switch_workspace_1: Switch to Workspace 2
-    switch_workspace_2: Switch to Workspace 2
-    switch_workspace_3: Switch to Workspace 3
-    switch_workspace_4: Vegere Workspace 4
-    switch_workspace_5: Switch to Workspace 5
-    switch_workspace_6: Switch to Workspace 6
-    switch_workspace_7: Switch to Workspace 7
-    switch_workspace_8: Switch to Workspace 8
-    switch_workspace_9: Switch to Workspace 9
-    toggle_launcher: Toggle
+    send_to_workspace: Ji bo Workspace {{0} bişînin.
+    start_weg_app: FOCUS an Destpêkirina Serîlêdanê {{0}}
+    switch_to_next_workspace: Veguherînin qada xebata next
+    switch_to_previous_workspace: Vegere qada xebata berê
+    switch_workspace: Switch to Workspace {{0}}
+    toggle_float: Mode Float Float Toggle
+    toggle_launcher: Destpêka Toggle
+    toggle_monocle: Mode Mode Monocle Workspace Toggle
   readonly_tooltip: Ev kurteyek xwendinê ye
   reset: Reset to Default
 sides:

@@ -1,3 +1,5 @@
+cancel: Töröl
+done: Kész
 drivers:
   got_it: Megvan.
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     A Seelen UI szolgáltatás (slu-szolgáltatás) egy függőség/segítő az
     alkalmazás megfelelő működéséhez.
   not_running_ok: Indítsa el a szolgáltatást
+shortcut:
+  register:
+    placeholder: Nyomja meg a gomb kombinációját
+    title: Új parancsikon regisztrálása
 tray:
   quit: Kilépés
   restart: UI újraindítása

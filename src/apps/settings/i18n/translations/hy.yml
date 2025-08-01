@@ -152,14 +152,20 @@ save: Խնայել
 save_and_restart: Պահել եւ վերագործարկել
 see_more: Տեսնել ավելին
 shortcuts:
-  enable: Միացնել ինտեգրված դյուրանցումները (AHK)
+  enable: Միացնել ներկառուցված դյուրանցումների համակարգը
   enable_tooltip: >-
-    Անջատեք, եթե դուք կիրականացնեք ձեր սեփական դյուրանցումները `օգտագործելով
-    Seelen Core API- ն
+    Անջատեք, եթե դուք կիրականացնեք ձեր սեփական դյուրանցումների համակարգը
+    `օգտագործելով Seelen UI հաճախորդը
   labels:
+    create_new_workspace: Ստեղծեք նոր աշխատանքային տարածք
+    cycle_stack_next: Ցիկլի կեռը հաջորդը
+    cycle_stack_prev: Cycle Stack Նախորդ
+    cycle_wallpaper_next: Փոխեք հաջորդ պաստառին
+    cycle_wallpaper_prev: Փոխեք նախորդ պաստառին
     decrease_height: Նվազեցնել բարձրությունը
     decrease_width: Լայնության նվազում
-    focus_bottom: Կենտրոնացեք հատակին
+    destroy_current_workspace: Քանդել ընթացիկ աշխատանքային տարածքը
+    focus_bottom: Կենտրոնացեք ներքեւից
     focus_latest: Կենտրոնացեք վերջին
     focus_left: Կենտրոնանալ ձախ
     focus_right: Կենտրոնանալ ճիշտ
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Բաց պարամետրեր
     misc_toggle_lock_tracing: Փոփոխեք կողպեքի հետեւում (տեղեկամատյաններ)
     misc_toggle_win_event_tracing: Անջատեք շահեք իրադարձության հետագծումը (տեղեկամատյաններ)
-    move_to_workspace_0: Տեղափոխել Workspace 0
-    move_to_workspace_1: Տեղափոխել Workspace 1
-    move_to_workspace_2: Տեղափոխվել դեպի Workspace 2
-    move_to_workspace_3: Տեղափոխվել Workspace 3-ին
-    move_to_workspace_4: Տեղափոխել Workpace 4-ին
-    move_to_workspace_5: Տեղափոխել Workpace 5
-    move_to_workspace_6: Տեղափոխել Workspace 6
-    move_to_workspace_7: Տեղափոխվել Workpace 7-ին
-    move_to_workspace_8: Տեղափոխել Workpace 8
-    move_to_workspace_9: Տեղափոխել Workspace 9
+    move_to_workspace: Տեղափոխվել դեպի Workspace {0}
+    move_window_down: Տեղափոխեք պատուհանը դեպի ներքեւ
+    move_window_left: Տեղափոխեք պատուհանը ձախից
+    move_window_right: Տեղափոխեք պատուհանը աջից
+    move_window_up: Տեղափոխեք պատուհանը վերեւում
+    pause_tiling: Դադարեք սալիկապատման պատուհանի կառավարիչը
     reserve_bottom: Ամրագրեք հատակը
     reserve_float: Ամրագրեք բոց
     reserve_left: Պահուստը մնացել է
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Պահեստավորված նյութեր
     reserve_top: Ամրագրեք վերեւ
     restore_sizes: Վերականգնել չափերը
-    send_to_workspace_0: Ուղարկել Workspace- ին 0
-    send_to_workspace_1: Ուղարկել Workspace 1-ին
-    send_to_workspace_2: Ուղարկել Workspace 2-ին
-    send_to_workspace_3: Ուղարկել Workspace 3-ին
-    send_to_workspace_4: Ուղարկել Workspace 4-ին
-    send_to_workspace_5: Ուղարկել Workspace 5-ին
-    send_to_workspace_6: Ուղարկել Workspace 6-ին
-    send_to_workspace_7: Ուղարկել Workspace 7-ին
-    send_to_workspace_8: Ուղարկել Workspace 8-ին
-    send_to_workspace_9: Ուղարկել Workspace 9-ին
-    start_weg_app_0: Կենտրոնացեք կամ սկսեք ծրագիրը TaskBar դիրքի 1-ին
-    start_weg_app_1: Կենտրոնացեք կամ սկսեք ծրագիրը TaskBar դիրքի վրա 2
-    start_weg_app_2: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar դիրքի վրա 3
-    start_weg_app_3: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 4-ում
-    start_weg_app_4: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 5-ում
-    start_weg_app_5: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 6-ում
-    start_weg_app_6: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 7-ում
-    start_weg_app_7: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar Position 8-ում
-    start_weg_app_8: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar դիրքի վրա 9
-    start_weg_app_9: Կենտրոնացեք կամ սկսեք ծրագիրը Taskbar դիրքի վրա 10
-    switch_workspace_0: Անցեք աշխատանքային տարածքին 1
-    switch_workspace_1: Անցեք Workspace- ին 2
-    switch_workspace_2: Անցեք Workspace- ին 2
-    switch_workspace_3: Անցեք Workspace- ին 3
-    switch_workspace_4: Անցեք Workspace- ին 4
-    switch_workspace_5: Անցեք Workspace- ին 5
-    switch_workspace_6: Անցեք Workspace- ին 6
-    switch_workspace_7: Անցեք Workspace- ին 7
-    switch_workspace_8: Անցեք Workspace- ին 8
-    switch_workspace_9: Անցեք Workspace- ին 9
-    toggle_launcher: Փոփոխվել
+    send_to_workspace: Ուղարկել Workspace- ին {0}
+    start_weg_app: Կենտրոնանալ կամ սկսել դիմումը {{0}
+    switch_to_next_workspace: Անցեք հաջորդ աշխատանքային տարածքին
+    switch_to_previous_workspace: Անցեք նախորդ աշխատանքային տարածքին
+    switch_workspace: Անցեք Workspace- ին {{0}}
+    toggle_float: Անջատեք պատուհանի լողացող ռեժիմը
+    toggle_launcher: Գործարկելարկը
+    toggle_monocle: Փոփոխեք Workspace Monocle ռեժիմը
   readonly_tooltip: Սա ընթերցված դյուրանցում է
   reset: Վերականգնել կանխադրված
 sides:

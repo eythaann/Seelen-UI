@@ -152,13 +152,19 @@ save: Uštedjeti
 save_and_restart: Spremi i ponovno pokrenite
 see_more: Pogledajte više
 shortcuts:
-  enable: Omogućite integrirane prečace (AHK)
+  enable: Omogući ugrađeni sustav prečaca
   enable_tooltip: >-
-    Onemogući ako ćete implementirati vlastite prečace pomoću Seelen Core API
-    -ja
+    Onemogući ako ćete implementirati vlastiti sustav prečaca pomoću klijenta
+    Seelen UI
   labels:
+    create_new_workspace: Stvorite novi radni prostor
+    cycle_stack_next: Sljedeći snop ciklusa
+    cycle_stack_prev: STAM STAKU PRETHONI
+    cycle_wallpaper_next: Promijenite na sljedeću pozadinu
+    cycle_wallpaper_prev: Promijenite na prethodnu pozadinu
     decrease_height: Visina smanjenja
     decrease_width: Širina smanjenja
+    destroy_current_workspace: Uništiti trenutni radni prostor
     focus_bottom: Fokus dna
     focus_latest: Fokus najnovije
     focus_left: Usredotočite se lijevo
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Otvorene postavke
     misc_toggle_lock_tracing: Preklopljenje zaključavanja (zapisnici)
     misc_toggle_win_event_tracing: Pregazivanje traganja događaja (zapisnici)
-    move_to_workspace_0: Pomaknite se u radni prostor 0
-    move_to_workspace_1: Pomaknite se u radni prostor 1
-    move_to_workspace_2: Pomaknite se u radni prostor 2
-    move_to_workspace_3: Pomaknite se u radni prostor 3
-    move_to_workspace_4: Pomaknite se u radni prostor 4
-    move_to_workspace_5: Pomaknite se u radni prostor 5
-    move_to_workspace_6: Pomaknite se u radni prostor 6
-    move_to_workspace_7: Pomaknite se u radni prostor 7
-    move_to_workspace_8: Pomaknite se u radni prostor 8
-    move_to_workspace_9: Pomaknite se u radni prostor 9
+    move_to_workspace: Pomaknite se na radni prostor {{0}}
+    move_window_down: Pomaknite prozor na dno
+    move_window_left: Pomaknite prozor u lijevo
+    move_window_right: Pomaknite prozor udesno
+    move_window_up: Pomaknite prozor na vrh
+    pause_tiling: Upravitelj prozora za pauzu
     reserve_bottom: Rezervirati
     reserve_float: Rezervirati plutaj
     reserve_left: Rezerva
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Rezerva
     reserve_top: Rezervirajte vrh
     restore_sizes: Vrati veličine
-    send_to_workspace_0: Pošaljite u radni prostor 0
-    send_to_workspace_1: Pošaljite u radni prostor 1
-    send_to_workspace_2: Pošaljite u radni prostor 2
-    send_to_workspace_3: Pošaljite u radni prostor 3
-    send_to_workspace_4: Pošaljite u radni prostor 4
-    send_to_workspace_5: Pošaljite u radni prostor 5
-    send_to_workspace_6: Pošaljite u radni prostor 6
-    send_to_workspace_7: Pošaljite u radni prostor 7
-    send_to_workspace_8: Pošaljite u radni prostor 8
-    send_to_workspace_9: Pošaljite u radni prostor 9
-    start_weg_app_0: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 1
-    start_weg_app_1: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 2
-    start_weg_app_2: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 3
-    start_weg_app_3: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 4
-    start_weg_app_4: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 5
-    start_weg_app_5: Usredotočite se ili pokrenite aplikaciju na traci zadataka 6
-    start_weg_app_6: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 7
-    start_weg_app_7: Usredotočite se ili pokrenite aplikaciju na poziciji na zadaću 8
-    start_weg_app_8: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 9
-    start_weg_app_9: Usredotočite se ili pokrenite aplikaciju na poziciji zadataka 10
-    switch_workspace_0: Prebacite se na radni prostor 1
-    switch_workspace_1: Prebacite se na radni prostor 2
-    switch_workspace_2: Prebacite se na radni prostor 2
-    switch_workspace_3: Prebacite se na radni prostor 3
-    switch_workspace_4: Prebacite se na radni prostor 4
-    switch_workspace_5: Prebacite se na radni prostor 5
-    switch_workspace_6: Prebacite se na radni prostor 6
-    switch_workspace_7: Prebacite se na radni prostor 7
-    switch_workspace_8: Prebacite se na radni prostor 8
-    switch_workspace_9: Prebacite se na radni prostor 9
-    toggle_launcher: Prebacivanje
+    send_to_workspace: Pošaljite u radni prostor {{0}}
+    start_weg_app: Fokus ili pokretanje aplikacije {{0}}
+    switch_to_next_workspace: Prebacite se na sljedeći radni prostor
+    switch_to_previous_workspace: Prebacite se na prethodni radni prostor
+    switch_workspace: Prebacite se na radni prostor {{0}}
+    toggle_float: Prebacivanje prozora plutajući način
+    toggle_launcher: Pokretač prebacivanja
+    toggle_monocle: Prebacite Monocle način rada radnog prostora
   readonly_tooltip: Ovo je prečac samo za čitanje
   reset: Ponovno postavite na zadane vrijednosti
 sides:

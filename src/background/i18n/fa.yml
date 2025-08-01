@@ -1,3 +1,5 @@
+cancel: لغو کردن
+done: انجام شده
 drivers:
   got_it: آن را
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     سرویس UI Seelen (سرویس slu) یک وابستگی / کمک کننده برای عملکرد صحیح برنامه
     است.
   not_running_ok: سرویس را شروع کنید
+shortcut:
+  register:
+    placeholder: هر ترکیب کلیدی را فشار دهید
+    title: ثبت میانبر جدید
 tray:
   quit: ترک
   restart: UI را مجدداً راه اندازی کنید

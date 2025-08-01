@@ -152,13 +152,19 @@ save: Simpan
 save_and_restart: Jimat & mulakan semula
 see_more: Lihat lagi
 shortcuts:
-  enable: Dayakan Pintasan Bersepadu (AHK)
+  enable: Dayakan sistem pintasan terbina dalam
   enable_tooltip: >-
-    Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
-    teras Seelen
+    Lumpuhkan jika anda akan melaksanakan sistem pintasan anda sendiri
+    menggunakan pelanggan Seelen UI
   labels:
+    create_new_workspace: Buat ruang kerja baru
+    cycle_stack_next: Stack kitaran seterusnya
+    cycle_stack_prev: Tumpukan kitaran sebelumnya
+    cycle_wallpaper_next: Tukar ke kertas dinding seterusnya
+    cycle_wallpaper_prev: Tukar ke kertas dinding sebelumnya
     decrease_height: Mengurangkan ketinggian
     decrease_width: Mengurangkan lebar
+    destroy_current_workspace: Memusnahkan ruang kerja semasa
     focus_bottom: Fokus bawah
     focus_latest: Fokus terkini
     focus_left: Fokus kiri
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Buka Tetapan
     misc_toggle_lock_tracing: Togol mengesan kunci (log)
     misc_toggle_win_event_tracing: Togol Menang Mengesan Acara (Log)
-    move_to_workspace_0: Pindah ke Ruang Kerja 0
-    move_to_workspace_1: Pindah ke Ruang Kerja 1
-    move_to_workspace_2: Pindah ke Ruang Kerja 2
-    move_to_workspace_3: Pindah ke Ruang Kerja 3
-    move_to_workspace_4: Pindah ke Ruang Kerja 4
-    move_to_workspace_5: Pindah ke Ruang Kerja 5
-    move_to_workspace_6: Pindah ke Ruang Kerja 6
-    move_to_workspace_7: Pindah ke Ruang Kerja 7
-    move_to_workspace_8: Pindah ke Ruang Kerja 8
-    move_to_workspace_9: Pindah ke Ruang Kerja 9
+    move_to_workspace: Pindah ke ruang kerja {{0}}
+    move_window_down: Pindahkan tetingkap ke bawah
+    move_window_left: Pindahkan tingkap ke kiri
+    move_window_right: Pindahkan tetingkap ke kanan
+    move_window_up: Pindahkan tetingkap ke bahagian atas
+    pause_tiling: Jeda Jeda Pengurus Tetingkap
     reserve_bottom: Bawah simpanan
     reserve_float: Rizab terapung
     reserve_left: Rizab kiri
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Timbunan simpanan
     reserve_top: Rizab atas
     restore_sizes: Pulihkan saiz
-    send_to_workspace_0: Hantar ke Ruang Kerja 0
-    send_to_workspace_1: Hantar ke Ruang Kerja 1
-    send_to_workspace_2: Hantar ke Ruang Kerja 2
-    send_to_workspace_3: Hantar ke Ruang Kerja 3
-    send_to_workspace_4: Hantar ke Ruang Kerja 4
-    send_to_workspace_5: Hantar ke Ruang Kerja 5
-    send_to_workspace_6: Hantar ke Ruang Kerja 6
-    send_to_workspace_7: Hantar ke Ruang Kerja 7
-    send_to_workspace_8: Hantar ke Ruang Kerja 8
-    send_to_workspace_9: Hantar ke Ruang Kerja 9
-    start_weg_app_0: Fokus atau Mula Aplikasi pada Posisi Taskbar 1
-    start_weg_app_1: Fokus atau Mula Aplikasi pada Posisi Taskbar 2
-    start_weg_app_2: Fokus atau Mula Aplikasi pada Posisi Taskbar 3
-    start_weg_app_3: Fokus atau Mulakan Aplikasi pada Posisi Taskbar 4
-    start_weg_app_4: Fokus atau Mulakan Aplikasi pada Posisi Taskbar 5
-    start_weg_app_5: Fokus atau Mula Aplikasi pada Posisi Taskbar 6
-    start_weg_app_6: Fokus atau Mula Aplikasi pada kedudukan bar tugas 7
-    start_weg_app_7: Fokus atau Mula Aplikasi pada kedudukan bar tugas 8
-    start_weg_app_8: Fokus atau Mula Aplikasi pada Posisi Taskbar 9
-    start_weg_app_9: Fokus atau Mula Aplikasi pada kedudukan bar tugas 10
-    switch_workspace_0: Beralih ke ruang kerja 1
-    switch_workspace_1: Beralih ke ruang kerja 2
-    switch_workspace_2: Beralih ke ruang kerja 2
-    switch_workspace_3: Beralih ke ruang kerja 3
-    switch_workspace_4: Beralih ke ruang kerja 4
-    switch_workspace_5: Beralih ke ruang kerja 5
-    switch_workspace_6: Beralih ke ruang kerja 6
-    switch_workspace_7: Tukar ke Ruang Kerja 7
-    switch_workspace_8: Beralih ke ruang kerja 8
-    switch_workspace_9: Beralih ke ruang kerja 9
-    toggle_launcher: Togol
+    send_to_workspace: Hantar ke Workspace {{0}}
+    start_weg_app: Fokus atau mulakan aplikasi {{0}}
+    switch_to_next_workspace: Beralih ke ruang kerja seterusnya
+    switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
+    switch_workspace: Tukar ke ruang kerja {{0}}
+    toggle_float: Mod Terapung Togel Togel
+    toggle_launcher: Pelancar togol
+    toggle_monocle: Mod Monocle Workspace Togol
   readonly_tooltip: Ini adalah jalan pintas baca sahaja
   reset: Tetapkan semula ke lalai
 sides:

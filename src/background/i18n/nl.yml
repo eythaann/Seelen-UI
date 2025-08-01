@@ -1,3 +1,5 @@
+cancel: Annuleren
+done: Klaar
 drivers:
   got_it: Ik heb het
   monitor_disabled: >-
@@ -34,6 +36,10 @@ service:
     Seelen UI Service (slu-service) is een afhankelijkheid/helper om de app
     correct te laten werken.
   not_running_ok: Dienst starten
+shortcut:
+  register:
+    placeholder: Druk op een sleutelcombinatie
+    title: Nieuwe snelkoppeling registreren
 tray:
   quit: Stoppen met
   restart: UI opnieuw opstarten

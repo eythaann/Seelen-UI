@@ -1,3 +1,5 @@
+cancel: Atšaukti
+done: Padaryta
 drivers:
   got_it: Turiu
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI paslauga (slu-service) yra priklausomybė / pagalbininkas, kad
     programa tinkamai veiktų.
   not_running_ok: Pradėti paslaugą
+shortcut:
+  register:
+    placeholder: Paspauskite bet kurį raktų derinį
+    title: Registruojant naują nuorodą
 tray:
   quit: Baigti
   restart: Iš naujo paleiskite vartotojo sąsają

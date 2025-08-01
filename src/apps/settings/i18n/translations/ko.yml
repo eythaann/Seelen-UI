@@ -145,71 +145,50 @@ save: 저장
 save_and_restart: 저장 및 재시작
 see_more: 자세히 보기
 shortcuts:
-  enable: 통합 단축키 (ahk) 활성화
-  enable_tooltip: Seelen Core API를 사용하여 자체 단축키를 구현할 경우 비활성화하세요
+  enable: 내장 단축키 시스템을 활성화하십시오
+  enable_tooltip: Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
   labels:
-    decrease_height: 높이 감소
-    decrease_width: 너비 감소
-    focus_bottom: 하단에 포커스
-    focus_latest: 마지막으로 사용했던 윈도우 포커스
-    focus_left: 왼쪽에 포커스
-    focus_right: 오른쪽에 포커스
-    focus_top: 상단에 포커스
-    increase_height: 높이 증가
-    increase_width: 너비 증가
-    misc_open_settings: 설정 열기
-    misc_toggle_lock_tracing: 잠금 로그 추척 토글
-    misc_toggle_win_event_tracing: 윈도우 이벤트 로그 추적 토글
-    move_to_workspace_0: 작업 공간 1로 이동
-    move_to_workspace_1: 작업 공간 2로 이동
-    move_to_workspace_2: 작업 공간 3으로 이동
-    move_to_workspace_3: 작업 공간 4로 이동
-    move_to_workspace_4: 작업 공간 5로 이동
-    move_to_workspace_5: 작업 공간 6으로 이동
-    move_to_workspace_6: 작업 공간 7로 이동
-    move_to_workspace_7: 작업 공간 8로 이동
-    move_to_workspace_8: 작업 공간 9로 이동
-    move_to_workspace_9: 작업 공간 10으로 이동
-    reserve_bottom: 하단 예약
-    reserve_float: 플로팅 예약
-    reserve_left: 왼쪽 예약
-    reserve_right: 오른쪽 예약
-    reserve_stack: 스택 예약
-    reserve_top: 상단 예약
-    restore_sizes: 크기 복원
-    send_to_workspace_0: 작업 공간 1로 보내기
-    send_to_workspace_1: 작업 공간 2로 보내기
-    send_to_workspace_2: 작업 공간 3으로 보내기
-    send_to_workspace_3: 작업 공간 4로 보내기
-    send_to_workspace_4: 작업 공간 5로 보내기
-    send_to_workspace_5: 작업 공간 6으로 보내기
-    send_to_workspace_6: 작업 공간 7로 보내기
-    send_to_workspace_7: 작업 공간 8로 보내기
-    send_to_workspace_8: 작업 공간 9로 보내기
-    send_to_workspace_9: 작업 공간 10으로 보내기
-    start_weg_app_0: 작업 표시 줄 위치에서 초점 또는 시작 앱 1
-    start_weg_app_1: 작업 표시 줄 위치에서 초점 또는 시작 앱 2
-    start_weg_app_2: 작업 표시 줄 위치에서 초점 또는 시작 앱 3
-    start_weg_app_3: 작업 표시 줄 위치에서 초점 또는 시작 앱 4
-    start_weg_app_4: 작업 표시 줄 위치 5에서 초점 또는 시작 앱
-    start_weg_app_5: 작업 표시 줄 위치 6에서 초점 또는 시작 앱
-    start_weg_app_6: 작업 표시 줄 위치에서 초점 또는 시작 앱 7
-    start_weg_app_7: 작업 표시 줄 위치에서 초점 또는 시작 앱 8
-    start_weg_app_8: 작업 표시 줄 위치에서 초점 또는 시작 앱 9
-    start_weg_app_9: 작업 표시 줄 위치에서 초점 또는 시작 앱 10
-    switch_workspace_0: 작업 공간 1로 전환
-    switch_workspace_1: 작업 공간 2로 전환
-    switch_workspace_2: 작업 공간 3으로 전환
-    switch_workspace_3: 작업 공간 4로 전환
-    switch_workspace_4: 작업 공간 5로 전환
-    switch_workspace_5: 작업 공간 6으로 전환
-    switch_workspace_6: 작업 공간 7로 전환
-    switch_workspace_7: 작업 공간 8로 전환
-    switch_workspace_8: 작업 공간 9로 전환
-    switch_workspace_9: 작업 공간 10으로 전환
-    toggle_launcher: 런처 토글
-  readonly_tooltip: 읽기 전용 단축키
-  reset: 기본값으로 재설정
+    create_new_workspace: 새 작업 공간을 만듭니다
+    cycle_stack_next: 다음에 사이클 스택
+    cycle_stack_prev: 사이클 스택 이전
+    cycle_wallpaper_next: 다음 벽지로 변경하십시오
+    cycle_wallpaper_prev: 이전 벽지로 변경하십시오
+    decrease_height: 높이를 줄입니다
+    decrease_width: 너비를 줄입니다
+    destroy_current_workspace: 현재 작업 공간을 파괴하십시오
+    focus_bottom: 초점 바닥
+    focus_latest: 초점 최신
+    focus_left: 초점이 남았습니다
+    focus_right: 집중적으로
+    focus_top: 포커스 탑
+    increase_height: 높이를 늘리십시오
+    increase_width: 폭을 늘리십시오
+    misc_open_settings: 열기 설정
+    misc_toggle_lock_tracing: 토글 잠금 추적 (로그)
+    misc_toggle_win_event_tracing: 토글 윈 이벤트 추적 (로그)
+    move_to_workspace: 작업 공간으로 이동 {{0}}
+    move_window_down: 창문을 바닥으로 이동하십시오
+    move_window_left: 왼쪽으로 창을 이동하십시오
+    move_window_right: 창을 오른쪽으로 이동하십시오
+    move_window_up: 창을 맨 위로 이동하십시오
+    pause_tiling: 타일링 윈도우 관리자를 일시 중지합니다
+    reserve_bottom: 바닥을 예약하십시오
+    reserve_float: 플로트 예비
+    reserve_left: 왼쪽 예비
+    reserve_right: 오른쪽을 예약하십시오
+    reserve_stack: 예비 스택
+    reserve_top: 탑을 예약하십시오
+    restore_sizes: 크기를 복원하십시오
+    send_to_workspace: 작업 공간으로 보내 {{0}}
+    start_weg_app: 초점 또는 시작 응용 프로그램 {{0}}
+    switch_to_next_workspace: 다음 작업 공간으로 전환하십시오
+    switch_to_previous_workspace: 이전 작업 공간으로 전환하십시오
+    switch_workspace: 작업 공간으로 전환 {{0}}
+    toggle_float: 토글 윈도우 플로트 모드
+    toggle_launcher: 토글 런처
+    toggle_monocle: 작업 공간 모노클 모드 토글
+  readonly_tooltip: 이것은 읽기 전용 단축키입니다
+  reset: 기본값으로 재설정하십시오
 sides:
   bottom: 아래
   left: 왼쪽

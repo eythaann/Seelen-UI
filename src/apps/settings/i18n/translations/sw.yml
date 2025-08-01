@@ -149,11 +149,19 @@ save: Kuokoa
 save_and_restart: Okoa na uanze tena
 see_more: Tazama zaidi
 shortcuts:
-  enable: Wezesha njia za mkato zilizojumuishwa (AHK)
-  enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
+  enable: Wezesha mfumo wa mkato uliojengwa ndani
+  enable_tooltip: >-
+    Lemaza ikiwa utatumia mfumo wako wa njia za mkato kwa kutumia mteja wa
+    Seelen UI
   labels:
+    create_new_workspace: Unda nafasi mpya ya kazi
+    cycle_stack_next: Mzunguko wa mzunguko unaofuata
+    cycle_stack_prev: Starehe ya mzunguko uliopita
+    cycle_wallpaper_next: Badilisha kwa Ukuta unaofuata
+    cycle_wallpaper_prev: Badilisha kwa Ukuta uliopita
     decrease_height: Kupungua urefu
     decrease_width: Punguza upana
+    destroy_current_workspace: Kuharibu nafasi ya kazi ya sasa
     focus_bottom: Kuzingatia chini
     focus_latest: Kuzingatia hivi karibuni
     focus_left: Kuzingatia kushoto
@@ -164,16 +172,12 @@ shortcuts:
     misc_open_settings: Mipangilio ya Fungua
     misc_toggle_lock_tracing: Kubadilisha Ufuatiliaji wa Kufunga (Magogo)
     misc_toggle_win_event_tracing: Kubadilisha Win Tukio Kufuatilia (Magogo)
-    move_to_workspace_0: Hoja kwenye nafasi ya kazi 0
-    move_to_workspace_1: Hoja kwa nafasi ya kazi 1
-    move_to_workspace_2: Hoja kwenye nafasi ya kazi 2
-    move_to_workspace_3: Hoja kwenye nafasi ya kazi 3
-    move_to_workspace_4: Hoja kwa nafasi ya kazi 4
-    move_to_workspace_5: Hoja kwa nafasi ya kazi 5
-    move_to_workspace_6: Hoja kwa nafasi ya kazi 6
-    move_to_workspace_7: Hoja kwa nafasi ya kazi 7
-    move_to_workspace_8: Hoja kwa nafasi ya kazi 8
-    move_to_workspace_9: Hoja kwa nafasi ya kazi 9
+    move_to_workspace: Hoja kwa nafasi ya kazi {{0}}
+    move_window_down: Sogeza dirisha hadi chini
+    move_window_left: Sogeza dirisha kushoto
+    move_window_right: Sogeza dirisha kwenda kulia
+    move_window_up: Sogeza dirisha juu
+    pause_tiling: Sitisha meneja wa windows
     reserve_bottom: Hifadhi chini
     reserve_float: Hifadhi kuelea
     reserve_left: Hifadhi kushoto
@@ -181,37 +185,14 @@ shortcuts:
     reserve_stack: Hifadhi ya Hifadhi
     reserve_top: Hifadhi juu
     restore_sizes: Kurejesha ukubwa
-    send_to_workspace_0: Tuma kwa nafasi ya kazi 0
-    send_to_workspace_1: Tuma kwa nafasi ya kazi 1
-    send_to_workspace_2: Tuma kwa nafasi ya kazi 2
-    send_to_workspace_3: Tuma kwa nafasi ya kazi 3
-    send_to_workspace_4: Tuma kwa nafasi ya kazi 4
-    send_to_workspace_5: Tuma kwa nafasi ya kazi 5
-    send_to_workspace_6: Tuma kwa nafasi ya kazi 6
-    send_to_workspace_7: Tuma kwa nafasi ya kazi 7
-    send_to_workspace_8: Tuma kwa nafasi ya kazi 8
-    send_to_workspace_9: Tuma kwa nafasi ya kazi 9
-    start_weg_app_0: Zingatia au anza programu kwenye nafasi ya kazi 1
-    start_weg_app_1: Zingatia au anza programu kwenye nafasi ya kazi 2
-    start_weg_app_2: Zingatia au anza programu kwenye nafasi ya kazi 3
-    start_weg_app_3: Zingatia au anza programu kwenye nafasi ya kazi 4
-    start_weg_app_4: Zingatia au anza programu kwenye nafasi ya kazi 5
-    start_weg_app_5: Zingatia au anza programu kwenye nafasi ya kazi 6
-    start_weg_app_6: Zingatia au anza programu kwenye nafasi ya kazi 7
-    start_weg_app_7: Zingatia au anza programu kwenye nafasi ya kazi 8
-    start_weg_app_8: Zingatia au anza programu kwenye nafasi ya kazi 9
-    start_weg_app_9: Zingatia au anza programu kwenye nafasi ya kazi 10
-    switch_workspace_0: Badilika kwenye nafasi ya kazi 1
-    switch_workspace_1: Badilika kwenye nafasi ya kazi 2
-    switch_workspace_2: Badilika kwenye nafasi ya kazi 2
-    switch_workspace_3: Badilika kwa nafasi ya kazi 3
-    switch_workspace_4: Badilika kwa nafasi ya kazi 4
-    switch_workspace_5: Badilika kwa nafasi ya kazi 5
-    switch_workspace_6: Badilika kwa nafasi ya kazi 6
-    switch_workspace_7: Badilika kwa nafasi ya kazi 7
-    switch_workspace_8: Badilika kwa nafasi ya kazi 8
-    switch_workspace_9: Badilika kwa nafasi ya kazi 9
-    toggle_launcher: Kugeuza
+    send_to_workspace: Tuma kwa nafasi ya kazi {{0}}
+    start_weg_app: Kuzingatia au Anza Maombi {{0}}
+    switch_to_next_workspace: Badilisha kwenye nafasi ya kazi inayofuata
+    switch_to_previous_workspace: Badilisha kwenye nafasi ya kazi ya hapo awali
+    switch_workspace: Badilika kwa nafasi ya kazi {{0}}
+    toggle_float: Badilisha modi ya kuelea ya dirisha
+    toggle_launcher: Kubadilisha kizindua
+    toggle_monocle: Badilisha modi ya nafasi ya kazi
   readonly_tooltip: Hii ni njia ya mkato ya kusoma tu
   reset: Rudisha kwa defaults
 sides:

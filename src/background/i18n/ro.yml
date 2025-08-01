@@ -1,3 +1,5 @@
+cancel: Anula
+done: Făcut
 drivers:
   got_it: Am înțeles
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI Service (serviciul slu) este o dependență/ajutor pentru ca
     aplicația să funcționeze corect.
   not_running_ok: Începeți serviciul
+shortcut:
+  register:
+    placeholder: Apăsați orice combinație de taste
+    title: Înregistrarea unei noi comenzi rapide
 tray:
   quit: Renunțați
   restart: Restart UI

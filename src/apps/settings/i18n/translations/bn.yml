@@ -154,13 +154,19 @@ save: সংরক্ষণ
 save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
 see_more: আরও দেখুন
 shortcuts:
-  enable: ইন্টিগ্রেটেড শর্টকাটগুলি সক্ষম করুন (এএইচকে)
+  enable: অন্তর্নির্মিত শর্টকাট সিস্টেম সক্ষম করুন
   enable_tooltip: >-
-    আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
-    অক্ষম করুন
+    আপনি যদি সিলেন ইউআই ক্লায়েন্ট ব্যবহার করে নিজের শর্টকাট সিস্টেমটি প্রয়োগ
+    করেন তবে অক্ষম করুন
   labels:
+    create_new_workspace: নতুন কর্মক্ষেত্র তৈরি করুন
+    cycle_stack_next: সাইকেল স্ট্যাক পরবর্তী
+    cycle_stack_prev: চক্র স্ট্যাক পূর্ববর্তী
+    cycle_wallpaper_next: পরবর্তী ওয়ালপেপারে পরিবর্তন করুন
+    cycle_wallpaper_prev: পূর্ববর্তী ওয়ালপেপারে পরিবর্তন করুন
     decrease_height: উচ্চতা হ্রাস
     decrease_width: প্রস্থ হ্রাস
+    destroy_current_workspace: বর্তমান কর্মক্ষেত্র ধ্বংস করুন
     focus_bottom: ফোকাস নীচে
     focus_latest: সর্বশেষ ফোকাস
     focus_left: ফোকাস বাম
@@ -171,16 +177,12 @@ shortcuts:
     misc_open_settings: ওপেন সেটিংস
     misc_toggle_lock_tracing: টগল লক ট্রেসিং (লগস)
     misc_toggle_win_event_tracing: টগল উইন ইভেন্ট ট্রেসিং (লগস)
-    move_to_workspace_0: ওয়ার্কস্পেস 0 এ যান
-    move_to_workspace_1: ওয়ার্কস্পেস 1 এ যান
-    move_to_workspace_2: ওয়ার্কস্পেস 2 এ যান
-    move_to_workspace_3: ওয়ার্কস্পেস 3 এ যান
-    move_to_workspace_4: ওয়ার্কস্পেস 4 এ যান
-    move_to_workspace_5: ওয়ার্কস্পেস 5 এ যান
-    move_to_workspace_6: ওয়ার্কস্পেস 6 এ যান
-    move_to_workspace_7: ওয়ার্কস্পেস 7 এ যান
-    move_to_workspace_8: ওয়ার্কস্পেস 8 এ যান
-    move_to_workspace_9: ওয়ার্কস্পেস 9 এ যান
+    move_to_workspace: ওয়ার্কস্পেসে যান {{0}}
+    move_window_down: নীচে উইন্ডো সরান
+    move_window_left: বাম দিকে উইন্ডো সরান
+    move_window_right: উইন্ডোটি ডানদিকে সরান
+    move_window_up: শীর্ষে উইন্ডো সরান
+    pause_tiling: টাইলিং উইন্ডো ম্যানেজার বিরতি দিন
     reserve_bottom: রিজার্ভ নীচে
     reserve_float: রিজার্ভ ফ্লোট
     reserve_left: রিজার্ভ বাম
@@ -188,39 +190,16 @@ shortcuts:
     reserve_stack: রিজার্ভ স্ট্যাক
     reserve_top: রিজার্ভ শীর্ষ
     restore_sizes: আকার পুনরুদ্ধার
-    send_to_workspace_0: ওয়ার্কস্পেস 0 এ প্রেরণ করুন
-    send_to_workspace_1: ওয়ার্কস্পেস 1 এ প্রেরণ করুন
-    send_to_workspace_2: ওয়ার্কস্পেস 2 এ প্রেরণ করুন
-    send_to_workspace_3: ওয়ার্কস্পেস 3 এ প্রেরণ করুন
-    send_to_workspace_4: ওয়ার্কস্পেস 4 এ প্রেরণ করুন
-    send_to_workspace_5: ওয়ার্কস্পেস 5 এ প্রেরণ করুন
-    send_to_workspace_6: ওয়ার্কস্পেস 6 এ প্রেরণ করুন
-    send_to_workspace_7: ওয়ার্কস্পেস 7 এ প্রেরণ করুন
-    send_to_workspace_8: ওয়ার্কস্পেস 8 এ প্রেরণ করুন
-    send_to_workspace_9: ওয়ার্কস্পেস 9 এ প্রেরণ করুন
-    start_weg_app_0: টাস্কবার পজিশনে ফোকাস বা শুরু করুন অ্যাপ্লিকেশন 1
-    start_weg_app_1: টাস্কবারের অবস্থান 2 এ ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    start_weg_app_2: টাস্কবার পজিশনে 3 এ ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    start_weg_app_3: টাস্কবার পজিশনে 4 এ ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    start_weg_app_4: টাস্কবার পজিশনে 5 এ ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    start_weg_app_5: টাস্কবার পজিশনে 6 এ ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    start_weg_app_6: টাস্কবার পজিশনে 7 এ ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    start_weg_app_7: টাস্কবার পজিশনে 8 এ ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    start_weg_app_8: টাস্কবার পজিশনে 9 ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    start_weg_app_9: টাস্কবার পজিশনে 10 এ ফোকাস বা শুরু করুন অ্যাপ্লিকেশন
-    switch_workspace_0: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
-    switch_workspace_1: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
-    switch_workspace_2: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
-    switch_workspace_3: ওয়ার্কস্পেস 3 এ স্যুইচ করুন
-    switch_workspace_4: ওয়ার্কস্পেস 4 এ স্যুইচ করুন
-    switch_workspace_5: ওয়ার্কস্পেস 5 এ স্যুইচ করুন
-    switch_workspace_6: ওয়ার্কস্পেস 6 এ স্যুইচ করুন
-    switch_workspace_7: ওয়ার্কস্পেস 7 এ স্যুইচ করুন
-    switch_workspace_8: ওয়ার্কস্পেস 8 এ স্যুইচ করুন
-    switch_workspace_9: ওয়ার্কস্পেস 9 এ স্যুইচ করুন
-    toggle_launcher: টগল
+    send_to_workspace: ওয়ার্কস্পেসে প্রেরণ করুন {{0}}
+    start_weg_app: ফোকাস বা শুরু করুন অ্যাপ্লিকেশন {{0}}
+    switch_to_next_workspace: পরবর্তী কর্মক্ষেত্রে স্যুইচ করুন
+    switch_to_previous_workspace: পূর্ববর্তী কর্মক্ষেত্রে স্যুইচ করুন
+    switch_workspace: ওয়ার্কস্পেসে স্যুইচ করুন {{0}}
+    toggle_float: টগল উইন্ডো ফ্লোট মোড
+    toggle_launcher: টগল লঞ্চার
+    toggle_monocle: টগল ওয়ার্কস্পেস মনোকল মোড
   readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
-  reset: ডিফল্টে পুনরায় সেট করুন
+  reset: ডিফল্ট পুনরায় সেট করুন
 sides:
   bottom: নীচে
   left: বাম

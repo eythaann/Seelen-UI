@@ -154,71 +154,50 @@ save: Speichern
 save_and_restart: Speichern & neu starten
 see_more: Mehr sehen
 shortcuts:
-  enable: Integrierte Kurzbefehle aktivieren (ahk)
+  enable: Aktivieren Sie ein integriertes Verknüpfungssystem
   enable_tooltip: >-
-    Deaktivieren, wenn du deine eigenen Kurzbefehle mit der Seelen Core API
-    implementierst
+    Deaktivieren Sie, wenn Sie Ihr eigenes Verknüpfungssystem mit dem Seelen UI
+    -Client implementieren
   labels:
-    decrease_height: Höhe verkleinern
-    decrease_width: Breite verkleinern
-    focus_bottom: Unten fokussieren
-    focus_latest: Letztes fokussieren
-    focus_left: Links fokussieren
-    focus_right: Rechts fokussieren
-    focus_top: Oben fokussieren
-    increase_height: Höhe vergrößern
-    increase_width: Breite vergrößern
+    create_new_workspace: Erstellen Sie einen neuen Arbeitsbereich
+    cycle_stack_next: Fahrradstapel als nächstes
+    cycle_stack_prev: Zyklusstapel vorher
+    cycle_wallpaper_next: Wechseln Sie zum nächsten Tapeten
+    cycle_wallpaper_prev: Wechseln Sie in die vorherige Tapete
+    decrease_height: Abnahme der Höhe
+    decrease_width: Verringerung der Breite
+    destroy_current_workspace: Zerstören Sie den aktuellen Arbeitsbereich
+    focus_bottom: Fokus auf den Boden
+    focus_latest: Fokus neuest
+    focus_left: Fokus links
+    focus_right: Fokus rechts
+    focus_top: Fokus auf die Spitze
+    increase_height: Erhöhen Sie die Größe
+    increase_width: Breite erhöhen
     misc_open_settings: Einstellungen geöffnet
     misc_toggle_lock_tracing: Schaltersperrverfolgung (Protokolle)
     misc_toggle_win_event_tracing: Verfolgung des Sieg -Ereignisses (Protokolle) umschalten
-    move_to_workspace_0: Zum Arbeitsbereich 0 verschieben
-    move_to_workspace_1: Zum Arbeitsbereich 1 verschieben
-    move_to_workspace_2: Zum Arbeitsbereich 2 verschieben
-    move_to_workspace_3: Zum Arbeitsbereich 3 verschieben
-    move_to_workspace_4: Zum Arbeitsbereich 4 verschieben
-    move_to_workspace_5: Zum Arbeitsbereich 5 verschieben
-    move_to_workspace_6: Zum Arbeitsbereich 6 verschieben
-    move_to_workspace_7: Zum Arbeitsbereich 7 verschieben
-    move_to_workspace_8: Zum Arbeitsbereich 8 verschieben
-    move_to_workspace_9: Zum Arbeitsbereich 9 verschieben
-    reserve_bottom: Unten reservieren
-    reserve_float: Schwebend reservieren
-    reserve_left: Links reservieren
+    move_to_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
+    move_window_down: Fenster nach unten bewegen
+    move_window_left: Fenster nach links bewegen
+    move_window_right: Fenster nach rechts bewegen
+    move_window_up: Fenster nach oben bewegen
+    pause_tiling: Pause von Fliesenfenstermanager innehalten
+    reserve_bottom: Reservenboden
+    reserve_float: Reserve Float
+    reserve_left: Reserve links
     reserve_right: Rechts reservieren
-    reserve_stack: Stapel reservieren
-    reserve_top: Oben reservieren
+    reserve_stack: Reservestapel
+    reserve_top: Reserve Top
     restore_sizes: Größen wiederherstellen
-    send_to_workspace_0: Zum Arbeitsbereich 0 senden
-    send_to_workspace_1: Zum Arbeitsbereich 1 senden
-    send_to_workspace_2: Zum Arbeitsbereich 2 senden
-    send_to_workspace_3: Zum Arbeitsbereich 3 senden
-    send_to_workspace_4: Zum Arbeitsbereich 4 senden
-    send_to_workspace_5: Zum Arbeitsbereich 5 senden
-    send_to_workspace_6: Zum Arbeitsbereich 6 senden
-    send_to_workspace_7: Zum Arbeitsbereich 7 senden
-    send_to_workspace_8: Zum Arbeitsbereich 8 senden
-    send_to_workspace_9: Zum Arbeitsbereich 9 senden
-    start_weg_app_0: Fokus oder starten Sie die App in der Taskleistenposition 1
-    start_weg_app_1: Fokus oder starten Sie die App in der Taskleistenposition 2
-    start_weg_app_2: Fokus oder starten Sie die App in der Taskleistenposition 3
-    start_weg_app_3: Fokus oder starten Sie die App in der Taskleistenposition 4
-    start_weg_app_4: Fokus oder starten Sie die App in der Taskleistenposition 5
-    start_weg_app_5: Fokus oder starten Sie die App in der Taskleistenposition 6
-    start_weg_app_6: Fokus oder starten Sie die App in der Taskleistenposition 7
-    start_weg_app_7: Fokus oder starten Sie die App in der Taskleistenposition 8
-    start_weg_app_8: Fokus oder starten Sie die App in der Taskleistenposition 9
-    start_weg_app_9: Fokus oder starten Sie die App in der Taskleistenposition 10
-    switch_workspace_0: Wechseln Sie zum Arbeitsbereich 1
-    switch_workspace_1: Wechseln Sie zum Arbeitsbereich 2
-    switch_workspace_2: Zum Arbeitsbereich 2 wechseln
-    switch_workspace_3: Zum Arbeitsbereich 3 wechseln
-    switch_workspace_4: Zum Arbeitsbereich 4 wechseln
-    switch_workspace_5: Zum Arbeitsbereich 5 wechseln
-    switch_workspace_6: Zum Arbeitsbereich 6 wechseln
-    switch_workspace_7: Zum Arbeitsbereich 7 wechseln
-    switch_workspace_8: Zum Arbeitsbereich 8 wechseln
-    switch_workspace_9: Zum Arbeitsbereich 9 wechseln
-    toggle_launcher: Umschalten
+    send_to_workspace: An den Arbeitsbereich senden {{0}}
+    start_weg_app: Fokus oder Start Application {{0}}
+    switch_to_next_workspace: Wechseln Sie zum nächsten Arbeitsbereich
+    switch_to_previous_workspace: Wechseln Sie zum vorherigen Arbeitsbereich
+    switch_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
+    toggle_float: Wechselfensterfloatmodus umschalten
+    toggle_launcher: Launcher umschalten
+    toggle_monocle: Umschalten des Arbeitsbereichs Monocle -Modus
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
   reset: Auf Standards zurücksetzen
 sides:

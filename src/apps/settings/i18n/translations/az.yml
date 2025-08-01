@@ -151,13 +151,19 @@ save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
 see_more: Daha çoxuna baxın
 shortcuts:
-  enable: İnteqrasiya edilmiş qısa yolları (AHK) aktivləşdirin
+  enable: Quraşdırılmış qısa yol sistemini aktivləşdirin
   enable_tooltip: >-
-    Seelen Core API istifadə edərək öz qısa yollarınızı həyata keçirə bilsəniz
-    deaktiv edin
+    Seelen UI müştərisindən istifadə edərək öz qısa yol sisteminizi həyata
+    keçirəcəksənsə deaktiv edin
   labels:
+    create_new_workspace: Yeni iş sahəsi yaradın
+    cycle_stack_next: Növbəti dövr yığını
+    cycle_stack_prev: Əvvəlki dövr yığını
+    cycle_wallpaper_next: Növbəti divar kağızı dəyişdirin
+    cycle_wallpaper_prev: Əvvəlki divar kağızı dəyişdirin
     decrease_height: Hündürlük azalmaq
     decrease_width: Enini azaltmaq
+    destroy_current_workspace: Cari iş sahəsini məhv edin
     focus_bottom: Fokuslanmaq
     focus_latest: Ən son fokus
     focus_left: Fokus sol
@@ -168,54 +174,27 @@ shortcuts:
     misc_open_settings: Parametrləri açın
     misc_toggle_lock_tracing: Kilid izləmə (qeydlər)
     misc_toggle_win_event_tracing: TOXGE WIN TƏDBİRLƏRİ İSTƏYİR (LOGS)
-    move_to_workspace_0: İş sahəsinə 0 hərəkət edin
-    move_to_workspace_1: İş sahəsinə 1-ə keçin
-    move_to_workspace_2: İş sahəsinə 2-ə keçin
-    move_to_workspace_3: İş sahəsinə 3-ə keçin
-    move_to_workspace_4: İş sahəsinə 4-ə keçin
-    move_to_workspace_5: İş sahəsinə 5-ə keçin
-    move_to_workspace_6: İş sahəsinə 6 hərəkət edin
-    move_to_workspace_7: 7 iş sahəsinə keçin
-    move_to_workspace_8: 8 iş sahəsinə keçin 8
-    move_to_workspace_9: İş sahəsinə 9-a keçin
+    move_to_workspace: İş sahəsinə keçin {{0}}
+    move_window_down: Pəncərəni altına köçürün
+    move_window_left: Pəncərəni sola köçürün
+    move_window_right: Pəncərəni sağa köçürün
+    move_window_up: Pəncərəni yuxarıya köçürün
+    pause_tiling: Pəncərə meneceri
     reserve_bottom: Ehtiyat
     reserve_float: Ehtiyat float
     reserve_left: Qoruğu
     reserve_right: Ehtiyat ehtiyat
     reserve_stack: Ehtiyat yığını
-    reserve_top: Bronlamaq
+    reserve_top: Bron etmək
     restore_sizes: Ölçüləri bərpa etmək
-    send_to_workspace_0: 0 iş sahəsinə göndərin
-    send_to_workspace_1: İş sahəsinə göndərin 1
-    send_to_workspace_2: İş sahəsinə 2 göndərin
-    send_to_workspace_3: İş sahəsinə göndərin 3
-    send_to_workspace_4: İş sahəsinə 4 göndərin
-    send_to_workspace_5: 5 iş sahəsinə göndərin
-    send_to_workspace_6: İş sahəsinə göndərin 6
-    send_to_workspace_7: 7 iş sahəsinə göndərin
-    send_to_workspace_8: İş sahəsinə göndərin 8
-    send_to_workspace_9: İş sahəsinə göndərin 9
-    start_weg_app_0: Tapşırıq çubuğunda 1-də fokus və ya başlanğıc tətbiqinə başlayın
-    start_weg_app_1: Vəzifə çubuğu mövqeyindəki 2-də fokus və ya başlamaq
-    start_weg_app_2: Vəzifə çubuğu mövqeyində Focus və ya Tətbiqə başlayın 3
-    start_weg_app_3: Task çubuğu mövqeyindəki 4-də fokus və ya başlanğıc tətbiq edin
-    start_weg_app_4: Vəzifə çubuğu mövqeyində Focus və ya Başlat Tətbiqinə 5
-    start_weg_app_5: Tapşırıq çubuğunda 6-da fokus və ya başlanğıc tətbiqetməsidir
-    start_weg_app_6: Tapşırıq çubuğunda 7-də fokus və ya başlama tətbiqinə başlayın
-    start_weg_app_7: Vəzifə çubuğu mövqeyində Focus və ya Başlat Tətbiqinə 8
-    start_weg_app_8: Vəzifə çubuğu mövqeyi 9-da fokus və ya başlamaq
-    start_weg_app_9: Vəzifə çubuğu mövqeyində fokus və ya başlama tətbiqinə 10
-    switch_workspace_0: İş sahəsinə 1 keçin
-    switch_workspace_1: İş sahəsinə 2 keçin
-    switch_workspace_2: İş sahəsinə 2 keçin
-    switch_workspace_3: İş sahəsinə 3 keçin
-    switch_workspace_4: İş sahəsinə 4-ə keçin
-    switch_workspace_5: İş sahəsinə 5-ə keçin
-    switch_workspace_6: İş sahəsinə 6-a keçin
-    switch_workspace_7: İş sahəsinə 7-ə keçin
-    switch_workspace_8: İş sahəsinə 8-ə keçin
-    switch_workspace_9: İş sahəsinə 9-a keçin
-    toggle_launcher: Keçid etmək
+    send_to_workspace: İş sahəsinə göndərin {{0}}
+    start_weg_app: Fokus və ya başlama tətbiqinə {{0}}
+    switch_to_next_workspace: Növbəti iş sahəsinə keçin
+    switch_to_previous_workspace: Əvvəlki iş sahəsinə keçin
+    switch_workspace: İş sahəsinə keçin {{0}}
+    toggle_float: Pəncərənin üzmə rejimini dəyişdirin
+    toggle_launcher: Başlatma qurğusu
+    toggle_monocle: İş sahəsi Monocle rejimi keçid
   readonly_tooltip: Bu yalnız bir oxu qısa yoldur
   reset: Defoltlara yenidən qurun
 sides:

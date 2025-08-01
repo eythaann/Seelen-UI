@@ -1,3 +1,5 @@
+cancel: रद्द करना
+done: हो गया
 drivers:
   got_it: समझ गया
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     सीलेन यूआई सेवा (स्लू-सर्विस) ऐप के ठीक से काम करने के लिए एक निर्भरता/सहायक
     है।
   not_running_ok: सेवा प्रारंभ करें
+shortcut:
+  register:
+    placeholder: किसी भी प्रमुख संयोजन को दबाएं
+    title: नया शॉर्टकट पंजीकृत करना
 tray:
   quit: छोड़ना
   restart: UI को पुनरारंभ करें

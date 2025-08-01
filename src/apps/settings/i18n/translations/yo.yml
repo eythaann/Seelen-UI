@@ -146,11 +146,17 @@ save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
 see_more: Wo diẹ sii
 shortcuts:
-  enable: Mu awọn ọna abuja ti o sopọ mọ (Ahk)
-  enable_tooltip: Muu Ti o ba yoo ṣe awọn ọna abuja tirẹ nipa lilo APEN mojuto API
+  enable: Mu ṣiṣẹ eto awọn ọna abuja
+  enable_tooltip: Muu Ti o ba yoo ṣe eto awọn ọna ọna abuja tirẹ nipa lilo alajọṣepọ UI
   labels:
+    create_new_workspace: Ṣẹda ibi-iṣẹ tuntun
+    cycle_stack_next: Awọn akopọ iyipo atẹle
+    cycle_stack_prev: Awọn akopọ ọmọ ni iṣaaju
+    cycle_wallpaper_next: Yipada si iṣẹṣọ ogiri atẹle
+    cycle_wallpaper_prev: Yipada si iṣẹṣọ ogiri iṣaaju
     decrease_height: Dinku iga
     decrease_width: DIVEELE WA
+    destroy_current_workspace: Pa ip [lọwọlọwọ run
     focus_bottom: Idojukọ Idojukọ
     focus_latest: Idojukọ
     focus_left: Idojukọ osi
@@ -161,16 +167,12 @@ shortcuts:
     misc_open_settings: Ṣi Eto
     misc_toggle_lock_tracing: Titiipa titiipa (awọn àkọọlẹ)
     misc_toggle_win_event_tracing: Tongo Win Iṣẹlẹ iṣẹlẹ (awọn àkọọlẹ)
-    move_to_workspace_0: Gbe si ibi-iṣẹ 0
-    move_to_workspace_1: Gbe si Accepace 1
-    move_to_workspace_2: Gbe si ibi-iṣẹ 2
-    move_to_workspace_3: Gbe si ibi-iṣẹ 3
-    move_to_workspace_4: Gbe si ibi-iṣẹ 4
-    move_to_workspace_5: Gbe si ibi-iṣẹ 5
-    move_to_workspace_6: Gbe si ibi-iṣẹ 6
-    move_to_workspace_7: Gbe si ibi-iṣẹ 7
-    move_to_workspace_8: Gbe si ibi-iṣẹ 8
-    move_to_workspace_9: Gbe si ibi-ipa 9
+    move_to_workspace: Gbe lọ si ibi-iṣẹ {{0}
+    move_window_down: Gbe window si isalẹ
+    move_window_left: Gbe window si osi
+    move_window_right: Gbe window si ọtun
+    move_window_up: Gbe window si oke
+    pause_tiling: Sinmi Took Window Manace
     reserve_bottom: Isalẹ ifipamọ
     reserve_float: Dase leefofo loju omi
     reserve_left: Reserve osi
@@ -178,37 +180,14 @@ shortcuts:
     reserve_stack: Ipilẹ akopọ
     reserve_top: Reserve oke
     restore_sizes: Pada awọn titobi
-    send_to_workspace_0: Firanṣẹ si ibi-iṣẹ 0
-    send_to_workspace_1: Firanṣẹ si ibi-iṣẹ 1
-    send_to_workspace_2: Firanṣẹ si ibi-iṣẹ 2
-    send_to_workspace_3: Firanṣẹ si ibi-iṣẹ 3
-    send_to_workspace_4: Firanṣẹ si ibi-iṣẹ 4
-    send_to_workspace_5: Firanṣẹ si Ibi-iṣẹ 5
-    send_to_workspace_6: Firanṣẹ si ibi-iṣẹ 6
-    send_to_workspace_7: Firanṣẹ si ibi-iṣẹ 7
-    send_to_workspace_8: Firanṣẹ si ibi-iṣẹ 8
-    send_to_workspace_9: Firanṣẹ si ibi-iṣẹ 9
-    start_weg_app_0: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 1
-    start_weg_app_1: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 2
-    start_weg_app_2: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 3
-    start_weg_app_3: Idojukọ tabi bẹrẹ app lori ipo iṣẹ ṣiṣe 4
-    start_weg_app_4: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 5
-    start_weg_app_5: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 6
-    start_weg_app_6: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 7
-    start_weg_app_7: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 8
-    start_weg_app_8: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 9
-    start_weg_app_9: Idojukọ tabi bẹrẹ app lori ipo iṣẹ-ṣiṣe 10
-    switch_workspace_0: Yipada si ibi-iṣẹ 1
-    switch_workspace_1: Yipada si ibi-iṣẹ 2
-    switch_workspace_2: Yipada si ibi-iṣẹ 2
-    switch_workspace_3: Yipada si ibi-iṣẹ 3
-    switch_workspace_4: Yipada si ibi-iṣẹ 4
-    switch_workspace_5: Yipada si ibi-iṣẹ 5
-    switch_workspace_6: Yipada si ibi-iṣẹ 6
-    switch_workspace_7: Yipada si ibi-iṣẹ 7
-    switch_workspace_8: Yipada si ibi-iṣẹ 8
-    switch_workspace_9: Yipada si ibi-iṣẹ 9
-    toggle_launcher: Aijiya
+    send_to_workspace: Firanṣẹ si Accepace {{0}
+    start_weg_app: Idojukọ tabi bẹrẹ ohun elo {0}}
+    switch_to_next_workspace: Yipada si ibi-iṣẹ t'okan
+    switch_to_previous_workspace: Yipada si ibi-iṣẹ iṣaaju
+    switch_workspace: Yipada si ibi-iṣẹ {0}
+    toggle_float: Oniropin window leefofo loju omi
+    toggle_launcher: Ifiwele tinggle
+    toggle_monocle: Toggle Servicepace Ipo Monocle
   readonly_tooltip: Eyi jẹ ọna abuja-kika
   reset: Tun si awọn aseku
 sides:

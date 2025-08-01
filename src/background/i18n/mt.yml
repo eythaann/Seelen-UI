@@ -1,3 +1,5 @@
+cancel: Ikkanċella
+done: Magħmul
 drivers:
   got_it: Ghandek
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI Service (slu-service) huwa dipendenza/helper biex l-app taħdem
     sew.
   not_running_ok: Ibda s-servizz
+shortcut:
+  register:
+    placeholder: Agħfas kwalunkwe kombinazzjoni taċ-ċavetta
+    title: Tirreġistra shortcut ġdid
 tray:
   quit: Nieqaf
   restart: Irristartja l-UI

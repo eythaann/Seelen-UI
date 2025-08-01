@@ -149,11 +149,19 @@ save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
 see_more: Vaata lähemalt
 shortcuts:
-  enable: Lubage integreeritud otseteed (AHK)
-  enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d
+  enable: Luba sisseehitatud otseteede süsteem
+  enable_tooltip: >-
+    Keelake, kui rakendate oma otseteede süsteemi, kasutades seeneni
+    kasutajaliidese klienti
   labels:
+    create_new_workspace: Looge uus tööruum
+    cycle_stack_next: Tsükli virn järgmisena
+    cycle_stack_prev: Tsükli virna eelmine
+    cycle_wallpaper_next: Muutke järgmisele tapeedile
+    cycle_wallpaper_prev: Muutke eelmisele tapeedile
     decrease_height: Vähendamine kõrgus
     decrease_width: Languslaius
+    destroy_current_workspace: Hävitada praegune tööruum
     focus_bottom: Fookuse põhi
     focus_latest: Keskenduda uusim
     focus_left: Fookus vasakule
@@ -164,16 +172,12 @@ shortcuts:
     misc_open_settings: Avatud sätted
     misc_toggle_lock_tracing: Lülitage lukustusjälg (logid)
     misc_toggle_win_event_tracing: Lülitage võidu sündmuste jälgimine (logid)
-    move_to_workspace_0: Liikuge tööruumi 0
-    move_to_workspace_1: Kolige tööalale 1
-    move_to_workspace_2: Kolige tööruumi 2
-    move_to_workspace_3: Kolige tööruumi 3
-    move_to_workspace_4: Kolige tööalale 4
-    move_to_workspace_5: Kolige tööruumi 5
-    move_to_workspace_6: Kolige tööruumi 6
-    move_to_workspace_7: Kolige tööruumi 7
-    move_to_workspace_8: Kolige tööalale 8
-    move_to_workspace_9: Kolige tööruumi 9
+    move_to_workspace: Liikuge tööruumi {{0}} saidile
+    move_window_down: Liigutage aken põhja
+    move_window_left: Liigutage aken vasakule
+    move_window_right: Liigutage aken paremale
+    move_window_up: Liigutage aken tippu
+    pause_tiling: Pausi plaatide aknahaldur
     reserve_bottom: Reservpõhja
     reserve_float: Reservvajutus
     reserve_left: Reserv vasak
@@ -181,37 +185,14 @@ shortcuts:
     reserve_stack: Reservvirn
     reserve_top: Reservi ülaosa
     restore_sizes: Taastada suurused
-    send_to_workspace_0: Saada tööalale 0
-    send_to_workspace_1: Saada tööala 1
-    send_to_workspace_2: Saada tööala 2
-    send_to_workspace_3: Saada tööala 3
-    send_to_workspace_4: Saada tööalale 4
-    send_to_workspace_5: Saada tööalale 5
-    send_to_workspace_6: Saada tööala 6
-    send_to_workspace_7: Saada tööruumi 7
-    send_to_workspace_8: Saada tööala 8
-    send_to_workspace_9: Saada Workspace 9
-    start_weg_app_0: Keskenduge või käivitage rakendus Task riba positsioonile 1
-    start_weg_app_1: Keskenduge või käivitage rakendus Task riba positsioonile 2
-    start_weg_app_2: Keskenduge või käivitage rakendus Task riba positsioonile 3
-    start_weg_app_3: Keskenduge või käivitage rakendus Taskbar positsioonile 4
-    start_weg_app_4: Keskenduge või käivitage rakendus Task riba positsioonile 5
-    start_weg_app_5: Keskenduge või käivitage rakendus Task riba positsioonile 6
-    start_weg_app_6: Keskenduge või käivitage rakendus Task riba positsioonile 7
-    start_weg_app_7: Keskenduge või käivitage rakendus Task riba positsioonile 8
-    start_weg_app_8: Keskenduge või käivitage rakendus Task riba positsioonile 9
-    start_weg_app_9: Keskenduge või käivitage rakendus Task riba positsioonile 10
-    switch_workspace_0: Lülitage tööalale 1
-    switch_workspace_1: Lülitage tööruum 2
-    switch_workspace_2: Lülitage tööruum 2
-    switch_workspace_3: Lülitage tööruum 3
-    switch_workspace_4: Lülitage tööruum 4
-    switch_workspace_5: Lülitage tööruum 5
-    switch_workspace_6: Lülitage tööruumi 6 -le
-    switch_workspace_7: Lülitage tööruumi 7 -le
-    switch_workspace_8: Lülitage tööruumi 8 -le
-    switch_workspace_9: Lülitage Workspace 9 -le
-    toggle_launcher: Lülituma
+    send_to_workspace: Saada tööruumi {{0}}
+    start_weg_app: Keskenduge või käivitage rakendus {{0}}
+    switch_to_next_workspace: Lülitage järgmisele tööalale
+    switch_to_previous_workspace: Lülitage eelmisele tööalale
+    switch_workspace: Lülitage tööruumi {{0}}
+    toggle_float: Lülitage akna ujukrežiim
+    toggle_launcher: Lülituskaketi
+    toggle_monocle: Tööruumi monokli režiimi lülitamine
   readonly_tooltip: See on kirjutuskaitstud otsetee
   reset: Lähtestage vaikeseadetele
 sides:

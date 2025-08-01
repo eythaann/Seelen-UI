@@ -1,3 +1,5 @@
+cancel: ይቅር
+done: ተከናውኗል
 drivers:
   got_it: ገባኝ
   monitor_disabled: አንዳንድ የተቆጣጠረ ሾፌሮች ተሰናክለዋል. እባክዎን እንዲተኩልዎት እንዲፈቅድላቸው ያነቃቸዋል.
@@ -22,6 +24,10 @@ service:
   not_running: Seelen UI አገልግሎት እየሰራ አይደለም።
   not_running_description: Seelen UI አገልግሎት (slu-አገልግሎት) መተግበሪያው በትክክል እንዲሰራ ጥገኛ/ረዳት ነው።
   not_running_ok: አገልግሎት ጀምር
+shortcut:
+  register:
+    placeholder: ማንኛውንም የቁልፍ ጥምረት ተጫን
+    title: አዲስ አቋራጭ መመዝገብ
 tray:
   quit: አቁም
   restart: እንደገና እንደገና ያስጀምሩ

@@ -150,13 +150,19 @@ save: Გადარჩენა
 save_and_restart: შენახვა და გადატვირთვა
 see_more: იხილეთ მეტი
 shortcuts:
-  enable: ინტეგრირებული მალსახმობების ჩართვა (AHK)
+  enable: ჩართეთ ჩამონტაჟებული მალსახმობების სისტემა
   enable_tooltip: >-
-    გამორთეთ, თუ თქვენ განახორციელებთ საკუთარ მალსახმობებს Seelen Core API– ს
-    გამოყენებით
+    გამორთეთ, თუ თქვენ განახორციელებთ თქვენს მალსახმობების სისტემას Seelen UI
+    კლიენტის გამოყენებით
   labels:
+    create_new_workspace: შექმენით ახალი სამუშაო ადგილი
+    cycle_stack_next: ციკლის დასტის შემდეგ
+    cycle_stack_prev: ციკლის დასტის წინა
+    cycle_wallpaper_next: შეცვალეთ შემდეგი ფონი
+    cycle_wallpaper_prev: წინა ფონიზე შეცვლა
     decrease_height: სიმაღლის შემცირება
     decrease_width: სიგანის შემცირება
+    destroy_current_workspace: გაანადგურე ამჟამინდელი სამუშაო ადგილი
     focus_bottom: ფოკუსირება
     focus_latest: ფოკუსირება უახლესი
     focus_left: ფოკუსირება მარცხნივ
@@ -167,16 +173,12 @@ shortcuts:
     misc_open_settings: ღია პარამეტრები
     misc_toggle_lock_tracing: ჩაკეტილი საკეტის კვალი (ჟურნალი)
     misc_toggle_win_event_tracing: გადარიცხეთ მოიგეთ ღონისძიების კვალი (ჟურნალი)
-    move_to_workspace_0: გადადით სამუშაო ადგილებზე 0
-    move_to_workspace_1: გადავიდეთ სამუშაო სივრცეში 1
-    move_to_workspace_2: გადავიდეთ სამუშაო ადგილებზე 2
-    move_to_workspace_3: გადავიდეთ სამუშაო ადგილებზე 3
-    move_to_workspace_4: გადავიდეთ სამუშაო ადგილებზე 4
-    move_to_workspace_5: გადადით სამუშაო ადგილებზე 5
-    move_to_workspace_6: გადადით სამუშაო ადგილებზე 6
-    move_to_workspace_7: გადადით სამუშაო ადგილებზე 7
-    move_to_workspace_8: გადავიდეთ სამუშაო ადგილებზე 8
-    move_to_workspace_9: გადავიდეთ სამუშაო სივრცეში 9
+    move_to_workspace: გადავიდეთ სამუშაო ადგილებზე {{0}}
+    move_window_down: ფანჯრის ქვედა ნაწილზე გადატანა
+    move_window_left: ფანჯრის მარცხნივ გადაადგილება
+    move_window_right: ფანჯრის მარჯვნივ გადაადგილება
+    move_window_up: ფანჯრის გადატანა ზემოდან
+    pause_tiling: პაუზის ჩამოსხმის ფანჯრის მენეჯერი
     reserve_bottom: სარეზერვო ქვედა
     reserve_float: სარეზერვო float
     reserve_left: ნაკრძალი დარჩა
@@ -184,37 +186,14 @@ shortcuts:
     reserve_stack: სარეზერვო დასტა
     reserve_top: სარეზერვო ზედა
     restore_sizes: აღადგინეთ ზომები
-    send_to_workspace_0: გაგზავნეთ სამუშაო სივრცეში 0
-    send_to_workspace_1: გაგზავნეთ სამუშაო სივრცეში 1
-    send_to_workspace_2: გაგზავნეთ სამუშაო ადგილებზე 2
-    send_to_workspace_3: გაგზავნეთ სამუშაო ადგილებზე 3
-    send_to_workspace_4: გაგზავნეთ სამუშაო სივრცეში 4
-    send_to_workspace_5: გაგზავნეთ სამუშაო სივრცეში 5
-    send_to_workspace_6: გაგზავნეთ სამუშაო სივრცეში 6
-    send_to_workspace_7: გაგზავნეთ სამუშაო ადგილებზე 7
-    send_to_workspace_8: გაგზავნეთ სამუშაო სივრცეში 8
-    send_to_workspace_9: გაგზავნეთ სამუშაო სივრცეში 9
-    start_weg_app_0: ფოკუსირება ან დაწყება აპლიკაცია დავალების პანელის პოზიციაზე 1
-    start_weg_app_1: ფოკუსირება ან დაწყება აპლიკაცია Taskbar პოზიციაზე 2
-    start_weg_app_2: ფოკუსირება ან დაწყება აპლიკაცია დავალების პანელის პოზიციაზე 3
-    start_weg_app_3: ფოკუსირება ან დაწყება აპლიკაცია დავალების პანელის პოზიციაზე 4
-    start_weg_app_4: ფოკუსირება ან დაწყება აპლიკაცია დავალების პანელის პოზიციაზე 5
-    start_weg_app_5: ფოკუსირება ან დაწყება აპლიკაცია დავალების პანელის პოზიციაზე 6
-    start_weg_app_6: ფოკუსირება ან დაწყება აპლიკაცია დავალების პანელის პოზიციაზე 7
-    start_weg_app_7: ფოკუსირება ან დაწყება აპლიკაცია დავალების პანელის პოზიციაზე 8
-    start_weg_app_8: ფოკუსირება ან დაწყება აპლიკაცია Taskbar პოზიციაზე 9
-    start_weg_app_9: ფოკუსირება ან დაწყება აპლიკაცია Taskbar პოზიციაზე 10
-    switch_workspace_0: გადადით სამუშაო ადგილებზე 1
-    switch_workspace_1: გადადით სამუშაო ადგილებზე 2
-    switch_workspace_2: გადადით სამუშაო ადგილებზე 2
-    switch_workspace_3: გადადით სამუშაო ადგილებზე 3
-    switch_workspace_4: გადადით სამუშაო ადგილებზე 4
-    switch_workspace_5: გადადით სამუშაო ადგილებზე 5
-    switch_workspace_6: გადადით სამუშაო ადგილებზე 6
-    switch_workspace_7: გადადით სამუშაო ადგილებზე 7
-    switch_workspace_8: გადადით სამუშაო ადგილებზე 8
-    switch_workspace_9: გადადით სამუშაო ადგილებზე 9
-    toggle_launcher: შეცვლა
+    send_to_workspace: გაგზავნეთ სამუშაო სივრცეში {{0}}
+    start_weg_app: ფოკუსირება ან დაწყება განაცხადი {{0}}
+    switch_to_next_workspace: გადადით შემდეგ სამუშაო ადგილებზე
+    switch_to_previous_workspace: გადახვიდეთ წინა სამუშაო ადგილებზე
+    switch_workspace: გადადით სამუშაო ადგილებზე {{0}}
+    toggle_float: გადარიცხეთ ფანჯრის float რეჟიმი
+    toggle_launcher: გადარიცხვის გამშვები
+    toggle_monocle: გადართეთ სამუშაო ადგილის მონოკლის რეჟიმი
   readonly_tooltip: ეს არის მხოლოდ წაკითხული მალსახმობი
   reset: გადატვირთვა ნაგულისხმევებზე
 sides:

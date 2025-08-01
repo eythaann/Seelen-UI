@@ -152,11 +152,19 @@ save: Uložiť
 save_and_restart: Uložiť a reštartovať
 see_more: Pozri viac
 shortcuts:
-  enable: Povoliť integrované skratky (AHK)
-  enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
+  enable: Povoliť vstavaný systém skratiek
+  enable_tooltip: >-
+    Zakážte, ak budete implementovať svoj vlastný systém skratiek pomocou
+    klienta Seelen UI klienta
   labels:
+    create_new_workspace: Vytvorte nový pracovný priestor
+    cycle_stack_next: Stack Cycle Ďalej
+    cycle_stack_prev: Cyklus predchádzajúci
+    cycle_wallpaper_next: Zmena na ďalšiu tapetu
+    cycle_wallpaper_prev: Zmena na predchádzajúcu tapetu
     decrease_height: Zníženie výšky
     decrease_width: Znížiť šírku
+    destroy_current_workspace: Zničiť súčasný pracovný priestor
     focus_bottom: Zaostrenie
     focus_latest: Najnovší
     focus_left: Vľavo
@@ -167,16 +175,12 @@ shortcuts:
     misc_open_settings: Otvorené nastavenia
     misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
     misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
-    move_to_workspace_0: Presuňte sa do pracovného priestoru 0
-    move_to_workspace_1: Presun do pracovného priestoru 1
-    move_to_workspace_2: Presuňte sa do pracovného priestoru 2
-    move_to_workspace_3: Presuňte sa do pracovného priestoru 3
-    move_to_workspace_4: Presuňte sa do pracovného priestoru 4
-    move_to_workspace_5: Presuňte sa do pracovného priestoru 5
-    move_to_workspace_6: Presuňte sa do pracovného priestoru 6
-    move_to_workspace_7: Presuňte sa do pracovného priestoru 7
-    move_to_workspace_8: Presuňte sa do pracovného priestoru 8
-    move_to_workspace_9: Presuňte sa do pracovného priestoru 9
+    move_to_workspace: Presunúť do pracovného priestoru {{0}}
+    move_window_down: Presuňte okno dole
+    move_window_left: Presuňte okno doľava
+    move_window_right: Presuňte okno doprava
+    move_window_up: Presuňte okno na vrchol
+    pause_tiling: Pauza obkladací správca okien
     reserve_bottom: Dno
     reserve_float: Plavák
     reserve_left: Vľavo
@@ -184,37 +188,14 @@ shortcuts:
     reserve_stack: Zásobník
     reserve_top: Horná časť
     restore_sizes: Obnoviť veľkosti
-    send_to_workspace_0: Pošlite do pracovného priestoru 0
-    send_to_workspace_1: Pošlite do pracovného priestoru 1
-    send_to_workspace_2: Pošlite do pracovného priestoru 2
-    send_to_workspace_3: Pošlite do pracovného priestoru 3
-    send_to_workspace_4: Pošlite do pracovného priestoru 4
-    send_to_workspace_5: Pošlite do pracovného priestoru 5
-    send_to_workspace_6: Pošlite do pracovného priestoru 6
-    send_to_workspace_7: Pošlite do pracovného priestoru 7
-    send_to_workspace_8: Pošlite do pracovného priestoru 8
-    send_to_workspace_9: Pošlite do pracovného priestoru 9
-    start_weg_app_0: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 1
-    start_weg_app_1: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 2
-    start_weg_app_2: Zamerajte alebo spustiť aplikáciu na pozíciu panela úloh 3
-    start_weg_app_3: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 4
-    start_weg_app_4: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 5
-    start_weg_app_5: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 6
-    start_weg_app_6: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 7
-    start_weg_app_7: Zamerajte alebo spustiť aplikáciu na pozíciu panela úloh 8
-    start_weg_app_8: Zamerajte alebo spustite aplikáciu na pozíciu panela úloh 9
-    start_weg_app_9: Zamerajte alebo spustiť aplikáciu na pozíciu panela úloh 10
-    switch_workspace_0: Prepnite na pracovný priestor 1
-    switch_workspace_1: Prepnite na pracovný priestor 2
-    switch_workspace_2: Prepnite na pracovný priestor 2
-    switch_workspace_3: Prepnite na pracovný priestor 3
-    switch_workspace_4: Prepnite na pracovný priestor 4
-    switch_workspace_5: Prepnite na pracovný priestor 5
-    switch_workspace_6: Prepnite na pracovný priestor 6
-    switch_workspace_7: Prepnite na pracovný priestor 7
-    switch_workspace_8: Prepnite na pracovný priestor 8
-    switch_workspace_9: Prepnite na pracovný priestor 9
-    toggle_launcher: Prepínanie
+    send_to_workspace: Odoslať do Workspace {{0}}
+    start_weg_app: Zamerajte alebo spustiť aplikáciu {{0}}
+    switch_to_next_workspace: Prepnite na ďalší pracovný priestor
+    switch_to_previous_workspace: Prepnite na predchádzajúci pracovný priestor
+    switch_workspace: Prepnite na pracovný priestor {{0}}
+    toggle_float: Prepínanie plavákového režimu okna
+    toggle_launcher: Prepínanie spúšťača
+    toggle_monocle: Prepnite režim Monocle Workspace
   readonly_tooltip: Toto je skratka iba na čítanie
   reset: Reset na predvolené hodnoty
 sides:

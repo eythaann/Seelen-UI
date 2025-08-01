@@ -146,70 +146,49 @@ save: להציל
 save_and_restart: שמור והפעלה מחדש
 see_more: ראה עוד
 shortcuts:
-  enable: אפשר קיצורי דרך משולבים (AHK)
-  enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core
+  enable: אפשר מערכת קיצורי דרך מובנים
+  enable_tooltip: השבת אם תיישם מערכת קיצורי דרך משלך באמצעות לקוח ממשק המשתמש של Seelen
   labels:
-    decrease_height: הקטן גובה
-    decrease_width: הקטן רוחב
-    focus_bottom: התמקד מטה
-    focus_latest: התמקד על האחרון
-    focus_left: התמקד שמאלה
-    focus_right: התמקד ימינה
-    focus_top: התמקד למעלה
-    increase_height: הגדל גובה
-    increase_width: הגדל רוחב
-    misc_open_settings: הגדרות פתוחות
+    create_new_workspace: צור סביבת עבודה חדשה
+    cycle_stack_next: מחזור מחזור הבא
+    cycle_stack_prev: מחזור מחזור קודם
+    cycle_wallpaper_next: שנה לטפט הבא
+    cycle_wallpaper_prev: שנה לטפט הקודם
+    decrease_height: ירידה בגובה
+    decrease_width: ירידה ברוחב
+    destroy_current_workspace: להרוס את סביבת העבודה הנוכחית
+    focus_bottom: מיקוד תחתון
+    focus_latest: התמקד האחרון
+    focus_left: פוקוס שמאלה
+    focus_right: להתמקד נכון
+    focus_top: מיקוד למעלה
+    increase_height: הגדל את הגובה
+    increase_width: הגדל את הרוחב
+    misc_open_settings: פתח הגדרות
     misc_toggle_lock_tracing: מעקב אחר נעילת נעילה (יומנים)
-    misc_toggle_win_event_tracing: מעקב אחר חלונות (יומנים)
-    move_to_workspace_0: עבור לסביבת עבודה 0
-    move_to_workspace_1: עבור לסביבת עבודה 1
-    move_to_workspace_2: עבור לסביבת עבודה 2
-    move_to_workspace_3: עבור לסביבת עבודה 3
-    move_to_workspace_4: עברו לסביבת עבודה 4
-    move_to_workspace_5: עבור לסביבת עבודה 5
-    move_to_workspace_6: עבור לסביבת עבודה 6
-    move_to_workspace_7: עבור לסביבת עבודה 7
-    move_to_workspace_8: עברו לסביבת עבודה 8
-    move_to_workspace_9: עברו לסביבת עבודה 9
-    reserve_bottom: שמור בתחתית
-    reserve_float: שמור בצף
-    reserve_left: שמור בשמאל
-    reserve_right: שמור בימין
-    reserve_stack: שמור במחסנית
-    reserve_top: שמור בעליון
-    restore_sizes: שחזר גדלים
-    send_to_workspace_0: שלח לסביבת עבודה 0
-    send_to_workspace_1: שלח לסביבת עבודה 1
-    send_to_workspace_2: שלח לסביבת עבודה 2
-    send_to_workspace_3: שלח לסביבת עבודה 3
-    send_to_workspace_4: שלח לסביבת עבודה 4
-    send_to_workspace_5: שלח לסביבת עבודה 5
-    send_to_workspace_6: שלח לסביבת עבודה 6
-    send_to_workspace_7: שלח לסביבת עבודה 7
-    send_to_workspace_8: שלח לסביבת עבודה 8
-    send_to_workspace_9: שלח לסביבת עבודה 9
-    start_weg_app_0: מקד או התחל אפליקציה בתפקיד שורת המשימות 1
-    start_weg_app_1: מקד או התחל אפליקציה במיקום שורת המשימות 2
-    start_weg_app_2: מקד או התחל אפליקציה במיקום שורת המשימות 3
-    start_weg_app_3: מקד או התחל אפליקציה במיקום שורת המשימות 4
-    start_weg_app_4: מקד או התחל אפליקציה במיקום שורת המשימות 5
-    start_weg_app_5: מקד או התחל אפליקציה במיקום שורת המשימות 6
-    start_weg_app_6: מקד או התחל אפליקציה בתפקיד שורת המשימות 7
-    start_weg_app_7: מקד או התחל אפליקציה במיקום שורת המשימות 8
-    start_weg_app_8: מקד או התחל אפליקציה במיקום שורת המשימות 9
-    start_weg_app_9: מקד או התחל אפליקציה במיקום שורת המשימות 10
-    switch_workspace_0: עבור לסביבת עבודה 1
-    switch_workspace_1: עבור לסביבת עבודה 2
-    switch_workspace_2: עבור לסביבת עבודה 2
-    switch_workspace_3: עבור לסביבת עבודה 3
-    switch_workspace_4: עברו לסביבת עבודה 4
-    switch_workspace_5: עברו לסביבת עבודה 5
-    switch_workspace_6: לעבור לסביבת עבודה 6
-    switch_workspace_7: לעבור לסביבת עבודה 7
-    switch_workspace_8: עברו לסביבת עבודה 8
-    switch_workspace_9: עבור לסביבת עבודה 9
-    toggle_launcher: מתג
-  readonly_tooltip: קיצור דרך לקריאה בלבד
+    misc_toggle_win_event_tracing: מעקב אחר WIN WIN (יומנים)
+    move_to_workspace: עברו לסביבת עבודה {{0}}
+    move_window_down: העבירו את החלון לתחתית
+    move_window_left: העבר חלון שמאלה
+    move_window_right: העבירו את החלון לימין
+    move_window_up: העבר חלון למעלה
+    pause_tiling: השהה את מנהל החלונות
+    reserve_bottom: שמורה בתחתית
+    reserve_float: שמורה לצוף
+    reserve_left: רזרבה שמאלה
+    reserve_right: שמור ימינה
+    reserve_stack: ערימת מילואים
+    reserve_top: עליון מילואים
+    restore_sizes: שחזור גדלים
+    send_to_workspace: שלח לסביבת עבודה {{0}}
+    start_weg_app: מיקוד או התחל יישום {{0}}
+    switch_to_next_workspace: עבור לסביבת העבודה הבאה
+    switch_to_previous_workspace: עבור לסביבת העבודה הקודמת
+    switch_workspace: עברו לסביבת עבודה {{0}}
+    toggle_float: החלף מצב צף חלון
+    toggle_launcher: Thinggle Thanger
+    toggle_monocle: החלף את מצב המונוקל של סביבת העבודה
+  readonly_tooltip: זהו קיצור דרך לקריאה בלבד
   reset: אפס לברירות מחדל
 sides:
   bottom: למטה

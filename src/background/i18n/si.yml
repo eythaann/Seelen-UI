@@ -1,3 +1,5 @@
+cancel: අවලංගු කරන්න
+done: කළා
 drivers:
   got_it: තේරුම් ගත්තා ද
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI සේවාව (slu-service) යනු යෙදුම නිසියාකාරව ක්‍රියා කිරීමට
     යැපුම්/උපකාරකයකි.
   not_running_ok: සේවාව ආරම්භ කරන්න
+shortcut:
+  register:
+    placeholder: ඕනෑම යතුරු සංයෝජනයක් ඔබන්න
+    title: නව කෙටිමඟ ලියාපදිංචි කිරීම
 tray:
   quit: ඉවත්ව යන්න
   restart: UI නැවත ආරම්භ කරන්න

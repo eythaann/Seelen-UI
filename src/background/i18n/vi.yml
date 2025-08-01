@@ -1,3 +1,5 @@
+cancel: Hủy bỏ
+done: Xong
 drivers:
   got_it: Hiểu rồi
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Dịch vụ giao diện người dùng Seelen (slu-service) là một công cụ phụ
     thuộc/trợ giúp để ứng dụng hoạt động bình thường.
   not_running_ok: Bắt đầu dịch vụ
+shortcut:
+  register:
+    placeholder: Nhấn bất kỳ kết hợp khóa nào
+    title: Đăng ký phím tắt mới
 tray:
   quit: Từ bỏ
   restart: Khởi động lại UI

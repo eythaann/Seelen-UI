@@ -154,73 +154,52 @@ save: Enregistrer
 save_and_restart: Enregistrer et redémarrer
 see_more: Voir plus
 shortcuts:
-  enable: Activer les raccourcis intégrés (ahk)
-  enable_tooltip: Désactivez si vous implémentez vos propres raccourcis via l'API Seelen Core
+  enable: Activer le système de raccourcis intégrés
+  enable_tooltip: >-
+    Désactiver si vous implémentez votre propre système de raccourcis à l'aide
+    du client de l'interface utilisateur Seelen
   labels:
+    create_new_workspace: Créer un nouvel espace de travail
+    cycle_stack_next: Pile de cycle Suivant
+    cycle_stack_prev: Pile de cycle Précédent
+    cycle_wallpaper_next: Passer au fond d'écran suivant
+    cycle_wallpaper_prev: Passer au fond d'écran précédent
     decrease_height: Diminuer la hauteur
     decrease_width: Diminuer la largeur
-    focus_bottom: Focus en bas
-    focus_latest: Focus le dernier
+    destroy_current_workspace: Détruire l'espace de travail actuel
+    focus_bottom: Focus Bottom
+    focus_latest: Focus plus tard
     focus_left: Focus à gauche
-    focus_right: Focus à droit
-    focus_top: Focus en haut
+    focus_right: Focus à droite
+    focus_top: Focus top
     increase_height: Augmenter la hauteur
     increase_width: Augmenter la largeur
-    misc_open_settings: Ouvrir les paramètres
-    misc_toggle_lock_tracing: Basculer le verrouillage du traçage (logs)
-    misc_toggle_win_event_tracing: Basculer le traçage des événements Windows (logs)
-    move_to_workspace_0: Déplacer vers le bureau virtuel 0
-    move_to_workspace_1: Déplacer vers le bureau virtuel 1
-    move_to_workspace_2: Déplacer vers le bureau virtuel 2
-    move_to_workspace_3: Déplacer vers le bureau virtuel 3
-    move_to_workspace_4: Déplacer vers le bureau virtuel 4
-    move_to_workspace_5: Déplacer vers le bureau virtuel 5
-    move_to_workspace_6: Déplacer vers le bureau virtuel 6
-    move_to_workspace_7: Déplacer vers le bureau virtuel 7
-    move_to_workspace_8: Déplacer vers le bureau virtuel 8
-    move_to_workspace_9: Déplacer vers le bureau virtuel 9
-    reserve_bottom: Réserver en bas
-    reserve_float: Réserver flottant
-    reserve_left: Réserver à gauche
+    misc_open_settings: Paramètres ouvrir
+    misc_toggle_lock_tracing: Togue de verrouillage (journaux)
+    misc_toggle_win_event_tracing: Togle Win Event Traçage (journaux)
+    move_to_workspace: Déplacer dans l'espace de travail {{0}}
+    move_window_down: Déplacer la fenêtre en bas
+    move_window_left: Déplacer la fenêtre à gauche
+    move_window_right: Déplacer la fenêtre à droite
+    move_window_up: Déplacer la fenêtre en haut
+    pause_tiling: Gestionnaire de fenêtres en carrelage en pause
+    reserve_bottom: Bottom
+    reserve_float: Réserver flotter
+    reserve_left: Réserve à gauche
     reserve_right: Réserver à droite
     reserve_stack: Pile de réserve
-    reserve_top: Réserver en haut
+    reserve_top: Réserve de réserve
     restore_sizes: Restaurer les tailles
-    send_to_workspace_0: Envoyer au bureau virtuel 0
-    send_to_workspace_1: Envoyer au bureau virtuel 1
-    send_to_workspace_2: Envoyer au bureau virtuel 2
-    send_to_workspace_3: Envoyer au bureau virtuel 3
-    send_to_workspace_4: Envoyer au bureau virtuel 4
-    send_to_workspace_5: Envoyer au bureau virtuel 5
-    send_to_workspace_6: Envoyer au bureau virtuel 6
-    send_to_workspace_7: Envoyer au bureau virtuel 7
-    send_to_workspace_8: Envoyer au bureau virtuel 8
-    send_to_workspace_9: Envoyer au bureau virtuel 9
-    start_weg_app_0: >-
-      Focus ou démarrage de l'application sur la position de la barre des tâches
-      1
-    start_weg_app_1: Focus ou démarrez l'application sur la position de la barre des tâches 2
-    start_weg_app_2: Focus ou démarrez l'application sur la position de la barre des tâches 3
-    start_weg_app_3: Focus ou démarrez l'application sur la position de la barre des tâches 4
-    start_weg_app_4: Focus ou démarrez l'application sur la position de la barre des tâches 5
-    start_weg_app_5: Focus ou démarrez l'application sur la position de la barre des tâches 6
-    start_weg_app_6: Focus ou démarrez l'application sur la position de la barre des tâches 7
-    start_weg_app_7: Focus ou démarrez l'application sur la position de la barre des tâches 8
-    start_weg_app_8: Focus ou démarrez l'application sur la position de la barre des tâches 9
-    start_weg_app_9: Focus ou démarrez l'application sur la position de la barre des tâches 10
-    switch_workspace_0: Passez à l'espace de travail 1
-    switch_workspace_1: Passez à l'espace de travail 2
-    switch_workspace_2: Passer à l'espace de travail 2
-    switch_workspace_3: Passer à l'espace de travail 3
-    switch_workspace_4: Passer à l'espace de travail 4
-    switch_workspace_5: Passer à l'espace de travail 5
-    switch_workspace_6: Passer à l'espace de travail 6
-    switch_workspace_7: Passer à Workspace 7
-    switch_workspace_8: Passer à l'espace de travail 8
-    switch_workspace_9: Passer à l'espace de travail 9
-    toggle_launcher: Afficher
+    send_to_workspace: Envoyer à Workspace {{0}}
+    start_weg_app: Focus ou démarrer l'application {{0}}
+    switch_to_next_workspace: Passez à l'espace de travail suivant
+    switch_to_previous_workspace: Passez à l'espace de travail précédent
+    switch_workspace: Passez à Workspace {{0}}
+    toggle_float: Mode de flotteur de fenêtre à bascule
+    toggle_launcher: Lanceur de basculement
+    toggle_monocle: Mode monocle d'espace de travail à bascule
   readonly_tooltip: Ceci est un raccourci en lecture seule
-  reset: Réinitialiser aux paramètres par défaut
+  reset: Réinitialiser les valeurs par défaut
 sides:
   bottom: Bas
   left: Gauche

@@ -1,3 +1,5 @@
+cancel: રદ કરવું
+done: કામ
 drivers:
   got_it: તે મળ્યું
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     સીલેન UI સેવા (સ્લુ-સર્વિસ) એ એપ્લિકેશનને યોગ્ય રીતે કાર્ય કરવા માટે એક
     નિર્ભરતા/સહાયક છે.
   not_running_ok: સેવા શરૂ કરો
+shortcut:
+  register:
+    placeholder: કોઈપણ કી સંયોજન દબાવો
+    title: નવી શોર્ટકટ નોંધણી
 tray:
   quit: છોડી દેવું
   restart: UI ફરીથી પ્રારંભ કરો

@@ -152,11 +152,19 @@ save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 see_more: Skatīt vairāk
 shortcuts:
-  enable: Iespējot integrētus saīsnes (AHK)
-  enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API
+  enable: Iespējot iebūvēto saīsņu sistēmu
+  enable_tooltip: >-
+    Atspējot, ja jūs ieviesīsit savu saīsņu sistēmu, izmantojot Seelen UI
+    klientu
   labels:
+    create_new_workspace: Izveidojiet jaunu darbvietu
+    cycle_stack_next: Nākamais cikla kaudze
+    cycle_stack_prev: Velosipēdu kaudze iepriekšējā
+    cycle_wallpaper_next: Mainiet uz nākamo fona attēlu
+    cycle_wallpaper_prev: Mainiet uz iepriekšējo fona attēlu
     decrease_height: Samazināt augstumu
     decrease_width: Samazināt platumu
+    destroy_current_workspace: Iznīcināt pašreizējo darbvietu
     focus_bottom: Fokusēt apakšā
     focus_latest: Fokuss jaunākais
     focus_left: Fokusēt pa kreisi
@@ -167,16 +175,12 @@ shortcuts:
     misc_open_settings: Atvērti iestatījumi
     misc_toggle_lock_tracing: Pārslēdziet slēdzenes izsekošanu (baļķi)
     misc_toggle_win_event_tracing: Pārslēdziet uzvaru notikumu izsekošanu (žurnāli)
-    move_to_workspace_0: Pārvietojieties uz darbvietu 0
-    move_to_workspace_1: Pārvietojieties uz 1. darbvietu
-    move_to_workspace_2: Pārvietojieties uz darbvietu 2
-    move_to_workspace_3: Pārvietojieties uz darbvietu 3
-    move_to_workspace_4: Pārvietojieties uz Workspace 4
-    move_to_workspace_5: Pārvietojieties uz Workspace 5
-    move_to_workspace_6: Pārvietojieties uz darbvietu 6
-    move_to_workspace_7: Pārvietojieties uz darbvietu 7
-    move_to_workspace_8: Pārvietojieties uz Workspace 8
-    move_to_workspace_9: Pārvietojieties uz darbvietu 9
+    move_to_workspace: Pārvietojieties uz darbvietu {{0}}
+    move_window_down: Pārvietojiet logu uz leju
+    move_window_left: Pārvietojiet logu pa kreisi
+    move_window_right: Pārvietojiet logu uz labo pusi
+    move_window_up: Pārvietojiet logu uz augšu
+    pause_tiling: Pauzēt flīzes logu pārvaldnieku
     reserve_bottom: Rezervēt apakšdaļu
     reserve_float: Rezerves pludiņš
     reserve_left: Rezervēt pa kreisi
@@ -184,37 +188,14 @@ shortcuts:
     reserve_stack: Rezerves kaudze
     reserve_top: Rezerves tops
     restore_sizes: Atjaunot izmērus
-    send_to_workspace_0: Nosūtīt uz darbvietu 0
-    send_to_workspace_1: Nosūtīt uz 1. darbvietu
-    send_to_workspace_2: Nosūtīt uz darbvietu 2
-    send_to_workspace_3: Nosūtīt uz darbvietu 3
-    send_to_workspace_4: Nosūtiet uz Workspace 4
-    send_to_workspace_5: Nosūtīt uz darba vietu 5
-    send_to_workspace_6: Nosūtīt uz darbvietu 6
-    send_to_workspace_7: Nosūtīt uz darbvietu 7
-    send_to_workspace_8: Nosūtīt uz darbvietu 8
-    send_to_workspace_9: Nosūtīt uz darbvietu 9
-    start_weg_app_0: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas pozīciju 1
-    start_weg_app_1: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas pozīciju 2
-    start_weg_app_2: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas 3. pozīciju
-    start_weg_app_3: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas pozīciju 4
-    start_weg_app_4: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas 5. pozīciju
-    start_weg_app_5: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas pozīciju 6
-    start_weg_app_6: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas pozīciju 7.
-    start_weg_app_7: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas pozīciju 8.
-    start_weg_app_8: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas pozīciju 9.
-    start_weg_app_9: Koncentrējieties vai Sāciet lietotni uz uzdevumjoslas pozīciju 10
-    switch_workspace_0: Pārslēdzieties uz 1. darbvietu
-    switch_workspace_1: Pārslēdzieties uz darbvietu 2
-    switch_workspace_2: Pārslēdzieties uz darbvietu 2
-    switch_workspace_3: Pārslēdzieties uz darbvietu 3
-    switch_workspace_4: Pārslēdzieties uz darbvietu 4
-    switch_workspace_5: Pārslēdzieties uz Workspace 5
-    switch_workspace_6: Pārslēdzieties uz darbvietu 6
-    switch_workspace_7: Pārslēdzieties uz darbvietu 7
-    switch_workspace_8: Pārslēdzieties uz darbvietu 8
-    switch_workspace_9: Pārslēdzieties uz darbvietu 9
-    toggle_launcher: Pārslēgt
+    send_to_workspace: Nosūtīt uz darbvietu {{0}}
+    start_weg_app: Fokusēt vai sākt lietojumprogrammu {{0}}
+    switch_to_next_workspace: Pārslēdzieties uz nākamo darbvietu
+    switch_to_previous_workspace: Pārslēdzieties uz iepriekšējo darbvietu
+    switch_workspace: Pārslēdzieties uz darbvietu {{0}}
+    toggle_float: Pārslēdziet loga pludiņa režīmu
+    toggle_launcher: Pārslēgt palaišanas ierīci
+    toggle_monocle: Pārslēdziet darbvietas monokla režīmu
   readonly_tooltip: Tas ir tikai lasāms saīsne
   reset: Atiestatīt uz noklusējuma
 sides:

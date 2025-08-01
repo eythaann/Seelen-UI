@@ -1,3 +1,5 @@
+cancel: ਰੱਦ ਕਰੋ
+done: ਕੀਤਾ
 drivers:
   got_it: ਮਿਲ ਗਿਆ
   monitor_disabled: >-
@@ -28,6 +30,10 @@ service:
   not_running: ਸੀਲਨ UI ਸੇਵਾ ਨਹੀਂ ਚੱਲ ਰਹੀ
   not_running_description: ਸੀਲੇਨ UI ਸੇਵਾ (ਸਲੂ-ਸੇਵਾ) ਐਪ ਦੇ ਸਹੀ ਢੰਗ ਨਾਲ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਿਰਭਰਤਾ/ਸਹਾਇਕ ਹੈ।
   not_running_ok: ਸੇਵਾ ਸ਼ੁਰੂ ਕਰੋ
+shortcut:
+  register:
+    placeholder: ਕੋਈ ਵੀ ਕੁੰਜੀ ਸੰਜੋਗ ਦਬਾਓ
+    title: ਨਵਾਂ ਸ਼ੌਰਟਕਟ ਰਜਿਸਟਰ ਕਰਨਾ
 tray:
   quit: ਛੱਡੋ
   restart: ਰੀਸਟਾਰਟ ਯੂਆਈ

@@ -1,3 +1,5 @@
+cancel: Манъ кардан
+done: Анҷом
 drivers:
   got_it: Гир онро
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI Service (slu-service) як вобастагӣ/ёрирасон барои дуруст кор
     кардани барнома мебошад.
   not_running_ok: Хидматро оғоз кунед
+shortcut:
+  register:
+    placeholder: Ягон комбинатсияи тугмаро пахш кунед
+    title: Сабти миёнабурҳои нав
 tray:
   quit: Баромадан
   restart: UI

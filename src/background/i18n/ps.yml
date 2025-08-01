@@ -1,3 +1,5 @@
+cancel: لغوه کول
+done: شوی
 drivers:
   got_it: ور واخیست
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     د سیلین UI خدمت (slu-service) د ایپ لپاره د سم کار کولو لپاره انحصار / مرسته
     کونکی دی.
   not_running_ok: خدمت پیل کړئ
+shortcut:
+  register:
+    placeholder: په هر کلي ترکیب فشار ورکړئ
+    title: د نوي لنډلارې ثبت کول
 tray:
   quit: پرېښودل
   restart: زه له سره بیا پیلوم

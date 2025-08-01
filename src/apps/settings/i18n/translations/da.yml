@@ -150,73 +150,52 @@ save: Gemme
 save_and_restart: Gem & genstart
 see_more: Se mere
 shortcuts:
-  enable: Aktivér integrerede genveje (AHK)
+  enable: Aktivér det indbyggede genvejssystem
   enable_tooltip: >-
-    Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core
-    API
+    Deaktiver, hvis du vil implementere dit eget genvejssystem ved hjælp af
+    Seelen UI Client
   labels:
+    create_new_workspace: Opret et nyt arbejdsområde
+    cycle_stack_next: Cyklus-stak Næste
+    cycle_stack_prev: Cyklus-stak Tidligere
+    cycle_wallpaper_next: Skift til næste baggrund
+    cycle_wallpaper_prev: Skift til forrige baggrund
     decrease_height: Reducer højden
     decrease_width: Reducer bredden
-    focus_bottom: Fokusbund
-    focus_latest: Fokus seneste
-    focus_left: Fokus tilbage
-    focus_right: Fokusere rigtigt
-    focus_top: Fokus top
-    increase_height: Øg højde
+    destroy_current_workspace: Ødelæg det nuværende arbejdsområde
+    focus_bottom: Fokus på bunden
+    focus_latest: Fokus på det seneste
+    focus_left: Fokus til venstre
+    focus_right: Fokuser rigtigt
+    focus_top: Fokus på toppen
+    increase_height: Forøg højden
     increase_width: Øg bredden
-    misc_open_settings: Åbne indstillinger
-    misc_toggle_lock_tracing: Skiftlåssporing (logfiler)
-    misc_toggle_win_event_tracing: Toggle win begivenhedssporing (logfiler)
-    move_to_workspace_0: Flyt til arbejdsområdet 0
-    move_to_workspace_1: Flyt til arbejdsområdet 1
-    move_to_workspace_2: Flyt til arbejdsområde 2
-    move_to_workspace_3: Flyt til arbejdsområde 3
-    move_to_workspace_4: Flyt til arbejdsområde 4
-    move_to_workspace_5: Flyt til arbejdsområde 5
-    move_to_workspace_6: Flyt til arbejdsområde 6
-    move_to_workspace_7: Flyt til arbejdsområde 7
-    move_to_workspace_8: Flyt til arbejdsområde 8
-    move_to_workspace_9: Flyt til arbejdsområde 9
+    misc_open_settings: Åbn indstillinger
+    misc_toggle_lock_tracing: Skift låsesporing (logfiler)
+    misc_toggle_win_event_tracing: Slå Win Event Tracing til (logfiler)
+    move_to_workspace: Flyt til arbejdsområde {{0}}
+    move_window_down: Flyt vinduet til bunden
+    move_window_left: Flyt vinduet til venstre
+    move_window_right: Flyt vinduet til højre
+    move_window_up: Flyt vinduet til toppen
+    pause_tiling: Sæt Tiling Window Manager på pause
     reserve_bottom: Reserve bund
-    reserve_float: Reserve float
+    reserve_float: Reserve Float
     reserve_left: Reserve til venstre
-    reserve_right: Reserver rigtigt
-    reserve_stack: Reserve stak
+    reserve_right: Reserver ret
+    reserve_stack: Reserve-stak
     reserve_top: Reserver top
-    restore_sizes: Gendanstørrelser
-    send_to_workspace_0: Send til arbejdsområdet 0
-    send_to_workspace_1: Send til arbejdsområde 1
-    send_to_workspace_2: Send til Workspace 2
-    send_to_workspace_3: Send til Workspace 3
-    send_to_workspace_4: Send til Workspace 4
-    send_to_workspace_5: Send til arbejdsområde 5
-    send_to_workspace_6: Send til arbejdsområde 6
-    send_to_workspace_7: Send til Workspace 7
-    send_to_workspace_8: Send til arbejdsområde 8
-    send_to_workspace_9: Send til Workspace 9
-    start_weg_app_0: Fokus eller start app på proceslinjeposition 1
-    start_weg_app_1: Fokus eller start app på proceslinjeposition 2
-    start_weg_app_2: Fokus eller start app på proceslinjeposition 3
-    start_weg_app_3: Fokus eller start app på proceslinjeposition 4
-    start_weg_app_4: Fokus eller start app på proceslinjeposition 5
-    start_weg_app_5: Fokus eller start app på proceslinjeposition 6
-    start_weg_app_6: Fokus eller start app på proceslinjeposition 7
-    start_weg_app_7: Fokus eller start app på proceslinjeposition 8
-    start_weg_app_8: Fokus eller start app på proceslinjeposition 9
-    start_weg_app_9: Fokus eller start app på proceslinjeposition 10
-    switch_workspace_0: Skift til arbejdsområde 1
-    switch_workspace_1: Skift til arbejdsområde 2
-    switch_workspace_2: Skift til arbejdsområde 2
-    switch_workspace_3: Skift til arbejdsområde 3
-    switch_workspace_4: Skift til arbejdsområde 4
-    switch_workspace_5: Skift til arbejdsområde 5
-    switch_workspace_6: Skift til arbejdsområde 6
-    switch_workspace_7: Skift til arbejdsområde 7
-    switch_workspace_8: Skift til arbejdsområde 8
-    switch_workspace_9: Skift til arbejdsområde 9
-    toggle_launcher: Skift
+    restore_sizes: Gendan størrelser
+    send_to_workspace: Send til arbejdsområde {{0}}
+    start_weg_app: Fokuser eller start programmet {{0}}
+    switch_to_next_workspace: Skift til næste arbejdsområde
+    switch_to_previous_workspace: Skift til forrige arbejdsområde
+    switch_workspace: Skift til arbejdsområde {{0}}
+    toggle_float: Skift mellem vinduets flydende tilstand
+    toggle_launcher: Toggle Launcher
+    toggle_monocle: Skift arbejdsområdets Monocle-tilstand
   readonly_tooltip: Dette er en skrivebeskyttet genvej
-  reset: Nulstil til misligholdelser
+  reset: Nulstil til standardindstillinger
 sides:
   bottom: Bund
   left: Venstre

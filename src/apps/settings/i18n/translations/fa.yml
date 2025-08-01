@@ -152,13 +152,19 @@ save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
 see_more: بیشتر ببینید
 shortcuts:
-  enable: میانبرهای یکپارچه (AHK) را فعال کنید
+  enable: سیستم میانبر داخلی را فعال کنید
   enable_tooltip: >-
-    اگر میانبرهای خود را با استفاده از API Seelen Core پیاده سازی خواهید کرد ،
-    غیرفعال کنید
+    اگر سیستم میانبر خود را با استفاده از مشتری Seelen UI پیاده سازی خواهید کرد
+    ، غیرفعال کنید
   labels:
+    create_new_workspace: فضای کاری جدید ایجاد کنید
+    cycle_stack_next: پشته چرخه بعدی
+    cycle_stack_prev: چرخه قبلی
+    cycle_wallpaper_next: تغییر به تصویر زمینه بعدی
+    cycle_wallpaper_prev: تغییر به تصویر زمینه قبلی
     decrease_height: کاهش قد
     decrease_width: کاهش عرض
+    destroy_current_workspace: فضای کاری فعلی را نابود کنید
     focus_bottom: پایین تمرکز
     focus_latest: آخرین تمرکز
     focus_left: تمرکز سمت چپ
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: تنظیمات باز
     misc_toggle_lock_tracing: Toggle Lock Tracing (سیاهههای مربوط)
     misc_toggle_win_event_tracing: Toggle Win Tracing (سیاهههای مربوط)
-    move_to_workspace_0: حرکت به فضای کاری 0
-    move_to_workspace_1: حرکت به فضای کاری 1
-    move_to_workspace_2: حرکت به فضای کاری 2
-    move_to_workspace_3: حرکت به فضای کاری 3
-    move_to_workspace_4: حرکت به فضای کاری 4
-    move_to_workspace_5: حرکت به فضای کاری 5
-    move_to_workspace_6: حرکت به فضای کاری 6
-    move_to_workspace_7: حرکت به فضای کاری 7
-    move_to_workspace_8: حرکت به فضای کاری 8
-    move_to_workspace_9: حرکت به فضای کاری 9
+    move_to_workspace: حرکت به فضای کاری {{0}}
+    move_window_down: پنجره را به پایین منتقل کنید
+    move_window_left: پنجره را به سمت چپ حرکت دهید
+    move_window_right: پنجره را به سمت راست حرکت دهید
+    move_window_up: پنجره را به بالا منتقل کنید
+    pause_tiling: مکث مدیر پنجره کاشی کاری
     reserve_bottom: قسمت پایین ذخیره
     reserve_float: شناور رزرو
     reserve_left: رزرو سمت چپ
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: پشته ذخیره
     reserve_top: بالای ذخیره
     restore_sizes: اندازه ها را بازیابی کنید
-    send_to_workspace_0: ارسال به فضای کاری 0
-    send_to_workspace_1: ارسال به فضای کاری 1
-    send_to_workspace_2: ارسال به فضای کاری 2
-    send_to_workspace_3: ارسال به فضای کاری 3
-    send_to_workspace_4: ارسال به فضای کاری 4
-    send_to_workspace_5: ارسال به فضای کاری 5
-    send_to_workspace_6: ارسال به فضای کاری 6
-    send_to_workspace_7: ارسال به فضای کاری 7
-    send_to_workspace_8: ارسال به فضای کاری 8
-    send_to_workspace_9: ارسال به فضای کاری 9
-    start_weg_app_0: تمرکز یا شروع برنامه در موقعیت نوار TaskBar 1
-    start_weg_app_1: تمرکز یا شروع برنامه در موقعیت وظیفه 2
-    start_weg_app_2: تمرکز یا شروع برنامه در موقعیت نوار TaskBar 3
-    start_weg_app_3: تمرکز یا شروع برنامه در موقعیت نوار TaskBar 4
-    start_weg_app_4: تمرکز یا راه اندازی برنامه در TaskBar Position 5
-    start_weg_app_5: تمرکز یا شروع برنامه در موقعیت وظیفه 6
-    start_weg_app_6: تمرکز یا شروع برنامه در موقعیت وظیفه 7
-    start_weg_app_7: تمرکز یا شروع برنامه در موقعیت وظیفه 8
-    start_weg_app_8: تمرکز یا شروع برنامه در موقعیت نوار TaskBar 9
-    start_weg_app_9: تمرکز یا شروع برنامه در موقعیت نوار وظیفه 10
-    switch_workspace_0: تغییر به فضای کاری 1
-    switch_workspace_1: تغییر به فضای کاری 2
-    switch_workspace_2: تغییر به فضای کاری 2
-    switch_workspace_3: تغییر به فضای کاری 3
-    switch_workspace_4: تغییر به فضای کاری 4
-    switch_workspace_5: تغییر به فضای کاری 5
-    switch_workspace_6: تغییر به فضای کاری 6
-    switch_workspace_7: تغییر به فضای کاری 7
-    switch_workspace_8: تغییر به فضای کاری 8
-    switch_workspace_9: تغییر به فضای کاری 9
-    toggle_launcher: پیچیدن
+    send_to_workspace: ارسال به فضای کاری {{0}}
+    start_weg_app: تمرکز یا شروع برنامه {{0}}
+    switch_to_next_workspace: به فضای کاری بعدی بروید
+    switch_to_previous_workspace: به فضای کاری قبلی بروید
+    switch_workspace: تغییر به فضای کاری {{0}}
+    toggle_float: حالت شناور پنجره
+    toggle_launcher: پرتاب کننده
+    toggle_monocle: حالت مونوکلر فضای کاری را تغییر دهید
   readonly_tooltip: این یک میانبر فقط خواندنی است
   reset: تنظیم مجدد به پیش فرض
 sides:

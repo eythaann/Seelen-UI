@@ -1,3 +1,5 @@
+cancel: Ματαίωση
+done: Γινώμενος
 drivers:
   got_it: Το πήρα
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Η υπηρεσία Seelen UI (slu-service) είναι μια εξάρτηση/βοήθεια για τη σωστή
     λειτουργία της εφαρμογής.
   not_running_ok: Ξεκινήστε την υπηρεσία
+shortcut:
+  register:
+    placeholder: Πατήστε οποιοδήποτε συνδυασμό πλήκτρων
+    title: Εγγραφή νέας συντόμευσης
 tray:
   quit: Σταματήστε το
   restart: Επανεκκίνηση UI

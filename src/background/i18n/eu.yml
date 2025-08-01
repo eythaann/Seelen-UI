@@ -1,3 +1,5 @@
+cancel: Indargabetu
+done: Egin
 drivers:
   got_it: Lortu dut
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI Zerbitzua (slu-zerbitzua) menpekotasun/laguntzailea da aplikazioak
     behar bezala funtziona dezan.
   not_running_ok: Hasi zerbitzua
+shortcut:
+  register:
+    placeholder: Sakatu edozein tekla konbinazio
+    title: Lasterbide berria erregistratzea
 tray:
   quit: Laga
   restart: Berrabiarazi ui

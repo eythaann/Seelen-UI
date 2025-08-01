@@ -1,3 +1,5 @@
+cancel: Chansliff
+done: Wedi gwneud
 drivers:
   got_it: GOT IT
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Mae Seelen UI Service (slu-service) yn ddibyniaeth / cynorthwyydd i'r ap
     weithio'n iawn.
   not_running_ok: Dechrau gwasanaeth
+shortcut:
+  register:
+    placeholder: Pwyswch unrhyw gyfuniad allweddol
+    title: Cofrestru llwybr byr newydd
 tray:
   quit: Gadawen
   restart: Ailgychwyn UI

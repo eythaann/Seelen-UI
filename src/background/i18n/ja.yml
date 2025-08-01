@@ -1,3 +1,5 @@
+cancel: キャンセル
+done: 終わり
 drivers:
   got_it: 了解
   monitor_disabled: 一部のモニタドライバが無効になっているようです。Seelen UIを正しく動作させるには、これらのドライバを有効にしてください。
@@ -22,6 +24,10 @@ service:
   not_running: Seelen UI サービスが実行されていません
   not_running_description: Seelen UI サービス (slu-service) は、アプリが適切に動作するための依存関係/ヘルパーです。
   not_running_ok: サービスを開始する
+shortcut:
+  register:
+    placeholder: 重要な組み合わせを押します
+    title: 新しいショートカットの登録
 tray:
   quit: SeelenUIを終了
   restart: SeelenUIを再起動

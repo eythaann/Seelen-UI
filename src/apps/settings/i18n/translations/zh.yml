@@ -141,70 +141,49 @@ save: 保存
 save_and_restart: 保存并重启应用
 see_more: 查看更多
 shortcuts:
-  enable: 启用集成快捷键 (ahk)
-  enable_tooltip: 如果您要使用 Seelen Core API 实现自定义快捷键，请禁用此项。
+  enable: 启用内置捷径系统
+  enable_tooltip: 禁用您使用SEELEN UI客户端实现自己的快捷方式系统
   labels:
+    create_new_workspace: 创建新工作区
+    cycle_stack_next: 循环堆栈接下来
+    cycle_stack_prev: 循环堆栈以前
+    cycle_wallpaper_next: 更改为下一个墙纸
+    cycle_wallpaper_prev: 更改为以前的墙纸
     decrease_height: 降低高度
-    decrease_width: 缩减宽度
+    decrease_width: 减小宽度
+    destroy_current_workspace: 破坏当前工作区
     focus_bottom: 聚焦底部
-    focus_latest: 最新聚焦
-    focus_left: 聚焦左侧
-    focus_right: 聚焦右侧
+    focus_latest: 重点最新
+    focus_left: 焦点左
+    focus_right: 重点正确
     focus_top: 聚焦顶部
-    increase_height: 增加高度
+    increase_height: 增加身高
     increase_width: 增加宽度
     misc_open_settings: 打开设置
     misc_toggle_lock_tracing: 切换锁定跟踪（日志）
-    misc_toggle_win_event_tracing: 切换 Win 事件跟踪（日志）
-    move_to_workspace_0: 移动至工作区 0
-    move_to_workspace_1: 移动至工作区 1
-    move_to_workspace_2: 移动至工作区 2
-    move_to_workspace_3: 移动至工作区 3
-    move_to_workspace_4: 移动至工作区 4
-    move_to_workspace_5: 移动至工作区 5
-    move_to_workspace_6: 移动至工作区 6
-    move_to_workspace_7: 移动至工作区 7
-    move_to_workspace_8: 移动至工作区 8
-    move_to_workspace_9: 移动至工作区 9
-    reserve_bottom: 预留底部
-    reserve_float: 浮动储备
-    reserve_left: 预留左侧
-    reserve_right: 预留右侧
-    reserve_stack: 堆栈储备
-    reserve_top: 预留顶部
-    restore_sizes: 恢复尺寸
-    send_to_workspace_0: 发送至工作区 0
-    send_to_workspace_1: 发送至工作区 1
-    send_to_workspace_2: 发送至工作区 2
-    send_to_workspace_3: 发送至工作区 3
-    send_to_workspace_4: 发送至工作区 4
-    send_to_workspace_5: 发送至工作区 5
-    send_to_workspace_6: 发送至工作区 6
-    send_to_workspace_7: 发送至工作区 7
-    send_to_workspace_8: 发送至工作区 8
-    send_to_workspace_9: 发送至工作区 9
-    start_weg_app_0: 聚焦或启动应用程序位置1
-    start_weg_app_1: 将重点或启动应用程序启动在任务栏位置2
-    start_weg_app_2: 聚焦或启动应用程序在任务栏位置3
-    start_weg_app_3: 重点或启动应用程序在任务栏位置4
-    start_weg_app_4: 重点或启动应用在任务栏位置5
-    start_weg_app_5: 将重点或启动应用程序启动在任务栏位置6
-    start_weg_app_6: 重点或启动应用在任务栏位置7
-    start_weg_app_7: 将重点或启动应用程序启动在任务栏位置8
-    start_weg_app_8: 聚焦或启动应用程序位置9
-    start_weg_app_9: 将重点或启动应用程序启动在任务栏位置10
-    switch_workspace_0: 切换至工作区 0
-    switch_workspace_1: 切换至工作区 1
-    switch_workspace_2: 切换至工作区 2
-    switch_workspace_3: 切换至工作区 3
-    switch_workspace_4: 切换至工作区 4
-    switch_workspace_5: 切换至工作区 5
-    switch_workspace_6: 切换至工作区 6
-    switch_workspace_7: 切换至工作区 7
-    switch_workspace_8: 切换至工作区 8
-    switch_workspace_9: 切换至工作区 9
-    toggle_launcher: 切换
-  readonly_tooltip: 这是一个只读的快捷键
+    misc_toggle_win_event_tracing: 切换Win事件跟踪（日志）
+    move_to_workspace: 移至工作区{{0}}
+    move_window_down: 将窗口移至底部
+    move_window_left: 向左移动窗口
+    move_window_right: 向右移动窗口
+    move_window_up: 将窗口移至顶部
+    pause_tiling: 暂停瓷砖窗口管理器
+    reserve_bottom: 储备底部
+    reserve_float: 储备浮子
+    reserve_left: 保留剩下
+    reserve_right: 保留权
+    reserve_stack: 储备堆
+    reserve_top: 储备顶
+    restore_sizes: 还原尺寸
+    send_to_workspace: 发送到工作区{{0}}
+    start_weg_app: 聚焦或启动应用程序{{0}}
+    switch_to_next_workspace: 切换到下一个工作区
+    switch_to_previous_workspace: 切换到以前的工作区
+    switch_workspace: 切换到工作区{{0}}
+    toggle_float: 切换窗口浮点模式
+    toggle_launcher: 切换发射器
+    toggle_monocle: 切换工作区单片模式
+  readonly_tooltip: 这是只读的捷径
   reset: 重置为默认值
 sides:
   bottom: 底部

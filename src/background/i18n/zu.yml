@@ -1,3 +1,5 @@
+cancel: Hlikihla
+done: Usulile
 drivers:
   got_it: Ngiyitholile
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Isevisi ye-Seelen UI (slu-service) incike/umsizi ukuze uhlelo lokusebenza
     lusebenze kahle.
   not_running_ok: Qala isevisi
+shortcut:
+  register:
+    placeholder: Cindezela noma iyiphi inhlanganisela yokhiye
+    title: Ukubhalisa isinqamuleli esisha
 tray:
   quit: Yeka
   restart: Qala kabusha ui

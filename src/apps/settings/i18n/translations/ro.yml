@@ -154,13 +154,19 @@ save: Salvați
 save_and_restart: Salvați și reporniți
 see_more: A se vedea mai mult
 shortcuts:
-  enable: Activați comenzi rapide integrate (AHK)
+  enable: Activați sistemul de comenzi rapide încorporate
   enable_tooltip: >-
-    Dezactivați dacă veți implementa propriile comenzi rapide folosind API -ul
-    Seelen Core
+    Dezactivați dacă veți implementa propriul sistem de comenzi rapide folosind
+    clientul UI Seelen
   labels:
+    create_new_workspace: Creați un spațiu de lucru nou
+    cycle_stack_next: Ciclism Stack în continuare
+    cycle_stack_prev: Stack cycle anterior
+    cycle_wallpaper_next: Schimbați la următorul tapet
+    cycle_wallpaper_prev: Schimbați la tapetul anterior
     decrease_height: Scăderea înălțimii
     decrease_width: Scăderea lățimii
+    destroy_current_workspace: Distrugeți spațiul de lucru actual
     focus_bottom: Focus Fund
     focus_latest: Concentrați -vă cel mai recent
     focus_left: Concentrați -vă la stânga
@@ -171,16 +177,12 @@ shortcuts:
     misc_open_settings: Setări deschise
     misc_toggle_lock_tracing: Comutarea blocării de blocare (jurnalele)
     misc_toggle_win_event_tracing: Toggle Win Win Tracing (Jurnals)
-    move_to_workspace_0: Treceți la spațiul de lucru 0
-    move_to_workspace_1: Treceți la spațiul de lucru 1
-    move_to_workspace_2: Treceți la spațiul de lucru 2
-    move_to_workspace_3: Treceți la spațiul de lucru 3
-    move_to_workspace_4: Treceți la spațiul de lucru 4
-    move_to_workspace_5: Treceți la spațiul de lucru 5
-    move_to_workspace_6: Treceți la spațiul de lucru 6
-    move_to_workspace_7: Mutați -vă la spațiul de lucru 7
-    move_to_workspace_8: Mutați -vă la spațiul de lucru 8
-    move_to_workspace_9: Treceți la spațiul de lucru 9
+    move_to_workspace: Treceți la Workspace {{0}}
+    move_window_down: Mutați fereastra în jos
+    move_window_left: Mutați fereastra în stânga
+    move_window_right: Mutați fereastra spre dreapta
+    move_window_up: Mutați fereastra în partea de sus
+    pause_tiling: Pauză manager de ferestre de gresie
     reserve_bottom: Rezervați fundul
     reserve_float: Rezervați plutitorul
     reserve_left: Rezerva stânga
@@ -188,37 +190,14 @@ shortcuts:
     reserve_stack: Rezerva stivă
     reserve_top: Rezervați vârful
     restore_sizes: Restaurați dimensiunile
-    send_to_workspace_0: Trimiteți la spațiul de lucru 0
-    send_to_workspace_1: Trimiteți la spațiul de lucru 1
-    send_to_workspace_2: Trimiteți la Workspace 2
-    send_to_workspace_3: Trimiteți la Workspace 3
-    send_to_workspace_4: Trimiteți la Workspace 4
-    send_to_workspace_5: Trimiteți la spațiul de lucru 5
-    send_to_workspace_6: Trimiteți la spațiul de lucru 6
-    send_to_workspace_7: Trimiteți la Workspace 7
-    send_to_workspace_8: Trimiteți la spațiul de lucru 8
-    send_to_workspace_9: Trimiteți la spațiul de lucru 9
-    start_weg_app_0: Concentrați -vă sau porniți aplicația pe poziția 1 a barei de activități
-    start_weg_app_1: Concentrați -vă sau porniți aplicația pe poziția 2 a barei de activități
-    start_weg_app_2: Concentrați -vă sau porniți aplicația pe poziția 3 a barei de activități
-    start_weg_app_3: Concentrați -vă sau porniți aplicația pe poziția barei de activități 4
-    start_weg_app_4: Concentrați -vă sau porniți aplicația pe poziția 5 a barei de activități
-    start_weg_app_5: Concentrați -vă sau porniți aplicația pe poziția barei de activități 6
-    start_weg_app_6: Concentrați -vă sau porniți aplicația pe poziția barei de lucru 7
-    start_weg_app_7: Concentrați -vă sau porniți aplicația pe poziția barei de activități 8
-    start_weg_app_8: Concentrați -vă sau porniți aplicația pe poziția 9 a barei de activități
-    start_weg_app_9: Concentrați -vă sau porniți aplicația pe poziția 10 a barei de activități
-    switch_workspace_0: Treceți la spațiul de lucru 1
-    switch_workspace_1: Treceți la spațiul de lucru 2
-    switch_workspace_2: Treceți la spațiul de lucru 2
-    switch_workspace_3: Treceți la spațiul de lucru 3
-    switch_workspace_4: Treceți la spațiul de lucru 4
-    switch_workspace_5: Treceți la spațiul de lucru 5
-    switch_workspace_6: Treceți la spațiul de lucru 6
-    switch_workspace_7: Treceți la spațiul de lucru 7
-    switch_workspace_8: Treceți la spațiul de lucru 8
-    switch_workspace_9: Treceți la spațiul de lucru 9
-    toggle_launcher: Comutați
+    send_to_workspace: Trimiteți la Workspace {{0}}
+    start_weg_app: Focus sau Start Application {{0}}
+    switch_to_next_workspace: Treceți la următorul spațiu de lucru
+    switch_to_previous_workspace: Treceți la spațiul de lucru anterior
+    switch_workspace: Treceți la Workspace {{0}}
+    toggle_float: Comutați modul de plutire a ferestrei
+    toggle_launcher: Toggle Launcher
+    toggle_monocle: Comutați modul monocle al spațiului de lucru
   readonly_tooltip: Aceasta este o scurtătură numai pentru citire
   reset: Resetați la valorile implicite
 sides:

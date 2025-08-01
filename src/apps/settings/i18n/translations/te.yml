@@ -150,71 +150,50 @@ save: సేవ్ చేయండి
 save_and_restart: సేవ్ & పున art ప్రారంభించండి
 see_more: మరిన్ని చూడండి
 shortcuts:
-  enable: ఇంటిగ్రేటెడ్ షార్ట్‌కట్‌లను ప్రారంభించండి (ahk)
+  enable: అంతర్నిర్మిత సత్వరమార్గాల వ్యవస్థను ప్రారంభించండి
   enable_tooltip: >-
-    మీరు సీలెన్ కోర్ Apiని ఉపయోగించి మీ స్వంత సత్వరమార్గాలను అమలు చేస్తే
-    నిలిపివేయండి
+    మీరు సీలెన్ UI క్లయింట్ ఉపయోగించి మీ స్వంత సత్వరమార్గాల వ్యవస్థను అమలు
+    చేస్తే నిలిపివేయండి
   labels:
-    decrease_height: ఎత్తు తగ్గించండి
-    decrease_width: వెడల్పును తగ్గించండి
-    focus_bottom: ఫోకస్ బాటమ్
-    focus_latest: తాజాగా ఫోకస్ చేయండి
-    focus_left: ఎడమవైపు దృష్టి పెట్టండి
-    focus_right: ఫోకస్ రైట్
+    create_new_workspace: క్రొత్త వర్క్‌స్పేస్‌ను సృష్టించండి
+    cycle_stack_next: తరువాత సైకిల్ స్టాక్
+    cycle_stack_prev: సైకిల్ స్టాక్ మునుపటి
+    cycle_wallpaper_next: తదుపరి వాల్‌పేపర్‌కు మార్చండి
+    cycle_wallpaper_prev: మునుపటి వాల్‌పేపర్‌కు మార్చండి
+    decrease_height: ఎత్తు తగ్గుతుంది
+    decrease_width: వెడల్పు తగ్గుతుంది
+    destroy_current_workspace: ప్రస్తుత వర్క్‌స్పేస్‌ను నాశనం చేయండి
+    focus_bottom: దిగువ ఫోకస్
+    focus_latest: తాజా ఫోకస్
+    focus_left: ఫోకస్ ఎడమ
+    focus_right: సరిగ్గా దృష్టి పెట్టండి
     focus_top: ఫోకస్ టాప్
-    increase_height: ఎత్తు పెంచండి
-    increase_width: వెడల్పు పెంచండి
+    increase_height: ఎత్తును పెంచండి
+    increase_width: వెడల్పును పెంచండి
     misc_open_settings: సెట్టింగులు తెరవండి
     misc_toggle_lock_tracing: లాక్ ట్రేసింగ్ (లాగ్‌లు) టోగుల్ చేయండి
     misc_toggle_win_event_tracing: విన్ ఈవెంట్ ట్రేసింగ్ (లాగ్స్) ను టోగుల్ చేయండి
-    move_to_workspace_0: కార్యస్థలం 0కి తరలించండి
-    move_to_workspace_1: కార్యస్థలానికి తరలించు 1
-    move_to_workspace_2: కార్యస్థలానికి తరలించు 2
-    move_to_workspace_3: కార్యస్థలానికి తరలించు 3
-    move_to_workspace_4: కార్యస్థలానికి తరలించు 4
-    move_to_workspace_5: కార్యస్థలానికి తరలించు 5
-    move_to_workspace_6: కార్యస్థలానికి తరలించు 6
-    move_to_workspace_7: కార్యస్థలానికి తరలించు 7
-    move_to_workspace_8: కార్యస్థలానికి తరలించు 8
-    move_to_workspace_9: కార్యస్థలానికి తరలించు 9
-    reserve_bottom: రిజర్వ్ బాటమ్
+    move_to_workspace: వర్క్‌స్పేస్‌కు తరలించండి {{0}}
+    move_window_down: విండోను దిగువకు తరలించండి
+    move_window_left: విండోను ఎడమ వైపుకు తరలించండి
+    move_window_right: విండోను కుడి వైపుకు తరలించండి
+    move_window_up: విండోను పైకి తరలించండి
+    pause_tiling: టైలింగ్ విండో మేనేజర్ పాజ్
+    reserve_bottom: దిగువ రిజర్వ్
     reserve_float: రిజర్వ్ ఫ్లోట్
     reserve_left: రిజర్వ్ ఎడమ
-    reserve_right: రిజర్వ్ హక్కు
+    reserve_right: కుడి రిజర్వ్
     reserve_stack: రిజర్వ్ స్టాక్
     reserve_top: రిజర్వ్ టాప్
     restore_sizes: పరిమాణాలను పునరుద్ధరించండి
-    send_to_workspace_0: కార్యస్థలం 0కి పంపండి
-    send_to_workspace_1: కార్యస్థలానికి పంపండి 1
-    send_to_workspace_2: కార్యస్థలానికి పంపండి 2
-    send_to_workspace_3: కార్యస్థలానికి పంపండి 3
-    send_to_workspace_4: కార్యస్థలానికి పంపండి 4
-    send_to_workspace_5: కార్యస్థలానికి పంపండి 5
-    send_to_workspace_6: కార్యస్థలానికి పంపండి 6
-    send_to_workspace_7: కార్యస్థలానికి పంపండి 7
-    send_to_workspace_8: కార్యస్థలానికి పంపండి 8
-    send_to_workspace_9: కార్యస్థలానికి పంపండి 9
-    start_weg_app_0: టాస్క్‌బార్ స్థానం 1 లో అనువర్తనాన్ని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_1: టాస్క్‌బార్ స్థానం 2 లో అనువర్తనాన్ని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_2: టాస్క్‌బార్ స్థానం 3 లో దృష్టిని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_3: టాస్క్‌బార్ స్థానం 4 లో దృష్టిని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_4: టాస్క్‌బార్ స్థానం 5 లో దృష్టిని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_5: టాస్క్‌బార్ స్థానం 6 లో దృష్టిని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_6: టాస్క్‌బార్ స్థానం 7 లో అనువర్తనాన్ని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_7: టాస్క్‌బార్ స్థానం 8 లో అనువర్తనాన్ని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_8: టాస్క్‌బార్ స్థానం 9 లో అనువర్తనాన్ని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    start_weg_app_9: టాస్క్‌బార్ స్థానం 10 లో దృష్టిని కేంద్రీకరించండి లేదా ప్రారంభించండి
-    switch_workspace_0: వర్క్‌స్పేస్ 1 కి మారండి
-    switch_workspace_1: వర్క్‌స్పేస్ 2 కి మారండి
-    switch_workspace_2: కార్యస్థలానికి మారండి 2
-    switch_workspace_3: కార్యస్థలానికి మారండి 3
-    switch_workspace_4: కార్యస్థలానికి మారండి 4
-    switch_workspace_5: కార్యస్థలానికి మారండి 5
-    switch_workspace_6: కార్యస్థలానికి మారండి 6
-    switch_workspace_7: కార్యస్థలానికి మారండి 7
-    switch_workspace_8: కార్యస్థలానికి మారండి 8
-    switch_workspace_9: కార్యస్థలానికి మారండి 9
-    toggle_launcher: టోగుల్
+    send_to_workspace: వర్క్‌స్పేస్‌కు పంపండి {{0}}
+    start_weg_app: ఫోకస్ చేయండి లేదా అప్లికేషన్ ప్రారంభించండి {{0}}
+    switch_to_next_workspace: తదుపరి వర్క్‌స్పేస్‌కు మారండి
+    switch_to_previous_workspace: మునుపటి వర్క్‌స్పేస్‌కు మారండి
+    switch_workspace: వర్క్‌స్పేస్‌కు మారండి {{0}}
+    toggle_float: విండో ఫ్లోట్ మోడ్‌ను టోగుల్ చేయండి
+    toggle_launcher: టోగుల్ లాంచర్
+    toggle_monocle: వర్క్‌స్పేస్ మోనోకిల్ మోడ్‌ను టోగుల్ చేయండి
   readonly_tooltip: ఇది చదవడానికి మాత్రమే సత్వరమార్గం
   reset: డిఫాల్ట్‌లకు రీసెట్ చేయండి
 sides:

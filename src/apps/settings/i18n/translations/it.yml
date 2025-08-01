@@ -152,71 +152,52 @@ save: Salva
 save_and_restart: Salva e Riavvia
 see_more: Per saperne di più
 shortcuts:
-  enable: Abilita Scorciatoie Integrate (ahk)
-  enable_tooltip: Disabilita se implementerete le vostre scorciatoie usando l'API Seelen Core
+  enable: Abilita le scorciatoie integrate
+  enable_tooltip: >-
+    Disabilita se implementerai il tuo sistema di scorciatoie utilizzando il
+    client UI Seelen
   labels:
-    decrease_height: Diminuisci Altezza
-    decrease_width: Diminuisci Larghezza
-    focus_bottom: Focus Basso
-    focus_latest: Focus Ultimo
-    focus_left: Focus Sinistra
-    focus_right: Focus Destra
-    focus_top: Focus Alto
-    increase_height: Aumenta Altezza
-    increase_width: Aumenta Larghezza
-    misc_open_settings: Apri Impostazioni
-    misc_toggle_lock_tracing: Attiva/Disattiva Tracciamento Blocco (log)
-    misc_toggle_win_event_tracing: Attiva/Disattiva Tracciamento Eventi Windows (log)
-    move_to_workspace_0: Sposta al Workspace 1
-    move_to_workspace_1: Sposta al Workspace 2
-    move_to_workspace_2: Sposta al Workspace 3
-    move_to_workspace_3: Sposta al Workspace 4
-    move_to_workspace_4: Sposta al Workspace 5
-    move_to_workspace_5: Sposta al Workspace 6
-    move_to_workspace_6: Sposta al Workspace 7
-    move_to_workspace_7: Sposta al Workspace 8
-    move_to_workspace_8: Sposta al Workspace 9
-    move_to_workspace_9: Sposta al Workspace 10
-    reserve_bottom: Riserva Basso
-    reserve_float: Riserva Fluttuante
-    reserve_left: Riserva Sinistra
-    reserve_right: Riserva Destra
-    reserve_stack: Riserva Impilata
-    reserve_top: Riserva Alto
-    restore_sizes: Ripristina Dimensioni
-    send_to_workspace_0: Invia al Workspace 1
-    send_to_workspace_1: Invia al Workspace 2
-    send_to_workspace_2: Invia al Workspace 3
-    send_to_workspace_3: Invia al Workspace 4
-    send_to_workspace_4: Invia al Workspace 5
-    send_to_workspace_5: Invia al Workspace 6
-    send_to_workspace_6: Invia al Workspace 7
-    send_to_workspace_7: Invia al Workspace 8
-    send_to_workspace_8: Invia al Workspace 9
-    send_to_workspace_9: Invia al Workspace 10
-    start_weg_app_0: Focus o Avvia l'app sulla posizione della barra delle applicazioni 1
-    start_weg_app_1: Focus o Avvia l'app sulla posizione della barra delle applicazioni 2
-    start_weg_app_2: Focus o Avvia l'app sulla posizione della barra delle applicazioni 3
-    start_weg_app_3: Focus o Avvia l'app sulla posizione della barra delle applicazioni 4
-    start_weg_app_4: Focus o Avvia l'app sulla posizione della barra delle applicazioni 5
-    start_weg_app_5: Focus o Avvia l'app sulla posizione della barra delle applicazioni 6
-    start_weg_app_6: Focus o Avvia l'app sulla posizione della barra delle applicazioni 7
-    start_weg_app_7: Focus o Avvia l'app sulla posizione della barra delle applicazioni 8
-    start_weg_app_8: Focus o Avvia l'app sulla posizione della barra delle applicazioni 9
-    start_weg_app_9: Focus o Avvia l'app sulla posizione della barra delle applicazioni 10
-    switch_workspace_0: Passa al Workspace 1
-    switch_workspace_1: Passa al Workspace 2
-    switch_workspace_2: Passa al Workspace 3
-    switch_workspace_3: Passa al Workspace 4
-    switch_workspace_4: Passa al Workspace 5
-    switch_workspace_5: Passa al Workspace 6
-    switch_workspace_6: Passa al Workspace 7
-    switch_workspace_7: Passa al Workspace 8
-    switch_workspace_8: Passa al Workspace 9
-    switch_workspace_9: Passa al Workspace 10
-    toggle_launcher: Attiva/Disattiva
-  readonly_tooltip: Questa è una scorciatoia di sola lettura
-  reset: Ripristina ai Predefiniti
+    create_new_workspace: Crea nuovo spazio di lavoro
+    cycle_stack_next: Cycle Stack Next
+    cycle_stack_prev: Cycle Stack precedente
+    cycle_wallpaper_next: Cambia allo sfondo successivo
+    cycle_wallpaper_prev: Passa allo sfondo precedente
+    decrease_height: Diminuire l'altezza
+    decrease_width: Diminuire la larghezza
+    destroy_current_workspace: Distruggi l'attuale spazio di lavoro
+    focus_bottom: Focus Bottom
+    focus_latest: Focus Ultime
+    focus_left: Focus a sinistra
+    focus_right: Concentrati bene
+    focus_top: Focus top
+    increase_height: Aumenta l'altezza
+    increase_width: Aumentare la larghezza
+    misc_open_settings: Impostazioni aperte
+    misc_toggle_lock_tracing: Attiva il tracciamento del blocco (tronchi)
+    misc_toggle_win_event_tracing: Taggle Win Event Tracing (Logs)
+    move_to_workspace: Passa su Workspace {{0}}
+    move_window_down: Sposta la finestra sul fondo
+    move_window_left: Sposta la finestra a sinistra
+    move_window_right: Sposta la finestra a destra
+    move_window_up: Sposta la finestra in alto
+    pause_tiling: Pausa pausa manager delle finestre
+    reserve_bottom: Riserva Bottom
+    reserve_float: Float di riserva
+    reserve_left: Riserva a sinistra
+    reserve_right: Riserva a destra
+    reserve_stack: Stack di riserva
+    reserve_top: Riserva Top
+    restore_sizes: Ripristinare le dimensioni
+    send_to_workspace: Invia a Workspace {{0}}
+    start_weg_app: Focus o Start Application {{0}}
+    switch_to_next_workspace: Passa all'area di lavoro successiva
+    switch_to_previous_workspace: Passa all'area di lavoro precedente
+    switch_workspace: Passa a Workspace {{0}}
+    toggle_float: Attiva la modalità galleggiante della finestra
+    toggle_launcher: Attiva il lanciarazzi
+    toggle_monocle: Attivare la modalità monoclo dell'area di lavoro
+  readonly_tooltip: Questo è un collegamento di sola lettura
+  reset: Ripristina le impostazioni predefinite
 sides:
   bottom: Basso
   left: Sinistra

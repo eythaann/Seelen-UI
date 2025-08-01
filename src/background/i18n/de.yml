@@ -1,3 +1,5 @@
+cancel: Stornieren
+done: Erledigt
 drivers:
   got_it: Verstanden
   monitor_disabled: >-
@@ -34,6 +36,10 @@ service:
     Der Seelen UI Service (slu-service) ist eine Abhängigkeit/Helfer für die
     ordnungsgemäße Funktion der App.
   not_running_ok: Dienst starten
+shortcut:
+  register:
+    placeholder: Drücken Sie eine beliebige Tastenkombination
+    title: Registrierung einer neuen Verknüpfung
 tray:
   quit: Beenden Sie
   restart: UI neu starten

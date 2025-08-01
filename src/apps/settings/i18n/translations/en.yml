@@ -149,11 +149,19 @@ save: Save
 save_and_restart: Save & Restart
 see_more: See More
 shortcuts:
-  enable: Enable Integrated Shortcuts (ahk)
-  enable_tooltip: Disable if you will implement your own shortcuts using the Seelen Core Api
+  enable: Enable built-in shortcuts system
+  enable_tooltip: >-
+    Disable if you will implement your own shortcuts system using the Seelen UI
+    Client
   labels:
+    create_new_workspace: Create new Workspace
+    cycle_stack_next: Cycle Stack Next
+    cycle_stack_prev: Cycle Stack Previous
+    cycle_wallpaper_next: Change to Next Wallpaper
+    cycle_wallpaper_prev: Change to Previous Wallpaper
     decrease_height: Decrease Height
     decrease_width: Decrease Width
+    destroy_current_workspace: Destroy Current Workspace
     focus_bottom: Focus Bottom
     focus_latest: Focus Latest
     focus_left: Focus Left
@@ -164,16 +172,12 @@ shortcuts:
     misc_open_settings: Open Settings
     misc_toggle_lock_tracing: Toggle Lock Tracing (logs)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (logs)
-    move_to_workspace_0: Move to Workspace 1
-    move_to_workspace_1: Move to Workspace 2
-    move_to_workspace_2: Move to Workspace 3
-    move_to_workspace_3: Move to Workspace 4
-    move_to_workspace_4: Move to Workspace 5
-    move_to_workspace_5: Move to Workspace 6
-    move_to_workspace_6: Move to Workspace 7
-    move_to_workspace_7: Move to Workspace 8
-    move_to_workspace_8: Move to Workspace 9
-    move_to_workspace_9: Move to Workspace 10
+    move_to_workspace: Move to Workspace {{0}}
+    move_window_down: Move Window to Bottom
+    move_window_left: Move Window to Left
+    move_window_right: Move Window to Right
+    move_window_up: Move Window to Top
+    pause_tiling: Pause Tiling Window Manager
     reserve_bottom: Reserve Bottom
     reserve_float: Reserve Float
     reserve_left: Reserve Left
@@ -181,37 +185,14 @@ shortcuts:
     reserve_stack: Reserve Stack
     reserve_top: Reserve Top
     restore_sizes: Restore Sizes
-    send_to_workspace_0: Send to Workspace 1
-    send_to_workspace_1: Send to Workspace 2
-    send_to_workspace_2: Send to Workspace 3
-    send_to_workspace_3: Send to Workspace 4
-    send_to_workspace_4: Send to Workspace 5
-    send_to_workspace_5: Send to Workspace 6
-    send_to_workspace_6: Send to Workspace 7
-    send_to_workspace_7: Send to Workspace 8
-    send_to_workspace_8: Send to Workspace 9
-    send_to_workspace_9: Send to Workspace 10
-    start_weg_app_0: Focus or start app on taskbar position 1
-    start_weg_app_1: Focus or start app on taskbar position 2
-    start_weg_app_2: Focus or start app on taskbar position 3
-    start_weg_app_3: Focus or start app on taskbar position 4
-    start_weg_app_4: Focus or start app on taskbar position 5
-    start_weg_app_5: Focus or start app on taskbar position 6
-    start_weg_app_6: Focus or start app on taskbar position 7
-    start_weg_app_7: Focus or start app on taskbar position 8
-    start_weg_app_8: Focus or start app on taskbar position 9
-    start_weg_app_9: Focus or start app on taskbar position 10
-    switch_workspace_0: Switch to Workspace 1
-    switch_workspace_1: Switch to Workspace 2
-    switch_workspace_2: Switch to Workspace 3
-    switch_workspace_3: Switch to Workspace 4
-    switch_workspace_4: Switch to Workspace 5
-    switch_workspace_5: Switch to Workspace 6
-    switch_workspace_6: Switch to Workspace 7
-    switch_workspace_7: Switch to Workspace 8
-    switch_workspace_8: Switch to Workspace 9
-    switch_workspace_9: Switch to Workspace 10
-    toggle_launcher: Toggle
+    send_to_workspace: Send to Workspace {{0}}
+    start_weg_app: Focus or Start Application {{0}}
+    switch_to_next_workspace: Switch to Next Workspace
+    switch_to_previous_workspace: Switch to Previous Workspace
+    switch_workspace: Switch to Workspace {{0}}
+    toggle_float: Toggle Window Float Mode
+    toggle_launcher: Toggle Launcher
+    toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: This is a read-only shortcut
   reset: Reset to Defaults
 sides:

@@ -150,69 +150,49 @@ save: រក្សាទុក
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
 see_more: មើលច្រើនទៀត
 shortcuts:
-  enable: បើកផ្លូវកាត់រួមបញ្ចូលគ្នា (ahk)
-  enable_tooltip: បិទប្រសិនបើអ្នកនឹងអនុវត្តផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើ Seelen Core Api
+  enable: បើកដំណើរការប្រព័ន្ធផ្លូវកាត់ដែលភ្ជាប់មកជាមួយ
+  enable_tooltip: >-
+    បិទប្រសិនបើអ្នកនឹងអនុវត្តប្រព័ន្ធផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើម៉ាស៊ីនភ្ញៀវយូណេយូយូ
   labels:
+    create_new_workspace: បង្កើតកន្លែងធ្វើការថ្មី
+    cycle_stack_next: វដ្តជង់បន្ទាប់បន្ទាប់
+    cycle_stack_prev: ជង់មុនវដ្តមុន
+    cycle_wallpaper_next: ប្តូរទៅផ្ទាំងរូបភាពបន្ទាប់
+    cycle_wallpaper_prev: ប្តូរទៅផ្ទាំងរូបភាពមុន
     decrease_height: បន្ថយកម្ពស់
-    decrease_width: បន្ថយទទឹង
-    focus_bottom: ផ្ដោតបាត
+    decrease_width: ថយចុះទទឹង
+    destroy_current_workspace: បំផ្លាញកន្លែងធ្វើការបច្ចុប្បន្ន
+    focus_bottom: ផ្តោតលើផ្នែកខាងក្រោម
     focus_latest: ផ្តោតចុងក្រោយ
-    focus_left: ផ្តោតទៅឆ្វេង
-    focus_right: ផ្តោតលើស្តាំ
-    focus_top: ផ្តោតកំពូល
+    focus_left: ផ្តោតអារម្មណ៍ខាងឆ្វេង
+    focus_right: ផ្តោតសិទ្ធិត្រឹមត្រូវ
+    focus_top: ផ្តោតលើកំពូល
     increase_height: បង្កើនកម្ពស់
     increase_width: បង្កើនទទឹង
     misc_open_settings: បើកការកំណត់
     misc_toggle_lock_tracing: បិទបើកការចាក់សោរ (កំណត់ហេតុ)
     misc_toggle_win_event_tracing: បិទ / បើកព្រឹត្តិការណ៍ឈ្នះ (កំណត់ហេតុ)
-    move_to_workspace_0: ផ្លាស់ទីទៅកន្លែងធ្វើការ 0
-    move_to_workspace_1: ផ្លាស់ទីទៅកន្លែងធ្វើការ 1
-    move_to_workspace_2: ផ្លាស់ទីទៅកន្លែងធ្វើការ 2
-    move_to_workspace_3: ផ្លាស់ទីទៅកន្លែងធ្វើការ 3
-    move_to_workspace_4: ផ្លាស់ទីទៅកន្លែងធ្វើការ 4
-    move_to_workspace_5: ផ្លាស់ទីទៅកន្លែងធ្វើការ 5
-    move_to_workspace_6: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៦
-    move_to_workspace_7: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៧
-    move_to_workspace_8: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៨
-    move_to_workspace_9: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៩
+    move_to_workspace: ផ្លាស់ទីទៅកន្លែងធ្វើការ {{0}}
+    move_window_down: ផ្លាស់ទីបង្អួចទៅបាត
+    move_window_left: ផ្លាស់ទីបង្អួចទៅឆ្វេង
+    move_window_right: ផ្លាស់ទីបង្អួចទៅស្តាំ
+    move_window_up: ផ្លាស់ទីបង្អួចទៅខាងលើ
+    pause_tiling: ផ្អាកកម្មវិធីគ្រប់គ្រងបង្អួច
     reserve_bottom: បាតបម្រុង
-    reserve_float: បម្រុងអណ្តែត
-    reserve_left: កក់ទុកខាងឆ្វេង
+    reserve_float: អណ្តែតអណ្តែត
+    reserve_left: បំរុងទុកខាងឆ្វេង
     reserve_right: រក្សាសិទ្ធិ
-    reserve_stack: ស្តុកទុក
-    reserve_top: បម្រុងទុកកំពូល
-    restore_sizes: ស្ដារទំហំ
-    send_to_workspace_0: ផ្ញើទៅកន្លែងធ្វើការ 0
-    send_to_workspace_1: ផ្ញើទៅកាន់កន្លែងធ្វើការ 1
-    send_to_workspace_2: ផ្ញើទៅកន្លែងធ្វើការ ២
-    send_to_workspace_3: ផ្ញើទៅកន្លែងធ្វើការ ៣
-    send_to_workspace_4: ផ្ញើទៅកន្លែងធ្វើការ ៤
-    send_to_workspace_5: ផ្ញើទៅកន្លែងធ្វើការ ៥
-    send_to_workspace_6: ផ្ញើទៅកន្លែងធ្វើការ ៦
-    send_to_workspace_7: ផ្ញើទៅកន្លែងធ្វើការ ៧
-    send_to_workspace_8: ផ្ញើទៅកន្លែងធ្វើការ ៨
-    send_to_workspace_9: ផ្ញើទៅកន្លែងធ្វើការ ៩
-    start_weg_app_0: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 1
-    start_weg_app_1: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 2
-    start_weg_app_2: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 3
-    start_weg_app_3: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 4
-    start_weg_app_4: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 5
-    start_weg_app_5: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 6
-    start_weg_app_6: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 7
-    start_weg_app_7: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 8
-    start_weg_app_8: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 9
-    start_weg_app_9: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 10
-    switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 1
-    switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 2
-    switch_workspace_2: ប្តូរទៅកន្លែងធ្វើការ 2
-    switch_workspace_3: ប្តូរទៅកន្លែងធ្វើការ 3
-    switch_workspace_4: ប្តូរទៅកន្លែងធ្វើការ 4
-    switch_workspace_5: ប្តូរទៅកន្លែងធ្វើការ 5
-    switch_workspace_6: ប្តូរទៅកន្លែងធ្វើការ 6
-    switch_workspace_7: ប្តូរទៅកន្លែងធ្វើការ 7
-    switch_workspace_8: ប្តូរទៅកន្លែងធ្វើការ 8
-    switch_workspace_9: ប្តូរទៅកន្លែងធ្វើការ 9
-    toggle_launcher: តន្លេ
+    reserve_stack: ជង់បម្រុង
+    reserve_top: បម្រុងខាងលើ
+    restore_sizes: ស្តារទំហំ
+    send_to_workspace: ផ្ញើទៅកន្លែងធ្វើការ {{0}}
+    start_weg_app: ផ្តោតអារម្មណ៍ឬចាប់ផ្តើមកម្មវិធី {{0}}
+    switch_to_next_workspace: ប្តូរទៅកន្លែងធ្វើការបន្ទាប់
+    switch_to_previous_workspace: ប្តូរទៅកន្លែងធ្វើការមុន
+    switch_workspace: ប្តូរទៅកន្លែងធ្វើការ {{0}}
+    toggle_float: បិទបើករបៀបអណ្តែតបង្អួច
+    toggle_launcher: បិទបើកដំណើរការ
+    toggle_monocle: បិទបើករបៀបម៉ូនីកឃែរ
   readonly_tooltip: នេះគឺជាផ្លូវកាត់ដែលបានតែអាន
   reset: កំណត់ឡើងវិញនូវលំនាំដើម
 sides:

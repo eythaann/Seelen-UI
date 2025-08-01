@@ -152,13 +152,19 @@ save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 see_more: Katso lisää
 shortcuts:
-  enable: Ota integroidut pikakuvakkeet käyttöön (AHK)
+  enable: Ota sisäänrakennettu pikakuvausjärjestelmä
   enable_tooltip: >-
-    Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
-    -sovellusliittymällä
+    Poista käytöstä, jos otat käyttöön omat pikakuvausjärjestelmäsi Seelen UI
+    -asiakkaan avulla
   labels:
+    create_new_workspace: Luo uusi työtila
+    cycle_stack_next: Sykli pino seuraavaksi
+    cycle_stack_prev: Pyöräpino edellinen
+    cycle_wallpaper_next: Vaihda seuraavaan taustakuvaksi
+    cycle_wallpaper_prev: Vaihda edelliseen taustakuvaan
     decrease_height: Pienenee
     decrease_width: Vähentynyt leveys
+    destroy_current_workspace: Tuhoa nykyinen työtila
     focus_bottom: Tarkennuspohja
     focus_latest: Focus -viimeisin
     focus_left: Focus jäljellä
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Avaa asetukset
     misc_toggle_lock_tracing: Vaihda lukkojen jäljitys (lokit)
     misc_toggle_win_event_tracing: Vaihda Win Win Event Tracing (lokit)
-    move_to_workspace_0: Siirry työtilaan 0
-    move_to_workspace_1: Siirry työtilaan 1
-    move_to_workspace_2: Siirry työtilaan 2
-    move_to_workspace_3: Siirry työtilaan 3
-    move_to_workspace_4: Siirry työtilaan 4
-    move_to_workspace_5: Siirry työtilaan 5
-    move_to_workspace_6: Siirry työtilaan 6
-    move_to_workspace_7: Siirry työtilaan 7
-    move_to_workspace_8: Siirry työtilaan 8
-    move_to_workspace_9: Siirry työtilaan 9
+    move_to_workspace: Siirry työtilaan {{0}}
+    move_window_down: Siirrä ikkuna pohjaan
+    move_window_left: Siirrä ikkuna vasemmalle
+    move_window_right: Siirrä ikkuna oikealle
+    move_window_up: Siirrä ikkuna yläosaan
+    pause_tiling: Tauko laatoitus ikkunanhallinta
     reserve_bottom: Varata pohja
     reserve_float: Varaa kelluva
     reserve_left: Varaa jäljellä
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Varantopino
     reserve_top: Varaa
     restore_sizes: Palauttaa koot
-    send_to_workspace_0: Lähetä työtilaan 0
-    send_to_workspace_1: Lähetä työtilaan 1
-    send_to_workspace_2: Lähetä työtilaan 2
-    send_to_workspace_3: Lähetä työtilaan 3
-    send_to_workspace_4: Lähetä työtilaan 4
-    send_to_workspace_5: Lähetä työtilaan 5
-    send_to_workspace_6: Lähetä työtilaan 6
-    send_to_workspace_7: Lähetä työtilaan 7
-    send_to_workspace_8: Lähetä työtilaan 8
-    send_to_workspace_9: Lähetä työtilaan 9
-    start_weg_app_0: Keskittyä tai käynnistä sovellus tehtäväpalkin asentoon 1
-    start_weg_app_1: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 2
-    start_weg_app_2: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 3
-    start_weg_app_3: Keskittyä tai käynnistä sovellus tehtäväpalkin asentoon 4
-    start_weg_app_4: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 5
-    start_weg_app_5: Keskittyä tai käynnistä sovellus tehtäväpalkin sijaintiin 6
-    start_weg_app_6: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 7
-    start_weg_app_7: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 8
-    start_weg_app_8: Keskittyä tai käynnistä sovellus tehtäväpalkin sijainnissa 9
-    start_weg_app_9: Keskittyä tai aloita sovellus tehtäväpalkin sijainnissa 10
-    switch_workspace_0: Vaihda työtilaan 1
-    switch_workspace_1: Vaihda työtilaan 2
-    switch_workspace_2: Vaihda työtilaan 2
-    switch_workspace_3: Vaihda työtilaan 3
-    switch_workspace_4: Vaihda työtilaan 4
-    switch_workspace_5: Vaihda työtilaan 5
-    switch_workspace_6: Vaihda työtilaan 6
-    switch_workspace_7: Vaihda työtilaan 7
-    switch_workspace_8: Vaihda työtilaan 8
-    switch_workspace_9: Vaihda työtilaan 9
-    toggle_launcher: Vaihtaa
+    send_to_workspace: Lähetä työtilaan {{0}}
+    start_weg_app: Keskittyä tai käynnistä sovellus {{0}}
+    switch_to_next_workspace: Vaihda seuraavaan työtilaan
+    switch_to_previous_workspace: Vaihda edelliseen työtilaan
+    switch_workspace: Vaihda työtilaan {{0}}
+    toggle_float: Vaihda ikkunan kelluva tila
+    toggle_launcher: Vaihda kantoraketti
+    toggle_monocle: Vaihda työtilan monokle -tila
   readonly_tooltip: Tämä on vain luku-pikakuvake
   reset: Palauta laiminlyöntiin
 sides:

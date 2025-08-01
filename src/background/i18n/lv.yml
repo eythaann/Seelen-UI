@@ -1,3 +1,5 @@
+cancel: Atcelt
+done: Darīts
 drivers:
   got_it: Sapratu.
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI pakalpojums (slu-service) ir atkarība/palīgs, lai lietotne
     darbotos pareizi.
   not_running_ok: Sāciet pakalpojumu
+shortcut:
+  register:
+    placeholder: Nospiediet jebkuru atslēgu kombināciju
+    title: Reģistrējot jaunu saīsni
 tray:
   quit: Pārtraukt
   restart: Lietotāja interfeisa restartēšana

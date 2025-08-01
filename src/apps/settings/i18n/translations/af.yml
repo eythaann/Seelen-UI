@@ -152,13 +152,19 @@ save: Red
 save_and_restart: Stoor en herbegin
 see_more: Sien meer
 shortcuts:
-  enable: Aktiveer geïntegreerde kortpaaie (AHK)
+  enable: Aktiveer ingeboude kortpadstelsel
   enable_tooltip: >-
-    Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen
-    Core API
+    Deaktiveer as u u eie kortpadstelsel met behulp van die Seelen UI -kliënt
+    implementeer
   labels:
+    create_new_workspace: Skep nuwe werkruimte
+    cycle_stack_next: Fietsstapel volgende
+    cycle_stack_prev: Siklusstapel vorige
+    cycle_wallpaper_next: Verander na die volgende muurpapier
+    cycle_wallpaper_prev: Verander na vorige muurpapier
     decrease_height: Verminder hoogte
     decrease_width: Verminder breedte
+    destroy_current_workspace: Vernietig die huidige werkruimte
     focus_bottom: Fokus onder
     focus_latest: Fokus nuut
     focus_left: Fokus links
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Open instellings
     misc_toggle_lock_tracing: Wisselslotopsporing (logs)
     misc_toggle_win_event_tracing: Skakel wen -byeenkomsopsporing (logs)
-    move_to_workspace_0: Beweeg na werkruimte 0
-    move_to_workspace_1: Beweeg na werkruimte 1
-    move_to_workspace_2: Beweeg na Workspace 2
-    move_to_workspace_3: Beweeg na Workspace 3
-    move_to_workspace_4: Beweeg na Workspace 4
-    move_to_workspace_5: Beweeg na Workspace 5
-    move_to_workspace_6: Beweeg na Workspace 6
-    move_to_workspace_7: Beweeg na Workspace 7
-    move_to_workspace_8: Beweeg na Workspace 8
-    move_to_workspace_9: Beweeg na Workspace 9
+    move_to_workspace: Beweeg na WorkSpace {{0}}
+    move_window_down: Skuif venster na onder
+    move_window_left: Skuif venster na links
+    move_window_right: Skuif venster na regs
+    move_window_up: Skuif venster na bo
+    pause_tiling: Pouse Tiling Window Manager
     reserve_bottom: Reservaat onder
     reserve_float: Reservaat vlot
     reserve_left: Reservaat links
@@ -186,39 +188,16 @@ shortcuts:
     reserve_stack: Reservaatstapel
     reserve_top: Reserve Top
     restore_sizes: Herstel groottes
-    send_to_workspace_0: Stuur na werkruimte 0
-    send_to_workspace_1: Stuur na Workspace 1
-    send_to_workspace_2: Stuur na Workspace 2
-    send_to_workspace_3: Stuur na Workspace 3
-    send_to_workspace_4: Stuur na Workspace 4
-    send_to_workspace_5: Stuur na Workspace 5
-    send_to_workspace_6: Stuur na Workspace 6
-    send_to_workspace_7: Stuur na Workspace 7
-    send_to_workspace_8: Stuur na Workspace 8
-    send_to_workspace_9: Stuur na Workspace 9
-    start_weg_app_0: Fokus of begin app op taakbalkposisie 1
-    start_weg_app_1: Fokus of begin app op taakbalkposisie 2
-    start_weg_app_2: Fokus of begin app op taakbalkposisie 3
-    start_weg_app_3: Fokus of begin app op taakbalkposisie 4
-    start_weg_app_4: Fokus of begin app op taakbalkposisie 5
-    start_weg_app_5: Fokus of begin app op taakbalkposisie 6
-    start_weg_app_6: Fokus of begin app op taakbalkposisie 7
-    start_weg_app_7: Fokus of begin app op taakbalkposisie 8
-    start_weg_app_8: Fokus of begin app op taakbalkposisie 9
-    start_weg_app_9: Fokus of begin app op taakbalkposisie 10
-    switch_workspace_0: Skakel oor na werkruimte 1
-    switch_workspace_1: Skakel oor na Workspace 2
-    switch_workspace_2: Skakel oor na Workspace 2
-    switch_workspace_3: Skakel oor na Workspace 3
-    switch_workspace_4: Skakel oor na Workspace 4
-    switch_workspace_5: Skakel oor na Workspace 5
-    switch_workspace_6: Skakel oor na Workspace 6
-    switch_workspace_7: Skakel oor na Workspace 7
-    switch_workspace_8: Skakel oor na Workspace 8
-    switch_workspace_9: Skakel oor na Workspace 9
-    toggle_launcher: Wissel
+    send_to_workspace: Stuur na WorkSpace {{0}}
+    start_weg_app: Fokus of begin toepassing {{0}}
+    switch_to_next_workspace: Skakel oor na die volgende werkruimte
+    switch_to_previous_workspace: Skakel oor na vorige werkruimte
+    switch_workspace: Skakel oor na WorkSpace {{0}}
+    toggle_float: Wisselvenstervlotmodus
+    toggle_launcher: Wisselaar Launcher
+    toggle_monocle: Toggle Workspace Monocle -modus
   readonly_tooltip: Dit is 'n leesalleen kortpad
-  reset: Herstel na standaard
+  reset: Stel weer in standaard
 sides:
   bottom: Bodem
   left: Links

@@ -1,3 +1,5 @@
+cancel: לְבַטֵל
+done: נַעֲשָׂה
 drivers:
   got_it: קיבלתי את זה
   monitor_disabled: >-
@@ -26,6 +28,10 @@ service:
   not_running: שירות ממשק המשתמש של Seelen לא פועל
   not_running_description: Seelen UI Service (slu-service) הוא תלות/עוזר כדי שהאפליקציה תפעל כראוי.
   not_running_ok: התחל שירות
+shortcut:
+  register:
+    placeholder: לחץ על כל שילוב מקשים
+    title: רישום קיצור דרך חדש
 tray:
   quit: צא
   restart: הפעל מחדש את UI

@@ -152,13 +152,19 @@ save: Tejash
 save_and_restart: Saqlang va qayta yoqing
 see_more: Ko'proq ko'rish
 shortcuts:
-  enable: Birlashtirilgan yorliqlarni yoqish (AHK)
+  enable: Ichki yorliqlar tizimini yoqing
   enable_tooltip: >-
-    Agar siz Seelen Core API yordamida o'z yorlig'ingizni amalga oshirsangiz,
-    o'chiring
+    Seelen Ui mijozidan foydalanib o'zingizning yorliq tizimingizni amalga
+    oshirsangiz, o'chiring
   labels:
+    create_new_workspace: Yangi ish maydonini yarating
+    cycle_stack_next: Keyingi tsikl stakan
+    cycle_stack_prev: Oldingi tsikl stakan
+    cycle_wallpaper_next: Keyingi devor qog'ozi o'zgartiring
+    cycle_wallpaper_prev: Oldingi fon rasmiga o'zgartirish
     decrease_height: Balandlikni kamaytirish
     decrease_width: Kenglikni kamaytirish
+    destroy_current_workspace: Hozirgi ish maydonini yo'q qiling
     focus_bottom: Fokus suvi
     focus_latest: Eng so'nggi
     focus_left: Fince chap
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Ochiq sozlamalar
     misc_toggle_lock_tracing: Qulfni qaytarish (jurnallar)
     misc_toggle_win_event_tracing: Tap The The The The Trecing (jurnallar)
-    move_to_workspace_0: Ish maydoni 0 ga o'ting
-    move_to_workspace_1: Ish maydoni 1 ga o'ting 1
-    move_to_workspace_2: Ish maydoni 2-ga o'ting
-    move_to_workspace_3: Ish maydoni 3 ga o'ting
-    move_to_workspace_4: Ish maydoni 4-ga o'ting
-    move_to_workspace_5: Ish maydoni 5 ga o'ting 5
-    move_to_workspace_6: Ish maydoni 6-ga o'ting
-    move_to_workspace_7: Ish maydoni 7-ga o'ting
-    move_to_workspace_8: Ish maydoni 8 ga o'ting 8
-    move_to_workspace_9: Ish maydoniga o'tish 9
+    move_to_workspace: Ish maydoni uchun {{0}}
+    move_window_down: Oynani pastga siljiting
+    move_window_left: Oynani chapga siljiting
+    move_window_right: Oynani o'ngga siljiting
+    move_window_up: Oynani yuqoriga siljiting
+    pause_tiling: Tiling oynasi menejeri
     reserve_bottom: Zaxira pastki
     reserve_float: Suzmoq
     reserve_left: Zaxira chap
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Zaxira to'plami
     reserve_top: Zaxira tepasi
     restore_sizes: O'lchamlarini tiklash
-    send_to_workspace_0: Ish maydoni 0 ga yuboring
-    send_to_workspace_1: Ish maydoni 1-ga yuboring
-    send_to_workspace_2: Ish maydoni 2-ga yuboring
-    send_to_workspace_3: Ish maydoni 3-ga yuboring
-    send_to_workspace_4: Ish maydoni 4-ga yuboring
-    send_to_workspace_5: Ish maydoni 5-ga yuboring 5
-    send_to_workspace_6: Ish maydoni 6-ga yuboring
-    send_to_workspace_7: Ish maydoni 7-ga yuboring
-    send_to_workspace_8: Ish maydoni 8-ga yuboring
-    send_to_workspace_9: Ish maydoni 9-ga yuboring
-    start_weg_app_0: FOYDALANISH yoki FOYDALANISh HUQUQIDA FAOLIYaTIDA 1
-    start_weg_app_1: Focond yoki ishga tushirishni boshchiligidagi vazifa 2 pozitsiyasida
-    start_weg_app_2: Joylashtirish yoki ishga tushirish paneli pozitsiyasida 3
-    start_weg_app_3: Maydoni paneli pozitsiyasida ishlash yoki ishga tushirish
-    start_weg_app_4: Focond yoki ishga tushirish panelidagi pozitsiyani ishga tushiring
-    start_weg_app_5: FOYDALANISh yoki FOYDALANISh HISOBI JAVOB BERISH 6
-    start_weg_app_6: Focond yoki App Vazifada joylashtiring
-    start_weg_app_7: Focond yoki ishga tushirishni boshchiligidagi ishga tushirish
-    start_weg_app_8: Focond yoki ishga tushirishni boshchiliging 9 holatiga qo'ying
-    start_weg_app_9: FOYDALANISH yoki FOYDALANISh HISOBOTI 10
-    switch_workspace_0: Ish maydoni 1 ga o'tish
-    switch_workspace_1: Ish maydoni 2-ga o'ting
-    switch_workspace_2: Ish maydoni 2-ga o'ting
-    switch_workspace_3: Ish maydoni 3 ga o'tish
-    switch_workspace_4: Ish maydoni 4-ga o'ting
-    switch_workspace_5: Ish maydoni 5 ga o'tish
-    switch_workspace_6: Ish maydoni 6 ga o'tish
-    switch_workspace_7: Ish maydoni 7-ga o'ting
-    switch_workspace_8: Ish maydoni 8 ga o'tish
-    switch_workspace_9: Ish maydoni 9 ga o'tish 9
-    toggle_launcher: Almashtirmoq
+    send_to_workspace: Ish maydoni uchun {{0}}
+    start_weg_app: Fokus yoki dasturni boshlash {{0}}
+    switch_to_next_workspace: Keyingi ish joyiga o'tish
+    switch_to_previous_workspace: Oldingi ish joyiga o'tish
+    switch_workspace: Ish maydoni {{0}}
+    toggle_float: Oynaning sath rejimini o'zgartiring
+    toggle_launcher: Yoquvchi ishga tushirish
+    toggle_monocle: Ish maydoni Monokle rejimini o'zgartiring
   readonly_tooltip: Bu faqat o'qish faqat yorliqidir
   reset: Standartlarga qayta o'rnating
 sides:

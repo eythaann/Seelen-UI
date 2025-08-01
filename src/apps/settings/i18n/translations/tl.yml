@@ -156,13 +156,19 @@ save: I -save
 save_and_restart: I -save at i -restart
 see_more: Makita pa
 shortcuts:
-  enable: Paganahin ang Integrated Shortcut (AHK)
+  enable: Paganahin ang built-in na mga shortcut system
   enable_tooltip: >-
-    Huwag paganahin kung ipatutupad mo ang iyong sariling mga shortcut gamit ang
-    Seelen Core API
+    Huwag paganahin kung ipatutupad mo ang iyong sariling sistema ng mga
+    shortcut gamit ang Seelen UI Client
   labels:
+    create_new_workspace: Lumikha ng bagong workspace
+    cycle_stack_next: Susunod na Stack Stack
+    cycle_stack_prev: Cycle Stack Nakaraan
+    cycle_wallpaper_next: Baguhin sa susunod na wallpaper
+    cycle_wallpaper_prev: Baguhin sa nakaraang wallpaper
     decrease_height: Bawasan ang taas
     decrease_width: Bawasan ang lapad
+    destroy_current_workspace: Wasakin ang kasalukuyang workspace
     focus_bottom: Pokus sa ilalim
     focus_latest: Pinakabagong ituon
     focus_left: Kaliwa ng Focus
@@ -173,16 +179,12 @@ shortcuts:
     misc_open_settings: Buksan ang mga setting
     misc_toggle_lock_tracing: Toggle lock tracing (log)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (log)
-    move_to_workspace_0: Lumipat sa workspace 0
-    move_to_workspace_1: Lumipat sa Workspace 1
-    move_to_workspace_2: Lumipat sa Workspace 2
-    move_to_workspace_3: Lumipat sa Workspace 3
-    move_to_workspace_4: Lumipat sa Workspace 4
-    move_to_workspace_5: Lumipat sa Workspace 5
-    move_to_workspace_6: Lumipat sa Workspace 6
-    move_to_workspace_7: Lumipat sa Workspace 7
-    move_to_workspace_8: Lumipat sa Workspace 8
-    move_to_workspace_9: Lumipat sa Workspace 9
+    move_to_workspace: Lumipat sa workspace {{0}}
+    move_window_down: Ilipat ang window sa ibaba
+    move_window_left: Ilipat ang window sa kaliwa
+    move_window_right: Ilipat ang window sa kanan
+    move_window_up: Ilipat ang window sa itaas
+    pause_tiling: I -pause ang manager ng window window
     reserve_bottom: Reserve Bottom
     reserve_float: Reserve float
     reserve_left: Reserve Kaliwa
@@ -190,37 +192,14 @@ shortcuts:
     reserve_stack: Reserve stack
     reserve_top: Reserve top
     restore_sizes: Ibalik ang mga sukat
-    send_to_workspace_0: Ipadala sa Workspace 0
-    send_to_workspace_1: Ipadala sa Workspace 1
-    send_to_workspace_2: Ipadala sa Workspace 2
-    send_to_workspace_3: Ipadala sa Workspace 3
-    send_to_workspace_4: Ipadala sa Workspace 4
-    send_to_workspace_5: Ipadala sa Workspace 5
-    send_to_workspace_6: Ipadala sa Workspace 6
-    send_to_workspace_7: Ipadala sa Workspace 7
-    send_to_workspace_8: Ipadala sa Workspace 8
-    send_to_workspace_9: Ipadala sa Workspace 9
-    start_weg_app_0: Ituon o simulan ang app sa posisyon ng taskbar 1
-    start_weg_app_1: Ituon o simulan ang app sa posisyon ng taskbar 2
-    start_weg_app_2: Ituon o simulan ang app sa posisyon ng taskbar 3
-    start_weg_app_3: Ituon o simulan ang app sa posisyon ng taskbar 4
-    start_weg_app_4: Ituon o simulan ang app sa posisyon ng taskbar 5
-    start_weg_app_5: Ituon o simulan ang app sa posisyon ng taskbar 6
-    start_weg_app_6: Ituon o simulan ang app sa posisyon ng taskbar 7
-    start_weg_app_7: Ituon o simulan ang app sa posisyon ng taskbar 8
-    start_weg_app_8: Ituon o simulan ang app sa posisyon ng taskbar 9
-    start_weg_app_9: Ituon o simulan ang app sa posisyon ng taskbar 10
-    switch_workspace_0: Lumipat sa Workspace 1
-    switch_workspace_1: Lumipat sa Workspace 2
-    switch_workspace_2: Lumipat sa Workspace 2
-    switch_workspace_3: Lumipat sa Workspace 3
-    switch_workspace_4: Lumipat sa Workspace 4
-    switch_workspace_5: Lumipat sa Workspace 5
-    switch_workspace_6: Lumipat sa Workspace 6
-    switch_workspace_7: Lumipat sa Workspace 7
-    switch_workspace_8: Lumipat sa Workspace 8
-    switch_workspace_9: Lumipat sa Workspace 9
-    toggle_launcher: Toggle
+    send_to_workspace: Ipadala sa Workspace {{0}}
+    start_weg_app: Ituon o simulan ang application {{0}}
+    switch_to_next_workspace: Lumipat sa Susunod na Workspace
+    switch_to_previous_workspace: Lumipat sa nakaraang workspace
+    switch_workspace: Lumipat sa workspace {{0}}
+    toggle_float: Toggle window float mode
+    toggle_launcher: Toggle launcher
+    toggle_monocle: Toggle workspace monocle mode
   readonly_tooltip: Ito ay isang shortcut na basahin lamang
   reset: I -reset sa mga default
 sides:

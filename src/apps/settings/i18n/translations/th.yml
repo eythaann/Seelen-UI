@@ -145,11 +145,17 @@ save: บันทึก
 save_and_restart: บันทึกและรีสตาร์ท
 see_more: ดูเพิ่มเติม
 shortcuts:
-  enable: เปิดใช้งานทางลัดแบบบูรณาการ (AHK)
-  enable_tooltip: ปิดการใช้งานหากคุณจะใช้ทางลัดของคุณเองโดยใช้ Seelen Core API
+  enable: เปิดใช้งานระบบทางลัดในตัว
+  enable_tooltip: ปิดการใช้งานหากคุณจะใช้ระบบทางลัดของคุณเองโดยใช้ไคลเอนต์ SEELEN UI
   labels:
+    create_new_workspace: สร้างพื้นที่ทำงานใหม่
+    cycle_stack_next: วงจรสแต็คถัดไป
+    cycle_stack_prev: Cycle Stack ก่อนหน้านี้
+    cycle_wallpaper_next: เปลี่ยนเป็นวอลล์เปเปอร์ถัดไป
+    cycle_wallpaper_prev: เปลี่ยนเป็นวอลล์เปเปอร์ก่อนหน้า
     decrease_height: ลดความสูง
     decrease_width: ลดความกว้าง
+    destroy_current_workspace: ทำลายพื้นที่ทำงานปัจจุบัน
     focus_bottom: โฟกัสด้านล่าง
     focus_latest: โฟกัสล่าสุด
     focus_left: โฟกัสซ้าย
@@ -160,16 +166,12 @@ shortcuts:
     misc_open_settings: เปิดการตั้งค่า
     misc_toggle_lock_tracing: สลับการติดตามล็อค (บันทึก)
     misc_toggle_win_event_tracing: สลับการติดตามเหตุการณ์ (บันทึก)
-    move_to_workspace_0: ย้ายไปที่เวิร์กสเปซ 0
-    move_to_workspace_1: ย้ายไปที่เวิร์กสเปซ 1
-    move_to_workspace_2: ย้ายไปที่เวิร์กสเปซ 2
-    move_to_workspace_3: ย้ายไปที่เวิร์กสเปซ 3
-    move_to_workspace_4: ย้ายไปที่เวิร์กสเปซ 4
-    move_to_workspace_5: ย้ายไปที่เวิร์กสเปซ 5
-    move_to_workspace_6: ย้ายไปที่เวิร์กสเปซ 6
-    move_to_workspace_7: ย้ายไปที่เวิร์กสเปซ 7
-    move_to_workspace_8: ย้ายไปที่เวิร์กสเปซ 8
-    move_to_workspace_9: ย้ายไปที่เวิร์กสเปซ 9
+    move_to_workspace: ย้ายไปที่ WorksPace {{0}}
+    move_window_down: ย้ายหน้าต่างไปด้านล่าง
+    move_window_left: ย้ายหน้าต่างไปทางซ้าย
+    move_window_right: ย้ายหน้าต่างไปทางขวา
+    move_window_up: ย้ายหน้าต่างไปด้านบน
+    pause_tiling: หยุดชั่วคราวตัวจัดการหน้าต่างปูกระเบื้อง
     reserve_bottom: สำรองด้านล่าง
     reserve_float: สำรองลอย
     reserve_left: สำรองซ้าย
@@ -177,37 +179,14 @@ shortcuts:
     reserve_stack: กองสำรอง
     reserve_top: สำรองด้านบน
     restore_sizes: คืนค่าขนาด
-    send_to_workspace_0: ส่งไปยังเวิร์กสเปซ 0
-    send_to_workspace_1: ส่งไปยังเวิร์กสเปซ 1
-    send_to_workspace_2: ส่งไปยังเวิร์กสเปซ 2
-    send_to_workspace_3: ส่งไปยังเวิร์กสเปซ 3
-    send_to_workspace_4: ส่งไปยังเวิร์กสเปซ 4
-    send_to_workspace_5: ส่งไปยังเวิร์กสเปซ 5
-    send_to_workspace_6: ส่งไปยังเวิร์กสเปซ 6
-    send_to_workspace_7: ส่งไปยังเวิร์กสเปซ 7
-    send_to_workspace_8: ส่งไปยังเวิร์กสเปซ 8
-    send_to_workspace_9: ส่งไปยังเวิร์กสเปซ 9
-    start_weg_app_0: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 1
-    start_weg_app_1: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 2
-    start_weg_app_2: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 3
-    start_weg_app_3: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 4
-    start_weg_app_4: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 5
-    start_weg_app_5: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 6
-    start_weg_app_6: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 7
-    start_weg_app_7: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 8
-    start_weg_app_8: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 9
-    start_weg_app_9: โฟกัสหรือเริ่มแอพในตำแหน่งแถบงาน 10
-    switch_workspace_0: เปลี่ยนไปใช้พื้นที่ทำงาน 1
-    switch_workspace_1: สลับไปที่ Workspace 2
-    switch_workspace_2: เปลี่ยนเป็น Workspace 2
-    switch_workspace_3: เปลี่ยนเป็น Workspace 3
-    switch_workspace_4: เปลี่ยนไปใช้พื้นที่ทำงาน 4
-    switch_workspace_5: เปลี่ยนไปใช้พื้นที่ทำงาน 5
-    switch_workspace_6: เปลี่ยนไปใช้พื้นที่ทำงาน 6
-    switch_workspace_7: เปลี่ยนไปใช้พื้นที่ทำงาน 7
-    switch_workspace_8: เปลี่ยนไปใช้พื้นที่ทำงาน 8
-    switch_workspace_9: เปลี่ยนไปใช้พื้นที่ทำงาน 9
-    toggle_launcher: สลับ
+    send_to_workspace: ส่งไปยัง WorksPace {{0}}
+    start_weg_app: โฟกัสหรือเริ่มแอปพลิเคชัน {{0}}
+    switch_to_next_workspace: เปลี่ยนเป็นพื้นที่ทำงานถัดไป
+    switch_to_previous_workspace: เปลี่ยนไปใช้พื้นที่ทำงานก่อนหน้า
+    switch_workspace: สลับไปที่ WorksPace {{0}}
+    toggle_float: สลับโหมดลอยหน้าต่าง
+    toggle_launcher: Toggle Launcher
+    toggle_monocle: สลับโหมดเวิร์กสเปซ Monocle
   readonly_tooltip: นี่คือทางลัดแบบอ่านอย่างเดียว
   reset: รีเซ็ตเป็นค่าเริ่มต้น
 sides:

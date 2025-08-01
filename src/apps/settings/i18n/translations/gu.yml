@@ -150,71 +150,50 @@ save: સાચવો
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
 see_more: વધુ જુઓ
 shortcuts:
-  enable: સંકલિત શૉર્ટકટ્સ સક્ષમ કરો (ahk)
+  enable: બિલ્ટ-ઇન શ shortc ર્ટકટ્સ સિસ્ટમને સક્ષમ કરો
   enable_tooltip: >-
-    જો તમે સીલેન કોર એપીઆઈનો ઉપયોગ કરીને તમારા પોતાના શોર્ટકટ્સનો અમલ કરશો તો
-    અક્ષમ કરો
+    જો તમે સીલેન યુઆઈ ક્લાયંટનો ઉપયોગ કરીને તમારી પોતાની શ shortc ર્ટકટ્સ સિસ્ટમ
+    લાગુ કરશો તો અક્ષમ કરો
   labels:
-    decrease_height: ઊંચાઈ ઘટાડો
-    decrease_width: પહોળાઈ ઘટાડો
-    focus_bottom: ફોકસ બોટમ
-    focus_latest: ફોકસ લેટેસ્ટ
-    focus_left: ડાબે ફોકસ કરો
-    focus_right: જમણે ફોકસ કરો
-    focus_top: ફોકસ ટોપ
-    increase_height: ઊંચાઈ વધારો
-    increase_width: પહોળાઈ વધારો
+    create_new_workspace: નવી વર્કસ્પેસ બનાવો
+    cycle_stack_next: ચક્ર સ્ટેક આગળ
+    cycle_stack_prev: સાયકલ સ્ટેક અગાઉ
+    cycle_wallpaper_next: આગલા વ wallp લપેપરમાં બદલો
+    cycle_wallpaper_prev: પાછલા વ wallp લપેપરમાં બદલો
+    decrease_height: ઘટાડો
+    decrease_width: પહોળાઈ ઘટાડવી
+    destroy_current_workspace: વર્તમાન વર્કસ્પેસનો નાશ કરો
+    focus_bottom: ફોકસ
+    focus_latest: ફોકસ ફોકસ
+    focus_left: ફોકસ
+    focus_right: ધ્યાન કેન્દ્રિત કરવું
+    focus_top: ફોકસ
+    increase_height: .ંચાઇમાં વધારો
+    increase_width: પહોળાઈમાં વધારો
     misc_open_settings: ખુલ્લી સેટિંગ્સ
     misc_toggle_lock_tracing: ટ g ગલ લ lock ક ટ્રેસિંગ (લોગ)
     misc_toggle_win_event_tracing: ટ g ગલ વિન ઇવેન્ટ ટ્રેસિંગ (લોગ)
-    move_to_workspace_0: વર્કસ્પેસ 0 પર ખસેડો
-    move_to_workspace_1: વર્કસ્પેસ 1 પર ખસેડો
-    move_to_workspace_2: વર્કસ્પેસ 2 પર ખસેડો
-    move_to_workspace_3: વર્કસ્પેસ 3 પર ખસેડો
-    move_to_workspace_4: વર્કસ્પેસ 4 પર ખસેડો
-    move_to_workspace_5: વર્કસ્પેસ 5 પર જાઓ
-    move_to_workspace_6: વર્કસ્પેસ 6 પર જાઓ
-    move_to_workspace_7: વર્કસ્પેસ 7 પર જાઓ
-    move_to_workspace_8: વર્કસ્પેસ 8 પર જાઓ
-    move_to_workspace_9: વર્કસ્પેસ પર ખસેડો 9
-    reserve_bottom: અનામત નીચે
-    reserve_float: રિઝર્વ ફ્લોટ
-    reserve_left: ડાબી બાજુ અનામત રાખો
-    reserve_right: અનામત અધિકાર
+    move_to_workspace: વર્કસ્પેસ {{0}} પર ખસેડો
+    move_window_down: વિંડોને નીચે ખસેડો
+    move_window_left: ડાબી બાજુ વિંડો ખસેડો
+    move_window_right: વિંડોને જમણે ખસેડો
+    move_window_up: વિંડોને ટોચ પર ખસેડો
+    pause_tiling: ટાઈલિંગ વિંડો મેનેજર થોભો
+    reserve_bottom: અનામત તળિયા
+    reserve_float: અનામત ફ્લોટ
+    reserve_left: અનામત બાકી
+    reserve_right: અનામત હક
     reserve_stack: અનામત સ્ટેક
-    reserve_top: અનામત ટોચ
-    restore_sizes: કદ પુનઃસ્થાપિત કરો
-    send_to_workspace_0: વર્કસ્પેસ 0 પર મોકલો
-    send_to_workspace_1: વર્કસ્પેસ 1 પર મોકલો
-    send_to_workspace_2: વર્કસ્પેસ 2 પર મોકલો
-    send_to_workspace_3: વર્કસ્પેસ પર મોકલો 3
-    send_to_workspace_4: વર્કસ્પેસ 4 પર મોકલો
-    send_to_workspace_5: વર્કસ્પેસ 5 પર મોકલો
-    send_to_workspace_6: વર્કસ્પેસ પર મોકલો 6
-    send_to_workspace_7: વર્કસ્પેસ પર મોકલો 7
-    send_to_workspace_8: વર્કસ્પેસ 8 પર મોકલો
-    send_to_workspace_9: વર્કસ્પેસ પર મોકલો 9
-    start_weg_app_0: ટાસ્કબાર પોઝિશન 1 પર ધ્યાન કેન્દ્રિત કરો અથવા એપ્લિકેશન પ્રારંભ કરો
-    start_weg_app_1: ટાસ્કબાર પોઝિશન 2 પર ધ્યાન કેન્દ્રિત કરો અથવા એપ્લિકેશન પ્રારંભ કરો
-    start_weg_app_2: ટાસ્કબાર પોઝિશન 3 પર ધ્યાન કેન્દ્રિત કરો અથવા એપ્લિકેશન પ્રારંભ કરો
-    start_weg_app_3: ટાસ્કબાર પોઝિશન 4 પર ધ્યાન કેન્દ્રિત કરો અથવા એપ્લિકેશન પ્રારંભ કરો
-    start_weg_app_4: ફોકસ અથવા ટાસ્કબાર પોઝિશન પર એપ્લિકેશન પ્રારંભ કરો 5
-    start_weg_app_5: ટાસ્કબાર પોઝિશન 6 પર ધ્યાન કેન્દ્રિત કરો અથવા એપ્લિકેશન પ્રારંભ કરો
-    start_weg_app_6: ફોકસ અથવા ટાસ્કબાર પોઝિશન 7 પર એપ્લિકેશન પ્રારંભ કરો
-    start_weg_app_7: ટાસ્કબાર પોઝિશન 8 પર ધ્યાન કેન્દ્રિત કરો અથવા એપ્લિકેશન પ્રારંભ કરો
-    start_weg_app_8: ફોકસ અથવા ટાસ્કબાર પોઝિશન 9 પર એપ્લિકેશન પ્રારંભ કરો
-    start_weg_app_9: ટાસ્કબાર પોઝિશન 10 પર ફોકસ અથવા એપ્લિકેશન પ્રારંભ કરો
-    switch_workspace_0: વર્કસ્પેસ 1 પર સ્વિચ કરો
-    switch_workspace_1: વર્કસ્પેસ 2 પર સ્વિચ કરો
-    switch_workspace_2: વર્કસ્પેસ 2 પર સ્વિચ કરો
-    switch_workspace_3: વર્કસ્પેસ 3 પર સ્વિચ કરો
-    switch_workspace_4: વર્કસ્પેસ 4 પર સ્વિચ કરો
-    switch_workspace_5: વર્કસ્પેસ 5 પર સ્વિચ કરો
-    switch_workspace_6: વર્કસ્પેસ 6 પર સ્વિચ કરો
-    switch_workspace_7: વર્કસ્પેસ 7 પર સ્વિચ કરો
-    switch_workspace_8: વર્કસ્પેસ 8 પર સ્વિચ કરો
-    switch_workspace_9: વર્કસ્પેસ 9 પર સ્વિચ કરો
-    toggle_launcher: ટોકવું
+    reserve_top: અનામત અનામત
+    restore_sizes: કદ પુન restore સ્થાપિત કરવું
+    send_to_workspace: વર્કસ્પેસ {{0}} પર મોકલો
+    start_weg_app: ધ્યાન કેન્દ્રિત કરો અથવા એપ્લિકેશન પ્રારંભ કરો {{0}}
+    switch_to_next_workspace: આગળના કાર્યસ્થળ પર સ્વિચ કરો
+    switch_to_previous_workspace: પાછલા વર્કસ્પેસ પર સ્વિચ કરો
+    switch_workspace: વર્કસ્પેસ પર સ્વિચ કરો {{0}}
+    toggle_float: ટ g ગલ વિંડો ફ્લોટ મોડ
+    toggle_launcher: ટ og ગલ લ la ંચરે
+    toggle_monocle: ટ g ગલ વર્કસ્પેસ મોનોક્લ મોડ
   readonly_tooltip: આ ફક્ત એક વાંચવા માટે શોર્ટકટ છે
   reset: ડિફોલ્ટ પર ફરીથી સેટ કરો
 sides:

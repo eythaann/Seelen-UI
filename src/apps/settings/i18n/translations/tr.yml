@@ -152,73 +152,52 @@ save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 see_more: Daha Fazla Gör
 shortcuts:
-  enable: Entegre Kısayolları Etkinleştir (AHK)
+  enable: Dahili kısayol sistemini etkinleştirin
   enable_tooltip: >-
-    Seelen Core API kullanarak kendi kısayollarınızı uygulayacaksanız devre dışı
-    bırakın
+    Seelen UI istemcisini kullanarak kendi kısayol sisteminizi uygulayacaksanız
+    devre dışı bırakın
   labels:
+    create_new_workspace: Yeni çalışma alanı oluşturun
+    cycle_stack_next: Bisiklet yığını sonraki
+    cycle_stack_prev: Önceki bisiklet yığını
+    cycle_wallpaper_next: Sonraki Duvar Kağıdına Değiştir
+    cycle_wallpaper_prev: Önceki duvar kağıdına geç
     decrease_height: Yüksekliği Azalt
     decrease_width: Genişliği Azalt
-    focus_bottom: Alta Odaklan
-    focus_latest: En Sona Odaklan
-    focus_left: Sola Odaklan
-    focus_right: Sağa Odaklan
-    focus_top: Üste Odaklan
-    increase_height: Yüksekliği Artır
-    increase_width: Genişliği Artır
-    misc_open_settings: Ayarları Aç
-    misc_toggle_lock_tracing: Kilit izlemeyi değiştir (günlükler)
-    misc_toggle_win_event_tracing: Win olay izlemeyi değiştir (günlükler)
-    move_to_workspace_0: Çalışma Alanı 1'e Taşı
-    move_to_workspace_1: Çalışma Alanı 2'ye Taşı
-    move_to_workspace_2: Çalışma Alanı 3'e Taşı
-    move_to_workspace_3: Çalışma Alanı 4'e Taşı
-    move_to_workspace_4: Çalışma Alanı 5'e Taşı
-    move_to_workspace_5: Çalışma Alanı 6'ya Taşı
-    move_to_workspace_6: Çalışma Alanı 7'ye Taşı
-    move_to_workspace_7: Çalışma Alanı 8'e Taşı
-    move_to_workspace_8: Çalışma Alanı 9'a Taşı
-    move_to_workspace_9: Çalışma Alanı 10'a Taşı
-    reserve_bottom: Altı Rezerve Et
-    reserve_float: Yüzeni Rezerve Et
-    reserve_left: Solu Rezerve Et
-    reserve_right: Sağı Rezerve Et
-    reserve_stack: Yığını Rezerve Et
-    reserve_top: Üstü Rezerve Et
+    destroy_current_workspace: Mevcut çalışma alanını yok et
+    focus_bottom: Dip
+    focus_latest: En son odak
+    focus_left: Sola odaklanmak
+    focus_right: Doğru odaklanmak
+    focus_top: Focus tepe
+    increase_height: Yüksekliği arttırmak
+    increase_width: Genişliği Artırın
+    misc_open_settings: Ayarlar Aç
+    misc_toggle_lock_tracing: Kilit izleme (kütükler)
+    misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
+    move_to_workspace: Çalışma Alanına Taşın {{0}}
+    move_window_down: Pencereyi dibe taşıyın
+    move_window_left: Pencereyi sola taşıyın
+    move_window_right: Pencereyi sağa taşıyın
+    move_window_up: Pencereyi üstüne taşıyın
+    pause_tiling: Duraklatma döşeme pencere yöneticisi
+    reserve_bottom: Dip
+    reserve_float: Yüzmek
+    reserve_left: Sola gitme
+    reserve_right: Doğru ayırtmak
+    reserve_stack: Yedek yığın
+    reserve_top: Üst kısım
     restore_sizes: Boyutları Geri Yükle
-    send_to_workspace_0: Çalışma Alanı 1'e Gönder
-    send_to_workspace_1: Çalışma Alanı 2'ye Gönder
-    send_to_workspace_2: Çalışma Alanı 3'e Gönder
-    send_to_workspace_3: Çalışma Alanı 4'e Gönder
-    send_to_workspace_4: Çalışma Alanı 5'e Gönder
-    send_to_workspace_5: Çalışma Alanı 6'ya Gönder
-    send_to_workspace_6: Çalışma Alanı 7'ye Gönder
-    send_to_workspace_7: Çalışma Alanı 8'e Gönder
-    send_to_workspace_8: Çalışma Alanı 9'a Gönder
-    send_to_workspace_9: Çalışma Alanı 10'a Gönder
-    start_weg_app_0: Odakla veya Başlat - Görev Çubuğu Pozisyonu 1
-    start_weg_app_1: Odakla veya Başlat - Görev Çubuğu Pozisyonu 2
-    start_weg_app_2: Odakla veya Başlat - Görev Çubuğu Pozisyonu 3
-    start_weg_app_3: Odakla veya Başlat - Görev Çubuğu Pozisyonu 4
-    start_weg_app_4: Odakla veya Başlat - Görev Çubuğu Pozisyonu 5
-    start_weg_app_5: Odakla veya Başlat - Görev Çubuğu Pozisyonu 6
-    start_weg_app_6: Odakla veya Başlat - Görev Çubuğu Pozisyonu 7
-    start_weg_app_7: Odakla veya Başlat - Görev Çubuğu Pozisyonu 8
-    start_weg_app_8: Odakla veya Başlat - Görev Çubuğu Pozisyonu 9
-    start_weg_app_9: Odakla veya Başlat - Görev Çubuğu Pozisyonu 10
-    switch_workspace_0: Çalışma Alanı 1'e Geç
-    switch_workspace_1: Çalışma Alanı 2'ye Geç
-    switch_workspace_2: Çalışma Alanı 3'e Geç
-    switch_workspace_3: Çalışma Alanı 4'e Geç
-    switch_workspace_4: Çalışma Alanı 5'e Geç
-    switch_workspace_5: Çalışma Alanı 6'ya Geç
-    switch_workspace_6: Çalışma Alanı 7'ye Geç
-    switch_workspace_7: Çalışma Alanı 8'e Geç
-    switch_workspace_8: Çalışma Alanı 9'a Geç
-    switch_workspace_9: Çalışma Alanı 10'a Geç
-    toggle_launcher: Başlatıcıyı Aç/Kapat
+    send_to_workspace: Çalışma Alanına Gönder {{0}}
+    start_weg_app: Odak veya Başlat Uygulaması {{0}}
+    switch_to_next_workspace: Sonraki çalışma alanına geçin
+    switch_to_previous_workspace: Önceki çalışma alanına geçin
+    switch_workspace: Çalışma alanına geç {{0}}
+    toggle_float: Pencere şamandıra modunu geçiş
+    toggle_launcher: Başlatıcı
+    toggle_monocle: Çalışma Alanı Monokle Modunu Değiştirin
   readonly_tooltip: Bu salt okunur bir kısayol
-  reset: Varsayılanlara Sıfırla
+  reset: Varsayılanlara sıfırlayın
 sides:
   bottom: Alt
   left: Sol

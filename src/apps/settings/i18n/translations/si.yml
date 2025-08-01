@@ -151,69 +151,50 @@ save: සුරකින්න
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
 see_more: තවත් බලන්න
 shortcuts:
-  enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
-  enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න
+  enable: සාදන ලද කෙටිමං පද්ධතියක් සක්රීය කරන්න
+  enable_tooltip: >-
+    ඔබ සීලංගා යූ සේවාදායකයා භාවිතා කරමින් ඔබේම කෙටිමං පද්ධතියක් ක්රියාත්මක
+    කරන්නේ නම් අක්රීය කරන්න
   labels:
-    decrease_height: උස අඩු කරන්න
+    create_new_workspace: නව වැඩබිම සාදන්න
+    cycle_stack_next: ඊළඟට චක්රීය තොගය
+    cycle_stack_prev: පෙර චක්රීය තොගය
+    cycle_wallpaper_next: ඊළඟ බිතුපතෙහි වෙනස් කිරීම
+    cycle_wallpaper_prev: පෙර බිතුපතෙහි වෙනස් කිරීම
+    decrease_height: උස අඩු කිරීම
     decrease_width: පළල අඩු කරන්න
+    destroy_current_workspace: වත්මන් වැඩබිම විනාශ කරන්න
     focus_bottom: පහළට අවධානය යොමු කරන්න
-    focus_latest: නවතම අවධානය යොමු කරන්න
+    focus_latest: නවතම අවධානයට යොමු කරන්න
     focus_left: වමට අවධානය යොමු කරන්න
-    focus_right: නිවැරදිව අවධානය යොමු කරන්න
+    focus_right: දකුණට හරි
     focus_top: ඉහළට අවධානය යොමු කරන්න
     increase_height: උස වැඩි කරන්න
-    increase_width: පළල වැඩි කරන්න
+    increase_width: පළල වැඩි කිරීම
     misc_open_settings: විවෘත සැකසුම්
     misc_toggle_lock_tracing: ටොගල් අගුල ලුහුබැඳීම (ල logs ු-සටහන්)
     misc_toggle_win_event_tracing: ටොගල් ජයග්රාහී සිදුවීම් ලුහුබැඳීම (ල logs ු-සටහන්)
-    move_to_workspace_0: Workspace 0 වෙත ගෙන යන්න
-    move_to_workspace_1: කාර්ය ඉඩ 1 වෙත ගෙන යන්න
-    move_to_workspace_2: කාර්ය ඉඩ 2 වෙත ගෙන යන්න
-    move_to_workspace_3: වැඩබිම වෙත ගෙන යන්න 3
-    move_to_workspace_4: වැඩබිම වෙත ගෙන යන්න 4
-    move_to_workspace_5: වැඩබිම වෙත ගෙන යන්න 5
-    move_to_workspace_6: වැඩබිම වෙත ගෙන යන්න 6
-    move_to_workspace_7: වැඩබිම වෙත ගෙන යන්න 7
-    move_to_workspace_8: වැඩබිම වෙත ගෙන යන්න 8
-    move_to_workspace_9: වැඩබිම වෙත ගෙන යන්න 9
-    reserve_bottom: සංචිත පතුලේ
-    reserve_float: රක්ෂිත පාවෙන
-    reserve_left: වම රක්ෂිතය
-    reserve_right: රක්ෂිත අයිතිය
+    move_to_workspace: වැඩපොළ වෙත යන්න {{0}}
+    move_window_down: කවුළුව පහළට ගෙනයන්න
+    move_window_left: කවුළුව වමට ගෙනයන්න
+    move_window_right: කවුළුව දකුණට ගෙනයන්න
+    move_window_up: කවුළුව ඉහළට ගෙන යන්න
+    pause_tiling: ටයිල් කිරීමේ කවුළු කළමනාකරු විරාමයක් තබන්න
+    reserve_bottom: සංචිත පතුල
+    reserve_float: සංචිත පාවීම
+    reserve_left: සංචිත වමට
+    reserve_right: සංචිත අයිතිය
     reserve_stack: සංචිත තොගය
-    reserve_top: ඉහළම රක්ෂිතය
-    restore_sizes: ප්‍රමාණ ප්‍රතිසාධනය කරන්න
-    send_to_workspace_0: Workspace 0 වෙත යවන්න
-    send_to_workspace_1: කාර්ය ඉඩ 1 වෙත යවන්න
-    send_to_workspace_2: Workspace 2 වෙත යවන්න
-    send_to_workspace_3: වැඩබිම වෙත යවන්න 3
-    send_to_workspace_4: වැඩබිම වෙත යවන්න 4
-    send_to_workspace_5: වැඩබිම වෙත යවන්න 5
-    send_to_workspace_6: වැඩබිම වෙත යවන්න 6
-    send_to_workspace_7: Workspace 7 වෙත යවන්න
-    send_to_workspace_8: Workspace 8 වෙත යවන්න
-    send_to_workspace_9: Workspace 9 වෙත යවන්න
-    start_weg_app_0: කාර්ය තීරුවේ 2 වන කාර්යබල් ස්ථානයේ අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
-    start_weg_app_1: කාර්ය තීරුවේ 2 වන කාර්යබල් 2 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
-    start_weg_app_2: කාර්ය තීරු ස්ථානය 3 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
-    start_weg_app_3: කාර්ය තීරු ස්ථාන 4 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
-    start_weg_app_4: කාර්ය තීරු ස්ථානය 5 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
-    start_weg_app_5: කාර්ය තීරු පිහිටීමේ ස්ථානය පිළිබඳ අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම 6
-    start_weg_app_6: කාර්ය තීරු ස්ථාන 7 හි අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම
-    start_weg_app_7: කාර්ය තීරු ස්ථානයේ 8 හි අවධානය යොමු කරන්න හෝ ආරම්භ කරන්න
-    start_weg_app_8: කාර්ය තීරුවේ 2 වන කාර්ය තීරුවේ අවධානය යොමු කරන්න හෝ ආරම්භ කරන්න
-    start_weg_app_9: කාර්ය තීරුවේ 10 වන කාර්යබල් ස්ථානයේ අවධානය යොමු කරන්න හෝ ආරම්භ කරන්න
-    switch_workspace_0: වැඩබිම් 1 වෙත මාරු වන්න
-    switch_workspace_1: වැඩබිම් 2 වෙත මාරු වන්න
-    switch_workspace_2: කාර්ය ඉඩ 2 වෙත මාරු වන්න
-    switch_workspace_3: වැඩබිම වෙත මාරු වන්න 3
-    switch_workspace_4: වැඩබිම වෙත මාරු වන්න 4
-    switch_workspace_5: වැඩබිම වෙත මාරු වන්න 5
-    switch_workspace_6: වැඩබිම වෙත මාරු වන්න 6
-    switch_workspace_7: වැඩබිම 7 වෙත මාරු වන්න
-    switch_workspace_8: කාර්ය ඉඩ 8 වෙත මාරු වන්න
-    switch_workspace_9: වැඩබිම වෙත මාරු වන්න 9
-    toggle_launcher: ටොගල කරන්න
+    reserve_top: සංවචනය
+    restore_sizes: ප්රමාණ ප්රතිස්ථාපනය කරන්න
+    send_to_workspace: වැඩපොළ වෙත යවන්න {{0}}
+    start_weg_app: අවධානය යොමු කිරීම හෝ ආරම්භ කිරීම {{0}}
+    switch_to_next_workspace: ඊළඟ වැඩබිම වෙත මාරු වන්න
+    switch_to_previous_workspace: පෙර වැඩබිම වෙත මාරු වන්න
+    switch_workspace: වැඩබිම් වෙත මාරු වන්න {{0}}
+    toggle_float: කවුළුව පාවෙන ප්රකාරය ටොගල කරන්න
+    toggle_launcher: ටොගල් දියත් කරන්නා
+    toggle_monocle: වැඩබිම මෝනොකැක් මාදිලිය ටොගල කරන්න
   readonly_tooltip: මෙය කියවීමට පමණක් කෙටිමඟකි
   reset: පෙරනිමි වෙත නැවත සකසන්න
 sides:

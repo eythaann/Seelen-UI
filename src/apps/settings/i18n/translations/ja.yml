@@ -144,71 +144,50 @@ save: 保存
 save_and_restart: 保存して再起動
 see_more: もっと見る
 shortcuts:
-  enable: AutoHotkeyを使用した統合ショートカットを有効にする
-  enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください。
+  enable: ビルトインショートカットシステムを有効にします
+  enable_tooltip: Seelen UIクライアントを使用して独自のショートカットシステムを実装する場合は無効にします
   labels:
-    decrease_height: 高さを減らす
-    decrease_width: 幅を減らす
-    focus_bottom: 下にフォーカス
-    focus_latest: 最新のウィンドウにフォーカス
-    focus_left: 左にフォーカス
-    focus_right: 右にフォーカス
-    focus_top: 上にフォーカス
-    increase_height: 高さを増やす
-    increase_width: 幅を増やす
+    create_new_workspace: 新しいワークスペースを作成します
+    cycle_stack_next: 次にサイクルスタック
+    cycle_stack_prev: サイクルスタック前
+    cycle_wallpaper_next: 次の壁紙に変更します
+    cycle_wallpaper_prev: 前の壁紙に変更します
+    decrease_height: 高さを減らします
+    decrease_width: 幅を減らします
+    destroy_current_workspace: 現在のワークスペースを破壊します
+    focus_bottom: フォーカスボトム
+    focus_latest: 最新の焦点
+    focus_left: フォーカスを左にします
+    focus_right: 焦点を合わせてください
+    focus_top: フォーカストップ
+    increase_height: 高さを増やします
+    increase_width: 幅を増やします
     misc_open_settings: 設定を開く
     misc_toggle_lock_tracing: トグルロックトレース（ログ）
     misc_toggle_win_event_tracing: トグルウィンイベントトレース（ログ）
-    move_to_workspace_0: ワークスペース0に移動
-    move_to_workspace_1: ワークスペース1に移動
-    move_to_workspace_2: ワークスペース2に移動
-    move_to_workspace_3: ワークスペース3に移動
-    move_to_workspace_4: ワークスペース4に移動
-    move_to_workspace_5: ワークスペース5に移動
-    move_to_workspace_6: ワークスペース6に移動
-    move_to_workspace_7: ワークスペース7に移動
-    move_to_workspace_8: ワークスペース8に移動
-    move_to_workspace_9: ワークスペース9に移動
-    reserve_bottom: 下側を予約
-    reserve_float: フロートを予約
-    reserve_left: 左側を予約
-    reserve_right: 右側を予約
-    reserve_stack: スタックを予約
-    reserve_top: 上側を予約
-    restore_sizes: サイズを復元
-    send_to_workspace_0: ワークスペース0に送信
-    send_to_workspace_1: ワークスペース1に送信
-    send_to_workspace_2: ワークスペース2に送信
-    send_to_workspace_3: ワークスペース3に送信
-    send_to_workspace_4: ワークスペース4に送信
-    send_to_workspace_5: ワークスペース5に送信
-    send_to_workspace_6: ワークスペース6に送信
-    send_to_workspace_7: ワークスペース7に送信
-    send_to_workspace_8: ワークスペース8に送信
-    send_to_workspace_9: ワークスペース9に送信
-    start_weg_app_0: タスクバーの位置にフォーカスまたはスタートアプリ1
-    start_weg_app_1: タスクバーの位置2に焦点を合わせるか開始します
-    start_weg_app_2: タスクバーの位置3にフォーカスまたはスタートアプリ
-    start_weg_app_3: タスクバーの位置4にフォーカスまたはスタートアプリ
-    start_weg_app_4: タスクバーの位置5にフォーカスまたはスタートアプリ5
-    start_weg_app_5: タスクバーの位置6にフォーカスまたはスタートアプリ
-    start_weg_app_6: タスクバーの位置7に焦点を合わせるか開始します
-    start_weg_app_7: タスクバーの位置8にフォーカスまたはスタートアプリ
-    start_weg_app_8: タスクバーの位置にフォーカスまたはスタートアプリ9
-    start_weg_app_9: タスクバーの位置にフォーカスまたはスタートアプリ10
-    switch_workspace_0: ワークスペースに切り替えます1
-    switch_workspace_1: ワークスペースに切り替えます2
-    switch_workspace_2: ワークスペース2に切り替え
-    switch_workspace_3: ワークスペース3に切り替え
-    switch_workspace_4: ワークスペース4に切り替え
-    switch_workspace_5: ワークスペース5に切り替え
-    switch_workspace_6: ワークスペース6に切り替え
-    switch_workspace_7: ワークスペース7に切り替え
-    switch_workspace_8: ワークスペース8に切り替え
-    switch_workspace_9: ワークスペース9に切り替え
-    toggle_launcher: トグル
-  readonly_tooltip: これは読み取り専用のショートカットです。
-  reset: デフォルトにリセットします。
+    move_to_workspace: ワークスペースに移動{{0}}
+    move_window_down: ウィンドウを下に移動します
+    move_window_left: ウィンドウを左に移動します
+    move_window_right: ウィンドウを右に移動します
+    move_window_up: ウィンドウを上に移動します
+    pause_tiling: タイル張りウィンドウマネージャーを一時停止します
+    reserve_bottom: 底を予約します
+    reserve_float: 予備のフロート
+    reserve_left: 左に予備
+    reserve_right: 右に予約します
+    reserve_stack: 予備スタック
+    reserve_top: トップを予約します
+    restore_sizes: サイズを復元します
+    send_to_workspace: workspaceに送信{{0}}
+    start_weg_app: フォーカスまたは開始アプリケーション{{0}}
+    switch_to_next_workspace: 次のワークスペースに切り替えます
+    switch_to_previous_workspace: 前のワークスペースに切り替えます
+    switch_workspace: ワークスペースに切り替えます{{0}}
+    toggle_float: ウィンドウフロートモードを切り替えます
+    toggle_launcher: トグルランチャー
+    toggle_monocle: ワークスペースモノクルモードのトグル
+  readonly_tooltip: これは読み取り専用のショートカットです
+  reset: デフォルトにリセットします
 sides:
   bottom: 下
   left: 左

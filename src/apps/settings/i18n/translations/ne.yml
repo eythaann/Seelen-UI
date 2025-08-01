@@ -152,13 +152,19 @@ save: बचाउनु
 save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
 see_more: अझ हेर्नुहोस्
 shortcuts:
-  enable: एकीकृत सर्टकट सक्षम गर्नुहोस् (AHK)
+  enable: निर्मित सर्टकट प्रणाली सक्षम गर्नुहोस्
   enable_tooltip: >-
-    असक्षम गर्नुहोस् यदि तपाईं देखिने कोर एपीआई प्रयोग गरेर तपाईंको आफ्नै
-    सर्टकटहरू लागू गर्नुहुन्छ भने असक्षम गर्नुहोस्
+    यदि तपाईं देखिने UI ग्राहक प्रयोग गरेर तपाईंको आफ्नै सर्टकट प्रणाली लागू
+    गर्नुहुन्छ भने असक्षम गर्नुहोस्
   labels:
+    create_new_workspace: नयाँ कार्यस्थान सिर्जना गर्नुहोस्
+    cycle_stack_next: साइकल स्ट्याक अर्को
+    cycle_stack_prev: चक्र स्ट्याक अघिल्लो
+    cycle_wallpaper_next: अर्को वालपेपरमा परिवर्तन गर्नुहोस्
+    cycle_wallpaper_prev: अघिल्लो वालपेपरमा परिवर्तन गर्नुहोस्
     decrease_height: उचाई घटाउनुहोस्
     decrease_width: चौडाई कम
+    destroy_current_workspace: वर्तमान कार्यक्षेत्र नष्ट गर्नुहोस्
     focus_bottom: फोकस तल
     focus_latest: पछिल्लो ध्यान दिनुहोस्
     focus_left: फर्काउनुहोस्
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: खुला सेटिंग्स
     misc_toggle_lock_tracing: टगल लक ट्रेसिंग (लग)
     misc_toggle_win_event_tracing: टगल जीत घटना ट्रेसिंग (लग)
-    move_to_workspace_0: कार्यक्षेत्र 0 मा सार्नुहोस्
-    move_to_workspace_1: कार्यक्षेत्र 1 मा सार्नुहोस्
-    move_to_workspace_2: कार्यक्षेत्र 2 मा सार्नुहोस्
-    move_to_workspace_3: कार्यक्षेत्र in मा सार्नुहोस्
-    move_to_workspace_4: कार्यक्षेत्र to मा सार्नुहोस्
-    move_to_workspace_5: कार्यस्थान to मा सार्नुहोस्
-    move_to_workspace_6: कार्यक्षेत्र in मा सार्नुहोस्
-    move_to_workspace_7: कार्यस्थान to मा सार्नुहोस्
-    move_to_workspace_8: कार्यक्षेत्र to मा सार्नुहोस्
-    move_to_workspace_9: कार्यक्षेत्र in मा सार्नुहोस्
+    move_to_workspace: कार्यक्षेत्रमा जानुहोस् {0}}
+    move_window_down: विन्डो तल सार्नुहोस्
+    move_window_left: बाँयामा विन्डो सार्नुहोस्
+    move_window_right: विन्डोलाई दायाँ सार्नुहोस्
+    move_window_up: विन्डो शीर्षमा सार्नुहोस्
+    pause_tiling: टेल टेल विन्डो प्रबन्धक रोक्नुहोस्
     reserve_bottom: रिजर्व तल
     reserve_float: रिजर्भ फ्लोट
     reserve_left: त्यागी बायाँ
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: रिजर्व स्ट्याक
     reserve_top: रिजर्व शीर्ष
     restore_sizes: आकार पुनर्स्थापना गर्नुहोस्
-    send_to_workspace_0: कार्यक्षेत्र 0 लाई पठाउनुहोस्
-    send_to_workspace_1: कार्यक्षेत्र 1 लाई पठाउनुहोस्
-    send_to_workspace_2: कार्यक्षेत्र 2 लाई पठाउनुहोस्
-    send_to_workspace_3: कार्यक्षेत्र to मा पठाउनुहोस्
-    send_to_workspace_4: कार्यक्षेत्र to मा पठाउनुहोस्
-    send_to_workspace_5: कार्यक्षेत्र to मा पठाउनुहोस्
-    send_to_workspace_6: कार्यक्षेत्र to मा पठाउनुहोस्
-    send_to_workspace_7: कार्यक्षेत्र to मा पठाउनुहोस्
-    send_to_workspace_8: कार्यक्षेत्र to मा पठाउनुहोस्
-    send_to_workspace_9: कार्यक्षेत्र to मा पठाउनुहोस्
-    start_weg_app_0: ध्यान केन्द्रित गर्नुहोस् वा टास्कबारबार स्थिति 1 मा सुरू गर्नुहोस्
-    start_weg_app_1: ध्यान केन्द्रित गर्नुहोस् वा टास्कबारबार स्थिति 2 मा सुरू गर्नुहोस्
-    start_weg_app_2: ध्यान केन्द्रित गर्नुहोस् वा टास्कबार बृहत स्थितिमा।
-    start_weg_app_3: ध्यान केन्द्रित गर्नुहोस् वा टास्कबार बम्बर स्थिति in मा सुरू गर्नुहोस्।
-    start_weg_app_4: ध्यान केन्द्रित गर्नुहोस् वा टास्कबार बृहार स्थितिमा।
-    start_weg_app_5: ध्यान केन्द्रित गर्नुहोस् वा टास्कबार बृद्धि गर्नुहोस्।
-    start_weg_app_6: ध्यान केन्द्रित गर्नुहोस् वा टास्कबारपरि स्थितिमा सुरू गर्नुहोस्।
-    start_weg_app_7: ध्यान केन्द्रित गर्नुहोस् वा टास्कबार बम्बई स्थितिमा।
-    start_weg_app_8: ध्यान केन्द्रित गर्नुहोस् वा टास्कबार बृहत स्थितिमा सुरू गर्नुहोस्।
-    start_weg_app_9: ध्यान केन्द्रित गर्नुहोस् वा टास्कबारपरि स्थिति 10 मा सुरू गर्नुहोस्
-    switch_workspace_0: कार्यक्षेत्र 1 मा स्विच गर्नुहोस्
-    switch_workspace_1: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
-    switch_workspace_2: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
-    switch_workspace_3: कार्यक्षेत्र in मा स्विच गर्नुहोस्
-    switch_workspace_4: कार्यक्षेत्र to मा स्विच गर्नुहोस्
-    switch_workspace_5: कार्यक्षेत्र in मा स्विच गर्नुहोस्।
-    switch_workspace_6: कार्यक्षेत्र in मा स्विच गर्नुहोस्
-    switch_workspace_7: कार्यक्षेत्र in मा स्विच गर्नुहोस्
-    switch_workspace_8: कार्यक्षेत्रमा स्विच गर्नुहोस्।
-    switch_workspace_9: कार्यक्षेत्र in मा स्विच गर्नुहोस्
-    toggle_launcher: धट लगाउनु
+    send_to_workspace: कार्यक्षेत्रमा पठाउनुहोस् {0}}}
+    start_weg_app: फोकस वा सुरू गर्नुहोस् {0} 0}}
+    switch_to_next_workspace: अर्को कार्यक्षेत्रमा स्विच गर्नुहोस्
+    switch_to_previous_workspace: अघिल्लो कार्यक्षेत्रमा स्विच गर्नुहोस्
+    switch_workspace: कार्यक्षेत्रमा स्विच {0}}
+    toggle_float: टगलल विन्डो फ्लोट मोड
+    toggle_launcher: लन्चचर टगल
+    toggle_monocle: टगलस्प्लिप मोयर्सिल मोनोकल मोड
   readonly_tooltip: यो एक पढ्न-मात्र सर्टकट हो
   reset: पूर्वनिर्धारित गर्न रिसेट गर्नुहोस्
 sides:

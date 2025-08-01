@@ -1,3 +1,5 @@
+cancel: Ghairi
+done: Imekamilika
 drivers:
   got_it: Nimepata
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI Service (slu-service) ni tegemezi/msaidizi kwa programu kufanya
     kazi vizuri.
   not_running_ok: Anza huduma
+shortcut:
+  register:
+    placeholder: Bonyeza mchanganyiko wowote muhimu
+    title: Kusajili njia ya mkato mpya
 tray:
   quit: Acha
   restart: Anzisha tena UI

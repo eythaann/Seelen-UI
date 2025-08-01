@@ -154,73 +154,52 @@ save: Guardar
 save_and_restart: Guardar y reiniciar
 see_more: Ver más
 shortcuts:
-  enable: Activar accesos directos integrados (ahk)
+  enable: Habilitar el sistema de accesos directos integrados
   enable_tooltip: >-
-    Desactivar si va a implementar sus propios accesos directos utilizando el
-    Seelen Core Api
+    Deshabilite si implementa su propio sistema de atajos utilizando el cliente
+    Seelen UI
   labels:
+    create_new_workspace: Crea un nuevo espacio de trabajo
+    cycle_stack_next: Pila de ciclo a continuación
+    cycle_stack_prev: Pila de ciclo anterior
+    cycle_wallpaper_next: Cambiar al siguiente fondo de pantalla
+    cycle_wallpaper_prev: Cambio a papel tapiz anterior
     decrease_height: Disminuir la altura
-    decrease_width: Disminuir Anchura
-    focus_bottom: Fondo Focus
-    focus_latest: Enfoque Lo último
-    focus_left: Focus Izquierda
-    focus_right: Enfoque a la derecha
-    focus_top: Focus Top
+    decrease_width: Disminuir el ancho
+    destroy_current_workspace: Destruir el espacio de trabajo actual
+    focus_bottom: Fondo de enfoque
+    focus_latest: Focus Último
+    focus_left: Se enfoca a la izquierda
+    focus_right: Concentrarse correctamente
+    focus_top: Top de enfoque
     increase_height: Aumentar la altura
-    increase_width: Aumentar la anchura
-    misc_open_settings: Abrir la configuración
-    misc_toggle_lock_tracing: Activar el seguimiento de bloqueos (registros)
-    misc_toggle_win_event_tracing: Activar el seguimiento de eventos de Win (registros)
-    move_to_workspace_0: Desplazarse al espacio de trabajo 1
-    move_to_workspace_1: Pasar al espacio de trabajo 2
-    move_to_workspace_2: Pasar al espacio de trabajo 3
-    move_to_workspace_3: Pasar al espacio de trabajo 4
-    move_to_workspace_4: Pasar al espacio de trabajo 5
-    move_to_workspace_5: Pasar al espacio de trabajo 6
-    move_to_workspace_6: Pasar al espacio de trabajo 7
-    move_to_workspace_7: Pasar al espacio de trabajo 8
-    move_to_workspace_8: Pasar al espacio de trabajo 9
-    move_to_workspace_9: Pasar al espacio de trabajo 10
-    reserve_bottom: Fondo de reserva
-    reserve_float: Flotador de reserva
-    reserve_left: Reserva izquierda
-    reserve_right: Derecho de reserva
-    reserve_stack: Pila de reserva
-    reserve_top: Reserva Top
-    restore_sizes: Restaurar tamaños
-    send_to_workspace_0: Enviar al espacio de trabajo 1
-    send_to_workspace_1: Enviar a Espacio de trabajo 2
-    send_to_workspace_2: Enviar a Espacio de trabajo 3
-    send_to_workspace_3: Enviar a Espacio de trabajo 4
-    send_to_workspace_4: Enviar a Espacio de trabajo 5
-    send_to_workspace_5: Enviar a Espacio de trabajo 6
-    send_to_workspace_6: Enviar a Espacio de trabajo 7
-    send_to_workspace_7: Enviar a Espacio de trabajo 8
-    send_to_workspace_8: Enviar al espacio de trabajo 9
-    send_to_workspace_9: Enviar a Espacio de trabajo 10
-    start_weg_app_0: Enfocar o comenzar la aplicación en la posición de la barra de tareas 1
-    start_weg_app_1: Enfocar o comenzar la aplicación en la posición de la barra de tareas 2
-    start_weg_app_2: Enfocar o comenzar la aplicación en la posición de la barra de tareas 3
-    start_weg_app_3: Enfocar o comenzar la aplicación en la posición de la barra de tareas 4
-    start_weg_app_4: Enfocar o comenzar la aplicación en la posición de la barra de tareas 5
-    start_weg_app_5: Enfocar o comenzar la aplicación en la posición de la barra de tareas 6
-    start_weg_app_6: Enfocar o comenzar la aplicación en la posición de la barra de tareas 7
-    start_weg_app_7: Enfocar o comenzar la aplicación en la posición de la barra de tareas 8
-    start_weg_app_8: Enfocar o comenzar la aplicación en la posición de la barra de tareas 9
-    start_weg_app_9: Enfoque o inicie la aplicación en la posición de la barra de tareas 10
-    switch_workspace_0: Cambiar al espacio de trabajo 1
-    switch_workspace_1: Cambiar al espacio de trabajo 2
-    switch_workspace_2: Cambiar al espacio de trabajo 3
-    switch_workspace_3: Cambiar al espacio de trabajo 4
-    switch_workspace_4: Cambiar al espacio de trabajo 5
-    switch_workspace_5: Cambiar al espacio de trabajo 6
-    switch_workspace_6: Cambiar al espacio de trabajo 7
-    switch_workspace_7: Cambiar al espacio de trabajo 8
-    switch_workspace_8: Cambiar al espacio de trabajo 9
-    switch_workspace_9: Cambiar al espacio de trabajo 10
-    toggle_launcher: Toggle
-  readonly_tooltip: Se trata de un acceso directo de sólo lectura
-  reset: Restablecer valores por defecto
+    increase_width: Aumento de ancho
+    misc_open_settings: Abrir configuración
+    misc_toggle_lock_tracing: Rastreo de bloqueo de al revés (registros)
+    misc_toggle_win_event_tracing: Rastreo de eventos para alternar (registros)
+    move_to_workspace: Mover al espacio de trabajo {{0}}
+    move_window_down: Mueva la ventana a la parte inferior
+    move_window_left: Mover la ventana a la izquierda
+    move_window_right: Mover la ventana a la derecha
+    move_window_up: Mover la ventana hacia arriba
+    pause_tiling: PAUSE Manager de ventana de mosaico
+    reserve_bottom: Parte inferior de reserva
+    reserve_float: Reservar flotar
+    reserve_left: Reserva a la izquierda
+    reserve_right: Reservar a la derecha
+    reserve_stack: Reserva
+    reserve_top: Top de reserva
+    restore_sizes: Tamaños de restauración
+    send_to_workspace: Enviar al espacio de trabajo {{0}}
+    start_weg_app: Aplicación de enfoque o inicio {{0}}
+    switch_to_next_workspace: Cambiar al siguiente espacio de trabajo
+    switch_to_previous_workspace: Cambiar al espacio de trabajo anterior
+    switch_workspace: Cambiar al espacio de trabajo {{0}}
+    toggle_float: Modo de flotación de la ventana de alternativa
+    toggle_launcher: Alternar lanzador
+    toggle_monocle: Modo de monocle del espacio de trabajo de al revés
+  readonly_tooltip: Este es un atajo de solo lectura
+  reset: Reiniciar a los valores predeterminados
 sides:
   bottom: Fondo
   left: Izquierda

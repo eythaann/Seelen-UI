@@ -151,11 +151,19 @@ save: Аврах
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
 see_more: Дэлгэрэнгүйг үзэх
 shortcuts:
-  enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
-  enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
+  enable: Баригдсан товчлол системийг идэвхжүүлэх
+  enable_tooltip: >-
+    Хэрэв та Seelen UI Client ашиглан өөрийн товчлолыг ашиглан өөрийн товчлолыг
+    хэрэгжүүлэхийг идэвхгүй болго
   labels:
+    create_new_workspace: Шинэ ажлын талбар үүсгэх
+    cycle_stack_next: Циклийн овоолго
+    cycle_stack_prev: Циклийн овоолго өмнөх
+    cycle_wallpaper_next: Дараагийн ханын зураг руу шилжих
+    cycle_wallpaper_prev: Өмнөх ханын зураг руу шилжих
     decrease_height: Өндөр хэмжээг
     decrease_width: Гарын хойш хөгжих
+    destroy_current_workspace: Одоогийн ажлын талбарыг устгах
     focus_bottom: Дээр төвлөрүү
     focus_latest: Фандик хамгийн сүүлийн үеийн
     focus_left: Зүүн талд байна
@@ -166,16 +174,12 @@ shortcuts:
     misc_open_settings: АВир танилцуулга
     misc_toggle_lock_tracing: Түгжих Tracing Tracing (бүртгэл)
     misc_toggle_win_event_tracing: Тогтмол үйл явдлын үеэр Togge To
-    move_to_workspace_0: Ажлын талбар руу шилжих 0
-    move_to_workspace_1: Ажлын талбар руу шилжих 1
-    move_to_workspace_2: Ажлын талбар руу шилжих 2
-    move_to_workspace_3: Ажлын талбар руу шилжих 3
-    move_to_workspace_4: Ажлын талбарт шилжих 4
-    move_to_workspace_5: Ажлын талбар руу шилжих 5
-    move_to_workspace_6: Ажлын талбар руу шилжих 6
-    move_to_workspace_7: Ажлын талбар руу шилжих 7
-    move_to_workspace_8: Ажлын талбар руу шилжих 8
-    move_to_workspace_9: Ажлын талбар руу шилжих 9
+    move_to_workspace: Ажлын талбар руу шилжих {{0}}
+    move_window_down: Цонхыг доош нь шилжүүлэх
+    move_window_left: Цонхыг зүүн тийш шилжүүлэх
+    move_window_right: Цонхыг баруун тийш нь шилжүүлэх
+    move_window_up: Цонхыг дээд руу шилжүүлэх
+    pause_tiling: Цонхны менежерийг түр зогсоох
     reserve_bottom: Нөөцийг нөөцлөх
     reserve_float: Нөөцийн хөвөх
     reserve_left: Зуух Зүүн
@@ -183,37 +187,14 @@ shortcuts:
     reserve_stack: Дурсамж авах
     reserve_top: Нэр гаргах
     restore_sizes: Хэмжээг сэргээх
-    send_to_workspace_0: Ажлын талбарт 0 руу илгээнэ үү
-    send_to_workspace_1: Ажлын талбар руу илгээх 1
-    send_to_workspace_2: Ажлын талбарт 2 руу илгээнэ үү
-    send_to_workspace_3: Ажлын талбар руу илгээх 3
-    send_to_workspace_4: Ажлын талбарт илгээх 4
-    send_to_workspace_5: Ажлын талбар руу илгээх 5
-    send_to_workspace_6: Workpace 6 руу илгээнэ үү
-    send_to_workspace_7: Ажлын талбар руу илгээх 7
-    send_to_workspace_8: Ажлын талбар руу илгээх 8
-    send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
-    start_weg_app_0: Taskbar-ийн байрлалд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    start_weg_app_1: Taskbar-ийн байрлал 2-т анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    start_weg_app_2: Taskbar-ийн байрлал дээр анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    start_weg_app_3: Taskbar-ийн байрлал дээр 4-р байранд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    start_weg_app_4: Taskbar-ийн байрлал дахь 5-р байранд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    start_weg_app_5: Taskbar-ийн TaskBar-ийн 6-р байранд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    start_weg_app_6: Taskbar-ийн төв байрлалд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    start_weg_app_7: Taskbar-ийн 8-р байранд анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    start_weg_app_8: Taskbar-ийн байрлал дээр анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх 9
-    start_weg_app_9: Taskbar-ийн ажлын байрны төв дээр анхаарлаа төвлөрүүлэх эсвэл эхлүүлэх
-    switch_workspace_0: Ажлын талбарт шилжих 1
-    switch_workspace_1: Ажлын талбарт 2 руу шилжих
-    switch_workspace_2: Ажлын талбарт 2 руу шилжих
-    switch_workspace_3: Ажлын талбар руу шилжих 3
-    switch_workspace_4: Ажлын талбар 4 руу шилжих
-    switch_workspace_5: Ажлын талбар руу шилжих 5
-    switch_workspace_6: Ажлын талбарт шилжих 6
-    switch_workspace_7: Ажлын талбарт шилжих 7
-    switch_workspace_8: Ажлын талбар руу шилжих 8
-    switch_workspace_9: Ажлын талбарт шилжих 9
-    toggle_launcher: Дугуй унах
+    send_to_workspace: Ажлын талбар руу илгээх {{0}}
+    start_weg_app: Фокус эсвэл програмыг эхлүүлэх {{0}}
+    switch_to_next_workspace: Дараагийн ажлын талбар руу шилжих
+    switch_to_previous_workspace: Өмнөх ажлын талбар руу шилжих
+    switch_workspace: Ажлын талбар руу шилжих {{0}}
+    toggle_float: Windows Hoad Mode-ийг сэлгэх
+    toggle_launcher: Logge Launcher
+    toggle_monocle: Ажлын талбар монокле горимыг сэлгэх
   readonly_tooltip: Энэ бол зөвхөн унших товчлол юм
   reset: Үндсэндээ тохируулах
 sides:

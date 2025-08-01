@@ -1,3 +1,5 @@
+cancel: 취소
+done: 완료
 drivers:
   got_it: 알겠습니다.
   monitor_disabled: 일부 모니터 드라이버가 비활성화되어 있는 것 같습니다. Seelen UI가 제대로 작동하도록 활성화해 주세요.
@@ -22,6 +24,10 @@ service:
   not_running: Seelen UI 서비스가 실행되고 있지 않습니다.
   not_running_description: Seelen UI 서비스(slu-service)는 앱이 제대로 작동하기 위한 종속성/도우미입니다.
   not_running_ok: 서비스 시작
+shortcut:
+  register:
+    placeholder: 주요 조합을 누릅니다
+    title: 새로운 바로 가기 등록
 tray:
   quit: 종료
   restart: UI 다시 시작

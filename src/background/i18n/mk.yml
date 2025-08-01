@@ -1,3 +1,5 @@
+cancel: Откажи
+done: Готово
 drivers:
   got_it: Го добив
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI Service (slu-service) е зависност/помошник за апликацијата да
     работи правилно.
   not_running_ok: Започнете ја услугата
+shortcut:
+  register:
+    placeholder: Притиснете која било комбинација на копче
+    title: Регистрирање на нова кратенка
 tray:
   quit: Откажете се
   restart: Рестартирај UI

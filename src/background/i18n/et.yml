@@ -1,3 +1,5 @@
+cancel: Tühistama
+done: Tehtud
 drivers:
   got_it: Sain selle
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seeleni kasutajaliidese teenus (slu-teenus) on rakenduse nõuetekohaseks
     tööks sõltuvus/abimees.
   not_running_ok: Käivitage teenus
+shortcut:
+  register:
+    placeholder: Vajutage mis tahes võtmekombinatsiooni
+    title: Uue otsetee registreerimine
 tray:
   quit: Lõpeta
   restart: UI taaskäivitamine

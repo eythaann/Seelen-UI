@@ -150,71 +150,50 @@ save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 see_more: Meer zien
 shortcuts:
-  enable: Geïntegreerde snelkoppelingen inschakelen (AHK)
+  enable: Schakel ingebouwd snelkoppelsysteem in
   enable_tooltip: >-
-    Schakel uit als u uw eigen snelkoppelingen implementeert met behulp van de
-    Seelen Core API
+    Schakel uit of u uw eigen snelkoppelsysteem implementeert met behulp van de
+    Selen UI -client
   labels:
+    create_new_workspace: Maak een nieuwe werkruimte
+    cycle_stack_next: Cycle Stack Volgende
+    cycle_stack_prev: Cyclusstapel vorige
+    cycle_wallpaper_next: Verander naar het volgende behang
+    cycle_wallpaper_prev: Verander naar het vorige achtergrond
     decrease_height: De hoogte verminderen
-    decrease_width: Breedte verminderen
-    focus_bottom: Focus bodem
+    decrease_width: Breedte afnemen
+    destroy_current_workspace: Vernietig de huidige werkruimte
+    focus_bottom: Focusbodem
     focus_latest: Focus nieuwste
     focus_left: Focus links
-    focus_right: Focus rechts
+    focus_right: Focus goed
     focus_top: Focus Top
-    increase_height: Hoogte verhogen
-    increase_width: Breedte vermeerderen
+    increase_height: Verhoog de hoogte
+    increase_width: Verhoog de breedte
     misc_open_settings: Open instellingen
-    misc_toggle_lock_tracing: Schakel vergrendeling traceren (logboeken)
+    misc_toggle_lock_tracing: Schakelvergrendeling traceren (logboeken)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (Logs)
-    move_to_workspace_0: Verplaats naar de werkruimte 0
-    move_to_workspace_1: Verplaats naar werkruimte 1
-    move_to_workspace_2: Verplaats naar werkruimte 2
-    move_to_workspace_3: Verplaatsen naar werkruimte 3
-    move_to_workspace_4: Verplaats naar werkruimte 4
-    move_to_workspace_5: Verplaats naar werkruimte 5
-    move_to_workspace_6: Verplaats naar werkruimte 6
-    move_to_workspace_7: Verplaats naar werkruimte 7
-    move_to_workspace_8: Verplaats naar werkruimte 8
-    move_to_workspace_9: Verplaats naar werkruimte 9
-    reserve_bottom: Reserveer bodem
+    move_to_workspace: Ga naar de werkruimte {{0}}
+    move_window_down: Verplaats venster naar beneden
+    move_window_left: Verplaats het venster naar links
+    move_window_right: Verplaats venster naar rechts
+    move_window_up: Verplaats het venster naar boven
+    pause_tiling: Pauzeer Tiling Window Manager
+    reserve_bottom: Reserve bodem
     reserve_float: Reserve Float
     reserve_left: Reserveer links
-    reserve_right: Reserveer rechts
-    reserve_stack: Reservestapel
+    reserve_right: Reserve recht
+    reserve_stack: Reservetapel
     reserve_top: Reserveer top
     restore_sizes: Herstel de maten
-    send_to_workspace_0: Stuur naar werkruimte 0
-    send_to_workspace_1: Stuur naar werkruimte 1
-    send_to_workspace_2: Stuur naar werkruimte 2
-    send_to_workspace_3: Stuur naar werkruimte 3
-    send_to_workspace_4: Stuur naar werkruimte 4
-    send_to_workspace_5: Stuur naar werkruimte 5
-    send_to_workspace_6: Stuur naar werkruimte 6
-    send_to_workspace_7: Stuur naar werkruimte 7
-    send_to_workspace_8: Stuur naar werkruimte 8
-    send_to_workspace_9: Stuur naar werkruimte 9
-    start_weg_app_0: Focus of start app op taakbalkpositie 1
-    start_weg_app_1: Focus of start app op taakbalkpositie 2
-    start_weg_app_2: Focus of start app op taakbalkpositie 3
-    start_weg_app_3: Focus of start app op taakbalkpositie 4
-    start_weg_app_4: Focus of start app op taakbalkpositie 5
-    start_weg_app_5: Focus of start app op taakbalkpositie 6
-    start_weg_app_6: Focus of start app op taakbalkpositie 7
-    start_weg_app_7: Focus of start app op taakbalkpositie 8
-    start_weg_app_8: Focus of start app op taakbalkpositie 9
-    start_weg_app_9: Focus of start app op taakbalkpositie 10
-    switch_workspace_0: Schakel over naar werkruimte 1
-    switch_workspace_1: Schakel over naar werkruimte 2
-    switch_workspace_2: Schakel over naar werkruimte 2
-    switch_workspace_3: Schakel over naar werkruimte 3
-    switch_workspace_4: Schakel over naar werkruimte 4
-    switch_workspace_5: Schakel over naar werkruimte 5
-    switch_workspace_6: Schakel over naar werkruimte 6
-    switch_workspace_7: Schakel over naar werkruimte 7
-    switch_workspace_8: Schakel over naar werkruimte 8
-    switch_workspace_9: Schakel over naar werkruimte 9
-    toggle_launcher: Schakelaar
+    send_to_workspace: Verzenden naar werkruimte {{0}}
+    start_weg_app: Focus of start applicatie {{0}}
+    switch_to_next_workspace: Schakel over naar de volgende werkruimte
+    switch_to_previous_workspace: Schakel over naar vorige werkruimte
+    switch_workspace: Schakel over naar werkruimte {{0}}
+    toggle_float: Schakelvenster Float -modus
+    toggle_launcher: Schakelwerper
+    toggle_monocle: Schakel de werkruimte Monocle -modus
   readonly_tooltip: Dit is een alleen-lezen snelkoppeling
   reset: Reset naar standaardwaarden
 sides:

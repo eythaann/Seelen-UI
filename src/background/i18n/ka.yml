@@ -1,3 +1,5 @@
+cancel: გაუქმება
+done: გაკეთებული
 drivers:
   got_it: მიიღო
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI Service (slu-service) არის დამოკიდებულება/დამხმარე აპის გამართულად
     მუშაობისთვის.
   not_running_ok: სერვისის დაწყება
+shortcut:
+  register:
+    placeholder: დააჭირეთ ნებისმიერ საკვანძო კომბინაციას
+    title: ახალი მალსახმობის რეგისტრაცია
 tray:
   quit: მიტოვება
   restart: გადატვირთეთ UI

@@ -79,8 +79,10 @@ pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_default_settings() -> Settings {
-    Settings::default()
+pub fn state_get_default_settings() -> Result<Settings> {
+    let mut settings = Settings::default();
+    settings.sanitize()?;
+    Ok(settings)
 }
 
 #[tauri::command(async)]

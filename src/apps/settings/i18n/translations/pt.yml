@@ -152,69 +152,50 @@ save: Salvar
 save_and_restart: Salve e reinicie
 see_more: Veja mais
 shortcuts:
-  enable: Habilitar atalhos integrados (ahk)
-  enable_tooltip: Desative se você implementar seus próprios atalhos usando a API Seelen Core
+  enable: Habilitar o sistema de atalhos embutidos
+  enable_tooltip: >-
+    Desative se você implementar seu próprio sistema de atalhos usando o Seelen
+    UI Client
   labels:
-    decrease_height: Diminuir Altura
-    decrease_width: Diminuir largura
-    focus_bottom: Foco Inferior
+    create_new_workspace: Crie um novo espaço de trabalho
+    cycle_stack_next: Pilha de ciclo a seguir
+    cycle_stack_prev: Pilha de ciclo anterior
+    cycle_wallpaper_next: Mudar para o próximo papel de parede
+    cycle_wallpaper_prev: Mudar para papel de parede anterior
+    decrease_height: Diminuir a altura
+    decrease_width: Diminuir a largura
+    destroy_current_workspace: Destrua o espaço de trabalho atual
+    focus_bottom: Foco no fundo
     focus_latest: Foco mais recente
-    focus_left: Foco à esquerda
-    focus_right: Foco à direita
-    focus_top: Foco Superior
+    focus_left: Foco restante
+    focus_right: Foco certo
+    focus_top: Focus Top
     increase_height: Aumentar a altura
-    increase_width: Aumentar largura
+    increase_width: Aumentar a largura
     misc_open_settings: Abra as configurações
-    misc_toggle_lock_tracing: Alternar o rastreamento de bloqueio (logs)
+    misc_toggle_lock_tracing: Traçar o traçado de trava (logs)
     misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
-    move_to_workspace_0: Mover para o espaço de trabalho 0
-    move_to_workspace_1: Mover para o espaço de trabalho 1
-    move_to_workspace_2: Mover para o espaço de trabalho 2
-    move_to_workspace_3: Mover para o espaço de trabalho 3
-    move_to_workspace_4: Mover para o espaço de trabalho 4
-    move_to_workspace_5: Mover para o espaço de trabalho 5
-    move_to_workspace_6: Mover para o espaço de trabalho 6
-    move_to_workspace_7: Mover para o espaço de trabalho 7
-    move_to_workspace_8: Mover para o espaço de trabalho 8
-    move_to_workspace_9: Mover para o espaço de trabalho 9
-    reserve_bottom: Reserva Inferior
-    reserve_float: Reserva Flutuante
-    reserve_left: Reserva à Esquerda
-    reserve_right: Reserva à Direita
-    reserve_stack: Pilha de Reserva
-    reserve_top: Reserva Superior
+    move_to_workspace: Mova para o espaço de trabalho {{0}}
+    move_window_down: Mova a janela para o fundo
+    move_window_left: Mova a janela para a esquerda
+    move_window_right: Mova a janela para a direita
+    move_window_up: Mova a janela para o topo
+    pause_tiling: PAUSA PAUSE JANEGENTE DE JANDA TILING
+    reserve_bottom: Fundo de reserva
+    reserve_float: Reserve flutuar
+    reserve_left: Reserve à esquerda
+    reserve_right: Reserve certo
+    reserve_stack: Pilha de reserva
+    reserve_top: Reserve Top
     restore_sizes: Restaurar tamanhos
-    send_to_workspace_0: Enviar para o espaço de trabalho 0
-    send_to_workspace_1: Enviar para o espaço de trabalho 1
-    send_to_workspace_2: Enviar para o espaço de trabalho 2
-    send_to_workspace_3: Enviar para o espaço de trabalho 3
-    send_to_workspace_4: Enviar para o espaço de trabalho 4
-    send_to_workspace_5: Enviar para o espaço de trabalho 5
-    send_to_workspace_6: Enviar para o espaço de trabalho 6
-    send_to_workspace_7: Enviar para o espaço de trabalho 7
-    send_to_workspace_8: Enviar para o espaço de trabalho 8
-    send_to_workspace_9: Enviar para o espaço de trabalho 9
-    start_weg_app_0: Concentre ou inicie o aplicativo na barra de tarefas 1
-    start_weg_app_1: Concentre ou inicie o aplicativo na barra de tarefas 2
-    start_weg_app_2: Concentre ou inicie o aplicativo na barra de tarefas 3
-    start_weg_app_3: Concentre ou inicie o aplicativo na barra de tarefas 4
-    start_weg_app_4: Concentre ou inicie o aplicativo na barra de tarefas 5
-    start_weg_app_5: Concentre ou inicie o aplicativo na barra de tarefas 6
-    start_weg_app_6: Concentre ou inicie o aplicativo na Posição da Barra de Tarefa 7
-    start_weg_app_7: Concentre ou inicie o aplicativo na barra de tarefas 8
-    start_weg_app_8: Concentre ou inicie o aplicativo na barra de tarefas 9
-    start_weg_app_9: Concentre ou inicie o aplicativo na barra de tarefas 10
-    switch_workspace_0: Mudar para o espaço de trabalho 1
-    switch_workspace_1: Mudar para o espaço de trabalho 2
-    switch_workspace_2: Mudar para o espaço de trabalho 2
-    switch_workspace_3: Mudar para o espaço de trabalho 3
-    switch_workspace_4: Mudar para o espaço de trabalho 4
-    switch_workspace_5: Mudar para o espaço de trabalho 5
-    switch_workspace_6: Mudar para o espaço de trabalho 6
-    switch_workspace_7: Mudar para o espaço de trabalho 7
-    switch_workspace_8: Mudar para o espaço de trabalho 8
-    switch_workspace_9: Mudar para o espaço de trabalho 9
-    toggle_launcher: Alternar
+    send_to_workspace: Enviar para o espaço de trabalho {{0}}
+    start_weg_app: Concentre ou inicie o aplicativo {{0}}
+    switch_to_next_workspace: Mude para o próximo espaço de trabalho
+    switch_to_previous_workspace: Mudar para o espaço de trabalho anterior
+    switch_workspace: Mudar para o espaço de trabalho {{0}}
+    toggle_float: Alterne o modo de flutuação da janela
+    toggle_launcher: TOGLGLE Lançador
+    toggle_monocle: Alternar o modo de monocle na área de trabalho
   readonly_tooltip: Este é um atalho somente leitura
   reset: Redefinir para padrões
 sides:

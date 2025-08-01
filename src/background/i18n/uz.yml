@@ -1,3 +1,5 @@
+cancel: Bekor qilmoq
+done: Bajarildi
 drivers:
   got_it: Tushundim
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI xizmati (slu-xizmati) ilovaning to'g'ri ishlashi uchun
     qaramlik/yordamchi hisoblanadi.
   not_running_ok: Xizmatni ishga tushirish
+shortcut:
+  register:
+    placeholder: Har qanday tugmachani bosing
+    title: Yangi yorliqni ro'yxatdan o'tkazish
 tray:
   quit: Ketmoq
   restart: Ui qayta ishga tushiring

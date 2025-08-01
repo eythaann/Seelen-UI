@@ -1,3 +1,5 @@
+cancel: Cancelar
+done: Hecho
 drivers:
   got_it: Entendido.
   monitor_disabled: >-
@@ -34,6 +36,10 @@ service:
     Seelen UI Service (slu-service) es una dependencia/ayudante para que la
     aplicación funcione correctamente.
   not_running_ok: Iniciar servicio
+shortcut:
+  register:
+    placeholder: Presione cualquier combinación de teclas
+    title: Registrando un nuevo atajo
 tray:
   quit: Deje de
   restart: Reiniciar IU

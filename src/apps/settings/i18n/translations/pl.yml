@@ -152,71 +152,52 @@ save: Zastosuj
 save_and_restart: Zastosuj i uruchom ponownie
 see_more: Zobacz więcej
 shortcuts:
-  enable: Włącz zintegrowane skróty (AHK)
-  enable_tooltip: Wyłącz, jeśli zaimplementujesz własne skróty za pomocą API Seelen Core
+  enable: Włącz wbudowany system skrótów
+  enable_tooltip: >-
+    Wyłącz, jeśli zaimplementujesz własny system skrótów za pomocą klienta
+    Seelen UI
   labels:
-    decrease_height: Zmniejsz wysokość
-    decrease_width: Zmniejsz szerokość
-    focus_bottom: Przełącz na okno pod spodem
-    focus_latest: Przełącz na ostatnie okno
-    focus_left: Przełącz na lewe okno
-    focus_right: Przełącz na prawe okno
-    focus_top: Przełącz na okno na wierzchu
-    increase_height: Zwiększ wysokość
-    increase_width: Zwiększ szerokość
+    create_new_workspace: Utwórz nowy obszar roboczy
+    cycle_stack_next: Następnie stos cyklowy
+    cycle_stack_prev: Stos cyklu poprzedni
+    cycle_wallpaper_next: Zmień na następną tapetę
+    cycle_wallpaper_prev: Zmień na poprzednią tapetę
+    decrease_height: Zmniejszyć wysokość
+    decrease_width: Zmniejszyć szerokość
+    destroy_current_workspace: Zniszcz obecny obszar roboczy
+    focus_bottom: Focus Dim
+    focus_latest: Focus najnowszy
+    focus_left: Skup się na lewej
+    focus_right: Skup się dobrze
+    focus_top: Focus Top
+    increase_height: Zwiększyć wysokość
+    increase_width: Zwiększyć szerokość
     misc_open_settings: Otwórz ustawienia
-    misc_toggle_lock_tracing: Przełącz śledzenie blokady (dzienniki)
-    misc_toggle_win_event_tracing: Przełącz śledzenie zdarzeń systemu Windows (dzienniki)
-    move_to_workspace_0: Przenieś na pulpit 0
-    move_to_workspace_1: Przenieś na pulpit 1
-    move_to_workspace_2: Przenieś na pulpit 2
-    move_to_workspace_3: Przenieś na pulpit 3
-    move_to_workspace_4: Przenieś na pulpit 4
-    move_to_workspace_5: Przenieś na pulpit 5
-    move_to_workspace_6: Przenieś na pulpit 6
-    move_to_workspace_7: Przenieś na pulpit 7
-    move_to_workspace_8: Przenieś na pulpit 8
-    move_to_workspace_9: Przenieś na pulpit 9
+    misc_toggle_lock_tracing: Przełączanie śledzenia blokady (dzienniki)
+    misc_toggle_win_event_tracing: Przełączanie zdarzeń wygranych (dzienniki)
+    move_to_workspace: Przenieś się do przestrzeni roboczej {{0}}
+    move_window_down: Przenieś okno na dolny
+    move_window_left: Przesuń okno po lewej
+    move_window_right: Przenieś okno po prawej stronie
+    move_window_up: Przesuń okno na górę
+    pause_tiling: Zatrzymaj menedżer okien kafelków
     reserve_bottom: Rezerwować dno
     reserve_float: Rezerwować pływak
     reserve_left: Rezerwa w lewo
     reserve_right: Rezerwuj prawnie
     reserve_stack: Stos rezerwowy
     reserve_top: Rezerwuj top
-    restore_sizes: Przywróć rozmiar
-    send_to_workspace_0: Wyślij na pulpit 0
-    send_to_workspace_1: Wyślij na pulpit 1
-    send_to_workspace_2: Wyślij na pulpit 2
-    send_to_workspace_3: Wyślij na pulpit 3
-    send_to_workspace_4: Wyślij na pulpit 4
-    send_to_workspace_5: Wyślij na pulpit 5
-    send_to_workspace_6: Wyślij na pulpit 6
-    send_to_workspace_7: Wyślij na pulpit 7
-    send_to_workspace_8: Wyślij na pulpit 8
-    send_to_workspace_9: Wyślij na pulpit 9
-    start_weg_app_0: Uruchom lub przełącz się na aplikację z pozycji 1 paska zadań
-    start_weg_app_1: Uruchom lub przełącz się na aplikację z pozycji 2 paska zadań
-    start_weg_app_2: Uruchom lub przełącz się na aplikację z pozycji 3 paska zadań
-    start_weg_app_3: Uruchom lub przełącz się na aplikację z pozycji 4 paska zadań
-    start_weg_app_4: Uruchom lub przełącz się na aplikację z pozycji 5 paska zadań
-    start_weg_app_5: Uruchom lub przełącz się na aplikację z pozycji 6 paska zadań
-    start_weg_app_6: Uruchom lub przełącz się na aplikację z pozycji 7 paska zadań
-    start_weg_app_7: Uruchom lub przełącz się na aplikację z pozycji 8 paska zadań
-    start_weg_app_8: Uruchom lub przełącz się na aplikację z pozycji 9 paska zadań
-    start_weg_app_9: Uruchom lub przełącz się na aplikację z pozycji 10 paska zadań
-    switch_workspace_0: Przejdź na pulpit 1
-    switch_workspace_1: Przejdź na pulpit 2
-    switch_workspace_2: Przejdź na pulpit 2
-    switch_workspace_3: Przejdź na pulpit 3
-    switch_workspace_4: Przejdź na pulpit 4
-    switch_workspace_5: Przejdź na pulpit 5
-    switch_workspace_6: Przejdź na pulpit 6
-    switch_workspace_7: Przejdź na pulpit 7
-    switch_workspace_8: Przejdź na pulpit 8
-    switch_workspace_9: Przejdź na pulpit 9
-    toggle_launcher: Uruchom launcher
-  readonly_tooltip: Ten skrót nie może zostać zmieniony
-  reset: Przywróć ustawienia domyślne
+    restore_sizes: Przywróć rozmiary
+    send_to_workspace: Wyślij do przestrzeni roboczej {{0}}
+    start_weg_app: Focus lub uruchom aplikację {{0}}
+    switch_to_next_workspace: Przejdź na następny obszar roboczy
+    switch_to_previous_workspace: Przejdź na poprzedni obszar roboczy
+    switch_workspace: Przełącz na przestrzeń roboczą {{0}}
+    toggle_float: Tryb przełączania okna pływaka
+    toggle_launcher: Przełącz wyrzutnię
+    toggle_monocle: Przełącz tryb monocle przestrzeni roboczej
+  readonly_tooltip: To jest skrót tylko do odczytu
+  reset: Zresetuj do domyślnych
 sides:
   bottom: Dół
   left: Lewo

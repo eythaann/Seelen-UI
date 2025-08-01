@@ -151,13 +151,19 @@ save: Megment
 save_and_restart: Mentés és újraindítás
 see_more: Lásd még
 shortcuts:
-  enable: Engedélyezze az integrált parancsikonokat (AHK)
+  enable: Engedélyezze a beépített parancsikonok rendszerét
   enable_tooltip: >-
-    Tiltsa le, ha a Seelen Core API segítségével megvalósítja saját
+    Tiltsa le, ha a Seelen UI kliens segítségével megvalósítja saját
     parancsikonjait
   labels:
+    create_new_workspace: Hozzon létre új munkaterületet
+    cycle_stack_next: Cycle Stack Next
+    cycle_stack_prev: Cycle Stack előző
+    cycle_wallpaper_next: Váltson a következő háttérképre
+    cycle_wallpaper_prev: Váltás az előző háttérképre
     decrease_height: Csökkenési magasság
     decrease_width: Csökken a szélesség
+    destroy_current_workspace: Pusztítsd el az aktuális munkaterületet
     focus_bottom: Fókusz alsó
     focus_latest: Fókuszban a legújabb
     focus_left: Fókusz balra
@@ -168,16 +174,12 @@ shortcuts:
     misc_open_settings: Nyissa meg a beállításokat
     misc_toggle_lock_tracing: Váltás zárkövetés (naplók)
     misc_toggle_win_event_tracing: Váltás a győzelem események nyomon követése (naplók)
-    move_to_workspace_0: Költözni a 0 munkaterületre
-    move_to_workspace_1: Költözni az 1. munkaterületre
-    move_to_workspace_2: Költözni a 2. munkaterületre
-    move_to_workspace_3: Költözni a Munkaterületre 3
-    move_to_workspace_4: Költözni a Workspace 4 -re
-    move_to_workspace_5: Költözni az 5. munkaterületre
-    move_to_workspace_6: Költözni a 6. munkaterületre
-    move_to_workspace_7: Költözni a Workspace 7 -re
-    move_to_workspace_8: Költözni a 8. munkaterületre
-    move_to_workspace_9: Költözni a munkaterületre 9
+    move_to_workspace: Költözni a munkaterületre {{0}}
+    move_window_down: Mozgassa az ablakot az aljára
+    move_window_left: Mozgassa az ablakot balra
+    move_window_right: Mozgassa az ablakot jobbra
+    move_window_up: Mozgassa az ablakot a tetejére
+    pause_tiling: Szünet a burkolólap ablakkezelőnek
     reserve_bottom: Tartalék alsó rész
     reserve_float: Tartalék úszó
     reserve_left: Tartalék balra
@@ -185,37 +187,14 @@ shortcuts:
     reserve_stack: Tartalékköteg
     reserve_top: Tartalék
     restore_sizes: Visszaállítani a méreteket
-    send_to_workspace_0: Küldje el a 0 munkaterületre
-    send_to_workspace_1: Küldje el az 1. munkaterületre
-    send_to_workspace_2: Küldje el a Workspace 2 -et
-    send_to_workspace_3: Küldje el a Workspace 3 -ot
-    send_to_workspace_4: Küldje el a Workspace 4 -et
-    send_to_workspace_5: Küldje el az 5. munkaterületre
-    send_to_workspace_6: Küldje el a 6. munkaterületre
-    send_to_workspace_7: Küldje el a Workspace 7 -et
-    send_to_workspace_8: Küldje el a 8. munkaterületre
-    send_to_workspace_9: Küldje el a munkaterületre 9
-    start_weg_app_0: Fókuszáljon vagy indítsa el az alkalmazást az 1. tálca pozíciójára
-    start_weg_app_1: Fókuszáljon vagy indítsa el az alkalmazást a 2. tálca pozíciójára
-    start_weg_app_2: Fókuszáljon vagy indítsa el az alkalmazást a 3. tálca pozíciójára
-    start_weg_app_3: Fókuszáljon vagy indítsa el az alkalmazást a 4. tálca pozíciójára
-    start_weg_app_4: Fókuszáljon vagy indítsa el az alkalmazást az 5. tálca pozíciójára
-    start_weg_app_5: Fókuszáljon vagy indítsa el az alkalmazást a tálca 6. pozíciójára
-    start_weg_app_6: Fókuszáljon vagy indítsa el az alkalmazást a tálca 7. helyzetére
-    start_weg_app_7: Fókuszáljon vagy indítsa el az alkalmazást a tálca 8. pozíciójára
-    start_weg_app_8: Fókuszáljon vagy indítsa el az alkalmazást a tálca 9. pozíciójára
-    start_weg_app_9: Fókuszáljon vagy indítsa el az alkalmazást a 10. tálca pozíciójára
-    switch_workspace_0: Váltás az 1. munkaterületre
-    switch_workspace_1: Váltás a 2. munkaterületre
-    switch_workspace_2: Váltás a 2. munkaterületre
-    switch_workspace_3: Váltás a 3. munkaterületre
-    switch_workspace_4: Váltás a Workspace 4 -re
-    switch_workspace_5: Váltás az 5. munkaterületre
-    switch_workspace_6: Váltás a 6 munkaterületre
-    switch_workspace_7: Váltás a 7. munkaterületre
-    switch_workspace_8: Váltás a 8. munkaterületre
-    switch_workspace_9: Váltás a munkaterületre 9
-    toggle_launcher: Váltás
+    send_to_workspace: Küldje el a munkaterületre {{0}}
+    start_weg_app: Fókusz vagy indítási alkalmazás {{0}}
+    switch_to_next_workspace: Váltás a következő munkaterületre
+    switch_to_previous_workspace: Váltás az előző munkaterületre
+    switch_workspace: Váltás a munkaterületre {{0}}
+    toggle_float: Windows úszó mód váltása
+    toggle_launcher: Váltóindító
+    toggle_monocle: Váltás a munkaterület monokle módja
   readonly_tooltip: Ez egy csak olvasható parancsikon
   reset: Alapértelmezés visszaállítása az alapértelmezésekre
 sides:

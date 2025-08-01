@@ -84,6 +84,7 @@ export const RootSlice = createSlice({
       i18n.changeLanguage(action.payload.language || undefined);
       return action.payload;
     },
+    setShortcuts: toBeSaved(reducers.setShortcuts),
     setDateFormat: toBeSaved(reducers.setDateFormat),
     setWall: toBeSaved(reducers.setWall),
     setLauncher: toBeSaved(reducers.setLauncher),

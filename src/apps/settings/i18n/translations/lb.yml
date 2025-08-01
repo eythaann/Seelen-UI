@@ -150,11 +150,19 @@ save: Spuerwäit
 save_and_restart: Spuert & nei starten
 see_more: Méi gesinn
 shortcuts:
-  enable: Aktivéiert integréiert Ofkiirzungen (AHK)
-  enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
+  enable: Aktivéiert agebaut-in Shortcuts System
+  enable_tooltip: >-
+    Desaktivéiere wann Dir Ären eegene Ofkierzungsystem implementéiert, mat dem
+    Segen UI Client
   labels:
+    create_new_workspace: Neie Aarbechtsberäich erstellen
+    cycle_stack_next: Zyklus Stack nieft
+    cycle_stack_prev: Cycle Stack virdrun
+    cycle_wallpaper_next: Ännerung op den nächsten Tapeten
+    cycle_wallpaper_prev: Ännerung op déi virdrun Tapeten
     decrease_height: Reduzéiert Héicht
     decrease_width: Reduzéiert Breet
+    destroy_current_workspace: Zerstéiert aktuell Aarbechtsberäich
     focus_bottom: Fokus ënnen
     focus_latest: Fokusséieren dat lescht
     focus_left: Fokusséiert lénks
@@ -165,16 +173,12 @@ shortcuts:
     misc_open_settings: Oppen Astellungen
     misc_toggle_lock_tracing: Toggle Lock Tracing (Logbicher)
     misc_toggle_win_event_tracing: Toggle gewannen Event Tracing (Logbicher)
-    move_to_workspace_0: Plënnert op Workspace 0
-    move_to_workspace_1: Gitt op Aarbechtsberäich 1
-    move_to_workspace_2: Plënnert op Aarbechtsberäich 2
-    move_to_workspace_3: Plënnert op Aarbechtsberäich 3
-    move_to_workspace_4: Gitt op Workspace 4
-    move_to_workspace_5: Plënnert op Aarbechtsberäich 5
-    move_to_workspace_6: Plënnert op Workspace 6
-    move_to_workspace_7: Plënnert op Workspace 7
-    move_to_workspace_8: Plënnert op Workspace 8
-    move_to_workspace_9: Plënnert op Workspace 9
+    move_to_workspace: Plënnert op Aarbechtsberäich {{0}}
+    move_window_down: Géifen Fënster op ënnen
+    move_window_left: Giddfen Fënster op lénks
+    move_window_right: Réckelt Fënster op riets
+    move_window_up: Réckelt Fënster op Top
+    pause_tiling: Pause filt Fenstermanager
     reserve_bottom: Reservéiert ënnen
     reserve_float: Reservéiert Float
     reserve_left: Reserve lénks
@@ -182,37 +186,14 @@ shortcuts:
     reserve_stack: Reserve Stack
     reserve_top: Reserve Top
     restore_sizes: Restauréiert Gréissten
-    send_to_workspace_0: Schéckt e Aarbechtsberäich 0
-    send_to_workspace_1: Schéckt op Aarbechtsberäich 1
-    send_to_workspace_2: Schéckt op Aarbechtsberäich 2
-    send_to_workspace_3: Schéckt op Aarbechtsberäich 3
-    send_to_workspace_4: Schéckt op Aarbechtsberäich 4
-    send_to_workspace_5: Schéckt op Aarbechtsberäich 5
-    send_to_workspace_6: Schéckt e Aarbechtsberäich 6
-    send_to_workspace_7: Schéckt op Aarbechtsberäich 7
-    send_to_workspace_8: Schéckt e Aarbechtsberäich 8
-    send_to_workspace_9: Schéckt an Aarbechtsbereedung 9
-    start_weg_app_0: Fokusséieren oder ufänken App op Taskbar Positioun 1
-    start_weg_app_1: Fokusséieren oder ufänken App op Taskbar Positioun 2
-    start_weg_app_2: Fokusséieren oder ufänken App op Taskbar Positioun 3
-    start_weg_app_3: Fokusséieren oder ufänken App op Taskbar Positioun 4
-    start_weg_app_4: Fokusséieren oder ufänken App op Taskbar Positioun 5
-    start_weg_app_5: Fokusséieren oder ufänken App op Taskbar Positioun 6
-    start_weg_app_6: Fokusséieren oder ufänken App op Taskbar Positioun 7
-    start_weg_app_7: Fokusséieren oder ufänken App op Taskbar Positioun 8
-    start_weg_app_8: Fokusséieren oder ufänken App op Taskbar Positioun 9
-    start_weg_app_9: Fokusséieren oder ufänken App op Taskbar Positioun 10
-    switch_workspace_0: Schalt op Aarbechtsberäich 1
-    switch_workspace_1: Schalt op Aarbechtsberäich 2
-    switch_workspace_2: Schalt op Aarbechtsberäich 2
-    switch_workspace_3: Wiesselt op Workspace 3
-    switch_workspace_4: Schalt op Workspace 4
-    switch_workspace_5: Schalt op Aarbechtsberäich 5
-    switch_workspace_6: Wiesselt op Workspace 6
-    switch_workspace_7: Wiesselt op Aarbechtsberäich 7
-    switch_workspace_8: Schalt op Workspace 8
-    switch_workspace_9: Wiesselt op Workspace 9
-    toggle_launcher: Talzkle
+    send_to_workspace: Schéckt op Aarbechtsberäich {{0}}
+    start_weg_app: Fokusséieren oder ufänken Applikatioun {{0}}
+    switch_to_next_workspace: Wiesselt op d'nächst Aarbechtsberäich
+    switch_to_previous_workspace: Wiesselt op virdrun Aarbechtsberäich
+    switch_workspace: Schalt op Aarbechtsberäich {{0}}
+    toggle_float: Toggle Fenster Float Modus
+    toggle_launcher: Toggle launcher
+    toggle_monocle: Toggle Workspace Monocle Modus
   readonly_tooltip: Dëst ass e Lies-nëmme Mangel
   reset: Reset op Defaults
 sides:

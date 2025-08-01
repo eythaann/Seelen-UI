@@ -152,71 +152,50 @@ save: Сохранить
 save_and_restart: Сохранить и перезапустить
 see_more: См. подробнее
 shortcuts:
-  enable: Включить встроенные сочетания клавиши (ahk)
+  enable: Включить встроенную систему ярлыков
   enable_tooltip: >-
-    Отключите, если будете реализовывать собственные сочитания клавиши с помощью
-    Seelen Core Api
+    Отключите, если вы будете реализовать свою собственную систему ярлыков,
+    используя клиент UI SEELEN
   labels:
+    create_new_workspace: Создайте новое рабочее пространство
+    cycle_stack_next: Велосипедный стек следующий
+    cycle_stack_prev: Велосипедный стек предыдущий
+    cycle_wallpaper_next: Переодеться в следующие обои
+    cycle_wallpaper_prev: Переход на предыдущие обои
     decrease_height: Уменьшить высоту
     decrease_width: Уменьшить ширину
-    focus_bottom: Фокус низа
-    focus_latest: Фокус последнего
-    focus_left: Фокус слева
-    focus_right: Фокус справа
-    focus_top: Фокус верха
-    increase_height: Увеличить высоты
+    destroy_current_workspace: Уничтожить текущее рабочее пространство
+    focus_bottom: Фокус снизу
+    focus_latest: Сосредоточиться на последнем
+    focus_left: Фокус остался
+    focus_right: Фокус правильно
+    focus_top: Фокус Топ
+    increase_height: Увеличить высоту
     increase_width: Увеличить ширину
     misc_open_settings: Откройте настройки
     misc_toggle_lock_tracing: Перевернуть отслеживание блокировки (журналы)
     misc_toggle_win_event_tracing: Toggle Win Tracing Event (журналы)
-    move_to_workspace_0: Перейти в рабочую область 0
-    move_to_workspace_1: Перейти в рабочую область 1
-    move_to_workspace_2: Перейти в рабочую область 2
-    move_to_workspace_3: Перейти в рабочую область 3
-    move_to_workspace_4: Перейти в рабочую область 4
-    move_to_workspace_5: Перейти в рабочую область 5
-    move_to_workspace_6: Перейти в рабочую область 6
-    move_to_workspace_7: Перейти в рабочую область 7
-    move_to_workspace_8: Перейти в рабочую область 8
-    move_to_workspace_9: Перейти в рабочую область 9
-    reserve_bottom: Зарезервировать низ
-    reserve_float: Резервировать плавающее
-    reserve_left: Зарезервировать лево
-    reserve_right: Зарезервировать право
-    reserve_stack: Зарезервировать стек
-    reserve_top: Зарезервировать верх
+    move_to_workspace: Перейти в рабочую пространство {{0}}
+    move_window_down: Переместить окно внизу
+    move_window_left: Переместить окно налево
+    move_window_right: Переместить окно вправо
+    move_window_up: Переместить окно вверх
+    pause_tiling: Пауза менеджер по плиточному окнам
+    reserve_bottom: Резерв дно
+    reserve_float: Резервировать поплавок
+    reserve_left: Резерв остался
+    reserve_right: Резервировать справа
+    reserve_stack: Резервный стек
+    reserve_top: Резерв вершина
     restore_sizes: Восстановить размеры
-    send_to_workspace_0: Отправить в рабочую область 0
-    send_to_workspace_1: Отправить в рабочую область 1
-    send_to_workspace_2: Отправить в рабочую область 2
-    send_to_workspace_3: Отправить в рабочую область 3
-    send_to_workspace_4: Отправить в рабочую область 4
-    send_to_workspace_5: Отправить в рабочую область 5
-    send_to_workspace_6: Отправить в рабочую область 6
-    send_to_workspace_7: Отправить в рабочую область 7
-    send_to_workspace_8: Отправить в рабочую область 8
-    send_to_workspace_9: Отправить в рабочую область 9
-    start_weg_app_0: Фокусировать или запустить приложение на 1 позиции панели задач
-    start_weg_app_1: Фокусировать или запустить приложение на 2 позиции панели задач
-    start_weg_app_2: Фокусировать или запустить приложение на 3 позиции панели задач
-    start_weg_app_3: Фокусировать или запустить приложение на 4 позиции панели задач
-    start_weg_app_4: Фокусировать или запустить приложение на 5 позиции панели задач
-    start_weg_app_5: Фокусировать или запустить приложение на 6 позиции панели задач
-    start_weg_app_6: Фокусировать или запустить приложение на 7 позиции панели задач
-    start_weg_app_7: Фокусировать или запустить приложение на 8 позиции панели задач
-    start_weg_app_8: Фокусировать или запустить приложение на 9 позиции панели задач
-    start_weg_app_9: Фокусировать или запустить приложение на 10 позиции панели задач
-    switch_workspace_0: Переключить на рабочую область 0
-    switch_workspace_1: Переключить на рабочую область 1
-    switch_workspace_2: Переключить на рабочую область 2
-    switch_workspace_3: Переключить на рабочую область 3
-    switch_workspace_4: Переключить на рабочую область 4
-    switch_workspace_5: Переключить на рабочую область 5
-    switch_workspace_6: Переключить на рабочую область 6
-    switch_workspace_7: Переключить на рабочую область 7
-    switch_workspace_8: Переключить на рабочую область 8
-    switch_workspace_9: Переключить на рабочую область 9
-    toggle_launcher: Переключать
+    send_to_workspace: Отправить в рабочее пространство {{0}}
+    start_weg_app: Focus или Start Application {{0}}
+    switch_to_next_workspace: Переключиться на следующее рабочее пространство
+    switch_to_previous_workspace: Переключиться на предыдущее рабочее пространство
+    switch_workspace: Переключить на рабочее пространство {{0}}
+    toggle_float: Переключать режим плавания окна
+    toggle_launcher: Переключение пусковой установки
+    toggle_monocle: Toggle Workspace Monocle режим
   readonly_tooltip: Это ярлык только для чтения
   reset: Сбросить по умолчанию
 sides:

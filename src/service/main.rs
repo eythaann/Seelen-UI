@@ -146,7 +146,8 @@ fn is_svc_already_running() -> bool {
 #[tokio::main]
 async fn main() -> Result<()> {
     if is_local_dev() {
-        WindowsApi::show_window(WindowsApi::get_console_window().0 as _, SW_MINIMIZE.0)?;
+        let window = WindowsApi::get_console_window();
+        let _ = WindowsApi::show_window(window.0 as _, SW_MINIMIZE.0);
     }
 
     handle_console_client().await?;

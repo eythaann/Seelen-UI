@@ -154,13 +154,19 @@ save: Menyimpan
 save_and_restart: Simpan & restart
 see_more: Lihat Lebih Lanjut
 shortcuts:
-  enable: Aktifkan pintasan terintegrasi (AHK)
+  enable: Aktifkan sistem pintasan bawaan
   enable_tooltip: >-
-    Nonaktifkan jika Anda akan mengimplementasikan jalan pintas Anda sendiri
-    menggunakan API Inti Seelen
+    Nonaktifkan jika Anda akan mengimplementasikan sistem pintasan Anda sendiri
+    menggunakan klien Seelen UI
   labels:
+    create_new_workspace: Buat ruang kerja baru
+    cycle_stack_next: Tumpukan Siklus Berikutnya
+    cycle_stack_prev: Tumpukan Siklus Sebelumnya
+    cycle_wallpaper_next: Ubah ke wallpaper berikutnya
+    cycle_wallpaper_prev: Ubah ke wallpaper sebelumnya
     decrease_height: Tinggi penurunan
     decrease_width: Penurunan lebar
+    destroy_current_workspace: Hancurkan ruang kerja saat ini
     focus_bottom: Fokus dasar
     focus_latest: Fokus Terbaru
     focus_left: Fokus kiri
@@ -169,18 +175,14 @@ shortcuts:
     increase_height: Tingkatkan tinggi
     increase_width: Meningkatkan lebar
     misc_open_settings: Buka Pengaturan
-    misc_toggle_lock_tracing: Take Toggle Lock Tracing (Log)
+    misc_toggle_lock_tracing: Toggle Lock Tracing (Log)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (Log)
-    move_to_workspace_0: Pindah ke ruang kerja 0
-    move_to_workspace_1: Pindah ke ruang kerja 1
-    move_to_workspace_2: Pindah ke ruang kerja 2
-    move_to_workspace_3: Pindah ke ruang kerja 3
-    move_to_workspace_4: Pindah ke ruang kerja 4
-    move_to_workspace_5: Pindah ke ruang kerja 5
-    move_to_workspace_6: Pindah ke ruang kerja 6
-    move_to_workspace_7: Pindah ke ruang kerja 7
-    move_to_workspace_8: Pindah ke ruang kerja 8
-    move_to_workspace_9: Pindah ke ruang kerja 9
+    move_to_workspace: Pindah ke Workspace {{0}}
+    move_window_down: Pindahkan jendela ke bawah
+    move_window_left: Pindahkan jendela ke kiri
+    move_window_right: Pindahkan jendela ke kanan
+    move_window_up: Pindahkan jendela ke atas
+    pause_tiling: Jeda Manajer Jendela Ubin
     reserve_bottom: Cadangan Bawah
     reserve_float: Cadangan float
     reserve_left: Cadangan kiri
@@ -188,37 +190,14 @@ shortcuts:
     reserve_stack: Tumpukan Cadangan
     reserve_top: Cadangan atasan
     restore_sizes: Kembalikan ukuran
-    send_to_workspace_0: Kirim ke ruang kerja 0
-    send_to_workspace_1: Kirim ke ruang kerja 1
-    send_to_workspace_2: Kirim ke Workspace 2
-    send_to_workspace_3: Kirim ke Workspace 3
-    send_to_workspace_4: Kirim ke Workspace 4
-    send_to_workspace_5: Kirim ke Workspace 5
-    send_to_workspace_6: Kirim ke Workspace 6
-    send_to_workspace_7: Kirim ke Workspace 7
-    send_to_workspace_8: Kirim ke Workspace 8
-    send_to_workspace_9: Kirim ke ruang kerja 9
-    start_weg_app_0: Fokus atau Mulai Aplikasi pada Posisi Taskbar 1
-    start_weg_app_1: Fokus atau Mulai Aplikasi pada Posisi Taskbar 2
-    start_weg_app_2: Fokus atau Mulai Aplikasi pada Posisi Taskbar 3
-    start_weg_app_3: Fokus atau Mulai Aplikasi pada Posisi Taskbar 4
-    start_weg_app_4: Fokus atau Mulai Aplikasi pada Posisi Taskbar 5
-    start_weg_app_5: Fokus atau Mulai Aplikasi pada Posisi Taskbar 6
-    start_weg_app_6: Fokus atau Mulai Aplikasi pada Posisi Taskbar 7
-    start_weg_app_7: Fokus atau Mulai Aplikasi pada Posisi Taskbar 8
-    start_weg_app_8: Fokus atau Mulai Aplikasi pada Posisi Taskbar 9
-    start_weg_app_9: Fokus atau Mulai Aplikasi pada Posisi Taskbar 10
-    switch_workspace_0: Beralih ke ruang kerja 1
-    switch_workspace_1: Beralih ke ruang kerja 2
-    switch_workspace_2: Beralih ke ruang kerja 2
-    switch_workspace_3: Beralih ke ruang kerja 3
-    switch_workspace_4: Beralih ke ruang kerja 4
-    switch_workspace_5: Beralih ke ruang kerja 5
-    switch_workspace_6: Beralih ke ruang kerja 6
-    switch_workspace_7: Beralih ke ruang kerja 7
-    switch_workspace_8: Beralih ke ruang kerja 8
-    switch_workspace_9: Beralih ke ruang kerja 9
-    toggle_launcher: Toggle
+    send_to_workspace: Kirim ke Workspace {{0}}
+    start_weg_app: Fokus atau Mulai Aplikasi {{0}}
+    switch_to_next_workspace: Beralih ke ruang kerja berikutnya
+    switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
+    switch_workspace: Beralih ke Workspace {{0}}
+    toggle_float: Toggle Window Float Mode
+    toggle_launcher: Toggle Launcher
+    toggle_monocle: Sakelar Mode Monokel Workspace
   readonly_tooltip: Ini adalah jalan pintas yang hanya membaca
   reset: Reset ke default
 sides:

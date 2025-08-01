@@ -1,3 +1,5 @@
+cancel: Batalkan
+done: Selesai
 drivers:
   got_it: Mendapatnya
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Perkhidmatan UI Seelen (perkhidmatan slu) ialah kebergantungan/pembantu
     untuk apl berfungsi dengan betul.
   not_running_ok: Mulakan perkhidmatan
+shortcut:
+  register:
+    placeholder: Tekan sebarang gabungan kekunci
+    title: Mendaftarkan pintasan baru
 tray:
   quit: Berhenti
   restart: Mulakan semula ui

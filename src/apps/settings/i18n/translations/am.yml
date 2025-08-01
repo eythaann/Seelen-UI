@@ -146,11 +146,17 @@ save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
 see_more: ተጨማሪ ይመልከቱ
 shortcuts:
-  enable: የተቀናጁ አቋራጮችን (AHK)
-  enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
+  enable: አብሮገነብ አቋራጭ አቋራጭ ስርዓት
+  enable_tooltip: የእራስዎን አቋራጮችን ስርዓት የሚተገበሩበትን የእራስዎን አቋራጮዎች ስርዓት የሚተገበሩ ከሆነ ያሰናክሉ
   labels:
+    create_new_workspace: አዲስ የስራ ቦታ ይፍጠሩ
+    cycle_stack_next: ቀጣይ የዑደት ቁልል
+    cycle_stack_prev: ዑደት ቀድሟል
+    cycle_wallpaper_next: ወደ ቀጣዩ የግድግዳ ወረቀት ይለውጡ
+    cycle_wallpaper_prev: ወደ ቀዳሚው የግድግዳ ወረቀት ይቀይሩ
     decrease_height: ቁመት ቀንሷል
     decrease_width: ስፋት መቀነስ
+    destroy_current_workspace: የአሁኑን የስራ ቦታ አጥፋ
     focus_bottom: ወደ ታች ትኩረት
     focus_latest: የቅርብ ጊዜዎችን ያተኩሩ
     focus_left: ትኩረት ቀርቷል
@@ -161,16 +167,12 @@ shortcuts:
     misc_open_settings: ክፍት ቅንብሮች
     misc_toggle_lock_tracing: መቆለፊያ መቆለፊያ (ምዝግብ ማስታወሻዎች)
     misc_toggle_win_event_tracing: የ UNSCUCT PORTERSERSESTERE (ምዝግብ ማስታወሻዎች)
-    move_to_workspace_0: ወደ የሥራ ቦታ 0 ይሂዱ
-    move_to_workspace_1: ወደ የሥራ ቦታ 1 ይሂዱ
-    move_to_workspace_2: ወደ የሥራ ቦታ 2 ይሂዱ
-    move_to_workspace_3: ወደ የሥራ ቦታ 3 ይሂዱ
-    move_to_workspace_4: ወደ የሥራ ቦታ 4 ይሂዱ
-    move_to_workspace_5: ወደ የሥራ ቦታ 5 ይሂዱ
-    move_to_workspace_6: ወደ የሥራ ቦታ 1 ይሂዱ
-    move_to_workspace_7: ወደ የሥራ ቦታ 7 ይሂዱ
-    move_to_workspace_8: ወደ የሥራ ቦታ 8 ይሂዱ
-    move_to_workspace_9: ወደ የሥራ ቦታ 9 ይሂዱ
+    move_to_workspace: ወደ የሥራ ቦታ ይሂዱ {{0}}}
+    move_window_down: መስኮት ወደ ታች ያንቀሳቅሱ
+    move_window_left: መስኮት ወደ ግራ ይሂዱ
+    move_window_right: መስኮት ወደ ቀኝ ያንቀሳቅሱ
+    move_window_up: መስኮት ወደ ላይ ያንቀሳቅሱ
+    pause_tiling: የቆዳ መስኮት አቀናባሪ ለአፍታ አቁም
     reserve_bottom: የተጠባበቅ ክፍል
     reserve_float: የተጠባባቂ ተንሳፋፊ
     reserve_left: የተቆራረጠ
@@ -178,37 +180,14 @@ shortcuts:
     reserve_stack: የተጠባባቂ ቁልል
     reserve_top: የላይኛው ክፍል
     restore_sizes: መጠኖች ወደነበሩበት ይመልሱ
-    send_to_workspace_0: ወደ የስራ ቦታ 0 ይላኩ 0
-    send_to_workspace_1: ወደ የስራ ቦታ 1 ይላኩ 1
-    send_to_workspace_2: ወደ የስራ ቦታ 2 ይላኩ 2
-    send_to_workspace_3: ወደ የስራ ቦታ 3 ይላኩ
-    send_to_workspace_4: ወደ የሥራ ቦታ 4 ይላኩ
-    send_to_workspace_5: ወደ የሥራ ቦታ 5 ይላኩ
-    send_to_workspace_6: ወደ የሥራ ቦታ 6 ይላኩ
-    send_to_workspace_7: ወደ የሥራ ቦታ 7 ይላኩ 7
-    send_to_workspace_8: ወደ የሥራ ቦታ 8 ይላኩ 8
-    send_to_workspace_9: ወደ የሥራ ቦታ 9 ይላኩ
-    start_weg_app_0: በተግባር አሞሌ አቀማመጥ 1 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_1: በተግባር አሞሌ አቀማመጥ 2 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_2: በተግባር አሞሌ አቀማመጥ 3 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_3: በተግባር አሞሌ አቀማመጥ 4 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_4: በተግባር አሞሌ አቀማመጥ 5 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_5: በትብብር አቀማመጥ 6 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_6: በተግባር አሞሌ አቀማመጥ 7 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_7: በተግባር አሞሌ አቀማመጥ 8 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_8: በተግባር አሞሌ አቀማመጥ 9 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    start_weg_app_9: በተግባር አሞሌ አቀማመጥ 10 ላይ መተግበሪያን ያተኩሩ ወይም ይጀምሩ
-    switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
-    switch_workspace_1: ወደ የሥራ ቦታ 2 ቀይር
-    switch_workspace_2: ወደ የሥራ ቦታ 2 ቀይር
-    switch_workspace_3: ወደ የስራ ቦታ 3 ቀይር
-    switch_workspace_4: ወደ የሥራ ቦታ 4 ይቀይሩ
-    switch_workspace_5: ወደ የሥራ ቦታ 5 ቀይር
-    switch_workspace_6: ወደ የሥራ ቦታ 6 ይቀይሩ
-    switch_workspace_7: ወደ የሥራ ቦታ 7 ቀይር
-    switch_workspace_8: ወደ የሥራ ቦታ 8 ቀይር
-    switch_workspace_9: ወደ የሥራ ቦታ 9 ቀይር
-    toggle_launcher: መቀላቀል
+    send_to_workspace: ወደ የሥራ ቦታ {{0}}}}
+    start_weg_app: የትኩረት ወይም የትግበራ ትግበራ {{0}}}
+    switch_to_next_workspace: ወደ ቀጣዩ የስራ ቦታ ይቀይሩ
+    switch_to_previous_workspace: ወደ ቀዳሚው የስራ ቦታ ይቀይሩ
+    switch_workspace: ወደ የሥራ ቦታ ቀይር {{0}}}
+    toggle_float: የመስኮት ተንሳፋፊ ሁነታን ይቀያይሩ
+    toggle_launcher: አስጀማሪን ይቀያይሩ
+    toggle_monocle: የስራ ቦታ ቦታን ይቀያይሩ
   readonly_tooltip: ይህ የተነበበ ብቻ አቋራጭ ነው
   reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
 sides:

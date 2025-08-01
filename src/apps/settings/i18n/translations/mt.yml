@@ -152,11 +152,19 @@ save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
 see_more: Ara aktar
 shortcuts:
-  enable: Enable Shortcuts Integrati (AHK)
-  enable_tooltip: Itfi jekk timplimenta s-shortcuts tiegħek stess billi tuża l-API Seelen Core
+  enable: Ippermetti s-sistema shortcuts inkorporati
+  enable_tooltip: >-
+    Itfi jekk timplimentax is-sistema shortcuts tiegħek stess billi tuża
+    l-klijent Seelen UI
   labels:
+    create_new_workspace: Oħloq spazju ta 'xogħol ġdid
+    cycle_stack_next: Stack Cycle li jmiss
+    cycle_stack_prev: Munzell taċ-ċiklu preċedenti
+    cycle_wallpaper_next: Ibdel għall-Wallpaper li jmiss
+    cycle_wallpaper_prev: Bidla għal wallpaper preċedenti
     decrease_height: Tnaqqas l-għoli
     decrease_width: Tnaqqis il-wisa '
+    destroy_current_workspace: Jeqirdu l-ispazju ta 'xogħol attwali
     focus_bottom: Fokus tal-qiegħ
     focus_latest: Iffoka l-aħħar
     focus_left: Fokus xellug
@@ -167,16 +175,12 @@ shortcuts:
     misc_open_settings: Settings miftuħa
     misc_toggle_lock_tracing: Traċċar tal-Lock Toggle (zkuk)
     misc_toggle_win_event_tracing: Toggle Win Avveniment Traċċar (zkuk)
-    move_to_workspace_0: Mexxi għall-Ispazju tax-Xogħol 0
-    move_to_workspace_1: Mexxi għall-Ispazju tax-Xogħol 1
-    move_to_workspace_2: Mexxi għall-Ispazju tax-Xogħol 2
-    move_to_workspace_3: Mexxi għall-Ispazju tax-Xogħol 3
-    move_to_workspace_4: Mexxi għall-Ispazju tax-Xogħol 4
-    move_to_workspace_5: Mexxi għall-Ispazju tax-Xogħol 5
-    move_to_workspace_6: Mexxi għall-Ispazju tax-Xogħol 6
-    move_to_workspace_7: Mexxi għall-Ispazju tax-Xogħol 7
-    move_to_workspace_8: Mexxi għall-Ispazju tax-Xogħol 8
-    move_to_workspace_9: Mexxi għall-Ispazju tax-Xogħol 9
+    move_to_workspace: Mexxi għal Workspace {{0}}
+    move_window_down: Mexxi tieqa għal isfel
+    move_window_left: Mexxi t-tieqa għax-xellug
+    move_window_right: Mexxi tieqa għal-lemin
+    move_window_up: Mexxi t-tieqa għal fuq
+    pause_tiling: Pawsa Maniġer tat-Tieqa tal-Madum
     reserve_bottom: Riserva tal-qiegħ
     reserve_float: Riżerva float
     reserve_left: Riserva xellug
@@ -184,37 +188,14 @@ shortcuts:
     reserve_stack: Riżerva munzell
     reserve_top: Riserva ta 'fuq
     restore_sizes: Irrestawra d-daqsijiet
-    send_to_workspace_0: Ibgħat lill-Ispazju tax-Xogħol 0
-    send_to_workspace_1: Ibgħat lill-Ispazju tax-Xogħol 1
-    send_to_workspace_2: Ibgħat lill-Ispazju tax-Xogħol 2
-    send_to_workspace_3: Ibgħat lill-Ispazju tax-Xogħol 3
-    send_to_workspace_4: Ibgħat lill-Ispazju tax-Xogħol 4
-    send_to_workspace_5: Ibgħat lill-Ispazju tax-Xogħol 5
-    send_to_workspace_6: Ibgħat lill-Ispazju tax-Xogħol 6
-    send_to_workspace_7: Ibgħat lill-Ispazju tax-Xogħol 7
-    send_to_workspace_8: Ibgħat lill-Ispazju tax-Xogħol 8
-    send_to_workspace_9: Ibgħat lill-Ispazju tax-Xogħol 9
-    start_weg_app_0: Tiffoka jew ibda app fuq il-pożizzjoni tat-taskbar 1
-    start_weg_app_1: Tiffoka jew ibda app fuq il-pożizzjoni taskbar 2
-    start_weg_app_2: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 3
-    start_weg_app_3: Iffoka jew ibda l-app fuq il-pożizzjoni ta 'taskbar 4
-    start_weg_app_4: Tiffoka jew ibda app fuq il-pożizzjoni tat-taskbar 5
-    start_weg_app_5: Iffoka jew ibda l-app fuq il-pożizzjoni taskbar 6
-    start_weg_app_6: Tiffoka jew ibda app fuq il-pożizzjoni taskbar 7
-    start_weg_app_7: Iffoka jew ibda l-app fuq il-pożizzjoni taskbar 8
-    start_weg_app_8: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 9
-    start_weg_app_9: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 10
-    switch_workspace_0: Aqleb għall-Ispazju tax-Xogħol 1
-    switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 2
-    switch_workspace_2: Aqleb għall-Ispazju tax-Xogħol 2
-    switch_workspace_3: Aqleb għall-Ispazju tax-Xogħol 3
-    switch_workspace_4: Aqleb għall-Ispazju tax-Xogħol 4
-    switch_workspace_5: Aqleb għall-Ispazju tax-Xogħol 5
-    switch_workspace_6: Aqleb għall-Ispazju tax-Xogħol 6
-    switch_workspace_7: Aqleb għall-Ispazju tax-Xogħol 7
-    switch_workspace_8: Aqleb għall-Ispazju tax-Xogħol 8
-    switch_workspace_9: Aqleb għall-Ispazju tax-Xogħol 9
-    toggle_launcher: Toggle
+    send_to_workspace: Ibgħat lil Workspace {{0}}
+    start_weg_app: Focus jew Ibda Applikazzjoni {{0}}
+    switch_to_next_workspace: Aqleb għall-Ispazju tax-Xogħol li jmiss
+    switch_to_previous_workspace: Aqleb għall-ispazju ta 'xogħol preċedenti
+    switch_workspace: Aqleb għal Workspace {{0}}
+    toggle_float: Toggle Window Float Mode
+    toggle_launcher: Toggle Launcher
+    toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: Din hija shortcut li jinqara biss
   reset: Irrisettja għal nuqqasijiet
 sides:

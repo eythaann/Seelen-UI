@@ -1,3 +1,5 @@
+cancel: Bişûndekirin
+done: Dank
 drivers:
   got_it: Min girt
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Xizmeta UI ya Seelen (slu-xizmet) ji bo ku sepan bi rêkûpêk bixebite
     pêwendiyek / arîkarek e.
   not_running_ok: Xizmetê dest pê bikin
+shortcut:
+  register:
+    placeholder: Her kombînasyona kilîtiyê çap bikin
+    title: Kurteya nû qeyd bikin
 tray:
   quit: Devjêberdan
   restart: UI ji nû ve bike

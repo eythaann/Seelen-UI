@@ -1,3 +1,5 @@
+cancel: Avboka
+done: Gjort
 drivers:
   got_it: Jag har den
   monitor_disabled: >-
@@ -28,6 +30,10 @@ service:
     Seelen UI Service (slu-service) är ett beroende/hjälpare för att appen ska
     fungera korrekt.
   not_running_ok: Starta service
+shortcut:
+  register:
+    placeholder: Tryck på alla tangentkombinationer
+    title: Registrera ny genväg
 tray:
   quit: Sluta
   restart: Starta om användargränssnittet

@@ -150,13 +150,19 @@ save: Spara
 save_and_restart: Spara och starta om
 see_more: Se mer
 shortcuts:
-  enable: Aktivera integrerade genvägar (AHK)
+  enable: Aktivera inbyggda genvägssystem
   enable_tooltip: >-
-    Inaktivera om du kommer att implementera dina egna genvägar med Seelen Core
-    API
+    Inaktivera om du kommer att implementera ditt eget genvägssystem med Seelen
+    UI -klienten
   labels:
+    create_new_workspace: Skapa en ny arbetsyta
+    cycle_stack_next: Cykelstack nästa
+    cycle_stack_prev: Cykelstack föregående
+    cycle_wallpaper_next: Byt till nästa tapet
+    cycle_wallpaper_prev: Ändra till tidigare tapeter
     decrease_height: Minskande höjd
     decrease_width: Minskande bredd
+    destroy_current_workspace: Förstör den aktuella arbetsytan
     focus_bottom: Fokusera botten
     focus_latest: Fokus senaste
     focus_left: Fokus vänster
@@ -167,16 +173,12 @@ shortcuts:
     misc_open_settings: Öppna inställningar
     misc_toggle_lock_tracing: TOGGLE LOCK TRACING (loggar)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (loggar)
-    move_to_workspace_0: Flytta till arbetsytan 0
-    move_to_workspace_1: Flytta till arbetsytan 1
-    move_to_workspace_2: Flytta till Workspace 2
-    move_to_workspace_3: Flytta till Workspace 3
-    move_to_workspace_4: Flytta till Workspace 4
-    move_to_workspace_5: Flytta till arbetsytan 5
-    move_to_workspace_6: Flytta till Workspace 6
-    move_to_workspace_7: Flytta till Workspace 7
-    move_to_workspace_8: Flytta till Workspace 8
-    move_to_workspace_9: Flytta till Workspace 9
+    move_to_workspace: Flytta till Workspace {{0}}
+    move_window_down: Flytta fönster till botten
+    move_window_left: Flytta fönstret till vänster
+    move_window_right: Flytta fönstret till höger
+    move_window_up: Flytta fönstret till toppen
+    pause_tiling: Pausskakelfönsterhanterare
     reserve_bottom: Reserv botten
     reserve_float: Reservflott
     reserve_left: Reservera vänster
@@ -184,37 +186,14 @@ shortcuts:
     reserve_stack: Reservstack
     reserve_top: Reservtopp
     restore_sizes: Återställ storleken
-    send_to_workspace_0: Skicka till Workspace 0
-    send_to_workspace_1: Skicka till Workspace 1
-    send_to_workspace_2: Skicka till Workspace 2
-    send_to_workspace_3: Skicka till Workspace 3
-    send_to_workspace_4: Skicka till Workspace 4
-    send_to_workspace_5: Skicka till Workspace 5
-    send_to_workspace_6: Skicka till Workspace 6
-    send_to_workspace_7: Skicka till Workspace 7
-    send_to_workspace_8: Skicka till Workspace 8
-    send_to_workspace_9: Skicka till Workspace 9
-    start_weg_app_0: Fokus eller starta app på aktivitetsfältets position 1
-    start_weg_app_1: Fokus eller starta appen på aktivitetsfältets position 2
-    start_weg_app_2: Fokus eller starta appen på aktivitetsfältets position 3
-    start_weg_app_3: Fokus eller starta app på aktivitetsfältet 4
-    start_weg_app_4: Fokus eller starta appen på aktivitetsfältets position 5
-    start_weg_app_5: Fokus eller starta app på aktivitetsfältet 6
-    start_weg_app_6: Fokus eller starta appen på aktivitetsfältets position 7
-    start_weg_app_7: Fokus eller starta appen på aktivitetsfältets position 8
-    start_weg_app_8: Fokus eller starta appen på aktivitetsfältets position 9
-    start_weg_app_9: Fokus eller starta app på aktivitetsfältets position 10
-    switch_workspace_0: Byt till arbetsyta 1
-    switch_workspace_1: Byt till arbetsyta 2
-    switch_workspace_2: Byt till arbetsyta 2
-    switch_workspace_3: Byt till arbetsyta 3
-    switch_workspace_4: Byt till arbetsyta 4
-    switch_workspace_5: Byt till arbetsyta 5
-    switch_workspace_6: Byt till arbetsyta 6
-    switch_workspace_7: Byt till arbetsyta 7
-    switch_workspace_8: Byt till arbetsyta 8
-    switch_workspace_9: Byt till arbetsyta 9
-    toggle_launcher: Vippan
+    send_to_workspace: Skicka till Workspace {{0}}
+    start_weg_app: Fokus eller starta applikationen {{0}}
+    switch_to_next_workspace: Byt till nästa arbetsyta
+    switch_to_previous_workspace: Byt till tidigare arbetsyta
+    switch_workspace: Byt till Workspace {{0}}
+    toggle_float: Växla fönsterflödesläge
+    toggle_launcher: Växla launcher
+    toggle_monocle: Växla arbetsyta Monocle -läge
   readonly_tooltip: Detta är en skrivskyddad genväg
   reset: Återställas till standardvärden
 sides:

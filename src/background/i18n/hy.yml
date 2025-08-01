@@ -1,3 +1,5 @@
+cancel: Չեղարկել
+done: Արված
 drivers:
   got_it: Ստացել է այն
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI Service-ը (slu-service) կախվածություն/օգնական է հավելվածի ճիշտ
     աշխատանքի համար:
   not_running_ok: Սկսեք ծառայությունը
+shortcut:
+  register:
+    placeholder: Սեղմեք ցանկացած ստեղնաշարի համադրություն
+    title: Նոր դյուրանցում գրանցելը
 tray:
   quit: Թողնել
   restart: Վերագործարկեք UI- ն

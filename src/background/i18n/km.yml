@@ -1,3 +1,5 @@
+cancel: លប់ចោល
+done: រ្យេឱដេនោ
 drivers:
   got_it: ទទួលបានវា
   monitor_disabled: >-
@@ -26,6 +28,10 @@ service:
     Seelen UI Service (slu-service)
     គឺជាការពឹងផ្អែក/ជំនួយសម្រាប់កម្មវិធីឱ្យដំណើរការបានត្រឹមត្រូវ។
   not_running_ok: ចាប់ផ្តើមសេវាកម្ម
+shortcut:
+  register:
+    placeholder: ចុចបន្សំគ្រាប់ចុចណាមួយ
+    title: ការចុះឈ្មោះផ្លូវកាត់ថ្មី
 tray:
   quit: ចាកចេញ
   restart: ចាប់ផ្តើម UI ឡើងវិញ

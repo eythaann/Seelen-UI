@@ -146,71 +146,50 @@ save: حفظ
 save_and_restart: حفظ وإعد التشغيل
 see_more: شاهد المزيد
 shortcuts:
-  enable: فعل الاختصارات (ahk)
-  enable_tooltip: قم بتعطيله إذا كنت ستستخدم الاختصارات الخاصة بك باستخدام Seelen Core Api
+  enable: تمكين نظام الاختصارات المدمجة
+  enable_tooltip: تعطيل إذا كنت ستنفذ نظام الاختصارات الخاص بك باستخدام عميل Seelen UI
   labels:
-    decrease_height: تقليل الارتفاع
-    decrease_width: تقليل العرض
-    focus_bottom: التركيز على الأسفل
-    focus_latest: التركيز على الأحدث
-    focus_left: التركيز على اليسار
-    focus_right: التركيز على اليمين
-    focus_top: التركيز على الأعلى
+    create_new_workspace: إنشاء مساحة عمل جديدة
+    cycle_stack_next: كومة الدراجة التالية
+    cycle_stack_prev: كومة الدراجة السابقة
+    cycle_wallpaper_next: التغيير إلى خلفية القادمة
+    cycle_wallpaper_prev: تغيير إلى خلفية سابقة
+    decrease_height: انخفاض الارتفاع
+    decrease_width: انخفاض العرض
+    destroy_current_workspace: تدمير مساحة العمل الحالية
+    focus_bottom: التركيز القاع
+    focus_latest: التركيز الأخير
+    focus_left: التركيز اليسار
+    focus_right: التركيز بشكل صحيح
+    focus_top: التركيز أعلى
     increase_height: زيادة الارتفاع
     increase_width: زيادة العرض
     misc_open_settings: فتح الإعدادات
-    misc_toggle_lock_tracing: فعل قفل تتبع (سجلات)
-    misc_toggle_win_event_tracing: فعل فوز تتبع حدث (سجلات)
-    move_to_workspace_0: انتقل إلى مساحة العمل 0
-    move_to_workspace_1: انتقل إلى مساحة العمل 1
-    move_to_workspace_2: انتقل إلى مساحة العمل 2
-    move_to_workspace_3: انتقل إلى مساحة العمل 3
-    move_to_workspace_4: انتقل إلى مساحة العمل 4
-    move_to_workspace_5: انتقل إلى مساحة العمل 5
-    move_to_workspace_6: انتقل إلى مساحة العمل 6
-    move_to_workspace_7: انتقل إلى مساحة العمل 7
-    move_to_workspace_8: انتقل إلى مساحة العمل 8
-    move_to_workspace_9: انتقل لمساحة العمل 9
-    reserve_bottom: الاحتياطي الأسفل
-    reserve_float: الاحتياطي العائم
-    reserve_left: الاحتياطي الأيسر
-    reserve_right: الاحتياطي الأيمن
-    reserve_stack: الاحتياطي المكدس
-    reserve_top: الاحتياطي الأعلى
+    misc_toggle_lock_tracing: تبديل قفل تتبع (سجلات)
+    misc_toggle_win_event_tracing: تبديل الفوز تتبع حدث (سجلات)
+    move_to_workspace: انتقل إلى مساحة العمل {{0}}
+    move_window_down: نقل النافذة إلى أسفل
+    move_window_left: تحرك النافذة إلى اليسار
+    move_window_right: نقل النافذة إلى اليمين
+    move_window_up: نقل النافذة إلى الأعلى
+    pause_tiling: وقفة مدير نافذة الإبلاغ
+    reserve_bottom: قاع الاحتياطي
+    reserve_float: تعويم الاحتياطي
+    reserve_left: الاحتياطي اليسار
+    reserve_right: حجز الحق
+    reserve_stack: كومة الاحتياطي
+    reserve_top: قمة الاحتياط
     restore_sizes: استعادة الأحجام
-    send_to_workspace_0: أرسل لمساحة العمل 0
-    send_to_workspace_1: أرسل لمساحة العمل 1
-    send_to_workspace_2: أرسل لمساحة العمل 2
-    send_to_workspace_3: أرسل لمساحة العمل 3
-    send_to_workspace_4: أرسل لمساحة العمل 4
-    send_to_workspace_5: أرسل لمساحة العمل 5
-    send_to_workspace_6: أرسل لمساحة العمل 6
-    send_to_workspace_7: أرسل لمساحة العمل 7
-    send_to_workspace_8: أرسل لمساحة العمل 8
-    send_to_workspace_9: أرسل لمساحة العمل 9
-    start_weg_app_0: ركز أو ابدأ التطبيق على موقع شريط المهام 1
-    start_weg_app_1: التركيز أو ابدأ التطبيق على موقع شريط المهام 2
-    start_weg_app_2: التركيز أو ابدأ التطبيق على موقع شريط المهام 3
-    start_weg_app_3: التركيز أو ابدأ التطبيق على موقع شريط المهام 4
-    start_weg_app_4: التركيز أو ابدأ التطبيق على موقع شريط المهام 5
-    start_weg_app_5: التركيز أو ابدأ التطبيق على موقع شريط المهام 6
-    start_weg_app_6: التركيز أو ابدأ التطبيق على موقع شريط المهام 7
-    start_weg_app_7: التركيز أو ابدأ التطبيق على موقع شريط المهام 8
-    start_weg_app_8: التركيز أو ابدأ التطبيق على موقع شريط المهام 9
-    start_weg_app_9: التركيز أو ابدأ التطبيق على موقع شريط المهام 10
-    switch_workspace_0: بدل إلى مساحة العمل 1
-    switch_workspace_1: بدل إلى مساحة العمل 2
-    switch_workspace_2: بدل إلى مساحة العمل 2
-    switch_workspace_3: بدل إلى مساحة العمل 3
-    switch_workspace_4: بدل إلى مساحة العمل 4
-    switch_workspace_5: بدل إلى مساحة العمل 5
-    switch_workspace_6: بدل إلى مساحة العمل 6
-    switch_workspace_7: بدل إلى مساحة العمل 7
-    switch_workspace_8: بدل إلى مساحة العمل 8
-    switch_workspace_9: بدل إلى مساحة العمل 9
-    toggle_launcher: فعل مشغل التطبيقات
+    send_to_workspace: أرسل إلى مساحة العمل {{0}}
+    start_weg_app: التركيز أو بدء التطبيق {{0}}
+    switch_to_next_workspace: التبديل إلى مساحة العمل التالية
+    switch_to_previous_workspace: التبديل إلى مساحة العمل السابقة
+    switch_workspace: التبديل إلى مساحة العمل {{0}}
+    toggle_float: تبديل النافذة وضع تعويم
+    toggle_launcher: تبديل قاذفة
+    toggle_monocle: تبديل وضع مساحة العمل monocle
   readonly_tooltip: هذا اختصار للقراءة فقط
-  reset: إعادة الضبط على الأساسيات
+  reset: إعادة ضبط على الافتراضات
 sides:
   bottom: تحت
   left: يسار

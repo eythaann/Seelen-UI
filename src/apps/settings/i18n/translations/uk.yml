@@ -150,71 +150,52 @@ save: Зберегти
 save_and_restart: Зберегти та перезапустити
 see_more: Побачити більше
 shortcuts:
-  enable: Увімкнути інтегровані сполучення клавіш (ahk)
-  enable_tooltip: Вимкніть, якщо ви реалізуєте власні сполучення за допомогою API Seelen Core
+  enable: Увімкнути вбудовану систему ярликів
+  enable_tooltip: >-
+    Вимкніть, якщо ви реалізуєте власну систему ярликів за допомогою клієнта
+    інтерфейсу SEELEN
   labels:
-    decrease_height: Зменшити висоту
-    decrease_width: Зменшити ширину
-    focus_bottom: Фокус знизу
-    focus_latest: Фокус на найновішому
+    create_new_workspace: Створіть нову робочу область
+    cycle_stack_next: Цикл стек далі
+    cycle_stack_prev: Стек циклу попереднього
+    cycle_wallpaper_next: Зміна на наступні шпалери
+    cycle_wallpaper_prev: Зміна на попередні шпалери
+    decrease_height: Зниження висоти
+    decrease_width: Зменшення ширини
+    destroy_current_workspace: Знищити поточну робочу область
+    focus_bottom: Фокус дно
+    focus_latest: Фокус найновіший
     focus_left: Фокус ліворуч
-    focus_right: Фокус праворуч
-    focus_top: Фокус згори
+    focus_right: Фокус правильно
+    focus_top: Фокус
     increase_height: Збільшити висоту
     increase_width: Збільшити ширину
-    misc_open_settings: Відкрити налаштування
-    misc_toggle_lock_tracing: Переключити відстеження блокування (журнали)
-    misc_toggle_win_event_tracing: Переключити відстеження подій Windows (журнали)
-    move_to_workspace_0: Перехід до робочої області 0
-    move_to_workspace_1: Перехід до робочої області 1
-    move_to_workspace_2: Перехід до робочої області 2
-    move_to_workspace_3: Перехід до робочої області 3
-    move_to_workspace_4: Перехід до робочої області 4
-    move_to_workspace_5: Перехід до робочої області 5
-    move_to_workspace_6: Перехід до робочої області 6
-    move_to_workspace_7: Перехід до робочої області 7
-    move_to_workspace_8: Перехід до робочої області 8
-    move_to_workspace_9: Перехід до робочої області 9
-    reserve_bottom: Резерв знизу
-    reserve_float: Резерв плавуче
+    misc_open_settings: Відкриті налаштування
+    misc_toggle_lock_tracing: Перемикання відстеження блокування (журнали)
+    misc_toggle_win_event_tracing: Toggle Win Tracing події (журнали)
+    move_to_workspace: Перемістіть до робочої області {{0}}
+    move_window_down: Перемістіть вікно до знизу
+    move_window_left: Перемістіть вікно вліво
+    move_window_right: Перемістіть вікно вправо
+    move_window_up: Перемістіть вікно вгорі
+    pause_tiling: Пауза плитка Менеджер вікон
+    reserve_bottom: ЗАБЕЗПЕЧЕННЯ
+    reserve_float: Резервне плавання
     reserve_left: Резерв зліва
-    reserve_right: Резерв зправа
-    reserve_stack: Резерв стаку
-    reserve_top: Резервувати згори
+    reserve_right: Резервуйте праворуч
+    reserve_stack: Резерв
+    reserve_top: Резервувати топ
     restore_sizes: Відновити розміри
-    send_to_workspace_0: Надіслати на робочий простір 0
-    send_to_workspace_1: Надіслати на робочий простір 1
-    send_to_workspace_2: Надіслати на робочий простір 2
-    send_to_workspace_3: Надіслати на робочий простір 3
-    send_to_workspace_4: Надіслати на робочий простір 4
-    send_to_workspace_5: Надіслати на робочий простір 5
-    send_to_workspace_6: Надіслати на робочий простір 6
-    send_to_workspace_7: Надіслати на робочий простір 7
-    send_to_workspace_8: Надіслати на робочий простір 8
-    send_to_workspace_9: Надіслати на робочий простір 9
-    start_weg_app_0: Фокусувати або запустити додаток на положенні панелі завдань 1
-    start_weg_app_1: Фокусувати або запустити додаток на положенні панелі завдань 2
-    start_weg_app_2: Фокусувати або запустити додаток на положенні панелі завдань 3
-    start_weg_app_3: Фокусувати або запустити додаток на положенні панелі завдань 4
-    start_weg_app_4: Фокусувати або запустити додаток на положенні панелі завдань 5
-    start_weg_app_5: Фокусувати або запустити додаток на положенні панелі завдань 6
-    start_weg_app_6: Фокусувати або запустити додаток на положенні панелі завдань 7
-    start_weg_app_7: Фокусувати або запустити додаток на положенні панелі завдань 8
-    start_weg_app_8: Фокусувати або запустити додаток на положенні панелі завдань 9
-    start_weg_app_9: Фокусувати або запустити додаток на положенні панелі завдань 10
-    switch_workspace_0: Перейти на робочий простір 0
-    switch_workspace_1: Перейти на робочий простір 1
-    switch_workspace_2: Перейти на робочий простір 2
-    switch_workspace_3: Перейти на робочий простір 3
-    switch_workspace_4: Перейти на робочий простір 4
-    switch_workspace_5: Перейти на робочий простір 5
-    switch_workspace_6: Перейти на робочий простір 6
-    switch_workspace_7: Перейти на робочий простір 7
-    switch_workspace_8: Перейти на робочий простір 8
-    switch_workspace_9: Перейти на робочий простір 9
-    toggle_launcher: Переключити
+    send_to_workspace: Надіслати на робочу область {{0}}
+    start_weg_app: Фокус або запуск програми {{0}}
+    switch_to_next_workspace: Перейдіть на наступну робочу область
+    switch_to_previous_workspace: Перехід на попередню робочу область
+    switch_workspace: Переключення на робочу область {{0}}
+    toggle_float: Перемикайте режим віконного поплавця
+    toggle_launcher: Перемикач запуску
+    toggle_monocle: Перемикайте режим монокльної роботи робочої області
   readonly_tooltip: Це ярлик лише для читання
-  reset: Скинути до параметрів за замовчуванням
+  reset: Скидання за замовчуванням
 sides:
   bottom: Низ
   left: Ліво

@@ -1,3 +1,5 @@
+cancel: Ophæve
+done: Færdig
 drivers:
   got_it: Jeg har det
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI Service (slu-service) er en afhængighed/hjælper for, at appen
     fungerer korrekt.
   not_running_ok: Start service
+shortcut:
+  register:
+    placeholder: Tryk på enhver nøglekombination
+    title: Registrering af ny genvej
 tray:
   quit: Stop
   restart: Genstart brugergrænsefladen

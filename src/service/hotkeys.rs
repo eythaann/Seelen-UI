@@ -118,6 +118,9 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Vec<String> {
         }
         CreateNewWorkspace => vec!["vd", "create-new-workspace"],
         DestroyCurrentWorkspace => vec!["vd", "destroy-current-workspace"],
+        // wallpaper manager
+        CycleWallpaperNext => vec!["wallpaper", "next"],
+        CycleWallpaperPrev => vec!["wallpaper", "prev"],
         // Weg
         StartWegApp(index) => {
             args.push(index.to_string());
@@ -148,6 +151,12 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Vec<String> {
         ReserveRight => vec!["wm", "reserve", "right"],
         ReserveFloat => vec!["wm", "reserve", "float"],
         ReserveStack => vec!["wm", "reserve", "stack"],
+        // Tiling window manager state
+        PauseTiling => vec!["wm", "pause"],
+        ToggleMonocle => vec!["wm", "toggle-monocle"],
+        ToggleFloat => vec!["wm", "toggle-float"],
+        CycleStackNext => vec!["wm", "cycle-stack", "next"],
+        CycleStackPrev => vec!["wm", "cycle-stack", "prev"],
         // others
         MiscOpenSettings => vec!["settings"],
         MiscToggleLockTracing => vec!["debug", "toggle-trace-lock"],

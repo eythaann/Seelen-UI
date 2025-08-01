@@ -152,13 +152,19 @@ save: محفوظ کریں
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
 see_more: مزید دیکھیں
 shortcuts:
-  enable: مربوط شارٹ کٹ (اے ایچ کے) کو فعال کریں
+  enable: بلٹ ان شارٹ کٹ سسٹم کو فعال کریں
   enable_tooltip: >-
-    اگر آپ سیلین کور API کا استعمال کرتے ہوئے اپنے شارٹ کٹ کو نافذ کریں گے تو
-    غیر فعال کریں
+    اگر آپ سیلین UI کلائنٹ کا استعمال کرتے ہوئے اپنے شارٹ کٹ سسٹم کو نافذ کریں
+    گے تو غیر فعال کریں
   labels:
+    create_new_workspace: نیا ورک اسپیس بنائیں
+    cycle_stack_next: سائیکل اسٹیک اگلا
+    cycle_stack_prev: سائیکل اسٹیک پچھلا
+    cycle_wallpaper_next: اگلے وال پیپر میں تبدیل کریں
+    cycle_wallpaper_prev: پچھلے وال پیپر میں تبدیل کریں
     decrease_height: اونچائی میں کمی
     decrease_width: چوڑائی کو کم کرنا
+    destroy_current_workspace: موجودہ ورک اسپیس کو ختم کریں
     focus_bottom: فوکس نیچے
     focus_latest: تازہ ترین توجہ مرکوز کریں
     focus_left: فوکس بائیں
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: کھلی ترتیبات
     misc_toggle_lock_tracing: ٹوگل لاک ٹریسنگ (نوشتہ جات)
     misc_toggle_win_event_tracing: ٹوگل ون ایونٹ ٹریسنگ (لاگ)
-    move_to_workspace_0: ورک اسپیس 0 میں منتقل کریں
-    move_to_workspace_1: ورک اسپیس 1 میں منتقل کریں
-    move_to_workspace_2: ورک اسپیس 2 میں منتقل کریں
-    move_to_workspace_3: ورک اسپیس 3 میں منتقل کریں
-    move_to_workspace_4: ورک اسپیس 4 میں منتقل کریں
-    move_to_workspace_5: ورک اسپیس 5 میں منتقل کریں
-    move_to_workspace_6: ورک اسپیس 6 میں منتقل کریں
-    move_to_workspace_7: ورک اسپیس 7 میں منتقل کریں
-    move_to_workspace_8: ورک اسپیس 8 میں منتقل کریں
-    move_to_workspace_9: ورک اسپیس 9 میں منتقل کریں
+    move_to_workspace: ورک اسپیس {{0}} میں منتقل کریں
+    move_window_down: ونڈو کو نیچے منتقل کریں
+    move_window_left: ونڈو کو بائیں طرف منتقل کریں
+    move_window_right: ونڈو کو دائیں طرف منتقل کریں
+    move_window_up: ونڈو کو اوپر منتقل کریں
+    pause_tiling: ٹائلنگ ونڈو مینیجر کو روکیں
     reserve_bottom: ریزرو نیچے
     reserve_float: ریزرو فلوٹ
     reserve_left: ریزرو بائیں
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: ریزرو اسٹیک
     reserve_top: ریزرو ٹاپ
     restore_sizes: سائز کو بحال کریں
-    send_to_workspace_0: ورک اسپیس 0 پر بھیجیں
-    send_to_workspace_1: ورک اسپیس 1 کو بھیجیں
-    send_to_workspace_2: ورک اسپیس 2 پر بھیجیں
-    send_to_workspace_3: ورک اسپیس 3 کو بھیجیں
-    send_to_workspace_4: ورک اسپیس 4 کو بھیجیں
-    send_to_workspace_5: ورک اسپیس 5 کو بھیجیں
-    send_to_workspace_6: ورک اسپیس 6 کو بھیجیں
-    send_to_workspace_7: ورک اسپیس 7 کو بھیجیں
-    send_to_workspace_8: ورک اسپیس 8 کو بھیجیں
-    send_to_workspace_9: ورک اسپیس 9 کو بھیجیں
-    start_weg_app_0: ٹاسک بار کی پوزیشن 1 پر فوکس کریں یا اسٹارٹ کریں
-    start_weg_app_1: ٹاسک بار کی پوزیشن 2 پر فوکس کریں یا اسٹارٹ کریں
-    start_weg_app_2: ٹاسک بار کی پوزیشن 3 پر فوکس کریں یا ایپ شروع کریں
-    start_weg_app_3: ٹاسک بار کی پوزیشن 4 پر فوکس کریں یا اسٹارٹ کریں
-    start_weg_app_4: ٹاسک بار کی پوزیشن 5 پر فوکس کریں یا اسٹارٹ کریں
-    start_weg_app_5: ٹاسک بار کی پوزیشن 6 پر فوکس کریں یا اسٹارٹ کریں
-    start_weg_app_6: ٹاسک بار کی پوزیشن 7 پر فوکس کریں یا اسٹارٹ کریں
-    start_weg_app_7: ٹاسک بار کی پوزیشن 8 پر فوکس کریں یا اسٹارٹ کریں
-    start_weg_app_8: ٹاسک بار کی پوزیشن 9 پر فوکس کریں یا اسٹارٹ کریں
-    start_weg_app_9: ٹاسک بار کی پوزیشن 10 پر فوکس کریں یا اسٹارٹ کریں
-    switch_workspace_0: ورک اسپیس 1 پر سوئچ کریں
-    switch_workspace_1: ورک اسپیس 2 پر سوئچ کریں
-    switch_workspace_2: ورک اسپیس 2 پر سوئچ کریں
-    switch_workspace_3: ورک اسپیس 3 پر سوئچ کریں
-    switch_workspace_4: ورک اسپیس 4 پر سوئچ کریں
-    switch_workspace_5: ورک اسپیس 5 پر سوئچ کریں
-    switch_workspace_6: ورک اسپیس 6 پر سوئچ کریں
-    switch_workspace_7: ورک اسپیس 7 پر سوئچ کریں
-    switch_workspace_8: ورک اسپیس 8 پر سوئچ کریں
-    switch_workspace_9: ورک اسپیس 9 پر سوئچ کریں
-    toggle_launcher: ٹوگل
+    send_to_workspace: ورک اسپیس کو بھیجیں {{0}}
+    start_weg_app: توجہ مرکوز کریں یا درخواست شروع کریں {{0}}
+    switch_to_next_workspace: اگلی ورک اسپیس پر سوئچ کریں
+    switch_to_previous_workspace: پچھلے ورک اسپیس پر سوئچ کریں
+    switch_workspace: ورک اسپیس {{0}} پر سوئچ کریں
+    toggle_float: ٹوگل ونڈو فلوٹ موڈ
+    toggle_launcher: ٹوگل لانچر
+    toggle_monocle: ٹوگل ورک اسپیس مونوکل وضع
   readonly_tooltip: یہ صرف ایک پڑھنے والا شارٹ کٹ ہے
   reset: ڈیفالٹس کو دوبارہ ترتیب دیں
 sides:

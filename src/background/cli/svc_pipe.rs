@@ -21,7 +21,7 @@ pub struct ServicePipe;
 impl ServicePipe {
     /// will ignore any response
     pub fn request(message: SvcAction) -> Result<()> {
-        tokio::spawn(async move {
+        tauri::async_runtime::spawn(async move {
             log_error!(ServiceIpc::send(message).await);
         });
         Ok(())

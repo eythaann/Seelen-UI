@@ -151,11 +151,19 @@ save: Cứu
 save_and_restart: Lưu & Khởi động lại
 see_more: Xem thêm
 shortcuts:
-  enable: Bật các phím tắt tích hợp (AHK)
-  enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
+  enable: Bật hệ thống phím tắt tích hợp
+  enable_tooltip: >-
+    Tắt nếu bạn sẽ triển khai hệ thống phím tắt của riêng mình bằng cách sử dụng
+    ứng dụng UI Seelen
   labels:
+    create_new_workspace: Tạo không gian làm việc mới
+    cycle_stack_next: Chu kỳ ngăn xếp tiếp theo
+    cycle_stack_prev: Chu kỳ ngăn xếp trước
+    cycle_wallpaper_next: Thay đổi hình nền tiếp theo
+    cycle_wallpaper_prev: Thay đổi thành hình nền trước
     decrease_height: Giảm chiều cao
     decrease_width: Giảm chiều rộng
+    destroy_current_workspace: Phá hủy không gian làm việc hiện tại
     focus_bottom: Focus bottom
     focus_latest: Tập trung mới nhất
     focus_left: Tập trung trái
@@ -166,16 +174,12 @@ shortcuts:
     misc_open_settings: Mở cài đặt
     misc_toggle_lock_tracing: Chuyển đổi dấu vết khóa (nhật ký)
     misc_toggle_win_event_tracing: Chuyển đổi theo dõi sự kiện (nhật ký)
-    move_to_workspace_0: Di chuyển đến không gian làm việc 0
-    move_to_workspace_1: Di chuyển đến không gian làm việc 1
-    move_to_workspace_2: Di chuyển đến không gian làm việc 2
-    move_to_workspace_3: Di chuyển đến không gian làm việc 3
-    move_to_workspace_4: Di chuyển đến không gian làm việc 4
-    move_to_workspace_5: Di chuyển đến không gian làm việc 5
-    move_to_workspace_6: Di chuyển đến không gian làm việc 6
-    move_to_workspace_7: Di chuyển đến không gian làm việc 7
-    move_to_workspace_8: Di chuyển đến không gian làm việc 8
-    move_to_workspace_9: Di chuyển đến không gian làm việc 9
+    move_to_workspace: Di chuyển đến không gian làm việc {{0}}
+    move_window_down: Di chuyển cửa sổ xuống dưới
+    move_window_left: Di chuyển cửa sổ sang trái
+    move_window_right: Di chuyển cửa sổ sang phải
+    move_window_up: Chuyển cửa sổ sang đầu
+    pause_tiling: Tạm dừng Trình quản lý cửa sổ ốp lát
     reserve_bottom: Dự trữ đáy
     reserve_float: Dự trữ nổi
     reserve_left: Dự trữ trái
@@ -183,37 +187,14 @@ shortcuts:
     reserve_stack: Ngân hàng dự trữ
     reserve_top: Dự trữ hàng đầu
     restore_sizes: Khôi phục kích thước
-    send_to_workspace_0: Gửi đến không gian làm việc 0
-    send_to_workspace_1: Gửi đến không gian làm việc 1
-    send_to_workspace_2: Gửi đến Workspace 2
-    send_to_workspace_3: Gửi đến không gian làm việc 3
-    send_to_workspace_4: Gửi đến không gian làm việc 4
-    send_to_workspace_5: Gửi đến không gian làm việc 5
-    send_to_workspace_6: Gửi đến không gian làm việc 6
-    send_to_workspace_7: Gửi đến không gian làm việc 7
-    send_to_workspace_8: Gửi đến không gian làm việc 8
-    send_to_workspace_9: Gửi đến không gian làm việc 9
-    start_weg_app_0: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 1
-    start_weg_app_1: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 2
-    start_weg_app_2: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 3
-    start_weg_app_3: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 4
-    start_weg_app_4: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 5
-    start_weg_app_5: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 6
-    start_weg_app_6: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 7
-    start_weg_app_7: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 8
-    start_weg_app_8: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 9
-    start_weg_app_9: Tập trung hoặc bắt đầu ứng dụng trên vị trí thanh tác vụ 10
-    switch_workspace_0: Chuyển sang không gian làm việc 1
-    switch_workspace_1: Chuyển sang không gian làm việc 2
-    switch_workspace_2: Chuyển sang không gian làm việc 2
-    switch_workspace_3: Chuyển sang không gian làm việc 3
-    switch_workspace_4: Chuyển sang không gian làm việc 4
-    switch_workspace_5: Chuyển sang không gian làm việc 5
-    switch_workspace_6: Chuyển sang không gian làm việc 6
-    switch_workspace_7: Chuyển sang không gian làm việc 7
-    switch_workspace_8: Chuyển sang không gian làm việc 8
-    switch_workspace_9: Chuyển sang không gian làm việc 9
-    toggle_launcher: Chuyển đổi
+    send_to_workspace: Gửi đến không gian làm việc {{0}}
+    start_weg_app: Ứng dụng tập trung hoặc bắt đầu {{0}}
+    switch_to_next_workspace: Chuyển sang không gian làm việc tiếp theo
+    switch_to_previous_workspace: Chuyển sang không gian làm việc trước đó
+    switch_workspace: Chuyển sang không gian làm việc {{0}}
+    toggle_float: Chuyển đổi chế độ nổi của cửa sổ
+    toggle_launcher: Chuyển đổi trình khởi chạy
+    toggle_monocle: Chuyển đổi chế độ Monocle không gian làm việc
   readonly_tooltip: Đây là một lối tắt chỉ đọc
   reset: Đặt lại về mặc định
 sides:

@@ -150,11 +150,19 @@ save: Vista
 save_and_restart: Vista og endurræsa
 see_more: Sjáðu meira
 shortcuts:
-  enable: Virkja samþætta flýtileiðir (AHK)
-  enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
+  enable: Virkja innbyggt flýtileiðkerfi
+  enable_tooltip: >-
+    Slökktu á ef þú munt innleiða þitt eigið flýtileiðkerfi með Seelen UI
+    viðskiptavininum
   labels:
+    create_new_workspace: Búðu til nýja vinnusvæði
+    cycle_stack_next: Hringrás stafla næst
+    cycle_stack_prev: Hringrás stafla fyrri
+    cycle_wallpaper_next: Breyttu í næsta veggfóður
+    cycle_wallpaper_prev: Breytast í fyrra veggfóður
     decrease_height: Minnka hæð
     decrease_width: Minnka breidd
+    destroy_current_workspace: Eyðileggja núverandi vinnusvæði
     focus_bottom: Fókus botn
     focus_latest: Fókus síðast
     focus_left: Einbeittu til vinstri
@@ -165,16 +173,12 @@ shortcuts:
     misc_open_settings: Opnar stillingar
     misc_toggle_lock_tracing: Skiptu um rekja lás (logs)
     misc_toggle_win_event_tracing: Skiptu um Win Event Tracing (logs)
-    move_to_workspace_0: Fara á vinnusvæði 0
-    move_to_workspace_1: Fara á vinnusvæði 1
-    move_to_workspace_2: Farðu í Workspace 2
-    move_to_workspace_3: Farðu í vinnusvæði 3
-    move_to_workspace_4: Farðu á Workspace 4
-    move_to_workspace_5: Fara í Workspace 5
-    move_to_workspace_6: Fara á vinnusvæði 6
-    move_to_workspace_7: Farðu í vinnusvæði 7
-    move_to_workspace_8: Farðu á vinnusvæði 8
-    move_to_workspace_9: Fara á vinnusvæði 9
+    move_to_workspace: Fara í vinnusvæði {{0}}
+    move_window_down: Færðu glugga til botns
+    move_window_left: Færðu glugga til vinstri
+    move_window_right: Færðu glugga til hægri
+    move_window_up: Færðu glugga efst
+    pause_tiling: Hlé flísar gluggastjóri
     reserve_bottom: Panta botn
     reserve_float: Varasjóður flot
     reserve_left: Pantaðu til vinstri
@@ -182,37 +186,14 @@ shortcuts:
     reserve_stack: Panta stafla
     reserve_top: Panta topp
     restore_sizes: Endurheimta stærðir
-    send_to_workspace_0: Sendu á Workspace 0
-    send_to_workspace_1: Sendu á vinnusvæði 1
-    send_to_workspace_2: Sendu á Workspace 2
-    send_to_workspace_3: Senda á Workspace 3
-    send_to_workspace_4: Sendu á Workspace 4
-    send_to_workspace_5: Sendu á Workspace 5
-    send_to_workspace_6: Sendu á Workspace 6
-    send_to_workspace_7: Sendu á Workspace 7
-    send_to_workspace_8: Sendu á Workspace 8
-    send_to_workspace_9: Sendu á Workspace 9
-    start_weg_app_0: Einbeittu eða byrjaðu app á stöðu verkefna 1
-    start_weg_app_1: Einbeittu eða byrjaðu app á stöðu verkefna 2
-    start_weg_app_2: Einbeittu eða byrjaðu app á stöðu verkefna 3
-    start_weg_app_3: Einbeittu eða byrjaðu app á stöðu verkefna 4
-    start_weg_app_4: Einbeittu eða byrjaðu app á stöðu verkefna 5
-    start_weg_app_5: Einbeittu eða byrjaðu app á stöðu verkefna 6
-    start_weg_app_6: Einbeittu eða byrjaðu app á stöðu verkefna 7
-    start_weg_app_7: Einbeittu eða byrjaðu app á stöðu verkefna 8
-    start_weg_app_8: Einbeittu eða byrjaðu app á stöðu verkefna 9
-    start_weg_app_9: Einbeittu eða byrjaðu app á stöðu verkefna 10
-    switch_workspace_0: Skiptu yfir í vinnusvæði 1
-    switch_workspace_1: Skiptu yfir í vinnusvæði 2
-    switch_workspace_2: Skiptu yfir í vinnusvæði 2
-    switch_workspace_3: Skiptu yfir í vinnusvæði 3
-    switch_workspace_4: Skiptu yfir í vinnusvæði 4
-    switch_workspace_5: Skiptu yfir í vinnusvæði 5
-    switch_workspace_6: Skiptu yfir í vinnusvæði 6
-    switch_workspace_7: Skiptu yfir í vinnusvæði 7
-    switch_workspace_8: Skiptu yfir í vinnusvæði 8
-    switch_workspace_9: Skiptu yfir í vinnusvæði 9
-    toggle_launcher: Skiptu
+    send_to_workspace: Sendu á Workspace {{0}}
+    start_weg_app: Einbeittu eða byrjaðu forrit {{0}}
+    switch_to_next_workspace: Skiptu yfir í næsta vinnusvæði
+    switch_to_previous_workspace: Skiptu yfir í fyrri vinnusvæði
+    switch_workspace: Skiptu yfir í vinnusvæði {{0}}
+    toggle_float: Skiptu um glugga flotastillingu
+    toggle_launcher: Skiptu um sjósetja
+    toggle_monocle: Skiptu um vinnusvæði Monocle Mode
   readonly_tooltip: Þetta er aðeins skrifvarinn
   reset: Endurstilla í vanskil
 sides:

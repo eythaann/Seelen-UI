@@ -1,3 +1,5 @@
+cancel: Ləğv etmək
+done: Tamamlandı
 drivers:
   got_it: Alıb içmək
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI Xidməti (slu-xidmət) tətbiqin düzgün işləməsi üçün
     asılılıq/köməkçidir.
   not_running_ok: Xidmətə başlayın
+shortcut:
+  register:
+    placeholder: Hər hansı bir açar birləşməsini basın
+    title: Yeni qısa yol qeydiyyatı
 tray:
   quit: Çıxmaq
   restart: UI-ni yenidən başladın

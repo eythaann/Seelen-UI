@@ -152,13 +152,19 @@ save: Estalviar
 save_and_restart: Desar i reiniciar
 see_more: Veure més
 shortcuts:
-  enable: Activa les dreceres integrades (AHK)
+  enable: Activa el sistema integrat de dreceres
   enable_tooltip: >-
-    Desactiveu si implementareu les vostres pròpies dreceres mitjançant l'API de
-    Seelen Core
+    Desactiveu si implementareu el vostre propi sistema de dreceres mitjançant
+    el client de la interfície d'usuari de Seelen
   labels:
+    create_new_workspace: Creeu un espai de treball nou
+    cycle_stack_next: Stack Cycle Següent
+    cycle_stack_prev: Pila de cicles anterior
+    cycle_wallpaper_next: Canvieu al fons de pantalla següent
+    cycle_wallpaper_prev: Canvieu a fons de pantalla anterior
     decrease_height: Disminuir l'alçada
     decrease_width: Disminuir l'amplada
+    destroy_current_workspace: Destrueix l'espai de treball actual
     focus_bottom: Focus Bottom
     focus_latest: Focus més recent
     focus_left: Focus deixat
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Configuració oberta
     misc_toggle_lock_tracing: Tornada de tancament de bloqueig (registres)
     misc_toggle_win_event_tracing: Toggle Win Traça (registres)
-    move_to_workspace_0: Desplaceu -vos a l'espai de treball 0
-    move_to_workspace_1: Desplaceu -vos a l'espai de treball 1
-    move_to_workspace_2: Desplaceu -vos a l'espai de treball 2
-    move_to_workspace_3: Desplaceu -vos a l'espai de treball 3
-    move_to_workspace_4: Traslladar -se a l'espai de treball 4
-    move_to_workspace_5: Desplaceu -vos a l'espai de treball 5
-    move_to_workspace_6: Desplaceu -vos a l'espai de treball 6
-    move_to_workspace_7: Desplaceu -vos a l'espai de treball 7
-    move_to_workspace_8: Traslladar -se a l'espai de treball 8
-    move_to_workspace_9: Traslladar -se a l'espai de treball 9
+    move_to_workspace: Desplaceu -vos a l'espai de treball {{0}}
+    move_window_down: Moveu la finestra a baix
+    move_window_left: Moveu la finestra a l'esquerra
+    move_window_right: Moveu la finestra a la dreta
+    move_window_up: Moveu la finestra a la part superior
+    pause_tiling: Pausa Gestor de finestres de rajoles
     reserve_bottom: Reserva de fons
     reserve_float: Reserva flotant
     reserve_left: Reserva a l'esquerra
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Pila de reserva
     reserve_top: Reserva superior
     restore_sizes: Restaurar les mides
-    send_to_workspace_0: Enviar a l’espai de treball 0
-    send_to_workspace_1: Envia a l'espai de treball 1
-    send_to_workspace_2: Enviar a l'espai de treball 2
-    send_to_workspace_3: Envia a l’espai de treball 3
-    send_to_workspace_4: Enviar a l’espai de treball 4
-    send_to_workspace_5: Enviar a l’espai de treball 5
-    send_to_workspace_6: Enviar a l’espai de treball 6
-    send_to_workspace_7: Enviar a l’espai de treball 7
-    send_to_workspace_8: Enviar a l'espai de treball 8
-    send_to_workspace_9: Enviar a l’espai de treball 9
-    start_weg_app_0: Centrar o iniciar l'aplicació a la posició de la barra de tasques 1
-    start_weg_app_1: Centrar o iniciar l'aplicació a la posició de la barra de tasques 2
-    start_weg_app_2: Centrar o iniciar l'aplicació a la posició de la barra de tasques 3
-    start_weg_app_3: Centrar o iniciar l'aplicació a la posició de la barra de tasques 4
-    start_weg_app_4: Centrar o iniciar l'aplicació a la posició de la barra de tasques 5
-    start_weg_app_5: Centrar o iniciar l'aplicació a la posició de la barra de tasques 6
-    start_weg_app_6: Centrar o iniciar l'aplicació a la posició de la barra de tasques 7
-    start_weg_app_7: Centrar o iniciar l'aplicació a la posició de la barra de tasques 8
-    start_weg_app_8: Centrar o iniciar l'aplicació a la posició de la barra de tasques 9
-    start_weg_app_9: Centrar o iniciar l'aplicació a la posició de la barra de tasques 10
-    switch_workspace_0: Canvia a l'espai de treball 1
-    switch_workspace_1: Canvia a l'espai de treball 2
-    switch_workspace_2: Canvia a l'espai de treball 2
-    switch_workspace_3: Canvia a l'espai de treball 3
-    switch_workspace_4: Canvia a l'espai de treball 4
-    switch_workspace_5: Canvia a l'espai de treball 5
-    switch_workspace_6: Canvia a l'espai de treball 6
-    switch_workspace_7: Canvia a l'espai de treball 7
-    switch_workspace_8: Canvia a l'espai de treball 8
-    switch_workspace_9: Canvia a l'espai de treball 9
-    toggle_launcher: Essibent
+    send_to_workspace: Enviar a l'espai de treball {{0}}
+    start_weg_app: Aplicació Focus o Inici {{0}}
+    switch_to_next_workspace: Canvieu al següent espai de treball
+    switch_to_previous_workspace: Canvieu a l'espai de treball anterior
+    switch_workspace: Switch a Workspace {{0}}
+    toggle_float: Mode de flotació de la finestra de commutació
+    toggle_launcher: Toggle Launcher
+    toggle_monocle: Mode Monocle de l'espai de treball
   readonly_tooltip: Aquesta és una drecera de només lectura
   reset: Restableix als valors predeterminats
 sides:

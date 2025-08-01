@@ -1,3 +1,5 @@
+cancel: Peruuttaa
+done: Tehty
 drivers:
   got_it: Sain sen
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI Service (slu-service) on riippuvuus/apuohjelma, jonka avulla
     sovellus toimii oikein.
   not_running_ok: Aloita palvelu
+shortcut:
+  register:
+    placeholder: Paina mitä tahansa näppäinyhdistelmää
+    title: Uuden pikakuvakkeen rekisteröinti
 tray:
   quit: Lopeta
   restart: Käynnistä käyttöliittymä uudelleen

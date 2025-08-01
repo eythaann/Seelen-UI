@@ -154,33 +154,35 @@ save: बचाना
 save_and_restart: सहेजें और पुनरारंभ करें
 see_more: और देखें
 shortcuts:
-  enable: एकीकृत शॉर्टकट (AHK) सक्षम करें
+  enable: अंतर्निहित शॉर्टकट सिस्टम सक्षम करें
   enable_tooltip: >-
-    अक्षम करें यदि आप सेलेन कोर एपीआई का उपयोग करके अपने स्वयं के शॉर्टकट को
-    लागू करेंगे
+    अक्षम करें यदि आप सेलेन यूआई क्लाइंट का उपयोग करके अपने स्वयं के शॉर्टकट
+    सिस्टम को लागू करेंगे
   labels:
+    create_new_workspace: नया कार्यक्षेत्र बनाएं
+    cycle_stack_next: साइकिल ढेर अगला
+    cycle_stack_prev: चक्र ढेर पिछला
+    cycle_wallpaper_next: अगले वॉलपेपर में बदलें
+    cycle_wallpaper_prev: पिछले वॉलपेपर में बदलें
     decrease_height: ऊंचाई में कमी
     decrease_width: चौड़ाई में कमी
+    destroy_current_workspace: वर्तमान कार्यक्षेत्र को नष्ट करें
     focus_bottom: फोकस बॉटम
     focus_latest: नवीनतम ध्यान केंद्रित करें
     focus_left: फोकस लेफ्ट
-    focus_right: फोकस अधिकार
+    focus_right: ध्यान केंद्रित करना
     focus_top: फोकस टॉप
     increase_height: ऊंचाई बढ़ाना
     increase_width: चौड़ाई में वृद्धि
     misc_open_settings: खुली सेटिंग
     misc_toggle_lock_tracing: टॉगल लॉक ट्रेसिंग (लॉग)
     misc_toggle_win_event_tracing: टॉगल जीत इवेंट ट्रेसिंग (लॉग)
-    move_to_workspace_0: कार्यक्षेत्र 0 पर जाएं
-    move_to_workspace_1: कार्यक्षेत्र 1 पर जाएं
-    move_to_workspace_2: कार्यक्षेत्र 2 पर जाएं
-    move_to_workspace_3: कार्यक्षेत्र 3 पर जाएं
-    move_to_workspace_4: कार्यक्षेत्र 4 पर जाएं
-    move_to_workspace_5: कार्यक्षेत्र 5 पर जाएं
-    move_to_workspace_6: कार्यक्षेत्र 6 पर जाएं
-    move_to_workspace_7: कार्यक्षेत्र 7 पर जाएं
-    move_to_workspace_8: कार्यक्षेत्र 8 पर जाएं
-    move_to_workspace_9: कार्यक्षेत्र 9 पर जाएं
+    move_to_workspace: कार्यक्षेत्र {{0}} पर जाएं
+    move_window_down: खिड़की को नीचे तक ले जाएं
+    move_window_left: खिड़की को बाईं ओर ले जाएं
+    move_window_right: खिड़की को दाईं ओर ले जाएं
+    move_window_up: खिड़की को शीर्ष पर ले जाएं
+    pause_tiling: टाइलिंग विंडो मैनेजर को रोकें
     reserve_bottom: रिजर्व
     reserve_float: रिजर्व फ्लोट
     reserve_left: आरक्षित आरक्षित
@@ -188,37 +190,14 @@ shortcuts:
     reserve_stack: आरक्षित स्टैक
     reserve_top: आरक्षित शीर्ष
     restore_sizes: आकारों को बहाल करें
-    send_to_workspace_0: कार्यक्षेत्र 0 पर भेजें
-    send_to_workspace_1: कार्यक्षेत्र 1 पर भेजें
-    send_to_workspace_2: कार्यक्षेत्र 2 को भेजें
-    send_to_workspace_3: कार्यक्षेत्र 3 को भेजें
-    send_to_workspace_4: कार्यक्षेत्र 4 पर भेजें
-    send_to_workspace_5: कार्यक्षेत्र 5 को भेजें
-    send_to_workspace_6: कार्यक्षेत्र 6 को भेजें
-    send_to_workspace_7: कार्यक्षेत्र 7 को भेजें
-    send_to_workspace_8: कार्यक्षेत्र 8 पर भेजें
-    send_to_workspace_9: कार्यक्षेत्र 9 को भेजें
-    start_weg_app_0: टास्कबार पोजिशन 1 पर फोकस या स्टार्ट ऐप
-    start_weg_app_1: टास्कबार पोजिशन 2 पर ऐप फोकस या स्टार्ट करें
-    start_weg_app_2: टास्कबार पोजिशन 3 पर ऐप फोकस या स्टार्ट करें
-    start_weg_app_3: टास्कबार पोजिशन 4 पर ऐप फोकस या स्टार्ट करें
-    start_weg_app_4: टास्कबार पोजिशन 5 पर ऐप फोकस या स्टार्ट करें
-    start_weg_app_5: टास्कबार पोजिशन 6 पर ऐप फोकस या स्टार्ट करें
-    start_weg_app_6: टास्कबार पोजिशन 7 पर फोकस या स्टार्ट ऐप
-    start_weg_app_7: टास्कबार पोजिशन 8 पर फोकस या स्टार्ट ऐप
-    start_weg_app_8: टास्कबार पोजिशन 9 पर ऐप फोकस या स्टार्ट करें
-    start_weg_app_9: टास्कबार पोजिशन 10 पर ऐप फोकस या स्टार्ट करें
-    switch_workspace_0: कार्यक्षेत्र 1 पर स्विच करें
-    switch_workspace_1: कार्यक्षेत्र 2 पर स्विच करें
-    switch_workspace_2: कार्यक्षेत्र 2 पर स्विच करें
-    switch_workspace_3: कार्यक्षेत्र 3 पर स्विच करें
-    switch_workspace_4: कार्यक्षेत्र 4 पर स्विच करें
-    switch_workspace_5: कार्यक्षेत्र 5 पर स्विच करें
-    switch_workspace_6: कार्यक्षेत्र 6 पर स्विच करें
-    switch_workspace_7: कार्यक्षेत्र 7 पर स्विच करें
-    switch_workspace_8: कार्यक्षेत्र 8 पर स्विच करें
-    switch_workspace_9: कार्यक्षेत्र 9 पर स्विच करें
-    toggle_launcher: टॉगल
+    send_to_workspace: कार्यक्षेत्र {{0}} को भेजें
+    start_weg_app: फोकस करें या आवेदन शुरू करें {{0}}
+    switch_to_next_workspace: अगले कार्यक्षेत्र पर स्विच करें
+    switch_to_previous_workspace: पिछले कार्यक्षेत्र पर स्विच करें
+    switch_workspace: कार्यक्षेत्र {{0}} पर स्विच करें
+    toggle_float: टॉगल विंडो फ्लोट मोड
+    toggle_launcher: टॉगल लॉन्चर
+    toggle_monocle: टॉगल वर्कस्पेस मोनोकल मोड
   readonly_tooltip: यह केवल एक रीड-शॉर्टकट है
   reset: डिफ़ॉल्ट पर पुनः सेट करें
 sides:

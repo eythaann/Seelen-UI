@@ -1,3 +1,5 @@
+cancel: Kanselleer
+done: Gedoen
 drivers:
   got_it: Het dit
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Seelen UI Service (slu-diens) is 'n afhanklikheid/helper vir die toepassing
     om behoorlik te werk.
   not_running_ok: Begin diens
+shortcut:
+  register:
+    placeholder: Druk op enige sleutelkombinasie
+    title: Nuwe kortpad registreer
 tray:
   quit: Laat vaar
   restart: Herbegin UI

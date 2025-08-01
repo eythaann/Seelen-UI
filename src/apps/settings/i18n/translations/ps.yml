@@ -147,11 +147,19 @@ save: خوندي کړئ
 save_and_restart: خوندي کول او بیا پیل کړئ
 see_more: نور وګوره
 shortcuts:
-  enable: مدغم شوي لنډیزونه (اه)
-  enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
+  enable: د جوړ شوي لنډیز سیسټم فعال کړئ
+  enable_tooltip: >-
+    غیر فعال کړئ که تاسو د اصلي UI پیرودونکي په کارولو سره خپل د لنډیو سیسټم پلي
+    کړئ
   labels:
+    create_new_workspace: نوی کارځای جوړ کړئ
+    cycle_stack_next: د دوران سټیک
+    cycle_stack_prev: دور مخکینی
+    cycle_wallpaper_next: راتلونکي وال پیپر ته بدل کړئ
+    cycle_wallpaper_prev: پخواني وال پیپر ته بدل کړئ
     decrease_height: لوړوالی کمول
     decrease_width: د سوری کمول
+    destroy_current_workspace: اوسني کاري ځای ویجاړ کړئ
     focus_bottom: ښکته
     focus_latest: وروستی تمرکز وکړئ
     focus_left: کي left ه تمرکز
@@ -162,16 +170,12 @@ shortcuts:
     misc_open_settings: خلاص امستنې
     misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)
     misc_toggle_win_event_tracing: د لید لید پاراګ (ونې)
-    move_to_workspace_0: د کارځای 0 ته لاړشئ
-    move_to_workspace_1: د کارځای 1 ته لاړشئ
-    move_to_workspace_2: د کارځای 2 ته لاړشئ
-    move_to_workspace_3: د کارځای 3 ته لاړشئ
-    move_to_workspace_4: د کارځای ته لاړشئ
-    move_to_workspace_5: د کارځای 5 ته لاړشئ
-    move_to_workspace_6: د کارځای ته لاړشئ
-    move_to_workspace_7: د کارځای 7 ته لاړشئ
-    move_to_workspace_8: د کارځای ته لاړشئ
-    move_to_workspace_9: د کارځای 9 ته لاړشئ
+    move_to_workspace: د کارځای ته لاړ شئ {0 0}}
+    move_window_down: د کړکۍ لاندې ته واړوئ
+    move_window_left: د کی left اړخ ته لاړشئ
+    move_window_right: د کړکۍ سمې ته لاړشئ
+    move_window_up: کړکۍ سر ته واړوئ
+    pause_tiling: د وقفې ټیینګ کړکۍ مدیر
     reserve_bottom: د
     reserve_float: ریزرو فلوټ
     reserve_left: ساتل شوی
@@ -179,37 +183,14 @@ shortcuts:
     reserve_stack: ریزرو سټیک
     reserve_top: خوندي پټی
     restore_sizes: اندازونه بحال کړئ
-    send_to_workspace_0: کارځای ته واستوئ
-    send_to_workspace_1: کارځای ته واستوئ
-    send_to_workspace_2: کارځای ته واستوئ
-    send_to_workspace_3: کارځای ته واستوئ
-    send_to_workspace_4: کارځای ته واستوئ
-    send_to_workspace_5: د کارځای 5 ته واستوئ
-    send_to_workspace_6: کارځای ته واستوئ
-    send_to_workspace_7: کارځای ته واستوئ
-    send_to_workspace_8: کارځای ته واستوئ
-    send_to_workspace_9: کارځای ته واستوئ
-    start_weg_app_0: د ټاسبر په موقعیت 1 کې فوکس یا پیل ایپ
-    start_weg_app_1: د ټاسبر په موقعیت 2 کې فوکس یا پیل ایپ
-    start_weg_app_2: د ټاسبر په موقعیت 3 کې فوکس یا پیل ایپ
-    start_weg_app_3: د ټاسبر په پوزیشن کې د ټیلک پاریز حالت کې تمرکز یا پیل ایپ
-    start_weg_app_4: په ټاسبر کې د سرلیک کولو ایپ یا پیل ایپ اپ
-    start_weg_app_5: د ټاسبر حالت 6 کې د سټراټ یا پیل ایپ
-    start_weg_app_6: د ټاسبر حالت کې د سټراټ یا پیل ایپ
-    start_weg_app_7: د ټاسبر موقعیت 8 باندې تمرکز یا پیل ایپ
-    start_weg_app_8: په ټاسبر کې د ټاسک بار کې د پیل غوښتنلیک
-    start_weg_app_9: د ټاسبر په موقعیت 10 د پیل ایپ اپ اپیل
-    switch_workspace_0: د کارځای 1 ته لاړشئ
-    switch_workspace_1: د کارځای 2 ته لاړشئ
-    switch_workspace_2: د کارځای 2 ته لاړشئ
-    switch_workspace_3: د کارځای 3 ته وګرځئ
-    switch_workspace_4: د کارځای ته وسپارئ
-    switch_workspace_5: د کارځای 5 ته لاړشئ
-    switch_workspace_6: د کارځای 6 ته وګرځئ
-    switch_workspace_7: د کارځای ته لاړشئ
-    switch_workspace_8: د کارځای 8 ته وګرځئ
-    switch_workspace_9: د کارځای شمیره 9
-    toggle_launcher: ټګول
+    send_to_workspace: کارځای ته واستوئ {{0}}
+    start_weg_app: فوکس یا د تطبیق غوښتنلیک {{0}}
+    switch_to_next_workspace: راتلونکی کاري ځای ته لاړشئ
+    switch_to_previous_workspace: پخوانیو ورکشاپ ته واړوئ
+    switch_workspace: د کارځای ته لاړشئ {0 0}}
+    toggle_float: د کړکۍ د فلوټ حالت
+    toggle_launcher: د تورالو لانچر
+    toggle_monocle: د رواپیز دستیس مونو سپیکشن حالت
   readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
   reset: د افلاسیون لپاره بیا تنظیمول
 sides:

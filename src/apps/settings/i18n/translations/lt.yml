@@ -150,11 +150,17 @@ save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 see_more: Žiūrėti daugiau
 shortcuts:
-  enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
-  enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
+  enable: Įgalinti įmontuotą nuorodų sistemą
+  enable_tooltip: Išjunkite, jei įdiegsite savo nuorodų sistemą naudodami „Seelen UI“ klientą
   labels:
+    create_new_workspace: Sukurkite naują darbo vietą
+    cycle_stack_next: Ciklo kaminas Kitas
+    cycle_stack_prev: Ciklų kaminas ankstesnis
+    cycle_wallpaper_next: Pakeiskite į kitą tapetą
+    cycle_wallpaper_prev: Pakeisti ankstesnius tapetus
     decrease_height: Sumažinti aukštį
     decrease_width: Sumažinti plotį
+    destroy_current_workspace: Sunaikinkite dabartinę darbo vietą
     focus_bottom: Fokusavimo dugnas
     focus_latest: Sutelkite naujausią
     focus_left: Fokusavimas kairėje
@@ -165,16 +171,12 @@ shortcuts:
     misc_open_settings: Atidaryti nustatymai
     misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)
     misc_toggle_win_event_tracing: Perjunkite „Win“ įvykių sekimą (žurnalai)
-    move_to_workspace_0: Pereikite į 0 darbo vietą
-    move_to_workspace_1: Pereikite į 1 darbo vietą
-    move_to_workspace_2: Pereikite į 2 darbo vietą
-    move_to_workspace_3: Pereikite į 3 darbo vietą
-    move_to_workspace_4: Pereikite į 4 darbo vietą
-    move_to_workspace_5: Pereikite į 5 darbo vietą
-    move_to_workspace_6: Pereikite į 6 darbo vietą
-    move_to_workspace_7: Pereikite į 7 darbo vietą
-    move_to_workspace_8: Pereikite į 8 darbo vietą
-    move_to_workspace_9: Pereikite į 9 darbo vietą
+    move_to_workspace: Pereikite į darbo vietą {{0}}
+    move_window_down: Perkelkite langą į apačią
+    move_window_left: Perkelkite langą į kairę
+    move_window_right: Perkelkite langą į dešinę
+    move_window_up: Perkelkite langą į viršų
+    pause_tiling: Pauzės plytelių langų tvarkyklė
     reserve_bottom: Rezervo dugnas
     reserve_float: Atsargos plūdė
     reserve_left: Rezervas kairėje
@@ -182,37 +184,14 @@ shortcuts:
     reserve_stack: Rezervo kaminas
     reserve_top: Rezervuokite viršų
     restore_sizes: Atkurti dydžius
-    send_to_workspace_0: Siųsti į darbo vietą 0
-    send_to_workspace_1: Siųsti į 1 darbo vietą
-    send_to_workspace_2: Siųsti į 2 darbo vietą
-    send_to_workspace_3: Siųsti į 3 „Workspace“
-    send_to_workspace_4: Siųsti į 4 darbo vietą
-    send_to_workspace_5: Siųsti į 5 darbo vietą
-    send_to_workspace_6: Siųsti į „Workspace 6“
-    send_to_workspace_7: Siųsti į „Workspace 7“
-    send_to_workspace_8: Siųsti į „Workspace 8“
-    send_to_workspace_9: Siųsti į „Workspace 9“
-    start_weg_app_0: Sutelkite arba paleiskite programą 1 užduočių juostoje
-    start_weg_app_1: Sutelkite arba paleiskite programą 2 užduočių juostoje
-    start_weg_app_2: Sutelkite arba paleiskite programą 3 užduoties juostoje
-    start_weg_app_3: Sutelkite arba paleiskite programą 4 užduoties juostoje
-    start_weg_app_4: Sutelkite arba paleiskite programą 5 užduoties juostoje
-    start_weg_app_5: Sutelkite arba paleiskite programą 6 užduoties juostoje
-    start_weg_app_6: Sutelkite arba paleiskite programą 7 užduoties juostoje
-    start_weg_app_7: Sutelkite arba paleiskite programą 8 užduočių juostoje
-    start_weg_app_8: Sutelkite arba paleiskite programą 9 užduočių juostoje
-    start_weg_app_9: Sutelkite arba paleiskite programą 10 užduočių juostoje
-    switch_workspace_0: Perjunkite į 1 darbo vietą
-    switch_workspace_1: Perjunkite į 2 darbo vietą
-    switch_workspace_2: Perjunkite į 2 darbo vietą
-    switch_workspace_3: Perjunkite į 3 darbo vietą
-    switch_workspace_4: Perjunkite į 4 darbo vietą
-    switch_workspace_5: Perjunkite į 5 darbo vietą
-    switch_workspace_6: Perjunkite į 6 darbo vietą
-    switch_workspace_7: Perjunkite į 7 darbo vietą
-    switch_workspace_8: Perjunkite į 8 darbo vietą
-    switch_workspace_9: Perjunkite į 9 darbo vietą
-    toggle_launcher: Perjungti
+    send_to_workspace: Siųsti į darbo vietą {{0}}
+    start_weg_app: Fokusuokite arba paleiskite programą {{0}}
+    switch_to_next_workspace: Perjunkite į kitą darbo vietą
+    switch_to_previous_workspace: Perjunkite į ankstesnę darbo vietą
+    switch_workspace: Perjunkite į darbo vietą {{0}}
+    toggle_float: Perjunkite lango plūdės režimą
+    toggle_launcher: „Toggle“ paleidimo priemonė
+    toggle_monocle: Perjunkite darbo vietos monokle režimą
   readonly_tooltip: Tai tik skaitomas nuoroda
   reset: Iš naujo nustatykite pagal numatytuosius nustatymus
 sides:

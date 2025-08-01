@@ -1,3 +1,5 @@
+cancel: يلغي
+done: منتهي
 drivers:
   got_it: حصلت عليه
   monitor_disabled: >-
@@ -26,6 +28,10 @@ service:
   not_running: خدمة Seelen UI لا تعمل
   not_running_description: تعتبر خدمة Seelen UI (خدمة slu) بمثابة تبعية/مساعد للتطبيق للعمل بشكل صحيح.
   not_running_ok: ابدأ الخدمة
+shortcut:
+  register:
+    placeholder: اضغط على أي مجموعة مفاتيح
+    title: تسجيل اختصار جديد
 tray:
   quit: الإقلاع عن التدخين
   restart: إعادة تشغيل واجهة المستخدم

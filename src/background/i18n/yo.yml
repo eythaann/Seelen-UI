@@ -1,3 +1,5 @@
+cancel: Fagilee
+done: Ṣe
 drivers:
   got_it: Ṣe o ri
   monitor_disabled: >-
@@ -30,6 +32,10 @@ service:
     Iṣẹ Seelen UI (iṣẹ slu-slu) jẹ igbẹkẹle/oluranlọwọ fun ohun elo lati ṣiṣẹ
     daradara.
   not_running_ok: Bẹrẹ iṣẹ
+shortcut:
+  register:
+    placeholder: Tẹ eyikeyi apapo bọtini
+    title: Sisọ ọrọ abuja tuntun
 tray:
   quit: Lọ kuro
   restart: Atunbere ui

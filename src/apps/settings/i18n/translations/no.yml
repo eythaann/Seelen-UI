@@ -152,13 +152,19 @@ save: Lagre
 save_and_restart: Lagre og start på nytt
 see_more: Se mer
 shortcuts:
-  enable: Aktiver integrerte snarveier (AHK)
+  enable: Aktiver innebygd snarveisystem
   enable_tooltip: >-
-    Deaktiver om du vil implementere dine egne snarveier ved hjelp av Seelen
-    Core API
+    Deaktiver om du implementerer ditt eget snarveisystem ved hjelp av Seelen UI
+    -klienten
   labels:
+    create_new_workspace: Lag nytt arbeidsområde
+    cycle_stack_next: Syklusstabel neste
+    cycle_stack_prev: Syklusstabel tidligere
+    cycle_wallpaper_next: Bytt til neste bakgrunn
+    cycle_wallpaper_prev: Endre til tidligere bakgrunn
     decrease_height: Reduser høyden
     decrease_width: Redusere bredden
+    destroy_current_workspace: Ødelegg gjeldende arbeidsområde
     focus_bottom: Fokus bunnen
     focus_latest: Fokusere siste
     focus_left: Fokus igjen
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Åpne innstillinger
     misc_toggle_lock_tracing: Toggle Lock Tracing (logger)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (logger)
-    move_to_workspace_0: Flytt til arbeidsområdet 0
-    move_to_workspace_1: Flytt til arbeidsområdet 1
-    move_to_workspace_2: Flytt til arbeidsområdet 2
-    move_to_workspace_3: Flytt til arbeidsområdet 3
-    move_to_workspace_4: Flytt til arbeidsområdet 4
-    move_to_workspace_5: Flytt til arbeidsområdet 5
-    move_to_workspace_6: Flytt til arbeidsområdet 6
-    move_to_workspace_7: Flytt til arbeidsområdet 7
-    move_to_workspace_8: Flytt til arbeidsområdet 8
-    move_to_workspace_9: Flytt til arbeidsområdet 9
+    move_to_workspace: Flytt til arbeidsområdet {{0}}
+    move_window_down: Flytt vinduet til bunnen
+    move_window_left: Flytt vinduet til venstre
+    move_window_right: Flytt vinduet til høyre
+    move_window_up: Flytt vinduet til toppen
+    pause_tiling: Pause flislegging av vindusbehandler
     reserve_bottom: Reserve bunn
     reserve_float: Reserve flyter
     reserve_left: Reserve igjen
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Reserve stack
     reserve_top: Reserve top
     restore_sizes: Gjenopprett størrelser
-    send_to_workspace_0: Send til arbeidsområdet 0
-    send_to_workspace_1: Send til arbeidsområdet 1
-    send_to_workspace_2: Send til arbeidsområdet 2
-    send_to_workspace_3: Send til arbeidsområdet 3
-    send_to_workspace_4: Send til arbeidsområdet 4
-    send_to_workspace_5: Send til arbeidsområdet 5
-    send_to_workspace_6: Send til arbeidsområdet 6
-    send_to_workspace_7: Send til arbeidsområdet 7
-    send_to_workspace_8: Send til arbeidsområdet 8
-    send_to_workspace_9: Send til arbeidsområdet 9
-    start_weg_app_0: Fokuser eller start app på oppgavelinjeposisjon 1
-    start_weg_app_1: Fokuser eller start app på oppgavelinjeposisjon 2
-    start_weg_app_2: Fokuser eller start app på oppgavelinjeposisjon 3
-    start_weg_app_3: Fokuser eller start app på oppgavelinjeposisjon 4
-    start_weg_app_4: Fokuser eller start app på oppgavelinjeposisjon 5
-    start_weg_app_5: Fokuser eller start app på oppgavelinjeposisjon 6
-    start_weg_app_6: Fokuser eller start app på oppgavelinjeposisjon 7
-    start_weg_app_7: Fokuser eller start app på oppgavelinjeposisjon 8
-    start_weg_app_8: Fokuser eller start app på oppgavelinjeposisjon 9
-    start_weg_app_9: Fokuser eller start app på oppgavelinjeposisjon 10
-    switch_workspace_0: Bytt til arbeidsområdet 1
-    switch_workspace_1: Bytt til arbeidsområdet 2
-    switch_workspace_2: Bytt til arbeidsområdet 2
-    switch_workspace_3: Bytt til arbeidsområdet 3
-    switch_workspace_4: Bytt til arbeidsområdet 4
-    switch_workspace_5: Bytt til arbeidsområdet 5
-    switch_workspace_6: Bytt til arbeidsområdet 6
-    switch_workspace_7: Bytt til arbeidsområdet 7
-    switch_workspace_8: Bytt til arbeidsområdet 8
-    switch_workspace_9: Bytt til arbeidsområdet 9
-    toggle_launcher: Veksle
+    send_to_workspace: Send til arbeidsområdet {{0}}
+    start_weg_app: Fokus eller start applikasjon {{0}}
+    switch_to_next_workspace: Bytt til neste arbeidsområde
+    switch_to_previous_workspace: Bytt til tidligere arbeidsområde
+    switch_workspace: Bytt til arbeidsområdet {{0}}
+    toggle_float: Veksle vindu float -modus
+    toggle_launcher: Veksle Launcher
+    toggle_monocle: Veksle arbeidsområde monokelmodus
   readonly_tooltip: Dette er en leselinje-snarvei
   reset: Tilbakestill til standardverdier
 sides:

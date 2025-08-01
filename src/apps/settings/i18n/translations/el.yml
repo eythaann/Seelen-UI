@@ -153,13 +153,19 @@ save: Αποθηκεύσετε
 save_and_restart: Αποθήκευση & επανεκκίνηση
 see_more: Δείτε περισσότερα
 shortcuts:
-  enable: Ενεργοποίηση ολοκληρωμένων συντομεύσεων (AHK)
+  enable: Ενεργοποίηση ενσωματωμένου συστήματος συντομεύσεων
   enable_tooltip: >-
-    Απενεργοποιήστε εάν θα εφαρμόσετε τις δικές σας συντομεύσεις χρησιμοποιώντας
-    το API Seelen Core
+    Απενεργοποιήστε εάν θα εφαρμόσετε το δικό σας σύστημα συντομεύσεων
+    χρησιμοποιώντας τον πελάτη SEELEN UI
   labels:
+    create_new_workspace: Δημιουργήστε νέο χώρο εργασίας
+    cycle_stack_next: Στοίβα Cycle Next
+    cycle_stack_prev: Στοίβα πριν
+    cycle_wallpaper_next: Αλλαγή στην επόμενη ταπετσαρία
+    cycle_wallpaper_prev: Αλλαγή σε προηγούμενη ταπετσαρία
     decrease_height: Μείωση του ύψους
     decrease_width: Μείωση του πλάτους
+    destroy_current_workspace: Καταστρέψτε τον τρέχοντα χώρο εργασίας
     focus_bottom: Επικεντρωμένος κάτω
     focus_latest: Επικεντρώνεται το τελευταίο
     focus_left: Αριστερά
@@ -170,16 +176,12 @@ shortcuts:
     misc_open_settings: Ανοίξτε τις ρυθμίσεις
     misc_toggle_lock_tracing: Εναλλαγή Lock Tracing (αρχεία καταγραφής)
     misc_toggle_win_event_tracing: Εναλλαγή εντοπισμού συμβάντων Win (Logs)
-    move_to_workspace_0: Μετακίνηση στο χώρο εργασίας 0
-    move_to_workspace_1: Μετακίνηση στο χώρο εργασίας 1
-    move_to_workspace_2: Μετακίνηση στο χώρο εργασίας 2
-    move_to_workspace_3: Μετακίνηση στο χώρο εργασίας 3
-    move_to_workspace_4: Μετακίνηση στο χώρο εργασίας 4
-    move_to_workspace_5: Μετακίνηση στο χώρο εργασίας 5
-    move_to_workspace_6: Μετακίνηση στο χώρο εργασίας 6
-    move_to_workspace_7: Μετακίνηση στο χώρο εργασίας 7
-    move_to_workspace_8: Μετακίνηση στο χώρο εργασίας 8
-    move_to_workspace_9: Μετακίνηση στο χώρο εργασίας 9
+    move_to_workspace: Μετακίνηση στο χώρο εργασίας {{0}}
+    move_window_down: Μετακίνηση του παραθύρου στο κάτω μέρος
+    move_window_left: Μετακίνηση παραθύρου στα αριστερά
+    move_window_right: Μετακίνηση παραθύρου προς τα δεξιά
+    move_window_up: Μετακίνηση του παραθύρου στην κορυφή
+    pause_tiling: Παύση διαχείρισης παραθύρων πλακάκια
     reserve_bottom: Αποθεματικός
     reserve_float: Επιφυλάκισμα
     reserve_left: Αποθεματικό αριστερά
@@ -187,37 +189,14 @@ shortcuts:
     reserve_stack: Επιφυλάκιση
     reserve_top: Επιφυλάξτε την κορυφή
     restore_sizes: Επαναφορά μεγέθους
-    send_to_workspace_0: Αποστολή στο χώρο εργασίας 0
-    send_to_workspace_1: Αποστολή στο χώρο εργασίας 1
-    send_to_workspace_2: Αποστολή στο χώρο εργασίας 2
-    send_to_workspace_3: Αποστολή στο χώρο εργασίας 3
-    send_to_workspace_4: Αποστολή στο χώρο εργασίας 4
-    send_to_workspace_5: Αποστολή στο χώρο εργασίας 5
-    send_to_workspace_6: Αποστολή στο χώρο εργασίας 6
-    send_to_workspace_7: Αποστολή στο χώρο εργασίας 7
-    send_to_workspace_8: Αποστολή στο χώρο εργασίας 8
-    send_to_workspace_9: Αποστολή στο χώρο εργασίας 9
-    start_weg_app_0: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 1
-    start_weg_app_1: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 2
-    start_weg_app_2: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 3
-    start_weg_app_3: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 4
-    start_weg_app_4: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 5
-    start_weg_app_5: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 6
-    start_weg_app_6: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 7
-    start_weg_app_7: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 8
-    start_weg_app_8: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 9
-    start_weg_app_9: Εστίαση ή εκκίνηση εφαρμογής στη θέση της γραμμής εργασιών 10
-    switch_workspace_0: Μεταβείτε στο χώρο εργασίας 1
-    switch_workspace_1: Μεταβείτε στο χώρο εργασίας 2
-    switch_workspace_2: Μεταβείτε στο χώρο εργασίας 2
-    switch_workspace_3: Μεταβείτε στο χώρο εργασίας 3
-    switch_workspace_4: Μεταβείτε στο χώρο εργασίας 4
-    switch_workspace_5: Μεταβείτε στο χώρο εργασίας 5
-    switch_workspace_6: Μεταβείτε στο χώρο εργασίας 6
-    switch_workspace_7: Μεταβείτε στο χώρο εργασίας 7
-    switch_workspace_8: Μεταβείτε στο χώρο εργασίας 8
-    switch_workspace_9: Μεταβείτε στο χώρο εργασίας 9
-    toggle_launcher: Μπαρέτα
+    send_to_workspace: Αποστολή στο χώρο εργασίας {{0}}
+    start_weg_app: Εστίαση ή εκκίνηση της εφαρμογής {{0}}
+    switch_to_next_workspace: Μεταβείτε στον επόμενο χώρο εργασίας
+    switch_to_previous_workspace: Μεταβείτε σε προηγούμενο χώρο εργασίας
+    switch_workspace: Μεταβείτε στο χώρο εργασίας {{0}}
+    toggle_float: Εναλλαγή παραθύρου Float Mode
+    toggle_launcher: Εναρκτήριο εκτοξευτή
+    toggle_monocle: Εναλλαγή λειτουργίας Monocle Workspace
   readonly_tooltip: Αυτή είναι μια συντόμευση μόνο για ανάγνωση
   reset: Επαναφορά σε προεπιλογές
 sides:

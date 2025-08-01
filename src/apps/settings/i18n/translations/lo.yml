@@ -148,69 +148,48 @@ save: ບັນທຶກ
 save_and_restart: ບັນທຶກແລະ Restart
 see_more: ເບິ່ງເພີ່ມເຕີມ
 shortcuts:
-  enable: ເປີດໃຊ້ທາງລັດປະສົມປະສານ (ahk)
-  enable_tooltip: ປິດໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ Seelen Core Api
+  enable: ເປີດໃຊ້ລະບົບທາງລັດທີ່ມີຢູ່
+  enable_tooltip: ປິດການໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດລະບົບທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ລູກຄ້າ Setelen Ui
   labels:
-    decrease_height: ຫຼຸດຄວາມສູງ
-    decrease_width: ຫຼຸດຄວາມກວ້າງ
-    focus_bottom: ໂຟກັສລຸ່ມ
-    focus_latest: Focus ຫຼ້າສຸດ
-    focus_left: ໂຟກັສຊ້າຍ
-    focus_right: ໂຟກັສຂວາ
-    focus_top: ໂຟກັສເທິງ
+    create_new_workspace: ສ້າງພື້ນທີ່ເຮັດວຽກໃຫມ່
+    cycle_stack_next: stack ຮອບວຽນຕໍ່ໄປ
+    cycle_stack_prev: stack ຮອບວຽນທີ່ຜ່ານມາ
+    cycle_wallpaper_next: ປ່ຽນເປັນຮູບວໍເປເປີຕໍ່ໄປ
+    cycle_wallpaper_prev: ປ່ຽນເປັນຮູບວໍເປເປີທີ່ຜ່ານມາ
+    decrease_height: ຫຼຸດລົງຄວາມສູງ
+    decrease_width: ຫຼຸດຜ່ອນຄວາມກວ້າງ
+    destroy_current_workspace: ທໍາລາຍພື້ນທີ່ເຮັດວຽກໃນປະຈຸບັນ
+    focus_bottom: ສຸມໃສ່ດ້ານລຸ່ມ
+    focus_latest: ສຸມສຸດທ້າຍ
+    focus_left: ສຸມໃສ່ຊ້າຍ
+    focus_right: ສຸມໃສ່ສິດ
+    focus_top: ສຸມໃສ່ດ້ານເທິງ
     increase_height: ເພີ່ມຄວາມສູງ
     increase_width: ເພີ່ມຄວາມກວ້າງ
     misc_open_settings: ເປີດການຕັ້ງຄ່າ
     misc_toggle_lock_tracing: Toggle Lock Tracing (ບັນທຶກ)
     misc_toggle_win_event_tracing: Toggle WIN ການແຂ່ງຂັນເຫດການ (ບັນທຶກ)
-    move_to_workspace_0: ຍ້າຍໄປບ່ອນເຮັດວຽກ 0
-    move_to_workspace_1: ຍ້າຍໄປບ່ອນເຮັດວຽກ 1
-    move_to_workspace_2: ຍ້າຍໄປບ່ອນເຮັດວຽກ 2
-    move_to_workspace_3: ຍ້າຍໄປບ່ອນເຮັດວຽກ 3
-    move_to_workspace_4: ຍ້າຍໄປບ່ອນເຮັດວຽກ 4
-    move_to_workspace_5: ຍ້າຍໄປບ່ອນເຮັດວຽກ 5
-    move_to_workspace_6: ຍ້າຍໄປບ່ອນເຮັດວຽກ 6
-    move_to_workspace_7: ຍ້າຍໄປບ່ອນເຮັດວຽກ 7
-    move_to_workspace_8: ຍ້າຍໄປບ່ອນເຮັດວຽກ 8
-    move_to_workspace_9: ຍ້າຍໄປບ່ອນເຮັດວຽກ 9
-    reserve_bottom: ຈອງລຸ່ມ
-    reserve_float: ສະຫງວນ Float
-    reserve_left: ຈອງຊ້າຍ
+    move_to_workspace: ຍ້າຍໄປເຮັດວຽກ {{0}}
+    move_window_down: ຍ້າຍປ່ອງຢ້ຽມໄປທາງລຸ່ມ
+    move_window_left: ຍ້າຍປ່ອງຢ້ຽມໄປທາງຊ້າຍ
+    move_window_right: ຍ້າຍປ່ອງຢ້ຽມໄປທາງຂວາ
+    move_window_up: ຍ້າຍປ່ອງຢ້ຽມໄປທາງເທີງ
+    pause_tiling: ຢຸດຊົ່ວຄາວຜູ້ຈັດການປ່ອງຢ້ຽມ
+    reserve_bottom: ສໍາຮອງລຸ່ມ
+    reserve_float: ເລື່ອນລອຍ
+    reserve_left: ສະຫງວນໄວ້
     reserve_right: ສະຫງວນສິດ
-    reserve_stack: ຈອງ stack
-    reserve_top: ສະຫງວນເທິງ
-    restore_sizes: ຟື້ນຟູຂະໜາດ
-    send_to_workspace_0: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 0
-    send_to_workspace_1: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 1
-    send_to_workspace_2: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 2
-    send_to_workspace_3: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 3
-    send_to_workspace_4: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 4
-    send_to_workspace_5: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 5
-    send_to_workspace_6: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 6
-    send_to_workspace_7: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 7
-    send_to_workspace_8: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 8
-    send_to_workspace_9: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 9
-    start_weg_app_0: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 1
-    start_weg_app_1: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງ Task -Breent Bad 2
-    start_weg_app_2: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 3
-    start_weg_app_3: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 4
-    start_weg_app_4: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 5
-    start_weg_app_5: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 6
-    start_weg_app_6: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 7
-    start_weg_app_7: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 8
-    start_weg_app_8: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 9
-    start_weg_app_9: ສຸມໃສ່ຫຼືເລີ່ມຕົ້ນແອັບ on ໃນຕໍາແຫນ່ງຂອງແຖບວຽກ 10
-    switch_workspace_0: ປ່ຽນໄປເຮັດວຽກ 1
-    switch_workspace_1: ປ່ຽນໄປເຮັດ Workspace 2
-    switch_workspace_2: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 2
-    switch_workspace_3: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 3
-    switch_workspace_4: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 4
-    switch_workspace_5: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 5
-    switch_workspace_6: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 6
-    switch_workspace_7: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 7
-    switch_workspace_8: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 8
-    switch_workspace_9: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 9
-    toggle_launcher: ສະຫຼັບ
+    reserve_stack: ສະຫງວນ
+    reserve_top: ສໍາຮອງສໍາລັບການ
+    restore_sizes: ຟື້ນຟູຂະຫນາດ
+    send_to_workspace: ສົ່ງໄປທີ່ Workspace {{0}}
+    start_weg_app: ຈຸດສຸມຫຼືການສະຫມັກສະຫມັກ {{0}}
+    switch_to_next_workspace: ປ່ຽນໄປເຮັດວຽກຢູ່ຫນ້າທໍາອິດ
+    switch_to_previous_workspace: ປ່ຽນເປັນບ່ອນເຮັດວຽກທີ່ຜ່ານມາ
+    switch_workspace: ປ່ຽນໄປເຮັດວຽກຢູ່ Workspace {{0}}
+    toggle_float: ຮູບແບບການເລື່ອນຂອງປ່ອງຢ້ຽມ
+    toggle_launcher: ສະຫຼັບເປີດຕົວ
+    toggle_monocle: ຮູບແບບ Monecle Workspace
   readonly_tooltip: ນີ້ແມ່ນທາງລັດທີ່ອ່ານເທົ່ານັ້ນ
   reset: ຕັ້ງຄ່າຄືນໃຫມ່
 sides:

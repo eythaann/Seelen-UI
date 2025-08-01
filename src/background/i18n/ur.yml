@@ -1,3 +1,5 @@
+cancel: منسوخ کریں
+done: کیا
 drivers:
   got_it: مل گیا
   monitor_disabled: >-
@@ -32,6 +34,10 @@ service:
     Seelen UI سروس (slu-service) ایپ کے صحیح طریقے سے کام کرنے کے لیے ایک
     انحصار/مددگار ہے۔
   not_running_ok: سروس شروع کریں۔
+shortcut:
+  register:
+    placeholder: کوئی بھی کلیدی مجموعہ دبائیں
+    title: نیا شارٹ کٹ رجسٹر کرنا
 tray:
   quit: چھوڑ دیں
   restart: دوبارہ شروع کریں UI

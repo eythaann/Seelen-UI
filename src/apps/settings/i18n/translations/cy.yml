@@ -152,13 +152,19 @@ save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 see_more: Gweld mwy
 shortcuts:
-  enable: Galluogi llwybrau byr integredig (AHK)
+  enable: Galluogi system llwybrau byr adeiledig
   enable_tooltip: >-
-    Analluoga os byddwch chi'n gweithredu'ch llwybrau byr eich hun gan
-    ddefnyddio API craidd Seelen
+    Analluoga os byddwch chi'n gweithredu'ch system llwybrau byr eich hun gan
+    ddefnyddio cleient Seelen UI
   labels:
+    create_new_workspace: Creu man gwaith newydd
+    cycle_stack_next: Pentwr beicio nesaf
+    cycle_stack_prev: Pentwr beicio blaenorol
+    cycle_wallpaper_next: Newid i'r papur wal nesaf
+    cycle_wallpaper_prev: Newid i bapur wal blaenorol
     decrease_height: Lleihau uchder
     decrease_width: Lleihau lled
+    destroy_current_workspace: Dinistrio man gwaith cyfredol
     focus_bottom: Ffocws Gwaelod
     focus_latest: Canolbwyntiwch y Diweddaraf
     focus_left: Ffocws ar ôl
@@ -169,16 +175,12 @@ shortcuts:
     misc_open_settings: Gosodiadau Agored
     misc_toggle_lock_tracing: Olrhain clo togl (logiau)
     misc_toggle_win_event_tracing: Olrhain Digwyddiad Win Toggle (Logiau)
-    move_to_workspace_0: Symud i Workpace 0
-    move_to_workspace_1: Symud i Workpace 1
-    move_to_workspace_2: Symud i Workpace 2
-    move_to_workspace_3: Symud i Workpace 3
-    move_to_workspace_4: Symud i Workpace 4
-    move_to_workspace_5: Symud i Workpace 5
-    move_to_workspace_6: Symud i Workpace 6
-    move_to_workspace_7: Symud i Workpace 7
-    move_to_workspace_8: Symud i Workpace 8
-    move_to_workspace_9: Symud i Workpace 9
+    move_to_workspace: Symud i Workpace {{0}}
+    move_window_down: Symud ffenestr i'r gwaelod
+    move_window_left: Symud ffenestr i'r chwith
+    move_window_right: Symud ffenestr i'r dde
+    move_window_up: Symud ffenestr i'r brig
+    pause_tiling: Oedi rheolwr ffenestri teils
     reserve_bottom: Cadwch y gwaelod
     reserve_float: Arnofio wrth gefn
     reserve_left: Gwarchodfa Chwith
@@ -186,37 +188,14 @@ shortcuts:
     reserve_stack: Pentwr wrth gefn
     reserve_top: Top wrth gefn
     restore_sizes: Adfer Meintiau
-    send_to_workspace_0: Anfon i Workpace 0
-    send_to_workspace_1: Anfonwch i Workpace 1
-    send_to_workspace_2: Anfonwch i Workpace 2
-    send_to_workspace_3: Anfonwch i Workpace 3
-    send_to_workspace_4: Anfonwch i Workpace 4
-    send_to_workspace_5: Anfonwch i Workpace 5
-    send_to_workspace_6: Anfonwch i Workpace 6
-    send_to_workspace_7: Anfon i Workpace 7
-    send_to_workspace_8: Anfonwch i Workpace 8
-    send_to_workspace_9: Anfonwch i Workpace 9
-    start_weg_app_0: Canolbwyntiwch neu gychwyn ap ar safle bar tasg 1
-    start_weg_app_1: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 2
-    start_weg_app_2: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 3
-    start_weg_app_3: Canolbwyntiwch neu gychwyn ap ar safle bar tasg 4
-    start_weg_app_4: Canolbwyntiwch neu gychwyn ap ar safle bar tasg 5
-    start_weg_app_5: Ap canolbwyntio neu gychwyn ar swydd bar tasg 6 6
-    start_weg_app_6: Canolbwyntiwch neu gychwyn ap ar swydd bar tasg 7
-    start_weg_app_7: Canolbwyntiwch neu Start App ar safle bar tasgau 8
-    start_weg_app_8: Ap canolbwyntio neu gychwyn ar safle bar tasg 9
-    start_weg_app_9: Canolbwyntiwch neu gychwyn ap ar safle bar tasg 10
-    switch_workspace_0: Newid i Workpace 1
-    switch_workspace_1: Newid i Workpace 2
-    switch_workspace_2: Newid i Workpace 2
-    switch_workspace_3: Newid i Workpace 3
-    switch_workspace_4: Newid i Workpace 4
-    switch_workspace_5: Newid i Workpace 5
-    switch_workspace_6: Newid i Workpace 6
-    switch_workspace_7: Newid i Workpace 7
-    switch_workspace_8: Newid i Workpace 8
-    switch_workspace_9: Newid i Workpace 9
-    toggle_launcher: Toglio
+    send_to_workspace: Anfonwch i Workpace {{0}}
+    start_weg_app: CYFLWYNO NEU SEART CAIS {{0}}
+    switch_to_next_workspace: Newid i ofod gwaith nesaf
+    switch_to_previous_workspace: Newid i Workpace Blaenorol
+    switch_workspace: Newid i Workpace {{0}}
+    toggle_float: Modd arnofio ffenestr togl
+    toggle_launcher: Lansiwr Toggle
+    toggle_monocle: Toggle Workpace Monocle Modd
   readonly_tooltip: Llwybr byr darllen yn unig yw hwn
   reset: Ailosod i ddiffygion
 sides:

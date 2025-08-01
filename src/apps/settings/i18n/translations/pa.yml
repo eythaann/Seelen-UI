@@ -146,71 +146,50 @@ save: ਸੇਵ ਕਰੋ
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
 see_more: ਹੋਰ ਦੇਖੋ
 shortcuts:
-  enable: ਏਕੀਕ੍ਰਿਤ ਸ਼ਾਰਟਕੱਟ (ahk) ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  enable: ਬਿਲਟ-ਇਨ ਸ਼ਾਰਟਕੱਟ ਸਿਸਟਮ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   enable_tooltip: >-
-    ਅਸਮਰੱਥ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਸੀਲੇਨ ਕੋਰ ਏਪੀਆਈ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ਾਰਟਕੱਟ
-    ਲਾਗੂ ਕਰਦੇ ਹੋ
+    ਅਯੋਗ ਕਰੋ ਜੇ ਤੁਸੀਂ ਵੇਖਿਆ UI ਕਲਾਇੰਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ੌਰਟਕਟ ਸਿਸਟਮ
+    ਨੂੰ ਲਾਗੂ ਕਰੋਗੇ
   labels:
-    decrease_height: ਉਚਾਈ ਘਟਾਓ
-    decrease_width: ਚੌੜਾਈ ਘਟਾਓ
-    focus_bottom: ਹੇਠਾਂ ਫੋਕਸ ਕਰੋ
-    focus_latest: ਫੋਕਸ ਤਾਜ਼ਾ
-    focus_left: ਖੱਬੇ ਪਾਸੇ ਫੋਕਸ ਕਰੋ
-    focus_right: ਸੱਜੇ ਫੋਕਸ ਕਰੋ
-    focus_top: ਫੋਕਸ ਸਿਖਰ
+    create_new_workspace: ਨਵਾਂ ਵਰਕਸਪੇਸ ਬਣਾਓ
+    cycle_stack_next: ਸਾਈਕਲ ਸਟੈਕ ਅੱਗੇ
+    cycle_stack_prev: ਸਾਈਕਲ ਸਟੈਕ ਪਿਛਲੇ
+    cycle_wallpaper_next: ਅਗਲੇ ਵਾਲਪੇਪਰ ਵਿੱਚ ਬਦਲੋ
+    cycle_wallpaper_prev: ਪਿਛਲੇ ਵਾਲਪੇਪਰ ਵਿੱਚ ਬਦਲੋ
+    decrease_height: ਉਚਾਈ ਨੂੰ ਘਟਾਓ
+    decrease_width: ਚੌੜਾਈ
+    destroy_current_workspace: ਮੌਜੂਦਾ ਵਰਕਸਪੇਸ ਨੂੰ ਨਸ਼ਟ ਕਰੋ
+    focus_bottom: ਫੋਕਸ ਤਲ
+    focus_latest: ਤਾਜ਼ਾ ਫੋਕਸ
+    focus_left: ਖੱਬੇ ਧਿਆਨ ਰੱਖੋ
+    focus_right: ਸਹੀ ਫੋਕਸ
+    focus_top: ਫੋਕਸ ਚੋਟੀ ਦੇ
     increase_height: ਉਚਾਈ ਵਧਾਓ
     increase_width: ਚੌੜਾਈ ਵਧਾਓ
     misc_open_settings: ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ
     misc_toggle_lock_tracing: ਟੌਗਲ ਲਾਕ ਟਰੇਸਿੰਗ (ਲੌਗ)
     misc_toggle_win_event_tracing: ਵਿਨ ਈਵੈਂਟ ਟਰੇਸਿੰਗ (ਲੌਗ) ਨੂੰ ਟੌਗਲ ਕਰੋ
-    move_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
-    move_to_workspace_1: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
-    move_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
-    move_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਜਾਓ
-    move_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
-    move_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਜਾਓ
-    move_to_workspace_6: ਵਰਕਸਪੇਸ 6 ਤੇ ਜਾਓ
-    move_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਜਾਓ
-    move_to_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਜਾਓ
-    move_to_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਜਾਓ
-    reserve_bottom: ਹੇਠਾਂ ਰਿਜ਼ਰਵ ਕਰੋ
+    move_to_workspace: ਵਰਕਸਪੇਸ ਵਿੱਚ ਜਾਓ {{0}}}
+    move_window_down: ਵਿੰਡੋ ਨੂੰ ਹੇਠਾਂ ਭੇਜੋ
+    move_window_left: ਵਿੰਡੋ ਨੂੰ ਖੱਬੇ ਵੱਲ ਭੇਜੋ
+    move_window_right: ਵਿੰਡੋ ਨੂੰ ਸੱਜੇ ਭੇਜੋ
+    move_window_up: ਵਿੰਡੋ ਨੂੰ ਸਿਖਰ ਤੇ ਲੈ ਜਾਓ
+    pause_tiling: ਵਿੰਡੋ ਮੈਨੇਜਰ ਨੂੰ ਰੋਕੋ
+    reserve_bottom: ਰਿਜ਼ਰਵ ਥੱਲੇ
     reserve_float: ਰਿਜ਼ਰਵ ਫਲੋਟ
-    reserve_left: ਖੱਬੇ ਪਾਸੇ ਰਾਖਵਾਂ ਕਰੋ
-    reserve_right: ਰਾਖਵਾਂ ਅਧਿਕਾਰ
+    reserve_left: ਰਿਜ਼ਰਵ ਬਚਿਆ
+    reserve_right: ਰਿਜ਼ਰਵ ਸਹੀ
     reserve_stack: ਰਿਜ਼ਰਵ ਸਟੈਕ
-    reserve_top: ਰਿਜ਼ਰਵ ਸਿਖਰ
-    restore_sizes: ਆਕਾਰ ਰੀਸਟੋਰ ਕਰੋ
-    send_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਭੇਜੋ
-    send_to_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਭੇਜੋ
-    send_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਭੇਜੋ
-    send_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਭੇਜੋ
-    send_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਭੇਜੋ
-    send_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਭੇਜੋ
-    send_to_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਭੇਜੋ
-    send_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਭੇਜੋ
-    send_to_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਭੇਜੋ
-    send_to_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਭੇਜੋ
-    start_weg_app_0: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 1 ਤੇ ਫੋਕਸ ਜਾਂ ਅਰੰਭ ਕਰੋ
-    start_weg_app_1: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 2 'ਤੇ ਧਿਆਨ ਕੇਂਦ੍ਰਤ ਕਰੋ ਜਾਂ ਸ਼ੁਰੂ ਕਰੋ
-    start_weg_app_2: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 3 ਤੇ ਧਿਆਨ ਕੇਂਦਰਤ ਕਰੋ ਜਾਂ ਅਰੰਭ ਕਰੋ
-    start_weg_app_3: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 4 'ਤੇ ਫੋਕਸ ਜਾਂ ਅਰੰਭ ਕਰੋ
-    start_weg_app_4: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 5 'ਤੇ ਫੋਕਸ ਜਾਂ ਅਰੰਭ ਕਰੋ
-    start_weg_app_5: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 6 ਤੇ ਫੋਕਸ ਜਾਂ ਅਰੰਭ ਕਰੋ
-    start_weg_app_6: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 7 'ਤੇ ਫੋਕਸ ਜਾਂ ਅਰੰਭ ਕਰੋ
-    start_weg_app_7: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 8 'ਤੇ ਧਿਆਨ ਕੇਂਦਰਤ ਕਰੋ ਜਾਂ ਸ਼ੁਰੂ ਕਰੋ
-    start_weg_app_8: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 9 ਤੇ ਧਿਆਨ ਕੇਂਦਰਤ ਕਰੋ ਜਾਂ ਐਪ ਸਟਾਰਟ ਕਰੋ
-    start_weg_app_9: ਟਾਸਕਬਾਰ ਸਥਿਤੀ 10 ਤੇ ਧਿਆਨ ਕੇਂਦਰਤ ਕਰੋ ਜਾਂ ਅਰੰਭ ਕਰੋ
-    switch_workspace_0: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
-    switch_workspace_1: ਵਰਕਸਪੇਸ 2 ਤੇ ਜਾਓ
-    switch_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
-    switch_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਜਾਓ
-    switch_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
-    switch_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਜਾਓ
-    switch_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਜਾਓ
-    switch_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਜਾਓ
-    switch_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਜਾਓ
-    switch_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਜਾਓ
-    toggle_launcher: ਟੌਗਲ
+    reserve_top: ਰਿਜ਼ਰਵ ਟਾਪ
+    restore_sizes: ਅਕਾਰ ਨੂੰ ਬਹਾਲ ਕਰੋ
+    send_to_workspace: ਵਰਕਸਪੇਸ ਨੂੰ ਭੇਜੋ {{0}}
+    start_weg_app: ਫੋਕਸ ਜਾਂ ਐਪਲੀਕੇਸ਼ਨ ਅਰੰਭ ਕਰੋ {{0}}
+    switch_to_next_workspace: ਅਗਲੇ ਵਰਕਸਪੇਸ ਤੇ ਜਾਓ
+    switch_to_previous_workspace: ਪਿਛਲੇ ਵਰਕਸਪੇਸ ਤੇ ਜਾਓ
+    switch_workspace: ਵਰਕਸਪੇਸ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ {{0}}}
+    toggle_float: ਵਿੰਡੋ ਫਲੋਟ ਮੋਡ ਬਦਲੋ
+    toggle_launcher: ਟੌਗਲ ਲਾਂਚਰ
+    toggle_monocle: ਵਰਕਸਪੇਸ ਮੋਨੋਕਲ ਮੋਡ ਟੌਗਲ ਕਰੋ
   readonly_tooltip: ਇਹ ਸਿਰਫ ਇਕੋ ਸ਼ਾਰਟਕੱਟ ਹੈ
   reset: ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈਟ ਕਰੋ
 sides:
