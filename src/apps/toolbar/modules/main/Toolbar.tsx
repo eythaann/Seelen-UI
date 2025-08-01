@@ -27,6 +27,7 @@ import { useWindowFocusChange } from '../../../shared/hooks';
 import { cx } from '../../../shared/styles';
 import { $toolbar_state } from '../shared/state/items';
 import { $bar_should_be_hidden, $settings } from '../shared/state/mod';
+import { matchIds } from '../shared/utils';
 import { MainContextMenu } from './ContextMenu';
 import { ItemsDropableContainer } from './ItemsContainer';
 import { componentByModule } from './mappins';
@@ -76,9 +77,7 @@ export function FancyToolbar() {
     if (['left', 'center', 'right'].includes(id)) {
       return $containers.value.find((c) => c.id === id);
     }
-    return $containers.value.find((c) =>
-      c.items.some((item) => item === id || (typeof item === 'object' && item.id === id)),
-    );
+    return $containers.value.find((c) => c.items.some((item) => matchIds(item, id)));
   }
 
   function handleDragStart({ active }: DragStartEvent) {
@@ -107,7 +106,9 @@ export function FancyToolbar() {
 
     $toolbar_state.value = {
       ...$toolbar_state.value,
-      [activeContainer.id]: activeContainer.items.filter((item) => item !== active.id),
+      [activeContainer.id]: activeContainer.items.filter(
+        (item) => !matchIds(item, active.id as string),
+      ),
       [overContainer.id]: newOverContainerItems,
     };
   }
@@ -127,8 +128,10 @@ export function FancyToolbar() {
       return;
     }
 
-    const activeIndex = activeContainer.items.findIndex((item) => item === active.id);
-    const overIndex = overContainer.items.findIndex((item) => item === over.id);
+    const activeIndex = activeContainer.items.findIndex((item) =>
+      matchIds(item, active.id as string),
+    );
+    const overIndex = overContainer.items.findIndex((item) => matchIds(item, over.id as string));
 
     if (activeIndex !== -1 && overIndex !== -1) {
       const newItems = arrayMove(activeContainer.items, activeIndex, overIndex);
@@ -140,7 +143,7 @@ export function FancyToolbar() {
   }
 
   const activeContainer = $dragging_id.value ? findContainer($dragging_id.value) : undefined;
-  const draggingItem = activeContainer?.items.find((item) => item === $dragging_id.value);
+  const draggingItem = activeContainer?.items.find((item) => matchIds(item, $dragging_id.value!));
 
   return (
     <AnimatedDropdown
@@ -173,9 +176,7 @@ export function FancyToolbar() {
           {$containers.value.map(({ id, items }) => (
             <ItemsDropableContainer key={id} id={id} items={items} />
           ))}
-          <DragOverlay>
-            {draggingItem && componentByModule(draggingItem)}
-          </DragOverlay>
+          <DragOverlay>{draggingItem && componentByModule(draggingItem)}</DragOverlay>
         </DndContext>
       </div>
     </AnimatedDropdown>

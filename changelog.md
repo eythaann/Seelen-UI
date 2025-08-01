@@ -13,6 +13,9 @@
 - monitors ids.
 - wallpaper manager.
 
+### fix
+- drag of text toolbar items not working.
+
 ## [2.3.12]
 ### enhancements
 - add new ways of customization for theme settings

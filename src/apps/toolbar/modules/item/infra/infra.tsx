@@ -1,4 +1,4 @@
-import { GenericToolbarItem } from '@seelen-ui/lib/types';
+import { GenericToolbarItem, TextToolbarItem } from '@seelen-ui/lib/types';
 import { Menu } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -54,4 +54,8 @@ export function GenericItem({ module }: { module: GenericToolbarItem }) {
     exe: null,
   };
   return <Item module={module} extraVars={{ window }} />;
+}
+
+export function TextItem({ module }: { module: TextToolbarItem }) {
+  return <Item module={module} extraVars={{ x: 0 }} />;
 }

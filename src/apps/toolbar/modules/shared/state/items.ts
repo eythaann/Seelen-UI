@@ -1,6 +1,8 @@
 import { signal } from '@preact/signals';
 import { invoke, PluginList, SeelenCommand, SeelenEvent, subscribe } from '@seelen-ui/lib';
-import { PluginId } from '@seelen-ui/lib/types';
+import { PluginId, ToolbarItem2 } from '@seelen-ui/lib/types';
+
+import { matchIds } from '../utils';
 
 export const $toolbar_state = signal(await invoke(SeelenCommand.StateGetToolbarItems));
 subscribe(SeelenEvent.StateToolbarItemsChanged, (event) => ($toolbar_state.value = event.payload));
@@ -32,7 +34,7 @@ export const $actions = {
     }
   },
   removeItem(id: string) {
-    let filter = (d: any) => d !== id && d.id !== id;
+    let filter = (d: ToolbarItem2) => !matchIds(d, id);
     const { left, center, right, ...rest } = $toolbar_state.value;
     $toolbar_state.value = {
       ...rest,
