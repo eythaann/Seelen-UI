@@ -7,6 +7,7 @@ use std::sync::{
 use windows::Win32::{
     Devices::Display::GUID_DEVINTERFACE_MONITOR,
     Foundation::{HWND, LPARAM, LRESULT, RECT, WPARAM},
+    System::Power::RegisterSuspendResumeNotification,
     UI::WindowsAndMessaging::{
         CreateWindowExW, DefWindowProcW, DispatchMessageW, FindWindowExW, GetMessageW,
         PostQuitMessage, RegisterClassW, RegisterDeviceNotificationW, RegisterShellHookWindow,
@@ -125,8 +126,13 @@ unsafe fn _create_background_window(done: &crossbeam_channel::Sender<()>) -> Res
         WM_SHELLHOOKMESSAGE = RegisterWindowMessageW(msg.as_pcwstr());
     }
 
+    // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registersuspendresumenotification
+    let _resume_suspend_handle =
+        RegisterSuspendResumeNotification(hwnd.into(), DEVICE_NOTIFY_WINDOW_HANDLE)?;
+
     done.send(())?;
     let mut msg = MSG::default();
+
     // GetMessageW will run until PostQuitMessage(0) is called
     while GetMessageW(&mut msg, Some(hwnd), 0, 0).into() {
         TranslateMessage(&msg).ok().filter_fake_error()?;

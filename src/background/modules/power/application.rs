@@ -135,10 +135,8 @@ impl PowerManager {
                         "System resumed (PBT_APMRESUMEAUTOMATIC) after {}s",
                         elapsed.as_secs()
                     );
-                    // Restart if suspended for more than 30 minutes
-                    if elapsed.as_secs() > 60 * 30 {
-                        get_app_handle().restart();
-                    }
+                    // Always restart the app after wake up event
+                    get_app_handle().restart();
                 }
                 _ => {}
             }

@@ -16,6 +16,7 @@
 ### fix
 - drag of text toolbar items not working.
 - live wallpapers blocking screensaver and lock screen.
+- sleep/wake up events not working.
 
 ## [2.3.12]
 ### enhancements
