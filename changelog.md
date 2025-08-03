@@ -8,6 +8,7 @@
 - wallpaper animations on in/out.
 - unique wallpaper slider per monitor.
 - new shortcuts to create/delete and change virtual desktops.
+- add force restart of gui, via shortcut `Ctrl + Win + Alt + R`.
 
 ### refactor
 - monitors ids.

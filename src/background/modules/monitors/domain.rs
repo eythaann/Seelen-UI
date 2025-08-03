@@ -10,7 +10,7 @@ impl TryFrom<Monitor> for PhysicalMonitor {
     fn try_from(m: Monitor) -> Result<Self, Self::Error> {
         let dpi = WindowsApi::get_monitor_scale_factor(m.handle())?;
         Ok(Self {
-            id: m.stable_id()?,
+            id: m.stable_id()?.into(),
             name: m.name()?,
             rect: m.rect()?,
             dpi,

@@ -1,6 +1,7 @@
 // Prevents additional console window on Windows in release
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod app_management;
 mod cli;
 mod enviroment;
 mod error;
@@ -12,33 +13,36 @@ mod task_scheduler;
 mod windows_api;
 
 use cli::handle_console_client;
-use crossbeam_channel::{Receiver, Sender};
-use enviroment::was_installed_using_msix;
 use error::Result;
 use itertools::Itertools;
-use lazy_static::lazy_static;
 use logger::SluServiceLogger;
 use shutdown::restore_native_taskbar;
 use slu_ipc::{AppIpc, ServiceIpc, IPC};
-use std::{process::Command, sync::atomic::AtomicBool};
+use std::sync::{atomic::AtomicBool, LazyLock, OnceLock};
 use string_utils::WindowsString;
 use task_scheduler::TaskSchedulerHelper;
-use windows::Win32::{
-    Security::SE_TCB_NAME,
-    UI::{Shell::FOLDERID_LocalAppData, WindowsAndMessaging::SW_MINIMIZE},
-};
+use tokio::sync::mpsc::Sender;
+use windows::Win32::{Security::SE_TCB_NAME, UI::WindowsAndMessaging::SW_MINIMIZE};
 use windows_api::WindowsApi;
 
-use crate::hotkeys::stop_app_shortcuts;
+use crate::{app_management::launch_seelen_ui, hotkeys::stop_app_shortcuts};
 
-lazy_static! {
-    pub static ref SERVICE_NAME: WindowsString = WindowsString::from_str("slu-service");
-    pub static ref SERVICE_DISPLAY_NAME: WindowsString =
-        WindowsString::from_str("Seelen UI Service");
-    static ref STOP_CHANNEL: (Sender<()>, Receiver<()>) = crossbeam_channel::unbounded();
-}
+pub static SERVICE_NAME: LazyLock<WindowsString> =
+    LazyLock::new(|| WindowsString::from_str("slu-service"));
+pub static SERVICE_DISPLAY_NAME: LazyLock<WindowsString> =
+    LazyLock::new(|| WindowsString::from_str("Seelen UI Service"));
+
+static ASYNC_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
+static EXIT_CHANNEL: OnceLock<Sender<u32>> = OnceLock::new();
 
 pub static STARTUP: AtomicBool = AtomicBool::new(false);
+
+pub fn get_runtime_handle() -> tokio::runtime::Handle {
+    ASYNC_RUNTIME_HANDLE
+        .get()
+        .expect("Tokio runtime was not initialized")
+        .clone()
+}
 
 pub fn was_started_from_startup_action() -> bool {
     STARTUP.load(std::sync::atomic::Ordering::SeqCst)
@@ -52,40 +56,24 @@ pub fn is_development() -> bool {
     cfg!(debug_assertions)
 }
 
-pub fn stop() {
-    STOP_CHANNEL.0.send(()).unwrap();
-}
-
-fn launch_seelen_ui() -> Result<()> {
-    let app_path = if was_installed_using_msix() {
-        WindowsApi::known_folder(FOLDERID_LocalAppData)?
-            .join("Microsoft\\WindowsApps\\seelen-ui.exe")
-    } else {
-        std::env::current_exe()?.with_file_name("seelen-ui.exe")
-    };
-
-    let mut args = Vec::new();
-    if was_started_from_startup_action() {
-        args.push("--startup".to_string());
-    }
-
-    let lnk_file = WindowsApi::create_temp_shortcut(&app_path, &args.join(" "))?;
-    // start it using explorer to spawn it as unelevated
-    Command::new("C:\\Windows\\explorer.exe")
-        .arg(&lnk_file)
-        .status()?;
-    std::fs::remove_file(&lnk_file)?;
-    Ok(())
+pub fn exit(code: u32) {
+    get_runtime_handle().spawn(async move {
+        EXIT_CHANNEL.get().unwrap().send(code).await.unwrap();
+    });
 }
 
 #[cfg(not(debug_assertions))]
 /// will stop the service after `max_attempts` attempts
-fn restart_gui_on_crash(max_attempts: u32) {
+fn restart_gui_on_crash(max_attempts: usize) {
     tokio::spawn(async move {
-        let mut attempts = 0;
-        while attempts < max_attempts {
+        use crate::app_management::GUI_RESTARTED_COUNTER;
+        use std::sync::atomic::Ordering;
+
+        while GUI_RESTARTED_COUNTER.load(Ordering::SeqCst) < max_attempts {
             if !AppIpc::can_stablish_connection() {
-                attempts += 1;
+                GUI_RESTARTED_COUNTER.fetch_add(1, Ordering::SeqCst);
+                log::trace!("Seelen UI was closed unexpectedly, restarting...");
+
                 if let Err(err) = launch_seelen_ui() {
                     log::error!("Failed to restart Seelen UI: {err}");
                     break;
@@ -93,17 +81,19 @@ fn restart_gui_on_crash(max_attempts: u32) {
             }
             tokio::time::sleep(std::time::Duration::from_secs(2)).await;
         }
-        stop();
+        exit(1);
     });
 }
 
 #[cfg(debug_assertions)]
 fn stop_service_on_seelen_ui_closed() {
+    // it's ok closing the GUI before the service on development
     tokio::spawn(async {
         while AppIpc::can_stablish_connection() {
             tokio::time::sleep(std::time::Duration::from_secs(2)).await;
         }
-        stop();
+        log::info!("Seelen UI closed, stopping the service");
+        exit(0);
     });
 }
 
@@ -124,7 +114,7 @@ pub fn setup() -> Result<()> {
     }
     #[cfg(not(debug_assertions))]
     {
-        restart_gui_on_crash(3);
+        restart_gui_on_crash(5);
     }
     Ok(())
 }
@@ -150,8 +140,16 @@ async fn main() -> Result<()> {
         let _ = WindowsApi::show_window(window.0 as _, SW_MINIMIZE.0);
     }
 
+    ASYNC_RUNTIME_HANDLE
+        .set(tokio::runtime::Handle::current())
+        .expect("Failed to set runtime handle");
+
+    let (tx, mut rx) = tokio::sync::mpsc::channel(1);
+    EXIT_CHANNEL.set(tx).unwrap();
+
     handle_console_client().await?;
     if is_svc_already_running() {
+        println!("Seelen UI Service is already running");
         return Ok(());
     }
 
@@ -164,10 +162,16 @@ async fn main() -> Result<()> {
     setup()?;
 
     // wait for stop signal
-    STOP_CHANNEL.1.recv().unwrap();
+    let exit_code = rx.recv().await.unwrap_or_default();
+
     // shutdown tasks:
     restore_native_taskbar()?;
     stop_app_shortcuts();
-    log::info!("Seelen UI Service stopped");
-    Ok(())
+    log::info!("Seelen UI Service exited with code {exit_code}");
+
+    if exit_code == 0 {
+        Ok(())
+    } else {
+        Err("Seelen UI Service exited with error".into())
+    }
 }

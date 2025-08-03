@@ -8,9 +8,9 @@ use std::{
 
 use interprocess::os::windows::{
     named_pipe::{
-        PipeListenerOptions, PipeStream,
+        DuplexPipeStream, PipeListenerOptions,
         pipe_mode::Bytes,
-        tokio::{DuplexPipeStream, PipeListenerOptionsExt},
+        tokio::{DuplexPipeStream as AsyncDuplexPipeStream, PipeListenerOptionsExt},
     },
     security_descriptor::{AsSecurityDescriptorMutExt, SecurityDescriptor},
 };
@@ -24,21 +24,24 @@ use crate::{
 /// https://learn.microsoft.com/en-us/windows/win32/secauthz/security-descriptor-control
 static SE_DACL_PROTECTED: u16 = 4096u16;
 
+// const END_OF_TRANSMISSION: u8 = 0x04;
+const END_OF_TRANSMISSION_BLOCK: u8 = 0x17;
+
 pub trait IPC {
     const PATH: &'static str;
-    const END_OF_TRANSMISSION_BLOCK: u8 = 0x17;
 
+    #[allow(async_fn_in_trait)]
+    async fn server_process_id() -> Result<u32> {
+        let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
+        let pid = stream.server_process_id()?;
+        write_to_ipc_stream(&stream, &[]).await?;
+        Ok(pid)
+    }
+
+    /// returns the server process id
     fn test_connection() -> Result<()> {
-        let mut stream = PipeStream::<Bytes, Bytes>::connect_by_path(Self::PATH)?;
-        stream.write_all(&[Self::END_OF_TRANSMISSION_BLOCK])?;
-        stream.flush()?;
-
-        let mut reader = std::io::BufReader::new(&stream);
-        let mut data = Vec::new();
-        reader.read_until(Self::END_OF_TRANSMISSION_BLOCK, &mut data)?;
-        data.pop();
-
-        let response: IpcResponse = serde_json::from_slice(&data)?;
+        let stream = DuplexPipeStream::connect_by_path(Self::PATH)?;
+        let response = send_to_ipc_stream(&stream, &[])?;
         response.ok()
     }
 
@@ -90,16 +93,15 @@ impl ServiceIpc {
         Ok(())
     }
 
-    async fn process_connection<F, R>(stream: &DuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
+    async fn process_connection<F, R>(
+        stream: &AsyncDuplexPipeStream<Bytes>,
+        cb: Arc<F>,
+    ) -> Result<()>
     where
         R: Future<Output = IpcResponse> + Send + Sync,
         F: Fn(SvcAction) -> R + Send + Sync + 'static,
     {
-        let mut reader = BufReader::new(stream);
-        let mut data = Vec::new();
-        reader.read_until(0x17, &mut data).await?;
-        data.pop(); // Remove end of transmission block
-
+        let data = read_from_ipc_stream(stream).await?;
         if data.is_empty() {
             return Self::response_to_client(stream, IpcResponse::Success).await;
         }
@@ -119,39 +121,21 @@ impl ServiceIpc {
         Ok(())
     }
 
-    async fn response_to_client(stream: &DuplexPipeStream<Bytes>, res: IpcResponse) -> Result<()> {
+    async fn response_to_client(
+        stream: &AsyncDuplexPipeStream<Bytes>,
+        res: IpcResponse,
+    ) -> Result<()> {
         let message = serde_json::to_vec(&res)?;
-
-        let mut writer = BufWriter::new(stream);
-        writer.write_all(&message).await?;
-        writer.write_all(&[0x17]).await?;
-        writer.flush().await?;
-        Ok(())
+        write_to_ipc_stream(stream, &message).await
     }
 
     pub async fn send(message: SvcAction) -> Result<()> {
-        let stream = DuplexPipeStream::connect_by_path(Self::PATH).await?;
+        let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
         let data = serde_json::to_vec(&SvcMessage {
             token: SvcMessage::signature().to_string(),
             action: message,
         })?;
-
-        {
-            let mut writer = BufWriter::new(&stream);
-            writer.write_all(&data).await?;
-            writer.write_all(&[0x17]).await?;
-            writer.flush().await?;
-        }
-
-        {
-            let mut reader = BufReader::new(&stream);
-            let mut data = Vec::new();
-            reader.read_until(0x17, &mut data).await?; // Read until end of transmission block
-            data.pop(); // Remove end of transmission block
-
-            let response: IpcResponse = serde_json::from_slice(&data)?;
-            response.ok()
-        }
+        async_send_to_ipc_stream(&stream, &data).await?.ok()
     }
 }
 
@@ -197,15 +181,11 @@ impl AppIpc {
         Ok(())
     }
 
-    async fn process_connection<F>(stream: &DuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
+    async fn process_connection<F>(stream: &AsyncDuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
     where
         F: Fn(Vec<String>) -> IpcResponse,
     {
-        let mut reader = BufReader::new(stream);
-        let mut data = Vec::new();
-        reader.read_until(0x17, &mut data).await?;
-        data.pop(); // Remove end of transmission block
-
+        let data = read_from_ipc_stream(stream).await?;
         if data.is_empty() {
             return Self::response_to_client(stream, IpcResponse::Success).await;
         }
@@ -216,35 +196,61 @@ impl AppIpc {
         Ok(())
     }
 
-    async fn response_to_client(stream: &DuplexPipeStream<Bytes>, res: IpcResponse) -> Result<()> {
+    async fn response_to_client(
+        stream: &AsyncDuplexPipeStream<Bytes>,
+        res: IpcResponse,
+    ) -> Result<()> {
         let message = serde_json::to_vec(&res)?;
-
-        let mut writer = BufWriter::new(stream);
-        writer.write_all(&message).await?;
-        writer.write_all(&[0x17]).await?;
-        writer.flush().await?;
-        Ok(())
+        write_to_ipc_stream(stream, &message).await
     }
 
     pub async fn send(message: Vec<String>) -> Result<()> {
-        let stream = DuplexPipeStream::connect_by_path(Self::PATH).await?;
+        let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
         let data = serde_json::to_vec(&message)?;
-
-        {
-            let mut writer = BufWriter::new(&stream);
-            writer.write_all(&data).await?;
-            writer.write_all(&[0x17]).await?;
-            writer.flush().await?;
-        }
-
-        {
-            let mut reader = BufReader::new(&stream);
-            let mut data = Vec::new();
-            reader.read_until(0x17, &mut data).await?; // Read until end of transmission block
-            data.pop(); // Remove end of transmission block
-
-            let response: IpcResponse = serde_json::from_slice(&data)?;
-            response.ok()
-        }
+        async_send_to_ipc_stream(&stream, &data).await?.ok()
     }
+}
+
+async fn read_from_ipc_stream(stream: &AsyncDuplexPipeStream<Bytes>) -> Result<Vec<u8>> {
+    let mut reader = BufReader::new(stream);
+    let mut buf = Vec::new();
+    reader
+        .read_until(END_OF_TRANSMISSION_BLOCK, &mut buf)
+        .await?;
+    buf.pop();
+    Ok(buf)
+}
+
+async fn write_to_ipc_stream(stream: &AsyncDuplexPipeStream<Bytes>, buf: &[u8]) -> Result<()> {
+    let mut writter = BufWriter::new(stream);
+    writter.write_all(buf).await?;
+    writter.write_all(&[END_OF_TRANSMISSION_BLOCK]).await?;
+    writter.flush().await?;
+    Ok(())
+}
+
+async fn async_send_to_ipc_stream(
+    stream: &AsyncDuplexPipeStream<Bytes>,
+    buf: &[u8],
+) -> Result<IpcResponse> {
+    write_to_ipc_stream(stream, buf).await?;
+    let buf = read_from_ipc_stream(stream).await?;
+    let response: IpcResponse = serde_json::from_slice(&buf)?;
+    Ok(response)
+}
+
+/// blocking version to test connections without needed of tokio runtime
+fn send_to_ipc_stream(stream: &DuplexPipeStream<Bytes>, buf: &[u8]) -> Result<IpcResponse> {
+    let mut writter = std::io::BufWriter::new(stream);
+    writter.write_all(buf)?;
+    writter.write_all(&[END_OF_TRANSMISSION_BLOCK])?;
+    writter.flush()?;
+
+    let mut reader = std::io::BufReader::new(stream);
+    let mut buf = Vec::new();
+    reader.read_until(END_OF_TRANSMISSION_BLOCK, &mut buf)?;
+    buf.pop();
+
+    let response: IpcResponse = serde_json::from_slice(&buf)?;
+    Ok(response)
 }

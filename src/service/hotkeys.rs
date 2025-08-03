@@ -2,7 +2,7 @@ use seelen_core::state::shortcuts::{SluHotkeyAction, SluShortcutsSettings};
 use slu_ipc::AppIpc;
 use win_hotkeys::{error::WHKError, events::KeyboardInputEvent, Hotkey, HotkeyManager, VKey};
 
-use crate::{error::Result, log_error};
+use crate::{app_management::kill_seelen_ui_processes, error::Result, log_error};
 
 pub fn start_app_shortcuts(config: SluShortcutsSettings) -> Result<()> {
     if let Err(err) = HotkeyManager::start_keyboard_capturing() {
@@ -32,12 +32,16 @@ pub fn start_app_shortcuts(config: SluShortcutsSettings) -> Result<()> {
         let tokio_handle = tokio::runtime::Handle::current();
 
         let hotkey = Hotkey::from_keys(vkeys).action(move || {
-            tokio_handle.spawn(async move {
-                println!("action: {action:?}");
-                let command = hotkey_action_to_cli_command(action);
-                println!("command: {command:?}");
-                log_error!(AppIpc::send(command).await);
-            });
+            log::trace!("Hotkey triggered: {action:?}");
+            if action == SluHotkeyAction::MiscForceRestart {
+                log_error!(kill_seelen_ui_processes());
+            }
+
+            if let Some(command) = hotkey_action_to_cli_command(action) {
+                tokio_handle.spawn(async move {
+                    log_error!(AppIpc::send(command).await);
+                });
+            }
         });
 
         log_error!(manager.register_hotkey(hotkey), slu_hotkey);
@@ -97,7 +101,7 @@ async fn send_registering_to_app(hotkey: Option<Vec<String>>) -> Result<()> {
     Ok(())
 }
 
-fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Vec<String> {
+fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> {
     use SluHotkeyAction::*;
     let mut args = Vec::new();
     let cmd = match action {
@@ -161,7 +165,11 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Vec<String> {
         MiscOpenSettings => vec!["settings"],
         MiscToggleLockTracing => vec!["debug", "toggle-trace-lock"],
         MiscToggleWinEventTracing => vec!["debug", "toggle-win-events"],
+        _ => vec![],
     };
 
-    cmd.iter().map(|s| s.to_string()).collect()
+    match cmd.is_empty() {
+        true => None,
+        false => Some(cmd.iter().map(|s| s.to_string()).collect()),
+    }
 }

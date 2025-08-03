@@ -73,6 +73,7 @@ impl VirtualDesktop {
         DesktopWorkspace {
             id: self.id().into(),
             name: self.name().clone(),
+            windows: Vec::new(),
         }
     }
 }

@@ -4,7 +4,7 @@ use crate::{error::Result, task_scheduler::TaskSchedulerHelper, windows_api::Win
 
 async fn _process_action(command: SvcAction) -> Result<()> {
     match command {
-        SvcAction::Stop => crate::stop(),
+        SvcAction::Stop => crate::exit(0),
         SvcAction::SetStartup(enabled) => TaskSchedulerHelper::set_run_on_logon(enabled)?,
         SvcAction::ShowWindow { hwnd, command } => WindowsApi::show_window(hwnd, command)?,
         SvcAction::ShowWindowAsync { hwnd, command } => {
