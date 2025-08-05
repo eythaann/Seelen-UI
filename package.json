@@ -36,7 +36,7 @@
     "@preact/compat": "^18.3.1",
     "@preact/signals": "^2.2.1",
     "@tauri-apps/api": "^2.5.0",
-    "@tauri-apps/cli": "^2.5.0",
+    "@tauri-apps/cli": "^2.7.1",
     "preact": "^10.26.9",
     "preact-render-to-string": "^6.5.13",
     "react-router": "^7.6.0"
