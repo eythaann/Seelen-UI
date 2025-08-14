@@ -1,8 +1,8 @@
-import { IconName } from '@icons';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { PluginId } from '@seelen-ui/lib/types';
 import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
 import { Icon } from '@shared/components/Icon';
+import { IconName } from '@shared/components/Icon/icons';
 import { Button, Checkbox, Flex, Input, Menu, Space } from 'antd';
 import { MenuItemType } from 'antd/es/menu/interface';
 import { useState } from 'react';

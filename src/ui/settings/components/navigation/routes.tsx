@@ -1,6 +1,5 @@
+import { Icon } from '@shared/components/Icon';
 import React from 'react';
-
-import { Icon } from '../../../shared/components/Icon';
 
 export enum RoutePath {
   Home = '/',

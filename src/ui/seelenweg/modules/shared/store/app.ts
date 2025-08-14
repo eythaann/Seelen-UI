@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { WegItemType } from '@seelen-ui/lib';
+import { StateBuilder } from '@shared/StateBuilder';
 
 import { PinnedWegItem, RootState, SwItem, TemporalWegItem } from './domain';
-
-import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
   devTools: false,

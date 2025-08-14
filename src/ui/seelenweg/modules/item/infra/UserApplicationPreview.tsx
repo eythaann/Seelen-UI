@@ -1,4 +1,6 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { Icon } from '@shared/components/Icon';
+import { cx } from '@shared/styles';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { tempDir } from '@tauri-apps/api/path';
@@ -7,8 +9,6 @@ import React, { useEffect, useReducer, useState } from 'react';
 
 import { HWND } from '../../shared/store/domain';
 
-import { Icon } from '../../../../shared/components/Icon';
-import { cx } from '../../../../shared/styles';
 import { $settings } from '../../shared/state/mod';
 interface PreviewProps {
   title: string;

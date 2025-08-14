@@ -1,5 +1,6 @@
 import { useComputed } from '@preact/signals';
 import { SeelenWegSide } from '@seelen-ui/lib';
+import { FileIcon, Icon } from '@shared/components/Icon';
 import { cx } from '@shared/styles';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { resolve, resourceDir } from '@tauri-apps/api/path';
@@ -13,7 +14,6 @@ import { Selectors } from '../../shared/store/app';
 
 import { MediaWegItem } from '../../shared/store/domain';
 
-import { FileIcon, Icon } from '../../../../shared/components/Icon';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { $settings } from '../../shared/state/mod';
 import { getMenuForItem } from './Menu';

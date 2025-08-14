@@ -5,6 +5,7 @@ import { SeelenCommand, WorkspaceToolbarItemMode } from '@seelen-ui/lib';
 import { WorkspaceToolbarItem } from '@seelen-ui/lib/types';
 import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
 import { useThrottle, useWindowFocusChange } from '@shared/hooks';
+import { cx } from '@shared/styles';
 import { invoke } from '@tauri-apps/api/core';
 import { Menu, Tooltip } from 'antd';
 import { HTMLAttributes, useState } from 'react';
@@ -13,7 +14,6 @@ import { useTranslation } from 'react-i18next';
 import { CommonItemContextMenu } from '../item/infra/ContextMenu';
 import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
-import { cx } from '../../../shared/styles';
 import { $toolbar_state } from '../shared/state/items';
 import { $virtual_desktop } from '../shared/state/system';
 

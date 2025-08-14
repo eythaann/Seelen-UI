@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Settings, UIColors } from '@seelen-ui/lib';
+import { StateBuilder } from '@shared/StateBuilder';
 
 import { RootState } from './domain';
-
-import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
   _version: 0,

@@ -1,4 +1,5 @@
 import { NotificationsToolbarItem } from '@seelen-ui/lib/types';
+import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
 import { useWindowFocusChange } from '@shared/hooks';
 import { Popover } from 'antd';
 import { useState } from 'react';
@@ -10,7 +11,6 @@ import { Selectors } from '../../shared/store/app';
 
 import { RootState } from '../../shared/store/domain';
 
-import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { ArrivalPreview } from './ArrivalPreview';
 import { Notifications } from './Notifications';
 

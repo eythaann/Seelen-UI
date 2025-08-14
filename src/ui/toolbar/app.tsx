@@ -1,10 +1,10 @@
 import { $system_colors } from '@shared/signals';
+import { useDarkMode } from '@shared/styles';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 
 import { ErrorBoundary } from '../seelenweg/components/Error';
-import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
 import { FancyToolbar } from './modules/main/Toolbar';
 

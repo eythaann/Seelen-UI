@@ -1,10 +1,10 @@
+import { cx } from '@shared/styles';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';
 
 import { WmFallbackNode } from '../../domain';
 
-import { cx } from '../../../../../shared/styles';
 import { LeafContainer } from './leaf';
 
 interface Props {

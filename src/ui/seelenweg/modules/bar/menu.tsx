@@ -1,10 +1,10 @@
 import { SeelenCommand, WegItemType } from '@seelen-ui/lib';
 import { dialog } from '@seelen-ui/lib/tauri';
+import { Icon } from '@shared/components/Icon';
 import { invoke } from '@tauri-apps/api/core';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
 
-import { Icon } from '../../../shared/components/Icon';
 import { $dock_state, $dock_state_actions } from '../shared/state/items';
 
 export function getSeelenWegMenu(t: TFunction): ItemType[] {

@@ -8,6 +8,7 @@ import {
   WallpaperInstanceSettings,
   WidgetId,
 } from '@seelen-ui/lib/types';
+import { StateBuilder } from '@shared/StateBuilder';
 import { cloneDeep, pick } from 'lodash';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
@@ -18,7 +19,6 @@ import { matcher, reducersFor, selectorsFor } from '../../utils/app';
 
 import { RootState } from '../domain';
 
-import { StateBuilder } from '../../../../../shared/StateBuilder';
 import i18n from '../../../../i18n';
 import { defaultSettings } from './default';
 

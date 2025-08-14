@@ -3,6 +3,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { useComputed } from '@preact/signals';
 import { RemoteDataDeclaration, ToolbarItem } from '@seelen-ui/lib/types';
 import { useDeepCompareEffect } from '@shared/hooks';
+import { cx } from '@shared/styles';
 import { Tooltip } from 'antd';
 import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from 'preact/compat';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,6 @@ import { useSelector } from 'react-redux';
 import { Selectors } from '../../shared/store/app';
 import { EvaluateAction } from '../app';
 
-import { cx } from '../../../../shared/styles';
 import { $toolbar_state } from '../../shared/state/items';
 import { SanboxedComponent } from './EvaluatedComponents';
 

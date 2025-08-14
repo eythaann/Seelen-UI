@@ -1,17 +1,16 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
 import { FileIcon } from '@shared/components/Icon';
+import { OverflowTooltip } from '@shared/components/OverflowTooltip';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Menu } from 'antd';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BackgroundByLayersV2 } from '../../../../shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { StartMenuApp } from '../../shared/store/domain';
-
-import { AnimatedDropdown } from '../../../../shared/components/AnimatedWrappers';
-import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 
 export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolean }) => {
   const { path, umid } = item;

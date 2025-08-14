@@ -1,5 +1,6 @@
 import { BluetoothDevices, SeelenCommand } from '@seelen-ui/lib';
 import { BluetoothDevice } from '@seelen-ui/lib/types';
+import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
 import { Icon } from '@shared/components/Icon';
 import { useWindowFocusChange } from '@shared/hooks';
 import { invoke } from '@tauri-apps/api/core';
@@ -9,11 +10,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../../shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
 
-import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { BluetoothSelectorEntry } from './BluetoothSelectorEntry';
 
 function BluetoothSelector({ open }: { open: boolean }) {

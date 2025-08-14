@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { StateBuilder } from '@shared/StateBuilder';
 
 import { Desktop, RootState } from './domain';
-
-import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const desk1 = new Desktop('1', 'Desktop 1');
 const desk2 = new Desktop('2', 'Desktop 2');

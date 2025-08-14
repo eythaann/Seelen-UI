@@ -1,14 +1,13 @@
 import { BluetoothDevices } from '@seelen-ui/lib';
 import { BluetoothDevice, BluetoothDevicePairShowPinRequest } from '@seelen-ui/lib/types';
+import { Icon } from '@shared/components/Icon';
+import { cx } from '@shared/styles';
 import { UnlistenFn } from '@tauri-apps/api/event';
 import { Button, Input, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { getIconForBTDevice, getMinorAsString } from '../application';
-
-import { Icon } from '../../../../shared/components/Icon';
-import { cx } from '../../../../shared/styles';
 
 export function BluetoothSelectorEntry(props: {
   device: BluetoothDevice;

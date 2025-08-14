@@ -1,15 +1,15 @@
+import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
+import { Icon } from '@shared/components/Icon';
+import { useWindowFocusChange } from '@shared/hooks';
 import { debounce } from 'lodash';
 import { VNode } from 'preact';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../../shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { selectDefaultOutput } from '../application';
 
-import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
-import { Icon } from '../../../../shared/components/Icon';
-import { useWindowFocusChange } from '../../../../shared/hooks';
 import { MediaMixerView } from './DeviceView';
 import { MediaMainView } from './MainView';
 import { VolumeControl } from './VolumeControl';

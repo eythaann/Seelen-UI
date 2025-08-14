@@ -14,10 +14,9 @@ import {
   VideosFolder,
   WegItems,
 } from '@seelen-ui/lib';
+import { StateBuilder } from '@shared/StateBuilder';
 
 import { RootState } from './domain';
-
-import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
   version: 0,

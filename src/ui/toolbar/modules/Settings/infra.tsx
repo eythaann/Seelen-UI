@@ -1,6 +1,8 @@
 import { useComputed } from '@preact/signals';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { Brightness, SettingsToolbarItem } from '@seelen-ui/lib/types';
+import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
+import { Icon } from '@shared/components/Icon';
 import { useWindowFocusChange } from '@shared/hooks';
 import { Button, Slider, Tooltip } from 'antd';
 import { throttle } from 'lodash';
@@ -8,16 +10,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../shared/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra/infra';
 import { VolumeControl } from '../media/infra/VolumeControl';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../shared/store/app';
 
 import { RootState } from '../shared/store/domain';
 
-import { AnimatedPopover } from '../../../shared/components/AnimatedWrappers';
-import { Icon } from '../../../shared/components/Icon';
 import { $settings } from '../shared/state/mod';
 
 interface Props {

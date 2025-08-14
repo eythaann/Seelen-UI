@@ -1,11 +1,11 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { FolderType } from '@seelen-ui/lib/types';
+import { Icon } from '@shared/components/Icon';
 import { cx } from '@shared/styles';
 import { path } from '@tauri-apps/api';
 import { t } from 'i18next';
 import { useState } from 'react';
 
-import { Icon } from '../../../../shared/components/Icon';
 import { EmptyList } from './EmptyList';
 import { FilePreview } from './FilePreview';
 import { UserHomeFolder } from './UserHome';

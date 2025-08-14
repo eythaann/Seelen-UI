@@ -1,6 +1,8 @@
 import { SeelenCommand, SeelenWegSide } from '@seelen-ui/lib';
+import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
 import { FileIcon } from '@shared/components/Icon';
 import { useWindowFocusChange } from '@shared/hooks';
+import { cx } from '@shared/styles';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import moment from 'moment';
@@ -8,14 +10,12 @@ import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../../shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
 
 import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
 
-import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
-import { cx } from '../../../../shared/styles';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { $settings } from '../../shared/state/mod';
 import { getUserApplicationContextMenu } from './UserApplicationContextMenu';

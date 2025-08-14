@@ -1,5 +1,6 @@
 import { AppIdentifierType, MatchingStrategy } from '@seelen-ui/lib';
 import { AppIdentifier } from '@seelen-ui/lib/types';
+import { Icon } from '@shared/components/Icon';
 import { Button, Input, Select, Switch } from 'antd';
 import { cloneDeep } from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import { OptionsFromEnum } from '../../shared/utils/app';
 import { defaultAppConfig } from '../app/default';
 
-import { Icon } from '../../../../shared/components/Icon';
 import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
 import cs from './Identifier.module.css';
 

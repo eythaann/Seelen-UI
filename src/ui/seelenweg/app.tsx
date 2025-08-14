@@ -1,9 +1,9 @@
 import { $system_colors } from '@shared/signals';
+import { useDarkMode } from '@shared/styles';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 
-import { useDarkMode } from '../shared/styles';
 import { ErrorBoundary } from './components/Error';
 import { SeelenWeg } from './modules/bar';
 

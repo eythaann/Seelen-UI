@@ -1,15 +1,15 @@
 import { GenericToolbarItem, TextToolbarItem } from '@seelen-ui/lib/types';
+import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
 import { useWindowFocusChange } from '@shared/hooks';
 import { Menu } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../../shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
 
-import { AnimatedDropdown } from '../../../../shared/components/AnimatedWrappers';
 import { CommonItemContextMenu } from './ContextMenu';
 import { InnerItem, InnerItemProps } from './Inner';
 

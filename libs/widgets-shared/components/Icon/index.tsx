@@ -1,4 +1,4 @@
-import { IconName } from '@icons';
+import { IconName } from '@shared/components/Icon/icons';
 import { HTMLAttributes } from 'preact/compat';
 
 import { cx } from '../../styles';

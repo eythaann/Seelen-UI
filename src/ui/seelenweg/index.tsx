@@ -1,4 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { getRootContainer } from '@shared';
 import { declareDocumentAsLayeredHitbox } from '@shared/layered';
 import { removeDefaultWebviewActions } from '@shared/setup';
 import { invoke } from '@tauri-apps/api/core';
@@ -11,12 +12,11 @@ import { loadStore, registerStoreEvents, store } from './modules/shared/store/in
 
 import { App } from './app';
 
-import { getRootContainer } from '../shared';
 import i18n, { loadTranslations } from './i18n';
 
-import '../shared/styles/colors.css';
+import '@shared/styles/colors.css';
 import './styles/variables.css';
-import '../shared/styles/reset.css';
+import '@shared/styles/reset.css';
 import './styles/global.css';
 
 removeDefaultWebviewActions();

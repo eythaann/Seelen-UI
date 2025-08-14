@@ -1,4 +1,3 @@
-import { IconName } from '@icons';
 import {
   BLEAppearance,
   BLEAppearanceHumanInterfaceDeviceSubCategory,
@@ -14,6 +13,7 @@ import {
   BluetoothToyMinor,
   BluetoothWearableMinor,
 } from '@seelen-ui/lib/types';
+import { IconName } from '@shared/components/Icon/icons';
 import { prettify, unionToIntersection } from 'readable-types';
 
 const UNKNOWN_ICON = 'TbDeviceUnknown';

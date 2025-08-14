@@ -4,8 +4,8 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from './app';
 
-import '../shared/styles/reset.css';
-import '../shared/styles/colors.css';
+import '@shared/styles/reset.css';
+import '@shared/styles/colors.css';
 import './global.css';
 
 startThemingTool();

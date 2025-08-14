@@ -1,10 +1,10 @@
+import { useDarkMode } from '@shared/styles';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { newSelectors } from './modules/shared/store/app/reducer';
 
-import { useDarkMode } from '../shared/styles';
 import { Routing } from './router';
 
 export function App() {

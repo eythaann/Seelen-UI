@@ -1,4 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { FileIcon, Icon } from '@shared/components/Icon';
 import { invoke } from '@tauri-apps/api/core';
 import { MenuProps } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
@@ -8,7 +9,6 @@ import { isPinnedApp } from '../../shared/store/app';
 
 import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
 
-import { FileIcon, Icon } from '../../../../shared/components/Icon';
 import { $dock_state_actions } from '../../shared/state/items';
 
 export function getUserApplicationContextMenu(

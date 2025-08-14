@@ -12,19 +12,19 @@ import {
 import { arrayMove } from '@dnd-kit/sortable';
 import { useComputed, useSignal } from '@preact/signals';
 import { ToolbarItem2 } from '@seelen-ui/lib/types';
+import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
+import { useWindowFocusChange } from '@shared/hooks';
+import { cx } from '@shared/styles';
 import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../shared/store/app';
 
 import { RootState } from '../shared/store/domain';
 
-import { AnimatedDropdown } from '../../../shared/components/AnimatedWrappers';
-import { useWindowFocusChange } from '../../../shared/hooks';
-import { cx } from '../../../shared/styles';
 import { $toolbar_state } from '../shared/state/items';
 import { $bar_should_be_hidden, $settings } from '../shared/state/mod';
 import { matchIds } from '../shared/utils';

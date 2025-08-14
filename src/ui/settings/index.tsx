@@ -1,3 +1,4 @@
+import { getRootContainer } from '@shared';
 import { removeDefaultWebviewActions } from '@shared/setup';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { createRoot } from 'react-dom/client';
@@ -9,12 +10,11 @@ import { LoadSettingsToStore, registerStoreEvents, store } from './modules/share
 
 import { App } from './app';
 
-import { getRootContainer } from '../shared';
 import i18n, { loadTranslations } from './i18n';
 
-import '../shared/styles/colors.css';
+import '@shared/styles/colors.css';
 import './styles/variables.css';
-import '../shared/styles/reset.css';
+import '@shared/styles/reset.css';
 import './styles/global.css';
 
 removeDefaultWebviewActions();

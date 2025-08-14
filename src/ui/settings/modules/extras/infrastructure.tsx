@@ -1,5 +1,7 @@
 import { invoke, SeelenCommand, UpdateChannel } from '@seelen-ui/lib';
 import { process } from '@seelen-ui/lib/tauri';
+import { isDev, wasInstalledUsingMSIX } from '@shared';
+import { Icon } from '@shared/components/Icon';
 import { Button, Select, Switch, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,8 +12,6 @@ import cs from './infra.module.css';
 
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 
-import { isDev, wasInstalledUsingMSIX } from '../../../shared';
-import { Icon } from '../../../shared/components/Icon';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export function Information() {

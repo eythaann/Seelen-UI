@@ -1,11 +1,10 @@
+import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
+import { useWindowFocusChange } from '@shared/hooks';
 import { Menu } from 'antd';
 import { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import { PropsWithChildren, useState } from 'react';
 
-import { BackgroundByLayersV2 } from '../../shared/components/BackgroundByLayers/infra';
-
-import { AnimatedDropdown } from '../../shared/components/AnimatedWrappers';
-import { useWindowFocusChange } from '../../shared/hooks';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 interface Props extends PropsWithChildren {
   items: ItemType<MenuItemType>[];

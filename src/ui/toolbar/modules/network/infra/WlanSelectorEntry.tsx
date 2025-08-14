@@ -1,12 +1,11 @@
-import { IconName } from '@icons';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { WlanBssEntry } from '@seelen-ui/lib/types';
+import { Icon } from '@shared/components/Icon';
+import { IconName } from '@shared/components/Icon/icons';
+import { cx } from '@shared/styles';
 import { Button, Input, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { Icon } from '../../../../shared/components/Icon';
-import { cx } from '../../../../shared/styles';
 
 const getTextFrequencies = (frequencies: number[]) => {
   const FREQUENCY_BANDS = [

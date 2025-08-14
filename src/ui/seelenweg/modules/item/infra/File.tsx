@@ -4,7 +4,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BackgroundByLayersV2 } from '../../../../shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { PinnedWegItem } from '../../shared/store/domain';
 

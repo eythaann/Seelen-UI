@@ -1,6 +1,6 @@
-import { IconName } from '@icons';
 import { ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
+import { IconName } from '@shared/components/Icon/icons';
 import { ResourceText } from '@shared/components/ResourceText';
 import { cx } from '@shared/styles';
 import { convertFileSrc } from '@tauri-apps/api/core';

@@ -1,6 +1,8 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { TrayIcon, TrayToolbarItem } from '@seelen-ui/lib/types';
+import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
 import { FileIcon } from '@shared/components/Icon';
+import { OverflowTooltip } from '@shared/components/OverflowTooltip';
 import { useInterval, useWindowFocusChange } from '@shared/hooks';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
@@ -8,13 +10,10 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../shared/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra/infra';
+import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../shared/store/app';
-
-import { AnimatedPopover } from '../../../shared/components/AnimatedWrappers';
-import { OverflowTooltip } from '../../../shared/components/OverflowTooltip';
 
 interface Props {
   module: TrayToolbarItem;
