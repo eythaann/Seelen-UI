@@ -45,7 +45,7 @@ impl SeelenWall {
         let window = tauri::WebviewWindowBuilder::new(
             handle,
             label,
-            tauri::WebviewUrl::App("seelen_wall/index.html".into()),
+            tauri::WebviewUrl::App("wallpaper_manager/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)

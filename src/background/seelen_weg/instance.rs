@@ -68,7 +68,7 @@ impl SeelenWeg {
         let window = tauri::WebviewWindowBuilder::new(
             manager,
             label,
-            tauri::WebviewUrl::App("seelenweg/index.html".into()),
+            tauri::WebviewUrl::App("weg/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)

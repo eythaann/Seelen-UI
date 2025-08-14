@@ -3,7 +3,7 @@ import { WindowManagerSettings, WmNode } from '@seelen-ui/lib/types';
 
 import { Reservation } from '../../layout/domain';
 
-import { IRootState } from '../../../../../shared.interfaces';
+import { IRootState } from '../../../../reduxRootState';
 
 export enum FocusAction {
   Left = 'Left',

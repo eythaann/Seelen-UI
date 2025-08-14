@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { Layout } from './modules/layout/infra';
 
-import { ErrorBoundary } from '../seelenweg/components/Error';
+import { ErrorBoundary } from '../weg/components/Error';
 
 export function App() {
   useEffect(() => {

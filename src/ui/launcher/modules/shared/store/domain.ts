@@ -1,5 +1,5 @@
 import { SeelenLauncherSettings } from '@seelen-ui/lib/types';
-import { IRootState } from 'src/shared.interfaces';
+import { IRootState } from 'src/ui/reduxRootState';
 
 export interface StartMenuApp {
   path: string;

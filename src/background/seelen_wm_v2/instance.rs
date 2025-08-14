@@ -55,7 +55,7 @@ impl WindowManagerV2 {
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             label,
-            tauri::WebviewUrl::App("seelen_wm_v2/index.html".into()),
+            tauri::WebviewUrl::App("window_manager/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)
