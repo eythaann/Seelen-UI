@@ -6,7 +6,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     pcstr,
     windows_api::window::event::WinEvent,
     windows_api::{window::Window, WindowsApi},

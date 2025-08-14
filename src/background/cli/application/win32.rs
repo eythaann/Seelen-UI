@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error::Result, windows_api::WindowsApi};
 
 #[derive(Debug, Serialize, Deserialize, clap::Args)]
 pub struct Win32Cli {

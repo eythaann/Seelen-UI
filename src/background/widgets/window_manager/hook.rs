@@ -4,7 +4,7 @@ use seelen_core::rect::Rect;
 use std::sync::Arc;
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     trace_lock,
     virtual_desktops::events::VirtualDesktopEvent,
     windows_api::window::event::WinEvent,

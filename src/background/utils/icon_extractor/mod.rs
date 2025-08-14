@@ -24,7 +24,7 @@ use std::arch::x86_64::{
 use std::io::BufRead;
 use std::path::{Path, PathBuf};
 
-use crate::error_handler::Result;
+use crate::error::Result;
 use crate::modules::start::application::START_MENU_MANAGER;
 use crate::modules::uwp::UwpManager;
 use crate::state::application::FULL_STATE;

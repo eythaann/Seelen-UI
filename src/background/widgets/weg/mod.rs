@@ -17,7 +17,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     log_error,
     state::application::FULL_STATE,
     trace_lock,

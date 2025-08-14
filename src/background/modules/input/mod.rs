@@ -19,7 +19,7 @@ use windows::Win32::UI::WindowsAndMessaging::SetCursorPos;
 use windows::Win32::UI::WindowsAndMessaging::SM_CXSCREEN;
 use windows::Win32::UI::WindowsAndMessaging::SM_CYSCREEN;
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 const VIRTUAL_KEYS: phf::Map<&'static str, VIRTUAL_KEY> = phf_map! {
     "CONTROL" => VK_CONTROL, "CTRL" => VK_CONTROL, "LCONTROL" => VK_LCONTROL, "LCTRL" => VK_LCONTROL, "RCONTROL" => VK_RCONTROL, "RCTRL" => VK_RCONTROL,

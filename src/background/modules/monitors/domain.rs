@@ -1,7 +1,7 @@
 use seelen_core::system_state::PhysicalMonitor;
 
 use crate::{
-    error_handler::AppError,
+    error::AppError,
     windows_api::{monitor::Monitor, WindowsApi},
 };
 

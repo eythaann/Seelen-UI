@@ -1,6 +1,6 @@
 use std::{path::PathBuf, sync::LazyLock};
 
-use crate::{error_handler::Result, event_manager, log_error, windows_api::types::AppUserModelId};
+use crate::{error::Result, event_manager, log_error, windows_api::types::AppUserModelId};
 
 use super::{_extract_and_save_icon_from_file, _extract_and_save_icon_umid};
 

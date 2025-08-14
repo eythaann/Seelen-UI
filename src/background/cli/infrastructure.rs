@@ -1,7 +1,7 @@
 use slu_ipc::{messages::SvcAction, ServiceIpc};
 use tauri::WebviewWindow;
 
-use crate::{error_handler::Result, widgets::popups::shortcut_registering::REG_SHORTCUT_DATA};
+use crate::{error::Result, widgets::popups::shortcut_registering::REG_SHORTCUT_DATA};
 
 #[tauri::command(async)]
 pub async fn request_to_user_input_shortcut(

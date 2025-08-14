@@ -3,7 +3,7 @@ use std::{collections::HashMap, path::PathBuf};
 use seelen_core::system_state::MonitorId;
 
 use crate::{
-    error_handler::Result, state::application::FullState, widgets::third_party::WidgetInstance,
+    error::Result, state::application::FullState, widgets::third_party::WidgetInstance,
     widgets::toolbar::FancyToolbar, widgets::weg::SeelenWeg,
     widgets::window_manager::instance::WindowManagerV2, windows_api::monitor::MonitorView,
 };

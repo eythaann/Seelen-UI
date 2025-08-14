@@ -2,7 +2,7 @@ use seelen_core::system_state::{Battery, PowerMode, PowerStatus};
 use windows::Win32::System::Shutdown::{EWX_LOGOFF, EWX_REBOOT, EWX_SHUTDOWN, SHTDN_REASON_NONE};
 
 use crate::{
-    error_handler::Result, log_error, modules::power::application::POWER_MANAGER, trace_lock,
+    error::Result, log_error, modules::power::application::POWER_MANAGER, trace_lock,
     windows_api::WindowsApi,
 };
 

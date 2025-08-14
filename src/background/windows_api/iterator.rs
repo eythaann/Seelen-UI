@@ -4,7 +4,7 @@ use windows::Win32::{
     UI::WindowsAndMessaging::{EnumChildWindows, EnumWindows},
 };
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error::Result, windows_api::WindowsApi};
 
 use super::{monitor::Monitor, window::Window};
 

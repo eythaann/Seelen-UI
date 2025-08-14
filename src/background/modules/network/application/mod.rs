@@ -27,7 +27,7 @@ use windows::Win32::{
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     utils::{pwsh::PwshScript, spawn_named_thread},
     windows_api::Com,
 };

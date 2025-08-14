@@ -14,7 +14,7 @@ use windows_core::HSTRING;
 use crate::modules::shared::radio::RADIO_MANAGER;
 use crate::{event_manager, hstring, log_error, trace_lock};
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 use super::domain::BluetoothDeviceInfo;
 

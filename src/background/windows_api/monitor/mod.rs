@@ -7,7 +7,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     modules::{
         input::domain::Point,
         monitors::{MonitorManager, GLOBAL_DISPLAY_MANAGER},

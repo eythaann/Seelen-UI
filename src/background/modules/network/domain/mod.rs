@@ -12,7 +12,7 @@ use windows::{
     },
 };
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 #[derive(PartialEq, Eq)]
 enum Address {

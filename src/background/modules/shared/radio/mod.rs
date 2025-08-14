@@ -7,7 +7,7 @@ use windows::{
     Foundation::TypedEventHandler,
 };
 
-use crate::{error_handler::Result, event_manager, log_error, trace_lock};
+use crate::{error::Result, event_manager, log_error, trace_lock};
 
 lazy_static! {
     pub static ref RADIO_MANAGER: Mutex<RadioManager> = Mutex::new(RadioManager::new());

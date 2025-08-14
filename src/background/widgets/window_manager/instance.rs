@@ -8,9 +8,9 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::get_app_handle, error_handler::Result, log_error, trace_lock,
-    virtual_desktops::get_vd_manager, widgets::toolbar::FancyToolbar,
-    widgets::window_manager::state::WM_STATE, windows_api::WindowsApi,
+    app::get_app_handle, error::Result, log_error, trace_lock, virtual_desktops::get_vd_manager,
+    widgets::toolbar::FancyToolbar, widgets::window_manager::state::WM_STATE,
+    windows_api::WindowsApi,
 };
 
 #[derive(Getters, MutGetters)]

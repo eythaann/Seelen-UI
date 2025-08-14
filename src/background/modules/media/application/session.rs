@@ -3,7 +3,7 @@ use windows::Win32::Media::Audio::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     log_error,
     modules::media::{application::MediaEvent, domain::MediaDeviceSession},
     windows_api::process::Process,

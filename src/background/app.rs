@@ -10,7 +10,7 @@ use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 use crate::{
     app_instance::SluMonitorInstance,
     cli::ServicePipe,
-    error_handler::Result,
+    error::Result,
     hook::register_win_hook,
     log_error,
     modules::{

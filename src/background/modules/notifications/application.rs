@@ -25,7 +25,7 @@ use windows::{
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     event_manager, log_error,
     modules::uwp::get_hightest_quality_posible,
     trace_lock,

@@ -20,7 +20,7 @@ use windows::Win32::{
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     log_error,
     state::application::FULL_STATE,
     trace_lock,

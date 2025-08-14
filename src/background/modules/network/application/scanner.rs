@@ -25,7 +25,7 @@ use windows::{
 };
 use windows_core::{PCWSTR, PWSTR};
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 use super::NetworkManager;
 

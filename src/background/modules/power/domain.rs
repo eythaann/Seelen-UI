@@ -1,7 +1,7 @@
 use seelen_core::system_state::{Battery, PowerMode, PowerStatus};
 use windows::Win32::System::Power::{EFFECTIVE_POWER_MODE, SYSTEM_POWER_STATUS};
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 pub fn power_status_to_serializable(power_status: SYSTEM_POWER_STATUS) -> PowerStatus {
     PowerStatus {

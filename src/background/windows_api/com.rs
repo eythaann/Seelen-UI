@@ -1,4 +1,4 @@
-use crate::error_handler::Result;
+use crate::error::Result;
 use windows::{
     core::{Interface, GUID},
     Win32::System::Com::{

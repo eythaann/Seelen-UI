@@ -6,9 +6,7 @@ use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{
-    error_handler::Result, is_local_dev, utils::is_running_as_appx, windows_api::WindowsApi,
-};
+use crate::{error::Result, is_local_dev, utils::is_running_as_appx, windows_api::WindowsApi};
 
 use super::spawn_named_thread;
 

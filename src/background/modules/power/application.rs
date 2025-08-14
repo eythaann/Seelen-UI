@@ -21,7 +21,7 @@ use windows::Win32::{
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     event_manager, log_error,
     modules::power::domain::power_mode_to_serializable,
     trace_lock,

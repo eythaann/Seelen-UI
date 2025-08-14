@@ -2,7 +2,7 @@ use seelen_core::{handlers::SeelenEvent, system_state::AppNotification};
 use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle, error_handler::Result, log_error,
+    app::get_app_handle, error::Result, log_error,
     modules::notifications::application::NotificationManager, trace_lock,
 };
 

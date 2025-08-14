@@ -13,7 +13,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     windows_api::{monitor::MonitorTarget, string_utils::WindowsString, WindowsApi},
 };
 

@@ -7,7 +7,7 @@ use seelen_core::system_state::StartMenuItem;
 use tauri::{path::BaseDirectory, Manager};
 
 use crate::{
-    app::get_app_handle, error_handler::Result, log_error, utils::constants::SEELEN_COMMON,
+    app::get_app_handle, error::Result, log_error, utils::constants::SEELEN_COMMON,
     windows_api::WindowsApi,
 };
 

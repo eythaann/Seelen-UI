@@ -9,8 +9,7 @@ use discord_rich_presence::{
 };
 
 use crate::{
-    error_handler::Result, is_local_dev, state::application::FULL_STATE,
-    utils::now_timestamp_as_millis,
+    error::Result, is_local_dev, state::application::FULL_STATE, utils::now_timestamp_as_millis,
 };
 
 use super::spawn_named_thread;

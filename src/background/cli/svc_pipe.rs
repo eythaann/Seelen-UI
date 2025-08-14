@@ -10,7 +10,7 @@ use windows_core::Interface;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     log_error,
     utils::{pwsh::PwshScript, was_installed_using_msix},
     windows_api::{Com, WindowsApi},

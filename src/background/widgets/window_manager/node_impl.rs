@@ -2,7 +2,7 @@ use evalexpr::{context_map, eval_with_context, HashMapContext};
 use itertools::Itertools;
 use seelen_core::state::WmNode;
 
-use crate::{error_handler::Result, modules::input::domain::Point, windows_api::window::Window};
+use crate::{error::Result, modules::input::domain::Point, windows_api::window::Window};
 
 #[derive(Debug)]
 pub struct WmNodeImpl(WmNode);

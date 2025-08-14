@@ -13,7 +13,7 @@ use windows::Win32::{
 use windows_core::Interface;
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     log_error,
     modules::media::domain::{MediaDevice, MediaDeviceSession, MediaDeviceType},
 };

@@ -12,7 +12,7 @@ use seelen_core::system_state::MonitorId;
 use tokio::io::AsyncWriteExt;
 use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
 
-use crate::error_handler::{Result, ResultLogExt};
+use crate::error::{Result, ResultLogExt};
 use crate::hook::HookManager;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::Debouncer;

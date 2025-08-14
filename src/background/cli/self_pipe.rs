@@ -1,7 +1,7 @@
 use clap::Parser;
 use slu_ipc::{messages::IpcResponse, AppIpc};
 
-use crate::{cli::application::AppCli, error_handler::Result};
+use crate::{cli::application::AppCli, error::Result};
 
 pub struct SelfPipe;
 impl SelfPipe {

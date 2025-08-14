@@ -6,7 +6,7 @@ use lazy_static::lazy_static;
 use std::path::{Path, PathBuf};
 use windows::ApplicationModel::{AppInfo, Package};
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 pub static UWP_LIGHTUNPLATED_POSTFIX: &str = "_altform-lightunplated";
 pub static UWP_UNPLATED_POSTFIX: &str = "_altform-unplated";

@@ -17,7 +17,7 @@ use windows::{
 };
 
 use crate::{
-    cli::ServicePipe, error_handler::Result, modules::start::application::START_MENU_MANAGER,
+    cli::ServicePipe, error::Result, modules::start::application::START_MENU_MANAGER,
     state::application::FULL_STATE, widgets::launcher::SeelenRofi, widgets::toolbar::FancyToolbar,
     widgets::wallpaper_manager::SeelenWall, widgets::weg::instance::SeelenWeg,
     widgets::window_manager::instance::WindowManagerV2,

@@ -6,7 +6,7 @@ use windows::Foundation::TypedEventHandler;
 
 use crate::{event_manager, log_error, trace_lock};
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 use super::BLUETOOTH_MANAGER;
 

@@ -1,5 +1,5 @@
 use crate::{
-    error_handler::Result,
+    error::Result,
     virtual_desktops::SluWorkspacesManager,
     windows_api::window::event::WinEvent,
     windows_api::{window::Window, WindowEnumerator},

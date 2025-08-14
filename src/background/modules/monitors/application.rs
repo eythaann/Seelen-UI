@@ -14,7 +14,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     event_manager, log_error, trace_lock,
     windows_api::{event_window::subscribe_to_background_window, monitor::MonitorView},
 };

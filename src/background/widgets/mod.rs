@@ -8,7 +8,7 @@ pub mod window_manager;
 
 use tauri::Manager;
 
-use crate::{app::get_app_handle, error_handler::Result, utils::WidgetWebviewLabel};
+use crate::{app::get_app_handle, error::Result, utils::WidgetWebviewLabel};
 
 pub fn show_settings() -> Result<()> {
     log::trace!("Show settings window");

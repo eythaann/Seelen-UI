@@ -7,7 +7,7 @@ use tauri_plugin_shell::ShellExt;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     state::application::FULL_STATE,
     trace_lock,
     widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,

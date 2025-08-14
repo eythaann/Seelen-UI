@@ -1,8 +1,7 @@
 use seelen_core::state::Widget;
 
 use crate::{
-    app::get_app_handle, error_handler::Result, state::application::FULL_STATE,
-    utils::WidgetWebviewLabel,
+    app::get_app_handle, error::Result, state::application::FULL_STATE, utils::WidgetWebviewLabel,
 };
 
 pub struct WidgetInstance {

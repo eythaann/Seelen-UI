@@ -19,7 +19,7 @@ use tauri::Emitter;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     modules::start::application::START_MENU_MANAGER,
     state::application::FULL_STATE,
     utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},

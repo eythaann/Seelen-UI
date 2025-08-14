@@ -1,7 +1,7 @@
 use windows::core::GUID;
 use winreg::{enums::HKEY_CURRENT_USER, RegKey};
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error::Result, windows_api::WindowsApi};
 
 use super::is_windows_10;
 

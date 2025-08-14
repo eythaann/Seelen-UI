@@ -19,7 +19,7 @@ use windows::Win32::{
 use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     event_manager, log_error,
     utils::spawn_named_thread,
     windows_api::{string_utils::WindowsString, WindowsApi},

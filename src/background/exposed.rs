@@ -11,7 +11,7 @@ use tauri_plugin_shell::ShellExt;
 use translators::Translator;
 
 use crate::app::{get_app_handle, Seelen};
-use crate::error_handler::Result;
+use crate::error::Result;
 use crate::hook::HookManager;
 use crate::modules::input::Keyboard;
 

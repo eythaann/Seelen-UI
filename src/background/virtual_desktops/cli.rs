@@ -1,7 +1,7 @@
 use seelen_core::system_state::MonitorId;
 use serde::{Deserialize, Serialize};
 
-use crate::{error_handler::Result, virtual_desktops::get_vd_manager, windows_api::window::Window};
+use crate::{error::Result, virtual_desktops::get_vd_manager, windows_api::window::Window};
 
 /// Manage the Seelen Window Manager.
 #[derive(Debug, Serialize, Deserialize, clap::Args)]

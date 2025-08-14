@@ -28,7 +28,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::{Result, ResultLogExt},
+    error::{Result, ResultLogExt},
     event_manager, trace_lock,
     utils::pcwstr,
     windows_api::Com,

@@ -11,9 +11,7 @@ use windows::Win32::Networking::NetworkListManager::{
     NLM_CONNECTIVITY_IPV6_INTERNET,
 };
 
-use crate::{
-    app::get_app_handle, error_handler::Result, log_error, utils::sleep_millis, windows_api::Com,
-};
+use crate::{app::get_app_handle, error::Result, log_error, utils::sleep_millis, windows_api::Com};
 
 use super::application::{get_local_ip_address, NetworkManager};
 

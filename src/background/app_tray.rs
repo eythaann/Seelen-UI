@@ -9,7 +9,7 @@ use tauri::{
 };
 
 use crate::app::get_app_handle;
-use crate::error_handler::Result;
+use crate::error::Result;
 use crate::log_error;
 use crate::utils::sleep_millis;
 use crate::widgets::show_settings;

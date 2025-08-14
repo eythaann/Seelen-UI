@@ -12,7 +12,7 @@ use tauri::Listener;
 use uuid::Uuid;
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     log_error,
     state::application::{download_remote_icons, FULL_STATE},
     utils::constants::SEELEN_COMMON,

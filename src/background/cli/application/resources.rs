@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use base64::Engine;
 use serde::{Deserialize, Serialize};
 
-use crate::{error_handler::Result, utils::constants::SEELEN_COMMON};
+use crate::{error::Result, utils::constants::SEELEN_COMMON};
 
 #[derive(Debug, Serialize, Deserialize, clap::Args)]
 pub struct WidgetCli {

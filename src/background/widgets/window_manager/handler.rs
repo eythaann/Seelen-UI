@@ -6,7 +6,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     windows_api::{window::Window, WindowsApi},
 };
 use seelen_core::rect::Rect;

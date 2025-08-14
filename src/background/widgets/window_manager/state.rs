@@ -12,7 +12,7 @@ use seelen_core::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     modules::{input::domain::Point, monitors::MonitorManager},
     state::application::FULL_STATE,
     virtual_desktops::get_vd_manager,

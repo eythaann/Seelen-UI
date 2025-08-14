@@ -30,7 +30,7 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, get_tokio_handle};
+use crate::{error::Result, get_tokio_handle};
 
 pub fn pcwstr(s: &str) -> windows::core::PCWSTR {
     windows::core::PCWSTR::from_raw(s.encode_utf16().chain(Some(0)).collect_vec().as_ptr())
@@ -117,7 +117,7 @@ macro_rules! trace_lock {
                     panic_msg = format!("{}, last successful aquire was at {}", panic_msg, path);
                 }
 
-                panic!("{:?}", $crate::error_handler::AppError::from(panic_msg));
+                panic!("{:?}", $crate::error::AppError::from(panic_msg));
             }
         }
     }};

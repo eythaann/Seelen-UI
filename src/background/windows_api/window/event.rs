@@ -1,4 +1,4 @@
-use crate::error_handler::Result;
+use crate::error::Result;
 use crate::windows_api::window::cache::WindowCachedData;
 use crate::windows_api::window::Window;
 use windows::Win32::UI::WindowsAndMessaging::*;

@@ -23,7 +23,7 @@ use windows::Win32::{
 
 use crate::{
     app::{get_app_handle, Seelen, SEELEN},
-    error_handler::{Result, ResultLogExt},
+    error::{Result, ResultLogExt},
     event_manager, log_error,
     modules::input::{domain::Point, Mouse},
     state::application::FULL_STATE,

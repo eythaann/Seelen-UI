@@ -10,7 +10,7 @@ use windows::Media::Control::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     log_error,
     modules::{
         media::{

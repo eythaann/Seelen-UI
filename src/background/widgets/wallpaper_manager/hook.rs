@@ -1,9 +1,7 @@
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
-use crate::{
-    error_handler::Result, windows_api::window::event::WinEvent, windows_api::window::Window,
-};
+use crate::{error::Result, windows_api::window::event::WinEvent, windows_api::window::Window};
 
 use super::SeelenWall;
 

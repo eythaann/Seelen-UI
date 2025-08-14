@@ -12,7 +12,7 @@ use windows::Win32::{
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     log_error, pcstr,
     windows_api::{WindowEnumerator, WindowsApi},
 };

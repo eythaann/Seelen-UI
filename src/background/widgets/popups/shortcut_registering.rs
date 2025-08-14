@@ -7,7 +7,7 @@ use tauri::{Emitter, Listener, WindowEvent};
 use uuid::Uuid;
 
 use crate::{
-    app::get_app_handle, cli::ServicePipe, error_handler::Result, log_error,
+    app::get_app_handle, cli::ServicePipe, error::Result, log_error,
     widgets::popups::POPUPS_MANAGER,
 };
 

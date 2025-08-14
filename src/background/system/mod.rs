@@ -2,7 +2,7 @@ use tauri::Listener;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     log_error,
     modules::{
         bluetooth::{infrastructure::register_bluetooth_events, release_bluetooth_events},

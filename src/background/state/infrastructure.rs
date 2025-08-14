@@ -10,7 +10,7 @@ use tauri_plugin_dialog::DialogExt;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     log_error, trace_lock,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::{window::Window, WindowsApi},

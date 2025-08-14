@@ -113,7 +113,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::{Result, WindowsResultExt},
+    error::{Result, WindowsResultExt},
     modules::input::{domain::Point, Mouse},
 };
 

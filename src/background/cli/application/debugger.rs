@@ -2,7 +2,7 @@ use std::sync::atomic::Ordering;
 
 use serde::{Deserialize, Serialize};
 
-use crate::{error_handler::Result, hook::LOG_WIN_EVENTS, utils::TRACE_LOCK_ENABLED};
+use crate::{error::Result, hook::LOG_WIN_EVENTS, utils::TRACE_LOCK_ENABLED};
 
 /// Debugger cli
 #[derive(Debug, Serialize, Deserialize, clap::Args)]

@@ -10,7 +10,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result,
+    error::Result,
     modules::{network::domain::Hotspot, shared::radio::RADIO_MANAGER},
     trace_lock,
 };

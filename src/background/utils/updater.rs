@@ -2,9 +2,7 @@ use seelen_core::state::UpdateChannel;
 use slu_ipc::messages::SvcAction;
 use tauri_plugin_updater::{Update, UpdaterExt};
 
-use crate::{
-    app::get_app_handle, cli::ServicePipe, error_handler::Result, state::application::FULL_STATE,
-};
+use crate::{app::get_app_handle, cli::ServicePipe, error::Result, state::application::FULL_STATE};
 
 use super::is_running_as_appx;
 

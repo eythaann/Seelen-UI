@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 use super::SeelenRofi;
 /// Seelen's App Launcher

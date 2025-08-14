@@ -1,6 +1,6 @@
 use seelen_core::state::Profile;
 
-use crate::{error_handler::Result, utils::constants::SEELEN_COMMON};
+use crate::{error::Result, utils::constants::SEELEN_COMMON};
 
 use super::FullState;
 

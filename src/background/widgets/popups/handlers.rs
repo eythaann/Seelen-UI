@@ -1,7 +1,7 @@
 use seelen_core::state::SluPopupConfig;
 use uuid::Uuid;
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 use super::POPUPS_MANAGER;
 

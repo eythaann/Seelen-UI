@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use crate::{error_handler::Result, event_manager, windows_api::traits::EventRegistrationTokenExt};
+use crate::{error::Result, event_manager, windows_api::traits::EventRegistrationTokenExt};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::system_state::UIColors;

@@ -17,7 +17,7 @@ use crate::{
     trace_lock,
 };
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 pub fn register_bluetooth_events() {
     std::thread::spawn(|| {

@@ -7,7 +7,7 @@ use seelen_core::{
 use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle, error_handler::Result, modules::uwp::UwpManager, trace_lock,
+    app::get_app_handle, error::Result, modules::uwp::UwpManager, trace_lock,
     utils::constants::SEELEN_COMMON, widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
 };
 

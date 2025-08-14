@@ -6,7 +6,7 @@ use windows::Win32::{
     Security::SE_DEBUG_NAME,
 };
 
-use crate::{error_handler::Result, windows_api::string_utils::WindowsString};
+use crate::{error::Result, windows_api::string_utils::WindowsString};
 
 use super::{Com, WindowsApi};
 

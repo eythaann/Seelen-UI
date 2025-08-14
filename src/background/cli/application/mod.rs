@@ -14,7 +14,7 @@ use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::{
-    app::SEELEN, cli::application::uri::process_uri, error_handler::Result, trace_lock,
+    app::SEELEN, cli::application::uri::process_uri, error::Result, trace_lock,
     virtual_desktops::cli::VirtualDesktopCli, widgets::launcher::cli::AppLauncherCli,
     widgets::popups::cli::PopupsCli, widgets::show_settings, widgets::weg::cli::WegCli,
     widgets::window_manager::cli::WindowManagerCli,

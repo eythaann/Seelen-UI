@@ -6,7 +6,7 @@ use tauri::Emitter;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     log_error,
     modules::monitors::MONITOR_MANAGER,
     windows_api::{monitor::Monitor, MonitorEnumerator},

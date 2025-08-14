@@ -3,7 +3,7 @@ use std::env::temp_dir;
 use itertools::Itertools;
 use tauri_plugin_shell::ShellExt;
 
-use crate::{app::get_app_handle, error_handler::Result, windows_api::WindowsApi};
+use crate::{app::get_app_handle, error::Result, windows_api::WindowsApi};
 
 const PWSH_COMMON_ARGS: [&str; 7] = [
     "-NoLogo",

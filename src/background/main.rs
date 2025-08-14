@@ -4,8 +4,9 @@
 
 mod app;
 mod app_instance;
+mod app_tray;
 mod cli;
-mod error_handler;
+mod error;
 mod exposed;
 mod hook;
 mod modules;
@@ -14,7 +15,6 @@ mod state;
 mod system;
 mod tauri_context;
 mod tauri_plugins;
-mod tray;
 mod utils;
 mod virtual_desktops;
 mod widgets;
@@ -30,14 +30,14 @@ extern crate lazy_static;
 use std::sync::{atomic::AtomicBool, OnceLock};
 
 use app::{Seelen, SEELEN};
+use app_tray::try_register_tray_icon;
 use cli::{application::handle_console_client, SelfPipe, ServicePipe};
-use error_handler::Result;
+use error::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
 use modules::tray::application::ensure_tray_overflow_creation;
 use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
-use tray::try_register_tray_icon;
 use utils::{
     integrity::{
         check_for_webview_optimal_state, print_initial_information, register_panic_hook,

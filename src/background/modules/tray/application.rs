@@ -35,7 +35,7 @@ use winreg::{
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     event_manager, pcstr, trace_lock,
     utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
     windows_api::{

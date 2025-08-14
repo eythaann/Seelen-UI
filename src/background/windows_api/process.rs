@@ -9,7 +9,7 @@ use windows::{
     },
 };
 
-use crate::error_handler::Result;
+use crate::error::Result;
 
 use super::{string_utils::WindowsString, types::AppUserModelId, window::Window, WindowsApi};
 

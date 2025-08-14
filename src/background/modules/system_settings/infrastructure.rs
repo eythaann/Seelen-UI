@@ -3,7 +3,7 @@ use tauri::Emitter;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     log_error,
     modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
     trace_lock,

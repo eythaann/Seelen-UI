@@ -19,7 +19,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::{Result, WindowsResultExt},
+    error::{Result, WindowsResultExt},
     log_error, trace_lock,
     utils::spawn_named_thread,
 };

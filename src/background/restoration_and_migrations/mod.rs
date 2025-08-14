@@ -2,7 +2,7 @@ use tauri::{path::BaseDirectory, Manager};
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     utils::{constants::SEELEN_COMMON, copy_dir_all},
 };
 

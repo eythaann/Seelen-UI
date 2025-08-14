@@ -7,7 +7,7 @@ use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     trace_lock,
     widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
     windows_api::{monitor::Monitor, window::Window, WindowsApi},

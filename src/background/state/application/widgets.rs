@@ -4,7 +4,7 @@ use tauri::Emitter;
 
 use crate::{
     app::{get_app_handle, SEELEN},
-    error_handler::Result,
+    error::Result,
     trace_lock,
     utils::constants::SEELEN_COMMON,
 };

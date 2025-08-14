@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use tauri::Emitter;
 
 use crate::app::get_app_handle;
-use crate::error_handler::Result;
+use crate::error::Result;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 use crate::windows_api::window::Window;

@@ -17,7 +17,7 @@ use tauri::Emitter;
 
 use crate::{
     app::get_app_handle,
-    error_handler::Result,
+    error::Result,
     trace_lock,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
 };
