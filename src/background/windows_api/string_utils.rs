@@ -10,6 +10,7 @@ pub struct WindowsString {
     pub inner: Vec<u16>,
 }
 
+#[allow(dead_code)]
 impl WindowsString {
     pub fn new_to_fill(capacity: usize) -> Self {
         Self {

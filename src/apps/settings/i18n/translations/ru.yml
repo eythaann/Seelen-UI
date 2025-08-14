@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Фокус Топ
     increase_height: Увеличить высоту
     increase_width: Увеличить ширину
+    misc_force_restart: Принудительный перезапуск
     misc_open_settings: Откройте настройки
     misc_toggle_lock_tracing: Перевернуть отслеживание блокировки (журналы)
     misc_toggle_win_event_tracing: Toggle Win Tracing Event (журналы)
@@ -233,14 +234,6 @@ update:
   available: Обновление доступно!
   channel: Обновить канал
   downloading: Загрузка ...
-vd:
-  disabled_windows_version: >-
-    Нативная стратегия виртуального рабочего стола недоступна для вашей версии
-    Windows.
-  strategy:
-    label: Стратегия виртуального рабочего стола
-    native: Нативная
-    seelen: Seelen
 wall:
   backgrounds: Обои
   blur: Пятно

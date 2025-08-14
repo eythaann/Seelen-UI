@@ -5,20 +5,22 @@ pub mod infrastructure;
 use application::FullState;
 use seelen_core::{
     resource::{PluginId, WidgetId},
-    state::{WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetInstanceType},
+    state::{
+        WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetInstanceType,
+        WorkspaceId,
+    },
+    system_state::MonitorId,
 };
 use uuid::Uuid;
-
-use crate::windows_api::monitor::Monitor;
 
 impl FullState {
     pub fn is_weg_enabled(&self) -> bool {
         self.settings.by_widget.weg.enabled
     }
 
-    pub fn is_weg_enabled_on_monitor(&self, monitor_id: &str) -> bool {
+    pub fn is_weg_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
         let is_global_enabled = self.is_weg_enabled();
-        match self.settings.monitors_v3.get(monitor_id) {
+        match self.settings.monitors_v3.get(monitor_id.as_str()) {
             Some(config) => {
                 is_global_enabled && config.by_widget.is_widget_enabled(&WidgetId::known_weg())
             }
@@ -30,13 +32,9 @@ impl FullState {
         self.settings.by_widget.fancy_toolbar.enabled
     }
 
-    pub fn is_bar_enabled_on_monitor(&self, monitor: &Monitor) -> bool {
+    pub fn is_bar_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
         let is_global_enabled = self.is_bar_enabled();
-        let device_id = match monitor.stable_id() {
-            Ok(id) => id,
-            Err(_) => return is_global_enabled,
-        };
-        match self.settings.monitors_v3.get(&device_id) {
+        match self.settings.monitors_v3.get(monitor_id.as_str()) {
             Some(config) => {
                 is_global_enabled
                     && config
@@ -47,33 +45,42 @@ impl FullState {
         }
     }
 
-    pub fn is_widget_enable(&self, widget: &Widget, monitor: &Monitor) -> bool {
+    pub fn is_window_manager_enabled(&self) -> bool {
+        self.settings.by_widget.wm.enabled
+    }
+
+    pub fn is_window_manager_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
+        let is_global_enabled = self.is_window_manager_enabled();
+        match self.settings.monitors_v3.get(monitor_id.as_str()) {
+            Some(config) => {
+                is_global_enabled && config.by_widget.is_widget_enabled(&WidgetId::known_wm())
+            }
+            None => is_global_enabled,
+        }
+    }
+
+    pub fn is_widget_enable_on_monitor(&self, widget: &Widget, monitor_id: &MonitorId) -> bool {
         // new widgets are enabled by default
         let is_globally_enabled = self
             .settings
             .by_widget
             .others
             .get(&widget.id)
-            .map_or(true, |config| config.enabled);
+            .is_none_or(|config| config.enabled);
 
         if !is_globally_enabled {
             return false;
         }
 
         match widget.instances {
-            WidgetInstanceType::ReplicaByMonitor => {
-                let Ok(device_id) = monitor.stable_id() else {
-                    return false;
-                };
-
-                self.settings
-                    .monitors_v3
-                    .get(&device_id)
-                    .map_or(true, |monitor_config| {
-                        monitor_config.by_widget.is_widget_enabled(&widget.id)
-                    })
-            }
-            _ => monitor.is_primary(),
+            WidgetInstanceType::ReplicaByMonitor => self
+                .settings
+                .monitors_v3
+                .get(monitor_id.as_str())
+                .is_none_or(|monitor_config| {
+                    monitor_config.by_widget.is_widget_enabled(&widget.id)
+                }),
+            _ => false,
         }
     }
 
@@ -88,10 +95,6 @@ impl FullState {
         }
     }
 
-    pub fn is_window_manager_enabled(&self) -> bool {
-        self.settings.by_widget.wm.enabled
-    }
-
     pub fn is_rofi_enabled(&self) -> bool {
         self.settings.by_widget.launcher.enabled
     }
@@ -104,7 +107,7 @@ impl FullState {
         self.settings.shortcuts.enabled
     }
 
-    pub fn get_wm_layout_id(&self, _monitor: &Monitor, _workspace_idx: usize) -> PluginId {
+    pub fn get_wm_layout_id(&self, _monitor: &MonitorId, _workspace_id: &WorkspaceId) -> PluginId {
         let mut default = self.settings.by_widget.wm.default_layout.clone();
         if !default.is_valid() {
             default = "@default/wm-bspwm".into();
@@ -141,7 +144,7 @@ impl FullState {
 
     pub fn get_weg_temporal_item_visibility(
         &self,
-        _monitor_id: &str,
+        _monitor_id: &MonitorId,
     ) -> WegTemporalItemsVisibility {
         /* match self.settings.monitors_v2.get(monitor_id) {
             Some(config) => config
@@ -154,7 +157,10 @@ impl FullState {
         self.settings.by_widget.weg.temporal_items_visibility
     }
 
-    pub fn get_weg_pinned_item_visibility(&self, _monitor_id: &str) -> WegPinnedItemsVisibility {
+    pub fn get_weg_pinned_item_visibility(
+        &self,
+        _monitor_id: &MonitorId,
+    ) -> WegPinnedItemsVisibility {
         /* match self.settings.monitors_v2.get(monitor_id) {
             Some(config) => config
                 .by_widget

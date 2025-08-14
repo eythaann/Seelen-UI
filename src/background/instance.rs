@@ -1,39 +1,30 @@
 use std::{collections::HashMap, path::PathBuf};
 
-use getset::{Getters, MutGetters};
+use seelen_core::system_state::MonitorId;
 
 use crate::{
-    error_handler::Result,
-    seelen_bar::FancyToolbar,
-    seelen_weg::SeelenWeg,
-    seelen_wm_v2::instance::WindowManagerV2,
-    state::application::FullState,
-    widget_loader::WidgetInstance,
-    windows_api::{monitor::Monitor, WindowsApi},
+    error_handler::Result, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
+    seelen_wm_v2::instance::WindowManagerV2, state::application::FullState,
+    widget_loader::WidgetInstance, windows_api::monitor::MonitorView,
 };
 
-use windows::Win32::Graphics::Gdi::HMONITOR;
-
-#[derive(Getters, MutGetters)]
-#[getset(get = "pub", get_mut = "pub")]
+/// This struct stores the widgets of a monitor
 pub struct SluMonitorInstance {
-    monitor: Monitor,
-    id: String,
-    toolbar: Option<FancyToolbar>,
-    weg: Option<SeelenWeg>,
-    wm: Option<WindowManagerV2>,
+    pub view: MonitorView,
+    pub main_target_id: MonitorId,
+    pub toolbar: Option<FancyToolbar>,
+    pub weg: Option<SeelenWeg>,
+    pub wm: Option<WindowManagerV2>,
     /// third party widgets
-    widgets: HashMap<PathBuf, WidgetInstance>,
+    pub widgets: HashMap<PathBuf, WidgetInstance>,
 }
 
-unsafe impl Send for SluMonitorInstance {}
-
 impl SluMonitorInstance {
-    pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
-        let monitor = Monitor::from(hmonitor);
+    pub fn new(view: MonitorView, settings: &FullState) -> Result<Self> {
+        let main_target_id = view.primary_target()?.stable_id2()?;
         let mut instance = Self {
-            id: monitor.stable_id()?,
-            monitor,
+            view,
+            main_target_id,
             toolbar: None,
             weg: None,
             wm: None,
@@ -44,19 +35,17 @@ impl SluMonitorInstance {
         Ok(instance)
     }
 
-    pub fn update_handle(&mut self, handle: HMONITOR) {
-        self.monitor = Monitor::from(handle);
-    }
-
     pub fn ensure_positions(&mut self) -> Result<()> {
+        let win32_monitor = self.view.as_win32_monitor()?;
+
         if let Some(bar) = &mut self.toolbar {
-            bar.set_position(self.monitor.handle())?;
+            bar.set_position(win32_monitor.handle())?;
         }
         if let Some(weg) = &mut self.weg {
-            weg.set_position(self.monitor.handle())?;
+            weg.set_position(win32_monitor.handle())?;
         }
         if let Some(wm) = &mut self.wm {
-            wm.set_position(self.monitor.handle())?;
+            wm.set_position(win32_monitor.handle())?;
             WindowManagerV2::force_retiling()?;
         }
         Ok(())
@@ -64,21 +53,21 @@ impl SluMonitorInstance {
 
     fn add_toolbar(&mut self) -> Result<()> {
         if self.toolbar.is_none() {
-            self.toolbar = Some(FancyToolbar::new(&self.id)?);
+            self.toolbar = Some(FancyToolbar::new(&self.main_target_id)?);
         }
         Ok(())
     }
 
     fn add_weg(&mut self) -> Result<()> {
         if self.weg.is_none() {
-            self.weg = Some(SeelenWeg::new(&self.id)?);
+            self.weg = Some(SeelenWeg::new(&self.main_target_id)?);
         }
         Ok(())
     }
 
     fn add_wm(&mut self) -> Result<()> {
         if self.wm.is_none() {
-            self.wm = Some(WindowManagerV2::new(&self.id)?)
+            self.wm = Some(WindowManagerV2::new(&self.main_target_id)?)
         }
         Ok(())
     }
@@ -89,33 +78,35 @@ impl SluMonitorInstance {
 
         let third_party_widgets = state.widgets.iter().filter(|(_, w)| !w.metadata.bundled);
         for (id, widget) in third_party_widgets {
-            if !state.is_widget_enable(widget, &self.monitor) {
+            if !state.is_widget_enable_on_monitor(widget, &self.main_target_id) {
                 self.widgets.remove(id); // unload disabled widgets
                 continue;
             }
 
             if !self.widgets.contains_key(id) {
-                self.widgets
-                    .insert(id.clone(), WidgetInstance::load(widget.clone(), &self.id)?);
+                self.widgets.insert(
+                    id.clone(),
+                    WidgetInstance::load(widget.clone(), &self.main_target_id)?,
+                );
             }
         }
         Ok(())
     }
 
     pub fn load_settings(&mut self, state: &FullState) -> Result<()> {
-        if state.is_bar_enabled_on_monitor(self.monitor()) {
+        if state.is_bar_enabled_on_monitor(&self.main_target_id) {
             self.add_toolbar()?;
         } else {
             self.toolbar = None;
         }
 
-        if state.is_weg_enabled_on_monitor(&self.monitor.stable_id()?) {
+        if state.is_weg_enabled_on_monitor(&self.main_target_id) {
             self.add_weg()?;
         } else {
             self.weg = None;
         }
 
-        if state.is_window_manager_enabled() {
+        if state.is_window_manager_enabled_on_monitor(&self.main_target_id) {
             self.add_wm()?;
         } else {
             self.wm = None;
@@ -124,9 +115,7 @@ impl SluMonitorInstance {
         self.reload_widgets(state)?;
         Ok(())
     }
-
-    pub fn is_focused(&self) -> bool {
-        let hwnd = WindowsApi::get_foreground_window();
-        self.monitor.handle() == WindowsApi::monitor_from_window(hwnd)
-    }
 }
+
+unsafe impl Send for SluMonitorInstance {}
+unsafe impl Sync for SluMonitorInstance {}

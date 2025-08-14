@@ -170,6 +170,7 @@ shortcuts:
     focus_top: Fokusséieren Top
     increase_height: Erhéijen Héicht
     increase_width: Erhéijung vun der Breet
+    misc_force_restart: Kraaft Restart
     misc_open_settings: Oppen Astellungen
     misc_toggle_lock_tracing: Toggle Lock Tracing (Logbicher)
     misc_toggle_win_event_tracing: Toggle gewannen Event Tracing (Logbicher)
@@ -231,14 +232,6 @@ update:
   available: Update verfügbar!
   channel: Update Kanal
   downloading: NËMMEN ...
-vd:
-  disabled_windows_version: >-
-    Gebierteg virtuell Desktop Strategie ass net fir Är Windows Versioun
-    verfügbar.
-  strategy:
-    label: Virtuell Desktop Strategie
-    native: Native
-    seelen: Gesieg
 wall:
   backgrounds: Wallpapers
   blur: Blour

@@ -171,6 +171,7 @@ shortcuts:
     focus_top: Додуулах нь эсрэг
     increase_height: Дээд хэмжээг нэмэгдүүлэх
     increase_width: Өргөнийг нэмэгдүүлэх
+    misc_force_restart: Хүчийг дахин эхлүүлэх
     misc_open_settings: АВир танилцуулга
     misc_toggle_lock_tracing: Түгжих Tracing Tracing (бүртгэл)
     misc_toggle_win_event_tracing: Тогтмол үйл явдлын үеэр Togge To
@@ -231,14 +232,6 @@ update:
   available: Шинэчлэх боломжтой!
   channel: Суваг шинэчлэх
   downloading: Татаж авах ...
-vd:
-  disabled_windows_version: >-
-    Уугуул виртуал ширээний стратеги нь таны Windows хувилбарт ашиглах
-    боломжгүй.
-  strategy:
-    label: Виртины ширээний эсрэг стратеги
-    native: Төрөлх нутгийн
-    seelen: Сахин суу
 wall:
   backgrounds: Ханын цаас
   blur: Тайлбарал

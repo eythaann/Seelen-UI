@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Aumentar a altura
     increase_width: Aumentar a largura
+    misc_force_restart: Forçar reinicialização
     misc_open_settings: Abra as configurações
     misc_toggle_lock_tracing: Traçar o traçado de trava (logs)
     misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
@@ -233,14 +234,6 @@ update:
   available: Atualização disponível!
   channel: Atualizar canal
   downloading: Download ...
-vd:
-  disabled_windows_version: >-
-    A estratégia de desktop virtual nativa não está disponível para sua versão
-    do Windows.
-  strategy:
-    label: Estratégia de desktop virtual
-    native: Nativa
-    seelen: Seelen
 wall:
   backgrounds: Papéis de parede
   blur: Desfoque

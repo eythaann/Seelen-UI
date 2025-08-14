@@ -170,6 +170,7 @@ shortcuts:
     focus_top: Fókus toppur
     increase_height: Auka hæð
     increase_width: Auka breidd
+    misc_force_restart: Force endurræsing
     misc_open_settings: Opnar stillingar
     misc_toggle_lock_tracing: Skiptu um rekja lás (logs)
     misc_toggle_win_event_tracing: Skiptu um Win Event Tracing (logs)
@@ -231,12 +232,6 @@ update:
   available: Uppfærsla í boði!
   channel: Uppfæra rás
   downloading: Niðurhal ...
-vd:
-  disabled_windows_version: Native Virtual Desktop Strategy er ekki í boði fyrir Windows útgáfuna þína.
-  strategy:
-    label: Sýndarborðsstefna
-    native: Innfæddur
-    seelen: Seelen
 wall:
   backgrounds: Veggfóður
   blur: Þoka

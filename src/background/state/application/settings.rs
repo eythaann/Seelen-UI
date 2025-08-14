@@ -1,9 +1,6 @@
 use std::{fs::OpenOptions, io::Write, path::Path};
 
-use seelen_core::{
-    handlers::SeelenEvent,
-    state::{Settings, VirtualDesktopStrategy},
-};
+use seelen_core::{handlers::SeelenEvent, state::Settings};
 use tauri::Emitter;
 
 use crate::{
@@ -11,7 +8,7 @@ use crate::{
     seelen::{get_app_handle, SEELEN},
     seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     trace_lock,
-    utils::{constants::SEELEN_COMMON, is_virtual_desktop_supported},
+    utils::constants::SEELEN_COMMON,
 };
 
 use super::FullState;
@@ -54,10 +51,6 @@ impl FullState {
                 self.settings.old_active_themes.clear();
             }
             self.settings.sanitize()?;
-        }
-
-        if !is_virtual_desktop_supported() {
-            self.settings.virtual_desktop_strategy = VirtualDesktopStrategy::Seelen;
         }
 
         if should_write_settings {

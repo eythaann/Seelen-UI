@@ -159,6 +159,7 @@ shortcuts:
     focus_top: 聚焦顶部
     increase_height: 增加身高
     increase_width: 增加宽度
+    misc_force_restart: 强制重启
     misc_open_settings: 打开设置
     misc_toggle_lock_tracing: 切换锁定跟踪（日志）
     misc_toggle_win_event_tracing: 切换Win事件跟踪（日志）
@@ -216,12 +217,6 @@ update:
   available: 更新可用！
   channel: 更新频道
   downloading: 正在下载...
-vd:
-  disabled_windows_version: 本地虚拟桌面策略不适用于您的 Windows 版本。
-  strategy:
-    label: 虚拟桌面策略
-    native: 原生
-    seelen: Seelen
 wall:
   backgrounds: 壁纸
   blur: 模糊

@@ -174,6 +174,7 @@ shortcuts:
     focus_top: Focus top
     increase_height: Augmenter la hauteur
     increase_width: Augmenter la largeur
+    misc_force_restart: Forcer le redémarrage
     misc_open_settings: Paramètres ouvrir
     misc_toggle_lock_tracing: Togue de verrouillage (journaux)
     misc_toggle_win_event_tracing: Togle Win Event Traçage (journaux)
@@ -235,14 +236,6 @@ update:
   available: Mise à jour disponible !
   channel: Canal de mise à jour
   downloading: Téléchargement...
-vd:
-  disabled_windows_version: >-
-    La gestion de bureau virtuelle native n'est pas disponible pour votre
-    version de Windows.
-  strategy:
-    label: Gestionnaire de bureau virtuel
-    native: Native
-    seelen: Seelen
 wall:
   backgrounds: Fonds d'écran
   blur: Flou

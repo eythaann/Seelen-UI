@@ -164,6 +164,7 @@ shortcuts:
     focus_top: ትኩረት
     increase_height: ቁመት ይጨምሩ
     increase_width: ስፋት መጨመር
+    misc_force_restart: አስገባ
     misc_open_settings: ክፍት ቅንብሮች
     misc_toggle_lock_tracing: መቆለፊያ መቆለፊያ (ምዝግብ ማስታወሻዎች)
     misc_toggle_win_event_tracing: የ UNSCUCT PORTERSERSESTERE (ምዝግብ ማስታወሻዎች)
@@ -221,12 +222,6 @@ update:
   available: ዝመና ይገኛል!
   channel: ጣቢያውን አዘምን
   downloading: ማውረድ ...
-vd:
-  disabled_windows_version: ቤተኛ ምናባዊ ዴስክቶፕ ስትራቴጂ ለዊንዶውስ ስሪትዎ አይገኝም.
-  strategy:
-    label: ምናባዊ ዴስክቶፕ ስትራቴጂ
-    native: ተወላጅ
-    seelen: እዩ
 wall:
   backgrounds: የግድግዳ ወረቀቶች
   blur: ብዥታ

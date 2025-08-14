@@ -116,7 +116,7 @@ function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps
 
   function onWaiting() {
     if (ref.current) {
-      console.debug('video waiting for data, seeking to 0');
+      // console.debug('video waiting for data, seeking to 0');
       ref.current.currentTime = 0;
     }
   }

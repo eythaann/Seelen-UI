@@ -19,7 +19,6 @@ import {
 import { FancyToolbarSettings, FocusedApp } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
-import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
 
 import { lazySlice, RootActions, RootSlice } from './app';
@@ -91,8 +90,6 @@ async function initFocusedColorSystem() {
 }
 
 export async function registerStoreEvents() {
-  const view = getCurrentWebviewWindow();
-
   Settings.getAsync().then(loadSettings);
   Settings.onChange(loadSettings);
 
@@ -106,14 +103,6 @@ export async function registerStoreEvents() {
 
   await subscribe(SeelenEvent.BatteriesStatus, (event) => {
     store.dispatch(RootActions.setBatteries(event.payload));
-  });
-
-  await subscribe(SeelenEvent.WorkspacesChanged, (event) => {
-    store.dispatch(RootActions.setWorkspaces(event.payload));
-  });
-
-  await subscribe(SeelenEvent.ActiveWorkspaceChanged, (event) => {
-    store.dispatch(RootActions.setActiveWorkspace(event.payload));
   });
 
   await subscribe(SeelenEvent.TrayInfo, (event) => {
@@ -187,7 +176,6 @@ export async function registerStoreEvents() {
   await initFocusedColorSystem();
 
   await startThemingTool();
-  await view.emitTo(view.label, 'store-events-ready');
 }
 
 function loadSettingsCSS(settings: FancyToolbarSettings) {

@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Augmentar l'alçada
     increase_width: Augment d'amplada
+    misc_force_restart: Reinici de la força
     misc_open_settings: Configuració oberta
     misc_toggle_lock_tracing: Tornada de tancament de bloqueig (registres)
     misc_toggle_win_event_tracing: Toggle Win Traça (registres)
@@ -233,14 +234,6 @@ update:
   available: Actualitzeu disponible.
   channel: Canal d'actualització
   downloading: Descarregant ...
-vd:
-  disabled_windows_version: >-
-    L'estratègia d'escriptori virtual nativa no està disponible per a la vostra
-    versió de Windows.
-  strategy:
-    label: Estratègia d'escriptori virtual
-    native: Nadiua
-    seelen: Seelen
 wall:
   backgrounds: Fons de pantalla
   blur: Borrosa

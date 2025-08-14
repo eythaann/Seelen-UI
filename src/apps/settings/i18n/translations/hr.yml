@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Fokus na vrhu
     increase_height: Povećati visinu
     increase_width: Povećati širinu
+    misc_force_restart: Ponovno pokrenite
     misc_open_settings: Otvorene postavke
     misc_toggle_lock_tracing: Preklopljenje zaključavanja (zapisnici)
     misc_toggle_win_event_tracing: Pregazivanje traganja događaja (zapisnici)
@@ -233,14 +234,6 @@ update:
   available: Ažuriranje dostupno!
   channel: Kanal za ažuriranje
   downloading: Preuzimanje ...
-vd:
-  disabled_windows_version: >-
-    Izvorna strategija virtualne radne površine nije dostupna za vašu Windows
-    verziju.
-  strategy:
-    label: Strategija virtualne radne površine
-    native: Rodni
-    seelen: Izviriti
 wall:
   backgrounds: Pozadine
   blur: Zamutiti

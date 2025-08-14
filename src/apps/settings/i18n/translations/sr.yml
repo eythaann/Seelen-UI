@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Фокусирати врх
     increase_height: Повећати висину
     increase_width: Повећати ширину
+    misc_force_restart: Поново покренути
     misc_open_settings: Отвори подешавања
     misc_toggle_lock_tracing: Укључите тражење закључавања (трупци)
     misc_toggle_win_event_tracing: Пребацивање тражења догађаја Вин (Дневци)
@@ -232,14 +233,6 @@ update:
   available: Ажурирање доступно!
   channel: Ажурирај канал
   downloading: Преузимање ...
-vd:
-  disabled_windows_version: >-
-    Изворна стратегија виртуелне радне површине није доступна за вашу Виндовс
-    верзију.
-  strategy:
-    label: Виртуелна стратегија радне површине
-    native: Наморан
-    seelen: Сеелен
 wall:
   backgrounds: Позадине
   blur: Замутити

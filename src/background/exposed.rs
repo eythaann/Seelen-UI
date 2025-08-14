@@ -3,6 +3,7 @@ use std::os::windows::process::CommandExt;
 use std::path::PathBuf;
 
 use seelen_core::state::RelaunchArguments;
+use seelen_core::system_state::MonitorId;
 use seelen_core::{command_handler_list, system_state::Color};
 
 use tauri::{Builder, WebviewWindow, Wry};
@@ -12,12 +13,12 @@ use translators::Translator;
 use crate::error_handler::Result;
 use crate::hook::HookManager;
 use crate::modules::input::Keyboard;
-use crate::modules::virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait};
 use crate::seelen::{get_app_handle, Seelen};
 
 use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
+use crate::utils::is_running_as_appx;
 use crate::utils::pwsh::PwshScript;
-use crate::utils::{is_running_as_appx, is_virtual_desktop_supported as virtual_desktop_supported};
+use crate::virtual_desktops::get_vd_manager;
 use crate::widgets::show_settings;
 use crate::windows_api::hdc::DeviceContext;
 use crate::windows_api::window::Window;
@@ -130,8 +131,8 @@ async fn get_auto_start_status() -> Result<bool> {
 }
 
 #[tauri::command(async)]
-fn switch_workspace(idx: usize) -> Result<()> {
-    get_vd_manager().switch_to(idx)
+fn switch_workspace(monitor_id: MonitorId, idx: usize) -> Result<()> {
+    get_vd_manager().switch_to(&monitor_id, idx)
 }
 
 #[tauri::command(async)]
@@ -149,11 +150,6 @@ fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Result<()> {
         extract_and_save_icon_from_file(&path);
     }
     Ok(())
-}
-
-#[tauri::command(async)]
-fn is_virtual_desktop_supported() -> bool {
-    virtual_desktop_supported()
 }
 
 #[tauri::command(async)]
@@ -234,6 +230,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::seelen_wm_v2::handler::*;
     use crate::state::infrastructure::*;
     use crate::system::brightness::*;
+    use crate::virtual_desktops::handlers::*;
 
     use crate::modules::bluetooth::infrastructure::*;
     use crate::modules::language::*;

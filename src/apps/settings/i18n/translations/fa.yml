@@ -172,6 +172,7 @@ shortcuts:
     focus_top: تمرکز بالا
     increase_height: افزایش ارتفاع
     increase_width: عرض را افزایش دهید
+    misc_force_restart: مجدداً نیرو
     misc_open_settings: تنظیمات باز
     misc_toggle_lock_tracing: Toggle Lock Tracing (سیاهههای مربوط)
     misc_toggle_win_event_tracing: Toggle Win Tracing (سیاهههای مربوط)
@@ -232,12 +233,6 @@ update:
   available: بروزرسانی موجود!
   channel: کانال
   downloading: بارگیری ...
-vd:
-  disabled_windows_version: استراتژی دسک تاپ مجازی بومی برای نسخه ویندوز شما در دسترس نیست.
-  strategy:
-    label: استراتژی رومیزی مجازی
-    native: بومی
-    seelen: بیچاری
 wall:
   backgrounds: تصاویر پس زمینه
   blur: مبهم

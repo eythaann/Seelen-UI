@@ -4,7 +4,6 @@ pub mod hook;
 use crate::{
     error_handler::Result,
     log_error,
-    modules::virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait},
     seelen::get_app_handle,
     state::application::FULL_STATE,
     utils::{
@@ -14,13 +13,12 @@ use crate::{
     windows_api::{window::Window, AppBarData, WindowsApi},
 };
 use base64::Engine;
-use itertools::Itertools;
 use seelen_core::{
     handlers::SeelenEvent,
     state::{FancyToolbarSide, HideMode},
 };
 use serde::Serialize;
-use tauri::{Emitter, Listener, WebviewWindow};
+use tauri::{Emitter, WebviewWindow};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
@@ -239,23 +237,6 @@ impl FancyToolbar {
         .always_on_top(true)
         .build()?;
         window.set_ignore_cursor_events(true)?;
-        window.listen("store-events-ready", Self::on_store_events_ready);
         Ok(window)
-    }
-
-    fn on_store_events_ready(_: tauri::Event) {
-        // TODO refactor this implementation
-        std::thread::spawn(|| -> Result<()> {
-            let handler = get_app_handle();
-            let vd = get_vd_manager();
-            let desktops = vd
-                .get_all()?
-                .iter()
-                .map(|d| d.as_serializable())
-                .collect_vec();
-            handler.emit(SeelenEvent::WorkspacesChanged, &desktops)?;
-            handler.emit(SeelenEvent::ActiveWorkspaceChanged, vd.get_current()?.id())?;
-            Ok(())
-        });
     }
 }

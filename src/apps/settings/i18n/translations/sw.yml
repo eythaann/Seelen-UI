@@ -169,6 +169,7 @@ shortcuts:
     focus_top: Kuzingatia juu
     increase_height: Ongeza urefu
     increase_width: Ongeza upana
+    misc_force_restart: Nguvu Anzisha tena
     misc_open_settings: Mipangilio ya Fungua
     misc_toggle_lock_tracing: Kubadilisha Ufuatiliaji wa Kufunga (Magogo)
     misc_toggle_win_event_tracing: Kubadilisha Win Tukio Kufuatilia (Magogo)
@@ -229,12 +230,6 @@ update:
   available: Sasisha inapatikana!
   channel: Sasisha kituo
   downloading: Kupakua ...
-vd:
-  disabled_windows_version: Mkakati wa asili wa desktop haupatikani kwa toleo lako la Windows.
-  strategy:
-    label: Mkakati wa kweli wa desktop
-    native: Mzaliwa
-    seelen: Seelen
 wall:
   backgrounds: Wallpapers
   blur: Blur

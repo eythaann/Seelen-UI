@@ -113,12 +113,12 @@ impl WmCommand {
                 // self.discard_reservation()?;
             }
             WmCommand::Debug => {
-                #[cfg(debug_assertions)]
+                /* #[cfg(debug_assertions)]
                 if let Some(monitor) = trace_lock!(crate::seelen::SEELEN).focused_monitor_mut() {
                     if let Some(wm) = monitor.wm() {
                         wm.window.open_devtools();
                     }
-                }
+                } */
             }
             WmCommand::Width { action } => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());

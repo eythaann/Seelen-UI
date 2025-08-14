@@ -3,7 +3,6 @@ import {
   AppNotification,
   Battery,
   BluetoothDevice,
-  DesktopWorkspace,
   File,
   FocusedApp,
   MediaDevice,
@@ -15,7 +14,6 @@ import {
   User,
   WegAppGroupItem,
   WlanBssEntry,
-  WorkspaceId,
 } from '@seelen-ui/lib/types';
 
 export interface RootState {
@@ -35,8 +33,6 @@ export interface RootState {
   powerStatus: PowerStatus;
   powerPlan: PowerMode;
   batteries: Battery[];
-  workspaces: DesktopWorkspace[];
-  activeWorkspace: WorkspaceId | null;
   systemTray: TrayIcon[];
   networkAdapters: NetworkAdapter[];
   networkLocalIp: string | null;

@@ -44,7 +44,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
     register_media_events();
     register_user_events();
     register_bluetooth_events();
-    register_monitor_webview_events();
+    log_error!(register_monitor_webview_events());
     register_system_settings_events();
     register_power_events();
     register_language_events();

@@ -166,6 +166,7 @@ shortcuts:
     focus_top: ສຸມໃສ່ດ້ານເທິງ
     increase_height: ເພີ່ມຄວາມສູງ
     increase_width: ເພີ່ມຄວາມກວ້າງ
+    misc_force_restart: ບັງຄັບໃຫ້ Restart
     misc_open_settings: ເປີດການຕັ້ງຄ່າ
     misc_toggle_lock_tracing: Toggle Lock Tracing (ບັນທຶກ)
     misc_toggle_win_event_tracing: Toggle WIN ການແຂ່ງຂັນເຫດການ (ບັນທຶກ)
@@ -228,12 +229,6 @@ update:
   available: ປັບປຸງໃຫ້ທັນສະໄຫມ!
   channel: ຊ່ອງທາງການປັບປຸງ
   downloading: ການດາວໂຫລດ ...
-vd:
-  disabled_windows_version: ກົນລະຍຸດ virtual virtual ພື້ນເມືອງແມ່ນບໍ່ມີສໍາລັບ Windows ຂອງທ່ານ.
-  strategy:
-    label: ຍຸດຍຸດທະສາດຂອງ desktop virtual
-    native: ຄົນພື້ນເມືອງ
-    seelen: ຊ່າງຕັດ
 wall:
   backgrounds: ຮູບວໍເປເປີ
   blur: ມົວ

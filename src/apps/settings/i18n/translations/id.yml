@@ -174,6 +174,7 @@ shortcuts:
     focus_top: Fokus atas
     increase_height: Tingkatkan tinggi
     increase_width: Meningkatkan lebar
+    misc_force_restart: Memaksa Mulai Ulang
     misc_open_settings: Buka Pengaturan
     misc_toggle_lock_tracing: Toggle Lock Tracing (Log)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (Log)
@@ -235,12 +236,6 @@ update:
   available: Perbarui Tersedia!
   channel: Perbarui saluran
   downloading: Mengunduh ...
-vd:
-  disabled_windows_version: Strategi desktop virtual asli tidak tersedia untuk versi Windows Anda.
-  strategy:
-    label: Strategi desktop virtual
-    native: Warga asli
-    seelen: Seelen
 wall:
   backgrounds: Wallpaper
   blur: Blur

@@ -1,6 +1,6 @@
 use base64::Engine;
 use getset::{Getters, MutGetters};
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{handlers::SeelenEvent, system_state::MonitorId};
 use std::sync::Arc;
 use tauri::{Emitter, Listener, WebviewWindow};
 use windows::Win32::{
@@ -8,13 +8,8 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result,
-    log_error,
-    modules::virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait},
-    seelen::get_app_handle,
-    seelen_bar::FancyToolbar,
-    seelen_wm_v2::state::WM_STATE,
-    trace_lock,
+    error_handler::Result, log_error, seelen::get_app_handle, seelen_bar::FancyToolbar,
+    seelen_wm_v2::state::WM_STATE, trace_lock, virtual_desktops::get_vd_manager,
     windows_api::WindowsApi,
 };
 
@@ -34,7 +29,7 @@ impl WindowManagerV2 {
     pub const TITLE: &'static str = ".Seelen Window Manager";
     pub const TARGET: &'static str = "@seelen/window-manager";
 
-    pub fn new(monitor_id: &str) -> Result<Self> {
+    pub fn new(monitor_id: &MonitorId) -> Result<Self> {
         Ok(Self {
             window: Self::create_window(monitor_id)?,
         })
@@ -52,7 +47,7 @@ impl WindowManagerV2 {
         ))
     }
 
-    fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
+    fn create_window(monitor_id: &MonitorId) -> Result<WebviewWindow> {
         let label = format!("{}?monitorId={}", Self::TARGET, monitor_id);
         log::info!("Creating {label}");
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
@@ -83,13 +78,14 @@ impl WindowManagerV2 {
         window.listen("complete-setup", move |_event| {
             let window_label = window_label.clone();
             let monitor_id = monitor_id.clone();
+
             std::thread::spawn(move || -> Result<()> {
                 let app = get_app_handle();
                 let mut state = trace_lock!(WM_STATE);
 
                 if let Some(m) = state.get_monitor_mut(&monitor_id) {
-                    let workspace_id = get_vd_manager().get_current()?.id();
-                    let w = m.get_workspace_mut(&workspace_id);
+                    let w =
+                        m.get_workspace_mut(get_vd_manager().get_active_workspace_id(&monitor_id));
                     app.emit_to(
                         window_label.as_ref(),
                         SeelenEvent::WMSetLayout,

@@ -170,6 +170,7 @@ shortcuts:
     focus_top: ఫోకస్ టాప్
     increase_height: ఎత్తును పెంచండి
     increase_width: వెడల్పును పెంచండి
+    misc_force_restart: ఫోర్స్ పున art ప్రారంభం
     misc_open_settings: సెట్టింగులు తెరవండి
     misc_toggle_lock_tracing: లాక్ ట్రేసింగ్ (లాగ్‌లు) టోగుల్ చేయండి
     misc_toggle_win_event_tracing: విన్ ఈవెంట్ ట్రేసింగ్ (లాగ్స్) ను టోగుల్ చేయండి
@@ -231,12 +232,6 @@ update:
   available: నవీకరణ అందుబాటులో ఉంది!
   channel: ఛానెల్‌ను నవీకరించండి
   downloading: డౌన్‌లోడ్ ...
-vd:
-  disabled_windows_version: మీ విండోస్ వెర్షన్ కోసం స్థానిక వర్చువల్ డెస్క్‌టాప్ వ్యూహం అందుబాటులో లేదు.
-  strategy:
-    label: వర్చువల్ డెస్క్‌టాప్ వ్యూహం
-    native: స్థానిక
-    seelen: సీలెన్
 wall:
   backgrounds: వాల్‌పేపర్లు
   blur: బ్లర్

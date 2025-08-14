@@ -16,7 +16,10 @@ impl SelfPipe {
         }
 
         if let Ok(cli) = AppCli::try_parse_from(argv) {
-            cli.process()?;
+            if let Err(err) = cli.process() {
+                log::error!("Failed to process command: {err}");
+                return Err(err);
+            }
         }
         Ok(())
     }

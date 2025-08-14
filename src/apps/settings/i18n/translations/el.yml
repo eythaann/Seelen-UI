@@ -173,6 +173,7 @@ shortcuts:
     focus_top: Επικεντρώνεται στην κορυφή
     increase_height: Ύψος αύξησης
     increase_width: Αύξηση πλάτους
+    misc_force_restart: Αναγκαστική επανεκκίνηση
     misc_open_settings: Ανοίξτε τις ρυθμίσεις
     misc_toggle_lock_tracing: Εναλλαγή Lock Tracing (αρχεία καταγραφής)
     misc_toggle_win_event_tracing: Εναλλαγή εντοπισμού συμβάντων Win (Logs)
@@ -234,14 +235,6 @@ update:
   available: Διαθέσιμη ενημέρωση!
   channel: Κανάλι ενημέρωσης
   downloading: Λήψη ...
-vd:
-  disabled_windows_version: >-
-    Η εγγενής στρατηγική εικονικής επιφάνειας εργασίας δεν είναι διαθέσιμη για
-    την έκδοση των Windows.
-  strategy:
-    label: Εικονική στρατηγική επιφάνειας εργασίας
-    native: Ντόπιος
-    seelen: Σένεν
 wall:
   backgrounds: Ταπετσαρίες
   blur: Θολούρα

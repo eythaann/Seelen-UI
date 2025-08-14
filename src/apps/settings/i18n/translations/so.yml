@@ -175,6 +175,7 @@ shortcuts:
     focus_top: Xoogga saar dusha sare
     increase_height: Kordhi dhererka
     increase_width: Kordhi ballaadhan
+    misc_force_restart: Xoogga dib u bilow
     misc_open_settings: Meel furan
     misc_toggle_lock_tracing: Ku wareeji raadinta qufulka (logs)
     misc_toggle_win_event_tracing: Ku guuleysta raadinta dhacdada dhacdada (logs)
@@ -235,14 +236,6 @@ update:
   available: Cusboonaysiinta la heli karo!
   channel: Cusboonaysiinta Kanaalka
   downloading: Soo dejinta ...
-vd:
-  disabled_windows_version: >-
-    Istaraatiijiyadda Desktop-ka dalkoodu hooyo looma heli karo nooca
-    Windows-kaaga.
-  strategy:
-    label: Istaraatiijiyadda Dembelade Desktop
-    native: U dhashay
-    seelen: Sekelen
 wall:
   backgrounds: Darf-biyoodka
   blur: Jilicsan

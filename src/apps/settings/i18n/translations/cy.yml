@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Top Ffocws
     increase_height: Cynyddu uchder
     increase_width: Cynyddu lled
+    misc_force_restart: Ailgychwyn grym
     misc_open_settings: Gosodiadau Agored
     misc_toggle_lock_tracing: Olrhain clo togl (logiau)
     misc_toggle_win_event_tracing: Olrhain Digwyddiad Win Toggle (Logiau)
@@ -233,14 +234,6 @@ update:
   available: Diweddariad ar gael!
   channel: Diweddaru Sianel
   downloading: Lawrlwytho ...
-vd:
-  disabled_windows_version: >-
-    Nid yw strategaeth bwrdd gwaith rhithwir brodorol ar gael ar gyfer eich
-    fersiwn Windows.
-  strategy:
-    label: Strategaeth bwrdd gwaith rithwir
-    native: Brodor
-    seelen: Seelen
 wall:
   backgrounds: Papurau Wal
   blur: Aneglur

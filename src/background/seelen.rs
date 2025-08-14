@@ -1,14 +1,11 @@
-use std::sync::{atomic::AtomicBool, Arc};
+use std::sync::{atomic::AtomicBool, Arc, LazyLock};
 
 use getset::{Getters, MutGetters};
-use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::system_state::MonitorId;
 use slu_ipc::messages::SvcAction;
 use tauri::{AppHandle, Wry};
-use windows::Win32::{
-    Graphics::Gdi::HMONITOR,
-    System::TaskScheduler::{ITaskService, TaskScheduler},
-};
+use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
 use crate::{
     cli::ServicePipe,
@@ -17,7 +14,7 @@ use crate::{
     instance::SluMonitorInstance,
     log_error,
     modules::{
-        monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
+        monitors::{MonitorManager, MonitorManagerEvent},
         system_settings::application::{SystemSettings, SystemSettingsEvent},
     },
     restoration_and_migrations::RestorationAndMigration,
@@ -29,16 +26,16 @@ use crate::{
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::discord::start_discord_rpc,
-    windows_api::{event_window::create_background_window, Com, WindowsApi},
+    windows_api::{event_window::create_background_window, monitor::MonitorView, Com},
     APP_HANDLE,
 };
 
-lazy_static! {
-    pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
-}
+pub static SEELEN: LazyLock<Arc<Mutex<Seelen>>> =
+    LazyLock::new(|| Arc::new(Mutex::new(Seelen::default())));
 
 static SEELEN_IS_RUNNING: AtomicBool = AtomicBool::new(false);
 
+/// Tauri app handle
 pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
     APP_HANDLE
         .get()
@@ -63,14 +60,6 @@ impl Seelen {
 
     pub fn is_running() -> bool {
         SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Acquire)
-    }
-
-    pub fn focused_monitor_mut(&mut self) -> Option<&mut SluMonitorInstance> {
-        self.instances.iter_mut().find(|m| m.is_focused())
-    }
-
-    pub fn monitor_by_device_id_mut(&mut self, id: &str) -> Option<&mut SluMonitorInstance> {
-        self.instances.iter_mut().find(|m| m.id() == id)
     }
 }
 
@@ -97,9 +86,7 @@ impl Seelen {
             wall.update_position()?;
         }
         for instance in &mut self.instances {
-            if WindowsApi::monitor_info(instance.monitor().handle()).is_ok() {
-                instance.ensure_positions()?;
-            }
+            instance.ensure_positions()?;
         }
         Ok(())
     }
@@ -150,19 +137,13 @@ impl Seelen {
     }
 
     fn on_monitor_event(event: MonitorManagerEvent) {
+        let mut guard = trace_lock!(SEELEN);
         match event {
-            MonitorManagerEvent::Added(_id, handle) => {
-                log_error!(trace_lock!(SEELEN).add_monitor(handle));
+            MonitorManagerEvent::ViewAdded(view) => {
+                log_error!(guard.add_monitor(view));
             }
-            MonitorManagerEvent::Removed(id, _handle) => {
-                log_error!(trace_lock!(SEELEN).remove_monitor(&id));
-            }
-            MonitorManagerEvent::Updated(id, handle) => {
-                if let Some(m) = trace_lock!(SEELEN).monitor_by_device_id_mut(&id) {
-                    m.update_handle(handle);
-                }
-                log_error!(trace_lock!(SEELEN).refresh_windows_positions());
-                log_error!(trace_lock!(WEG_ITEMS_IMPL).emit_to_webview());
+            MonitorManagerEvent::ViewRemoved(id) => {
+                log_error!(guard.remove_monitor(&id));
             }
         }
     }
@@ -196,9 +177,8 @@ impl Seelen {
         }
 
         log::trace!("Enumerating Monitors & Creating Instances");
-        let monitors = { trace_lock!(MONITOR_MANAGER).monitors.clone() };
-        for (_name, id) in monitors {
-            self.add_monitor(id)?;
+        for view in MonitorManager::get_all_views()? {
+            self.add_monitor(view)?;
         }
 
         MonitorManager::subscribe(Self::on_monitor_event);
@@ -233,17 +213,16 @@ impl Seelen {
         release_system_events_handlers();
     }
 
-    fn add_monitor(&mut self, handle: HMONITOR) -> Result<()> {
+    fn add_monitor(&mut self, view: MonitorView) -> Result<()> {
         let state = FULL_STATE.load();
-        self.instances
-            .push(SluMonitorInstance::new(handle, &state)?);
+        self.instances.push(SluMonitorInstance::new(view, &state)?);
         self.refresh_windows_positions()?;
         trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }
 
-    fn remove_monitor(&mut self, id: &str) -> Result<()> {
-        self.instances.retain(|m| m.id() != id);
+    fn remove_monitor(&mut self, id: &MonitorId) -> Result<()> {
+        self.instances.retain(|m| &m.main_target_id != id);
         self.refresh_windows_positions()?;
         trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())

@@ -1,3 +1,5 @@
+pub mod cache;
+
 use seelen_core::{rect::Rect, state::AppExtraFlag};
 use slu_ipc::messages::SvcAction;
 use std::fmt::{Debug, Display};
@@ -14,17 +16,9 @@ use windows::{
 };
 
 use crate::{
-    cli::ServicePipe,
-    error_handler::Result,
-    modules::{
-        start::application::START_MENU_MANAGER,
-        virtual_desk::{get_vd_manager, VirtualDesktop, VirtualDesktopManagerTrait},
-    },
-    seelen_bar::FancyToolbar,
-    seelen_rofi::SeelenRofi,
-    seelen_wall::SeelenWall,
-    seelen_weg::instance::SeelenWeg,
-    seelen_wm_v2::instance::WindowManagerV2,
+    cli::ServicePipe, error_handler::Result, modules::start::application::START_MENU_MANAGER,
+    seelen_bar::FancyToolbar, seelen_rofi::SeelenRofi, seelen_wall::SeelenWall,
+    seelen_weg::instance::SeelenWeg, seelen_wm_v2::instance::WindowManagerV2,
     state::application::FULL_STATE,
 };
 
@@ -204,10 +198,6 @@ impl Window {
 
     pub fn monitor(&self) -> Monitor {
         Monitor::from(WindowsApi::monitor_from_window(self.0))
-    }
-
-    pub fn workspace(&self) -> Result<VirtualDesktop> {
-        get_vd_manager().get_by_window(self.address())
     }
 
     pub fn is_window(&self) -> bool {

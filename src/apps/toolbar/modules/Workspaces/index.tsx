@@ -7,17 +7,16 @@ import { invoke } from '@tauri-apps/api/core';
 import { Menu, Tooltip } from 'antd';
 import { HTMLAttributes, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 
 import { CommonItemContextMenu } from '../item/infra/ContextMenu';
 import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
 
-import { Selectors } from '../shared/store/app';
 import { AnimatedDropdown } from 'src/apps/shared/components/AnimatedWrappers';
 import { useThrottle, useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { cx } from '../../../shared/styles';
 import { $toolbar_state } from '../shared/state/items';
+import { $virtual_desktop } from '../shared/state/system';
 
 interface Props {
   module: WorkspaceToolbarItem;
@@ -32,8 +31,8 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
     animateLayoutChanges: () => false,
   });
 
-  const workspaces = useSelector(Selectors.workspaces);
-  const activeWorkspace = useSelector(Selectors.activeWorkspace);
+  const workspaces = $virtual_desktop.value?.workspaces || [];
+  const activeWorkspace = $virtual_desktop.value?.current_workspace;
 
   const { mode } = module;
   const commonProps = {
@@ -136,7 +135,6 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
 
 export function WorkspacesModule({ module }: Props) {
   const [openContextMenu, setOpenContextMenu] = useState(false);
-  const workspaces = useSelector(Selectors.workspaces);
 
   const { t } = useTranslation();
 
@@ -146,7 +144,7 @@ export function WorkspacesModule({ module }: Props) {
     }
   });
 
-  if (!workspaces.length) {
+  if (!$virtual_desktop.value) {
     return null;
   }
 

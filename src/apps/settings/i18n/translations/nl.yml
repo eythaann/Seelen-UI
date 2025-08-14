@@ -170,6 +170,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Verhoog de hoogte
     increase_width: Verhoog de breedte
+    misc_force_restart: Opnieuw opstarten forceren
     misc_open_settings: Open instellingen
     misc_toggle_lock_tracing: Schakelvergrendeling traceren (logboeken)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (Logs)
@@ -231,14 +232,6 @@ update:
   available: Update beschikbaar!
   channel: Updatekanaal
   downloading: Downloaden ...
-vd:
-  disabled_windows_version: >-
-    Native Virtual Desktop -strategie is niet beschikbaar voor uw Windows
-    -versie.
-  strategy:
-    label: Virtuele desktopstrategie
-    native: Native
-    seelen: Seelen
 wall:
   backgrounds: Achtergronden
   blur: Vervagen

@@ -172,6 +172,7 @@ shortcuts:
     focus_top: فوکس ٹاپ
     increase_height: اونچائی میں اضافہ
     increase_width: چوڑائی میں اضافہ
+    misc_force_restart: زبردستی دوبارہ شروع کریں
     misc_open_settings: کھلی ترتیبات
     misc_toggle_lock_tracing: ٹوگل لاک ٹریسنگ (نوشتہ جات)
     misc_toggle_win_event_tracing: ٹوگل ون ایونٹ ٹریسنگ (لاگ)
@@ -232,12 +233,6 @@ update:
   available: تازہ کاری دستیاب!
   channel: چینل کو اپ ڈیٹ کریں
   downloading: ڈاؤن لوڈ کرنا ...
-vd:
-  disabled_windows_version: آپ کے ونڈوز ورژن کے لئے دیسی ورچوئل ڈیسک ٹاپ حکمت عملی دستیاب نہیں ہے۔
-  strategy:
-    label: ورچوئل ڈیسک ٹاپ حکمت عملی
-    native: آبائی
-    seelen: سیلین
 wall:
   backgrounds: وال پیپر
   blur: دھندلا

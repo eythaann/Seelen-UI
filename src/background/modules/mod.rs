@@ -12,7 +12,6 @@ pub mod system_settings;
 pub mod tray;
 pub mod user;
 pub mod uwp;
-pub mod virtual_desk;
 
 #[macro_export]
 macro_rules! event_manager {

@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Fokus atas
     increase_height: Meningkatkan ketinggian
     increase_width: Meningkatkan lebar
+    misc_force_restart: Memaksa memulakan semula
     misc_open_settings: Buka Tetapan
     misc_toggle_lock_tracing: Togol mengesan kunci (log)
     misc_toggle_win_event_tracing: Togol Menang Mengesan Acara (Log)
@@ -233,12 +234,6 @@ update:
   available: Kemas kini tersedia!
   channel: Kemas kini saluran
   downloading: Memuat turun ...
-vd:
-  disabled_windows_version: Strategi desktop maya asli tidak tersedia untuk versi Windows anda.
-  strategy:
-    label: Strategi Desktop Maya
-    native: Asli
-    seelen: Seelen
 wall:
   backgrounds: Kertas dinding
   blur: Kabur

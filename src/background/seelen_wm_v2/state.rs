@@ -1,24 +1,22 @@
-use std::{
-    collections::{hash_map::Entry, HashMap},
-    sync::Arc,
-};
+use std::{collections::HashMap, sync::Arc};
 
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::state::{
-    value::{KnownPlugin, PluginValue},
-    NoFallbackBehavior, WmNode,
+use seelen_core::{
+    state::{
+        value::{KnownPlugin, PluginValue},
+        NoFallbackBehavior, WmNode, WorkspaceId,
+    },
+    system_state::MonitorId,
 };
 
 use crate::{
     error_handler::Result,
-    modules::{
-        input::domain::Point,
-        virtual_desk::{get_vd_manager, VirtualDesktopManagerTrait},
-    },
+    modules::{input::domain::Point, monitors::MonitorManager},
     state::application::FULL_STATE,
-    windows_api::{monitor::Monitor, window::Window, MonitorEnumerator},
+    virtual_desktops::get_vd_manager,
+    windows_api::{monitor::Monitor, window::Window},
 };
 
 use super::{cli::Axis, node_impl::WmNodeImpl};
@@ -39,150 +37,50 @@ pub struct WmV2StateWorkspace {
     no_fallback_behavior: NoFallbackBehavior,
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct WmV2StateMonitor {
-    pub id: String,
-    pub workspaces: HashMap<String, WmV2StateWorkspace>,
+    pub id: MonitorId,
+    pub workspaces: HashMap<WorkspaceId, WmV2StateWorkspace>,
 }
 
 #[derive(Debug, Default)]
 pub struct WmV2State {
-    pub monitors: HashMap<String, WmV2StateMonitor>,
-}
-
-#[allow(dead_code)]
-impl WmV2StateWorkspace {
-    pub fn new(monitor: &Monitor, workspace_idx: usize) -> Self {
-        let mut workspace = Self {
-            root: None,
-            no_fallback_behavior: NoFallbackBehavior::Float,
-        };
-
-        let settings = FULL_STATE.load();
-        let layout_id = settings.get_wm_layout_id(monitor, workspace_idx);
-
-        let plugin_with_layout = settings.plugins().values().find(|p| p.id == layout_id);
-        let Some(plugin) = plugin_with_layout else {
-            return workspace;
-        };
-        let PluginValue::Known(plugin) = &plugin.plugin else {
-            return workspace;
-        };
-        let KnownPlugin::WManager(layout) = plugin else {
-            return workspace;
-        };
-
-        workspace.root = Some(WmNodeImpl::new(layout.structure.clone()));
-        workspace.no_fallback_behavior = layout.no_fallback_behavior.clone();
-        workspace
-    }
-
-    pub fn get_root_node(&self) -> Option<&WmNode> {
-        self.root.as_ref().map(|n| n.inner())
-    }
-
-    pub fn add_window(&mut self, window: &Window) {
-        if let Some(node) = &mut self.root {
-            let residual = node.try_add_window(window);
-            if !residual.is_empty() {
-                log::warn!("Current Layout is full, and fallback container was not found");
-                // TODO
-            }
-        }
-    }
-
-    pub fn remove_window(&mut self, window: &Window) {
-        if let Some(node) = &mut self.root {
-            let residual = node.remove_window(window);
-            if !residual.is_empty() {
-                log::warn!("Current Layout is full, and fallback container was not found");
-                // TODO
-            }
-        }
-    }
-
-    pub fn contains(&self, window: &Window) -> bool {
-        self.root.as_ref().is_some_and(|n| n.contains(window))
-    }
-
-    pub fn trace_to(&self, window: &Window) -> Vec<&WmNode> {
-        self.root.as_ref().map_or(vec![], |n| n.trace(window))
-    }
-
-    pub fn get_node_at_point(&mut self, point: &Point) -> Option<&mut WmNode> {
-        if let Some(root) = &mut self.root {
-            return root.get_node_at_point(point).ok()?;
-        }
-        None
-    }
-}
-
-#[allow(dead_code)]
-impl WmV2StateMonitor {
-    pub fn create_workspace(monitor: &Monitor, workspace_id: &str) -> Result<WmV2StateWorkspace> {
-        for (workspace_idx, w) in get_vd_manager().get_all()?.iter().enumerate() {
-            if w.id() == workspace_id {
-                return Ok(WmV2StateWorkspace::new(monitor, workspace_idx));
-            }
-        }
-        Err("Invalid workspace id".into())
-    }
-
-    pub fn get_workspace_mut(&mut self, workspace_id: &str) -> &mut WmV2StateWorkspace {
-        match self.workspaces.entry(workspace_id.to_string()) {
-            Entry::Occupied(e) => e.into_mut(),
-            Entry::Vacant(e) => {
-                let monitor = Monitor::by_id(&self.id).expect("Failed to get monitor");
-                let new_workspace = Self::create_workspace(&monitor, workspace_id)
-                    .expect("Failed to ensure workspace");
-                e.insert(new_workspace)
-            }
-        }
-    }
-
-    pub fn contains(&self, window: &Window) -> bool {
-        self.workspaces.values().any(|w| w.contains(window))
-    }
-
-    pub fn trace_to(&self, window: &Window) -> Option<(&WmV2StateWorkspace, Vec<&WmNode>)> {
-        for w in self.workspaces.values() {
-            let trace = w.trace_to(window);
-            if !trace.is_empty() {
-                return Some((w, trace));
-            }
-        }
-        None
-    }
+    pub monitors: HashMap<MonitorId, WmV2StateMonitor>,
 }
 
 #[allow(dead_code)]
 impl WmV2State {
     /// will enumarate all monitors and workspaces
     pub fn init(&mut self) -> Result<()> {
-        let workspaces = get_vd_manager().get_all()?;
-        for monitor in MonitorEnumerator::get_all_v2()? {
-            let id = monitor.stable_id()?;
-            if self.monitors.contains_key(&id) {
+        let mut guard = get_vd_manager();
+
+        for view in MonitorManager::get_all_views()? {
+            let monitor_id = view.primary_target()?.stable_id2()?;
+            if self.monitors.contains_key(&monitor_id) {
                 continue;
             }
 
-            let mut wm_monitor = WmV2StateMonitor::default();
-            for (workspace_idx, w) in workspaces.iter().enumerate() {
-                if wm_monitor.workspaces.contains_key(&w.id()) {
+            let mut wm_monitor = WmV2StateMonitor::new(&monitor_id);
+
+            let vd_monitor = guard.get_monitor_mut(&monitor_id);
+            for workspace in &vd_monitor.workspaces {
+                if wm_monitor.workspaces.contains_key(&workspace.id) {
                     continue;
                 }
-                wm_monitor
-                    .workspaces
-                    .insert(w.id(), WmV2StateWorkspace::new(&monitor, workspace_idx));
+
+                wm_monitor.workspaces.insert(
+                    workspace.id.clone(),
+                    WmV2StateWorkspace::new(&monitor_id, &workspace.id),
+                );
             }
 
-            wm_monitor.id = id.clone();
-            self.monitors.insert(id, wm_monitor);
+            wm_monitor.id = monitor_id.clone();
+            self.monitors.insert(monitor_id, wm_monitor);
         }
         Ok(())
     }
 
-    pub fn get_monitor_mut(&mut self, monitor_id: &str) -> Option<&mut WmV2StateMonitor> {
+    pub fn get_monitor_mut(&mut self, monitor_id: &MonitorId) -> Option<&mut WmV2StateMonitor> {
         self.monitors.get_mut(monitor_id)
     }
 
@@ -204,9 +102,13 @@ impl WmV2State {
 
     pub fn get_node_at_point(&mut self, point: &Point) -> Option<&mut WmNode> {
         let monitor = Monitor::from(point);
-        if let Some(m) = self.monitors.get_mut(&monitor.stable_id().ok()?) {
-            let current_workspace = get_vd_manager().get_current().ok()?.id();
-            if let Some(w) = m.workspaces.get_mut(&current_workspace) {
+        if let Some(s_monitor) = self.monitors.get_mut(&monitor.stable_id2().ok()?) {
+            let current_workspace = get_vd_manager()
+                .get_monitor_mut(&s_monitor.id)
+                .current_workspace
+                .clone();
+
+            if let Some(w) = s_monitor.workspaces.get_mut(&current_workspace) {
                 return w.get_node_at_point(point);
             }
         }
@@ -314,5 +216,102 @@ impl WmV2State {
         }
 
         Err("Trying to change size of an unmanaged window".into())
+    }
+}
+
+#[allow(dead_code)]
+impl WmV2StateMonitor {
+    pub fn new(monitor_id: &MonitorId) -> Self {
+        Self {
+            id: monitor_id.clone(),
+            workspaces: HashMap::new(),
+        }
+    }
+
+    pub fn get_workspace_mut(&mut self, workspace_id: &WorkspaceId) -> &mut WmV2StateWorkspace {
+        self.workspaces
+            .entry(workspace_id.clone())
+            .or_insert_with(|| WmV2StateWorkspace::new(&self.id, workspace_id))
+    }
+
+    pub fn contains(&self, window: &Window) -> bool {
+        self.workspaces.values().any(|w| w.contains(window))
+    }
+
+    pub fn trace_to(&self, window: &Window) -> Option<(&WmV2StateWorkspace, Vec<&WmNode>)> {
+        for w in self.workspaces.values() {
+            let trace = w.trace_to(window);
+            if !trace.is_empty() {
+                return Some((w, trace));
+            }
+        }
+        None
+    }
+}
+
+#[allow(dead_code)]
+impl WmV2StateWorkspace {
+    pub fn new(monitor: &MonitorId, workspace: &WorkspaceId) -> Self {
+        let settings = FULL_STATE.load();
+        let layout_id = settings.get_wm_layout_id(monitor, workspace);
+
+        let mut workspace = Self {
+            root: None,
+            no_fallback_behavior: NoFallbackBehavior::Float,
+        };
+
+        let plugin_with_layout = settings.plugins().values().find(|p| p.id == layout_id);
+        let Some(plugin) = plugin_with_layout else {
+            return workspace;
+        };
+        let PluginValue::Known(plugin) = &plugin.plugin else {
+            return workspace;
+        };
+        let KnownPlugin::WManager(layout) = plugin else {
+            return workspace;
+        };
+
+        workspace.root = Some(WmNodeImpl::new(layout.structure.clone()));
+        workspace.no_fallback_behavior = layout.no_fallback_behavior.clone();
+        workspace
+    }
+
+    pub fn get_root_node(&self) -> Option<&WmNode> {
+        self.root.as_ref().map(|n| n.inner())
+    }
+
+    pub fn add_window(&mut self, window: &Window) {
+        if let Some(node) = &mut self.root {
+            let residual = node.try_add_window(window);
+            if !residual.is_empty() {
+                log::warn!("Current Layout is full, and fallback container was not found");
+                // TODO
+            }
+        }
+    }
+
+    pub fn remove_window(&mut self, window: &Window) {
+        if let Some(node) = &mut self.root {
+            let residual = node.remove_window(window);
+            if !residual.is_empty() {
+                log::warn!("Current Layout is full, and fallback container was not found");
+                // TODO
+            }
+        }
+    }
+
+    pub fn contains(&self, window: &Window) -> bool {
+        self.root.as_ref().is_some_and(|n| n.contains(window))
+    }
+
+    pub fn trace_to(&self, window: &Window) -> Vec<&WmNode> {
+        self.root.as_ref().map_or(vec![], |n| n.trace(window))
+    }
+
+    pub fn get_node_at_point(&mut self, point: &Point) -> Option<&mut WmNode> {
+        if let Some(root) = &mut self.root {
+            return root.get_node_at_point(point).ok()?;
+        }
+        None
     }
 }

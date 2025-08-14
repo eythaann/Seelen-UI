@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Fokusa tops
     increase_height: Palielināt augstumu
     increase_width: Palielināt platumu
+    misc_force_restart: Piespiedu restartēšana
     misc_open_settings: Atvērti iestatījumi
     misc_toggle_lock_tracing: Pārslēdziet slēdzenes izsekošanu (baļķi)
     misc_toggle_win_event_tracing: Pārslēdziet uzvaru notikumu izsekošanu (žurnāli)
@@ -233,12 +234,6 @@ update:
   available: Pieejams atjauninājums!
   channel: Atjaunināt kanālu
   downloading: Lejupielāde ...
-vd:
-  disabled_windows_version: Vietējā virtuālā darbvirsmas stratēģija nav pieejama jūsu Windows versijai.
-  strategy:
-    label: Virtuālā darbvirsmas stratēģija
-    native: Vietējais
-    seelen: Seelēna
 wall:
   backgrounds: Tapetes
   blur: Blur

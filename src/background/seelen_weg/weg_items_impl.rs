@@ -6,6 +6,7 @@ use seelen_core::{
         PinnedWegItemData, RelaunchArguments, WegAppGroupItem, WegItem, WegItemSubtype, WegItems,
         WegPinnedItemsVisibility, WegTemporalItemsVisibility,
     },
+    system_state::MonitorId,
 };
 use std::{
     collections::HashMap,
@@ -36,7 +37,7 @@ lazy_static! {
 #[derive(Debug, Clone)]
 pub struct WegItemsImpl {
     items: WegItems,
-    pre_state: Option<HashMap<String, WegItems>>,
+    pre_state: Option<HashMap<MonitorId, WegItems>>,
 }
 
 fn item_contains_window(item: &WegItem, searching: isize) -> bool {
@@ -365,12 +366,12 @@ impl WegItemsImpl {
         }
     }
 
-    pub fn get_filtered_by_monitor(&self) -> Result<HashMap<String, WegItems>> {
+    pub fn get_filtered_by_monitor(&self) -> Result<HashMap<MonitorId, WegItems>> {
         let mut result = HashMap::new();
         let state = FULL_STATE.load();
 
         for monitor in MonitorEnumerator::get_all_v2()? {
-            let monitor_id = monitor.stable_id()?;
+            let monitor_id = monitor.stable_id()?.into();
             if !state.is_weg_enabled_on_monitor(&monitor_id) {
                 continue;
             }

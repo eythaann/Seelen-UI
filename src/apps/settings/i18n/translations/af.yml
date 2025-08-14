@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Fokus top
     increase_height: Verhoog die hoogte
     increase_width: Verhoog die breedte
+    misc_force_restart: Force herbegin
     misc_open_settings: Open instellings
     misc_toggle_lock_tracing: Wisselslotopsporing (logs)
     misc_toggle_win_event_tracing: Skakel wen -byeenkomsopsporing (logs)
@@ -233,14 +234,6 @@ update:
   available: Opdatering beskikbaar!
   channel: Update Channel
   downloading: Aflaai ...
-vd:
-  disabled_windows_version: >-
-    Inheemse virtuele tafelrekenaarstrategie is nie beskikbaar vir u Windows
-    -weergawe nie.
-  strategy:
-    label: Virtuele tafelrekenaarstrategie
-    native: Inheems
-    seelen: Seelen
 wall:
   backgrounds: Agtergronde
   blur: Vervaag

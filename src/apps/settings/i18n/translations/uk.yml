@@ -170,6 +170,7 @@ shortcuts:
     focus_top: Фокус
     increase_height: Збільшити висоту
     increase_width: Збільшити ширину
+    misc_force_restart: Примусовий перезапуск
     misc_open_settings: Відкриті налаштування
     misc_toggle_lock_tracing: Перемикання відстеження блокування (журнали)
     misc_toggle_win_event_tracing: Toggle Win Tracing події (журнали)
@@ -231,14 +232,6 @@ update:
   available: Доступне оновлення!
   channel: Канал оновлення
   downloading: Завантаження...
-vd:
-  disabled_windows_version: >-
-    Рідна віртуальна стратегія робочого столу недоступна для вашої версії
-    Windows.
-  strategy:
-    label: Стратегія робочого столу
-    native: Звичайна
-    seelen: Seelen
 wall:
   backgrounds: Шпалери
   blur: Плямистість.

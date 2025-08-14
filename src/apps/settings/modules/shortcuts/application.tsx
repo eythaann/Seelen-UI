@@ -115,6 +115,7 @@ export function getHotkeysGroups(hotkeys: SluHotkey[]): Groups {
       case 'misc_open_settings':
       case 'misc_toggle_lock_tracing':
       case 'misc_toggle_win_event_tracing':
+      case 'misc_force_restart':
         groups.misc.push(hotkey);
         break;
       default:

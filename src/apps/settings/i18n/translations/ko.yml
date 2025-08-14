@@ -163,6 +163,7 @@ shortcuts:
     focus_top: 포커스 탑
     increase_height: 높이를 늘리십시오
     increase_width: 폭을 늘리십시오
+    misc_force_restart: 강제 재시작
     misc_open_settings: 열기 설정
     misc_toggle_lock_tracing: 토글 잠금 추적 (로그)
     misc_toggle_win_event_tracing: 토글 윈 이벤트 추적 (로그)
@@ -220,12 +221,6 @@ update:
   available: 사용 가능한 업데이트가 존재합니다!
   channel: 업데이트 채널
   downloading: 다운로드 중...
-vd:
-  disabled_windows_version: 현재 Windows 버전에서는 시스템 기본 가상 데스크톱 모드를 사용할 수 없습니다.
-  strategy:
-    label: 가상 데스크탑 모드
-    native: 시스템 기본
-    seelen: Seelen
 wall:
   backgrounds: 배경화면
   blur: 블러

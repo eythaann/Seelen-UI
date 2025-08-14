@@ -33,7 +33,7 @@ pub struct AppError {
 }
 
 define_app_errors!(
-    Custom(String);
+    App(String);
     Io(std::io::Error);
     Tauri(tauri::Error);
     Lib(seelen_core::SeelenLibError);
@@ -60,6 +60,7 @@ define_app_errors!(
     Translator(translators::Error);
     WinHotkey(win_hotkeys::error::WHKError);
     SluIpc(slu_ipc::error::Error);
+    Tokio(tokio::task::JoinError);
 );
 
 impl std::fmt::Debug for AppError {
@@ -86,6 +87,12 @@ impl std::fmt::Debug for AppError {
 
                 // 2) skip trace of other modules/libraries specially tracing of tao and tauri libs
                 if !name.starts_with("seelen_ui") {
+                    index += 1;
+                    continue;
+                }
+
+                // 3) skip convertion of erros to AppError
+                if name.starts_with("seelen_ui::error_handler") && name.ends_with("from") {
                     index += 1;
                     continue;
                 }
@@ -160,7 +167,7 @@ pub trait WindowsResultExt {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error>;
 }
 
-pub trait ResultLogger {
+pub trait ResultLogExt {
     /// Take the result and log it if there is an error
     fn log_error(self);
 }
@@ -183,7 +190,7 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
     }
 }
 
-impl<T, E: std::fmt::Debug> ResultLogger for core::result::Result<T, E> {
+impl<T, E: std::fmt::Debug> ResultLogExt for core::result::Result<T, E> {
     fn log_error(self) {
         if let Err(err) = self {
             log::error!("{err:?}");

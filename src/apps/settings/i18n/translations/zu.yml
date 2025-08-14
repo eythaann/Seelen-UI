@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Gxila phezulu
     increase_height: Khuphula ukuphakama
     increase_width: Khulisa Ububanzi
+    misc_force_restart: Force Qala kabusha
     misc_open_settings: Vula izilungiselelo
     misc_toggle_lock_tracing: Guqula ukukhiya ukulandelela (izingodo)
     misc_toggle_win_event_tracing: Guqula u-Win Traceng (izingodo)
@@ -233,12 +234,6 @@ update:
   available: Ukuvuselelwa Kuyatholakala!
   channel: Isiteshi sokuvuselela
   downloading: Ukulanda ...
-vd:
-  disabled_windows_version: Isu le-Virtual desktop yendabuko alitholakali ngenguqulo yakho yeWindows.
-  strategy:
-    label: Isu le-Virtual Desktop
-    native: '-Okudabuka'
-    seelen: '-Kwaseshud'
 wall:
   backgrounds: Ama-Wallpaper
   blur: Impumpula

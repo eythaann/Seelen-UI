@@ -164,6 +164,7 @@ shortcuts:
     focus_top: التركيز أعلى
     increase_height: زيادة الارتفاع
     increase_width: زيادة العرض
+    misc_force_restart: فرض إعادة التشغيل
     misc_open_settings: فتح الإعدادات
     misc_toggle_lock_tracing: تبديل قفل تتبع (سجلات)
     misc_toggle_win_event_tracing: تبديل الفوز تتبع حدث (سجلات)
@@ -224,12 +225,6 @@ update:
   available: تحديث متاح!
   channel: تحديث قناة
   downloading: تنزيل ...
-vd:
-  disabled_windows_version: استراتيجية سطح المكتب الافتراضية الأصلية غير متوفرة لإصدار Windows الخاص بك.
-  strategy:
-    label: استراتيجية سطح المكتب الظاهري
-    native: محلي
-    seelen: سيلين
 wall:
   backgrounds: خلفيات
   blur: الضبابية

@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Zaostrenie
     increase_height: Výška
     increase_width: Zväčšenie
+    misc_force_restart: Vynútiť reštart
     misc_open_settings: Otvorené nastavenia
     misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
     misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
@@ -233,14 +234,6 @@ update:
   available: Aktualizácia k dispozícii!
   channel: Kanál
   downloading: Sťahovanie ...
-vd:
-  disabled_windows_version: >-
-    Natívna virtuálna stolná stratégia nie je k dispozícii pre vašu verziu
-    systému Windows.
-  strategy:
-    label: Stratégia virtuálnej plochy
-    native: Domorodý
-    seelen: Kabína
 wall:
   backgrounds: Tapety
   blur: Rozmazanie

@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Focus top
     increase_height: Iżid l-għoli
     increase_width: Iżżid il-wisa '
+    misc_force_restart: Startjar mill-ġdid tal-forza
     misc_open_settings: Settings miftuħa
     misc_toggle_lock_tracing: Traċċar tal-Lock Toggle (zkuk)
     misc_toggle_win_event_tracing: Toggle Win Avveniment Traċċar (zkuk)
@@ -233,14 +234,6 @@ update:
   available: Aġġornament disponibbli!
   channel: Aġġorna l-kanal
   downloading: Tniżżil ...
-vd:
-  disabled_windows_version: >-
-    L-istrateġija tad-desktop virtwali indiġena mhix disponibbli għall-verżjoni
-    tal-Windows tiegħek.
-  strategy:
-    label: Strateġija tad-desktop virtwali
-    native: Nattiv
-    seelen: Seelen
 wall:
   backgrounds: Wallpapers
   blur: Ċċajpar

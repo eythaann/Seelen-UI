@@ -166,6 +166,7 @@ shortcuts:
     focus_top: ਫੋਕਸ ਚੋਟੀ ਦੇ
     increase_height: ਉਚਾਈ ਵਧਾਓ
     increase_width: ਚੌੜਾਈ ਵਧਾਓ
+    misc_force_restart: ਫੋਰਸ ਚਾਲੂ
     misc_open_settings: ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ
     misc_toggle_lock_tracing: ਟੌਗਲ ਲਾਕ ਟਰੇਸਿੰਗ (ਲੌਗ)
     misc_toggle_win_event_tracing: ਵਿਨ ਈਵੈਂਟ ਟਰੇਸਿੰਗ (ਲੌਗ) ਨੂੰ ਟੌਗਲ ਕਰੋ
@@ -227,12 +228,6 @@ update:
   available: ਅਪਡੇਟ ਉਪਲਬਧ!
   channel: ਚੈਨਲ ਅਪਡੇਟ ਕਰੋ
   downloading: ਡਾ ing ਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ...
-vd:
-  disabled_windows_version: ਦੇਸੀ ਵਰਚੁਅਲ ਡੈਸਕਟੌਪ ਰਣਨੀਤੀ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
-  strategy:
-    label: ਵਰਚੁਅਲ ਡੈਸਕਟੌਤੀ ਰਣਨੀਤੀ
-    native: ਦੇਸੀ
-    seelen: ਵੇਖਿਆ
 wall:
   backgrounds: ਵਾਲਪੇਪਰ
   blur: ਧੁੰਦਲਾ

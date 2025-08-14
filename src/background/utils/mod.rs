@@ -15,7 +15,7 @@ use std::{
     collections::HashMap,
     fs,
     path::{Path, PathBuf},
-    sync::atomic::AtomicBool,
+    sync::{atomic::AtomicBool, Arc, LazyLock},
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
@@ -30,7 +30,7 @@ use windows::{
     },
 };
 
-use crate::error_handler::Result;
+use crate::{error_handler::Result, get_tokio_handle};
 
 pub fn pcwstr(s: &str) -> windows::core::PCWSTR {
     windows::core::PCWSTR::from_raw(s.encode_utf16().chain(Some(0)).collect_vec().as_ptr())
@@ -78,10 +78,9 @@ pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
     Ok(path_buf)
 }
 
-pub static TRACE_LOCK_ENABLED: AtomicBool = AtomicBool::new(false);
-lazy_static::lazy_static! {
-    pub static ref LAST_SUCCESSFUL_LOCK: Mutex<HashMap<String, String>> = Mutex::new(HashMap::new());
-}
+pub static TRACE_LOCK_ENABLED: AtomicBool = AtomicBool::new(true);
+pub static LAST_SUCCESSFUL_LOCK: LazyLock<Mutex<HashMap<String, String>>> =
+    LazyLock::new(|| Mutex::new(HashMap::new()));
 
 #[macro_export]
 macro_rules! trace_lock {
@@ -98,13 +97,18 @@ macro_rules! trace_lock {
                         .try_lock_for(std::time::Duration::from_secs(5))
                         .unwrap();
                     let location = format!("{}:{}", file!(), line!());
-                    log::trace!("{} lock acquired at {}", guard_name, location);
                     map.insert(guard_name.to_owned(), location);
                 }
                 guard
             }
             None => {
-                let mut panic_msg = format!("{} mutex is deadlocked", guard_name);
+                let mut panic_msg = format!(
+                    "{} mutex is deadlocked at {}:{}",
+                    guard_name,
+                    file!(),
+                    line!()
+                );
+
                 if let Some(path) = $crate::utils::LAST_SUCCESSFUL_LOCK
                     .try_lock_for(std::time::Duration::from_secs(5))
                     .unwrap()
@@ -112,6 +116,7 @@ macro_rules! trace_lock {
                 {
                     panic_msg = format!("{}, last successful aquire was at {}", panic_msg, path);
                 }
+
                 panic!("{:?}", $crate::error_handler::AppError::from(panic_msg));
             }
         }
@@ -237,4 +242,40 @@ pub fn date_based_hex_id() -> String {
         .unwrap()
         .as_millis();
     format!("{since_epoch:x}")
+}
+
+pub struct Debouncer {
+    delay: Duration,
+    task: Arc<Mutex<Option<tokio::task::JoinHandle<()>>>>,
+}
+
+impl Debouncer {
+    /// Create a new debouncer with a delay.
+    pub fn new(delay: Duration) -> Self {
+        Debouncer {
+            delay,
+            task: Arc::new(Mutex::new(None)),
+        }
+    }
+
+    /// Call the function after the delay.
+    pub fn call<F, Fut, R>(&self, f: F)
+    where
+        F: FnOnce() -> Fut + Send + 'static,
+        Fut: std::future::Future<Output = R> + Send + 'static,
+    {
+        let mut task = self.task.lock();
+
+        // Cancel existing timer if it exists
+        if let Some(handle) = task.take() {
+            handle.abort();
+        }
+
+        // Set a new timer
+        let delay = self.delay;
+        *task = Some(get_tokio_handle().spawn(async move {
+            tokio::time::sleep(delay).await;
+            f().await;
+        }));
+    }
 }

@@ -176,6 +176,7 @@ shortcuts:
     focus_top: Tumuon sa itaas
     increase_height: Dagdagan ang taas
     increase_width: Dagdagan ang lapad
+    misc_force_restart: Force restart
     misc_open_settings: Buksan ang mga setting
     misc_toggle_lock_tracing: Toggle lock tracing (log)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (log)
@@ -237,14 +238,6 @@ update:
   available: Mag -update Magagamit!
   channel: I -update ang channel
   downloading: Pag -download ...
-vd:
-  disabled_windows_version: >-
-    Ang diskarte ng katutubong virtual desktop ay hindi magagamit para sa iyong
-    bersyon ng Windows.
-  strategy:
-    label: Diskarte sa Virtual Desktop
-    native: Katutubong
-    seelen: Seelen
 wall:
   backgrounds: Wallpaper
   blur: Malabo

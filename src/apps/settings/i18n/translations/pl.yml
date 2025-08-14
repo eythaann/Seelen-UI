@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Zwiększyć wysokość
     increase_width: Zwiększyć szerokość
+    misc_force_restart: Wymuś restart
     misc_open_settings: Otwórz ustawienia
     misc_toggle_lock_tracing: Przełączanie śledzenia blokady (dzienniki)
     misc_toggle_win_event_tracing: Przełączanie zdarzeń wygranych (dzienniki)
@@ -233,14 +234,6 @@ update:
   available: Dostępna aktualizacja!
   channel: Kanał aktualizacji
   downloading: Pobieranie...
-vd:
-  disabled_windows_version: >-
-    Strategia wirtualnych pulpitów nie jest dostępna dla tej wersji systemu
-    Windows.
-  strategy:
-    label: Strategia wirtualnych pulpitów
-    native: Natywny
-    seelen: Seelen
 wall:
   backgrounds: Tapety
   blur: Rozmycie

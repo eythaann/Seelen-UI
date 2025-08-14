@@ -22,6 +22,7 @@ mod system;
 mod tauri_context;
 mod tray;
 mod utils;
+mod virtual_desktops;
 mod widget_loader;
 mod widgets;
 mod windows_api;
@@ -56,12 +57,19 @@ use utils::{
 use crate::seelen::get_app_handle;
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
+static TOKIO_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
 static SILENT: AtomicBool = AtomicBool::new(false);
 static STARTUP: AtomicBool = AtomicBool::new(false);
 static VERBOSE: AtomicBool = AtomicBool::new(false);
 
 pub fn is_local_dev() -> bool {
     cfg!(dev)
+}
+
+pub fn get_tokio_handle() -> &'static tokio::runtime::Handle {
+    TOKIO_RUNTIME_HANDLE
+        .get()
+        .expect("Tokio runtime was not initialized")
 }
 
 async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
@@ -133,6 +141,10 @@ async fn main() -> Result<()> {
     if was_installed_using_msix() && !is_running_as_appx() {
         restart_as_appx()?;
     }
+
+    TOKIO_RUNTIME_HANDLE
+        .set(tokio::runtime::Handle::current())
+        .expect("Failed to set runtime handle");
 
     rust_i18n::set_locale(&seelen_core::state::Settings::get_system_language());
     trace_lock!(PERFORMANCE_HELPER).start("setup");

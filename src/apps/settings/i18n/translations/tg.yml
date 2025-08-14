@@ -170,6 +170,7 @@ shortcuts:
     focus_top: Фокус ба боло
     increase_height: Баланд бардоштани баландӣ
     increase_width: Паҳнои васеъ
+    misc_force_restart: Бастори қувват
     misc_open_settings: Танзимоти кушода
     misc_toggle_lock_tracing: Todge Cound Tracking (гузоришҳо)
     misc_toggle_win_event_tracing: Гузариш ба ғолиб Tweacing (гузоришҳо)
@@ -230,12 +231,6 @@ update:
   available: Навсозӣ!
   channel: Навсозӣ канал
   downloading: Зеркашӣ кунед ...
-vd:
-  disabled_windows_version: Стратегияи кории ватанӣ барои версияи Windows дастрас нест.
-  strategy:
-    label: Стратегияи кории корӣ
-    native: Модарӣ
-    seelen: Желен
 wall:
   backgrounds: Обои обу
   blur: Гул

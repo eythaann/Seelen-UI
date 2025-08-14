@@ -5,8 +5,8 @@ use std::sync::Arc;
 
 use crate::{
     error_handler::Result,
-    modules::virtual_desk::VirtualDesktopEvent,
     trace_lock,
+    virtual_desktops::events::VirtualDesktopEvent,
     windows_api::{monitor::Monitor, window::Window},
     winevent::WinEvent,
 };
@@ -22,11 +22,12 @@ lazy_static! {
 impl WindowManagerV2 {
     pub fn process_vd_event(event: &VirtualDesktopEvent) -> Result<()> {
         match event {
-            VirtualDesktopEvent::DesktopChanged { new, old: _ } => {
+            VirtualDesktopEvent::DesktopChanged { monitor, workspace } => {
+                // TODO: implement
                 // Self::discard_reservation()?;
-                Self::workspace_changed(new)?;
+                Self::workspace_changed(monitor, workspace)?;
             }
-            VirtualDesktopEvent::WindowChanged(window) => {
+            VirtualDesktopEvent::WindowChanged { window, .. } => {
                 let window = &Window::from(*window);
                 if Self::is_managed(window) {
                     log::trace!("window changed: {window:?}");

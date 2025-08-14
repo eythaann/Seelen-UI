@@ -168,6 +168,7 @@ shortcuts:
     focus_top: Fokusavimo viršus
     increase_height: Padidinti aukštį
     increase_width: Padidinti plotį
+    misc_force_restart: Priverstinis paleidimas iš naujo
     misc_open_settings: Atidaryti nustatymai
     misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)
     misc_toggle_win_event_tracing: Perjunkite „Win“ įvykių sekimą (žurnalai)
@@ -229,12 +230,6 @@ update:
   available: Galima atnaujinti!
   channel: Atnaujinkite kanalą
   downloading: Atsisiuntimas ...
-vd:
-  disabled_windows_version: Natūralios virtualios darbalaukio strategijos nėra jūsų „Windows“ versijai.
-  strategy:
-    label: Virtuali darbalaukio strategija
-    native: Gimtoji
-    seelen: Seelenas
 wall:
   backgrounds: Tapetai
   blur: Neryškumas

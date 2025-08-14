@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Focus tepe
     increase_height: Yüksekliği arttırmak
     increase_width: Genişliği Artırın
+    misc_force_restart: Yeniden Başlatmaya Zorla
     misc_open_settings: Ayarlar Aç
     misc_toggle_lock_tracing: Kilit izleme (kütükler)
     misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
@@ -233,12 +234,6 @@ update:
   available: Güncelleme Mevcut!
   channel: Güncelleme kanalı
   downloading: İndiriliyor...
-vd:
-  disabled_windows_version: Yerli Sanal Masaüstü Stratejisi Windows sürümünüz için mevcut değil.
-  strategy:
-    label: Sanal Masaüstü Stratejisi
-    native: Yerli
-    seelen: Seelen
 wall:
   backgrounds: Duvar Kağıtları
   blur: Bulanıklık

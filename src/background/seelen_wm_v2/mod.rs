@@ -6,7 +6,11 @@ pub mod node_impl;
 pub mod state;
 
 use instance::WindowManagerV2;
-use seelen_core::{handlers::SeelenEvent, state::AppExtraFlag};
+use seelen_core::{
+    handlers::SeelenEvent,
+    state::{AppExtraFlag, WorkspaceId},
+    system_state::MonitorId,
+};
 use state::{WmV2StateWorkspace, WM_STATE};
 use tauri::Emitter;
 use windows::Win32::{
@@ -17,11 +21,11 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     log_error,
-    modules::virtual_desk::{get_vd_manager, VirtualDesktop, VirtualDesktopManagerTrait},
     seelen::get_app_handle,
     state::application::FULL_STATE,
     trace_lock,
-    windows_api::{monitor::Monitor, window::Window, WindowEnumerator, WindowsApi},
+    virtual_desktops::get_vd_manager,
+    windows_api::{window::Window, WindowEnumerator, WindowsApi},
 };
 
 impl WindowManagerV2 {
@@ -88,14 +92,19 @@ impl WindowManagerV2 {
     }
 
     fn add(window: &Window) -> Result<()> {
-        let mut state = trace_lock!(WM_STATE);
-        let vd_manager = get_vd_manager();
-        let current_workspace_id = vd_manager.get_current()?.id();
+        window.init_cache();
 
-        let mut monitor_id = window.monitor().stable_id()?;
-        let mut workspace_id = window.workspace()?.id();
+        let monitor_id = window.monitor().stable_id2()?;
 
-        if let Some(config) = FULL_STATE.load().get_app_config_by_window(window.hwnd()) {
+        let mut vd_manager = get_vd_manager();
+        let vd_active_id = vd_manager.get_active_workspace_id(&monitor_id).clone();
+
+        let win_vd_workspace = vd_manager
+            .workspace_containing_window(&window.address())
+            .ok_or("Window is not associated with any workspace")?;
+
+        // TODO: Reimplement this
+        /* if let Some(config) = FULL_STATE.load().get_app_config_by_window(window.hwnd()) {
             if let Some(index) = config.bound_monitor {
                 if let Some(monitor) = Monitor::at(index) {
                     monitor_id = monitor.stable_id()?;
@@ -110,12 +119,38 @@ impl WindowManagerV2 {
                     workspace_id = workspace.id();
                 }
             }
-        }
+        } */
 
+        let mut state = trace_lock!(WM_STATE);
         if let Some(monitor) = state.get_monitor_mut(&monitor_id) {
-            let workspace = monitor.get_workspace_mut(&workspace_id);
-            workspace.add_window(window);
-            if workspace_id == current_workspace_id {
+            let wm_workspace = monitor.get_workspace_mut(&win_vd_workspace.id);
+            wm_workspace.add_window(window);
+
+            if win_vd_workspace.id == vd_active_id {
+                get_app_handle().emit_to(
+                    Self::get_label(&monitor_id),
+                    SeelenEvent::WMSetLayout,
+                    wm_workspace.get_root_node(),
+                )?;
+            }
+        }
+        Ok(())
+    }
+
+    fn remove(window: &Window) -> Result<()> {
+        let monitor_id = window.get_cached_data().monitor;
+        let mut state = trace_lock!(WM_STATE);
+        let Some(monitor) = state.get_monitor_mut(&monitor_id) else {
+            return Ok(());
+        };
+
+        let mut vd = get_vd_manager();
+        let current_workspace = vd.get_active_workspace_id(&monitor_id);
+
+        for (workspace_id, workspace) in monitor.workspaces.iter_mut() {
+            workspace.remove_window(window);
+
+            if workspace_id == current_workspace {
                 get_app_handle().emit_to(
                     Self::get_label(&monitor_id),
                     SeelenEvent::WMSetLayout,
@@ -126,37 +161,19 @@ impl WindowManagerV2 {
         Ok(())
     }
 
-    fn remove(window: &Window) -> Result<()> {
+    fn workspace_changed(monitor_id: &MonitorId, workspace_id: &WorkspaceId) -> Result<()> {
         let mut state = trace_lock!(WM_STATE);
-        let current_workspace = get_vd_manager().get_current()?.id();
 
-        // TODO this can be optimized, later
-        for (monitor_id, monitor) in state.monitors.iter_mut() {
-            for (workspace_id, workspace) in monitor.workspaces.iter_mut() {
-                workspace.remove_window(window);
-                if workspace_id == &current_workspace {
-                    get_app_handle().emit_to(
-                        Self::get_label(monitor_id),
-                        SeelenEvent::WMSetLayout,
-                        workspace.get_root_node(),
-                    )?;
-                }
-            }
-        }
-        Ok(())
-    }
+        let monitor = state
+            .get_monitor_mut(monitor_id)
+            .ok_or("Monitor not found")?;
+        let workspace = monitor.get_workspace_mut(workspace_id);
 
-    fn workspace_changed(current: &VirtualDesktop) -> Result<()> {
-        let mut state = trace_lock!(WM_STATE);
-        let workspace_id = current.id();
-        for (monitor_id, monitor) in state.monitors.iter_mut() {
-            let workspace = monitor.get_workspace_mut(&workspace_id);
-            get_app_handle().emit_to(
-                Self::get_label(monitor_id),
-                SeelenEvent::WMSetLayout,
-                workspace.get_root_node(),
-            )?;
-        }
+        get_app_handle().emit_to(
+            Self::get_label(monitor_id),
+            SeelenEvent::WMSetLayout,
+            workspace.get_root_node(),
+        )?;
         Ok(())
     }
 

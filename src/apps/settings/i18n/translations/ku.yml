@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Bilindbûnê zêde bikin
     increase_width: Berfireh zêde bikin
+    misc_force_restart: Hêza Destpêkirin
     misc_open_settings: Mîhengên vekirî
     misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
@@ -232,12 +233,6 @@ update:
   available: Nûvekirin!
   channel: Kanala Nûve
   downloading: Daxistin ...
-vd:
-  disabled_windows_version: Stratejiya Desktop ya Native ya Native ji bo guhertoya weya Windows-ê nabe.
-  strategy:
-    label: Stratejiya Desktop Virtual
-    native: Welatî
-    seelen: Seelen
 wall:
   backgrounds: Wallpapers
   blur: Şîn

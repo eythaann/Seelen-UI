@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Zaměření Top
     increase_height: Zvýšení výšky
     increase_width: Zvětšení šířky
+    misc_force_restart: Vynutit restart
     misc_open_settings: Otevřít nastavení
     misc_toggle_lock_tracing: Přepínání sledování zámků (protokoly)
     misc_toggle_win_event_tracing: Přepnutí sledování událostí Win (protokoly)
@@ -233,12 +234,6 @@ update:
   available: Aktualizace k dispozici!
   channel: Aktualizovat kanál
   downloading: Stahování ...
-vd:
-  disabled_windows_version: Nativní strategie virtuální plochy není pro vaši verzi Windows k dispozici.
-  strategy:
-    label: Strategie virtuální plochy
-    native: Nativní
-    seelen: Seelen
 wall:
   backgrounds: Tapety
   blur: Rozmazání

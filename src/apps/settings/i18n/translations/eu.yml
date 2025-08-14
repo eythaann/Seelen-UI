@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Altuera handitzea
     increase_width: Zabalera handitzea
+    misc_force_restart: Indarra berrabiarazi
     misc_open_settings: Ezarpenak irekitzea
     misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
     misc_toggle_win_event_tracing: Txandakatu Gertaeren trazatzea (erregistroak)
@@ -233,14 +234,6 @@ update:
   available: Eguneratu eskuragarri!
   channel: Eguneratu kanala
   downloading: Deskargatzen ...
-vd:
-  disabled_windows_version: >-
-    Mahaigaineko estrategia birtuala ez dago erabilgarri zure Windows
-    bertsiorako.
-  strategy:
-    label: Mahaigaineko estrategia birtuala
-    native: Sorterriko
-    seelen: Sekelo
 wall:
   backgrounds: Horma-irudiak
   blur: Lau lauak

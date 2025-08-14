@@ -1,16 +1,13 @@
 use std::{
-    collections::HashMap,
+    collections::HashSet,
     sync::{
         atomic::{AtomicBool, Ordering},
-        Arc,
+        Arc, LazyLock,
     },
-    thread::JoinHandle,
     time::{Duration, Instant},
 };
 
-use itertools::Itertools;
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
+use parking_lot::{Mutex, RwLock};
 use seelen_core::{handlers::SeelenEvent, system_state::FocusedApp};
 use tauri::Emitter;
 use windows::Win32::{
@@ -25,51 +22,24 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result,
+    error_handler::{Result, ResultLogExt},
     event_manager, log_error,
-    modules::{
-        input::{domain::Point, Mouse},
-        virtual_desk::{
-            get_vd_manager, VirtualDesktopEvent, VirtualDesktopManager, VirtualDesktopManagerTrait,
-        },
-    },
+    modules::input::{domain::Point, Mouse},
     seelen::{get_app_handle, Seelen, SEELEN},
     seelen_weg::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
-    state::{application::FULL_STATE, domain::AppExtraFlag},
+    state::application::FULL_STATE,
     trace_lock,
     utils::spawn_named_thread,
-    windows_api::{window::Window, WindowEnumerator, WindowsApi},
+    virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager, SluWorkspacesManager},
+    windows_api::{window::Window, WindowEnumerator},
     winevent::WinEvent,
 };
 
-lazy_static! {
-    static ref HOOK_MANAGER_SKIPPER: Arc<Mutex<HookManagerSkipper>> =
-        Arc::new(Mutex::new(HookManagerSkipper::default()));
-    pub static ref WINDOW_DICT: Arc<Mutex<HashMap<isize, WindowCachedData>>> =
-        Arc::new(Mutex::new(HashMap::new()));
-}
+static HOOK_MANAGER_SKIPPER: LazyLock<Arc<Mutex<HookManagerSkipper>>> =
+    LazyLock::new(|| Arc::new(Mutex::new(HookManagerSkipper::default())));
 
 pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct WindowCachedData {
-    pub hwnd: isize,
-    pub monitor: usize,
-    pub maximized: bool,
-    pub fullscreen: bool,
-}
-
-impl From<&Window> for WindowCachedData {
-    fn from(w: &Window) -> Self {
-        WindowCachedData {
-            hwnd: w.address(),
-            monitor: w.monitor().address(),
-            maximized: w.is_maximized(),
-            fullscreen: w.is_fullscreen(),
-        }
-    }
-}
 
 #[derive(Debug)]
 pub struct HookManagerSkipperItem {
@@ -144,13 +114,8 @@ impl HookManager {
         }
     }
 
-    pub fn run_with_async<F, T>(f: F) -> JoinHandle<T>
-    where
-        F: FnOnce(&mut HookManagerSkipper) -> T,
-        F: Send + 'static,
-        T: Send + 'static,
-    {
-        std::thread::spawn(move || f(&mut *trace_lock!(HOOK_MANAGER_SKIPPER)))
+    pub fn skip_next_event(event: WinEvent, hwnd: isize) {
+        trace_lock!(HOOK_MANAGER_SKIPPER).skip(event, hwnd);
     }
 
     fn log_event(event: WinEvent, origin: Window) {
@@ -215,9 +180,8 @@ impl HookManager {
             log_error!(result);
         }
 
-        #[allow(irrefutable_let_patterns)]
-        if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
-            log_error!(vd.on_win_event(event, &origin), event);
+        {
+            log_error!(get_vd_manager().on_win_event(event, &origin), event);
         }
 
         let app_state = FULL_STATE.load();
@@ -242,66 +206,48 @@ impl HookManager {
 
         let mut seelen = trace_lock!(SEELEN);
         for instance in seelen.instances_mut() {
-            if let Some(toolbar) = instance.toolbar_mut() {
+            if let Some(toolbar) = &mut instance.toolbar {
                 log_error!(toolbar.process_win_event(event, &origin), event);
             }
-            if let Some(weg) = instance.weg_mut() {
+            if let Some(weg) = &mut instance.weg {
                 log_error!(weg.process_individual_win_event(event, &origin), event);
             }
         }
     }
 }
 
-pub fn init_self_windows_registry() -> Result<()> {
-    std::thread::spawn(|| {
-        let mut dict = HashMap::new();
-        let result = WindowEnumerator::new().for_each_and_descendants(|window| {
-            dict.entry(window.address())
-                .or_insert_with(|| WindowCachedData::from(&window));
-        });
-        log_error!(result);
-        trace_lock!(WINDOW_DICT).extend(dict);
-    });
+pub fn init_zombie_window_killer() -> Result<()> {
+    let existing_windows = Arc::new(RwLock::new(HashSet::new()));
 
-    // this should be the first subscription or it will not work correctly
-    HookManager::subscribe(|(event, origin)| match event {
+    let dict = existing_windows.clone();
+    HookManager::subscribe(move |(event, origin)| match event {
         WinEvent::ObjectCreate => {
-            let mut dict = trace_lock!(WINDOW_DICT);
-            dict.insert(origin.address(), WindowCachedData::from(&origin));
+            dict.write().insert(origin.address());
         }
         WinEvent::ObjectDestroy => {
-            let mut dict = trace_lock!(WINDOW_DICT);
-            dict.remove(&origin.address());
+            dict.write().remove(&origin.address());
         }
-        _ => {
-            /* #[cfg(debug_assertions)]
-            {
-                let mut dict = trace_lock!(WINDOW_DICT);
-                dict.entry(origin.address()).or_insert_with(|| {
-                    log::warn!(
-                        "{:?} emitted by an unregisted window({:?})",
-                        event.green(),
-                        origin
-                    );
-                    WindowCachedData::from(&origin)
-                });
-            } */
-        }
+        _ => {}
     });
 
-    // Spawns a background thread that periodically checks for "zombie windows" - windows
+    // Spawns a task that periodically checks for "zombie windows" - windows
     // that have been destroyed (e.g., through task kill or abnormal termination) but didn't
     // properly emit the ObjectDestroy event. This thread detects such windows
     // and emits the missing destruction events to ensure proper cleanup.
     spawn_named_thread("Zombie Window Exterminator", move || {
-        std::thread::sleep(std::time::Duration::from_secs(9));
+        WindowEnumerator::new()
+            .for_each_and_descendants(|window| {
+                existing_windows.write().insert(window.address());
+            })
+            .log_error();
+
         loop {
             std::thread::sleep(std::time::Duration::from_secs(1));
-            let registered = trace_lock!(WINDOW_DICT).keys().cloned().collect_vec();
-            for addr in registered {
-                let window = Window::from(addr);
+            let guard = existing_windows.write();
+            for addr in guard.iter() {
+                let window = Window::from(*addr);
                 if !window.is_window() {
-                    log::trace!("Reaping window: {:0x}", window.address());
+                    // log::trace!("Reaping window: {:0x}", window.address());
                     log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
                 }
             }
@@ -313,7 +259,8 @@ pub fn init_self_windows_registry() -> Result<()> {
 
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
-    init_self_windows_registry()?;
+    get_vd_manager().list_windows_into_respective_workspace()?;
+    init_zombie_window_killer()?;
 
     spawn_named_thread("WinEventHook", move || unsafe {
         SetWinEventHook(
@@ -346,14 +293,6 @@ pub fn register_win_hook() -> Result<()> {
         }
     })?;
 
-    let (sender, receiver) = std::sync::mpsc::channel::<VirtualDesktopEvent>();
-    get_vd_manager().listen_events(sender)?;
-    spawn_named_thread("VirtualDesktopEventHook", move || {
-        for event in receiver {
-            log_error!(process_vd_event(event))
-        }
-    })?;
-
     spawn_named_thread("MouseEventHook", || {
         let handle = get_app_handle();
         let mut last_pos = Point::default();
@@ -369,48 +308,18 @@ pub fn register_win_hook() -> Result<()> {
         }
     })?;
 
+    SluWorkspacesManager::subscribe(|e| log_error!(process_vd_event(e)));
     Ok(())
 }
 
 pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
     if FULL_STATE.load().is_window_manager_enabled() {
-        log_error!(WindowManagerV2::process_vd_event(&event));
+        WindowManagerV2::process_vd_event(&event)?;
     }
 
-    match event {
-        VirtualDesktopEvent::DesktopCreated(_)
-        | VirtualDesktopEvent::DesktopDestroyed { destroyed: _ }
-        | VirtualDesktopEvent::DesktopMoved {
-            desktop: _,
-            old_index: _,
-            new_index: _,
-        }
-        | VirtualDesktopEvent::DesktopNameChanged(_, _) => {
-            let desktops = get_vd_manager()
-                .get_all()?
-                .iter()
-                .map(|d| d.as_serializable())
-                .collect_vec();
-            get_app_handle().emit(SeelenEvent::WorkspacesChanged, &desktops)?;
-        }
-        VirtualDesktopEvent::DesktopChanged { new, old: _ } => {
-            get_app_handle().emit(SeelenEvent::ActiveWorkspaceChanged, new.id())?;
-        }
-        VirtualDesktopEvent::WindowChanged(window) => {
-            let hwnd = HWND(window as _);
-            if WindowsApi::is_window(hwnd) {
-                if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
-                    let vd = get_vd_manager();
-                    if config.options.contains(&AppExtraFlag::Pinned)
-                        && !vd.is_pinned_window(window)?
-                    {
-                        vd.pin_window(window)?;
-                    }
-                }
-            }
-        }
-        _ => {}
-    }
-
+    get_app_handle().emit(
+        SeelenEvent::VirtualDesktopsChanged,
+        get_vd_manager().desktops(),
+    )?;
     Ok(())
 }

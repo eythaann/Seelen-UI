@@ -20,7 +20,6 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'devTools',
     'language',
     'dateFormat',
-    'virtualDesktopStrategy',
     'updater',
     'byWidget',
     'drpc',

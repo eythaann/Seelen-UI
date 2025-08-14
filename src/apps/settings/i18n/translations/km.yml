@@ -169,6 +169,7 @@ shortcuts:
     focus_top: ផ្តោតលើកំពូល
     increase_height: បង្កើនកម្ពស់
     increase_width: បង្កើនទទឹង
+    misc_force_restart: បង្ខំឱ្យចាប់ផ្តើមឡើងវិញ
     misc_open_settings: បើកការកំណត់
     misc_toggle_lock_tracing: បិទបើកការចាក់សោរ (កំណត់ហេតុ)
     misc_toggle_win_event_tracing: បិទ / បើកព្រឹត្តិការណ៍ឈ្នះ (កំណត់ហេតុ)
@@ -230,12 +231,6 @@ update:
   available: មានបច្ចុប្បន្នភាព!
   channel: ឆានែលធ្វើបច្ចុប្បន្នភាព
   downloading: ទាញយក ...
-vd:
-  disabled_windows_version: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិតដើមមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
-  strategy:
-    label: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិត
-    native: នៃកមនើត
-    seelen: កន្លេងតមខ្ច៉ាត់សែល
 wall:
   backgrounds: ផាបផេច
   blur: ព្រមម៉ុន

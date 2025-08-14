@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UIColors, UpdateChannel, VirtualDesktopStrategy } from '@seelen-ui/lib';
+import { UIColors, UpdateChannel } from '@seelen-ui/lib';
 import {
   IconPackId,
   SeelenWallSettings,
@@ -46,7 +46,6 @@ const initialState: RootState = {
   language: navigator.language.split('-')[0] || 'en',
   dateFormat: 'ddd D MMM, hh:mm A',
   colors: UIColors.default().inner,
-  virtualDesktopStrategy: VirtualDesktopStrategy.Native,
   updater: {
     channel: UpdateChannel.Release,
   },
@@ -97,7 +96,6 @@ export const RootSlice = createSlice({
       state.toBeSaved = true;
       i18n.changeLanguage(action.payload);
     },
-    setVirtualDesktopStrategy: toBeSavedAndRestarted(reducers.setVirtualDesktopStrategy),
     restoreToLastLoaded: (state) => {
       if (state.lastLoaded) {
         const toMaintain = pick(state, ['autostart', 'route', 'colors', 'lastLoaded']);

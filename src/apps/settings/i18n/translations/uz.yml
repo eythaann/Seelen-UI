@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Face Top
     increase_height: Balandlikni oshirish
     increase_width: Kenglikni oshirish
+    misc_force_restart: Kuchni qayta boshlang
     misc_open_settings: Ochiq sozlamalar
     misc_toggle_lock_tracing: Qulfni qaytarish (jurnallar)
     misc_toggle_win_event_tracing: Tap The The The The Trecing (jurnallar)
@@ -233,14 +234,6 @@ update:
   available: Yangilanish mavjud!
   channel: Kanalni yangilash
   downloading: Yuklab olish ...
-vd:
-  disabled_windows_version: >-
-    National Virtual ish strategiya strategiyasi Windows versiyangiz uchun
-    mavjud emas.
-  strategy:
-    label: Virtual ish stoli strategiyasi
-    native: Mahalliy
-    seelen: Seelen
 wall:
   backgrounds: Fon rasmlari
   blur: Puflamoq

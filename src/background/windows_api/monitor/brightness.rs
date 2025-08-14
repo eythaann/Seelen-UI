@@ -1,24 +1,20 @@
-use windows::{
-    Devices::Enumeration::DeviceInformation,
-    Win32::{
-        Devices::Display::{
-            GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness, DISPLAYPOLICY_AC,
-            DISPLAYPOLICY_DC, DISPLAY_BRIGHTNESS, IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS,
-            IOCTL_VIDEO_SET_DISPLAY_BRIGHTNESS, PHYSICAL_MONITOR,
-        },
-        Foundation::{BOOL, HANDLE},
-        Graphics::Gdi::DISPLAY_DEVICEW,
-        Storage::FileSystem::{
-            CreateFileW, FILE_GENERIC_READ, FILE_GENERIC_WRITE, FILE_SHARE_READ, FILE_SHARE_WRITE,
-            OPEN_EXISTING,
-        },
-        System::IO::DeviceIoControl,
+use windows::Win32::{
+    Devices::Display::{
+        GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness, DISPLAYPOLICY_AC,
+        DISPLAYPOLICY_DC, DISPLAY_BRIGHTNESS, IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS,
+        IOCTL_VIDEO_SET_DISPLAY_BRIGHTNESS, PHYSICAL_MONITOR,
     },
+    Foundation::{BOOL, HANDLE},
+    Storage::FileSystem::{
+        CreateFileW, FILE_GENERIC_READ, FILE_GENERIC_WRITE, FILE_SHARE_READ, FILE_SHARE_WRITE,
+        OPEN_EXISTING,
+    },
+    System::IO::DeviceIoControl,
 };
 
 use crate::{
     error_handler::Result,
-    windows_api::{string_utils::WindowsString, WindowsApi},
+    windows_api::{monitor::MonitorTarget, string_utils::WindowsString, WindowsApi},
 };
 
 use super::Monitor;
@@ -33,63 +29,18 @@ pub struct DdcciBrightnessValues {
     pub max: u32,
 }
 
-/// Represents a display device
-#[derive(Clone)]
-#[allow(dead_code)]
-pub struct DisplayDevice {
-    /// Note: DISPLAYCONFIG_TARGET_DEVICE_NAME.monitorDevicePath == DISPLAY_DEVICEW.DeviceID (with EDD_GET_DEVICE_INTERFACE_NAME)\
-    /// These are in the "DOS Device Path" format.
-    id: WindowsString,
-    pub name: WindowsString,
-    /// Note: PHYSICAL_MONITOR.szPhysicalMonitorDescription == DISPLAY_DEVICEW.DeviceString
-    pub description: WindowsString,
-    /// registry key
-    pub key: WindowsString,
-    pub flags: u32,
-}
-
-impl From<&DISPLAY_DEVICEW> for DisplayDevice {
-    fn from(device: &DISPLAY_DEVICEW) -> Self {
-        Self {
-            id: WindowsString::from_slice(&device.DeviceID),
-            name: WindowsString::from_slice(&device.DeviceName),
-            description: WindowsString::from_slice(&device.DeviceString),
-            key: WindowsString::from_slice(&device.DeviceKey),
-            flags: device.StateFlags.0,
-        }
-    }
-}
-
-impl std::fmt::Debug for DisplayDevice {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("DisplayDevice")
-            .field("id", &self.id.to_os_string())
-            .field("name", &self.name.to_os_string())
-            .field("description", &self.description.to_os_string())
-            .field("key", &self.key.to_os_string())
-            .field("flags", &self.flags)
-            .finish()
-    }
-}
-
-impl DisplayDevice {
-    pub fn id(&self) -> String {
-        self.id.to_string()
-    }
-
-    pub fn is_enabled(&self) -> Result<bool> {
-        let information = DeviceInformation::CreateFromIdAsync(&self.id.to_hstring())?.get()?;
-        Ok(information.IsEnabled()?)
-    }
-
+impl MonitorTarget {
     /// Opens and returns a file handle for a display device using its DOS device path.\
     /// These handles are only used for the `DeviceIoControl` API (for internal displays);
     /// a handle can still be returned for external displays, but it should not be used.
     fn get_file_handle(&self) -> Result<HANDLE> {
+        let device_id = self.0.TryGetMonitor()?.DeviceId()?.to_os_string();
+        let device_id = WindowsString::from(device_id);
+
         // This could fail for virtual devices e.g. Remote Desktop sessions - they are not real monitors
         let handle = unsafe {
             CreateFileW(
-                self.id.as_pcwstr(),
+                device_id.as_pcwstr(),
                 (FILE_GENERIC_READ | FILE_GENERIC_WRITE).0,
                 FILE_SHARE_READ | FILE_SHARE_WRITE,
                 None,

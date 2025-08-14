@@ -9,10 +9,14 @@
 - unique wallpaper slider per monitor.
 - new shortcuts to create/delete and change virtual desktops.
 - add force restart of gui, via shortcut `Ctrl + Win + Alt + R`.
+- now workspaces are per monitor.
+- now workspaces persist over restarts.
 
 ### refactor
 - monitors ids.
 - wallpaper manager.
+- virtual desktops.
+- tiling window manager.
 
 ### fix
 - drag of text toolbar items not working.

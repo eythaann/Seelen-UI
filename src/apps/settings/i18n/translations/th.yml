@@ -163,6 +163,7 @@ shortcuts:
     focus_top: โฟกัสด้านบน
     increase_height: เพิ่มความสูง
     increase_width: เพิ่มความกว้าง
+    misc_force_restart: บังคับให้รีสตาร์ท
     misc_open_settings: เปิดการตั้งค่า
     misc_toggle_lock_tracing: สลับการติดตามล็อค (บันทึก)
     misc_toggle_win_event_tracing: สลับการติดตามเหตุการณ์ (บันทึก)
@@ -223,12 +224,6 @@ update:
   available: อัปเดตพร้อมใช้งาน!
   channel: อัปเดตช่อง
   downloading: ดาวน์โหลด ...
-vd:
-  disabled_windows_version: กลยุทธ์เดสก์ท็อปเสมือนจริงไม่พร้อมใช้งานสำหรับเวอร์ชัน Windows ของคุณ
-  strategy:
-    label: กลยุทธ์เดสก์ท็อปเสมือนจริง
-    native: พื้นเมือง
-    seelen: เซเล่น
 wall:
   backgrounds: วอลเปเปอร์
   blur: เบลอ

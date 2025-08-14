@@ -170,6 +170,7 @@ shortcuts:
     focus_top: Fokus på toppen
     increase_height: Forøg højden
     increase_width: Øg bredden
+    misc_force_restart: Fremtving genstart
     misc_open_settings: Åbn indstillinger
     misc_toggle_lock_tracing: Skift låsesporing (logfiler)
     misc_toggle_win_event_tracing: Slå Win Event Tracing til (logfiler)
@@ -231,14 +232,6 @@ update:
   available: Opdatering tilgængelig!
   channel: Opdateringskanal
   downloading: Download ...
-vd:
-  disabled_windows_version: >-
-    Native Virtual Desktop Strategy er ikke tilgængelig til din Windows
-    -version.
-  strategy:
-    label: Virtuel desktopstrategi
-    native: Hjemmehørende
-    seelen: Seelen
 wall:
   backgrounds: Baggrunde
   blur: Sløring

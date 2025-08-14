@@ -171,6 +171,7 @@ shortcuts:
     focus_top: Fokuslanmaq
     increase_height: Boylanmaq
     increase_width: Enini artırmaq
+    misc_force_restart: Güc yenidən başladın
     misc_open_settings: Parametrləri açın
     misc_toggle_lock_tracing: Kilid izləmə (qeydlər)
     misc_toggle_win_event_tracing: TOXGE WIN TƏDBİRLƏRİ İSTƏYİR (LOGS)
@@ -232,12 +233,6 @@ update:
   available: YENİLƏNİB!
   channel: Kanal yeniləmə
   downloading: Yükləmə ...
-vd:
-  disabled_windows_version: Doğma Virtual Masaüstü Strategiyası Windows versiyanız üçün mövcud deyil.
-  strategy:
-    label: Virtual masaüstü strategiyası
-    native: Doğma
-    seelen: Seelen
 wall:
   backgrounds: Divar kağızları
   blur: Sönük

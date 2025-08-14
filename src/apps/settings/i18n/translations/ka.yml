@@ -170,6 +170,7 @@ shortcuts:
     focus_top: ფოკუსირება
     increase_height: სიმაღლის გაზრდა
     increase_width: სიგანის გაზრდა
+    misc_force_restart: ძალის გადატვირთვა
     misc_open_settings: ღია პარამეტრები
     misc_toggle_lock_tracing: ჩაკეტილი საკეტის კვალი (ჟურნალი)
     misc_toggle_win_event_tracing: გადარიცხეთ მოიგეთ ღონისძიების კვალი (ჟურნალი)
@@ -231,14 +232,6 @@ update:
   available: განახლება ხელმისაწვდომია!
   channel: განაახლეთ არხი
   downloading: ჩამოტვირთვა ...
-vd:
-  disabled_windows_version: >-
-    მშობლიური ვირტუალური დესკტოპის სტრატეგია არ არის ხელმისაწვდომი თქვენი
-    Windows ვერსიისთვის.
-  strategy:
-    label: ვირტუალური დესკტოპის სტრატეგია
-    native: მკვიდრი ქალი
-    seelen: სელენი
 wall:
   backgrounds: ფონები
   blur: დაბენა

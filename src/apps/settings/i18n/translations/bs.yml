@@ -170,6 +170,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Povećati visinu
     increase_width: Povećati širinu
+    misc_force_restart: Restart sile
     misc_open_settings: Otvorite postavke
     misc_toggle_lock_tracing: Prebacivanje zaključavanja (trupci)
     misc_toggle_win_event_tracing: Toggle win za praćenje događaja (trupci)
@@ -231,12 +232,6 @@ update:
   available: Ažuriraj dostupno!
   channel: Ažuriraj kanal
   downloading: Preuzimanje ...
-vd:
-  disabled_windows_version: Native virtualna radna površina nije dostupna za vašu verziju za Windows.
-  strategy:
-    label: Virtualna strategija radne površine
-    native: Rođen
-    seelen: Seelen
 wall:
   backgrounds: Pozadine
   blur: Zamutiti

@@ -169,6 +169,7 @@ shortcuts:
     focus_top: Fookus ülaosa
     increase_height: Suurendage kõrgust
     increase_width: Suurendama laiust
+    misc_force_restart: Taaskäivituse sundimine
     misc_open_settings: Avatud sätted
     misc_toggle_lock_tracing: Lülitage lukustusjälg (logid)
     misc_toggle_win_event_tracing: Lülitage võidu sündmuste jälgimine (logid)
@@ -230,14 +231,6 @@ update:
   available: Värskendage saadaval!
   channel: Värskenduskanal
   downloading: Allalaadimine ...
-vd:
-  disabled_windows_version: >-
-    Natiivse virtuaalse töölaua strateegia pole teie Windowsi versiooni jaoks
-    saadaval.
-  strategy:
-    label: Virtuaalne töölaua strateegia
-    native: Põliselanik
-    seelen: Seelen
 wall:
   backgrounds: Taustapildid
   blur: Blur

@@ -31,7 +31,6 @@ use std::{
 use windows::{
     core::{BSTR, GUID, PCWSTR},
     ApplicationModel::AppInfo,
-    Devices::Display::Core::{DisplayManager, DisplayManagerOptions, DisplayTarget},
     Storage::Streams::{
         DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
     },
@@ -55,9 +54,8 @@ use windows::{
                 DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
-                EnumDisplayDevicesW, EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint,
-                MonitorFromWindow, DISPLAY_DEVICEW, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
-                MONITOR_DEFAULTTOPRIMARY,
+                EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint, MonitorFromWindow,
+                HMONITOR, MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
             },
         },
         Security::{
@@ -102,12 +100,12 @@ use windows::{
                 GetSystemMetrics, GetWindowLongW, GetWindowRect, GetWindowTextW,
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
                 PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW,
-                EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN,
-                SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER,
-                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
-                WS_SIZEBOX, WS_THICKFRAME,
+                GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
+                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
+                SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER, SW_RESTORE,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
+                WS_THICKFRAME,
             },
         },
     },
@@ -746,41 +744,6 @@ impl WindowsApi {
             GetPhysicalMonitorsFromHMONITOR(monitor, p_physical_monitors.as_mut())?;
         };
         Ok(p_physical_monitors)
-    }
-
-    pub fn get_monitor_target_by_idx(idx: usize) -> Result<DisplayTarget> {
-        let manager = DisplayManager::Create(DisplayManagerOptions::None)?;
-        let state = manager.TryReadCurrentStateForAllTargets()?;
-        let state = state.State()?;
-        let view = state.Views()?.GetAt(idx as u32)?;
-        let target = view.Paths()?.First()?.Current()?.Target()?;
-        Ok(target)
-    }
-
-    pub fn get_display_devices(monitor: HMONITOR) -> Result<Vec<DISPLAY_DEVICEW>> {
-        let info = Self::monitor_info(monitor)?;
-        let str_device = WindowsString::from_slice(&info.szDevice);
-        let mut devices = Vec::new();
-        for device_idx in 0.. {
-            let mut device = DISPLAY_DEVICEW {
-                cb: std::mem::size_of::<DISPLAY_DEVICEW>() as u32,
-                ..Default::default()
-            };
-            if !unsafe {
-                EnumDisplayDevicesW(
-                    str_device.as_pcwstr(),
-                    device_idx,
-                    &mut device,
-                    EDD_GET_DEVICE_INTERFACE_NAME,
-                )
-                .as_bool()
-            } {
-                break;
-            }
-            // maybe we need to check https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesa#remarks
-            devices.push(device);
-        }
-        Ok(devices)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen

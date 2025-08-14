@@ -44,8 +44,6 @@ const initialState: RootState = {
   },
   powerPlan: 'Unknown',
   batteries: [],
-  workspaces: [],
-  activeWorkspace: null,
   systemTray: [],
   networkAdapters: [],
   networkLocalIp: null,

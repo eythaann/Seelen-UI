@@ -13,6 +13,9 @@ pub struct WindowEnumerator {
     parent: Option<HWND>,
 }
 
+unsafe impl Send for WindowEnumerator {}
+unsafe impl Sync for WindowEnumerator {}
+
 impl WindowEnumerator {
     pub fn new() -> Self {
         Self { parent: None }

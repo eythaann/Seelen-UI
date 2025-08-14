@@ -164,6 +164,7 @@ shortcuts:
     focus_top: Dojukọ oke
     increase_height: Igasoke giga
     increase_width: Gbooro
+    misc_force_restart: Fi ipa mu
     misc_open_settings: Ṣi Eto
     misc_toggle_lock_tracing: Titiipa titiipa (awọn àkọọlẹ)
     misc_toggle_win_event_tracing: Tongo Win Iṣẹlẹ iṣẹlẹ (awọn àkọọlẹ)
@@ -224,12 +225,6 @@ update:
   available: Imudojuiwọn wa!
   channel: Ohun elo imudojuiwọn
   downloading: Gbigba lati ayelujara ...
-vd:
-  disabled_windows_version: Abitabi Ojú-iṣẹ Ọmọ-iṣẹ abinibi ko wa fun ẹya Windows rẹ.
-  strategy:
-    label: Foju tabili tabili
-    native: Ọmọ ibilẹ ọkunrin
-    seelen: Sibẹ
 wall:
   backgrounds: Ogiri ogiri
   blur: Abẹ

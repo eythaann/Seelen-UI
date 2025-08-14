@@ -171,6 +171,7 @@ shortcuts:
     focus_top: ඉහළට අවධානය යොමු කරන්න
     increase_height: උස වැඩි කරන්න
     increase_width: පළල වැඩි කිරීම
+    misc_force_restart: බලය නැවත ආරම්භ කරන්න
     misc_open_settings: විවෘත සැකසුම්
     misc_toggle_lock_tracing: ටොගල් අගුල ලුහුබැඳීම (ල logs ු-සටහන්)
     misc_toggle_win_event_tracing: ටොගල් ජයග්රාහී සිදුවීම් ලුහුබැඳීම (ල logs ු-සටහන්)
@@ -232,12 +233,6 @@ update:
   available: යාවත්කාලීන කිරීම!
   channel: නාලිකාව යාවත්කාලීන කරන්න
   downloading: බාගත කිරීම ...
-vd:
-  disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා ස්වදේශීය අතථ්ය ඩෙස්ක්ටොප් උපාය ලබා ගත නොහැක.
-  strategy:
-    label: අතථ්ය ඩෙස්ක්ටොප් උපායමාර්ගය
-    native: ස්වදේශික
-    seelen: සීලන්
 wall:
   backgrounds: බිතුපත්
   blur: බ්ලර්

@@ -172,6 +172,7 @@ shortcuts:
     focus_top: Фокус отгоре
     increase_height: Увеличете височината
     increase_width: Увеличете ширината
+    misc_force_restart: Принудително рестартиране
     misc_open_settings: Отворени настройки
     misc_toggle_lock_tracing: Toggle Lock Tracing (Logs)
     misc_toggle_win_event_tracing: Превключване на победа проследяване на събитията (logs)
@@ -233,12 +234,6 @@ update:
   available: Налична актуализация!
   channel: Канал за актуализиране
   downloading: Изтегляне ...
-vd:
-  disabled_windows_version: Native Virtual Desktop Strategy не е налична за вашата версия на Windows.
-  strategy:
-    label: Виртуална стратегия за настолни компютри
-    native: Роден
-    seelen: Зелен
 wall:
   backgrounds: Тапети
   blur: Размазване

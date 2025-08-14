@@ -167,6 +167,7 @@ shortcuts:
     focus_top: فوکس سر
     increase_height: قد زیاتول
     increase_width: پلنوالی زیات کړئ
+    misc_force_restart: ځواک بیاچالانول
     misc_open_settings: خلاص امستنې
     misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)
     misc_toggle_win_event_tracing: د لید لید پاراګ (ونې)
@@ -227,12 +228,6 @@ update:
   available: اوسمهالول شتون لري!
   channel: چینل تازه کول
   downloading: دانلود ...
-vd:
-  disabled_windows_version: اصلي مجازی ډیسک ډیسک ستراتیژي ستاسو د وینډوز نسخه لپاره شتون نلري.
-  strategy:
-    label: مجازی ډیسټاپ ستراتیژي
-    native: اصلي
-    seelen: تلل
 wall:
   backgrounds: والپيپرونه
   blur: روښانه

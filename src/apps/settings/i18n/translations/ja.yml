@@ -162,6 +162,7 @@ shortcuts:
     focus_top: フォーカストップ
     increase_height: 高さを増やします
     increase_width: 幅を増やします
+    misc_force_restart: 強制再起動
     misc_open_settings: 設定を開く
     misc_toggle_lock_tracing: トグルロックトレース（ログ）
     misc_toggle_win_event_tracing: トグルウィンイベントトレース（ログ）
@@ -219,12 +220,6 @@ update:
   available: 更新が利用可能です！
   channel: 更新チャンネル
   downloading: ダウンロード中...
-vd:
-  disabled_windows_version: このバージョンのWindowsでは、ネイティブの仮想デスクトップ戦略は利用できません。
-  strategy:
-    label: 仮想デスクトップ戦略
-    native: ネイティブ
-    seelen: Seelen
 wall:
   backgrounds: 壁紙
   blur: ブラー

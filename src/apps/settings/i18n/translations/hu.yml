@@ -171,6 +171,7 @@ shortcuts:
     focus_top: Fókusz teteje
     increase_height: Növelje a magasságot
     increase_width: Növelje a szélességet
+    misc_force_restart: Újraindítás kikényszerítése
     misc_open_settings: Nyissa meg a beállításokat
     misc_toggle_lock_tracing: Váltás zárkövetés (naplók)
     misc_toggle_win_event_tracing: Váltás a győzelem események nyomon követése (naplók)
@@ -232,12 +233,6 @@ update:
   available: A frissítés elérhető!
   channel: Frissítési csatorna
   downloading: Letöltés ...
-vd:
-  disabled_windows_version: A natív virtuális asztali stratégia nem érhető el a Windows verziójához.
-  strategy:
-    label: Virtuális asztali stratégia
-    native: Bennszülött
-    seelen: Seelen
 wall:
   backgrounds: Háttérképek
   blur: Elmosódás

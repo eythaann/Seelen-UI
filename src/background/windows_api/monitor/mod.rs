@@ -1,11 +1,19 @@
 mod brightness;
 
-use brightness::DisplayDevice;
 use itertools::Itertools;
-use windows::Win32::Graphics::Gdi::HMONITOR;
+use windows::{
+    Devices::Display::Core::{DisplayTarget, DisplayView},
+    Win32::Graphics::Gdi::HMONITOR,
+};
 
-use crate::{error_handler::Result, modules::input::domain::Point};
-use seelen_core::rect::Rect;
+use crate::{
+    error_handler::Result,
+    modules::{
+        input::domain::Point,
+        monitors::{MonitorManager, GLOBAL_DISPLAY_MANAGER},
+    },
+};
+use seelen_core::{rect::Rect, system_state::MonitorId};
 
 use super::{MonitorEnumerator, WindowsApi};
 
@@ -42,15 +50,6 @@ impl Monitor {
         self.0
     }
 
-    pub fn address(&self) -> usize {
-        self.0 .0 as _
-    }
-
-    pub fn at(index: usize) -> Option<Monitor> {
-        let monitors = MonitorEnumerator::get_all_v2().ok()?;
-        monitors.get(index).copied()
-    }
-
     pub fn index(&self) -> Result<usize> {
         let monitors = MonitorEnumerator::get_all_v2()?;
         let (idx, _) = monitors
@@ -58,17 +57,6 @@ impl Monitor {
             .find_position(|monitor| monitor == self)
             .ok_or("Invalid or expired monitor handle")?;
         Ok(idx)
-    }
-
-    pub fn by_id(id: &str) -> Option<Monitor> {
-        for m in MonitorEnumerator::get_all_v2().ok()? {
-            if let Ok(monitor_device_id) = m.stable_id() {
-                if monitor_device_id == id {
-                    return Some(m);
-                }
-            }
-        }
-        None
     }
 
     pub fn primary() -> Monitor {
@@ -79,30 +67,20 @@ impl Monitor {
         self.0 == WindowsApi::primary_monitor()
     }
 
+    pub fn as_monitor_view(&self) -> Result<MonitorView> {
+        MonitorManager::view_at(self.index()? as u32)
+    }
+
     pub fn name(&self) -> Result<String> {
-        let target = WindowsApi::get_monitor_target_by_idx(self.index()?)?;
-        Ok(target.TryGetMonitor()?.DisplayName()?.to_string())
+        self.as_monitor_view()?.primary_target()?.name()
     }
 
     pub fn stable_id(&self) -> Result<String> {
-        let target = WindowsApi::get_monitor_target_by_idx(self.index()?)?;
-        Ok(target.StableMonitorId()?.to_string())
+        self.as_monitor_view()?.primary_target()?.stable_id()
     }
 
-    fn diplay_devices(&self) -> Result<Vec<DisplayDevice>> {
-        WindowsApi::get_display_devices(self.0)
-            .map(|list| list.iter().map(DisplayDevice::from).collect())
-    }
-
-    /// the first display device is the primary
-    pub fn main_display_device(&self) -> Result<DisplayDevice> {
-        let diplay_devices = self.diplay_devices()?;
-        for device in diplay_devices {
-            if device.is_enabled()? {
-                return Ok(device);
-            }
-        }
-        Err("No enabled display device for this monitor".into())
+    pub fn stable_id2(&self) -> Result<MonitorId> {
+        self.as_monitor_view()?.primary_target()?.stable_id2()
     }
 
     pub fn rect(&self) -> Result<Rect> {
@@ -120,5 +98,76 @@ impl Monitor {
         let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(self.0)?;
         let text_scale_factor = WindowsApi::get_text_scale_factor()?;
         Ok(monitor_scale_factor * text_scale_factor)
+    }
+}
+
+/// represents a display screen view (one view can be shown in multiple displays 'mirrors')
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct MonitorView(DisplayView);
+
+impl MonitorView {
+    pub fn index(&self) -> Result<usize> {
+        let state = GLOBAL_DISPLAY_MANAGER.TryReadCurrentStateForModeQuery()?;
+        let state = state.State()?;
+
+        let id = self.primary_target()?.stable_id()?;
+
+        for (idx, view) in state.Views()?.into_iter().enumerate() {
+            let primary_path = view.Paths()?.GetAt(0)?;
+            let primary_target = primary_path.Target()?;
+            let pt_id = primary_target.StableMonitorId()?.to_string();
+
+            if pt_id == id {
+                return Ok(idx);
+            }
+        }
+        Err("Invalid or expired monitor view".into())
+    }
+
+    pub fn as_win32_monitor(&self) -> Result<Monitor> {
+        let win32_views = MonitorEnumerator::get_all_v2()?;
+        let monitor = win32_views.get(self.index()?).copied();
+        Ok(monitor.ok_or("Invalid or expired monitor view")?)
+    }
+
+    pub fn targets(&self) -> Result<Vec<MonitorTarget>> {
+        let mut targets = Vec::new();
+        for path in self.0.Paths()? {
+            targets.push(path.Target()?.into());
+        }
+        Ok(targets)
+    }
+
+    pub fn primary_target(&self) -> Result<MonitorTarget> {
+        Ok(self.0.Paths()?.GetAt(0)?.Target()?.into())
+    }
+}
+
+impl From<DisplayView> for MonitorView {
+    fn from(view: DisplayView) -> Self {
+        Self(view)
+    }
+}
+
+/// represents a physical screen/monitor
+pub struct MonitorTarget(DisplayTarget);
+
+impl MonitorTarget {
+    pub fn stable_id(&self) -> Result<String> {
+        Ok(self.0.StableMonitorId()?.to_string())
+    }
+
+    pub fn stable_id2(&self) -> Result<MonitorId> {
+        Ok(self.0.StableMonitorId()?.to_string().into())
+    }
+
+    pub fn name(&self) -> Result<String> {
+        Ok(self.0.TryGetMonitor()?.DisplayName()?.to_string())
+    }
+}
+
+impl From<DisplayTarget> for MonitorTarget {
+    fn from(target: DisplayTarget) -> Self {
+        Self(target)
     }
 }
