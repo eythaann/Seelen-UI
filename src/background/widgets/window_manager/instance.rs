@@ -73,27 +73,17 @@ impl WindowManagerV2 {
 
         window.set_ignore_cursor_events(true)?;
 
-        let window_label = Arc::new(window.label().to_owned());
         let monitor_id = Arc::new(monitor_id.to_owned());
+
         window.listen("complete-setup", move |_event| {
-            let window_label = window_label.clone();
             let monitor_id = monitor_id.clone();
 
             std::thread::spawn(move || -> Result<()> {
-                let app = get_app_handle();
                 let mut state = trace_lock!(WM_STATE);
-
-                if let Some(m) = state.get_monitor_mut(&monitor_id) {
-                    let w =
-                        m.get_workspace_mut(get_vd_manager().get_active_workspace_id(&monitor_id));
-                    app.emit_to(
-                        window_label.as_ref(),
-                        SeelenEvent::WMSetLayout,
-                        w.get_root_node(),
-                    )?;
-                }
-
-                app.emit(
+                let workspace = state
+                    .get_workspace_state(get_vd_manager().get_active_workspace_id(&monitor_id));
+                Self::render_workspace(&monitor_id, workspace)?;
+                get_app_handle().emit(
                     SeelenEvent::WMSetActiveWindow,
                     WindowsApi::get_foreground_window().0 as isize,
                 )?;

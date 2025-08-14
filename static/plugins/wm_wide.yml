@@ -144,7 +144,6 @@ metadata:
     lo: ຮູບແບບກ້ວາງສໍາລັບຈໍຕິດຕາມແນວນອນ.
     km: ប្លង់ធំទូលាយសម្រាប់ម៉ូនីទ័រផ្ដេក។
 plugin:
-  no_fallback_behavior: Float
   structure:
     type: Horizontal
     children:

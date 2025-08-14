@@ -6,9 +6,11 @@ use std::sync::Arc;
 use crate::{
     error::Result,
     trace_lock,
-    virtual_desktops::events::VirtualDesktopEvent,
-    windows_api::window::event::WinEvent,
-    windows_api::{monitor::Monitor, window::Window},
+    virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager},
+    windows_api::{
+        monitor::Monitor,
+        window::{event::WinEvent, Window},
+    },
 };
 
 use super::{cli::Axis, state::WM_STATE, WindowManagerV2};
@@ -68,10 +70,16 @@ impl WindowManagerV2 {
             } else {
                 Axis::Left
             };
+
+            let mut state = trace_lock!(WM_STATE);
+            state.update_size(window, axis, percentage_diff, true)?;
             log::trace!("window width changed by: {percentage_diff}%");
-            let state = trace_lock!(WM_STATE);
-            let (m, w) = state.update_size(window, axis, percentage_diff, true)?;
-            Self::render_workspace(&m.id, w)?;
+
+            let monitor_id = window.get_cached_data().monitor;
+            let current_workspace = get_vd_manager()
+                .get_active_workspace_id(&monitor_id)
+                .clone();
+            Self::render_workspace(&monitor_id, state.get_workspace_state(&current_workspace))?;
         }
 
         if initial_height != new_height {
@@ -81,10 +89,16 @@ impl WindowManagerV2 {
             } else {
                 Axis::Top
             };
+
+            let mut state = trace_lock!(WM_STATE);
+            state.update_size(window, axis, percentage_diff, true)?;
             log::trace!("window height changed by: {percentage_diff}%");
-            let state = trace_lock!(WM_STATE);
-            let (m, w) = state.update_size(window, axis, percentage_diff, true)?;
-            Self::render_workspace(&m.id, w)?;
+
+            let monitor_id = window.get_cached_data().monitor;
+            let current_workspace = get_vd_manager()
+                .get_active_workspace_id(&monitor_id)
+                .clone();
+            Self::render_workspace(&monitor_id, state.get_workspace_state(&current_workspace))?;
         }
 
         Self::force_retiling()?;
@@ -105,7 +119,7 @@ impl WindowManagerV2 {
             WinEvent::ObjectCreate | WinEvent::ObjectShow | WinEvent::SystemMinimizeEnd => {
                 if !Self::is_managed(window) && Self::should_be_managed(window.hwnd()) {
                     Self::add(window)?;
-                    Self::set_overlay_visibility(true)?;
+                    Self::set_overlay_visibility(Self::is_tiled(window))?;
                 }
             }
             WinEvent::ObjectDestroy | WinEvent::ObjectHide | WinEvent::SystemMinimizeStart => {
@@ -115,7 +129,7 @@ impl WindowManagerV2 {
             }
             WinEvent::ObjectFocus | WinEvent::SystemForeground => {
                 Self::set_active_window(window)?;
-                Self::set_overlay_visibility(Self::is_managed(window))?;
+                Self::set_overlay_visibility(Self::is_tiled(window))?;
             }
             // apps like firefox doesn't launch ObjectCreate
             WinEvent::ObjectNameChange => {
@@ -124,7 +138,7 @@ impl WindowManagerV2 {
                     && Self::should_be_managed(window.hwnd())
                 {
                     Self::add(window)?;
-                    Self::set_overlay_visibility(true)?;
+                    Self::set_overlay_visibility(Self::is_tiled(window))?;
                 }
             }
             WinEvent::SyntheticMaximizeStart => {
@@ -133,10 +147,12 @@ impl WindowManagerV2 {
             }
             WinEvent::SyntheticMaximizeEnd => {
                 // todo make this by monitor
-                Self::set_overlay_visibility(true)?;
+                Self::set_overlay_visibility(Self::is_tiled(window))?;
             }
             WinEvent::SyntheticFullscreenStart => Self::set_overlay_visibility(false)?,
-            WinEvent::SyntheticFullscreenEnd => Self::set_overlay_visibility(true)?,
+            WinEvent::SyntheticFullscreenEnd => {
+                Self::set_overlay_visibility(Self::is_tiled(window))?;
+            }
             _ => {}
         };
         Ok(())

@@ -11,6 +11,9 @@
 - add force restart of gui, via shortcut `Ctrl + Win + Alt + R`.
 - now workspaces are per monitor.
 - now workspaces persist over restarts.
+- on window manager windows now can be float or tiled.
+- implement focus change via keyboard hotkeys on tiling window manager.
+- implement container leaf swapping via keyboard hotkeys on tiling window manager.
 
 ### refactor
 - monitors ids.

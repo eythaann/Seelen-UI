@@ -1,17 +1,16 @@
+import { WmNode } from '@seelen-ui/lib/types';
 import { cx } from '@shared/styles';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';
 
-import { WmFallbackNode } from '../../domain';
-
-import { LeafContainer } from './leaf';
+import { Leaf } from './leaf';
 
 interface Props {
-  node: WmFallbackNode;
+  node: WmNode;
 }
 
-export function FallbackContainer({ node }: Props) {
+export function Stack({ node }: Props) {
   const { border } = useSelector(Selectors.settings);
 
   return (
@@ -21,20 +20,20 @@ export function FallbackContainer({ node }: Props) {
       }}
       className={cx('wm-container', 'wm-stack')}
     >
-      {node.handles.length > 1 && (
+      {node.windows.length > 1 && (
         <div
           className={cx('wm-stack-bar', {
             'wm-stack-bar-with-borders': border.enabled,
           })}
         >
-          {node.handles.map((handle) => (
+          {node.windows.map((handle) => (
             <div key={handle} className="wm-stack-bar-item">
               {handle}
             </div>
           ))}
         </div>
       )}
-      {node.active && <LeafContainer hwnd={node.active} />}
+      {node.active && <Leaf hwnd={node.active} />}
     </div>
   );
 }

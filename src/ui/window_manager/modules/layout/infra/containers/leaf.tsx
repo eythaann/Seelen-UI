@@ -15,7 +15,7 @@ interface Props {
   growFactor?: number;
 }
 
-export function LeafContainer({ hwnd, growFactor }: Props) {
+export function Leaf({ hwnd, growFactor }: Props) {
   const _version = useSelector(Selectors._version);
 
   const reservation = useSelector(Selectors.reservation);

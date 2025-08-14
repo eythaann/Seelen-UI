@@ -144,7 +144,6 @@ metadata:
     lo: ຮູບແບບຕາຂ່າຍໄຟຟ້າ, ມີປະໂຫຍດສໍາລັບຜູ້ຕິດຕາມຂ່າວໃຫຍ່.
     km: ប្លង់ក្រឡាចត្រង្គមានប្រយោជន៍សម្រាប់ម៉ូនីទ័រធំ ៗ ។
 plugin:
-  no_fallback_behavior: Float
   structure:
     type: Horizontal
     children:

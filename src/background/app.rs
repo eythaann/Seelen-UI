@@ -45,7 +45,7 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
 /** Struct should be initialized first before calling any other methods */
 #[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
-    instances: Vec<SluMonitorInstance>,
+    pub instances: Vec<SluMonitorInstance>,
     #[getset(get = "pub", get_mut = "pub")]
     rofi: Option<SeelenRofi>,
     #[getset(get = "pub", get_mut = "pub")]
@@ -112,7 +112,7 @@ impl Seelen {
 
         match state.is_window_manager_enabled() {
             true => {
-                WindowManagerV2::init_state()?;
+                WindowManagerV2::init_state();
                 WindowManagerV2::enumerate_all_windows()?;
             }
             false => WindowManagerV2::clear_state(),

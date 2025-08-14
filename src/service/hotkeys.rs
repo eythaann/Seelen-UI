@@ -139,13 +139,13 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> 
         DecreaseHeight => vec!["wm", "height", "decrease"],
         RestoreSizes => vec!["wm", "reset-workspace-size"],
         // Window Manger focused window sizing
-        FocusTop => vec!["wm", "focus", "top"],
-        FocusBottom => vec!["wm", "focus", "bottom"],
+        FocusTop => vec!["wm", "focus", "up"],
+        FocusBottom => vec!["wm", "focus", "down"],
         FocusLeft => vec!["wm", "focus", "left"],
         FocusRight => vec!["wm", "focus", "right"],
         // Window Manager focused window positioning
-        MoveWindowUp => vec!["wm", "move", "top"],
-        MoveWindowDown => vec!["wm", "move", "bottom"],
+        MoveWindowUp => vec!["wm", "move", "up"],
+        MoveWindowDown => vec!["wm", "move", "down"],
         MoveWindowLeft => vec!["wm", "move", "left"],
         MoveWindowRight => vec!["wm", "move", "right"],
         // Tiling window manager reservation
@@ -156,7 +156,7 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> 
         ReserveFloat => vec!["wm", "reserve", "float"],
         ReserveStack => vec!["wm", "reserve", "stack"],
         // Tiling window manager state
-        PauseTiling => vec!["wm", "pause"],
+        PauseTiling => vec!["wm", "toggle"],
         ToggleMonocle => vec!["wm", "toggle-monocle"],
         ToggleFloat => vec!["wm", "toggle-float"],
         CycleStackNext => vec!["wm", "cycle-stack", "next"],

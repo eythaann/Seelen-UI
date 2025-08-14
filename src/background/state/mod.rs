@@ -107,7 +107,7 @@ impl FullState {
         self.settings.shortcuts.enabled
     }
 
-    pub fn get_wm_layout_id(&self, _monitor: &MonitorId, _workspace_id: &WorkspaceId) -> PluginId {
+    pub fn get_wm_layout_id(&self, _workspace_id: &WorkspaceId) -> PluginId {
         let mut default = self.settings.by_widget.wm.default_layout.clone();
         if !default.is_valid() {
             default = "@default/wm-bspwm".into();

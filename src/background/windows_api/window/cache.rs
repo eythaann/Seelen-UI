@@ -8,7 +8,7 @@ use seelen_core::system_state::MonitorId;
 
 use super::Window;
 
-pub static WINDOW_CACHE_DICT: LazyLock<Arc<RwLock<HashMap<isize, WindowCachedData>>>> =
+static WINDOW_CACHE_DICT: LazyLock<Arc<RwLock<HashMap<isize, WindowCachedData>>>> =
     LazyLock::new(|| Arc::new(RwLock::new(HashMap::new())));
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -33,6 +33,7 @@ impl WindowCachedData {
 impl Window {
     /// use this to ensure the cache is initialized, useful if we need information like monitor
     /// where the window was destroyed
+    #[allow(dead_code)]
     pub fn init_cache(&self) {
         match WINDOW_CACHE_DICT.write().entry(self.address()) {
             std::collections::hash_map::Entry::Occupied(_) => {}

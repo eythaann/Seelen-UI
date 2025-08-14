@@ -1,116 +1,86 @@
-use std::{collections::HashMap, sync::Arc};
+use std::{
+    collections::HashMap,
+    sync::{Arc, LazyLock},
+};
 
 use itertools::Itertools;
-use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::{
+    rect::Rect,
     state::{
         value::{KnownPlugin, PluginValue},
-        NoFallbackBehavior, WmNode, WorkspaceId,
+        WindowManagerLayout, WmNode, WmNodeKind, WorkspaceId,
     },
-    system_state::MonitorId,
 };
 
 use crate::{
     error::Result,
-    modules::{input::domain::Point, monitors::MonitorManager},
+    log_error,
+    modules::input::domain::Point,
     state::application::FULL_STATE,
     virtual_desktops::get_vd_manager,
+    widgets::window_manager::node_ext::WmNodeExt,
     windows_api::{monitor::Monitor, window::Window},
 };
 
-use super::{cli::Axis, node_impl::WmNodeImpl};
+use super::cli::Axis;
 
-lazy_static! {
-    pub static ref WM_STATE: Arc<Mutex<WmV2State>> = Arc::new(Mutex::new({
-        let mut state = WmV2State::default();
+pub static WM_STATE: LazyLock<Arc<Mutex<WmState>>> = LazyLock::new(|| {
+    Arc::new(Mutex::new({
+        let mut state = WmState::default();
+        state.recreate();
         state
-            .init()
-            .expect("Failed to initialize Window Manager State");
-        state
-    }));
-}
-
-#[derive(Debug)]
-pub struct WmV2StateWorkspace {
-    root: Option<WmNodeImpl>,
-    no_fallback_behavior: NoFallbackBehavior,
-}
-
-#[derive(Debug)]
-pub struct WmV2StateMonitor {
-    pub id: MonitorId,
-    pub workspaces: HashMap<WorkspaceId, WmV2StateWorkspace>,
-}
+    }))
+});
 
 #[derive(Debug, Default)]
-pub struct WmV2State {
-    pub monitors: HashMap<MonitorId, WmV2StateMonitor>,
+pub struct WmState {
+    pub layouts: HashMap<WorkspaceId, WmWorkspaceState>,
 }
 
 #[allow(dead_code)]
-impl WmV2State {
+impl WmState {
     /// will enumarate all monitors and workspaces
-    pub fn init(&mut self) -> Result<()> {
-        let mut guard = get_vd_manager();
-
-        for view in MonitorManager::get_all_views()? {
-            let monitor_id = view.primary_target()?.stable_id2()?;
-            if self.monitors.contains_key(&monitor_id) {
-                continue;
-            }
-
-            let mut wm_monitor = WmV2StateMonitor::new(&monitor_id);
-
-            let vd_monitor = guard.get_monitor_mut(&monitor_id);
-            for workspace in &vd_monitor.workspaces {
-                if wm_monitor.workspaces.contains_key(&workspace.id) {
-                    continue;
-                }
-
-                wm_monitor.workspaces.insert(
-                    workspace.id.clone(),
-                    WmV2StateWorkspace::new(&monitor_id, &workspace.id),
-                );
-            }
-
-            wm_monitor.id = monitor_id.clone();
-            self.monitors.insert(monitor_id, wm_monitor);
+    pub fn recreate(&mut self) {
+        let vd = get_vd_manager();
+        for workspace in vd.iter_workspaces() {
+            self.layouts
+                .insert(workspace.id.clone(), WmWorkspaceState::new(&workspace.id));
         }
-        Ok(())
     }
 
-    pub fn get_monitor_mut(&mut self, monitor_id: &MonitorId) -> Option<&mut WmV2StateMonitor> {
-        self.monitors.get_mut(monitor_id)
+    pub fn is_managed(&self, window: &Window) -> bool {
+        self.layouts.values().any(|w| w.is_managed(window))
     }
 
-    pub fn contains(&self, window: &Window) -> bool {
-        self.trace_to(window).is_some()
+    pub fn is_tiled(&self, window: &Window) -> bool {
+        self.layouts.values().any(|w| w.is_tiled(window))
     }
 
-    pub fn trace_to(
-        &self,
+    pub fn get_workspace_state(&mut self, workspace: &WorkspaceId) -> &mut WmWorkspaceState {
+        self.layouts
+            .entry(workspace.clone())
+            .or_insert_with(|| WmWorkspaceState::new(workspace))
+    }
+
+    pub fn get_workspace_state_for_window(
+        &mut self,
         window: &Window,
-    ) -> Option<(&WmV2StateMonitor, &WmV2StateWorkspace, Vec<&WmNode>)> {
-        for m in self.monitors.values() {
-            if let Some((w, trace)) = m.trace_to(window) {
-                return Some((m, w, trace));
-            }
-        }
-        None
+    ) -> Option<&mut WmWorkspaceState> {
+        let window_workspace = get_vd_manager()
+            .workspace_containing_window(&window.address())
+            .map(|w| w.id.clone())?;
+        Some(self.get_workspace_state(&window_workspace))
     }
 
     pub fn get_node_at_point(&mut self, point: &Point) -> Option<&mut WmNode> {
         let monitor = Monitor::from(point);
-        if let Some(s_monitor) = self.monitors.get_mut(&monitor.stable_id2().ok()?) {
-            let current_workspace = get_vd_manager()
-                .get_monitor_mut(&s_monitor.id)
-                .current_workspace
-                .clone();
-
-            if let Some(w) = s_monitor.workspaces.get_mut(&current_workspace) {
-                return w.get_node_at_point(point);
-            }
+        let monitor_id = monitor.stable_id2().ok()?;
+        let current_workspace = get_vd_manager()
+            .get_active_workspace_id(&monitor_id)
+            .clone();
+        if let Some(w) = self.layouts.get_mut(&current_workspace) {
+            return w.get_node_at_point(point);
         }
         None
     }
@@ -129,189 +99,222 @@ impl WmV2State {
         axis: Axis,
         percentage: f32,
         relative: bool,
-    ) -> Result<(&WmV2StateMonitor, &WmV2StateWorkspace)> {
-        if let Some((m, w, trace)) = self.trace_to(window) {
-            let mut siblins_with_window_node = &Vec::new();
+    ) -> Result<()> {
+        let monitor_id = window.get_cached_data().monitor;
+        let current_workspace = get_vd_manager()
+            .get_active_workspace_id(&monitor_id)
+            .clone();
 
-            for n in trace.iter().rev() {
-                match n {
-                    WmNode::Horizontal(inner) => match axis {
-                        Axis::Horizontal | Axis::Left | Axis::Right => {
-                            if inner
-                                .children
-                                .iter()
-                                .filter(|n| !n.is_empty())
-                                .collect_vec()
-                                .len()
-                                >= 2
-                            {
-                                siblins_with_window_node = &inner.children;
-                                break;
-                            }
-                        }
-                        _ => {}
-                    },
-                    WmNode::Vertical(inner) => match axis {
-                        Axis::Horizontal | Axis::Top | Axis::Bottom => {
-                            if inner
-                                .children
-                                .iter()
-                                .filter(|n| !n.is_empty())
-                                .collect_vec()
-                                .len()
-                                >= 2
-                            {
-                                siblins_with_window_node = &inner.children;
-                                break;
-                            }
-                        }
-                        _ => {}
-                    },
-                    _ => {}
+        let Some(w) = self.layouts.get(&current_workspace) else {
+            return Ok(());
+        };
+
+        if w.layout.floating_windows.contains(&window.address()) {
+            let mut rect = window.inner_rect()?;
+            match axis {
+                Axis::Horizontal | Axis::Left | Axis::Right => {
+                    let width = (rect.right - rect.left) as f32;
+                    let center_x = rect.left + (width / 2.0) as i32;
+                    let new_width = (width * (1.0 + percentage / 100.0)) as i32;
+                    rect.left = center_x - new_width / 2;
+                    rect.right = center_x + new_width / 2;
                 }
-            }
-
-            if siblins_with_window_node.is_empty() {
-                log::warn!("Can't change size if the window is alone on axis");
-                return Ok((m, w));
-            }
-
-            let (node_of_window_idx, node_of_window) = siblins_with_window_node
-                .iter()
-                .find_position(|n| WmNodeImpl::new((*n).clone()).contains(window))
-                .expect("The algorithm at the top of this function is wrong / broken");
-
-            let siblins = siblins_with_window_node
-                .iter()
-                .enumerate()
-                .filter(|(idx, n)| {
-                    *idx != node_of_window_idx
-                        && match axis {
-                            Axis::Horizontal | Axis::Vertical => true,
-                            Axis::Left | Axis::Top => *idx < node_of_window_idx,
-                            Axis::Bottom | Axis::Right => *idx > node_of_window_idx,
-                        }
-                        && !n.is_empty()
-                })
-                .collect_vec();
-
-            if siblins.is_empty() {
-                log::warn!(
-                    "Can't change size at {axis:?} if there are no other windows on that side"
-                );
-                return Ok((m, w));
-            }
-
-            let total_pie: f32 = siblins.iter().map(|(_, n)| n.grow_factor().get()).sum();
-            let window_portion = node_of_window.grow_factor().get();
-
-            let to_grow = if relative { window_portion } else { total_pie } * percentage / 100f32;
-            let to_reduce = to_grow / siblins.len() as f32;
-
-            node_of_window.grow_factor().set(window_portion + to_grow);
-            for (_, n) in siblins {
-                n.grow_factor().set(n.grow_factor().get() - to_reduce);
-            }
-            return Ok((m, w));
+                Axis::Vertical | Axis::Top | Axis::Bottom => {
+                    let height = (rect.bottom - rect.top) as f32;
+                    let center_y = rect.top + (height / 2.0) as i32;
+                    let new_height = (height * (1.0 + percentage / 100.0)) as i32;
+                    rect.top = center_y - new_height / 2;
+                    rect.bottom = center_y + new_height / 2;
+                }
+            };
+            window.set_inner_rect(&rect)?;
+            return Ok(());
         }
 
-        Err("Trying to change size of an unmanaged window".into())
+        let trace = w.trace(window);
+        if trace.is_empty() {
+            return Err("Trying to change size of an unmanaged window".into());
+        }
+
+        let parent_to_search = match axis {
+            Axis::Horizontal | Axis::Left | Axis::Right => WmNodeKind::Horizontal,
+            Axis::Vertical | Axis::Top | Axis::Bottom => WmNodeKind::Vertical,
+        };
+
+        let first_matched_parent = trace.iter().rev().find(|n| {
+            n.kind == parent_to_search && n.children.iter().filter(|n| !n.is_empty()).count() >= 2
+        });
+
+        let Some(first_matched_parent) = first_matched_parent else {
+            log::warn!("Can't change size if the window is alone on axis");
+            return Ok(());
+        };
+
+        let (node_of_window_idx, node_of_window) = first_matched_parent
+            .children
+            .iter()
+            .find_position(|n| n.contains(window))
+            .expect("The algorithm at the top of this function is wrong / broken");
+
+        let siblings = first_matched_parent
+            .children
+            .iter()
+            .enumerate()
+            .filter(|(idx, n)| {
+                *idx != node_of_window_idx
+                    && match axis {
+                        Axis::Horizontal | Axis::Vertical => true,
+                        Axis::Left | Axis::Top => *idx < node_of_window_idx,
+                        Axis::Bottom | Axis::Right => *idx > node_of_window_idx,
+                    }
+                    && !n.is_empty()
+            })
+            .collect_vec();
+
+        if siblings.is_empty() {
+            log::warn!("Can't change size at {axis:?} if there are no other windows on that side");
+            return Ok(());
+        }
+
+        let total_pie: f32 = siblings.iter().map(|(_, n)| n.grow_factor.get()).sum();
+        let window_portion = node_of_window.grow_factor.get();
+
+        let to_grow = if relative { window_portion } else { total_pie } * percentage / 100f32;
+        let to_reduce = to_grow / siblings.len() as f32;
+
+        node_of_window.grow_factor.set(window_portion + to_grow);
+        for (_, n) in siblings {
+            n.grow_factor.set(n.grow_factor.get() - to_reduce);
+        }
+
+        Ok(())
     }
 }
 
+#[derive(Debug)]
 #[allow(dead_code)]
-impl WmV2StateMonitor {
-    pub fn new(monitor_id: &MonitorId) -> Self {
-        Self {
-            id: monitor_id.clone(),
-            workspaces: HashMap::new(),
-        }
-    }
-
-    pub fn get_workspace_mut(&mut self, workspace_id: &WorkspaceId) -> &mut WmV2StateWorkspace {
-        self.workspaces
-            .entry(workspace_id.clone())
-            .or_insert_with(|| WmV2StateWorkspace::new(&self.id, workspace_id))
-    }
-
-    pub fn contains(&self, window: &Window) -> bool {
-        self.workspaces.values().any(|w| w.contains(window))
-    }
-
-    pub fn trace_to(&self, window: &Window) -> Option<(&WmV2StateWorkspace, Vec<&WmNode>)> {
-        for w in self.workspaces.values() {
-            let trace = w.trace_to(window);
-            if !trace.is_empty() {
-                return Some((w, trace));
-            }
-        }
-        None
-    }
+pub struct WmWorkspaceState {
+    pub id: WorkspaceId,
+    pub layout: WindowManagerLayout,
 }
 
-#[allow(dead_code)]
-impl WmV2StateWorkspace {
-    pub fn new(monitor: &MonitorId, workspace: &WorkspaceId) -> Self {
+impl WmWorkspaceState {
+    pub fn new(workspace: &WorkspaceId) -> Self {
         let settings = FULL_STATE.load();
-        let layout_id = settings.get_wm_layout_id(monitor, workspace);
+        let layout_id = settings.get_wm_layout_id(workspace);
 
         let mut workspace = Self {
-            root: None,
-            no_fallback_behavior: NoFallbackBehavior::Float,
+            id: workspace.clone(),
+            layout: WindowManagerLayout::default(),
         };
 
         let plugin_with_layout = settings.plugins().values().find(|p| p.id == layout_id);
         let Some(plugin) = plugin_with_layout else {
             return workspace;
         };
+
         let PluginValue::Known(plugin) = &plugin.plugin else {
             return workspace;
         };
+
         let KnownPlugin::WManager(layout) = plugin else {
             return workspace;
         };
 
-        workspace.root = Some(WmNodeImpl::new(layout.structure.clone()));
-        workspace.no_fallback_behavior = layout.no_fallback_behavior.clone();
+        workspace.layout = layout.clone();
         workspace
     }
 
-    pub fn get_root_node(&self) -> Option<&WmNode> {
-        self.root.as_ref().map(|n| n.inner())
+    pub fn set_rect_to_float_initial_size(window: &Window) -> Result<()> {
+        let guard = FULL_STATE.load();
+        let config = &guard.settings.by_widget.wm.floating;
+
+        let monitor = window.monitor();
+        let monitor_dpi = monitor.scale_factor()?;
+        let monitor_rect = monitor.rect()?;
+        let monitor_width = monitor_rect.right - monitor_rect.left;
+        let monitor_height = monitor_rect.bottom - monitor_rect.top;
+
+        let window_width = (config.width * monitor_dpi) as i32;
+        let window_height = (config.height * monitor_dpi) as i32;
+
+        let x = monitor_rect.left + (monitor_width - window_width) / 2;
+        let y = monitor_rect.top + (monitor_height - window_height) / 2;
+
+        window.set_inner_rect(&Rect {
+            left: x,
+            top: y,
+            right: x + window_width,
+            bottom: y + window_height,
+        })
     }
 
-    pub fn add_window(&mut self, window: &Window) {
-        if let Some(node) = &mut self.root {
-            let residual = node.try_add_window(window);
-            if !residual.is_empty() {
-                log::warn!("Current Layout is full, and fallback container was not found");
-                // TODO
-            }
+    pub fn add_to_floats(&mut self, window: &Window) -> Result<()> {
+        let window_id = window.address();
+        if self.is_floating(&window_id) {
+            return Ok(());
+        }
+
+        log::trace!("floating window ({window_id:x})");
+        self.layout.floating_windows.push(window_id);
+        Self::set_rect_to_float_initial_size(window)
+    }
+
+    pub fn add_to_tiles(&mut self, window: &Window) {
+        if self.is_tiled(window) {
+            return;
+        }
+        log::trace!("tiling window ({:x})", window.address());
+
+        self.layout
+            .floating_windows
+            .retain(|w| w != &window.address());
+        let residual = self.layout.structure.add_window(window);
+        for w in residual {
+            log_error!(self.add_to_floats(&Window::from(w)));
         }
     }
 
-    pub fn remove_window(&mut self, window: &Window) {
-        if let Some(node) = &mut self.root {
-            let residual = node.remove_window(window);
-            if !residual.is_empty() {
-                log::warn!("Current Layout is full, and fallback container was not found");
-                // TODO
-            }
+    pub fn unmanage(&mut self, window: &Window) {
+        self.layout
+            .floating_windows
+            .retain(|w| w != &window.address());
+        let residual = self.layout.structure.remove_window(window);
+        for w in residual {
+            log_error!(self.add_to_floats(&Window::from(w)));
         }
     }
 
-    pub fn contains(&self, window: &Window) -> bool {
-        self.root.as_ref().is_some_and(|n| n.contains(window))
+    pub fn is_floating(&self, window_id: &isize) -> bool {
+        self.layout.floating_windows.contains(window_id)
     }
 
-    pub fn trace_to(&self, window: &Window) -> Vec<&WmNode> {
-        self.root.as_ref().map_or(vec![], |n| n.trace(window))
+    pub fn is_tiled(&self, window: &Window) -> bool {
+        self.layout.structure.contains(window)
+    }
+
+    pub fn is_managed(&self, window: &Window) -> bool {
+        self.is_floating(&window.address()) || self.is_tiled(window)
+    }
+
+    pub fn swap_nodes_containing_window(&mut self, a: &Window, b: &Window) -> Result<()> {
+        let ptr = &mut self.layout.structure as *mut WmNode;
+        let node_a = unsafe { &mut *ptr }.leaf_containing_mut(a);
+        let node_b = unsafe { &mut *ptr }.leaf_containing_mut(b);
+
+        if let (Some(node_a), Some(node_b)) = (node_a, node_b) {
+            std::mem::swap(&mut node_a.kind, &mut node_b.kind);
+            std::mem::swap(&mut node_a.active, &mut node_b.active);
+            std::mem::swap(&mut node_a.windows, &mut node_b.windows);
+        }
+        Ok(())
+    }
+
+    pub fn trace(&self, window: &Window) -> Vec<&WmNode> {
+        self.layout.structure.trace(window)
     }
 
     pub fn get_node_at_point(&mut self, point: &Point) -> Option<&mut WmNode> {
-        if let Some(root) = &mut self.root {
-            return root.get_node_at_point(point).ok()?;
-        }
-        None
+        self.layout.structure.get_node_at_point(point).ok()?
     }
 }

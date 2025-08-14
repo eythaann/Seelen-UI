@@ -1,7 +1,7 @@
 pub mod cache;
 pub mod event;
 
-use seelen_core::{rect::Rect, state::AppExtraFlag};
+use seelen_core::{rect::Rect, state::AppExtraFlag, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
 use std::fmt::{Debug, Display};
 
@@ -201,6 +201,10 @@ impl Window {
         Monitor::from(WindowsApi::monitor_from_window(self.0))
     }
 
+    pub fn monitor_id(&self) -> MonitorId {
+        self.get_cached_data().monitor
+    }
+
     pub fn is_window(&self) -> bool {
         WindowsApi::is_window(self.0)
     }
@@ -369,6 +373,17 @@ impl Window {
                 flags: flags.0,
             })
         }
+    }
+
+    pub fn set_inner_rect(&self, rect: &Rect) -> Result<()> {
+        let shadow = WindowsApi::shadow_rect(self.0)?;
+        let rect = RECT {
+            top: rect.top + shadow.top,
+            left: rect.left + shadow.left,
+            right: rect.right + shadow.right,
+            bottom: rect.bottom + shadow.bottom,
+        };
+        self.set_position(&rect, SET_WINDOW_POS_FLAGS(0))
     }
 
     pub fn focus(&self) -> Result<()> {

@@ -48,7 +48,7 @@ export async function loadStore() {
   setSettings(await Settings.getAsync());
   await Settings.onChange(setSettings);
 
-  await view.listen<WmNode | null>(SeelenEvent.WMSetLayout, (e) => {
+  await view.listen<WmNode>(SeelenEvent.WMSetLayout, (e) => {
     store.dispatch(Actions.setLayout(e.payload));
   });
 

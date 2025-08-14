@@ -1,14 +1,13 @@
 use clap::ValueEnum;
-use seelen_core::handlers::SeelenEvent;
 use serde::{Deserialize, Serialize};
-use tauri::Emitter;
 
-use crate::app::get_app_handle;
 use crate::error::Result;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
+use crate::virtual_desktops::get_vd_manager;
+use crate::widgets::window_manager::node_ext::WmNodeExt;
+use crate::widgets::window_manager::state::WmWorkspaceState;
 use crate::windows_api::window::Window;
-use crate::windows_api::WindowsApi;
 
 use super::instance::WindowManagerV2;
 use super::state::WM_STATE;
@@ -24,18 +23,23 @@ pub enum AllowedReservations {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
-pub enum AllowedFocus {
+pub enum NodeSiblingSide {
     Left,
     Right,
     Up,
     Down,
-    Latest,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
 pub enum Sizing {
     Increase,
     Decrease,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
+pub enum StepWay {
+    Next,
+    Prev,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
@@ -60,10 +64,8 @@ pub struct WindowManagerCli {
 pub enum WmCommand {
     /// Open Dev Tools (only works if the app is running in dev mode)
     Debug,
-    /// Pause the Seelen Window Manager.
-    Pause,
-    /// Resume the Seelen Window Manager.
-    Resume,
+    /// Toggles the Seelen Window Manager.
+    Toggle,
     /// Reserve space for a incoming window.
     Reserve {
         /// The position of the new window.
@@ -83,10 +85,16 @@ pub enum WmCommand {
     },
     /// Resets the size of the containers in current workspace to the default size.
     ResetWorkspaceSize,
+    /// Toggles the floating state of the window
+    ToggleFloat,
+    /// Moves the window to the specified position
+    Move { side: NodeSiblingSide },
+    /// Cycles the foregrounf node if it is a stack
+    CycleStack { way: StepWay },
     /// Focuses the window in the specified position.
     Focus {
         /// The position of the window to focus.
-        side: AllowedFocus,
+        side: NodeSiblingSide,
     },
 }
 
@@ -99,12 +107,62 @@ impl WindowManagerCli {
 impl WmCommand {
     pub fn process(self) -> Result<()> {
         match self {
-            WmCommand::Pause => {
-                // self.pause(true, true)?;
+            WmCommand::Toggle => {
+                FULL_STATE.rcu(move |state| {
+                    let mut state = state.cloned();
+                    state.settings.by_widget.wm.enabled = !state.settings.by_widget.wm.enabled;
+                    state
+                });
+                FULL_STATE.load().write_settings()?;
             }
-            WmCommand::Resume => {
-                // self.pause(false, true)?;
-                // Seelen::start_ahk_shortcuts()?;
+            WmCommand::Debug => {
+                #[cfg(debug_assertions)]
+                {
+                    let guard = trace_lock!(crate::app::SEELEN);
+                    for instance in &guard.instances {
+                        if let Some(wm) = &instance.wm {
+                            wm.window.open_devtools();
+                        }
+                    }
+                }
+            }
+            WmCommand::Width { action } => {
+                let foreground = Window::get_foregrounded();
+                let percentage = match action {
+                    Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
+                    Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
+                };
+
+                let mut state = trace_lock!(WM_STATE);
+                state.update_size(&foreground, Axis::Horizontal, percentage, false)?;
+
+                let monitor_id = foreground.monitor_id();
+                let current_workspace = get_vd_manager()
+                    .get_active_workspace_id(&monitor_id)
+                    .clone();
+                WindowManagerV2::render_workspace(
+                    &monitor_id,
+                    state.get_workspace_state(&current_workspace),
+                )?;
+            }
+            WmCommand::Height { action } => {
+                let foreground = Window::get_foregrounded();
+                let percentage = match action {
+                    Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
+                    Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
+                };
+
+                let mut state = trace_lock!(WM_STATE);
+                state.update_size(&foreground, Axis::Vertical, percentage, false)?;
+
+                let monitor_id = foreground.monitor_id();
+                let current_workspace = get_vd_manager()
+                    .get_active_workspace_id(&monitor_id)
+                    .clone();
+                WindowManagerV2::render_workspace(
+                    &monitor_id,
+                    state.get_workspace_state(&current_workspace),
+                )?;
             }
             WmCommand::Reserve { .. } => {
                 // self.reserve(side)?;
@@ -112,51 +170,78 @@ impl WmCommand {
             WmCommand::CancelReservation => {
                 // self.discard_reservation()?;
             }
-            WmCommand::Debug => {
-                /* #[cfg(debug_assertions)]
-                if let Some(monitor) = trace_lock!(crate::app::SEELEN).focused_monitor_mut() {
-                    if let Some(wm) = monitor.wm() {
-                        wm.window.open_devtools();
-                    }
-                } */
-            }
-            WmCommand::Width { action } => {
-                let foreground = Window::from(WindowsApi::get_foreground_window());
-                let percentage = match action {
-                    Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
-                    Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
-                };
-
-                let state = trace_lock!(WM_STATE);
-                let (m, w) = state.update_size(&foreground, Axis::Horizontal, percentage, false)?;
-                get_app_handle().emit_to(
-                    WindowManagerV2::get_label(&m.id),
-                    SeelenEvent::WMSetLayout,
-                    w.get_root_node(),
-                )?;
-            }
-            WmCommand::Height { action } => {
-                let foreground = Window::from(WindowsApi::get_foreground_window());
-                let percentage = match action {
-                    Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
-                    Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
-                };
-
-                let state = trace_lock!(WM_STATE);
-                let (m, w) = state.update_size(&foreground, Axis::Vertical, percentage, false)?;
-                get_app_handle().emit_to(
-                    WindowManagerV2::get_label(&m.id),
-                    SeelenEvent::WMSetLayout,
-                    w.get_root_node(),
-                )?;
-            }
             WmCommand::ResetWorkspaceSize => {
-                // self.emit(SeelenEvent::WMResetWorkspaceSize, ())?;
+                let foreground = Window::get_foregrounded();
+                let mut state = trace_lock!(WM_STATE);
+                if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
+                    if workspace.is_floating(&foreground.address()) {
+                        WmWorkspaceState::set_rect_to_float_initial_size(&foreground)?;
+                    }
+                }
             }
-            WmCommand::Focus { .. } => {
-                // self.emit(SeelenEvent::WMFocus, side)?;
+            WmCommand::ToggleFloat => {
+                let foreground = Window::get_foregrounded();
+                let mut state = trace_lock!(WM_STATE);
+                if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
+                    if workspace.is_floating(&foreground.address()) {
+                        workspace.add_to_tiles(&foreground);
+                        WindowManagerV2::set_overlay_visibility(true)?;
+                    } else if workspace.is_tiled(&foreground) {
+                        workspace.unmanage(&foreground);
+                        workspace.add_to_floats(&foreground)?;
+                        WindowManagerV2::set_overlay_visibility(false)?;
+                    }
+
+                    WindowManagerV2::render_workspace(
+                        &foreground.get_cached_data().monitor,
+                        workspace,
+                    )?;
+                }
             }
+            WmCommand::Focus { side } => {
+                let foreground = Window::get_foregrounded();
+                let mut state = trace_lock!(WM_STATE);
+                if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
+                    let siblings = workspace
+                        .layout
+                        .structure
+                        .get_siblings_at_side(&foreground, &side);
+                    match siblings.first().and_then(|sibling| sibling.face()) {
+                        Some(sibling) => {
+                            sibling.focus()?;
+                        }
+                        None => {
+                            log::warn!("There is no node at {side:?} to be focused");
+                        }
+                    }
+                }
+            }
+            WmCommand::Move { side } => {
+                let foreground = Window::get_foregrounded();
+                let mut state = trace_lock!(WM_STATE);
+                if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
+                    let siblings = workspace
+                        .layout
+                        .structure
+                        .get_siblings_at_side(&foreground, &side);
+
+                    match siblings.first().and_then(|sibling| sibling.face()) {
+                        Some(sibling) => {
+                            workspace.swap_nodes_containing_window(&foreground, &sibling)?;
+                            WindowManagerV2::render_workspace(
+                                &foreground.get_cached_data().monitor,
+                                workspace,
+                            )?;
+                        }
+                        None => {
+                            log::warn!("There is no node at {side:?} to be swapped");
+                        }
+                    }
+                }
+            }
+            WmCommand::CycleStack { .. } => {}
         };
+
         Ok(())
     }
 }

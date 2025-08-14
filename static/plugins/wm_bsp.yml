@@ -1,3 +1,4 @@
+#
 id: '@default/wm-bspwm'
 metadata:
   displayName:
@@ -144,7 +145,6 @@ metadata:
     th: เค้าโครงกระเบื้อง BSPWM เริ่มต้น
 target: '@seelen/window-manager'
 plugin:
-  no_fallback_behavior: Float
   structure:
     type: Horizontal
     children:
