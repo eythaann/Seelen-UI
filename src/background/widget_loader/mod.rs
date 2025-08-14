@@ -52,7 +52,7 @@ impl WidgetInstance {
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             &label.raw,
-            tauri::WebviewUrl::App("widget_loader/index.html".into()),
+            tauri::WebviewUrl::App("third_party/index.html".into()),
         )
         .title(title)
         .transparent(true)

@@ -51,9 +51,9 @@ async function completeTranslationsFor(localesDir: string) {
   }
 }
 
-await completeTranslationsFor('src/apps/toolbar/i18n/translations');
-await completeTranslationsFor('src/apps/seelenweg/i18n/translations');
-await completeTranslationsFor('src/apps/settings/i18n/translations');
-await completeTranslationsFor('src/apps/seelen_rofi/i18n/translations');
+await completeTranslationsFor('src/ui/toolbar/i18n/translations');
+await completeTranslationsFor('src/ui/seelenweg/i18n/translations');
+await completeTranslationsFor('src/ui/settings/i18n/translations');
+await completeTranslationsFor('src/ui/seelen_rofi/i18n/translations');
 
 await completeTranslationsFor('src/background/i18n');

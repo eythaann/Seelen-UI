@@ -69,14 +69,14 @@ async function extractIconsIfNecessary() {
 }
 
 const appFolders = fs
-  .readdirSync('src/apps')
-  .filter((item) => item !== 'shared' && fs.statSync(path.join('src/apps', item)).isDirectory());
+  .readdirSync('src/ui')
+  .filter((item) => item !== 'shared' && fs.statSync(path.join('src/ui', item)).isDirectory());
 
 const entryPoints = appFolders
   .map((folder) => {
-    const vanilla = `./src/apps/${folder}/index.ts`;
-    const react = `./src/apps/${folder}/index.tsx`;
-    const svelte = `./src/apps/${folder}/index.svelte`;
+    const vanilla = `./src/ui/${folder}/index.ts`;
+    const react = `./src/ui/${folder}/index.tsx`;
+    const svelte = `./src/ui/${folder}/index.svelte`;
     if (fs.existsSync(vanilla)) {
       return vanilla;
     }
@@ -90,7 +90,7 @@ const entryPoints = appFolders
   })
   .filter((file) => !!file);
 
-entryPoints.push('./src/apps/shared/integrity.ts');
+entryPoints.push('./libs/widgets-integrity/mod.ts');
 
 const OwnPlugin: esbuild.Plugin = {
   name: 'copy-public-by-entry',
@@ -101,14 +101,14 @@ const OwnPlugin: esbuild.Plugin = {
     build.onEnd(() => {
       // copy public folder for each widget
       appFolders.forEach((folder) => {
-        let source = `src/apps/${folder}/public`;
+        let source = `src/ui/${folder}/public`;
         let target = `dist/${folder}`;
         fs.cpSync(source, target, { recursive: true, force: true });
       });
 
       // move nested folders to root
-      fs.readdirSync('dist/src/apps').forEach((folder) => {
-        let source = `dist/src/apps/${folder}`;
+      fs.readdirSync('dist/src/ui').forEach((folder) => {
+        let source = `dist/src/ui/${folder}`;
         let target = `dist/${folder}`;
         fs.cpSync(source, target, { recursive: true, force: true });
       });
