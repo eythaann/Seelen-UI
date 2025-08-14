@@ -7,8 +7,8 @@ use crate::{
     error_handler::Result,
     trace_lock,
     virtual_desktops::events::VirtualDesktopEvent,
+    windows_api::window::event::WinEvent,
     windows_api::{monitor::Monitor, window::Window},
-    winevent::WinEvent,
 };
 
 use super::{cli::Axis, state::WM_STATE, WindowManagerV2};

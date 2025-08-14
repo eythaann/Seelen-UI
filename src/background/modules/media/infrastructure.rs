@@ -3,8 +3,8 @@ use tauri::Emitter;
 use windows::{core::GUID, Win32::Media::Audio::ISimpleAudioVolume};
 
 use crate::{
-    error_handler::Result, log_error, modules::media::application::MEDIA_MANAGER,
-    seelen::get_app_handle, trace_lock, windows_api::WindowsApi,
+    app::get_app_handle, error_handler::Result, log_error,
+    modules::media::application::MEDIA_MANAGER, trace_lock, windows_api::WindowsApi,
 };
 
 use super::{

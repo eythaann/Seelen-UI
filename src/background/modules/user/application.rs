@@ -24,7 +24,7 @@ use winreg::{
 };
 
 use crate::{
-    error_handler::Result, event_manager, log_error, seelen::get_app_handle, trace_lock,
+    app::get_app_handle, error_handler::Result, event_manager, log_error, trace_lock,
     windows_api::WindowsApi,
 };
 

@@ -1,7 +1,7 @@
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
-use crate::{error_handler::Result, seelen::get_app_handle};
+use crate::{app::get_app_handle, error_handler::Result};
 
 use super::FullState;
 

@@ -35,7 +35,8 @@ use std::{
 };
 
 use crate::{
-    error_handler::Result, log_error, popups::POPUPS_MANAGER, utils::constants::SEELEN_COMMON,
+    error_handler::Result, log_error, utils::constants::SEELEN_COMMON,
+    widgets::popups::POPUPS_MANAGER,
 };
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};

@@ -12,7 +12,7 @@ use windows::Win32::Networking::NetworkListManager::{
 };
 
 use crate::{
-    error_handler::Result, log_error, seelen::get_app_handle, utils::sleep_millis, windows_api::Com,
+    app::get_app_handle, error_handler::Result, log_error, utils::sleep_millis, windows_api::Com,
 };
 
 use super::application::{get_local_ip_address, NetworkManager};

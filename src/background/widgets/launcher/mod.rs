@@ -7,8 +7,8 @@ use tauri::WebviewWindow;
 use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS};
 
 use crate::{
-    error_handler::Result, log_error, modules::start::application::START_MENU_MANAGER,
-    seelen::get_app_handle, windows_api::WindowsApi,
+    app::get_app_handle, error_handler::Result, log_error,
+    modules::start::application::START_MENU_MANAGER, windows_api::WindowsApi,
 };
 
 pub struct SeelenRofi {

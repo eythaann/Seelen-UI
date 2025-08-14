@@ -14,9 +14,9 @@ use uuid::Uuid;
 use crate::{
     error_handler::Result,
     log_error,
-    popups::POPUPS_MANAGER,
     state::application::{download_remote_icons, FULL_STATE},
     utils::constants::SEELEN_COMMON,
+    widgets::popups::POPUPS_MANAGER,
 };
 
 pub const URI: &str = "seelen-ui.uri:";

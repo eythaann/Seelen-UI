@@ -1,4 +1,5 @@
 pub mod cache;
+pub mod event;
 
 use seelen_core::{rect::Rect, state::AppExtraFlag};
 use slu_ipc::messages::SvcAction;
@@ -17,9 +18,9 @@ use windows::{
 
 use crate::{
     cli::ServicePipe, error_handler::Result, modules::start::application::START_MENU_MANAGER,
-    seelen_bar::FancyToolbar, seelen_rofi::SeelenRofi, seelen_wall::SeelenWall,
-    seelen_weg::instance::SeelenWeg, seelen_wm_v2::instance::WindowManagerV2,
-    state::application::FULL_STATE,
+    state::application::FULL_STATE, widgets::launcher::SeelenRofi, widgets::toolbar::FancyToolbar,
+    widgets::wallpaper_manager::SeelenWall, widgets::weg::instance::SeelenWeg,
+    widgets::window_manager::instance::WindowManagerV2,
 };
 
 use super::{

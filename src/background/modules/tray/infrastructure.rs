@@ -2,10 +2,10 @@ use seelen_core::{handlers::SeelenEvent, system_state::TrayIcon};
 use tauri::Emitter;
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
     log_error,
     modules::tray::application::{TrayIconManager, TRAY_ICON_MANAGER},
-    seelen::get_app_handle,
     trace_lock,
 };
 

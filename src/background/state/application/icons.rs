@@ -16,8 +16,8 @@ use seelen_core::{
 use tauri::Emitter;
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
-    seelen::get_app_handle,
     trace_lock,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
 };

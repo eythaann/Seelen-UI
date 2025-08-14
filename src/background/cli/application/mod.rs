@@ -14,10 +14,10 @@ use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::{
-    cli::application::uri::process_uri, error_handler::Result, popups::cli::PopupsCli,
-    seelen::SEELEN, seelen_rofi::cli::AppLauncherCli, seelen_weg::cli::WegCli,
-    seelen_wm_v2::cli::WindowManagerCli, trace_lock, virtual_desktops::cli::VirtualDesktopCli,
-    widgets::show_settings,
+    app::SEELEN, cli::application::uri::process_uri, error_handler::Result, trace_lock,
+    virtual_desktops::cli::VirtualDesktopCli, widgets::launcher::cli::AppLauncherCli,
+    widgets::popups::cli::PopupsCli, widgets::show_settings, widgets::weg::cli::WegCli,
+    widgets::window_manager::cli::WindowManagerCli,
 };
 
 /// Seelen Command Line Interface

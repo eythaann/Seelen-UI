@@ -2,10 +2,10 @@ use seelen_core::{handlers::SeelenEvent, system_state::UIColors};
 use tauri::Emitter;
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
     log_error,
     modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
-    seelen::get_app_handle,
     trace_lock,
 };
 

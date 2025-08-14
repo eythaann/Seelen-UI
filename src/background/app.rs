@@ -8,24 +8,24 @@ use tauri::{AppHandle, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
 use crate::{
+    app_instance::SluMonitorInstance,
     cli::ServicePipe,
     error_handler::Result,
     hook::register_win_hook,
-    instance::SluMonitorInstance,
     log_error,
     modules::{
         monitors::{MonitorManager, MonitorManagerEvent},
         system_settings::application::{SystemSettings, SystemSettingsEvent},
     },
     restoration_and_migrations::RestorationAndMigration,
-    seelen_rofi::SeelenRofi,
-    seelen_wall::SeelenWall,
-    seelen_weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
-    seelen_wm_v2::instance::WindowManagerV2,
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::discord::start_discord_rpc,
+    widgets::launcher::SeelenRofi,
+    widgets::wallpaper_manager::SeelenWall,
+    widgets::weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
+    widgets::window_manager::instance::WindowManagerV2,
     windows_api::{event_window::create_background_window, monitor::MonitorView, Com},
     APP_HANDLE,
 };

@@ -9,9 +9,9 @@ use windows::Win32::{
 use windows_core::Interface;
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
     log_error,
-    seelen::get_app_handle,
     utils::{pwsh::PwshScript, was_installed_using_msix},
     windows_api::{Com, WindowsApi},
 };

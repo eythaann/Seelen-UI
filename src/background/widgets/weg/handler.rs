@@ -6,11 +6,11 @@ use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
-    seelen::get_app_handle,
-    seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     state::application::FULL_STATE,
     trace_lock,
+    widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
     windows_api::{window::Window, WindowsApi},
 };
 use windows::Win32::UI::WindowsAndMessaging::{SW_SHOWMINNOACTIVE, WM_CLOSE};

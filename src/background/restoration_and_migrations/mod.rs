@@ -1,8 +1,8 @@
 use tauri::{path::BaseDirectory, Manager};
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
-    seelen::get_app_handle,
     utils::{constants::SEELEN_COMMON, copy_dir_all},
 };
 
@@ -37,13 +37,19 @@ impl RestorationAndMigration {
     pub fn migrate_old_folders() -> Result<()> {
         let handle = get_app_handle();
         let data_path = handle.path().app_data_dir()?;
+
         let old_soundpacks = data_path.join("sounds");
-        let old_iconpacks = data_path.join("icons");
         if old_soundpacks.exists() {
             std::fs::remove_dir_all(old_soundpacks)?;
         }
+
+        let old_iconpacks = data_path.join("icons");
         if old_iconpacks.exists() {
-            std::fs::rename(old_iconpacks, data_path.join("old_iconpacks"))?;
+            let renamed = data_path.join("old_iconpacks");
+            if renamed.exists() {
+                std::fs::remove_dir_all(&renamed)?;
+            }
+            std::fs::rename(old_iconpacks, renamed)?;
         }
         Ok(())
     }

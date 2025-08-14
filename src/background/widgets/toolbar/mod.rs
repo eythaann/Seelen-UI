@@ -2,9 +2,9 @@ pub mod cli;
 pub mod hook;
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
     log_error,
-    seelen::get_app_handle,
     state::application::FULL_STATE,
     utils::{
         are_overlaped,

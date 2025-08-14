@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{error_handler::Result, popups::shortcut_registering::set_registering_shortcut};
+use crate::{
+    error_handler::Result, widgets::popups::shortcut_registering::set_registering_shortcut,
+};
 
 /// Manage the Seelen Popups.
 #[derive(Debug, Serialize, Deserialize, clap::Args)]

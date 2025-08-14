@@ -7,8 +7,8 @@ use seelen_core::{
 use tauri::Emitter;
 
 use crate::{
-    error_handler::Result, modules::uwp::UwpManager, seelen::get_app_handle,
-    seelen_weg::weg_items_impl::WEG_ITEMS_IMPL, trace_lock, utils::constants::SEELEN_COMMON,
+    app::get_app_handle, error_handler::Result, modules::uwp::UwpManager, trace_lock,
+    utils::constants::SEELEN_COMMON, widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
 };
 
 use super::FullState;

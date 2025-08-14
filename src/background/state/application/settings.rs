@@ -4,11 +4,11 @@ use seelen_core::{handlers::SeelenEvent, state::Settings};
 use tauri::Emitter;
 
 use crate::{
+    app::{get_app_handle, SEELEN},
     error_handler::Result,
-    seelen::{get_app_handle, SEELEN},
-    seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     trace_lock,
     utils::constants::SEELEN_COMMON,
+    widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
 };
 
 use super::FullState;

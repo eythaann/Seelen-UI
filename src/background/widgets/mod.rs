@@ -1,6 +1,14 @@
+pub mod launcher;
+pub mod popups;
+pub mod third_party;
+pub mod toolbar;
+pub mod wallpaper_manager;
+pub mod weg;
+pub mod window_manager;
+
 use tauri::Manager;
 
-use crate::{error_handler::Result, seelen::get_app_handle, utils::WidgetWebviewLabel};
+use crate::{app::get_app_handle, error_handler::Result, utils::WidgetWebviewLabel};
 
 pub fn show_settings() -> Result<()> {
     log::trace!("Show settings window");

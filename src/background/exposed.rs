@@ -10,10 +10,10 @@ use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use translators::Translator;
 
+use crate::app::{get_app_handle, Seelen};
 use crate::error_handler::Result;
 use crate::hook::HookManager;
 use crate::modules::input::Keyboard;
-use crate::seelen::{get_app_handle, Seelen};
 
 use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 use crate::utils::is_running_as_appx;
@@ -21,9 +21,9 @@ use crate::utils::pwsh::PwshScript;
 use crate::virtual_desktops::get_vd_manager;
 use crate::widgets::show_settings;
 use crate::windows_api::hdc::DeviceContext;
+use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
-use crate::winevent::WinEvent;
 use crate::{log_error, utils};
 
 #[tauri::command(async)]
@@ -224,13 +224,12 @@ async fn translate_text(
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::cli::*;
-    use crate::popups::handlers::*;
-    use crate::seelen_rofi::handler::*;
-    use crate::seelen_weg::handler::*;
-    use crate::seelen_wm_v2::handler::*;
     use crate::state::infrastructure::*;
-    use crate::system::brightness::*;
     use crate::virtual_desktops::handlers::*;
+    use crate::widgets::launcher::handler::*;
+    use crate::widgets::popups::handlers::*;
+    use crate::widgets::weg::handler::*;
+    use crate::widgets::window_manager::handler::*;
 
     use crate::modules::bluetooth::infrastructure::*;
     use crate::modules::language::*;

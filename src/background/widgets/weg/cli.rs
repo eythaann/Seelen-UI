@@ -6,10 +6,10 @@ use tauri_plugin_shell::ShellExt;
 use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
-    seelen::get_app_handle,
-    seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     trace_lock,
+    widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
     windows_api::{monitor::Monitor, window::Window, WindowsApi},
 };
 

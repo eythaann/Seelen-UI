@@ -1,7 +1,7 @@
 use seelen_core::{handlers::SeelenEvent, system_state::SystemLanguage};
 use tauri::Emitter;
 
-use crate::{error_handler::Result, seelen::get_app_handle, trace_lock};
+use crate::{app::get_app_handle, error_handler::Result, trace_lock};
 
 use super::application::{LanguageEvent, LanguageManager, LANGUAGE_MANAGER};
 

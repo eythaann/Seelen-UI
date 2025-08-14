@@ -8,12 +8,12 @@ use seelen_core::{
 use tauri::Emitter;
 
 use crate::{
+    app::get_app_handle,
     log_error,
     modules::bluetooth::{
         bluetooth_pair_manager::{BluetoothPairEvent, BluetoothPairManager},
         BluetoothEvent, BluetoothManager, BLUETOOTH_MANAGER,
     },
-    seelen::get_app_handle,
     trace_lock,
 };
 

@@ -24,10 +24,10 @@ use windows::{
 };
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
     event_manager, log_error,
     modules::uwp::get_hightest_quality_posible,
-    seelen::get_app_handle,
     trace_lock,
     utils::{convert_file_to_src, icon_extractor::extract_and_save_icon_umid, spawn_named_thread},
     windows_api::traits::EventRegistrationTokenExt,

@@ -2,31 +2,23 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 #![feature(never_type)]
 
+mod app;
+mod app_instance;
 mod cli;
 mod error_handler;
 mod exposed;
 mod hook;
-mod instance;
 mod modules;
-mod plugins;
-mod popups;
 mod restoration_and_migrations;
-mod seelen;
-mod seelen_bar;
-mod seelen_rofi;
-mod seelen_wall;
-mod seelen_weg;
-mod seelen_wm_v2;
 mod state;
 mod system;
 mod tauri_context;
+mod tauri_plugins;
 mod tray;
 mod utils;
 mod virtual_desktops;
-mod widget_loader;
 mod widgets;
 mod windows_api;
-mod winevent;
 
 #[macro_use]
 extern crate rust_i18n;
@@ -37,14 +29,14 @@ extern crate lazy_static;
 
 use std::sync::{atomic::AtomicBool, OnceLock};
 
+use app::{Seelen, SEELEN};
 use cli::{application::handle_console_client, SelfPipe, ServicePipe};
 use error_handler::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
 use modules::tray::application::ensure_tray_overflow_creation;
-use plugins::register_plugins;
-use seelen::{Seelen, SEELEN};
 use slu_ipc::messages::SvcAction;
+use tauri_plugins::register_plugins;
 use tray::try_register_tray_icon;
 use utils::{
     integrity::{
@@ -54,7 +46,7 @@ use utils::{
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
 
-use crate::seelen::get_app_handle;
+use crate::app::get_app_handle;
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static TOKIO_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();

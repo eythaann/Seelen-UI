@@ -3,8 +3,8 @@ use seelen_core::{handlers::SeelenEvent, resource::SluResource, state::Widget};
 use tauri::Emitter;
 
 use crate::{
+    app::{get_app_handle, SEELEN},
     error_handler::Result,
-    seelen::{get_app_handle, SEELEN},
     trace_lock,
     utils::constants::SEELEN_COMMON,
 };

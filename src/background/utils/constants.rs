@@ -7,7 +7,7 @@ use itertools::Itertools;
 use lazy_static::lazy_static;
 use tauri::Manager;
 
-use crate::seelen::get_app_handle;
+use crate::app::get_app_handle;
 
 lazy_static! {
     pub static ref SEELEN_COMMON: Arc<SeelenCommon> = Arc::new(SeelenCommon::new());

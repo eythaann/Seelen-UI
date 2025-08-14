@@ -1,4 +1,6 @@
-use crate::{error_handler::Result, windows_api::window::Window, winevent::WinEvent};
+use crate::{
+    error_handler::Result, windows_api::window::event::WinEvent, windows_api::window::Window,
+};
 
 use super::FancyToolbar;
 

@@ -17,8 +17,8 @@ use crate::hook::HookManager;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::Debouncer;
 use crate::virtual_desktops::events::VirtualDesktopEvent;
+use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
-use crate::winevent::WinEvent;
 use crate::{event_manager, log_error, trace_lock};
 
 static SAVE_DEBOUNCER: LazyLock<Debouncer> =

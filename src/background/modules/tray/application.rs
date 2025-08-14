@@ -34,10 +34,9 @@ use winreg::{
 };
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
-    event_manager, pcstr,
-    seelen::get_app_handle,
-    trace_lock,
+    event_manager, pcstr, trace_lock,
     utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
     windows_api::{
         event_window::{get_native_shell_hwnd, subscribe_to_background_window},

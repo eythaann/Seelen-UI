@@ -6,7 +6,7 @@ use seelen_core::{
 };
 use tauri::Emitter;
 
-use crate::{error_handler::Result, seelen::get_app_handle, utils::constants::SEELEN_COMMON};
+use crate::{app::get_app_handle, error_handler::Result, utils::constants::SEELEN_COMMON};
 
 use super::FullState;
 

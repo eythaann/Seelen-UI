@@ -12,15 +12,15 @@ use windows::Win32::{
 };
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
     log_error,
-    seelen::get_app_handle,
-    seelen_bar::FancyToolbar,
     state::application::FULL_STATE,
     utils::{
         are_overlaped,
         constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
     },
+    widgets::toolbar::FancyToolbar,
     windows_api::{window::Window, AppBarData, WindowsApi},
 };
 

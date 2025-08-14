@@ -1,8 +1,7 @@
-pub mod brightness;
-
 use tauri::Listener;
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
     log_error,
     modules::{
@@ -20,10 +19,10 @@ use crate::{
         tray::infrastructure::register_tray_icons_events,
         user::infrastructure::register_user_events,
     },
-    seelen::get_app_handle,
     trace_lock,
 };
 
+// todo replace this by self module lazy initilization
 pub fn declare_system_events_handlers() -> Result<()> {
     // avoid binding interfaces to main thread
     // others like bluetooth or wi-fi, bandwidth, etc depends on this.

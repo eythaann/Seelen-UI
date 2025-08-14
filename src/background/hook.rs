@@ -22,18 +22,18 @@ use windows::Win32::{
 };
 
 use crate::{
+    app::{get_app_handle, Seelen, SEELEN},
     error_handler::{Result, ResultLogExt},
     event_manager, log_error,
     modules::input::{domain::Point, Mouse},
-    seelen::{get_app_handle, Seelen, SEELEN},
-    seelen_weg::SeelenWeg,
-    seelen_wm_v2::instance::WindowManagerV2,
     state::application::FULL_STATE,
     trace_lock,
     utils::spawn_named_thread,
     virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager, SluWorkspacesManager},
+    widgets::weg::SeelenWeg,
+    widgets::window_manager::instance::WindowManagerV2,
+    windows_api::window::event::WinEvent,
     windows_api::{window::Window, WindowEnumerator},
-    winevent::WinEvent,
 };
 
 static HOOK_MANAGER_SKIPPER: LazyLock<Arc<Mutex<HookManagerSkipper>>> =

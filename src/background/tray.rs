@@ -8,9 +8,9 @@ use tauri::{
     AppHandle,
 };
 
+use crate::app::get_app_handle;
 use crate::error_handler::Result;
 use crate::log_error;
-use crate::seelen::get_app_handle;
 use crate::utils::sleep_millis;
 use crate::widgets::show_settings;
 

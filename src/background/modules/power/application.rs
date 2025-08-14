@@ -20,10 +20,10 @@ use windows::Win32::{
 };
 
 use crate::{
+    app::get_app_handle,
     error_handler::Result,
     event_manager, log_error,
     modules::power::domain::power_mode_to_serializable,
-    seelen::get_app_handle,
     trace_lock,
     utils::spawn_named_thread,
     windows_api::{event_window::subscribe_to_background_window, WindowsApi},
