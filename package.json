@@ -8,7 +8,7 @@
     "tauri": "tauri",
     "tauri:update": "tsx scripts/UpdateTauri.ts",
     "dev": "cargo build && tauri dev",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "build:ui": "tsx scripts/build.ts",
     "build:ui:watch": "tsx scripts/build.ts --serve",
     "build:ui:production": "tsx scripts/build.ts --production",
