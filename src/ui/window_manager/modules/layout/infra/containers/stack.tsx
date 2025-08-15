@@ -22,12 +22,13 @@ export function Stack({ node }: Props) {
     >
       {node.windows.length > 1 && (
         <div
+          data-allow-mouse-events
           className={cx('wm-stack-bar', {
             'wm-stack-bar-with-borders': border.enabled,
           })}
         >
           {node.windows.map((handle) => (
-            <div key={handle} className="wm-stack-bar-item">
+            <div key={handle} data-allow-mouse-events className="wm-stack-bar-item">
               {handle}
             </div>
           ))}

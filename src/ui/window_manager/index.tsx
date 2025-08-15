@@ -1,4 +1,5 @@
 import { getRootContainer } from '@shared';
+import { declareDocumentAsLayeredHitbox } from '@shared/layered';
 import { removeDefaultWebviewActions } from '@shared/setup';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -12,6 +13,7 @@ import '@shared/styles/reset.css';
 import './styles/global.css';
 
 removeDefaultWebviewActions();
+await declareDocumentAsLayeredHitbox((e) => e.hasAttribute('data-allow-mouse-events'));
 await loadStore();
 
 const container = getRootContainer();

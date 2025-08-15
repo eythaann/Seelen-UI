@@ -25,6 +25,7 @@ use crate::{
     state::application::FULL_STATE,
     trace_lock,
     virtual_desktops::get_vd_manager,
+    widgets::window_manager::node_ext::WmNodeExt,
     windows_api::{window::Window, WindowEnumerator, WindowsApi},
 };
 
@@ -76,12 +77,13 @@ impl WindowManagerV2 {
         Ok(())
     }
 
-    fn render_workspace(monitor_id: &str, w: &WmWorkspaceState) -> Result<()> {
+    fn render_workspace(monitor_id: &str, workspace: &WmWorkspaceState) -> Result<()> {
         // log::trace!("rendering layout {} in monitor {monitor_id}", w.layout.structure);
+        workspace.layout.structure.hide_non_active()?;
         get_app_handle().emit_to(
             Self::get_label(monitor_id),
             SeelenEvent::WMSetLayout,
-            &w.layout.structure,
+            &workspace.layout.structure,
         )?;
         Ok(())
     }

@@ -1,6 +1,7 @@
 use evalexpr::{context_map, eval_with_context, HashMapContext};
 use itertools::Itertools;
 use seelen_core::state::{WmNode, WmNodeKind};
+use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_RESTORE};
 
 use crate::{
     error::Result, modules::input::domain::Point, widgets::window_manager::cli::NodeSiblingSide,
@@ -16,7 +17,7 @@ pub trait WmNodeExt {
     /// trace the way to the window
     fn trace(&self, window: &Window) -> Vec<&Self>;
 
-    fn get_node_at_point(&mut self, point: &Point) -> Result<Option<&mut Self>>;
+    fn get_node_at_point(&mut self, point: &Point, ignore: &[isize]) -> Result<Option<&mut Self>>;
 
     /// trace and get the inmediate silbings of the node
     fn get_siblings_at_side(&self, window: &Window, side: &NodeSiblingSide) -> Vec<&Self>;
@@ -33,6 +34,8 @@ pub trait WmNodeExt {
 
     /// gets the first leaf node having a window, follows node priority.
     fn face(&self) -> Option<Window>;
+
+    fn hide_non_active(&self) -> Result<()>;
 }
 
 fn create_context(len: usize, is_reindexing: bool) -> HashMapContext {
@@ -278,10 +281,13 @@ impl WmNodeExt for WmNode {
         None
     }
 
-    fn get_node_at_point(&mut self, point: &Point) -> Result<Option<&mut Self>> {
+    fn get_node_at_point(&mut self, point: &Point, ignore: &[isize]) -> Result<Option<&mut Self>> {
         match self.kind {
             WmNodeKind::Leaf | WmNodeKind::Stack => {
                 if let Some(handle) = self.active {
+                    if ignore.contains(&handle) {
+                        return Ok(None);
+                    }
                     let window = Window::from(handle);
                     if point.is_inside_rect(&window.inner_rect()?) {
                         return Ok(Some(self));
@@ -290,12 +296,37 @@ impl WmNodeExt for WmNode {
             }
             WmNodeKind::Horizontal | WmNodeKind::Vertical => {
                 for child in self.children.iter_mut() {
-                    if let Some(node) = child.get_node_at_point(point)? {
+                    if let Some(node) = child.get_node_at_point(point, ignore)? {
                         return Ok(Some(node));
                     }
                 }
             }
         }
         Ok(None)
+    }
+
+    fn hide_non_active(&self) -> Result<()> {
+        match self.kind {
+            WmNodeKind::Leaf | WmNodeKind::Stack => {
+                if let Some(handle) = self.active {
+                    for addr in &self.windows {
+                        let window = Window::from(*addr);
+                        if *addr == handle {
+                            if window.is_minimized() {
+                                window.show_window(SW_RESTORE)?;
+                            }
+                        } else if !window.is_minimized() {
+                            window.show_window(SW_FORCEMINIMIZE)?;
+                        }
+                    }
+                }
+            }
+            WmNodeKind::Horizontal | WmNodeKind::Vertical => {
+                for child in self.children.iter() {
+                    child.hide_non_active()?;
+                }
+            }
+        }
+        Ok(())
     }
 }

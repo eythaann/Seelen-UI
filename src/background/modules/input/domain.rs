@@ -18,12 +18,12 @@ impl Point {
     }
 
     /// Retrieves the x position.
-    pub fn get_x(&self) -> i32 {
+    pub fn x(&self) -> i32 {
         self.0.x
     }
 
     /// Retrieves the y position.
-    pub fn get_y(&self) -> i32 {
+    pub fn y(&self) -> i32 {
         self.0.y
     }
 

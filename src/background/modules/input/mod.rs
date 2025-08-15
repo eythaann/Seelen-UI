@@ -593,28 +593,13 @@ impl Mouse {
     /// Retrieves the position of the mouse cursor, in screen coordinates.
     pub fn get_cursor_pos() -> Result<Point> {
         let mut pos: Point = Point::default();
-        // let ret = unsafe {
-        //     GetCursorPos(pos.as_mut())
-        // };
-
-        // if ret.as_bool() {
-        //     Ok(pos)
-        // } else {
-        //     Err(Error::last_os_error())
-        // }
         unsafe { GetCursorPos(pos.as_mut())? };
         Ok(pos)
     }
 
     /// Moves the cursor to the specified screen coordinates.
     pub fn set_cursor_pos(pos: Point) -> Result<()> {
-        // let ret = unsafe { SetCursorPos(pos.get_x(), pos.get_y()) };
-        // if ret.as_bool() {
-        //     Ok(())
-        // } else {
-        //     Err(Error::last_os_error())
-        // }
-        unsafe { SetCursorPos(pos.get_x(), pos.get_y())? };
+        unsafe { SetCursorPos(pos.x(), pos.y())? };
         Ok(())
     }
 
@@ -632,14 +617,14 @@ impl Mouse {
     /// ```
     pub fn move_to(&self, target: Point) -> Result<()> {
         let (width, height) = get_screen_size()?;
-        let x = min(max(0, target.get_x()), width);
-        let y = min(max(0, target.get_y()), height);
+        let x = min(max(0, target.x()), width);
+        let y = min(max(0, target.y()), height);
         let target = Point::new(x, y);
 
         if self.move_time > 0 {
             let source = Self::get_cursor_pos()?;
-            let delta_x = target.get_x() - source.get_x();
-            let delta_y = target.get_y() - source.get_y();
+            let delta_x = target.x() - source.x();
+            let delta_y = target.y() - source.y();
 
             let delta = max(delta_x.abs(), delta_y.abs());
             let steps = delta / 20;
@@ -648,7 +633,7 @@ impl Mouse {
                 let step_y = delta_y / steps;
                 let interval = Duration::from_millis(self.move_time / steps as u64);
                 for i in 1..steps {
-                    let pos = Point::new(source.get_x() + step_x * i, source.get_y() + step_y * i);
+                    let pos = Point::new(source.x() + step_x * i, source.y() + step_y * i);
                     Self::set_cursor_pos(pos)?;
                     sleep(interval);
                 }
@@ -674,8 +659,8 @@ impl Mouse {
         }
 
         self.before_click()?;
-        self.mouse_event(pos.get_x(), pos.get_y(), MOUSEEVENTF_LEFTDOWN)?;
-        self.mouse_event(pos.get_x(), pos.get_y(), MOUSEEVENTF_LEFTUP)?;
+        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTDOWN)?;
+        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTUP)?;
         self.after_click()?;
 
         Ok(())
@@ -698,13 +683,13 @@ impl Mouse {
 
         self.before_click()?;
 
-        self.mouse_event(pos.get_x(), pos.get_y(), MOUSEEVENTF_LEFTDOWN)?;
-        self.mouse_event(pos.get_x(), pos.get_y(), MOUSEEVENTF_LEFTUP)?;
+        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTDOWN)?;
+        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTUP)?;
 
         sleep(Duration::from_millis(max(200, self.interval)));
 
-        self.mouse_event(pos.get_x(), pos.get_y(), MOUSEEVENTF_LEFTDOWN)?;
-        self.mouse_event(pos.get_x(), pos.get_y(), MOUSEEVENTF_LEFTUP)?;
+        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTDOWN)?;
+        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTUP)?;
 
         self.after_click()?;
 
@@ -727,8 +712,8 @@ impl Mouse {
         }
 
         self.before_click()?;
-        self.mouse_event(pos.get_x(), pos.get_y(), MOUSEEVENTF_RIGHTDOWN)?;
-        self.mouse_event(pos.get_x(), pos.get_y(), MOUSEEVENTF_RIGHTUP)?;
+        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_RIGHTDOWN)?;
+        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_RIGHTUP)?;
         self.after_click()?;
 
         Ok(())

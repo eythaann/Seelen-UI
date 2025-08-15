@@ -87,6 +87,8 @@ pub enum WmCommand {
     ResetWorkspaceSize,
     /// Toggles the floating state of the window
     ToggleFloat,
+    /// Toggles workspace layout mode to monocle (single stack)
+    ToggleMonocle,
     /// Moves the window to the specified position
     Move { side: NodeSiblingSide },
     /// Cycles the foregrounf node if it is a stack
@@ -198,6 +200,18 @@ impl WmCommand {
                     )?;
                 }
             }
+            WmCommand::ToggleMonocle => {
+                let foreground = Window::get_foregrounded();
+                let monitor_id = foreground.get_cached_data().monitor;
+                let workspace = get_vd_manager()
+                    .get_active_workspace_id(&monitor_id)
+                    .clone();
+
+                let mut state = trace_lock!(WM_STATE);
+                let workspace = state.get_workspace_state(&workspace);
+                workspace.toggle_monocle();
+                WindowManagerV2::render_workspace(&monitor_id, workspace)?;
+            }
             WmCommand::Focus { side } => {
                 let foreground = Window::get_foregrounded();
                 let mut state = trace_lock!(WM_STATE);
@@ -239,7 +253,37 @@ impl WmCommand {
                     }
                 }
             }
-            WmCommand::CycleStack { .. } => {}
+            WmCommand::CycleStack { way } => {
+                let foreground = Window::get_foregrounded();
+                let mut state = trace_lock!(WM_STATE);
+                let Some(workspace) = state.get_workspace_state_for_window(&foreground) else {
+                    return Ok(());
+                };
+                let Some(node) = workspace.layout.structure.leaf_containing_mut(&foreground) else {
+                    return Ok(());
+                };
+
+                let active = node.active.ok_or("No active window")?;
+                let idx = node
+                    .windows
+                    .iter()
+                    .position(|w| *w == active)
+                    .ok_or("No active window")?;
+
+                let len = node.windows.len();
+                let next_idx = if way == StepWay::Next {
+                    (idx + 1) % len // next and cycle
+                } else {
+                    (idx + (len - 1)) % len // prev and cycle
+                };
+
+                node.active = Some(node.windows[next_idx]);
+
+                WindowManagerV2::render_workspace(
+                    &foreground.get_cached_data().monitor,
+                    workspace,
+                )?;
+            }
         };
 
         Ok(())

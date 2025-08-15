@@ -3,9 +3,11 @@ pub mod events;
 pub mod handlers;
 mod win_hook;
 
+use std::collections::HashSet;
 use std::fs::File;
 use std::sync::{Arc, LazyLock};
 
+use itertools::Itertools;
 use parking_lot::{Mutex, MutexGuard};
 use seelen_core::state::{DesktopWorkspace, VirtualDesktopMonitor, VirtualDesktops, WorkspaceId};
 use seelen_core::system_state::MonitorId;
@@ -26,6 +28,9 @@ static SAVE_DEBOUNCER: LazyLock<Debouncer> =
 
 pub static WORKSPACES_MANAGER: LazyLock<Arc<Mutex<SluWorkspacesManager>>> =
     LazyLock::new(|| Arc::new(Mutex::new(SluWorkspacesManager::init())));
+
+pub static HIDDEN_BY_USER: LazyLock<Arc<Mutex<HashSet<isize>>>> =
+    LazyLock::new(|| Arc::new(Mutex::new(HashSet::new())));
 
 pub struct SluWorkspacesManager(VirtualDesktops);
 
@@ -72,19 +77,27 @@ impl SluWorkspacesManager {
         self.0.pinned.contains(window_id)
     }
 
-    fn hide_workspace(workspace: &DesktopWorkspace) {
+    fn hide_workspace(workspace: &DesktopWorkspace, force: bool) {
+        let mode = if force { SW_FORCEMINIMIZE } else { SW_MINIMIZE };
         for addr in &workspace.windows {
             let window = Window::from(*addr);
             if window.is_window() && !window.is_minimized() {
                 HookManager::skip_next_event(WinEvent::SystemMinimizeStart, window.address());
-                log_error!(window.show_window(SW_MINIMIZE));
+                log_error!(window.show_window_async(mode));
             }
         }
     }
 
     fn restore_workspace(workspace: &DesktopWorkspace) {
-        for addr in &workspace.windows {
-            let window = Window::from(*addr);
+        let hidden_by_user = trace_lock!(HIDDEN_BY_USER);
+        let filtered = workspace
+            .windows
+            .iter()
+            .filter(|w| !hidden_by_user.contains(w))
+            .collect_vec();
+
+        for addr in &filtered {
+            let window = Window::from(**addr);
             if window.is_window() && window.is_minimized() {
                 HookManager::skip_next_event(WinEvent::SystemMinimizeEnd, window.address());
                 // use normal show instead async cuz it will keep the order of restoring
@@ -93,8 +106,8 @@ impl SluWorkspacesManager {
         }
 
         // ensure correct focus
-        if let Some(last) = workspace.windows.last() {
-            log_error!(Window::from(*last).focus());
+        if let Some(last) = filtered.last() {
+            log_error!(Window::from(**last).focus());
         }
     }
 
@@ -121,7 +134,7 @@ impl SluWorkspacesManager {
             .ok_or("workspace not found")?;
 
         monitor.current_workspace = workspace_to_change.id.clone();
-        Self::hide_workspace(current);
+        Self::hide_workspace(current, false);
         Self::restore_workspace(workspace_to_change);
 
         Self::event_tx().send(VirtualDesktopEvent::DesktopChanged {
@@ -145,7 +158,7 @@ impl SluWorkspacesManager {
                 return Ok(()); // nothing to do
             }
             monitor.current_workspace = workspace_to_change.id.clone();
-            Self::hide_workspace(current);
+            Self::hide_workspace(current, false);
             Self::restore_workspace(workspace_to_change);
         }
 
@@ -195,7 +208,7 @@ impl SluWorkspacesManager {
         }
 
         Self::event_tx()
-            .send(VirtualDesktopEvent::WindowChanged {
+            .send(VirtualDesktopEvent::WindowMoved {
                 window: *window_id,
                 desktop: target_id,
             })
@@ -248,7 +261,7 @@ impl SluWorkspacesManager {
 
             for addr in deleted.windows {
                 Self::event_tx()
-                    .send(VirtualDesktopEvent::WindowChanged {
+                    .send(VirtualDesktopEvent::WindowMoved {
                         window: addr,
                         desktop: fallback.id.clone(),
                     })

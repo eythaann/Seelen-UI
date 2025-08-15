@@ -6,8 +6,9 @@ use application::FullState;
 use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
+        value::{KnownPlugin, PluginValue},
         WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetInstanceType,
-        WorkspaceId,
+        WindowManagerLayout, WorkspaceId,
     },
     system_state::MonitorId,
 };
@@ -105,6 +106,27 @@ impl FullState {
 
     pub fn are_shortcuts_enabled(&self) -> bool {
         self.settings.shortcuts.enabled
+    }
+
+    pub fn get_wm_layout(&self, workspace_id: &WorkspaceId) -> WindowManagerLayout {
+        let base = WindowManagerLayout::default();
+
+        let layout_id = self.get_wm_layout_id(workspace_id);
+
+        let plugin_with_layout = self.plugins().values().find(|p| p.id == layout_id);
+        let Some(plugin) = plugin_with_layout else {
+            return base;
+        };
+
+        let PluginValue::Known(plugin) = &plugin.plugin else {
+            return base;
+        };
+
+        let KnownPlugin::WManager(layout) = plugin else {
+            return base;
+        };
+
+        layout.clone()
     }
 
     pub fn get_wm_layout_id(&self, _workspace_id: &WorkspaceId) -> PluginId {

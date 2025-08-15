@@ -5,8 +5,10 @@ use std::sync::Arc;
 
 use crate::{
     error::Result,
+    modules::input::Mouse,
     trace_lock,
     virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager},
+    widgets::window_manager::node_ext::WmNodeExt,
     windows_api::{
         monitor::Monitor,
         window::{event::WinEvent, Window},
@@ -29,12 +31,24 @@ impl WindowManagerV2 {
                 // Self::discard_reservation()?;
                 Self::workspace_changed(monitor, workspace)?;
             }
-            VirtualDesktopEvent::WindowChanged { window, .. } => {
+            VirtualDesktopEvent::WindowAdded { window, desktop: _ } => {
+                let window = &Window::from(*window);
+                if !Self::is_managed(window) && Self::should_be_managed(window.hwnd()) {
+                    Self::add(window)?;
+                    Self::set_overlay_visibility(Self::is_tiled(window))?;
+                }
+            }
+            VirtualDesktopEvent::WindowMoved { window, .. } => {
                 let window = &Window::from(*window);
                 if Self::is_managed(window) {
-                    log::trace!("window changed: {window:?}");
                     Self::remove(window)?;
                     Self::add(window)?;
+                }
+            }
+            VirtualDesktopEvent::WindowRemoved { window } => {
+                let window = &Window::from(*window);
+                if Self::is_managed(window) {
+                    Self::remove(window)?;
                 }
             }
             _ => {}
@@ -43,7 +57,7 @@ impl WindowManagerV2 {
     }
 
     fn system_move_size_end(window: &Window) -> Result<()> {
-        if !Self::is_managed(window) {
+        if !Self::is_tiled(window) {
             return Ok(());
         }
 
@@ -56,50 +70,58 @@ impl WindowManagerV2 {
         }
 
         let initial_rect = trace_lock!(SystemMoveSizeStartRect);
+        let end_rect = window.inner_rect()?;
+
         let initial_width = (initial_rect.right - initial_rect.left) as f32;
         let initial_height = (initial_rect.bottom - initial_rect.top) as f32;
 
-        let rect = window.inner_rect()?;
-        let new_width = (rect.right - rect.left) as f32;
-        let new_height = (rect.bottom - rect.top) as f32;
+        let new_width = (end_rect.right - end_rect.left) as f32;
+        let new_height = (end_rect.bottom - end_rect.top) as f32;
+
+        let mut state = trace_lock!(WM_STATE);
+        let monitor_id = window.get_cached_data().monitor;
+
+        // not resized only dragged/moved
+        if initial_width == new_width && initial_height == new_height {
+            if let Some(workspace) = state.get_workspace_state_for_window(window) {
+                if let Some(node) =
+                    workspace.get_node_at_point(&Mouse::get_cursor_pos()?, &[window.address()])
+                {
+                    if let Some(face) = node.face() {
+                        workspace.swap_nodes_containing_window(window, &face)?;
+                    }
+                }
+                Self::render_workspace(&monitor_id, workspace)?;
+            }
+            return Ok(());
+        }
 
         if initial_width != new_width {
             let percentage_diff = (new_width - initial_width) / initial_width * 100.0;
-            let axis = if rect.left == initial_rect.left {
+            let axis = if end_rect.left == initial_rect.left {
                 Axis::Right
             } else {
                 Axis::Left
             };
-
-            let mut state = trace_lock!(WM_STATE);
             state.update_size(window, axis, percentage_diff, true)?;
             log::trace!("window width changed by: {percentage_diff}%");
-
-            let monitor_id = window.get_cached_data().monitor;
-            let current_workspace = get_vd_manager()
-                .get_active_workspace_id(&monitor_id)
-                .clone();
-            Self::render_workspace(&monitor_id, state.get_workspace_state(&current_workspace))?;
         }
 
         if initial_height != new_height {
             let percentage_diff = (new_height - initial_height) / initial_height * 100.0;
-            let axis = if rect.top == initial_rect.top {
+            let axis = if end_rect.top == initial_rect.top {
                 Axis::Bottom
             } else {
                 Axis::Top
             };
-
-            let mut state = trace_lock!(WM_STATE);
             state.update_size(window, axis, percentage_diff, true)?;
             log::trace!("window height changed by: {percentage_diff}%");
-
-            let monitor_id = window.get_cached_data().monitor;
-            let current_workspace = get_vd_manager()
-                .get_active_workspace_id(&monitor_id)
-                .clone();
-            Self::render_workspace(&monitor_id, state.get_workspace_state(&current_workspace))?;
         }
+
+        let current_workspace = get_vd_manager()
+            .get_active_workspace_id(&monitor_id)
+            .clone();
+        Self::render_workspace(&monitor_id, state.get_workspace_state(&current_workspace))?;
 
         Self::force_retiling()?;
         Self::set_overlay_visibility(true)?;
@@ -109,37 +131,18 @@ impl WindowManagerV2 {
     pub fn process_win_event(event: WinEvent, window: &Window) -> Result<()> {
         match event {
             WinEvent::SystemMoveSizeStart => {
-                if Self::is_managed(window) {
+                if Self::is_tiled(window) {
                     Self::set_overlay_visibility(false)?;
                     *trace_lock!(SystemMoveSizeStartRect) = window.inner_rect()?;
                     *trace_lock!(SystemMoveSizeStartMonitor) = window.monitor();
                 }
             }
-            WinEvent::SystemMoveSizeEnd => Self::system_move_size_end(window)?,
-            WinEvent::ObjectCreate | WinEvent::ObjectShow | WinEvent::SystemMinimizeEnd => {
-                if !Self::is_managed(window) && Self::should_be_managed(window.hwnd()) {
-                    Self::add(window)?;
-                    Self::set_overlay_visibility(Self::is_tiled(window))?;
-                }
-            }
-            WinEvent::ObjectDestroy | WinEvent::ObjectHide | WinEvent::SystemMinimizeStart => {
-                if Self::is_managed(window) {
-                    Self::remove(window)?;
-                }
+            WinEvent::SystemMoveSizeEnd => {
+                Self::system_move_size_end(window)?;
             }
             WinEvent::ObjectFocus | WinEvent::SystemForeground => {
                 Self::set_active_window(window)?;
                 Self::set_overlay_visibility(Self::is_tiled(window))?;
-            }
-            // apps like firefox doesn't launch ObjectCreate
-            WinEvent::ObjectNameChange => {
-                if window.is_focused()
-                    && !Self::is_managed(window)
-                    && Self::should_be_managed(window.hwnd())
-                {
-                    Self::add(window)?;
-                    Self::set_overlay_visibility(Self::is_tiled(window))?;
-                }
             }
             WinEvent::SyntheticMaximizeStart => {
                 // todo make this by monitor

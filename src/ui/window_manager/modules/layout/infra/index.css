@@ -6,22 +6,13 @@
 }
 
 .wm-container {
-  position: relative;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0%;
   gap: var(--config-containers-gap);
 
-  &:first-child:last-child {
-    flex-grow: 1 !important; /* force be full size on single window */
-  }
-
   &.wm-leaf {
-    border-radius: 10px;
-
-    &.wm-leaf-focused {
-      z-index: 1;
-    }
+    border-radius: 10px; /* windows 11 border radius */
   }
 
   &.wm-stack {
@@ -29,14 +20,16 @@
     flex-direction: column;
 
     .wm-stack-bar {
+      position: relative;
+
       max-width: fit-content;
       display: flex;
       gap: var(--config-containers-gap);
       border-radius: 8px;
       width: 100%;
+      height: 30px;
 
       .wm-stack-bar-item {
-        padding: 6px;
         max-width: 100px;
         overflow: hidden;
         text-wrap: nowrap;

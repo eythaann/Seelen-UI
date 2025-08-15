@@ -18,7 +18,9 @@ class LayeredHitbox {
   }
 }
 
-export async function declareDocumentAsLayeredHitbox(): Promise<void> {
+export async function declareDocumentAsLayeredHitbox(
+  shouldAllowMouseEvent: (element: Element) => boolean = (element) => element != document.body,
+): Promise<void> {
   const webview = TauriWindow.getCurrentWindow();
   const { x, y } = await webview.outerPosition();
   const { width, height } = await webview.outerSize();
@@ -64,23 +66,23 @@ export async function declareDocumentAsLayeredHitbox(): Promise<void> {
     const adjustedX = (mouseX - windowX) / globalThis.devicePixelRatio;
     const adjustedY = (mouseY - windowY) / globalThis.devicePixelRatio;
 
-    const isOverBody = document.elementFromPoint(adjustedX, adjustedY) == document.body;
-    if (isOverBody && !data.isIgnoringCursorEvents) {
-      data.isIgnoringCursorEvents = true;
-      webview.setIgnoreCursorEvents(true);
+    const elementAtPoint = document.elementFromPoint(adjustedX, adjustedY);
+    if (!elementAtPoint) {
+      return;
     }
 
-    if (!isOverBody && data.isIgnoringCursorEvents) {
-      data.isIgnoringCursorEvents = false;
-      webview.setIgnoreCursorEvents(false);
+    const shouldAllow = shouldAllowMouseEvent(elementAtPoint);
+    if (shouldAllow == data.isIgnoringCursorEvents) {
+      data.isIgnoringCursorEvents = !shouldAllow;
+      webview.setIgnoreCursorEvents(!shouldAllow);
     }
   });
 
   globalThis.addEventListener('touchstart', (e) => {
-    const isOverBody = e.target == document.body;
-    if (isOverBody && !data.isIgnoringCursorEvents) {
-      data.isIgnoringCursorEvents = true;
-      webview.setIgnoreCursorEvents(data.isLayeredEnabled);
+    const shouldAllow = shouldAllowMouseEvent(e.target as Element);
+    if (shouldAllow == data.isIgnoringCursorEvents) {
+      data.isIgnoringCursorEvents = !shouldAllow;
+      webview.setIgnoreCursorEvents(!shouldAllow);
     }
   });
 

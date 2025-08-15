@@ -300,7 +300,7 @@ pub fn register_win_hook() -> Result<()> {
         loop {
             if let Ok(pos) = Mouse::get_cursor_pos() {
                 if last_pos != pos {
-                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.get_x(), pos.get_y()]);
+                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.x(), pos.y()]);
                     last_pos = pos;
                 }
             }

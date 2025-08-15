@@ -15,9 +15,16 @@ pub enum VirtualDesktopEvent {
         old_index: usize,
         new_index: usize,
     }, */
-    /// Emitted when a window is moved of the virtual desktop.
-    WindowChanged {
+    WindowAdded {
         window: isize,
         desktop: WorkspaceId,
+    },
+    /// Emitted when a window is or moved of virtual desktop.
+    WindowMoved {
+        window: isize,
+        desktop: WorkspaceId,
+    },
+    WindowRemoved {
+        window: isize,
     },
 }

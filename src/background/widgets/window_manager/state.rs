@@ -7,20 +7,13 @@ use itertools::Itertools;
 use parking_lot::Mutex;
 use seelen_core::{
     rect::Rect,
-    state::{
-        value::{KnownPlugin, PluginValue},
-        WindowManagerLayout, WmNode, WmNodeKind, WorkspaceId,
-    },
+    state::{WindowManagerLayout, WmNode, WmNodeKind, WorkspaceId},
 };
 
 use crate::{
-    error::Result,
-    log_error,
-    modules::input::domain::Point,
-    state::application::FULL_STATE,
-    virtual_desktops::get_vd_manager,
-    widgets::window_manager::node_ext::WmNodeExt,
-    windows_api::{monitor::Monitor, window::Window},
+    error::Result, log_error, modules::input::domain::Point, state::application::FULL_STATE,
+    virtual_desktops::get_vd_manager, widgets::window_manager::node_ext::WmNodeExt,
+    windows_api::window::Window,
 };
 
 use super::cli::Axis;
@@ -71,18 +64,6 @@ impl WmState {
             .workspace_containing_window(&window.address())
             .map(|w| w.id.clone())?;
         Some(self.get_workspace_state(&window_workspace))
-    }
-
-    pub fn get_node_at_point(&mut self, point: &Point) -> Option<&mut WmNode> {
-        let monitor = Monitor::from(point);
-        let monitor_id = monitor.stable_id2().ok()?;
-        let current_workspace = get_vd_manager()
-            .get_active_workspace_id(&monitor_id)
-            .clone();
-        if let Some(w) = self.layouts.get_mut(&current_workspace) {
-            return w.get_node_at_point(point);
-        }
-        None
     }
 
     /// # Parameters
@@ -196,33 +177,18 @@ impl WmState {
 pub struct WmWorkspaceState {
     pub id: WorkspaceId,
     pub layout: WindowManagerLayout,
+    pub monocle: bool,
 }
 
 impl WmWorkspaceState {
-    pub fn new(workspace: &WorkspaceId) -> Self {
+    pub fn new(workspace_id: &WorkspaceId) -> Self {
         let settings = FULL_STATE.load();
-        let layout_id = settings.get_wm_layout_id(workspace);
-
-        let mut workspace = Self {
-            id: workspace.clone(),
-            layout: WindowManagerLayout::default(),
-        };
-
-        let plugin_with_layout = settings.plugins().values().find(|p| p.id == layout_id);
-        let Some(plugin) = plugin_with_layout else {
-            return workspace;
-        };
-
-        let PluginValue::Known(plugin) = &plugin.plugin else {
-            return workspace;
-        };
-
-        let KnownPlugin::WManager(layout) = plugin else {
-            return workspace;
-        };
-
-        workspace.layout = layout.clone();
-        workspace
+        let layout = settings.get_wm_layout(workspace_id);
+        Self {
+            id: workspace_id.clone(),
+            layout,
+            monocle: false,
+        }
     }
 
     pub fn set_rect_to_float_initial_size(window: &Window) -> Result<()> {
@@ -298,6 +264,14 @@ impl WmWorkspaceState {
     }
 
     pub fn swap_nodes_containing_window(&mut self, a: &Window, b: &Window) -> Result<()> {
+        if a == b {
+            return Ok(());
+        }
+        log::trace!(
+            "swapping nodes containing windows ({:x}, {:x})",
+            a.address(),
+            b.address()
+        );
         let ptr = &mut self.layout.structure as *mut WmNode;
         let node_a = unsafe { &mut *ptr }.leaf_containing_mut(a);
         let node_b = unsafe { &mut *ptr }.leaf_containing_mut(b);
@@ -314,7 +288,33 @@ impl WmWorkspaceState {
         self.layout.structure.trace(window)
     }
 
-    pub fn get_node_at_point(&mut self, point: &Point) -> Option<&mut WmNode> {
-        self.layout.structure.get_node_at_point(point).ok()?
+    pub fn get_node_at_point(&mut self, point: &Point, ignore: &[isize]) -> Option<&mut WmNode> {
+        self.layout
+            .structure
+            .get_node_at_point(point, ignore)
+            .ok()?
+    }
+
+    pub fn toggle_monocle(&mut self) {
+        self.monocle = !self.monocle;
+
+        if self.monocle {
+            let windows = self.layout.structure.drain();
+            let active = windows.first().copied();
+
+            self.layout.structure = WmNode {
+                kind: WmNodeKind::Stack,
+                active,
+                windows,
+                max_stack_size: None,
+                ..Default::default()
+            }
+        } else {
+            let windows = self.layout.structure.drain();
+            self.layout.structure = FULL_STATE.load().get_wm_layout(&self.id).structure;
+            for w in windows {
+                self.add_to_tiles(&Window::from(w));
+            }
+        }
     }
 }

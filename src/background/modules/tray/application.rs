@@ -9,7 +9,7 @@ use std::{
 };
 use tauri::Listener;
 use windows::Win32::{
-    Foundation::{HWND, POINT, RECT},
+    Foundation::{HWND, RECT},
     System::DataExchange::COPYDATASTRUCT,
     UI::{
         Accessibility::{
@@ -22,8 +22,8 @@ use windows::Win32::{
             NOTIFYICONIDENTIFIER,
         },
         WindowsAndMessaging::{
-            FindWindowA, FindWindowExA, GetCursorPos, RegisterWindowMessageW, SendNotifyMessageW,
-            HWND_BROADCAST, SW_HIDE, SW_SHOW, WM_COPYDATA,
+            FindWindowA, FindWindowExA, RegisterWindowMessageW, SendNotifyMessageW, HWND_BROADCAST,
+            SW_HIDE, SW_SHOW, WM_COPYDATA,
         },
     },
 };
@@ -36,7 +36,9 @@ use winreg::{
 use crate::{
     app::get_app_handle,
     error::Result,
-    event_manager, pcstr, trace_lock,
+    event_manager,
+    modules::input::Mouse,
+    pcstr, trace_lock,
     utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
     windows_api::{
         event_window::{get_native_shell_hwnd, subscribe_to_background_window},
@@ -441,8 +443,7 @@ impl TrayIconUIElement {
     pub fn context_menu(&self) -> Result<()> {
         let element: IUIAutomationElement3 = self.0.cast()?;
 
-        let mut cursor_pos = POINT::default();
-        unsafe { GetCursorPos(&mut cursor_pos as *mut POINT)? };
+        let cursor_pos = Mouse::get_cursor_pos()?;
 
         if let Some(hwnd) = get_tray_overflow_handle() {
             WindowsApi::show_window_async(hwnd, SW_SHOW)?;
@@ -451,8 +452,8 @@ impl TrayIconUIElement {
             WindowsApi::move_window(
                 hwnd,
                 &RECT {
-                    top: cursor_pos.y - (rect.bottom - rect.top),
-                    left: cursor_pos.x - (rect.right - rect.left),
+                    top: cursor_pos.y() - (rect.bottom - rect.top),
+                    left: cursor_pos.x() - (rect.right - rect.left),
                     right: 0,
                     bottom: 0,
                 },

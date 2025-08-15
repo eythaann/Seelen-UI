@@ -1,13 +1,16 @@
 use crate::{
-    error::Result,
-    virtual_desktops::SluWorkspacesManager,
-    windows_api::window::event::WinEvent,
-    windows_api::{window::Window, WindowEnumerator},
+    error::{Result, ResultLogExt},
+    trace_lock,
+    virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager, HIDDEN_BY_USER},
+    windows_api::{
+        window::{event::WinEvent, Window},
+        WindowEnumerator,
+    },
 };
 
 impl SluWorkspacesManager {
     pub fn should_be_added(window: &Window) -> bool {
-        window.is_real_window() && !window.is_minimized()
+        window.is_real_window()
     }
 
     pub fn contains(&self, window: &Window) -> bool {
@@ -28,8 +31,19 @@ impl SluWorkspacesManager {
         };
 
         let active = self.get_active_workspace_mut(&monitor_id.into());
+        if active.windows.contains(&window_id) {
+            return;
+        }
+
         log::trace!("adding window ({window_id:x}) to workspace {}", active.id);
         active.windows.push(window_id);
+
+        Self::event_tx()
+            .send(VirtualDesktopEvent::WindowAdded {
+                window: window_id,
+                desktop: active.id.clone(),
+            })
+            .log_error();
         self.save()
     }
 
@@ -39,13 +53,33 @@ impl SluWorkspacesManager {
         for workspace in self.iter_workspaces_mut() {
             workspace.windows.retain(|w| w != &window_id);
         }
+        Self::event_tx()
+            .send(VirtualDesktopEvent::WindowRemoved { window: window_id })
+            .log_error();
         self.save()
     }
 
-    /// TODO: try to move windows on others native virtual desktops to only one.
+    /// TODO: try to move windows on others native virtual desktops to only one,
+    /// or add a warning message to users.
     pub fn list_windows_into_respective_workspace(&mut self) -> Result<()> {
+        // restore workspaces state
+        for (monitor_id, monitor) in &self.desktops().monitors {
+            for workspace in &monitor.workspaces {
+                if workspace.id == monitor.current_workspace {
+                    Self::restore_workspace(workspace);
+                    Self::event_tx().send(VirtualDesktopEvent::DesktopChanged {
+                        monitor: monitor_id.clone(),
+                        workspace: workspace.id.clone(),
+                    })?;
+                } else {
+                    Self::hide_workspace(workspace, false);
+                }
+            }
+        }
+
+        // scan new windows, but only add the visible ones to the active workspace
         WindowEnumerator::new().for_each(|window| {
-            if !self.contains(&window) && Self::should_be_added(&window) {
+            if !self.contains(&window) && Self::should_be_added(&window) && !window.is_minimized() {
                 self.add(&window);
             }
         })
@@ -54,21 +88,40 @@ impl SluWorkspacesManager {
     pub fn on_win_event(&mut self, event: WinEvent, window: &Window) -> Result<()> {
         let window_id = window.address();
         match event {
-            WinEvent::ObjectCreate | WinEvent::ObjectShow | WinEvent::ObjectNameChange => {
+            WinEvent::ObjectCreate | WinEvent::ObjectShow => {
                 if !self.contains(window) && Self::should_be_added(window) {
                     self.add(window);
                 }
             }
+            // ObjectNameChange, is fired on styles changed too, so we need to revaluate them,
+            // also there's filters by title, so this will be revaluated too.
+            WinEvent::ObjectNameChange => match self.contains(window) {
+                true => {
+                    if !Self::should_be_added(window) {
+                        self.remove(window);
+                    }
+                }
+                false => {
+                    if Self::should_be_added(window) {
+                        self.add(window);
+                    }
+                }
+            },
+            WinEvent::SystemMinimizeStart => {
+                trace_lock!(HIDDEN_BY_USER).insert(window_id);
+            }
             WinEvent::SystemMinimizeEnd => {
+                trace_lock!(HIDDEN_BY_USER).remove(&window_id);
                 if let Some(workspace) =
                     self.workspace_containing_window(&window.address()).cloned()
                 {
                     self.switch_to_id(&window.monitor().stable_id()?.into(), &workspace.id)?;
                 } else if !self.is_pinned(&window_id) && Self::should_be_added(window) {
+                    // add minimized windows during the scanning, to the current active workspace
                     self.add(window);
                 }
             }
-            WinEvent::ObjectDestroy | WinEvent::ObjectHide | WinEvent::SystemMinimizeStart => {
+            WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
                 self.remove(window);
             }
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {

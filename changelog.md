@@ -13,7 +13,8 @@
 - now workspaces persist over restarts.
 - on window manager windows now can be float or tiled.
 - implement focus change via keyboard hotkeys on tiling window manager.
-- implement container leaf swapping via keyboard hotkeys on tiling window manager.
+- implement container swapping via keyboard hotkeys on tiling window manager.
+- swap twm containers on window drag event.
 
 ### refactor
 - monitors ids.
