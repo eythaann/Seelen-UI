@@ -99,11 +99,11 @@ use windows::{
                 BringWindowToTop, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
                 GetSystemMetrics, GetWindowLongW, GetWindowRect, GetWindowTextW,
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
-                PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW,
-                GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
-                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER, SW_RESTORE,
+                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
+                SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
+                SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN,
+                SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
                 WS_THICKFRAME,
             },
@@ -114,7 +114,9 @@ use windows::{
 
 use crate::{
     error::{Result, WindowsResultExt},
-    modules::input::{domain::Point, Mouse},
+    hook::HookManager,
+    modules::input::{domain::Point, Keyboard, Mouse},
+    windows_api::window::{event::WinEvent, Window},
 };
 
 #[macro_export]
@@ -193,6 +195,7 @@ impl WindowsApi {
         unsafe { GetCurrentProcessId() }
     }
 
+    #[allow(dead_code)]
     pub fn current_thread_id() -> u32 {
         unsafe { GetCurrentThreadId() }
     }
@@ -210,8 +213,15 @@ impl WindowsApi {
         }
     }
 
+    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
     pub fn get_foreground_window() -> HWND {
-        unsafe { GetForegroundWindow() }
+        let mut hwnd = unsafe { GetForegroundWindow() };
+        // based on windows doc, get foreground can return null while window is losing activation
+        // so we wait until we get a valid window
+        while hwnd.is_invalid() {
+            hwnd = unsafe { GetForegroundWindow() };
+        }
+        hwnd
     }
 
     pub fn is_window(hwnd: HWND) -> bool {
@@ -329,29 +339,37 @@ impl WindowsApi {
         Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_ASYNCWINDOWPOS)
     }
 
+    #[allow(dead_code)]
     pub fn bring_to_top(hwnd: HWND) -> Result<()> {
         unsafe { BringWindowToTop(hwnd)? };
         Ok(())
     }
 
+    #[allow(dead_code)]
     pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
         unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
         Ok(())
     }
 
     pub fn set_foreground(hwnd: HWND) -> Result<()> {
-        if Self::is_iconic(hwnd) {
-            Self::show_window(hwnd, SW_RESTORE)?;
+        let window = Window::from(hwnd);
+
+        if !unsafe { SetForegroundWindow(hwnd).as_bool() } {
+            // https://stackoverflow.com/questions/10740346/setforegroundwindow-only-working-while-visual-studio-is-open
+            let keyboard = Keyboard::new();
+            keyboard.send_keys("{alt}")?;
+            // this can fail but still be successful.
+            let _ = unsafe { SetForegroundWindow(hwnd) };
         }
-        let (_, focused_thread) = Self::window_thread_process_id(Self::get_foreground_window());
-        let app_thread = Self::current_thread_id();
-        if focused_thread != app_thread {
-            Self::attach_thread_input(focused_thread, app_thread, true)?;
-            Self::bring_to_top(hwnd)?;
-            Self::attach_thread_input(focused_thread, app_thread, false)?;
-        } else {
-            Self::bring_to_top(hwnd)?;
+
+        // extra validation
+        if Window::get_foregrounded() != window {
+            return Err("Failed to set foreground window".into());
         }
+
+        // event sometimes is not emitted, so we manually emit it, this will cause 2 foreground events
+        // if original was recieved, btw having it twice is better than nothing
+        HookManager::event_tx().send((WinEvent::SystemForeground, window))?;
         Ok(())
     }
 

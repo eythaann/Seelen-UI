@@ -11,7 +11,7 @@ use windows_core::Interface;
 use crate::{
     app::get_app_handle,
     error::Result,
-    log_error,
+    get_tokio_handle, log_error,
     utils::{pwsh::PwshScript, was_installed_using_msix},
     windows_api::{Com, WindowsApi},
 };
@@ -21,7 +21,7 @@ pub struct ServicePipe;
 impl ServicePipe {
     /// will ignore any response
     pub fn request(message: SvcAction) -> Result<()> {
-        tauri::async_runtime::spawn(async move {
+        get_tokio_handle().spawn(async move {
             log_error!(ServiceIpc::send(message).await);
         });
         Ok(())

@@ -91,14 +91,19 @@ impl WindowsApi {
         if Self::is_iconic(hwnd) {
             Self::show_window(addr, SW_RESTORE.0)?;
         }
+
         let (_, focused_thread) = Self::window_thread_process_id(Self::get_foreground_window());
         let app_thread = Self::current_thread_id();
+
+        let mut attached = false;
         if focused_thread != app_thread {
-            Self::attach_thread_input(focused_thread, app_thread, true)?;
-            Self::bring_to_top(hwnd)?;
+            attached = Self::attach_thread_input(focused_thread, app_thread, true).is_ok();
+        }
+
+        Self::bring_to_top(hwnd)?;
+
+        if attached {
             Self::attach_thread_input(focused_thread, app_thread, false)?;
-        } else {
-            Self::bring_to_top(hwnd)?;
         }
         Ok(())
     }

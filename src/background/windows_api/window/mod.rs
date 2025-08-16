@@ -10,7 +10,7 @@ use windows::{
     Win32::{
         Foundation::{HWND, RECT},
         UI::WindowsAndMessaging::{
-            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
+            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SW_RESTORE, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
             WS_EX_TOOLWINDOW,
         },
     },
@@ -387,10 +387,15 @@ impl Window {
     }
 
     pub fn focus(&self) -> Result<()> {
-        if self.process().open_handle().is_ok() {
+        if self.is_minimized() {
+            self.show_window(SW_RESTORE)?;
+        }
+
+        /* if self.process().open_handle().is_ok() {
             WindowsApi::set_foreground(self.hwnd())
         } else {
             ServicePipe::request(SvcAction::SetForeground(self.address()))
-        }
+        } */
+        WindowsApi::set_foreground(self.hwnd())
     }
 }

@@ -1,4 +1,5 @@
 #root {
+  /* Root container always should use all the screen, independently of the grow factor */
   > .wm-container {
     width: 100%;
     height: 100%;
@@ -12,6 +13,11 @@
   min-height: 0;
   min-width: 0;
   gap: var(--config-containers-gap);
+
+  /* if no siblings, ignore grow factor */
+  &:first-child:last-child {
+    flex-grow: 1 !important;
+  }
 
   &.wm-leaf {
     border-radius: 10px; /* windows 11 border radius */

@@ -13,7 +13,7 @@ use uuid::Uuid;
 
 use crate::{
     error::Result,
-    log_error,
+    get_tokio_handle, log_error,
     state::application::{download_remote_icons, FULL_STATE},
     utils::constants::SEELEN_COMMON,
     widgets::popups::POPUPS_MANAGER,
@@ -59,7 +59,7 @@ pub fn process_uri(uri: &str) -> Result<()> {
     };
 
     let url = format!("https://product{env_prefix}.seelen.io/resource/download/{resource_id}");
-    tauri::async_runtime::spawn(async move {
+    get_tokio_handle().spawn(async move {
         log_error!(download_resource(&url).await);
     });
 

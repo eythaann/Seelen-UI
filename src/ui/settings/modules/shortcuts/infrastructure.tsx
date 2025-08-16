@@ -90,11 +90,13 @@ export function Shortcuts() {
 
       <SettingsGroup>{groups.windowManager.tilingFocus.map(mapHokey)}</SettingsGroup>
 
-      <SettingsGroup>{groups.windowManager.tilingLayout.map(mapHokey)}</SettingsGroup>
+      {/* TODO implement live layout modification */}
+      {/* <SettingsGroup>{groups.windowManager.tilingLayout.map(mapHokey)}</SettingsGroup> */}
 
       <SettingsGroup>{groups.weg.map(mapHokey)}</SettingsGroup>
 
-      <SettingsGroup>{groups.wallpaperManager.map(mapHokey)}</SettingsGroup>
+      {/* TODO implement wallpaper change shortcut */}
+      {/* <SettingsGroup>{groups.wallpaperManager.map(mapHokey)}</SettingsGroup> */}
 
       <SettingsGroup>{groups.misc.map(mapHokey)}</SettingsGroup>
     </>

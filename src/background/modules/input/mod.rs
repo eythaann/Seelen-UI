@@ -141,7 +141,7 @@ impl Input {
             Anonymous: INPUT_0 {
                 ki: KEYBDINPUT {
                     wVk: key,
-                    wScan: 0,
+                    wScan: unsafe { MapVirtualKeyW(u32::from(key.0), MAPVK_VK_TO_VSC) } as u16,
                     dwFlags: flags,
                     time: 0,
                     dwExtraInfo: 0,

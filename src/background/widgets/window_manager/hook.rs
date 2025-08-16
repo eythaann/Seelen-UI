@@ -1,6 +1,6 @@
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::rect::Rect;
+use seelen_core::{rect::Rect, state::WmNodeKind};
 use std::sync::Arc;
 
 use crate::{
@@ -134,6 +134,25 @@ impl WindowManagerV2 {
             }
             WinEvent::SystemMoveSizeEnd => {
                 Self::system_move_size_end(window)?;
+            }
+            WinEvent::SystemMinimizeStart => {
+                let mut should_remove = false;
+                {
+                    let mut state = trace_lock!(WM_STATE);
+                    if let Some(workspace) = state.get_workspace_state_for_window(window) {
+                        if let Some(node) = workspace.layout.structure.leaf_containing(window) {
+                            should_remove = node.kind != WmNodeKind::Stack;
+                        }
+                    }
+                };
+                if should_remove {
+                    Self::remove(window)?;
+                }
+            }
+            WinEvent::SystemMinimizeEnd => {
+                if !Self::is_managed(window) && Self::should_be_managed(window.hwnd()) {
+                    Self::add(window)?;
+                }
             }
             _ => {}
         };

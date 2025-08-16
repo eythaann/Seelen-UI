@@ -140,7 +140,10 @@ impl WindowManagerV2 {
 
     pub fn enumerate_all_windows() -> Result<()> {
         WindowEnumerator::new().for_each(|window| {
-            if !Self::is_managed(&window) && Self::should_be_managed(window.hwnd()) {
+            if !Self::is_managed(&window)
+                && Self::should_be_managed(window.hwnd())
+                && !window.is_minimized()
+            {
                 log_error!(Self::add(&window));
             }
         })
