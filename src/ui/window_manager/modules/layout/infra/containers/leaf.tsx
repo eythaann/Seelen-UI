@@ -1,13 +1,15 @@
+import { useSignalEffect } from '@preact/signals';
 import { SeelenCommand } from '@seelen-ui/lib';
 import { toPhysicalPixels } from '@shared';
 import { cx } from '@shared/styles';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';
 
+import { $focused_app, $force_repositioning, $layout } from '../../../shared/state/mod';
 import { ReservedContainer } from './reserved';
 
 interface Props {
@@ -16,10 +18,7 @@ interface Props {
 }
 
 export function Leaf({ hwnd, growFactor }: Props) {
-  const _version = useSelector(Selectors._version);
-
   const reservation = useSelector(Selectors.reservation);
-  const activeWindow = useSelector(Selectors.activeWindow);
   const borderSettings = useSelector(Selectors.settings.border);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -45,11 +44,13 @@ export function Leaf({ hwnd, growFactor }: Props) {
     });
   }, [hwnd]);
 
-  useEffect(() => {
+  useSignalEffect(() => {
+    let _a = $layout.value;
+    let _b = $force_repositioning.value;
     updateSize();
   });
 
-  const isFocused = activeWindow === hwnd;
+  const isFocused = $focused_app.value.hwnd === hwnd;
   return (
     <div
       ref={ref}

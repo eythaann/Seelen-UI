@@ -11,14 +11,42 @@
 }
 
 .wm-stack {
-  .wm-stack-bar {
-    background-color: #222222;
-    color: #fefefe;
+  display: flex;
+  flex-direction: column;
 
-    &.wm-stack-bar-with-borders {
-      border-style: solid;
-      border-width: var(--config-border-width);
-      border-color: var(--config-accent-dark-color);
+  .wm-stack-bar {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 10px;
+    gap: var(--config-containers-gap);
+    border-radius: 10px;
+    background-color: var(--color-persist-gray-900);
+    color: #fefefe;
+    font-size: 0.85rem;
+
+    .wm-stack-bar-item {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .wm-stack-bar-item-icon {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+      }
+
+      .wm-stack-bar-item-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100px;
+      }
+
+      &.wm-stack-bar-item-active {
+        color: var(--config-accent-lighter-color);
+      }
     }
   }
 }

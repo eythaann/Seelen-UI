@@ -1,7 +1,10 @@
 use std::{ffi::OsStr, path::PathBuf};
 
 use image::ImageFormat;
-use seelen_core::state::{PinnedWegItemData, RelaunchArguments, WegItem, WegItemSubtype, WegItems};
+use seelen_core::{
+    state::{PinnedWegItemData, RelaunchArguments, WegItem, WegItemSubtype, WegItems},
+    system_state::MonitorId,
+};
 use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
@@ -18,13 +21,17 @@ use windows::Win32::UI::WindowsAndMessaging::{SW_SHOWMINNOACTIVE, WM_CLOSE};
 use super::SeelenWeg;
 
 #[tauri::command(async)]
-pub fn weg_get_items_for_widget(window: tauri::Window) -> Result<WegItems> {
-    let device_id = Window::from(window.hwnd()?.0 as isize)
-        .monitor()
-        .stable_id2()?;
-    let items = trace_lock!(WEG_ITEMS_IMPL).get_filtered_by_monitor()?;
-
-    Ok(items[&device_id].clone())
+pub fn state_get_weg_items(monitor_id: Option<MonitorId>) -> WegItems {
+    let guard = trace_lock!(WEG_ITEMS_IMPL);
+    if let Some(id) = monitor_id {
+        return guard
+            .get_filtered_by_monitor()
+            .unwrap_or_default()
+            .get(&id)
+            .cloned()
+            .unwrap_or_else(|| guard.items.clone());
+    }
+    guard.items.clone()
 }
 
 #[tauri::command(async)]

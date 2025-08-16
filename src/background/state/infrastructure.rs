@@ -39,11 +39,6 @@ pub fn state_get_toolbar_items() -> Placeholder {
 }
 
 #[tauri::command(async)]
-pub fn state_get_weg_items() -> WegItems {
-    FULL_STATE.load().weg_items().clone()
-}
-
-#[tauri::command(async)]
 pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Result<()> {
     items.sanitize();
     let guard = FULL_STATE.load();

@@ -92,7 +92,7 @@ impl std::fmt::Debug for AppError {
                 }
 
                 // 3) skip convertion of erros to AppError
-                if name.starts_with("seelen_ui::error_handler") && name.ends_with("from") {
+                if name.starts_with("seelen_ui::error::impl") && name.ends_with("from") {
                     index += 1;
                     continue;
                 }

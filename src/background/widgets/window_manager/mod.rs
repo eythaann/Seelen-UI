@@ -45,8 +45,7 @@ impl WindowManagerV2 {
         && window.is_real_window()
         // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
         && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
-        && !window.is_minimized()
-        && (get_vd_manager().uses_cloak() || !window.is_cloaked())
+        && !window.is_cloaked()
     }
 
     fn should_be_managed(hwnd: HWND) -> bool {
@@ -85,16 +84,6 @@ impl WindowManagerV2 {
             SeelenEvent::WMSetLayout,
             &workspace.layout.structure,
         )?;
-        Ok(())
-    }
-
-    fn set_overlay_visibility(visible: bool) -> Result {
-        get_app_handle().emit(SeelenEvent::WMSetOverlayVisibility, visible)?;
-        Ok(())
-    }
-
-    fn set_active_window(window: &Window) -> Result {
-        get_app_handle().emit(SeelenEvent::WMSetActiveWindow, window.address())?;
         Ok(())
     }
 

@@ -187,11 +187,9 @@ impl WmCommand {
                 if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
                     if workspace.is_floating(&foreground.address()) {
                         workspace.add_to_tiles(&foreground);
-                        WindowManagerV2::set_overlay_visibility(true)?;
                     } else if workspace.is_tiled(&foreground) {
                         workspace.unmanage(&foreground);
                         workspace.add_to_floats(&foreground)?;
-                        WindowManagerV2::set_overlay_visibility(false)?;
                     }
 
                     WindowManagerV2::render_workspace(

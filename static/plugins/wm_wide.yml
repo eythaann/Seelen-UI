@@ -145,11 +145,11 @@ metadata:
     km: ប្លង់ធំទូលាយសម្រាប់ម៉ូនីទ័រផ្ដេក។
 plugin:
   structure:
-    type: Horizontal
+    type: Vertical
     children:
       - type: Leaf
         growFactor: 1.5
-      - type: Vertical
+      - type: Horizontal
         children:
           - type: Leaf
           - type: Leaf

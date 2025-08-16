@@ -50,18 +50,10 @@ impl SeelenWeg {
         Ok(HWND(self.window.hwnd()?.0))
     }
 
-    pub fn get_label(monitor_id: &str) -> String {
-        base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(format!(
-            "{}?monitorId={}",
-            Self::TARGET,
-            monitor_id
-        ))
-    }
-
-    fn create_window(postfix: &str) -> Result<WebviewWindow> {
+    fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
 
-        let label = format!("{}?monitorId={}", Self::TARGET, postfix);
+        let label = format!("{}?monitorId={}", Self::TARGET, monitor_id);
         log::info!("Creating {label}");
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
 

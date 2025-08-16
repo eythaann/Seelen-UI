@@ -198,38 +198,51 @@ impl From<u32> for WinEvent {
 }
 
 impl WinEvent {
-    pub fn get_synthetics(&self, origin: &Window) -> Result<Vec<WinEvent>> {
+    pub fn update_cache_and_get_synthetics(&self, origin: &Window) -> Result<Vec<WinEvent>> {
         let mut synthetics = Vec::new();
 
-        if self == &Self::ObjectLocationChange && origin.is_focused() {
-            synthetics.push(Self::SyntheticForegroundLocationChange);
-
-            let old = origin.get_cached_data();
-            let new = WindowCachedData::create_for(origin);
-
-            if old == new {
-                return Ok(synthetics);
+        match self {
+            Self::SystemMoveSizeStart => {
+                let mut data = origin.get_cached_data();
+                data.dragging = true;
+                origin.set_cached_data(data);
             }
-
-            if old.maximized != new.maximized {
-                synthetics.push(match old.maximized {
-                    true => Self::SyntheticMaximizeEnd,
-                    false => Self::SyntheticMaximizeStart,
-                });
+            Self::SystemMoveSizeEnd => {
+                let mut data = origin.get_cached_data();
+                data.dragging = false;
+                origin.set_cached_data(data);
             }
+            Self::ObjectLocationChange if origin.is_focused() => {
+                synthetics.push(Self::SyntheticForegroundLocationChange);
 
-            if old.fullscreen != new.fullscreen {
-                synthetics.push(match old.fullscreen {
-                    true => Self::SyntheticFullscreenEnd,
-                    false => Self::SyntheticFullscreenStart,
-                });
+                let old = origin.get_cached_data();
+                let new = WindowCachedData::create_for(origin);
+
+                if old == new {
+                    return Ok(synthetics);
+                }
+
+                if old.maximized != new.maximized {
+                    synthetics.push(match old.maximized {
+                        true => Self::SyntheticMaximizeEnd,
+                        false => Self::SyntheticMaximizeStart,
+                    });
+                }
+
+                if old.fullscreen != new.fullscreen {
+                    synthetics.push(match old.fullscreen {
+                        true => Self::SyntheticFullscreenEnd,
+                        false => Self::SyntheticFullscreenStart,
+                    });
+                }
+
+                if old.monitor != new.monitor {
+                    synthetics.push(Self::SyntheticMonitorChanged);
+                }
+
+                origin.set_cached_data(new);
             }
-
-            if old.monitor != new.monitor {
-                synthetics.push(Self::SyntheticMonitorChanged);
-            }
-
-            origin.set_cached_data(new);
+            _ => {}
         }
 
         Ok(synthetics)

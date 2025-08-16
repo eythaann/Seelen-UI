@@ -283,11 +283,6 @@ impl SluWorkspacesManager {
 
         self.save();
     }
-
-    // maybe we can use this on future, for now always false
-    pub fn uses_cloak(&self) -> bool {
-        false
-    }
 }
 
 // getters and setters

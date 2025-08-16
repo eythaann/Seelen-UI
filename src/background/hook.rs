@@ -8,7 +8,7 @@ use std::{
 };
 
 use parking_lot::{Mutex, RwLock};
-use seelen_core::{handlers::SeelenEvent, system_state::FocusedApp};
+use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
@@ -156,28 +156,22 @@ impl HookManager {
         let shoup_update_focused = matches!(
             event,
             WinEvent::SystemForeground
+                | WinEvent::ObjectNameChange
+                | WinEvent::SystemMoveSizeStart
+                | WinEvent::SystemMoveSizeEnd
                 | WinEvent::SyntheticMaximizeStart
                 | WinEvent::SyntheticMaximizeEnd
-                | WinEvent::ObjectNameChange
+                | WinEvent::SyntheticFullscreenStart
+                | WinEvent::SyntheticFullscreenEnd
         );
 
         if shoup_update_focused && origin.is_focused() {
-            let process = origin.process();
-            let result = get_app_handle().emit(
-                SeelenEvent::GlobalFocusChanged,
-                FocusedApp {
-                    hwnd: origin.address(),
-                    title: origin.title(),
-                    name: origin
-                        .app_display_name()
-                        .unwrap_or(String::from("Error on App Name")),
-                    exe: process.program_path().ok(),
-                    umid: origin.app_user_model_id().map(|umid| umid.to_string()),
-                    is_maximized: origin.is_maximized(),
-                    is_seelen_overlay: origin.is_seelen_overlay(),
-                },
-            );
-            log_error!(result);
+            get_app_handle()
+                .emit(
+                    SeelenEvent::GlobalFocusChanged,
+                    origin.as_focused_app_information(),
+                )
+                .log_error();
         }
 
         {
@@ -259,7 +253,6 @@ pub fn init_zombie_window_killer() -> Result<()> {
 
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
-    get_vd_manager().list_windows_into_respective_workspace()?;
     init_zombie_window_killer()?;
 
     spawn_named_thread("WinEventHook", move || unsafe {
@@ -278,8 +271,9 @@ pub fn register_win_hook() -> Result<()> {
                 origin = Window::get_foregrounded(); // sometimes event is emited with wrong origin
             }
 
+            let synthetics = event.update_cache_and_get_synthetics(&origin);
             HookManager::process_event(event, origin);
-            if let Ok(synthetics) = event.get_synthetics(&origin) {
+            if let Ok(synthetics) = synthetics {
                 for synthetic_event in synthetics {
                     HookManager::process_event(synthetic_event, origin)
                 }

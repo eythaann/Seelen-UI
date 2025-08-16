@@ -35,7 +35,6 @@ impl WindowManagerV2 {
                 let window = &Window::from(*window);
                 if !Self::is_managed(window) && Self::should_be_managed(window.hwnd()) {
                     Self::add(window)?;
-                    Self::set_overlay_visibility(Self::is_tiled(window))?;
                 }
             }
             VirtualDesktopEvent::WindowMoved { window, .. } => {
@@ -65,7 +64,6 @@ impl WindowManagerV2 {
             log::trace!("window moved of monitor");
             Self::remove(window)?;
             Self::add(window)?;
-            Self::set_overlay_visibility(true)?;
             return Ok(());
         }
 
@@ -122,9 +120,7 @@ impl WindowManagerV2 {
             .get_active_workspace_id(&monitor_id)
             .clone();
         Self::render_workspace(&monitor_id, state.get_workspace_state(&current_workspace))?;
-
         Self::force_retiling()?;
-        Self::set_overlay_visibility(true)?;
         Ok(())
     }
 
@@ -132,29 +128,12 @@ impl WindowManagerV2 {
         match event {
             WinEvent::SystemMoveSizeStart => {
                 if Self::is_tiled(window) {
-                    Self::set_overlay_visibility(false)?;
                     *trace_lock!(SystemMoveSizeStartRect) = window.inner_rect()?;
                     *trace_lock!(SystemMoveSizeStartMonitor) = window.monitor();
                 }
             }
             WinEvent::SystemMoveSizeEnd => {
                 Self::system_move_size_end(window)?;
-            }
-            WinEvent::ObjectFocus | WinEvent::SystemForeground => {
-                Self::set_active_window(window)?;
-                Self::set_overlay_visibility(Self::is_tiled(window))?;
-            }
-            WinEvent::SyntheticMaximizeStart => {
-                // todo make this by monitor
-                Self::set_overlay_visibility(false)?;
-            }
-            WinEvent::SyntheticMaximizeEnd => {
-                // todo make this by monitor
-                Self::set_overlay_visibility(Self::is_tiled(window))?;
-            }
-            WinEvent::SyntheticFullscreenStart => Self::set_overlay_visibility(false)?,
-            WinEvent::SyntheticFullscreenEnd => {
-                Self::set_overlay_visibility(Self::is_tiled(window))?;
             }
             _ => {}
         };

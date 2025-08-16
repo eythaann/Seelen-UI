@@ -1,12 +1,11 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useComputed } from '@preact/signals';
-import { SeelenCommand, WorkspaceToolbarItemMode } from '@seelen-ui/lib';
+import { invoke, SeelenCommand, Widget, WorkspaceToolbarItemMode } from '@seelen-ui/lib';
 import { WorkspaceToolbarItem } from '@seelen-ui/lib/types';
 import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
 import { useThrottle, useWindowFocusChange } from '@shared/hooks';
 import { cx } from '@shared/styles';
-import { invoke } from '@tauri-apps/api/core';
 import { Menu, Tooltip } from 'antd';
 import { HTMLAttributes, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +20,8 @@ interface Props {
   module: WorkspaceToolbarItem;
   onContextMenu?: (e: MouseEvent) => void;
 }
+
+let monitorId = Widget.getCurrent().decoded.monitorId!;
 
 function InnerWorkspacesModule({ module, ...rest }: Props) {
   const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
@@ -57,7 +58,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
       const index = workspaces.findIndex((w) => w.id === activeWorkspace);
       const newIndex = isUp ? index - 1 : index + 1;
       if (newIndex >= 0 && newIndex < workspaces.length) {
-        invoke(SeelenCommand.SwitchWorkspace, { idx: newIndex });
+        invoke(SeelenCommand.SwitchWorkspace, { monitorId, idx: newIndex });
       }
     },
     500,
@@ -79,7 +80,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
           {workspaces.map((w, idx) => (
             <li
               key={w.id}
-              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { idx })}
+              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { monitorId, idx })}
               className={cx('workspace-dot', {
                 'workspace-dot-active': w.id === activeWorkspace,
               })}
@@ -115,7 +116,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
                 'ft-bar-item-clickable': true,
                 'ft-bar-item-active': w.id === activeWorkspace,
               })}
-              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { idx })}
+              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { monitorId, idx })}
             >
               <div className="ft-bar-item-content">
                 <span>

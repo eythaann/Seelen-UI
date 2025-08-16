@@ -52,11 +52,16 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
   }
 
   render(): React.ReactNode {
+    const dataProps = Object.entries(this.props)
+      .filter(([k]) => k.startsWith('data-'))
+      .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
+
     return (
       <figure {...this.props} className={cx(cs.outer, this.props.className)}>
-        <img src={this.state.src || ''} />
+        <img {...dataProps} src={this.state.src || ''} />
         {this.state.mask && (
           <div
+            {...dataProps}
             className={cx(cs.mask, 'sl-mask')}
             style={{ maskImage: `url('${this.state.mask}')` }}
           />

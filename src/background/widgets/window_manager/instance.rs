@@ -1,8 +1,8 @@
 use base64::Engine;
 use getset::{Getters, MutGetters};
-use seelen_core::{handlers::SeelenEvent, system_state::MonitorId};
+use seelen_core::system_state::MonitorId;
 use std::sync::Arc;
-use tauri::{Emitter, Listener, WebviewWindow};
+use tauri::{Listener, WebviewWindow};
 use windows::Win32::{
     Foundation::HWND, Graphics::Gdi::HMONITOR, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS,
 };
@@ -83,10 +83,6 @@ impl WindowManagerV2 {
                 let workspace = state
                     .get_workspace_state(get_vd_manager().get_active_workspace_id(&monitor_id));
                 Self::render_workspace(&monitor_id, workspace)?;
-                get_app_handle().emit(
-                    SeelenEvent::WMSetActiveWindow,
-                    WindowsApi::get_foreground_window().0 as isize,
-                )?;
                 Ok(())
             });
         });

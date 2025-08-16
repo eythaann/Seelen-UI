@@ -11,8 +11,12 @@ use seelen_core::{
 };
 
 use crate::{
-    error::Result, log_error, modules::input::domain::Point, state::application::FULL_STATE,
-    virtual_desktops::get_vd_manager, widgets::window_manager::node_ext::WmNodeExt,
+    error::Result,
+    log_error,
+    modules::input::domain::Point,
+    state::application::FULL_STATE,
+    virtual_desktops::get_vd_manager,
+    widgets::window_manager::{instance::WindowManagerV2, node_ext::WmNodeExt},
     windows_api::window::Window,
 };
 
@@ -31,14 +35,19 @@ pub struct WmState {
     pub layouts: HashMap<WorkspaceId, WmWorkspaceState>,
 }
 
-#[allow(dead_code)]
 impl WmState {
     /// will enumarate all monitors and workspaces
     pub fn recreate(&mut self) {
         let vd = get_vd_manager();
         for workspace in vd.iter_workspaces() {
-            self.layouts
-                .insert(workspace.id.clone(), WmWorkspaceState::new(&workspace.id));
+            let mut w_state = WmWorkspaceState::new(&workspace.id);
+            for w in &workspace.windows {
+                let window = Window::from(*w);
+                if WindowManagerV2::should_be_managed(window.hwnd()) {
+                    w_state.add_to_tiles(&window);
+                }
+            }
+            self.layouts.insert(workspace.id.clone(), w_state);
         }
     }
 

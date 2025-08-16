@@ -4,7 +4,7 @@ use std::{
 };
 
 use parking_lot::RwLock;
-use seelen_core::system_state::MonitorId;
+use seelen_core::system_state::{FocusedApp, MonitorId};
 
 use super::Window;
 
@@ -17,6 +17,7 @@ pub struct WindowCachedData {
     pub monitor: MonitorId,
     pub maximized: bool,
     pub fullscreen: bool,
+    pub dragging: bool,
 }
 
 impl WindowCachedData {
@@ -26,6 +27,7 @@ impl WindowCachedData {
             monitor: w.monitor().stable_id().unwrap_or_default().into(),
             maximized: w.is_maximized(),
             fullscreen: w.is_fullscreen(),
+            dragging: false,
         }
     }
 }
@@ -47,7 +49,6 @@ impl Window {
         if let Some(data) = WINDOW_CACHE_DICT.read().get(&self.address()) {
             return data.clone();
         }
-
         let data = WindowCachedData::create_for(self);
         self.set_cached_data(data.clone());
         data
@@ -55,5 +56,24 @@ impl Window {
 
     pub fn set_cached_data(&self, data: WindowCachedData) {
         WINDOW_CACHE_DICT.write().insert(self.address(), data);
+    }
+
+    pub fn as_focused_app_information(&self) -> FocusedApp {
+        let cached = self.get_cached_data();
+        let process = self.process();
+        FocusedApp {
+            hwnd: self.address(),
+            monitor: cached.monitor,
+            title: self.title(),
+            name: self
+                .app_display_name()
+                .unwrap_or(String::from("Error on App Name")),
+            exe: process.program_path().ok(),
+            umid: self.app_user_model_id().map(|umid| umid.to_string()),
+            is_maximized: cached.maximized,
+            is_fullscreened: cached.fullscreen,
+            is_seelen_overlay: self.is_seelen_overlay(),
+            is_being_dragged: cached.dragging,
+        }
     }
 }

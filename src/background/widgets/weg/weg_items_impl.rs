@@ -23,11 +23,8 @@ use crate::{
     modules::start::application::START_MENU_MANAGER,
     state::application::FULL_STATE,
     utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
-    widgets::toolbar::FancyToolbar,
     windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
 };
-
-use super::SeelenWeg;
 
 lazy_static! {
     pub static ref WEG_ITEMS_IMPL: Arc<Mutex<WegItemsImpl>> =
@@ -36,8 +33,7 @@ lazy_static! {
 
 #[derive(Debug, Clone)]
 pub struct WegItemsImpl {
-    items: WegItems,
-    pre_state: Option<HashMap<MonitorId, WegItems>>,
+    pub items: WegItems,
 }
 
 fn item_contains_window(item: &WegItem, searching: isize) -> bool {
@@ -108,34 +104,12 @@ impl WegItemsImpl {
     pub fn new() -> Self {
         WegItemsImpl {
             items: FULL_STATE.load().weg_items.clone(),
-            pre_state: None,
         }
     }
 
     pub fn emit_to_webview(&mut self) -> Result<()> {
         let handle = get_app_handle();
-        let current_state = self.get_filtered_by_monitor().ok();
-
-        if current_state != self.pre_state {
-            if let Some(items) = &current_state {
-                for (monitor_id, items) in items {
-                    handle.emit_to(
-                        SeelenWeg::get_label(monitor_id),
-                        SeelenEvent::WegInstanceChanged,
-                        items,
-                    )?;
-                    // temporal solution, weg events needs an refactor to allow be used by any widget
-                    handle.emit_to(
-                        FancyToolbar::label(monitor_id),
-                        SeelenEvent::WegInstanceChanged,
-                        items,
-                    )?;
-                }
-            }
-
-            self.pre_state = current_state;
-        }
-
+        handle.emit(SeelenEvent::StateWegItemsChanged, ())?;
         Ok(())
     }
 
@@ -349,16 +323,13 @@ impl WegItemsImpl {
         }
     }
 
-    fn filter_by_monitor(&mut self, monitor_id: &str) {
+    fn filter_by_monitor(&mut self, monitor_id: &MonitorId) {
         for item in self.iter_all_mut() {
             match item {
                 WegItem::Pinned(data) | WegItem::Temporal(data) => {
                     data.windows.retain(|w| {
                         let window = Window::from(w.handle);
-                        window
-                            .monitor()
-                            .stable_id()
-                            .is_ok_and(|id| id == monitor_id)
+                        &window.monitor_id() == monitor_id
                     });
                 }
                 _ => {}
@@ -375,6 +346,7 @@ impl WegItemsImpl {
             if !state.is_weg_enabled_on_monitor(&monitor_id) {
                 continue;
             }
+
             let temporal_mode = state.get_weg_temporal_item_visibility(&monitor_id);
             let pinned_mode = state.get_weg_pinned_item_visibility(&monitor_id);
             let pinned_visible = match pinned_mode {

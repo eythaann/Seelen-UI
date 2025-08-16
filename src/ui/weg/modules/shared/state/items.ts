@@ -1,5 +1,5 @@
 import { signal } from '@preact/signals';
-import { WegItems, WegItemType } from '@seelen-ui/lib';
+import { WegItems, WegItemType, Widget } from '@seelen-ui/lib';
 import { WegItem } from '@seelen-ui/lib/types';
 import { debounce } from 'lodash';
 
@@ -23,7 +23,13 @@ export const HardcodedSeparator2: SeparatorWegItem = {
 function getStateFromStored(raw: WegItems): DockState {
   return {
     isReorderDisabled: raw.inner.isReorderDisabled,
-    items: [...raw.inner.left, HardcodedSeparator1, ...raw.inner.center, HardcodedSeparator2, ...raw.inner.right],
+    items: [
+      ...raw.inner.left,
+      HardcodedSeparator1,
+      ...raw.inner.center,
+      HardcodedSeparator2,
+      ...raw.inner.right,
+    ],
   };
 }
 
@@ -40,8 +46,11 @@ function stateToStored(state: DockState): WegItems {
   });
 }
 
-export const $dock_state = signal(getStateFromStored(await WegItems.forCurrentWidget()));
-WegItems.forCurrentWidgetChange((items) => ($dock_state.value = getStateFromStored(items)));
+let monitorId = Widget.getCurrent().decoded.monitorId!;
+export const $dock_state = signal(getStateFromStored(await WegItems.getForMonitor(monitorId)));
+WegItems.onChange(async () => {
+  $dock_state.value = getStateFromStored(await WegItems.getForMonitor(monitorId));
+});
 
 $dock_state.subscribe(
   debounce((v) => {

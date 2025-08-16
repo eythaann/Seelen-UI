@@ -148,14 +148,21 @@ plugin:
   structure:
     type: Horizontal
     children:
-      - type: Leaf
+      - type: Leaf # 1
       - type: Vertical
         children:
-          - type: Leaf
+          - type: Leaf # 2
           - type: Horizontal
             children:
-              - type: Leaf
               - type: Vertical
+                priority: 2
                 children:
-                  - type: Leaf
-                  - type: Leaf
+                  - type: Horizontal
+                    priority: 2
+                    children:
+                      - type: Leaf # 5
+                      - type: Leaf # 6
+                  - type: Leaf # 4
+                    priority: 1
+              - type: Leaf # 3
+                priority: 1

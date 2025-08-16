@@ -13,7 +13,7 @@ import '@shared/styles/reset.css';
 import './styles/global.css';
 
 removeDefaultWebviewActions();
-await declareDocumentAsLayeredHitbox((e) => e.hasAttribute('data-allow-mouse-events'));
+await declareDocumentAsLayeredHitbox((e) => e.getAttribute('data-allow-mouse-events') === 'true');
 await loadStore();
 
 const container = getRootContainer();

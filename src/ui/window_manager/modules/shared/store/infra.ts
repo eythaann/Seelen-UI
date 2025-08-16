@@ -1,8 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { SeelenEvent, Settings, startThemingTool, UIColors } from '@seelen-ui/lib';
-import { WmNode } from '@seelen-ui/lib/types';
-import { listen } from '@tauri-apps/api/event';
-import { getCurrentWebview } from '@tauri-apps/api/webview';
+import { Settings, startThemingTool, UIColors } from '@seelen-ui/lib';
 
 import { Actions, RootSlice } from './app';
 
@@ -42,28 +39,10 @@ async function loadUIColors() {
 }
 
 export async function loadStore() {
-  const view = getCurrentWebview();
   await loadUIColors();
 
   setSettings(await Settings.getAsync());
   await Settings.onChange(setSettings);
-
-  await view.listen<WmNode>(SeelenEvent.WMSetLayout, (e) => {
-    store.dispatch(Actions.setLayout(e.payload));
-  });
-
-  await listen<void>(SeelenEvent.WMForceRetiling, () => {
-    store.dispatch(Actions.forceUpdate());
-  });
-
-  await listen<boolean>(SeelenEvent.WMSetOverlayVisibility, ({ payload }) => {
-    store.dispatch(Actions.setOverlayVisible(payload));
-    document.body.style.opacity = payload ? '1' : '0';
-  });
-
-  await listen<number>(SeelenEvent.WMSetActiveWindow, ({ payload }) => {
-    store.dispatch(Actions.setActiveWindow(payload));
-  });
 
   await startThemingTool();
 }

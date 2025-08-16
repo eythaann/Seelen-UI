@@ -22,10 +22,13 @@ use crate::{
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::discord::start_discord_rpc,
-    widgets::launcher::SeelenRofi,
-    widgets::wallpaper_manager::SeelenWall,
-    widgets::weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
-    widgets::window_manager::instance::WindowManagerV2,
+    virtual_desktops::get_vd_manager,
+    widgets::{
+        launcher::SeelenRofi,
+        wallpaper_manager::SeelenWall,
+        weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
+        window_manager::instance::WindowManagerV2,
+    },
     windows_api::{event_window::create_background_window, monitor::MonitorView, Com},
     APP_HANDLE,
 };
@@ -190,6 +193,7 @@ impl Seelen {
             SeelenWeg::enumerate_all_windows()?;
         }
 
+        get_vd_manager().list_windows_into_respective_workspace()?;
         if state.is_window_manager_enabled() {
             WindowManagerV2::enumerate_all_windows()?;
         }

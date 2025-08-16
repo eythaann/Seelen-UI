@@ -1,9 +1,8 @@
 import { WmNode } from '@seelen-ui/lib/types';
+import { FileIcon } from '@shared/components/Icon';
 import { cx } from '@shared/styles';
-import { useSelector } from 'react-redux';
 
-import { Selectors } from '../../../shared/store/app';
-
+import { $open_apps, $overlay_visible } from '../../../shared/state/mod';
 import { Leaf } from './leaf';
 
 interface Props {
@@ -11,8 +10,6 @@ interface Props {
 }
 
 export function Stack({ node }: Props) {
-  const { border } = useSelector(Selectors.settings);
-
   return (
     <div
       style={{
@@ -21,17 +18,36 @@ export function Stack({ node }: Props) {
       className={cx('wm-container', 'wm-stack')}
     >
       {node.windows.length > 1 && (
-        <div
-          data-allow-mouse-events
-          className={cx('wm-stack-bar', {
-            'wm-stack-bar-with-borders': border.enabled,
+        <div className="wm-stack-bar" data-allow-mouse-events={$overlay_visible.value}>
+          {node.windows.map((handle) => {
+            const info = $open_apps.value.find((app) =>
+              app.windows.some((w) => w.handle === handle),
+            );
+
+            return (
+              <div
+                key={handle}
+                className={cx('wm-stack-bar-item', {
+                  'wm-stack-bar-item-active': handle === node.active,
+                })}
+                data-allow-mouse-events={$overlay_visible.value}
+              >
+                <FileIcon
+                  path={info?.path}
+                  umid={info?.umid}
+                  className="wm-stack-bar-item-icon"
+                  data-allow-mouse-events={$overlay_visible.value}
+                />
+                <span
+                  className="wm-stack-bar-item-title"
+                  data-allow-mouse-events={$overlay_visible.value}
+                >
+                  {info?.windows.find((w) => w.handle === handle)?.title ||
+                    `0x${handle.toString(16)}`}
+                </span>
+              </div>
+            );
           })}
-        >
-          {node.windows.map((handle) => (
-            <div key={handle} data-allow-mouse-events className="wm-stack-bar-item">
-              {handle}
-            </div>
-          ))}
         </div>
       )}
       {node.active && <Leaf hwnd={node.active} />}

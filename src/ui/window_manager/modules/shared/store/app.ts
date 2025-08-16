@@ -5,13 +5,9 @@ import { StateBuilder } from '@shared/StateBuilder';
 import { RootState } from './domain';
 
 const initialState: RootState = {
-  _version: 0,
-  layout: null,
   settings: (await Settings.default()).windowManager,
   colors: UIColors.default().inner,
-  activeWindow: 0,
   reservation: null,
-  overlayVisible: true,
 };
 
 export const RootSlice = createSlice({
@@ -19,9 +15,6 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    forceUpdate(state) {
-      state._version += 1;
-    },
   },
 });
 

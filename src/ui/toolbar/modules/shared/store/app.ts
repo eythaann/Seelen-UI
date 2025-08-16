@@ -13,6 +13,7 @@ import {
   UserDetails,
   VideosFolder,
   WegItems,
+  Widget,
 } from '@seelen-ui/lib';
 import { StateBuilder } from '@shared/StateBuilder';
 
@@ -114,8 +115,12 @@ export async function lazySlice(d: Dispatch) {
       .toSorted((a, b) => Number(b.lastActive - a.lastActive));
     d(RootActions.setOpenApps(apps));
   };
-  WegItems.forCurrentWidget().then(onGetWegItems);
-  WegItems.forCurrentWidgetChange(onGetWegItems);
+
+  let monitorId = Widget.getCurrent().decoded.monitorId!;
+  WegItems.getForMonitor(monitorId).then(onGetWegItems);
+  WegItems.onChange(() => {
+    WegItems.getForMonitor(monitorId).then(onGetWegItems);
+  });
 
   const obj = {
     userRecentFolder: (await RecentFolder.getAsync()).asArray(),

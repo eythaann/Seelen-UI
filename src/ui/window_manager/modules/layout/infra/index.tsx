@@ -1,30 +1,29 @@
+import { effect } from '@preact/signals';
 import { WmNodeKind } from '@seelen-ui/lib';
 import { cx } from '@shared/styles';
-import { useSelector } from 'react-redux';
-
-import { Selectors } from '../../shared/store/app';
 
 import { Node } from '../domain';
 
+import { $layout, $overlay_visible } from '../../shared/state/mod';
+import { NodeUtils } from '../../shared/utils';
 import { Leaf } from './containers/leaf';
 import { Stack } from './containers/stack';
 
 import './index.css';
 
-function isNodeEmpty(node: Node): boolean {
-  switch (node.type) {
-    case WmNodeKind.Leaf:
-      return !node.active;
-    case WmNodeKind.Stack:
-      return node.windows.length === 0;
-    case WmNodeKind.Horizontal:
-    case WmNodeKind.Vertical:
-      return node.children.every(isNodeEmpty);
+effect(() => {
+  document.body.style.opacity = $overlay_visible.value ? '1' : '0';
+});
+
+export function Layout() {
+  if (!$layout.value) {
+    return null;
   }
+  return <Container node={$layout.value} />;
 }
 
 export function Container({ node }: { node: Node }) {
-  if (isNodeEmpty(node)) {
+  if (NodeUtils.isEmpty(node)) {
     return null;
   }
 
@@ -52,14 +51,4 @@ export function Container({ node }: { node: Node }) {
   }
 
   return null;
-}
-
-export function Layout() {
-  const layout = useSelector(Selectors.layout);
-
-  if (!layout) {
-    return null;
-  }
-
-  return <Container node={layout} />;
 }

@@ -82,6 +82,10 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
   render(): React.ReactNode {
     const { path: _path, umid: _umid, noFallback, ...imgProps } = this.props;
 
+    const dataProps = Object.entries(imgProps)
+      .filter(([k]) => k.startsWith('data-'))
+      .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
+
     if (this.state.src) {
       return (
         <figure
@@ -89,9 +93,10 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
           className={cx(cs.outer, imgProps.className)}
           data-shape={this.state.isAproximatelySquare ? 'square' : 'unknown'}
         >
-          <img src={this.state.src} />
+          <img {...dataProps} src={this.state.src} />
           {this.state.mask && (
             <div
+              {...dataProps}
               className={cx(cs.mask, 'sl-mask')}
               style={{ maskImage: `url('${this.state.mask}')` }}
             />

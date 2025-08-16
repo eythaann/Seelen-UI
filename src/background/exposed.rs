@@ -3,7 +3,7 @@ use std::os::windows::process::CommandExt;
 use std::path::PathBuf;
 
 use seelen_core::state::RelaunchArguments;
-use seelen_core::system_state::MonitorId;
+use seelen_core::system_state::{FocusedApp, MonitorId};
 use seelen_core::{command_handler_list, system_state::Color};
 
 use tauri::{Builder, WebviewWindow, Wry};
@@ -196,6 +196,11 @@ async fn install_last_available_update() -> Result<()> {
     get_app_handle().restart();
     #[allow(unreachable_code)]
     Ok(())
+}
+
+#[tauri::command(async)]
+fn get_focused_app() -> FocusedApp {
+    Window::get_foregrounded().as_focused_app_information()
 }
 
 #[tauri::command(async)]
