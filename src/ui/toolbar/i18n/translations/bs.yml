@@ -56,7 +56,7 @@ notifications:
   settings: Više obavijesti Postavke
   title: Obavijesti
 placeholder:
-  battery_remaining: preostalo%
+  battery_remaining: 'preostalo%'
   bluetooth_devices: Bluetooth i uređaji
   ethernet_connected: pristup Internetu
   ethernet_disconnected: Nema pristupa internetu
