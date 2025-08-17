@@ -3,14 +3,12 @@ done: Verdataktioun
 drivers:
   got_it: Krut et
   monitor_disabled: >-
-    Et schéngt, datt e puer Monitor Chauffeuren behënnert ginn. Aktivéiert
-    hinnen hinnen ze gesinn ze gesinn.
+    Et schéngt, datt e puer Monitor Chauffeuren behënnert ginn. Aktivéiert hinnen hinnen ze gesinn ze gesinn.
   monitor_disabled_title: Monitor Chauffeuren sinn ausgeschalt
 resource:
   added: Eng nei Ressource gouf bäigefüügt
   download_failed_body: >-
-    Eppes ass falsch gaang wärend Dir d'Ressource eroflueden, mellt Iech w.e.g.
-    an de Seeper Entwéckler Team.
+    Eppes ass falsch gaang wärend Dir d'Ressource eroflueden, mellt Iech w.e.g. an de Seeper Entwéckler Team.
   download_failed_title: Ressource Download ass net gescheitert
   downloading: Eruppes-Opstellung erofgeluedenen ...
   downloading_body: Dëst kann e puer Sekonnen da daach, wann ech net zou d'Found sinn.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI erfuerdert Webview2 Runtime. Weg installéieren et.
   outdated: WebView2 Runtime veroudert
   outdated_description: >-
-    Seelen UI erfuerdert Webview2 Runtime %{min_version} oder méi héich. Weg
-    update et.
+    Seelen UI erfuerdert Webview2 Runtime %{min_version} oder méi héich. Weg update et.
 service:
   not_running: Seelen UI Service net lafen
   not_running_description: >-
-    Seelen UI Service (slu-Service) ass eng Ofhängegkeet / Helfer fir d'App
-    richteg ze schaffen.
+    Seelen UI Service (slu-Service) ass eng Ofhängegkeet / Helfer fir d'App richteg ze schaffen.
   not_running_ok: Start Service
 shortcut:
   register:
