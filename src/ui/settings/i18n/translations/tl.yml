@@ -1,323 +1,306 @@
 app_launcher:
-  enable: Paganahin ang launcher ng app
+  enable: Enable App Launcher
   launch_on:
-    mouse_over: Itapat ng mouse
-    primary: Pangunahin
-  monitor: Subaybayan upang ipakita
+    mouse_over: Mouse over
+    primary: Primary
+  monitor: Monitor to show
   runners:
-    cmd: Utos
-    explorer: Tumakbo
-    label: Mga mananakbo
+    cmd: Command
+    explorer: Run
+    label: Runners
 apps_configurations:
   app:
-    bindings: Ang pagbubuklod (tandaan ang parehong mga pagpipilian ay kinakailangan)
-    category: Kategorya
-    category_placeholder: Wala
-    monitor: Subaybayan
-    monitor_placeholder: Wala
-    name: Pangalan
-    ok_create: Lumikha
-    ok_edit: I -update
-    ok_readonly: I -edit bilang bago
+    bindings: Binding (note both options are required)
+    category: Category
+    category_placeholder: None
+    monitor: Monitor
+    monitor_placeholder: None
+    name: Name
+    ok_create: Create
+    ok_edit: Update
+    ok_readonly: Edit as New
     options:
-      float: Lumutang
-      force: Pamahalaan ang Pamahalaan
-      hidden: Itago mula sa pantalan/taskbar
-      pinned: Naka -pin
-      unmanage: Hindi namamahala
-    options_label: Dagdag na mga pagpipilian
-    title_create: Lumilikha ng {{pangalan}}
-    title_edit: Pag -edit {{pangalan}}
-    title_readonly: Pagtingin {{pangalan}}
-    weg_options_label: Mga pagpipilian sa pantalan/taskbar
-    wm_options_label: Mga pagpipilian sa Window Manager
+      float: Float
+      force: Force Manage
+      hidden: Hide from dock/taskbar
+      pinned: Pinned
+      unmanage: Unmanage
+    options_label: Extra Options
+    title_create: Creating {{name}}
+    title_edit: Editing {{name}}
+    title_readonly: Viewing {{name}}
+    weg_options_label: Dock/Taskbar Options
+    wm_options_label: Window Manager Options
     workspace: Workspace
-    workspace_placeholder: Wala
+    workspace_placeholder: None
   bundled_msg: >-
-    Ang mga naka -bundle na mga pagsasaayos ay hindi mai -edit at idinisenyo
-    upang mabigyan ka ng pinakamahusay na karanasan nang walang pagpapasadya.
-    Awtomatiko nilang i -configure ang pinaka -karaniwang mga aplikasyon para sa
-    iyo.
-  bundled_title: Ang config ng app na naka -bundle kay Seelen
-  confirm_delete: Sigurado ka bang nais mong tanggalin ang pagsasaayos na ito/s?
-  confirm_delete_title: Kumpirmahin ang Tanggalin
-  delete: Tanggalin
-  export: I -export
-  export_full: Mga setting ng pag -export sa pamamagitan ng aplikasyon
+    These bundled configurations are not editable and are designed to provide you with the best experience without customization. They automatically configure the most common applications for you.
+  bundled_title: App Config Bundled with Seelen
+  confirm_delete: Are you sure you want to delete this configuration/s?
+  confirm_delete_title: Confirm Delete
+  delete: Delete
+  export: Export
+  export_full: Export settings by application
   extra_info: >-
-    Ang Seelen UI ay gumagamit lamang ng isang identifier bawat app (unang tugma
-    na natagpuan) kaya ang pagkakasunud -sunod sa kung paano ang tinukoy ay
-    mahalaga, ang pinakabagong idinagdag ay unahin, dahil ang tala ang
-    talahanayan ay pinagsunod -sunod ng default mula sa pinakabagong hanggang sa
-    luma.
+    Seelen UI use only one identifier per app (first match found) so the order in how are specificated is important, the latest added will be prioritized, as note the table is sorted by default from latest to old.
   identifier:
-    add_block: Magdagdag ng block
-    and: At
+    add_block: Add Block
+    and: AND
     id: Identifier
-    kind: Kilalanin ng
-    matching_strategy: Diskarte sa pagtutugma
+    kind: Identify By
+    matching_strategy: Matching Strategy
     matching_strategy_option:
-      contains: Naglalaman
-      ends_with: Nagtatapos sa
-      equals: katumbas
-      regex: Regular na pagpapahayag
-      starts_with: Nagsisimula sa
-    negation: Negate pagtutugma
-    or: O
-    remove: Tanggalin ang bloke
+      contains: Contains
+      ends_with: Ends with
+      equals: Equals
+      regex: Regular expression
+      starts_with: Starts with
+    negation: Negate Matching
+    or: OR
+    remove: Delete Block
     type:
-      class: Klase
+      class: Class
       exe: Exe
-      path: Daan
-      title: Pamagat
-  import: Angkat
-  import_full: Mga setting ng pag -import sa pamamagitan ng application
-  new: Bago
-  search: Maghanap
-  swap: Ipagpalit
-cancel: Kanselahin
-close: Malapit
-delete: Tanggalin
+      path: Path
+      title: Title
+  import: Import
+  import_full: Import settings by application
+  new: New
+  search: Search
+  swap: Swap
+cancel: Cancel
+close: Close
+delete: Delete
 devtools:
-  app_folders: Mga folder ng app
-  custom_config_file: I -load ang pasadyang config file
-  data_folder: Folder ng data
-  enable: Paganahin ang mga tool ng developer
-  install_folder: Folder ng pag -install
-  load: Mag -load
-  settings_file: File ng mga setting
-  simulate_fullscreen: Gayahin ang fullscreen na kaganapan
+  app_folders: App Folders
+  custom_config_file: Load Custom Config File
+  data_folder: Data Folder
+  enable: Enable Developer Tools
+  install_folder: Installation Folder
+  load: Load
+  settings_file: Settings File
+  simulate_fullscreen: Simulate fullscreen event
 extras:
-  clear_icons: I -clear ang Mga Icon ng System Cache
-  clear_icons_tooltip: >-
-    Ang isang pag -restart ay maaaring kailanganin upang ganap na maisakatuparan
-    ang lahat ng mga widget
-  exit: Huminto/exit
-  links: Opisyal na mga link
-  relaunch: Muling pagsasaayos
-  version: Bersyon
+  clear_icons: Clear System Icons Cache
+  clear_icons_tooltip: A restart could be required to fully take effect on all widgets
+  exit: Quit/Exit
+  links: Official Links
+  relaunch: Relaunch
+  version: Version
 general:
-  accent_color: Kulay ng accent
-  date_format: Format ng petsa
+  accent_color: Accent Color
+  date_format: Date Format
   icon_pack:
-    available: Magagamit na Mga Icon Pack
-    selected: Mga Aktibong Icon Pack
-  language: Wika
-  startup: Patakbuhin sa Startup?
+    available: Available Icon Packs
+    selected: Active Icon Packs
+  language: Language
+  startup: Run on startup?
   theme:
-    available: Magagamit na Mga Tema
-    selected: Mga Aktibong Tema
+    available: Available Themes
+    selected: Active Themes
 header:
   labels:
-    config: Mga pagsasaayos
-    developer: Para sa mga developer
+    config: Configurations
+    developer: For developers
     extras: Extras
-    general: Pangkalahatan
+    general: General
     home: Home
-    icon_pack_editor: Mga icon na naka -cache
-    iconpack: Icon pack
-    monitors: Monitor
+    icon_pack_editor: Cached Icons
+    iconpack: Icon Packs
+    monitors: Monitors
     plugin: Plugins
-    resources: Mga mapagkukunan
-    shortcuts: Mga shortcut
-    soundpack: Mga tunog pack
-    specific_apps: Mga setting sa pamamagitan ng application
-    theme: Mga tema
-    virtual_desk: Mga Virtual Desktop
-    wallpaper: Wallpaper
-    widget: Mga widget
+    resources: Resources
+    shortcuts: Shortcuts
+    soundpack: Sound Packs
+    specific_apps: Settings by Application
+    theme: Themes
+    virtual_desk: Virtual Desktops
+    wallpaper: Wallpapers
+    widget: Widgets
 home:
-  new_resources: Mga bagong mapagkukunan
-inherit: Magmana
-inProgress: Sa pag -unlad ...
-insert: Ipasok
-loading: Naglo -load ...
+  new_resources: New Resources
+inherit: Inherit
+inProgress: In Progress...
+insert: Insert
+loading: Loading...
 miscellaneous: Miscellaneous
 monitors_configurations:
-  label: Subaybayan {{index}}
-more: Higit pa
-open: Buksan
-quit: Huminto ka
-remove: Alisin
-reset_all_to_default: I -reset ang lahat sa mga default na halaga
-reset_to_default: I -reset sa default na halaga
+  label: Monitor {{index}}
+more: More
+open: Open
+quit: Quit
+remove: Remove
+reset_all_to_default: Reset all to default values
+reset_to_default: Reset to default value
 resources:
-  app_outdated: >-
-    Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
-    Seelen UI upang gumana nang maayos.
-  discover: Tuklasin ang higit pang mga mapagkukunan
-  export: Mapagkukunan ng pag -export
-  import_wallpapers: Mag -import ng mga lokal na wallpaper
-  open_folder: Buksan ang folder ng mapagkukunan
+  app_outdated: This resource requires a newer version of Seelen UI to work properly.
+  discover: Discover more resources
+  export: Export Resource
+  import_wallpapers: Import local wallpapers
+  open_folder: Open resource folder
   outdated: >-
-    Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
-    Seelen UI at maaaring hindi gumana nang maayos.
-save: I -save
-save_and_restart: I -save at i -restart
-see_more: Makita pa
+    This resource was designed for an older version of Seelen UI and might not work properly.
+save: Save
+save_and_restart: Save & Restart
+see_more: See More
 shortcuts:
-  enable: Paganahin ang built-in na mga shortcut system
+  enable: Enable built-in shortcuts system
   enable_tooltip: >-
-    Huwag paganahin kung ipatutupad mo ang iyong sariling sistema ng mga
-    shortcut gamit ang Seelen UI Client
+    Disable if you will implement your own shortcuts system using the Seelen UI Client
   labels:
-    create_new_workspace: Lumikha ng bagong workspace
-    cycle_stack_next: Susunod na Stack Stack
-    cycle_stack_prev: Cycle Stack Nakaraan
-    cycle_wallpaper_next: Baguhin sa susunod na wallpaper
-    cycle_wallpaper_prev: Baguhin sa nakaraang wallpaper
-    decrease_height: Bawasan ang taas
-    decrease_width: Bawasan ang lapad
-    destroy_current_workspace: Wasakin ang kasalukuyang workspace
-    focus_bottom: Pokus sa ilalim
-    focus_latest: Pinakabagong ituon
-    focus_left: Kaliwa ng Focus
-    focus_right: Tama ang ituon
-    focus_top: Tumuon sa itaas
-    increase_height: Dagdagan ang taas
-    increase_width: Dagdagan ang lapad
-    misc_force_restart: Force restart
-    misc_open_settings: Buksan ang mga setting
-    misc_toggle_lock_tracing: Toggle lock tracing (log)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (log)
-    move_to_workspace: Lumipat sa workspace {{0}}
-    move_window_down: Ilipat ang window sa ibaba
-    move_window_left: Ilipat ang window sa kaliwa
-    move_window_right: Ilipat ang window sa kanan
-    move_window_up: Ilipat ang window sa itaas
-    pause_tiling: I -pause ang manager ng window window
+    create_new_workspace: Create new Workspace
+    cycle_stack_next: Cycle Stack Next
+    cycle_stack_prev: Cycle Stack Previous
+    cycle_wallpaper_next: Change to Next Wallpaper
+    cycle_wallpaper_prev: Change to Previous Wallpaper
+    decrease_height: Decrease Height
+    decrease_width: Decrease Width
+    destroy_current_workspace: Destroy Current Workspace
+    focus_bottom: Focus Bottom
+    focus_latest: Focus Latest
+    focus_left: Focus Left
+    focus_right: Focus Right
+    focus_top: Focus Top
+    increase_height: Increase Height
+    increase_width: Increase Width
+    misc_force_restart: Force Restart
+    misc_open_settings: Open Settings
+    misc_toggle_lock_tracing: Toggle Lock Tracing (logs)
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (logs)
+    move_to_workspace: Move to Workspace {{0}}
+    move_window_down: Move Window to Bottom
+    move_window_left: Move Window to Left
+    move_window_right: Move Window to Right
+    move_window_up: Move Window to Top
+    pause_tiling: Pause Tiling Window Manager
     reserve_bottom: Reserve Bottom
-    reserve_float: Reserve float
-    reserve_left: Reserve Kaliwa
-    reserve_right: Tama ang reserba
-    reserve_stack: Reserve stack
-    reserve_top: Reserve top
-    restore_sizes: Ibalik ang mga sukat
-    send_to_workspace: Ipadala sa Workspace {{0}}
-    start_weg_app: Ituon o simulan ang application {{0}}
-    switch_to_next_workspace: Lumipat sa Susunod na Workspace
-    switch_to_previous_workspace: Lumipat sa nakaraang workspace
-    switch_workspace: Lumipat sa workspace {{0}}
-    toggle_float: Toggle window float mode
-    toggle_launcher: Toggle launcher
-    toggle_monocle: Toggle workspace monocle mode
-  readonly_tooltip: Ito ay isang shortcut na basahin lamang
-  reset: I -reset sa mga default
+    reserve_float: Reserve Float
+    reserve_left: Reserve Left
+    reserve_right: Reserve Right
+    reserve_stack: Reserve Stack
+    reserve_top: Reserve Top
+    restore_sizes: Restore Sizes
+    send_to_workspace: Send to Workspace {{0}}
+    start_weg_app: Focus or Start Application {{0}}
+    switch_to_next_workspace: Switch to Next Workspace
+    switch_to_previous_workspace: Switch to Previous Workspace
+    switch_workspace: Switch to Workspace {{0}}
+    toggle_float: Toggle Window Float Mode
+    toggle_launcher: Toggle Launcher
+    toggle_monocle: Toggle Workspace Monocle Mode
+  readonly_tooltip: This is a read-only shortcut
+  reset: Reset to Defaults
 sides:
-  bottom: Ilalim
-  left: Kaliwa
-  right: Tama
-  top: Tuktok
+  bottom: Bottom
+  left: Left
+  right: Right
+  top: Top
 start:
   message: >-
-    Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
-    may isang isinama na tiling windows manager upang mapahusay ang iyong
-    karanasan sa Windows! Galugarin ang isang bagong panahon ng kahusayan at
-    multitasking sa aming intuitive interface at mga advanced na tampok.
-  message_accent: I -optimize ang iyong pagiging produktibo sa estilo!
-  title: Maligayang pagdating!
+    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated tiling windows manager to enhance your Windows experience! Explore a new era of efficiency and multitasking with our intuitive interface and advanced features.
+  message_accent: Optimize your productivity with style!
+  title: Welcome!
 toolbar:
-  auto_hide: Auto itago
-  delay_to_hide: Delay sa pagtatago
-  delay_to_show: Pagkaantala sa pagpapakita
-  dock_side: Posisyon
-  dynamic_color: Dinamikong Kulay
+  auto_hide: Auto Hide
+  delay_to_hide: Delay to hide
+  delay_to_show: Delay to show
+  dock_side: Position
+  dynamic_color: Dynamic Color
   dynamic_color_tooltip: >-
-    Paganahin ang mga dynamic na background at foreground na kulay batay sa
-    nakatutok na window. (Ang mga kulay ay maaaring ma -overridden ng mga tema)
-  enable: Paganahin ang magarbong toolbar
-  height: Taas
+    Enable dynamic background and foreground colors based on focused window. (Colors can be overridden by themes)
+  enable: Enable Fancy Toolbar
+  height: Height
   hide_mode:
-    always: Laging
-    never: Hindi kailanman
-    on_overlap: Sa overlap
+    always: Always
+    never: Never
+    on_overlap: On overlap
   label: Toolbar
-  placeholder: {}
-  show_hibernate: Ipakita ang pindutan ng hibernate sa menu ng kuryente
+  placeholder: { }
+  show_hibernate: Show hibernate button on power menu
 update:
-  available: Mag -update Magagamit!
-  channel: I -update ang channel
-  downloading: Pag -download ...
+  available: Update Available!
+  channel: Update Channel
+  downloading: Downloading...
 wall:
-  backgrounds: Wallpaper
-  blur: Malabo
-  contrast: Kaibahan
-  enable: Paganahin ang manager ng wallpaper
+  backgrounds: Wallpapers
+  blur: Blur
+  contrast: Contrast
+  enable: Enable Wallpaper Manager
   fit:
-    contain: Naglalaman
-    cover: Takpan
-    fill: Punan
-  flipHorizontal: I -flip ang pahalang
-  flipVertical: Flip vertical
-  hours: oras
-  interval: Baguhin ang wallpaper bawat
-  minutes: minuto
-  no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
-  objectFit: Pagkasyahin sa background
-  objectPosition: Posisyon sa background
-  overlayColor: Kulay ng overlay
+    contain: Contain
+    cover: Cover
+    fill: Fill
+  flipHorizontal: Flip Horizontal
+  flipVertical: Flip Vertical
+  hours: hours
+  interval: Change wallpaper every
+  minutes: minutes
+  no_background: Empty slideshow, using theme's background instead.
+  objectFit: Background Fit
+  objectPosition: Background Position
+  overlayColor: Overlay Color
   overlayMixBlendMode: Overlay Mix Blend Mode
-  playback: Bilis ng pag -playback
+  playback: Playback speed
   position:
-    bottom: Ilalim
-    center: Sentro
-    left: Kaliwa
-    right: Tama
-    top: Tuktok
+    bottom: Bottom
+    center: Center
+    left: Left
+    right: Right
+    top: Top
   random: Randomize slideshow
   saturation: Saturation
-  seconds: segundo
-  withOverlay: Na may overlay
+  seconds: seconds
+  withOverlay: With Overlay
 weg:
-  auto_hide: Auto itago
-  delay_to_hide: Delay sa pagtatago
-  delay_to_show: Pagkaantala sa pagpapakita
-  dock_side: Posisyon
-  enable: Paganahin ang pantalan/taskbar
-  filtering: Pag -filter ng item
+  auto_hide: Auto Hide
+  delay_to_hide: Delay to hide
+  delay_to_show: Delay to show
+  dock_side: Position
+  enable: Enable Dock/Taskbar
+  filtering: Item Filtering
   gap: Gap
   hide_mode:
-    always: Laging
-    never: Hindi kailanman
-    on_overlap: Sa overlap
+    always: Always
+    never: Never
+    on_overlap: On overlap
   items:
-    gap: Puwang sa pagitan ng mga item
-    label: Mga item
+    gap: Space Between Items
+    label: Items
     pinned_visibility:
-      always: Laging
-      label: Visibility ng Mga Naka-pin na Item
-      when_primary: Kapag ang monitor ay pangunahin
-    show_instance_counter: Ipakita ang bukas na counter ng windows
-    show_window_title: Ipakita ang Buksan ang Pamagat ng Window (Pahalang lamang)
-    size: Laki ng item
+      always: Always
+      label: Pinned Items Visibility
+      when_primary: When the monitor is primary
+    show_instance_counter: Show open windows counter
+    show_window_title: Show open window title (only horizontal)
+    size: Item Size
     temporal_visibility:
-      all: Lahat
-      label: Visibility ng Mga Na-unpin na Item
-      on_monitor: Sa Monitor
-    thumbnail_generation_enabled: Bumuo ng mga thumbnail sa item hover
-    visible_separators: Visible Separator
+      all: All
+      label: Unpinned Items Visibility
+      on_monitor: On Monitor
+    thumbnail_generation_enabled: Generate thumbnails on item hover
+    visible_separators: Visible Separators
   label: Dock/Taskbar
   margin: Margin
   mode:
-    full_width: Buong lapad ng screen
-    min_content: Maliit hangga't maaari
+    full_width: Full screen width
+    min_content: Small as can be
   padding: Padding
-  show_end_task: Ipakita ang pagtatapos ng gawain sa taskbar
-  width: Lapad
+  show_end_task: Show end task in taskbar
+  width: Width
 widget:
-  enable: Paganahin ang widget na ito
-  enable_for_monitor: Paganahin sa monitor na ito
-  instances: Mga pagkakataon
+  enable: Enable this widget
+  enable_for_monitor: Enable on this monitor
+  instances: Instances
 wm:
-  author: May -akda
+  author: Author
   border:
-    enable: Paganahin ang hangganan ng window
+    enable: Enable Window's Border
     offset: Border Offset
-    width: Lapad ng hangganan
-  description: Paglalarawan
-  enable: Paganahin ang manager ng window window
+    width: Border Width
+  description: Description
+  enable: Enable Tiling Window Manager
   layout: Layout
-  resize_delta: Baguhin ang laki ng Delta (%)
-  space_between_containers: Puwang sa pagitan ng mga lalagyan
-  workspace_offset: Workspaces Offset (Margin)
-  workspace_padding: Mga workspaces padding
+  resize_delta: Resize Delta (%)
+  space_between_containers: Space Between Containers
+  workspace_offset: Workspaces Offset (Margins)
+  workspace_padding: Workspaces Padding
