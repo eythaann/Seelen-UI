@@ -3,14 +3,12 @@ done: Fatto
 drivers:
   got_it: Capito
   monitor_disabled: >-
-    Sembra che alcuni driver del monitor siano disabilitati. Abilitarli per
-    consentire il corretto funzionamento di Seelen UI.
+    Sembra che alcuni driver del monitor siano disabilitati. Abilitarli per consentire il corretto funzionamento di Seelen UI.
   monitor_disabled_title: I driver del monitor sono disabilitati
 resource:
   added: È stata aggiunta una nuova risorsa
   download_failed_body: >-
-    Qualcosa è andato storto durante il download della risorsa, segnalatelo al
-    team di sviluppatori di Seelen.
+    Qualcosa è andato storto durante il download della risorsa, segnalatelo al team di sviluppatori di Seelen.
   download_failed_title: Download di risorse non riuscito
   downloading: Scaricare le risorse...
   downloading_body: L'operazione potrebbe richiedere alcuni secondi; non chiudere la finestra.
@@ -21,18 +19,14 @@ runtime:
   corrupted_file_path: Percorso del file corrotto
   download: Vai alla pagina di download
   not_found: Runtime WebView2 non trovato
-  not_found_description: >-
-    L'interfaccia utente di Seelen richiede Webview2 Runtime. Per favore
-    installalo.
+  not_found_description: L'interfaccia utente di Seelen richiede Webview2 Runtime. Per favore installalo.
   outdated: WebView2 Runtime obsoleto
   outdated_description: >-
-    L'interfaccia utente di Seelen richiede Webview2 Runtime %{min_version} o
-    versione successiva. Per favore aggiornalo.
+    L'interfaccia utente di Seelen richiede Webview2 Runtime %{min_version} o versione successiva. Per favore aggiornalo.
 service:
   not_running: Il servizio UI Seelen non è in esecuzione
   not_running_description: >-
-    Seelen UI Service (slu-service) è una dipendenza/un aiuto per il corretto
-    funzionamento dell'app.
+    Seelen UI Service (slu-service) è una dipendenza/un aiuto per il corretto funzionamento dell'app.
   not_running_ok: Avvia il servizio
 shortcut:
   register:
