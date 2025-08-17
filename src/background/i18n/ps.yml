@@ -3,14 +3,12 @@ done: شوی
 drivers:
   got_it: ور واخیست
   monitor_disabled: >-
-    داسې بریښي چې ځینې نظارت کونکي معلولین معیوب دي. مهرباني وکړئ دوی ته وړتیا
-    ورکړئ چې زنګ ووهي.
+    داسې بریښي چې ځینې نظارت کونکي معلولین معیوب دي. مهرباني وکړئ دوی ته وړتیا ورکړئ چې زنګ ووهي.
   monitor_disabled_title: د چلوونکو څارنه معلولیت لري
 resource:
   added: یو نوی سرچینه اضافه شوې
   download_failed_body: >-
-    یو څه د سرچینې ډاونلوډ پر مهال غلط شوي، مهرباني وکړئ دا د اصلي پراختیا کونکي
-    ټیم ته راپور کړئ.
+    یو څه د سرچینې ډاونلوډ پر مهال غلط شوي، مهرباني وکړئ دا د اصلي پراختیا کونکي ټیم ته راپور کړئ.
   download_failed_title: د سرچینې ډاونلوډ ونشو
   downloading: د شتمنیو ډاونلوډ کول ...
   downloading_body: دا ممکن یو څو ثانیې ونیسي، مهرباني وکړئ کړکۍ بند کړئ.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI د Webview2 Runtime ته اړتیا لري. مهرباني وکړئ دا نصب کړئ.
   outdated: WebView2 د چلولو وخت زوړ شوی
   outdated_description: >-
-    Seelen UI د Webview2 Runtime %{min_version} یا لوړ ته اړتیا لري. مهرباني
-    وکړئ تازه یې کړئ.
+    Seelen UI د Webview2 Runtime %{min_version} یا لوړ ته اړتیا لري. مهرباني وکړئ تازه یې کړئ.
 service:
   not_running: د سیلین UI خدمت نه روان دی
   not_running_description: >-
-    د سیلین UI خدمت (slu-service) د ایپ لپاره د سم کار کولو لپاره انحصار / مرسته
-    کونکی دی.
+    د سیلین UI خدمت (slu-service) د ایپ لپاره د سم کار کولو لپاره انحصار / مرسته کونکی دی.
   not_running_ok: خدمت پیل کړئ
 shortcut:
   register:
