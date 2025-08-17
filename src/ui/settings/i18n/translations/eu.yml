@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Laneko espazioa
     workspace_placeholder: Ezein ez
   bundled_msg: >-
-    Konfigurazio multzo hauek ez dira editagarriak eta pertsonalizaziorik gabeko
-    esperientzia onena emateko diseinatuta daude. Zuretzako aplikazio ohikoenak
-    automatikoki konfiguratzen dituzte.
+    Konfigurazio multzo hauek ez dira editagarriak eta pertsonalizaziorik gabeko esperientzia onena emateko diseinatuta daude. Zuretzako aplikazio ohikoenak automatikoki konfiguratzen dituzte.
   bundled_title: App konfigurazioa Seelen-ekin lotuta
   confirm_delete: Ziur konfigurazio hau ezabatu nahi duzula?
   confirm_delete_title: Berretsi Ezabatu
@@ -44,10 +42,7 @@ apps_configurations:
   export: Esportagai
   export_full: Esportatu ezarpenak aplikazioaren arabera
   extra_info: >-
-    Seelen UIk aplikazio bakoitzeko identifikatzaile bakarra erabili (lehen
-    partidua aurkitu da), beraz, zehatz-mehatz azaltzen da, azken erantsia
-    lehentasuna izango da, ohar gisa taula lehenetsi da lehenetsitakoa
-    zaharretik azkenetik ordenatuta.
+    Seelen UIk aplikazio bakoitzeko identifikatzaile bakarra erabili (lehen partidua aurkitu da), beraz, zehatz-mehatz azaltzen da, azken erantsia lehentasuna izango da, ohar gisa taula lehenetsi da lehenetsitakoa zaharretik azkenetik ordenatuta.
   identifier:
     add_block: Gehitu blokea
     and: Eta
@@ -138,24 +133,20 @@ remove: Atera
 reset_all_to_default: Berrezarri guztiak balio lehenetsiak
 reset_to_default: Berrezarri lehenetsitako balioa
 resources:
-  app_outdated: >-
-    Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona
-    dezan.
+  app_outdated: Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona dezan.
   discover: Ezagutu baliabide gehiago
   export: Esportatu baliabidea
   import_wallpapers: Inportatu tokiko horma-irudiak
   open_folder: Baliabide irekiko karpeta
   outdated: >-
-    Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala
-    funtzionatuko.
+    Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala funtzionatuko.
 save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
 see_more: Ikusi gehiago
 shortcuts:
   enable: Gaitu zuzeneko lasterbideen sistema
   enable_tooltip: >-
-    Desgaitu Seelen UI bezeroa erabiliz zure lasterbideen sistema ezartzen
-    baduzu
+    Desgaitu Seelen UI bezeroa erabiliz zure lasterbideen sistema ezartzen baduzu
   labels:
     create_new_workspace: Sortu laneko espazioa berria
     cycle_stack_next: Ziklo pila hurrengoa
@@ -206,10 +197,7 @@ sides:
   top: Tontor
 start:
   message: >-
-    Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
-    kudeatzailearekin txertatu zure Windows esperientzia hobetzeko! Arakatu
-    eraginkortasunaren eta multiataza aro berria gure interfaze intuitiboarekin
-    eta ezaugarri aurreratuekin.
+    Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho kudeatzailearekin txertatu zure Windows esperientzia hobetzeko! Arakatu eraginkortasunaren eta multiataza aro berria gure interfaze intuitiboarekin eta ezaugarri aurreratuekin.
   message_accent: Optimizatu zure produktibitatea estiloarekin!
   title: Ongi etorri!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Kokaleku
   dynamic_color: Kolore dinamikoa
   dynamic_color_tooltip: >-
-    Gaitu fokatutako leihoan oinarritutako atzeko plano eta lehen planoko kolore
-    dinamikoak. (Koloreak gaiak gainditu daitezke)
+    Gaitu fokatutako leihoan oinarritutako atzeko plano eta lehen planoko kolore dinamikoak. (Koloreak gaiak gainditu daitezke)
   enable: Gaitu tresna-barra
   height: Luzera
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Inoiz ez
     on_overlap: Gainjartzean
   label: Tresna barra
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Erakutsi Hibernate botoia Power Menuan
 update:
   available: Eguneratu eskuragarri!
