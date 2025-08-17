@@ -1,0 +1,102 @@
+bluetooth:
+  available: Dispositivos disponíveis (não emparelhados)
+  cancel: Cancelar
+  connected: Dispositivos conectados
+  forget: Esquecer
+  lowenergy: Baixa energia
+  more: Mais configurações de Bluetooth
+  not_found: Nenhum dispositivo Bluetooth encontrado
+  pair: Emparelhar
+  paired: Dispositivos emparelhados
+  placeholder:
+    passphrase: Senha, código ou PIN
+  scanning: Procurando dispositivos
+context_menu:
+  add_custom_text: Adicionar item de texto personalizado
+  modules: Módulos
+  remove: Remover módulo
+  reorder_disable: Bloquear barra de ferramentas
+  reorder_enable: Desbloquear barra de ferramentas
+  restore: Restaurar padrão
+  settings: Configurações
+  task_manager: Gerenciador de Tarefas
+keyboard:
+  more: Mais configurações de teclado
+  title: Layout do teclado
+media:
+  default_multimedia_volume: Volume multimídia
+  device:
+    channel:
+      system: Sons do sistema
+    comunications: Comunicações
+    missing: Dispositivo ausente
+    mixer: Mixer de volume
+    multimedia: Multimídia
+    settings: Mais configurações do dispositivo
+    volume: Volume do dispositivo
+  input_devices: Dispositivos de entrada
+  output_devices: Dispositivos de saída
+  players: Reprodutores de mídia
+network:
+  available: Redes disponíveis
+  connect: Conectar
+  connected: Conectado a
+  disconnect: Desconectar
+  hidden: Rede oculta
+  more: Mais configurações de rede
+  not_found: Nenhuma rede Wi-Fi encontrada
+  placeholder:
+    password: Senha
+  saved: Redes salvas
+  scanning: Procurando redes
+  secured: Rede criptografada
+notifications:
+  clear: Limpar tudo
+  empty: Sem notificações
+  settings: Mais configurações de notificações
+  title: Notificações
+placeholder:
+  battery_remaining: '% restante'
+  bluetooth_devices: Bluetooth e Dispositivos
+  ethernet_connected: Acesso à Internet
+  ethernet_disconnected: Sem acesso à Internet
+  notifications: Notificações
+  open_system_tray: Abrir bandeja do sistema
+  settings: Configurações rápidas
+  smart_charge: ' - Carga inteligente'
+  volume: Volume
+settings:
+  app_settings: Configurações do aplicativo
+  brightness: Brilho
+  hibernate: Hibernar
+  lock: Bloquear
+  log_out: Sair da conta
+  power: Energia
+  restart: Reiniciar
+  shutdown: Desligar
+  sleep: Suspender
+  title: Configurações
+tray:
+  empty: 'Nenhum item na bandeja (obs.: Windows 10 não implementado)'
+  unlabeled: Ícone de bandeja sem rótulo
+userhome:
+  empty_list: Sem itens
+  folders:
+    desktop: Área de Trabalho
+    documents: Documentos
+    downloads: Downloads
+    more_items: Mostrar mais...
+    music: Música
+    pictures: Imagens
+    recent: Recentemente usados
+    reduce_items: Mostrar menos...
+    title: Diretórios de usuário
+    videos: Vídeos
+  profile:
+    accounts: Abrir configurações de conta
+    open_onedrive: Abrir pasta do OneDrive
+    open_user_folder: Abrir pasta do usuário
+  seelen_options:
+    open_installation_folder: Abrir pasta de instalação do Seelen
+    open_log_folder: Abrir pasta de logs do Seelen
+    title: Diretórios do Seelen
