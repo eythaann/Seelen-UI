@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.4.0]
 ### features
 - wallpaper resources.
 - filter for wallpapers.
