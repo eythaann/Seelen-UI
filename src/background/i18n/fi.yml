@@ -3,14 +3,12 @@ done: Tehty
 drivers:
   got_it: Sain sen
   monitor_disabled: >-
-    Näyttää siltä, että jotkin näytönohjaimet on poistettu käytöstä. Ota ne
-    käyttöön, jotta Seelen UI toimisi oikein.
+    Näyttää siltä, että jotkin näytönohjaimet on poistettu käytöstä. Ota ne käyttöön, jotta Seelen UI toimisi oikein.
   monitor_disabled_title: Näytön ohjaimet on poistettu käytöstä
 resource:
   added: Uusi resurssi on lisätty
   download_failed_body: >-
-    Jotain meni pieleen resurssin lataamisen aikana, ilmoita siitä Seelenin
-    kehittäjätiimille.
+    Jotain meni pieleen resurssin lataamisen aikana, ilmoita siitä Seelenin kehittäjätiimille.
   download_failed_title: Resurssien lataus epäonnistui
   downloading: Varojen lataaminen...
   downloading_body: Tämä saattaa kestää muutaman sekunnin, älä sulje ikkunaa.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen-käyttöliittymä vaatii Webview2 Runtime -sovelluksen. Asenna se.
   outdated: WebView2 Runtime vanhentunut
   outdated_description: >-
-    Seelen-käyttöliittymä vaatii Webview2 Runtime %{min_version} tai uudemman.
-    Päivitä se.
+    Seelen-käyttöliittymä vaatii Webview2 Runtime %{min_version} tai uudemman. Päivitä se.
 service:
   not_running: Seelen UI -palvelu ei ole käynnissä
   not_running_description: >-
-    Seelen UI Service (slu-service) on riippuvuus/apuohjelma, jonka avulla
-    sovellus toimii oikein.
+    Seelen UI Service (slu-service) on riippuvuus/apuohjelma, jonka avulla sovellus toimii oikein.
   not_running_ok: Aloita palvelu
 shortcut:
   register:
