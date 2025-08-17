@@ -1,38 +1,38 @@
-cancel: Cancel
-done: Done
+cancel: 取消
+done: 完畢
 drivers:
-  got_it: Got it
+  got_it: 知道了
   monitor_disabled: >-
-    It appears that some monitor drivers are disabled. Please enable them to let Seelen UI work properly.
-  monitor_disabled_title: Monitor drivers are disabled
+    看來某些監視器驅動程序被禁用。 請讓他們讓Seelen UI正常工作。
+  monitor_disabled_title: 監視驅動程序被禁用
 resource:
-  added: A new resource has been added
+  added: 添加了一個新資源
   download_failed_body: >-
-    Something went wrong while downloading the resource, please report it to the Seelen developer team.
-  download_failed_title: Resource download failed
-  downloading: Downloading assets...
-  downloading_body: This might take a few seconds, please don't close the window.
-  enable: Enable
+    下載資源時出現問題，請向Seelen開發人員團隊報告。
+  download_failed_title: 資源下載失敗
+  downloading: 下載資產...
+  downloading_body: 這可能需要幾秒鐘，請不要關閉窗口。
+  enable: 使能夠
 runtime:
-  corrupted_data: Corrupted data
-  corrupted_file: A configuration file is corrupted, using default values instead.
-  corrupted_file_path: Corrupted file path
-  download: Go to download page
-  not_found: WebView2 Runtime not found
-  not_found_description: Seelen UI requires Webview2 Runtime. Please install it.
-  outdated: WebView2 Runtime outdated
+  corrupted_data: 損壞的數據
+  corrupted_file: 使用默認值改為損壞配置文件。
+  corrupted_file_path: 損壞的文件路徑
+  download: 轉到下載頁面
+  not_found: WebView2運行時找不到
+  not_found_description: Seelen UI需要WebView2運行時。 請安裝。
+  outdated: WebView2運行時過時
   outdated_description: >-
-    Seelen UI requires Webview2 Runtime %{min_version} or higher. Please update it.
+    Seelen UI需要WebView2運行時％{min_version}或更高。 請更新。
 service:
-  not_running: Seelen UI Service not running
+  not_running: Seelen UI服務不運行
   not_running_description: >-
-    Seelen UI Service (slu-service) is a dependency/helper for the app to work properly.
-  not_running_ok: Start service
+    SEELEN UI服務（SLU服務）是該應用程序正常工作的依賴性/助手。
+  not_running_ok: 開始服務
 shortcut:
   register:
-    placeholder: Press any key combination
-    title: Registering new shortcut
+    placeholder: 按任何鍵組合
+    title: 註冊新快捷方式
 tray:
-  quit: Quit
-  restart: Restart UI
-  settings: Settings
+  quit: 辭職
+  restart: 重新啟動UI
+  settings: 設定
