@@ -1,0 +1,3 @@
+files:
+  - source: i18n/**/en.yml
+    translation: /%original_path%/%locale_with_underscore%.yml

@@ -8,6 +8,7 @@ on:
       - "**.md"
       - "documentation/**"
       - ".github/**"
+      - "crowdin.yml"
   workflow_dispatch:
 
 concurrency:
