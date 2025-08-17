@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Obszar roboczy
     workspace_placeholder: Nic
   bundled_msg: >-
-    Te konfiguracje pakietowe nie są edytowalne i mają na celu zapewnienie
-    najlepszych wrażeń bez dostosowywania. Automatycznie konfigurują dla Ciebie
-    najczęściej używane aplikacje.
+    Te konfiguracje pakietowe nie są edytowalne i mają na celu zapewnienie najlepszych wrażeń bez dostosowywania. Automatycznie konfigurują dla Ciebie najczęściej używane aplikacje.
   bundled_title: App Config w pakiecie z Seelen
   confirm_delete: Czy na pewno chcesz usunąć tę konfigurację?
   confirm_delete_title: Potwierdź usunięcie
@@ -44,10 +42,7 @@ apps_configurations:
   export: Eksportuj
   export_full: Eksport ustawień według aplikacji
   extra_info: >-
-    Interfejs użytkownika Seelen używa tylko jednego identyfikatora na aplikację
-    (znaleziono pierwsze dopasowanie), dlatego ważna jest kolejność dodawania.
-    Priorytet będzie mieć najnowszy dodany, ponieważ tabela jest domyślnie
-    sortowana od najnowszego do najstarszego.
+    Interfejs użytkownika Seelen używa tylko jednego identyfikatora na aplikację (znaleziono pierwsze dopasowanie), dlatego ważna jest kolejność dodawania. Priorytet będzie mieć najnowszy dodany, ponieważ tabela jest domyślnie sortowana od najnowszego do najstarszego.
   identifier:
     add_block: Dodaj blok
     and: I
@@ -87,9 +82,7 @@ devtools:
   simulate_fullscreen: Symuluj wydarzenie na pełnym ekranie
 extras:
   clear_icons: Wyczyść pamięć podręczną ikon systemowych
-  clear_icons_tooltip: >-
-    Do poprawnego uruchomienia wszystkich widżetów może być wymagane ponowne
-    uruchomienie systemu
+  clear_icons_tooltip: Do poprawnego uruchomienia wszystkich widżetów może być wymagane ponowne uruchomienie systemu
   exit: Wyjdź
   links: Oficjalne linki
   relaunch: Wznów
@@ -146,16 +139,14 @@ resources:
   import_wallpapers: Import lokalnych tapet
   open_folder: Otwórz folder zasobów
   outdated: >-
-    Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
-    działać poprawnie.
+    Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie działać poprawnie.
 save: Zastosuj
 save_and_restart: Zastosuj i uruchom ponownie
 see_more: Zobacz więcej
 shortcuts:
   enable: Włącz wbudowany system skrótów
   enable_tooltip: >-
-    Wyłącz, jeśli zaimplementujesz własny system skrótów za pomocą klienta
-    Seelen UI
+    Wyłącz, jeśli zaimplementujesz własny system skrótów za pomocą klienta Seelen UI
   labels:
     create_new_workspace: Utwórz nowy obszar roboczy
     cycle_stack_next: Następnie stos cyklowy
@@ -206,10 +197,7 @@ sides:
   top: Góra
 start:
   message: >-
-    Witamy w Seelen UI, kompletnym środowisku pulpitu zawierającym menadżer
-    rozmieszczenia okien, który sprawi że korzystanie z systemu Windows stanie
-    się przyjemniejsze! Przejdź na wyższy poziom produktywności dzięki naszemu
-    intuicyjnemu interfejsowi i zaawansowanym funkcjom.
+    Witamy w Seelen UI, kompletnym środowisku pulpitu zawierającym menadżer rozmieszczenia okien, który sprawi że korzystanie z systemu Windows stanie się przyjemniejsze! Przejdź na wyższy poziom produktywności dzięki naszemu intuicyjnemu interfejsowi i zaawansowanym funkcjom.
   message_accent: Zwiększ swoją produktywność w świetnym stylu!
   title: Witaj!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Pozycja
   dynamic_color: Dynamiczny kolor
   dynamic_color_tooltip: >-
-    Włącz dynamiczne kolory tła i pierwszego planu w oparciu o okno, na którym
-    skupiono uwagę. (Kolory mogą być zastępowane przez motywy)
+    Włącz dynamiczne kolory tła i pierwszego planu w oparciu o okno, na którym skupiono uwagę. (Kolory mogą być zastępowane przez motywy)
   enable: Włącz pasek narzędzi
   height: Wysokość
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Nigdy
     on_overlap: Kiedy zasłania
   label: Pasek narzędzi
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Wyświetlanie przycisku hibernacji w menu zasilania
 update:
   available: Dostępna aktualizacja!
@@ -259,7 +246,7 @@ wall:
     center: Centrum
     left: Lewa
     right: Prawo
-    top: Top
+    top: Góra
   random: Losowa kolejność
   saturation: Nasycenie
   seconds: sekund
