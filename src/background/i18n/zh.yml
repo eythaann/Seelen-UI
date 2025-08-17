@@ -1,34 +1,38 @@
 cancel: 取消
-done: 完毕
+done: Done
 drivers:
-  got_it: 明白
-  monitor_disabled: 某些显示器驱动程序似乎被禁用。请启用它们，以便 Seelen UI 正常工作。
-  monitor_disabled_title: 显示器驱动程序已禁用
+  got_it: Got it
+  monitor_disabled: >-
+    It appears that some monitor drivers are disabled. Please enable them to let Seelen UI work properly.
+  monitor_disabled_title: Monitor drivers are disabled
 resource:
-  added: 新增资源
-  download_failed_body: 下载资源时出现问题，请向 Seelen 开发团队报告。
-  download_failed_title: 资源下载失败
-  downloading: 下载资产...
-  downloading_body: 这可能需要几秒钟，请不要关闭窗口。
-  enable: 启用
+  added: A new resource has been added
+  download_failed_body: >-
+    Something went wrong while downloading the resource, please report it to the Seelen developer team.
+  download_failed_title: Resource download failed
+  downloading: Downloading assets...
+  downloading_body: This might take a few seconds, please don't close the window.
+  enable: Enable
 runtime:
-  corrupted_data: 损坏的数据
-  corrupted_file: 配置文件已损坏，使用默认值代替。
-  corrupted_file_path: 文件路径损坏
-  download: 前往下载页面
-  not_found: 未找到 WebView2 运行时
-  not_found_description: Seelen UI 需要 Webview2 运行时。请安装它。
-  outdated: WebView2 运行时已过时
-  outdated_description: Seelen UI 需要 Webview2 运行时 %{min_version} 或更高版本。请更新它。
+  corrupted_data: Corrupted data
+  corrupted_file: A configuration file is corrupted, using default values instead.
+  corrupted_file_path: Corrupted file path
+  download: Go to download page
+  not_found: WebView2 Runtime not found
+  not_found_description: Seelen UI requires Webview2 Runtime. Please install it.
+  outdated: WebView2 Runtime outdated
+  outdated_description: >-
+    Seelen UI requires Webview2 Runtime %{min_version} or higher. Please update it.
 service:
-  not_running: Seelen UI 服务未运行
-  not_running_description: Seelen UI 服务（slu-service）是应用程序正常工作的依赖项/帮助程序。
-  not_running_ok: 启动服务
+  not_running: Seelen UI Service not running
+  not_running_description: >-
+    Seelen UI Service (slu-service) is a dependency/helper for the app to work properly.
+  not_running_ok: Start service
 shortcut:
   register:
-    placeholder: 按任何键组合
-    title: 注册新快捷方式
+    placeholder: Press any key combination
+    title: Registering new shortcut
 tray:
-  quit: 退出
-  restart: 重启用户界面
-  settings: 设置
+  quit: Quit
+  restart: Restart UI
+  settings: Settings
