@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    cmd: Command
-    explorer: Run
+    cmd: Comando
+    explorer: Correr
 footer:
-  shortcuts: Show Shortcuts
+  shortcuts: Mostre atalhos
 header:
-  search: App, Command or Path
+  search: Aplicativo, comando ou caminho
 item:
-  open_location: Open File Location
-  pin: Pin to Dock
+  open_location: Localização do arquivo aberto
+  pin: Pin para doca
