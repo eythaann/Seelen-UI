@@ -28,14 +28,13 @@ apps_configurations:
     options_label: 追加の設定
     title_create: '{{name}}を作成する'
     title_edit: 編集{{name}}
-    title_readonly: 「{{name}}」を表示しています
+    title_readonly: '「{{name}}」を表示しています'
     weg_options_label: ドック/タスクバーの設定
     wm_options_label: ウィンドウマネージャーの設定
     workspace: ワークスペース
     workspace_placeholder: なし
   bundled_msg: >-
-    これらのバンドルされた構成は編集可能ではなく、カスタマイズなしで最高の体験を提供するように設計されています。
-    最も一般的なアプリケーションを自動的に構成します。
+    これらのバンドルされた構成は編集可能ではなく、カスタマイズなしで最高の体験を提供するように設計されています。 最も一般的なアプリケーションを自動的に構成します。
   bundled_title: Seelenにバンドルされたアプリの構成
   confirm_delete: この構成を削除しますか？
   confirm_delete_title: 削除の確認
@@ -139,13 +138,15 @@ resources:
   export: 輸出リソース
   import_wallpapers: ローカル壁紙のインポート
   open_folder: リソースフォルダを開く
-  outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
+  outdated: >-
+    このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
 save: 保存
 save_and_restart: 保存して再起動
 see_more: もっと見る
 shortcuts:
   enable: ビルトインショートカットシステムを有効にします
-  enable_tooltip: Seelen UIクライアントを使用して独自のショートカットシステムを実装する場合は無効にします
+  enable_tooltip: >-
+    Seelen UIクライアントを使用して独自のショートカットシステムを実装する場合は無効にします
   labels:
     create_new_workspace: 新しいワークスペースを作成します
     cycle_stack_next: 次にサイクルスタック
@@ -196,8 +197,7 @@ sides:
   top: 上
 start:
   message: >-
-    SeelenUIにようこそ！ 組み込みのタイル型ウィンドウマネージャーを備えた究極のデスクトップ環境で、あなたのWindows での体験を向上させます！
-    直感的なインターフェースと高度な機能で効率的なマルチタスクの新時代を探求しましょう。
+    SeelenUIにようこそ！ 組み込みのタイル型ウィンドウマネージャーを備えた究極のデスクトップ環境で、あなたのWindows での体験を向上させます！ 直感的なインターフェースと高度な機能で効率的なマルチタスクの新時代を探求しましょう。
   message_accent: あなた好みのスタイリングで生産性を最適化！
   title: ようこそ！
 toolbar:
@@ -206,7 +206,8 @@ toolbar:
   delay_to_show: 表示が遅れる
   dock_side: ポジション
   dynamic_color: ダイナミックカラー
-  dynamic_color_tooltip: フォーカスされたウィンドウに基づく動的な背景色と前景色を有効にする。(色はテーマによって上書きできます)
+  dynamic_color_tooltip: >-
+    フォーカスされたウィンドウに基づく動的な背景色と前景色を有効にする。(色はテーマによって上書きできます)
   enable: ツールバーを有効にする
   height: 高さ
   hide_mode:
@@ -214,7 +215,7 @@ toolbar:
     never: 一度もない
     on_overlap: オーバーラップ時
   label: ツールバーの設定
-  placeholder: {}
+  placeholder: { }
   show_hibernate: 電源メニューにハイバネートボタンを表示する
 update:
   available: 更新が利用可能です！
