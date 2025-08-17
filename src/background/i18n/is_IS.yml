@@ -1,0 +1,38 @@
+cancel: Cancel
+done: Done
+drivers:
+  got_it: Got it
+  monitor_disabled: >-
+    It appears that some monitor drivers are disabled. Please enable them to let Seelen UI work properly.
+  monitor_disabled_title: Monitor drivers are disabled
+resource:
+  added: A new resource has been added
+  download_failed_body: >-
+    Something went wrong while downloading the resource, please report it to the Seelen developer team.
+  download_failed_title: Resource download failed
+  downloading: Downloading assets...
+  downloading_body: This might take a few seconds, please don't close the window.
+  enable: Enable
+runtime:
+  corrupted_data: Corrupted data
+  corrupted_file: A configuration file is corrupted, using default values instead.
+  corrupted_file_path: Corrupted file path
+  download: Go to download page
+  not_found: WebView2 Runtime not found
+  not_found_description: Seelen UI requires Webview2 Runtime. Please install it.
+  outdated: WebView2 Runtime outdated
+  outdated_description: >-
+    Seelen UI requires Webview2 Runtime %{min_version} or higher. Please update it.
+service:
+  not_running: Seelen UI Service not running
+  not_running_description: >-
+    Seelen UI Service (slu-service) is a dependency/helper for the app to work properly.
+  not_running_ok: Start service
+shortcut:
+  register:
+    placeholder: Press any key combination
+    title: Registering new shortcut
+tray:
+  quit: Quit
+  restart: Restart UI
+  settings: Settings
