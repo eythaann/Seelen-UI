@@ -3,36 +3,30 @@ done: Bajarildi
 drivers:
   got_it: Tushundim
   monitor_disabled: >-
-    Ko'rinib turibdiki, ba'zi haydovchilar o'chirilgan. Iltimos, ularni Seelen
-    Ui to'g'ri ishlashga imkon berish imkoniyatini bering.
+    Ko'rinib turibdiki, ba'zi haydovchilar o'chirilgan. Iltimos, ularni Seelen Ui to'g'ri ishlashga imkon berish imkoniyatini bering.
   monitor_disabled_title: Monitor drayverlari o'chirilgan
 resource:
   added: Yangi manba qo'shildi
   download_failed_body: >-
-    Resursni yuklayotganda biron bir narsa noto'g'ri ketdi, iltimos, Seelen
-    ishlab chiqaruvchi jamoasiga xabar bering.
+    Resursni yuklayotganda biron bir narsa noto'g'ri ketdi, iltimos, Seelen ishlab chiqaruvchi jamoasiga xabar bering.
   download_failed_title: Resurslarni yuklab olish amalga oshmadi
   downloading: Aktivlarni yuklab olish ...
   downloading_body: Bu bir necha soniya davom etishi mumkin, iltimos derazani yopmang.
   enable: Yoqib yubormoq
 runtime:
   corrupted_data: Buzilgan ma'lumotlar
-  corrupted_file: >-
-    Buning o'rniga standart qiymatlardan foydalangan holda konfiguratsiya fayli
-    buzilgan.
+  corrupted_file: Buning o'rniga standart qiymatlardan foydalangan holda konfiguratsiya fayli buzilgan.
   corrupted_file_path: Buzilgan fayl yo'li
   download: Yuklab olish sahifasiga o'ting
   not_found: WebView2 ish vaqti topilmadi
   not_found_description: Seelen UI uchun Webview2 Runtime kerak. Iltimos, uni oʻrnating.
   outdated: WebView2 ish vaqti eskirgan
   outdated_description: >-
-    Seelen UI uchun Webview2 Runtime %{min_version} yoki undan yuqoriroq talab
-    qilinadi. Iltimos, uni yangilang.
+    Seelen UI uchun Webview2 Runtime %{min_version} yoki undan yuqoriroq talab qilinadi. Iltimos, uni yangilang.
 service:
   not_running: Seelen UI xizmati ishlamayapti
   not_running_description: >-
-    Seelen UI xizmati (slu-xizmati) ilovaning to'g'ri ishlashi uchun
-    qaramlik/yordamchi hisoblanadi.
+    Seelen UI xizmati (slu-xizmati) ilovaning to'g'ri ishlashi uchun qaramlik/yordamchi hisoblanadi.
   not_running_ok: Xizmatni ishga tushirish
 shortcut:
   register:
