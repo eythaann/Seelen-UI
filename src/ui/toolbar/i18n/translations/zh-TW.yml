@@ -1,0 +1,102 @@
+bluetooth:
+  available: 可用设备（未配对）
+  cancel: 取消
+  connected: 已连接设备
+  forget: 忘记设备
+  lowenergy: 低能耗
+  more: 更多蓝牙设置
+  not_found: 未找到蓝牙设备
+  pair: 配对
+  paired: 已配对设备
+  placeholder:
+    passphrase: 密码口令、代码或 PIN 码
+  scanning: 扫描设备
+context_menu:
+  add_custom_text: 添加自定义文本项目
+  modules: 模块
+  remove: 删除模块
+  reorder_disable: 锁定工具栏
+  reorder_enable: 解锁工具栏
+  restore: 恢复到默认值
+  settings: 设置
+  task_manager: 任务管理器
+keyboard:
+  more: 更多键盘设置
+  title: 键盘布局
+media:
+  default_multimedia_volume: 多媒体音量
+  device:
+    channel:
+      system: 系统声音
+    comunications: 通信
+    missing: 丢失的设备
+    mixer: 音量混合器
+    multimedia: 多媒体
+    settings: 更多设备设置
+    volume: 设备音量
+  input_devices: 输入设备
+  output_devices: 输出设备
+  players: 媒体播放器
+network:
+  available: 可用网络
+  connect: 连接
+  connected: 已连接
+  disconnect: 断开连接
+  hidden: 隐藏网络
+  more: 更多网络设置
+  not_found: 未找到 Wi-Fi 网络
+  placeholder:
+    password: 密码
+  saved: 已保存的网络
+  scanning: 扫描网络
+  secured: 加密网络
+notifications:
+  clear: 全部清除
+  empty: 无通知
+  settings: 更多通知设置
+  title: 通知
+placeholder:
+  battery_remaining: '% 剩余电量'
+  bluetooth_devices: 蓝牙和设备
+  ethernet_connected: 已连接到互联网
+  ethernet_disconnected: 未连接到互联网
+  notifications: 通知
+  open_system_tray: 打开系统托盘
+  settings: 快速设置
+  smart_charge: ' - 智能充电'
+  volume: 音量
+settings:
+  app_settings: 应用设置
+  brightness: 亮度
+  hibernate: 休眠
+  lock: 锁
+  log_out: 注销
+  power: 电源
+  restart: 重启
+  shutdown: 关机
+  sleep: 睡眠
+  title: 设置
+tray:
+  empty: '无托盘项目（注：Windows 10 未实施）'
+  unlabeled: 无标签托盘图标
+userhome:
+  empty_list: 无项目
+  folders:
+    desktop: 桌面
+    documents: 文件
+    downloads: 下载
+    more_items: 显示更多...
+    music: 音乐
+    pictures: 图片
+    recent: 最近使用
+    reduce_items: 显示更少...
+    title: 用户目录
+    videos: 视频
+  profile:
+    accounts: 打开账户设置
+    open_onedrive: 打开 OneDrive 目录
+    open_user_folder: 打开用户目录
+  seelen_options:
+    open_installation_folder: 打开 Seelen 设置文件夹
+    open_log_folder: 打开 Seelen 日志文件夹
+    title: Seelen 目录
