@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Workspace
     workspace_placeholder: None
   bundled_msg: >-
-    These bundled configurations are not editable and are designed to provide
-    you with the best experience without customization. They automatically
-    configure the most common applications for you.
+    These bundled configurations are not editable and are designed to provide you with the best experience without customization. They automatically configure the most common applications for you.
   bundled_title: App Config Bundled with Seelen
   confirm_delete: Are you sure you want to delete this configuration/s?
   confirm_delete_title: Confirm Delete
@@ -44,9 +42,7 @@ apps_configurations:
   export: Export
   export_full: Export settings by application
   extra_info: >-
-    Seelen UI use only one identifier per app (first match found) so the order
-    in how are specificated is important, the latest added will be prioritized,
-    as note the table is sorted by default from latest to old.
+    Seelen UI use only one identifier per app (first match found) so the order in how are specificated is important, the latest added will be prioritized, as note the table is sorted by default from latest to old.
   identifier:
     add_block: Add Block
     and: AND
@@ -143,16 +139,14 @@ resources:
   import_wallpapers: Import local wallpapers
   open_folder: Open resource folder
   outdated: >-
-    This resource was designed for an older version of Seelen UI and might not
-    work properly.
+    This resource was designed for an older version of Seelen UI and might not work properly.
 save: Save
 save_and_restart: Save & Restart
 see_more: See More
 shortcuts:
   enable: Enable built-in shortcuts system
   enable_tooltip: >-
-    Disable if you will implement your own shortcuts system using the Seelen UI
-    Client
+    Disable if you will implement your own shortcuts system using the Seelen UI Client
   labels:
     create_new_workspace: Create new Workspace
     cycle_stack_next: Cycle Stack Next
@@ -203,10 +197,7 @@ sides:
   top: Top
 start:
   message: >-
-    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated
-    tiling windows manager to enhance your Windows experience! Explore a new era
-    of efficiency and multitasking with our intuitive interface and advanced
-    features.
+    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated tiling windows manager to enhance your Windows experience! Explore a new era of efficiency and multitasking with our intuitive interface and advanced features.
   message_accent: Optimize your productivity with style!
   title: Welcome!
 toolbar:
@@ -216,8 +207,7 @@ toolbar:
   dock_side: Position
   dynamic_color: Dynamic Color
   dynamic_color_tooltip: >-
-    Enable dynamic background and foreground colors based on focused window.
-    (Colors can be overridden by themes)
+    Enable dynamic background and foreground colors based on focused window. (Colors can be overridden by themes)
   enable: Enable Fancy Toolbar
   height: Height
   hide_mode:
@@ -225,7 +215,7 @@ toolbar:
     never: Never
     on_overlap: On overlap
   label: Toolbar
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Show hibernate button on power menu
 update:
   available: Update Available!
