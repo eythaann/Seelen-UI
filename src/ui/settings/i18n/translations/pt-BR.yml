@@ -1,0 +1,306 @@
+app_launcher:
+  enable: Ativar Lançador de Aplicativos
+  launch_on:
+    mouse_over: Ao passar o mouse
+    primary: Primário
+  monitor: Monitor para exibir
+  runners:
+    cmd: Comando
+    explorer: Executar
+    label: Executores
+apps_configurations:
+  app:
+    bindings: Vinculação (ambas as opções são obrigatórias)
+    category: Categoria
+    category_placeholder: Nenhum
+    monitor: Monitor
+    monitor_placeholder: Nenhum
+    name: Nome
+    ok_create: Criar
+    ok_edit: Atualizar
+    ok_readonly: Editar como novo
+    options:
+      float: Flutuante
+      force: Forçar gerenciamento
+      hidden: Ocultar da dock/barra de tarefas
+      pinned: Fixado
+      unmanage: Não gerenciar
+    options_label: Opções extras
+    title_create: Criando {{name}}
+    title_edit: Editando {{name}}
+    title_readonly: Visualizando {{name}}
+    weg_options_label: Opções da dock/barra de tarefas
+    wm_options_label: Opções do gerenciador de janelas
+    workspace: Área de trabalho
+    workspace_placeholder: Nenhum
+  bundled_msg: >-
+    Essas configurações agrupadas não são editáveis e foram projetadas para fornecer a melhor experiência sem personalização. Elas configuram automaticamente os aplicativos mais comuns para você.
+  bundled_title: Configurações de Aplicativos incluídas no Seelen
+  confirm_delete: Tem certeza de que deseja excluir esta(s) configuração(ões)?
+  confirm_delete_title: Confirmar exclusão
+  delete: Excluir
+  export: Exportar
+  export_full: Exportar configurações por aplicativo
+  extra_info: >-
+    A Seelen UI usa apenas um identificador por aplicativo (primeira correspondência encontrada); portanto, a ordem é importante. O último adicionado tem prioridade. A tabela é ordenada do mais recente ao mais antigo por padrão.
+  identifier:
+    add_block: Adicionar bloco
+    and: E
+    id: Identificador
+    kind: Identificar por
+    matching_strategy: Estratégia de correspondência
+    matching_strategy_option:
+      contains: Contém
+      ends_with: Termina com
+      equals: Igual
+      regex: Expressão regular
+      starts_with: Começa com
+    negation: Negar correspondência
+    or: OU
+    remove: Excluir bloco
+    type:
+      class: Classe
+      exe: Exe
+      path: Caminho
+      title: Título
+  import: Importar
+  import_full: Importar configurações por aplicativo
+  new: Novo
+  search: Pesquisar
+  swap: Trocar
+cancel: Cancelar
+close: Fechar
+delete: Excluir
+devtools:
+  app_folders: Pastas de Aplicativos
+  custom_config_file: Carregar Arquivo de Configuração Personalizado
+  data_folder: Pasta de Dados
+  enable: Ativar Ferramentas de Desenvolvedor
+  install_folder: Pasta de Instalação
+  load: Carregar
+  settings_file: Arquivo de Configurações
+  simulate_fullscreen: Simular evento de tela cheia
+extras:
+  clear_icons: Limpar cache de ícones do sistema
+  clear_icons_tooltip: Pode ser necessário reiniciar para aplicar a todos os widgets
+  exit: Sair
+  links: Links Oficiais
+  relaunch: Reiniciar
+  version: Versão
+general:
+  accent_color: Cor de destaque
+  date_format: Formato de data
+  icon_pack:
+    available: Pacotes de ícones disponíveis
+    selected: Pacotes de ícones ativos
+  language: Idioma
+  startup: Executar na inicialização?
+  theme:
+    available: Temas disponíveis
+    selected: Temas ativos
+header:
+  labels:
+    config: Configurações
+    developer: Para desenvolvedores
+    extras: Extras
+    general: Geral
+    home: Início
+    icon_pack_editor: Ícones em cache
+    iconpack: Pacotes de Ícones
+    monitors: Monitores
+    plugin: Plugins
+    resources: Recursos
+    shortcuts: Atalhos
+    soundpack: Pacotes de Som
+    specific_apps: Configurações por Aplicativo
+    theme: Temas
+    virtual_desk: Áreas de Trabalho Virtuais
+    wallpaper: Papéis de Parede
+    widget: Widgets
+home:
+  new_resources: Novos Recursos
+inherit: Herdar
+inProgress: Em andamento...
+insert: Inserir
+loading: Carregando...
+miscellaneous: Miscelânea
+monitors_configurations:
+  label: Monitor {{index}}
+more: Mais
+open: Abrir
+quit: Desistir
+remove: Remover
+reset_all_to_default: Redefinir tudo para os valores padrão
+reset_to_default: Redefinir para o valor padrão
+resources:
+  app_outdated: Esse recurso requer uma versão mais recente da interface do usuário da Seelen para funcionar corretamente.
+  discover: Descubra mais recursos
+  export: Recurso de exportação
+  import_wallpapers: Importar papéis de parede locais
+  open_folder: Abrir a pasta de recursos
+  outdated: >-
+    Esse recurso foi projetado para uma versão mais antiga da interface do usuário da Seelen e pode não funcionar corretamente.
+save: Salvar
+save_and_restart: Salve e reinicie
+see_more: Veja mais
+shortcuts:
+  enable: Habilitar o sistema de atalhos embutidos
+  enable_tooltip: >-
+    Desative se você implementar seu próprio sistema de atalhos usando o Seelen UI Client
+  labels:
+    create_new_workspace: Crie um novo espaço de trabalho
+    cycle_stack_next: Pilha de ciclo a seguir
+    cycle_stack_prev: Pilha de ciclo anterior
+    cycle_wallpaper_next: Mudar para o próximo papel de parede
+    cycle_wallpaper_prev: Mudar para papel de parede anterior
+    decrease_height: Diminuir a altura
+    decrease_width: Diminuir a largura
+    destroy_current_workspace: Destrua o espaço de trabalho atual
+    focus_bottom: Foco no fundo
+    focus_latest: Foco mais recente
+    focus_left: Foco restante
+    focus_right: Foco certo
+    focus_top: Focus Top
+    increase_height: Aumentar a altura
+    increase_width: Aumentar a largura
+    misc_force_restart: Forçar reinicialização
+    misc_open_settings: Abra as configurações
+    misc_toggle_lock_tracing: Traçar o traçado de trava (logs)
+    misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
+    move_to_workspace: Mova para o espaço de trabalho {{0}}
+    move_window_down: Mova a janela para o fundo
+    move_window_left: Mova a janela para a esquerda
+    move_window_right: Mova a janela para a direita
+    move_window_up: Mova a janela para o topo
+    pause_tiling: PAUSA PAUSE JANEGENTE DE JANDA TILING
+    reserve_bottom: Fundo de reserva
+    reserve_float: Reserve flutuar
+    reserve_left: Reserve à esquerda
+    reserve_right: Reserve certo
+    reserve_stack: Pilha de reserva
+    reserve_top: Reserve Top
+    restore_sizes: Restaurar tamanhos
+    send_to_workspace: Enviar para o espaço de trabalho {{0}}
+    start_weg_app: Concentre ou inicie o aplicativo {{0}}
+    switch_to_next_workspace: Mude para o próximo espaço de trabalho
+    switch_to_previous_workspace: Mudar para o espaço de trabalho anterior
+    switch_workspace: Mudar para o espaço de trabalho {{0}}
+    toggle_float: Alterne o modo de flutuação da janela
+    toggle_launcher: TOGLGLE Lançador
+    toggle_monocle: Alternar o modo de monocle na área de trabalho
+  readonly_tooltip: Este é um atalho somente leitura
+  reset: Redefinir para padrões
+sides:
+  bottom: Abaixo
+  left: Esquerda
+  right: Direita
+  top: Topo
+start:
+  message: >-
+    Bem-vindo ao Seelen UI, o melhor ambiente de área de trabalho com um gerenciador de janelas lado a lado incorporado para aprimorar sua experiência com o Windows! Explore uma nova era de eficiência e multitarefa com nossa interface intuitiva e recursos avançados.
+  message_accent: Otimize sua produtividade com estilo!
+  title: Bem-vindo!
+toolbar:
+  auto_hide: Esconder automaticamente
+  delay_to_hide: Demora para esconder
+  delay_to_show: Demora para mostrar
+  dock_side: Posição
+  dynamic_color: Cor dinâmica
+  dynamic_color_tooltip: >-
+    Habilite as cores dinâmicas de fundo e primeiro plano com base na janela focada. (As cores podem ser substituídas pelos temas)
+  enable: Ativar barra de ferramentas sofisticada
+  height: Altura
+  hide_mode:
+    always: Sempre
+    never: Nunca
+    on_overlap: Na sobreposição
+  label: Barra de ferramentas
+  placeholder: { }
+  show_hibernate: Mostre o botão Hibernate no menu Power
+update:
+  available: Atualização disponível!
+  channel: Atualizar canal
+  downloading: Download ...
+wall:
+  backgrounds: Papéis de parede
+  blur: Desfoque
+  contrast: Contraste
+  enable: Ativar gerente de papel de parede
+  fit:
+    contain: Conter
+    cover: Capa
+    fill: Preencher
+  flipHorizontal: Virar na horizontal
+  flipVertical: Virar vertical
+  hours: horas
+  interval: Troque o papel de parede todos
+  minutes: minutos
+  no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
+  objectFit: Ajuste do plano de fundo
+  objectPosition: Posição de fundo
+  overlayColor: Cor da sobreposição
+  overlayMixBlendMode: Overlay Mix Blend Mode (Modo de mistura de sobreposição)
+  playback: Velocidade de reprodução
+  position:
+    bottom: Parte inferior
+    center: Centro
+    left: Esquerda
+    right: Certo
+    top: Topo
+  random: Randomize Slideshow
+  saturation: Saturação
+  seconds: segundas
+  withOverlay: Com sobreposição
+weg:
+  auto_hide: Ocultar automaticamente
+  delay_to_hide: Demora para esconder
+  delay_to_show: Demora para mostrar
+  dock_side: Posição
+  enable: Habilitar Dock/Barra de Tarefas
+  filtering: Filtragem de itens
+  gap: Espaçamento
+  hide_mode:
+    always: Sempre
+    never: Nunca
+    on_overlap: Na sobreposição
+  items:
+    gap: Espaço entre itens
+    label: Item
+    pinned_visibility:
+      always: Sempre
+      label: Visibilidade dos itens fixados
+      when_primary: Quando o monitor é primário
+    show_instance_counter: Mostre o balcão do Windows aberto
+    show_window_title: Mostrar título de janela aberta (apenas horizontal)
+    size: Tamanho do item
+    temporal_visibility:
+      all: Todos
+      label: Visibilidade de itens não fixados
+      on_monitor: No monitor
+    thumbnail_generation_enabled: Gerar miniaturas no itens pairar
+    visible_separators: Separadores Visíveis
+  label: Dock/barra de tarefas
+  margin: Margem
+  mode:
+    full_width: Largura de tela inteira
+    min_content: Pequeno como pode ser
+  padding: Preenchimento
+  show_end_task: Mostrar tarefa final na barra de tarefas
+  width: Largura
+widget:
+  enable: Ativar esse widget
+  enable_for_monitor: Ativar neste monitor
+  instances: Instâncias
+wm:
+  author: Autor
+  border:
+    enable: Habilitar borda da janela
+    offset: Deslocamento de borda
+    width: Largura da borda
+  description: Descrição
+  enable: Habilitar gerenciador de janela de ladrilhos
+  layout: Disposição
+  resize_delta: Delta de redimensionamento (%)
+  space_between_containers: Espaço entre contêineres
+  workspace_offset: Deslocamento de espaços de trabalho (margens)
+  workspace_padding: Preenchimento de espaços de trabalho
