@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Indawo
     workspace_placeholder: Namunye
   bundled_msg: >-
-    Lokhu kulungiswa okuhlanganisiwe akuhlelekile futhi kuklanyelwe ukukunikeza
-    okuhlangenwe nakho okuhle kakhulu ngaphandle kokwenza ngokwezifiso.
-    Balungiselela ngokuzenzakalelayo izicelo ezivame kakhulu kuwe.
+    Lokhu kulungiswa okuhlanganisiwe akuhlelekile futhi kuklanyelwe ukukunikeza okuhlangenwe nakho okuhle kakhulu ngaphandle kokwenza ngokwezifiso. Balungiselela ngokuzenzakalelayo izicelo ezivame kakhulu kuwe.
   bundled_title: I-App Config ehlanganiswe ne-Seleen
   confirm_delete: Uqinisekile ukuthi ufuna ukususa lolu hlelo / s?
   confirm_delete_title: Qinisekisa ukususa
@@ -44,10 +42,7 @@ apps_configurations:
   export: Thumela kwamanye amazwe
   export_full: Thumela Amasethingi okuthumela ngaphandle ngesicelo
   extra_info: >-
-    I-Seelen UI isebenzisa kuphela isikhombi esisodwa sohlelo lokusebenza
-    ngalunye (umdlalo wokuqala otholakala) ngakho-ke i-oda lokuthi libalulekile
-    kanjani, njengoba itafula lakamuva lizobekwa phambili, njengoba inothi
-    lihlelwe ngokuzenzakalela kusuka kwakamuva kuya kwakamuva kuya kwakamuva.
+    I-Seelen UI isebenzisa kuphela isikhombi esisodwa sohlelo lokusebenza ngalunye (umdlalo wokuqala otholakala) ngakho-ke i-oda lokuthi libalulekile kanjani, njengoba itafula lakamuva lizobekwa phambili, njengoba inothi lihlelwe ngokuzenzakalela kusuka kwakamuva kuya kwakamuva kuya kwakamuva.
   identifier:
     add_block: Faka ibhlokhi
     and: Na-
@@ -87,9 +82,7 @@ devtools:
   simulate_fullscreen: Lingisa umcimbi wesikrini esigcwele
 extras:
   clear_icons: Sula i-Cold yesistimu ye-System
-  clear_icons_tooltip: >-
-    Ukuqalisa kabusha kungadingeka ukuthi kusebenze ngokuphelele kuwo wonke
-    amawijethi
+  clear_icons_tooltip: Ukuqalisa kabusha kungadingeka ukuthi kusebenze ngokuphelele kuwo wonke amawijethi
   exit: Quit / Phuma
   links: Izixhumanisi ezisemthethweni
   relaunch: Qondisa amandla ehlehliseyo
@@ -146,16 +139,14 @@ resources:
   import_wallpapers: Ngenisa amaphephadonga endawo
   open_folder: Ifolda Yezisetshenziswa
   outdated: >-
-    Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze
-    kahle.
+    Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze kahle.
 save: Hlenga
 save_and_restart: Gcina futhi Qalisa kabusha
 see_more: Buka Okuningi
 shortcuts:
   enable: Nika amandla uhlelo lwezinqamuleli ezakhelwe ngaphakathi
   enable_tooltip: >-
-    Khubaza uma uzosebenzisa uhlelo lwakho lwezinqamuleli usebenzisa iklayenti
-    le-Seelen UI
+    Khubaza uma uzosebenzisa uhlelo lwakho lwezinqamuleli usebenzisa iklayenti le-Seelen UI
   labels:
     create_new_workspace: Dala indawo yokusebenza entsha
     cycle_stack_next: Umjikelezo isitaki olandelayo
@@ -206,10 +197,7 @@ sides:
   top: Isihloko
 start:
   message: >-
-    Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
-    ofakiwe wokuthuthukisa isipiliyoni sakho seWindows! Hlola inkathi entsha
-    yokusebenza kahle kanye ne-multitasking nge-interface yethu enembile nezici
-    ezithuthukile.
+    Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows ofakiwe wokuthuthukisa isipiliyoni sakho seWindows! Hlola inkathi entsha yokusebenza kahle kanye ne-multitasking nge-interface yethu enembile nezici ezithuthukile.
   message_accent: Lungiselela umkhiqizo wakho ngesitayela!
   title: Uyemukelwa!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Ukuma
   dynamic_color: Umbala we-Dynamic
   dynamic_color_tooltip: >-
-    Nika amandla ingemuva elinamandla nemibala engaphambili esekelwe ewindini
-    eligxile. (Imibala ingaba ngaphezulu kwezindikimba)
+    Nika amandla ingemuva elinamandla nemibala engaphambili esekelwe ewindini eligxile. (Imibala ingaba ngaphezulu kwezindikimba)
   enable: Nika amandla amathuluzi e-fancy
   height: Ubude
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Ungalokothi
     on_overlap: Ngokugqagqana
   label: Indawo yamathuluzi
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Khombisa inkinobho ye-hibernate kwimenyu yamandla
 update:
   available: Ukuvuselelwa Kuyatholakala!
@@ -248,9 +235,7 @@ wall:
   hours: amahora
   interval: Shintsha iphepha lokunamathisela odongeni
   minutes: imizuzu
-  no_background: >-
-    Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
-    esikhundleni.
+  no_background: Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme esikhundleni.
   objectFit: Isendlalelo semuva
   objectPosition: Isikhundla sangemuva
   overlayColor: Umbala obheke phambili
