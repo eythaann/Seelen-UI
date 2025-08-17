@@ -56,7 +56,7 @@ notifications:
   settings: Више поставки обавештења
   title: Обавештења
 placeholder:
-  battery_remaining: преостали%
+  battery_remaining: 'преостали%'
   bluetooth_devices: Блуетоотх и уређаји
   ethernet_connected: Приступ интернету
   ethernet_disconnected: Нема приступа интернету
