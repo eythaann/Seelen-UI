@@ -1,38 +1,38 @@
-cancel: Cancel
-done: Done
+cancel: Cancelar
+done: Hecho
 drivers:
-  got_it: Got it
+  got_it: Entendido
   monitor_disabled: >-
-    It appears that some monitor drivers are disabled. Please enable them to let Seelen UI work properly.
-  monitor_disabled_title: Monitor drivers are disabled
+    Parece que algunos controladores de monitor están deshabilitados. Por favor, actívalos para que Seelen UI funcione correctamente.
+  monitor_disabled_title: Los controladores de monitor están desactivados
 resource:
-  added: A new resource has been added
+  added: Se ha añadido un nuevo recurso
   download_failed_body: >-
-    Something went wrong while downloading the resource, please report it to the Seelen developer team.
-  download_failed_title: Resource download failed
-  downloading: Downloading assets...
-  downloading_body: This might take a few seconds, please don't close the window.
-  enable: Enable
+    Algo ha ido mal al descargar el recurso, por favor informa de ello al equipo de desarrolladores de Seelen.
+  download_failed_title: Fallo en la descarga de recursos
+  downloading: Descarga de activos...
+  downloading_body: Esto puede tardar unos segundos, por favor no cierre la ventana.
+  enable: Activar
 runtime:
-  corrupted_data: Corrupted data
-  corrupted_file: A configuration file is corrupted, using default values instead.
-  corrupted_file_path: Corrupted file path
-  download: Go to download page
-  not_found: WebView2 Runtime not found
-  not_found_description: Seelen UI requires Webview2 Runtime. Please install it.
-  outdated: WebView2 Runtime outdated
+  corrupted_data: Datos dañados
+  corrupted_file: Un archivo de configuración está dañado, utilizando valores por defecto en su lugar.
+  corrupted_file_path: Ruta de archivo dañada
+  download: Ir a la página de descarga
+  not_found: Tiempo de ejecución de WebView2 no encontrado
+  not_found_description: La interfaz de usuario de Seelen requiere Webview2 Runtime. Por favor instálelo.
+  outdated: Tiempo de ejecución de WebView2 desactualizado
   outdated_description: >-
-    Seelen UI requires Webview2 Runtime %{min_version} or higher. Please update it.
+    La interfaz de usuario de Seelen requiere Webview2 Runtime %{min_version} o superior. Por favor actualícelo.
 service:
-  not_running: Seelen UI Service not running
+  not_running: El servicio Seelen UI no se ejecuta
   not_running_description: >-
-    Seelen UI Service (slu-service) is a dependency/helper for the app to work properly.
-  not_running_ok: Start service
+    Seelen UI Service (slu-service) es una dependencia/ayudante para que la aplicación funcione correctamente.
+  not_running_ok: Iniciar servicio
 shortcut:
   register:
-    placeholder: Press any key combination
-    title: Registering new shortcut
+    placeholder: Presione cualquier combinación de teclas
+    title: Registrando un nuevo atajo
 tray:
-  quit: Quit
-  restart: Restart UI
-  settings: Settings
+  quit: Deje de
+  restart: Reiniciar IU
+  settings: Ajustes
