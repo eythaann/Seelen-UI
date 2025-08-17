@@ -3,38 +3,30 @@ done: Vykonaný
 drivers:
   got_it: Mám to
   monitor_disabled: >-
-    Zdá sa, že niektoré ovládače monitora sú vypnuté. Povoľte ich, aby
-    používateľské rozhranie Seelen UI fungovalo správne.
+    Zdá sa, že niektoré ovládače monitora sú vypnuté. Povoľte ich, aby používateľské rozhranie Seelen UI fungovalo správne.
   monitor_disabled_title: Ovládače monitora sú vypnuté
 resource:
   added: Bol pridaný nový zdroj
   download_failed_body: >-
-    Pri sťahovaní zdroja sa niečo pokazilo, nahláste to prosím vývojárskemu tímu
-    Seelen.
+    Pri sťahovaní zdroja sa niečo pokazilo, nahláste to prosím vývojárskemu tímu Seelen.
   download_failed_title: Stiahnutie zdroja sa nepodarilo
   downloading: Sťahovanie aktív...
   downloading_body: Môže to trvať niekoľko sekúnd, nezatvárajte okno.
   enable: Povolenie stránky
 runtime:
   corrupted_data: Poškodené údaje
-  corrupted_file: >-
-    Konfiguračný súbor je poškodený a namiesto neho sa používajú predvolené
-    hodnoty.
+  corrupted_file: Konfiguračný súbor je poškodený a namiesto neho sa používajú predvolené hodnoty.
   corrupted_file_path: Poškodená cesta k súboru
   download: Prejdite na stránku sťahovania
   not_found: WebView2 Runtime sa nenašlo
-  not_found_description: >-
-    Používateľské rozhranie Seelen vyžaduje Webview2 Runtime. Nainštalujte si
-    ho.
+  not_found_description: Používateľské rozhranie Seelen vyžaduje Webview2 Runtime. Nainštalujte si ho.
   outdated: WebView2 Runtime je zastarané
   outdated_description: >-
-    Používateľské rozhranie Seelen vyžaduje Webview2 Runtime %{min_version}
-    alebo vyššie. Aktualizujte ho.
+    Používateľské rozhranie Seelen vyžaduje Webview2 Runtime %{min_version} alebo vyššie. Aktualizujte ho.
 service:
   not_running: Služba používateľského rozhrania Seelen nie je spustená
   not_running_description: >-
-    Seelen UI Service (slu-service) je závislosť/pomocník pre správne fungovanie
-    aplikácie.
+    Seelen UI Service (slu-service) je závislosť/pomocník pre správne fungovanie aplikácie.
   not_running_ok: Spustite službu
 shortcut:
   register:
