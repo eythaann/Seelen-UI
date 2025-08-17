@@ -1,7 +1,7 @@
 app_launcher:
-  enable: Activar App Launcher
+  enable: Activar Lanzador de Aplicaciones
   launch_on:
-    mouse_over: Pasar el ratón por encima
+    mouse_over: Posición del Ratón
     primary: Principal
   monitor: Monitor para mostrar
   runners:
@@ -13,7 +13,7 @@ apps_configurations:
     bindings: Encuadernación (ambas opciones son obligatorias)
     category: Categoría
     category_placeholder: Ninguno
-    monitor: Monitor
+    monitor: Pantalla
     monitor_placeholder: Ninguno
     name: Nombre
     ok_create: Cree
@@ -23,7 +23,7 @@ apps_configurations:
       float: Flotador
       force: Forzar la gestión
       hidden: Ocultar del dock/barra de tareas
-      pinned: Pinned
+      pinned: Anclado
       unmanage: No gestionar
     options_label: Opciones adicionales
     title_create: Crear {{nombre}}
@@ -108,7 +108,7 @@ header:
     icon_pack_editor: Iconos en caché
     iconpack: Paquetes de iconos
     monitors: Monitores
-    plugin: Plugins
+    plugin: Extensiones
     resources: Recursos
     shortcuts: Atajos
     soundpack: Paquetes de sonido
@@ -125,7 +125,7 @@ insert: Inserte
 loading: Cargando...
 miscellaneous: Varios
 monitors_configurations:
-  label: Monitor {{index}}
+  label: Pantalla {{index}}
 more: Más
 open: Abrir
 quit: Deje de
@@ -194,7 +194,7 @@ sides:
   bottom: Fondo
   left: Izquierda
   right: Derecha
-  top: Top
+  top: Superior
 start:
   message: >-
     Bienvenido a Seelen UI, el Entorno de Escritorio definitivo con un gestor de ventanas en mosaico incorporado para mejorar tu experiencia Windows. Explora una nueva era de eficiencia y multitarea con nuestra interfaz intuitiva y funciones avanzadas.
@@ -246,7 +246,7 @@ wall:
     center: Centro
     left: Izquierda
     right: Derecha
-    top: Top
+    top: Arriba
   random: Cambio de fondo aleatorio
   saturation: Saturación
   seconds: segundos
