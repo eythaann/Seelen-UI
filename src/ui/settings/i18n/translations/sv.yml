@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Arbetsyta
     workspace_placeholder: Ingen
   bundled_msg: >-
-    Dessa bundna konfigurationer är inte redigerbara och är utformade för att ge
-    dig den bästa upplevelsen utan anpassning. De konfigurerar automatiskt de
-    vanligaste applikationerna för dig.
+    Dessa bundna konfigurationer är inte redigerbara och är utformade för att ge dig den bästa upplevelsen utan anpassning. De konfigurerar automatiskt de vanligaste applikationerna för dig.
   bundled_title: App config bunded med seelen
   confirm_delete: Är du säker på att du vill ta bort den här konfigurationen/s?
   confirm_delete_title: Bekräfta radering
@@ -44,10 +42,7 @@ apps_configurations:
   export: Exportera
   export_full: Exportera inställningar per applikation
   extra_info: >-
-    Seelen UI använder endast en identifierare per app (första matchningen
-    hittas) så ordningen i hur de specificeras är viktig, det senast tillagda
-    kommer att prioriteras, som observera att tabellen sorteras som standard
-    från senaste till gammal.
+    Seelen UI använder endast en identifierare per app (första matchningen hittas) så ordningen i hur de specificeras är viktig, det senast tillagda kommer att prioriteras, som observera att tabellen sorteras som standard från senaste till gammal.
   identifier:
     add_block: Lägga till
     and: OCH
@@ -144,16 +139,14 @@ resources:
   import_wallpapers: Importera lokala bakgrundsbilder
   open_folder: Öppna resursmappen
   outdated: >-
-    Den här resursen är utformad för en äldre version av Seelen UI och kanske
-    inte fungerar korrekt.
+    Den här resursen är utformad för en äldre version av Seelen UI och kanske inte fungerar korrekt.
 save: Spara
 save_and_restart: Spara och starta om
 see_more: Se mer
 shortcuts:
   enable: Aktivera inbyggda genvägssystem
   enable_tooltip: >-
-    Inaktivera om du kommer att implementera ditt eget genvägssystem med Seelen
-    UI -klienten
+    Inaktivera om du kommer att implementera ditt eget genvägssystem med Seelen UI -klienten
   labels:
     create_new_workspace: Skapa en ny arbetsyta
     cycle_stack_next: Cykelstack nästa
@@ -204,10 +197,7 @@ sides:
   top: Topp
 start:
   message: >-
-    Välkommen till Seelen UI, den ultimata skrivbordsmiljön med en införlivad
-    kakling Windows Manager för att förbättra din Windows -upplevelse! Utforska
-    en ny era av effektivitet och multitasking med vårt intuitiva gränssnitt och
-    avancerade funktioner.
+    Välkommen till Seelen UI, den ultimata skrivbordsmiljön med en införlivad kakling Windows Manager för att förbättra din Windows -upplevelse! Utforska en ny era av effektivitet och multitasking med vårt intuitiva gränssnitt och avancerade funktioner.
   message_accent: Optimera din produktivitet med stil!
   title: Välkommen!
 toolbar:
@@ -217,8 +207,7 @@ toolbar:
   dock_side: Position
   dynamic_color: Dynamisk färg
   dynamic_color_tooltip: >-
-    Aktivera dynamiska bakgrunds- och förgrundsfärger baserat på fokuserat
-    fönster. (Färgerna kan åsidosättas av teman)
+    Aktivera dynamiska bakgrunds- och förgrundsfärger baserat på fokuserat fönster. (Färgerna kan åsidosättas av teman)
   enable: Aktivera snyggt verktygsfält
   height: Höjd
   hide_mode:
@@ -226,7 +215,7 @@ toolbar:
     never: Aldrig
     on_overlap: På överlappning
   label: Verktygsfält
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Visa knappen för viloläge i Power-menyn
 update:
   available: Uppdatering tillgänglig!
