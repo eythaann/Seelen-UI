@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Workspace
     workspace_placeholder: Nessuno
   bundled_msg: >-
-    Queste configurazioni fornite non sono modificabili e sono progettate per
-    fornirvi la migliore esperienza senza personalizzazione. Configurano
-    automaticamente le applicazioni più comuni per voi.
+    Queste configurazioni fornite non sono modificabili e sono progettate per fornirvi la migliore esperienza senza personalizzazione. Configurano automaticamente le applicazioni più comuni per voi.
   bundled_title: Config App Fornite con Seelen
   confirm_delete: Siete sicuri di voler eliminare questa/e configurazione/i?
   confirm_delete_title: Conferma Eliminazione
@@ -44,10 +42,7 @@ apps_configurations:
   export: Esporta
   export_full: Esportazione delle impostazioni per applicazione
   extra_info: >-
-    Seelen UI utilizza solo un identificatore per app (primo corrispondente
-    trovato), quindi l'ordine in cui sono specificate è importante; l'ultima
-    aggiunta avrà la priorità. Nota che la tabella è ordinata per impostazione
-    predefinita dalla più recente alla più vecchia.
+    Seelen UI utilizza solo un identificatore per app (primo corrispondente trovato), quindi l'ordine in cui sono specificate è importante; l'ultima aggiunta avrà la priorità. Nota che la tabella è ordinata per impostazione predefinita dalla più recente alla più vecchia.
   identifier:
     add_block: Aggiungi Blocco
     and: E
@@ -138,24 +133,20 @@ remove: Rimuovi
 reset_all_to_default: Ripristinare tutti i valori predefiniti
 reset_to_default: Ripristino del valore predefinito
 resources:
-  app_outdated: >-
-    Questa risorsa richiede una versione più recente di Seelen UI per funzionare
-    correttamente.
+  app_outdated: Questa risorsa richiede una versione più recente di Seelen UI per funzionare correttamente.
   discover: Scoprire altre risorse
   export: Esportazione di risorse
   import_wallpapers: Importazione di sfondi locali
   open_folder: Aprire la cartella delle risorse
   outdated: >-
-    Questa risorsa è stata progettata per una versione precedente di Seelen UI e
-    potrebbe non funzionare correttamente.
+    Questa risorsa è stata progettata per una versione precedente di Seelen UI e potrebbe non funzionare correttamente.
 save: Salva
 save_and_restart: Salva e Riavvia
 see_more: Per saperne di più
 shortcuts:
   enable: Abilita le scorciatoie integrate
   enable_tooltip: >-
-    Disabilita se implementerai il tuo sistema di scorciatoie utilizzando il
-    client UI Seelen
+    Disabilita se implementerai il tuo sistema di scorciatoie utilizzando il client UI Seelen
   labels:
     create_new_workspace: Crea nuovo spazio di lavoro
     cycle_stack_next: Cycle Stack Next
@@ -206,10 +197,7 @@ sides:
   top: Alto
 start:
   message: >-
-    Benvenuti in Seelen UI, l'ambiente desktop definitivo con un gestore delle
-    finestre a tiling incorporato per migliorare la vostra esperienza Windows!
-    Esplorate una nuova era di efficienza e multitasking con la nostra
-    interfaccia intuitiva e funzionalità avanzate.
+    Benvenuti in Seelen UI, l'ambiente desktop definitivo con un gestore delle finestre a tiling incorporato per migliorare la vostra esperienza Windows! Esplorate una nuova era di efficienza e multitasking con la nostra interfaccia intuitiva e funzionalità avanzate.
   message_accent: Ottimizzate la vostra produttività con stile!
   title: Benvenuti!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Posizione
   dynamic_color: Colore dinamico
   dynamic_color_tooltip: >-
-    Abilita i colori dinamici di sfondo e primo piano in base alla finestra
-    focalizzata. (I colori possono essere sovrascritti dai temi).
+    Abilita i colori dinamici di sfondo e primo piano in base alla finestra focalizzata. (I colori possono essere sovrascritti dai temi).
   enable: Abilita Barra Fancy
   height: Altezza
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Mai
     on_overlap: Sulla sovrapposizione
   label: Barra
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Mostra il pulsante di ibernazione nel menu di alimentazione
 update:
   available: Aggiornamento Disponibile!
