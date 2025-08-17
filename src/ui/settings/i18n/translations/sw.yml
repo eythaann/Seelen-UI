@@ -34,8 +34,7 @@ apps_configurations:
     workspace: Nafasi ya kazi
     workspace_placeholder: Hakuna
   bundled_msg: >-
-    Usanidi huu uliowekwa wazi hauwezi kuhaririwa na umeundwa kukupa uzoefu bora
-    bila ubinafsishaji. Wao husanidi moja kwa moja programu za kawaida kwako.
+    Usanidi huu uliowekwa wazi hauwezi kuhaririwa na umeundwa kukupa uzoefu bora bila ubinafsishaji. Wao husanidi moja kwa moja programu za kawaida kwako.
   bundled_title: Programu ya kusanidi na Seelen
   confirm_delete: Je! Una uhakika unataka kufuta usanidi huu/s?
   confirm_delete_title: Thibitisha Futa
@@ -43,10 +42,7 @@ apps_configurations:
   export: Kuuza nje
   export_full: Mipangilio ya kuuza nje na Maombi
   extra_info: >-
-    Seelen UI hutumia kitambulisho kimoja tu kwa kila programu (kwanza
-    kupatikana) kwa hivyo mpangilio wa jinsi ulivyobainishwa ni muhimu, ya hivi
-    punde zaidi yatapewa kipaumbele, kwani kumbuka jedwali hupangwa kwa
-    chaguo-msingi kutoka kwa hivi karibuni hadi vya zamani.
+    Seelen UI hutumia kitambulisho kimoja tu kwa kila programu (kwanza kupatikana) kwa hivyo mpangilio wa jinsi ulivyobainishwa ni muhimu, ya hivi punde zaidi yatapewa kipaumbele, kwani kumbuka jedwali hupangwa kwa chaguo-msingi kutoka kwa hivi karibuni hadi vya zamani.
   identifier:
     add_block: Ongeza block
     and: Na
@@ -143,16 +139,14 @@ resources:
   import_wallpapers: Ingiza wallpapers za mitaa
   open_folder: Fungua folda ya rasilimali
   outdated: >-
-    Rasilimali hii ilibuniwa kwa toleo la zamani la Seelen UI na linaweza
-    kufanya kazi vizuri.
+    Rasilimali hii ilibuniwa kwa toleo la zamani la Seelen UI na linaweza kufanya kazi vizuri.
 save: Kuokoa
 save_and_restart: Okoa na uanze tena
 see_more: Tazama zaidi
 shortcuts:
   enable: Wezesha mfumo wa mkato uliojengwa ndani
   enable_tooltip: >-
-    Lemaza ikiwa utatumia mfumo wako wa njia za mkato kwa kutumia mteja wa
-    Seelen UI
+    Lemaza ikiwa utatumia mfumo wako wa njia za mkato kwa kutumia mteja wa Seelen UI
   labels:
     create_new_workspace: Unda nafasi mpya ya kazi
     cycle_stack_next: Mzunguko wa mzunguko unaofuata
@@ -203,9 +197,7 @@ sides:
   top: Juu
 start:
   message: >-
-    Karibu Seelen UI, mazingira ya mwisho ya desktop na meneja wa Windows
-    aliyeingizwa ili kuongeza uzoefu wako wa Windows! Chunguza enzi mpya ya
-    ufanisi na multitasking na interface yetu ya angavu na sifa za hali ya juu.
+    Karibu Seelen UI, mazingira ya mwisho ya desktop na meneja wa Windows aliyeingizwa ili kuongeza uzoefu wako wa Windows! Chunguza enzi mpya ya ufanisi na multitasking na interface yetu ya angavu na sifa za hali ya juu.
   message_accent: Boresha tija yako na mtindo!
   title: Karibu!
 toolbar:
@@ -215,8 +207,7 @@ toolbar:
   dock_side: Msimamo
   dynamic_color: Rangi ya nguvu
   dynamic_color_tooltip: >-
-    Wezesha asili ya nguvu na rangi za mbele kulingana na dirisha lililolenga.
-    (Rangi zinaweza kupitishwa na mada)
+    Wezesha asili ya nguvu na rangi za mbele kulingana na dirisha lililolenga. (Rangi zinaweza kupitishwa na mada)
   enable: Wezesha zana ya dhana
   height: Urefu
   hide_mode:
@@ -224,7 +215,7 @@ toolbar:
     never: Kamwe
     on_overlap: Juu ya mwingiliano
   label: Zana
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Onyesha kitufe cha Hibernate kwenye menyu ya nguvu
 update:
   available: Sasisha inapatikana!
