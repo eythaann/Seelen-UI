@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Çalışma Alanı
     workspace_placeholder: Yok
   bundled_msg: >-
-    Bu paketlenmiş yapılandırmalar düzenlenemez ve özelleştirme olmadan size en
-    iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları otomatik 
-    olarak yapılandırır.
+    Bu paketlenmiş yapılandırmalar düzenlenemez ve özelleştirme olmadan size en iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları otomatik olarak yapılandırır.
   bundled_title: Seelen ile Birlikte Gelen Uygulama Yapılandırması
   confirm_delete: Bu yapılandırmayı silmek istediğinizden emin misiniz?
   confirm_delete_title: Silmeyi Onayla
@@ -44,10 +42,7 @@ apps_configurations:
   export: Dışa Aktar
   export_full: Ayarları uygulamaya göre dışa aktar
   extra_info: >-
-    Seelen UI, uygulama başına yalnızca bir tanımlayıcı kullanır (ilk eşleşme
-    bulundu), bu nedenle nasıl belirlendiği sırası önemlidir. Tablonun
-    varsayılan olarak en yeniden eskiye doğru sıralandığını unutmayın, en son
-    eklenenlere öncelik verilecektir.
+    Seelen UI, uygulama başına yalnızca bir tanımlayıcı kullanır (ilk eşleşme bulundu), bu nedenle nasıl belirlendiği sırası önemlidir. Tablonun varsayılan olarak en yeniden eskiye doğru sıralandığını unutmayın, en son eklenenlere öncelik verilecektir.
   identifier:
     add_block: Blok Ekle
     and: VE
@@ -138,24 +133,20 @@ remove: Kaldır
 reset_all_to_default: Tümünü varsayılan değerlere sıfırla
 reset_to_default: Varsayılan değere sıfırla
 resources:
-  app_outdated: >-
-    Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
-    gerekir.
+  app_outdated: Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü gerekir.
   discover: Daha fazla kaynak keşfedin
   export: Kaynak Dışa Aktarımı
   import_wallpapers: Yerel duvar kağıtlarını içe aktarma
   open_folder: Kaynak klasörünü aç
   outdated: >-
-    Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün
-    çalışmayabilir.
+    Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün çalışmayabilir.
 save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 see_more: Daha Fazla Gör
 shortcuts:
   enable: Dahili kısayol sistemini etkinleştirin
   enable_tooltip: >-
-    Seelen UI istemcisini kullanarak kendi kısayol sisteminizi uygulayacaksanız
-    devre dışı bırakın
+    Seelen UI istemcisini kullanarak kendi kısayol sisteminizi uygulayacaksanız devre dışı bırakın
   labels:
     create_new_workspace: Yeni çalışma alanı oluşturun
     cycle_stack_next: Bisiklet yığını sonraki
@@ -206,10 +197,7 @@ sides:
   top: Üst
 start:
   message: >-
-    Seelen UI'a hoş geldiniz! Windows deneyiminizi geliştirmek için entegre 
-    döşeme pencere yöneticisi ile en iyi masaüstü ortamı. Kullanıcı dostu
-    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevde yeni bir
-    çağı keşfedin.
+    Seelen UI'a hoş geldiniz! Windows deneyiminizi geliştirmek için entegre döşeme pencere yöneticisi ile en iyi masaüstü ortamı. Kullanıcı dostu arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevde yeni bir çağı keşfedin.
   message_accent: Verimliliğinizi stil ile optimize edin!
   title: Hoş Geldiniz!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Pozisyon
   dynamic_color: Dinamik Renk
   dynamic_color_tooltip: >-
-    Odaklanılan pencereye göre dinamik arka plan ve ön plan renklerini
-    etkinleştirin. (Renkler temalar tarafından geçersiz kılınabilir)
+    Odaklanılan pencereye göre dinamik arka plan ve ön plan renklerini etkinleştirin. (Renkler temalar tarafından geçersiz kılınabilir)
   enable: Araç Çubuğunu Etkinleştir
   height: Yükseklik
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Asla
     on_overlap: Üst üste binme durumunda
   label: Araç Çubuğu
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Güç menüsünde hazırda bekletme düğmesini göster
 update:
   available: Güncelleme Mevcut!
