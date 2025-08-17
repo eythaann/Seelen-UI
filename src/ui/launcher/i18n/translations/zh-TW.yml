@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: 命令
+    explorer: 运行
+footer:
+  shortcuts: 显示快捷方式
+header:
+  search: 应用程序、命令或路径
+item:
+  open_location: 打开文件位置
+  pin: 固定到 Dock / 任务栏
