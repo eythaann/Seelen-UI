@@ -3,14 +3,12 @@ done: Gert
 drivers:
   got_it: Fékk það
   monitor_disabled: >-
-    Svo virðist sem sumir eftirlitsbílstjórar séu óvirkir. Vinsamlegast gerðu
-    þeim kleift að láta Seelen UI virka almennilega.
+    Svo virðist sem sumir eftirlitsbílstjórar séu óvirkir. Vinsamlegast gerðu þeim kleift að láta Seelen UI virka almennilega.
   monitor_disabled_title: Fylgstu ökumenn eru óvirkir
 resource:
   added: Nýjum auðlind hefur verið bætt við
   download_failed_body: >-
-    Eitthvað fór úrskeiðis þegar hún halaði niður auðlindinni, vinsamlegast
-    tilkynntu það til Seelen Developer teymisins.
+    Eitthvað fór úrskeiðis þegar hún halaði niður auðlindinni, vinsamlegast tilkynntu það til Seelen Developer teymisins.
   download_failed_title: Auðlind niðurhal mistókst
   downloading: Að hlaða niður eignum ...
   downloading_body: Þetta gæti tekið nokkrar sekúndur, vinsamlegast ekki loka glugganum.
@@ -24,11 +22,11 @@ runtime:
   not_found_description: Seelen UI krefst Webview2 Runtime. Vinsamlegast settu það upp.
   outdated: WebView2 Runtime úreltur
   outdated_description: >-
-    Seelen notendaviðmót krefst Webview2 Runtime %{min_version} eða hærri.
-    Vinsamlegast uppfærðu það.
+    Seelen notendaviðmót krefst Webview2 Runtime %{min_version} eða hærri. Vinsamlegast uppfærðu það.
 service:
   not_running: Seelen UI þjónusta er ekki í gangi
-  not_running_description: Seelen UI Service (slu-þjónusta) er háð/hjálp til að appið virki rétt.
+  not_running_description: >-
+    Seelen UI Service (slu-þjónusta) er háð/hjálp til að appið virki rétt.
   not_running_ok: Byrjaðu þjónustu
 shortcut:
   register:
