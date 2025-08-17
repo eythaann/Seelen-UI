@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Pracovný priestor
     workspace_placeholder: Žiadny
   bundled_msg: >-
-    Tieto zviazané konfigurácie nie sú upraviteľné a sú navrhnuté tak, aby vám
-    poskytli najlepší zážitok bez prispôsobenia. Automaticky nakonfigurujú pre
-    vás najbežnejšie aplikácie.
+    Tieto zviazané konfigurácie nie sú upraviteľné a sú navrhnuté tak, aby vám poskytli najlepší zážitok bez prispôsobenia. Automaticky nakonfigurujú pre vás najbežnejšie aplikácie.
   bundled_title: Aplikácia konfigurácia zviazaná s Seelen
   confirm_delete: Ste si istí, že chcete túto konfiguráciu vymazať?
   confirm_delete_title: Potvrďte odstránenie
@@ -44,10 +42,7 @@ apps_configurations:
   export: Export
   export_full: Export nastavení podľa aplikácie
   extra_info: >-
-    Používateľské rozhranie Seelen používa iba jeden identifikátor na aplikáciu
-    (prvá nájdená zhoda), takže poradie, v akom sú špecifikované, je dôležité.
-    Najnovšie pridané budú mať prioritu, pretože tabuľka je predvolene zoradená
-    od najnovšieho po staré.
+    Používateľské rozhranie Seelen používa iba jeden identifikátor na aplikáciu (prvá nájdená zhoda), takže poradie, v akom sú špecifikované, je dôležité. Najnovšie pridané budú mať prioritu, pretože tabuľka je predvolene zoradená od najnovšieho po staré.
   identifier:
     add_block: Pridať blok
     and: A
@@ -138,24 +133,20 @@ remove: Odložiť
 reset_all_to_default: Obnovenie všetkých predvolených hodnôt
 reset_to_default: Obnovenie predvolenej hodnoty
 resources:
-  app_outdated: >-
-    Tento zdroj si na správne fungovanie vyžaduje novšiu verziu používateľského
-    rozhrania Seelen.
+  app_outdated: Tento zdroj si na správne fungovanie vyžaduje novšiu verziu používateľského rozhrania Seelen.
   discover: Objavte ďalšie zdroje
   export: Vývozný zdroj
   import_wallpapers: Import miestnych tapiet
   open_folder: Otvorenie priečinka so zdrojmi
   outdated: >-
-    Tento zdroj bol navrhnutý pre staršiu verziu používateľského rozhrania
-    Seelen a nemusí fungovať správne.
+    Tento zdroj bol navrhnutý pre staršiu verziu používateľského rozhrania Seelen a nemusí fungovať správne.
 save: Uložiť
 save_and_restart: Uložiť a reštartovať
 see_more: Pozri viac
 shortcuts:
   enable: Povoliť vstavaný systém skratiek
   enable_tooltip: >-
-    Zakážte, ak budete implementovať svoj vlastný systém skratiek pomocou
-    klienta Seelen UI klienta
+    Zakážte, ak budete implementovať svoj vlastný systém skratiek pomocou klienta Seelen UI klienta
   labels:
     create_new_workspace: Vytvorte nový pracovný priestor
     cycle_stack_next: Stack Cycle Ďalej
@@ -206,10 +197,7 @@ sides:
   top: Vrchol
 start:
   message: >-
-    Vitajte v používateľskom rozhraní Seelen, v konečnom prostredí Desktop so
-    začleneným obkladom Windows Manager, aby ste vylepšili váš zážitok z systému
-    Windows! Preskúmajte novú éru účinnosti a multitaskingu s naším intuitívnym
-    rozhraním a pokročilými funkciami.
+    Vitajte v používateľskom rozhraní Seelen, v konečnom prostredí Desktop so začleneným obkladom Windows Manager, aby ste vylepšili váš zážitok z systému Windows! Preskúmajte novú éru účinnosti a multitaskingu s naším intuitívnym rozhraním a pokročilými funkciami.
   message_accent: Optimalizujte svoju produktivitu štýlom!
   title: Vitajte!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Pozícia
   dynamic_color: Dynamická farba
   dynamic_color_tooltip: >-
-    Povolenie dynamických farieb pozadia a popredia na základe zameraného okna.
-    (Farby môžu byť prepísané témami)
+    Povolenie dynamických farieb pozadia a popredia na základe zameraného okna. (Farby môžu byť prepísané témami)
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Nikdy
     on_overlap: Na prekrytí
   label: Panel s nástrojmi
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Zobrazenie tlačidla hibernácie v ponuke napájania
 update:
   available: Aktualizácia k dispozícii!
