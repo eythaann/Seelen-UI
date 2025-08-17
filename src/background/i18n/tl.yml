@@ -3,38 +3,30 @@ done: Tapos na
 drivers:
   got_it: Nakuha mo na
   monitor_disabled: >-
-    Lumilitaw na ang ilang mga driver ng monitor ay hindi pinagana. Mangyaring
-    paganahin ang mga ito upang hayaan ang Seelen UI na gumana nang maayos.
+    Lumilitaw na ang ilang mga driver ng monitor ay hindi pinagana. Mangyaring paganahin ang mga ito upang hayaan ang Seelen UI na gumana nang maayos.
   monitor_disabled_title: Ang mga driver ng monitor ay hindi pinagana
 resource:
   added: Ang isang bagong mapagkukunan ay naidagdag
   download_failed_body: >-
-    May mali habang nag -download ng mapagkukunan, mangyaring iulat ito sa
-    koponan ng developer ng Seelen.
+    May mali habang nag -download ng mapagkukunan, mangyaring iulat ito sa koponan ng developer ng Seelen.
   download_failed_title: Nabigo ang pag -download ng mapagkukunan
   downloading: Pag -download ng mga assets ...
   downloading_body: Maaaring tumagal ito ng ilang segundo, mangyaring huwag isara ang window.
   enable: Paganahin
 runtime:
   corrupted_data: Nasira data
-  corrupted_file: >-
-    Ang isang file ng pagsasaayos ay nasira, gamit ang mga default na halaga sa
-    halip.
+  corrupted_file: Ang isang file ng pagsasaayos ay nasira, gamit ang mga default na halaga sa halip.
   corrupted_file_path: Nasira na landas ng file
   download: Pumunta sa pahina ng pag-download
   not_found: Hindi nahanap ang WebView2 Runtime
-  not_found_description: >-
-    Ang Seelen UI ay nangangailangan ng Webview2 Runtime. Mangyaring i-install
-    ito.
+  not_found_description: Ang Seelen UI ay nangangailangan ng Webview2 Runtime. Mangyaring i-install ito.
   outdated: Luma na ang Runtime ng WebView2
   outdated_description: >-
-    Ang Seelen UI ay nangangailangan ng Webview2 Runtime %{min_version} o mas
-    mataas. Mangyaring i-update ito.
+    Ang Seelen UI ay nangangailangan ng Webview2 Runtime %{min_version} o mas mataas. Mangyaring i-update ito.
 service:
   not_running: Hindi tumatakbo ang Seelen UI Service
   not_running_description: >-
-    Ang Seelen UI Service (slu-service) ay isang dependency/helper para gumana
-    nang maayos ang app.
+    Ang Seelen UI Service (slu-service) ay isang dependency/helper para gumana nang maayos ang app.
   not_running_ok: Simulan ang serbisyo
 shortcut:
   register:
