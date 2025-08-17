@@ -3,14 +3,12 @@ done: Tehtud
 drivers:
   got_it: Sain selle
   monitor_disabled: >-
-    Tundub, et mõned monitori draiverid on välja lülitatud. Palun lubage need,
-    et Seelen UI töötaks korralikult.
+    Tundub, et mõned monitori draiverid on välja lülitatud. Palun lubage need, et Seelen UI töötaks korralikult.
   monitor_disabled_title: Monitori draiverid on välja lülitatud
 resource:
   added: Lisatud on uus ressurss
   download_failed_body: >-
-    Midagi läks ressursi allalaadimisel valesti, palun teatage sellest Seeleni
-    arendusmeeskonnale.
+    Midagi läks ressursi allalaadimisel valesti, palun teatage sellest Seeleni arendusmeeskonnale.
   download_failed_title: Ressursi allalaadimine ebaõnnestus
   downloading: Varade allalaadimine...
   downloading_body: See võib võtta paar sekundit, palun ärge sulgege akent.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seeleni kasutajaliides nõuab Webview2 Runtime'i. Palun installige see.
   outdated: WebView2 käitusaeg on aegunud
   outdated_description: >-
-    Seeleni kasutajaliides nõuab Webview2 Runtime %{min_version} või uuemat.
-    Palun värskendage seda.
+    Seeleni kasutajaliides nõuab Webview2 Runtime %{min_version} või uuemat. Palun värskendage seda.
 service:
   not_running: Seelen UI teenus ei tööta
   not_running_description: >-
-    Seeleni kasutajaliidese teenus (slu-teenus) on rakenduse nõuetekohaseks
-    tööks sõltuvus/abimees.
+    Seeleni kasutajaliidese teenus (slu-teenus) on rakenduse nõuetekohaseks tööks sõltuvus/abimees.
   not_running_ok: Käivitage teenus
 shortcut:
   register:
