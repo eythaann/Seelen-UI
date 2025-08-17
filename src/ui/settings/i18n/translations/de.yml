@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Arbeitsbereich
     workspace_placeholder: Keine
   bundled_msg: >-
-    Diese gebündelten Konfigurationen sind nicht bearbeitbar und wurden
-    entwickelt, um dir das beste Erlebnis ohne Anpassung zu bieten. Sie
-    konfigurieren die gebräuchlichsten Anwendungen automatisch für dich.
+    Diese gebündelten Konfigurationen sind nicht bearbeitbar und wurden entwickelt, um dir das beste Erlebnis ohne Anpassung zu bieten. Sie konfigurieren die gebräuchlichsten Anwendungen automatisch für dich.
   bundled_title: Mit Seelen gebündelte App-Konfiguration
   confirm_delete: Möchtest du diese Konfiguration wirklich löschen?
   confirm_delete_title: Löschen bestätigen
@@ -44,10 +42,7 @@ apps_configurations:
   export: Exportieren
   export_full: Einstellungen nach Anwendung exportieren
   extra_info: >-
-    Seelen UI Verwenden Sie nur einen Kenner pro App (zuerst übereinstimmend
-    gefunden). Die Reihenfolge, in der spezifisch ist, ist wichtig. Die neueste
-    hinzugefügte zusätzliche wird priorisiert, da die Tabelle standardmäßig von
-    der neuesten nach alt sortiert wird.
+    Seelen UI Verwenden Sie nur einen Kenner pro App (zuerst übereinstimmend gefunden). Die Reihenfolge, in der spezifisch ist, ist wichtig. Die neueste hinzugefügte zusätzliche wird priorisiert, da die Tabelle standardmäßig von der neuesten nach alt sortiert wird.
   identifier:
     add_block: Block hinzufügen
     and: UND
@@ -87,9 +82,7 @@ devtools:
   simulate_fullscreen: Vollbildereignis simulieren
 extras:
   clear_icons: System-Symbol-Cache löschen
-  clear_icons_tooltip: >-
-    Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu
-    aktivieren.
+  clear_icons_tooltip: Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu aktivieren.
   exit: Beenden
   links: Offizielle Links
   relaunch: Neu starten
@@ -140,24 +133,20 @@ remove: Entfernen
 reset_all_to_default: Alles auf Standardwerte zurücksetzen
 reset_to_default: Zurücksetzen auf den Standardwert
 resources:
-  app_outdated: >-
-    Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
-    funktionieren.
+  app_outdated: Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu funktionieren.
   discover: Weitere Ressourcen entdecken
   export: Ressource exportieren
   import_wallpapers: Lokale Hintergrundbilder importieren
   open_folder: Ressourcenordner öffnen
   outdated: >-
-    Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und
-    funktioniert möglicherweise nicht richtig.
+    Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und funktioniert möglicherweise nicht richtig.
 save: Speichern
 save_and_restart: Speichern & neu starten
 see_more: Mehr sehen
 shortcuts:
   enable: Aktivieren Sie ein integriertes Verknüpfungssystem
   enable_tooltip: >-
-    Deaktivieren Sie, wenn Sie Ihr eigenes Verknüpfungssystem mit dem Seelen UI
-    -Client implementieren
+    Deaktivieren Sie, wenn Sie Ihr eigenes Verknüpfungssystem mit dem Seelen UI -Client implementieren
   labels:
     create_new_workspace: Erstellen Sie einen neuen Arbeitsbereich
     cycle_stack_next: Fahrradstapel als nächstes
@@ -208,10 +197,7 @@ sides:
   top: Oben
 start:
   message: >-
-    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem
-    integrierten Fenstermanager, um dein Windows-Erlebnis zu verbessern! Erkunde
-    eine neue Ära der Effizienz und Multitasking mit unserer intuitiven
-    Oberfläche und fortschrittlichen Funktionen.
+    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem integrierten Fenstermanager, um dein Windows-Erlebnis zu verbessern! Erkunde eine neue Ära der Effizienz und Multitasking mit unserer intuitiven Oberfläche und fortschrittlichen Funktionen.
   message_accent: Optimiere deine Produktivität mit Stil!
   title: Willkommen!
 toolbar:
@@ -221,9 +207,7 @@ toolbar:
   dock_side: Position
   dynamic_color: Dynamische Farbe
   dynamic_color_tooltip: >-
-    Aktivieren Sie dynamische Hintergrund- und Vordergrundfarben, die auf dem
-    fokussierten Fenster basieren. (Farben können von Themes überschrieben
-    werden)
+    Aktivieren Sie dynamische Hintergrund- und Vordergrundfarben, die auf dem fokussierten Fenster basieren. (Farben können von Themes überschrieben werden)
   enable: Elegante Werkzeugleiste aktivieren
   height: Höhe
   hide_mode:
@@ -231,7 +215,7 @@ toolbar:
     never: Niemals
     on_overlap: Auf Überlappung
   label: Symbolleiste
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Schaltfläche "Ruhezustand" im Menü "Energie" anzeigen
 update:
   available: Update verfügbar!
