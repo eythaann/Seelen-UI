@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Spațiu de lucru
     workspace_placeholder: Nici unul
   bundled_msg: >-
-    Aceste configurații în pachet nu sunt editabile și sunt concepute pentru a
-    vă oferi cea mai bună experiență fără personalizare. Acestea configurează
-    automat cele mai frecvente aplicații pentru dvs.
+    Aceste configurații în pachet nu sunt editabile și sunt concepute pentru a vă oferi cea mai bună experiență fără personalizare. Acestea configurează automat cele mai frecvente aplicații pentru dvs.
   bundled_title: App Config Bundled cu Seelen
   confirm_delete: Ești sigur că vrei să ștergi această configurație/s?
   confirm_delete_title: Confirmă ștergerea
@@ -44,10 +42,7 @@ apps_configurations:
   export: Export
   export_full: Exportul setărilor în funcție de aplicație
   extra_info: >-
-    Seelen UI folosește un singur identificator pe aplicație (prima potrivire
-    găsită), astfel încât ordinea în modul în care este specificată este
-    importantă, cea mai recentă adăugată va fi prioritară, deoarece notă tabelul
-    este sortat în mod implicit de la cel mai recent la vechi.
+    Seelen UI folosește un singur identificator pe aplicație (prima potrivire găsită), astfel încât ordinea în modul în care este specificată este importantă, cea mai recentă adăugată va fi prioritară, deoarece notă tabelul este sortat în mod implicit de la cel mai recent la vechi.
   identifier:
     add_block: Adăugați bloc
     and: ȘI
@@ -87,9 +82,7 @@ devtools:
   simulate_fullscreen: Simulați un eveniment pe ecran complet
 extras:
   clear_icons: Ștergeți memoria cache a pictogramelor de sistem
-  clear_icons_tooltip: >-
-    Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în
-    vigoare
+  clear_icons_tooltip: Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în vigoare
   exit: Renunță/ieșire
   links: Link -uri oficiale
   relaunch: Relansare
@@ -140,24 +133,20 @@ remove: Elimina
 reset_all_to_default: Resetați toate la valorile implicite
 reset_to_default: Resetare la valoarea implicită
 resources:
-  app_outdated: >-
-    Această resursă necesită o versiune mai recentă a Seelen UI pentru a
-    funcționa corect.
+  app_outdated: Această resursă necesită o versiune mai recentă a Seelen UI pentru a funcționa corect.
   discover: Descoperiți mai multe resurse
   export: Export de resurse
   import_wallpapers: Importați imagini de fundal locale
   open_folder: Deschideți folderul de resurse
   outdated: >-
-    Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și
-    este posibil să nu funcționeze corect.
+    Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și este posibil să nu funcționeze corect.
 save: Salvați
 save_and_restart: Salvați și reporniți
 see_more: A se vedea mai mult
 shortcuts:
   enable: Activați sistemul de comenzi rapide încorporate
   enable_tooltip: >-
-    Dezactivați dacă veți implementa propriul sistem de comenzi rapide folosind
-    clientul UI Seelen
+    Dezactivați dacă veți implementa propriul sistem de comenzi rapide folosind clientul UI Seelen
   labels:
     create_new_workspace: Creați un spațiu de lucru nou
     cycle_stack_next: Ciclism Stack în continuare
@@ -205,13 +194,10 @@ sides:
   bottom: Fund
   left: Stânga
   right: Dreapta
-  top: Top
+  top: Sus
 start:
   message: >-
-    Bine ați venit la Seelen UI, mediul de desktop final cu un manager Windows
-    de gresie încorporat pentru a vă îmbunătăți experiența Windows! Explorați o
-    nouă eră de eficiență și multitasking cu interfața noastră intuitivă și
-    caracteristicile avansate.
+    Bine ați venit la Seelen UI, mediul de desktop final cu un manager Windows de gresie încorporat pentru a vă îmbunătăți experiența Windows! Explorați o nouă eră de eficiență și multitasking cu interfața noastră intuitivă și caracteristicile avansate.
   message_accent: Optimizează -ți productivitatea cu stil!
   title: Bine ati venit!
 toolbar:
@@ -221,8 +207,7 @@ toolbar:
   dock_side: Poziția
   dynamic_color: Culoare dinamică
   dynamic_color_tooltip: >-
-    Activați culorile dinamice de fundal și prim-plan în funcție de fereastra
-    focalizată. (Culorile pot fi înlocuite de teme)
+    Activați culorile dinamice de fundal și prim-plan în funcție de fereastra focalizată. (Culorile pot fi înlocuite de teme)
   enable: Activați bara de instrumente fantezistă
   height: Înălţime
   hide_mode:
@@ -230,7 +215,7 @@ toolbar:
     never: Nu
     on_overlap: Pe suprapunere
   label: Bara de instrumente
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Afișați butonul de hibernare în meniul de pornire
 update:
   available: Actualizare disponibilă!
