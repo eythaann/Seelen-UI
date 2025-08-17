@@ -1,102 +1,102 @@
 bluetooth:
-  available: Mga magagamit na aparato (hindi ipinares)
-  cancel: Kanselahin
-  connected: Mga konektadong aparato
-  forget: Kalimutan
-  lowenergy: Mababang enerhiya
-  more: Marami pang mga setting ng Bluetooth
-  not_found: Walang nahanap na mga aparato ng Bluetooth
-  pair: Pares
-  paired: Nai -save na mga aparato
+  available: Available Devices (Not Paired)
+  cancel: Cancel
+  connected: Connected Devices
+  forget: Forget
+  lowenergy: Low Energy
+  more: More Bluetooth Settings
+  not_found: No Bluetooth devices found
+  pair: Pair
+  paired: Saved Devices
   placeholder:
-    passphrase: Passphrase, code o pin
-  scanning: Pag -scan para sa mga aparato
+    passphrase: Passphrase, Code or PIN
+  scanning: Scanning for devices
 context_menu:
-  add_custom_text: Magdagdag ng pasadyang item ng teksto
-  modules: Mga module
-  remove: Alisin ang module
-  reorder_disable: I -lock ang toolbar
-  reorder_enable: I -unlock ang toolbar
-  restore: Ibalik sa default
-  settings: Mga setting
+  add_custom_text: Add custom text item
+  modules: Modules
+  remove: Remove Module
+  reorder_disable: Lock toolbar
+  reorder_enable: Unlock toolbar
+  restore: Restore to Default
+  settings: Settings
   task_manager: Task Manager
 keyboard:
-  more: Higit pang mga setting ng keyboard
-  title: Layout ng keyboard
+  more: More Keyboard Settings
+  title: Keyboard Layout
 media:
-  default_multimedia_volume: Dami ng multimedia
+  default_multimedia_volume: Multimedia Volume
   device:
     channel:
-      system: Tunog ng system
-    comunications: Komunikasyon
-    missing: Nawawalang aparato
-    mixer: Dami ng panghalo
+      system: System sounds
+    comunications: Communications
+    missing: Missing Device
+    mixer: Volume Mixer
     multimedia: Multimedia
-    settings: Higit pang mga setting ng aparato
-    volume: Dami ng aparato
-  input_devices: Mga aparato sa pag -input
-  output_devices: Mga aparato ng output
-  players: Mga manlalaro ng media
+    settings: More Device Settings
+    volume: Device Volume
+  input_devices: Input devices
+  output_devices: Output devices
+  players: Media Players
 network:
-  available: Magagamit na mga network
-  connect: Kumonekta
-  connected: Nakakonekta sa
-  disconnect: Idiskonekta
-  hidden: Nakatagong network
-  more: Higit pang mga setting ng network
-  not_found: Walang nahanap na mga network
+  available: Available networks
+  connect: Connect
+  connected: Connected to
+  disconnect: Disconnect
+  hidden: Hidden Network
+  more: More Network Settings
+  not_found: No Wi-Fi networks found
   placeholder:
     password: Password
-  saved: Mga naka-save na network
-  scanning: Pag-scan para sa mga network
-  secured: Naka-encrypt na network
+  saved: Saved networks
+  scanning: Scanning for networks
+  secured: Encrypted network
 notifications:
-  clear: Malinaw ang lahat
-  empty: Walang mga abiso
-  settings: Marami pang Mga Setting ng Mga Abiso
-  title: Mga abiso
+  clear: Clear all
+  empty: No notifications
+  settings: More Notifications Settings
+  title: Notifications
 placeholder:
-  battery_remaining: Nananatili
-  bluetooth_devices: Bluetooth at mga aparato
+  battery_remaining: '% remaining'
+  bluetooth_devices: Bluetooth & Devices
   ethernet_connected: Internet access
-  ethernet_disconnected: Walang internet access
-  notifications: Mga abiso
-  open_system_tray: Bukas na tray ng system
-  settings: Mabilis na mga setting
-  smart_charge: '- Smart Charge'
-  volume: Dami
+  ethernet_disconnected: No internet access
+  notifications: Notifications
+  open_system_tray: Open System Tray
+  settings: Quick Settings
+  smart_charge: ' - Smart Charge'
+  volume: Volume
 settings:
-  app_settings: Mga Setting ng App
-  brightness: Ningning
+  app_settings: App Settings
+  brightness: Brightness
   hibernate: Hibernate
-  lock: I -lock
-  log_out: Mag -log out
-  power: Kapangyarihan
-  restart: I -restart
+  lock: Lock
+  log_out: Log Out
+  power: Power
+  restart: Restart
   shutdown: Shutdown
-  sleep: Matulog ka na
-  title: Mga setting
+  sleep: Sleep
+  title: Settings
 tray:
-  empty: 'Walang mga item sa tray (Tandaan: Ang Windows 10 ay hindi ipinatupad)'
-  unlabeled: Hindi nabigong icon ng tray
+  empty: 'No tray items (Note: Windows 10 is not implemented)'
+  unlabeled: Unlabelled Tray Icon
 userhome:
-  empty_list: Walang mga item
+  empty_list: No items
   folders:
     desktop: Desktop
-    documents: Mga dokumento
-    downloads: Mga pag -download
-    more_items: Ipakita pa ...
-    music: Musika
-    pictures: Mga larawan
-    recent: Kamakailan lamang na ginamit
-    reduce_items: Mas kaunti ang ipakita ...
-    title: Mga Direktoryo ng Gumagamit
-    videos: Mga video
+    documents: Documents
+    downloads: Downloads
+    more_items: Show more...
+    music: Music
+    pictures: Pictures
+    recent: Recently used
+    reduce_items: Show less...
+    title: User directories
+    videos: Videos
   profile:
-    accounts: Buksan ang Mga Setting ng Account
-    open_onedrive: Buksan ang direktoryo ng OneDrive
-    open_user_folder: Buksan ang direktoryo ng gumagamit
+    accounts: Open account settings
+    open_onedrive: Open OneDrive directory
+    open_user_folder: Open user directory
   seelen_options:
-    open_installation_folder: Buksan ang folder ng Seelen Setting
-    open_log_folder: Buksan ang folder ng log ng Seelen
-    title: Mga Direktoryo ng Seelen
+    open_installation_folder: Open Seelen settings folder
+    open_log_folder: Open Seelen log folder
+    title: Seelen directories
