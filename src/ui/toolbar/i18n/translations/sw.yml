@@ -56,7 +56,7 @@ notifications:
   settings: Mipangilio ya Arifa zaidi
   title: Arifa
 placeholder:
-  battery_remaining: Imebaki
+  battery_remaining: 'Imebaki'
   bluetooth_devices: Bluetooth & vifaa
   ethernet_connected: Ufikiaji wa mtandao
   ethernet_disconnected: Hakuna ufikiaji wa mtandao
