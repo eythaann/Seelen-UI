@@ -3,36 +3,30 @@ done: Făcut
 drivers:
   got_it: Am înțeles
   monitor_disabled: >-
-    Se pare că unele drivere de monitor sunt dezactivate. Vă rugăm să le
-    activați pentru ca Seelen UI să funcționeze corect.
+    Se pare că unele drivere de monitor sunt dezactivate. Vă rugăm să le activați pentru ca Seelen UI să funcționeze corect.
   monitor_disabled_title: Driverele monitorului sunt dezactivate
 resource:
   added: O nouă resursă a fost adăugată
   download_failed_body: >-
-    Ceva nu a mers bine în timpul descărcării resursei, vă rugăm să raportați
-    acest lucru echipei de dezvoltatori Seelen.
+    Ceva nu a mers bine în timpul descărcării resursei, vă rugăm să raportați acest lucru echipei de dezvoltatori Seelen.
   download_failed_title: Descărcarea resurselor a eșuat
   downloading: Descărcarea activelor...
   downloading_body: Aceasta poate dura câteva secunde, vă rugăm să nu închideți fereastra.
   enable: Activare
 runtime:
   corrupted_data: Date corupte
-  corrupted_file: >-
-    Un fișier de configurare este corupt, utilizând în schimb valorile
-    implicite.
+  corrupted_file: Un fișier de configurare este corupt, utilizând în schimb valorile implicite.
   corrupted_file_path: Calea fișierului coruptă
   download: Accesați pagina de descărcare
   not_found: WebView2 Runtime nu a fost găsit
   not_found_description: Seelen UI necesită Webview2 Runtime. Vă rugăm să o instalați.
   outdated: WebView2 Runtime depășit
   outdated_description: >-
-    Seelen UI necesită Webview2 Runtime %{min_version} sau mai mare. Vă rugăm să
-    o actualizați.
+    Seelen UI necesită Webview2 Runtime %{min_version} sau mai mare. Vă rugăm să o actualizați.
 service:
   not_running: Serviciul Seelen UI nu rulează
   not_running_description: >-
-    Seelen UI Service (serviciul slu) este o dependență/ajutor pentru ca
-    aplicația să funcționeze corect.
+    Seelen UI Service (serviciul slu) este o dependență/ajutor pentru ca aplicația să funcționeze corect.
   not_running_ok: Începeți serviciul
 shortcut:
   register:
