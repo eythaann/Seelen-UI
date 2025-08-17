@@ -56,7 +56,7 @@ notifications:
   settings: Marami pang Mga Setting ng Mga Abiso
   title: Mga abiso
 placeholder:
-  battery_remaining: Nananatili
+  battery_remaining: 'Nananatili'
   bluetooth_devices: Bluetooth at mga aparato
   ethernet_connected: Internet access
   ethernet_disconnected: Walang internet access
