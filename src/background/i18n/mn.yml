@@ -3,14 +3,12 @@ done: Хийх
 drivers:
   got_it: Үүнийг авсан
   monitor_disabled: >-
-    Зарим мониторын драйверуудыг идэвхгүй болгосон байх шиг байна. Seelen Ui
-    ажлыг зөв ажиллуулахыг зөвшөөрнө үү.
+    Зарим мониторын драйверуудыг идэвхгүй болгосон байх шиг байна. Seelen Ui ажлыг зөв ажиллуулахыг зөвшөөрнө үү.
   monitor_disabled_title: Хяналтын драйверуудыг идэвхгүй болгосон байна
 resource:
   added: Шинэ нөөц нэмэгдсэн
   download_failed_body: >-
-    Нөөцийг татаж авч байхдаа ямар нэг зүйл буруу болсон бол Seelen
-    хөгжүүлэгчийн баг руу мэдээлнэ үү.
+    Нөөцийг татаж авч байхдаа ямар нэг зүйл буруу болсон бол Seelen хөгжүүлэгчийн баг руу мэдээлнэ үү.
   download_failed_title: Нөөцийг татаж авах амжилтгүй боллоо
   downloading: Хөрөнгө татаж авах ...
   downloading_body: Энэ нь хэдэн секунд болж магадгүй бөгөөд цонхыг хааж болохгүй.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI нь Webview2 Runtime шаарддаг. Үүнийг суулгана уу.
   outdated: WebView2 Ажиллах хугацаа хуучирсан
   outdated_description: >-
-    Seelen UI нь Webview2 Runtime %{min_version} буюу түүнээс дээш байхыг
-    шаарддаг. Үүнийг шинэчилнэ үү.
+    Seelen UI нь Webview2 Runtime %{min_version} буюу түүнээс дээш байхыг шаарддаг. Үүнийг шинэчилнэ үү.
 service:
   not_running: Seelen UI үйлчилгээ ажиллахгүй байна
   not_running_description: >-
-    Seelen UI үйлчилгээ (slu-service) нь програмыг зөв ажиллуулахад
-    хамааралтай/туслагч юм.
+    Seelen UI үйлчилгээ (slu-service) нь програмыг зөв ажиллуулахад хамааралтай/туслагч юм.
   not_running_ok: Үйлчилгээг эхлүүлэх
 shortcut:
   register:
