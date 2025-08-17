@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    cmd: Command
-    explorer: Run
+    cmd: 命令
+    explorer: 跑步
 footer:
-  shortcuts: Show Shortcuts
+  shortcuts: 顯示快捷方式
 header:
-  search: App, Command or Path
+  search: 應用，命令或路徑
 item:
-  open_location: Open File Location
-  pin: Pin to Dock
+  open_location: 打開文件位置
+  pin: 引腳到停靠
