@@ -56,7 +56,7 @@ notifications:
   settings: تنظیمات اعلان بیشتر
   title: اعلان ها
 placeholder:
-  battery_remaining: ٪ باقی مانده
+  battery_remaining: '٪ باقی مانده'
   bluetooth_devices: بلوتوث و دستگاه
   ethernet_connected: دسترسی به اینترنت
   ethernet_disconnected: بدون دسترسی به اینترنت
