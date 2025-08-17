@@ -1,31 +1,31 @@
 app_menu:
-  close: Close
-  close_multiple: Close All
-  copy_handles: Copy Handles
-  kill: Kill Process
-  kill_multiple: Kill All Processes
-  open_file_location: Open File Location
-  pin: Pin
-  pin_to_center: Pin to Center
-  pin_to_left: Pin to Left
-  pin_to_right: Pin to Right
-  run_as: Run as Administrator
-  unpin: Unpin
+  close: 关闭
+  close_multiple: 全部关闭
+  copy_handles: 复制句柄
+  kill: 杀死进程
+  kill_multiple: 杀死所有进程
+  open_file_location: 打开文件位置
+  pin: 固定
+  pin_to_center: 固定到中心
+  pin_to_left: 固定到左侧
+  pin_to_right: 固定到右侧
+  run_as: 以管理员身份运行
+  unpin: 取消固定
 context_menu:
-  reorder_disable: Lock taskbar
-  reorder_enable: Unlock taskbar
+  reorder_disable: 锁定任务栏
+  reorder_enable: 解锁任务栏
 media:
-  not_playing: Nothing is playing
+  not_playing: 未播放任何内容
 media_menu:
-  remove: Remove Media Module
+  remove: 移除媒体模块
 start_menu:
-  remove: Remove Start Module
+  remove: 移除开始模块
 taskbar_menu:
-  add_file: Pin Custom File
-  add_folder: Pin Custom Folder
-  media: Add Media Module
-  settings: Settings
-  start: Add Start Module
-  task_manager: Task Manager
+  add_file: 固定自定义文件
+  add_folder: 固定自定义文件夹
+  media: 添加媒体模块
+  settings: 设置
+  start: 添加启动模块
+  task_manager: 任务管理器
 weg:
-  empty: No items to show
+  empty: 没有可显示的项目
