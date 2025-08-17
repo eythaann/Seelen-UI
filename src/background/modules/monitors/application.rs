@@ -25,7 +25,7 @@ pub static MONITOR_MANAGER: LazyLock<Arc<Mutex<MonitorManager>>> = LazyLock::new
     ))
 });
 
-pub static GLOBAL_DISPLAY_MANAGER: LazyLock<DisplayManager> =
+static GLOBAL_DISPLAY_MANAGER: LazyLock<DisplayManager> =
     LazyLock::new(|| DisplayManager::Create(DisplayManagerOptions::None).unwrap());
 
 pub struct MonitorManager {

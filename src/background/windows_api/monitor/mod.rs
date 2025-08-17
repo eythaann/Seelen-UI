@@ -8,10 +8,7 @@ use windows::{
 
 use crate::{
     error::Result,
-    modules::{
-        input::domain::Point,
-        monitors::{MonitorManager, GLOBAL_DISPLAY_MANAGER},
-    },
+    modules::{input::domain::Point, monitors::MonitorManager},
 };
 use seelen_core::{rect::Rect, system_state::MonitorId};
 
@@ -106,17 +103,10 @@ pub struct MonitorView(DisplayView);
 
 impl MonitorView {
     pub fn index(&self) -> Result<usize> {
-        let state = GLOBAL_DISPLAY_MANAGER.TryReadCurrentStateForModeQuery()?;
-        let state = state.State()?;
-
-        let id = self.primary_target()?.stable_id()?;
-
-        for (idx, view) in state.Views()?.into_iter().enumerate() {
-            let primary_path = view.Paths()?.GetAt(0)?;
-            let primary_target = primary_path.Target()?;
-            let pt_id = primary_target.StableMonitorId()?.to_string();
-
-            if pt_id == id {
+        let searching_id = self.primary_target()?.stable_id()?;
+        for (idx, view) in MonitorManager::get_all_views()?.into_iter().enumerate() {
+            let current_id = view.primary_target()?.stable_id()?;
+            if current_id == searching_id {
                 return Ok(idx);
             }
         }
