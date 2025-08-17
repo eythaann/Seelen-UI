@@ -57,7 +57,7 @@ notifications:
   title: Pranešimai
 placeholder:
   battery_remaining: '% liko'
-  bluetooth_devices: „Bluetooth“ ir įrenginiai
+  bluetooth_devices: '„Bluetooth“ ir įrenginiai'
   ethernet_connected: Interneto ryšys
   ethernet_disconnected: Jokios interneto prieigos
   notifications: Pranešimai
