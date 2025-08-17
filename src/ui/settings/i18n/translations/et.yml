@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Tööruum
     workspace_placeholder: Mitte ükski
   bundled_msg: >-
-    Need komplekteeritud konfiguratsioonid ei ole redigeeritavad ja on loodud
-    selleks, et pakkuda teile parimat kogemust ilma kohandamiseta. Nad
-    konfigureerivad teie jaoks automaatselt kõige levinumaid rakendusi.
+    Need komplekteeritud konfiguratsioonid ei ole redigeeritavad ja on loodud selleks, et pakkuda teile parimat kogemust ilma kohandamiseta. Nad konfigureerivad teie jaoks automaatselt kõige levinumaid rakendusi.
   bundled_title: Rakenduse konfiguratsioon, mis on komplekteeritud Seeleniga
   confirm_delete: Kas olete kindel, et soovite selle konfiguratsiooni/S kustutada?
   confirm_delete_title: Kinnitage kustutamine
@@ -44,9 +42,7 @@ apps_configurations:
   export: Ekspordi-
   export_full: Ekspordi seaded rakenduste kaupa
   extra_info: >-
-    Seeleni kasutajaliides kasutab rakenduse kohta ainult ühte identifikaatorit
-    (leiti esimene vaste), seega on määramise järjekord oluline, viimati lisatud
-    on prioriteediks, kuna tabel sorteeritakse vaikimisi uusimast vanani.
+    Seeleni kasutajaliides kasutab rakenduse kohta ainult ühte identifikaatorit (leiti esimene vaste), seega on määramise järjekord oluline, viimati lisatud on prioriteediks, kuna tabel sorteeritakse vaikimisi uusimast vanani.
   identifier:
     add_block: Lisa plokk
     and: Ja
@@ -143,16 +139,14 @@ resources:
   import_wallpapers: Kohalike taustapiltide importimine
   open_folder: Avage ressursside kaust
   outdated: >-
-    See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi
-    korralikult töötada.
+    See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi korralikult töötada.
 save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
 see_more: Vaata lähemalt
 shortcuts:
   enable: Luba sisseehitatud otseteede süsteem
   enable_tooltip: >-
-    Keelake, kui rakendate oma otseteede süsteemi, kasutades seeneni
-    kasutajaliidese klienti
+    Keelake, kui rakendate oma otseteede süsteemi, kasutades seeneni kasutajaliidese klienti
   labels:
     create_new_workspace: Looge uus tööruum
     cycle_stack_next: Tsükli virn järgmisena
@@ -203,10 +197,7 @@ sides:
   top: Tipus
 start:
   message: >-
-    Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
-    inkorporeeritud plaatidega Windowsi halduriga, et täiustada oma Windows
-    kogemust! Uurige meie intuitiivse liidese ja edasijõudnute funktsioonidega
-    uut tõhususe ja multitegumtöötluse ajastut.
+    Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos inkorporeeritud plaatidega Windowsi halduriga, et täiustada oma Windows kogemust! Uurige meie intuitiivse liidese ja edasijõudnute funktsioonidega uut tõhususe ja multitegumtöötluse ajastut.
   message_accent: Optimeerige oma tootlikkust stiiliga!
   title: Tere tulemast!
 toolbar:
@@ -216,8 +207,7 @@ toolbar:
   dock_side: Positsioon
   dynamic_color: Dünaamiline värv
   dynamic_color_tooltip: >-
-    Võimaldab dünaamilise tausta- ja esiplaanivärvi, mis põhineb fookustatud
-    aknal. (Värve saab teemade abil muuta)
+    Võimaldab dünaamilise tausta- ja esiplaanivärvi, mis põhineb fookustatud aknal. (Värve saab teemade abil muuta)
   enable: Luba väljamõeldud tööriistariba
   height: Kõrgus
   hide_mode:
@@ -225,7 +215,7 @@ toolbar:
     never: Mitte kunagi
     on_overlap: Kattumises
   label: Tööriistariba
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Näita hibernatsiooni nuppu toite menüüs
 update:
   available: Värskendage saadaval!
