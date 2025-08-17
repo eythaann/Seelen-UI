@@ -1,102 +1,102 @@
 bluetooth:
-  available: Available Devices (Not Paired)
-  cancel: Cancel
-  connected: Connected Devices
-  forget: Forget
-  lowenergy: Low Energy
-  more: More Bluetooth Settings
-  not_found: No Bluetooth devices found
-  pair: Pair
-  paired: Saved Devices
+  available: Dispositivos disponíveis (não emparelhados)
+  cancel: Cancelar
+  connected: Dispositivos conectados
+  forget: Esquecer-se
+  lowenergy: Baixa energia
+  more: Mais configurações do Bluetooth
+  not_found: Nenhum dispositivo Bluetooth encontrado
+  pair: Par
+  paired: Dispositivos salvos
   placeholder:
-    passphrase: Passphrase, Code or PIN
-  scanning: Scanning for devices
+    passphrase: Senha, código ou pino
+  scanning: Digitalização para dispositivos
 context_menu:
-  add_custom_text: Add custom text item
-  modules: Modules
-  remove: Remove Module
-  reorder_disable: Lock toolbar
-  reorder_enable: Unlock toolbar
-  restore: Restore to Default
-  settings: Settings
-  task_manager: Task Manager
+  add_custom_text: Adicionar item de texto personalizado
+  modules: Módulos
+  remove: Remova o módulo
+  reorder_disable: Barra de ferramentas de bloqueio
+  reorder_enable: Desbloqueie a barra de ferramentas
+  restore: Restaurar para padrão
+  settings: Configurações
+  task_manager: Gerente de tarefas
 keyboard:
-  more: More Keyboard Settings
-  title: Keyboard Layout
+  more: Mais configurações de teclado
+  title: Layout do teclado
 media:
-  default_multimedia_volume: Multimedia Volume
+  default_multimedia_volume: Volume multimídia
   device:
     channel:
-      system: System sounds
-    comunications: Communications
-    missing: Missing Device
-    mixer: Volume Mixer
-    multimedia: Multimedia
-    settings: More Device Settings
-    volume: Device Volume
-  input_devices: Input devices
-  output_devices: Output devices
-  players: Media Players
+      system: Sons do sistema
+    comunications: Comunicações
+    missing: Dispositivo ausente
+    mixer: Misturador de volume
+    multimedia: Multimídia
+    settings: Mais configurações de dispositivo
+    volume: Volume do dispositivo
+  input_devices: Dispositivos de entrada
+  output_devices: Dispositivos de saída
+  players: Players de mídia
 network:
-  available: Available networks
-  connect: Connect
-  connected: Connected to
-  disconnect: Disconnect
-  hidden: Hidden Network
-  more: More Network Settings
-  not_found: No Wi-Fi networks found
+  available: Redes disponíveis
+  connect: Ligar
+  connected: Conectado a
+  disconnect: Desconectar
+  hidden: Rede oculta
+  more: Mais configurações de rede
+  not_found: Nenhuma rede Wi-Fi encontrada
   placeholder:
-    password: Password
-  saved: Saved networks
-  scanning: Scanning for networks
-  secured: Encrypted network
+    password: Palavra-passe
+  saved: Redes salvas
+  scanning: Digitalização para redes
+  secured: Rede criptografada
 notifications:
-  clear: Clear all
-  empty: No notifications
-  settings: More Notifications Settings
-  title: Notifications
+  clear: Limpar tudo
+  empty: Sem notificações
+  settings: Mais configurações de notificações
+  title: Notificações
 placeholder:
-  battery_remaining: '% remaining'
-  bluetooth_devices: Bluetooth & Devices
-  ethernet_connected: Internet access
-  ethernet_disconnected: No internet access
-  notifications: Notifications
-  open_system_tray: Open System Tray
-  settings: Quick Settings
-  smart_charge: ' - Smart Charge'
+  battery_remaining: '% restante'
+  bluetooth_devices: Bluetooth e dispositivos
+  ethernet_connected: acesso à Internet
+  ethernet_disconnected: Sem acesso à Internet
+  notifications: Notificações
+  open_system_tray: Bandeja de sistema aberto
+  settings: Configurações rápidas
+  smart_charge: ' - cobrança inteligente'
   volume: Volume
 settings:
-  app_settings: App Settings
-  brightness: Brightness
-  hibernate: Hibernate
-  lock: Lock
+  app_settings: Configurações do aplicativo
+  brightness: Brilho
+  hibernate: Hibernado
+  lock: Bloquear
   log_out: Log Out
-  power: Power
-  restart: Restart
-  shutdown: Shutdown
-  sleep: Sleep
-  title: Settings
+  power: Poder
+  restart: Reiniciar
+  shutdown: Desligar
+  sleep: Dormir
+  title: Configurações
 tray:
-  empty: 'No tray items (Note: Windows 10 is not implemented)'
-  unlabeled: Unlabelled Tray Icon
+  empty: 'Não há itens de bandeja (Nota: o Windows 10 não é implementado)'
+  unlabeled: Ícone de bandeja não marcada
 userhome:
-  empty_list: No items
+  empty_list: Sem itens
   folders:
     desktop: Desktop
-    documents: Documents
+    documents: Documentos
     downloads: Downloads
-    more_items: Show more...
-    music: Music
-    pictures: Pictures
-    recent: Recently used
-    reduce_items: Show less...
-    title: User directories
-    videos: Videos
+    more_items: Mostre mais ...
+    music: Música
+    pictures: Fotos
+    recent: Usado recentemente
+    reduce_items: Mostrar menos ...
+    title: Diretórios de usuário
+    videos: Vídeos
   profile:
-    accounts: Open account settings
-    open_onedrive: Open OneDrive directory
-    open_user_folder: Open user directory
+    accounts: Abra as configurações da conta
+    open_onedrive: Open OneDrive Directory
+    open_user_folder: Diretório de usuário aberto
   seelen_options:
-    open_installation_folder: Open Seelen settings folder
-    open_log_folder: Open Seelen log folder
-    title: Seelen directories
+    open_installation_folder: Pasta de configurações de Seelen abra Seelen
+    open_log_folder: Pasta de log de Seelen aberta
+    title: Diretórios de Seelen
