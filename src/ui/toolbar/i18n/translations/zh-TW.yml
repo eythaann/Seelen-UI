@@ -1,0 +1,102 @@
+bluetooth:
+  available: 可用設備（未配對）
+  cancel: 取消
+  connected: 連接的設備
+  forget: 忘記
+  lowenergy: 低能量
+  more: 更多藍牙設置
+  not_found: 找不到藍牙設備
+  pair: 一對
+  paired: 保存的設備
+  placeholder:
+    passphrase: 密碼，代碼或PIN
+  scanning: 掃描設備
+context_menu:
+  add_custom_text: 添加自定義文本項目
+  modules: 模塊
+  remove: 刪除模塊
+  reorder_disable: 鎖工具欄
+  reorder_enable: 解鎖工具欄
+  restore: 還原為默認
+  settings: 設定
+  task_manager: 工作管理員
+keyboard:
+  more: 更多鍵盤設置
+  title: 鍵盤佈局
+media:
+  default_multimedia_volume: 多媒體體積
+  device:
+    channel:
+      system: 系統聲音
+    comunications: 通訊
+    missing: 缺少設備
+    mixer: 音量混合器
+    multimedia: 多媒體
+    settings: 更多設備設置
+    volume: 設備音量
+  input_devices: 輸入設備
+  output_devices: 輸出設備
+  players: 媒體播放器
+network:
+  available: 可用網絡
+  connect: 連接
+  connected: 連接到
+  disconnect: 斷開
+  hidden: 隱藏網絡
+  more: 更多網絡設置
+  not_found: 找不到Wi-Fi網絡
+  placeholder:
+    password: 密碼
+  saved: 保存的網絡
+  scanning: 掃描網絡
+  secured: 加密網絡
+notifications:
+  clear: 清除全部
+  empty: 沒有通知
+  settings: 更多的通知設置
+  title: 通知
+placeholder:
+  battery_remaining: ％ 其餘的
+  bluetooth_devices: 藍牙和設備
+  ethernet_connected: 互聯網訪問
+  ethernet_disconnected: 沒有互聯網訪問
+  notifications: 通知
+  open_system_tray: 打開的系統托盤
+  settings: 快速設置
+  smart_charge: '  - 明智的費用'
+  volume: 體積
+settings:
+  app_settings: 應用設置
+  brightness: 亮度
+  hibernate: 冬眠
+  lock: 鎖
+  log_out: 註銷
+  power: 力量
+  restart: 重新啟動
+  shutdown: 關閉
+  sleep: 睡覺
+  title: 設定
+tray:
+  empty: 沒有托盤項目（注意：未實現Windows 10）
+  unlabeled: 未標記的托盤圖標
+userhome:
+  empty_list: 沒有項目
+  folders:
+    desktop: 桌面
+    documents: 文件
+    downloads: 下載
+    more_items: 顯示更多...
+    music: 音樂
+    pictures: 圖片
+    recent: 最近使用的
+    reduce_items: 少顯示...
+    title: 用戶目錄
+    videos: 影片
+  profile:
+    accounts: 打開帳戶設置
+    open_onedrive: 打開OneDrive目錄
+    open_user_folder: 打開用戶目錄
+  seelen_options:
+    open_installation_folder: 打開Seelen設置文件夾
+    open_log_folder: 打開Seelen日誌文件夾
+    title: Seelen目錄

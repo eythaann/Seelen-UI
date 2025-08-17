@@ -1,0 +1,31 @@
+app_menu:
+  close: Perto
+  close_multiple: Feche tudo
+  copy_handles: Alças de cópia
+  kill: Processo de matar
+  kill_multiple: Mate todos os processos
+  open_file_location: Localização do arquivo aberto
+  pin: Pino
+  pin_to_center: Pino para centralizar
+  pin_to_left: Pino para a esquerda
+  pin_to_right: Pino para a direita
+  run_as: Executar como administrador
+  unpin: Não
+context_menu:
+  reorder_disable: Bloquear barra de tarefas
+  reorder_enable: Desbloqueie a barra de tarefas
+media:
+  not_playing: Nada está tocando
+media_menu:
+  remove: Remova o módulo de mídia
+start_menu:
+  remove: Remova o módulo inicial
+taskbar_menu:
+  add_file: PIN File personalizado
+  add_folder: Pin Pasta Custom
+  media: Adicione módulo de mídia
+  settings: Configurações
+  start: Adicione o módulo inicial
+  task_manager: Gerente de tarefas
+weg:
+  empty: Sem itens para mostrar

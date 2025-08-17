@@ -1,0 +1,43 @@
+cancel: Cancelar
+done: Concluída
+drivers:
+  got_it: Entendi
+  monitor_disabled: >-
+    Parece que alguns drivers de monitor estão desativados. Por favor, permita
+    que eles permitam que a interface do usuário de Seelen funcione
+    corretamente.
+  monitor_disabled_title: Os motoristas de monitor estão desativados
+resource:
+  added: Um novo recurso foi adicionado
+  download_failed_body: >-
+    Algo deu errado ao baixar o recurso, informe -o à equipe de desenvolvedores
+    da Seelen.
+  download_failed_title: Download de recursos falhou
+  downloading: Download de ativos ...
+  downloading_body: Isso pode levar alguns segundos, por favor, não feche a janela.
+  enable: Ativar
+runtime:
+  corrupted_data: Dados corrompidos
+  corrupted_file: Um arquivo de configuração está corrompido, usando valores padrão.
+  corrupted_file_path: Caminho de arquivo corrompido
+  download: Vá para a página de download
+  not_found: WebView2 Tempo de execução não encontrado
+  not_found_description: O SEELEN UI requer o tempo de execução do WebView2. Por favor, instale.
+  outdated: WebView2 Tempo de execução desatualizado
+  outdated_description: >-
+    O SEELEN UI requer WebView2 Runtime %{min_version} ou superior. Por favor,
+    atualize -o.
+service:
+  not_running: Serviço de interface do usuário de Seelen não está sendo executado
+  not_running_description: >-
+    O Serviço Seelen UI (SLU-Service) é uma dependência/auxiliar para o
+    aplicativo funcionar corretamente.
+  not_running_ok: Start Service
+shortcut:
+  register:
+    placeholder: Pressione qualquer combinação de tecla
+    title: Registrando um novo atalho
+tray:
+  quit: Despedir-se
+  restart: Reinicie a interface do usuário
+  settings: Configurações

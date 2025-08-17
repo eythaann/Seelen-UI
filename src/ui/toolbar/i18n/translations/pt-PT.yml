@@ -1,0 +1,102 @@
+bluetooth:
+  available: Dispositivos disponíveis (não emparelhados)
+  cancel: Cancelar
+  connected: Dispositivos conectados
+  forget: Esquecer-se
+  lowenergy: Baixa energia
+  more: Mais configurações do Bluetooth
+  not_found: Nenhum dispositivo Bluetooth encontrado
+  pair: Par
+  paired: Dispositivos salvos
+  placeholder:
+    passphrase: Senha, código ou pino
+  scanning: Digitalização para dispositivos
+context_menu:
+  add_custom_text: Adicionar item de texto personalizado
+  modules: Módulos
+  remove: Remova o módulo
+  reorder_disable: Barra de ferramentas de bloqueio
+  reorder_enable: Desbloqueie a barra de ferramentas
+  restore: Restaurar para padrão
+  settings: Configurações
+  task_manager: Gerente de tarefas
+keyboard:
+  more: Mais configurações de teclado
+  title: Layout do teclado
+media:
+  default_multimedia_volume: Volume multimídia
+  device:
+    channel:
+      system: Sons do sistema
+    comunications: Comunicações
+    missing: Dispositivo ausente
+    mixer: Misturador de volume
+    multimedia: Multimídia
+    settings: Mais configurações de dispositivo
+    volume: Volume do dispositivo
+  input_devices: Dispositivos de entrada
+  output_devices: Dispositivos de saída
+  players: Players de mídia
+network:
+  available: Redes disponíveis
+  connect: Ligar
+  connected: Conectado a
+  disconnect: Desconectar
+  hidden: Rede oculta
+  more: Mais configurações de rede
+  not_found: Nenhuma rede Wi-Fi encontrada
+  placeholder:
+    password: Palavra-passe
+  saved: Redes salvas
+  scanning: Digitalização para redes
+  secured: Rede criptografada
+notifications:
+  clear: Limpar tudo
+  empty: Sem notificações
+  settings: Mais configurações de notificações
+  title: Notificações
+placeholder:
+  battery_remaining: '% restante'
+  bluetooth_devices: Bluetooth e dispositivos
+  ethernet_connected: acesso à Internet
+  ethernet_disconnected: Sem acesso à Internet
+  notifications: Notificações
+  open_system_tray: Bandeja de sistema aberto
+  settings: Configurações rápidas
+  smart_charge: ' - cobrança inteligente'
+  volume: Volume
+settings:
+  app_settings: Configurações do aplicativo
+  brightness: Brilho
+  hibernate: Hibernado
+  lock: Bloquear
+  log_out: Log Out
+  power: Poder
+  restart: Reiniciar
+  shutdown: Desligar
+  sleep: Dormir
+  title: Configurações
+tray:
+  empty: 'Não há itens de bandeja (Nota: o Windows 10 não é implementado)'
+  unlabeled: Ícone de bandeja não marcada
+userhome:
+  empty_list: Sem itens
+  folders:
+    desktop: Desktop
+    documents: Documentos
+    downloads: Downloads
+    more_items: Mostre mais ...
+    music: Música
+    pictures: Fotos
+    recent: Usado recentemente
+    reduce_items: Mostrar menos ...
+    title: Diretórios de usuário
+    videos: Vídeos
+  profile:
+    accounts: Abra as configurações da conta
+    open_onedrive: Open OneDrive Directory
+    open_user_folder: Diretório de usuário aberto
+  seelen_options:
+    open_installation_folder: Pasta de configurações de Seelen abra Seelen
+    open_log_folder: Pasta de log de Seelen aberta
+    title: Diretórios de Seelen
