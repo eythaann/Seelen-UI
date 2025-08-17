@@ -1,0 +1,31 @@
+app_menu:
+  close: Fechar
+  close_multiple: Fechar tudo
+  copy_handles: Copiar identificadores
+  kill: Encerrar processo
+  kill_multiple: Encerrar todos os processos
+  open_file_location: Abrir local do arquivo
+  pin: Fixar
+  pin_to_center: Fixar no centro
+  pin_to_left: Fixar à esquerda
+  pin_to_right: Fixar à direita
+  run_as: Executar como administrador
+  unpin: Desafixar
+context_menu:
+  reorder_disable: Bloquear barra de tarefas
+  reorder_enable: Desbloquear barra de tarefas
+media:
+  not_playing: Nada está tocando
+media_menu:
+  remove: Remover módulo de mídia
+start_menu:
+  remove: Remover módulo Iniciar
+taskbar_menu:
+  add_file: Fixar arquivo personalizado
+  add_folder: Fixar pasta personalizada
+  media: Adicionar módulo de mídia
+  settings: Configurações
+  start: Adicionar módulo Iniciar
+  task_manager: Gerenciador de Tarefas
+weg:
+  empty: Nenhum item para mostrar
