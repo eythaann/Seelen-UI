@@ -1,102 +1,102 @@
 bluetooth:
-  available: 可用设备（未配对）
-  cancel: 取消
-  connected: 已连接设备
-  forget: 忘记设备
-  lowenergy: 低能耗
-  more: 更多蓝牙设置
-  not_found: 未找到蓝牙设备
-  pair: 配对
-  paired: 已配对设备
+  available: Available Devices (Not Paired)
+  cancel: Cancel
+  connected: Connected Devices
+  forget: Forget
+  lowenergy: Low Energy
+  more: More Bluetooth Settings
+  not_found: No Bluetooth devices found
+  pair: Pair
+  paired: Saved Devices
   placeholder:
-    passphrase: 密码口令、代码或 PIN 码
-  scanning: 扫描设备
+    passphrase: Passphrase, Code or PIN
+  scanning: Scanning for devices
 context_menu:
-  add_custom_text: 添加自定义文本项目
-  modules: 模块
-  remove: 删除模块
-  reorder_disable: 锁定工具栏
-  reorder_enable: 解锁工具栏
-  restore: 恢复到默认值
-  settings: 设置
-  task_manager: 任务管理器
+  add_custom_text: Add custom text item
+  modules: Modules
+  remove: Remove Module
+  reorder_disable: Lock toolbar
+  reorder_enable: Unlock toolbar
+  restore: Restore to Default
+  settings: Settings
+  task_manager: Task Manager
 keyboard:
-  more: 更多键盘设置
-  title: 键盘布局
+  more: More Keyboard Settings
+  title: Keyboard Layout
 media:
-  default_multimedia_volume: 多媒体音量
+  default_multimedia_volume: Multimedia Volume
   device:
     channel:
-      system: 系统声音
-    comunications: 通信
-    missing: 丢失的设备
-    mixer: 音量混合器
-    multimedia: 多媒体
-    settings: 更多设备设置
-    volume: 设备音量
-  input_devices: 输入设备
-  output_devices: 输出设备
-  players: 媒体播放器
+      system: System sounds
+    comunications: Communications
+    missing: Missing Device
+    mixer: Volume Mixer
+    multimedia: Multimedia
+    settings: More Device Settings
+    volume: Device Volume
+  input_devices: Input devices
+  output_devices: Output devices
+  players: Media Players
 network:
-  available: 可用网络
-  connect: 连接
-  connected: 已连接
-  disconnect: 断开连接
-  hidden: 隐藏网络
-  more: 更多网络设置
-  not_found: 未找到 Wi-Fi 网络
+  available: Available networks
+  connect: Connect
+  connected: Connected to
+  disconnect: Disconnect
+  hidden: Hidden Network
+  more: More Network Settings
+  not_found: No Wi-Fi networks found
   placeholder:
-    password: 密码
-  saved: 已保存的网络
-  scanning: 扫描网络
-  secured: 加密网络
+    password: Password
+  saved: Saved networks
+  scanning: Scanning for networks
+  secured: Encrypted network
 notifications:
-  clear: 全部清除
-  empty: 无通知
-  settings: 更多通知设置
-  title: 通知
+  clear: Clear all
+  empty: No notifications
+  settings: More Notifications Settings
+  title: Notifications
 placeholder:
-  battery_remaining: '% 剩余电量'
-  bluetooth_devices: 蓝牙和设备
-  ethernet_connected: 已连接到互联网
-  ethernet_disconnected: 未连接到互联网
-  notifications: 通知
-  open_system_tray: 打开系统托盘
-  settings: 快速设置
-  smart_charge: ' - 智能充电'
-  volume: 音量
+  battery_remaining: '% remaining'
+  bluetooth_devices: Bluetooth & Devices
+  ethernet_connected: Internet access
+  ethernet_disconnected: No internet access
+  notifications: Notifications
+  open_system_tray: Open System Tray
+  settings: Quick Settings
+  smart_charge: ' - Smart Charge'
+  volume: Volume
 settings:
-  app_settings: 应用设置
-  brightness: 亮度
-  hibernate: 休眠
-  lock: 锁
-  log_out: 注销
-  power: 电源
-  restart: 重启
-  shutdown: 关机
-  sleep: 睡眠
-  title: 设置
+  app_settings: App Settings
+  brightness: Brightness
+  hibernate: Hibernate
+  lock: Lock
+  log_out: Log Out
+  power: Power
+  restart: Restart
+  shutdown: Shutdown
+  sleep: Sleep
+  title: Settings
 tray:
-  empty: '无托盘项目（注：Windows 10 未实施）'
-  unlabeled: 无标签托盘图标
+  empty: 'No tray items (Note: Windows 10 is not implemented)'
+  unlabeled: Unlabelled Tray Icon
 userhome:
-  empty_list: 无项目
+  empty_list: No items
   folders:
-    desktop: 桌面
-    documents: 文件
-    downloads: 下载
-    more_items: 显示更多...
-    music: 音乐
-    pictures: 图片
-    recent: 最近使用
-    reduce_items: 显示更少...
-    title: 用户目录
-    videos: 视频
+    desktop: Desktop
+    documents: Documents
+    downloads: Downloads
+    more_items: Show more...
+    music: Music
+    pictures: Pictures
+    recent: Recently used
+    reduce_items: Show less...
+    title: User directories
+    videos: Videos
   profile:
-    accounts: 打开账户设置
-    open_onedrive: 打开 OneDrive 目录
-    open_user_folder: 打开用户目录
+    accounts: Open account settings
+    open_onedrive: Open OneDrive directory
+    open_user_folder: Open user directory
   seelen_options:
-    open_installation_folder: 打开 Seelen 设置文件夹
-    open_log_folder: 打开 Seelen 日志文件夹
-    title: Seelen 目录
+    open_installation_folder: Open Seelen settings folder
+    open_log_folder: Open Seelen log folder
+    title: Seelen directories
