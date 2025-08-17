@@ -3,14 +3,12 @@ done: Արված
 drivers:
   got_it: Ստացել է այն
   monitor_disabled: >-
-    Պարզվում է, որ մոնիտորի որոշ վարորդներ հաշմանդամ են: Խնդրում ենք
-    հնարավորություն տալ նրանց թույլ տալ, որ Seelen Ui- ն ճիշտ աշխատի:
+    Պարզվում է, որ մոնիտորի որոշ վարորդներ հաշմանդամ են: Խնդրում ենք հնարավորություն տալ նրանց թույլ տալ, որ Seelen Ui- ն ճիշտ աշխատի:
   monitor_disabled_title: Մոնիտորի վարորդներն անջատված են
 resource:
   added: Ավելացվել է նոր ռեսուրս
   download_failed_body: >-
-    Ինչ-որ բան սխալ է գործել ռեսուրսը ներբեռնելիս, խնդրում ենք այն հաղորդել
-    Սելեն ծրագրավորողի թիմին:
+    Ինչ-որ բան սխալ է գործել ռեսուրսը ներբեռնելիս, խնդրում ենք այն հաղորդել Սելեն ծրագրավորողի թիմին:
   download_failed_title: Ռեսուրսների ներբեռնումը ձախողվեց
   downloading: Ակտիվների ներբեռնում ...
   downloading_body: 'Սա կարող է տեւել մի քանի վայրկյան, խնդրում եմ մի փակեք պատուհանը:'
@@ -24,13 +22,11 @@ runtime:
   not_found_description: 'Seelen UI-ն պահանջում է Webview2 Runtime: Խնդրում ենք տեղադրել այն:'
   outdated: WebView2 Runtime-ը հնացել է
   outdated_description: >-
-    Seelen UI-ն պահանջում է Webview2 Runtime %{min_version} կամ ավելի բարձր:
-    Խնդրում ենք թարմացնել այն:
+    Seelen UI-ն պահանջում է Webview2 Runtime %{min_version} կամ ավելի բարձր: Խնդրում ենք թարմացնել այն:
 service:
   not_running: Seelen UI ծառայությունը չի աշխատում
   not_running_description: >-
-    Seelen UI Service-ը (slu-service) կախվածություն/օգնական է հավելվածի ճիշտ
-    աշխատանքի համար:
+    Seelen UI Service-ը (slu-service) կախվածություն/օգնական է հավելվածի ճիշտ աշխատանքի համար:
   not_running_ok: Սկսեք ծառայությունը
 shortcut:
   register:
