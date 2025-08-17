@@ -56,7 +56,7 @@ notifications:
   settings: Daha çox bildiriş parametrləri
   title: Bildirişlər
 placeholder:
-  battery_remaining: Qalan
+  battery_remaining: 'Qalan'
   bluetooth_devices: Bluetooth və Cihazlar
   ethernet_connected: İnternetə çıxışı
   ethernet_disconnected: İnternetə giriş yoxdur
