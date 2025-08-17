@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Espai de treball
     workspace_placeholder: Res
   bundled_msg: >-
-    Aquestes configuracions agrupades no són editables i estan dissenyades per
-    proporcionar -vos la millor experiència sense personalització. Configuen
-    automàticament les aplicacions més habituals per a vosaltres.
+    Aquestes configuracions agrupades no són editables i estan dissenyades per proporcionar -vos la millor experiència sense personalització. Configuen automàticament les aplicacions més habituals per a vosaltres.
   bundled_title: Configuració de l'aplicació agrupada amb Seelen
   confirm_delete: Esteu segur que voleu suprimir aquesta configuració/s?
   confirm_delete_title: Confirmeu Suprimeix
@@ -44,10 +42,7 @@ apps_configurations:
   export: Exportar
   export_full: Exporta la configuració per sol·licitud
   extra_info: >-
-    La interfície d'usuari de Seelen només utilitza un identificador per
-    aplicació (primer partit que es troba), de manera que l'ordre de com
-    s'especifica és important, es prioritzarà l'últim afegit, ja que nota que la
-    taula s'ordena de manera predeterminada de l'antiga a la vella.
+    La interfície d'usuari de Seelen només utilitza un identificador per aplicació (primer partit que es troba), de manera que l'ordre de com s'especifica és important, es prioritzarà l'últim afegit, ja que nota que la taula s'ordena de manera predeterminada de l'antiga a la vella.
   identifier:
     add_block: Afegiu bloc
     and: I
@@ -138,24 +133,20 @@ remove: Treure
 reset_all_to_default: Restableix tot als valors predeterminats
 reset_to_default: Restableix al valor predeterminat
 resources:
-  app_outdated: >-
-    Aquest recurs requereix una versió més recent de la interfície d'usuari de
-    Seelen per funcionar correctament.
+  app_outdated: Aquest recurs requereix una versió més recent de la interfície d'usuari de Seelen per funcionar correctament.
   discover: Descobriu més recursos
   export: Els recursos d’exportació
   import_wallpapers: Importa fons de pantalla locals
   open_folder: Obrir la carpeta de recursos
   outdated: >-
-    Aquest recurs va ser dissenyat per a una versió anterior de la interfície
-    d'usuari de Seelen i pot no funcionar correctament.
+    Aquest recurs va ser dissenyat per a una versió anterior de la interfície d'usuari de Seelen i pot no funcionar correctament.
 save: Estalviar
 save_and_restart: Desar i reiniciar
 see_more: Veure més
 shortcuts:
   enable: Activa el sistema integrat de dreceres
   enable_tooltip: >-
-    Desactiveu si implementareu el vostre propi sistema de dreceres mitjançant
-    el client de la interfície d'usuari de Seelen
+    Desactiveu si implementareu el vostre propi sistema de dreceres mitjançant el client de la interfície d'usuari de Seelen
   labels:
     create_new_workspace: Creeu un espai de treball nou
     cycle_stack_next: Stack Cycle Següent
@@ -206,10 +197,7 @@ sides:
   top: Superior
 start:
   message: >-
-    Benvingut a la interfície d'usuari de Seelen, l'entorn d'escriptori
-    definitiu amb un gestor de Windows de rajoles incorporat per millorar la
-    vostra experiència de Windows. Exploreu una nova era d’eficiència i
-    multitasca amb la nostra interfície intuïtiva i les funcions avançades.
+    Benvingut a la interfície d'usuari de Seelen, l'entorn d'escriptori definitiu amb un gestor de Windows de rajoles incorporat per millorar la vostra experiència de Windows. Exploreu una nova era d’eficiència i multitasca amb la nostra interfície intuïtiva i les funcions avançades.
   message_accent: Optimitzeu la vostra productivitat amb estil.
   title: Benvingut!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Posició
   dynamic_color: Color dinàmic
   dynamic_color_tooltip: >-
-    Activa els colors dinàmics de fons i en primer pla basats en la finestra
-    centrada. (Els colors es poden anul·lar per temes)
+    Activa els colors dinàmics de fons i en primer pla basats en la finestra centrada. (Els colors es poden anul·lar per temes)
   enable: Activa la barra d’eines de luxe
   height: Altura
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Mai
     on_overlap: Sobre la superposició
   label: Barra d’eines
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Mostra el botó hibernat al menú d'alimentació
 update:
   available: Actualitzeu disponible.
