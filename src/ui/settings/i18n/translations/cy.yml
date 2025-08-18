@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Gweithle
     workspace_placeholder: Neb
   bundled_msg: >-
-    Nid oes modd golygu'r cyfluniadau bwndelu hyn ac fe'u cynlluniwyd i roi'r
-    profiad gorau i chi heb addasu. Maent yn ffurfweddu'r cymwysiadau mwyaf
-    cyffredin ar eich cyfer yn awtomatig.
+    Nid oes modd golygu'r cyfluniadau bwndelu hyn ac fe'u cynlluniwyd i roi'r profiad gorau i chi heb addasu. Maent yn ffurfweddu'r cymwysiadau mwyaf cyffredin ar eich cyfer yn awtomatig.
   bundled_title: App Config wedi'i bwndelu â Seelen
   confirm_delete: Ydych chi'n siŵr eich bod chi am ddileu'r cyfluniad/au hwn?
   confirm_delete_title: Cadarnhau Dileu
@@ -44,10 +42,7 @@ apps_configurations:
   export: Allforiff
   export_full: Gosodiadau Allforio yn ôl Cais
   extra_info: >-
-    Mae Seelen UI yn defnyddio dim ond un dynodwr i bob app (y gêm gyntaf a
-    ddarganfuwyd) felly mae'r gorchymyn yn sut yn cael ei nodi yn bwysig, bydd
-    yr ychwanegiad diweddaraf yn cael ei flaenoriaethu, fel nodyn mae'r tabl yn
-    cael ei ddidoli yn ddiofyn o'r diweddaraf i'r hen.
+    Mae Seelen UI yn defnyddio dim ond un dynodwr i bob app (y gêm gyntaf a ddarganfuwyd) felly mae'r gorchymyn yn sut yn cael ei nodi yn bwysig, bydd yr ychwanegiad diweddaraf yn cael ei flaenoriaethu, fel nodyn mae'r tabl yn cael ei ddidoli yn ddiofyn o'r diweddaraf i'r hen.
   identifier:
     add_block: Ychwanegu bloc
     and: A
@@ -138,24 +133,20 @@ remove: Godon
 reset_all_to_default: Ailosod popeth i werthoedd diofyn
 reset_to_default: Ailosod i werth diofyn
 resources:
-  app_outdated: >-
-    Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
-    iawn.
+  app_outdated: Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n iawn.
   discover: Darganfyddwch fwy o adnoddau
   export: Adnodd Allforio
   import_wallpapers: Mewnforio papurau wal lleol
   open_folder: Ffolder Adnoddau Agored
   outdated: >-
-    Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na
-    fyddai'n gweithio'n iawn.
+    Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na fyddai'n gweithio'n iawn.
 save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 see_more: Gweld mwy
 shortcuts:
   enable: Galluogi system llwybrau byr adeiledig
   enable_tooltip: >-
-    Analluoga os byddwch chi'n gweithredu'ch system llwybrau byr eich hun gan
-    ddefnyddio cleient Seelen UI
+    Analluoga os byddwch chi'n gweithredu'ch system llwybrau byr eich hun gan ddefnyddio cleient Seelen UI
   labels:
     create_new_workspace: Creu man gwaith newydd
     cycle_stack_next: Pentwr beicio nesaf
@@ -206,10 +197,7 @@ sides:
   top: Brigant
 start:
   message: >-
-    Croeso i Seelen UI, yr amgylchedd bwrdd gwaith yn y pen draw gyda rheolwr
-    ffenestri teils corfforedig i wella'ch profiad Windows! Archwiliwch oes
-    newydd o effeithlonrwydd ac amldasgio gyda'n rhyngwyneb greddfol a'n
-    nodweddion uwch.
+    Croeso i Seelen UI, yr amgylchedd bwrdd gwaith yn y pen draw gyda rheolwr ffenestri teils corfforedig i wella'ch profiad Windows! Archwiliwch oes newydd o effeithlonrwydd ac amldasgio gyda'n rhyngwyneb greddfol a'n nodweddion uwch.
   message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
   title: Croeso!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Safle
   dynamic_color: Lliw deinamig
   dynamic_color_tooltip: >-
-    Galluogi cefndir deinamig a lliwiau blaendir yn seiliedig ar ffenestr â
-    ffocws. (Gellir diystyru lliwiau gan themâu)
+    Galluogi cefndir deinamig a lliwiau blaendir yn seiliedig ar ffenestr â ffocws. (Gellir diystyru lliwiau gan themâu)
   enable: Galluogi bar offer ffansi
   height: Uchder
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Byth
     on_overlap: Ar gorgyffwrdd
   label: Bariau
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Dangos botwm gaeafgysgu ar y ddewislen pŵer
 update:
   available: Diweddariad ar gael!

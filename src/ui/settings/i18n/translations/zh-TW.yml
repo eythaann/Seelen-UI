@@ -33,7 +33,8 @@ apps_configurations:
     wm_options_label: 窗口管理器選項
     workspace: 工作區
     workspace_placeholder: 沒有任何
-  bundled_msg: 這些捆綁的配置不可編輯，旨在為您提供最佳體驗而沒有自定義。 他們會自動為您配置最常見的應用程序。
+  bundled_msg: >-
+    這些捆綁的配置不可編輯，旨在為您提供最佳體驗而沒有自定義。 他們會自動為您配置最常見的應用程序。
   bundled_title: App Config與Seelen捆綁在一起
   confirm_delete: 您確定要刪除此配置嗎？
   confirm_delete_title: 確認刪除
@@ -41,8 +42,7 @@ apps_configurations:
   export: 出口
   export_full: 按應用程序導出設置
   extra_info: >-
-    SEELEN
-    UI僅使用每個應用程序使用一個標識符（第一次匹配），因此“如何指定”的順序很重要，最新添加的添加將得到優先級，因為註意表的默認情況下是從最新到舊的。
+    SEELEN UI僅使用每個應用程序使用一個標識符（第一次匹配），因此“如何指定”的順序很重要，最新添加的添加將得到優先級，因為註意表的默認情況下是從最新到舊的。
   identifier:
     add_block: 添加塊
     and: 和
@@ -138,13 +138,15 @@ resources:
   export: 導出資源
   import_wallpapers: 導入本地壁紙
   open_folder: 打開資源文件夾
-  outdated: 該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
+  outdated: >-
+    該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
 save: 節省
 save_and_restart: 保存和重新啟動
 see_more: 查看更多
 shortcuts:
   enable: 啟用內置捷徑系統
-  enable_tooltip: 禁用您使用SEELEN UI客戶端實現自己的快捷方式系統
+  enable_tooltip: >-
+    禁用您使用SEELEN UI客戶端實現自己的快捷方式系統
   labels:
     create_new_workspace: 創建新工作區
     cycle_stack_next: 循環堆棧接下來
@@ -195,8 +197,7 @@ sides:
   top: 頂部
 start:
   message: >-
-    歡迎來到Seelen UI，這是終極台式機環境，並帶有合併的瓷磚Windows Manager，以增強您的Windows體驗！
-    通過我們的直觀界面和高級功能探索效率和多任務的新時代。
+    歡迎來到Seelen UI，這是終極台式機環境，並帶有合併的瓷磚Windows Manager，以增強您的Windows體驗！ 通過我們的直觀界面和高級功能探索效率和多任務的新時代。
   message_accent: 通過風格優化您的生產力！
   title: 歡迎！
 toolbar:
@@ -205,7 +206,8 @@ toolbar:
   delay_to_show: 延遲顯示
   dock_side: 位置
   dynamic_color: 動態顏色
-  dynamic_color_tooltip: 基於聚焦窗口啟用動態背景和前景顏色。 （顏色可以被主題覆蓋）
+  dynamic_color_tooltip: >-
+    基於聚焦窗口啟用動態背景和前景顏色。 （顏色可以被主題覆蓋）
   enable: 啟用高檔工具欄
   height: 高度
   hide_mode:
@@ -213,7 +215,7 @@ toolbar:
     never: 絕不
     on_overlap: 在重疊
   label: 工具欄
-  placeholder: {}
+  placeholder: { }
   show_hibernate: 在電源菜單上顯示Hibernate按鈕
 update:
   available: 更新可用！

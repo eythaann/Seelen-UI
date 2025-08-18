@@ -77,9 +77,7 @@ settings:
   sleep: Mettre en veille
   title: Paramètres
 tray:
-  empty: >-
-    Pas d'éléments dans la zone de notification (Note : Windows 10 n'est pas
-    supporté)
+  empty: 'Pas d''éléments dans la zone de notification (Note : Windows 10 n''est pas supporté)'
   unlabeled: Icône de plateau sans étiquette
 userhome:
   empty_list: Aucun élément

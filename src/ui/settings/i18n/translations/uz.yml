@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Ish maydoni
     workspace_placeholder: Hech biri
   bundled_msg: >-
-    Ushbu yig'ilgan konfiguratsiyalar tahrirlanmaydi va sizga eng yaxshi
-    tajribani taqdim etishsiz taqdim etish uchun mo'ljallangan. Ular avtomatik
-    ravishda siz uchun eng keng tarqalgan dasturlarni sozlaydi.
+    Ushbu yig'ilgan konfiguratsiyalar tahrirlanmaydi va sizga eng yaxshi tajribani taqdim etishsiz taqdim etish uchun mo'ljallangan. Ular avtomatik ravishda siz uchun eng keng tarqalgan dasturlarni sozlaydi.
   bundled_title: Dastur konfigurasi Seelen bilan bog'langan
   confirm_delete: Ushbu konfiguratsiyani o'chirishni xohlayotganingizga ishonchingiz komilmi?
   confirm_delete_title: O'chirishni tasdiqlang
@@ -44,10 +42,7 @@ apps_configurations:
   export: Eksport
   export_full: Ilova orqali eksport sozlamalari
   extra_info: >-
-    Seelen UI har bir ilovada faqat bitta identifikatordan foydalanadi (birinchi
-    moslik topildi), shuning uchun qanday belgilanish tartibi muhim, oxirgi
-    qoʻshilganlar ustuvor boʻladi, chunki jadval sukut boʻyicha oxirgidan
-    eskisiga saralanganligini unutmang.
+    Seelen UI har bir ilovada faqat bitta identifikatordan foydalanadi (birinchi moslik topildi), shuning uchun qanday belgilanish tartibi muhim, oxirgi qoʻshilganlar ustuvor boʻladi, chunki jadval sukut boʻyicha oxirgidan eskisiga saralanganligini unutmang.
   identifier:
     add_block: Blokni qo'shish
     and: Va
@@ -87,9 +82,7 @@ devtools:
   simulate_fullscreen: Toʻliq ekranli hodisani simulyatsiya qilish
 extras:
   clear_icons: Tozalash tizimi piktogrammalari kesh
-  clear_icons_tooltip: >-
-    Barcha vidjetlarga to'liq ta'sir qilish uchun qayta boshlash talab qilinishi
-    mumkin
+  clear_icons_tooltip: Barcha vidjetlarga to'liq ta'sir qilish uchun qayta boshlash talab qilinishi mumkin
   exit: Chiqish / chiqish
   links: Rasmiy havolalar
   relaunch: Qolma
@@ -146,16 +139,14 @@ resources:
   import_wallpapers: Mahalliy fon rasmlarini import qilish
   open_folder: Resurslar jildini oching
   outdated: >-
-    Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri
-    ishlamasligi mumkin.
+    Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri ishlamasligi mumkin.
 save: Tejash
 save_and_restart: Saqlang va qayta yoqing
 see_more: Ko'proq ko'rish
 shortcuts:
   enable: Ichki yorliqlar tizimini yoqing
   enable_tooltip: >-
-    Seelen Ui mijozidan foydalanib o'zingizning yorliq tizimingizni amalga
-    oshirsangiz, o'chiring
+    Seelen Ui mijozidan foydalanib o'zingizning yorliq tizimingizni amalga oshirsangiz, o'chiring
   labels:
     create_new_workspace: Yangi ish maydonini yarating
     cycle_stack_next: Keyingi tsikl stakan
@@ -206,10 +197,7 @@ sides:
   top: Eng yuqori
 start:
   message: >-
-    Windows tajribangizni oshirish uchun "Windows" bosh murabbiyi bo'lgan
-    Windows menejeriga ega Seelen UI-ga xush kelibsiz! Bizning intuitiv
-    interfeysimiz va rivojlangan xususiyatlarimiz bilan samaradorlik va ko'p
-    bosqichli yangi davrni o'rganing.
+    Windows tajribangizni oshirish uchun "Windows" bosh murabbiyi bo'lgan Windows menejeriga ega Seelen UI-ga xush kelibsiz! Bizning intuitiv interfeysimiz va rivojlangan xususiyatlarimiz bilan samaradorlik va ko'p bosqichli yangi davrni o'rganing.
   message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
   title: Xush kelibsiz!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Pozitsiya
   dynamic_color: Dinamik rang
   dynamic_color_tooltip: >-
-    Fokuslangan oynada dinamik fon va oldingi ranglarni yoqish. (Ranglar
-    mavzular tomonidan bekor qilinishi mumkin)
+    Fokuslangan oynada dinamik fon va oldingi ranglarni yoqish. (Ranglar mavzular tomonidan bekor qilinishi mumkin)
   enable: Fashr asboblar panelini yoqing
   height: Balandlik
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Hech qachon
     on_overlap: Bir-biriga yopishgan holda
   label: Asboblar paneli
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Quvvat menyusidagi Xolernate tugmasini bosing
 update:
   available: Yangilanish mavjud!

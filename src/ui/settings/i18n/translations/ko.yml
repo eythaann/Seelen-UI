@@ -34,8 +34,7 @@ apps_configurations:
     workspace: 작업 공간
     workspace_placeholder: 없음
   bundled_msg: >-
-    이러한 미리 구성된 설정은 편집할 수 없으며, 수정하지 않고 최상의 경험을 제공하도록 설계되었습니다. 자주 사용되는 프로그램을 자동으로
-    구성합니다.
+    이러한 미리 구성된 설정은 편집할 수 없으며, 수정하지 않고 최상의 경험을 제공하도록 설계되었습니다. 자주 사용되는 프로그램을 자동으로 구성합니다.
   bundled_title: Seelen에서 제공한 설정
   confirm_delete: 정말로 이 설정을 삭제하시겠습니까?
   confirm_delete_title: 삭제하시겠습니까?
@@ -43,8 +42,7 @@ apps_configurations:
   export: 내보내기
   export_full: 애플리케이션별 설정 내보내기
   extra_info: >-
-    Seelen UI는 앱당 (가장 먼저 일치한) 하나의 식별자만 사용하므로 식별된 순서는 중요합니다. 가장 최근에 추가된 항목이 우선순위를
-    정합니다. 참고로 테이블은 기본적으로 최신순 부터 오래된 순서로 정렬됩니다.
+    Seelen UI는 앱당 (가장 먼저 일치한) 하나의 식별자만 사용하므로 식별된 순서는 중요합니다. 가장 최근에 추가된 항목이 우선순위를 정합니다. 참고로 테이블은 기본적으로 최신순 부터 오래된 순서로 정렬됩니다.
   identifier:
     add_block: 블록 추가
     and: 그리고
@@ -140,13 +138,15 @@ resources:
   export: 리소스 내보내기
   import_wallpapers: 로컬 배경화면 가져오기
   open_folder: 리소스 폴더 열기
-  outdated: 이 리소스는 이전 버전의 Seelen UI용으로 설계되었으며 제대로 작동하지 않을 수 있습니다.
+  outdated: >-
+    이 리소스는 이전 버전의 Seelen UI용으로 설계되었으며 제대로 작동하지 않을 수 있습니다.
 save: 저장
 save_and_restart: 저장 및 재시작
 see_more: 자세히 보기
 shortcuts:
   enable: 내장 단축키 시스템을 활성화하십시오
-  enable_tooltip: Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
+  enable_tooltip: >-
+    Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
   labels:
     create_new_workspace: 새 작업 공간을 만듭니다
     cycle_stack_next: 다음에 사이클 스택
@@ -197,8 +197,7 @@ sides:
   top: 위
 start:
   message: >-
-    Seelen UI에 오신 것을 환영합니다. Windows 경험을 향상시키기 위해 타일링 윈도우 매니저가 포함된 궁극의 데스크탑
-    환경입니다! 직관적인 인터페이스와 고급 기능을 통해 효율성과 멀티태스킹의 새로운 시대를 탐험해 보세요.
+    Seelen UI에 오신 것을 환영합니다. Windows 경험을 향상시키기 위해 타일링 윈도우 매니저가 포함된 궁극의 데스크탑 환경입니다! 직관적인 인터페이스와 고급 기능을 통해 효율성과 멀티태스킹의 새로운 시대를 탐험해 보세요.
   message_accent: 스타일로 생산성을 최적화하세요!
   title: 환영합니다!
 toolbar:
@@ -207,7 +206,8 @@ toolbar:
   delay_to_show: 표시 지연
   dock_side: 위치
   dynamic_color: 동적 색상
-  dynamic_color_tooltip: 초점이 맞춰진 창을 기준으로 동적 배경 및 전경색을 사용하도록 설정합니다. (테마에 따라 색상을 재정의할 수 있음)
+  dynamic_color_tooltip: >-
+    초점이 맞춰진 창을 기준으로 동적 배경 및 전경색을 사용하도록 설정합니다. (테마에 따라 색상을 재정의할 수 있음)
   enable: 툴바 활성화
   height: 높이
   hide_mode:
@@ -215,7 +215,7 @@ toolbar:
     never: 안 함
     on_overlap: 오버랩 시
   label: 도구 모음
-  placeholder: {}
+  placeholder: { }
   show_hibernate: 전원 메뉴에 최대 절전 모드 버튼 표시
 update:
   available: 사용 가능한 업데이트가 존재합니다!
@@ -246,7 +246,7 @@ wall:
     center: 센터
     left: 왼쪽
     right: 오른쪽
-    top: Top
+    top: 위
   random: 슬라이드 쇼 무작위
   saturation: 채도
   seconds: 초

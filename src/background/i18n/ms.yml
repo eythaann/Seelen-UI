@@ -3,14 +3,12 @@ done: Selesai
 drivers:
   got_it: Mendapatnya
   monitor_disabled: >-
-    Nampaknya beberapa pemandu monitor dilumpuhkan. Sila membolehkan mereka
-    membiarkan Seelen UI berfungsi dengan baik.
+    Nampaknya beberapa pemandu monitor dilumpuhkan. Sila membolehkan mereka membiarkan Seelen UI berfungsi dengan baik.
   monitor_disabled_title: Pemantauan pemantauan dilumpuhkan
 resource:
   added: Sumber baru telah ditambah
   download_failed_body: >-
-    Sesuatu yang tidak kena semasa memuat turun sumber, sila laporkan kepada
-    pasukan pemaju Seelen.
+    Sesuatu yang tidak kena semasa memuat turun sumber, sila laporkan kepada pasukan pemaju Seelen.
   download_failed_title: Muat turun sumber gagal
   downloading: Memuat turun aset ...
   downloading_body: Ini mungkin mengambil masa beberapa saat, jangan menutup tetingkap.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: UI Seelen memerlukan Webview2 Runtime. Sila pasang.
   outdated: WebView2 Runtime sudah lapuk
   outdated_description: >-
-    UI Seelen memerlukan Webview2 Runtime %{min_version} atau lebih tinggi. Sila
-    kemas kini.
+    UI Seelen memerlukan Webview2 Runtime %{min_version} atau lebih tinggi. Sila kemas kini.
 service:
   not_running: Perkhidmatan UI Seelen tidak berjalan
   not_running_description: >-
-    Perkhidmatan UI Seelen (perkhidmatan slu) ialah kebergantungan/pembantu
-    untuk apl berfungsi dengan betul.
+    Perkhidmatan UI Seelen (perkhidmatan slu) ialah kebergantungan/pembantu untuk apl berfungsi dengan betul.
   not_running_ok: Mulakan perkhidmatan
 shortcut:
   register:

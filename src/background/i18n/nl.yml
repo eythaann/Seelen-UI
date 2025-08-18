@@ -3,38 +3,30 @@ done: Klaar
 drivers:
   got_it: Ik heb het
   monitor_disabled: >-
-    Het lijkt erop dat sommige beeldschermstuurprogramma's zijn uitgeschakeld.
-    Schakel deze in om Seelen UI goed te laten werken.
+    Het lijkt erop dat sommige beeldschermstuurprogramma's zijn uitgeschakeld. Schakel deze in om Seelen UI goed te laten werken.
   monitor_disabled_title: Monitorstuurprogramma's zijn uitgeschakeld
 resource:
   added: Er is een nieuwe bron toegevoegd
   download_failed_body: >-
-    Er is iets misgegaan tijdens het downloaden van de bron, meld dit
-    alstublieft aan het ontwikkelteam van Seelen.
+    Er is iets misgegaan tijdens het downloaden van de bron, meld dit alstublieft aan het ontwikkelteam van Seelen.
   download_failed_title: Downloaden van bronnen mislukt
   downloading: Bedrijfsmiddelen downloaden...
   downloading_body: Dit kan enkele seconden duren, sluit het venster niet.
   enable: inschakelen
 runtime:
   corrupted_data: Beschadigde gegevens
-  corrupted_file: >-
-    Een configuratiebestand is beschadigd, waardoor standaardwaarden worden
-    gebruikt.
+  corrupted_file: Een configuratiebestand is beschadigd, waardoor standaardwaarden worden gebruikt.
   corrupted_file_path: Corrupt bestandspad
   download: Ga naar de downloadpagina
   not_found: WebView2 Runtime niet gevonden
-  not_found_description: >-
-    De Seelen-gebruikersinterface vereist Webview2 Runtime. Installeer het
-    alstublieft.
+  not_found_description: De Seelen-gebruikersinterface vereist Webview2 Runtime. Installeer het alstublieft.
   outdated: WebView2 Runtime verouderd
   outdated_description: >-
-    Seelen UI vereist Webview2 Runtime %{min_version} of hoger. Update het
-    alstublieft.
+    Seelen UI vereist Webview2 Runtime %{min_version} of hoger. Update het alstublieft.
 service:
   not_running: Seelen UI-service is niet actief
   not_running_description: >-
-    Seelen UI Service (slu-service) is een afhankelijkheid/helper om de app
-    correct te laten werken.
+    Seelen UI Service (slu-service) is een afhankelijkheid/helper om de app correct te laten werken.
   not_running_ok: Dienst starten
 shortcut:
   register:

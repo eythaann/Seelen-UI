@@ -56,7 +56,7 @@ notifications:
   settings: 更多的通知設置
   title: 通知
 placeholder:
-  battery_remaining: ％ 其餘的
+  battery_remaining: '％ 其餘的'
   bluetooth_devices: 藍牙和設備
   ethernet_connected: 互聯網訪問
   ethernet_disconnected: 沒有互聯網訪問
@@ -77,7 +77,7 @@ settings:
   sleep: 睡覺
   title: 設定
 tray:
-  empty: 沒有托盤項目（注意：未實現Windows 10）
+  empty: '沒有托盤項目（注意：未實現Windows 10）'
   unlabeled: 未標記的托盤圖標
 userhome:
   empty_list: 沒有項目

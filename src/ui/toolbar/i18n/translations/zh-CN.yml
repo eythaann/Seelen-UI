@@ -77,7 +77,7 @@ settings:
   sleep: 睡眠
   title: 设置
 tray:
-  empty: 无托盘项目（注：Windows 10 未实施）
+  empty: '无托盘项目（注：Windows 10 未实施）'
   unlabeled: 无标签托盘图标
 userhome:
   empty_list: 无项目

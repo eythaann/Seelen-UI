@@ -34,9 +34,7 @@ apps_configurations:
     workspace: Työtila
     workspace_placeholder: Ei mitään
   bundled_msg: >-
-    Näitä pauhutettuja kokoonpanoja ei voida muokata, ja ne on suunniteltu
-    tarjoamaan sinulle paras kokemus ilman räätälöintiä. Ne määrittelevät
-    sinulle yleisimmät sovellukset automaattisesti.
+    Näitä pauhutettuja kokoonpanoja ei voida muokata, ja ne on suunniteltu tarjoamaan sinulle paras kokemus ilman räätälöintiä. Ne määrittelevät sinulle yleisimmät sovellukset automaattisesti.
   bundled_title: APP -konfigurointi, joka on mukana Seelenin kanssa
   confirm_delete: Haluatko varmasti poistaa tämän kokoonpanon/S?
   confirm_delete_title: Vahvista poistaminen
@@ -44,10 +42,7 @@ apps_configurations:
   export: Viedä
   export_full: Vie asetukset sovelluksittain
   extra_info: >-
-    Seelen -käyttöliittymä käyttää vain yhtä tunnistetta sovellusta kohden
-    (ensimmäinen ottelu löydetty), joten tilaus kuinka spesifikaatio on tärkeä,
-    viimeisin lisätty lisätään etusijalle, kuten huomaa, että taulukko
-    lajitellaan oletuksena viimeisimmästä vanhaan.
+    Seelen -käyttöliittymä käyttää vain yhtä tunnistetta sovellusta kohden (ensimmäinen ottelu löydetty), joten tilaus kuinka spesifikaatio on tärkeä, viimeisin lisätty lisätään etusijalle, kuten huomaa, että taulukko lajitellaan oletuksena viimeisimmästä vanhaan.
   identifier:
     add_block: Lisätä
     and: JA
@@ -87,9 +82,7 @@ devtools:
   simulate_fullscreen: Simuloi koko näytön tapahtumaa
 extras:
   clear_icons: Tyhjennä järjestelmän kuvakkeiden välimuisti
-  clear_icons_tooltip: >-
-    Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat
-    täysin voimaan.
+  clear_icons_tooltip: Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat täysin voimaan.
   exit: Lopettaa/poistua
   links: Viralliset linkit
   relaunch: Käynnistää uudelleen
@@ -146,16 +139,14 @@ resources:
   import_wallpapers: Tuo paikallisia taustakuvia
   open_folder: Avaa resurssikansio
   outdated: >-
-    Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se
-    välttämättä toimi oikein.
+    Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se välttämättä toimi oikein.
 save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 see_more: Katso lisää
 shortcuts:
   enable: Ota sisäänrakennettu pikakuvausjärjestelmä
   enable_tooltip: >-
-    Poista käytöstä, jos otat käyttöön omat pikakuvausjärjestelmäsi Seelen UI
-    -asiakkaan avulla
+    Poista käytöstä, jos otat käyttöön omat pikakuvausjärjestelmäsi Seelen UI -asiakkaan avulla
   labels:
     create_new_workspace: Luo uusi työtila
     cycle_stack_next: Sykli pino seuraavaksi
@@ -206,10 +197,7 @@ sides:
   top: Ylhäältä
 start:
   message: >-
-    Tervetuloa Seelen UI: hen, Ultimate Desktop -ympäristöön, jossa on
-    sisällytetty laatoitus Windows Manager, parantaaksesi Windows -kokemustasi!
-    Tutustu uuteen tehokkuuden ja monitehtavan aikakauteen intuitiivisella
-    rajapinnalla ja edistyneillä ominaisuuksilla.
+    Tervetuloa Seelen UI: hen, Ultimate Desktop -ympäristöön, jossa on sisällytetty laatoitus Windows Manager, parantaaksesi Windows -kokemustasi! Tutustu uuteen tehokkuuden ja monitehtavan aikakauteen intuitiivisella rajapinnalla ja edistyneillä ominaisuuksilla.
   message_accent: Optimoi tuottavuus tyylillä!
   title: Tervetuloa!
 toolbar:
@@ -219,8 +207,7 @@ toolbar:
   dock_side: Asema
   dynamic_color: Dynaaminen väri
   dynamic_color_tooltip: >-
-    Ota käyttöön dynaamiset tausta- ja etualavärit, jotka perustuvat
-    tarkennettuun ikkunaan. (Teemat voivat ohittaa värit).
+    Ota käyttöön dynaamiset tausta- ja etualavärit, jotka perustuvat tarkennettuun ikkunaan. (Teemat voivat ohittaa värit).
   enable: Ota hieno työkalurivi käyttöön
   height: Korkeus
   hide_mode:
@@ -228,7 +215,7 @@ toolbar:
     never: Ei koskaan
     on_overlap: Päällekkäin
   label: Työkalurivi
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Näytä lepotilapainike virtapainikkeessa
 update:
   available: Päivitä saatavilla!
@@ -259,7 +246,7 @@ wall:
     center: Keskusta
     left: Vasen
     right: Oikea
-    top: Top
+    top: Ylhäältä
   random: Satunnaista diaesitys
   saturation: Saturaatio
   seconds: sekunti

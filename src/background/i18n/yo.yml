@@ -3,14 +3,12 @@ done: Ṣe
 drivers:
   got_it: Ṣe o ri
   monitor_disabled: >-
-    O han pe diẹ ninu awọn awakọ atẹle ni alaabo. Jọwọ jẹ ki wọn jẹ ki wọn jẹ ki
-    wọn jẹ ki wọn ṣiṣẹ daradara.
+    O han pe diẹ ninu awọn awakọ atẹle ni alaabo. Jọwọ jẹ ki wọn jẹ ki wọn jẹ ki wọn jẹ ki wọn ṣiṣẹ daradara.
   monitor_disabled_title: Atẹle awọn awakọ jẹ alaabo
 resource:
   added: A ti ṣafikun awọn orisun titun
   download_failed_body: >-
-    Ohunkan ti o jẹ aṣiṣe lakoko gbigba awọn orisun, jọwọ jabo o si ẹgbẹ oludalu
-    ti o yẹ fun Silen.
+    Ohunkan ti o jẹ aṣiṣe lakoko gbigba awọn orisun, jọwọ jabo o si ẹgbẹ oludalu ti o yẹ fun Silen.
   download_failed_title: Igbasilẹ Igbasilẹ kuna
   downloading: Gbigba awọn ohun-ini ...
   downloading_body: Eyi le gba iṣẹju diẹ, jọwọ maṣe pa window naa.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI nilo Webview2 Runtime. Jọwọ fi sii.
   outdated: WebView2 Runtime ti igba atijọ
   outdated_description: >-
-    Seelen UI nilo Webview2 Runtime %{min_version} tabi ga julọ. Jọwọ ṣe
-    imudojuiwọn rẹ.
+    Seelen UI nilo Webview2 Runtime %{min_version} tabi ga julọ. Jọwọ ṣe imudojuiwọn rẹ.
 service:
   not_running: Seelen UI Service ko nṣiṣẹ
   not_running_description: >-
-    Iṣẹ Seelen UI (iṣẹ slu-slu) jẹ igbẹkẹle/oluranlọwọ fun ohun elo lati ṣiṣẹ
-    daradara.
+    Iṣẹ Seelen UI (iṣẹ slu-slu) jẹ igbẹkẹle/oluranlọwọ fun ohun elo lati ṣiṣẹ daradara.
   not_running_ok: Bẹrẹ iṣẹ
 shortcut:
   register:

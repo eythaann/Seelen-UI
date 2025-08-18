@@ -33,14 +33,16 @@ apps_configurations:
     wm_options_label: 窗口管理器选项
     workspace: 工作区
     workspace_placeholder: 无
-  bundled_msg: 这些捆绑配置不可编辑，旨在为您提供无需定制的最佳体验。它们会自动为您配置最常用的应用程序。
+  bundled_msg: >-
+    这些捆绑配置不可编辑，旨在为您提供无需定制的最佳体验。它们会自动为您配置最常用的应用程序。
   bundled_title: 与 Seelen 捆绑的应用程序配置
   confirm_delete: 您确定要删除此配置吗？
   confirm_delete_title: 确认删除
   delete: 删除
   export: 导出
   export_full: 按应用程序导出设置
-  extra_info: Seelen UI  对每个应用程序只使用一个标识符（找到的第一个匹配），因此“如何指定”的顺序很重要，最新添加的将优先，注册表默认从新到旧排序。
+  extra_info: >-
+    Seelen UI  对每个应用程序只使用一个标识符（找到的第一个匹配），因此“如何指定”的顺序很重要，最新添加的将优先，注册表默认从新到旧排序。
   identifier:
     add_block: 添加块
     and: 与
@@ -136,13 +138,15 @@ resources:
   export: 出口资源
   import_wallpapers: 导入本地壁纸
   open_folder: 打开资源文件夹
-  outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
+  outdated: >-
+    此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
 save: 保存
 save_and_restart: 保存并重启应用
 see_more: 查看更多
 shortcuts:
   enable: 启用内置捷径系统
-  enable_tooltip: 禁用您使用SEELEN UI客户端实现自己的快捷方式系统
+  enable_tooltip: >-
+    禁用您使用SEELEN UI客户端实现自己的快捷方式系统
   labels:
     create_new_workspace: 创建新工作区
     cycle_stack_next: 循环堆栈接下来
@@ -193,8 +197,7 @@ sides:
   top: 顶部
 start:
   message: >-
-    欢迎来到 Seelen UI，这是一个终极桌面环境，内置了平铺窗口管理器，以提升您的 Windows 体验！
-    通过我们直观的界面和先进的功能，探索高效与多任务处理的新纪元。
+    欢迎来到 Seelen UI，这是一个终极桌面环境，内置了平铺窗口管理器，以提升您的 Windows 体验！ 通过我们直观的界面和先进的功能，探索高效与多任务处理的新纪元。
   message_accent: 以风格优化您的工作效率！
   title: 欢迎使用！
 toolbar:
@@ -203,7 +206,8 @@ toolbar:
   delay_to_show: 延迟显示
   dock_side: 职位
   dynamic_color: 动态色彩
-  dynamic_color_tooltip: 根据聚焦窗口启用动态背景和前景颜色。(颜色可由主题覆盖）
+  dynamic_color_tooltip: >-
+    根据聚焦窗口启用动态背景和前景颜色。(颜色可由主题覆盖）
   enable: 启用精美工具栏
   height: 高度
   hide_mode:
@@ -211,7 +215,7 @@ toolbar:
     never: 绝不
     on_overlap: 关于重叠
   label: 工具栏
-  placeholder: {}
+  placeholder: { }
   show_hibernate: 在电源菜单上显示休眠按钮
 update:
   available: 更新可用！

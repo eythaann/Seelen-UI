@@ -3,36 +3,30 @@ done: Usulile
 drivers:
   got_it: Ngiyitholile
   monitor_disabled: >-
-    Kubonakala sengathi abanye abashayeli abaqashile bakhutshaziwe. Sicela
-    ubanikeze amandla okuvumela i-Seelen UI isebenze kahle.
+    Kubonakala sengathi abanye abashayeli abaqashile bakhutshaziwe. Sicela ubanikeze amandla okuvumela i-Seelen UI isebenze kahle.
   monitor_disabled_title: Abaqaphi abashayeli bayakhutshazwa
 resource:
   added: Kufakwe insiza entsha
   download_failed_body: >-
-    Kukhona okungahambanga kahle ngenkathi elanda insiza, sicela ubike kwiqembu
-    le-Seelen Developer.
+    Kukhona okungahambanga kahle ngenkathi elanda insiza, sicela ubike kwiqembu le-Seelen Developer.
   download_failed_title: Ukulanda izinsiza kwehlulekile
   downloading: Ukulanda Amafa ...
   downloading_body: Lokhu kungathatha imizuzwana embalwa, ngicela ungavali iwindi.
   enable: Nika amandla
 runtime:
   corrupted_data: Idatha eyonakalisiwe
-  corrupted_file: >-
-    Ifayela lokucushwa lonakalisiwe, kusetshenziswa amanani azenzakalelayo
-    esikhundleni salokho.
+  corrupted_file: Ifayela lokucushwa lonakalisiwe, kusetshenziswa amanani azenzakalelayo esikhundleni salokho.
   corrupted_file_path: Indlela yefayela eyonakele
   download: Iya ekhasini lokulanda
   not_found: Isikhathi sokusebenza se-WebView2 asitholakali
   not_found_description: I-Seelen UI idinga isikhathi sokusebenza se-Webview2. Sicela uyifake.
   outdated: I-WebView2 Runtime isiphelelwe yisikhathi
   outdated_description: >-
-    I-Seelen UI idinga isikhathi sokusebenza se-Webview2 %{min_version} noma
-    ngaphezulu. Sicela uyibuyekeze.
+    I-Seelen UI idinga isikhathi sokusebenza se-Webview2 %{min_version} noma ngaphezulu. Sicela uyibuyekeze.
 service:
   not_running: Isevisi ye-Seelen UI ayisebenzi
   not_running_description: >-
-    Isevisi ye-Seelen UI (slu-service) incike/umsizi ukuze uhlelo lokusebenza
-    lusebenze kahle.
+    Isevisi ye-Seelen UI (slu-service) incike/umsizi ukuze uhlelo lokusebenza lusebenze kahle.
   not_running_ok: Qala isevisi
 shortcut:
   register:

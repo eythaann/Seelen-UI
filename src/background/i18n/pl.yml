@@ -3,38 +3,30 @@ done: Zrobione
 drivers:
   got_it: Rozumiem
   monitor_disabled: >-
-    Wygląda na to, że niektóre sterowniki monitora są wyłączone. Włącz je, aby
-    Seelen UI działał poprawnie.
+    Wygląda na to, że niektóre sterowniki monitora są wyłączone. Włącz je, aby Seelen UI działał poprawnie.
   monitor_disabled_title: Sterowniki monitora są wyłączone
 resource:
   added: Dodano nowy zasób
   download_failed_body: >-
-    Coś poszło nie tak podczas pobierania zasobu, zgłoś to zespołowi deweloperów
-    Seelen.
+    Coś poszło nie tak podczas pobierania zasobu, zgłoś to zespołowi deweloperów Seelen.
   download_failed_title: Pobieranie zasobów nie powiodło się
   downloading: Pobieranie zasobów...
   downloading_body: Może to potrwać kilka sekund, nie zamykaj okna.
   enable: Włącz
 runtime:
   corrupted_data: Uszkodzone dane
-  corrupted_file: >-
-    Plik konfiguracyjny jest uszkodzony i zamiast niego używane są wartości
-    domyślne.
+  corrupted_file: Plik konfiguracyjny jest uszkodzony i zamiast niego używane są wartości domyślne.
   corrupted_file_path: Uszkodzona ścieżka pliku
   download: Przejdź do strony pobierania
   not_found: Nie znaleziono środowiska uruchomieniowego WebView2
-  not_found_description: >-
-    Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2.
-    Zainstaluj go.
+  not_found_description: Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2. Zainstaluj go.
   outdated: Środowisko wykonawcze WebView2 jest nieaktualne
   outdated_description: >-
-    Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2
-    %{min_version} lub nowszego. Zaktualizuj je i spróbuj ponownie.
+    Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2 %{min_version} lub nowszego. Zaktualizuj je i spróbuj ponownie.
 service:
   not_running: Usługa Seelen UI nie działa prawidłowo
   not_running_description: >-
-    Usługa Seelen UI Service (slu-service) jest zależnością umożliwiającą
-    prawidłowe działanie aplikacji.
+    Usługa Seelen UI Service (slu-service) jest zależnością umożliwiającą prawidłowe działanie aplikacji.
   not_running_ok: Uruchom usługę
 shortcut:
   register:
