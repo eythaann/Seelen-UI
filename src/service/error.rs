@@ -41,6 +41,8 @@ define_app_errors!(
     WideStringNull(widestring::error::MissingNulTerminator);
     SluIpc(slu_ipc::error::Error);
     WinHotkeys(win_hotkeys::error::WHKError);
+    TimeFormat(time::error::InvalidFormatDescription);
+    TimeOffset(time::error::IndeterminateOffset);
 );
 
 impl std::fmt::Debug for ServiceError {

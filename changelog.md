@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- cleanup of old service logs on start.
+- add time to service logs.
+
 ## [2.4.0]
 ### features
 - wallpaper resources.

@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use windows::Win32::UI::Shell::FOLDERID_LocalAppData;
 use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
 
@@ -7,6 +9,7 @@ pub struct SluServiceLogger {}
 
 impl SluServiceLogger {
     const REG_BASEKEY: &str = r"SYSTEM\CurrentControlSet\Services\EventLog\Application";
+    const MAX_LOG_SIZE: u64 = 1024 * 1024; // 1MB
 
     // remove on v2.3 or v2.4
     pub fn uninstall_old_logging() -> Result<()> {
@@ -47,21 +50,36 @@ impl SluServiceLogger {
         }));
     }
 
+    pub fn cleanup_if_needed(log_path: &Path) -> Result<()> {
+        if log_path.exists() {
+            let metadata = std::fs::metadata(log_path)?;
+            if metadata.len() > Self::MAX_LOG_SIZE {
+                std::fs::remove_file(log_path)?;
+            }
+        }
+        Ok(())
+    }
+
     pub fn init() -> Result<()> {
+        let log_path = WindowsApi::known_folder(FOLDERID_LocalAppData)?
+            .join("com.seelen.seelen-ui/logs/SLU Service.log");
+        Self::cleanup_if_needed(&log_path)?;
+
+        let format =
+            time::format_description::parse("[[[year]-[month]-[day]][[[hour]:[minute]:[second]]")?;
+        let local_now = time::OffsetDateTime::now_local()?;
         fern::Dispatch::new()
-            .format(|out, message, record| {
+            .format(move |out, message, record| {
                 out.finish(format_args!(
-                    "[{}][{}] {}",
+                    "{}[{}][{}] {}",
+                    local_now.format(&format).expect("Failed to format time"),
                     record.level(),
                     record.target(),
                     message
                 ))
             })
             .chain(std::io::stdout())
-            .chain(fern::log_file(
-                WindowsApi::known_folder(FOLDERID_LocalAppData)?
-                    .join("com.seelen.seelen-ui/logs/SLU Service.log"),
-            )?)
+            .chain(fern::log_file(log_path)?)
             .apply()?;
         Self::register_panic_hook();
         Ok(())
