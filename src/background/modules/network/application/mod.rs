@@ -148,8 +148,10 @@ impl NetworkManager {
                     let current_state = unsafe { list_manager.GetConnectivity() }.ok();
                     if let (Some(current_state), Some(last_state)) = (current_state, last_state) {
                         if current_state != last_state {
-                            last_ip = get_local_ip_address_base().ok();
-                            cb(current_state, last_ip.unwrap().to_string());
+                            if let Ok(ip) = get_local_ip_address_base() {
+                                last_ip = Some(ip);
+                                cb(current_state, ip.to_string());
+                            }
                         } else if current_state.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
                             == NLM_CONNECTIVITY_IPV4_INTERNET.0
                             || current_state.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
