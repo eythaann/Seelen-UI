@@ -1,3 +1,6 @@
+action:
+  confirm: Јесте ли сигурни?
+  confirm_body: Ова радња се не може поништити.
 app_launcher:
   enable: Омогући бацач апликација
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Остало
 monitors_configurations:
   label: Монитор {{Индек}}
 more: Више
+'no': 'Не'
 open: Отворен
 quit: Одустати
 remove: Скинути
@@ -134,6 +138,7 @@ reset_all_to_default: Ресетујте све за подразумеване 
 reset_to_default: Ресетујте на подразумевану вредност
 resources:
   app_outdated: Овај ресурс захтева новију верзију СЕЕЛЕН-а да ради правилно.
+  delete: Избриши ресурс
   discover: Откријте више ресурса
   export: Извозни ресурс
   import_wallpapers: Увоз локалне позадине
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Простор између контејнера
   workspace_offset: Оффсет радних простора (маржи)
   workspace_padding: Облога за радне просторе
+'yes': 'Да'
