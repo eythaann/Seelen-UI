@@ -141,6 +141,7 @@ resources:
   delete: Dzēst resursu
   discover: Atklājiet vairāk resursu
   export: Eksporta resursi
+  has_update: An update is available
   import_wallpapers: Importēt vietējās tapetes
   open_folder: Atvērt resursu mapi
   outdated: >-
