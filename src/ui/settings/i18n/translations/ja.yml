@@ -141,6 +141,7 @@ resources:
   delete: リソースを削除します
   discover: その他のリソース
   export: 輸出リソース
+  has_update: An update is available
   import_wallpapers: ローカル壁紙のインポート
   open_folder: リソースフォルダを開く
   outdated: >-
