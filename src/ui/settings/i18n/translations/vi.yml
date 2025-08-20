@@ -1,3 +1,6 @@
+action:
+  confirm: Bạn có chắc không?
+  confirm_body: Hành động này không thể được hoàn tác.
 app_launcher:
   enable: Bật trình khởi chạy ứng dụng
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Linh tinh
 monitors_configurations:
   label: Màn hình {{index}}
 more: Hơn
+'no': 'KHÔNG'
 open: Mở
 quit: Từ bỏ
 remove: Di dời
@@ -134,6 +138,7 @@ reset_all_to_default: Đặt lại tất cả về giá trị mặc định
 reset_to_default: Đặt lại về giá trị mặc định
 resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
+  delete: Xóa tài nguyên
   discover: Khám phá thêm tài nguyên
   export: Tài nguyên xuất khẩu
   import_wallpapers: Nhập hình nền địa phương
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Không gian giữa các container
   workspace_offset: Không gian làm việc bù (lề)
   workspace_padding: Không gian làm việc đệm
+'yes': 'Đúng'
