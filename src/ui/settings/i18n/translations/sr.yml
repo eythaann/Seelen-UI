@@ -141,6 +141,7 @@ resources:
   delete: Избриши ресурс
   discover: Откријте више ресурса
   export: Извозни ресурс
+  has_update: An update is available
   import_wallpapers: Увоз локалне позадине
   open_folder: Отворите мапу ресурса
   outdated: >-
