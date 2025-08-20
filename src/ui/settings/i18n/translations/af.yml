@@ -141,6 +141,7 @@ resources:
   delete: Vee hulpbron uit
   discover: Ontdek meer bronne
   export: Uitvoerhulpbron
+  has_update: An update is available
   import_wallpapers: Voer plaaslike agtergronde in
   open_folder: Open Resource Folder
   outdated: >-
