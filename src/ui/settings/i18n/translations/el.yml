@@ -1,3 +1,6 @@
+action:
+  confirm: Είστε σίγουροι;
+  confirm_body: Αυτή η ενέργεια δεν μπορεί να ανατραπεί.
 app_launcher:
   enable: Ενεργοποίηση εκτοξευτή εφαρμογών
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Ανάμικτος
 monitors_configurations:
   label: Monitor {{index}}
 more: Περισσότερο
+'no': 'Οχι'
 open: Ανοιξε
 quit: Εγκαταλείπω
 remove: Αφαιρώ
@@ -134,6 +138,7 @@ reset_all_to_default: Επαναφορά όλων στις προεπιλεγμ�
 reset_to_default: Επαναφορά στην προεπιλεγμένη τιμή
 resources:
   app_outdated: Αυτός ο πόρος απαιτεί μια νεότερη έκδοση του Seelen UI για να λειτουργήσει σωστά.
+  delete: Διαγραφή πόρου
   discover: Ανακαλύψτε περισσότερους πόρους
   export: Πόρος εξαγωγής
   import_wallpapers: Εισαγωγή τοπικών ταπετσαριών
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων
   workspace_offset: Μετατόπιση χώρων εργασίας (περιθώρια)
   workspace_padding: Πλατύφυλλα
+'yes': 'Ναί'
