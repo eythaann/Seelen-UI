@@ -141,6 +141,7 @@ resources:
   delete: 删除资源
   discover: 发现更多资源
   export: 出口资源
+  has_update: An update is available
   import_wallpapers: 导入本地壁纸
   open_folder: 打开资源文件夹
   outdated: >-
