@@ -1,3 +1,6 @@
+action:
+  confirm: Er du sikker?
+  confirm_body: Denne handling kan ikke fortrydes.
 app_launcher:
   enable: Aktivér app Launcher
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Diverse
 monitors_configurations:
   label: Monitor {{index}}
 more: Mere
+'no': 'Ingen'
 open: Åben
 quit: Afslut
 remove: Fjerne
@@ -134,6 +138,7 @@ reset_all_to_default: Nulstil alt til standardværdier
 reset_to_default: Nulstil til standardværdi
 resources:
   app_outdated: Denne ressource kræver en nyere version af Seelen UI for at fungere korrekt.
+  delete: Slet ressource
   discover: Opdag flere ressourcer
   export: Eksporter ressource
   import_wallpapers: Importer lokale baggrunde
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Rum mellem containere
   workspace_offset: Arbejdsområder offset (marginer)
   workspace_padding: Arbejdsområder polstring
+'yes': 'Ja'
