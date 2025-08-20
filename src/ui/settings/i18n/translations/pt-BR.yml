@@ -1,3 +1,6 @@
+action:
+  confirm: Tem certeza?
+  confirm_body: Esta ação não pode ser desfeita.
 app_launcher:
   enable: Ativar Lançador de Aplicativos
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Miscelânea
 monitors_configurations:
   label: Monitor {{index}}
 more: Mais
+'no': 'Não'
 open: Abrir
 quit: Desistir
 remove: Remover
@@ -134,6 +138,7 @@ reset_all_to_default: Redefinir tudo para os valores padrão
 reset_to_default: Redefinir para o valor padrão
 resources:
   app_outdated: Esse recurso requer uma versão mais recente da interface do usuário da Seelen para funcionar corretamente.
+  delete: Excluir recursos
   discover: Descubra mais recursos
   export: Recurso de exportação
   import_wallpapers: Importar papéis de parede locais
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Espaço entre contêineres
   workspace_offset: Deslocamento de espaços de trabalho (margens)
   workspace_padding: Preenchimento de espaços de trabalho
+'yes': 'Sim'
