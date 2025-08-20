@@ -141,6 +141,7 @@ resources:
   delete: સાધન કા delો
   discover: વધુ સંસાધનો શોધો
   export: નિકાસ સાધન
+  has_update: An update is available
   import_wallpapers: સ્થાનિક વ wallp લપેપર્સ આયાત કરો
   open_folder: ખુલ્લા સંસાધન ફોલ્ડર
   outdated: >-
