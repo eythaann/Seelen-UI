@@ -141,6 +141,7 @@ resources:
   delete: ምንጭን ሰርዝ
   discover: ተጨማሪ ሀብቶችን ያግኙ
   export: ወደ ውጭ የመላክ ሀብት
+  has_update: An update is available
   import_wallpapers: የአካባቢያዊ የግድግዳ ወረቀቶች ያስመጡ
   open_folder: ክፍት የመረጃ ምንጭ አቃፊ
   outdated: >-
