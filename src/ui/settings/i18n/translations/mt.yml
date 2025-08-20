@@ -141,6 +141,7 @@ resources:
   delete: Ħassar ir-riżorsa
   discover: Skopri aktar riżorsi
   export: Riżorsa ta 'esportazzjoni
+  has_update: An update is available
   import_wallpapers: Importa wallpapers lokali
   open_folder: Folder tar-Riżorsi Miftuħa
   outdated: >-
