@@ -1,3 +1,6 @@
+action:
+  confirm: Uqinisekile?
+  confirm_body: Lesi senzo asinakungcola.
 app_launcher:
   enable: Nika amandla isiqalisi sohlelo lokusebenza
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: '-Nhlobonhlobo'
 monitors_configurations:
   label: Qapha {{inkomba}}
 more: Okuningi
+'no': '-Nokuba'
 open: Vula
 quit: Yeka
 remove: Susa
@@ -134,6 +138,7 @@ reset_all_to_default: Setha kabusha konke kumanani azenzakalelayo
 reset_to_default: Setha kabusha ngenani elizenzakalelayo
 resources:
   app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
+  delete: Susa insiza
   discover: Thola izinsiza ezengeziwe
   export: Ukuthumela impahla
   import_wallpapers: Ngenisa amaphephadonga endawo
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Isikhala phakathi kweziqukathi
   workspace_offset: Izindawo zokusebenzela (Margins)
   workspace_padding: I-Workespashe Padding
+'yes': 'Yebo'
