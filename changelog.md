@@ -10,6 +10,7 @@
 
 ### fix
 - toolbar not showing when user deleted basic system folders.
+- hotkeys stopping working after lock screen.
 
 ## [2.4.0]
 ### features
