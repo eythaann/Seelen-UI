@@ -141,6 +141,7 @@ resources:
   delete: Susa insiza
   discover: Thola izinsiza ezengeziwe
   export: Ukuthumela impahla
+  has_update: An update is available
   import_wallpapers: Ngenisa amaphephadonga endawo
   open_folder: Ifolda Yezisetshenziswa
   outdated: >-
