@@ -141,6 +141,7 @@ resources:
   delete: Resurslarni o'chirish
   discover: Ko'proq resurslarni kashf eting
   export: Eksport manbai
+  has_update: An update is available
   import_wallpapers: Mahalliy fon rasmlarini import qilish
   open_folder: Resurslar jildini oching
   outdated: >-
