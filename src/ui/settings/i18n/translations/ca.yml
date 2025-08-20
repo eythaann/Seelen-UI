@@ -141,6 +141,7 @@ resources:
   delete: Esborra el recurs
   discover: Descobriu més recursos
   export: Els recursos d’exportació
+  has_update: An update is available
   import_wallpapers: Importa fons de pantalla locals
   open_folder: Obrir la carpeta de recursos
   outdated: >-
