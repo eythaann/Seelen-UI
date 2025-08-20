@@ -141,6 +141,7 @@ resources:
   delete: সংস্থান মুছুন
   discover: আরও সংস্থান আবিষ্কার করুন
   export: রফতানি সংস্থান
+  has_update: An update is available
   import_wallpapers: স্থানীয় ওয়ালপেপার আমদানি করুন
   open_folder: ওপেন রিসোর্স ফোল্ডার
   outdated: >-
