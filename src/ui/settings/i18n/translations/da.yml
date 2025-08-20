@@ -141,6 +141,7 @@ resources:
   delete: Slet ressource
   discover: Opdag flere ressourcer
   export: Eksporter ressource
+  has_update: An update is available
   import_wallpapers: Importer lokale baggrunde
   open_folder: Åbn ressourcemappen
   outdated: >-
