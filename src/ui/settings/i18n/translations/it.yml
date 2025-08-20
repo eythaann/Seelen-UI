@@ -1,3 +1,6 @@
+action:
+  confirm: Sei sicuro?
+  confirm_body: Questa azione non può essere annullata.
 app_launcher:
   enable: Abilita Launcher delle App
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Varie
 monitors_configurations:
   label: Monitor {{index}}
 more: Altro
+'no': 'NO'
 open: Apri
 quit: Esci
 remove: Rimuovi
@@ -134,6 +138,7 @@ reset_all_to_default: Ripristinare tutti i valori predefiniti
 reset_to_default: Ripristino del valore predefinito
 resources:
   app_outdated: Questa risorsa richiede una versione più recente di Seelen UI per funzionare correttamente.
+  delete: Elimina risorsa
   discover: Scoprire altre risorse
   export: Esportazione di risorse
   import_wallpapers: Importazione di sfondi locali
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Spazio tra i Contenitori
   workspace_offset: Offset dei Workspace (Margini)
   workspace_padding: Spaziatura dei Workspace
+'yes': 'SÌ'
