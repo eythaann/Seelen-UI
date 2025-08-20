@@ -1,3 +1,6 @@
+action:
+  confirm: Apa kamu yakin?
+  confirm_body: Tindakan ini tidak bisa dibatalkan.
 app_launcher:
   enable: Aktifkan peluncur aplikasi
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Aneka ragam
 monitors_configurations:
   label: Monitor {{index}}
 more: Lagi
+'no': 'TIDAK'
 open: Membuka
 quit: Berhenti
 remove: Menghapus
@@ -134,6 +138,7 @@ reset_all_to_default: Atur ulang semua ke nilai default
 reset_to_default: Atur ulang ke nilai default
 resources:
   app_outdated: Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat berfungsi dengan baik.
+  delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya
   export: Sumber Daya Ekspor
   import_wallpapers: Impor wallpaper lokal
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Ruang antar wadah
   workspace_offset: Offset ruang kerja (margin)
   workspace_padding: Padding ruang kerja
+'yes': 'Ya'
