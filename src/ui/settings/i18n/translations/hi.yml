@@ -141,6 +141,7 @@ resources:
   delete: संसाधन हटाएं
   discover: अधिक संसाधनों की खोज करें
   export: निर्यात संसाधन
+  has_update: An update is available
   import_wallpapers: स्थानीय वॉलपेपर आयात करें
   open_folder: संसाधन फ़ोल्डर खोलें
   outdated: >-
