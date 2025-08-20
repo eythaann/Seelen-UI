@@ -1,3 +1,6 @@
+action:
+  confirm: Ar tikrai?
+  confirm_body: Šis veiksmas negali būti panaikintas.
 app_launcher:
   enable: Įgalinti programos paleidimo priemonę
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Įvairūs
 monitors_configurations:
   label: Monitorius {{index}}
 more: Daugiau
+'no': 'Ne'
 open: Atviras
 quit: Mesti
 remove: Pašalinti
@@ -134,6 +138,7 @@ reset_all_to_default: Iš naujo nustatyti visas numatytąsias vertes
 reset_to_default: Iš naujo nustatyti numatytąją vertę
 resources:
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
+  delete: Ištrinti šaltinį
   discover: Atraskite daugiau išteklių
   export: Eksporto ištekliai
   import_wallpapers: Importuoti vietinius ekrano užsklandas
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Tarpas tarp konteinerių
   workspace_offset: Darbo vietos poslinkis (paraštės)
   workspace_padding: Darbo vietų pamušalas
+'yes': 'Taip'
