@@ -1,3 +1,6 @@
+action:
+  confirm: 你确定吗？
+  confirm_body: 该动作不能撤消。
 app_launcher:
   enable: 启用应用程序启动器
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: 杂项
 monitors_configurations:
   label: 监视 {{index}}
 more: 更多
+'no': '不'
 open: 打开
 quit: 退出
 remove: 消除
@@ -134,6 +138,7 @@ reset_all_to_default: 全部重置为默认值
 reset_to_default: 重置为默认值
 resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
+  delete: 删除资源
   discover: 发现更多资源
   export: 出口资源
   import_wallpapers: 导入本地壁纸
@@ -304,3 +309,4 @@ wm:
   space_between_containers: 容器间距
   workspace_offset: 工作区偏移（边距）
   workspace_padding: 工作区内边距
+'yes': '是的'
