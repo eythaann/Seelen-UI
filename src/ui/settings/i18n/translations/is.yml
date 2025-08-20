@@ -1,3 +1,6 @@
+action:
+  confirm: Ertu viss?
+  confirm_body: Ekki er hægt að afturkalla þessa aðgerð.
 app_launcher:
   enable: Virkja App Launcher
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Ýmislegt
 monitors_configurations:
   label: Monitor {{Index}}
 more: Meira
+'no': 'Nei'
 open: Opið
 quit: Hættu
 remove: Fjarlægðu
@@ -134,6 +138,7 @@ reset_all_to_default: Endurstilla allt í sjálfgefin gildi
 reset_to_default: Endurstilla í sjálfgefið gildi
 resources:
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
+  delete: Eyða auðlindinni
   discover: Uppgötvaðu fleiri úrræði
   export: Útflutningsauðlind
   import_wallpapers: Flytja inn staðbundið veggfóður
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Rými milli gáma
   workspace_offset: Vinnusvæði offset (framlegð)
   workspace_padding: Vinnusvæði padding
+'yes': 'Já'
