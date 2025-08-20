@@ -141,6 +141,7 @@ resources:
   delete: Verwijder resource
   discover: Ontdek meer bronnen
   export: Exporteren
+  has_update: An update is available
   import_wallpapers: Lokale achtergronden importeren
   open_folder: Map met bronnen openen
   outdated: >-
