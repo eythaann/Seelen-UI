@@ -141,6 +141,7 @@ resources:
   delete: Διαγραφή πόρου
   discover: Ανακαλύψτε περισσότερους πόρους
   export: Πόρος εξαγωγής
+  has_update: An update is available
   import_wallpapers: Εισαγωγή τοπικών ταπετσαριών
   open_folder: Άνοιγμα φακέλου πόρων
   outdated: >-
