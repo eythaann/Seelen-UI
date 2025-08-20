@@ -141,6 +141,7 @@ resources:
   delete: Vymazať zdroj
   discover: Objavte ďalšie zdroje
   export: Vývozný zdroj
+  has_update: An update is available
   import_wallpapers: Import miestnych tapiet
   open_folder: Otvorenie priečinka so zdrojmi
   outdated: >-
