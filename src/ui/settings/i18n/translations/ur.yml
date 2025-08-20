@@ -1,3 +1,6 @@
+action:
+  confirm: کیا آپ کو یقین ہے؟
+  confirm_body: اس عمل کو ختم نہیں کیا جاسکتا۔
 app_launcher:
   enable: ایپ لانچر کو فعال کریں
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: متفرق
 monitors_configurations:
   label: مانیٹر {{انڈیکس}}
 more: زیادہ
+'no': 'نہیں'
 open: کھلا
 quit: چھوڑ دیں
 remove: ہٹا دیں
@@ -134,6 +138,7 @@ reset_all_to_default: سب کو پہلے سے طے شدہ اقدار پر دوب
 reset_to_default: ڈیفالٹ ویلیو پر دوبارہ سیٹ کریں
 resources:
   app_outdated: اس وسیلہ کے لئے مناسب طریقے سے کام کرنے کے لئے سیلین UI کا ایک نیا ورژن درکار ہے۔
+  delete: وسائل کو حذف کریں
   discover: مزید وسائل دریافت کریں
   export: برآمدی وسائل
   import_wallpapers: مقامی وال پیپر درآمد کریں
@@ -304,3 +309,4 @@ wm:
   space_between_containers: کنٹینرز کے درمیان جگہ
   workspace_offset: ورک اسپیس آفسیٹ (مارجن)
   workspace_padding: ورک اسپیس پیڈنگ
+'yes': 'ہاں'
