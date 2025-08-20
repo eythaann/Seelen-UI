@@ -141,6 +141,7 @@ resources:
   delete: Xóa tài nguyên
   discover: Khám phá thêm tài nguyên
   export: Tài nguyên xuất khẩu
+  has_update: An update is available
   import_wallpapers: Nhập hình nền địa phương
   open_folder: Mở thư mục tài nguyên
   outdated: >-
