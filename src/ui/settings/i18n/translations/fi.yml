@@ -141,6 +141,7 @@ resources:
   delete: Poistaa resurssi
   discover: Löydä lisää resursseja
   export: Vientiresurssi
+  has_update: An update is available
   import_wallpapers: Tuo paikallisia taustakuvia
   open_folder: Avaa resurssikansio
   outdated: >-
