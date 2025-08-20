@@ -141,6 +141,7 @@ resources:
   delete: සම්පත මකන්න
   discover: තවත් සම්පත් සොයා ගන්න
   export: අපනයන සම්පත
+  has_update: An update is available
   import_wallpapers: දේශීය බිතුපත් ආනයනය කරන්න
   open_folder: සම්පත් ෆෝල්ඩරය විවෘත කරන්න
   outdated: >-
