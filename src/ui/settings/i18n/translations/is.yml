@@ -141,6 +141,7 @@ resources:
   delete: Eyða auðlindinni
   discover: Uppgötvaðu fleiri úrræði
   export: Útflutningsauðlind
+  has_update: An update is available
   import_wallpapers: Flytja inn staðbundið veggfóður
   open_folder: Opin auðlindamappa
   outdated: >-
