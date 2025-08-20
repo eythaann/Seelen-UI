@@ -1,3 +1,6 @@
+action:
+  confirm: Adakah anda pasti?
+  confirm_body: Tindakan ini tidak dapat dibatalkan.
 app_launcher:
   enable: Dayakan Pelancar App
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Pelbagai
 monitors_configurations:
   label: Monitor {{index}}
 more: Lebih
+'no': 'Tidak'
 open: Buka
 quit: Berhenti
 remove: Keluarkan
@@ -134,6 +138,7 @@ reset_all_to_default: Tetapkan semula semua ke nilai lalai
 reset_to_default: Tetapkan semula ke nilai lalai
 resources:
   app_outdated: Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan baik.
+  delete: Padam sumber
   discover: Cari lebih banyak sumber
   export: Sumber Eksport
   import_wallpapers: Mengimport kertas dinding tempatan
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Ruang antara bekas
   workspace_offset: Ruang Kerja Offset (margin)
   workspace_padding: Padding ruang kerja
+'yes': 'Ya'
