@@ -141,6 +141,7 @@ resources:
   delete: Ištrinti šaltinį
   discover: Atraskite daugiau išteklių
   export: Eksporto ištekliai
+  has_update: An update is available
   import_wallpapers: Importuoti vietinius ekrano užsklandas
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
