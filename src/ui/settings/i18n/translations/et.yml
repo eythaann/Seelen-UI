@@ -141,6 +141,7 @@ resources:
   delete: Ressurss kustutama
   discover: Avasta rohkem ressursse
   export: Ekspordi ressurss
+  has_update: An update is available
   import_wallpapers: Kohalike taustapiltide importimine
   open_folder: Avage ressursside kaust
   outdated: >-
