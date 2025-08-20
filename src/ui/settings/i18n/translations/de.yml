@@ -141,6 +141,7 @@ resources:
   delete: Ressource löschen
   discover: Weitere Ressourcen entdecken
   export: Ressource exportieren
+  has_update: An update is available
   import_wallpapers: Lokale Hintergrundbilder importieren
   open_folder: Ressourcenordner öffnen
   outdated: >-
