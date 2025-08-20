@@ -1,3 +1,6 @@
+action:
+  confirm: 你確定嗎？
+  confirm_body: 該動作不能撤消。
 app_launcher:
   enable: 啟用應用啟動器
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: 各種各樣的
 monitors_configurations:
   label: 監視{{index}}
 more: 更多的
+'no': '不'
 open: 打開
 quit: 辭職
 remove: 消除
@@ -134,6 +138,7 @@ reset_all_to_default: 重置全部默認值
 reset_to_default: 重置為默認值
 resources:
   app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。
+  delete: 刪除資源
   discover: 發現更多資源
   export: 導出資源
   import_wallpapers: 導入本地壁紙
@@ -304,3 +309,4 @@ wm:
   space_between_containers: 容器之間的空間
   workspace_offset: 工作區偏移（邊距）
   workspace_padding: 工作區填充
+'yes': '是的'
