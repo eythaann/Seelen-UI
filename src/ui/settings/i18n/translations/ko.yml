@@ -141,6 +141,7 @@ resources:
   delete: 리소스 삭제
   discover: 더 많은 리소스 살펴보기
   export: 리소스 내보내기
+  has_update: An update is available
   import_wallpapers: 로컬 배경화면 가져오기
   open_folder: 리소스 폴더 열기
   outdated: >-
