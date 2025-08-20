@@ -141,6 +141,7 @@ resources:
   delete: ລົບລ້າງຊັບພະຍາກອນ
   discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ
   export: ຊັບພະຍາກອນການສົ່ງອອກ
+  has_update: An update is available
   import_wallpapers: ນໍາເຂົ້າຮູບວໍເປເປີທ້ອງຖິ່ນ
   open_folder: Open Opence Folder
   outdated: >-
