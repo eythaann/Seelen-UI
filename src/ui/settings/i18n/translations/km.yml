@@ -141,6 +141,7 @@ resources:
   delete: លុបធនធាន
   discover: ស្វែងយល់ពីធនធានបន្ថែម
   export: ធនធាននាំចេញ
+  has_update: An update is available
   import_wallpapers: នាំចូលផ្ទាំងរូបភាពក្នុងស្រុក
   open_folder: បើកថតធនធាន
   outdated: >-
