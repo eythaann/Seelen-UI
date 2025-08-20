@@ -1,3 +1,6 @@
+action:
+  confirm: Jesteś pewien?
+  confirm_body: Tego działania nie można cofnąć.
 app_launcher:
   enable: Włącz launcher
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Różnorodny
 monitors_configurations:
   label: Monitor {{indeks}}
 more: Więcej
+'no': 'NIE'
 open: otwarty
 quit: Zrezygnować
 remove: Usunąć
@@ -134,6 +138,7 @@ reset_all_to_default: Przywróć wartości domyślne
 reset_to_default: Przywróć wartość domyślną
 resources:
   app_outdated: Ten zasób wymaga nowszej wersji Seelen UI do poprawnego działania.
+  delete: Usuń zasób
   discover: Odkryj więcej zasobów
   export: Zasoby eksportowe
   import_wallpapers: Import lokalnych tapet
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Przestrzeń między oknami
   workspace_offset: Marginesy przestrzeni roboczych
   workspace_padding: Wysokość tła przestrzeni roboczych
+'yes': 'Tak'
