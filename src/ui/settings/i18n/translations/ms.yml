@@ -141,6 +141,7 @@ resources:
   delete: Padam sumber
   discover: Cari lebih banyak sumber
   export: Sumber Eksport
+  has_update: An update is available
   import_wallpapers: Mengimport kertas dinding tempatan
   open_folder: Buka Folder Sumber
   outdated: >-
