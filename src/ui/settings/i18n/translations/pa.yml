@@ -1,3 +1,6 @@
+action:
+  confirm: ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
+  confirm_body: ਇਸ ਕਿਰਿਆ ਨੂੰ ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ.
 app_launcher:
   enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: ਫੁਟਕਲ
 monitors_configurations:
   label: ਨਿਗਰਾਨੀ {{ਇੰਡੈਕਸ}
 more: ਹੋਰ
+'no': 'ਨਹੀਂ'
 open: ਖੋਲ੍ਹੋ
 quit: ਛੱਡੋ
 remove: ਹਟਾਓ
@@ -134,6 +138,7 @@ reset_all_to_default: ਸਾਰੇ ਡਿਫੌਲਟ ਮੁੱਲਾਂ ਤੇ 
 reset_to_default: ਡਿਫੌਲਟ ਵੈਲਯੂ ਤੇ ਰੀਸੈਟ ਕਰੋ
 resources:
   app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
+  delete: ਸਰੋਤ ਨੂੰ ਮਿਟਾਓ
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ
   export: ਨਿਰਯਾਤ ਸਰੋਤ
   import_wallpapers: ਸਥਾਨਕ ਵਾਲਪੇਪਰ ਆਯਾਤ ਕਰੋ
@@ -304,3 +309,4 @@ wm:
   space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
   workspace_offset: ਵਰਕਸਪੇਸ ਆਫਸੈੱਟ (ਮਾਰਜਿਨ)
   workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ
+'yes': 'ਹਾਂ'
