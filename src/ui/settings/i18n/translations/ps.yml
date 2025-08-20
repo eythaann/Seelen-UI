@@ -141,6 +141,7 @@ resources:
   delete: سرچینه حذف کړئ
   discover: ډیرې سرچینې ومومئ
   export: د صادراتو سرچینې
+  has_update: An update is available
   import_wallpapers: ځایی وال پیپرونه وارد کړئ
   open_folder: د سرچینو پوښۍ خلاصه کړئ
   outdated: >-
