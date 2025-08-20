@@ -1,3 +1,6 @@
+action:
+  confirm: مطمئن هستید؟
+  confirm_body: این عمل نمی تواند خنثی شود.
 app_launcher:
   enable: پرتاب برنامه را فعال کنید
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: متفاوتی
 monitors_configurations:
   label: مانیتور {{فهرست}}
 more: بیشتر
+'no': 'هیچ'
 open: باز کن
 quit: ترک
 remove: برداشتن
@@ -134,6 +138,7 @@ reset_all_to_default: تنظیم مجدد همه به مقادیر پیش فرض
 reset_to_default: تنظیم مجدد به مقدار پیش فرض
 resources:
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
+  delete: منبع را حذف کنید
   discover: منابع بیشتری را کشف کنید
   export: منبع صادراتی
   import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
@@ -304,3 +309,4 @@ wm:
   space_between_containers: فضای بین ظروف
   workspace_offset: مکانهای کار افست (حاشیه)
   workspace_padding: قسمتهای کاری PADING
+'yes': 'بله'
