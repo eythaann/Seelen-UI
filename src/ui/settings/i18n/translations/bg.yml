@@ -141,6 +141,7 @@ resources:
   delete: Изтриване на ресурс
   discover: Открийте още ресурси
   export: Износ на ресурси
+  has_update: An update is available
   import_wallpapers: Импортиране на местни тапети
   open_folder: Отваряне на папката с ресурси
   outdated: >-
