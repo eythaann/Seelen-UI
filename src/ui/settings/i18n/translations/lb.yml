@@ -141,6 +141,7 @@ resources:
   delete: Läschen Ressource
   discover: Entdeckt méi Ressourcen
   export: Export Ressource
+  has_update: An update is available
   import_wallpapers: Import lokal Wallpapers
   open_folder: Oppen Ressource Dossier
   outdated: >-
