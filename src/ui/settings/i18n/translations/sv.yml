@@ -141,6 +141,7 @@ resources:
   delete: Radera resurs
   discover: Upptäck fler resurser
   export: Exportera resurs
+  has_update: An update is available
   import_wallpapers: Importera lokala bakgrundsbilder
   open_folder: Öppna resursmappen
   outdated: >-
