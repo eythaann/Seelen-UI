@@ -31,8 +31,9 @@ impl FullState {
             let path = entry.path();
             match Widget::load(&path) {
                 Ok(mut widget) => {
-                    widget.metadata.bundled = path.starts_with(bundled_path);
-                    self.widgets.insert(widget.metadata.path.clone(), widget);
+                    widget.metadata.internal.bundled = path.starts_with(bundled_path);
+                    self.widgets
+                        .insert(widget.metadata.internal.path.clone(), widget);
                 }
                 Err(e) => {
                     log::error!("Failed to load widget: {e}");

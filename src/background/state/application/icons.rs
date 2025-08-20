@@ -180,9 +180,10 @@ impl IconPacksManager {
             icon_pack.metadata.display_name = ResourceText::En("System".to_string());
             icon_pack.metadata.description =
                 ResourceText::En("Icons from Windows and Program Files".to_string());
-            icon_pack.metadata.path = SYSTEM_ICONS.to_path_buf();
+            icon_pack.metadata.internal.path = SYSTEM_ICONS.to_path_buf();
 
-            self.0.insert(icon_pack.metadata.path.clone(), icon_pack);
+            self.0
+                .insert(icon_pack.metadata.internal.path.clone(), icon_pack);
             self.write_system_icon_pack()?;
         }
 
@@ -287,10 +288,10 @@ impl FullState {
                 }
             };
 
-            icon_pack.metadata.bundled = entry.file_name() == "system";
+            icon_pack.metadata.internal.bundled = entry.file_name() == "system";
             icon_packs_manager
                 .0
-                .insert(icon_pack.metadata.path.clone(), icon_pack);
+                .insert(icon_pack.metadata.internal.path.clone(), icon_pack);
         }
 
         icon_packs_manager.sanitize_system_icon_pack(is_first_load)?;
@@ -311,14 +312,16 @@ pub async fn download_remote_icons(pack: &mut IconPack) -> Result<()> {
         match &mut new_entry {
             IconPackEntry::Unique(entry) => {
                 if let Some(icon) = &mut entry.icon {
-                    *icon = download_entry_icons(icon, &pack.metadata.path).await?;
+                    *icon = download_entry_icons(icon, &pack.metadata.internal.path).await?;
                 }
             }
             IconPackEntry::Shared(entry) => {
-                entry.icon = download_entry_icons(&entry.icon, &pack.metadata.path).await?;
+                entry.icon =
+                    download_entry_icons(&entry.icon, &pack.metadata.internal.path).await?;
             }
             IconPackEntry::Custom(entry) => {
-                entry.icon = download_entry_icons(&entry.icon, &pack.metadata.path).await?;
+                entry.icon =
+                    download_entry_icons(&entry.icon, &pack.metadata.internal.path).await?;
             }
         }
 

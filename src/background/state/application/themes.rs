@@ -26,8 +26,10 @@ impl FullState {
                     if theme.id.starts_with("@deprecated") {
                         continue;
                     }
-                    theme.metadata.bundled = path.starts_with(SEELEN_COMMON.bundled_themes_path());
-                    self.themes.insert(theme.metadata.path.clone(), theme);
+                    theme.metadata.internal.bundled =
+                        path.starts_with(SEELEN_COMMON.bundled_themes_path());
+                    self.themes
+                        .insert(theme.metadata.internal.path.clone(), theme);
                 }
                 Err(err) => log::error!("Failed to load theme ({:?}): {:?}", entry.path(), err),
             }

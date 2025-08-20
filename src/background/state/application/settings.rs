@@ -43,7 +43,7 @@ impl FullState {
                     if self
                         .settings
                         .old_active_themes
-                        .contains(&theme.metadata.filename)
+                        .contains(&theme.metadata.internal.filename)
                     {
                         self.settings.active_themes.push(theme.id.clone());
                     }

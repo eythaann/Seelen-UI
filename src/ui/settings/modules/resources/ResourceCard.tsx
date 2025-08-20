@@ -1,5 +1,11 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from '@seelen-ui/lib/types';
+import {
+  Resource,
+  ResourceId,
+  ResourceKind,
+  ResourceMetadata,
+  Wallpaper,
+} from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
 import { IconName } from '@shared/components/Icon/icons';
 import { ResourceText } from '@shared/components/ResourceText';
@@ -7,6 +13,7 @@ import { cx } from '@shared/styles';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { Button, Popconfirm, Tooltip } from 'antd';
 import { ComponentChildren } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -29,9 +36,24 @@ interface ResourceCardProps {
 }
 
 export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
+  const [hasUpdate, setHasUpdate] = useState(false);
   const isDevToolsEnabled = useSelector(RootSelectors.devTools);
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    async function checkUpdate() {
+      if (!resource.metadata.downloaded_at) return;
+
+      const res = await fetch(`https://product.seelen.io/resource/${resource.id.replace('@', '')}`);
+      const remoteResource: Resource = await res.json();
+      const lastUpdateRelease = new Date(remoteResource.updatedAt);
+      const downloadedAt = new Date(remoteResource.metadata.downloaded_at!);
+      setHasUpdate(lastUpdateRelease > downloadedAt);
+    }
+
+    checkUpdate();
+  }, []);
 
   const [major = 0, minor = 0, patch = 0] = EnvConfig.version.split('.').map(Number);
   const [majorTarget = 0, minorTarget = 0, patchTarget = 0] =
@@ -50,6 +72,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
   const showWarning = targetIsOlder && !resource.metadata.bundled;
   const showDanger = targetIsNewer && !resource.metadata.bundled;
 
+  const resourceLink = `https://seelen.io/resources/${resource.id.replace('@', '')}`;
   return (
     <div
       className={cx(cs.card, {
@@ -77,14 +100,23 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
           {resource.metadata.bundled || resource.id.startsWith('@user') ? (
             <span>{resource.id}</span>
           ) : (
-            <a href={`https://seelen.io/resources/${resource.id.replace('@', '')}`} target="_blank">
+            <a href={resourceLink} target="_blank">
               {resource.id}
             </a>
           )}
         </p>
       </div>
       <div className={cs.actions}>
-        <div className={cs.actionsTop}>{actions}</div>
+        <div className={cs.actionsTop}>
+          {hasUpdate && (
+            <Tooltip title={t('resources.has_update')} placement="left">
+              <Button type="link" href={resourceLink + '?update'} target="_blank">
+                <Icon iconName="MdUpdate" />
+              </Button>
+            </Tooltip>
+          )}
+          {actions}
+        </div>
         {isDevToolsEnabled && kind !== 'Wallpaper' && (
           <Tooltip title={t('resources.export')} placement="left">
             <Button

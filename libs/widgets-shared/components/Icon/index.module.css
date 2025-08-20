@@ -1,5 +1,8 @@
 .reactIcon {
   height: 1rem;
+  width: max-content;
+  display: inline-block;
+
   > svg {
     vertical-align: middle;
   }

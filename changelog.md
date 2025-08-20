@@ -2,7 +2,8 @@
 
 ## [Unreleased]
 ### features
-- add button to delete resources.
+- add a button to delete resources.
+- add a button to update downloaded resources.
 
 ### enhancements
 - cleanup of old service logs on start.
@@ -11,6 +12,7 @@
 ### fix
 - toolbar not showing when user deleted basic system folders.
 - hotkeys stopping working after lock screen.
+- update app button not showing correctly on settings.
 
 ## [2.4.0]
 ### features

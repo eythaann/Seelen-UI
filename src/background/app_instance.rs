@@ -76,7 +76,10 @@ impl SluMonitorInstance {
         // unload uninstalled widgets
         self.widgets.retain(|id, _| state.widgets.contains_key(id));
 
-        let third_party_widgets = state.widgets.iter().filter(|(_, w)| !w.metadata.bundled);
+        let third_party_widgets = state
+            .widgets
+            .iter()
+            .filter(|(_, w)| !w.metadata.internal.bundled);
         for (id, widget) in third_party_widgets {
             if !state.is_widget_enable_on_monitor(widget, &self.main_target_id) {
                 self.widgets.remove(id); // unload disabled widgets

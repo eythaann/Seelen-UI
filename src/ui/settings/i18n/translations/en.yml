@@ -145,6 +145,7 @@ resources:
   delete: Delete Resource
   discover: Discover more resources
   export: Export Resource
+  has_update: An update is available
   import_wallpapers: Import local wallpapers
   open_folder: Open resource folder
   outdated: >-
