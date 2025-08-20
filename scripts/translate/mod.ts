@@ -1,16 +1,9 @@
-import { AutoTranslator, ObjectTranslator } from '@seelen/translation-toolkit';
+import { GoogleTranslator, ObjectTranslator } from '@seelen/translation-toolkit';
 import { SupportedLanguages } from '@seelen-ui/lib';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import yaml from 'js-yaml';
 
-const API_KEY = process.env.DEEPL_API_KEY;
-
-if (!API_KEY) {
-  console.error('Missing DEEPL_API_KEY');
-  process.exit(1);
-}
-
-const translator = new AutoTranslator({ source: 'en', deeplApiKey: API_KEY });
+const translator = new GoogleTranslator({ source: 'en' });
 
 const targetLanguages = SupportedLanguages.filter((lang) => lang.value !== 'en');
 
@@ -52,7 +45,7 @@ async function completeTranslationsFor(localesDir: string) {
 }
 
 await completeTranslationsFor('src/ui/toolbar/i18n/translations');
-await completeTranslationsFor('src/ui/seelenweg/i18n/translations');
+await completeTranslationsFor('src/ui/weg/i18n/translations');
 await completeTranslationsFor('src/ui/settings/i18n/translations');
 await completeTranslationsFor('src/ui/launcher/i18n/translations');
 

@@ -1,3 +1,6 @@
+action:
+  confirm: Bass du secher?
+  confirm_body: Dës Aktioun kann net annuléiert ginn.
 app_launcher:
   enable: Aktivéiert App Launcher
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Erleeën
 monitors_configurations:
   label: Monitor {{index}}
 more: Méi kleng
+'no': Nee
 open: Ëmen e gratis
 quit: Ness
 remove: Ofwäschen
@@ -139,6 +143,7 @@ reset_all_to_default: Reset all op Standardwäerter
 reset_to_default: Reset op Standardwäert
 resources:
   app_outdated: Dës Ressource brauch eng nei Versioun vu Seelen Ui fir richteg ze schaffen.
+  delete: Läschen Ressource
   discover: Entdeckt méi Ressourcen
   export: Export Ressource
   import_wallpapers: Import lokal Wallpapers
@@ -315,3 +320,4 @@ wm:
   space_between_containers: Raum tëscht Behälter
   workspace_offset: Workspaces Offset (Rand)
   workspace_padding: Aarbechtsberäich padding
+'yes': Jo

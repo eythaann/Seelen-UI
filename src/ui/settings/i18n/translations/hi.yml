@@ -1,3 +1,6 @@
+action:
+  confirm: क्या आपको यकीन है?
+  confirm_body: इस एक्शन को वापस नहीं किया जा सकता।
 app_launcher:
   enable: ऐप लॉन्चर सक्षम करें
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: मिश्रित
 monitors_configurations:
   label: मॉनिटर {{इंडेक्स}}
 more: अधिक
+'no': नहीं
 open: खुला
 quit: छोड़ना
 remove: निकालना
@@ -143,6 +147,7 @@ resources:
   app_outdated: >-
     इस संसाधन को ठीक से काम करने के लिए सेलेन यूआई के एक नए संस्करण की आवश्यकता
     होती है।
+  delete: संसाधन हटाएं
   discover: अधिक संसाधनों की खोज करें
   export: निर्यात संसाधन
   import_wallpapers: स्थानीय वॉलपेपर आयात करें
@@ -318,3 +323,4 @@ wm:
   space_between_containers: कंटेनरों के बीच की जगह
   workspace_offset: कार्यक्षेत्र ऑफसेट (मार्जिन)
   workspace_padding: कार्यक्षेत्र पैडिंग
+'yes': हाँ

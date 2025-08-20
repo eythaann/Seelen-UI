@@ -1,3 +1,6 @@
+action:
+  confirm: Дали сте сигурни?
+  confirm_body: Оваа акција не може да се разоткрие.
 app_launcher:
   enable: Овозможете фрлач на апликации
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Различни
 monitors_configurations:
   label: Монитор {{индекс}}
 more: Повеќе
+'no': Не
 open: Отворено
 quit: Откажете се
 remove: Отстранете
@@ -141,6 +145,7 @@ reset_all_to_default: Ресетирајте ги сите на стандард
 reset_to_default: Ресетирање на стандардна вредност
 resources:
   app_outdated: Овој ресурс бара понова верзија на Seelen UI да работи правилно.
+  delete: Избришете ресурс
   discover: Откријте повеќе ресурси
   export: Извоз ресурс
   import_wallpapers: Увезете локални позадини
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Простор помеѓу контејнери
   workspace_offset: Работни места за неутрализирање (маргини)
   workspace_padding: Подлога за работни места
+'yes': Да

@@ -1,3 +1,6 @@
+action:
+  confirm: Шумо мутмаъин ҳастед?
+  confirm_body: Ин амал бекор карда намешавад.
 app_launcher:
   enable: Фаъолсозии Apple
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Дигар
 monitors_configurations:
   label: Монитор {Индекс}}
 more: Бештар
+'no': Нест
 open: Кушодан
 quit: Баромадан
 remove: Дур кардан
@@ -139,6 +143,7 @@ reset_all_to_default: Ҳама ба арзишҳои пешфарз
 reset_to_default: Аз нав танзимкунии арзиши пешфарз
 resources:
   app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.
+  delete: Манбаъро нест мекунад
   discover: Нахуст захираҳои бештарро кашф кунед
   export: Манбаъ
   import_wallpapers: Объекти маҳаллӣ
@@ -314,3 +319,4 @@ wm:
   space_between_containers: Фосила байни контейнер
   workspace_offset: Ҷойгиршавӣ
   workspace_padding: Worlpaces Padding
+'yes': Ҳа

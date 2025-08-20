@@ -1,3 +1,6 @@
+action:
+  confirm: তুমি কি নিশ্চিত?
+  confirm_body: এই ক্রিয়াটি পূর্বাবস্থায় ফিরে যেতে পারে না।
 app_launcher:
   enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: বিবিধ
 monitors_configurations:
   label: '{{সূচক}} মনিটর'
 more: আরও
+'no': না
 open: খোলা
 quit: প্রস্থান
 remove: সরান
@@ -143,6 +147,7 @@ resources:
   app_outdated: >-
     এই সংস্থানটির জন্য সঠিকভাবে কাজ করার জন্য সিলেন ইউআইয়ের একটি নতুন সংস্করণ
     প্রয়োজন।
+  delete: সংস্থান মুছুন
   discover: আরও সংস্থান আবিষ্কার করুন
   export: রফতানি সংস্থান
   import_wallpapers: স্থানীয় ওয়ালপেপার আমদানি করুন
@@ -319,3 +324,4 @@ wm:
   space_between_containers: পাত্রে স্থান
   workspace_offset: ওয়ার্কস্পেস অফসেট (মার্জিন)
   workspace_padding: ওয়ার্কস্পেস প্যাডিং
+'yes': হ্যাঁ

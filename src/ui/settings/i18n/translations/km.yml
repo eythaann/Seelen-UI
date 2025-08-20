@@ -1,3 +1,6 @@
+action:
+  confirm: តើអ្នកប្រាកដទេ?
+  confirm_body: សកម្មភាពនេះមិនអាចធ្វើវិញបានទេ។
 app_launcher:
   enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: ដេលមានផ្នេកខុសក្នា
 monitors_configurations:
   label: ម៉ូនីទ័រ {{សន្ទស្សន៍}}
 more: រេចីនចាង
+'no': ដេលក្ផាន
 open: បើក
 quit: ឈប់
 remove: រមកមិ avad ចេញ
@@ -139,6 +143,7 @@ reset_all_to_default: កំណត់ឡើងវិញទាំងអស់ទ�
 reset_to_default: កំណត់ឡើងវិញទៅតម្លៃលំនាំដើម
 resources:
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
+  delete: លុបធនធាន
   discover: ស្វែងយល់ពីធនធានបន្ថែម
   export: ធនធាននាំចេញ
   import_wallpapers: នាំចូលផ្ទាំងរូបភាពក្នុងស្រុក
@@ -314,3 +319,4 @@ wm:
   space_between_containers: ចន្លោះរវាងកុងតឺន័រ
   workspace_offset: កន្លែងធ្វើការអុហ្វសិត (រឹម)
   workspace_padding: ចន្លោះកន្លែងធ្វើការ
+'yes': បាត

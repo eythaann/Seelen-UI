@@ -1,3 +1,6 @@
+action:
+  confirm: के तपाइँ निश्चित हुनुहुन्छ?
+  confirm_body: यो कार्य पूर्ववत गर्न सकिदैन।
 app_launcher:
   enable: अनुप्रयोग सुरुवातकर्तालाई सक्षम गर्नुहोस्
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: विविघ
 monitors_configurations:
   label: मोनिटर \ inchtax}}
 more: अरु
+'no': छैन
 open: खोल्नु
 quit: छोड्नु
 remove: हटाउनु
@@ -141,6 +145,7 @@ resources:
   app_outdated: >-
     यो स्रोतको आवश्यकता छ हेर्नुहोस् UI लाई राम्रोसँग काम गर्नको लागि नयाँ
     संस्करण आवश्यक छ।
+  delete: स्रोत मेट्नुहोस्
   discover: अधिक स्रोतहरू पत्ता लगाउनुहोस्
   export: निर्यातको स्रोत
   import_wallpapers: स्थानीय वालपेपर आयात गर्नुहोस्
@@ -316,3 +321,4 @@ wm:
   space_between_containers: कन्टेनर बीचको ठाउँ
   workspace_offset: कार्यस्पेस अफसेट (मार्जिन)
   workspace_padding: कार्यक्षेत्र प्याडिंग
+'yes': हुन्छ

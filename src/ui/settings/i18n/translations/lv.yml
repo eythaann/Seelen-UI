@@ -1,3 +1,6 @@
+action:
+  confirm: Vai esat pārliecināts?
+  confirm_body: Šo darbību nevar atsaukt.
 app_launcher:
   enable: Iespējot lietotņu palaišanas ierīci
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Dažāds
 monitors_configurations:
   label: Monitors {{indekss}}
 more: Vairāk
+'no': Ne
 open: Atvērt
 quit: Atmest
 remove: Noņemt
@@ -141,6 +145,7 @@ reset_all_to_default: Visu noklusējuma vērtību atiestatīšana
 reset_to_default: Atiestatīt noklusējuma vērtību
 resources:
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
+  delete: Dzēst resursu
   discover: Atklājiet vairāk resursu
   export: Eksporta resursi
   import_wallpapers: Importēt vietējās tapetes
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Telpa starp konteineriem
   workspace_offset: Darbvietu kompensācija (malas)
   workspace_padding: Darbvietas polsterējums
+'yes': Jā

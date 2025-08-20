@@ -1,3 +1,6 @@
+action:
+  confirm: Ṣe o da ọ loju?
+  confirm_body: Iṣe yii ko le ṣe atunṣe.
 app_launcher:
   enable: Jeki Ifilọlẹ app
   launch_on:
@@ -130,6 +133,7 @@ miscellaneous: Oriṣiriṣi
 monitors_configurations:
   label: Adirẹsi {{Ṣe atọka}}
 more: Diẹ sii
+'no': Kọ
 open: Ṣii
 quit: Lọ kuro
 remove: Yọkuro
@@ -137,6 +141,7 @@ reset_all_to_default: Tun gbogbo rẹ si awọn iye aifọwọyi
 reset_to_default: Tunto si iye aiyipada
 resources:
   app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
+  delete: Paarẹ awọn olu
   discover: Ṣawari awọn orisun diẹ sii
   export: Si ilẹkan ta
   import_wallpapers: Gbe awọn iṣẹṣọ ogiri agbegbe wọle
@@ -308,3 +313,4 @@ wm:
   space_between_containers: Aaye laarin awọn apoti
   workspace_offset: Awọn iṣẹ Iṣẹ-iṣẹ (awọn ala)
   workspace_padding: Awọn iṣẹ itasi
+'yes': Bẹẹni

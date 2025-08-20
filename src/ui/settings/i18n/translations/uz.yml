@@ -1,3 +1,6 @@
+action:
+  confirm: Ishonasizmi?
+  confirm_body: Ushbu harakatni bekor qilib bo'lmaydi.
 app_launcher:
   enable: APP ishga tushirishni yoqish
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Har xil
 monitors_configurations:
   label: '{{Indeks}}'
 more: Ko'proq
+'no': Yo'q
 open: Ochiq
 quit: Ketmoq
 remove: Olib tashlamoq
@@ -141,6 +145,7 @@ reset_all_to_default: Barcha standart qiymatlarni qayta o'rnating
 reset_to_default: Standart qiymatni qayta o'rnating
 resources:
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
+  delete: Resurslarni o'chirish
   discover: Ko'proq resurslarni kashf eting
   export: Eksport manbai
   import_wallpapers: Mahalliy fon rasmlarini import qilish
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Idishlar orasidagi bo'shliq
   workspace_offset: Ishxonalar ofset (marjalar)
   workspace_padding: Ish plakding
+'yes': Ha

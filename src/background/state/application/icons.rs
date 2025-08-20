@@ -170,7 +170,7 @@ impl IconPacksManager {
         Ok(())
     }
 
-    pub fn sanitize_system_icon_pack(&mut self, initial: bool) -> Result<()> {
+    pub fn sanitize_system_icon_pack(&mut self, is_first_load: bool) -> Result<()> {
         // add default icon pack if not exists
         if !self.0.contains_key(SYSTEM_ICONS.as_path()) {
             let mut icon_pack = IconPack {
@@ -192,7 +192,7 @@ impl IconPacksManager {
         let folder_path = SYSTEM_ICONS.join("folder-icon.svg");
         let url_path = SYSTEM_ICONS.join("url.png");
 
-        if !missing_path.exists() || initial {
+        if is_first_load {
             std::fs::copy(
                 SEELEN_COMMON
                     .app_resource_dir()
@@ -201,7 +201,7 @@ impl IconPacksManager {
             )?;
         }
 
-        if !start_path.exists() || initial {
+        if is_first_load {
             std::fs::copy(
                 SEELEN_COMMON
                     .app_resource_dir()
@@ -210,7 +210,7 @@ impl IconPacksManager {
             )?;
         }
 
-        if !folder_path.exists() || initial {
+        if is_first_load {
             std::fs::copy(
                 SEELEN_COMMON
                     .app_resource_dir()
@@ -219,7 +219,7 @@ impl IconPacksManager {
             )?;
         }
 
-        if !url_path.exists() || initial {
+        if is_first_load {
             std::fs::copy(
                 SEELEN_COMMON
                     .app_resource_dir()
@@ -272,7 +272,7 @@ impl FullState {
         Ok(())
     }
 
-    pub(super) fn load_icons_packs(&mut self, initial: bool) -> Result<()> {
+    pub(super) fn load_icons_packs(&mut self, is_first_load: bool) -> Result<()> {
         let entries = std::fs::read_dir(SEELEN_COMMON.user_icons_path())?;
         let mut icon_packs_manager = trace_lock!(self.icon_packs);
         icon_packs_manager.0.clear();
@@ -293,7 +293,7 @@ impl FullState {
                 .insert(icon_pack.metadata.path.clone(), icon_pack);
         }
 
-        icon_packs_manager.sanitize_system_icon_pack(initial)?;
+        icon_packs_manager.sanitize_system_icon_pack(is_first_load)?;
         Ok(())
     }
 }

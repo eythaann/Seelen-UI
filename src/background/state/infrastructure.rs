@@ -1,10 +1,13 @@
 use std::path::PathBuf;
 
 use itertools::Itertools;
-use seelen_core::state::{
-    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPack,
-    IconPackEntry, LauncherHistory, Plugin, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
-    Widget,
+use seelen_core::{
+    resource::{ResourceId, ResourceKind, SluResource},
+    state::{
+        by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPack,
+        IconPackEntry, LauncherHistory, Plugin, Profile, Wallpaper, WegItems,
+        WegPinnedItemsVisibility, Widget,
+    },
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -173,4 +176,49 @@ pub fn state_delete_cached_icons() -> Result<()> {
 #[tauri::command(async)]
 pub fn state_add_icon_to_custom_icon_pack(_icon: IconPackEntry) -> Result<()> {
     todo!()
+}
+
+#[tauri::command(async)]
+pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
+    let guard = FULL_STATE.load();
+    match kind {
+        ResourceKind::Theme => {
+            for theme in guard.themes.values() {
+                if *theme.id == id {
+                    theme.delete()?;
+                }
+            }
+        }
+        ResourceKind::Plugin => {
+            for plugin in guard.plugins.values() {
+                if *plugin.id == id {
+                    plugin.delete()?;
+                }
+            }
+        }
+        ResourceKind::Widget => {
+            for widget in guard.widgets.values() {
+                if *widget.id == id {
+                    widget.delete()?;
+                }
+            }
+        }
+        ResourceKind::IconPack => {
+            let mutex = trace_lock!(guard.icon_packs);
+            for icon_pack in mutex.list() {
+                if *icon_pack.id == id {
+                    icon_pack.delete()?;
+                }
+            }
+        }
+        ResourceKind::Wallpaper => {
+            for wallpaper in &guard.wallpapers {
+                if *wallpaper.id == id {
+                    wallpaper.delete()?;
+                }
+            }
+        }
+        ResourceKind::SoundPack => {}
+    }
+    Ok(())
 }

@@ -1,3 +1,6 @@
+action:
+  confirm: Oletko varma?
+  confirm_body: Tätä toimintaa ei voida kumota.
 app_launcher:
   enable: Ota sovelluksen kantoraketti käyttöön
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Sekalainen
 monitors_configurations:
   label: Monitor {{hakemisto}}
 more: Lisää
+'no': Ei
 open: Avata
 quit: Lopettaa
 remove: Poistaa
@@ -141,6 +145,7 @@ reset_all_to_default: Nollaa kaikki oletusarvot
 reset_to_default: Nollaa oletusarvoon
 resources:
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
+  delete: Poistaa resurssi
   discover: Löydä lisää resursseja
   export: Vientiresurssi
   import_wallpapers: Tuo paikallisia taustakuvia
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Konttien välinen tila
   workspace_offset: Työtilojen siirtymä (marginaalit)
   workspace_padding: Työtilat
+'yes': Kyllä

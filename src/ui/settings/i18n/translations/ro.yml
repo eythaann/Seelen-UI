@@ -1,3 +1,6 @@
+action:
+  confirm: Ești sigur?
+  confirm_body: Această acțiune nu poate fi anulată.
 app_launcher:
   enable: Activați lansatorul de aplicații
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Diverse
 monitors_configurations:
   label: Monitor {{index}}
 more: Mai mult
+'no': Nu
 open: Deschis
 quit: Părăsi
 remove: Elimina
@@ -143,6 +147,7 @@ resources:
   app_outdated: >-
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a
     funcționa corect.
+  delete: Ștergeți resursa
   discover: Descoperiți mai multe resurse
   export: Export de resurse
   import_wallpapers: Importați imagini de fundal locale
@@ -319,3 +324,4 @@ wm:
   space_between_containers: Spațiu între containere
   workspace_offset: Spații de lucru Offset (marje)
   workspace_padding: Padding spații de lucru
+'yes': Da

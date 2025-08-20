@@ -1,3 +1,6 @@
+action:
+  confirm: Ma hubtaa?
+  confirm_body: Ficilkan lama beddeli karo.
 app_launcher:
   enable: U oggolow appka bilaabista
   launch_on:
@@ -135,6 +138,7 @@ miscellaneous: Kala duduwan
 monitors_configurations:
   label: Kormeer {{tus ind ind}}
 more: Ka badan
+'no': Maya
 open: Furid
 quit: Joojin
 remove: Ka qaadid
@@ -144,6 +148,7 @@ resources:
   app_outdated: >-
     Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah
     u shaqeynaya.
+  delete: Tirtir Kheyraadka
   discover: Soo hel ilo badan
   export: Ilaha dhoofinta
   import_wallpapers: Soo dejiso waraaqaha boodhka ee maxalliga ah
@@ -319,3 +324,4 @@ wm:
   space_between_containers: Meel bannaan oo u dhexeeya weelka
   workspace_offset: Goobaha shaqada ayaa ka dhigtay
   workspace_padding: Goobta Goobta Goobta
+'yes': Haa

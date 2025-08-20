@@ -1,3 +1,6 @@
+action:
+  confirm: நீங்கள் உறுதியாக இருக்கிறீர்களா?
+  confirm_body: இந்த செயலை செயல்தவிர்க்க முடியாது.
 app_launcher:
   enable: பயன்பாட்டு துவக்கியை இயக்கவும்
   launch_on:
@@ -133,6 +136,7 @@ miscellaneous: இதர
 monitors_configurations:
   label: கண்காணிக்கவும் {{குறியீட்டு}}}
 more: மேலும்
+'no': இல்லை
 open: திற
 quit: விட்டுவிட
 remove: அகற்று
@@ -140,6 +144,7 @@ reset_all_to_default: இயல்புநிலை மதிப்புகள
 reset_to_default: இயல்புநிலை மதிப்புக்கு மீட்டமைக்கவும்
 resources:
   app_outdated: இந்த வளத்திற்கு சரியாக வேலை செய்ய சீலன் UI இன் புதிய பதிப்பு தேவைப்படுகிறது.
+  delete: வளத்தை நீக்கு
   discover: மேலும் ஆதாரங்களைக் கண்டறியவும்
   export: ஏற்றுமதி வள
   import_wallpapers: உள்ளூர் வால்பேப்பர்களை இறக்குமதி செய்யுங்கள்
@@ -316,3 +321,4 @@ wm:
   space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி
   workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
   workspace_padding: பணியிடங்கள் திணிப்பு
+'yes': ஆம்

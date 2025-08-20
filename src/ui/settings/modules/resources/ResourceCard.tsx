@@ -1,10 +1,11 @@
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from '@seelen-ui/lib/types';
 import { Icon } from '@shared/components/Icon';
 import { IconName } from '@shared/components/Icon/icons';
 import { ResourceText } from '@shared/components/ResourceText';
 import { cx } from '@shared/styles';
 import { convertFileSrc } from '@tauri-apps/api/core';
-import { Button, Tooltip } from 'antd';
+import { Button, Popconfirm, Tooltip } from 'antd';
 import { ComponentChildren } from 'preact';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -94,6 +95,23 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
             >
               <Icon iconName="BiExport" />
             </Button>
+          </Tooltip>
+        )}
+        {!resource.metadata.bundled && (
+          <Tooltip title={t('resources.delete')} placement="left">
+            <Popconfirm
+              title={t('action.confirm')}
+              description={t('action.confirm_body')}
+              okText={t('yes')}
+              cancelText={t('no')}
+              onConfirm={() => {
+                invoke(SeelenCommand.RemoveResource, { kind, id: resource.id });
+              }}
+            >
+              <Button type="text" danger>
+                <Icon iconName="BiTrash" />
+              </Button>
+            </Popconfirm>
           </Tooltip>
         )}
       </div>

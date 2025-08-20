@@ -1,3 +1,6 @@
+action:
+  confirm: Ydych chi'n sicr?
+  confirm_body: Ni ellir dadwneud y weithred hon.
 app_launcher:
   enable: Galluogi lansiwr app
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Hamddenol
 monitors_configurations:
   label: Monitro {{mynegai}}
 more: Mwy
+'no': Na
 open: Ymagorant
 quit: Gadawen
 remove: Godon
@@ -141,6 +145,7 @@ resources:
   app_outdated: >-
     Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
     iawn.
+  delete: Dileu Adnodd
   discover: Darganfyddwch fwy o adnoddau
   export: Adnodd Allforio
   import_wallpapers: Mewnforio papurau wal lleol
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Lle rhwng cynwysyddion
   workspace_offset: Gwrthbwyso lleoedd gwaith (ymylon)
   workspace_padding: Padin lleoedd gwaith
+'yes': Ie

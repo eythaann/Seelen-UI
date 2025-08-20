@@ -1,3 +1,6 @@
+action:
+  confirm: Jeste li sigurni?
+  confirm_body: Ova akcija se ne može poništiti.
 app_launcher:
   enable: Omogući pokretač aplikacija
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Ostalo
 monitors_configurations:
   label: Monitor {{index}}
 more: Više
+'no': Ne
 open: Otvoren
 quit: Prestati
 remove: Ukloniti
@@ -139,6 +143,7 @@ reset_all_to_default: Poništite sve na zadane vrijednosti
 reset_to_default: Resetiranje na zadanu vrijednost
 resources:
   app_outdated: Ovaj resurs zahtijeva noviju verziju Seelen Ui da radi pravilno.
+  delete: Izbriši resurs
   discover: Otkrijte više resursa
   export: Izvozni resurs
   import_wallpapers: Uvoz lokalnih pozadina
@@ -315,3 +320,4 @@ wm:
   space_between_containers: Prostor između kontejnera
   workspace_offset: Offset radne prostore (margine)
   workspace_padding: Djelatna površina obloga
+'yes': Da

@@ -1,3 +1,6 @@
+action:
+  confirm: Ziur al zaude?
+  confirm_body: Ekintza hau ezin da desegin.
 app_launcher:
   enable: Gaitu aplikazioaren abiarazlea
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Heterogeneo
 monitors_configurations:
   label: Monitor {{index}}
 more: Gehiago
+'no': Ez-
 open: Ireki
 quit: Laga
 remove: Atera
@@ -141,6 +145,7 @@ resources:
   app_outdated: >-
     Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona
     dezan.
+  delete: Baliabidea ezabatu
   discover: Ezagutu baliabide gehiago
   export: Esportatu baliabidea
   import_wallpapers: Inportatu tokiko horma-irudiak
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Edukiontzien arteko espazioa
   workspace_offset: Laneko espazioak desplazamendua (marjinak)
   workspace_padding: Laneko guneak betegarria
+'yes': Bai

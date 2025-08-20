@@ -1,3 +1,6 @@
+action:
+  confirm: Er du sikker?
+  confirm_body: Denne handlingen kan ikke angres.
 app_launcher:
   enable: Aktiver appstarter
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Diverse
 monitors_configurations:
   label: Overvåke {{indeks}}
 more: Flere
+'no': Ingen
 open: Åpen
 quit: Slutte
 remove: Fjerne
@@ -141,6 +145,7 @@ resources:
   app_outdated: >-
     Denne ressursen krever en nyere versjon av Seelen UI for å fungere
     ordentlig.
+  delete: Slett ressurs
   discover: Oppdag flere ressurser
   export: Eksportressurs
   import_wallpapers: Importer lokale bakgrunnsbilder
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Plass mellom containere
   workspace_offset: Arbeidsområder forskyvning (marginer)
   workspace_padding: Arbeidsområder polstring
+'yes': Ja

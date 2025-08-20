@@ -1,3 +1,6 @@
+action:
+  confirm: Bist du sicher?
+  confirm_body: Diese Aktion kann nicht rückgängig gemacht werden.
 app_launcher:
   enable: App Launcher aktivieren
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Verschiedenes
 monitors_configurations:
   label: Monitor {{index}}
 more: Mehr
+'no': NEIN
 open: Öffnen
 quit: Beenden
 remove: Entfernen
@@ -143,6 +147,7 @@ resources:
   app_outdated: >-
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
     funktionieren.
+  delete: Ressource löschen
   discover: Weitere Ressourcen entdecken
   export: Ressource exportieren
   import_wallpapers: Lokale Hintergrundbilder importieren
@@ -320,3 +325,4 @@ wm:
   space_between_containers: Abstand zwischen Containern
   workspace_offset: Arbeitsbereichs-Versatz (Ränder)
   workspace_padding: Arbeitsbereichs-Padding
+'yes': Ja

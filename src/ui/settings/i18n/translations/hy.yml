@@ -1,3 +1,6 @@
+action:
+  confirm: Վստահ եք
+  confirm_body: 'Այս գործողությունը չի կարող վերացնել:'
 app_launcher:
   enable: Միացնել ծրագրի արձակումը
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Զանազան
 monitors_configurations:
   label: Մոնիտոր {{ինդեքս}
 more: Ավելի շատ
+'no': Ոչ
 open: Բաց անել
 quit: Թողնել
 remove: Հեռացնել
@@ -141,6 +145,7 @@ reset_all_to_default: Վերագործարկեք բոլորին լռելյայն
 reset_to_default: Վերագործարկեք կանխադրված արժեքը
 resources:
   app_outdated: 'Այս ռեսուրսը պահանջում է Seelen UI- ի նոր տարբերակը `ճիշտ աշխատելու համար:'
+  delete: Delete նջել ռեսուրսը
   discover: Բացահայտեք ավելի շատ ռեսուրսներ
   export: Արտահանման ռեսուրս
   import_wallpapers: Ներմուծեք տեղական պաստառներ
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Տիեզերք բեռնարկղերի միջեւ
   workspace_offset: Աշխատանքային տարածքների օֆսեթ (լուսանցքներ)
   workspace_padding: Աշխատանքային տարածքների լիցքավորում
+'yes': Այո

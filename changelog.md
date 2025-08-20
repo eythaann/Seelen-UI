@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add button to delete resources.
+
 ### enhancements
 - cleanup of old service logs on start.
 - add time to service logs.

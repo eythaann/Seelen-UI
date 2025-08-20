@@ -1,3 +1,6 @@
+action:
+  confirm: 확실합니까?
+  confirm_body: 이 조치는 취소 할 수 없습니다.
 app_launcher:
   enable: 앱 런처 활성화
   launch_on:
@@ -129,6 +132,7 @@ miscellaneous: 기타
 monitors_configurations:
   label: 모니터 {{index}}
 more: 더보기
+'no': 아니요
 open: 열기
 quit: 종료
 remove: 제거
@@ -136,6 +140,7 @@ reset_all_to_default: 모두 기본값으로 초기화
 reset_to_default: 기본값으로 재설정
 resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
+  delete: 리소스 삭제
   discover: 더 많은 리소스 살펴보기
   export: 리소스 내보내기
   import_wallpapers: 로컬 배경화면 가져오기
@@ -304,3 +309,4 @@ wm:
   space_between_containers: 컨테이너 간 간격
   workspace_offset: 작업 공간 바깥 여백
   workspace_padding: 작업 공간 안쪽 여백
+'yes': 예

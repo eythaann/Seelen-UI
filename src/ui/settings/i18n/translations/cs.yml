@@ -1,3 +1,6 @@
+action:
+  confirm: Jsi si jistý?
+  confirm_body: Tuto akci nelze vrátit zpět.
 app_launcher:
   enable: Povolit spouštěč aplikací
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Smíšený
 monitors_configurations:
   label: Monitor {{index}}
 more: Více
+'no': Žádný
 open: Otevřeno
 quit: Přestat
 remove: Odstranit
@@ -141,6 +145,7 @@ resources:
   app_outdated: >-
     Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského
     rozhraní Seelen.
+  delete: Odstranit zdroj
   discover: Objevte další zdroje
   export: Exportní zdroj
   import_wallpapers: Import místních tapet
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Prostor mezi kontejnery
   workspace_offset: Posun pracovních prostor (marže)
   workspace_padding: Padding pracovních prostorů
+'yes': Ano

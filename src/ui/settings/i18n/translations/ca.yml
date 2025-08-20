@@ -1,3 +1,6 @@
+action:
+  confirm: Esteu segur?
+  confirm_body: Aquesta acció no es pot desfer.
 app_launcher:
   enable: Activa el llançador d'aplicacions
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Divers
 monitors_configurations:
   label: Monitor {{index}}
 more: Més
+'no': 'No'
 open: Obrir
 quit: Abandonar
 remove: Treure
@@ -141,6 +145,7 @@ resources:
   app_outdated: >-
     Aquest recurs requereix una versió més recent de la interfície d'usuari de
     Seelen per funcionar correctament.
+  delete: Esborra el recurs
   discover: Descobriu més recursos
   export: Els recursos d’exportació
   import_wallpapers: Importa fons de pantalla locals
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Espai entre contenidors
   workspace_offset: Offset d'espais de treball (marges)
   workspace_padding: Rado d’espais de treball
+'yes': Sí

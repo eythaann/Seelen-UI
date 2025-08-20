@@ -1,3 +1,6 @@
+action:
+  confirm: ایا تاسو ډاډه یاست؟
+  confirm_body: دا عمل نشي خلاصولی.
 app_launcher:
   enable: د اپلیکیشن لیسچر وړ کړئ
   launch_on:
@@ -131,6 +134,7 @@ miscellaneous: متفرقه
 monitors_configurations:
   label: د {{{پلس} نظارت وکړئ}
 more: نور
+'no': نه
 open: خلاص
 quit: پرېښودل
 remove: لرې کول
@@ -138,6 +142,7 @@ reset_all_to_default: ټول ډیفالټ ارزښتونو ته تنظیم کړ�
 reset_to_default: د ډیفالټ ارزښت ته بیا تنظیمول
 resources:
   app_outdated: دا سرچینه د سم کار کولو لپاره یو نوي نسخه ته اړتیا لري.
+  delete: سرچینه حذف کړئ
   discover: ډیرې سرچینې ومومئ
   export: د صادراتو سرچینې
   import_wallpapers: ځایی وال پیپرونه وارد کړئ
@@ -311,3 +316,4 @@ wm:
   space_between_containers: د کانتینرونو ترمینځ ځای
   workspace_offset: د کاري ځای ځایونه (مارجینز)
   workspace_padding: د کارډا ریسس
+'yes': هو

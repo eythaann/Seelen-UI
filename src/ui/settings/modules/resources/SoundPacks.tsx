@@ -18,7 +18,7 @@ export function SoundPacksView() {
             type="default"
             onClick={async () => {
               const dataDir = await path.appDataDir();
-              invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'sounds') });
+              invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'soundpacks') });
             }}
           >
             <Icon iconName="PiFoldersDuotone" />

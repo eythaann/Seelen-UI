@@ -1,3 +1,6 @@
+action:
+  confirm: Emin misin?
+  confirm_body: Bu eylem geri alınamaz.
 app_launcher:
   enable: Uygulama Başlatıcısını Etkinleştir
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Çeşitli
 monitors_configurations:
   label: Monitör {{index}}
 more: Daha Fazla
+'no': HAYIR
 open: Aç
 quit: Çıkış
 remove: Kaldır
@@ -141,6 +145,7 @@ resources:
   app_outdated: >-
     Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
     gerekir.
+  delete: Kaynağı Sil
   discover: Daha fazla kaynak keşfedin
   export: Kaynak Dışa Aktarımı
   import_wallpapers: Yerel duvar kağıtlarını içe aktarma
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Konteynerler Arası Boşluk
   workspace_offset: Çalışma Alanları Uzaklıkları (Kenar Boşlukları)
   workspace_padding: Çalışma Alanları İç Boşluğu
+'yes': Evet

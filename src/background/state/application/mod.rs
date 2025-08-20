@@ -110,7 +110,8 @@ impl FullState {
     }
 
     fn process_changes(&mut self, changed: &HashSet<PathBuf>) -> Result<()> {
-        let mut icons_metadata_changed = false;
+        let mut icons_changed = false;
+        let mut system_icons_changed = false;
         let mut weg_items_changed = false;
         let mut toolbar_items_changed = false;
         let mut history_changed = false;
@@ -123,12 +124,12 @@ impl FullState {
 
         // Single iteration over the changed paths
         for path in changed {
-            if !icons_metadata_changed
-                && path.starts_with(SEELEN_COMMON.user_icons_path())
-                && path.file_stem().is_some_and(|s| s == "metadata")
-            {
-                icons_metadata_changed = true;
-            }
+            if !icons_changed && path.starts_with(SEELEN_COMMON.user_icons_path()) {
+                icons_changed = true;
+                if !system_icons_changed {
+                    system_icons_changed = path.to_string_lossy().contains("system");
+                }
+            };
 
             if !weg_items_changed && path == SEELEN_COMMON.weg_items_path() {
                 weg_items_changed = true;
@@ -179,9 +180,11 @@ impl FullState {
             }
         }
 
-        if icons_metadata_changed {
+        if icons_changed {
             log::info!("Icon Packs changed");
-            self.load_icons_packs(false)?;
+            if !system_icons_changed {
+                self.load_icons_packs(false)?;
+            }
             self.emit_icon_packs()?;
         }
 

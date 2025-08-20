@@ -1,3 +1,6 @@
+action:
+  confirm: Sigurado ka ba?
+  confirm_body: Ang pagkilos na ito ay hindi maaaring magawa.
 app_launcher:
   enable: Paganahin ang launcher ng app
   launch_on:
@@ -136,6 +139,7 @@ miscellaneous: Miscellaneous
 monitors_configurations:
   label: Subaybayan {{index}}
 more: Higit pa
+'no': Hindi
 open: Buksan
 quit: Huminto ka
 remove: Alisin
@@ -145,6 +149,7 @@ resources:
   app_outdated: >-
     Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
     Seelen UI upang gumana nang maayos.
+  delete: Tanggalin ang mapagkukunan
   discover: Tuklasin ang higit pang mga mapagkukunan
   export: Mapagkukunan ng pag -export
   import_wallpapers: Mag -import ng mga lokal na wallpaper
@@ -321,3 +326,4 @@ wm:
   space_between_containers: Puwang sa pagitan ng mga lalagyan
   workspace_offset: Workspaces Offset (Margin)
   workspace_padding: Mga workspaces padding
+'yes': Oo

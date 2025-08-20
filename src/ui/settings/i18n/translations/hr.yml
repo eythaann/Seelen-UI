@@ -1,3 +1,6 @@
+action:
+  confirm: Jeste li sigurni?
+  confirm_body: Ova se radnja ne može poništiti.
 app_launcher:
   enable: Omogućite pokretač aplikacija
   launch_on:
@@ -132,6 +135,7 @@ miscellaneous: Razni
 monitors_configurations:
   label: Monitor {{index}}
 more: Više
+'no': Ne
 open: Otvoren
 quit: Prestati
 remove: Ukloniti
@@ -141,6 +145,7 @@ resources:
   app_outdated: >-
     Ovaj resurs zahtijeva da novija verzija Seelen korisničkog sučelja radi
     ispravno.
+  delete: Izbriši resurs
   discover: Otkrijte više resursa
   export: Izvozni resurs
   import_wallpapers: Uvoz lokalnih pozadina
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Prostor između spremnika
   workspace_offset: Pomak radnog prostora (margine)
   workspace_padding: Radni prostori jastučići
+'yes': Da

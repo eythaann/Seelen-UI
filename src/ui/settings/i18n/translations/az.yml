@@ -1,3 +1,6 @@
+action:
+  confirm: Əminsən?
+  confirm_body: Bu hərəkət geri qaytarıla bilməz.
 app_launcher:
   enable: Tətbiq başlatıcısını aktivləşdirin
   launch_on:
@@ -131,6 +134,7 @@ miscellaneous: Müxtəlif
 monitors_configurations:
   label: Monitor {{index}}
 more: Daha çox
+'no': Yox
 open: Açıq-saçıq
 quit: Çıxmaq
 remove: Çıxarmaq
@@ -140,6 +144,7 @@ resources:
   app_outdated: >-
     Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını
     tələb edir.
+  delete: Resurs silmək
   discover: Daha çox mənbəyi kəşf edin
   export: İxracat mənbəyi
   import_wallpapers: Yerli divar kağızları idxal edin
@@ -316,3 +321,4 @@ wm:
   space_between_containers: Konteynerlər arasındakı boşluq
   workspace_offset: İş yerləri ofset (kənarları)
   workspace_padding: İş sahələri padding
+'yes': Bəli

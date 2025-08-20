@@ -1,3 +1,6 @@
+action:
+  confirm: Вы уверены?
+  confirm_body: Это действие не может быть отменено.
 app_launcher:
   enable: Включить лаунчер приложений
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Разное
 monitors_configurations:
   label: Монитор {{index}}
 more: Подробнее
+'no': Нет
 open: Открыть
 quit: Закрыть
 remove: Удалить
@@ -141,6 +145,7 @@ reset_all_to_default: Сброс всех значений по умолчани
 reset_to_default: Сброс на значение по умолчанию
 resources:
   app_outdated: Для корректной работы этого ресурса требуется более новая версия Seelen UI.
+  delete: Удалить ресурс
   discover: Откройте для себя больше ресурсов
   export: Экспортный ресурс
   import_wallpapers: Импорт местных обоев
@@ -317,3 +322,4 @@ wm:
   space_between_containers: Пространство между контейнерами
   workspace_offset: Внешний отступ рабочего пространства
   workspace_padding: Внутренний отступ рабочего пространства
+'yes': Да

@@ -1,3 +1,6 @@
+action:
+  confirm: Es-tu sûr?
+  confirm_body: Cette action ne peut pas être annulée.
 app_launcher:
   enable: Activer le lanceur d'applications
   launch_on:
@@ -134,6 +137,7 @@ miscellaneous: Divers
 monitors_configurations:
   label: Moniteur {{index}}
 more: Plus
+'no': Non
 open: Ouvrir
 quit: Quitter
 remove: Retirer
@@ -143,6 +147,7 @@ resources:
   app_outdated: >-
     Cette ressource nécessite une version plus récente de Seelen UI pour
     fonctionner correctement.
+  delete: Supprimer les ressources
   discover: Découvrez d'autres ressources
   export: Exporter la ressource
   import_wallpapers: Importer des fonds d'écran locaux
@@ -319,3 +324,4 @@ wm:
   space_between_containers: Espacement entre les conteneurs
   workspace_offset: Décalage des bureaux virtuels (Marges)
   workspace_padding: Rembourrage(Padding) des bureaux virtuels
+'yes': Oui
