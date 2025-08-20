@@ -141,6 +141,7 @@ resources:
   delete: حذف المورد
   discover: اكتشف المزيد من الموارد
   export: موارد التصدير
+  has_update: An update is available
   import_wallpapers: استيراد الخلفيات المحلية
   open_folder: فتح مجلد الموارد
   outdated: >-
