@@ -141,6 +141,7 @@ resources:
   delete: Удалить ресурс
   discover: Откройте для себя больше ресурсов
   export: Экспортный ресурс
+  has_update: An update is available
   import_wallpapers: Импорт местных обоев
   open_folder: Откройте папку с ресурсами
   outdated: >-
