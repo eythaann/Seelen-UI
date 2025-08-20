@@ -8,6 +8,9 @@
 - cleanup of old service logs on start.
 - add time to service logs.
 
+### fix
+- toolbar not showing when user deleted basic system folders.
+
 ## [2.4.0]
 ### features
 - wallpaper resources.

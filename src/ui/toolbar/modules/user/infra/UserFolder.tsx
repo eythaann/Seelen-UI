@@ -16,23 +16,34 @@ interface UserFolderProps {
   setCategoryOpen: (category: FolderType) => void;
 }
 
-const pathByCategory: Record<FolderType, string> = {
-  Recent: (await path.dataDir()) + '\\Microsoft\\Windows\\Recent',
-  Desktop: await path.desktopDir(),
-  Documents: await path.documentDir(),
-  Downloads: await path.downloadDir(),
-  Music: await path.audioDir(),
-  Pictures: await path.pictureDir(),
-  Videos: await path.videoDir(),
-  Unknown: await path.homeDir(),
-};
+async function getPathByFolderType(folderType: FolderType): Promise<string> {
+  switch (folderType) {
+    case 'Recent':
+      return (await path.dataDir()) + '\\Microsoft\\Windows\\Recent';
+    case 'Desktop':
+      return await path.desktopDir();
+    case 'Documents':
+      return await path.documentDir();
+    case 'Downloads':
+      return await path.downloadDir();
+    case 'Music':
+      return await path.audioDir();
+    case 'Pictures':
+      return await path.pictureDir();
+    case 'Videos':
+      return await path.videoDir();
+    case 'Unknown':
+    default:
+      return await path.homeDir();
+  }
+}
 
 export function UserFolder({ folderProps, setCategoryOpen, categoryOpen }: UserFolderProps) {
   const [folderShowCount, setFolderShowCount] = useState(5);
   const { content, category, icon } = folderProps;
 
   const OpenOnExplorer = async () => {
-    invoke(SeelenCommand.OpenFile, { path: pathByCategory[category] });
+    invoke(SeelenCommand.OpenFile, { path: await getPathByFolderType(category) });
   };
 
   const onClickChevron = (e: MouseEvent) => {
