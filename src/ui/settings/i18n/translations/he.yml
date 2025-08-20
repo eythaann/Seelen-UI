@@ -141,6 +141,7 @@ resources:
   delete: מחק משאב
   discover: לגלות משאבים נוספים
   export: משאב ייצוא
+  has_update: An update is available
   import_wallpapers: ייבא טפטים מקומיים
   open_folder: פתיחת תיקיית משאבים
   outdated: >-
