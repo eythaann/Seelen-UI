@@ -141,6 +141,7 @@ resources:
   delete: Видалити ресурс
   discover: Відкрийте для себе більше ресурсів
   export: Експортний ресурс
+  has_update: An update is available
   import_wallpapers: Імпортувати місцеві шпалери
   open_folder: Відкрийте папку з ресурсами
   outdated: >-
