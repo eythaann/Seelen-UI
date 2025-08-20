@@ -1,3 +1,6 @@
+action:
+  confirm: Piştrastin?
+  confirm_body: Ev çalakî nikare were paşguh kirin.
 app_launcher:
   enable: Launcher App çalak bikin
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Lihevket
 monitors_configurations:
   label: Monitor {{Index-}
 more: Zêde
+'no': 'Na'
 open: Vekirî
 quit: Devjêberdan
 remove: Dûrxistin
@@ -134,6 +138,7 @@ reset_all_to_default: Hemî nirxên xwerû resen bikin
 reset_to_default: Reset bi nirxa xwerû
 resources:
   app_outdated: Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş bixebite.
+  delete: Avkaniyê jêbirin
   discover: Zêdetir çavkaniyên kifş bikin
   export: Resouravkaniya Export
   import_wallpapers: Dîwarên herêmî yên import bikin
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Cîhê di navbera konteyneran de
   workspace_offset: Karûbarên Workspan (Margins)
   workspace_padding: Karên xebitandinê
+'yes': 'Erê'
