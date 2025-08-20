@@ -141,6 +141,7 @@ resources:
   delete: منبع را حذف کنید
   discover: منابع بیشتری را کشف کنید
   export: منبع صادراتی
+  has_update: An update is available
   import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
   open_folder: پوشه منبع باز
   outdated: >-
