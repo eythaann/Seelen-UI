@@ -141,6 +141,7 @@ resources:
   delete: Usuń zasób
   discover: Odkryj więcej zasobów
   export: Zasoby eksportowe
+  has_update: An update is available
   import_wallpapers: Import lokalnych tapet
   open_folder: Otwórz folder zasobów
   outdated: >-
