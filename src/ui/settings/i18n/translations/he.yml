@@ -1,3 +1,6 @@
+action:
+  confirm: אתה בטוח?
+  confirm_body: לא ניתן לבטל פעולה זו.
 app_launcher:
   enable: הפעל משגר אפליקציות
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: שונות
 monitors_configurations:
   label: צג {{index}}
 more: יוֹתֵר
+'no': 'לֹא'
 open: לִפְתוֹחַ
 quit: לְהַפְסִיק
 remove: לְהַסִיר
@@ -134,6 +138,7 @@ reset_all_to_default: אפס את כל ערכי ברירת המחדל
 reset_to_default: אפס לערך ברירת המחדל
 resources:
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
+  delete: מחק משאב
   discover: לגלות משאבים נוספים
   export: משאב ייצוא
   import_wallpapers: ייבא טפטים מקומיים
@@ -304,3 +309,4 @@ wm:
   space_between_containers: רווח בין מיכלים
   workspace_offset: הסטת שולי סביבת עבודה
   workspace_padding: ריפוד סביבת עבודה
+'yes': 'כֵּן'
