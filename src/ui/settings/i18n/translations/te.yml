@@ -141,6 +141,7 @@ resources:
   delete: వనరును తొలగించండి
   discover: మరిన్ని వనరులను కనుగొనండి
   export: ఎగుమతి వనరు
+  has_update: An update is available
   import_wallpapers: స్థానిక వాల్‌పేపర్‌లను దిగుమతి చేయండి
   open_folder: ఓపెన్ రిసోర్స్ ఫోల్డర్
   outdated: >-
