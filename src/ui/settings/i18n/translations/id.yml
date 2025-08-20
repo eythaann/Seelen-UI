@@ -141,6 +141,7 @@ resources:
   delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya
   export: Sumber Daya Ekspor
+  has_update: An update is available
   import_wallpapers: Impor wallpaper lokal
   open_folder: Buka folder sumber daya
   outdated: >-
