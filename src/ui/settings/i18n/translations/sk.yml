@@ -1,3 +1,6 @@
+action:
+  confirm: Si si istý?
+  confirm_body: Táto akcia sa nedá vrátiť späť.
 app_launcher:
   enable: Povoliť spúšťač aplikácií
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Rôznorodý
 monitors_configurations:
   label: Monitor {{index}}
 more: Viac
+'no': 'Nie'
 open: OTVORENÉ
 quit: Prestať
 remove: Odložiť
@@ -134,6 +138,7 @@ reset_all_to_default: Obnovenie všetkých predvolených hodnôt
 reset_to_default: Obnovenie predvolenej hodnoty
 resources:
   app_outdated: Tento zdroj si na správne fungovanie vyžaduje novšiu verziu používateľského rozhrania Seelen.
+  delete: Vymazať zdroj
   discover: Objavte ďalšie zdroje
   export: Vývozný zdroj
   import_wallpapers: Import miestnych tapiet
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Priestor medzi nádobami
   workspace_offset: Offsety Workspaces (marže)
   workspace_padding: Čalúnenie pracovných priestorov
+'yes': 'Áno'
