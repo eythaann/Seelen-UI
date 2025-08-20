@@ -141,6 +141,7 @@ resources:
   delete: Avkaniyê jêbirin
   discover: Zêdetir çavkaniyên kifş bikin
   export: Resouravkaniya Export
+  has_update: An update is available
   import_wallpapers: Dîwarên herêmî yên import bikin
   open_folder: Peldanka çavkaniya vekirî
   outdated: >-
