@@ -1,3 +1,6 @@
+action:
+  confirm: Is jy seker?
+  confirm_body: Hierdie aksie kan nie ongedaan gemaak word nie.
 app_launcher:
   enable: Aktiveer App Launcher
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Verskillend
 monitors_configurations:
   label: Monitor {{index}}
 more: Meer
+'no': 'Nee'
 open: Oopmaak
 quit: Laat vaar
 remove: Verwyder
@@ -134,6 +138,7 @@ reset_all_to_default: Stel alles terug na standaardwaardes
 reset_to_default: Stel weer in standaardwaarde
 resources:
   app_outdated: Hierdie hulpbron vereis dat 'n nuwer weergawe van Seelen UI behoorlik moet werk.
+  delete: Vee hulpbron uit
   discover: Ontdek meer bronne
   export: Uitvoerhulpbron
   import_wallpapers: Voer plaaslike agtergronde in
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Ruimte tussen houers
   workspace_offset: Werkruimtes offset (marges)
   workspace_padding: Werkruimtes opvulling
+'yes': 'Ja'
