@@ -141,6 +141,7 @@ resources:
   delete: Манбаъро нест мекунад
   discover: Нахуст захираҳои бештарро кашф кунед
   export: Манбаъ
+  has_update: An update is available
   import_wallpapers: Объекти маҳаллӣ
   open_folder: Папкаи захираҳо
   outdated: >-
