@@ -141,6 +141,7 @@ resources:
   delete: Futa rasilimali
   discover: Gundua rasilimali zaidi
   export: Rasilimali ya kuuza nje
+  has_update: An update is available
   import_wallpapers: Ingiza wallpapers za mitaa
   open_folder: Fungua folda ya rasilimali
   outdated: >-
