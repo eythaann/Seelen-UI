@@ -141,6 +141,7 @@ resources:
   delete: وسائل کو حذف کریں
   discover: مزید وسائل دریافت کریں
   export: برآمدی وسائل
+  has_update: An update is available
   import_wallpapers: مقامی وال پیپر درآمد کریں
   open_folder: اوپن ریسورس فولڈر
   outdated: >-
