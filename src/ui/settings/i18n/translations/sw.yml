@@ -1,3 +1,6 @@
+action:
+  confirm: Una uhakika?
+  confirm_body: Kitendo hiki hakiwezi kufutwa.
 app_launcher:
   enable: Wezesha Kizindua cha Programu
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Miscellaneous
 monitors_configurations:
   label: Monitor {{index}}
 more: Zaidi
+'no': 'Hapana'
 open: Wazi
 quit: Acha
 remove: Ondoa
@@ -134,6 +138,7 @@ reset_all_to_default: Rudisha yote kwa maadili ya msingi
 reset_to_default: Rudisha kwa thamani ya msingi
 resources:
   app_outdated: Rasilimali hii inahitaji toleo jipya la Seelen UI kufanya kazi vizuri.
+  delete: Futa rasilimali
   discover: Gundua rasilimali zaidi
   export: Rasilimali ya kuuza nje
   import_wallpapers: Ingiza wallpapers za mitaa
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Nafasi kati ya vyombo
   workspace_offset: Nafasi za kazi za kukabiliana (pembezoni)
   workspace_padding: Nafasi za kazi
+'yes': 'Ndio'
