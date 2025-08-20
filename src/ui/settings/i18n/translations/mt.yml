@@ -1,3 +1,6 @@
+action:
+  confirm: Int żgur?
+  confirm_body: Din l-azzjoni ma tistax titneħħa.
 app_launcher:
   enable: Enable App Launcher
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Varji
 monitors_configurations:
   label: Monitor {{indiċi}}
 more: Aktar
+'no': 'LE'
 open: Miftuħa
 quit: Nieqaf
 remove: Neħħi
@@ -134,6 +138,7 @@ reset_all_to_default: Irrisettja l-valuri kollha tal-inadempjenza
 reset_to_default: Irrisettja għall-valur awtomatiku
 resources:
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
+  delete: Ħassar ir-riżorsa
   discover: Skopri aktar riżorsi
   export: Riżorsa ta 'esportazzjoni
   import_wallpapers: Importa wallpapers lokali
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Spazju bejn il-kontenituri
   workspace_offset: Spazji tax-Xogħol Offset (Marġini)
   workspace_padding: Padding tal-ispazji tax-xogħol
+'yes': 'IVA'
