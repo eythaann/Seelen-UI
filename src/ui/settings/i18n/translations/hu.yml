@@ -1,3 +1,6 @@
+action:
+  confirm: Biztos vagy benne?
+  confirm_body: Ezt a műveletet nem lehet visszavonni.
 app_launcher:
   enable: Engedélyezze az alkalmazás indítóját
   launch_on:
@@ -127,6 +130,7 @@ miscellaneous: Különféle
 monitors_configurations:
   label: Monitor {{index}}
 more: Több
+'no': 'Nem'
 open: Nyisd ki
 quit: Kilépés
 remove: Eltávolítás
@@ -134,6 +138,7 @@ reset_all_to_default: Mindent visszaállít az alapértelmezett értékekre
 reset_to_default: Alapértelmezett értékre visszaállítása
 resources:
   app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
+  delete: Az erőforrás törlése
   discover: További források felfedezése
   export: Export erőforrás
   import_wallpapers: Helyi háttérképek importálása
@@ -304,3 +309,4 @@ wm:
   space_between_containers: Hely a konténerek között
   workspace_offset: A munkaterületek eltolása (margók)
   workspace_padding: Munkaterületek párnázása
+'yes': 'Igen'
