@@ -141,6 +141,7 @@ resources:
   delete: წაშალეთ რესურსი
   discover: აღმოაჩინეთ მეტი რესურსი
   export: ექსპორტის რესურსი
+  has_update: An update is available
   import_wallpapers: ადგილობრივი ფონების იმპორტი
   open_folder: ღია რესურსების საქაღალდე
   outdated: >-
