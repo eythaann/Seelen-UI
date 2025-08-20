@@ -141,6 +141,7 @@ resources:
   delete: Dileu Adnodd
   discover: Darganfyddwch fwy o adnoddau
   export: Adnodd Allforio
+  has_update: An update is available
   import_wallpapers: Mewnforio papurau wal lleol
   open_folder: Ffolder Adnoddau Agored
   outdated: >-
