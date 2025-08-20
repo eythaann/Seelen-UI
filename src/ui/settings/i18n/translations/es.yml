@@ -141,6 +141,7 @@ resources:
   delete: Eliminar recursos
   discover: Descubra más recursos
   export: Recursos para la exportación
+  has_update: An update is available
   import_wallpapers: Importar fondos de pantalla locales
   open_folder: Abrir carpeta de recursos
   outdated: >-
