@@ -141,6 +141,7 @@ resources:
   delete: Delete նջել ռեսուրսը
   discover: Բացահայտեք ավելի շատ ռեսուրսներ
   export: Արտահանման ռեսուրս
+  has_update: An update is available
   import_wallpapers: Ներմուծեք տեղական պաստառներ
   open_folder: Բացեք ռեսուրսների թղթապանակ
   outdated: >-
