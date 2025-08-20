@@ -141,6 +141,7 @@ resources:
   delete: வளத்தை நீக்கு
   discover: மேலும் ஆதாரங்களைக் கண்டறியவும்
   export: ஏற்றுமதி வள
+  has_update: An update is available
   import_wallpapers: உள்ளூர் வால்பேப்பர்களை இறக்குமதி செய்யுங்கள்
   open_folder: திறந்த வள கோப்புறை
   outdated: >-
