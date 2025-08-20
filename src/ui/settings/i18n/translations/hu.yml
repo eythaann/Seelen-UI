@@ -141,6 +141,7 @@ resources:
   delete: Az erőforrás törlése
   discover: További források felfedezése
   export: Export erőforrás
+  has_update: An update is available
   import_wallpapers: Helyi háttérképek importálása
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
