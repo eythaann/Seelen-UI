@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.4.1]
 ### features
 - add a button to delete resources.
 - add a button to update downloaded resources.
