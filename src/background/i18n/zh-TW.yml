@@ -1,16 +1,16 @@
 cancel: 取消
-done: 完畢
+done: 完成
 drivers:
-  got_it: 知道了
+  got_it: 了解
   monitor_disabled: >-
-    看來某些監視器驅動程序被禁用。 請讓他們讓Seelen UI正常工作。
-  monitor_disabled_title: 監視驅動程序被禁用
+    看起來部分顯示器驅動程式已被停用，請啟用這些驅動程式以讓 Seelen UI 正常運作。
+  monitor_disabled_title: 顯示器驅動程式已停用
 resource:
-  added: 添加了一個新資源
+  added: 已新增資源
   download_failed_body: >-
-    下載資源時出現問題，請向Seelen開發人員團隊報告。
+    下載資源時發生錯誤，請向 Seelen 開發團隊回報此問題。
   download_failed_title: 資源下載失敗
-  downloading: 下載資產...
+  downloading: 正在下載資源...
   downloading_body: 這可能需要幾秒鐘，請不要關閉窗口。
   enable: 使能夠
 runtime:
