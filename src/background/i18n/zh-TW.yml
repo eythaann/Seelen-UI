@@ -10,7 +10,7 @@ resource:
   download_failed_body: >-
     下載資源時發生錯誤，請向 Seelen 開發團隊回報此問題。
   download_failed_title: 資源下載失敗
-  downloading: 正在下載資源……
+  downloading: 正在下載資源...
   downloading_body: 這可能需要幾秒鐘時間，請不要關閉視窗。
   enable: 啟用
 runtime:
