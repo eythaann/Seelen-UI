@@ -123,7 +123,7 @@ header:
 home:
   new_resources: 新資源
 inherit: 繼承
-inProgress: 處理中……
+inProgress: 處理中...
 insert: 插入
 loading: 載入中...
 miscellaneous: 其他
@@ -226,7 +226,7 @@ toolbar:
 update:
   available: 有可用更新！
   channel: 更新頻道
-  downloading: 下載中……
+  downloading: 下載中...
 wall:
   backgrounds: 桌布
   blur: 模糊
