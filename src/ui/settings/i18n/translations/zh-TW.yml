@@ -1,313 +1,313 @@
 action:
-  confirm: 你確定嗎？
-  confirm_body: 該動作不能撤消。
+  confirm: 您確定嗎？
+  confirm_body: 此動作無法復原。
 app_launcher:
-  enable: 啟用應用啟動器
+  enable: 啟用應用程式啟動器
   launch_on:
-    mouse_over: 鼠標結束
-    primary: 基本的
-  monitor: 顯示顯示
+    mouse_over: 滑鼠懸停
+    primary: 主要
+  monitor: 顯示器設定
   runners:
     cmd: 命令
-    explorer: 跑步
-    label: 跑步者
+    explorer: 執行
+    label: 執行器
 apps_configurations:
   app:
     bindings: 綁定（需要兩個選項）
     category: 類別
-    category_placeholder: 沒有任何
-    monitor: 監視器
-    monitor_placeholder: 沒有任何
-    name: 姓名
-    ok_create: 創造
+    category_placeholder: 無
+    monitor: 顯示器
+    monitor_placeholder: 無
+    name: 名稱
+    ok_create: 建立
     ok_edit: 更新
     ok_readonly: 編輯為新
     options:
-      float: 漂浮
-      force: 力管理
-      hidden: 隱藏碼頭/任務欄
-      pinned: 固定
-      unmanage: 不受限制
-    options_label: 額外的選擇
-    title_create: 創建{{name}}
-    title_edit: 編輯{{name}}
-    title_readonly: 查看{{name}}
-    weg_options_label: 碼頭/任務欄選項
-    wm_options_label: 窗口管理器選項
+      float: 浮動
+      force: 強制管理
+      hidden: 從 Dock / 工作列 隱藏
+      pinned: 釘選
+      unmanage: 不管理
+    options_label: 額外選項
+    title_create: 建立 {{name}}
+    title_edit: 編輯 {{name}}
+    title_readonly: 檢視 {{name}}
+    weg_options_label: Dock / 工作列 選項
+    wm_options_label: 視窗管理器選項
     workspace: 工作區
-    workspace_placeholder: 沒有任何
+    workspace_placeholder: 無
   bundled_msg: >-
-    這些捆綁的配置不可編輯，旨在為您提供最佳體驗而沒有自定義。 他們會自動為您配置最常見的應用程序。
-  bundled_title: App Config與Seelen捆綁在一起
+    這些內建設定無法編輯，旨在提供最佳的預設體驗。它們會自動為您配置最常見的應用程式。
+  bundled_title: Seelen 內建應用程式設定
   confirm_delete: 您確定要刪除此配置嗎？
   confirm_delete_title: 確認刪除
   delete: 刪除
-  export: 出口
-  export_full: 按應用程序導出設置
+  export: 匯出
+  export_full: 依應用程式匯出設定
   extra_info: >-
-    SEELEN UI僅使用每個應用程序使用一個標識符（第一次匹配），因此“如何指定”的順序很重要，最新添加的添加將得到優先級，因為註意表的默認情況下是從最新到舊的。
+    Seelen UI 每個應用程式僅使用一個識別符（第一次匹配），因此指定的順序很重要，最新新增的會獲得優先權，注意表格預設是從最新到舊排序。
   identifier:
-    add_block: 添加塊
-    and: 和
-    id: 標識符
-    kind: 識別
+    add_block: 新增區塊
+    and: 且
+    id: 識別符
+    kind: 識別方式
     matching_strategy: 匹配策略
     matching_strategy_option:
       contains: 包含
-      ends_with: 以
-      equals: 平等
-      regex: 正則表達式
-      starts_with: 從
+      ends_with: 結尾為
+      equals: 等於
+      regex: 正規表示式
+      starts_with: 開頭為
     negation: 負匹配
-    or: 或者
-    remove: 刪除塊
+    or: 或
+    remove: 刪除區塊
     type:
-      class: 班級
-      exe: EXE文件
-      path: 小路
+      class: 類別
+      exe: Exe 執行檔
+      path: 路徑
       title: 標題
-  import: 進口
-  import_full: 通過應用程序導入設置
-  new: 新的
+  import: 匯入
+  import_full: 依應用程式匯入設定
+  new: 新增
   search: 搜尋
   swap: 交換
 cancel: 取消
 close: 關閉
 delete: 刪除
 devtools:
-  app_folders: 應用文件夾
-  custom_config_file: 加載自定義配置文件
-  data_folder: 數據文件夾
-  enable: 啟用開發人員工具
-  install_folder: 安裝文件夾
+  app_folders: 應用程式資料夾
+  custom_config_file: 載入自訂設定檔
+  data_folder: 資料資料夾
+  enable: 啟用開發者工具
+  install_folder: 安裝資料夾
   load: 載入
-  settings_file: 設置文件
-  simulate_fullscreen: 模擬全屏事件
+  settings_file: 設定檔案
+  simulate_fullscreen: 模擬全螢幕事件
 extras:
-  clear_icons: 清除系統圖標緩存
-  clear_icons_tooltip: 可能需要重新啟動才能完全生效所有小部件
-  exit: 退出/退出
-  links: 官方鏈接
+  clear_icons: 清除系統圖示快取
+  clear_icons_tooltip: 可能需要重新啟動才能在所有小工具上完全生效
+  exit: 結束/退出
+  links: 官方連結
   relaunch: 重新啟動
   version: 版本
 general:
-  accent_color: 口音顏色
+  accent_color: 主色調
   date_format: 日期格式
   icon_pack:
-    available: 可用的圖標包
-    selected: 活動圖標包
+    available: 可用圖示包
+    selected: 使用中圖示包
   language: 語言
-  startup: 在啟動上運行？
+  startup: 開機自動啟動？
   theme:
-    available: 可用的主題
-    selected: 主題主題
+    available: 可用主題
+    selected: 使用中主題
 header:
   labels:
-    config: 配置
-    developer: 對於開發人員
-    extras: 額外
-    general: 一般的
-    home: 家
-    icon_pack_editor: 緩存圖標
-    iconpack: 圖標包
-    monitors: 監視器
-    plugin: 插件
+    config: 設定
+    developer: 開發者工具
+    extras: 附加功能
+    general: 一般
+    home: 首頁
+    icon_pack_editor: 圖示快取
+    iconpack: 圖示包
+    monitors: 顯示器
+    plugin: 外掛程式
     resources: 資源
-    shortcuts: 捷徑
-    soundpack: 聲音包
-    specific_apps: 按應用程序設置
+    shortcuts: 快速鍵
+    soundpack: 音效包
+    specific_apps: 根據應用程式設定
     theme: 主題
     virtual_desk: 虛擬桌面
-    wallpaper: 壁紙
-    widget: 小部件
+    wallpaper: 桌布
+    widget: 小工具
 home:
   new_resources: 新資源
 inherit: 繼承
-inProgress: 進行中...
+inProgress: 處理中……
 insert: 插入
 loading: 載入中...
-miscellaneous: 各種各樣的
+miscellaneous: 其他
 monitors_configurations:
-  label: 監視{{index}}
-more: 更多的
-'no': '不'
-open: 打開
-quit: 辭職
-remove: 消除
-reset_all_to_default: 重置全部默認值
-reset_to_default: 重置為默認值
+  label: 顯示器 {{index}}
+more: 更多
+'no': '否'
+open: 開啟
+quit: 離開
+remove: 移除
+reset_all_to_default: 全部重設為預設值
+reset_to_default: 重設為預設值
 resources:
-  app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。
+  app_outdated: 此資源需要較新版本的 Seelen UI 才能正常使用。
   delete: 刪除資源
-  discover: 發現更多資源
-  export: 導出資源
-  has_update: An update is available
-  import_wallpapers: 導入本地壁紙
-  open_folder: 打開資源文件夾
+  discover: 探索更多資源
+  export: 匯出資源
+  has_update: 有可用的更新
+  import_wallpapers: 匯入本機桌布
+  open_folder: 開啟資源資料夾
   outdated: >-
-    該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
-save: 節省
-save_and_restart: 保存和重新啟動
+    該資源是為 Seelen UI 的較舊版本而設計的，可能無法正常工作。
+save: 儲存
+save_and_restart: 儲存並重新啟動
 see_more: 查看更多
 shortcuts:
-  enable: 啟用內置捷徑系統
+  enable: 啟用整合快捷鍵 (ahk)
   enable_tooltip: >-
-    禁用您使用SEELEN UI客戶端實現自己的快捷方式系統
+    若要使用 Seelen Core API 自訂快捷鍵，請停用此選項
   labels:
-    create_new_workspace: 創建新工作區
-    cycle_stack_next: 循環堆棧接下來
-    cycle_stack_prev: 循環堆棧以前
-    cycle_wallpaper_next: 更改為下一個牆紙
-    cycle_wallpaper_prev: 更改為以前的牆紙
-    decrease_height: 降低高度
-    decrease_width: 減小寬度
-    destroy_current_workspace: 破壞當前工作區
+    create_new_workspace: 建立新工作區
+    cycle_stack_next: 切換到下一個堆疊
+    cycle_stack_prev: 切換到上一個堆疊
+    cycle_wallpaper_next: 切換到下一張桌布
+    cycle_wallpaper_prev: 切換到上一張桌布
+    decrease_height: 減少高度
+    decrease_width: 減少寬度
+    destroy_current_workspace: 刪除目前工作區
     focus_bottom: 聚焦底部
-    focus_latest: 重點最新
-    focus_left: 焦點左
-    focus_right: 重點正確
+    focus_latest: 聚焦最新
+    focus_left: 聚焦左側
+    focus_right: 聚焦右側
     focus_top: 聚焦頂部
-    increase_height: 增加身高
+    increase_height: 增加高度
     increase_width: 增加寬度
     misc_force_restart: 強制重新啟動
-    misc_open_settings: 打開設置
-    misc_toggle_lock_tracing: 切換鎖定跟踪（日誌）
-    misc_toggle_win_event_tracing: 切換Win事件跟踪（日誌）
+    misc_open_settings: 開啟設定
+    misc_toggle_lock_tracing: 切換鎖定追蹤（日誌）
+    misc_toggle_win_event_tracing: 切換 Windows 事件追蹤（日誌）
     move_to_workspace: 移至工作區{{0}}
-    move_window_down: 將窗口移至底部
-    move_window_left: 向左移動窗口
-    move_window_right: 向右移動窗口
-    move_window_up: 將窗口移至頂部
-    pause_tiling: 暫停瓷磚窗口管理器
-    reserve_bottom: 儲備底部
-    reserve_float: 儲備浮子
-    reserve_left: 保留剩下
-    reserve_right: 保留權
-    reserve_stack: 儲備堆
-    reserve_top: 儲備頂
+    move_window_down: 將視窗移至底部
+    move_window_left: 將視窗移至左側
+    move_window_right: 將視窗移至右側
+    move_window_up: 將視窗移至頂部
+    pause_tiling: 暫停平鋪視窗管理器
+    reserve_bottom: 保留底部
+    reserve_float: 保留浮動
+    reserve_left: 保留左側
+    reserve_right: 保留右側
+    reserve_stack: 保留堆疊
+    reserve_top: 保留頂部
     restore_sizes: 還原尺寸
-    send_to_workspace: 發送到工作區{{0}}
-    start_weg_app: 聚焦或啟動應用程序{{0}}
+    send_to_workspace: 傳送至工作區 {{0}}
+    start_weg_app: 聚焦或啟動應用程式 {{0}}
     switch_to_next_workspace: 切換到下一個工作區
-    switch_to_previous_workspace: 切換到以前的工作區
-    switch_workspace: 切換到工作區{{0}}
-    toggle_float: 切換窗口浮點模式
-    toggle_launcher: 切換發射器
-    toggle_monocle: 切換工作區單片模式
-  readonly_tooltip: 這是只讀的捷徑
-  reset: 重置為默認值
+    switch_to_previous_workspace: 切換到上一個工作區
+    switch_workspace: 切換到工作區 {{0}}
+    toggle_float: 切換視窗浮動模式
+    toggle_launcher: 切換啟動器
+    toggle_monocle: 切換工作區單一視窗模式
+  readonly_tooltip: 此為唯讀快捷鍵
+  reset: 重設為預設值
 sides:
   bottom: 底部
-  left: 左邊
-  right: 正確的
+  left: 左側
+  right: 右側
   top: 頂部
 start:
   message: >-
-    歡迎來到Seelen UI，這是終極台式機環境，並帶有合併的瓷磚Windows Manager，以增強您的Windows體驗！ 通過我們的直觀界面和高級功能探索效率和多任務的新時代。
+    歡迎使用 Seelen UI，這是終極桌面環境，內建平鋪視窗管理器，提升您的 Windows 體驗！透過我們直覺的介面和進階功能，探索效率與多工的新境界。
   message_accent: 通過風格優化您的生產力！
   title: 歡迎！
 toolbar:
   auto_hide: 自動隱藏
-  delay_to_hide: 延遲隱藏
-  delay_to_show: 延遲顯示
+  delay_to_hide: 隱藏延遲
+  delay_to_show: 顯示延遲
   dock_side: 位置
-  dynamic_color: 動態顏色
+  dynamic_color: 動態色彩
   dynamic_color_tooltip: >-
-    基於聚焦窗口啟用動態背景和前景顏色。 （顏色可以被主題覆蓋）
-  enable: 啟用高檔工具欄
+    根據焦點視窗變更背景與前景色（主題可能會覆蓋）
+  enable: 啟用精美工具列
   height: 高度
   hide_mode:
     always: 總是
-    never: 絕不
-    on_overlap: 在重疊
-  label: 工具欄
+    never: 永不
+    on_overlap: 重疊時
+  label: 工具列
   placeholder: { }
-  show_hibernate: 在電源菜單上顯示Hibernate按鈕
+  show_hibernate: 在電源選單顯示休眠按鈕
 update:
-  available: 更新可用！
+  available: 有可用更新！
   channel: 更新頻道
-  downloading: 下載...
+  downloading: 下載中……
 wall:
-  backgrounds: 壁紙
+  backgrounds: 桌布
   blur: 模糊
   contrast: 對比
-  enable: 啟用壁紙經理
+  enable: 啟用桌布管理器
   fit:
     contain: 包含
-    cover: 覆蓋
-    fill: 充滿
-  flipHorizontal: 翻轉水平
-  flipVertical: 翻轉垂直
+    cover: 填滿
+    fill: 延展
+  flipHorizontal: 水平翻轉
+  flipVertical: 垂直翻轉
   hours: 小時
-  interval: 每次更改牆紙
+  interval: 更換桌布時間間隔
   minutes: 分鐘
-  no_background: 使用主題的背景為空幻燈片。
+  no_background: 空幻燈片，使用主題背景。
   objectFit: 背景擬合
   objectPosition: 背景位置
   overlayColor: 覆蓋顏色
-  overlayMixBlendMode: 疊加混合混合模式
+  overlayMixBlendMode: 覆蓋混合模式
   playback: 播放速度
   position:
     bottom: 底部
     center: 中心
-    left: 左邊
-    right: 正確的
+    left: 左側
+    right: 右側
     top: 頂部
-  random: 隨機化幻燈片
+  random: 隨機播放幻燈片
   saturation: 飽和
   seconds: 秒
-  withOverlay: 使用覆蓋
+  withOverlay: 使用覆蓋層
 weg:
   auto_hide: 自動隱藏
-  delay_to_hide: 延遲隱藏
-  delay_to_show: 延遲顯示
+  delay_to_hide: 隱藏延遲
+  delay_to_show: 顯示延遲
   dock_side: 位置
-  enable: 啟用碼頭/任務欄
-  filtering: 項目過濾
+  enable: 啟用 Dock / 工作列
+  filtering: 項目篩選
   gap: 差距
   hide_mode:
     always: 總是
-    never: 絕不
-    on_overlap: 在重疊
+    never: 永不
+    on_overlap: 重疊時
   items:
-    gap: 項目之間的空間
-    label: 專案
+    gap: 項目間距
+    label: 項目
     pinned_visibility:
       always: 總是
-      label: 固定物品可見性
-      when_primary: 當監視器是主要的
-    show_instance_counter: 顯示打開的Windows計數器
-    show_window_title: 顯示打開的窗口標題（僅水平）
+      label: 釘選項目可見性
+      when_primary: 當顯示器為為主螢幕時
+    show_instance_counter: 顯示視窗數量
+    show_window_title: 顯示視窗標題（僅橫向）
     size: 項目大小
     temporal_visibility:
       all: 全部
-      label: 未鎖定的物品可見性
-      on_monitor: 在顯示器上
-    thumbnail_generation_enabled: 在項目懸停上生成縮略圖
-    visible_separators: 可見的分離器
-  label: 碼頭/任務欄
-  margin: 利潤
+      label: 未釘選項目可見性
+      on_monitor: 所在螢幕
+    thumbnail_generation_enabled: 當滑鼠懸停項目時產生縮圖
+    visible_separators: 顯示分隔線
+  label: Dock / 工作列
+  margin: 邊距
   mode:
-    full_width: 全屏寬度
-    min_content: 很小
-  padding: 填充
-  show_end_task: 在任務欄中顯示最終任務
+    full_width: 全螢幕寬度
+    min_content: 最小寬度
+  padding: 內距
+  show_end_task: 在工作列中顯示結束任務
   width: 寬度
 widget:
-  enable: 啟用這個小部件
-  enable_for_monitor: 在此顯示器上啟用
+  enable: 啟用小工具
+  enable_for_monitor: 在此螢幕啟用
   instances: 實例
 wm:
   author: 作者
   border:
-    enable: 啟用Window的邊框
-    offset: 邊界偏移
-    width: 邊界寬度
+    enable: 啟用視窗邊框
+    offset: 邊框偏移
+    width: 邊框寬度
   description: 描述
-  enable: 啟用平鋪窗口管理器
-  layout: 佈局
-  resize_delta: 調整三角洲大小（％）
-  space_between_containers: 容器之間的空間
-  workspace_offset: 工作區偏移（邊距）
-  workspace_padding: 工作區填充
-'yes': '是的'
+  enable: 啟用平鋪視窗管理器
+  layout: 版面配置
+  resize_delta: 大小調整增幅（%）
+  space_between_containers: 容器間距
+  workspace_offset: 工作區邊距
+  workspace_padding: 工作區內距
+'yes': '是'
