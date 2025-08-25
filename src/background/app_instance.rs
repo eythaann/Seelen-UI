@@ -89,13 +89,9 @@ impl SluMonitorInstance {
             }
         });
 
-        log::debug!("?????????????????? // {}", third_party_widgets.len());
-
         let state = FULL_STATE.load();
         for (key, widget) in third_party_widgets {
             if !state.is_widget_enable_on_monitor(&widget, &self.main_target_id) {
-                log::debug!("WTF???????????????");
-
                 self.widgets.remove(&key); // unload disabled widgets
                 continue;
             }

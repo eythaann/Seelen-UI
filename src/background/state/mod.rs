@@ -72,7 +72,6 @@ impl FullState {
             .is_none_or(|config| config.enabled);
 
         if !is_globally_enabled {
-            log::debug!("WHY?? {:?}", widget.id);
             return false;
         }
 
