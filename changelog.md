@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- third party widgets sometimes not starting.
+
 ## [2.4.1]
 ### features
 - add a button to delete resources.

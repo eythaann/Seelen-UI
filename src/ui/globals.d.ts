@@ -29,4 +29,5 @@ interface Window {
     };
     invoke: any;
   };
+  __SLU_WIDGET: import('@seelen-ui/lib/types').Widget;
 }

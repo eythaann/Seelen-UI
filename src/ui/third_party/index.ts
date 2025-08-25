@@ -1,14 +1,8 @@
-import type { Widget } from '@seelen-ui/lib/types';
 import { removeDefaultWebviewActions } from '@shared/setup';
-import { _invoke, WebviewInformation } from 'libs/widgets-integrity/_tauri';
-
-const currentWidgetId = new WebviewInformation().widgetId;
-const widgetList = await _invoke<Widget[]>('state_get_widgets');
-const widget = widgetList.find((widget) => widget.id === currentWidgetId)!;
 
 removeDefaultWebviewActions();
 
-const { js, css, html } = widget;
+const { js, css, html } = window.__SLU_WIDGET;
 
 if (html) {
   document.body.innerHTML = html;

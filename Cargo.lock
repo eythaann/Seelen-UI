@@ -2290,7 +2290,7 @@ dependencies = [
  "js-sys",
  "log",
  "wasm-bindgen",
- "windows-core 0.60.1",
+ "windows-core 0.59.0",
 ]
 
 [[package]]
@@ -3308,7 +3308,7 @@ version = "0.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77e878c846a8abae00dd069496dbe8751b16ac1c3d6bd2a7283a938e8228f90d"
 dependencies = [
- "proc-macro-crate 1.3.1",
+ "proc-macro-crate 2.0.0",
  "proc-macro2",
  "quote",
  "syn 2.0.106",
@@ -4975,7 +4975,7 @@ dependencies = [
 [[package]]
 name = "seelen-core"
 version = "2.4.1"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#8391121174148b81af1e15d46edc6df2263f946a"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#f60e3271c32dc481cdecb04c2f6c029abdc26d33"
 dependencies = [
  "base64 0.22.1",
  "chrono",
@@ -7157,7 +7157,7 @@ version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0978bf7171b3d90bac376700cb56d606feb40f251a475a5d6634613564460b22"
 dependencies = [
- "windows-sys 0.52.0",
+ "windows-sys 0.48.0",
 ]
 
 [[package]]
