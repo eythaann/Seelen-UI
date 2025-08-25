@@ -10,29 +10,29 @@ resource:
   download_failed_body: >-
     下載資源時發生錯誤，請向 Seelen 開發團隊回報此問題。
   download_failed_title: 資源下載失敗
-  downloading: 正在下載資源...
-  downloading_body: 這可能需要幾秒鐘，請不要關閉窗口。
-  enable: 使能夠
+  downloading: 正在下載資源……
+  downloading_body: 這可能需要幾秒鐘時間，請不要關閉視窗。
+  enable: 啟用
 runtime:
-  corrupted_data: 損壞的數據
-  corrupted_file: 使用默認值改為損壞配置文件。
-  corrupted_file_path: 損壞的文件路徑
-  download: 轉到下載頁面
-  not_found: WebView2運行時找不到
-  not_found_description: Seelen UI需要WebView2運行時。 請安裝。
-  outdated: WebView2運行時過時
+  corrupted_data: 資料已損毀
+  corrupted_file: 設定檔已損毀，將改用預設值。
+  corrupted_file_path: 損毀的檔案路徑
+  download: 前往下載頁面
+  not_found: 找不到 WebView2 執行階段
+  not_found_description: Seelen UI 需要 WebView2 執行階段，請安裝它。
+  outdated: WebView2 執行階段版本過舊
   outdated_description: >-
-    Seelen UI需要WebView2運行時％{min_version}或更高。 請更新。
+    Seelen UI 需要 WebView2 執行階段 %{min_version} 或更新版本，請進行更新。
 service:
-  not_running: Seelen UI服務不運行
+  not_running: Seelen UI 服務未執行
   not_running_description: >-
-    SEELEN UI服務（SLU服務）是該應用程序正常工作的依賴性/助手。
-  not_running_ok: 開始服務
+    Seelen UI 服務 (slu-service) 是應用程式正常運作所需的相依性/協助程式。
+  not_running_ok: 啟動服務
 shortcut:
   register:
-    placeholder: 按任何鍵組合
-    title: 註冊新快捷方式
+    placeholder: 按下任意按鍵組合
+    title: 註冊新快速鍵
 tray:
-  quit: 辭職
-  restart: 重新啟動UI
+  quit: 結束
+  restart: 重新啟動 UI
   settings: 設定
