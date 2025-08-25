@@ -26,8 +26,9 @@ impl Drop for WidgetInstance {
 }
 
 impl WidgetInstance {
-    pub fn load(widget: Widget, monitor_id: &str) -> Result<Self> {
+    pub fn load(widget: &Widget, monitor_id: &str) -> Result<Self> {
         let label = WidgetWebviewLabel::new(&widget.id, Some(monitor_id), None);
+        log::info!("Creating {}", label.decoded);
 
         let state = FULL_STATE.load();
         let title = widget.metadata.display_name.get(state.locale());

@@ -25,7 +25,11 @@ use tokio::sync::mpsc::Sender;
 use windows::Win32::{Security::SE_TCB_NAME, UI::WindowsAndMessaging::SW_MINIMIZE};
 use windows_api::WindowsApi;
 
-use crate::{app_management::launch_seelen_ui, hotkeys::stop_app_shortcuts};
+use crate::{
+    app_management::launch_seelen_ui,
+    enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
+    hotkeys::stop_app_shortcuts,
+};
 
 pub static SERVICE_NAME: LazyLock<WindowsString> =
     LazyLock::new(|| WindowsString::from_str("slu-service"));
@@ -138,6 +142,7 @@ async fn main() -> Result<()> {
     if is_local_dev() {
         let window = WindowsApi::get_console_window();
         let _ = WindowsApi::show_window(window.0 as _, SW_MINIMIZE.0);
+        add_installation_dir_to_path()?;
     }
 
     ASYNC_RUNTIME_HANDLE
@@ -168,6 +173,10 @@ async fn main() -> Result<()> {
     restore_native_taskbar()?;
     stop_app_shortcuts();
     log::info!("Seelen UI Service exited with code {exit_code}");
+
+    if is_local_dev() {
+        remove_installation_dir_from_path()?;
+    }
 
     if exit_code == 0 {
         Ok(())

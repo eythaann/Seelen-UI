@@ -10,6 +10,7 @@ mod error;
 mod exposed;
 mod hook;
 mod modules;
+mod resources;
 mod restoration_and_migrations;
 mod state;
 mod system;

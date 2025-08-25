@@ -30,16 +30,19 @@ pub fn add_installation_dir_to_path() -> Result<()> {
     }
 
     let enviroment = open_machine_enviroment()?;
-    let env_path: String = enviroment.get_value("Path")?;
+    let paths: String = enviroment.get_value("Path")?;
+    let mut paths: Vec<String> = paths.split(';').map(|s| s.to_owned()).collect();
 
     let install_folder = std::env::current_exe()?
         .parent()
         .expect("Failed to get parent directory")
         .to_string_lossy()
         .to_string();
-    if !env_path.contains(&install_folder) {
+
+    if !paths.contains(&install_folder) {
         log::trace!("Adding installation directory to PATH environment variable");
-        enviroment.set_value("Path", &format!("{install_folder};{env_path}"))?;
+        paths.push(install_folder);
+        enviroment.set_value("Path", &paths.join(";"))?;
     }
     Ok(())
 }
@@ -51,17 +54,19 @@ pub fn remove_installation_dir_from_path() -> Result<()> {
     }
 
     let enviroment = open_machine_enviroment()?;
-    let env_path: String = enviroment.get_value("Path")?;
+    let paths: String = enviroment.get_value("Path")?;
+    let mut paths: Vec<String> = paths.split(';').map(|s| s.to_owned()).collect();
 
     let install_folder = std::env::current_exe()?
         .parent()
         .expect("Failed to get parent directory")
         .to_string_lossy()
         .to_string();
-    if env_path.contains(&install_folder) {
+
+    if paths.contains(&install_folder) {
         log::trace!("Removing installation directory from PATH environment variable");
-        let new_path = env_path.replace(&format!("{install_folder};"), "");
-        enviroment.set_value("Path", &new_path)?;
+        paths.retain(|p| p != &install_folder);
+        enviroment.set_value("Path", &paths.join(";"))?;
     }
     Ok(())
 }

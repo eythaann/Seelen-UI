@@ -3,9 +3,14 @@ use std::{collections::HashMap, path::PathBuf};
 use seelen_core::system_state::MonitorId;
 
 use crate::{
-    error::Result, state::application::FullState, widgets::third_party::WidgetInstance,
-    widgets::toolbar::FancyToolbar, widgets::weg::SeelenWeg,
-    widgets::window_manager::instance::WindowManagerV2, windows_api::monitor::MonitorView,
+    error::Result,
+    resources::RESOURCES,
+    state::application::{FullState, FULL_STATE},
+    widgets::{
+        third_party::WidgetInstance, toolbar::FancyToolbar, weg::SeelenWeg,
+        window_manager::instance::WindowManagerV2,
+    },
+    windows_api::monitor::MonitorView,
 };
 
 /// This struct stores the widgets of a monitor
@@ -72,24 +77,33 @@ impl SluMonitorInstance {
         Ok(())
     }
 
-    pub fn reload_widgets(&mut self, state: &FullState) -> Result<()> {
+    pub fn reload_widgets(&mut self) -> Result<()> {
         // unload uninstalled widgets
-        self.widgets.retain(|id, _| state.widgets.contains_key(id));
+        self.widgets
+            .retain(|key, _| RESOURCES.widgets.contains(key));
 
-        let third_party_widgets = state
-            .widgets
-            .iter()
-            .filter(|(_, w)| !w.metadata.internal.bundled);
-        for (id, widget) in third_party_widgets {
-            if !state.is_widget_enable_on_monitor(widget, &self.main_target_id) {
-                self.widgets.remove(id); // unload disabled widgets
+        let mut third_party_widgets = Vec::new();
+        RESOURCES.widgets.scan(|k, w| {
+            if !w.metadata.internal.bundled {
+                third_party_widgets.push((k.clone(), w.clone()));
+            }
+        });
+
+        log::debug!("?????????????????? // {}", third_party_widgets.len());
+
+        let state = FULL_STATE.load();
+        for (key, widget) in third_party_widgets {
+            if !state.is_widget_enable_on_monitor(&widget, &self.main_target_id) {
+                log::debug!("WTF???????????????");
+
+                self.widgets.remove(&key); // unload disabled widgets
                 continue;
             }
 
-            if !self.widgets.contains_key(id) {
+            if !self.widgets.contains_key(&key) {
                 self.widgets.insert(
-                    id.clone(),
-                    WidgetInstance::load(widget.clone(), &self.main_target_id)?,
+                    key.clone(),
+                    WidgetInstance::load(&widget, &self.main_target_id)?,
                 );
             }
         }
@@ -115,7 +129,7 @@ impl SluMonitorInstance {
             self.wm = None;
         }
 
-        self.reload_widgets(state)?;
+        self.reload_widgets()?;
         Ok(())
     }
 }

@@ -1,13 +1,9 @@
 use std::path::PathBuf;
 
 use itertools::Itertools;
-use seelen_core::{
-    resource::{ResourceId, ResourceKind, SluResource},
-    state::{
-        by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPack,
-        IconPackEntry, LauncherHistory, Plugin, Profile, Wallpaper, WegItems,
-        WegPinnedItemsVisibility, Widget,
-    },
+use seelen_core::state::{
+    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPack,
+    IconPackEntry, LauncherHistory, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -21,7 +17,7 @@ use crate::{
 
 use super::{
     application::{FullState, FULL_STATE},
-    domain::{AppConfig, Placeholder, Settings, Theme},
+    domain::{AppConfig, Placeholder, Settings},
 };
 
 #[tauri::command(async)]
@@ -29,11 +25,6 @@ pub fn state_get_icon_packs() -> Vec<IconPack> {
     let mutex = FULL_STATE.load().icon_packs().clone();
     let icon_packs = trace_lock!(mutex);
     icon_packs.owned_list()
-}
-
-#[tauri::command(async)]
-pub fn state_get_themes() -> Vec<Theme> {
-    FULL_STATE.load().themes().values().cloned().collect_vec()
 }
 
 #[tauri::command(async)]
@@ -144,23 +135,8 @@ pub fn state_request_wallpaper_addition() -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_plugins() -> Vec<Plugin> {
-    FULL_STATE.load().plugins().values().cloned().collect_vec()
-}
-
-#[tauri::command(async)]
-pub fn state_get_widgets() -> Vec<Widget> {
-    FULL_STATE.load().widgets().values().cloned().collect_vec()
-}
-
-#[tauri::command(async)]
 pub fn state_get_profiles() -> Vec<Profile> {
     FULL_STATE.load().profiles.clone()
-}
-
-#[tauri::command(async)]
-pub fn state_get_wallpapers() -> Vec<Wallpaper> {
-    FULL_STATE.load().wallpapers.clone()
 }
 
 #[tauri::command(async)]
@@ -176,49 +152,4 @@ pub fn state_delete_cached_icons() -> Result<()> {
 #[tauri::command(async)]
 pub fn state_add_icon_to_custom_icon_pack(_icon: IconPackEntry) -> Result<()> {
     todo!()
-}
-
-#[tauri::command(async)]
-pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
-    let guard = FULL_STATE.load();
-    match kind {
-        ResourceKind::Theme => {
-            for theme in guard.themes.values() {
-                if *theme.id == id {
-                    theme.delete()?;
-                }
-            }
-        }
-        ResourceKind::Plugin => {
-            for plugin in guard.plugins.values() {
-                if *plugin.id == id {
-                    plugin.delete()?;
-                }
-            }
-        }
-        ResourceKind::Widget => {
-            for widget in guard.widgets.values() {
-                if *widget.id == id {
-                    widget.delete()?;
-                }
-            }
-        }
-        ResourceKind::IconPack => {
-            let mutex = trace_lock!(guard.icon_packs);
-            for icon_pack in mutex.list() {
-                if *icon_pack.id == id {
-                    icon_pack.delete()?;
-                }
-            }
-        }
-        ResourceKind::Wallpaper => {
-            for wallpaper in &guard.wallpapers {
-                if *wallpaper.id == id {
-                    wallpaper.delete()?;
-                }
-            }
-        }
-        ResourceKind::SoundPack => {}
-    }
-    Ok(())
 }

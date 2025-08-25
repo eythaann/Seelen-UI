@@ -129,7 +129,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
             </Button>
           </Tooltip>
         )}
-        {!resource.metadata.bundled && (
+        {!resource.metadata.bundled && resource.metadata.path.includes('com.seelen.seelen-ui') && (
           <Tooltip title={t('resources.delete')} placement="left">
             <Popconfirm
               title={t('action.confirm')}

@@ -2,15 +2,15 @@ use std::sync::{atomic::AtomicBool, Arc, LazyLock};
 
 use getset::{Getters, MutGetters};
 use parking_lot::Mutex;
-use seelen_core::system_state::MonitorId;
+use seelen_core::{handlers::SeelenEvent, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
-use tauri::{AppHandle, Wry};
+use tauri::{AppHandle, Listener, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
 use crate::{
     app_instance::SluMonitorInstance,
     cli::ServicePipe,
-    error::Result,
+    error::{Result, ResultLogExt},
     hook::register_win_hook,
     log_error,
     modules::{
@@ -90,13 +90,6 @@ impl Seelen {
         }
         for instance in &mut self.instances {
             instance.ensure_positions()?;
-        }
-        Ok(())
-    }
-
-    pub fn on_widgets_change(&mut self, state: &FullState) -> Result<()> {
-        for monitor in &mut self.instances {
-            monitor.reload_widgets(state)?;
         }
         Ok(())
     }
@@ -206,6 +199,15 @@ impl Seelen {
                 state.settings.shortcuts.clone(),
             ))?;
         }
+
+        get_app_handle().listen(SeelenEvent::StateWidgetsChanged, |_| {
+            std::thread::spawn(|| {
+                let mut guard = trace_lock!(SEELEN);
+                for monitor in &mut guard.instances {
+                    monitor.reload_widgets().log_error();
+                }
+            });
+        });
 
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())

@@ -32,31 +32,13 @@ impl FullState {
 
     fn _read_settings(&mut self) -> Result<()> {
         let path_exists = SEELEN_COMMON.settings_path().exists();
-        let mut should_write_settings = !path_exists;
-
         if path_exists {
             self.settings = Self::get_settings_from_path(SEELEN_COMMON.settings_path())?;
             self.settings.migrate()?;
-            if !self.settings.old_active_themes.is_empty() {
-                should_write_settings = true;
-                for theme in self.themes.values() {
-                    if self
-                        .settings
-                        .old_active_themes
-                        .contains(&theme.metadata.internal.filename)
-                    {
-                        self.settings.active_themes.push(theme.id.clone());
-                    }
-                }
-                self.settings.old_active_themes.clear();
-            }
             self.settings.sanitize()?;
+        } else {
+            self.write_settings()?; // create initial settings file
         }
-
-        if should_write_settings {
-            self.write_settings()?;
-        }
-
         Ok(())
     }
 

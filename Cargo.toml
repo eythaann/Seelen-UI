@@ -72,6 +72,7 @@ windows = "0.59.0"
 windows-core = "0.59.0"
 winreg = "0.55.0"
 time = "0.3.41"
+scc = "2.4.0"
 
 [[bin]]
 name = "seelen-ui"
@@ -237,6 +238,7 @@ windows = { workspace = true, features = [
     "Data_Xml_Dom",
 ] }
 time = { workspace = true, features = ["formatting", "local-offset"] }
+scc = { workspace = true }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

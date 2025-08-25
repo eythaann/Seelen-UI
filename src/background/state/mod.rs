@@ -14,6 +14,8 @@ use seelen_core::{
 };
 use uuid::Uuid;
 
+use crate::{resources::RESOURCES, windows_api::monitor::Monitor};
+
 impl FullState {
     pub fn is_weg_enabled(&self) -> bool {
         self.settings.by_widget.weg.enabled
@@ -70,6 +72,7 @@ impl FullState {
             .is_none_or(|config| config.enabled);
 
         if !is_globally_enabled {
+            log::debug!("WHY?? {:?}", widget.id);
             return false;
         }
 
@@ -81,7 +84,7 @@ impl FullState {
                 .is_none_or(|monitor_config| {
                     monitor_config.by_widget.is_widget_enabled(&widget.id)
                 }),
-            _ => false,
+            _ => Monitor::primary().stable_id2().ok().as_ref() == Some(monitor_id),
         }
     }
 
@@ -113,7 +116,16 @@ impl FullState {
 
         let layout_id = self.get_wm_layout_id(workspace_id);
 
-        let plugin_with_layout = self.plugins().values().find(|p| p.id == layout_id);
+        let mut plugin_with_layout = None;
+        RESOURCES.plugins.any(|_, p| {
+            if p.id == layout_id {
+                plugin_with_layout = Some(p.clone());
+                true
+            } else {
+                false
+            }
+        });
+
         let Some(plugin) = plugin_with_layout else {
             return base;
         };

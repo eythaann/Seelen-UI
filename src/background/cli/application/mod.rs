@@ -1,5 +1,4 @@
 mod debugger;
-mod resources;
 mod uri;
 mod win32;
 
@@ -7,17 +6,22 @@ use std::sync::atomic::Ordering;
 
 use clap::Parser;
 use debugger::DebuggerCli;
-use resources::WidgetCli;
 use serde::{Deserialize, Serialize};
 use slu_ipc::AppIpc;
 use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::{
-    app::SEELEN, cli::application::uri::process_uri, error::Result, trace_lock,
-    virtual_desktops::cli::VirtualDesktopCli, widgets::launcher::cli::AppLauncherCli,
-    widgets::popups::cli::PopupsCli, widgets::show_settings, widgets::weg::cli::WegCli,
-    widgets::window_manager::cli::WindowManagerCli,
+    app::SEELEN,
+    cli::application::uri::process_uri,
+    error::Result,
+    resources::cli::ResourceManagerCli,
+    trace_lock,
+    virtual_desktops::cli::VirtualDesktopCli,
+    widgets::{
+        launcher::cli::AppLauncherCli, popups::cli::PopupsCli, show_settings, weg::cli::WegCli,
+        window_manager::cli::WindowManagerCli,
+    },
 };
 
 /// Seelen Command Line Interface
@@ -49,7 +53,7 @@ pub enum AppCliCommand {
     WindowManager(WindowManagerCli),
     Popup(PopupsCli),
     Weg(WegCli),
-    Widget(WidgetCli),
+    Resource(ResourceManagerCli),
     Win32(Win32Cli),
 }
 
@@ -161,7 +165,7 @@ impl AppCliCommand {
             AppCliCommand::Weg(command) => {
                 command.process()?;
             }
-            AppCliCommand::Widget(command) => {
+            AppCliCommand::Resource(command) => {
                 command.process()?;
             }
             AppCliCommand::Popup(command) => {

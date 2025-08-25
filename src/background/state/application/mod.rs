@@ -1,14 +1,10 @@
 mod apps_config;
 mod events;
 mod icons;
-mod plugins;
 mod profiles;
 mod settings;
-mod themes;
 mod toolbar_items;
-mod wallpapers;
 mod weg_items;
-mod widgets;
 
 pub use icons::download_remote_icons;
 
@@ -23,22 +19,23 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::state::{
-    CssStyles, LauncherHistory, Plugin, Profile, SluPopupConfig, SluPopupContent, Wallpaper,
-    WegItems, Widget,
+use seelen_core::{
+    resource::ResourceKind,
+    state::{CssStyles, LauncherHistory, Profile, SluPopupConfig, SluPopupContent, WegItems},
 };
 use std::{
-    collections::{HashMap, HashSet, VecDeque},
+    collections::{HashSet, VecDeque},
     path::{Path, PathBuf},
     sync::Arc,
     time::Duration,
 };
 
 use crate::{
-    error::Result, log_error, utils::constants::SEELEN_COMMON, widgets::popups::POPUPS_MANAGER,
+    error::Result, log_error, resources::RESOURCES, utils::constants::SEELEN_COMMON,
+    widgets::popups::POPUPS_MANAGER,
 };
 
-use super::domain::{AppConfig, Placeholder, Settings, Theme};
+use super::domain::{AppConfig, Placeholder, Settings};
 
 lazy_static! {
     pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
@@ -58,12 +55,8 @@ pub struct FullState {
     pub weg_items: WegItems,
     pub toolbar_items: Placeholder,
     pub launcher_history: LauncherHistory,
-
-    pub themes: HashMap<PathBuf, Theme>,
-    pub plugins: HashMap<PathBuf, Plugin>,
-    pub widgets: HashMap<PathBuf, Widget>,
+    // ====== resources ========
     pub icon_packs: Arc<Mutex<IconPacksManager>>,
-    pub wallpapers: Vec<Wallpaper>,
 }
 
 unsafe impl Sync for FullState {}
@@ -79,11 +72,7 @@ impl FullState {
             weg_items: WegItems::default(),
             toolbar_items: Placeholder::default(),
             launcher_history: LauncherHistory::default(),
-            themes: HashMap::new(),
-            plugins: HashMap::new(),
-            widgets: HashMap::new(),
             icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
-            wallpapers: Vec::new(),
         };
         manager.load_all()?; // ScaDaned log shows a deadlock here.
         manager.start_listeners()?;
@@ -214,8 +203,8 @@ impl FullState {
 
         if themes_changed {
             log::info!("Theme changed");
-            self.load_themes()?;
-            self.emit_themes()?;
+            RESOURCES.load_all_of_type(ResourceKind::Theme)?;
+            RESOURCES.emit_themes()?;
         }
 
         if app_configs_changed {
@@ -226,20 +215,20 @@ impl FullState {
 
         if plugins_changed {
             log::info!("Plugins changed");
-            self.load_plugins()?;
-            self.emit_plugins()?;
+            RESOURCES.load_all_of_type(ResourceKind::Plugin)?;
+            RESOURCES.emit_plugins()?;
         }
 
         if widgets_changed {
             log::info!("Widgets changed");
-            self.load_widgets()?;
-            self.emit_widgets()?;
+            RESOURCES.load_all_of_type(ResourceKind::Widget)?;
+            RESOURCES.emit_widgets()?;
         }
 
         if wallpapers_changed {
             log::info!("Wallpapers changed");
-            self.load_wallpapers()?;
-            self.emit_wallpapers()?;
+            RESOURCES.load_all_of_type(ResourceKind::Wallpaper)?;
+            RESOURCES.emit_wallpapers()?;
         }
 
         // important: settings changed should be the last one to avoid use unexisting state
@@ -371,9 +360,6 @@ impl FullState {
 
     /// We log each step on this cuz for some reason a deadlock is happening somewhere.
     fn load_all(&mut self) -> Result<()> {
-        log::trace!("Initial load: themes");
-        self.load_themes()?; // themes needs to be loaded before settings, for a needed migration since v2.3.8
-
         log::trace!("Initial load: settings");
         self.read_settings();
 
@@ -383,23 +369,26 @@ impl FullState {
         log::trace!("Initial load: toolbar items");
         self.read_toolbar_items();
 
-        log::trace!("Initial load: icons packs");
-        self.load_icons_packs(true)?;
-
         log::trace!("Initial load: settings by app");
         self.load_settings_by_app();
 
         log::trace!("Initial load: history");
         self.load_history();
 
+        log::trace!("Initial load: themes");
+        RESOURCES.load_all_of_type(ResourceKind::Theme)?;
+
         log::trace!("Initial load: plugins");
-        self.load_plugins()?;
+        RESOURCES.load_all_of_type(ResourceKind::Plugin)?;
 
         log::trace!("Initial load: widgets");
-        self.load_widgets()?;
+        RESOURCES.load_all_of_type(ResourceKind::Widget)?;
 
         log::trace!("Initial load: wallpapers");
-        self.load_wallpapers()?;
+        RESOURCES.load_all_of_type(ResourceKind::Wallpaper)?;
+
+        log::trace!("Initial load: icons packs");
+        self.load_icons_packs(true)?;
 
         log::trace!("Initial load: profiles");
         self.load_profiles()?;
