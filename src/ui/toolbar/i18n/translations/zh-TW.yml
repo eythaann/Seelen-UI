@@ -1,84 +1,84 @@
 bluetooth:
-  available: 可用設備（未配對）
+  available: 可用裝置（未配對）
   cancel: 取消
-  connected: 連接的設備
-  forget: 忘記
-  lowenergy: 低能量
-  more: 更多藍牙設置
-  not_found: 找不到藍牙設備
-  pair: 一對
-  paired: 保存的設備
+  connected: 已連線的裝置
+  forget: 忘記裝置
+  lowenergy: 低功耗
+  more: 更多藍牙設定
+  not_found: 找不到藍牙裝置
+  pair: 配對
+  paired: 已保存的裝置
   placeholder:
-    passphrase: 密碼，代碼或PIN
-  scanning: 掃描設備
+    passphrase: 密碼、配對碼或 PIN
+  scanning: 正在掃描裝置
 context_menu:
-  add_custom_text: 添加自定義文本項目
-  modules: 模塊
-  remove: 刪除模塊
-  reorder_disable: 鎖工具欄
-  reorder_enable: 解鎖工具欄
-  restore: 還原為默認
+  add_custom_text: 新增自訂文字項目
+  modules: 模組
+  remove: 移除模組
+  reorder_disable: 鎖定工具列
+  reorder_enable: 解鎖工具列
+  restore: 還原為預設值
   settings: 設定
   task_manager: 工作管理員
 keyboard:
-  more: 更多鍵盤設置
-  title: 鍵盤佈局
+  more: 更多鍵盤設定
+  title: 鍵盤配置
 media:
-  default_multimedia_volume: 多媒體體積
+  default_multimedia_volume: 多媒體音量
   device:
     channel:
-      system: 系統聲音
+      system: 系統音效
     comunications: 通訊
-    missing: 缺少設備
-    mixer: 音量混合器
+    missing: 缺少裝置
+    mixer: 音量混音器
     multimedia: 多媒體
-    settings: 更多設備設置
-    volume: 設備音量
-  input_devices: 輸入設備
-  output_devices: 輸出設備
+    settings: 更多裝置設定
+    volume: 裝置音量
+  input_devices: 輸入裝置
+  output_devices: 輸出裝置
   players: 媒體播放器
 network:
   available: 可用網絡
-  connect: 連接
-  connected: 連接到
-  disconnect: 斷開
+  connect: 連線
+  connected: 已連線至
+  disconnect: 中斷連線
   hidden: 隱藏網絡
-  more: 更多網絡設置
-  not_found: 找不到Wi-Fi網絡
+  more: 更多網路設定
+  not_found: 找不到 Wi-Fi 網路
   placeholder:
     password: 密碼
-  saved: 保存的網絡
-  scanning: 掃描網絡
-  secured: 加密網絡
+  saved: 已保存的網路
+  scanning: 正在掃描網路
+  secured: 加密網路
 notifications:
   clear: 清除全部
   empty: 沒有通知
-  settings: 更多的通知設置
+  settings: 更多通知設定
   title: 通知
 placeholder:
-  battery_remaining: '％ 其餘的'
-  bluetooth_devices: 藍牙和設備
-  ethernet_connected: 互聯網訪問
-  ethernet_disconnected: 沒有互聯網訪問
+  battery_remaining: '% 剩餘電量'
+  bluetooth_devices: 藍牙與裝置
+  ethernet_connected: 已連接網際網路
+  ethernet_disconnected: 無網際網路連接
   notifications: 通知
-  open_system_tray: 打開的系統托盤
-  settings: 快速設置
-  smart_charge: '  - 明智的費用'
-  volume: 體積
+  open_system_tray: 開啟系統匣
+  settings: 快速設定
+  smart_charge: ' - 智慧充電'
+  volume: 音量
 settings:
-  app_settings: 應用設置
-  brightness: 亮度
-  hibernate: 冬眠
-  lock: 鎖
-  log_out: 註銷
-  power: 力量
+  app_settings: 應用程式設定
+  brightness: 螢幕亮度
+  hibernate: 休眠
+  lock: 鎖定
+  log_out: 登出
+  power: 電源選項
   restart: 重新啟動
-  shutdown: 關閉
-  sleep: 睡覺
-  title: 設定
+  shutdown: 關機
+  sleep: 睡眠
+  title: 系統設定
 tray:
-  empty: '沒有托盤項目（注意：未實現Windows 10）'
-  unlabeled: 未標記的托盤圖標
+  empty: '沒有系統匣項目（註：Windows 10 尚未支援）'
+  unlabeled: 無標籤圖示
 userhome:
   empty_list: 沒有項目
   folders:
@@ -88,15 +88,15 @@ userhome:
     more_items: 顯示更多...
     music: 音樂
     pictures: 圖片
-    recent: 最近使用的
-    reduce_items: 少顯示...
-    title: 用戶目錄
+    recent: 最近使用
+    reduce_items: 顯示較少...
+    title: 使用者目錄
     videos: 影片
   profile:
-    accounts: 打開帳戶設置
-    open_onedrive: 打開OneDrive目錄
-    open_user_folder: 打開用戶目錄
+    accounts: 開啟帳戶設定
+    open_onedrive: 開啟 OneDrive 資料夾
+    open_user_folder: 開啟使用者資料夾
   seelen_options:
-    open_installation_folder: 打開Seelen設置文件夾
-    open_log_folder: 打開Seelen日誌文件夾
-    title: Seelen目錄
+    open_installation_folder: 開啟 Seelen 安裝資料夾
+    open_log_folder: 開啟 Seelen 日誌資料夾
+    title: Seelen 資料夾
