@@ -119,7 +119,7 @@ function _SlPopup<TProps extends BasicElementProps>(
 
   const updatePopupPosition = () => {
     if (debug) {
-      console.log('updatePopupPosition');
+      console.debug('updatePopupPosition');
     }
 
     if (!$was_open.value || !$is_open.value || !triggerRef.current || !popupRef.current) return;
@@ -131,7 +131,7 @@ function _SlPopup<TProps extends BasicElementProps>(
     );
 
     if (debug) {
-      console.log('position', position);
+      console.debug('position', position);
     }
 
     const newStyles = {

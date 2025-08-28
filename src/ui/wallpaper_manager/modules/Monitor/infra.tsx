@@ -6,7 +6,6 @@ import { $idle, $paused, $settings, $wallpapers } from '../shared/state';
 import { $get_active_wallpapers, $relativeMonitors } from './derived';
 
 export function MonitorContainers() {
-  console.log($relativeMonitors.value);
   return $relativeMonitors.value.map((monitor) => {
     return <Monitor key={monitor.id} monitor={monitor} />;
   });
@@ -100,6 +99,13 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
 
   const oldWallpaper = $wallpapers.value.find((wallpaper) => wallpaper.id === $old_id.value);
   const wallpaper = $wallpapers.value.find((wallpaper) => wallpaper.id === $current_id.value);
+
+  if ($old_id.value && !oldWallpaper) {
+    console.error('Old wallpaper not found (maybe removed?)', $old_id.value);
+  }
+  if ($current_id.value && !wallpaper) {
+    console.error('Wallpaper not found (maybe removed?)', $current_id.value);
+  }
 
   return (
     <div
