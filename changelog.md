@@ -4,6 +4,7 @@
 ### fix
 - third party widgets sometimes not starting.
 - can not save settings on empty wallpaper list.
+- not updating UI on remotion of resources.
 
 ## [2.4.1]
 ### features

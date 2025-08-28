@@ -10,44 +10,55 @@ use std::sync::Arc;
 pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
     match kind {
         ResourceKind::Theme => {
-            RESOURCES.themes.scan(|_, v| {
+            RESOURCES.themes.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
                     log_error!(v.delete());
+                    return false;
                 }
+                true
             });
         }
         ResourceKind::Plugin => {
-            RESOURCES.plugins.scan(|_, v| {
+            RESOURCES.plugins.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
                     log_error!(v.delete());
+                    return false;
                 }
+                true
             });
         }
         ResourceKind::Widget => {
-            RESOURCES.widgets.scan(|_, v| {
+            RESOURCES.widgets.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
                     log_error!(v.delete());
+                    return false;
                 }
+                true
             });
         }
         ResourceKind::IconPack => {
-            RESOURCES.icon_packs.scan(|_, v| {
+            RESOURCES.icon_packs.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
                     log_error!(v.delete());
+                    return false;
                 }
+                true
             });
         }
         ResourceKind::Wallpaper => {
-            RESOURCES.wallpapers.scan(|_, v| {
+            RESOURCES.wallpapers.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
                     log_error!(v.delete());
+                    return false;
                 }
+                true
             });
         }
         ResourceKind::SoundPack => {
             // feature not implemented
         }
     }
+    RESOURCES.emit_kind_changed(&kind)?;
     Ok(())
 }
 
