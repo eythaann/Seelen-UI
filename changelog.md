@@ -6,6 +6,7 @@
 - can not save settings on empty wallpaper list.
 - not updating UI on remotion of resources.
 - button to update downloaded resources not working properly.
+- crash on max integer caused by media players.
 
 ## [2.4.1]
 ### features

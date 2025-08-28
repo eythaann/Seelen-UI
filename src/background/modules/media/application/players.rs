@@ -31,11 +31,11 @@ fn timeline_from_raw(
 ) -> windows_core::Result<MediaPlayerTimeline> {
     // TimeSpan is in ticks of 100ns
     Ok(MediaPlayerTimeline {
-        start: raw.StartTime()?.Duration * 100,
-        end: raw.EndTime()?.Duration * 100,
-        position: raw.Position()?.Duration * 100,
-        min_seek: raw.MinSeekTime()?.Duration * 100,
-        max_seek: raw.MaxSeekTime()?.Duration * 100,
+        start: raw.StartTime()?.Duration.saturating_mul(100),
+        end: raw.EndTime()?.Duration.saturating_mul(100),
+        position: raw.Position()?.Duration.saturating_mul(100),
+        min_seek: raw.MinSeekTime()?.Duration.saturating_mul(100),
+        max_seek: raw.MaxSeekTime()?.Duration.saturating_mul(100),
         last_updated_time: raw.LastUpdatedTime()?.UniversalTime,
     })
 }
