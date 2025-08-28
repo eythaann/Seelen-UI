@@ -68,7 +68,7 @@ uuid = "1.8.0"
 widestring = "1.0.2"
 win-hotkeys = { git = "https://github.com/Seelen-Inc/windows-keyboard-hook.git" }
 win-screenshot = "4.0.8"
-windows = "0.59.0"
+windows = "0.61.3"
 windows-core = "0.59.0"
 winreg = "0.55.0"
 time = "0.3.41"

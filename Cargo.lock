@@ -5050,7 +5050,7 @@ dependencies = [
  "widestring",
  "win-hotkeys",
  "win-screenshot",
- "windows 0.59.0",
+ "windows 0.61.3",
  "windows-core 0.59.0",
  "winreg 0.55.0",
 ]
@@ -7189,16 +7189,6 @@ checksum = "e48a53791691ab099e5e2ad123536d0fff50652600abaf43bbf952894110d0be"
 dependencies = [
  "windows-core 0.52.0",
  "windows-targets 0.52.6",
-]
-
-[[package]]
-name = "windows"
-version = "0.59.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f919aee0a93304be7f62e8e5027811bbba96bcb1de84d6618be56e43f8a32a1"
-dependencies = [
- "windows-core 0.59.0",
- "windows-targets 0.53.3",
 ]
 
 [[package]]
