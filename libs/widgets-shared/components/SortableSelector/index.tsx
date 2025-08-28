@@ -85,7 +85,7 @@ export function VerticalSortableSelect<T extends string>({
 
     const oldPos = enabled.indexOf(active.id as T);
     const newPos = enabled.indexOf(over.id as T);
-    const newEnabled = arrayMove(enabled, oldPos, newPos);
+    const newEnabled = arrayMove(enabled, oldPos, newPos).filter(Boolean);
     onChange(newEnabled);
   }
 
