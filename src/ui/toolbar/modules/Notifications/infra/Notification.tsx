@@ -1,5 +1,6 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { AppNotification, ToastBindingEntry, ToastImage } from '@seelen-ui/lib/types';
+import { WindowsDateFileTimeToDate } from '@shared';
 import { FileIcon, Icon } from '@shared/components/Icon';
 import { cx } from '@shared/styles';
 import { Select, Tooltip } from 'antd';
@@ -9,13 +10,6 @@ import moment from 'moment';
 interface Props {
   notification: AppNotification;
   onClose?: () => void;
-}
-
-// Difference between Windows epoch (1601) and Unix epoch (1970) in milliseconds
-const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
-
-function WindowsDateFileTimeToDate(fileTime: bigint) {
-  return new Date(Number(fileTime / 10000n - EPOCH_DIFF_MILLISECONDS));
 }
 
 export function Notification({ notification, onClose }: Props) {

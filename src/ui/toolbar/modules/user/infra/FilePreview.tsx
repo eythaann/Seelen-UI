@@ -1,17 +1,12 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { File } from '@seelen-ui/lib/types';
+import { WindowsDateFileTimeToDate } from '@shared';
 import { FileIcon } from '@shared/components/Icon';
 import { Tooltip } from 'antd';
 import moment from 'moment';
 
 interface FilePreviewProps {
   file: File;
-}
-
-const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
-
-function WindowsDateFileTimeToDate(fileTime: bigint) {
-  return new Date(Number(BigInt(fileTime) / 10000n - EPOCH_DIFF_MILLISECONDS));
 }
 
 export function FilePreview({ file }: FilePreviewProps) {

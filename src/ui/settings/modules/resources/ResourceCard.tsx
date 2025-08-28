@@ -43,13 +43,14 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
 
   useEffect(() => {
     async function checkUpdate() {
-      if (!resource.metadata.downloaded_at) return;
-
+      if (!resource.metadata.filename.endsWith('.slu')) {
+        return;
+      }
       const res = await fetch(`https://product.seelen.io/resource/${resource.id.replace('@', '')}`);
       const remoteResource: Resource = await res.json();
       const lastUpdateRelease = new Date(remoteResource.updatedAt);
-      const downloadedAt = new Date(remoteResource.metadata.downloaded_at!);
-      setHasUpdate(lastUpdateRelease > downloadedAt);
+      const writtenAt = new Date(resource.metadata.writtenAt);
+      setHasUpdate(lastUpdateRelease > writtenAt);
     }
 
     checkUpdate();

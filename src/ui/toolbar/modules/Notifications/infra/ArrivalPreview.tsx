@@ -1,4 +1,5 @@
 import { AppNotification } from '@seelen-ui/lib/types';
+import { WindowsDateFileTimeToDate } from '@shared';
 import { useInterval } from '@shared/hooks';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -8,13 +9,7 @@ import { Selectors } from '../../shared/store/app';
 
 import { Notification } from './Notification';
 
-// Difference between Windows epoch (1601) and Unix epoch (1970) in milliseconds
-const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
 const NOTIFICATION_PREVIEW_TIME = 5 * 1000;
-
-function WindowsDateFileTimeToDate(fileTime: bigint) {
-  return new Date(Number(fileTime / 10000n - EPOCH_DIFF_MILLISECONDS));
-}
 
 export function ArrivalPreview() {
   const allNotifications = useSelector(Selectors.notifications);
