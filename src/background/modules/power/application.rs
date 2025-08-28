@@ -136,7 +136,7 @@ impl PowerManager {
                         elapsed.as_secs()
                     );
                     // Always restart the app after wake up event
-                    get_app_handle().restart();
+                    get_app_handle().request_restart();
                 }
                 _ => {}
             }

@@ -88,7 +88,10 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
 fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
     match event {
         tauri::RunEvent::Ready => {
-            log::info!("Setup was completed, app is ready.");
+            log::info!("Tauri Application is ready.");
+        }
+        tauri::RunEvent::Resumed => {
+            log::info!("Tauri Event Loop was resumed.");
         }
         tauri::RunEvent::ExitRequested { api, code, .. } => match code {
             Some(code) => {
