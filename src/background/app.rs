@@ -153,12 +153,12 @@ impl Seelen {
     pub fn start(&mut self) -> Result<()> {
         RestorationAndMigration::run_full()?;
 
+        let state = FULL_STATE.load();
+        rust_i18n::set_locale(state.locale());
+
         // order is important
         create_background_window()?;
         declare_system_events_handlers()?;
-
-        let state = FULL_STATE.load();
-        rust_i18n::set_locale(state.locale());
 
         if state.is_rofi_enabled() {
             self.add_rofi()?;

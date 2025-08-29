@@ -33,6 +33,7 @@ export function getResourceText(text: ResourceText, locale: string): string {
 const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
 
 /** Convert Windows FileTime to Js Unix Date */
-export function WindowsDateFileTimeToDate(fileTime: bigint) {
+export function WindowsDateFileTimeToDate(fileTime: bigint | number) {
+  if (typeof fileTime === 'number') fileTime = BigInt(fileTime);
   return new Date(Number(fileTime / 10000n - EPOCH_DIFF_MILLISECONDS));
 }

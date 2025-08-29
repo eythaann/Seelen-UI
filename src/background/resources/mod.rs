@@ -83,8 +83,11 @@ impl ResourceManager {
                     .upsert(path.to_path_buf(), Arc::new(Wallpaper::load(path)?));
             }
             ResourceKind::IconPack => {
+                let mut icon_pack = IconPack::load(path)?;
+                icon_pack.metadata.internal.bundled =
+                    path == SEELEN_COMMON.user_icons_path().join("system");
                 self.icon_packs
-                    .upsert(path.to_path_buf(), Arc::new(IconPack::load(path)?));
+                    .upsert(path.to_path_buf(), Arc::new(icon_pack));
             }
             ResourceKind::SoundPack => {
                 // feature not implemented
