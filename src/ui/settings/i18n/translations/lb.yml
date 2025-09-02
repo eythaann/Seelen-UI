@@ -97,6 +97,14 @@ general:
     available: Verfügbar Ikon Packs
     selected: Aktiv Ikon Packs
   language: Sprooche
+  performance_mode:
+    on_battery: Op Batterie
+    on_energy_saver: Op Energiespuer
+    options:
+      disabled: Behënnert
+      extreme: Extrem
+      minimal: Minimal
+    plugged: Ugeschloss oder opluede
   startup: Run op Startup?
   theme:
     available: Verfügbar Themen
@@ -141,7 +149,7 @@ resources:
   delete: Läschen Ressource
   discover: Entdeckt méi Ressourcen
   export: Export Ressource
-  has_update: An update is available
+  has_update: En Update ass verfügbar
   import_wallpapers: Import lokal Wallpapers
   open_folder: Oppen Ressource Dossier
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Aktivéiert op dësem Monitor
   instances: Instanzen
 wm:
+  animations:
+    duration: Animatioun Dauer (MS)
+    ease_function: Animatioun ausserhalb Funktioun
+    enable: Aktivéiert Fenster Animatiounen
   author: Auteur
   border:
     enable: Aktivéiert Fenster Grenz
