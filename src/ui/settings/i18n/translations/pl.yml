@@ -97,6 +97,14 @@ general:
     available: Dostępne pakiety ikon
     selected: Aktywne pakiety ikon
   language: Język
+  performance_mode:
+    on_battery: Na baterii
+    on_energy_saver: Na oszczędności energii
+    options:
+      disabled: Wyłączony
+      extreme: Skrajny
+      minimal: Minimalny
+    plugged: Podłączone lub ładowanie
   startup: Uruchomić przy starcie systemu?
   theme:
     available: Dostępne motywy
@@ -141,7 +149,7 @@ resources:
   delete: Usuń zasób
   discover: Odkryj więcej zasobów
   export: Zasoby eksportowe
-  has_update: An update is available
+  has_update: Aktualizacja jest dostępna
   import_wallpapers: Import lokalnych tapet
   open_folder: Otwórz folder zasobów
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Włącz na tym monitorze
   instances: Wystąpienia
 wm:
+  animations:
+    duration: Czas trwania animacji (MS)
+    ease_function: Funkcja łagodzenia animacji
+    enable: Włącz animacje okna
   author: Autor
   border:
     enable: Włącz granicę okna
