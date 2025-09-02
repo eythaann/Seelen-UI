@@ -8,7 +8,7 @@ import { Wallpaper, WallpaperInstanceSettings } from '@seelen-ui/lib/types';
 import { cx } from '@shared/styles';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { ComponentChildren } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
+import { useEffect, useMemo, useRef } from 'preact/hooks';
 
 import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
 
@@ -92,6 +92,7 @@ interface DefinedWallProps extends BaseProps {
 function ImageWallpaper({ definition, config, onLoad }: DefinedWallProps) {
   return (
     <img
+      id={definition.id}
       className={cx(cs.wallpaper, 'wallpaper')}
       style={getWallpaperStyles(config)}
       src={convertFileSrc(definition.metadata.path + '\\' + definition.filename!)}
@@ -103,39 +104,60 @@ function ImageWallpaper({ definition, config, onLoad }: DefinedWallProps) {
 function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps) {
   const ref = useRef<HTMLVideoElement>(null);
 
+  const videoSrc = useMemo(
+    () => convertFileSrc(definition.metadata.path + '\\' + definition.filename!),
+    [definition.metadata.path, definition.filename],
+  );
+
+  useEffect(() => {
+    // https://github.com/facebook/react/issues/15583
+    // this is a workaround for a bug in js that causes memory leak on video elements
+    return () => {
+      if (ref.current) {
+        ref.current.pause();
+        ref.current.removeAttribute('src');
+        ref.current.load();
+        if (window.gc) {
+          setTimeout(() => window.gc?.(), 100);
+        }
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (ref.current && paused !== undefined) {
-      console.debug('wallpaper state changed:', paused);
+      // console.debug('📺 Wallpaper state changed:', paused, 'for:', definition.id);
       if (paused) {
         ref.current.pause();
-      } else {
+      } else if (ref.current.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
         ref.current.play();
       }
     }
   }, [paused]);
 
-  function onWaiting() {
-    if (ref.current) {
-      // console.debug('video waiting for data, seeking to 0');
-      ref.current.currentTime = 0;
-    }
-  }
-
   return (
     <video
+      id={definition.id}
       className={cx(cs.wallpaper, 'wallpaper')}
       style={getWallpaperStyles(config)}
       ref={ref}
-      src={convertFileSrc(definition.metadata.path + '\\' + definition.filename!)}
+      src={videoSrc}
       controls={false}
       muted
       autoPlay={!paused}
       loop
       playsInline
       disableRemotePlayback
-      onWaiting={onWaiting}
       playbackRate={getPlaybackRate(config.playbackSpeed)}
       onLoadedMetadata={onLoad} // mark video as loaded on portrait load
+      onWaiting={() => {
+        console.debug('video waiting for data');
+      }}
+      onCanPlay={() => {
+        if (ref.current && !paused) {
+          ref.current.play();
+        }
+      }}
     />
   );
 }

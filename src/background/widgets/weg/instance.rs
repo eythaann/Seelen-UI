@@ -20,7 +20,7 @@ use crate::{
         are_overlaped,
         constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
     },
-    widgets::toolbar::FancyToolbar,
+    widgets::{toolbar::FancyToolbar, WebviewArgs},
     windows_api::{window::Window, AppBarData, WindowsApi},
 };
 
@@ -52,8 +52,9 @@ impl SeelenWeg {
 
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
-
         let label = format!("{}?monitorId={}", Self::TARGET, monitor_id);
+        let args = WebviewArgs::new().disable_gpu();
+
         log::info!("Creating {label}");
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
 
@@ -73,6 +74,8 @@ impl SeelenWeg {
         .shadow(false)
         .skip_taskbar(true)
         .always_on_top(true)
+        .data_directory(args.data_directory())
+        .additional_browser_args(&args.to_string())
         .build()?;
 
         window.set_ignore_cursor_events(true)?;

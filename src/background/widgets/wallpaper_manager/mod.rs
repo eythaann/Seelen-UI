@@ -14,6 +14,7 @@ use crate::{
     app::get_app_handle,
     error::Result,
     log_error, pcstr,
+    widgets::WebviewArgs,
     windows_api::{WindowEnumerator, WindowsApi},
 };
 
@@ -42,6 +43,8 @@ impl SeelenWall {
     fn create_window() -> Result<WebviewWindow> {
         let handle = get_app_handle();
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::TARGET);
+        let args = WebviewArgs::new();
+
         let window = tauri::WebviewWindowBuilder::new(
             handle,
             label,
@@ -57,8 +60,8 @@ impl SeelenWall {
         .visible(false)
         .disable_drag_drop_handler()
         .skip_taskbar(true)
-        // idk why I add this but lively wallpaper has it XD
-        // .additional_browser_args("--disk-cache-size=1 --disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection")
+        .data_directory(args.data_directory())
+        .additional_browser_args(&args.to_string())
         .build()?;
 
         window.set_always_on_bottom(true)?;

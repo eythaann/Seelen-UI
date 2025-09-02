@@ -6,9 +6,15 @@ pub mod wallpaper_manager;
 pub mod weg;
 pub mod window_manager;
 
+use std::path::PathBuf;
+
 use tauri::Manager;
 
-use crate::{app::get_app_handle, error::Result, utils::WidgetWebviewLabel};
+use crate::{
+    app::get_app_handle,
+    error::Result,
+    utils::{constants::SEELEN_COMMON, WidgetWebviewLabel},
+};
 
 pub fn show_settings() -> Result<()> {
     log::trace!("Show settings window");
@@ -20,6 +26,7 @@ pub fn show_settings() -> Result<()> {
             window.set_focus()?;
         }
         None => {
+            let args = WebviewArgs::new().disable_gpu();
             tauri::WebviewWindowBuilder::new(
                 handle,
                 label.raw,
@@ -31,8 +38,56 @@ pub fn show_settings() -> Result<()> {
             .visible(false)
             .decorations(false)
             .center()
+            .data_directory(args.data_directory())
+            .additional_browser_args(&args.to_string())
             .build()?;
         }
     }
     Ok(())
+}
+
+pub struct WebviewArgs {
+    pub args: Vec<String>,
+}
+
+impl WebviewArgs {
+    const BASE_1: &str = "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection";
+    const BASE_2: &str = "--disable-site-isolation-trials";
+
+    pub fn new() -> Self {
+        // --disk-cache-size=0
+        Self {
+            args: vec![Self::BASE_1.to_string(), Self::BASE_2.to_string()],
+        }
+    }
+
+    pub fn with(mut self, arg: &str) -> Self {
+        self.args.push(arg.to_string());
+        self
+    }
+
+    pub fn disable_gpu(self) -> Self {
+        self.with("--disable-gpu")
+    }
+
+    pub fn data_directory(&self) -> PathBuf {
+        // remove bases
+        let mut args = self.args.clone();
+        args.remove(0);
+        args.remove(0);
+
+        if args.is_empty() {
+            SEELEN_COMMON.app_cache_dir().to_path_buf()
+        } else {
+            SEELEN_COMMON
+                .app_cache_dir()
+                .join(args.join("").replace("-", ""))
+        }
+    }
+}
+
+impl std::fmt::Display for WebviewArgs {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.args.join(" "))
+    }
 }

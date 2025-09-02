@@ -628,7 +628,7 @@ Section Install
 
   ; Copy main executable
   File "${MAINBINARYSRCPATH}"
-  FILE "${__FILEDIR__}\..\..\seelen_ui.pdb" ;slu
+  ; FILE "${__FILEDIR__}\..\..\seelen_ui.pdb" ;slu
 
   ; Copy resources
   {{#each resources_dirs}}
@@ -767,7 +767,7 @@ Section Uninstall
   ; Delete the app directory and its content from disk
   ; Copy main executable
   Delete "$INSTDIR\${MAINBINARYNAME}.exe"
-  Delete "$INSTDIR\seelen_ui.pdb" ;slu
+  ; Delete "$INSTDIR\seelen_ui.pdb" ;slu
 
   ; Delete resources
   {{#each resources}}

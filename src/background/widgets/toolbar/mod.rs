@@ -10,6 +10,7 @@ use crate::{
         are_overlaped,
         constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
     },
+    widgets::WebviewArgs,
     windows_api::{window::Window, AppBarData, WindowsApi},
 };
 use base64::Engine;
@@ -216,6 +217,7 @@ impl FancyToolbar {
 
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
+        let args = WebviewArgs::new().disable_gpu();
 
         log::info!("Creating {}", Self::decoded_label(monitor_id));
 
@@ -235,7 +237,10 @@ impl FancyToolbar {
         .shadow(false)
         .skip_taskbar(true)
         .always_on_top(true)
+        .data_directory(args.data_directory())
+        .additional_browser_args(&args.to_string())
         .build()?;
+
         window.set_ignore_cursor_events(true)?;
         Ok(window)
     }

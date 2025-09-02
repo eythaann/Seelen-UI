@@ -6,7 +6,10 @@ use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{error::Result, is_local_dev, utils::is_running_as_appx, windows_api::WindowsApi};
+use crate::{
+    error::Result, is_local_dev, utils::is_running_as_appx, widgets::WebviewArgs,
+    windows_api::WindowsApi,
+};
 
 use super::spawn_named_thread;
 
@@ -114,12 +117,16 @@ static WEBVIEW_STATE_VALIDATED: AtomicBool = AtomicBool::new(false);
 pub fn check_for_webview_optimal_state(app: &tauri::AppHandle) -> Result<()> {
     start_integrity_thread(app.clone());
     let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode("@seelen/integrity");
+    let args = WebviewArgs::new().disable_gpu();
+
     let window = tauri::WebviewWindowBuilder::new(
         app,
         &label,
         tauri::WebviewUrl::App("integrity/index.html".into()),
     )
     .visible(false)
+    .data_directory(args.data_directory())
+    .additional_browser_args(&args.to_string())
     .build()?;
     window.hwnd()?; // build could not fail so we check for the handle.
     window.destroy()?; // close the fake window

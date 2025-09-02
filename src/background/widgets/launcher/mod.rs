@@ -8,7 +8,7 @@ use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::SWP_ASYNCWINDOWP
 
 use crate::{
     app::get_app_handle, error::Result, log_error, modules::start::application::START_MENU_MANAGER,
-    windows_api::WindowsApi,
+    widgets::WebviewArgs, windows_api::WindowsApi,
 };
 
 pub struct SeelenRofi {
@@ -59,6 +59,8 @@ impl SeelenRofi {
 
     fn create_window() -> Result<WebviewWindow> {
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::TARGET);
+        let args = WebviewArgs::new().disable_gpu();
+
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             label,
@@ -76,6 +78,8 @@ impl SeelenRofi {
         .skip_taskbar(true)
         .drag_and_drop(false)
         .always_on_top(true)
+        .data_directory(args.data_directory())
+        .additional_browser_args(&args.to_string())
         .build()?;
 
         Ok(window)

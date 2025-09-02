@@ -8,8 +8,11 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::get_app_handle, error::Result, log_error, trace_lock, virtual_desktops::get_vd_manager,
-    widgets::toolbar::FancyToolbar, widgets::window_manager::state::WM_STATE,
+    app::get_app_handle,
+    error::Result,
+    log_error, trace_lock,
+    virtual_desktops::get_vd_manager,
+    widgets::{toolbar::FancyToolbar, window_manager::state::WM_STATE, WebviewArgs},
     windows_api::WindowsApi,
 };
 
@@ -51,6 +54,7 @@ impl WindowManagerV2 {
         let label = format!("{}?monitorId={}", Self::TARGET, monitor_id);
         log::info!("Creating {label}");
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
+        let args = WebviewArgs::new().disable_gpu();
 
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
@@ -69,6 +73,8 @@ impl WindowManagerV2 {
         .skip_taskbar(true)
         .drag_and_drop(false)
         .always_on_top(true)
+        .data_directory(args.data_directory())
+        .additional_browser_args(&args.to_string())
         .build()?;
 
         window.set_ignore_cursor_events(true)?;

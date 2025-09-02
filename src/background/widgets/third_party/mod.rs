@@ -2,6 +2,7 @@ use seelen_core::state::Widget;
 
 use crate::{
     app::get_app_handle, error::Result, state::application::FULL_STATE, utils::WidgetWebviewLabel,
+    widgets::WebviewArgs,
 };
 
 pub struct WidgetInstance {
@@ -49,6 +50,8 @@ impl WidgetInstance {
     }
 
     fn create_window(title: &str, label: &WidgetWebviewLabel) -> Result<tauri::WebviewWindow> {
+        let args = WebviewArgs::new().disable_gpu();
+
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             &label.raw,
@@ -57,6 +60,8 @@ impl WidgetInstance {
         .title(title)
         .transparent(true)
         .visible(false)
+        .data_directory(args.data_directory())
+        .additional_browser_args(&args.to_string())
         .build()?;
         Ok(window)
     }

@@ -12,7 +12,7 @@ use tauri::{
 };
 use uuid::Uuid;
 
-use crate::{app::get_app_handle, error::Result, utils::WidgetWebviewLabel};
+use crate::{app::get_app_handle, error::Result, utils::WidgetWebviewLabel, widgets::WebviewArgs};
 
 pub static POPUPS_MANAGER: LazyLock<Mutex<PopupsManager>> = LazyLock::new(|| {
     Mutex::new(PopupsManager {
@@ -36,6 +36,7 @@ impl PopupsManager {
     pub fn create(&mut self, config: SluPopupConfig) -> Result<Uuid> {
         let popup_id = Uuid::new_v4();
         let label = WidgetWebviewLabel::new(&WidgetId::known_popup(), None, Some(&popup_id));
+        let args = WebviewArgs::new().disable_gpu();
 
         let manager = get_app_handle();
         let window = WebviewWindowBuilder::new(
@@ -59,6 +60,8 @@ impl PopupsManager {
             effects: vec![WindowEffect::Acrylic],
         })
         .visible(false)
+        .data_directory(args.data_directory())
+        .additional_browser_args(&args.to_string())
         .build()?;
 
         window.on_window_event(move |e| {

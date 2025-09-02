@@ -124,7 +124,7 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
             key={oldWallpaper?.id || 'themed'}
             definition={oldWallpaper}
             config={oldWallpaper && $settings.value.byWallpaper[oldWallpaper.id]}
-            paused={$paused.value || $idle.value}
+            paused={true} // inmediately pause exiting wallpaper, to avoid gpu usage.
             out={$current_was_loaded.value}
           />
         ),

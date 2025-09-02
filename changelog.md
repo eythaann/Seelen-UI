@@ -7,6 +7,7 @@
 
 ### enhancements
 - improvement on power events.
+- reduce memory usage (RAM).
 
 ### fix
 - third party widgets sometimes not starting.
