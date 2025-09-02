@@ -1,6 +1,7 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { getRootContainer } from '@shared';
 import { declareDocumentAsLayeredHitbox } from '@shared/layered';
+import { disableAnimationsOnPerformanceMode } from '@shared/performance';
 import { removeDefaultWebviewActions } from '@shared/setup';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -24,6 +25,7 @@ await declareDocumentAsLayeredHitbox();
 await loadStore();
 await registerStoreEvents();
 await loadTranslations();
+disableAnimationsOnPerformanceMode();
 
 const container = getRootContainer();
 createRoot(container).render(

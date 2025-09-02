@@ -2,7 +2,7 @@ import { batch, useComputed, useSignal, useSignalEffect } from '@preact/signals'
 import { PhysicalMonitor, WallpaperId } from '@seelen-ui/lib/types';
 import { Wallpaper as WallpaperComponent } from '@shared/components/Wallpaper';
 
-import { $idle, $paused, $settings, $wallpapers } from '../shared/state';
+import { $paused, $settings, $wallpapers } from '../shared/state';
 import { $get_active_wallpapers, $relativeMonitors } from './derived';
 
 export function MonitorContainers() {
@@ -17,7 +17,8 @@ export function MonitorContainers() {
  *    - no transitions, no old wallpaper, show themed as fallback
  * 2. two or more wallpapers:
  *    - interval change between wallpapers
- *    - in case of error, old wallpaper will persist until next change
+ *    - in case of error, old wallpaper will persist for 1 second
+ * 3. performance mode will disable video wallpapers
  */
 function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
   const $render_old = useSignal(false);
@@ -133,7 +134,7 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
           definition={wallpaper}
           config={wallpaper && $settings.value.byWallpaper[wallpaper.id]}
           onLoad={() => ($current_was_loaded.value = true)}
-          paused={$paused.value || $idle.value}
+          paused={$paused.value}
         />,
       ]}
     </div>

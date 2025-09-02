@@ -3,14 +3,17 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{
     by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPack,
-    IconPackEntry, LauncherHistory, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
+    IconPackEntry, LauncherHistory, PerformanceMode, Profile, Wallpaper, WegItems,
+    WegPinnedItemsVisibility,
 };
 use tauri_plugin_dialog::DialogExt;
 
 use crate::{
     app::get_app_handle,
     error::Result,
-    log_error, trace_lock,
+    log_error,
+    state::application::performance::PERFORMANCE_MODE,
+    trace_lock,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::{window::Window, WindowsApi},
 };
@@ -155,6 +158,6 @@ pub fn state_add_icon_to_custom_icon_pack(_icon: IconPackEntry) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn state_is_performance_mode_enabled() -> bool {
-    todo!()
+pub fn state_get_performance_mode() -> PerformanceMode {
+    **PERFORMANCE_MODE.load()
 }

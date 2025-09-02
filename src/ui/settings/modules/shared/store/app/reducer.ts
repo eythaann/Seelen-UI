@@ -92,6 +92,7 @@ export const RootSlice = createSlice({
     setUpdater: toBeSavedAndRestarted(reducers.setUpdater),
     setDrpc: toBeSavedAndRestarted(reducers.setDrpc),
     setMonitors: toBeSaved(reducers.setMonitorsV3),
+    setPerformanceMode: toBeSaved(reducers.setPerformanceMode),
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
       state.toBeSaved = true;

@@ -7,8 +7,10 @@ use tauri::{Emitter, Listener};
 use crate::{
     app::get_app_handle,
     error::{ErrorMap, ResultLogExt},
+    hook::HookManager,
     modules::power::infrastructure::{get_batteries, get_power_mode, get_power_status},
     state::application::FULL_STATE,
+    windows_api::window::{event::WinEvent, Window},
 };
 
 pub static PERFORMANCE_MODE: LazyLock<ArcSwap<PerformanceMode>> = LazyLock::new(|| {
@@ -22,9 +24,26 @@ fn start_listeners() {
     let handle = get_app_handle();
     handle.listen(SeelenEvent::PowerMode, |_| check_for_changes());
     handle.listen(SeelenEvent::PowerStatus, |_| check_for_changes());
+    handle.listen(SeelenEvent::StateSettingsChanged, |_| check_for_changes());
+
+    HookManager::subscribe(|(event, _origin)| {
+        if matches!(
+            event,
+            WinEvent::SystemForeground
+                | WinEvent::SyntheticFullscreenStart
+                | WinEvent::SyntheticFullscreenEnd
+        ) {
+            check_for_changes();
+        }
+    });
 }
 
 fn get_perf_mode() -> PerformanceMode {
+    let foreground = Window::get_foregrounded();
+    if foreground.get_cached_data().fullscreen {
+        return PerformanceMode::Extreme;
+    }
+
     let guard = FULL_STATE.load();
     let config = &guard.settings.performance_mode;
 

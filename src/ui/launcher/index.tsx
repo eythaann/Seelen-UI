@@ -1,5 +1,6 @@
 import { getRootContainer } from '@shared/index';
 import { declareDocumentAsLayeredHitbox } from '@shared/layered';
+import { disableAnimationsOnPerformanceMode } from '@shared/performance';
 import { removeDefaultWebviewActions } from '@shared/setup';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
@@ -19,6 +20,7 @@ await declareDocumentAsLayeredHitbox();
 await loadTranslations();
 await initStore();
 registerDocumentEvents();
+disableAnimationsOnPerformanceMode();
 
 createRoot(getRootContainer()).render(
   <Provider store={store}>

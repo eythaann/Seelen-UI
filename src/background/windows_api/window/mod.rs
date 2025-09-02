@@ -230,7 +230,7 @@ impl Window {
     }
 
     pub fn is_fullscreen(&self) -> bool {
-        WindowsApi::is_fullscreen(self.0).unwrap_or(false)
+        WindowsApi::is_fullscreen(self.0).unwrap_or(false) && !self.is_desktop()
     }
 
     /// is the window an Application Frame Host

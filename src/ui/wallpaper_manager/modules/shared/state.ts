@@ -1,4 +1,4 @@
-import { signal } from '@preact/signals';
+import { computed, signal } from '@preact/signals';
 import {
   invoke,
   SeelenCommand,
@@ -29,8 +29,10 @@ Settings.onChange(
 (await UIColors.getAsync()).setAsCssVariables();
 UIColors.onChange((colors) => colors.setAsCssVariables());
 
-export const $paused = signal(false);
-subscribe(SeelenEvent.WallStop, ({ payload }) => ($paused.value = payload));
+export const $focused = signal(await invoke(SeelenCommand.GetFocusedApp));
+subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
+  $focused.value = e.payload;
+});
 
 export const $idle = signal(false);
 const setAsIdle = debounce(() => {
@@ -44,6 +46,10 @@ subscribe(SeelenEvent.GlobalMouseMove, () => {
   setAsIdle();
 });
 
+export const $paused = computed(() => {
+  return $idle.value || $focused.value.isFullscreened || $performance_mode.value !== 'Disabled';
+});
+
 export const $monitors = signal(await invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, ({ payload }) => {
   $monitors.value = payload;
@@ -51,3 +57,6 @@ subscribe(SeelenEvent.SystemMonitorsChanged, ({ payload }) => {
 
 export const $wallpapers = signal((await WallpaperList.getAsync()).asArray());
 WallpaperList.onChange((wallpapers) => ($wallpapers.value = wallpapers.asArray()));
+
+export const $performance_mode = signal(await invoke(SeelenCommand.StateGetPerformanceMode));
+subscribe(SeelenEvent.StatePerformanceModeChanged, (e) => ($performance_mode.value = e.payload));
