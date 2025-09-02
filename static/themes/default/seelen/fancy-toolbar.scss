@@ -475,7 +475,7 @@
     .media-device {
       display: grid;
       align-items: center;
-      grid-template-columns: 50px 1fr 50px;
+      grid-template-columns: min-content 1fr 50px;
       gap: 8px;
 
       .media-device-action {
@@ -496,8 +496,9 @@
     }
 
     .media-device-title {
-      flex: 1;
       @extend %overflowable-text;
+      flex: 1;
+      font-weight: 600;
     }
   }
 

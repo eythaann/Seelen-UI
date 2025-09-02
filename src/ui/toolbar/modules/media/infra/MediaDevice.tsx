@@ -33,13 +33,13 @@ export function Device({
 
   return (
     <div className="media-device">
-      <Button.Group size="small" style={{ width: 50 }}>
+      <Button.Group size="small">
         <Tooltip title={t('media.device.multimedia')}>
           <Button
             type={device.isDefaultMultimedia ? 'primary' : 'default'}
             onClick={onClickMultimedia}
           >
-            <Icon iconName="IoMusicalNotes" size={18} />
+            <Icon iconName="IoMusicalNotes" size={14} />
           </Button>
         </Tooltip>
         <Tooltip title={t('media.device.comunications')}>
@@ -47,7 +47,7 @@ export function Device({
             type={device.isDefaultCommunications ? 'primary' : 'default'}
             onClick={onClickCommunications}
           >
-            <Icon iconName="FaPhoneFlip" />
+            <Icon iconName="FaPhoneFlip" size={12} />
           </Button>
         </Tooltip>
       </Button.Group>

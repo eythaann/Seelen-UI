@@ -15,6 +15,7 @@
 - not updating UI on remotion of resources.
 - button to update downloaded resources not working properly.
 - crash on max integer caused by media players.
+- media player popup not working properly.
 
 ## [2.4.1]
 ### features

@@ -82,16 +82,20 @@ function _SlPopup<TProps extends BasicElementProps>(
   useEffect(() => {
     const cb = (e: MouseEvent) => {
       const clickedElement = e.target as HTMLElement;
-      const isTrigger = clickedElement.closest(`[data-sl-trigger-id="${unique_trigger_id.current}"]`);
-      const isPopup = clickedElement.closest('.sl-popup');
+      if (!clickedElement || !document.contains(clickedElement)) {
+        return;
+      }
 
+      const isTrigger = clickedElement.closest(
+        `[data-sl-trigger-id="${unique_trigger_id.current}"]`,
+      );
+      const isPopup = clickedElement.closest('.sl-popup');
       if (!isTrigger && !isPopup && $is_open.value) {
         onOpenChange(false);
       }
     };
     window.addEventListener('click', cb);
     window.addEventListener('contextmenu', cb);
-
     return () => {
       window.removeEventListener('click', cb);
       window.removeEventListener('contextmenu', cb);
@@ -203,6 +207,7 @@ function _SlPopup<TProps extends BasicElementProps>(
         createPortal(
           <div>
             <div
+              id={unique_trigger_id.current}
               ref={popupRef}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}

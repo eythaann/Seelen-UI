@@ -60,7 +60,7 @@ impl PowerManager {
     fn try_create_instance() -> Result<Self> {
         let mut instance = Self {
             power_status: Self::get_power_status()?,
-            current_power_mode: PowerMode::Unknown,
+            batteries: Self::get_batteries()?,
             ..Default::default()
         };
 
