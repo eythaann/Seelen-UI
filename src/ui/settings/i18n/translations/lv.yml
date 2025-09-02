@@ -97,6 +97,14 @@ general:
     available: Pieejamie ikonu komplekti
     selected: Aktīvās ikonu pakotnes
   language: Valoda
+  performance_mode:
+    on_battery: Uz akumulatora
+    on_energy_saver: Par enerģijas taupīšanu
+    options:
+      disabled: Nespējīgs
+      extreme: Galējs
+      minimal: Minimāls
+    plugged: Pievienots vai uzlādēts
   startup: Skriet startup?
   theme:
     available: Pieejamie motīvi
@@ -141,7 +149,7 @@ resources:
   delete: Dzēst resursu
   discover: Atklājiet vairāk resursu
   export: Eksporta resursi
-  has_update: An update is available
+  has_update: Ir pieejams atjauninājums
   import_wallpapers: Importēt vietējās tapetes
   open_folder: Atvērt resursu mapi
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Ieslēgt šajā monitorā
   instances: Instances
 wm:
+  animations:
+    duration: Animācijas ilgums (MS)
+    ease_function: Animācijas atvieglošanas funkcija
+    enable: Iespējot loga animācijas
   author: Autors
   border:
     enable: Iespējot loga robežu
