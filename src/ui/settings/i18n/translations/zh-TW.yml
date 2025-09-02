@@ -97,6 +97,14 @@ general:
     available: 可用圖示包
     selected: 使用中圖示包
   language: 語言
+  performance_mode:
+    on_battery: 在電池上
+    on_energy_saver: 在能量儲蓄方面
+    options:
+      disabled: 禁用
+      extreme: 極端
+      minimal: 最小
+    plugged: 插入或充電
   startup: 開機自動啟動？
   theme:
     available: 可用主題
@@ -141,7 +149,7 @@ resources:
   delete: 刪除資源
   discover: 探索更多資源
   export: 匯出資源
-  has_update: 有可用的更新
+  has_update: 有更新可用
   import_wallpapers: 匯入本機桌布
   open_folder: 開啟資源資料夾
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: 在此螢幕啟用
   instances: 實例
 wm:
+  animations:
+    duration: 動畫持續時間（MS）
+    ease_function: 動畫放鬆功能
+    enable: 啟用Window的動畫
   author: 作者
   border:
     enable: 啟用視窗邊框
