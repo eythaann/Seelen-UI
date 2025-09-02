@@ -97,6 +97,14 @@ general:
     available: Packs d'icônes disponibles
     selected: Packs d'icônes actifs
   language: Langue
+  performance_mode:
+    on_battery: Sur la batterie
+    on_energy_saver: Sur l'énergie
+    options:
+      disabled: Désactivé
+      extreme: Extrême
+      minimal: Minimal
+    plugged: Bouchée ou charge
   startup: Lancer au démarrage ?
   theme:
     available: Thèmes disponibles
@@ -141,7 +149,7 @@ resources:
   delete: Supprimer les ressources
   discover: Découvrez d'autres ressources
   export: Exporter la ressource
-  has_update: An update is available
+  has_update: Une mise à jour est disponible
   import_wallpapers: Importer des fonds d'écran locaux
   open_folder: Ouvrir le dossier des ressources
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Activer sur ce moniteur
   instances: Instances
 wm:
+  animations:
+    duration: Durée d'animation (MS)
+    ease_function: Fonction d'assouplissement de l'animation
+    enable: Activer les animations de Window
   author: Auteur
   border:
     enable: Activer la bordure de fenêtre
