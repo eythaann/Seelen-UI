@@ -97,6 +97,14 @@ general:
     available: उपलब्ध आइकन प्याकहरू
     selected: सक्रिय आइकन प्याकहरू
   language: भाषा
+  performance_mode:
+    on_battery: ब्याट्री मा
+    on_energy_saver: ऊर्जा सेभरमा
+    options:
+      disabled: पंगु
+      extreme: अत्यधिक
+      minimal: न्यूनतम
+    plugged: प्लग वा चार्ज गर्दै
   startup: स्टार्टअपमा भाग्नुहोस्?
   theme:
     available: उपलब्ध विषयवस्तुहरू
@@ -141,7 +149,7 @@ resources:
   delete: स्रोत मेट्नुहोस्
   discover: अधिक स्रोतहरू पत्ता लगाउनुहोस्
   export: निर्यातको स्रोत
-  has_update: An update is available
+  has_update: एक अपडेट उपलब्ध छ
   import_wallpapers: स्थानीय वालपेपर आयात गर्नुहोस्
   open_folder: ओपन स्रोत फोल्डर
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: यस मोनिटरमा सक्षम गर्नुहोस्
   instances: संकेतहरू
 wm:
+  animations:
+    duration: एनिमेसन अवधि (एमएस)
+    ease_function: एनिमेसन स्टाइनिंग प्रकार्य
+    enable: विन्डोको एनिमेसन सक्षम गर्नुहोस्
   author: लेखिका
   border:
     enable: विन्डोको सीमा सक्षम गर्नुहोस्
