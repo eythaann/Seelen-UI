@@ -97,6 +97,14 @@ general:
     available: Verfügbare Icon-Pakete
     selected: Aktive Icon-Pakete
   language: Sprache
+  performance_mode:
+    on_battery: Batterie
+    on_energy_saver: Auf Energiesparer
+    options:
+      disabled: Deaktiviert
+      extreme: Extrem
+      minimal: Minimal
+    plugged: Verstopft oder aufgeladen
   startup: Beim Hochfahren ausführen?
   theme:
     available: Verfügbare Themen
@@ -141,7 +149,7 @@ resources:
   delete: Ressource löschen
   discover: Weitere Ressourcen entdecken
   export: Ressource exportieren
-  has_update: An update is available
+  has_update: Ein Update ist verfügbar
   import_wallpapers: Lokale Hintergrundbilder importieren
   open_folder: Ressourcenordner öffnen
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Auf diesem Monitor aktivieren
   instances: Instanzen
 wm:
+  animations:
+    duration: Animationsdauer (MS)
+    ease_function: Animation Lockering -Funktion
+    enable: Aktivieren Sie die Animationen von Windows
   author: Autor
   border:
     enable: Fensterrand aktivieren
