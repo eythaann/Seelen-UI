@@ -97,6 +97,14 @@ general:
     available: Elérhető ikoncsomagok
     selected: Aktív ikoncsomagok
   language: Nyelv
+  performance_mode:
+    on_battery: Akkumulátorra
+    on_energy_saver: Az energiatakarékosról
+    options:
+      disabled: Fogyatékkal élők
+      extreme: Szélső
+      minimal: Minimális
+    plugged: Bedugva vagy töltés
   startup: Futtatni indításkor?
   theme:
     available: Elérhető témák
@@ -141,7 +149,7 @@ resources:
   delete: Az erőforrás törlése
   discover: További források felfedezése
   export: Export erőforrás
-  has_update: An update is available
+  has_update: Frissítés érhető el
   import_wallpapers: Helyi háttérképek importálása
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Engedélyezés ezen a monitoron
   instances: Instances
 wm:
+  animations:
+    duration: Animációs időtartam (MS)
+    ease_function: Animáció enyhítő funkciója
+    enable: Engedélyezze az ablak animációit
   author: Szerző
   border:
     enable: Engedélyezze az ablak szegélyét
