@@ -97,6 +97,14 @@ general:
     available: د آیکون کڅوړې شتون لري
     selected: د فعال آیکون بسته
   language: ژبه
+  performance_mode:
+    on_battery: په بیټرۍ کې
+    on_energy_saver: د انرژي سیور باندې
+    options:
+      disabled: ناتوان شوی
+      extreme: ډیر
+      minimal: لږترلږه
+    plugged: فلګ یا چارج کول
   startup: په پیل کې چلول؟
   theme:
     available: شته موضوعات
@@ -141,7 +149,7 @@ resources:
   delete: سرچینه حذف کړئ
   discover: ډیرې سرچینې ومومئ
   export: د صادراتو سرچینې
-  has_update: An update is available
+  has_update: یو اوسمهال شتون لري
   import_wallpapers: ځایی وال پیپرونه وارد کړئ
   open_folder: د سرچینو پوښۍ خلاصه کړئ
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: پدې څارنه کې وړ کړئ
   instances: مثالونه
 wm:
+  animations:
+    duration: د انیمیشن موده (MS)
+    ease_function: د انیمیشن ډیک فعالیت
+    enable: د کړکۍ انکار کول فعال کړئ
   author: لیکوال
   border:
     enable: د کړکۍ پوله فعال کړئ
