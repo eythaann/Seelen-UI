@@ -97,6 +97,14 @@ general:
     available: ઉપલબ્ધ આઇકન પેક
     selected: સક્રિય આઇકન પેક્સ
   language: ભાષા
+  performance_mode:
+    on_battery: બેટરી પર
+    on_energy_saver: Energy ર્જા બચતકાર પર
+    options:
+      disabled: અયોગ્ય
+      extreme: આત્યંતિક
+      minimal: પ્રમાણસર
+    plugged: પ્લગ અથવા ચાર્જિંગ
   startup: સ્ટાર્ટઅપ પર ચલાવો?
   theme:
     available: ઉપલબ્ધ થીમ્સ
@@ -141,7 +149,7 @@ resources:
   delete: સાધન કા delો
   discover: વધુ સંસાધનો શોધો
   export: નિકાસ સાધન
-  has_update: An update is available
+  has_update: એક અપડેટ ઉપલબ્ધ છે
   import_wallpapers: સ્થાનિક વ wallp લપેપર્સ આયાત કરો
   open_folder: ખુલ્લા સંસાધન ફોલ્ડર
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: આ મોનિટર પર સક્ષમ કરો
   instances: દાખલા
 wm:
+  animations:
+    duration: એનિમેશન અવધિ (એમએસ)
+    ease_function: એનિમેશન સરળ કાર્ય
+    enable: વિંડોના એનિમેશનને સક્ષમ કરો
   author: લેખક
   border:
     enable: વિન્ડોની બોર્ડર સક્ષમ કરો
