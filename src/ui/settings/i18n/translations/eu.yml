@@ -97,6 +97,14 @@ general:
     available: Eskuragarri dauden ikono paketeak
     selected: Ikono pakete aktiboak
   language: Mintzaira
+  performance_mode:
+    on_battery: Bateria gainean
+    on_energy_saver: Energia aurrezteari buruz
+    options:
+      disabled: Minusbaliatu
+      extreme: Muturreko
+      minimal: Gutxien
+    plugged: Entxufatua edo kargatzea
   startup: Korrika abiaraztean?
   theme:
     available: Eskuragarri dauden gaiak
@@ -141,7 +149,7 @@ resources:
   delete: Baliabidea ezabatu
   discover: Ezagutu baliabide gehiago
   export: Esportatu baliabidea
-  has_update: An update is available
+  has_update: Eguneratze bat eskuragarri dago
   import_wallpapers: Inportatu tokiko horma-irudiak
   open_folder: Baliabide irekiko karpeta
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Gaitu monitore honetan
   instances: Makineria
 wm:
+  animations:
+    duration: Animazioaren iraupena (MS)
+    ease_function: Animazioaren arakuntzaren funtzioa
+    enable: Gaitu leihoen animazioak
   author: Idazle
   border:
     enable: Gaitu leihoen ertza
