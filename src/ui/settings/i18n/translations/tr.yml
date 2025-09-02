@@ -97,6 +97,14 @@ general:
     available: Mevcut Simge Paketleri
     selected: Aktif Simge Paketleri
   language: Dil
+  performance_mode:
+    on_battery: Aküde
+    on_energy_saver: Enerji tasarrufu üzerine
+    options:
+      disabled: Engelli
+      extreme: Aşırı
+      minimal: Minimal
+    plugged: Tıkalı veya şarj
   startup: Başlangıçta çalıştır
   theme:
     available: Mevcut Temalar
@@ -141,7 +149,7 @@ resources:
   delete: Kaynağı Sil
   discover: Daha fazla kaynak keşfedin
   export: Kaynak Dışa Aktarımı
-  has_update: An update is available
+  has_update: Bir güncelleme mevcuttur
   import_wallpapers: Yerel duvar kağıtlarını içe aktarma
   open_folder: Kaynak klasörünü aç
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Bu monitörde etkinleştir
   instances: Örnekler
 wm:
+  animations:
+    duration: Animasyon Süresi (MS)
+    ease_function: Animasyon kolaylaştırma işlevi
+    enable: Pencerenin animasyonlarını etkinleştirin
   author: Yazar
   border:
     enable: Pencere Kenarlığını Etkinleştir
