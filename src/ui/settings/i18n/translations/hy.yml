@@ -97,6 +97,14 @@ general:
     available: Հասանելի պատկերակների փաթեթներ
     selected: Ակտիվ պատկերակների փաթեթներ
   language: Լեզու
+  performance_mode:
+    on_battery: Մարտկոցի վրա
+    on_energy_saver: Էներգախնայողաբար
+    options:
+      disabled: Հաշմանդամացած
+      extreme: Ծայրահեղություն
+      minimal: Նվազագույն
+    plugged: Միացված կամ լիցքավորող
   startup: 'Գործարկման վրա գործարկեք:'
   theme:
     available: Հասանելի թեմաներ
@@ -141,7 +149,7 @@ resources:
   delete: Delete նջել ռեսուրսը
   discover: Բացահայտեք ավելի շատ ռեսուրսներ
   export: Արտահանման ռեսուրս
-  has_update: An update is available
+  has_update: Թարմացումն առկա է
   import_wallpapers: Ներմուծեք տեղական պաստառներ
   open_folder: Բացեք ռեսուրսների թղթապանակ
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Միացնել այս մոնիտորի վրա
   instances: Դեպքեր
 wm:
+  animations:
+    duration: Անիմացիայի տեւողությունը (MS)
+    ease_function: Անիմացիայի թեթեւացման գործառույթը
+    enable: Միացնել պատուհանի անիմացիաները
   author: Հեղինակ
   border:
     enable: Միացնել պատուհանի սահմանը
