@@ -97,6 +97,14 @@ general:
     available: Διαθέσιμα πακέτα εικονιδίων
     selected: Ενεργά πακέτα εικονιδίων
   language: Γλώσσα
+  performance_mode:
+    on_battery: Σε μπαταρία
+    on_energy_saver: Σχετικά με την εξοικονόμηση ενέργειας
+    options:
+      disabled: Ανάπηρος
+      extreme: Ακρο
+      minimal: Ελάχιστος
+    plugged: Συνδεδεμένος ή φόρτιση
   startup: Εκτέλεση κατά την εκκίνηση;
   theme:
     available: Διαθέσιμα θέματα
@@ -141,7 +149,7 @@ resources:
   delete: Διαγραφή πόρου
   discover: Ανακαλύψτε περισσότερους πόρους
   export: Πόρος εξαγωγής
-  has_update: An update is available
+  has_update: Μια ενημέρωση είναι διαθέσιμη
   import_wallpapers: Εισαγωγή τοπικών ταπετσαριών
   open_folder: Άνοιγμα φακέλου πόρων
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Ενεργοποίηση σε αυτή την οθόνη
   instances: Περιπτώσεις
 wm:
+  animations:
+    duration: Διάρκεια κινούμενων σχεδίων (MS)
+    ease_function: Λειτουργία χαλάρωσης κινούμενων σχεδίων
+    enable: Ενεργοποιήστε τα κινούμενα σχέδια του παραθύρου
   author: Συγγραφέας
   border:
     enable: Ενεργοποιήστε τα σύνορα του παραθύρου
