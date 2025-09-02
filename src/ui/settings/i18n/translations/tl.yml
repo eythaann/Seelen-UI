@@ -97,6 +97,14 @@ general:
     available: Magagamit na Mga Icon Pack
     selected: Mga Aktibong Icon Pack
   language: Wika
+  performance_mode:
+    on_battery: Sa baterya
+    on_energy_saver: Sa enerhiya saver
+    options:
+      disabled: Hindi pinagana
+      extreme: Matinding
+      minimal: Minimal
+    plugged: Naka -plug o singilin
   startup: Patakbuhin sa Startup?
   theme:
     available: Magagamit na Mga Tema
@@ -141,7 +149,7 @@ resources:
   delete: Tanggalin ang mapagkukunan
   discover: Tuklasin ang higit pang mga mapagkukunan
   export: Mapagkukunan ng pag -export
-  has_update: An update is available
+  has_update: Magagamit ang isang pag -update
   import_wallpapers: Mag -import ng mga lokal na wallpaper
   open_folder: Buksan ang folder ng mapagkukunan
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Paganahin sa monitor na ito
   instances: Mga pagkakataon
 wm:
+  animations:
+    duration: Tagal ng Animation (MS)
+    ease_function: Pag -andar ng pag -easing ng animation
+    enable: Paganahin ang mga animation ng window
   author: May -akda
   border:
     enable: Paganahin ang hangganan ng window
