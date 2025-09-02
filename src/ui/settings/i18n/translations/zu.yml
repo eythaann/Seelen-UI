@@ -97,6 +97,14 @@ general:
     available: Amaphekhi esithonjana atholakalayo
     selected: Amaphekhi Wesithonjana Asebenzayo
   language: Ulimi
+  performance_mode:
+    on_battery: Ebhethri
+    on_energy_saver: Ku-Sergy Saver
+    options:
+      disabled: '-Gogekile'
+      extreme: '-Dlulele'
+      minimal: '-Ncilula'
+    plugged: Ixhunyiwe noma ishaja
   startup: Gijima ekuqaleni?
   theme:
     available: Izingqikithi Ezitholakalayo
@@ -141,7 +149,7 @@ resources:
   delete: Susa insiza
   discover: Thola izinsiza ezengeziwe
   export: Ukuthumela impahla
-  has_update: An update is available
+  has_update: Isibuyekezo siyatholakala
   import_wallpapers: Ngenisa amaphephadonga endawo
   open_folder: Ifolda Yezisetshenziswa
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Nika amandla kulo mqaphi
   instances: Izimo
 wm:
+  animations:
+    duration: Isikhathi se-animation (MS)
+    ease_function: Ukugqwayiza kwe-animation function
+    enable: Nika amandla izithombe zewindi
   author: Umlobi
   border:
     enable: Nika amandla umngcele wewindi
