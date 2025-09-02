@@ -97,6 +97,14 @@ general:
     available: Pacchetti di icone disponibili
     selected: Pacchetti di icone attivi
   language: Lingua
+  performance_mode:
+    on_battery: Su batteria
+    on_energy_saver: Sull'energia risparmiando
+    options:
+      disabled: Disabile
+      extreme: Estremo
+      minimal: Minimo
+    plugged: Collegato o ricarica
   startup: Eseguire all'avvio?
   theme:
     available: Temi disponibili
@@ -141,7 +149,7 @@ resources:
   delete: Elimina risorsa
   discover: Scoprire altre risorse
   export: Esportazione di risorse
-  has_update: An update is available
+  has_update: È disponibile un aggiornamento
   import_wallpapers: Importazione di sfondi locali
   open_folder: Aprire la cartella delle risorse
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Abilita su questo monitor
   instances: Istanze
 wm:
+  animations:
+    duration: Durata dell'animazione (MS)
+    ease_function: Funzione di allentamento dell'animazione
+    enable: Abilita le animazioni di Window
   author: Autore
   border:
     enable: Abilita Bordo delle Finestre
