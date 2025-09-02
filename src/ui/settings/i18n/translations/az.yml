@@ -97,6 +97,14 @@ general:
     available: Mövcud İkon Paketləri
     selected: Aktiv İkon Paketləri
   language: Dil
+  performance_mode:
+    on_battery: Batareyada
+    on_energy_saver: Enerji qənaətçisi haqqında
+    options:
+      disabled: Əlil
+      extreme: Ekstremal
+      minimal: Minimal
+    plugged: Qoşuldu və ya şarj
   startup: Başlanğıcda qaçırsınız?
   theme:
     available: Mövcud Mövzular
@@ -141,7 +149,7 @@ resources:
   delete: Resurs silmək
   discover: Daha çox mənbəyi kəşf edin
   export: İxracat mənbəyi
-  has_update: An update is available
+  has_update: Bir yeniləmə mövcuddur
   import_wallpapers: Yerli divar kağızları idxal edin
   open_folder: Açıq Resurs qovluğu
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Bu monitorda aktivləşdirin
   instances: Hal
 wm:
+  animations:
+    duration: Animasiya müddəti (MS)
+    ease_function: Animasiya asanlaşdırma funksiyası
+    enable: Pəncərənin animasiyalarını aktivləşdirin
   author: Müəllif
   border:
     enable: Pəncərənin sərhədini aktivləşdirin
