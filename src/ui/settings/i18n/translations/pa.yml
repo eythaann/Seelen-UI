@@ -98,6 +98,14 @@ general:
     available: ਉਪਲਬਧ ਆਈਕਨ ਪੈਕ
     selected: ਐਕਟਿਵ ਆਈਕਨ ਪੈਕ
   language: ਭਾਸ਼ਾ
+  performance_mode:
+    on_battery: ਬੈਟਰੀ ਤੇ
+    on_energy_saver: Energy ਰਜਾ ਸੇਵਰ ਤੇ
+    options:
+      disabled: ਅਯੋਗ
+      extreme: ਅੱਤ
+      minimal: ਘੱਟੋ ਘੱਟ
+    plugged: ਪਲੱਗ ਕੀਤਾ ਜਾਂ ਚਾਰਜ ਕਰਨਾ
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
   theme:
     available: ਉਪਲਬਧ ਥੀਮ
@@ -142,6 +150,7 @@ resources:
   delete: ਸਰੋਤ ਨੂੰ ਮਿਟਾਓ
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ
   export: ਨਿਰਯਾਤ ਸਰੋਤ
+  has_update: ਇੱਕ ਅਪਡੇਟ ਉਪਲਬਧ ਹੈ
   import_wallpapers: ਸਥਾਨਕ ਵਾਲਪੇਪਰ ਆਯਾਤ ਕਰੋ
   open_folder: ਓਪਨ ਸਰੋਤ ਫੋਲਡਰ
   outdated: >-
@@ -304,6 +313,10 @@ widget:
   enable_for_monitor: ਇਸ ਮਾਨੀਟਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   instances: ਉਦਾਹਰਣ
 wm:
+  animations:
+    duration: ਐਨੀਮੇਸ਼ਨ ਅੰਤਰਾਲ (ਐਮਐਸ)
+    ease_function: ਐਨੀਮੇਸ਼ਨ ਆਸਾਨ ਫੰਕਸ਼ਨ
+    enable: ਵਿੰਡੋ ਦੇ ਐਨੀਮੇਸ਼ਨ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   author: ਲੇਖਕ
   border:
     enable: ਵਿੰਡੋ ਦੇ ਬਾਰਡਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ

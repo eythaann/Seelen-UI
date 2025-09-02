@@ -102,6 +102,14 @@ general:
     available: అందుబాటులో ఉన్న ఐకాన్ ప్యాక్‌లు
     selected: సక్రియ ఐకాన్ ప్యాక్‌లు
   language: భాష
+  performance_mode:
+    on_battery: బ్యాటరీపై
+    on_energy_saver: ఎనర్జీ సేవర్‌పై
+    options:
+      disabled: నిలిపివేయబడింది
+      extreme: ఎక్స్‌ట్రీమ్
+      minimal: కనిష్ట
+    plugged: ప్లగ్డ్ లేదా ఛార్జింగ్
   startup: స్టార్టప్‌లో అమలు చేయాలా?
   theme:
     available: అందుబాటులో ఉన్న థీమ్‌లు
@@ -146,6 +154,7 @@ resources:
   delete: వనరును తొలగించండి
   discover: మరిన్ని వనరులను కనుగొనండి
   export: ఎగుమతి వనరు
+  has_update: నవీకరణ అందుబాటులో ఉంది
   import_wallpapers: స్థానిక వాల్‌పేపర్‌లను దిగుమతి చేయండి
   open_folder: ఓపెన్ రిసోర్స్ ఫోల్డర్
   outdated: >-
@@ -308,6 +317,10 @@ widget:
   enable_for_monitor: ఈ మానిటర్‌లో ప్రారంభించండి
   instances: ఉదాహరణలు
 wm:
+  animations:
+    duration: యానిమేషన్ వ్యవధి (ఎంఎస్)
+    ease_function: యానిమేషన్ సడలింపు ఫంక్షన్
+    enable: విండో యొక్క యానిమేషన్లను ప్రారంభించండి
   author: రచయిత
   border:
     enable: విండో అంచుని ప్రారంభించండి

@@ -14,7 +14,7 @@ use seelen_core::system_state::MonitorId;
 use tokio::io::AsyncWriteExt;
 use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
 
-use crate::error::{Result, ResultLogExt};
+use crate::error::Result;
 use crate::hook::HookManager;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::Debouncer;
@@ -207,12 +207,10 @@ impl SluWorkspacesManager {
             log_error!(window.show_window(SW_FORCEMINIMIZE));
         }
 
-        Self::event_tx()
-            .send(VirtualDesktopEvent::WindowMoved {
-                window: *window_id,
-                desktop: target_id,
-            })
-            .log_error();
+        Self::send(VirtualDesktopEvent::WindowMoved {
+            window: *window_id,
+            desktop: target_id,
+        });
         self.save();
 
         Ok(())
@@ -226,9 +224,7 @@ impl SluWorkspacesManager {
             .workspaces
             .push(new_desktop);
         self.save();
-        Self::event_tx()
-            .send(VirtualDesktopEvent::DesktopCreated(new_desktop_id.clone()))
-            .log_error();
+        Self::send(VirtualDesktopEvent::DesktopCreated(new_desktop_id.clone()));
         new_desktop_id
     }
 
@@ -260,24 +256,17 @@ impl SluWorkspacesManager {
             }
 
             for addr in deleted.windows {
-                Self::event_tx()
-                    .send(VirtualDesktopEvent::WindowMoved {
-                        window: addr,
-                        desktop: fallback.id.clone(),
-                    })
-                    .log_error();
+                Self::send(VirtualDesktopEvent::WindowMoved {
+                    window: addr,
+                    desktop: fallback.id.clone(),
+                });
             }
 
-            Self::event_tx()
-                .send(VirtualDesktopEvent::DesktopChanged {
-                    monitor: monitor.id.clone(),
-                    workspace: fallback.id.clone(),
-                })
-                .log_error();
-
-            Self::event_tx()
-                .send(VirtualDesktopEvent::DesktopDestroyed(deleted.id))
-                .log_error();
+            Self::send(VirtualDesktopEvent::DesktopChanged {
+                monitor: monitor.id.clone(),
+                workspace: fallback.id.clone(),
+            });
+            Self::send(VirtualDesktopEvent::DesktopDestroyed(deleted.id));
             break;
         }
 

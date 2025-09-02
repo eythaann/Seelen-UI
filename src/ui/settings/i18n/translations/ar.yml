@@ -100,6 +100,14 @@ general:
     available: حزم الأيقونات المتوفرة
     selected: حزم الأيقونات النشطة
   language: اللغات
+  performance_mode:
+    on_battery: على البطارية
+    on_energy_saver: على توفير الطاقة
+    options:
+      disabled: عاجز
+      extreme: أقصى
+      minimal: الحد الأدنى
+    plugged: توصيل أو شحن
   startup: تفعيل عند تشغيل الكمبيوتر؟
   theme:
     available: السمات المتاحة
@@ -144,6 +152,7 @@ resources:
   delete: حذف المورد
   discover: اكتشف المزيد من الموارد
   export: موارد التصدير
+  has_update: تحديث متاح
   import_wallpapers: استيراد الخلفيات المحلية
   open_folder: فتح مجلد الموارد
   outdated: تم تصميم هذا المورد لإصدار أقدم من Seelen UI وقد لا يعمل بشكل صحيح.
@@ -301,6 +310,10 @@ widget:
   enable_for_monitor: التمكين على هذه الشاشة
   instances: المثيلات
 wm:
+  animations:
+    duration: مدة الرسوم المتحركة (MS)
+    ease_function: وظيفة تسهيل الرسوم المتحركة
+    enable: تمكين الرسوم المتحركة للنافذة
   author: المؤلف
   border:
     enable: تفعيل حدود النافذة

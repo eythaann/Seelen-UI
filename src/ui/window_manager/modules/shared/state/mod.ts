@@ -1,6 +1,15 @@
-import { computed, signal } from '@preact/signals';
-import { invoke, SeelenCommand, SeelenEvent, subscribe, WegItems, Widget } from '@seelen-ui/lib';
-import { WmNode } from '@seelen-ui/lib/types';
+import { computed, effect, signal } from '@preact/signals';
+import {
+  invoke,
+  SeelenCommand,
+  SeelenEvent,
+  Settings,
+  subscribe,
+  UIColors,
+  WegItems,
+  Widget,
+} from '@seelen-ui/lib';
+import { WindowManagerSettings, WmNode } from '@seelen-ui/lib/types';
 
 import { NodeUtils } from '../utils';
 
@@ -51,4 +60,30 @@ export const $overlay_visible = computed(() => {
       !$focused_app.value.isFullscreened &&
       !$focused_app.value.isBeingDragged)
   );
+});
+
+export const $settings = signal<WindowManagerSettings>((await Settings.getAsync()).windowManager);
+Settings.onChange((settings) => ($settings.value = settings.windowManager));
+
+// =================================================
+//                  CSS variables
+// =================================================
+
+(await UIColors.getAsync()).setAsCssVariables();
+UIColors.onChange((colors) => colors.setAsCssVariables());
+
+effect(() => {
+  const settings = $settings.value;
+  const styles = document.documentElement.style;
+
+  styles.setProperty('--config-padding', `${settings.workspacePadding}px`);
+  styles.setProperty('--config-containers-gap', `${settings.workspaceGap}px`);
+
+  styles.setProperty('--config-margin-top', `${settings.workspaceMargin.top}px`);
+  styles.setProperty('--config-margin-left', `${settings.workspaceMargin.left}px`);
+  styles.setProperty('--config-margin-right', `${settings.workspaceMargin.right}px`);
+  styles.setProperty('--config-margin-bottom', `${settings.workspaceMargin.bottom}px`);
+
+  styles.setProperty('--config-border-offset', `${settings.border.offset}px`);
+  styles.setProperty('--config-border-width', `${settings.border.width}px`);
 });

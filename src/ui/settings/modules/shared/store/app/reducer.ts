@@ -56,6 +56,7 @@ const initialState: RootState = {
   byWidget: defaultSettings.inner.byWidget,
   byTheme: {},
   byWallpaper: {},
+  performanceMode: defaultSettings.performanceMode,
 };
 
 function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {

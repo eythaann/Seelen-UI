@@ -104,6 +104,14 @@ general:
     available: Paket Ikon yang Tersedia
     selected: Paket Ikon Aktif
   language: Bahasa
+  performance_mode:
+    on_battery: Pada baterai
+    on_energy_saver: Tentang Penghemat Energi
+    options:
+      disabled: Dengan disabilitas
+      extreme: Ekstrim
+      minimal: Minimal
+    plugged: Terhubung atau pengisian daya
   startup: Jalankan saat startup?
   theme:
     available: Tema yang Tersedia
@@ -150,6 +158,7 @@ resources:
   delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya
   export: Sumber Daya Ekspor
+  has_update: Pembaruan tersedia
   import_wallpapers: Impor wallpaper lokal
   open_folder: Buka folder sumber daya
   outdated: >-
@@ -312,6 +321,10 @@ widget:
   enable_for_monitor: Aktifkan pada monitor ini
   instances: Contoh
 wm:
+  animations:
+    duration: Durasi Animasi (MS)
+    ease_function: Fungsi pelonggaran animasi
+    enable: Aktifkan animasi Window
   author: Pengarang
   border:
     enable: Aktifkan Perbatasan Jendela

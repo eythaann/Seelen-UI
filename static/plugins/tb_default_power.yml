@@ -81,18 +81,18 @@ plugin:
       t("placeholder.battery_remaining"),
       battery.smartCharging ? t("placeholder.smart_charge") : ""
     ]
-  template: >-
-    let group = []; if (power.acLineStatus === 1 || battery.state ===
-    "charging") {
+  template: |-
+    let group = [];
+
+    if (power.acLineStatus === 1 || battery.state === "charging") {
       group.push(icon("BsFillLightningChargeFill", 12));
       group.push(" ");
     }
 
-    if (power.systemStatusFlag == 1 || powerPlan === "BetterBattery") {
+    if (power.systemStatusFlag == 1 || powerPlan === "BetterBattery" || powerPlan === "BatterySaver") {
       group.push(icon("FaLeaf", 12));
       group.push(" ");
-    } else if (powerPlan === "HighPerformance" || powerPlan ===
-    "MaxPerformance") {
+    } else if (powerPlan === "HighPerformance" || powerPlan === "MaxPerformance") {
       group.push(icon("IoSpeedometer", 12));
       group.push(" ");
     }
@@ -112,7 +112,11 @@ plugin:
         : battery.percentage > 5
         ? icon("PiBatteryLowFill")
         : icon("PiBatteryWarning")
-    ); group.push(" "); group.push(battery.percentage); group.push("%");
+    );
+
+    group.push(" ");
+    group.push(battery.percentage);
+    group.push("%");
 
     return group;
   onClickV2: open("ms-settings:powersleep")

@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- tiling window manager animations.
+- performance mode for seelen.
+
+### enhancements
+- improvement on power events.
+
 ### fix
 - third party widgets sometimes not starting.
 - can not save settings on empty wallpaper list.

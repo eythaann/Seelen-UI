@@ -104,6 +104,14 @@ general:
     available: Pakketti ta' Ikoni Disponibbli
     selected: Pakketti tal-Ikoni Attivi
   language: Lingwa
+  performance_mode:
+    on_battery: Fuq batterija
+    on_energy_saver: Fuq l-enerġija li tiffranka
+    options:
+      disabled: B'diżabilità
+      extreme: Estrem
+      minimal: Minimu
+    plugged: Imqabbad jew iċċarġjar
   startup: Mexxi fuq l-istartjar?
   theme:
     available: Temi Disponibbli
@@ -148,6 +156,7 @@ resources:
   delete: Ħassar ir-riżorsa
   discover: Skopri aktar riżorsi
   export: Riżorsa ta 'esportazzjoni
+  has_update: Aġġornament huwa disponibbli
   import_wallpapers: Importa wallpapers lokali
   open_folder: Folder tar-Riżorsi Miftuħa
   outdated: >-
@@ -310,6 +319,10 @@ widget:
   enable_for_monitor: Jippermetti fuq dan il-monitor
   instances: Każijiet
 wm:
+  animations:
+    duration: Tul tal-Animazzjoni (MS)
+    ease_function: Funzjoni li tittaffa l-animazzjoni
+    enable: Ippermetti l-animazzjonijiet tat-tieqa
   author: Awtur
   border:
     enable: Ippermetti l-fruntiera tat-tieqa

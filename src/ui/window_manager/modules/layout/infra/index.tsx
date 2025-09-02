@@ -1,10 +1,12 @@
-import { effect } from '@preact/signals';
+import { effect, useSignalEffect } from '@preact/signals';
 import { WmNodeKind } from '@seelen-ui/lib';
 import { cx } from '@shared/styles';
 
+import { requestPositioningOfLeaves } from '../application';
+
 import { Node } from '../domain';
 
-import { $layout, $overlay_visible } from '../../shared/state/mod';
+import { $force_repositioning, $layout, $overlay_visible, $settings } from '../../shared/state/mod';
 import { NodeUtils } from '../../shared/utils';
 import { Leaf } from './containers/leaf';
 import { Stack } from './containers/stack';
@@ -16,9 +18,17 @@ effect(() => {
 });
 
 export function Layout() {
+  useSignalEffect(() => {
+    $settings.value;
+    $layout.value;
+    $force_repositioning.value;
+    requestPositioningOfLeaves();
+  });
+
   if (!$layout.value) {
     return null;
   }
+
   return <Container node={$layout.value} />;
 }
 

@@ -97,6 +97,14 @@ general:
     available: 可用的圖標包
     selected: 活動圖標包
   language: 語言
+  performance_mode:
+    on_battery: 在電池上
+    on_energy_saver: 在能量儲蓄方面
+    options:
+      disabled: 禁用
+      extreme: 極端
+      minimal: 最小
+    plugged: 插入或充電
   startup: 在啟動上運行？
   theme:
     available: 可用的主題
@@ -141,6 +149,7 @@ resources:
   delete: 刪除資源
   discover: 發現更多資源
   export: 導出資源
+  has_update: 有更新可用
   import_wallpapers: 導入本地壁紙
   open_folder: 打開資源文件夾
   outdated: 該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
@@ -295,6 +304,10 @@ widget:
   enable_for_monitor: 在此顯示器上啟用
   instances: 實例
 wm:
+  animations:
+    duration: 動畫持續時間（MS）
+    ease_function: 動畫放鬆功能
+    enable: 啟用Window的動畫
   author: 作者
   border:
     enable: 啟用Window的邊框

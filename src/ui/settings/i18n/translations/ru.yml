@@ -104,6 +104,14 @@ general:
     available: Доступные пакеты значков
     selected: Активные пакеты значков
   language: Язык
+  performance_mode:
+    on_battery: На батареи
+    on_energy_saver: На энергетическую экономию
+    options:
+      disabled: Неполноценный
+      extreme: Крайний
+      minimal: Минимальный
+    plugged: Подключен или зарядка
   startup: Автозапуск при включении системы
   theme:
     available: Доступные темы
@@ -148,6 +156,7 @@ resources:
   delete: Удалить ресурс
   discover: Откройте для себя больше ресурсов
   export: Экспортный ресурс
+  has_update: Доступно обновление
   import_wallpapers: Импорт местных обоев
   open_folder: Откройте папку с ресурсами
   outdated: >-
@@ -310,6 +319,10 @@ widget:
   enable_for_monitor: Включить на этом мониторе
   instances: Экземпляры
 wm:
+  animations:
+    duration: Продолжительность анимации (MS)
+    ease_function: Функция облегчения анимации
+    enable: Включить анимацию Window
   author: Автор
   border:
     enable: Включить границу окон

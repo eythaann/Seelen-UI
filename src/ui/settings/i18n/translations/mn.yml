@@ -103,6 +103,14 @@ general:
     available: Боломжтой Icon багцууд
     selected: Идэвхтэй дүрсний багцууд
   language: Хэл
+  performance_mode:
+    on_battery: Зайтай
+    on_energy_saver: Эрчим хүч хэмнэгч дээр
+    options:
+      disabled: Эрэмдэг зэрэмдэг
+      extreme: Түйлын
+      minimal: Бага
+    plugged: Залгасан эсвэл цэнэглэж байна
   startup: Эхлэх үед гүйх үү?
   theme:
     available: Боломжтой загварууд
@@ -147,6 +155,7 @@ resources:
   delete: Нөөцийг устгах
   discover: Илүү их нөөцийг олж мэдэх
   export: Нөөцийг экспортлох
+  has_update: Шинэчлэлт хийх боломжтой
   import_wallpapers: Орон нутгийн ханын цаас импортлох
   open_folder: Нээлттэй зөөврийн
   outdated: >-
@@ -308,6 +317,10 @@ widget:
   enable_for_monitor: Энэ монитор дээр идэвхжүүлэх
   instances: Саналууд
 wm:
+  animations:
+    duration: Хөдөлгөөнт давталт (MS)
+    ease_function: Хөдөлгөөнт хялбаршуулах функц
+    enable: Цонхны анимацийг идэвхжүүлэх
   author: Зохиолч
   border:
     enable: Цонхны хилийг идэвхжүүлэх

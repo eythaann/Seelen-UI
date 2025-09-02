@@ -102,6 +102,14 @@ general:
     available: Paquets d'icones disponibles
     selected: Paquets d'icones actius
   language: Llenguatge
+  performance_mode:
+    on_battery: A la bateria
+    on_energy_saver: A l'estalvi d'energia
+    options:
+      disabled: Inepte
+      extreme: Extrem
+      minimal: Mínim
+    plugged: Tassa o càrrega
   startup: Executeu la posada en marxa?
   theme:
     available: Temes disponibles
@@ -148,6 +156,7 @@ resources:
   delete: Esborra el recurs
   discover: Descobriu més recursos
   export: Els recursos d’exportació
+  has_update: Hi ha disponible una actualització
   import_wallpapers: Importa fons de pantalla locals
   open_folder: Obrir la carpeta de recursos
   outdated: >-
@@ -310,6 +319,10 @@ widget:
   enable_for_monitor: Activa en aquest monitor
   instances: Instàncies
 wm:
+  animations:
+    duration: Durada de l'animació (MS)
+    ease_function: Funció d'alleujament d'animació
+    enable: Activa les animacions de la finestra
   author: Autora
   border:
     enable: Activa la vora de la finestra

@@ -153,3 +153,8 @@ pub fn state_delete_cached_icons() -> Result<()> {
 pub fn state_add_icon_to_custom_icon_pack(_icon: IconPackEntry) -> Result<()> {
     todo!()
 }
+
+#[tauri::command(async)]
+pub fn state_is_performance_mode_enabled() -> bool {
+    todo!()
+}

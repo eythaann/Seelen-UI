@@ -102,6 +102,14 @@ general:
     available: ხელმისაწვდომი ხატების პაკეტები
     selected: აქტიური ხატების პაკეტები
   language: Ენა
+  performance_mode:
+    on_battery: ბატარეაზე
+    on_energy_saver: ენერგიის დაზოგვაზე
+    options:
+      disabled: უუნარო
+      extreme: უკიდურესი
+      minimal: მინიმალური
+    plugged: ჩართული ან დატენვა
   startup: გაშვებით გაშვებით?
   theme:
     available: ხელმისაწვდომი თემები
@@ -146,6 +154,7 @@ resources:
   delete: წაშალეთ რესურსი
   discover: აღმოაჩინეთ მეტი რესურსი
   export: ექსპორტის რესურსი
+  has_update: განახლება ხელმისაწვდომია
   import_wallpapers: ადგილობრივი ფონების იმპორტი
   open_folder: ღია რესურსების საქაღალდე
   outdated: >-
@@ -308,6 +317,10 @@ widget:
   enable_for_monitor: ჩართეთ ამ მონიტორზე
   instances: შემთხვევები
 wm:
+  animations:
+    duration: ანიმაციის ხანგრძლივობა (MS)
+    ease_function: ანიმაციის შემსუბუქებული ფუნქცია
+    enable: ფანჯრის ანიმაციების ჩართვა
   author: ავტორი
   border:
     enable: ფანჯრის საზღვრის ჩართვა

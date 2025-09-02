@@ -102,6 +102,14 @@ general:
     available: Tillgängliga ikonpaket
     selected: Aktiva ikonpaket
   language: Språk
+  performance_mode:
+    on_battery: På batteri
+    on_energy_saver: På energisparare
+    options:
+      disabled: Funktionshindrad
+      extreme: Extrem
+      minimal: Minimal
+    plugged: Ansluten eller laddning
   startup: Köras vid start?
   theme:
     available: Tillgängliga teman
@@ -146,6 +154,7 @@ resources:
   delete: Radera resurs
   discover: Upptäck fler resurser
   export: Exportera resurs
+  has_update: En uppdatering är tillgänglig
   import_wallpapers: Importera lokala bakgrundsbilder
   open_folder: Öppna resursmappen
   outdated: >-
@@ -308,6 +317,10 @@ widget:
   enable_for_monitor: Aktivera på denna bildskärm
   instances: Instanser
 wm:
+  animations:
+    duration: Animationens varaktighet (MS)
+    ease_function: Animationslättningsfunktion
+    enable: Aktivera Windows animationer
   author: Författare
   border:
     enable: Aktivera fönstergränsen

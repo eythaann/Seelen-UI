@@ -1,5 +1,5 @@
 use crate::{
-    error::{Result, ResultLogExt},
+    error::Result,
     trace_lock,
     virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager, HIDDEN_BY_USER},
     windows_api::{
@@ -38,12 +38,10 @@ impl SluWorkspacesManager {
         log::trace!("adding window ({window_id:x}) to workspace {}", active.id);
         active.windows.push(window_id);
 
-        Self::event_tx()
-            .send(VirtualDesktopEvent::WindowAdded {
-                window: window_id,
-                desktop: active.id.clone(),
-            })
-            .log_error();
+        Self::send(VirtualDesktopEvent::WindowAdded {
+            window: window_id,
+            desktop: active.id.clone(),
+        });
         self.save()
     }
 
@@ -53,9 +51,7 @@ impl SluWorkspacesManager {
         for workspace in self.iter_workspaces_mut() {
             workspace.windows.retain(|w| w != &window_id);
         }
-        Self::event_tx()
-            .send(VirtualDesktopEvent::WindowRemoved { window: window_id })
-            .log_error();
+        Self::send(VirtualDesktopEvent::WindowRemoved { window: window_id });
         self.save()
     }
 

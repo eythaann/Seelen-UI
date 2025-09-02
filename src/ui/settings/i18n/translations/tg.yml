@@ -102,6 +102,14 @@ general:
     available: Бастаҳои нишонаи дастрас
     selected: Бастаҳои нишонаи фаъол
   language: Забон
+  performance_mode:
+    on_battery: Аз рӯи батарея
+    on_energy_saver: Оид ба сарфкунандаи энергия
+    options:
+      disabled: Маъюб
+      extreme: Шадид
+      minimal: Ҳадди аққал
+    plugged: Васл кардан ё пур кардани барқ
   startup: Оғози кор?
   theme:
     available: Мавзӯъҳои дастрас
@@ -146,6 +154,7 @@ resources:
   delete: Манбаъро нест мекунад
   discover: Нахуст захираҳои бештарро кашф кунед
   export: Манбаъ
+  has_update: Навсозӣ дастрас аст
   import_wallpapers: Объекти маҳаллӣ
   open_folder: Папкаи захираҳо
   outdated: >-
@@ -307,6 +316,10 @@ widget:
   enable_for_monitor: Дар ин монитор фаъол кунед
   instances: Ҳолатҳо
 wm:
+  animations:
+    duration: Давомнокии аниматсия (MS)
+    ease_function: Имтиёзҳои осон
+    enable: Фаъолсозии аниматсияҳои тирезаро фаъол кунед
   author: Муаллиф
   border:
     enable: Сарҳади тирезаро фаъол созед

@@ -98,6 +98,14 @@ general:
     available: 利用可能なアイコン パック
     selected: アクティブなアイコン パック
   language: 言語
+  performance_mode:
+    on_battery: バッテリー上
+    on_energy_saver: エネルギーセーバーについて
+    options:
+      disabled: 無効
+      extreme: 過激
+      minimal: 最小限
+    plugged: プラグまたは充電
   startup: 起動時に実行する
   theme:
     available: 利用可能なテーマ
@@ -142,6 +150,7 @@ resources:
   delete: リソースを削除します
   discover: その他のリソース
   export: 輸出リソース
+  has_update: アップデートが利用可能です
   import_wallpapers: ローカル壁紙のインポート
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
@@ -296,6 +305,10 @@ widget:
   enable_for_monitor: このモニターで有効にする
   instances: インスタンス
 wm:
+  animations:
+    duration: アニメーション期間（MS）
+    ease_function: アニメーション緩和機能
+    enable: ウィンドウのアニメーションを有効にします
   author: 製作者
   border:
     enable: ウィンドウの境界線を描画する

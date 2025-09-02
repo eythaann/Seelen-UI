@@ -102,6 +102,14 @@ general:
     available: Pek Ikon Tersedia
     selected: Pek Ikon Aktif
   language: Bahasa
+  performance_mode:
+    on_battery: Pada bateri
+    on_energy_saver: Pada Penjimat Tenaga
+    options:
+      disabled: Kurang upaya
+      extreme: Melampau
+      minimal: Minimum
+    plugged: Dipasang atau mengecas
   startup: Jalankan permulaan?
   theme:
     available: Tema yang Tersedia
@@ -148,6 +156,7 @@ resources:
   delete: Padam sumber
   discover: Cari lebih banyak sumber
   export: Sumber Eksport
+  has_update: Kemas kini ada
   import_wallpapers: Mengimport kertas dinding tempatan
   open_folder: Buka Folder Sumber
   outdated: >-
@@ -310,6 +319,10 @@ widget:
   enable_for_monitor: Dayakan di monitor ini
   instances: Contoh
 wm:
+  animations:
+    duration: Tempoh Animasi (MS)
+    ease_function: Fungsi pelonggaran animasi
+    enable: Dayakan animasi tetingkap
   author: Pengarang
   border:
     enable: Dayakan sempadan tetingkap

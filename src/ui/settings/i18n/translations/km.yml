@@ -102,6 +102,14 @@ general:
     available: កញ្ចប់រូបតំណាងដែលមាន
     selected: កញ្ចប់រូបតំណាងសកម្ម
   language: ភាសា
+  performance_mode:
+    on_battery: នៅលើថ្ម
+    on_energy_saver: នៅលើអ្នកសន្សំថាមពល
+    options:
+      disabled: កាយវិកលកម្ផ
+      extreme: ខ្លាមងបមផុត
+      minimal: ដេលអឹមតីម
+    plugged: ដោតឬសាក
   startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
   theme:
     available: ស្បែកដែលអាចប្រើបាន
@@ -146,6 +154,7 @@ resources:
   delete: លុបធនធាន
   discover: ស្វែងយល់ពីធនធានបន្ថែម
   export: ធនធាននាំចេញ
+  has_update: ការធ្វើបច្ចុប្បន្នភាពមាន
   import_wallpapers: នាំចូលផ្ទាំងរូបភាពក្នុងស្រុក
   open_folder: បើកថតធនធាន
   outdated: >-
@@ -307,6 +316,10 @@ widget:
   enable_for_monitor: បើកដំណើរការម៉ូនីទ័រនេះ
   instances: ករណីបុម
 wm:
+  animations:
+    duration: រយៈពេលចលនា (MS)
+    ease_function: មុខងារបន្ធូរបន្ថយចលនា
+    enable: បើកចលនាចលនារបស់បង្អួច
   author: អ្នកនិពន្ធ
   border:
     enable: បើកស៊ុមបង្អួច

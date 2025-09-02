@@ -101,6 +101,14 @@ general:
     available: Available Icon Packs
     selected: Active Icon Packs
   language: Language
+  performance_mode:
+    on_battery: On Battery
+    on_energy_saver: On Energy Saver
+    options:
+      disabled: Disabled
+      extreme: Extreme
+      minimal: Minimal
+    plugged: Plugged or Charging
   startup: Run on startup?
   theme:
     available: Available Themes
@@ -308,6 +316,10 @@ widget:
   enable_for_monitor: Enable on this monitor
   instances: Instances
 wm:
+  animations:
+    duration: Animation Duration (ms)
+    ease_function: Animation Easing Function
+    enable: Enable Window's Animations
   author: Author
   border:
     enable: Enable Window's Border

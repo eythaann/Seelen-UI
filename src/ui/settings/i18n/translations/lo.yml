@@ -100,6 +100,14 @@ general:
     available: ໄອຄອນຊອງທີ່ມີໃຫ້
     selected: ຊຸດໄອຄອນທີ່ໃຊ້ໄດ້
   language: ພາສາ
+  performance_mode:
+    on_battery: ສຸດແບັດເຕີຣີ
+    on_energy_saver: ກ່ຽວກັບປະຫຍັດພະລັງງານ
+    options:
+      disabled: ພິການ
+      extreme: ທີ່ຮ້າຍ
+      minimal: ຫນ້ອຍ
+    plugged: ສຽບຫລືສາກໄຟ
   startup: ດໍາເນີນການກ່ຽວກັບການເລີ່ມຕົ້ນ?
   theme:
     available: ຮູບແບບສີສັນທີ່ມີຢູ່
@@ -144,6 +152,7 @@ resources:
   delete: ລົບລ້າງຊັບພະຍາກອນ
   discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ
   export: ຊັບພະຍາກອນການສົ່ງອອກ
+  has_update: ມີການປັບປຸງໃຫມ່
   import_wallpapers: ນໍາເຂົ້າຮູບວໍເປເປີທ້ອງຖິ່ນ
   open_folder: Open Opence Folder
   outdated: >-
@@ -305,6 +314,10 @@ widget:
   enable_for_monitor: ເປີດໃຊ້ງານຕິດຕາມກວດການີ້
   instances: ຖານະ
 wm:
+  animations:
+    duration: ໄລຍະເວລາທີ່ມີຊີວິດຊີວາ (MS)
+    ease_function: ຫນ້າທີ່ການທ່ອງທ່ຽວແບບເຄື່ອນໄຫວ
+    enable: ເປີດໃຊ້ພາບເຄື່ອນໄຫວຂອງ window
   author: ຜູ້ຂຽນ
   border:
     enable: ເປີດໃຊ້ຂອບຂອງປ່ອງຢ້ຽມ

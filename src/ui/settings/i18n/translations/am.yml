@@ -100,6 +100,14 @@ general:
     available: የሚገኙ የአዶ ጥቅሎች
     selected: ንቁ አዶ ጥቅሎች
   language: ቋንቋ
+  performance_mode:
+    on_battery: ባትሪ ላይ
+    on_energy_saver: በሃይል ቆጣቢ ላይ
+    options:
+      disabled: ተሰናክሏል
+      extreme: በጣም
+      minimal: አነስተኛ
+    plugged: ተሰኪ ወይም መሙላት
   startup: ጅምር ላይ ይሮጡ?
   theme:
     available: የሚገኙ ገጽታዎች
@@ -144,6 +152,7 @@ resources:
   delete: ምንጭን ሰርዝ
   discover: ተጨማሪ ሀብቶችን ያግኙ
   export: ወደ ውጭ የመላክ ሀብት
+  has_update: ዝመና ይገኛል
   import_wallpapers: የአካባቢያዊ የግድግዳ ወረቀቶች ያስመጡ
   open_folder: ክፍት የመረጃ ምንጭ አቃፊ
   outdated: ይህ የመረጃ ሀብት ለተረጋጋሪ ዌይ ስሪት ለተጨማሪ ስሪት የተሰራ ሲሆን በትክክል ላይሰራ ይችላል.
@@ -298,6 +307,10 @@ widget:
   enable_for_monitor: በዚህ መቆጣጠሪያ ላይ ያንቁ
   instances: ሁኔታዎች
 wm:
+  animations:
+    duration: እነማ ቆይታ (MS)
+    ease_function: አኒሜሽን ኢኮኖሚ ተግባር
+    enable: የመስኮት እነማዎችን አንቃ
   author: ደራሲ ደራሲ
   border:
     enable: የመስኮት ድንበር አንቃ

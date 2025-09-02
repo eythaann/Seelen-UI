@@ -1,0 +1,9 @@
+[package]
+name = "positioning"
+edition = "2024"
+
+[dependencies]
+thiserror = { workspace = true }
+log = { workspace = true }
+keyframe = "1.1.1"
+windows = { workspace = true, features = ["Win32_Foundation", "Win32_UI_WindowsAndMessaging"] }

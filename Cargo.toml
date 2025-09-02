@@ -13,7 +13,7 @@ rust-version = "1.89"
 build = "scripts/build.rs"
 
 [workspace]
-members = ["libs/slu-ipc"]
+members = ["libs/slu-ipc", "libs/positioning"]
 
 [workspace.dependencies]
 tokio = "1.47.0"
@@ -49,6 +49,7 @@ reqwest = "0.12.15"
 rust-i18n = "3.1.4"
 seelen-core = { git = "https://github.com/Seelen-Inc/slu-lib.git" }
 slu-ipc = { path = "libs/slu-ipc" }
+positioning = { path = "libs/positioning" }
 sysinfo = "0.30.12"
 tauri = "2.8.3"
 tauri-build = "2.4.0"
@@ -101,6 +102,7 @@ tauri-build = { workspace = true, features = [] }
 
 [dependencies]
 slu-ipc = { workspace = true }
+positioning = { workspace = true }
 tauri = { workspace = true, features = ["protocol-asset", "tray-icon", "image-png"] }
 tauri-plugin-fs = { workspace = true }
 tauri-plugin-dialog = { workspace = true }
@@ -176,6 +178,7 @@ windows = { workspace = true, features = [
     "Win32_System_Com_StructuredStorage",
     "Win32_System_Variant",
     "Win32_System_LibraryLoader",
+    "Win32_System_SystemServices",
     "Win32_System_SystemInformation",
     "Win32_System_Console",
     "Win32_System_Registry",

@@ -34,11 +34,11 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@preact/compat": "^18.3.1",
-    "@preact/signals": "^2.2.1",
+    "@preact/signals": "^2.3.1",
     "@tauri-apps/api": "^2.8.0",
     "@tauri-apps/cli": "^2.8.2",
-    "preact": "^10.26.9",
-    "preact-render-to-string": "^6.5.13",
+    "preact": "^10.27.1",
+    "preact-render-to-string": "^6.6.1",
     "react-router": "^7.6.0"
   },
   "devDependencies": {
@@ -46,7 +46,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@nyariv/sandboxjs": "^0.8.24",
     "@reduxjs/toolkit": "^2.5.0",
-    "@seelen-ui/lib": "^2.4.1-next.20250828194336",
+    "@seelen-ui/lib": "^2.4.1-next.20250831092551",
     "@seelen/translation-toolkit": "^1.1.10",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@types/d3": "^7.4.3",

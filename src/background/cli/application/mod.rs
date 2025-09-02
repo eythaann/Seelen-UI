@@ -1,3 +1,4 @@
+mod art;
 mod debugger;
 mod uri;
 mod win32;
@@ -13,7 +14,7 @@ use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PA
 
 use crate::{
     app::SEELEN,
-    cli::application::uri::process_uri,
+    cli::application::{art::ArtCli, uri::process_uri},
     error::Result,
     resources::cli::ResourceManagerCli,
     trace_lock,
@@ -55,6 +56,7 @@ pub enum AppCliCommand {
     Weg(WegCli),
     Resource(ResourceManagerCli),
     Win32(Win32Cli),
+    Art(ArtCli),
 }
 
 // attach console could fail if not console to attach is present
@@ -89,22 +91,27 @@ pub async fn handle_console_client() -> Result<()> {
         println!("Parsed {matches:#?}");
     }
 
-    // win32 commands are handled separately, as this should run on a win32 context.
-    if let Some(AppCliCommand::Win32(ctx)) = &matches.command {
-        ctx.process()?;
-        std::process::exit(0);
-    }
-
-    if matches.command.is_some() || matches.uri.is_some() {
+    if matches.should_be_redirected() {
         attach_console();
         matches.send_to_main_instance().await?;
         std::process::exit(0);
     }
 
+    if matches.command.is_some() {
+        matches.process()?;
+        std::process::exit(0);
+    }
     Ok(())
 }
 
 impl AppCli {
+    pub fn should_be_redirected(&self) -> bool {
+        if let Some(command) = &self.command {
+            return matches!(command, AppCliCommand::Win32(_) | AppCliCommand::Art(_));
+        }
+        self.uri.is_some()
+    }
+
     /// intended to be called on the main instance
     pub fn process(self) -> Result<()> {
         if let Some(uri) = self.uri {
@@ -173,7 +180,12 @@ impl AppCliCommand {
             AppCliCommand::Popup(command) => {
                 command.process()?;
             }
-            AppCliCommand::Win32(_) => {}
+            AppCliCommand::Win32(command) => {
+                command.process()?;
+            }
+            AppCliCommand::Art(command) => {
+                command.process();
+            }
         }
         Ok(())
     }

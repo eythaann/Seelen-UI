@@ -104,6 +104,14 @@ general:
     available: उपलब्ध चिह्न पैक
     selected: सक्रिय चिह्न पैक
   language: भाषा
+  performance_mode:
+    on_battery: बैटरी पर
+    on_energy_saver: ऊर्जा सेवर पर
+    options:
+      disabled: अक्षम
+      extreme: चरम
+      minimal: न्यूनतम
+    plugged: प्लग या चार्जिंग
   startup: स्टार्टअप पर चलाएं?
   theme:
     available: उपलब्ध थीम्स
@@ -150,6 +158,7 @@ resources:
   delete: संसाधन हटाएं
   discover: अधिक संसाधनों की खोज करें
   export: निर्यात संसाधन
+  has_update: एक अपडेट उपलब्ध है
   import_wallpapers: स्थानीय वॉलपेपर आयात करें
   open_folder: संसाधन फ़ोल्डर खोलें
   outdated: >-
@@ -311,6 +320,10 @@ widget:
   enable_for_monitor: इस मॉनिटर पर सक्षम करें
   instances: उदाहरण
 wm:
+  animations:
+    duration: एनीमेशन अवधि (एमएस)
+    ease_function: एनीमेशन सहजता समारोह
+    enable: विंडो के एनिमेशन सक्षम करें
   author: लेखक
   border:
     enable: विंडो की सीमा सक्षम करें

@@ -1,6 +1,7 @@
 mod apps_config;
 mod events;
 mod icons;
+pub mod performance;
 mod profiles;
 mod settings;
 mod toolbar_items;

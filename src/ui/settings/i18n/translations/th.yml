@@ -99,6 +99,14 @@ general:
     available: ชุดไอคอนที่มีอยู่
     selected: ชุดไอคอนที่ใช้งานอยู่
   language: ภาษา
+  performance_mode:
+    on_battery: บนแบตเตอรี่
+    on_energy_saver: ประหยัดพลังงาน
+    options:
+      disabled: พิการ
+      extreme: สุดขีด
+      minimal: น้อยที่สุด
+    plugged: เสียบหรือชาร์จ
   startup: วิ่งเมื่อเริ่มต้น?
   theme:
     available: ธีมที่มีจำหน่าย
@@ -143,6 +151,7 @@ resources:
   delete: ลบทรัพยากร
   discover: ค้นพบทรัพยากรเพิ่มเติม
   export: ทรัพยากรส่งออก
+  has_update: มีการอัปเดต
   import_wallpapers: นำเข้าวอลเปเปอร์ในท้องถิ่น
   open_folder: เปิดโฟลเดอร์ทรัพยากร
   outdated: ทรัพยากรนี้ได้รับการออกแบบมาสำหรับ Seelen UI รุ่นเก่าและอาจทำงานไม่ถูกต้อง
@@ -300,6 +309,10 @@ widget:
   enable_for_monitor: เปิดใช้งานบนจอภาพนี้
   instances: อินสแตนซ์
 wm:
+  animations:
+    duration: ระยะเวลาการเคลื่อนไหว (MS)
+    ease_function: ฟังก์ชั่นการผ่อนคลายภาพเคลื่อนไหว
+    enable: เปิดใช้งานภาพเคลื่อนไหวของหน้าต่าง
   author: ผู้เขียน
   border:
     enable: เปิดใช้งานเส้นขอบของหน้าต่าง

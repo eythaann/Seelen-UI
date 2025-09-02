@@ -104,6 +104,14 @@ general:
     available: Налични пакети с икони
     selected: Активни пакети с икони
   language: Език
+  performance_mode:
+    on_battery: На батерия
+    on_energy_saver: На Saver Energy
+    options:
+      disabled: Деактивиран
+      extreme: Крайно
+      minimal: Минимален
+    plugged: Включени или зареждане
   startup: Да се ​​стартирате при стартиране?
   theme:
     available: Налични теми
@@ -148,6 +156,7 @@ resources:
   delete: Изтриване на ресурс
   discover: Открийте още ресурси
   export: Износ на ресурси
+  has_update: Налична е актуализация
   import_wallpapers: Импортиране на местни тапети
   open_folder: Отваряне на папката с ресурси
   outdated: >-
@@ -310,6 +319,10 @@ widget:
   enable_for_monitor: Разрешаване на този монитор
   instances: Инстанции
 wm:
+  animations:
+    duration: Продължителност на анимацията (MS)
+    ease_function: Функция за облекчаване на анимацията
+    enable: Активирайте анимациите на Window
   author: Автор
   border:
     enable: Активирайте границата на Windows

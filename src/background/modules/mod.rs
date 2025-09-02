@@ -28,6 +28,7 @@ macro_rules! event_manager {
             std::sync::Arc<parking_lot::Mutex<Vec<Box<dyn FnMut($event) + Send + 'static>>>>,
         > = std::sync::OnceLock::new();
 
+        #[allow(dead_code)]
         impl $name {
             fn channel() -> &'static (
                 crossbeam_channel::Sender<$event>,
@@ -38,6 +39,12 @@ macro_rules! event_manager {
 
             pub fn event_tx() -> crossbeam_channel::Sender<$event> {
                 Self::channel().0.clone()
+            }
+
+            pub fn send(event: $event) {
+                if let Err(e) = Self::channel().0.send(event) {
+                    log::error!("Failed to send event: {e}");
+                }
             }
 
             fn subscribers() -> &'static std::sync::Arc<

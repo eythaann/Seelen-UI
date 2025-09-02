@@ -103,6 +103,14 @@ general:
     available: கிடைக்கும் ஐகான் பேக்குகள்
     selected: செயலில் உள்ள ஐகான் பேக்குகள்
   language: மொழி
+  performance_mode:
+    on_battery: பேட்டரியில்
+    on_energy_saver: ஆற்றல் சேமிப்பாளரில்
+    options:
+      disabled: முடக்கப்பட்டது
+      extreme: எக்ஸ்ட்ரீம்
+      minimal: குறைந்தபட்ச
+    plugged: செருகப்பட்ட அல்லது சார்ஜ்
   startup: தொடக்கத்தில் இயக்கவா?
   theme:
     available: கிடைக்கும் தீம்கள்
@@ -147,6 +155,7 @@ resources:
   delete: வளத்தை நீக்கு
   discover: மேலும் ஆதாரங்களைக் கண்டறியவும்
   export: ஏற்றுமதி வள
+  has_update: புதுப்பிப்பு கிடைக்கிறது
   import_wallpapers: உள்ளூர் வால்பேப்பர்களை இறக்குமதி செய்யுங்கள்
   open_folder: திறந்த வள கோப்புறை
   outdated: >-
@@ -309,6 +318,10 @@ widget:
   enable_for_monitor: இந்த மானிட்டரில் இயக்கவும்
   instances: நிகழ்வுகள்
 wm:
+  animations:
+    duration: அனிமேஷன் காலம் (எம்.எஸ்)
+    ease_function: அனிமேஷன் எளிதாக்கும் செயல்பாடு
+    enable: சாளரத்தின் அனிமேஷன்களை இயக்கவும்
   author: நூலாசிரியர்
   border:
     enable: சாளரத்தின் எல்லையை இயக்கு

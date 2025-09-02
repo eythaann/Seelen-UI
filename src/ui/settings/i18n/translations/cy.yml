@@ -102,6 +102,14 @@ general:
     available: Pecynnau Eicon Ar Gael
     selected: Pecynnau Eicon Actif
   language: Iaith
+  performance_mode:
+    on_battery: Ar fatri
+    on_energy_saver: Ar arbed ynni
+    options:
+      disabled: Anabl
+      extreme: Eithafol
+      minimal: Lleiaf posibl
+    plugged: Plygio neu wefru
   startup: Rhedeg ar gychwyn?
   theme:
     available: Themâu sydd ar Gael
@@ -148,6 +156,7 @@ resources:
   delete: Dileu Adnodd
   discover: Darganfyddwch fwy o adnoddau
   export: Adnodd Allforio
+  has_update: Mae diweddariad ar gael
   import_wallpapers: Mewnforio papurau wal lleol
   open_folder: Ffolder Adnoddau Agored
   outdated: >-
@@ -310,6 +319,10 @@ widget:
   enable_for_monitor: Galluogi ar y monitor hwn
   instances: Achosion
 wm:
+  animations:
+    duration: Hyd animeiddio (MS)
+    ease_function: Swyddogaeth lleddfu animeiddiad
+    enable: Galluogi animeiddiadau ffenestr
   author: Awduron
   border:
     enable: Galluogi ffin ffenestr

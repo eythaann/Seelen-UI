@@ -12,6 +12,7 @@ import { RootSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
+import { WmAnimationsSettings } from './Animations';
 import { GlobalPaddings } from './GlobalPaddings';
 import { OthersConfigs } from './Others';
 
@@ -75,6 +76,8 @@ export function WindowManagerSettings() {
         <SettingsGroup>
           <BorderSettings />
         </SettingsGroup>
+
+        <WmAnimationsSettings />
       </ConfigProvider>
     </>
   );

@@ -100,6 +100,14 @@ general:
     available: חבילות אייקונים זמינות
     selected: ערכות אייקונים פעילות
   language: שפה
+  performance_mode:
+    on_battery: על סוללה
+    on_energy_saver: על חוסך אנרגיה
+    options:
+      disabled: נָכֶה
+      extreme: קיצוני
+      minimal: מִינִימָלִי
+    plugged: מחובר או טעינה
   startup: לרוץ בהפעלה?
   theme:
     available: ערכות נושא זמינות
@@ -144,6 +152,7 @@ resources:
   delete: מחק משאב
   discover: לגלות משאבים נוספים
   export: משאב ייצוא
+  has_update: ניתן לקבל עדכון
   import_wallpapers: ייבא טפטים מקומיים
   open_folder: פתיחת תיקיית משאבים
   outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.
@@ -301,6 +310,10 @@ widget:
   enable_for_monitor: אפשר בצג זה
   instances: מקרים
 wm:
+  animations:
+    duration: משך אנימציה (MS)
+    ease_function: הפונקציה הקלת האנימציה
+    enable: אפשר אנימציות של חלון
   author: מחבר
   border:
     enable: אפשר את גבול החלון

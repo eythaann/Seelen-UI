@@ -28,7 +28,7 @@ use windows::{
 };
 
 use crate::{
-    error::{Result, ResultLogExt},
+    error::{ErrorMap, Result, ResultLogExt},
     event_manager, trace_lock,
     utils::pcwstr,
     windows_api::Com,
@@ -105,27 +105,21 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
         role: ERole,
         device_id: &windows_core::PCWSTR,
     ) -> windows_core::Result<()> {
-        let tx = MediaManager::event_tx();
-        tx.send(MediaEvent::DefaultDeviceChanged {
+        MediaManager::send(MediaEvent::DefaultDeviceChanged {
             flow,
             role,
             device_id: unsafe { device_id.to_string()? },
-        })
-        .log_error();
+        });
         Ok(())
     }
 
     fn OnDeviceAdded(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
-        let tx = MediaManager::event_tx();
-        tx.send(MediaEvent::DeviceAdded(unsafe { device_id.to_string()? }))
-            .log_error();
+        MediaManager::send(MediaEvent::DeviceAdded(unsafe { device_id.to_string()? }));
         Ok(())
     }
 
     fn OnDeviceRemoved(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
-        let tx = MediaManager::event_tx();
-        tx.send(MediaEvent::DeviceRemoved(unsafe { device_id.to_string()? }))
-            .log_error();
+        MediaManager::send(MediaEvent::DeviceRemoved(unsafe { device_id.to_string()? }));
         Ok(())
     }
 
@@ -140,6 +134,7 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
             DEVICE_STATE_ACTIVE => tx.send(MediaEvent::DeviceAdded(device_id)),
             _ => tx.send(MediaEvent::DeviceRemoved(device_id)),
         }
+        .wrap_error()
         .log_error();
         Ok(())
     }
@@ -431,9 +426,7 @@ impl MediaManager {
                     player.removed_at = Some(std::time::Instant::now());
                     std::thread::spawn(move || {
                         std::thread::sleep(Duration::from_millis(1500));
-                        Self::event_tx()
-                            .send(MediaEvent::MediaPlayerCleanRequested)
-                            .log_error();
+                        Self::send(MediaEvent::MediaPlayerCleanRequested);
                     });
                 }
             }

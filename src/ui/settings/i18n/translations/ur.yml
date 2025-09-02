@@ -102,6 +102,14 @@ general:
     available: دستیاب آئیکن پیک
     selected: ایکٹو آئیکن پیک
   language: زبان
+  performance_mode:
+    on_battery: بیٹری پر
+    on_energy_saver: انرجی سیور پر
+    options:
+      disabled: غیر فعال
+      extreme: انتہائی
+      minimal: کم سے کم
+    plugged: پلگ ان یا چارجنگ
   startup: اسٹارٹ اپ پر چلائیں؟
   theme:
     available: دستیاب تھیمز
@@ -148,6 +156,7 @@ resources:
   delete: وسائل کو حذف کریں
   discover: مزید وسائل دریافت کریں
   export: برآمدی وسائل
+  has_update: ایک تازہ کاری دستیاب ہے
   import_wallpapers: مقامی وال پیپر درآمد کریں
   open_folder: اوپن ریسورس فولڈر
   outdated: >-
@@ -309,6 +318,10 @@ widget:
   enable_for_monitor: اس مانیٹر کو قابل بنائیں
   instances: مثال کے طور پر
 wm:
+  animations:
+    duration: حرکت پذیری کا دورانیہ (ایم ایس)
+    ease_function: حرکت پذیری میں آسانی پیدا کرنا
+    enable: ونڈو کے متحرک تصاویر کو فعال کریں
   author: مصنف
   border:
     enable: ونڈو کی بارڈر کو فعال کریں

@@ -105,6 +105,14 @@ general:
     available: Xirmooyinka Icon ee la heli karo
     selected: Xirmooyinka Astaanta Firfircoon
   language: Af
+  performance_mode:
+    on_battery: Batteriga
+    on_energy_saver: Ku Saabsan Tamarta Saver
+    options:
+      disabled: Itaal-daran
+      extreme: Xad-dhaaf ah
+      minimal: Aan yahayeexan
+    plugged: Xirxiran ama ku dallac
   startup: Ku orod bilowga?
   theme:
     available: Mawduucyada la heli karo
@@ -151,6 +159,7 @@ resources:
   delete: Tirtir Kheyraadka
   discover: Soo hel ilo badan
   export: Ilaha dhoofinta
+  has_update: Cusboonaysiin ayaa la heli karaa
   import_wallpapers: Soo dejiso waraaqaha boodhka ee maxalliga ah
   open_folder: Fur faylka furan
   outdated: >-
@@ -312,6 +321,10 @@ widget:
   enable_for_monitor: U oggolow kormeerkan
   instances: Tusaca
 wm:
+  animations:
+    duration: Duration animation (MS)
+    ease_function: Animation fududeynta shaqada
+    enable: Karti animations daaqadaha
   author: Qoraa
   border:
     enable: Karti xadka daaqadaha

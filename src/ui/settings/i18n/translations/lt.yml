@@ -102,6 +102,14 @@ general:
     available: Galimi piktogramų paketai
     selected: Aktyvūs piktogramų paketai
   language: Kalba
+  performance_mode:
+    on_battery: Ant akumuliatoriaus
+    on_energy_saver: Dėl energijos taupymo
+    options:
+      disabled: Neįgalus
+      extreme: Kraštutinumas
+      minimal: Minimalus
+    plugged: Prijungtas ar įkrovimas
   startup: Paleisti paleidimą?
   theme:
     available: Galimos temos
@@ -146,6 +154,7 @@ resources:
   delete: Ištrinti šaltinį
   discover: Atraskite daugiau išteklių
   export: Eksporto ištekliai
+  has_update: Galimas atnaujinimas
   import_wallpapers: Importuoti vietinius ekrano užsklandas
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
@@ -306,6 +315,10 @@ widget:
   enable_for_monitor: Įjungti šiame monitoriuje
   instances: Atvejai
 wm:
+  animations:
+    duration: Animacijos trukmė (MS)
+    ease_function: Animacijos palengvinimo funkcija
+    enable: Įgalinkite lango animacijas
   author: Autorius
   border:
     enable: Įgalinti lango sieną

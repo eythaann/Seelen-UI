@@ -102,6 +102,14 @@ general:
     available: Dostupné balíčky ikon
     selected: Aktivní balíčky ikon
   language: Jazyk
+  performance_mode:
+    on_battery: Na baterii
+    on_energy_saver: Na spořič energie
+    options:
+      disabled: Deaktivované
+      extreme: Extrémní
+      minimal: Minimální
+    plugged: Připojené nebo nabíjení
   startup: Spoustit při každém startu?
   theme:
     available: Dostupné motivy
@@ -148,6 +156,7 @@ resources:
   delete: Odstranit zdroj
   discover: Objevte další zdroje
   export: Exportní zdroj
+  has_update: K dispozici je aktualizace
   import_wallpapers: Import místních tapet
   open_folder: Otevření složky se zdroji
   outdated: >-
@@ -310,6 +319,10 @@ widget:
   enable_for_monitor: Povolit na tomto monitoru
   instances: Instance
 wm:
+  animations:
+    duration: Animace doba trvání (MS)
+    ease_function: Funkce uvolňování animace
+    enable: Povolit animace okna
   author: Autor
   border:
     enable: Povolte hranici okna

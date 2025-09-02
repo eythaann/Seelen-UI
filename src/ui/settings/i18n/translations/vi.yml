@@ -103,6 +103,14 @@ general:
     available: Gói biểu tượng có sẵn
     selected: Gói biểu tượng hoạt động
   language: Ngôn ngữ
+  performance_mode:
+    on_battery: Trên pin
+    on_energy_saver: Trên tiết kiệm năng lượng
+    options:
+      disabled: Tàn tật
+      extreme: Vô cùng
+      minimal: Tối thiểu
+    plugged: Cắm hoặc sạc
   startup: Chạy khi khởi động?
   theme:
     available: Chủ đề có sẵn
@@ -147,6 +155,7 @@ resources:
   delete: Xóa tài nguyên
   discover: Khám phá thêm tài nguyên
   export: Tài nguyên xuất khẩu
+  has_update: Một bản cập nhật có sẵn
   import_wallpapers: Nhập hình nền địa phương
   open_folder: Mở thư mục tài nguyên
   outdated: >-
@@ -309,6 +318,10 @@ widget:
   enable_for_monitor: Bật trên màn hình này
   instances: Trường hợp
 wm:
+  animations:
+    duration: Thời lượng hoạt hình (MS)
+    ease_function: Hoạt hình nới lỏng chức năng
+    enable: Bật hình ảnh động của Window
   author: Tác giả
   border:
     enable: Bật biên giới của cửa sổ

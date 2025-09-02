@@ -23,17 +23,18 @@ use windows::Win32::{
 
 use crate::{
     app::{get_app_handle, Seelen, SEELEN},
-    error::{Result, ResultLogExt},
+    error::{ErrorMap, Result, ResultLogExt},
     event_manager, log_error,
     modules::input::{domain::Point, Mouse},
     state::application::FULL_STATE,
     trace_lock,
     utils::spawn_named_thread,
     virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager, SluWorkspacesManager},
-    widgets::weg::SeelenWeg,
-    widgets::window_manager::instance::WindowManagerV2,
-    windows_api::window::event::WinEvent,
-    windows_api::{window::Window, WindowEnumerator},
+    widgets::{weg::SeelenWeg, window_manager::instance::WindowManagerV2},
+    windows_api::{
+        window::{event::WinEvent, Window},
+        WindowEnumerator,
+    },
 };
 
 static HOOK_MANAGER_SKIPPER: LazyLock<Arc<Mutex<HookManagerSkipper>>> =
@@ -171,6 +172,7 @@ impl HookManager {
                     SeelenEvent::GlobalFocusChanged,
                     origin.as_focused_app_information(),
                 )
+                .wrap_error()
                 .log_error();
         }
 

@@ -101,6 +101,14 @@ general:
     available: Vifurushi vya ikoni vinavyopatikana
     selected: Vifurushi vya ikoni zinazotumika
   language: Lugha
+  performance_mode:
+    on_battery: Kwenye betri
+    on_energy_saver: Kwenye Saver ya Nishati
+    options:
+      disabled: Walemavu
+      extreme: Uliokithiri
+      minimal: Ndogo
+    plugged: Kuziba au kuchaji
   startup: Kuendesha kuanza?
   theme:
     available: Mandhari Zinazopatikana
@@ -145,6 +153,7 @@ resources:
   delete: Futa rasilimali
   discover: Gundua rasilimali zaidi
   export: Rasilimali ya kuuza nje
+  has_update: Sasisho linapatikana
   import_wallpapers: Ingiza wallpapers za mitaa
   open_folder: Fungua folda ya rasilimali
   outdated: >-
@@ -306,6 +315,10 @@ widget:
   enable_for_monitor: Wezesha kwenye mfuatiliaji huu
   instances: Matukio
 wm:
+  animations:
+    duration: Muda wa Uhuishaji (MS)
+    ease_function: Uhuishaji wa Kuongeza Uhuishaji
+    enable: Wezesha michoro za Window
   author: Mwandishi
   border:
     enable: Wezesha mpaka wa dirisha

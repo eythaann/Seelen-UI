@@ -13,6 +13,7 @@ import { RootSelectors } from '../../../shared/store/app/selectors';
 
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
+import { PerformanceSettings } from './Performance';
 
 export function General() {
   const [changingAutostart, setChangingAutostart] = useState(false);
@@ -97,6 +98,8 @@ export function General() {
       </SettingsGroup>
 
       <Colors />
+
+      <PerformanceSettings />
     </>
   );
 }

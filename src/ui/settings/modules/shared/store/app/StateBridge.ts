@@ -25,6 +25,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'drpc',
     'byTheme',
     'byWallpaper',
+    'performanceMode',
   ]);
 
   // migration since v2.1.0

@@ -102,6 +102,14 @@ general:
     available: Lausir táknpakkar
     selected: Virkir táknpakkar
   language: Tungumál
+  performance_mode:
+    on_battery: Á rafhlöðu
+    on_energy_saver: Á orkusparnað
+    options:
+      disabled: Óvirkur
+      extreme: Öfgafullt
+      minimal: Lágmarks
+    plugged: Tengt eða hleðsla
   startup: Hlaupa í gangsetningu?
   theme:
     available: Þemu í boði
@@ -146,6 +154,7 @@ resources:
   delete: Eyða auðlindinni
   discover: Uppgötvaðu fleiri úrræði
   export: Útflutningsauðlind
+  has_update: Uppfærsla er í boði
   import_wallpapers: Flytja inn staðbundið veggfóður
   open_folder: Opin auðlindamappa
   outdated: >-
@@ -308,6 +317,10 @@ widget:
   enable_for_monitor: Virkja á þessum skjá
   instances: Dæmi
 wm:
+  animations:
+    duration: Lengd hreyfimynda (MS)
+    ease_function: Leiðandi aðgerð
+    enable: Virkja teiknimyndir Window
   author: Höfundur
   border:
     enable: Virkja landamæri glugga

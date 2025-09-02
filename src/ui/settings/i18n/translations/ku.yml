@@ -102,6 +102,14 @@ general:
     available: Pakêtên îkonê yên berdest
     selected: Pakêtên Îkonên Çalak
   language: Ziman
+  performance_mode:
+    on_battery: Li ser batterê
+    on_energy_saver: Li ser Saveravdêriya Enerjiyê
+    options:
+      disabled: Bêmecel
+      extreme: Bêfêhm zêde
+      minimal: Minimal
+    plugged: Plug kirin an drav kirin
   startup: Li ser destpêka bisekinin?
   theme:
     available: Mijarên Berdest
@@ -148,6 +156,7 @@ resources:
   delete: Avkaniyê jêbirin
   discover: Zêdetir çavkaniyên kifş bikin
   export: Resouravkaniya Export
+  has_update: Nûvekirinek heye
   import_wallpapers: Dîwarên herêmî yên import bikin
   open_folder: Peldanka çavkaniya vekirî
   outdated: >-
@@ -309,6 +318,10 @@ widget:
   enable_for_monitor: Li ser vê çavdêriyê çalak bikin
   instances: Mînak
 wm:
+  animations:
+    duration: Demjimêr anîmasyon (MS)
+    ease_function: Fonksiyona hêsankirina anîmasyonê
+    enable: Animasyonên Pencereyê çalak bikin
   author: Nivîskar
   border:
     enable: Sînorê pencereyê çalak bike

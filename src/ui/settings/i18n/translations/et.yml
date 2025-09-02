@@ -101,6 +101,14 @@ general:
     available: Saadaval ikoonipaketid
     selected: Aktiivsed ikoonipaketid
   language: Keel
+  performance_mode:
+    on_battery: Akul
+    on_energy_saver: Energiasäästjal
+    options:
+      disabled: Puudega
+      extreme: Äärmuslik
+      minimal: Minimaalne
+    plugged: Ühendatud või laadimine
   startup: Kas joosta startup?
   theme:
     available: Saadaolevad teemad
@@ -145,6 +153,7 @@ resources:
   delete: Ressurss kustutama
   discover: Avasta rohkem ressursse
   export: Ekspordi ressurss
+  has_update: Värskendus on saadaval
   import_wallpapers: Kohalike taustapiltide importimine
   open_folder: Avage ressursside kaust
   outdated: >-
@@ -307,6 +316,10 @@ widget:
   enable_for_monitor: Lubatud sellel monitoril
   instances: Instants
 wm:
+  animations:
+    duration: Animatsiooni kestus (MS)
+    ease_function: Animatsiooni leevendusfunktsioon
+    enable: Luba akna animatsioonid
   author: Autor
   border:
     enable: Luba akna piir

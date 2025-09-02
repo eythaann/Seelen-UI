@@ -61,6 +61,7 @@ define_app_errors!(
     WinHotkey(win_hotkeys::error::WHKError);
     SluIpc(slu_ipc::error::Error);
     Tokio(tokio::task::JoinError);
+    Positioning(positioning::error::Error);
 );
 
 impl std::fmt::Debug for AppError {
@@ -172,6 +173,10 @@ pub trait ResultLogExt {
     fn log_error(self);
 }
 
+pub trait ErrorMap<T> {
+    fn wrap_error(self) -> core::result::Result<T, AppError>;
+}
+
 impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error> {
         match self {
@@ -190,7 +195,13 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
     }
 }
 
-impl<T, E: std::fmt::Debug> ResultLogExt for core::result::Result<T, E> {
+impl<T, E: Into<AppError>> ErrorMap<T> for core::result::Result<T, E> {
+    fn wrap_error(self) -> core::result::Result<T, AppError> {
+        self.map_err(Into::into)
+    }
+}
+
+impl<T> ResultLogExt for core::result::Result<T, AppError> {
     fn log_error(self) {
         if let Err(err) = self {
             log::error!("{err:?}");
