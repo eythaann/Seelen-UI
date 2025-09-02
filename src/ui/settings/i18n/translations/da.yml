@@ -97,6 +97,14 @@ general:
     available: Tilgængelige ikonpakker
     selected: Aktive ikonpakker
   language: Sprog
+  performance_mode:
+    on_battery: På batteri
+    on_energy_saver: På energibesparende
+    options:
+      disabled: Handicappet
+      extreme: Ekstrem
+      minimal: Minimal
+    plugged: Tilsluttet eller opladning
   startup: Kør ved opstart?
   theme:
     available: Tilgængelige temaer
@@ -141,7 +149,7 @@ resources:
   delete: Slet ressource
   discover: Opdag flere ressourcer
   export: Eksporter ressource
-  has_update: An update is available
+  has_update: En opdatering er tilgængelig
   import_wallpapers: Importer lokale baggrunde
   open_folder: Åbn ressourcemappen
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Aktiver på denne skærm
   instances: Forekomster
 wm:
+  animations:
+    duration: Animationsvarighed (MS)
+    ease_function: Animationsaflastningsfunktion
+    enable: Aktivér vindues animationer
   author: Forfatter
   border:
     enable: Aktivér vindues grænse
