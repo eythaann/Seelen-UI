@@ -97,6 +97,14 @@ general:
     available: Saatavilla kuvakepaketit
     selected: Aktiiviset kuvakepaketit
   language: Kieli
+  performance_mode:
+    on_battery: Akun päällä
+    on_energy_saver: Energiansäästäjällä
+    options:
+      disabled: Vammainen
+      extreme: Äärimmäinen
+      minimal: Minimaalinen
+    plugged: Kytketty tai lataus
   startup: Suorittaa käynnistyksen yhteydessä?
   theme:
     available: Käytettävissä olevat teemat
@@ -141,7 +149,7 @@ resources:
   delete: Poistaa resurssi
   discover: Löydä lisää resursseja
   export: Vientiresurssi
-  has_update: An update is available
+  has_update: Päivitys on käytettävissä
   import_wallpapers: Tuo paikallisia taustakuvia
   open_folder: Avaa resurssikansio
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Ota käyttöön tällä näytöllä
   instances: Instanssit
 wm:
+  animations:
+    duration: Animaation kesto (MS)
+    ease_function: Animaation helpotustoiminto
+    enable: Ota ikkunan animaatiot käyttöön
   author: Kirjoittaja
   border:
     enable: Ota ikkunan reuna käyttöön
