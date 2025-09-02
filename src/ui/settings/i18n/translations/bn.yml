@@ -97,6 +97,14 @@ general:
     available: উপলব্ধ আইকন প্যাক
     selected: সক্রিয় আইকন প্যাক
   language: ভাষা
+  performance_mode:
+    on_battery: ব্যাটারিতে
+    on_energy_saver: শক্তি সঞ্চয় উপর
+    options:
+      disabled: অক্ষম
+      extreme: চরম
+      minimal: ন্যূনতম
+    plugged: প্লাগ বা চার্জিং
   startup: প্রারম্ভকালে চালানো?
   theme:
     available: উপলব্ধ থিম
@@ -141,7 +149,7 @@ resources:
   delete: সংস্থান মুছুন
   discover: আরও সংস্থান আবিষ্কার করুন
   export: রফতানি সংস্থান
-  has_update: An update is available
+  has_update: একটি আপডেট উপলব্ধ
   import_wallpapers: স্থানীয় ওয়ালপেপার আমদানি করুন
   open_folder: ওপেন রিসোর্স ফোল্ডার
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: এই মনিটরে সক্ষম করুন
   instances: উদাহরণ
 wm:
+  animations:
+    duration: অ্যানিমেশন সময়কাল (এমএস)
+    ease_function: অ্যানিমেশন ইজিং ফাংশন
+    enable: উইন্ডোর অ্যানিমেশনগুলি সক্ষম করুন
   author: লেখক
   border:
     enable: উইন্ডোর সীমানা সক্ষম করুন
