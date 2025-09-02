@@ -97,6 +97,14 @@ general:
     available: Awọn akopọ Aami ti o wa
     selected: Awọn akopọ Aami ti nṣiṣe lọwọ
   language: Ede
+  performance_mode:
+    on_battery: Lori batiri
+    on_energy_saver: Lori Ipamọ Agbara
+    options:
+      disabled: Abirun
+      extreme: Ipẹkun
+      minimal: Ayọkuro
+    plugged: Pulọọgi tabi gbigba agbara
   startup: Ṣiṣe lori ibẹrẹ?
   theme:
     available: Awọn akori to wa
@@ -141,7 +149,7 @@ resources:
   delete: Paarẹ awọn olu
   discover: Ṣawari awọn orisun diẹ sii
   export: Si ilẹkan ta
-  has_update: An update is available
+  has_update: Imudojuiwọn wa
   import_wallpapers: Gbe awọn iṣẹṣọ ogiri agbegbe wọle
   open_folder: Ṣii folda Ipilẹṣẹ
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Mu ṣiṣẹ lori atẹle yii
   instances: Awọn iṣẹlẹ
 wm:
+  animations:
+    duration: Akoko Idaraya (MS)
+    ease_function: Iṣẹ to dara pupọ
+    enable: Jeki awọn ohun idanilaraya window
   author: Onkọwe ọkunrin
   border:
     enable: Jeki aala window
