@@ -97,6 +97,14 @@ general:
     available: Mavjud piktogramma to'plamlari
     selected: Faol piktogramma to'plamlari
   language: Til
+  performance_mode:
+    on_battery: Batareyada
+    on_energy_saver: Energiya tejash bo'yicha
+    options:
+      disabled: Nogiron
+      extreme: Haddan tashqari
+      minimal: Minimal
+    plugged: Ulangan yoki zaryadlash
   startup: Ishga tushirishda ishlaydimi?
   theme:
     available: Mavjud mavzular
@@ -141,7 +149,7 @@ resources:
   delete: Resurslarni o'chirish
   discover: Ko'proq resurslarni kashf eting
   export: Eksport manbai
-  has_update: An update is available
+  has_update: Yangilanish mavjud
   import_wallpapers: Mahalliy fon rasmlarini import qilish
   open_folder: Resurslar jildini oching
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Ushbu monitorga yoqish
   instances: Mustaqil holatlar
 wm:
+  animations:
+    duration: Animatsiya muddati (MS)
+    ease_function: Animatsiya engillashtirish funktsiyasi
+    enable: Oyna animatsiyalarini yoqing
   author: Muallif
   border:
     enable: Oynaning chegarasini yoqing
