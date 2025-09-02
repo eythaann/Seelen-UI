@@ -97,6 +97,14 @@ general:
     available: Pachete de pictograme disponibile
     selected: Pachete de pictograme active
   language: Limba
+  performance_mode:
+    on_battery: Pe baterie
+    on_energy_saver: Pe economia de energie
+    options:
+      disabled: Dezactivat
+      extreme: Extrem
+      minimal: Minim
+    plugged: Conectat sau încărcat
   startup: Rulați la pornire?
   theme:
     available: Teme disponibile
@@ -141,7 +149,7 @@ resources:
   delete: Ștergeți resursa
   discover: Descoperiți mai multe resurse
   export: Export de resurse
-  has_update: An update is available
+  has_update: O actualizare este disponibilă
   import_wallpapers: Importați imagini de fundal locale
   open_folder: Deschideți folderul de resurse
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Activați pe acest monitor
   instances: Instanțe
 wm:
+  animations:
+    duration: Durata de animație (MS)
+    ease_function: Funcția de ușurare a animației
+    enable: Activați animațiile Window
   author: Autor
   border:
     enable: Activați granița ferestrei
