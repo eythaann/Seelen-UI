@@ -97,6 +97,14 @@ general:
     available: Доступні пакети іконок
     selected: Активні пакети іконки
   language: Мова
+  performance_mode:
+    on_battery: На акумулятор
+    on_energy_saver: На енергозбереженні
+    options:
+      disabled: Інвалід
+      extreme: Екстремальний
+      minimal: Мінімальний
+    plugged: Підключений або заряджається
   startup: Запускати разом з Windows?
   theme:
     available: Доступні теми
@@ -141,7 +149,7 @@ resources:
   delete: Видалити ресурс
   discover: Відкрийте для себе більше ресурсів
   export: Експортний ресурс
-  has_update: An update is available
+  has_update: Доступне оновлення
   import_wallpapers: Імпортувати місцеві шпалери
   open_folder: Відкрийте папку з ресурсами
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Увімкнути на цьому моніторі
   instances: Екземпляри
 wm:
+  animations:
+    duration: Тривалість анімації (MS)
+    ease_function: Функція ослаблення анімації
+    enable: Увімкнути анімацію вікна
   author: Автор
   border:
     enable: Увімкнути кордон вікна
