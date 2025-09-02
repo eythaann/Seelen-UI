@@ -97,6 +97,14 @@ general:
     available: Доступни пакети икона
     selected: Активни пакети икона
   language: Језик
+  performance_mode:
+    on_battery: На батерији
+    on_energy_saver: На уштеду енергије
+    options:
+      disabled: Инвалидски
+      extreme: Екстремни
+      minimal: Минималан
+    plugged: Прикључен или пуњење
   startup: Ради на покретању?
   theme:
     available: Доступне теме
@@ -141,7 +149,7 @@ resources:
   delete: Избриши ресурс
   discover: Откријте више ресурса
   export: Извозни ресурс
-  has_update: An update is available
+  has_update: Доступно је ажурирање
   import_wallpapers: Увоз локалне позадине
   open_folder: Отворите мапу ресурса
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: Омогући на овом монитору
   instances: Случајеви
 wm:
+  animations:
+    duration: Трајање анимације (МС)
+    ease_function: Олакшања анимације
+    enable: Омогућите анимације прозора
   author: Аутор
   border:
     enable: Омогућите границу прозора
