@@ -97,6 +97,14 @@ general:
     available: بسته‌های آیکون موجود
     selected: بسته های آیکون فعال
   language: زبان
+  performance_mode:
+    on_battery: در باتری
+    on_energy_saver: در مورد صرفه جویی در انرژی
+    options:
+      disabled: معلول
+      extreme: شدید
+      minimal: حداقل
+    plugged: وصل شده یا شارژ
   startup: در راه اندازی اجرا می شود؟
   theme:
     available: تم های موجود
@@ -141,7 +149,7 @@ resources:
   delete: منبع را حذف کنید
   discover: منابع بیشتری را کشف کنید
   export: منبع صادراتی
-  has_update: An update is available
+  has_update: به روزرسانی در دسترس است
   import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
   open_folder: پوشه منبع باز
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: این مانیتور را فعال کنید
   instances: نمونه
 wm:
+  animations:
+    duration: مدت زمان انیمیشن (MS)
+    ease_function: عملکرد تسکین انیمیشن
+    enable: انیمیشن های پنجره را فعال کنید
   author: نویسنده
   border:
     enable: مرز پنجره را فعال کنید
