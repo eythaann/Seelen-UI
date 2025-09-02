@@ -97,6 +97,14 @@ general:
     available: පවතින අයිකන ඇසුරුම්
     selected: ක්‍රියාකාරී අයිකන ඇසුරුම්
   language: භාෂාව
+  performance_mode:
+    on_battery: බැටරි මත
+    on_energy_saver: බලශක්ති ඉතිරිය
+    options:
+      disabled: ආබාධිත
+      extreme: අන්ත
+      minimal: අවම
+    plugged: ප්ලග් හෝ ආරෝපණය
   startup: ආරම්භයේදී ධාවනය කරන්නද?
   theme:
     available: පවතින තේමා
@@ -141,7 +149,7 @@ resources:
   delete: සම්පත මකන්න
   discover: තවත් සම්පත් සොයා ගන්න
   export: අපනයන සම්පත
-  has_update: An update is available
+  has_update: යාවත්කාලීන කිරීමක් තිබේ
   import_wallpapers: දේශීය බිතුපත් ආනයනය කරන්න
   open_folder: සම්පත් ෆෝල්ඩරය විවෘත කරන්න
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: මෙම මොනිටරය මත සක්රීය කරන්න
   instances: අවස්ථා
 wm:
+  animations:
+    duration: සජීවිකරණ කාලය (MS)
+    ease_function: සජීවිකරණ ලිහිල් කිරීමේ ක්රියාකාරිත්වය
+    enable: කවුළුවේ සජීවිකරණ සක්රීය කරන්න
   author: කර්තෘ
   border:
     enable: කවුළුවේ මායිම සක්රිය කරන්න
