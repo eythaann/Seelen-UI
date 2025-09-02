@@ -97,6 +97,14 @@ general:
     available: 사용 가능한 아이콘 팩
     selected: 현재 아이콘 팩
   language: 언어
+  performance_mode:
+    on_battery: 배터리에
+    on_energy_saver: 에너지 세이버에서
+    options:
+      disabled: 장애가 있는
+      extreme: 극심한
+      minimal: 최소
+    plugged: 플러그 또는 충전
   startup: 시작 시 실행
   theme:
     available: 사용 가능한 테마
@@ -141,7 +149,7 @@ resources:
   delete: 리소스 삭제
   discover: 더 많은 리소스 살펴보기
   export: 리소스 내보내기
-  has_update: An update is available
+  has_update: 업데이트를 사용할 수 있습니다
   import_wallpapers: 로컬 배경화면 가져오기
   open_folder: 리소스 폴더 열기
   outdated: >-
@@ -298,6 +306,10 @@ widget:
   enable_for_monitor: 이 모니터에서 활성화
   instances: 인스턴스
 wm:
+  animations:
+    duration: 애니메이션 지속 시간 (MS)
+    ease_function: 애니메이션 완화 기능
+    enable: 창의 애니메이션을 활성화합니다
   author: 작성자
   border:
     enable: 창 테두리 활성화
