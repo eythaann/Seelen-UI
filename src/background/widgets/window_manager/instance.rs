@@ -1,6 +1,9 @@
 use base64::Engine;
 use getset::{Getters, MutGetters};
-use seelen_core::system_state::MonitorId;
+use seelen_core::{
+    state::{FancyToolbarSide, HideMode, SeelenWegSide},
+    system_state::MonitorId,
+};
 use std::sync::Arc;
 use tauri::{Listener, WebviewWindow};
 use windows::Win32::{
@@ -10,9 +13,13 @@ use windows::Win32::{
 use crate::{
     app::get_app_handle,
     error::Result,
-    log_error, trace_lock,
+    log_error,
+    state::application::FULL_STATE,
+    trace_lock,
     virtual_desktops::get_vd_manager,
-    widgets::{toolbar::FancyToolbar, window_manager::state::WM_STATE, WebviewArgs},
+    widgets::{
+        toolbar::FancyToolbar, weg::SeelenWeg, window_manager::state::WM_STATE, WebviewArgs,
+    },
     windows_api::WindowsApi,
 };
 
@@ -97,10 +104,46 @@ impl WindowManagerV2 {
     }
 
     pub fn set_position(&self, monitor: HMONITOR) -> Result<()> {
-        let work_area = FancyToolbar::get_work_area_by_monitor(monitor)?;
-        let main_hwnd = self.hwnd()?;
-        WindowsApi::move_window(main_hwnd, &work_area)?;
-        WindowsApi::set_position(main_hwnd, None, &work_area, SWP_ASYNCWINDOWPOS)?;
+        let state = FULL_STATE.load();
+        let toolbar_config = &state.settings.by_widget.fancy_toolbar;
+        let weg_config = &state.settings.by_widget.weg;
+
+        let hwnd = HWND(self.hwnd()?.0);
+        let monitor_info = WindowsApi::monitor_info(monitor)?;
+
+        let mut rect = monitor_info.monitorInfo.rcMonitor;
+        if toolbar_config.enabled && toolbar_config.hide_mode != HideMode::Always {
+            let toolbar_size = FancyToolbar::get_toolbar_height_on_monitor(monitor)?;
+            match state.settings.by_widget.fancy_toolbar.position {
+                FancyToolbarSide::Top => {
+                    rect.top += toolbar_size;
+                }
+                FancyToolbarSide::Bottom => {
+                    rect.bottom -= toolbar_size;
+                }
+            }
+        }
+
+        if weg_config.enabled && weg_config.hide_mode != HideMode::Always {
+            let weg_size = SeelenWeg::get_weg_size_on_monitor(monitor)?;
+            match weg_config.position {
+                SeelenWegSide::Top => {
+                    rect.top += weg_size;
+                }
+                SeelenWegSide::Bottom => {
+                    rect.bottom -= weg_size;
+                }
+                SeelenWegSide::Left => {
+                    rect.left += weg_size;
+                }
+                SeelenWegSide::Right => {
+                    rect.right -= weg_size;
+                }
+            }
+        }
+
+        WindowsApi::move_window(hwnd, &rect)?;
+        WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 }

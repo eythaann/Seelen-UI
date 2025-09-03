@@ -1,7 +1,7 @@
 use base64::Engine;
 use seelen_core::{
     handlers::SeelenEvent,
-    state::{HideMode, SeelenWegSide},
+    state::{FancyToolbarSide, HideMode, SeelenWegSide},
 };
 use serde::Serialize;
 use tauri::{Emitter, WebviewWindow, Wry};
@@ -169,30 +169,55 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
-        let rc_work = FancyToolbar::get_work_area_by_monitor(monitor)?;
-        let hwnd = HWND(self.hwnd()?.0);
-
+    pub fn get_weg_size_on_monitor(monitor: HMONITOR) -> Result<i32> {
         let state = FULL_STATE.load();
         let settings = &state.settings.by_widget.weg;
         let monitor_dpi = WindowsApi::get_monitor_scale_factor(monitor)?;
         let text_scale_factor = WindowsApi::get_text_scale_factor()?;
-
         let total_size = (settings.total_size() as f64 * monitor_dpi * text_scale_factor) as i32;
+        Ok(total_size)
+    }
 
-        self.theoretical_rect = rc_work;
+    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
+        let state = FULL_STATE.load();
+        let toolbar_config = &state.settings.by_widget.fancy_toolbar;
+        let settings = &state.settings.by_widget.weg;
+
+        let hwnd = HWND(self.hwnd()?.0);
+        let monitor_info = WindowsApi::monitor_info(monitor)?;
+
+        let mut rect = monitor_info.monitorInfo.rcMonitor;
+        if toolbar_config.enabled && toolbar_config.hide_mode != HideMode::Always {
+            let toolbar_size = FancyToolbar::get_toolbar_height_on_monitor(monitor)?;
+            match state.settings.by_widget.fancy_toolbar.position {
+                FancyToolbarSide::Top => {
+                    rect.top += toolbar_size;
+                }
+                FancyToolbarSide::Bottom => {
+                    rect.bottom -= toolbar_size;
+                }
+            }
+        }
+
+        let dock_size = Self::get_weg_size_on_monitor(monitor)?;
+        self.theoretical_rect = monitor_info.monitorInfo.rcMonitor;
+        // note: we reduce by 10px the webview size of the dock to avoid be matched as a fullscreen window
         match settings.position {
             SeelenWegSide::Left => {
-                self.theoretical_rect.right = self.theoretical_rect.left + total_size;
+                self.theoretical_rect.right = self.theoretical_rect.left + dock_size;
+                rect.right -= 10;
             }
             SeelenWegSide::Right => {
-                self.theoretical_rect.left = self.theoretical_rect.right - total_size;
+                self.theoretical_rect.left = self.theoretical_rect.right - dock_size;
+                rect.left += 10;
             }
             SeelenWegSide::Top => {
-                self.theoretical_rect.bottom = self.theoretical_rect.top + total_size;
+                self.theoretical_rect.bottom = self.theoretical_rect.top + dock_size;
+                rect.bottom -= 10;
             }
             SeelenWegSide::Bottom => {
-                self.theoretical_rect.top = self.theoretical_rect.bottom - total_size;
+                self.theoretical_rect.top = self.theoretical_rect.bottom - dock_size;
+                rect.top += 10;
             }
         }
 
@@ -207,8 +232,8 @@ impl SeelenWeg {
         };
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(hwnd, &rc_work)?;
-        WindowsApi::set_position(hwnd, None, &rc_work, SWP_ASYNCWINDOWPOS)?;
+        WindowsApi::move_window(hwnd, &rect)?;
+        WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 }

@@ -149,31 +149,12 @@ impl FancyToolbar {
         base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::decoded_label(monitor_id))
     }
 
-    /// Work area no works fine on multiple monitors
-    /// so we use this functions that only takes the toolbar in account
-    pub fn get_work_area_by_monitor(monitor: HMONITOR) -> Result<RECT> {
+    pub fn get_toolbar_height_on_monitor(monitor: HMONITOR) -> Result<i32> {
         let state = FULL_STATE.load();
         let settings = &state.settings.by_widget.fancy_toolbar;
-
-        let monitor_info = WindowsApi::monitor_info(monitor)?;
         let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(monitor)?;
         let text_scale_factor = WindowsApi::get_text_scale_factor()?;
-        let real_height =
-            (settings.height as f64 * monitor_scale_factor * text_scale_factor) as i32;
-
-        let mut rect = monitor_info.monitorInfo.rcMonitor;
-        if state.is_bar_enabled() {
-            match settings.position {
-                FancyToolbarSide::Top => {
-                    rect.top += real_height;
-                }
-                FancyToolbarSide::Bottom => {
-                    rect.bottom -= real_height;
-                }
-            }
-        }
-
-        Ok(rect)
+        Ok((settings.height as f64 * monitor_scale_factor * text_scale_factor) as i32)
     }
 
     pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
@@ -183,19 +164,22 @@ impl FancyToolbar {
         let settings = &state.settings.by_widget.fancy_toolbar;
 
         let monitor_info = WindowsApi::monitor_info(monitor)?;
-        let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(monitor)?;
-        let text_scale_factor = WindowsApi::get_text_scale_factor()?;
         let rc_monitor = monitor_info.monitorInfo.rcMonitor;
 
-        let real_height =
-            (settings.height as f64 * monitor_scale_factor * text_scale_factor) as i32;
+        let real_height = Self::get_toolbar_height_on_monitor(monitor)?;
+
+        let mut real_rect = rc_monitor;
         self.theoretical_rect = rc_monitor;
+
+        // note: we reduce by 10px the webview of the toolbar to avoid be matched as a fullscreen window
         match settings.position {
             FancyToolbarSide::Top => {
                 self.theoretical_rect.bottom = rc_monitor.top + real_height;
+                real_rect.bottom -= 10;
             }
             FancyToolbarSide::Bottom => {
                 self.theoretical_rect.top = rc_monitor.bottom - real_height;
+                real_rect.top += 10;
             }
         }
 
@@ -210,8 +194,8 @@ impl FancyToolbar {
         };
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(hwnd, &rc_monitor)?;
-        WindowsApi::set_position(hwnd, None, &rc_monitor, SWP_ASYNCWINDOWPOS)?;
+        WindowsApi::move_window(hwnd, &real_rect)?;
+        WindowsApi::set_position(hwnd, None, &real_rect, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 
