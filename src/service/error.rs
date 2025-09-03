@@ -43,6 +43,7 @@ define_app_errors!(
     WinHotkeys(win_hotkeys::error::WHKError);
     TimeFormat(time::error::InvalidFormatDescription);
     TimeOffset(time::error::IndeterminateOffset);
+    Positioning(positioning::error::Error);
 );
 
 impl std::fmt::Debug for ServiceError {

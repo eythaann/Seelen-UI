@@ -1,15 +1,19 @@
-use seelen_core::state::shortcuts::SluShortcutsSettings;
-use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+use bincode::{Decode, Encode};
+use seelen_core::rect::Rect;
 
 use crate::error::{Error, Result};
 
 /// Seelen UI Service Actions
 #[allow(dead_code)]
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Encode, Decode)]
 pub enum SvcAction {
     Stop,
     SetStartup(bool),
-    SetShortcutsConfig(SluShortcutsSettings),
+    /// this needs to be a string because of bincode's limitations
+    /// this should be SluShortcutsSettings on json format
+    SetShortcutsConfig(String),
     ShowWindow {
         hwnd: isize,
         command: i32,
@@ -20,18 +24,23 @@ pub enum SvcAction {
     },
     SetWindowPosition {
         hwnd: isize,
-        x: i32,
-        y: i32,
-        width: i32,
-        height: i32,
+        #[bincode(with_serde)]
+        rect: Rect,
         flags: u32,
+    },
+    DeferWindowPositions {
+        #[bincode(with_serde)]
+        list: HashMap<isize, Rect>,
+        animated: bool,
+        animation_duration: u64,
+        easing: String,
     },
     SetForeground(isize),
     StartShortcutRegistration,
     StopShortcutRegistration,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Encode, Decode)]
 pub struct SvcMessage {
     pub token: String,
     pub action: SvcAction,
@@ -47,7 +56,7 @@ impl SvcMessage {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Encode, Decode)]
 pub enum IpcResponse {
     Success,
     Err(String),

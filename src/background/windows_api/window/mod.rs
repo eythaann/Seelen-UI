@@ -378,10 +378,12 @@ impl Window {
         } else {
             ServicePipe::request(SvcAction::SetWindowPosition {
                 hwnd: self.address(),
-                x: rect.left,
-                y: rect.top,
-                width: (rect.right - rect.left).abs(),
-                height: (rect.bottom - rect.top).abs(),
+                rect: Rect {
+                    top: rect.top,
+                    left: rect.left,
+                    right: rect.right,
+                    bottom: rect.bottom,
+                },
                 flags: flags.0,
             })
         }

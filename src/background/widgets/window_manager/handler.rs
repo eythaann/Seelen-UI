@@ -1,22 +1,21 @@
-use std::{collections::HashMap, sync::LazyLock};
+use std::collections::HashMap;
 
-use positioning::{easings::Easing, AppWinAnimation};
-use windows::Win32::{Foundation::RECT, UI::WindowsAndMessaging::SW_NORMAL};
+use slu_ipc::messages::SvcAction;
+use windows::Win32::UI::WindowsAndMessaging::SW_NORMAL;
 
 use crate::{
+    cli::ServicePipe,
     error::Result,
     state::application::{performance::PERFORMANCE_MODE, FULL_STATE},
     windows_api::{window::Window, WindowsApi},
 };
 use seelen_core::{rect::Rect, state::PerformanceMode};
 
-static ANIMATION_INSTANCE: LazyLock<tokio::sync::Mutex<Option<AppWinAnimation>>> =
-    LazyLock::new(|| tokio::sync::Mutex::new(None));
-
 #[tauri::command(async)]
 pub async fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> {
-    let mut positioner = positioning::Positioner::new();
+    let mut list = HashMap::new();
 
+    // map and filter step
     for (hwnd, rect) in positions {
         let window = Window::from(hwnd);
         if !window.is_window() || window.is_minimized() {
@@ -28,39 +27,26 @@ pub async fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Resul
         }
 
         let shadow = WindowsApi::shadow_rect(window.hwnd())?;
-        let desired_rect = RECT {
+        let desired_rect = Rect {
             top: rect.top + shadow.top,
             left: rect.left + shadow.left,
             right: rect.right + shadow.right,
             bottom: rect.bottom + shadow.bottom,
         };
-
-        positioner.add(hwnd, desired_rect.into());
-    }
-
-    // the guards avoid playing multiple animations at the same time.
-    let mut guard = ANIMATION_INSTANCE.lock().await;
-    if let Some(mut last) = guard.take() {
-        last.interrupt();
-        last.wait();
+        list.insert(hwnd, desired_rect);
     }
 
     let state = FULL_STATE.load();
     let perf_mode = PERFORMANCE_MODE.load();
+    let place_animated =
+        !state.settings.by_widget.wm.animations.enabled || **perf_mode != PerformanceMode::Disabled;
 
-    if !state.settings.by_widget.wm.animations.enabled || **perf_mode != PerformanceMode::Disabled {
-        positioner.place()?;
-        return Ok(());
-    }
-
-    let duration = state.settings.by_widget.wm.animations.duration_ms;
-    let easing = Easing::from_name(&state.settings.by_widget.wm.animations.ease_function)
-        .unwrap_or(Easing::Linear);
-    *guard = Some(positioner.place_animated(duration, easing, |result| {
-        if let Err(err) = result {
-            log::error!("Animated window placement failed: {err}");
-        }
-    })?);
+    ServicePipe::request(SvcAction::DeferWindowPositions {
+        list,
+        animated: place_animated,
+        animation_duration: state.settings.by_widget.wm.animations.duration_ms,
+        easing: state.settings.by_widget.wm.animations.ease_function.clone(),
+    })?;
     Ok(())
 }
 

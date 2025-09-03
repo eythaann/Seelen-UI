@@ -11,7 +11,7 @@ use windows_core::Interface;
 use crate::{
     app::get_app_handle,
     error::Result,
-    get_tokio_handle, log_error,
+    get_tokio_handle,
     utils::{pwsh::PwshScript, was_installed_using_msix},
     windows_api::{Com, WindowsApi},
 };
@@ -22,7 +22,9 @@ impl ServicePipe {
     /// will ignore any response
     pub fn request(message: SvcAction) -> Result<()> {
         get_tokio_handle().spawn(async move {
-            log_error!(ServiceIpc::send(message).await);
+            if let Err(err) = ServiceIpc::send(message.clone()).await {
+                log::error!("Error sending message to service {err}. Message: {message:?}");
+            }
         });
         Ok(())
     }

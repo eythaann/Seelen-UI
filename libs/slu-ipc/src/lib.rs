@@ -106,7 +106,7 @@ impl ServiceIpc {
             return Self::response_to_client(stream, IpcResponse::Success).await;
         }
 
-        let message: SvcMessage = serde_json::from_slice(&data)?;
+        let message: SvcMessage = bincode::decode_from_slice(&data, bincode::config::standard())?.0;
         if !message.is_signature_valid() {
             Self::response_to_client(
                 stream,
@@ -125,16 +125,19 @@ impl ServiceIpc {
         stream: &AsyncDuplexPipeStream<Bytes>,
         res: IpcResponse,
     ) -> Result<()> {
-        let message = serde_json::to_vec(&res)?;
+        let message = bincode::encode_to_vec(&res, bincode::config::standard())?;
         write_to_ipc_stream(stream, &message).await
     }
 
     pub async fn send(message: SvcAction) -> Result<()> {
         let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
-        let data = serde_json::to_vec(&SvcMessage {
-            token: SvcMessage::signature().to_string(),
-            action: message,
-        })?;
+        let data = bincode::encode_to_vec(
+            &SvcMessage {
+                token: SvcMessage::signature().to_string(),
+                action: message,
+            },
+            bincode::config::standard(),
+        )?;
         async_send_to_ipc_stream(&stream, &data).await?.ok()
     }
 }
@@ -190,7 +193,8 @@ impl AppIpc {
             return Self::response_to_client(stream, IpcResponse::Success).await;
         }
 
-        let message: Vec<String> = serde_json::from_slice(&data)?;
+        let message: Vec<String> =
+            bincode::serde::decode_from_slice(&data, bincode::config::standard())?.0;
         log::trace!("IPC command received: {message:?}");
         Self::response_to_client(stream, cb(message)).await?;
         Ok(())
@@ -200,13 +204,13 @@ impl AppIpc {
         stream: &AsyncDuplexPipeStream<Bytes>,
         res: IpcResponse,
     ) -> Result<()> {
-        let message = serde_json::to_vec(&res)?;
+        let message = bincode::encode_to_vec(&res, bincode::config::standard())?;
         write_to_ipc_stream(stream, &message).await
     }
 
     pub async fn send(message: Vec<String>) -> Result<()> {
         let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
-        let data = serde_json::to_vec(&message)?;
+        let data = bincode::encode_to_vec(&message, bincode::config::standard())?;
         async_send_to_ipc_stream(&stream, &data).await?.ok()
     }
 }
@@ -235,7 +239,7 @@ async fn async_send_to_ipc_stream(
 ) -> Result<IpcResponse> {
     write_to_ipc_stream(stream, buf).await?;
     let buf = read_from_ipc_stream(stream).await?;
-    let response: IpcResponse = serde_json::from_slice(&buf)?;
+    let response: IpcResponse = bincode::decode_from_slice(&buf, bincode::config::standard())?.0;
     Ok(response)
 }
 
@@ -251,6 +255,6 @@ fn send_to_ipc_stream(stream: &DuplexPipeStream<Bytes>, buf: &[u8]) -> Result<Ip
     reader.read_until(END_OF_TRANSMISSION_BLOCK, &mut buf)?;
     buf.pop();
 
-    let response: IpcResponse = serde_json::from_slice(&buf)?;
+    let response: IpcResponse = bincode::decode_from_slice(&buf, bincode::config::standard())?.0;
     Ok(response)
 }
