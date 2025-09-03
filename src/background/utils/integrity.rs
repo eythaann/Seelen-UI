@@ -7,7 +7,10 @@ use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error::Result, is_local_dev, utils::is_running_as_appx, widgets::WebviewArgs,
+    error::Result,
+    is_local_dev,
+    utils::{constants::SEELEN_COMMON, is_running_as_appx},
+    widgets::WebviewArgs,
     windows_api::WindowsApi,
 };
 
@@ -151,7 +154,7 @@ pub fn start_integrity_thread(app: tauri::AppHandle) {
 }
 
 pub fn restart_as_appx() -> Result<!> {
-    std::process::Command::new("C:\\Windows\\explorer.exe")
+    std::process::Command::new(SEELEN_COMMON.system_dir().join("explorer.exe"))
         .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
         .spawn()?;
     std::process::exit(0);

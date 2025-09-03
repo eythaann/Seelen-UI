@@ -140,7 +140,7 @@ export function MainContextMenu() {
             icon: <Icon iconName="PiChartLineFill" />,
             label: t('context_menu.task_manager'),
             onClick() {
-              invoke(SeelenCommand.OpenFile, { path: 'C:\\Windows\\System32\\Taskmgr.exe' });
+              invoke(SeelenCommand.OpenFile, { path: 'Taskmgr.exe' });
             },
           },
           {

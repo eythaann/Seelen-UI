@@ -18,10 +18,5 @@ pub fn is_running_as_appx() -> bool {
 }
 
 pub fn was_installed_using_msix() -> bool {
-    std::env::current_exe().is_ok_and(|p| {
-        p.with_file_name("AppxManifest.xml").exists()
-            || p.to_string_lossy()
-                .to_lowercase()
-                .starts_with("c:\\program files\\windowsapps")
-    })
+    std::env::current_exe().is_ok_and(|p| p.with_file_name("AppxManifest.xml").exists())
 }

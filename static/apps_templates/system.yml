@@ -76,18 +76,18 @@
 
 - name: System Background Apps
   identifier:
-    id: C:\Windows\SystemApps
+    id: Windows\SystemApps
     kind: Path
-    matchingStrategy: StartsWith
+    matchingStrategy: Contains
   options:
     - hidden
     - unmanage
 
 - name: Idle Windows Settings
   identifier:
-    id: C:\Windows\ImmersiveControlPanel
+    id: Windows\ImmersiveControlPanel
     kind: Path
-    matchingStrategy: StartsWith
+    matchingStrategy: Contains
   options:
     - hidden
     - unmanage

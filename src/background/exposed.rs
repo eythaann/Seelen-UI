@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::os::windows::process::CommandExt;
 use std::path::PathBuf;
 
 use seelen_core::state::RelaunchArguments;
@@ -15,6 +14,7 @@ use crate::error::Result;
 use crate::hook::HookManager;
 use crate::modules::input::Keyboard;
 
+use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 use crate::utils::is_running_as_appx;
 use crate::utils::pwsh::PwshScript;
@@ -27,44 +27,18 @@ use crate::windows_api::WindowsApi;
 use crate::{log_error, utils};
 
 #[tauri::command(async)]
+fn open_file(path: String) -> Result<()> {
+    open::that_detached(path)?;
+    Ok(())
+}
+
+#[tauri::command(async)]
 fn select_file_on_explorer(path: String) -> Result<()> {
     get_app_handle()
         .shell()
-        .command("C:\\Windows\\explorer.exe")
+        .command(SEELEN_COMMON.system_dir().join("explorer.exe"))
         .args(["/select,", &path])
         .spawn()?;
-    Ok(())
-}
-
-#[tauri::command(async)]
-fn open_file(path: String) -> Result<()> {
-    std::process::Command::new("C:\\Windows\\explorer.exe")
-        .raw_arg(format!("\"{path}\""))
-        .spawn()?;
-    Ok(())
-}
-
-#[tauri::command(async)]
-async fn run_as_admin(program: PathBuf, args: Option<RelaunchArguments>) -> Result<()> {
-    let args = match args {
-        Some(args) => match args {
-            RelaunchArguments::String(args) => args,
-            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
-        },
-        None => String::new(),
-    };
-    log::trace!("Running as admin: {program:?} {args}");
-
-    let command = if args.is_empty() {
-        format!("Start-Process '{}' -Verb runAs", program.display())
-    } else {
-        format!(
-            "Start-Process '{}' -Verb runAs -ArgumentList '{}'",
-            program.display(),
-            args
-        )
-    };
-    PwshScript::new(command).execute().await?;
     Ok(())
 }
 
@@ -90,11 +64,35 @@ async fn run(
     let lnk_file = WindowsApi::create_temp_shortcut(&program, &args, working_dir.as_deref())?;
     get_app_handle()
         .shell()
-        .command("C:\\Windows\\explorer.exe")
+        .command(SEELEN_COMMON.system_dir().join("explorer.exe"))
         .arg(&lnk_file)
         .status()
         .await?;
     std::fs::remove_file(&lnk_file)?;
+    Ok(())
+}
+
+#[tauri::command(async)]
+async fn run_as_admin(program: PathBuf, args: Option<RelaunchArguments>) -> Result<()> {
+    let args = match args {
+        Some(args) => match args {
+            RelaunchArguments::String(args) => args,
+            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
+        },
+        None => String::new(),
+    };
+    log::trace!("Running as admin: {program:?} {args}");
+
+    let command = if args.is_empty() {
+        format!("Start-Process '{}' -Verb runAs", program.display())
+    } else {
+        format!(
+            "Start-Process '{}' -Verb runAs -ArgumentList '{}'",
+            program.display(),
+            args
+        )
+    };
+    PwshScript::new(command).execute().await?;
     Ok(())
 }
 

@@ -957,7 +957,7 @@ impl WindowsApi {
         Ok(name.to_string())
     }
 
-    // change to some crate like dirs to allow multiple platforms
+    /// https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid
     pub fn known_folder(folder_id: windows::core::GUID) -> Result<PathBuf> {
         let path = unsafe { SHGetKnownFolderPath(&folder_id, KF_FLAG_DEFAULT, None)? };
         Ok(PathBuf::from(OsString::from_wide(unsafe {

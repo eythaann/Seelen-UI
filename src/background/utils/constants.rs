@@ -6,8 +6,9 @@ use std::{
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use tauri::Manager;
+use windows::Win32::UI::Shell::FOLDERID_Windows;
 
-use crate::app::get_app_handle;
+use crate::{app::get_app_handle, windows_api::WindowsApi};
 
 lazy_static! {
     pub static ref SEELEN_COMMON: Arc<SeelenCommon> = Arc::new(SeelenCommon::new());
@@ -56,11 +57,14 @@ pub struct SeelenCommon {
     user_app_configs: PathBuf,
     bundled_app_configs: PathBuf,
     wallpapers: PathBuf,
-    sounds: PathBuf,
-    /// @deprecated since v2.1.0
-    user_placeholders: PathBuf,
     widgets: PathBuf,
     bundled_widgets: PathBuf,
+    sounds: PathBuf,
+    // system
+    system_dir: PathBuf,
+
+    // @deprecated since v2.1.0
+    user_placeholders: PathBuf,
     profiles: PathBuf,
     bundled_profiles: PathBuf,
 }
@@ -69,13 +73,17 @@ pub struct SeelenCommon {
 impl SeelenCommon {
     pub fn new() -> Self {
         let resolver = get_app_handle().path();
-        let data_dir = resolver.app_data_dir().expect("Failed to get app data dir");
+
         let resource_dir = resolver.resource_dir().expect("Failed to get resource dir");
+        let data_dir = resolver.app_data_dir().expect("Failed to get app data dir");
         let cache_dir = resolver.app_cache_dir().expect("Failed to get cache dir");
         let temp_dir = resolver
             .temp_dir()
             .expect("Failed to get temp dir")
             .join("com.seelen.seelen-ui");
+
+        let system_dir =
+            WindowsApi::known_folder(FOLDERID_Windows).expect("Failed to get system dir");
 
         Self {
             history: data_dir.join("history"),
@@ -101,6 +109,7 @@ impl SeelenCommon {
             resource_dir,
             cache_dir,
             temp_dir,
+            system_dir,
         }
     }
 
@@ -118,6 +127,11 @@ impl SeelenCommon {
 
     pub fn app_temp_dir(&self) -> &Path {
         &self.temp_dir
+    }
+
+    /// Windows: `X:\Windows`
+    pub fn system_dir(&self) -> &Path {
+        &self.system_dir
     }
 
     pub fn settings_path(&self) -> &Path {

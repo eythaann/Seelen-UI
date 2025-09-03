@@ -4,12 +4,9 @@ use std::sync::Arc;
 use arc_swap::ArcSwap;
 use lazy_static::lazy_static;
 use seelen_core::system_state::StartMenuItem;
-use tauri::{path::BaseDirectory, Manager};
+use windows::Win32::UI::Shell::{FOLDERID_CommonPrograms, FOLDERID_Programs};
 
-use crate::{
-    app::get_app_handle, error::Result, log_error, utils::constants::SEELEN_COMMON,
-    windows_api::WindowsApi,
-};
+use crate::{error::Result, log_error, utils::constants::SEELEN_COMMON, windows_api::WindowsApi};
 
 lazy_static! {
     pub static ref START_MENU_MANAGER: ArcSwap<StartMenuManager> = ArcSwap::from_pointee({
@@ -25,18 +22,15 @@ pub struct StartMenuManager {
 }
 
 impl StartMenuManager {
+    /// programs shared by all users
     pub fn common_items_path() -> PathBuf {
-        PathBuf::from(r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs")
+        WindowsApi::known_folder(FOLDERID_CommonPrograms)
+            .expect("Failed to get common programs folder")
     }
 
+    /// programs specific to the current user
     pub fn user_items_path() -> PathBuf {
-        get_app_handle()
-            .path()
-            .resolve(
-                r"Microsoft\Windows\Start Menu\Programs",
-                BaseDirectory::Data,
-            )
-            .expect("Failed to resolve user start menu path")
+        WindowsApi::known_folder(FOLDERID_Programs).expect("Failed to get user programs folder")
     }
 
     pub fn new() -> StartMenuManager {

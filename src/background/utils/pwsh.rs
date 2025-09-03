@@ -1,7 +1,8 @@
-use std::env::temp_dir;
+use std::{env::temp_dir, path::PathBuf, sync::LazyLock};
 
 use itertools::Itertools;
 use tauri_plugin_shell::ShellExt;
+use windows::Win32::UI::Shell::FOLDERID_System;
 
 use crate::{app::get_app_handle, error::Result, windows_api::WindowsApi};
 
@@ -26,7 +27,11 @@ pub enum PwshExecutionMode {
     Command,
 }
 
-static POWERSHELL_PATH: &str = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
+static POWERSHELL_PATH: LazyLock<PathBuf> = LazyLock::new(|| {
+    WindowsApi::known_folder(FOLDERID_System)
+        .expect("Failed to get system folder")
+        .join("WindowsPowerShell\\v1.0\\powershell.exe")
+});
 
 impl PwshScript {
     pub fn new<S: Into<String>>(contents: S) -> Self {
@@ -63,7 +68,7 @@ impl PwshScript {
                     .map(|s| s.to_string())
                     .chain([
                         "-Command".to_string(),
-                        format!("Start-Process '{}' -Verb runAs -WindowStyle Hidden -Wait -ArgumentList '{}'", POWERSHELL_PATH, args.join(" "))
+                        format!("Start-Process '{}' -Verb runAs -WindowStyle Hidden -Wait -ArgumentList '{}'", POWERSHELL_PATH.display(), args.join(" "))
                     ])
                     .collect_vec();
                 }
@@ -86,7 +91,7 @@ impl PwshScript {
 
         let args = self.build_args(&script_path.to_string_lossy());
         let shell = get_app_handle().shell();
-        let result = shell.command(POWERSHELL_PATH).args(args).output().await;
+        let result = shell.command(&*POWERSHELL_PATH).args(args).output().await;
         // delete script before check output
         std::fs::remove_file(&script_path)?;
         let output = result?;

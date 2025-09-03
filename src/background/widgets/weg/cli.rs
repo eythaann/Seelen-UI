@@ -9,6 +9,7 @@ use crate::{
     app::get_app_handle,
     error::Result,
     trace_lock,
+    utils::constants::SEELEN_COMMON,
     widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
     windows_api::{monitor::Monitor, window::Window, WindowsApi},
 };
@@ -85,7 +86,7 @@ impl WegCli {
                         tokio::spawn(async move {
                             let _ = get_app_handle()
                                 .shell()
-                                .command("C:\\Windows\\explorer.exe")
+                                .command(SEELEN_COMMON.system_dir().join("explorer.exe"))
                                 .arg(&lnk_file)
                                 .status()
                                 .await;

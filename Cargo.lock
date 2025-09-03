@@ -5047,6 +5047,7 @@ dependencies = [
  "lazy_static",
  "log",
  "notify-debouncer-full",
+ "open",
  "os_info",
  "owo-colors",
  "parking_lot",

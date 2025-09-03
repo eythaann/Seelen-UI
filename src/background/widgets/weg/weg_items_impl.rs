@@ -22,7 +22,10 @@ use crate::{
     error::Result,
     modules::start::application::START_MENU_MANAGER,
     state::application::FULL_STATE,
-    utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
+    utils::{
+        constants::SEELEN_COMMON,
+        icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
+    },
     windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
 };
 
@@ -176,7 +179,11 @@ impl WegItemsImpl {
                     // pre-extraction to avoid flickering on the ui
                     extract_and_save_icon_umid(&AppUserModelId::Appx(umid.clone()));
                     (
-                        "C:\\Windows\\explorer.exe".to_owned(),
+                        SEELEN_COMMON
+                            .system_dir()
+                            .join("explorer.exe")
+                            .to_string_lossy()
+                            .to_string(),
                         Some(format!("shell:AppsFolder\\{umid}")),
                     )
                 }
@@ -209,7 +216,11 @@ impl WegItemsImpl {
                         get_parts_of_inline_command(&relaunch_command)
                     } else if shortcut.is_some() {
                         (
-                            "C:\\Windows\\explorer.exe".to_owned(),
+                            SEELEN_COMMON
+                                .system_dir()
+                                .join("explorer.exe")
+                                .to_string_lossy()
+                                .to_string(),
                             Some(format!("shell:AppsFolder\\{umid}")),
                         )
                     } else {

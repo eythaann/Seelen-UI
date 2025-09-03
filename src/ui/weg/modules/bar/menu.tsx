@@ -19,7 +19,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
         label: t('taskbar_menu.task_manager'),
         icon: <Icon iconName="PiChartLineFill" />,
         onClick() {
-          invoke(SeelenCommand.OpenFile, { path: 'C:\\Windows\\System32\\Taskmgr.exe' });
+          invoke(SeelenCommand.OpenFile, { path: 'Taskmgr.exe' });
         },
       },
       {
@@ -108,7 +108,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       label: t('taskbar_menu.task_manager'),
       icon: <Icon iconName="PiChartLineFill" />,
       onClick() {
-        invoke(SeelenCommand.OpenFile, { path: 'C:\\Windows\\System32\\Taskmgr.exe' });
+        invoke(SeelenCommand.OpenFile, { path: 'Taskmgr.exe' });
       },
     },
     {

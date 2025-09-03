@@ -3,15 +3,22 @@ pub mod event;
 
 use seelen_core::{rect::Rect, state::AppExtraFlag, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
-use std::fmt::{Debug, Display};
+use std::{
+    fmt::{Debug, Display},
+    path::PathBuf,
+    sync::LazyLock,
+};
 
 use windows::{
     ApplicationModel::AppInfo,
     Win32::{
         Foundation::{HWND, RECT},
-        UI::WindowsAndMessaging::{
-            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SW_RESTORE, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
-            WS_EX_TOOLWINDOW,
+        UI::{
+            Shell::FOLDERID_System,
+            WindowsAndMessaging::{
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SW_RESTORE, WS_EX_APPWINDOW,
+                WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+            },
         },
     },
 };
@@ -64,7 +71,12 @@ impl Display for Window {
     }
 }
 
-pub const APP_FRAME_HOST_PATH: &str = "C:\\Windows\\System32\\ApplicationFrameHost.exe";
+static APP_FRAME_HOST_PATH: LazyLock<PathBuf> = LazyLock::new(|| {
+    WindowsApi::known_folder(FOLDERID_System)
+        .expect("Failed to get system folder")
+        .join("ApplicationFrameHost.exe")
+});
+
 impl Window {
     pub fn get_foregrounded() -> Window {
         Window(WindowsApi::get_foreground_window())
@@ -239,7 +251,7 @@ impl Window {
             .process()
             .program_path()?
             .as_os_str()
-            .eq_ignore_ascii_case(APP_FRAME_HOST_PATH))
+            .eq_ignore_ascii_case(&*APP_FRAME_HOST_PATH))
     }
 
     /// will fail if the window is not a frame

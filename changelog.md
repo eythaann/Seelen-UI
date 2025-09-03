@@ -16,6 +16,7 @@
 - button to update downloaded resources not working properly.
 - crash on max integer caused by media players.
 - media player popup not working properly.
+- app not working when system installed on different drive unit.
 
 ## [2.4.1]
 ### features
