@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.4.2]
 ### features
 - tiling window manager animations.
 - performance mode for seelen.
