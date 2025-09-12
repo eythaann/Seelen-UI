@@ -69,7 +69,8 @@ use windows::{
             EnhancedStorage::{
                 PKEY_AppUserModel_ID, PKEY_AppUserModel_PreventPinning,
                 PKEY_AppUserModel_RelaunchCommand, PKEY_AppUserModel_RelaunchDisplayNameResource,
-                PKEY_AppUserModel_RelaunchIconResource, PKEY_FileDescription,
+                PKEY_AppUserModel_RelaunchIconResource, PKEY_AppUserModel_ToastActivatorCLSID,
+                PKEY_FileDescription,
             },
             FileSystem::WIN32_FIND_DATAW,
         },
@@ -670,7 +671,23 @@ impl WindowsApi {
             if value.is_empty() {
                 return Err("No AppUserModel_ID".into());
             }
-            Ok(BSTR::try_from(&value)?.to_string())
+            Ok(value.to_string())
+        })
+    }
+
+    pub fn get_file_toast_activator(path: &Path) -> Result<String> {
+        Com::run_with_context(|| unsafe {
+            let shell_item = Self::get_shell_item(path)?;
+            let store: IPropertyStore = shell_item.GetPropertyStore(GPS_DEFAULT)?;
+            let value = store.GetValue(&PKEY_AppUserModel_ToastActivatorCLSID)?;
+            if value.is_empty() {
+                return Err("No AppUserModel ToastActivator CLSID".into());
+            }
+            Ok(value
+                .to_string()
+                .trim_start_matches("{")
+                .trim_end_matches("}")
+                .to_owned())
         })
     }
 

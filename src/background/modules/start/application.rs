@@ -111,6 +111,7 @@ impl StartMenuManager {
                 let target = WindowsApi::resolve_lnk_target(&path).ok().map(|(t, _)| t);
                 items.push(StartMenuItem {
                     umid: WindowsApi::get_file_umid(&path).ok(),
+                    toast_activator: WindowsApi::get_file_toast_activator(&path).ok(),
                     path,
                     target,
                 })

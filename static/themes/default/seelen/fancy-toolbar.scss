@@ -729,7 +729,7 @@
   padding: 10px;
   transition: scale 0.1s ease-in-out;
 
-  &:active:not(:has(.notification-header-close:active, .notification-action:active)) {
+  &:active:not(:has(button:active, input:active)) {
     scale: 0.9;
   }
 
@@ -748,6 +748,7 @@
       gap: 8px;
       font-size: 0.8rem;
       color: var(--color-gray-800);
+      font-weight: 600;
 
       .notification-icon {
         width: 1.5em;
@@ -762,13 +763,13 @@
   .notification-body {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 10px;
 
     .notification-body-logo-image {
       grid-column: 1 / 2;
       grid-row: 1 / 2;
       width: 3rem;
       height: 3rem;
+      margin-right: 10px;
 
       &.notification-body-logo-image-circle {
         border-radius: 50%;
@@ -780,6 +781,21 @@
       overflow: hidden;
       grid-column: 2 / 3;
       grid-row: 1 / 2;
+
+      > p:first-of-type {
+        font-weight: 600;
+      }
+
+      .notification-group {
+        display: flex;
+        gap: 6px;
+
+        .notification-subgroup {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
     }
 
     .notification-body-hero-image {
@@ -788,6 +804,7 @@
       width: 100%;
       max-height: 300px;
       object-fit: cover;
+      margin-top: 10px;
     }
   }
 

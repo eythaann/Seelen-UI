@@ -9,7 +9,9 @@ use std::{
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::system_state::{AppNotification, Toast, ToastBindingEntry};
+use seelen_core::system_state::{
+    AppNotification, Toast, ToastActionActivationType, ToastBindingChild, ToastText,
+};
 use tauri::Manager;
 use windows::{
     ApplicationModel::AppInfo,
@@ -27,10 +29,10 @@ use crate::{
     app::get_app_handle,
     error::Result,
     event_manager, log_error,
-    modules::uwp::get_hightest_quality_posible,
+    modules::{start::application::START_MENU_MANAGER, uwp::get_hightest_quality_posible},
     trace_lock,
     utils::{convert_file_to_src, icon_extractor::extract_and_save_icon_umid, spawn_named_thread},
-    windows_api::traits::EventRegistrationTokenExt,
+    windows_api::{traits::EventRegistrationTokenExt, types::AppUserModelId, WindowsApi},
 };
 
 lazy_static! {
@@ -183,13 +185,18 @@ impl NotificationManager {
     }
 
     fn clean_toast(toast: &mut Toast, umid: &str) -> Result<()> {
+        if toast.launch.is_none() {
+            toast.launch = Some(format!("shell:AppsFolder\\{umid}"));
+            toast.activation_type = ToastActionActivationType::Protocol;
+        }
+
         let package_path = AppInfo::GetFromAppUserModelId(&umid.into())
             .and_then(|info| info.Package())
             .and_then(|package| package.InstalledPath())
             .map(|path| PathBuf::from(path.to_os_string()));
 
-        for entry in &mut toast.visual.binding.entries {
-            let ToastBindingEntry::Image(image) = entry else {
+        for entry in &mut toast.visual.binding.children {
+            let ToastBindingChild::Image(image) = entry else {
                 continue;
             };
 
@@ -197,6 +204,7 @@ impl NotificationManager {
                 continue;
             }
 
+            log::trace!("Resolving image src:e \"{}\"", image.src);
             let uri = Uri::CreateUri(&image.src.clone().into())?;
             let scheme = uri.SchemeName()?.to_string_lossy();
             let uri_path = PathBuf::from(
@@ -252,7 +260,14 @@ impl NotificationManager {
                     image.src = convert_file_to_src(&path);
                 }
                 "file" => {
-                    image.src = convert_file_to_src(&uri_path);
+                    image.src = if uri_path.exists() {
+                        convert_file_to_src(&uri_path)
+                    } else {
+                        // telegram desktop from ms store uses file intead of ms-appdata
+                        // so this causes the image to be missing, windows doesn't show image as well
+                        // so we decide to follow same behavior.
+                        "".to_string()
+                    }
                 }
                 _ => {}
             }
@@ -280,15 +295,13 @@ impl NotificationManager {
         let app_umid = app_info.AppUserModelId()?;
 
         let visuals = notification.Visual()?;
-        let text_sequence = visuals
-            .GetBinding(&KnownNotificationBindings::ToastGeneric()?)?
-            .GetTextElements()?;
-        let mut notification_text = Vec::new();
-        for text in text_sequence {
-            let text = text.Text()?.to_string_lossy().trim().to_string();
-            if !text.is_empty() {
-                notification_text.push(text);
-            }
+        let binding = visuals.GetBinding(&KnownNotificationBindings::ToastGeneric()?)?;
+        let text_sequence = binding.GetTextElements()?;
+
+        let mut notification_text = String::new();
+        for text in &text_sequence {
+            let text = text.Text()?.to_string_lossy().trim().replace("\r\n", "\n");
+            notification_text.push_str(&text);
         }
 
         let history = self.manager.History()?;
@@ -304,29 +317,46 @@ impl NotificationManager {
         for toast_notification in toast_notifications {
             // this can be null when the notification count is bigger than the max allowed by default 20
             if let Ok(content) = toast_notification.Content() {
-                let data = content.GetXml()?.to_string();
-                let mut toast: Toast = quick_xml::de::from_str(&data)?;
-
-                let mut toast_text = Vec::new();
-                for entry in &toast.visual.binding.entries {
-                    if let ToastBindingEntry::Text(text) = entry {
-                        if !text.content.is_empty() {
-                            toast_text.push(text.content.clone().replace("\r\n", "\n"));
-                        }
-                    }
-                }
+                let toast_xml = content.GetXml()?.to_string();
+                let mut toast: Toast = quick_xml::de::from_str(&toast_xml)?;
+                let toast_text = get_text_from_toast(&toast);
 
                 if notification_text == toast_text {
                     Self::clean_toast(&mut toast, &app_umid.to_string())?;
                     notification_content = Some(toast);
+
+                    println!(
+                        "??????????? Group {:?} - Tag: {:?}",
+                        toast_notification.Group(),
+                        toast_notification.Tag()
+                    );
                     break;
                 }
             }
         }
 
-        if notification_content.is_none() {
-            log::debug!("NONE FOR {notification_text:#?}");
-        }
+        let notification_content = match notification_content {
+            Some(content) => content,
+            None => {
+                log::debug!("Toast content not found, generating one from plain text");
+                let mut toast = Toast::default();
+                let content = &mut toast.visual.binding.children;
+                for text in text_sequence {
+                    let text = text
+                        .Text()?
+                        .to_string_lossy()
+                        .replace("\r\n", "\n")
+                        .trim()
+                        .to_owned();
+                    content.push(ToastBindingChild::Text(ToastText {
+                        id: None,
+                        content: text,
+                    }));
+                }
+                Self::clean_toast(&mut toast, &app_umid.to_string())?;
+                toast
+            }
+        };
 
         // pre-extraction to avoid flickering on the ui
         extract_and_save_icon_umid(&app_umid.to_string().into());
@@ -337,9 +367,36 @@ impl NotificationManager {
             app_name: display_info.DisplayName()?.to_string(),
             app_description: display_info.Description()?.to_string(),
             date: u_notification.CreationTime()?.UniversalTime,
-            content: notification_content.ok_or("Failed to get notification content")?,
+            content: notification_content,
         });
         self.notifications.sort_by(|a, b| b.date.cmp(&a.date));
         Ok(())
     }
+}
+
+fn get_text_from_toast(toast: &Toast) -> String {
+    let mut text = String::new();
+    for entry in &toast.visual.binding.children {
+        // text inside groups are intended to be ignored for the comparison
+        if let ToastBindingChild::Text(entry) = entry {
+            text.push_str(entry.content.replace("\r\n", "\n").trim());
+        }
+    }
+    text
+}
+
+pub fn get_toast_activator_clsid(app_umid: &AppUserModelId) -> Result<String> {
+    match app_umid {
+        AppUserModelId::PropertyStore(umid) => {
+            let guard = START_MENU_MANAGER.load();
+            if let Some(item) = guard.get_by_file_umid(umid) {
+                let clsid = WindowsApi::get_file_toast_activator(&item.path)?;
+                return Ok(clsid);
+            }
+        }
+        _ => {
+            // todo search for the clsid in the AppManifest
+        }
+    };
+    Err(format!("Unable to get toast activator clsid for: {app_umid:?}").into())
 }

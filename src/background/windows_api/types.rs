@@ -2,13 +2,21 @@ use super::WindowsApi;
 
 #[derive(Debug, Clone)]
 pub enum AppUserModelId {
+    /// aumid added to the app start menu shortcut (eg: "com.squirrel.Discord.Discord")
     PropertyStore(String),
+    /// Appx/Msix aumid (eg: "Microsoft.WindowsTerminal_8wekyb3d8bbwe!TerminalApp")
     Appx(String),
 }
 
 impl AppUserModelId {
     pub fn is_appx(&self) -> bool {
         matches!(self, AppUserModelId::Appx(_))
+    }
+}
+
+impl std::fmt::Display for AppUserModelId {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }
 

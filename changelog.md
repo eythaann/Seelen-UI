@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- notifications not showing or working as expected.
+
 ## [2.4.2]
 ### features
 - tiling window manager animations.

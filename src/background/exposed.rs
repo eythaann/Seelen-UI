@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::os::windows::process::CommandExt;
 use std::path::PathBuf;
 
 use seelen_core::state::RelaunchArguments;
@@ -8,6 +9,7 @@ use seelen_core::{command_handler_list, system_state::Color};
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use translators::Translator;
+use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW};
 
 use crate::app::{get_app_handle, Seelen};
 use crate::error::Result;
@@ -27,8 +29,17 @@ use crate::windows_api::WindowsApi;
 use crate::{log_error, utils};
 
 #[tauri::command(async)]
-fn open_file(path: String) -> Result<()> {
-    open::that_detached(path)?;
+pub fn open_file(path: String) -> Result<()> {
+    std::process::Command::new("cmd")
+        .raw_arg("/c")
+        .raw_arg("start")
+        .raw_arg("\"\"")
+        .raw_arg(format!("\"{path}\""))
+        .creation_flags(CREATE_NO_WINDOW.0 | CREATE_NEW_PROCESS_GROUP.0)
+        .stdin(std::process::Stdio::null())
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
+        .spawn()?;
     Ok(())
 }
 
@@ -44,7 +55,7 @@ fn select_file_on_explorer(path: String) -> Result<()> {
 
 #[tauri::command(async)]
 async fn run(
-    program: PathBuf,
+    program: String,
     args: Option<RelaunchArguments>,
     working_dir: Option<PathBuf>,
 ) -> Result<()> {
@@ -55,13 +66,15 @@ async fn run(
         },
         None => String::new(),
     };
+
     log::trace!("Running: {program:?} {args} in {working_dir:?}");
 
     // we create a link file to trick with explorer into a separated process
     // and without elevation in case Seelen UI was running as admin
     // this could take some delay like is creating a file but just are some milliseconds
     // and this exposed funtion is intended to just run certain times
-    let lnk_file = WindowsApi::create_temp_shortcut(&program, &args, working_dir.as_deref())?;
+    let lnk_file =
+        WindowsApi::create_temp_shortcut(&PathBuf::from(program), &args, working_dir.as_deref())?;
     get_app_handle()
         .shell()
         .command(SEELEN_COMMON.system_dir().join("explorer.exe"))

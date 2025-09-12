@@ -1,5 +1,12 @@
+import { useSignal } from '@preact/signals';
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { AppNotification, ToastBindingEntry, ToastImage } from '@seelen-ui/lib/types';
+import {
+  AppNotification,
+  ToastActionActivationType,
+  ToastActionsChild,
+  ToastBindingChild,
+  ToastImage,
+} from '@seelen-ui/lib/types';
 import { WindowsDateFileTimeToDate } from '@shared';
 import { FileIcon, Icon } from '@shared/components/Icon';
 import { cx } from '@shared/styles';
@@ -13,13 +20,215 @@ interface Props {
 }
 
 export function Notification({ notification, onClose }: Props) {
+  const $data = useSignal<Record<string, string>>({});
+
+  const { logoImage, heroImage, body, actions } = splitToastContent(notification);
+
+  function onInputChange(key: string, value: string) {
+    $data.value = { ...$data.value, [key]: value };
+  }
+
+  function onAction(args: string, method: ToastActionActivationType) {
+    switch (method) {
+      case 'Protocol':
+        invoke(SeelenCommand.OpenFile, {
+          path: args,
+        });
+      default:
+        invoke(SeelenCommand.ActivateNotification, {
+          umid: notification.appUmid,
+          args,
+          inputData: $data.value,
+        });
+    }
+  }
+
+  return (
+    <motion.div
+      animate={{ x: '0%', opacity: 1 }}
+      exit={{ x: '100%', opacity: 0 }}
+      initial={{ x: '100%', opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
+      <div
+        className="notification"
+        onClick={() => {
+          if (notification.content['@launch']) {
+            onAction(notification.content['@launch'], notification.content['@activationType']);
+          }
+        }}
+      >
+        <div className="notification-header">
+          <div className="notification-header-info">
+            <FileIcon className="notification-icon" umid={notification.appUmid} />
+            <div>{notification.appName}</div>
+            <span>-</span>
+            <div>{moment(WindowsDateFileTimeToDate(notification.date)).fromNow()}</div>
+          </div>
+          <button
+            className="notification-header-close"
+            onClick={(e) => {
+              e.stopPropagation();
+              invoke(SeelenCommand.NotificationsClose, { id: notification.id });
+              onClose?.();
+            }}
+          >
+            <Icon iconName="IoClose" />
+          </button>
+        </div>
+
+        <div className="notification-body">
+          {logoImage && logoImage['@src'] && (
+            <img
+              src={logoImage['@src']}
+              alt={logoImage['@alt'] || ''}
+              className={cx('notification-body-logo-image', {
+                'notification-body-logo-image-circle': logoImage['@hint-crop'] === 'Circle',
+              })}
+            />
+          )}
+
+          <div className="notification-body-content">
+            {body.map((entry, index) => (
+              <NotificationBindingEntry key={index} entry={entry} />
+            ))}
+          </div>
+
+          {heroImage && heroImage['@src'] && (
+            <img
+              src={heroImage['@src']}
+              alt={heroImage['@alt'] || ''}
+              className="notification-body-hero-image"
+            />
+          )}
+        </div>
+
+        {!!actions.length && (
+          <div className="notification-actions">
+            {actions.map((entry, index) => (
+              <NotificationActionEntry
+                key={index}
+                entry={entry}
+                inputsData={$data.value}
+                onInputChange={onInputChange}
+                onAction={onAction}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+function NotificationBindingEntry({ entry }: { entry: ToastBindingChild }) {
+  if ('text' in entry) {
+    return <p>{entry.text.$value}</p>;
+  }
+
+  if ('image' in entry && entry.image['@src']) {
+    // these placement are handled separately
+    if (entry.image['@placement'] === 'AppLogoOverride' || entry.image['@placement'] === 'Hero') {
+      return null;
+    }
+    return <img src={entry.image['@src']} alt={entry.image['@alt'] || ''} />;
+  }
+
+  if ('group' in entry) {
+    return (
+      <div className="notification-group">
+        {entry.group.subgroup.map((subgroup, index) => (
+          <div key={index} className="notification-subgroup">
+            {subgroup.$value.map((entry, index) => (
+              <NotificationBindingEntry key={index} entry={entry} />
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
+}
+
+interface NotificationActionEntryProps {
+  entry: ToastActionsChild;
+  inputsData: Record<string, string>;
+  onInputChange: (key: string, value: string) => void;
+  onAction: (args: string, method: ToastActionActivationType) => void;
+}
+
+function NotificationActionEntry({
+  entry,
+  inputsData,
+  onInputChange,
+  onAction,
+}: NotificationActionEntryProps) {
+  if ('input' in entry) {
+    const input = entry.input;
+    switch (input['@type']) {
+      case 'Text':
+        return (
+          <input
+            className="notification-input"
+            placeholder={input['@placeHolderContent'] || ''}
+            value={inputsData[input['@id']] || ''}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            onChange={(e) => {
+              onInputChange(input['@id'], e.currentTarget.value);
+            }}
+          />
+        );
+      case 'Selection':
+        return (
+          <Select
+            size="small"
+            placeholder={input['@placeHolderContent']}
+            value={inputsData[input['@id']]}
+            options={input.selection.map((opt) => ({
+              value: opt['@id'],
+              label: opt['@content'],
+            }))}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            onSelect={(value) => {
+              onInputChange(input['@id'], value);
+            }}
+          />
+        );
+    }
+  }
+
+  if ('action' in entry && entry.action['@placement'] !== 'ContextMenu') {
+    return (
+      <Tooltip title={entry.action['@hint-toolTip']}>
+        <button
+          className="notification-action"
+          onClick={(e) => {
+            e.stopPropagation();
+            onAction(entry.action['@arguments'], entry.action['@activationType']);
+          }}
+        >
+          {entry.action['@content']}
+        </button>
+      </Tooltip>
+    );
+  }
+
+  return null;
+}
+
+function splitToastContent(notification: AppNotification) {
   const toast = notification.content;
   const template = toast.visual.binding['@template'];
   const actions = toast.actions?.$value || [];
 
   let logoImage: ToastImage | null = null;
   let heroImage: ToastImage | null = null;
-  const content: ToastBindingEntry[] = [];
+  const body: ToastBindingChild[] = [];
 
   for (const entry of toast.visual.binding.$value) {
     if ('image' in entry) {
@@ -36,145 +245,8 @@ export function Notification({ notification, onClose }: Props) {
         continue;
       }
     }
-    content.push(entry);
+    body.push(entry);
   }
 
-  return (
-    <motion.div
-      animate={{ x: '0%', opacity: 1 }}
-      exit={{ x: '100%', opacity: 0 }}
-      initial={{ x: '100%', opacity: 1 }}
-      transition={{ duration: 0.4 }}
-    >
-      <div
-        className="notification"
-        onClick={() => {
-          if (toast['@launch']) {
-            invoke(SeelenCommand.OpenFile, { path: toast['@launch'] });
-          }
-        }}
-      >
-        <div className="notification-header">
-          <div className="notification-header-info">
-            <FileIcon className="notification-icon" umid={notification.appUmid} />
-            <div>{notification.appName}</div>
-            <span>-</span>
-            <div>{moment(WindowsDateFileTimeToDate(BigInt(notification.date))).fromNow()}</div>
-          </div>
-          <button
-            className="notification-header-close"
-            onClick={(e) => {
-              e.stopPropagation();
-              invoke(SeelenCommand.NotificationsClose, { id: notification.id }).catch(
-                console.error,
-              );
-              onClose?.();
-            }}
-          >
-            <Icon iconName="IoClose" />
-          </button>
-        </div>
-        <div className="notification-body">
-          {logoImage && (
-            <img
-              src={logoImage['@src']}
-              alt={logoImage['@alt'] || ''}
-              className={cx('notification-body-logo-image', {
-                'notification-body-logo-image-circle': logoImage['@hint-crop'] === 'Circle',
-              })}
-            />
-          )}
-
-          <div className="notification-body-content">
-            {content.map((entry, index) => {
-              if ('text' in entry) {
-                return <p key={index}>{entry.text.$value}</p>;
-              }
-
-              if (
-                'image' in entry &&
-                entry.image['@placement'] != 'AppLogoOverride' &&
-                entry.image['@placement'] != 'Hero'
-              ) {
-                return (
-                  <img
-                    key={index}
-                    src={entry.image['@src']}
-                    alt={entry.image['@alt'] ?? undefined}
-                  />
-                );
-              }
-
-              return null;
-            })}
-          </div>
-
-          {heroImage && (
-            <img
-              src={heroImage['@src']}
-              alt={heroImage['@alt'] || ''}
-              className="notification-body-hero-image"
-            />
-          )}
-        </div>
-        {!!actions.length && (
-          <div className="notification-actions">
-            {actions.map((entry, index) => {
-              if ('input' in entry) {
-                const input = entry.input;
-                switch (input['@type']) {
-                  case 'Text':
-                    return (
-                      <input
-                        className="notification-input"
-                        key={index}
-                        placeholder={input['@placeHolderContent'] || ''}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      />
-                    );
-                  case 'Selection':
-                    return (
-                      <Select
-                        key={index}
-                        size="small"
-                        placeholder={input['@placeHolderContent'] || ''}
-                        options={input.selection.map((opt) => ({
-                          id: opt['@id'],
-                          value: opt['@content'],
-                        }))}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      />
-                    );
-                }
-              }
-
-              if ('action' in entry && entry.action['@placement'] !== 'ContextMenu') {
-                return (
-                  <Tooltip key={index} title={entry.action['@hint-toolTip']}>
-                    <button
-                      className="notification-action"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (entry.action['@activationType'] === 'Protocol') {
-                          invoke(SeelenCommand.OpenFile, { path: entry.action['@arguments'] });
-                        }
-                      }}
-                    >
-                      {entry.action['@content']}
-                    </button>
-                  </Tooltip>
-                );
-              }
-
-              return null;
-            })}
-          </div>
-        )}
-      </div>
-    </motion.div>
-  );
+  return { logoImage, heroImage, body, actions };
 }
