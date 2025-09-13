@@ -151,7 +151,7 @@ function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps
       playbackRate={getPlaybackRate(config.playbackSpeed)}
       onLoadedMetadata={onLoad} // mark video as loaded on portrait load
       onWaiting={() => {
-        console.debug('video waiting for data');
+        // console.debug('video waiting for data');
       }}
       onCanPlay={() => {
         if (ref.current && !paused) {

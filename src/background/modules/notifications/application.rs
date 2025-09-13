@@ -324,12 +324,6 @@ impl NotificationManager {
                 if notification_text == toast_text {
                     Self::clean_toast(&mut toast, &app_umid.to_string())?;
                     notification_content = Some(toast);
-
-                    println!(
-                        "??????????? Group {:?} - Tag: {:?}",
-                        toast_notification.Group(),
-                        toast_notification.Tag()
-                    );
                     break;
                 }
             }

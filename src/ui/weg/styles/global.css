@@ -30,78 +30,47 @@ body {
 
 /** Root Styles */
 #root {
-  --position-when-hidden: calc(
-    (var(--config-item-size) + ((var(--config-padding) + var(--config-margin)) * 2)) * -1
+  --dock-size: calc(
+    (var(--config-item-size) + ((var(--config-padding) + var(--config-margin)) * 2))
   );
+
   position: absolute;
   height: min-content;
   width: min-content;
   max-width: 100vw;
   max-height: 100vh;
-  will-change: contents;
-  transition-property: top, left, right, bottom;
-  transition-duration: 200ms;
-  transition-timing-function: ease-in-out;
-
-  &:has(.taskbar.hidden)::after {
-    content: "";
-    position: fixed;
-  }
+  transition: transform 0.2s ease-in-out;
 
   &:has(.taskbar.left) {
     left: 0;
-    &::after {
-      bottom: 0;
-      left: 0;
-      width: 1px;
-      height: 100vh;
-    }
   }
 
   &:has(.taskbar.right) {
     right: 0;
-    &::after {
-      top: 0;
-      right: 0;
-      width: 1px;
-      height: 100vh;
-    }
   }
 
   &:has(.taskbar.top) {
     top: 0;
-    &::after {
-      top: 0;
-      right: 0;
-      width: 100vw;
-      height: 1px;
-    }
   }
 
   &:has(.taskbar.bottom) {
     bottom: 0;
-    &::after {
-      bottom: 0;
-      left: 0;
-      width: 100vw;
-      height: 1px;
-    }
   }
 
   &:has(.taskbar.hidden.left) {
-    left: var(--position-when-hidden);
+    transform: translate(calc(var(--dock-size) * -1), 0);
   }
 
   &:has(.taskbar.hidden.right) {
-    right: var(--position-when-hidden);
+    transform: translate(var(--dock-size), 0);
   }
 
   &:has(.taskbar.hidden.top) {
-    top: var(--position-when-hidden);
+    transform: translate(0, calc(var(--dock-size) * -1));
   }
 
   &:has(.taskbar.hidden.bottom) {
-    bottom: var(--position-when-hidden);
+    transform: translate(0, var(--dock-size));
   }
 }
 

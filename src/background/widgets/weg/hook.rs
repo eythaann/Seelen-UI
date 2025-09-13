@@ -67,14 +67,14 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn process_individual_win_event(&mut self, event: WinEvent, window: &Window) -> Result<()> {
+    pub fn process_individual_win_event(&mut self, event: WinEvent, origin: &Window) -> Result<()> {
         match event {
             WinEvent::SystemForeground | WinEvent::SyntheticForegroundLocationChange => {
-                self.handle_overlaped_status(window)?;
+                self.handle_overlaped_status(origin)?;
             }
             WinEvent::ObjectLocationChange => {
-                if window.hwnd() == self.hwnd()? {
-                    self.set_position(window.monitor().handle())?;
+                if origin.hwnd() == self.hwnd()? {
+                    self.reposition_if_needed()?;
                 }
             }
             _ => {}

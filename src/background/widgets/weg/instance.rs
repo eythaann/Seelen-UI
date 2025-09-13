@@ -26,8 +26,10 @@ use crate::{
 
 pub struct SeelenWeg {
     pub window: WebviewWindow<Wry>,
-    /// Is the rect that the dock should have when it isn't hidden
+    /// This is the GUI rect of the dock, not used as webview window rect
     pub theoretical_rect: RECT,
+    /// This is the webview/window rect
+    pub webview_rect: RECT,
     pub overlaped_by: Option<Window>,
     pub hidden: bool,
 }
@@ -87,6 +89,7 @@ impl SeelenWeg {
             window: Self::create_window(postfix)?,
             overlaped_by: None,
             theoretical_rect: RECT::default(),
+            webview_rect: RECT::default(),
             hidden: false,
         };
         Ok(weg)
@@ -186,38 +189,39 @@ impl SeelenWeg {
         let hwnd = HWND(self.hwnd()?.0);
         let monitor_info = WindowsApi::monitor_info(monitor)?;
 
-        let mut rect = monitor_info.monitorInfo.rcMonitor;
+        self.theoretical_rect = monitor_info.monitorInfo.rcMonitor;
+        self.webview_rect = monitor_info.monitorInfo.rcMonitor;
+
         if toolbar_config.enabled && toolbar_config.hide_mode != HideMode::Always {
             let toolbar_size = FancyToolbar::get_toolbar_height_on_monitor(monitor)?;
             match state.settings.by_widget.fancy_toolbar.position {
                 FancyToolbarSide::Top => {
-                    rect.top += toolbar_size;
+                    self.webview_rect.top += toolbar_size;
                 }
                 FancyToolbarSide::Bottom => {
-                    rect.bottom -= toolbar_size;
+                    self.webview_rect.bottom -= toolbar_size;
                 }
             }
         }
 
-        let dock_size = Self::get_weg_size_on_monitor(monitor)?;
-        self.theoretical_rect = monitor_info.monitorInfo.rcMonitor;
         // note: we reduce by 10px the webview size of the dock to avoid be matched as a fullscreen window
+        let dock_size = Self::get_weg_size_on_monitor(monitor)?;
         match settings.position {
             SeelenWegSide::Left => {
                 self.theoretical_rect.right = self.theoretical_rect.left + dock_size;
-                rect.right -= 10;
+                self.webview_rect.right -= 10;
             }
             SeelenWegSide::Right => {
                 self.theoretical_rect.left = self.theoretical_rect.right - dock_size;
-                rect.left += 10;
+                self.webview_rect.left += 10;
             }
             SeelenWegSide::Top => {
                 self.theoretical_rect.bottom = self.theoretical_rect.top + dock_size;
-                rect.bottom -= 10;
+                self.webview_rect.bottom -= 10;
             }
             SeelenWegSide::Bottom => {
                 self.theoretical_rect.top = self.theoretical_rect.bottom - dock_size;
-                rect.top += 10;
+                self.webview_rect.top += 10;
             }
         }
 
@@ -232,8 +236,17 @@ impl SeelenWeg {
         };
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(hwnd, &rect)?;
-        WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
+        WindowsApi::move_window(hwnd, &self.webview_rect)?;
+        WindowsApi::set_position(hwnd, None, &self.webview_rect, SWP_ASYNCWINDOWPOS)?;
+        Ok(())
+    }
+
+    pub fn reposition_if_needed(&mut self) -> Result<()> {
+        let hwnd = self.hwnd()?;
+        if self.webview_rect == WindowsApi::get_outer_window_rect(hwnd)? {
+            return Ok(()); // position is ok no need to reposition
+        }
+        self.set_position(WindowsApi::monitor_from_window(hwnd))?;
         Ok(())
     }
 }

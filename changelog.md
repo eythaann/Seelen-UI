@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### fix
 - notifications not showing or working as expected.
+- autohide not working properly on some screen resolutions.
 
 ## [2.4.2]
 ### features

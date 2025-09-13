@@ -28,8 +28,10 @@ use windows::Win32::{
 
 pub struct FancyToolbar {
     window: WebviewWindow,
-    /// Is the rect that the toolbar should have when it isn't hidden
-    theoretical_rect: RECT,
+    /// This is the GUI rect of the dock, not used as webview window rect
+    pub theoretical_rect: RECT,
+    /// This is the webview/window rect
+    pub webview_rect: RECT,
     overlaped_by: Option<Window>,
     hidden: bool,
 }
@@ -53,6 +55,7 @@ impl FancyToolbar {
         Ok(Self {
             window: Self::create_window(monitor)?,
             theoretical_rect: RECT::default(),
+            webview_rect: RECT::default(),
             overlaped_by: None,
             hidden: false,
         })
@@ -149,6 +152,36 @@ impl FancyToolbar {
         base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::decoded_label(monitor_id))
     }
 
+    fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
+        let manager = get_app_handle();
+        let args = WebviewArgs::new().disable_gpu();
+
+        log::info!("Creating {}", Self::decoded_label(monitor_id));
+
+        let window = tauri::WebviewWindowBuilder::new(
+            manager,
+            Self::label(monitor_id),
+            tauri::WebviewUrl::App("toolbar/index.html".into()),
+        )
+        .title(Self::TITLE)
+        .minimizable(false)
+        .maximizable(false)
+        .closable(false)
+        .resizable(false)
+        .visible(false)
+        .decorations(false)
+        .transparent(true)
+        .shadow(false)
+        .skip_taskbar(true)
+        .always_on_top(true)
+        .data_directory(args.data_directory())
+        .additional_browser_args(&args.to_string())
+        .build()?;
+
+        window.set_ignore_cursor_events(true)?;
+        Ok(window)
+    }
+
     pub fn get_toolbar_height_on_monitor(monitor: HMONITOR) -> Result<i32> {
         let state = FULL_STATE.load();
         let settings = &state.settings.by_widget.fancy_toolbar;
@@ -199,33 +232,12 @@ impl FancyToolbar {
         Ok(())
     }
 
-    fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
-        let manager = get_app_handle();
-        let args = WebviewArgs::new().disable_gpu();
-
-        log::info!("Creating {}", Self::decoded_label(monitor_id));
-
-        let window = tauri::WebviewWindowBuilder::new(
-            manager,
-            Self::label(monitor_id),
-            tauri::WebviewUrl::App("toolbar/index.html".into()),
-        )
-        .title(Self::TITLE)
-        .minimizable(false)
-        .maximizable(false)
-        .closable(false)
-        .resizable(false)
-        .visible(false)
-        .decorations(false)
-        .transparent(true)
-        .shadow(false)
-        .skip_taskbar(true)
-        .always_on_top(true)
-        .data_directory(args.data_directory())
-        .additional_browser_args(&args.to_string())
-        .build()?;
-
-        window.set_ignore_cursor_events(true)?;
-        Ok(window)
+    pub fn reposition_if_needed(&mut self) -> Result<()> {
+        let hwnd = self.hwnd()?;
+        if self.webview_rect == WindowsApi::get_outer_window_rect(hwnd)? {
+            return Ok(()); // position is ok no need to reposition
+        }
+        self.set_position(WindowsApi::monitor_from_window(hwnd))?;
+        Ok(())
     }
 }

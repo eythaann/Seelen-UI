@@ -5,7 +5,7 @@ import { $is_this_webview_focused } from '@shared/signals';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
 
-import { $root_hovered } from './dom';
+import { $mouse_at_edge } from './system';
 
 export const $settings = signal<SeelenWegSettings>((await Settings.getAsync()).seelenweg);
 Settings.onChange((settings) => ($settings.value = settings.seelenweg));
@@ -31,21 +31,23 @@ const setDockAsNotHidden = computed(() => {
 effect(() => {
   let hidden = false;
   let flush = false;
+
+  let isMouseOverEdge = $mouse_at_edge.value === $settings.value.position;
+
   switch ($settings.value.hideMode) {
     case HideMode.Never:
       hidden = false;
       flush = true;
       break;
     case HideMode.Always:
-      hidden =
-        !$is_this_webview_focused.value && !$there_are_open_popups.value && !$root_hovered.value;
+      hidden = !$is_this_webview_focused.value && !$there_are_open_popups.value && !isMouseOverEdge;
       break;
     case HideMode.OnOverlap:
       hidden =
         $is_dock_overlaped.value &&
         !$is_this_webview_focused.value &&
         !$there_are_open_popups.value &&
-        !$root_hovered.value;
+        !isMouseOverEdge;
       break;
   }
 

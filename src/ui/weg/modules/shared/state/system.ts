@@ -1,14 +1,8 @@
 import { computed, signal } from '@preact/signals';
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from '@seelen-ui/lib';
-import { FancyToolbarSide } from '@seelen-ui/lib/types';
+import { SeelenWegSide } from '@seelen-ui/lib/types';
 
 const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
-
-const initialDesktops = await invoke(SeelenCommand.StateGetVirtualDesktops);
-export const $virtual_desktop = signal(initialDesktops.monitors[currentMonitorId]);
-subscribe(SeelenEvent.VirtualDesktopsChanged, (e) => {
-  $virtual_desktop.value = e.payload.monitors[currentMonitorId];
-});
 
 const $monitors = signal(await invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, (e) => {
@@ -22,12 +16,18 @@ subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
   $mouse_pos.value = { x, y };
 });
 
-export const $mouse_at_edge = computed<FancyToolbarSide | null>(() => {
+export const $mouse_at_edge = computed<SeelenWegSide | null>(() => {
   if ($mouse_pos.value.y === $current_monitor.value.rect.top) {
     return 'Top';
   }
+  if ($mouse_pos.value.x === $current_monitor.value.rect.left) {
+    return 'Left';
+  }
   if ($mouse_pos.value.y === $current_monitor.value.rect.bottom - 1) {
     return 'Bottom';
+  }
+  if ($mouse_pos.value.x === $current_monitor.value.rect.right - 1) {
+    return 'Right';
   }
   return null;
 });
