@@ -4,6 +4,7 @@
 ### fix
 - notifications not showing or working as expected.
 - autohide not working properly on some screen resolutions.
+- managing incorrect app windows on restart the app.
 
 ## [2.4.2]
 ### features

@@ -65,9 +65,11 @@ impl SluWorkspacesManager {
             Err(_) => Default::default(),
         });
 
-        // ensure saved windows are still valid
+        // ensure saved windows are still valid.
         for workspace in manager.iter_workspaces_mut() {
-            workspace.windows.retain(|w| Window::from(*w).is_window());
+            workspace
+                .windows
+                .retain(|w| Self::should_be_added(&Window::from(*w)));
         }
 
         manager
