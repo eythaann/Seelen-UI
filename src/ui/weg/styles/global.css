@@ -57,20 +57,22 @@ body {
     bottom: 0;
   }
 
-  &:has(.taskbar.hidden.left) {
-    transform: translate(calc(var(--dock-size) * -1), 0);
-  }
+  &:not(:hover) {
+    &:has(.taskbar.hidden.left) {
+      transform: translate(calc(var(--dock-size) * -1), 0);
+    }
 
-  &:has(.taskbar.hidden.right) {
-    transform: translate(var(--dock-size), 0);
-  }
+    &:has(.taskbar.hidden.right) {
+      transform: translate(var(--dock-size), 0);
+    }
 
-  &:has(.taskbar.hidden.top) {
-    transform: translate(0, calc(var(--dock-size) * -1));
-  }
+    &:has(.taskbar.hidden.top) {
+      transform: translate(0, calc(var(--dock-size) * -1));
+    }
 
-  &:has(.taskbar.hidden.bottom) {
-    transform: translate(0, var(--dock-size));
+    &:has(.taskbar.hidden.bottom) {
+      transform: translate(0, var(--dock-size));
+    }
   }
 }
 
