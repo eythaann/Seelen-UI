@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.4.3]
 ### fix
 - notifications not showing or working as expected.
 - autohide not working properly on some screen resolutions.

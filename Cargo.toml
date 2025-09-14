@@ -2,7 +2,7 @@ cargo-features = ["profile-rustflags", "codegen-backend"]
 
 [package]
 name = "seelen-ui"
-version = "2.4.2"
+version = "2.4.3"
 description = "Seelen UI Background"
 authors = ["eythaann"]
 license = "Polyform Strict License"
