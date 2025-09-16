@@ -54,6 +54,7 @@ npm install && npm run dev
 ### Monorepo Structure
 
 **Root Level:**
+
 - `libs/` - Shared libraries and core components
   - `core/` - Core Seelen UI library with Rust-generated TypeScript bindings
   - `positioning/` - Positioning utilities
@@ -62,6 +63,7 @@ npm install && npm run dev
   - `widgets-shared/` - Shared widget components
 
 **Seelen UI Application:**
+
 - `src/background/` - Rust backend following event-driven architecture
 - `src/service/` - System service components
 - `src/ui/` - Frontend applications (each subdirectory is an independent app)

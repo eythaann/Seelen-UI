@@ -33,7 +33,6 @@ jobs:
           git tag -f nightly
           git push origin --force --tags
 
-
       - name: Generate Version
         id: gen-version
         uses: actions/github-script@v7
@@ -168,5 +167,5 @@ jobs:
                   asset_id: asset.id,
                 });
               });
-            
+
             await Promise.all(deletions);
