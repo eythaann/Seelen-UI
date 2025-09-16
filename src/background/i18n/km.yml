@@ -3,12 +3,12 @@ done: រ្យេឱដេនោ
 drivers:
   got_it: ទទួលបានវា
   monitor_disabled: >-
-    វាបង្ហាញថាកម្មវិធីបញ្ជាម៉ូនីទ័រមួយចំនួនត្រូវបានបិទ។
-    សូមអនុញ្ញាតឱ្យពួកគេអនុញ្ញាតឱ្យ Seelle UI ធ្វើការបានត្រឹមត្រូវ។
+    វាបង្ហាញថាកម្មវិធីបញ្ជាម៉ូនីទ័រមួយចំនួនត្រូវបានបិទ។ សូមអនុញ្ញាតឱ្យពួកគេអនុញ្ញាតឱ្យ Seelle UI ធ្វើការបានត្រឹមត្រូវ។
   monitor_disabled_title: កម្មវិធីបញ្ជាត្រួតពិនិត្យត្រូវបានបិទ
 resource:
   added: ធនធានថ្មីត្រូវបានបន្ថែម
-  download_failed_body: មានអ្វីមួយមិនប្រក្រតីនៅពេលទាញយកធនធានសូមរាយការណ៍ទៅក្រុមអ្នកអភិវឌ្ឍន៍ Seeen ។
+  download_failed_body: >-
+    មានអ្វីមួយមិនប្រក្រតីនៅពេលទាញយកធនធានសូមរាយការណ៍ទៅក្រុមអ្នកអភិវឌ្ឍន៍ Seeen ។
   download_failed_title: ការទាញយកធនធានបានបរាជ័យ
   downloading: ទាញយកទ្រព្យសម្បត្តិ ...
   downloading_body: វាអាចចំណាយពេលពីរបីវិនាទីសូមកុំបិទបង្អួច។
@@ -21,12 +21,12 @@ runtime:
   not_found: WebView2 Runtime រកមិនឃើញទេ។
   not_found_description: Seelen UI ទាមទារ Webview2 Runtime ។ សូមដំឡើងវា។
   outdated: WebView2 Runtime ហួសសម័យ
-  outdated_description: Seelen UI ទាមទារ Webview2 Runtime %{min_version} ឬខ្ពស់ជាងនេះ។ សូមអាប់ដេតវា។
+  outdated_description: >-
+    Seelen UI ទាមទារ Webview2 Runtime %{min_version} ឬខ្ពស់ជាងនេះ។ សូមអាប់ដេតវា។
 service:
   not_running: សេវា Seelen UI មិនដំណើរការទេ។
   not_running_description: >-
-    Seelen UI Service (slu-service)
-    គឺជាការពឹងផ្អែក/ជំនួយសម្រាប់កម្មវិធីឱ្យដំណើរការបានត្រឹមត្រូវ។
+    Seelen UI Service (slu-service) គឺជាការពឹងផ្អែក/ជំនួយសម្រាប់កម្មវិធីឱ្យដំណើរការបានត្រឹមត្រូវ។
   not_running_ok: ចាប់ផ្តើមសេវាកម្ម
 shortcut:
   register:
