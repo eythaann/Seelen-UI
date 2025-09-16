@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Darba vieta
     workspace_placeholder: Neviens
   bundled_msg: >-
-    Šīs komplektētās konfigurācijas nav rediģējamas un ir paredzētas, lai
-    sniegtu jums vislabāko pieredzi bez pielāgošanas. Tie automātiski konfigurē
-    jums visizplatītākās lietojumprogrammas.
+    Šīs komplektētās konfigurācijas nav rediģējamas un ir paredzētas, lai sniegtu jums vislabāko pieredzi bez pielāgošanas. Tie automātiski konfigurē jums visizplatītākās lietojumprogrammas.
   bundled_title: Lietotnes konfigurācija, kas komplektēta ar Seelen
   confirm_delete: Vai esat pārliecināts, ka vēlaties izdzēst šo konfigurāciju/-as?
   confirm_delete_title: Apstipriniet izdzēst
@@ -47,10 +45,7 @@ apps_configurations:
   export: Eksportēt
   export_full: Eksportēt iestatījumus pēc lietojumprogrammas
   extra_info: >-
-    Seelen lietotāja saskarnē katrai lietotnei tiek izmantots tikai viens
-    identifikators (atrasta pirmā atbilstība), tāpēc ir svarīga secība, kādā tie
-    tiek norādīti, un jaunākajam pievienotajam tiks piešķirta prioritāte, jo
-    ņemiet vērā, ka tabula pēc noklusējuma tiek kārtota no jaunākā uz veco.
+    Seelen lietotāja saskarnē katrai lietotnei tiek izmantots tikai viens identifikators (atrasta pirmā atbilstība), tāpēc ir svarīga secība, kādā tie tiek norādīti, un jaunākajam pievienotajam tiks piešķirta prioritāte, jo ņemiet vērā, ka tabula pēc noklusējuma tiek kārtota no jaunākā uz veco.
   identifier:
     add_block: Pievienot bloku
     and: UN
@@ -90,9 +85,7 @@ devtools:
   simulate_fullscreen: Simulējiet pilnekrāna notikumu
 extras:
   clear_icons: Iztīrīt sistēmas ikonu kešatmiņu
-  clear_icons_tooltip: >-
-    Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos
-    logrīkos.
+  clear_icons_tooltip: Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos logrīkos.
   exit: Atmest/iziet
   links: Oficiālas saites
   relaunch: Atsākšana
@@ -145,7 +138,7 @@ miscellaneous: Dažāds
 monitors_configurations:
   label: Monitors {{indekss}}
 more: Vairāk
-'no': Ne
+'no': 'Ne'
 open: Atvērt
 quit: Atmest
 remove: Noņemt
@@ -160,16 +153,14 @@ resources:
   import_wallpapers: Importēt vietējās tapetes
   open_folder: Atvērt resursu mapi
   outdated: >-
-    Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties
-    pareizi.
+    Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties pareizi.
 save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 see_more: Skatīt vairāk
 shortcuts:
   enable: Iespējot iebūvēto saīsņu sistēmu
   enable_tooltip: >-
-    Atspējot, ja jūs ieviesīsit savu saīsņu sistēmu, izmantojot Seelen UI
-    klientu
+    Atspējot, ja jūs ieviesīsit savu saīsņu sistēmu, izmantojot Seelen UI klientu
   labels:
     create_new_workspace: Izveidojiet jaunu darbvietu
     cycle_stack_next: Nākamais cikla kaudze
@@ -220,10 +211,7 @@ sides:
   top: Tops
 start:
   message: >-
-    Laipni lūdzam Seelen Ui, galvenajā darbvirsmas vidē ar iestrādātu flīzes
-    Windows Manager, lai uzlabotu jūsu Windows pieredzi! Izpētiet jaunu
-    efektivitātes un daudzuzdevumu laikmetu ar mūsu intuitīvo interfeisu un
-    uzlabotajām funkcijām.
+    Laipni lūdzam Seelen Ui, galvenajā darbvirsmas vidē ar iestrādātu flīzes Windows Manager, lai uzlabotu jūsu Windows pieredzi! Izpētiet jaunu efektivitātes un daudzuzdevumu laikmetu ar mūsu intuitīvo interfeisu un uzlabotajām funkcijām.
   message_accent: Optimizējiet savu produktivitāti ar stilu!
   title: Laipni lūdzam!
 toolbar:
@@ -233,8 +221,7 @@ toolbar:
   dock_side: Pozīcija
   dynamic_color: Dinamiskā krāsa
   dynamic_color_tooltip: >-
-    Iespēja izmantot dinamiskas fona un priekšplāna krāsas atkarībā no fokusētā
-    loga. (Krāsas var pārspēt ar tēmām)
+    Iespēja izmantot dinamiskas fona un priekšplāna krāsas atkarībā no fokusētā loga. (Krāsas var pārspēt ar tēmām)
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
   hide_mode:
@@ -242,7 +229,7 @@ toolbar:
     never: Nekad
     on_overlap: Uz pārklāšanās
   label: Rīkjosla
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Rādīt hibernēšanas pogu barošanas izvēlnē
 update:
   available: Pieejams atjauninājums!
@@ -273,7 +260,7 @@ wall:
     center: Centrs
     left: Kreisā
     right: Tiesības
-    top: Top
+    top: Tops
   random: Randomizējiet slaidrādi
   saturation: Piesātinājums
   seconds: sekundes
@@ -335,4 +322,4 @@ wm:
   space_between_containers: Telpa starp konteineriem
   workspace_offset: Darbvietu kompensācija (malas)
   workspace_padding: Darbvietas polsterējums
-'yes': Jā
+'yes': 'Jā'
