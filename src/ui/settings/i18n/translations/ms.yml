@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Ruang kerja
     workspace_placeholder: Tiada
   bundled_msg: >-
-    Konfigurasi yang dibundel ini tidak dapat diedit dan direka untuk memberi
-    anda pengalaman terbaik tanpa penyesuaian. Mereka secara automatik
-    mengkonfigurasi aplikasi yang paling biasa untuk anda.
+    Konfigurasi yang dibundel ini tidak dapat diedit dan direka untuk memberi anda pengalaman terbaik tanpa penyesuaian. Mereka secara automatik mengkonfigurasi aplikasi yang paling biasa untuk anda.
   bundled_title: Konfigurasi aplikasi dibundel dengan seelen
   confirm_delete: Adakah anda pasti mahu memadamkan konfigurasi ini?
   confirm_delete_title: Sahkan padam
@@ -47,10 +45,7 @@ apps_configurations:
   export: Eksport
   export_full: Tetapan eksport melalui permohonan
   extra_info: >-
-    UI Seelen hanya menggunakan satu pengecam bagi setiap apl (padanan pertama
-    ditemui) jadi susunan cara dikhususkan adalah penting, penambahan terkini
-    akan diutamakan, kerana ambil perhatian bahawa jadual diisih secara lalai
-    dari terkini ke lama.
+    UI Seelen hanya menggunakan satu pengecam bagi setiap apl (padanan pertama ditemui) jadi susunan cara dikhususkan adalah penting, penambahan terkini akan diutamakan, kerana ambil perhatian bahawa jadual diisih secara lalai dari terkini ke lama.
   identifier:
     add_block: Tambah blok
     and: Dan
@@ -143,16 +138,14 @@ miscellaneous: Pelbagai
 monitors_configurations:
   label: Monitor {{index}}
 more: Lebih
-'no': Tidak
+'no': 'Tidak'
 open: Buka
 quit: Berhenti
 remove: Keluarkan
 reset_all_to_default: Tetapkan semula semua ke nilai lalai
 reset_to_default: Tetapkan semula ke nilai lalai
 resources:
-  app_outdated: >-
-    Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan
-    baik.
+  app_outdated: Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan baik.
   delete: Padam sumber
   discover: Cari lebih banyak sumber
   export: Sumber Eksport
@@ -160,16 +153,14 @@ resources:
   import_wallpapers: Mengimport kertas dinding tempatan
   open_folder: Buka Folder Sumber
   outdated: >-
-    Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi
-    dengan baik.
+    Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi dengan baik.
 save: Simpan
 save_and_restart: Jimat & mulakan semula
 see_more: Lihat lagi
 shortcuts:
   enable: Dayakan sistem pintasan terbina dalam
   enable_tooltip: >-
-    Lumpuhkan jika anda akan melaksanakan sistem pintasan anda sendiri
-    menggunakan pelanggan Seelen UI
+    Lumpuhkan jika anda akan melaksanakan sistem pintasan anda sendiri menggunakan pelanggan Seelen UI
   labels:
     create_new_workspace: Buat ruang kerja baru
     cycle_stack_next: Stack kitaran seterusnya
@@ -220,10 +211,7 @@ sides:
   top: Atas
 start:
   message: >-
-    Selamat datang ke Seelen UI, persekitaran desktop muktamad dengan Pengurus
-    Windows Tiling yang diperbadankan untuk meningkatkan pengalaman Windows
-    anda! Terokai era kecekapan baru dan multitasking dengan antara muka
-    intuitif dan ciri canggih kami.
+    Selamat datang ke Seelen UI, persekitaran desktop muktamad dengan Pengurus Windows Tiling yang diperbadankan untuk meningkatkan pengalaman Windows anda! Terokai era kecekapan baru dan multitasking dengan antara muka intuitif dan ciri canggih kami.
   message_accent: Mengoptimumkan produktiviti anda dengan gaya!
   title: Selamat datang!
 toolbar:
@@ -233,8 +221,7 @@ toolbar:
   dock_side: Kedudukan
   dynamic_color: Warna dinamik
   dynamic_color_tooltip: >-
-    Dayakan latar belakang dinamik dan warna latar depan berdasarkan tetingkap
-    fokus. (Warna boleh ditindih oleh tema)
+    Dayakan latar belakang dinamik dan warna latar depan berdasarkan tetingkap fokus. (Warna boleh ditindih oleh tema)
   enable: Dayakan bar alat mewah
   height: Ketinggian
   hide_mode:
@@ -242,7 +229,7 @@ toolbar:
     never: tidak pernah
     on_overlap: Bertindih
   label: Bar alat
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Tunjukkan butang hibernate pada menu kuasa
 update:
   available: Kemas kini tersedia!
@@ -335,4 +322,4 @@ wm:
   space_between_containers: Ruang antara bekas
   workspace_offset: Ruang Kerja Offset (margin)
   workspace_padding: Padding ruang kerja
-'yes': Ya
+'yes': 'Ya'
