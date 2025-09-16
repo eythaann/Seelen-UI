@@ -3,14 +3,12 @@ done: Færdig
 drivers:
   got_it: Jeg har det
   monitor_disabled: >-
-    Det ser ud til, at nogle skærmdrivere er deaktiveret. Aktivér dem venligst,
-    så Seelen UI kan fungere korrekt.
+    Det ser ud til, at nogle skærmdrivere er deaktiveret. Aktivér dem venligst, så Seelen UI kan fungere korrekt.
   monitor_disabled_title: Skærmdrivere er deaktiveret
 resource:
   added: En ny ressource er blevet tilføjet
   download_failed_body: >-
-    Noget gik galt under download af ressourcen, rapporter det venligst til
-    Seelen-udviklerteamet.
+    Noget gik galt under download af ressourcen, rapporter det venligst til Seelen-udviklerteamet.
   download_failed_title: Download af ressourcer mislykkedes
   downloading: Download af aktiver...
   downloading_body: Det kan tage et par sekunder, så lad være med at lukke vinduet.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI kræver Webview2 Runtime. Installer det venligst.
   outdated: WebView2 Runtime forældet
   outdated_description: >-
-    Seelen UI kræver Webview2 Runtime %{min_version} eller højere. Opdater det
-    venligst.
+    Seelen UI kræver Webview2 Runtime %{min_version} eller højere. Opdater det venligst.
 service:
   not_running: Seelen UI Service kører ikke
   not_running_description: >-
-    Seelen UI Service (slu-service) er en afhængighed/hjælper for, at appen
-    fungerer korrekt.
+    Seelen UI Service (slu-service) er en afhængighed/hjælper for, at appen fungerer korrekt.
   not_running_ok: Start service
 shortcut:
   register:
