@@ -8,6 +8,8 @@ Seelen UI is a fully customizable desktop environment for Windows built with Rus
 (frontend). It provides tiling window management, customizable toolbar, app launcher, media controls, and system
 integrations through a Tauri-based architecture.
 
+This project follows a **monorepo architecture** with separate libraries and the main Seelen UI application.
+
 ## Build and Development Commands
 
 ### Initial Setup
@@ -20,17 +22,21 @@ npm install && npm run dev
 
 - `npm run dev` - Start development server with hot reload
 - `npm run build:ui` - Build UI components
-- `npm run build:ui:production` - Build UI for production
-- `npm run build:ui:watch` - Build UI in watch mode
 - `cargo build` - Build Rust backend
 - `npm run tauri dev` - Run Tauri in development mode
 
-### Code Quality
+### Code Quality (Deno-based)
 
-- `npm run lint` - Run ESLint with zero warnings policy
-- `npm run lint:fix` - Auto-fix linting issues
+- `deno lint` - Run Deno linting (replacing ESLint)
+- `deno fmt` - Format code with Deno formatter
 - `npm run type-check` - Run TypeScript type checking
 - `npm test` - Run tests with Jest
+
+### Library Commands (libs/core)
+
+- `cd libs/core && deno task build` - Build core library with TypeScript bindings
+- `cd libs/core && deno task build:rs` - Generate Rust-to-TypeScript bindings
+- `cd libs/core && deno task build:npm` - Build NPM package from Deno library
 
 ### Other Commands
 
@@ -45,8 +51,17 @@ npm install && npm run dev
 - **Frontend**: Multiple independent React/Preact applications bundled with esbuild
 - **IPC**: Tauri's invoke system for frontend-backend communication
 
-### Directory Structure
+### Monorepo Structure
 
+**Root Level:**
+- `libs/` - Shared libraries and core components
+  - `core/` - Core Seelen UI library with Rust-generated TypeScript bindings
+  - `positioning/` - Positioning utilities
+  - `slu-ipc/` - Inter-process communication
+  - `widgets-integrity/` - Widget integrity checks
+  - `widgets-shared/` - Shared widget components
+
+**Seelen UI Application:**
 - `src/background/` - Rust backend following event-driven architecture
 - `src/service/` - System service components
 - `src/ui/` - Frontend applications (each subdirectory is an independent app)
@@ -99,7 +114,8 @@ Each UI app follows hexagonal architecture with:
 - **esbuild** for fast frontend bundling
 - **Cargo** for Rust compilation
 - **TypeScript** with strict type checking
-- **ESLint** with stylistic rules and import sorting
+- **Deno** for linting, formatting, and core library management (migrating from Node.js)
+- **Rust-to-TypeScript bindings** generated automatically in `libs/core`
 
 ## Development Guidelines
 
@@ -150,9 +166,10 @@ To prevent deadlocks, always acquire locks in this order:
 
 ## Dependencies
 
-- **External Rust Library**: Uses `slu-lib` (Seelen UI Library) from separate repository
+- **Core Library**: Uses `@seelen-ui/lib` from `libs/core` (monorepo library with Rust-generated TypeScript bindings)
 - **Tauri Plugins**: Extensive use of official Tauri plugins for system integration
 - **Windows Runtime**: Requires WebView2 and Microsoft Edge for proper functionality
+- **Deno Runtime**: Progressive migration from Node.js to Deno for tooling and core library
 
 ## Building and Deployment
 

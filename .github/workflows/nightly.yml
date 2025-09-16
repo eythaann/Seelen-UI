@@ -26,8 +26,6 @@ jobs:
       nightly-version: ${{ steps.gen-version.outputs.result }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
       - run: git fetch --tags --prune
 
       - name: Create or update 'nightly' tag (force overwrite)
@@ -35,8 +33,6 @@ jobs:
           git tag -f nightly
           git push origin --force --tags
 
-      - name: Confirm the tag was updated
-        run: git ls-remote --tags origin
 
       - name: Generate Version
         id: gen-version
@@ -68,8 +64,6 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - uses: actions/setup-node@v4
         with:
@@ -93,10 +87,13 @@ jobs:
         if: matrix.platform == 'windows-2025'
         shell: pwsh
         run: |
-          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
-          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+          # Install in parallel to save time
+          $jobs = @(
+            { winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force --silent },
+            { winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force --silent },
+            { winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force --silent }
+          )
+          $jobs | ForEach-Object { Start-Job -ScriptBlock $_ } | Wait-Job | Receive-Job
 
       - name: Set Version
         run: |
@@ -142,7 +139,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const tagName = 'nightly';
-            const nightlyVersion = ${{ needs.update-tag.outputs.nightly-version }};
+            const nightlyVersion = '${{ needs.update-tag.outputs.nightly-version }}';
             console.info(`nightlyVersion: ${nightlyVersion}`);
 
             const release = await github.rest.repos.getReleaseByTag({
@@ -157,16 +154,19 @@ jobs:
               release_id: release.data.id,
             });
 
-            result.data.forEach(async (asset) => {
-              if (asset.name.endsWith('.json')) {
-                return;
-              }
-              if (!asset.name.includes(nightlyVersion) || asset.name.endsWith('.sig')) {
+            // Use Promise.all for parallel deletion
+            const deletions = result.data
+              .filter(asset => {
+                if (asset.name.endsWith('.json')) return false;
+                return !asset.name.includes(nightlyVersion) || asset.name.endsWith('.sig');
+              })
+              .map(asset => {
                 console.info(`deleting ${asset.name}`);
-                await github.rest.repos.deleteReleaseAsset({
+                return github.rest.repos.deleteReleaseAsset({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   asset_id: asset.id,
                 });
-              }
-            });
+              });
+            
+            await Promise.all(deletions);

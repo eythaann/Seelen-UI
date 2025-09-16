@@ -20,8 +20,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
       - name: Get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
@@ -61,8 +59,6 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - uses: actions/setup-node@v4
         with:
@@ -77,6 +73,7 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2024-06-25
+      - uses: Swatinem/rust-cache@v2
 
       - name: Install frontend dependencies
         run: npm install
@@ -85,10 +82,13 @@ jobs:
         if: matrix.platform == 'windows-2025'
         shell: pwsh
         run: |
-          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
-          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+          # Install in parallel to save time
+          $jobs = @(
+            { winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force --silent },
+            { winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force --silent },
+            { winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force --silent }
+          )
+          $jobs | ForEach-Object { Start-Job -ScriptBlock $_ } | Wait-Job | Receive-Job
 
       - uses: tauri-apps/tauri-action@v0.5.16
         env:
@@ -118,8 +118,6 @@ jobs:
     runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Download Artifacts
         uses: actions/download-artifact@v4
