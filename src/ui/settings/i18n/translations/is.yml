@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Vinnusvæði
     workspace_placeholder: Enginn
   bundled_msg: >-
-    Þessar búnt stillingar eru ekki breytanlegar og eru hannaðar til að veita
-    þér bestu upplifunina án aðlögunar. Þeir stilla sjálfkrafa algengustu
-    forritin fyrir þig.
+    Þessar búnt stillingar eru ekki breytanlegar og eru hannaðar til að veita þér bestu upplifunina án aðlögunar. Þeir stilla sjálfkrafa algengustu forritin fyrir þig.
   bundled_title: App stillt saman með Seelen
   confirm_delete: Ertu viss um að þú viljir eyða þessari stillingu/s?
   confirm_delete_title: Staðfestu að eyða
@@ -47,10 +45,7 @@ apps_configurations:
   export: Flytja út
   export_full: Útflutningsstillingar eftir umsókn
   extra_info: >-
-    Seelen UI Notaðu aðeins eitt auðkenni á hvert forrit (fyrsta samsvörun sem
-    fannst) þannig að röðin í því hvernig eru sértæk er mikilvæg, nýjasta bætt
-    við verður forgangsraðað, eins og athugið að töflunni er flokkað sjálfgefið
-    frá nýjasta til gamla.
+    Seelen UI Notaðu aðeins eitt auðkenni á hvert forrit (fyrsta samsvörun sem fannst) þannig að röðin í því hvernig eru sértæk er mikilvæg, nýjasta bætt við verður forgangsraðað, eins og athugið að töflunni er flokkað sjálfgefið frá nýjasta til gamla.
   identifier:
     add_block: Bæta við blokk
     and: Og
@@ -143,7 +138,7 @@ miscellaneous: Ýmislegt
 monitors_configurations:
   label: Monitor {{Index}}
 more: Meira
-'no': Nei
+'no': 'Nei'
 open: Opið
 quit: Hættu
 remove: Fjarlægðu
@@ -158,16 +153,14 @@ resources:
   import_wallpapers: Flytja inn staðbundið veggfóður
   open_folder: Opin auðlindamappa
   outdated: >-
-    Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað
-    rétt.
+    Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað rétt.
 save: Vista
 save_and_restart: Vista og endurræsa
 see_more: Sjáðu meira
 shortcuts:
   enable: Virkja innbyggt flýtileiðkerfi
   enable_tooltip: >-
-    Slökktu á ef þú munt innleiða þitt eigið flýtileiðkerfi með Seelen UI
-    viðskiptavininum
+    Slökktu á ef þú munt innleiða þitt eigið flýtileiðkerfi með Seelen UI viðskiptavininum
   labels:
     create_new_workspace: Búðu til nýja vinnusvæði
     cycle_stack_next: Hringrás stafla næst
@@ -218,10 +211,7 @@ sides:
   top: Efst
 start:
   message: >-
-    Verið velkomin í Seelen HÍ, fullkominn skrifborðsumhverfi með innbyggðan
-    flísar Windows Manager til að auka Windows upplifun þína! Kannaðu nýtt
-    tímabil skilvirkni og fjölverkavinnslu með leiðandi viðmóti okkar og
-    háþróaðri eiginleika.
+    Verið velkomin í Seelen HÍ, fullkominn skrifborðsumhverfi með innbyggðan flísar Windows Manager til að auka Windows upplifun þína! Kannaðu nýtt tímabil skilvirkni og fjölverkavinnslu með leiðandi viðmóti okkar og háþróaðri eiginleika.
   message_accent: Fínstilltu framleiðni þína með stæl!
   title: Velkominn!
 toolbar:
@@ -231,8 +221,7 @@ toolbar:
   dock_side: Staða
   dynamic_color: Kraftmikinn litur
   dynamic_color_tooltip: >-
-    Virkja kraftmikinn bakgrunn og forgrunni liti byggðir á einbeittum glugga.
-    (Hægt er að hnekkja litum með þemum)
+    Virkja kraftmikinn bakgrunn og forgrunni liti byggðir á einbeittum glugga. (Hægt er að hnekkja litum með þemum)
   enable: Virkja Fancy tækjastiku
   height: Hæð
   hide_mode:
@@ -240,7 +229,7 @@ toolbar:
     never: Aldrei
     on_overlap: Á skörun
   label: Tækjastikur
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Sýna dvalahnappinn í Power valmyndinni
 update:
   available: Uppfærsla í boði!
@@ -333,4 +322,4 @@ wm:
   space_between_containers: Rými milli gáma
   workspace_offset: Vinnusvæði offset (framlegð)
   workspace_padding: Vinnusvæði padding
-'yes': Já
+'yes': 'Já'
