@@ -56,7 +56,7 @@ notifications:
   settings: نور د خبرتیاوې تنظیمات
   title: خبرتیاوې
 placeholder:
-  battery_remaining: ٪ پاتې
+  battery_remaining: '٪ پاتې'
   bluetooth_devices: بلوتوث او وسایل
   ethernet_connected: انټرنیټ لاسرسی
   ethernet_disconnected: هیڅ انټرنیټ لاسرسی
@@ -73,7 +73,7 @@ settings:
   log_out: وتل
   power: ځواک
   restart: بیا روښانه کول
-  shutdown: ‍‍‍بندول
+  shutdown: '‍‍‍بندول'
   sleep: ویده شه
   title: امستنې
 tray:
