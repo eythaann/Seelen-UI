@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Radni prostor
     workspace_placeholder: Nijedan
   bundled_msg: >-
-    Ove uleteljene konfiguracije nisu uređivanje i dizajnirane su da vam pruže
-    najbolje iskustvo bez prilagodbe. Oni automatski konfiguriraju najčešće
-    aplikacije za vas.
+    Ove uleteljene konfiguracije nisu uređivanje i dizajnirane su da vam pruže najbolje iskustvo bez prilagodbe. Oni automatski konfiguriraju najčešće aplikacije za vas.
   bundled_title: Konfiguracija aplikacija paketa sa seelen
   confirm_delete: Jeste li sigurni da želite izbrisati ovu konfiguraciju / s?
   confirm_delete_title: Potvrdite Izbriši
@@ -47,10 +45,7 @@ apps_configurations:
   export: Izvoz
   export_full: Izvoz postavki po nanosu
   extra_info: >-
-    Seelen UI Koristite samo jedan identifikator po aplikaciji (prvo pronađeno),
-    tako da je narudžba u tome kako je specifično, najnoviji dodani bit će
-    prioritet, jer je u priopćenju tablica po zadanim postavkama sortirana iz
-    posljednjeg.
+    Seelen UI Koristite samo jedan identifikator po aplikaciji (prvo pronađeno), tako da je narudžba u tome kako je specifično, najnoviji dodani bit će prioritet, jer je u priopćenju tablica po zadanim postavkama sortirana iz posljednjeg.
   identifier:
     add_block: Dodajte blok
     and: I
@@ -143,7 +138,7 @@ miscellaneous: Ostalo
 monitors_configurations:
   label: Monitor {{index}}
 more: Više
-'no': Ne
+'no': 'Ne'
 open: Otvoren
 quit: Prestati
 remove: Ukloniti
@@ -158,16 +153,14 @@ resources:
   import_wallpapers: Uvoz lokalnih pozadina
   open_folder: Otvorite mapu resursa
   outdated: >-
-    Ovaj je resurs dizajniran za stariju verziju Seelena UI-a i možda neće
-    raditi ispravno.
+    Ovaj je resurs dizajniran za stariju verziju Seelena UI-a i možda neće raditi ispravno.
 save: Sačuvati
 save_and_restart: Spremi i ponovno pokretanje
 see_more: Pogledajte više
 shortcuts:
   enable: Omogući ugrađene sistem prečaca
   enable_tooltip: >-
-    Onemogućite ako ćete implementirati vlastite sustav prečaca pomoću klijenta
-    SEELEN UI
+    Onemogućite ako ćete implementirati vlastite sustav prečaca pomoću klijenta SEELEN UI
   labels:
     create_new_workspace: Kreirajte novi radni prostor
     cycle_stack_next: Sljedeći ciklus stack
@@ -218,10 +211,7 @@ sides:
   top: Vrh
 start:
   message: >-
-    Dobrodošli u Seelen UI, vrhunsko okruženje za radnu površinu sa ugrađenim
-    popločavanjem Windows Manager-a za poboljšanje vašeg Windows iskustva!
-    Istražite novu eru efikasnosti i više zadataka sa našim intuitivnim
-    interfejsom i naprednim funkcijama.
+    Dobrodošli u Seelen UI, vrhunsko okruženje za radnu površinu sa ugrađenim popločavanjem Windows Manager-a za poboljšanje vašeg Windows iskustva! Istražite novu eru efikasnosti i više zadataka sa našim intuitivnim interfejsom i naprednim funkcijama.
   message_accent: Optimizirajte svoju produktivnost sa stilom!
   title: Dobrodošli!
 toolbar:
@@ -231,8 +221,7 @@ toolbar:
   dock_side: Položaj
   dynamic_color: Dinamička boja
   dynamic_color_tooltip: >-
-    Omogućite dinamičku pozadinu i boje prednjeg plana na osnovu fokusiranog
-    prozora. (Boje se mogu prevladati od tema)
+    Omogućite dinamičku pozadinu i boje prednjeg plana na osnovu fokusiranog prozora. (Boje se mogu prevladati od tema)
   enable: Omogući fantastičnu alatnu traku
   height: Visina
   hide_mode:
@@ -240,7 +229,7 @@ toolbar:
     never: Nikad
     on_overlap: Na preklapanje
   label: Alatna traka
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Prikaži dugme Hibernate na meniju napajanja
 update:
   available: Ažuriraj dostupno!
@@ -333,4 +322,4 @@ wm:
   space_between_containers: Prostor između kontejnera
   workspace_offset: Offset radne prostore (margine)
   workspace_padding: Djelatna površina obloga
-'yes': Da
+'yes': 'Da'
