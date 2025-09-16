@@ -37,9 +37,7 @@ apps_configurations:
     workspace: İş sahəsi
     workspace_placeholder: Heç kim
   bundled_msg: >-
-    Bu paketlənmiş konfiqurasiya düzəliş deyil və özelleştirme olmadan ən yaxşı
-    təcrübəni təmin etmək üçün hazırlanmışdır. Avtomatik olaraq sizin üçün ən
-    çox yayılmış tətbiqləri konfiqurasiya edirlər.
+    Bu paketlənmiş konfiqurasiya düzəliş deyil və özelleştirme olmadan ən yaxşı təcrübəni təmin etmək üçün hazırlanmışdır. Avtomatik olaraq sizin üçün ən çox yayılmış tətbiqləri konfiqurasiya edirlər.
   bundled_title: App Config Seelen ilə birləşdirilmişdir
   confirm_delete: Bu konfiqurasiya / s silmək istədiyinizə əminsiniz?
   confirm_delete_title: Silmək təsdiqləyin
@@ -47,9 +45,7 @@ apps_configurations:
   export: İxrac etmək
   export_full: Tətbiq tərəfindən parametrləri ixrac edin
   extra_info: >-
-    Seelen UI, bir tətbiq başına yalnız bir identifikatordan istifadə edir (ilk
-    matç tapıldı), buna görə əmiklər necə vacibdir, ən son əlavə olaraq,
-    cədvəlin ən sondan köhnəyə görə sıralandığı üçün prioritetləşdiriləcəkdir.
+    Seelen UI, bir tətbiq başına yalnız bir identifikatordan istifadə edir (ilk matç tapıldı), buna görə əmiklər necə vacibdir, ən son əlavə olaraq, cədvəlin ən sondan köhnəyə görə sıralandığı üçün prioritetləşdiriləcəkdir.
   identifier:
     add_block: Blok əlavə edin
     and: Və
@@ -142,16 +138,14 @@ miscellaneous: Müxtəlif
 monitors_configurations:
   label: Monitor {{index}}
 more: Daha çox
-'no': Yox
+'no': 'Yox'
 open: Açıq-saçıq
 quit: Çıxmaq
 remove: Çıxarmaq
 reset_all_to_default: Hamısını standart dəyərlərə yenidən qurun
 reset_to_default: Defolt dəyərinə yenidən qurun
 resources:
-  app_outdated: >-
-    Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını
-    tələb edir.
+  app_outdated: Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını tələb edir.
   delete: Resurs silmək
   discover: Daha çox mənbəyi kəşf edin
   export: İxracat mənbəyi
@@ -159,16 +153,14 @@ resources:
   import_wallpapers: Yerli divar kağızları idxal edin
   open_folder: Açıq Resurs qovluğu
   outdated: >-
-    Bu qaynaq Seelen UI-nin köhnə bir versiyası üçün hazırlanmış və düzgün
-    işləməyə bilər.
+    Bu qaynaq Seelen UI-nin köhnə bir versiyası üçün hazırlanmış və düzgün işləməyə bilər.
 save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
 see_more: Daha çoxuna baxın
 shortcuts:
   enable: Quraşdırılmış qısa yol sistemini aktivləşdirin
   enable_tooltip: >-
-    Seelen UI müştərisindən istifadə edərək öz qısa yol sisteminizi həyata
-    keçirəcəksənsə deaktiv edin
+    Seelen UI müştərisindən istifadə edərək öz qısa yol sisteminizi həyata keçirəcəksənsə deaktiv edin
   labels:
     create_new_workspace: Yeni iş sahəsi yaradın
     cycle_stack_next: Növbəti dövr yığını
@@ -219,10 +211,7 @@ sides:
   top: Üst
 start:
   message: >-
-    Windows təcrübənizi artırmaq üçün birləşdirilmiş bir kirəmit windows
-    meneceri olan son masa üstü mühiti Seelen Ui-yə xoş gəlmisiniz! İntuitiv
-    interfeysimiz və inkişaf etmiş xüsusiyyətlərimizlə yeni bir səmərəlilik və
-    çoklu bir dövrü araşdırın.
+    Windows təcrübənizi artırmaq üçün birləşdirilmiş bir kirəmit windows meneceri olan son masa üstü mühiti Seelen Ui-yə xoş gəlmisiniz! İntuitiv interfeysimiz və inkişaf etmiş xüsusiyyətlərimizlə yeni bir səmərəlilik və çoklu bir dövrü araşdırın.
   message_accent: Üslubla məhsuldarlığınızı optimallaşdırın!
   title: Xoş gəliş edin!
 toolbar:
@@ -232,8 +221,7 @@ toolbar:
   dock_side: Mövqe
   dynamic_color: Dinamik rəng
   dynamic_color_tooltip: >-
-    Diqqət edilmiş pəncərəyə əsaslanan dinamik fon və ön rəngləri aktivləşdirin.
-    (Rənglər mövzular tərəfindən ləğv edilə bilər)
+    Diqqət edilmiş pəncərəyə əsaslanan dinamik fon və ön rəngləri aktivləşdirin. (Rənglər mövzular tərəfindən ləğv edilə bilər)
   enable: Zərif alət çubuğunu aktivləşdirin
   height: Hündürlük
   hide_mode:
@@ -241,7 +229,7 @@ toolbar:
     never: Heç vaxt
     on_overlap: Üst-üstə düşür
   label: Alət çubuğu
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Güc menyusunda Hibernate düyməsini göstərin
 update:
   available: YENİLƏNİB!
@@ -334,4 +322,4 @@ wm:
   space_between_containers: Konteynerlər arasındakı boşluq
   workspace_offset: İş yerləri ofset (kənarları)
   workspace_padding: İş sahələri padding
-'yes': Bəli
+'yes': 'Bəli'
