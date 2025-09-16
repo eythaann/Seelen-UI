@@ -32,14 +32,12 @@ apps_configurations:
     title_create: Kurti {{name}}
     title_edit: Redagavimas {{name}}
     title_readonly: Peržiūra {{name}}
-    weg_options_label: „Dock“/„Taskbar“ parinktys
-    wm_options_label: „Windows Manager“ parinktys
+    weg_options_label: '„Dock“/„Taskbar“ parinktys'
+    wm_options_label: '„Windows Manager“ parinktys'
     workspace: Darbo vieta
     workspace_placeholder: Nė vienas
   bundled_msg: >-
-    Šios sujungtos konfigūracijos nėra redaguojamos ir yra skirtos suteikti jums
-    geriausią patirtį be pritaikymo. Jie automatiškai sukonfigūruoja dažniausiai
-    jums.
+    Šios sujungtos konfigūracijos nėra redaguojamos ir yra skirtos suteikti jums geriausią patirtį be pritaikymo. Jie automatiškai sukonfigūruoja dažniausiai jums.
   bundled_title: APP CONFIC sujungta su „Seelen“
   confirm_delete: Ar tikrai norite ištrinti šią konfigūraciją (-us)?
   confirm_delete_title: Patvirtinkite ištrynti
@@ -47,10 +45,7 @@ apps_configurations:
   export: Eksportas
   export_full: Eksportuoti nustatymus pagal programą
   extra_info: >-
-    „Seelen“ vartotojo sąsaja naudoja tik vieną identifikatorių vienai programai
-    (rasta pirmoji atitiktis), todėl svarbi tvarka, kaip nurodyta, bus teikiama
-    pirmenybė naujausiai pridėtai, nes pagal numatytuosius nustatymus lentelė
-    rūšiuojama nuo naujausios iki senesnės.
+    „Seelen“ vartotojo sąsaja naudoja tik vieną identifikatorių vienai programai (rasta pirmoji atitiktis), todėl svarbi tvarka, kaip nurodyta, bus teikiama pirmenybė naujausiai pridėtai, nes pagal numatytuosius nustatymus lentelė rūšiuojama nuo naujausios iki senesnės.
   identifier:
     add_block: Pridėkite bloką
     and: Ir
@@ -143,7 +138,7 @@ miscellaneous: Įvairūs
 monitors_configurations:
   label: Monitorius {{index}}
 more: Daugiau
-'no': Ne
+'no': 'Ne'
 open: Atviras
 quit: Mesti
 remove: Pašalinti
@@ -158,14 +153,14 @@ resources:
   import_wallpapers: Importuoti vietinius ekrano užsklandas
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
-    Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
-    tinkamai.
+    Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti tinkamai.
 save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 see_more: Žiūrėti daugiau
 shortcuts:
   enable: Įgalinti įmontuotą nuorodų sistemą
-  enable_tooltip: Išjunkite, jei įdiegsite savo nuorodų sistemą naudodami „Seelen UI“ klientą
+  enable_tooltip: >-
+    Išjunkite, jei įdiegsite savo nuorodų sistemą naudodami „Seelen UI“ klientą
   labels:
     create_new_workspace: Sukurkite naują darbo vietą
     cycle_stack_next: Ciklo kaminas Kitas
@@ -205,7 +200,7 @@ shortcuts:
     switch_to_previous_workspace: Perjunkite į ankstesnę darbo vietą
     switch_workspace: Perjunkite į darbo vietą {{0}}
     toggle_float: Perjunkite lango plūdės režimą
-    toggle_launcher: „Toggle“ paleidimo priemonė
+    toggle_launcher: '„Toggle“ paleidimo priemonė'
     toggle_monocle: Perjunkite darbo vietos monokle režimą
   readonly_tooltip: Tai tik skaitomas nuoroda
   reset: Iš naujo nustatykite pagal numatytuosius nustatymus
@@ -216,10 +211,7 @@ sides:
   top: Viršus
 start:
   message: >-
-    Sveiki atvykę į „Seelen UI“, „Ultimate Desktop“ aplinką su „Incorporated“
-    plytelių „Windows Manager“, kad patobulintumėte „Windows“ patirtį! Naršykite
-    naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi intuityvia
-    sąsaja ir pažangiomis funkcijomis.
+    Sveiki atvykę į „Seelen UI“, „Ultimate Desktop“ aplinką su „Incorporated“ plytelių „Windows Manager“, kad patobulintumėte „Windows“ patirtį! Naršykite naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi intuityvia sąsaja ir pažangiomis funkcijomis.
   message_accent: Optimizuokite savo produktyvumą stiliumi!
   title: Sveiki!
 toolbar:
@@ -229,8 +221,7 @@ toolbar:
   dock_side: Pozicija
   dynamic_color: Dinaminė spalva
   dynamic_color_tooltip: >-
-    Įgalinkite dinamines fono ir pirmojo plano spalvas pagal sufokusuotą langą.
-    (Spalvas galima pakeisti temomis)
+    Įgalinkite dinamines fono ir pirmojo plano spalvas pagal sufokusuotą langą. (Spalvas galima pakeisti temomis)
   enable: Įgalinkite išgalvotą įrankių juostą
   height: Ūgis
   hide_mode:
@@ -238,7 +229,7 @@ toolbar:
     never: Niekada
     on_overlap: Ant persidengimo
   label: Įrankių juosta
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Rodyti užmigdymo režimo mygtuką maitinimo meniu
 update:
   available: Galima atnaujinti!
@@ -302,7 +293,7 @@ weg:
       on_monitor: Ant monitoriaus
     thumbnail_generation_enabled: Generuoti miniatiūras, kai elementas užvedamas ant pelės žymeklio
     visible_separators: Matomi separatoriai
-  label: „Dock“/„Taskbar“
+  label: '„Dock“/„Taskbar“'
   margin: Paraštė
   mode:
     full_width: Visas ekrano plotis
@@ -331,4 +322,4 @@ wm:
   space_between_containers: Tarpas tarp konteinerių
   workspace_offset: Darbo vietos poslinkis (paraštės)
   workspace_padding: Darbo vietų pamušalas
-'yes': Taip
+'yes': 'Taip'
