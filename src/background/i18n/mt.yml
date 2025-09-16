@@ -3,14 +3,12 @@ done: Magħmul
 drivers:
   got_it: Ghandek
   monitor_disabled: >-
-    Jidher li xi sewwieqa tal-monitoraġġ huma diżabbli. Jekk jogħġbok ħallihom
-    iħallu lil Seelen UI taħdem kif suppost.
+    Jidher li xi sewwieqa tal-monitoraġġ huma diżabbli. Jekk jogħġbok ħallihom iħallu lil Seelen UI taħdem kif suppost.
   monitor_disabled_title: Is-sewwieqa tal-monitoraġġ huma diżattivati
 resource:
   added: Ġiet miżjuda riżorsa ġdida
   download_failed_body: >-
-    Xi ħaġa marret ħażin waqt li tniżżel ir-riżorsa, jekk jogħġbok irrapportaha
-    lit-tim tal-iżviluppatur Seelen.
+    Xi ħaġa marret ħażin waqt li tniżżel ir-riżorsa, jekk jogħġbok irrapportaha lit-tim tal-iżviluppatur Seelen.
   download_failed_title: It-tniżżil tar-riżorsi falla
   downloading: Tniżżil ta 'assi ...
   downloading_body: Dan jista 'jieħu ftit sekondi, jekk jogħġbok ma tagħlaqx it-tieqa.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI teħtieġ Webview2 Runtime. Jekk jogħġbok installah.
   outdated: WebView2 Runtime skadut
   outdated_description: >-
-    Seelen UI teħtieġ Webview2 Runtime %{min_version} jew ogħla. Jekk jogħġbok
-    aġġornaha.
+    Seelen UI teħtieġ Webview2 Runtime %{min_version} jew ogħla. Jekk jogħġbok aġġornaha.
 service:
   not_running: Is-Servizz ta' Seelen UI mhux qed jaħdem
   not_running_description: >-
-    Seelen UI Service (slu-service) huwa dipendenza/helper biex l-app taħdem
-    sew.
+    Seelen UI Service (slu-service) huwa dipendenza/helper biex l-app taħdem sew.
   not_running_ok: Ibda s-servizz
 shortcut:
   register:
