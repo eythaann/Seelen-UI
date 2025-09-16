@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Arbeidsområde
     workspace_placeholder: Ingen
   bundled_msg: >-
-    Disse samlede konfigurasjonene er ikke redigerbare og er designet for å gi
-    deg den beste opplevelsen uten tilpasning. De konfigurerer automatisk de
-    vanligste applikasjonene for deg.
+    Disse samlede konfigurasjonene er ikke redigerbare og er designet for å gi deg den beste opplevelsen uten tilpasning. De konfigurerer automatisk de vanligste applikasjonene for deg.
   bundled_title: App Config samlet med Seelen
   confirm_delete: Er du sikker på at du vil slette denne konfigurasjonen/S?
   confirm_delete_title: Bekreft slett
@@ -47,10 +45,7 @@ apps_configurations:
   export: Eksport
   export_full: Eksportinnstillinger etter søknad
   extra_info: >-
-    Seelen-brukergrensesnittet bruker kun én identifikator per app (første treff
-    funnet), så rekkefølgen i hvordan spesifikasjonene er viktig, det siste lagt
-    til vil bli prioritert, da merk at tabellen er sortert som standard fra
-    nyeste til gammel.
+    Seelen-brukergrensesnittet bruker kun én identifikator per app (første treff funnet), så rekkefølgen i hvordan spesifikasjonene er viktig, det siste lagt til vil bli prioritert, da merk at tabellen er sortert som standard fra nyeste til gammel.
   identifier:
     add_block: Legg til blokkering
     and: OG
@@ -143,16 +138,14 @@ miscellaneous: Diverse
 monitors_configurations:
   label: Overvåke {{indeks}}
 more: Flere
-'no': Ingen
+'no': 'Ingen'
 open: Åpen
 quit: Slutte
 remove: Fjerne
 reset_all_to_default: Tilbakestill alt til standardverdier
 reset_to_default: Tilbakestill til standardverdi
 resources:
-  app_outdated: >-
-    Denne ressursen krever en nyere versjon av Seelen UI for å fungere
-    ordentlig.
+  app_outdated: Denne ressursen krever en nyere versjon av Seelen UI for å fungere ordentlig.
   delete: Slett ressurs
   discover: Oppdag flere ressurser
   export: Eksportressurs
@@ -160,16 +153,14 @@ resources:
   import_wallpapers: Importer lokale bakgrunnsbilder
   open_folder: Åpne ressursmappe
   outdated: >-
-    Denne ressursen ble designet for en eldre versjon av Seelen UI og fungerer
-    kanskje ikke ordentlig.
+    Denne ressursen ble designet for en eldre versjon av Seelen UI og fungerer kanskje ikke ordentlig.
 save: Lagre
 save_and_restart: Lagre og start på nytt
 see_more: Se mer
 shortcuts:
   enable: Aktiver innebygd snarveisystem
   enable_tooltip: >-
-    Deaktiver om du implementerer ditt eget snarveisystem ved hjelp av Seelen UI
-    -klienten
+    Deaktiver om du implementerer ditt eget snarveisystem ved hjelp av Seelen UI -klienten
   labels:
     create_new_workspace: Lag nytt arbeidsområde
     cycle_stack_next: Syklusstabel neste
@@ -220,21 +211,17 @@ sides:
   top: Topp
 start:
   message: >-
-    Velkommen til Seelen UI, Ultimate Desktop Environment med en innlemmet
-    tilflising av Windows Manager for å forbedre Windows -opplevelsen din!
-    Utforsk en ny epoke med effektivitet og multitasking med vårt intuitive
-    grensesnitt og avanserte funksjoner.
+    Velkommen til Seelen UI, Ultimate Desktop Environment med en innlemmet tilflising av Windows Manager for å forbedre Windows -opplevelsen din! Utforsk en ny epoke med effektivitet og multitasking med vårt intuitive grensesnitt og avanserte funksjoner.
   message_accent: Optimaliser produktiviteten din med stil!
   title: Velkommen!
 toolbar:
-  auto_hide: Auto Hide
+  auto_hide: Skjul automatisk
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
   dynamic_color: Dynamisk farge
   dynamic_color_tooltip: >-
-    Aktiver dynamisk bakgrunn og forgrunnsfarger basert på fokusert vindu.
-    (Farger kan overstyres av temaer)
+    Aktiver dynamisk bakgrunn og forgrunnsfarger basert på fokusert vindu. (Farger kan overstyres av temaer)
   enable: Aktiver fancy verktøylinje
   height: Høyde
   hide_mode:
@@ -242,7 +229,7 @@ toolbar:
     never: Aldri
     on_overlap: På overlapping
   label: Verktøylinje
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Vis dvalemodus på strømmenyen
 update:
   available: Oppdatering tilgjengelig!
@@ -335,4 +322,4 @@ wm:
   space_between_containers: Plass mellom containere
   workspace_offset: Arbeidsområder forskyvning (marginer)
   workspace_padding: Arbeidsområder polstring
-'yes': Ja
+'yes': 'Ja'
