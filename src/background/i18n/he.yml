@@ -3,12 +3,12 @@ done: נַעֲשָׂה
 drivers:
   got_it: קיבלתי את זה
   monitor_disabled: >-
-    נראה כי נהגי צג מסוימים מושבתים. אנא אפשר להם לאפשר לממשק המשתמש של Seelen
-    לעבוד כמו שצריך.
+    נראה כי נהגי צג מסוימים מושבתים. אנא אפשר להם לאפשר לממשק המשתמש של Seelen לעבוד כמו שצריך.
   monitor_disabled_title: נהגי המוניטור מושבתים
 resource:
   added: נוסף משאב חדש
-  download_failed_body: משהו השתבש בזמן הורדת המשאב, אנא דווח עליו לצוות המפתחים של Seelen.
+  download_failed_body: >-
+    משהו השתבש בזמן הורדת המשאב, אנא דווח עליו לצוות המפתחים של Seelen.
   download_failed_title: הורדת משאבים נכשלה
   downloading: הורדת נכסים ...
   downloading_body: זה עשוי לקחת מספר שניות, אנא אל תסגור את החלון.
@@ -22,11 +22,11 @@ runtime:
   not_found_description: ממשק המשתמש של Seelen דורש זמן ריצה של Webview2. נא להתקין אותו.
   outdated: זמן ריצה של WebView2 מיושן
   outdated_description: >-
-    ממשק המשתמש של Seelen דורש זמן ריצה של Webview2 %{min_version} ומעלה. אנא
-    עדכן אותו.
+    ממשק המשתמש של Seelen דורש זמן ריצה של Webview2 %{min_version} ומעלה. אנא עדכן אותו.
 service:
   not_running: שירות ממשק המשתמש של Seelen לא פועל
-  not_running_description: Seelen UI Service (slu-service) הוא תלות/עוזר כדי שהאפליקציה תפעל כראוי.
+  not_running_description: >-
+    Seelen UI Service (slu-service) הוא תלות/עוזר כדי שהאפליקציה תפעל כראוי.
   not_running_ok: התחל שירות
 shortcut:
   register:
