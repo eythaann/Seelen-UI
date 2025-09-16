@@ -1,31 +1,31 @@
 app_menu:
   close: 關閉
-  close_multiple: 關閉全部
-  copy_handles: 複製把手
-  kill: 殺死過程
-  kill_multiple: 殺死所有過程
-  open_file_location: 打開文件位置
-  pin: 別針
-  pin_to_center: 引腳到中心
-  pin_to_left: 引腳向左
-  pin_to_right: 銷釘向右
-  run_as: 作為管理員運行
-  unpin: Uncin
+  close_multiple: 全部關閉
+  copy_handles: 複製控制代碼
+  kill: 結束程序
+  kill_multiple: 結束所有程序
+  open_file_location: 開啟檔案位置
+  pin: 釘選
+  pin_to_center: 釘選到中間
+  pin_to_left: 釘選到左側
+  pin_to_right: 釘選到右側
+  run_as: 以管理員身分執行
+  unpin: 取消釘選
 context_menu:
-  reorder_disable: 鎖任務欄
-  reorder_enable: 解鎖任務欄
+  reorder_disable: 鎖定工作列
+  reorder_enable: 解鎖工作列
 media:
-  not_playing: 什麼都沒有玩
+  not_playing: 沒有正在播放的內容
 media_menu:
-  remove: 刪除媒體模塊
+  remove: 移除媒體模組
 start_menu:
-  remove: 刪除開始模塊
+  remove: 移除開始模組
 taskbar_menu:
-  add_file: 引導自定義文件
-  add_folder: 引腳自定義文件夾
-  media: 添加媒體模塊
+  add_file: 釘選自訂檔案
+  add_folder: 釘選自訂資料夾
+  media: 新增媒體模組
   settings: 設定
-  start: 添加開始模塊
+  start: 新增開始模組
   task_manager: 工作管理員
 weg:
-  empty: 沒有顯示的物品
+  empty: 沒有項目可顯示
