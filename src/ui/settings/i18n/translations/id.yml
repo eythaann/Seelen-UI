@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Ruang kerja
     workspace_placeholder: Tidak ada
   bundled_msg: >-
-    Konfigurasi yang dibundel ini tidak dapat diedit dan dirancang untuk memberi
-    Anda pengalaman terbaik tanpa kustomisasi. Mereka secara otomatis
-    mengonfigurasi aplikasi yang paling umum untuk Anda.
+    Konfigurasi yang dibundel ini tidak dapat diedit dan dirancang untuk memberi Anda pengalaman terbaik tanpa kustomisasi. Mereka secara otomatis mengonfigurasi aplikasi yang paling umum untuk Anda.
   bundled_title: Aplikasi Config dibundel dengan Seelen
   confirm_delete: Anda yakin ingin menghapus konfigurasi ini?
   confirm_delete_title: Konfirmasi hapus
@@ -47,10 +45,7 @@ apps_configurations:
   export: Ekspor
   export_full: Pengaturan ekspor menurut aplikasi
   extra_info: >-
-    Seelen UI Gunakan hanya satu pengidentifikasi per aplikasi (Pertandingan
-    Pertama Ditemukan) sehingga pesanan dalam bagaimana spesifisasi itu penting,
-    yang ditambahkan terbaru akan diprioritaskan, seperti yang dicatat tabel
-    diurutkan secara default dari yang terbaru ke yang lama.
+    Seelen UI Gunakan hanya satu pengidentifikasi per aplikasi (Pertandingan Pertama Ditemukan) sehingga pesanan dalam bagaimana spesifisasi itu penting, yang ditambahkan terbaru akan diprioritaskan, seperti yang dicatat tabel diurutkan secara default dari yang terbaru ke yang lama.
   identifier:
     add_block: Tambahkan blok
     and: DAN
@@ -90,9 +85,7 @@ devtools:
   simulate_fullscreen: Simulasikan acara layar penuh
 extras:
   clear_icons: Menghapus Cache Ikon Sistem
-  clear_icons_tooltip: >-
-    Pengaktifan ulang mungkin diperlukan untuk menerapkan efek sepenuhnya pada
-    semua widget
+  clear_icons_tooltip: Pengaktifan ulang mungkin diperlukan untuk menerapkan efek sepenuhnya pada semua widget
   exit: Berhenti/keluar
   links: Tautan resmi
   relaunch: Peluncuran kembali
@@ -145,16 +138,14 @@ miscellaneous: Aneka ragam
 monitors_configurations:
   label: Monitor {{index}}
 more: Lagi
-'no': TIDAK
+'no': 'TIDAK'
 open: Membuka
 quit: Berhenti
 remove: Menghapus
 reset_all_to_default: Atur ulang semua ke nilai default
 reset_to_default: Atur ulang ke nilai default
 resources:
-  app_outdated: >-
-    Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat
-    berfungsi dengan baik.
+  app_outdated: Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat berfungsi dengan baik.
   delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya
   export: Sumber Daya Ekspor
@@ -162,16 +153,14 @@ resources:
   import_wallpapers: Impor wallpaper lokal
   open_folder: Buka folder sumber daya
   outdated: >-
-    Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak
-    berfungsi dengan baik.
+    Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak berfungsi dengan baik.
 save: Menyimpan
 save_and_restart: Simpan & restart
 see_more: Lihat Lebih Lanjut
 shortcuts:
   enable: Aktifkan sistem pintasan bawaan
   enable_tooltip: >-
-    Nonaktifkan jika Anda akan mengimplementasikan sistem pintasan Anda sendiri
-    menggunakan klien Seelen UI
+    Nonaktifkan jika Anda akan mengimplementasikan sistem pintasan Anda sendiri menggunakan klien Seelen UI
   labels:
     create_new_workspace: Buat ruang kerja baru
     cycle_stack_next: Tumpukan Siklus Berikutnya
@@ -222,10 +211,7 @@ sides:
   top: Atas
 start:
   message: >-
-    Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
-    Manager yang digabungkan untuk meningkatkan pengalaman Windows Anda!
-    Jelajahi era baru efisiensi dan multitasking dengan antarmuka intuitif dan
-    fitur canggih kami.
+    Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows Manager yang digabungkan untuk meningkatkan pengalaman Windows Anda! Jelajahi era baru efisiensi dan multitasking dengan antarmuka intuitif dan fitur canggih kami.
   message_accent: Optimalkan produktivitas Anda dengan gaya!
   title: Selamat datang!
 toolbar:
@@ -235,8 +221,7 @@ toolbar:
   dock_side: Posisi
   dynamic_color: Warna Dinamis
   dynamic_color_tooltip: >-
-    Aktifkan warna latar belakang dan latar depan yang dinamis berdasarkan
-    jendela terfokus. (Warna dapat ditimpa oleh tema)
+    Aktifkan warna latar belakang dan latar depan yang dinamis berdasarkan jendela terfokus. (Warna dapat ditimpa oleh tema)
   enable: Aktifkan toolbar mewah
   height: Tinggi
   hide_mode:
@@ -244,7 +229,7 @@ toolbar:
     never: Tidak pernah
     on_overlap: Di tumpang tindih
   label: Toolbar
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Menampilkan tombol hibernasi pada menu daya
 update:
   available: Perbarui Tersedia!
@@ -337,4 +322,4 @@ wm:
   space_between_containers: Ruang antar wadah
   workspace_offset: Offset ruang kerja (margin)
   workspace_padding: Padding ruang kerja
-'yes': Ya
+'yes': 'Ya'
