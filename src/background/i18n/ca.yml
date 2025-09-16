@@ -3,36 +3,30 @@ done: Fer
 drivers:
   got_it: Ho tinc
   monitor_disabled: >-
-    Sembla que alguns controladors de monitor estan desactivats. Si us plau,
-    permeteu -los que Seelen Ui funcioni correctament.
+    Sembla que alguns controladors de monitor estan desactivats. Si us plau, permeteu -los que Seelen Ui funcioni correctament.
   monitor_disabled_title: Els controladors de monitorització estan desactivats
 resource:
   added: S'ha afegit un nou recurs
   download_failed_body: >-
-    Alguna cosa va passar malament mentre descarregueu el recurs, informeu -lo a
-    l'equip de desenvolupadors de Seelen.
+    Alguna cosa va passar malament mentre descarregueu el recurs, informeu -lo a l'equip de desenvolupadors de Seelen.
   download_failed_title: Descàrrega de recursos ha fallat
   downloading: Descarregar actius ...
   downloading_body: Això pot trigar uns segons, si us plau, no tanqueu la finestra.
   enable: Capacitar
 runtime:
   corrupted_data: Dades corrompudes
-  corrupted_file: >-
-    En canvi, un fitxer de configuració està corromput, utilitzant valors
-    predeterminats.
+  corrupted_file: En canvi, un fitxer de configuració està corromput, utilitzant valors predeterminats.
   corrupted_file_path: Ruta del fitxer corromput
   download: Aneu a la pàgina de descàrrega
   not_found: No s'ha trobat el temps d'execució de WebView2
   not_found_description: La interfície d'usuari de Seelen requereix Webview2 Runtime. Instal·leu-lo.
   outdated: Temps d'execució de WebView2 obsolet
   outdated_description: >-
-    La IU de Seelen requereix el temps d'execució de Webview2 %{min_version} o
-    superior. Si us plau, actualitzeu-lo.
+    La IU de Seelen requereix el temps d'execució de Webview2 %{min_version} o superior. Si us plau, actualitzeu-lo.
 service:
   not_running: El servei d'IU de Seelen no s'executa
   not_running_description: >-
-    Seelen UI Service (servei slu) és una dependència/ajuda perquè l'aplicació
-    funcioni correctament.
+    Seelen UI Service (servei slu) és una dependència/ajuda perquè l'aplicació funcioni correctament.
   not_running_ok: Iniciar servei
 shortcut:
   register:
