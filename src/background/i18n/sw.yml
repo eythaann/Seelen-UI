@@ -3,14 +3,12 @@ done: Imekamilika
 drivers:
   got_it: Nimepata
   monitor_disabled: >-
-    Inatokea kwamba madereva wengine wa kuangalia ni walemavu. Tafadhali
-    wawezeshe kuruhusu Seelen UI ifanye kazi vizuri.
+    Inatokea kwamba madereva wengine wa kuangalia ni walemavu. Tafadhali wawezeshe kuruhusu Seelen UI ifanye kazi vizuri.
   monitor_disabled_title: Madereva wa kufuatilia ni walemavu
 resource:
   added: Rasilimali mpya imeongezwa
   download_failed_body: >-
-    Kitu kilienda vibaya wakati wa kupakua rasilimali, tafadhali ripoti kwa timu
-    ya wasanidi programu wa Seelen.
+    Kitu kilienda vibaya wakati wa kupakua rasilimali, tafadhali ripoti kwa timu ya wasanidi programu wa Seelen.
   download_failed_title: Upakuaji wa rasilimali umeshindwa
   downloading: Kupakua mali ...
   downloading_body: Hii inaweza kuchukua sekunde chache, tafadhali usifunge dirisha.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI inahitaji Webview2 Runtime. Tafadhali isakinishe.
   outdated: WebView2 Runtime imepitwa na wakati
   outdated_description: >-
-    Seelen UI inahitaji Webview2 Runtime %{min_version} au toleo jipya zaidi.
-    Tafadhali isasishe.
+    Seelen UI inahitaji Webview2 Runtime %{min_version} au toleo jipya zaidi. Tafadhali isasishe.
 service:
   not_running: Huduma ya Seelen UI haifanyi kazi
   not_running_description: >-
-    Seelen UI Service (slu-service) ni tegemezi/msaidizi kwa programu kufanya
-    kazi vizuri.
+    Seelen UI Service (slu-service) ni tegemezi/msaidizi kwa programu kufanya kazi vizuri.
   not_running_ok: Anza huduma
 shortcut:
   register:
