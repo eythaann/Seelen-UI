@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Werkruimte
     workspace_placeholder: Geen
   bundled_msg: >-
-    Hierdie saamgevoegde konfigurasies is nie bewerkbaar nie en is ontwerp om u
-    die beste ervaring sonder aanpassing te bied. Hulle stel outomaties die
-    algemeenste toepassings vir u op.
+    Hierdie saamgevoegde konfigurasies is nie bewerkbaar nie en is ontwerp om u die beste ervaring sonder aanpassing te bied. Hulle stel outomaties die algemeenste toepassings vir u op.
   bundled_title: App -konfigurasie saam met Seelen
   confirm_delete: Is u seker dat u hierdie konfigurasie/s wil uitvee?
   confirm_delete_title: Bevestig delete
@@ -47,10 +45,7 @@ apps_configurations:
   export: Uitvoer
   export_full: Uitvoerinstellings volgens aansoek
   extra_info: >-
-    Seelen UI gebruik slegs een identifiseerder per app (eerste wedstryd
-    gevind), dus die volgorde in hoe dit gespesifiseer is, is belangrik, die
-    nuutste bygevoeg sal geprioritiseer word, aangesien die tabel standaard van
-    die nuutste na oud gesorteer is.
+    Seelen UI gebruik slegs een identifiseerder per app (eerste wedstryd gevind), dus die volgorde in hoe dit gespesifiseer is, is belangrik, die nuutste bygevoeg sal geprioritiseer word, aangesien die tabel standaard van die nuutste na oud gesorteer is.
   identifier:
     add_block: Voeg blok by
     and: En
@@ -143,16 +138,14 @@ miscellaneous: Verskillend
 monitors_configurations:
   label: Monitor {{index}}
 more: Meer
-'no': Nee
+'no': 'Nee'
 open: Oopmaak
 quit: Laat vaar
 remove: Verwyder
 reset_all_to_default: Stel alles terug na standaardwaardes
 reset_to_default: Stel weer in standaardwaarde
 resources:
-  app_outdated: >-
-    Hierdie hulpbron vereis dat 'n nuwer weergawe van Seelen UI behoorlik moet
-    werk.
+  app_outdated: Hierdie hulpbron vereis dat 'n nuwer weergawe van Seelen UI behoorlik moet werk.
   delete: Vee hulpbron uit
   discover: Ontdek meer bronne
   export: Uitvoerhulpbron
@@ -160,16 +153,14 @@ resources:
   import_wallpapers: Voer plaaslike agtergronde in
   open_folder: Open Resource Folder
   outdated: >-
-    Hierdie hulpbron is ontwerp vir 'n ouer weergawe van Seelen UI en werk
-    moontlik nie behoorlik nie.
+    Hierdie hulpbron is ontwerp vir 'n ouer weergawe van Seelen UI en werk moontlik nie behoorlik nie.
 save: Red
 save_and_restart: Stoor en herbegin
 see_more: Sien meer
 shortcuts:
   enable: Aktiveer ingeboude kortpadstelsel
   enable_tooltip: >-
-    Deaktiveer as u u eie kortpadstelsel met behulp van die Seelen UI -kliënt
-    implementeer
+    Deaktiveer as u u eie kortpadstelsel met behulp van die Seelen UI -kliënt implementeer
   labels:
     create_new_workspace: Skep nuwe werkruimte
     cycle_stack_next: Fietsstapel volgende
@@ -217,13 +208,10 @@ sides:
   bottom: Bodem
   left: Links
   right: Regs
-  top: Top
+  top: Kruin
 start:
   message: >-
-    Welkom by Seelen UI, die uiteindelike tafelrekenaaromgewing met 'n ingelyfde
-    teëlbestuurder om u Windows -ervaring te verbeter! Ontdek 'n nuwe era van
-    doeltreffendheid en multitasking met ons intuïtiewe koppelvlak en gevorderde
-    funksies.
+    Welkom by Seelen UI, die uiteindelike tafelrekenaaromgewing met 'n ingelyfde teëlbestuurder om u Windows -ervaring te verbeter! Ontdek 'n nuwe era van doeltreffendheid en multitasking met ons intuïtiewe koppelvlak en gevorderde funksies.
   message_accent: Optimaliseer u produktiwiteit met styl!
   title: Welkom!
 toolbar:
@@ -233,8 +221,7 @@ toolbar:
   dock_side: Posisie
   dynamic_color: Dinamiese kleur
   dynamic_color_tooltip: >-
-    Aktiveer dinamiese agtergrond en voorgrondkleure gebaseer op gefokusde
-    venster. (Kleure kan deur temas oorheers word)
+    Aktiveer dinamiese agtergrond en voorgrondkleure gebaseer op gefokusde venster. (Kleure kan deur temas oorheers word)
   enable: Aktiveer Fancy Toolbar
   height: Hoogte
   hide_mode:
@@ -242,7 +229,7 @@ toolbar:
     never: Nooit nie
     on_overlap: Op oorvleueling
   label: Werkbalk
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Wys Hibernate -knoppie op Power Menu
 update:
   available: Opdatering beskikbaar!
@@ -335,4 +322,4 @@ wm:
   space_between_containers: Ruimte tussen houers
   workspace_offset: Werkruimtes offset (marges)
   workspace_padding: Werkruimtes opvulling
-'yes': Ja
+'yes': 'Ja'
