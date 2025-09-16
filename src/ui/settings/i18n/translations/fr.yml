@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Espace de travail
     workspace_placeholder: Aucun
   bundled_msg: >-
-    Ces configurations groupées ne sont pas modifiables et sont conçues pour
-    vous offrir la meilleure expérience sans personnalisation. Ils configurent
-    automatiquement pour vous les applications les plus courantes.
+    Ces configurations groupées ne sont pas modifiables et sont conçues pour vous offrir la meilleure expérience sans personnalisation. Ils configurent automatiquement pour vous les applications les plus courantes.
   bundled_title: Configuration des applications groupées avec Seelen
   confirm_delete: Êtes-vous sûr de vouloir supprimer cette/ces configuration(s) ?
   confirm_delete_title: Confirmer la suppression
@@ -47,10 +45,7 @@ apps_configurations:
   export: Exporter
   export_full: Exporter les paramètres par application
   extra_info: >-
-    Seelen UI utilise un seul identifiant par application (premier correspondant
-    trouvé), donc l'ordre dans lequel ils sont spécifiés est important, le
-    dernier ajouté sera priorisée, car le tableau est trié par défaut du plus
-    récent au plus ancien.
+    Seelen UI utilise un seul identifiant par application (premier correspondant trouvé), donc l'ordre dans lequel ils sont spécifiés est important, le dernier ajouté sera priorisée, car le tableau est trié par défaut du plus récent au plus ancien.
   identifier:
     add_block: Ajouter un bloc
     and: ET
@@ -90,9 +85,7 @@ devtools:
   simulate_fullscreen: Simuler l'événement plein écran
 extras:
   clear_icons: Effacer le cache des icônes du système
-  clear_icons_tooltip: >-
-    Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les
-    widgets
+  clear_icons_tooltip: Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les widgets
   exit: Quitter
   links: Liens officiels
   relaunch: Redémarrer Seelen UI
@@ -145,16 +138,14 @@ miscellaneous: Divers
 monitors_configurations:
   label: Moniteur {{index}}
 more: Plus
-'no': Non
+'no': 'Non'
 open: Ouvrir
 quit: Quitter
 remove: Retirer
 reset_all_to_default: Rétablir les valeurs par défaut
 reset_to_default: Remise à la valeur par défaut
 resources:
-  app_outdated: >-
-    Cette ressource nécessite une version plus récente de Seelen UI pour
-    fonctionner correctement.
+  app_outdated: Cette ressource nécessite une version plus récente de Seelen UI pour fonctionner correctement.
   delete: Supprimer les ressources
   discover: Découvrez d'autres ressources
   export: Exporter la ressource
@@ -162,16 +153,14 @@ resources:
   import_wallpapers: Importer des fonds d'écran locaux
   open_folder: Ouvrir le dossier des ressources
   outdated: >-
-    Cette ressource a été conçue pour une ancienne version de Seelen UI et peut
-    ne pas fonctionner correctement.
+    Cette ressource a été conçue pour une ancienne version de Seelen UI et peut ne pas fonctionner correctement.
 save: Enregistrer
 save_and_restart: Enregistrer et redémarrer
 see_more: Voir plus
 shortcuts:
   enable: Activer le système de raccourcis intégrés
   enable_tooltip: >-
-    Désactiver si vous implémentez votre propre système de raccourcis à l'aide
-    du client de l'interface utilisateur Seelen
+    Désactiver si vous implémentez votre propre système de raccourcis à l'aide du client de l'interface utilisateur Seelen
   labels:
     create_new_workspace: Créer un nouvel espace de travail
     cycle_stack_next: Pile de cycle Suivant
@@ -222,10 +211,7 @@ sides:
   top: Haut
 start:
   message: >-
-    Bienvenue sur Seelen UI, l'environnement de bureau ultime avec un
-    gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience
-    Windows ! Découvrez une nouvelle ère d'efficacité et de multitâche avec
-    notre interface intuitive et ses fonctionnalités avancées.
+    Bienvenue sur Seelen UI, l'environnement de bureau ultime avec un gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience Windows ! Découvrez une nouvelle ère d'efficacité et de multitâche avec notre interface intuitive et ses fonctionnalités avancées.
   message_accent: Optimisez votre productivité avec style !
   title: Bienvenue !
 toolbar:
@@ -235,8 +221,7 @@ toolbar:
   dock_side: Position
   dynamic_color: Couleurs dynamiques
   dynamic_color_tooltip: >-
-    Active les couleurs dynamiques d'arrière-plan et d'avant-plan en fonction de
-    la fenêtre ciblée. (Les couleurs peuvent être remplacées par des thèmes)
+    Active les couleurs dynamiques d'arrière-plan et d'avant-plan en fonction de la fenêtre ciblée. (Les couleurs peuvent être remplacées par des thèmes)
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
   hide_mode:
@@ -244,7 +229,7 @@ toolbar:
     never: Jamais
     on_overlap: Sur chevauchement
   label: Barre d'outils
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Afficher la veille prolongée dans le menu Marche/Arrêt
 update:
   available: Mise à jour disponible !
@@ -337,4 +322,4 @@ wm:
   space_between_containers: Espacement entre les conteneurs
   workspace_offset: Décalage des bureaux virtuels (Marges)
   workspace_padding: Rembourrage(Padding) des bureaux virtuels
-'yes': Oui
+'yes': 'Oui'
