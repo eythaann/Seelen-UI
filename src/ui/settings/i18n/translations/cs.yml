@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Pracovní prostor
     workspace_placeholder: Žádný
   bundled_msg: >-
-    Tyto sdružené konfigurace nejsou upravitelné a jsou navrženy tak, aby vám
-    poskytly nejlepší zkušenost bez přizpůsobení. Automaticky pro  Vás
-    nakonfigurují nejběžnější aplikace.
+    Tyto sdružené konfigurace nejsou upravitelné a jsou navrženy tak, aby vám poskytly nejlepší zkušenost bez přizpůsobení. Automaticky pro  Vás nakonfigurují nejběžnější aplikace.
   bundled_title: Konfigurace aplikace spojená s Seelen
   confirm_delete: Určitě chcete tuto konfiguraci smazat?
   confirm_delete_title: Potvrďte smazání
@@ -47,10 +45,7 @@ apps_configurations:
   export: Exportovat
   export_full: Export nastavení podle aplikace
   extra_info: >-
-    SEELEN UI používá pouze jeden identifikátor na aplikaci (první nalezený),
-    takže pořadí v tom, jak jsou specifikovány, je důležité, nejnovější přidaná
-    bude upřednostňována, protože tabulka je ve výchozím nastavení tříděna od
-    nejnovější po nejstarší.
+    SEELEN UI používá pouze jeden identifikátor na aplikaci (první nalezený), takže pořadí v tom, jak jsou specifikovány, je důležité, nejnovější přidaná bude upřednostňována, protože tabulka je ve výchozím nastavení tříděna od nejnovější po nejstarší.
   identifier:
     add_block: Přidat blok
     and: A
@@ -143,16 +138,14 @@ miscellaneous: Smíšený
 monitors_configurations:
   label: Monitor {{index}}
 more: Více
-'no': Žádný
+'no': 'Žádný'
 open: Otevřeno
 quit: Přestat
 remove: Odstranit
 reset_all_to_default: Obnovení všech výchozích hodnot
 reset_to_default: Obnovení výchozí hodnoty
 resources:
-  app_outdated: >-
-    Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského
-    rozhraní Seelen.
+  app_outdated: Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského rozhraní Seelen.
   delete: Odstranit zdroj
   discover: Objevte další zdroje
   export: Exportní zdroj
@@ -160,16 +153,14 @@ resources:
   import_wallpapers: Import místních tapet
   open_folder: Otevření složky se zdroji
   outdated: >-
-    Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a
-    nemusí fungovat správně.
+    Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a nemusí fungovat správně.
 save: Uložit
 save_and_restart: Uložit a restartovat
 see_more: Viz více
 shortcuts:
   enable: Povolení vestavěného systému zkratek
   enable_tooltip: >-
-    Zakázat, pokud budete implementovat vlastní systém zkratek pomocí klienta
-    Seelen UI.
+    Zakázat, pokud budete implementovat vlastní systém zkratek pomocí klienta Seelen UI.
   labels:
     create_new_workspace: Vytvoření nového pracovního prostoru
     cycle_stack_next: Cyklus Stack Další
@@ -220,10 +211,7 @@ sides:
   top: Svršek
 start:
   message: >-
-    Vítejte v SEELEN UI, Ultimate Desktop Environment s začleněným manažerem
-    oken, aby se zlepšil Vaší zkušenost se systémem Windows! Objevte novou éru
-    účinnosti a multitaskingu s naším intuitivním rozhraním a pokročilými
-    funkcemi.
+    Vítejte v SEELEN UI, Ultimate Desktop Environment s začleněným manažerem oken, aby se zlepšil Vaší zkušenost se systémem Windows! Objevte novou éru účinnosti a multitaskingu s naším intuitivním rozhraním a pokročilými funkcemi.
   message_accent: Optimalizujte svou produktivitu se stylem!
   title: Vítejte!
 toolbar:
@@ -233,8 +221,7 @@ toolbar:
   dock_side: Pozice
   dynamic_color: Dynamická barva
   dynamic_color_tooltip: >-
-    Povolení dynamických barev pozadí a popředí na základě zaměřeného okna.
-    (Barvy lze přepsat pomocí motivů)
+    Povolení dynamických barev pozadí a popředí na základě zaměřeného okna. (Barvy lze přepsat pomocí motivů)
   enable: Povolte ozdobný panel nástrojů
   height: Výška
   hide_mode:
@@ -242,7 +229,7 @@ toolbar:
     never: Nikdy
     on_overlap: Na překrytí
   label: Panel nástrojů
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Zobrazení tlačítka hibernace v nabídce napájení
 update:
   available: Aktualizace k dispozici!
@@ -335,4 +322,4 @@ wm:
   space_between_containers: Prostor mezi kontejnery
   workspace_offset: Posun pracovních prostor (marže)
   workspace_padding: Padding pracovních prostorů
-'yes': Ano
+'yes': 'Ano'
