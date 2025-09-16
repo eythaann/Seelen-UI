@@ -1,22 +1,22 @@
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { useComputed } from '@preact/signals';
-import { RemoteDataDeclaration, ToolbarItem } from '@seelen-ui/lib/types';
-import { useDeepCompareEffect } from '@shared/hooks';
-import { cx } from '@shared/styles';
-import { Tooltip } from 'antd';
-import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from 'preact/compat';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { useComputed } from "@preact/signals";
+import { RemoteDataDeclaration, ToolbarItem } from "@seelen-ui/lib/types";
+import { useDeepCompareEffect } from "@shared/hooks";
+import { cx } from "@shared/styles";
+import { Tooltip } from "antd";
+import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from "preact/compat";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { Selectors } from '../../shared/store/app';
-import { EvaluateAction } from '../app';
+import { Selectors } from "../../shared/store/app";
+import { EvaluateAction } from "../app";
 
-import { $toolbar_state } from '../../shared/state/items';
-import { SanboxedComponent } from './EvaluatedComponents';
+import { $toolbar_state } from "../../shared/state/items";
+import { SanboxedComponent } from "./EvaluatedComponents";
 
 export interface InnerItemProps extends PropsWithChildren {
-  module: Omit<ToolbarItem, 'type'>;
+  module: Omit<ToolbarItem, "type">;
   extraVars?: Record<string, any>;
   active?: boolean;
   clickable?: boolean;
@@ -45,7 +45,14 @@ export function InnerItem(props: InnerItemProps) {
   const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
   const env = useSelector(Selectors.env);
 
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
     id,
     disabled: isReorderDisabled.value,
     animateLayoutChanges: () => false,
@@ -72,7 +79,7 @@ export function InnerItem(props: InnerItemProps) {
     <Tooltip
       arrow={false}
       mouseLeaveDelay={0}
-      classNames={{ root: 'ft-bar-item-tooltip' }}
+      classNames={{ root: "ft-bar-item-tooltip" }}
       title={tooltip ? <SanboxedComponent code={tooltip} scope={scope} /> : undefined}
     >
       <div
@@ -81,11 +88,16 @@ export function InnerItem(props: InnerItemProps) {
         {...(attributes as HTMLAttributes<HTMLDivElement>)}
         {...rest}
         id={id}
-        style={{ ...style, transform: CSS.Translate.toString(transform), transition, opacity: isDragging ? 0.3 : 1 }}
-        className={cx('ft-bar-item', {
+        style={{
+          ...style,
+          transform: CSS.Translate.toString(transform),
+          transition,
+          opacity: isDragging ? 0.3 : 1,
+        }}
+        className={cx("ft-bar-item", {
           // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
-          'ft-bar-item-clickable': clickable || onClickV2,
-          'ft-bar-item-active': active,
+          "ft-bar-item-clickable": clickable || onClickV2,
+          "ft-bar-item-active": active,
         })}
         onWheel={onWheelProp}
         onKeyDown={onKeydownProp}
@@ -113,20 +125,30 @@ export function InnerItem(props: InnerItemProps) {
   );
 }
 
-function useRemoteData(remoteData: Record<string, RemoteDataDeclaration | undefined>) {
+function useRemoteData(
+  remoteData: Record<string, RemoteDataDeclaration | undefined>,
+) {
   const [state, setState] = useState<Record<string, any>>(() => {
-    return Object.keys(remoteData).reduce((acc, key) => ({ ...acc, [key]: undefined }), {});
+    return Object.keys(remoteData).reduce(
+      (acc, key) => ({ ...acc, [key]: undefined }),
+      {},
+    );
   });
 
-  const intervalsRef = useRef<Record<string, number>>({});
+  const intervalsRef = useRef<Record<string, ReturnType<typeof setInterval>>>(
+    {},
+  );
   const mountedRef = useRef(true);
 
-  const fetchData = async (key: string, rd: RemoteDataDeclaration): Promise<void> => {
+  const fetchData = async (
+    key: string,
+    rd: RemoteDataDeclaration,
+  ): Promise<void> => {
     if (!mountedRef.current) return;
 
     try {
       const response = await fetch(rd.url, rd.requestInit as RequestInit);
-      const data = response.headers.get('Content-Type')?.includes('application/json')
+      const data = response.headers.get("Content-Type")?.includes("application/json")
         ? await response.json()
         : await response.text();
 
@@ -157,7 +179,7 @@ function useRemoteData(remoteData: Record<string, RemoteDataDeclaration | undefi
       if (!rd) return;
       fetchData(key, rd);
       if (rd.updateIntervalSeconds) {
-        intervalsRef.current[key] = window.setInterval(
+        intervalsRef.current[key] = globalThis.setInterval(
           () => fetchData(key, rd),
           rd.updateIntervalSeconds * 1000,
         );

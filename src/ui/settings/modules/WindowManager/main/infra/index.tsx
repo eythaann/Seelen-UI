@@ -1,20 +1,20 @@
-import { SeelenWindowManagerWidgetId } from '@seelen-ui/lib';
-import { PluginId } from '@seelen-ui/lib/types';
-import { ResourceText } from '@shared/components/ResourceText';
-import { ConfigProvider, Select, Switch } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { SeelenWindowManagerWidgetId } from "@seelen-ui/lib";
+import { PluginId } from "@seelen-ui/lib/types";
+import { ResourceText } from "@shared/components/ResourceText";
+import { ConfigProvider, Select, Switch } from "antd";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
-import { BorderSettings } from '../../border/infra';
+import { BorderSettings } from "../../border/infra";
 
-import { newSelectors } from '../../../shared/store/app/reducer';
-import { RootSelectors } from '../../../shared/store/app/selectors';
-import { WManagerSettingsActions } from '../app';
+import { newSelectors } from "../../../shared/store/app/reducer";
+import { RootSelectors } from "../../../shared/store/app/selectors";
+import { WManagerSettingsActions } from "../app";
 
-import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
-import { WmAnimationsSettings } from './Animations';
-import { GlobalPaddings } from './GlobalPaddings';
-import { OthersConfigs } from './Others';
+import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox";
+import { WmAnimationsSettings } from "./Animations";
+import { GlobalPaddings } from "./GlobalPaddings";
+import { OthersConfigs } from "./Others";
 
 export function WindowManagerSettings() {
   const settings = useSelector(RootSelectors.windowManager);
@@ -40,7 +40,7 @@ export function WindowManagerSettings() {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>{t('wm.enable')}</b>
+            <b>{t("wm.enable")}</b>
           </div>
           <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
@@ -50,10 +50,10 @@ export function WindowManagerSettings() {
         <SettingsGroup>
           <SettingsOption>
             <div>
-              <b>{t('wm.layout')}: </b>
+              <b>{t("wm.layout")}:</b>
             </div>
             <Select
-              style={{ width: '200px' }}
+              style={{ width: "200px" }}
               value={defaultLayout}
               options={layouts.map((layout) => ({
                 key: layout.id,
@@ -65,8 +65,8 @@ export function WindowManagerSettings() {
           </SettingsOption>
           <div>
             <p>
-              <b>{t('wm.description')}: </b>
-              <ResourceText text={usingLayout?.metadata.description || '-'} />,
+              <b>{t("wm.description")}:</b>
+              <ResourceText text={usingLayout?.metadata.description || "-"} />,
             </p>
           </div>
         </SettingsGroup>

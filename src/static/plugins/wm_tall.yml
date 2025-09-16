@@ -1,5 +1,5 @@
-id: '@default/wm-tall'
-target: '@seelen/window-manager'
+id: "@default/wm-tall"
+target: "@seelen/window-manager"
 metadata:
   displayName:
     en: Tall Layout
@@ -34,7 +34,7 @@ metadata:
     ms: Susun atur tinggi
     mt: Tqassim għoli
     pt: Layout alto
-    'no': Høy layout
+    "no": Høy layout
     sv: Hög layout
     fi: Tall Layout
     uz: Uzun bo'yli tartib
@@ -105,7 +105,7 @@ metadata:
     sk: Vysoké rozloženie pre vertikálne monitory.
     ms: Susun atur tinggi untuk monitor menegak.
     fi: Pitkä asettelu pystysuorille näytöille.
-    'no': Høy oppsett for vertikale skjermer.
+    "no": Høy oppsett for vertikale skjermer.
     sv: Hög layout för vertikala bildskärmar.
     mt: Tqassim għoli għal monitors vertikali.
     tr: Dikey monitörler için uzun düzen.
@@ -125,7 +125,7 @@ metadata:
     ka: მაღალი განლაგება ვერტიკალური მონიტორებისთვის.
     ps: د عمودینو څارونکو لپاره اوږد ترتیب.
     he: פריסה גבוהה למסכים אנכיים.
-    hy: 'Ուղղահայաց մոնիտորների բարձրահասակ դասավորություն:'
+    hy: "Ուղղահայաց մոնիտորների բարձրահասակ դասավորություն:"
     ur: عمودی مانیٹر کے لئے لمبا ترتیب۔
     am: ረዣዥም አቀማመጥ ለአቀባዊ መቆጣጠሪያዎች.
     bn: উল্লম্ব মনিটরের জন্য লম্বা বিন্যাস।

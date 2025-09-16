@@ -1,20 +1,20 @@
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { Icon } from '@shared/components/Icon';
-import { useWindowFocusChange } from '@shared/hooks';
-import { cx } from '@shared/styles';
-import { Calendar, Row } from 'antd';
-import { CalendarMode, HeaderRender } from 'antd/es/calendar/generateCalendar';
-import moment from 'moment';
-import { VNode } from 'preact';
-import momentGenerateConfig from 'rc-picker/es/generate/moment';
-import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { Icon } from "@shared/components/Icon";
+import { useWindowFocusChange } from "@shared/hooks";
+import { cx } from "@shared/styles";
+import { Calendar, Row } from "antd";
+import { CalendarMode, HeaderRender } from "antd/es/calendar/generateCalendar";
+import moment from "moment";
+import { VNode } from "preact";
+import momentGenerateConfig from "rc-picker/es/generate/moment";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import './infra.css';
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import "./infra.css";
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
 const short_week_days = {
-  inner: ['Su', 'Mn', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+  inner: ["Su", "Mn", "Tu", "We", "Th", "Fr", "Sa"],
 };
 
 const MomentCalendar = Calendar.generateCalendar({
@@ -28,16 +28,16 @@ const MomentCalendar = Calendar.generateCalendar({
 const DateCalendarHeader: HeaderRender<moment.Moment> = (props) => {
   const { type, value: date, onChange, onTypeChange } = props;
 
-  if (type === 'month') {
+  if (type === "month") {
     return (
       <Row className="calendar-header">
-        <span className="calendar-date" onClick={() => onTypeChange('year')}>
-          {date.format('MMMM YYYY')}
+        <span className="calendar-date" onClick={() => onTypeChange("year")}>
+          {date.format("MMMM YYYY")}
         </span>
         <div className="calendar-actions">
           <button
             className="calendar-navigator"
-            onClick={() => onChange(date.clone().add(-1, 'months'))}
+            onClick={() => onChange(date.clone().add(-1, "months"))}
           >
             <Icon iconName="AiOutlineLeft" />
           </button>
@@ -49,7 +49,7 @@ const DateCalendarHeader: HeaderRender<moment.Moment> = (props) => {
           </button>
           <button
             className="calendar-navigator"
-            onClick={() => onChange(date.clone().add(1, 'months'))}
+            onClick={() => onChange(date.clone().add(1, "months"))}
           >
             <Icon iconName="AiOutlineRight" />
           </button>
@@ -60,14 +60,14 @@ const DateCalendarHeader: HeaderRender<moment.Moment> = (props) => {
 
   return (
     <Row className="calendar-header">
-      <span className="calendar-date" onClick={() => onTypeChange('month')}>
-        {date.format('YYYY')}
+      <span className="calendar-date" onClick={() => onTypeChange("month")}>
+        {date.format("YYYY")}
       </span>
       <div className="calendar-actions">
         <div className="calendar-header-placeholder" />
         <button
           className="calendar-navigator"
-          onClick={() => onChange(date.clone().add(-1, 'years'))}
+          onClick={() => onChange(date.clone().add(-1, "years"))}
         >
           <Icon iconName="AiOutlineLeft" />
         </button>
@@ -79,7 +79,7 @@ const DateCalendarHeader: HeaderRender<moment.Moment> = (props) => {
         </button>
         <button
           className="calendar-navigator"
-          onClick={() => onChange(date.clone().add(1, 'years'))}
+          onClick={() => onChange(date.clone().add(1, "years"))}
         >
           <Icon iconName="AiOutlineRight" />
         </button>
@@ -92,20 +92,20 @@ function DateCalendar() {
   const { i18n } = useTranslation();
 
   const [date, setDate] = useState(moment().locale(i18n.language));
-  const [viewMode, setViewMode] = useState<CalendarMode | undefined>('month');
+  const [viewMode, setViewMode] = useState<CalendarMode | undefined>("month");
 
   useEffect(() => {
     setDate(date.locale(i18n.language));
-    const start = date.clone().startOf('isoWeek');
+    const start = date.clone().startOf("isoWeek");
     short_week_days.inner = [
-      start.day(0).format('dd'),
-      start.day(1).format('dd'),
-      start.day(2).format('dd'),
-      start.day(3).format('dd'),
-      start.day(4).format('dd'),
-      start.day(5).format('dd'),
-      start.day(6).format('dd'),
-      start.day(7).format('dd'),
+      start.day(0).format("dd"),
+      start.day(1).format("dd"),
+      start.day(2).format("dd"),
+      start.day(3).format("dd"),
+      start.day(4).format("dd"),
+      start.day(5).format("dd"),
+      start.day(6).format("dd"),
+      start.day(7).format("dd"),
     ];
   }, [i18n.language]);
 
@@ -117,8 +117,8 @@ function DateCalendar() {
     setDate((date) =>
       date
         .clone()
-        .startOf('month')
-        .add(isUp ? 1 : -1, viewMode as moment.unitOfTime.Base),
+        .startOf("month")
+        .add(isUp ? 1 : -1, viewMode as moment.unitOfTime.Base)
     );
   }, []);
 
@@ -138,33 +138,34 @@ function DateCalendar() {
           mode={viewMode}
           headerRender={DateCalendarHeader}
           fullCellRender={(current, info) =>
-            info.type == 'date' ? (
-              <div
-                className={cx('calendar-cell-value', {
-                  'calendar-cell-selected': current.isSame(date, 'date'),
-                  'calendar-cell-today': current.isSame(info.today, 'date'),
-                  'calendar-cell-off-month': current.month() != date.month(),
-                })}
-                onClick={() => setDate(current)}
-              >
-                {Number(current.format('DD'))}
-              </div>
-            ) : (
-              <div
-                className={cx('calendar-cell-value', 'calendar-cell-month', {
-                  'calendar-cell-today': current
-                    .startOf('month')
-                    .isSame(info.today.startOf('month'), 'date'),
-                })}
-                onClick={() => {
-                  setDate(current);
-                  setViewMode('month');
-                }}
-              >
-                {current.format('MMMM')}
-              </div>
-            )
-          }
+            info.type == "date"
+              ? (
+                <div
+                  className={cx("calendar-cell-value", {
+                    "calendar-cell-selected": current.isSame(date, "date"),
+                    "calendar-cell-today": current.isSame(info.today, "date"),
+                    "calendar-cell-off-month": current.month() != date.month(),
+                  })}
+                  onClick={() => setDate(current)}
+                >
+                  {Number(current.format("DD"))}
+                </div>
+              )
+              : (
+                <div
+                  className={cx("calendar-cell-value", "calendar-cell-month", {
+                    "calendar-cell-today": current
+                      .startOf("month")
+                      .isSame(info.today.startOf("month"), "date"),
+                  })}
+                  onClick={() => {
+                    setDate(current);
+                    setViewMode("month");
+                  }}
+                >
+                  {current.format("MMMM")}
+                </div>
+              )}
         />
       </div>
     </BackgroundByLayersV2>
@@ -183,8 +184,8 @@ export function WithDateCalendar({ children }: { children: VNode }) {
   return (
     <AnimatedPopover
       animationDescription={{
-        openAnimationName: 'calendar-open',
-        closeAnimationName: 'calendar-close',
+        openAnimationName: "calendar-open",
+        closeAnimationName: "calendar-close",
       }}
       open={openPreview}
       trigger="click"

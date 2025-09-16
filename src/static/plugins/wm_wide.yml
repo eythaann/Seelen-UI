@@ -1,5 +1,5 @@
-id: '@default/wm-wide'
-target: '@seelen/window-manager'
+id: "@default/wm-wide"
+target: "@seelen/window-manager"
 metadata:
   displayName:
     en: Wide Layout
@@ -36,7 +36,7 @@ metadata:
     mt: Tqassim wiesa '
     fi: Laaja asettelu
     sv: Bred layout
-    'no': Bred layout
+    "no": Bred layout
     uz: Keng tartib
     tr: Geniş Düzen
     el: Ευρεία διάταξη
@@ -106,7 +106,7 @@ metadata:
     mt: Tqassim wiesa 'għal monitors orizzontali.
     ro: Dispunere largă pentru monitoare orizontale.
     fi: Leveä asettelu vaakasuorille näytöille.
-    'no': Bred utforming for horisontale skjermer.
+    "no": Bred utforming for horisontale skjermer.
     sv: Bred layout för horisontella bildskärmar.
     uz: Gorizontal monitorlar uchun keng tayyorlang.
     tr: Yatay monitörler için geniş düzen.
@@ -125,7 +125,7 @@ metadata:
     ka: ფართო განლაგება ჰორიზონტალური მონიტორებისთვის.
     he: פריסה רחבה למסכים אופקיים.
     ur: افقی مانیٹر کے لئے وسیع ترتیب۔
-    hy: 'Հորիզոնական մոնիտորների լայն դասավորություն:'
+    hy: "Հորիզոնական մոնիտորների լայն դասավորություն:"
     ps: پراخه ترتیب د افقی څارونکو لپاره.
     fa: طرح گسترده برای مانیتورهای افقی.
     hi: क्षैतिज मॉनिटर के लिए वाइड लेआउट।

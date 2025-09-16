@@ -1,7 +1,7 @@
-import type { MonitorId, WegItem, WegItems as IWegItems } from '@seelen-ui/types';
-import { invoke, SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from '../handlers/mod.ts';
-import { newFromInvoke } from '../utils/State.ts';
-import type { Enum } from '../utils/enums.ts';
+import type { MonitorId, WegItem, WegItems as IWegItems } from "@seelen-ui/types";
+import { invoke, SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../handlers/mod.ts";
+import { newFromInvoke } from "../utils/State.ts";
+import type { Enum } from "../utils/enums.ts";
 
 export class WegItems {
   constructor(public inner: IWegItems) {}
@@ -30,12 +30,12 @@ export class WegItems {
 //    From here some enums as helpers like @seelen-ui/types only contains types
 // =================================================================================
 
-const WegItemType: Enum<WegItem['type']> = {
-  Pinned: 'Pinned',
-  Temporal: 'Temporal',
-  Separator: 'Separator',
-  Media: 'Media',
-  StartMenu: 'StartMenu',
+const WegItemType: Enum<WegItem["type"]> = {
+  Pinned: "Pinned",
+  Temporal: "Temporal",
+  Separator: "Separator",
+  Media: "Media",
+  StartMenu: "StartMenu",
 };
 
 export { WegItemType };

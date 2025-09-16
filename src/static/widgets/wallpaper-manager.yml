@@ -1,4 +1,4 @@
-id: '@seelen/wallpaper-manager'
+id: "@seelen/wallpaper-manager"
 icon: PiWallDuotone
 metadata:
   displayName:
@@ -35,7 +35,7 @@ metadata:
     pt: Gerenciador de papéis de parede
     mt: Maniġer tal-Wallpaper
     fi: Taustakuva Manager
-    'no': Bakgrunnssjef
+    "no": Bakgrunnssjef
     sv: Bakgrundshanterare
     uz: Fon rasmi menejeri
     tr: Duvar Kağıdı Yöneticisi

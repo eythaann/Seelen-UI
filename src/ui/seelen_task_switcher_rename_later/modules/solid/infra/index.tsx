@@ -1,9 +1,9 @@
-import { Reorder } from 'framer-motion';
-import { useDispatch, useSelector } from 'react-redux';
+import { Reorder } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Actions, Selectors } from '../../shared/store/app';
+import { Actions, Selectors } from "../../shared/store/app";
 
-import { Desktop } from '../../shared/store/domain';
+import { Desktop } from "../../shared/store/domain";
 
 function SolidNav() {
   const desktops = useSelector(Selectors.desktops);
@@ -27,7 +27,7 @@ function SolidNav() {
           <Reorder.Item key={d.id} value={d} className="desktop-container">
             <button className="desktop">
               <div className="desktop-header">{d.name}</div>
-              <img className="desktop-preview" src={d.preview || ''} />
+              <img className="desktop-preview" src={d.preview || ""} />
             </button>
           </Reorder.Item>
         ))}
@@ -40,8 +40,8 @@ function SolidNav() {
 const windows = Array.from({ length: 7 }).map((_, i) => ({
   hwnd: i,
   title: `Window ${i}`,
-  icon: '',
-  preview: '',
+  icon: "",
+  preview: "",
 }));
 
 function Window({ w }: { w: (typeof windows)[0] }) {

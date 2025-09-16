@@ -1,19 +1,19 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { IconPack, IconPackId } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { path } from '@tauri-apps/api';
-import { Button, Switch } from 'antd';
-import { Reorder } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { IconPack, IconPackId } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { path } from "@tauri-apps/api";
+import { Button, Switch } from "antd";
+import { Reorder } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
-import cs from './infra.module.css';
+import cs from "./infra.module.css";
 
-import { RootActions } from '../shared/store/app/reducer';
-import { RootSelectors } from '../shared/store/app/selectors';
+import { RootActions } from "../shared/store/app/reducer";
+import { RootSelectors } from "../shared/store/app/selectors";
 
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { ResourceCard } from './ResourceCard';
+import { SettingsGroup, SettingsOption } from "../../components/SettingsBox";
+import { ResourceCard } from "./ResourceCard";
 
 export function IconPacksView() {
   const activeIds = useSelector(RootSelectors.activeIconPacks);
@@ -24,7 +24,9 @@ export function IconPacksView() {
 
   function toggleIconPack(id: IconPackId) {
     if (activeIds.includes(id)) {
-      dispatch(RootActions.setActiveIconPacks(activeIds.filter((x) => x !== id)));
+      dispatch(
+        RootActions.setActiveIconPacks(activeIds.filter((x) => x !== id)),
+      );
     } else {
       dispatch(RootActions.setActiveIconPacks([...activeIds, id]));
     }
@@ -49,12 +51,14 @@ export function IconPacksView() {
     <div className={cs.list}>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('resources.open_folder')}</b>
+          <b>{t("resources.open_folder")}</b>
           <Button
             type="default"
             onClick={async () => {
               const dataDir = await path.appDataDir();
-              invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'iconpacks') });
+              invoke(SeelenCommand.OpenFile, {
+                path: await path.join(dataDir, "iconpacks"),
+              });
             }}
           >
             <Icon iconName="PiFoldersDuotone" />
@@ -62,30 +66,40 @@ export function IconPacksView() {
         </SettingsOption>
       </SettingsGroup>
 
-      <b>{t('general.icon_pack.selected')}</b>
-      <Reorder.Group values={activeIds} onReorder={onReorder} className={cs.reorderGroup}>
+      <b>{t("general.icon_pack.selected")}</b>
+      <Reorder.Group
+        values={activeIds}
+        onReorder={onReorder}
+        className={cs.reorderGroup}
+      >
         {enabled.map((iconPack) => (
           <Reorder.Item key={iconPack.id} value={iconPack.id}>
             <ResourceCard
               resource={iconPack}
               kind="IconPack"
-              actions={
-                iconPack.id === '@system/icon-pack' ? undefined : (
-                  <Switch defaultChecked={true} onChange={() => toggleIconPack(iconPack.id)} />
-                )
-              }
+              actions={iconPack.id === "@system/icon-pack" ? undefined : (
+                <Switch
+                  defaultChecked
+                  onChange={() => toggleIconPack(iconPack.id)}
+                />
+              )}
             />
           </Reorder.Item>
         ))}
       </Reorder.Group>
 
-      <b>{t('general.icon_pack.available')}</b>
+      <b>{t("general.icon_pack.available")}</b>
       {disabled.map((iconPack) => (
         <ResourceCard
           key={iconPack.id}
           resource={iconPack}
           kind="IconPack"
-          actions={<Switch defaultChecked={false} onChange={() => toggleIconPack(iconPack.id)} />}
+          actions={
+            <Switch
+              defaultChecked={false}
+              onChange={() => toggleIconPack(iconPack.id)}
+            />
+          }
         />
       ))}
     </div>

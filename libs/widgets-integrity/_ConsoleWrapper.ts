@@ -1,5 +1,5 @@
 // this file is a modification of https://github.com/tauri-apps/tauri-plugin-log/blob/v2/guest-js/index.ts
-import { _invoke, WebviewInformation } from './_tauri';
+import { _invoke, WebviewInformation } from "./_tauri";
 
 export interface LogOptions {
   file?: string;
@@ -41,14 +41,18 @@ export enum LogLevel {
 }
 
 const webviewInfo = new WebviewInformation();
-async function log(level: LogLevel, message: string, options?: LogOptions): Promise<void> {
+async function log(
+  level: LogLevel,
+  message: string,
+  options?: LogOptions,
+): Promise<void> {
   // we use the webview label as the location, intead call stack as the stack on the Seelen UI case
   // will be always the same because of the console wrapper, this is different from the tauri plugin
   const location = webviewInfo.label;
 
   const { file, line, keyValues } = options ?? {};
 
-  await _invoke('plugin:log|log', {
+  await _invoke("plugin:log|log", {
     level,
     message,
     location,
@@ -74,7 +78,10 @@ async function log(level: LogLevel, message: string, options?: LogOptions): Prom
  * error(`Error: ${err_info} on port ${port}`);
  * ```
  */
-export async function error(message: string, options?: LogOptions): Promise<void> {
+export async function error(
+  message: string,
+  options?: LogOptions,
+): Promise<void> {
   await log(LogLevel.Error, message, options);
 }
 
@@ -93,7 +100,10 @@ export async function error(message: string, options?: LogOptions): Promise<void
  * warn(`Warning! {warn_description}!`);
  * ```
  */
-export async function warn(message: string, options?: LogOptions): Promise<void> {
+export async function warn(
+  message: string,
+  options?: LogOptions,
+): Promise<void> {
   await log(LogLevel.Warn, message, options);
 }
 
@@ -112,7 +122,10 @@ export async function warn(message: string, options?: LogOptions): Promise<void>
  * info(`Connected to port {conn_info.port} at {conn_info.speed} Mb/s`);
  * ```
  */
-export async function info(message: string, options?: LogOptions): Promise<void> {
+export async function info(
+  message: string,
+  options?: LogOptions,
+): Promise<void> {
   await log(LogLevel.Info, message, options);
 }
 
@@ -131,7 +144,10 @@ export async function info(message: string, options?: LogOptions): Promise<void>
  * debug(`New position: x: {pos.x}, y: {pos.y}`);
  * ```
  */
-export async function debug(message: string, options?: LogOptions): Promise<void> {
+export async function debug(
+  message: string,
+  options?: LogOptions,
+): Promise<void> {
   await log(LogLevel.Debug, message, options);
 }
 
@@ -150,6 +166,9 @@ export async function debug(message: string, options?: LogOptions): Promise<void
  * trace(`Position is: x: {pos.x}, y: {pos.y}`);
  * ```
  */
-export async function trace(message: string, options?: LogOptions): Promise<void> {
+export async function trace(
+  message: string,
+  options?: LogOptions,
+): Promise<void> {
   await log(LogLevel.Trace, message, options);
 }

@@ -1,19 +1,19 @@
-import { useSignal } from '@preact/signals';
+import { useSignal } from "@preact/signals";
 import {
   SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS,
   SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS,
   WallpaperConfiguration,
-} from '@seelen-ui/lib';
-import { Wallpaper, WallpaperInstanceSettings } from '@seelen-ui/lib/types';
-import { cx } from '@shared/styles';
-import { convertFileSrc } from '@tauri-apps/api/core';
-import { ComponentChildren } from 'preact';
-import { useEffect, useMemo, useRef } from 'preact/hooks';
+} from "@seelen-ui/lib";
+import { Wallpaper, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
+import { cx } from "@shared/styles";
+import { convertFileSrc } from "@tauri-apps/api/core";
+import { ComponentChildren } from "preact";
+import { useEffect, useMemo, useRef } from "preact/hooks";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { getPlaybackRate, getWallpaperStyles } from './utils';
-import cs from './index.module.css';
+import { getPlaybackRate, getWallpaperStyles } from "./utils";
+import cs from "./index.module.css";
 
 interface BaseProps {
   definition?: Wallpaper;
@@ -40,14 +40,28 @@ export function Wallpaper(props: BaseProps) {
     definition &&
     SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.endsWith(ext))
   ) {
-    element = <ImageWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
+    element = (
+      <ImageWallpaper
+        {...props}
+        onLoad={onLoad}
+        definition={definition}
+        config={config}
+      />
+    );
   }
 
   if (
     definition &&
     SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.endsWith(ext))
   ) {
-    element = <VideoWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
+    element = (
+      <VideoWallpaper
+        {...props}
+        onLoad={onLoad}
+        definition={definition}
+        config={config}
+      />
+    );
   }
 
   if (!element) {
@@ -56,29 +70,37 @@ export function Wallpaper(props: BaseProps) {
 
   return (
     <div
-      className={cx(cs.container, 'wallpaper-container', {
+      className={cx(cs.container, "wallpaper-container", {
         rendering: $loaded.value,
-        'will-unrender': props.out,
+        "will-unrender": props.out,
       })}
     >
       {element}
       {config.withOverlay && $loaded.value && (
         <div
-          className={cx(cs.overlay, 'wallpaper-overlay')}
-          style={{ mixBlendMode: config.overlayMixBlendMode, backgroundColor: config.overlayColor }}
+          className={cx(cs.overlay, "wallpaper-overlay")}
+          style={{
+            mixBlendMode: config.overlayMixBlendMode,
+            backgroundColor: config.overlayColor,
+          }}
         />
       )}
     </div>
   );
 }
 
-export function ThemedWallpaper({ config, onLoad }: Pick<DefinedWallProps, 'config' | 'onLoad'>) {
+export function ThemedWallpaper(
+  { config, onLoad }: Pick<DefinedWallProps, "config" | "onLoad">,
+) {
   useEffect(() => {
     onLoad?.();
   }, []);
 
   return (
-    <div className={cx(cs.wallpaper, 'themed-wallpaper')} style={getWallpaperStyles(config)}>
+    <div
+      className={cx(cs.wallpaper, "themed-wallpaper")}
+      style={getWallpaperStyles(config)}
+    >
       <BackgroundByLayersV2 />
     </div>
   );
@@ -93,19 +115,23 @@ function ImageWallpaper({ definition, config, onLoad }: DefinedWallProps) {
   return (
     <img
       id={definition.id}
-      className={cx(cs.wallpaper, 'wallpaper')}
+      className={cx(cs.wallpaper, "wallpaper")}
       style={getWallpaperStyles(config)}
-      src={convertFileSrc(definition.metadata.path + '\\' + definition.filename!)}
+      src={convertFileSrc(
+        definition.metadata.path + "\\" + definition.filename!,
+      )}
       onLoad={onLoad}
     />
   );
 }
 
-function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps) {
+function VideoWallpaper(
+  { definition, config, paused, onLoad }: DefinedWallProps,
+) {
   const ref = useRef<HTMLVideoElement>(null);
 
   const videoSrc = useMemo(
-    () => convertFileSrc(definition.metadata.path + '\\' + definition.filename!),
+    () => convertFileSrc(definition.metadata.path + "\\" + definition.filename!),
     [definition.metadata.path, definition.filename],
   );
 
@@ -115,10 +141,10 @@ function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps
     return () => {
       if (ref.current) {
         ref.current.pause();
-        ref.current.removeAttribute('src');
+        ref.current.removeAttribute("src");
         ref.current.load();
-        if (window.gc) {
-          setTimeout(() => window.gc?.(), 100);
+        if (globalThis.gc) {
+          setTimeout(() => globalThis.gc?.(), 100);
         }
       }
     };
@@ -138,7 +164,7 @@ function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps
   return (
     <video
       id={definition.id}
-      className={cx(cs.wallpaper, 'wallpaper')}
+      className={cx(cs.wallpaper, "wallpaper")}
       style={getWallpaperStyles(config)}
       ref={ref}
       src={videoSrc}

@@ -1,5 +1,5 @@
-import { SeelenEvent } from '@seelen-ui/lib';
-import { window as TauriWindow } from '@seelen-ui/lib/tauri';
+import { SeelenEvent } from "@seelen-ui/lib";
+import { window as TauriWindow } from "@seelen-ui/lib/tauri";
 
 class LayeredHitbox {
   private _isIgnoringCursorEvents: boolean = true;
@@ -44,41 +44,48 @@ export async function declareDocumentAsLayeredHitbox(
     data.isLayeredEnabled = event.payload;
   });
 
-  webview.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
-    if (!data.isLayeredEnabled) {
-      return;
-    }
+  webview.listen<[x: number, y: number]>(
+    SeelenEvent.GlobalMouseMove,
+    (event) => {
+      if (!data.isLayeredEnabled) {
+        return;
+      }
 
-    const [mouseX, mouseY] = event.payload;
-    const { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = webviewRect;
+      const [mouseX, mouseY] = event.payload;
+      const {
+        x: windowX,
+        y: windowY,
+        width: windowWidth,
+        height: windowHeight,
+      } = webviewRect;
 
-    // check if the mouse is inside the window
-    const isHoverWindow =
-      mouseX >= windowX &&
-      mouseX <= windowX + windowWidth &&
-      mouseY >= windowY &&
-      mouseY <= windowY + windowHeight;
+      // check if the mouse is inside the window
+      const isHoverWindow = mouseX >= windowX &&
+        mouseX <= windowX + windowWidth &&
+        mouseY >= windowY &&
+        mouseY <= windowY + windowHeight;
 
-    if (!isHoverWindow) {
-      return;
-    }
+      if (!isHoverWindow) {
+        return;
+      }
 
-    const adjustedX = (mouseX - windowX) / globalThis.devicePixelRatio;
-    const adjustedY = (mouseY - windowY) / globalThis.devicePixelRatio;
+      const adjustedX = (mouseX - windowX) / globalThis.devicePixelRatio;
+      const adjustedY = (mouseY - windowY) / globalThis.devicePixelRatio;
 
-    const elementAtPoint = document.elementFromPoint(adjustedX, adjustedY);
-    if (!elementAtPoint) {
-      return;
-    }
+      const elementAtPoint = document.elementFromPoint(adjustedX, adjustedY);
+      if (!elementAtPoint) {
+        return;
+      }
 
-    const shouldAllow = shouldAllowMouseEvent(elementAtPoint);
-    if (shouldAllow == data.isIgnoringCursorEvents) {
-      data.isIgnoringCursorEvents = !shouldAllow;
-      webview.setIgnoreCursorEvents(!shouldAllow);
-    }
-  });
+      const shouldAllow = shouldAllowMouseEvent(elementAtPoint);
+      if (shouldAllow == data.isIgnoringCursorEvents) {
+        data.isIgnoringCursorEvents = !shouldAllow;
+        webview.setIgnoreCursorEvents(!shouldAllow);
+      }
+    },
+  );
 
-  globalThis.addEventListener('touchstart', (e) => {
+  globalThis.addEventListener("touchstart", (e) => {
     const shouldAllow = shouldAllowMouseEvent(e.target as Element);
     if (shouldAllow == data.isIgnoringCursorEvents) {
       data.isIgnoringCursorEvents = !shouldAllow;

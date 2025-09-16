@@ -1,24 +1,24 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { getRootContainer } from '@shared';
-import { declareDocumentAsLayeredHitbox } from '@shared/layered';
-import { disableAnimationsOnPerformanceMode } from '@shared/performance';
-import { removeDefaultWebviewActions } from '@shared/setup';
-import { invoke } from '@tauri-apps/api/core';
-import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { createRoot } from 'react-dom/client';
-import { I18nextProvider } from 'react-i18next';
-import { Provider } from 'react-redux';
+import { SeelenCommand } from "@seelen-ui/lib";
+import { getRootContainer } from "@shared";
+import { declareDocumentAsLayeredHitbox } from "@shared/layered";
+import { disableAnimationsOnPerformanceMode } from "@shared/performance";
+import { removeDefaultWebviewActions } from "@shared/setup";
+import { invoke } from "@tauri-apps/api/core";
+import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { createRoot } from "react-dom/client";
+import { I18nextProvider } from "react-i18next";
+import { Provider } from "react-redux";
 
-import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
+import { loadStore, registerStoreEvents, store } from "./modules/shared/store/infra";
 
-import { App } from './app';
+import { App } from "./app";
 
-import i18n, { loadTranslations } from './i18n';
+import i18n, { loadTranslations } from "./i18n";
 
-import '@shared/styles/colors.css';
-import './styles/variables.css';
-import '@shared/styles/reset.css';
-import './styles/global.css';
+import "@shared/styles/colors.css";
+import "./styles/variables.css";
+import "@shared/styles/reset.css";
+import "./styles/global.css";
 
 removeDefaultWebviewActions();
 await declareDocumentAsLayeredHitbox();
@@ -37,7 +37,7 @@ createRoot(container).render(
 );
 
 getCurrentWebviewWindow().onDragDropEvent(async (e) => {
-  if (e.payload.type === 'drop') {
+  if (e.payload.type === "drop") {
     for (const path of e.payload.paths) {
       await invoke(SeelenCommand.WegPinItem, { path });
     }

@@ -1,8 +1,8 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { Icon } from '@shared/components/Icon';
-import { Badge, Button, Tooltip } from 'antd';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { Icon } from "@shared/components/Icon";
+import { Badge, Button, Tooltip } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function UpdateButton() {
   const [downloading, setDownloading] = useState<boolean>(false);
@@ -21,7 +21,9 @@ export function UpdateButton() {
   }
 
   return (
-    <Tooltip title={downloading ? t('update.downloading') : t('update.available')}>
+    <Tooltip
+      title={downloading ? t("update.downloading") : t("update.available")}
+    >
       <Button
         type="text"
         loading={downloading}

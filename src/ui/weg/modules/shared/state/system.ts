@@ -1,6 +1,6 @@
-import { computed, signal } from '@preact/signals';
-import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from '@seelen-ui/lib';
-import { SeelenWegSide } from '@seelen-ui/lib/types';
+import { computed, signal } from "@preact/signals";
+import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
+import { SeelenWegSide } from "@seelen-ui/lib/types";
 
 const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
 
@@ -18,16 +18,16 @@ subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
 
 export const $mouse_at_edge = computed<SeelenWegSide | null>(() => {
   if ($mouse_pos.value.y === $current_monitor.value.rect.top) {
-    return 'Top';
+    return "Top";
   }
   if ($mouse_pos.value.x === $current_monitor.value.rect.left) {
-    return 'Left';
+    return "Left";
   }
   if ($mouse_pos.value.y === $current_monitor.value.rect.bottom - 1) {
-    return 'Bottom';
+    return "Bottom";
   }
   if ($mouse_pos.value.x === $current_monitor.value.rect.right - 1) {
-    return 'Right';
+    return "Right";
   }
   return null;
 });

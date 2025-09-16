@@ -1,7 +1,7 @@
-import Sandbox from '@nyariv/sandboxjs';
-import { SeelenCommand, SeelenEvent } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
-import { emit, emitTo } from '@tauri-apps/api/event';
+import Sandbox from "@nyariv/sandboxjs";
+import { SeelenCommand, SeelenEvent } from "@seelen-ui/lib";
+import { invoke } from "@tauri-apps/api/core";
+import { emit, emitTo } from "@tauri-apps/api/event";
 
 const ActionsScope = {
   open(path: string) {

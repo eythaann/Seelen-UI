@@ -14,7 +14,7 @@
 
     "core:window:deny-create",
     "core:window:allow-destroy",
-    
+
     "core:window:allow-set-always-on-top",
     "core:window:allow-set-always-on-bottom",
     "core:window:allow-set-fullscreen",
@@ -45,7 +45,7 @@
     "core:window:allow-set-effects",
     "core:window:allow-set-content-protected",
     "core:window:allow-set-ignore-cursor-events",
-    
+
     "core:window:allow-set-skip-taskbar",
     "core:window:allow-set-visible-on-all-workspaces",
 

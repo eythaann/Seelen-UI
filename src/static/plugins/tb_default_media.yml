@@ -1,4 +1,4 @@
-id: '@default/media'
+id: "@default/media"
 metadata:
   displayName:
     en: Media
@@ -28,7 +28,7 @@ metadata:
     sw: Media
     lb: Medienen
     pl: Media
-    'no': Media
+    "no": Media
     ro: Media
     pt: Mídia
     sk: Médiá
@@ -72,7 +72,7 @@ metadata:
     km: ឧបករន៍ផសាយប៍តមាន
     lo: ສື່ມວນຊົນ
 icon: IoVolumeMediumOutline
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: media
   withMediaControls: true

@@ -1,15 +1,15 @@
-import { Icon } from '@shared/components/Icon';
-import { Button, InputNumber, Switch } from 'antd';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router';
+import { Icon } from "@shared/components/Icon";
+import { Button, InputNumber, Switch } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router";
 
-import { newSelectors, RootActions } from '../shared/store/app/reducer';
+import { newSelectors, RootActions } from "../shared/store/app/reducer";
 
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { WallpaperList } from './WallpaperList';
-import cs from './index.module.css';
+import { SettingsGroup, SettingsOption } from "../../components/SettingsBox";
+import { WallpaperList } from "./WallpaperList";
+import cs from "./index.module.css";
 
 export function WallSettings() {
   const wall = useSelector(newSelectors.wall);
@@ -40,11 +40,17 @@ export function WallSettings() {
     patchWallSettings({ enabled });
   }
 
-  const updateTime = (key: 'hours' | 'minutes' | 'seconds', value: number | null) => {
+  const updateTime = (
+    key: "hours" | "minutes" | "seconds",
+    value: number | null,
+  ) => {
     if (value === null) return;
     const newTime = { ...time, [key]: Math.floor(value) };
     setTime(newTime);
-    const newInterval = Math.max(newTime.hours * 3600 + newTime.minutes * 60 + newTime.seconds, 1);
+    const newInterval = Math.max(
+      newTime.hours * 3600 + newTime.minutes * 60 + newTime.seconds,
+      1,
+    );
     patchWallSettings({ interval: newInterval });
   };
 
@@ -52,28 +58,28 @@ export function WallSettings() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('wall.enable')}</b>
+          <b>{t("wall.enable")}</b>
           <Switch value={enabled} onChange={onChangeEnabled} />
         </SettingsOption>
       </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('wall.random')}</b>
+          <b>{t("wall.random")}</b>
           <Switch
             value={wall.randomize}
             onChange={(randomize) => patchWallSettings({ randomize })}
           />
         </SettingsOption>
         <SettingsOption>
-          <b>{t('wall.interval')}</b>
+          <b>{t("wall.interval")}</b>
           <div className={cs.interval}>
-            {['hours', 'minutes', 'seconds'].map((unit) => (
+            {["hours", "minutes", "seconds"].map((unit) => (
               <div key={unit}>
                 <b>{t(`wall.${unit}`)}:</b>
                 <InputNumber
                   value={time[unit as keyof typeof time]}
-                  onChange={(value) => updateTime(unit as 'hours' | 'minutes' | 'seconds', value)}
+                  onChange={(value) => updateTime(unit as "hours" | "minutes" | "seconds", value)}
                   min={0}
                   style={{ width: 50 }}
                 />
@@ -85,7 +91,7 @@ export function WallSettings() {
 
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('wall.backgrounds')}</b>
+          <b>{t("wall.backgrounds")}</b>
           <Link to="/resources/wallpaper">
             <Button type="primary" className={cs.backgroundAdd}>
               <Icon iconName="IoImages" size={14} />

@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UIColors, UpdateChannel } from '@seelen-ui/lib';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UIColors, UpdateChannel } from "@seelen-ui/lib";
 import {
   IconPackId,
   SeelenWallSettings,
@@ -7,20 +7,20 @@ import {
   WallpaperId,
   WallpaperInstanceSettings,
   WidgetId,
-} from '@seelen-ui/lib/types';
-import { StateBuilder } from '@shared/StateBuilder';
-import { cloneDeep, pick } from 'lodash';
+} from "@seelen-ui/lib/types";
+import { StateBuilder } from "@shared/StateBuilder";
+import { cloneDeep, pick } from "lodash";
 
-import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
-import { FancyToolbarSlice } from '../../../fancyToolbar/app';
-import { SeelenWegSlice } from '../../../seelenweg/app';
-import { SeelenManagerSlice } from '../../../WindowManager/main/app';
-import { matcher, reducersFor, selectorsFor } from '../../utils/app';
+import { AppsConfigSlice } from "../../../appsConfigurations/app/reducer";
+import { FancyToolbarSlice } from "../../../fancyToolbar/app";
+import { SeelenWegSlice } from "../../../seelenweg/app";
+import { SeelenManagerSlice } from "../../../WindowManager/main/app";
+import { matcher, reducersFor, selectorsFor } from "../../utils/app";
 
-import { RootState } from '../domain';
+import { RootState } from "../domain";
 
-import i18n from '../../../../i18n';
-import { defaultSettings } from './default';
+import i18n from "../../../../i18n";
+import { defaultSettings } from "./default";
 
 const initialState: RootState = {
   lastLoaded: null,
@@ -43,8 +43,8 @@ const initialState: RootState = {
   activeThemes: [],
   devTools: false,
   drpc: true,
-  language: navigator.language.split('-')[0] || 'en',
-  dateFormat: 'ddd D MMM, hh:mm A',
+  language: navigator.language.split("-")[0] || "en",
+  dateFormat: "ddd D MMM, hh:mm A",
   colors: UIColors.default().inner,
   updater: {
     channel: UpdateChannel.Release,
@@ -76,7 +76,7 @@ function toBeSavedAndRestarted<S, A, R>(fn: (state: S, action: A) => R) {
 
 const reducers = reducersFor(initialState);
 export const RootSlice = createSlice({
-  name: 'main',
+  name: "main",
   initialState,
   reducers: {
     ...reducers,
@@ -100,7 +100,12 @@ export const RootSlice = createSlice({
     },
     restoreToLastLoaded: (state) => {
       if (state.lastLoaded) {
-        const toMaintain = pick(state, ['autostart', 'route', 'colors', 'lastLoaded']);
+        const toMaintain = pick(state, [
+          "autostart",
+          "route",
+          "colors",
+          "lastLoaded",
+        ]);
         const newState = {
           ...cloneDeep(state.lastLoaded),
           ...toMaintain,
@@ -160,7 +165,9 @@ export const RootSlice = createSlice({
     },
     patchWidgetConfig(
       state,
-      action: PayloadAction<{ widgetId: WidgetId; config: Record<string, unknown> }>,
+      action: PayloadAction<
+        { widgetId: WidgetId; config: Record<string, unknown> }
+      >,
     ) {
       const { widgetId, config } = action.payload;
 
@@ -242,13 +249,19 @@ export const RootSlice = createSlice({
       state.byTheme[themeId]![name] = value;
       state.toBeSaved = true;
     },
-    deleteThemeVariable: (state, action: PayloadAction<{ themeId: ThemeId; name: string }>) => {
+    deleteThemeVariable: (
+      state,
+      action: PayloadAction<{ themeId: ThemeId; name: string }>,
+    ) => {
       const { themeId, name } = action.payload;
       state.byTheme[themeId] ??= {};
       delete state.byTheme[themeId]![name];
       state.toBeSaved = true;
     },
-    resetThemeVariables: (state, action: PayloadAction<{ themeId: ThemeId }>) => {
+    resetThemeVariables: (
+      state,
+      action: PayloadAction<{ themeId: ThemeId }>,
+    ) => {
       const { themeId } = action.payload;
       state.byTheme[themeId] = {};
       state.toBeSaved = true;
@@ -259,7 +272,10 @@ export const RootSlice = createSlice({
     builder
       .addMatcher(matcher(SeelenManagerSlice), (state, action) => {
         state.toBeSaved = true;
-        state.windowManager = SeelenManagerSlice.reducer(state.windowManager, action);
+        state.windowManager = SeelenManagerSlice.reducer(
+          state.windowManager,
+          action,
+        );
       })
       .addMatcher(matcher(SeelenWegSlice), (state, action) => {
         state.toBeSaved = true;
@@ -267,11 +283,17 @@ export const RootSlice = createSlice({
       })
       .addMatcher(matcher(AppsConfigSlice), (state, action) => {
         state.toBeSaved = true;
-        state.appsConfigurations = AppsConfigSlice.reducer(state.appsConfigurations, action);
+        state.appsConfigurations = AppsConfigSlice.reducer(
+          state.appsConfigurations,
+          action,
+        );
       })
       .addMatcher(matcher(FancyToolbarSlice), (state, action) => {
         state.toBeSaved = true;
-        state.fancyToolbar = FancyToolbarSlice.reducer(state.fancyToolbar, action);
+        state.fancyToolbar = FancyToolbarSlice.reducer(
+          state.fancyToolbar,
+          action,
+        );
       });
   },
 });

@@ -1,29 +1,23 @@
-import { computed, effect, signal } from '@preact/signals';
-import {
-  invoke,
-  SeelenCommand,
-  SeelenEvent,
-  Settings,
-  subscribe,
-  UIColors,
-  WegItems,
-  Widget,
-} from '@seelen-ui/lib';
-import { WindowManagerSettings, WmNode } from '@seelen-ui/lib/types';
+import { computed, effect, signal } from "@preact/signals";
+import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, UIColors, WegItems, Widget } from "@seelen-ui/lib";
+import { WindowManagerSettings, WmNode } from "@seelen-ui/lib/types";
 
-import { NodeUtils } from '../utils';
+import { NodeUtils } from "../utils";
 
 export const $layout = signal<WmNode | null>(null);
-await Widget.getCurrent().webview.listen<WmNode>(SeelenEvent.WMSetLayout, (e) => {
-  $layout.value = e.payload;
-});
+await Widget.getCurrent().webview.listen<WmNode>(
+  SeelenEvent.WMSetLayout,
+  (e) => {
+    $layout.value = e.payload;
+  },
+);
 
 const getOpenApps = (items: WegItems) => {
   return items.inner.left
     .concat(items.inner.center)
     .concat(items.inner.right)
     .flatMap((item) => {
-      if ('windows' in item) {
+      if ("windows" in item) {
         return [
           {
             path: item.path,
@@ -62,7 +56,9 @@ export const $overlay_visible = computed(() => {
   );
 });
 
-export const $settings = signal<WindowManagerSettings>((await Settings.getAsync()).windowManager);
+export const $settings = signal<WindowManagerSettings>(
+  (await Settings.getAsync()).windowManager,
+);
 Settings.onChange((settings) => ($settings.value = settings.windowManager));
 
 // =================================================
@@ -76,14 +72,26 @@ effect(() => {
   const settings = $settings.value;
   const styles = document.documentElement.style;
 
-  styles.setProperty('--config-padding', `${settings.workspacePadding}px`);
-  styles.setProperty('--config-containers-gap', `${settings.workspaceGap}px`);
+  styles.setProperty("--config-padding", `${settings.workspacePadding}px`);
+  styles.setProperty("--config-containers-gap", `${settings.workspaceGap}px`);
 
-  styles.setProperty('--config-margin-top', `${settings.workspaceMargin.top}px`);
-  styles.setProperty('--config-margin-left', `${settings.workspaceMargin.left}px`);
-  styles.setProperty('--config-margin-right', `${settings.workspaceMargin.right}px`);
-  styles.setProperty('--config-margin-bottom', `${settings.workspaceMargin.bottom}px`);
+  styles.setProperty(
+    "--config-margin-top",
+    `${settings.workspaceMargin.top}px`,
+  );
+  styles.setProperty(
+    "--config-margin-left",
+    `${settings.workspaceMargin.left}px`,
+  );
+  styles.setProperty(
+    "--config-margin-right",
+    `${settings.workspaceMargin.right}px`,
+  );
+  styles.setProperty(
+    "--config-margin-bottom",
+    `${settings.workspaceMargin.bottom}px`,
+  );
 
-  styles.setProperty('--config-border-offset', `${settings.border.offset}px`);
-  styles.setProperty('--config-border-width', `${settings.border.width}px`);
+  styles.setProperty("--config-border-offset", `${settings.border.offset}px`);
+  styles.setProperty("--config-border-width", `${settings.border.width}px`);
 });

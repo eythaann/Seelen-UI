@@ -1,4 +1,4 @@
-import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import {
   BluetoothDevices,
   DesktopFolder,
@@ -14,10 +14,10 @@ import {
   VideosFolder,
   WegItems,
   Widget,
-} from '@seelen-ui/lib';
-import { StateBuilder } from '@shared/StateBuilder';
+} from "@seelen-ui/lib";
+import { StateBuilder } from "@shared/StateBuilder";
 
-import { RootState } from './domain';
+import { RootState } from "./domain";
 
 const initialState: RootState = {
   version: 0,
@@ -42,7 +42,7 @@ const initialState: RootState = {
     batteryLifeTime: -1,
     batteryFullLifeTime: -1,
   },
-  powerPlan: 'Unknown',
+  powerPlan: "Unknown",
   batteries: [],
   systemTray: [],
   networkAdapters: [],
@@ -59,13 +59,15 @@ const initialState: RootState = {
 };
 
 export const RootSlice = createSlice({
-  name: 'root',
+  name: "root",
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
     addWindowColor(
       state,
-      action: PayloadAction<[number, { background: string; foreground: string }]>,
+      action: PayloadAction<
+        [number, { background: string; foreground: string }]
+      >,
     ) {
       state.windowColorByHandle[`${action.payload[0]}`] = action.payload[1];
     },
@@ -80,9 +82,7 @@ export const Selectors = StateBuilder.compositeSelector(initialState);
 
 // no core things that can be lazy loaded to improve performance
 export async function lazySlice(d: Dispatch) {
-  invoke(SeelenCommand.GetNotifications).then((notifications) =>
-    d(RootActions.setNotifications(notifications)),
-  );
+  invoke(SeelenCommand.GetNotifications).then((notifications) => d(RootActions.setNotifications(notifications)));
 
   invoke(SeelenCommand.GetPowerStatus).then((status) => d(RootActions.setPowerStatus(status)));
   invoke(SeelenCommand.GetPowerMode).then((plan) => d(RootActions.setPowerPlan(plan)));
@@ -93,9 +93,7 @@ export async function lazySlice(d: Dispatch) {
     d(RootActions.setMediaOutputs(outputs));
   });
 
-  invoke(SeelenCommand.GetMediaSessions).then((sessions) =>
-    d(RootActions.setMediaSessions(sessions)),
-  );
+  invoke(SeelenCommand.GetMediaSessions).then((sessions) => d(RootActions.setMediaSessions(sessions)));
 
   invoke(SeelenCommand.GetTrayIcons).then((info) => d(RootActions.setSystemTray(info)));
 
@@ -106,7 +104,7 @@ export async function lazySlice(d: Dispatch) {
       .concat(items.inner.center)
       .concat(items.inner.right)
       .map((d) => {
-        if ('windows' in d) {
+        if ("windows" in d) {
           return d.windows;
         }
         return [];

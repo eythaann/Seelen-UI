@@ -1,8 +1,8 @@
-import { WidgetSettingsDeclarationList, WsdGroupEntry, WsdItem } from '@seelen-ui/lib/types';
-import { ResourceText } from '@shared/components/ResourceText';
-import { ColorPicker, Input, InputNumber, Select, Slider, Switch } from 'antd';
+import { WidgetSettingsDeclarationList, WsdGroupEntry, WsdItem } from "@seelen-ui/lib/types";
+import { ResourceText } from "@shared/components/ResourceText";
+import { ColorPicker, Input, InputNumber, Select, Slider, Switch } from "antd";
 
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox";
 
 interface Props {
   // settings definitions
@@ -15,12 +15,19 @@ interface Props {
   isByMonitor?: boolean;
 }
 
-export function RenderBySettingsDeclaration({ definitions, values, onConfigChange }: Props) {
+export function RenderBySettingsDeclaration(
+  { definitions, values, onConfigChange }: Props,
+) {
   return definitions.map(({ group }, idx) => {
     return (
       <SettingsGroup key={idx}>
         {group.map((entry, idx) => (
-          <WSGroupEntry key={idx} entry={entry} values={values} onConfigChange={onConfigChange} />
+          <WSGroupEntry
+            key={idx}
+            entry={entry}
+            values={values}
+            onConfigChange={onConfigChange}
+          />
         ))}
       </SettingsGroup>
     );
@@ -41,16 +48,33 @@ function WSGroupEntry(props: WSGroupEntryProps) {
   if (entry.children.length > 0) {
     return (
       <SettingsSubGroup
-        label={<WSItem def={entry.config} values={values} onConfigChange={onConfigChange} />}
+        label={
+          <WSItem
+            def={entry.config}
+            values={values}
+            onConfigChange={onConfigChange}
+          />
+        }
       >
         {entry.children.map((entry, idx) => (
-          <WSGroupEntry key={idx} entry={entry} values={values} onConfigChange={onConfigChange} />
+          <WSGroupEntry
+            key={idx}
+            entry={entry}
+            values={values}
+            onConfigChange={onConfigChange}
+          />
         ))}
       </SettingsSubGroup>
     );
   }
 
-  return <WSItem def={entry.config} values={values} onConfigChange={onConfigChange} />;
+  return (
+    <WSItem
+      def={entry.config}
+      values={values}
+      onConfigChange={onConfigChange}
+    />
+  );
 }
 
 // ================================================
@@ -70,27 +94,30 @@ function WSItem({ def, values, onConfigChange }: WSItemProps) {
     onChange: (value: any) => onConfigChange(def.key, value),
   };
 
-  if (def.type === 'switch') {
+  if (def.type === "switch") {
     action = <Switch {...commonProps} />;
-  } else if (def.type === 'select') {
+  } else if (def.type === "select") {
     action = <Select {...commonProps} options={def.options} />;
-  } else if (def.type === 'input-text') {
+  } else if (def.type === "input-text") {
     action = (
-      <Input {...commonProps} onChange={(e) => onConfigChange(def.key, e.currentTarget.value)} />
+      <Input
+        {...commonProps}
+        onChange={(e) => onConfigChange(def.key, e.currentTarget.value)}
+      />
     );
-  } else if (def.type === 'input-number') {
+  } else if (def.type === "input-number") {
     action = <InputNumber {...commonProps} />;
-  } else if (def.type === 'range') {
+  } else if (def.type === "range") {
     action = (
       <Slider
         {...commonProps}
-        style={{ width: '200px' }}
+        style={{ width: "200px" }}
         step={def.step}
         min={def.from}
         max={def.to}
       />
     );
-  } else if (def.type === 'color') {
+  } else if (def.type === "color") {
     action = (
       <ColorPicker
         {...commonProps}

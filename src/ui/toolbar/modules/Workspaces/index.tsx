@@ -1,20 +1,20 @@
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { useComputed } from '@preact/signals';
-import { invoke, SeelenCommand, Widget, WorkspaceToolbarItemMode } from '@seelen-ui/lib';
-import { WorkspaceToolbarItem } from '@seelen-ui/lib/types';
-import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
-import { useThrottle, useWindowFocusChange } from '@shared/hooks';
-import { cx } from '@shared/styles';
-import { Menu, Tooltip } from 'antd';
-import { HTMLAttributes, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { useComputed } from "@preact/signals";
+import { invoke, SeelenCommand, Widget, WorkspaceToolbarItemMode } from "@seelen-ui/lib";
+import { WorkspaceToolbarItem } from "@seelen-ui/lib/types";
+import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
+import { useThrottle, useWindowFocusChange } from "@shared/hooks";
+import { cx } from "@shared/styles";
+import { Menu, Tooltip } from "antd";
+import { HTMLAttributes, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { CommonItemContextMenu } from '../item/infra/ContextMenu';
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { CommonItemContextMenu } from "../item/infra/ContextMenu";
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { $toolbar_state } from '../shared/state/items';
-import { $virtual_desktop } from '../shared/state/system';
+import { $toolbar_state } from "../shared/state/items";
+import { $virtual_desktop } from "../shared/state/system";
 
 interface Props {
   module: WorkspaceToolbarItem;
@@ -25,7 +25,14 @@ let monitorId = Widget.getCurrent().decoded.monitorId!;
 
 function InnerWorkspacesModule({ module, ...rest }: Props) {
   const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
     id: module.id,
     disabled: isReorderDisabled.value,
     animateLayoutChanges: () => false,
@@ -81,8 +88,8 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
             <li
               key={w.id}
               onClick={() => invoke(SeelenCommand.SwitchWorkspace, { monitorId, idx })}
-              className={cx('workspace-dot', {
-                'workspace-dot-active': w.id === activeWorkspace,
+              className={cx("workspace-dot", {
+                "workspace-dot-active": w.id === activeWorkspace,
               })}
             />
           ))}
@@ -106,23 +113,21 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
           <Tooltip
             arrow={false}
             mouseLeaveDelay={0}
-            classNames={{ root: 'ft-bar-item-tooltip' }}
+            classNames={{ root: "ft-bar-item-tooltip" }}
             title={w.name || `Workspace ${idx + 1}`}
             key={w.id}
           >
             <div
               style={module.style}
-              className={cx('ft-bar-item', {
-                'ft-bar-item-clickable': true,
-                'ft-bar-item-active': w.id === activeWorkspace,
+              className={cx("ft-bar-item", {
+                "ft-bar-item-clickable": true,
+                "ft-bar-item-active": w.id === activeWorkspace,
               })}
               onClick={() => invoke(SeelenCommand.SwitchWorkspace, { monitorId, idx })}
             >
               <div className="ft-bar-item-content">
                 <span>
-                  {mode === WorkspaceToolbarItemMode.Named
-                    ? `${w.name || `Workspace ${idx + 1}`}`
-                    : `${idx + 1}`}
+                  {mode === WorkspaceToolbarItemMode.Named ? `${w.name || `Workspace ${idx + 1}`}` : `${idx + 1}`}
                 </span>
               </div>
             </div>
@@ -151,15 +156,18 @@ export function WorkspacesModule({ module }: Props) {
   return (
     <AnimatedDropdown
       animationDescription={{
-        openAnimationName: 'ft-bar-item-context-menu-open',
-        closeAnimationName: 'ft-bar-item-context-menu-close',
+        openAnimationName: "ft-bar-item-context-menu-open",
+        closeAnimationName: "ft-bar-item-context-menu-close",
       }}
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
-      trigger={['contextMenu']}
+      trigger={["contextMenu"]}
       dropdownRender={() => (
         <BackgroundByLayersV2 className="ft-bar-item-context-menu-container">
-          <Menu className="ft-bar-item-context-menu" items={CommonItemContextMenu(t, module)} />
+          <Menu
+            className="ft-bar-item-context-menu"
+            items={CommonItemContextMenu(t, module)}
+          />
         </BackgroundByLayersV2>
       )}
     >

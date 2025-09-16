@@ -1,9 +1,9 @@
-import * as d3 from 'd3';
-import { useEffect, useRef } from 'react';
+import * as d3 from "d3";
+import { useEffect, useRef } from "react";
 
-import { Placement } from '../../shared/store/domain';
+import { Placement } from "../../shared/store/domain";
 
-import { mocked_desktops } from '../mock';
+import { mocked_desktops } from "../mock";
 
 const data = {
   nodes: mocked_desktops.map((d) => d.asData()),
@@ -30,58 +30,67 @@ const chart = function () {
   const simulation = d3
     .forceSimulation(nodes)
     .force(
-      'link',
+      "link",
       d3
         .forceLink(links)
         .id((d: any) => d.id)
         .distance(200)
         .strength(1),
     )
-    .force('collide', d3.forceCollide())
-    .force('charge', d3.forceManyBody())
-    .force('center', d3.forceCenter(width / 2, height / 2))
-    .on('tick', ticked);
+    .force("collide", d3.forceCollide())
+    .force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .on("tick", ticked);
 
   // Create the SVG container.
   const svg = d3
-    .create('svg')
-    .attr('width', width)
-    .attr('height', height)
-    .attr('viewBox', [0, 0, width, height])
-    .attr('style', 'max-width: 100%; height: auto;');
+    .create("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "max-width: 100%; height: auto;");
 
   // Add a line for each link, and a circle for each node.
   const link = svg
-    .append('g')
-    .attr('stroke', '#999')
-    .attr('stroke-opacity', 0.6)
+    .append("g")
+    .attr("stroke", "#999")
+    .attr("stroke-opacity", 0.6)
     .selectAll()
     .data(links)
-    .join('line')
-    .attr('stroke-width', (d: any) => Math.sqrt(d.value));
+    .join("line")
+    .attr("stroke-width", (d: any) => Math.sqrt(d.value));
 
   const node = svg
-    .append('g')
-    .attr('stroke', '#fff')
-    .attr('stroke-width', 1.5)
+    .append("g")
+    .attr("stroke", "#fff")
+    .attr("stroke-width", 1.5)
     .selectAll()
     .data(nodes)
-    .join('rect')
-    .attr('width', MINI_DESKTOP_WIDTH)
-    .attr('height', MINI_DESKTOP_HEIGHT)
-    .attr('class', 'mini-desktop');
+    .join("rect")
+    .attr("width", MINI_DESKTOP_WIDTH)
+    .attr("height", MINI_DESKTOP_HEIGHT)
+    .attr("class", "mini-desktop");
 
-  node.append('title').text((d) => d.id);
+  node.append("title").text((d) => d.id);
 
   // Add a drag behavior.
-  node.call(d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended) as any);
+  node.call(
+    d3.drag().on("start", dragstarted).on("drag", dragged).on(
+      "end",
+      dragended,
+    ) as any,
+  );
 
   // Set the position attributes of links and nodes each time the simulation ticks.
   function ticked() {
     link
-      .attr('x1', (d: any) => {
+      .attr("x1", (d: any) => {
         let x = d.source.x;
-        if ([Placement.Right, Placement.TopRight, Placement.BottomRight].includes(d.placement)) {
+        if (
+          [Placement.Right, Placement.TopRight, Placement.BottomRight].includes(
+            d.placement,
+          )
+        ) {
           return x + MINI_DESKTOP_WIDTH;
         }
         if ([Placement.Top, Placement.Bottom].includes(d.placement)) {
@@ -89,9 +98,12 @@ const chart = function () {
         }
         return x;
       })
-      .attr('y1', (d: any) => {
+      .attr("y1", (d: any) => {
         let y = d.source.y;
-        if ([Placement.Bottom, Placement.BottomLeft, Placement.BottomRight].includes(d.placement)) {
+        if (
+          [Placement.Bottom, Placement.BottomLeft, Placement.BottomRight]
+            .includes(d.placement)
+        ) {
           return y + MINI_DESKTOP_HEIGHT;
         }
         if ([Placement.Left, Placement.Right].includes(d.placement)) {
@@ -99,9 +111,13 @@ const chart = function () {
         }
         return y;
       })
-      .attr('x2', (d: any) => {
+      .attr("x2", (d: any) => {
         let x = d.target.x;
-        if ([Placement.Left, Placement.TopLeft, Placement.BottomLeft].includes(d.placement)) {
+        if (
+          [Placement.Left, Placement.TopLeft, Placement.BottomLeft].includes(
+            d.placement,
+          )
+        ) {
           return x + MINI_DESKTOP_WIDTH;
         }
         if ([Placement.Top, Placement.Bottom].includes(d.placement)) {
@@ -109,9 +125,13 @@ const chart = function () {
         }
         return x;
       })
-      .attr('y2', (d: any) => {
+      .attr("y2", (d: any) => {
         let y = d.target.y;
-        if ([Placement.Top, Placement.TopLeft, Placement.TopRight].includes(d.placement)) {
+        if (
+          [Placement.Top, Placement.TopLeft, Placement.TopRight].includes(
+            d.placement,
+          )
+        ) {
           return y + MINI_DESKTOP_HEIGHT;
         }
         if ([Placement.Left, Placement.Right].includes(d.placement)) {
@@ -120,7 +140,7 @@ const chart = function () {
         return y;
       });
 
-    (node as any).attr('x', (d: any) => d.x).attr('y', (d: any) => d.y);
+    (node as any).attr("x", (d: any) => d.x).attr("y", (d: any) => d.y);
   }
 
   // Reheat the simulation when drag starts, and fix the subject position.

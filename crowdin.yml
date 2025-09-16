@@ -1,5 +1,5 @@
-base_path: '.'
-base_url: 'https://api.crowdin.com'
+base_path: "."
+base_url: "https://api.crowdin.com"
 preserve_hierarchy: true
 files:
   - source: i18n/**/en.yml

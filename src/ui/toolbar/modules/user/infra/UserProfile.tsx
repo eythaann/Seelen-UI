@@ -1,10 +1,10 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { User } from '@seelen-ui/lib/types';
-import { Icon, MissingIcon } from '@shared/components/Icon';
-import { path } from '@tauri-apps/api';
-import { convertFileSrc } from '@tauri-apps/api/core';
-import { Tooltip } from 'antd';
-import { useTranslation } from 'react-i18next';
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { User } from "@seelen-ui/lib/types";
+import { Icon, MissingIcon } from "@shared/components/Icon";
+import { path } from "@tauri-apps/api";
+import { convertFileSrc } from "@tauri-apps/api/core";
+import { Tooltip } from "antd";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   user: User;
@@ -16,12 +16,20 @@ export function UserProfile({ user }: Props) {
   return (
     <div className="userhome-profile-container">
       <div className="userhome-profile-picture-container">
-        {user.profilePicturePath ? (
-          <img className="userhome-profile-picture" src={convertFileSrc(user.profilePicturePath)} />
-        ) : (
-          <MissingIcon />
-        )}
-        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.log_out')} placement="bottom">
+        {user.profilePicturePath
+          ? (
+            <img
+              className="userhome-profile-picture"
+              src={convertFileSrc(user.profilePicturePath)}
+            />
+          )
+          : <MissingIcon />}
+        <Tooltip
+          mouseLeaveDelay={0}
+          arrow={false}
+          title={t("settings.log_out")}
+          placement="bottom"
+        >
           <button
             className="userhome-profile-lock-button"
             onClick={() => invoke(SeelenCommand.LogOut)}
@@ -32,12 +40,12 @@ export function UserProfile({ user }: Props) {
         <Tooltip
           mouseLeaveDelay={0}
           arrow={false}
-          title={t('userhome.profile.accounts')}
+          title={t("userhome.profile.accounts")}
           placement="bottom"
         >
           <button
             className="userhome-profile-settings-button"
-            onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:accounts' })}
+            onClick={() => invoke(SeelenCommand.OpenFile, { path: "ms-settings:accounts" })}
           >
             <Icon iconName="RiSettings3Fill" />
           </button>
@@ -50,7 +58,7 @@ export function UserProfile({ user }: Props) {
           <Tooltip
             mouseLeaveDelay={0}
             arrow={false}
-            title={t('userhome.profile.open_user_folder')}
+            title={t("userhome.profile.open_user_folder")}
             placement="right"
           >
             <button
@@ -69,7 +77,7 @@ export function UserProfile({ user }: Props) {
         <Tooltip
           mouseLeaveDelay={0}
           arrow={false}
-          title={t('userhome.profile.open_onedrive')}
+          title={t("userhome.profile.open_onedrive")}
           placement="right"
         >
           <button

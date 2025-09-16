@@ -1,5 +1,5 @@
-import { ResourceText as IResourceText } from '@seelen-ui/lib/types';
-import { useTranslation } from 'react-i18next';
+import { ResourceText as IResourceText } from "@seelen-ui/lib/types";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   className?: string;
@@ -19,11 +19,11 @@ export function ResourceText({ text, className, noFallback }: Props) {
     return <span className={className}>null!?</span>;
   }
 
-  if (typeof text === 'string') {
+  if (typeof text === "string") {
     return <span className={className}>{text}</span>;
   }
 
-  const text2 = text[language] || text['en'];
+  const text2 = text[language] || text["en"];
   if (!text2) {
     if (noFallback) {
       return null;

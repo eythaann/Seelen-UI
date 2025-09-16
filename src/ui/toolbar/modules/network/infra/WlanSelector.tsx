@@ -1,20 +1,20 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { WlanBssEntry } from '@seelen-ui/lib/types';
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { Icon } from '@shared/components/Icon';
-import { useWindowFocusChange } from '@shared/hooks';
-import { invoke } from '@tauri-apps/api/core';
-import { Tooltip } from 'antd';
-import { VNode } from 'preact';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { SeelenCommand } from "@seelen-ui/lib";
+import { WlanBssEntry } from "@seelen-ui/lib/types";
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { Icon } from "@shared/components/Icon";
+import { useWindowFocusChange } from "@shared/hooks";
+import { invoke } from "@tauri-apps/api/core";
+import { Tooltip } from "antd";
+import { VNode } from "preact";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { WlanSelectorEntry } from './WlanSelectorEntry';
+import { WlanSelectorEntry } from "./WlanSelectorEntry";
 
 function WlanSelector({ open }: { open: boolean }) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -65,7 +65,7 @@ function WlanSelector({ open }: { open: boolean }) {
     >
       {connected && (
         <>
-          <div className="wlan-selector-title">{t('network.connected')}</div>
+          <div className="wlan-selector-title">{t("network.connected")}</div>
           <div className="wlan-selector-entries">
             <WlanSelectorEntry
               group={connected}
@@ -78,7 +78,7 @@ function WlanSelector({ open }: { open: boolean }) {
 
       {known.length > 0 && (
         <>
-          <div className="wlan-selector-title">{t('network.saved')}</div>
+          <div className="wlan-selector-title">{t("network.saved")}</div>
           <div className="wlan-selector-entries">
             {known.map((group) => {
               let ssid = group[0].ssid!;
@@ -96,17 +96,15 @@ function WlanSelector({ open }: { open: boolean }) {
       )}
 
       <div className="wlan-selector-title">
-        <span>{t('network.available')}</span>
-        <Tooltip title={t('network.scanning')}>
+        <span>{t("network.available")}</span>
+        <Tooltip title={t("network.scanning")}>
           <button className="wlan-selector-refresh">
             <Icon iconName="TbRefresh" size={12} />
           </button>
         </Tooltip>
       </div>
       <div className="wlan-selector-entries">
-        {unknown.length === 0 && (
-          <div className="wlan-selector-empty">{t('network.not_found')}</div>
-        )}
+        {unknown.length === 0 && <div className="wlan-selector-empty">{t("network.not_found")}</div>}
         {unknown.map((group) => {
           let ssid = group[0].ssid!;
           return (
@@ -122,8 +120,8 @@ function WlanSelector({ open }: { open: boolean }) {
           <WlanSelectorEntry
             key="__HIDDEN_SSID__"
             group={hidden as [WlanBssEntry, ...WlanBssEntry[]]}
-            selected={selected === '__HIDDEN_SSID__'}
-            onClick={() => setSelected('__HIDDEN_SSID__')}
+            selected={selected === "__HIDDEN_SSID__"}
+            onClick={() => setSelected("__HIDDEN_SSID__")}
           />
         )}
       </div>
@@ -131,9 +129,9 @@ function WlanSelector({ open }: { open: boolean }) {
       <div className="wlan-selector-footer">
         <button
           className="wlan-selector-footer-button"
-          onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:network' })}
+          onClick={() => invoke(SeelenCommand.OpenFile, { path: "ms-settings:network" })}
         >
-          {t('network.more')}
+          {t("network.more")}
         </button>
       </div>
     </BackgroundByLayersV2>
@@ -145,7 +143,9 @@ export interface WlanSelectorProperties {
   children: VNode;
 }
 
-export function WithWlanSelector({ setActive, children }: WlanSelectorProperties) {
+export function WithWlanSelector(
+  { setActive, children }: WlanSelectorProperties,
+) {
   const [mounted, setMounted] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
 
@@ -175,8 +175,8 @@ export function WithWlanSelector({ setActive, children }: WlanSelectorProperties
   return (
     <AnimatedPopover
       animationDescription={{
-        openAnimationName: 'wlan-open',
-        closeAnimationName: 'wlan-close',
+        openAnimationName: "wlan-open",
+        closeAnimationName: "wlan-close",
       }}
       open={openPreview}
       trigger="click"

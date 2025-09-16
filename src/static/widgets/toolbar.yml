@@ -1,4 +1,4 @@
-id: '@seelen/fancy-toolbar'
+id: "@seelen/fancy-toolbar"
 icon: BiSolidDockTop
 metadata:
   displayName:
@@ -30,7 +30,7 @@ metadata:
     ms: Bar alat mewah
     mt: Toolbar tal-Fancy
     nl: Fancy werkbalk
-    'no': Fancy verktøylinje
+    "no": Fancy verktøylinje
     uz: Fashion asboblar paneli
     pl: Fantazyjny pasek narzędzi
     pt: Barra de ferramentas sofisticada

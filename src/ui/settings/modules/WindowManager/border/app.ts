@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Border } from '@seelen-ui/lib/types';
+import { createSlice } from "@reduxjs/toolkit";
+import { Border } from "@seelen-ui/lib/types";
 
-import { reducersFor, selectorsFor } from '../../shared/utils/app';
+import { reducersFor, selectorsFor } from "../../shared/utils/app";
 
 const initialState: Border = {
   enabled: false,
@@ -10,7 +10,7 @@ const initialState: Border = {
 };
 
 export const BorderSlice = createSlice({
-  name: 'windowManager/border',
+  name: "windowManager/border",
   initialState,
   reducers: reducersFor(initialState),
   selectors: selectorsFor(initialState),

@@ -1,14 +1,14 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { AppNotification } from '@seelen-ui/lib/types';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { AppNotification } from "@seelen-ui/lib/types";
+import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { Notification } from './Notification';
+import { Notification } from "./Notification";
 
 export function Notifications() {
   const notifications = useSelector(Selectors.notifications);
@@ -17,16 +17,19 @@ export function Notifications() {
   const { t } = useTranslation();
 
   return (
-    <BackgroundByLayersV2 className="notifications" onContextMenu={(e) => e.stopPropagation()}>
+    <BackgroundByLayersV2
+      className="notifications"
+      onContextMenu={(e) => e.stopPropagation()}
+    >
       <div className="notifications-header">
-        <span>{t('notifications.title')}</span>
+        <span>{t("notifications.title")}</span>
         <button
           className="notifications-clear-button"
           onClick={() => {
             invoke(SeelenCommand.NotificationsCloseAll).catch(console.error);
           }}
         >
-          {t('notifications.clear')}
+          {t("notifications.clear")}
         </button>
       </div>
 
@@ -44,7 +47,7 @@ export function Notifications() {
             animate={{ opacity: 1, height: 200 }}
             transition={{ duration: 0.2, delay: 0.4 }}
           >
-            <p>{t('notifications.empty')}</p>
+            <p>{t("notifications.empty")}</p>
           </motion.div>
         )}
       </div>
@@ -52,12 +55,14 @@ export function Notifications() {
         <button
           className="notifications-settings-button"
           onClick={() => {
-            invoke(SeelenCommand.OpenFile, { path: 'ms-settings:notifications' }).catch(
+            invoke(SeelenCommand.OpenFile, {
+              path: "ms-settings:notifications",
+            }).catch(
               console.error,
             );
           }}
         >
-          {t('notifications.settings')}
+          {t("notifications.settings")}
         </button>
       </div>
     </BackgroundByLayersV2>

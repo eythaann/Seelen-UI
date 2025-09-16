@@ -1,4 +1,4 @@
-id: '@default/date'
+id: "@default/date"
 metadata:
   displayName:
     en: Date
@@ -28,7 +28,7 @@ metadata:
     sw: Tarehe
     lb: Datum un
     pl: Data
-    'no': Dato
+    "no": Dato
     pt: Data
     ms: Tarikh
     sk: Dátum
@@ -72,7 +72,7 @@ metadata:
     si: දිනය
     lo: ວັນທີ
 icon: TbCalendar
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: date
   template: return date

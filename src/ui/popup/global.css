@@ -28,7 +28,7 @@ body {
     button {
       app-region: no-drag;
     }
-    
+
     .header-content {
       display: flex;
       flex-direction: column;

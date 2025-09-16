@@ -7,7 +7,8 @@
 
   .content {
     height: 100%;
-    background: linear-gradient(217deg, var(--color-red-100), rgba(255, 0, 0, 0) 70%),
+    background:
+      linear-gradient(217deg, var(--color-red-100), rgba(255, 0, 0, 0) 70%),
       linear-gradient(127deg, var(--color-blue-100), rgba(0, 0, 255, 0) 70%),
       linear-gradient(336deg, var(--color-cyan-100), rgba(0, 255, 0, 0) 70%);
     padding: 10px;

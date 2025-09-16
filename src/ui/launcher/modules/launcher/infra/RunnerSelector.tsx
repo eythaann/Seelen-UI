@@ -1,6 +1,6 @@
-import { Select, Tooltip } from 'antd';
-import { forwardRef, RefObject } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Select, Tooltip } from "antd";
+import { forwardRef, RefObject } from "react";
+import { useTranslation } from "react-i18next";
 
 interface RunnerSelectorProps {
   selectedRunner: number;
@@ -24,11 +24,11 @@ export const RunnerSelector = forwardRef((props: RunnerSelectorProps, ref) => {
         onChange={setSelectedRunner}
         options={runners.map((runner, idx) => ({
           key: runner.id,
-          label: runner.label.startsWith('t:') ? t(runner.label.replace('t:', '')) : runner.label,
+          label: runner.label.startsWith("t:") ? t(runner.label.replace("t:", "")) : runner.label,
           value: idx,
         }))}
         onKeyDown={(e) => {
-          if (e.shiftKey && e.key === 'Tab') {
+          if (e.shiftKey && e.key === "Tab") {
             helpRef.current?.focus();
             e.preventDefault();
           }

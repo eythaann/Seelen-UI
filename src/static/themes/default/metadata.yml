@@ -1,4 +1,4 @@
-id: '@default/theme'
+id: "@default/theme"
 metadata:
   displayName:
     en: Default
@@ -27,7 +27,7 @@ metadata:
     is: Sjálfgefið
     nl: Standaard
     mt: Default
-    'no': Misligholde
+    "no": Misligholde
     pl: Domyślne
     lb: Asofbild
     uz: Bajarilish
@@ -98,7 +98,7 @@ metadata:
     hr: Zadana tema Seelen
     sw: Mada ya Seelen Default
     mt: Tema Seelen Default
-    'no': Standard Seelen -tema
+    "no": Standard Seelen -tema
     lb: Standardvires Themen
     pl: Domyślny motyw Seelen
     pt: Tema padrão da Seelen

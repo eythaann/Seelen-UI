@@ -1,7 +1,7 @@
-import { Action, Slice } from '@reduxjs/toolkit';
-import { TFunction } from 'i18next';
+import { Action, Slice } from "@reduxjs/toolkit";
+import { TFunction } from "i18next";
 
-import { HexColor, ReducersFor, SelectorsFor } from './domain';
+import { HexColor, ReducersFor, SelectorsFor } from "./domain";
 
 type Args = undefined | string | { [x: string]: boolean | null | undefined };
 export const cx = (...args: Args[]): string => {
@@ -11,20 +11,22 @@ export const cx = (...args: Args[]): string => {
         return;
       }
 
-      if (typeof arg === 'string') {
+      if (typeof arg === "string") {
         return arg;
       }
 
       return Object.keys(arg)
-        .map((key) => (arg[key] ? key : ''))
-        .join(' ');
+        .map((key) => (arg[key] ? key : ""))
+        .join(" ");
     })
-    .join(' ');
+    .join(" ");
 };
 
 export const matcher = (slice: Slice) => (action: Action) => action.type.startsWith(slice.name);
 
-export const selectorsFor = <T extends anyObject>(state: T): SelectorsFor<T> => {
+export const selectorsFor = <T extends anyObject>(
+  state: T,
+): SelectorsFor<T> => {
   const selectors = {} as SelectorsFor<T>;
   for (const key in state) {
     selectors[key] = (state: T) => state[key];
@@ -54,21 +56,25 @@ export const defaultOnNull = <T>(value: T | null | undefined, onNull: T): T => {
 };
 
 export const validateHexColor = (str: string): HexColor | null => {
-  if (!str.startsWith('#')) {
+  if (!str.startsWith("#")) {
     return null;
   }
   return str as HexColor;
 };
 
-export const OptionsFromEnum = (t: TFunction, obj: anyObject, translationPrefix: string) => {
+export const OptionsFromEnum = (
+  t: TFunction,
+  obj: anyObject,
+  translationPrefix: string,
+) => {
   return Object.values(obj).map((value) => ({
-    label: t(translationPrefix + '.' + toSnakeCase(value)),
+    label: t(translationPrefix + "." + toSnakeCase(value)),
     value,
   }));
 };
 
 function toSnakeCase(text: string) {
-  let snake = '';
+  let snake = "";
   for (let i = 0; i < text.length; i++) {
     const char = text[i]!;
     if (char === char.toLowerCase() && !char.match(/[0-9]/)) {

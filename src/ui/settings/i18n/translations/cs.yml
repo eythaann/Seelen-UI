@@ -47,7 +47,7 @@ apps_configurations:
   export: Exportovat
   export_full: Export nastavení podle aplikace
   extra_info: >-
-    SEELEN UI používá pouze jeden identifikátor na aplikaci (první nalezený), 
+    SEELEN UI používá pouze jeden identifikátor na aplikaci (první nalezený),
     takže pořadí v tom, jak jsou specifikovány, je důležité, nejnovější přidaná
     bude upřednostňována, protože tabulka je ve výchozím nastavení tříděna od
     nejnovější po nejstarší.

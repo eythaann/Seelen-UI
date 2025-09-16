@@ -1,5 +1,5 @@
-id: '@default/wm-grid'
-target: '@seelen/window-manager'
+id: "@default/wm-grid"
+target: "@seelen/window-manager"
 metadata:
   displayName:
     en: Grid
@@ -35,7 +35,7 @@ metadata:
     sk: Sieť
     mt: Grilja
     fi: Ruutu
-    'no': Rutenett
+    "no": Rutenett
     sv: Rutnät
     uz: Panjara
     tr: Izgara
@@ -107,7 +107,7 @@ metadata:
     ms: Susun atur grid, berguna untuk monitor besar.
     fi: Ruudukkoasettelu, hyödyllinen suurille näytöille.
     sv: Grid Layout, användbart för stora bildskärmar.
-    'no': Nettoppsett, nyttig for store skjermer.
+    "no": Nettoppsett, nyttig for store skjermer.
     uz: Katta monitorlar uchun foydali bo'lgan panjara.
     tr: Izgara Düzeni, büyük monitörler için kullanışlıdır.
     vi: Bố cục lưới, hữu ích cho màn hình lớn.
@@ -123,7 +123,7 @@ metadata:
     tg: Тарҳбандии Grid, барои мониторҳои калон муфид аст.
     sr: Грид изглед, користан за велике мониторе.
     ka: ქსელის განლაგება, სასარგებლოა დიდი მონიტორებისთვის.
-    hy: 'Gr անցի դասավորություն, օգտակար մեծ մոնիտորների համար:'
+    hy: "Gr անցի դասավորություն, օգտակար մեծ մոնիտորների համար:"
     ur: گرڈ لے آؤٹ ، بڑے مانیٹر کے لئے مفید ہے۔
     he: פריסת רשת, שימושית למסכים גדולים.
     hi: ग्रिड लेआउट, बड़े मॉनिटर के लिए उपयोगी।

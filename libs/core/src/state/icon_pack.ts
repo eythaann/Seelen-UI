@@ -4,13 +4,13 @@ import type {
   IconPack as IIconPack,
   SeelenCommandGetIconArgs,
   UniqueIconPackEntry,
-} from '@seelen-ui/types';
-import { List } from '../utils/List.ts';
-import { newFromInvoke, newOnEvent } from '../utils/State.ts';
-import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
-import { Settings } from './settings/mod.ts';
-import type { UnlistenFn } from '@tauri-apps/api/event';
-import { convertFileSrc } from '@tauri-apps/api/core';
+} from "@seelen-ui/types";
+import { List } from "../utils/List.ts";
+import { newFromInvoke, newOnEvent } from "../utils/State.ts";
+import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from "../handlers/mod.ts";
+import { Settings } from "./settings/mod.ts";
+import type { UnlistenFn } from "@tauri-apps/api/event";
+import { convertFileSrc } from "@tauri-apps/api/core";
 
 export class IconPackList extends List<IIconPack> {
   static getAsync(): Promise<IconPackList> {
@@ -55,11 +55,11 @@ export class IconPackManager {
       }
 
       for (const entry of pack.entries) {
-        if (entry.type === 'unique') {
+        if (entry.type === "unique") {
           entry.path = entry.path?.toLowerCase() || null;
         }
 
-        if (entry.type === 'shared') {
+        if (entry.type === "shared") {
           entry.extension = entry.extension.toLowerCase();
         }
 
@@ -182,25 +182,27 @@ export class IconPackManager {
    * });
    */
   public getIconPath(args: SeelenCommandGetIconArgs): IIcon | null {
-    const { path, umid, __seen = new Set<string>() } = args as SeelenCommandGetIconArgs & { __seen?: Set<string> };
+    const { path, umid, __seen = new Set<string>() } = args as
+      & SeelenCommandGetIconArgs
+      & { __seen?: Set<string> };
     // If neither path nor UMID is provided, return null
     if (!path && !umid) {
       return null;
     }
 
     const lowerPath = path?.toLowerCase();
-    const extension = lowerPath?.split('.').pop();
+    const extension = lowerPath?.split(".").pop();
 
     for (const pack of this.activeIconPacks) {
       let entry: UniqueIconPackEntry | undefined;
 
       if (umid) {
-        entry = pack.entries.find((e) => e.type === 'unique' && !!e.umid && e.umid === umid) as UniqueIconPackEntry;
+        entry = pack.entries.find((e) => e.type === "unique" && !!e.umid && e.umid === umid) as UniqueIconPackEntry;
       }
 
       if (!entry && lowerPath) {
         entry = pack.entries.find((e) => {
-          if (e.type !== 'unique' || !e.path) {
+          if (e.type !== "unique" || !e.path) {
             return false;
           }
 
@@ -209,8 +211,8 @@ export class IconPackManager {
           }
 
           // only search for filename in case of executable files
-          if (extension === 'exe') {
-            const filename = lowerPath.split('\\').pop();
+          if (extension === "exe") {
+            const filename = lowerPath.split("\\").pop();
             if (filename && e.path.endsWith(filename)) {
               return true;
             }
@@ -226,7 +228,9 @@ export class IconPackManager {
             return null;
           }
           __seen.add(entry.redirect);
-          return this.getIconPath({ path: entry.redirect, __seen } as SeelenCommandGetIconArgs);
+          return this.getIconPath(
+            { path: entry.redirect, __seen } as SeelenCommandGetIconArgs,
+          );
         }
 
         if (entry.icon) {
@@ -242,7 +246,7 @@ export class IconPackManager {
 
     for (const pack of this.activeIconPacks) {
       const icon = pack.entries.find((e) => {
-        return e.type === 'shared' && e.extension === extension;
+        return e.type === "shared" && e.extension === extension;
       });
 
       if (icon) {
@@ -287,7 +291,7 @@ export class IconPackManager {
    */
   public getCustomIconPath(name: string): IIcon | null {
     for (const pack of this.activeIconPacks) {
-      const entry = pack.entries.find((e) => e.type === 'custom' && e.key === name);
+      const entry = pack.entries.find((e) => e.type === "custom" && e.key === name);
       if (entry) {
         return entry.icon;
       }
@@ -317,7 +321,9 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public static requestIconExtraction(obj: SeelenCommandGetIconArgs): Promise<void> {
+  public static requestIconExtraction(
+    obj: SeelenCommandGetIconArgs,
+  ): Promise<void> {
     return invoke(SeelenCommand.GetIcon, obj);
   }
 

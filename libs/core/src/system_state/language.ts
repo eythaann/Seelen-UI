@@ -1,6 +1,6 @@
-import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
-import { List } from '../utils/List.ts';
-import { newFromInvoke, newOnEvent } from '../utils/State.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../handlers/mod.ts";
+import { List } from "../utils/List.ts";
+import { newFromInvoke, newOnEvent } from "../utils/State.ts";
 
 export interface KeyboardLayout {
   id: string;

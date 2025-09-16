@@ -1,13 +1,13 @@
-import { BluetoothDevices } from '@seelen-ui/lib';
-import { BluetoothDevice, BluetoothDevicePairShowPinRequest } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { cx } from '@shared/styles';
-import { UnlistenFn } from '@tauri-apps/api/event';
-import { Button, Input, Tooltip } from 'antd';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { BluetoothDevices } from "@seelen-ui/lib";
+import { BluetoothDevice, BluetoothDevicePairShowPinRequest } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { cx } from "@shared/styles";
+import { UnlistenFn } from "@tauri-apps/api/event";
+import { Button, Input, Tooltip } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { getIconForBTDevice, getMinorAsString } from '../application';
+import { getIconForBTDevice, getMinorAsString } from "../application";
 
 export function BluetoothSelectorEntry(props: {
   device: BluetoothDevice;
@@ -18,7 +18,7 @@ export function BluetoothSelectorEntry(props: {
 
   let [loading, setLoading] = useState(false);
   let [showFields, setShowFields] = useState(false);
-  let [passphrase, setPassphrase] = useState('');
+  let [passphrase, setPassphrase] = useState("");
   let [showErrors, setShowErrors] = useState(false);
   let [confirmationPhase, setConfirmationPhase] = useState(false);
   let [unsubscribtion, setUnsubscribtion] = useState<UnlistenFn | null>(null);
@@ -28,7 +28,7 @@ export function BluetoothSelectorEntry(props: {
   useEffect(() => {
     setShowFields(selected && confirmationPhase);
     setShowErrors(false);
-    setPassphrase('');
+    setPassphrase("");
     setLoading(false);
     if (unsubscribtion !== null) {
       unsubscribtion();
@@ -97,25 +97,26 @@ export function BluetoothSelectorEntry(props: {
   return (
     <div
       key={device.id}
-      className={cx('bluetooth-entry', {
-        'bluetooth-entry-selected': selected,
+      className={cx("bluetooth-entry", {
+        "bluetooth-entry-selected": selected,
       })}
       onClick={onClick}
     >
       <div className="bluetooth-entry-info">
-        <Icon iconName={device.connected ? 'TbBluetoothConnected' : 'TbBluetooth'} size={20} />
+        <Icon
+          iconName={device.connected ? "TbBluetoothConnected" : "TbBluetooth"}
+          size={20}
+        />
         <span className="bluetooth-entry-info-label">{device.name}</span>
         <Tooltip
-          title={
-            device.appearance
-              ? `${device.appearance.category} - ${device.appearance.subcategory}`
-              : `${device.majorClass} - ${getMinorAsString(device.minorClass)}`
-          }
+          title={device.appearance
+            ? `${device.appearance.category} - ${device.appearance.subcategory}`
+            : `${device.majorClass} - ${getMinorAsString(device.minorClass)}`}
         >
           <Icon iconName={getIconForBTDevice(device)} size={20} />
         </Tooltip>
         {device.isLowEnergy && (
-          <Tooltip title={t('bluetooth.lowenergy')}>
+          <Tooltip title={t("bluetooth.lowenergy")}>
             <Icon iconName="MdOutlineEnergySavingsLeaf" size={20} />
           </Tooltip>
         )}
@@ -125,9 +126,9 @@ export function BluetoothSelectorEntry(props: {
         <form className="bluetooth-entry-fields">
           <Input
             type="text"
-            placeholder={t('bluetooth.placeholder.passphrase')}
+            placeholder={t("bluetooth.placeholder.passphrase")}
             value={passphrase}
-            status={showErrors ? 'error' : undefined}
+            status={showErrors ? "error" : undefined}
             onChange={(e) => setPassphrase(e.currentTarget.value)}
             onPressEnter={() => onAction(true)}
             autoFocus={showFields}
@@ -138,12 +139,12 @@ export function BluetoothSelectorEntry(props: {
       {selected && (
         <div className="bluetooth-entry-actions">
           <Button
-            type={device.paired ? 'default' : 'primary'}
+            type={device.paired ? "default" : "primary"}
             onClick={() => onAction(true)}
             loading={loading}
             disabled={loading}
           >
-            {device.paired ? t('bluetooth.forget') : t('bluetooth.pair')}
+            {device.paired ? t("bluetooth.forget") : t("bluetooth.pair")}
           </Button>
           {confirmationPhase && (
             <Button
@@ -152,7 +153,7 @@ export function BluetoothSelectorEntry(props: {
               loading={loading}
               disabled={loading}
             >
-              {t('bluetooth.cancel')}
+              {t("bluetooth.cancel")}
             </Button>
           )}
         </div>

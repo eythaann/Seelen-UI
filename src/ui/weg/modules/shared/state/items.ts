@@ -1,9 +1,9 @@
-import { signal } from '@preact/signals';
-import { WegItems, WegItemType, Widget } from '@seelen-ui/lib';
-import { WegItem } from '@seelen-ui/lib/types';
-import { debounce } from 'lodash';
+import { signal } from "@preact/signals";
+import { WegItems, WegItemType, Widget } from "@seelen-ui/lib";
+import { WegItem } from "@seelen-ui/lib/types";
+import { debounce } from "lodash";
 
-import { SeparatorWegItem } from '../store/domain';
+import { SeparatorWegItem } from "../store/domain";
 
 interface DockState {
   isReorderDisabled: boolean;
@@ -11,12 +11,12 @@ interface DockState {
 }
 
 export const HardcodedSeparator1: SeparatorWegItem = {
-  id: 'hardcoded-separator-1',
+  id: "hardcoded-separator-1",
   type: WegItemType.Separator,
 };
 
 export const HardcodedSeparator2: SeparatorWegItem = {
-  id: 'hardcoded-separator-2',
+  id: "hardcoded-separator-2",
   type: WegItemType.Separator,
 };
 
@@ -47,9 +47,13 @@ function stateToStored(state: DockState): WegItems {
 }
 
 let monitorId = Widget.getCurrent().decoded.monitorId!;
-export const $dock_state = signal(getStateFromStored(await WegItems.getForMonitor(monitorId)));
+export const $dock_state = signal(
+  getStateFromStored(await WegItems.getForMonitor(monitorId)),
+);
 WegItems.onChange(async () => {
-  $dock_state.value = getStateFromStored(await WegItems.getForMonitor(monitorId));
+  $dock_state.value = getStateFromStored(
+    await WegItems.getForMonitor(monitorId),
+  );
 });
 
 $dock_state.subscribe(
@@ -88,7 +92,9 @@ export const $dock_state_actions = {
     };
   },
   addMediaModule() {
-    if (!$dock_state.value.items.some((current) => current.type === WegItemType.Media)) {
+    if (
+      !$dock_state.value.items.some((current) => current.type === WegItemType.Media)
+    ) {
       const newItems = [...$dock_state.value.items];
       newItems.push({
         id: crypto.randomUUID(),
@@ -98,7 +104,9 @@ export const $dock_state_actions = {
     }
   },
   addStartModule() {
-    if (!$dock_state.value.items.some((current) => current.type === WegItemType.StartMenu)) {
+    if (
+      !$dock_state.value.items.some((current) => current.type === WegItemType.StartMenu)
+    ) {
       const newItems = [...$dock_state.value.items];
       newItems.unshift({
         id: crypto.randomUUID(),

@@ -1,6 +1,6 @@
-import { cx } from '@shared/styles';
+import { cx } from "@shared/styles";
 
-import { $focused_app, $settings } from '../../../shared/state/mod';
+import { $focused_app, $settings } from "../../../shared/state/mod";
 // import { ReservedContainer } from './reserved';
 
 interface Props {
@@ -16,9 +16,9 @@ export function Leaf({ hwnd, growFactor }: Props) {
       style={{
         flexGrow: growFactor,
       }}
-      className={cx('wm-container', 'wm-leaf', {
-        'wm-leaf-focused': isFocused,
-        'wm-leaf-with-borders': $settings.value.border.enabled,
+      className={cx("wm-container", "wm-leaf", {
+        "wm-leaf-focused": isFocused,
+        "wm-leaf-with-borders": $settings.value.border.enabled,
       })}
     >
       {/* {!!reservation && isFocused && <ReservedContainer reservation={reservation} />} */}

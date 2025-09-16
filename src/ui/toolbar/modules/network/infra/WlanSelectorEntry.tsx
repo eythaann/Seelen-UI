@@ -1,17 +1,17 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { WlanBssEntry } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { IconName } from '@shared/components/Icon/icons';
-import { cx } from '@shared/styles';
-import { Button, Input, Tooltip } from 'antd';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { WlanBssEntry } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { IconName } from "@shared/components/Icon/icons";
+import { cx } from "@shared/styles";
+import { Button, Input, Tooltip } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const getTextFrequencies = (frequencies: number[]) => {
   const FREQUENCY_BANDS = [
-    { name: '2.4G', min: 2_400_000, max: 2_484_000 },
-    { name: '5G', min: 5_000_000, max: 5_850_000 },
-    { name: '6G', min: 5_925_000, max: 7_125_000 },
+    { name: "2.4G", min: 2_400_000, max: 2_484_000 },
+    { name: "5G", min: 5_000_000, max: 5_850_000 },
+    { name: "6G", min: 5_925_000, max: 7_125_000 },
   ];
 
   const detectedBands = new Set<string>();
@@ -39,15 +39,15 @@ export function WlanSelectorEntry(props: {
   let [showFields, setShowFields] = useState(false);
   let [showErrors, setShowErrors] = useState(false);
 
-  let [ssid, setSsid] = useState(entry.ssid || '');
-  let [password, setPassword] = useState('');
+  let [ssid, setSsid] = useState(entry.ssid || "");
+  let [password, setPassword] = useState("");
 
   const { t } = useTranslation();
 
   useEffect(() => {
     setShowFields(selected && !entry.known && (!entry.ssid || entry.secured));
-    setSsid(entry.ssid || '');
-    setPassword('');
+    setSsid(entry.ssid || "");
+    setPassword("");
     setShowErrors(false);
   }, [selected]);
 
@@ -67,15 +67,19 @@ export function WlanSelectorEntry(props: {
     setLoading(true);
 
     if (entry.connected) {
-      invoke(SeelenCommand.WlanDisconnect).then(() => setLoading(false), onrejected);
+      invoke(SeelenCommand.WlanDisconnect).then(
+        () => setLoading(false),
+        onrejected,
+      );
       return;
     }
 
     if (showFields) {
-      invoke(SeelenCommand.WlanConnect, { ssid, password, hidden: !entry.ssid }).then(
-        onfulfilled,
-        onrejected,
-      );
+      invoke(SeelenCommand.WlanConnect, { ssid, password, hidden: !entry.ssid })
+        .then(
+          onfulfilled,
+          onrejected,
+        );
       return;
     }
 
@@ -97,13 +101,13 @@ export function WlanSelectorEntry(props: {
       .catch(onrejected);
   }
 
-  let signalIcon: IconName = 'GrWifiNone';
+  let signalIcon: IconName = "GrWifiNone";
   if (entry.signal > 75) {
-    signalIcon = 'GrWifi';
+    signalIcon = "GrWifi";
   } else if (entry.signal > 50) {
-    signalIcon = 'GrWifiMedium';
+    signalIcon = "GrWifiMedium";
   } else if (entry.signal > 25) {
-    signalIcon = 'GrWifiLow';
+    signalIcon = "GrWifiLow";
   }
 
   const frequencies = getTextFrequencies(group.map((e) => e.channelFrequency));
@@ -111,19 +115,19 @@ export function WlanSelectorEntry(props: {
   return (
     <div
       key={entry.bssid}
-      className={cx('wlan-entry', {
-        'wlan-entry-selected': selected,
+      className={cx("wlan-entry", {
+        "wlan-entry-selected": selected,
       })}
       onClick={onClick}
     >
       <div className="wlan-entry-info">
         <Icon iconName={signalIcon} size={20} />
         <span className="wlan-entry-info-ssid">
-          {entry.ssid || `${t('network.hidden')} (${group.length})`}
+          {entry.ssid || `${t("network.hidden")} (${group.length})`}
         </span>
-        {!isHiddenGroup && <div className="wlan-entry-info-channel">{frequencies.join('/')}</div>}
+        {!isHiddenGroup && <div className="wlan-entry-info-channel">{frequencies.join("/")}</div>}
         {!isHiddenGroup && entry.secured && (
-          <Tooltip title={t('network.secured')}>
+          <Tooltip title={t("network.secured")}>
             <Icon iconName="PiPasswordFill" />
           </Tooltip>
         )}
@@ -135,7 +139,7 @@ export function WlanSelectorEntry(props: {
               type="text"
               placeholder="SSID"
               value={ssid}
-              status={showErrors ? 'error' : undefined}
+              status={showErrors ? "error" : undefined}
               onChange={(e) => setSsid(e.currentTarget.value)}
               autoFocus
               onPressEnter={(e) => (e.currentTarget.nextSibling as HTMLInputElement)?.focus()}
@@ -143,9 +147,9 @@ export function WlanSelectorEntry(props: {
           )}
           <Input
             type="password"
-            placeholder={t('network.placeholder.password')}
+            placeholder={t("network.placeholder.password")}
             value={password}
-            status={showErrors ? 'error' : undefined}
+            status={showErrors ? "error" : undefined}
             onChange={(e) => setPassword(e.currentTarget.value)}
             onPressEnter={onConnection}
             autoFocus={!!entry.ssid}
@@ -155,12 +159,12 @@ export function WlanSelectorEntry(props: {
       {selected && (
         <div className="wlan-entry-actions">
           <Button
-            type={entry.connected ? 'default' : 'primary'}
+            type={entry.connected ? "default" : "primary"}
             onClick={onConnection}
             loading={loading}
             disabled={loading}
           >
-            {entry.connected ? t('network.disconnect') : t('network.connect')}
+            {entry.connected ? t("network.disconnect") : t("network.connect")}
           </Button>
         </div>
       )}

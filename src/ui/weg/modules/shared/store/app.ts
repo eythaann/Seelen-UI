@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { WegItemType } from '@seelen-ui/lib';
-import { StateBuilder } from '@shared/StateBuilder';
+import { createSlice } from "@reduxjs/toolkit";
+import { WegItemType } from "@seelen-ui/lib";
+import { StateBuilder } from "@shared/StateBuilder";
 
-import { PinnedWegItem, RootState, SwItem, TemporalWegItem } from './domain';
+import { PinnedWegItem, RootState, SwItem, TemporalWegItem } from "./domain";
 
 const initialState: RootState = {
   devTools: false,
@@ -12,7 +12,7 @@ const initialState: RootState = {
 };
 
 export const RootSlice = createSlice({
-  name: 'root',
+  name: "root",
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),

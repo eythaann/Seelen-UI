@@ -1,10 +1,10 @@
-import { AppIdentifierType, MatchingStrategy } from '@seelen-ui/lib';
-import { AppConfig } from '@seelen-ui/lib/types';
+import { AppIdentifierType, MatchingStrategy } from "@seelen-ui/lib";
+import { AppConfig } from "@seelen-ui/lib/types";
 
 export const defaultAppConfig: AppConfig = {
-  name: 'New App',
+  name: "New App",
   identifier: {
-    id: 'new-app.exe',
+    id: "new-app.exe",
     matchingStrategy: MatchingStrategy.Equals,
     kind: AppIdentifierType.Exe,
     negation: false,

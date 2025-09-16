@@ -1,20 +1,20 @@
-import { effect, useSignalEffect } from '@preact/signals';
-import { WmNodeKind } from '@seelen-ui/lib';
-import { cx } from '@shared/styles';
+import { effect, useSignalEffect } from "@preact/signals";
+import { WmNodeKind } from "@seelen-ui/lib";
+import { cx } from "@shared/styles";
 
-import { requestPositioningOfLeaves } from '../application';
+import { requestPositioningOfLeaves } from "../application";
 
-import { Node } from '../domain';
+import { Node } from "../domain";
 
-import { $force_repositioning, $layout, $overlay_visible, $settings } from '../../shared/state/mod';
-import { NodeUtils } from '../../shared/utils';
-import { Leaf } from './containers/leaf';
-import { Stack } from './containers/stack';
+import { $force_repositioning, $layout, $overlay_visible, $settings } from "../../shared/state/mod";
+import { NodeUtils } from "../../shared/utils";
+import { Leaf } from "./containers/leaf";
+import { Stack } from "./containers/stack";
 
-import './index.css';
+import "./index.css";
 
 effect(() => {
-  document.body.style.opacity = $overlay_visible.value ? '1' : '0';
+  document.body.style.opacity = $overlay_visible.value ? "1" : "0";
 });
 
 export function Layout() {
@@ -45,17 +45,17 @@ export function Container({ node }: { node: Node }) {
     return <Leaf hwnd={node.active} growFactor={node.growFactor} />;
   }
 
-  if (node.type === WmNodeKind.Horizontal || node.type === WmNodeKind.Vertical) {
+  if (
+    node.type === WmNodeKind.Horizontal || node.type === WmNodeKind.Vertical
+  ) {
     return (
       <div
         style={{
           flexGrow: node.growFactor,
         }}
-        className={cx('wm-container', `wm-${node.type.toLowerCase()}`)}
+        className={cx("wm-container", `wm-${node.type.toLowerCase()}`)}
       >
-        {node.children.map((child, idx) => (
-          <Container key={idx} node={child} />
-        ))}
+        {node.children.map((child, idx) => <Container key={idx} node={child} />)}
       </div>
     );
   }

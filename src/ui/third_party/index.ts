@@ -1,5 +1,5 @@
-import { disableAnimationsOnPerformanceMode } from '@shared/performance';
-import { removeDefaultWebviewActions } from '@shared/setup';
+import { disableAnimationsOnPerformanceMode } from "@shared/performance";
+import { removeDefaultWebviewActions } from "@shared/setup";
 
 removeDefaultWebviewActions();
 disableAnimationsOnPerformanceMode();
@@ -11,14 +11,14 @@ if (html) {
 }
 
 if (css) {
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.textContent = css;
   document.head.appendChild(style);
 }
 
 if (js) {
-  const script = document.createElement('script');
-  script.type = 'module';
+  const script = document.createElement("script");
+  script.type = "module";
   script.textContent = js;
   document.head.appendChild(script);
 }

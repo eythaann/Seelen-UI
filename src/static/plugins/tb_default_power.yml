@@ -1,4 +1,4 @@
-id: '@default/power'
+id: "@default/power"
 metadata:
   displayName:
     en: Power & Battery
@@ -35,7 +35,7 @@ metadata:
     mt: Enerġija u batterija
     sv: Strömförsörjning och batteri
     fi: Virta ja akku
-    'no': Strøm og batteri
+    "no": Strøm og batteri
     uz: Quvvat va batareya
     tr: Güç ve Akü
     el: Ισχύς & μπαταρία
@@ -72,7 +72,7 @@ metadata:
     lo: ພະລັງງານແລະຫມໍ້ໄຟ
     km: ថាមពលនិងថ្ម
 icon: PiBatteryMediumFill
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: power
   tooltip: |-

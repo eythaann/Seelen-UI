@@ -1,4 +1,4 @@
-id: '@eythaann/bubbles'
+id: "@eythaann/bubbles"
 metadata:
   displayName:
     en: Bubbles
@@ -35,7 +35,7 @@ metadata:
     mt: Bżieżaq
     fi: Bubbles
     sv: Bubblor
-    'no': Bobler
+    "no": Bobler
     uz: Pufakcha
     el: Φυσαλίδες
     bg: Балончета
@@ -101,7 +101,7 @@ metadata:
     uz: Pufakchalar pop.
     fi: Bubbles sanoo pop.
     sv: Bubblorna säger "pop".
-    'no': Bubbles sier pop.
+    "no": Bubbles sier pop.
     pl: Bąbelki mówią pop.
     mt: Bubbles jgħid pop.
     tr: Bubbles pop diyor.
@@ -122,7 +122,7 @@ metadata:
     sr: Бубблес каже Поп.
     tg: Футболҳо мегӯяд, ки поп.
     ka: ბუშტები ამბობს პოპ.
-    hy: 'Փուչիկները ասում են փոփը:'
+    hy: "Փուչիկները ասում են փոփը:"
     he: בועות אומר פופ.
     ur: بلبلوں کا کہنا ہے کہ پاپ۔
     fa: حباب می گوید پاپ.
@@ -145,7 +145,7 @@ metadata:
   tags:
     - toolbar
 styles:
-  '@seelen/fancy-toolbar': |
+  "@seelen/fancy-toolbar": |
     .ft-bar-bg-layer-1 {
       display: none;
     }

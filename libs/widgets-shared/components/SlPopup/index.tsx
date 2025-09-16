@@ -1,26 +1,21 @@
-import { useSignal, useSignalEffect } from '@preact/signals';
-import { useDebounce } from '@shared/hooks';
-import { $is_this_webview_focused } from '@shared/signals';
-import { cx } from '@shared/styles';
-import { cloneElement, ComponentChild, VNode } from 'preact';
-import { ForwardedRef, forwardRef, JSX } from 'preact/compat';
-import {
-  createPortal,
-  CSSProperties,
-  HTMLAttributes,
-  useCallback,
-  useEffect,
-  useRef,
-} from 'preact/compat';
+import { useSignal, useSignalEffect } from "@preact/signals";
+import { useDebounce } from "@shared/hooks";
+import { $is_this_webview_focused } from "@shared/signals";
+import { cx } from "@shared/styles";
+import { cloneElement, ComponentChild, VNode } from "preact";
+import { ForwardedRef, forwardRef, JSX } from "preact/compat";
+import { createPortal, CSSProperties, HTMLAttributes, useCallback, useEffect, useRef } from "preact/compat";
 
-import { LegacyCustomAnimationProps } from '../AnimatedWrappers/domain';
+import { LegacyCustomAnimationProps } from "../AnimatedWrappers/domain";
 
-import { mergeRefs } from '../mergeRefs';
-import { calculateElementPosition } from './positioning';
+import { mergeRefs } from "../mergeRefs";
+import { calculateElementPosition } from "./positioning";
 
-import './base.css';
+import "./base.css";
 
-type BasicElementProps = HTMLAttributes<HTMLElement> & { [x in `data-${string}`]: string };
+type BasicElementProps =
+  & HTMLAttributes<HTMLElement>
+  & { [x in `data-${string}`]: string };
 
 export interface SlPopupProps<TriggerProps extends BasicElementProps> extends BasicElementProps {
   debug?: boolean;
@@ -29,8 +24,8 @@ export interface SlPopupProps<TriggerProps extends BasicElementProps> extends Ba
   onOpenChange?: (open: boolean) => void;
   content: ComponentChild;
   children: VNode<TriggerProps>;
-  placement?: 'bottom' | 'top' | 'left' | 'right';
-  trigger?: 'click' | 'hover' | 'manual';
+  placement?: "bottom" | "top" | "left" | "right";
+  trigger?: "click" | "hover" | "manual";
   mouseEnterDelay?: number;
 }
 
@@ -44,10 +39,10 @@ function _SlPopup<TProps extends BasicElementProps>(
     onOpenChange: onOpenChangeProp,
     content,
     children: trigger,
-    trigger: triggerType = 'click',
+    trigger: triggerType = "click",
     mouseEnterDelay = 0.4,
     animationDescription = {},
-    placement: preferredPosition = 'bottom',
+    placement: preferredPosition = "bottom",
     ...rest
   } = props;
   const { openAnimationName, closeAnimationName } = animationDescription;
@@ -62,7 +57,10 @@ function _SlPopup<TProps extends BasicElementProps>(
   const triggerRef = useRef<HTMLElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
 
-  const mouseDelayedAction = useDebounce((cb: () => void) => cb(), mouseEnterDelay * 1000);
+  const mouseDelayedAction = useDebounce(
+    (cb: () => void) => cb(),
+    mouseEnterDelay * 1000,
+  );
   const onOpenChange = useCallback(
     (open: boolean) => {
       if (!isExternallyHandled) {
@@ -89,16 +87,16 @@ function _SlPopup<TProps extends BasicElementProps>(
       const isTrigger = clickedElement.closest(
         `[data-sl-trigger-id="${unique_trigger_id.current}"]`,
       );
-      const isPopup = clickedElement.closest('.sl-popup');
+      const isPopup = clickedElement.closest(".sl-popup");
       if (!isTrigger && !isPopup && $is_open.value) {
         onOpenChange(false);
       }
     };
-    window.addEventListener('click', cb);
-    window.addEventListener('contextmenu', cb);
+    globalThis.addEventListener("click", cb);
+    globalThis.addEventListener("contextmenu", cb);
     return () => {
-      window.removeEventListener('click', cb);
-      window.removeEventListener('contextmenu', cb);
+      globalThis.removeEventListener("click", cb);
+      globalThis.removeEventListener("contextmenu", cb);
     };
   }, [onOpenChange]);
 
@@ -123,10 +121,13 @@ function _SlPopup<TProps extends BasicElementProps>(
 
   const updatePopupPosition = () => {
     if (debug) {
-      console.debug('updatePopupPosition');
+      console.debug("updatePopupPosition");
     }
 
-    if (!$was_open.value || !$is_open.value || !triggerRef.current || !popupRef.current) return;
+    if (
+      !$was_open.value || !$is_open.value || !triggerRef.current ||
+      !popupRef.current
+    ) return;
 
     const position = calculateElementPosition(
       triggerRef.current,
@@ -135,7 +136,7 @@ function _SlPopup<TProps extends BasicElementProps>(
     );
 
     if (debug) {
-      console.debug('position', position);
+      console.debug("position", position);
     }
 
     const newStyles = {
@@ -144,7 +145,10 @@ function _SlPopup<TProps extends BasicElementProps>(
     };
 
     // Only update if styles actually changed
-    if (JSON.stringify(newStyles) !== JSON.stringify($popup_position_styles.peek())) {
+    if (
+      JSON.stringify(newStyles) !==
+        JSON.stringify($popup_position_styles.peek())
+    ) {
       $popup_position_styles.value = newStyles;
     }
   };
@@ -152,7 +156,7 @@ function _SlPopup<TProps extends BasicElementProps>(
   useSignalEffect(updatePopupPosition);
 
   function onMouseEnter() {
-    if (triggerType === 'hover') {
+    if (triggerType === "hover") {
       if ($is_open.value) {
         mouseDelayedAction.cancel();
         return;
@@ -162,7 +166,7 @@ function _SlPopup<TProps extends BasicElementProps>(
   }
 
   function onMouseLeave() {
-    if (triggerType === 'hover') {
+    if (triggerType === "hover") {
       if (!$is_open.value) {
         mouseDelayedAction.cancel();
         return;
@@ -175,24 +179,24 @@ function _SlPopup<TProps extends BasicElementProps>(
   const triggerProps = {
     ...toForwardDown,
     ...trigger.props,
-    'data-sl-trigger-id': unique_trigger_id.current,
+    "data-sl-trigger-id": unique_trigger_id.current,
     onClick(e: JSX.TargetedMouseEvent<HTMLElement>) {
       trigger.props.onClick?.(e);
-      if (triggerType === 'click') {
+      if (triggerType === "click") {
         onOpenChange(!$is_open.value);
       }
       toForwardDown.onClick?.(e);
     },
     onMouseEnter(e: JSX.TargetedMouseEvent<HTMLElement>) {
       trigger.props.onMouseEnter?.(e);
-      if (triggerType === 'hover') {
+      if (triggerType === "hover") {
         onMouseEnter();
       }
       toForwardDown.onMouseEnter?.(e);
     },
     onMouseLeave(e: JSX.TargetedMouseEvent<HTMLElement>) {
       trigger.props.onMouseLeave?.(e);
-      if (triggerType === 'hover') {
+      if (triggerType === "hover") {
         onMouseLeave();
       }
       toForwardDown.onMouseLeave?.(e);
@@ -214,11 +218,13 @@ function _SlPopup<TProps extends BasicElementProps>(
               style={{
                 ...$popup_position_styles.value,
               }}
-              className={cx('sl-popup', {
-                'sl-popup-open': $is_open.value,
-                'sl-popup-closed': !$is_open.value,
-                [openAnimationName ?? '!?']: openAnimationName && $is_open.value,
-                [closeAnimationName ?? '!?']: closeAnimationName && !$is_open.value,
+              className={cx("sl-popup", {
+                "sl-popup-open": $is_open.value,
+                "sl-popup-closed": !$is_open.value,
+                [openAnimationName ?? "!?"]: openAnimationName &&
+                  $is_open.value,
+                [closeAnimationName ?? "!?"]: closeAnimationName &&
+                  !$is_open.value,
               })}
             >
               {content}

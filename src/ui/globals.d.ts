@@ -1,18 +1,18 @@
-declare module 'real-react-dom/server' {
+declare module "real-react-dom/server" {
   export function renderToStaticMarkup(element: any): string;
 }
 
-declare module '*.module.css' {
+declare module "*.module.css" {
   const classnames: Record<string, string>;
   export default classnames;
 }
 
-declare module '*.module.scss' {
+declare module "*.module.scss" {
   const classnames: Record<string, string>;
   export default classnames;
 }
 
-declare module '*.yml' {
+declare module "*.yml" {
   export default string;
 }
 
@@ -29,5 +29,5 @@ interface Window {
     };
     invoke: any;
   };
-  __SLU_WIDGET: import('@seelen-ui/lib/types').Widget;
+  __SLU_WIDGET: import("@seelen-ui/lib/types").Widget;
 }

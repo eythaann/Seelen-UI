@@ -1,5 +1,5 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from '@seelen-ui/lib';
-import { PerformanceMode } from '@seelen-ui/lib/types';
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { PerformanceMode } from "@seelen-ui/lib/types";
 
 export async function disableAnimationsOnPerformanceMode() {
   let initial = await invoke(SeelenCommand.StateGetPerformanceMode);
@@ -10,8 +10,8 @@ export async function disableAnimationsOnPerformanceMode() {
 }
 
 function setDisableAnimations(mode: PerformanceMode) {
-  if (mode === 'Extreme') {
-    let style = document.createElement('style');
+  if (mode === "Extreme") {
+    let style = document.createElement("style");
     style.id = DISABLE_ANIMATIONS_ID;
     style.appendChild(document.createTextNode(DISABLE_ANIMATIONS_CSS));
     document.head.appendChild(style);
@@ -20,7 +20,7 @@ function setDisableAnimations(mode: PerformanceMode) {
   }
 }
 
-const DISABLE_ANIMATIONS_ID = 'force-disable-animations';
+const DISABLE_ANIMATIONS_ID = "force-disable-animations";
 const DISABLE_ANIMATIONS_CSS = `
 * {
   transition: none !important;

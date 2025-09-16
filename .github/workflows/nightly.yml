@@ -22,7 +22,8 @@ jobs:
   update-tag:
     needs: continuous-integration
     runs-on: ubuntu-latest
-
+    outputs:
+      nightly-version: ${{ steps.gen-version.outputs.result }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,40 +38,8 @@ jobs:
       - name: Confirm the tag was updated
         run: git ls-remote --tags origin
 
-  build-installers:
-    needs: continuous-integration
-    permissions:
-      contents: write
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: "windows-2025"
-            args: ""
-    outputs:
-      nightly-version: ${{ steps.change-version.outputs.result }}
-    runs-on: ${{ matrix.platform }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-
-      - name: Install Rust Nightly
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly-2024-06-25
-      - uses: Swatinem/rust-cache@v2
-
-      - name: Install frontend dependencies
-        run: npm clean-install
-
-      - name: Change version to nightly
-        id: change-version
+      - name: Generate Version
+        id: gen-version
         uses: actions/github-script@v7
         with:
           script: |
@@ -82,14 +51,43 @@ jobs:
             const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
             const nightlyVersion = `${currentVersion}+${timestamp}`;
 
-            packageJson.version = nightlyVersion;
-            fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
-
-            let cargoTomlContent = fs.readFileSync('Cargo.toml', 'utf-8');
-            cargoTomlContent = cargoTomlContent.replace(/^version\s*=\s*".*"/m, `version = "${nightlyVersion}"`);
-            fs.writeFileSync('Cargo.toml', cargoTomlContent);
-
             return nightlyVersion;
+
+  build-installers:
+    needs:
+      - update-tag
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "windows-2025"
+            args: ""
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install Rust Nightly
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2024-06-25
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install frontend dependencies
+        run: npm install
 
       - name: Install MSIX dependencies
         if: matrix.platform == 'windows-2025'
@@ -99,6 +97,10 @@ jobs:
           winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+
+      - name: Set Version
+        run: |
+          npm run versionish -- --version ${{ needs.update-tag.outputs.nightly-version }}
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
       - uses: tauri-apps/tauri-action@v0.5.16
@@ -127,7 +129,9 @@ jobs:
           files: target/release/bundle/msix/*
 
   remove-old-artifacts:
-    needs: build-installers
+    needs:
+      - update-tag
+      - build-installers
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -138,7 +142,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const tagName = 'nightly';
-            const nightlyVersion = ${{ needs.build-installers.outputs.nightly-version }};
+            const nightlyVersion = ${{ needs.update-tag.outputs.nightly-version }};
             console.info(`nightlyVersion: ${nightlyVersion}`);
 
             const release = await github.rest.repos.getReleaseByTag({

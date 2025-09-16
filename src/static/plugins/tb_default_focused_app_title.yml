@@ -1,4 +1,4 @@
-id: '@default/focused-app-title'
+id: "@default/focused-app-title"
 metadata:
   displayName:
     en: Focused App Title
@@ -36,7 +36,7 @@ metadata:
     ms: Tajuk aplikasi yang difokuskan
     uz: FOCKES sarlavhasi
     sv: Fokuserad app-titel
-    'no': Fokusert apptittel
+    "no": Fokusert apptittel
     tr: Odaklanmış Uygulama Başlığı
     el: Εστιασμένη εφαρμογή Τίτλος
     bg: Заглавие на фокусираното приложение
@@ -72,7 +72,7 @@ metadata:
     lo: ເອົາຫົວຂໍ້ app ທີ່ສຸມໃສ່
     km: ចំណងជើងកម្មវិធីផ្តោតអារម្មណ៍
 icon: MdCenterFocusWeak
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: generic
   template: return window.title

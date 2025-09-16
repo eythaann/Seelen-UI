@@ -1,11 +1,14 @@
-import { DragOverEvent, UniqueIdentifier } from '@dnd-kit/core';
+import { DragOverEvent, UniqueIdentifier } from "@dnd-kit/core";
 
 export interface DndContainer<T extends UniqueIdentifier> {
   id: T;
   items: T[];
 }
 
-function getContainerIdx(id: UniqueIdentifier, containers: DndContainer<UniqueIdentifier>[]) {
+function getContainerIdx(
+  id: UniqueIdentifier,
+  containers: DndContainer<UniqueIdentifier>[],
+) {
   return containers.findIndex((c) => c.id === id || c.items.includes(id));
 }
 
@@ -38,8 +41,14 @@ export function genericHandleDragOver<T extends UniqueIdentifier>(
   const newActiveContainerItems = activeContainer.items.filter((item) => item !== active.id);
 
   const newState = [...containers];
-  newState[activeContainerIdx] = { ...activeContainer, items: newActiveContainerItems };
-  newState[overContainerIdx] = { ...overContainer, items: newOverContainerItems };
+  newState[activeContainerIdx] = {
+    ...activeContainer,
+    items: newActiveContainerItems,
+  };
+  newState[overContainerIdx] = {
+    ...overContainer,
+    items: newOverContainerItems,
+  };
 
   onChange(newState);
 }

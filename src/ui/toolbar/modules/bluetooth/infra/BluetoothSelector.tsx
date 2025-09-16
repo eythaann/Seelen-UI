@@ -1,30 +1,33 @@
-import { BluetoothDevices, SeelenCommand } from '@seelen-ui/lib';
-import { BluetoothDevice } from '@seelen-ui/lib/types';
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { Icon } from '@shared/components/Icon';
-import { useWindowFocusChange } from '@shared/hooks';
-import { invoke } from '@tauri-apps/api/core';
-import { Tooltip } from 'antd';
-import { VNode } from 'preact';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { BluetoothDevices, SeelenCommand } from "@seelen-ui/lib";
+import { BluetoothDevice } from "@seelen-ui/lib/types";
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { Icon } from "@shared/components/Icon";
+import { useWindowFocusChange } from "@shared/hooks";
+import { invoke } from "@tauri-apps/api/core";
+import { Tooltip } from "antd";
+import { VNode } from "preact";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { BluetoothSelectorEntry } from './BluetoothSelectorEntry';
+import { BluetoothSelectorEntry } from "./BluetoothSelectorEntry";
 
 function BluetoothSelector({ open }: { open: boolean }) {
   const [selected, setSelected] = useState<string | null>(null);
 
-  const storeEntries: BluetoothDevice[] = useSelector(Selectors.bluetoothDevices);
+  const storeEntries: BluetoothDevice[] = useSelector(
+    Selectors.bluetoothDevices,
+  );
   const entries: BluetoothDevice[] = storeEntries.filter(
     (item) =>
       !storeEntries.find(
         (current) =>
-          current.name == item.name && current.id != item.id && !current.isLowEnergy,
+          current.name == item.name && current.id != item.id &&
+          !current.isLowEnergy,
       ),
   );
   const connectedDevices = entries.filter((item) => item.connected);
@@ -36,7 +39,8 @@ function BluetoothSelector({ open }: { open: boolean }) {
     (item) =>
       !store_discovered_entries.find(
         (current) =>
-          current.name == item.name && current.id != item.id && !current.isLowEnergy,
+          current.name == item.name && current.id != item.id &&
+          !current.isLowEnergy,
       ),
   );
 
@@ -49,10 +53,13 @@ function BluetoothSelector({ open }: { open: boolean }) {
   }, [open]);
 
   return (
-    <BackgroundByLayersV2 className="bluetooth" onContextMenu={(e) => e.stopPropagation()}>
+    <BackgroundByLayersV2
+      className="bluetooth"
+      onContextMenu={(e) => e.stopPropagation()}
+    >
       {connectedDevices.length > 0 && (
         <>
-          <div className="bluetooth-title">{t('bluetooth.connected')}</div>
+          <div className="bluetooth-title">{t("bluetooth.connected")}</div>
           <div className="bluetooth-entries">
             {connectedDevices.map((item) => {
               return (
@@ -70,7 +77,7 @@ function BluetoothSelector({ open }: { open: boolean }) {
 
       {disconnectedDevices.length > 0 && (
         <>
-          <div className="bluetooth-title">{t('bluetooth.paired')}</div>
+          <div className="bluetooth-title">{t("bluetooth.paired")}</div>
           <div className="bluetooth-entries">
             {disconnectedDevices.map((item) => {
               return (
@@ -87,36 +94,36 @@ function BluetoothSelector({ open }: { open: boolean }) {
       )}
 
       <div className="bluetooth-title">
-        <span>{t('bluetooth.available')}</span>
-        <Tooltip title={t('bluetooth.scanning')}>
+        <span>{t("bluetooth.available")}</span>
+        <Tooltip title={t("bluetooth.scanning")}>
           <button className="bluetooth-refresh">
             <Icon iconName="TbRefresh" size={12} />
           </button>
         </Tooltip>
       </div>
       <div className="bluetooth-entries">
-        {discovered_entries.length ? (
-          discovered_entries.map((item) => {
-            return (
-              <BluetoothSelectorEntry
-                key={item.name}
-                device={item}
-                selected={selected === item.id}
-                onClick={() => setSelected(item.id)}
-              />
-            );
-          })
-        ) : (
-          <div className="bluetooth-empty">{t('bluetooth.not_found')}</div>
-        )}
+        {discovered_entries.length
+          ? (
+            discovered_entries.map((item) => {
+              return (
+                <BluetoothSelectorEntry
+                  key={item.name}
+                  device={item}
+                  selected={selected === item.id}
+                  onClick={() => setSelected(item.id)}
+                />
+              );
+            })
+          )
+          : <div className="bluetooth-empty">{t("bluetooth.not_found")}</div>}
       </div>
 
       <div className="bluetooth-footer">
         <button
           className="bluetooth-footer-more-button"
-          onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:devices' })}
+          onClick={() => invoke(SeelenCommand.OpenFile, { path: "ms-settings:devices" })}
         >
-          {t('bluetooth.more')}
+          {t("bluetooth.more")}
         </button>
       </div>
     </BackgroundByLayersV2>
@@ -128,7 +135,9 @@ export interface BluetoothSelectorProperties {
   children: VNode;
 }
 
-export function WithBluetoothSelector({ setActive, children }: BluetoothSelectorProperties) {
+export function WithBluetoothSelector(
+  { setActive, children }: BluetoothSelectorProperties,
+) {
   const [mounted, setMounted] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
 
@@ -158,8 +167,8 @@ export function WithBluetoothSelector({ setActive, children }: BluetoothSelector
   return (
     <AnimatedPopover
       animationDescription={{
-        openAnimationName: 'bluetooth-open',
-        closeAnimationName: 'bluetooth-close',
+        openAnimationName: "bluetooth-open",
+        closeAnimationName: "bluetooth-close",
       }}
       open={openPreview}
       trigger="click"

@@ -1,5 +1,5 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
+import { SeelenCommand } from "@seelen-ui/lib";
+import { invoke } from "@tauri-apps/api/core";
 
 export class startup {
   static async enable(): Promise<void> {
@@ -11,6 +11,6 @@ export class startup {
   }
 
   static async isEnabled(): Promise<boolean> {
-    return await invoke<boolean>('get_auto_start_status');
+    return await invoke<boolean>("get_auto_start_status");
   }
 }

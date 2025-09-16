@@ -1,8 +1,8 @@
-import { computed } from '@preact/signals';
-import { SeelenWallWidgetId } from '@seelen-ui/lib';
-import { Wallpaper, WallpaperId } from '@seelen-ui/lib/types';
+import { computed } from "@preact/signals";
+import { SeelenWallWidgetId } from "@seelen-ui/lib";
+import { Wallpaper, WallpaperId } from "@seelen-ui/lib/types";
 
-import { $monitors, $settings, $wallpapers } from '../shared/state';
+import { $monitors, $settings, $wallpapers } from "../shared/state";
 
 export const $relativeMonitors = computed(() => {
   const lower = { x: 0, y: 0 };
@@ -34,9 +34,10 @@ export function $get_active_wallpapers(monitorId: string): Wallpaper[] {
   const active: Wallpaper[] = [];
 
   const monitorConfig = $settings.value.byMonitor[monitorId];
-  const bgsInMonitor = monitorConfig?.byWidget?.[SeelenWallWidgetId]?.backgroundsV2 as
-    | WallpaperId[]
-    | undefined;
+  const bgsInMonitor = monitorConfig?.byWidget?.[SeelenWallWidgetId]
+    ?.backgroundsV2 as
+      | WallpaperId[]
+      | undefined;
 
   for (const id of bgsInMonitor || $settings.value.backgroundsV2) {
     let current = $wallpapers.value.find((w) => w.id === id);

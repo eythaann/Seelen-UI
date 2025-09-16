@@ -1,11 +1,11 @@
-import Sandbox from '@nyariv/sandboxjs';
-import { FileIcon, Icon } from '@shared/components/Icon';
-import { IconName } from '@shared/components/Icon/icons';
-import { convertFileSrc } from '@tauri-apps/api/core';
-import { memo, useEffect, useState } from 'react';
-import { z } from 'zod';
+import Sandbox from "@nyariv/sandboxjs";
+import { FileIcon, Icon } from "@shared/components/Icon";
+import { IconName } from "@shared/components/Icon/icons";
+import { convertFileSrc } from "@tauri-apps/api/core";
+import { memo, useEffect, useState } from "react";
+import { z } from "zod";
 
-import { EvaluateAction } from '../app';
+import { EvaluateAction } from "../app";
 
 interface SanboxedComponentProps {
   code: string;
@@ -33,7 +33,7 @@ function compileCode(code: string) {
       executor: sandbox.compile(code),
     };
   } catch (e) {
-    console.error('Error compiling code: ', e);
+    console.error("Error compiling code: ", e);
     return null;
   }
 }
@@ -51,24 +51,25 @@ function _SanboxedComponent({ code, scope }: SanboxedComponentProps) {
   }
 
   try {
-    const content = compiled.executor({ ...scope, ...ComponentCreatorScope }).run();
+    const content = compiled.executor({ ...scope, ...ComponentCreatorScope })
+      .run();
     return <ElementsFromEvaluated content={content} />;
-  } catch (error) {
+  } catch (_error) {
     const { env: _, ...rest } = scope;
-    console.error('Error executing component:', { scope: rest });
+    console.error("Error executing component:", { scope: rest });
     return <span>!?</span>;
   }
 }
 
 function ElementsFromEvaluated({ content }: { content: unknown }) {
   switch (typeof content) {
-    case 'string':
+    case "string":
       return <span>{content}</span>;
-    case 'number':
-    case 'boolean':
-    case 'bigint':
+    case "number":
+    case "boolean":
+    case "bigint":
       return <span>{String(content)}</span>;
-    case 'object':
+    case "object":
       if (content === null) {
         return null;
       }
@@ -79,24 +80,28 @@ function ElementsFromEvaluated({ content }: { content: unknown }) {
         });
       }
 
-      if ('__type' in content) {
-        if (content.__type === 'button') {
+      if ("__type" in content) {
+        if (content.__type === "button") {
           return <EvaluatedButton {...EvaluatedButtonPropsSchema.parse(content)} />;
         }
 
-        if (content.__type === 'react-icon') {
-          return <EvaluatedReactIcon {...EvaluatedReactIconPropsSchema.parse(content)} />;
+        if (content.__type === "react-icon") {
+          return (
+            <EvaluatedReactIcon
+              {...EvaluatedReactIconPropsSchema.parse(content)}
+            />
+          );
         }
 
-        if (content.__type === 'image') {
+        if (content.__type === "image") {
           return <EvaluatedImage {...EvaluatedImagePropsSchema.parse(content)} />;
         }
 
-        if (content.__type === 'app-icon') {
+        if (content.__type === "app-icon") {
           return <EvaluatedAppIcon {...EvaluatedAppIconPropsSchema.parse(content)} />;
         }
       }
-
+      return null;
     default:
       return null;
   }
@@ -104,7 +109,7 @@ function ElementsFromEvaluated({ content }: { content: unknown }) {
 
 type EvaluatedButtonProps = z.infer<typeof EvaluatedButtonPropsSchema>;
 const EvaluatedButtonPropsSchema = z.object({
-  __type: z.literal('button').default('button'),
+  __type: z.literal("button").default("button"),
   content: z.unknown().nullish(),
   onClick: z.string().nullish(),
 });
@@ -125,7 +130,7 @@ function EvaluatedButton({ content, onClick }: EvaluatedButtonProps) {
 
 type EvaluatedReactIconProps = z.infer<typeof EvaluatedReactIconPropsSchema>;
 const EvaluatedReactIconPropsSchema = z.object({
-  __type: z.literal('react-icon').default('react-icon'),
+  __type: z.literal("react-icon").default("react-icon"),
   name: z.string(),
   size: z.number().optional(),
 });
@@ -136,27 +141,27 @@ function EvaluatedReactIcon({ name, size }: EvaluatedReactIconProps) {
 
 type EvaluatedImageProps = z.infer<typeof EvaluatedImagePropsSchema>;
 const EvaluatedImagePropsSchema = z.object({
-  __type: z.literal('image').default('image'),
+  __type: z.literal("image").default("image"),
   url: z.string().nullish(),
   path: z.string().nullish(),
-  size: z.union([z.string(), z.number()]).default('1rem'),
+  size: z.union([z.string(), z.number()]).default("1rem"),
 });
 
 function EvaluatedImage({ url, path, size }: EvaluatedImageProps) {
   return (
     <img
-      src={path ? convertFileSrc(path) : url || ''}
-      style={{ width: size, height: size, objectFit: 'contain' }}
+      src={path ? convertFileSrc(path) : url || ""}
+      style={{ width: size, height: size, objectFit: "contain" }}
     />
   );
 }
 
 type EvaluatedAppIconProps = z.infer<typeof EvaluatedAppIconPropsSchema>;
 const EvaluatedAppIconPropsSchema = z.object({
-  __type: z.literal('app-icon').default('app-icon'),
+  __type: z.literal("app-icon").default("app-icon"),
   path: z.string().nullish(),
   umid: z.string().nullish(),
-  size: z.union([z.string(), z.number()]).default('1rem'),
+  size: z.union([z.string(), z.number()]).default("1rem"),
 });
 
 function EvaluatedAppIcon({ path, umid, size }: EvaluatedAppIconProps) {

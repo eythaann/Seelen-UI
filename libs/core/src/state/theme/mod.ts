@@ -5,13 +5,13 @@ import type {
   ThemeConfigDefinition,
   ThemeId,
   ThemeVariableDefinition,
-} from '@seelen-ui/types';
-import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mod.ts';
-import { List } from '../../utils/List.ts';
-import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
-import { Widget } from '../widget/mod.ts';
-import { Settings } from '../settings/mod.ts';
-import { UIColors } from '../../system_state/ui_colors.ts';
+} from "@seelen-ui/types";
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
+import { List } from "../../utils/List.ts";
+import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
+import { Widget } from "../widget/mod.ts";
+import { Settings } from "../settings/mod.ts";
+import { UIColors } from "../../system_state/ui_colors.ts";
 
 export class ThemeList extends List<ITheme> {
   static getAsync(): Promise<ThemeList> {
@@ -22,7 +22,7 @@ export class ThemeList extends List<ITheme> {
     return newOnEvent(cb, this, SeelenEvent.StateThemesChanged);
   }
 
-  applyToDocument(activeIds: ThemeId[], variables: ISettings['byTheme']): void {
+  applyToDocument(activeIds: ThemeId[], variables: ISettings["byTheme"]): void {
     const enabledThemes: Theme[] = [];
     for (const theme of this.asArray()) {
       if (activeIds.includes(theme.id)) {
@@ -51,7 +51,7 @@ export class Theme {
   }
 
   /** Will add the styles targeting the current widget id */
-  applyToDocument(varValues: ISettings['byTheme'][ResourceId] = {}): void {
+  applyToDocument(varValues: ISettings["byTheme"][ResourceId] = {}): void {
     const widgetId = Widget.getCurrentWidgetId();
     let styles = ``;
 
@@ -63,25 +63,26 @@ export class Theme {
         @property ${def.name} {
           syntax: "${def.syntax}";
           inherits: true;
-          initial-value: ${def.initialValue}${'initialValueUnit' in def ? def.initialValueUnit : ''}
+          initial-value: ${def.initialValue}${"initialValueUnit" in def ? def.initialValueUnit : ""}
         }
       `;
     });
 
-    const layerName = 'theme-' + this.metadata.path.toLowerCase().replaceAll(/[^a-zA-Z0-9]/g, '_');
+    const layerName = "theme-" +
+      this.metadata.path.toLowerCase().replaceAll(/[^a-zA-Z0-9]/g, "_");
     styles += `@layer ${layerName}-shared {\n${this.sharedStyles}\n}\n`;
 
     const variablesContent = Object.entries(varValues)
       .filter(([name]) => isValidCssVariableName(name))
-      .map(([name, value]) => `${name}: ${value || ''};`)
-      .join('\n');
-    styles += `@layer ${layerName} {\n:root {${variablesContent}}\n${this.styles[widgetId] ?? ''}\n}\n`;
+      .map(([name, value]) => `${name}: ${value || ""};`)
+      .join("\n");
+    styles += `@layer ${layerName} {\n:root {${variablesContent}}\n${this.styles[widgetId] ?? ""}\n}\n`;
 
     this.removeFromDocument(); // remove old styles
-    const styleElement = document.createElement('style');
+    const styleElement = document.createElement("style");
     styleElement.id = this.id;
     styleElement.textContent = styles;
-    styleElement.setAttribute('data-resource-type', 'theme');
+    styleElement.setAttribute("data-resource-type", "theme");
     document.head.appendChild(styleElement);
   }
 
@@ -94,9 +95,12 @@ function isValidCssVariableName(name: string): boolean {
   return /^--[\w\d-]*$/.test(name);
 }
 
-function iterateVariableDefinitions(defs: ThemeConfigDefinition[], cb: (def: ThemeVariableDefinition) => void): void {
+function iterateVariableDefinitions(
+  defs: ThemeConfigDefinition[],
+  cb: (def: ThemeVariableDefinition) => void,
+): void {
   for (const def of defs) {
-    if ('group' in def) {
+    if ("group" in def) {
       iterateVariableDefinitions(def.group.items, cb);
     } else {
       cb(def);
@@ -105,7 +109,9 @@ function iterateVariableDefinitions(defs: ThemeConfigDefinition[], cb: (def: The
 }
 
 export function removeAllThemeStyles(): void {
-  const elements = document.querySelectorAll(`style[data-resource-type="theme"]`);
+  const elements = document.querySelectorAll(
+    `style[data-resource-type="theme"]`,
+  );
   for (const element of elements) {
     element.remove();
   }

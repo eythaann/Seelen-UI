@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import {
   AppConfigurationList,
   ConnectedMonitorList,
@@ -11,18 +11,18 @@ import {
   UIColors,
   WallpaperList,
   WidgetList,
-} from '@seelen-ui/lib';
-import { Modal } from 'antd';
-import { cloneDeep } from 'lodash';
+} from "@seelen-ui/lib";
+import { Modal } from "antd";
+import { cloneDeep } from "lodash";
 
-import { startup } from '../tauri/infra';
+import { startup } from "../tauri/infra";
 
-import { RootActions, RootReducer } from './app/reducer';
-import { StateToJsonSettings } from './app/StateBridge';
+import { RootActions, RootReducer } from "./app/reducer";
+import { StateToJsonSettings } from "./app/StateBridge";
 
-import { RootState } from './domain';
+import { RootState } from "./domain";
 
-import { saveUserSettings } from './storeApi';
+import { saveUserSettings } from "./storeApi";
 
 const IsSavingSettings = { current: false };
 
@@ -117,9 +117,7 @@ export async function registerStoreEvents() {
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
-  const settings: Settings = customPath
-    ? await Settings.loadCustom(customPath)
-    : await Settings.getAsync();
+  const settings: Settings = customPath ? await Settings.loadCustom(customPath) : await Settings.getAsync();
 
   const currentState = store.getState();
   store.dispatch(
@@ -137,15 +135,25 @@ export const LoadSettingsToStore = async (customPath?: string) => {
 
   store.dispatch(RootActions.setAutostart(await startup.isEnabled()));
 
-  store.dispatch(RootActions.setAppsConfigurations((await AppConfigurationList.getAsync()).all()));
+  store.dispatch(
+    RootActions.setAppsConfigurations(
+      (await AppConfigurationList.getAsync()).all(),
+    ),
+  );
 
-  store.dispatch(RootActions.setAvailableThemes((await ThemeList.getAsync()).all()));
-  store.dispatch(RootActions.setAvailableIconPacks((await IconPackList.getAsync()).all()));
+  store.dispatch(
+    RootActions.setAvailableThemes((await ThemeList.getAsync()).all()),
+  );
+  store.dispatch(
+    RootActions.setAvailableIconPacks((await IconPackList.getAsync()).all()),
+  );
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
   store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));
   store.dispatch(RootActions.setProfiles((await ProfileList.getAsync()).all()));
-  store.dispatch(RootActions.setWallpapers((await WallpaperList.getAsync()).all()));
+  store.dispatch(
+    RootActions.setWallpapers((await WallpaperList.getAsync()).all()),
+  );
 
   setMonitorsOnState(await ConnectedMonitorList.getAsync());
 
@@ -179,7 +187,7 @@ export const SaveStore = async () => {
     );
   } catch (error) {
     Modal.error({
-      title: 'Error on Save',
+      title: "Error on Save",
       content: String(error),
       centered: true,
     });

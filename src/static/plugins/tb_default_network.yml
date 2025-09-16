@@ -1,4 +1,4 @@
-id: '@default/network'
+id: "@default/network"
 metadata:
   displayName:
     en: Network
@@ -33,7 +33,7 @@ metadata:
     ro: Rețea
     mt: Netwerk
     sv: Nätverk
-    'no': Nettverk
+    "no": Nettverk
     uz: Tarmog'i
     sk: Sieť
     tr: Şebeke
@@ -72,7 +72,7 @@ metadata:
     th: เครือข่าย
     lo: ເຄືອຂ່າຍ
 icon: FaWifi
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: network
   withWlanSelector: true

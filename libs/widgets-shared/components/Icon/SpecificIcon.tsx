@@ -1,11 +1,11 @@
-import { cx } from '@shared/styles';
-import { UnlistenFn } from '@tauri-apps/api/event';
-import React, { ImgHTMLAttributes } from 'react';
+import { cx } from "@shared/styles";
+import { UnlistenFn } from "@tauri-apps/api/event";
+import React, { ImgHTMLAttributes } from "react";
 
-import { iconPackManager } from './common';
-import cs from './index.module.css';
+import { iconPackManager } from "./common";
+import cs from "./index.module.css";
 
-interface SpecificIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+interface SpecificIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {
   name: string;
 }
 
@@ -15,7 +15,7 @@ interface SpecificIconState {
   isAproximatelySquare: boolean;
 }
 
-const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const darkModeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
 function getSpecificIcon(name: string): SpecificIconState {
   const icon = iconPackManager.getCustomIcon(name);
   if (icon) {
@@ -39,7 +39,7 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
       ...getSpecificIcon(this.props.name),
     };
 
-    darkModeQuery.addEventListener('change', this.updateSrc);
+    darkModeQuery.addEventListener("change", this.updateSrc);
     iconPackManager.onChange(this.updateSrc).then((unlistener) => {
       this.unlistener = unlistener;
     });
@@ -54,7 +54,7 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
   componentWillUnmount(): void {
     this.unlistener?.();
     this.unlistener = null;
-    darkModeQuery.removeEventListener('change', this.updateSrc);
+    darkModeQuery.removeEventListener("change", this.updateSrc);
   }
 
   updateSrc(): void {
@@ -72,7 +72,7 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
         <img src={this.state.src} />
         {this.state.mask && (
           <div
-            className={cx(cs.mask, 'sl-mask')}
+            className={cx(cs.mask, "sl-mask")}
             style={{ maskImage: `url('${this.state.mask}')` }}
           />
         )}

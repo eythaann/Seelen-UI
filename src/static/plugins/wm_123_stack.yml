@@ -1,9 +1,9 @@
 #
-id: '@default/wm-123-stack'
+id: "@default/wm-123-stack"
 metadata:
   displayName: One, Two, Three, Stack!
   description: Layout of three containers and last one is an stack.
-target: '@seelen/window-manager'
+target: "@seelen/window-manager"
 plugin:
   structure:
     type: Horizontal

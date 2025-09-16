@@ -1,25 +1,25 @@
-import { SeelenCommand, SeelenWegSide } from '@seelen-ui/lib';
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { FileIcon } from '@shared/components/Icon';
-import { useWindowFocusChange } from '@shared/hooks';
-import { cx } from '@shared/styles';
-import { invoke } from '@tauri-apps/api/core';
-import { emit } from '@tauri-apps/api/event';
-import moment from 'moment';
-import { memo, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { SeelenCommand, SeelenWegSide } from "@seelen-ui/lib";
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { FileIcon } from "@shared/components/Icon";
+import { useWindowFocusChange } from "@shared/hooks";
+import { cx } from "@shared/styles";
+import { invoke } from "@tauri-apps/api/core";
+import { emit } from "@tauri-apps/api/event";
+import moment from "moment";
+import { memo, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
+import { PinnedWegItem, TemporalWegItem } from "../../shared/store/domain";
 
-import { WithContextMenu } from '../../../components/WithContextMenu';
-import { $settings } from '../../shared/state/mod';
-import { getUserApplicationContextMenu } from './UserApplicationContextMenu';
-import { UserApplicationPreview } from './UserApplicationPreview';
+import { WithContextMenu } from "../../../components/WithContextMenu";
+import { $settings } from "../../shared/state/mod";
+import { getUserApplicationContextMenu } from "./UserApplicationContextMenu";
+import { UserApplicationPreview } from "./UserApplicationPreview";
 
 interface Props {
   item: PinnedWegItem | TemporalWegItem;
@@ -39,26 +39,26 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
   const calculatePlacement = (position: any) => {
     switch (position) {
       case SeelenWegSide.Bottom: {
-        return 'top';
+        return "top";
       }
       case SeelenWegSide.Top: {
-        return 'bottom';
+        return "bottom";
       }
       case SeelenWegSide.Left: {
-        return 'right';
+        return "right";
       }
       case SeelenWegSide.Right: {
-        return 'left';
+        return "left";
       }
       default: {
-        throw new Error('Not Implemented!');
+        throw new Error("Not Implemented!");
       }
     }
   };
 
   useWindowFocusChange((focused) => {
     if (!focused) {
-      setBlockUntil(moment(new Date()).add(1, 'second'));
+      setBlockUntil(moment(new Date()).add(1, "second"));
       setOpenPreview(false);
       setOpenContextMenu(false);
     }
@@ -73,8 +73,7 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
   }, [openPreview]);
 
   const notificationsCount = notifications.filter((n) => n.appUmid === item.umid).length;
-  const itemLabel =
-    $settings.value.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;
+  const itemLabel = $settings.value.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;
 
   const itemNode = (
     <div
@@ -95,7 +94,7 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
           });
           // this fix an issue of persisting focused colors when minimizing from dock
           if (wasFocused) {
-            emit('hidden::remove-focused-color');
+            emit("hidden::remove-focused-color");
           }
         }
       }}
@@ -109,17 +108,17 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       <BackgroundByLayersV2 prefix="item" />
       <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
       {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
-      {notificationsCount > 0 && (
-        <div className="weg-item-notification-badge">{notificationsCount}</div>
-      )}
+      {notificationsCount > 0 && <div className="weg-item-notification-badge">{notificationsCount}</div>}
       {$settings.value.showInstanceCounter && item.windows.length > 1 && (
-        <div className="weg-item-instance-counter-badge">{item.windows.length}</div>
+        <div className="weg-item-instance-counter-badge">
+          {item.windows.length}
+        </div>
       )}
       {!$settings.value.showWindowTitle && (
         <div
-          className={cx('weg-item-open-sign', {
-            'weg-item-open-sign-active': !!item.windows.length,
-            'weg-item-open-sign-focused': item.windows.some((w) => w.handle === focusedApp?.hwnd),
+          className={cx("weg-item-open-sign", {
+            "weg-item-open-sign-active": !!item.windows.length,
+            "weg-item-open-sign-focused": item.windows.some((w) => w.handle === focusedApp?.hwnd),
           })}
         />
       )}
@@ -132,7 +131,12 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
 
   return (
     <WithContextMenu
-      items={getUserApplicationContextMenu(t, item, devTools, $settings.value.showEndTask) || []}
+      items={getUserApplicationContextMenu(
+        t,
+        item,
+        devTools,
+        $settings.value.showEndTask,
+      ) || []}
       onOpenChange={(isOpen) => {
         setOpenContextMenu(isOpen);
         if (openPreview && isOpen) {
@@ -142,18 +146,22 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
     >
       <AnimatedPopover
         animationDescription={{
-          openAnimationName: 'weg-item-preview-container-open',
-          closeAnimationName: 'weg-item-preview-container-close',
+          openAnimationName: "weg-item-preview-container-open",
+          closeAnimationName: "weg-item-preview-container-close",
         }}
         open={openPreview}
         placement={calculatePlacement($settings.value.position)}
         onOpenChange={(open) =>
-          setOpenPreview(open && !openContextMenu && moment(new Date()) > blockUntil)
-        }
+          setOpenPreview(
+            open && !openContextMenu && moment(new Date()) > blockUntil,
+          )}
         trigger="hover"
         content={
           <BackgroundByLayersV2
-            className={cx('weg-item-preview-container', $settings.value.position.toLowerCase())}
+            className={cx(
+              "weg-item-preview-container",
+              $settings.value.position.toLowerCase(),
+            )}
             onMouseMoveCapture={(e) => e.stopPropagation()}
             onContextMenu={(e) => {
               e.stopPropagation();
@@ -170,9 +178,7 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
                   isFocused={focusedApp?.hwnd === window.handle}
                 />
               ))}
-              {item.windows.length === 0 && (
-                <div className="weg-item-display-name">{item.displayName}</div>
-              )}
+              {item.windows.length === 0 && <div className="weg-item-display-name">{item.displayName}</div>}
             </div>
           </BackgroundByLayersV2>
         }

@@ -1,5 +1,5 @@
 #
-id: '@default/wm-bspwm'
+id: "@default/wm-bspwm"
 metadata:
   displayName:
     en: BSPWM Layout
@@ -34,7 +34,7 @@ metadata:
     sk: Rozloženie BSPWM
     mt: Tqassim BSPWM
     fi: BSPWM-asettelu
-    'no': BSPWM -oppsett
+    "no": BSPWM -oppsett
     ms: Susun atur BSPWM
     sv: BSPWM Layout
     uz: Bscwm tartibi
@@ -106,7 +106,7 @@ metadata:
     mt: Tqassim tal-madum BSPWM default.
     fi: bspwm-laattojen oletusasettelu.
     sk: predvolené rozloženie dlaždíc bspwm.
-    'no': Standard BSPWM Tile Layout.
+    "no": Standard BSPWM Tile Layout.
     uz: Bswwm plitka tartibi.
     tr: varsayılan bspwm karo düzeni.
     sv: standardlayout för bspwm-kakel.
@@ -124,7 +124,7 @@ metadata:
     sr: Подразумевано Изглед плочица БСПВМ.
     ka: ნაგულისხმევი BSPWM ფილების განლაგება.
     he: פריסת אריחי ברירת מחדל של BSPWM.
-    hy: 'Default BSPWM սալիկների դասավորությունը:'
+    hy: "Default BSPWM սալիկների դասավորությունը:"
     ur: پہلے سے طے شدہ BSPWM ٹائل لے آؤٹ۔
     ps: د بیضیف ډسمه د ټیل ټایل ترکیب.
     fa: طرح کاشی BSPWM پیش فرض.
@@ -143,7 +143,7 @@ metadata:
     ja: デフォルトのbspwmタイルレイアウト。
     km: ប្លង់ក្បឿង bspwm លំនាំដើម។
     th: เค้าโครงกระเบื้อง BSPWM เริ่มต้น
-target: '@seelen/window-manager'
+target: "@seelen/window-manager"
 plugin:
   structure:
     type: Horizontal

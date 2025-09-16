@@ -1,8 +1,8 @@
-import { signal } from '@preact/signals';
-import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from '@seelen-ui/lib';
-import { SluPopupConfig, SluPopupContent as ISluPopupContent } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { IconName } from '@shared/components/Icon/icons';
+import { signal } from "@preact/signals";
+import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
+import { SluPopupConfig, SluPopupContent as ISluPopupContent } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { IconName } from "@shared/components/Icon/icons";
 
 const currentWidget = Widget.getCurrent();
 const state = signal<SluPopupConfig>({
@@ -13,7 +13,9 @@ const state = signal<SluPopupConfig>({
   footer: [],
 });
 
-invoke(SeelenCommand.GetPopupConfig, { instanceId: currentWidget.decoded.instanceId! })
+invoke(SeelenCommand.GetPopupConfig, {
+  instanceId: currentWidget.decoded.instanceId!,
+})
   .then(async (data) => {
     state.value = data;
     currentWidget.webview.setTitle(getOnlyText(data.title));
@@ -25,7 +27,7 @@ invoke(SeelenCommand.GetPopupConfig, { instanceId: currentWidget.decoded.instanc
     closePopup();
   });
 
-subscribe(SeelenEvent.PopupContentChanged, async (e) => {
+subscribe(SeelenEvent.PopupContentChanged, (e) => {
   state.value = e.payload;
   currentWidget.webview.setTitle(getOnlyText(e.payload.title));
 });
@@ -39,9 +41,7 @@ export function App() {
     <div className="popup">
       <header data-tauri-drag-region className="header">
         <div className="header-content">
-          {state.value.title.map((subEntry, idx) => (
-            <SluPopupContent key={idx} entry={subEntry} />
-          ))}
+          {state.value.title.map((subEntry, idx) => <SluPopupContent key={idx} entry={subEntry} />)}
         </div>
         <button className="header-close" onClick={closePopup}>
           <Icon iconName="CgClose" />
@@ -49,15 +49,11 @@ export function App() {
       </header>
 
       <main className="content">
-        {state.value.content.map((subEntry, idx) => (
-          <SluPopupContent key={idx} entry={subEntry} />
-        ))}
+        {state.value.content.map((subEntry, idx) => <SluPopupContent key={idx} entry={subEntry} />)}
       </main>
 
       <footer className="footer">
-        {state.value.footer.map((subEntry, idx) => (
-          <SluPopupContent key={idx} entry={subEntry} />
-        ))}
+        {state.value.footer.map((subEntry, idx) => <SluPopupContent key={idx} entry={subEntry} />)}
       </footer>
     </div>
   );
@@ -65,40 +61,52 @@ export function App() {
 
 function SluPopupContent({ entry }: { entry: ISluPopupContent }) {
   switch (entry.type) {
-    case 'text':
+    case "text":
       return (
         <p className="text" style={entry.styles || {}}>
           {entry.value}
         </p>
       );
-    case 'icon':
-      return <Icon className="icon" iconName={entry.name as IconName} style={entry.styles || {}} />;
-    case 'image':
-      return <img className="image" src={entry.href} style={entry.styles || {}} alt={entry.href} />;
-    case 'button':
+    case "icon":
+      return (
+        <Icon
+          className="icon"
+          iconName={entry.name as IconName}
+          style={entry.styles || {}}
+        />
+      );
+    case "image":
+      return (
+        <img
+          className="image"
+          src={entry.href}
+          style={entry.styles || {}}
+          alt={entry.href}
+        />
+      );
+    case "button":
       return (
         <button
           className="button"
           onClick={() => {
-            if (entry.onClick === 'exit') {
+            if (entry.onClick === "exit") {
               closePopup();
               return;
             }
-            currentWidget.webview.emitTo(currentWidget.webview.label, `${entry.onClick}`);
+            currentWidget.webview.emitTo(
+              currentWidget.webview.label,
+              `${entry.onClick}`,
+            );
           }}
           style={entry.styles || {}}
         >
-          {entry.inner.map((subEntry, idx) => (
-            <SluPopupContent key={idx} entry={subEntry} />
-          ))}
+          {entry.inner.map((subEntry, idx) => <SluPopupContent key={idx} entry={subEntry} />)}
         </button>
       );
-    case 'group':
+    case "group":
       return (
         <div className="group" style={entry.styles || {}}>
-          {entry.items.map((subEntry, idx) => (
-            <SluPopupContent key={idx} entry={subEntry} />
-          ))}
+          {entry.items.map((subEntry, idx) => <SluPopupContent key={idx} entry={subEntry} />)}
         </div>
       );
     default:
@@ -107,15 +115,15 @@ function SluPopupContent({ entry }: { entry: ISluPopupContent }) {
 }
 
 function getOnlyText(content: ISluPopupContent[]) {
-  let text = '';
+  let text = "";
   for (const entry of content) {
-    if (entry.type === 'text') {
+    if (entry.type === "text") {
       text += `${entry.value} `;
     }
 
-    if (entry.type === 'group') {
+    if (entry.type === "group") {
       text += getOnlyText(entry.items);
-      text += ' ';
+      text += " ";
     }
   }
   return text;

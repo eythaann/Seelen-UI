@@ -1,18 +1,19 @@
-import { execSync } from 'child_process';
-import fs from 'fs';
-import glob from 'glob';
-import path from 'path';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
+import { execSync } from "child_process";
+import fs from "fs";
+import glob from "glob";
+import path from "path";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 
-import packageJson from '../package.json';
-import tauriConfig from '../src/tauri.conf.json';
+import packageJson from "../package.json";
+import tauriConfig from "../src/tauri.conf.json";
+import process from "node:process";
 
 async function getArgs() {
-  const argv = await yargs(hideBin(process.argv)).option('target', {
-    type: 'string',
-    description: 'target to get the files from',
-    default: 'release',
+  const argv = await yargs(hideBin(process.argv)).option("target", {
+    type: "string",
+    description: "target to get the files from",
+    default: "release",
   }).argv;
   return {
     target: argv.target,
@@ -21,12 +22,12 @@ async function getArgs() {
 
 const [major, minor, patch, nightly_date] = packageJson.version.split(/[\.\+]/);
 if (major === undefined || minor === undefined || patch === undefined) {
-  throw new Error('Invalid package version');
+  throw new Error("Invalid package version");
 }
 
 const { target } = await getArgs();
 
-console.info('Building MSIX...');
+console.info("Building MSIX...");
 const buildFolder = `target/${target}/msix`;
 const bundleFolder = `target/${target}/bundle/msix`;
 
@@ -43,13 +44,19 @@ const installer_msix_path = path.resolve(
 
 // Add manifest
 const manifest = fs
-  .readFileSync('templates/AppxManifest.xml', 'utf-8')
-  .replace('{{version}}', appxPackageVersion);
+  .readFileSync("templates/AppxManifest.xml", "utf-8")
+  .replace("{{version}}", appxPackageVersion);
 fs.writeFileSync(`${buildFolder}/AppxManifest.xml`, manifest);
 
 // Add binaries
-fs.copyFileSync(`target/${target}/slu-service.exe`, `${buildFolder}/slu-service.exe`);
-fs.copyFileSync(`target/${target}/seelen-ui.exe`, `${buildFolder}/seelen-ui.exe`);
+fs.copyFileSync(
+  `target/${target}/slu-service.exe`,
+  `${buildFolder}/slu-service.exe`,
+);
+fs.copyFileSync(
+  `target/${target}/seelen-ui.exe`,
+  `${buildFolder}/seelen-ui.exe`,
+);
 
 // Add resources
 tauriConfig.bundle.resources.forEach((pattern) => {
@@ -62,7 +69,9 @@ tauriConfig.bundle.resources.forEach((pattern) => {
 
 try {
   // create installer bundle
-  let out = execSync(`msixHeroCli pack -d ${buildFolder} -p ${installer_msix_path}`);
+  let out = execSync(
+    `msixHeroCli pack -d ${buildFolder} -p ${installer_msix_path}`,
+  );
   console.info(out.toString());
 
   // sign installer with local certificate (this is for testing only) store changes the cert in the windows store
@@ -71,6 +80,6 @@ try {
   );
   console.info(out2.toString());
 } catch (error) {
-  console.error('\n\n', error?.toString());
+  console.error("\n\n", error?.toString());
   process.exit(1);
 }

@@ -1,14 +1,11 @@
-import {
-  Action,
-  ActionReducerMapBuilder,
-  CaseReducer,
-  PayloadAction,
-  Slice,
-} from '@reduxjs/toolkit';
-import { cast, isStrictObject, prettify, TupleReduce } from 'readable-types';
+import { Action, ActionReducerMapBuilder, CaseReducer, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { cast, isStrictObject, prettify, TupleReduce } from "readable-types";
 
 type ReducersFor<T> = {
-  [K in keyof T as `set${Capitalize<cast<K, string>>}`]: CaseReducer<T, PayloadAction<T[K]>>;
+  [K in keyof T as `set${Capitalize<cast<K, string>>}`]: CaseReducer<
+    T,
+    PayloadAction<T[K]>
+  >;
 };
 
 const capitalize = (text: string) => {
@@ -18,13 +15,17 @@ const capitalize = (text: string) => {
 const matcher = (slice: Slice) => (action: Action) => action.type.startsWith(slice.name);
 
 interface $GetState extends $<[acc: Record<string, any>, current: Slice]> {
-  return: this[0] & { [x in this[1]['name']]: ReturnType<this[1]['getInitialState']> };
+  return:
+    & this[0]
+    & { [x in this[1]["name"]]: ReturnType<this[1]["getInitialState"]> };
 }
 
 export type SelectorFor2<State extends anyObject, Current = State> = $if<
   isStrictObject<Current>,
   {
-    then: ((state: State) => Current) & { [K in keyof Current]: SelectorFor2<State, Current[K]> };
+    then:
+      & ((state: State) => Current)
+      & { [K in keyof Current]: SelectorFor2<State, Current[K]> };
     else: (state: State) => Current;
   }
 >;
@@ -42,7 +43,7 @@ export class StateBuilder {
 
   static addSliceAsExtraReducer(
     slice: Slice,
-    builder: ActionReducerMapBuilder<{ [x in Slice['name']]: any }>,
+    builder: ActionReducerMapBuilder<{ [x in Slice["name"]]: any }>,
   ) {
     builder.addMatcher(matcher(slice), (state, action) => {
       state[slice.name] = slice.reducer(state[slice.name], action);
@@ -68,8 +69,11 @@ export class StateBuilder {
         continue;
       }
       selfSelector[key] = (state: any) => selfSelector(state)[key];
-      if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-        selfSelector[key] = StateBuilder.compositeSelector(obj[key], selfSelector[key]);
+      if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+        selfSelector[key] = StateBuilder.compositeSelector(
+          obj[key],
+          selfSelector[key],
+        );
       }
     }
     return selfSelector;

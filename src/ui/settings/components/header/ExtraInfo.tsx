@@ -1,14 +1,14 @@
-import { Tooltip } from 'antd';
-import { AnyComponent } from 'preact';
-import { useTranslation } from 'react-i18next';
+import { Tooltip } from "antd";
+import { AnyComponent } from "preact";
+import { useTranslation } from "react-i18next";
 
-import { RoutePath } from '../navigation/routes';
+import { RoutePath } from "../navigation/routes";
 
 export const RouteExtraInfo: { [key: string]: AnyComponent } = {
   [RoutePath.SettingsByApplication]: () => {
     const { t } = useTranslation();
     return (
-      <Tooltip title={t('apps_configurations.extra_info')}>
+      <Tooltip title={t("apps_configurations.extra_info")}>
         <span>🛈</span>
       </Tooltip>
     );

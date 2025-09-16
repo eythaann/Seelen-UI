@@ -84,9 +84,9 @@ body {
   }
 }
 
-.launcher-item-context-menu-open, 
+.launcher-item-context-menu-open,
 .launcher-item-context-menu-close {
-  animation: PopupBaseAnimation 0.2s linear forwards; 
+  animation: PopupBaseAnimation 0.2s linear forwards;
 }
 .launcher-item-context-menu-close {
   animation-direction: reverse;

@@ -1,17 +1,17 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { Icon } from '@shared/components/Icon';
-import { path } from '@tauri-apps/api';
-import { Button } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router';
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { Icon } from "@shared/components/Icon";
+import { path } from "@tauri-apps/api";
+import { Button } from "antd";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router";
 
-import cs from '../infra.module.css';
+import cs from "../infra.module.css";
 
-import { newSelectors } from '../../shared/store/app/reducer';
+import { newSelectors } from "../../shared/store/app/reducer";
 
-import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
-import { ResourceCard } from '../ResourceCard';
+import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox";
+import { ResourceCard } from "../ResourceCard";
 
 export function AllWallpapersView() {
   const wallpapers = useSelector(newSelectors.wallpapers);
@@ -22,19 +22,21 @@ export function AllWallpapersView() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('resources.open_folder')}</b>
+          <b>{t("resources.open_folder")}</b>
           <Button
             type="default"
             onClick={async () => {
               const dataDir = await path.appDataDir();
-              invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'wallpapers') });
+              invoke(SeelenCommand.OpenFile, {
+                path: await path.join(dataDir, "wallpapers"),
+              });
             }}
           >
             <Icon iconName="PiFoldersDuotone" />
           </Button>
         </SettingsOption>
         <SettingsOption>
-          <b>{t('resources.import_wallpapers')}</b>
+          <b>{t("resources.import_wallpapers")}</b>
           <Button
             type="default"
             onClick={() => {
@@ -45,8 +47,12 @@ export function AllWallpapersView() {
           </Button>
         </SettingsOption>
         <SettingsOption>
-          <span>{t('resources.discover')}:</span>
-          <Button href="https://seelen.io/resources/s?category=Wallpaper" target="_blank" type="link">
+          <span>{t("resources.discover")}:</span>
+          <Button
+            href="https://seelen.io/resources/s?category=Wallpaper"
+            target="_blank"
+            type="link"
+          >
             https://seelen.io/resources/s?category=Wallpaper
           </Button>
         </SettingsOption>
@@ -60,7 +66,7 @@ export function AllWallpapersView() {
             kind="Wallpaper"
             actions={
               <>
-                <NavLink to={`/wallpaper/${resource.id.replace('@', '')}`}>
+                <NavLink to={`/wallpaper/${resource.id.replace("@", "")}`}>
                   <Button type="text">
                     <Icon iconName="RiSettings4Fill" />
                   </Button>

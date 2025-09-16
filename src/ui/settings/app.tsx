@@ -1,11 +1,11 @@
-import { useDarkMode } from '@shared/styles';
-import { ConfigProvider, theme } from 'antd';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDarkMode } from "@shared/styles";
+import { ConfigProvider, theme } from "antd";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import { newSelectors } from './modules/shared/store/app/reducer';
+import { newSelectors } from "./modules/shared/store/app/reducer";
 
-import { Routing } from './router';
+import { Routing } from "./router";
 
 export function App() {
   const isDarkMode = useDarkMode();
@@ -13,9 +13,9 @@ export function App() {
 
   useEffect(() => {
     setTimeout(() => {
-      let splashscreen = document.getElementById('splashscreen');
-      splashscreen?.classList.add('vanish');
-      setTimeout(() => splashscreen?.classList.add('hidden'), 300);
+      let splashscreen = document.getElementById("splashscreen");
+      splashscreen?.classList.add("vanish");
+      setTimeout(() => splashscreen?.classList.add("hidden"), 300);
     }, 300);
   }, []);
 

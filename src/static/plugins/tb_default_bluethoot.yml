@@ -1,4 +1,4 @@
-id: '@default/bluetooth'
+id: "@default/bluetooth"
 metadata:
   displayName:
     en: Bluetooth
@@ -31,7 +31,7 @@ metadata:
     pt: Bluetooth
     mt: Bluetooth
     ro: Bluetooth
-    'no': Bluetooth
+    "no": Bluetooth
     ku: Bluetooth
     sk: Bluetooth
     fi: Bluetooth
@@ -72,7 +72,7 @@ metadata:
     th: บลูทู ธ
     lo: ພັນລະ
 icon: TbBluetooth
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: bluetooth
   template: return icon("TbBluetoothConnected")

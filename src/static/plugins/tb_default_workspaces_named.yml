@@ -1,4 +1,4 @@
-id: '@default/workspaces-named'
+id: "@default/workspaces-named"
 metadata:
   displayName:
     en: Named Workspaces
@@ -32,7 +32,7 @@ metadata:
     pt: Espaços de trabalho nomeados
     ro: Spații de lucru numite
     mt: Imsemmi spazji tax-xogħol
-    'no': Kalt arbeidsområder
+    "no": Kalt arbeidsområder
     uz: Nomlangan ish joylari
     sk: Pomenované pracovné priestory
     fi: Nimetyt työtilat
@@ -72,7 +72,7 @@ metadata:
     lo: ຊື່ວ່າເຮັດວຽກເຮັດງານທໍາ
     km: កន្លែងធ្វើការដែលមានឈ្មោះ
 icon: TbAbc
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: workspaces
   mode: named

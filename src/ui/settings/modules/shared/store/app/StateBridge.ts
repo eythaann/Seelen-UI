@@ -4,28 +4,28 @@ import {
   SeelenWallWidgetId,
   SeelenWegWidgetId,
   SeelenWindowManagerWidgetId,
-} from '@seelen-ui/lib';
-import { Settings } from '@seelen-ui/lib/types';
-import { cloneDeep, pick } from 'lodash';
+} from "@seelen-ui/lib";
+import { Settings } from "@seelen-ui/lib/types";
+import { cloneDeep, pick } from "lodash";
 
-import { RootState } from '../domain';
+import { RootState } from "../domain";
 
 export const StateToJsonSettings = (state: RootState): Settings => {
   let settings = pick(cloneDeep(state), [
-    'activeIconPacks',
-    'oldActiveThemes',
-    'activeThemes',
-    'monitorsV3',
-    'shortcuts',
-    'devTools',
-    'language',
-    'dateFormat',
-    'updater',
-    'byWidget',
-    'drpc',
-    'byTheme',
-    'byWallpaper',
-    'performanceMode',
+    "activeIconPacks",
+    "oldActiveThemes",
+    "activeThemes",
+    "monitorsV3",
+    "shortcuts",
+    "devTools",
+    "language",
+    "dateFormat",
+    "updater",
+    "byWidget",
+    "drpc",
+    "byTheme",
+    "byWallpaper",
+    "performanceMode",
   ]);
 
   // migration since v2.1.0

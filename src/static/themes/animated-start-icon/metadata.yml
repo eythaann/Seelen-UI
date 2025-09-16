@@ -1,4 +1,4 @@
-id: '@eythaann/animated-start-icon'
+id: "@eythaann/animated-start-icon"
 metadata:
   displayName:
     en: Animated Start Icon
@@ -34,7 +34,7 @@ metadata:
     ms: Ikon permulaan animasi
     fi: Animoitu käynnistyskuvake
     sv: Animerad start-ikon
-    'no': Animert startikon
+    "no": Animert startikon
     uz: Animated boshlanish belgisi
     nl: Geanimeerd startpictogram
     el: Κινούμενο εικονίδιο έναρξης
@@ -104,7 +104,7 @@ metadata:
     lb: Ersatz Start Ikon duerch eng animéiert Versioun
     sk: Nahradenie ikony štartu animovanou verziou
     uz: Boshlash belgisini jonlantirilgan versiya orqali almashtiring
-    'no': Erstatt Start -ikonet med en animert versjon
+    "no": Erstatt Start -ikonet med en animert versjon
     mt: Ibdel l-ikona tal-bidu b'verżjoni animata
     sv: Ersätt startikonen med en animerad version
     fi: Korvaa käynnistyskuvake animoidulla versiolla

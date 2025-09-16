@@ -1,6 +1,6 @@
-import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../handlers/mod.ts';
-import { newFromInvoke, newOnEvent } from '../utils/State.ts';
-import type { Color as IColor, UIColors as IUIColors } from '@seelen-ui/types';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../handlers/mod.ts";
+import { newFromInvoke, newOnEvent } from "../utils/State.ts";
+import type { Color as IColor, UIColors as IUIColors } from "@seelen-ui/types";
 
 export class UIColors {
   constructor(public inner: IUIColors) {}
@@ -15,37 +15,37 @@ export class UIColors {
 
   static default(): UIColors {
     return new this({
-      background: '#ffffff',
-      foreground: '#000000',
-      accent_darkest: '#990000',
-      accent_darker: '#aa0000',
-      accent_dark: '#bb0000',
-      accent: '#cc0000',
-      accent_light: '#dd0000',
-      accent_lighter: '#ee0000',
-      accent_lightest: '#ff0000',
+      background: "#ffffff",
+      foreground: "#000000",
+      accent_darkest: "#990000",
+      accent_darker: "#aa0000",
+      accent_dark: "#bb0000",
+      accent: "#cc0000",
+      accent_light: "#dd0000",
+      accent_lighter: "#ee0000",
+      accent_lightest: "#ff0000",
       complement: null,
     });
   }
 
   setAsCssVariables(): void {
-    const id = 'system-ui-color-variables';
+    const id = "system-ui-color-variables";
     document.getElementById(id)?.remove();
-    const element = document.createElement('style');
+    const element = document.createElement("style");
     element.id = id;
-    element.textContent = ':root {\n';
+    element.textContent = ":root {\n";
 
     for (const [key, value] of Object.entries(this.inner)) {
-      if (typeof value !== 'string') {
+      if (typeof value !== "string") {
         continue;
       }
-      const hex = value.replace('#', '').slice(0, 6);
+      const hex = value.replace("#", "").slice(0, 6);
       const color = parseInt(hex, 16);
       const r = (color >> 16) & 255;
       const g = (color >> 8) & 255;
       const b = color & 255;
       // replace rust snake case with kebab case
-      const name = key.replace('_', '-');
+      const name = key.replace("_", "-");
       element.textContent += `--config-${name}-color: ${value.slice(0, 7)};\n`;
       element.textContent += `--config-${name}-color-rgb: ${r}, ${g}, ${b};\n`;
     }
@@ -68,12 +68,12 @@ export class Color {
   }
 
   private getRuntimeStyleSheet(): HTMLStyleElement {
-    const styleId = 'slu-lib-runtime-color-variables';
+    const styleId = "slu-lib-runtime-color-variables";
     let styleElement = document.getElementById(styleId) as HTMLStyleElement;
     if (!styleElement) {
-      styleElement = document.createElement('style');
+      styleElement = document.createElement("style");
       styleElement.id = styleId;
-      styleElement.textContent = ':root {\n}';
+      styleElement.textContent = ":root {\n}";
       document.head.appendChild(styleElement);
     }
     return styleElement;
@@ -81,7 +81,7 @@ export class Color {
 
   private insertIntoStyleSheet(obj: Record<string, string>): void {
     const sheet = this.getRuntimeStyleSheet();
-    const lines = sheet.textContent!.split('\n');
+    const lines = sheet.textContent!.split("\n");
     lines.pop(); // remove the closing brace
 
     for (const [key, value] of Object.entries(obj)) {
@@ -93,17 +93,17 @@ export class Color {
       }
     }
 
-    lines.push('}');
-    sheet.textContent = lines.join('\n');
+    lines.push("}");
+    sheet.textContent = lines.join("\n");
   }
 
   toHexString(): string {
     return (
-      '#' +
-      this.inner.r.toString(16).padStart(2, '0') +
-      this.inner.g.toString(16).padStart(2, '0') +
-      this.inner.b.toString(16).padStart(2, '0') +
-      this.inner.a.toString(16).padStart(2, '0')
+      "#" +
+      this.inner.r.toString(16).padStart(2, "0") +
+      this.inner.g.toString(16).padStart(2, "0") +
+      this.inner.b.toString(16).padStart(2, "0") +
+      this.inner.a.toString(16).padStart(2, "0")
     );
   }
 
@@ -117,8 +117,8 @@ export class Color {
    */
   setAsCssVariable(name: string): void {
     const parsedName = name
-      .replace('_', '-')
-      .replace(/[^a-zA-Z0-9\-]/g, '')
+      .replace("_", "-")
+      .replace(/[^a-zA-Z0-9\-]/g, "")
       .toLowerCase();
 
     this.insertIntoStyleSheet({

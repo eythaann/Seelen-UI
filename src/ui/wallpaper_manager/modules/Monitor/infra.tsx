@@ -1,9 +1,9 @@
-import { batch, useComputed, useSignal, useSignalEffect } from '@preact/signals';
-import { PhysicalMonitor, WallpaperId } from '@seelen-ui/lib/types';
-import { Wallpaper as WallpaperComponent } from '@shared/components/Wallpaper';
+import { batch, useComputed, useSignal, useSignalEffect } from "@preact/signals";
+import { PhysicalMonitor, WallpaperId } from "@seelen-ui/lib/types";
+import { Wallpaper as WallpaperComponent } from "@shared/components/Wallpaper";
 
-import { $paused, $settings, $wallpapers } from '../shared/state';
-import { $get_active_wallpapers, $relativeMonitors } from './derived';
+import { $paused, $settings, $wallpapers } from "../shared/state";
+import { $get_active_wallpapers, $relativeMonitors } from "./derived";
 
 export function MonitorContainers() {
   return $relativeMonitors.value.map((monitor) => {
@@ -57,9 +57,7 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
   }
 
   function changeToNext() {
-    let currentIdx = $current_id.value
-      ? $active_wallpapers.value.findIndex((w) => w.id === $current_id.value)
-      : 0;
+    let currentIdx = $current_id.value ? $active_wallpapers.value.findIndex((w) => w.id === $current_id.value) : 0;
 
     // if current was removed from actives
     if (currentIdx === -1) {
@@ -94,7 +92,10 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
       return;
     }
 
-    let intervalId = window.setInterval(changeToNext, $settings.value.interval * 1000);
+    let intervalId = globalThis.setInterval(
+      changeToNext,
+      $settings.value.interval * 1000,
+    );
     return () => clearInterval(intervalId);
   });
 
@@ -102,35 +103,38 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
   const wallpaper = $wallpapers.value.find((wallpaper) => wallpaper.id === $current_id.value);
 
   if ($old_id.value && !oldWallpaper) {
-    console.error('Old wallpaper not found (maybe removed?)', $old_id.value);
+    console.error("Old wallpaper not found (maybe removed?)", $old_id.value);
   }
   if ($current_id.value && !wallpaper) {
-    console.error('Wallpaper not found (maybe removed?)', $current_id.value);
+    console.error("Wallpaper not found (maybe removed?)", $current_id.value);
   }
 
   return (
     <div
       className="monitor"
       style={{
-        position: 'fixed',
-        left: monitor.rect.left / window.devicePixelRatio,
-        top: monitor.rect.top / window.devicePixelRatio,
-        width: (monitor.rect.right - monitor.rect.left) / window.devicePixelRatio,
-        height: (monitor.rect.bottom - monitor.rect.top) / window.devicePixelRatio,
+        position: "fixed",
+        left: monitor.rect.left / globalThis.devicePixelRatio,
+        top: monitor.rect.top / globalThis.devicePixelRatio,
+        width: (monitor.rect.right - monitor.rect.left) /
+          globalThis.devicePixelRatio,
+        height: (monitor.rect.bottom - monitor.rect.top) /
+          globalThis.devicePixelRatio,
       }}
     >
       {[
         $render_old.value && (
           <WallpaperComponent
-            key={oldWallpaper?.id || 'themed'}
+            key={oldWallpaper?.id || "themed"}
             definition={oldWallpaper}
-            config={oldWallpaper && $settings.value.byWallpaper[oldWallpaper.id]}
-            paused={true} // inmediately pause exiting wallpaper, to avoid gpu usage.
+            config={oldWallpaper &&
+              $settings.value.byWallpaper[oldWallpaper.id]}
+            paused // inmediately pause exiting wallpaper, to avoid gpu usage.
             out={$current_was_loaded.value}
           />
         ),
         <WallpaperComponent
-          key={wallpaper?.id || 'themed'}
+          key={wallpaper?.id || "themed"}
           definition={wallpaper}
           config={wallpaper && $settings.value.byWallpaper[wallpaper.id]}
           onLoad={() => ($current_was_loaded.value = true)}

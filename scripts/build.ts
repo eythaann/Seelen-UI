@@ -1,22 +1,23 @@
-import esbuild from 'esbuild';
-import CssModulesPlugin from 'esbuild-css-modules-plugin';
-import express from 'express';
-import fs from 'fs';
-import path from 'path';
-import { renderToStaticMarkup } from 'real-react-dom/server'; // preact compat doesn't work for extracting icons
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
+import esbuild from "esbuild";
+import CssModulesPlugin from "esbuild-css-modules-plugin";
+import express from "express";
+import fs from "fs";
+import path from "path";
+import { renderToStaticMarkup } from "real-react-dom/server"; // preact compat doesn't work for extracting icons
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+import process from "node:process";
 
 async function getArgs() {
   const argv = await yargs(hideBin(process.argv))
-    .option('production', {
-      type: 'boolean',
-      description: 'Enable Production Minified Bundle',
+    .option("production", {
+      type: "boolean",
+      description: "Enable Production Minified Bundle",
       default: false,
     })
-    .option('serve', {
-      type: 'boolean',
-      description: 'Run a local server',
+    .option("serve", {
+      type: "boolean",
+      description: "Run a local server",
       default: false,
     }).argv;
   return {
@@ -26,35 +27,35 @@ async function getArgs() {
 }
 
 async function extractIconsIfNecessary() {
-  if (fs.existsSync('./dist/icons')) {
+  if (fs.existsSync("./dist/icons")) {
     return;
   }
 
-  console.info('Extracting SVG Lazy Icons');
-  console.time('Lazy Icons');
-  fs.mkdirSync('./dist/icons', { recursive: true });
+  console.info("Extracting SVG Lazy Icons");
+  console.time("Lazy Icons");
+  fs.mkdirSync("./dist/icons", { recursive: true });
 
-  let tsFile = '// This file is generated on build, do not edit.\nexport type IconName =';
-  const entries = fs.readdirSync('./node_modules/react-icons');
+  let tsFile = "// This file is generated on build, do not edit.\nexport type IconName =";
+  const entries = fs.readdirSync("./node_modules/react-icons");
 
   for (const entry of entries) {
-    const entryPath = path.join('./node_modules/react-icons', entry);
+    const entryPath = path.join("./node_modules/react-icons", entry);
     const isDir = fs.statSync(entryPath).isDirectory();
 
-    if (!isDir || entry === 'lib') {
+    if (!isDir || entry === "lib") {
       continue;
     }
 
-    console.info('Extracting icon family:', entry);
+    console.info("Extracting icon family:", entry);
 
     const family = await import(`react-icons/${entry}`);
     for (const [name, ElementConstructor] of Object.entries(family)) {
-      if (typeof ElementConstructor !== 'function') {
+      if (typeof ElementConstructor !== "function") {
         continue;
       }
-      const element = ElementConstructor({ size: '1em' });
+      const element = ElementConstructor({ size: "1em" });
       const svg = renderToStaticMarkup(element);
-      if (!svg.startsWith('<svg')) {
+      if (!svg.startsWith("<svg")) {
         throw new Error(`Invalid SVG: ${svg}`);
       }
       fs.writeFileSync(`./dist/icons/${name}.svg`, svg);
@@ -63,14 +64,14 @@ async function extractIconsIfNecessary() {
     tsFile += `\n  | keyof typeof import('react-icons/${entry}')`;
   }
 
-  tsFile += ';\n';
-  fs.writeFileSync('./src/icons.ts', tsFile);
-  console.timeEnd('Lazy Icons');
+  tsFile += ";\n";
+  fs.writeFileSync("./src/icons.ts", tsFile);
+  console.timeEnd("Lazy Icons");
 }
 
 const appFolders = fs
-  .readdirSync('src/ui')
-  .filter((item) => item !== 'shared' && fs.statSync(path.join('src/ui', item)).isDirectory());
+  .readdirSync("src/ui")
+  .filter((item) => item !== "shared" && fs.statSync(path.join("src/ui", item)).isDirectory());
 
 const entryPoints = appFolders
   .map((folder) => {
@@ -86,17 +87,17 @@ const entryPoints = appFolders
     if (fs.existsSync(svelte)) {
       return svelte;
     }
-    return '';
+    return "";
   })
   .filter((file) => !!file);
 
-entryPoints.push('./libs/widgets-integrity/mod.ts');
+entryPoints.push("./libs/widgets-integrity/mod.ts");
 
 const OwnPlugin: esbuild.Plugin = {
-  name: 'copy-public-by-entry',
+  name: "copy-public-by-entry",
   setup(build) {
     build.onStart(() => {
-      console.time('build');
+      console.time("build");
     });
     build.onEnd(() => {
       // copy public folder for each widget
@@ -107,23 +108,23 @@ const OwnPlugin: esbuild.Plugin = {
       });
 
       // move nested folders to root
-      fs.readdirSync('dist/src/ui').forEach((folder) => {
+      fs.readdirSync("dist/src/ui").forEach((folder) => {
         let source = `dist/src/ui/${folder}`;
         let target = `dist/${folder}`;
         fs.cpSync(source, target, { recursive: true, force: true });
       });
-      fs.rmSync('dist/src', { recursive: true, force: true });
+      fs.rmSync("dist/src", { recursive: true, force: true });
 
-      console.timeEnd('build');
+      console.timeEnd("build");
     });
   },
 };
 
 function startDevServer() {
   const app = express();
-  app.use(express.static('dist'));
+  app.use(express.static("dist"));
   app.listen(3579, () => {
-    console.info('Listening on http://localhost:3579');
+    console.info("Listening on http://localhost:3579");
   });
 }
 
@@ -133,11 +134,11 @@ function startDevServer() {
 
   await extractIconsIfNecessary();
 
-  console.info('Removing old artifacts');
+  console.info("Removing old artifacts");
   // delete all in dist less icons
-  fs.readdirSync('dist').forEach((folder) => {
-    if (folder !== 'icons') {
-      fs.rmSync(path.join('dist', folder), { recursive: true, force: true });
+  fs.readdirSync("dist").forEach((folder) => {
+    if (folder !== "icons") {
+      fs.rmSync(path.join("dist", folder), { recursive: true, force: true });
     }
   });
 
@@ -147,24 +148,24 @@ function startDevServer() {
     minify: isProd,
     sourcemap: !isProd,
     treeShaking: true,
-    format: 'esm',
-    outdir: './dist',
-    jsx: 'automatic',
+    format: "esm",
+    outdir: "./dist",
+    jsx: "automatic",
     loader: {
-      '.yml': 'text',
+      ".yml": "text",
     },
     plugins: [
       CssModulesPlugin({
-        localsConvention: 'camelCase',
-        pattern: 'do-not-use-on-themes-[local]-[hash]',
+        localsConvention: "camelCase",
+        pattern: "do-not-use-on-themes-[local]-[hash]",
       }),
       OwnPlugin,
     ],
     alias: {
-      react: './node_modules/preact/compat/',
-      'react/jsx-runtime': './node_modules/preact/jsx-runtime',
-      'react-dom': './node_modules/preact/compat/',
-      'react-dom/*': './node_modules/preact/compat/*',
+      react: "./node_modules/preact/compat/",
+      "react/jsx-runtime": "./node_modules/preact/jsx-runtime",
+      "react-dom": "./node_modules/preact/compat/",
+      "react-dom/*": "./node_modules/preact/compat/*",
     },
   });
 

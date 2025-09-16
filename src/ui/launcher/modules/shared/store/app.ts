@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Settings, UIColors } from '@seelen-ui/lib';
-import { StateBuilder } from '@shared/StateBuilder';
+import { createSlice } from "@reduxjs/toolkit";
+import { Settings, UIColors } from "@seelen-ui/lib";
+import { StateBuilder } from "@shared/StateBuilder";
 
-import { LauncherState } from './domain';
+import { LauncherState } from "./domain";
 
 const initialState: LauncherState = {
   colors: UIColors.default().inner,
@@ -12,7 +12,7 @@ const initialState: LauncherState = {
 };
 
 export const RootSlice = createSlice({
-  name: 'root',
+  name: "root",
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),

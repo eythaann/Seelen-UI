@@ -8,29 +8,29 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
-import { useComputed, useSignal } from '@preact/signals';
-import { ToolbarItem2 } from '@seelen-ui/lib/types';
-import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
-import { useWindowFocusChange } from '@shared/hooks';
-import { cx } from '@shared/styles';
-import { isEqual } from 'lodash';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+} from "@dnd-kit/core";
+import { arrayMove } from "@dnd-kit/sortable";
+import { useComputed, useSignal } from "@preact/signals";
+import { ToolbarItem2 } from "@seelen-ui/lib/types";
+import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
+import { useWindowFocusChange } from "@shared/hooks";
+import { cx } from "@shared/styles";
+import { isEqual } from "lodash";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../shared/store/app';
+import { Selectors } from "../shared/store/app";
 
-import { RootState } from '../shared/store/domain';
+import { RootState } from "../shared/store/domain";
 
-import { $toolbar_state } from '../shared/state/items';
-import { $bar_should_be_hidden, $settings } from '../shared/state/mod';
-import { matchIds } from '../shared/utils';
-import { MainContextMenu } from './ContextMenu';
-import { ItemsDropableContainer } from './ItemsContainer';
-import { componentByModule } from './mappins';
+import { $toolbar_state } from "../shared/state/items";
+import { $bar_should_be_hidden, $settings } from "../shared/state/mod";
+import { matchIds } from "../shared/utils";
+import { MainContextMenu } from "./ContextMenu";
+import { ItemsDropableContainer } from "./ItemsContainer";
+import { componentByModule } from "./mappins";
 
 interface Container {
   id: string;
@@ -41,15 +41,15 @@ export function FancyToolbar() {
   const $dragging_id = useSignal<string | null>(null);
   const $containers = useComputed<Container[]>(() => [
     {
-      id: 'left',
+      id: "left",
       items: $toolbar_state.value.left,
     },
     {
-      id: 'center',
+      id: "center",
       items: $toolbar_state.value.center,
     },
     {
-      id: 'right',
+      id: "right",
       items: $toolbar_state.value.right,
     },
   ]);
@@ -74,7 +74,7 @@ export function FancyToolbar() {
   const sensors = useSensors(pointerSensor);
 
   function findContainer(id: string): Container | undefined {
-    if (['left', 'center', 'right'].includes(id)) {
+    if (["left", "center", "right"].includes(id)) {
       return $containers.value.find((c) => c.id === id);
     }
     return $containers.value.find((c) => c.items.some((item) => matchIds(item, id)));
@@ -91,7 +91,10 @@ export function FancyToolbar() {
     const activeContainer = findContainer(active.id as string);
     const overContainer = findContainer(over.id as string);
 
-    if (!activeContainer || !overContainer || activeContainer.id === overContainer.id) return;
+    if (
+      !activeContainer || !overContainer ||
+      activeContainer.id === overContainer.id
+    ) return;
 
     const activeItem = activeContainer.items.find((item) => item === active.id);
     if (!activeItem) return;
@@ -123,14 +126,15 @@ export function FancyToolbar() {
     const activeContainer = findContainer(active.id as string);
     const overContainer = findContainer(over.id as string);
 
-    if (!activeContainer || !overContainer || activeContainer.id !== overContainer.id) {
+    if (
+      !activeContainer || !overContainer ||
+      activeContainer.id !== overContainer.id
+    ) {
       $dragging_id.value = null;
       return;
     }
 
-    const activeIndex = activeContainer.items.findIndex((item) =>
-      matchIds(item, active.id as string),
-    );
+    const activeIndex = activeContainer.items.findIndex((item) => matchIds(item, active.id as string));
     const overIndex = overContainer.items.findIndex((item) => matchIds(item, over.id as string));
 
     if (activeIndex !== -1 && overIndex !== -1) {
@@ -148,17 +152,17 @@ export function FancyToolbar() {
   return (
     <AnimatedDropdown
       animationDescription={{
-        openAnimationName: 'ft-bar-context-menu-open',
-        closeAnimationName: 'ft-bar-context-menu-close',
+        openAnimationName: "ft-bar-context-menu-open",
+        closeAnimationName: "ft-bar-context-menu-close",
       }}
-      trigger={['contextMenu']}
+      trigger={["contextMenu"]}
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
       dropdownRender={() => <MainContextMenu />}
     >
       <div
-        className={cx('ft-bar', $settings.value.position.toLowerCase(), {
-          'ft-bar-hidden': $bar_should_be_hidden.value,
+        className={cx("ft-bar", $settings.value.position.toLowerCase(), {
+          "ft-bar-hidden": $bar_should_be_hidden.value,
         })}
         data-there-is-maximized-on-background={data.thereIsMaximizedOnBg}
         data-focused-is-maximized={!!focusedWindow?.isMaximized}
@@ -173,10 +177,10 @@ export function FancyToolbar() {
           onDragEnd={handleDragEnd}
           sensors={sensors}
         >
-          {$containers.value.map(({ id, items }) => (
-            <ItemsDropableContainer key={id} id={id} items={items} />
-          ))}
-          <DragOverlay>{draggingItem && componentByModule(draggingItem)}</DragOverlay>
+          {$containers.value.map(({ id, items }) => <ItemsDropableContainer key={id} id={id} items={items} />)}
+          <DragOverlay>
+            {draggingItem && componentByModule(draggingItem)}
+          </DragOverlay>
         </DndContext>
       </div>
     </AnimatedDropdown>
@@ -194,16 +198,20 @@ function useBarData() {
   useEffect(() => {
     if (color) {
       document.documentElement.style.setProperty(
-        '--color-maximized-on-bg-background',
+        "--color-maximized-on-bg-background",
         color.background,
       );
       document.documentElement.style.setProperty(
-        '--color-maximized-on-bg-foreground',
+        "--color-maximized-on-bg-foreground",
         color.foreground,
       );
     } else {
-      document.documentElement.style.removeProperty('--color-maximized-on-bg-background');
-      document.documentElement.style.removeProperty('--color-maximized-on-bg-foreground');
+      document.documentElement.style.removeProperty(
+        "--color-maximized-on-bg-background",
+      );
+      document.documentElement.style.removeProperty(
+        "--color-maximized-on-bg-foreground",
+      );
     }
   }, [color]);
 

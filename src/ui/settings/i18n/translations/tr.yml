@@ -38,7 +38,7 @@ apps_configurations:
     workspace_placeholder: Yok
   bundled_msg: >-
     Bu paketlenmiş yapılandırmalar düzenlenemez ve özelleştirme olmadan size en
-    iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları otomatik 
+    iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları otomatik
     olarak yapılandırır.
   bundled_title: Seelen ile Birlikte Gelen Uygulama Yapılandırması
   confirm_delete: Bu yapılandırmayı silmek istediğinizden emin misiniz?
@@ -220,7 +220,7 @@ sides:
   top: Üst
 start:
   message: >-
-    Seelen UI'a hoş geldiniz! Windows deneyiminizi geliştirmek için entegre 
+    Seelen UI'a hoş geldiniz! Windows deneyiminizi geliştirmek için entegre
     döşeme pencere yöneticisi ile en iyi masaüstü ortamı. Kullanıcı dostu
     arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevde yeni bir
     çağı keşfedin.

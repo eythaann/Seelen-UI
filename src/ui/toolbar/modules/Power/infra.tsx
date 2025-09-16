@@ -1,9 +1,9 @@
-import { PowerToolbarItem } from '@seelen-ui/lib/types';
-import { useSelector } from 'react-redux';
+import { PowerToolbarItem } from "@seelen-ui/lib/types";
+import { useSelector } from "react-redux";
 
-import { Item } from '../item/infra/infra';
+import { Item } from "../item/infra/infra";
 
-import { Selectors } from '../shared/store/app';
+import { Selectors } from "../shared/store/app";
 
 interface Props {
   module: PowerToolbarItem;

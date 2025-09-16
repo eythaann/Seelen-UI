@@ -1,27 +1,31 @@
-import { AppConfig } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
-import { ColumnsType, ColumnType } from 'antd/es/table';
-import { TFunction } from 'i18next';
-import { cloneDeep, debounce } from 'lodash';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { AppConfig } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { Button, Input, Modal, Switch, Table, Tooltip } from "antd";
+import { ColumnsType, ColumnType } from "antd/es/table";
+import { TFunction } from "i18next";
+import { cloneDeep, debounce } from "lodash";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
-import { useAppSelector } from '../../shared/utils/infra';
+import { useAppSelector } from "../../shared/utils/infra";
 
-import { RootSelectors } from '../../shared/store/app/selectors';
-import { cx } from '../../shared/utils/app';
-import { getSorterByBool, getSorterByText } from '../app/filters';
-import { AppsConfigActions } from '../app/reducer';
+import { RootSelectors } from "../../shared/store/app/selectors";
+import { cx } from "../../shared/utils/app";
+import { getSorterByBool, getSorterByText } from "../app/filters";
+import { AppsConfigActions } from "../app/reducer";
 
-import { AppConfigurationExtended, WmApplicationOptions } from '../domain';
+import { AppConfigurationExtended, WmApplicationOptions } from "../domain";
 
-import { ExportApps } from '../../shared/store/storeApi';
-import { EditAppModal } from './EditModal';
-import cs from './index.module.css';
+import { ExportApps } from "../../shared/store/storeApi";
+import { EditAppModal } from "./EditModal";
+import cs from "./index.module.css";
 
-const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index: number) => {
+const ReadonlySwitch = (
+  value: boolean,
+  record: AppConfigurationExtended,
+  _index: number,
+) => {
   return (
     <Switch
       value={value}
@@ -36,12 +40,12 @@ const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index
 const getColumns = (t: TFunction): ColumnsType<AppConfigurationExtended> => {
   return [
     {
-      title: t('apps_configurations.app.name'),
-      dataIndex: 'name',
-      key: 'name',
-      fixed: 'left',
+      title: t("apps_configurations.app.name"),
+      dataIndex: "name",
+      key: "name",
+      fixed: "left",
       width: 120,
-      sorter: getSorterByText('name'),
+      sorter: getSorterByText("name"),
       render: (name) => (
         <Tooltip placement="topLeft" title={name}>
           {name}
@@ -49,32 +53,31 @@ const getColumns = (t: TFunction): ColumnsType<AppConfigurationExtended> => {
       ),
     },
     {
-      title: t('apps_configurations.app.category'),
-      dataIndex: 'category',
-      key: 'category',
+      title: t("apps_configurations.app.category"),
+      dataIndex: "category",
+      key: "category",
       width: 120,
       render(value, _record, _index) {
-        return value || '-';
+        return value || "-";
       },
-      sorter: getSorterByText('category'),
+      sorter: getSorterByText("category"),
     },
     ...Object.values(WmApplicationOptions).map(
-      (option) =>
-        ({
-          title: t(`apps_configurations.app.options.${option}`),
-          dataIndex: option,
-          key: option,
-          align: 'center',
-          width: 140,
-          render: ReadonlySwitch,
-          sorter: getSorterByBool(option),
-        } as ColumnType<AppConfigurationExtended>),
+      (option) => ({
+        title: t(`apps_configurations.app.options.${option}`),
+        dataIndex: option,
+        key: option,
+        align: "center",
+        width: 140,
+        render: ReadonlySwitch,
+        sorter: getSorterByBool(option),
+      } as ColumnType<AppConfigurationExtended>),
     ),
     {
       title: <ActionsTitle />,
-      key: 'operation',
-      fixed: 'right',
-      align: 'center',
+      key: "operation",
+      fixed: "right",
+      align: "center",
       width: 60,
       render: (_, record, index) => <Actions record={record} index={index} />,
     },
@@ -96,15 +99,22 @@ function ActionsTitle() {
 
   return (
     <div>
-      <EditAppModal open={isModalOpen} isNew onSave={onSave} onCancel={onCancel} />
+      <EditAppModal
+        open={isModalOpen}
+        isNew
+        onSave={onSave}
+        onCancel={onCancel}
+      />
       <Button className={cs.newBtn} type="primary" onClick={showModal}>
-        {t('apps_configurations.new')}
+        {t("apps_configurations.new")}
       </Button>
     </div>
   );
 }
 
-function Actions({ record }: { record: AppConfigurationExtended; index: number }) {
+function Actions(
+  { record }: { record: AppConfigurationExtended; index: number },
+) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -132,7 +142,10 @@ function Actions({ record }: { record: AppConfigurationExtended; index: number }
           readonlyApp={record.isBundled ? record : undefined}
         />
       )}
-      <Button type={record.isBundled ? 'default' : 'primary'} onClick={showModal}>
+      <Button
+        type={record.isBundled ? "default" : "primary"}
+        onClick={showModal}
+      >
         {record.isBundled ? <Icon iconName="FaEye" /> : <Icon iconName="MdOutlineEdit" />}
       </Button>
     </div>
@@ -143,7 +156,7 @@ export function AppsConfiguration() {
   const [delay, setDelay] = useState(300);
   const [loading, setLoading] = useState(true);
   const [selectedAppsKey, setSelectedAppsKey] = useState<number[]>([]);
-  const [searched, setSearched] = useState('');
+  const [searched, setSearched] = useState("");
   const [data, setData] = useState<AppConfigurationExtended[]>([]);
 
   const apps = useAppSelector(RootSelectors.appsConfigurations);
@@ -190,16 +203,16 @@ export function AppsConfiguration() {
 
   const confirmDelete = useCallback(() => {
     const modal = Modal.confirm({
-      title: t('apps_configurations.confirm_delete_title'),
-      content: t('apps_configurations.confirm_delete'),
-      okText: t('delete'),
+      title: t("apps_configurations.confirm_delete_title"),
+      content: t("apps_configurations.confirm_delete"),
+      okText: t("delete"),
       onOk: () => {
         dispatch(AppsConfigActions.deleteMany(selectedAppsKey));
         setSelectedAppsKey([]);
         modal.destroy();
       },
       okButtonProps: { danger: true },
-      cancelText: t('cancel'),
+      cancelText: t("cancel"),
       centered: true,
     });
   }, [selectedAppsKey]);
@@ -216,7 +229,7 @@ export function AppsConfiguration() {
     <Input
       onChange={onSearch}
       onClick={(e) => e.stopPropagation()}
-      placeholder={t('apps_configurations.search')}
+      placeholder={t("apps_configurations.search")}
     />
   );
 
@@ -227,7 +240,7 @@ export function AppsConfiguration() {
         dataSource={data}
         columns={columns}
         pagination={{ pageSize: 25 }}
-        scroll={{ y: 'calc(100vh - 150px)', x: '100vw' }}
+        scroll={{ y: "calc(100vh - 150px)", x: "100vw" }}
         className={cs.table}
         rowSelection={{
           selectedRowKeys: selectedAppsKey,
@@ -242,15 +255,24 @@ export function AppsConfiguration() {
         }}
       />
       <div className={cs.footer}>
-        <Button onClick={importApps}>{t('apps_configurations.import')}</Button>
+        <Button onClick={importApps}>{t("apps_configurations.import")}</Button>
         <Button onClick={exportApps} disabled={!selectedAppsKey.length}>
-          {t('apps_configurations.export')}
+          {t("apps_configurations.export")}
         </Button>
-        <Button type="primary" danger disabled={!selectedAppsKey.length} onClick={confirmDelete}>
-          {t('apps_configurations.delete')}
+        <Button
+          type="primary"
+          danger
+          disabled={!selectedAppsKey.length}
+          onClick={confirmDelete}
+        >
+          {t("apps_configurations.delete")}
         </Button>
-        <Button onClick={performSwap} type="primary" disabled={selectedAppsKey.length !== 2}>
-          {t('apps_configurations.swap')}
+        <Button
+          onClick={performSwap}
+          type="primary"
+          disabled={selectedAppsKey.length !== 2}
+        >
+          {t("apps_configurations.swap")}
         </Button>
       </div>
     </div>

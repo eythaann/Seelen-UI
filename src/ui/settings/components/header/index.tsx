@@ -1,21 +1,21 @@
-import { process } from '@seelen-ui/lib/tauri';
-import { ResourceText } from '@shared/components/ResourceText';
-import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { Button } from 'antd';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router';
+import { process } from "@seelen-ui/lib/tauri";
+import { ResourceText } from "@shared/components/ResourceText";
+import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { Button } from "antd";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useLocation } from "react-router";
 
-import { SaveStore } from '../../modules/shared/store/infra';
-import { useAppSelector } from '../../modules/shared/utils/infra';
+import { SaveStore } from "../../modules/shared/store/infra";
+import { useAppSelector } from "../../modules/shared/utils/infra";
 
-import { RootActions } from '../../modules/shared/store/app/reducer';
-import { RootSelectors } from '../../modules/shared/store/app/selectors';
+import { RootActions } from "../../modules/shared/store/app/reducer";
+import { RootSelectors } from "../../modules/shared/store/app/selectors";
 
-import { RouteExtraInfo } from './ExtraInfo';
-import { UpdateButton } from './UpdateButton';
-import cs from './index.module.css';
+import { RouteExtraInfo } from "./ExtraInfo";
+import { UpdateButton } from "./UpdateButton";
+import cs from "./index.module.css";
 
 export const Header = () => {
   const widgets = useSelector(RootSelectors.widgets);
@@ -43,36 +43,39 @@ export const Header = () => {
     }
   };
 
-  const saveBtnLabel = shouldRestart ? t('save_and_restart') : t('save');
+  const saveBtnLabel = shouldRestart ? t("save_and_restart") : t("save");
 
   let label: React.ReactNode = <span>null!?</span>;
-  let parts = location.pathname === '/' ? ['home'] : location.pathname.split('/').filter(Boolean);
+  let parts = location.pathname === "/" ? ["home"] : location.pathname.split("/").filter(Boolean);
 
-  if (parts[0] === 'widget') {
+  if (parts[0] === "widget") {
     const [_, username, resourceName] = parts;
     const widgetId = `@${username}/${resourceName}`;
     const widget = widgets.find((w) => w.id === widgetId);
     label = widget ? <ResourceText text={widget.metadata.displayName} /> : <span>{widgetId}</span>;
-  } else if (parts[0] === 'theme') {
+  } else if (parts[0] === "theme") {
     const [_, username, resourceName] = parts;
     const themeId = `@${username}/${resourceName}`;
     const theme = themes.find((t) => t.id === themeId);
     label = theme ? <ResourceText text={theme.metadata.displayName} /> : <span>{themeId}</span>;
   } else {
-    if (parts[0] === 'wallpaper') {
-      parts = ['resources', 'wallpaper', 'config'];
+    if (parts[0] === "wallpaper") {
+      parts = ["resources", "wallpaper", "config"];
     }
 
     label = parts.map((part, idx) => (
       <React.Fragment key={part}>
-        {idx !== parts.length - 1 ? (
-          <NavLink to={`/${parts.slice(0, idx + 1).join('/')}`} className={cs.part}>
-            {t(`header.labels.${part}`)}
-          </NavLink>
-        ) : (
-          <span className={cs.part}>{t(`header.labels.${part}`)}</span>
-        )}
-        {++idx < parts.length ? '>' : ''}
+        {idx !== parts.length - 1
+          ? (
+            <NavLink
+              to={`/${parts.slice(0, idx + 1).join("/")}`}
+              className={cs.part}
+            >
+              {t(`header.labels.${part}`)}
+            </NavLink>
+          )
+          : <span className={cs.part}>{t(`header.labels.${part}`)}</span>}
+        {++idx < parts.length ? ">" : ""}
       </React.Fragment>
     ));
   }
@@ -89,19 +92,21 @@ export const Header = () => {
         <UpdateButton />
         <Button
           style={{ minWidth: 60 }}
-          children={t('cancel')}
           type="default"
           danger
           disabled={!hasChanges}
           onClick={cancelChanges}
-        />
+        >
+          {t("cancel")}
+        </Button>
         <Button
           style={{ minWidth: 60 }}
-          children={hasChanges ? saveBtnLabel : t('close')}
           type="primary"
           danger={!hasChanges}
           onClick={SaveOrQuit}
-        />
+        >
+          {hasChanges ? saveBtnLabel : t("close")}
+        </Button>
       </div>
     </div>
   );

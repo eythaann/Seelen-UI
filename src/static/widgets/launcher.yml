@@ -1,4 +1,4 @@
-id: '@seelen/launcher'
+id: "@seelen/launcher"
 icon: MdRocketLaunch
 metadata:
   displayName:
@@ -36,7 +36,7 @@ metadata:
     fi: Sovelluksen käynnistin
     mt: Launcher tal-Applikazzjoni
     sv: Applikationsstartare
-    'no': Søknadsstart
+    "no": Søknadsstart
     uz: Ilovani ishga tushirish xizmati
     tr: Uygulama Başlatıcı
     el: Εκτοξευτής εφαρμογών

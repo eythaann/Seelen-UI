@@ -10,7 +10,7 @@
 export function calculateElementPosition(
   base: HTMLElement,
   follower: HTMLElement,
-  preferredPosition: 'bottom' | 'top' | 'left' | 'right',
+  preferredPosition: "bottom" | "top" | "left" | "right",
 ): { top: number; left: number } {
   // Get bounding rectangles and viewport dimensions
   const baseRect = base.getBoundingClientRect();
@@ -27,7 +27,12 @@ export function calculateElementPosition(
   );
 
   // Adjust position to ensure it stays within viewport boundaries
-  position = adjustToViewport(position, followerRect, viewportWidth, viewportHeight);
+  position = adjustToViewport(
+    position,
+    followerRect,
+    viewportWidth,
+    viewportHeight,
+  );
 
   return position;
 }
@@ -46,7 +51,7 @@ function calculateInitialPosition(
   let left = 0;
 
   switch (preferredPosition) {
-    case 'bottom':
+    case "bottom":
       top = baseRect.bottom;
       left = baseRect.left + baseRect.width / 2 - followerRect.width / 2;
       // Flip to top if it would go below viewport
@@ -55,7 +60,7 @@ function calculateInitialPosition(
       }
       break;
 
-    case 'top':
+    case "top":
       top = baseRect.top - followerRect.height;
       left = baseRect.left + baseRect.width / 2 - followerRect.width / 2;
       // Flip to bottom if it would go above viewport
@@ -64,7 +69,7 @@ function calculateInitialPosition(
       }
       break;
 
-    case 'left':
+    case "left":
       left = baseRect.left - followerRect.width;
       top = baseRect.top + baseRect.height / 2 - followerRect.height / 2;
       // Flip to right if it would go beyond left viewport edge
@@ -73,7 +78,7 @@ function calculateInitialPosition(
       }
       break;
 
-    case 'right':
+    case "right":
     default:
       left = baseRect.right;
       top = baseRect.top + baseRect.height / 2 - followerRect.height / 2;

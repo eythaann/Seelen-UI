@@ -1,14 +1,6 @@
-import { computed, signal } from '@preact/signals';
-import {
-  invoke,
-  SeelenCommand,
-  SeelenEvent,
-  Settings,
-  subscribe,
-  UIColors,
-  WallpaperList,
-} from '@seelen-ui/lib';
-import { debounce } from 'lodash';
+import { computed, signal } from "@preact/signals";
+import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, UIColors, WallpaperList } from "@seelen-ui/lib";
+import { debounce } from "lodash";
 
 const initial = await Settings.getAsync();
 
@@ -18,12 +10,11 @@ export const $settings = signal({
   byMonitor: initial.monitorsV3,
 });
 Settings.onChange(
-  (settings) =>
-    ($settings.value = {
-      ...settings.wall,
-      byWallpaper: settings.byWallpaper,
-      byMonitor: settings.monitorsV3,
-    }),
+  (settings) => ($settings.value = {
+    ...settings.wall,
+    byWallpaper: settings.byWallpaper,
+    byMonitor: settings.monitorsV3,
+  }),
 );
 
 (await UIColors.getAsync()).setAsCssVariables();
@@ -47,7 +38,8 @@ subscribe(SeelenEvent.GlobalMouseMove, () => {
 });
 
 export const $paused = computed(() => {
-  return $idle.value || $focused.value.isFullscreened || $performance_mode.value !== 'Disabled';
+  return $idle.value || $focused.value.isFullscreened ||
+    $performance_mode.value !== "Disabled";
 });
 
 export const $monitors = signal(await invoke(SeelenCommand.SystemGetMonitors));
@@ -56,7 +48,14 @@ subscribe(SeelenEvent.SystemMonitorsChanged, ({ payload }) => {
 });
 
 export const $wallpapers = signal((await WallpaperList.getAsync()).asArray());
-WallpaperList.onChange((wallpapers) => ($wallpapers.value = wallpapers.asArray()));
+WallpaperList.onChange((
+  wallpapers,
+) => ($wallpapers.value = wallpapers.asArray()));
 
-export const $performance_mode = signal(await invoke(SeelenCommand.StateGetPerformanceMode));
-subscribe(SeelenEvent.StatePerformanceModeChanged, (e) => ($performance_mode.value = e.payload));
+export const $performance_mode = signal(
+  await invoke(SeelenCommand.StateGetPerformanceMode),
+);
+subscribe(
+  SeelenEvent.StatePerformanceModeChanged,
+  (e) => ($performance_mode.value = e.payload),
+);

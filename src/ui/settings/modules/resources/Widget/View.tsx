@@ -1,24 +1,20 @@
-import { SeelenWallWidgetId } from '@seelen-ui/lib';
-import { WidgetId } from '@seelen-ui/lib/types';
-import { Switch } from 'antd';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { SeelenWallWidgetId } from "@seelen-ui/lib";
+import { WidgetId } from "@seelen-ui/lib/types";
+import { Switch } from "antd";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 
-import { RootActions } from '../../shared/store/app/reducer';
-import { RootSelectors } from '../../shared/store/app/selectors';
+import { RootActions } from "../../shared/store/app/reducer";
+import { RootSelectors } from "../../shared/store/app/selectors";
 
-import { RootState } from '../../shared/store/domain';
+import { RootState } from "../../shared/store/domain";
 
-import {
-  SettingsGroup,
-  SettingsOption,
-  SettingsSubGroup,
-} from '../../../components/SettingsBox';
-import { WallpaperList } from '../../Wall/WallpaperList';
-import { RenderBySettingsDeclaration } from './ConfigRenderer';
-import { WidgetInstanceSelector } from './InstanceSelector';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox";
+import { WallpaperList } from "../../Wall/WallpaperList";
+import { RenderBySettingsDeclaration } from "./ConfigRenderer";
+import { WidgetInstanceSelector } from "./InstanceSelector";
 
 const selectMonitorWidgetConfig = (id: WidgetId, monitorId?: string) => (state: RootState) => {
   if (!monitorId) {
@@ -45,8 +41,11 @@ export function WidgetConfiguration({
   const [selectedInstance, setSelectedInstance] = useState<string | null>(null);
 
   const widget = useSelector(selectWidgetDeclaration(widgetId));
-  const rootConfig = useSelector(selectWidgetConfig(widgetId)) || { enabled: true };
-  const monitorConfig = useSelector(selectMonitorWidgetConfig(widgetId, monitorId));
+  const rootConfig = useSelector(selectWidgetConfig(widgetId)) ||
+    { enabled: true };
+  const monitorConfig = useSelector(
+    selectMonitorWidgetConfig(widgetId, monitorId),
+  );
   const areDevToolsEnabled = useSelector(RootSelectors.devTools);
 
   const { t } = useTranslation();
@@ -69,7 +68,7 @@ export function WidgetConfiguration({
     }
 
     // intances `enabled` always inherit from widget root config
-    if (selectedInstance && key !== 'enabled') {
+    if (selectedInstance && key !== "enabled") {
       d(
         RootActions.patchWidgetInstanceConfig({
           widgetId,
@@ -83,7 +82,9 @@ export function WidgetConfiguration({
     d(RootActions.patchWidgetConfig({ widgetId, config: { [key]: value } }));
   };
 
-  const instances = Object.keys(rootConfig.$instances || {}).map((instanceId) => ({
+  const instances = Object.keys(rootConfig.$instances || {}).map((
+    instanceId,
+  ) => ({
     label: `Instance ${instanceId.slice(0, 6)}`,
     value: instanceId,
   }));
@@ -95,28 +96,31 @@ export function WidgetConfiguration({
     ...(monitorConfig || {}),
   };
 
-  const showToggleEnabled = !monitorId || widget.instances === 'ReplicaByMonitor';
+  const showToggleEnabled = !monitorId ||
+    widget.instances === "ReplicaByMonitor";
 
   return (
     <>
       {showToggleEnabled && (
         <SettingsGroup>
           <SettingsOption>
-            <b>{monitorId ? t('widget.enable_for_monitor') : t('widget.enable')}</b>
+            <b>
+              {monitorId ? t("widget.enable_for_monitor") : t("widget.enable")}
+            </b>
             <Switch
               checked={config.enabled}
               onChange={(value) => {
-                onConfigChange('enabled', value);
+                onConfigChange("enabled", value);
               }}
             />
           </SettingsOption>
         </SettingsGroup>
       )}
 
-      {widget.instances === 'Multiple' && (
+      {widget.instances === "Multiple" && (
         <SettingsGroup>
           <SettingsOption>
-            <b>{t('widget.instances')}</b>
+            <b>{t("widget.instances")}</b>
             <WidgetInstanceSelector
               widgetId={widgetId}
               options={instances}
@@ -135,9 +139,7 @@ export function WidgetConfiguration({
       />
 
       {/* special case */}
-      {widgetId === SeelenWallWidgetId && (
-        <WallpaperList monitorId={monitorId} />
-      )}
+      {widgetId === SeelenWallWidgetId && <WallpaperList monitorId={monitorId} />}
 
       {areDevToolsEnabled && (
         <SettingsGroup>
@@ -156,7 +158,7 @@ export function WidgetConfiguration({
 }
 
 export function WidgetView() {
-  const { username, resourceName } = useParams<'username' | 'resourceName'>();
+  const { username, resourceName } = useParams<"username" | "resourceName">();
   const widgetId = `@${username}/${resourceName}` as WidgetId;
   return <WidgetConfiguration widgetId={widgetId} />;
 }

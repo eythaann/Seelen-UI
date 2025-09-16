@@ -1,11 +1,11 @@
 // This file is for testing, not final implementation yet.
 
-import { WidgetId } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { Button, Modal } from 'antd';
-import { ReactNode, useState } from 'react';
+import { WidgetId } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { Button, Modal } from "antd";
+import { ReactNode, useState } from "react";
 
-import { WidgetConfiguration } from '../../resources/Widget/View';
+import { WidgetConfiguration } from "../../resources/Widget/View";
 
 interface Props {
   widgetId: WidgetId;
@@ -18,7 +18,13 @@ export function WidgetSettingsModal({ widgetId, monitorId, title }: Props) {
 
   return (
     <>
-      <Modal open={open} onCancel={() => setOpen(false)} title={title} footer={null} centered>
+      <Modal
+        open={open}
+        onCancel={() => setOpen(false)}
+        title={title}
+        footer={null}
+        centered
+      >
         <WidgetConfiguration widgetId={widgetId} monitorId={monitorId} />
       </Modal>
       <Button type="default" onClick={() => setOpen(true)}>

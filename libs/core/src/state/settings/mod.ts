@@ -1,4 +1,4 @@
-import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mod.ts';
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 
 import type {
   FancyToolbarSettings,
@@ -15,10 +15,10 @@ import type {
   UpdateChannel,
   WidgetId,
   WindowManagerSettings,
-} from '@seelen-ui/types';
-import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
-import type { Enum } from '../../utils/enums.ts';
-import { invoke } from '../../handlers/mod.ts';
+} from "@seelen-ui/types";
+import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
+import type { Enum } from "../../utils/enums.ts";
+import { invoke } from "../../handlers/mod.ts";
 import {
   SeelenLauncherWidgetId,
   SeelenToolbarWidgetId,
@@ -26,7 +26,7 @@ import {
   SeelenWegWidgetId,
   SeelenWindowManagerWidgetId,
   Widget,
-} from '../widget/mod.ts';
+} from "../widget/mod.ts";
 
 export interface Settings extends ISettings {}
 export class Settings {
@@ -76,9 +76,11 @@ export class Settings {
     };
   }
 
-  private getBundledWidgetConfig<T extends ThirdPartyWidgetSettings>(id: WidgetId): T {
+  private getBundledWidgetConfig<T extends ThirdPartyWidgetSettings>(
+    id: WidgetId,
+  ): T {
     const config = this.inner.byWidget[id];
-    if (!config) throw new Error('Bundled widget settings not found');
+    if (!config) throw new Error("Bundled widget settings not found");
     return config as T;
   }
 
@@ -113,39 +115,39 @@ export class Settings {
 // =================================================================================
 
 const FancyToolbarSide: Enum<FancyToolbarSide> = {
-  Top: 'Top',
-  Bottom: 'Bottom',
+  Top: "Top",
+  Bottom: "Bottom",
 };
 
 const SeelenWegMode: Enum<SeelenWegMode> = {
-  FullWidth: 'FullWidth',
-  MinContent: 'MinContent',
+  FullWidth: "FullWidth",
+  MinContent: "MinContent",
 };
 
 const HideMode: Enum<HideMode> = {
-  Never: 'Never',
-  Always: 'Always',
-  OnOverlap: 'OnOverlap',
+  Never: "Never",
+  Always: "Always",
+  OnOverlap: "OnOverlap",
 };
 
 const SeelenWegSide: Enum<SeelenWegSide> = {
-  Left: 'Left',
-  Right: 'Right',
-  Top: 'Top',
-  Bottom: 'Bottom',
+  Left: "Left",
+  Right: "Right",
+  Top: "Top",
+  Bottom: "Bottom",
 };
 
 const SeelenLauncherMonitor: Enum<SeelenLauncherMonitor> = {
-  Primary: 'Primary',
-  MouseOver: 'MouseOver',
+  Primary: "Primary",
+  MouseOver: "MouseOver",
 };
 
 const UpdateChannel: Enum<UpdateChannel> = {
-  Release: 'Release',
-  Beta: 'Beta',
-  Nightly: 'Nightly',
+  Release: "Release",
+  Beta: "Beta",
+  Nightly: "Nightly",
 };
 
 export { FancyToolbarSide, HideMode, SeelenLauncherMonitor, SeelenWegMode, SeelenWegSide, UpdateChannel };
 
-export * from './settings_by_monitor.ts';
+export * from "./settings_by_monitor.ts";

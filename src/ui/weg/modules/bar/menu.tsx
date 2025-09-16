@@ -1,30 +1,30 @@
-import { SeelenCommand, WegItemType } from '@seelen-ui/lib';
-import { dialog } from '@seelen-ui/lib/tauri';
-import { Icon } from '@shared/components/Icon';
-import { invoke } from '@tauri-apps/api/core';
-import { ItemType } from 'antd/es/menu/interface';
-import { TFunction } from 'i18next';
+import { SeelenCommand, WegItemType } from "@seelen-ui/lib";
+import { dialog } from "@seelen-ui/lib/tauri";
+import { Icon } from "@shared/components/Icon";
+import { invoke } from "@tauri-apps/api/core";
+import { ItemType } from "antd/es/menu/interface";
+import { TFunction } from "i18next";
 
-import { $dock_state, $dock_state_actions } from '../shared/state/items';
+import { $dock_state, $dock_state_actions } from "../shared/state/items";
 
 export function getSeelenWegMenu(t: TFunction): ItemType[] {
-  const isRestrictedBar =
-    $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length > 0 &&
+  const isRestrictedBar = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator)
+        .length > 0 &&
     $dock_state.value.items.every((item) => item.type === WegItemType.Temporal && item.pinDisabled);
 
-  if (!!isRestrictedBar) {
+  if (isRestrictedBar) {
     return [
       {
-        key: 'task_manager',
-        label: t('taskbar_menu.task_manager'),
+        key: "task_manager",
+        label: t("taskbar_menu.task_manager"),
         icon: <Icon iconName="PiChartLineFill" />,
         onClick() {
-          invoke(SeelenCommand.OpenFile, { path: 'Taskmgr.exe' });
+          invoke(SeelenCommand.OpenFile, { path: "Taskmgr.exe" });
         },
       },
       {
-        key: 'settings',
-        label: t('taskbar_menu.settings'),
+        key: "settings",
+        label: t("taskbar_menu.settings"),
         icon: <Icon iconName="RiSettings4Fill" />,
         onClick() {
           invoke(SeelenCommand.ShowAppSettings);
@@ -35,35 +35,35 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
 
   return [
     {
-      key: 'add-media-module',
-      label: t('taskbar_menu.media'),
+      key: "add-media-module",
+      label: t("taskbar_menu.media"),
       icon: <Icon iconName="PiMusicNotesPlusFill" />,
       onClick() {
         $dock_state_actions.addMediaModule();
       },
     },
     {
-      key: 'add-start-module',
-      label: t('taskbar_menu.start'),
+      key: "add-start-module",
+      label: t("taskbar_menu.start"),
       icon: <Icon iconName="BsWindows" size={14} />,
       onClick() {
         $dock_state_actions.addStartModule();
       },
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
-      key: 'add-item',
-      label: t('taskbar_menu.add_file'),
+      key: "add-item",
+      label: t("taskbar_menu.add_file"),
       icon: <Icon iconName="RiFileAddLine" />,
       async onClick() {
         const files = await dialog.open({
-          title: t('taskbar_menu.add_file'),
+          title: t("taskbar_menu.add_file"),
           multiple: true,
           filters: [
-            { name: 'lnk', extensions: ['lnk'] },
-            { name: '*', extensions: ['*'] },
+            { name: "lnk", extensions: ["lnk"] },
+            { name: "*", extensions: ["*"] },
           ],
         });
         for (const path of files || []) {
@@ -72,12 +72,12 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       },
     },
     {
-      key: 'add-folder',
-      label: t('taskbar_menu.add_folder'),
+      key: "add-folder",
+      label: t("taskbar_menu.add_folder"),
       icon: <Icon iconName="RiFolderAddLine" />,
       async onClick() {
         const folder = await dialog.open({
-          title: t('taskbar_menu.add_folder'),
+          title: t("taskbar_menu.add_folder"),
           directory: true,
         });
         if (folder) {
@@ -86,15 +86,17 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       },
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
-      key: 'reoder',
-      icon: <Icon iconName={$dock_state.value.isReorderDisabled ? 'CgLockUnlock' : 'CgLock'} />,
+      key: "reoder",
+      icon: (
+        <Icon
+          iconName={$dock_state.value.isReorderDisabled ? "CgLockUnlock" : "CgLock"}
+        />
+      ),
       label: t(
-        $dock_state.value.isReorderDisabled
-          ? 'context_menu.reorder_enable'
-          : 'context_menu.reorder_disable',
+        $dock_state.value.isReorderDisabled ? "context_menu.reorder_enable" : "context_menu.reorder_disable",
       ),
       onClick() {
         $dock_state.value = {
@@ -104,16 +106,16 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       },
     },
     {
-      key: 'task_manager',
-      label: t('taskbar_menu.task_manager'),
+      key: "task_manager",
+      label: t("taskbar_menu.task_manager"),
       icon: <Icon iconName="PiChartLineFill" />,
       onClick() {
-        invoke(SeelenCommand.OpenFile, { path: 'Taskmgr.exe' });
+        invoke(SeelenCommand.OpenFile, { path: "Taskmgr.exe" });
       },
     },
     {
-      key: 'settings',
-      label: t('taskbar_menu.settings'),
+      key: "settings",
+      label: t("taskbar_menu.settings"),
       icon: <Icon iconName="RiSettings4Fill" />,
       onClick() {
         invoke(SeelenCommand.ShowAppSettings);

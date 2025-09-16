@@ -1,4 +1,4 @@
-id: '@default/notifications'
+id: "@default/notifications"
 metadata:
   displayName:
     en: Notifications
@@ -27,7 +27,7 @@ metadata:
     nl: Meldingen
     ku: Notifications
     ms: Pemberitahuan
-    'no': Varsler
+    "no": Varsler
     pl: Powiadomienia
     lb: Notifikatiounen
     uz: Bildirishnoma
@@ -72,11 +72,11 @@ metadata:
     gu: સૂચના
     lo: ແຈ້ງການ
 icon: MdOutlineNotifications
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: notifications
   template: >-
     return count > 0 ? icon("MdNotificationsActive") :
     icon("MdOutlineNotifications")
-  badge: 'return count > 0 ? count : null'
+  badge: "return count > 0 ? count : null"
   tooltip: 'return [t("placeholder.notifications"), ": ", count]'

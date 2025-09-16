@@ -1,4 +1,4 @@
-import { app, path } from '@tauri-apps/api';
+import { app, path } from "@tauri-apps/api";
 
 export const EnvConfig = {
   version: await app.getVersion(),

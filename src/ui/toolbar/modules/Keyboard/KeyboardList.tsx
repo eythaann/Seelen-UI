@@ -1,16 +1,16 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { Icon } from '@shared/components/Icon';
-import { useWindowFocusChange } from '@shared/hooks';
-import { cx } from '@shared/styles';
-import { VNode } from 'preact';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { Icon } from "@shared/components/Icon";
+import { useWindowFocusChange } from "@shared/hooks";
+import { cx } from "@shared/styles";
+import { VNode } from "preact";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../shared/store/app';
+import { Selectors } from "../shared/store/app";
 
 function KeyboardSelector() {
   const languages = useSelector(Selectors.languages);
@@ -19,15 +19,15 @@ function KeyboardSelector() {
 
   return (
     <BackgroundByLayersV2 className="keyboard-selector">
-      <div className="keyboard-selector-header">{t('keyboard.title')}</div>
+      <div className="keyboard-selector-header">{t("keyboard.title")}</div>
       <div className="keyboard-selector-body">
         {languages.map((lang) => {
           return lang.inputMethods.map((keyboard) => {
             return (
               <button
                 key={`${lang.code}-${keyboard.id}`}
-                className={cx('keyboard-selector-entry', {
-                  'keyboard-selector-entry-active': keyboard.active,
+                className={cx("keyboard-selector-entry", {
+                  "keyboard-selector-entry-active": keyboard.active,
                 })}
                 onClick={() => {
                   invoke(SeelenCommand.SystemSetKeyboardLayout, {
@@ -40,8 +40,12 @@ function KeyboardSelector() {
                   <Icon iconName="FaRegKeyboard" />
                 </div>
                 <div className="keyboard-selector-entry-info">
-                  <span className="keyboard-selector-entry-lang">{lang.name}</span>
-                  <span className="keyboard-selector-entry-keyboard">{keyboard.displayName}</span>
+                  <span className="keyboard-selector-entry-lang">
+                    {lang.name}
+                  </span>
+                  <span className="keyboard-selector-entry-keyboard">
+                    {keyboard.displayName}
+                  </span>
                 </div>
               </button>
             );
@@ -51,9 +55,9 @@ function KeyboardSelector() {
       <div className="keyboard-selector-footer">
         <button
           className="keyboard-selector-footer-button"
-          onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:keyboard' })}
+          onClick={() => invoke(SeelenCommand.OpenFile, { path: "ms-settings:keyboard" })}
         >
-          {t('keyboard.more')}
+          {t("keyboard.more")}
         </button>
       </div>
     </BackgroundByLayersV2>
@@ -72,8 +76,8 @@ export function WithKeyboardSelector({ children }: { children: VNode }) {
   return (
     <AnimatedPopover
       animationDescription={{
-        openAnimationName: 'keyboard-selector-open',
-        closeAnimationName: 'keyboard-selector-close',
+        openAnimationName: "keyboard-selector-open",
+        closeAnimationName: "keyboard-selector-close",
       }}
       open={openPreview}
       trigger="click"

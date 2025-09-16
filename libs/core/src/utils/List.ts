@@ -10,10 +10,10 @@ export abstract class List<T = unknown> {
    */
   constructor(protected inner: T[]) {
     if (!inner) {
-      throw new Error('The inner array cannot be null or undefined.');
+      throw new Error("The inner array cannot be null or undefined.");
     }
     if (!Array.isArray(inner)) {
-      throw new Error('The inner array must be an array.');
+      throw new Error("The inner array must be an array.");
     }
   }
 

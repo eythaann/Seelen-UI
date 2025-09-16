@@ -1,6 +1,6 @@
 {
   "name": "@seelen-ui/lib",
-  "version": "2.4.1",
+  "version": "2.4.4",
   "description": "Seelen UI Library for Widgets",
   "license": "AGPL-3.0",
   "exports": {
@@ -37,19 +37,9 @@
     ]
   },
   "fmt": {
-    "include": [
-      "src",
-      "scripts",
-      "gen"
-    ],
-    "lineWidth": 120,
-    "singleQuote": true
+    "lineWidth": 120
   },
   "lint": {
-    "include": [
-      "src",
-      "scripts"
-    ],
     "rules": {
       "include": [
         "explicit-function-return-type"

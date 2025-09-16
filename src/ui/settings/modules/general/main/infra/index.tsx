@@ -1,19 +1,19 @@
-import { SupportedLanguages } from '@seelen-ui/lib';
-import { Icon } from '@shared/components/Icon';
-import { Input, Select, Switch, Tooltip } from 'antd';
-import { ChangeEvent, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { SupportedLanguages } from "@seelen-ui/lib";
+import { Icon } from "@shared/components/Icon";
+import { Input, Select, Switch, Tooltip } from "antd";
+import { ChangeEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { startup } from '../../../shared/tauri/infra';
-import { useAppDispatch } from '../../../shared/utils/infra';
+import { startup } from "../../../shared/tauri/infra";
+import { useAppDispatch } from "../../../shared/utils/infra";
 
-import { RootActions } from '../../../shared/store/app/reducer';
-import { RootSelectors } from '../../../shared/store/app/selectors';
+import { RootActions } from "../../../shared/store/app/reducer";
+import { RootSelectors } from "../../../shared/store/app/selectors";
 
-import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
-import { Colors } from './Colors';
-import { PerformanceSettings } from './Performance';
+import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox";
+import { Colors } from "./Colors";
+import { PerformanceSettings } from "./Performance";
 
 export function General() {
   const [changingAutostart, setChangingAutostart] = useState(false);
@@ -47,7 +47,7 @@ export function General() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('general.startup')}</b>
+          <b>{t("general.startup")}</b>
           <Switch
             onChange={onAutoStart}
             value={!!autostartStatus}
@@ -57,7 +57,7 @@ export function General() {
       </SettingsGroup>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('general.language')}</b>
+          <b>{t("general.language")}</b>
           <Select
             showSearch
             filterOption={(_searching, option) => {
@@ -69,18 +69,21 @@ export function General() {
               let enLabel = option.enLabel.toLocaleLowerCase();
               return label.includes(searching) || enLabel.includes(searching);
             }}
-            style={{ width: '200px' }}
+            style={{ width: "200px" }}
             value={language}
             options={[...SupportedLanguages]}
             onSelect={(value) => dispatch(RootActions.setLanguage(value))}
           />
         </SettingsOption>
         <SettingsOption>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <b>{t('general.date_format')}</b>
+          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <b>{t("general.date_format")}</b>
             <Tooltip
               title={
-                <a href="https://momentjs.com/docs/#/displaying/format/" target="_blank">
+                <a
+                  href="https://momentjs.com/docs/#/displaying/format/"
+                  target="_blank"
+                >
                   https://momentjs.com/docs/#/displaying/format/
                 </a>
               }
@@ -89,7 +92,7 @@ export function General() {
             </Tooltip>
           </div>
           <Input
-            style={{ width: '200px', maxWidth: '200px' }}
+            style={{ width: "200px", maxWidth: "200px" }}
             placeholder="YYYY-MM-DD"
             value={dateFormat}
             onChange={onDateFormatChange}

@@ -1,17 +1,17 @@
-import { GenericToolbarItem, TextToolbarItem } from '@seelen-ui/lib/types';
-import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
-import { useWindowFocusChange } from '@shared/hooks';
-import { Menu } from 'antd';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { GenericToolbarItem, TextToolbarItem } from "@seelen-ui/lib/types";
+import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
+import { useWindowFocusChange } from "@shared/hooks";
+import { Menu } from "antd";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { CommonItemContextMenu } from './ContextMenu';
-import { InnerItem, InnerItemProps } from './Inner';
+import { CommonItemContextMenu } from "./ContextMenu";
+import { InnerItem, InnerItemProps } from "./Inner";
 
 export function Item(props: InnerItemProps) {
   const [openContextMenu, setOpenContextMenu] = useState(false);
@@ -27,12 +27,12 @@ export function Item(props: InnerItemProps) {
   return (
     <AnimatedDropdown
       animationDescription={{
-        openAnimationName: 'ft-bar-item-context-menu-open',
-        closeAnimationName: 'ft-bar-item-context-menu-close',
+        openAnimationName: "ft-bar-item-context-menu-open",
+        closeAnimationName: "ft-bar-item-context-menu-close",
       }}
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
-      trigger={['contextMenu']}
+      trigger={["contextMenu"]}
       dropdownRender={() => (
         <BackgroundByLayersV2 className="ft-bar-item-context-menu-container">
           <Menu
@@ -49,8 +49,8 @@ export function Item(props: InnerItemProps) {
 
 export function GenericItem({ module }: { module: GenericToolbarItem }) {
   const window = useSelector(Selectors.focused) || {
-    name: 'None',
-    title: 'No Window Focused',
+    name: "None",
+    title: "No Window Focused",
     exe: null,
   };
   return <Item module={module} extraVars={{ window }} />;

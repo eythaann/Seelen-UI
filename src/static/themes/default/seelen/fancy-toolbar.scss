@@ -81,7 +81,7 @@
   gap: 10px;
   margin: var(--popups-margin);
   width: 300px;
-  max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
+  max-height: calc(100vh - var(--config-height) - var(--popups-margin) * 2);
   padding: 10px;
   box-shadow: 0 0 10px 10px #0001;
   border-radius: 10px;
@@ -153,12 +153,18 @@
 
   &[data-dynamic-color="true"] {
     // --color-focused-app-background (this var exist but is unused)
-    color: var(--color-maximized-on-bg-foreground, var(--color-persist-gray-100));
+    color: var(
+      --color-maximized-on-bg-foreground,
+      var(--color-persist-gray-100)
+    );
 
     > .bg-layers {
       > .bg-layer-2 {
         // --color-focused-app-foreground (this var exist but is unused)
-        background-color: var(--color-maximized-on-bg-background, var(--color-persist-gray-900));
+        background-color: var(
+          --color-maximized-on-bg-background,
+          var(--color-persist-gray-900)
+        );
       }
     }
   }
@@ -711,7 +717,7 @@
   @extend %list;
   margin: var(--popups-margin);
   width: 350px;
-  max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
+  max-height: calc(100vh - var(--config-height) - var(--popups-margin) * 2);
 
   .notification-header-info {
     animation: text-highlight 5s ease-in-out infinite;
@@ -881,8 +887,8 @@
     position: relative;
     transition: background-color 0.2s ease-in;
     border-radius: 4px;
-    width: calc(100% - (var(--margin) * 2));
-    height: calc(100% - (var(--margin) * 2));
+    width: calc(100% - var(--margin) * 2);
+    height: calc(100% - var(--margin) * 2);
     display: flex;
     justify-content: center;
     align-items: center;

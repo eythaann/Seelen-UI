@@ -1,4 +1,4 @@
-id: '@seelen/weg'
+id: "@seelen/weg"
 icon: BiDockBottom
 metadata:
   displayName:
@@ -33,7 +33,7 @@ metadata:
     ms: Dock/Taskbar
     sk: Dok / panel s ponukou
     ro: Dock/Taskbar
-    'no': Dock/oppgavelinje
+    "no": Dock/oppgavelinje
     mt: Dock / Taskbar
     fi: Telakka/taskupalkki
     sv: Docka/Taskbar

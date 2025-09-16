@@ -1,4 +1,4 @@
-id: '@seelen/window-manager'
+id: "@seelen/window-manager"
 icon: BsGrid1X2Fill
 metadata:
   displayName:
@@ -34,7 +34,7 @@ metadata:
     sk: Správca okien
     mt: Window Manager
     fi: Ikkunanhallinta
-    'no': Vindusleder
+    "no": Vindusleder
     uz: Oyna menejeri
     tr: Pencere Yöneticisi
     sv: Fönsterhanterare

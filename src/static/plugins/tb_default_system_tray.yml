@@ -1,4 +1,4 @@
-id: '@default/system-tray'
+id: "@default/system-tray"
 metadata:
   displayName:
     en: System Tray
@@ -35,7 +35,7 @@ metadata:
     mt: Tray tas-Sistema
     fi: Järjestelmätarjotin
     sv: Systemfack
-    'no': Systembrett
+    "no": Systembrett
     uz: Tizim patnis
     tr: Sistem Tepsisi
     el: Δίσκος συστήματος
@@ -72,7 +72,7 @@ metadata:
     lo: ຖາດລະບົບ
     km: ថាសប្រព័ន្ធ
 icon: IoFileTrayFullOutline
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: tray
   template: return icon("BsThreeDots")

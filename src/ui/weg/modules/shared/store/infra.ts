@@ -1,13 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { SeelenCommand, SeelenEvent, Settings, startThemingTool, subscribe } from '@seelen-ui/lib';
-import { FocusedApp, SeelenWegSettings } from '@seelen-ui/lib/types';
-import { invoke } from '@tauri-apps/api/core';
-import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { debounce } from 'lodash';
+import { configureStore } from "@reduxjs/toolkit";
+import { SeelenCommand, SeelenEvent, Settings, startThemingTool, subscribe } from "@seelen-ui/lib";
+import { FocusedApp, SeelenWegSettings } from "@seelen-ui/lib/types";
+import { invoke } from "@tauri-apps/api/core";
+import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { debounce } from "lodash";
 
-import { RootActions, RootSlice } from './app';
+import { RootActions, RootSlice } from "./app";
 
-import i18n from '../../../i18n';
+import i18n from "../../../i18n";
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -26,7 +26,7 @@ export async function registerStoreEvents() {
   }, 200);
   await view.listen<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
     onFocusChanged(e.payload);
-    if (e.payload.name != 'Seelen UI') {
+    if (e.payload.name != "Seelen UI") {
       onFocusChanged.flush();
     }
   });
@@ -47,12 +47,15 @@ export async function registerStoreEvents() {
 function loadSettingsCSS(settings: SeelenWegSettings) {
   const styles = document.documentElement.style;
 
-  styles.setProperty('--config-margin', `${settings.margin}px`);
-  styles.setProperty('--config-padding', `${settings.padding}px`);
+  styles.setProperty("--config-margin", `${settings.margin}px`);
+  styles.setProperty("--config-padding", `${settings.padding}px`);
 
-  styles.setProperty('--config-item-size', `${settings.size}px`);
-  styles.setProperty('--config-item-zoom-size', `${settings.zoomSize}px`);
-  styles.setProperty('--config-space-between-items', `${settings.spaceBetweenItems}px`);
+  styles.setProperty("--config-item-size", `${settings.size}px`);
+  styles.setProperty("--config-item-zoom-size", `${settings.zoomSize}px`);
+  styles.setProperty(
+    "--config-space-between-items",
+    `${settings.spaceBetweenItems}px`,
+  );
 }
 
 function loadSettingsToStore(settings: Settings) {
@@ -63,5 +66,7 @@ function loadSettingsToStore(settings: Settings) {
 
 export async function loadStore() {
   loadSettingsToStore(await Settings.getAsync());
-  store.dispatch(RootActions.setMediaSessions(await invoke(SeelenCommand.GetMediaSessions)));
+  store.dispatch(
+    RootActions.setMediaSessions(await invoke(SeelenCommand.GetMediaSessions)),
+  );
 }

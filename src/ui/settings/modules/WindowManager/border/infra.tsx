@@ -1,12 +1,12 @@
-import { InputNumber, Switch } from 'antd';
-import { useTranslation } from 'react-i18next';
+import { InputNumber, Switch } from "antd";
+import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector, useDispatchCallback } from '../../shared/utils/infra';
+import { useAppDispatch, useAppSelector, useDispatchCallback } from "../../shared/utils/infra";
 
-import { BorderSelectors } from '../../shared/store/app/selectors';
-import { BorderActions } from './app';
+import { BorderSelectors } from "../../shared/store/app/selectors";
+import { BorderActions } from "./app";
 
-import { SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
+import { SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox";
 
 export const BorderSettings = () => {
   const enabled = useAppSelector(BorderSelectors.enabled);
@@ -32,17 +32,17 @@ export const BorderSettings = () => {
     <SettingsSubGroup
       label={
         <SettingsOption>
-          <span>{t('wm.border.enable')}</span>
+          <span>{t("wm.border.enable")}</span>
           <Switch value={enabled} onChange={toggleEnabled} />
         </SettingsOption>
       }
     >
       <SettingsOption>
-        <span>{t('wm.border.offset')}</span>
+        <span>{t("wm.border.offset")}</span>
         <InputNumber value={offset} onChange={updateOffset} />
       </SettingsOption>
       <SettingsOption>
-        <span>{t('wm.border.width')}</span>
+        <span>{t("wm.border.width")}</span>
         <InputNumber value={width} onChange={updateWidth} />
       </SettingsOption>
     </SettingsSubGroup>

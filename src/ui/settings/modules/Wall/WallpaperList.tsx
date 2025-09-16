@@ -1,19 +1,19 @@
-import { useSignal } from '@preact/signals';
-import { SeelenWallWidgetId } from '@seelen-ui/lib';
-import { WallpaperId } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { ResourceText } from '@shared/components/ResourceText';
-import { VerticalSortableSelect } from '@shared/components/SortableSelector';
-import { Wallpaper } from '@shared/components/Wallpaper';
-import { Button, Modal, Switch } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSignal } from "@preact/signals";
+import { SeelenWallWidgetId } from "@seelen-ui/lib";
+import { WallpaperId } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { ResourceText } from "@shared/components/ResourceText";
+import { VerticalSortableSelect } from "@shared/components/SortableSelector";
+import { Wallpaper } from "@shared/components/Wallpaper";
+import { Button, Modal, Switch } from "antd";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
-import { newSelectors, RootActions } from '../shared/store/app/reducer';
+import { newSelectors, RootActions } from "../shared/store/app/reducer";
 
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { ResourcePortrait } from '../resources/ResourceCard';
-import cs from './index.module.css';
+import { SettingsGroup, SettingsOption } from "../../components/SettingsBox";
+import { ResourcePortrait } from "../resources/ResourceCard";
+import cs from "./index.module.css";
 
 interface Props {
   monitorId?: string;
@@ -71,7 +71,7 @@ export function WallpaperList({ monitorId }: Props) {
     <SettingsGroup>
       {monitorId && (
         <SettingsOption
-          label={t('inherit')}
+          label={t("inherit")}
           action={<Switch value={isInherited} onChange={setInherited} />}
         />
       )}
@@ -82,8 +82,15 @@ export function WallpaperList({ monitorId }: Props) {
           label: (
             <div className={cs.entryLabel}>
               <ResourcePortrait resource={w} kind="Wallpaper" />
-              <ResourceText className={cs.entryName} text={w.metadata.displayName} />
-              <Button type="text" size="small" onClick={() => ($toPreview.value = w.id)}>
+              <ResourceText
+                className={cs.entryName}
+                text={w.metadata.displayName}
+              />
+              <Button
+                type="text"
+                size="small"
+                onClick={() => ($toPreview.value = w.id)}
+              >
                 <Icon iconName="FaEye" />
               </Button>
             </div>

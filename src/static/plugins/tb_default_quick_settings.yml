@@ -1,4 +1,4 @@
-id: '@default/quick-settings'
+id: "@default/quick-settings"
 metadata:
   displayName:
     en: Quick Settings
@@ -34,7 +34,7 @@ metadata:
     sk: Rýchle nastavenia
     mt: Settings ta 'malajr
     sv: Snabbinställningar
-    'no': Raske innstillinger
+    "no": Raske innstillinger
     uz: Tez sozlamalar
     tr: Hızlı Ayarlar
     fi: Pika-asetukset
@@ -72,7 +72,7 @@ metadata:
     lo: ການຕັ້ງຄ່າດ່ວນ
     km: ការកំណត់រហ័ស
 icon: LuSettings2
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: settings
   template: return icon("LuSettings2")

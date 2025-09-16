@@ -1,12 +1,12 @@
-import { BluetoothDevice, BluetoothToolbarItem } from '@seelen-ui/lib/types';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { BluetoothDevice, BluetoothToolbarItem } from "@seelen-ui/lib/types";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-import { Item } from '../../item/infra/infra';
+import { Item } from "../../item/infra/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { WithBluetoothSelector } from './BluetoothSelector';
+import { WithBluetoothSelector } from "./BluetoothSelector";
 
 interface Props {
   active?: boolean;
@@ -14,7 +14,9 @@ interface Props {
 }
 
 function BluetoothModuleItem({ module, active, ...rest }: Props) {
-  const bluetoothDevices: BluetoothDevice[] = useSelector(Selectors.bluetoothDevices);
+  const bluetoothDevices: BluetoothDevice[] = useSelector(
+    Selectors.bluetoothDevices,
+  );
   const connectedDevices = bluetoothDevices.filter((item) => item.connected);
 
   return (
@@ -31,13 +33,13 @@ function BluetoothModuleItem({ module, active, ...rest }: Props) {
 }
 
 export function BluetoothModule({ module }: Props) {
-  const [ open, setOpen ] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  return module.withBluetoothSelector ? (
-    <WithBluetoothSelector setActive={setOpen}>
-      <BluetoothModuleItem module={module} active={open} />
-    </WithBluetoothSelector>
-  ) : (
-    <BluetoothModuleItem module={module} />
-  );
+  return module.withBluetoothSelector
+    ? (
+      <WithBluetoothSelector setActive={setOpen}>
+        <BluetoothModuleItem module={module} active={open} />
+      </WithBluetoothSelector>
+    )
+    : <BluetoothModuleItem module={module} />;
 }

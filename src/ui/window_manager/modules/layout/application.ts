@@ -1,14 +1,14 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { Rect } from '@seelen-ui/lib/types';
-import { toPhysicalPixels } from '@shared';
-import { getCurrentWindow } from '@tauri-apps/api/window';
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { Rect } from "@seelen-ui/lib/types";
+import { toPhysicalPixels } from "@shared";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 
-import { $settings } from '../shared/state/mod';
+import { $settings } from "../shared/state/mod";
 
 export async function requestPositioningOfLeaves() {
   const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();
 
-  let elements = document.querySelectorAll('[data-hwnd]');
+  let elements = document.querySelectorAll("[data-hwnd]");
   let positions: Record<string, Rect> = {};
 
   const borderConfig = $settings.value.border;

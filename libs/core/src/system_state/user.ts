@@ -1,18 +1,18 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from '../handlers/mod.ts';
-import { newFromInvoke, newOnEvent } from '../utils/State.ts';
-import { List } from '../utils/List.ts';
-import type { Enum } from '../utils/enums.ts';
-import type { File, FolderType, User } from '@seelen-ui/types';
+import { invoke, SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../handlers/mod.ts";
+import { newFromInvoke, newOnEvent } from "../utils/State.ts";
+import { List } from "../utils/List.ts";
+import type { Enum } from "../utils/enums.ts";
+import type { File, FolderType, User } from "@seelen-ui/types";
 
 const FolderType: Enum<FolderType> = {
-  Unknown: 'Unknown',
-  Recent: 'Recent',
-  Desktop: 'Desktop',
-  Downloads: 'Downloads',
-  Documents: 'Documents',
-  Pictures: 'Pictures',
-  Videos: 'Videos',
-  Music: 'Music',
+  Unknown: "Unknown",
+  Recent: "Recent",
+  Desktop: "Desktop",
+  Downloads: "Downloads",
+  Documents: "Documents",
+  Pictures: "Pictures",
+  Videos: "Videos",
+  Music: "Music",
 };
 
 export class UserDetails {
@@ -32,12 +32,17 @@ export class UserDirectory extends List<File> {
 
   static async getAsync(): Promise<UserDirectory> {
     return new this(
-      await invoke(SeelenCommand.GetUserFolderContent, { folderType: this.folderType }),
+      await invoke(SeelenCommand.GetUserFolderContent, {
+        folderType: this.folderType,
+      }),
     );
   }
 
   static setDirectoryLimit(amount: number): Promise<void> {
-    return invoke(SeelenCommand.SetUserFolderLimit, { folderType: this.folderType, amount });
+    return invoke(SeelenCommand.SetUserFolderLimit, {
+      folderType: this.folderType,
+      amount,
+    });
   }
 
   static onChange(cb: (instance: RecentFolder) => void): Promise<UnSubscriber> {

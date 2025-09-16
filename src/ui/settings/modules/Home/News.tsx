@@ -1,16 +1,16 @@
-import { useInterval } from '@shared/hooks';
-import { cx } from '@shared/styles';
-import { Button, Skeleton } from 'antd';
-import { useAnimate } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useInterval } from "@shared/hooks";
+import { cx } from "@shared/styles";
+import { Button, Skeleton } from "antd";
+import { useAnimate } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import cs from './News.module.css';
+import cs from "./News.module.css";
 
-const BASE_NEWS_URL = 'https://raw.githubusercontent.com/Seelen-Inc/slu-blog/refs/heads/main/news';
+const BASE_NEWS_URL = "https://raw.githubusercontent.com/Seelen-Inc/slu-blog/refs/heads/main/news";
 
 async function getNewNames(): Promise<string[]> {
-  let response = await fetch(BASE_NEWS_URL + '/show_on_app.json');
+  let response = await fetch(BASE_NEWS_URL + "/show_on_app.json");
 
   if (response.ok) {
     let data = await response.json();
@@ -35,7 +35,7 @@ async function getNew(name: string): Promise<New | null> {
       data.image = `${BASE_NEWS_URL}/${name}/image.png`;
       return data;
     }
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
   return null;
@@ -73,37 +73,45 @@ export function NoticeSlider() {
   return (
     <div className={cs.notices}>
       <div ref={scope} className={cs.notice}>
-        {current ? (
-          <>
-            <img className={cs.image} src={current.image} alt={current.title} />
-            <div className={cs.content}>
-              <h3 className={cs.title}>{current.title}</h3>
-              <p className={cs.message}>{current.message}</p>
-              <div className={cs.linkButton}>
-                <Button href={current.url} target="_blank" type="primary">
-                  {t('see_more')}
-                </Button>
+        {current
+          ? (
+            <>
+              <img
+                className={cs.image}
+                src={current.image}
+                alt={current.title}
+              />
+              <div className={cs.content}>
+                <h3 className={cs.title}>{current.title}</h3>
+                <p className={cs.message}>{current.message}</p>
+                <div className={cs.linkButton}>
+                  <Button href={current.url} target="_blank" type="primary">
+                    {t("see_more")}
+                  </Button>
+                </div>
               </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className={cs.image} />
-            <div className={cs.content}>
-              <Skeleton active className={cs.title} paragraph={false} />
-              <Skeleton active className={cs.message} title={false} />
-              <div className={cs.linkButton}>
-                <Skeleton.Button active />
+            </>
+          )
+          : (
+            <>
+              <div className={cs.image} />
+              <div className={cs.content}>
+                <Skeleton active className={cs.title} paragraph={false} />
+                <Skeleton active className={cs.message} title={false} />
+                <div className={cs.linkButton}>
+                  <Skeleton.Button active />
+                </div>
               </div>
-            </div>
-          </>
-        )}
+            </>
+          )}
       </div>
       <div className={cs.pagination}>
         {news.map((_item, index) => (
           <div
             key={index}
-            className={cx(cs.paginationDot, { [cs.active!]: index === currentIdx % news.length })}
+            className={cx(cs.paginationDot, {
+              [cs.active!]: index === currentIdx % news.length,
+            })}
             onClick={() => {
               animate(scope.current, { opacity: 0 }).then(() => {
                 setCurrentIdx(index);

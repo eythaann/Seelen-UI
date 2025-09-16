@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppConfig } from '@seelen-ui/lib/types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppConfig } from "@seelen-ui/lib/types";
 
 const initialState: AppConfig[] = [];
 
@@ -8,7 +8,7 @@ interface AppPayload {
 }
 
 export const AppsConfigSlice = createSlice({
-  name: 'monitors',
+  name: "monitors",
   initialState,
   reducers: {
     delete: (state, action: PayloadAction<number>) => {
@@ -24,7 +24,10 @@ export const AppsConfigSlice = createSlice({
     push: (state, action: PayloadAction<AppConfig[]>) => {
       state.push(...action.payload);
     },
-    replace: (state, action: PayloadAction<AppPayload & { app: AppConfig }>) => {
+    replace: (
+      state,
+      action: PayloadAction<AppPayload & { app: AppConfig }>,
+    ) => {
       const { idx, app } = action.payload;
       state[idx] = app;
     },

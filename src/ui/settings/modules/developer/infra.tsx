@@ -1,17 +1,17 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { path } from '@tauri-apps/api';
-import { invoke } from '@tauri-apps/api/core';
-import { Button, Switch } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { SeelenCommand } from "@seelen-ui/lib";
+import { path } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
+import { Button, Switch } from "antd";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
-import { resolveDataPath } from '../shared/config/infra';
+import { resolveDataPath } from "../shared/config/infra";
 
-import { SeelenWegActions } from '../seelenweg/app';
-import { newSelectors, RootActions } from '../shared/store/app/reducer';
-import { LoadCustomConfigFile } from './app';
+import { SeelenWegActions } from "../seelenweg/app";
+import { newSelectors, RootActions } from "../shared/store/app/reducer";
+import { LoadCustomConfigFile } from "./app";
 
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox";
 
 export function DeveloperTools() {
   const devTools = useSelector(newSelectors.devTools);
@@ -25,7 +25,9 @@ export function DeveloperTools() {
   }
 
   async function openSettingsFile() {
-    invoke(SeelenCommand.OpenFile, { path: await resolveDataPath('settings.json') });
+    invoke(SeelenCommand.OpenFile, {
+      path: await resolveDataPath("settings.json"),
+    });
   }
 
   async function openInstallFolder() {
@@ -37,21 +39,21 @@ export function DeveloperTools() {
   }
 
   async function simulateFullscreen(value: boolean) {
-    invoke(SeelenCommand.SimulateFullscreen, { value });
+    await invoke(SeelenCommand.SimulateFullscreen, { value });
   }
 
   return (
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('devtools.enable')}</b>
+          <b>{t("devtools.enable")}</b>
           <Switch value={devTools} onChange={onToggleDevTools} />
         </SettingsOption>
       </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('weg.show_end_task')}</b>
+          <b>{t("weg.show_end_task")}</b>
           <Switch
             checked={showEndTask}
             onChange={(value) => dispatch(SeelenWegActions.setShowEndTask(value))}
@@ -60,32 +62,32 @@ export function DeveloperTools() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('devtools.app_folders')}>
+        <SettingsSubGroup label={t("devtools.app_folders")}>
           <SettingsOption>
-            <span>{t('devtools.install_folder')}</span>
-            <Button onClick={openInstallFolder}>{t('open')}</Button>
+            <span>{t("devtools.install_folder")}</span>
+            <Button onClick={openInstallFolder}>{t("open")}</Button>
           </SettingsOption>
           <SettingsOption>
-            <span>{t('devtools.data_folder')}</span>
-            <Button onClick={openDataFolder}>{t('open')}</Button>
+            <span>{t("devtools.data_folder")}</span>
+            <Button onClick={openDataFolder}>{t("open")}</Button>
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
-          <span>{t('devtools.settings_file')}</span>
-          <Button onClick={openSettingsFile}>{t('open')}</Button>
+          <span>{t("devtools.settings_file")}</span>
+          <Button onClick={openSettingsFile}>{t("open")}</Button>
         </SettingsOption>
         <SettingsOption>
-          <span>{t('devtools.custom_config_file')}:</span>
-          <Button onClick={LoadCustomConfigFile}>{t('devtools.load')}</Button>
+          <span>{t("devtools.custom_config_file")}:</span>
+          <Button onClick={LoadCustomConfigFile}>{t("devtools.load")}</Button>
         </SettingsOption>
       </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('devtools.simulate_fullscreen')}</b>
+          <b>{t("devtools.simulate_fullscreen")}</b>
           <Switch onChange={simulateFullscreen} />
         </SettingsOption>
       </SettingsGroup>

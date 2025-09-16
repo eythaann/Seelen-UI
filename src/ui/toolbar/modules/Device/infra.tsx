@@ -1,7 +1,6 @@
+import { DeviceToolbarItem } from "@seelen-ui/lib/types";
 
-import { DeviceToolbarItem } from '@seelen-ui/lib/types';
-
-import { Item } from '../item/infra/infra';
+import { Item } from "../item/infra/infra";
 
 interface Props {
   module: DeviceToolbarItem;

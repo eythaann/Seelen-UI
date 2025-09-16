@@ -30,9 +30,7 @@ body {
 
 /** Root Styles */
 #root {
-  --dock-size: calc(
-    (var(--config-item-size) + ((var(--config-padding) + var(--config-margin)) * 2))
-  );
+  --dock-size: calc(var(--config-item-size) + (var(--config-padding) + var(--config-margin)) * 2);
 
   position: absolute;
   height: min-content;

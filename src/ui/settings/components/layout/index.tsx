@@ -1,9 +1,9 @@
-import { useLayoutEffect, useRef } from 'preact/hooks';
-import { Outlet, useLocation } from 'react-router';
+import { useLayoutEffect, useRef } from "preact/hooks";
+import { Outlet, useLocation } from "react-router";
 
-import { Header } from '../header';
-import { Navigation } from '../navigation';
-import cs from './index.module.css';
+import { Header } from "../header";
+import { Navigation } from "../navigation";
+import cs from "./index.module.css";
 
 export function Layout() {
   const location = useLocation();
@@ -11,7 +11,7 @@ export function Layout() {
 
   useLayoutEffect(() => {
     // Scroll to the top of the page when the route changes
-    contentRef.current?.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    contentRef.current?.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [location.pathname]);
 
   return (

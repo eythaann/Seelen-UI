@@ -1,49 +1,49 @@
-import { useComputed } from '@preact/signals';
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { File, FolderType } from '@seelen-ui/lib/types';
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { Icon } from '@shared/components/Icon';
-import { IconName } from '@shared/components/Icon/icons';
-import { useWindowFocusChange } from '@shared/hooks';
-import { path } from '@tauri-apps/api';
-import { Tooltip } from 'antd';
-import { t } from 'i18next';
-import { VNode } from 'preact';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useComputed } from "@preact/signals";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { File, FolderType } from "@seelen-ui/lib/types";
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { Icon } from "@shared/components/Icon";
+import { IconName } from "@shared/components/Icon/icons";
+import { useWindowFocusChange } from "@shared/hooks";
+import { path } from "@tauri-apps/api";
+import { Tooltip } from "antd";
+import { t } from "i18next";
+import { VNode } from "preact";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { $settings } from '../../shared/state/mod';
-import { UserFolder } from './UserFolder';
-import { UserProfile } from './UserProfile';
+import { $settings } from "../../shared/state/mod";
+import { UserFolder } from "./UserFolder";
+import { UserProfile } from "./UserProfile";
 
-interface UserHomeProps {}
-
-function folderTypeToIcon(folderType: FolderType): { icon: IconName; category: FolderType } {
+function folderTypeToIcon(
+  folderType: FolderType,
+): { icon: IconName; category: FolderType } {
   switch (folderType) {
-    case 'Recent': {
-      return { category: folderType, icon: 'MdOutlineHistory' };
+    case "Recent": {
+      return { category: folderType, icon: "MdOutlineHistory" };
     }
-    case 'Desktop': {
-      return { category: folderType, icon: 'HiOutlineDesktopComputer' };
+    case "Desktop": {
+      return { category: folderType, icon: "HiOutlineDesktopComputer" };
     }
-    case 'Documents': {
-      return { category: folderType, icon: 'IoDocumentsOutline' };
+    case "Documents": {
+      return { category: folderType, icon: "IoDocumentsOutline" };
     }
-    case 'Downloads': {
-      return { category: folderType, icon: 'PiDownloadSimpleBold' };
+    case "Downloads": {
+      return { category: folderType, icon: "PiDownloadSimpleBold" };
     }
-    case 'Pictures': {
-      return { category: folderType, icon: 'IoImageOutline' };
+    case "Pictures": {
+      return { category: folderType, icon: "IoImageOutline" };
     }
-    case 'Videos': {
-      return { category: folderType, icon: 'PiVideo' };
+    case "Videos": {
+      return { category: folderType, icon: "PiVideo" };
     }
-    case 'Music': {
-      return { category: folderType, icon: 'BsFileEarmarkMusic' };
+    case "Music": {
+      return { category: folderType, icon: "BsFileEarmarkMusic" };
     }
     default: {
       throw new Error(`The given parameter: ${folderType} incovertible`);
@@ -57,19 +57,40 @@ export interface UserHomeFolder {
   icon: IconName;
 }
 
-function UserHome({}: UserHomeProps) {
-  const [categoryOpen, setCategoryOpen] = useState<FolderType>('Unknown');
+function UserHome() {
+  const [categoryOpen, setCategoryOpen] = useState<FolderType>("Unknown");
 
   const showHibernate = useComputed(() => $settings.value.showHibernateButton);
   const user = useSelector(Selectors.user);
   const folders: UserHomeFolder[] = [
-    { ...folderTypeToIcon('Recent'), content: useSelector(Selectors.userRecentFolder) },
-    { ...folderTypeToIcon('Desktop'), content: useSelector(Selectors.userDesktopFolder) },
-    { ...folderTypeToIcon('Documents'), content: useSelector(Selectors.userDocumentsFolder) },
-    { ...folderTypeToIcon('Downloads'), content: useSelector(Selectors.userDownloadsFolder) },
-    { ...folderTypeToIcon('Music'), content: useSelector(Selectors.userMusicFolder) },
-    { ...folderTypeToIcon('Pictures'), content: useSelector(Selectors.userPicturesFolder) },
-    { ...folderTypeToIcon('Videos'), content: useSelector(Selectors.userVideosFolder) },
+    {
+      ...folderTypeToIcon("Recent"),
+      content: useSelector(Selectors.userRecentFolder),
+    },
+    {
+      ...folderTypeToIcon("Desktop"),
+      content: useSelector(Selectors.userDesktopFolder),
+    },
+    {
+      ...folderTypeToIcon("Documents"),
+      content: useSelector(Selectors.userDocumentsFolder),
+    },
+    {
+      ...folderTypeToIcon("Downloads"),
+      content: useSelector(Selectors.userDownloadsFolder),
+    },
+    {
+      ...folderTypeToIcon("Music"),
+      content: useSelector(Selectors.userMusicFolder),
+    },
+    {
+      ...folderTypeToIcon("Pictures"),
+      content: useSelector(Selectors.userPicturesFolder),
+    },
+    {
+      ...folderTypeToIcon("Videos"),
+      content: useSelector(Selectors.userVideosFolder),
+    },
   ];
 
   return (
@@ -81,7 +102,7 @@ function UserHome({}: UserHomeProps) {
       {user && <UserProfile user={user} />}
 
       <hr />
-      <span className="userhome-label">{t('userhome.folders.title')}</span>
+      <span className="userhome-label">{t("userhome.folders.title")}</span>
       {folders.map((item) => (
         <UserFolder
           key={item.category}
@@ -92,7 +113,9 @@ function UserHome({}: UserHomeProps) {
       ))}
 
       <hr />
-      <span className="userhome-label">{t('userhome.seelen_options.title')}</span>
+      <span className="userhome-label">
+        {t("userhome.seelen_options.title")}
+      </span>
       <ul className="userhome-seelen-options">
         <li
           className="userhome-seelen-option-item"
@@ -100,7 +123,7 @@ function UserHome({}: UserHomeProps) {
         >
           <Icon iconName="TbFolderCog" />
           <span className="userhome-seelen-option-item-title">
-            {t('userhome.seelen_options.open_installation_folder')}
+            {t("userhome.seelen_options.open_installation_folder")}
           </span>
         </li>
         <li
@@ -109,26 +132,36 @@ function UserHome({}: UserHomeProps) {
         >
           <Icon iconName="TbLogs" />
           <span className="userhome-seelen-option-item-title">
-            {t('userhome.seelen_options.open_log_folder')}
+            {t("userhome.seelen_options.open_log_folder")}
           </span>
         </li>
       </ul>
 
       <hr />
-      <span className="userhome-label">{t('settings.power')}</span>
+      <span className="userhome-label">{t("settings.power")}</span>
       <div className="userhome-power">
-        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.lock')}>
-          <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.Lock)}>
+        <Tooltip mouseLeaveDelay={0} arrow={false} title={t("settings.lock")}>
+          <button
+            className="userhome-power-button"
+            onClick={() => invoke(SeelenCommand.Lock)}
+          >
             <Icon iconName="BiLock" />
           </button>
         </Tooltip>
-        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.sleep')}>
-          <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.Suspend)}>
+        <Tooltip mouseLeaveDelay={0} arrow={false} title={t("settings.sleep")}>
+          <button
+            className="userhome-power-button"
+            onClick={() => invoke(SeelenCommand.Suspend)}
+          >
             <Icon iconName="BiMoon" />
           </button>
         </Tooltip>
         {showHibernate && (
-          <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.hibernate')}>
+          <Tooltip
+            mouseLeaveDelay={0}
+            arrow={false}
+            title={t("settings.hibernate")}
+          >
             <button
               className="userhome-power-button"
               onClick={() => invoke(SeelenCommand.Hibernate)}
@@ -137,13 +170,27 @@ function UserHome({}: UserHomeProps) {
             </button>
           </Tooltip>
         )}
-        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.restart')}>
-          <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.Restart)}>
+        <Tooltip
+          mouseLeaveDelay={0}
+          arrow={false}
+          title={t("settings.restart")}
+        >
+          <button
+            className="userhome-power-button"
+            onClick={() => invoke(SeelenCommand.Restart)}
+          >
             <Icon iconName="VscDebugRestart" />
           </button>
         </Tooltip>
-        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.shutdown')}>
-          <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.Shutdown)}>
+        <Tooltip
+          mouseLeaveDelay={0}
+          arrow={false}
+          title={t("settings.shutdown")}
+        >
+          <button
+            className="userhome-power-button"
+            onClick={() => invoke(SeelenCommand.Shutdown)}
+          >
             <Icon iconName="GrPower" />
           </button>
         </Tooltip>
@@ -171,8 +218,8 @@ export function WithUserHome({ setOpen, children }: UserHomeModuleProps) {
   return (
     <AnimatedPopover
       animationDescription={{
-        openAnimationName: 'userhome-open',
-        closeAnimationName: 'userhome-close',
+        openAnimationName: "userhome-open",
+        closeAnimationName: "userhome-close",
       }}
       open={openPreview}
       trigger="click"

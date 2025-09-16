@@ -1,4 +1,4 @@
-id: '@default/user-folder'
+id: "@default/user-folder"
 metadata:
   displayName:
     en: User Folder
@@ -39,7 +39,7 @@ metadata:
     uz: Foydalanuvchi papkasi
     el: Φάκελος χρήστη
     bg: Потребителска папка
-    'no': Brukermappe
+    "no": Brukermappe
     so: Faylka isticmaale
     ru: Папка пользователя
     vi: Thư mục người dùng
@@ -72,7 +72,7 @@ metadata:
     lo: ໂຟນເດີຂອງຜູ້ໃຊ້
     km: ថតអ្នកប្រើ
 icon: FaRegCircleUser
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: user
   withUserFolder: true

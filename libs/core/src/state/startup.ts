@@ -1,4 +1,4 @@
-import { invoke, SeelenCommand } from '../handlers/mod.ts';
+import { invoke, SeelenCommand } from "../handlers/mod.ts";
 
 export class StartupManager {
   static async setAutoStart(enabled: boolean): Promise<void> {

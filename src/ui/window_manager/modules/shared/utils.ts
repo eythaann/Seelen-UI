@@ -1,5 +1,5 @@
-import { WmNodeKind } from '@seelen-ui/lib';
-import { WmNode } from '@seelen-ui/lib/types';
+import { WmNodeKind } from "@seelen-ui/lib";
+import { WmNode } from "@seelen-ui/lib/types";
 
 export class NodeUtils {
   static isEmpty(node: WmNode): boolean {

@@ -1,8 +1,8 @@
-import { useDroppable } from '@dnd-kit/core';
-import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortable';
-import { ToolbarItem2 } from '@seelen-ui/lib/types';
+import { useDroppable } from "@dnd-kit/core";
+import { horizontalListSortingStrategy, SortableContext } from "@dnd-kit/sortable";
+import { ToolbarItem2 } from "@seelen-ui/lib/types";
 
-import { componentByModule } from './mappins';
+import { componentByModule } from "./mappins";
 
 interface Props {
   id: string;
@@ -23,4 +23,3 @@ export function ItemsDropableContainer({ id, items }: Props) {
     </div>
   );
 }
-

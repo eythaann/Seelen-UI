@@ -7,27 +7,27 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   arrayMove,
   horizontalListSortingStrategy,
   SortableContext,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { batch, useSignal } from '@preact/signals';
-import { WegItemType } from '@seelen-ui/lib';
-import { useTranslation } from 'react-i18next';
+} from "@dnd-kit/sortable";
+import { batch, useSignal } from "@preact/signals";
+import { WegItemType } from "@seelen-ui/lib";
+import { useTranslation } from "react-i18next";
 
-import { FileOrFolder } from '../item/infra/File';
-import { MediaSession } from '../item/infra/MediaSession';
-import { Separator } from '../item/infra/Separator';
-import { StartMenu } from '../item/infra/StartMenu';
-import { UserApplication } from '../item/infra/UserApplication';
+import { FileOrFolder } from "../item/infra/File";
+import { MediaSession } from "../item/infra/MediaSession";
+import { Separator } from "../item/infra/Separator";
+import { StartMenu } from "../item/infra/StartMenu";
+import { UserApplication } from "../item/infra/UserApplication";
 
-import { SwItem } from '../shared/store/domain';
+import { SwItem } from "../shared/store/domain";
 
-import { $dock_state } from '../shared/state/items';
-import { DraggableItem } from './DraggableItem';
+import { $dock_state } from "../shared/state/items";
+import { DraggableItem } from "./DraggableItem";
 
 export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
   const $active_id = useSignal<string | null>(null);
@@ -40,8 +40,8 @@ export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
   });
   const sensors = useSensors(pointerSensor);
 
-  const isEmpty =
-    $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length === 0;
+  const isEmpty = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator)
+    .length === 0;
 
   function handleDragStart(e: DragStartEvent) {
     $active_id.value = e.active.id as string;
@@ -73,20 +73,22 @@ export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
       sensors={sensors}
     >
       <div className="weg-items">
-        {isEmpty ? (
-          <span className="weg-empty-state-label">{t('weg.empty')}</span>
-        ) : (
+        {isEmpty ? <span className="weg-empty-state-label">{t("weg.empty")}</span> : (
           <SortableContext
             items={$dock_state.value.items}
             strategy={isHorizontal ? horizontalListSortingStrategy : verticalListSortingStrategy}
             disabled={$dock_state.value.isReorderDisabled}
           >
             {$dock_state.value.items.map((item) => (
-              <DraggableItem item={item}>{ItemByType(item, false)}</DraggableItem>
+              <DraggableItem item={item}>
+                {ItemByType(item, false)}
+              </DraggableItem>
             ))}
           </SortableContext>
         )}
-        <DragOverlay>{dragginItem && ItemByType(dragginItem, true)}</DragOverlay>
+        <DragOverlay>
+          {dragginItem && ItemByType(dragginItem, true)}
+        </DragOverlay>
       </div>
     </DndContext>
   );
@@ -94,7 +96,7 @@ export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
 
 function ItemByType(item: SwItem, isOverlay: boolean) {
   if (item.type === WegItemType.Pinned) {
-    if (item.subtype === 'App') {
+    if (item.subtype === "App") {
       return <UserApplication key={item.id} item={item} isOverlay={isOverlay} />;
     }
     return <FileOrFolder key={item.id} item={item} />;

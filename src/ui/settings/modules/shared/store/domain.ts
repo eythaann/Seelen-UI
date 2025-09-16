@@ -14,7 +14,7 @@ import {
   Wallpaper,
   Widget,
   WindowManagerSettings,
-} from '@seelen-ui/lib/types';
+} from "@seelen-ui/lib/types";
 
 export interface RootState extends Settings {
   lastLoaded: this | null;

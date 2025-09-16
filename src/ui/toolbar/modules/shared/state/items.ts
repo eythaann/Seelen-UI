@@ -1,13 +1,20 @@
-import { signal } from '@preact/signals';
-import { invoke, PluginList, SeelenCommand, SeelenEvent, subscribe } from '@seelen-ui/lib';
-import { PluginId, ToolbarItem2 } from '@seelen-ui/lib/types';
+import { signal } from "@preact/signals";
+import { invoke, PluginList, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { PluginId, ToolbarItem2 } from "@seelen-ui/lib/types";
 
-import { matchIds } from '../utils';
+import { matchIds } from "../utils";
 
-export const $toolbar_state = signal(await invoke(SeelenCommand.StateGetToolbarItems));
-subscribe(SeelenEvent.StateToolbarItemsChanged, (event) => ($toolbar_state.value = event.payload));
+export const $toolbar_state = signal(
+  await invoke(SeelenCommand.StateGetToolbarItems),
+);
+subscribe(
+  SeelenEvent.StateToolbarItemsChanged,
+  (event) => ($toolbar_state.value = event.payload),
+);
 
-export const $plugins = signal((await PluginList.getAsync()).forCurrentWidget());
+export const $plugins = signal(
+  (await PluginList.getAsync()).forCurrentWidget(),
+);
 await PluginList.onChange((list) => {
   $plugins.value = list.forCurrentWidget();
 });
@@ -17,15 +24,16 @@ export const $actions = {
     const cleaned = text.trim().replace(/"/g, '\\"');
     const newRight = [...$toolbar_state.value.right];
     newRight.push({
-      id: window.crypto.randomUUID(),
-      type: 'text',
+      id: globalThis.crypto.randomUUID(),
+      type: "text",
       template: `return "${cleaned}"`,
     } as any);
     $toolbar_state.value = { ...$toolbar_state.value, right: newRight };
   },
   addItem(id: PluginId) {
     const { left, center, right } = $toolbar_state.value;
-    const alreadyExists = left.includes(id) || right.includes(id) || center.includes(id);
+    const alreadyExists = left.includes(id) || right.includes(id) ||
+      center.includes(id);
     if (!alreadyExists) {
       $toolbar_state.value = {
         ...$toolbar_state.value,

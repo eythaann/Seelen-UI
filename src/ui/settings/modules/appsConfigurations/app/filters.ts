@@ -1,4 +1,3 @@
-
 export const getSorterByText = (key: string) => (paramA: anyObject, paramB: anyObject) => {
   const a = String(paramA[key]).toLowerCase();
   const b = String(paramB[key]).toLowerCase();

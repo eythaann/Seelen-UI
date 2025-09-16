@@ -1,24 +1,24 @@
-import { useComputed } from '@preact/signals';
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { Brightness, SettingsToolbarItem } from '@seelen-ui/lib/types';
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { Icon } from '@shared/components/Icon';
-import { useWindowFocusChange } from '@shared/hooks';
-import { Button, Slider, Tooltip } from 'antd';
-import { throttle } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useComputed } from "@preact/signals";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { Brightness, SettingsToolbarItem } from "@seelen-ui/lib/types";
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { Icon } from "@shared/components/Icon";
+import { useWindowFocusChange } from "@shared/hooks";
+import { Button, Slider, Tooltip } from "antd";
+import { throttle } from "lodash";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import { Item } from '../item/infra/infra';
-import { VolumeControl } from '../media/infra/VolumeControl';
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { Item } from "../item/infra/infra";
+import { VolumeControl } from "../media/infra/VolumeControl";
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from '../shared/store/app';
+import { Selectors } from "../shared/store/app";
 
-import { RootState } from '../shared/store/domain';
+import { RootState } from "../shared/store/domain";
 
-import { $settings } from '../shared/state/mod';
+import { $settings } from "../shared/state/mod";
 
 interface Props {
   module: SettingsToolbarItem;
@@ -26,9 +26,9 @@ interface Props {
 
 function brightnessIcon(brightness: number) {
   if (brightness >= 60) {
-    return 'TbBrightnessUp';
+    return "TbBrightnessUp";
   }
-  return brightness >= 30 ? 'TbBrightnessDown' : 'TbBrightnessDownFilled';
+  return brightness >= 30 ? "TbBrightnessDown" : "TbBrightnessDownFilled";
 }
 
 export function SettingsModule({ module }: Props) {
@@ -37,10 +37,10 @@ export function SettingsModule({ module }: Props) {
 
   const showHibernate = useComputed(() => $settings.value.showHibernateButton);
   const defaultInput = useSelector((state: RootState) =>
-    Selectors.mediaInputs(state).find((d) => d.isDefaultMultimedia),
+    Selectors.mediaInputs(state).find((d) => d.isDefaultMultimedia)
   );
   const defaultOutput = useSelector((state: RootState) =>
-    Selectors.mediaOutputs(state).find((d) => d.isDefaultMultimedia),
+    Selectors.mediaOutputs(state).find((d) => d.isDefaultMultimedia)
   );
 
   const { t } = useTranslation();
@@ -65,8 +65,8 @@ export function SettingsModule({ module }: Props) {
   return (
     <AnimatedPopover
       animationDescription={{
-        openAnimationName: 'settings-open',
-        closeAnimationName: 'settings-close',
+        openAnimationName: "settings-open",
+        closeAnimationName: "settings-close",
       }}
       open={openPreview}
       trigger="click"
@@ -78,11 +78,11 @@ export function SettingsModule({ module }: Props) {
           onContextMenu={(e) => e.stopPropagation()}
         >
           <div className="fast-settings-title">
-            <span>{t('settings.title')}</span>
+            <span>{t("settings.title")}</span>
             <Tooltip
               mouseLeaveDelay={0}
               arrow={false}
-              title={t('settings.app_settings')}
+              title={t("settings.app_settings")}
               placement="left"
             >
               <button
@@ -94,7 +94,11 @@ export function SettingsModule({ module }: Props) {
             </Tooltip>
           </div>
 
-          {brightness && <span className="fast-settings-label">{t('settings.brightness')}</span>}
+          {brightness && (
+            <span className="fast-settings-label">
+              {t("settings.brightness")}
+            </span>
+          )}
           {brightness && (
             <div className="fast-settings-item">
               <Button
@@ -118,7 +122,9 @@ export function SettingsModule({ module }: Props) {
           )}
 
           {!!(defaultInput || defaultOutput) && (
-            <span className="fast-settings-label">{t('media.default_multimedia_volume')}</span>
+            <span className="fast-settings-label">
+              {t("media.default_multimedia_volume")}
+            </span>
           )}
           {!!defaultOutput && (
             <div className="fast-settings-item">
@@ -127,7 +133,7 @@ export function SettingsModule({ module }: Props) {
                 deviceId={defaultOutput.id}
                 icon={
                   <Icon
-                    iconName={defaultOutput.muted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'}
+                    iconName={defaultOutput.muted ? "IoVolumeMuteOutline" : "IoVolumeHighOutline"}
                   />
                 }
                 // onRightAction={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:sound' })}
@@ -139,14 +145,22 @@ export function SettingsModule({ module }: Props) {
               <VolumeControl
                 value={defaultInput.volume}
                 deviceId={defaultInput.id}
-                icon={<Icon iconName={defaultInput.muted ? 'BiMicrophoneOff' : 'BiMicrophone'} />}
+                icon={
+                  <Icon
+                    iconName={defaultInput.muted ? "BiMicrophoneOff" : "BiMicrophone"}
+                  />
+                }
               />
             </div>
           )}
 
-          <span className="fast-settings-label">{t('settings.power')}</span>
+          <span className="fast-settings-label">{t("settings.power")}</span>
           <div className="fast-settings-item fast-settings-power">
-            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.lock')}>
+            <Tooltip
+              mouseLeaveDelay={0}
+              arrow={false}
+              title={t("settings.lock")}
+            >
               <button
                 className="fast-settings-item-button"
                 onClick={() => invoke(SeelenCommand.Lock)}
@@ -154,7 +168,11 @@ export function SettingsModule({ module }: Props) {
                 <Icon iconName="BiLock" />
               </button>
             </Tooltip>
-            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.sleep')}>
+            <Tooltip
+              mouseLeaveDelay={0}
+              arrow={false}
+              title={t("settings.sleep")}
+            >
               <button
                 className="fast-settings-item-button"
                 onClick={() => invoke(SeelenCommand.Suspend)}
@@ -163,7 +181,11 @@ export function SettingsModule({ module }: Props) {
               </button>
             </Tooltip>
             {showHibernate && (
-              <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.hibernate')}>
+              <Tooltip
+                mouseLeaveDelay={0}
+                arrow={false}
+                title={t("settings.hibernate")}
+              >
                 <button
                   className="fast-settings-item-button"
                   onClick={() => invoke(SeelenCommand.Hibernate)}
@@ -172,7 +194,11 @@ export function SettingsModule({ module }: Props) {
                 </button>
               </Tooltip>
             )}
-            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.restart')}>
+            <Tooltip
+              mouseLeaveDelay={0}
+              arrow={false}
+              title={t("settings.restart")}
+            >
               <button
                 className="fast-settings-item-button"
                 onClick={() => invoke(SeelenCommand.Restart)}
@@ -180,7 +206,11 @@ export function SettingsModule({ module }: Props) {
                 <Icon iconName="VscDebugRestart" />
               </button>
             </Tooltip>
-            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.shutdown')}>
+            <Tooltip
+              mouseLeaveDelay={0}
+              arrow={false}
+              title={t("settings.shutdown")}
+            >
               <button
                 className="fast-settings-item-button"
                 onClick={() => invoke(SeelenCommand.Shutdown)}

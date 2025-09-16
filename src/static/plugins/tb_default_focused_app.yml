@@ -1,4 +1,4 @@
-id: '@default/focused-app'
+id: "@default/focused-app"
 metadata:
   displayName:
     en: Focused App Display Name
@@ -34,7 +34,7 @@ metadata:
     sk: Zobrazenie názvu aplikácie so zameraním
     mt: Isem tal-wiri tal-app iffokat
     fi: Keskitetty sovellus Näyttönimi
-    'no': Fokusert app visningsnavn
+    "no": Fokusert app visningsnavn
     sv: Fokuserad app Visningsnamn
     uz: Fokus qilingan ilovaning displey nomi
     tr: Odaklanmış Uygulama Görünen Adı
@@ -72,7 +72,7 @@ metadata:
     si: අවධානය යොමු කළ යෙදුම් දර්ශන නාමය
     lo: ຊື່ການສະແດງແອັບ App ທີ່ສຸມໃສ່
 icon: MdCenterFocusStrong
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: generic
   template: 'return [AppIcon({ path: window.exe, umid: window.umid }), "  ", window.name]'

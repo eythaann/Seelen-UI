@@ -1,20 +1,20 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from "@reduxjs/toolkit";
 
-import { Selectors } from '../shared/store/app';
+import { Selectors } from "../shared/store/app";
 
 /** Returns a number between 0 and 255 */
 export function calcLuminance(imageUrl: string): Promise<number> {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.crossOrigin = 'Anonymous';
+    img.crossOrigin = "Anonymous";
     img.src = imageUrl;
 
     img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
 
       if (!ctx) {
-        reject(new Error('Unable to get canvas context'));
+        reject(new Error("Unable to get canvas context"));
         return;
       }
 
@@ -46,6 +46,7 @@ export function calcLuminance(imageUrl: string): Promise<number> {
   });
 }
 
-export const selectDefaultOutput = createSelector(Selectors.mediaOutputs, (mediaOutputs) =>
-  mediaOutputs.find((d) => d.isDefaultMultimedia),
+export const selectDefaultOutput = createSelector(
+  Selectors.mediaOutputs,
+  (mediaOutputs) => mediaOutputs.find((d) => d.isDefaultMultimedia),
 );

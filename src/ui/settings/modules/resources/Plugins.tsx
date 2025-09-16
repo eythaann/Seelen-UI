@@ -1,20 +1,20 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { Plugin } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { ResourceText } from '@shared/components/ResourceText';
-import { path } from '@tauri-apps/api';
-import { invoke } from '@tauri-apps/api/core';
-import { Button } from 'antd';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { SeelenCommand } from "@seelen-ui/lib";
+import { Plugin } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { ResourceText } from "@shared/components/ResourceText";
+import { path } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
+import { Button } from "antd";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-import cs from './infra.module.css';
+import cs from "./infra.module.css";
 
-import { RootSelectors } from '../shared/store/app/selectors';
+import { RootSelectors } from "../shared/store/app/selectors";
 
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { ResourceCard } from './ResourceCard';
+import { SettingsGroup, SettingsOption } from "../../components/SettingsBox";
+import { ResourceCard } from "./ResourceCard";
 
 export function PluginsView() {
   const widgets = useSelector(RootSelectors.widgets);
@@ -47,20 +47,26 @@ export function PluginsView() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('resources.open_folder')}</b>
+          <b>{t("resources.open_folder")}</b>
           <Button
             type="default"
             onClick={async () => {
               const dataDir = await path.appDataDir();
-              invoke(SeelenCommand.OpenFile, { path: await path.join(dataDir, 'plugins') });
+              invoke(SeelenCommand.OpenFile, {
+                path: await path.join(dataDir, "plugins"),
+              });
             }}
           >
             <Icon iconName="PiFoldersDuotone" />
           </Button>
         </SettingsOption>
         <SettingsOption>
-          <span>{t('resources.discover')}:</span>
-          <Button href="https://seelen.io/resources/s?category=Plugin" target="_blank" type="link">
+          <span>{t("resources.discover")}:</span>
+          <Button
+            href="https://seelen.io/resources/s?category=Plugin"
+            target="_blank"
+            type="link"
+          >
             https://seelen.io/resources/s?category=Plugin
           </Button>
         </SettingsOption>
@@ -75,13 +81,11 @@ export function PluginsView() {
                 key={plugin.id}
                 resource={plugin}
                 kind="Plugin"
-                actions={
-                  plugin.metadata.bundled ? undefined : (
-                    <Button size="small" type="text" danger>
-                      <Icon iconName="IoTrash" />
-                    </Button>
-                  )
-                }
+                actions={plugin.metadata.bundled ? undefined : (
+                  <Button size="small" type="text" danger>
+                    <Icon iconName="IoTrash" />
+                  </Button>
+                )}
               />
             ))}
           </React.Fragment>

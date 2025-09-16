@@ -1,15 +1,15 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { Icon } from '@shared/components/Icon';
-import { cx } from '@shared/styles';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { listen } from '@tauri-apps/api/event';
-import { tempDir } from '@tauri-apps/api/path';
-import { Spin } from 'antd';
-import React, { useEffect, useReducer, useState } from 'react';
+import { SeelenCommand } from "@seelen-ui/lib";
+import { Icon } from "@shared/components/Icon";
+import { cx } from "@shared/styles";
+import { convertFileSrc, invoke } from "@tauri-apps/api/core";
+import { listen } from "@tauri-apps/api/event";
+import { tempDir } from "@tauri-apps/api/path";
+import { Spin } from "antd";
+import React, { useEffect, useReducer, useState } from "react";
 
-import { HWND } from '../../shared/store/domain';
+import { HWND } from "../../shared/store/domain";
 
-import { $settings } from '../../shared/state/mod';
+import { $settings } from "../../shared/state/mod";
 interface PreviewProps {
   title: string;
   hwnd: HWND;
@@ -18,7 +18,9 @@ interface PreviewProps {
 
 const TEMP_FOLDER = await tempDir();
 
-export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps) => {
+export const UserApplicationPreview = (
+  { title, hwnd, isFocused }: PreviewProps,
+) => {
   const imageUrl = convertFileSrc(`${TEMP_FOLDER}${hwnd}.png`);
 
   const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
@@ -41,11 +43,15 @@ export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps)
 
   return (
     <div
-      className={cx('weg-item-preview', {
-        'weg-item-preview-thumbnail-disabled': !$settings.value.thumbnailGenerationEnabled,
+      className={cx("weg-item-preview", {
+        "weg-item-preview-thumbnail-disabled": !$settings.value
+          .thumbnailGenerationEnabled,
       })}
       onClick={() => {
-        invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: isFocused });
+        invoke(SeelenCommand.WegToggleWindowState, {
+          hwnd,
+          wasFocused: isFocused,
+        });
       }}
     >
       <div className="weg-item-preview-topbar">
@@ -56,15 +62,15 @@ export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps)
       </div>
       {$settings.value.thumbnailGenerationEnabled && (
         <div className="weg-item-preview-image-container">
-          {imageSrc ? (
-            <img
-              className="weg-item-preview-image"
-              src={imageSrc + `?${new Date().getTime()}`}
-              onError={() => setImageSrc(null)}
-            />
-          ) : (
-            <Spin className="weg-item-preview-spin" />
-          )}
+          {imageSrc
+            ? (
+              <img
+                className="weg-item-preview-image"
+                src={imageSrc + `?${new Date().getTime()}`}
+                onError={() => setImageSrc(null)}
+              />
+            )
+            : <Spin className="weg-item-preview-spin" />}
         </div>
       )}
     </div>

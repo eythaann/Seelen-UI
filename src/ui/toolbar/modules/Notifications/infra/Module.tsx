@@ -1,18 +1,18 @@
-import { NotificationsToolbarItem } from '@seelen-ui/lib/types';
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { useWindowFocusChange } from '@shared/hooks';
-import { Popover } from 'antd';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { NotificationsToolbarItem } from "@seelen-ui/lib/types";
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { useWindowFocusChange } from "@shared/hooks";
+import { Popover } from "antd";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-import { Item } from '../../item/infra/infra';
+import { Item } from "../../item/infra/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { RootState } from '../../shared/store/domain';
+import { RootState } from "../../shared/store/domain";
 
-import { ArrivalPreview } from './ArrivalPreview';
-import { Notifications } from './Notifications';
+import { ArrivalPreview } from "./ArrivalPreview";
+import { Notifications } from "./Notifications";
 
 interface Props {
   module: NotificationsToolbarItem;
@@ -32,8 +32,8 @@ export function NotificationsModule({ module }: Props) {
     <Popover open={!openPreview} arrow={false} content={<ArrivalPreview />}>
       <AnimatedPopover
         animationDescription={{
-          openAnimationName: 'notification-open',
-          closeAnimationName: 'notification-close',
+          openAnimationName: "notification-open",
+          closeAnimationName: "notification-close",
         }}
         open={openPreview}
         trigger="click"

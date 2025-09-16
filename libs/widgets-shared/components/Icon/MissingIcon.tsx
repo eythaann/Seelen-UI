@@ -1,11 +1,11 @@
-import { cx } from '@shared/styles';
-import { UnlistenFn } from '@tauri-apps/api/event';
-import React, { ImgHTMLAttributes } from 'react';
+import { cx } from "@shared/styles";
+import { UnlistenFn } from "@tauri-apps/api/event";
+import React, { ImgHTMLAttributes } from "react";
 
-import { iconPackManager } from './common';
-import cs from './index.module.css';
+import { iconPackManager } from "./common";
+import cs from "./index.module.css";
 
-interface MissingIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {}
+interface MissingIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {}
 
 interface MissingIconState {
   src: string | null;
@@ -13,7 +13,7 @@ interface MissingIconState {
   isAproximatelySquare: boolean;
 }
 
-const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const darkModeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
 function getMissingIcon(): MissingIconState {
   const icon = iconPackManager.getMissingIcon();
   if (icon) {
@@ -35,7 +35,7 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
 
     this.state = getMissingIcon();
 
-    darkModeQuery.addEventListener('change', this.updateSrc);
+    darkModeQuery.addEventListener("change", this.updateSrc);
     iconPackManager.onChange(this.updateSrc).then((unlistener) => {
       this.unlistener = unlistener;
     });
@@ -44,7 +44,7 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
   componentWillUnmount(): void {
     this.unlistener?.();
     this.unlistener = null;
-    darkModeQuery.removeEventListener('change', this.updateSrc);
+    darkModeQuery.removeEventListener("change", this.updateSrc);
   }
 
   updateSrc(): void {
@@ -53,16 +53,16 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
 
   render(): React.ReactNode {
     const dataProps = Object.entries(this.props)
-      .filter(([k]) => k.startsWith('data-'))
+      .filter(([k]) => k.startsWith("data-"))
       .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
 
     return (
       <figure {...this.props} className={cx(cs.outer, this.props.className)}>
-        <img {...dataProps} src={this.state.src || ''} />
+        <img {...dataProps} src={this.state.src || ""} />
         {this.state.mask && (
           <div
             {...dataProps}
-            className={cx(cs.mask, 'sl-mask')}
+            className={cx(cs.mask, "sl-mask")}
             style={{ maskImage: `url('${this.state.mask}')` }}
           />
         )}

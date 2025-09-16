@@ -1,13 +1,6 @@
-import { getCurrentWindow } from '@tauri-apps/api/window';
-import {
-  debounce,
-  DebouncedFunc,
-  DebouncedFuncLeading,
-  isEqual,
-  throttle,
-  ThrottleSettings,
-} from 'lodash';
-import { useEffect, useMemo, useRef } from 'react';
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { debounce, DebouncedFunc, DebouncedFuncLeading, isEqual, throttle, ThrottleSettings } from "lodash";
+import { useEffect, useMemo, useRef } from "react";
 
 export function useWindowFocusChange(cb: (focused: boolean) => void) {
   useEffect(() => {
@@ -49,7 +42,11 @@ export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
   }, [ms, ...deps]);
 }
 
-export function useSyncClockInterval(cb: () => void, on: 'minutes' | 'seconds', deps: any[] = []) {
+export function useSyncClockInterval(
+  cb: () => void,
+  on: "minutes" | "seconds",
+  deps: any[] = [],
+) {
   const ref = useRef<number | null>(null);
 
   const clearLastInterval = () => {
@@ -63,16 +60,17 @@ export function useSyncClockInterval(cb: () => void, on: 'minutes' | 'seconds', 
 
     const now = new Date();
     let msToWaitForClockSync = 0;
-    if (on === 'minutes') {
+    if (on === "minutes") {
       const secondsUntilNextMinute = 60 - now.getSeconds();
-      msToWaitForClockSync = secondsUntilNextMinute * 1000 - now.getMilliseconds();
-    } else if (on === 'seconds') {
+      msToWaitForClockSync = secondsUntilNextMinute * 1000 -
+        now.getMilliseconds();
+    } else if (on === "seconds") {
       msToWaitForClockSync = 1000 - now.getMilliseconds();
     }
 
     setTimeout(() => {
       cb();
-      let interval = on === 'minutes' ? 60 * 1000 : 1000;
+      let interval = on === "minutes" ? 60 * 1000 : 1000;
       ref.current = window.setInterval(cb, interval);
     }, msToWaitForClockSync);
 
@@ -80,7 +78,10 @@ export function useSyncClockInterval(cb: () => void, on: 'minutes' | 'seconds', 
   }, [on, ...deps]);
 }
 
-export function useDeepCompareEffect(callback: () => void, dependencies: any[]) {
+export function useDeepCompareEffect(
+  callback: () => void,
+  dependencies: any[],
+) {
   const currentDependenciesRef = useRef<any[]>();
   if (!isEqual(currentDependenciesRef.current, dependencies)) {
     currentDependenciesRef.current = dependencies;

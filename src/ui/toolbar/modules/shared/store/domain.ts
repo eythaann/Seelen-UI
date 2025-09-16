@@ -1,4 +1,4 @@
-import { SystemLanguage } from '@seelen-ui/lib';
+import { SystemLanguage } from "@seelen-ui/lib";
 import {
   AppNotification,
   Battery,
@@ -14,7 +14,7 @@ import {
   User,
   WegAppGroupItem,
   WlanBssEntry,
-} from '@seelen-ui/lib/types';
+} from "@seelen-ui/lib/types";
 
 export interface RootState {
   version: number;
@@ -44,5 +44,8 @@ export interface RootState {
   notifications: AppNotification[];
   languages: SystemLanguage[];
   openApps: WegAppGroupItem[];
-  windowColorByHandle: Record<string, { background: string; foreground: string }>;
+  windowColorByHandle: Record<
+    string,
+    { background: string; foreground: string }
+  >;
 }

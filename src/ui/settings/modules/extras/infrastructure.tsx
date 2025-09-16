@@ -1,18 +1,18 @@
-import { invoke, SeelenCommand, UpdateChannel } from '@seelen-ui/lib';
-import { process } from '@seelen-ui/lib/tauri';
-import { isDev, wasInstalledUsingMSIX } from '@shared';
-import { Icon } from '@shared/components/Icon';
-import { Button, Select, Switch, Tooltip } from 'antd';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { invoke, SeelenCommand, UpdateChannel } from "@seelen-ui/lib";
+import { process } from "@seelen-ui/lib/tauri";
+import { isDev, wasInstalledUsingMSIX } from "@shared";
+import { Icon } from "@shared/components/Icon";
+import { Button, Select, Switch, Tooltip } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
-import { EnvConfig } from '../shared/config/infra';
-import cs from './infra.module.css';
+import { EnvConfig } from "../shared/config/infra";
+import cs from "./infra.module.css";
 
-import { newSelectors, RootActions } from '../shared/store/app/reducer';
+import { newSelectors, RootActions } from "../shared/store/app/reducer";
 
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox";
 
 export function Information() {
   const [isMsixBuild, setIsMsixBuild] = useState(true);
@@ -47,25 +47,28 @@ export function Information() {
       <SettingsGroup>
         <SettingsSubGroup label="Seelen UI">
           <SettingsOption>
-            <span>{t('extras.version')}:</span>
+            <span>{t("extras.version")}:</span>
             <span className={cs.version}>
-              v{EnvConfig.version} {isDevMode && '(dev)'} {isMsixBuild && '(msix)'}
+              v{EnvConfig.version} {isDevMode && "(dev)"} {isMsixBuild && "(msix)"}
             </span>
           </SettingsOption>
           <SettingsOption>
-            <span>{t('update.channel')}</span>
+            <span>{t("update.channel")}</span>
             <Select
               value={updaterSettings.channel}
               disabled={isMsixBuild}
               onChange={onChangeUpdateChannel}
-              options={Object.values(UpdateChannel).map((c) => ({ value: c, label: c }))}
+              options={Object.values(UpdateChannel).map((c) => ({
+                value: c,
+                label: c,
+              }))}
             />
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('extras.links')}>
+        <SettingsSubGroup label={t("extras.links")}>
           <SettingsOption>
             <span>Github:</span>
             <a href="https://github.com/eythaann/seelen-ui" target="_blank">
@@ -90,9 +93,9 @@ export function Information() {
 
       <SettingsGroup>
         <SettingsOption>
-          <b style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            {t('extras.clear_icons')}
-            <Tooltip title={t('extras.clear_icons_tooltip')}>
+          <b style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            {t("extras.clear_icons")}
+            <Tooltip title={t("extras.clear_icons_tooltip")}>
               <Icon iconName="LuCircleHelp" />
             </Tooltip>
           </b>
@@ -100,7 +103,7 @@ export function Information() {
             type="dashed"
             danger
             onClick={() => invoke(SeelenCommand.StateDeleteCachedIcons)}
-            style={{ width: '50px' }}
+            style={{ width: "50px" }}
           >
             <Icon iconName="IoReload" size={12} />
           </Button>
@@ -109,14 +112,23 @@ export function Information() {
 
       <SettingsGroup>
         <SettingsOption>
-          <b>{t('extras.relaunch')}</b>
-          <Button type="dashed" onClick={() => process.relaunch()} style={{ width: '50px' }}>
+          <b>{t("extras.relaunch")}</b>
+          <Button
+            type="dashed"
+            onClick={() => process.relaunch()}
+            style={{ width: "50px" }}
+          >
             <Icon iconName="IoReload" size={12} />
           </Button>
         </SettingsOption>
         <SettingsOption>
-          <b>{t('extras.exit')}</b>
-          <Button type="dashed" danger onClick={() => process.exit(0)} style={{ width: '50px' }}>
+          <b>{t("extras.exit")}</b>
+          <Button
+            type="dashed"
+            danger
+            onClick={() => process.exit(0)}
+            style={{ width: "50px" }}
+          >
             <Icon iconName="IoClose" />
           </Button>
         </SettingsOption>

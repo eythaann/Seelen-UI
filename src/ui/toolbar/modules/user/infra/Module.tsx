@@ -1,12 +1,12 @@
-import { UserToolbarItem } from '@seelen-ui/lib/types';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { UserToolbarItem } from "@seelen-ui/lib/types";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-import { Item } from '../../item/infra/infra';
+import { Item } from "../../item/infra/infra";
 
-import { Selectors } from '../../shared/store/app';
+import { Selectors } from "../../shared/store/app";
 
-import { WithUserHome } from './UserHome';
+import { WithUserHome } from "./UserHome";
 
 interface Props {
   module: UserToolbarItem;
@@ -28,11 +28,11 @@ function UserModuleItem({ module, active, ...rest }: Props) {
 export function UserModule({ module }: Props) {
   const [isActive, setIsActive] = useState(false);
 
-  return module.withUserFolder ? (
-    <WithUserHome setOpen={setIsActive}>
-      <UserModuleItem module={module} active={isActive} />
-    </WithUserHome>
-  ) : (
-    <UserModuleItem module={module} />
-  );
+  return module.withUserFolder
+    ? (
+      <WithUserHome setOpen={setIsActive}>
+        <UserModuleItem module={module} active={isActive} />
+      </WithUserHome>
+    )
+    : <UserModuleItem module={module} />;
 }

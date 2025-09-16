@@ -1,0 +1,21 @@
+{
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-sloppy-imports",
+        "prefer-const",
+        "jsx-button-has-type",
+        "no-explicit-any",
+        "ban-types",
+        "no-window",
+        "no-window-prefix"
+      ]
+    }
+  },
+  "fmt": {
+    "lineWidth": 120,
+    "exclude": [
+      "**/i18n/translations/**"
+    ]
+  }
+}

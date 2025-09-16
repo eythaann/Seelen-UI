@@ -1,4 +1,4 @@
-id: '@default/workspaces-numbered'
+id: "@default/workspaces-numbered"
 metadata:
   displayName:
     en: Numbered Workspaces
@@ -34,7 +34,7 @@ metadata:
     sk: Číslované pracovné priestory
     mt: Spazji tax-xogħol numerati
     fi: Numeroidut työtilat
-    'no': Nummererte arbeidsområder
+    "no": Nummererte arbeidsområder
     sv: Numrerade arbetsytor
     uz: Raqamlangan ish joylari
     tr: Numaralandırılmış Çalışma Alanları
@@ -72,7 +72,7 @@ metadata:
     km: កន្លែងធ្វើការដែលមានលេខរៀង
     lo: ບ່ອນເຮັດວຽກທີ່ມີຈໍານວນ
 icon: GoNumber
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: workspaces
   mode: numbered

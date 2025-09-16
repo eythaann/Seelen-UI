@@ -1,13 +1,13 @@
-import { InputNumber } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { InputNumber } from "antd";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
-import { useAppSelector } from '../../../shared/utils/infra';
+import { useAppSelector } from "../../../shared/utils/infra";
 
-import { SeelenWmSelectors } from '../../../shared/store/app/selectors';
-import { WManagerSettingsActions } from '../app';
+import { SeelenWmSelectors } from "../../../shared/store/app/selectors";
+import { WManagerSettingsActions } from "../app";
 
-import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
+import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox";
 
 export const OthersConfigs = () => {
   const resizeDelta = useAppSelector(SeelenWmSelectors.resizeDelta);
@@ -23,8 +23,13 @@ export const OthersConfigs = () => {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <span>{t('wm.resize_delta')}</span>
-          <InputNumber value={resizeDelta} onChange={onChangeResizeDelta} min={1} max={40} />
+          <span>{t("wm.resize_delta")}</span>
+          <InputNumber
+            value={resizeDelta}
+            onChange={onChangeResizeDelta}
+            min={1}
+            max={40}
+          />
         </SettingsOption>
       </SettingsGroup>
     </>

@@ -1,9 +1,9 @@
-import { useCallback } from 'react';
-import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from 'react-redux';
+import { useCallback } from "react";
+import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-redux";
 
-import type { AppDispatch, store } from '../store/infra';
+import type { AppDispatch, store } from "../store/infra";
 
-import { RootState } from '../store/domain';
+import { RootState } from "../store/domain";
 
 type DispatchFunc = () => AppDispatch;
 export const useAppDispatch: DispatchFunc = useDispatch;

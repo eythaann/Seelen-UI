@@ -1,11 +1,13 @@
-import { computed, signal } from '@preact/signals';
-import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from '@seelen-ui/lib';
-import { FancyToolbarSide } from '@seelen-ui/lib/types';
+import { computed, signal } from "@preact/signals";
+import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
+import { FancyToolbarSide } from "@seelen-ui/lib/types";
 
 const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
 
 const initialDesktops = await invoke(SeelenCommand.StateGetVirtualDesktops);
-export const $virtual_desktop = signal(initialDesktops.monitors[currentMonitorId]);
+export const $virtual_desktop = signal(
+  initialDesktops.monitors[currentMonitorId],
+);
 subscribe(SeelenEvent.VirtualDesktopsChanged, (e) => {
   $virtual_desktop.value = e.payload.monitors[currentMonitorId];
 });
@@ -24,10 +26,10 @@ subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
 
 export const $mouse_at_edge = computed<FancyToolbarSide | null>(() => {
   if ($mouse_pos.value.y === $current_monitor.value.rect.top) {
-    return 'Top';
+    return "Top";
   }
   if ($mouse_pos.value.y === $current_monitor.value.rect.bottom - 1) {
-    return 'Bottom';
+    return "Bottom";
   }
   return null;
 });

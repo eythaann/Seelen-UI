@@ -1,19 +1,15 @@
-import { Rect } from '@seelen-ui/lib';
-import { Icon } from '@shared/components/Icon';
-import { Button, InputNumber } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { Rect } from "@seelen-ui/lib";
+import { Icon } from "@shared/components/Icon";
+import { Button, InputNumber } from "antd";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
-import { useAppSelector } from '../../../shared/utils/infra';
+import { useAppSelector } from "../../../shared/utils/infra";
 
-import { SeelenWmSelectors } from '../../../shared/store/app/selectors';
-import { WManagerSettingsActions } from '../app';
+import { SeelenWmSelectors } from "../../../shared/store/app/selectors";
+import { WManagerSettingsActions } from "../app";
 
-import {
-  SettingsGroup,
-  SettingsOption,
-  SettingsSubGroup,
-} from '../../../../components/SettingsBox';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox";
 
 export const GlobalPaddings = () => {
   const workspaceGap = useAppSelector(SeelenWmSelectors.workspaceGap);
@@ -36,7 +32,9 @@ export const GlobalPaddings = () => {
   };
 
   const onChangeDefaultPadding = (value: number | null) => {
-    dispatch(WManagerSettingsActions.setWorkspacePadding(Math.round(value || 0)));
+    dispatch(
+      WManagerSettingsActions.setWorkspacePadding(Math.round(value || 0)),
+    );
   };
 
   return (
@@ -61,8 +59,18 @@ interface WindowManagerSpacingSettings {
   onClear?: () => void;
 }
 
-export function WindowManagerSpacingSettings(props: WindowManagerSpacingSettings) {
-  const { gap, padding, margins, onChangeGap, onChangePadding, onChangeMargins, onClear } = props;
+export function WindowManagerSpacingSettings(
+  props: WindowManagerSpacingSettings,
+) {
+  const {
+    gap,
+    padding,
+    margins,
+    onChangeGap,
+    onChangePadding,
+    onChangeMargins,
+    onClear,
+  } = props;
 
   const { t } = useTranslation();
 
@@ -70,60 +78,65 @@ export function WindowManagerSpacingSettings(props: WindowManagerSpacingSettings
     <SettingsGroup>
       {onClear && (
         <SettingsOption>
-          <span>{t('header.labels.seelen_wm')}</span>
+          <span>{t("header.labels.seelen_wm")}</span>
           <Button onClick={onClear}>
             <Icon iconName="IoTrash" size={14} />
           </Button>
         </SettingsOption>
       )}
       <SettingsOption>
-        <b>{t('wm.space_between_containers')}</b>
-        <InputNumber value={gap} onChange={onChangeGap} min={0} placeholder={t('inherit')} />
+        <b>{t("wm.space_between_containers")}</b>
+        <InputNumber
+          value={gap}
+          onChange={onChangeGap}
+          min={0}
+          placeholder={t("inherit")}
+        />
       </SettingsOption>
       <SettingsOption>
-        <b>{t('wm.workspace_padding')}</b>
+        <b>{t("wm.workspace_padding")}</b>
         <InputNumber
           value={padding}
           onChange={onChangePadding}
           min={0}
-          placeholder={t('inherit')}
+          placeholder={t("inherit")}
         />
       </SettingsOption>
-      <SettingsSubGroup label={t('wm.workspace_offset')}>
+      <SettingsSubGroup label={t("wm.workspace_offset")}>
         <SettingsOption>
-          <span>{t('sides.left')}</span>
+          <span>{t("sides.left")}</span>
           <InputNumber
             value={margins?.left}
-            onChange={onChangeMargins.bind(null, 'left')}
+            onChange={onChangeMargins.bind(null, "left")}
             min={0}
-            placeholder={t('inherit')}
+            placeholder={t("inherit")}
           />
         </SettingsOption>
         <SettingsOption>
-          <span>{t('sides.top')}</span>
+          <span>{t("sides.top")}</span>
           <InputNumber
             value={margins?.top}
-            onChange={onChangeMargins.bind(null, 'top')}
+            onChange={onChangeMargins.bind(null, "top")}
             min={0}
-            placeholder={t('inherit')}
+            placeholder={t("inherit")}
           />
         </SettingsOption>
         <SettingsOption>
-          <span>{t('sides.right')}</span>
+          <span>{t("sides.right")}</span>
           <InputNumber
             value={margins?.right}
-            onChange={onChangeMargins.bind(null, 'right')}
+            onChange={onChangeMargins.bind(null, "right")}
             min={0}
-            placeholder={t('inherit')}
+            placeholder={t("inherit")}
           />
         </SettingsOption>
         <SettingsOption>
-          <span>{t('sides.bottom')}</span>
+          <span>{t("sides.bottom")}</span>
           <InputNumber
             value={margins?.bottom}
-            onChange={onChangeMargins.bind(null, 'bottom')}
+            onChange={onChangeMargins.bind(null, "bottom")}
             min={0}
-            placeholder={t('inherit')}
+            placeholder={t("inherit")}
           />
         </SettingsOption>
       </SettingsSubGroup>

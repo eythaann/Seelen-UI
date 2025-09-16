@@ -4,9 +4,9 @@
 
 At Seelen UI, we always recommend using the latest available version, as all versions are kept secure and up to date.
 
-| Version  | Support        |
-| -------- | -------------- |
-| Latest   | :white_check_mark: |
+| Version | Support            |
+| ------- | ------------------ |
+| Latest  | :white_check_mark: |
 
 ## Reporting a Vulnerability
 

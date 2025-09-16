@@ -3,7 +3,10 @@
   Seelen UI Library
 </h1>
 
-The **Seelen UI Library** is the core library for [Seelen UI](https://github.com/eythaann/seelen-ui), a highly customizable desktop UI. This library provides the necessary tools and types to create and manage widgets, plugins, and themes for the Seelen UI application. It's a hybrid library with a Rust core and TypeScript/Deno bindings, designed for performance and type safety.
+The **Seelen UI Library** is the core library for [Seelen UI](https://github.com/eythaann/seelen-ui), a highly
+customizable desktop UI. This library provides the necessary tools and types to create and manage widgets, plugins, and
+themes for the Seelen UI application. It's a hybrid library with a Rust core and TypeScript/Deno bindings, designed for
+performance and type safety.
 
 ## Installation
 
@@ -12,11 +15,13 @@ The **Seelen UI Library** is the core library for [Seelen UI](https://github.com
 You can use the library from JSR or npm.
 
 **JSR:**
+
 ```sh
 deno add @seelen-ui/lib
 ```
 
 **NPM:**
+
 ```sh
 npm install @seelen-ui/lib
 ```

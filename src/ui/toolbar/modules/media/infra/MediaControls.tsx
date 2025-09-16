@@ -1,37 +1,40 @@
-import { AnimatedPopover } from '@shared/components/AnimatedWrappers';
-import { Icon } from '@shared/components/Icon';
-import { useWindowFocusChange } from '@shared/hooks';
-import { debounce } from 'lodash';
-import { VNode } from 'preact';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
+import { Icon } from "@shared/components/Icon";
+import { useWindowFocusChange } from "@shared/hooks";
+import { debounce } from "lodash";
+import { VNode } from "preact";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { selectDefaultOutput } from '../application';
+import { selectDefaultOutput } from "../application";
 
-import { MediaMixerView } from './DeviceView';
-import { MediaMainView } from './MainView';
-import { VolumeControl } from './VolumeControl';
+import { MediaMixerView } from "./DeviceView";
+import { MediaMainView } from "./MainView";
+import { VolumeControl } from "./VolumeControl";
 
-import './index.css';
+import "./index.css";
 
 function MediaControls() {
   const [deviceId, setDeviceId] = useState<string | null>(null);
-  const [view, setView] = useState<string>('main');
+  const [view, setView] = useState<string>("main");
 
   return (
-    <BackgroundByLayersV2 className="media-control" onContextMenu={(e) => e.stopPropagation()}>
-      {view === 'main' || !deviceId ? (
-        <MediaMainView
-          setViewDeviceId={(id) => {
-            setDeviceId(id);
-            setView('mixer');
-          }}
-        />
-      ) : (
-        <MediaMixerView deviceId={deviceId} onBack={() => setView('main')} />
-      )}
+    <BackgroundByLayersV2
+      className="media-control"
+      onContextMenu={(e) => e.stopPropagation()}
+    >
+      {view === "main" || !deviceId
+        ? (
+          <MediaMainView
+            setViewDeviceId={(id) => {
+              setDeviceId(id);
+              setView("mixer");
+            }}
+          />
+        )
+        : <MediaMixerView deviceId={deviceId} onBack={() => setView("main")} />}
     </BackgroundByLayersV2>
   );
 }
@@ -83,23 +86,26 @@ export function WithMediaControls({ children, setActive }: MediaControlProps) {
   return (
     <AnimatedPopover
       animationDescription={{
-        openAnimationName: 'media-notifier-open',
-        closeAnimationName: 'media-notifier-close',
+        openAnimationName: "media-notifier-open",
+        closeAnimationName: "media-notifier-close",
       }}
       open={openNotifier}
       trigger="manual"
       content={
-        <BackgroundByLayersV2 className="media-notifier" onContextMenu={(e) => e.stopPropagation()}>
+        <BackgroundByLayersV2
+          className="media-notifier"
+          onContextMenu={(e) => e.stopPropagation()}
+        >
           {defaultOutput && (
             <VolumeControl
               value={defaultOutput.volume}
               deviceId={defaultOutput.id}
               icon={
                 <Icon
-                  iconName={defaultOutput.muted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'}
+                  iconName={defaultOutput.muted ? "IoVolumeMuteOutline" : "IoVolumeHighOutline"}
                 />
               }
-              withPercentage={true}
+              withPercentage
             />
           )}
         </BackgroundByLayersV2>
@@ -107,8 +113,8 @@ export function WithMediaControls({ children, setActive }: MediaControlProps) {
     >
       <AnimatedPopover
         animationDescription={{
-          openAnimationName: 'media-open',
-          closeAnimationName: 'media-close',
+          openAnimationName: "media-open",
+          closeAnimationName: "media-close",
         }}
         open={openControls}
         trigger="click"

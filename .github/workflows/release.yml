@@ -67,6 +67,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
 
       - name: Install Rust Nightly
         uses: dtolnay/rust-toolchain@master

@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/widget.schema.json
-id: '@seelen/popup'
+id: "@seelen/popup"
 icon: FaRegWindowRestore
 metadata:
   displayName:
@@ -31,7 +31,7 @@ metadata:
     ms: Popup shell
     mt: Popups tal-qoxra
     nl: Shell -pop -ups
-    'no': Shell popups
+    "no": Shell popups
     uz: Shell qalqib chiqilishi
     pl: Wyskakujące okienka
     pt: Pop -ups de concha
@@ -114,7 +114,7 @@ metadata:
     ms: Widget ini membolehkan menunjukkan popup tersuai kepada pengguna.
     mt: Dan il-widget jippermetti li turi popups personalizzati lill-utenti.
     nl: Met deze widget kunnen u aangepaste pop -ups tonen voor gebruikers.
-    'no': Denne widgeten lar vise tilpassede popups til brukere.
+    "no": Denne widgeten lar vise tilpassede popups til brukere.
     uz: >-
       Ushbu vidjet foydalanuvchilarga moslashtirilgan qalqib chiquvchi
       popuplarni ko'rsatishga imkon beradi.

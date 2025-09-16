@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
@@ -10,12 +10,14 @@
   xmlns:desktop7="http://schemas.microsoft.com/appx/manifest/desktop/windows10/7"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
-  IgnorableNamespaces="uap uap3 uap5 uap7 uap10 desktop6 desktop7 rescap virtualization">
+  IgnorableNamespaces="uap uap3 uap5 uap7 uap10 desktop6 desktop7 rescap virtualization"
+>
   <Identity
     Name="Seelen.SeelenUI"
     Publisher="CN=7E60225C-94CB-4B2E-B17F-0159A11074CB"
     Version="{{version}}"
-    ProcessorArchitecture="x64" />
+    ProcessorArchitecture="x64"
+  />
 
   <Properties>
     <DisplayName>Seelen UI</DisplayName>
@@ -31,8 +33,10 @@
     <!-- will be used on versions 21H1 and newer -->
     <virtualization:FileSystemWriteVirtualization>
       <virtualization:ExcludedDirectories>
-        <virtualization:ExcludedDirectory>$(KnownFolder:LocalAppData)\com.seelen.seelen-ui\logs</virtualization:ExcludedDirectory>
-        <virtualization:ExcludedDirectory>$(KnownFolder:RoamingAppData)\com.seelen.seelen-ui</virtualization:ExcludedDirectory>
+        <virtualization:ExcludedDirectory
+        >$(KnownFolder:LocalAppData)\com.seelen.seelen-ui\logs</virtualization:ExcludedDirectory>
+        <virtualization:ExcludedDirectory
+        >$(KnownFolder:RoamingAppData)\com.seelen.seelen-ui</virtualization:ExcludedDirectory>
       </virtualization:ExcludedDirectories>
     </virtualization:FileSystemWriteVirtualization>
 
@@ -51,12 +55,19 @@
   </Resources>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0"
-      MaxVersionTested="10.0.22000.1" />
+    <TargetDeviceFamily
+      Name="Windows.Desktop"
+      MinVersion="10.0.17763.0"
+      MaxVersionTested="10.0.22000.1"
+    />
   </Dependencies>
 
   <Applications>
-    <Application Id="App" Executable="seelen-ui.exe" EntryPoint="Windows.FullTrustApplication">
+    <Application
+      Id="App"
+      Executable="seelen-ui.exe"
+      EntryPoint="Windows.FullTrustApplication"
+    >
       <uap3:VisualElements
         DisplayName="Seelen UI"
         Description="Fully Customizable Desktop Enviroment for Windows."
@@ -64,7 +75,8 @@
         Square44x44Logo="static\icons\48x48.png"
         BackgroundColor="transparent"
         AppListEntry="default"
-        VisualGroup="Seelen">
+        VisualGroup="Seelen"
+      >
       </uap3:VisualElements>
 
       <Extensions>
@@ -93,7 +105,11 @@
       </Extensions>
     </Application>
 
-    <Application Id="Service" Executable="slu-service.exe" EntryPoint="Windows.FullTrustApplication">
+    <Application
+      Id="Service"
+      Executable="slu-service.exe"
+      EntryPoint="Windows.FullTrustApplication"
+    >
       <uap3:VisualElements
         DisplayName="SLU Service"
         Description="Service Helper for Seelen UI"
@@ -101,7 +117,8 @@
         Square44x44Logo="static\icons\48x48.png"
         BackgroundColor="transparent"
         AppListEntry="default"
-        VisualGroup="Seelen">
+        VisualGroup="Seelen"
+      >
       </uap3:VisualElements>
 
       <Extensions>

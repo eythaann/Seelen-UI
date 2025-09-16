@@ -1,5 +1,5 @@
-import { invoke as tauriInvoke } from '@tauri-apps/api/core';
-import { listen as tauriListen, type Options as ListenerOptions } from '@tauri-apps/api/event';
+import { invoke as tauriInvoke } from "@tauri-apps/api/core";
+import { listen as tauriListen, type Options as ListenerOptions } from "@tauri-apps/api/event";
 
 import type {
   AllSeelenCommandArguments,
@@ -8,7 +8,7 @@ import type {
   SeelenCommand,
   SeelenEvent,
   UnSubscriber,
-} from '../handlers/mod.ts';
+} from "../handlers/mod.ts";
 
 // deno-lint-ignore no-explicit-any
 interface ConstructorWithSingleArg<T = any> {

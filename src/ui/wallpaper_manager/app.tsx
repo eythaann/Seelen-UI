@@ -1,7 +1,7 @@
-import { getCurrentWindow } from '@tauri-apps/api/window';
-import { useEffect } from 'react';
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { useEffect } from "react";
 
-import { MonitorContainers } from './modules/Monitor/infra';
+import { MonitorContainers } from "./modules/Monitor/infra";
 
 export function App() {
   useEffect(() => {

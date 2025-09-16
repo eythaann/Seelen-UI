@@ -617,9 +617,9 @@ appearance_values:
     name: Insulin Pump
     subcategory:
       - value: 0x01
-        name: 'Insulin Pump, durable pump'
+        name: "Insulin Pump, durable pump"
       - value: 0x04
-        name: 'Insulin Pump, patch pump'
+        name: "Insulin Pump, patch pump"
       - value: 0x08
         name: Insulin Pen
   - category: 0x036

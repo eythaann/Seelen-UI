@@ -1,4 +1,4 @@
-id: '@default/keyboard'
+id: "@default/keyboard"
 metadata:
   displayName:
     en: Keyboard Layout
@@ -32,7 +32,7 @@ metadata:
     ro: Layout tastatură
     ms: Susun atur papan kekunci
     mt: Tqassim tat-tastiera
-    'no': Tastaturoppsett
+    "no": Tastaturoppsett
     sk: Rozloženie klávesnice
     sv: Layout för tangentbord
     uz: Klaviatura tartibi
@@ -72,7 +72,7 @@ metadata:
     km: ប្លង់ក្តារចុច
     lo: ຮູບແບບ keyboard
 icon: FaRegKeyboard
-target: '@seelen/fancy-toolbar'
+target: "@seelen/fancy-toolbar"
 plugin:
   type: keyboard
   tooltip: return [activeLang.name, " - ", activeKeyboard.displayName]

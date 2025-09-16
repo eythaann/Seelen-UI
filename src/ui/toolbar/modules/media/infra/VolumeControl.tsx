@@ -1,9 +1,9 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { Icon } from '@shared/components/Icon';
-import { invoke } from '@tauri-apps/api/core';
-import { Slider, Tooltip } from 'antd';
-import { throttle } from 'lodash';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { SeelenCommand } from "@seelen-ui/lib";
+import { Icon } from "@shared/components/Icon";
+import { invoke } from "@tauri-apps/api/core";
+import { Slider, Tooltip } from "antd";
+import { throttle } from "lodash";
+import { memo, useCallback, useEffect, useState } from "react";
 
 interface Props {
   value: number;
@@ -20,7 +20,11 @@ export const VolumeSlider = memo(({ value, deviceId, sessionId }: Props) => {
 
   const onExternalChange = useCallback(
     throttle((value: number) => {
-      invoke(SeelenCommand.SetVolumeLevel, { deviceId, sessionId, level: value }).catch(console.error);
+      invoke(SeelenCommand.SetVolumeLevel, {
+        deviceId,
+        sessionId,
+        level: value,
+      }).catch(console.error);
     }, 100),
     [deviceId, sessionId],
   );
@@ -32,7 +36,10 @@ export const VolumeSlider = memo(({ value, deviceId, sessionId }: Props) => {
 
   function onWheel(e: WheelEvent) {
     const isUp = e.deltaY < 0;
-    const level = Math.max(0, Math.min(1, internalValue + (isUp ? 0.02 : -0.02)));
+    const level = Math.max(
+      0,
+      Math.min(1, internalValue + (isUp ? 0.02 : -0.02)),
+    );
     onInternalChange(level);
   }
 
@@ -84,7 +91,7 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
         </button>
       </Tooltip>
       <VolumeSlider value={value} deviceId={deviceId} sessionId={sessionId} />
-      {withPercentage && <span style={{ lineHeight: '100%' }}>{(100 * value).toFixed(0)}%</span>}
+      {withPercentage && <span style={{ lineHeight: "100%" }}>{(100 * value).toFixed(0)}%</span>}
       {!!onRightAction && (
         <button className="media-control-volume-action" onClick={onRightAction}>
           <Icon iconName="RiEqualizerLine" />

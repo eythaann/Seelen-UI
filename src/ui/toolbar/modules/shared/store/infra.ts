@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import {
   BluetoothDevices,
   Color,
@@ -15,16 +15,16 @@ import {
   subscribe,
   UserDetails,
   VideosFolder,
-} from '@seelen-ui/lib';
-import { FancyToolbarSettings, FocusedApp } from '@seelen-ui/lib/types';
-import { invoke } from '@tauri-apps/api/core';
-import { listen as listenGlobal } from '@tauri-apps/api/event';
-import { debounce, throttle } from 'lodash';
+} from "@seelen-ui/lib";
+import { FancyToolbarSettings, FocusedApp } from "@seelen-ui/lib/types";
+import { invoke } from "@tauri-apps/api/core";
+import { listen as listenGlobal } from "@tauri-apps/api/event";
+import { debounce, throttle } from "lodash";
 
-import { lazySlice, RootActions, RootSlice } from './app';
+import { lazySlice, RootActions, RootSlice } from "./app";
 
-import i18n from '../../../i18n';
-import { $settings } from '../state/mod';
+import i18n from "../../../i18n";
+import { $settings } from "../state/mod";
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -38,8 +38,12 @@ export const store = configureStore({
 lazySlice(store.dispatch);
 
 const removeFocusedColorCssVars = () => {
-  document.documentElement.style.removeProperty('--color-focused-app-background');
-  document.documentElement.style.removeProperty('--color-focused-app-foreground');
+  document.documentElement.style.removeProperty(
+    "--color-focused-app-background",
+  );
+  document.documentElement.style.removeProperty(
+    "--color-focused-app-foreground",
+  );
 };
 
 async function initFocusedColorSystem() {
@@ -54,7 +58,9 @@ async function initFocusedColorSystem() {
       return;
     }
 
-    let color = new Color(await invoke(SeelenCommand.SystemGetForegroundWindowColor));
+    let color = new Color(
+      await invoke(SeelenCommand.SystemGetForegroundWindowColor),
+    );
     if (color.inner.a === 0) {
       removeFocusedColorCssVars();
       return;
@@ -62,20 +68,28 @@ async function initFocusedColorSystem() {
 
     const luminance = color.calcLuminance();
     const background = color.toHexString();
-    const foreground =
-      luminance / 255 > 0.5 ? 'var(--color-persist-gray-900)' : 'var(--color-persist-gray-100)';
+    const foreground = luminance / 255 > 0.5 ? "var(--color-persist-gray-900)" : "var(--color-persist-gray-100)";
 
-    document.documentElement.style.setProperty('--color-focused-app-background', background);
-    document.documentElement.style.setProperty('--color-focused-app-foreground', foreground);
+    document.documentElement.style.setProperty(
+      "--color-focused-app-background",
+      background,
+    );
+    document.documentElement.style.setProperty(
+      "--color-focused-app-foreground",
+      foreground,
+    );
 
     store.dispatch(
-      RootActions.addWindowColor([optimisticFocused.hwnd, { background, foreground }]),
+      RootActions.addWindowColor([optimisticFocused.hwnd, {
+        background,
+        foreground,
+      }]),
     );
   };
 
-  await listenGlobal('hidden::remove-focused-color', removeFocusedColorCssVars);
+  await listenGlobal("hidden::remove-focused-color", removeFocusedColorCssVars);
 
-  window.setInterval(updateFocusedColor, 350);
+  globalThis.setInterval(updateFocusedColor, 350);
   await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
     const app = e.payload;
     optimisticFocused = app;
@@ -126,7 +140,9 @@ export async function registerStoreEvents() {
 
   await subscribe(SeelenEvent.Notifications, (event) => {
     store.dispatch(
-      RootActions.setNotifications(event.payload.sort((a, b) => Number(b.date - a.date))),
+      RootActions.setNotifications(
+        event.payload.sort((a, b) => Number(b.date - a.date)),
+      ),
     );
   });
 
@@ -149,28 +165,16 @@ export async function registerStoreEvents() {
   LanguageList.onChange((list) => store.dispatch(RootActions.setLanguages(list.asArray())));
 
   UserDetails.onChange((details) => store.dispatch(RootActions.setUser(details.user)));
-  RecentFolder.onChange((details) =>
-    store.dispatch(RootActions.setUserRecentFolder(details.all())),
-  );
-  DocumentsFolder.onChange((details) =>
-    store.dispatch(RootActions.setUserDocumentsFolder(details.all())),
-  );
-  DownloadsFolder.onChange((details) =>
-    store.dispatch(RootActions.setUserDownloadsFolder(details.all())),
-  );
-  PicturesFolder.onChange((details) =>
-    store.dispatch(RootActions.setUserPicturesFolder(details.all())),
-  );
-  VideosFolder.onChange((details) =>
-    store.dispatch(RootActions.setUserVideosFolder(details.all())),
-  );
+  RecentFolder.onChange((details) => store.dispatch(RootActions.setUserRecentFolder(details.all())));
+  DocumentsFolder.onChange((details) => store.dispatch(RootActions.setUserDocumentsFolder(details.all())));
+  DownloadsFolder.onChange((details) => store.dispatch(RootActions.setUserDownloadsFolder(details.all())));
+  PicturesFolder.onChange((details) => store.dispatch(RootActions.setUserPicturesFolder(details.all())));
+  VideosFolder.onChange((details) => store.dispatch(RootActions.setUserVideosFolder(details.all())));
   MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
 
-  BluetoothDevices.onChange((devices) =>
-    store.dispatch(RootActions.setBluetoothDevices(devices.all())),
-  );
+  BluetoothDevices.onChange((devices) => store.dispatch(RootActions.setBluetoothDevices(devices.all())));
   BluetoothDevices.onDiscoveredDevicesChange((devices) =>
-    store.dispatch(RootActions.setDiscoveredBluetoothDevices(devices.all())),
+    store.dispatch(RootActions.setDiscoveredBluetoothDevices(devices.all()))
   );
 
   await initFocusedColorSystem();
@@ -180,12 +184,12 @@ export async function registerStoreEvents() {
 
 function loadSettingsCSS(settings: FancyToolbarSettings) {
   const styles = document.documentElement.style;
-  styles.setProperty('--config-height', `${settings.height}px`);
-  styles.setProperty('--config-time-before-show', `${settings.delayToShow}ms`);
-  styles.setProperty('--config-time-before-hide', `${settings.delayToHide}ms`);
+  styles.setProperty("--config-height", `${settings.height}px`);
+  styles.setProperty("--config-time-before-show", `${settings.delayToShow}ms`);
+  styles.setProperty("--config-time-before-hide", `${settings.delayToHide}ms`);
 }
 
-async function loadSettings(settings: Settings) {
+function loadSettings(settings: Settings) {
   i18n.changeLanguage(settings.inner.language || undefined);
   loadSettingsCSS(settings.fancyToolbar);
   if (!settings.fancyToolbar.dynamicColor) {

@@ -1,15 +1,15 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { FileIcon, SpecificIcon } from '@shared/components/Icon';
-import { invoke } from '@tauri-apps/api/core';
-import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { SeelenCommand } from "@seelen-ui/lib";
+import { FileIcon, SpecificIcon } from "@shared/components/Icon";
+import { invoke } from "@tauri-apps/api/core";
+import { memo } from "react";
+import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { PinnedWegItem } from '../../shared/store/domain';
+import { PinnedWegItem } from "../../shared/store/domain";
 
-import { WithContextMenu } from '../../../components/WithContextMenu';
-import { getMenuForItem } from './Menu';
+import { WithContextMenu } from "../../../components/WithContextMenu";
+import { getMenuForItem } from "./Menu";
 
 interface Props {
   item: PinnedWegItem;
@@ -28,14 +28,20 @@ export const FileOrFolder = memo(({ item }: Props) => {
         onContextMenu={(e) => e.stopPropagation()}
       >
         <BackgroundByLayersV2 prefix="item" />
-        {item.subtype === 'Folder' ? (
-          <SpecificIcon
-            className="weg-item-icon weg-item-folder-icon"
-            name="@seelen/weg::folder"
-          />
-        ) : (
-          <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
-        )}
+        {item.subtype === "Folder"
+          ? (
+            <SpecificIcon
+              className="weg-item-icon weg-item-folder-icon"
+              name="@seelen/weg::folder"
+            />
+          )
+          : (
+            <FileIcon
+              className="weg-item-icon"
+              path={item.path}
+              umid={item.umid}
+            />
+          )}
       </div>
     </WithContextMenu>
   );

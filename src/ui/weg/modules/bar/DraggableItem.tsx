@@ -1,19 +1,26 @@
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { cx } from '@shared/styles';
-import { HTMLAttributes, PropsWithChildren } from 'preact/compat';
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { cx } from "@shared/styles";
+import { HTMLAttributes, PropsWithChildren } from "preact/compat";
 
-import { SwItem } from '../shared/store/domain';
+import { SwItem } from "../shared/store/domain";
 
 interface Props extends PropsWithChildren {
   item: SwItem;
 }
 
 export function DraggableItem({ children, item }: Props) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
     id: item.id,
     animateLayoutChanges: () => false,
-    disabled: item.type === 'Separator',
+    disabled: item.type === "Separator",
   });
 
   return (
@@ -26,12 +33,12 @@ export function DraggableItem({ children, item }: Props) {
         transition,
         opacity: isDragging ? 0.3 : 1,
       }}
-      className={cx('weg-item-drag-container', {
+      className={cx("weg-item-drag-container", {
         dragging: isDragging,
       })}
       // this was added here to avoid need to pass it to all the items types,
       // this avoid the double context menu of dock menu and dock items.
-      onContextMenu={item.type === 'Separator' ? undefined : (e) => e.stopPropagation()}
+      onContextMenu={item.type === "Separator" ? undefined : (e) => e.stopPropagation()}
     >
       {children}
     </div>

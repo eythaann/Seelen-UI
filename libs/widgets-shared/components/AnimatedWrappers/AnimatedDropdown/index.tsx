@@ -1,11 +1,11 @@
-import { Dropdown, DropdownProps } from 'antd';
-import { ComponentChild } from 'preact';
-import { useEffect, useState } from 'react';
+import { Dropdown, DropdownProps } from "antd";
+import { ComponentChild } from "preact";
+import { useEffect, useState } from "react";
 
-import { LegacyCustomAnimationProps } from '../domain';
+import { LegacyCustomAnimationProps } from "../domain";
 
-import { useDebounce } from '../../../hooks';
-import { cx } from '../../../styles';
+import { useDebounce } from "../../../hooks";
+import { cx } from "../../../styles";
 
 export interface AnimatedDropwonProps extends DropdownProps {
   animationDescription: LegacyCustomAnimationProps;
@@ -41,8 +41,8 @@ export function AnimatedDropdown({
   }, [open]);
 
   const classnames: Record<string, boolean> = {
-    'sl-popup-open': open,
-    'sl-popup-close': !open,
+    "sl-popup-open": open,
+    "sl-popup-close": !open,
   };
 
   if (openAnimationName) {
@@ -64,9 +64,7 @@ export function AnimatedDropdown({
         onOpenChange?.(open, event);
       }}
       {...dropdownProps}
-      dropdownRender={(origin) =>
-        dropdownRender && <div className={cx(classnames)}>{dropdownRender(origin)}</div>
-      }
+      dropdownRender={(origin) => dropdownRender && <div className={cx(classnames)}>{dropdownRender(origin)}</div>}
     >
       {children}
     </Dropdown>

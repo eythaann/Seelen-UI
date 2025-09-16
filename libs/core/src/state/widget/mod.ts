@@ -1,20 +1,20 @@
-import type { ThirdPartyWidgetSettings, Widget as IWidget, WidgetId, WsdGroupEntry } from '@seelen-ui/types';
-import { SeelenCommand, SeelenEvent, type UnSubscriber } from '../../handlers/mod.ts';
-import { List } from '../../utils/List.ts';
-import { newFromInvoke, newOnEvent } from '../../utils/State.ts';
-import { getCurrentWebviewWindow, type WebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { decodeBase64Url } from '@std/encoding/base64url';
-import { PhysicalPosition, PhysicalSize } from '@tauri-apps/api/dpi';
-import { monitorFromPoint } from '@tauri-apps/api/window';
-import { debounce } from '../../utils/async.ts';
+import type { ThirdPartyWidgetSettings, Widget as IWidget, WidgetId, WsdGroupEntry } from "@seelen-ui/types";
+import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
+import { List } from "../../utils/List.ts";
+import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
+import { getCurrentWebviewWindow, type WebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { decodeBase64Url } from "@std/encoding/base64url";
+import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
+import { monitorFromPoint } from "@tauri-apps/api/window";
+import { debounce } from "../../utils/async.ts";
 
-export const SeelenSettingsWidgetId: WidgetId = '@seelen/settings' as WidgetId;
-export const SeelenPopupWidgetId: WidgetId = '@seelen/popup' as WidgetId;
-export const SeelenWegWidgetId: WidgetId = '@seelen/weg' as WidgetId;
-export const SeelenToolbarWidgetId: WidgetId = '@seelen/fancy-toolbar' as WidgetId;
-export const SeelenWindowManagerWidgetId: WidgetId = '@seelen/window-manager' as WidgetId;
-export const SeelenLauncherWidgetId: WidgetId = '@seelen/launcher' as WidgetId;
-export const SeelenWallWidgetId: WidgetId = '@seelen/wallpaper-manager' as WidgetId;
+export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
+export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
+export const SeelenWegWidgetId: WidgetId = "@seelen/weg" as WidgetId;
+export const SeelenToolbarWidgetId: WidgetId = "@seelen/fancy-toolbar" as WidgetId;
+export const SeelenWindowManagerWidgetId: WidgetId = "@seelen/window-manager" as WidgetId;
+export const SeelenLauncherWidgetId: WidgetId = "@seelen/launcher" as WidgetId;
+export const SeelenWallWidgetId: WidgetId = "@seelen/wallpaper-manager" as WidgetId;
 
 export class WidgetList extends List<IWidget> {
   static getAsync(): Promise<WidgetList> {
@@ -64,7 +64,7 @@ export class Widget {
 
     this.id = id as WidgetId;
     this.decoded = Object.freeze({
-      label: `${id}${query ? `?${query}` : ''}`,
+      label: `${id}${query ? `?${query}` : ""}`,
       monitorId: paramsObj.monitorId || null,
       instanceId: paramsObj.instanceId || null,
       params: Object.freeze(Object.fromEntries(params)),
@@ -73,10 +73,12 @@ export class Widget {
 
   private static getDecodedWebviewLabel(): [WidgetId, string | undefined] {
     const encondedLabel = getCurrentWebviewWindow().label;
-    const decodedLabel = new TextDecoder().decode(decodeBase64Url(encondedLabel));
-    const [id, query] = decodedLabel.split('?');
+    const decodedLabel = new TextDecoder().decode(
+      decodeBase64Url(encondedLabel),
+    );
+    const [id, query] = decodedLabel.split("?");
     if (!id) {
-      throw new Error('Missing widget id on webview label');
+      throw new Error("Missing widget id on webview label");
     }
     return [id as WidgetId, query];
   }
@@ -90,9 +92,12 @@ export class Widget {
   static getCurrent(): Widget {
     const scope = globalThis as ExtendedGlobalThis;
     if (!scope.__SLU_WIDGET) {
-      throw new Error('The library is being used on a non Seelen UI environment');
+      throw new Error(
+        "The library is being used on a non Seelen UI environment",
+      );
     }
-    return scope.__SLU_WIDGET_INSTANCE || (scope.__SLU_WIDGET_INSTANCE = new Widget(scope.__SLU_WIDGET));
+    return scope.__SLU_WIDGET_INSTANCE ||
+      (scope.__SLU_WIDGET_INSTANCE = new Widget(scope.__SLU_WIDGET));
   }
 
   /** @deprecated Use `getCurrent` instead, this method will be removed on future */
@@ -100,7 +105,9 @@ export class Widget {
     return this.getCurrent();
   }
 
-  private static getEntryDefaultValues(entry: WsdGroupEntry): Record<string, unknown> {
+  private static getEntryDefaultValues(
+    entry: WsdGroupEntry,
+  ): Record<string, unknown> {
     const config: Record<string, unknown> = {
       [entry.config.key]: entry.config.defaultValue,
     };
@@ -196,4 +203,7 @@ export class Widget {
   }
 }
 
-type ExtendedGlobalThis = typeof globalThis & { __SLU_WIDGET?: IWidget; __SLU_WIDGET_INSTANCE?: Widget };
+type ExtendedGlobalThis = typeof globalThis & {
+  __SLU_WIDGET?: IWidget;
+  __SLU_WIDGET_INSTANCE?: Widget;
+};

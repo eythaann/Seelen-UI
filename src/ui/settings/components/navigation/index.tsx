@@ -1,18 +1,18 @@
-import { Icon } from '@shared/components/Icon';
-import { ResourceText } from '@shared/components/ResourceText';
-import { Tooltip } from 'antd';
-import React, { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router';
+import { Icon } from "@shared/components/Icon";
+import { ResourceText } from "@shared/components/ResourceText";
+import { Tooltip } from "antd";
+import React, { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { NavLink, useLocation } from "react-router";
 
-import { useAppSelector } from '../../modules/shared/utils/infra';
+import { useAppSelector } from "../../modules/shared/utils/infra";
 
-import { RootSelectors } from '../../modules/shared/store/app/selectors';
-import { cx } from '../../modules/shared/utils/app';
+import { RootSelectors } from "../../modules/shared/store/app/selectors";
+import { cx } from "../../modules/shared/utils/app";
 
-import { RouteIcons, RoutePath } from './routes';
-import cs from './index.module.css';
+import { RouteIcons, RoutePath } from "./routes";
+import cs from "./index.module.css";
 
 export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);
@@ -32,7 +32,7 @@ export const Navigation = memo(() => {
         route={route}
         isActive={location.pathname.startsWith(route)}
         collapsed={collapsed}
-        label={t(`header.labels.${route.replace('/', '')}`)}
+        label={t(`header.labels.${route.replace("/", "")}`)}
         icon={RouteIcons[route]}
       />
     );
@@ -58,7 +58,11 @@ export const Navigation = memo(() => {
       })}
     >
       <div className={cs.header}>
-        <img src="./logo.svg" onClick={() => setCollapsed(!collapsed)} loading="lazy" />
+        <img
+          src="./logo.svg"
+          onClick={() => setCollapsed(!collapsed)}
+          loading="lazy"
+        />
         <h1>Seelen UI</h1>
         <Icon
           className={cs.chevron}
@@ -71,8 +75,8 @@ export const Navigation = memo(() => {
         <div className={cs.group}>
           <Item
             route={RoutePath.Home}
-            isActive={location.pathname === '/'}
-            label={t('header.labels.home')}
+            isActive={location.pathname === "/"}
+            label={t("header.labels.home")}
             icon={<Icon iconName="TbHome" />}
             collapsed={collapsed}
           />
@@ -82,16 +86,17 @@ export const Navigation = memo(() => {
         <div className={cs.separator} />
         <div className={cs.group}>
           {widgets
-            .filter((widget) => !['@seelen/settings', '@seelen/popup'].includes(widget.id))
+            .filter((widget) => !["@seelen/settings", "@seelen/popup"].includes(widget.id))
             .toSorted((a, b) => a.id.localeCompare(b.id))
             .map((widget) => (
               <Item
                 key={widget.id}
-                route={`/widget/${widget.id.replace('@', '')}`}
-                isActive={location.pathname === `/widget/${widget.id.replace('@', '')}`}
+                route={`/widget/${widget.id.replace("@", "")}`}
+                isActive={location.pathname ===
+                  `/widget/${widget.id.replace("@", "")}`}
                 collapsed={collapsed}
                 label={<ResourceText text={widget.metadata.displayName} />}
-                icon={<Icon iconName={(widget.icon as any) || 'BiSolidWidget'} />}
+                icon={<Icon iconName={(widget.icon as any) || "BiSolidWidget"} />}
               />
             ))}
         </div>
@@ -105,8 +110,9 @@ export const Navigation = memo(() => {
                 .map((theme) => (
                   <Item
                     key={theme.id}
-                    route={`/theme/${theme.id.replace('@', '')}`}
-                    isActive={location.pathname === `/theme/${theme.id.replace('@', '')}`}
+                    route={`/theme/${theme.id.replace("@", "")}`}
+                    isActive={location.pathname ===
+                      `/theme/${theme.id.replace("@", "")}`}
                     collapsed={collapsed}
                     label={<ResourceText text={theme.metadata.displayName} />}
                     icon={<Icon iconName="BiSolidPalette" />}

@@ -1,21 +1,21 @@
-import { getRootContainer } from '@shared';
-import { declareDocumentAsLayeredHitbox } from '@shared/layered';
-import { disableAnimationsOnPerformanceMode } from '@shared/performance';
-import { removeDefaultWebviewActions } from '@shared/setup';
-import { createRoot } from 'react-dom/client';
-import { I18nextProvider } from 'react-i18next';
-import { Provider } from 'react-redux';
+import { getRootContainer } from "@shared";
+import { declareDocumentAsLayeredHitbox } from "@shared/layered";
+import { disableAnimationsOnPerformanceMode } from "@shared/performance";
+import { removeDefaultWebviewActions } from "@shared/setup";
+import { createRoot } from "react-dom/client";
+import { I18nextProvider } from "react-i18next";
+import { Provider } from "react-redux";
 
-import { registerStoreEvents, store } from './modules/shared/store/infra';
+import { registerStoreEvents, store } from "./modules/shared/store/infra";
 
-import { App } from './app';
+import { App } from "./app";
 
-import i18n, { loadTranslations } from './i18n';
+import i18n, { loadTranslations } from "./i18n";
 
-import '@shared/styles/colors.css';
-import './styles/variables.css';
-import '@shared/styles/reset.css';
-import './styles/global.css';
+import "@shared/styles/colors.css";
+import "./styles/variables.css";
+import "@shared/styles/reset.css";
+import "./styles/global.css";
 
 removeDefaultWebviewActions();
 await declareDocumentAsLayeredHitbox();

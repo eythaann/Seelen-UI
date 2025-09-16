@@ -1,9 +1,9 @@
-import { WidgetId } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { Button, Select, Space } from 'antd';
-import { useDispatch } from 'react-redux';
+import { WidgetId } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { Button, Select, Space } from "antd";
+import { useDispatch } from "react-redux";
 
-import { RootActions } from '../../shared/store/app/reducer';
+import { RootActions } from "../../shared/store/app/reducer";
 
 interface InstanceSelectorProps {
   widgetId: WidgetId;
@@ -15,12 +15,18 @@ interface InstanceSelectorProps {
   }[];
 }
 
-export function WidgetInstanceSelector({ widgetId, options, selected, onSelect }: InstanceSelectorProps) {
+export function WidgetInstanceSelector(
+  { widgetId, options, selected, onSelect }: InstanceSelectorProps,
+) {
   const d = useDispatch();
 
   const onInstanceCreated = () => {
     const instanceId = crypto.randomUUID();
-    d(RootActions.patchWidgetInstanceConfig({ widgetId, instanceId, config: {} }));
+    d(RootActions.patchWidgetInstanceConfig({
+      widgetId,
+      instanceId,
+      config: {},
+    }));
     onSelect(instanceId);
   };
 

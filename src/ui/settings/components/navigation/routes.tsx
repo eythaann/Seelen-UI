@@ -1,21 +1,21 @@
-import { Icon } from '@shared/components/Icon';
-import React from 'react';
+import { Icon } from "@shared/components/Icon";
+import React from "react";
 
 export enum RoutePath {
-  Home = '/',
-  General = '/general',
-  Resource = '/resources',
-  FancyToolbar = '/widget/seelen/fancy-toolbar',
-  WindowManager = '/widget/seelen/window-manager',
-  AppLauncher = '/widget/seelen/launcher',
-  WallpaperManager = '/widget/seelen/wallpaper-manager',
-  SeelenWeg = '/widget/seelen/weg',
-  Shortcuts = '/shortcuts',
-  SettingsByMonitor = '/monitors',
-  SettingsByApplication = '/specific_apps',
-  DevTools = '/developer',
-  IconPackEditor = '/icon_pack_editor',
-  Extras = '/extras',
+  Home = "/",
+  General = "/general",
+  Resource = "/resources",
+  FancyToolbar = "/widget/seelen/fancy-toolbar",
+  WindowManager = "/widget/seelen/window-manager",
+  AppLauncher = "/widget/seelen/launcher",
+  WallpaperManager = "/widget/seelen/wallpaper-manager",
+  SeelenWeg = "/widget/seelen/weg",
+  Shortcuts = "/shortcuts",
+  SettingsByMonitor = "/monitors",
+  SettingsByApplication = "/specific_apps",
+  DevTools = "/developer",
+  IconPackEditor = "/icon_pack_editor",
+  Extras = "/extras",
 }
 
 export const RouteIcons: { [key in RoutePath]?: React.ReactNode } = {

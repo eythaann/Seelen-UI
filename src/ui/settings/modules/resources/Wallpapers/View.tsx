@@ -1,47 +1,46 @@
-import { WallpaperConfiguration } from '@seelen-ui/lib';
-import { PlaybackSpeed, WallpaperId, WallpaperInstanceSettings } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { ResourceText } from '@shared/components/ResourceText';
-import { Wallpaper } from '@shared/components/Wallpaper';
-import { Button, ColorPicker, Select, Slider, Switch } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { WallpaperConfiguration } from "@seelen-ui/lib";
+import { PlaybackSpeed, WallpaperId, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { ResourceText } from "@shared/components/ResourceText";
+import { Wallpaper } from "@shared/components/Wallpaper";
+import { Button, ColorPicker, Select, Slider, Switch } from "antd";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 
-import { newSelectors, RootActions } from '../../shared/store/app/reducer';
+import { newSelectors, RootActions } from "../../shared/store/app/reducer";
 
-import {
-  SettingsGroup,
-  SettingsOption,
-  SettingsSubGroup,
-} from '../../../components/SettingsBox';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox";
 
 const playbackSpeeds: PlaybackSpeed[] = [
-  'xDot25',
-  'xDot5',
-  'xDot75',
-  'x1',
-  'x1Dot25',
-  'x1Dot5',
-  'x1Dot75',
-  'x2',
+  "xDot25",
+  "xDot5",
+  "xDot75",
+  "x1",
+  "x1Dot25",
+  "x1Dot5",
+  "x1Dot75",
+  "x2",
 ];
 const playbackSpeedOptions = playbackSpeeds.map((s) => ({
-  label: s.replace('Dot', '.').replace('x.', 'x0.'),
+  label: s.replace("Dot", ".").replace("x.", "x0."),
   value: s,
 }));
 
 const defaultWallpaperConfig = await WallpaperConfiguration.default();
 
 export function SingleWallpaperView() {
-  const { username, resourceName } = useParams<'username' | 'resourceName'>();
+  const { username, resourceName } = useParams<"username" | "resourceName">();
   const resourceId = `@${username}/${resourceName}` as WallpaperId;
 
   const wallpaper = useSelector(newSelectors.wallpapers);
   const editingWallpaper = wallpaper.find((wallpaper) => wallpaper.id === resourceId);
 
   const storedSettings = useSelector(newSelectors.byWallpaper);
-  const config = { ...defaultWallpaperConfig, ...(storedSettings[resourceId] || {}) };
+  const config = {
+    ...defaultWallpaperConfig,
+    ...(storedSettings[resourceId] || {}),
+  };
 
   const d = useDispatch();
   const { t } = useTranslation();
@@ -62,24 +61,24 @@ export function SingleWallpaperView() {
     <>
       <div
         style={{
-          position: 'relative',
-          width: '100%',
-          aspectRatio: '16 / 9',
-          backgroundColor: '#000',
-          overflow: 'hidden',
-          marginBottom: '10px',
-          borderRadius: '10px',
+          position: "relative",
+          width: "100%",
+          aspectRatio: "16 / 9",
+          backgroundColor: "#000",
+          overflow: "hidden",
+          marginBottom: "10px",
+          borderRadius: "10px",
         }}
       >
         <Wallpaper definition={editingWallpaper} config={config} />
       </div>
 
       <SettingsGroup>
-        <b style={{ textAlign: 'center', fontSize: '1.1rem' }}>
+        <b style={{ textAlign: "center", fontSize: "1.1rem" }}>
           <ResourceText text={editingWallpaper.metadata.displayName} />
         </b>
         <SettingsOption
-          label={t('reset_all_to_default')}
+          label={t("reset_all_to_default")}
           action={
             <Button onClick={onReset}>
               <Icon iconName="RiResetLeftLine" />
@@ -90,7 +89,7 @@ export function SingleWallpaperView() {
 
       <SettingsGroup>
         <SettingsOption
-          label={t('wall.playback')}
+          label={t("wall.playback")}
           action={
             <Select
               value={config.playbackSpeed}
@@ -103,7 +102,7 @@ export function SingleWallpaperView() {
         />
 
         <SettingsOption
-          label={t('wall.flipHorizontal')}
+          label={t("wall.flipHorizontal")}
           action={
             <Switch
               value={config.flipHorizontal}
@@ -115,7 +114,7 @@ export function SingleWallpaperView() {
         />
 
         <SettingsOption
-          label={t('wall.flipVertical')}
+          label={t("wall.flipVertical")}
           action={
             <Switch
               value={config.flipVertical}
@@ -127,7 +126,7 @@ export function SingleWallpaperView() {
         />
 
         <SettingsOption
-          label={t('wall.blur')}
+          label={t("wall.blur")}
           action={
             <Slider
               value={config.blur}
@@ -141,14 +140,14 @@ export function SingleWallpaperView() {
         />
 
         <SettingsOption
-          label={t('wall.objectFit')}
+          label={t("wall.objectFit")}
           action={
             <Select
               value={config.objectFit}
               options={[
-                { label: t('wall.fit.cover'), value: 'cover' },
-                { label: t('wall.fit.contain'), value: 'contain' },
-                { label: t('wall.fit.fill'), value: 'fill' },
+                { label: t("wall.fit.cover"), value: "cover" },
+                { label: t("wall.fit.contain"), value: "contain" },
+                { label: t("wall.fit.fill"), value: "fill" },
               ]}
               onSelect={(objectFit) => {
                 patchWallSettings({ objectFit });
@@ -158,16 +157,16 @@ export function SingleWallpaperView() {
         />
 
         <SettingsOption
-          label={t('wall.objectPosition')}
+          label={t("wall.objectPosition")}
           action={
             <Select
               value={config.objectPosition}
               options={[
-                { label: t('wall.position.top'), value: 'top' },
-                { label: t('wall.position.center'), value: 'center' },
-                { label: t('wall.position.bottom'), value: 'bottom' },
-                { label: t('wall.position.left'), value: 'left' },
-                { label: t('wall.position.right'), value: 'right' },
+                { label: t("wall.position.top"), value: "top" },
+                { label: t("wall.position.center"), value: "center" },
+                { label: t("wall.position.bottom"), value: "bottom" },
+                { label: t("wall.position.left"), value: "left" },
+                { label: t("wall.position.right"), value: "right" },
               ]}
               onSelect={(objectPosition) => {
                 patchWallSettings({ objectPosition });
@@ -177,7 +176,7 @@ export function SingleWallpaperView() {
         />
 
         <SettingsOption
-          label={t('wall.saturation')}
+          label={t("wall.saturation")}
           action={
             <Slider
               value={config.saturation}
@@ -192,7 +191,7 @@ export function SingleWallpaperView() {
         />
 
         <SettingsOption
-          label={t('wall.contrast')}
+          label={t("wall.contrast")}
           action={
             <Slider
               value={config.contrast}
@@ -211,7 +210,7 @@ export function SingleWallpaperView() {
         <SettingsSubGroup
           label={
             <SettingsOption
-              label={t('wall.withOverlay')}
+              label={t("wall.withOverlay")}
               action={
                 <Switch
                   value={config.withOverlay}
@@ -224,29 +223,29 @@ export function SingleWallpaperView() {
           }
         >
           <SettingsOption
-            label={t('wall.overlayMixBlendMode')}
+            label={t("wall.overlayMixBlendMode")}
             action={
               <Select
                 value={config.overlayMixBlendMode}
                 options={[
-                  { label: 'normal', value: 'normal' },
-                  { label: 'multiply', value: 'multiply' },
-                  { label: 'screen', value: 'screen' },
-                  { label: 'overlay', value: 'overlay' },
-                  { label: 'darken', value: 'darken' },
-                  { label: 'lighten', value: 'lighten' },
-                  { label: 'color-dodge', value: 'color-dodge' },
-                  { label: 'color-burn', value: 'color-burn' },
-                  { label: 'hard-light', value: 'hard-light' },
-                  { label: 'soft-light', value: 'soft-light' },
-                  { label: 'difference', value: 'difference' },
-                  { label: 'exclusion', value: 'exclusion' },
-                  { label: 'hue', value: 'hue' },
-                  { label: 'saturation', value: 'saturation' },
-                  { label: 'color', value: 'color' },
-                  { label: 'luminosity', value: 'luminosity' },
-                  { label: 'plus-darker', value: 'plus-darker' },
-                  { label: 'plus-lighter', value: 'plus-lighter' },
+                  { label: "normal", value: "normal" },
+                  { label: "multiply", value: "multiply" },
+                  { label: "screen", value: "screen" },
+                  { label: "overlay", value: "overlay" },
+                  { label: "darken", value: "darken" },
+                  { label: "lighten", value: "lighten" },
+                  { label: "color-dodge", value: "color-dodge" },
+                  { label: "color-burn", value: "color-burn" },
+                  { label: "hard-light", value: "hard-light" },
+                  { label: "soft-light", value: "soft-light" },
+                  { label: "difference", value: "difference" },
+                  { label: "exclusion", value: "exclusion" },
+                  { label: "hue", value: "hue" },
+                  { label: "saturation", value: "saturation" },
+                  { label: "color", value: "color" },
+                  { label: "luminosity", value: "luminosity" },
+                  { label: "plus-darker", value: "plus-darker" },
+                  { label: "plus-lighter", value: "plus-lighter" },
                 ]}
                 onSelect={(overlayMixBlendMode) => {
                   patchWallSettings({ overlayMixBlendMode });
@@ -256,7 +255,7 @@ export function SingleWallpaperView() {
           />
 
           <SettingsOption
-            label={t('wall.overlayColor')}
+            label={t("wall.overlayColor")}
             action={
               <ColorPicker
                 showText

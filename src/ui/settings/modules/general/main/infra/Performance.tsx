@@ -1,14 +1,10 @@
-import { PerformanceMode, PerformanceModeSettings } from '@seelen-ui/lib/types';
-import { Select } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  SettingsGroup,
-  SettingsOption,
-  SettingsSubGroup,
-} from 'src/ui/settings/components/SettingsBox';
+import { PerformanceMode, PerformanceModeSettings } from "@seelen-ui/lib/types";
+import { Select } from "antd";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "src/ui/settings/components/SettingsBox";
 
-import { newSelectors, RootActions } from '../../../shared/store/app/reducer';
+import { newSelectors, RootActions } from "../../../shared/store/app/reducer";
 
 export function PerformanceSettings() {
   const perf = useSelector(newSelectors.performanceMode);
@@ -22,16 +18,16 @@ export function PerformanceSettings() {
 
   const options: { label: string; value: PerformanceMode }[] = [
     {
-      label: t('general.performance_mode.options.disabled'),
-      value: 'Disabled',
+      label: t("general.performance_mode.options.disabled"),
+      value: "Disabled",
     },
     {
-      label: t('general.performance_mode.options.minimal'),
-      value: 'Minimal',
+      label: t("general.performance_mode.options.minimal"),
+      value: "Minimal",
     },
     {
-      label: t('general.performance_mode.options.extreme'),
-      value: 'Extreme',
+      label: t("general.performance_mode.options.extreme"),
+      value: "Extreme",
     },
   ];
 
@@ -39,7 +35,7 @@ export function PerformanceSettings() {
     <SettingsGroup>
       <SettingsSubGroup label="Performance Mode">
         <SettingsOption
-          label={t('general.performance_mode.plugged')}
+          label={t("general.performance_mode.plugged")}
           action={
             <Select
               value={perf.default}
@@ -49,7 +45,7 @@ export function PerformanceSettings() {
           }
         />
         <SettingsOption
-          label={t('general.performance_mode.on_battery')}
+          label={t("general.performance_mode.on_battery")}
           action={
             <Select
               value={perf.onBattery}
@@ -59,7 +55,7 @@ export function PerformanceSettings() {
           }
         />
         <SettingsOption
-          label={t('general.performance_mode.on_energy_saver')}
+          label={t("general.performance_mode.on_energy_saver")}
           action={
             <Select
               value={perf.onEnergySaver}

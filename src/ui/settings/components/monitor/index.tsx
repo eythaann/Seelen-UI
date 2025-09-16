@@ -1,11 +1,11 @@
-import { SeelenWallWidgetId } from '@seelen-ui/lib';
-import { WallpaperId } from '@seelen-ui/lib/types';
-import { Wallpaper } from '@shared/components/Wallpaper';
-import { useSelector } from 'react-redux';
+import { SeelenWallWidgetId } from "@seelen-ui/lib";
+import { WallpaperId } from "@seelen-ui/lib/types";
+import { Wallpaper } from "@shared/components/Wallpaper";
+import { useSelector } from "react-redux";
 
-import { newSelectors } from '../../modules/shared/store/app/reducer';
+import { newSelectors } from "../../modules/shared/store/app/reducer";
 
-import cs from './index.module.css';
+import cs from "./index.module.css";
 
 interface Props {
   monitorId: string;
@@ -32,9 +32,9 @@ export function Monitor({ monitorId, width = 1920, height = 1080 }: Props) {
     aspectRatio: `${width} / ${height}`,
   };
   if (width > height) {
-    style.width = '100%';
+    style.width = "100%";
   } else {
-    style.height = '100%';
+    style.height = "100%";
   }
 
   return (
@@ -44,10 +44,12 @@ export function Monitor({ monitorId, width = 1920, height = 1080 }: Props) {
         style={style}
       >
         <div className={cs.screen}>
-          <Wallpaper definition={wallpaper} config={wallpaperId ? wallpaperSettings[wallpaperId] : undefined} />
+          <Wallpaper
+            definition={wallpaper}
+            config={wallpaperId ? wallpaperSettings[wallpaperId] : undefined}
+          />
         </div>
       </div>
     </div>
   );
 }
-

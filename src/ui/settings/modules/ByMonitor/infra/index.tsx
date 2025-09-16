@@ -1,14 +1,14 @@
-import { SeelenWallWidgetId } from '@seelen-ui/lib';
-import { PhysicalMonitor, Widget } from '@seelen-ui/lib/types';
-import { ResourceText } from '@shared/components/ResourceText';
-import { useSelector } from 'react-redux';
+import { SeelenWallWidgetId } from "@seelen-ui/lib";
+import { PhysicalMonitor, Widget } from "@seelen-ui/lib/types";
+import { ResourceText } from "@shared/components/ResourceText";
+import { useSelector } from "react-redux";
 
-import { newSelectors } from '../../shared/store/app/reducer';
+import { newSelectors } from "../../shared/store/app/reducer";
 
-import { Monitor } from '../../../components/monitor';
-import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
-import { WidgetSettingsModal } from './WidgetSettingsModal';
-import cs from './index.module.css';
+import { Monitor } from "../../../components/monitor";
+import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox";
+import { WidgetSettingsModal } from "./WidgetSettingsModal";
+import cs from "./index.module.css";
 
 interface MonitorConfigProps {
   device: PhysicalMonitor;
@@ -49,7 +49,7 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
                     title={
                       <>
                         {device.name}
-                        {' / '}
+                        {" / "}
                         <ResourceText text={widget.metadata.displayName} />
                       </>
                     }
@@ -83,7 +83,7 @@ export function SettingsByMonitor() {
 }
 
 function isConfigurableByMonitor(widget: Widget) {
-  if (widget.instances === 'ReplicaByMonitor') {
+  if (widget.instances === "ReplicaByMonitor") {
     return true;
   }
 

@@ -1,18 +1,18 @@
-import { SimulationLinkDatum, SimulationNodeDatum } from 'd3';
-import { SoftOpaque, toPlain } from 'readable-types';
+import { SimulationLinkDatum, SimulationNodeDatum } from "d3";
+import { SoftOpaque, toPlain } from "readable-types";
 
 export enum Placement {
-  Left = 'left',
-  Right = 'right',
-  Top = 'top',
-  Bottom = 'bottom',
-  TopLeft = 'top_left',
-  TopRight = 'top_right',
-  BottomLeft = 'bottom_left',
-  BottomRight = 'bottom_right',
+  Left = "left",
+  Right = "right",
+  Top = "top",
+  Bottom = "bottom",
+  TopLeft = "top_left",
+  TopRight = "top_right",
+  BottomLeft = "bottom_left",
+  BottomRight = "bottom_right",
 }
 
-export type DesktopId = SoftOpaque<string, 'DesktopId'>;
+export type DesktopId = SoftOpaque<string, "DesktopId">;
 
 export type DesktopData = toPlain<Desktop> & SimulationNodeDatum;
 

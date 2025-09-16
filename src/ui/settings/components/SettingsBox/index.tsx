@@ -1,8 +1,8 @@
-import { Icon } from '@shared/components/Icon';
-import { ConfigProvider, Tooltip } from 'antd';
-import { ComponentChildren } from 'preact';
+import { Icon } from "@shared/components/Icon";
+import { ConfigProvider, Tooltip } from "antd";
+import { ComponentChildren } from "preact";
 
-import cs from './index.module.css';
+import cs from "./index.module.css";
 
 interface Props {
   children: React.ReactNode;
@@ -22,7 +22,9 @@ interface SubGroupProps {
   disabled?: boolean;
 }
 
-export const SettingsSubGroup = ({ children, label, disabled }: SubGroupProps) => {
+export const SettingsSubGroup = (
+  { children, label, disabled }: SubGroupProps,
+) => {
   return (
     <div className={cs.subgroup}>
       <div className={cs.subtitle}>{label}</div>
@@ -44,26 +46,28 @@ type OptionProps = {
 export const SettingsOption = (props: OptionProps) => {
   return (
     <div className={cs.setting}>
-      {props.children ? (
-        props.children
-      ) : (
-        <>
-          <div className={cs.info}>
-            <div className={cs.label}>
-              {props.label}
-              {props.tip && (
-                <Tooltip title={props.tip}>
-                  <Icon iconName="HiOutlineInformationCircle" />
-                </Tooltip>
-              )}
+      {props.children
+        ? (
+          props.children
+        )
+        : (
+          <>
+            <div className={cs.info}>
+              <div className={cs.label}>
+                {props.label}
+                {props.tip && (
+                  <Tooltip title={props.tip}>
+                    <Icon iconName="HiOutlineInformationCircle" />
+                  </Tooltip>
+                )}
+              </div>
+              {props.description && <div className={cs.description}>{props.description}</div>}
             </div>
-            {props.description && <div className={cs.description}>{props.description}</div>}
-          </div>
-          <div className={cs.action}>
-            {props.action}
-          </div>
-        </>
-      )}
+            <div className={cs.action}>
+              {props.action}
+            </div>
+          </>
+        )}
     </div>
   );
 };

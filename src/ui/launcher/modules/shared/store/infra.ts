@@ -1,10 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { LauncherHistory, SeelenCommand, Settings, startThemingTool, UIColors } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
+import { configureStore } from "@reduxjs/toolkit";
+import { LauncherHistory, SeelenCommand, Settings, startThemingTool, UIColors } from "@seelen-ui/lib";
+import { invoke } from "@tauri-apps/api/core";
 
-import { Actions, RootSlice } from './app';
+import { Actions, RootSlice } from "./app";
 
-import i18n from '../../../i18n';
+import i18n from "../../../i18n";
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

@@ -1,5 +1,5 @@
-import { AppExtraFlag } from '@seelen-ui/lib';
-import { AppConfig } from '@seelen-ui/lib/types';
+import { AppExtraFlag } from "@seelen-ui/lib";
+import { AppConfig } from "@seelen-ui/lib/types";
 
 export const WmApplicationOptions = [
   AppExtraFlag.Float,

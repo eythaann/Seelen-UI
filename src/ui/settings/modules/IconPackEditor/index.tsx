@@ -1,16 +1,20 @@
-import { path } from '@seelen-ui/lib/tauri';
-import { Icon, IconPackEntry } from '@seelen-ui/lib/types';
-import { convertFileSrc } from '@tauri-apps/api/core';
-import { Input } from 'antd';
-import { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { path } from "@seelen-ui/lib/tauri";
+import { Icon, IconPackEntry } from "@seelen-ui/lib/types";
+import { convertFileSrc } from "@tauri-apps/api/core";
+import { Input } from "antd";
+import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
-import { newSelectors } from '../shared/store/app/reducer';
+import { newSelectors } from "../shared/store/app/reducer";
 
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import cs from './index.module.css';
+import { SettingsGroup, SettingsOption } from "../../components/SettingsBox";
+import cs from "./index.module.css";
 
-const parent = await path.resolve(await path.appDataDir(), 'iconpacks', 'system');
+const parent = await path.resolve(
+  await path.appDataDir(),
+  "iconpacks",
+  "system",
+);
 
 function resolveAsSrc(icon: Icon): Icon {
   return {
@@ -23,11 +27,11 @@ function resolveAsSrc(icon: Icon): Icon {
 }
 
 export function IconPackEditorView() {
-  const [filterValue, setFilterValue] = useState('');
+  const [filterValue, setFilterValue] = useState("");
   const iconPacks = useSelector(newSelectors.availableIconPacks);
 
   const entries = useMemo(() => {
-    const system = iconPacks.find((i) => i.id === '@system/icon-pack');
+    const system = iconPacks.find((i) => i.id === "@system/icon-pack");
     return (
       system?.entries
         .filter((e) => containsSearched(e, filterValue))
@@ -70,25 +74,25 @@ export function IconPackEditorView() {
 }
 
 function IconTitle({ entry }: { entry: IconPackEntry }) {
-  if (entry.type === 'unique') {
+  if (entry.type === "unique") {
     return (
       <h3>
         <p>
-          <b>umid: </b>
+          <b>umid:</b>
           {entry.umid}
         </p>
         <p>
-          <b>path or filename: </b>
+          <b>path or filename:</b>
           {entry.path}
         </p>
       </h3>
     );
   }
 
-  if (entry.type === 'shared') {
+  if (entry.type === "shared") {
     return (
       <h3>
-        <b>Extension: </b>
+        <b>Extension:</b>
         {entry.extension}
       </h3>
     );
@@ -96,7 +100,7 @@ function IconTitle({ entry }: { entry: IconPackEntry }) {
 
   return (
     <h3>
-      <b>Key: </b>
+      <b>Key:</b>
       {entry.key}
     </h3>
   );
@@ -144,10 +148,11 @@ function IconEditor({ icon }: { icon: Icon }) {
 function containsSearched(entry: IconPackEntry, filterValue: string) {
   const searchString = filterValue.toLowerCase();
   return (
-    (entry.type === 'unique' &&
+    (entry.type === "unique" &&
       (!!entry.path?.toLowerCase().includes(searchString) ||
         !!entry.umid?.toLowerCase().includes(searchString))) ||
-    (entry.type === 'shared' && entry.extension.toLowerCase().includes(searchString)) ||
-    (entry.type === 'custom' && entry.key.toLowerCase().includes(searchString))
+    (entry.type === "shared" &&
+      entry.extension.toLowerCase().includes(searchString)) ||
+    (entry.type === "custom" && entry.key.toLowerCase().includes(searchString))
   );
 }

@@ -1,17 +1,17 @@
-import { invoke, SeelenCommand, Widget } from '@seelen-ui/lib';
-import { SluHotkey } from '@seelen-ui/lib/types';
-import { Icon } from '@shared/components/Icon';
-import { Button, Input, Switch, Tooltip } from 'antd';
-import Compact from 'antd/es/space/Compact';
-import { cloneDeep } from 'lodash';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import { SluHotkey } from "@seelen-ui/lib/types";
+import { Icon } from "@shared/components/Icon";
+import { Button, Input, Switch, Tooltip } from "antd";
+import Compact from "antd/es/space/Compact";
+import { cloneDeep } from "lodash";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
-import { defaultSettings } from '../shared/store/app/default';
-import { newSelectors, RootActions } from '../shared/store/app/reducer';
-import { getHotkeysGroups } from './application';
+import { defaultSettings } from "../shared/store/app/default";
+import { newSelectors, RootActions } from "../shared/store/app/reducer";
+import { getHotkeysGroups } from "./application";
 
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
+import { SettingsGroup, SettingsOption } from "../../components/SettingsBox";
 
 export function Shortcuts() {
   const { enabled, appCommands } = useSelector(newSelectors.shortcuts);
@@ -57,13 +57,13 @@ export function Shortcuts() {
     <>
       <SettingsGroup>
         <SettingsOption
-          label={t('shortcuts.enable')}
-          tip={t('shortcuts.enable_tooltip')}
+          label={t("shortcuts.enable")}
+          tip={t("shortcuts.enable_tooltip")}
           action={<Switch value={enabled} onChange={onToogleShortcuts} />}
         />
 
         <SettingsOption
-          label={t('shortcuts.reset')}
+          label={t("shortcuts.reset")}
           action={
             <Button onClick={onReset}>
               <Icon iconName="RiResetLeftLine" />
@@ -76,7 +76,9 @@ export function Shortcuts() {
 
       <SettingsGroup>{groups.virtualDesktop.main.map(mapHokey)}</SettingsGroup>
 
-      <SettingsGroup>{groups.virtualDesktop.switch.map(mapHokey)}</SettingsGroup>
+      <SettingsGroup>
+        {groups.virtualDesktop.switch.map(mapHokey)}
+      </SettingsGroup>
 
       <SettingsGroup>{groups.virtualDesktop.move.map(mapHokey)}</SettingsGroup>
 
@@ -86,9 +88,13 @@ export function Shortcuts() {
 
       <SettingsGroup>{groups.windowManager.sizing.map(mapHokey)}</SettingsGroup>
 
-      <SettingsGroup>{groups.windowManager.positioning.map(mapHokey)}</SettingsGroup>
+      <SettingsGroup>
+        {groups.windowManager.positioning.map(mapHokey)}
+      </SettingsGroup>
 
-      <SettingsGroup>{groups.windowManager.tilingFocus.map(mapHokey)}</SettingsGroup>
+      <SettingsGroup>
+        {groups.windowManager.tilingFocus.map(mapHokey)}
+      </SettingsGroup>
 
       {/* TODO implement live layout modification */}
       {/* <SettingsGroup>{groups.windowManager.tilingLayout.map(mapHokey)}</SettingsGroup> */}
@@ -111,11 +117,13 @@ interface ShortcutProps {
 function Shortcut({ hotkey: { action, keys }, onChanged }: ShortcutProps) {
   const { t } = useTranslation();
 
-  const args: Record<string, number | string> = 'arg' in action ? { 0: action.arg } : {};
+  const args: Record<string, number | string> = "arg" in action ? { 0: action.arg } : {};
 
   function onEdit() {
-    invoke(SeelenCommand.RequestToUserInputShortcut, { callbackEvent: 'finished' });
-    Widget.getCurrent().webview.once<null | string[]>('finished', (e) => {
+    invoke(SeelenCommand.RequestToUserInputShortcut, {
+      callbackEvent: "finished",
+    });
+    Widget.getCurrent().webview.once<null | string[]>("finished", (e) => {
       if (e.payload) {
         onChanged(e.payload);
       }
@@ -127,8 +135,8 @@ function Shortcut({ hotkey: { action, keys }, onChanged }: ShortcutProps) {
       label={t(`shortcuts.labels.${action.name}`, args)}
       action={
         <Compact>
-          <Input value={keys.join(' + ')} readOnly />
-          <Tooltip title={t('shortcuts.readonly_tooltip')}>
+          <Input value={keys.join(" + ")} readOnly />
+          <Tooltip title={t("shortcuts.readonly_tooltip")}>
             <Button onClick={onEdit} style={{ minWidth: 32 }}>
               <Icon iconName="AiOutlineEdit" />
             </Button>

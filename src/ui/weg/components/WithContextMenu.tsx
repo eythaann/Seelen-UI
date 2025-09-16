@@ -1,10 +1,10 @@
-import { AnimatedDropdown } from '@shared/components/AnimatedWrappers';
-import { useWindowFocusChange } from '@shared/hooks';
-import { Menu } from 'antd';
-import { ItemType, MenuItemType } from 'antd/es/menu/interface';
-import { PropsWithChildren, useState } from 'react';
+import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
+import { useWindowFocusChange } from "@shared/hooks";
+import { Menu } from "antd";
+import { ItemType, MenuItemType } from "antd/es/menu/interface";
+import { PropsWithChildren, useState } from "react";
 
-import { BackgroundByLayersV2 } from '@shared/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
 interface Props extends PropsWithChildren {
   items: ItemType<MenuItemType>[];
@@ -23,8 +23,8 @@ export function WithContextMenu({ children, items, onOpenChange }: Props) {
   return (
     <AnimatedDropdown
       animationDescription={{
-        openAnimationName: 'weg-context-menu-container-open',
-        closeAnimationName: 'weg-context-menu-container-close',
+        openAnimationName: "weg-context-menu-container-open",
+        closeAnimationName: "weg-context-menu-container-close",
       }}
       placement="topLeft"
       open={openContextMenu}
@@ -34,7 +34,7 @@ export function WithContextMenu({ children, items, onOpenChange }: Props) {
           onOpenChange(isOpen);
         }
       }}
-      trigger={['contextMenu']}
+      trigger={["contextMenu"]}
       dropdownRender={() => (
         <BackgroundByLayersV2
           className="weg-context-menu-container"
