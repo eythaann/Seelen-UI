@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Área de trabalho
     workspace_placeholder: Nenhum
   bundled_msg: >-
-    Essas configurações agrupadas não são editáveis e foram projetadas para
-    fornecer a melhor experiência sem personalização. Elas configuram
-    automaticamente os aplicativos mais comuns para você.
+    Essas configurações agrupadas não são editáveis e foram projetadas para fornecer a melhor experiência sem personalização. Elas configuram automaticamente os aplicativos mais comuns para você.
   bundled_title: Configurações de Aplicativos incluídas no Seelen
   confirm_delete: Tem certeza de que deseja excluir esta(s) configuração(ões)?
   confirm_delete_title: Confirmar exclusão
@@ -47,10 +45,7 @@ apps_configurations:
   export: Exportar
   export_full: Exportar configurações por aplicativo
   extra_info: >-
-    A Seelen UI usa apenas um identificador por aplicativo (primeira
-    correspondência encontrada); portanto, a ordem é importante. O último
-    adicionado tem prioridade. A tabela é ordenada do mais recente ao mais
-    antigo por padrão.
+    A Seelen UI usa apenas um identificador por aplicativo (primeira correspondência encontrada); portanto, a ordem é importante. O último adicionado tem prioridade. A tabela é ordenada do mais recente ao mais antigo por padrão.
   identifier:
     add_block: Adicionar bloco
     and: E
@@ -143,16 +138,14 @@ miscellaneous: Miscelânea
 monitors_configurations:
   label: Monitor {{index}}
 more: Mais
-'no': Não
+'no': 'Não'
 open: Abrir
 quit: Desistir
 remove: Remover
 reset_all_to_default: Redefinir tudo para os valores padrão
 reset_to_default: Redefinir para o valor padrão
 resources:
-  app_outdated: >-
-    Esse recurso requer uma versão mais recente da interface do usuário da
-    Seelen para funcionar corretamente.
+  app_outdated: Esse recurso requer uma versão mais recente da interface do usuário da Seelen para funcionar corretamente.
   delete: Excluir recursos
   discover: Descubra mais recursos
   export: Recurso de exportação
@@ -160,16 +153,14 @@ resources:
   import_wallpapers: Importar papéis de parede locais
   open_folder: Abrir a pasta de recursos
   outdated: >-
-    Esse recurso foi projetado para uma versão mais antiga da interface do
-    usuário da Seelen e pode não funcionar corretamente.
+    Esse recurso foi projetado para uma versão mais antiga da interface do usuário da Seelen e pode não funcionar corretamente.
 save: Salvar
 save_and_restart: Salve e reinicie
 see_more: Veja mais
 shortcuts:
   enable: Habilitar o sistema de atalhos embutidos
   enable_tooltip: >-
-    Desative se você implementar seu próprio sistema de atalhos usando o Seelen
-    UI Client
+    Desative se você implementar seu próprio sistema de atalhos usando o Seelen UI Client
   labels:
     create_new_workspace: Crie um novo espaço de trabalho
     cycle_stack_next: Pilha de ciclo a seguir
@@ -220,10 +211,7 @@ sides:
   top: Topo
 start:
   message: >-
-    Bem-vindo ao Seelen UI, o melhor ambiente de área de trabalho com um
-    gerenciador de janelas lado a lado incorporado para aprimorar sua
-    experiência com o Windows! Explore uma nova era de eficiência e multitarefa
-    com nossa interface intuitiva e recursos avançados.
+    Bem-vindo ao Seelen UI, o melhor ambiente de área de trabalho com um gerenciador de janelas lado a lado incorporado para aprimorar sua experiência com o Windows! Explore uma nova era de eficiência e multitarefa com nossa interface intuitiva e recursos avançados.
   message_accent: Otimize sua produtividade com estilo!
   title: Bem-vindo!
 toolbar:
@@ -233,8 +221,7 @@ toolbar:
   dock_side: Posição
   dynamic_color: Cor dinâmica
   dynamic_color_tooltip: >-
-    Habilite as cores dinâmicas de fundo e primeiro plano com base na janela
-    focada. (As cores podem ser substituídas pelos temas)
+    Habilite as cores dinâmicas de fundo e primeiro plano com base na janela focada. (As cores podem ser substituídas pelos temas)
   enable: Ativar barra de ferramentas sofisticada
   height: Altura
   hide_mode:
@@ -242,7 +229,7 @@ toolbar:
     never: Nunca
     on_overlap: Na sobreposição
   label: Barra de ferramentas
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Mostre o botão Hibernate no menu Power
 update:
   available: Atualização disponível!
@@ -335,4 +322,4 @@ wm:
   space_between_containers: Espaço entre contêineres
   workspace_offset: Deslocamento de espaços de trabalho (margens)
   workspace_padding: Preenchimento de espaços de trabalho
-'yes': Sim
+'yes': 'Sim'
