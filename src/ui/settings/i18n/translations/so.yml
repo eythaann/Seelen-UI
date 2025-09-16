@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Shaqo-joojin
     workspace_placeholder: Midna
   bundled_msg: >-
-    Qaabeyntan xirmada ma aha wax aan la taabtaan oo loogu talagalay inay ku
-    siiyaan khibradda ugu fiican ee aan la helin. Waxay si otomaatig ah u
-    habeeyaan codsiyada ugu caansan adiga.
+    Qaabeyntan xirmada ma aha wax aan la taabtaan oo loogu talagalay inay ku siiyaan khibradda ugu fiican ee aan la helin. Waxay si otomaatig ah u habeeyaan codsiyada ugu caansan adiga.
   bundled_title: App COLOND SOLDED SELEN
   confirm_delete: Ma hubtaa inaad rabto inaad tirtirto qaabeyntan / s?
   confirm_delete_title: Xaqiiji Delete
@@ -47,11 +45,7 @@ apps_configurations:
   export: Dhoofin
   export_full: Dejinta Dhoofinta Codsiga
   extra_info: >-
-    Seelen UI waxay isticmaashaa hal aqoonsi oo app kasta ah (ciyaartii ugu
-    horaysay ee la helay) markaa siday u kala horreeyaan sida loo cayimay ayaa
-    muhiim ah, waxa ugu dambeeya ee lagu daray ayaa la kala hormarin doonaa,
-    sida la ogsoon yahay in miiska si caadi ah loo soocay kii u dambeeyay ilaa
-    kii hore.
+    Seelen UI waxay isticmaashaa hal aqoonsi oo app kasta ah (ciyaartii ugu horaysay ee la helay) markaa siday u kala horreeyaan sida loo cayimay ayaa muhiim ah, waxa ugu dambeeya ee lagu daray ayaa la kala hormarin doonaa, sida la ogsoon yahay in miiska si caadi ah loo soocay kii u dambeeyay ilaa kii hore.
   identifier:
     add_block: Ku dar xannibaadda
     and: Iyo
@@ -91,9 +85,7 @@ devtools:
   simulate_fullscreen: Isku day dhacdo shaashad buuxda
 extras:
   clear_icons: Calaamadaha Calaamadaha Camis Cast
-  clear_icons_tooltip: >-
-    Dib-u-bilaabi kara ayaa loo baahan karaa inuu si buuxda u dhaqan geliyo
-    dhammaan waxyaabaha widgets
+  clear_icons_tooltip: Dib-u-bilaabi kara ayaa loo baahan karaa inuu si buuxda u dhaqan geliyo dhammaan waxyaabaha widgets
   exit: Jooji / bixitaan
   links: Xiriirinta rasmiga ah
   relaunch: Dib u beer
@@ -146,16 +138,14 @@ miscellaneous: Kala duduwan
 monitors_configurations:
   label: Kormeer {{tus ind ind}}
 more: Ka badan
-'no': Maya
+'no': 'Maya'
 open: Furid
 quit: Joojin
 remove: Ka qaadid
 reset_all_to_default: Dib u dejiso dhammaan qiimayaasha caadiga ah
 reset_to_default: Dib u dejiso qiimaha caadiga ah
 resources:
-  app_outdated: >-
-    Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah
-    u shaqeynaya.
+  app_outdated: Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah u shaqeynaya.
   delete: Tirtir Kheyraadka
   discover: Soo hel ilo badan
   export: Ilaha dhoofinta
@@ -163,16 +153,14 @@ resources:
   import_wallpapers: Soo dejiso waraaqaha boodhka ee maxalliga ah
   open_folder: Fur faylka furan
   outdated: >-
-    Kheyraadkan waxaa loogu talagalay in nooc ka weyn oo ah Selelel Ui oo laga
-    yaabo inuu si sax ah u shaqeyn.
+    Kheyraadkan waxaa loogu talagalay in nooc ka weyn oo ah Selelel Ui oo laga yaabo inuu si sax ah u shaqeyn.
 save: Badbaadin
 save_and_restart: Badbaadin & Dib u bilow
 see_more: Arag in dheeraad ah
 shortcuts:
   enable: U fududee nidaamka qaab dhismeedka gaagaaban
   enable_tooltip: >-
-    Disable Haddii aad hirgelin doontid nidaamkaaga gaagaaban ee aad adigu iska
-    leedahay adiga oo adeegsanaya macmiilka SELEN UI
+    Disable Haddii aad hirgelin doontid nidaamkaaga gaagaaban ee aad adigu iska leedahay adiga oo adeegsanaya macmiilka SELEN UI
   labels:
     create_new_workspace: Abuuro shaqooyin cusub
     cycle_stack_next: Wareegga xidhmada
@@ -223,9 +211,7 @@ sides:
   top: Dusha kore
 start:
   message: >-
-    Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
-    maamulaha Windows-ka oo lagu daro Maareeyaha Windows Sahamiyaan marxalad
-    cusub oo hufnaan iyo fara badan
+    Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh maamulaha Windows-ka oo lagu daro Maareeyaha Windows Sahamiyaan marxalad cusub oo hufnaan iyo fara badan
   message_accent: Ku dadaal wax soo saarkaaga qaabka!
   title: Soo dhawow!
 toolbar:
@@ -235,8 +221,7 @@ toolbar:
   dock_side: Meel
   dynamic_color: Midab firfircoon
   dynamic_color_tooltip: >-
-    U oggolow asalka firfircoon iyo milix hore oo salka ku haya daaqadda diirada
-    saareysa. (Midabada waxaa lagu wareejin karaa mawduucyo)
+    U oggolow asalka firfircoon iyo milix hore oo salka ku haya daaqadda diirada saareysa. (Midabada waxaa lagu wareejin karaa mawduucyo)
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
   hide_mode:
@@ -244,7 +229,7 @@ toolbar:
     never: Marna
     on_overlap: Isku dhafka
   label: Qalab argamiye
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Tus badhanka Hibernate ee ku yaal menuska Power
 update:
   available: Cusboonaysiinta la heli karo!
@@ -337,4 +322,4 @@ wm:
   space_between_containers: Meel bannaan oo u dhexeeya weelka
   workspace_offset: Goobaha shaqada ayaa ka dhigtay
   workspace_padding: Goobta Goobta Goobta
-'yes': Haa
+'yes': 'Haa'
