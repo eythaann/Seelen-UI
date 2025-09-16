@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Munkaterület
     workspace_placeholder: Egyik sem
   bundled_msg: >-
-    Ezek a csomagolt konfigurációk nem szerkeszthetők, és úgy tervezték, hogy
-    testreszabás nélkül biztosítsa a legjobb élményt. Automatikusan
-    konfigurálják a leggyakoribb alkalmazásokat az Ön számára.
+    Ezek a csomagolt konfigurációk nem szerkeszthetők, és úgy tervezték, hogy testreszabás nélkül biztosítsa a legjobb élményt. Automatikusan konfigurálják a leggyakoribb alkalmazásokat az Ön számára.
   bundled_title: A Seelen -vel csomagolt alkalmazás konfigurációja
   confirm_delete: Biztos benne, hogy törölni akarja ezt a konfigurációt/S -t?
   confirm_delete_title: Törlés jóváhagyása
@@ -47,9 +45,7 @@ apps_configurations:
   export: Export
   export_full: Beállítások exportálása alkalmazásonként
   extra_info: >-
-    A Seelen UI alkalmazásonként csak egy azonosítót használ (az első egyezés
-    található), ezért fontos a sorrend, a legutolsó hozzáadott lesz prioritás,
-    mivel a táblázat alapértelmezés szerint a legújabbtól a régiig van rendezve.
+    A Seelen UI alkalmazásonként csak egy azonosítót használ (az első egyezés található), ezért fontos a sorrend, a legutolsó hozzáadott lesz prioritás, mivel a táblázat alapértelmezés szerint a legújabbtól a régiig van rendezve.
   identifier:
     add_block: Blokk hozzáadása
     and: ÉS
@@ -89,9 +85,7 @@ devtools:
   simulate_fullscreen: Teljes képernyős esemény szimulálása
 extras:
   clear_icons: Rendszerikonok gyorsítótárának törlése
-  clear_icons_tooltip: >-
-    Újraindítás szükséges lehet ahhoz, hogy az összes widget teljes mértékben
-    érvénybe lépjen.
+  clear_icons_tooltip: Újraindítás szükséges lehet ahhoz, hogy az összes widget teljes mértékben érvénybe lépjen.
   exit: Kilépés/kilépés
   links: Hivatalos linkek
   relaunch: Újraindít
@@ -144,7 +138,7 @@ miscellaneous: Különféle
 monitors_configurations:
   label: Monitor {{index}}
 more: Több
-'no': Nem
+'no': 'Nem'
 open: Nyisd ki
 quit: Kilépés
 remove: Eltávolítás
@@ -159,16 +153,14 @@ resources:
   import_wallpapers: Helyi háttérképek importálása
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
-    Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,
-    hogy nem működik megfelelően.
+    Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat, hogy nem működik megfelelően.
 save: Megment
 save_and_restart: Mentés és újraindítás
 see_more: Lásd még
 shortcuts:
   enable: Engedélyezze a beépített parancsikonok rendszerét
   enable_tooltip: >-
-    Tiltsa le, ha a Seelen UI kliens segítségével megvalósítja saját
-    parancsikonjait
+    Tiltsa le, ha a Seelen UI kliens segítségével megvalósítja saját parancsikonjait
   labels:
     create_new_workspace: Hozzon létre új munkaterületet
     cycle_stack_next: Cycle Stack Next
@@ -219,10 +211,7 @@ sides:
   top: Felső
 start:
   message: >-
-    Üdvözöljük a Seelen UI -ban, az Ultimate Desktop környezetben egy beépített
-    burkolólap Windows Manager -rel, hogy javítsa a Windows élményét! Fedezze
-    fel a hatékonyság és a multitasking új korszakát az intuitív felületünkkel
-    és a fejlett funkciókkal.
+    Üdvözöljük a Seelen UI -ban, az Ultimate Desktop környezetben egy beépített burkolólap Windows Manager -rel, hogy javítsa a Windows élményét! Fedezze fel a hatékonyság és a multitasking új korszakát az intuitív felületünkkel és a fejlett funkciókkal.
   message_accent: Optimalizálja a termelékenységet stílusosan!
   title: Üdvözöljük!
 toolbar:
@@ -232,8 +221,7 @@ toolbar:
   dock_side: Pozíció
   dynamic_color: Dinamikus szín
   dynamic_color_tooltip: >-
-    Dinamikus háttér- és előtérszínek engedélyezése a fókuszált ablak alapján.
-    (A színeket a témák felülbírálhatják)
+    Dinamikus háttér- és előtérszínek engedélyezése a fókuszált ablak alapján. (A színeket a témák felülbírálhatják)
   enable: Engedélyezze a divatos eszköztárat
   height: Magasság
   hide_mode:
@@ -241,7 +229,7 @@ toolbar:
     never: Soha
     on_overlap: Az átfedésben
   label: Eszköztár
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Hibernálás gomb megjelenítése a bekapcsolási menüben
 update:
   available: A frissítés elérhető!
@@ -272,7 +260,7 @@ wall:
     center: Központ
     left: Balra
     right: Jobbra
-    top: Top
+    top: Felső
   random: Véletlenszerűsítse a diavetítést
   saturation: Telítettség
   seconds: másodpercek
@@ -334,4 +322,4 @@ wm:
   space_between_containers: Hely a konténerek között
   workspace_offset: A munkaterületek eltolása (margók)
   workspace_padding: Munkaterületek párnázása
-'yes': Igen
+'yes': 'Igen'
