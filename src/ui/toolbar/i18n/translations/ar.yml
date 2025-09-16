@@ -56,7 +56,7 @@ notifications:
   settings: المزيد من إعدادات الإشعارات
   title: الإشعارات
 placeholder:
-  battery_remaining: ٪ متبقي
+  battery_remaining: '٪ متبقي'
   bluetooth_devices: بلوتوث
   ethernet_connected: خدمة الإنترنت
   ethernet_disconnected: لا يوجد اتصال بالإنترنت
