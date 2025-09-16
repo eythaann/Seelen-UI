@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/theme.schema.json
+id: '@eythaann/variables-test'
+metadata:
+  displayName: Variables Test
+  description: this theme is just for testing
+  appTargetVersion: [2, 3, 0]
+settings:
+  - syntax: <color>
+    name: --testing-settings1-1
+    label: Testing Color Setting 1
+    initialValue: '#f00'
+  - syntax: <color>
+    name: --testing-settings1-2
+    label: Testing Color Setting 2
+    initialValue: '#00f'
+  - syntax: <length>
+    name: --testing-sizes
+    label: Testing Length Setting 3
+    initialValue: 20
+    initialValueUnit: px
+  - syntax: <number>
+    name: --testing-number
+    label: Testing Number Setting
+    initialValue: 60
+  - syntax: <string>
+    name: --testing-string
+    label: Testing User Input
+    initialValue: 'hello world'
+  - syntax: <url>
+    name: --testing-url
+    label: Testing User URL Input
+    initialValue: https://google.com

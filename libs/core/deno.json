@@ -1,0 +1,73 @@
+{
+  "name": "@seelen-ui/lib",
+  "version": "2.4.1",
+  "description": "Seelen UI Library for Widgets",
+  "license": "AGPL-3.0",
+  "exports": {
+    ".": "./src/lib.ts",
+    "./types": "./gen/types/mod.ts",
+    "./tauri": "./src/re-exports/tauri.ts"
+  },
+  "tasks": {
+    "build:npm": "deno run -A ./scripts/build_npm.ts",
+    "build:rs": "deno run -A ./scripts/rust_bindings.ts",
+    "build": "deno task build:rs && deno task build:npm"
+  },
+  "test": {
+    "include": [
+      "src/**/*.test.ts"
+    ]
+  },
+  "imports": {
+    "@deno/dnt": "jsr:@deno/dnt@0.41.3",
+    "@seelen-ui/types": "./gen/types/mod.ts",
+    "@std/assert": "jsr:@std/assert@^1.0.14",
+    "@std/encoding": "jsr:@std/encoding@^1.0.10",
+    "@tauri-apps/api": "npm:@tauri-apps/api@^2.8.0",
+    "@tauri-apps/plugin-dialog": "npm:@tauri-apps/plugin-dialog@^2.3.3",
+    "@tauri-apps/plugin-fs": "npm:@tauri-apps/plugin-fs@^2.4.2",
+    "@tauri-apps/plugin-log": "npm:@tauri-apps/plugin-log@^2.6.0",
+    "@tauri-apps/plugin-process": "npm:@tauri-apps/plugin-process@^2.3.0"
+  },
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2023"
+    ]
+  },
+  "fmt": {
+    "include": [
+      "src",
+      "scripts",
+      "gen"
+    ],
+    "lineWidth": 120,
+    "singleQuote": true
+  },
+  "lint": {
+    "include": [
+      "src",
+      "scripts"
+    ],
+    "rules": {
+      "include": [
+        "explicit-function-return-type"
+      ],
+      "exclude": [
+        "no-slow-types"
+      ]
+    }
+  },
+  "publish": {
+    "include": [
+      "src",
+      "gen",
+      "LICENSE",
+      "readme.md"
+    ],
+    "exclude": [
+      "src/**/*.test.ts"
+    ]
+  }
+}

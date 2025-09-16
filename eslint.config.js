@@ -4,7 +4,7 @@ import { parser as _parser, plugin } from 'typescript-eslint';
 
 export default [
   {
-    ignores: ['node_modules/', '.git/', 'dist/', 'target/', '.dist/'],
+    ignores: ['node_modules/', '.git/', 'dist/', 'target/', '.dist/', 'libs/core'],
   },
   {
     files: ['**/*.{js,jsx,ts,tsx,mjs}'],

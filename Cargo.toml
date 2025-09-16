@@ -1,19 +1,22 @@
 cargo-features = ["profile-rustflags", "codegen-backend"]
 
-[package]
-name = "seelen-ui"
-version = "2.4.3"
-description = "Seelen UI Background"
-authors = ["eythaann"]
-license = "Polyform Strict License"
-repository = "https://github.com/eythaann/seelen-ui.git"
-default-run = "seelen-ui"
-edition = "2021"
-rust-version = "1.89"
-build = "scripts/build.rs"
-
 [workspace]
-members = ["libs/slu-ipc", "libs/positioning"]
+members = ["libs/slu-ipc", "libs/positioning", "libs/core", "src"]
+resolver = "3"
+
+[profile.dev]
+debug = "full"
+strip = "symbols"
+incremental = true
+rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
+
+[profile.release]
+debug = "limited"
+strip = "symbols"
+opt-level = "z"
+lto = true
+codegen-units = 1
+rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
 [workspace.dependencies]
 tokio = "1.47.0"
@@ -47,7 +50,7 @@ rand = "0.9.1"
 regex = "1.11.1"
 reqwest = "0.12.15"
 rust-i18n = "3.1.4"
-seelen-core = { git = "https://github.com/Seelen-Inc/slu-lib.git" }
+seelen-core = { path = "libs/core" }
 slu-ipc = { path = "libs/slu-ipc" }
 positioning = { path = "libs/positioning" }
 sysinfo = "0.30.12"
@@ -74,179 +77,3 @@ windows-core = "0.59.0"
 winreg = "0.55.0"
 time = "0.3.41"
 scc = "2.4.0"
-
-[[bin]]
-name = "seelen-ui"
-path = "src/background/main.rs"
-
-[[bin]]
-name = "slu-service"
-path = "src/service/main.rs"
-
-[profile.dev]
-debug = "full"
-strip = "symbols"
-incremental = true
-rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
-
-[profile.release]
-debug = "limited"
-strip = "symbols"
-opt-level = "z"
-lto = true
-codegen-units = 1
-rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
-
-[build-dependencies]
-tauri-build = { workspace = true, features = [] }
-
-[dependencies]
-slu-ipc = { workspace = true }
-positioning = { workspace = true }
-tauri = { workspace = true, features = ["protocol-asset", "tray-icon", "image-png"] }
-tauri-plugin-fs = { workspace = true }
-tauri-plugin-dialog = { workspace = true }
-tauri-plugin-autostart = { workspace = true }
-tauri-plugin-shell = { workspace = true }
-tauri-plugin-process = { workspace = true }
-tauri-plugin-log = { workspace = true }
-tauri-plugin-updater = { workspace = true }
-tauri-plugin-deep-link = { workspace = true }
-tauri-plugin-http = { workspace = true }
-serde = { workspace = true, features = ["derive"] }
-serde_json = { workspace = true }
-serde_yaml = { workspace = true }
-lazy_static = { workspace = true }
-parking_lot = { workspace = true }
-log = { workspace = true }
-uuid = { workspace = true }
-image = { workspace = true, features = ["ico"] }
-widestring = { workspace = true }
-itertools = { workspace = true }
-clap = { workspace = true, features = ["derive", "string"] }
-os_info = { workspace = true }
-crossbeam-channel = { workspace = true }
-regex = { workspace = true }
-getset = { workspace = true }
-phf = { workspace = true }
-sysinfo = { workspace = true }
-battery = { workspace = true }
-# winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
-winreg = { workspace = true }
-windows-core = { workspace = true } # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
-win-screenshot = { workspace = true }
-base64 = { workspace = true }
-arc-swap = { workspace = true }
-notify-debouncer-full = { workspace = true }
-encoding_rs = { workspace = true }
-evalexpr = { workspace = true }
-quick-xml = { workspace = true, features = ["serialize", "encoding"] }
-backtrace = { workspace = true }
-owo-colors = { workspace = true }
-rust-i18n = { workspace = true }
-url = { workspace = true }
-urlencoding = { workspace = true }
-fern = { workspace = true }
-reqwest = { workspace = true }
-translators = { workspace = true, features = ["google", "tokio-async"] }
-rand = { workspace = true }
-discord-rich-presence = { workspace = true }
-win-hotkeys = { workspace = true }
-tokio = { workspace = true }
-seelen-core = { workspace = true }
-windows = { workspace = true, features = [
-    "Win32_Foundation",
-    "ApplicationModel",
-    "ApplicationModel_Core",
-    "ApplicationModel_Background",
-    "Foundation_Collections",
-    "Foundation_Numerics",
-    "Management_Deployment",
-    "Win32_Globalization",
-    "Win32_UI_Input_KeyboardAndMouse",
-    "Win32_UI_WindowsAndMessaging",
-    "Win32_UI_Shell",
-    "Win32_UI_Shell_PropertiesSystem",
-    "Win32_UI_Accessibility",
-    "Win32_UI_Controls",
-    "Win32_UI_Notifications",
-    "Win32_Graphics_Dwm",
-    "Win32_Graphics_Gdi",
-    "Win32_UI_HiDpi",
-    "Win32_System_DataExchange",
-    "Win32_System_Ole",
-    "Win32_System_Com",
-    "Win32_System_Com_StructuredStorage",
-    "Win32_System_Variant",
-    "Win32_System_LibraryLoader",
-    "Win32_System_SystemServices",
-    "Win32_System_SystemInformation",
-    "Win32_System_Console",
-    "Win32_System_Registry",
-    "Win32_System_Environment",
-    "Win32_Security",
-    "Win32_Security_Authorization",
-    "Win32_System_Kernel",
-    "Win32_System_IO",
-    "Win32_System_Services",
-    "Win32_System_EventLog",
-    "Win32_System_TaskScheduler",
-    "Win32_System_Threading",
-    "Win32_System_WinRT",
-    "Win32_System_StationsAndDesktops",
-    "Win32_System_RemoteDesktop",
-    "Win32_System_ProcessStatus",
-    "Wdk_System_Threading",
-    "Wdk_System_SystemInformation",
-    "Wdk_System_SystemServices",
-    "Win32_System_Power",
-    "Win32_System_Shutdown",
-    "Win32_Storage_FileSystem",
-    "Win32_Storage_EnhancedStorage",
-    "Win32_Storage_Packaging_Appx",
-    "Win32_Security_Authentication_Identity",
-    "Win32_Media_KernelStreaming",
-    "Win32_Media_Audio_Endpoints",
-    "Win32_Media_Audio_Apo",
-    "Win32_Media_DeviceManager",
-    "Graphics",
-    "Media",
-    "Media_Audio",
-    "Media_Render",
-    "Media_Capture",
-    "Media_Effects",
-    "Media_Control",
-    "Storage_Streams",
-    "Win32_Devices_Display",
-    "Win32_Devices_DeviceAndDriverInstallation",
-    "Win32_Devices_FunctionDiscovery",
-    "UI_Core",
-    "UI_Notifications_Management",
-    "UI_ViewManagement",
-    "deprecated",
-    "Win32_NetworkManagement_IpHelper",
-    "Win32_NetworkManagement_Ndis",
-    "Win32_Networking_WinSock",
-    "Win32_Networking_NetworkListManager",
-    "Win32_NetworkManagement_WiFi",
-    "Networking_NetworkOperators",
-    "Networking_Connectivity",
-    "Security_Credentials",
-    "Devices_Custom",
-    "Devices_Bluetooth",
-    "Devices_Enumeration",
-    "Devices_Radios",
-    "Devices_WiFi",
-    "Devices_Display",
-    "Devices_Display_Core",
-    "Data_Xml_Dom",
-] }
-time = { workspace = true, features = ["formatting", "local-offset"] }
-scc = { workspace = true }
-open = "5.3.2"
-
-[features]
-# this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
-# If you use cargo directly instead of tauri's cli you can use this feature flag to switch between tauri's `dev` and `build` modes.
-custom-protocol = ["tauri/custom-protocol"]
-devtools = ["tauri/devtools"]

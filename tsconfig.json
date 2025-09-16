@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "noImplicitAny": true,
@@ -52,6 +53,7 @@
   },
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "libs/core",
   ]
 }

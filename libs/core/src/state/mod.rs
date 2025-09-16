@@ -1,0 +1,27 @@
+mod icon_pack;
+mod placeholder;
+mod plugin;
+mod popups;
+mod profile;
+mod settings;
+mod settings_by_app;
+mod theme;
+mod wallpaper;
+mod weg_items;
+mod widget;
+mod wm_layout;
+mod workspaces;
+
+pub use icon_pack::*;
+pub use placeholder::*;
+pub use plugin::*;
+pub use popups::*;
+pub use profile::*;
+pub use settings::*;
+pub use settings_by_app::*;
+pub use theme::*;
+pub use wallpaper::*;
+pub use weg_items::*;
+pub use widget::*;
+pub use wm_layout::*;
+pub use workspaces::*;

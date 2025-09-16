@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/theme.schema.json
+id: '@eythaann/variables-test'
+metadata:
+  displayName: Variables Test
+  description: this theme is just for testing
+  appTargetVersion: [2, 3, 12]
+settings:
+  - syntax: <color>
+    name: --testing-settings
+    label: Testing Color Setting1-1
+    initialValue: '#f00'
+  - syntax: <color>
+    name: --testing-settings1-2
+    label: Testing Color Setting 2
+    initialValue: '#00f'
+  - syntax: <length>
+    name: --testing-sizes
+    label: Testing Length Setting 3
+    initialValue: 20
+    initialValueUnit: px
+  - syntax: <number>
+    name: --testing-number
+    label: Testing Number Setting
+    initialValue: 60
+  - syntax: <string>
+    name: --testing-string
+    label: Testing User Input
+    initialValue: 'hello world'
+  - syntax: <url>
+    name: --testing-url
+    label: Testing User URL Input
+    initialValue: https://google.com
+
+  - group:
+      header: This is a group header
+      items:
+        - syntax: <color>
+          name: --testing-settings2-1
+          label: Testing Color Setting
+          description: This is a description to test log text in the settings UI
+          initialValue: '#f00'
+        - syntax: <color>
+          name: --testing-settings2-2
+          label: Testing Color Setting 2
+          initialValue: '#00f'
+        - syntax: <length>
+          name: --testing-sizes2
+          label: Testing Length Setting 3
+          description: This is a description to test log text in the settings UI
+          initialValue: 20
+          initialValueUnit: px
+        - syntax: <number>
+          name: --testing-number2
+          label: Testing Number Setting
+          initialValue: 60
+        - syntax: <string>
+          name: --testing-string2
+          label: Testing User Input
+          initialValue: 'hello world'
+        - syntax: <url>
+          name: --testing-url2
+          label: Testing User URL Input
+          initialValue: https://google.com
+
+        - group:
+            header: This is a sub group header
+            items:
+              - syntax: <color>
+                name: --testing-settings2-1
+                label: Testing Color Setting
+                initialValue: '#f00'
+              - syntax: <color>
+                name: --testing-settings2-2
+                label: Testing Color Setting 2
+                initialValue: '#00f'
+              - syntax: <length>
+                name: --testing-sizes2
+                label: Testing Length Setting 3
+                tip: This is a tooltip to test, log text in the settings UI here as well as the description below it as well as the label of the setting
+                description: Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                initialValue: 20
+                initialValueUnit: px
+              - syntax: <number>
+                name: --testing-number2
+                label: Testing Number Setting
+                description: This is a description to test log text in the settings UI
+                initialValue: 60
+                options:
+                  - 60
+                  - 90
+                  - 120
+                  - 300
+              - syntax: <string>
+                name: --testing-string2
+                label: Testing User Input
+                initialValue: 'hello world'
+              - syntax: <url>
+                name: --testing-url2
+                label: Testing User URL Input
+                initialValue: https://google.com

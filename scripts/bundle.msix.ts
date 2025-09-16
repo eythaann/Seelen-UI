@@ -6,7 +6,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 import packageJson from '../package.json';
-import tauriConfig from '../tauri.conf.json';
+import tauriConfig from '../src/tauri.conf.json';
 
 async function getArgs() {
   const argv = await yargs(hideBin(process.argv)).option('target', {

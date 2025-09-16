@@ -1,0 +1,678 @@
+# https://bitbucket.org/bluetooth-SIG/public/src/main/assigned_numbers/core/appearance_values.yaml
+appearance_values:
+  - category: 0x000
+    name: Unknown
+  - category: 0x001
+    name: Phone
+  - category: 0x002
+    name: Computer
+    subcategory:
+      - value: 0x01
+        name: Desktop Workstation
+      - value: 0x02
+        name: Server-class Computer
+      - value: 0x03
+        name: Laptop
+      - value: 0x04
+        name: Handheld PC/PDA (clamshell)
+      - value: 0x05
+        name: Palm-size PC/PDA
+      - value: 0x06
+        name: Wearable computer (watch size)
+      - value: 0x07
+        name: Tablet
+      - value: 0x08
+        name: Docking Station
+      - value: 0x09
+        name: All in One
+      - value: 0x0A
+        name: Blade Server
+      - value: 0x0B
+        name: Convertible
+      - value: 0x0C
+        name: Detachable
+      - value: 0x0D
+        name: IoT Gateway
+      - value: 0x0E
+        name: Mini PC
+      - value: 0x0F
+        name: Stick PC
+  - category: 0x003
+    name: Watch
+    subcategory:
+      - value: 0x01
+        name: Sports Watch
+      - value: 0x02
+        name: Smartwatch
+  - category: 0x004
+    name: Clock
+  - category: 0x005
+    name: Display
+  - category: 0x006
+    name: Remote Control
+  - category: 0x007
+    name: Eye-glasses
+  - category: 0x008
+    name: Tag
+  - category: 0x009
+    name: Keyring
+  - category: 0x00A
+    name: Media Player
+  - category: 0x00B
+    name: Barcode Scanner
+  - category: 0x00C
+    name: Thermometer
+    subcategory:
+      - value: 0x01
+        name: Ear Thermometer
+  - category: 0x00D
+    name: Heart Rate Sensor
+    subcategory:
+      - value: 0x01
+        name: Heart Rate Belt
+  - category: 0x00E
+    name: Blood Pressure
+    subcategory:
+      - value: 0x01
+        name: Arm Blood Pressure
+      - value: 0x02
+        name: Wrist Blood Pressure
+  - category: 0x00F
+    name: Human Interface Device
+    subcategory:
+      - value: 0x01
+        name: Keyboard
+      - value: 0x02
+        name: Mouse
+      - value: 0x03
+        name: Joystick
+      - value: 0x04
+        name: Gamepad
+      - value: 0x05
+        name: Digitizer Tablet
+      - value: 0x06
+        name: Card Reader
+      - value: 0x07
+        name: Digital Pen
+      - value: 0x08
+        name: Barcode Scanner
+      - value: 0x09
+        name: Touchpad
+      - value: 0x0A
+        name: Presentation Remote
+  - category: 0x010
+    name: Glucose Meter
+  - category: 0x011
+    name: Running Walking Sensor
+    subcategory:
+      - value: 0x01
+        name: In-Shoe Running Walking Sensor
+      - value: 0x02
+        name: On-Shoe Running Walking Sensor
+      - value: 0x03
+        name: On-Hip Running Walking Sensor
+  - category: 0x012
+    name: Cycling
+    subcategory:
+      - value: 0x01
+        name: Cycling Computer
+      - value: 0x02
+        name: Speed Sensor
+      - value: 0x03
+        name: Cadence Sensor
+      - value: 0x04
+        name: Power Sensor
+      - value: 0x05
+        name: Speed and Cadence Sensor
+  - category: 0x013
+    name: Control Device
+    subcategory:
+      - value: 0x01
+        name: Switch
+      - value: 0x02
+        name: Multi-switch
+      - value: 0x03
+        name: Button
+      - value: 0x04
+        name: Slider
+      - value: 0x05
+        name: Rotary Switch
+      - value: 0x06
+        name: Touch Panel
+      - value: 0x07
+        name: Single Switch
+      - value: 0x08
+        name: Double Switch
+      - value: 0x09
+        name: Triple Switch
+      - value: 0x0A
+        name: Battery Switch
+      - value: 0x0B
+        name: Energy Harvesting Switch
+      - value: 0x0C
+        name: Push Button
+      - value: 0x0D
+        name: Dial
+  - category: 0x014
+    name: Network Device
+    subcategory:
+      - value: 0x01
+        name: Access Point
+      - value: 0x02
+        name: Mesh Device
+      - value: 0x03
+        name: Mesh Network Proxy
+  - category: 0x015
+    name: Sensor
+    subcategory:
+      - value: 0x01
+        name: Motion Sensor
+      - value: 0x02
+        name: Air quality Sensor
+      - value: 0x03
+        name: Temperature Sensor
+      - value: 0x04
+        name: Humidity Sensor
+      - value: 0x05
+        name: Leak Sensor
+      - value: 0x06
+        name: Smoke Sensor
+      - value: 0x07
+        name: Occupancy Sensor
+      - value: 0x08
+        name: Contact Sensor
+      - value: 0x09
+        name: Carbon Monoxide Sensor
+      - value: 0x0A
+        name: Carbon Dioxide Sensor
+      - value: 0x0B
+        name: Ambient Light Sensor
+      - value: 0x0C
+        name: Energy Sensor
+      - value: 0x0D
+        name: Color Light Sensor
+      - value: 0x0E
+        name: Rain Sensor
+      - value: 0x0F
+        name: Fire Sensor
+      - value: 0x10
+        name: Wind Sensor
+      - value: 0x11
+        name: Proximity Sensor
+      - value: 0x12
+        name: Multi-Sensor
+      - value: 0x13
+        name: Flush Mounted Sensor
+      - value: 0x14
+        name: Ceiling Mounted Sensor
+      - value: 0x15
+        name: Wall Mounted Sensor
+      - value: 0x16
+        name: Multisensor
+      - value: 0x17
+        name: Energy Meter
+      - value: 0x18
+        name: Flame Detector
+      - value: 0x19
+        name: Vehicle Tire Pressure Sensor
+  - category: 0x016
+    name: Light Fixtures
+    subcategory:
+      - value: 0x01
+        name: Wall Light
+      - value: 0x02
+        name: Ceiling Light
+      - value: 0x03
+        name: Floor Light
+      - value: 0x04
+        name: Cabinet Light
+      - value: 0x05
+        name: Desk Light
+      - value: 0x06
+        name: Troffer Light
+      - value: 0x07
+        name: Pendant Light
+      - value: 0x08
+        name: In-ground Light
+      - value: 0x09
+        name: Flood Light
+      - value: 0x0A
+        name: Underwater Light
+      - value: 0x0B
+        name: Bollard with Light
+      - value: 0x0C
+        name: Pathway Light
+      - value: 0x0D
+        name: Garden Light
+      - value: 0x0E
+        name: Pole-top Light
+      - value: 0x0F
+        name: Spotlight
+      - value: 0x10
+        name: Linear Light
+      - value: 0x11
+        name: Street Light
+      - value: 0x12
+        name: Shelves Light
+      - value: 0x13
+        name: Bay Light
+      - value: 0x14
+        name: Emergency Exit Light
+      - value: 0x15
+        name: Light Controller
+      - value: 0x16
+        name: Light Driver
+      - value: 0x17
+        name: Bulb
+      - value: 0x18
+        name: Low-bay Light
+      - value: 0x19
+        name: High-bay Light
+  - category: 0x017
+    name: Fan
+    subcategory:
+      - value: 0x01
+        name: Ceiling Fan
+      - value: 0x02
+        name: Axial Fan
+      - value: 0x03
+        name: Exhaust Fan
+      - value: 0x04
+        name: Pedestal Fan
+      - value: 0x05
+        name: Desk Fan
+      - value: 0x06
+        name: Wall Fan
+  - category: 0x018
+    name: HVAC
+    subcategory:
+      - value: 0x01
+        name: Thermostat
+      - value: 0x02
+        name: Humidifier
+      - value: 0x03
+        name: De-humidifier
+      - value: 0x04
+        name: Heater
+      - value: 0x05
+        name: Radiator
+      - value: 0x06
+        name: Boiler
+      - value: 0x07
+        name: Heat Pump
+      - value: 0x08
+        name: Infrared Heater
+      - value: 0x09
+        name: Radiant Panel Heater
+      - value: 0x0A
+        name: Fan Heater
+      - value: 0x0B
+        name: Air Curtain
+  - category: 0x019
+    name: Air Conditioning
+  - category: 0x01A
+    name: Humidifier
+  - category: 0x01B
+    name: Heating
+    subcategory:
+      - value: 0x01
+        name: Radiator
+      - value: 0x02
+        name: Boiler
+      - value: 0x03
+        name: Heat Pump
+      - value: 0x04
+        name: Infrared Heater
+      - value: 0x05
+        name: Radiant Panel Heater
+      - value: 0x06
+        name: Fan Heater
+      - value: 0x07
+        name: Air Curtain
+  - category: 0x01C
+    name: Access Control
+    subcategory:
+      - value: 0x01
+        name: Access Door
+      - value: 0x02
+        name: Garage Door
+      - value: 0x03
+        name: Emergency Exit Door
+      - value: 0x04
+        name: Access Lock
+      - value: 0x05
+        name: Elevator
+      - value: 0x06
+        name: Window
+      - value: 0x07
+        name: Entrance Gate
+      - value: 0x08
+        name: Door Lock
+      - value: 0x09
+        name: Locker
+  - category: 0x01D
+    name: Motorized Device
+    subcategory:
+      - value: 0x01
+        name: Motorized Gate
+      - value: 0x02
+        name: Awning
+      - value: 0x03
+        name: Blinds or Shades
+      - value: 0x04
+        name: Curtains
+      - value: 0x05
+        name: Screen
+  - category: 0x01E
+    name: Power Device
+    subcategory:
+      - value: 0x01
+        name: Power Outlet
+      - value: 0x02
+        name: Power Strip
+      - value: 0x03
+        name: Plug
+      - value: 0x04
+        name: Power Supply
+      - value: 0x05
+        name: LED Driver
+      - value: 0x06
+        name: Fluorescent Lamp Gear
+      - value: 0x07
+        name: HID Lamp Gear
+      - value: 0x08
+        name: Charge Case
+      - value: 0x09
+        name: Power Bank
+  - category: 0x01F
+    name: Light Source
+    subcategory:
+      - value: 0x01
+        name: Incandescent Light Bulb
+      - value: 0x02
+        name: LED Lamp
+      - value: 0x03
+        name: HID Lamp
+      - value: 0x04
+        name: Fluorescent Lamp
+      - value: 0x05
+        name: LED Array
+      - value: 0x06
+        name: Multi-Color LED Array
+      - value: 0x07
+        name: Low voltage halogen
+      - value: 0x08
+        name: Organic light emitting diode (OLED)
+  - category: 0x020
+    name: Window Covering
+    subcategory:
+      - value: 0x01
+        name: Window Shades
+      - value: 0x02
+        name: Window Blinds
+      - value: 0x03
+        name: Window Awning
+      - value: 0x04
+        name: Window Curtain
+      - value: 0x05
+        name: Exterior Shutter
+      - value: 0x06
+        name: Exterior Screen
+  - category: 0x021
+    name: Audio Sink
+    subcategory:
+      - value: 0x01
+        name: Standalone Speaker
+      - value: 0x02
+        name: Soundbar
+      - value: 0x03
+        name: Bookshelf Speaker
+      - value: 0x04
+        name: Standmounted Speaker
+      - value: 0x05
+        name: Speakerphone
+  - category: 0x022
+    name: Audio Source
+    subcategory:
+      - value: 0x01
+        name: Microphone
+      - value: 0x02
+        name: Alarm
+      - value: 0x03
+        name: Bell
+      - value: 0x04
+        name: Horn
+      - value: 0x05
+        name: Broadcasting Device
+      - value: 0x06
+        name: Service Desk
+      - value: 0x07
+        name: Kiosk
+      - value: 0x08
+        name: Broadcasting Room
+      - value: 0x09
+        name: Auditorium
+  - category: 0x023
+    name: Motorized Vehicle
+    subcategory:
+      - value: 0x01
+        name: Car
+      - value: 0x02
+        name: Large Goods Vehicle
+      - value: 0x03
+        name: Vehicle 2-Wheels
+      - value: 0x04
+        name: Motorbike
+      - value: 0x05
+        name: Scooter
+      - value: 0x06
+        name: Moped
+      - value: 0x07
+        name: Vehicle 3-Wheels
+      - value: 0x08
+        name: Light Vehicle
+      - value: 0x09
+        name: Quad Bike
+      - value: 0x0A
+        name: Minibus
+      - value: 0x0B
+        name: Bus
+      - value: 0x0C
+        name: Trolley
+      - value: 0x0D
+        name: Agricultural Vehicle
+      - value: 0x0E
+        name: Camper / Caravan
+      - value: 0x0F
+        name: Recreational Vehicle / Motor Home
+  - category: 0x024
+    name: Domestic Appliance
+    subcategory:
+      - value: 0x01
+        name: Refrigerator
+      - value: 0x02
+        name: Freezer
+      - value: 0x03
+        name: Oven
+      - value: 0x04
+        name: Microwave
+      - value: 0x05
+        name: Toaster
+      - value: 0x06
+        name: Washing Machine
+      - value: 0x07
+        name: Dryer
+      - value: 0x08
+        name: Coffee maker
+      - value: 0x09
+        name: Clothes iron
+      - value: 0x0A
+        name: Curling iron
+      - value: 0x0B
+        name: Hair dryer
+      - value: 0x0C
+        name: Vacuum cleaner
+      - value: 0x0D
+        name: Robotic vacuum cleaner
+      - value: 0x0E
+        name: Rice cooker
+      - value: 0x0F
+        name: Clothes steamer
+  - category: 0x025
+    name: Wearable Audio Device
+    subcategory:
+      - value: 0x01
+        name: Earbud
+      - value: 0x02
+        name: Headset
+      - value: 0x03
+        name: Headphones
+      - value: 0x04
+        name: Neck Band
+  - category: 0x026
+    name: Aircraft
+    subcategory:
+      - value: 0x01
+        name: Light Aircraft
+      - value: 0x02
+        name: Microlight
+      - value: 0x03
+        name: Paraglider
+      - value: 0x04
+        name: Large Passenger Aircraft
+  - category: 0x027
+    name: AV Equipment
+    subcategory:
+      - value: 0x01
+        name: Amplifier
+      - value: 0x02
+        name: Receiver
+      - value: 0x03
+        name: Radio
+      - value: 0x04
+        name: Tuner
+      - value: 0x05
+        name: Turntable
+      - value: 0x06
+        name: CD Player
+      - value: 0x07
+        name: DVD Player
+      - value: 0x08
+        name: Bluray Player
+      - value: 0x09
+        name: Optical Disc Player
+      - value: 0x0A
+        name: Set-Top Box
+  - category: 0x028
+    name: Display Equipment
+    subcategory:
+      - value: 0x01
+        name: Television
+      - value: 0x02
+        name: Monitor
+      - value: 0x03
+        name: Projector
+  - category: 0x029
+    name: Hearing aid
+    subcategory:
+      - value: 0x01
+        name: In-ear hearing aid
+      - value: 0x02
+        name: Behind-ear hearing aid
+      - value: 0x03
+        name: Cochlear Implant
+  - category: 0x02A
+    name: Gaming
+    subcategory:
+      - value: 0x01
+        name: Home Video Game Console
+      - value: 0x02
+        name: Portable handheld console
+  - category: 0x02B
+    name: Signage
+    subcategory:
+      - value: 0x01
+        name: Digital Signage
+      - value: 0x02
+        name: Electronic Label
+  - category: 0x031
+    name: Pulse Oximeter
+    subcategory:
+      - value: 0x01
+        name: Fingertip Pulse Oximeter
+      - value: 0x02
+        name: Wrist Worn Pulse Oximeter
+  - category: 0x032
+    name: Weight Scale
+  - category: 0x033
+    name: Personal Mobility Device
+    subcategory:
+      - value: 0x01
+        name: Powered Wheelchair
+      - value: 0x02
+        name: Mobility Scooter
+  - category: 0x034
+    name: Continuous Glucose Monitor
+  - category: 0x035
+    name: Insulin Pump
+    subcategory:
+      - value: 0x01
+        name: 'Insulin Pump, durable pump'
+      - value: 0x04
+        name: 'Insulin Pump, patch pump'
+      - value: 0x08
+        name: Insulin Pen
+  - category: 0x036
+    name: Medication Delivery
+  - category: 0x037
+    name: Spirometer
+    subcategory:
+      - value: 0x01
+        name: Handheld Spirometer
+  - category: 0x051
+    name: Outdoor Sports Activity
+    subcategory:
+      - value: 0x01
+        name: Location Display
+      - value: 0x02
+        name: Location and Navigation Display
+      - value: 0x03
+        name: Location Pod
+      - value: 0x04
+        name: Location and Navigation Pod
+  - category: 0x052
+    name: Industrial Measurement Device
+    subcategory:
+      - value: 0x01
+        name: Torque Testing Device
+      - value: 0x02
+        name: Caliper
+      - value: 0x03
+        name: Dial Indicator
+      - value: 0x04
+        name: Micrometer
+      - value: 0x05
+        name: Height Gauge
+      - value: 0x06
+        name: Force Gauge
+  - category: 0x053
+    name: Industrial Tools
+    subcategory:
+      - value: 0x01
+        name: Machine Tool Holder
+      - value: 0x02
+        name: Generic Clamping Device
+      - value: 0x03
+        name: Clamping Jaws/Jaw Chuck
+      - value: 0x04
+        name: Clamping (Collet) Chuck
+      - value: 0x05
+        name: Clamping Mandrel
+      - value: 0x06
+        name: Vise
+      - value: 0x07
+        name: Zero-Point Clamping System
+      - value: 0x08
+        name: Torque Wrench
+      - value: 0x09
+        name: Torque Screwdriver

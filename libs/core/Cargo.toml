@@ -1,0 +1,29 @@
+[package]
+name = "seelen-core"
+version = "2.4.1"
+edition = "2021"
+rust-version = "1.89"
+
+[dependencies]
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+serde_alias = "0.0.2"
+schemars = { version = "1.0.4", features = ["url2", "uuid1", "chrono04"] }
+regex = { workspace = true }
+sys-locale = "0.3.1"
+uuid = { workspace = true, features = ["v4", "serde"] }
+ts-rs = { git = "https://github.com/eythaann/ts-rs.git", features = [
+  "import-deno",
+  "no-serde-warnings",
+  "serde-json-impl",
+  "url-impl",
+  "uuid-impl",
+  "chrono-impl",
+] }
+base64 = { workspace = true }
+url = { workspace = true, features = ["serde"] }
+grass = { version = "0.13.4", default-features = false, features = ['random'] }
+num_enum = "0.7.3"
+chrono = { version = "0.4.40", features = ["serde"] }
+paste = "1.0.15"

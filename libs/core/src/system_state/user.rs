@@ -1,0 +1,60 @@
+use std::path::PathBuf;
+
+use ts_rs::TS;
+
+#[derive(Debug, Copy, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[ts(export)]
+pub enum FolderType {
+    Unknown,
+    Recent,
+    Desktop,
+    Downloads,
+    Documents,
+    Music,
+    Pictures,
+    Videos,
+}
+
+static ALL_FOLDERS: [FolderType; 7] = [
+    FolderType::Recent,
+    FolderType::Desktop,
+    FolderType::Downloads,
+    FolderType::Documents,
+    FolderType::Music,
+    FolderType::Pictures,
+    FolderType::Videos,
+];
+
+impl FolderType {
+    pub fn values() -> &'static [FolderType] {
+        &ALL_FOLDERS
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
+pub struct File {
+    pub path: PathBuf,
+    pub last_access_time: u64,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
+pub struct FolderChangedArgs {
+    pub of_folder: FolderType,
+    pub content: Option<Vec<File>>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
+pub struct User {
+    pub name: String,
+    pub domain: String,
+    pub profile_home_path: PathBuf,
+    pub email: Option<String>,
+    pub one_drive_path: Option<PathBuf>,
+    pub profile_picture_path: Option<PathBuf>,
+}
