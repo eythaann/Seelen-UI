@@ -56,7 +56,7 @@ notifications:
   settings: مزید اطلاعات کی ترتیبات
   title: اطلاعات
 placeholder:
-  battery_remaining: ٪ یٹری
+  battery_remaining: '٪ یٹری'
   bluetooth_devices: بلوٹوتھ اور ڈیوائسز
   ethernet_connected: ایتھر نیٹ کنیکٹڈ
   ethernet_disconnected: ایتھر نیٹ ڈسکنیکٹ
