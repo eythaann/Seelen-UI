@@ -3,14 +3,12 @@ done: Ferdig
 drivers:
   got_it: Har det
   monitor_disabled: >-
-    Det ser ut til at noen overvåkningsførere er deaktivert. La dem gjøre dem i
-    stand til å la Seelen UI fungere ordentlig.
+    Det ser ut til at noen overvåkningsførere er deaktivert. La dem gjøre dem i stand til å la Seelen UI fungere ordentlig.
   monitor_disabled_title: Monitor drivere er deaktivert
 resource:
   added: En ny ressurs er lagt til
   download_failed_body: >-
-    Noe gikk galt mens du lastet ned ressursen, vennligst rapporter den til
-    Seelen -utviklerteamet.
+    Noe gikk galt mens du lastet ned ressursen, vennligst rapporter den til Seelen -utviklerteamet.
   download_failed_title: Ressursnedlasting mislyktes
   downloading: Last ned eiendeler ...
   downloading_body: Dette kan ta noen sekunder, ikke lukk vinduet.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI krever Webview2 Runtime. Vennligst installer den.
   outdated: WebView2 Runtime utdatert
   outdated_description: >-
-    Seelen UI krever Webview2 Runtime %{min_version} eller høyere. Vennligst
-    oppdater den.
+    Seelen UI krever Webview2 Runtime %{min_version} eller høyere. Vennligst oppdater den.
 service:
   not_running: Seelen UI Service kjører ikke
   not_running_description: >-
-    Seelen UI Service (slu-service) er en avhengighet/hjelper for at appen skal
-    fungere skikkelig.
+    Seelen UI Service (slu-service) er en avhengighet/hjelper for at appen skal fungere skikkelig.
   not_running_ok: Start tjenesten
 shortcut:
   register:
