@@ -56,7 +56,7 @@ notifications:
   settings: ການຕັ້ງຄ່າການແຈ້ງເຕືອນເພີ່ມເຕີມ
   title: ແຈ້ງການ
 placeholder:
-  battery_remaining: ສ່ວນທີ່ເຫຼືອ
+  battery_remaining: 'ສ່ວນທີ່ເຫຼືອ'
   bluetooth_devices: Bluetooth & ອຸປະກອນ
   ethernet_connected: ການ​ເຂົ້າ​ເຖິງ​ອິນ​ເຕີ​ເນັດ
   ethernet_disconnected: ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ
