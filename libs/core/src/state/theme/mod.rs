@@ -22,7 +22,7 @@ pub static ALLOWED_STYLE_EXTENSIONS: &[&str] = &["css", "scss", "sass"];
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Theme {
     pub id: ThemeId,
     /// Metadata about the theme

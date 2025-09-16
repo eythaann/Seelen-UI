@@ -12,7 +12,7 @@ use crate::{
 };
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Wallpaper {
     pub id: WallpaperId,
     pub metadata: ResourceMetadata,

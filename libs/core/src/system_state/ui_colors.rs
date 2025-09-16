@@ -1,6 +1,6 @@
 /// https://learn.microsoft.com/is-is/uwp/api/windows.ui.viewmanagement.uicolortype?view=winrt-19041
 #[derive(Debug, Default, Serialize, Deserialize, TS)]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct UIColors {
     pub background: String,
     pub foreground: String,
@@ -16,7 +16,7 @@ pub struct UIColors {
 
 /// since v2.2.0 this should be used to handle every used color in the app
 #[derive(Debug, Default, Serialize, Deserialize, TS)]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Color {
     pub r: u8,
     pub g: u8,

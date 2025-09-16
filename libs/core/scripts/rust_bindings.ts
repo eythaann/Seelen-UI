@@ -22,7 +22,7 @@ await Deno.mkdir(GenTypesPath, { recursive: true });
   // btw internally we also decided to use tests to avoid having a binary.
   // also this gill generate the json schemas
   await new Deno.Command("cargo", {
-    args: ["test", "--no-default-features"],
+    args: ["test", "--features", "gen-binds"],
     stderr: "inherit",
     stdout: "inherit",
   }).output();

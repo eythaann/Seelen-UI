@@ -123,7 +123,7 @@ impl WegItem {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct WegItems {
     /// Whether the reordering possible on the weg
     pub is_reorder_disabled: bool,

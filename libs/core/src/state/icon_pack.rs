@@ -15,7 +15,7 @@ use crate::{
 
 #[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct IconPack {
     pub id: IconPackId,
     #[serde(alias = "info")]

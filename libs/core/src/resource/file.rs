@@ -23,7 +23,7 @@ use super::{Resource, ResourceKind};
 /// with new versions.
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct SluResourceFile {
     pub version: u32,
     pub resource: Resource,

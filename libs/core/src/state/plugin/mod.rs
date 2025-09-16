@@ -15,7 +15,7 @@ use crate::{
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Plugin {
     pub id: PluginId,
     #[serde(default)]

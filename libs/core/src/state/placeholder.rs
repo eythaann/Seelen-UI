@@ -394,7 +394,7 @@ pub enum ToolbarItem2 {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Placeholder {
     /// Whether the reordering possible on the toolbar
     pub is_reorder_disabled: bool,

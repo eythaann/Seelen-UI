@@ -11,7 +11,7 @@ pub struct KeyboardLayout {
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct SystemLanguage {
     pub id: String,
     pub code: String,

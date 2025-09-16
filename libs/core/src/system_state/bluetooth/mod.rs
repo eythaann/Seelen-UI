@@ -9,7 +9,7 @@ use enums::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct BluetoothDevice {
     pub id: String,
     pub name: String,
@@ -121,7 +121,7 @@ impl BluetoothDevice {
 
 #[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct BluetoothDevicePairShowPinRequest {
     pub pin: String,
     pub confirmation_needed: bool,

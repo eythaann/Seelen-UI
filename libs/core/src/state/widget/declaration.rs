@@ -196,7 +196,7 @@ impl WsdGroup {
 ///
 /// With this, custom windows or widgets to configure an specific widget are not needed.
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct WidgetSettingsDeclarationList(Vec<WsdGroup>);
 
 impl WidgetSettingsDeclarationList {

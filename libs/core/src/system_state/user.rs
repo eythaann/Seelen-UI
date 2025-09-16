@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use ts_rs::TS;
 
 #[derive(Debug, Copy, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub enum FolderType {
     Unknown,
     Recent,
@@ -33,7 +33,7 @@ impl FolderType {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct File {
     pub path: PathBuf,
     pub last_access_time: u64,
@@ -41,7 +41,7 @@ pub struct File {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct FolderChangedArgs {
     pub of_folder: FolderType,
     pub content: Option<Vec<File>>,
@@ -49,7 +49,7 @@ pub struct FolderChangedArgs {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct User {
     pub name: String,
     pub domain: String,

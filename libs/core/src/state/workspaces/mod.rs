@@ -6,7 +6,7 @@ use crate::{identifier_impl, system_state::MonitorId};
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct VirtualDesktops {
     /// Workspaces per monitor
     pub monitors: HashMap<MonitorId, VirtualDesktopMonitor>,

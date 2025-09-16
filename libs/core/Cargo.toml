@@ -27,3 +27,6 @@ grass = { version = "0.13.4", default-features = false, features = ['random'] }
 num_enum = "0.7.3"
 chrono = { version = "0.4.40", features = ["serde"] }
 paste = "1.0.15"
+
+[features]
+gen-binds = []

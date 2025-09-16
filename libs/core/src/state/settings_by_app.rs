@@ -152,7 +152,7 @@ impl AppIdentifier {
 #[serde_alias(SnakeCase)]
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct AppConfig {
     /// name of the app
     pub name: String,

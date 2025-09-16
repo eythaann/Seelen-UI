@@ -15,7 +15,7 @@ use crate::{
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Widget {
     /// Resource id ex: `@seelen/weg`
     pub id: WidgetId,

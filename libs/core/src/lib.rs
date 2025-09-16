@@ -20,6 +20,7 @@ extern crate ts_rs;
 #[macro_use(FromPrimitive, IntoPrimitive)]
 extern crate num_enum;
 
+#[cfg(feature = "gen-binds")]
 #[test]
 fn generate_schemas() {
     use state::{AppConfig, IconPack, Placeholder, Plugin, Settings, Theme, WegItems, Widget};

@@ -123,7 +123,7 @@ pub enum WmNodeLifetime {
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct WindowManagerLayout {
     pub structure: WmNode,
     #[serde(skip_deserializing)]

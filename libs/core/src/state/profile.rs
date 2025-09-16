@@ -15,7 +15,7 @@ pub struct ProfileSettings {
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Profile {
     name: String,
     toolbar_layout: Placeholder,

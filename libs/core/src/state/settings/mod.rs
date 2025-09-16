@@ -401,7 +401,7 @@ impl Default for UpdaterSettings {
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-#[ts(export)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Settings {
     /// @deprecated since v2.1.0, will be removed in v3.0.0
     #[ts(skip)]

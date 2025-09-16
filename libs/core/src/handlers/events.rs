@@ -26,7 +26,7 @@ macro_rules! slu_events_declaration {
         }
 
         #[derive(Serialize, TS)]
-        #[ts(export)]
+        #[cfg_attr(feature = "gen-binds", ts(export))]
         pub enum SeelenEventPayload {
             $(
                 #[serde(rename = $value)]

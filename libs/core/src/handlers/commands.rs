@@ -13,7 +13,7 @@ macro_rules! slu_commands_declaration {
 
         #[cfg(test)]
         impl SeelenCommand {
-            pub fn generate_ts_file(path: &str) {
+            pub(crate) fn generate_ts_file(path: &str) {
                 let mut content: Vec<String> = std::vec::Vec::new();
 
                 content.push("// This file was generated via rust macros. Don't modify manually.".to_owned());
@@ -48,7 +48,7 @@ macro_rules! slu_commands_declaration {
             #[cfg(test)]
             #[allow(non_camel_case_types, dead_code)]
             #[derive(Deserialize, TS)]
-            #[ts(export)]
+            #[cfg_attr(feature = "gen-binds", ts(export))]
             enum SeelenCommandArgument {
                 $(
                     #[allow(non_snake_case)]
@@ -63,7 +63,7 @@ macro_rules! slu_commands_declaration {
 
         /// Internal used as mapping of commands to their return types
         #[derive(Serialize, TS)]
-        #[ts(export)]
+        #[cfg_attr(feature = "gen-binds", ts(export))]
         #[allow(non_camel_case_types, dead_code)]
         #[cfg(test)]
         enum SeelenCommandReturn {
