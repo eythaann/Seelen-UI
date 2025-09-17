@@ -54,6 +54,6 @@
   "exclude": [
     "node_modules",
     "dist",
-    "libs/core"
+    "libs/core/**"
   ]
 }

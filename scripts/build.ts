@@ -65,7 +65,7 @@ async function extractIconsIfNecessary() {
   }
 
   tsFile += ";\n";
-  fs.writeFileSync("./src/icons.ts", tsFile);
+  fs.writeFileSync("./libs/widgets-shared/components/Icon/icons.ts", tsFile);
   console.timeEnd("Lazy Icons");
 }
 

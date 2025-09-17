@@ -24,7 +24,7 @@ pre-commit:
     rust-linter:
       priority: 6
       glob: "**/*.rs"
-      run: cargo clippy -- -D warnings
+      run: cargo clippy --all-targets -- -D warnings
 
 pre-push:
   commands:

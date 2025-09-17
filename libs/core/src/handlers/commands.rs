@@ -13,6 +13,7 @@ macro_rules! slu_commands_declaration {
 
         #[cfg(test)]
         impl SeelenCommand {
+            #[cfg(feature = "gen-binds")]
             pub(crate) fn generate_ts_file(path: &str) {
                 let mut content: Vec<String> = std::vec::Vec::new();
 
