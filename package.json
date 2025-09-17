@@ -6,13 +6,14 @@
   "scripts": {
     "tauri": "tauri",
     "tauri:update": "tsx scripts/UpdateTauri.ts",
-    "prepare": "cd ./libs/core && deno task build && cd ../..",
+    "build:ui": "tsx scripts/build.ts",
+    "build:lib": "cd ./libs/core && deno task build && cd ../..",
     "dev": "cargo build && tauri dev",
     "test": "jest --passWithNoTests",
-    "build:ui": "tsx scripts/build.ts",
     "translate": "tsx ./scripts/translate/mod.ts",
     "type-check": "tsc --noEmit",
     "versionish": "tsx ./scripts/versionish.ts",
+    "preinstall": "npm run build:lib",
     "postinstall": "lefthook install"
   },
   "keywords": [],
