@@ -9,12 +9,12 @@ on:
 
 jobs:
   js-test-and-linter:
-    runs-on: windows-2025
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - uses: denoland/setup-deno@v2
@@ -27,13 +27,8 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - run: npm install
-
-      - name: Format
-        run: deno fmt --check
-
-      - name: Linter
-        run: deno lint
-
+      - run: deno fmt --check
+      - run: deno lint
       - run: npm run type-check
       - run: npm run test
 
