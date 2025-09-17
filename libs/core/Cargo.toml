@@ -4,6 +4,9 @@ version = "2.4.4"
 edition = "2021"
 rust-version = "1.89"
 
+[lints]
+workspace = true
+
 [dependencies]
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }

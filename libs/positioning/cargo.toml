@@ -2,6 +2,9 @@
 name = "positioning"
 edition = "2024"
 
+[lints]
+workspace = true
+
 [dependencies]
 thiserror = { workspace = true }
 log = { workspace = true }

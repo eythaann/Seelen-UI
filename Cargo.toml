@@ -1,9 +1,5 @@
 cargo-features = ["profile-rustflags", "codegen-backend"]
 
-[workspace]
-members = ["libs/slu-ipc", "libs/positioning", "libs/core", "src"]
-resolver = "3"
-
 [profile.dev]
 debug = "full"
 strip = "symbols"
@@ -17,6 +13,11 @@ opt-level = "z"
 lto = true
 codegen-units = 1
 rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
+
+[workspace]
+members = ["libs/slu-ipc", "libs/positioning", "libs/core", "src"]
+resolver = "3"
+lints = {}
 
 [workspace.dependencies]
 tokio = "1.47.0"
