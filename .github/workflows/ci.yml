@@ -40,14 +40,17 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2025-09-12
-          components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
 
       - name: Format
-        run: cargo fmt -- --check
+        run: |-
+          rustup component add rustfmt
+          cargo fmt -- --check
 
       - name: Linter
-        run: cargo clippy --locked --all-targets -- -D warnings
+        run: |-
+          rustup component add clippy
+          cargo clippy --locked --all-targets -- -D warnings
 
   rust-test:
     runs-on: windows-2025
