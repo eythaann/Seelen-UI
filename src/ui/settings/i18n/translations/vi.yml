@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Không gian làm việc
     workspace_placeholder: Không có
   bundled_msg: >-
-    Các cấu hình đi kèm này không thể chỉnh sửa và được thiết kế để cung cấp cho
-    bạn trải nghiệm tốt nhất mà không cần tùy chỉnh. Chúng tự động định cấu hình
-    các ứng dụng phổ biến nhất cho bạn.
+    Các cấu hình đi kèm này không thể chỉnh sửa và được thiết kế để cung cấp cho bạn trải nghiệm tốt nhất mà không cần tùy chỉnh. Chúng tự động định cấu hình các ứng dụng phổ biến nhất cho bạn.
   bundled_title: Ứng dụng Cấu hình đi kèm với Seelen
   confirm_delete: Bạn có chắc bạn muốn xóa cấu hình/s này không?
   confirm_delete_title: Xác nhận xóa
@@ -47,9 +45,7 @@ apps_configurations:
   export: Xuất khẩu
   export_full: Cài đặt xuất theo ứng dụng
   extra_info: >-
-    Seelen UI chỉ sử dụng một định danh cho mỗi ứng dụng (tìm thấy trận đấu đầu
-    tiên) vì vậy thứ tự được cụ thể là quan trọng, phần được thêm mới nhất sẽ
-    được ưu tiên, vì ghi chú được sắp xếp theo mặc định từ mới nhất đến cũ.
+    Seelen UI chỉ sử dụng một định danh cho mỗi ứng dụng (tìm thấy trận đấu đầu tiên) vì vậy thứ tự được cụ thể là quan trọng, phần được thêm mới nhất sẽ được ưu tiên, vì ghi chú được sắp xếp theo mặc định từ mới nhất đến cũ.
   identifier:
     add_block: Thêm khối
     and: VÀ
@@ -89,9 +85,7 @@ devtools:
   simulate_fullscreen: Mô phỏng sự kiện toàn màn hình
 extras:
   clear_icons: Xóa bộ đệm biểu tượng hệ thống
-  clear_icons_tooltip: >-
-    Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các
-    tiện ích
+  clear_icons_tooltip: Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các tiện ích
   exit: Thoát/Thoát
   links: Liên kết chính thức
   relaunch: Khởi động lại
@@ -144,7 +138,7 @@ miscellaneous: Linh tinh
 monitors_configurations:
   label: Màn hình {{index}}
 more: Hơn
-'no': KHÔNG
+'no': 'KHÔNG'
 open: Mở
 quit: Từ bỏ
 remove: Di dời
@@ -159,16 +153,14 @@ resources:
   import_wallpapers: Nhập hình nền địa phương
   open_folder: Mở thư mục tài nguyên
   outdated: >-
-    Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không
-    hoạt động đúng.
+    Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không hoạt động đúng.
 save: Cứu
 save_and_restart: Lưu & Khởi động lại
 see_more: Xem thêm
 shortcuts:
   enable: Bật hệ thống phím tắt tích hợp
   enable_tooltip: >-
-    Tắt nếu bạn sẽ triển khai hệ thống phím tắt của riêng mình bằng cách sử dụng
-    ứng dụng UI Seelen
+    Tắt nếu bạn sẽ triển khai hệ thống phím tắt của riêng mình bằng cách sử dụng ứng dụng UI Seelen
   labels:
     create_new_workspace: Tạo không gian làm việc mới
     cycle_stack_next: Chu kỳ ngăn xếp tiếp theo
@@ -219,10 +211,7 @@ sides:
   top: Đứng đầu
 start:
   message: >-
-    Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
-    quản lý Windows được kết hợp để nâng cao trải nghiệm Windows của bạn! Khám
-    phá một kỷ nguyên mới của hiệu quả và đa nhiệm với giao diện trực quan và
-    các tính năng nâng cao của chúng tôi.
+    Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình quản lý Windows được kết hợp để nâng cao trải nghiệm Windows của bạn! Khám phá một kỷ nguyên mới của hiệu quả và đa nhiệm với giao diện trực quan và các tính năng nâng cao của chúng tôi.
   message_accent: Tối ưu hóa năng suất của bạn với phong cách!
   title: Chào mừng!
 toolbar:
@@ -232,8 +221,7 @@ toolbar:
   dock_side: Chức vụ
   dynamic_color: Màu sắc động
   dynamic_color_tooltip: >-
-    Kích hoạt nền động và màu nền dựa trên cửa sổ tập trung. (Màu sắc có thể bị
-    ghi đè bởi các chủ đề)
+    Kích hoạt nền động và màu nền dựa trên cửa sổ tập trung. (Màu sắc có thể bị ghi đè bởi các chủ đề)
   enable: Kích hoạt thanh công cụ ưa thích
   height: Chiều cao
   hide_mode:
@@ -241,7 +229,7 @@ toolbar:
     never: Không bao giờ
     on_overlap: Trên sự chồng chéo
   label: Thanh công cụ
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Hiển thị nút Hibernate trên Menu Power
 update:
   available: Cập nhật có sẵn!
@@ -334,4 +322,4 @@ wm:
   space_between_containers: Không gian giữa các container
   workspace_offset: Không gian làm việc bù (lề)
   workspace_padding: Không gian làm việc đệm
-'yes': Đúng
+'yes': 'Đúng'

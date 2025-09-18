@@ -3,14 +3,12 @@ done: Xong
 drivers:
   got_it: Hiểu rồi
   monitor_disabled: >-
-    Có vẻ như một số trình điều khiển màn hình bị vô hiệu hóa. Vui lòng cho phép
-    họ để Seelen UI hoạt động đúng.
+    Có vẻ như một số trình điều khiển màn hình bị vô hiệu hóa. Vui lòng cho phép họ để Seelen UI hoạt động đúng.
   monitor_disabled_title: Trình điều khiển theo dõi bị vô hiệu hóa
 resource:
   added: Một tài nguyên mới đã được thêm vào
   download_failed_body: >-
-    Có điều gì đó không ổn trong khi tải xuống tài nguyên, vui lòng báo cáo cho
-    nhóm Nhà phát triển Seelen.
+    Có điều gì đó không ổn trong khi tải xuống tài nguyên, vui lòng báo cáo cho nhóm Nhà phát triển Seelen.
   download_failed_title: Tải xuống tài nguyên không thành công
   downloading: Tải xuống tài sản ...
   downloading_body: Điều này có thể mất vài giây, xin vui lòng không đóng cửa sổ.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Giao diện người dùng Seelen yêu cầu Thời gian chạy Webview2. Hãy cài đặt nó.
   outdated: Thời gian chạy WebView2 đã lỗi thời
   outdated_description: >-
-    Giao diện người dùng Seelen yêu cầu Webview2 Runtime %{min_version} trở lên.
-    Hãy cập nhật nó.
+    Giao diện người dùng Seelen yêu cầu Webview2 Runtime %{min_version} trở lên. Hãy cập nhật nó.
 service:
   not_running: Dịch vụ giao diện người dùng Seelen không chạy
   not_running_description: >-
-    Dịch vụ giao diện người dùng Seelen (slu-service) là một công cụ phụ
-    thuộc/trợ giúp để ứng dụng hoạt động bình thường.
+    Dịch vụ giao diện người dùng Seelen (slu-service) là một công cụ phụ thuộc/trợ giúp để ứng dụng hoạt động bình thường.
   not_running_ok: Bắt đầu dịch vụ
 shortcut:
   register:

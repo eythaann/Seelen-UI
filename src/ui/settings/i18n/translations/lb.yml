@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Konschtpas
     workspace_placeholder: Keen
   bundled_msg: >-
-    Dës gebündelt Konfiguratiounen sinn net geännert a sinn entwéckelt fir Iech
-    déi bescht Erfahrung ouni Personnalisatioun ze ginn. Si konfiguréieren
-    automatesch déi heefegst Uwendungen fir Iech.
+    Dës gebündelt Konfiguratiounen sinn net geännert a sinn entwéckelt fir Iech déi bescht Erfahrung ouni Personnalisatioun ze ginn. Si konfiguréieren automatesch déi heefegst Uwendungen fir Iech.
   bundled_title: App con conflüchteg mat Seelen
   confirm_delete: Sidd Dir sécher, datt Dir dës Configuratioun / s läscht braucht?
   confirm_delete_title: Confirméieren Leedung
@@ -47,10 +45,7 @@ apps_configurations:
   export: Export
   export_full: Export Astellunge vun der Uwendung
   extra_info: >-
-    Svelt UI benotzen nëmmen een identifizéierer pro App (Virdeel net fonnt),
-    sou wéi kënne bestëmmten onbestëmmt ass wichteg, well den Dësch bestëmmt
-    gëtt geschafaf, wéi Den Tabell aus alstoën ass, sou wéi den Dësch par
-    rapport ass.
+    Svelt UI benotzen nëmmen een identifizéierer pro App (Virdeel net fonnt), sou wéi kënne bestëmmten onbestëmmt ass wichteg, well den Dësch bestëmmt gëtt geschafaf, wéi Den Tabell aus alstoën ass, sou wéi den Dësch par rapport ass.
   identifier:
     add_block: Füügt Block
     and: An an
@@ -143,7 +138,7 @@ miscellaneous: Erleeën
 monitors_configurations:
   label: Monitor {{index}}
 more: Méi kleng
-'no': Nee
+'no': 'Nee'
 open: Ëmen e gratis
 quit: Ness
 remove: Ofwäschen
@@ -158,16 +153,14 @@ resources:
   import_wallpapers: Import lokal Wallpapers
   open_folder: Oppen Ressource Dossier
   outdated: >-
-    Dës Ressource gouf fir eng méi al Versioun vu seelen UI entworf a sech net
-    richteg schaffen.
+    Dës Ressource gouf fir eng méi al Versioun vu seelen UI entworf a sech net richteg schaffen.
 save: Spuerwäit
 save_and_restart: Spuert & nei starten
 see_more: Méi gesinn
 shortcuts:
   enable: Aktivéiert agebaut-in Shortcuts System
   enable_tooltip: >-
-    Desaktivéiere wann Dir Ären eegene Ofkierzungsystem implementéiert, mat dem
-    Segen UI Client
+    Desaktivéiere wann Dir Ären eegene Ofkierzungsystem implementéiert, mat dem Segen UI Client
   labels:
     create_new_workspace: Neie Aarbechtsberäich erstellen
     cycle_stack_next: Zyklus Stack nieft
@@ -218,10 +211,7 @@ sides:
   top: Uewen
 start:
   message: >-
-    Wëllkomm fir ze gesinn Ui, den ultimativen Desktop Ëmfeld mat engem agebaute
-    Fournisseur Manager fir Är Windows Erfarung ze verbesseren! Entdeckt eng nei
-    Ära vun Effizienz a Multits mat eisen intuitiven Interface a
-    fortgeschratgeschen Features.
+    Wëllkomm fir ze gesinn Ui, den ultimativen Desktop Ëmfeld mat engem agebaute Fournisseur Manager fir Är Windows Erfarung ze verbesseren! Entdeckt eng nei Ära vun Effizienz a Multits mat eisen intuitiven Interface a fortgeschratgeschen Features.
   message_accent: Optimiséiert Är Produktivitéit mam Stil!
   title: Wëllkomm!
 toolbar:
@@ -231,8 +221,7 @@ toolbar:
   dock_side: Positioun un
   dynamic_color: Dynamesch Faarf
   dynamic_color_tooltip: >-
-    Aktivéiert dynamesch Hannergrond a Virdergrond Faarwen baséiert op
-    fokusséiert Fënster. (Faarwen kënne vu Themen iwwerschriwwe ginn)
+    Aktivéiert dynamesch Hannergrond a Virdergrond Faarwen baséiert op fokusséiert Fënster. (Faarwen kënne vu Themen iwwerschriwwe ginn)
   enable: Aktivéiert Fore Toolbar
   height: Héicht
   hide_mode:
@@ -240,7 +229,7 @@ toolbar:
     never: Ni
     on_overlap: Op Iwwerlappung
   label: TO-tcstar
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Show Hibernate Knäppchen op Power Menu
 update:
   available: Update verfügbar!
@@ -333,4 +322,4 @@ wm:
   space_between_containers: Raum tëscht Behälter
   workspace_offset: Workspaces Offset (Rand)
   workspace_padding: Aarbechtsberäich padding
-'yes': Jo
+'yes': 'Jo'

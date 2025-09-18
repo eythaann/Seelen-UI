@@ -3,14 +3,12 @@ done: Анҷом
 drivers:
   got_it: Гир онро
   monitor_disabled: >-
-    Чунин ба назар мерасад, ки баъзе ронандагони мониторинг ғайрифаъоланд.
-    Лутфан ба онҳо имкон диҳед, ки ui дуруст кор кунед.
+    Чунин ба назар мерасад, ки баъзе ронандагони мониторинг ғайрифаъоланд. Лутфан ба онҳо имкон диҳед, ки ui дуруст кор кунед.
   monitor_disabled_title: Мониторинги ронандагон хомӯш карда мешаванд
 resource:
   added: Як манбаи нав илова карда шуд
   download_failed_body: >-
-    Ҳангоми зеркашии манбаъ хато рафт, лутфан онро ба дастаи таҳиякунандаи
-    SELEDENTER хабар диҳед.
+    Ҳангоми зеркашии манбаъ хато рафт, лутфан онро ба дастаи таҳиякунандаи SELEDENTER хабар диҳед.
   download_failed_title: Захира зеркашӣ ноком шуд
   downloading: Зеркашии дороиҳо ...
   downloading_body: Ин метавонад якчанд сонияро талаб кунад, лутфан тирезаро пӯшед.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI вақти Webview2-ро талаб мекунад. Лутфан онро насб кунед.
   outdated: WebView2 Runtime кӯҳна шудааст
   outdated_description: >-
-    UI Seelen Webview2 Runtime %{min_version} ё навтарро талаб мекунад. Лутфан
-    онро навсозӣ кунед.
+    UI Seelen Webview2 Runtime %{min_version} ё навтарро талаб мекунад. Лутфан онро навсозӣ кунед.
 service:
   not_running: Seelen UI Service кор намекунад
   not_running_description: >-
-    Seelen UI Service (slu-service) як вобастагӣ/ёрирасон барои дуруст кор
-    кардани барнома мебошад.
+    Seelen UI Service (slu-service) як вобастагӣ/ёрирасон барои дуруст кор кардани барнома мебошад.
   not_running_ok: Хидматро оғоз кунед
 shortcut:
   register:

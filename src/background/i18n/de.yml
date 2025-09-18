@@ -3,38 +3,30 @@ done: Erledigt
 drivers:
   got_it: Verstanden
   monitor_disabled: >-
-    Es scheint, dass einige Monitortreiber deaktiviert sind. Bitte aktivieren
-    Sie diese, damit Seelen UI richtig funktioniert.
+    Es scheint, dass einige Monitortreiber deaktiviert sind. Bitte aktivieren Sie diese, damit Seelen UI richtig funktioniert.
   monitor_disabled_title: Monitortreiber sind deaktiviert
 resource:
   added: Es wurde eine neue Ressource hinzugefügt
   download_failed_body: >-
-    Beim Herunterladen der Ressource ist ein Fehler aufgetreten. Bitte melden
-    Sie dies dem Seelen-Entwicklerteam.
+    Beim Herunterladen der Ressource ist ein Fehler aufgetreten. Bitte melden Sie dies dem Seelen-Entwicklerteam.
   download_failed_title: Ressourcendownload fehlgeschlagen
   downloading: Herunterladen von Assets...
   downloading_body: Dies kann ein paar Sekunden dauern, bitte schließen Sie das Fenster nicht.
   enable: Aktivieren Sie
 runtime:
   corrupted_data: Beschädigte Daten
-  corrupted_file: >-
-    Eine Konfigurationsdatei ist beschädigt und verwendet stattdessen
-    Standardwerte.
+  corrupted_file: Eine Konfigurationsdatei ist beschädigt und verwendet stattdessen Standardwerte.
   corrupted_file_path: Korrupter Dateipfad
   download: Gehen Sie zur Download-Seite
   not_found: WebView2-Laufzeit nicht gefunden
-  not_found_description: >-
-    Für die Seelen-Benutzeroberfläche ist Webview2 Runtime erforderlich. Bitte
-    installieren Sie es.
+  not_found_description: Für die Seelen-Benutzeroberfläche ist Webview2 Runtime erforderlich. Bitte installieren Sie es.
   outdated: WebView2-Laufzeit veraltet
   outdated_description: >-
-    Für die Seelen-Benutzeroberfläche ist Webview2 Runtime %{min_version} oder
-    höher erforderlich. Bitte aktualisieren Sie es.
+    Für die Seelen-Benutzeroberfläche ist Webview2 Runtime %{min_version} oder höher erforderlich. Bitte aktualisieren Sie es.
 service:
   not_running: Der Seelen-UI-Dienst läuft nicht
   not_running_description: >-
-    Der Seelen UI Service (slu-service) ist eine Abhängigkeit/Helfer für die
-    ordnungsgemäße Funktion der App.
+    Der Seelen UI Service (slu-service) ist eine Abhängigkeit/Helfer für die ordnungsgemäße Funktion der App.
   not_running_ok: Dienst starten
 shortcut:
   register:

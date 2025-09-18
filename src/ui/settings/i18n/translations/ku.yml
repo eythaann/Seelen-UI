@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Workspace
     workspace_placeholder: Netû
   bundled_msg: >-
-    Van konfigurasyonên bundled ne edîtor in û têne çêkirin ku ji we re ezmûna
-    çêtirîn bêyî adetbûnê peyda bikin. Ew bixweber ji bo we serlêdanên herî
-    gelemperî mîheng dikin.
+    Van konfigurasyonên bundled ne edîtor in û têne çêkirin ku ji we re ezmûna çêtirîn bêyî adetbûnê peyda bikin. Ew bixweber ji bo we serlêdanên herî gelemperî mîheng dikin.
   bundled_title: App Confic bi seelen
   confirm_delete: Ma hûn guman dikin ku hûn dixwazin vê konfigurasyonê / s jêbirin?
   confirm_delete_title: DELETE piştrast bikin
@@ -47,8 +45,7 @@ apps_configurations:
   export: Eksport
   export_full: Mîhengên bi serîlêdanê re bikin
   extra_info: >-
-    Selen UI tenê yek nasnameyê bikar tînin (yekem maça ku tê dîtin) ji ber vê
-    yekê fermanê girîng e.
+    Selen UI tenê yek nasnameyê bikar tînin (yekem maça ku tê dîtin) ji ber vê yekê fermanê girîng e.
   identifier:
     add_block: Blok zêde bikin
     and: Û
@@ -88,9 +85,7 @@ devtools:
   simulate_fullscreen: Bûyera tevahî ekranê simule bikin
 extras:
   clear_icons: Îkonên pergala zelal cache
-  clear_icons_tooltip: >-
-    Pêdivî ye ku ji nû ve destpêkirinê were xwestin ku bi tevahî li ser hemî
-    widgetan bandor bike
+  clear_icons_tooltip: Pêdivî ye ku ji nû ve destpêkirinê were xwestin ku bi tevahî li ser hemî widgetan bandor bike
   exit: Qut / derketin
   links: Girêdanên fermî
   relaunch: Berxwedêr
@@ -143,16 +138,14 @@ miscellaneous: Lihevket
 monitors_configurations:
   label: Monitor {{Index-}
 more: Zêde
-'no': Na
+'no': 'Na'
 open: Vekirî
 quit: Devjêberdan
 remove: Dûrxistin
 reset_all_to_default: Hemî nirxên xwerû resen bikin
 reset_to_default: Reset bi nirxa xwerû
 resources:
-  app_outdated: >-
-    Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş
-    bixebite.
+  app_outdated: Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş bixebite.
   delete: Avkaniyê jêbirin
   discover: Zêdetir çavkaniyên kifş bikin
   export: Resouravkaniya Export
@@ -160,16 +153,14 @@ resources:
   import_wallpapers: Dîwarên herêmî yên import bikin
   open_folder: Peldanka çavkaniya vekirî
   outdated: >-
-    Vê çavkaniyê ji bo guhertoyek kevn a Seelen UI hate çêkirin û dibe ku bi
-    rengek baş kar neke.
+    Vê çavkaniyê ji bo guhertoyek kevn a Seelen UI hate çêkirin û dibe ku bi rengek baş kar neke.
 save: Rizgarkirin
 save_and_restart: Save & Restart
 see_more: Bêtir bibînin
 shortcuts:
   enable: Pergala kurtefîlmên çêkirî çalak bikin
   enable_tooltip: >-
-    Heke hûn ê pergala kurteya xwe bi karanîna muwekîlê Seelen UI bikar bînin
-    bicîh bikin
+    Heke hûn ê pergala kurteya xwe bi karanîna muwekîlê Seelen UI bikar bînin bicîh bikin
   labels:
     create_new_workspace: Karê nû nû çêbikin
     cycle_stack_next: Cycle stack next
@@ -220,9 +211,7 @@ sides:
   top: Kop
 start:
   message: >-
-    Welcome to Seelen Ui, hawîrdora desktopê ya paşîn a bi navgînek pencereya bi
-    navgîniya Windows-ê re ku ezmûna Windows zêde bike! Li ser serdemek nû û
-    pirrjimar bi navbeynkariya intuitive û taybetmendiyên pêşkeftî vekolînin.
+    Welcome to Seelen Ui, hawîrdora desktopê ya paşîn a bi navgînek pencereya bi navgîniya Windows-ê re ku ezmûna Windows zêde bike! Li ser serdemek nû û pirrjimar bi navbeynkariya intuitive û taybetmendiyên pêşkeftî vekolînin.
   message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
   title: Bi xêr hatî!
 toolbar:
@@ -232,8 +221,7 @@ toolbar:
   dock_side: Rewş
   dynamic_color: Rengê dînamîkî
   dynamic_color_tooltip: >-
-    Backgroundavdêriya Dînamîk û rengên pêşîn ên li ser bingeha pencereya
-    mijûlkirî çalak bikin. (Colors dikare ji hêla mijaran ve were şandin)
+    Backgroundavdêriya Dînamîk û rengên pêşîn ên li ser bingeha pencereya mijûlkirî çalak bikin. (Colors dikare ji hêla mijaran ve were şandin)
   enable: Vebijêrkek Fancy Vebijêrin
   height: Bilindî
   hide_mode:
@@ -241,7 +229,7 @@ toolbar:
     never: Qet
     on_overlap: Li ser hevgirtinê
   label: Toolbar
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Bişkojka Hibernate li ser menuya hêzê nîşan bide
 update:
   available: Nûvekirin!
@@ -334,4 +322,4 @@ wm:
   space_between_containers: Cîhê di navbera konteyneran de
   workspace_offset: Karûbarên Workspan (Margins)
   workspace_padding: Karên xebitandinê
-'yes': Erê
+'yes': 'Erê'

@@ -56,7 +56,7 @@ notifications:
   settings: Ավելի շատ ծանուցումների պարամետրեր
   title: Ծանուցումներ
 placeholder:
-  battery_remaining: Մնացած
+  battery_remaining: 'Մնացած'
   bluetooth_devices: Bluetooth & սարքեր
   ethernet_connected: Ինտերնետ հասանելիության
   ethernet_disconnected: Ոչ մի ինտերնետ մուտք չկա
@@ -77,7 +77,7 @@ settings:
   sleep: Քնել
   title: Կարգավորումներ
 tray:
-  empty: Ոչ մի սկուտեղի իրեր (Նշում. Windows 10-ը չի իրականացվում)
+  empty: 'Ոչ մի սկուտեղի իրեր (Նշում. Windows 10-ը չի իրականացվում)'
   unlabeled: Unlabelled Tray Icon
 userhome:
   empty_list: Ոչ մի առարկա

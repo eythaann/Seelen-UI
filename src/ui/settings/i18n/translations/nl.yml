@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Werkruimte
     workspace_placeholder: Geen
   bundled_msg: >-
-    Deze gebundelde configuraties zijn niet bewerkbaar en zijn ontworpen om u de
-    beste ervaring zonder aanpassing te bieden. Ze configureren automatisch de
-    meest voorkomende toepassingen voor u.
+    Deze gebundelde configuraties zijn niet bewerkbaar en zijn ontworpen om u de beste ervaring zonder aanpassing te bieden. Ze configureren automatisch de meest voorkomende toepassingen voor u.
   bundled_title: App -configuratie gebundeld met Seelen
   confirm_delete: Weet u zeker dat u deze configuratie(s) wilt verwijderen?
   confirm_delete_title: Bevestig verwijderen
@@ -47,10 +45,7 @@ apps_configurations:
   export: Exporteren
   export_full: Instellingen exporteren per toepassing
   extra_info: >-
-    Seelen UI gebruikt slechts één ID per app (eerste gevonden match), dus de
-    volgorde waarin ze worden gespecificeerd is belangrijk. De laatst
-    toegevoegde krijgt prioriteit, aangezien de tabel standaard wordt gesorteerd
-    van nieuwste naar oude.
+    Seelen UI gebruikt slechts één ID per app (eerste gevonden match), dus de volgorde waarin ze worden gespecificeerd is belangrijk. De laatst toegevoegde krijgt prioriteit, aangezien de tabel standaard wordt gesorteerd van nieuwste naar oude.
   identifier:
     add_block: Block toevoegen
     and: EN
@@ -143,7 +138,7 @@ miscellaneous: Gemengd
 monitors_configurations:
   label: Monitor {{index}}
 more: Meer
-'no': Nee
+'no': 'Nee'
 open: Open
 quit: Afsluiten
 remove: Verwijderen
@@ -158,16 +153,14 @@ resources:
   import_wallpapers: Lokale achtergronden importeren
   open_folder: Map met bronnen openen
   outdated: >-
-    Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
-    mogelijk niet goed.
+    Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt mogelijk niet goed.
 save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 see_more: Meer zien
 shortcuts:
   enable: Schakel ingebouwd snelkoppelsysteem in
   enable_tooltip: >-
-    Schakel uit of u uw eigen snelkoppelsysteem implementeert met behulp van de
-    Selen UI -client
+    Schakel uit of u uw eigen snelkoppelsysteem implementeert met behulp van de Selen UI -client
   labels:
     create_new_workspace: Maak een nieuwe werkruimte
     cycle_stack_next: Cycle Stack Volgende
@@ -218,10 +211,7 @@ sides:
   top: Bovenkant
 start:
   message: >-
-    Welkom bij Seelen UI, de ultieme desktopomgeving met een opgenomen Tiling
-    Windows Manager om uw Windows -ervaring te verbeteren! Verken een nieuw
-    tijdperk van efficiëntie en multitasking met onze intuïtieve interface en
-    geavanceerde functies.
+    Welkom bij Seelen UI, de ultieme desktopomgeving met een opgenomen Tiling Windows Manager om uw Windows -ervaring te verbeteren! Verken een nieuw tijdperk van efficiëntie en multitasking met onze intuïtieve interface en geavanceerde functies.
   message_accent: Optimaliseer uw productiviteit met stijl!
   title: Welkom!
 toolbar:
@@ -231,8 +221,7 @@ toolbar:
   dock_side: Positie
   dynamic_color: Dynamische kleur
   dynamic_color_tooltip: >-
-    Dynamische achtergrond- en voorgrondkleuren inschakelen op basis van het
-    gefocuste venster. (Kleuren kunnen worden overschreven door thema's)
+    Dynamische achtergrond- en voorgrondkleuren inschakelen op basis van het gefocuste venster. (Kleuren kunnen worden overschreven door thema's)
   enable: Schakel fancy werkbalk in
   height: Hoogte
   hide_mode:
@@ -240,7 +229,7 @@ toolbar:
     never: Nooit
     on_overlap: Op overlap
   label: Werkbalk
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Toon slaapstandknop in energiemenu
 update:
   available: Update beschikbaar!
@@ -260,9 +249,7 @@ wall:
   hours: uren
   interval: Verander wallpaper elke
   minutes: notulen
-  no_background: >-
-    Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
-    thema.
+  no_background: Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het thema.
   objectFit: Achtergrond
   objectPosition: Achtergrond Positie
   overlayColor: Overlay Kleur
@@ -273,7 +260,7 @@ wall:
     center: Midden
     left: Links
     right: Rechts
-    top: Top
+    top: Bovenkant
   random: Randomize diavoorstelling
   saturation: Verzadiging
   seconds: seconden
@@ -335,4 +322,4 @@ wm:
   space_between_containers: Ruimte tussen containers
   workspace_offset: Workspaces Offset (marges)
   workspace_padding: Workspaces -vulling
-'yes': Ja
+'yes': 'Ja'

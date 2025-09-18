@@ -37,10 +37,7 @@ apps_configurations:
     workspace: Workspace
     workspace_placeholder: Wala
   bundled_msg: >-
-    Ang mga naka -bundle na mga pagsasaayos ay hindi mai -edit at idinisenyo
-    upang mabigyan ka ng pinakamahusay na karanasan nang walang pagpapasadya.
-    Awtomatiko nilang i -configure ang pinaka -karaniwang mga aplikasyon para sa
-    iyo.
+    Ang mga naka -bundle na mga pagsasaayos ay hindi mai -edit at idinisenyo upang mabigyan ka ng pinakamahusay na karanasan nang walang pagpapasadya. Awtomatiko nilang i -configure ang pinaka -karaniwang mga aplikasyon para sa iyo.
   bundled_title: Ang config ng app na naka -bundle kay Seelen
   confirm_delete: Sigurado ka bang nais mong tanggalin ang pagsasaayos na ito/s?
   confirm_delete_title: Kumpirmahin ang Tanggalin
@@ -48,11 +45,7 @@ apps_configurations:
   export: I -export
   export_full: Mga setting ng pag -export sa pamamagitan ng aplikasyon
   extra_info: >-
-    Ang Seelen UI ay gumagamit lamang ng isang identifier bawat app (unang tugma
-    na natagpuan) kaya ang pagkakasunud -sunod sa kung paano ang tinukoy ay
-    mahalaga, ang pinakabagong idinagdag ay unahin, dahil ang tala ang
-    talahanayan ay pinagsunod -sunod ng default mula sa pinakabagong hanggang sa
-    luma.
+    Ang Seelen UI ay gumagamit lamang ng isang identifier bawat app (unang tugma na natagpuan) kaya ang pagkakasunud -sunod sa kung paano ang tinukoy ay mahalaga, ang pinakabagong idinagdag ay unahin, dahil ang tala ang talahanayan ay pinagsunod -sunod ng default mula sa pinakabagong hanggang sa luma.
   identifier:
     add_block: Magdagdag ng block
     and: At
@@ -92,9 +85,7 @@ devtools:
   simulate_fullscreen: Gayahin ang fullscreen na kaganapan
 extras:
   clear_icons: I -clear ang Mga Icon ng System Cache
-  clear_icons_tooltip: >-
-    Ang isang pag -restart ay maaaring kailanganin upang ganap na maisakatuparan
-    ang lahat ng mga widget
+  clear_icons_tooltip: Ang isang pag -restart ay maaaring kailanganin upang ganap na maisakatuparan ang lahat ng mga widget
   exit: Huminto/exit
   links: Opisyal na mga link
   relaunch: Muling pagsasaayos
@@ -147,16 +138,14 @@ miscellaneous: Miscellaneous
 monitors_configurations:
   label: Subaybayan {{index}}
 more: Higit pa
-'no': Hindi
+'no': 'Hindi'
 open: Buksan
 quit: Huminto ka
 remove: Alisin
 reset_all_to_default: I -reset ang lahat sa mga default na halaga
 reset_to_default: I -reset sa default na halaga
 resources:
-  app_outdated: >-
-    Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
-    Seelen UI upang gumana nang maayos.
+  app_outdated: Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng Seelen UI upang gumana nang maayos.
   delete: Tanggalin ang mapagkukunan
   discover: Tuklasin ang higit pang mga mapagkukunan
   export: Mapagkukunan ng pag -export
@@ -164,16 +153,14 @@ resources:
   import_wallpapers: Mag -import ng mga lokal na wallpaper
   open_folder: Buksan ang folder ng mapagkukunan
   outdated: >-
-    Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
-    Seelen UI at maaaring hindi gumana nang maayos.
+    Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng Seelen UI at maaaring hindi gumana nang maayos.
 save: I -save
 save_and_restart: I -save at i -restart
 see_more: Makita pa
 shortcuts:
   enable: Paganahin ang built-in na mga shortcut system
   enable_tooltip: >-
-    Huwag paganahin kung ipatutupad mo ang iyong sariling sistema ng mga
-    shortcut gamit ang Seelen UI Client
+    Huwag paganahin kung ipatutupad mo ang iyong sariling sistema ng mga shortcut gamit ang Seelen UI Client
   labels:
     create_new_workspace: Lumikha ng bagong workspace
     cycle_stack_next: Susunod na Stack Stack
@@ -224,10 +211,7 @@ sides:
   top: Tuktok
 start:
   message: >-
-    Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
-    may isang isinama na tiling windows manager upang mapahusay ang iyong
-    karanasan sa Windows! Galugarin ang isang bagong panahon ng kahusayan at
-    multitasking sa aming intuitive interface at mga advanced na tampok.
+    Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na may isang isinama na tiling windows manager upang mapahusay ang iyong karanasan sa Windows! Galugarin ang isang bagong panahon ng kahusayan at multitasking sa aming intuitive interface at mga advanced na tampok.
   message_accent: I -optimize ang iyong pagiging produktibo sa estilo!
   title: Maligayang pagdating!
 toolbar:
@@ -237,8 +221,7 @@ toolbar:
   dock_side: Posisyon
   dynamic_color: Dinamikong Kulay
   dynamic_color_tooltip: >-
-    Paganahin ang mga dynamic na background at foreground na kulay batay sa
-    nakatutok na window. (Ang mga kulay ay maaaring ma -overridden ng mga tema)
+    Paganahin ang mga dynamic na background at foreground na kulay batay sa nakatutok na window. (Ang mga kulay ay maaaring ma -overridden ng mga tema)
   enable: Paganahin ang magarbong toolbar
   height: Taas
   hide_mode:
@@ -246,7 +229,7 @@ toolbar:
     never: Hindi kailanman
     on_overlap: Sa overlap
   label: Toolbar
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Ipakita ang pindutan ng hibernate sa menu ng kuryente
 update:
   available: Mag -update Magagamit!
@@ -339,4 +322,4 @@ wm:
   space_between_containers: Puwang sa pagitan ng mga lalagyan
   workspace_offset: Workspaces Offset (Margin)
   workspace_padding: Mga workspaces padding
-'yes': Oo
+'yes': 'Oo'

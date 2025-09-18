@@ -37,8 +37,7 @@ apps_configurations:
     workspace: Ibi-iṣẹ
     workspace_placeholder: Ko si
   bundled_msg: >-
-    Awọn atunto ti a dapọ mọ ko ṣe deede ati pe a ṣe apẹrẹ lati fun ọ ni iriri
-    ti o dara julọ laisi isọdi. Wọn tunto awọn ohun elo ti o wọpọ julọ fun ọ.
+    Awọn atunto ti a dapọ mọ ko ṣe deede ati pe a ṣe apẹrẹ lati fun ọ ni iriri ti o dara julọ laisi isọdi. Wọn tunto awọn ohun elo ti o wọpọ julọ fun ọ.
   bundled_title: Ohun elo app ṣepọ pẹlu Selen
   confirm_delete: Ṣe o da ọ loju pe o fẹ lati pa iṣeto rẹ / s?
   confirm_delete_title: Jẹrisi paarẹ
@@ -46,9 +45,7 @@ apps_configurations:
   export: Firanṣẹ si ilẹ okeere
   export_full: Awọn eto okeere nipasẹ ohun elo
   extra_info: >-
-    Sisen UI Nikan idakan kan fun app (ere akọkọ ti a rii) nitorinaa ni alaye ni
-    pataki, bi a ṣe le ṣe akiyesi tabili ti o wa ni lẹsẹsẹ nipasẹ aiyipada si
-    atijọ.
+    Sisen UI Nikan idakan kan fun app (ere akọkọ ti a rii) nitorinaa ni alaye ni pataki, bi a ṣe le ṣe akiyesi tabili ti o wa ni lẹsẹsẹ nipasẹ aiyipada si atijọ.
   identifier:
     add_block: Fi dègbé
     and: Ati
@@ -141,7 +138,7 @@ miscellaneous: Oriṣiriṣi
 monitors_configurations:
   label: Adirẹsi {{Ṣe atọka}}
 more: Diẹ sii
-'no': Kọ
+'no': 'Kọ'
 open: Ṣii
 quit: Lọ kuro
 remove: Yọkuro
@@ -155,13 +152,15 @@ resources:
   has_update: Imudojuiwọn wa
   import_wallpapers: Gbe awọn iṣẹṣọ ogiri agbegbe wọle
   open_folder: Ṣii folda Ipilẹṣẹ
-  outdated: A ṣe orisun yii fun ẹya atijọ ti Silen Ui ati pe ko le ma ṣiṣẹ daradara.
+  outdated: >-
+    A ṣe orisun yii fun ẹya atijọ ti Silen Ui ati pe ko le ma ṣiṣẹ daradara.
 save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
 see_more: Wo diẹ sii
 shortcuts:
   enable: Mu ṣiṣẹ eto awọn ọna abuja
-  enable_tooltip: Muu Ti o ba yoo ṣe eto awọn ọna ọna abuja tirẹ nipa lilo alajọṣepọ UI
+  enable_tooltip: >-
+    Muu Ti o ba yoo ṣe eto awọn ọna ọna abuja tirẹ nipa lilo alajọṣepọ UI
   labels:
     create_new_workspace: Ṣẹda ibi-iṣẹ tuntun
     cycle_stack_next: Awọn akopọ iyipo atẹle
@@ -212,9 +211,7 @@ sides:
   top: Oke
 start:
   message: >-
-    Kaabọ si Sielen UI, agbegbe tabili ti o gaju pẹlu ipilẹ Windows Manager lati
-    jẹki iriri Windows rẹ! Ṣawari akoko ti o ni ṣiṣe ati multitasking pẹlu wa
-    ati awọn ẹya ti ilọsiwaju.
+    Kaabọ si Sielen UI, agbegbe tabili ti o gaju pẹlu ipilẹ Windows Manager lati jẹki iriri Windows rẹ! Ṣawari akoko ti o ni ṣiṣe ati multitasking pẹlu wa ati awọn ẹya ti ilọsiwaju.
   message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
   title: Kaabọ!
 toolbar:
@@ -224,8 +221,7 @@ toolbar:
   dock_side: Ipo
   dynamic_color: Awọ ti o ni agbara
   dynamic_color_tooltip: >-
-    Mu ipilẹ pada sile ati awọn awọ iwaju ti o da lori window aifọwọyi. (Awọn
-    awọ le ṣe ni agbara nipasẹ awọn akori)
+    Mu ipilẹ pada sile ati awọn awọ iwaju ti o da lori window aifọwọyi. (Awọn awọ le ṣe ni agbara nipasẹ awọn akori)
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
   height: Giga
   hide_mode:
@@ -233,7 +229,7 @@ toolbar:
     never: Kò
     on_overlap: Lori agbekọja
   label: Ọpa irinṣẹ
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Fihan bọtini Hibernate lori Akojọ Akojọ
 update:
   available: Imudojuiwọn wa!
@@ -326,4 +322,4 @@ wm:
   space_between_containers: Aaye laarin awọn apoti
   workspace_offset: Awọn iṣẹ Iṣẹ-iṣẹ (awọn ala)
   workspace_padding: Awọn iṣẹ itasi
-'yes': Bẹẹni
+'yes': 'Bẹẹni'

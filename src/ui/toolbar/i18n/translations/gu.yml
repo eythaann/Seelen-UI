@@ -56,7 +56,7 @@ notifications:
   settings: વધુ સૂચનાઓ સેટિંગ્સ
   title: સૂચના
 placeholder:
-  battery_remaining: બાકી %
+  battery_remaining: 'બાકી %'
   bluetooth_devices: બ્લૂટૂથ અને ઉપકરણો
   ethernet_connected: ઇન્ટરનેટનો ઉપયોગ
   ethernet_disconnected: કોઈ ઇન્ટરનેટ એક્સેસ નથી

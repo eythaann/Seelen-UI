@@ -2,11 +2,13 @@ cancel: キャンセル
 done: 終わり
 drivers:
   got_it: 了解
-  monitor_disabled: 一部のモニタドライバが無効になっているようです。Seelen UIを正しく動作させるには、これらのドライバを有効にしてください。
+  monitor_disabled: >-
+    一部のモニタドライバが無効になっているようです。Seelen UIを正しく動作させるには、これらのドライバを有効にしてください。
   monitor_disabled_title: モニタドライバが無効
 resource:
   added: 新しいリソースが追加されました
-  download_failed_body: リソースのダウンロード中に何か問題が発生しました。
+  download_failed_body: >-
+    リソースのダウンロード中に何か問題が発生しました。
   download_failed_title: リソースのダウンロードに失敗しました
   downloading: 資産のダウンロード...
   downloading_body: ウィンドウを閉じないでください。
@@ -19,10 +21,12 @@ runtime:
   not_found: WebView2 ランタイムが見つかりません
   not_found_description: Seelen UI には Webview2 ランタイムが必要です。インストールしてください。
   outdated: WebView2 ランタイムが古いです
-  outdated_description: Seelen UI には、Webview2 ランタイム %{min_version} 以降が必要です。更新してください。
+  outdated_description: >-
+    Seelen UI には、Webview2 ランタイム %{min_version} 以降が必要です。更新してください。
 service:
   not_running: Seelen UI サービスが実行されていません
-  not_running_description: Seelen UI サービス (slu-service) は、アプリが適切に動作するための依存関係/ヘルパーです。
+  not_running_description: >-
+    Seelen UI サービス (slu-service) は、アプリが適切に動作するための依存関係/ヘルパーです。
   not_running_ok: サービスを開始する
 shortcut:
   register:

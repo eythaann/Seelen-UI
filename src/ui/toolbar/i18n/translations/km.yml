@@ -56,7 +56,7 @@ notifications:
   settings: ការកំណត់ការជូនដំណឹងបន្ថែម
   title: ការជូនដំណឹង
 placeholder:
-  battery_remaining: នៅសល់%
+  battery_remaining: 'នៅសល់%'
   bluetooth_devices: ប៊្លូធូសនិងឧបករណ៍
   ethernet_connected: ការចូលប្រើអ៊ីនធឺណិត
   ethernet_disconnected: គ្មានការចូលប្រើអ៊ីនធឺណិតទេ

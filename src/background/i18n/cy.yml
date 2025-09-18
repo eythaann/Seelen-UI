@@ -3,14 +3,12 @@ done: Wedi gwneud
 drivers:
   got_it: GOT IT
   monitor_disabled: >-
-    Mae'n ymddangos bod rhai gyrwyr monitro yn anabl. Os gwelwch yn dda eu
-    galluogi i adael i Seelen UI weithio'n iawn.
+    Mae'n ymddangos bod rhai gyrwyr monitro yn anabl. Os gwelwch yn dda eu galluogi i adael i Seelen UI weithio'n iawn.
   monitor_disabled_title: Monitro gyrwyr yn anabl
 resource:
   added: Ychwanegwyd adnodd newydd
   download_failed_body: >-
-    Aeth rhywbeth o'i le wrth lawrlwytho'r adnodd, rhowch wybod iddo i dîm
-    datblygwyr Seelen.
+    Aeth rhywbeth o'i le wrth lawrlwytho'r adnodd, rhowch wybod iddo i dîm datblygwyr Seelen.
   download_failed_title: Methodd Lawrlwytho Adnoddau
   downloading: Lawrlwytho asedau ...
   downloading_body: Efallai y bydd hyn yn cymryd ychydig eiliadau, peidiwch â chau'r ffenestr.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Mae Seelen UI angen Amser Rhedeg Webview2. Os gwelwch yn dda gosod.
   outdated: WebView2 Runtime wedi dyddio
   outdated_description: >-
-    Mae Seelen UI angen amser rhedeg Webview2 %{ min_version} neu uwch.
-    Diweddarwch ef.
+    Mae Seelen UI angen amser rhedeg Webview2 %{ min_version} neu uwch. Diweddarwch ef.
 service:
   not_running: Gwasanaeth UI Seelen ddim yn rhedeg
   not_running_description: >-
-    Mae Seelen UI Service (slu-service) yn ddibyniaeth / cynorthwyydd i'r ap
-    weithio'n iawn.
+    Mae Seelen UI Service (slu-service) yn ddibyniaeth / cynorthwyydd i'r ap weithio'n iawn.
   not_running_ok: Dechrau gwasanaeth
 shortcut:
   register:
