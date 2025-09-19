@@ -1,12 +1,10 @@
-use seelen_core::state::Profile;
-
-use crate::{error::Result, utils::constants::SEELEN_COMMON};
+use crate::error::Result;
 
 use super::FullState;
 
 impl FullState {
     pub(super) fn load_profiles(&mut self) -> Result<()> {
-        let user_path = SEELEN_COMMON.user_profiles_path();
+        /* let user_path = SEELEN_COMMON.user_profiles_path();
         for entry in std::fs::read_dir(user_path)?.flatten() {
             let path = entry.path();
             if !path.is_dir() {
@@ -20,7 +18,7 @@ impl FullState {
                     log::error!("Failed to load profile: {e}");
                 }
             }
-        }
+        } */
         Ok(())
     }
 }

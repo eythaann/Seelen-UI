@@ -12,6 +12,14 @@ interface SanboxedComponentProps {
   scope: Record<string, any>;
 }
 
+enum ObjectComponentKind {
+  Icon = "Icon",
+  AppIcon = "AppIcon",
+  Image = "Image",
+  Button = "Button",
+  Group = "Group",
+}
+
 const ComponentCreatorScope = {
   icon: (arg1?: unknown, arg2?: unknown) => {
     return EvaluatedReactIconPropsSchema.parse({
@@ -23,6 +31,7 @@ const ComponentCreatorScope = {
   AppIcon: (arg: unknown) => EvaluatedAppIconPropsSchema.parse(arg),
   Image: (arg: unknown) => EvaluatedImagePropsSchema.parse(arg),
   Button: (arg: unknown) => EvaluatedButtonPropsSchema.parse(arg),
+  Group: (arg: unknown) => EvaluatedGroupPropsSchema.parse(arg),
 };
 
 function compileCode(code: string) {
@@ -51,8 +60,7 @@ function _SanboxedComponent({ code, scope }: SanboxedComponentProps) {
   }
 
   try {
-    const content = compiled.executor({ ...scope, ...ComponentCreatorScope })
-      .run();
+    const content = compiled.executor({ ...scope, ...ComponentCreatorScope }).run();
     return <ElementsFromEvaluated content={content} />;
   } catch (_error) {
     const { env: _, ...rest } = scope;
@@ -80,27 +88,23 @@ function ElementsFromEvaluated({ content }: { content: unknown }) {
         });
       }
 
-      if ("__type" in content) {
-        if (content.__type === "button") {
-          return <EvaluatedButton {...EvaluatedButtonPropsSchema.parse(content)} />;
-        }
-
-        if (content.__type === "react-icon") {
-          return (
-            <EvaluatedReactIcon
-              {...EvaluatedReactIconPropsSchema.parse(content)}
-            />
-          );
-        }
-
-        if (content.__type === "image") {
-          return <EvaluatedImage {...EvaluatedImagePropsSchema.parse(content)} />;
-        }
-
-        if (content.__type === "app-icon") {
-          return <EvaluatedAppIcon {...EvaluatedAppIconPropsSchema.parse(content)} />;
+      if ("@component" in content) {
+        switch (content["@component"]) {
+          case ObjectComponentKind.Icon:
+            return <EvaluatedReactIcon {...EvaluatedReactIconPropsSchema.parse(content)} />;
+          case ObjectComponentKind.AppIcon:
+            return <EvaluatedAppIcon {...EvaluatedAppIconPropsSchema.parse(content)} />;
+          case ObjectComponentKind.Image:
+            return <EvaluatedImage {...EvaluatedImagePropsSchema.parse(content)} />;
+          case ObjectComponentKind.Button:
+            return <EvaluatedButton {...EvaluatedButtonPropsSchema.parse(content)} />;
+          case ObjectComponentKind.Group:
+            return <EvaluatedGroup {...EvaluatedGroupPropsSchema.parse(content)} />;
+          default:
+            return null;
         }
       }
+
       return null;
     default:
       return null;
@@ -109,14 +113,15 @@ function ElementsFromEvaluated({ content }: { content: unknown }) {
 
 type EvaluatedButtonProps = z.infer<typeof EvaluatedButtonPropsSchema>;
 const EvaluatedButtonPropsSchema = z.object({
-  __type: z.literal("button").default("button"),
+  "@component": z.literal(ObjectComponentKind.Button).default(ObjectComponentKind.Button),
+  style: z.record(z.any()).default({}),
   content: z.unknown().nullish(),
   onClick: z.string().nullish(),
 });
-
-function EvaluatedButton({ content, onClick }: EvaluatedButtonProps) {
+function EvaluatedButton({ style, content, onClick }: EvaluatedButtonProps) {
   return (
     <button
+      style={style}
       onClick={() => {
         if (onClick) {
           EvaluateAction(onClick, {});
@@ -130,23 +135,21 @@ function EvaluatedButton({ content, onClick }: EvaluatedButtonProps) {
 
 type EvaluatedReactIconProps = z.infer<typeof EvaluatedReactIconPropsSchema>;
 const EvaluatedReactIconPropsSchema = z.object({
-  __type: z.literal("react-icon").default("react-icon"),
+  "@component": z.literal(ObjectComponentKind.Icon).default(ObjectComponentKind.Icon),
   name: z.string(),
   size: z.number().optional(),
 });
-
 function EvaluatedReactIcon({ name, size }: EvaluatedReactIconProps) {
   return <Icon iconName={name as IconName} size={size} />;
 }
 
 type EvaluatedImageProps = z.infer<typeof EvaluatedImagePropsSchema>;
 const EvaluatedImagePropsSchema = z.object({
-  __type: z.literal("image").default("image"),
+  "@component": z.literal(ObjectComponentKind.Image).default(ObjectComponentKind.Image),
   url: z.string().nullish(),
   path: z.string().nullish(),
   size: z.union([z.string(), z.number()]).default("1rem"),
 });
-
 function EvaluatedImage({ url, path, size }: EvaluatedImageProps) {
   return (
     <img
@@ -158,12 +161,25 @@ function EvaluatedImage({ url, path, size }: EvaluatedImageProps) {
 
 type EvaluatedAppIconProps = z.infer<typeof EvaluatedAppIconPropsSchema>;
 const EvaluatedAppIconPropsSchema = z.object({
-  __type: z.literal("app-icon").default("app-icon"),
+  "@component": z.literal(ObjectComponentKind.AppIcon).default(ObjectComponentKind.AppIcon),
   path: z.string().nullish(),
   umid: z.string().nullish(),
   size: z.union([z.string(), z.number()]).default("1rem"),
 });
-
 function EvaluatedAppIcon({ path, umid, size }: EvaluatedAppIconProps) {
   return <FileIcon path={path} umid={umid} style={{ width: size, height: size }} />;
+}
+
+type EvaluatedGroupProps = z.infer<typeof EvaluatedGroupPropsSchema>;
+const EvaluatedGroupPropsSchema = z.object({
+  "@component": z.literal(ObjectComponentKind.Group).default(ObjectComponentKind.Group),
+  style: z.record(z.any()).default({}),
+  content: z.unknown().nullish(),
+});
+function EvaluatedGroup({ content, style }: EvaluatedGroupProps) {
+  return (
+    <div style={style}>
+      <ElementsFromEvaluated content={content} />
+    </div>
+  );
 }

@@ -1,6 +1,6 @@
 pub mod declaration;
 
-use std::{fs::File, path::Path};
+use std::path::Path;
 
 use declaration::WidgetSettingsDeclarationList;
 use schemars::JsonSchema;
@@ -9,8 +9,8 @@ use ts_rs::TS;
 
 use crate::{
     error::Result,
-    resource::{ConcreteResource, ResourceMetadata, SluResource, SluResourceFile, WidgetId},
-    utils::search_for_metadata_file,
+    resource::{ResourceKind, ResourceMetadata, SluResource, WidgetId},
+    utils::search_resource_entrypoint,
 };
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
@@ -38,6 +38,8 @@ pub struct Widget {
 }
 
 impl SluResource for Widget {
+    const KIND: ResourceKind = ResourceKind::Widget;
+
     fn metadata(&self) -> &ResourceMetadata {
         &self.metadata
     }
@@ -46,28 +48,8 @@ impl SluResource for Widget {
         &mut self.metadata
     }
 
-    fn load_from_file(path: &Path) -> Result<Self> {
-        let extension = path
-            .extension()
-            .ok_or("Invalid widget path extension")?
-            .to_string_lossy();
-
-        let resource = match extension.as_ref() {
-            "yml" | "yaml" => serde_yaml::from_reader(File::open(path)?)?,
-            "json" | "jsonc" => serde_json::from_reader(File::open(path)?)?,
-            "slu" => match SluResourceFile::load(path)?.concrete()? {
-                ConcreteResource::Widget(widget) => widget,
-                _ => return Err("Resource file is not a widget".into()),
-            },
-            _ => {
-                return Err("Invalid widget extension".into());
-            }
-        };
-        Ok(resource)
-    }
-
     fn load_from_folder(path: &Path) -> Result<Widget> {
-        let file = search_for_metadata_file(path).ok_or("No metadata file found")?;
+        let file = search_resource_entrypoint(path).ok_or("No metadata file found")?;
         let mut widget = Self::load_from_file(&file)?;
 
         for stem in ["index.js", "main.js", "mod.js"] {

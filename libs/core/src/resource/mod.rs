@@ -1,16 +1,17 @@
 mod file;
+mod interface;
 mod resource_id;
+mod yaml_ext;
 
 pub use file::*;
+pub use interface::*;
 pub use resource_id::*;
-
-pub use file::SluResourceFile;
+pub use yaml_ext::*;
 
 use std::{
     collections::{HashMap, HashSet},
-    fs::File,
     hash::Hash,
-    path::{Path, PathBuf},
+    path::PathBuf,
 };
 
 use chrono::{DateTime, Utc};
@@ -20,7 +21,7 @@ use ts_rs::TS;
 use url::Url;
 use uuid::Uuid;
 
-use crate::{error::Result, utils::search_for_metadata_file};
+use crate::error::Result;
 
 // =============================================================================
 
@@ -141,6 +142,7 @@ pub enum ResourceAttribute {
 
 // =============================================================================
 
+/// Represents a resource in the cloud, uploaded by a user
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
@@ -192,85 +194,6 @@ impl Resource {
             if map.get("en").is_none() {
                 return Err("missing mandatory english description".into());
             }
-        }
-        Ok(())
-    }
-}
-
-pub trait SluResource: Sized + Serialize {
-    fn metadata(&self) -> &ResourceMetadata;
-    fn metadata_mut(&mut self) -> &mut ResourceMetadata;
-
-    fn load_from_file(path: &Path) -> Result<Self>;
-
-    fn load_from_folder(path: &Path) -> Result<Self>;
-
-    fn sanitize(&mut self) {}
-    fn validate(&self) -> Result<()> {
-        Ok(())
-    }
-
-    fn load(path: &Path) -> Result<Self> {
-        let mut resource = if path.is_dir() {
-            Self::load_from_folder(path)?
-        } else {
-            Self::load_from_file(path)?
-        };
-
-        let meta = resource.metadata_mut();
-        meta.internal.path = path.to_path_buf();
-        meta.internal.filename = path
-            .file_name()
-            .unwrap_or_default()
-            .to_string_lossy()
-            .to_string();
-        meta.internal.written_at = path.metadata()?.modified()?.into();
-
-        resource.sanitize();
-        resource.validate()?;
-        Ok(resource)
-    }
-
-    fn save(&self) -> Result<()> {
-        let mut save_path = self.metadata().internal.path.to_path_buf();
-        if save_path.is_dir() {
-            save_path = search_for_metadata_file(&save_path)
-                .unwrap_or_else(|| save_path.join("metadata.yml"));
-        }
-
-        let extension = save_path
-            .extension()
-            .ok_or("Invalid path extension")?
-            .to_string_lossy()
-            .to_lowercase();
-
-        match extension.as_str() {
-            "slu" => {
-                let mut slu_file = SluResourceFile::load(&save_path)?;
-                slu_file.data = serde_json::to_value(self)?.into();
-                slu_file.store(&save_path)?;
-            }
-            "yml" | "yaml" => {
-                let file = File::create(save_path)?;
-                serde_yaml::to_writer(file, self)?;
-            }
-            "json" | "jsonc" => {
-                let file = File::create(save_path)?;
-                serde_json::to_writer_pretty(file, self)?;
-            }
-            _ => {
-                return Err("Unsupported path extension".into());
-            }
-        }
-        Ok(())
-    }
-
-    fn delete(&self) -> Result<()> {
-        let path = self.metadata().internal.path.to_path_buf();
-        if path.is_dir() {
-            std::fs::remove_dir_all(path)?;
-        } else {
-            std::fs::remove_file(path)?;
         }
         Ok(())
     }

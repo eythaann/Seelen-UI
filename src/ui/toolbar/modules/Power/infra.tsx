@@ -11,20 +11,15 @@ interface Props {
 
 export function PowerModule({ module }: Props) {
   const power = useSelector(Selectors.powerStatus);
-  const powerPlan = useSelector(Selectors.powerPlan);
+  const powerMode = useSelector(Selectors.powerPlan);
   const batteries = useSelector(Selectors.batteries);
-
-  if (!batteries.length) {
-    return null;
-  }
 
   return (
     <Item
       extraVars={{
         power,
-        powerPlan,
+        powerMode,
         batteries,
-        battery: batteries[0],
       }}
       module={module}
     />

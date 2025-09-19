@@ -26,15 +26,18 @@ impl From<serde_json::Value> for TsUnknown {
     }
 }
 
-pub fn search_for_metadata_file(folder: &Path) -> Option<PathBuf> {
-    for entry in std::fs::read_dir(folder).ok()?.flatten() {
-        if entry
-            .file_name()
-            .to_string_lossy()
-            .to_lowercase()
-            .starts_with("metadata")
-        {
-            return Some(entry.path());
+static ALLOWED_ROOT_FILESTEMS: &[&str] = &["metadata", "index", "mod", "main"];
+static ALLOWED_ROOT_EXTENSIONS: &[&str] = &["yml", "yaml", "slu", "json"];
+pub fn search_resource_entrypoint(folder: &Path) -> Option<PathBuf> {
+    if folder.is_file() {
+        return None;
+    }
+    for filestem in ALLOWED_ROOT_FILESTEMS {
+        for extension in ALLOWED_ROOT_EXTENSIONS {
+            let path = folder.join(format!("{filestem}.{extension}"));
+            if path.is_file() {
+                return Some(path);
+            }
         }
     }
     None

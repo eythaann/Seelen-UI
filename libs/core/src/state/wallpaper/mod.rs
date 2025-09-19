@@ -1,14 +1,13 @@
-use std::{fs::File, path::Path};
+use std::path::Path;
 
 use url::Url;
 
 use crate::{
     error::Result,
     resource::{
-        ConcreteResource, InternalResourceMetadata, ResourceMetadata, ResourceText, SluResource,
-        SluResourceFile, WallpaperId,
+        InternalResourceMetadata, ResourceKind, ResourceMetadata, ResourceText, SluResource,
+        WallpaperId,
     },
-    utils::search_for_metadata_file,
 };
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -23,37 +22,14 @@ pub struct Wallpaper {
 }
 
 impl SluResource for Wallpaper {
+    const KIND: ResourceKind = ResourceKind::Wallpaper;
+
     fn metadata(&self) -> &ResourceMetadata {
         &self.metadata
     }
 
     fn metadata_mut(&mut self) -> &mut ResourceMetadata {
         &mut self.metadata
-    }
-
-    fn load_from_file(path: &Path) -> Result<Self> {
-        let extension = path
-            .extension()
-            .ok_or("Invalid theme path extension")?
-            .to_string_lossy();
-
-        let wallpaper = match extension.as_ref() {
-            "yml" | "yaml" => serde_yaml::from_reader(File::open(path)?)?,
-            "json" | "jsonc" => serde_json::from_reader(File::open(path)?)?,
-            "slu" => match SluResourceFile::load(path)?.concrete()? {
-                ConcreteResource::Wallpaper(parsed) => parsed,
-                _ => return Err("Resource file is not a wallpaper".into()),
-            },
-            _ => {
-                return Err("Invalid wallpaper path extension".into());
-            }
-        };
-        Ok(wallpaper)
-    }
-
-    fn load_from_folder(path: &Path) -> Result<Self> {
-        let metadata = search_for_metadata_file(path).ok_or("No metadata file found")?;
-        Self::load_from_file(&metadata)
     }
 }
 

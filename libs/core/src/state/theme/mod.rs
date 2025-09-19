@@ -3,7 +3,7 @@ mod tests;
 
 pub mod config;
 
-use std::{collections::HashMap, fs::File, path::Path};
+use std::{collections::HashMap, path::Path};
 
 use config::ThemeSettingsDefinition;
 use schemars::JsonSchema;
@@ -12,10 +12,8 @@ use ts_rs::TS;
 
 use crate::{
     error::Result,
-    resource::{
-        ConcreteResource, ResourceMetadata, SluResource, SluResourceFile, ThemeId, WidgetId,
-    },
-    utils::search_for_metadata_file,
+    resource::{ResourceKind, ResourceMetadata, SluResource, ThemeId, WidgetId},
+    utils::search_resource_entrypoint,
 };
 
 pub static ALLOWED_STYLE_EXTENSIONS: &[&str] = &["css", "scss", "sass"];
@@ -37,32 +35,14 @@ pub struct Theme {
 }
 
 impl SluResource for Theme {
+    const KIND: ResourceKind = ResourceKind::Theme;
+
     fn metadata(&self) -> &ResourceMetadata {
         &self.metadata
     }
 
     fn metadata_mut(&mut self) -> &mut ResourceMetadata {
         &mut self.metadata
-    }
-
-    fn load_from_file(path: &Path) -> Result<Theme> {
-        let extension = path
-            .extension()
-            .ok_or("Invalid theme path extension")?
-            .to_string_lossy();
-
-        let theme = match extension.as_ref() {
-            "yml" | "yaml" => serde_yaml::from_reader(File::open(path)?)?,
-            "json" | "jsonc" => serde_json::from_reader(File::open(path)?)?,
-            "slu" => match SluResourceFile::load(path)?.concrete()? {
-                ConcreteResource::Theme(theme) => theme,
-                _ => return Err("Resource file is not a theme".into()),
-            },
-            _ => {
-                return Err("Invalid theme path extension".into());
-            }
-        };
-        Ok(theme)
     }
 
     fn load_from_folder(path: &Path) -> Result<Theme> {
@@ -125,7 +105,7 @@ impl SluResource for Theme {
 impl Theme {
     /// Load theme from a folder using old deprecated paths since v2.1.0 will be removed in v3
     fn load_old_folder_schema(path: &Path) -> Result<Theme> {
-        let file = search_for_metadata_file(path).unwrap_or_else(|| {
+        let file = search_resource_entrypoint(path).unwrap_or_else(|| {
             path.join("theme.yml") // backward compatibility to be removed in v3
         });
         let mut theme = Self::load_from_file(&file)?;

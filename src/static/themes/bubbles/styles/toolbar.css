@@ -1,0 +1,23 @@
+.ft-bar-bg-layer-1 {
+  display: none;
+}
+
+.ft-bar-bg-layer-2 {
+  display: none;
+}
+
+.ft-bar-item {
+  color: var(--color-persist-gray-100);
+  background-color: var(--color-persist-gray-900);
+  border-radius: 10px;
+  padding: 2px 8px;
+  height: 25px;
+  transition-property: color, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+
+  &.ft-bar-item-clickable {
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+}

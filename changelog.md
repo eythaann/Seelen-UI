@@ -2,7 +2,13 @@
 
 ## [2.4.4]
 
-## [2.4.4]
+### enhancements
+
+- improve development ecosystem of resources via embedding of yaml files.
+
+### fix
+
+- not considering multiple batteries on setups.
 
 ### refactor
 

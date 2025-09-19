@@ -5,16 +5,12 @@ use std::{
 };
 
 use base64::Engine;
-use serde::{Deserialize, Serialize};
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use ts_rs::TS;
 
-use crate::{
-    error::Result,
-    state::{IconPack, Plugin, Theme, Wallpaper, Widget},
-    utils::TsUnknown,
-};
+use crate::{error::Result, utils::TsUnknown};
 
-use super::{Resource, ResourceKind};
+use super::Resource;
 
 /// A container for Seelen UI resources.
 ///
@@ -26,16 +22,10 @@ use super::{Resource, ResourceKind};
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct SluResourceFile {
     pub version: u32,
+    /// information about the downloaded resource
     pub resource: Resource,
+    /// real resource data to be deserialized on load
     pub data: TsUnknown,
-}
-
-pub enum ConcreteResource {
-    Theme(Theme),
-    Plugin(Plugin),
-    IconPack(IconPack),
-    Widget(Widget),
-    Wallpaper(Wallpaper),
 }
 
 impl SluResourceFile {
@@ -87,7 +77,10 @@ impl SluResourceFile {
         self.encode(&mut file)
     }
 
-    pub fn concrete(&self) -> Result<ConcreteResource> {
+    pub fn try_parse_into<T>(&self) -> Result<T>
+    where
+        T: DeserializeOwned,
+    {
         let mut resource = serde_json::value::Map::new();
 
         resource.insert(
@@ -102,22 +95,7 @@ impl SluResourceFile {
         let data = self.data.0.as_object().ok_or("invalid data")?;
         resource.append(&mut data.clone());
 
-        let concrete = match self.resource.kind {
-            ResourceKind::Theme => {
-                ConcreteResource::Theme(serde_json::from_value(resource.into())?)
-            }
-            ResourceKind::Plugin => {
-                ConcreteResource::Plugin(serde_json::from_value(resource.into())?)
-            }
-            ResourceKind::IconPack => {
-                ConcreteResource::IconPack(serde_json::from_value(resource.into())?)
-            }
-            ResourceKind::Widget => {
-                ConcreteResource::Widget(serde_json::from_value(resource.into())?)
-            }
-            _ => return Err("unsupported resource kind".into()),
-        };
-
-        Ok(concrete)
+        let parsed = serde_json::from_value(resource.into())?;
+        Ok(parsed)
     }
 }

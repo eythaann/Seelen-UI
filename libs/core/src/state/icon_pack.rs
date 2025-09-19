@@ -1,17 +1,10 @@
-use std::{
-    fs::File,
-    path::{Path, PathBuf},
-};
+use std::path::PathBuf;
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
-use crate::{
-    error::Result,
-    resource::{ConcreteResource, IconPackId, ResourceMetadata, SluResource, SluResourceFile},
-    utils::search_for_metadata_file,
-};
+use crate::resource::{IconPackId, ResourceKind, ResourceMetadata, SluResource};
 
 #[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -31,6 +24,8 @@ pub struct IconPack {
 }
 
 impl SluResource for IconPack {
+    const KIND: ResourceKind = ResourceKind::IconPack;
+
     fn metadata(&self) -> &ResourceMetadata {
         &self.metadata
     }
@@ -49,31 +44,6 @@ impl SluResource for IconPack {
             IconPackEntry::Shared(e) => e.icon.is_valid(),
             IconPackEntry::Custom(e) => e.icon.is_valid(),
         })
-    }
-
-    fn load_from_file(path: &Path) -> Result<Self> {
-        let extension = path
-            .extension()
-            .ok_or("Invalid icon pack path extension")?
-            .to_string_lossy();
-
-        let icon_pack = match extension.as_ref() {
-            "yml" | "yaml" => serde_yaml::from_reader(File::open(path)?)?,
-            "json" | "jsonc" => serde_json::from_reader(File::open(path)?)?,
-            "slu" => match SluResourceFile::load(path)?.concrete()? {
-                ConcreteResource::IconPack(resource) => resource,
-                _ => return Err("Resource file is not a icon pack".into()),
-            },
-            _ => {
-                return Err("Invalid icon pack path extension".into());
-            }
-        };
-        Ok(icon_pack)
-    }
-
-    fn load_from_folder(path: &Path) -> Result<Self> {
-        let file = search_for_metadata_file(path).ok_or("No metadata file found")?;
-        Self::load_from_file(&file)
     }
 }
 
