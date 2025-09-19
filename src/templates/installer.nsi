@@ -296,9 +296,9 @@ Function PageLeaveReinstall
     Goto reinst_uninstall
   ${EndIf}
 
-  ; In update mode, always proceeds without uninstalling
+  ; In update mode, always uninstall previous version first to remove old files
   ${If} $UpdateMode = 1
-    Goto reinst_done
+    Goto reinst_uninstall
   ${EndIf}
 
   ; $R0 holds whether same(0)/upgrading(1)/downgrading(-1) version
