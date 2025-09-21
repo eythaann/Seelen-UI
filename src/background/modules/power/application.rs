@@ -1,7 +1,4 @@
-use std::{
-    sync::{Arc, LazyLock},
-    time::Instant,
-};
+use std::sync::{Arc, LazyLock};
 
 use parking_lot::Mutex;
 use seelen_core::system_state::{Battery, PowerMode, PowerStatus};
@@ -16,13 +13,11 @@ use windows::Win32::{
         SystemServices::GUID_BATTERY_PERCENTAGE_REMAINING,
     },
     UI::WindowsAndMessaging::{
-        DEVICE_NOTIFY_CALLBACK, PBT_APMPOWERSTATUSCHANGE, PBT_APMRESUMEAUTOMATIC,
-        PBT_APMRESUMESUSPEND, PBT_APMSUSPEND, WM_POWERBROADCAST,
+        DEVICE_NOTIFY_CALLBACK, PBT_APMPOWERSTATUSCHANGE, WM_POWERBROADCAST,
     },
 };
 
 use crate::{
-    app::get_app_handle,
     error::Result,
     event_manager,
     modules::power::domain::power_mode_to_serializable,
@@ -49,7 +44,6 @@ pub struct PowerManager {
     pub current_power_mode: PowerMode,
     pub batteries: Vec<Battery>,
 
-    pub last_suspend: Option<Instant>,
     power_setting_battery_percent_token: Option<HPOWERNOTIFY>,
     power_mode_event_token: Option<isize>,
 }
@@ -141,41 +135,17 @@ impl PowerManager {
     }
 
     fn on_bg_window_proc(msg: u32, w_param: usize, _l_param: isize) -> Result<()> {
-        if msg != WM_POWERBROADCAST {
-            return Ok(());
-        }
-
-        match w_param as u32 {
-            PBT_APMPOWERSTATUSCHANGE => {
-                let mut guard = trace_lock!(POWER_MANAGER);
-                let new_status = Self::get_power_status()?;
-                if guard.power_status.ac_line_status != new_status.ac_line_status {
-                    let batteries = Self::get_batteries()?;
-                    guard.batteries = batteries.clone();
-                    Self::send(PowerManagerEvent::BatteriesChanged(batteries));
-                }
-                log::trace!("Power status changed to {new_status:?}");
-                guard.power_status = new_status.clone();
-                Self::send(PowerManagerEvent::PowerStatusChanged(new_status));
+        if msg == WM_POWERBROADCAST && w_param as u32 == PBT_APMPOWERSTATUSCHANGE {
+            let mut guard = trace_lock!(POWER_MANAGER);
+            let new_status = Self::get_power_status()?;
+            if guard.power_status.ac_line_status != new_status.ac_line_status {
+                let batteries = Self::get_batteries()?;
+                guard.batteries = batteries.clone();
+                Self::send(PowerManagerEvent::BatteriesChanged(batteries));
             }
-            PBT_APMSUSPEND => {
-                log::info!("System suspended");
-                trace_lock!(POWER_MANAGER).last_suspend = Some(Instant::now());
-            }
-            PBT_APMRESUMESUSPEND => {
-                log::info!("System resumed (PBT_APMRESUMESUSPEND)");
-            }
-            PBT_APMRESUMEAUTOMATIC => {
-                let last_suspend = trace_lock!(POWER_MANAGER).last_suspend.take();
-                let elapsed = last_suspend.unwrap_or_else(Instant::now).elapsed();
-                log::info!(
-                    "System resumed (PBT_APMRESUMEAUTOMATIC) after {}s",
-                    elapsed.as_secs()
-                );
-                // Always restart the app after wake up event
-                get_app_handle().request_restart();
-            }
-            _ => {}
+            log::trace!("Power status changed to {new_status:?}");
+            guard.power_status = new_status.clone();
+            Self::send(PowerManagerEvent::PowerStatusChanged(new_status));
         }
         Ok(())
     }
@@ -194,7 +164,6 @@ impl Default for PowerManager {
             power_status: power_status_to_serializable(SYSTEM_POWER_STATUS::default()),
             current_power_mode: PowerMode::Unknown,
             batteries: Vec::new(),
-            last_suspend: None,
             power_mode_event_token: None,
             power_setting_battery_percent_token: None,
         }

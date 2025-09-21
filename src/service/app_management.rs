@@ -3,7 +3,16 @@ use std::{
     sync::atomic::{AtomicUsize, Ordering},
 };
 
-use windows::Win32::UI::Shell::{FOLDERID_LocalAppData, FOLDERID_Windows};
+use windows::Win32::{
+    Foundation::HANDLE,
+    System::Power::{
+        RegisterSuspendResumeNotification, DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS, HPOWERNOTIFY,
+    },
+    UI::{
+        Shell::{FOLDERID_LocalAppData, FOLDERID_Windows},
+        WindowsAndMessaging::{DEVICE_NOTIFY_CALLBACK, PBT_APMRESUMESUSPEND},
+    },
+};
 
 use crate::{
     enviroment::was_installed_using_msix, error::Result, was_started_from_startup_action,
@@ -47,4 +56,39 @@ pub fn kill_seelen_ui_processes() -> Result<()> {
     }
     GUI_RESTARTED_COUNTER.store(0, Ordering::SeqCst);
     Ok(())
+}
+
+/// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registersuspendresumenotification
+/// https://learn.microsoft.com/en-us/windows/win32/api/powrprof/nc-powrprof-device_notify_callback_routine
+unsafe extern "system" fn power_sleep_resume_proc(
+    _context: *const core::ffi::c_void,
+    event: u32,
+    _setting: *const core::ffi::c_void,
+) -> u32 {
+    log::debug!("Received power event: {event}");
+    if event == PBT_APMRESUMESUSPEND {
+        kill_seelen_ui_processes().unwrap();
+    }
+    0
+}
+
+/// on Dropped will unregister all the handlers
+#[allow(dead_code)]
+pub struct SystemEventHandlers {
+    power: HPOWERNOTIFY,
+}
+
+pub fn start_listening_system_events() -> Result<SystemEventHandlers> {
+    let mut recipient = DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS {
+        Callback: Some(power_sleep_resume_proc),
+        ..Default::default()
+    };
+    let handler = unsafe {
+        RegisterSuspendResumeNotification(
+            HANDLE(&mut recipient as *mut _ as _),
+            DEVICE_NOTIFY_CALLBACK,
+        )
+    }?;
+
+    Ok(SystemEventHandlers { power: handler })
 }

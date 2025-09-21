@@ -18,7 +18,7 @@ use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader, BufWriter};
 
 use crate::{
     error::Result,
-    messages::{IpcResponse, SvcAction, SvcMessage},
+    messages::{IpcResponse, LauncherMessage, SvcAction, SvcMessage},
 };
 
 /// https://learn.microsoft.com/en-us/windows/win32/secauthz/security-descriptor-control
@@ -257,4 +257,76 @@ fn send_to_ipc_stream(stream: &DuplexPipeStream<Bytes>, buf: &[u8]) -> Result<Ip
 
     let response: IpcResponse = bincode::decode_from_slice(&buf, bincode::config::standard())?.0;
     Ok(response)
+}
+
+pub struct LauncherIpc {
+    _priv: (),
+}
+
+impl IPC for LauncherIpc {
+    const PATH: &'static str = r"\\.\pipe\seelen-ui-launcher";
+}
+
+impl LauncherIpc {
+    pub fn start<F>(cb: F) -> Result<()>
+    where
+        F: Fn(LauncherMessage) -> IpcResponse + Send + Sync + 'static,
+    {
+        let mut sd = SecurityDescriptor::new()?;
+        unsafe { sd.set_dacl(std::ptr::null_mut(), false)? };
+        sd.set_control(SE_DACL_PROTECTED, SE_DACL_PROTECTED)?;
+
+        let listener = PipeListenerOptions::new()
+            .path(Self::PATH)
+            .security_descriptor(Some(sd))
+            .create_tokio_duplex::<Bytes>()?;
+
+        tokio::spawn(async move {
+            let cb = Arc::new(cb);
+            while let Ok(stream) = listener.accept().await {
+                let cb = cb.clone();
+                tokio::spawn(async move {
+                    if let Err(err) = Self::process_connection(&stream, cb).await
+                        && let Err(send_err) =
+                            Self::response_to_client(&stream, IpcResponse::Err(err.to_string()))
+                                .await
+                    {
+                        log::error!(
+                            "Failed to send error response: {send_err} || Original error: {err}"
+                        );
+                    }
+                });
+            }
+        });
+        Ok(())
+    }
+
+    async fn response_to_client(
+        stream: &AsyncDuplexPipeStream<Bytes>,
+        res: IpcResponse,
+    ) -> Result<()> {
+        let message = bincode::encode_to_vec(&res, bincode::config::standard())?;
+        write_to_ipc_stream(stream, &message).await
+    }
+
+    async fn process_connection<F>(stream: &AsyncDuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
+    where
+        F: Fn(LauncherMessage) -> IpcResponse + Send + Sync,
+    {
+        let data = read_from_ipc_stream(stream).await?;
+        if data.is_empty() {
+            return Self::response_to_client(stream, IpcResponse::Success).await;
+        }
+        let message: LauncherMessage =
+            bincode::decode_from_slice(&data, bincode::config::standard())?.0;
+        log::trace!("IPC command received: {message:?}");
+        Self::response_to_client(stream, cb(message)).await?;
+        Ok(())
+    }
+
+    pub async fn send(message: LauncherMessage) -> Result<()> {
+        let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
+        let data = bincode::encode_to_vec(&message, bincode::config::standard())?;
+        async_send_to_ipc_stream(&stream, &data).await?.ok()
+    }
 }

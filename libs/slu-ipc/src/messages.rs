@@ -5,6 +5,21 @@ use seelen_core::rect::Rect;
 
 use crate::error::{Error, Result};
 
+#[derive(Debug, Clone, Encode, Decode)]
+pub enum IpcResponse {
+    Success,
+    Err(String),
+}
+
+impl IpcResponse {
+    pub fn ok(self) -> Result<()> {
+        match self {
+            IpcResponse::Success => Ok(()),
+            IpcResponse::Err(err) => Err(Error::IpcResponseError(err)),
+        }
+    }
+}
+
 /// Seelen UI Service Actions
 #[allow(dead_code)]
 #[derive(Debug, Clone, Encode, Decode)]
@@ -56,17 +71,10 @@ impl SvcMessage {
     }
 }
 
-#[derive(Debug, Clone, Encode, Decode)]
-pub enum IpcResponse {
-    Success,
-    Err(String),
-}
+// ========== Launcher ==========
 
-impl IpcResponse {
-    pub fn ok(self) -> Result<()> {
-        match self {
-            IpcResponse::Success => Ok(()),
-            IpcResponse::Err(err) => Err(Error::IpcResponseError(err)),
-        }
-    }
+#[derive(Debug, Clone, Encode, Decode)]
+pub enum LauncherMessage {
+    GuiStarted,
+    Quit,
 }

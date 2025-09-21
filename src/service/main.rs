@@ -26,7 +26,7 @@ use windows::Win32::{Security::SE_TCB_NAME, UI::WindowsAndMessaging::SW_MINIMIZE
 use windows_api::WindowsApi;
 
 use crate::{
-    app_management::launch_seelen_ui,
+    app_management::{launch_seelen_ui, start_listening_system_events},
     enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
     hotkeys::stop_app_shortcuts,
 };
@@ -165,8 +165,9 @@ async fn main() -> Result<()> {
     log::info!("Starting Seelen UI Service");
     log::info!("Arguments: {:?}", std::env::args().collect_vec());
     setup()?;
+    let _handlers = start_listening_system_events()?;
 
-    // wait for stop signal
+    // ===================== wait for stop signal ====================
     let exit_code = rx.recv().await.unwrap_or_default();
 
     // shutdown tasks:

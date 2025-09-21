@@ -9,6 +9,7 @@
 ### fix
 
 - not considering multiple batteries on setups.
+- app not forcing restart on pc sleep/resume.
 
 ### refactor
 
