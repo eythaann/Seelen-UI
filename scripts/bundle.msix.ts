@@ -44,7 +44,7 @@ const installer_msix_path = path.resolve(
 
 // Add manifest
 const manifest = fs
-  .readFileSync("templates/AppxManifest.xml", "utf-8")
+  .readFileSync("src/templates/AppxManifest.xml", "utf-8")
   .replace("{{version}}", appxPackageVersion);
 fs.writeFileSync(`${buildFolder}/AppxManifest.xml`, manifest);
 
