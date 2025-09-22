@@ -138,7 +138,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const tagName = 'nightly';
-            const nightlyVersion = '${{ needs.update-tag.outputs.nightly-version }}';
+            const nightlyVersion = ${{ needs.update-tag.outputs.nightly-version }};
             console.info(`nightlyVersion: ${nightlyVersion}`);
 
             const release = await github.rest.repos.getReleaseByTag({
