@@ -1,12 +1,10 @@
 import { execSync } from "child_process";
 import fs from "fs";
-import glob from "glob";
 import path from "path";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
 import packageJson from "../package.json";
-import tauriConfig from "../src/tauri.conf.json";
 import process from "node:process";
 
 async function getArgs() {
@@ -49,29 +47,15 @@ const manifest = fs
 fs.writeFileSync(`${buildFolder}/AppxManifest.xml`, manifest);
 
 // Add binaries
-fs.copyFileSync(
-  `target/${target}/slu-service.exe`,
-  `${buildFolder}/slu-service.exe`,
-);
-fs.copyFileSync(
-  `target/${target}/seelen-ui.exe`,
-  `${buildFolder}/seelen-ui.exe`,
-);
+fs.copyFileSync(`target/${target}/slu-service.exe`, `${buildFolder}/slu-service.exe`);
+fs.copyFileSync(`target/${target}/seelen-ui.exe`, `${buildFolder}/seelen-ui.exe`);
 
 // Add resources
-tauriConfig.bundle.resources.forEach((pattern) => {
-  let files = glob.sync(pattern, { nodir: true });
-  files.forEach((file) => {
-    fs.mkdirSync(path.dirname(`${buildFolder}/${file}`), { recursive: true });
-    fs.copyFileSync(file, path.resolve(`${buildFolder}/${file}`));
-  });
-});
+fs.cpSync("src/static", `${buildFolder}/static`, { recursive: true });
 
 try {
   // create installer bundle
-  let out = execSync(
-    `msixHeroCli pack -d ${buildFolder} -p ${installer_msix_path}`,
-  );
+  let out = execSync(`msixHeroCli pack -d ${buildFolder} -p ${installer_msix_path}`);
   console.info(out.toString());
 
   // sign installer with local certificate (this is for testing only) store changes the cert in the windows store

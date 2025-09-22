@@ -108,7 +108,7 @@ jobs:
           tagName: nightly
           releaseName: Seelen UI Nightly
           prerelease: true
-          includeDebug: true
+          # includeDebug: true
           args: ${{ matrix.args }}
 
       - name: Bundle MSIX
