@@ -3,13 +3,13 @@ bluetooth:
   cancel: Annuler
   connected: Appareils connectés
   forget: Oublier
-  lowenergy: Faible énergie
-  more: Autres paramètres Bluetooth
+  lowenergy: Faible consommation
+  more: Paramètres Bluetooth avancés
   not_found: Aucun appareil Bluetooth n'a été trouvé
   pair: Appairer
   paired: Appareils sauvegardés
   placeholder:
-    passphrase: Passphrase, code ou PIN
+    passphrase: Code, mot de passe ou PIN
   scanning: Recherche d'appareils
 context_menu:
   add_custom_text: Ajouter un texte personnalisé
@@ -17,43 +17,43 @@ context_menu:
   remove: Retirer le module
   reorder_disable: Verrouiller la barre d'outils
   reorder_enable: Déverrouiller la barre d'outils
-  restore: Rétablir la valeur par défaut
+  restore: Restaurer les valeurs par défaut
   settings: Paramètres
   task_manager: Gestionnaire des tâches
 keyboard:
-  more: Autres paramètres du clavier
+  more: Paramètres avancés de clavier
   title: Disposition du clavier
 media:
   default_multimedia_volume: Volume multimédia
   device:
     channel:
-      system: Sons du système
+      system: Sons système
     comunications: Communications
-    missing: Dispositif manquant
+    missing: Appareil introuvable
     mixer: Mélangeur de volume
     multimedia: Multimédia
-    settings: Autres paramètres de l'appareil
+    settings: Paramètres audio avancés
     volume: Volume de l'appareil
-  input_devices: Dispositifs d'entrée
-  output_devices: Dispositifs de sortie
-  players: Lecteurs multimédias
+  input_devices: Périphériques d'entrée
+  output_devices: Périphériques de sortie
+  players: Lecteurs multimédia
 network:
   available: Réseaux disponibles
-  connect: Connecter
+  connect: Se connecter
   connected: Connecté à
-  disconnect: Déconnecter
-  hidden: Réseau caché
-  more: Plus de paramètres réseau
-  not_found: Aucun réseau trouvé
+  disconnect: Se déconnecter
+  hidden: Réseau masqué
+  more: Paramètres réseau avancés
+  not_found: Aucun réseau Wi-Fi n'a été trouvé
   placeholder:
     password: Mot de passe
   saved: Réseaux enregistrés
   scanning: Recherche de réseaux
-  secured: Réseau crypté
+  secured: Réseau sécurisé
 notifications:
   clear: Tout effacer
   empty: Aucune notification
-  settings: Autres paramètres de notification
+  settings: Paramètres de notification avancés
   title: Notifications
 placeholder:
   battery_remaining: '% restants'
@@ -62,8 +62,8 @@ placeholder:
   ethernet_disconnected: Pas d'accès Internet
   notifications: Notifications
   open_system_tray: Ouvrir la barre d'état système
-  settings: Réglages rapides
-  smart_charge: '- Chargement intelligent'
+  settings: Paramètres rapides
+  smart_charge: '- Charge intelligente'
   volume: Volume
 settings:
   app_settings: Paramètres de l'application
@@ -78,9 +78,9 @@ settings:
   title: Paramètres
 tray:
   empty: >-
-    Pas d'éléments dans la zone de notification (Note : Windows 10 n'est pas
+    Pas d'éléments dans la barre d'état (Note : Windows 10 n'est pas
     supporté)
-  unlabeled: Icône de plateau sans étiquette
+  unlabeled: Icône sans titre
 userhome:
   empty_list: Aucun élément
   folders:
@@ -99,6 +99,7 @@ userhome:
     open_onedrive: Ouvrir le dossier OneDrive
     open_user_folder: Ouvrir le dossier utilisateur
   seelen_options:
-    open_installation_folder: Dossier d'installation de Seelen
-    open_log_folder: Dossier des logs de Seelen
+    open_installation_folder: Ouvrir le dossier des paramètres Seelen
+    open_log_folder: Ouvrir le dossier de logs Seelen
     title: Dossiers Seelen
+    

@@ -1,44 +1,44 @@
 cancel: Annuler
-done: Fait
+done: Terminé
 drivers:
-  got_it: Je l'ai
+  got_it: Compris
   monitor_disabled: >-
-    Il semble que certains pilotes de moniteur soient désactivés. Veuillez les
+    Il semble que certains pilotes graphiques soient désactivés. Veuillez les
     activer pour permettre à Seelen UI de fonctionner correctement.
-  monitor_disabled_title: Les pilotes de moniteur sont désactivés
+  monitor_disabled_title: Les pilotes du moniteur sont désactivés
 resource:
   added: Une nouvelle ressource a été ajoutée
   download_failed_body: >-
     Un problème s'est produit lors du téléchargement de la ressource, veuillez
     le signaler à l'équipe de développeurs de Seelen.
   download_failed_title: Le téléchargement des ressources a échoué
-  downloading: Téléchargement des actifs...
+  downloading: Téléchargement des ressources...
   downloading_body: Cela peut prendre quelques secondes, ne fermez pas la fenêtre.
   enable: Activer
 runtime:
   corrupted_data: Données corrompues
-  corrupted_file: Un fichier de configuration est corrompu et utilise des valeurs par défaut.
-  corrupted_file_path: Chemin d'accès au fichier corrompu
+  corrupted_file: Un fichier de configuration est corrompu, les valeurs par défaut seront utilisées.
+  corrupted_file_path: Chemin du fichier corrompu
   download: Aller à la page de téléchargement
-  not_found: Le moteur d'exécution WebView2 est introuvable
+  not_found: Le runtime WebView2 est introuvable
   not_found_description: >-
     L'interface utilisateur de Seelen nécessite le runtime Webview2. Veuillez
     l'installer.
-  outdated: WebView2 Runtime obsolète
+  outdated: Le runtime WebView2 est obsolète
   outdated_description: >-
-    L'interface utilisateur de Seelen nécessite Webview2 Runtime %{min_version}
-    ou supérieur. Veuillez le mettre à jour.
+    L'interface utilisateur de Seelen nécessite le runtime Webview2 %{min_version}
+    ou une version plus récente. Veuillez le mettre à jour.
 service:
-  not_running: Le service d'interface utilisateur Seelen ne fonctionne pas
+  not_running: Le service Seelen UI n'est pas démarré
   not_running_description: >-
-    Seelen UI Service (slu-service) est une dépendance/une aide permettant à
-    l'application de fonctionner correctement.
+    Seelen UI Service (slu-service) est un processus indispensable au bon fonctionnement
+    de l'application.
   not_running_ok: Démarrer le service
 shortcut:
   register:
     placeholder: Appuyez sur n'importe quelle combinaison de touches
-    title: Enregistrement de nouveaux raccourcis
+    title: Enregistrer un nouveau raccourci
 tray:
-  quit: Arrêter l'application
-  restart: Redémarrer l'interface utilisateur
+  quit: Quitter l'application
+  restart: Redémarrer Seelen UI
   settings: Paramètres
