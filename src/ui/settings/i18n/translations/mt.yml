@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Spazju ta 'xogħol
     workspace_placeholder: Xejn
   bundled_msg: >-
-    Dawn il-konfigurazzjonijiet miġbura mhumiex editabbli u huma mfassla biex
-    jipprovdulek l-aħjar esperjenza mingħajr personalizzazzjoni. Huma
-    awtomatikament jikkonfiguraw l-aktar applikazzjonijiet komuni għalik.
+    Dawn il-konfigurazzjonijiet miġbura mhumiex editabbli u huma mfassla biex jipprovdulek l-aħjar esperjenza mingħajr personalizzazzjoni. Huma awtomatikament jikkonfiguraw l-aktar applikazzjonijiet komuni għalik.
   bundled_title: App konfigurazzjoni miġbura ma 'seelen
   confirm_delete: Int żgur li trid tħassar din il-konfigurazzjoni / i?
   confirm_delete_title: Ikkonferma Ħassar
@@ -47,10 +45,7 @@ apps_configurations:
   export: Esportazzjoni
   export_full: Settings tal-Esportazzjoni skont l-Applikazzjoni
   extra_info: >-
-    Seelen UI tuża identifikatur wieħed biss għal kull app (l-ewwel tqabbil
-    misjub) sabiex l-ordni ta 'kif huma speċifikati hija importanti, l-aħħar
-    miżjuda se tkun prijoritizzata, peress li nnota li t-tabella hija magħżula
-    b'mod awtomatiku mill-aktar tard għall-qadim.
+    Seelen UI tuża identifikatur wieħed biss għal kull app (l-ewwel tqabbil misjub) sabiex l-ordni ta 'kif huma speċifikati hija importanti, l-aħħar miżjuda se tkun prijoritizzata, peress li nnota li t-tabella hija magħżula b'mod awtomatiku mill-aktar tard għall-qadim.
   identifier:
     add_block: Żid blokka
     and: U
@@ -90,9 +85,7 @@ devtools:
   simulate_fullscreen: Issimula avveniment fullscreen
 extras:
   clear_icons: Ikoni tas-sistema ċara cache
-  clear_icons_tooltip: >-
-    Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq
-    il-widgets kollha
+  clear_icons_tooltip: Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq il-widgets kollha
   exit: Nieqaf / ħruġ
   links: Rabtiet uffiċjali
   relaunch: Tnedija mill-ġdid
@@ -145,7 +138,7 @@ miscellaneous: Varji
 monitors_configurations:
   label: Monitor {{indiċi}}
 more: Aktar
-'no': LE
+'no': 'LE'
 open: Miftuħa
 quit: Nieqaf
 remove: Neħħi
@@ -160,16 +153,14 @@ resources:
   import_wallpapers: Importa wallpapers lokali
   open_folder: Folder tar-Riżorsi Miftuħa
   outdated: >-
-    Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u
-    tista' ma taħdimx sew.
+    Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u tista' ma taħdimx sew.
 save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
 see_more: Ara aktar
 shortcuts:
   enable: Ippermetti s-sistema shortcuts inkorporati
   enable_tooltip: >-
-    Itfi jekk timplimentax is-sistema shortcuts tiegħek stess billi tuża
-    l-klijent Seelen UI
+    Itfi jekk timplimentax is-sistema shortcuts tiegħek stess billi tuża l-klijent Seelen UI
   labels:
     create_new_workspace: Oħloq spazju ta 'xogħol ġdid
     cycle_stack_next: Stack Cycle li jmiss
@@ -220,10 +211,7 @@ sides:
   top: Quċċata
 start:
   message: >-
-    Merħba għal Seelen UI, l-ambjent tad-desktop aħħari b'maniġġ tal-Windows
-    tal-madum inkorporat biex itejjeb l-esperjenza tal-Windows tiegħek! Esplora
-    era ġdida ta 'effiċjenza u multitasking bl-interface intuwittiv tagħna u
-    karatteristiċi avvanzati.
+    Merħba għal Seelen UI, l-ambjent tad-desktop aħħari b'maniġġ tal-Windows tal-madum inkorporat biex itejjeb l-esperjenza tal-Windows tiegħek! Esplora era ġdida ta 'effiċjenza u multitasking bl-interface intuwittiv tagħna u karatteristiċi avvanzati.
   message_accent: Ottimizza l-produttività tiegħek bl-istil!
   title: Merħba!
 toolbar:
@@ -233,8 +221,7 @@ toolbar:
   dock_side: Pożizzjoni
   dynamic_color: Kulur dinamiku
   dynamic_color_tooltip: >-
-    Ippermetti l-isfond dinamiku u l-kuluri tat-tagħrif miksub ibbażati fuq
-    tieqa ffokata. (Il-kuluri jistgħu jiġu mwarrba bit-temi)
+    Ippermetti l-isfond dinamiku u l-kuluri tat-tagħrif miksub ibbażati fuq tieqa ffokata. (Il-kuluri jistgħu jiġu mwarrba bit-temi)
   enable: Jippermetti toolbar tal-fancy
   height: Għoli
   hide_mode:
@@ -242,7 +229,7 @@ toolbar:
     never: Qatt
     on_overlap: Fuq koinċidenza
   label: Toolbar
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Uri buttuna Hibernate fuq il-menu tal-qawwa
 update:
   available: Aġġornament disponibbli!
@@ -335,4 +322,4 @@ wm:
   space_between_containers: Spazju bejn il-kontenituri
   workspace_offset: Spazji tax-Xogħol Offset (Marġini)
   workspace_padding: Padding tal-ispazji tax-xogħol
-'yes': IVA
+'yes': 'IVA'

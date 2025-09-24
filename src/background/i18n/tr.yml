@@ -3,38 +3,30 @@ done: Tamamlamak
 drivers:
   got_it: Anladım.
   monitor_disabled: >-
-    Bazı monitör sürücülerinin devre dışı bırakıldığı görülüyor. Seelen UI'nin
-    düzgün çalışması için lütfen bunları etkinleştirin.
+    Bazı monitör sürücülerinin devre dışı bırakıldığı görülüyor. Seelen UI'nin düzgün çalışması için lütfen bunları etkinleştirin.
   monitor_disabled_title: Monitör sürücüleri devre dışı bırakıldı
 resource:
   added: Yeni bir kaynak eklendi
   download_failed_body: >-
-    Kaynak indirilirken bir şeyler ters gitti, lütfen bunu Seelen geliştirici
-    ekibine bildirin.
+    Kaynak indirilirken bir şeyler ters gitti, lütfen bunu Seelen geliştirici ekibine bildirin.
   download_failed_title: Kaynak indirme başarısız oldu
   downloading: Varlıklar indiriliyor...
   downloading_body: Bu işlem birkaç saniye sürebilir, lütfen pencereyi kapatmayın.
   enable: Etkinleştir
 runtime:
   corrupted_data: Bozuk veriler
-  corrupted_file: >-
-    Bir yapılandırma dosyası bozulmuş, bunun yerine varsayılan değerler
-    kullanılıyor.
+  corrupted_file: Bir yapılandırma dosyası bozulmuş, bunun yerine varsayılan değerler kullanılıyor.
   corrupted_file_path: Bozuk dosya yolu
   download: İndirme sayfasına git
   not_found: WebView2 Çalışma Zamanı bulunamadı
-  not_found_description: >-
-    Seelen kullanıcı arayüzü Webview2 Çalışma Zamanı gerektirir. Lütfen
-    yükleyin.
+  not_found_description: Seelen kullanıcı arayüzü Webview2 Çalışma Zamanı gerektirir. Lütfen yükleyin.
   outdated: WebView2 Çalışma Zamanı güncel değil
   outdated_description: >-
-    Seelen kullanıcı arayüzü, Webview2 Çalışma Zamanı %{min_version} veya üstünü
-    gerektirir. Lütfen güncelleyin.
+    Seelen kullanıcı arayüzü, Webview2 Çalışma Zamanı %{min_version} veya üstünü gerektirir. Lütfen güncelleyin.
 service:
   not_running: Seelen UI Hizmeti çalışmıyor
   not_running_description: >-
-    Seelen UI Hizmeti (slu-service), uygulamanın düzgün çalışması için bir
-    bağımlılık/yardımcıdır.
+    Seelen UI Hizmeti (slu-service), uygulamanın düzgün çalışması için bir bağımlılık/yardımcıdır.
   not_running_ok: Hizmeti başlat
 shortcut:
   register:

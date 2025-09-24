@@ -3,36 +3,30 @@ done: Padaryta
 drivers:
   got_it: Turiu
   monitor_disabled: >-
-    Atrodo, kad kai kurios monitoriaus tvarkyklės yra išjungtos. Įjunkite jas,
-    kad "Seelen UI" veiktų tinkamai.
+    Atrodo, kad kai kurios monitoriaus tvarkyklės yra išjungtos. Įjunkite jas, kad "Seelen UI" veiktų tinkamai.
   monitor_disabled_title: Monitoriaus tvarkyklės yra išjungtos
 resource:
   added: Pridėtas naujas išteklius
   download_failed_body: >-
-    Atsisiunčiant išteklių kažkas nepavyko, praneškite apie tai "Seelen" kūrėjų
-    komandai.
+    Atsisiunčiant išteklių kažkas nepavyko, praneškite apie tai "Seelen" kūrėjų komandai.
   download_failed_title: Išteklių atsisiuntimas nepavyko
   downloading: Turto atsisiuntimas...
   downloading_body: Tai gali užtrukti kelias sekundes, todėl neuždarykite lango.
   enable: Įjungti
 runtime:
   corrupted_data: Sugadinti duomenys
-  corrupted_file: >-
-    Konfigūracijos failas sugadintas, vietoj jo naudojamos numatytojo nustatymo
-    reikšmės.
+  corrupted_file: Konfigūracijos failas sugadintas, vietoj jo naudojamos numatytojo nustatymo reikšmės.
   corrupted_file_path: Sugadintas failo kelias
   download: Eikite į atsisiuntimo puslapį
   not_found: WebView2 vykdymo laikas nerastas
-  not_found_description: „Seelen“ vartotojo sąsajai reikalinga „Webview2 Runtime“. Įdiekite jį.
-  outdated: „WebView2“ vykdymo laikas pasenęs
+  not_found_description: '„Seelen“ vartotojo sąsajai reikalinga „Webview2 Runtime“. Įdiekite jį.'
+  outdated: '„WebView2“ vykdymo laikas pasenęs'
   outdated_description: >-
-    „Seelen“ vartotojo sąsajai reikalinga „Webview2 Runtime“ %{min_version} arba
-    naujesnė versija. Prašome atnaujinti.
+    „Seelen“ vartotojo sąsajai reikalinga „Webview2 Runtime“ %{min_version} arba naujesnė versija. Prašome atnaujinti.
 service:
   not_running: Seelen UI paslauga neveikia
   not_running_description: >-
-    Seelen UI paslauga (slu-service) yra priklausomybė / pagalbininkas, kad
-    programa tinkamai veiktų.
+    Seelen UI paslauga (slu-service) yra priklausomybė / pagalbininkas, kad programa tinkamai veiktų.
   not_running_ok: Pradėti paslaugą
 shortcut:
   register:

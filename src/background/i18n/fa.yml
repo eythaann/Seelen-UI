@@ -3,14 +3,12 @@ done: انجام شده
 drivers:
   got_it: آن را
   monitor_disabled: >-
-    به نظر می رسد که برخی از درایورهای مانیتور غیرفعال هستند. لطفاً آنها را فعال
-    کنید تا اجازه دهند Seelen UI به درستی کار کند.
+    به نظر می رسد که برخی از درایورهای مانیتور غیرفعال هستند. لطفاً آنها را فعال کنید تا اجازه دهند Seelen UI به درستی کار کند.
   monitor_disabled_title: رانندگان مانیتور غیرفعال هستند
 resource:
   added: یک منبع جدید اضافه شده است
   download_failed_body: >-
-    هنگام بارگیری منبع ، مشکلی پیش آمد ، لطفاً آن را به تیم توسعه دهنده Seelen
-    گزارش دهید.
+    هنگام بارگیری منبع ، مشکلی پیش آمد ، لطفاً آن را به تیم توسعه دهنده Seelen گزارش دهید.
   download_failed_title: بارگیری منابع ناموفق است
   downloading: بارگیری دارایی ...
   downloading_body: این ممکن است چند ثانیه طول بکشد ، لطفاً پنجره را ببندید.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: رابط کاربری Seelen به Webview2 Runtime نیاز دارد. لطفا آن را نصب کنید.
   outdated: WebView2 Runtime قدیمی شده است
   outdated_description: >-
-    رابط کاربری Seelen به Webview2 Runtime %{min_version} یا بالاتر نیاز دارد.
-    لطفا آن را به روز کنید.
+    رابط کاربری Seelen به Webview2 Runtime %{min_version} یا بالاتر نیاز دارد. لطفا آن را به روز کنید.
 service:
   not_running: سرویس رابط کاربری Seelen اجرا نمی شود
   not_running_description: >-
-    سرویس UI Seelen (سرویس slu) یک وابستگی / کمک کننده برای عملکرد صحیح برنامه
-    است.
+    سرویس UI Seelen (سرویس slu) یک وابستگی / کمک کننده برای عملکرد صحیح برنامه است.
   not_running_ok: سرویس را شروع کنید
 shortcut:
   register:

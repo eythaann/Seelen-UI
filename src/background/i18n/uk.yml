@@ -3,38 +3,30 @@ done: Виконаний
 drivers:
   got_it: Зрозумів.
   monitor_disabled: >-
-    Здається, деякі драйвери моніторів вимкнено. Будь ласка, увімкніть їх, щоб
-    інтерфейс Seelen працював належним чином.
+    Здається, деякі драйвери моніторів вимкнено. Будь ласка, увімкніть їх, щоб інтерфейс Seelen працював належним чином.
   monitor_disabled_title: Драйвери монітора вимкнено
 resource:
   added: Додано новий ресурс
   download_failed_body: >-
-    Під час завантаження ресурсу сталася помилка, будь ласка, повідомте про неї
-    команді розробників Seelen.
+    Під час завантаження ресурсу сталася помилка, будь ласка, повідомте про неї команді розробників Seelen.
   download_failed_title: Не вдалося завантажити ресурс
   downloading: Завантаження активів...
   downloading_body: Це може зайняти кілька секунд, будь ласка, не закривайте вікно.
   enable: Увімкнути
 runtime:
   corrupted_data: Пошкоджені дані
-  corrupted_file: >-
-    Файл конфігурації пошкоджено, замість нього використовуються значення за
-    замовчуванням.
+  corrupted_file: Файл конфігурації пошкоджено, замість нього використовуються значення за замовчуванням.
   corrupted_file_path: Неправильний шлях до файлу
   download: Перейдіть на сторінку завантаження
   not_found: WebView2 Runtime не знайдено
-  not_found_description: >-
-    Інтерфейс користувача Seelen потребує Webview2 Runtime. Будь ласка,
-    встановіть його.
+  not_found_description: Інтерфейс користувача Seelen потребує Webview2 Runtime. Будь ласка, встановіть його.
   outdated: WebView2 Runtime застаріла
   outdated_description: >-
-    Інтерфейс користувача Seelen вимагає Webview2 Runtime %{min_version} або
-    новішої версії. Будь ласка, оновіть його.
+    Інтерфейс користувача Seelen вимагає Webview2 Runtime %{min_version} або новішої версії. Будь ласка, оновіть його.
 service:
   not_running: Служба інтерфейсу користувача Seelen не працює
   not_running_description: >-
-    Seelen UI Service (slu-service) — це залежність/помічник для належної роботи
-    програми.
+    Seelen UI Service (slu-service) — це залежність/помічник для належної роботи програми.
   not_running_ok: Запустити службу
 shortcut:
   register:

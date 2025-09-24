@@ -3,14 +3,12 @@ done: Dank
 drivers:
   got_it: Min girt
   monitor_disabled: >-
-    Ew xuya dike ku hin ajokarên çavdêriyê neçalak in. Ji kerema xwe wan çalak
-    bikin da ku dev ji SEELEN UI bi rengek baş bixebitin.
+    Ew xuya dike ku hin ajokarên çavdêriyê neçalak in. Ji kerema xwe wan çalak bikin da ku dev ji SEELEN UI bi rengek baş bixebitin.
   monitor_disabled_title: Ajokarên çavdêriyê neçalak in
 resource:
   added: Resavkaniyek nû hatiye zêdekirin
   download_failed_body: >-
-    Di dema dakêşandina çavkaniyê de tiştek çewt derbas bû, ji kerema xwe ew ji
-    tîmê pêşdebirên Seelen re ragihînin.
+    Di dema dakêşandina çavkaniyê de tiştek çewt derbas bû, ji kerema xwe ew ji tîmê pêşdebirên Seelen re ragihînin.
   download_failed_title: Daxistina çavkaniyê têk çû
   downloading: Daxistina Assets ...
   downloading_body: Ev dibe ku çend hûrdeman bigire, ji kerema xwe pencereyê bigire.
@@ -24,13 +22,11 @@ runtime:
   not_found_description: Seelen UI hewceyê Webview2 Runtime hewce dike. Ji kerema xwe saz bikin.
   outdated: WebView2 Runtime kevn bûye
   outdated_description: >-
-    Seelen UI ji Webview2 Runtime %{min_version} an mezintir hewce dike. Ji
-    kerema xwe wê nûve bikin.
+    Seelen UI ji Webview2 Runtime %{min_version} an mezintir hewce dike. Ji kerema xwe wê nûve bikin.
 service:
   not_running: Karûbarê UI ya Seelen nayê xebitandin
   not_running_description: >-
-    Xizmeta UI ya Seelen (slu-xizmet) ji bo ku sepan bi rêkûpêk bixebite
-    pêwendiyek / arîkarek e.
+    Xizmeta UI ya Seelen (slu-xizmet) ji bo ku sepan bi rêkûpêk bixebite pêwendiyek / arîkarek e.
   not_running_ok: Xizmetê dest pê bikin
 shortcut:
   register:

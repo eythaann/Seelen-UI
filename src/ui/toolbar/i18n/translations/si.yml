@@ -56,7 +56,7 @@ notifications:
   settings: දැනුම්දීම් සැකසුම්
   title: දැනුම්දීම්
 placeholder:
-  battery_remaining: ඉතිරි% ඉතිරිව ඇත
+  battery_remaining: 'ඉතිරි% ඉතිරිව ඇත'
   bluetooth_devices: බ්ලූටූත් සහ උපාංග
   ethernet_connected: අන්තර්ජාල පිවිසුම
   ethernet_disconnected: අන්තර්ජාල ප්රවේශයක් නොමැත

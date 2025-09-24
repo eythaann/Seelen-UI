@@ -3,36 +3,30 @@ done: Готово
 drivers:
   got_it: Го добив
   monitor_disabled: >-
-    Се чини дека некои возачи на монитори се оневозможени. Ве молиме, овозможете
-    им да им дозволите на Seelen UI да работи правилно.
+    Се чини дека некои возачи на монитори се оневозможени. Ве молиме, овозможете им да им дозволите на Seelen UI да работи правилно.
   monitor_disabled_title: Возачите на монитор се оневозможени
 resource:
   added: Додаден е нов ресурс
   download_failed_body: >-
-    Нешто тргна наопаку додека го преземате ресурсот, ве молиме пријавете го во
-    тимот за развивачи на Селен.
+    Нешто тргна наопаку додека го преземате ресурсот, ве молиме пријавете го во тимот за развивачи на Селен.
   download_failed_title: Преземањето на ресурсите не успеа
   downloading: Преземање средства ...
   downloading_body: Ова може да потрае неколку секунди, ве молиме, не затворајте го прозорецот.
   enable: Овозможи
 runtime:
   corrupted_data: Расипани податоци
-  corrupted_file: >-
-    Датотеката за конфигурација е расипана, наместо тоа, користејќи стандардни
-    вредности.
+  corrupted_file: Датотеката за конфигурација е расипана, наместо тоа, користејќи стандардни вредности.
   corrupted_file_path: Расипана патека на датотеки
   download: Одете на страницата за преземање
   not_found: WebView2 Runtime не е пронајдено
   not_found_description: Seelen UI бара Webview2 Runtime. Ве молиме инсталирајте го.
   outdated: WebView2 Runtime е застарено
   outdated_description: >-
-    Seelen UI бара Webview2 Runtime %{min_version} или повисоко. Ве молиме
-    ажурирајте го.
+    Seelen UI бара Webview2 Runtime %{min_version} или повисоко. Ве молиме ажурирајте го.
 service:
   not_running: Селенската UI услуга не работи
   not_running_description: >-
-    Seelen UI Service (slu-service) е зависност/помошник за апликацијата да
-    работи правилно.
+    Seelen UI Service (slu-service) е зависност/помошник за апликацијата да работи правилно.
   not_running_ok: Започнете ја услугата
 shortcut:
   register:

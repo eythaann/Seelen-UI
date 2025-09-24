@@ -56,7 +56,7 @@ notifications:
   settings: მეტი შეტყობინებების პარამეტრები
   title: შეტყობინებები
 placeholder:
-  battery_remaining: დარჩენილი
+  battery_remaining: 'დარჩენილი'
   bluetooth_devices: Bluetooth & მოწყობილობები
   ethernet_connected: ინტერნეტი
   ethernet_disconnected: ინტერნეტი არ არის

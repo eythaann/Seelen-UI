@@ -25,7 +25,7 @@ taskbar_menu:
   add_folder: 사용자 정의 폴더 추가
   media: 미디어 모듈 추가
   settings: 설정
-  start: 시작 버튼 추가
+  start: 시작 모듈 추가
   task_manager: 작업 관리자
 weg:
   empty: 표시할 항목이 없습니다.

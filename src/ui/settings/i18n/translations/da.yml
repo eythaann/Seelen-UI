@@ -37,9 +37,7 @@ apps_configurations:
     workspace: Arbejdsområde
     workspace_placeholder: Ingen
   bundled_msg: >-
-    Disse samlede konfigurationer kan ikke redigeres og er designet til at give
-    dig den bedste oplevelse uden tilpasning. De konfigurerer automatisk de mest
-    almindelige applikationer til dig.
+    Disse samlede konfigurationer kan ikke redigeres og er designet til at give dig den bedste oplevelse uden tilpasning. De konfigurerer automatisk de mest almindelige applikationer til dig.
   bundled_title: App Config bundtet med Seelen
   confirm_delete: Er du sikker på, at du vil slette denne konfiguration/er?
   confirm_delete_title: Bekræft slet
@@ -47,10 +45,7 @@ apps_configurations:
   export: Eksport
   export_full: Eksporter indstillinger efter program
   extra_info: >-
-    Seelen UI bruger kun én identifikator pr. app (første match fundet), så
-    rækkefølgen i, hvordan de specificeres, er vigtig, det senest tilføjede vil
-    blive prioriteret, da bemærk, at tabellen er sorteret som standard fra
-    seneste til gammel.
+    Seelen UI bruger kun én identifikator pr. app (første match fundet), så rækkefølgen i, hvordan de specificeres, er vigtig, det senest tilføjede vil blive prioriteret, da bemærk, at tabellen er sorteret som standard fra seneste til gammel.
   identifier:
     add_block: Tilføj blok
     and: OG
@@ -143,7 +138,7 @@ miscellaneous: Diverse
 monitors_configurations:
   label: Monitor {{index}}
 more: Mere
-'no': Ingen
+'no': 'Ingen'
 open: Åben
 quit: Afslut
 remove: Fjerne
@@ -158,16 +153,14 @@ resources:
   import_wallpapers: Importer lokale baggrunde
   open_folder: Åbn ressourcemappen
   outdated: >-
-    Denne ressource er designet til en ældre version af Seelen UI og fungerer
-    muligvis ikke korrekt.
+    Denne ressource er designet til en ældre version af Seelen UI og fungerer muligvis ikke korrekt.
 save: Gemme
 save_and_restart: Gem & genstart
 see_more: Se mere
 shortcuts:
   enable: Aktivér det indbyggede genvejssystem
   enable_tooltip: >-
-    Deaktiver, hvis du vil implementere dit eget genvejssystem ved hjælp af
-    Seelen UI Client
+    Deaktiver, hvis du vil implementere dit eget genvejssystem ved hjælp af Seelen UI Client
   labels:
     create_new_workspace: Opret et nyt arbejdsområde
     cycle_stack_next: Cyklus-stak Næste
@@ -215,13 +208,10 @@ sides:
   bottom: Bund
   left: Venstre
   right: Højre
-  top: Top
+  top: Til toppen
 start:
   message: >-
-    Velkommen til Seelen UI, det ultimative desktopmiljø med en inkorporeret
-    Flising Windows Manager for at forbedre din Windows -oplevelse! Udforsk en
-    ny æra med effektivitet og multitasking med vores intuitive interface og
-    avancerede funktioner.
+    Velkommen til Seelen UI, det ultimative desktopmiljø med en inkorporeret Flising Windows Manager for at forbedre din Windows -oplevelse! Udforsk en ny æra med effektivitet og multitasking med vores intuitive interface og avancerede funktioner.
   message_accent: Optimer din produktivitet med stil!
   title: Velkommen!
 toolbar:
@@ -231,8 +221,7 @@ toolbar:
   dock_side: Position
   dynamic_color: Dynamisk farve
   dynamic_color_tooltip: >-
-    Aktivér dynamiske baggrunds- og forgrundsfarver baseret på det fokuserede
-    vindue. (Farver kan tilsidesættes af temaer)
+    Aktivér dynamiske baggrunds- og forgrundsfarver baseret på det fokuserede vindue. (Farver kan tilsidesættes af temaer)
   enable: Aktivér fancy værktøjslinje
   height: Højde
   hide_mode:
@@ -240,7 +229,7 @@ toolbar:
     never: Aldrig
     on_overlap: På overlapning
   label: Værktøjslinje
-  placeholder: {}
+  placeholder: { }
   show_hibernate: Vis dvale-knap i strøm-menuen
 update:
   available: Opdatering tilgængelig!
@@ -333,4 +322,4 @@ wm:
   space_between_containers: Rum mellem containere
   workspace_offset: Arbejdsområder offset (marginer)
   workspace_padding: Arbejdsområder polstring
-'yes': Ja
+'yes': 'Ja'

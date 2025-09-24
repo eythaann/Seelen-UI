@@ -3,36 +3,30 @@ done: გაკეთებული
 drivers:
   got_it: მიიღო
   monitor_disabled: >-
-    როგორც ჩანს, ზოგიერთი მონიტორის მძღოლი გამორთულია. გთხოვთ, გაუშვათ, რომ
-    Seelen UI- ს სწორად იმუშაონ.
+    როგორც ჩანს, ზოგიერთი მონიტორის მძღოლი გამორთულია. გთხოვთ, გაუშვათ, რომ Seelen UI- ს სწორად იმუშაონ.
   monitor_disabled_title: მონიტორის მძღოლები გამორთულია
 resource:
   added: დაემატა ახალი რესურსი
   download_failed_body: >-
-    რესურსის ჩამოტვირთვისას რამე არასწორედ დასრულდა, გთხოვთ, შეატყობინოთ მას
-    Seelen Developer- ის გუნდს.
+    რესურსის ჩამოტვირთვისას რამე არასწორედ დასრულდა, გთხოვთ, შეატყობინოთ მას Seelen Developer- ის გუნდს.
   download_failed_title: რესურსის ჩამოტვირთვა ვერ მოხერხდა
   downloading: აქტივების ჩამოტვირთვა ...
   downloading_body: ამას შეიძლება რამდენიმე წამი დასჭირდეს, გთხოვთ, არ დახუროთ ფანჯარა.
   enable: შესაძლებლობის მიცემა
 runtime:
   corrupted_data: კორუმპირებული მონაცემები
-  corrupted_file: >-
-    კონფიგურაციის ფაილი კორუმპირებულია, ამის ნაცვლად ნაგულისხმევი მნიშვნელობების
-    გამოყენებით.
+  corrupted_file: კონფიგურაციის ფაილი კორუმპირებულია, ამის ნაცვლად ნაგულისხმევი მნიშვნელობების გამოყენებით.
   corrupted_file_path: კორუმპირებული ფაილის გზა
   download: გადადით ჩამოტვირთვის გვერდზე
   not_found: WebView2 Runtime ვერ მოიძებნა
   not_found_description: Seelen UI მოითხოვს Webview2 Runtime-ს. გთხოვთ დააინსტალიროთ.
   outdated: WebView2 Runtime მოძველებულია
   outdated_description: >-
-    Seelen UI მოითხოვს Webview2 Runtime %{min_version} ან უფრო მაღალს. გთხოვთ
-    განაახლოთ იგი.
+    Seelen UI მოითხოვს Webview2 Runtime %{min_version} ან უფრო მაღალს. გთხოვთ განაახლოთ იგი.
 service:
   not_running: Seelen UI სერვისი არ მუშაობს
   not_running_description: >-
-    Seelen UI Service (slu-service) არის დამოკიდებულება/დამხმარე აპის გამართულად
-    მუშაობისთვის.
+    Seelen UI Service (slu-service) არის დამოკიდებულება/დამხმარე აპის გამართულად მუშაობისთვის.
   not_running_ok: სერვისის დაწყება
 shortcut:
   register:
