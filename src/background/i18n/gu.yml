@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: કોઈપણ કી સંયોજન દબાવો
     title: નવી શોર્ટકટ નોંધણી
-tray:
-  quit: છોડી દેવું
-  restart: UI ફરીથી પ્રારંભ કરો
-  settings: પતાવટ
