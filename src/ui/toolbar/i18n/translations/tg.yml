@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Дастрасии Интернет
   ethernet_disconnected: Дастрасии Интернет надорад
   notifications: Огоҳиҳо
-  open_system_tray: Пойгоҳи системаро кушоед
   settings: Танзимоти фаврӣ
   smart_charge: '- СПАЛ'
   volume: Баланд
@@ -76,9 +75,6 @@ settings:
   shutdown: Пӯшида шудан
   sleep: Хоб
   title: Танзимот
-tray:
-  empty: 'Ягон ҷузъҳои табақе (Эзоҳ: Windows 10 иҷро карда намешавад)'
-  unlabeled: Тасвири табақаи ғайриқонунӣ
 userhome:
   empty_list: Ҳеҷ чиз нест
   folders:
