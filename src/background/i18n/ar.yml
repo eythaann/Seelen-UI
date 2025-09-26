@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: اضغط على أي مجموعة مفاتيح
     title: تسجيل اختصار جديد
-tray:
-  quit: الإقلاع عن التدخين
-  restart: إعادة تشغيل واجهة المستخدم
-  settings: الإعدادات
