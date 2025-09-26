@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Tekan sebarang gabungan kekunci
     title: Mendaftarkan pintasan baru
-tray:
-  quit: Berhenti
-  restart: Mulakan semula ui
-  settings: Tetapan
