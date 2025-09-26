@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Притиснете која било комбинација на копче
     title: Регистрирање на нова кратенка
-tray:
-  quit: Откажете се
-  restart: Рестартирај UI
-  settings: Поставки
