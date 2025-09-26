@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Ինտերնետ հասանելիության
   ethernet_disconnected: Ոչ մի ինտերնետ մուտք չկա
   notifications: Ծանուցումներ
-  open_system_tray: Բաց համակարգի սկուտեղ
   settings: Արագ պարամետրեր
   smart_charge: '- Խելացի վճար'
   volume: Ծավալ
@@ -76,9 +75,6 @@ settings:
   shutdown: Անջատել
   sleep: Քնել
   title: Կարգավորումներ
-tray:
-  empty: 'Ոչ մի սկուտեղի իրեր (Նշում. Windows 10-ը չի իրականացվում)'
-  unlabeled: Unlabelled Tray Icon
 userhome:
   empty_list: Ոչ մի առարկա
   folders:
