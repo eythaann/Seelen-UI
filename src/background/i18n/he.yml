@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: לחץ על כל שילוב מקשים
     title: רישום קיצור דרך חדש
-tray:
-  quit: צא
-  restart: הפעל מחדש את UI
-  settings: הגדרות
