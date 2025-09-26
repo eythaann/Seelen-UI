@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: достъп до интернет
   ethernet_disconnected: Няма достъп до интернет
   notifications: Известия
-  open_system_tray: Отворена система табла
   settings: Бързи настройки
   smart_charge: '- Smart Charge'
   volume: Сила на звука
@@ -76,9 +75,6 @@ settings:
   shutdown: Изключвам
   sleep: Сън
   title: Настройки
-tray:
-  empty: 'Няма елементи в таблата (Забележка: Windows 10 не е въведена)'
-  unlabeled: Икона на тава без етикет
 userhome:
   empty_list: Няма артикули
   folders:
