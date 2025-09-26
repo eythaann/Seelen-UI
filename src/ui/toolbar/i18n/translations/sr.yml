@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Приступ интернету
   ethernet_disconnected: Нема приступа интернету
   notifications: Обавештења
-  open_system_tray: Отворите лежиште за систем
   settings: Брза подешавања
   smart_charge: '- паметно набој'
   volume: Запремина
@@ -76,9 +75,6 @@ settings:
   shutdown: Искључити
   sleep: Спавати
   title: Подешавања
-tray:
-  empty: 'Нема ставки за ладице (Напомена: Виндовс 10 се не спроводи)'
-  unlabeled: Икона за отпадне траи
 userhome:
   empty_list: Нема предмета
   folders:
