@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: დააჭირეთ ნებისმიერ საკვანძო კომბინაციას
     title: ახალი მალსახმობის რეგისტრაცია
-tray:
-  quit: მიტოვება
-  restart: გადატვირთეთ UI
-  settings: პარამეტრები
