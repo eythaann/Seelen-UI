@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Ukufinyelela i-Inthanethi
   ethernet_disconnected: Akukho ukufinyelela kwe-inthanethi
   notifications: Izaziso
-  open_system_tray: I-Open System Tray
   settings: Izilungiselelo ezisheshayo
   smart_charge: '- Ukushaja okuhle'
   volume: Ukuvimbanisa
@@ -76,9 +75,6 @@ settings:
   shutdown: Vala shaqa
   sleep: Ukulala
   title: Amasethingi
-tray:
-  empty: 'Azikho izinto zetay (Qaphela: IWindows 10 ayisebenzi)'
-  unlabeled: Isithonjana se-tray esingafundile
 userhome:
   empty_list: Azikho izinto
   folders:
