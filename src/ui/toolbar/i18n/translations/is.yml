@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: internet aðgangur
   ethernet_disconnected: Enginn internetaðgangur
   notifications: Tilkynningar
-  open_system_tray: Opinn kerfisbakki
   settings: Fljótar stillingar
   smart_charge: '- Snjall hleðsla'
   volume: Bindi
@@ -76,9 +75,6 @@ settings:
   shutdown: Lokun
   sleep: Sofðu
   title: Stillingar
-tray:
-  empty: 'Engir bakkar hlutir (Athugið: Windows 10 er ekki útfærður)'
-  unlabeled: Ómerkt bakkatákn
 userhome:
   empty_list: Engir hlutir
   folders:
