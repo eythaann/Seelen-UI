@@ -1,3 +1,4 @@
+pub mod apps;
 pub mod bluetooth;
 pub mod input;
 pub mod language;

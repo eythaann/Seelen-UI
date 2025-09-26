@@ -108,6 +108,8 @@ impl WindowManagerCli {
 
 impl WmCommand {
     pub fn process(self) -> Result<()> {
+        let foreground = Window::get_foregrounded();
+
         match self {
             WmCommand::Toggle => {
                 FULL_STATE.rcu(move |state| {
@@ -129,7 +131,6 @@ impl WmCommand {
                 }
             }
             WmCommand::Width { action } => {
-                let foreground = Window::get_foregrounded();
                 let percentage = match action {
                     Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
                     Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
@@ -148,7 +149,6 @@ impl WmCommand {
                 )?;
             }
             WmCommand::Height { action } => {
-                let foreground = Window::get_foregrounded();
                 let percentage = match action {
                     Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,
                     Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
@@ -173,7 +173,6 @@ impl WmCommand {
                 // self.discard_reservation()?;
             }
             WmCommand::ResetWorkspaceSize => {
-                let foreground = Window::get_foregrounded();
                 let mut state = trace_lock!(WM_STATE);
                 if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
                     if workspace.is_floating(&foreground.address()) {
@@ -182,7 +181,6 @@ impl WmCommand {
                 }
             }
             WmCommand::ToggleFloat => {
-                let foreground = Window::get_foregrounded();
                 let mut state = trace_lock!(WM_STATE);
                 if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
                     if workspace.is_floating(&foreground.address()) {
@@ -192,15 +190,11 @@ impl WmCommand {
                         workspace.add_to_floats(&foreground)?;
                     }
 
-                    WindowManagerV2::render_workspace(
-                        &foreground.get_cached_data().monitor,
-                        workspace,
-                    )?;
+                    WindowManagerV2::render_workspace(&foreground.monitor_id(), workspace)?;
                 }
             }
             WmCommand::ToggleMonocle => {
-                let foreground = Window::get_foregrounded();
-                let monitor_id = foreground.get_cached_data().monitor;
+                let monitor_id = foreground.monitor_id();
                 let workspace = get_vd_manager()
                     .get_active_workspace_id(&monitor_id)
                     .clone();
@@ -211,7 +205,6 @@ impl WmCommand {
                 WindowManagerV2::render_workspace(&monitor_id, workspace)?;
             }
             WmCommand::Focus { side } => {
-                let foreground = Window::get_foregrounded();
                 let mut state = trace_lock!(WM_STATE);
                 if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
                     let siblings = workspace
@@ -229,7 +222,6 @@ impl WmCommand {
                 }
             }
             WmCommand::Move { side } => {
-                let foreground = Window::get_foregrounded();
                 let mut state = trace_lock!(WM_STATE);
                 if let Some(workspace) = state.get_workspace_state_for_window(&foreground) {
                     let siblings = workspace
@@ -240,10 +232,7 @@ impl WmCommand {
                     match siblings.first().and_then(|sibling| sibling.face()) {
                         Some(sibling) => {
                             workspace.swap_nodes_containing_window(&foreground, &sibling)?;
-                            WindowManagerV2::render_workspace(
-                                &foreground.get_cached_data().monitor,
-                                workspace,
-                            )?;
+                            WindowManagerV2::render_workspace(&foreground.monitor_id(), workspace)?;
                         }
                         None => {
                             log::warn!("There is no node at {side:?} to be swapped");
@@ -252,7 +241,6 @@ impl WmCommand {
                 }
             }
             WmCommand::CycleStack { way } => {
-                let foreground = Window::get_foregrounded();
                 let mut state = trace_lock!(WM_STATE);
                 let Some(workspace) = state.get_workspace_state_for_window(&foreground) else {
                     return Ok(());
@@ -277,10 +265,7 @@ impl WmCommand {
 
                 node.active = Some(node.windows[next_idx]);
 
-                WindowManagerV2::render_workspace(
-                    &foreground.get_cached_data().monitor,
-                    workspace,
-                )?;
+                WindowManagerV2::render_workspace(&foreground.monitor_id(), workspace)?;
             }
         };
 

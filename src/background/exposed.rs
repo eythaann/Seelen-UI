@@ -3,7 +3,7 @@ use std::os::windows::process::CommandExt;
 use std::path::PathBuf;
 
 use seelen_core::state::RelaunchArguments;
-use seelen_core::system_state::{FocusedApp, MonitorId};
+use seelen_core::system_state::MonitorId;
 use seelen_core::{command_handler_list, system_state::Color};
 
 use tauri::{Builder, WebviewWindow, Wry};
@@ -210,16 +210,6 @@ async fn install_last_available_update() -> Result<()> {
 }
 
 #[tauri::command(async)]
-fn get_focused_app() -> FocusedApp {
-    Window::get_foregrounded().as_focused_app_information()
-}
-
-#[tauri::command(async)]
-fn show_desktop() -> Result<()> {
-    todo!()
-}
-
-#[tauri::command(async)]
 async fn translate_text(
     source: String,
     source_lang: String,
@@ -247,6 +237,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::widgets::weg::handler::*;
     use crate::widgets::window_manager::handler::*;
 
+    use crate::modules::apps::infrastructure::*;
     use crate::modules::bluetooth::infrastructure::*;
     use crate::modules::language::*;
     use crate::modules::media::infrastructure::*;

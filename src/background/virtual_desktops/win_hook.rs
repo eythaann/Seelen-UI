@@ -10,7 +10,7 @@ use crate::{
 
 impl SluWorkspacesManager {
     pub fn should_be_added(window: &Window) -> bool {
-        window.is_real_window()
+        window.is_interactable_and_not_hidden()
     }
 
     pub fn contains(&self, window: &Window) -> bool {

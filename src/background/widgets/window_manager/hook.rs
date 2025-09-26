@@ -77,7 +77,7 @@ impl WindowManagerV2 {
         let new_height = (end_rect.bottom - end_rect.top) as f32;
 
         let mut state = trace_lock!(WM_STATE);
-        let monitor_id = window.get_cached_data().monitor;
+        let monitor_id = window.monitor_id();
 
         // not resized only dragged/moved
         if initial_width == new_width && initial_height == new_height {

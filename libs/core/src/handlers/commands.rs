@@ -169,6 +169,8 @@ slu_commands_declaration! {
     GetUser = get_user() -> User,
     GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<File>,
     SetUserFolderLimit = set_user_folder_limit(folder_type: FolderType, amount: usize),
+    GerUserApplications = get_user_applications() -> Vec<UserApplication>,
+    GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
 
     //Bluetooth
     GetConnectedBluetoothDevices = get_connected_bluetooth_devices() -> Vec<BluetoothDevice>,

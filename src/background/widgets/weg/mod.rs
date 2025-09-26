@@ -67,7 +67,7 @@ impl SeelenWeg {
     }
 
     pub fn should_be_added(window: &Window) -> bool {
-        window.is_real_window()
+        window.is_interactable_and_not_hidden()
     }
 
     pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {

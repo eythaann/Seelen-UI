@@ -14,5 +14,24 @@ pub struct FocusedApp {
     pub is_maximized: bool,
     pub is_fullscreened: bool,
     pub is_seelen_overlay: bool,
-    pub is_being_dragged: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct UserApplication {
+    pub name: String,
+    pub path: PathBuf,
+    pub umid: Option<String>,
+    pub is_in_start_menu: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct UserAppWindow {
+    pub hwnd: isize,
+    pub monitor: MonitorId,
+    pub title: String,
+    pub is_zoomed: bool,
+    pub is_iconic: bool,
+    pub is_fullscreen: bool,
 }

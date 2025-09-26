@@ -53,6 +53,8 @@ slu_events_declaration! {
 
     UserChanged(User) as "user-changed",
     UserFolderChanged(FolderChangedArgs) as "user-folder-changed",
+    UserApplicationsChanged(Vec<UserApplication>) as "user::applications-changed",
+    UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
 
     BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
     BluetoothDiscoveredDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-discovered-devices-changed",
