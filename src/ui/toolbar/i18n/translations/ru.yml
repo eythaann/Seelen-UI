@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Сеть
   ethernet_disconnected: Нет сети
   notifications: Уведомления
-  open_system_tray: Открыть системный трей
   settings: Быстрые настройки
   smart_charge: '- Умная зарядка'
   volume: Громкость
@@ -76,9 +75,6 @@ settings:
   shutdown: Завершение работы
   sleep: Спящий режим
   title: Настройки
-tray:
-  empty: 'Нет элементов в трее (Примечание: в Windows 10 не реализовано)'
-  unlabeled: Значок в трее без метки
 userhome:
   empty_list: Нет предметов
   folders:
