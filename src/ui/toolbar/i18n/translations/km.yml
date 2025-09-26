@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: ការចូលប្រើអ៊ីនធឺណិត
   ethernet_disconnected: គ្មានការចូលប្រើអ៊ីនធឺណិតទេ
   notifications: ការជូនដំណឹង
-  open_system_tray: បើកថាសប្រព័ន្ធ
   settings: ការកំណត់រហ័ស
   smart_charge: '- គិតថ្លៃឆ្លាត'
   volume: ចមនយន
@@ -76,9 +75,6 @@ settings:
   shutdown: បិទ
   sleep: ដមនេក
   title: ការកំណត់
-tray:
-  empty: 'មិនមានធាតុថាស (ចំណាំ: វីនដូ 10 មិនត្រូវបានអនុវត្តទេ)'
-  unlabeled: រូបតំណាងថាឡៃដែលមិនស្មោះត្រង់
 userhome:
   empty_list: មិនមានធាតុ
   folders:
