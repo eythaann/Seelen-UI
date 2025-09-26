@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: যে কোনও কী সংমিশ্রণ টিপুন
     title: নতুন শর্টকাট নিবন্ধন
-tray:
-  quit: প্রস্থান
-  restart: ইউআই পুনরায় চালু করুন
-  settings: সেটিংস
