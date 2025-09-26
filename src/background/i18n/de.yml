@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Drücken Sie eine beliebige Tastenkombination
     title: Registrierung einer neuen Verknüpfung
-tray:
-  quit: Beenden Sie
-  restart: UI neu starten
-  settings: Einstellungen
