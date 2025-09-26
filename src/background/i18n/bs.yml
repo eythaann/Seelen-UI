@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Pritisnite bilo koju kombinaciju tipki
     title: Registriranje nove prečice
-tray:
-  quit: Prestati
-  restart: Restart UI
-  settings: Postavke
