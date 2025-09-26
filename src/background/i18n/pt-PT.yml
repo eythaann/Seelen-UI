@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Pressione qualquer combinação de tecla
     title: Registrando um novo atalho
-tray:
-  quit: Despedir-se
-  restart: Reinicie a interface do usuário
-  settings: Configurações
