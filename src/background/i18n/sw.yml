@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Bonyeza mchanganyiko wowote muhimu
     title: Kusajili njia ya mkato mpya
-tray:
-  quit: Acha
-  restart: Anzisha tena UI
-  settings: Mipangilio
