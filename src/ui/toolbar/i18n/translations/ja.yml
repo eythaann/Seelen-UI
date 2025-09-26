@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: 接続されています
   ethernet_disconnected: 接続されていません
   notifications: 通知
-  open_system_tray: システムトレイ
   settings: SeelenUIの設定
   smart_charge: '- スマートチャージが有効'
   volume: 音量
@@ -76,9 +75,6 @@ settings:
   shutdown: シャットダウン
   sleep: スリープ
   title: 設定
-tray:
-  empty: 'トレイ項目なし（注：Windows 10には実装されていません）'
-  unlabeled: ラベルなしトレイアイコン
 userhome:
   empty_list: アイテムがありません
   folders:
