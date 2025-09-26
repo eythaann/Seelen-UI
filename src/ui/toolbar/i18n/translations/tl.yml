@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Internet access
   ethernet_disconnected: Walang internet access
   notifications: Mga abiso
-  open_system_tray: Bukas na tray ng system
   settings: Mabilis na mga setting
   smart_charge: '- Smart Charge'
   volume: Dami
@@ -76,9 +75,6 @@ settings:
   shutdown: Shutdown
   sleep: Matulog ka na
   title: Mga setting
-tray:
-  empty: 'Walang mga item sa tray (Tandaan: Ang Windows 10 ay hindi ipinatupad)'
-  unlabeled: Hindi nabigong icon ng tray
 userhome:
   empty_list: Walang mga item
   folders:
