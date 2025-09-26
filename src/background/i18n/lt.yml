@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Paspauskite bet kurį raktų derinį
     title: Registruojant naują nuorodą
-tray:
-  quit: Baigti
-  restart: Iš naujo paleiskite vartotojo sąsają
-  settings: Nustatymai
