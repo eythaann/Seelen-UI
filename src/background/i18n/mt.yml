@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Agħfas kwalunkwe kombinazzjoni taċ-ċavetta
     title: Tirreġistra shortcut ġdid
-tray:
-  quit: Nieqaf
-  restart: Irristartja l-UI
-  settings: Settings
