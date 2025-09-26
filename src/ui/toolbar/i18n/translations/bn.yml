@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: ইন্টারনেট সুবিধা
   ethernet_disconnected: কোনও ইন্টারনেট অ্যাক্সেস নেই
   notifications: বিজ্ঞপ্তি
-  open_system_tray: ওপেন সিস্টেম ট্রে
   settings: দ্রুত সেটিংস
   smart_charge: '- স্মার্ট চার্জ'
   volume: ভলিউম
@@ -76,9 +75,6 @@ settings:
   shutdown: শাটডাউন
   sleep: ঘুম
   title: সেটিংস
-tray:
-  empty: 'কোনও ট্রে আইটেম নেই (দ্রষ্টব্য: উইন্ডোজ 10 প্রয়োগ করা হয়নি)'
-  unlabeled: লেবেলযুক্ত ট্রে আইকন
 userhome:
   empty_list: কোনও আইটেম নেই
   folders:
