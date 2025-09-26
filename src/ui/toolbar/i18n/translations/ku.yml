@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Gihîştina înternetê
   ethernet_disconnected: Ne gihîştina înternetê
   notifications: Notifications
-  open_system_tray: Tray pergala vekirî
   settings: Mîhengên Bilez
   smart_charge: '- heqê harm'
   volume: Bend
@@ -76,9 +75,6 @@ settings:
   shutdown: Temirandin
   sleep: Xew
   title: Mîhengan
-tray:
-  empty: 'Tiştên tray (Nîşe: Windows 10 nayê pêkanîn)'
-  unlabeled: Îkonê tray a bêpergal
 userhome:
   empty_list: Tiştek tune
   folders:
