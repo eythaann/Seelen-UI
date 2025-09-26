@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: 按下任意按鍵組合
     title: 註冊新快速鍵
-tray:
-  quit: 結束
-  restart: 重新啟動 UI
-  settings: 設定
