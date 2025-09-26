@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Tryk på enhver nøglekombination
     title: Registrering af ny genvej
-tray:
-  quit: Stop
-  restart: Genstart brugergrænsefladen
-  settings: Indstillinger
