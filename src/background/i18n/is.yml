@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Ýttu á hvaða lykilsamsetningu sem er
     title: Að skrá nýja flýtileið
-tray:
-  quit: Hættu
-  restart: Endurræstu UI
-  settings: Stillingar
