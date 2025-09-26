@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Paina mitä tahansa näppäinyhdistelmää
     title: Uuden pikakuvakkeen rekisteröinti
-tray:
-  quit: Lopeta
-  restart: Käynnistä käyttöliittymä uudelleen
-  settings: Asetukset
