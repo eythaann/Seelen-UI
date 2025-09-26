@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: กดชุดค่าผสมคีย์ใด ๆ
     title: การลงทะเบียนทางลัดใหม่
-tray:
-  quit: ล้มเลิก
-  restart: รีสตาร์ท UI
-  settings: การตั้งค่า
