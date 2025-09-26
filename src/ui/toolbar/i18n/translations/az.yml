@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: İnternetə çıxışı
   ethernet_disconnected: İnternetə giriş yoxdur
   notifications: Bildirişlər
-  open_system_tray: Açıq Sistem Tepsisi
   settings: Tez Parametrlər
   smart_charge: '- Ağıllı yük'
   volume: Həcm
@@ -76,9 +75,6 @@ settings:
   shutdown: Söndür
   sleep: Yatmaq
   title: Parametrlər
-tray:
-  empty: 'Lövhə əşyaları yoxdur (Qeyd: Windows 10 tətbiq olunmur)'
-  unlabeled: Qeyri-çapsız tepsik nişanı
 userhome:
   empty_list: Nəhəng
   folders:
