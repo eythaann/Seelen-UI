@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Internet-hozzáférés
   ethernet_disconnected: Nincs internet-hozzáférés
   notifications: Értesítések
-  open_system_tray: Rendszertálca megnyitása
   settings: Gyorsbeállítások
   smart_charge: ' - Intelligens töltés'
   volume: Hangerő
@@ -76,9 +75,6 @@ settings:
   shutdown: Leállítás
   sleep: Alvó mód
   title: Beállítások
-tray:
-  empty: 'Nincsenek tálcaelemek (Megjegyzés: Windows 10 nem támogatott)'
-  unlabeled: Címkézetlen tálcaikon
 userhome:
   empty_list: Nincs megjeleníthető elem
   folders:

@@ -28,7 +28,3 @@ shortcut:
   register:
     placeholder: 按任何键组合
     title: 注册新快捷方式
-tray:
-  quit: 退出
-  restart: 重启用户界面
-  settings: 设置

@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Πατήστε οποιοδήποτε συνδυασμό πλήκτρων
     title: Εγγραφή νέας συντόμευσης
-tray:
-  quit: Σταματήστε το
-  restart: Επανεκκίνηση UI
-  settings: Ρυθμίσεις

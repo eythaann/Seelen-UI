@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: इंटरनेट का उपयोग
   ethernet_disconnected: इंटरनेट की सुविधा नहीं है
   notifications: अधिसूचना
-  open_system_tray: खुला तंत्र ट्रे
   settings: त्वरित सेटिंग
   smart_charge: '- स्मार्ट चार्ज'
   volume: आयतन
@@ -76,9 +75,6 @@ settings:
   shutdown: शट डाउन
   sleep: नींद
   title: समायोजन
-tray:
-  empty: 'कोई ट्रे आइटम नहीं (नोट: विंडोज 10 लागू नहीं किया गया है)'
-  unlabeled: अनबेल्ड ट्रे आइकन
 userhome:
   empty_list: कोई आइटम नहीं
   folders:

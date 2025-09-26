@@ -2,6 +2,7 @@ pub mod constants;
 pub mod discord;
 pub mod icon_extractor;
 pub mod integrity;
+pub mod lock_free;
 pub mod pwsh;
 pub mod updater;
 pub mod virtual_desktop;
@@ -56,6 +57,7 @@ pub fn are_overlaped(a: &RECT, b: &RECT) -> bool {
 /// Resolve paths with folder ids in the form of "{GUID}\path\to\file"
 ///
 /// https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid
+#[allow(dead_code)]
 pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
     let parts = path.as_ref().split("\\");
     let mut path_buf = PathBuf::new();

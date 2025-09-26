@@ -2,9 +2,14 @@
 
 ## [2.4.4]
 
+### features
+
+- add emergency shortcut to stop seelen process (Ctrl + Win + Alt + K).
+
 ### enhancements
 
 - improve development ecosystem of resources via embedding of yaml files.
+- allow open dev tools on release builds.
 
 ### fix
 
@@ -14,6 +19,8 @@
 ### refactor
 
 - move core library to main repository.
+- remove app tray icon registration.
+- remove windows tray icons related code.
 
 ## [2.4.3]
 

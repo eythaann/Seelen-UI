@@ -40,7 +40,3 @@ shortcut:
   register:
     placeholder: Stlačte ľubovoľnú kombináciu klávesov
     title: Registrácia novej skratky
-tray:
-  quit: Ukončite
-  restart: Reštartovanie používateľského rozhrania
-  settings: Nastavenia

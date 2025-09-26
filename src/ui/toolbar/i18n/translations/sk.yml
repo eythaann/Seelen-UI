@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Prístup na internet
   ethernet_disconnected: Žiadny prístup na internet
   notifications: Oznámenia
-  open_system_tray: Podnos otvorených systémov
   settings: Rýchle nastavenia
   smart_charge: '- Inteligentný poplatok'
   volume: Zväzok
@@ -76,11 +75,6 @@ settings:
   shutdown: Vypnúť
   sleep: Spať
   title: nastavenie
-tray:
-  empty: >-
-    Žiadne položky v zásobníku (Poznámka: systém Windows 10 nie je
-    implementovaný)
-  unlabeled: Ikona zásobníka bez označenia
 userhome:
   empty_list: Žiadne položky
   folders:

@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: İnternet erişimi
   ethernet_disconnected: İnternet erişimi yok
   notifications: Bildirimler
-  open_system_tray: Sistem Tepsisini Aç
   settings: Hızlı Ayarlar
   smart_charge: '- Akıllı şarj'
   volume: Ses
@@ -76,9 +75,6 @@ settings:
   shutdown: Kapat
   sleep: Uyku
   title: Ayarlar
-tray:
-  empty: 'Tepsi öğesi yok (Not: Windows 10 uygulanmamaktadır)'
-  unlabeled: Etiketlenmemiş Tepsi Simgesi
 userhome:
   empty_list: Ürün yok
   folders:

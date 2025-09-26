@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Interneto ryšys
   ethernet_disconnected: Jokios interneto prieigos
   notifications: Pranešimai
-  open_system_tray: Atviras sistemos dėklas
   settings: Greiti nustatymai
   smart_charge: '- Išmanus mokestis'
   volume: Apimtis
@@ -76,9 +75,6 @@ settings:
   shutdown: Išjungti
   sleep: Miegas
   title: Nustatymai
-tray:
-  empty: 'Nėra dėklo elementų (Pastaba: "Windows 10" neįdiegta)'
-  unlabeled: Nepažymėta dėklo piktograma
 userhome:
   empty_list: Jokių daiktų
   folders:

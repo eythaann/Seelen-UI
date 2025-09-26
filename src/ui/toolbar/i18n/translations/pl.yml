@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: dostęp do Internetu
   ethernet_disconnected: Brak dostępu do internetu
   notifications: Powiadomienia
-  open_system_tray: Ukryte ikony
   settings: Szybkie ustawienia
   smart_charge: '- Inteligentne ładowanie'
   volume: Głośność
@@ -76,9 +75,6 @@ settings:
   shutdown: Zamknij
   sleep: Uśpij
   title: Ustawienia
-tray:
-  empty: 'Brak elementów w zasobniku (Uwaga: Windows 10 nie jest obsługiwany)'
-  unlabeled: Ikona bez etykiety
 userhome:
   empty_list: Brak przedmiotów
   folders:

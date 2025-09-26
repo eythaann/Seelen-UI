@@ -28,7 +28,3 @@ shortcut:
   register:
     placeholder: 주요 조합을 누릅니다
     title: 새로운 바로 가기 등록
-tray:
-  quit: 종료
-  restart: UI 다시 시작
-  settings: 설정

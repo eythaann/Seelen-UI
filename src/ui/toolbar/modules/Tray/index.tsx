@@ -1,4 +1,4 @@
-import { SeelenCommand } from "@seelen-ui/lib";
+/* import { SeelenCommand } from "@seelen-ui/lib";
 import { TrayIcon, TrayToolbarItem } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
 import { FileIcon } from "@shared/components/Icon";
@@ -132,3 +132,4 @@ export function TrayModule({ module }: Props) {
     </AnimatedPopover>
   );
 }
+ */

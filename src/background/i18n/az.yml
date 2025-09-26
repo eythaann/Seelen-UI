@@ -38,7 +38,3 @@ shortcut:
   register:
     placeholder: Hər hansı bir açar birləşməsini basın
     title: Yeni qısa yol qeydiyyatı
-tray:
-  quit: Çıxmaq
-  restart: UI-ni yenidən başladın
-  settings: Parametrlər

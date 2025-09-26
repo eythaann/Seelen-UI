@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: இணைய அணுகல்
   ethernet_disconnected: இணைய அணுகல் இல்லை
   notifications: அறிவிப்புகள்
-  open_system_tray: திறந்த கணினி தட்டு
   settings: விரைவான அமைப்புகள்
   smart_charge: '- ஸ்மார்ட் கட்டணம்'
   volume: தொகுதி
@@ -76,9 +75,6 @@ settings:
   shutdown: பணிநிறுத்தம்
   sleep: தூங்கு
   title: அமைப்புகள்
-tray:
-  empty: 'தட்டு உருப்படிகள் இல்லை (குறிப்பு: விண்டோஸ் 10 செயல்படுத்தப்படவில்லை)'
-  unlabeled: பெயரிடப்படாத தட்டு ஐகான்
 userhome:
   empty_list: உருப்படிகள் இல்லை
   folders:

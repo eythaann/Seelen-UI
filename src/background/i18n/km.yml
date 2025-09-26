@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: ចុចបន្សំគ្រាប់ចុចណាមួយ
     title: ការចុះឈ្មោះផ្លូវកាត់ថ្មី
-tray:
-  quit: ចាកចេញ
-  restart: ចាប់ផ្តើម UI ឡើងវិញ
-  settings: ការកំណត់

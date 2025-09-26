@@ -38,7 +38,3 @@ shortcut:
   register:
     placeholder: Nyomja meg a gomb kombinációját
     title: Új parancsikon regisztrálása
-tray:
-  quit: Kilépés
-  restart: UI újraindítása
-  settings: Beállítások

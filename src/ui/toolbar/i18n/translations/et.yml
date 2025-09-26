@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: internetiühendus
   ethernet_disconnected: Interneti -ühendus pole
   notifications: Teatised
-  open_system_tray: Avatud süsteemialus
   settings: Kiired seaded
   smart_charge: '- Nutikas tasu'
   volume: Maht
@@ -76,9 +75,6 @@ settings:
   shutdown: Lülita välja
   sleep: Magama
   title: Sätted
-tray:
-  empty: 'Puuduvad salveelemendid (Märkus: Windows 10 ei ole rakendatud)'
-  unlabeled: Märkimata salve ikoon
 userhome:
   empty_list: Puuduvad esemed
   folders:

@@ -4,6 +4,7 @@ pub fn is_windows_10() -> bool {
     matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if (&10240..&22000).contains(&x))
 }
 
+#[allow(dead_code)]
 pub fn is_windows_11() -> bool {
     matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22000)
 }

@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: कुनै कुञ्जी संयोजन थिच्नुहोस्
     title: नयाँ सर्टकट दर्ता गर्दै
-tray:
-  quit: छोड्नु
-  restart: "UI पुन: सुरू गर्नुहोस्"
-  settings: बतंग

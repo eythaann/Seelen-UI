@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: የበይነመረብ መዳረሻ
   ethernet_disconnected: ምንም የበይነመረብ ግንኙነት የለም
   notifications: ማሳወቂያዎች
-  open_system_tray: ክፍት የስርዓት ትሪ
   settings: ፈጣን ቅንብሮች
   smart_charge: '- ዘመናዊ ክፍያ'
   volume: ድምጽ
@@ -76,9 +75,6 @@ settings:
   shutdown: ዝጋው
   sleep: እንቅልፍ
   title: ቅንብሮች
-tray:
-  empty: 'ምንም ትሪ ዕቃዎች የሉም (ማስታወሻ: ዊንዶውስ 10 ተተግብሯል)'
-  unlabeled: ያልተስተካከለ ትሪ አዶ
 userhome:
   empty_list: ምንም ዕቃዎች የሉም
   folders:

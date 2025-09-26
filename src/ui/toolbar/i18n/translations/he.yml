@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: גישה לאינטרנט
   ethernet_disconnected: אין גישה לאינטרנט
   notifications: התראות
-  open_system_tray: מגש מערכת פתוח
   settings: הגדרות מהירות
   smart_charge: '- חיוב חכם'
   volume: עוצמת קול
@@ -76,9 +75,6 @@ settings:
   shutdown: כבה
   sleep: שינה
   title: הגדרות
-tray:
-  empty: 'אין פריטי מגש (הערה: Windows 10 אינו מיושם)'
-  unlabeled: אייקון מגש ללא תווית
 userhome:
   empty_list: אין פריטים
   folders:

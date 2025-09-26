@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: πρόσβαση στο διαδίκτυο
   ethernet_disconnected: Χωρίς πρόσβαση στο Διαδίκτυο
   notifications: Ειδοποιήσεις
-  open_system_tray: Ανοίξτε το δίσκο του συστήματος
   settings: Γρήγορες ρυθμίσεις
   smart_charge: '- έξυπνη χρέωση'
   volume: Ενταση ΗΧΟΥ
@@ -76,9 +75,6 @@ settings:
   shutdown: ΤΕΡΜΑΤΙΣΜΟΣ ΛΕΙΤΟΥΡΓΙΑΣ
   sleep: Υπνος
   title: Ρυθμίσεις
-tray:
-  empty: 'Δεν υπάρχουν στοιχεία στο δίσκο (Σημείωση: τα Windows 10 δεν εφαρμόζονται)'
-  unlabeled: Εικονίδιο δίσκου χωρίς ετικέτα
 userhome:
   empty_list: Δεν υπάρχουν αντικείμενα
   folders:

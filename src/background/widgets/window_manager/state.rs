@@ -90,7 +90,7 @@ impl WmState {
         percentage: f32,
         relative: bool,
     ) -> Result<()> {
-        let monitor_id = window.get_cached_data().monitor;
+        let monitor_id = window.monitor_id();
         let current_workspace = get_vd_manager()
             .get_active_workspace_id(&monitor_id)
             .clone();

@@ -273,7 +273,7 @@ pub fn register_win_hook() -> Result<()> {
                 origin = Window::get_foregrounded(); // sometimes event is emited with wrong origin
             }
 
-            let synthetics = event.update_cache_and_get_synthetics(&origin);
+            let synthetics = event.get_synthetics(&origin);
             HookManager::process_event(event, origin);
             if let Ok(synthetics) = synthetics {
                 for synthetic_event in synthetics {

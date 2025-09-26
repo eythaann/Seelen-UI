@@ -1,5 +1,6 @@
+use std::sync::LazyLock;
+
 use crate::error::Result;
-use crate::windows_api::window::cache::WindowCachedData;
 use crate::windows_api::window::Window;
 use windows::Win32::UI::WindowsAndMessaging::*;
 
@@ -197,50 +198,71 @@ impl From<u32> for WinEvent {
     }
 }
 
+static CACHE: LazyLock<scc::HashMap<isize, WindowCache>> = LazyLock::new(scc::HashMap::new);
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct WindowCache {
+    monitor: String,
+    maximized: bool,
+    fullscreen: bool,
+}
+
+impl From<&Window> for WindowCache {
+    fn from(window: &Window) -> Self {
+        Self {
+            monitor: window.monitor().stable_id().unwrap_or_default(),
+            maximized: window.is_maximized(),
+            fullscreen: window.is_fullscreen(),
+        }
+    }
+}
+
 impl WinEvent {
-    pub fn update_cache_and_get_synthetics(&self, origin: &Window) -> Result<Vec<WinEvent>> {
+    fn get_or_init_cache_for(window: &Window) -> WindowCache {
+        match CACHE.entry(window.address()) {
+            scc::hash_map::Entry::Occupied(o) => o.get().clone(),
+            scc::hash_map::Entry::Vacant(v) => {
+                let cache = WindowCache::from(window);
+                v.insert_entry(cache.clone());
+                cache
+            }
+        }
+    }
+
+    pub fn get_synthetics(&self, origin: &Window) -> Result<Vec<WinEvent>> {
         let mut synthetics = Vec::new();
 
         match self {
-            Self::SystemMoveSizeStart => {
-                let mut data = origin.get_cached_data();
-                data.dragging = true;
-                origin.set_cached_data(data);
-            }
-            Self::SystemMoveSizeEnd => {
-                let mut data = origin.get_cached_data();
-                data.dragging = false;
-                origin.set_cached_data(data);
-            }
             Self::ObjectLocationChange if origin.is_focused() => {
                 synthetics.push(Self::SyntheticForegroundLocationChange);
 
-                let old = origin.get_cached_data();
-                let new = WindowCachedData::create_for(origin);
+                let before = Self::get_or_init_cache_for(origin);
+                let now = WindowCache::from(origin);
 
-                if old == new {
+                if before == now {
                     return Ok(synthetics);
                 }
 
-                if old.maximized != new.maximized {
-                    synthetics.push(match old.maximized {
-                        true => Self::SyntheticMaximizeEnd,
-                        false => Self::SyntheticMaximizeStart,
-                    });
+                match (before.maximized, now.maximized) {
+                    (false, true) => synthetics.push(Self::SyntheticMaximizeStart),
+                    (true, false) => synthetics.push(Self::SyntheticMaximizeEnd),
+                    _ => {}
                 }
 
-                if old.fullscreen != new.fullscreen {
-                    synthetics.push(match old.fullscreen {
-                        true => Self::SyntheticFullscreenEnd,
-                        false => Self::SyntheticFullscreenStart,
-                    });
+                match (before.fullscreen, now.fullscreen) {
+                    (false, true) => synthetics.push(Self::SyntheticFullscreenStart),
+                    (true, false) => synthetics.push(Self::SyntheticFullscreenEnd),
+                    _ => {}
                 }
 
-                if old.monitor != new.monitor {
+                if before.monitor != now.monitor {
                     synthetics.push(Self::SyntheticMonitorChanged);
                 }
 
-                origin.set_cached_data(new);
+                CACHE.upsert(origin.address(), now);
+            }
+            Self::ObjectDestroy => {
+                CACHE.remove(&origin.address());
             }
             _ => {}
         }

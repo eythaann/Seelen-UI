@@ -38,12 +38,8 @@ export const store = configureStore({
 lazySlice(store.dispatch);
 
 const removeFocusedColorCssVars = () => {
-  document.documentElement.style.removeProperty(
-    "--color-focused-app-background",
-  );
-  document.documentElement.style.removeProperty(
-    "--color-focused-app-foreground",
-  );
+  document.documentElement.style.removeProperty("--color-focused-app-background");
+  document.documentElement.style.removeProperty("--color-focused-app-foreground");
 };
 
 async function initFocusedColorSystem() {
@@ -58,9 +54,7 @@ async function initFocusedColorSystem() {
       return;
     }
 
-    let color = new Color(
-      await invoke(SeelenCommand.SystemGetForegroundWindowColor),
-    );
+    let color = new Color(await invoke(SeelenCommand.SystemGetForegroundWindowColor));
     if (color.inner.a === 0) {
       removeFocusedColorCssVars();
       return;
@@ -70,20 +64,17 @@ async function initFocusedColorSystem() {
     const background = color.toHexString();
     const foreground = luminance / 255 > 0.5 ? "var(--color-persist-gray-900)" : "var(--color-persist-gray-100)";
 
-    document.documentElement.style.setProperty(
-      "--color-focused-app-background",
-      background,
-    );
-    document.documentElement.style.setProperty(
-      "--color-focused-app-foreground",
-      foreground,
-    );
+    document.documentElement.style.setProperty("--color-focused-app-background", background);
+    document.documentElement.style.setProperty("--color-focused-app-foreground", foreground);
 
     store.dispatch(
-      RootActions.addWindowColor([optimisticFocused.hwnd, {
-        background,
-        foreground,
-      }]),
+      RootActions.addWindowColor([
+        optimisticFocused.hwnd,
+        {
+          background,
+          foreground,
+        },
+      ]),
     );
   };
 
@@ -119,10 +110,6 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setBatteries(event.payload));
   });
 
-  await subscribe(SeelenEvent.TrayInfo, (event) => {
-    store.dispatch(RootActions.setSystemTray(event.payload));
-  });
-
   await subscribe(SeelenEvent.MediaSessions, (event) => {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
@@ -140,9 +127,7 @@ export async function registerStoreEvents() {
 
   await subscribe(SeelenEvent.Notifications, (event) => {
     store.dispatch(
-      RootActions.setNotifications(
-        event.payload.sort((a, b) => Number(b.date - a.date)),
-      ),
+      RootActions.setNotifications(event.payload.sort((a, b) => Number(b.date - a.date))),
     );
   });
 

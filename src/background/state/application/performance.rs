@@ -40,7 +40,7 @@ fn start_listeners() {
 
 fn get_perf_mode() -> PerformanceMode {
     let foreground = Window::get_foregrounded();
-    if foreground.get_cached_data().fullscreen && !foreground.is_seelen_overlay() {
+    if foreground.is_fullscreen() && !foreground.is_seelen_overlay() {
         return PerformanceMode::Extreme;
     }
 

@@ -28,7 +28,3 @@ shortcut:
   register:
     placeholder: ማንኛውንም የቁልፍ ጥምረት ተጫን
     title: አዲስ አቋራጭ መመዝገብ
-tray:
-  quit: አቁም
-  restart: እንደገና እንደገና ያስጀምሩ
-  settings: ቅንብሮች

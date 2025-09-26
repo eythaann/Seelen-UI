@@ -14,7 +14,6 @@ const ToolbarModuleType: Enum<ToolbarItem["type"]> = {
   Network: "network",
   Bluetooth: "bluetooth",
   Media: "media",
-  Tray: "tray",
   User: "user",
   Notifications: "notifications",
   Device: "device",

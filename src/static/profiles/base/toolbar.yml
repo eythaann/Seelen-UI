@@ -16,7 +16,6 @@ center:
   - "@default/date"
 
 right:
-  - "@default/system-tray"
   - "@default/bluetooth"
   - "@default/network"
   - "@default/media"

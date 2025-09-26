@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Tekan Kombinasi Kunci apa pun
     title: Mendaftarkan jalan pintas baru
-tray:
-  quit: Berhenti
-  restart: Mulai ulang UI
-  settings: Pengaturan

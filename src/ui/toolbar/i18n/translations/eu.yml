@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Interneterako sarbidea
   ethernet_disconnected: Ez da Interneteko sarbiderik
   notifications: Jakinarazpenak
-  open_system_tray: Sistema irekiko erretilua
   settings: Ezarpen azkarrak
   smart_charge: '- Karga adimentsua'
   volume: Ozentasun
@@ -76,9 +75,6 @@ settings:
   shutdown: Itzali
   sleep: Lo
   title: Ezarpen
-tray:
-  empty: 'Erretilurik ez (Oharra: Windows 10 ez da inplementatu)'
-  unlabeled: Nahitaezko erretilua ikonoa
 userhome:
   empty_list: Ez dago elementurik
   folders:

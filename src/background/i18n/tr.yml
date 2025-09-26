@@ -40,7 +40,3 @@ shortcut:
   register:
     placeholder: Herhangi bir tuş kombinasyonuna basın
     title: Yeni kısayol kaydetme
-tray:
-  quit: Bırak
-  restart: Kullanıcı Arayüzünü Yeniden Başlat
-  settings: Ayarlar

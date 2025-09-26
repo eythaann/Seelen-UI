@@ -1,7 +1,7 @@
 pub mod cache;
 pub mod event;
 
-use seelen_core::{rect::Rect, state::AppExtraFlag, system_state::MonitorId};
+use seelen_core::{rect::Rect, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
 use std::{
     fmt::{Debug, Display},
@@ -15,19 +15,21 @@ use windows::{
         Foundation::{HWND, RECT},
         UI::{
             Shell::FOLDERID_System,
-            WindowsAndMessaging::{
-                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SW_RESTORE, WS_EX_APPWINDOW,
-                WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
-            },
+            WindowsAndMessaging::{SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SW_RESTORE},
         },
     },
 };
 
 use crate::{
-    cli::ServicePipe, error::Result, modules::start::application::START_MENU_MANAGER,
-    state::application::FULL_STATE, widgets::launcher::SeelenRofi, widgets::toolbar::FancyToolbar,
-    widgets::wallpaper_manager::SeelenWall, widgets::weg::instance::SeelenWeg,
-    widgets::window_manager::instance::WindowManagerV2,
+    cli::ServicePipe,
+    error::Result,
+    modules::{
+        apps::application::is_interactable_and_not_hidden, start::application::START_MENU_MANAGER,
+    },
+    widgets::{
+        launcher::SeelenRofi, toolbar::FancyToolbar, wallpaper_manager::SeelenWall,
+        weg::instance::SeelenWeg, window_manager::instance::WindowManagerV2,
+    },
 };
 
 use super::{
@@ -214,7 +216,9 @@ impl Window {
     }
 
     pub fn monitor_id(&self) -> MonitorId {
-        self.get_cached_data().monitor
+        self.monitor()
+            .stable_id2()
+            .unwrap_or_else(|_| MonitorId("null".to_string()))
     }
 
     pub fn is_window(&self) -> bool {
@@ -297,57 +301,9 @@ impl Window {
         false
     }
 
-    pub fn is_real_window(&self) -> bool {
-        // unmanageable window
-        if self.process().open_limited_handle().is_err() {
-            return false;
-        }
-
-        if !self.is_visible() || self.parent().is_some() {
-            return false;
-        }
-
-        // ignore windows without a title or that start with a dot
-        // this is a seelen ui behavior, not present on other desktop environments
-        let title = self.title();
-        if title.is_empty() || title.starts_with('.') {
-            return false;
-        }
-
-        // this class is used for edge tabs to be shown as independent windows on alt + tab
-        // this only applies when the new tab is created it is binded to explorer.exe for some reason
-        // maybe we can search/learn more about edge tabs later.
-        // fix: https://github.com/eythaann/Seelen-UI/issues/83
-        if self.class() == "Windows.Internal.Shell.TabProxyWindow" {
-            return false;
-        }
-
-        let ex_style = WindowsApi::get_ex_styles(self.hwnd());
-        if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
-            && !ex_style.contains(WS_EX_APPWINDOW)
-        {
-            return false;
-        }
-
-        if let Ok(frame_creator) = self.get_frame_creator() {
-            if frame_creator.is_none() {
-                return false;
-            }
-        }
-
-        if self.process().is_frozen().unwrap_or(false) {
-            return false;
-        }
-
-        // I don't like to determine if a window is real filtering by this configs, but will be here
-        // as a workaround in meantime we find a way to filter better, as native taskbar does.
-        if let Some(config) = FULL_STATE.load().get_app_config_by_window(self.hwnd()) {
-            if config.options.contains(&AppExtraFlag::Hidden) {
-                return false;
-            }
-        }
-
-        true
+    /// read inner called doc for more info
+    pub fn is_interactable_and_not_hidden(&self) -> bool {
+        is_interactable_and_not_hidden(self)
     }
 
     pub fn show_window(&self, command: SHOW_WINDOW_CMD) -> Result<()> {

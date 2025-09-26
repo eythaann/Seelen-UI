@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: 互聯網訪問
   ethernet_disconnected: 沒有互聯網訪問
   notifications: 通知
-  open_system_tray: 打開的系統托盤
   settings: 快速設置
   smart_charge: '  - 明智的費用'
   volume: 體積
@@ -76,9 +75,6 @@ settings:
   shutdown: 關閉
   sleep: 睡覺
   title: 設定
-tray:
-  empty: 沒有托盤項目（注意：未實現Windows 10）
-  unlabeled: 未標記的托盤圖標
 userhome:
   empty_list: 沒有項目
   folders:

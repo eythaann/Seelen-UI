@@ -71,6 +71,8 @@ impl From<u32> for AppBarDataState {
 }
 
 pub struct AppBarData(pub APPBARDATA);
+
+#[allow(dead_code)]
 impl AppBarData {
     pub fn from_handle(hwnd: HWND) -> Self {
         Self(APPBARDATA {

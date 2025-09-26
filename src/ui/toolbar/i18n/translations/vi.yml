@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: truy cập Internet
   ethernet_disconnected: Không có kết nối mạng
   notifications: Thông báo
-  open_system_tray: Khay mở hệ thống
   settings: Cài đặt nhanh
   smart_charge: '- Phí thông minh'
   volume: Âm lượng
@@ -76,9 +75,6 @@ settings:
   shutdown: Tắt
   sleep: Ngủ
   title: Cài đặt
-tray:
-  empty: 'Không có mục Khay (Lưu ý: Windows 10 không được triển khai)'
-  unlabeled: Biểu tượng khay không ghi nhãn
 userhome:
   empty_list: Không có mặt hàng
   folders:

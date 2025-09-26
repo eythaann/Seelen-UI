@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: akses internet
   ethernet_disconnected: Tiada akses Internet
   notifications: Pemberitahuan
-  open_system_tray: Buka dulang sistem
   settings: Tetapan cepat
   smart_charge: '- Caj pintar'
   volume: Kelantangan
@@ -76,9 +75,6 @@ settings:
   shutdown: Menutup
   sleep: Tidur
   title: Tetapan
-tray:
-  empty: 'Tiada item dulang (Nota: Windows 10 tidak dilaksanakan)'
-  unlabeled: Ikon dulang yang tidak dilabel
 userhome:
   empty_list: Tiada barang
   folders:

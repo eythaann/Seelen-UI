@@ -16,7 +16,6 @@ import { SettingsModule } from "../Settings/infra";
 import { UserModule } from "../user/infra/Module";
 
 import { $plugins } from "../shared/state/items";
-import { TrayModule } from "../Tray";
 import { WorkspacesModule } from "../Workspaces";
 
 const modulesByType: Record<
@@ -31,7 +30,6 @@ const modulesByType: Record<
   [ToolbarItemType.Keyboard]: memo(KeyboardModule),
   [ToolbarItemType.Settings]: memo(SettingsModule),
   [ToolbarItemType.Workspaces]: memo(WorkspacesModule),
-  [ToolbarItemType.Tray]: memo(TrayModule),
   [ToolbarItemType.Bluetooth]: memo(BluetoothModule),
   [ToolbarItemType.Network]: memo(NetworkModule),
   [ToolbarItemType.Media]: memo(MediaModule),

@@ -169,6 +169,8 @@ slu_commands_declaration! {
     GetUser = get_user() -> User,
     GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<File>,
     SetUserFolderLimit = set_user_folder_limit(folder_type: FolderType, amount: usize),
+    GerUserApplications = get_user_applications() -> Vec<UserApplication>,
+    GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
 
     //Bluetooth
     GetConnectedBluetoothDevices = get_connected_bluetooth_devices() -> Vec<BluetoothDevice>,
@@ -222,11 +224,6 @@ slu_commands_declaration! {
     UpdatePopup = update_popup(instance_id: uuid::Uuid, config: SluPopupConfig),
     ClosePopup = close_popup(instance_id: uuid::Uuid),
     GetPopupConfig = get_popup_config(instance_id: uuid::Uuid) -> SluPopupConfig,
-
-    // Tray Icons
-    GetTrayIcons = get_tray_icons() -> Vec<TrayIcon>,
-    OnClickTrayIcon = on_click_tray_icon(key: String),
-    OnContextMenuTrayIcon = on_context_menu_tray_icon(key: String),
 
     // Network
     WlanGetProfiles = wlan_get_profiles() -> Vec<WlanProfile>,

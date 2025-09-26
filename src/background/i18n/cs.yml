@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Stiskněte libovolnou kombinaci klíčů
     title: Registrace nové zkratky
-tray:
-  quit: Ukončit
-  restart: Restart uživatelského rozhraní
-  settings: Nastavení

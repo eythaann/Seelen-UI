@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Press any key combination
     title: Registering new shortcut
-tray:
-  quit: Quit
-  restart: Restart UI
-  settings: Settings

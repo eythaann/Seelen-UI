@@ -40,7 +40,3 @@ shortcut:
   register:
     placeholder: Druk op een sleutelcombinatie
     title: Nieuwe snelkoppeling registreren
-tray:
-  quit: Stoppen met
-  restart: UI opnieuw opstarten
-  settings: Instellingen

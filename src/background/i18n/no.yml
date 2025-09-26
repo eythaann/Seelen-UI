@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Trykk på enhver tastekombinasjon
     title: Registrering av ny snarvei
-tray:
-  quit: Slutte
-  restart: Start ui på nytt
-  settings: Innstillinger

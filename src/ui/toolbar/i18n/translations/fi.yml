@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Internet-yhteys
   ethernet_disconnected: Ei Internet-yhteyttä
   notifications: Ilmoitukset
-  open_system_tray: Avoin järjestelmälokero
   settings: Pika -asetukset
   smart_charge: '- Älykäs maksu'
   volume: Tilavuus
@@ -76,9 +75,6 @@ settings:
   shutdown: Sammuttaa
   sleep: Nukkua
   title: asetukset
-tray:
-  empty: 'Ei lokeron kohteita (Huomautus: Windows 10:tä ei ole toteutettu).'
-  unlabeled: Merkitsemätön lokeron kuvake
 userhome:
   empty_list: Ei kohteita
   folders:

@@ -38,7 +38,3 @@ shortcut:
   register:
     placeholder: Appuyez sur n'importe quelle combinaison de touches
     title: Enregistrer un nouveau raccourci
-tray:
-  quit: Quitter l'application
-  restart: Redémarrer Seelen UI
-  settings: Paramètres

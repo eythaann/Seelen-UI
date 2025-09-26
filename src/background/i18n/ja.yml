@@ -28,7 +28,3 @@ shortcut:
   register:
     placeholder: 重要な組み合わせを押します
     title: 新しいショートカットの登録
-tray:
-  quit: SeelenUIを終了
-  restart: SeelenUIを再起動
-  settings: SeelenUIの設定
