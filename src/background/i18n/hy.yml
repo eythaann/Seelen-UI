@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Սեղմեք ցանկացած ստեղնաշարի համադրություն
     title: Նոր դյուրանցում գրանցելը
-tray:
-  quit: Թողնել
-  restart: Վերագործարկեք UI- ն
-  settings: Կարգավորումներ
