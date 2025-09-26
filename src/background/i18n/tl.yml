@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Pindutin ang anumang key na kumbinasyon
     title: Pagrehistro ng Bagong Shortcut
-tray:
-  quit: Huminto ka
-  restart: I -restart ang UI
-  settings: Mga setting
