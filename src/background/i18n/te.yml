@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: ఏదైనా కీ కలయిక నొక్కండి
     title: కొత్త సత్వరమార్గాన్ని నమోదు చేస్తోంది
-tray:
-  quit: నిష్క్రమించండి
-  restart: పున art ప్రారంభించండి
-  settings: సెట్టింగులు
