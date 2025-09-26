@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Accesso a Internet
   ethernet_disconnected: Nessun accesso a Internet
   notifications: Notifiche
-  open_system_tray: Apri System Tray
   settings: Impostazioni Rapide
   smart_charge: ' - Carica Intelligente'
   volume: Volume
@@ -76,9 +75,6 @@ settings:
   shutdown: Spegni
   sleep: Sospendi
   title: Impostazioni
-tray:
-  empty: 'Nessun elemento nella tray (Nota: Windows 10 non è implementato)'
-  unlabeled: Icona Vassoio senza etichetta
 userhome:
   empty_list: Nessun articolo
   folders:
