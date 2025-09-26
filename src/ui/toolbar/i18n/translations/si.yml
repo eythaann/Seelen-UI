@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: අන්තර්ජාල පිවිසුම
   ethernet_disconnected: අන්තර්ජාල ප්රවේශයක් නොමැත
   notifications: දැනුම්දීම්
-  open_system_tray: විවෘත පද්ධති තැටි
   settings: ඉක්මන් සැකසුම්
   smart_charge: '- ස්මාර්ට් ගාස්තුව'
   volume: පරිමාව
@@ -76,9 +75,6 @@ settings:
   shutdown: වසා දමන්න
   sleep: නිදාගන්න
   title: සැකසුම්
-tray:
-  empty: 'තැටි අයිතම නැත (සටහන: වින්ඩෝස් 10 ක්රියාත්මක නොවේ)'
-  unlabeled: ලැජ්ජාවේ තැටි නිරූපකය
 userhome:
   empty_list: අයිතම නැත
   folders:
