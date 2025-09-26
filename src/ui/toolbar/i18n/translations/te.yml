@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: ఇంటర్నెట్ సదుపాయం
   ethernet_disconnected: ఇంటర్నెట్ సదుపాయం లేదు
   notifications: నోటిఫికేషన్‌లు
-  open_system_tray: ఓపెన్ సిస్టమ్ ట్రే
   settings: శీఘ్ర సెట్టింగులు
   smart_charge: '- స్మార్ట్ ఛార్జ్'
   volume: వాల్యూమ్
@@ -76,9 +75,6 @@ settings:
   shutdown: షట్డౌన్
   sleep: నిద్ర
   title: సెట్టింగులు
-tray:
-  empty: 'ట్రే అంశాలు లేవు (గమనిక: విండోస్ 10 అమలు చేయబడలేదు)'
-  unlabeled: లేబుల్ చేయని ట్రే చిహ్నం
 userhome:
   empty_list: అంశాలు లేవు
   folders:
