@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Pwyswch unrhyw gyfuniad allweddol
     title: Cofrestru llwybr byr newydd
-tray:
-  quit: Gadawen
-  restart: Ailgychwyn UI
-  settings: Gosodiadau
