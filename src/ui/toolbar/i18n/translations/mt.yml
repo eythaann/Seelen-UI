@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Aċċess għall-Internet
   ethernet_disconnected: L-ebda aċċess għall-internet
   notifications: Notifiki
-  open_system_tray: Tray tas-Sistema Miftuħa
   settings: Settings ta 'malajr
   smart_charge: '- ħlas intelliġenti'
   volume: Volum
@@ -76,9 +75,6 @@ settings:
   shutdown: Għalaq
   sleep: Irqad
   title: Settings
-tray:
-  empty: 'L-ebda oġġetti tat-trej (Nota: Windows 10 mhux implimentat)'
-  unlabeled: Ikona tat-trej mhux immarkata
 userhome:
   empty_list: L-ebda oġġetti
   folders:
