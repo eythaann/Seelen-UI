@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Premere qualsiasi combinazione di tasti
     title: Registrazione di nuovi collegamenti
-tray:
-  quit: Abbandonare
-  restart: Riavviare l'interfaccia utente
-  settings: Impostazioni
