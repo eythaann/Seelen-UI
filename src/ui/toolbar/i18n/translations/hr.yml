@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: pristup internetu
   ethernet_disconnected: Nema pristupa internetu
   notifications: Obavijesti
-  open_system_tray: Otvoreni sustav
   settings: Brze postavke
   smart_charge: '- pametni naboj'
   volume: Volumen
@@ -76,9 +75,6 @@ settings:
   shutdown: Ugasiti
   sleep: Spavati
   title: Postavke
-tray:
-  empty: 'Nema stavki za ladicu (NAPOMENA: Windows 10 nije implementiran)'
-  unlabeled: Ikona neobilježene ladice
 userhome:
   empty_list: Nema predmeta
   folders:
