@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: accés a Internet
   ethernet_disconnected: Sense accés a Internet
   notifications: Notificacions
-  open_system_tray: Safata del sistema obert
   settings: Configuració ràpida
   smart_charge: '- Càrrega intel·ligent'
   volume: Volum
@@ -76,9 +75,6 @@ settings:
   shutdown: Tancar
   sleep: Dormir
   title: Configuració
-tray:
-  empty: 'No hi ha articles de safata (nota: Windows 10 no està implementat)'
-  unlabeled: Icona de la safata no etiquetada
 userhome:
   empty_list: Sense articles
   folders:
