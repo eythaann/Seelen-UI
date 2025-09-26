@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: इन्टरनेट पहुँच
   ethernet_disconnected: कुनै इन्टर्नेट पहुँच छैन
   notifications: सूचना
-  open_system_tray: खुला प्रणाली ट्रे
   settings: द्रुत सेटिंग्स
   smart_charge: '- स्मार्ट शुल्क'
   volume: आवाज
@@ -76,9 +75,6 @@ settings:
   shutdown: बन्द गर
   sleep: निदाउनु
   title: बतंग
-tray:
-  empty: 'कुनै ट्रे आईटमहरू (नोट: विन्डोज 10 कार्यान्वयन छैन)'
-  unlabeled: अनलिसर गरिएको ट्रे आइकन
 userhome:
   empty_list: वस्तुहरू छैनन्
   folders:
