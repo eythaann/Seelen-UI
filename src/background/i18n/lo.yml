@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: ກົດປຸ່ມປະສົມປະສານໃດໆ
     title: ລົງທະບຽນລັດໃຫມ່
-tray:
-  quit: ເຊົາ
-  restart: Restart UI
-  settings: ການກໍານົດ
