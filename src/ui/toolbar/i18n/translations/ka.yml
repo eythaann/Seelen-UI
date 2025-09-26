@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: ინტერნეტი
   ethernet_disconnected: ინტერნეტი არ არის
   notifications: შეტყობინებები
-  open_system_tray: ღია სისტემის უჯრა
   settings: სწრაფი პარამეტრები
   smart_charge: '- ჭკვიანი მუხტი'
   volume: ტომი
@@ -76,9 +75,6 @@ settings:
   shutdown: Გათიშვა
   sleep: ძილი
   title: პარამეტრები
-tray:
-  empty: 'არ არის უჯრის ელემენტები (შენიშვნა: Windows 10 არ არის განხორციელებული)'
-  unlabeled: არასასურველი უჯრის ხატი
 userhome:
   empty_list: არ არის ნივთები
   folders:
