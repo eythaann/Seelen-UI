@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: internetåtkomst
   ethernet_disconnected: Ingen internetuppkoppling
   notifications: Meddelanden
-  open_system_tray: Öppet system
   settings: Snabbinställningar
   smart_charge: '- Smart laddning'
   volume: Volym
@@ -76,9 +75,6 @@ settings:
   shutdown: Stänga av
   sleep: Sova
   title: inställningar
-tray:
-  empty: 'Inga objekt i facket (Obs: Windows 10 är inte implementerat)'
-  unlabeled: Ikon för obemärkt fack
 userhome:
   empty_list: Inga föremål
   folders:
