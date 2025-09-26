@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Tryck på alla tangentkombinationer
     title: Registrera ny genväg
-tray:
-  quit: Sluta
-  restart: Starta om användargränssnittet
-  settings: Inställningar
