@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Accès Internet
   ethernet_disconnected: Pas d'accès Internet
   notifications: Notifications
-  open_system_tray: Ouvrir la barre d'état système
   settings: Réglages rapides
   smart_charge: '- Chargement intelligent'
   volume: Volume
@@ -76,9 +75,6 @@ settings:
   shutdown: Arrêter
   sleep: Mettre en veille
   title: Paramètres
-tray:
-  empty: 'Pas d''éléments dans la zone de notification (Note : Windows 10 n''est pas supporté)'
-  unlabeled: Icône de plateau sans étiquette
 userhome:
   empty_list: Aucun élément
   folders:
