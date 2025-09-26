@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: ایتھر نیٹ کنیکٹڈ
   ethernet_disconnected: ایتھر نیٹ ڈسکنیکٹ
   notifications: اطلاعات
-  open_system_tray: اوپن سسٹم ٹرے
   settings: سیٹٹنگ
   smart_charge: '- سمارٹ چارج'
   volume: والیم
@@ -76,9 +75,6 @@ settings:
   shutdown: شٹ ڈاؤن
   sleep: سلیپ
   title: عنوان
-tray:
-  empty: 'ٹرے آئٹمز نہیں (نوٹ: ونڈوز 10 پر عمل درآمد نہیں ہوا ہے)'
-  unlabeled: غیر لیبلڈ ٹرے آئیکن
 userhome:
   empty_list: کوئی اشیاء نہیں
   folders:
