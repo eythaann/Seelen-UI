@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Internettilgang
   ethernet_disconnected: Ingen internettilgang
   notifications: Varsler
-  open_system_tray: Åpent systembrett
   settings: Raske innstillinger
   smart_charge: '- Smart kostnad'
   volume: Volum
@@ -76,9 +75,6 @@ settings:
   shutdown: Skru av
   sleep: Sove
   title: Innstillinger
-tray:
-  empty: 'Ingen brettelementer (Merk: Windows 10 er ikke implementert)'
-  unlabeled: Umerket brettikon
 userhome:
   empty_list: Ingen ting
   folders:

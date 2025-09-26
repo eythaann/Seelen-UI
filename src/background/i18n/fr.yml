@@ -38,7 +38,3 @@ shortcut:
   register:
     placeholder: Appuyez sur n'importe quelle combinaison de touches
     title: Enregistrement de nouveaux raccourcis
-tray:
-  quit: Arrêter l'application
-  restart: Redémarrer l'interface utilisateur
-  settings: Paramètres

@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: 인터넷 연결됨
   ethernet_disconnected: 인터넷 연결 안됨
   notifications: 알림
-  open_system_tray: 시스템 트레이 열기
   settings: 빠른 설정
   smart_charge: ' - 스마트 충전'
   volume: 볼륨
@@ -76,9 +75,6 @@ settings:
   shutdown: 종료
   sleep: 절전
   title: 설정
-tray:
-  empty: '트레이 항목 없음(참고: Windows 10은 구현되지 않음)'
-  unlabeled: 레이블이 없는 트레이 아이콘
 userhome:
   empty_list: 항목 없음
   folders:

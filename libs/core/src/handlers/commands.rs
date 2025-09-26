@@ -225,11 +225,6 @@ slu_commands_declaration! {
     ClosePopup = close_popup(instance_id: uuid::Uuid),
     GetPopupConfig = get_popup_config(instance_id: uuid::Uuid) -> SluPopupConfig,
 
-    // Tray Icons
-    GetTrayIcons = get_tray_icons() -> Vec<TrayIcon>,
-    OnClickTrayIcon = on_click_tray_icon(key: String),
-    OnContextMenuTrayIcon = on_context_menu_tray_icon(key: String),
-
     // Network
     WlanGetProfiles = wlan_get_profiles() -> Vec<WlanProfile>,
     WlanStartScanning = wlan_start_scanning(),

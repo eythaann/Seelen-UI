@@ -78,8 +78,6 @@ slu_events_declaration! {
 
     ColorsChanged(UIColors) as "colors-changed",
 
-    TrayInfo(Vec<TrayIcon>) as "tray-info",
-
     ToolbarOverlaped(bool) as "set-auto-hide",
 
     WegOverlaped(bool) as "set-auto-hide",

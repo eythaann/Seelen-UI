@@ -38,7 +38,3 @@ shortcut:
   register:
     placeholder: Premeu qualsevol combinació de tecles
     title: Registre de nou drecera
-tray:
-  quit: Abandonar
-  restart: Reinicieu la interfície d'usuari
-  settings: Configuració

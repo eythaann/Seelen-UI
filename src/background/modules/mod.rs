@@ -10,7 +10,6 @@ pub mod power;
 pub mod shared;
 pub mod start;
 pub mod system_settings;
-pub mod tray;
 pub mod user;
 pub mod uwp;
 

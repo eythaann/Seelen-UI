@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: internet toegang
   ethernet_disconnected: Geen toegang tot het internet
   notifications: Meldingen
-  open_system_tray: Open systeemlade
   settings: Snelle instellingen
   smart_charge: ' - Slimme lading'
   volume: Volume
@@ -76,9 +75,6 @@ settings:
   shutdown: Afsluiten
   sleep: Slaap
   title: Instellingen
-tray:
-  empty: 'Geen lade-items (Opmerking: Windows 10 is niet geïmplementeerd)'
-  unlabeled: Pictogram Lade zonder label
 userhome:
   empty_list: Geen items
   folders:

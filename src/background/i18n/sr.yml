@@ -34,7 +34,3 @@ shortcut:
   register:
     placeholder: Притисните било коју комбинацију тастера
     title: Регистровање нове пречице
-tray:
-  quit: Престати
-  restart: Поново покрените уи
-  settings: Подешавања

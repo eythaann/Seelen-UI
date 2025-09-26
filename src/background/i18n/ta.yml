@@ -38,7 +38,3 @@ shortcut:
   register:
     placeholder: எந்த முக்கிய கலவையையும் அழுத்தவும்
     title: புதிய குறுக்குவழியை பதிவு செய்தல்
-tray:
-  quit: வெளியேறு
-  restart: UI ஐ மறுதொடக்கம் செய்யுங்கள்
-  settings: அமைப்புகள்

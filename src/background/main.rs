@@ -4,7 +4,6 @@
 
 mod app;
 mod app_instance;
-mod app_tray;
 mod cli;
 mod error;
 mod exposed;
@@ -31,12 +30,10 @@ extern crate lazy_static;
 use std::sync::{atomic::AtomicBool, OnceLock};
 
 use app::{Seelen, SEELEN};
-use app_tray::try_register_tray_icon;
 use cli::{application::handle_console_client, SelfPipe, ServicePipe};
 use error::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
-use modules::tray::application::ensure_tray_overflow_creation;
 use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
@@ -76,11 +73,7 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
 
     check_for_webview_optimal_state(app_handle)?;
 
-    // try it at start it on open the program to avoid do it before
-    log_error!(ensure_tray_overflow_creation());
-
     trace_lock!(SEELEN).start()?;
-    log_error!(try_register_tray_icon());
     trace_lock!(PERFORMANCE_HELPER).end("setup");
     Ok(())
 }

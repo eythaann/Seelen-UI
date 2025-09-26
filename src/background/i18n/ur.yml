@@ -38,7 +38,3 @@ shortcut:
   register:
     placeholder: کوئی بھی کلیدی مجموعہ دبائیں
     title: نیا شارٹ کٹ رجسٹر کرنا
-tray:
-  quit: چھوڑ دیں
-  restart: دوبارہ شروع کریں UI
-  settings: ترتیبات

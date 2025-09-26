@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Vajutage mis tahes võtmekombinatsiooni
     title: Uue otsetee registreerimine
-tray:
-  quit: Lõpeta
-  restart: UI taaskäivitamine
-  settings: Seaded

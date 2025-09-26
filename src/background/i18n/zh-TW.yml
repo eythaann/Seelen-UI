@@ -28,7 +28,3 @@ shortcut:
   register:
     placeholder: 按任何鍵組合
     title: 註冊新快捷方式
-tray:
-  quit: 辭職
-  restart: 重新啟動UI
-  settings: 設定

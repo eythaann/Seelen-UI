@@ -38,7 +38,3 @@ shortcut:
   register:
     placeholder: Har qanday tugmachani bosing
     title: Yangi yorliqni ro'yxatdan o'tkazish
-tray:
-  quit: Ketmoq
-  restart: Ui qayta ishga tushiring
-  settings: Sozlash

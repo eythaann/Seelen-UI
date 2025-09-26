@@ -44,7 +44,6 @@ const initialState: RootState = {
   },
   powerPlan: "Unknown",
   batteries: [],
-  systemTray: [],
   networkAdapters: [],
   networkLocalIp: null,
   online: false,
@@ -65,9 +64,7 @@ export const RootSlice = createSlice({
     ...StateBuilder.reducersFor(initialState),
     addWindowColor(
       state,
-      action: PayloadAction<
-        [number, { background: string; foreground: string }]
-      >,
+      action: PayloadAction<[number, { background: string; foreground: string }]>,
     ) {
       state.windowColorByHandle[`${action.payload[0]}`] = action.payload[1];
     },
@@ -94,8 +91,6 @@ export async function lazySlice(d: Dispatch) {
   });
 
   invoke(SeelenCommand.GetMediaSessions).then((sessions) => d(RootActions.setMediaSessions(sessions)));
-
-  invoke(SeelenCommand.GetTrayIcons).then((info) => d(RootActions.setSystemTray(info)));
 
   LanguageList.getAsync().then((list) => d(RootActions.setLanguages(list.asArray())));
 

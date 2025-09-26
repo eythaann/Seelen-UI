@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: ການ​ເຂົ້າ​ເຖິງ​ອິນ​ເຕີ​ເນັດ
   ethernet_disconnected: ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ
   notifications: ແຈ້ງການ
-  open_system_tray: ເປີດຖາດລະບົບ
   settings: ການຕັ້ງຄ່າດ່ວນ
   smart_charge: '- ຮັບຜິດຊອບສະຫຼາດ'
   volume: ປະລິມານ
@@ -76,9 +75,6 @@ settings:
   shutdown: ປິດ​ເຄື່ອງ
   sleep: ນອນ
   title: ການກໍານົດ
-tray:
-  empty: 'ບໍ່ມີລາຍການ Tray (ຫມາຍເຫດ: Windows 10 ບໍ່ໄດ້ຖືກຈັດຕັ້ງປະຕິບັດ)'
-  unlabeled: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບການຮັກສາ
 userhome:
   empty_list: ບໍ່ມີສິນຄ້າຫຍັງ
   folders:

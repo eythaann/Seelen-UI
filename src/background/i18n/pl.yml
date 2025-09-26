@@ -40,7 +40,3 @@ shortcut:
   register:
     placeholder: Naciśnij dowolną kombinację klawiszy
     title: Rejestracja nowego skrótu
-tray:
-  quit: Wyjdź
-  restart: Zrestartuj interfejs
-  settings: Ustawienia

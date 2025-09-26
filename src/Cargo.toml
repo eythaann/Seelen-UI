@@ -27,7 +27,7 @@ tauri-build = { workspace = true, features = [] }
 [dependencies]
 slu-ipc = { workspace = true }
 positioning = { workspace = true }
-tauri = { workspace = true, features = ["protocol-asset", "tray-icon", "image-png"] }
+tauri = { workspace = true, features = ["protocol-asset", "devtools"] }
 tauri-plugin-fs = { workspace = true }
 tauri-plugin-dialog = { workspace = true }
 tauri-plugin-autostart = { workspace = true }

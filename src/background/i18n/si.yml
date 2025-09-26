@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: ඕනෑම යතුරු සංයෝජනයක් ඔබන්න
     title: නව කෙටිමඟ ලියාපදිංචි කිරීම
-tray:
-  quit: ඉවත්ව යන්න
-  restart: UI නැවත ආරම්භ කරන්න
-  settings: සැකසුම්

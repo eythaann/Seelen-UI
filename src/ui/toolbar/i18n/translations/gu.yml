@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: ઇન્ટરનેટનો ઉપયોગ
   ethernet_disconnected: કોઈ ઇન્ટરનેટ એક્સેસ નથી
   notifications: સૂચના
-  open_system_tray: ખુલ્લી સિસ્ટમ ટ્રે
   settings: ઝડપી સેટિંગ્સ
   smart_charge: '- સ્માર્ટ ચાર્જ'
   volume: જથ્થો
@@ -76,9 +75,6 @@ settings:
   shutdown: બંધ કરો
   sleep: ઊંઘ
   title: પતાવટ
-tray:
-  empty: 'કોઈ ટ્રે આઇટમ્સ (નોંધ: વિન્ડોઝ 10 લાગુ નથી)'
-  unlabeled: અનન્ય ટ્રે ચિહ્ન
 userhome:
   empty_list: કોઈ વસ્તુ
   folders:

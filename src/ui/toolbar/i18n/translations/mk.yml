@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Интернет пристап
   ethernet_disconnected: Нема пристап до Интернет
   notifications: Известувања
-  open_system_tray: Отворен фиока за систем
   settings: Брзи поставки
   smart_charge: '- Паметно полнење'
   volume: Волумен
@@ -76,9 +75,6 @@ settings:
   shutdown: Исклучи
   sleep: Спиење
   title: Поставки
-tray:
-  empty: 'Без предмети за послужавник (белешка: Windows 10 не се спроведува)'
-  unlabeled: Икона за обележување на послужавник
 userhome:
   empty_list: Нема предмети
   folders:

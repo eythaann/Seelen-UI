@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: انټرنیټ لاسرسی
   ethernet_disconnected: هیڅ انټرنیټ لاسرسی
   notifications: خبرتیاوې
-  open_system_tray: د خلاص سیسټم ټری
   settings: ګړندي امستنې
   smart_charge: '- سمارټ چارج'
   volume: حجم
@@ -76,9 +75,6 @@ settings:
   shutdown: ‍‍‍بندول
   sleep: ویده شه
   title: امستنې
-tray:
-  empty: 'هیڅ ټرای توکي ندي (یادونه: وینډوز 10 ندي پلي شوي)'
-  unlabeled: بې بنسټه ټری عکس
 userhome:
   empty_list: هیڅ توکي نشته
   folders:

@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Интернэт интернет нэвтрэх
   ethernet_disconnected: Интернэтэд нэвтрэх боломжгүй байна
   notifications: Мэдэгдэл
-  open_system_tray: Нээлттэй системийн тавиур
   settings: Түлэлцэн тохиргоо
   smart_charge: '- ухаалаг цэнэг'
   volume: Хэмжээ
@@ -76,9 +75,6 @@ settings:
   shutdown: Унтраах
   sleep: Нойр
   title: Тохиргоо
-tray:
-  empty: 'Тавиурын зүйл байхгүй (тэмдэглэл: Windows 10-ийг хэрэгжүүлээгүй)'
-  unlabeled: Unlabelled Tray дүрс
 userhome:
   empty_list: Зүйл байхгүй
   folders:

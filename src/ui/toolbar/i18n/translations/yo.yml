@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Wiwọle Intanẹẹti
   ethernet_disconnected: Ko si wiwọle intanẹẹti ko si
   notifications: Awọn iwifunni
-  open_system_tray: Ṣii Tẹ Tẹ
   settings: Eto Awọn ọna
   smart_charge: '- Awọn iṣakoso Smart'
   volume: Iwọn didun
@@ -76,9 +75,6 @@ settings:
   shutdown: Paade
   sleep: Sun
   title: Ètò
-tray:
-  empty: 'Ko si awọn ohun atẹ (akọsilẹ: Windows 10 ko mu)'
-  unlabeled: Alailowaya ti ko ni ile-iwe
 userhome:
   empty_list: Ko si awọn ohun kan
   folders:

@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Press all Tastekombinatioun
     title: Registréiert nei Ofkiirzung
-tray:
-  quit: Ness
-  restart: Restart ui
-  settings: Astellunge

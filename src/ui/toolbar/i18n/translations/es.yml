@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Acceso a internet
   ethernet_disconnected: Sin acceso a internet
   notifications: Notificaciones
-  open_system_tray: Abrir bandeja del sistema
   settings: Configuraciones rápidas
   smart_charge: ' - Carga inteligente'
   volume: Volumen
@@ -76,9 +75,6 @@ settings:
   shutdown: Apagar
   sleep: Suspender
   title: Configuraciones
-tray:
-  empty: 'Sin elementos en la bandeja (Nota: Windows 10 no está implementado)'
-  unlabeled: Icono de bandeja sin etiqueta
 userhome:
   empty_list: No hay artículos
   folders:

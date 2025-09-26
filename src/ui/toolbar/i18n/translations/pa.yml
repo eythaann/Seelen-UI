@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: ਇੰਟਰਨੈੱਟ ਪਹੁੰਚ
   ethernet_disconnected: ਕੋਈ ਇੰਟਰਨੈੱਟ ਪਹੁੰਚ ਨਹੀਂ
   notifications: ਸੂਚਨਾਵਾਂ
-  open_system_tray: ਸਿਸਟਮ ਟਰੇ ਖੋਲ੍ਹੋ
   settings: ਤੇਜ਼ ਸੈਟਿੰਗ
   smart_charge: '- ਸਮਾਰਟ ਚਾਰਜ'
   volume: ਵਾਲੀਅਮ
@@ -76,9 +75,6 @@ settings:
   shutdown: ਸ਼ਟ ਡਾਉਨ
   sleep: ਨੀਂਦ
   title: ਸੈਟਿੰਗਜ਼
-tray:
-  empty: 'ਕੋਈ ਟਰੇ ਆਈਟਮਾਂ (ਨੋਟ: ਵਿੰਡੋਜ਼ 10 ਲਾਗੂ ਨਹੀਂ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ)'
-  unlabeled: ਬਿਨਾਲੇ ਟਰੇ ਆਈਕਨ
 userhome:
   empty_list: ਕੋਈ ਚੀਜ਼ਾਂ ਨਹੀਂ
   folders:

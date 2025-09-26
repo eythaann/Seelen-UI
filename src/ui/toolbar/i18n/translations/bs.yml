@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: pristup Internetu
   ethernet_disconnected: Nema pristupa internetu
   notifications: Obavijesti
-  open_system_tray: Otvorena sistemska ladica
   settings: Brze postavke
   smart_charge: '- pametna optužba'
   volume: Zapremina
@@ -76,9 +75,6 @@ settings:
   shutdown: Ugasiti
   sleep: Spavati
   title: Postavke
-tray:
-  empty: 'Nema predmeta za ladicu (Napomena: Windows 10 se ne primjenjuje)'
-  unlabeled: Ikona neobrađene ladice
 userhome:
   empty_list: Nema predmeta
   folders:

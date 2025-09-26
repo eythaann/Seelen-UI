@@ -246,7 +246,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::modules::notifications::infrastructure::*;
     use crate::modules::power::infrastructure::*;
     use crate::modules::system_settings::infrastructure::*;
-    use crate::modules::tray::infrastructure::*;
     use crate::modules::user::infrastructure::*;
     use crate::resources::commands::*;
 

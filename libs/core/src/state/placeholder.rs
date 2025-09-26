@@ -307,10 +307,6 @@ common_item! {
     /// ```
     struct NotificationsToolbarItem {}
 
-    /// ## Workspace Item Scope
-    /// this module does no expand the scope of the item
-    struct TrayToolbarItem {}
-
     /// ## Device Item Scope
     /// this module does no expand the scope of the item
     struct DeviceToolbarItem {}
@@ -339,7 +335,6 @@ pub enum ToolbarItem {
     Media(MediaToolbarItem),
     User(UserToolbarItem),
     Notifications(NotificationsToolbarItem),
-    Tray(TrayToolbarItem),
     Device(DeviceToolbarItem),
     Settings(SettingsToolbarItem),
     Workspaces(WorkspaceToolbarItem),
@@ -358,7 +353,6 @@ impl ToolbarItem {
             ToolbarItem::Media(item) => item.id.clone(),
             ToolbarItem::User(item) => item.id.clone(),
             ToolbarItem::Notifications(item) => item.id.clone(),
-            ToolbarItem::Tray(item) => item.id.clone(),
             ToolbarItem::Device(item) => item.id.clone(),
             ToolbarItem::Settings(item) => item.id.clone(),
             ToolbarItem::Workspaces(item) => item.id.clone(),
@@ -377,7 +371,6 @@ impl ToolbarItem {
             ToolbarItem::Media(item) => item.id = id,
             ToolbarItem::User(item) => item.id = id,
             ToolbarItem::Notifications(item) => item.id = id,
-            ToolbarItem::Tray(item) => item.id = id,
             ToolbarItem::Device(item) => item.id = id,
             ToolbarItem::Settings(item) => item.id = id,
             ToolbarItem::Workspaces(item) => item.id = id,

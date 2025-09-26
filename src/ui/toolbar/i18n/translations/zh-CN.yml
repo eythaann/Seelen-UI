@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: 已连接到互联网
   ethernet_disconnected: 未连接到互联网
   notifications: 通知
-  open_system_tray: 打开系统托盘
   settings: 快速设置
   smart_charge: ' - 智能充电'
   volume: 音量
@@ -76,9 +75,6 @@ settings:
   shutdown: 关机
   sleep: 睡眠
   title: 设置
-tray:
-  empty: 无托盘项目（注：Windows 10 未实施）
-  unlabeled: 无标签托盘图标
 userhome:
   empty_list: 无项目
   folders:

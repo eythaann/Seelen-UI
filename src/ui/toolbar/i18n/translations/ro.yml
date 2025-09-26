@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: acces la internet
   ethernet_disconnected: Fara acces la internet
   notifications: Notificări
-  open_system_tray: Tava de sistem deschisă
   settings: Setări rapide
   smart_charge: '- Încărcare inteligentă'
   volume: Volum
@@ -76,9 +75,6 @@ settings:
   shutdown: Închide
   sleep: Dormi
   title: Setări
-tray:
-  empty: 'Nu există elemente în tavă (Notă: Windows 10 nu este implementat)'
-  unlabeled: Pictograma tavă fără etichetă
 userhome:
   empty_list: Nu există articole
   folders:

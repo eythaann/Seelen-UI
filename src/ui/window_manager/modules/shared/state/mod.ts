@@ -5,12 +5,9 @@ import { WindowManagerSettings, WmNode } from "@seelen-ui/lib/types";
 import { NodeUtils } from "../utils";
 
 export const $layout = signal<WmNode | null>(null);
-await Widget.getCurrent().webview.listen<WmNode>(
-  SeelenEvent.WMSetLayout,
-  (e) => {
-    $layout.value = e.payload;
-  },
-);
+await Widget.getCurrent().webview.listen<WmNode>(SeelenEvent.WMSetLayout, (e) => {
+  $layout.value = e.payload;
+});
 
 const getOpenApps = (items: WegItems) => {
   return items.inner.left
@@ -51,14 +48,11 @@ export const $overlay_visible = computed(() => {
     ($layout.value &&
       NodeUtils.contains($layout.value, $focused_app.value.hwnd) &&
       !$focused_app.value.isMaximized &&
-      !$focused_app.value.isFullscreened &&
-      !$focused_app.value.isBeingDragged)
+      !$focused_app.value.isFullscreened)
   );
 });
 
-export const $settings = signal<WindowManagerSettings>(
-  (await Settings.getAsync()).windowManager,
-);
+export const $settings = signal<WindowManagerSettings>((await Settings.getAsync()).windowManager);
 Settings.onChange((settings) => ($settings.value = settings.windowManager));
 
 // =================================================
@@ -75,22 +69,10 @@ effect(() => {
   styles.setProperty("--config-padding", `${settings.workspacePadding}px`);
   styles.setProperty("--config-containers-gap", `${settings.workspaceGap}px`);
 
-  styles.setProperty(
-    "--config-margin-top",
-    `${settings.workspaceMargin.top}px`,
-  );
-  styles.setProperty(
-    "--config-margin-left",
-    `${settings.workspaceMargin.left}px`,
-  );
-  styles.setProperty(
-    "--config-margin-right",
-    `${settings.workspaceMargin.right}px`,
-  );
-  styles.setProperty(
-    "--config-margin-bottom",
-    `${settings.workspaceMargin.bottom}px`,
-  );
+  styles.setProperty("--config-margin-top", `${settings.workspaceMargin.top}px`);
+  styles.setProperty("--config-margin-left", `${settings.workspaceMargin.left}px`);
+  styles.setProperty("--config-margin-right", `${settings.workspaceMargin.right}px`);
+  styles.setProperty("--config-margin-bottom", `${settings.workspaceMargin.bottom}px`);
 
   styles.setProperty("--config-border-offset", `${settings.border.offset}px`);
   styles.setProperty("--config-border-width", `${settings.border.width}px`);

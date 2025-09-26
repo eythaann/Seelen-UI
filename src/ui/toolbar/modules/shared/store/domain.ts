@@ -10,7 +10,6 @@ import {
   NetworkAdapter,
   PowerMode,
   PowerStatus,
-  TrayIcon,
   User,
   WegAppGroupItem,
   WlanBssEntry,
@@ -33,7 +32,6 @@ export interface RootState {
   powerStatus: PowerStatus;
   powerPlan: PowerMode;
   batteries: Battery[];
-  systemTray: TrayIcon[];
   networkAdapters: NetworkAdapter[];
   networkLocalIp: string | null;
   online: boolean;

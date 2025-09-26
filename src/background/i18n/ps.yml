@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: په هر کلي ترکیب فشار ورکړئ
     title: د نوي لنډلارې ثبت کول
-tray:
-  quit: پرېښودل
-  restart: زه له سره بیا پیلوم
-  settings: امستنې

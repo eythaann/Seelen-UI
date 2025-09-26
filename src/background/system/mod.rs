@@ -17,7 +17,6 @@ use crate::{
         power::infrastructure::{register_power_events, release_power_events},
         shared::radio::RADIO_MANAGER,
         system_settings::infrastructure::{register_system_settings_events, release_colors_events},
-        tray::infrastructure::register_tray_icons_events,
         user::infrastructure::register_user_events,
     },
     trace_lock,
@@ -40,7 +39,6 @@ pub fn declare_system_events_handlers() -> Result<()> {
     });
 
     register_app_win_events();
-    register_tray_icons_events();
     register_notification_events();
     register_media_events();
     register_user_events();

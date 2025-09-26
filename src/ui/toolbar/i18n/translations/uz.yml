@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Internetga ulanish
   ethernet_disconnected: Internetga kirish yo'q
   notifications: Bildirishnoma
-  open_system_tray: Ochiq tizimning patnisi
   settings: Tez sozlamalar
   smart_charge: '- aqlli zaryad'
   volume: Hajmi
@@ -76,9 +75,6 @@ settings:
   shutdown: O'chirish; yopish
   sleep: Uyqu
   title: Sozlash
-tray:
-  empty: 'Patnis buyumlari yo''q (Izoh: Windows 10 amalga oshirilmagan)'
-  unlabeled: Bojavelilmagan aşınma ikonka
 userhome:
   empty_list: Hech narsa yo'q
   folders:

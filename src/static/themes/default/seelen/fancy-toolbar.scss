@@ -320,63 +320,6 @@
   }
 }
 
-.tray {
-  @extend %popup;
-  width: 250px;
-
-  .tray-list {
-    @extend %list;
-    overflow-y: auto;
-    max-height: 50vh;
-
-    .tray-item {
-      display: grid;
-      grid-template-columns: 20px 1fr;
-      align-items: center;
-      gap: 8px;
-      border-radius: 8px;
-      padding: 8px;
-      gap: 6px;
-      height: min-content;
-
-      &:hover {
-        background-color: rgba(var(--config-accent-color-rgb), 0.2);
-      }
-
-      .tray-item-icon-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .tray-item-icon {
-          height: 1rem;
-          object-fit: contain;
-        }
-      }
-
-      .tray-item-label {
-        font-size: 0.7rem;
-        font-weight: 600;
-      }
-
-      .tray-item-label-tooltip {
-        padding: 0 40px;
-      }
-    }
-  }
-
-  .tray-empty {
-    width: 100%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--color-gray-600);
-  }
-}
-
 .wlan-selector {
   @extend %popup;
 

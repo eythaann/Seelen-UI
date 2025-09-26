@@ -40,7 +40,3 @@ shortcut:
   register:
     placeholder: Presione cualquier combinación de teclas
     title: Registrando un nuevo atajo
-tray:
-  quit: Deje de
-  restart: Reiniciar IU
-  settings: Ajustes

@@ -9,8 +9,8 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, RECT, WPARAM},
     System::Power::RegisterSuspendResumeNotification,
     UI::WindowsAndMessaging::{
-        CreateWindowExW, DefWindowProcW, DispatchMessageW, FindWindowExW, GetMessageW,
-        PostQuitMessage, RegisterClassW, RegisterDeviceNotificationW, RegisterShellHookWindow,
+        CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
+        RegisterClassW, RegisterDeviceNotificationW, RegisterShellHookWindow,
         RegisterWindowMessageW, TranslateMessage, DBT_DEVTYP_DEVICEINTERFACE,
         DEVICE_NOTIFY_WINDOW_HANDLE, DEV_BROADCAST_DEVICEINTERFACE_W, HWND_TOPMOST, MSG,
         SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, WINDOW_EX_STYLE, WINDOW_STYLE, WM_DESTROY,
@@ -159,12 +159,4 @@ where
     F: Fn(u32, usize, isize) -> Result<()> + Send + Sync + 'static,
 {
     trace_lock!(CALLBACKS).push(Box::new(callback));
-}
-
-pub fn get_native_shell_hwnd() -> Result<HWND> {
-    let hwnd = unsafe {
-        let class = WindowsString::from("Shell_TrayWnd");
-        FindWindowExW(None, None, class.as_pcwstr(), None)?
-    };
-    Ok(hwnd)
 }

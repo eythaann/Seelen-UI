@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: هر ترکیب کلیدی را فشار دهید
     title: ثبت میانبر جدید
-tray:
-  quit: ترک
-  restart: UI را مجدداً راه اندازی کنید
-  settings: تنظیمات

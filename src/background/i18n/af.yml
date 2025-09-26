@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Druk op enige sleutelkombinasie
     title: Nuwe kortpad registreer
-tray:
-  quit: Laat vaar
-  restart: Herbegin UI
-  settings: Instellings

@@ -36,7 +36,3 @@ shortcut:
   register:
     placeholder: Аливаа товчлуурын хослолыг дарна уу
     title: Шинэ товчлол бүртгэж байна
-tray:
-  quit: Орхих
-  restart: UI-г дахин эхлүүлнэ үү
-  settings: Тохиргоо

@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Internetadgang
   ethernet_disconnected: Ingen internetadgang
   notifications: Underretninger
-  open_system_tray: Åben systembakke
   settings: Hurtige indstillinger
   smart_charge: '- Smart opladning'
   volume: Bind
@@ -76,9 +75,6 @@ settings:
   shutdown: Lukke ned
   sleep: Søvn
   title: Indstillinger
-tray:
-  empty: 'Ingen elementer i bakken (Bemærk: Windows 10 er ikke implementeret)'
-  unlabeled: Ikon for ubemærket bakke
 userhome:
   empty_list: Ingen genstande
   folders:

@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: การเข้าถึงอินเทอร์เน็ต
   ethernet_disconnected: ไม่มีการเข้าถึงอินเทอร์เน็ต
   notifications: การแจ้งเตือน
-  open_system_tray: ถาดระบบเปิด
   settings: การตั้งค่าอย่างรวดเร็ว
   smart_charge: '- ชาร์จอัจฉริยะ'
   volume: ปริมาณ
@@ -76,9 +75,6 @@ settings:
   shutdown: ปิดตัวลง
   sleep: นอน
   title: การตั้งค่า
-tray:
-  empty: 'ไม่มีรายการถาด (หมายเหตุ: Windows 10 ไม่ได้ใช้งาน)'
-  unlabeled: ไอคอนถาดที่ไม่มีป้ายกำกับ
 userhome:
   empty_list: ไม่มีรายการ
   folders:
