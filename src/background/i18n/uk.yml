@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Натисніть будь -яку комбінацію клавіш
     title: Реєстрація нового ярлика
-tray:
-  quit: Звільнися.
-  restart: Перезапустити інтерфейс
-  settings: Налаштування
