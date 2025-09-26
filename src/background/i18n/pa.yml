@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: ਕੋਈ ਵੀ ਕੁੰਜੀ ਸੰਜੋਗ ਦਬਾਓ
     title: ਨਵਾਂ ਸ਼ੌਰਟਕਟ ਰਜਿਸਟਰ ਕਰਨਾ
-tray:
-  quit: ਛੱਡੋ
-  restart: ਰੀਸਟਾਰਟ ਯੂਆਈ
-  settings: ਸੈਟਿੰਗਜ਼
