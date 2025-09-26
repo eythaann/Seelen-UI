@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Apăsați orice combinație de taste
     title: Înregistrarea unei noi comenzi rapide
-tray:
-  quit: Renunțați
-  restart: Restart UI
-  settings: Setări
