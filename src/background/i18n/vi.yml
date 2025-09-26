@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Nhấn bất kỳ kết hợp khóa nào
     title: Đăng ký phím tắt mới
-tray:
-  quit: Từ bỏ
-  restart: Khởi động lại UI
-  settings: Cài đặt
