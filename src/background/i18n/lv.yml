@@ -32,7 +32,3 @@ shortcut:
   register:
     placeholder: Nospiediet jebkuru atslēgu kombināciju
     title: Reģistrējot jaunu saīsni
-tray:
-  quit: Pārtraukt
-  restart: Lietotāja interfeisa restartēšana
-  settings: Iestatījumi
