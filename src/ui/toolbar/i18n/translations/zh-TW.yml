@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: 已連接網際網路
   ethernet_disconnected: 無網際網路連接
   notifications: 通知
-  open_system_tray: 開啟系統匣
   settings: 快速設定
   smart_charge: ' - 智慧充電'
   volume: 音量
@@ -76,9 +75,6 @@ settings:
   shutdown: 關機
   sleep: 睡眠
   title: 系統設定
-tray:
-  empty: '沒有系統匣項目（註：Windows 10 尚未支援）'
-  unlabeled: 無標籤圖示
 userhome:
   empty_list: 沒有項目
   folders:
