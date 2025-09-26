@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: Mynediad i'r Rhyngrwyd
   ethernet_disconnected: Dim Mynediad i'r Rhyngrwyd
   notifications: Hysbysiadau
-  open_system_tray: Hambwrdd System Agored
   settings: Gosodiadau Cyflym
   smart_charge: '- Tâl craff'
   volume: Nghyfrol
@@ -76,9 +75,6 @@ settings:
   shutdown: Chaead
   sleep: Chysger
   title: Gosodiadau
-tray:
-  empty: 'Dim eitemau hambwrdd (nodyn: ni weithredir Windows 10)'
-  unlabeled: Eicon hambwrdd heb ei labelu
 userhome:
   empty_list: Dim eitemau
   folders:
