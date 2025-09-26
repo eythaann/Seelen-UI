@@ -61,7 +61,6 @@ placeholder:
   ethernet_connected: خدمة الإنترنت
   ethernet_disconnected: لا يوجد اتصال بالإنترنت
   notifications: الإشعارات
-  open_system_tray: افتح ايقونات النظام
   settings: الإعدادات السريعة
   smart_charge: '- الشحن الذكي'
   volume: الصوت
@@ -76,9 +75,6 @@ settings:
   shutdown: اطفاء الجهاز
   sleep: النوم
   title: إعدادات
-tray:
-  empty: 'لا توجد عناصر صينية (ملاحظة: لم يتم تنفيذ نظام التشغيل Windows 10)'
-  unlabeled: أيقونة الدرج غير المسمى
 userhome:
   empty_list: لا توجد عناصر
   folders:
