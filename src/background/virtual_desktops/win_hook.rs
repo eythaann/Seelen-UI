@@ -1,11 +1,12 @@
 use crate::{
     error::Result,
+    modules::apps::application::{UserAppsEvent, UserAppsManager},
     trace_lock,
-    virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager, HIDDEN_BY_USER},
-    windows_api::{
-        window::{event::WinEvent, Window},
-        WindowEnumerator,
+    virtual_desktops::{
+        events::VirtualDesktopEvent, SluWorkspacesManager, MINIMIZED_BY_USER,
+        MINIMIZED_BY_WORKSPACES, WORKSPACES_MANAGER,
     },
+    windows_api::window::{event::WinEvent, Window},
 };
 
 impl SluWorkspacesManager {
@@ -35,7 +36,7 @@ impl SluWorkspacesManager {
             return;
         }
 
-        log::trace!("adding window ({window_id:x}) to workspace {}", active.id);
+        log::trace!("adding {window} to workspace {}", active.id);
         active.windows.push(window_id);
 
         Self::send(VirtualDesktopEvent::WindowAdded {
@@ -73,41 +74,42 @@ impl SluWorkspacesManager {
             }
         }
 
-        // scan new windows, but only add the visible ones to the active workspace
-        WindowEnumerator::new().for_each(|window| {
-            if !self.contains(&window) && Self::should_be_added(&window) && !window.is_minimized() {
-                self.add(&window);
+        // scan no added windows, but only add the non minimized ones to the current active workspace
+        UserAppsManager::instance()
+            .interactable_windows
+            .for_each(|data| {
+                let window = Window::from(data.hwnd);
+                if !self.contains(&window) && !window.is_minimized() {
+                    self.add(&window);
+                }
+            });
+        Ok(())
+    }
+
+    pub(super) fn init_hook_listener() {
+        UserAppsManager::subscribe(|event| match event {
+            UserAppsEvent::WinAdded(addr) => {
+                let mut guard = trace_lock!(WORKSPACES_MANAGER);
+                guard.add(&Window::from(addr));
             }
-        })
+            UserAppsEvent::WinRemoved(addr) => {
+                let mut guard = trace_lock!(WORKSPACES_MANAGER);
+                guard.remove(&Window::from(addr));
+            }
+            _ => {}
+        });
     }
 
     pub fn on_win_event(&mut self, event: WinEvent, window: &Window) -> Result<()> {
         let window_id = window.address();
         match event {
-            WinEvent::ObjectCreate | WinEvent::ObjectShow => {
-                if !self.contains(window) && Self::should_be_added(window) {
-                    self.add(window);
-                }
-            }
-            // ObjectNameChange, is fired on styles changed too, so we need to revaluate them,
-            // also there's filters by title, so this will be revaluated too.
-            WinEvent::ObjectNameChange => match self.contains(window) {
-                true => {
-                    if !Self::should_be_added(window) {
-                        self.remove(window);
-                    }
-                }
-                false => {
-                    if Self::should_be_added(window) {
-                        self.add(window);
-                    }
-                }
-            },
             WinEvent::SystemMinimizeStart => {
-                trace_lock!(HIDDEN_BY_USER).insert(window_id);
+                if !MINIMIZED_BY_WORKSPACES.contains(&window_id) {
+                    let _ = MINIMIZED_BY_USER.insert(window_id);
+                }
             }
             WinEvent::SystemMinimizeEnd => {
-                trace_lock!(HIDDEN_BY_USER).remove(&window_id);
+                MINIMIZED_BY_USER.remove(&window_id);
                 if let Some(workspace) =
                     self.workspace_containing_window(&window.address()).cloned()
                 {
@@ -117,26 +119,12 @@ impl SluWorkspacesManager {
                     self.add(window);
                 }
             }
-            WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
-                self.remove(window);
-            }
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
                 if let Some(workspace) = self.workspace_containing_window_mut(&window_id) {
                     // update z-order
                     workspace.windows.retain(|w| w != &window_id);
                     workspace.windows.push(window_id);
                     self.save();
-                }
-            }
-            WinEvent::ObjectParentChange => {
-                if let Some(parent) = window.parent() {
-                    if self.contains(window) {
-                        self.remove(window);
-                    }
-
-                    if !self.contains(&parent) && Self::should_be_added(&parent) {
-                        self.add(&parent);
-                    }
                 }
             }
             WinEvent::SyntheticMonitorChanged => {

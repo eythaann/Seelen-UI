@@ -56,8 +56,8 @@ impl UserAppsManager {
                     if !USER_APPS_MANAGER.contains_win(&parent)
                         && parent.is_interactable_and_not_hidden()
                     {
-                        USER_APPS_MANAGER.add_win(&window);
-                        Self::send(UserAppsEvent::WinAdded(window.address()));
+                        USER_APPS_MANAGER.add_win(&parent);
+                        Self::send(UserAppsEvent::WinAdded(parent.address()));
                     }
                 }
             }

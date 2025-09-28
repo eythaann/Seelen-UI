@@ -2,12 +2,12 @@ use std::{
     collections::HashSet,
     sync::{
         atomic::{AtomicBool, Ordering},
-        Arc, LazyLock,
+        Arc,
     },
-    time::{Duration, Instant},
+    time::Duration,
 };
 
-use parking_lot::{Mutex, RwLock};
+use parking_lot::RwLock;
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 use windows::Win32::{
@@ -37,55 +37,7 @@ use crate::{
     },
 };
 
-static HOOK_MANAGER_SKIPPER: LazyLock<Arc<Mutex<HookManagerSkipper>>> =
-    LazyLock::new(|| Arc::new(Mutex::new(HookManagerSkipper::default())));
-
 pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
-
-#[derive(Debug)]
-pub struct HookManagerSkipperItem {
-    hwnd: isize,
-    event: WinEvent,
-    expiry: Instant,
-    skipped: bool,
-}
-
-#[derive(Debug, Default)]
-pub struct HookManagerSkipper {
-    to_skip: Vec<HookManagerSkipperItem>,
-}
-
-impl HookManagerSkipper {
-    /// this function is intended to be called before ejecuting a actions that will
-    /// trigger some window event, so the skipper will be removed after 1 second
-    /// if no event is emitted in that interval
-    pub fn skip(&mut self, event: WinEvent, hwnd: isize) {
-        self.to_skip.push(HookManagerSkipperItem {
-            hwnd,
-            event,
-            expiry: Instant::now() + Duration::from_millis(1000),
-            skipped: false,
-        });
-    }
-
-    fn cleanup(&mut self) {
-        self.to_skip
-            .retain(|s| !s.skipped && s.expiry > Instant::now());
-    }
-
-    /// returns true if the event should be skipped
-    fn should_skip(&mut self, event: WinEvent, hwnd: isize) -> bool {
-        if let Some(item) = self
-            .to_skip
-            .iter_mut()
-            .find(|s| s.hwnd == hwnd && s.event == event && !s.skipped && s.expiry > Instant::now())
-        {
-            item.skipped = true;
-            return true;
-        }
-        false
-    }
-}
 
 pub struct HookManager;
 
@@ -115,10 +67,6 @@ impl HookManager {
         }
     }
 
-    pub fn skip_next_event(event: WinEvent, hwnd: isize) {
-        trace_lock!(HOOK_MANAGER_SKIPPER).skip(event, hwnd);
-    }
-
     fn log_event(event: WinEvent, origin: Window) {
         if event == WinEvent::ObjectLocationChange || !LOG_WIN_EVENTS.load(Ordering::Acquire) {
             return;
@@ -142,17 +90,6 @@ impl HookManager {
 
     fn process_event(event: WinEvent, origin: Window) {
         Self::log_event(event, origin);
-
-        {
-            let mut skipper = trace_lock!(HOOK_MANAGER_SKIPPER);
-            if skipper.should_skip(event, origin.address()) {
-                if LOG_WIN_EVENTS.load(Ordering::Acquire) {
-                    log::debug!("Skipping WinEvent::{event:?}");
-                }
-                skipper.cleanup();
-                return;
-            }
-        }
 
         let shoup_update_focused = matches!(
             event,
@@ -210,47 +147,6 @@ impl HookManager {
             }
         }
     }
-}
-
-pub fn init_zombie_window_killer() -> Result<()> {
-    let existing_windows = Arc::new(RwLock::new(HashSet::new()));
-
-    let dict = existing_windows.clone();
-    HookManager::subscribe(move |(event, origin)| match event {
-        WinEvent::ObjectCreate => {
-            dict.write().insert(origin.address());
-        }
-        WinEvent::ObjectDestroy => {
-            dict.write().remove(&origin.address());
-        }
-        _ => {}
-    });
-
-    // Spawns a task that periodically checks for "zombie windows" - windows
-    // that have been destroyed (e.g., through task kill or abnormal termination) but didn't
-    // properly emit the ObjectDestroy event. This thread detects such windows
-    // and emits the missing destruction events to ensure proper cleanup.
-    spawn_named_thread("Zombie Window Exterminator", move || {
-        WindowEnumerator::new()
-            .for_each_and_descendants(|window| {
-                existing_windows.write().insert(window.address());
-            })
-            .log_error();
-
-        loop {
-            std::thread::sleep(std::time::Duration::from_secs(1));
-            let guard = existing_windows.write();
-            for addr in guard.iter() {
-                let window = Window::from(*addr);
-                if !window.is_window() {
-                    // log::trace!("Reaping window: {:0x}", window.address());
-                    log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
-                }
-            }
-        }
-    })?;
-
-    Ok(())
 }
 
 pub fn register_win_hook() -> Result<()> {
@@ -317,5 +213,46 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
         SeelenEvent::VirtualDesktopsChanged,
         get_vd_manager().desktops(),
     )?;
+    Ok(())
+}
+
+pub fn init_zombie_window_killer() -> Result<()> {
+    let existing_windows = Arc::new(RwLock::new(HashSet::new()));
+
+    let dict = existing_windows.clone();
+    HookManager::subscribe(move |(event, origin)| match event {
+        WinEvent::ObjectCreate => {
+            dict.write().insert(origin.address());
+        }
+        WinEvent::ObjectDestroy => {
+            dict.write().remove(&origin.address());
+        }
+        _ => {}
+    });
+
+    // Spawns a task that periodically checks for "zombie windows" - windows
+    // that have been destroyed (e.g., through task kill or abnormal termination) but didn't
+    // properly emit the ObjectDestroy event. This thread detects such windows
+    // and emits the missing destruction events to ensure proper cleanup.
+    spawn_named_thread("Zombie Window Exterminator", move || {
+        WindowEnumerator::new()
+            .for_each_and_descendants(|window| {
+                existing_windows.write().insert(window.address());
+            })
+            .log_error();
+
+        loop {
+            std::thread::sleep(std::time::Duration::from_secs(1));
+            let guard = existing_windows.write();
+            for addr in guard.iter() {
+                let window = Window::from(*addr);
+                if !window.is_window() {
+                    // log::trace!("Reaping window: {:0x}", window.address());
+                    log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
+                }
+            }
+        }
+    })?;
+
     Ok(())
 }

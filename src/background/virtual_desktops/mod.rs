@@ -3,11 +3,9 @@ pub mod events;
 pub mod handlers;
 mod win_hook;
 
-use std::collections::HashSet;
 use std::fs::File;
 use std::sync::{Arc, LazyLock};
 
-use itertools::Itertools;
 use parking_lot::{Mutex, MutexGuard};
 use seelen_core::state::{DesktopWorkspace, VirtualDesktopMonitor, VirtualDesktops, WorkspaceId};
 use seelen_core::system_state::MonitorId;
@@ -15,11 +13,9 @@ use tokio::io::AsyncWriteExt;
 use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
 
 use crate::error::Result;
-use crate::hook::HookManager;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::Debouncer;
 use crate::virtual_desktops::events::VirtualDesktopEvent;
-use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
 use crate::{event_manager, log_error, trace_lock};
 
@@ -29,8 +25,9 @@ static SAVE_DEBOUNCER: LazyLock<Debouncer> =
 pub static WORKSPACES_MANAGER: LazyLock<Arc<Mutex<SluWorkspacesManager>>> =
     LazyLock::new(|| Arc::new(Mutex::new(SluWorkspacesManager::init())));
 
-pub static HIDDEN_BY_USER: LazyLock<Arc<Mutex<HashSet<isize>>>> =
-    LazyLock::new(|| Arc::new(Mutex::new(HashSet::new())));
+pub static MINIMIZED_BY_USER: LazyLock<scc::HashSet<isize>> = LazyLock::new(scc::HashSet::new);
+pub static MINIMIZED_BY_WORKSPACES: LazyLock<scc::HashSet<isize>> =
+    LazyLock::new(scc::HashSet::new);
 
 pub struct SluWorkspacesManager(VirtualDesktops);
 
@@ -56,7 +53,7 @@ impl SluWorkspacesManager {
         });
     }
 
-    pub fn init() -> Self {
+    fn init() -> Self {
         let mut manager = Self(match Self::load_stored() {
             Ok(mut state) => {
                 state.sanitize();
@@ -72,6 +69,7 @@ impl SluWorkspacesManager {
                 .retain(|w| Self::should_be_added(&Window::from(*w)));
         }
 
+        Self::init_hook_listener();
         manager
     }
 
@@ -84,32 +82,30 @@ impl SluWorkspacesManager {
         for addr in &workspace.windows {
             let window = Window::from(*addr);
             if window.is_window() && !window.is_minimized() {
-                HookManager::skip_next_event(WinEvent::SystemMinimizeStart, window.address());
+                let _ = MINIMIZED_BY_WORKSPACES.insert(window.address());
                 log_error!(window.show_window_async(mode));
             }
         }
     }
 
     fn restore_workspace(workspace: &DesktopWorkspace) {
-        let hidden_by_user = trace_lock!(HIDDEN_BY_USER);
-        let filtered = workspace
-            .windows
-            .iter()
-            .filter(|w| !hidden_by_user.contains(w))
-            .collect_vec();
+        let len = workspace.windows.len();
+        for (idx, addr) in workspace.windows.iter().enumerate() {
+            if MINIMIZED_BY_USER.contains(addr) {
+                continue;
+            }
 
-        for addr in &filtered {
-            let window = Window::from(**addr);
+            let window = Window::from(*addr);
             if window.is_window() && window.is_minimized() {
-                HookManager::skip_next_event(WinEvent::SystemMinimizeEnd, window.address());
+                MINIMIZED_BY_WORKSPACES.remove(&window.address());
                 // use normal show instead async cuz it will keep the order of restoring
                 log_error!(window.show_window(SW_RESTORE));
             }
-        }
 
-        // ensure correct focus
-        if let Some(last) = filtered.last() {
-            log_error!(Window::from(**last).focus());
+            // ensure correct focus
+            if idx == len - 1 {
+                log_error!(window.focus());
+            }
         }
     }
 
@@ -205,7 +201,7 @@ impl SluWorkspacesManager {
 
         let window = Window::from(*window_id);
         if !window.is_minimized() {
-            HookManager::skip_next_event(WinEvent::SystemMinimizeStart, window.address());
+            let _ = MINIMIZED_BY_WORKSPACES.insert(window.address());
             log_error!(window.show_window(SW_FORCEMINIMIZE));
         }
 

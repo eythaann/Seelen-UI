@@ -34,7 +34,11 @@ impl UserAppsManager {
         }
     }
 
-    fn contains_win(&self, window: &Window) -> bool {
+    pub fn instance() -> &'static Self {
+        &USER_APPS_MANAGER
+    }
+
+    pub fn contains_win(&self, window: &Window) -> bool {
         let hwnd = window.address();
         self.interactable_windows.any(|w| w.hwnd == hwnd)
     }

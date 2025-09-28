@@ -29,7 +29,6 @@ const AppExtraFlag: Enum<AppExtraFlag> = {
   Force: "force",
   Unmanage: "unmanage",
   Pinned: "pinned",
-  Hidden: "hidden",
 };
 
 const AppIdentifierType: Enum<AppIdentifierType> = {

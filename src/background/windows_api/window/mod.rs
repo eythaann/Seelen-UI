@@ -69,7 +69,7 @@ impl Debug for Window {
 
 impl Display for Window {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Window({:?})", self.0)
+        write!(f, "Window({:?})", self.0 .0)
     }
 }
 
