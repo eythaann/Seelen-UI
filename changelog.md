@@ -15,6 +15,8 @@
 
 - not considering multiple batteries on setups.
 - app not forcing restart on pc sleep/resume.
+- app/service ipc messages corrupted on encode/decode.
+- window manager animations enable logic.
 
 ### refactor
 

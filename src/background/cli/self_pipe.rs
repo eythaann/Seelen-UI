@@ -1,5 +1,8 @@
 use clap::Parser;
-use slu_ipc::{messages::IpcResponse, AppIpc};
+use slu_ipc::{
+    messages::{AppMessage, IpcResponse},
+    AppIpc,
+};
 
 use crate::{cli::application::AppCli, error::Result};
 
@@ -37,7 +40,7 @@ impl SelfPipe {
     }
 
     pub async fn request_open_settings() -> Result<()> {
-        AppIpc::send(vec!["settings".to_owned()]).await?;
+        AppIpc::send(AppMessage(vec!["settings".to_owned()])).await?;
         Ok(())
     }
 }

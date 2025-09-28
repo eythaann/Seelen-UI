@@ -8,7 +8,7 @@ use std::sync::atomic::Ordering;
 use clap::Parser;
 use debugger::DebuggerCli;
 use serde::{Deserialize, Serialize};
-use slu_ipc::AppIpc;
+use slu_ipc::{messages::AppMessage, AppIpc};
 use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
@@ -144,7 +144,7 @@ impl AppCli {
             println!("Sending {args:#?}");
         }
 
-        AppIpc::send(args)
+        AppIpc::send(AppMessage(args))
             .await
             .map_err(|_| "Can't stablish connection, ensure Seelen UI is running.")?;
         Ok(())
