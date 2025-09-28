@@ -32,7 +32,12 @@ export function wrapConsoleV2() {
     const original = console[fnName];
     console[fnName] = (...params: any[]) => {
       original(...params);
-      logger(StringifyParams(params));
+      let message = StringifyParams(params);
+      /// ignore Ant Design Warnings
+      if (message.includes("[Ant Design CSS-in-JS]")) {
+        return;
+      }
+      logger(message);
     };
   }
 

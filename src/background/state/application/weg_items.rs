@@ -8,7 +8,7 @@ use tauri::Emitter;
 
 use crate::{
     app::get_app_handle, error::Result, modules::uwp::UwpManager, trace_lock,
-    utils::constants::SEELEN_COMMON, widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
+    utils::constants::SEELEN_COMMON, widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
 };
 
 use super::FullState;
@@ -31,7 +31,7 @@ impl FullState {
 
     pub fn emit_weg_items(&self) -> Result<()> {
         get_app_handle().emit(SeelenEvent::StateWegItemsChanged, &self.weg_items)?;
-        trace_lock!(WEG_ITEMS_IMPL).on_stored_changed(self.weg_items.clone())?;
+        trace_lock!(SEELEN_WEG_STATE).on_stored_changed(self.weg_items.clone())?;
         Ok(())
     }
 

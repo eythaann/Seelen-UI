@@ -30,7 +30,7 @@ impl Drop for SeelenWall {
 }
 
 impl SeelenWall {
-    pub const TITLE: &str = ".Seelen Wall";
+    pub const TITLE: &str = "Seelen Wall";
     const TARGET: &str = "@seelen/wallpaper-manager";
 
     pub fn new() -> Result<Self> {

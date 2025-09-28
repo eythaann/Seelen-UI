@@ -13,7 +13,7 @@ use crate::{
     error::Result,
     state::application::FULL_STATE,
     trace_lock,
-    widgets::weg::weg_items_impl::WEG_ITEMS_IMPL,
+    widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
     windows_api::{window::Window, WindowsApi},
 };
 use windows::Win32::UI::WindowsAndMessaging::{SW_SHOWMINNOACTIVE, WM_CLOSE};
@@ -22,7 +22,7 @@ use super::SeelenWeg;
 
 #[tauri::command(async)]
 pub fn state_get_weg_items(monitor_id: Option<MonitorId>) -> WegItems {
-    let guard = trace_lock!(WEG_ITEMS_IMPL);
+    let guard = trace_lock!(SEELEN_WEG_STATE);
     if let Some(id) = monitor_id {
         return guard
             .get_filtered_by_monitor()

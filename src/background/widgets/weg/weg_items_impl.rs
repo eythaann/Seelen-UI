@@ -1,4 +1,3 @@
-use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::{
     handlers::SeelenEvent,
@@ -12,16 +11,20 @@ use std::{
     collections::HashMap,
     ffi::OsStr,
     path::PathBuf,
-    sync::Arc,
+    sync::{Arc, LazyLock},
     time::{SystemTime, UNIX_EPOCH},
 };
 use tauri::Emitter;
 
 use crate::{
     app::get_app_handle,
-    error::Result,
-    modules::start::application::START_MENU_MANAGER,
+    error::{Result, ResultLogExt},
+    modules::{
+        apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
+        start::application::START_MENU_MANAGER,
+    },
     state::application::FULL_STATE,
+    trace_lock,
     utils::{
         constants::SEELEN_COMMON,
         icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
@@ -29,13 +32,11 @@ use crate::{
     windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
 };
 
-lazy_static! {
-    pub static ref WEG_ITEMS_IMPL: Arc<Mutex<WegItemsImpl>> =
-        Arc::new(Mutex::new(WegItemsImpl::new()));
-}
+pub static SEELEN_WEG_STATE: LazyLock<Arc<Mutex<SeelenWegState>>> =
+    LazyLock::new(|| Arc::new(Mutex::new(SeelenWegState::new())));
 
 #[derive(Debug, Clone)]
-pub struct WegItemsImpl {
+pub struct SeelenWegState {
     pub items: WegItems,
 }
 
@@ -103,11 +104,36 @@ fn get_parts_of_inline_command(cmd: &str) -> (String, Option<String>) {
     (program, if args.is_empty() { None } else { Some(args) })
 }
 
-impl WegItemsImpl {
+impl SeelenWegState {
     pub fn new() -> Self {
-        WegItemsImpl {
+        let mut state = SeelenWegState {
             items: FULL_STATE.load().weg_items.clone(),
-        }
+        };
+
+        UserAppsManager::subscribe(|e| match e {
+            UserAppsEvent::WinAdded(addr) => {
+                let mut guard = trace_lock!(SEELEN_WEG_STATE);
+                guard.add(&Window::from(addr)).log_error();
+                guard.emit_to_webview().log_error();
+            }
+            UserAppsEvent::WinUpdated(addr) => {
+                let mut guard = trace_lock!(SEELEN_WEG_STATE);
+                guard.update_window_info(&Window::from(addr));
+                guard.emit_to_webview().log_error();
+            }
+            UserAppsEvent::WinRemoved(addr) => {
+                let mut guard = trace_lock!(SEELEN_WEG_STATE);
+                guard.remove(&Window::from(addr));
+                guard.emit_to_webview().log_error();
+            }
+            _ => {}
+        });
+
+        USER_APPS_MANAGER.interactable_windows.for_each(|w| {
+            state.add(&Window::from(w.hwnd)).log_error();
+        });
+
+        state
     }
 
     pub fn emit_to_webview(&mut self) -> Result<()> {
@@ -307,6 +333,14 @@ impl WegItemsImpl {
         })
     }
 
+    pub fn update_window_info(&mut self, window: &Window) {
+        if let Some(app_window) = self.get_window_mut(window) {
+            app_window.title = window.title();
+            app_window.is_iconic = window.is_minimized();
+            app_window.is_zoomed = window.is_maximized();
+        }
+    }
+
     pub fn update_window_activation(&mut self, window: &Window) {
         if let Some(app_window) = self.get_window_mut(window) {
             app_window.last_active = SystemTime::now()
@@ -323,14 +357,6 @@ impl WegItemsImpl {
                 }
                 _ => {}
             }
-        }
-    }
-
-    pub fn update_window(&mut self, window: &Window) {
-        if let Some(app_window) = self.get_window_mut(window) {
-            app_window.title = window.title();
-            app_window.is_iconic = window.is_minimized();
-            app_window.is_zoomed = window.is_maximized();
         }
     }
 

@@ -1,12 +1,11 @@
-use seelen_core::{state::AppExtraFlag, system_state::UserAppWindow};
+use seelen_core::system_state::UserAppWindow;
 use windows::Win32::UI::WindowsAndMessaging::{
-    WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+    WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW, WS_MINIMIZEBOX,
 };
 
 use crate::{
     hook::HookManager,
     modules::apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
-    state::application::FULL_STATE,
     windows_api::{
         window::{event::WinEvent, Window},
         WindowEnumerator, WindowsApi,
@@ -27,46 +26,52 @@ impl UserAppsManager {
     }
 
     fn on_win_event(event: WinEvent, window: Window) {
-        let mut is_interactable = USER_APPS_MANAGER.contains_win(&window.address());
+        let mut is_interactable = USER_APPS_MANAGER.contains_win(&window);
 
         match event {
-            WinEvent::ObjectCreate => {
-                if is_interactable_and_not_hidden(&window) {
-                    USER_APPS_MANAGER
-                        .interactable_windows
-                        .push(window.to_serializable());
-                    Self::send(UserAppsEvent::WinAdded);
+            WinEvent::ObjectCreate | WinEvent::ObjectShow => {
+                if !is_interactable && is_interactable_and_not_hidden(&window) {
+                    USER_APPS_MANAGER.add_win(&window);
+                    Self::send(UserAppsEvent::WinAdded(window.address()));
                 }
             }
-            WinEvent::ObjectShow
-            | WinEvent::ObjectUncloaked
-            | WinEvent::ObjectNameChange
-            | WinEvent::ObjectParentChange => {
+            WinEvent::ObjectNameChange => {
                 let was_interactable = is_interactable;
                 is_interactable = is_interactable_and_not_hidden(&window);
                 match (was_interactable, is_interactable) {
                     (false, true) => {
-                        USER_APPS_MANAGER
-                            .interactable_windows
-                            .push(window.to_serializable());
-                        Self::send(UserAppsEvent::WinAdded);
+                        USER_APPS_MANAGER.add_win(&window);
+                        Self::send(UserAppsEvent::WinAdded(window.address()));
                     }
                     (true, false) => {
-                        let addr = window.address();
-                        USER_APPS_MANAGER
-                            .interactable_windows
-                            .retain(|w| w.hwnd != addr);
-                        Self::send(UserAppsEvent::WinRemoved);
+                        USER_APPS_MANAGER.remove_win(&window);
+                        Self::send(UserAppsEvent::WinRemoved(window.address()));
                     }
                     _ => {}
                 }
             }
+            WinEvent::ObjectParentChange => {
+                // re-check for UWP apps that on creation starts without a parent
+                if let Some(parent) = window.parent() {
+                    if !USER_APPS_MANAGER.contains_win(&parent)
+                        && parent.is_interactable_and_not_hidden()
+                    {
+                        USER_APPS_MANAGER.add_win(&window);
+                        Self::send(UserAppsEvent::WinAdded(window.address()));
+                    }
+                }
+            }
+            WinEvent::ObjectHide => {
+                // UWP ApplicationFrameHosts are always hidden on minimize
+                if is_interactable && !window.is_frame().unwrap_or(false) {
+                    USER_APPS_MANAGER.remove_win(&window);
+                    Self::send(UserAppsEvent::WinRemoved(window.address()));
+                }
+            }
             WinEvent::ObjectDestroy => {
                 if is_interactable {
-                    USER_APPS_MANAGER
-                        .interactable_windows
-                        .retain(|w| w.hwnd != window.address());
-                    Self::send(UserAppsEvent::WinRemoved);
+                    USER_APPS_MANAGER.remove_win(&window);
+                    Self::send(UserAppsEvent::WinRemoved(window.address()));
                 }
             }
             _ => {}
@@ -91,7 +96,7 @@ impl UserAppsManager {
                     *w = window.to_serializable();
                 }
             });
-            Self::send(UserAppsEvent::WinUpdated);
+            Self::send(UserAppsEvent::WinUpdated(window.address()));
         }
     }
 }
@@ -102,19 +107,13 @@ impl UserAppsManager {
 ///
 /// As windows properties can change, this should be reevaluated on every change.
 pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
-    // unmanageable window
-    if window.process().open_limited_handle().is_err() {
+    if !window.is_visible() {
         return false;
     }
 
-    if !window.is_visible() || window.parent().is_some() {
-        return false;
-    }
-
-    // ignore windows without a title or that start with a dot
-    // this is a seelen ui behavior, not present on other desktop environments
+    // ignore windows without a title, these are not intended to be shown to users (comonly are invisible windows)
     let title = window.title();
-    if title.is_empty() || title.starts_with('.') {
+    if title.is_empty() {
         return false;
     }
 
@@ -126,10 +125,22 @@ pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
         return false;
     }
 
+    // Discard unminimizable windows
+    let style = WindowsApi::get_styles(window.hwnd());
+    if !style.contains(WS_MINIMIZEBOX) {
+        return false;
+    }
+
+    // Discard layered windows without WS_EX_APPWINDOW
     let ex_style = WindowsApi::get_ex_styles(window.hwnd());
     if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
         && !ex_style.contains(WS_EX_APPWINDOW)
     {
+        return false;
+    }
+
+    // unmanageable window, these probably are system processes
+    if window.process().open_limited_handle().is_err() {
         return false;
     }
 
@@ -141,14 +152,6 @@ pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
 
     if window.process().is_frozen().unwrap_or(false) {
         return false;
-    }
-
-    // I don't like to determine if a window is real filtering by this configs, but will be here
-    // as a workaround in meantime we find a way to filter better, as native taskbar does.
-    if let Some(config) = FULL_STATE.load().get_app_config_by_window(window.hwnd()) {
-        if config.options.contains(&AppExtraFlag::Hidden) {
-            return false;
-        }
     }
 
     true

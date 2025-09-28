@@ -17,26 +17,6 @@ use super::{SeelenWeg, TASKBAR_CLASS};
 impl SeelenWeg {
     pub fn process_global_win_event(event: WinEvent, window: &Window) -> Result<()> {
         match event {
-            WinEvent::ObjectShow | WinEvent::ObjectCreate => {
-                if Self::should_be_added(window) {
-                    Self::add(window)?;
-                }
-            }
-            WinEvent::ObjectParentChange => {
-                if let Some(parent) = window.parent() {
-                    if Self::contains_app(window) {
-                        Self::remove_hwnd(window)?;
-                    }
-                    if !Self::contains_app(&parent) && Self::should_be_added(&parent) {
-                        Self::add(&parent)?;
-                    }
-                }
-            }
-            WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
-                if Self::contains_app(window) {
-                    Self::remove_hwnd(window)?;
-                }
-            }
             WinEvent::SystemMoveSizeEnd => {
                 if Self::contains_app(window) {
                     Self::update_app(window)?;
@@ -50,8 +30,6 @@ impl SeelenWeg {
             WinEvent::ObjectNameChange => {
                 if Self::contains_app(window) {
                     Self::update_app(window)?;
-                } else if Self::should_be_added(window) {
-                    Self::add(window)?;
                 }
             }
             WinEvent::SystemMinimizeStart

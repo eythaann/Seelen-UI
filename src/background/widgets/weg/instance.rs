@@ -45,7 +45,7 @@ impl Drop for SeelenWeg {
 }
 
 impl SeelenWeg {
-    pub const TITLE: &'static str = ".SeelenWeg";
+    pub const TITLE: &'static str = "SeelenWeg";
     pub const TARGET: &'static str = "@seelen/weg";
 
     pub fn hwnd(&self) -> Result<HWND> {

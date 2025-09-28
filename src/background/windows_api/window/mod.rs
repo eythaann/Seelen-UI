@@ -263,11 +263,22 @@ impl Window {
         if !self.is_frame()? {
             return Err("Window is not a frame".into());
         }
-        for window in self.children()? {
-            if !window.class().starts_with("ApplicationFrame") {
-                return Ok(Some(window));
-            }
+
+        let title = Some(self.title());
+        let class = Some("Windows.UI.Core.CoreWindow".to_owned());
+
+        // frame creator is a child of the window while rendering
+        if let Ok(hwnd) =
+            WindowsApi::find_window(Some(self.hwnd()), None, title.clone(), class.clone())
+        {
+            return Ok(Some(Window::from(hwnd)));
         }
+
+        // while minimized, not rendering, the creator is detached as an top level window
+        if let Ok(hwnd) = WindowsApi::find_window(None, None, title, class) {
+            return Ok(Some(Window::from(hwnd)));
+        }
+
         Ok(None)
     }
 
