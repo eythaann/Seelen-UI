@@ -11,7 +11,7 @@ import { ownSelector, RootSelectors } from "../../shared/store/app/selectors";
 import { defaultAppConfig } from "../app/default";
 
 import { RootState } from "../../shared/store/domain";
-import { AppConfigurationExtended, WegApplicationOptions, WmApplicationOptions } from "../domain";
+import { AppConfigurationExtended, WmApplicationOptions } from "../domain";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox";
 import { Identifier } from "./Identifier";
@@ -161,23 +161,6 @@ export const EditAppModal = (
             label={t("apps_configurations.app.wm_options_label")}
           >
             {WmApplicationOptions.map((value, i) => (
-              <SettingsOption key={i}>
-                <span>{t(`apps_configurations.app.options.${value}`)}</span>
-                <Switch
-                  value={app.options.includes(value as any as AppExtraFlag)}
-                  onChange={onChangeOption.bind(
-                    this,
-                    value as any as AppExtraFlag,
-                  )}
-                />
-              </SettingsOption>
-            ))}
-          </SettingsSubGroup>
-
-          <SettingsSubGroup
-            label={t("apps_configurations.app.weg_options_label")}
-          >
-            {WegApplicationOptions.map((value, i) => (
               <SettingsOption key={i}>
                 <span>{t(`apps_configurations.app.options.${value}`)}</span>
                 <Switch
