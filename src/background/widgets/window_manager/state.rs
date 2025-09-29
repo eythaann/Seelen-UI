@@ -16,7 +16,9 @@ use crate::{
     modules::input::domain::Point,
     state::application::FULL_STATE,
     virtual_desktops::get_vd_manager,
-    widgets::window_manager::{instance::WindowManagerV2, node_ext::WmNodeExt},
+    widgets::window_manager::{
+        handler::set_app_windows_positions, instance::WindowManagerV2, node_ext::WmNodeExt,
+    },
     windows_api::window::Window,
 };
 
@@ -117,8 +119,10 @@ impl WmState {
                     rect.bottom = center_y + new_height / 2;
                 }
             };
-            window.set_inner_rect(&rect)?;
-            return Ok(());
+
+            let mut positions = HashMap::new();
+            positions.insert(window.address(), rect);
+            return set_app_windows_positions(positions);
         }
 
         let trace = w.trace(window);
@@ -216,12 +220,17 @@ impl WmWorkspaceState {
         let x = monitor_rect.left + (monitor_width - window_width) / 2;
         let y = monitor_rect.top + (monitor_height - window_height) / 2;
 
-        window.set_inner_rect(&Rect {
-            left: x,
-            top: y,
-            right: x + window_width,
-            bottom: y + window_height,
-        })
+        let mut positions = HashMap::new();
+        positions.insert(
+            window.address(),
+            Rect {
+                left: x,
+                top: y,
+                right: x + window_width,
+                bottom: y + window_height,
+            },
+        );
+        set_app_windows_positions(positions)
     }
 
     pub fn add_to_floats(&mut self, window: &Window) -> Result<()> {

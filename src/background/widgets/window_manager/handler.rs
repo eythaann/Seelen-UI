@@ -12,7 +12,7 @@ use crate::{
 use seelen_core::{rect::Rect, state::PerformanceMode};
 
 #[tauri::command(async)]
-pub async fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> {
+pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> {
     let mut list = HashMap::new();
 
     // map and filter step

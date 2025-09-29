@@ -6,15 +6,12 @@ pub mod rect;
 
 use std::collections::HashMap;
 
-use keyframe::{AnimationSequence, keyframes};
+use windows::Win32::UI::WindowsAndMessaging::WM_SETREDRAW;
 
 use crate::{
-    api::{
-        defer_window_position, finish_defered_positioning, force_redraw_window, get_window_rect,
-        start_defered_positioning,
-    },
+    api::{force_redraw_window, get_window_rect, is_explorer, position_window, send_message},
     easings::Easing,
-    error::{Error, Result},
+    error::Result,
     rect::Rect,
 };
 
@@ -22,6 +19,14 @@ use crate::{
 pub struct Positioner {
     /// key-pair of window id and its desired position
     pub to_positioning: HashMap<isize, Rect>,
+}
+
+pub struct WinDataForAnimation {
+    hwnd: isize,
+    from: Rect,
+    to: Rect,
+    is_size_changing: bool,
+    is_explorer: bool,
 }
 
 impl Positioner {
@@ -43,12 +48,9 @@ impl Positioner {
 
     /// Place all windows to their desired position
     pub fn place(&self) -> Result<()> {
-        let mut hdwp = start_defered_positioning(self.to_positioning.len() as i32)?;
         for (window_id, rect) in self.to_positioning.iter() {
-            hdwp = defer_window_position(hdwp, *window_id, rect, true)
-                .map_err(|_| Error::SetPositionFailed)?;
+            position_window(*window_id, rect, true, false)?;
         }
-        finish_defered_positioning(hdwp)?;
         Ok(())
     }
 
@@ -58,7 +60,7 @@ impl Positioner {
         &self,
         duration_ms: u64,
         easing: Easing,
-        on_end: impl FnOnce(Result<()>) + Send + 'static,
+        on_end: impl FnOnce(Result<bool>) + Send + 'static,
     ) -> Result<AppWinAnimation> {
         let mut animation = AppWinAnimation::new(duration_ms, easing);
         animation.batch = self.to_positioning.clone();
@@ -88,70 +90,121 @@ impl AppWinAnimation {
 
     fn start<F>(&mut self, on_end: F) -> Result<()>
     where
-        F: FnOnce(Result<()>) + Send + 'static,
+        F: FnOnce(Result<bool>) + Send + 'static,
     {
         self.interrupt(); // interrupt previous animation if any
         self.wait(); // ensure previous run of this animation is finished
-        let mut sequences = Vec::new();
+        let mut list = Vec::new();
 
-        for (w_addr, desired_rect) in self.batch.iter() {
-            let initial_rect = get_window_rect(*w_addr)?;
-
+        for (win_id, desired_rect) in self.batch.iter() {
+            let initial_rect = get_window_rect(*win_id)?;
+            let is_size_changing = initial_rect.width != desired_rect.width
+                || initial_rect.height != desired_rect.height;
+            let is_position_changing =
+                initial_rect.x != desired_rect.x || initial_rect.y != desired_rect.y;
             // skip windows that are already in the desired position
-            if &initial_rect == desired_rect {
+            if !is_size_changing && !is_position_changing {
                 continue;
             }
-
-            let sequence = keyframes![
-                (initial_rect, 0.0, self.easing),
-                (desired_rect.clone(), 1.0)
-            ];
-            sequences.push((*w_addr, sequence));
+            list.push(WinDataForAnimation {
+                hwnd: *win_id,
+                from: initial_rect,
+                to: *desired_rect,
+                is_size_changing,
+                is_explorer: is_explorer(*win_id)?,
+            });
         }
 
         // there is nothing to animate
-        if sequences.is_empty() {
+        if list.is_empty() {
             return Ok(());
         }
 
         let (tx, rx) = std::sync::mpsc::channel::<()>();
+        let easing = self.easing;
         let animation_duration = std::time::Duration::from_millis(self.duration_ms);
         self.animation_interrupt_signal = Some(tx);
         self.animation_thread = Some(std::thread::spawn(move || {
-            let result = Self::perform(sequences, animation_duration, rx);
+            for data in &list {
+                if data.is_explorer {
+                    send_message(data.hwnd, WM_SETREDRAW, Some(0), None);
+                }
+            }
+
+            let result = Self::perform(&list, easing, animation_duration, rx);
+            if result.as_ref().is_ok_and(|interrupted| !interrupted) {
+                for data in &list {
+                    if data.is_explorer {
+                        send_message(data.hwnd, WM_SETREDRAW, Some(1), None);
+                        let _ = force_redraw_window(data.hwnd);
+                    }
+                }
+            }
+
             on_end(result);
         }));
         Ok(())
     }
 
+    /// returns true if animation was interrupted/canceled
     fn perform(
-        mut sequences: Vec<(isize, AnimationSequence<Rect>)>,
+        list: &Vec<WinDataForAnimation>,
+        easing: Easing,
         animation_duration: std::time::Duration,
         interrupt_rx: std::sync::mpsc::Receiver<()>,
-    ) -> Result<()> {
+    ) -> Result<bool> {
         let start_time = std::time::Instant::now();
         let mut progress = 0.0;
+        let mut interrupted = false;
 
-        while progress < 1.0 && interrupt_rx.try_recv().is_err() {
-            let elapsed = start_time.elapsed();
-            progress = (elapsed.as_secs_f64() / animation_duration.as_secs_f64()).min(1.0);
+        let mut frames = 0;
+        let mut last_frame_time = start_time;
+        let min_frame_duration = std::time::Duration::from_millis(7); // ~ 144 fps as limit
 
-            let mut hdwp = start_defered_positioning(sequences.len() as i32)?;
-            for (window_id, sequence) in sequences.iter_mut() {
-                sequence.advance_to(progress);
-                let rect = sequence.now();
-                hdwp = defer_window_position(hdwp, *window_id, &rect, false)
-                    .map_err(|_| Error::SetPositionFailed)?;
+        while progress < 1.0 {
+            if interrupt_rx.try_recv().is_ok() {
+                interrupted = true;
+                break;
             }
-            finish_defered_positioning(hdwp)?;
+
+            let elapsed = start_time.elapsed();
+            progress =
+                (elapsed.as_millis() as f64 / animation_duration.as_millis() as f64).min(1.0);
+
+            let rects = list.iter().map(|data| {
+                (
+                    data.hwnd,
+                    keyframe::ease(easing, data.from, data.to, progress),
+                    data.is_size_changing,
+                )
+            });
+
+            // let mut hdwp = start_defered_positioning(list.len() as i32)?;
+            for (window_id, rect, size_changing) in rects {
+                // move_window(window_id, &rect, false)?;
+                position_window(window_id, &rect, false, !size_changing)?;
+                // hdwp = defer_window_position(hdwp, window_id, &rect, !size_changing)?;
+            }
+            //  finish_defered_positioning(hdwp)?;
+
+            frames += 1;
+            let elapsed = last_frame_time.elapsed();
+            if elapsed < min_frame_duration {
+                std::thread::sleep(min_frame_duration - elapsed);
+            }
+            last_frame_time = std::time::Instant::now();
         }
 
-        // re-draw windows to remove artifacts
-        for (window_id, _) in sequences {
-            let _ = force_redraw_window(window_id);
+        if !interrupted {
+            log::trace!("Animation completed in {frames} frames");
+            for data in list {
+                // defer window position doesn't force the desired size, it is locked by window min size
+                position_window(data.hwnd, &data.to, true, false)?;
+                let _ = force_redraw_window(data.hwnd);
+            }
         }
 
-        Ok(())
+        Ok(interrupted)
     }
 
     pub fn is_running(&self) -> bool {

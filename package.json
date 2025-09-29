@@ -52,6 +52,7 @@
     "@types/lodash": "^4.17.7",
     "@types/node": "^20.11.19",
     "@types/react-dom": "^18.2.19",
+    "@types/yargs": "^17.0.33",
     "antd": "^5.23.0",
     "d3": "^7.9.0",
     "esbuild": "^0.25.5",

@@ -10,6 +10,7 @@
 
 - improve development ecosystem of resources via embedding of yaml files.
 - allow open dev tools on release builds.
+- optimize window movement animations.
 
 ### fix
 
@@ -17,6 +18,7 @@
 - app not forcing restart on pc sleep/resume.
 - app/service ipc messages corrupted on encode/decode.
 - window manager animations enable logic.
+- window manager not forcing size of windows on tiling.
 
 ### refactor
 
