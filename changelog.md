@@ -19,6 +19,8 @@
 - app/service ipc messages corrupted on encode/decode.
 - window manager animations enable logic.
 - window manager not forcing size of windows on tiling.
+- wallpaper paused while using Alt + Tab.
+- stucked menus on extreme performance mode.
 
 ### refactor
 

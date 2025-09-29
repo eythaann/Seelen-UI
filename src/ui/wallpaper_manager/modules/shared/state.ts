@@ -38,8 +38,12 @@ subscribe(SeelenEvent.GlobalMouseMove, () => {
 });
 
 export const $paused = computed(() => {
-  return $idle.value || $focused.value.isFullscreened ||
-    $performance_mode.value !== "Disabled";
+  return (
+    $idle.value ||
+    ($focused.value.isFullscreened &&
+      !$focused.value.exe?.toLowerCase().endsWith("explorer.exe")) ||
+    $performance_mode.value !== "Disabled"
+  );
 });
 
 export const $monitors = signal(await invoke(SeelenCommand.SystemGetMonitors));
@@ -48,14 +52,7 @@ subscribe(SeelenEvent.SystemMonitorsChanged, ({ payload }) => {
 });
 
 export const $wallpapers = signal((await WallpaperList.getAsync()).asArray());
-WallpaperList.onChange((
-  wallpapers,
-) => ($wallpapers.value = wallpapers.asArray()));
+WallpaperList.onChange((wallpapers) => ($wallpapers.value = wallpapers.asArray()));
 
-export const $performance_mode = signal(
-  await invoke(SeelenCommand.StateGetPerformanceMode),
-);
-subscribe(
-  SeelenEvent.StatePerformanceModeChanged,
-  (e) => ($performance_mode.value = e.payload),
-);
+export const $performance_mode = signal(await invoke(SeelenCommand.StateGetPerformanceMode));
+subscribe(SeelenEvent.StatePerformanceModeChanged, (e) => ($performance_mode.value = e.payload));
