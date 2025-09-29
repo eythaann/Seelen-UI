@@ -64,9 +64,10 @@ impl SluWorkspacesManager {
 
         // ensure saved windows are still valid.
         for workspace in manager.iter_workspaces_mut() {
-            workspace
-                .windows
-                .retain(|w| Self::should_be_added(&Window::from(*w)));
+            workspace.windows.retain(|w| {
+                let window = Window::from(*w);
+                window.is_window() && window.is_interactable_and_not_hidden()
+            });
         }
 
         Self::init_hook_listener();
@@ -280,6 +281,16 @@ impl SluWorkspacesManager {
 
     pub fn desktops_mut(&mut self) -> &mut VirtualDesktops {
         &mut self.0
+    }
+
+    pub fn monitor_containing_workspace(&self, workspace_id: &WorkspaceId) -> Option<MonitorId> {
+        self.desktops().monitors.iter().find_map(|(id, monitor)| {
+            monitor
+                .workspaces
+                .iter()
+                .find(|w| &w.id == workspace_id)
+                .map(|_| id.clone())
+        })
     }
 
     pub fn iter_workspaces(&self) -> impl Iterator<Item = &DesktopWorkspace> {

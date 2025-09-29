@@ -44,12 +44,12 @@ impl UserAppsManager {
     }
 
     fn add_win(&self, window: &Window) {
-        log::trace!("Adding window: {window:?}");
+        log::trace!("Adding: {window}");
         self.interactable_windows.push(window.to_serializable());
     }
 
     fn remove_win(&self, window: &Window) {
-        log::trace!("Removing window: {window}");
+        log::trace!("Removing: {window}");
         let hwnd = window.address();
         self.interactable_windows.retain(|w| w.hwnd != hwnd);
     }

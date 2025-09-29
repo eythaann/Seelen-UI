@@ -10,10 +10,6 @@ use crate::{
 };
 
 impl SluWorkspacesManager {
-    pub fn should_be_added(window: &Window) -> bool {
-        window.is_interactable_and_not_hidden()
-    }
-
     pub fn contains(&self, window: &Window) -> bool {
         let window_id = window.address();
         self.is_pinned(&window_id)
@@ -47,6 +43,7 @@ impl SluWorkspacesManager {
     }
 
     fn remove(&mut self, window: &Window) {
+        log::trace!("Removing {window} from workspaces");
         let window_id = window.address();
         self.0.pinned.retain(|w| w != &window_id);
         for workspace in self.iter_workspaces_mut() {
@@ -114,7 +111,7 @@ impl SluWorkspacesManager {
                     self.workspace_containing_window(&window.address()).cloned()
                 {
                     self.switch_to_id(&window.monitor().stable_id()?.into(), &workspace.id)?;
-                } else if !self.is_pinned(&window_id) && Self::should_be_added(window) {
+                } else if !self.is_pinned(&window_id) && window.is_interactable_and_not_hidden() {
                     // add minimized windows during the scanning, to the current active workspace
                     self.add(window);
                 }

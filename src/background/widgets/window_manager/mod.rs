@@ -32,18 +32,7 @@ use crate::{
 impl WindowManagerV2 {
     fn is_manageable_window(hwnd: HWND) -> bool {
         let window = Window::from(hwnd);
-        let exe = window.process().program_path();
-
-        if let Ok(exe) = &exe {
-            if exe.ends_with("ApplicationFrameHost.exe") && window.is_interactable_and_not_hidden()
-            {
-                return true;
-            }
-        }
-
-        // Without admin some apps does not return the exe path so these should be unmanaged
-        exe.is_ok()
-        && window.is_interactable_and_not_hidden()
+        window.is_interactable_and_not_hidden()
         // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
         && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
         && !window.is_cloaked()
@@ -78,7 +67,7 @@ impl WindowManagerV2 {
     }
 
     fn render_workspace(monitor_id: &str, workspace: &WmWorkspaceState) -> Result<()> {
-        // log::trace!("rendering layout {} in monitor {monitor_id}", w.layout.structure);
+        log::trace!("Rendering workspace on {monitor_id}");
         workspace.layout.structure.hide_non_active()?;
         get_app_handle().emit_to(
             Self::get_label(monitor_id),
@@ -109,16 +98,15 @@ impl WindowManagerV2 {
     }
 
     fn remove(window: &Window) -> Result<()> {
-        let monitor_id = window.monitor_id();
         let mut state = trace_lock!(WM_STATE);
-
-        let mut vd = get_vd_manager();
-        let current_workspace = vd.get_active_workspace_id(&monitor_id);
-
+        let vd = get_vd_manager();
         for (workspace_id, workspace) in &mut state.layouts {
-            workspace.unmanage(window);
-            if workspace_id == current_workspace {
-                Self::render_workspace(&monitor_id, workspace)?;
+            if workspace.is_managed(window) {
+                workspace.unmanage(window);
+                if let Some(monitor_id) = vd.monitor_containing_workspace(workspace_id) {
+                    Self::render_workspace(&monitor_id, workspace)?;
+                }
+                break;
             }
         }
         Ok(())
