@@ -56,7 +56,9 @@ jobs:
       matrix:
         include:
           - platform: "windows-2025"
-          - platform: "windows-11-arm"
+            target: "x86_64-pc-windows-msvc"
+          - platform: "windows-2025"
+            target: "aarch64-pc-windows-msvc"
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -75,13 +77,14 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2025-09-12
+          targets: ${{ matrix.target }}
       - uses: Swatinem/rust-cache@v2
 
       - name: Install frontend dependencies
         run: npm install
 
       - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-2025'
+        if: matrix.target == 'x86_64-pc-windows-msvc'
         shell: pwsh
         run: |
           # Install in parallel to save time
@@ -98,23 +101,23 @@ jobs:
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
       - name: Build
-        run: npx tauri build --no-bundle --ci
+        run: npx tauri build --no-bundle --ci --target ${{ matrix.target }}
 
       - name: Bundle
         env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        run: npx tauri bundle --ci
+        run: npx tauri bundle --ci --target ${{ matrix.target }}
 
       - name: Bundle MSIX
-        if: matrix.platform == 'windows-2025'
+        if: matrix.target == 'x86_64-pc-windows-msvc'
         run: npx tsx scripts/bundle.msix.ts
 
       - name: Upload to artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-bundles-${{ matrix.platform }}
-          path: target/release/bundle
+          name: build-bundles-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/bundle
 
   merge-artifacts:
     needs:
