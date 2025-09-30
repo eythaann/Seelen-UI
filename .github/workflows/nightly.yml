@@ -78,6 +78,7 @@ jobs:
         with:
           toolchain: nightly-2025-09-12
           targets: ${{ matrix.target }}
+      - run: rustup target add ${{ matrix.target }}
       - uses: Swatinem/rust-cache@v2
 
       - name: Install frontend dependencies
