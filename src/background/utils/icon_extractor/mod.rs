@@ -24,9 +24,7 @@ use std::arch::x86_64::{
 };
 
 #[cfg(target_arch = "aarch64")]
-use std::arch::aarch64::{
-    uint8x16_t, vld1q_u8, vqtbl1q_u8, vst1q_u8
-};
+use std::arch::aarch64::{uint8x16_t, vld1q_u8, vqtbl1q_u8, vst1q_u8};
 
 use std::io::BufRead;
 use std::path::{Path, PathBuf};
@@ -71,7 +69,7 @@ pub fn bgra_to_rgba(data: &mut [u8]) {
         2, 1, 0, 3, // First pixel
         6, 5, 4, 7, // Second pixel
         10, 9, 8, 11, // Third pixel
-        14, 13, 12, 15 // Fourth pixel
+        14, 13, 12, 15, // Fourth pixel
     ];
     // The shuffle mask for the conversion in NEON intrinsics
     let mask: uint8x16_t = unsafe { vld1q_u8(maskplain.as_ptr()) };

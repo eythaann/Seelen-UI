@@ -56,11 +56,9 @@ jobs:
       matrix:
         include:
           - platform: "windows-2025"
-            args: ""
+          - platform: "windows-11-arm"
 
     runs-on: ${{ matrix.platform }}
-    outputs:
-      artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
     steps:
       - uses: actions/checkout@v4
 
@@ -113,16 +111,31 @@ jobs:
         run: npx tsx scripts/bundle.msix.ts
 
       - name: Upload to artifacts
-        id: artifact-upload-step
         uses: actions/upload-artifact@v4
         with:
-          name: build-bundles
+          name: build-bundles-${{ matrix.platform }}
           path: target/release/bundle
+
+  merge-artifacts:
+    needs:
+      - update-tag
+      - build
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-id: ${{ steps.upload-merged.outputs.artifact-id }}
+    steps:
+      - name: Merge artifacts
+        id: upload-merged
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: build-bundles
+          pattern: build-bundles-*
+          delete-merged: true
 
   sign-and-upload:
     needs:
       - update-tag
-      - build
+      - merge-artifacts
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -134,7 +147,7 @@ jobs:
           organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
           project-slug: seelen-ui
           signing-policy-slug: test-signing
-          github-artifact-id: "${{ needs.build.outputs.artifact-id }}"
+          github-artifact-id: "${{ needs.merge-artifacts.outputs.artifact-id }}"
           output-artifact-directory: target/release/signed-bundle
 
       - name: Upload Signed Installers to release
