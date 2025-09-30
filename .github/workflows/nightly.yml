@@ -48,11 +48,9 @@ jobs:
 
             return nightlyVersion;
 
-  build-installers:
+  build:
     needs:
       - update-tag
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -61,6 +59,8 @@ jobs:
             args: ""
 
     runs-on: ${{ matrix.platform }}
+    outputs:
+      artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
     steps:
       - uses: actions/checkout@v4
 
@@ -119,6 +119,14 @@ jobs:
           name: build-bundles
           path: target/release/bundle
 
+  sign-and-upload:
+    needs:
+      - update-tag
+      - build
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
       - name: Submit to SignPath
         uses: signpath/github-action-submit-signing-request@v1
         with:
@@ -126,7 +134,7 @@ jobs:
           organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
           project-slug: seelen-ui
           signing-policy-slug: test-signing
-          github-artifact-id: "${{ steps.artifact-upload-step.outputs.artifact-id }}"
+          github-artifact-id: "${{ needs.build.outputs.artifact-id }}"
           output-artifact-directory: target/release/signed-bundle
 
       - name: Upload Signed Installers to release
@@ -140,7 +148,7 @@ jobs:
   remove-old-artifacts:
     needs:
       - update-tag
-      - build-installers
+      - sign-and-upload
     permissions:
       contents: write
     runs-on: ubuntu-latest
