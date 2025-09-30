@@ -88,13 +88,11 @@ jobs:
         if: matrix.target == 'x86_64-pc-windows-msvc'
         shell: pwsh
         run: |
-          # Install in parallel to save time
-          $jobs = @(
-            { winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force --silent },
-            { winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force --silent },
-            { winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force --silent }
-          )
-          $jobs | ForEach-Object { Start-Job -ScriptBlock $_ } | Wait-Job | Receive-Job
+          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
+          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+
 
       - name: Set Version
         run: |
