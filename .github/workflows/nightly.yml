@@ -112,7 +112,7 @@ jobs:
 
       - name: Bundle MSIX
         if: matrix.target == 'x86_64-pc-windows-msvc'
-        run: npx tsx scripts/bundle.msix.ts
+        run: npx tsx scripts/bundle.msix.ts --target ${{ matrix.target }}
 
       - name: Upload to artifacts
         uses: actions/upload-artifact@v4

@@ -26,8 +26,8 @@ if (major === undefined || minor === undefined || patch === undefined) {
 const { target } = await getArgs();
 
 console.info("Building MSIX...");
-const buildFolder = `target/${target}/msix`;
-const bundleFolder = `target/${target}/bundle/msix`;
+const buildFolder = `target/${target}/release/msix`;
+const bundleFolder = `target/${target}/release/bundle/msix`;
 
 fs.rmSync(buildFolder, { recursive: true, force: true }); // clean up
 fs.mkdirSync(buildFolder, { recursive: true });
@@ -47,8 +47,8 @@ const manifest = fs
 fs.writeFileSync(`${buildFolder}/AppxManifest.xml`, manifest);
 
 // Add binaries
-fs.copyFileSync(`target/${target}/slu-service.exe`, `${buildFolder}/slu-service.exe`);
-fs.copyFileSync(`target/${target}/seelen-ui.exe`, `${buildFolder}/seelen-ui.exe`);
+fs.copyFileSync(`target/${target}/release/slu-service.exe`, `${buildFolder}/slu-service.exe`);
+fs.copyFileSync(`target/${target}/release/seelen-ui.exe`, `${buildFolder}/seelen-ui.exe`);
 
 // Add resources
 fs.cpSync("src/static", `${buildFolder}/static`, { recursive: true });
