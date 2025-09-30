@@ -99,30 +99,43 @@ jobs:
           npm run versionish -- --version ${{ needs.update-tag.outputs.nightly-version }}
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
-      - uses: tauri-apps/tauri-action@v0.5.16
+      - name: Build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        with:
-          tagName: nightly
-          releaseName: Seelen UI Nightly
-          prerelease: true
-          # includeDebug: true
-          args: ${{ matrix.args }}
+        run: npx tauri build --no-bundle --ci
+
+      - name: Bundle
+        run: npx tauri bundle --ci
 
       - name: Bundle MSIX
         if: matrix.platform == 'windows-2025'
         run: npx tsx scripts/bundle.msix.ts
 
-      - name: Upload msix to release
-        if: matrix.platform == 'windows-2025'
+      - name: Upload to artifacts
+        id: artifact-upload-step
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-bundles
+          path: target/release/bundle
+
+      - name: Submit to SignPath
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: "${{ secrets.SIGNPATH_API_TOKEN }}"
+          organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
+          project-slug: seelen-ui
+          signing-policy-slug: test-signing
+          github-artifact-id: "${{ steps.artifact-upload-step.outputs.artifact-id }}"
+          output-artifact-directory: target/release/signed-bundle
+
+      - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: nightly
           name: Seelen UI Nightly
           prerelease: true
-          files: target/release/bundle/msix/*
+          files: target/release/signed-bundle/**/*
 
   remove-old-artifacts:
     needs:
