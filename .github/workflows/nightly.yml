@@ -80,6 +80,8 @@ jobs:
           targets: ${{ matrix.target }}
       - run: rustup target add ${{ matrix.target }}
       - uses: Swatinem/rust-cache@v2
+        with:
+          key: nightly-build-${{ matrix.platform }}-${{ matrix.target }}
 
       - name: Install frontend dependencies
         run: npm install
