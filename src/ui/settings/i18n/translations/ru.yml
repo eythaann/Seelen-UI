@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Фокус Топ
     increase_height: Увеличить высоту
     increase_width: Увеличить ширину
+    misc_force_quit: Сила ухода
     misc_force_restart: Принудительный перезапуск
     misc_open_settings: Откройте настройки
     misc_toggle_lock_tracing: Перевернуть отслеживание блокировки (журналы)

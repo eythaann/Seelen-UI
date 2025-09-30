@@ -188,6 +188,7 @@ shortcuts:
     focus_top: Fokus auf die Spitze
     increase_height: Erhöhen Sie die Größe
     increase_width: Breite erhöhen
+    misc_force_quit: Kraft verlassen
     misc_force_restart: Neustart erzwingen
     misc_open_settings: Einstellungen geöffnet
     misc_toggle_lock_tracing: Schaltersperrverfolgung (Protokolle)

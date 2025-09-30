@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Fokusa tops
     increase_height: Palielināt augstumu
     increase_width: Palielināt platumu
+    misc_force_quit: Spēks atmest
     misc_force_restart: Piespiedu restartēšana
     misc_open_settings: Atvērti iestatījumi
     misc_toggle_lock_tracing: Pārslēdziet slēdzenes izsekošanu (baļķi)

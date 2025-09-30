@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Fokus atas
     increase_height: Meningkatkan ketinggian
     increase_width: Meningkatkan lebar
+    misc_force_quit: Memaksa berhenti
     misc_force_restart: Memaksa memulakan semula
     misc_open_settings: Buka Tetapan
     misc_toggle_lock_tracing: Togol mengesan kunci (log)

@@ -2,7 +2,7 @@ use seelen_core::state::shortcuts::{SluHotkeyAction, SluShortcutsSettings};
 use slu_ipc::{messages::AppMessage, AppIpc};
 use win_hotkeys::{error::WHKError, events::KeyboardInputEvent, Hotkey, HotkeyManager, VKey};
 
-use crate::{app_management::kill_seelen_ui_processes, error::Result, log_error};
+use crate::{app_management::kill_seelen_ui_processes, error::Result, exit, log_error};
 
 pub fn start_app_shortcuts(config: SluShortcutsSettings) -> Result<()> {
     if let Err(err) = HotkeyManager::start_keyboard_capturing() {
@@ -33,8 +33,14 @@ pub fn start_app_shortcuts(config: SluShortcutsSettings) -> Result<()> {
 
         let hotkey = Hotkey::from_keys(vkeys).action(move || {
             log::trace!("Hotkey triggered: {action:?}");
-            if action == SluHotkeyAction::MiscForceRestart {
-                log_error!(kill_seelen_ui_processes());
+            match action {
+                SluHotkeyAction::MiscForceRestart => {
+                    log_error!(kill_seelen_ui_processes());
+                }
+                SluHotkeyAction::MiscForceQuit => {
+                    exit(0);
+                }
+                _ => {}
             }
 
             if let Some(command) = hotkey_action_to_cli_command(action) {

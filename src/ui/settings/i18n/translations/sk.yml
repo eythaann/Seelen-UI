@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Zaostrenie
     increase_height: Výška
     increase_width: Zväčšenie
+    misc_force_quit: Vynútiť prestať
     misc_force_restart: Vynútiť reštart
     misc_open_settings: Otvorené nastavenia
     misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)

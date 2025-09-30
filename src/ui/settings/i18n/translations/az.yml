@@ -185,6 +185,7 @@ shortcuts:
     focus_top: Fokuslanmaq
     increase_height: Boylanmaq
     increase_width: Enini artırmaq
+    misc_force_quit: Çıxmaq
     misc_force_restart: Güc yenidən başladın
     misc_open_settings: Parametrləri açın
     misc_toggle_lock_tracing: Kilid izləmə (qeydlər)

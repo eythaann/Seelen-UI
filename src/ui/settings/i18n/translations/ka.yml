@@ -184,6 +184,7 @@ shortcuts:
     focus_top: ფოკუსირება
     increase_height: სიმაღლის გაზრდა
     increase_width: სიგანის გაზრდა
+    misc_force_quit: ძალის დატოვება
     misc_force_restart: ძალის გადატვირთვა
     misc_open_settings: ღია პარამეტრები
     misc_toggle_lock_tracing: ჩაკეტილი საკეტის კვალი (ჟურნალი)

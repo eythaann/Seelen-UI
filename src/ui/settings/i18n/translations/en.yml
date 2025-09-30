@@ -183,6 +183,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Increase Height
     increase_width: Increase Width
+    misc_force_quit: Force Quit
     misc_force_restart: Force Restart
     misc_open_settings: Open Settings
     misc_toggle_lock_tracing: Toggle Lock Tracing (logs)

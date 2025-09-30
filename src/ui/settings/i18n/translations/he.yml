@@ -178,6 +178,7 @@ shortcuts:
     focus_top: מיקוד למעלה
     increase_height: הגדל את הגובה
     increase_width: הגדל את הרוחב
+    misc_force_quit: כוח התפטר
     misc_force_restart: הכוח להפעיל מחדש
     misc_open_settings: פתח הגדרות
     misc_toggle_lock_tracing: מעקב אחר נעילת נעילה (יומנים)

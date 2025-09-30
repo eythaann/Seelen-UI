@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Фокусирати врх
     increase_height: Повећати висину
     increase_width: Повећати ширину
+    misc_force_quit: Престанак
     misc_force_restart: Поново покренути
     misc_open_settings: Отвори подешавања
     misc_toggle_lock_tracing: Укључите тражење закључавања (трупци)

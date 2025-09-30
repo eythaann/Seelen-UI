@@ -184,6 +184,7 @@ shortcuts:
     focus_top: Focus topp
     increase_height: Öka höjden
     increase_width: Öka bredd
+    misc_force_quit: Straffa
     misc_force_restart: Tvinga omstart
     misc_open_settings: Öppna inställningar
     misc_toggle_lock_tracing: TOGGLE LOCK TRACING (loggar)

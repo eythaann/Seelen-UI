@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Focus tepe
     increase_height: Yüksekliği arttırmak
     increase_width: Genişliği Artırın
+    misc_force_quit: Çıkarma
     misc_force_restart: Yeniden Başlatmaya Zorla
     misc_open_settings: Ayarlar Aç
     misc_toggle_lock_tracing: Kilit izleme (kütükler)

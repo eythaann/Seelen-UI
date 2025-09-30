@@ -26,7 +26,7 @@ use windows::Win32::{Security::SE_TCB_NAME, UI::WindowsAndMessaging::SW_MINIMIZE
 use windows_api::WindowsApi;
 
 use crate::{
-    app_management::{launch_seelen_ui, start_listening_system_events},
+    app_management::{kill_seelen_ui_processes, launch_seelen_ui, start_listening_system_events},
     enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
     hotkeys::stop_app_shortcuts,
 };
@@ -37,9 +37,11 @@ pub static SERVICE_DISPLAY_NAME: LazyLock<WindowsString> =
     LazyLock::new(|| WindowsString::from_str("Seelen UI Service"));
 
 static ASYNC_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
+
 static EXIT_CHANNEL: OnceLock<Sender<u32>> = OnceLock::new();
 
 pub static STARTUP: AtomicBool = AtomicBool::new(false);
+pub static EXITING: AtomicBool = AtomicBool::new(false);
 
 pub fn get_runtime_handle() -> tokio::runtime::Handle {
     ASYNC_RUNTIME_HANDLE
@@ -61,6 +63,7 @@ pub fn is_development() -> bool {
 }
 
 pub fn exit(code: u32) {
+    EXITING.store(true, std::sync::atomic::Ordering::SeqCst);
     get_runtime_handle().spawn(async move {
         EXIT_CHANNEL.get().unwrap().send(code).await.unwrap();
     });
@@ -74,7 +77,7 @@ fn restart_gui_on_crash(max_attempts: usize) {
         use std::sync::atomic::Ordering;
 
         while GUI_RESTARTED_COUNTER.load(Ordering::SeqCst) < max_attempts {
-            if !AppIpc::can_stablish_connection() {
+            if !AppIpc::can_stablish_connection() && !EXITING.load(Ordering::SeqCst) {
                 GUI_RESTARTED_COUNTER.fetch_add(1, Ordering::SeqCst);
                 log::trace!("Seelen UI was closed unexpectedly, restarting...");
 
@@ -171,6 +174,7 @@ async fn main() -> Result<()> {
     let exit_code = rx.recv().await.unwrap_or_default();
 
     // shutdown tasks:
+    kill_seelen_ui_processes()?;
     restore_native_taskbar()?;
     stop_app_shortcuts();
     log::info!("Seelen UI Service exited with code {exit_code}");

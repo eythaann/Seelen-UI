@@ -188,6 +188,7 @@ shortcuts:
     focus_top: Focus top
     increase_height: Augmenter la hauteur
     increase_width: Augmenter la largeur
+    misc_force_quit: Force quitter
     misc_force_restart: Forcer le redémarrage
     misc_open_settings: Paramètres ouvrir
     misc_toggle_lock_tracing: Togue de verrouillage (journaux)

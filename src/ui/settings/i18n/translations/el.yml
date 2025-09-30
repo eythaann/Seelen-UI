@@ -187,6 +187,7 @@ shortcuts:
     focus_top: Επικεντρώνεται στην κορυφή
     increase_height: Ύψος αύξησης
     increase_width: Αύξηση πλάτους
+    misc_force_quit: Φρικιασμένη δύναμη
     misc_force_restart: Αναγκαστική επανεκκίνηση
     misc_open_settings: Ανοίξτε τις ρυθμίσεις
     misc_toggle_lock_tracing: Εναλλαγή Lock Tracing (αρχεία καταγραφής)

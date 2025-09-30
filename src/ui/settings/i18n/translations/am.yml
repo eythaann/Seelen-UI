@@ -178,6 +178,7 @@ shortcuts:
     focus_top: ትኩረት
     increase_height: ቁመት ይጨምሩ
     increase_width: ስፋት መጨመር
+    misc_force_quit: ኃይል አቁሟል
     misc_force_restart: አስገባ
     misc_open_settings: ክፍት ቅንብሮች
     misc_toggle_lock_tracing: መቆለፊያ መቆለፊያ (ምዝግብ ማስታወሻዎች)

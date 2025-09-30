@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Keskittyä
     increase_height: Lisätä korkeutta
     increase_width: Lisätä leveyttä
+    misc_force_quit: Pakottaa
     misc_force_restart: Pakota uudelleenkäynnistys
     misc_open_settings: Avaa asetukset
     misc_toggle_lock_tracing: Vaihda lukkojen jäljitys (lokit)

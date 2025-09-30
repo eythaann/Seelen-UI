@@ -181,6 +181,7 @@ shortcuts:
     focus_top: فوکس سر
     increase_height: قد زیاتول
     increase_width: پلنوالی زیات کړئ
+    misc_force_quit: ځواک پرېښودل
     misc_force_restart: ځواک بیاچالانول
     misc_open_settings: خلاص امستنې
     misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)

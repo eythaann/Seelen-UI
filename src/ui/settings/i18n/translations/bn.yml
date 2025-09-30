@@ -188,6 +188,7 @@ shortcuts:
     focus_top: ফোকাস শীর্ষ
     increase_height: উচ্চতা বৃদ্ধি
     increase_width: প্রস্থ বৃদ্ধি
+    misc_force_quit: ফোর্স প্রস্থান
     misc_force_restart: জোর পুনরায় চালু করুন
     misc_open_settings: ওপেন সেটিংস
     misc_toggle_lock_tracing: টগল লক ট্রেসিং (লগস)

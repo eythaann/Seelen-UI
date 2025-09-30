@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Фокус отгоре
     increase_height: Увеличете височината
     increase_width: Увеличете ширината
+    misc_force_quit: Силата напусна
     misc_force_restart: Принудително рестартиране
     misc_open_settings: Отворени настройки
     misc_toggle_lock_tracing: Toggle Lock Tracing (Logs)

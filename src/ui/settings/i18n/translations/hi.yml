@@ -188,6 +188,7 @@ shortcuts:
     focus_top: फोकस टॉप
     increase_height: ऊंचाई बढ़ाना
     increase_width: चौड़ाई में वृद्धि
+    misc_force_quit: जबरन छोड़ना
     misc_force_restart: बल फिर से शुरू करना
     misc_open_settings: खुली सेटिंग
     misc_toggle_lock_tracing: टॉगल लॉक ट्रेसिंग (लॉग)

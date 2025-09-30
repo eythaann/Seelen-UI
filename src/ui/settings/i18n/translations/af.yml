@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Fokus top
     increase_height: Verhoog die hoogte
     increase_width: Verhoog die breedte
+    misc_force_quit: Force Quit
     misc_force_restart: Force herbegin
     misc_open_settings: Open instellings
     misc_toggle_lock_tracing: Wisselslotopsporing (logs)

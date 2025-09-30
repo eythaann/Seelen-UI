@@ -178,6 +178,7 @@ shortcuts:
     focus_top: التركيز أعلى
     increase_height: زيادة الارتفاع
     increase_width: زيادة العرض
+    misc_force_quit: استقال
     misc_force_restart: فرض إعادة التشغيل
     misc_open_settings: فتح الإعدادات
     misc_toggle_lock_tracing: تبديل قفل تتبع (سجلات)

@@ -185,6 +185,7 @@ shortcuts:
     focus_top: மேலே கவனம் செலுத்துங்கள்
     increase_height: உயரத்தை அதிகரிக்கவும்
     increase_width: அகலத்தை அதிகரிக்கவும்
+    misc_force_quit: படை வெளியேறுதல்
     misc_force_restart: படை மறுதொடக்கம்
     misc_open_settings: திறந்த அமைப்புகள்
     misc_toggle_lock_tracing: பூட்டு தடமறிதல் (பதிவுகள்)

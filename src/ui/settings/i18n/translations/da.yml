@@ -184,6 +184,7 @@ shortcuts:
     focus_top: Fokus på toppen
     increase_height: Forøg højden
     increase_width: Øg bredden
+    misc_force_quit: Force stopper
     misc_force_restart: Fremtving genstart
     misc_open_settings: Åbn indstillinger
     misc_toggle_lock_tracing: Skift låsesporing (logfiler)
