@@ -21,6 +21,7 @@
 - window manager not forcing size of windows on tiling.
 - wallpaper paused while using Alt + Tab.
 - stucked menus on extreme performance mode.
+- stucked inline items after being dragged on toolbar.
 
 ### refactor
 

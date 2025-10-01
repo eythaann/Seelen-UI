@@ -80,10 +80,6 @@ export function FancyToolbar() {
     return $containers.value.find((c) => c.items.some((item) => matchIds(item, id)));
   }
 
-  function handleDragStart({ active }: DragStartEvent) {
-    $dragging_id.value = active.id as string;
-  }
-
   // this handles the item container change while dragging
   function handleDragOver({ active, over }: DragOverEvent) {
     if (!over) return;
@@ -91,10 +87,7 @@ export function FancyToolbar() {
     const activeContainer = findContainer(active.id as string);
     const overContainer = findContainer(over.id as string);
 
-    if (
-      !activeContainer || !overContainer ||
-      activeContainer.id === overContainer.id
-    ) return;
+    if (!activeContainer || !overContainer || activeContainer.id === overContainer.id) return;
 
     const activeItem = activeContainer.items.find((item) => item === active.id);
     if (!activeItem) return;
@@ -119,18 +112,13 @@ export function FancyToolbar() {
   // this will handle the sorting
   function handleDragEnd({ active, over }: DragEndEvent) {
     if (!over || active.id === over.id) {
-      $dragging_id.value = null;
       return;
     }
 
     const activeContainer = findContainer(active.id as string);
     const overContainer = findContainer(over.id as string);
 
-    if (
-      !activeContainer || !overContainer ||
-      activeContainer.id !== overContainer.id
-    ) {
-      $dragging_id.value = null;
+    if (!activeContainer || !overContainer || activeContainer.id !== overContainer.id) {
       return;
     }
 
@@ -172,15 +160,18 @@ export function FancyToolbar() {
         <BackgroundByLayersV2 prefix="ft-bar" />
         <DndContext
           collisionDetection={closestCorners}
-          onDragStart={handleDragStart}
+          onDragStart={({ active }: DragStartEvent) => {
+            $dragging_id.value = active.id as string;
+          }}
           onDragOver={handleDragOver}
-          onDragEnd={handleDragEnd}
+          onDragEnd={(e: DragEndEvent) => {
+            handleDragEnd(e);
+            $dragging_id.value = null;
+          }}
           sensors={sensors}
         >
           {$containers.value.map(({ id, items }) => <ItemsDropableContainer key={id} id={id} items={items} />)}
-          <DragOverlay>
-            {draggingItem && componentByModule(draggingItem)}
-          </DragOverlay>
+          <DragOverlay>{draggingItem && componentByModule(draggingItem)}</DragOverlay>
         </DndContext>
       </div>
     </AnimatedDropdown>
@@ -206,12 +197,8 @@ function useBarData() {
         color.foreground,
       );
     } else {
-      document.documentElement.style.removeProperty(
-        "--color-maximized-on-bg-background",
-      );
-      document.documentElement.style.removeProperty(
-        "--color-maximized-on-bg-foreground",
-      );
+      document.documentElement.style.removeProperty("--color-maximized-on-bg-background");
+      document.documentElement.style.removeProperty("--color-maximized-on-bg-foreground");
     }
   }, [color]);
 

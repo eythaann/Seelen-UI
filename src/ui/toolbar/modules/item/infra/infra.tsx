@@ -47,15 +47,15 @@ export function Item(props: InnerItemProps) {
   );
 }
 
-export function GenericItem({ module }: { module: GenericToolbarItem }) {
+export function AppsItem({ module, ...rest }: { module: GenericToolbarItem }) {
   const window = useSelector(Selectors.focused) || {
     name: "None",
     title: "No Window Focused",
     exe: null,
   };
-  return <Item module={module} extraVars={{ window }} />;
+  return <Item {...rest} module={module} extraVars={{ window }} />;
 }
 
-export function TextItem({ module }: { module: TextToolbarItem }) {
-  return <Item module={module} extraVars={{ x: 0 }} />;
+export function TextItem({ module, ...rest }: { module: TextToolbarItem }) {
+  return <Item {...rest} module={module} />;
 }
