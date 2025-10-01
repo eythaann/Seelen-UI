@@ -143,6 +143,39 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+      - name: Clean existing assets
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const tagName = 'nightly';
+
+            const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: tagName,
+            });
+
+            const { data: assets } = await github.rest.repos.listReleaseAssets({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.data.id,
+            });
+
+            core.info(`Found ${assets.length} existing assets to clean`);
+
+            const deletions = assets.map(asset => {
+              core.info(`Deleting ${asset.name}`);
+              return github.rest.repos.deleteReleaseAsset({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: asset.id,
+              });
+            });
+
+            await Promise.all(deletions);
+            core.info('✅ All existing assets cleaned');
+
       - name: Submit to SignPath
         uses: signpath/github-action-submit-signing-request@v1
         with:
@@ -163,6 +196,7 @@ jobs:
 
   generate-update-file:
     needs:
+      - update-tag
       - sign-and-upload
     permissions:
       contents: write
@@ -174,6 +208,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const tagName = 'nightly';
+            const version = ${{ needs.update-tag.outputs.nightly-version }};
+
+            core.info(`Using version: ${version}`);
 
             // Get the nightly release
             const release = await github.rest.repos.getReleaseByTag({
@@ -201,20 +238,6 @@ jobs:
             if (relevantAssets.length === 0) {
               throw new Error('No relevant assets found in release');
             }
-
-            // Extract version from the first exe file
-            const exeAsset = relevantAssets.find(a => a.name.endsWith('.exe'));
-            if (!exeAsset) {
-              throw new Error('No .exe file found in assets');
-            }
-
-            // Extract version from filename (format: Seelen-UI_x.y.z+timestamp_x64-setup.exe)
-            const versionMatch = exeAsset.name.match(/Seelen-UI_(.+?)_/);
-            if (!versionMatch) {
-              throw new Error(`Could not extract version from filename: ${exeAsset.name}`);
-            }
-            const version = versionMatch[1];
-            core.info(`Detected version: ${version}`);
 
             // Build the update manifest
             const update = {
@@ -301,49 +324,3 @@ jobs:
             });
 
             core.info('✅ Successfully generated and uploaded latest.json');
-
-  remove-old-artifacts:
-    needs:
-      - update-tag
-      - generate-update-file
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Remove Signatures and Old Artifacts
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const tagName = 'nightly';
-            const nightlyVersion = '${{ needs.update-tag.outputs.nightly-version }}';
-            console.info(`nightlyVersion: ${nightlyVersion}`);
-
-            const release = await github.rest.repos.getReleaseByTag({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag: tagName,
-            });
-
-            const result = await github.rest.repos.listReleaseAssets({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: release.data.id,
-            });
-
-            // Use Promise.all for parallel deletion
-            const deletions = result.data
-              .filter(asset => {
-                if (asset.name.endsWith('.json')) return false;
-                return !asset.name.includes(nightlyVersion) || asset.name.endsWith('.sig');
-              })
-              .map(asset => {
-                console.info(`deleting ${asset.name}`);
-                return github.rest.repos.deleteReleaseAsset({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  asset_id: asset.id,
-                });
-              });
-
-            await Promise.all(deletions);
