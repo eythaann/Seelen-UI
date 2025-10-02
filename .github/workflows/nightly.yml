@@ -198,10 +198,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Tauri Updater Signature
-        run: |-
-          npx tauri signer sign -k ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }} -p ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }} "./bundles/nsis/Seelen UI_${{ needs.update-tag.outputs.nightly-version }}_arm64-setup.exe"
-          npx tauri signer sign -k ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }} -p ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }} "./bundles/nsis/Seelen UI_${{ needs.update-tag.outputs.nightly-version }}_x64-setup.exe"
+        env:
+          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          VERSION: ${{ needs.update-tag.outputs.nightly-version }}
+        run: |
+          npm install -g @tauri-apps/cli
+          tauri signer sign -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "./bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
+          tauri signer sign -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "./bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
 
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
