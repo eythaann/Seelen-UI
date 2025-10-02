@@ -112,6 +112,15 @@ jobs:
       - name: Build
         run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
 
+      - name: Clean bundle folder from cache
+        shell: pwsh
+        run: |
+          $bundlePath = "target/${{ matrix.target }}/release/bundle"
+          if (Test-Path $bundlePath) {
+            Remove-Item -Path $bundlePath -Recurse -Force
+            Write-Output "Old bundles files deleted: $bundlePath"
+          }
+
       - name: Bundle
         env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
