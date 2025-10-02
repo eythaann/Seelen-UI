@@ -72,7 +72,7 @@ jobs:
       - name: Linter
         run: |-
           rustup component add clippy
-          cargo clippy --frozen --locked --all-targets -- -D warnings
+          cargo clippy --locked --all-targets -- -D warnings
 
   rust-test:
     runs-on: windows-2025
