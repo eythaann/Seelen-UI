@@ -5,9 +5,8 @@ commit-msg:
 
 pre-commit:
   commands:
-    js-format:
+    file-format:
       priority: 1
-      glob: "**/*.{js,jsx,ts,tsx}"
       run: deno fmt --check
     rust-format:
       priority: 2
