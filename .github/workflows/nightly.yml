@@ -5,10 +5,10 @@ on:
     branches:
       - master
     paths-ignore:
-      - "**.md"
-      - "documentation/**"
-      - ".github/**"
-      - "crowdin.yml"
+      - '**.md'
+      - 'documentation/**'
+      - '.github/**'
+      - 'crowdin.yml'
   workflow_dispatch:
 
 concurrency:
@@ -55,10 +55,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-2025"
-            target: "x86_64-pc-windows-msvc"
-          - platform: "windows-2025"
-            target: "aarch64-pc-windows-msvc"
+          - platform: 'windows-2025'
+            target: 'x86_64-pc-windows-msvc'
+          - platform: 'windows-2025'
+            target: 'aarch64-pc-windows-msvc'
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -180,12 +180,21 @@ jobs:
       - name: Submit to SignPath
         uses: signpath/github-action-submit-signing-request@v1
         with:
-          api-token: "${{ secrets.SIGNPATH_API_TOKEN }}"
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
           organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
           project-slug: seelen-ui
           signing-policy-slug: test-signing
-          github-artifact-id: "${{ needs.merge-artifacts.outputs.artifact-id }}"
+          github-artifact-id: ${{ needs.merge-artifacts.outputs.artifact-id }}
           output-artifact-directory: bundles
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Tauri Updater Signature
+        run: |-
+          npx tauri signer sign -k ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }} -p ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }} "./bundles/nsis/Seelen UI_${{ needs.update-tag.outputs.nightly-version }}_arm64-setup.exe"
+          npx tauri signer sign -k ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }} -p ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }} "./bundles/nsis/Seelen UI_${{ needs.update-tag.outputs.nightly-version }}_x64-setup.exe"
 
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
