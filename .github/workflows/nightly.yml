@@ -5,10 +5,10 @@ on:
     branches:
       - master
     paths-ignore:
-      - "**.md"
-      - "documentation/**"
-      - ".github/**"
-      - "crowdin.yml"
+      - '**.md'
+      - 'documentation/**'
+      - '.github/**'
+      - 'crowdin.yml'
   workflow_dispatch:
 
 concurrency:
@@ -55,10 +55,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-2025"
-            target: "x86_64-pc-windows-msvc"
-          - platform: "windows-2025"
-            target: "aarch64-pc-windows-msvc"
+          - platform: 'windows-2025'
+            target: 'x86_64-pc-windows-msvc'
+          - platform: 'windows-2025'
+            target: 'aarch64-pc-windows-msvc'
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -79,10 +79,18 @@ jobs:
           toolchain: nightly-2025-09-12
           targets: ${{ matrix.target }}
       - run: rustup target add ${{ matrix.target }}
-      - uses: Swatinem/rust-cache@v2
+
+      - uses: actions/cache/restore@v4
         with:
-          prefix-key: ${{ matrix.target }}
-          cache-on-failure: true
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: rust-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            rust-${{ runner.os }}-
 
       - name: Install frontend dependencies
         run: npm install
@@ -190,7 +198,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
       - name: Tauri Updater Signature
         run: |-
           npx tauri signer sign -k ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }} -p ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }} "./bundles/nsis/Seelen UI_${{ needs.update-tag.outputs.nightly-version }}_arm64-setup.exe"
