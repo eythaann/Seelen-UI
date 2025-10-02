@@ -5,10 +5,10 @@ on:
     branches:
       - master
     paths-ignore:
-      - "**.md"
-      - "documentation/**"
-      - ".github/**"
-      - "crowdin.yml"
+      - '**.md'
+      - 'documentation/**'
+      - '.github/**'
+      - 'crowdin.yml'
   workflow_dispatch:
 
 concurrency:
@@ -55,10 +55,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-2025"
-            target: "x86_64-pc-windows-msvc"
-          - platform: "windows-2025"
-            target: "aarch64-pc-windows-msvc"
+          - platform: 'windows-2025'
+            target: 'x86_64-pc-windows-msvc'
+          - platform: 'windows-2025'
+            target: 'aarch64-pc-windows-msvc'
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -80,7 +80,7 @@ jobs:
           targets: ${{ matrix.target }}
       - run: rustup target add ${{ matrix.target }}
 
-      - uses: actions/cache/restore@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/bin/
@@ -88,7 +88,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             target/
-          key: rust-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+          key: rust-build-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             rust-${{ runner.os }}-
 
@@ -110,13 +110,13 @@ jobs:
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
       - name: Build
-        run: npx tauri build --no-bundle --ci --target ${{ matrix.target }}
+        run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
 
       - name: Bundle
         env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        run: npx tauri bundle --ci --target ${{ matrix.target }}
+        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }}
 
       - name: Bundle MSIX
         if: matrix.target == 'x86_64-pc-windows-msvc'
@@ -195,6 +195,10 @@ jobs:
           github-artifact-id: ${{ needs.merge-artifacts.outputs.artifact-id }}
           output-artifact-directory: bundles
 
+      - name: File Tree
+        run: |-
+          tree bundles
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -206,8 +210,8 @@ jobs:
           VERSION: ${{ needs.update-tag.outputs.nightly-version }}
         run: |
           npm install -g @tauri-apps/cli
-          tauri signer sign -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "./bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
-          tauri signer sign -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "./bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
 
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
