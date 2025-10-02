@@ -55,10 +55,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-2025"
-            target: "x86_64-pc-windows-msvc"
-          - platform: "windows-2025"
-            target: "aarch64-pc-windows-msvc"
+          - platform: windows-2025
+            target: x86_64-pc-windows-msvc
+          - platform: windows-2025
+            target: aarch64-pc-windows-msvc
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -152,6 +152,11 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Clean existing assets
         uses: actions/github-script@v7
         with:
@@ -198,10 +203,6 @@ jobs:
       - name: File Tree
         run: |-
           tree bundles
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
 
       - name: Tauri Updater Signature
         env:
