@@ -217,11 +217,21 @@ jobs:
         env:
           SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           SIGNING_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-          VERSION: ${{ needs.update-tag.outputs.nightly-version }}
         run: |
           npm install -g @tauri-apps/cli
-          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
-          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
+
+          echo "Removing existing .sig files to regenerate with Tauri updater keys..."
+          find ./bundles -name "*.sig" -type f -delete
+          echo "Existing signatures removed"
+
+          VERSION=${{ needs.update-tag.outputs.nightly-version }}
+          PATH1="bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
+          PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
+
+          echo "Signing ${PATH1}..."
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" $PATH1
+          echo "Signing ${PATH2}..."
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" $PATH2
 
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
