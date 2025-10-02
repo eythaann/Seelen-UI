@@ -28,6 +28,7 @@
 - move core library to main repository.
 - remove app tray icon registration.
 - remove windows tray icons related code.
+- discord RPC now is disabled by default.
 
 ## [2.4.3]
 
