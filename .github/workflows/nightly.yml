@@ -229,9 +229,9 @@ jobs:
           PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
 
           echo "Signing ${PATH1}..."
-          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" $PATH1
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH1"
           echo "Signing ${PATH2}..."
-          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" $PATH2
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH2"
 
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
