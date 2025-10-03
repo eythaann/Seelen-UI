@@ -177,6 +177,7 @@ shortcuts:
     focus_top: โฟกัสด้านบน
     increase_height: เพิ่มความสูง
     increase_width: เพิ่มความกว้าง
+    misc_force_quit: บังคับให้เลิก
     misc_force_restart: บังคับให้รีสตาร์ท
     misc_open_settings: เปิดการตั้งค่า
     misc_toggle_lock_tracing: สลับการติดตามล็อค (บันทึก)

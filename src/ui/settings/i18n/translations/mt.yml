@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Focus top
     increase_height: Iżid l-għoli
     increase_width: Iżżid il-wisa '
+    misc_force_quit: Forza nieqaf
     misc_force_restart: Startjar mill-ġdid tal-forza
     misc_open_settings: Settings miftuħa
     misc_toggle_lock_tracing: Traċċar tal-Lock Toggle (zkuk)

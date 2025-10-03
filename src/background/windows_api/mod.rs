@@ -97,16 +97,16 @@ use windows::{
                 VirtualDesktopManager, KF_FLAG_DEFAULT, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                BringWindowToTop, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetSystemMetrics, GetWindowLongW, GetWindowRect, GetWindowTextW,
-                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
-                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN,
-                SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER,
-                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
-                WS_THICKFRAME,
+                BringWindowToTop, FindWindowExW, GetClassNameW, GetDesktopWindow,
+                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindowLongW, GetWindowRect,
+                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
+                IsZoomed, PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow,
+                ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE,
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
+                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
+                SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOSIZE, SWP_NOZORDER, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE,
+                WINDOW_STYLE, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -186,6 +186,33 @@ impl WindowsApi {
         };
 
         (process_id, thread_id)
+    }
+
+    pub fn find_window(
+        parent: Option<HWND>,
+        after: Option<HWND>,
+        title: Option<String>,
+        class: Option<String>,
+    ) -> Result<HWND> {
+        let title = WindowsString::from(title.unwrap_or_default());
+        let class = WindowsString::from(class.unwrap_or_default());
+        let found = unsafe {
+            FindWindowExW(
+                parent,
+                after,
+                if class.is_empty() {
+                    PCWSTR::null()
+                } else {
+                    class.as_pcwstr()
+                },
+                if title.is_empty() {
+                    PCWSTR::null()
+                } else {
+                    title.as_pcwstr()
+                },
+            )
+        }?;
+        Ok(found)
     }
 
     pub fn current_process() -> HANDLE {

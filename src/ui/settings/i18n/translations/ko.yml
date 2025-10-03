@@ -177,6 +177,7 @@ shortcuts:
     focus_top: 포커스 탑
     increase_height: 높이를 늘리십시오
     increase_width: 폭을 늘리십시오
+    misc_force_quit: 힘을 끊으십시오
     misc_force_restart: 강제 재시작
     misc_open_settings: 열기 설정
     misc_toggle_lock_tracing: 토글 잠금 추적 (로그)

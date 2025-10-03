@@ -184,6 +184,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Povećati visinu
     increase_width: Povećati širinu
+    misc_force_quit: Prisiliti
     misc_force_restart: Restart sile
     misc_open_settings: Otvorite postavke
     misc_toggle_lock_tracing: Prebacivanje zaključavanja (trupci)

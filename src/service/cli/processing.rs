@@ -57,14 +57,13 @@ async fn _process_action(command: SvcAction) -> Result<()> {
             }
 
             let easing = Easing::from_name(&easing).unwrap_or(Easing::Linear);
-            *guard =
-                Some(
-                    positioner.place_animated(animation_duration, easing, move |result| {
-                        if let Err(err) = result {
-                            log::error!("Animated window placement failed: {err}");
-                        }
-                    })?,
-                );
+            let animation =
+                positioner.place_animated(animation_duration, easing, move |result| {
+                    if let Err(err) = result {
+                        log::error!("Animated window placement failed: {err}");
+                    }
+                })?;
+            *guard = Some(animation);
         }
         SvcAction::SetForeground(hwnd) => WindowsApi::set_foreground(hwnd)?,
         SvcAction::SetShortcutsConfig(config) => {

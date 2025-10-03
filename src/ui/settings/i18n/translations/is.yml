@@ -184,6 +184,7 @@ shortcuts:
     focus_top: Fókus toppur
     increase_height: Auka hæð
     increase_width: Auka breidd
+    misc_force_quit: Force hætti
     misc_force_restart: Force endurræsing
     misc_open_settings: Opnar stillingar
     misc_toggle_lock_tracing: Skiptu um rekja lás (logs)

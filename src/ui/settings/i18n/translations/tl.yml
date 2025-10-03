@@ -190,6 +190,7 @@ shortcuts:
     focus_top: Tumuon sa itaas
     increase_height: Dagdagan ang taas
     increase_width: Dagdagan ang lapad
+    misc_force_quit: Puwersa na huminto
     misc_force_restart: Force restart
     misc_open_settings: Buksan ang mga setting
     misc_toggle_lock_tracing: Toggle lock tracing (log)

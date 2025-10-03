@@ -26,7 +26,7 @@ use crate::{
     widgets::{
         launcher::SeelenRofi,
         wallpaper_manager::SeelenWall,
-        weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
+        weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
         window_manager::instance::WindowManagerV2,
     },
     windows_api::{event_window::create_background_window, monitor::MonitorView, Com},
@@ -182,10 +182,6 @@ impl Seelen {
 
         self.refresh_windows_positions()?;
 
-        if state.is_weg_enabled() {
-            SeelenWeg::enumerate_all_windows()?;
-        }
-
         get_vd_manager().list_windows_into_respective_workspace()?;
         if state.is_window_manager_enabled() {
             WindowManagerV2::enumerate_all_windows()?;
@@ -223,14 +219,14 @@ impl Seelen {
         let state = FULL_STATE.load();
         self.instances.push(SluMonitorInstance::new(view, &state)?);
         self.refresh_windows_positions()?;
-        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
+        trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }
 
     fn remove_monitor(&mut self, id: &MonitorId) -> Result<()> {
         self.instances.retain(|m| &m.main_target_id != id);
         self.refresh_windows_positions()?;
-        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
+        trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }
 

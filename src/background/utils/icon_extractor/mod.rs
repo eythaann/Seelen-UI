@@ -18,9 +18,14 @@ use windows::Win32::{
 
 use seelen_core::state::Icon;
 
+#[cfg(target_arch = "x86_64")]
 use std::arch::x86_64::{
     __m128i, _mm_loadu_si128, _mm_setr_epi8, _mm_shuffle_epi8, _mm_storeu_si128,
 };
+
+#[cfg(target_arch = "aarch64")]
+use std::arch::aarch64::{uint8x16_t, vld1q_u8, vqtbl1q_u8, vst1q_u8};
+
 use std::io::BufRead;
 use std::path::{Path, PathBuf};
 
@@ -37,6 +42,7 @@ use crate::windows_api::WindowsApi;
 /// Convert BGRA to RGBA
 ///
 /// Uses SIMD to go fast
+#[cfg(target_arch = "x86_64")]
 pub fn bgra_to_rgba(data: &mut [u8]) {
     // The shuffle mask for converting BGRA -> RGBA
     let mask: __m128i = unsafe {
@@ -52,6 +58,26 @@ pub fn bgra_to_rgba(data: &mut [u8]) {
         let mut vector = unsafe { _mm_loadu_si128(chunk.as_ptr() as *const __m128i) };
         vector = unsafe { _mm_shuffle_epi8(vector, mask) };
         unsafe { _mm_storeu_si128(chunk.as_mut_ptr() as *mut __m128i, vector) };
+    }
+}
+
+// Uses NEON intrinsics to go fast
+#[cfg(target_arch = "aarch64")]
+pub fn bgra_to_rgba(data: &mut [u8]) {
+    // The shuffle mask for converting BGRA -> RGBA
+    let maskplain: [u8; 16] = [
+        2, 1, 0, 3, // First pixel
+        6, 5, 4, 7, // Second pixel
+        10, 9, 8, 11, // Third pixel
+        14, 13, 12, 15, // Fourth pixel
+    ];
+    // The shuffle mask for the conversion in NEON intrinsics
+    let mask: uint8x16_t = unsafe { vld1q_u8(maskplain.as_ptr()) };
+    // For each 16-byte chunk in your data
+    for chunk in data.chunks_exact_mut(16) {
+        let mut vector: uint8x16_t = unsafe { vld1q_u8(chunk.as_ptr()) };
+        vector = unsafe { vqtbl1q_u8(vector, mask) };
+        unsafe { vst1q_u8(chunk.as_mut_ptr(), vector) };
     }
 }
 

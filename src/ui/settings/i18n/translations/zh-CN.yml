@@ -173,6 +173,7 @@ shortcuts:
     focus_top: 聚焦顶部
     increase_height: 增加身高
     increase_width: 增加宽度
+    misc_force_quit: 武力退出
     misc_force_restart: 强制重启
     misc_open_settings: 打开设置
     misc_toggle_lock_tracing: 切换锁定跟踪（日志）

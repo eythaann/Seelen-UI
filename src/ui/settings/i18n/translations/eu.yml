@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Altuera handitzea
     increase_width: Zabalera handitzea
+    misc_force_quit: Behartu irten
     misc_force_restart: Indarra berrabiarazi
     misc_open_settings: Ezarpenak irekitzea
     misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)

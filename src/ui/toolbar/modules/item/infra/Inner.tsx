@@ -5,7 +5,7 @@ import { RemoteDataDeclaration, ToolbarItem } from "@seelen-ui/lib/types";
 import { useDeepCompareEffect } from "@shared/hooks";
 import { cx } from "@shared/styles";
 import { Tooltip } from "antd";
-import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from "preact/compat";
+import { HTMLAttributes, useEffect, useRef, useState } from "preact/compat";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
@@ -15,15 +15,12 @@ import { EvaluateAction } from "../app";
 import { $toolbar_state } from "../../shared/state/items";
 import { SanboxedComponent } from "./EvaluatedComponents";
 
-export interface InnerItemProps extends PropsWithChildren {
+export interface InnerItemProps extends HTMLAttributes<HTMLDivElement> {
   module: Omit<ToolbarItem, "type">;
   extraVars?: Record<string, any>;
   active?: boolean;
   clickable?: boolean;
-  onWheel?: (e: WheelEvent) => void;
-  // needed for dropdown/popup wrappers
   onClick?: (e: MouseEvent) => void;
-  onKeydown?: (e: KeyboardEvent) => void;
 }
 
 export function InnerItem(props: InnerItemProps) {
@@ -32,8 +29,6 @@ export function InnerItem(props: InnerItemProps) {
     module,
     active,
     onClick: onClickProp,
-    onKeydown: onKeydownProp,
-    onWheel: onWheelProp,
     children,
     clickable = true,
     ...rest
@@ -45,14 +40,7 @@ export function InnerItem(props: InnerItemProps) {
   const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
   const env = useSelector(Selectors.env);
 
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
     disabled: isReorderDisabled.value,
     animateLayoutChanges: () => false,
@@ -75,6 +63,8 @@ export function InnerItem(props: InnerItemProps) {
     setScope((s) => ({ ...s, ...extraVars, ...fetchedData }));
   }, [extraVars, fetchedData]);
 
+  console.log(rest);
+
   return (
     <Tooltip
       arrow={false}
@@ -83,11 +73,11 @@ export function InnerItem(props: InnerItemProps) {
       title={tooltip ? <SanboxedComponent code={tooltip} scope={scope} /> : undefined}
     >
       <div
+        {...rest}
+        id={id}
         ref={setNodeRef}
         {...listeners}
         {...(attributes as HTMLAttributes<HTMLDivElement>)}
-        {...rest}
-        id={id}
         style={{
           ...style,
           transform: CSS.Translate.toString(transform),
@@ -99,8 +89,6 @@ export function InnerItem(props: InnerItemProps) {
           "ft-bar-item-clickable": clickable || onClickV2,
           "ft-bar-item-active": active,
         })}
-        onWheel={onWheelProp}
-        onKeyDown={onKeydownProp}
         onClick={(e: MouseEvent) => {
           onClickProp?.(e);
           if (onClickV2) {
@@ -125,25 +113,15 @@ export function InnerItem(props: InnerItemProps) {
   );
 }
 
-function useRemoteData(
-  remoteData: Record<string, RemoteDataDeclaration | undefined>,
-) {
+function useRemoteData(remoteData: Record<string, RemoteDataDeclaration | undefined>) {
   const [state, setState] = useState<Record<string, any>>(() => {
-    return Object.keys(remoteData).reduce(
-      (acc, key) => ({ ...acc, [key]: undefined }),
-      {},
-    );
+    return Object.keys(remoteData).reduce((acc, key) => ({ ...acc, [key]: undefined }), {});
   });
 
-  const intervalsRef = useRef<Record<string, ReturnType<typeof setInterval>>>(
-    {},
-  );
+  const intervalsRef = useRef<Record<string, ReturnType<typeof setInterval>>>({});
   const mountedRef = useRef(true);
 
-  const fetchData = async (
-    key: string,
-    rd: RemoteDataDeclaration,
-  ): Promise<void> => {
+  const fetchData = async (key: string, rd: RemoteDataDeclaration): Promise<void> => {
     if (!mountedRef.current) return;
 
     try {

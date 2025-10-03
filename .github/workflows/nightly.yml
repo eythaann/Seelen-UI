@@ -48,17 +48,17 @@ jobs:
 
             return nightlyVersion;
 
-  build-installers:
+  build:
     needs:
       - update-tag
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-2025"
-            args: ""
+          - platform: windows-2025
+            target: x86_64-pc-windows-msvc
+          - platform: windows-2025
+            target: aarch64-pc-windows-msvc
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -77,69 +77,101 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2025-09-12
-      - uses: Swatinem/rust-cache@v2
+          targets: ${{ matrix.target }}
+      - run: rustup target add ${{ matrix.target }}
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: rust-build-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            rust-${{ runner.os }}-
 
       - name: Install frontend dependencies
         run: npm install
 
       - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-2025'
+        if: matrix.target == 'x86_64-pc-windows-msvc'
         shell: pwsh
         run: |
-          # Install in parallel to save time
-          $jobs = @(
-            { winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force --silent },
-            { winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force --silent },
-            { winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force --silent }
-          )
-          $jobs | ForEach-Object { Start-Job -ScriptBlock $_ } | Wait-Job | Receive-Job
+          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
+          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
       - name: Set Version
         run: |
           npm run versionish -- --version ${{ needs.update-tag.outputs.nightly-version }}
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
-      - uses: tauri-apps/tauri-action@v0.5.16
+      - name: Build
+        run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
+
+      - name: Clean bundle folder from cache
+        shell: pwsh
+        run: |
+          $bundlePath = "target/${{ matrix.target }}/release/bundle"
+          if (Test-Path $bundlePath) {
+            Remove-Item -Path $bundlePath -Recurse -Force
+            Write-Output "Old bundles files deleted: $bundlePath"
+          }
+
+      - name: Bundle
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        with:
-          tagName: nightly
-          releaseName: Seelen UI Nightly
-          prerelease: true
-          # includeDebug: true
-          args: ${{ matrix.args }}
+        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }}
 
       - name: Bundle MSIX
-        if: matrix.platform == 'windows-2025'
-        run: npx tsx scripts/bundle.msix.ts
+        if: matrix.target == 'x86_64-pc-windows-msvc'
+        run: npx tsx scripts/bundle.msix.ts --target ${{ matrix.target }}
 
-      - name: Upload msix to release
-        if: matrix.platform == 'windows-2025'
-        uses: softprops/action-gh-release@v2
+      - name: Upload to artifacts
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: nightly
-          name: Seelen UI Nightly
-          prerelease: true
-          files: target/release/bundle/msix/*
+          name: build-bundles-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/bundle
 
-  remove-old-artifacts:
+  merge-artifacts:
     needs:
       - update-tag
-      - build-installers
+      - build
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-id: ${{ steps.upload-merged.outputs.artifact-id }}
+    steps:
+      - name: Merge artifacts
+        id: upload-merged
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: build-bundles
+          pattern: build-bundles-*
+          delete-merged: true
+
+  sign-and-upload:
+    needs:
+      - update-tag
+      - merge-artifacts
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Remove Signatures and Old Artifacts
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Clean existing assets
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const tagName = 'nightly';
-            const nightlyVersion = ${{ needs.update-tag.outputs.nightly-version }};
-            console.info(`nightlyVersion: ${nightlyVersion}`);
 
             const release = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
@@ -147,25 +179,195 @@ jobs:
               tag: tagName,
             });
 
-            const result = await github.rest.repos.listReleaseAssets({
+            const { data: assets } = await github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: release.data.id,
             });
 
-            // Use Promise.all for parallel deletion
-            const deletions = result.data
-              .filter(asset => {
-                if (asset.name.endsWith('.json')) return false;
-                return !asset.name.includes(nightlyVersion) || asset.name.endsWith('.sig');
-              })
-              .map(asset => {
-                console.info(`deleting ${asset.name}`);
-                return github.rest.repos.deleteReleaseAsset({
+            core.info(`Found ${assets.length} existing assets to clean`);
+
+            const deletions = assets.map(asset => {
+              core.info(`Deleting ${asset.name}`);
+              return github.rest.repos.deleteReleaseAsset({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: asset.id,
+              });
+            });
+
+            await Promise.all(deletions);
+            core.info('✅ All existing assets cleaned');
+
+      - name: Submit to SignPath
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
+          project-slug: seelen-ui
+          signing-policy-slug: test-signing
+          github-artifact-id: ${{ needs.merge-artifacts.outputs.artifact-id }}
+          output-artifact-directory: bundles
+
+      - name: File Tree
+        run: |-
+          tree bundles
+
+      - name: Tauri Updater Signature
+        env:
+          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: |
+          npm install -g @tauri-apps/cli
+
+          echo "Removing existing .sig files to regenerate with Tauri updater keys..."
+          find ./bundles -name "*.sig" -type f -delete
+          echo "Existing signatures removed"
+
+          VERSION=${{ needs.update-tag.outputs.nightly-version }}
+          PATH1="bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
+          PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
+
+          echo "Signing ${PATH1}..."
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH1"
+          echo "Signing ${PATH2}..."
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH2"
+
+      - name: Upload Signed Installers to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly
+          name: Seelen UI Nightly
+          prerelease: true
+          files: bundles/**/*
+
+  generate-update-file:
+    needs:
+      - update-tag
+      - sign-and-upload
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate and Upload latest.json
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const tagName = 'nightly';
+            const version = ${{ needs.update-tag.outputs.nightly-version }};
+
+            core.info(`Using version: ${version}`);
+
+            // Get the nightly release
+            const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: tagName,
+            });
+
+            core.info(`Found release: ${release.data.name} (${release.data.tag_name})`);
+
+            // Get all assets from the release
+            const { data: assets } = await github.rest.repos.listReleaseAssets({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.data.id,
+            });
+
+            core.info(`Found ${assets.length} assets`);
+
+            // Filter relevant assets (exe and sig files)
+            const relevantAssets = assets.filter(asset =>
+              asset.name.endsWith('.exe') || asset.name.endsWith('.sig')
+            );
+
+            if (relevantAssets.length === 0) {
+              throw new Error('No relevant assets found in release');
+            }
+
+            // Build the update manifest
+            const update = {
+              version,
+              notes: `Nightly build ${version}`,
+              pub_date: new Date().toISOString(),
+              platforms: {
+                "windows-x86_64": { signature: "", url: "" },
+                "windows-aarch64": { signature: "", url: "" },
+              },
+            };
+
+            // Map assets to platforms
+            for (const asset of relevantAssets) {
+              const platform = asset.name.includes('x64')
+                ? 'windows-x86_64'
+                : asset.name.includes('arm64')
+                  ? 'windows-aarch64'
+                  : null;
+
+              if (!platform) {
+                core.warning(`Skipping asset with unknown platform: ${asset.name}`);
+                continue;
+              }
+
+              if (asset.name.endsWith('.sig')) {
+                // Download signature content
+                const sigResponse = await github.request('GET /repos/{owner}/{repo}/releases/assets/{asset_id}', {
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   asset_id: asset.id,
+                  headers: { accept: 'application/octet-stream' },
                 });
-              });
+                update.platforms[platform].signature = Buffer.from(sigResponse.data).toString('utf-8');
+                core.info(`Added signature for ${platform}`);
+              }
 
-            await Promise.all(deletions);
+              if (asset.name.endsWith('.exe')) {
+                update.platforms[platform].url = asset.browser_download_url;
+                core.info(`Added URL for ${platform}: ${asset.browser_download_url}`);
+              }
+            }
+
+            // Validate and remove incomplete platforms
+            for (const [platform, data] of Object.entries(update.platforms)) {
+              if (!data.signature || !data.url) {
+                core.warning(`Platform ${platform} is incomplete - removing`);
+                delete update.platforms[platform];
+              }
+            }
+
+            if (Object.keys(update.platforms).length === 0) {
+              throw new Error('No valid platforms found in assets');
+            }
+
+            const manifestJson = JSON.stringify(update, null, 2);
+            core.info('Generated update manifest:');
+            core.info(manifestJson);
+
+            // Delete existing latest.json if it exists
+            const existingManifest = assets.find(a => a.name === 'latest.json');
+            if (existingManifest) {
+              core.info('Deleting existing latest.json');
+              await github.rest.repos.deleteReleaseAsset({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: existingManifest.id,
+              });
+            }
+
+            // Upload the new manifest
+            core.info('Uploading latest.json to release');
+            const manifestBuffer = Buffer.from(manifestJson, 'utf-8');
+            await github.rest.repos.uploadReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.data.id,
+              name: 'latest.json',
+              data: manifestBuffer,
+              headers: {
+                'content-type': 'application/json',
+                'content-length': manifestBuffer.length,
+              },
+            });
+
+            core.info('✅ Successfully generated and uploaded latest.json');

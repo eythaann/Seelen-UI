@@ -11,7 +11,7 @@ use crate::{app::get_app_handle, error::Result, utils::constants::SEELEN_COMMON}
 use super::FullState;
 
 impl FullState {
-    fn initial_toolbar_items() -> Placeholder {
+    pub fn initial_toolbar_items() -> Placeholder {
         Placeholder {
             left: vec![
                 ToolbarItem2::Plugin("@default/user-folder".into()),

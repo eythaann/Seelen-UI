@@ -18,7 +18,7 @@ use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader, BufWriter};
 
 use crate::{
     error::Result,
-    messages::{IpcResponse, LauncherMessage, SvcAction, SvcMessage},
+    messages::{AppMessage, IpcResponse, LauncherMessage, SvcAction, SvcMessage},
 };
 
 /// https://learn.microsoft.com/en-us/windows/win32/secauthz/security-descriptor-control
@@ -106,7 +106,7 @@ impl ServiceIpc {
             return Self::response_to_client(stream, IpcResponse::Success).await;
         }
 
-        let message: SvcMessage = bincode::decode_from_slice(&data, bincode::config::standard())?.0;
+        let message = SvcMessage::from_bytes(&data)?;
         if !message.is_signature_valid() {
             Self::response_to_client(
                 stream,
@@ -125,19 +125,16 @@ impl ServiceIpc {
         stream: &AsyncDuplexPipeStream<Bytes>,
         res: IpcResponse,
     ) -> Result<()> {
-        let message = bincode::encode_to_vec(&res, bincode::config::standard())?;
-        write_to_ipc_stream(stream, &message).await
+        write_to_ipc_stream(stream, &res.to_bytes()?).await
     }
 
     pub async fn send(message: SvcAction) -> Result<()> {
         let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
-        let data = bincode::encode_to_vec(
-            &SvcMessage {
-                token: SvcMessage::signature().to_string(),
-                action: message,
-            },
-            bincode::config::standard(),
-        )?;
+        let data = SvcMessage {
+            token: SvcMessage::signature().to_string(),
+            action: message,
+        }
+        .to_bytes()?;
         async_send_to_ipc_stream(&stream, &data).await?.ok()
     }
 }
@@ -193,10 +190,9 @@ impl AppIpc {
             return Self::response_to_client(stream, IpcResponse::Success).await;
         }
 
-        let message: Vec<String> =
-            bincode::serde::decode_from_slice(&data, bincode::config::standard())?.0;
+        let message = AppMessage::from_bytes(&data)?;
         log::trace!("IPC command received: {message:?}");
-        Self::response_to_client(stream, cb(message)).await?;
+        Self::response_to_client(stream, cb(message.0)).await?;
         Ok(())
     }
 
@@ -204,14 +200,14 @@ impl AppIpc {
         stream: &AsyncDuplexPipeStream<Bytes>,
         res: IpcResponse,
     ) -> Result<()> {
-        let message = bincode::encode_to_vec(&res, bincode::config::standard())?;
-        write_to_ipc_stream(stream, &message).await
+        write_to_ipc_stream(stream, &res.to_bytes()?).await
     }
 
-    pub async fn send(message: Vec<String>) -> Result<()> {
+    pub async fn send(message: AppMessage) -> Result<()> {
         let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
-        let data = bincode::encode_to_vec(&message, bincode::config::standard())?;
-        async_send_to_ipc_stream(&stream, &data).await?.ok()
+        async_send_to_ipc_stream(&stream, &message.to_bytes()?)
+            .await?
+            .ok()
     }
 }
 
@@ -239,8 +235,7 @@ async fn async_send_to_ipc_stream(
 ) -> Result<IpcResponse> {
     write_to_ipc_stream(stream, buf).await?;
     let buf = read_from_ipc_stream(stream).await?;
-    let response: IpcResponse = bincode::decode_from_slice(&buf, bincode::config::standard())?.0;
-    Ok(response)
+    IpcResponse::from_bytes(&buf)
 }
 
 /// blocking version to test connections without needed of tokio runtime
@@ -255,8 +250,7 @@ fn send_to_ipc_stream(stream: &DuplexPipeStream<Bytes>, buf: &[u8]) -> Result<Ip
     reader.read_until(END_OF_TRANSMISSION_BLOCK, &mut buf)?;
     buf.pop();
 
-    let response: IpcResponse = bincode::decode_from_slice(&buf, bincode::config::standard())?.0;
-    Ok(response)
+    IpcResponse::from_bytes(&buf)
 }
 
 pub struct LauncherIpc {
@@ -305,8 +299,7 @@ impl LauncherIpc {
         stream: &AsyncDuplexPipeStream<Bytes>,
         res: IpcResponse,
     ) -> Result<()> {
-        let message = bincode::encode_to_vec(&res, bincode::config::standard())?;
-        write_to_ipc_stream(stream, &message).await
+        write_to_ipc_stream(stream, &res.to_bytes()?).await
     }
 
     async fn process_connection<F>(stream: &AsyncDuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
@@ -317,8 +310,7 @@ impl LauncherIpc {
         if data.is_empty() {
             return Self::response_to_client(stream, IpcResponse::Success).await;
         }
-        let message: LauncherMessage =
-            bincode::decode_from_slice(&data, bincode::config::standard())?.0;
+        let message = LauncherMessage::from_bytes(&data)?;
         log::trace!("IPC command received: {message:?}");
         Self::response_to_client(stream, cb(message)).await?;
         Ok(())
@@ -326,7 +318,8 @@ impl LauncherIpc {
 
     pub async fn send(message: LauncherMessage) -> Result<()> {
         let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
-        let data = bincode::encode_to_vec(&message, bincode::config::standard())?;
-        async_send_to_ipc_stream(&stream, &data).await?.ok()
+        async_send_to_ipc_stream(&stream, &message.to_bytes()?)
+            .await?
+            .ok()
     }
 }

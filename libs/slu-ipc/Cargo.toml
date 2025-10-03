@@ -13,4 +13,4 @@ log = { workspace = true }
 interprocess = { workspace = true, features = ["tokio"] }
 seelen-core = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
-bincode = { version = "2.0.1", features = ["serde"] }
+serde_json = { workspace = true }

@@ -71,7 +71,7 @@ impl FullState {
             settings: Settings::default(),
             settings_by_app: VecDeque::new(),
             weg_items: WegItems::default(),
-            toolbar_items: Placeholder::default(),
+            toolbar_items: Self::initial_toolbar_items(),
             launcher_history: LauncherHistory::default(),
             icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
         };

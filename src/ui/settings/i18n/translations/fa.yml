@@ -186,6 +186,7 @@ shortcuts:
     focus_top: تمرکز بالا
     increase_height: افزایش ارتفاع
     increase_width: عرض را افزایش دهید
+    misc_force_quit: نیرو ترک
     misc_force_restart: مجدداً نیرو
     misc_open_settings: تنظیمات باز
     misc_toggle_lock_tracing: Toggle Lock Tracing (سیاهههای مربوط)

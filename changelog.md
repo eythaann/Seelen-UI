@@ -10,17 +10,25 @@
 
 - improve development ecosystem of resources via embedding of yaml files.
 - allow open dev tools on release builds.
+- optimize window movement animations.
 
 ### fix
 
 - not considering multiple batteries on setups.
 - app not forcing restart on pc sleep/resume.
+- app/service ipc messages corrupted on encode/decode.
+- window manager animations enable logic.
+- window manager not forcing size of windows on tiling.
+- wallpaper paused while using Alt + Tab.
+- stucked menus on extreme performance mode.
+- stucked inline items after being dragged on toolbar.
 
 ### refactor
 
 - move core library to main repository.
 - remove app tray icon registration.
 - remove windows tray icons related code.
+- discord RPC now is disabled by default.
 
 ## [2.4.3]
 

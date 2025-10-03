@@ -6,7 +6,7 @@ use std::sync::LazyLock;
 
 use seelen_core::system_state::UserAppWindow;
 
-use crate::{event_manager, utils::lock_free::SyncVec};
+use crate::{event_manager, utils::lock_free::SyncVec, windows_api::window::Window};
 
 pub static USER_APPS_MANAGER: LazyLock<UserAppsManager> = LazyLock::new(UserAppsManager::init);
 
@@ -17,9 +17,9 @@ pub struct UserAppsManager {
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum UserAppsEvent {
-    WinAdded,
-    WinUpdated,
-    WinRemoved,
+    WinAdded(isize),
+    WinUpdated(isize),
+    WinRemoved(isize),
     AppAdded,
     AppUpdated,
     AppRemoved,
@@ -34,7 +34,23 @@ impl UserAppsManager {
         }
     }
 
-    fn contains_win(&self, win: &isize) -> bool {
-        self.interactable_windows.any(|w| &w.hwnd == win)
+    pub fn instance() -> &'static Self {
+        &USER_APPS_MANAGER
+    }
+
+    pub fn contains_win(&self, window: &Window) -> bool {
+        let hwnd = window.address();
+        self.interactable_windows.any(|w| w.hwnd == hwnd)
+    }
+
+    fn add_win(&self, window: &Window) {
+        log::trace!("Adding: {window}");
+        self.interactable_windows.push(window.to_serializable());
+    }
+
+    fn remove_win(&self, window: &Window) {
+        log::trace!("Removing: {window}");
+        let hwnd = window.address();
+        self.interactable_windows.retain(|w| w.hwnd != hwnd);
     }
 }

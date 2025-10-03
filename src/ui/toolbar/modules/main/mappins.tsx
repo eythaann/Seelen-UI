@@ -6,7 +6,7 @@ import { memo } from "react";
 import { BluetoothModule } from "../bluetooth/infra/Module";
 import { DateModule } from "../Date/infra";
 import { DeviceModule } from "../Device/infra";
-import { GenericItem, TextItem } from "../item/infra/infra";
+import { AppsItem, TextItem } from "../item/infra/infra";
 import { KeyboardModule } from "../Keyboard/infra";
 import { MediaModule } from "../media/infra/Module";
 import { NetworkModule } from "../network/infra/Module";
@@ -20,10 +20,10 @@ import { WorkspacesModule } from "../Workspaces";
 
 const modulesByType: Record<
   ToolbarItem["type"],
-  AnyComponent<{ module: any; value: any }>
+  AnyComponent<{ module: any }>
 > = {
   [ToolbarItemType.Text]: memo(TextItem),
-  [ToolbarItemType.Generic]: memo(GenericItem),
+  [ToolbarItemType.Generic]: memo(AppsItem),
   [ToolbarItemType.User]: memo(UserModule),
   [ToolbarItemType.Date]: memo(DateModule),
   [ToolbarItemType.Power]: memo(PowerModule),
@@ -58,5 +58,6 @@ export function componentByModule(entry: ToolbarItem2) {
   if (!Component) {
     return null;
   }
-  return <Component key={module.id} module={module} value={entry} />;
+
+  return <Component key={module.id} module={module} />;
 }

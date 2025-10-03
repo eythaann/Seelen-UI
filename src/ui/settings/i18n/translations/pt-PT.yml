@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Aumentar a altura
     increase_width: Aumentar a largura
+    misc_force_quit: Force parou
     misc_force_restart: Reiniciar força
     misc_open_settings: Abra as configurações
     misc_toggle_lock_tracing: Traçar o traçado de trava (logs)

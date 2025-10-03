@@ -185,6 +185,7 @@ shortcuts:
     focus_top: ඉහළට අවධානය යොමු කරන්න
     increase_height: උස වැඩි කරන්න
     increase_width: පළල වැඩි කිරීම
+    misc_force_quit: බලය ඉවත්වීම
     misc_force_restart: බලය නැවත ආරම්භ කරන්න
     misc_open_settings: විවෘත සැකසුම්
     misc_toggle_lock_tracing: ටොගල් අගුල ලුහුබැඳීම (ල logs ු-සටහන්)

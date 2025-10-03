@@ -8,8 +8,6 @@ export const WmApplicationOptions = [
   AppExtraFlag.Pinned,
 ];
 
-export const WegApplicationOptions = [AppExtraFlag.Hidden];
-
 export interface AppConfigurationExtended extends AppConfig {
   key: number;
 }

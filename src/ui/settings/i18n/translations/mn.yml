@@ -185,6 +185,7 @@ shortcuts:
     focus_top: Додуулах нь эсрэг
     increase_height: Дээд хэмжээг нэмэгдүүлэх
     increase_width: Өргөнийг нэмэгдүүлэх
+    misc_force_quit: Хүчний гарах
     misc_force_restart: Хүчийг дахин эхлүүлэх
     misc_open_settings: АВир танилцуулга
     misc_toggle_lock_tracing: Түгжих Tracing Tracing (бүртгэл)

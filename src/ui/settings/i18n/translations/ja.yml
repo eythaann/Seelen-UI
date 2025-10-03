@@ -176,6 +176,7 @@ shortcuts:
     focus_top: フォーカストップ
     increase_height: 高さを増やします
     increase_width: 幅を増やします
+    misc_force_quit: 強制終了
     misc_force_restart: 強制再起動
     misc_open_settings: 設定を開く
     misc_toggle_lock_tracing: トグルロックトレース（ログ）

@@ -188,6 +188,7 @@ shortcuts:
     focus_top: Focus top
     increase_height: Crește înălțimea
     increase_width: Creșteți lățimea
+    misc_force_quit: Forța a renunțat
     misc_force_restart: Forțați repornirea
     misc_open_settings: Setări deschise
     misc_toggle_lock_tracing: Comutarea blocării de blocare (jurnalele)

@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Face Top
     increase_height: Balandlikni oshirish
     increase_width: Kenglikni oshirish
+    misc_force_quit: Kuch berish
     misc_force_restart: Kuchni qayta boshlang
     misc_open_settings: Ochiq sozlamalar
     misc_toggle_lock_tracing: Qulfni qaytarish (jurnallar)

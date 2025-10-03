@@ -474,7 +474,7 @@ impl Default for Settings {
             // ---
             performance_mode: PerformanceModeSettings::default(),
             shortcuts: SluShortcutsSettings::default(),
-            drpc: true,
+            drpc: false,
             old_active_themes: Vec::new(),
             active_themes: vec!["@default/theme".into()],
             active_icon_packs: vec!["@system/icon-pack".into()],

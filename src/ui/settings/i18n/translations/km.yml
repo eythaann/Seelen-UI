@@ -183,6 +183,7 @@ shortcuts:
     focus_top: ផ្តោតលើកំពូល
     increase_height: បង្កើនកម្ពស់
     increase_width: បង្កើនទទឹង
+    misc_force_quit: បង្ខំឱ្យឈប់
     misc_force_restart: បង្ខំឱ្យចាប់ផ្តើមឡើងវិញ
     misc_open_settings: បើកការកំណត់
     misc_toggle_lock_tracing: បិទបើកការចាក់សោរ (កំណត់ហេតុ)

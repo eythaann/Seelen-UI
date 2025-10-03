@@ -7,7 +7,7 @@ use crate::{
     error::Result,
     modules::input::Mouse,
     trace_lock,
-    virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager},
+    virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager, MINIMIZED_BY_WORKSPACES},
     widgets::window_manager::node_ext::WmNodeExt,
     windows_api::{
         monitor::Monitor,
@@ -136,6 +136,10 @@ impl WindowManagerV2 {
                 Self::system_move_size_end(window)?;
             }
             WinEvent::SystemMinimizeStart => {
+                if MINIMIZED_BY_WORKSPACES.contains(&window.address()) {
+                    return Ok(());
+                }
+
                 let mut should_remove = false;
                 {
                     let mut state = trace_lock!(WM_STATE);

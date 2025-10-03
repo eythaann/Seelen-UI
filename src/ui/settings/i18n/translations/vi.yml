@@ -185,6 +185,7 @@ shortcuts:
     focus_top: Tập trung hàng đầu
     increase_height: Tăng chiều cao
     increase_width: Tăng chiều rộng
+    misc_force_quit: BẮT ĐẦU
     misc_force_restart: Bắt đầu lại
     misc_open_settings: Mở cài đặt
     misc_toggle_lock_tracing: Chuyển đổi dấu vết khóa (nhật ký)

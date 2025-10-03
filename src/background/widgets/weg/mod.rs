@@ -9,7 +9,7 @@ pub use instance::SeelenWeg;
 use std::thread::JoinHandle;
 
 use image::{DynamicImage, RgbaImage};
-use weg_items_impl::WEG_ITEMS_IMPL;
+use weg_items_impl::SEELEN_WEG_STATE;
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::HWND,
@@ -18,7 +18,6 @@ use windows::Win32::{
 
 use crate::{
     error::Result,
-    log_error,
     state::application::FULL_STATE,
     trace_lock,
     utils::sleep_millis,
@@ -27,47 +26,21 @@ use crate::{
 
 impl SeelenWeg {
     pub fn contains_app(window: &Window) -> bool {
-        trace_lock!(WEG_ITEMS_IMPL).contains(window)
+        trace_lock!(SEELEN_WEG_STATE).contains(window)
     }
 
     pub fn foregrounded_app(window: &Window) -> Result<()> {
-        let mut weg = trace_lock!(WEG_ITEMS_IMPL);
+        let mut weg = trace_lock!(SEELEN_WEG_STATE);
         weg.update_window_activation(window);
         weg.emit_to_webview()?;
         Ok(())
     }
 
     pub fn update_app(window: &Window) -> Result<()> {
-        let mut weg = trace_lock!(WEG_ITEMS_IMPL);
-        weg.update_window(window);
+        let mut weg = trace_lock!(SEELEN_WEG_STATE);
+        weg.update_window_info(window);
         weg.emit_to_webview()?;
         Ok(())
-    }
-
-    pub fn enumerate_all_windows() -> Result<()> {
-        WindowEnumerator::new().for_each(|window| {
-            if Self::should_be_added(&window) {
-                log_error!(Self::add(&window));
-            }
-        })
-    }
-
-    pub fn add(window: &Window) -> Result<()> {
-        let mut weg = trace_lock!(WEG_ITEMS_IMPL);
-        weg.add(window)?;
-        weg.emit_to_webview()?;
-        Ok(())
-    }
-
-    pub fn remove_hwnd(window: &Window) -> Result<()> {
-        let mut weg = trace_lock!(WEG_ITEMS_IMPL);
-        weg.remove(window);
-        weg.emit_to_webview()?;
-        Ok(())
-    }
-
-    pub fn should_be_added(window: &Window) -> bool {
-        window.is_interactable_and_not_hidden()
     }
 
     pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {

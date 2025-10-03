@@ -69,7 +69,7 @@ impl Debug for Window {
 
 impl Display for Window {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Window({:?})", self.0)
+        write!(f, "Window({:?})", self.0 .0)
     }
 }
 
@@ -263,11 +263,22 @@ impl Window {
         if !self.is_frame()? {
             return Err("Window is not a frame".into());
         }
-        for window in self.children()? {
-            if !window.class().starts_with("ApplicationFrame") {
-                return Ok(Some(window));
-            }
+
+        let title = Some(self.title());
+        let class = Some("Windows.UI.Core.CoreWindow".to_owned());
+
+        // frame creator is a child of the window while rendering
+        if let Ok(hwnd) =
+            WindowsApi::find_window(Some(self.hwnd()), None, title.clone(), class.clone())
+        {
+            return Ok(Some(Window::from(hwnd)));
         }
+
+        // while minimized, not rendering, the creator is detached as an top level window
+        if let Ok(hwnd) = WindowsApi::find_window(None, None, title, class) {
+            return Ok(Some(Window::from(hwnd)));
+        }
+
         Ok(None)
     }
 
@@ -328,6 +339,7 @@ impl Window {
         }
     }
 
+    #[allow(dead_code)]
     pub fn set_position(&self, rect: &RECT, flags: SET_WINDOW_POS_FLAGS) -> Result<()> {
         if self.process().open_handle().is_ok() {
             WindowsApi::set_position(self.hwnd(), None, rect, flags)
@@ -343,17 +355,6 @@ impl Window {
                 flags: flags.0,
             })
         }
-    }
-
-    pub fn set_inner_rect(&self, rect: &Rect) -> Result<()> {
-        let shadow = WindowsApi::shadow_rect(self.0)?;
-        let rect = RECT {
-            top: rect.top + shadow.top,
-            left: rect.left + shadow.left,
-            right: rect.right + shadow.right,
-            bottom: rect.bottom + shadow.bottom,
-        };
-        self.set_position(&rect, SET_WINDOW_POS_FLAGS(0))
     }
 
     pub fn focus(&self) -> Result<()> {

@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Фокус врвот
     increase_height: Зголемете ја висината
     increase_width: Зголемете ја ширината
+    misc_force_quit: Сила откажана
     misc_force_restart: Рестартирање на силата
     misc_open_settings: Отворете ги поставките
     misc_toggle_lock_tracing: Следење на заклучување на заклучување (логови)

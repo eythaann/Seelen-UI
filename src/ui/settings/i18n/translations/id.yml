@@ -188,6 +188,7 @@ shortcuts:
     focus_top: Fokus atas
     increase_height: Tingkatkan tinggi
     increase_width: Meningkatkan lebar
+    misc_force_quit: Force berhenti
     misc_force_restart: Memaksa Mulai Ulang
     misc_open_settings: Buka Pengaturan
     misc_toggle_lock_tracing: Toggle Lock Tracing (Log)

@@ -36,7 +36,7 @@ impl Drop for WindowManagerV2 {
 }
 
 impl WindowManagerV2 {
-    pub const TITLE: &'static str = ".Seelen Window Manager";
+    pub const TITLE: &'static str = "Seelen Window Manager";
     pub const TARGET: &'static str = "@seelen/window-manager";
 
     pub fn new(monitor_id: &MonitorId) -> Result<Self> {

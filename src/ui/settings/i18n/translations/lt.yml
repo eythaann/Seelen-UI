@@ -182,6 +182,7 @@ shortcuts:
     focus_top: Fokusavimo viršus
     increase_height: Padidinti aukštį
     increase_width: Padidinti plotį
+    misc_force_quit: Jėga mesti
     misc_force_restart: Priverstinis paleidimas iš naujo
     misc_open_settings: Atidaryti nustatymai
     misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)

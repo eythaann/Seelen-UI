@@ -187,6 +187,7 @@ shortcuts:
     focus_top: Focus vers le haut
     increase_height: Augmenter la hauteur
     increase_width: Augmenter la largeur
+    misc_force_quit: Forcer l'arrêt de Seelen UI
     misc_force_restart: Forcer le redémarrage de Seelen UI
     misc_open_settings: Ouvrir les paramètres de Seelen UI
     misc_toggle_lock_tracing: Activer/désactiver suivi des verrous (logs)

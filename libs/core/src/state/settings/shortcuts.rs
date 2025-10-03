@@ -75,6 +75,7 @@ define_hotkey_actions! {
     // misc
     MiscOpenSettings = ["Win", "K"],
     MiscForceRestart = ["Ctrl", "Win", "Alt", "R"],
+    MiscForceQuit = ["Ctrl", "Win", "Alt", "K"],
     MiscToggleLockTracing,
     MiscToggleWinEventTracing
 }
@@ -181,6 +182,10 @@ impl SluShortcutsSettings {
         };
 
         if let Some(h) = defaults.get_mut(SluHotkeyAction::MiscForceRestart) {
+            h.readonly = true;
+        }
+
+        if let Some(h) = defaults.get_mut(SluHotkeyAction::MiscForceQuit) {
             h.readonly = true;
         }
 

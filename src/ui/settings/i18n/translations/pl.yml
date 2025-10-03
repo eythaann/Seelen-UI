@@ -186,6 +186,7 @@ shortcuts:
     focus_top: Focus Top
     increase_height: Zwiększyć wysokość
     increase_width: Zwiększyć szerokość
+    misc_force_quit: Force zrezygnować
     misc_force_restart: Wymuś restart
     misc_open_settings: Otwórz ustawienia
     misc_toggle_lock_tracing: Przełączanie śledzenia blokady (dzienniki)

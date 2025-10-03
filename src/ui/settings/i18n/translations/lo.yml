@@ -180,6 +180,7 @@ shortcuts:
     focus_top: ສຸມໃສ່ດ້ານເທິງ
     increase_height: ເພີ່ມຄວາມສູງ
     increase_width: ເພີ່ມຄວາມກວ້າງ
+    misc_force_quit: ບັງຄັບໃຫ້ເຊົາ
     misc_force_restart: ບັງຄັບໃຫ້ Restart
     misc_open_settings: ເປີດການຕັ້ງຄ່າ
     misc_toggle_lock_tracing: Toggle Lock Tracing (ບັນທຶກ)

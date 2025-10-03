@@ -15,8 +15,8 @@ pub enum AppExtraFlag {
     Unmanage,
     /// Pin this app in all the virtual desktops in the wm.
     Pinned,
-    /// Hide this app on the dock/taskbar.
-    Hidden,
+    #[serde(other)]
+    Unknown,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]

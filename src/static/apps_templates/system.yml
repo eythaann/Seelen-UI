@@ -73,21 +73,3 @@
     matchingStrategy: Equals
   options:
     - unmanage
-
-- name: System Background Apps
-  identifier:
-    id: Windows\SystemApps
-    kind: Path
-    matchingStrategy: Contains
-  options:
-    - hidden
-    - unmanage
-
-- name: Idle Windows Settings
-  identifier:
-    id: Windows\ImmersiveControlPanel
-    kind: Path
-    matchingStrategy: Contains
-  options:
-    - hidden
-    - unmanage
