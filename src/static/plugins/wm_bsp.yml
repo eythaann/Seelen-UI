@@ -84,7 +84,7 @@ metadata:
     de: Standard-Bspwm-Kachel-Layout.
     ca: Disposició per defecte de rajoles BSPWM.
     cy: Cynllun teils bspwm diofyn.
-    fr: Disposition par défaut des tuiles BSPWM.
+    fr: Disposition des fenêtres en mode BSPWM (Binary Space Partitioning Window Manager). Chaque nouvelle fenêtre prend la moitié de la précédente fenêtre active.
     id: tata letak ubin bspwm default.
     eu: BSPWM fitxa lehenetsia.
     it: layout predefinito delle piastrelle bspwm.

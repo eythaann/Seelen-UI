@@ -1,9 +1,9 @@
 app_launcher:
   runners:
-    cmd: Commande
+    cmd: Terminal
     explorer: Explorateur
 footer:
-  shortcuts: Montrer les raccourcis clavier
+  shortcuts: Afficher les raccourcis clavier
 header:
   search: Application, commande ou dossier
 item:
