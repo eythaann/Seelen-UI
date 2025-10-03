@@ -11,6 +11,7 @@
 - improve development ecosystem of resources via embedding of yaml files.
 - allow open dev tools on release builds.
 - optimize window movement animations.
+- don't show version warning if target version is not present.
 
 ### fix
 

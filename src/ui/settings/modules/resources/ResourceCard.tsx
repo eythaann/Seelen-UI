@@ -40,9 +40,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
       if (!resource.metadata.filename.endsWith(".slu")) {
         return;
       }
-      const res = await fetch(
-        `https://product.seelen.io/resource/${resource.id.replace("@", "")}`,
-      );
+      const res = await fetch(`https://product.seelen.io/resource/${resource.id.replace("@", "")}`);
       const remoteResource: Resource = await res.json();
       const lastUpdateRelease = new Date(remoteResource.updatedAt);
       const writtenAt = new Date(resource.metadata.writtenAt);
@@ -52,18 +50,19 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
     checkUpdate();
   }, []);
 
-  const [major = 0, minor = 0, patch = 0] = EnvConfig.version.split(".").map(
-    Number,
-  );
+  const [major = 0, minor = 0, patch = 0] = EnvConfig.version.split(".").map(Number);
   const [majorTarget = 0, minorTarget = 0, patchTarget = 0] = resource.metadata.appTargetVersion || [];
 
-  const targetIsOlder = majorTarget < major ||
-    (majorTarget === major && minorTarget < minor) ||
-    (majorTarget === major && minorTarget === minor && patchTarget < patch);
+  const targetIsOlder = !!resource.metadata.appTargetVersion &&
+    (majorTarget < major ||
+      (majorTarget === major && minorTarget < minor) ||
+      (majorTarget === major && minorTarget === minor && patchTarget < patch));
 
-  const targetIsNewer = majorTarget > major ||
+  const targetIsNewer = !!resource.metadata.appTargetVersion && (
+    majorTarget > major ||
     (majorTarget === major && minorTarget > minor) ||
-    (majorTarget === major && minorTarget === minor && patchTarget > patch);
+    (majorTarget === major && minorTarget === minor && patchTarget > patch)
+  );
 
   const showWarning = targetIsOlder && !resource.metadata.bundled;
   const showDanger = targetIsNewer && !resource.metadata.bundled;
@@ -106,11 +105,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
         <div className={cs.actionsTop}>
           {hasUpdate && (
             <Tooltip title={t("resources.has_update")} placement="left">
-              <Button
-                type="link"
-                href={resourceLink + "?update"}
-                target="_blank"
-              >
+              <Button type="link" href={resourceLink + "?update"} target="_blank">
                 <Icon iconName="MdUpdate" />
               </Button>
             </Tooltip>
@@ -129,8 +124,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
             </Button>
           </Tooltip>
         )}
-        {!resource.metadata.bundled &&
-          resource.metadata.path.includes("com.seelen.seelen-ui") && (
+        {!resource.metadata.bundled && resource.metadata.path.includes("com.seelen.seelen-ui") && (
           <Tooltip title={t("resources.delete")} placement="left">
             <Popconfirm
               title={t("action.confirm")}
@@ -181,9 +175,7 @@ function ResourcePortraitInner({ resource, kind }: ResourcePortraitProps) {
     if (wallpaper.thumbnail_filename) {
       return (
         <img
-          src={convertFileSrc(
-            `${resource.metadata.path}\\${wallpaper.thumbnail_filename}`,
-          )}
+          src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.thumbnail_filename}`)}
           style={{ filter: "blur(0.4px)" }}
           loading="lazy"
         />
@@ -208,9 +200,7 @@ function ResourcePortraitInner({ resource, kind }: ResourcePortraitProps) {
   return <ResourceIcon kind={kind} />;
 }
 
-export function ResourcePortrait(
-  { resource, kind, children }: ResourcePortraitProps,
-) {
+export function ResourcePortrait({ resource, kind, children }: ResourcePortraitProps) {
   return (
     <figure className={cs.portrait}>
       <ResourcePortraitInner resource={resource} kind={kind} />
