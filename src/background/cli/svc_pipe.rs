@@ -77,31 +77,54 @@ impl ServicePipe {
     // the service should be running since installer will start it or startup task scheduler
     // so if the service is not running, we need to start it (common on msix setup)
     pub async fn start_service() -> Result<()> {
-        if let Err(err) = Self::start_service_task() {
-            log::debug!("Can not start service via task scheduler: {err}");
-            let script = PwshScript::new(format!(
-                "Start-Process '{}' -Verb runAs",
-                Self::service_path()?.display()
-            ))
-            .inline_command()
-            .elevated();
-            let result = script.execute().await;
-            if let Err(err) = result {
-                let try_again = get_app_handle()
-                    .dialog()
-                    .message(t!("service.not_running_description"))
-                    .title(t!("service.not_running"))
-                    .kind(MessageDialogKind::Info)
-                    .buttons(MessageDialogButtons::OkCustom(
-                        t!("service.not_running_ok").to_string(),
-                    ))
-                    .blocking_show();
-                if try_again {
-                    script.execute().await?;
-                }
-                return Err(err);
+        let Err(err) = Self::start_service_task() else {
+            return Ok(());
+        };
+
+        log::debug!("Can not start service via task scheduler: {err}");
+
+        let script = PwshScript::new(format!(
+            "Start-Process '{}' -Verb runAs",
+            Self::service_path()?.display()
+        ))
+        .inline_command()
+        .elevated();
+
+        let result = script.execute().await;
+        if let Err(err) = result {
+            let try_again = get_app_handle()
+                .dialog()
+                .message(t!("service.not_running_description"))
+                .title(t!("service.not_running"))
+                .kind(MessageDialogKind::Info)
+                .buttons(MessageDialogButtons::OkCustom(
+                    t!("service.not_running_ok").to_string(),
+                ))
+                .blocking_show();
+            if try_again {
+                script.execute().await?;
             }
+            return Err(err);
         }
+
+        let mut counter = 0;
+        while !Self::is_running() && counter < 10 {
+            log::debug!("Waiting for service IPC...");
+            counter += 1;
+            tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+        }
+
+        if counter == 10 {
+            get_app_handle()
+                .dialog()
+                .message(t!("service.not_running_description"))
+                .title(t!("service.not_running"))
+                .kind(MessageDialogKind::Error)
+                .buttons(MessageDialogButtons::Ok)
+                .blocking_show();
+            return Err("Service not running".into());
+        }
+
         Ok(())
     }
 }
