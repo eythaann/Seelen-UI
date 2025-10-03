@@ -1,5 +1,5 @@
 use windows::Win32::{
-    Foundation::{HWND, LPARAM, RECT, WPARAM},
+    Foundation::{HWND, RECT},
     Graphics::Gdi::{
         RDW_ALLCHILDREN, RDW_ERASE, RDW_FRAME, RDW_INVALIDATE, RDW_UPDATENOW, RedrawWindow,
         UpdateWindow,
@@ -7,7 +7,7 @@ use windows::Win32::{
     UI::WindowsAndMessaging::{
         BeginDeferWindowPos, DeferWindowPos, EndDeferWindowPos, GetClassNameW, GetWindowRect, HDWP,
         MoveWindow, SWP_DEFERERASE, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOOWNERZORDER,
-        SWP_NOREDRAW, SWP_NOSENDCHANGING, SWP_NOSIZE, SWP_NOZORDER, SendMessageW, SetWindowPos,
+        SWP_NOREDRAW, SWP_NOSENDCHANGING, SWP_NOSIZE, SWP_NOZORDER, SetWindowPos,
     },
 };
 
@@ -113,17 +113,6 @@ pub fn force_redraw_window(window_id: isize) -> Result<()> {
         UpdateWindow(hwnd).ok()?;
     }
     Ok(())
-}
-
-pub fn send_message(hwnd: isize, message: u32, wparam: Option<usize>, lparam: Option<isize>) {
-    unsafe {
-        SendMessageW(
-            HWND(hwnd as _),
-            message,
-            wparam.map(WPARAM),
-            lparam.map(LPARAM),
-        );
-    }
 }
 
 pub fn get_class(hwnd: isize) -> Result<String> {

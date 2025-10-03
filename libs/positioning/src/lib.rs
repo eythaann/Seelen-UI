@@ -6,10 +6,8 @@ pub mod rect;
 
 use std::collections::HashMap;
 
-use windows::Win32::UI::WindowsAndMessaging::WM_SETREDRAW;
-
 use crate::{
-    api::{force_redraw_window, get_window_rect, is_explorer, position_window, send_message},
+    api::{force_redraw_window, get_window_rect, is_explorer, position_window},
     easings::Easing,
     error::Result,
     rect::Rect,
@@ -60,7 +58,7 @@ impl Positioner {
         &self,
         duration_ms: u64,
         easing: Easing,
-        on_end: impl FnOnce(Result<bool>) + Send + 'static,
+        on_end: impl Fn(Result<bool>) + Sync + Send + 'static,
     ) -> Result<AppWinAnimation> {
         let mut animation = AppWinAnimation::new(duration_ms, easing);
         animation.batch = self.to_positioning.clone();
@@ -73,8 +71,8 @@ pub struct AppWinAnimation {
     batch: HashMap<isize, Rect>,
     easing: Easing,
     duration_ms: u64,
-    animation_interrupt_signal: Option<std::sync::mpsc::Sender<()>>,
-    animation_thread: Option<std::thread::JoinHandle<()>>,
+    animation_interrupt_signals: Vec<std::sync::mpsc::Sender<()>>,
+    animation_threads: Vec<std::thread::JoinHandle<()>>,
 }
 
 impl AppWinAnimation {
@@ -83,14 +81,14 @@ impl AppWinAnimation {
             batch: HashMap::new(),
             easing,
             duration_ms,
-            animation_interrupt_signal: None,
-            animation_thread: None,
+            animation_interrupt_signals: Vec::new(),
+            animation_threads: Vec::new(),
         }
     }
 
     fn start<F>(&mut self, on_end: F) -> Result<()>
     where
-        F: FnOnce(Result<bool>) + Send + 'static,
+        F: Fn(Result<bool>) + Sync + Send + 'static,
     {
         self.interrupt(); // interrupt previous animation if any
         self.wait(); // ensure previous run of this animation is finished
@@ -120,35 +118,29 @@ impl AppWinAnimation {
             return Ok(());
         }
 
-        let (tx, rx) = std::sync::mpsc::channel::<()>();
         let easing = self.easing;
         let animation_duration = std::time::Duration::from_millis(self.duration_ms);
-        self.animation_interrupt_signal = Some(tx);
-        self.animation_thread = Some(std::thread::spawn(move || {
-            for data in &list {
-                if data.is_explorer {
-                    send_message(data.hwnd, WM_SETREDRAW, Some(0), None);
-                }
-            }
 
-            let result = Self::perform(&list, easing, animation_duration, rx);
-            if result.as_ref().is_ok_and(|interrupted| !interrupted) {
-                for data in &list {
-                    if data.is_explorer {
-                        send_message(data.hwnd, WM_SETREDRAW, Some(1), None);
-                        let _ = force_redraw_window(data.hwnd);
-                    }
-                }
-            }
+        let on_end = std::sync::Arc::new(on_end);
+        for data in list {
+            let (tx, rx) = std::sync::mpsc::channel::<()>();
 
-            on_end(result);
-        }));
+            let on_end = on_end.clone();
+            let thread = std::thread::spawn(move || {
+                let result = Self::perform(&data, easing, animation_duration, rx);
+                on_end(result);
+            });
+
+            self.animation_interrupt_signals.push(tx);
+            self.animation_threads.push(thread);
+        }
+
         Ok(())
     }
 
     /// returns true if animation was interrupted/canceled
     fn perform(
-        list: &Vec<WinDataForAnimation>,
+        data: &WinDataForAnimation,
         easing: Easing,
         animation_duration: std::time::Duration,
         interrupt_rx: std::sync::mpsc::Receiver<()>,
@@ -171,21 +163,8 @@ impl AppWinAnimation {
             progress =
                 (elapsed.as_millis() as f64 / animation_duration.as_millis() as f64).min(1.0);
 
-            let rects = list.iter().map(|data| {
-                (
-                    data.hwnd,
-                    keyframe::ease(easing, data.from, data.to, progress),
-                    data.is_size_changing,
-                )
-            });
-
-            // let mut hdwp = start_defered_positioning(list.len() as i32)?;
-            for (window_id, rect, size_changing) in rects {
-                // move_window(window_id, &rect, false)?;
-                position_window(window_id, &rect, false, !size_changing)?;
-                // hdwp = defer_window_position(hdwp, window_id, &rect, !size_changing)?;
-            }
-            //  finish_defered_positioning(hdwp)?;
+            let rect = keyframe::ease(easing, data.from, data.to, progress);
+            position_window(data.hwnd, &rect, data.is_explorer, !data.is_size_changing)?;
 
             frames += 1;
             let elapsed = last_frame_time.elapsed();
@@ -197,30 +176,28 @@ impl AppWinAnimation {
 
         if !interrupted {
             log::trace!("Animation completed in {frames} frames");
-            for data in list {
-                // defer window position doesn't force the desired size, it is locked by window min size
-                position_window(data.hwnd, &data.to, true, false)?;
-                let _ = force_redraw_window(data.hwnd);
-            }
+            let _ = force_redraw_window(data.hwnd);
         }
 
         Ok(interrupted)
     }
 
     pub fn is_running(&self) -> bool {
-        self.animation_thread.is_some()
+        !self.animation_threads.is_empty()
     }
 
     /// Interrupt the animation
     pub fn interrupt(&mut self) {
-        if let Some(animation_interrupt_signal) = self.animation_interrupt_signal.take() {
-            let _ = animation_interrupt_signal.send(());
+        let signals = std::mem::take(&mut self.animation_interrupt_signals);
+        for signal in signals {
+            let _ = signal.send(());
         }
     }
 
     /// Wait for the animation to finish, and return the result of the last performed animation
     pub fn wait(&mut self) {
-        if let Some(animation_thread) = self.animation_thread.take() {
+        let threads = std::mem::take(&mut self.animation_threads);
+        for animation_thread in threads {
             animation_thread
                 .join()
                 .expect("Join animation thread failed");

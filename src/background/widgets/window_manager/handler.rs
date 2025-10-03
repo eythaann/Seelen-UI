@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::LazyLock};
 
 use slu_ipc::messages::SvcAction;
 use windows::Win32::UI::WindowsAndMessaging::SW_NORMAL;
@@ -10,6 +10,13 @@ use crate::{
     windows_api::{window::Window, WindowsApi},
 };
 use seelen_core::{rect::Rect, state::PerformanceMode};
+
+static SCHEDULED_POSITIONS: LazyLock<scc::HashMap<isize, Rect>> = LazyLock::new(scc::HashMap::new);
+
+/// will schedule the position to be sent in a batch on the next window manager update
+pub fn schedule_window_position(window: isize, rect: Rect) {
+    SCHEDULED_POSITIONS.upsert(window, rect);
+}
 
 #[tauri::command(async)]
 pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> {
@@ -35,6 +42,14 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
         };
         list.insert(hwnd, desired_rect);
     }
+
+    SCHEDULED_POSITIONS.scan(|k, v| {
+        let window = Window::from(*k);
+        if window.is_window() && !window.is_minimized() {
+            list.insert(*k, v.clone());
+        }
+    });
+    SCHEDULED_POSITIONS.clear();
 
     let state = FULL_STATE.load();
     let perf_mode = PERFORMANCE_MODE.load();
