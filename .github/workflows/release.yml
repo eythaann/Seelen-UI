@@ -45,76 +45,134 @@ jobs:
             });
             return data.id;
 
-  build-installers:
+  build:
     needs: create-release
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
         include:
-          - platform: "windows-2025"
-            args: ""
+          - platform: windows-2025
+            target: x86_64-pc-windows-msvc
+          - platform: windows-2025
+            target: aarch64-pc-windows-msvc
 
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: ./.github/actions/setup
         with:
-          node-version: 20
-          cache: npm
-
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-
-      - name: Install Rust Nightly
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly-2025-09-12
-      - uses: Swatinem/rust-cache@v2
+          rust-targets: ${{ matrix.target }}
+          cache-key-prefix: rust-build-${{ matrix.target }}
 
       - name: Install frontend dependencies
         run: npm install
 
       - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-2025'
+        if: matrix.target == 'x86_64-pc-windows-msvc'
         shell: pwsh
         run: |
-          # Install in parallel to save time
-          $jobs = @(
-            { winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force --silent },
-            { winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force --silent },
-            { winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force --silent }
-          )
-          $jobs | ForEach-Object { Start-Job -ScriptBlock $_ } | Wait-Job | Receive-Job
+          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
+          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
-      - uses: tauri-apps/tauri-action@v0.5.16
+      - name: Build
+        run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
+
+      - name: Clean bundle folder from cache
+        shell: pwsh
+        run: |
+          $bundlePath = "target/${{ matrix.target }}/release/bundle"
+          if (Test-Path $bundlePath) {
+            Remove-Item -Path $bundlePath -Recurse -Force
+            Write-Output "Old bundles files deleted: $bundlePath"
+          }
+
+      - name: Bundle
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        with:
-          releaseId: ${{ needs.create-release.outputs.release_id }}
-          args: ${{ matrix.args }}
+        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }}
 
       - name: Bundle MSIX
-        if: matrix.platform == 'windows-2025'
-        run: npx tsx scripts/bundle.msix.ts
+        if: matrix.target == 'x86_64-pc-windows-msvc'
+        run: npx tsx scripts/bundle.msix.ts --target ${{ matrix.target }}
 
-      - name: Upload artifacts
-        id: artifact-upload-step
+      - name: Upload to artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-bundle
-          path: target/release/bundle
+          name: build-bundles-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/bundle
 
-      - name: Output artifact ID
-        run: echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+  merge-artifacts:
+    needs: build
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-id: ${{ steps.upload-merged.outputs.artifact-id }}
+    steps:
+      - name: Merge artifacts
+        id: upload-merged
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: build-bundles
+          pattern: build-bundles-*
+          delete-merged: true
+
+  sign-and-upload:
+    needs: merge-artifacts
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Submit to SignPath
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
+          project-slug: seelen-ui
+          signing-policy-slug: test-signing
+          github-artifact-id: ${{ needs.merge-artifacts.outputs.artifact-id }}
+          output-artifact-directory: bundles
+
+      - name: File Tree
+        run: |-
+          tree bundles
+
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+
+      - name: Tauri Updater Signature
+        env:
+          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: |
+          npm install -g @tauri-apps/cli
+
+          echo "Removing existing .sig files to regenerate with Tauri updater keys..."
+          find ./bundles -name "*.sig" -type f -delete
+          echo "Existing signatures removed"
+
+          VERSION=${{ env.PACKAGE_VERSION }}
+          PATH1="bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
+          PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
+
+          echo "Signing ${PATH1}..."
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH1"
+          echo "Signing ${PATH2}..."
+          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH2"
+
+      - name: Upload Signed Installers to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.PACKAGE_VERSION }}
+          files: bundles/**/*
 
   microsoft-store-submission:
-    needs: build-installers
+    needs: sign-and-upload
     runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
@@ -122,7 +180,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-bundle
+          name: build-bundles
           path: target/release/bundle
 
       # Use Store Broker to publish to Microsoft Store
@@ -137,8 +195,23 @@ jobs:
           PartnerCenterClientSecret: ${{ secrets.MS_CLIENT_SECRET }}
           SBDisableTelemetry: true
 
+  generate-update-file:
+    needs: sign-and-upload
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+      - uses: ./.github/actions/generate-update-manifest
+        with:
+          tag-name: v${{ env.PACKAGE_VERSION }}
+          version: ${{ env.PACKAGE_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
   publish-release:
-    needs: [build-installers, create-release]
+    needs: [create-release, generate-update-file]
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -150,22 +223,6 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
-            const result = await github.rest.repos.listReleaseAssets({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: process.env.releaseId,
-            });
-
-            result.data.forEach(async (asset) => {
-              if (asset.name.endsWith('.sig')) {
-                await github.rest.repos.deleteReleaseAsset({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  asset_id: asset.id,
-                });
-              }
-            });
-
             await github.rest.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,

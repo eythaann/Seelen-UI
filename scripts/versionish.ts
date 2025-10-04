@@ -4,73 +4,94 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { execSync } from "child_process";
 
+function updateCargoVersion(filePath: string, version: string): void {
+  let content = fs.readFileSync(filePath, "utf-8");
+  content = content.replace(/^version\s*=\s*".*"/m, `version = "${version}"`);
+  fs.writeFileSync(filePath, content);
+}
+
+function updateJsonVersion(filePath: string, version: string): void {
+  const json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+  json.version = version;
+  fs.writeFileSync(filePath, JSON.stringify(json, null, 2));
+}
+
+function updateChangelog(version: string): void {
+  if (version.includes("-")) {
+    console.log("Skipping changelog update for pre-release version");
+    return;
+  }
+
+  let content = fs.readFileSync("changelog.md", "utf-8");
+  content = content.replace("# Changelog", `# Changelog\n\n## [${version}]`);
+  fs.writeFileSync("changelog.md", content);
+  console.log(`✓ Changelog updated for version ${version}`);
+}
+
+function createGitTag(version: string): void {
+  const tag = `v${version}`;
+  execSync(`git tag -s ${tag} -m "${tag}"`, { stdio: "inherit" });
+  console.log(`✓ Git tag ${tag} created`);
+}
+
 async function main(args: string[]) {
   const argv = await yargs(hideBin(args))
     .version(false)
     .option("version", {
       type: "string",
-      description: "Version to set",
-      demandOption: true,
+      description: "Version to set (defaults to current package.json version)",
+      demandOption: false,
     })
-    .option("start", {
+    .option("set-changelog", {
       type: "boolean",
       default: false,
-      description: "Starting the development of a new version",
+      description: "Add a new changelog entry for the version",
     })
-    .option("finish", {
+    .option("create-tag", {
       type: "boolean",
       default: false,
-      description: "Finishing the development of a new version",
+      description: "Create a signed git tag for the version",
     }).argv;
 
-  // update library version
-  {
-    let content = fs.readFileSync("./libs/core/Cargo.toml", "utf-8");
-    content = content.replace(
-      /^version\s*=\s*".*"/m,
-      `version = "${argv.version}"`,
-    );
-    fs.writeFileSync("./libs/core/Cargo.toml", content);
+  // Get version from package.json if not provided
+  const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
+  const version = argv.version || packageJson.version;
 
-    let denoJson = JSON.parse(
-      fs.readFileSync("./libs/core/deno.json", "utf-8"),
-    );
-    denoJson.version = argv.version;
-    fs.writeFileSync(
-      "./libs/core/deno.json",
-      JSON.stringify(denoJson, null, 2),
-    );
+  console.log(`Using version: ${version}`);
+
+  const shouldSetChangelog = argv["set-changelog"];
+  const shouldCreateTag = argv["create-tag"];
+
+  // If only creating tag, skip file updates
+  if (shouldCreateTag && !argv.version) {
+    createGitTag(version);
+    return;
   }
 
-  // update app version
-  {
-    let content = fs.readFileSync("./src/Cargo.toml", "utf-8");
-    content = content.replace(
-      /^version\s*=\s*".*"/m,
-      `version = "${argv.version}"`,
-    );
-    fs.writeFileSync("./src/Cargo.toml", content);
+  // Update library versions
+  console.log("Updating library versions...");
+  updateCargoVersion("./libs/core/Cargo.toml", version);
+  updateJsonVersion("./libs/core/deno.json", version);
+  console.log("✓ Library versions updated");
 
-    let packageJson = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
-    packageJson.version = argv.version;
-    fs.writeFileSync("./package.json", JSON.stringify(packageJson, null, 2));
+  // Update app versions
+  console.log("Updating app versions...");
+  updateCargoVersion("./src/Cargo.toml", version);
+  packageJson.version = version;
+  fs.writeFileSync("./package.json", JSON.stringify(packageJson, null, 2));
+  console.log("✓ App versions updated");
+
+  // Update changelog if requested
+  if (shouldSetChangelog) {
+    updateChangelog(version);
   }
 
-  if (argv.start) {
-    // update changelog only on release channel
-    if (!argv.version.includes("-")) {
-      let content = fs.readFileSync("changelog.md", "utf-8");
-      content = content.replace(
-        "# Changelog",
-        `# Changelog\n\n## [${argv.version}]`,
-      );
-      fs.writeFileSync("changelog.md", content);
-    }
+  // Create tag if requested
+  if (shouldCreateTag) {
+    createGitTag(version);
   }
 
-  if (argv.finish) {
-    execSync(`git tag -s v${argv.version} -m "v${argv.version}"`);
-  }
+  console.log(`\n✓ Version ${version} set successfully`);
 }
 
 main(process.argv);

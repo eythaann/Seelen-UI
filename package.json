@@ -13,6 +13,8 @@
     "translate": "tsx ./scripts/translate/mod.ts",
     "type-check": "tsc --noEmit",
     "versionish": "tsx ./scripts/versionish.ts",
+    "version:start": "tsx ./scripts/versionish.ts --set-changelog --version",
+    "version:finish": "tsx ./scripts/versionish.ts --create-tag",
     "preinstall": "npm run build:lib",
     "postinstall": "lefthook install"
   },

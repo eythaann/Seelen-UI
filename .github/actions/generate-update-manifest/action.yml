@@ -1,0 +1,139 @@
+name: Generate Update Manifest
+description: Generates and uploads latest.json for Tauri updater
+
+inputs:
+  tag-name:
+    description: Tag name to get the release from
+    required: true
+  version:
+    description: Version to use in the manifest
+    required: true
+  github-token:
+    description: GitHub token for API access
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Generate and Upload latest.json
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const tagName = '${{ inputs.tag-name }}';
+          const version = '${{ inputs.version }}';
+
+          core.info(`Using version: ${version}`);
+
+          // Get the release
+          const release = await github.rest.repos.getReleaseByTag({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            tag: tagName,
+          });
+
+          core.info(`Found release: ${release.data.name} (${release.data.tag_name})`);
+
+          // Get all assets from the release
+          const { data: assets } = await github.rest.repos.listReleaseAssets({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: release.data.id,
+          });
+
+          core.info(`Found ${assets.length} assets`);
+
+          // Filter relevant assets (exe and sig files)
+          const relevantAssets = assets.filter(asset =>
+            asset.name.endsWith('.exe') || asset.name.endsWith('.sig')
+          );
+
+          if (relevantAssets.length === 0) {
+            throw new Error('No relevant assets found in release');
+          }
+
+          // Build the update manifest
+          const update = {
+            version,
+            notes: `Nightly build ${version}`,
+            pub_date: new Date().toISOString(),
+            platforms: {
+              "windows-x86_64": { signature: "", url: "" },
+              "windows-aarch64": { signature: "", url: "" },
+            },
+          };
+
+          // Map assets to platforms
+          for (const asset of relevantAssets) {
+            const platform = asset.name.includes('x64')
+              ? 'windows-x86_64'
+              : asset.name.includes('arm64')
+                ? 'windows-aarch64'
+                : null;
+
+            if (!platform) {
+              core.warning(`Skipping asset with unknown platform: ${asset.name}`);
+              continue;
+            }
+
+            if (asset.name.endsWith('.sig')) {
+              // Download signature content
+              const sigResponse = await github.request('GET /repos/{owner}/{repo}/releases/assets/{asset_id}', {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                asset_id: asset.id,
+                headers: { accept: 'application/octet-stream' },
+              });
+              update.platforms[platform].signature = Buffer.from(sigResponse.data).toString('utf-8');
+              core.info(`Added signature for ${platform}`);
+            }
+
+            if (asset.name.endsWith('.exe')) {
+              update.platforms[platform].url = asset.browser_download_url;
+              core.info(`Added URL for ${platform}: ${asset.browser_download_url}`);
+            }
+          }
+
+          // Validate and remove incomplete platforms
+          for (const [platform, data] of Object.entries(update.platforms)) {
+            if (!data.signature || !data.url) {
+              core.warning(`Platform ${platform} is incomplete - removing`);
+              delete update.platforms[platform];
+            }
+          }
+
+          if (Object.keys(update.platforms).length === 0) {
+            throw new Error('No valid platforms found in assets');
+          }
+
+          const manifestJson = JSON.stringify(update, null, 2);
+          core.info('Generated update manifest:');
+          core.info(manifestJson);
+
+          // Delete existing latest.json if it exists
+          const existingManifest = assets.find(a => a.name === 'latest.json');
+          if (existingManifest) {
+            core.info('Deleting existing latest.json');
+            await github.rest.repos.deleteReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              asset_id: existingManifest.id,
+            });
+          }
+
+          // Upload the new manifest
+          core.info('Uploading latest.json to release');
+          const manifestBuffer = Buffer.from(manifestJson, 'utf-8');
+          await github.rest.repos.uploadReleaseAsset({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: release.data.id,
+            name: 'latest.json',
+            data: manifestBuffer,
+            headers: {
+              'content-type': 'application/json',
+              'content-length': manifestBuffer.length,
+            },
+          });
+
+          core.info('✅ Successfully generated and uploaded latest.json');
