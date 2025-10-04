@@ -62,6 +62,7 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           rust-targets: ${{ matrix.target }}

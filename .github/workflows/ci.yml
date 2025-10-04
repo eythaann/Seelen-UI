@@ -11,6 +11,7 @@ jobs:
   js-test-and-linter:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           rust-components: rustfmt
@@ -24,6 +25,7 @@ jobs:
   rust-linter:
     runs-on: windows-2025
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
 
       - name: Format
@@ -39,6 +41,7 @@ jobs:
   rust-test:
     runs-on: windows-2025
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           cache-key-prefix: rust-test
