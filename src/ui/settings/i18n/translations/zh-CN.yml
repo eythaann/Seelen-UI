@@ -95,7 +95,7 @@ general:
   date_format: 日期格式
   icon_pack:
     available: 可用的图标包
-    selected: 活动图标包
+    selected: 已选择的图标包
   language: 语言
   performance_mode:
     on_battery: 使用电池
@@ -227,7 +227,7 @@ toolbar:
   hide_mode:
     always: 总是
     never: 绝不
-    on_overlap: 关于重叠
+    on_overlap: 当重叠
   label: 工具栏
   placeholder: { }
   show_hibernate: 在电源菜单上显示休眠按钮
@@ -276,7 +276,7 @@ weg:
   hide_mode:
     always: 总是
     never: 绝不
-    on_overlap: 关于重叠
+    on_overlap: 当重叠
   items:
     gap: 项目间距
     label: 项目
