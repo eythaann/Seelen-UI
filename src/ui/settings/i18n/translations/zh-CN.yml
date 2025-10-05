@@ -108,7 +108,7 @@ general:
   startup: 开机自启
   theme:
     available: 可用主题
-    selected: 活跃主题
+    selected: 已选择
 header:
   labels:
     config: 配置
@@ -148,7 +148,7 @@ resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
   delete: 删除资源
   discover: 发现更多资源
-  export: 出口资源
+  export: 导出资源
   has_update: 有更新可用
   import_wallpapers: 导入本地壁纸
   open_folder: 打开资源文件夹
@@ -165,17 +165,17 @@ shortcuts:
     create_new_workspace: 创建新工作区
     cycle_stack_next: 循环堆栈接下来
     cycle_stack_prev: 循环堆栈以前
-    cycle_wallpaper_next: 更改为下一个墙纸
-    cycle_wallpaper_prev: 更改为以前的墙纸
+    cycle_wallpaper_next: 更改为下一个壁纸
+    cycle_wallpaper_prev: 更改为上一个壁纸
     decrease_height: 降低高度
     decrease_width: 减小宽度
     destroy_current_workspace: 破坏当前工作区
     focus_bottom: 聚焦底部
-    focus_latest: 重点最新
-    focus_left: 焦点左
-    focus_right: 重点正确
+    focus_latest: 聚焦最新
+    focus_left: 聚焦左侧
+    focus_right: 聚焦右侧
     focus_top: 聚焦顶部
-    increase_height: 增加身高
+    increase_height: 增加高度	
     increase_width: 增加宽度
     misc_force_restart: 强制重启
     misc_open_settings: 打开设置
@@ -187,12 +187,12 @@ shortcuts:
     move_window_right: 向右移动窗口
     move_window_up: 将窗口移至顶部
     pause_tiling: 暂停瓷砖窗口管理器
-    reserve_bottom: 储备底部
-    reserve_float: 储备浮子
-    reserve_left: 保留剩下
-    reserve_right: 保留权
-    reserve_stack: 储备堆
-    reserve_top: 储备顶
+    reserve_bottom:预留底部
+    reserve_float: 预留浮动
+    reserve_left: 预留左侧
+    reserve_right: 预留右侧
+    reserve_stack: 预留堆
+    reserve_top: 预留顶部
     restore_sizes: 还原尺寸
     send_to_workspace: 发送到工作区{{0}}
     start_weg_app: 聚焦或启动应用程序{{0}}
@@ -259,8 +259,8 @@ wall:
     bottom: 底部
     center: 中心
     left: 左侧
-    right: 对
-    top: 返回顶部
+    right: 右侧
+    top: 顶部
   random: 随机更改壁纸
   saturation: 饱和度
   seconds: 秒
