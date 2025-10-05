@@ -5,7 +5,7 @@ app_launcher:
   enable: 启用应用程序启动器
   launch_on:
     mouse_over: 鼠标悬停
-    primary: 基本的
+    primary: 主要
   monitor: 要显示的显示器
   runners:
     cmd: 命令
@@ -62,9 +62,9 @@ apps_configurations:
     or: 或
     remove: 删除块
     type:
-      class: 班级
+      class: 类别
       exe: EXE文件
-      path: 小路
+      path: 路径
       title: 标题
   import: 导入
   import_full: 按应用程序导入设置
@@ -98,8 +98,8 @@ general:
     selected: 活动图标包
   language: 语言
   performance_mode:
-    on_battery: 在电池上
-    on_energy_saver: 在能量储蓄方面
+    on_battery: 使用电池
+    on_energy_saver: 节能模式
     options:
       disabled: 禁用
       extreme: 极端
