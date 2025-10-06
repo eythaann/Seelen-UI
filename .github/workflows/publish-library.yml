@@ -1,0 +1,35 @@
+name: "Release"
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  continuous-integration:
+    uses: ./.github/workflows/ci.yml
+
+  build-and-publish:
+    needs: continuous-integration
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - name: Build Rust bindings
+        run: cd libs/core && deno task build:rs
+
+      - name: Publish to JSR
+        run: cd libs/core && deno publish --allow-dirty
+
+      - name: Build NPM package
+        run: cd libs/core && deno task build:npm
+
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+        run: |
+          cd libs/core/npm
+          npm publish --provenance --tag latest
