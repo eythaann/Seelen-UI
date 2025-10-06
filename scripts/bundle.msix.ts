@@ -25,7 +25,14 @@ if (major === undefined || minor === undefined || patch === undefined) {
 
 const { target } = await getArgs();
 
-console.info("Building MSIX...");
+// Determine architecture for MSIX naming
+const archMap: Record<string, string> = {
+  "x86_64-pc-windows-msvc": "x64",
+  "aarch64-pc-windows-msvc": "arm64",
+};
+const arch = archMap[target] || "x64";
+
+console.info(`Building MSIX for ${arch}...`);
 const buildFolder = `target/${target}/release/msix`;
 const bundleFolder = `target/${target}/release/bundle/msix`;
 
@@ -37,13 +44,14 @@ fs.mkdirSync(bundleFolder, { recursive: true });
 const appxPackageVersion = `${major}.${minor}.${patch}.0`;
 const fileVersion = nightly_date ? packageJson.version : appxPackageVersion;
 const installer_msix_path = path.resolve(
-  `${bundleFolder}/Seelen.SeelenUI_${fileVersion}_x64__p6yyn03m1894e.msix`,
+  `${bundleFolder}/Seelen.SeelenUI_${fileVersion}_${arch}__p6yyn03m1894e.msix`,
 );
 
 // Add manifest
 const manifest = fs
   .readFileSync("src/templates/AppxManifest.xml", "utf-8")
-  .replace("{{version}}", appxPackageVersion);
+  .replace("{{version}}", appxPackageVersion)
+  .replace("{{architecture}}", arch);
 fs.writeFileSync(`${buildFolder}/AppxManifest.xml`, manifest);
 
 // Add binaries

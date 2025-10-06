@@ -16,7 +16,7 @@
     Name="Seelen.SeelenUI"
     Publisher="CN=7E60225C-94CB-4B2E-B17F-0159A11074CB"
     Version="{{version}}"
-    ProcessorArchitecture="x64"
+    ProcessorArchitecture="{{architecture}}"
   />
 
   <Properties>
