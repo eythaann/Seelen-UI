@@ -2,8 +2,8 @@ name: Generate Update Manifest
 description: Generates and uploads latest.json for Tauri updater
 
 inputs:
-  tag-name:
-    description: Tag name to get the release from
+  release-id:
+    description: Release ID to get the release from
     required: true
   version:
     description: Version to use in the manifest
@@ -20,19 +20,19 @@ runs:
       with:
         github-token: ${{ inputs.github-token }}
         script: |
-          const tagName = '${{ inputs.tag-name }}';
+          const releaseId = '${{ inputs.release-id }}';
           const version = '${{ inputs.version }}';
 
           core.info(`Using version: ${version}`);
 
           // Get the release
-          const release = await github.rest.repos.getReleaseByTag({
+          const release = await github.rest.repos.getRelease({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            tag: tagName,
+            release_id: releaseId,
           });
 
-          core.info(`Found release: ${release.data.name} (${release.data.tag_name})`);
+          core.info(`Found release: ${release.data.name} (ID: ${release.data.id})`);
 
           // Get all assets from the release
           const { data: assets } = await github.rest.repos.listReleaseAssets({
@@ -55,7 +55,7 @@ runs:
           // Build the update manifest
           const update = {
             version,
-            notes: `Nightly build ${version}`,
+            notes: `Seelen UI build ${version}`,
             pub_date: new Date().toISOString(),
             platforms: {
               "windows-x86_64": { signature: "", url: "" },

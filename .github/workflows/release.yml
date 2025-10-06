@@ -207,7 +207,7 @@ jobs:
         run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
       - uses: ./.github/actions/generate-update-manifest
         with:
-          tag-name: v${{ env.PACKAGE_VERSION }}
+          release-id: ${{ needs.create-release.outputs.release_id }}
           version: ${{ env.PACKAGE_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
