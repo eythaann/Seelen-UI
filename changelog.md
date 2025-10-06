@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.4.5]
+
 ## [2.4.4]
 
 ### features
