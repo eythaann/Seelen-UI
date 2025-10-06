@@ -224,8 +224,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Get Release ID
+        id: get-release
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: 'nightly',
+            });
+            return release.data.id;
       - uses: ./.github/actions/generate-update-manifest
         with:
-          tag-name: nightly
+          release-id: ${{ steps.get-release.outputs.result }}
           version: ${{ needs.update-tag.outputs.nightly-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
