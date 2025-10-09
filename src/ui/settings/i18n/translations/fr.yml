@@ -1,22 +1,22 @@
 action:
-  confirm: Es-tu sûr?
-  confirm_body: Cette action ne peut pas être annulée.
+  confirm: Êtes-vous sûr ?
+  confirm_body: Cette action est irréversible.
 app_launcher:
   enable: Activer le lanceur d'applications
   launch_on:
-    mouse_over: Passez la souris
-    primary: Primaire
-  monitor: Moniteur à afficher
+    mouse_over: Survol de la souris
+    primary: Clic principal
+  monitor: Écran à afficher
   runners:
-    cmd: Commande
+    cmd: Terminal
     explorer: Explorateur
     label: Lanceurs
 apps_configurations:
   app:
-    bindings: Raccourcis (notez que les deux options sont nécessaires)
+    bindings: Rattachement (Les deux options sont requises)
     category: Catégorie
-    category_placeholder: Aucun
-    monitor: Moniteur
+    category_placeholder: Aucune
+    monitor: Écran
     monitor_placeholder: Aucun
     name: Nom
     ok_create: Créer
@@ -30,27 +30,26 @@ apps_configurations:
       unmanage: Ne pas gérer
     options_label: Options supplémentaires
     title_create: Création de {{name}}
-    title_edit: Modification de {{nom}}
+    title_edit: Modification de {{name}}
     title_readonly: Visualisation de {{name}}
     weg_options_label: Options Dock/Barre des tâches
-    wm_options_label: Options gestionnaire de fenêtres
+    wm_options_label: Options du gestionnaire de fenêtres
     workspace: Espace de travail
     workspace_placeholder: Aucun
   bundled_msg: >-
-    Ces configurations groupées ne sont pas modifiables et sont conçues pour
-    vous offrir la meilleure expérience sans personnalisation. Ils configurent
-    automatiquement pour vous les applications les plus courantes.
-  bundled_title: Configuration des applications groupées avec Seelen
-  confirm_delete: Êtes-vous sûr de vouloir supprimer cette/ces configuration(s) ?
+    Ces configurations intégrées ne sont pas modifiables et sont conçues pour
+    vous offrir la meilleure expérience sans personnalisation. Elles configurent
+    automatiquement les applications les plus courantes pour vous.
+  bundled_title: Configuration des applications incluses avec Seelen
+  confirm_delete: Êtes-vous sûr de vouloir supprimer le(s) configuration(s) sélectionnées ?
   confirm_delete_title: Confirmer la suppression
   delete: Supprimer
   export: Exporter
   export_full: Exporter les paramètres par application
   extra_info: >-
-    Seelen UI utilise un seul identifiant par application (premier correspondant
-    trouvé), donc l'ordre dans lequel ils sont spécifiés est important, le
-    dernier ajouté sera priorisée, car le tableau est trié par défaut du plus
-    récent au plus ancien.
+    Seelen UI utilise un seul sélecteur par application (la première correspondance
+    trouvée), donc l'ordre des paramètres est important. La table étant triée par défaut 
+    du plus récent au plus ancien, le dernier paramètre ajouté sera prioritaire.
   identifier:
     add_block: Ajouter un bloc
     and: ET
@@ -63,7 +62,7 @@ apps_configurations:
       equals: Égal
       regex: Expression régulière
       starts_with: Commence par
-    negation: Annuler la correspondance
+    negation: (NON) Inverser la correspondance 
     or: OU
     remove: Supprimer le bloc
     type:
@@ -75,7 +74,7 @@ apps_configurations:
   import_full: Importer des paramètres par application
   new: Nouveau
   search: Rechercher
-  swap: Échanger
+  swap: Permuter la sélection
 cancel: Annuler
 close: Fermer
 delete: Supprimer
@@ -87,11 +86,11 @@ devtools:
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
-  simulate_fullscreen: Simuler l'événement plein écran
+  simulate_fullscreen: Simuler un événement de plein écran
 extras:
-  clear_icons: Effacer le cache des icônes du système
+  clear_icons: Vider le cache des icônes système
   clear_icons_tooltip: >-
-    Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les
+    Un redémarrage peut être nécessaire pour que l'effet s'applique à tous les
     widgets
   exit: Quitter
   links: Liens officiels
@@ -105,13 +104,13 @@ general:
     selected: Packs d'icônes actifs
   language: Langue
   performance_mode:
-    on_battery: Sur la batterie
-    on_energy_saver: Sur l'énergie
+    on_battery: Sur batterie
+    on_energy_saver: En mode économie d'énergie
     options:
       disabled: Désactivé
       extreme: Extrême
       minimal: Minimal
-    plugged: Bouchée ou charge
+    plugged: Branché / En charge
   startup: Lancer au démarrage ?
   theme:
     available: Thèmes disponibles
@@ -125,11 +124,11 @@ header:
     home: Accueil
     icon_pack_editor: Icônes en cache
     iconpack: Packs d'icônes
-    monitors: Moniteurs
+    monitors: Écrans
     plugin: Plugins
     resources: Ressources
     shortcuts: Raccourcis
-    soundpack: Paquets de sons
+    soundpack: Packs de sons
     specific_apps: Paramètres par application
     theme: Thèmes
     virtual_desk: Bureaux virtuels
@@ -143,79 +142,79 @@ insert: Insérer
 loading: Chargement...
 miscellaneous: Divers
 monitors_configurations:
-  label: Moniteur {{index}}
+  label: Écran {{index}}
 more: Plus
 'no': Non
 open: Ouvrir
 quit: Quitter
 remove: Retirer
 reset_all_to_default: Rétablir les valeurs par défaut
-reset_to_default: Remise à la valeur par défaut
+reset_to_default: Réinitialiser à la valeur par défaut
 resources:
   app_outdated: >-
     Cette ressource nécessite une version plus récente de Seelen UI pour
     fonctionner correctement.
   delete: Supprimer les ressources
-  discover: Découvrez d'autres ressources
+  discover: Découvrir d'autres ressources
   export: Exporter la ressource
   has_update: Une mise à jour est disponible
   import_wallpapers: Importer des fonds d'écran locaux
   open_folder: Ouvrir le dossier des ressources
   outdated: >-
-    Cette ressource a été conçue pour une ancienne version de Seelen UI et peut
+    Cette ressource a été conçue pour une ancienne version de Seelen UI et pourrait
     ne pas fonctionner correctement.
-save: Enregistrer
-save_and_restart: Enregistrer et redémarrer
+save: Sauvegarder
+save_and_restart: Sauvegarder et redémarrer
 see_more: Voir plus
 shortcuts:
-  enable: Activer le système de raccourcis intégrés
+  enable: Activer le système de raccourcis clavier
   enable_tooltip: >-
-    Désactiver si vous implémentez votre propre système de raccourcis à l'aide
-    du client de l'interface utilisateur Seelen
+    Désactivez cette option si vous souhaitez implémenter votre propre système de
+    raccourcis clavier en utilisant le connecteur de Seelen UI.
   labels:
     create_new_workspace: Créer un nouvel espace de travail
-    cycle_stack_next: Pile de cycle Suivant
-    cycle_stack_prev: Pile de cycle Précédent
-    cycle_wallpaper_next: Passer au fond d'écran suivant
-    cycle_wallpaper_prev: Passer au fond d'écran précédent
+    cycle_stack_next: Fenêtre suivante (mode empilé)
+    cycle_stack_prev: Fenêtre précédente (mode emplié)
+    cycle_wallpaper_next: Fond d'écran suivant
+    cycle_wallpaper_prev: Fond d'écran précédent
     decrease_height: Diminuer la hauteur
     decrease_width: Diminuer la largeur
-    destroy_current_workspace: Détruire l'espace de travail actuel
-    focus_bottom: Focus Bottom
-    focus_latest: Focus plus tard
-    focus_left: Focus à gauche
-    focus_right: Focus à droite
-    focus_top: Focus top
+    destroy_current_workspace: Supprimer l'espace de travail courant
+    focus_bottom: Focus vers le bas
+    focus_latest: Focus sur le plus récent
+    focus_left: Focus vers la gauche
+    focus_right: Focus vers la droite
+    focus_top: Focus vers le haut
     increase_height: Augmenter la hauteur
     increase_width: Augmenter la largeur
-    misc_force_quit: Force quitter
-    misc_force_restart: Forcer le redémarrage
-    misc_open_settings: Paramètres ouvrir
-    misc_toggle_lock_tracing: Togue de verrouillage (journaux)
-    misc_toggle_win_event_tracing: Togle Win Event Traçage (journaux)
-    move_to_workspace: Déplacer dans l'espace de travail {{0}}
-    move_window_down: Déplacer la fenêtre en bas
-    move_window_left: Déplacer la fenêtre à gauche
-    move_window_right: Déplacer la fenêtre à droite
-    move_window_up: Déplacer la fenêtre en haut
-    pause_tiling: Gestionnaire de fenêtres en carrelage en pause
-    reserve_bottom: Bottom
-    reserve_float: Réserver flotter
-    reserve_left: Réserve à gauche
-    reserve_right: Réserver à droite
-    reserve_stack: Pile de réserve
-    reserve_top: Réserve de réserve
+    misc_force_quit: Forcer l'arrêt de Seelen UI
+    misc_force_restart: Forcer le redémarrage de Seelen UI
+    misc_open_settings: Ouvrir les paramètres de Seelen UI
+    misc_toggle_lock_tracing: Activer/désactiver suivi des verrous (logs)
+    misc_toggle_win_event_tracing: Activer/désactiver suivi des évènements Win (logs)
+    move_to_workspace: Se déplacer avec la fenêtre active au Workspace {{0}}
+    move_window_down: Déplacer la fenêtre active vers le bas
+    move_window_left: Déplacer la fenêtre active vers la gauche
+    move_window_right: Déplacer la fenêtre active vers la droite
+    move_window_up: Déplacer la fenêtre active vers le haut
+    pause_tiling: Mettre en pause le gestionnaire de fenêtres en mosaïque
+    reserve_bottom: Réserver un espace vers le bas
+    reserve_float: Réserver un espace flottant
+    reserve_left: Réserver un espace vers la gauche
+    reserve_right: Réserver un espace vers la droite
+    reserve_stack: Réserver un emplacement empilé
+    reserve_top: Réserver un espace vers le haut
     restore_sizes: Restaurer les tailles
-    send_to_workspace: Envoyer à Workspace {{0}}
-    start_weg_app: Focus ou démarrer l'application {{0}}
-    switch_to_next_workspace: Passez à l'espace de travail suivant
-    switch_to_previous_workspace: Passez à l'espace de travail précédent
-    switch_workspace: Passez à Workspace {{0}}
-    toggle_float: Mode de flotteur de fenêtre à bascule
-    toggle_launcher: Lanceur de basculement
-    toggle_monocle: Mode monocle d'espace de travail à bascule
-  readonly_tooltip: Ceci est un raccourci en lecture seule
-  reset: Réinitialiser les valeurs par défaut
+    send_to_workspace: Envoyer la fenêtre au Workspace {{0}}
+    start_weg_app: Focus ou démarrage de l'application {{0}}
+    switch_to_next_workspace: Espace de travail suivant
+    switch_to_previous_workspace: Espace de travail précédent
+    switch_workspace: Passer au Workspace {{0}}
+    toggle_float: Basculer la fenêtre active en mode flottant
+    toggle_launcher: Lanceur d'applications
+    toggle_monocle: Empiler l'espace de travail
+  readonly_tooltip: Raccourci en lecture seule
+  reset: Rétablir les valeurs par défaut
 sides:
   bottom: Bas
   left: Gauche
@@ -226,27 +225,27 @@ start:
     Bienvenue sur Seelen UI, l'environnement de bureau ultime avec un
     gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience
     Windows ! Découvrez une nouvelle ère d'efficacité et de multitâche avec
-    notre interface intuitive et ses fonctionnalités avancées.
+    son interface intuitive et ses fonctionnalités avancées.
   message_accent: Optimisez votre productivité avec style !
   title: Bienvenue !
 toolbar:
   auto_hide: Masquer automatiquement
-  delay_to_hide: Délai avant de masquer
-  delay_to_show: Délai avant d'afficher
+  delay_to_hide: Délai avant masquage
+  delay_to_show: Délai avant affichage
   dock_side: Position
   dynamic_color: Couleurs dynamiques
   dynamic_color_tooltip: >-
     Active les couleurs dynamiques d'arrière-plan et d'avant-plan en fonction de
-    la fenêtre ciblée. (Les couleurs peuvent être remplacées par des thèmes)
-  enable: Activer la barre d'outils sophistiquée
+    la fenêtre active. (Les couleurs peuvent être remplacées par des thèmes).
+  enable: Activer la barre d'outils évoluée
   height: Hauteur
   hide_mode:
     always: Toujours
     never: Jamais
-    on_overlap: Sur chevauchement
+    on_overlap: Si chevauchement
   label: Barre d'outils
   placeholder: {}
-  show_hibernate: Afficher la veille prolongée dans le menu Marche/Arrêt
+  show_hibernate: Afficher le bouton de veille prolongée dans le menu Marche/Arrêt
 update:
   available: Mise à jour disponible !
   channel: Canal de mise à jour
@@ -257,32 +256,32 @@ wall:
   contrast: Contraste
   enable: Activer le gestionnaire de fonds d'écran
   fit:
-    contain: Contenir
-    cover: Couverture
-    fill: Remplir
-  flipHorizontal: Retournement horizontal
-  flipVertical: Flip Vertical
+    contain: Ajuster
+    cover: Couvrir
+    fill: Étirer
+  flipHorizontal: Retourner horizontalement
+  flipVertical: Retourner verticalement
   hours: heures
   interval: Changer de fond d'écran toutes les
   minutes: minutes
-  no_background: Liste vide, le fond d'écran du thème sera utilisé.
-  objectFit: Conforme à l'arrière-plan
-  objectPosition: Position d'arrière-plan
-  overlayColor: Couleur de la superposition
-  overlayMixBlendMode: Mode de mélange de la superposition
+  no_background: Diaporama vide, le fond d'écran du thème sera utilisé.
+  objectFit: Ajustement du fond d'écran
+  objectPosition: Position du fond d'écran
+  overlayColor: Couleur du filtre
+  overlayMixBlendMode: Mode de fusion du filtre
   playback: Vitesse de lecture
   position:
-    bottom: Le fond
-    center: Centre
-    left: Gauche
-    right: Droit
-    top: Haut de page
+    bottom: En bas
+    center: Centré
+    left: À gauche
+    right: À droite
+    top: En haut
   random: Diaporama aléatoire
   saturation: Saturation
   seconds: secondes
-  withOverlay: Avec recouvrement
+  withOverlay: Avec filtre
 weg:
-  auto_hide: Masquage automatique
+  auto_hide: Masquage automatique du Dock
   delay_to_hide: Délai avant masquage
   delay_to_show: Délai avant affichage
   dock_side: Position
@@ -299,27 +298,27 @@ weg:
     pinned_visibility:
       always: Toujours
       label: Visibilité des éléments épinglés
-      when_primary: Lorsque le moniteur est principal
+      when_primary: Écran principal uniquement
     show_instance_counter: Compteur de fenêtres ouvertes
-    show_window_title: Afficher le titre de la fenêtre ouverte (uniquement à l'horizontale)
+    show_window_title: Afficher le titre des fenêtres ouvertes (uniquement à l'horizontale)
     size: Taille des éléments
     temporal_visibility:
       all: Tous
       label: Visibilité des éléments non épinglés
-      on_monitor: Sur le moniteur
-    thumbnail_generation_enabled: Générer des vignettes au survol de l'article
+      on_monitor: À l'écran
+    thumbnail_generation_enabled: Générer des vignettes au survol des éléments
     visible_separators: Séparateurs visibles
   label: Dock/Barre des tâches
   margin: Marge
   mode:
-    full_width: Pleine largeur
-    min_content: Aussi petit que possible
+    full_width: Tout l'écran
+    min_content: Minimale
   padding: Hauteur
   show_end_task: Afficher la tâche finale dans la barre des tâches
   width: Largeur
 widget:
   enable: Activer ce widget
-  enable_for_monitor: Activer sur ce moniteur
+  enable_for_monitor: Activer sur cet écran
   instances: Instances
 wm:
   animations:
@@ -336,6 +335,6 @@ wm:
   layout: Disposition
   resize_delta: Delta de redimensionnement (%)
   space_between_containers: Espacement entre les conteneurs
-  workspace_offset: Décalage des bureaux virtuels (Marges)
-  workspace_padding: Rembourrage(Padding) des bureaux virtuels
+  workspace_offset: Décalage des espaces de travail (Marges)
+  workspace_padding: Marge intérieure des espaces de travail
 'yes': Oui

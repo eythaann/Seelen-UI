@@ -15,7 +15,7 @@ context_menu:
   reorder_disable: Verrouiller la barre des tâches
   reorder_enable: Déverrouiller la barre des tâches
 media:
-  not_playing: Vide
+  not_playing: Aucune lecture en cours
 media_menu:
   remove: Masquer le module multimédia
 start_menu:
