@@ -1,0 +1,63 @@
+:root {
+  --task-size: 80px;
+}
+
+.task-switcher {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #a2a2a247;
+    box-shadow: inset 0 0 10px 1px #fffa;
+  }
+
+  width: min-content;
+  border: 1px solid var(--color-gray-500);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+
+  // background-color: #0f06;
+  display: grid;
+  grid-auto-columns: var(--task-size);
+  grid-auto-rows: var(--task-size);
+  grid-auto-flow: column;
+  gap: 10px;
+
+  // overflow-x: auto;
+
+  .task {
+    width: 100%;
+    height: 100%;
+    padding: 6px;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fdfdfdaa;
+
+    &:focus {
+      outline: 3px solid var(--config-accent-color) !important;
+    }
+
+    &:active {
+      transform: scale(0.92);
+    }
+
+    .task-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

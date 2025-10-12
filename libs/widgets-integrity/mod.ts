@@ -16,6 +16,10 @@ const currentWidgetId = new WebviewInformation().widgetId;
 const widgetList = await _invoke<Widget[]>("state_get_widgets");
 window.__SLU_WIDGET = widgetList.find((widget) => widget.id === currentWidgetId)!;
 
+if (!window.__SLU_WIDGET) {
+  throw new Error(`Widget definition not found for ${currentWidgetId}`);
+}
+
 /// load index.js
 const script = document.createElement("script");
 script.type = "module";

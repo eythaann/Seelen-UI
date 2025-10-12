@@ -120,13 +120,9 @@ export function getHotkeysGroups(hotkeys: SluHotkey[]): Groups {
         groups.misc.push(hotkey);
         break;
       default:
-        assertUnreachable(name);
+        break;
     }
   }
 
   return groups;
-}
-
-function assertUnreachable(x: never): never {
-  throw new Error("Unreachable case: " + x);
 }

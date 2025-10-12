@@ -1,5 +1,6 @@
 pub mod launcher;
 pub mod popups;
+pub mod task_switcher;
 pub mod third_party;
 pub mod toolbar;
 pub mod wallpaper_manager;
@@ -15,6 +16,14 @@ use crate::{
     error::Result,
     utils::{constants::SEELEN_COMMON, WidgetWebviewLabel},
 };
+
+pub trait TrustedWidget {
+    const ID: &'static str;
+
+    fn title() -> String {
+        Self::ID.to_string()
+    }
+}
 
 pub fn show_settings() -> Result<()> {
     log::trace!("Show settings window");

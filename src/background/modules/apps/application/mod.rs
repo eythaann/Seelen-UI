@@ -1,3 +1,5 @@
+pub mod msix;
+pub mod msix_manifest;
 mod windows;
 
 pub use windows::*;

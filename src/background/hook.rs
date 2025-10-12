@@ -132,7 +132,7 @@ impl HookManager {
 
         {
             let mut seelen = trace_lock!(SEELEN);
-            if let Some(wall) = seelen.wall_mut() {
+            if let Some(wall) = &mut seelen.wall {
                 log_error!(wall.process_win_event(event, &origin), event);
             }
         };

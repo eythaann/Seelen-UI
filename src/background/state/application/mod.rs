@@ -10,7 +10,6 @@ mod weg_items;
 pub use icons::download_remote_icons;
 
 use arc_swap::ArcSwap;
-use getset::Getters;
 use icons::IconPacksManager;
 use itertools::Itertools;
 use lazy_static::lazy_static;
@@ -45,8 +44,7 @@ lazy_static! {
     }));
 }
 
-#[derive(Getters, Debug, Clone)]
-#[getset(get = "pub")]
+#[derive(Debug, Clone)]
 pub struct FullState {
     watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========

@@ -7,8 +7,8 @@ use seelen_core::{
 use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle, error::Result, modules::uwp::UwpManager, trace_lock,
-    utils::constants::SEELEN_COMMON, widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
+    app::get_app_handle, error::Result, modules::apps::application::msix::MsixAppsManager,
+    trace_lock, utils::constants::SEELEN_COMMON, widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
 };
 
 use super::FullState;
@@ -19,7 +19,7 @@ impl FullState {
             match item {
                 WegItem::Pinned(data) | WegItem::Temporal(data) => {
                     if let Some(umid) = &data.umid {
-                        if let Ok(Some(app_path)) = UwpManager::get_app_path(umid) {
+                        if let Ok(Some(app_path)) = MsixAppsManager::instance().get_app_path(umid) {
                             data.path = app_path;
                         }
                     }

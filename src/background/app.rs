@@ -1,6 +1,5 @@
 use std::sync::{atomic::AtomicBool, Arc, LazyLock};
 
-use getset::{Getters, MutGetters};
 use parking_lot::Mutex;
 use seelen_core::{handlers::SeelenEvent, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
@@ -25,6 +24,7 @@ use crate::{
     virtual_desktops::get_vd_manager,
     widgets::{
         launcher::SeelenRofi,
+        task_switcher::TaskSwitcher,
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
         window_manager::instance::WindowManagerV2,
@@ -46,13 +46,12 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
 }
 
 /** Struct should be initialized first before calling any other methods */
-#[derive(Getters, MutGetters, Default)]
+#[derive(Default)]
 pub struct Seelen {
     pub instances: Vec<SluMonitorInstance>,
-    #[getset(get = "pub", get_mut = "pub")]
-    rofi: Option<SeelenRofi>,
-    #[getset(get = "pub", get_mut = "pub")]
-    wall: Option<SeelenWall>,
+    pub wall: Option<SeelenWall>,
+    pub rofi: Option<SeelenRofi>,
+    pub task_switcher: Option<TaskSwitcher>,
 }
 
 /* ============== Getters ============== */
@@ -80,6 +79,13 @@ impl Seelen {
             let wall = SeelenWall::new()?;
             wall.update_position()?;
             self.wall = Some(wall)
+        }
+        Ok(())
+    }
+
+    fn add_task_switcher(&mut self) -> Result<()> {
+        if self.task_switcher.is_none() {
+            self.task_switcher = Some(TaskSwitcher::new()?);
         }
         Ok(())
     }
@@ -128,6 +134,7 @@ impl Seelen {
             monitor.load_settings(state)?;
         }
 
+        self.add_task_switcher()?;
         self.refresh_windows_positions()?;
         Ok(())
     }
@@ -159,6 +166,7 @@ impl Seelen {
         // order is important
         create_background_window()?;
         declare_system_events_handlers()?;
+        self.add_task_switcher()?;
 
         if state.is_rofi_enabled() {
             self.add_rofi()?;

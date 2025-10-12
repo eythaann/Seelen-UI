@@ -66,7 +66,7 @@ static STATUSES: [&str; 20] = [
 ];
 
 pub fn start_discord_rpc() -> Result<()> {
-    if !FULL_STATE.load().settings().drpc {
+    if !FULL_STATE.load().settings.drpc {
         return Ok(());
     }
 

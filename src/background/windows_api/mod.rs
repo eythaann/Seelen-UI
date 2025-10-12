@@ -91,10 +91,11 @@ use windows::{
         UI::{
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
             Shell::{
-                IShellItem2, IShellLinkW, IVirtualDesktopManager,
+                BHID_EnumItems, IEnumShellItems, IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
-                SHCreateItemFromParsingName, SHGetKnownFolderPath, SHLoadIndirectString, ShellLink,
-                VirtualDesktopManager, KF_FLAG_DEFAULT, SIGDN_NORMALDISPLAY,
+                SHCreateItemFromParsingName, SHGetKnownFolderItem, SHGetKnownFolderPath,
+                SHLoadIndirectString, ShellLink, VirtualDesktopManager, KF_FLAG_DEFAULT,
+                SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 BringWindowToTop, FindWindowExW, GetClassNameW, GetDesktopWindow,
@@ -1007,5 +1008,40 @@ impl WindowsApi {
         Ok(PathBuf::from(OsString::from_wide(unsafe {
             path.as_wide()
         })))
+    }
+
+    #[allow(dead_code)]
+    pub fn known_folder_item(folder_id: windows::core::GUID) -> Result<()> {
+        let item: IShellItem2 = unsafe { SHGetKnownFolderItem(&folder_id, KF_FLAG_DEFAULT, None)? };
+        let enumerator: IEnumShellItems = unsafe { item.BindToHandler(None, &BHID_EnumItems)? };
+
+        loop {
+            let mut items = [None; 1];
+            let mut fetched = 0u32;
+
+            unsafe { enumerator.Next(&mut items, Some(&mut fetched))? };
+
+            if fetched == 0 {
+                break;
+            }
+
+            if let Some(item) = &items[0] {
+                let item: IShellItem2 = item.cast()?;
+                // Obtener el nombre para mostrar
+                let display_name = unsafe {
+                    item.GetDisplayName(SIGDN_NORMALDISPLAY)?
+                        .to_hstring()
+                        .to_os_string()
+                };
+                let umid = unsafe {
+                    item.GetString(&PKEY_AppUserModel_ID)
+                        .ok()
+                        .map(|s| s.to_hstring().to_os_string())
+                };
+                println!("- {} // {:?}", display_name.display(), umid);
+            }
+        }
+
+        Ok(())
     }
 }

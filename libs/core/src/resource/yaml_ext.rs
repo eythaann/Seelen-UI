@@ -41,7 +41,15 @@ fn parse_yaml(base: &Path, value: Value) -> Result<Value> {
         Value::Tagged(tag) => {
             if tag.tag == "!include" {
                 if let Value::String(relative_path) = tag.value {
-                    let text = std::fs::read_to_string(base.join(relative_path))?;
+                    let to_include = base.join(relative_path);
+                    let text = if to_include
+                        .extension()
+                        .is_some_and(|ext| ext == "scss" || ext == "sass")
+                    {
+                        grass::from_path(&to_include, &grass::Options::default())?
+                    } else {
+                        std::fs::read_to_string(&to_include)?
+                    };
                     return Ok(Value::String(text));
                 }
             }

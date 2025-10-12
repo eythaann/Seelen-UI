@@ -1,20 +1,19 @@
 use std::path::{Path, PathBuf};
-use std::sync::Arc;
+use std::sync::{Arc, LazyLock};
 
 use arc_swap::ArcSwap;
-use lazy_static::lazy_static;
 use seelen_core::system_state::StartMenuItem;
 use windows::Win32::UI::Shell::{FOLDERID_CommonPrograms, FOLDERID_Programs};
 
 use crate::{error::Result, log_error, utils::constants::SEELEN_COMMON, windows_api::WindowsApi};
 
-lazy_static! {
-    pub static ref START_MENU_MANAGER: ArcSwap<StartMenuManager> = ArcSwap::from_pointee({
+pub static START_MENU_MANAGER: LazyLock<ArcSwap<StartMenuManager>> = LazyLock::new(|| {
+    ArcSwap::from_pointee({
         let mut manager = StartMenuManager::new();
         manager.init().unwrap();
         manager
-    });
-}
+    })
+});
 
 pub struct StartMenuManager {
     pub list: Vec<StartMenuItem>,

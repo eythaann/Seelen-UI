@@ -117,7 +117,7 @@ interface ShortcutProps {
 function Shortcut({ hotkey: { action, keys }, onChanged }: ShortcutProps) {
   const { t } = useTranslation();
 
-  const args: Record<string, number | string> = "arg" in action ? { 0: action.arg } : {};
+  const args: Record<string, number | string> = "index" in action ? { 0: action.index } : {};
 
   function onEdit() {
     invoke(SeelenCommand.RequestToUserInputShortcut, {

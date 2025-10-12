@@ -1,5 +1,7 @@
 use std::path::PathBuf;
 
+use seelen_core::system_state::ProcessInformation;
+use sysinfo::System;
 use windows::{
     ApplicationModel::AppInfo,
     Win32::{
@@ -98,6 +100,25 @@ impl Process {
                 .ok_or("there is no file stem")?
                 .to_string_lossy()
                 .to_string()),
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn command(&self) -> Result<Vec<String>> {
+        let mut sys = System::new();
+        let pid = sysinfo::Pid::from_u32(self.0);
+        sys.refresh_process_specifics(
+            pid,
+            sysinfo::ProcessRefreshKind::new().with_cmd(sysinfo::UpdateKind::Always),
+        );
+        let process = sys.process(pid).ok_or("process not found")?;
+        Ok(process.cmd().to_vec())
+    }
+
+    pub fn to_serializable(&self) -> ProcessInformation {
+        ProcessInformation {
+            id: self.0,
+            path: self.program_path().ok(),
         }
     }
 }

@@ -156,12 +156,3 @@ pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
 
     true
 }
-
-/* fn notify_changed_to_ui() {
-    let items = get_user_app_windows();
-    get_app_handle()
-        .emit(SeelenEvent::UserAppWindowsChanged, items)
-        .wrap_error()
-        .log_error();
-}
- */

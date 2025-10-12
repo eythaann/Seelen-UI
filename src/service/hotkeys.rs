@@ -107,75 +107,102 @@ async fn send_registering_to_app(hotkey: Option<Vec<String>>) -> Result<()> {
     Ok(())
 }
 
+/// Helper macro to create a command vector with optional conditional flags
+///
+/// Usage:
+/// - Simple command: `cmd!["wm", "focus", "up"]`
+/// - With variables: `cmd!["vd", "switch", index]`
+/// - With conditional flags: `cmd!["task", "run"; verbose => "--verbose", debug => "--debug"]`
+/// - Mixed: `cmd!["app", value; flag1 => "--flag1", cond2 => format!("--opt={}", val)]`
+///
+/// Examples:
+/// ```
+/// cmd!["settings"]
+/// cmd!["vd", "switch-workspace", 3]
+/// cmd!["task-switcher", "select-next"; select_on_key_up => "--auto-confirm"]
+/// cmd!["wm", "run"; verbose => "--verbose", debug => "--debug", force => "--force"]
+/// ```
+macro_rules! cmd {
+    // Simple case: just arguments, no conditional flags
+    ($($arg:expr),+ $(,)?) => {
+        vec![$($arg.to_string()),+]
+    };
+    // With conditional flags
+    ($($base:expr),+ ; $($cond:expr => $flag:expr),+ $(,)?) => {
+        {
+            let mut v = vec![$($base.to_string()),+];
+            $(
+                if $cond {
+                    v.push($flag.to_string());
+                }
+            )+
+            v
+        }
+    };
+}
+
 fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> {
     use SluHotkeyAction::*;
-    let mut args = Vec::new();
-    let cmd = match action {
+
+    let command = match action {
+        // task switcher
+        TaskNext { select_on_key_up } => {
+            cmd!["task-switcher", "select-next-task"; select_on_key_up => "--auto-confirm"]
+        }
+        TaskPrev { select_on_key_up } => {
+            cmd!["task-switcher", "select-previous-task"; select_on_key_up => "--auto-confirm"]
+        }
         // Virtual Desktop
-        SwitchToNextWorkspace => vec!["vd", "switch-next"],
-        SwitchToPreviousWorkspace => vec!["vd", "switch-prev"],
-        SwitchWorkspace(index) => {
-            args.push(index.to_string());
-            vec!["vd", "switch-workspace", &args[0]]
-        }
-        MoveToWorkspace(index) => {
-            args.push(index.to_string());
-            vec!["vd", "move-to-workspace", &args[0]]
-        }
-        SendToWorkspace(index) => {
-            args.push(index.to_string());
-            vec!["vd", "send-to-workspace", &args[0]]
-        }
-        CreateNewWorkspace => vec!["vd", "create-new-workspace"],
-        DestroyCurrentWorkspace => vec!["vd", "destroy-current-workspace"],
+        SwitchToNextWorkspace => cmd!["vd", "switch-next"],
+        SwitchToPreviousWorkspace => cmd!["vd", "switch-prev"],
+        SwitchWorkspace { index } => cmd!["vd", "switch-workspace", index],
+        MoveToWorkspace { index } => cmd!["vd", "move-to-workspace", index],
+        SendToWorkspace { index } => cmd!["vd", "send-to-workspace", index],
+        CreateNewWorkspace => cmd!["vd", "create-new-workspace"],
+        DestroyCurrentWorkspace => cmd!["vd", "destroy-current-workspace"],
         // wallpaper manager
-        CycleWallpaperNext => vec!["wallpaper", "next"],
-        CycleWallpaperPrev => vec!["wallpaper", "prev"],
+        CycleWallpaperNext => cmd!["wallpaper", "next"],
+        CycleWallpaperPrev => cmd!["wallpaper", "prev"],
         // Weg
-        StartWegApp(index) => {
-            args.push(index.to_string());
-            vec!["weg", "foreground-or-run-app", &args[0]]
-        }
+        StartWegApp { index } => cmd!["weg", "foreground-or-run-app", index],
         // App Launcher / Start Menu
-        ToggleLauncher => vec!["launcher", "toggle"],
+        ToggleLauncher => cmd!["launcher", "toggle"],
         // Window Manager
-        IncreaseWidth => vec!["wm", "width", "increase"],
-        DecreaseWidth => vec!["wm", "width", "decrease"],
-        IncreaseHeight => vec!["wm", "height", "increase"],
-        DecreaseHeight => vec!["wm", "height", "decrease"],
-        RestoreSizes => vec!["wm", "reset-workspace-size"],
+        IncreaseWidth => cmd!["wm", "width", "increase"],
+        DecreaseWidth => cmd!["wm", "width", "decrease"],
+        IncreaseHeight => cmd!["wm", "height", "increase"],
+        DecreaseHeight => cmd!["wm", "height", "decrease"],
+        RestoreSizes => cmd!["wm", "reset-workspace-size"],
         // Window Manger focused window sizing
-        FocusTop => vec!["wm", "focus", "up"],
-        FocusBottom => vec!["wm", "focus", "down"],
-        FocusLeft => vec!["wm", "focus", "left"],
-        FocusRight => vec!["wm", "focus", "right"],
+        FocusTop => cmd!["wm", "focus", "up"],
+        FocusBottom => cmd!["wm", "focus", "down"],
+        FocusLeft => cmd!["wm", "focus", "left"],
+        FocusRight => cmd!["wm", "focus", "right"],
         // Window Manager focused window positioning
-        MoveWindowUp => vec!["wm", "move", "up"],
-        MoveWindowDown => vec!["wm", "move", "down"],
-        MoveWindowLeft => vec!["wm", "move", "left"],
-        MoveWindowRight => vec!["wm", "move", "right"],
+        MoveWindowUp => cmd!["wm", "move", "up"],
+        MoveWindowDown => cmd!["wm", "move", "down"],
+        MoveWindowLeft => cmd!["wm", "move", "left"],
+        MoveWindowRight => cmd!["wm", "move", "right"],
         // Tiling window manager reservation
-        ReserveTop => vec!["wm", "reserve", "top"],
-        ReserveBottom => vec!["wm", "reserve", "bottom"],
-        ReserveLeft => vec!["wm", "reserve", "left"],
-        ReserveRight => vec!["wm", "reserve", "right"],
-        ReserveFloat => vec!["wm", "reserve", "float"],
-        ReserveStack => vec!["wm", "reserve", "stack"],
+        ReserveTop => cmd!["wm", "reserve", "top"],
+        ReserveBottom => cmd!["wm", "reserve", "bottom"],
+        ReserveLeft => cmd!["wm", "reserve", "left"],
+        ReserveRight => cmd!["wm", "reserve", "right"],
+        ReserveFloat => cmd!["wm", "reserve", "float"],
+        ReserveStack => cmd!["wm", "reserve", "stack"],
         // Tiling window manager state
-        PauseTiling => vec!["wm", "toggle"],
-        ToggleMonocle => vec!["wm", "toggle-monocle"],
-        ToggleFloat => vec!["wm", "toggle-float"],
-        CycleStackNext => vec!["wm", "cycle-stack", "next"],
-        CycleStackPrev => vec!["wm", "cycle-stack", "prev"],
+        PauseTiling => cmd!["wm", "toggle"],
+        ToggleMonocle => cmd!["wm", "toggle-monocle"],
+        ToggleFloat => cmd!["wm", "toggle-float"],
+        CycleStackNext => cmd!["wm", "cycle-stack", "next"],
+        CycleStackPrev => cmd!["wm", "cycle-stack", "prev"],
         // others
-        MiscOpenSettings => vec!["settings"],
-        MiscToggleLockTracing => vec!["debug", "toggle-trace-lock"],
-        MiscToggleWinEventTracing => vec!["debug", "toggle-win-events"],
-        _ => vec![],
+        MiscOpenSettings => cmd!["settings"],
+        MiscToggleLockTracing => cmd!["debug", "toggle-trace-lock"],
+        MiscToggleWinEventTracing => cmd!["debug", "toggle-win-events"],
+        // no command needed
+        _ => return None,
     };
 
-    match cmd.is_empty() {
-        true => None,
-        false => Some(cmd.iter().map(|s| s.to_string()).collect()),
-    }
+    Some(command)
 }

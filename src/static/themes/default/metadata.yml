@@ -146,3 +146,5 @@ metadata:
     - weg
     - toolbar
     - window-manager
+styles:
+  "@seelen/task-switcher": !include styles/task-switcher.scss

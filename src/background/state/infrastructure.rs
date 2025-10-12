@@ -19,20 +19,20 @@ use crate::{
 };
 
 use super::{
-    application::{FullState, FULL_STATE},
+    application::FULL_STATE,
     domain::{AppConfig, Placeholder, Settings},
 };
 
 #[tauri::command(async)]
 pub fn state_get_icon_packs() -> Vec<IconPack> {
-    let mutex = FULL_STATE.load().icon_packs().clone();
+    let mutex = FULL_STATE.load().icon_packs.clone();
     let icon_packs = trace_lock!(mutex);
     icon_packs.owned_list()
 }
 
 #[tauri::command(async)]
 pub fn state_get_toolbar_items() -> Placeholder {
-    FULL_STATE.load().toolbar_items().clone()
+    FULL_STATE.load().toolbar_items.clone()
 }
 
 #[tauri::command(async)]
@@ -54,18 +54,15 @@ pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Resu
 
 #[tauri::command(async)]
 pub fn state_get_history() -> LauncherHistory {
-    FULL_STATE.load().launcher_history().clone()
+    FULL_STATE.load().launcher_history.clone()
 }
 
 #[tauri::command(async)]
 pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
     if let Some(path) = path {
-        let mut settings = FullState::get_settings_from_path(&path)?;
-        settings.migrate()?;
-        settings.sanitize()?;
-        Ok(settings)
+        Ok(Settings::load(path)?)
     } else {
-        Ok(FULL_STATE.load().settings().clone())
+        Ok(FULL_STATE.load().settings.clone())
     }
 }
 
@@ -100,7 +97,7 @@ pub fn state_write_settings(settings: Settings) -> Result<()> {
 pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
     FULL_STATE
         .load()
-        .settings_by_app()
+        .settings_by_app
         .iter()
         .cloned()
         .collect_vec()
@@ -144,7 +141,7 @@ pub fn state_get_profiles() -> Vec<Profile> {
 
 #[tauri::command(async)]
 pub fn state_delete_cached_icons() -> Result<()> {
-    let mutex = FULL_STATE.load().icon_packs().clone();
+    let mutex = FULL_STATE.load().icon_packs.clone();
     let mut icon_manager = trace_lock!(mutex);
     icon_manager.clear_system_icons()?;
     icon_manager.sanitize_system_icon_pack(false)?;
