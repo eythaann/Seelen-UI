@@ -13,9 +13,12 @@ impl Window {
             hwnd: self.address(),
             monitor: self.monitor().stable_id().unwrap_or_default().into(),
             title: self.title(),
+            app_name: self.app_display_name().unwrap_or_default(),
             is_iconic: self.is_minimized(),
             is_zoomed: self.is_maximized(),
             is_fullscreen: self.is_fullscreen(),
+            umid: self.app_user_model_id().map(|umid| umid.to_string()),
+            process: self.process().to_serializable(),
         }
     }
 

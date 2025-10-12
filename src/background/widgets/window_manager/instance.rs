@@ -1,5 +1,4 @@
 use base64::Engine;
-use getset::{Getters, MutGetters};
 use seelen_core::{
     state::{FancyToolbarSide, HideMode, SeelenWegSide},
     system_state::MonitorId,
@@ -23,7 +22,6 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-#[derive(Getters, MutGetters)]
 pub struct WindowManagerV2 {
     pub window: WebviewWindow,
 }

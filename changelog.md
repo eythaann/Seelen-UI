@@ -2,6 +2,10 @@
 
 ## [2.4.5]
 
+### fix
+
+- app cli was not working.
+
 ## [2.4.4]
 
 ### features

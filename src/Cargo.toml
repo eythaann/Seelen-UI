@@ -51,7 +51,6 @@ clap = { workspace = true, features = ["derive", "string"] }
 os_info = { workspace = true }
 crossbeam-channel = { workspace = true }
 regex = { workspace = true }
-getset = { workspace = true }
 phf = { workspace = true }
 sysinfo = { workspace = true }
 battery = { workspace = true }

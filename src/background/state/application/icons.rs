@@ -268,7 +268,7 @@ impl FullState {
     pub fn emit_icon_packs(&self) -> Result<()> {
         get_app_handle().emit(
             SeelenEvent::StateIconPacksChanged,
-            trace_lock!(self.icon_packs()).list(),
+            trace_lock!(self.icon_packs).list(),
         )?;
         Ok(())
     }

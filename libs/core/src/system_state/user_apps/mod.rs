@@ -31,7 +31,18 @@ pub struct UserAppWindow {
     pub hwnd: isize,
     pub monitor: MonitorId,
     pub title: String,
+    pub app_name: String,
     pub is_zoomed: bool,
     pub is_iconic: bool,
     pub is_fullscreen: bool,
+    /// this can be from the window property store, or inherited from the process
+    pub umid: Option<String>,
+    /// if the window is a frame, this information will be mapped to the process creator
+    pub process: ProcessInformation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+pub struct ProcessInformation {
+    pub id: u32,
+    pub path: Option<PathBuf>,
 }

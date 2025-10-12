@@ -30,8 +30,8 @@ use std::io::BufRead;
 use std::path::{Path, PathBuf};
 
 use crate::error::Result;
+use crate::modules::apps::application::msix::MsixAppsManager;
 use crate::modules::start::application::START_MENU_MANAGER;
-use crate::modules::uwp::UwpManager;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 use crate::utils::constants::SEELEN_COMMON;
@@ -346,7 +346,7 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
     let is_lnk_file = origin_ext == "lnk";
     let is_url_file = origin_ext == "url";
 
-    let mutex = FULL_STATE.load().icon_packs().clone();
+    let mutex = FULL_STATE.load().icon_packs.clone();
     let mut icon_manager = trace_lock!(mutex);
     if is_exe_file || is_lnk_file || is_url_file {
         if icon_manager.has_app_icon(None, Some(origin)) {
@@ -431,10 +431,11 @@ pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) {
 
 /// returns the path of the icon extracted from the app with the specified package app user model id.
 pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
-    let icon_manager_mutex = FULL_STATE.load().icon_packs().clone();
+    let icon_manager_mutex = FULL_STATE.load().icon_packs.clone();
     match aumid {
         AppUserModelId::Appx(app_umid) => {
-            let path = UwpManager::get_app_path(app_umid)?;
+            let msix_manager = MsixAppsManager::instance();
+            let path = msix_manager.get_app_path(app_umid)?;
             {
                 let manager = trace_lock!(icon_manager_mutex);
                 if manager.has_app_icon(Some(aumid.as_str()), path.as_deref()) {
@@ -444,7 +445,7 @@ pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
 
             log::trace!("Extracting icon for {app_umid:?}");
             let mut gen_icon = Icon::default();
-            let (light_path, dark_path) = UwpManager::get_high_quality_icon_path(app_umid)?;
+            let (light_path, dark_path) = msix_manager.get_app_icon_path(app_umid)?;
 
             let root = SEELEN_COMMON.user_icons_path().join("system");
             let name = date_based_hex_id();

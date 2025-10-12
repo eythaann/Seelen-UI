@@ -4,15 +4,9 @@
   "description": "permissions that were migrated from v1. windows: [settings, wm]",
   "local": true,
   "windows": [
-    "QHNlZWxlbi9zZXR0aW5ncw",
-    "QHNlZWxlbi93aW5kb3ctbWFuYWdlc*"
+    "QHNlZWxlbi9zZXR0aW5ncw"
   ],
   "permissions": [
-    "core:app:default",
-    "core:resources:default",
-    "core:menu:default",
-    "deep-link:default",
-
     "fs:allow-read-text-file",
     "fs:allow-write-text-file",
     "fs:allow-exists",
@@ -20,7 +14,6 @@
     "fs:allow-read-dir",
     "fs:allow-copy-file",
     "fs:allow-remove",
-
     {
       "identifier": "fs:scope",
       "allow": [
@@ -36,16 +29,7 @@
       ]
     },
 
-    "autostart:allow-enable",
-    "autostart:allow-disable",
-    "autostart:allow-is-enabled",
-
-    "dialog:allow-save",
-    "dialog:allow-open",
-
     "process:allow-restart",
-    "process:allow-exit",
-
-    "shell:allow-open"
+    "process:allow-exit"
   ]
 }

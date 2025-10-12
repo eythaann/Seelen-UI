@@ -1,0 +1,5 @@
+id: "@seelen/task-switcher"
+icon: PiSelectionForegroundDuotone
+metadata:
+  displayName: Task Switcher
+instances: Single

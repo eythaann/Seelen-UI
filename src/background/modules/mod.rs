@@ -11,7 +11,6 @@ pub mod shared;
 pub mod start;
 pub mod system_settings;
 pub mod user;
-pub mod uwp;
 
 #[macro_export]
 macro_rules! event_manager {

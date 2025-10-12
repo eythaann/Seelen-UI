@@ -11,6 +11,7 @@
     "core:event:default",
     "core:webview:default",
     "core:path:default",
+    "core:app:default",
     "dialog:default"
   ]
 }

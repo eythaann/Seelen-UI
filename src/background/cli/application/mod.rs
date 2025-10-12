@@ -7,7 +7,6 @@ use std::sync::atomic::Ordering;
 
 use clap::Parser;
 use debugger::DebuggerCli;
-use serde::{Deserialize, Serialize};
 use slu_ipc::{messages::AppMessage, AppIpc};
 use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
@@ -20,13 +19,14 @@ use crate::{
     trace_lock,
     virtual_desktops::cli::VirtualDesktopCli,
     widgets::{
-        launcher::cli::AppLauncherCli, popups::cli::PopupsCli, show_settings, weg::cli::WegCli,
+        launcher::cli::AppLauncherCli, popups::cli::PopupsCli, show_settings,
+        task_switcher::cli::TaskSwitcherClient, weg::cli::WegCli,
         window_manager::cli::WindowManagerCli,
     },
 };
 
 /// Seelen Command Line Interface
-#[derive(Debug, Serialize, Deserialize, clap::Parser)]
+#[derive(Debug, clap::Parser)]
 #[command(version, name = "Seelen UI")]
 pub struct AppCli {
     /// Indicates that the app was invoked from the start up action.
@@ -44,7 +44,7 @@ pub struct AppCli {
     command: Option<AppCliCommand>,
 }
 
-#[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
+#[derive(Debug, clap::Subcommand)]
 pub enum AppCliCommand {
     /// Opens the Seelen settings gui.
     Settings,
@@ -57,6 +57,7 @@ pub enum AppCliCommand {
     Resource(ResourceManagerCli),
     Win32(Win32Cli),
     Art(ArtCli),
+    TaskSwitcher(TaskSwitcherClient),
 }
 
 // attach console could fail if not console to attach is present
@@ -107,7 +108,7 @@ pub async fn handle_console_client() -> Result<()> {
 impl AppCli {
     pub fn should_be_redirected(&self) -> bool {
         if let Some(command) = &self.command {
-            return matches!(command, AppCliCommand::Win32(_) | AppCliCommand::Art(_));
+            return !matches!(command, AppCliCommand::Win32(_) | AppCliCommand::Art(_));
         }
         self.uri.is_some()
     }
@@ -164,7 +165,7 @@ impl AppCliCommand {
                 command.process()?;
             }
             AppCliCommand::Launcher(command) => {
-                if let Some(rofi) = trace_lock!(SEELEN).rofi_mut() {
+                if let Some(rofi) = &mut trace_lock!(SEELEN).rofi {
                     rofi.process(command)?;
                 }
             }
@@ -180,6 +181,10 @@ impl AppCliCommand {
             AppCliCommand::Popup(command) => {
                 command.process()?;
             }
+            AppCliCommand::TaskSwitcher(command) => {
+                command.process()?;
+            }
+            // ========================================
             AppCliCommand::Win32(command) => {
                 command.process()?;
             }

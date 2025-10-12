@@ -1,0 +1,9 @@
+#root {
+  width: min-content;
+  height: min-content;
+}
+
+body {
+  overflow: hidden;
+  background: transparent;
+}

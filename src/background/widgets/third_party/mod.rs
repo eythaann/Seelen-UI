@@ -63,6 +63,7 @@ impl WidgetInstance {
         .data_directory(args.data_directory())
         .additional_browser_args(&args.to_string())
         .build()?;
+
         Ok(window)
     }
 }
