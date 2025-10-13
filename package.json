@@ -36,9 +36,11 @@
     "@preact/signals": "^2.3.1",
     "@tauri-apps/api": "^2.8.0",
     "@tauri-apps/cli": "^2.8.2",
+    "esbuild-svelte": "^0.9.3",
     "preact": "^10.27.1",
     "preact-render-to-string": "^6.6.1",
-    "react-router": "^7.6.0"
+    "react-router": "^7.6.0",
+    "svelte-preprocess": "^6.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",

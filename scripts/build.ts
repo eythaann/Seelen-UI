@@ -1,179 +1,69 @@
-import esbuild from "esbuild";
-import CssModulesPlugin from "esbuild-css-modules-plugin";
-import express from "express";
-import fs from "fs";
-import path from "path";
-import { renderToStaticMarkup } from "real-react-dom/server"; // preact compat doesn't work for extracting icons
-import yargs from "yargs";
-import { hideBin } from "yargs/helpers";
+// Main build orchestrator
+// This file coordinates the build process for Seelen UI applications
+
+import { parseArgs } from "./build/config.ts";
+import { extractIcons } from "./build/steps/icons.ts";
+import { cleanDist } from "./build/steps/cleanup.ts";
+import { discoverEntryPoints, groupEntryPointsByFramework } from "./build/steps/discover.ts";
+import { buildReact } from "./build/builders/react.ts";
+import { buildSvelte } from "./build/builders/svelte.ts";
+import { buildVanilla } from "./build/builders/vanilla.ts";
+import { startDevServer } from "./build/server.ts";
 import process from "node:process";
 
-async function getArgs() {
-  const argv = await yargs(hideBin(process.argv))
-    .option("production", {
-      type: "boolean",
-      description: "Enable Production Minified Bundle",
-      default: false,
-    })
-    .option("serve", {
-      type: "boolean",
-      description: "Run a local server",
-      default: false,
-    }).argv;
-  return {
-    isProd: !!argv.production,
-    serve: !!argv.serve,
-  };
-}
+/**
+ * Main build function
+ * Orchestrates the entire build process:
+ * 1. Parse command-line arguments
+ * 2. Extract icons (in parallel with cleaning)
+ * 3. Clean dist directory (in parallel with icons)
+ * 4. Discover entry points
+ * 5. Build all frameworks in parallel (React, Svelte, Vanilla)
+ * 6. Start dev server (if --serve flag is set) - serves the entire dist folder
+ */
+async function main() {
+  const args = await parseArgs();
+  console.info(`Build mode: ${args.isProd ? "production" : "development"}`);
+  console.info(`Serve: ${args.serve ? "enabled" : "disabled"}\n`);
 
-async function extractIconsIfNecessary() {
-  if (fs.existsSync("./dist/icons")) {
-    return;
-  }
+  // Step 1 & 2: Extract icons and clean dist directory in parallel
+  await Promise.all([extractIcons(), Promise.resolve(cleanDist())]);
 
-  console.info("Extracting SVG Lazy Icons");
-  console.time("Lazy Icons");
-  fs.mkdirSync("./dist/icons", { recursive: true });
+  // Step 3: Discover entry points
+  const entryPoints = discoverEntryPoints();
+  const groupedEntryPoints = groupEntryPointsByFramework(entryPoints);
 
-  let tsFile = "// This file is generated on build, do not edit.\nexport type IconName =";
-  const entries = fs.readdirSync("./node_modules/react-icons");
+  console.info(`\nDiscovered entry points:`);
+  console.info(`  React: ${groupedEntryPoints.react.length}`);
+  console.info(`  Svelte: ${groupedEntryPoints.svelte.length}`);
+  console.info(`  Vanilla: ${groupedEntryPoints.vanilla.length}`);
+  console.info();
 
-  for (const entry of entries) {
-    const entryPath = path.join("./node_modules/react-icons", entry);
-    const isDir = fs.statSync(entryPath).isDirectory();
+  // Collect all app folders for public file copying
+  const allAppFolders = entryPoints.map((entry) => entry.folder);
 
-    if (!isDir || entry === "lib") {
-      continue;
-    }
+  // Step 4: Build all frameworks in parallel
+  console.info("Starting parallel builds...\n");
+  console.time("Total build time");
 
-    console.info("Extracting icon family:", entry);
+  await Promise.all([
+    buildReact(groupedEntryPoints.react, allAppFolders, args),
+    buildSvelte(groupedEntryPoints.svelte, allAppFolders, args),
+    buildVanilla(groupedEntryPoints.vanilla, allAppFolders, args),
+  ]);
 
-    const family = await import(`react-icons/${entry}`);
-    for (const [name, ElementConstructor] of Object.entries(family)) {
-      if (typeof ElementConstructor !== "function") {
-        continue;
-      }
-      const element = ElementConstructor({ size: "1em" });
-      const svg = renderToStaticMarkup(element);
-      if (!svg.startsWith("<svg")) {
-        throw new Error(`Invalid SVG: ${svg}`);
-      }
-      fs.writeFileSync(`./dist/icons/${name}.svg`, svg);
-    }
+  console.timeEnd("Total build time");
 
-    tsFile += `\n  | keyof typeof import('react-icons/${entry}')`;
-  }
-
-  tsFile += ";\n";
-  fs.writeFileSync("./libs/widgets-shared/components/Icon/icons.ts", tsFile);
-  console.timeEnd("Lazy Icons");
-}
-
-const appFolders = fs
-  .readdirSync("src/ui")
-  .filter((item) => item !== "shared" && fs.statSync(path.join("src/ui", item)).isDirectory());
-
-const entryPoints = appFolders
-  .map((folder) => {
-    const vanilla = `./src/ui/${folder}/index.ts`;
-    const react = `./src/ui/${folder}/index.tsx`;
-    const svelte = `./src/ui/${folder}/index.svelte`;
-    if (fs.existsSync(vanilla)) {
-      return vanilla;
-    }
-    if (fs.existsSync(react)) {
-      return react;
-    }
-    if (fs.existsSync(svelte)) {
-      return svelte;
-    }
-    return "";
-  })
-  .filter((file) => !!file);
-
-entryPoints.push("./libs/widgets-integrity/mod.ts");
-
-const OwnPlugin: esbuild.Plugin = {
-  name: "copy-public-by-entry",
-  setup(build) {
-    build.onStart(() => {
-      console.time("build");
-    });
-    build.onEnd(() => {
-      // copy public folder for each widget
-      appFolders.forEach((folder) => {
-        let source = `src/ui/${folder}/public`;
-        let target = `dist/${folder}`;
-        fs.cpSync(source, target, { recursive: true, force: true });
-      });
-
-      // move nested folders to root
-      fs.readdirSync("dist/src/ui").forEach((folder) => {
-        let source = `dist/src/ui/${folder}`;
-        let target = `dist/${folder}`;
-        fs.cpSync(source, target, { recursive: true, force: true });
-      });
-      fs.rmSync("dist/src", { recursive: true, force: true });
-
-      console.timeEnd("build");
-    });
-  },
-};
-
-function startDevServer() {
-  const app = express();
-  app.use(express.static("dist"));
-  app.listen(3579, () => {
-    console.info("Listening on http://localhost:3579");
-  });
-}
-
-(async function main() {
-  const { isProd, serve } = await getArgs();
-  console.info(`isProd: ${isProd}, serve: ${serve}`);
-
-  await extractIconsIfNecessary();
-
-  console.info("Removing old artifacts");
-  // delete all in dist less icons
-  fs.readdirSync("dist").forEach((folder) => {
-    if (folder !== "icons") {
-      fs.rmSync(path.join("dist", folder), { recursive: true, force: true });
-    }
-  });
-
-  const ctx = await esbuild.context({
-    entryPoints: entryPoints,
-    bundle: true,
-    minify: isProd,
-    sourcemap: !isProd,
-    treeShaking: true,
-    format: "esm",
-    outdir: "./dist",
-    jsx: "automatic",
-    loader: {
-      ".yml": "text",
-    },
-    plugins: [
-      CssModulesPlugin({
-        localsConvention: "camelCase",
-        pattern: "do-not-use-on-themes-[local]-[hash]",
-      }),
-      OwnPlugin,
-    ],
-    alias: {
-      react: "./node_modules/preact/compat/",
-      "react/jsx-runtime": "./node_modules/preact/jsx-runtime",
-      "react-dom": "./node_modules/preact/compat/",
-      "react-dom/*": "./node_modules/preact/compat/*",
-    },
-  });
-
-  if (serve) {
-    await ctx.watch();
+  // Step 5: Start dev server if requested (serves entire dist folder)
+  if (args.serve) {
     startDevServer();
-  } else {
-    await ctx.rebuild();
-    await ctx.dispose();
   }
-})();
+
+  console.info("\n✓ Build complete!\n");
+}
+
+// Run the build
+main().catch((error) => {
+  console.error("Build failed:", error);
+  process.exit(1);
+});

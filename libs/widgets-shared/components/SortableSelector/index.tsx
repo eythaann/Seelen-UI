@@ -1,10 +1,10 @@
 import {
   closestCorners,
   DndContext,
-  DragEndEvent,
-  DragOverEvent,
+  type DragEndEvent,
+  type DragOverEvent,
   DragOverlay,
-  DragStartEvent,
+  type DragStartEvent,
   PointerSensor,
   useDroppable,
   useSensor,
@@ -14,10 +14,10 @@ import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } 
 import { CSS } from "@dnd-kit/utilities";
 import { useSignal } from "@preact/signals";
 import { throttle } from "lodash";
-import { ComponentChildren } from "preact";
+import type { ComponentChildren } from "preact";
 import { useMemo } from "preact/hooks";
 
-import { genericHandleDragOver } from "../DndKit/utils";
+import { genericHandleDragOver } from "../DndKit/utils.ts";
 import cs from "./index.module.css";
 
 interface Props<T> {

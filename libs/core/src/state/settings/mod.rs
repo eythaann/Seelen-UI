@@ -66,6 +66,7 @@ impl Default for FancyToolbarSettings {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum FancyToolbarSide {
     Top,
     Bottom,
@@ -74,6 +75,7 @@ pub enum FancyToolbarSide {
 // ============== SeelenWeg Settings ==============
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum SeelenWegMode {
     #[serde(alias = "Full-Width")]
     FullWidth,
@@ -82,18 +84,21 @@ pub enum SeelenWegMode {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum WegTemporalItemsVisibility {
     All,
     OnMonitor,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum WegPinnedItemsVisibility {
     Always,
     WhenPrimary,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum HideMode {
     /// never hide
     Never,
@@ -105,6 +110,7 @@ pub enum HideMode {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum SeelenWegSide {
     Left,
     Right,
@@ -288,6 +294,7 @@ impl Default for WindowManagerSettings {
 // ================= Seelen Launcher ================
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum SeelenLauncherMonitor {
     Primary,
     #[serde(alias = "Mouse-Over")]
@@ -377,6 +384,7 @@ impl Default for SeelenWallSettings {
 // ========================== Seelen Updates ==============================
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum UpdateChannel {
     Release,
     Beta,
@@ -621,6 +629,7 @@ impl Default for PerformanceModeSettings {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum PerformanceMode {
     /// Does nothing, all animations are enabled.
     Disabled,

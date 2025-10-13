@@ -5,7 +5,7 @@
 import type { Widget } from "@seelen-ui/lib/types";
 import { _invoke, WebviewInformation } from "libs/widgets-integrity/_tauri";
 
-import { wrapConsoleV2 } from "./ConsoleWrapper";
+import { wrapConsoleV2 } from "./ConsoleWrapper.ts";
 
 wrapConsoleV2();
 

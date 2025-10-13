@@ -1,6 +1,6 @@
 use std::{collections::HashMap, path::PathBuf};
 
-use seelen_core::system_state::MonitorId;
+use seelen_core::{state::WidgetLoader, system_state::MonitorId};
 
 use crate::{
     error::Result,
@@ -17,10 +17,11 @@ use crate::{
 pub struct SluMonitorInstance {
     pub view: MonitorView,
     pub main_target_id: MonitorId,
+    // legacy widgets
     pub toolbar: Option<FancyToolbar>,
     pub weg: Option<SeelenWeg>,
     pub wm: Option<WindowManagerV2>,
-    /// third party widgets
+    // new widgets storage
     pub widgets: HashMap<PathBuf, WidgetInstance>,
 }
 
@@ -82,15 +83,15 @@ impl SluMonitorInstance {
         self.widgets
             .retain(|key, _| RESOURCES.widgets.contains(key));
 
-        let mut third_party_widgets = Vec::new();
+        let mut to_load = Vec::new();
         RESOURCES.widgets.scan(|k, w| {
-            if !w.metadata.internal.bundled {
-                third_party_widgets.push((k.clone(), w.clone()));
+            if w.loader != WidgetLoader::Legacy {
+                to_load.push((k.clone(), w.clone()));
             }
         });
 
         let state = FULL_STATE.load();
-        for (key, widget) in third_party_widgets {
+        for (key, widget) in to_load {
             if !state.is_widget_enable_on_monitor(&widget, &self.main_target_id) {
                 self.widgets.remove(&key); // unload disabled widgets
                 continue;

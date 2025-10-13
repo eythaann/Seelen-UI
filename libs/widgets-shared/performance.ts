@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
-import { PerformanceMode } from "@seelen-ui/lib/types";
+import type { PerformanceMode } from "@seelen-ui/lib/types";
 
 export async function disableAnimationsOnPerformanceMode() {
   let initial = await invoke(SeelenCommand.StateGetPerformanceMode);

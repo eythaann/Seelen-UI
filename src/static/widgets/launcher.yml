@@ -72,3 +72,5 @@ metadata:
     th: แอปพลิเคชัน Launcher
     lo: Launcher ໃບສະຫມັກ
     km: កម្មវិធីដំណើរការដាក់ពាក្យសុំ
+loader: Legacy
+instances: ReplicaByMonitor

@@ -44,8 +44,13 @@ export class UIColors {
       const r = (color >> 16) & 255;
       const g = (color >> 8) & 255;
       const b = color & 255;
+
       // replace rust snake case with kebab case
       const name = key.replace("_", "-");
+      element.textContent += `--system-${name}-color: ${value.slice(0, 7)};\n`;
+      element.textContent += `--system-${name}-color-rgb: ${r}, ${g}, ${b};\n`;
+
+      // @deprecated old names
       element.textContent += `--config-${name}-color: ${value.slice(0, 7)};\n`;
       element.textContent += `--config-${name}-color-rgb: ${r}, ${g}, ${b};\n`;
     }

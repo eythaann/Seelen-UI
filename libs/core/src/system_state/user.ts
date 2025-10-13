@@ -1,19 +1,7 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../handlers/mod.ts";
 import { newFromInvoke, newOnEvent } from "../utils/State.ts";
 import { List } from "../utils/List.ts";
-import type { Enum } from "../utils/enums.ts";
-import type { File, FolderType, User } from "@seelen-ui/types";
-
-const FolderType: Enum<FolderType> = {
-  Unknown: "Unknown",
-  Recent: "Recent",
-  Desktop: "Desktop",
-  Downloads: "Downloads",
-  Documents: "Documents",
-  Pictures: "Pictures",
-  Videos: "Videos",
-  Music: "Music",
-};
+import { type File, FolderType, type User } from "@seelen-ui/types";
 
 export class UserDetails {
   constructor(public user: User) {}
@@ -85,5 +73,3 @@ export class VideosFolder extends UserDirectory {
 export class MusicFolder extends UserDirectory {
   static override readonly folderType = FolderType.Music;
 }
-
-export { FolderType };

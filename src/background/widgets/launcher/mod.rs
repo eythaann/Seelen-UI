@@ -64,7 +64,7 @@ impl SeelenRofi {
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             label,
-            tauri::WebviewUrl::App("launcher/index.html".into()),
+            tauri::WebviewUrl::App("react/launcher/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)

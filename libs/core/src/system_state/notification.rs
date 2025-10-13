@@ -31,6 +31,7 @@ pub struct Toast {
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum ToastDuration {
     #[default]
     Short,
@@ -91,6 +92,7 @@ pub struct ToastBinding {
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum ToastTemplateType {
     ToastImageAndText01,
     ToastImageAndText02,
@@ -141,6 +143,7 @@ pub struct ToastImage {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum ToastImageCropType {
     #[serde(alias = "circle")]
     Circle,
@@ -236,6 +239,7 @@ pub struct ToastInput {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum ToastInputType {
     #[serde(alias = "text")]
     Text,
@@ -285,6 +289,7 @@ pub struct ToastAction {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum ToastActionButtonStyle {
     #[serde(alias = "success")]
     Sucess,
@@ -295,6 +300,7 @@ pub enum ToastActionButtonStyle {
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum ToastActionAfterActivationBehavior {
     #[default]
     #[serde(alias = "default")]
@@ -306,6 +312,7 @@ pub enum ToastActionAfterActivationBehavior {
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum ToastActionActivationType {
     #[default]
     #[serde(alias = "foreground")]
@@ -321,6 +328,7 @@ pub enum ToastActionActivationType {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum ToastActionPlacement {
     #[serde(alias = "contextMenu")]
     ContextMenu,

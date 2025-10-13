@@ -43,6 +43,7 @@ impl Default for WallpaperInstanceSettings {
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(repr(enum = name))]
 pub enum ObjectFit {
     Fill,
     Contain,
@@ -52,6 +53,7 @@ pub enum ObjectFit {
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(repr(enum = name))]
 pub enum ObjectPosition {
     Top,
     #[default]
@@ -63,6 +65,7 @@ pub enum ObjectPosition {
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "kebab-case")]
+#[ts(repr(enum = name))]
 pub enum MixBlendMode {
     Normal,
     #[default]
@@ -87,6 +90,7 @@ pub enum MixBlendMode {
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(repr(enum = name))]
 pub enum PlaybackSpeed {
     XDot25,
     XDot5,

@@ -13,6 +13,7 @@ pub struct PowerStatus {
 // https://learn.microsoft.com/en-us/windows/win32/api/powersetting/ne-powersetting-effective_power_mode
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
 #[repr(i32)]
+#[ts(repr(enum = name))]
 pub enum PowerMode {
     BatterySaver,
     BetterBattery,

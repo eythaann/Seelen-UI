@@ -2,6 +2,10 @@
 
 ## [2.4.5]
 
+### refactor
+
+- refactor on widget declarations for bundled widgets.
+
 ### fix
 
 - app cli was not working.

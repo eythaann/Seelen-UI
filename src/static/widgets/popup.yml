@@ -184,3 +184,4 @@ metadata:
     zh: 该小部件允许向用户显示自定义的弹出窗口。
     ja: このウィジェットにより、ユーザーにカスタマイズされたポップアップを表示できます。
 instances: Multiple
+loader: Legacy

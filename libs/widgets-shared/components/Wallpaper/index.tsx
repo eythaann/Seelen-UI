@@ -4,15 +4,15 @@ import {
   SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS,
   WallpaperConfiguration,
 } from "@seelen-ui/lib";
-import { Wallpaper, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
+import type { Wallpaper, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
 import { cx } from "@shared/styles";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { ComponentChildren } from "preact";
+import type { ComponentChildren } from "preact";
 import { useEffect, useMemo, useRef } from "preact/hooks";
 
 import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { getPlaybackRate, getWallpaperStyles } from "./utils";
+import { getPlaybackRate, getWallpaperStyles } from "./utils.ts";
 import cs from "./index.module.css";
 
 interface BaseProps {

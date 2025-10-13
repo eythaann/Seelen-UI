@@ -72,3 +72,5 @@ metadata:
     lo: ຜູ້ຈັດການ Window
     th: ผู้จัดการหน้าต่าง
     km: កម្មវិធីគ្រប់គ្រងបង្អួច
+loader: Legacy
+instances: ReplicaByMonitor

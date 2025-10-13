@@ -1,6 +1,7 @@
 use std::cell::Cell;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum WmNodeKind {
     /// node will not grow, this is the final node.
     Leaf,
@@ -115,6 +116,7 @@ impl std::fmt::Display for WmNode {
 }
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum WmNodeLifetime {
     Temporal,
     #[default]

@@ -63,7 +63,7 @@ impl SeelenWeg {
         let window = tauri::WebviewWindowBuilder::new(
             manager,
             label,
-            tauri::WebviewUrl::App("weg/index.html".into()),
+            tauri::WebviewUrl::App("react/weg/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)

@@ -1,4 +1,4 @@
-import * as logger from "./_ConsoleWrapper";
+import * as logger from "./_ConsoleWrapper.ts";
 
 function StringifyParams(params: any[]): string {
   return params.reduce((acc, current) => {

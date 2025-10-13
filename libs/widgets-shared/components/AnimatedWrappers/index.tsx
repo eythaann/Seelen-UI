@@ -1,2 +1,2 @@
-export { AnimatedDropdown } from "./AnimatedDropdown";
-export { AnimatedPopover } from "./AnimatedPopover";
+export { AnimatedDropdown } from "./AnimatedDropdown/index.tsx";
+export { AnimatedPopover } from "./AnimatedPopover/index.tsx";

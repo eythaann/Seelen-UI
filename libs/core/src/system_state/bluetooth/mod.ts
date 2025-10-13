@@ -1,7 +1,6 @@
 import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 import { List } from "../../utils/List.ts";
-import type { Enum } from "../../utils/enums.ts";
-import type { BluetoothDevice, BluetoothDevicePairShowPinRequest, BluetoothMajorClass } from "@seelen-ui/types";
+import type { BluetoothDevice, BluetoothDevicePairShowPinRequest } from "@seelen-ui/types";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import { subscribe } from "../../handlers/mod.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
@@ -66,19 +65,3 @@ export class BluetoothDevices extends List<BluetoothDevice> {
     return new this([]);
   }
 }
-
-const BluetoothMajor: Enum<BluetoothMajorClass> = {
-  Miscellaneous: "Miscellaneous",
-  Computer: "Computer",
-  Phone: "Phone",
-  NetworkAccessPoint: "NetworkAccessPoint",
-  AudioVideo: "AudioVideo",
-  Peripheral: "Peripheral",
-  Imaging: "Imaging",
-  Wearable: "Wearable",
-  Toy: "Toy",
-  Health: "Health",
-  Uncategorized: "Uncategorized",
-};
-
-export { BluetoothMajor };

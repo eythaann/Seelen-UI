@@ -1,11 +1,11 @@
-import { Dropdown, DropdownProps } from "antd";
-import { ComponentChild } from "preact";
+import { Dropdown, type DropdownProps } from "antd";
+import type { ComponentChild } from "preact";
 import { useEffect, useState } from "react";
 
-import { LegacyCustomAnimationProps } from "../domain";
+import type { LegacyCustomAnimationProps } from "../domain.ts";
 
-import { useDebounce } from "../../../hooks";
-import { cx } from "../../../styles";
+import { useDebounce } from "../../../hooks.ts";
+import { cx } from "../../../styles.ts";
 
 export interface AnimatedDropwonProps extends DropdownProps {
   animationDescription: LegacyCustomAnimationProps;

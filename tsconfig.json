@@ -6,6 +6,7 @@
     ],
     "target": "ESNext",
     "module": "esnext",
+    "verbatimModuleSyntax": true,
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

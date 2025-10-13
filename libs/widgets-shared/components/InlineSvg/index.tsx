@@ -1,5 +1,5 @@
 import { cx } from "@shared/styles";
-import { HTMLAttributes, useEffect, useState } from "react";
+import { type HTMLAttributes, useEffect, useState } from "react";
 
 import cs from "./index.module.css";
 

@@ -73,3 +73,4 @@ metadata:
     zh: 花式工具栏
     ja: ファンシーツールバー
 instances: ReplicaByMonitor
+loader: Legacy

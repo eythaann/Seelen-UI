@@ -10,6 +10,7 @@ use ts_rs::TS;
 use crate::{
     error::Result,
     resource::{ResourceKind, ResourceMetadata, SluResource, WidgetId},
+    state::Plugin,
     utils::search_resource_entrypoint,
 };
 
@@ -24,17 +25,31 @@ pub struct Widget {
     pub icon: Option<String>,
     /// Widget metadata, as texts, tags, images, etc.
     pub metadata: ResourceMetadata,
-    /// How many instances are allowed of this widget.
-    pub instances: WidgetInstanceType,
+
     /// Widget settings declaration, this is esentially a struct to be used by an
     /// builder to create the widget settings UI on the Settings window.
     pub settings: WidgetSettingsDeclarationList,
+    /// If true, the widget will not be shown on the Settings Navigation as a Tab, but it will
+    /// still be available on the widgets full list.
+    pub hidden: bool,
+    /// How many instances are allowed of this widget.
+    pub instances: WidgetInstanceType,
+
+    /// Way to load the widget
+    pub loader: WidgetLoader,
+    /// Framework used to build the widget
+    pub framework: String,
     /// Optional widget js code
     pub js: Option<String>,
     /// Optional widget css
     pub css: Option<String>,
     /// Optional widget html
     pub html: Option<String>,
+
+    /// Optional list of plugins to be installed side the widget.
+    /// Use this if your widget needs interaction with other widgets like
+    /// adding a context menu item that shows this widget.
+    pub plugins: Vec<Plugin>,
 }
 
 impl SluResource for Widget {
@@ -80,11 +95,21 @@ impl SluResource for Widget {
         if self.settings.there_are_duplicates() {
             return Err("Widget settings declaration have duplicated keys".into());
         }
+        for plugin in &self.plugins {
+            plugin.validate()?
+        }
         Ok(())
+    }
+
+    fn sanitize(&mut self) {
+        for plugin in &mut self.plugins {
+            plugin.sanitize()
+        }
     }
 }
 
-#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum WidgetInstanceType {
     /// Default behavior, only one instance of this widget is allowed.
     /// This is useful for widgets intended to work as custom config window.
@@ -96,4 +121,17 @@ pub enum WidgetInstanceType {
     /// Seelen UI will create an instance of this widget per each monitor connected.\
     /// This can be configured by the user using per monitor settings.\
     ReplicaByMonitor,
+}
+
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum WidgetLoader {
+    /// Used for old internal widgets, similar to `Internal`.
+    Legacy,
+    /// Used for internal bundled widgets, this will load the code from internal resources
+    /// and ignore the `js`, `css`, and `html` fields.
+    Internal,
+    /// Used for third party widgets, this will load the code from the `js`, `css`, and `html` fields
+    #[default]
+    ThirdParty,
 }

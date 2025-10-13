@@ -17,6 +17,7 @@ pub struct WegAppGroupItem {
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum WegItemSubtype {
     File,
     Folder,
@@ -97,6 +98,16 @@ pub enum WegItem {
     StartMenu {
         id: String,
     },
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(export, repr(enum = name))]
+pub enum WegItemType {
+    Pinned,
+    Temporal,
+    Separator,
+    Media,
+    StartMenu,
 }
 
 impl WegItem {

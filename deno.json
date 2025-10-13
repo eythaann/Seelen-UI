@@ -1,8 +1,10 @@
 {
   "lint": {
     "rules": {
+      "include": [
+        "verbatim-module-syntax"
+      ],
       "exclude": [
-        "no-sloppy-imports",
         "prefer-const",
         "jsx-button-has-type",
         "no-explicit-any",

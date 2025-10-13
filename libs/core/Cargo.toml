@@ -16,8 +16,7 @@ schemars = { version = "1.0.4", features = ["url2", "uuid1", "chrono04"] }
 regex = { workspace = true }
 sys-locale = "0.3.1"
 uuid = { workspace = true, features = ["v4", "serde"] }
-ts-rs = { git = "https://github.com/eythaann/ts-rs.git", features = [
-  "import-deno",
+ts-rs = { version = "11.1.0", features = [
   "no-serde-warnings",
   "serde-json-impl",
   "url-impl",

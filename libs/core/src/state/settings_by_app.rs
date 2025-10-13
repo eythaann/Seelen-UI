@@ -6,6 +6,7 @@ use ts_rs::TS;
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "snake_case")]
+#[ts(repr(enum = name))]
 pub enum AppExtraFlag {
     /// Start the app in the center of the screen as floating in the wm.
     Float,
@@ -20,6 +21,7 @@ pub enum AppExtraFlag {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum AppIdentifierType {
     #[serde(alias = "exe")]
     Exe,
@@ -32,6 +34,7 @@ pub enum AppIdentifierType {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum MatchingStrategy {
     #[serde(alias = "equals", alias = "legacy", alias = "Legacy")]
     Equals,

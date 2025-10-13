@@ -37,7 +37,7 @@ impl TaskSwitcher {
         let webview = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             &label.raw,
-            tauri::WebviewUrl::App("task_switcher/index.html".into()),
+            tauri::WebviewUrl::App("react/task_switcher/index.html".into()),
         )
         .title(Self::title())
         .minimizable(false)

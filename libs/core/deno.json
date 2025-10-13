@@ -59,5 +59,8 @@
     "exclude": [
       "src/**/*.test.ts"
     ]
-  }
+  },
+  "exclude": [
+    "npm"
+  ]
 }

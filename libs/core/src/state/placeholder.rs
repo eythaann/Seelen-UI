@@ -75,6 +75,7 @@ pub enum StyleValue {
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(repr(enum = name))]
 pub enum WorkspaceToolbarItemMode {
     #[default]
     Dotted,
@@ -323,21 +324,52 @@ common_item! {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(tag = "type", rename_all = "camelCase")]
+#[serde(tag = "type")]
 pub enum ToolbarItem {
+    #[serde(alias = "text")]
     Text(TextToolbarItem),
+    #[serde(alias = "generic")]
     Generic(GenericToolbarItem),
+    #[serde(alias = "date")]
     Date(DateToolbarItem),
+    #[serde(alias = "power")]
     Power(PowerToolbarItem),
+    #[serde(alias = "keyboard")]
     Keyboard(KeyboardToolbarItem),
+    #[serde(alias = "network")]
     Network(NetworkToolbarItem),
+    #[serde(alias = "bluetooth")]
     Bluetooth(BluetoothToolbarItem),
+    #[serde(alias = "media")]
     Media(MediaToolbarItem),
+    #[serde(alias = "user")]
     User(UserToolbarItem),
+    #[serde(alias = "notifications")]
     Notifications(NotificationsToolbarItem),
+    #[serde(alias = "device")]
     Device(DeviceToolbarItem),
+    #[serde(alias = "settings")]
     Settings(SettingsToolbarItem),
+    #[serde(alias = "workspaces")]
     Workspaces(WorkspaceToolbarItem),
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(export, repr(enum = name))]
+pub enum ToolbarModuleType {
+    Text,
+    Generic,
+    Date,
+    Power,
+    Keyboard,
+    Network,
+    Bluetooth,
+    Media,
+    User,
+    Notifications,
+    Device,
+    Settings,
+    Workspaces,
 }
 
 impl ToolbarItem {
