@@ -1,5 +1,5 @@
-import { PlaybackSpeed, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
-import { CSSProperties } from "preact/compat";
+import type { PlaybackSpeed, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
+import type { CSSProperties } from "preact/compat";
 
 export function getPlaybackRate(speed: PlaybackSpeed): number {
   switch (speed) {
@@ -20,6 +20,8 @@ export function getPlaybackRate(speed: PlaybackSpeed): number {
     case "x2":
       return 2;
   }
+
+  return 1;
 }
 
 export function getWallpaperStyles(config: WallpaperInstanceSettings) {

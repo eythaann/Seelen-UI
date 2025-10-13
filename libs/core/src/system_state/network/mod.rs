@@ -31,6 +31,7 @@ pub struct WlanBssEntry {
 
 #[derive(Debug, Clone, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(repr(enum = name))]
 pub enum AdapterStatus {
     Up,
     Down,

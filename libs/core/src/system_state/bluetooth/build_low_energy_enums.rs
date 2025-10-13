@@ -35,14 +35,14 @@ mod tests {
         )?;
         file.write_all(
         "// all this structs are based on official docs https://www.bluetooth.com/specifications/assigned-numbers\n\n".as_bytes()
-    )?;
+        )?;
 
         let mut category_enum = vec![
-        "#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]".to_string(),
-        "#[repr(u16)]".to_string(),
-        "pub enum BLEAppearanceCategory {".to_string(),
-        "    #[default]".to_string(),
-    ];
+            "#[repr(u16)]".to_string(),
+            "#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]".to_string(),
+            "pub enum BLEAppearanceCategory {".to_string(),
+            "    #[default]".to_string(),
+        ];
 
         let mut appearance_enum = vec![
             "#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]".to_string(),

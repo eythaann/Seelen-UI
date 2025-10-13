@@ -1,5 +1,5 @@
 import { SeelenCommand } from "@seelen-ui/lib";
-import { ResourceText } from "@seelen-ui/lib/types";
+import type { ResourceText } from "@seelen-ui/lib/types";
 import { invoke } from "@tauri-apps/api/core";
 
 export function getRootContainer(): HTMLElement {

@@ -806,10 +806,10 @@ pub enum BLEAppearanceIndustrialToolsSubCategory {
     Reserved(u16),
 }
 
+#[repr(u16)]
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
-#[repr(u16)]
 pub enum BLEAppearanceCategory {
     #[default]
     Unknown = 0x0,

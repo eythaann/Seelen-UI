@@ -1,0 +1,6 @@
+id: "@seelen/power-menu"
+metadata:
+  displayName: Power Menu
+instances: Single
+loader: Internal
+hidden: true

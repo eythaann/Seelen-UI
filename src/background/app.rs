@@ -1,4 +1,7 @@
-use std::sync::{atomic::AtomicBool, Arc, LazyLock};
+use std::{
+    collections::HashMap,
+    sync::{atomic::AtomicBool, Arc, LazyLock},
+};
 
 use parking_lot::Mutex;
 use seelen_core::{handlers::SeelenEvent, system_state::MonitorId};
@@ -25,6 +28,7 @@ use crate::{
     widgets::{
         launcher::SeelenRofi,
         task_switcher::TaskSwitcher,
+        third_party::WidgetInstance,
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
         window_manager::instance::WindowManagerV2,
@@ -52,6 +56,8 @@ pub struct Seelen {
     pub wall: Option<SeelenWall>,
     pub rofi: Option<SeelenRofi>,
     pub task_switcher: Option<TaskSwitcher>,
+    #[allow(dead_code)]
+    pub widgets: HashMap<String, WidgetInstance>,
 }
 
 /* ============== Getters ============== */

@@ -105,6 +105,7 @@ impl Default for ResourceMetadata {
 // =============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum ResourceKind {
     Theme,
     IconPack,
@@ -117,6 +118,7 @@ pub enum ResourceKind {
 // =============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum ResourceStatus {
     /// Initial state
     Draft,
@@ -133,6 +135,7 @@ pub enum ResourceStatus {
 // =============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum ResourceAttribute {
     /// this resource is not working
     NotWorking,

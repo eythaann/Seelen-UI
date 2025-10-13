@@ -1,1 +1,1 @@
-export { SlPopup as AnimatedPopover } from "../../SlPopup";
+export { SlPopup as AnimatedPopover } from "../../SlPopup/index.tsx";

@@ -1,0 +1,6 @@
+id: "@seelen/workspaces-viewer"
+metadata:
+  displayName: Workspaces Viewer
+instances: Single
+loader: Internal
+hidden: true

@@ -1,5 +1,5 @@
 import { cx } from "@shared/styles";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 import cs from "./infra.module.css";
 

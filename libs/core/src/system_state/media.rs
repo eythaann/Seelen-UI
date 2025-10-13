@@ -50,6 +50,7 @@ pub struct MediaDeviceSession {
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
+#[ts(repr(enum = name))]
 pub enum MediaDeviceType {
     Input,
     Output,

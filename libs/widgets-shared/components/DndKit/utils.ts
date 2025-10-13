@@ -1,4 +1,4 @@
-import { DragOverEvent, UniqueIdentifier } from "@dnd-kit/core";
+import type { DragOverEvent, UniqueIdentifier } from "@dnd-kit/core";
 
 export interface DndContainer<T extends UniqueIdentifier> {
   id: T;

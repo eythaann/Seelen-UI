@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use ts_rs::TS;
 
 #[derive(Debug, Copy, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
 pub enum FolderType {
     Unknown,
     Recent,

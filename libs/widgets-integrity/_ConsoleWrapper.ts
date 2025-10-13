@@ -1,5 +1,5 @@
 // this file is a modification of https://github.com/tauri-apps/tauri-plugin-log/blob/v2/guest-js/index.ts
-import { _invoke, WebviewInformation } from "./_tauri";
+import { _invoke, WebviewInformation } from "./_tauri.ts";
 
 export interface LogOptions {
   file?: string;

@@ -1,4 +1,4 @@
-import { Component, Ref, RefCallback } from "preact";
+import type { Component, Ref, RefCallback } from "preact";
 
 export function assignRef<T>(
   ref: Ref<T> | undefined | null,

@@ -1,8 +1,8 @@
-import { IconName } from "@shared/components/Icon/icons";
-import { HTMLAttributes } from "preact/compat";
+import type { IconName } from "@shared/components/Icon/icons";
+import type { HTMLAttributes } from "preact/compat";
 
-import { cx } from "../../styles";
-import InlineSVG from "../InlineSvg";
+import { cx } from "../../styles.ts";
+import InlineSVG from "../InlineSvg/index.tsx";
 import cs from "./index.module.css";
 
 interface ReactIconProps extends HTMLAttributes<HTMLElement> {
@@ -19,13 +19,13 @@ export function Icon(props: ReactIconProps) {
   return (
     <InlineSVG
       {...rest}
-      src={`../icons/${iconName}.svg`}
+      src={`/icons/${iconName}.svg`}
       className={cx("slu-icon", cs.reactIcon, className)}
       style={{ height: size, color, ...(style || {}) }}
     />
   );
 }
 
-export * from "./FileIcon";
-export * from "./MissingIcon";
-export * from "./SpecificIcon";
+export * from "./FileIcon.tsx";
+export * from "./MissingIcon.tsx";
+export * from "./SpecificIcon.tsx";

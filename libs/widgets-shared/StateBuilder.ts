@@ -1,5 +1,5 @@
-import { Action, ActionReducerMapBuilder, CaseReducer, PayloadAction, Slice } from "@reduxjs/toolkit";
-import { cast, isStrictObject, prettify, TupleReduce } from "readable-types";
+import type { Action, ActionReducerMapBuilder, CaseReducer, PayloadAction, Slice } from "@reduxjs/toolkit";
+import type { cast, isStrictObject, prettify, TupleReduce } from "readable-types";
 
 type ReducersFor<T> = {
   [K in keyof T as `set${Capitalize<cast<K, string>>}`]: CaseReducer<

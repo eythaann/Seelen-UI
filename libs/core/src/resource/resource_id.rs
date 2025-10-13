@@ -93,7 +93,7 @@ impl ResourceId {
     /// # Safety
     ///
     /// The string is a valid resource id
-    pub fn name(&self) -> String {
+    pub fn resource_name(&self) -> String {
         self.0.split('/').next_back().unwrap().to_string()
     }
 }

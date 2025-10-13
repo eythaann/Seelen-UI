@@ -1,8 +1,8 @@
 import { cx } from "@shared/styles";
-import { UnlistenFn } from "@tauri-apps/api/event";
-import React, { ImgHTMLAttributes } from "react";
+import type { UnlistenFn } from "@tauri-apps/api/event";
+import React, { type ImgHTMLAttributes } from "react";
 
-import { iconPackManager } from "./common";
+import { iconPackManager } from "./common.ts";
 import cs from "./index.module.css";
 
 interface MissingIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {}

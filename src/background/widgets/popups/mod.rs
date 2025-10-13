@@ -42,7 +42,7 @@ impl PopupsManager {
         let window = WebviewWindowBuilder::new(
             manager,
             label.raw,
-            tauri::WebviewUrl::App("popup/index.html".into()),
+            tauri::WebviewUrl::App("react/popup/index.html".into()),
         )
         .center()
         .minimizable(false)

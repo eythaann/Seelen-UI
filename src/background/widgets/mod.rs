@@ -39,7 +39,7 @@ pub fn show_settings() -> Result<()> {
             tauri::WebviewWindowBuilder::new(
                 handle,
                 label.raw,
-                tauri::WebviewUrl::App("settings/index.html".into()),
+                tauri::WebviewUrl::App("react/settings/index.html".into()),
             )
             .title("Settings")
             .inner_size(800.0, 500.0)

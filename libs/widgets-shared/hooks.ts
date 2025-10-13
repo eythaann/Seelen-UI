@@ -1,5 +1,12 @@
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { debounce, DebouncedFunc, DebouncedFuncLeading, isEqual, throttle, ThrottleSettings } from "lodash";
+import {
+  debounce,
+  type DebouncedFunc,
+  type DebouncedFuncLeading,
+  isEqual,
+  throttle,
+  type ThrottleSettings,
+} from "lodash";
 import { useEffect, useMemo, useRef } from "react";
 
 export function useWindowFocusChange(cb: (focused: boolean) => void) {

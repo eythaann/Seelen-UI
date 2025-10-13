@@ -1,5 +1,6 @@
-#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]
 #[repr(u32)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum BluetoothMajorServiceClass {
     LimitedDiscoverableMode = 0x1,
     LowEnergyAudio = 0x2,
@@ -27,6 +28,7 @@ pub enum BluetoothMajorServiceClass {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(repr(enum = name))]
 pub enum BluetoothMajorClass {
     /// The ”Miscellaneous” Major Device Class is used where a more specific
     /// Major Device Class code is not suitable.\
@@ -116,6 +118,7 @@ pub enum BluetoothPhoneMinor {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(repr(enum = name))]
 pub enum BluetoothNetworkMinor {
     FullyAvailable = 0x0,
     Used01To17Percent = 0x1,
@@ -175,6 +178,7 @@ pub enum BluetoothAudioVideoMinor {
 #[derive(
     Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS,
 )]
+#[ts(repr(enum = name))]
 pub enum BluetoothPeripheralMinor {
     /// Code for device not specified
     #[default]
@@ -209,6 +213,7 @@ pub enum BluetoothPeripheralSubMinor {
 /// 4 bits, flags that can be combined
 #[repr(u8)]
 #[derive(Debug, Copy, Clone, Eq, PartialEq, IntoPrimitive, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
 pub enum BluetoothImagingMinor {
     Display = 0x1,
     Camera = 0x2,

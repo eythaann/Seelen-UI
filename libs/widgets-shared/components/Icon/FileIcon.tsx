@@ -1,11 +1,11 @@
 import { IconPackManager } from "@seelen-ui/lib";
-import { SeelenCommandGetIconArgs } from "@seelen-ui/lib/types";
+import type { SeelenCommandGetIconArgs } from "@seelen-ui/lib/types";
 import { cx } from "@shared/styles";
-import { UnlistenFn } from "@tauri-apps/api/event";
-import React, { ImgHTMLAttributes } from "react";
+import type { UnlistenFn } from "@tauri-apps/api/event";
+import React, { type ImgHTMLAttributes } from "react";
 
-import { iconPackManager } from "./common";
-import { MissingIcon } from "./MissingIcon";
+import { iconPackManager } from "./common.ts";
+import { MissingIcon } from "./MissingIcon.tsx";
 import cs from "./index.module.css";
 
 interface FileIconProps extends SeelenCommandGetIconArgs, Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {
