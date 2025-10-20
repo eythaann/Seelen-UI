@@ -121,4 +121,11 @@ impl Process {
             path: self.program_path().ok(),
         }
     }
+
+    pub fn is_seelen(&self) -> bool {
+        if let Ok(exe) = self.program_path() {
+            return exe.ends_with("seelen-ui.exe");
+        }
+        false
+    }
 }

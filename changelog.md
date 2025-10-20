@@ -2,6 +2,12 @@
 
 ## [2.4.5]
 
+### features
+
+- new power menu widget.
+- widgets now can declare plugins to be loaded.
+- new fields on widgets metadata.
+
 ### refactor
 
 - refactor on widget declarations for bundled widgets.

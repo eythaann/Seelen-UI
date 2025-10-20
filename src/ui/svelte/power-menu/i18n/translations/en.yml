@@ -1,0 +1,8 @@
+goodbye: Goodbye {{0}}
+hibernate: Hibernate
+lock: Lock session
+log_out: Log out
+reboot: Reboot
+shutdown: Power off
+suspend: Suspend
+uptime: Uptime

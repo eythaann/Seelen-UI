@@ -134,10 +134,6 @@ export class Widget {
       this.webview.setShadow(false), // no shadows
       // hide from native shell
       this.webview.setSkipTaskbar(true),
-      // set as hidden (no manage) window on seelen ui
-      this.webview.title().then((title) => {
-        this.webview.setTitle(`.${title}`);
-      }),
       // as a (desktop/overlay) widget we don't wanna allow nothing of these
       this.webview.setMinimizable(false),
       this.webview.setMaximizable(false),

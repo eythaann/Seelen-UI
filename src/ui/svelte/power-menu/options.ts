@@ -11,7 +11,7 @@ export const options: Option[] = [
     onClick() {},
   },
   {
-    key: "logout",
+    key: "log_out",
     icon: "IoLogOutOutline",
     onClick() {},
   },
@@ -26,7 +26,7 @@ export const options: Option[] = [
     onClick() {},
   },
   {
-    key: "sleep",
+    key: "suspend",
     icon: "BiMoon",
     onClick() {},
   },

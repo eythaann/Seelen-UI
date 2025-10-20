@@ -1,4 +1,12 @@
-import { invoke, type Rect, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { invoke, type Rect, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
+import { locale } from "./i18n/index.ts";
+import { writable } from "svelte/store";
+
+let settings = writable(await Settings.getAsync());
+Settings.onChange((s) => settings.set(s));
+settings.subscribe((settings) => {
+  locale.set(settings.language || "en");
+});
 
 let monitors = $state(await invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, (e) => {
@@ -21,6 +29,7 @@ subscribe(SeelenEvent.UserChanged, (e) => {
   user = e.payload;
 });
 
+export type State = typeof state;
 export const state = {
   get monitors() {
     return monitors;
