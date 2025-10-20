@@ -62,16 +62,15 @@ impl FullState {
         }
     }
 
-    pub fn is_widget_enable_on_monitor(&self, widget: &Widget, monitor_id: &MonitorId) -> bool {
-        // new widgets are enabled by default
-        let is_globally_enabled = self
-            .settings
-            .by_widget
-            .others
-            .get(&widget.id)
-            .is_none_or(|config| config.enabled);
+    pub fn is_widget_enabled(&self, widget: &Widget) -> bool {
+        match self.settings.by_widget.others.get(&widget.id) {
+            Some(config) => config.enabled,
+            None => widget.metadata.internal.bundled, // only internal widgets are enabled by default
+        }
+    }
 
-        if !is_globally_enabled {
+    pub fn is_widget_enable_on_monitor(&self, widget: &Widget, monitor_id: &MonitorId) -> bool {
+        if !self.is_widget_enabled(widget) {
             return false;
         }
 

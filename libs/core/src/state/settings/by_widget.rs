@@ -27,7 +27,7 @@ pub struct SettingsByWidget {
     pub others: HashMap<WidgetId, ThirdPartyWidgetSettings>,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default)]
 pub struct ThirdPartyWidgetSettings {
     /// Enable or disable the widget
@@ -40,14 +40,4 @@ pub struct ThirdPartyWidgetSettings {
     pub instances: Option<HashMap<Uuid, HashMap<String, TsUnknown>>>,
     #[serde(flatten)]
     pub rest: HashMap<String, TsUnknown>,
-}
-
-impl Default for ThirdPartyWidgetSettings {
-    fn default() -> Self {
-        Self {
-            enabled: true, // new widgets are enabled by default
-            instances: None,
-            rest: Default::default(),
-        }
-    }
 }

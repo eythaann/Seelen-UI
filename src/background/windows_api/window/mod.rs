@@ -246,7 +246,9 @@ impl Window {
     }
 
     pub fn is_fullscreen(&self) -> bool {
-        WindowsApi::is_fullscreen(self.0).unwrap_or(false) && !self.is_desktop()
+        WindowsApi::is_fullscreen(self.0).unwrap_or(false)
+            && !self.is_desktop()
+            && !self.process().is_seelen() // we ignore seelen widgets
     }
 
     /// is the window an Application Frame Host
@@ -298,18 +300,16 @@ impl Window {
     }
 
     pub fn is_seelen_overlay(&self) -> bool {
-        if let Ok(exe) = self.process().program_path() {
-            return exe.ends_with("seelen-ui.exe")
-                && [
-                    FancyToolbar::TITLE,
-                    WindowManagerV2::TITLE,
-                    SeelenWeg::TITLE,
-                    SeelenRofi::TITLE,
-                    SeelenWall::TITLE,
-                ]
-                .contains(&self.title().as_str());
+        self.process().is_seelen() && {
+            [
+                FancyToolbar::TITLE,
+                WindowManagerV2::TITLE,
+                SeelenWeg::TITLE,
+                SeelenRofi::TITLE,
+                SeelenWall::TITLE,
+            ]
+            .contains(&self.title().as_str())
         }
-        false
     }
 
     /// read inner called doc for more info

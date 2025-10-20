@@ -47,6 +47,17 @@ impl ResourceManager {
                 let mut widget = Widget::load(path)?;
                 widget.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_widgets_path());
+
+                widget
+                    .plugins
+                    .retain(|plugin| !plugin.metadata.internal.path.starts_with(path));
+
+                for mut plugin in widget.plugins.clone() {
+                    plugin.metadata.internal = widget.metadata.internal.clone();
+                    self.plugins
+                        .upsert(path.join(plugin.id.to_string()), Arc::new(plugin));
+                }
+
                 self.widgets.upsert(path.to_path_buf(), Arc::new(widget));
             }
             ResourceKind::Plugin => {
