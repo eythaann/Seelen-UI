@@ -100,13 +100,13 @@ general:
     selected: 현재 아이콘 팩
   language: 언어
   performance_mode:
-    on_battery: 배터리에
-    on_energy_saver: 에너지 세이버에서
+    on_battery: 배터리 사용 시
+    on_energy_saver: 에너지 세이버 사용 시
     options:
-      disabled: 장애가 있는
-      extreme: 극심한
+      disabled: 비활성화
+      extreme: 고성능
       minimal: 최소
-    plugged: 플러그 또는 충전
+    plugged: 전원 사용 시
   startup: 시작 시 실행
   theme:
     available: 사용 가능한 테마
@@ -145,7 +145,7 @@ open: 열기
 quit: 종료
 remove: 제거
 reset_all_to_default: 모두 기본값으로 초기화
-reset_to_default: 기본값으로 재설정
+reset_to_default: 기본값으로 초기화
 resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
   delete: 리소스 삭제
@@ -159,52 +159,52 @@ save: 저장
 save_and_restart: 저장 및 재시작
 see_more: 자세히 보기
 shortcuts:
-  enable: 내장 단축키 시스템을 활성화하십시오
-  enable_tooltip: Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
+  enable: 내장 단축키 시스템 활성화
+  enable_tooltip: Seelen UI 클라이언트를 사용하여 직접 단축키 시스템을 구현하는 경우 비활성화하십시오.
   labels:
-    create_new_workspace: 새 작업 공간을 만듭니다
-    cycle_stack_next: 다음에 사이클 스택
-    cycle_stack_prev: 사이클 스택 이전
-    cycle_wallpaper_next: 다음 벽지로 변경하십시오
-    cycle_wallpaper_prev: 이전 벽지로 변경하십시오
-    decrease_height: 높이를 줄입니다
-    decrease_width: 너비를 줄입니다
-    destroy_current_workspace: 현재 작업 공간을 파괴하십시오
-    focus_bottom: 초점 바닥
-    focus_latest: 초점 최신
-    focus_left: 초점이 남았습니다
-    focus_right: 집중적으로
-    focus_top: 포커스 탑
-    increase_height: 높이를 늘리십시오
-    increase_width: 폭을 늘리십시오
-    misc_force_quit: 힘을 끊으십시오
+    create_new_workspace: 새 작업 공간 생성
+    cycle_stack_next: 다음 사이클 스택
+    cycle_stack_prev: 이전 사이클 스택
+    cycle_wallpaper_next: 다음 배경화면으로 변경
+    cycle_wallpaper_prev: 이전 배경화면으로 변경
+    decrease_height: 높이 줄이기
+    decrease_width: 너비 줄이기
+    destroy_current_workspace: 현재 작업 공간 삭제
+    focus_bottom: 아래로 포커스 이동
+    focus_latest: 포커스 창으로 포커스 이동
+    focus_left: 왼쪽으로 포커스 이동
+    focus_right: 오른쪽으로 포커스 이동
+    focus_top: 위로 포커스 이동
+    increase_height: 높이 늘리기
+    increase_width: 너비 늘리기
+    misc_force_quit: 강제 종료
     misc_force_restart: 강제 재시작
-    misc_open_settings: 열기 설정
+    misc_open_settings: 설정 열기
     misc_toggle_lock_tracing: 토글 잠금 추적 (로그)
-    misc_toggle_win_event_tracing: 토글 윈 이벤트 추적 (로그)
-    move_to_workspace: 작업 공간으로 이동 {{0}}
-    move_window_down: 창문을 바닥으로 이동하십시오
-    move_window_left: 왼쪽으로 창을 이동하십시오
-    move_window_right: 창을 오른쪽으로 이동하십시오
-    move_window_up: 창을 맨 위로 이동하십시오
-    pause_tiling: 타일링 윈도우 관리자를 일시 중지합니다
-    reserve_bottom: 바닥을 예약하십시오
-    reserve_float: 플로트 예비
-    reserve_left: 왼쪽 예비
-    reserve_right: 오른쪽을 예약하십시오
-    reserve_stack: 예비 스택
-    reserve_top: 탑을 예약하십시오
-    restore_sizes: 크기를 복원하십시오
-    send_to_workspace: 작업 공간으로 보내 {{0}}
-    start_weg_app: 초점 또는 시작 응용 프로그램 {{0}}
-    switch_to_next_workspace: 다음 작업 공간으로 전환하십시오
-    switch_to_previous_workspace: 이전 작업 공간으로 전환하십시오
-    switch_workspace: 작업 공간으로 전환 {{0}}
+    misc_toggle_win_event_tracing: 토글 윈도우 이벤트 추적 (로그)
+    move_to_workspace: 작업 공간 {{0}} 으로 이동
+    move_window_down: 아래로 윈도우 이동
+    move_window_left: 왼쪽으로 윈도우 이동
+    move_window_right: 오른쪽으로 윈도우 이동
+    move_window_up: 위로 윈도우 이동
+    pause_tiling: 타일링 윈도우 관리자를 일시 중지
+    reserve_bottom: 아래 리저브
+    reserve_float: 플로트 리저브
+    reserve_left: 왼쪽 리저브
+    reserve_right: 오른쪽 리저브
+    reserve_stack: 스택 리저브
+    reserve_top: 상단 리저브
+    restore_sizes: 크기 복원
+    send_to_workspace: 작업 공간 {{0}} 으로 보내기
+    start_weg_app: 응용 프로그램 {{0}} 에 포커스 또는 시작
+    switch_to_next_workspace: 다음 작업 공간으로 전환
+    switch_to_previous_workspace: 이전 작업 공간으로 전환
+    switch_workspace: 작업 공간 {{0}} 으로 전환
     toggle_float: 토글 윈도우 플로트 모드
     toggle_launcher: 토글 런처
     toggle_monocle: 작업 공간 모노클 모드 토글
   readonly_tooltip: 이것은 읽기 전용 단축키입니다
-  reset: 기본값으로 재설정하십시오
+  reset: 기본값으로 초기화하기
 sides:
   bottom: 아래
   left: 왼쪽
@@ -286,7 +286,7 @@ weg:
       label: 고정된 항목 가시성
       when_primary: 모니터가 기본인 경우
     show_instance_counter: 열린 창 카운터 표시
-    show_window_title: 열린 창 제목 표시(가로만)
+    show_window_title: 열린 창 제목 표시 (가로만)
     size: 항목 크기
     temporal_visibility:
       all: 모두
@@ -308,9 +308,9 @@ widget:
   instances: 인스턴스
 wm:
   animations:
-    duration: 애니메이션 지속 시간 (MS)
-    ease_function: 애니메이션 완화 기능
-    enable: 창의 애니메이션을 활성화합니다
+    duration: 애니메이션 지속 시간 (ms)
+    ease_function: 부드러운 애니메이션 종류
+    enable: 애니메이션 활성화
   author: 작성자
   border:
     enable: 창 테두리 활성화
