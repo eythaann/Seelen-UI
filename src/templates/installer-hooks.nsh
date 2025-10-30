@@ -7,6 +7,12 @@
   DetailPrint 'Exec: $1'
   nsExec::Exec $1
   Pop $0
+
+  ; Clean static folder to remove assets from previous versions
+  ${If} ${FileExists} "$INSTDIR\static\*.*"
+    DetailPrint 'Cleaning static folder from previous installation...'
+    RMDir /r "$INSTDIR\static"
+  ${EndIf}
 !macroend
 
 !macro NSIS_HOOK_POSTINSTALL
