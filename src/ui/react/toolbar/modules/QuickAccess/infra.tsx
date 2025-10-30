@@ -1,5 +1,4 @@
-import { useComputed } from "@preact/signals";
-import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent } from "@seelen-ui/lib";
 import type { Brightness, SettingsToolbarItem } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
 import { Icon } from "@shared/components/Icon";
@@ -18,7 +17,7 @@ import { Selectors } from "../shared/store/app.ts";
 
 import type { RootState } from "../shared/store/domain.ts";
 
-import { $settings } from "../shared/state/mod.ts";
+import { emit } from "@tauri-apps/api/event";
 
 interface Props {
   module: SettingsToolbarItem;
@@ -35,7 +34,6 @@ export function SettingsModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
   const [brightness, setBrightness] = useState<Brightness | null>(null);
 
-  const showHibernate = useComputed(() => $settings.value.showHibernateButton);
   const defaultInput = useSelector((state: RootState) =>
     Selectors.mediaInputs(state).find((d) => d.isDefaultMultimedia)
   );
@@ -73,34 +71,17 @@ export function SettingsModule({ module }: Props) {
       onOpenChange={setOpenPreview}
       content={
         <BackgroundByLayersV2
-          className="fast-settings"
-          prefix="fast-settings"
+          className="quick-access"
+          prefix="quick-access"
           onContextMenu={(e) => e.stopPropagation()}
         >
-          <div className="fast-settings-title">
+          <div className="quick-access-header">
             <span>{t("settings.title")}</span>
-            <Tooltip
-              mouseLeaveDelay={0}
-              arrow={false}
-              title={t("settings.app_settings")}
-              placement="left"
-            >
-              <button
-                className="fast-settings-item-title-button"
-                onClick={() => invoke(SeelenCommand.ShowAppSettings)}
-              >
-                <Icon iconName="RiSettings4Fill" />
-              </button>
-            </Tooltip>
           </div>
 
+          {brightness && <span className="quick-access-label">{t("settings.brightness")}</span>}
           {brightness && (
-            <span className="fast-settings-label">
-              {t("settings.brightness")}
-            </span>
-          )}
-          {brightness && (
-            <div className="fast-settings-item">
+            <div className="quick-access-item">
               <Button
                 type="text"
                 onClick={() => {
@@ -122,12 +103,10 @@ export function SettingsModule({ module }: Props) {
           )}
 
           {!!(defaultInput || defaultOutput) && (
-            <span className="fast-settings-label">
-              {t("media.default_multimedia_volume")}
-            </span>
+            <span className="quick-access-label">{t("media.default_multimedia_volume")}</span>
           )}
           {!!defaultOutput && (
-            <div className="fast-settings-item">
+            <div className="quick-access-item">
               <VolumeControl
                 value={defaultOutput.volume}
                 deviceId={defaultOutput.id}
@@ -141,81 +120,44 @@ export function SettingsModule({ module }: Props) {
             </div>
           )}
           {!!defaultInput && (
-            <div className="fast-settings-item">
+            <div className="quick-access-item">
               <VolumeControl
                 value={defaultInput.volume}
                 deviceId={defaultInput.id}
-                icon={
-                  <Icon
-                    iconName={defaultInput.muted ? "BiMicrophoneOff" : "BiMicrophone"}
-                  />
-                }
+                icon={<Icon iconName={defaultInput.muted ? "BiMicrophoneOff" : "BiMicrophone"} />}
               />
             </div>
           )}
 
-          <span className="fast-settings-label">{t("settings.power")}</span>
-          <div className="fast-settings-item fast-settings-power">
+          <span className="quick-access-label"></span>
+          <div className="quick-access-footer">
             <Tooltip
               mouseLeaveDelay={0}
               arrow={false}
-              title={t("settings.lock")}
+              title={t("settings.app_settings")}
+              placement="left"
             >
               <button
-                className="fast-settings-item-button"
-                onClick={() => invoke(SeelenCommand.Lock)}
+                className="quick-access-footer-button"
+                onClick={() => invoke(SeelenCommand.ShowAppSettings)}
               >
-                <Icon iconName="BiLock" />
+                <Icon iconName="RiSettings4Fill" />
               </button>
             </Tooltip>
+
             <Tooltip
               mouseLeaveDelay={0}
               arrow={false}
-              title={t("settings.sleep")}
+              title={t("settings.power")}
+              placement="bottom"
             >
               <button
-                className="fast-settings-item-button"
-                onClick={() => invoke(SeelenCommand.Suspend)}
+                className="quick-access-footer-button"
+                onClick={() => {
+                  emit(SeelenEvent.WidgetTriggered, { id: "@seelen/power-menu" });
+                }}
               >
-                <Icon iconName="BiMoon" />
-              </button>
-            </Tooltip>
-            {showHibernate && (
-              <Tooltip
-                mouseLeaveDelay={0}
-                arrow={false}
-                title={t("settings.hibernate")}
-              >
-                <button
-                  className="fast-settings-item-button"
-                  onClick={() => invoke(SeelenCommand.Hibernate)}
-                >
-                  <Icon iconName="FiClock" />
-                </button>
-              </Tooltip>
-            )}
-            <Tooltip
-              mouseLeaveDelay={0}
-              arrow={false}
-              title={t("settings.restart")}
-            >
-              <button
-                className="fast-settings-item-button"
-                onClick={() => invoke(SeelenCommand.Restart)}
-              >
-                <Icon iconName="VscDebugRestart" />
-              </button>
-            </Tooltip>
-            <Tooltip
-              mouseLeaveDelay={0}
-              arrow={false}
-              title={t("settings.shutdown")}
-            >
-              <button
-                className="fast-settings-item-button"
-                onClick={() => invoke(SeelenCommand.Shutdown)}
-              >
-                <Icon iconName="GrPower" />
+                <Icon iconName="IoPower" />
               </button>
             </Tooltip>
           </div>

@@ -14,6 +14,10 @@ import { EvaluateAction } from "../app.tsx";
 
 import { $toolbar_state } from "../../shared/state/items.ts";
 import { SanboxedComponent } from "./EvaluatedComponents.tsx";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { emit } from "@tauri-apps/api/event";
+import { SeelenEvent } from "libs/core/npm/esm/mod";
+import { toPhysicalPixels } from "@shared";
 
 export interface InnerItemProps extends HTMLAttributes<HTMLDivElement> {
   module: Omit<ToolbarItem, "type">;
@@ -49,10 +53,21 @@ export function InnerItem(props: InnerItemProps) {
   const { t } = useTranslation();
 
   const [scope, setScope] = useState<Record<string, any>>({
-    env,
-    t,
     ...extraVars,
     ...fetchedData,
+    env,
+    t,
+    trigger: async (widgetId: string) => {
+      const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();
+
+      // get position of the element on the screen
+      const element = document.getElementById(id)!;
+      const domRect = element.getBoundingClientRect();
+      const x = windowX + toPhysicalPixels(domRect.left);
+      const y = windowY + toPhysicalPixels(domRect.top);
+
+      emit(SeelenEvent.WidgetTriggered, { id: widgetId, desiredPosition: [x, y] });
+    },
   });
 
   useEffect(() => {
@@ -62,8 +77,6 @@ export function InnerItem(props: InnerItemProps) {
   useDeepCompareEffect(() => {
     setScope((s) => ({ ...s, ...extraVars, ...fetchedData }));
   }, [extraVars, fetchedData]);
-
-  console.log(rest);
 
   return (
     <Tooltip

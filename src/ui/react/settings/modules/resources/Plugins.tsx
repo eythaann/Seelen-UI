@@ -62,11 +62,7 @@ export function PluginsView() {
         </SettingsOption>
         <SettingsOption>
           <span>{t("resources.discover")}:</span>
-          <Button
-            href="https://seelen.io/resources/s?category=Plugin"
-            target="_blank"
-            type="link"
-          >
+          <Button href="https://seelen.io/resources/s?category=Plugin" target="_blank" type="link">
             https://seelen.io/resources/s?category=Plugin
           </Button>
         </SettingsOption>
@@ -81,11 +77,6 @@ export function PluginsView() {
                 key={plugin.id}
                 resource={plugin}
                 kind={ResourceKind.Plugin}
-                actions={plugin.metadata.bundled ? undefined : (
-                  <Button size="small" type="text" danger>
-                    <Icon iconName="IoTrash" />
-                  </Button>
-                )}
               />
             ))}
           </React.Fragment>

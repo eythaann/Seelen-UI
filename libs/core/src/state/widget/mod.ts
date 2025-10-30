@@ -1,5 +1,12 @@
-import type { ThirdPartyWidgetSettings, Widget as IWidget, WidgetId, WsdGroupEntry } from "@seelen-ui/types";
-import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
+import {
+  type ThirdPartyWidgetSettings,
+  type Widget as IWidget,
+  type WidgetId,
+  WidgetPreset,
+  type WidgetTriggeredArgs,
+  type WsdGroupEntry,
+} from "@seelen-ui/types";
+import { SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
 import { List } from "../../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { getCurrentWebviewWindow, type WebviewWindow } from "@tauri-apps/api/webviewWindow";
@@ -7,6 +14,8 @@ import { decodeBase64Url } from "@std/encoding/base64url";
 import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";
+import { autoSizeWebviewBasedOnContent } from "./sizing.ts";
+import type { EventCallback } from "@tauri-apps/api/event";
 
 export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
 export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
@@ -73,9 +82,7 @@ export class Widget {
 
   private static getDecodedWebviewLabel(): [WidgetId, string | undefined] {
     const encondedLabel = getCurrentWebviewWindow().label;
-    const decodedLabel = new TextDecoder().decode(
-      decodeBase64Url(encondedLabel),
-    );
+    const decodedLabel = new TextDecoder().decode(decodeBase64Url(encondedLabel));
     const [id, query] = decodedLabel.split("?");
     if (!id) {
       throw new Error("Missing widget id on webview label");
@@ -92,22 +99,14 @@ export class Widget {
   static getCurrent(): Widget {
     const scope = globalThis as ExtendedGlobalThis;
     if (!scope.__SLU_WIDGET) {
-      throw new Error(
-        "The library is being used on a non Seelen UI environment",
-      );
+      throw new Error("The library is being used on a non Seelen UI environment");
     }
-    return scope.__SLU_WIDGET_INSTANCE ||
-      (scope.__SLU_WIDGET_INSTANCE = new Widget(scope.__SLU_WIDGET));
+    return (
+      scope.__SLU_WIDGET_INSTANCE || (scope.__SLU_WIDGET_INSTANCE = new Widget(scope.__SLU_WIDGET))
+    );
   }
 
-  /** @deprecated Use `getCurrent` instead, this method will be removed on future */
-  private static getCurrentAsync(): Widget {
-    return this.getCurrent();
-  }
-
-  private static getEntryDefaultValues(
-    entry: WsdGroupEntry,
-  ): Record<string, unknown> {
+  private static getEntryDefaultValues(entry: WsdGroupEntry): Record<string, unknown> {
     const config: Record<string, unknown> = {
       [entry.config.key]: entry.config.defaultValue,
     };
@@ -128,7 +127,7 @@ export class Widget {
     return config;
   }
 
-  private commonConfig(): Array<Promise<void>> {
+  private applyInvisiblePreset(): Array<Promise<void>> {
     return [
       this.webview.setDecorations(false), // no title bar
       this.webview.setShadow(false), // no shadows
@@ -141,29 +140,101 @@ export class Widget {
     ];
   }
 
-  /** Will set this instance as a desktop widget */
-  async setAsDesktopWidget(): Promise<void> {
+  /** Will apply the recommended settings for a desktop widget */
+  private async applyDesktopPreset(): Promise<void> {
     await Promise.all([
-      ...this.commonConfig(),
+      ...this.applyInvisiblePreset(),
       // Desktop widgets are always on bottom
       this.webview.setAlwaysOnBottom(true),
     ]);
+    await this.persistPositionAndSize();
   }
 
-  /** Will set this instance as an overlay widget */
-  async setAsOverlayWidget(): Promise<void> {
+  /** Will apply the recommended settings for an overlay widget */
+  private async applyOverlayPreset(): Promise<void> {
     await Promise.all([
-      ...this.commonConfig(),
+      ...this.applyInvisiblePreset(),
       // Overlay widgets are always on top
       this.webview.setAlwaysOnTop(true),
     ]);
+  }
+
+  /** Will apply the recommended settings for a popup widget */
+  private async applyPopupPreset(): Promise<void> {
+    await Promise.all([...this.applyInvisiblePreset(), this.webview.setResizable(false)]);
+
+    // auto close on focus lost
+    const closeOnTimeout = debounce(() => {
+      // this.webview.close(); todo
+    }, 5000);
+
+    this.webview.onFocusChanged((e) => {
+      if (e.payload) {
+        closeOnTimeout.cancel();
+      } else {
+        this.webview.hide();
+        closeOnTimeout();
+      }
+    });
+
+    this.onTrigger(async ({ desiredPosition }) => {
+      if (desiredPosition) {
+        let x = desiredPosition[0];
+        let y = desiredPosition[1];
+
+        const monitor = await monitorFromPoint(x, y);
+        if (monitor) {
+          const { width, height } = await this.webview.outerSize();
+          const x2 = x + width;
+          const y2 = y + height;
+
+          const mx = monitor.position.x;
+          const my = monitor.position.y;
+          const mx2 = mx + monitor.size.width;
+          const my2 = my + monitor.size.height;
+
+          // check left edge
+          if (x < mx) {
+            x = mx;
+          }
+
+          // check top edge
+          if (y < my) {
+            y = my;
+          }
+
+          // check right edge
+          if (x2 > mx2) {
+            x = mx2 - width;
+          }
+
+          // check bottom edge
+          if (y2 > my2) {
+            y = my2 - height;
+          }
+
+          // ensure final position is still within monitor bounds (in case window is larger than monitor)
+          if (x < mx) {
+            x = mx;
+          }
+
+          if (y < my) {
+            y = my;
+          }
+        }
+
+        await this.webview.setPosition(new PhysicalPosition(x, y));
+      }
+
+      await this.webview.show();
+    });
   }
 
   /**
    * Will restore the saved position and size of the widget after that
    * will store the position and size of the widget on change.
    */
-  async persistPositionAndSize(): Promise<void> {
+  public async persistPositionAndSize(): Promise<void> {
     const storage = globalThis.window.localStorage;
     const { label } = this.webview;
 
@@ -183,19 +254,63 @@ export class Widget {
       await this.webview.setSize(size);
     }
 
-    this.webview.onMoved(debounce((e) => {
-      const { x, y } = e.payload;
-      storage.setItem(`${label}::x`, x.toString());
-      storage.setItem(`${label}::y`, y.toString());
-      console.info(`Widget position saved: ${x} ${y}`);
-    }, 500));
+    this.webview.onMoved(
+      debounce((e) => {
+        const { x, y } = e.payload;
+        storage.setItem(`${label}::x`, x.toString());
+        storage.setItem(`${label}::y`, y.toString());
+        console.info(`Widget position saved: ${x} ${y}`);
+      }, 500),
+    );
 
-    this.webview.onResized(debounce((e) => {
-      const { width, height } = e.payload;
-      storage.setItem(`${label}::width`, width.toString());
-      storage.setItem(`${label}::height`, height.toString());
-      console.info(`Widget size saved: ${width} ${height}`);
-    }, 500));
+    this.webview.onResized(
+      debounce((e) => {
+        const { width, height } = e.payload;
+        storage.setItem(`${label}::width`, width.toString());
+        storage.setItem(`${label}::height`, height.toString());
+        console.info(`Widget size saved: ${width} ${height}`);
+      }, 500),
+    );
+  }
+
+  // this will monitor the element and resize the webview accordingly
+  public autoSizeWebviewByElement(element: HTMLElement = document.body): void {
+    autoSizeWebviewBasedOnContent(this.webview, element);
+  }
+
+  /**
+   * Will initialize the widget based on the preset, this function won't show the widget.
+   * You need to call `webview.show()` to show the widget.
+   */
+  public async init(): Promise<void> {
+    switch (this.def.preset) {
+      case WidgetPreset.None:
+        break;
+      case WidgetPreset.Desktop:
+        await this.applyDesktopPreset();
+        break;
+      case WidgetPreset.Overlay:
+        await this.applyOverlayPreset();
+        break;
+      case WidgetPreset.Popup:
+        await this.applyPopupPreset();
+        break;
+    }
+  }
+
+  public onTrigger(cb: (args: WidgetTriggeredArgs) => void): void {
+    const fn: EventCallback<WidgetTriggeredArgs> = ({ payload }) => {
+      const { id, monitorId, instanceId } = payload;
+      if (
+        id !== this.id ||
+        (monitorId && monitorId !== this.decoded.monitorId) ||
+        (instanceId && instanceId !== this.decoded.instanceId)
+      ) {
+        return;
+      }
+      cb(payload);
+    };
+    subscribe(SeelenEvent.WidgetTriggered, fn.bind(this));
   }
 }
 

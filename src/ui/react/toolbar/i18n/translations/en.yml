@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: App Settings
   brightness: Brightness
-  hibernate: Hibernate
-  lock: Lock
-  log_out: Log Out
-  power: Power
   restart: Restart
-  shutdown: Shutdown
-  sleep: Sleep
+  power: Power
   title: Settings
 userhome:
   empty_list: No items

@@ -15,66 +15,61 @@ pub mod user;
 #[macro_export]
 macro_rules! event_manager {
     ($name:ident, $event:ty) => {
-        static CHANNEL: std::sync::OnceLock<(
+        static CHANNEL: std::sync::LazyLock<(
             crossbeam_channel::Sender<$event>,
             crossbeam_channel::Receiver<$event>,
-        )> = std::sync::OnceLock::new();
+        )> = std::sync::LazyLock::new(|| {
+            std::thread::spawn(move || {
+                let rx = CHANNEL.1.clone();
+                for event in rx {
+                    SUBSCRIBERS.scan(|_k, v| {
+                        v(event.clone());
+                    })
+                }
+            });
+            crossbeam_channel::unbounded()
+        });
 
-        static CHANNEL_THREAD: std::sync::OnceLock<std::thread::JoinHandle<()>> =
-            std::sync::OnceLock::new();
+        static SUBSCRIBERS: std::sync::LazyLock<
+            scc::HashMap<String, Box<dyn Fn($event) + Sync + Send + 'static>>,
+        > = std::sync::LazyLock::new(scc::HashMap::new);
 
-        static SUBSCRIBERS: std::sync::OnceLock<
-            std::sync::Arc<parking_lot::Mutex<Vec<Box<dyn FnMut($event) + Send + 'static>>>>,
-        > = std::sync::OnceLock::new();
+        static THREAD_INIT: std::sync::Once = std::sync::Once::new();
 
         #[allow(dead_code)]
         impl $name {
-            fn channel() -> &'static (
-                crossbeam_channel::Sender<$event>,
-                crossbeam_channel::Receiver<$event>,
-            ) {
-                CHANNEL.get_or_init(crossbeam_channel::unbounded)
-            }
-
             pub fn event_tx() -> crossbeam_channel::Sender<$event> {
-                Self::channel().0.clone()
+                CHANNEL.0.clone()
             }
 
             pub fn send(event: $event) {
-                if let Err(e) = Self::channel().0.send(event) {
+                THREAD_INIT.call_once(|| {
+                    let rx = CHANNEL.1.clone();
+                    std::thread::spawn(move || {
+                        for event in rx {
+                            SUBSCRIBERS.scan(|_k, v| {
+                                v(event.clone());
+                            });
+                        }
+                    });
+                });
+
+                if let Err(e) = CHANNEL.0.send(event) {
                     log::error!("Failed to send event: {e}");
                 }
             }
 
-            fn subscribers() -> &'static std::sync::Arc<
-                parking_lot::Mutex<Vec<Box<dyn FnMut($event) + Send + 'static>>>,
-            > {
-                SUBSCRIBERS.get_or_init(|| std::sync::Arc::new(parking_lot::Mutex::new(Vec::new())))
+            pub fn subscribe<F>(callback: F) -> String
+            where
+                F: Fn($event) + Sync + Send + 'static,
+            {
+                let id = uuid::Uuid::new_v4().to_string();
+                let _ = SUBSCRIBERS.insert(id.clone(), Box::new(callback));
+                id
             }
 
-            /// Add a new subscriber to the event manager and start the event processing thread
-            pub fn subscribe<F>(callback: F)
-            where
-                F: FnMut($event) + Send + 'static,
-            {
-                let mut subs = Self::subscribers().lock();
-                subs.push(Box::new(callback));
-                if subs.len() != 1 {
-                    return;
-                }
-                // Start the event processing thread on the first subscriber
-                CHANNEL_THREAD.get_or_init(|| {
-                    let rx = Self::channel().1.clone();
-                    let subscribers = Self::subscribers().clone();
-                    std::thread::spawn(move || {
-                        for event in rx {
-                            let mut subs = subscribers.lock();
-                            for subscriber in subs.iter_mut() {
-                                subscriber(event.clone());
-                            }
-                        }
-                    })
-                });
+            pub fn unsubscribe(id: &str) {
+                SUBSCRIBERS.remove(id);
             }
         }
     };

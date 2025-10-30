@@ -86,7 +86,7 @@ export const Navigation = memo(() => {
         <div className={cs.separator} />
         <div className={cs.group}>
           {widgets
-            .filter((widget) => !["@seelen/settings", "@seelen/popup"].includes(widget.id))
+            .filter((widget) => !widget.hidden)
             .toSorted((a, b) => a.id.localeCompare(b.id))
             .map((widget) => (
               <Item

@@ -101,4 +101,6 @@ slu_events_declaration! {
     StateProfilesChanged(Vec<Profile>) as "profiles-changed",
 
     StatePerformanceModeChanged(PerformanceMode) as "state::performance-mode-changed",
+
+    WidgetTriggered(WidgetTriggeredArgs) as "widget::triggered",
 }

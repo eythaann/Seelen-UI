@@ -4,15 +4,8 @@ import { invoke } from "@tauri-apps/api/core";
 import { emit, emitTo } from "@tauri-apps/api/event";
 
 const ActionsScope = {
-  open(path: string) {
-    invoke(SeelenCommand.OpenFile, { path });
-  },
-  run(program: string, args: string[], workingDir: string) {
-    invoke(SeelenCommand.Run, { program, args, workingDir });
-  },
-  copyToClipboard(text: string) {
-    navigator.clipboard.writeText(text);
-  },
+  SeelenCommand,
+  SeelenEvent,
   invoke(command: SeelenCommand, args?: any) {
     invoke(command, args);
   },
@@ -22,8 +15,16 @@ const ActionsScope = {
   emitTo(target: string, event: SeelenEvent, payload?: unknown) {
     emitTo(target, event, payload);
   },
-  SeelenCommand,
-  SeelenEvent,
+  // ==================== abstractions ====================
+  open(path: string) {
+    invoke(SeelenCommand.OpenFile, { path });
+  },
+  run(program: string, args: string[], workingDir: string) {
+    invoke(SeelenCommand.Run, { program, args, workingDir });
+  },
+  copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text);
+  },
 };
 
 export async function EvaluateAction(code: string, scope: Record<string, any>) {

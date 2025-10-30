@@ -1,4 +1,3 @@
-import { useComputed } from "@preact/signals";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { type File, FolderType } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
@@ -6,7 +5,6 @@ import { Icon } from "@shared/components/Icon";
 import type { IconName } from "@shared/components/Icon/icons";
 import { useWindowFocusChange } from "@shared/hooks";
 import { path } from "@tauri-apps/api";
-import { Tooltip } from "antd";
 import { t } from "i18next";
 import type { VNode } from "preact";
 import { useEffect, useState } from "react";
@@ -16,7 +14,6 @@ import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infr
 
 import { Selectors } from "../../shared/store/app.ts";
 
-import { $settings } from "../../shared/state/mod.ts";
 import { UserFolder } from "./UserFolder.tsx";
 import { UserProfile } from "./UserProfile.tsx";
 
@@ -60,7 +57,6 @@ export interface UserHomeFolder {
 function UserHome() {
   const [categoryOpen, setCategoryOpen] = useState<FolderType>(FolderType.Unknown);
 
-  const showHibernate = useComputed(() => $settings.value.showHibernateButton);
   const user = useSelector(Selectors.user);
   const folders: UserHomeFolder[] = [
     {
@@ -136,65 +132,6 @@ function UserHome() {
           </span>
         </li>
       </ul>
-
-      <hr />
-      <span className="userhome-label">{t("settings.power")}</span>
-      <div className="userhome-power">
-        <Tooltip mouseLeaveDelay={0} arrow={false} title={t("settings.lock")}>
-          <button
-            className="userhome-power-button"
-            onClick={() => invoke(SeelenCommand.Lock)}
-          >
-            <Icon iconName="BiLock" />
-          </button>
-        </Tooltip>
-        <Tooltip mouseLeaveDelay={0} arrow={false} title={t("settings.sleep")}>
-          <button
-            className="userhome-power-button"
-            onClick={() => invoke(SeelenCommand.Suspend)}
-          >
-            <Icon iconName="BiMoon" />
-          </button>
-        </Tooltip>
-        {showHibernate && (
-          <Tooltip
-            mouseLeaveDelay={0}
-            arrow={false}
-            title={t("settings.hibernate")}
-          >
-            <button
-              className="userhome-power-button"
-              onClick={() => invoke(SeelenCommand.Hibernate)}
-            >
-              <Icon iconName="FiClock" />
-            </button>
-          </Tooltip>
-        )}
-        <Tooltip
-          mouseLeaveDelay={0}
-          arrow={false}
-          title={t("settings.restart")}
-        >
-          <button
-            className="userhome-power-button"
-            onClick={() => invoke(SeelenCommand.Restart)}
-          >
-            <Icon iconName="VscDebugRestart" />
-          </button>
-        </Tooltip>
-        <Tooltip
-          mouseLeaveDelay={0}
-          arrow={false}
-          title={t("settings.shutdown")}
-        >
-          <button
-            className="userhome-power-button"
-            onClick={() => invoke(SeelenCommand.Shutdown)}
-          >
-            <Icon iconName="GrPower" />
-          </button>
-        </Tooltip>
-      </div>
     </BackgroundByLayersV2>
   );
 }

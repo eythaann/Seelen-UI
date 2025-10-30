@@ -27,8 +27,8 @@ impl Drop for WidgetInstance {
 }
 
 impl WidgetInstance {
-    pub fn load(widget: &Widget, monitor_id: &str) -> Result<Self> {
-        let label = WidgetWebviewLabel::new(&widget.id, Some(monitor_id), None);
+    pub fn load(widget: &Widget, monitor_id: Option<&str>) -> Result<Self> {
+        let label = WidgetWebviewLabel::new(&widget.id, monitor_id, None);
         log::info!("Creating {:?}", label.decoded);
 
         let state = FULL_STATE.load();
@@ -37,16 +37,18 @@ impl WidgetInstance {
 
         let mut extra_instances = vec![];
         for ins in state.get_widget_instances_ids(&widget.id) {
-            let label = WidgetWebviewLabel::new(&widget.id, Some(monitor_id), Some(&ins));
+            let label = WidgetWebviewLabel::new(&widget.id, monitor_id, Some(&ins));
             let window = Self::create_window(widget, title, &label)?;
             extra_instances.push((label, window));
         }
 
-        Ok(Self {
+        let instance = Self {
             label,
             window,
             extra_instances,
-        })
+        };
+
+        Ok(instance)
     }
 
     fn create_window(

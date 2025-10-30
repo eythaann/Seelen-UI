@@ -1,13 +1,17 @@
-use std::{collections::HashMap, path::PathBuf};
+use std::collections::HashMap;
 
-use seelen_core::{state::WidgetLoader, system_state::MonitorId};
+use seelen_core::{
+    resource::WidgetId,
+    state::{WidgetInstanceMode, WidgetLoader},
+    system_state::MonitorId,
+};
 
 use crate::{
     error::Result,
     resources::RESOURCES,
     state::application::{FullState, FULL_STATE},
     widgets::{
-        third_party::WidgetInstance, toolbar::FancyToolbar, weg::SeelenWeg,
+        loader::WidgetInstance, toolbar::FancyToolbar, weg::SeelenWeg,
         window_manager::instance::WindowManagerV2,
     },
     windows_api::monitor::MonitorView,
@@ -22,7 +26,7 @@ pub struct SluMonitorInstance {
     pub weg: Option<SeelenWeg>,
     pub wm: Option<WindowManagerV2>,
     // new widgets storage
-    pub widgets: HashMap<PathBuf, WidgetInstance>,
+    pub widgets: HashMap<WidgetId, WidgetInstance>,
 }
 
 impl SluMonitorInstance {
@@ -98,10 +102,12 @@ impl SluMonitorInstance {
             }
 
             if !self.widgets.contains_key(&key) {
-                self.widgets.insert(
-                    key.clone(),
-                    WidgetInstance::load(&widget, &self.main_target_id)?,
-                );
+                let monitor_id: Option<&str> = match widget.instances {
+                    WidgetInstanceMode::ReplicaByMonitor => Some(&self.main_target_id),
+                    _ => None,
+                };
+                self.widgets
+                    .insert(key.clone(), WidgetInstance::load(&widget, monitor_id)?);
             }
         }
         Ok(())

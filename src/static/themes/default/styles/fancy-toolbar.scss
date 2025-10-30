@@ -268,34 +268,22 @@
   }
 }
 
-.fast-settings {
+.quick-access {
   @extend %popup;
   width: 300px;
   position: relative;
   gap: 4px;
 
-  .fast-settings-title {
+  .quick-access-header {
     z-index: 1;
     font-weight: 600;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    .fast-settings-item-title-button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 6px;
-      border-radius: 6px;
-
-      &:hover {
-        backdrop-filter: brightness(0.8);
-      }
-    }
   }
 
-  .fast-settings-item {
+  .quick-access-item {
     z-index: 1;
     display: flex;
     gap: 6px;
@@ -306,17 +294,16 @@
     }
   }
 
-  .fast-settings-power {
+  .quick-access-footer {
+    z-index: 1;
     display: flex;
     gap: 6px;
+    align-items: center;
+    justify-content: flex-end;
+  }
 
-    .fast-settings-item-button {
-      @extend %actionable-button, %flex-centered;
-      flex: 1;
-      border: 1px solid var(--color-gray-600);
-      border-radius: 8px;
-      padding: 8px 12px;
-    }
+  .quick-access-footer-button {
+    @extend %actionable-button;
   }
 }
 
@@ -503,7 +490,7 @@
   }
 }
 
-.fast-settings-label,
+.quick-access-label,
 .media-control-label {
   font-size: 0.8rem;
   font-weight: 600;
@@ -994,20 +981,6 @@
     .userhome-seelen-option-item {
       @extend %actionable-button;
       font-weight: 600;
-    }
-  }
-
-  .userhome-power {
-    margin-top: 4px;
-    display: flex;
-    gap: 6px;
-
-    .userhome-power-button {
-      @extend %actionable-button, %flex-centered;
-      flex: 1;
-      border: 1px solid var(--color-gray-600);
-      border-radius: 8px;
-      padding: 8px 12px;
     }
   }
 }

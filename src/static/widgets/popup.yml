@@ -185,3 +185,4 @@ metadata:
     ja: このウィジェットにより、ユーザーにカスタマイズされたポップアップを表示できます。
 instances: Multiple
 loader: Legacy
+hidden: true

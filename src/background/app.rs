@@ -27,8 +27,8 @@ use crate::{
     virtual_desktops::get_vd_manager,
     widgets::{
         launcher::SeelenRofi,
+        loader::WidgetInstance,
         task_switcher::TaskSwitcher,
-        third_party::WidgetInstance,
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
         window_manager::instance::WindowManagerV2,
