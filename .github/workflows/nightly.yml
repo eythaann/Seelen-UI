@@ -179,7 +179,7 @@ jobs:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
           organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
           project-slug: seelen-ui
-          signing-policy-slug: test-signing
+          signing-policy-slug: release-signing
           github-artifact-id: ${{ needs.merge-artifacts.outputs.artifact-id }}
           output-artifact-directory: bundles
 

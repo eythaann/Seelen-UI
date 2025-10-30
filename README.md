@@ -208,6 +208,15 @@ See the [LICENSE](LICENSE) file for details.
 
 For inquiries and support, please contact me on [Discord](https://discord.gg/ABfASx5ZAJ).
 
+## Sponsors
+
+We're grateful for the support of our sponsors who help make Seelen UI possible.
+
+|                                                                                                         Sponsor                                                                                                          | Description                                                                                                  |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------- |
+| [![DigitalOcean](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=955c7335abf5&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge) | **DigitalOcean** provides cloud infrastructure services that power our development and testing environments. |
+|                                                                [![SignPath](https://avatars.githubusercontent.com/u/34448643?s=60)](https://signpath.io/)                                                                | **SignPath** provides free code signing certificates, ensuring secure and trusted releases for our users.    |
+
 ## See you later
 
 ```

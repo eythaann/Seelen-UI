@@ -10,7 +10,8 @@
         "no-explicit-any",
         "ban-types",
         "no-window",
-        "no-window-prefix"
+        "no-window-prefix",
+        "no-sloppy-imports"
       ]
     }
   },
