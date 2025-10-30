@@ -11,6 +11,7 @@ use crate::{
     error::Result,
     resource::{ResourceKind, ResourceMetadata, SluResource, WidgetId},
     state::Plugin,
+    system_state::MonitorId,
     utils::search_resource_entrypoint,
 };
 
@@ -26,6 +27,8 @@ pub struct Widget {
     /// Widget metadata, as texts, tags, images, etc.
     pub metadata: ResourceMetadata,
 
+    /// Widget configuration preset
+    pub preset: WidgetPreset,
     /// Widget settings declaration, this is esentially a struct to be used by an
     /// builder to create the widget settings UI on the Settings window.
     pub settings: WidgetSettingsDeclarationList,
@@ -33,12 +36,10 @@ pub struct Widget {
     /// still be available on the widgets full list.
     pub hidden: bool,
     /// How many instances are allowed of this widget.
-    pub instances: WidgetInstanceType,
+    pub instances: WidgetInstanceMode,
 
     /// Way to load the widget
     pub loader: WidgetLoader,
-    /// Framework used to build the widget
-    pub framework: String,
     /// Optional widget js code
     pub js: Option<String>,
     /// Optional widget css
@@ -110,7 +111,7 @@ impl SluResource for Widget {
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[ts(repr(enum = name))]
-pub enum WidgetInstanceType {
+pub enum WidgetInstanceMode {
     /// Default behavior, only one instance of this widget is allowed.
     /// This is useful for widgets intended to work as custom config window.
     #[default]
@@ -134,4 +135,46 @@ pub enum WidgetLoader {
     /// Used for third party widgets, this will load the code from the `js`, `css`, and `html` fields
     #[default]
     ThirdParty,
+}
+
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum WidgetPreset {
+    /// No special behavior, all should be manually configured
+    #[default]
+    None,
+    /// Always on bottom, no title bar, etc. Resizable by default.
+    Desktop,
+    /// Always on top, no title bar, etc.
+    Overlay,
+    /// Same as overlay, but will be automatically closed on unfocus;
+    /// Also this type of widgets can be manually open/closed/show/hide by other widgets or plugins.
+    /// On show the widget will be at the specified position, could be custom one, or will take the mouse cursor position.
+    ///
+    /// If a widget is of this type, the enabled property won't determine the visibility of the widget,
+    /// as this widget is only shown when explicitly requested.
+    ///
+    /// Widget instances mode will be ignored for this type of widgets, As popups should be always single instance.
+    Popup,
+}
+
+impl Widget {
+    pub fn instance_mode(&self) -> WidgetInstanceMode {
+        if self.preset == WidgetPreset::Popup {
+            WidgetInstanceMode::Single
+        } else {
+            self.instances
+        }
+    }
+}
+
+/// Arguments that could be passed on the trigger widget function, widgets decides if use it or not.
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+pub struct WidgetTriggeredArgs {
+    pub id: WidgetId,
+    pub monitor_id: Option<MonitorId>,
+    pub instance_id: Option<String>,
+    pub desired_position: Option<(i32, i32)>,
 }

@@ -10,4 +10,5 @@ plugin:
     return "Power Menu";
   template: |-
     return Icon({ name: "IoPower" });
-  onClickV2: emit("power-menu::show")
+  onClickV2: |-
+    trigger("@seelen/power-menu");

@@ -1,7 +1,7 @@
 pub mod launcher;
+pub mod loader;
 pub mod popups;
 pub mod task_switcher;
-pub mod third_party;
 pub mod toolbar;
 pub mod wallpaper_manager;
 pub mod weg;

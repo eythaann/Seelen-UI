@@ -11,7 +11,7 @@ import { MediaModule } from "../media/infra/Module.tsx";
 import { NetworkModule } from "../network/infra/Module.tsx";
 import { NotificationsModule } from "../Notifications/infra/Module.tsx";
 import { PowerModule } from "../Power/infra.tsx";
-import { SettingsModule } from "../Settings/infra.tsx";
+import { SettingsModule } from "../QuickAccess/infra.tsx";
 import { UserModule } from "../user/infra/Module.tsx";
 
 import { $plugins } from "../shared/state/items.ts";

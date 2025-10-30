@@ -5,6 +5,7 @@ metadata:
   description: !extend i18n/description.yml
 instances: Single
 loader: Internal
+preset: Overlay
 hidden: true
 plugins:
   - !extend ./toolbar-plugin.yml

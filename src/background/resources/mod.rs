@@ -8,7 +8,7 @@ use std::{
 };
 
 use seelen_core::{
-    resource::{ResourceKind, SluResource},
+    resource::{IconPackId, PluginId, ResourceKind, SluResource, ThemeId, WallpaperId, WidgetId},
     state::{IconPack, Plugin, Theme, Wallpaper, Widget},
 };
 
@@ -22,11 +22,11 @@ pub static RESOURCES: LazyLock<Arc<ResourceManager>> =
 
 #[derive(Default)]
 pub struct ResourceManager {
-    pub themes: scc::HashMap<PathBuf, Arc<Theme>>,
-    pub plugins: scc::HashMap<PathBuf, Arc<Plugin>>,
-    pub widgets: scc::HashMap<PathBuf, Arc<Widget>>,
-    pub icon_packs: scc::HashMap<PathBuf, Arc<IconPack>>,
-    pub wallpapers: scc::HashMap<PathBuf, Arc<Wallpaper>>,
+    pub themes: scc::HashMap<ThemeId, Arc<Theme>>,
+    pub plugins: scc::HashMap<PluginId, Arc<Plugin>>,
+    pub widgets: scc::HashMap<WidgetId, Arc<Widget>>,
+    pub icon_packs: scc::HashMap<IconPackId, Arc<IconPack>>,
+    pub wallpapers: scc::HashMap<WallpaperId, Arc<Wallpaper>>,
     /// list of manual loaded resources
     pub manual: scc::HashSet<PathBuf>,
 }
@@ -41,7 +41,7 @@ impl ResourceManager {
                 }
                 theme.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_themes_path());
-                self.themes.upsert(path.to_path_buf(), Arc::new(theme));
+                self.themes.upsert(theme.id.clone(), Arc::new(theme));
             }
             ResourceKind::Widget => {
                 let mut widget = Widget::load(path)?;
@@ -54,17 +54,16 @@ impl ResourceManager {
 
                 for mut plugin in widget.plugins.clone() {
                     plugin.metadata.internal = widget.metadata.internal.clone();
-                    self.plugins
-                        .upsert(path.join(plugin.id.to_string()), Arc::new(plugin));
+                    self.plugins.upsert(plugin.id.clone(), Arc::new(plugin));
                 }
 
-                self.widgets.upsert(path.to_path_buf(), Arc::new(widget));
+                self.widgets.upsert(widget.id.clone(), Arc::new(widget));
             }
             ResourceKind::Plugin => {
                 let mut plugin = Plugin::load(path)?;
                 plugin.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_plugins_path());
-                self.plugins.upsert(path.to_path_buf(), Arc::new(plugin));
+                self.plugins.upsert(plugin.id.clone(), Arc::new(plugin));
             }
             ResourceKind::Wallpaper => {
                 if path.is_file() {
@@ -85,20 +84,21 @@ impl ResourceManager {
                             !path.starts_with(SEELEN_COMMON.user_wallpapers_path()),
                         )?;
                         self.wallpapers
-                            .upsert(path.to_path_buf(), Arc::new(wallpaper));
+                            .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
                     }
                     return Ok(());
                 }
 
+                let wallpaper = Wallpaper::load(path)?;
                 self.wallpapers
-                    .upsert(path.to_path_buf(), Arc::new(Wallpaper::load(path)?));
+                    .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
             }
             ResourceKind::IconPack => {
                 let mut icon_pack = IconPack::load(path)?;
                 icon_pack.metadata.internal.bundled =
                     path == SEELEN_COMMON.user_icons_path().join("system");
                 self.icon_packs
-                    .upsert(path.to_path_buf(), Arc::new(icon_pack));
+                    .upsert(icon_pack.id.clone(), Arc::new(icon_pack));
             }
             ResourceKind::SoundPack => {
                 // feature not implemented
@@ -110,19 +110,21 @@ impl ResourceManager {
     pub fn unload(&self, kind: &ResourceKind, path: &Path) {
         match kind {
             ResourceKind::Theme => {
-                self.themes.remove(path);
+                self.themes.retain(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Widget => {
-                self.widgets.remove(path);
+                self.widgets.retain(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Plugin => {
-                self.plugins.remove(path);
+                self.plugins.retain(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Wallpaper => {
-                self.wallpapers.remove(path);
+                self.wallpapers
+                    .retain(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::IconPack => {
-                self.icon_packs.remove(path);
+                self.icon_packs
+                    .retain(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::SoundPack => {
                 // feature not implemented
@@ -132,11 +134,21 @@ impl ResourceManager {
 
     pub fn unload_all(&self, kind: &ResourceKind) {
         match kind {
-            ResourceKind::Theme => self.themes.retain(|k, _| !self.manual.contains(k)),
-            ResourceKind::Plugin => self.plugins.retain(|k, _| !self.manual.contains(k)),
-            ResourceKind::Widget => self.widgets.retain(|k, _| !self.manual.contains(k)),
-            ResourceKind::IconPack => self.icon_packs.retain(|k, _| !self.manual.contains(k)),
-            ResourceKind::Wallpaper => self.wallpapers.retain(|k, _| !self.manual.contains(k)),
+            ResourceKind::Theme => self
+                .themes
+                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+            ResourceKind::Plugin => self
+                .plugins
+                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+            ResourceKind::Widget => self
+                .widgets
+                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+            ResourceKind::IconPack => self
+                .icon_packs
+                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+            ResourceKind::Wallpaper => self
+                .wallpapers
+                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
             ResourceKind::SoundPack => {
                 // feature not implemented
             }

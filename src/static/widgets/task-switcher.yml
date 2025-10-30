@@ -4,3 +4,4 @@ metadata:
   displayName: Task Switcher
 instances: Single
 loader: Legacy
+hidden: true

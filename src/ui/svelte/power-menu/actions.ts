@@ -7,18 +7,24 @@ let widget = Widget.getCurrent();
 let webview = widget.webview;
 
 export async function setup(state: State) {
-  await updateSize(state);
-
-  await widget.setAsOverlayWidget();
-  await webview.setResizable(false);
+  webview.setResizable(false);
 
   listen("power-menu::show", () => {
     webview.show();
   });
 
-  listen("power-menu::hide", () => {
-    webview.hide();
+  webview.onFocusChanged((e) => {
+    if (!e.payload) {
+      webview.hide();
+    }
   });
+
+  widget.onTrigger(() => {
+    webview.show();
+  });
+
+  await updateSize(state);
+  await widget.init();
 }
 
 async function updateSize(state: State) {

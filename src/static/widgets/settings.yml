@@ -75,3 +75,4 @@ metadata:
     ja: Seelen UI設定
 instances: Single
 loader: Legacy
+hidden: true

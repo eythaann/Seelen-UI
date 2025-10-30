@@ -1,21 +1,21 @@
-import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
+import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { LogicalSize } from "@tauri-apps/api/dpi";
-import { getRootContainer } from "@shared";
 
-interface Options {
+export interface AutoSizeOptions {
   onResize?: () => void;
 }
 
 /** This function will update the size of the webview/window based on the size of the root element */
-export function autoSizeWebviewBasedOnContent(options: Options = {}) {
+export function autoSizeWebviewBasedOnContent(
+  webview: WebviewWindow,
+  element: HTMLElement,
+  options: AutoSizeOptions = {},
+): () => void {
   const { onResize } = options;
 
-  const webview = getCurrentWebviewWindow();
-  const root = getRootContainer();
-
   const updateSize = async () => {
-    const contentWidth = Math.floor(root.scrollWidth);
-    const contentHeight = Math.floor(root.scrollHeight);
+    const contentWidth = Math.floor(element.scrollWidth);
+    const contentHeight = Math.floor(element.scrollHeight);
 
     if (contentWidth > 0 && contentHeight > 0) {
       const { width: currentWidth, height: currentHeight } = await webview.outerSize();
@@ -44,19 +44,15 @@ export function autoSizeWebviewBasedOnContent(options: Options = {}) {
     updateSize();
   });
 
-  observer.observe(root, {
+  observer.observe(element, {
     childList: true,
     subtree: true,
     attributes: true,
     characterData: true,
   });
 
-  // Also update on window resize (for responsive content)
-  window.addEventListener("resize", updateSize);
-
   // Cleanup function
   return () => {
     observer.disconnect();
-    window.removeEventListener("resize", updateSize);
   };
 }

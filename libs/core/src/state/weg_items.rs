@@ -101,7 +101,7 @@ pub enum WegItem {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(export, repr(enum = name))]
+#[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
 pub enum WegItemType {
     Pinned,
     Temporal,

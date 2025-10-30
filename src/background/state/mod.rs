@@ -7,7 +7,7 @@ use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
         value::{KnownPlugin, PluginValue},
-        WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetInstanceType,
+        WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetInstanceMode,
         WindowManagerLayout, WorkspaceId,
     },
     system_state::MonitorId,
@@ -75,7 +75,7 @@ impl FullState {
         }
 
         match widget.instances {
-            WidgetInstanceType::ReplicaByMonitor => self
+            WidgetInstanceMode::ReplicaByMonitor => self
                 .settings
                 .monitors_v3
                 .get(monitor_id.as_str())
