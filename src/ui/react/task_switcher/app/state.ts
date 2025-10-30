@@ -2,37 +2,78 @@ import { batch, effect, signal } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { listen } from "@tauri-apps/api/event";
 
+export const $showing = signal(false);
+export const $autoConfirm = signal(false);
+
 export const $windows = signal(await invoke(SeelenCommand.GetUserAppWindows));
 subscribe(SeelenEvent.UserAppWindowsChanged, (e) => ($windows.value = e.payload));
 
 export const $focusedWinId = signal((await invoke(SeelenCommand.GetFocusedApp)).hwnd);
 subscribe(SeelenEvent.GlobalFocusChanged, (e) => ($focusedWinId.value = e.payload.hwnd));
 
-export const $selectedWindow = signal<number | null>(null);
-effect(() => {
-  const win = $windows.value.find((w) => w.hwnd === $focusedWinId.value);
-  $selectedWindow.value = win?.hwnd || null;
-});
+export const $selectedWindow = signal<number | null>($focusedWinId.value);
 
-export const $showing = signal(false);
-export const $autoConfirm = signal(false);
+// Only sync with focused window when task switcher is hidden
+effect(() => {
+  if (!$showing.value) {
+    const win = $windows.value.find((w) => w.hwnd === $focusedWinId.value);
+    $selectedWindow.value = win?.hwnd || null;
+  }
+});
 
 listen<boolean>("hidden::task-switcher-select-next", ({ payload: autoConfirm }) => {
+  // Don't show if there are no windows
+  if ($windows.value.length === 0) {
+    return;
+  }
+
+  const wasShowing = $showing.value;
+
   batch(() => {
+    // Only set autoConfirm on first show (when switcher was hidden)
+    if (!wasShowing) {
+      $autoConfirm.value = autoConfirm;
+    }
     $showing.value = true;
-    $autoConfirm.value = autoConfirm;
   });
-  // cycle next index, go to first if last.
-  const index = $windows.value.findIndex((w) => w.hwnd === $selectedWindow.value);
+
+  // If switcher was hidden, use focused window as starting point
+  const currentHwnd = wasShowing ? $selectedWindow.value : $focusedWinId.value;
+
+  // Find current index, default to -1 if not found (will cycle to first)
+  let index = $windows.value.findIndex((w) => w.hwnd === currentHwnd);
+  if (index === -1) {
+    index = $windows.value.length - 1; // Will cycle to 0 with (index + 1) % length
+  }
+
   $selectedWindow.value = $windows.value[(index + 1) % $windows.value.length]?.hwnd || null;
 });
+
 listen<boolean>("hidden::task-switcher-select-previous", ({ payload: autoConfirm }) => {
+  // Don't show if there are no windows
+  if ($windows.value.length === 0) {
+    return;
+  }
+
+  const wasShowing = $showing.value;
+
   batch(() => {
+    // Only set autoConfirm on first show (when switcher was hidden)
+    if (!wasShowing) {
+      $autoConfirm.value = autoConfirm;
+    }
     $showing.value = true;
-    $autoConfirm.value = autoConfirm;
   });
-  // cycle previous index, go to last if first.
-  const index = $windows.value.findIndex((w) => w.hwnd === $selectedWindow.value);
+
+  // If switcher was hidden, use focused window as starting point
+  const currentHwnd = wasShowing ? $selectedWindow.value : $focusedWinId.value;
+
+  // Find current index, default to 0 if not found (will cycle to last)
+  let index = $windows.value.findIndex((w) => w.hwnd === currentHwnd);
+  if (index === -1) {
+    index = 0; // Will cycle to last with (index - 1 + length) % length
+  }
+
   $selectedWindow.value = $windows.value[(index - 1 + $windows.value.length) % $windows.value.length]?.hwnd || null;
 });
 
@@ -58,6 +99,6 @@ window.onkeyup = (e) => {
       hwnd: $selectedWindow.value,
       wasFocused: false,
     });
-    $showing.value = true;
+    $showing.value = false;
   }
 };
