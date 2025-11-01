@@ -15,8 +15,8 @@ context_menu:
   add_custom_text: 添加自定义文本项
   modules: 模块
   remove: 移除模块
-  reorder_disable: 锁定工具栏
-  reorder_enable: 解锁工具栏
+  reorder_disable: 锁定花式工具栏
+  reorder_enable: 解锁花式工具栏
   restore: 恢复默认值
   settings: 设置
   task_manager: 任务管理器

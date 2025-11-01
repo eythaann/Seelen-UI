@@ -2,7 +2,7 @@ action:
   confirm: 确定吗？
   confirm_body: 此操作无法撤销。
 app_launcher:
-  enable: 启用应用启动器
+  enable: 启用应用程序启动器
   launch_on:
     mouse_over: 鼠标悬停
     primary: 主要
@@ -217,7 +217,7 @@ toolbar:
   dock_side: 位置
   dynamic_color: 动态颜色
   dynamic_color_tooltip: 根据聚焦窗口启用动态背景和前景颜色。（颜色可被主题覆盖）
-  enable: 启用精美工具栏
+  enable: 启用花式工具栏
   height: 高度
   hide_mode:
     always: 总是
