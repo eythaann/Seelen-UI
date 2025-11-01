@@ -3,21 +3,21 @@ bluetooth:
   cancel: 取消
   connected: 已连接设备
   forget: 忘记设备
-  lowenergy: 低能耗
+  lowenergy: 低功耗模式
   more: 更多蓝牙设置
   not_found: 未找到蓝牙设备
   pair: 配对
   paired: 已配对设备
   placeholder:
-    passphrase: 密码口令、代码或 PIN 码
-  scanning: 扫描设备
+    passphrase: 密码、代码或 PIN
+  scanning: 正在搜索设备
 context_menu:
-  add_custom_text: 添加自定义文本项目
+  add_custom_text: 添加自定义文本项
   modules: 模块
-  remove: 删除模块
+  remove: 移除模块
   reorder_disable: 锁定工具栏
   reorder_enable: 解锁工具栏
-  restore: 恢复到默认值
+  restore: 恢复默认值
   settings: 设置
   task_manager: 任务管理器
 keyboard:
@@ -29,7 +29,7 @@ media:
     channel:
       system: 系统声音
     comunications: 通信
-    missing: 丢失的设备
+    missing: 设备缺失
     mixer: 音量混合器
     multimedia: 多媒体
     settings: 更多设备设置
@@ -40,15 +40,15 @@ media:
 network:
   available: 可用网络
   connect: 连接
-  connected: 已连接
+  connected: 已连接至
   disconnect: 断开连接
   hidden: 隐藏网络
   more: 更多网络设置
   not_found: 未找到 Wi-Fi 网络
   placeholder:
     password: 密码
-  saved: 已保存的网络
-  scanning: 扫描网络
+  saved: 已保存网络
+  scanning: 正在搜索网络
   secured: 加密网络
 notifications:
   clear: 全部清除
@@ -56,10 +56,10 @@ notifications:
   settings: 更多通知设置
   title: 通知
 placeholder:
-  battery_remaining: '% 剩余电量'
-  bluetooth_devices: 蓝牙和设备
-  ethernet_connected: 已连接到互联网
-  ethernet_disconnected: 未连接到互联网
+  battery_remaining: '% 剩余'
+  bluetooth_devices: 蓝牙与设备
+  ethernet_connected: 已连接互联网
+  ethernet_disconnected: 无互联网连接
   notifications: 通知
   settings: 快速设置
   smart_charge: ' - 智能充电'
@@ -68,7 +68,7 @@ settings:
   app_settings: 应用设置
   brightness: 亮度
   hibernate: 休眠
-  lock: 锁
+  lock: 锁定
   log_out: 注销
   power: 电源
   restart: 重启
@@ -79,7 +79,7 @@ userhome:
   empty_list: 无项目
   folders:
     desktop: 桌面
-    documents: 文件
+    documents: 文档
     downloads: 下载
     more_items: 显示更多...
     music: 音乐
