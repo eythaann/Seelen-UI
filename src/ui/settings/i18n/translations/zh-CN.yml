@@ -306,7 +306,7 @@ wm:
   animations:
     duration: 动画持续时间（MS）
     ease_function: 过渡动画
-    enable: 启用 Window 动画
+    enable: 启用窗口动画
   author: 作者
   border:
     enable: 启用窗口边框
