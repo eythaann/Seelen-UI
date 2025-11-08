@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Paramètres de l'application
   brightness: Luminosité
-  hibernate: Veille prolongée
-  lock: Verrouiller
-  log_out: Se déconnecter
   power: Marche/Arrêt
   restart: Redémarrer
-  shutdown: Arrêter
-  sleep: Mettre en veille
   title: Paramètres
 userhome:
   empty_list: Aucun élément

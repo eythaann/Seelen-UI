@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Forritastillingar
   brightness: Birtustig
-  hibernate: Dvala
-  lock: Læstu
-  log_out: Að skrá þig út
   power: Máttur
   restart: Endurræsa
-  shutdown: Lokun
-  sleep: Sofðu
   title: Stillingar
 userhome:
   empty_list: Engir hlutir

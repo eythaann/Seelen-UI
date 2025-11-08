@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Настройки на приложението
   brightness: Яркост
-  hibernate: Hibernate
-  lock: Заключване
-  log_out: Излез от профила си
   power: Мощност
   restart: Рестартирам
-  shutdown: Изключвам
-  sleep: Сън
   title: Настройки
 userhome:
   empty_list: Няма артикули

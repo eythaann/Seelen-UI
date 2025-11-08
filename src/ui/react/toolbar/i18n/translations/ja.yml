@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: SeelenUIの設定
   brightness: 明るさ
-  hibernate: 休止状態
-  lock: ロック
-  log_out: ログアウト
   power: 電源
   restart: 再起動
-  shutdown: シャットダウン
-  sleep: スリープ
   title: 設定
 userhome:
   empty_list: アイテムがありません

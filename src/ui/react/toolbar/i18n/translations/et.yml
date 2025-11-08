@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Rakenduse sätted
   brightness: Heledus
-  hibernate: Hibernate
-  lock: Lock
-  log_out: Logi välja
   power: Võimsus
   restart: Taaskäivita
-  shutdown: Lülita välja
-  sleep: Magama
   title: Sätted
 userhome:
   empty_list: Puuduvad esemed

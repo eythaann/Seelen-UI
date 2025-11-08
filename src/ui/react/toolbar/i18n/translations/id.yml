@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Pengaturan aplikasi
   brightness: Kecerahan
-  hibernate: Hibernasi
-  lock: Mengunci
-  log_out: Keluar
   power: Kekuatan
   restart: Mengulang kembali
-  shutdown: Matikan
-  sleep: Tidur
   title: Pengaturan
 userhome:
   empty_list: Tidak ada item

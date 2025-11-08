@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Sovellusasetukset
   brightness: Kirkkaus
-  hibernate: Hibernate
-  lock: Lukitus
-  log_out: Kirjautua ulos
   power: Voima
   restart: Uudelleenkäynnistää
-  shutdown: Sammuttaa
-  sleep: Nukkua
   title: asetukset
 userhome:
   empty_list: Ei kohteita

@@ -2,7 +2,6 @@ import { SeelenCommand } from "@seelen-ui/lib";
 import { getRootContainer } from "@shared";
 import { declareDocumentAsLayeredHitbox } from "@shared/layered";
 import { disableAnimationsOnPerformanceMode } from "@shared/performance";
-import { removeDefaultWebviewActions } from "@shared/setup";
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { createRoot } from "react-dom/client";
@@ -20,7 +19,6 @@ import "./styles/variables.css";
 import "@shared/styles/reset.css";
 import "./styles/global.css";
 
-removeDefaultWebviewActions();
 await declareDocumentAsLayeredHitbox();
 await loadStore();
 await registerStoreEvents();

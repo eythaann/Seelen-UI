@@ -199,10 +199,11 @@ impl Window {
     }
 
     pub fn parent(&self) -> Option<Window> {
-        match WindowsApi::get_parent(self.0) {
-            Ok(parent) => Some(Window::from(parent)),
-            Err(_) => None,
-        }
+        WindowsApi::get_parent(self.0).ok().map(Window::from)
+    }
+
+    pub fn owner(&self) -> Option<Window> {
+        WindowsApi::get_owner(self.0).ok().map(Window::from)
     }
 
     pub fn children(&self) -> Result<Vec<Window>> {

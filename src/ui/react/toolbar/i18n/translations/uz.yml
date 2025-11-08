@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Ilova sozlamalari
   brightness: Yorqinlik
-  hibernate: Xunlamoq
-  lock: Qulflamoq
-  log_out: Chiqish
   power: Kuch
   restart: Qayta ishga tushirish
-  shutdown: O'chirish; yopish
-  sleep: Uyqu
   title: Sozlash
 userhome:
   empty_list: Hech narsa yo'q

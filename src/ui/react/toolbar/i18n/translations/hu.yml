@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Alkalmazásbeállítások
   brightness: Fényerő
-  hibernate: Hibernálás
-  lock: Zárolás
-  log_out: Kijelentkezés
   power: Kikapcsolás
   restart: Újraindítás
-  shutdown: Leállítás
-  sleep: Alvó mód
   title: Beállítások
 userhome:
   empty_list: Nincs megjeleníthető elem

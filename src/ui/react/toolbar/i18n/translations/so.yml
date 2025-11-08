@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: App Goobaha
   brightness: Dhalaalaya
-  hibernate: Hiiberhanate
-  lock: Quful
-  log_out: Ka bax
   power: Awood
   restart: Dib u bilow
-  shutdown: Bakhtii
-  sleep: Seexo
   title: Dejinta
 userhome:
   empty_list: Wax walboo ah

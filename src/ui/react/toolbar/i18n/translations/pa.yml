@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: ਐਪ ਸੈਟਿੰਗਾਂ
   brightness: ਚਮਕ
-  hibernate: ਹਾਈਬਰਨੇਟ
-  lock: ਲਾਕ
-  log_out: ਲਾੱਗ ਆਊਟ, ਬਾਹਰ ਆਉਣਾ
   power: ਸ਼ਕਤੀ
   restart: ਰੀਸਟਾਰਟ
-  shutdown: ਸ਼ਟ ਡਾਉਨ
-  sleep: ਨੀਂਦ
   title: ਸੈਟਿੰਗਜ਼
 userhome:
   empty_list: ਕੋਈ ਚੀਜ਼ਾਂ ਨਹੀਂ

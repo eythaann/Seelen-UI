@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useComputed } from "@preact/signals";
-import type { RemoteDataDeclaration, ToolbarItem } from "@seelen-ui/lib/types";
+import { FancyToolbarSide, type RemoteDataDeclaration, type ToolbarItem } from "@seelen-ui/lib/types";
 import { useDeepCompareEffect } from "@shared/hooks";
 import { cx } from "@shared/styles";
 import { Tooltip } from "antd";
@@ -18,6 +18,7 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { emit } from "@tauri-apps/api/event";
 import { SeelenEvent } from "libs/core/npm/esm/mod";
 import { toPhysicalPixels } from "@shared";
+import { $settings } from "../../shared/state/mod.ts";
 
 export interface InnerItemProps extends HTMLAttributes<HTMLDivElement> {
   module: Omit<ToolbarItem, "type">;
@@ -64,8 +65,11 @@ export function InnerItem(props: InnerItemProps) {
       const element = document.getElementById(id)!;
       const domRect = element.getBoundingClientRect();
       const x = windowX + toPhysicalPixels(domRect.left);
-      const y = windowY + toPhysicalPixels(domRect.top);
 
+      const rootRect = document.getElementById("root")!.getBoundingClientRect();
+      const y = $settings.value.position === FancyToolbarSide.Top
+        ? windowY + toPhysicalPixels(rootRect.bottom + 10)
+        : windowY + toPhysicalPixels(domRect.top - 10);
       emit(SeelenEvent.WidgetTriggered, { id: widgetId, desiredPosition: [x, y] });
     },
   });

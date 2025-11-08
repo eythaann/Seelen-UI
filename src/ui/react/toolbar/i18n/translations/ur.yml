@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: ایپ کی ترتیبات
   brightness: چمک
-  hibernate: ہائبرنیٹ
-  lock: لاک
-  log_out: لاگ آوٹ
   power: پاور
   restart: ریسٹارٹ
-  shutdown: شٹ ڈاؤن
-  sleep: سلیپ
   title: عنوان
 userhome:
   empty_list: کوئی اشیاء نہیں

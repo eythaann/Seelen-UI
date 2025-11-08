@@ -22,7 +22,7 @@ mod windows_api;
 
 #[macro_use]
 extern crate rust_i18n;
-i18n!("src/background/i18n", fallback = "en");
+i18n!("background/i18n", fallback = "en");
 
 #[macro_use]
 extern crate lazy_static;

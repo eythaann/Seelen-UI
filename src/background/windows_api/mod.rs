@@ -99,15 +99,15 @@ use windows::{
             },
             WindowsAndMessaging::{
                 BringWindowToTop, FindWindowExW, GetClassNameW, GetDesktopWindow,
-                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindowLongW, GetWindowRect,
-                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
-                IsZoomed, PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow,
-                ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE,
-                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
-                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
-                SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOSIZE, SWP_NOZORDER, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE,
-                WINDOW_STYLE, WS_SIZEBOX, WS_THICKFRAME,
+                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindow, GetWindowLongW,
+                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
+                IsWindowVisible, IsZoomed, PostMessageW, SetForegroundWindow, SetWindowPos,
+                ShowWindow, ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE,
+                GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
+                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
+                SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -465,6 +465,10 @@ impl WindowsApi {
 
     pub fn get_parent(hwnd: HWND) -> Result<HWND> {
         Ok(unsafe { GetParent(hwnd)? })
+    }
+
+    pub fn get_owner(hwnd: HWND) -> Result<HWND> {
+        Ok(unsafe { GetWindow(hwnd, GW_OWNER)? })
     }
 
     pub fn get_desktop_window() -> HWND {

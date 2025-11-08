@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: යෙදුම් සැකසුම්
   brightness: දීප්තිය
-  hibernate: ශිශිරත්වය
-  lock: අගුල
-  log_out: ඉවත් වන්න
   power: බලය
   restart: යළි අරඹන්න
-  shutdown: වසා දමන්න
-  sleep: නිදාගන්න
   title: සැකසුම්
 userhome:
   empty_list: අයිතම නැත

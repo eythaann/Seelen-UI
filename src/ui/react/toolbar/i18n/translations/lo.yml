@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: ການຕັ້ງຄ່າແອັບ app
   brightness: ຄວາມສະຫວ່າງ
-  hibernate: ຮູດ
-  lock: ກະແຈ
-  log_out: ອອກ​ຈາກ​ລະ​ບົບ
   power: ພະເດດ
   restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່
-  shutdown: ປິດ​ເຄື່ອງ
-  sleep: ນອນ
   title: ການກໍານົດ
 userhome:
   empty_list: ບໍ່ມີສິນຄ້າຫຍັງ

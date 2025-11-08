@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: App Astellunge
   brightness: Hellegkeet
-  hibernate: Hibernate
-  lock: Spock
-  log_out: Ausloggen
   power: Kraaftbeldscht
   restart: Neistart
-  shutdown: Ausmaachen
-  sleep: Schlolof
   title: Astellunge
 userhome:
   empty_list: Keng Saachen

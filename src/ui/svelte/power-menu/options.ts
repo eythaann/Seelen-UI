@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { SeelenCommand } from "libs/core/npm/esm/mod";
+import { SeelenCommand } from "@seelen-ui/lib";
 
 interface Option {
   key: string;

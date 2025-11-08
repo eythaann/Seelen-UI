@@ -1,5 +1,4 @@
 import { getRootContainer } from "@shared";
-import { removeDefaultWebviewActions } from "@shared/setup";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
@@ -17,7 +16,6 @@ import "./styles/variables.css";
 import "@shared/styles/reset.css";
 import "./styles/global.css";
 
-removeDefaultWebviewActions();
 getCurrentWebviewWindow().show();
 
 await LoadSettingsToStore();

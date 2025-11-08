@@ -232,6 +232,10 @@ slu_commands_declaration! {
     WlanConnect = wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> bool,
     WlanDisconnect = wlan_disconnect(),
 
+    // system tray
+    GetSystemTrayIcons = get_system_tray_icons() -> Vec<SysTrayIcon>,
+    SendSystemTrayIconAction = send_system_tray_icon_action(id: SysTrayIconId, action: SystrayIconAction),
+
     // Notifications
     GetNotifications = get_notifications() -> Vec<AppNotification>,
     NotificationsClose = notifications_close(id: u32),

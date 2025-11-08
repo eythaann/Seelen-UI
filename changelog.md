@@ -7,6 +7,7 @@
 - new power menu widget.
 - widgets now can declare plugins to be loaded.
 - new fields on widgets metadata.
+- new system tray widget.
 
 ### refactor
 
@@ -15,6 +16,8 @@
 ### fix
 
 - app cli was not working.
+- (#1258) missing translations on background process.
+- apps being filtering wrong.
 
 ## [2.4.4]
 

@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Setări aplicație
   brightness: Luminozitate
-  hibernate: Hibernare
-  lock: Încuietoare
-  log_out: Deconectați -vă
   power: Putere
   restart: Repornire
-  shutdown: Închide
-  sleep: Dormi
   title: Setări
 userhome:
   empty_list: Nu există articole

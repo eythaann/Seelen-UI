@@ -44,5 +44,6 @@ await build({
   postBuild(): void {
     Deno.copyFileSync("../../LICENSE", "npm/LICENSE");
     Deno.copyFileSync("readme.md", "npm/readme.md");
+    Deno.removeSync("npm/src", { recursive: true });
   },
 });

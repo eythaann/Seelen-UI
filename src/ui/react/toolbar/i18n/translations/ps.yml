@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: د ایپ امستنې
   brightness: روښانه کول
-  hibernate: سپړنه
-  lock: لاک
-  log_out: وتل
   power: ځواک
   restart: بیا روښانه کول
-  shutdown: ‍‍‍بندول
-  sleep: ویده شه
   title: امستنې
 userhome:
   empty_list: هیڅ توکي نشته
