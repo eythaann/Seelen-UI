@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: అనువర్తన సెట్టింగులు
   brightness: ప్రకాశం
-  hibernate: హైబర్నేట్
-  lock: లాక్
-  log_out: లాగ్ అవుట్
   power: శక్తి
   restart: పున art ప్రారంభం
-  shutdown: షట్డౌన్
-  sleep: నిద్ర
   title: సెట్టింగులు
 userhome:
   empty_list: అంశాలు లేవు

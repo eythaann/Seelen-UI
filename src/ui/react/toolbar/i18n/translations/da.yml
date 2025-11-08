@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Appindstillinger
   brightness: Lysstyrke
-  hibernate: Dvale
-  lock: Lås
-  log_out: Log ud
   power: Magt
   restart: Genstart
-  shutdown: Lukke ned
-  sleep: Søvn
   title: Indstillinger
 userhome:
   empty_list: Ingen genstande

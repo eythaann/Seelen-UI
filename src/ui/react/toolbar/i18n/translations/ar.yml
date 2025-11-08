@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: إعدادات التطبيقات
   brightness: السطوع
-  hibernate: السبات
-  lock: القفل
-  log_out: تسجيل خروج
   power: الطاقة
   restart: إعادة التشغيل
-  shutdown: اطفاء الجهاز
-  sleep: النوم
   title: إعدادات
 userhome:
   empty_list: لا توجد عناصر

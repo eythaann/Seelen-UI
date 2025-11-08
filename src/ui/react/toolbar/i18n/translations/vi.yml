@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Cài đặt ứng dụng
   brightness: Độ sáng
-  hibernate: Ngủ đông
-  lock: Khóa
-  log_out: Đăng xuất
   power: Quyền lực
   restart: Khởi động lại
-  shutdown: Tắt
-  sleep: Ngủ
   title: Cài đặt
 userhome:
   empty_list: Không có mặt hàng

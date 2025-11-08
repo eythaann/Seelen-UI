@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Appinnstillinger
   brightness: Lysstyrke
-  hibernate: Dvale
-  lock: Låse
-  log_out: Logg ut
   power: Makt
   restart: Omstart
-  shutdown: Skru av
-  sleep: Sove
   title: Innstillinger
 userhome:
   empty_list: Ingen ting

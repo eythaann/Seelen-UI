@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Mipangilio ya programu
   brightness: Mwangaza
-  hibernate: Hibernate
-  lock: Funga
-  log_out: Ingia nje
   power: Nguvu
   restart: Anzisha tena
-  shutdown: Kuzimisha
-  sleep: Kulala
   title: Mipangilio
 userhome:
   empty_list: Hakuna vitu

@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Postavke aplikacija
   brightness: Svjetlost
-  hibernate: Hibernat
-  lock: Brana
-  log_out: Odjavite se
   power: Vlast
   restart: Ponovno pokrenuti
-  shutdown: Ugasiti
-  sleep: Spavati
   title: Postavke
 userhome:
   empty_list: Nema predmeta

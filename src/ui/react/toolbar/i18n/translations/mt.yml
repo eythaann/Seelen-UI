@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Settings tal-App
   brightness: Luminożità
-  hibernate: Hibernate
-  lock: Lock
-  log_out: Oħroġ
   power: Qawwa
   restart: Erġa ibda
-  shutdown: Għalaq
-  sleep: Irqad
   title: Settings
 userhome:
   empty_list: L-ebda oġġetti

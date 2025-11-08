@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Izilungiselelo zohlelo lokusebenza
   brightness: Ukugqama
-  hibernate: Umgebha
-  lock: Khiya hluthulela
-  log_out: Phuma
   power: Ubuqhwaga
   restart: Qalanisa
-  shutdown: Vala shaqa
-  sleep: Ukulala
   title: Amasethingi
 userhome:
   empty_list: Azikho izinto

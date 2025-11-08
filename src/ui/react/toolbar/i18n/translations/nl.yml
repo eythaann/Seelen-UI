@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: App instellingen
   brightness: Helderheid
-  hibernate: Winterslaap
-  lock: Slot
-  log_out: Uitloggen
   power: Energie
   restart: Herstarten
-  shutdown: Afsluiten
-  sleep: Slaap
   title: Instellingen
 userhome:
   empty_list: Geen items

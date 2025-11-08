@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Uygulama Ayarları
   brightness: Parlaklık
-  hibernate: Hazırda Beklet
-  lock: Kilit
-  log_out: Çıkış Yap
   power: Güç
   restart: Yeniden başlat
-  shutdown: Kapat
-  sleep: Uyku
   title: Ayarlar
 userhome:
   empty_list: Ürün yok

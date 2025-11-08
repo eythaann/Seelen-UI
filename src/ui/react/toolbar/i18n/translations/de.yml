@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: App-Einstellungen
   brightness: Helligkeit
-  hibernate: Winterschlaf
-  lock: Schloss
-  log_out: Abmelden
   power: Leistung
   restart: Neustarten
-  shutdown: Herunterfahren
-  sleep: Ruhezustand
   title: Einstellungen
 userhome:
   empty_list: Keine Artikel

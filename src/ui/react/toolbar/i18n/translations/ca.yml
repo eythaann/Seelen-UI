@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Configuració de l'aplicació
   brightness: Brillantor
-  hibernate: Hibernar
-  lock: Tancar
-  log_out: Tancar sessió
   power: Força
   restart: Reinicia
-  shutdown: Tancar
-  sleep: Dormir
   title: Configuració
 userhome:
   empty_list: Sense articles

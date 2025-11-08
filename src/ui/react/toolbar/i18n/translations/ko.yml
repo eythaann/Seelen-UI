@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: 앱 설정
   brightness: 밝기
-  hibernate: 최대 절전 모드
-  lock: 잠금
-  log_out: 로그아웃
   power: 전원
   restart: 다시 시작
-  shutdown: 종료
-  sleep: 절전
   title: 설정
 userhome:
   empty_list: 항목 없음

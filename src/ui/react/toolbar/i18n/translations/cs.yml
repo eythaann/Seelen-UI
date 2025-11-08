@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Nastavení aplikace
   brightness: Jas
-  hibernate: Hibernace
-  lock: Zámek
-  log_out: Odhlásit se
   power: Napájení
   restart: Restart
-  shutdown: Vypnout
-  sleep: Spát
   title: Nastavení
 userhome:
   empty_list: Žádné položky
