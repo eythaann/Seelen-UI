@@ -67,8 +67,6 @@ impl SystemTrayManager {
     pub(super) fn process_event(&self, event: Win32TrayEvent) -> Option<SystrayEvent> {
         match &event {
             Win32TrayEvent::IconAdd(icon_data) | Win32TrayEvent::IconUpdate(icon_data) => {
-                log::info!("Icon modified or added: {:?}", icon_data);
-
                 let found_icon_id = self.find_icon(icon_data).map(|icon| icon.stable_id.clone());
 
                 let found_icon = match found_icon_id {
@@ -131,6 +129,8 @@ impl SystemTrayManager {
                         .upsert(to_update.stable_id.clone(), to_update.clone());
                     Some(SystrayEvent::IconUpdate(to_update.clone()))
                 } else {
+                    log::info!("Tray icon added: {:?}", icon_data);
+
                     // Icon doesn't exist yet, so add new icon. Skip icons that
                     // cannot be identified.
                     let stable_id = icon_data.guid.map(SysTrayIconId::Guid).or({
@@ -175,7 +175,7 @@ impl SystemTrayManager {
                 }
             }
             Win32TrayEvent::IconRemove(icon_data) => {
-                log::info!("Icon removed: {:?}", icon_data);
+                log::info!("Tray icon removed: {:?}", icon_data);
 
                 let icon_id = self.find_icon(icon_data).map(|icon| icon.stable_id.clone());
 

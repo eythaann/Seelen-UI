@@ -345,7 +345,7 @@ impl TraySpy {
                     _ => None,
                 };
 
-                log::debug!("Tray event: {:?}", tray_event);
+                // log::debug!("Tray event: {:?}", tray_event);
 
                 if let Some(event) = tray_event {
                     event_tx.send(event).expect("Failed to send tray event.");

@@ -17,6 +17,7 @@
 
 - app cli was not working.
 - (#1258) missing translations on background process.
+- apps being filtering wrong.
 
 ## [2.4.4]
 
