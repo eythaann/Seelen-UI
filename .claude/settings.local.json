@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(nul)",
+      "Bash(cargo check:*)"
     ],
     "deny": [],
     "ask": []

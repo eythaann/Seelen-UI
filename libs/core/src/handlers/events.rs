@@ -100,6 +100,9 @@ slu_events_declaration! {
     StateWallpapersChanged(Vec<Wallpaper>) as "UserResources::wallpapers-changed",
     StateProfilesChanged(Vec<Profile>) as "profiles-changed",
 
+    // system tray
+    SystemTrayChanged(Vec<SysTrayIcon>) as "system-tray::changed",
+
     StatePerformanceModeChanged(PerformanceMode) as "state::performance-mode-changed",
 
     WidgetTriggered(WidgetTriggeredArgs) as "widget::triggered",

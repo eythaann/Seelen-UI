@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ClassValue } from "svelte/elements";
-  import type { IconName } from "@shared/components/Icon/icons";
+  import type { IconName } from "./icons";
   import InlineSVG from "./InlineSVG.svelte";
 
   interface Props {

@@ -1,10 +1,8 @@
 import { disableAnimationsOnPerformanceMode } from "@shared/performance";
-import { removeDefaultWebviewActions } from "@shared/setup";
 
 import "@shared/styles/colors.css";
 import "./reset.css";
 
-removeDefaultWebviewActions();
 disableAnimationsOnPerformanceMode();
 
 const { js, css, html } = window.__SLU_WIDGET;

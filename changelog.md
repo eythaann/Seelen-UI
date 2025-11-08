@@ -7,6 +7,7 @@
 - new power menu widget.
 - widgets now can declare plugins to be loaded.
 - new fields on widgets metadata.
+- new system tray widget.
 
 ### refactor
 

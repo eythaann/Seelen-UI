@@ -96,6 +96,8 @@ export enum SeelenCommand {
   WlanStopScanning = "wlan_stop_scanning",
   WlanConnect = "wlan_connect",
   WlanDisconnect = "wlan_disconnect",
+  GetSystemTrayIcons = "get_system_tray_icons",
+  SendSystemTrayIconAction = "send_system_tray_icon_action",
   GetNotifications = "get_notifications",
   NotificationsClose = "notifications_close",
   NotificationsCloseAll = "notifications_close_all",

@@ -14,3 +14,4 @@ styles:
   "@seelen/wallpaper-manager": !include styles/wallpaper-manager.css
   "@seelen/weg": !include styles/weg.css
   "@seelen/window-manager": !include styles/window-manager.css
+  "@seelen/system-tray": !include styles/tray-menu.scss

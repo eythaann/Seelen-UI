@@ -3,6 +3,7 @@ use image::{GenericImageView, ImageBuffer, RgbaImage};
 use itertools::Itertools;
 use queue::{IconExtractor, IconExtractorRequest};
 use windows::core::PCWSTR;
+use windows::Win32::Graphics::Gdi::{GetObjectW, BITMAP, BI_RGB};
 use windows::Win32::{
     Graphics::Gdi::{
         CreateCompatibleDC, DeleteDC, DeleteObject, GetDIBits, SelectObject, BITMAPINFO,
@@ -91,6 +92,20 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
         if !GetIconInfoExW(*hicon, &mut icon_info).as_bool() {
             return Err("Failed to get icon info".into());
         }
+
+        let mut bitmap = BITMAP::default();
+        if GetObjectW(
+            icon_info.hbmColor.into(),
+            std::mem::size_of::<BITMAP>() as i32,
+            Some(&mut bitmap as *mut _ as *mut _),
+        ) == 0
+        {
+            return Err("Failed to get bitmap info".into());
+        }
+
+        let width = bitmap.bmWidth;
+        let height = bitmap.bmHeight.abs();
+
         let hdc_screen = CreateCompatibleDC(None);
         let hdc_mem = CreateCompatibleDC(Some(hdc_screen));
         let hbm_old = SelectObject(hdc_mem, icon_info.hbmColor.into());
@@ -98,24 +113,23 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
         let mut bmp_info = BITMAPINFO {
             bmiHeader: BITMAPINFOHEADER {
                 biSize: std::mem::size_of::<BITMAPINFOHEADER>() as u32,
-                biWidth: icon_info.xHotspot as i32 * 2,
-                biHeight: -(icon_info.yHotspot as i32 * 2),
+                biWidth: width,
+                biHeight: -(height), // Negative for top-down bitmap
                 biPlanes: 1,
                 biBitCount: 32, // 4 bytes per pixel
-                biCompression: DIB_RGB_COLORS.0,
+                biCompression: BI_RGB.0,
                 ..Default::default()
             },
             ..Default::default()
         };
 
-        let mut buffer: Vec<u8> =
-            vec![0; (icon_info.xHotspot * 2 * icon_info.yHotspot * 2 * 4) as usize];
+        let mut buffer: Vec<u8> = vec![0; (width * height * 4) as usize];
 
         if GetDIBits(
             hdc_mem,
             icon_info.hbmColor,
             0,
-            icon_info.yHotspot * 2,
+            height as u32,
             Some(buffer.as_mut_ptr() as *mut _),
             &mut bmp_info,
             DIB_RGB_COLORS,
@@ -135,11 +149,52 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
             return Err("Icon is not 32 bit".into());
         }
 
+        fix_alpha_channel(buffer.as_mut_slice());
         bgra_to_rgba(buffer.as_mut_slice());
 
-        let image = ImageBuffer::from_raw(icon_info.xHotspot * 2, icon_info.yHotspot * 2, buffer)
+        let image = ImageBuffer::from_raw(width as u32, height as u32, buffer)
             .expect("Failed to create image buffer");
         Ok(image)
+    }
+}
+
+fn fix_alpha_channel(buffer: &mut [u8]) {
+    let pixels = buffer.len() / 4;
+    let mut has_non_zero_alpha = false;
+    let mut has_varying_alpha = false;
+
+    // Verify the alpha channel
+    for i in 0..pixels {
+        let alpha = buffer[i * 4 + 3];
+        if alpha > 0 {
+            has_non_zero_alpha = true;
+        }
+        if alpha > 0 && alpha < 255 {
+            has_varying_alpha = true;
+            break;
+        }
+    }
+
+    // if all alpha values are 0, set them to 255
+    if !has_non_zero_alpha {
+        for i in 0..pixels {
+            buffer[i * 4 + 3] = 255;
+        }
+    }
+    // if there is premultiplied alpha
+    else if has_varying_alpha {
+        for i in 0..pixels {
+            let alpha = buffer[i * 4 + 3];
+            if alpha > 0 && alpha < 255 {
+                let alpha_f = alpha as f32 / 255.0;
+                let b = ((buffer[i * 4] as f32 / alpha_f).min(255.0)) as u8;
+                let g = ((buffer[i * 4 + 1] as f32 / alpha_f).min(255.0)) as u8;
+                let r = ((buffer[i * 4 + 2] as f32 / alpha_f).min(255.0)) as u8;
+                buffer[i * 4] = b;
+                buffer[i * 4 + 1] = g;
+                buffer[i * 4 + 2] = r;
+            }
+        }
     }
 }
 
