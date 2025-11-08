@@ -16,6 +16,7 @@
 ### fix
 
 - app cli was not working.
+- (#1258) missing translations on background process.
 
 ## [2.4.4]
 

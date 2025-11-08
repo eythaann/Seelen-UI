@@ -18,11 +18,11 @@
     border-radius: 8px;
 
     &:hover {
-      background-color: var(--system-accent-color);
+      background-color: var(--system-accent-light-color);
     }
 
     &:active {
-      background-color: var(--system-accent-dark-color);
+      background-color: var(--system-accent-color);
     }
 
     .system-tray-item-icon-box {
