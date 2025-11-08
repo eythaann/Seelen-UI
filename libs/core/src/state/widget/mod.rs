@@ -176,5 +176,24 @@ pub struct WidgetTriggeredArgs {
     pub id: WidgetId,
     pub monitor_id: Option<MonitorId>,
     pub instance_id: Option<String>,
+    /// Desired position to show the widget
     pub desired_position: Option<(i32, i32)>,
+    /// This will be used to align the widget at the desired position
+    /// - start will set the widget at the left of point,
+    /// - center will set the widget at the center of point,
+    /// - end will set the widget at the right of point
+    pub align_x: Option<Alignment>,
+    /// This will be used to align the widget at the desired position
+    /// - start will set the widget at the top of point,
+    /// - center will set the widget at the center of point,
+    /// - end will set the widget at the bottom of point
+    pub align_y: Option<Alignment>,
+}
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
+pub enum Alignment {
+    Start,
+    Center,
+    End,
 }

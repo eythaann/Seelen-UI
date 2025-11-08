@@ -28,6 +28,7 @@ impl FullState {
             ],
             center: vec![ToolbarItem2::Plugin("@default/date".into())],
             right: vec![
+                ToolbarItem2::Plugin("@seelen/tb-system-tray".into()),
                 ToolbarItem2::Plugin("@default/keyboard".into()),
                 ToolbarItem2::Plugin("@default/bluetooth".into()),
                 ToolbarItem2::Plugin("@default/network".into()),

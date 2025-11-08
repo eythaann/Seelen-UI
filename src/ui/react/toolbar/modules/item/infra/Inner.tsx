@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useComputed } from "@preact/signals";
-import { FancyToolbarSide, type RemoteDataDeclaration, type ToolbarItem } from "@seelen-ui/lib/types";
+import { Alignment, FancyToolbarSide, type RemoteDataDeclaration, type ToolbarItem } from "@seelen-ui/lib/types";
 import { useDeepCompareEffect } from "@shared/hooks";
 import { cx } from "@shared/styles";
 import { Tooltip } from "antd";
@@ -16,9 +16,9 @@ import { $toolbar_state } from "../../shared/state/items.ts";
 import { SanboxedComponent } from "./EvaluatedComponents.tsx";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { emit } from "@tauri-apps/api/event";
-import { SeelenEvent } from "libs/core/npm/esm/mod";
 import { toPhysicalPixels } from "@shared";
 import { $settings } from "../../shared/state/mod.ts";
+import { SeelenEvent } from "@seelen-ui/lib";
 
 export interface InnerItemProps extends HTMLAttributes<HTMLDivElement> {
   module: Omit<ToolbarItem, "type">;
@@ -64,13 +64,19 @@ export function InnerItem(props: InnerItemProps) {
       // get position of the element on the screen
       const element = document.getElementById(id)!;
       const domRect = element.getBoundingClientRect();
-      const x = windowX + toPhysicalPixels(domRect.left);
+      const x = windowX + toPhysicalPixels(domRect.left + domRect.width / 2);
 
       const rootRect = document.getElementById("root")!.getBoundingClientRect();
       const y = $settings.value.position === FancyToolbarSide.Top
         ? windowY + toPhysicalPixels(rootRect.bottom + 10)
-        : windowY + toPhysicalPixels(domRect.top - 10);
-      emit(SeelenEvent.WidgetTriggered, { id: widgetId, desiredPosition: [x, y] });
+        : windowY + toPhysicalPixels(rootRect.top - 10);
+
+      emit(SeelenEvent.WidgetTriggered, {
+        id: widgetId,
+        desiredPosition: [x, y],
+        alignX: Alignment.Center,
+        alignY: $settings.value.position === FancyToolbarSide.Top ? Alignment.End : Alignment.Start,
+      });
     },
   });
 

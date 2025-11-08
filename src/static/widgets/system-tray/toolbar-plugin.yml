@@ -1,4 +1,4 @@
-id: "@seelen/tb-tray-menu"
+id: "@seelen/tb-system-tray"
 metadata:
   displayName: !extend i18n/display_name.yml
   description: !extend i18n/description.yml
