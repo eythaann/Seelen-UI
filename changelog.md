@@ -12,6 +12,7 @@
 ### enhancements
 
 - disable individual shortcuts if attached widget is not enabled.
+- only show enabled themes as quick access in settings window.
 
 ### refactor
 
