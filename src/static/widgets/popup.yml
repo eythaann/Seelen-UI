@@ -71,7 +71,7 @@ metadata:
     lo: Popup ຫອຍ
     km: ការលេចឡើងសែល
     ko: 쉘 팝업
-    zh: 外壳弹出窗口
+    zh: Shell 弹出窗口
     ja: シェルポップアップ
   description:
     en: This widget allows show customized popups to users.
