@@ -263,6 +263,7 @@ wall:
   hours: ordire ordu
   interval: Aldatu horma-irudia guztietan
   minutes: minutuak
+  muted: Ezkutatu bideoaren audioa
   no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
   objectFit: Atzeko planoaren moldaketa
   objectPosition: Atzeko planoaren posizioa

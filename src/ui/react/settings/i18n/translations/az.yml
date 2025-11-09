@@ -262,6 +262,7 @@ wall:
   hours: sair
   interval: Divar kağızı hər birini dəyişdirin
   minutes: dəqiqəlik
+  muted: Səssiz video audio
   no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
   objectFit: Arxa plan
   objectPosition: Fon mövqeyi

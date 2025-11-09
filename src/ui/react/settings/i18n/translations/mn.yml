@@ -261,6 +261,7 @@ wall:
   hours: цаг
   interval: Ханын цаасыг өөрчлөх
   minutes: хоёр хоног
+  muted: Дуугүй видео аудио
   no_background: Хоосон слайпешт, оронд нь.
   objectFit: Суурь тохирох
   objectPosition: Арын байрлал

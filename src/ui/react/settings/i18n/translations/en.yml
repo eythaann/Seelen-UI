@@ -260,6 +260,7 @@ wall:
   hours: hours
   interval: Change wallpaper every
   minutes: minutes
+  muted: Mute video audio
   no_background: Empty slideshow, using theme's background instead.
   objectFit: Background Fit
   objectPosition: Background Position

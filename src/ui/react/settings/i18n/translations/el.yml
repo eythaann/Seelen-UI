@@ -264,6 +264,7 @@ wall:
   hours: ώρες
   interval: Αλλάξτε ταπετσαρία κάθε
   minutes: πρακτικά
+  muted: Σίγαση ήχου βίντεο
   no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
   objectFit: Φόντο Fit
   objectPosition: Ιστορικό Θέση

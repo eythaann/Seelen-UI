@@ -261,6 +261,7 @@ wall:
   hours: timer
   interval: Skift tapet hver
   minutes: minutter
+  muted: Slå videolyd fra
   no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
   objectFit: Baggrundstilpasning
   objectPosition: Baggrundsposition

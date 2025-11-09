@@ -263,6 +263,7 @@ wall:
   hours: laiks
   interval: Mainiet fona attēlus katru
   minutes: protokols
+  muted: Izslēgt video audio
   no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
   objectFit: Fona fona atbilstība
   objectPosition: Pamatinformācija Pozīcija

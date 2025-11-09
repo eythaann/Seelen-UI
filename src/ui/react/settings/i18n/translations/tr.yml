@@ -263,6 +263,7 @@ wall:
   hours: saat
   interval: Duvar kağıdı değiştirme aralığı
   minutes: dakika
+  muted: Video sesini kapat
   no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
   objectFit: Arka Plan Uyumu
   objectPosition: Arka Plan Pozisyonu

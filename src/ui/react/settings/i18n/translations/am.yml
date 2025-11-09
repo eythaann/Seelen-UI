@@ -251,6 +251,7 @@ wall:
   hours: ሰዓታት
   interval: የግድግዳ ወረቀት እያንዳንዱን ይለውጡ
   minutes: ደቂቃዎች
+  muted: ድምጸ-ከል ቪዲዮ ኦዲዮ
   no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
   objectFit: ዳራ ተስማሚ
   objectPosition: የጀርባ አቀማመጥ

@@ -1,4 +1,4 @@
-import { WallpaperConfiguration } from "@seelen-ui/lib";
+import { SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS, WallpaperConfiguration } from "@seelen-ui/lib";
 import type { PlaybackSpeed, WallpaperId, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
 import { Icon } from "@shared/components/Icon";
 import { ResourceText } from "@shared/components/ResourceText";
@@ -268,6 +268,22 @@ export function SingleWallpaperView() {
           />
         </SettingsSubGroup>
       </SettingsGroup>
+
+      {SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.some((ext) => editingWallpaper.filename?.toLowerCase()?.endsWith(ext)) && (
+        <SettingsGroup>
+          <SettingsOption
+            label={t("wall.muted")}
+            action={
+              <Switch
+                value={config.muted}
+                onChange={(muted) => {
+                  patchWallSettings({ muted });
+                }}
+              />
+            }
+          />
+        </SettingsGroup>
+      )}
     </>
   );
 }

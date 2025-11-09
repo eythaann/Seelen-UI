@@ -261,6 +261,7 @@ wall:
   hours: klukkustundir
   interval: Skiptu um veggfóður hvert
   minutes: mínútur
+  muted: Slökkva á myndhljóði
   no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
   objectFit: Bakgrunnur passa
   objectPosition: Bakgrunnsstaða

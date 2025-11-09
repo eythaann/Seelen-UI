@@ -266,6 +266,7 @@ wall:
   hours: Std.
   interval: Wechseln Sie die Hintergrundbild
   minutes: Minuten
+  muted: Video-Audio stumm schalten
   no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
   objectFit: Hintergrund Passform
   objectPosition: Hintergrund Position

@@ -264,6 +264,7 @@ wall:
   hours: घंटे
   interval: वॉलपेपर हर बदलें
   minutes: मिनट
+  muted: वीडियो ऑडियो म्यूट करें
   no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
   objectFit: पृष्ठभूमि फिट
   objectPosition: पृष्ठभूमि स्थिति

@@ -249,6 +249,7 @@ wall:
   hours: 時間
   interval: 壁紙を毎回変更します
   minutes: 分
+  muted: ビデオの音声をミュートする
   no_background: 壁紙に使用するファイルを選択
   objectFit: バックグラウンド・フィット
   objectPosition: バックグラウンド

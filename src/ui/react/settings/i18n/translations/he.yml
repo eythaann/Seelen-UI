@@ -254,6 +254,7 @@ wall:
   hours: שעות
   interval: החלף טפטים כל
   minutes: דקות
+  muted: השתקת אודיו של וידאו
   no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
   objectFit: כושר רקע
   objectPosition: מיקום רקע

@@ -257,6 +257,7 @@ wall:
   hours: ਘੰਟੇ
   interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
   minutes: ਮਿੰਟ
+  muted: ਵੀਡੀਓ ਆਡੀਓ ਨੂੰ ਮਿਊਟ ਕਰੋ
   no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
   objectFit: ਪਿਛੋਕੜ ਫਿਟ
   objectPosition: ਪਿਛੋਕੜ ਦੀ ਸਥਿਤੀ

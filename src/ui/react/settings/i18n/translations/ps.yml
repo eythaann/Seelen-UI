@@ -257,6 +257,7 @@ wall:
   hours: ساعتونه
   interval: په وال پیپر بدل کړئ
   minutes: دقیقې
+  muted: د ویډیو آډیو خاموش کړئ
   no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
   objectFit: شالید فټ
   objectPosition: شالید وضعیت

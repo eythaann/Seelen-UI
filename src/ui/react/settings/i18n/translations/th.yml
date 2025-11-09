@@ -253,6 +253,7 @@ wall:
   hours: ชั่วโมง
   interval: เปลี่ยนวอลล์เปเปอร์ทุก ๆ
   minutes: นาที
+  muted: ปิดเสียงวิดีโอ
   no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
   objectFit: พื้นหลังพอดี
   objectPosition: ตำแหน่งพื้นหลัง

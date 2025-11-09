@@ -261,6 +261,7 @@ wall:
   hours: uren
   interval: Verander wallpaper elke
   minutes: notulen
+  muted: Video-audio dempen
   no_background: >-
     Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
     thema.

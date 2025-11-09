@@ -263,6 +263,7 @@ wall:
   hours: ure
   interval: Verander die muurpapier elke
   minutes: minute
+  muted: Demp video-oudio
   no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
   objectFit: Agtergrond pas
   objectPosition: Agtergrondposisie

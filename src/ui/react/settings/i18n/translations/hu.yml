@@ -262,6 +262,7 @@ wall:
   hours: órák
   interval: Változtasd meg minden háttérképet
   minutes: jegyzőkönyv
+  muted: Videó hang némítása
   no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
   objectFit: Háttér illeszkedés
   objectPosition: Háttér Pozíció

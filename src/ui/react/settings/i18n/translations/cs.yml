@@ -263,6 +263,7 @@ wall:
   hours: hodiny
   interval: Změňte tapetu každých
   minutes: minuty
+  muted: Ztlumit zvuk videa
   no_background: Prázdná prezentace, použití pozadí motivu.
   objectFit: Pozadí Fit
   objectPosition: Pozice v pozadí

@@ -263,6 +263,7 @@ wall:
   hours: tuntia
   interval: Vaihda taustakuva jokainen
   minutes: minuutti
+  muted: Mykistä videon ääni
   no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
   objectFit: Tausta Fit
   objectPosition: Tausta Asema

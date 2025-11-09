@@ -263,6 +263,7 @@ wall:
   hours: sate
   interval: Promijenite pozadinu svaku
   minutes: minute
+  muted: Isključi video zvuk
   no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
   objectFit: Fit
   objectPosition: Pozadinski položaj

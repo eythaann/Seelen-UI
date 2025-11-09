@@ -265,6 +265,7 @@ wall:
   hours: heures
   interval: Changer de fond d'écran toutes les
   minutes: minutes
+  muted: Couper le son de la vidéo
   no_background: Liste vide, le fond d'écran du thème sera utilisé.
   objectFit: Conforme à l'arrière-plan
   objectPosition: Position d'arrière-plan

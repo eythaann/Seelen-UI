@@ -21,6 +21,8 @@ pub struct WallpaperInstanceSettings {
     pub with_overlay: bool,
     pub overlay_mix_blend_mode: MixBlendMode,
     pub overlay_color: String,
+    /// mute video backgrounds
+    pub muted: bool,
 }
 
 impl Default for WallpaperInstanceSettings {
@@ -37,6 +39,7 @@ impl Default for WallpaperInstanceSettings {
             with_overlay: false,
             overlay_mix_blend_mode: MixBlendMode::default(),
             overlay_color: "#ff0000".to_string(),
+            muted: true,
         }
     }
 }

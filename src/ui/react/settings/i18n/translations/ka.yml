@@ -261,6 +261,7 @@ wall:
   hours: საათი
   interval: შეცვალეთ ფონი ყველა
   minutes: წუთი
+  muted: ვიდეო აუდიოს დადუმება
   no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
   objectFit: ფონის შესაფერისი
   objectPosition: ფონის პოზიცია

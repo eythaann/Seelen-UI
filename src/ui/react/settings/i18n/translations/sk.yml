@@ -263,6 +263,7 @@ wall:
   hours: hodiny
   interval: Vymeňte tapetu každý
   minutes: minúta
+  muted: Stlmiť zvuk videa
   no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
   objectFit: Pozadie Fit
   objectPosition: Pozadie Pozícia

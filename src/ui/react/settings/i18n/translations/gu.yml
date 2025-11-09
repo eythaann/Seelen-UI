@@ -260,6 +260,7 @@ wall:
   hours: સમય
   interval: દરેક વ wallp લપેપર બદલો
   minutes: પ્રકાર
+  muted: વિડિઓ ઑડિઓ મ્યૂટ કરો
   no_background: તેના બદલે થીમની પૃષ્ઠભૂમિનો ઉપયોગ કરીને ખાલી સ્લાઇડશો.
   objectFit: પૃષ્ઠભૂમિ
   objectPosition: પૃષ્ઠભૂમિ

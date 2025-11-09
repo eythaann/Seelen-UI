@@ -261,6 +261,7 @@ wall:
   hours: sati
   interval: Promijenite pozadinu svake
   minutes: minuta
+  muted: Isključite zvuk video zapisa
   no_background: Prazno prezentacija, koristeći temu, umjesto toga.
   objectFit: Pozadina fit
   objectPosition: Pozadinsko pozicija

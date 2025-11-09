@@ -261,6 +261,7 @@ wall:
   hours: timme
   interval: Ändra tapeter varje
   minutes: minuter
+  muted: Stäng av videoljud
   no_background: Tomt bildspel, med temas bakgrund istället.
   objectFit: Bakgrund Passform
   objectPosition: Bakgrund Position

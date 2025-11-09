@@ -265,6 +265,7 @@ wall:
   hours: jam
   interval: Ubah wallpaper setiap
   minutes: menit
+  muted: Bisukan audio video
   no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
   objectFit: Kesesuaian Latar Belakang
   objectPosition: Posisi Latar Belakang

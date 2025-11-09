@@ -263,6 +263,7 @@ wall:
   hours: ore
   interval: Cambia sfondo ogni
   minutes: minuti
+  muted: Disattiva l'audio del video
   no_background: Slideshow vuoto, usa invece lo sfondo del tema.
   objectFit: Sfondo adatto
   objectPosition: Posizione di fondo

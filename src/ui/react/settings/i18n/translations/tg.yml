@@ -260,6 +260,7 @@ wall:
   hours: соат
   interval: Тағйироти ҳар як
   minutes: дақиқа
+  muted: Аудити видеоӣ
   no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
   objectFit: Замина
   objectPosition: Мавқеи заминавӣ

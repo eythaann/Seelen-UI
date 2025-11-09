@@ -260,6 +260,7 @@ wall:
   hours: tööaeg
   interval: Vahetage tapeeti iga
   minutes: protokoll
+  muted: Video heli vaigistamine
   no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
   objectFit: Taust sobivus
   objectPosition: Taustapositsioon

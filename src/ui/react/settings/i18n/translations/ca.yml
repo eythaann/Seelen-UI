@@ -263,6 +263,7 @@ wall:
   hours: hores
   interval: Canvieu el fons de pantalla cada
   minutes: minuts
+  muted: Silencia l'àudio del vídeo
   no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
   objectFit: Fixació de fons
   objectPosition: Posició de fons

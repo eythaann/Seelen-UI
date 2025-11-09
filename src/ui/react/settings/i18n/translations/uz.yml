@@ -263,6 +263,7 @@ wall:
   hours: soat
   interval: Har bir devor rasmini o'zgartiring
   minutes: daqiqa
+  muted: Ovozni o'chirish
   no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
   objectFit: Fon mos
   objectPosition: Fon holati

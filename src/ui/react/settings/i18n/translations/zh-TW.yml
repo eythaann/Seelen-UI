@@ -248,6 +248,7 @@ wall:
   hours: 小時
   interval: 每次更改牆紙
   minutes: 分鐘
+  muted: 將視頻音頻靜音
   no_background: 使用主題的背景為空幻燈片。
   objectFit: 背景擬合
   objectPosition: 背景位置

@@ -262,6 +262,7 @@ wall:
   hours: giờ
   interval: Thay đổi hình nền mỗi
   minutes: phút
+  muted: Tắt âm thanh video
   no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
   objectFit: Phù hợp với nền
   objectPosition: Vị trí nền

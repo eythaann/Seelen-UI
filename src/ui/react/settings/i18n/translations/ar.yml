@@ -254,6 +254,7 @@ wall:
   hours: ساعات
   interval: تغيير الخلفية كل
   minutes: دقائق
+  muted: كتم صوت الفيديو
   no_background: بدون خلفية
   objectFit: الخلفية الملائمة
   objectPosition: موقف الخلفية

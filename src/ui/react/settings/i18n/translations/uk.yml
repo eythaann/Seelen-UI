@@ -261,6 +261,7 @@ wall:
   hours: години
   interval: Зміна шпалер кожні
   minutes: хвилини
+  muted: Вимкнути звук відео
   no_background: Слайдів не знайдено, натомість застосовано фон теми.
   objectFit: Підгонка фону
   objectPosition: Вихідна позиція

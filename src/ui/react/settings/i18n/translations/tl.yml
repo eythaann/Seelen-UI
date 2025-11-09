@@ -267,6 +267,7 @@ wall:
   hours: oras
   interval: Baguhin ang wallpaper bawat
   minutes: minuto
+  muted: Mute Video Audio
   no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
   objectFit: Pagkasyahin sa background
   objectPosition: Posisyon sa background

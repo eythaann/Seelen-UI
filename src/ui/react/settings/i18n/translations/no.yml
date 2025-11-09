@@ -263,6 +263,7 @@ wall:
   hours: timer
   interval: Endre bakgrunnsbilde hver
   minutes: minutter
+  muted: Demp videolyd
   no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
   objectFit: Bakgrunns passform
   objectPosition: Bakgrunnsposisjon

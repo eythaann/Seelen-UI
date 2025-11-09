@@ -265,6 +265,7 @@ wall:
   hours: ore
   interval: Schimbați tapet fiecare
   minutes: minute
+  muted: Dezactivați sunetul video
   no_background: Slideshow gol, folosind în schimb fundalul temei.
   objectFit: Potrivire în fundal
   objectPosition: Poziția de fundal

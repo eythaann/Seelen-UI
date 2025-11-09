@@ -250,6 +250,7 @@ wall:
   hours: 시간
   interval: 배경화면 변경 주기
   minutes: 분
+  muted: 비디오 오디오 음소거
   no_background: 배경화면이 없으면, 테마에 내장된 배경화면을 대신 사용합니다.
   objectFit: 배경 맞춤
   objectPosition: 배경 위치

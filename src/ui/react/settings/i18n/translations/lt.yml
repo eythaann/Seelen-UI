@@ -259,6 +259,7 @@ wall:
   hours: valandos
   interval: Keiskite tapetų kiekvieną
   minutes: minutės
+  muted: Nutildyti vaizdo garsą
   no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
   objectFit: Pagrindinė informacija Pritaikymas
   objectPosition: Pagrindinė padėtis

@@ -263,6 +263,7 @@ wall:
   hours: horas
   interval: Troque o papel de parede todos
   minutes: minutos
+  muted: Silenciar áudio de vídeo
   no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
   objectFit: Ajuste do plano de fundo
   objectPosition: Posição de fundo

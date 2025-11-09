@@ -258,6 +258,7 @@ wall:
   hours: ຊົ່ວໂມງ
   interval: ປ່ຽນຮູບວໍເປເປີທຸກ
   minutes: ນາທີ
+  muted: ສຽງ mute ສຽງສຽງ
   no_background: ການສະໄລ້ທີ່ເປົ່າ, ໂດຍໃຊ້ພື້ນຫລັງຂອງຫົວຂໍ້ແທນ.
   objectFit: ປະຫວັດຄວາມເປັນມາ
   objectPosition: ຕໍາແຫນ່ງພື້ນຫລັງ

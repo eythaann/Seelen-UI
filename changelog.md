@@ -23,6 +23,7 @@
 - app cli was not working.
 - (#1258) missing translations on background process.
 - apps being filtering wrong.
+- stucked video wallpapers.
 
 ## [2.4.4]
 

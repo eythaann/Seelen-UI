@@ -265,6 +265,7 @@ wall:
   hours: horas
   interval: Cambia el fondo de pantalla cada
   minutes: minutos
+  muted: Silenciar audio de vídeo
   no_background: Presentación de fondos vacía, utilizando el fondo del tema en su lugar.
   objectFit: Ajuste de fondo
   objectPosition: Antecedentes

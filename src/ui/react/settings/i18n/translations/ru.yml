@@ -263,6 +263,7 @@ wall:
   hours: часы
   interval: Менять обои через
   minutes: минуты
+  muted: Отключить звук видео
   no_background: Пустое слайд-шоу (используется фон темы)
   objectFit: Фоновая подгонка
   objectPosition: Фоновая позиция
