@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use seelen_core::rect::Rect;
+use seelen_core::{rect::Rect, state::Settings};
 use serde::{Deserialize, Serialize};
 
 use crate::error::{Error, Result};
@@ -51,9 +51,7 @@ impl AppMessage {
 pub enum SvcAction {
     Stop,
     SetStartup(bool),
-    /// this needs to be a string because of bincode's limitations
-    /// this should be SluShortcutsSettings on json format
-    SetShortcutsConfig(String),
+    SetSettings(Box<Settings>),
     ShowWindow {
         hwnd: isize,
         command: i32,

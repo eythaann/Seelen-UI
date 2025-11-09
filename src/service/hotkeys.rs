@@ -1,10 +1,10 @@
-use seelen_core::state::shortcuts::{SluHotkeyAction, SluShortcutsSettings};
+use seelen_core::state::{shortcuts::SluHotkeyAction, Settings};
 use slu_ipc::{messages::AppMessage, AppIpc};
 use win_hotkeys::{error::WHKError, events::KeyboardInputEvent, Hotkey, HotkeyManager, VKey};
 
 use crate::{app_management::kill_seelen_ui_processes, error::Result, exit, log_error};
 
-pub fn start_app_shortcuts(config: SluShortcutsSettings) -> Result<()> {
+pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
     if let Err(err) = HotkeyManager::start_keyboard_capturing() {
         match err {
             WHKError::AlreadyStarted => {}
@@ -15,7 +15,13 @@ pub fn start_app_shortcuts(config: SluShortcutsSettings) -> Result<()> {
     let mut manager = HotkeyManager::current();
     manager.unregister_all()?; // delete previously registered shortcuts
 
-    'registration: for slu_hotkey in &config.app_commands {
+    'registration: for slu_hotkey in &settings.shortcuts.app_commands {
+        if let Some(attached) = &slu_hotkey.attached_to {
+            if !settings.is_widget_enabled(attached) {
+                continue 'registration;
+            }
+        }
+
         let mut vkeys = Vec::new();
         for key in &slu_hotkey.keys {
             let vkey = match VKey::from_keyname(key) {

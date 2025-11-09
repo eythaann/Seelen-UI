@@ -9,6 +9,10 @@
 - new fields on widgets metadata.
 - new system tray widget.
 
+### enhancements
+
+- disable individual shortcuts if attached widget is not enabled.
+
 ### refactor
 
 - refactor on widget declarations for bundled widgets.

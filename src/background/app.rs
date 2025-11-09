@@ -108,9 +108,7 @@ impl Seelen {
 
     pub fn on_settings_change(&mut self, state: &FullState) -> Result<()> {
         rust_i18n::set_locale(state.locale());
-        ServicePipe::request(SvcAction::SetShortcutsConfig(serde_json::to_string(
-            &state.settings.shortcuts,
-        )?))?;
+        ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
 
         if state.is_weg_enabled() {
             SeelenWeg::hide_taskbar();
@@ -205,9 +203,7 @@ impl Seelen {
         start_discord_rpc()?;
 
         if state.are_shortcuts_enabled() {
-            ServicePipe::request(SvcAction::SetShortcutsConfig(serde_json::to_string(
-                &state.settings.shortcuts,
-            )?))?;
+            ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
         }
 
         get_app_handle().listen(SeelenEvent::StateWidgetsChanged, |_| {

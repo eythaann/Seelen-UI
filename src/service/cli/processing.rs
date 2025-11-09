@@ -1,7 +1,6 @@
 use std::sync::LazyLock;
 
 use positioning::{easings::Easing, AppWinAnimation, Positioner};
-use seelen_core::state::shortcuts::SluShortcutsSettings;
 use slu_ipc::messages::{IpcResponse, SvcAction};
 
 use crate::{error::Result, task_scheduler::TaskSchedulerHelper, windows_api::WindowsApi};
@@ -66,10 +65,9 @@ async fn _process_action(command: SvcAction) -> Result<()> {
             *guard = Some(animation);
         }
         SvcAction::SetForeground(hwnd) => WindowsApi::set_foreground(hwnd)?,
-        SvcAction::SetShortcutsConfig(config) => {
-            let config: SluShortcutsSettings = serde_json::from_str(&config)?;
-            if config.enabled {
-                crate::hotkeys::start_app_shortcuts(config)?;
+        SvcAction::SetSettings(settings) => {
+            if settings.shortcuts.enabled {
+                crate::hotkeys::start_app_shortcuts(&settings)?;
             } else {
                 crate::hotkeys::stop_app_shortcuts();
             }
