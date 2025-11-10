@@ -253,3 +253,8 @@ jobs:
 
           FOOTER_TEXT: "Seelen Inc."
           FOOTER_URL: "https://github.com/eythaann/seelen-ui"
+
+  publish-core-library:
+    needs: publish-release
+    uses: ./.github/workflows/publish-core.yml
+    secrets: inherit
