@@ -183,7 +183,7 @@ pub fn register_win_hook() -> Result<()> {
             let _ = TranslateMessage(&msg);
             DispatchMessageW(&msg);
         }
-    })?;
+    });
 
     spawn_named_thread("MouseEventHook", || {
         let handle = get_app_handle();
@@ -198,7 +198,7 @@ pub fn register_win_hook() -> Result<()> {
             }
             std::thread::sleep(sleep_time);
         }
-    })?;
+    });
 
     SluWorkspacesManager::subscribe(|e| log_error!(process_vd_event(e)));
     Ok(())
@@ -252,7 +252,7 @@ pub fn init_zombie_window_killer() -> Result<()> {
                 }
             }
         }
-    })?;
+    });
 
     Ok(())
 }

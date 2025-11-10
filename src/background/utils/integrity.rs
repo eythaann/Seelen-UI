@@ -149,8 +149,7 @@ pub fn start_integrity_thread(app: tauri::AppHandle) {
         if remaining_attempts == 0 {
             app.exit(1);
         }
-    })
-    .expect("Failed to start integrity thread");
+    });
 }
 
 pub fn restart_as_appx() -> Result<!> {

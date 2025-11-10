@@ -152,16 +152,19 @@ impl PerformanceHelper {
 }
 
 /// Useful when spawning threads that will allocate a loop or some other blocking operation
-pub fn spawn_named_thread<F, T>(id: &str, cb: F) -> Result<std::thread::JoinHandle<T>>
+pub fn spawn_named_thread<F, T>(id: &str, cb: F) -> std::thread::JoinHandle<T>
 where
     F: FnOnce() -> T,
     F: Send + 'static,
     T: Send + 'static,
 {
-    std::thread::Builder::new()
+    let thread = std::thread::Builder::new()
         .name(format!("Seelen Thread - {id}"))
-        .spawn(cb)
-        .map_err(|e| format!("Failed to spawn thread: {e}").into())
+        .spawn(cb);
+    match thread {
+        Ok(handle) => handle,
+        Err(e) => panic!("Failed to spawn thread: {e}"),
+    }
 }
 
 pub fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> Result<()> {

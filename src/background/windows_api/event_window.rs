@@ -135,7 +135,7 @@ pub fn create_background_window() -> Result<()> {
     spawn_named_thread("Background Window", move || {
         log::trace!("Creating background window...");
         log_error!(unsafe { BgWindowProc::_create_background_window(&tx) });
-    })?;
+    });
     rx.recv()?;
     log::trace!("Background window created");
     Ok(())

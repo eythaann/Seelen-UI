@@ -6,6 +6,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
 use crate::{
     hook::HookManager,
     modules::apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
+    utils::spawn_named_thread,
     windows_api::{
         window::{event::WinEvent, Window},
         WindowEnumerator, WindowsApi,
@@ -22,6 +23,14 @@ impl UserAppsManager {
         });
 
         HookManager::subscribe(|(event, window)| Self::on_win_event(event, window));
+
+        spawn_named_thread("InteractableWindowsRevalidator", || loop {
+            std::thread::sleep(std::time::Duration::from_millis(1000));
+            Self::instance()
+                .interactable_windows
+                .retain(|w| is_interactable_and_not_hidden(&Window::from(w.hwnd)));
+        });
+
         initial
     }
 

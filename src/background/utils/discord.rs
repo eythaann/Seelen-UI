@@ -110,7 +110,7 @@ pub fn start_discord_rpc() -> Result<()> {
             log::info!("Discord IPC disconnected");
             std::thread::sleep(retry_conection_time);
         }
-    })?;
+    });
     Ok(())
 }
 
