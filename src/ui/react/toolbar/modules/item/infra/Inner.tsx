@@ -1,7 +1,13 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useComputed } from "@preact/signals";
-import { Alignment, FancyToolbarSide, type RemoteDataDeclaration, type ToolbarItem } from "@seelen-ui/lib/types";
+import {
+  Alignment,
+  FancyToolbarSide,
+  type RemoteDataDeclaration,
+  type ToolbarItem,
+  type WidgetId,
+} from "@seelen-ui/lib/types";
 import { useDeepCompareEffect } from "@shared/hooks";
 import { cx } from "@shared/styles";
 import { Tooltip } from "antd";
@@ -15,10 +21,9 @@ import { EvaluateAction } from "../app.tsx";
 import { $toolbar_state } from "../../shared/state/items.ts";
 import { SanboxedComponent } from "./EvaluatedComponents.tsx";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { emit } from "@tauri-apps/api/event";
 import { toPhysicalPixels } from "@shared";
 import { $settings } from "../../shared/state/mod.ts";
-import { SeelenEvent } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 
 export interface InnerItemProps extends HTMLAttributes<HTMLDivElement> {
   module: Omit<ToolbarItem, "type">;
@@ -58,7 +63,11 @@ export function InnerItem(props: InnerItemProps) {
     ...fetchedData,
     env,
     t,
-    trigger: async (widgetId: string) => {
+    trigger: async (widgetId: WidgetId) => {
+      if (typeof widgetId != "string") {
+        return;
+      }
+
       const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();
 
       // get position of the element on the screen
@@ -71,11 +80,13 @@ export function InnerItem(props: InnerItemProps) {
         ? windowY + toPhysicalPixels(rootRect.bottom + 10)
         : windowY + toPhysicalPixels(rootRect.top - 10);
 
-      emit(SeelenEvent.WidgetTriggered, {
-        id: widgetId,
-        desiredPosition: [x, y],
-        alignX: Alignment.Center,
-        alignY: $settings.value.position === FancyToolbarSide.Top ? Alignment.End : Alignment.Start,
+      invoke(SeelenCommand.TriggerWidget, {
+        payload: {
+          id: widgetId,
+          desiredPosition: [x, y],
+          alignX: Alignment.Center,
+          alignY: $settings.value.position === FancyToolbarSide.Top ? Alignment.End : Alignment.Start,
+        },
       });
     },
   });

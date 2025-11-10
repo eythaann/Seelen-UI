@@ -1,6 +1,6 @@
-use tauri::Emitter;
+use seelen_core::state::WidgetTriggerPayload;
 
-use crate::{app::get_app_handle, error::Result};
+use crate::{error::Result, widgets::trigger_widget};
 
 #[derive(Debug, clap::Args)]
 pub struct TaskSwitcherClient {
@@ -30,11 +30,16 @@ impl TaskSwitcherCommand {
     pub fn process(self) -> Result<()> {
         match self {
             TaskSwitcherCommand::SelectNextTask { auto_confirm } => {
-                log::trace!("Select next task");
-                get_app_handle().emit("hidden::task-switcher-select-next", auto_confirm)?;
+                let mut args = WidgetTriggerPayload::new("@seelen/task-switcher".into());
+                args.add_custom_arg("direction", "next");
+                args.add_custom_arg("autoConfirm", auto_confirm);
+                trigger_widget(args)?;
             }
             TaskSwitcherCommand::SelectPreviousTask { auto_confirm } => {
-                get_app_handle().emit("hidden::task-switcher-select-previous", auto_confirm)?;
+                let mut args = WidgetTriggerPayload::new("@seelen/task-switcher".into());
+                args.add_custom_arg("direction", "previous");
+                args.add_custom_arg("autoConfirm", auto_confirm);
+                trigger_widget(args)?;
             }
         }
         Ok(())

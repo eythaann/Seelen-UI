@@ -1,6 +1,6 @@
 pub mod declaration;
 
-use std::path::Path;
+use std::{collections::HashMap, path::Path};
 
 use declaration::WidgetSettingsDeclarationList;
 use schemars::JsonSchema;
@@ -12,7 +12,7 @@ use crate::{
     resource::{ResourceKind, ResourceMetadata, SluResource, WidgetId},
     state::Plugin,
     system_state::MonitorId,
-    utils::search_resource_entrypoint,
+    utils::{search_resource_entrypoint, TsUnknown},
 };
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
@@ -171,8 +171,8 @@ impl Widget {
 /// Arguments that could be passed on the trigger widget function, widgets decides if use it or not.
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
-pub struct WidgetTriggeredArgs {
+#[cfg_attr(feature = "gen-binds", ts(export, optional_fields = nullable))]
+pub struct WidgetTriggerPayload {
     pub id: WidgetId,
     pub monitor_id: Option<MonitorId>,
     pub instance_id: Option<String>,
@@ -188,6 +188,33 @@ pub struct WidgetTriggeredArgs {
     /// - center will set the widget at the center of point,
     /// - end will set the widget at the bottom of point
     pub align_y: Option<Alignment>,
+    /// Custom arguments to be used by the widget recieving the trigger.
+    /// this can be anything, and depends on the widget to evaluate them.
+    pub custom_args: Option<HashMap<String, TsUnknown>>,
+}
+
+impl WidgetTriggerPayload {
+    pub fn new(id: WidgetId) -> Self {
+        Self {
+            id,
+            monitor_id: None,
+            instance_id: None,
+            desired_position: None,
+            align_x: None,
+            align_y: None,
+            custom_args: None,
+        }
+    }
+
+    pub fn add_custom_arg(&mut self, key: impl AsRef<str>, value: impl Into<TsUnknown>) {
+        if self.custom_args.is_none() {
+            self.custom_args = Some(HashMap::new());
+        }
+        self.custom_args
+            .as_mut()
+            .unwrap()
+            .insert(key.as_ref().to_string(), value.into());
+    }
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, TS)]

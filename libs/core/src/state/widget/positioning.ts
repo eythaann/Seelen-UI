@@ -31,8 +31,11 @@ export async function adjustPostionByPlacement({
     y -= height;
   }
 
-  const pos = await fitIntoMonitor({ x, y, width, height });
-  return pos;
+  const fixed = await fitIntoMonitor({ x, y, width, height });
+  return {
+    x: Math.round(fixed.x),
+    y: Math.round(fixed.y),
+  };
 }
 
 async function fitIntoMonitor({

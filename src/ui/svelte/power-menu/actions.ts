@@ -1,17 +1,12 @@
 import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/window";
 import { Widget } from "@seelen-ui/lib";
 import type { State } from "./state.svelte.ts";
-import { listen } from "@tauri-apps/api/event";
 
 let widget = Widget.getCurrent();
 let webview = widget.webview;
 
 export async function setup(state: State) {
   webview.setResizable(false);
-
-  listen("power-menu::show", () => {
-    webview.show();
-  });
 
   webview.onFocusChanged((e) => {
     if (!e.payload) {

@@ -105,5 +105,5 @@ slu_events_declaration! {
 
     StatePerformanceModeChanged(PerformanceMode) as "state::performance-mode-changed",
 
-    WidgetTriggered(WidgetTriggeredArgs) as "widget::triggered",
+    WidgetTriggered(WidgetTriggerPayload) as "widget::triggered",
 }
