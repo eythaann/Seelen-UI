@@ -3,7 +3,9 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(nul)",
-      "Bash(cargo check:*)"
+      "Bash(cargo check:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(git mv:*)"
     ],
     "deny": [],
     "ask": []

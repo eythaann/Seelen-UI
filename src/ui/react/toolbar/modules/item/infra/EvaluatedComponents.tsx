@@ -5,7 +5,7 @@ import { convertFileSrc } from "@tauri-apps/api/core";
 import { memo, useEffect, useState } from "react";
 import { z } from "zod";
 
-import { EvaluateAction } from "../app.tsx";
+import { EvaluateAction } from "../app/actionEvaluator.ts";
 
 interface SanboxedComponentProps {
   code: string;

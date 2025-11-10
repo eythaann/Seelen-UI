@@ -1,29 +1,15 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useComputed } from "@preact/signals";
-import {
-  Alignment,
-  FancyToolbarSide,
-  type RemoteDataDeclaration,
-  type ToolbarItem,
-  type WidgetId,
-} from "@seelen-ui/lib/types";
-import { useDeepCompareEffect } from "@shared/hooks";
+import type { ToolbarItem } from "@seelen-ui/lib/types";
 import { cx } from "@shared/styles";
 import { Tooltip } from "antd";
-import { type HTMLAttributes, useEffect, useRef, useState } from "preact/compat";
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import type { HTMLAttributes } from "preact/compat";
 
-import { Selectors } from "../../shared/store/app.ts";
-import { EvaluateAction } from "../app.tsx";
-
+import { EvaluateAction } from "../app/actionEvaluator.ts";
+import { useItemScope, useRemoteData } from "../app/hooks/index.ts";
 import { $toolbar_state } from "../../shared/state/items.ts";
 import { SanboxedComponent } from "./EvaluatedComponents.tsx";
-import { getCurrentWindow } from "@tauri-apps/api/window";
-import { toPhysicalPixels } from "@shared";
-import { $settings } from "../../shared/state/mod.ts";
-import { invoke, SeelenCommand } from "@seelen-ui/lib";
 
 export interface InnerItemProps extends HTMLAttributes<HTMLDivElement> {
   module: Omit<ToolbarItem, "type">;
@@ -48,7 +34,6 @@ export function InnerItem(props: InnerItemProps) {
 
   const fetchedData = useRemoteData(remoteData);
   const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
-  const env = useSelector(Selectors.env);
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
@@ -56,48 +41,11 @@ export function InnerItem(props: InnerItemProps) {
     animateLayoutChanges: () => false,
   });
 
-  const { t } = useTranslation();
-
-  const [scope, setScope] = useState<Record<string, any>>({
-    ...extraVars,
-    ...fetchedData,
-    env,
-    t,
-    trigger: async (widgetId: WidgetId) => {
-      if (typeof widgetId != "string") {
-        return;
-      }
-
-      const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();
-
-      // get position of the element on the screen
-      const element = document.getElementById(id)!;
-      const domRect = element.getBoundingClientRect();
-      const x = windowX + toPhysicalPixels(domRect.left + domRect.width / 2);
-
-      const rootRect = document.getElementById("root")!.getBoundingClientRect();
-      const y = $settings.value.position === FancyToolbarSide.Top
-        ? windowY + toPhysicalPixels(rootRect.bottom + 10)
-        : windowY + toPhysicalPixels(rootRect.top - 10);
-
-      invoke(SeelenCommand.TriggerWidget, {
-        payload: {
-          id: widgetId,
-          desiredPosition: [x, y],
-          alignX: Alignment.Center,
-          alignY: $settings.value.position === FancyToolbarSide.Top ? Alignment.End : Alignment.Start,
-        },
-      });
-    },
+  const scope = useItemScope({
+    itemId: id,
+    extraVars,
+    fetchedData,
   });
-
-  useEffect(() => {
-    setScope((s) => ({ ...s, env, t }));
-  }, [env, t]);
-
-  useDeepCompareEffect(() => {
-    setScope((s) => ({ ...s, ...extraVars, ...fetchedData }));
-  }, [extraVars, fetchedData]);
 
   return (
     <Tooltip
@@ -145,64 +93,4 @@ export function InnerItem(props: InnerItemProps) {
       </div>
     </Tooltip>
   );
-}
-
-function useRemoteData(remoteData: Record<string, RemoteDataDeclaration | undefined>) {
-  const [state, setState] = useState<Record<string, any>>(() => {
-    return Object.keys(remoteData).reduce((acc, key) => ({ ...acc, [key]: undefined }), {});
-  });
-
-  const intervalsRef = useRef<Record<string, ReturnType<typeof setInterval>>>({});
-  const mountedRef = useRef(true);
-
-  const fetchData = async (key: string, rd: RemoteDataDeclaration): Promise<void> => {
-    if (!mountedRef.current) return;
-
-    try {
-      const response = await fetch(rd.url, rd.requestInit as RequestInit);
-      const data = response.headers.get("Content-Type")?.includes("application/json")
-        ? await response.json()
-        : await response.text();
-
-      if (mountedRef.current) {
-        setState((prev) => ({
-          ...prev,
-          [key]: data,
-        }));
-      }
-    } catch (error) {
-      console.error(`Error fetching ${key}:`, error);
-    }
-  };
-
-  useDeepCompareEffect(() => {
-    mountedRef.current = true;
-    Object.values(intervalsRef.current).forEach(clearInterval);
-    intervalsRef.current = {};
-
-    const initialState = Object.keys(remoteData).reduce(
-      (acc, key) => ({ ...acc, [key]: undefined }),
-      {},
-    );
-
-    setState((prev) => ({ ...initialState, ...prev }));
-
-    Object.entries(remoteData).forEach(([key, rd]) => {
-      if (!rd) return;
-      fetchData(key, rd);
-      if (rd.updateIntervalSeconds) {
-        intervalsRef.current[key] = globalThis.setInterval(
-          () => fetchData(key, rd),
-          rd.updateIntervalSeconds * 1000,
-        );
-      }
-    });
-
-    return () => {
-      mountedRef.current = false;
-      Object.values(intervalsRef.current).forEach(clearInterval);
-    };
-  }, [remoteData]);
-
-  return state;
 }
