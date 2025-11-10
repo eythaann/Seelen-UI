@@ -174,6 +174,11 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
                             .active_icon_packs
                             .push(friendly_id.clone().into());
                     }
+                    ResourceKind::Widget => {
+                        state
+                            .settings
+                            .set_widget_enabled(&friendly_id.clone().into(), true);
+                    }
                     _ => {}
                 }
                 state

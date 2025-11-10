@@ -615,6 +615,10 @@ impl Settings {
     pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
         self.by_widget.is_enabled(widget_id)
     }
+
+    pub fn set_widget_enabled(&mut self, widget_id: &WidgetId, enabled: bool) {
+        self.by_widget.set_enabled(widget_id, enabled);
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
