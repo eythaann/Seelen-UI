@@ -1,24 +1,23 @@
 import { monitorFromPoint } from "@tauri-apps/api/window";
 import { Alignment } from "@seelen-ui/lib/types";
-import type { Widget } from "./mod.ts";
 
 interface args {
-  widget: Widget;
   x: number;
   y: number;
+  width: number;
+  height: number;
   alignX?: Alignment | null;
   alignY?: Alignment | null;
 }
 
 export async function adjustPostionByPlacement({
-  widget,
   x,
   y,
+  width,
+  height,
   alignX,
   alignY,
 }: args): Promise<{ x: number; y: number }> {
-  const { width, height } = await widget.webview.outerSize();
-
   if (alignX === Alignment.Center) {
     x -= width / 2;
   } else if (alignX === Alignment.Start) {

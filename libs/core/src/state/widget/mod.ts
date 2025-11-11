@@ -180,10 +180,12 @@ export class Widget {
 
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
       if (desiredPosition) {
+        const { width, height } = await this.webview.outerSize();
         const pos = await adjustPostionByPlacement({
-          widget: this,
           x: desiredPosition[0],
           y: desiredPosition[1],
+          width,
+          height,
           alignX,
           alignY,
         });
