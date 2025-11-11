@@ -3,7 +3,7 @@ import {
   type Widget as IWidget,
   type WidgetId,
   WidgetPreset,
-  type WidgetTriggeredArgs,
+  type WidgetTriggerPayload,
   type WsdGroupEntry,
 } from "@seelen-ui/types";
 import { SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
@@ -261,8 +261,8 @@ export class Widget {
     }
   }
 
-  public onTrigger(cb: (args: WidgetTriggeredArgs) => void): void {
-    const fn: EventCallback<WidgetTriggeredArgs> = ({ payload }) => {
+  public onTrigger(cb: (args: WidgetTriggerPayload) => void): void {
+    const fn: EventCallback<WidgetTriggerPayload> = ({ payload }) => {
       const { id, monitorId, instanceId } = payload;
       if (
         id !== this.id ||
