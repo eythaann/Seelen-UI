@@ -39,6 +39,8 @@ jobs:
         run: deno task build:npm
 
       - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
         run: |
           cd ./npm
           npm --verbose publish --provenance --tag latest
