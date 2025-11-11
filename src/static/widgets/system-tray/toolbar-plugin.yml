@@ -2,13 +2,13 @@ id: "@seelen/tb-system-tray"
 metadata:
   displayName: !extend i18n/display_name.yml
   description: !extend i18n/description.yml
-icon: BsThreeDots
+icon: IoIosArrowDropdown
 target: "@seelen/fancy-toolbar"
 plugin:
   type: generic
   tooltip: |-
     return "System Tray";
   template: |-
-    return Icon({ name: "BsThreeDots" });
+    return Icon({ name: "IoIosArrowDropdown" });
   onClickV2: |-
     trigger("@seelen/system-tray");
