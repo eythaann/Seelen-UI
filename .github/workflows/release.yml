@@ -195,7 +195,7 @@ jobs:
           SBDisableTelemetry: true
 
   generate-update-file:
-    needs: sign-and-upload
+    needs: [create-release, sign-and-upload]
     permissions:
       contents: write
     runs-on: ubuntu-latest
