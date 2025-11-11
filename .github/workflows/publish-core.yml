@@ -41,4 +41,4 @@ jobs:
       - name: Publish to NPM
         run: |
           cd ./npm
-          npm publish --provenance --tag latest
+          npm --verbose publish --provenance --tag latest

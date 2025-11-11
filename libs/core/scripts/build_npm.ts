@@ -12,10 +12,10 @@ const packageJson: BuildOptions["package"] = {
   license,
   repository: {
     type: "git",
-    url: "git+https://github.com/Seelen-Inc/slu-lib.git",
+    url: "git+https://github.com/eythaann/Seelen-UI.git",
   },
   bugs: {
-    url: "https://github.com/Seelen-Inc/slu-lib/issues",
+    url: "https://github.com/eythaann/Seelen-UI/issues",
   },
 };
 
