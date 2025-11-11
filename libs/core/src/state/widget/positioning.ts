@@ -1,5 +1,5 @@
 import { monitorFromPoint } from "@tauri-apps/api/window";
-import { Alignment } from "@seelen-ui/lib/types";
+import { Alignment } from "@seelen-ui/types";
 
 interface args {
   x: number;
