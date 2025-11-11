@@ -44,6 +44,8 @@ pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
                     log_error!(kill_seelen_ui_processes());
                 }
                 SluHotkeyAction::MiscForceQuit => {
+                    crate::EXITING.store(true, std::sync::atomic::Ordering::SeqCst);
+                    log_error!(kill_seelen_ui_processes());
                     exit(0);
                 }
                 _ => {}
