@@ -1,3 +1,4 @@
+use std::borrow::Borrow;
 use std::collections::HashMap;
 use std::hash::Hash;
 
@@ -8,7 +9,7 @@ use crate::trace_lock;
 /// Wrapper for `Mutex<HashMap<K, V>>` with simplifies the API and prevents deadlocks
 pub struct SyncHashMap<K, V>(Mutex<HashMap<K, V>>);
 
-#[allow(dead_code)]
+#[allow(dead_code, clippy::multiple_bound_locations)]
 impl<K, V> SyncHashMap<K, V>
 where
     K: Eq + Hash,
@@ -29,7 +30,11 @@ where
         trace_lock!(self.0).insert(key, value)
     }
 
-    pub fn remove(&self, key: &K) -> Option<V> {
+    pub fn remove<Q: ?Sized>(&self, key: &Q) -> Option<V>
+    where
+        K: Borrow<Q>,
+        Q: Eq + Hash,
+    {
         trace_lock!(self.0).remove(key)
     }
 
@@ -37,15 +42,10 @@ where
         trace_lock!(self.0).contains_key(key)
     }
 
-    pub fn get<F, R>(&self, key: &K, f: F) -> Option<R>
+    pub fn get<Q: ?Sized, F, R>(&self, key: &Q, f: F) -> Option<R>
     where
-        F: FnOnce(&V) -> R,
-    {
-        trace_lock!(self.0).get(key).map(f)
-    }
-
-    pub fn get_mut<F, R>(&self, key: &K, f: F) -> Option<R>
-    where
+        K: Borrow<Q>,
+        Q: Eq + Hash,
         F: FnOnce(&mut V) -> R,
     {
         trace_lock!(self.0).get_mut(key).map(f)

@@ -24,6 +24,7 @@
 - (#1258) missing translations on background process.
 - apps being filtering wrong.
 - stucked video wallpapers.
+- deadlocks on media manager.
 
 ## [2.4.4]
 

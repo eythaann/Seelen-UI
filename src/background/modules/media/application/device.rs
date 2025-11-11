@@ -138,7 +138,7 @@ impl MediaDevice {
         }
     }
 
-    pub fn release(self) {
+    pub fn release(&self) {
         unsafe {
             log_error!(self
                 .volume_endpoint
