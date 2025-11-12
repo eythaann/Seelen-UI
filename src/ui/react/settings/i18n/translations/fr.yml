@@ -157,7 +157,6 @@ resources:
     fonctionner correctement.
   delete: Supprimer les ressources
   discover: Découvrez d'autres ressources
-  export: Exporter la ressource
   has_update: Une mise à jour est disponible
   import_wallpapers: Importer des fonds d'écran locaux
   open_folder: Ouvrir le dossier des ressources

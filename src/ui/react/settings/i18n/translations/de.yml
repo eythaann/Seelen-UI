@@ -157,7 +157,6 @@ resources:
     funktionieren.
   delete: Ressource löschen
   discover: Weitere Ressourcen entdecken
-  export: Ressource exportieren
   has_update: Ein Update ist verfügbar
   import_wallpapers: Lokale Hintergrundbilder importieren
   open_folder: Ressourcenordner öffnen

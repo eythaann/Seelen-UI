@@ -9,14 +9,9 @@ import { Button, Popconfirm, Tooltip } from "antd";
 import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
 import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
-
-import { RootSelectors } from "../shared/store/app/selectors.ts";
-
-import { ExportResource } from "../shared/store/storeApi.ts";
 
 type AnyResource = {
   id: ResourceId;
@@ -31,7 +26,6 @@ interface ResourceCardProps {
 
 export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
   const [hasUpdate, setHasUpdate] = useState(false);
-  const isDevToolsEnabled = useSelector(RootSelectors.devTools);
 
   const { t } = useTranslation();
 
@@ -58,11 +52,10 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
       (majorTarget === major && minorTarget < minor) ||
       (majorTarget === major && minorTarget === minor && patchTarget < patch));
 
-  const targetIsNewer = !!resource.metadata.appTargetVersion && (
-    majorTarget > major ||
-    (majorTarget === major && minorTarget > minor) ||
-    (majorTarget === major && minorTarget === minor && patchTarget > patch)
-  );
+  const targetIsNewer = !!resource.metadata.appTargetVersion &&
+    (majorTarget > major ||
+      (majorTarget === major && minorTarget > minor) ||
+      (majorTarget === major && minorTarget === minor && patchTarget > patch));
 
   const showWarning = targetIsOlder && !resource.metadata.bundled;
   const showDanger = targetIsNewer && !resource.metadata.bundled;
@@ -112,18 +105,6 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
           )}
           {actions}
         </div>
-        {isDevToolsEnabled && kind !== "Wallpaper" && (
-          <Tooltip title={t("resources.export")} placement="left">
-            <Button
-              type="text"
-              onClick={() => {
-                ExportResource(resource);
-              }}
-            >
-              <Icon iconName="BiExport" />
-            </Button>
-          </Tooltip>
-        )}
         {!resource.metadata.bundled && resource.metadata.path.includes("com.seelen.seelen-ui") && (
           <Tooltip title={t("resources.delete")} placement="left">
             <Popconfirm

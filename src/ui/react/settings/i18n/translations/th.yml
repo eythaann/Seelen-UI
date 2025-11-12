@@ -150,7 +150,6 @@ resources:
   app_outdated: ทรัพยากรนี้ต้องการ Seelen UI รุ่นใหม่กว่าเพื่อทำงานอย่างถูกต้อง
   delete: ลบทรัพยากร
   discover: ค้นพบทรัพยากรเพิ่มเติม
-  export: ทรัพยากรส่งออก
   has_update: มีการอัปเดต
   import_wallpapers: นำเข้าวอลเปเปอร์ในท้องถิ่น
   open_folder: เปิดโฟลเดอร์ทรัพยากร

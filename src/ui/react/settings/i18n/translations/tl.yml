@@ -159,7 +159,6 @@ resources:
     Seelen UI upang gumana nang maayos.
   delete: Tanggalin ang mapagkukunan
   discover: Tuklasin ang higit pang mga mapagkukunan
-  export: Mapagkukunan ng pag -export
   has_update: Magagamit ang isang pag -update
   import_wallpapers: Mag -import ng mga lokal na wallpaper
   open_folder: Buksan ang folder ng mapagkukunan

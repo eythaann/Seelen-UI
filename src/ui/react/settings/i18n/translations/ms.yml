@@ -155,7 +155,6 @@ resources:
     baik.
   delete: Padam sumber
   discover: Cari lebih banyak sumber
-  export: Sumber Eksport
   has_update: Kemas kini ada
   import_wallpapers: Mengimport kertas dinding tempatan
   open_folder: Buka Folder Sumber

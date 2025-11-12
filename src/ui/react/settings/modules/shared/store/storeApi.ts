@@ -57,23 +57,3 @@ export async function ExportApps(apps: any[]) {
     fs.writeTextFile(pathToSave, yaml.dump(apps));
   }
 }
-
-export async function ExportResource(resource: { id: string }) {
-  const parts = resource.id.split("/");
-  const resourceName = parts.pop();
-  if (!resourceName) {
-    console.error("No resource name when exporting");
-    return;
-  }
-  const date = new Date();
-  const filename = resourceName + "." + date.toISOString().split("T")[0] +
-    ".yml";
-  const pathToSave = await dialog.save({
-    title: i18n.t("resources.export"),
-    defaultPath: await path.join(await path.downloadDir(), filename),
-    filters: [{ name: "YAML", extensions: ["yaml", "yml"] }],
-  });
-  if (pathToSave) {
-    fs.writeTextFile(pathToSave, yaml.dump(resource));
-  }
-}

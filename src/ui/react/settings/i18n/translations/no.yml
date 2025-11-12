@@ -155,7 +155,6 @@ resources:
     ordentlig.
   delete: Slett ressurs
   discover: Oppdag flere ressurser
-  export: Eksportressurs
   has_update: En oppdatering er tilgjengelig
   import_wallpapers: Importer lokale bakgrunnsbilder
   open_folder: Åpne ressursmappe

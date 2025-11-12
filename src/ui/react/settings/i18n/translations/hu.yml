@@ -154,7 +154,6 @@ resources:
   app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
   delete: Az erőforrás törlése
   discover: További források felfedezése
-  export: Export erőforrás
   has_update: Frissítés érhető el
   import_wallpapers: Helyi háttérképek importálása
   open_folder: Nyissa meg az erőforrás mappát

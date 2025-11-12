@@ -153,7 +153,6 @@ resources:
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
   delete: លុបធនធាន
   discover: ស្វែងយល់ពីធនធានបន្ថែម
-  export: ធនធាននាំចេញ
   has_update: ការធ្វើបច្ចុប្បន្នភាពមាន
   import_wallpapers: នាំចូលផ្ទាំងរូបភាពក្នុងស្រុក
   open_folder: បើកថតធនធាន

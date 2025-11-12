@@ -152,7 +152,6 @@ resources:
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
   delete: Delete Resource
   discover: Discover more resources
-  export: Export Resource
   has_update: An update is available
   import_wallpapers: Import local wallpapers
   open_folder: Open resource folder

@@ -155,7 +155,6 @@ resources:
     rozhraní Seelen.
   delete: Odstranit zdroj
   discover: Objevte další zdroje
-  export: Exportní zdroj
   has_update: K dispozici je aktualizace
   import_wallpapers: Import místních tapet
   open_folder: Otevření složky se zdroji

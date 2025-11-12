@@ -149,7 +149,6 @@ resources:
   app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
   delete: リソースを削除します
   discover: その他のリソース
-  export: 輸出リソース
   has_update: アップデートが利用可能です
   import_wallpapers: ローカル壁紙のインポート
   open_folder: リソースフォルダを開く

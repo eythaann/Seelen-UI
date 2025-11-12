@@ -151,7 +151,6 @@ resources:
   app_outdated: ይህ ሀብት በአግባቡ እንዲሠራ አዲስ የአዲስ ስሪት ይፈልጋል.
   delete: ምንጭን ሰርዝ
   discover: ተጨማሪ ሀብቶችን ያግኙ
-  export: ወደ ውጭ የመላክ ሀብት
   has_update: ዝመና ይገኛል
   import_wallpapers: የአካባቢያዊ የግድግዳ ወረቀቶች ያስመጡ
   open_folder: ክፍት የመረጃ ምንጭ አቃፊ

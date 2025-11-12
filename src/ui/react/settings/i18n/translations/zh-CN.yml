@@ -146,7 +146,6 @@ resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
   delete: 删除资源
   discover: 发现更多资源
-  export: 出口资源
   has_update: 有更新可用
   import_wallpapers: 导入本地壁纸
   open_folder: 打开资源文件夹

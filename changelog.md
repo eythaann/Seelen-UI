@@ -2,6 +2,14 @@
 
 ## [2.4.6]
 
+### features
+
+- add new cli command to bundle resources.
+
+### refactor
+
+- remove export resource button from settings.
+
 ## [2.4.5]
 
 ### features

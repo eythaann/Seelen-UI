@@ -153,7 +153,6 @@ resources:
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
   delete: Verwijder resource
   discover: Ontdek meer bronnen
-  export: Exporteren
   has_update: Er is een update beschikbaar
   import_wallpapers: Lokale achtergronden importeren
   open_folder: Map met bronnen openen

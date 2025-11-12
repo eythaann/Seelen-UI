@@ -153,7 +153,6 @@ resources:
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
   delete: Eyða auðlindinni
   discover: Uppgötvaðu fleiri úrræði
-  export: Útflutningsauðlind
   has_update: Uppfærsla er í boði
   import_wallpapers: Flytja inn staðbundið veggfóður
   open_folder: Opin auðlindamappa

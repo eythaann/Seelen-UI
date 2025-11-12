@@ -153,7 +153,6 @@ resources:
   app_outdated: Ovaj resurs zahtijeva noviju verziju Seelen Ui da radi pravilno.
   delete: Izbriši resurs
   discover: Otkrijte više resursa
-  export: Izvozni resurs
   has_update: Dostupno je ažuriranje
   import_wallpapers: Uvoz lokalnih pozadina
   open_folder: Otvorite mapu resursa

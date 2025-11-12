@@ -155,7 +155,6 @@ resources:
     werk.
   delete: Vee hulpbron uit
   discover: Ontdek meer bronne
-  export: Uitvoerhulpbron
   has_update: '''N Opdatering is beskikbaar'
   import_wallpapers: Voer plaaslike agtergronde in
   open_folder: Open Resource Folder

@@ -155,7 +155,6 @@ resources:
     correttamente.
   delete: Elimina risorsa
   discover: Scoprire altre risorse
-  export: Esportazione di risorse
   has_update: È disponibile un aggiornamento
   import_wallpapers: Importazione di sfondi locali
   open_folder: Aprire la cartella delle risorse

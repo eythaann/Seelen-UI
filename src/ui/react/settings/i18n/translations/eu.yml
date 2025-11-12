@@ -155,7 +155,6 @@ resources:
     dezan.
   delete: Baliabidea ezabatu
   discover: Ezagutu baliabide gehiago
-  export: Esportatu baliabidea
   has_update: Eguneratze bat eskuragarri dago
   import_wallpapers: Inportatu tokiko horma-irudiak
   open_folder: Baliabide irekiko karpeta

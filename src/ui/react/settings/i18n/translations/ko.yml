@@ -150,7 +150,6 @@ resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
   delete: 리소스 삭제
   discover: 더 많은 리소스 살펴보기
-  export: 리소스 내보내기
   has_update: 업데이트를 사용할 수 있습니다
   import_wallpapers: 로컬 배경화면 가져오기
   open_folder: 리소스 폴더 열기

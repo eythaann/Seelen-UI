@@ -155,7 +155,6 @@ resources:
     Seelen per funcionar correctament.
   delete: Esborra el recurs
   discover: Descobriu més recursos
-  export: Els recursos d’exportació
   has_update: Hi ha disponible una actualització
   import_wallpapers: Importa fons de pantalla locals
   open_folder: Obrir la carpeta de recursos

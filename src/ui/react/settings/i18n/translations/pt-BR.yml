@@ -155,7 +155,6 @@ resources:
     Seelen para funcionar corretamente.
   delete: Excluir recursos
   discover: Descubra mais recursos
-  export: Recurso de exportação
   has_update: Uma atualização está disponível
   import_wallpapers: Importar papéis de parede locais
   open_folder: Abrir a pasta de recursos

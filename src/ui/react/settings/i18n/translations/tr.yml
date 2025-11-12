@@ -155,7 +155,6 @@ resources:
     gerekir.
   delete: Kaynağı Sil
   discover: Daha fazla kaynak keşfedin
-  export: Kaynak Dışa Aktarımı
   has_update: Bir güncelleme mevcuttur
   import_wallpapers: Yerel duvar kağıtlarını içe aktarma
   open_folder: Kaynak klasörünü aç
