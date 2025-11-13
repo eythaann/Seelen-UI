@@ -1,6 +1,3 @@
-use std::sync::LazyLock;
-
-use parking_lot::Mutex;
 use seelen_core::system_state::MonitorId;
 use serde::{Deserialize, Serialize};
 
@@ -47,13 +44,8 @@ impl VirtualDesktopCli {
     }
 }
 
-static LOCKER: LazyLock<Mutex<()>> = LazyLock::new(|| Mutex::new(()));
-
 impl VdCommand {
     pub fn process(self) -> Result<()> {
-        // we lock here to prevent concurrent calls
-        let _lock = LOCKER.lock();
-
         let focused_win = Window::get_foregrounded();
         let monitor_id: MonitorId = focused_win.monitor().stable_id()?.into();
         let mut vd = get_vd_manager();

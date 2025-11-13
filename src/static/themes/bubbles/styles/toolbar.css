@@ -20,4 +20,8 @@
     padding: 2px 8px;
     border-radius: 10px;
   }
+
+  &.ft-bar-item-active {
+    color: var(--config-accent-color);
+  }
 }

@@ -222,6 +222,10 @@ async fn translate_text(
         target_lang = "zh-CN".to_string();
     }
 
+    if target_lang == "pt" {
+        target_lang = "pt-BR".to_string();
+    }
+
     let translated = translator
         .translate_async(&source, &source_lang, &target_lang)
         .await?;

@@ -10,6 +10,10 @@
 
 - remove export resource button from settings.
 
+### fix
+
+- inifity switching loop on workspaces.
+
 ## [2.4.5]
 
 ### features

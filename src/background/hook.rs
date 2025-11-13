@@ -113,21 +113,15 @@ impl HookManager {
                 .log_error();
         }
 
-        {
-            log_error!(get_vd_manager().on_win_event(event, &origin), event);
-        }
+        log_error!(SluWorkspacesManager::on_win_event(event, &origin), event);
 
         let app_state = FULL_STATE.load();
         if app_state.is_weg_enabled() {
-            std::thread::spawn(move || {
-                log_error!(SeelenWeg::process_global_win_event(event, &origin), event);
-            });
+            log_error!(SeelenWeg::process_global_win_event(event, &origin), event);
         }
 
         if app_state.is_window_manager_enabled() {
-            std::thread::spawn(move || {
-                log_error!(WindowManagerV2::process_win_event(event, &origin), event);
-            });
+            log_error!(WindowManagerV2::process_win_event(event, &origin), event);
         }
 
         {

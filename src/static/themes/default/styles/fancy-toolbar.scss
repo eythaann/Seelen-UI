@@ -153,18 +153,12 @@
 
   &[data-dynamic-color="true"] {
     // --color-focused-app-foreground (this var exist but is unused)
-    color: var(
-      --color-maximized-on-bg-foreground,
-      var(--color-persist-gray-100)
-    );
+    color: var(--color-maximized-on-bg-foreground, var(--color-persist-gray-100));
 
     > .bg-layers {
       > .bg-layer-2 {
         // --color-focused-app-background (this var exist but is unused)
-        background-color: var(
-          --color-maximized-on-bg-background,
-          var(--color-persist-gray-900)
-        );
+        background-color: var(--color-maximized-on-bg-background, var(--color-persist-gray-900));
       }
     }
   }
@@ -194,6 +188,19 @@
         background-color: var(--config-accent-color);
       }
     }
+  }
+
+  &.ft-bar-item-clickable {
+    padding: 1px 4px;
+    border-radius: 6px;
+
+    &:hover {
+      backdrop-filter: brightness(3);
+    }
+  }
+
+  &.ft-bar-item-active {
+    color: var(--config-accent-color);
   }
 }
 
@@ -229,19 +236,6 @@
       }
     }
   }
-}
-
-.ft-bar-item-clickable {
-  padding: 1px 4px;
-  border-radius: 6px;
-
-  &:hover {
-    backdrop-filter: brightness(3);
-  }
-}
-
-.ft-bar-item-active {
-  color: var(--config-accent-color);
 }
 
 .ft-bar-item-content {
