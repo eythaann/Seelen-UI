@@ -153,7 +153,6 @@ resources:
   app_outdated: આ સંસાધનને યોગ્ય રીતે કાર્ય કરવા માટે સીલેન યુઆઈનું નવું સંસ્કરણ જરૂરી છે.
   delete: સાધન કા delો
   discover: વધુ સંસાધનો શોધો
-  export: નિકાસ સાધન
   has_update: એક અપડેટ ઉપલબ્ધ છે
   import_wallpapers: સ્થાનિક વ wallp લપેપર્સ આયાત કરો
   open_folder: ખુલ્લા સંસાધન ફોલ્ડર
@@ -260,6 +259,7 @@ wall:
   hours: સમય
   interval: દરેક વ wallp લપેપર બદલો
   minutes: પ્રકાર
+  muted: વિડિઓ ઑડિઓ મ્યૂટ કરો
   no_background: તેના બદલે થીમની પૃષ્ઠભૂમિનો ઉપયોગ કરીને ખાલી સ્લાઇડશો.
   objectFit: પૃષ્ઠભૂમિ
   objectPosition: પૃષ્ઠભૂમિ

@@ -151,7 +151,6 @@ resources:
   app_outdated: ຊັບພະຍາກອນນີ້ຮຽກຮ້ອງໃຫ້ມີ Searen ລຸ້ນໃຫມ່ UI ໃຫ້ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
   delete: ລົບລ້າງຊັບພະຍາກອນ
   discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ
-  export: ຊັບພະຍາກອນການສົ່ງອອກ
   has_update: ມີການປັບປຸງໃຫມ່
   import_wallpapers: ນໍາເຂົ້າຮູບວໍເປເປີທ້ອງຖິ່ນ
   open_folder: Open Opence Folder
@@ -258,6 +257,7 @@ wall:
   hours: ຊົ່ວໂມງ
   interval: ປ່ຽນຮູບວໍເປເປີທຸກ
   minutes: ນາທີ
+  muted: ສຽງ mute ສຽງສຽງ
   no_background: ການສະໄລ້ທີ່ເປົ່າ, ໂດຍໃຊ້ພື້ນຫລັງຂອງຫົວຂໍ້ແທນ.
   objectFit: ປະຫວັດຄວາມເປັນມາ
   objectPosition: ຕໍາແຫນ່ງພື້ນຫລັງ

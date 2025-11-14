@@ -156,7 +156,6 @@ resources:
     σωστά.
   delete: Διαγραφή πόρου
   discover: Ανακαλύψτε περισσότερους πόρους
-  export: Πόρος εξαγωγής
   has_update: Μια ενημέρωση είναι διαθέσιμη
   import_wallpapers: Εισαγωγή τοπικών ταπετσαριών
   open_folder: Άνοιγμα φακέλου πόρων
@@ -264,6 +263,7 @@ wall:
   hours: ώρες
   interval: Αλλάξτε ταπετσαρία κάθε
   minutes: πρακτικά
+  muted: Σίγαση ήχου βίντεο
   no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
   objectFit: Φόντο Fit
   objectPosition: Ιστορικό Θέση

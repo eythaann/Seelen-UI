@@ -151,7 +151,6 @@ resources:
   app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
   delete: Paarẹ awọn olu
   discover: Ṣawari awọn orisun diẹ sii
-  export: Si ilẹkan ta
   has_update: Imudojuiwọn wa
   import_wallpapers: Gbe awọn iṣẹṣọ ogiri agbegbe wọle
   open_folder: Ṣii folda Ipilẹṣẹ
@@ -254,6 +253,7 @@ wall:
   hours: wakati
   interval: Ayipada ogiri ni gbogbo
   minutes: iṣẹju
+  muted: Free Voio fidio
   no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
   objectFit: Abẹla abẹlẹ
   objectPosition: Ipo abẹlẹ

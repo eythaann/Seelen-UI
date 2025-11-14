@@ -3,7 +3,7 @@ import {
   type Widget as IWidget,
   type WidgetId,
   WidgetPreset,
-  type WidgetTriggeredArgs,
+  type WidgetTriggerPayload,
   type WsdGroupEntry,
 } from "@seelen-ui/types";
 import { SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
@@ -16,6 +16,7 @@ import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";
 import { autoSizeWebviewBasedOnContent } from "./sizing.ts";
 import type { EventCallback } from "@tauri-apps/api/event";
+import { adjustPostionByPlacement } from "./positioning.ts";
 
 export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
 export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
@@ -177,55 +178,19 @@ export class Widget {
       }
     });
 
-    this.onTrigger(async ({ desiredPosition }) => {
+    this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
       if (desiredPosition) {
-        let x = desiredPosition[0];
-        let y = desiredPosition[1];
-
-        const monitor = await monitorFromPoint(x, y);
-        if (monitor) {
-          const { width, height } = await this.webview.outerSize();
-          const x2 = x + width;
-          const y2 = y + height;
-
-          const mx = monitor.position.x;
-          const my = monitor.position.y;
-          const mx2 = mx + monitor.size.width;
-          const my2 = my + monitor.size.height;
-
-          // check left edge
-          if (x < mx) {
-            x = mx;
-          }
-
-          // check top edge
-          if (y < my) {
-            y = my;
-          }
-
-          // check right edge
-          if (x2 > mx2) {
-            x = mx2 - width;
-          }
-
-          // check bottom edge
-          if (y2 > my2) {
-            y = my2 - height;
-          }
-
-          // ensure final position is still within monitor bounds (in case window is larger than monitor)
-          if (x < mx) {
-            x = mx;
-          }
-
-          if (y < my) {
-            y = my;
-          }
-        }
-
-        await this.webview.setPosition(new PhysicalPosition(x, y));
+        const { width, height } = await this.webview.outerSize();
+        const pos = await adjustPostionByPlacement({
+          x: desiredPosition[0],
+          y: desiredPosition[1],
+          width,
+          height,
+          alignX,
+          alignY,
+        });
+        await this.webview.setPosition(new PhysicalPosition(pos.x, pos.y));
       }
-
       await this.webview.show();
     });
   }
@@ -298,8 +263,8 @@ export class Widget {
     }
   }
 
-  public onTrigger(cb: (args: WidgetTriggeredArgs) => void): void {
-    const fn: EventCallback<WidgetTriggeredArgs> = ({ payload }) => {
+  public onTrigger(cb: (args: WidgetTriggerPayload) => void): void {
+    const fn: EventCallback<WidgetTriggerPayload> = ({ payload }) => {
       const { id, monitorId, instanceId } = payload;
       if (
         id !== this.id ||

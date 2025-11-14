@@ -99,9 +99,11 @@ pub async fn handle_console_client() -> Result<()> {
     }
 
     if matches.command.is_some() {
+        attach_console();
         matches.process()?;
         std::process::exit(0);
     }
+
     Ok(())
 }
 

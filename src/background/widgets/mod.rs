@@ -9,13 +9,20 @@ pub mod window_manager;
 
 use std::path::PathBuf;
 
-use tauri::Manager;
+use seelen_core::{handlers::SeelenEvent, state::WidgetTriggerPayload};
+use tauri::{Emitter, Manager};
 
 use crate::{
     app::get_app_handle,
     error::Result,
     utils::{constants::SEELEN_COMMON, WidgetWebviewLabel},
 };
+
+#[tauri::command(async)]
+pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
+    get_app_handle().emit(SeelenEvent::WidgetTriggered, &payload)?;
+    Ok(())
+}
 
 pub trait TrustedWidget {
     const ID: &'static str;

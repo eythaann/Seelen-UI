@@ -158,7 +158,6 @@ resources:
     u shaqeynaya.
   delete: Tirtir Kheyraadka
   discover: Soo hel ilo badan
-  export: Ilaha dhoofinta
   has_update: Cusboonaysiin ayaa la heli karaa
   import_wallpapers: Soo dejiso waraaqaha boodhka ee maxalliga ah
   open_folder: Fur faylka furan
@@ -265,6 +264,7 @@ wall:
   hours: saacadood
   interval: Beddel wadooyinka si kasta
   minutes: daqiiqo
+  muted: Muuqaalka Muuqaalka Mate
   no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
   objectFit: Asalka taam
   objectPosition: Booska asalka ah

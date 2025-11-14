@@ -155,7 +155,6 @@ resources:
     werk.
   delete: Vee hulpbron uit
   discover: Ontdek meer bronne
-  export: Uitvoerhulpbron
   has_update: '''N Opdatering is beskikbaar'
   import_wallpapers: Voer plaaslike agtergronde in
   open_folder: Open Resource Folder
@@ -263,6 +262,7 @@ wall:
   hours: ure
   interval: Verander die muurpapier elke
   minutes: minute
+  muted: Demp video-oudio
   no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
   objectFit: Agtergrond pas
   objectPosition: Agtergrondposisie

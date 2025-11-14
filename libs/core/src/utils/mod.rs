@@ -20,9 +20,9 @@ macro_rules! __switch {
 #[ts(type = "unknown")]
 pub struct TsUnknown(pub serde_json::Value);
 
-impl From<serde_json::Value> for TsUnknown {
-    fn from(value: serde_json::Value) -> Self {
-        TsUnknown(value)
+impl<T: Into<serde_json::Value>> From<T> for TsUnknown {
+    fn from(value: T) -> Self {
+        TsUnknown(value.into())
     }
 }
 

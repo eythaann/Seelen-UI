@@ -150,7 +150,6 @@ resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
   delete: 리소스 삭제
   discover: 더 많은 리소스 살펴보기
-  export: 리소스 내보내기
   has_update: 업데이트를 사용할 수 있습니다
   import_wallpapers: 로컬 배경화면 가져오기
   open_folder: 리소스 폴더 열기
@@ -250,6 +249,7 @@ wall:
   hours: 시간
   interval: 배경화면 변경 주기
   minutes: 분
+  muted: 비디오 오디오 음소거
   no_background: 배경화면이 없으면, 테마에 내장된 배경화면을 대신 사용합니다.
   objectFit: 배경 맞춤
   objectPosition: 배경 위치

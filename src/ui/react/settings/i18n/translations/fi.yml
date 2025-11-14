@@ -155,7 +155,6 @@ resources:
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
   delete: Poistaa resurssi
   discover: Löydä lisää resursseja
-  export: Vientiresurssi
   has_update: Päivitys on käytettävissä
   import_wallpapers: Tuo paikallisia taustakuvia
   open_folder: Avaa resurssikansio
@@ -263,6 +262,7 @@ wall:
   hours: tuntia
   interval: Vaihda taustakuva jokainen
   minutes: minuutti
+  muted: Mykistä videon ääni
   no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
   objectFit: Tausta Fit
   objectPosition: Tausta Asema

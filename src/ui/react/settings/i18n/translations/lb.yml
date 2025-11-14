@@ -153,7 +153,6 @@ resources:
   app_outdated: Dës Ressource brauch eng nei Versioun vu Seelen Ui fir richteg ze schaffen.
   delete: Läschen Ressource
   discover: Entdeckt méi Ressourcen
-  export: Export Ressource
   has_update: En Update ass verfügbar
   import_wallpapers: Import lokal Wallpapers
   open_folder: Oppen Ressource Dossier
@@ -261,6 +260,7 @@ wall:
   hours: Stonnen.
   interval: Änneren Wallpaper all
   minutes: Minutte vun der Minutten
+  muted: Demp Video Audio
   no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
   objectFit: Hannergrond fit
   objectPosition: Hannergrënn Positioun

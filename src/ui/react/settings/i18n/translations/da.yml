@@ -153,7 +153,6 @@ resources:
   app_outdated: Denne ressource kræver en nyere version af Seelen UI for at fungere korrekt.
   delete: Slet ressource
   discover: Opdag flere ressourcer
-  export: Eksporter ressource
   has_update: En opdatering er tilgængelig
   import_wallpapers: Importer lokale baggrunde
   open_folder: Åbn ressourcemappen
@@ -261,6 +260,7 @@ wall:
   hours: timer
   interval: Skift tapet hver
   minutes: minutter
+  muted: Slå videolyd fra
   no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
   objectFit: Baggrundstilpasning
   objectPosition: Baggrundsposition

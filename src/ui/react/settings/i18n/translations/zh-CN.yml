@@ -146,7 +146,6 @@ resources:
   app_outdated: 此资源需要更新版本的 Seelen UI 才能正常工作。
   delete: 删除资源
   discover: 发现更多资源
-  export: 导出资源
   has_update: 有可用更新
   import_wallpapers: 导入本地壁纸
   open_folder: 打开资源文件夹
@@ -244,9 +243,9 @@ wall:
   hours: 小时
   interval: 更换壁纸的时间间隔
   minutes: 分钟
-  no_background: 幻灯片为空，使用主题背景替代。
-  objectFit: 背景适应方式
-  objectPosition: 背景位置
+  no_background: 空幻灯片，使用主题背景。
+  objectFit: 背景适合
+  objectPosition: 背景职位
   overlayColor: 叠加颜色
   overlayMixBlendMode: 叠加混合模式
   playback: 播放速度

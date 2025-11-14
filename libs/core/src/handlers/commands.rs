@@ -161,6 +161,9 @@ slu_commands_declaration! {
     StateRequestWallpaperAddition = state_request_wallpaper_addition(),
     StateGetPerformanceMode = state_get_performance_mode() -> PerformanceMode,
 
+    // Widgets
+    TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
+
     // Shell
     GetNativeShellWallpaper = get_native_shell_wallpaper() -> PathBuf,
     SetNativeShellWallpaper = set_native_shell_wallpaper(path: PathBuf),

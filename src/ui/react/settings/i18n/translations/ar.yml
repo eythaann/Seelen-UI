@@ -151,7 +151,6 @@ resources:
   app_outdated: يتطلب هذا المورد إصدارًا أحدث من Seelen UI ليعمل بشكل صحيح.
   delete: حذف المورد
   discover: اكتشف المزيد من الموارد
-  export: موارد التصدير
   has_update: تحديث متاح
   import_wallpapers: استيراد الخلفيات المحلية
   open_folder: فتح مجلد الموارد
@@ -254,6 +253,7 @@ wall:
   hours: ساعات
   interval: تغيير الخلفية كل
   minutes: دقائق
+  muted: كتم صوت الفيديو
   no_background: بدون خلفية
   objectFit: الخلفية الملائمة
   objectPosition: موقف الخلفية

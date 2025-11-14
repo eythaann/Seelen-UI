@@ -150,7 +150,6 @@ resources:
   app_outdated: ทรัพยากรนี้ต้องการ Seelen UI รุ่นใหม่กว่าเพื่อทำงานอย่างถูกต้อง
   delete: ลบทรัพยากร
   discover: ค้นพบทรัพยากรเพิ่มเติม
-  export: ทรัพยากรส่งออก
   has_update: มีการอัปเดต
   import_wallpapers: นำเข้าวอลเปเปอร์ในท้องถิ่น
   open_folder: เปิดโฟลเดอร์ทรัพยากร
@@ -253,6 +252,7 @@ wall:
   hours: ชั่วโมง
   interval: เปลี่ยนวอลล์เปเปอร์ทุก ๆ
   minutes: นาที
+  muted: ปิดเสียงวิดีโอ
   no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
   objectFit: พื้นหลังพอดี
   objectPosition: ตำแหน่งพื้นหลัง

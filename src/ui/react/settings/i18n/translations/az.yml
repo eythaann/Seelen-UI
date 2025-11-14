@@ -154,7 +154,6 @@ resources:
     tələb edir.
   delete: Resurs silmək
   discover: Daha çox mənbəyi kəşf edin
-  export: İxracat mənbəyi
   has_update: Bir yeniləmə mövcuddur
   import_wallpapers: Yerli divar kağızları idxal edin
   open_folder: Açıq Resurs qovluğu
@@ -262,6 +261,7 @@ wall:
   hours: sair
   interval: Divar kağızı hər birini dəyişdirin
   minutes: dəqiqəlik
+  muted: Səssiz video audio
   no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
   objectFit: Arxa plan
   objectPosition: Fon mövqeyi

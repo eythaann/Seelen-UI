@@ -2,6 +2,8 @@ use std::collections::HashSet;
 
 use uuid::Uuid;
 
+use crate::resource::WidgetId;
+
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(tag = "name", rename_all = "snake_case")]
 pub enum SluHotkeyAction {
@@ -81,9 +83,12 @@ pub struct SluHotkey {
     pub keys: Vec<String>,
     #[serde(default)]
     pub readonly: bool,
-    /// This will be true for hotkeys intended to override system hotkeys
+    /// This will be true for hotkeys intended to override system hotkeys.
     #[serde(default)]
     pub system: bool,
+    /// If present this shortcut will be only available if the widget is enabled.
+    #[serde(default)]
+    pub attached_to: Option<WidgetId>,
 }
 
 impl SluHotkey {
@@ -98,6 +103,7 @@ impl SluHotkey {
             keys: keys.into_iter().map(|k| k.as_ref().to_string()).collect(),
             readonly: false,
             system: false,
+            attached_to: None,
         }
     }
 
@@ -108,6 +114,11 @@ impl SluHotkey {
 
     pub fn readonly(mut self) -> Self {
         self.readonly = true;
+        self
+    }
+
+    pub fn attached_to(mut self, widget_id: impl Into<WidgetId>) -> Self {
+        self.attached_to = Some(widget_id.into());
         self
     }
 }
@@ -167,7 +178,8 @@ impl SluShortcutsSettings {
                     SluHotkeyAction::StartWegApp { index },
                     ["Win", digit_key.as_str()],
                 )
-                .system(),
+                .system()
+                .attached_to("@seelen/weg"),
             );
 
             shorcuts.push(SluHotkey::new(
@@ -195,69 +207,85 @@ impl SluShortcutsSettings {
     fn _default_shortcuts() -> Vec<SluHotkey> {
         use SluHotkeyAction::*;
 
+        let wm = "@seelen/window-manager";
+
         vec![
-            SluHotkey::new(ToggleLauncher, ["Win", "S"]),
-            SluHotkey::new(ToggleWorkspacesView, ["Win", "Tab"]).system(),
-            // ==========================================
+            SluHotkey::new(ToggleLauncher, ["Win", "S"]).attached_to("@seelen/launcher"),
+            // Task switching and viewer
             SluHotkey::new(
                 TaskNext {
                     select_on_key_up: true,
                 },
                 ["Alt", "Tab"],
             )
-            .system(),
+            .system()
+            .attached_to("@seelen/task-switcher"),
             SluHotkey::new(
                 TaskPrev {
                     select_on_key_up: true,
                 },
                 ["Alt", "Shift", "Tab"],
             )
-            .system(),
+            .system()
+            .attached_to("@seelen/task-switcher"),
             SluHotkey::new(
                 TaskNext {
                     select_on_key_up: false,
                 },
                 ["Alt", "Ctrl", "Tab"],
             )
-            .system(),
+            .system()
+            .attached_to("@seelen/task-switcher"),
             SluHotkey::new(
                 TaskPrev {
                     select_on_key_up: false,
                 },
                 ["Alt", "Ctrl", "Shift", "Tab"],
             )
-            .system(),
-            // ==========================================
-            SluHotkey::new(PauseTiling, ["Win", "P"]),
-            SluHotkey::new(ToggleFloat, ["Win", "F"]),
-            SluHotkey::new(ToggleMonocle, ["Win", "M"]),
-            SluHotkey::new(CycleStackNext, ["Win", "Alt", "Right"]),
-            SluHotkey::new(CycleStackPrev, ["Win", "Alt", "Left"]),
-            SluHotkey::new(ReserveTop, ["Win", "Shift", "I"]),
-            SluHotkey::new(ReserveBottom, ["Win", "Shift", "K"]),
-            SluHotkey::new(ReserveLeft, ["Win", "Shift", "J"]),
-            SluHotkey::new(ReserveRight, ["Win", "Shift", "L"]),
-            SluHotkey::new(ReserveFloat, ["Win", "Shift", "U"]),
-            SluHotkey::new(ReserveStack, ["Win", "Shift", "O"]),
-            SluHotkey::new(FocusTop, ["Alt", "I"]),
-            SluHotkey::new(FocusBottom, ["Alt", "K"]),
-            SluHotkey::new(FocusLeft, ["Alt", "J"]),
-            SluHotkey::new(FocusRight, ["Alt", "L"]),
-            SluHotkey::new(IncreaseWidth, ["Win", "Alt", "="]),
-            SluHotkey::new(DecreaseWidth, ["Win", "Alt", "-"]),
-            SluHotkey::new(IncreaseHeight, ["Win", "Ctrl", "="]),
-            SluHotkey::new(DecreaseHeight, ["Win", "Ctrl", "-"]),
-            SluHotkey::new(RestoreSizes, ["Win", "Alt", "0"]),
-            SluHotkey::new(MoveWindowUp, ["Shift", "Alt", "I"]),
-            SluHotkey::new(MoveWindowDown, ["Shift", "Alt", "K"]),
-            SluHotkey::new(MoveWindowLeft, ["Shift", "Alt", "J"]),
-            SluHotkey::new(MoveWindowRight, ["Shift", "Alt", "L"]),
+            .system()
+            .attached_to("@seelen/task-switcher"),
+            // tiling window manager
+            SluHotkey::new(PauseTiling, ["Win", "P"]).attached_to(wm),
+            SluHotkey::new(ToggleFloat, ["Win", "F"]).attached_to(wm),
+            SluHotkey::new(ToggleMonocle, ["Win", "M"]).attached_to(wm),
+            //
+            SluHotkey::new(CycleStackNext, ["Win", "Alt", "Right"]).attached_to(wm),
+            SluHotkey::new(CycleStackPrev, ["Win", "Alt", "Left"]).attached_to(wm),
+            //
+            SluHotkey::new(ReserveTop, ["Win", "Shift", "I"]).attached_to(wm),
+            SluHotkey::new(ReserveBottom, ["Win", "Shift", "K"]).attached_to(wm),
+            SluHotkey::new(ReserveLeft, ["Win", "Shift", "J"]).attached_to(wm),
+            SluHotkey::new(ReserveRight, ["Win", "Shift", "L"]).attached_to(wm),
+            SluHotkey::new(ReserveFloat, ["Win", "Shift", "U"]).attached_to(wm),
+            SluHotkey::new(ReserveStack, ["Win", "Shift", "O"]).attached_to(wm),
+            //
+            SluHotkey::new(FocusTop, ["Alt", "I"]).attached_to(wm),
+            SluHotkey::new(FocusBottom, ["Alt", "K"]).attached_to(wm),
+            SluHotkey::new(FocusLeft, ["Alt", "J"]).attached_to(wm),
+            SluHotkey::new(FocusRight, ["Alt", "L"]).attached_to(wm),
+            //
+            SluHotkey::new(IncreaseWidth, ["Win", "Alt", "="]).attached_to(wm),
+            SluHotkey::new(DecreaseWidth, ["Win", "Alt", "-"]).attached_to(wm),
+            SluHotkey::new(IncreaseHeight, ["Win", "Ctrl", "="]).attached_to(wm),
+            SluHotkey::new(DecreaseHeight, ["Win", "Ctrl", "-"]).attached_to(wm),
+            SluHotkey::new(RestoreSizes, ["Win", "Alt", "0"]).attached_to(wm),
+            //
+            SluHotkey::new(MoveWindowUp, ["Shift", "Alt", "I"]).attached_to(wm),
+            SluHotkey::new(MoveWindowDown, ["Shift", "Alt", "K"]).attached_to(wm),
+            SluHotkey::new(MoveWindowLeft, ["Shift", "Alt", "J"]).attached_to(wm),
+            SluHotkey::new(MoveWindowRight, ["Shift", "Alt", "L"]).attached_to(wm),
+            // virtual desktop
             SluHotkey::new(SwitchToNextWorkspace, ["Ctrl", "Win", "Right"]).system(),
             SluHotkey::new(SwitchToPreviousWorkspace, ["Ctrl", "Win", "Left"]).system(),
             SluHotkey::new(CreateNewWorkspace, ["Ctrl", "Win", "D"]).system(),
             SluHotkey::new(DestroyCurrentWorkspace, ["Ctrl", "Win", "F4"]).system(),
+            SluHotkey::new(ToggleWorkspacesView, ["Win", "Tab"])
+                .system()
+                .attached_to("@seelen/workspaces-viewer"),
+            // wallpaper manager
             SluHotkey::new(CycleWallpaperNext, ["Ctrl", "Win", "Up"]),
             SluHotkey::new(CycleWallpaperPrev, ["Ctrl", "Win", "Down"]),
+            // misc
             SluHotkey::new(MiscOpenSettings, ["Win", "K"]),
             SluHotkey::new(MiscForceRestart, ["Ctrl", "Win", "Alt", "R"]).readonly(),
             SluHotkey::new(MiscForceQuit, ["Ctrl", "Win", "Alt", "K"]).readonly(),

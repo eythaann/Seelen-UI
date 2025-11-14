@@ -62,6 +62,7 @@ define_app_errors!(
     SluIpc(slu_ipc::error::Error);
     Tokio(tokio::task::JoinError);
     Positioning(positioning::error::Error);
+    Time(time::error::Error);
 );
 
 impl std::fmt::Debug for AppError {

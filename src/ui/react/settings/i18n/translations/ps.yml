@@ -152,7 +152,6 @@ resources:
   app_outdated: دا سرچینه د سم کار کولو لپاره یو نوي نسخه ته اړتیا لري.
   delete: سرچینه حذف کړئ
   discover: ډیرې سرچینې ومومئ
-  export: د صادراتو سرچینې
   has_update: یو اوسمهال شتون لري
   import_wallpapers: ځایی وال پیپرونه وارد کړئ
   open_folder: د سرچینو پوښۍ خلاصه کړئ
@@ -257,6 +256,7 @@ wall:
   hours: ساعتونه
   interval: په وال پیپر بدل کړئ
   minutes: دقیقې
+  muted: د ویډیو آډیو خاموش کړئ
   no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
   objectFit: شالید فټ
   objectPosition: شالید وضعیت

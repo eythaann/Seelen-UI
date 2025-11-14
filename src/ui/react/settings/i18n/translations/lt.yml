@@ -153,7 +153,6 @@ resources:
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
   delete: Ištrinti šaltinį
   discover: Atraskite daugiau išteklių
-  export: Eksporto ištekliai
   has_update: Galimas atnaujinimas
   import_wallpapers: Importuoti vietinius ekrano užsklandas
   open_folder: Atidarykite išteklių aplanką
@@ -259,6 +258,7 @@ wall:
   hours: valandos
   interval: Keiskite tapetų kiekvieną
   minutes: minutės
+  muted: Nutildyti vaizdo garsą
   no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
   objectFit: Pagrindinė informacija Pritaikymas
   objectPosition: Pagrindinė padėtis

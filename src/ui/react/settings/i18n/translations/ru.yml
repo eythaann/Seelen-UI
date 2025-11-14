@@ -155,7 +155,6 @@ resources:
   app_outdated: Для корректной работы этого ресурса требуется более новая версия Seelen UI.
   delete: Удалить ресурс
   discover: Откройте для себя больше ресурсов
-  export: Экспортный ресурс
   has_update: Доступно обновление
   import_wallpapers: Импорт местных обоев
   open_folder: Откройте папку с ресурсами
@@ -263,6 +262,7 @@ wall:
   hours: часы
   interval: Менять обои через
   minutes: минуты
+  muted: Отключить звук видео
   no_background: Пустое слайд-шоу (используется фон темы)
   objectFit: Фоновая подгонка
   objectPosition: Фоновая позиция

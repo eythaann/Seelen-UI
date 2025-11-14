@@ -14,6 +14,7 @@ use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_
 
 use crate::error::Result;
 use crate::utils::constants::SEELEN_COMMON;
+use crate::utils::lock_free::SyncVec;
 use crate::utils::Debouncer;
 use crate::virtual_desktops::events::VirtualDesktopEvent;
 use crate::windows_api::window::Window;
@@ -25,9 +26,11 @@ static SAVE_DEBOUNCER: LazyLock<Debouncer> =
 pub static WORKSPACES_MANAGER: LazyLock<Arc<Mutex<SluWorkspacesManager>>> =
     LazyLock::new(|| Arc::new(Mutex::new(SluWorkspacesManager::init())));
 
-pub static MINIMIZED_BY_USER: LazyLock<scc::HashSet<isize>> = LazyLock::new(scc::HashSet::new);
 pub static MINIMIZED_BY_WORKSPACES: LazyLock<scc::HashSet<isize>> =
     LazyLock::new(scc::HashSet::new);
+pub static RESTORED_EVENT_QUEUE: LazyLock<SyncVec<isize>> = LazyLock::new(SyncVec::new);
+
+pub static SWITCHING_LOCKER: LazyLock<Mutex<u32>> = LazyLock::new(|| Mutex::new(0));
 
 pub struct SluWorkspacesManager(VirtualDesktops);
 
@@ -84,7 +87,7 @@ impl SluWorkspacesManager {
             let window = Window::from(*addr);
             if window.is_window() && !window.is_minimized() {
                 let _ = MINIMIZED_BY_WORKSPACES.insert(window.address());
-                log_error!(window.show_window_async(mode));
+                log_error!(window.show_window(mode));
             }
         }
     }
@@ -92,16 +95,20 @@ impl SluWorkspacesManager {
     fn restore_workspace(workspace: &DesktopWorkspace) {
         let len = workspace.windows.len();
         for (idx, addr) in workspace.windows.iter().enumerate() {
-            if MINIMIZED_BY_USER.contains(addr) {
+            let window = Window::from(*addr);
+            let is_minimized = window.is_minimized();
+
+            // avoid restore windows manually minimized by the user
+            if is_minimized && !MINIMIZED_BY_WORKSPACES.contains(addr) {
                 continue;
             }
 
-            let window = Window::from(*addr);
-            if window.is_window() && window.is_minimized() {
-                MINIMIZED_BY_WORKSPACES.remove(&window.address());
+            if is_minimized {
                 // use normal show instead async cuz it will keep the order of restoring
                 log_error!(window.show_window(SW_RESTORE));
+                RESTORED_EVENT_QUEUE.push(*addr);
             }
+            MINIMIZED_BY_WORKSPACES.remove(addr);
 
             // ensure correct focus
             if idx == len - 1 {
@@ -115,11 +122,15 @@ impl SluWorkspacesManager {
         monitor_id: &MonitorId,
         workspace_id: &WorkspaceId,
     ) -> Result<()> {
-        let monitor = self.get_monitor_mut(monitor_id);
+        // we lock here to prevent concurrent switching causing an infinite loop
+        let _lock = trace_lock!(SWITCHING_LOCKER);
 
+        let monitor = self.get_monitor_mut(monitor_id);
         if &monitor.current_workspace == workspace_id {
             return Ok(()); // nothing to do
         }
+
+        log::trace!("Switching to workspace {workspace_id} on monitor {monitor_id}");
 
         let current = monitor
             .workspaces
@@ -141,10 +152,14 @@ impl SluWorkspacesManager {
             workspace: workspace_id.clone(),
         })?;
         self.save();
+
         Ok(())
     }
 
     pub fn switch_to(&mut self, monitor_id: &MonitorId, index: usize) -> Result<()> {
+        // we lock here to prevent concurrent switching causing an infinite loop
+        let _lock = trace_lock!(SWITCHING_LOCKER);
+
         let monitor = self.get_monitor_mut(monitor_id);
         let current = monitor
             .workspaces
@@ -152,20 +167,30 @@ impl SluWorkspacesManager {
             .find(|w| w.id == monitor.current_workspace)
             .ok_or("current workspace not found")?;
 
-        if let Some(workspace_to_change) = monitor.workspaces.get(index) {
-            if workspace_to_change.id == current.id {
-                return Ok(()); // nothing to do
-            }
-            monitor.current_workspace = workspace_to_change.id.clone();
-            Self::hide_workspace(current, false);
-            Self::restore_workspace(workspace_to_change);
+        let Some(workspace_to_change) = monitor.workspaces.get(index) else {
+            return Ok(());
+        };
+
+        if workspace_to_change.id == current.id {
+            return Ok(());
         }
+
+        log::trace!(
+            "Switching to workspace {} on monitor {}",
+            workspace_to_change.id,
+            monitor_id
+        );
+
+        monitor.current_workspace = workspace_to_change.id.clone();
+        Self::hide_workspace(current, false);
+        Self::restore_workspace(workspace_to_change);
 
         Self::event_tx().send(VirtualDesktopEvent::DesktopChanged {
             monitor: monitor_id.clone(),
             workspace: monitor.current_workspace.clone(),
         })?;
         self.save();
+
         Ok(())
     }
 

@@ -155,7 +155,6 @@ resources:
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
   delete: Dzēst resursu
   discover: Atklājiet vairāk resursu
-  export: Eksporta resursi
   has_update: Ir pieejams atjauninājums
   import_wallpapers: Importēt vietējās tapetes
   open_folder: Atvērt resursu mapi
@@ -263,6 +262,7 @@ wall:
   hours: laiks
   interval: Mainiet fona attēlus katru
   minutes: protokols
+  muted: Izslēgt video audio
   no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
   objectFit: Fona fona atbilstība
   objectPosition: Pamatinformācija Pozīcija

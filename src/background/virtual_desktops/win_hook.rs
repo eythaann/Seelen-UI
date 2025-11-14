@@ -3,8 +3,8 @@ use crate::{
     modules::apps::application::{UserAppsEvent, UserAppsManager},
     trace_lock,
     virtual_desktops::{
-        events::VirtualDesktopEvent, SluWorkspacesManager, MINIMIZED_BY_USER,
-        MINIMIZED_BY_WORKSPACES, WORKSPACES_MANAGER,
+        events::VirtualDesktopEvent, get_vd_manager, SluWorkspacesManager, RESTORED_EVENT_QUEUE,
+        WORKSPACES_MANAGER,
     },
     windows_api::window::{event::WinEvent, Window},
 };
@@ -66,7 +66,7 @@ impl SluWorkspacesManager {
                         workspace: workspace.id.clone(),
                     })?;
                 } else {
-                    Self::hide_workspace(workspace, false);
+                    Self::hide_workspace(workspace, true);
                 }
             }
         }
@@ -97,37 +97,51 @@ impl SluWorkspacesManager {
         });
     }
 
-    pub fn on_win_event(&mut self, event: WinEvent, window: &Window) -> Result<()> {
+    pub fn on_win_event(event: WinEvent, window: &Window) -> Result<()> {
         let window_id = window.address();
         match event {
-            WinEvent::SystemMinimizeStart => {
-                if !MINIMIZED_BY_WORKSPACES.contains(&window_id) {
-                    let _ = MINIMIZED_BY_USER.insert(window_id);
-                }
-            }
             WinEvent::SystemMinimizeEnd => {
-                MINIMIZED_BY_USER.remove(&window_id);
-                if let Some(workspace) =
-                    self.workspace_containing_window(&window.address()).cloned()
+                let mut found = false;
+                RESTORED_EVENT_QUEUE.retain(|w| {
+                    if !found && w == &window_id {
+                        found = true;
+                        return false;
+                    }
+                    true
+                });
+
+                if found {
+                    return Ok(());
+                }
+
+                // restore workspace if the window was unminimized by the user via alt+tab or others
+                let mut manager = get_vd_manager();
+                if let Some(workspace) = manager
+                    .workspace_containing_window(&window.address())
+                    .cloned()
                 {
-                    self.switch_to_id(&window.monitor().stable_id()?.into(), &workspace.id)?;
-                } else if !self.is_pinned(&window_id) && window.is_interactable_and_not_hidden() {
-                    // add minimized windows during the scanning, to the current active workspace
-                    self.add(window);
+                    manager.switch_to_id(&window.monitor().stable_id()?.into(), &workspace.id)?;
+                }
+                // add minimized windows during the scanning, to the current active workspace
+                else if !manager.is_pinned(&window_id) && window.is_interactable_and_not_hidden()
+                {
+                    manager.add(window);
                 }
             }
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
-                if let Some(workspace) = self.workspace_containing_window_mut(&window_id) {
+                let mut manager = get_vd_manager();
+                if let Some(workspace) = manager.workspace_containing_window_mut(&window_id) {
                     // update z-order
                     workspace.windows.retain(|w| w != &window_id);
                     workspace.windows.push(window_id);
-                    self.save();
+                    manager.save();
                 }
             }
             WinEvent::SyntheticMonitorChanged => {
-                if self.contains(window) && !self.is_pinned(&window_id) {
-                    self.remove(window);
-                    self.add(window);
+                let mut manager = get_vd_manager();
+                if manager.contains(window) && !manager.is_pinned(&window_id) {
+                    manager.remove(window);
+                    manager.add(window);
                 }
             }
             _ => {}

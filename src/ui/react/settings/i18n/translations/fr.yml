@@ -157,7 +157,6 @@ resources:
     fonctionner correctement.
   delete: Supprimer les ressources
   discover: Découvrez d'autres ressources
-  export: Exporter la ressource
   has_update: Une mise à jour est disponible
   import_wallpapers: Importer des fonds d'écran locaux
   open_folder: Ouvrir le dossier des ressources
@@ -265,6 +264,7 @@ wall:
   hours: heures
   interval: Changer de fond d'écran toutes les
   minutes: minutes
+  muted: Couper le son de la vidéo
   no_background: Liste vide, le fond d'écran du thème sera utilisé.
   objectFit: Conforme à l'arrière-plan
   objectPosition: Position d'arrière-plan

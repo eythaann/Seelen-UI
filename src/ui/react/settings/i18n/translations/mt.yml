@@ -155,7 +155,6 @@ resources:
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
   delete: Ħassar ir-riżorsa
   discover: Skopri aktar riżorsi
-  export: Riżorsa ta 'esportazzjoni
   has_update: Aġġornament huwa disponibbli
   import_wallpapers: Importa wallpapers lokali
   open_folder: Folder tar-Riżorsi Miftuħa
@@ -263,6 +262,7 @@ wall:
   hours: sigħat
   interval: Ibdel il-wallpaper kull
   minutes: minuti
+  muted: Mute video awdjo
   no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
   objectFit: L-isfond jaqbel
   objectPosition: Pożizzjoni ta 'sfond

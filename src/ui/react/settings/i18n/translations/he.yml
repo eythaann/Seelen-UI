@@ -151,7 +151,6 @@ resources:
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
   delete: מחק משאב
   discover: לגלות משאבים נוספים
-  export: משאב ייצוא
   has_update: ניתן לקבל עדכון
   import_wallpapers: ייבא טפטים מקומיים
   open_folder: פתיחת תיקיית משאבים
@@ -254,6 +253,7 @@ wall:
   hours: שעות
   interval: החלף טפטים כל
   minutes: דקות
+  muted: השתקת אודיו של וידאו
   no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
   objectFit: כושר רקע
   objectPosition: מיקום רקע

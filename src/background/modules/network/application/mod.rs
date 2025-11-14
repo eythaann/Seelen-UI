@@ -173,8 +173,7 @@ impl NetworkManager {
             });
 
             log::warn!("Network loop finished: {result:?}");
-        })
-        .expect("Failed to spawn network manager loop");
+        });
     }
 
     pub async fn get_wifi_profiles() -> Result<Vec<WlanProfile>> {

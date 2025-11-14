@@ -154,7 +154,6 @@ resources:
   app_outdated: Энэ нөөц нь Seelen Ui-ийн шинэ хувилбарыг зөв ажиллахыг шаарддаг.
   delete: Нөөцийг устгах
   discover: Илүү их нөөцийг олж мэдэх
-  export: Нөөцийг экспортлох
   has_update: Шинэчлэлт хийх боломжтой
   import_wallpapers: Орон нутгийн ханын цаас импортлох
   open_folder: Нээлттэй зөөврийн
@@ -261,6 +260,7 @@ wall:
   hours: цаг
   interval: Ханын цаасыг өөрчлөх
   minutes: хоёр хоног
+  muted: Дуугүй видео аудио
   no_background: Хоосон слайпешт, оронд нь.
   objectFit: Суурь тохирох
   objectPosition: Арын байрлал

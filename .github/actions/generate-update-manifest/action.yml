@@ -21,7 +21,7 @@ runs:
         github-token: ${{ inputs.github-token }}
         script: |
           const releaseId = '${{ inputs.release-id }}';
-          const version = '${{ inputs.version }}';
+          const version = '${{ inputs.version }}'.replaceAll('"', '');
 
           core.info(`Using version: ${version}`);
 

@@ -155,7 +155,6 @@ resources:
     correttamente.
   delete: Elimina risorsa
   discover: Scoprire altre risorse
-  export: Esportazione di risorse
   has_update: È disponibile un aggiornamento
   import_wallpapers: Importazione di sfondi locali
   open_folder: Aprire la cartella delle risorse
@@ -263,6 +262,7 @@ wall:
   hours: ore
   interval: Cambia sfondo ogni
   minutes: minuti
+  muted: Disattiva l'audio del video
   no_background: Slideshow vuoto, usa invece lo sfondo del tema.
   objectFit: Sfondo adatto
   objectPosition: Posizione di fondo

@@ -154,7 +154,6 @@ resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
   delete: Xóa tài nguyên
   discover: Khám phá thêm tài nguyên
-  export: Tài nguyên xuất khẩu
   has_update: Một bản cập nhật có sẵn
   import_wallpapers: Nhập hình nền địa phương
   open_folder: Mở thư mục tài nguyên
@@ -262,6 +261,7 @@ wall:
   hours: giờ
   interval: Thay đổi hình nền mỗi
   minutes: phút
+  muted: Tắt âm thanh video
   no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
   objectFit: Phù hợp với nền
   objectPosition: Vị trí nền

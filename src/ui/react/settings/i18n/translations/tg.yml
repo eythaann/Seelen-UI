@@ -153,7 +153,6 @@ resources:
   app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.
   delete: Манбаъро нест мекунад
   discover: Нахуст захираҳои бештарро кашф кунед
-  export: Манбаъ
   has_update: Навсозӣ дастрас аст
   import_wallpapers: Объекти маҳаллӣ
   open_folder: Папкаи захираҳо
@@ -260,6 +259,7 @@ wall:
   hours: соат
   interval: Тағйироти ҳар як
   minutes: дақиқа
+  muted: Аудити видеоӣ
   no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
   objectFit: Замина
   objectPosition: Мавқеи заминавӣ

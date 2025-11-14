@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.4.6]
+
+### features
+
+- add new cli command to bundle resources.
+
+### refactor
+
+- remove export resource button from settings.
+
+### fix
+
+- inifity switching loop on workspaces.
+
 ## [2.4.5]
 
 ### features
@@ -8,6 +22,11 @@
 - widgets now can declare plugins to be loaded.
 - new fields on widgets metadata.
 - new system tray widget.
+
+### enhancements
+
+- disable individual shortcuts if attached widget is not enabled.
+- only show enabled themes as quick access in settings window.
 
 ### refactor
 
@@ -18,6 +37,8 @@
 - app cli was not working.
 - (#1258) missing translations on background process.
 - apps being filtering wrong.
+- stucked video wallpapers.
+- deadlocks on media manager.
 
 ## [2.4.4]
 

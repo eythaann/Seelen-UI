@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 use serde_alias::serde_alias;
 use ts_rs::TS;
 
+use crate::resource::WidgetId;
 use crate::{
     error::Result,
     rect::Rect,
@@ -607,6 +608,16 @@ impl Settings {
         }
 
         Ok(())
+    }
+
+    // This indicates if the widget is enabled on general, doesn't take in care
+    // by monitor or by instance settings.
+    pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
+        self.by_widget.is_enabled(widget_id)
+    }
+
+    pub fn set_widget_enabled(&mut self, widget_id: &WidgetId, enabled: bool) {
+        self.by_widget.set_enabled(widget_id, enabled);
     }
 }
 

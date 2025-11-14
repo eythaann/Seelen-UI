@@ -35,7 +35,7 @@ export function RestoreToDefault() {
     ],
     center: ["@default/date" as PluginId],
     right: [
-      "@default/system-tray" as PluginId,
+      "@seelen/tb-system-tray" as PluginId,
       "@default/keyboard" as PluginId,
       "@default/bluetooth" as PluginId,
       "@default/network" as PluginId,

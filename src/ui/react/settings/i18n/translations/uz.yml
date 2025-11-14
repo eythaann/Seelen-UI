@@ -155,7 +155,6 @@ resources:
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
   delete: Resurslarni o'chirish
   discover: Ko'proq resurslarni kashf eting
-  export: Eksport manbai
   has_update: Yangilanish mavjud
   import_wallpapers: Mahalliy fon rasmlarini import qilish
   open_folder: Resurslar jildini oching
@@ -263,6 +262,7 @@ wall:
   hours: soat
   interval: Har bir devor rasmini o'zgartiring
   minutes: daqiqa
+  muted: Ovozni o'chirish
   no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
   objectFit: Fon mos
   objectPosition: Fon holati

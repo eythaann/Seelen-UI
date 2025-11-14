@@ -155,7 +155,6 @@ resources:
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
   delete: منبع را حذف کنید
   discover: منابع بیشتری را کشف کنید
-  export: منبع صادراتی
   has_update: به روزرسانی در دسترس است
   import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
   open_folder: پوشه منبع باز
@@ -262,6 +261,7 @@ wall:
   hours: ساعت
   interval: کاغذ دیواری را تغییر دهید
   minutes: دقایقی
+  muted: صدای ویدیو را بی صدا کنید
   no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
   objectFit: متناسب با پس زمینه
   objectPosition: موقعیت پس زمینه

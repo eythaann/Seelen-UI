@@ -155,7 +155,6 @@ resources:
     ispravno.
   delete: Izbriši resurs
   discover: Otkrijte više resursa
-  export: Izvozni resurs
   has_update: Dostupno je ažuriranje
   import_wallpapers: Uvoz lokalnih pozadina
   open_folder: Mapa otvorenih resursa
@@ -263,6 +262,7 @@ wall:
   hours: sate
   interval: Promijenite pozadinu svaku
   minutes: minute
+  muted: Isključi video zvuk
   no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
   objectFit: Fit
   objectPosition: Pozadinski položaj

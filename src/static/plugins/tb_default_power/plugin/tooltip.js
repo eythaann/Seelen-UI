@@ -1,5 +1,5 @@
 if (!batteries.length) {
-  return null;
+  return "Plugged in";
 }
 
 return Group({

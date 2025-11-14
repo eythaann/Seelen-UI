@@ -157,7 +157,6 @@ resources:
     होती है।
   delete: संसाधन हटाएं
   discover: अधिक संसाधनों की खोज करें
-  export: निर्यात संसाधन
   has_update: एक अपडेट उपलब्ध है
   import_wallpapers: स्थानीय वॉलपेपर आयात करें
   open_folder: संसाधन फ़ोल्डर खोलें
@@ -264,6 +263,7 @@ wall:
   hours: घंटे
   interval: वॉलपेपर हर बदलें
   minutes: मिनट
+  muted: वीडियो ऑडियो म्यूट करें
   no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
   objectFit: पृष्ठभूमि फिट
   objectPosition: पृष्ठभूमि स्थिति

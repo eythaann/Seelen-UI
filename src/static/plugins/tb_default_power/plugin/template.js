@@ -1,5 +1,5 @@
 if (!batteries.length) {
-  return null;
+  return icon("TbPlugConnected");
 }
 
 const averagePercentage = batteries.reduce((total, battery) => total + battery.percentage, 0) / batteries.length;

@@ -157,7 +157,6 @@ resources:
     funcționa corect.
   delete: Ștergeți resursa
   discover: Descoperiți mai multe resurse
-  export: Export de resurse
   has_update: O actualizare este disponibilă
   import_wallpapers: Importați imagini de fundal locale
   open_folder: Deschideți folderul de resurse
@@ -265,6 +264,7 @@ wall:
   hours: ore
   interval: Schimbați tapet fiecare
   minutes: minute
+  muted: Dezactivați sunetul video
   no_background: Slideshow gol, folosind în schimb fundalul temei.
   objectFit: Potrivire în fundal
   objectPosition: Poziția de fundal

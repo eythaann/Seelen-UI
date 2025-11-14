@@ -149,7 +149,6 @@ resources:
   app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
   delete: ਸਰੋਤ ਨੂੰ ਮਿਟਾਓ
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ
-  export: ਨਿਰਯਾਤ ਸਰੋਤ
   has_update: ਇੱਕ ਅਪਡੇਟ ਉਪਲਬਧ ਹੈ
   import_wallpapers: ਸਥਾਨਕ ਵਾਲਪੇਪਰ ਆਯਾਤ ਕਰੋ
   open_folder: ਓਪਨ ਸਰੋਤ ਫੋਲਡਰ
@@ -257,6 +256,7 @@ wall:
   hours: ਘੰਟੇ
   interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
   minutes: ਮਿੰਟ
+  muted: ਵੀਡੀਓ ਆਡੀਓ ਨੂੰ ਮਿਊਟ ਕਰੋ
   no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
   objectFit: ਪਿਛੋਕੜ ਫਿਟ
   objectPosition: ਪਿਛੋਕੜ ਦੀ ਸਥਿਤੀ

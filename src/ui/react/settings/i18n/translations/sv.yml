@@ -153,7 +153,6 @@ resources:
   app_outdated: Denna resurs kräver en nyare version av Seelen UI för att fungera korrekt.
   delete: Radera resurs
   discover: Upptäck fler resurser
-  export: Exportera resurs
   has_update: En uppdatering är tillgänglig
   import_wallpapers: Importera lokala bakgrundsbilder
   open_folder: Öppna resursmappen
@@ -261,6 +260,7 @@ wall:
   hours: timme
   interval: Ändra tapeter varje
   minutes: minuter
+  muted: Stäng av videoljud
   no_background: Tomt bildspel, med temas bakgrund istället.
   objectFit: Bakgrund Passform
   objectPosition: Bakgrund Position

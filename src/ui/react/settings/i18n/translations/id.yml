@@ -157,7 +157,6 @@ resources:
     berfungsi dengan baik.
   delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya
-  export: Sumber Daya Ekspor
   has_update: Pembaruan tersedia
   import_wallpapers: Impor wallpaper lokal
   open_folder: Buka folder sumber daya
@@ -265,6 +264,7 @@ wall:
   hours: jam
   interval: Ubah wallpaper setiap
   minutes: menit
+  muted: Bisukan audio video
   no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
   objectFit: Kesesuaian Latar Belakang
   objectPosition: Posisi Latar Belakang

@@ -42,8 +42,7 @@ impl SystemTrayManager {
                         .log_error();
                 }
             }
-        })
-        .expect("Thread name already in use.");
+        });
 
         Self {
             icons: SyncHashMap::new(),

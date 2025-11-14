@@ -155,7 +155,6 @@ resources:
     baik.
   delete: Padam sumber
   discover: Cari lebih banyak sumber
-  export: Sumber Eksport
   has_update: Kemas kini ada
   import_wallpapers: Mengimport kertas dinding tempatan
   open_folder: Buka Folder Sumber
@@ -263,6 +262,7 @@ wall:
   hours: jam
   interval: Tukar kertas dinding setiap
   minutes: minit
+  muted: Audio video bisu
   no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
   objectFit: Latar belakang sesuai
   objectPosition: Kedudukan latar belakang

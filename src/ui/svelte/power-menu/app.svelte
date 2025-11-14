@@ -42,7 +42,7 @@
   <ul class="power-menu-list">
     {#each options as option}
       <li>
-        <button on:click={option.action} class="power-menu-item">
+        <button on:click={option.onClick} class="power-menu-item">
           <Icon iconName={option.icon} />
           <span class="power-menu-item-label">{$t(option.key)}</span>
         </button>

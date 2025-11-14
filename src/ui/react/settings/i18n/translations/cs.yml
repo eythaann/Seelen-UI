@@ -155,7 +155,6 @@ resources:
     rozhraní Seelen.
   delete: Odstranit zdroj
   discover: Objevte další zdroje
-  export: Exportní zdroj
   has_update: K dispozici je aktualizace
   import_wallpapers: Import místních tapet
   open_folder: Otevření složky se zdroji
@@ -263,6 +262,7 @@ wall:
   hours: hodiny
   interval: Změňte tapetu každých
   minutes: minuty
+  muted: Ztlumit zvuk videa
   no_background: Prázdná prezentace, použití pozadí motivu.
   objectFit: Pozadí Fit
   objectPosition: Pozice v pozadí

@@ -222,6 +222,10 @@ async fn translate_text(
         target_lang = "zh-CN".to_string();
     }
 
+    if target_lang == "pt" {
+        target_lang = "pt-BR".to_string();
+    }
+
     let translated = translator
         .translate_async(&source, &source_lang, &target_lang)
         .await?;
@@ -236,6 +240,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::widgets::popups::handlers::*;
     use crate::widgets::weg::handler::*;
     use crate::widgets::window_manager::handler::*;
+    use crate::widgets::*;
 
     use crate::modules::apps::infrastructure::*;
     use crate::modules::bluetooth::infrastructure::*;

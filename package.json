@@ -1,6 +1,6 @@
 {
   "name": "seelen-ui",
-  "version": "2.4.5",
+  "version": "2.4.6",
   "description": "Seelen UI Project",
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
     "dev": "cargo build && tauri dev",
     "test": "",
     "translate": "tsx ./scripts/translate/mod.ts",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc --noEmit && cd ./libs/core && deno check && cd ../..",
     "versionish": "tsx ./scripts/versionish.ts",
     "version:start": "tsx ./scripts/versionish.ts --set-changelog --version",
     "version:finish": "tsx ./scripts/versionish.ts --create-tag",

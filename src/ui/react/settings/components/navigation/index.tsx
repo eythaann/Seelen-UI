@@ -19,6 +19,7 @@ export const Navigation = memo(() => {
 
   const widgets = useSelector(RootSelectors.widgets);
   const themes = useAppSelector(RootSelectors.availableThemes);
+  const activeThemes = useAppSelector(RootSelectors.activeThemes);
   const devTools = useAppSelector(RootSelectors.devTools);
 
   const { t } = useTranslation();
@@ -38,7 +39,9 @@ export const Navigation = memo(() => {
     );
   };
 
-  const themesWithSettings = themes.filter((theme) => theme.settings.length);
+  const themesDirectAccess = themes.filter(
+    (theme) => theme.settings.length && activeThemes.includes(theme.id),
+  );
 
   const advanceGroup = [
     RoutePath.SettingsByMonitor,
@@ -58,11 +61,7 @@ export const Navigation = memo(() => {
       })}
     >
       <div className={cs.header}>
-        <img
-          src="./logo.svg"
-          onClick={() => setCollapsed(!collapsed)}
-          loading="lazy"
-        />
+        <img src="./logo.svg" onClick={() => setCollapsed(!collapsed)} loading="lazy" />
         <h1>Seelen UI</h1>
         <Icon
           className={cs.chevron}
@@ -92,8 +91,7 @@ export const Navigation = memo(() => {
               <Item
                 key={widget.id}
                 route={`/widget/${widget.id.replace("@", "")}`}
-                isActive={location.pathname ===
-                  `/widget/${widget.id.replace("@", "")}`}
+                isActive={location.pathname === `/widget/${widget.id.replace("@", "")}`}
                 collapsed={collapsed}
                 label={<ResourceText text={widget.metadata.displayName} />}
                 icon={<Icon iconName={(widget.icon as any) || "BiSolidWidget"} />}
@@ -101,18 +99,17 @@ export const Navigation = memo(() => {
             ))}
         </div>
 
-        {!!themesWithSettings.length && (
+        {!!themesDirectAccess.length && (
           <>
             <div className={cs.separator} />
             <div className={cs.group}>
-              {themesWithSettings
+              {themesDirectAccess
                 .toSorted((a, b) => a.id.localeCompare(b.id))
                 .map((theme) => (
                   <Item
                     key={theme.id}
                     route={`/theme/${theme.id.replace("@", "")}`}
-                    isActive={location.pathname ===
-                      `/theme/${theme.id.replace("@", "")}`}
+                    isActive={location.pathname === `/theme/${theme.id.replace("@", "")}`}
                     collapsed={collapsed}
                     label={<ResourceText text={theme.metadata.displayName} />}
                     icon={<Icon iconName="BiSolidPalette" />}

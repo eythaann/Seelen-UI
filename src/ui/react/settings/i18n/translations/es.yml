@@ -157,7 +157,6 @@ resources:
     correctamente.
   delete: Eliminar recursos
   discover: Descubra más recursos
-  export: Recursos para la exportación
   has_update: Una actualización está disponible
   import_wallpapers: Importar fondos de pantalla locales
   open_folder: Abrir carpeta de recursos
@@ -265,6 +264,7 @@ wall:
   hours: horas
   interval: Cambia el fondo de pantalla cada
   minutes: minutos
+  muted: Silenciar audio de vídeo
   no_background: Presentación de fondos vacía, utilizando el fondo del tema en su lugar.
   objectFit: Ajuste de fondo
   objectPosition: Antecedentes

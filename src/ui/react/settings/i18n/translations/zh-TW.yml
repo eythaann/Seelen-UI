@@ -148,7 +148,6 @@ resources:
   app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。
   delete: 刪除資源
   discover: 發現更多資源
-  export: 導出資源
   has_update: 有更新可用
   import_wallpapers: 導入本地壁紙
   open_folder: 打開資源文件夾
@@ -248,6 +247,7 @@ wall:
   hours: 小時
   interval: 每次更改牆紙
   minutes: 分鐘
+  muted: 將視頻音頻靜音
   no_background: 使用主題的背景為空幻燈片。
   objectFit: 背景擬合
   objectPosition: 背景位置

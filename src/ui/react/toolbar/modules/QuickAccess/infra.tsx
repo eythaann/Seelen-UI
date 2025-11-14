@@ -1,5 +1,5 @@
-import { invoke, SeelenCommand, SeelenEvent } from "@seelen-ui/lib";
-import type { Brightness, SettingsToolbarItem } from "@seelen-ui/lib/types";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import type { Brightness, SettingsToolbarItem, WidgetId } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
 import { Icon } from "@shared/components/Icon";
 import { useWindowFocusChange } from "@shared/hooks";
@@ -16,8 +16,6 @@ import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infr
 import { Selectors } from "../shared/store/app.ts";
 
 import type { RootState } from "../shared/store/domain.ts";
-
-import { emit } from "@tauri-apps/api/event";
 
 interface Props {
   module: SettingsToolbarItem;
@@ -154,7 +152,9 @@ export function SettingsModule({ module }: Props) {
               <button
                 className="quick-access-footer-button"
                 onClick={() => {
-                  emit(SeelenEvent.WidgetTriggered, { id: "@seelen/power-menu" });
+                  invoke(SeelenCommand.TriggerWidget, {
+                    payload: { id: "@seelen/power-menu" as WidgetId },
+                  });
                 }}
               >
                 <Icon iconName="IoPower" />

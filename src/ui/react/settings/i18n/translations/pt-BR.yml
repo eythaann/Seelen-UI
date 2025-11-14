@@ -155,7 +155,6 @@ resources:
     Seelen para funcionar corretamente.
   delete: Excluir recursos
   discover: Descubra mais recursos
-  export: Recurso de exportação
   has_update: Uma atualização está disponível
   import_wallpapers: Importar papéis de parede locais
   open_folder: Abrir a pasta de recursos
@@ -263,6 +262,7 @@ wall:
   hours: horas
   interval: Troque o papel de parede todos
   minutes: minutos
+  muted: Silenciar áudio de vídeo
   no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
   objectFit: Ajuste do plano de fundo
   objectPosition: Posição de fundo

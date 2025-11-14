@@ -155,7 +155,6 @@ resources:
     dezan.
   delete: Baliabidea ezabatu
   discover: Ezagutu baliabide gehiago
-  export: Esportatu baliabidea
   has_update: Eguneratze bat eskuragarri dago
   import_wallpapers: Inportatu tokiko horma-irudiak
   open_folder: Baliabide irekiko karpeta
@@ -263,6 +262,7 @@ wall:
   hours: ordire ordu
   interval: Aldatu horma-irudia guztietan
   minutes: minutuak
+  muted: Ezkutatu bideoaren audioa
   no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
   objectFit: Atzeko planoaren moldaketa
   objectPosition: Atzeko planoaren posizioa

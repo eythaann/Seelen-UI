@@ -155,7 +155,6 @@ resources:
     bixebite.
   delete: Avkaniyê jêbirin
   discover: Zêdetir çavkaniyên kifş bikin
-  export: Resouravkaniya Export
   has_update: Nûvekirinek heye
   import_wallpapers: Dîwarên herêmî yên import bikin
   open_folder: Peldanka çavkaniya vekirî
@@ -262,6 +261,7 @@ wall:
   hours: demjimêr
   interval: Her kesê biguherînin
   minutes: deqq
+  muted: Dengê vîdyoyê qut bike
   no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
   objectFit: Background Fit
   objectPosition: Positiona paşîn

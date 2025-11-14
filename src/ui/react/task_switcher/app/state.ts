@@ -1,6 +1,7 @@
 import { batch, effect, signal } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
-import { listen } from "@tauri-apps/api/event";
+
+let widget = Widget.getCurrent();
 
 export const $showing = signal(false);
 export const $autoConfirm = signal(false);
@@ -21,14 +22,16 @@ effect(() => {
   }
 });
 
-listen<boolean>("hidden::task-switcher-select-next", ({ payload: autoConfirm }) => {
+widget.onTrigger((payload) => {
+  const direction: string = (payload.customArgs?.direction as string) || "next";
+  const autoConfirm: boolean = (payload.customArgs?.autoConfirm as boolean) || false;
+
   // Don't show if there are no windows
   if ($windows.value.length === 0) {
     return;
   }
 
   const wasShowing = $showing.value;
-
   batch(() => {
     // Only set autoConfirm on first show (when switcher was hidden)
     if (!wasShowing) {
@@ -40,44 +43,20 @@ listen<boolean>("hidden::task-switcher-select-next", ({ payload: autoConfirm }) 
   // If switcher was hidden, use focused window as starting point
   const currentHwnd = wasShowing ? $selectedWindow.value : $focusedWinId.value;
 
-  // Find current index, default to -1 if not found (will cycle to first)
   let index = $windows.value.findIndex((w) => w.hwnd === currentHwnd);
-  if (index === -1) {
-    index = $windows.value.length - 1; // Will cycle to 0 with (index + 1) % length
-  }
-
-  $selectedWindow.value = $windows.value[(index + 1) % $windows.value.length]?.hwnd || null;
-});
-
-listen<boolean>("hidden::task-switcher-select-previous", ({ payload: autoConfirm }) => {
-  // Don't show if there are no windows
-  if ($windows.value.length === 0) {
-    return;
-  }
-
-  const wasShowing = $showing.value;
-
-  batch(() => {
-    // Only set autoConfirm on first show (when switcher was hidden)
-    if (!wasShowing) {
-      $autoConfirm.value = autoConfirm;
+  if (direction === "next") {
+    if (index === -1) {
+      index = $windows.value.length - 1; // Will cycle to 0 with (index + 1) % length
     }
-    $showing.value = true;
-  });
-
-  // If switcher was hidden, use focused window as starting point
-  const currentHwnd = wasShowing ? $selectedWindow.value : $focusedWinId.value;
-
-  // Find current index, default to 0 if not found (will cycle to last)
-  let index = $windows.value.findIndex((w) => w.hwnd === currentHwnd);
-  if (index === -1) {
-    index = 0; // Will cycle to last with (index - 1 + length) % length
+    $selectedWindow.value = $windows.value[(index + 1) % $windows.value.length]?.hwnd || null;
+  } else if (direction === "previous") {
+    if (index === -1) {
+      index = 0; // Will cycle to last with (index - 1 + length) % length
+    }
+    $selectedWindow.value = $windows.value[(index - 1 + $windows.value.length) % $windows.value.length]?.hwnd || null;
   }
-
-  $selectedWindow.value = $windows.value[(index - 1 + $windows.value.length) % $windows.value.length]?.hwnd || null;
 });
 
-let widget = Widget.getCurrent();
 $showing.subscribe(async (show) => {
   if (show) {
     await widget.webview.show();

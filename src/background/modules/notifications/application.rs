@@ -128,7 +128,7 @@ impl NotificationManager {
                         std::thread::sleep(std::time::Duration::from_secs(1));
                     }
                     Ok(())
-                })?;
+                });
             }
         }
 
