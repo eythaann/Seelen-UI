@@ -1,11 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)",
-      "Bash(nul)",
-      "Bash(cargo check:*)",
-      "Bash(npm run type-check:*)",
-      "Bash(git mv:*)"
+      "Bash",
+      "Read",
+      "Edit",
+      "Write"
     ],
     "deny": [],
     "ask": []

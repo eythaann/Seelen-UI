@@ -2,16 +2,16 @@ import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Rect } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "@shared";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import type { State } from "../shared/state.svelte";
 
-import { $settings } from "../shared/state/mod.ts";
-
-export async function requestPositioningOfLeaves() {
+export async function requestPositioningOfLeaves(state: State) {
   const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();
 
   let elements = document.querySelectorAll("[data-hwnd]");
   let positions: Record<string, Rect> = {};
 
-  const borderConfig = $settings.value.border;
+  // Svelte 5 runes: direct access to state
+  const borderConfig = state.settings.border;
   elements.forEach((element) => {
     let hwnd = (element as HTMLDivElement).dataset.hwnd!;
     const border = borderConfig.enabled ? borderConfig.width + borderConfig.offset : 0;

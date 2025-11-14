@@ -9,10 +9,13 @@
 ### refactor
 
 - remove export resource button from settings.
+- remake wm ui from react to svelte (this reduced 10mb of ram usage).
 
 ### fix
 
-- inifity switching loop on workspaces.
+- infity switching loop on workspaces.
+- memory leak on long sessions.
+- external links not working.
 
 ## [2.4.5]
 

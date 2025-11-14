@@ -74,3 +74,4 @@ metadata:
     km: កម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
 loader: Legacy
 instances: Single
+noMemoryLeakWorkaround: true
