@@ -243,9 +243,10 @@ wall:
   hours: 小时
   interval: 更换壁纸的时间间隔
   minutes: 分钟
-  no_background: 空幻灯片，使用主题背景。
-  objectFit: 背景适合
-  objectPosition: 背景职位
+  muted: 将视频音频静音
+  no_background: 幻灯片为空，使用主题背景替代。
+  objectFit: 背景适应方式
+  objectPosition: 背景位置
   overlayColor: 叠加颜色
   overlayMixBlendMode: 叠加混合模式
   playback: 播放速度
