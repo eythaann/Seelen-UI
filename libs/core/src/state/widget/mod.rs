@@ -27,16 +27,19 @@ pub struct Widget {
     /// Widget metadata, as texts, tags, images, etc.
     pub metadata: ResourceMetadata,
 
-    /// Widget configuration preset
-    pub preset: WidgetPreset,
     /// Widget settings declaration, this is esentially a struct to be used by an
     /// builder to create the widget settings UI on the Settings window.
     pub settings: WidgetSettingsDeclarationList,
+    /// Widget configuration preset
+    pub preset: WidgetPreset,
+    /// How many instances are allowed of this widget.
+    pub instances: WidgetInstanceMode,
     /// If true, the widget will not be shown on the Settings Navigation as a Tab, but it will
     /// still be available on the widgets full list.
     pub hidden: bool,
-    /// How many instances are allowed of this widget.
-    pub instances: WidgetInstanceMode,
+    /// If true, the memory leak of webview2 (https://github.com/tauri-apps/tauri/issues/4026)
+    /// workaround, will be no applied for instances of this widget.
+    pub no_memory_leak_workaround: bool,
 
     /// Way to load the widget
     pub loader: WidgetLoader,

@@ -13,6 +13,7 @@
 ### fix
 
 - inifity switching loop on workspaces.
+- memory leak on long sessions.
 
 ## [2.4.5]
 

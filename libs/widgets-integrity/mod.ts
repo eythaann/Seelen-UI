@@ -5,7 +5,7 @@
 import { wrapConsoleV2 } from "./ConsoleWrapper.ts";
 wrapConsoleV2();
 
-import type { Widget } from "@seelen-ui/lib/types";
+import type { FocusedApp, Widget } from "@seelen-ui/lib/types";
 import { _invoke, WebviewInformation } from "libs/widgets-integrity/_tauri";
 
 import { removeDefaultWebviewActions } from "@shared/setup.ts";
@@ -29,3 +29,17 @@ document.head.appendChild(script);
 
 // remove default browser actions, we don't need them
 removeDefaultWebviewActions();
+
+setTimeout(() => {
+  window.gc?.();
+}, 1000);
+
+if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
+  setTimeout(async () => {
+    const app = await _invoke<FocusedApp>("get_focused_app");
+    if (!app.exe?.endsWith("seelen-ui.exe")) {
+      console.trace("Reloading widget.");
+      location.reload();
+    }
+  }, 60_000 * 10); // every 10 minutes
+}

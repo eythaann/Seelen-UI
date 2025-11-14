@@ -7,17 +7,12 @@ import { useEffect } from "react";
 import { ErrorBoundary } from "./components/Error/index.tsx";
 import { SeelenWeg } from "./modules/bar/index.tsx";
 
-async function onMount() {
-  const view = getCurrentWebviewWindow();
-  await view.show();
-}
-
 export function App() {
   const isDarkMode = useDarkMode();
 
   useEffect(() => {
-    onMount();
-    console.debug("Seelen Weg app mounted");
+    const view = getCurrentWebviewWindow();
+    view.show();
   }, []);
 
   return (

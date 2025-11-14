@@ -68,7 +68,7 @@ pub struct WebviewArgs {
 
 impl WebviewArgs {
     const BASE_1: &str = "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection";
-    const BASE_2: &str = "--disable-site-isolation-trials";
+    const BASE_2: &str = "--no-first-run --disable-site-isolation-trials --disable-background-timer-throttling --V8Maglev";
 
     pub fn new() -> Self {
         // --disk-cache-size=0
