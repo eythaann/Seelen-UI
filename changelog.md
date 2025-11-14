@@ -15,6 +15,7 @@
 
 - infity switching loop on workspaces.
 - memory leak on long sessions.
+- external links not working.
 
 ## [2.4.5]
 

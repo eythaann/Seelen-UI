@@ -12,6 +12,7 @@
     "core:webview:default",
     "core:path:default",
     "core:app:default",
-    "dialog:default"
+    "dialog:default",
+    "shell:allow-open"
   ]
 }
