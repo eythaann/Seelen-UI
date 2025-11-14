@@ -83,7 +83,6 @@ impl WindowManagerV2 {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
-        window.open_devtools();
 
         let monitor_id = Arc::new(monitor_id.to_owned());
 
