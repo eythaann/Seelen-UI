@@ -67,8 +67,8 @@ placeholder:
 settings:
   app_settings: App Settings
   brightness: Brightness
-  restart: Restart
   power: Power
+  restart: Restart
   title: Settings
 userhome:
   empty_list: No items

@@ -1,7 +1,6 @@
 import { getRootContainer } from "@shared";
 import { declareDocumentAsLayeredHitbox } from "@shared/layered";
 import { disableAnimationsOnPerformanceMode } from "@shared/performance";
-import { removeDefaultWebviewActions } from "@shared/setup";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
@@ -17,7 +16,6 @@ import "./styles/variables.css";
 import "@shared/styles/reset.css";
 import "./styles/global.css";
 
-removeDefaultWebviewActions();
 await declareDocumentAsLayeredHitbox();
 await registerStoreEvents();
 await loadTranslations();

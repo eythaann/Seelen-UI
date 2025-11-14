@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Подешавања апликација
   brightness: Светлина
-  hibernate: Хибернација
-  lock: Закључати
-  log_out: Одјавити се
   power: Моћ
   restart: Поново покренути
-  shutdown: Искључити
-  sleep: Спавати
   title: Подешавања
 userhome:
   empty_list: Нема предмета

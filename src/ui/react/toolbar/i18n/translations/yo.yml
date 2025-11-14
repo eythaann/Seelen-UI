@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Eto App
   brightness: Didan
-  hibernate: Hibernate
-  lock: Tiipa
-  log_out: Wọle
   power: Agbara
   restart: Tun bẹrẹ
-  shutdown: Paade
-  sleep: Sun
   title: Ètò
 userhome:
   empty_list: Ko si awọn ohun kan

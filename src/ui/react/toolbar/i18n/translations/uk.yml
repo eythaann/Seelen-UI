@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Налаштування додатку
   brightness: Яскравість
-  hibernate: Сплячий режим.
-  lock: Блокування.
-  log_out: Вийти
   power: Живлення
   restart: Перезапустити
-  shutdown: Завершити роботу
-  sleep: Сон
   title: Налаштування
 userhome:
   empty_list: Немає предметів

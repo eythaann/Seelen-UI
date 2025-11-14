@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: პროგრამის პარამეტრები
   brightness: სიკაშკაშე
-  hibernate: ზიხაცობა
-  lock: დაკეტვა
-  log_out: შესვლა
   power: ძალა
   restart: Რესტარტი
-  shutdown: Გათიშვა
-  sleep: ძილი
   title: პარამეტრები
 userhome:
   empty_list: არ არის ნივთები

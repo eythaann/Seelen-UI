@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: App inställningar
   brightness: Ljusstyrka
-  hibernate: Hibernate
-  lock: Lås
-  log_out: Logga ut
   power: Driva
   restart: Omstart
-  shutdown: Stänga av
-  sleep: Sova
   title: inställningar
 userhome:
   empty_list: Inga föremål

@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: பயன்பாட்டு அமைப்புகள்
   brightness: பிரகாசம்
-  hibernate: ஹைபர்னேட்
-  lock: பூட்டு
-  log_out: வெளியேறு
   power: சக்தி
   restart: மறுதொடக்கம்
-  shutdown: பணிநிறுத்தம்
-  sleep: தூங்கு
   title: அமைப்புகள்
 userhome:
   empty_list: உருப்படிகள் இல்லை

@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Lietotņu iestatījumi
   brightness: Spilgtums
-  hibernate: Hibernate
-  lock: Bloķēt
-  log_out: Izlogoties
   power: Spēks
   restart: Restartēt
-  shutdown: Izslēgt
-  sleep: Gulēt
   title: Iestatījumi
 userhome:
   empty_list: Nav vienību

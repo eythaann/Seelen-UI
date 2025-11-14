@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Танзимоти барнома
   brightness: Равшанӣ
-  hibernate: Мунтазир
-  lock: Пайваст кардан
-  log_out: Баромадан
   power: Нерӯ
   restart: Оғози дубора
-  shutdown: Пӯшида шудан
-  sleep: Хоб
   title: Танзимот
 userhome:
   empty_list: Ҳеҷ чиз нест

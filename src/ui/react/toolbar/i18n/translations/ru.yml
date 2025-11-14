@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Настройки приложения
   brightness: Яркость
-  hibernate: Гибернация
-  lock: Заблокировать
-  log_out: Выход из системы
   power: Питание
   restart: Перезагрузка
-  shutdown: Завершение работы
-  sleep: Спящий режим
   title: Настройки
 userhome:
   empty_list: Нет предметов

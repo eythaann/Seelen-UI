@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: הגדרות אפליקציה
   brightness: בהירות
-  hibernate: שינה
-  lock: נעילה
-  log_out: צא
   power: סוללה
   restart: הפעל מחדש
-  shutdown: כבה
-  sleep: שינה
   title: הגדרות
 userhome:
   empty_list: אין פריטים

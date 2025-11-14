@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Tətbiq parametrləri
   brightness: Parlaqlıq
-  hibernate: Qışqırmaq
-  lock: Qıfıllamaq
-  log_out: Çıxış
   power: Güc
   restart: Yenidən başlamaq
-  shutdown: Söndür
-  sleep: Yatmaq
   title: Parametrlər
 userhome:
   empty_list: Nəhəng

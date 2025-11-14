@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: Ustawienia aplikacji
   brightness: Jasność
-  hibernate: Hibernuj
-  lock: Blokuj
-  log_out: Wyloguj
   power: Zasilanie
   restart: Uruchom ponownie
-  shutdown: Zamknij
-  sleep: Uśpij
   title: Ustawienia
 userhome:
   empty_list: Brak przedmiotów

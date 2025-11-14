@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: የመተግበሪያ ቅንጅቶች
   brightness: ብሩህነት
-  hibernate: ጩኸት
-  lock: መቆለፊያ
-  log_out: ውጣ
   power: ኃይል
   restart: እንደገና ጀምር
-  shutdown: ዝጋው
-  sleep: እንቅልፍ
   title: ቅንብሮች
 userhome:
   empty_list: ምንም ዕቃዎች የሉም

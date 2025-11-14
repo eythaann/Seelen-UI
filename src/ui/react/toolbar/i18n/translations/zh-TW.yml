@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: 應用設置
   brightness: 亮度
-  hibernate: 冬眠
-  lock: 鎖
-  log_out: 註銷
   power: 力量
   restart: 重新啟動
-  shutdown: 關閉
-  sleep: 睡覺
   title: 設定
 userhome:
   empty_list: 沒有項目

@@ -67,13 +67,8 @@ placeholder:
 settings:
   app_settings: অ্যাপ সেটিংস
   brightness: উজ্জ্বলতা
-  hibernate: হাইবারনেট
-  lock: লক
-  log_out: প্রস্থান
   power: শক্তি
   restart: আবার শুরু
-  shutdown: শাটডাউন
-  sleep: ঘুম
   title: সেটিংস
 userhome:
   empty_list: কোনও আইটেম নেই

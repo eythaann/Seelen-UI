@@ -1,6 +1,6 @@
 use seelen_core::system_state::UserAppWindow;
 use windows::Win32::UI::WindowsAndMessaging::{
-    WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW, WS_MINIMIZEBOX,
+    WS_CHILD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW, WS_MINIMIZEBOX,
 };
 
 use crate::{
@@ -107,7 +107,8 @@ impl UserAppsManager {
 ///
 /// As windows properties can change, this should be reevaluated on every change.
 pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
-    if !window.is_visible() {
+    // It must be a visible Window and not cloaked
+    if !window.is_visible() || window.is_cloaked() {
         return false;
     }
 
@@ -125,32 +126,34 @@ pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
         return false;
     }
 
-    // Discard unminimizable windows
     let style = WindowsApi::get_styles(window.hwnd());
-    if !style.contains(WS_MINIMIZEBOX) {
-        return false;
-    }
-
-    // Discard layered windows without WS_EX_APPWINDOW
     let ex_style = WindowsApi::get_ex_styles(window.hwnd());
-    if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
-        && !ex_style.contains(WS_EX_APPWINDOW)
-    {
-        return false;
-    }
 
-    // unmanageable window, these probably are system processes
-    if window.process().open_limited_handle().is_err() {
-        return false;
-    }
+    if !ex_style.contains(WS_EX_APPWINDOW) {
+        // It must not be owned by another window
+        if style.contains(WS_CHILD) || window.owner().is_some() {
+            return false;
+        }
 
-    if let Ok(frame_creator) = window.get_frame_creator() {
-        if frame_creator.is_none() {
+        // Discard tool windows without WS_EX_APPWINDOW
+        if ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE) {
             return false;
         }
     }
 
-    if window.process().is_frozen().unwrap_or(false) {
+    let process = window.process();
+    // unmanageable window, these probably are system processes
+    if process.open_limited_handle().is_err() {
+        return false;
+    }
+
+    // Internal behaviour for seelen ui widgets:
+    // Discard unminimizable windows (they have no caption/title bar)
+    if !style.contains(WS_MINIMIZEBOX) && process.is_seelen() {
+        return false;
+    }
+
+    if process.is_frozen().unwrap_or(false) {
         return false;
     }
 
