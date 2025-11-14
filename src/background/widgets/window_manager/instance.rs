@@ -64,7 +64,7 @@ impl WindowManagerV2 {
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             label,
-            tauri::WebviewUrl::App("react/window_manager/index.html".into()),
+            tauri::WebviewUrl::App("svelte/window_manager/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)
@@ -83,6 +83,7 @@ impl WindowManagerV2 {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
+        window.open_devtools();
 
         let monitor_id = Arc::new(monitor_id.to_owned());
 

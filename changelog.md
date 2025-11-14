@@ -9,6 +9,7 @@
 ### refactor
 
 - remove export resource button from settings.
+- remake wm ui from react to svelte (this reduced 10mb of ram usage).
 
 ### fix
 
