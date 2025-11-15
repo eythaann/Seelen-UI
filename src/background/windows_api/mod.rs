@@ -193,10 +193,10 @@ impl WindowsApi {
         parent: Option<HWND>,
         after: Option<HWND>,
         title: Option<String>,
-        class: Option<String>,
+        class: Option<impl Into<String>>,
     ) -> Result<HWND> {
         let title = WindowsString::from(title.unwrap_or_default());
-        let class = WindowsString::from(class.unwrap_or_default());
+        let class = WindowsString::from(class.map(Into::into).unwrap_or_default());
         let found = unsafe {
             FindWindowExW(
                 parent,
