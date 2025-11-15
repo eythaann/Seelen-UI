@@ -33,7 +33,6 @@ impl BgWindowProc {
     unsafe fn _create_background_window(done: &crossbeam_channel::Sender<()>) -> Result<()> {
         let title = WindowsString::from("Seelen UI Background Window");
         let class = WindowsString::from("SeelenBackgroundWindow");
-        // let class = WindowsString::from("Shell_TrayWnd"); // interset native shell messages
 
         let h_module = WindowsApi::module_handle_w()?;
 

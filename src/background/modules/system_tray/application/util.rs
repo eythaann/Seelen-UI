@@ -10,9 +10,9 @@ use windows::Win32::{
         WS_EX_TOPMOST, WS_OVERLAPPEDWINDOW,
     },
 };
-use windows_core::{w, PCWSTR};
+use windows_core::w;
 
-use crate::windows_api::WindowsApi;
+use crate::windows_api::{string_utils::WindowsString, WindowsApi};
 
 pub type WindowProcedure = WNDPROC;
 
@@ -25,10 +25,11 @@ impl Util {
         class_name: &str,
         window_procedure: WindowProcedure,
     ) -> crate::Result<isize> {
-        let class_name = Self::to_wide(class_name);
+        let title = WindowsString::from("SeelenUI");
+        let class_name = WindowsString::from(class_name);
 
         let class = WNDCLASSW {
-            lpszClassName: PCWSTR::from_raw(class_name.as_ptr()),
+            lpszClassName: class_name.as_pcwstr(),
             style: CS_HREDRAW | CS_VREDRAW,
             lpfnWndProc: window_procedure,
             ..Default::default()
@@ -43,8 +44,8 @@ impl Util {
         let handle = unsafe {
             CreateWindowExW(
                 WS_EX_TOOLWINDOW | WS_EX_APPWINDOW | WS_EX_TOPMOST,
-                PCWSTR::from_raw(class_name.as_ptr()),
-                PCWSTR::from_raw(class_name.as_ptr()),
+                class_name.as_pcwstr(),
+                title.as_pcwstr(),
                 WS_OVERLAPPEDWINDOW,
                 CW_USEDEFAULT,
                 CW_USEDEFAULT,
@@ -86,11 +87,6 @@ impl Util {
         unsafe { PostThreadMessageW(thread_id, WM_QUIT, WPARAM::default(), LPARAM::default()) }?;
 
         Ok(())
-    }
-
-    /// Converts a string to a wide string.
-    pub fn to_wide(string: &str) -> Vec<u16> {
-        string.encode_utf16().chain(std::iter::once(0)).collect()
     }
 
     /// Packs two 16-bit values into a 32-bit value. This is commonly used

@@ -60,7 +60,7 @@ pub static TASKBAR_CLASS: [&str; 2] = ["Shell_TrayWnd", "Shell_SecondaryTrayWnd"
 pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
     let mut founds = Vec::new();
     WindowEnumerator::new().for_each(|w| {
-        if TASKBAR_CLASS.contains(&w.class().as_str()) {
+        if TASKBAR_CLASS.contains(&w.class().as_str()) && w.title().is_empty() {
             founds.push(w.hwnd());
         }
     })?;

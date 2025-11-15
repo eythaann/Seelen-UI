@@ -24,7 +24,7 @@ use windows::Win32::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
         Shell::{IShellLinkW, SHGetKnownFolderPath, ShellLink, KF_FLAG_DEFAULT},
         WindowsAndMessaging::{
-            BringWindowToTop, FindWindowW, GetClassNameW, GetForegroundWindow,
+            BringWindowToTop, FindWindowW, GetClassNameW, GetForegroundWindow, GetWindowTextW,
             GetWindowThreadProcessId, IsIconic, SetWindowPos, ShowWindow, ShowWindowAsync,
             SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
         },
@@ -214,6 +214,13 @@ impl WindowsApi {
     pub fn get_class(hwnd: HWND) -> String {
         let mut text: [u16; 512] = [0; 512];
         let len = unsafe { GetClassNameW(hwnd, &mut text) };
+        let length = usize::try_from(len).unwrap_or(0);
+        String::from_utf16_lossy(&text[..length])
+    }
+
+    pub fn get_title(hwnd: HWND) -> String {
+        let mut text: [u16; 512] = [0; 512];
+        let len = unsafe { GetWindowTextW(hwnd, &mut text) };
         let length = usize::try_from(len).unwrap_or(0);
         String::from_utf16_lossy(&text[..length])
     }
