@@ -1,11 +1,13 @@
 use crate::{identifier_impl, rect::Rect};
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
 pub struct PhysicalMonitor {
     pub id: MonitorId,
     pub name: String,
     pub rect: Rect,
     pub dpi: f64,
+    pub is_primary: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, TS)]

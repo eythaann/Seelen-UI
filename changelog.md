@@ -19,6 +19,7 @@
 - external links not working.
 - wallpaper manager corner barder radius.
 - windows overlaping the toolbar and dock when autohide is disabled.
+- Power Menu not showing corrently on multiple monitors (#1266).
 
 ## [2.4.5]
 

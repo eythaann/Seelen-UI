@@ -14,6 +14,7 @@ impl TryFrom<Monitor> for PhysicalMonitor {
             name: m.name()?,
             rect: m.rect()?,
             dpi,
+            is_primary: m.is_primary(),
         })
     }
 }

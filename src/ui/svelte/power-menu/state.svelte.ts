@@ -24,6 +24,14 @@ let desktopRect = $derived.by(() => {
   return rect;
 });
 
+let menuRect = $derived.by(() => {
+  let primary = monitors.find((m) => m.isPrimary);
+  if (primary) {
+    return primary.rect;
+  }
+  return desktopRect;
+});
+
 let user = $state(await invoke(SeelenCommand.GetUser));
 subscribe(SeelenEvent.UserChanged, (e) => {
   user = e.payload;
@@ -36,6 +44,9 @@ export const state = {
   },
   get desktopRect() {
     return desktopRect;
+  },
+  get menuRect() {
+    return menuRect;
   },
   get user() {
     return user;
