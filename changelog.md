@@ -10,6 +10,7 @@
 
 - remove export resource button from settings.
 - remake wm ui from react to svelte (this reduced 10mb of ram usage).
+- remove native shell window hook, instead use win32 hooks via dlls.
 
 ### fix
 
@@ -17,6 +18,7 @@
 - memory leak on long sessions.
 - external links not working.
 - wallpaper manager corner barder radius.
+- windows overlaping the toolbar and dock when autohide is disabled.
 
 ## [2.4.5]
 

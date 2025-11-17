@@ -147,7 +147,7 @@ impl AppCli {
             println!("Sending {args:#?}");
         }
 
-        AppIpc::send(AppMessage(args))
+        AppIpc::send(AppMessage::Cli(args))
             .await
             .map_err(|_| "Can't stablish connection, ensure Seelen UI is running.")?;
         Ok(())

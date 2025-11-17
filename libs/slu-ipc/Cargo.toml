@@ -14,3 +14,4 @@ interprocess = { workspace = true, features = ["tokio"] }
 seelen-core = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
+uuid = { workspace = true, features = ["serde"] }

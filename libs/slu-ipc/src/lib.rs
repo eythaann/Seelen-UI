@@ -150,7 +150,7 @@ impl IPC for AppIpc {
 impl AppIpc {
     pub fn start<F>(cb: F) -> Result<()>
     where
-        F: Fn(Vec<String>) -> IpcResponse + Send + Sync + 'static,
+        F: Fn(AppMessage) -> IpcResponse + Send + Sync + 'static,
     {
         let mut sd = SecurityDescriptor::new()?;
         unsafe { sd.set_dacl(std::ptr::null_mut(), false)? };
@@ -183,7 +183,7 @@ impl AppIpc {
 
     async fn process_connection<F>(stream: &AsyncDuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
     where
-        F: Fn(Vec<String>) -> IpcResponse,
+        F: Fn(AppMessage) -> IpcResponse,
     {
         let data = read_from_ipc_stream(stream).await?;
         if data.is_empty() {
@@ -192,7 +192,7 @@ impl AppIpc {
 
         let message = AppMessage::from_bytes(&data)?;
         log::trace!("IPC command received: {message:?}");
-        Self::response_to_client(stream, cb(message.0)).await?;
+        Self::response_to_client(stream, cb(message)).await?;
         Ok(())
     }
 
@@ -208,6 +208,14 @@ impl AppIpc {
         async_send_to_ipc_stream(&stream, &message.to_bytes()?)
             .await?
             .ok()
+    }
+
+    /// Sends a message synchronously (used from DLL hooks)
+    pub fn send_sync(message: &AppMessage) -> Result<()> {
+        let stream = DuplexPipeStream::connect_by_path(Self::PATH)?;
+        let data = message.to_bytes()?;
+        send_to_ipc_stream(&stream, &data)?;
+        Ok(())
     }
 }
 

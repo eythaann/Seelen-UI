@@ -31,7 +31,15 @@ impl IpcResponse {
 // ==============================================
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct AppMessage(pub Vec<String>);
+#[serde(untagged)]
+pub enum AppMessage {
+    /// Command-line messages
+    Cli(Vec<String>),
+    /// System tray change event
+    TrayChanged(Win32TrayEvent),
+    /// Debug message for logging and diagnostics
+    Debug(String),
+}
 
 impl AppMessage {
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
@@ -116,4 +124,28 @@ impl LauncherMessage {
     pub fn to_bytes(&self) -> Result<Vec<u8>> {
         Ok(serde_json::to_vec(self)?)
     }
+}
+
+// ========== Tray ==========
+
+/// System tray icon data
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct IconEventData {
+    pub uid: Option<u32>,
+    pub window_handle: Option<isize>,
+    pub guid: Option<uuid::Uuid>,
+    pub tooltip: Option<String>,
+    pub icon_handle: Option<isize>,
+    pub callback_message: Option<u32>,
+    pub version: Option<u32>,
+    pub is_visible: bool,
+}
+
+/// System tray events captured by the hook
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(tag = "type")]
+pub enum Win32TrayEvent {
+    IconAdd { data: IconEventData },
+    IconUpdate { data: IconEventData },
+    IconRemove { data: IconEventData },
 }

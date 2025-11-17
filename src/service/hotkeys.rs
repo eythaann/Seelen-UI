@@ -53,7 +53,7 @@ pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
 
             if let Some(command) = hotkey_action_to_cli_command(action) {
                 tokio_handle.spawn(async move {
-                    log_error!(AppIpc::send(AppMessage(command)).await);
+                    log_error!(AppIpc::send(AppMessage::Cli(command)).await);
                 });
             }
         });
@@ -106,7 +106,7 @@ pub async fn stop_shortcut_registration() -> Result<()> {
 }
 
 async fn send_registering_to_app(hotkey: Option<Vec<String>>) -> Result<()> {
-    AppIpc::send(AppMessage(vec![
+    AppIpc::send(AppMessage::Cli(vec![
         "popup".to_owned(),
         "internal-set-shortcut".to_owned(),
         serde_json::to_string(&hotkey)?,
