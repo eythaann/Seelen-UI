@@ -5,6 +5,7 @@
 ### features
 
 - add new cli command to bundle resources.
+- allow close window using middle click on dock item preview.
 
 ### refactor
 

@@ -18,9 +18,7 @@ interface PreviewProps {
 
 const TEMP_FOLDER = await tempDir();
 
-export const UserApplicationPreview = (
-  { title, hwnd, isFocused }: PreviewProps,
-) => {
+export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps) => {
   const imageUrl = convertFileSrc(`${TEMP_FOLDER}${hwnd}.png`);
 
   const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
@@ -44,14 +42,18 @@ export const UserApplicationPreview = (
   return (
     <div
       className={cx("weg-item-preview", {
-        "weg-item-preview-thumbnail-disabled": !$settings.value
-          .thumbnailGenerationEnabled,
+        "weg-item-preview-thumbnail-disabled": !$settings.value.thumbnailGenerationEnabled,
       })}
       onClick={() => {
         invoke(SeelenCommand.WegToggleWindowState, {
           hwnd,
           wasFocused: isFocused,
         });
+      }}
+      onAuxClick={(e) => {
+        if (e.button === 1) {
+          invoke(SeelenCommand.WegCloseApp, { hwnd });
+        }
       }}
     >
       <div className="weg-item-preview-topbar">
