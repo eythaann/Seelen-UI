@@ -14,7 +14,7 @@ enum SubCommand {
 }
 
 impl Win32Cli {
-    pub fn process(&self) -> Result<()> {
+    pub fn process_direct(&self) -> Result<()> {
         match &self.subcommand {
             SubCommand::SetDefaultAudioDevice { id, role } => {
                 WindowsApi::set_default_audio_device(id, role)?;

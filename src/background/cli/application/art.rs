@@ -11,7 +11,7 @@ pub struct ArtCli {
 }
 
 impl ArtCli {
-    pub fn process(self) {
+    pub fn process_direct(self) {
         match self.variant {
             ArtVariant::SeelenLogo => {
                 println!("{SEELEN_LOGO_ASCII}");

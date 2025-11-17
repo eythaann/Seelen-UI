@@ -1,6 +1,6 @@
 id: "@seelen/workspaces-viewer"
 metadata:
-  displayName: Workspaces Viewer
+  displayName: !extend i18n/display_name.yml
 instances: Single
 loader: Internal
 hidden: true

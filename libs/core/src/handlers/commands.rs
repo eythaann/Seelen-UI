@@ -124,9 +124,6 @@ slu_commands_declaration! {
     // Restart the app after install the update so it returns a promise resolved with `never`
     InstallLastAvailableUpdate = install_last_available_update(),
 
-    // miscellaneous
-    TranslateText = translate_text(source: String, source_lang: String, target_lang: String) -> String,
-
     // System
     SystemGetForegroundWindowColor = get_foreground_window_color() -> Color,
     SystemGetMonitors = get_connected_monitors() -> Vec<PhysicalMonitor>,

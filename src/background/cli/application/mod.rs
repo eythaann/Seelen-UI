@@ -25,6 +25,36 @@ use crate::{
     },
 };
 
+/// Defines how a CLI command should be executed
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CommandExecutionMode {
+    /// Command executes directly in the console that invokes it
+    Direct,
+    /// Command is sent to the main Seelen UI instance via IPC
+    MainInstance,
+}
+
+/// Trait for CLI commands to define their execution mode
+pub trait SluCliCommand {
+    /// Returns the execution mode for this command.
+    /// Default implementation returns MainInstance.
+    fn execution_mode(&self) -> CommandExecutionMode {
+        CommandExecutionMode::MainInstance
+    }
+}
+
+/// Determines how the CLI invocation should be handled
+#[derive(Debug)]
+enum CliRoutingStrategy {
+    /// Execute command directly in this process and exit (e.g., Win32 utils, Bundle, Translate)
+    ExecuteDirect,
+    /// Send command to main instance via IPC and exit (e.g., Settings, VirtualDesk, Load/Unload)
+    /// The main instance will re-parse the args and execute the command
+    RedirectToMainInstance,
+    /// No command to execute, continue with normal app startup
+    StartApp,
+}
+
 /// Seelen Command Line Interface
 #[derive(Debug, clap::Parser)]
 #[command(version, name = "Seelen UI")]
@@ -60,59 +90,116 @@ pub enum AppCliCommand {
     TaskSwitcher(TaskSwitcherClient),
 }
 
-// attach console could fail if not console to attach is present
-pub fn attach_console() -> bool {
-    let already_attached = unsafe { !GetConsoleWindow().is_invalid() };
-    already_attached || unsafe { AttachConsole(ATTACH_PARENT_PROCESS).is_ok() }
+impl SluCliCommand for AppCliCommand {
+    fn execution_mode(&self) -> CommandExecutionMode {
+        match self {
+            AppCliCommand::Win32(_) => CommandExecutionMode::Direct,
+            AppCliCommand::Art(_) => CommandExecutionMode::Direct,
+            AppCliCommand::Resource(r) => r.execution_mode(),
+            // All other commands use the default MainInstance mode
+            _ => CommandExecutionMode::MainInstance,
+        }
+    }
 }
 
-/// Handles the CLI and will exit the process if needed.\
-/// Performs redirection to the instance if needed too, will fail if no instance is running.
+/// Main entry point for CLI handling.
+///
+/// Flow:
+/// 1. Parse CLI arguments
+/// 2. Configure global flags (startup, silent, verbose)
+/// 3. Determine routing strategy based on command
+/// 4. Execute according to strategy:
+///    - ExecuteDirect: Run in this process and exit
+///    - RedirectToMainInstance: Send to running instance via IPC and exit
+///    - StartApp: Normal app startup, continue execution
 pub async fn handle_console_client() -> Result<()> {
-    let matches = match AppCli::try_parse() {
+    let cli = parse_cli_args();
+    configure_global_flags(&cli);
+
+    // Determine how to handle this invocation
+    let strategy = determine_routing_strategy(&cli);
+
+    if cli.verbose {
+        println!("Routing strategy: {strategy:?}");
+    }
+
+    // Execute according to strategy
+    match strategy {
+        CliRoutingStrategy::ExecuteDirect => {
+            attach_console();
+            cli.process_direct().await?;
+            std::process::exit(0);
+        }
+        CliRoutingStrategy::RedirectToMainInstance => {
+            attach_console();
+            cli.send_to_main_instance().await?;
+            std::process::exit(0);
+        }
+        CliRoutingStrategy::StartApp => {
+            // Normal app startup, continue execution
+            Ok(())
+        }
+    }
+}
+
+/// Parse CLI arguments, exits process on parse errors (--help, --version, etc.)
+fn parse_cli_args() -> AppCli {
+    match AppCli::try_parse() {
         Ok(cli) => cli,
         Err(e) => {
-            // (help, --help or -h) and other sugestions are managed as error
             attach_console();
             e.exit();
         }
-    };
+    }
+}
 
-    if matches.startup {
+/// Configure global flags based on CLI arguments
+fn configure_global_flags(cli: &AppCli) {
+    if cli.startup {
         crate::STARTUP.store(true, Ordering::SeqCst);
     }
 
-    if matches.silent {
+    if cli.silent {
         crate::SILENT.store(true, Ordering::SeqCst);
     }
 
-    if matches.verbose {
+    if cli.verbose {
         crate::VERBOSE.store(true, Ordering::SeqCst);
-        println!("Received {:#?}", std::env::args());
-        println!("Parsed {matches:#?}");
+        println!("Received args: {:#?}", std::env::args().collect::<Vec<_>>());
+        println!("Parsed CLI: {cli:#?}");
+    }
+}
+
+/// Determines how this CLI invocation should be routed
+fn determine_routing_strategy(cli: &AppCli) -> CliRoutingStrategy {
+    // If we have a command, check its execution mode
+    if let Some(command) = &cli.command {
+        match command.execution_mode() {
+            CommandExecutionMode::Direct => {
+                return CliRoutingStrategy::ExecuteDirect;
+            }
+            CommandExecutionMode::MainInstance => {
+                return CliRoutingStrategy::RedirectToMainInstance;
+            }
+        }
     }
 
-    if matches.should_be_redirected() {
-        attach_console();
-        matches.send_to_main_instance().await?;
-        std::process::exit(0);
+    // URIs are always redirected to main instance
+    if cli.uri.is_some() {
+        return CliRoutingStrategy::RedirectToMainInstance;
     }
 
-    if matches.command.is_some() {
-        attach_console();
-        matches.process()?;
-        std::process::exit(0);
-    }
-
-    Ok(())
+    // No command or URI = normal app startup
+    CliRoutingStrategy::StartApp
 }
 
 impl AppCli {
-    pub fn should_be_redirected(&self) -> bool {
-        if let Some(command) = &self.command {
-            return !matches!(command, AppCliCommand::Win32(_) | AppCliCommand::Art(_));
+    /// Processes commands that execute directly in the console (async)
+    pub async fn process_direct(self) -> Result<()> {
+        match self.command {
+            Some(cmd) => cmd.process_direct().await,
+            None => Ok(()),
         }
-        self.uri.is_some()
     }
 
     /// intended to be called on the main instance
@@ -120,6 +207,7 @@ impl AppCli {
         if let Some(uri) = self.uri {
             return process_uri(&uri);
         }
+
         match self.command {
             Some(cmd) => cmd.process(),
             None => Ok(()),
@@ -155,6 +243,25 @@ impl AppCli {
 }
 
 impl AppCliCommand {
+    /// Processes commands that execute directly in console (async)
+    pub async fn process_direct(self) -> Result<()> {
+        match self {
+            AppCliCommand::Win32(command) => {
+                command.process_direct()?;
+            }
+            AppCliCommand::Art(command) => {
+                command.process_direct();
+            }
+            AppCliCommand::Resource(command) => {
+                command.process_direct().await?;
+            }
+            _ => {
+                return Err("Command does not support direct execution".into());
+            }
+        }
+        Ok(())
+    }
+
     pub fn process(self) -> Result<()> {
         match self {
             AppCliCommand::Settings => {
@@ -186,14 +293,16 @@ impl AppCliCommand {
             AppCliCommand::TaskSwitcher(command) => {
                 command.process()?;
             }
-            // ========================================
-            AppCliCommand::Win32(command) => {
-                command.process()?;
-            }
-            AppCliCommand::Art(command) => {
-                command.process();
+            _ => {
+                return Err("Command does not support instance execution".into());
             }
         }
         Ok(())
     }
+}
+
+// attach console could fail if not console to attach is present
+pub fn attach_console() -> bool {
+    let already_attached = unsafe { !GetConsoleWindow().is_invalid() };
+    already_attached || unsafe { AttachConsole(ATTACH_PARENT_PROCESS).is_ok() }
 }

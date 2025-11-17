@@ -18,7 +18,6 @@ export enum SeelenCommand {
   RequestToUserInputShortcut = "request_to_user_input_shortcut",
   CheckForUpdates = "check_for_updates",
   InstallLastAvailableUpdate = "install_last_available_update",
-  TranslateText = "translate_text",
   SystemGetForegroundWindowColor = "get_foreground_window_color",
   SystemGetMonitors = "get_connected_monitors",
   SystemGetColors = "get_system_colors",

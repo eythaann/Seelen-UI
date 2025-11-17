@@ -36,6 +36,14 @@ pub enum ResourceText {
 impl ResourceText {
     const MISSING_TEXT: &'static str = "!?";
 
+    /// Returns true if the text exists for the given lang
+    pub fn has(&self, lang: &str) -> bool {
+        match self {
+            ResourceText::En(_) => lang == "en",
+            ResourceText::Localized(map) => map.get(lang).is_some_and(|t| !t.is_empty()),
+        }
+    }
+
     /// Returns the text by lang, uses `en` as fallback.
     /// If no text fallback found will return `!?`
     pub fn get(&self, lang: &str) -> &str {
@@ -48,6 +56,18 @@ impl ResourceText {
                     None => Self::MISSING_TEXT,
                 },
             },
+        }
+    }
+
+    pub fn set(&mut self, lang: impl Into<String>, value: impl Into<String>) {
+        if let ResourceText::En(v) = self {
+            let mut dict = HashMap::new();
+            dict.insert("en".to_string(), v.to_string());
+            *self = ResourceText::Localized(dict);
+        }
+
+        if let ResourceText::Localized(dict) = self {
+            dict.insert(lang.into(), value.into());
         }
     }
 }

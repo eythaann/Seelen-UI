@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.4.7]
+
+### features
+
+- add new cli command to tranlate resource texts.
+
 ## [2.4.6]
 
 ### features

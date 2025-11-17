@@ -1,7 +1,7 @@
 id: "@seelen/task-switcher"
 icon: PiSelectionForegroundDuotone
 metadata:
-  displayName: Task Switcher
+  displayName: !extend i18n/display_name.yml
 instances: Single
 loader: Legacy
 hidden: true
