@@ -3,6 +3,7 @@
   DetailPrint 'Exec: $1'
   nsExec::Exec $1
   Pop $0
+
   StrCpy $1 "taskkill.exe /F /T /IM seelen-ui.exe"
   DetailPrint 'Exec: $1'
   nsExec::Exec $1
@@ -13,6 +14,8 @@
     DetailPrint 'Cleaning static folder from previous installation...'
     RMDir /r "$INSTDIR\static"
   ${EndIf}
+
+  FILE /a "${__FILEDIR__}\..\..\sluhk.dll" ;
 !macroend
 
 !macro NSIS_HOOK_POSTINSTALL

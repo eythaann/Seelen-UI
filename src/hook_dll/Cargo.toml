@@ -1,10 +1,10 @@
 [package]
-name = "tray-hook-dll"
+name = "slu-hook"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "tray_hook"
+name = "sluhk"
 crate-type = ["cdylib"]
 
 [dependencies]

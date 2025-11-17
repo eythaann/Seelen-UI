@@ -73,7 +73,7 @@ impl TrayHookLoader {
             .ok_or("Failed to get executable directory")?;
 
         // The DLL should be in the same directory as the executable
-        let dll_path = exe_dir.join("tray_hook.dll");
+        let dll_path = exe_dir.join("sluhk.dll");
 
         if !dll_path.exists() {
             return Err(format!("DLL not found at: {}", dll_path.display()).into());

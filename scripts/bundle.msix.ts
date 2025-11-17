@@ -55,8 +55,12 @@ const manifest = fs
 fs.writeFileSync(`${buildFolder}/AppxManifest.xml`, manifest);
 
 // Add binaries
-fs.copyFileSync(`target/${target}/release/slu-service.exe`, `${buildFolder}/slu-service.exe`);
 fs.copyFileSync(`target/${target}/release/seelen-ui.exe`, `${buildFolder}/seelen-ui.exe`);
+fs.copyFileSync(`target/${target}/release/slu-service.exe`, `${buildFolder}/slu-service.exe`);
+fs.copyFileSync(`target/${target}/release/splash.exe`, `${buildFolder}/splash.exe`);
+
+// dlls
+fs.copyFileSync(`target/${target}/release/sluhk.dll`, `${buildFolder}/sluhk.dll`);
 
 // Add resources
 fs.cpSync("src/static", `${buildFolder}/static`, { recursive: true });
