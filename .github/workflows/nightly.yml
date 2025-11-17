@@ -83,6 +83,9 @@ jobs:
         run: |
           npm run versionish -- --version ${{ needs.update-tag.outputs.nightly-version }}
 
+      - name: Build Hook DLL
+        run: cargo build --release --target ${{ matrix.target }} -p sluhk
+
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
       - name: Build
         run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}

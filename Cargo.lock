@@ -6915,17 +6915,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "slu-hook"
-version = "0.1.0"
-dependencies = [
- "parking_lot 0.12.4",
- "slu-ipc",
- "uuid 1.18.0",
- "windows 0.59.0",
- "windows-core 0.59.0",
-]
-
-[[package]]
 name = "slu-ipc"
 version = "0.1.0"
 dependencies = [
@@ -6937,6 +6926,17 @@ dependencies = [
  "thiserror 2.0.16",
  "tokio",
  "uuid 1.18.0",
+]
+
+[[package]]
+name = "sluhk"
+version = "0.1.0"
+dependencies = [
+ "parking_lot 0.12.4",
+ "slu-ipc",
+ "uuid 1.18.0",
+ "windows 0.59.0",
+ "windows-core 0.59.0",
 ]
 
 [[package]]

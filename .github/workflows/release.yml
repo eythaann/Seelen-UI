@@ -75,6 +75,9 @@ jobs:
           winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
+      - name: Build Hook DLL
+        run: cargo build --release --target ${{ matrix.target }} -p sluhk
+
       - name: Build
         run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
 
