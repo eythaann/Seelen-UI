@@ -7,8 +7,8 @@ $version = $jsonObject.version
 
 # Look for both x64 and arm64 MSIX files
 $msixFiles = @(
-    ".\target\release\bundle\msix\Seelen.SeelenUI_${version}.0_x64__p6yyn03m1894e.msix",
-    ".\target\release\bundle\msix\Seelen.SeelenUI_${version}.0_arm64__p6yyn03m1894e.msix"
+    ".\target\release\bundle\msix\Seelen.UI_${version}.0_x64.msix",
+    ".\target\release\bundle\msix\Seelen.UI_${version}.0_arm64.msix"
 )
 
 # Filter existing files
