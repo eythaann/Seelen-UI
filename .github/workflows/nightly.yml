@@ -43,8 +43,8 @@ jobs:
             const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
             const currentVersion = packageJson.version;
 
-            const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
-            const nightlyVersion = `${currentVersion}+${timestamp}`;
+            const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(2, 12);
+            const nightlyVersion = `${currentVersion}-nightly.${timestamp}`;
 
             return nightlyVersion;
 
