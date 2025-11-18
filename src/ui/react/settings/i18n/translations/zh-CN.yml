@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: 更新
     ok_readonly: 作为新内容编辑
     options:
-      float: 浮动
-      force: 强制管理
-      hidden: 从 Dock / 任务栏 隐藏
-      pinned: 固定
-      unmanage: 取消管理
+      NoInteractive: 没有互动
+      VdPinned: 在所有工作区中显示
+      WmFloat: Twm - 开始浮动
+      WmForce: Twm - 强制管理
+      WmUnmanage: Twm - 取消管理
     options_label: 其他
     title_create: 创建 {{name}}
     title_edit: 编辑 {{name}}

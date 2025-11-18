@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Ändern
     ok_readonly: Als neu bearbeiten
     options:
-      float: Schwebend
-      force: Verwaltung erzwingen
-      hidden: Vor Dock/Taskleiste verstecken
-      pinned: Angeheftet
-      unmanage: Nicht verwalten
+      NoInteractive: Keine Interaktivität
+      VdPinned: In allen Arbeitsbereichen anzeigen
+      WmFloat: Twm – Beginnen Sie mit dem Schweben
+      WmForce: Twm – Force Manage
+      WmUnmanage: Twm – Nicht verwalten
     options_label: Zusätzliche Optionen
     title_create: '{{name}} erstellen'
     title_edit: Bearbeitung {{Name}}

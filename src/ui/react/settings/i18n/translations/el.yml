@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Εκσυγχρονίζω
     ok_readonly: Επεξεργαστείτε ως νέο
     options:
-      float: Φλοτέρ
-      force: Διαχειριστείτε τη δύναμη
-      hidden: Απόκρυψη από τη γραμμή αποβάθρας/εργασιών
-      pinned: Καρφωμένος
-      unmanage: Μη διαχείριση
+      NoInteractive: Χωρίς διαδραστικό
+      VdPinned: Εμφάνιση σε όλους τους χώρους εργασίας
+      WmFloat: Twm - Ξεκινήστε να επιπλέετε
+      WmForce: Twm - Διαχείριση δύναμης
+      WmUnmanage: Twm - Κατάργηση διαχείρισης
     options_label: Επιπλέον επιλογές
     title_create: Δημιουργία {{name}}
     title_edit: Επεξεργασία {{όνομα}}

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Diweddara ’
     ok_readonly: Golygu fel NEWYDD
     options:
-      float: Harnofion
-      force: Rheoli Llu
-      hidden: Cuddio rhag doc/bar tasg
-      pinned: Pined
-      unmanage: Di -reol
+      NoInteractive: Dim Rhyngweithiol
+      VdPinned: Dangoswch ym mhob man gwaith
+      WmFloat: Twm - Dechrau arnofio
+      WmForce: Twm - Rheolwr yr Heddlu
+      WmUnmanage: Twm - Unmanage
     options_label: Opsiynau ychwanegol
     title_create: Creu {{enw}}
     title_edit: Golygu {{enw}}

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Buyekeza
     ok_readonly: Hlela njengomusha
     options:
-      float: Thwala amaphiko
-      force: Cindezela Phatha
-      hidden: Fihla kusuka edokodweni / ye-taskbar
-      pinned: Uphinisiwe
-      unmanage: Ugeage
+      NoInteractive: Akukho okusebenzayo
+      VdPinned: Khombisa kuzo zonke izindawo zokusebenza
+      WmFloat: I-TWM - Qala ukuntanta
+      WmForce: I-TWM - Force Phatha
+      WmUnmanage: I-TWM - UNANMARAGE
     options_label: Izinketho Ezengeziwe
     title_create: Ukudala {{igama}}
     title_edit: Ukuhlela {{igama}}

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Update
     ok_readonly: Bewerken als nieuw
     options:
-      float: Zweven
-      force: Geforceerd beheren
-      hidden: Verbergen zich voor Dock/Taskbar
-      pinned: Vastgemaakt
-      unmanage: Niet beheren
+      NoInteractive: Geen interactief
+      VdPinned: Toon in alle werkruimten
+      WmFloat: Twm - Begin met zweven
+      WmForce: Twm - Forceer beheer
+      WmUnmanage: Twm - Niet beheren
     options_label: Extra opties
     title_create: Het maken van {{name}}
     title_edit: Bewerken {{name}}

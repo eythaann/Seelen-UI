@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Aktualizácia
     ok_readonly: Upravovať ako nové
     options:
-      float: Plavák
-      force: Riadiť silu
-      hidden: Skryť pred prístaviskom/panelom úloh
-      pinned: Pripnutý
-      unmanage: Nemeniť
+      NoInteractive: Žiadna interaktívna
+      VdPinned: Zobraziť vo všetkých pracovných priestoroch
+      WmFloat: Twm - Začať plávať
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Ďalšie možnosti
     title_create: Vytváranie {{name}}
     title_edit: Úpravy {{name}}

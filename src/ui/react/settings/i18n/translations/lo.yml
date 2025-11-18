@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ອັບເດດ
     ok_readonly: ແກ້ໄຂເປັນໃໝ່
     options:
-      float: ລອຍ
-      force: ບັງຄັບໃຫ້ຈັດການ
-      hidden: ເຊື່ອງຈາກ Dock / Taskbar
-      pinned: ປັກໝຸດ
-      unmanage: ຍົກເລີກການຈັດການ
+      NoInteractive: ບໍ່ມີການໂຕ້ຕອບກັນ
+      VdPinned: ສະແດງໃນທຸກບ່ອນເຮັດວຽກ
+      WmFloat: twm - ເລີ່ມຕົ້ນລອຍ
+      WmForce: twm - ກໍາລັງແຮງງານຄຸ້ມຄອງ
+      WmUnmanage: twm - unmanage
     options_label: ທາງເລືອກພິເສດ
     title_create: ການສ້າງ {{name}}
     title_edit: ການແກ້ໄຂ {{ne name}}}

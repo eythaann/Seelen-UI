@@ -1,4 +1,4 @@
-use seelen_core::system_state::UserAppWindow;
+use seelen_core::{state::AppExtraFlag, system_state::UserAppWindow};
 use windows::Win32::UI::WindowsAndMessaging::{
     WS_CHILD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW, WS_MINIMIZEBOX,
 };
@@ -6,6 +6,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
 use crate::{
     hook::HookManager,
     modules::apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
+    state::application::FULL_STATE,
     utils::spawn_named_thread,
     windows_api::{
         window::{event::WinEvent, Window},
@@ -164,6 +165,13 @@ pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
 
     if process.is_frozen().unwrap_or(false) {
         return false;
+    }
+
+    let guard = FULL_STATE.load();
+    if let Some(config) = guard.get_app_config_by_window(window.hwnd()) {
+        if config.options.contains(&AppExtraFlag::NoInteractive) {
+            return false;
+        }
     }
 
     true

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Ažurirati
     ok_readonly: Uredi kao novo
     options:
-      float: Lebdjeti
-      force: Sile upravljati
-      hidden: Sakrij se sa pristaništa / zadataka
-      pinned: Prikvačen
-      unmanage: Nevenjački
+      NoInteractive: No Interactive
+      VdPinned: Prikaži u svim radnim prostorima
+      WmFloat: Twm - Počnite plutati
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Dodatne opcije
     title_create: Stvarajući {{ime}}
     title_edit: Uređivanje {{ime}}

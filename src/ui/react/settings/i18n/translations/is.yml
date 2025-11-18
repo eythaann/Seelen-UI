@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: UPDATE
     ok_readonly: Breyta sem nýjum
     options:
-      float: Fljóta
-      force: Valdastjórnun
-      hidden: Fela fyrir bryggju/verkefnastiku
-      pinned: Fest
-      unmanage: Unanmanage
+      NoInteractive: Engin gagnvirk
+      VdPinned: Sýna á öllum vinnusvæðum
+      WmFloat: Twm - Byrjaðu að fljóta
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Stjórna ekki
     options_label: Auka valkostir
     title_create: Búa til {{nafn}}
     title_edit: Breyting {{name}}

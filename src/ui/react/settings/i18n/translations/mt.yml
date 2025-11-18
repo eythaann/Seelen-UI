@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Aġġornament
     ok_readonly: Editja bħala ġdida
     options:
-      float: Galleġġjant
-      force: Forza ta 'tmexxija
-      hidden: Aħbi mill-baċir / taskbar
-      pinned: Imqabbad
-      unmanage: Mhux immaniġġjat
+      NoInteractive: Nru Interattiv
+      VdPinned: Uri fl-ispazji tax-xogħol kollha
+      WmFloat: Twm - Ibda f'wiċċ l-ilma
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Għażliet żejda
     title_create: Ħolqien ta '{{isem}}
     title_edit: Editjar {{isem}}

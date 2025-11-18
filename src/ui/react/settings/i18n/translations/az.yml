@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Aktuallaşdırmaq
     ok_readonly: Yeni kimi redaktə edin
     options:
-      float: Sal
-      force: İdarə etmək
-      hidden: Dock / tapşırıq çubuğundan gizləyin
-      pinned: Sancaq
-      unmanage: Qüsursuz
+      NoInteractive: İnteraktiv yoxdur
+      VdPinned: Bütün iş yerlərində göstərin
+      WmFloat: TWM - üzənlərə başlayın
+      WmForce: TWM - Güc idarə edin
+      WmUnmanage: TWM - Unmanage
     options_label: Əlavə seçimlər
     title_create: Yaratmaq {{ad}}
     title_edit: Redaktə {{ad}}

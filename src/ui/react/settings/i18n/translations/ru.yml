@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Обновить
     ok_readonly: Изменить как новое
     options:
-      float: Плавающее
-      force: Управлять принудительно
-      hidden: Скрыть с панели задач
-      pinned: Закреплено
-      unmanage: Неуправляемое
+      NoInteractive: Нет интерактивности
+      VdPinned: Показать во всех рабочих областях
+      WmFloat: Twm – Начни плавать
+      WmForce: Twm — принудительное управление
+      WmUnmanage: Twm – отменить управление
     options_label: Дополнительные параметры
     title_create: Создание {{name}}
     title_edit: Редактирование {{name}}

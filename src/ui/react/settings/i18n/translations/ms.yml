@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Kemas kini
     ok_readonly: Edit sebagai baru
     options:
-      float: Terapung
-      force: Daya mengurus
-      hidden: Sembunyikan dari Dock/Taskbar
-      pinned: Disematkan
-      unmanage: Unmanage
+      NoInteractive: Tiada interaktif
+      VdPinned: Tunjukkan di semua ruang kerja
+      WmFloat: TWM - Mula Terapung
+      WmForce: TWM - Mengurus daya
+      WmUnmanage: TWM - Unmanage
     options_label: Pilihan tambahan
     title_create: Menciptakan {{name}}
     title_edit: Penyuntingan {{name}}

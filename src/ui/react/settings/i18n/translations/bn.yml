@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: হালনাগাদ
     ok_readonly: নতুন হিসাবে সম্পাদনা
     options:
-      float: ভাসা
-      force: জোর পরিচালনা
-      hidden: ডক/টাস্কবার থেকে লুকান
-      pinned: পিনড
-      unmanage: আনম্যানেজ
+      NoInteractive: কোন ইন্টারেক্টিভ
+      VdPinned: সমস্ত কর্মক্ষেত্রে দেখান
+      WmFloat: Twm - ভাসতে শুরু করুন
+      WmForce: Twm - ফোর্স ম্যানেজ
+      WmUnmanage: Twm - Unmanage
     options_label: অতিরিক্ত বিকল্প
     title_create: '{{নাম}} তৈরি করা'
     title_edit: সম্পাদনা {{নাম}}

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Värskendama
     ok_readonly: Redigeerimine uuena
     options:
-      float: Ujuk
-      force: Jõudu juhtima
-      hidden: Peida doki/ülesanderiba eest
-      pinned: Kinnitatud
-      unmanage: Juhtimine
+      NoInteractive: Pole interaktiivset
+      VdPinned: Kuva kõikides tööruumides
+      WmFloat: Twm – alusta ujumist
+      WmForce: Twm – jõu haldamine
+      WmUnmanage: Twm – haldamata
     options_label: Lisavalikud
     title_create: '{{Name}} loomine'
     title_edit: Redigeerimine {{nimi}}

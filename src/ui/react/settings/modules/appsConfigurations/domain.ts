@@ -1,11 +1,4 @@
-import { type AppConfig, AppExtraFlag } from "@seelen-ui/lib/types";
-
-export const WmApplicationOptions = [
-  AppExtraFlag.float,
-  AppExtraFlag.unmanage,
-  AppExtraFlag.force,
-  AppExtraFlag.pinned,
-];
+import type { AppConfig } from "@seelen-ui/lib/types";
 
 export interface AppConfigurationExtended extends AppConfig {
   key: number;

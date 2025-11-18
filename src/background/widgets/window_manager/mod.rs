@@ -15,7 +15,7 @@ use state::{WmWorkspaceState, WM_STATE};
 use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
-    UI::WindowsAndMessaging::{WS_CAPTION, WS_EX_TOPMOST},
+    UI::WindowsAndMessaging::{WS_EX_TOPMOST, WS_SIZEBOX},
 };
 
 use crate::{
@@ -30,27 +30,39 @@ use crate::{
 };
 
 impl WindowManagerV2 {
-    fn is_manageable_window(hwnd: HWND) -> bool {
-        let window = Window::from(hwnd);
-        window.is_interactable_and_not_hidden()
-        // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
-        && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
-        && !window.is_cloaked()
-    }
-
     fn should_be_managed(hwnd: HWND) -> bool {
+        let window = Window::from(hwnd);
+        if !window.is_interactable_and_not_hidden() {
+            return false;
+        }
+
         if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
-            if config.options.contains(&AppExtraFlag::Force) {
+            if config.options.contains(&AppExtraFlag::VdPinned) {
+                return false;
+            }
+
+            if config.options.contains(&AppExtraFlag::WmForce) {
                 return true;
             }
 
-            if config.options.contains(&AppExtraFlag::Unmanage)
-                || config.options.contains(&AppExtraFlag::Pinned)
-            {
+            if config.options.contains(&AppExtraFlag::WmUnmanage) {
                 return false;
             }
         }
-        Self::is_manageable_window(hwnd)
+
+        let styles = WindowsApi::get_styles(hwnd);
+        // Ignore windows that are not resizable
+        if !styles.contains(WS_SIZEBOX) {
+            return false;
+        }
+
+        let ex_styles = WindowsApi::get_ex_styles(hwnd);
+        // Top most windows normally are widgets or tools that should not be managed
+        if ex_styles.contains(WS_EX_TOPMOST) {
+            return false;
+        }
+
+        true
     }
 
     fn is_managed(window: &Window) -> bool {

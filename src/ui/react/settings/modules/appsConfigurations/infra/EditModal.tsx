@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import type { AppConfig, AppExtraFlag, AppIdentifier } from "@seelen-ui/lib/types";
+import { type AppConfig, AppExtraFlag, type AppIdentifier } from "@seelen-ui/lib/types";
 import { ConfigProvider, Input, Modal, Select, Switch } from "antd";
 import { cloneDeep } from "lodash";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import { ownSelector, RootSelectors } from "../../shared/store/app/selectors.ts"
 import { defaultAppConfig } from "../app/default.ts";
 
 import type { RootState } from "../../shared/store/domain.ts";
-import { type AppConfigurationExtended, WmApplicationOptions } from "../domain.ts";
+import type { AppConfigurationExtended } from "../domain.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 import { Identifier } from "./Identifier.tsx";
@@ -30,9 +30,7 @@ const getAppSelector = (idx: number | undefined, isNew: boolean) =>
     return idx != null && !isNew ? state.appsConfigurations[idx]! : cloneDeep(defaultAppConfig);
   });
 
-export const EditAppModal = (
-  { idx, onCancel, onSave, isNew, open, readonlyApp }: Props,
-) => {
+export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
   const { t } = useTranslation();
 
   const _monitors = useSelector(RootSelectors.monitorsV3);
@@ -156,22 +154,21 @@ export const EditAppModal = (
         </SettingsGroup>
 
         <SettingsGroup>
-          <SettingsSubGroup
-            label={t("apps_configurations.app.wm_options_label")}
-          >
-            {WmApplicationOptions.map((value, i) => (
-              <SettingsOption key={i}>
-                <span>{t(`apps_configurations.app.options.${value}`)}</span>
-                <Switch
-                  value={app.options.includes(value as any as AppExtraFlag)}
-                  onChange={onChangeOption.bind(
-                    this,
-                    value as any as AppExtraFlag,
-                  )}
-                />
-              </SettingsOption>
-            ))}
-          </SettingsSubGroup>
+          {Object.values(AppExtraFlag).map((value) => {
+            if (value === AppExtraFlag.Unknown) return null;
+            return (
+              <SettingsOption
+                key={value}
+                label={t(`apps_configurations.app.options.${value}`)}
+                action={
+                  <Switch
+                    value={app.options.includes(value as any as AppExtraFlag)}
+                    onChange={onChangeOption.bind(this, value as any as AppExtraFlag)}
+                  />
+                }
+              />
+            );
+          })}
         </SettingsGroup>
       </ConfigProvider>
     </Modal>

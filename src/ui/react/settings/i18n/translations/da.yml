@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Opdatering
     ok_readonly: Rediger som ny
     options:
-      float: Flyde
-      force: Force Management
-      hidden: Skjul for dock/proceslinje
-      pinned: Fastgjort
-      unmanage: Uudvikling
+      NoInteractive: Ingen interaktiv
+      VdPinned: Vis i alle arbejdsområder
+      WmFloat: Twm - Start flydende
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Ekstra muligheder
     title_create: Oprettelse af {{navn}}
     title_edit: Redigering {{navn}}

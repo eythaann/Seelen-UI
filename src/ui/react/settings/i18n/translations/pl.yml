@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Edytuj
     ok_readonly: Edytuj jako nowy
     options:
-      float: Platforma
-      force: Siła zarządza
-      hidden: Ukryj się przed dokiem/paskiem zadań
-      pinned: Przypięty
-      unmanage: Niezarządzanie
+      NoInteractive: Brak interaktywnego
+      VdPinned: Pokaż we wszystkich obszarach roboczych
+      WmFloat: Twm - Zacznij pływać
+      WmForce: Twm – Zarządzanie siłami
+      WmUnmanage: Twm — nie zarządzaj
     options_label: Dodatkowe opcje
     title_create: Tworzenie {{nazwa}}
     title_edit: Edycja {{nazwa}}

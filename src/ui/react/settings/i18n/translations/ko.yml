@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: 수정하기
     ok_readonly: 복사본으로 편집
     options:
-      float: 플로팅
-      force: 강제 관리
-      hidden: 독/작업 표시줄에 숨기기
-      pinned: 고정
-      unmanage: 관리 상태
+      NoInteractive: 대화형 없음
+      VdPinned: 모든 작업공간에 표시
+      WmFloat: Twm - 부동 시작
+      WmForce: Twm - 강제 관리
+      WmUnmanage: Twm - 관리 해제
     options_label: 추가 옵션
     title_create: '{{name}} 만들기'
     title_edit: 편집 {{name}}

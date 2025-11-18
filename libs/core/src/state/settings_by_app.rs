@@ -5,17 +5,23 @@ use serde_alias::serde_alias;
 use ts_rs::TS;
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "snake_case")]
 #[ts(repr(enum = name))]
 pub enum AppExtraFlag {
+    /// Mark this app as non interactive window.
+    #[serde(alias = "no-interactive")]
+    NoInteractive,
     /// Start the app in the center of the screen as floating in the wm.
-    Float,
-    /// Force manage this app in the wm.
-    Force,
+    #[serde(alias = "float", alias = "wm-float")]
+    WmFloat,
+    /// Forces the management of this app in the wm. (only if it is interactable and not pinned)
+    #[serde(alias = "force", alias = "wm-force")]
+    WmForce,
     /// Unmanage this app in the wm.
-    Unmanage,
+    #[serde(alias = "unmanage", alias = "wm-unmanage")]
+    WmUnmanage,
     /// Pin this app in all the virtual desktops in the wm.
-    Pinned,
+    #[serde(alias = "pinned", alias = "vd-pinned")]
+    VdPinned,
     #[serde(other)]
     Unknown,
 }
@@ -78,7 +84,7 @@ pub struct AppIdentifierCache {
 }
 
 impl AppIdentifier {
-    pub fn perform_cache(&mut self) {
+    pub fn prepare(&mut self) {
         if matches!(self.matching_strategy, MatchingStrategy::Regex) {
             let result = Regex::new(&self.id);
             if let Ok(re) = result {
@@ -89,8 +95,8 @@ impl AppIdentifier {
             self.cache.uppercased_id = Some(self.id.to_uppercase());
         }
 
-        self.and.iter_mut().for_each(|i| i.perform_cache());
-        self.or.iter_mut().for_each(|i| i.perform_cache());
+        self.and.iter_mut().for_each(|i| i.prepare());
+        self.or.iter_mut().for_each(|i| i.prepare());
     }
 
     pub fn uppercased_id(&self) -> &str {
@@ -173,4 +179,49 @@ pub struct AppConfig {
     /// is this config bundled with seelen ui.
     #[serde(default)]
     pub is_bundled: bool,
+}
+
+impl AppConfig {
+    pub fn prepare(&mut self) {
+        self.identifier.prepare();
+    }
+}
+
+#[derive(Debug, Default, Clone)]
+pub struct AppsConfigurationList(Vec<AppConfig>);
+
+impl AppsConfigurationList {
+    pub fn prepare(&mut self) {
+        self.0.iter_mut().for_each(|config| config.prepare());
+    }
+
+    pub fn search(&self, title: &str, class: &str, exe: &str, path: &str) -> Option<&AppConfig> {
+        self.0
+            .iter()
+            .find(|&config| config.identifier.validate(title, class, exe, path))
+    }
+
+    pub fn iter(&self) -> impl Iterator<Item = &AppConfig> {
+        self.0.iter()
+    }
+
+    pub fn clear(&mut self) {
+        self.0.clear();
+    }
+
+    pub fn len(&self) -> usize {
+        self.0.len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
+
+    pub fn extend(&mut self, configs: Vec<AppConfig>) {
+        self.0.extend(configs);
+    }
+
+    pub fn as_slice(&self) -> &[AppConfig] {
+        &self.0
+    }
 }

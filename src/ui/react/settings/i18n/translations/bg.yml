@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Актуализация
     ok_readonly: Редактиране като ново
     options:
-      float: Float
-      force: Управление на силата
-      hidden: Скрийте се от Dock/Taskbar
-      pinned: Прикован
-      unmanage: Несъгласен
+      NoInteractive: Без интерактивност
+      VdPinned: Показване във всички работни пространства
+      WmFloat: Twm - Започнете да плавате
+      WmForce: Twm - Принудително управление
+      WmUnmanage: Twm - Премахване на управление
     options_label: Допълнителни опции
     title_create: Създаване {{name}}
     title_edit: Редактиране {{name}}

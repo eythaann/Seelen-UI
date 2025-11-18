@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: 更新
     ok_readonly: 編輯為新
     options:
-      float: 漂浮
-      force: 力管理
-      hidden: 隱藏碼頭/任務欄
-      pinned: 固定
-      unmanage: 不受限制
+      NoInteractive: 沒有互動
+      VdPinned: 在所有工作區中顯示
+      WmFloat: Twm - 開始浮動
+      WmForce: Twm - 強制管理
+      WmUnmanage: Twm - 取消管理
     options_label: 額外的選擇
     title_create: 創建{{name}}
     title_edit: 編輯{{name}}

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: अद्यतन
     ok_readonly: नए के रूप में संपादित करें
     options:
-      float: तैरना
-      force: बल का प्रबंधन करना
-      hidden: डॉक/टास्कबार से छिपाएं
-      pinned: पिन की गई
-      unmanage: अमानवीय
+      NoInteractive: कोई इंटरैक्टिव नहीं
+      VdPinned: सभी कार्यस्थानों में दिखाएं
+      WmFloat: Twm - तैरना प्रारंभ करें
+      WmForce: Twm - फोर्स मैनेज
+      WmUnmanage: Twm - अनमैनेज
     options_label: अतिरिक्त विकल्प
     title_create: '{{नाम}} बनाना'
     title_edit: संपादन {{नाम}}

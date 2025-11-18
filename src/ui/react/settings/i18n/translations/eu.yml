@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Eguneratu
     ok_readonly: Editatu berria
     options:
-      float: Flotatu
-      force: Indar kudeatzea
-      hidden: Ezkutatu kai / ataza-barran
-      pinned: Pipe
-      unmanage: Loraza
+      NoInteractive: Ez interaktiborik
+      VdPinned: Erakutsi laneko gune guztietan
+      WmFloat: Twm - Hasi flotatzen
+      WmForce: Twm - Indarra kudeatu
+      WmUnmanage: Twm - Deskudeatu
     options_label: Aukera gehigarriak
     title_create: '{{Name}} sortzea'
     title_edit: '{{Name}} edizioa'

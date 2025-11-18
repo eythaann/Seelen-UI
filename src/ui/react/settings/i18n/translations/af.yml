@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Opdateer
     ok_readonly: Wysig as nuut
     options:
-      float: Dryf
-      force: Kragbestuur
-      hidden: Verberg van die beskuldigdebalk/taakbalk
-      pinned: Vasgaan
-      unmanage: Onhandiging
+      NoInteractive: Geen interaktief nie
+      VdPinned: Wys in alle werkruimtes
+      WmFloat: Twm - Begin dryf
+      WmForce: Twm - Force Bestuur
+      WmUnmanage: Twm - Onbestuur
     options_label: Ekstra opsies
     title_create: Skep {{name}}
     title_edit: Redigering {{name}}

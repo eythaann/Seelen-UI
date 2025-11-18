@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Թարմացում
     ok_readonly: Խմբագրել որպես նոր
     options:
-      float: Լողացող
-      force: Ուժի կառավարում
-      hidden: Թաքցնել նավահանգիստից / առաջադրանք
-      pinned: Փածսյա
-      unmanage: Անօդաչուր
+      NoInteractive: Ինտերակտիվ չկա
+      VdPinned: Ցուցադրել բոլոր աշխատանքային տարածքներում
+      WmFloat: Twm - Սկսեք լողալ
+      WmForce: Twm - ուժի կառավարում
+      WmUnmanage: Twm - Չկառավարել
     options_label: Լրացուցիչ ընտրանքներ
     title_create: Ստեղծելով {{name}
     title_edit: Խմբագրում {{name}

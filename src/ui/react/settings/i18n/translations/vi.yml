@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Cập nhật
     ok_readonly: Chỉnh sửa như mới
     options:
-      float: Trôi nổi
-      force: Quản lý lực lượng
-      hidden: Ẩn từ Dock/Thanh tác vụ
-      pinned: Ghim
-      unmanage: Không quản lý
+      NoInteractive: Không tương tác
+      VdPinned: Hiển thị trong tất cả không gian làm việc
+      WmFloat: Twm - Bắt đầu nổi
+      WmForce: Twm - Quản lý lực lượng
+      WmUnmanage: Twm - Bỏ quản lý
     options_label: Tùy chọn bổ sung
     title_create: Tạo {{name}}
     title_edit: Chỉnh sửa {{name}}

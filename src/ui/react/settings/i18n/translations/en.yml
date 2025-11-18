@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Update
     ok_readonly: Edit as New
     options:
-      float: Float
-      force: Force Manage
-      hidden: Hide from dock/taskbar
-      pinned: Pinned
-      unmanage: Unmanage
+      NoInteractive: No Interactive
+      VdPinned: Show in all workspaces
+      WmFloat: Twm - Start Floating
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Extra Options
     title_create: Creating {{name}}
     title_edit: Editing {{name}}

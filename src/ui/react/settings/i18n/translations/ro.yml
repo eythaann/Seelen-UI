@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Actualizați
     ok_readonly: Editați ca nou
     options:
-      float: Pluti
-      force: Forța gestionează
-      hidden: Ascundeți -vă de doc/bara de activități
-      pinned: Fixat
-      unmanage: Ne gestionare
+      NoInteractive: Nu interactiv
+      VdPinned: Afișați în toate spațiile de lucru
+      WmFloat: Twm - Începeți să plutească
+      WmForce: Twm - Gestionarea forței
+      WmUnmanage: Twm - Unmanage
     options_label: Opțiuni suplimentare
     title_create: Crearea {{nume}}
     title_edit: Editare {{nume}}

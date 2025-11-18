@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: UDÛDEPATE
     ok_readonly: Wekî nû biguherînin
     options:
-      float: Avbazîn
-      force: Hêza birêvebirin
-      hidden: Ji Dock / Taskbar veşêrin
-      pinned: Pinned
-      unmanage: Nedar
+      NoInteractive: No Interactive
+      VdPinned: Di hemî cîhên xebatê de nîşan bide
+      WmFloat: Twm - Destpêkirina Floating
+      WmForce: Twm - Birêvebirina Hêzê
+      WmUnmanage: Twm - Birêvebirin
     options_label: Vebijarkên zêde
     title_create: Afirandina {NAME}
     title_edit: Verastkirin {{name}}

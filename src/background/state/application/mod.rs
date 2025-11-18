@@ -21,10 +21,13 @@ use notify_debouncer_full::{
 use parking_lot::Mutex;
 use seelen_core::{
     resource::ResourceKind,
-    state::{CssStyles, LauncherHistory, Profile, SluPopupConfig, SluPopupContent, WegItems},
+    state::{
+        AppsConfigurationList, CssStyles, LauncherHistory, Profile, SluPopupConfig,
+        SluPopupContent, WegItems,
+    },
 };
 use std::{
-    collections::{HashSet, VecDeque},
+    collections::HashSet,
     path::{Path, PathBuf},
     sync::Arc,
     time::Duration,
@@ -50,7 +53,7 @@ pub struct FullState {
     // ======== data ========
     pub profiles: Vec<Profile>,
     pub settings: Settings,
-    pub settings_by_app: VecDeque<AppConfig>,
+    pub settings_by_app: AppsConfigurationList,
     pub weg_items: WegItems,
     pub toolbar_items: Placeholder,
     pub launcher_history: LauncherHistory,
@@ -67,7 +70,7 @@ impl FullState {
             // ======== data ========
             profiles: Vec::new(),
             settings: Settings::default(),
-            settings_by_app: VecDeque::new(),
+            settings_by_app: AppsConfigurationList::default(),
             weg_items: WegItems::default(),
             toolbar_items: Self::initial_toolbar_items(),
             launcher_history: LauncherHistory::default(),
@@ -327,9 +330,7 @@ impl FullState {
             self.settings_by_app.extend(apps);
         }
 
-        self.settings_by_app
-            .iter_mut()
-            .for_each(|app| app.identifier.perform_cache());
+        self.settings_by_app.prepare();
         Ok(())
     }
 

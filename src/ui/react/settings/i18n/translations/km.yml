@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ធ្វើបច្ចុប្បន្នភាព
     ok_readonly: កែសម្រួលដូចថ្មី។
     options:
-      float: អណ្តែត
-      force: គ្រប់គ្រងដោយបង្ខំ
-      hidden: លាក់ខ្លួនពីចត / ភារកិច្ច
-      pinned: ខ្ទាស់
-      unmanage: មិនគ្រប់គ្រង
+      NoInteractive: គ្មានអន្តរកម្ម
+      VdPinned: បង្ហាញនៅក្នុងកន្លែងធ្វើការទាំងអស់
+      WmFloat: TWM - ចាប់ផ្តើមអណ្តែត
+      WmForce: TWM - គ្រប់គ្រងកម្លាំង
+      WmUnmanage: TWM - Unmanage
     options_label: ជម្រើសបន្ថែម
     title_create: ការបង្កើត {{name}}
     title_edit: ការកែសម្រួល {{ឈ្មោះ}}

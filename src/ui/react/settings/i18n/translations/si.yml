@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: යාවත්කාලීන කරන්න
     ok_readonly: නව ලෙස සංස්කරණය කරන්න
     options:
-      float: පාවෙන
-      force: බල කළමනාකරණය
-      hidden: තටාකයේ / කාර්ය තීරුවෙන් සඟවන්න
-      pinned: පින් කර ඇත
-      unmanage: කළමනාකරණය කරන්න
+      NoInteractive: අන්තර්ක්‍රියාකාරී නැත
+      VdPinned: සියලුම වැඩබිම්වල පෙන්වන්න
+      WmFloat: Twm - පාවෙන ආරම්භ කරන්න
+      WmForce: Twm - බල කළමනාකරණය
+      WmUnmanage: Twm - කළමනාකරණය කරන්න
     options_label: අමතර විකල්ප
     title_create: '{{name}} නිර්මාණය කරමින්'
     title_edit: සංස්කරණය {{name}}

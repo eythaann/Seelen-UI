@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: تعديل
     ok_readonly: عرض قرائه فقط
     options:
-      float: يطفو
-      force: الألزام
-      hidden: مخفي من دائرة المهام/شريط المهام
-      pinned: مثبت
-      unmanage: لم يتم إدارته
+      NoInteractive: لا التفاعلية
+      VdPinned: إظهار في كافة مساحات العمل
+      WmFloat: Twm - ابدأ بالطفو
+      WmForce: Twm - إدارة القوة
+      WmUnmanage: Twm - عدم الإدارة
     options_label: خيارات إضافية
     title_create: إنشاء {{الأسم}}
     title_edit: تعديل {{العنوان}}

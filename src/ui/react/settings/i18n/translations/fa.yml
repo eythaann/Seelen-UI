@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: به روز رسانی
     ok_readonly: ویرایش به عنوان جدید
     options:
-      float: شناور
-      force: زور مدیریت
-      hidden: مخفی کردن از حوض/نوار وظیفه
-      pinned: بریده شده
-      unmanage: از بین بردن
+      NoInteractive: بدون تعامل
+      VdPinned: نمایش در همه فضاهای کاری
+      WmFloat: Twm - شناور را شروع کنید
+      WmForce: Twm - مدیریت نیرو
+      WmUnmanage: Twm - مدیریت کنید
     options_label: گزینه های اضافی
     title_create: ایجاد {{name}}
     title_edit: ویرایش {{نام}}

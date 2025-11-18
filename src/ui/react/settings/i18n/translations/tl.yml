@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: I -update
     ok_readonly: I -edit bilang bago
     options:
-      float: Lumutang
-      force: Pamahalaan ang Pamahalaan
-      hidden: Itago mula sa pantalan/taskbar
-      pinned: Naka -pin
-      unmanage: Hindi namamahala
+      NoInteractive: Walang interactive
+      VdPinned: Ipakita sa lahat ng mga lugar ng trabaho
+      WmFloat: TWM - Simulan ang lumulutang
+      WmForce: TWM - Pamahalaan ang Pamahalaan
+      WmUnmanage: TWM - hindi namamahala
     options_label: Dagdag na mga pagpipilian
     title_create: Lumilikha ng {{pangalan}}
     title_edit: Pag -edit {{pangalan}}

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: புதுப்பிக்கவும்
     ok_readonly: புதியதாக திருத்தவும்
     options:
-      float: மிதவை
-      force: கட்டாயம் நிர்வகி
-      hidden: கப்பல்துறை/பணிப்பட்டியிலிருந்து மறைக்கவும்
-      pinned: பின் செய்யப்பட்டது
-      unmanage: நிர்வகியுங்கள்
+      NoInteractive: ஊடாடுதல் இல்லை
+      VdPinned: அனைத்து பணியிடங்களிலும் காட்டு
+      WmFloat: Twm - மிதக்கத் தொடங்குங்கள்
+      WmForce: Twm - படை நிர்வகி
+      WmUnmanage: Twm - நிர்வகிக்கா
     options_label: கூடுதல் விருப்பங்கள்
     title_create: '{{name}} உருவாக்குகிறது'
     title_edit: எடிட்டிங் {{பெயர்}}

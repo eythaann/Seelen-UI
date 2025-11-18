@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: अद्यावधिक गर्नुहोस्
     ok_readonly: नयाँ जस्तै सम्पादन गर्नुहोस्
     options:
-      float: उत्रनु
-      force: शक्ति प्रबन्ध
-      hidden: डक / टास्कबारबाट लुकाउनुहोस्
-      pinned: गाइन्ड लाग्यो
-      unmanage: अज्ञात
+      NoInteractive: कुनै अन्तरक्रियात्मक छैन
+      VdPinned: सबै कार्यस्थानहरूमा देखाउनुहोस्
+      WmFloat: Twm - फ्लोटिंग सुरु गर्नुहोस्
+      WmForce: Twm - बल व्यवस्थापन
+      WmUnmanage: Twm - अप्रबन्ध गर्नुहोस्
     options_label: अतिरिक्त विकल्पहरू
     title_create: '{{Neame नाम} सिर्जना गर्दै}'
     title_edit: '{{{{नाम} ..'

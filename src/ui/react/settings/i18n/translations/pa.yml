@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ਅਪਡੇਟ
     ok_readonly: ਨਵੇਂ ਵਜੋਂ ਸੰਪਾਦਿਤ ਕਰੋ
     options:
-      float: ਫਲੋਟ
-      force: ਫੋਰਸ ਪ੍ਰਬੰਧਨ
-      hidden: ਡੌਕ / ਟਾਸਕਬਾਰ ਤੋਂ ਲੁਕੋ
-      pinned: ਪਿੰਨ ਕੀਤਾ
-      unmanage: ਅਪ੍ਰਬੰਧਿਤ ਕਰੋ
+      NoInteractive: ਕੋਈ ਇੰਟਰਐਕਟਿਵ ਨਹੀਂ
+      VdPinned: ਸਾਰੇ ਵਰਕਸਪੇਸ ਵਿੱਚ ਦਿਖਾਓ
+      WmFloat: Twm - ਫਲੋਟਿੰਗ ਸ਼ੁਰੂ ਕਰੋ
+      WmForce: Twm - ਫੋਰਸ ਪ੍ਰਬੰਧਨ
+      WmUnmanage: Twm - ਅਪ੍ਰਬੰਧਿਤ
     options_label: ਵਾਧੂ ਵਿਕਲਪ
     title_create: '{{name}} ਬਣਾਉਣਾ'
     title_edit: ਸੰਪਾਦਨ {ime neame}

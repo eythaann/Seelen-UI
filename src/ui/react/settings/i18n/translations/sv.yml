@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Uppdatering
     ok_readonly: Redigera som ny
     options:
-      float: Flyta
-      force: Tvinga sig
-      hidden: Gömma sig från docka/aktivitetsfält
-      pinned: Fästad
-      unmanage: Obehandla
+      NoInteractive: Ingen interaktiv
+      VdPinned: Visa i alla arbetsytor
+      WmFloat: Twm - Börja flyta
+      WmForce: Twm - Force Hantera
+      WmUnmanage: Twm - Unmanage
     options_label: Extra alternativ
     title_create: Skapa {{name}}
     title_edit: Redigera {{name}}

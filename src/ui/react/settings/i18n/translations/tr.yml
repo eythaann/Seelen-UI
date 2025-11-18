@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Düzenle
     ok_readonly: Yeni Olarak Düzenle
     options:
-      float: Yüzer
-      force: Zorla Yönet
-      hidden: Dock/Görev Çubuğunda Gizle
-      pinned: Sabitlenmiş
-      unmanage: Yönetim Dışında Tut
+      NoInteractive: Etkileşimli Değil
+      VdPinned: Tüm çalışma alanlarında göster
+      WmFloat: Twm - Kaymaya Başla
+      WmForce: Twm - Yönetmeyi Zorla
+      WmUnmanage: Twm - Yönetimi kaldır
     options_label: Ekstra Seçenekler
     title_create: '{{Name}} Oluşturuluyor'
     title_edit: '{{name}} Düzenleniyor'

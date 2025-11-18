@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Cusboonaysiin
     ok_readonly: Tafatir sida cusub
     options:
-      float: Sabbayn
-      force: Xoog u maareeyaan
-      hidden: Ka qarsoon xijaabka / Turniinka
-      pinned: Shaashad
-      unmanage: Aan lahayn
+      NoInteractive: Is dhexgalka
+      VdPinned: Muuji dhammaan goobta shaqada
+      WmFloat: TWM - Bilow sabuuradda
+      WmForce: TWM - Xoog Maamulka
+      WmUnmanage: TWM - oo aan si qabad lahayn
     options_label: Fursadaha dheeraadka ah
     title_create: Abuuritaanka {{Magaca {Magaca}
     title_edit: Tafatirka {{magaca}}

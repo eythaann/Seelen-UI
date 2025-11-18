@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Päivittää
     ok_readonly: Muokata UUSIA
     options:
-      float: Kellua
-      force: Voimankäyttö
-      hidden: Piiloutua telakalta/tehtäväpalkista
-      pinned: Kiinnitetty
-      unmanage: Hallinta
+      NoInteractive: Ei interaktiivista
+      VdPinned: Näytä kaikissa työtiloissa
+      WmFloat: Twm - Aloita kelluminen
+      WmForce: Twm - Pakota hallinta
+      WmUnmanage: Twm - Ei hallintaa
     options_label: Ylimääräiset vaihtoehdot
     title_create: '{{Nimi}} luominen'
     title_edit: Muokkaaminen {{nimi}}

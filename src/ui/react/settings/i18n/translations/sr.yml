@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ажурирање
     ok_readonly: Уреди као ново
     options:
-      float: Пловак
-      force: Присилно управљање
-      hidden: Сакриј се од пристаништа / траке задатака
-      pinned: Прикован
-      unmanage: Неукратити
+      NoInteractive: Но Интерацтиве
+      VdPinned: Прикажи у свим радним просторима
+      WmFloat: Твм - Почни да плуташ
+      WmForce: Твм - Форце Манаге
+      WmUnmanage: Твм - Унманаге
     options_label: Додатне опције
     title_create: Стварање {{наме}}
     title_edit: Уређивање {{наме}}

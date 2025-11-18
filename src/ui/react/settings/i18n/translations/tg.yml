@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Навсозӣ
     ok_readonly: Ҳамчун нав
     options:
-      float: Шино кардан
-      force: Идоракунии қувва
-      hidden: Аз док / паноҳгоҳ пинҳон кунед
-      pinned: Пинҳон
-      unmanage: Тасдиқнашаванда
+      NoInteractive: Ягон интерактивӣ нест
+      VdPinned: Дар ҳама ҷойҳои корӣ нишон диҳед
+      WmFloat: Дугоник - Оғози шино
+      WmForce: Twr - Идоракунии қувва
+      WmUnmanage: Twrm - Noweragage
     options_label: Имконоти иловагӣ
     title_create: Эҷоди {{НОМИ}}
     title_edit: Таҳрир {{НОМ}}

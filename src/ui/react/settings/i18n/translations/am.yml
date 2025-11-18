@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ዝመና
     ok_readonly: እንደ አዲስ ያርትዑ
     options:
-      float: ተንሳፋፊ
-      force: ኃይል ማስተዳደር
-      hidden: ከ Dock / Actorbar ይደብቁ
-      pinned: ተያይ ated ል
-      unmanage: አለመግባባት
+      NoInteractive: በይነተገናኝ የለም
+      VdPinned: በሁሉም የስራ ቦታዎች ውስጥ አሳይ
+      WmFloat: Twm - ተንሳፋፊ ጅምር
+      WmForce: Twm - ኃይል ያስተዳድሩ
+      WmUnmanage: Twm - አለመግባባት
     options_label: ተጨማሪ አማራጮች
     title_create: '{{{ስም} መፍጠር}}'
     title_edit: አርት editing {{ስም}}}

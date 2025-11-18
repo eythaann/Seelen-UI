@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Yangilamoq
     ok_readonly: Yangi sifatida tahrirlash
     options:
-      float: Suzmoq
-      force: Kuchni boshqarish
-      hidden: Dock / vazifalar panelidan yashirish
-      pinned: Zebo
-      unmanage: Ishtiyoq
+      NoInteractive: Interaktiv interfaol yo'q
+      VdPinned: Barcha ish joylarida ko'rsatish
+      WmFloat: TWM - suzishni boshlang
+      WmForce: TWM - kuchni boshqarish
+      WmUnmanage: TWM - Ungelaj
     options_label: Qo'shimcha variantlar
     title_create: '{{Ism}} yaratish'
     title_edit: '{{Ismi}} tahrirlash'

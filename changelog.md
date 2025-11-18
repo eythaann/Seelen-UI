@@ -6,6 +6,10 @@
 
 - add new cli command to tranlate resource texts.
 
+### enhancements
+
+- improve window manager matching system.
+
 ## [2.4.6]
 
 ### features

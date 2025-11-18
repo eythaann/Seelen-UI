@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Memperbarui
     ok_readonly: Edit sebagai baru
     options:
-      float: Mengambang
-      force: Memaksa mengelola
-      hidden: Sembunyikan dari Dock/Taskbar
-      pinned: Disematkan
-      unmanage: Tidak mengelola
+      NoInteractive: Tidak Ada Interaktif
+      VdPinned: Tampilkan di semua ruang kerja
+      WmFloat: Twm - Mulai Mengambang
+      WmForce: Twm - Paksa Kelola
+      WmUnmanage: Twm - Batalkan pengelolaan
     options_label: Opsi tambahan
     title_create: Membuat {{name}}
     title_edit: Mengedit {{name}}

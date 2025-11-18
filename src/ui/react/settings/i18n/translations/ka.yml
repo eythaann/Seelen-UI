@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: განახლება
     ok_readonly: რედაქტირება როგორც ახალი
     options:
-      float: ტივტივი
-      force: ძალის მართვა
-      hidden: დამალვა დოკიდან/დავალებისგან
-      pinned: დადგენილება
-      unmanage: გაუგებრობა
+      NoInteractive: არ არის ინტერაქტიული
+      VdPinned: ჩვენება ყველა სამუშაო სივრცეში
+      WmFloat: Twm - დაიწყე მცურავი
+      WmForce: Twm - ძალის მართვა
+      WmUnmanage: Twm - გაუქმება
     options_label: დამატებითი პარამეტრები
     title_create: '{{სახელის შექმნა}}'
     title_edit: რედაქტირება {{სახელი}}

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Оновити
     ok_readonly: Редагувати як нове
     options:
-      float: Плаваюче
-      force: Змусити
-      hidden: Сховати з панелі завдань
-      pinned: Закріплений
-      unmanage: Не керувати
+      NoInteractive: Немає інтерактиву
+      VdPinned: Показати в усіх робочих областях
+      WmFloat: Twm - почати плавати
+      WmForce: Twm – примусове керування
+      WmUnmanage: Twm - Скасувати керування
     options_label: Додаткові варіанти
     title_create: Створення {{name}}
     title_edit: Редагування {{name}}

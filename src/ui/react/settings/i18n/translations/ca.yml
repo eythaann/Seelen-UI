@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Actualitzar
     ok_readonly: Edita com a nou
     options:
-      float: Surar
-      force: Gestionar la força
-      hidden: Amagueu del moll/barra de tasques
-      pinned: Fixada
-      unmanage: Implacable
+      NoInteractive: No interactiu
+      VdPinned: Mostra a tots els espais de treball
+      WmFloat: Twm - Comença a flotar
+      WmForce: Twm - Força de gestió
+      WmUnmanage: Twm - Desadministrar
     options_label: Opcions addicionals
     title_create: Creació {{nom}}
     title_edit: Edició {{nom}}

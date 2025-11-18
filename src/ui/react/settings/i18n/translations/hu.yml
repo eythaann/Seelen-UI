@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Frissít
     ok_readonly: Szerkesztés újként
     options:
-      float: Úszó
-      force: Erőkezelés
-      hidden: Rejtőzik a dokkból/tálcánból
-      pinned: Rögzített
-      unmanage: Menedzsment
+      NoInteractive: Nincs interaktív
+      VdPinned: Megjelenítés minden munkaterületen
+      WmFloat: Twm – Indítsa el a lebegést
+      WmForce: Twm – Kényszerkezelés
+      WmUnmanage: Twm – Kezelés megszüntetése
     options_label: Extra lehetőségek
     title_create: '{{Név}} létrehozása'
     title_edit: Szerkesztés {{név}}

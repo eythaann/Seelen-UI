@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Aggiorna
     ok_readonly: Modifica come Nuovo
     options:
-      float: Fluttuante
-      force: Forza Gestione
-      hidden: Nascondi da dock/barra delle attività
-      pinned: Fissato
-      unmanage: Non Gestire
+      NoInteractive: Non interattivo
+      VdPinned: Mostra in tutte le aree di lavoro
+      WmFloat: Twm - Inizia a fluttuare
+      WmForce: Twm - Gestione della forza
+      WmUnmanage: Twm - Non gestibile
     options_label: Opzioni Extra
     title_create: Crea {{name}}
     title_edit: Modifica {{name}}

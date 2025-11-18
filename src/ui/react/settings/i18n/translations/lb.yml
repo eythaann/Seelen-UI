@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Olaangs
     ok_readonly: Ännert als nei
     options:
-      float: Schwammen
-      force: Kraaft managen
-      hidden: Verstoppen vun Dock / Taskbar
-      pinned: Verbonnen
-      unmanage: Unmanage
+      NoInteractive: Keng interaktiv
+      VdPinned: Show an all Aarbechtsberäicher
+      WmFloat: Twm - Start Floating
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Extra Optiounen
     title_create: Erstellen {{Numm}}
     title_edit: Ännert {{Numm}}
