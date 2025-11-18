@@ -1,6 +1,6 @@
 {
   "name": "@seelen-ui/lib",
-  "version": "2.4.7",
+  "version": "2.4.8",
   "description": "Seelen UI Library for Widgets",
   "license": "AGPL-3.0",
   "exports": {

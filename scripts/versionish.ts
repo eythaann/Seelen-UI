@@ -78,7 +78,7 @@ async function main(args: string[]) {
   console.log("Updating app versions...");
   updateCargoVersion("./src/Cargo.toml", version);
   packageJson.version = version;
-  fs.writeFileSync("./package.json", JSON.stringify(packageJson, null, 2));
+  fs.writeFileSync("./package.json", JSON.stringify(packageJson, null, 2) + "\n");
   console.log("✓ App versions updated");
 
   // Update changelog if requested
@@ -92,6 +92,11 @@ async function main(args: string[]) {
   }
 
   console.log(`\n✓ Version ${version} set successfully`);
+
+  // cargo check to update the lockfile
+  execSync("cargo check", { stdio: "inherit" });
+  // npm install to update the lockfile
+  execSync("npm install", { stdio: "inherit" });
 }
 
 main(process.argv);
