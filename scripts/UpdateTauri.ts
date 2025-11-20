@@ -21,7 +21,7 @@ let command = `npm install ${toUpdate.join(" ")}`;
 console.info(`${command}\n`);
 execSync(command, { stdio: "inherit" });
 
-const cargoToml = toml.parse(readFileSync("Cargo.toml", "utf-8"));
+const cargoToml = toml.parse(readFileSync("src/Cargo.toml", "utf-8"));
 dependencies = {
   ...cargoToml["build-dependencies"],
   ...cargoToml.dependencies,
