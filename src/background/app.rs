@@ -83,7 +83,7 @@ impl Seelen {
     fn add_wall(&mut self) -> Result<()> {
         if self.wall.is_none() {
             let wall = SeelenWall::new()?;
-            wall.update_position()?;
+            log_error!(wall.update_position());
             self.wall = Some(wall)
         }
         Ok(())
