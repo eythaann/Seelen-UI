@@ -22,10 +22,8 @@ export async function declareDocumentAsLayeredHitbox(
   shouldAllowMouseEvent: (element: Element) => boolean = (element) => element != document.body,
 ): Promise<void> {
   const webview = TauriWindow.getCurrentWindow();
-  const { x, y } = await webview.outerPosition();
-  const { width, height } = await webview.outerSize();
 
-  const webviewRect = { x, y, width, height };
+  const webviewRect = { x: 0, y: 0, width: 0, height: 0 };
 
   await webview.setIgnoreCursorEvents(true);
   const data = new LayeredHitbox();
@@ -40,50 +38,49 @@ export async function declareDocumentAsLayeredHitbox(
     webviewRect.height = e.payload.height;
   });
 
+  const { x, y } = await webview.outerPosition();
+  webviewRect.x = x;
+  webviewRect.y = y;
+  const { width, height } = await webview.outerSize();
+  webviewRect.width = width;
+  webviewRect.height = height;
+
   webview.listen<boolean>(SeelenEvent.HandleLayeredHitboxes, (event) => {
     data.isLayeredEnabled = event.payload;
   });
 
-  webview.listen<[x: number, y: number]>(
-    SeelenEvent.GlobalMouseMove,
-    (event) => {
-      if (!data.isLayeredEnabled) {
-        return;
-      }
+  webview.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
+    if (!data.isLayeredEnabled) {
+      return;
+    }
 
-      const [mouseX, mouseY] = event.payload;
-      const {
-        x: windowX,
-        y: windowY,
-        width: windowWidth,
-        height: windowHeight,
-      } = webviewRect;
+    const [mouseX, mouseY] = event.payload;
+    const { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = webviewRect;
 
-      // check if the mouse is inside the window
-      const isHoverWindow = mouseX >= windowX &&
-        mouseX <= windowX + windowWidth &&
-        mouseY >= windowY &&
-        mouseY <= windowY + windowHeight;
+    // check if the mouse is inside the window
+    const isHoverWindow = mouseX >= windowX &&
+      mouseX <= windowX + windowWidth &&
+      mouseY >= windowY &&
+      mouseY <= windowY + windowHeight;
 
-      if (!isHoverWindow) {
-        return;
-      }
+    if (!isHoverWindow) {
+      return;
+    }
 
-      const adjustedX = (mouseX - windowX) / globalThis.devicePixelRatio;
-      const adjustedY = (mouseY - windowY) / globalThis.devicePixelRatio;
+    const adjustedX = (mouseX - windowX) / globalThis.devicePixelRatio;
+    const adjustedY = (mouseY - windowY) / globalThis.devicePixelRatio;
 
-      const elementAtPoint = document.elementFromPoint(adjustedX, adjustedY);
-      if (!elementAtPoint) {
-        return;
-      }
+    const elementAtPoint = document.elementFromPoint(adjustedX, adjustedY);
+    if (!elementAtPoint) {
+      return;
+    }
 
-      const shouldAllow = shouldAllowMouseEvent(elementAtPoint);
-      if (shouldAllow == data.isIgnoringCursorEvents) {
-        data.isIgnoringCursorEvents = !shouldAllow;
-        webview.setIgnoreCursorEvents(!shouldAllow);
-      }
-    },
-  );
+    const shouldAllow = shouldAllowMouseEvent(elementAtPoint);
+    if (shouldAllow == data.isIgnoringCursorEvents) {
+      data.isIgnoringCursorEvents = !shouldAllow;
+      webview.setIgnoreCursorEvents(!shouldAllow);
+    }
+  });
 
   globalThis.addEventListener("touchstart", (e) => {
     const shouldAllow = shouldAllowMouseEvent(e.target as Element);

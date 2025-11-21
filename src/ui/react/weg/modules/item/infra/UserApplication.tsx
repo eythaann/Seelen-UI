@@ -4,7 +4,6 @@ import { FileIcon } from "@shared/components/Icon";
 import { useWindowFocusChange } from "@shared/hooks";
 import { cx } from "@shared/styles";
 import { invoke } from "@tauri-apps/api/core";
-import { emit } from "@tauri-apps/api/event";
 import moment from "moment";
 import { memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -93,10 +92,6 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
             hwnd: window.handle,
             wasFocused,
           });
-          // this fix an issue of persisting focused colors when minimizing from dock
-          if (wasFocused) {
-            emit("hidden::remove-focused-color");
-          }
         }
       }}
       onAuxClick={(e) => {

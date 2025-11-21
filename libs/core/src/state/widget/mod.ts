@@ -10,7 +10,7 @@ import { SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../../
 import { List } from "../../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { getCurrentWebviewWindow, type WebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { decodeBase64Url } from "@std/encoding/base64url";
+import { decodeBase64Url } from "@std/encoding";
 import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";

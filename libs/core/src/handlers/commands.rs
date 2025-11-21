@@ -102,6 +102,8 @@ slu_commands_declaration! {
     RunAsAdmin = run_as_admin(program: PathBuf, args: Option<RelaunchArguments>),
 
     GetFocusedApp = get_focused_app() -> FocusedApp,
+    GetMousePosition = get_mouse_position() -> [i32; 2],
+
     IsDevMode = is_dev_mode() -> bool,
     IsAppxPackage = is_appx_package() -> bool,
     OpenFile = open_file(path: PathBuf),

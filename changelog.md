@@ -2,7 +2,13 @@
 
 ## [2.4.8]
 
-## [2.4.8]
+### enhancements
+
+- toolbar overlapped and hidden state.
+
+### fix
+
+- toolbar being shown while using fullscreen apps.
 
 ## [2.4.7]
 

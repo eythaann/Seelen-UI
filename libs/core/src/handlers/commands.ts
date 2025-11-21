@@ -5,6 +5,7 @@ export enum SeelenCommand {
   Run = "run",
   RunAsAdmin = "run_as_admin",
   GetFocusedApp = "get_focused_app",
+  GetMousePosition = "get_mouse_position",
   IsDevMode = "is_dev_mode",
   IsAppxPackage = "is_appx_package",
   OpenFile = "open_file",

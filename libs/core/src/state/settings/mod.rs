@@ -45,10 +45,6 @@ pub struct FancyToolbarSettings {
     pub delay_to_show: u32,
     /// delay to hide the toolbar on Mouse Leave in milliseconds
     pub delay_to_hide: u32,
-    /// show the hibernate button on power menu
-    pub show_hibernate_button: bool,
-    /// enable or disable dynamic color based on maximized focused window (themes can override this)
-    pub dynamic_color: bool,
 }
 
 impl Default for FancyToolbarSettings {
@@ -60,8 +56,6 @@ impl Default for FancyToolbarSettings {
             hide_mode: HideMode::Never,
             delay_to_show: 100,
             delay_to_hide: 800,
-            show_hibernate_button: false,
-            dynamic_color: true,
         }
     }
 }

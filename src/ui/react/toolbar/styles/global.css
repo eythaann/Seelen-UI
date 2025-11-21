@@ -23,11 +23,11 @@ body {
   }
 
   &:has(.ft-bar-hidden.top:not(:hover)) {
-    transform: translate(0, calc(var(--config-height) * -1));
+    transform: translate3d(0, calc(var(--config-height) * -1), 0);
   }
 
   &:has(.ft-bar-hidden.bottom:not(:hover)) {
-    transform: translate(0, calc(var(--config-height)));
+    transform: translate3d(0, calc(var(--config-height)), 0);
   }
 }
 

@@ -15,7 +15,14 @@ codegen-units = 1
 rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
 [workspace]
-members = ["libs/slu-ipc", "libs/positioning", "libs/core", "src", "src/hook_dll"]
+members = [
+  "libs/core",
+  "libs/positioning",
+  "libs/slu-ipc",
+  "libs/utils",
+  "src",
+  "src/hook_dll",
+]
 resolver = "3"
 lints = {}
 
@@ -52,6 +59,7 @@ reqwest = "0.12.15"
 rust-i18n = "3.1.4"
 seelen-core = { path = "libs/core" }
 slu-ipc = { path = "libs/slu-ipc" }
+slu-utils = { path = "libs/utils" }
 positioning = { path = "libs/positioning" }
 sysinfo = "0.30.12"
 tauri = "2.9.3"

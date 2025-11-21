@@ -29,6 +29,7 @@ impl Window {
             hwnd: self.address(),
             monitor: self.monitor().stable_id().unwrap_or_default().into(),
             title: self.title(),
+            class: self.class(),
             name: self
                 .app_display_name()
                 .unwrap_or(String::from("Error on App Name")),
@@ -37,6 +38,7 @@ impl Window {
             is_maximized: self.is_maximized(),
             is_fullscreened: self.is_fullscreen(),
             is_seelen_overlay: self.is_seelen_overlay(),
+            rect: self.inner_rect().ok(),
         }
     }
 }

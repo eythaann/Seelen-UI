@@ -94,6 +94,7 @@ impl HookManager {
         let shoup_update_focused = matches!(
             event,
             WinEvent::SystemForeground
+                | WinEvent::SyntheticForegroundLocationChange
                 | WinEvent::ObjectNameChange
                 | WinEvent::SystemMoveSizeStart
                 | WinEvent::SystemMoveSizeEnd

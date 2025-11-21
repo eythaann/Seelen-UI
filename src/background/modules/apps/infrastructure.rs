@@ -8,7 +8,10 @@ use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
 use crate::{
     app::get_app_handle,
     error::{ErrorMap, ResultLogExt},
-    modules::apps::application::{UserAppsManager, USER_APPS_MANAGER},
+    modules::{
+        apps::application::{UserAppsManager, USER_APPS_MANAGER},
+        input::Mouse,
+    },
     windows_api::window::Window,
 };
 
@@ -25,6 +28,12 @@ pub fn register_app_win_events() {
 #[tauri::command(async)]
 pub fn get_focused_app() -> FocusedApp {
     Window::get_foregrounded().as_focused_app_information()
+}
+
+#[tauri::command(async)]
+pub fn get_mouse_position() -> [i32; 2] {
+    let point = Mouse::get_cursor_pos().unwrap_or_default();
+    [point.x(), point.y()]
 }
 
 #[tauri::command(async)]

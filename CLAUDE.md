@@ -50,6 +50,7 @@ npm install && npm run dev
 - **Backend**: Rust with Tauri framework handling system integrations, window management, and native APIs
 - **Frontend**: Multiple independent React/Preact applications bundled with esbuild
 - **IPC**: Tauri's invoke system for frontend-backend communication
+- **Event-Driven**: Async event architecture for real-time state synchronization between backend and frontend widgets
 
 ### Monorepo Structure
 
@@ -60,7 +61,7 @@ npm install && npm run dev
   - `positioning/` - Positioning utilities
   - `slu-ipc/` - Inter-process communication
   - `widgets-integrity/` - Widget integrity checks
-  - `widgets-shared/` - Shared widget components
+  - `widgets-shared/` - Shared widget components and LazySignal architecture for cross-widget state
 
 **Seelen UI Application:**
 
@@ -97,7 +98,8 @@ Each UI app follows hexagonal architecture with:
 ### Frontend
 
 - **React/Preact** with hooks and functional components
-- **Redux Toolkit** for state management
+- **Preact Signals** for reactive state management across widgets
+- **Redux Toolkit** for complex component-level state management
 - **Ant Design** for UI components
 - **CSS Modules** for styling
 - **i18next** for internationalization (70+ languages supported)
@@ -150,9 +152,94 @@ To prevent deadlocks, always acquire locks in this order:
 
 ### State Management
 
+#### Redux Toolkit (Component State)
+
 - Use Redux Toolkit for complex state in UI apps
 - Keep state management in the `store/` directories
 - Follow the established patterns for actions, reducers, and selectors
+
+#### LazySignal Architecture (Shared/Global State)
+
+**CRITICAL**: For shared widget state that depends on async events and async getters, use the `LazySignal` pattern from
+`libs/widgets-shared/` to avoid race conditions.
+
+**Why LazySignal is Necessary:**
+
+In an event-driven architecture with async initialization and async event handlers, race conditions can occur:
+
+- Initial state fetch may complete after an event has already updated the value
+- Multiple async operations may compete to set the initial state
+- Event listeners may fire before initialization completes
+
+**How LazySignal Works:**
+
+```typescript
+// libs/widgets-shared/LazySignal.ts
+class LazySignal<T> extends Signal<T> {
+  // Throws error if accessed before initialization
+  get value(): T {
+    if (!this.initialized) {
+      throw new Error("LazySignal was not initialized");
+    }
+    return this.value;
+  }
+
+  // Double-check pattern to prevent race conditions
+  async init() {
+    if (!this.initialized) {
+      const value = await this.initializer();
+      // Check again after await - event may have set value during fetch
+      if (!this.initialized) {
+        this.initialized = true;
+        this.value = value;
+      }
+    }
+  }
+}
+```
+
+**Usage Pattern:**
+
+```typescript
+// 1. Create lazy signal with async initializer
+const $system_colors = lazySignal(async () => (await UIColors.getAsync()).inner);
+
+// 2. Set up event listeners that can fire anytime
+await UIColors.onChange((colors) => ($system_colors.value = colors.inner));
+
+// 3. Initialize - won't overwrite if event already fired
+await $system_colors.init();
+```
+
+**Key Benefits:**
+
+- **Race Condition Safe**: Double-check pattern ensures events fired during initialization aren't overwritten
+- **Fail-Fast**: Throws error if accessed before initialization, catching bugs early
+- **Event Handler Utility**: `setByPayload` method simplifies Tauri event integration
+- **Type Safe**: Full TypeScript support with proper type inference
+
+**When to Use:**
+
+- ✅ Shared state across multiple widgets/webviews
+- ✅ State synchronized with backend via async events
+- ✅ Initial state requires async fetch (Tauri invoke, system APIs)
+- ✅ State updated by multiple async sources simultaneously
+- ❌ Local component state (use React hooks/Redux instead)
+- ❌ Simple synchronous state
+
+**Example from Production:**
+
+```typescript
+// libs/widgets-shared/signals.ts
+const $is_this_webview_focused = lazySignal(() => window.isFocused());
+await window.onFocusChanged($is_this_webview_focused.setByPayload);
+await $is_this_webview_focused.init();
+```
+
+This ensures focus state is always correct regardless of whether:
+
+- The initial fetch completes first, OR
+- A focus event fires before initialization completes
 
 ### Windows Integration
 

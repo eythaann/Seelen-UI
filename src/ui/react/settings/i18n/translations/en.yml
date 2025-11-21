@@ -228,10 +228,6 @@ toolbar:
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position
-  dynamic_color: Dynamic Color
-  dynamic_color_tooltip: >-
-    Enable dynamic background and foreground colors based on focused window.
-    (Colors can be overridden by themes)
   enable: Enable Fancy Toolbar
   height: Height
   hide_mode:
@@ -240,7 +236,6 @@ toolbar:
     on_overlap: On overlap
   label: Toolbar
   placeholder: {}
-  show_hibernate: Show hibernate button on power menu
 update:
   available: Update Available!
   channel: Update Channel

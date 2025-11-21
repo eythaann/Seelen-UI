@@ -6535,6 +6535,7 @@ dependencies = [
  "serde_json",
  "serde_yaml",
  "slu-ipc",
+ "slu-utils",
  "sysinfo",
  "tauri",
  "tauri-build",
@@ -6940,6 +6941,10 @@ dependencies = [
  "tokio",
  "uuid 1.18.1",
 ]
+
+[[package]]
+name = "slu-utils"
+version = "0.0.1"
 
 [[package]]
 name = "sluhk"
