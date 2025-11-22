@@ -89,7 +89,6 @@ impl FancyToolbar {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
-        window.open_devtools();
 
         Ok(window)
     }

@@ -4,7 +4,7 @@ import { invoke } from "@tauri-apps/api/core";
 import type { ItemType } from "antd/es/menu/interface";
 import type { TFunction } from "i18next";
 
-import type { SwItem } from "../../shared/store/domain.ts";
+import type { SwItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
 import { WegItemType } from "@seelen-ui/lib/types";

@@ -3,16 +3,14 @@ import { SpecificIcon } from "@shared/components/Icon";
 import { invoke } from "@tauri-apps/api/core";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
 import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from "../../shared/store/app.ts";
-
-import type { StartMenuWegItem } from "../../shared/store/domain.ts";
+import type { StartMenuWegItem } from "../../shared/types.ts";
 
 import { WithContextMenu } from "../../../components/WithContextMenu.tsx";
 import { getMenuForItem } from "./Menu.tsx";
+import { $delayedFocused } from "../../shared/state/windows.ts";
 
 interface Props {
   item: StartMenuWegItem;
@@ -21,11 +19,9 @@ interface Props {
 const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];
 
 export const StartMenu = memo(({ item }: Props) => {
-  const focused = useSelector(Selectors.focusedApp);
-
   const { t } = useTranslation();
 
-  const isStartMenuOpen = startMenuExes.some((program) => (focused?.exe || "").endsWith(program));
+  const isStartMenuOpen = startMenuExes.some((program) => ($delayedFocused.value?.exe || "").endsWith(program));
 
   return (
     <WithContextMenu items={getMenuForItem(t, item)}>

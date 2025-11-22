@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import type { PinnedWegItem } from "../../shared/store/domain.ts";
+import type { PinnedWegItem } from "../../shared/types.ts";
 
 import { WithContextMenu } from "../../../components/WithContextMenu.tsx";
 import { getMenuForItem } from "./Menu.tsx";

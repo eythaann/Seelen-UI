@@ -1,4 +1,4 @@
-import { SeelenCommand } from "@seelen-ui/lib";
+import { SeelenCommand, startThemingTool } from "@seelen-ui/lib";
 import { getRootContainer } from "@shared";
 import { declareDocumentAsLayeredHitbox } from "@shared/layered";
 import { disableAnimationsOnPerformanceMode } from "@shared/performance";
@@ -6,9 +6,6 @@ import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
-import { Provider } from "react-redux";
-
-import { loadStore, registerStoreEvents, store } from "./modules/shared/store/infra.ts";
 
 import { App } from "./app.tsx";
 
@@ -20,18 +17,16 @@ import "@shared/styles/reset.css";
 import "./styles/global.css";
 
 await declareDocumentAsLayeredHitbox();
-await loadStore();
-await registerStoreEvents();
 await loadTranslations();
+await startThemingTool();
+
 disableAnimationsOnPerformanceMode();
 
 const container = getRootContainer();
 createRoot(container).render(
-  <Provider store={store}>
-    <I18nextProvider i18n={i18n}>
-      <App />
-    </I18nextProvider>
-  </Provider>,
+  <I18nextProvider i18n={i18n}>
+    <App />
+  </I18nextProvider>,
 );
 
 getCurrentWebviewWindow().onDragDropEvent(async (e) => {

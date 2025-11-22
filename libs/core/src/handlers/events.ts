@@ -26,7 +26,6 @@ export enum SeelenEvent {
   PowerMode = "power-mode",
   BatteriesStatus = "batteries-status",
   ColorsChanged = "colors-changed",
-  WegOverlaped = "set-auto-hide",
   WMSetReservation = "set-reservation",
   WMForceRetiling = "wm-force-retiling",
   WMSetLayout = "wm-set-layout",

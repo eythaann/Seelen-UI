@@ -5,10 +5,13 @@
 ### enhancements
 
 - toolbar overlapped and hidden state.
+- addition of pdb files on nightly builds.
 
 ### fix
 
+- crash caused by wallpaper manager.
 - toolbar being shown while using fullscreen apps.
+- dock being shown while using fullscreen apps.
 
 ## [2.4.7]
 

@@ -1,4 +1,4 @@
-import type { AppNotification, FocusedApp, MediaPlayer, WegItem } from "@seelen-ui/lib/types";
+import type { WegItem } from "@seelen-ui/lib/types";
 
 export type HWND = number & {};
 
@@ -10,11 +10,3 @@ export type StartMenuWegItem = Extract<WegItem, { type: "StartMenu" }>;
 
 /** @alias */
 export type SwItem = WegItem;
-
-export interface RootState {
-  devTools: boolean;
-  // ----------------------
-  focusedApp: FocusedApp | null;
-  mediaSessions: MediaPlayer[];
-  notifications: AppNotification[];
-}

@@ -7,18 +7,17 @@ import { tempDir } from "@tauri-apps/api/path";
 import { Spin } from "antd";
 import { type MouseEvent, useEffect, useReducer, useState } from "react";
 
-import type { HWND } from "../../shared/store/domain.ts";
+import type { HWND } from "../../shared/types.ts";
 
-import { $settings } from "../../shared/state/mod.ts";
+import { $delayedFocused, $settings } from "../../shared/state/mod.ts";
 interface PreviewProps {
   title: string;
   hwnd: HWND;
-  isFocused: boolean;
 }
 
 const TEMP_FOLDER = await tempDir();
 
-export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps) => {
+export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
   const imageUrl = convertFileSrc(`${TEMP_FOLDER}${hwnd}.png`);
 
   const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
@@ -47,7 +46,7 @@ export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps)
       onClick={() => {
         invoke(SeelenCommand.WegToggleWindowState, {
           hwnd,
-          wasFocused: isFocused,
+          wasFocused: $delayedFocused.value?.hwnd === hwnd,
         });
       }}
       onAuxClick={(e) => {

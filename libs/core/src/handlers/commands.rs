@@ -162,6 +162,7 @@ slu_commands_declaration! {
 
     // Widgets
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
+    GetSelfWindowId = get_self_window_handle() -> isize,
 
     // Shell
     GetNativeShellWallpaper = get_native_shell_wallpaper() -> PathBuf,

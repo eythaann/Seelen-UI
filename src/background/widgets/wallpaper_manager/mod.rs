@@ -55,7 +55,7 @@ impl SeelenWall {
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::TARGET);
         let args = WebviewArgs::new();
 
-        let mut builder = tauri::WebviewWindowBuilder::new(
+        let builder = tauri::WebviewWindowBuilder::new(
             handle,
             label,
             tauri::WebviewUrl::App("react/wallpaper_manager/index.html".into()),
@@ -77,13 +77,13 @@ impl SeelenWall {
         .data_directory(args.data_directory())
         .additional_browser_args(&args.to_string());
 
-        // workaround for  https://github.com/tauri-apps/tao/issues/1153
-        if let Ok(_progman) = WindowsApi::find_window(None, None, None, Some("Progman")) {
+        // workaround for https://github.com/tauri-apps/tao/issues/1153
+        /* if let Ok(_progman) = WindowsApi::find_window(None, None, None, Some("Progman")) {
             let mut progman = Default::default();
             builder = builder.parent_raw(progman);
             progman.0 = _progman.0;
             builder = builder.parent_raw(progman);
-        }
+        } */
 
         let window = builder.build()?;
         Ok(window)

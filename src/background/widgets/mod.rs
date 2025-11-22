@@ -24,6 +24,11 @@ pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
     Ok(())
 }
 
+#[tauri::command(async)]
+pub fn get_self_window_handle(webview: tauri::WebviewWindow<tauri::Wry>) -> Result<isize> {
+    Ok(webview.hwnd()?.0 as isize)
+}
+
 pub trait TrustedWidget {
     const ID: &'static str;
 

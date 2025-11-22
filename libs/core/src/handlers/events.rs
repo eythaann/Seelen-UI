@@ -78,8 +78,6 @@ slu_events_declaration! {
 
     ColorsChanged(UIColors) as "colors-changed",
 
-    WegOverlaped(bool) as "set-auto-hide",
-
     WMSetReservation as "set-reservation",
     WMForceRetiling as "wm-force-retiling",
     WMSetLayout(WmNode) as "wm-set-layout",

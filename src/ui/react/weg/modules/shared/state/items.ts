@@ -3,7 +3,7 @@ import { WegItems, Widget } from "@seelen-ui/lib";
 import { type WegItem, WegItemType } from "@seelen-ui/lib/types";
 import { debounce } from "lodash";
 
-import type { SeparatorWegItem } from "../store/domain.ts";
+import type { SeparatorWegItem } from "../types.ts";
 
 interface DockState {
   isReorderDisabled: boolean;

@@ -7,15 +7,13 @@ import { resolve, resourceDir } from "@tauri-apps/api/path";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
 import { calcLuminance } from "../../../../toolbar/modules/media/application.ts";
-import { Selectors } from "../../shared/store/app.ts";
 
-import type { MediaWegItem } from "../../shared/store/domain.ts";
+import type { MediaWegItem } from "../../shared/types.ts";
 
 import { WithContextMenu } from "../../../components/WithContextMenu.tsx";
-import { $settings } from "../../shared/state/mod.ts";
+import { $players, $settings } from "../../shared/state/mod.ts";
 import { getMenuForItem } from "./Menu.tsx";
 
 import "./MediaSession.css";
@@ -35,8 +33,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
   const [luminance, setLuminance] = useState(150);
 
   const $dock_position = useComputed(() => $settings.value.position);
-  const sessions = useSelector(Selectors.mediaSessions);
-  const session = sessions.find((s) => s.default);
+  const session = $players.value.find((s) => s.default);
 
   let thumbnailSrc = convertFileSrc(
     session?.thumbnail ? session.thumbnail : DEFAULT_THUMBNAIL,

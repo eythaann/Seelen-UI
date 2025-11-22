@@ -48,6 +48,7 @@ export enum SeelenCommand {
   StateRequestWallpaperAddition = "state_request_wallpaper_addition",
   StateGetPerformanceMode = "state_get_performance_mode",
   TriggerWidget = "trigger_widget",
+  GetSelfWindowId = "get_self_window_handle",
   GetNativeShellWallpaper = "get_native_shell_wallpaper",
   SetNativeShellWallpaper = "set_native_shell_wallpaper",
   GetUser = "get_user",

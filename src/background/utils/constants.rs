@@ -1,42 +1,15 @@
 use std::{
     path::{Path, PathBuf},
-    sync::Arc,
+    sync::{Arc, LazyLock},
 };
 
-use itertools::Itertools;
-use lazy_static::lazy_static;
 use tauri::Manager;
 use windows::Win32::UI::Shell::FOLDERID_Windows;
 
 use crate::{app::get_app_handle, windows_api::WindowsApi};
 
-lazy_static! {
-    pub static ref SEELEN_COMMON: Arc<SeelenCommon> = Arc::new(SeelenCommon::new());
-
-    /**
-     * Some UWP apps like WhatsApp are resized after be opened,
-     * this list will be used to resize them back after a delay.
-     */
-    pub static ref FORCE_RETILING_AFTER_ADD: Vec<String> = ["WhatsApp"]
-    .iter()
-    .map(|x| x.to_string())
-    .collect_vec();
-}
-
-pub static NATIVE_UI_POPUP_CLASSES: [&str; 3] = [
-    "ForegroundStaging",            // Task Switching and Task View
-    "XamlExplorerHostIslandWindow", // Task Switching, Task View and other popups
-    "ControlCenterWindow",          // Windows 11 right panel with quick settings
-];
-
-pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 6] = [
-    "msedgewebview2.exe",
-    "SearchHost.exe",
-    "StartMenuExperienceHost.exe",
-    "ShellExperienceHost.exe",
-    "GameBar.exe",      // Windows Xbox Game Bar
-    "SnippingTool.exe", // Windows Snipping Tool
-];
+pub static SEELEN_COMMON: LazyLock<Arc<SeelenCommon>> =
+    LazyLock::new(|| Arc::new(SeelenCommon::new()));
 
 pub struct SeelenCommon {
     // general

@@ -24,7 +24,7 @@ import { Separator } from "../item/infra/Separator.tsx";
 import { StartMenu } from "../item/infra/StartMenu.tsx";
 import { UserApplication } from "../item/infra/UserApplication.tsx";
 
-import type { SwItem } from "../shared/store/domain.ts";
+import type { SwItem } from "../shared/types.ts";
 
 import { $dock_state } from "../shared/state/items.ts";
 import { DraggableItem } from "./DraggableItem.tsx";

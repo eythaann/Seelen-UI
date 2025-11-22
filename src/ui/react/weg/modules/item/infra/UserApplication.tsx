@@ -7,16 +7,13 @@ import { invoke } from "@tauri-apps/api/core";
 import moment from "moment";
 import { memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
 import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
 
-import { Selectors } from "../../shared/store/app.ts";
-
-import type { PinnedWegItem, TemporalWegItem } from "../../shared/store/domain.ts";
+import type { PinnedWegItem, TemporalWegItem } from "../../shared/types.ts";
 
 import { WithContextMenu } from "../../../components/WithContextMenu.tsx";
-import { $settings } from "../../shared/state/mod.ts";
+import { $delayedFocused, $focused, $notifications, $settings } from "../../shared/state/mod.ts";
 import { getUserApplicationContextMenu } from "./UserApplicationContextMenu.tsx";
 import { UserApplicationPreview } from "./UserApplicationPreview.tsx";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
@@ -30,10 +27,6 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
   const [openPreview, setOpenPreview] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [blockUntil, setBlockUntil] = useState(moment(new Date()));
-
-  const notifications = useSelector(Selectors.notifications);
-  const devTools = useSelector(Selectors.devTools);
-  const focusedApp = useSelector(Selectors.focusedApp);
 
   const { t } = useTranslation();
   const calculatePlacement = (position: any) => {
@@ -72,7 +65,7 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
     }
   }, [openPreview]);
 
-  const notificationsCount = notifications.filter((n) => n.appUmid === item.umid).length;
+  const notificationsCount = $notifications.value.filter((n) => n.appUmid === item.umid).length;
   const itemLabel = $settings.value.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;
 
   const itemNode = (
@@ -87,10 +80,9 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
             workingDir: item.relaunchIn,
           });
         } else {
-          const wasFocused = focusedApp?.hwnd === window.handle;
           invoke(SeelenCommand.WegToggleWindowState, {
             hwnd: window.handle,
-            wasFocused,
+            wasFocused: $delayedFocused.value?.hwnd === window.handle,
           });
         }
       }}
@@ -106,15 +98,15 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
       {notificationsCount > 0 && <div className="weg-item-notification-badge">{notificationsCount}</div>}
       {$settings.value.showInstanceCounter && item.windows.length > 1 && (
-        <div className="weg-item-instance-counter-badge">
-          {item.windows.length}
-        </div>
+        <div className="weg-item-instance-counter-badge">{item.windows.length}</div>
       )}
       {!$settings.value.showWindowTitle && (
         <div
           className={cx("weg-item-open-sign", {
             "weg-item-open-sign-active": !!item.windows.length,
-            "weg-item-open-sign-focused": item.windows.some((w) => w.handle === focusedApp?.hwnd),
+            "weg-item-open-sign-focused": item.windows.some(
+              (w) => w.handle === $focused.value.hwnd,
+            ),
           })}
         />
       )}
@@ -127,12 +119,7 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
 
   return (
     <WithContextMenu
-      items={getUserApplicationContextMenu(
-        t,
-        item,
-        devTools,
-        $settings.value.showEndTask,
-      ) || []}
+      items={getUserApplicationContextMenu(t, item) || []}
       onOpenChange={(isOpen) => {
         setOpenContextMenu(isOpen);
         if (openPreview && isOpen) {
@@ -147,17 +134,11 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
         }}
         open={openPreview}
         placement={calculatePlacement($settings.value.position)}
-        onOpenChange={(open) =>
-          setOpenPreview(
-            open && !openContextMenu && moment(new Date()) > blockUntil,
-          )}
+        onOpenChange={(open) => setOpenPreview(open && !openContextMenu && moment(new Date()) > blockUntil)}
         trigger="hover"
         content={
           <BackgroundByLayersV2
-            className={cx(
-              "weg-item-preview-container",
-              $settings.value.position.toLowerCase(),
-            )}
+            className={cx("weg-item-preview-container", $settings.value.position.toLowerCase())}
             onMouseMoveCapture={(e) => e.stopPropagation()}
             onContextMenu={(e) => {
               e.stopPropagation();
@@ -171,7 +152,6 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
                   key={window.handle}
                   title={window.title}
                   hwnd={window.handle}
-                  isFocused={focusedApp?.hwnd === window.handle}
                 />
               ))}
               {item.windows.length === 0 && <div className="weg-item-display-name">{item.displayName}</div>}

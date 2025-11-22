@@ -25,10 +25,7 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use windows::{
     core::GUID,
-    Win32::{
-        Foundation::RECT,
-        UI::Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
-    },
+    Win32::UI::Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
 };
 
 use crate::{error::Result, get_tokio_handle};
@@ -39,19 +36,6 @@ pub fn pcwstr(s: &str) -> windows::core::PCWSTR {
 
 pub fn sleep_millis(millis: u64) {
     std::thread::sleep(Duration::from_millis(millis));
-}
-
-pub fn are_overlaped(a: &RECT, b: &RECT) -> bool {
-    let zeroed = RECT::default();
-    if a == &zeroed || b == &zeroed {
-        return false;
-    }
-    // The edge pixel overlapping do not matters. This resolves the shared pixel in between the monitors,
-    // hereby a fullscreened app shared pixel collision does not hide other monitor windows.
-    if a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom {
-        return false;
-    }
-    true
 }
 
 /// Resolve paths with folder ids in the form of "{GUID}\path\to\file"
