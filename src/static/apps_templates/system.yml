@@ -81,12 +81,3 @@
   options:
     - no-interactive
     - unmanage
-
-- name: Idle Windows Settings
-  identifier:
-    id: Windows\ImmersiveControlPanel
-    kind: Path
-    matchingStrategy: Contains
-  options:
-    - no-interactive
-    - unmanage

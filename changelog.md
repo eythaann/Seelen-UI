@@ -6,6 +6,7 @@
 
 - toolbar overlapped and hidden state.
 - addition of pdb files on nightly builds.
+- interactable windows matching system.
 
 ### fix
 

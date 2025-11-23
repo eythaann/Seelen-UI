@@ -45,7 +45,7 @@ impl UserAppsManager {
                     Self::send(UserAppsEvent::WinAdded(window.address()));
                 }
             }
-            WinEvent::ObjectNameChange => {
+            WinEvent::ObjectNameChange | WinEvent::ObjectParentChange => {
                 let was_interactable = is_interactable;
                 is_interactable = is_interactable_and_not_hidden(&window);
                 match (was_interactable, is_interactable) {
@@ -59,15 +59,16 @@ impl UserAppsManager {
                     }
                     _ => {}
                 }
-            }
-            WinEvent::ObjectParentChange => {
+
                 // re-check for UWP apps that on creation starts without a parent
-                if let Some(parent) = window.parent() {
-                    if !USER_APPS_MANAGER.contains_win(&parent)
-                        && parent.is_interactable_and_not_hidden()
-                    {
-                        USER_APPS_MANAGER.add_win(&parent);
-                        Self::send(UserAppsEvent::WinAdded(parent.address()));
+                if event == WinEvent::ObjectParentChange {
+                    if let Some(parent) = window.parent() {
+                        if !USER_APPS_MANAGER.contains_win(&parent)
+                            && parent.is_interactable_and_not_hidden()
+                        {
+                            USER_APPS_MANAGER.add_win(&parent);
+                            Self::send(UserAppsEvent::WinAdded(parent.address()));
+                        }
                     }
                 }
             }
@@ -167,8 +168,14 @@ pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
         return false;
     }
 
+    let to_validate = match window.get_frame_creator() {
+        Ok(None) => return false, // not found
+        Ok(Some(creator)) => creator,
+        Err(_) => *window, // window is not a frame
+    };
+
     let guard = FULL_STATE.load();
-    if let Some(config) = guard.get_app_config_by_window(window.hwnd()) {
+    if let Some(config) = guard.get_app_config_by_window(to_validate.hwnd()) {
         if config.options.contains(&AppExtraFlag::NoInteractive) {
             return false;
         }
