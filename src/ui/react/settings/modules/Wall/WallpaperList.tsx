@@ -107,7 +107,7 @@ export function WallpaperList({ monitorId }: Props) {
         centered
       >
         <div className={cs.preview}>
-          {previewing && <Wallpaper definition={previewing} />}
+          {previewing && <Wallpaper definition={previewing} muted />}
         </div>
       </Modal>
     </SettingsGroup>

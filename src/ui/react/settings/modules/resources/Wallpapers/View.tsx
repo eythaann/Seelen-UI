@@ -70,7 +70,7 @@ export function SingleWallpaperView() {
           borderRadius: "10px",
         }}
       >
-        <Wallpaper definition={editingWallpaper} config={config} />
+        <Wallpaper definition={editingWallpaper} config={config} muted />
       </div>
 
       <SettingsGroup>

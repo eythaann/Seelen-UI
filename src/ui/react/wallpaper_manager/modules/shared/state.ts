@@ -37,6 +37,10 @@ subscribe(SeelenEvent.GlobalMouseMove, () => {
   setAsIdle();
 });
 
+export const $muted = computed(() => {
+  return $focused.value.class !== "Progman";
+});
+
 export const $paused = computed(() => {
   return (
     $idle.value ||

@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.4.9]
+
+### features
+
+- implement wallpaper downloads.
+
 ## [2.4.8]
 
 ### enhancements

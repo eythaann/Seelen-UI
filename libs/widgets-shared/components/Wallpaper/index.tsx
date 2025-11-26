@@ -19,6 +19,7 @@ interface BaseProps {
   definition?: Wallpaper;
   config?: WallpaperInstanceSettings;
   onLoad?: () => void;
+  muted?: boolean;
   paused?: boolean;
   out?: boolean;
 }
@@ -141,7 +142,7 @@ function ImageWallpaper({ definition, config, onLoad }: DefinedWallProps) {
   );
 }
 
-function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps) {
+function VideoWallpaper({ definition, config, muted, paused, onLoad }: DefinedWallProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const waitingTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const retryCountRef = useRef(0);
@@ -333,7 +334,7 @@ function VideoWallpaper({ definition, config, paused, onLoad }: DefinedWallProps
       ref={ref}
       src={videoSrc}
       controls={false}
-      muted={config.muted}
+      muted={muted || config.muted}
       autoPlay={!paused}
       loop
       playsInline

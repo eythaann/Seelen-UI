@@ -47,6 +47,7 @@ export function Monitor({ monitorId, width = 1920, height = 1080 }: Props) {
           <Wallpaper
             definition={wallpaper}
             config={wallpaperId ? wallpaperSettings[wallpaperId] : undefined}
+            muted
           />
         </div>
       </div>

@@ -6,7 +6,7 @@ use std::{
 use itertools::Itertools;
 use seelen_core::{
     resource::{Resource, ResourceKind, SluResource, SluResourceFile},
-    state::{CssStyles, IconPack, SluPopupConfig, SluPopupContent},
+    state::{CssStyles, IconPack, SluPopupConfig, SluPopupContent, Wallpaper},
 };
 use tauri::Listener;
 use uuid::Uuid;
@@ -15,7 +15,7 @@ use crate::{
     error::Result,
     get_tokio_handle, log_error,
     state::application::{download_remote_icons, FULL_STATE},
-    utils::constants::SEELEN_COMMON,
+    utils::{constants::SEELEN_COMMON, date_based_hex_id},
     widgets::popups::POPUPS_MANAGER,
 };
 
@@ -79,7 +79,8 @@ fn path_by_resource_kind(kind: &ResourceKind) -> &Path {
 
 fn store_file_on_respective_user_folder(file: &SluResourceFile) -> Result<PathBuf> {
     let mut path_to_store = path_by_resource_kind(&file.resource.kind).to_path_buf();
-    if file.resource.kind == ResourceKind::IconPack {
+    if file.resource.kind == ResourceKind::IconPack || file.resource.kind == ResourceKind::Wallpaper
+    {
         path_to_store.push(file.resource.id.to_string());
         std::fs::create_dir_all(&path_to_store)?;
         path_to_store.push("metadata.slu");
@@ -136,10 +137,17 @@ async fn _download_resource(url: &str) -> Result<SluResourceFile> {
     let res = reqwest::get(url).await?;
     let file = res.json::<SluResourceFile>().await?;
     let saved_path = store_file_on_respective_user_folder(&file)?;
+
     if file.resource.kind == ResourceKind::IconPack {
         let mut pack = IconPack::load(saved_path.parent().unwrap())?;
         download_remote_icons(&mut pack).await?;
     }
+
+    if file.resource.kind == ResourceKind::Wallpaper {
+        let mut wallpaper = Wallpaper::load(saved_path.parent().unwrap())?;
+        download_remote_wallpapers(&mut wallpaper).await?;
+    }
+
     Ok(file)
 }
 
@@ -178,6 +186,14 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
                         state
                             .settings
                             .set_widget_enabled(&friendly_id.clone().into(), true);
+                    }
+                    ResourceKind::Wallpaper => {
+                        state
+                            .settings
+                            .by_widget
+                            .wall
+                            .backgrounds_v2
+                            .push(friendly_id.clone().into());
                     }
                     _ => {}
                 }
@@ -317,4 +333,46 @@ fn error_popup_config(err: &str) -> SluPopupConfig {
         ],
         ..Default::default()
     }
+}
+
+async fn download_remote_wallpapers(wallpaper: &mut Wallpaper) -> Result<()> {
+    if wallpaper.url.is_none() && wallpaper.thumbnail_url.is_none() {
+        return Ok(());
+    }
+
+    let folder_to_store = &wallpaper.metadata.internal.path;
+
+    // Download the main wallpaper file
+    if let Some(url) = &wallpaper.url {
+        let filename = download_remote_asset(url, folder_to_store).await?;
+        wallpaper.filename = Some(filename);
+    }
+
+    // Download the thumbnail
+    if let Some(thumbnail_url) = &wallpaper.thumbnail_url {
+        let thumbnail_filename = download_remote_asset(thumbnail_url, folder_to_store).await?;
+        wallpaper.thumbnail_filename = Some(thumbnail_filename);
+    }
+
+    wallpaper.save()?;
+    Ok(())
+}
+
+async fn download_remote_asset(url: &url::Url, folder_to_store: &Path) -> Result<String> {
+    if !folder_to_store.is_dir() {
+        std::fs::create_dir_all(folder_to_store)?;
+    }
+
+    let Some(extension) = url.path().split('.').next_back() else {
+        return Err("Could not determine file extension from URL".into());
+    };
+
+    let res = reqwest::get(url.as_str()).await?;
+    let bytes = res.bytes().await?;
+
+    let filename = format!("{}.{}", date_based_hex_id(), extension);
+    let file_path = folder_to_store.join(&filename);
+
+    std::fs::write(&file_path, &bytes)?;
+    Ok(filename)
 }
