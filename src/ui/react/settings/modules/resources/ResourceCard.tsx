@@ -153,29 +153,15 @@ function ResourcePortraitInner({ resource, kind }: ResourcePortraitProps) {
 
   if (kind === "Wallpaper") {
     const wallpaper = resource as Wallpaper;
-    if (wallpaper.thumbnail_filename) {
+    if (wallpaper.thumbnailFilename) {
       return (
         <img
-          src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.thumbnail_filename}`)}
+          src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.thumbnailFilename}`)}
           style={{ filter: "blur(0.4px)" }}
           loading="lazy"
         />
       );
     }
-
-    /* if (
-        wallpaper.filename &&
-        SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.includes(wallpaper.filename.split('.').pop()!)
-      ) {
-        return (
-          <video
-            src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.filename}`)}
-            controls={false}
-            preload="metadata"
-            style={{ filter: 'blur(0.4px)' }}
-          />
-        );
-      } */
   }
 
   return <ResourceIcon kind={kind} />;

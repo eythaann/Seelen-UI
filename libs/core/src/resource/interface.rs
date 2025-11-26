@@ -83,7 +83,7 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
     /// Sanitize the resource data
     fn sanitize(&mut self) {}
 
-    /// Validates the resource
+    /// Validates the resource after sanitization
     fn validate(&self) -> Result<()> {
         Ok(())
     }
