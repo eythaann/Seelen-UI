@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
 import { HashRouter } from "react-router";
+import { startThemingTool } from "@seelen-ui/lib";
 
 import { LoadSettingsToStore, registerStoreEvents, store } from "./modules/shared/store/infra.ts";
 
@@ -21,6 +22,7 @@ getCurrentWebviewWindow().show();
 await LoadSettingsToStore();
 await registerStoreEvents();
 await loadTranslations();
+await startThemingTool();
 
 const container = getRootContainer();
 createRoot(container).render(

@@ -12,6 +12,7 @@ import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { Widget } from "../widget/mod.ts";
 import { Settings } from "../settings/mod.ts";
 import { UIColors } from "../../system_state/ui_colors.ts";
+import { startDateCssVariables } from "./theming.ts";
 
 export class ThemeList extends List<ITheme> {
   static getAsync(): Promise<ThemeList> {
@@ -139,4 +140,5 @@ export async function startThemingTool(): Promise<void> {
   await UIColors.onChange((colors) => colors.setAsCssVariables());
 
   themes.applyToDocument(settings.activeThemes, settings.byTheme);
+  startDateCssVariables();
 }

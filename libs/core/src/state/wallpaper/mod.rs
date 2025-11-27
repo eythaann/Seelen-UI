@@ -22,6 +22,9 @@ pub struct Wallpaper {
     pub filename: Option<String>,
     #[serde(alias = "thumbnail_filename")]
     pub thumbnail_filename: Option<String>,
+    /// Only used if the wallpaper type is `Layered`.\
+    /// Custom css that will be applied only on this wallpaper.
+    pub css: Option<String>,
 }
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
@@ -31,6 +34,8 @@ pub enum WallpaperKind {
     Image,
     #[serde(alias = "video")]
     Video,
+    #[serde(alias = "layered")]
+    Layered,
     /// used for wallpapers created before v2.4.9, will be changed on sanitization
     #[default]
     Unsupported,
@@ -136,6 +141,7 @@ impl Wallpaper {
             } else {
                 None
             },
+            css: None,
         };
         wallpaper.save()?;
 

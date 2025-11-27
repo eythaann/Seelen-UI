@@ -5,6 +5,8 @@
 ### features
 
 - implement wallpaper downloads.
+- add new wallpaper type "layered" it allows create unique wallpaper via css.
+- new css variables added related to the date (hour, minute, day, month, year).
 
 ## [2.4.8]
 

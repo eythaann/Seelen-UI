@@ -1,10 +1,6 @@
 import { useSignal } from "@preact/signals";
-import {
-  SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS,
-  SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS,
-  WallpaperConfiguration,
-} from "@seelen-ui/lib";
-import type { Wallpaper, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
+import { WallpaperConfiguration } from "@seelen-ui/lib";
+import { type Wallpaper, type WallpaperInstanceSettings, WallpaperKind } from "@seelen-ui/lib/types";
 import { cx } from "@shared/styles";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import type { ComponentChildren } from "preact";
@@ -37,22 +33,20 @@ export function Wallpaper(props: BaseProps) {
   }
 
   let element: ComponentChildren = null;
-  if (
-    definition &&
-    SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.toLowerCase()?.endsWith(ext))
-  ) {
-    element = <ImageWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
-  }
 
-  if (
-    definition &&
-    SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.some((ext) => definition.filename?.toLowerCase()?.endsWith(ext))
-  ) {
-    element = <VideoWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
-  }
-
-  if (!element) {
-    element = <ThemedWallpaper {...props} onLoad={onLoad} config={config} />;
+  switch (definition?.type) {
+    case WallpaperKind.Image:
+      element = <ImageWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
+      break;
+    case WallpaperKind.Video:
+      element = <VideoWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
+      break;
+    case WallpaperKind.Layered:
+      element = <ThemedWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
+      break;
+    default:
+      element = <ThemedWallpaper {...props} onLoad={onLoad} />;
+      break;
   }
 
   return (
@@ -76,13 +70,26 @@ export function Wallpaper(props: BaseProps) {
   );
 }
 
-export function ThemedWallpaper({ config, onLoad }: Pick<DefinedWallProps, "config" | "onLoad">) {
+export function ThemedWallpaper({
+  definition,
+  config,
+  onLoad,
+}: Pick<BaseProps, "definition" | "config" | "onLoad">) {
   useEffect(() => {
     onLoad?.();
   }, []);
 
+  if (!definition || !config) {
+    return (
+      <div className={cx(cs.wallpaper, cs.defaultWallpaper)}>
+        <BackgroundByLayersV2 />
+      </div>
+    );
+  }
+
   return (
-    <div className={cx(cs.wallpaper, "themed-wallpaper")} style={getWallpaperStyles(config)}>
+    <div id={definition.id} className={cs.wallpaper} style={getWallpaperStyles(config)}>
+      <style>{`@scope { ${definition.css || ""} }`}</style>
       <BackgroundByLayersV2 />
     </div>
   );
