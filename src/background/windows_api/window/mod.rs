@@ -23,9 +23,7 @@ use windows::{
 use crate::{
     cli::ServicePipe,
     error::Result,
-    modules::{
-        apps::application::is_interactable_and_not_hidden, start::application::START_MENU_MANAGER,
-    },
+    modules::{apps::application::is_interactable_window, start::application::START_MENU_MANAGER},
     widgets::{
         launcher::SeelenRofi, toolbar::FancyToolbar, wallpaper_manager::SeelenWall,
         weg::instance::SeelenWeg, window_manager::instance::WindowManagerV2,
@@ -315,7 +313,7 @@ impl Window {
 
     /// read inner called doc for more info
     pub fn is_interactable_and_not_hidden(&self) -> bool {
-        is_interactable_and_not_hidden(self)
+        is_interactable_window(self)
     }
 
     pub fn show_window(&self, command: SHOW_WINDOW_CMD) -> Result<()> {

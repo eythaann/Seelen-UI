@@ -18,7 +18,7 @@ impl UserAppsManager {
     pub(super) fn init_listing_app_windows() -> Vec<UserAppWindow> {
         let mut initial = Vec::new();
         let _ = WindowEnumerator::new().for_each(|window| {
-            if is_interactable_and_not_hidden(&window) {
+            if is_interactable_window(&window) {
                 initial.push(window.to_serializable());
             }
         });
@@ -29,7 +29,7 @@ impl UserAppsManager {
             std::thread::sleep(std::time::Duration::from_millis(1000));
             Self::instance()
                 .interactable_windows
-                .retain(|w| is_interactable_and_not_hidden(&Window::from(w.hwnd)));
+                .retain(|w| is_interactable_window(&Window::from(w.hwnd)));
         });
 
         initial
@@ -40,14 +40,14 @@ impl UserAppsManager {
 
         match event {
             WinEvent::ObjectCreate | WinEvent::ObjectShow => {
-                if !is_interactable && is_interactable_and_not_hidden(&window) {
+                if !is_interactable && is_interactable_window(&window) {
                     USER_APPS_MANAGER.add_win(&window);
                     Self::send(UserAppsEvent::WinAdded(window.address()));
                 }
             }
             WinEvent::ObjectNameChange | WinEvent::ObjectParentChange => {
                 let was_interactable = is_interactable;
-                is_interactable = is_interactable_and_not_hidden(&window);
+                is_interactable = is_interactable_window(&window);
                 match (was_interactable, is_interactable) {
                     (false, true) => {
                         USER_APPS_MANAGER.add_win(&window);
@@ -117,9 +117,9 @@ impl UserAppsManager {
 /// for the users.
 ///
 /// As windows properties can change, this should be reevaluated on every change.
-pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
+pub fn is_interactable_window(window: &Window) -> bool {
     // It must be a visible Window and not cloaked
-    if !window.is_visible() || window.is_cloaked() {
+    if !window.is_window() || !window.is_visible() || window.is_cloaked() {
         return false;
     }
 

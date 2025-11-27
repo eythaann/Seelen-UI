@@ -242,7 +242,7 @@ pub fn init_zombie_window_killer() -> Result<()> {
             for addr in guard.iter() {
                 let window = Window::from(*addr);
                 if !window.is_window() {
-                    // log::trace!("Reaping window: {:0x}", window.address());
+                    log::trace!("Reaping window: {:0x}", window.address());
                     log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
                 }
             }
