@@ -24,10 +24,6 @@ pub struct Wallpaper {
     pub thumbnail_url: Option<Url>,
     #[serde(alias = "thumbnail_filename")]
     pub thumbnail_filename: Option<String>,
-    /// bytes of the wallpaper
-    pub size: Option<u64>,
-    /// resolution of the wallpaper in pixels
-    pub resolution: Option<[u32; 2]>,
 
     /// Only used if the wallpaper type is `Layered`.\
     /// Custom css that will be applied only on this wallpaper.

@@ -93,6 +93,8 @@ pub struct ResourceMetadata {
     /// Developers are responsible to update the resource so when resource does not
     /// match the current app version, the resource will be shown with a warning message
     pub app_target_version: Option<(u32, u32, u32)>,
+    /// Extra metadata for the resource
+    pub extras: HashMap<String, String>,
     #[serde(flatten, skip_deserializing)]
     pub internal: InternalResourceMetadata,
 }
@@ -116,6 +118,7 @@ impl Default for ResourceMetadata {
             banner: None,
             screenshots: Vec::new(),
             tags: Vec::new(),
+            extras: HashMap::new(),
             app_target_version: None,
             internal: InternalResourceMetadata::default(),
         }
