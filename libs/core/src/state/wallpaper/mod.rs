@@ -17,11 +17,18 @@ pub struct Wallpaper {
     pub id: WallpaperId,
     pub metadata: ResourceMetadata,
     pub r#type: WallpaperKind,
+
     pub url: Option<Url>,
-    pub thumbnail_url: Option<Url>,
     pub filename: Option<String>,
+
+    pub thumbnail_url: Option<Url>,
     #[serde(alias = "thumbnail_filename")]
     pub thumbnail_filename: Option<String>,
+    /// bytes of the wallpaper
+    pub size: Option<u64>,
+    /// resolution of the wallpaper in pixels
+    pub resolution: Option<[u32; 2]>,
+
     /// Only used if the wallpaper type is `Layered`.\
     /// Custom css that will be applied only on this wallpaper.
     pub css: Option<String>,
@@ -133,15 +140,13 @@ impl Wallpaper {
             id,
             metadata,
             r#type,
-            url: None,
-            thumbnail_url: None,
             filename: Some(filename.clone()),
             thumbnail_filename: if Self::SUPPORTED_IMAGES.contains(&ext.as_str()) {
                 Some(filename)
             } else {
                 None
             },
-            css: None,
+            ..Default::default()
         };
         wallpaper.save()?;
 
