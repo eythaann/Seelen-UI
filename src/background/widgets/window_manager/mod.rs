@@ -36,7 +36,7 @@ impl WindowManagerV2 {
             return false;
         }
 
-        if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
+        if let Ok(Some(config)) = FULL_STATE.load().get_app_config_by_window(hwnd) {
             if config.options.contains(&AppExtraFlag::VdPinned) {
                 return false;
             }

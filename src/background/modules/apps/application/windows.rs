@@ -26,10 +26,16 @@ impl UserAppsManager {
         HookManager::subscribe(|(event, window)| Self::on_win_event(event, window));
 
         spawn_named_thread("InteractableWindowsRevalidator", || loop {
-            std::thread::sleep(std::time::Duration::from_millis(1000));
-            Self::instance()
-                .interactable_windows
-                .retain(|w| is_interactable_window(&Window::from(w.hwnd)));
+            std::thread::sleep(std::time::Duration::from_millis(2000));
+            Self::instance().interactable_windows.retain(|w| {
+                let window = Window::from(w.hwnd);
+                if window.is_interactable_and_not_hidden() {
+                    true
+                } else {
+                    Self::send(UserAppsEvent::WinRemoved(window.address()));
+                    false
+                }
+            });
         });
 
         initial
@@ -175,8 +181,15 @@ pub fn is_interactable_window(window: &Window) -> bool {
     };
 
     let guard = FULL_STATE.load();
-    if let Some(config) = guard.get_app_config_by_window(to_validate.hwnd()) {
-        if config.options.contains(&AppExtraFlag::NoInteractive) {
+    match guard.get_app_config_by_window(to_validate.hwnd()) {
+        Ok(Some(config)) => {
+            if config.options.contains(&AppExtraFlag::NoInteractive) {
+                return false;
+            }
+        }
+        Ok(_) => {}
+        Err(err) => {
+            log::error!("Error getting app config: {err}");
             return false;
         }
     }

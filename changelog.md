@@ -2,6 +2,10 @@
 
 ## [2.4.10]
 
+### fix
+
+- ghost items on dock and window manager.
+
 ## [2.4.9]
 
 ### features
