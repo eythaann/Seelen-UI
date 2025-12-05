@@ -29,7 +29,7 @@
 <InlineSVG
   {...rest}
   src={`/icons/${iconName}.svg`}
-  class={["slu-icon", "react-icon", className]}
+  class={["slu-icon", className]}
   style={computedStyle}
 />
 

@@ -174,6 +174,7 @@ pub trait ResultLogExt {
     fn log_error(self);
 }
 
+// todo remove this trait
 pub trait ErrorMap<T> {
     fn wrap_error(self) -> core::result::Result<T, AppError>;
 }
@@ -197,15 +198,17 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
 }
 
 impl<T, E: Into<AppError>> ErrorMap<T> for core::result::Result<T, E> {
+    #[inline(always)]
     fn wrap_error(self) -> core::result::Result<T, AppError> {
         self.map_err(Into::into)
     }
 }
 
-impl<T> ResultLogExt for core::result::Result<T, AppError> {
+impl<T, E: Into<AppError>> ResultLogExt for core::result::Result<T, E> {
+    #[inline(always)]
     fn log_error(self) {
         if let Err(err) = self {
-            log::error!("{err:?}");
+            log::error!("{:?}", err.into());
         }
     }
 }

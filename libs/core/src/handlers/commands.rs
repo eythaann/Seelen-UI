@@ -175,14 +175,6 @@ slu_commands_declaration! {
     GerUserApplications = get_user_applications() -> Vec<UserApplication>,
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
 
-    //Bluetooth
-    GetConnectedBluetoothDevices = get_connected_bluetooth_devices() -> Vec<BluetoothDevice>,
-    StartBluetoothScanning = start_bluetooth_scanning(),
-    StopBluetoothScanning = stop_bluetooth_scanning(),
-    PairBluetoothDevice = pair_bluetooth_device(address: u64),
-    ForgetBluetoothDevice = forget_bluetooth_device(id: String),
-    ConfirmBluetoothDevicePair = confirm_bluetooth_device_pair(accept: bool, passphrase: String),
-
     // Media
     GetMediaDevices = get_media_devices() -> [Vec<MediaDevice>; 2],
     GetMediaSessions = get_media_sessions() -> Vec<MediaPlayer>,
@@ -248,4 +240,18 @@ slu_commands_declaration! {
         args: String,
         input_data: HashMap<String, String>,
     ),
+
+    // Radios
+    GetRadios = get_radios() -> Vec<RadioDevice>,
+    SetRadioState = set_radios_state(kind: RadioDeviceKind, enabled: bool),
+
+    // Bluetooth
+    GetBluetoothDevices = get_bluetooth_devices() -> Vec<BluetoothDevice>,
+    StartBluetoothScanning = start_bluetooth_scanning(),
+    StopBluetoothScanning = stop_bluetooth_scanning(),
+
+    GetConnectedBluetoothDevices = get_connected_bluetooth_devices() -> Vec<BluetoothDevice>,
+    PairBluetoothDevice = pair_bluetooth_device(address: u64),
+    ForgetBluetoothDevice = forget_bluetooth_device(id: String),
+    ConfirmBluetoothDevicePair = confirm_bluetooth_device_pair(accept: bool, passphrase: String),
 }

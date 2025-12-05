@@ -39,8 +39,13 @@ pub fn register_media_events() {
             | MediaEvent::DeviceSessionRemoved { .. }
             | MediaEvent::DeviceSessionVolumeChanged { .. } => {
                 let app = get_app_handle();
-                log_error!(app.emit(SeelenEvent::MediaInputs, MEDIA_MANAGER.inputs.values()));
-                log_error!(app.emit(SeelenEvent::MediaOutputs, MEDIA_MANAGER.outputs.values()));
+
+                let inputs = MEDIA_MANAGER.inputs.values();
+                let outputs = MEDIA_MANAGER.outputs.values();
+
+                log_error!(app.emit(SeelenEvent::MediaDevices, (&inputs, &outputs)));
+                log_error!(app.emit(SeelenEvent::MediaInputs, &inputs));
+                log_error!(app.emit(SeelenEvent::MediaOutputs, &outputs));
             }
         });
     });

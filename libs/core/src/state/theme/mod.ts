@@ -70,7 +70,11 @@ export class Theme {
     });
 
     const layerName = "theme-" +
-      this.metadata.path.toLowerCase().replaceAll(/[^a-zA-Z0-9]/g, "_");
+      this.id
+        .toLowerCase()
+        .replaceAll("@", "")
+        .replaceAll(/[^a-zA-Z0-9\-\_]/g, "_");
+
     styles += `@layer ${layerName}-shared {\n${this.sharedStyles}\n}\n`;
 
     const variablesContent = Object.entries(varValues)
@@ -110,9 +114,7 @@ function iterateVariableDefinitions(
 }
 
 export function removeAllThemeStyles(): void {
-  const elements = document.querySelectorAll(
-    `style[data-resource-type="theme"]`,
-  );
+  const elements = document.querySelectorAll(`style[data-resource-type="theme"]`);
   for (const element of elements) {
     element.remove();
   }

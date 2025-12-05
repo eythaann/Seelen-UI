@@ -1,0 +1,15 @@
+button[data-skin="transparent"] {
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  &:hover {
+    background-color: rgba(var(--config-accent-color-rgb), 0.2);
+  }
+
+  &:active {
+    background-color: rgba(var(--config-accent-color-rgb), 0.4);
+  }
+}

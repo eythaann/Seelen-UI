@@ -72,7 +72,7 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
         <img src={this.state.src} />
         {this.state.mask && (
           <div
-            className={cx(cs.mask, "sl-mask")}
+            className={cs.mask}
             style={{ maskImage: `url('${this.state.mask}')` }}
           />
         )}

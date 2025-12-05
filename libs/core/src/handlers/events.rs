@@ -56,12 +56,8 @@ slu_events_declaration! {
     UserApplicationsChanged(Vec<UserApplication>) as "user::applications-changed",
     UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
 
-    BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
-    BluetoothDiscoveredDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-discovered-devices-changed",
-    BluetoothPairShowPin(BluetoothDevicePairShowPinRequest) as "bluetooth-pair-show-pin",
-    BluetoothPairRequestPin as "bluetooth-pair-request-pin",
-
     MediaSessions(Vec<MediaPlayer>) as "media-sessions",
+    MediaDevices([Vec<MediaDevice>; 2]) as "media::devices",
     MediaInputs(Vec<MediaDevice>) as "media-inputs",
     MediaOutputs(Vec<MediaDevice>) as "media-outputs",
 
@@ -102,4 +98,12 @@ slu_events_declaration! {
     StatePerformanceModeChanged(PerformanceMode) as "state::performance-mode-changed",
 
     WidgetTriggered(WidgetTriggerPayload) as "widget::triggered",
+
+    // Radios
+    RadiosChanged(Vec<RadioDevice>) as "radio::changed",
+
+    BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
+    BluetoothDiscoveredDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-discovered-devices-changed",
+    BluetoothPairShowPin(BluetoothDevicePairShowPinRequest) as "bluetooth-pair-show-pin",
+    BluetoothPairRequestPin as "bluetooth-pair-request-pin",
 }

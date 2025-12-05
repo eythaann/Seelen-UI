@@ -7,7 +7,7 @@ pub mod monitors;
 pub mod network;
 pub mod notifications;
 pub mod power;
-pub mod shared;
+pub mod radios;
 pub mod start;
 pub mod system_settings;
 pub mod system_tray;

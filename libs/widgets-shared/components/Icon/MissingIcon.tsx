@@ -62,7 +62,7 @@ export class MissingIcon extends React.Component<MissingIconProps, MissingIconSt
         {this.state.mask && (
           <div
             {...dataProps}
-            className={cx(cs.mask, "sl-mask")}
+            className={cs.mask}
             style={{ maskImage: `url('${this.state.mask}')` }}
           />
         )}

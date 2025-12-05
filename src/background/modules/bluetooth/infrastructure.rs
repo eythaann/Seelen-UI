@@ -20,7 +20,7 @@ use crate::{
 use crate::error::Result;
 
 pub fn register_bluetooth_events() {
-    std::thread::spawn(|| {
+    /* std::thread::spawn(|| {
         log_error!(trace_lock!(BLUETOOTH_MANAGER).register_for_bt_devices());
 
         BluetoothManager::subscribe(|event| match event {
@@ -62,7 +62,7 @@ pub fn register_bluetooth_events() {
                 // Do not need anything, this is an internal event that is triggered by UI confirmation
             }
         });
-    });
+    }); */
 }
 
 #[tauri::command(async)]

@@ -100,7 +100,7 @@ export class FileIcon extends React.Component<FileIconProps, FileIconState> {
           {this.state.mask && (
             <div
               {...dataProps}
-              className={cx(cs.mask, "sl-mask")}
+              className={cs.mask}
               style={{ maskImage: `url('${this.state.mask}')` }}
             />
           )}

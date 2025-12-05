@@ -41,7 +41,7 @@
   ];
 </script>
 
-<div class="system-tray">
+<div class={["slu-popover", "system-tray"]}>
   {#each state.trayItems as item}
     {#if item.is_visible && (!item.guid || !GUIDS_TO_IGNORE.includes(item.guid))}
       <button

@@ -1,0 +1,28 @@
+input[type="range"] {
+  appearance: none;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+input[type="range"][data-skin="flat"] {
+  height: 25px;
+  border-radius: 10px;
+  background: var(--color-gray-300);
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: var(--color-gray-400);
+  }
+
+  &::-webkit-slider-runnable-track {
+    appearance: none;
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 0;
+    height: 0;
+    box-shadow: -100vw 0 0 100vw var(--system-accent-dark-color);
+  }
+}

@@ -5,7 +5,8 @@
       "Read",
       "Edit",
       "Write",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

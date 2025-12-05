@@ -7,7 +7,7 @@ import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 
 export class BluetoothDevices extends List<BluetoothDevice> {
   static getAsync(): Promise<BluetoothDevices> {
-    return newFromInvoke(this, SeelenCommand.GetConnectedBluetoothDevices);
+    return newFromInvoke(this, SeelenCommand.GetBluetoothDevices);
   }
 
   static onChange(

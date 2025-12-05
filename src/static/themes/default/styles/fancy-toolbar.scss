@@ -250,45 +250,6 @@
   }
 }
 
-.quick-access {
-  @extend %popup;
-  width: 300px;
-  position: relative;
-  gap: 4px;
-
-  .quick-access-header {
-    z-index: 1;
-    font-weight: 600;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .quick-access-item {
-    z-index: 1;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-
-    .ant-slider {
-      flex: 1;
-    }
-  }
-
-  .quick-access-footer {
-    z-index: 1;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .quick-access-footer-button {
-    @extend %actionable-button;
-  }
-}
-
 .wlan-selector {
   @extend %popup;
 
@@ -472,7 +433,6 @@
   }
 }
 
-.quick-access-label,
 .media-control-label {
   font-size: 0.8rem;
   font-weight: 600;

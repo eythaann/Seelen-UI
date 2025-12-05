@@ -35,7 +35,7 @@ impl FullState {
                 ToolbarItem2::Plugin("@default/media".into()),
                 ToolbarItem2::Plugin("@default/power".into()),
                 ToolbarItem2::Plugin("@default/notifications".into()),
-                ToolbarItem2::Plugin("@default/quick-settings".into()),
+                ToolbarItem2::Plugin("@seelen/tb-quick-settings".into()),
             ],
             ..Default::default()
         }

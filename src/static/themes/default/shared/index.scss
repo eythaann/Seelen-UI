@@ -1,0 +1,65 @@
+/*
+ * The idea with this feature of Shared styles over all widgets, is to provide a way to
+ * reusable components and styles that can be used across all widgets.
+ *
+ * As example all bundled widgets related to popups uses these shared styles.
+ *
+ * By default we shouldn't touch global scopes like `body`, `button`, `input` etc.
+ * Instead we use data attributes to target specific elements, and only if the developer
+ * decides to use these shared components/styles in their widgets.
+ */
+
+@import "./inputs.scss";
+@import "./buttons.scss";
+
+// Accessibility Improvement
+button,
+input {
+  &:focus-visible {
+    outline-offset: 2px;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: var(--system-accent-color);
+  }
+}
+
+// todo refactor these
+.slu-popover {
+  width: 300px;
+  background-color: var(--color-gray-50);
+  color: var(--color-gray-900);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+/* deprecated, being removed for v2.5 */
+.sl-popup {
+  &.sl-popup-open {
+    animation: fade-in 0.1s linear;
+  }
+
+  &.sl-popup-closed {
+    animation: fade-out 0.1s linear;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    display: block; /* this is important to correctly handle the out animation */
+    opacity: 1;
+  }
+  to {
+    display: none; /* this is important to correctly handle the out animation */
+    opacity: 0;
+  }
+}

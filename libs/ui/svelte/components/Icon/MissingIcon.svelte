@@ -61,7 +61,7 @@
   {#if state.mask}
     <div
       {...dataProps}
-      class="slu-icon-mask sl-mask"
+      class="slu-icon-mask"
       style="mask-image: url('{state.mask}')"
     ></div>
   {/if}

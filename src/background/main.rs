@@ -24,9 +24,6 @@ mod windows_api;
 extern crate rust_i18n;
 i18n!("background/i18n", fallback = "en");
 
-#[macro_use]
-extern crate lazy_static;
-
 use std::sync::{atomic::AtomicBool, OnceLock};
 
 use app::{Seelen, SEELEN};

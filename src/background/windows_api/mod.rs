@@ -1,5 +1,6 @@
 mod app_bar;
 mod com;
+mod devices;
 pub mod event_window;
 pub mod hdc;
 mod iterator;
@@ -13,7 +14,9 @@ pub mod window;
 
 pub use app_bar::*;
 pub use com::*;
+pub use devices::*;
 pub use iterator::*;
+
 use itertools::Itertools;
 use process::ProcessInformationFlag;
 use string_utils::WindowsString;

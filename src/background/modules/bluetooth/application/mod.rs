@@ -5,13 +5,17 @@ use std::sync::Arc;
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use windows::Devices::Bluetooth::{BluetoothDevice, BluetoothLEDevice};
-use windows::Devices::Enumeration::{DeviceInformation, DeviceInformationUpdate, DeviceWatcher};
-use windows::Devices::Radios::RadioKind;
-use windows::Foundation::TypedEventHandler;
+use seelen_core::system_state::RadioDeviceKind;
+use windows::{
+    Devices::{
+        Bluetooth::{BluetoothDevice, BluetoothLEDevice},
+        Enumeration::{DeviceInformation, DeviceInformationUpdate, DeviceWatcher},
+    },
+    Foundation::TypedEventHandler,
+};
 use windows_core::HSTRING;
 
-use crate::modules::shared::radio::RADIO_MANAGER;
+use crate::modules::radios::manager::RadioManager;
 use crate::{event_manager, hstring, log_error, trace_lock};
 
 use crate::error::Result;
@@ -104,7 +108,7 @@ impl BluetoothManager {
     }
 
     pub fn is_bluetooth_enabled() -> bool {
-        trace_lock!(RADIO_MANAGER).is_enabled(RadioKind::Bluetooth)
+        RadioManager::instance().is_enabled(RadioDeviceKind::Bluetooth)
     }
 
     pub fn register_for_bt_devices(&mut self) -> Result<()> {
