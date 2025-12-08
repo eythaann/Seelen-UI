@@ -218,8 +218,6 @@ toolbar:
   delay_to_hide: 延遲隱藏
   delay_to_show: 延遲顯示
   dock_side: 位置
-  dynamic_color: 動態顏色
-  dynamic_color_tooltip: 基於聚焦窗口啟用動態背景和前景顏色。 （顏色可以被主題覆蓋）
   enable: 啟用高檔工具欄
   height: 高度
   hide_mode:
@@ -228,7 +226,6 @@ toolbar:
     on_overlap: 在重疊
   label: 工具欄
   placeholder: {}
-  show_hibernate: 在電源菜單上顯示Hibernate按鈕
 update:
   available: 更新可用！
   channel: 更新頻道

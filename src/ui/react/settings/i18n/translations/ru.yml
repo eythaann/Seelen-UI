@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Задержка, чтобы скрыть
   delay_to_show: Задержка показа
   dock_side: Позиция
-  dynamic_color: Динамический цвет
-  dynamic_color_tooltip: >-
-    Динамическая подстройка цвета под активное окно (темы могут переопределять
-    цвета).
   enable: Включить
   height: Высота
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: При перекрытии
   label: Верхняя панель
   placeholder: {}
-  show_hibernate: Показать кнопку перехода в спящий режим в меню питания
 update:
   available: Обновление доступно!
   channel: Обновить канал

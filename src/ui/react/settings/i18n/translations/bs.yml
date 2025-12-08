@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
   dock_side: Položaj
-  dynamic_color: Dinamička boja
-  dynamic_color_tooltip: >-
-    Omogućite dinamičku pozadinu i boje prednjeg plana na osnovu fokusiranog
-    prozora. (Boje se mogu prevladati od tema)
   enable: Omogući fantastičnu alatnu traku
   height: Visina
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: Na preklapanje
   label: Alatna traka
   placeholder: {}
-  show_hibernate: Prikaži dugme Hibernate na meniju napajanja
 update:
   available: Ažuriraj dostupno!
   channel: Ažuriraj kanal

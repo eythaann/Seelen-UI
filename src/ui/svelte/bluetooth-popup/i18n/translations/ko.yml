@@ -1,0 +1,24 @@
+available: 사용 가능한 장치
+cancel: 취소
+confirm: 확인하다
+confirm_only: 페어링 확인
+confirm_pin: PIN이 일치하는지 확인하세요.
+connected: 연결됨
+disconnect: 연결 끊기
+display_pin: 기기에 이 PIN을 입력하세요.
+lowenergy: 저에너지
+more: 추가 블루투스 설정
+no_adapter: Bluetooth 어댑터를 찾을 수 없습니다.
+not_found: 기기를 찾을 수 없습니다.
+pair: 쌍
+paired: 페어링됨
+pairing: 편성...
+pairing_failed: 페어링 실패
+password: 비밀번호
+provide_address: 주소를 입력하세요
+provide_password: 사용자 이름과 비밀번호를 입력하세요
+provide_pin: PIN 입력
+scanning: 기기 검색 중...
+unpair: 페어링 해제
+unpair_failed: 페어링 해제 실패
+username: 사용자 이름

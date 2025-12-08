@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Atraso para se esconder
   delay_to_show: Atraso para mostrar
   dock_side: Posição
-  dynamic_color: Cor dinâmica
-  dynamic_color_tooltip: >-
-    Habilite as cores dinâmicas de fundo e primeiro plano com base na janela
-    focada. (As cores podem ser substituídas pelos temas)
   enable: Ativar barra de ferramentas sofisticada
   height: Altura
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Em sobreposição
   label: Barra de ferramentas
   placeholder: {}
-  show_hibernate: Mostre o botão Hibernate no menu Power
 update:
   available: Atualização disponível!
   channel: Atualizar canal

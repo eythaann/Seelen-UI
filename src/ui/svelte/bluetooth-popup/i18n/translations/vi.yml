@@ -1,0 +1,24 @@
+available: Thiết bị có sẵn
+cancel: Hủy bỏ
+confirm: Xác nhận
+confirm_only: Xác nhận ghép nối
+confirm_pin: Xác nhận rằng mã PIN khớp
+connected: Đã kết nối
+disconnect: Ngắt kết nối
+display_pin: Nhập mã PIN này vào thiết bị
+lowenergy: Năng lượng thấp
+more: Thêm cài đặt Bluetooth
+no_adapter: Không tìm thấy bộ chuyển đổi Bluetooth
+not_found: Không tìm thấy thiết bị nào
+pair: Đôi
+paired: Đã ghép nối
+pairing: Đang ghép nối...
+pairing_failed: Ghép nối không thành công
+password: Mật khẩu
+provide_address: Nhập địa chỉ
+provide_password: Nhập tên người dùng và mật khẩu
+provide_pin: Nhập mã PIN
+scanning: Đang quét tìm thiết bị...
+unpair: Hủy ghép nối
+unpair_failed: Hủy ghép nối không thành công
+username: Tên người dùng

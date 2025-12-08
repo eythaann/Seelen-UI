@@ -1,0 +1,24 @@
+available: Հասանելի սարքեր
+cancel: Չեղարկել
+confirm: Հաստատել
+confirm_only: Հաստատեք զուգավորումը
+confirm_pin: Հաստատեք, որ PIN-ը համընկնում է
+connected: Միացված է
+disconnect: Անջատել
+display_pin: Մուտքագրեք այս PIN կոդը սարքի վրա
+lowenergy: Ցածր էներգիա
+more: Ավելի շատ Bluetooth կարգավորումներ
+no_adapter: Bluetooth ադապտեր չի գտնվել
+not_found: Սարքեր չեն գտնվել
+pair: Զույգ
+paired: Զուգակցված
+pairing: Զուգավորում...
+pairing_failed: Չհաջողվեց զուգակցել
+password: Գաղտնաբառ
+provide_address: Մուտքագրեք հասցեն
+provide_password: Մուտքագրեք օգտվողի անունը և գաղտնաբառը
+provide_pin: Մուտքագրեք PIN կոդը
+scanning: Սարքերի սկանավորում...
+unpair: Ապազույգացնել
+unpair_failed: Չհաջողվեց չեղարկել զուգակցումը
+username: Օգտվողի անունը

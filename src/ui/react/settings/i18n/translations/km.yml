@@ -228,10 +228,6 @@ toolbar:
   delay_to_hide: ពន្យារពេលដើម្បីលាក់
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
   dock_side: តីតាមង
-  dynamic_color: ពណ៌ថាមវន្ត
-  dynamic_color_tooltip: >-
-    បើកដំណើរការផ្ទៃខាងក្រោយថាមវន្តនិងពណ៌ខាងមុខដោយផ្អែកលើបង្អួចដែលផ្តោតអារម្មណ៍។
-    (ពណ៌អាចត្រូវបានបដិសេធដោយស្បែក)
   enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
   height: កម្ពស់
   hide_mode:
@@ -240,7 +236,6 @@ toolbar:
     on_overlap: នៅលើការត្រួតស៊ីគ្នា។
   label: របាររបន៍របយ័ត្ន។ រប
   placeholder: {}
-  show_hibernate: បង្ហាញប៊ូតុង hibernate នៅលើ menu enu
 update:
   available: មានបច្ចុប្បន្នភាព!
   channel: ឆានែលធ្វើបច្ចុប្បន្នភាព

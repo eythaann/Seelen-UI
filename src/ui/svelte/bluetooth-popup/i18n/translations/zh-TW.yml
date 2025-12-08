@@ -1,0 +1,24 @@
+available: 可用設備
+cancel: 取消
+confirm: 確認
+confirm_only: 確認配對
+confirm_pin: 確認 PIN 碼匹配
+connected: 已連接
+disconnect: 斷開
+display_pin: 在設備上輸入此 PIN 碼
+lowenergy: 低能量
+more: 更多藍牙設置
+no_adapter: 未找到藍牙適配器
+not_found: 未找到設備
+pair: 一對
+paired: 配對
+pairing: 配對...
+pairing_failed: 配對失敗
+password: 密碼
+provide_address: 輸入地址
+provide_password: 輸入用戶名和密碼
+provide_pin: 輸入密碼
+scanning: 正在掃描設備...
+unpair: 取消配對
+unpair_failed: 取消配對失敗
+username: 使用者名稱

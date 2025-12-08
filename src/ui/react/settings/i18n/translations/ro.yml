@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
   dock_side: Poziția
-  dynamic_color: Culoare dinamică
-  dynamic_color_tooltip: >-
-    Activați culorile dinamice de fundal și prim-plan în funcție de fereastra
-    focalizată. (Culorile pot fi înlocuite de teme)
   enable: Activați bara de instrumente fantezistă
   height: Înălţime
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: Pe suprapunere
   label: Bara de instrumente
   placeholder: {}
-  show_hibernate: Afișați butonul de hibernare în meniul de pornire
 update:
   available: Actualizare disponibilă!
   channel: Actualizare canal

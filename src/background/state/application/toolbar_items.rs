@@ -30,7 +30,7 @@ impl FullState {
             right: vec![
                 ToolbarItem2::Plugin("@seelen/tb-system-tray".into()),
                 ToolbarItem2::Plugin("@default/keyboard".into()),
-                ToolbarItem2::Plugin("@default/bluetooth".into()),
+                ToolbarItem2::Plugin("@seelen/tb-bluetooth-popup".into()),
                 ToolbarItem2::Plugin("@default/network".into()),
                 ToolbarItem2::Plugin("@default/media".into()),
                 ToolbarItem2::Plugin("@default/power".into()),

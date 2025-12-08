@@ -13,14 +13,11 @@
 @import "./buttons.scss";
 
 // Accessibility Improvement
-button,
-input {
-  &:focus-visible {
-    outline-offset: 2px;
-    outline-style: solid;
-    outline-width: 2px;
-    outline-color: var(--system-accent-color);
-  }
+*:focus-visible {
+  outline-offset: 2px;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: var(--system-accent-color);
 }
 
 // todo refactor these
@@ -30,7 +27,7 @@ input {
   color: var(--color-gray-900);
   border-radius: 10px;
   padding: 10px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 /* deprecated, being removed for v2.5 */

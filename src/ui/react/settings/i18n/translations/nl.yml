@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
   dock_side: Positie
-  dynamic_color: Dynamische kleur
-  dynamic_color_tooltip: >-
-    Dynamische achtergrond- en voorgrondkleuren inschakelen op basis van het
-    gefocuste venster. (Kleuren kunnen worden overschreven door thema's)
   enable: Schakel fancy werkbalk in
   height: Hoogte
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: Op overlap
   label: Werkbalk
   placeholder: {}
-  show_hibernate: Toon slaapstandknop in energiemenu
 update:
   available: Update beschikbaar!
   channel: Updatekanaal

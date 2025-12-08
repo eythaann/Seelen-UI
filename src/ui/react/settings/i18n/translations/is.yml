@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
   dock_side: Staða
-  dynamic_color: Kraftmikinn litur
-  dynamic_color_tooltip: >-
-    Virkja kraftmikinn bakgrunn og forgrunni liti byggðir á einbeittum glugga.
-    (Hægt er að hnekkja litum með þemum)
   enable: Virkja Fancy tækjastiku
   height: Hæð
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: Á skörun
   label: Tækjastikur
   placeholder: {}
-  show_hibernate: Sýna dvalahnappinn í Power valmyndinni
 update:
   available: Uppfærsla í boði!
   channel: Uppfæra rás

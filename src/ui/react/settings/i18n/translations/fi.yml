@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
   dock_side: Asema
-  dynamic_color: Dynaaminen väri
-  dynamic_color_tooltip: >-
-    Ota käyttöön dynaamiset tausta- ja etualavärit, jotka perustuvat
-    tarkennettuun ikkunaan. (Teemat voivat ohittaa värit).
   enable: Ota hieno työkalurivi käyttöön
   height: Korkeus
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Päällekkäin
   label: Työkalurivi
   placeholder: {}
-  show_hibernate: Näytä lepotilapainike virtapainikkeessa
 update:
   available: Päivitä saatavilla!
   channel: Päivityskanava

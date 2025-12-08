@@ -1,0 +1,24 @@
+available: Verfügbare Geräte
+cancel: Stornieren
+confirm: Bestätigen
+confirm_only: Bestätigen Sie die Kopplung
+confirm_pin: Bestätigen Sie, dass die PIN übereinstimmt
+connected: Verbunden
+disconnect: Trennen
+display_pin: Geben Sie diese PIN am Gerät ein
+lowenergy: Niedrige Energie
+more: Weitere Bluetooth-Einstellungen
+no_adapter: Kein Bluetooth-Adapter gefunden
+not_found: Keine Geräte gefunden
+pair: Paar
+paired: Gepaart
+pairing: Paarung...
+pairing_failed: Die Kopplung ist fehlgeschlagen
+password: Passwort
+provide_address: Adresse eingeben
+provide_password: Geben Sie Benutzernamen und Passwort ein
+provide_pin: PIN eingeben
+scanning: Nach Geräten suchen...
+unpair: Entkoppeln
+unpair_failed: Das Entkoppeln ist fehlgeschlagen
+username: Benutzername

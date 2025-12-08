@@ -53,5 +53,6 @@ await completeTranslationsFor("src/ui/react/settings/i18n/translations");
 await completeTranslationsFor("src/ui/react/launcher/i18n/translations");
 
 await completeTranslationsFor("src/ui/svelte/power-menu/i18n/translations");
+await completeTranslationsFor("src/ui/svelte/bluetooth-popup/i18n/translations");
 
 await completeTranslationsFor("src/background/i18n");

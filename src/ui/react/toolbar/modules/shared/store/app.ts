@@ -30,7 +30,6 @@ const initialState: RootState = {
   userMusicFolder: [],
   env: (await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>,
   bluetoothDevices: (await BluetoothDevices.getAsync()).all(),
-  discoveredBluetoothDevices: BluetoothDevices.default().all(),
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
     acLineStatus: 255,

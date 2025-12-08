@@ -1,0 +1,24 @@
+available: Elérhető eszközök
+cancel: Mégsem
+confirm: Erősítse meg
+confirm_only: Erősítse meg a párosítást
+confirm_pin: Győződjön meg arról, hogy a PIN egyezik
+connected: Csatlakozva
+disconnect: Leválasztás
+display_pin: Írja be ezt a PIN-kódot az eszközön
+lowenergy: Alacsony energia
+more: További Bluetooth beállítások
+no_adapter: Nem található Bluetooth adapter
+not_found: Nem találhatók eszközök
+pair: Pár
+paired: Párosítva
+pairing: Párosítás...
+pairing_failed: A párosítás nem sikerült
+password: Jelszó
+provide_address: Adja meg a címet
+provide_password: Adja meg a felhasználónevet és a jelszót
+provide_pin: Írja be a PIN-kódot
+scanning: Eszközök keresése...
+unpair: Párosítás megszüntetése
+unpair_failed: A párosítás megszüntetése nem sikerült
+username: Felhasználónév

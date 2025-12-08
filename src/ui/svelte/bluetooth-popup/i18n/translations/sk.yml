@@ -1,0 +1,24 @@
+available: Dostupné zariadenia
+cancel: Zrušiť
+confirm: Potvrďte
+confirm_only: Potvrďte spárovanie
+confirm_pin: Potvrďte, že sa PIN zhoduje
+connected: Pripojené
+disconnect: Odpojiť
+display_pin: Zadajte tento PIN na zariadení
+lowenergy: Nízka energia
+more: Ďalšie nastavenia Bluetooth
+no_adapter: Nenašiel sa žiadny adaptér Bluetooth
+not_found: Nenašli sa žiadne zariadenia
+pair: Spárovať
+paired: Spárované
+pairing: Párovanie...
+pairing_failed: Párovanie zlyhalo
+password: heslo
+provide_address: Zadajte adresu
+provide_password: Zadajte používateľské meno a heslo
+provide_pin: Zadajte PIN
+scanning: Hľadajú sa zariadenia...
+unpair: Zrušiť párovanie
+unpair_failed: Zrušenie párovania zlyhalo
+username: Používateľské meno

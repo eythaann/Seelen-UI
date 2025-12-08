@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció
-  dynamic_color: Dinamikus szín
-  dynamic_color_tooltip: >-
-    Dinamikus háttér- és előtérszínek engedélyezése a fókuszált ablak alapján.
-    (A színeket a témák felülbírálhatják)
   enable: Engedélyezze a divatos eszköztárat
   height: Magasság
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: Az átfedésben
   label: Eszköztár
   placeholder: {}
-  show_hibernate: Hibernálás gomb megjelenítése a bekapcsolási menüben
 update:
   available: A frissítés elérhető!
   channel: Frissítési csatorna

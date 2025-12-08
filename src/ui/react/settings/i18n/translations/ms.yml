@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan
-  dynamic_color: Warna dinamik
-  dynamic_color_tooltip: >-
-    Dayakan latar belakang dinamik dan warna latar depan berdasarkan tetingkap
-    fokus. (Warna boleh ditindih oleh tema)
   enable: Dayakan bar alat mewah
   height: Ketinggian
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Bertindih
   label: Bar alat
   placeholder: {}
-  show_hibernate: Tunjukkan butang hibernate pada menu kuasa
 update:
   available: Kemas kini tersedia!
   channel: Kemas kini saluran

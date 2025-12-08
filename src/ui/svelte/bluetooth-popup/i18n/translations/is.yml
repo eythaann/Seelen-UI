@@ -1,0 +1,24 @@
+available: Tiltæk tæki
+cancel: Hætta við
+confirm: Staðfesta
+confirm_only: Staðfestu pörun
+confirm_pin: Staðfestu að PIN-númerið passi
+connected: Tengdur
+disconnect: Aftengdu
+display_pin: Sláðu inn þetta PIN-númer á tækinu
+lowenergy: Lág orku
+more: Fleiri Bluetooth stillingar
+no_adapter: Enginn Bluetooth millistykki fannst
+not_found: Engin tæki fundust
+pair: Par
+paired: Pöruð
+pairing: Pörun...
+pairing_failed: Pörun mistókst
+password: Lykilorð
+provide_address: Sláðu inn heimilisfang
+provide_password: Sláðu inn notandanafn og lykilorð
+provide_pin: Sláðu inn PIN-númer
+scanning: Leitar að tækjum...
+unpair: Afpörun
+unpair_failed: Afpörun mistókst
+username: Notandanafn

@@ -249,9 +249,8 @@ slu_commands_declaration! {
     GetBluetoothDevices = get_bluetooth_devices() -> Vec<BluetoothDevice>,
     StartBluetoothScanning = start_bluetooth_scanning(),
     StopBluetoothScanning = stop_bluetooth_scanning(),
-
-    GetConnectedBluetoothDevices = get_connected_bluetooth_devices() -> Vec<BluetoothDevice>,
-    PairBluetoothDevice = pair_bluetooth_device(address: u64),
+    RequestPairBluetoothDevice = request_pair_bluetooth_device(id: String) -> DevicePairingNeededAction,
+    ConfirmBluetoothDevicePairing = confirm_bluetooth_device_pairing(id: String, answer: DevicePairingAnswer),
+    DisconnectBluetoothDevice = disconnect_bluetooth_device(id: String),
     ForgetBluetoothDevice = forget_bluetooth_device(id: String),
-    ConfirmBluetoothDevicePair = confirm_bluetooth_device_pair(accept: bool, passphrase: String),
 }

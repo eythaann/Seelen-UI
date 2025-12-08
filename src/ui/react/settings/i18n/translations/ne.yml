@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
   dock_side: स्थिति
-  dynamic_color: गतिशील र color ्ग
-  dynamic_color_tooltip: >-
-    ध्यान केन्द्रित विन्डोमा आधारित गतिशील पृष्ठभूमि र अग्रभूमिहरू प्रयोगहरू
-    सक्षम गर्नुहोस्। (रंगहरू थिम द्वारा ओभरराइड गर्न सकिन्छ)
   enable: फैन्सी उपकरणपट्टी सक्षम गर्नुहोस्
   height: ऊचाई
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: ओभरल्यापमा
   label: औजारपरो
   placeholder: {}
-  show_hibernate: पावर मेनूमा हाइबरनेट बटन देखाउनुहोस्
 update:
   available: अपडेट उपलब्ध!
   channel: अद्यावधिक च्यानल

@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం
-  dynamic_color: డైనమిక్ రంగు
-  dynamic_color_tooltip: >-
-    ఫోకస్డ్ విండో ఆధారంగా డైనమిక్ నేపథ్యం మరియు ముందుభాగం రంగులను ప్రారంభించండి.
-    (రంగులను ఇతివృత్తాల ద్వారా భర్తీ చేయవచ్చు)
   enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
   height: ఎత్తు
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: అతివ్యాప్తిపై
   label: టూల్‌బార్
   placeholder: {}
-  show_hibernate: పవర్ మెనులో హైబర్నేట్ బటన్‌ను చూపించు
 update:
   available: నవీకరణ అందుబాటులో ఉంది!
   channel: ఛానెల్‌ను నవీకరించండి

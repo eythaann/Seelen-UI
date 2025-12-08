@@ -232,10 +232,6 @@ toolbar:
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
   dock_side: पद
-  dynamic_color: गतिशील रंग
-  dynamic_color_tooltip: >-
-    ध्यान केंद्रित विंडो के आधार पर गतिशील पृष्ठभूमि और अग्रभूमि रंग सक्षम करें।
-    (रंगों को विषयों द्वारा ओवरराइड किया जा सकता है)
   enable: फैंसी टूलबार सक्षम करें
   height: ऊंचाई
   hide_mode:
@@ -244,7 +240,6 @@ toolbar:
     on_overlap: ओवरलैप पर
   label: उपकरण पट्टी
   placeholder: {}
-  show_hibernate: पावर मेनू पर हाइबरनेट बटन दिखाएं
 update:
   available: उपलब्ध अद्यतन!
   channel: अद्यतन चैनल

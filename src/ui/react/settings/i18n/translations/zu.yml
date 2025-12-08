@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
-  dynamic_color: Umbala we-Dynamic
-  dynamic_color_tooltip: >-
-    Nika amandla ingemuva elinamandla nemibala engaphambili esekelwe ewindini
-    eligxile. (Imibala ingaba ngaphezulu kwezindikimba)
   enable: Nika amandla amathuluzi e-fancy
   height: Ubude
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Ngokugqagqana
   label: Indawo yamathuluzi
   placeholder: {}
-  show_hibernate: Khombisa inkinobho ye-hibernate kwimenyu yamandla
 update:
   available: Ukuvuselelwa Kuyatholakala!
   channel: Isiteshi sokuvuselela

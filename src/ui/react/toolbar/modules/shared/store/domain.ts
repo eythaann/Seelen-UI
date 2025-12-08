@@ -25,7 +25,6 @@ export interface RootState {
   userMusicFolder: File[];
   env: Record<string, string>;
   bluetoothDevices: BluetoothDevice[];
-  discoveredBluetoothDevices: BluetoothDevice[];
   powerStatus: PowerStatus;
   powerPlan: PowerMode;
   batteries: Battery[];

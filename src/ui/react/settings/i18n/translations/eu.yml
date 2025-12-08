@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
-  dynamic_color: Kolore dinamikoa
-  dynamic_color_tooltip: >-
-    Gaitu fokatutako leihoan oinarritutako atzeko plano eta lehen planoko kolore
-    dinamikoak. (Koloreak gaiak gainditu daitezke)
   enable: Gaitu tresna-barra
   height: Luzera
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Gainjartzean
   label: Tresna barra
   placeholder: {}
-  show_hibernate: Erakutsi Hibernate botoia Power Menuan
 update:
   available: Eguneratu eskuragarri!
   channel: Eguneratu kanala

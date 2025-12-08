@@ -96,9 +96,6 @@ export async function registerStoreEvents() {
   MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
 
   BluetoothDevices.onChange((devices) => store.dispatch(RootActions.setBluetoothDevices(devices.all())));
-  BluetoothDevices.onDiscoveredDevicesChange((devices) =>
-    store.dispatch(RootActions.setDiscoveredBluetoothDevices(devices.all()))
-  );
 
   await startThemingTool();
 }

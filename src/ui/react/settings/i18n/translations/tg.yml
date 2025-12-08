@@ -228,10 +228,6 @@ toolbar:
   delay_to_hide: Таъхир барои пинҳон кардан
   delay_to_show: Таъхир барои нишон додан
   dock_side: Вазъият
-  dynamic_color: Ранги динамикӣ
-  dynamic_color_tooltip: >-
-    Дар асоси равзанаи мазкур замина ва рангҳои динамикаро фаъол созед. (Рангҳо
-    метавонанд аз ҷониби мавзӯъҳо аз нав баҳо дода шаванд)
   enable: Дастрас кардани панели футболи
   height: Баландӣ
   hide_mode:
@@ -240,7 +236,6 @@ toolbar:
     on_overlap: Дар такрори
   label: Асбобу
   placeholder: {}
-  show_hibernate: Тугмаи Hibernate -ро дар менюи энергетикӣ нишон диҳед
 update:
   available: Навсозӣ!
   channel: Навсозӣ канал

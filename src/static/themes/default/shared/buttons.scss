@@ -1,15 +1,48 @@
-button[data-skin="transparent"] {
+%common {
   padding: 4px;
   border-radius: 6px;
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+button[data-skin="transparent"] {
+  @extend %common;
 
   &:hover {
-    background-color: rgba(var(--config-accent-color-rgb), 0.2);
+    background-color: rgba(var(--system-accent-color-rgb), 0.2);
   }
 
   &:active {
-    background-color: rgba(var(--config-accent-color-rgb), 0.4);
+    background-color: rgba(var(--system-accent-color-rgb), 0.4);
+  }
+}
+
+button[data-skin="solid"] {
+  @extend %common;
+  padding: 4px 10px;
+  background-color: var(--system-accent-color);
+
+  &:hover {
+    background-color: var(--system-accent-dark-color);
+  }
+
+  &:active {
+    background-color: var(--system-accent-darker-color);
+  }
+}
+
+button[data-skin="outline"] {
+  @extend %common;
+  padding: 4px 10px;
+  background-color: var(--color-gray-50);
+  border: 1px solid var(--color-gray-300);
+
+  &:hover {
+    border: 1px solid var(--system-accent-color);
+  }
+
+  &:active {
+    border: 1px solid var(--system-accent-dark-color);
   }
 }

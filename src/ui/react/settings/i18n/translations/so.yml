@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: Dib u dhig si loo qariyo
   delay_to_show: Dib u dhig si loo muujiyo
   dock_side: Meel
-  dynamic_color: Midab firfircoon
-  dynamic_color_tooltip: >-
-    U oggolow asalka firfircoon iyo milix hore oo salka ku haya daaqadda diirada
-    saareysa. (Midabada waxaa lagu wareejin karaa mawduucyo)
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: Isku dhafka
   label: Qalab argamiye
   placeholder: {}
-  show_hibernate: Tus badhanka Hibernate ee ku yaal menuska Power
 update:
   available: Cusboonaysiinta la heli karo!
   channel: Cusboonaysiinta Kanaalka

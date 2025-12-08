@@ -216,8 +216,6 @@ toolbar:
   delay_to_hide: 延迟隐藏
   delay_to_show: 延迟显示
   dock_side: 职位
-  dynamic_color: 动态色彩
-  dynamic_color_tooltip: 根据聚焦窗口启用动态背景和前景颜色。(颜色可由主题覆盖）
   enable: 启用精美工具栏
   height: 高度
   hide_mode:
@@ -226,7 +224,6 @@ toolbar:
     on_overlap: 关于重叠
   label: 工具栏
   placeholder: {}
-  show_hibernate: 在电源菜单上显示休眠按钮
 update:
   available: 更新可用！
   channel: 更新频道

@@ -22,6 +22,7 @@ pub struct BluetoothDevice {
     pub connected: bool,
     pub paired: bool,
     pub can_pair: bool,
+    pub can_disconnect: bool,
     pub is_low_energy: bool,
 }
 
@@ -125,4 +126,35 @@ impl BluetoothDevice {
 pub struct BluetoothDevicePairShowPinRequest {
     pub pin: String,
     pub confirmation_needed: bool,
+}
+
+#[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[serde(tag = "needs")]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+pub enum DevicePairingNeededAction {
+    /// No extra action is needed
+    None,
+    /// The user only needs to confirm the pairing
+    ConfirmOnly,
+    /// Should be displayed to the user to be inserted in the other device
+    DisplayPin { pin: String },
+    /// An input pin should be provided
+    ProvidePin,
+    /// Pin should be displayed to the user and confirm that is the same as the other device
+    ConfirmPinMatch { pin: String },
+    /// An input pin should be provided
+    ProvidePasswordCredential,
+    /// An input address should be provided
+    ProvideAddress,
+}
+
+#[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+pub struct DevicePairingAnswer {
+    pub accept: bool,
+    pub pin: Option<String>,
+    pub username: Option<String>,
+    pub password: Option<String>,
+    pub address: Option<String>,
 }

@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
   dock_side: Posisie
-  dynamic_color: Dinamiese kleur
-  dynamic_color_tooltip: >-
-    Aktiveer dinamiese agtergrond en voorgrondkleure gebaseer op gefokusde
-    venster. (Kleure kan deur temas oorheers word)
   enable: Aktiveer Fancy Toolbar
   height: Hoogte
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Op oorvleueling
   label: Werkbalk
   placeholder: {}
-  show_hibernate: Wys Hibernate -knoppie op Power Menu
 update:
   available: Opdatering beskikbaar!
   channel: Update Channel

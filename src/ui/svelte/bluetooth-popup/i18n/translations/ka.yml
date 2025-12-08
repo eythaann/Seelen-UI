@@ -1,0 +1,24 @@
+available: ხელმისაწვდომი მოწყობილობები
+cancel: გაუქმება
+confirm: დაადასტურეთ
+confirm_only: დაადასტურეთ დაწყვილება
+confirm_pin: დაადასტურეთ, რომ PIN ემთხვევა
+connected: დაკავშირებულია
+disconnect: გათიშვა
+display_pin: შეიყვანეთ ეს PIN მოწყობილობაზე
+lowenergy: დაბალი ენერგია
+more: მეტი Bluetooth პარამეტრები
+no_adapter: Bluetooth ადაპტერი ვერ მოიძებნა
+not_found: მოწყობილობები არ მოიძებნა
+pair: წყვილი
+paired: დაწყვილებული
+pairing: დაწყვილება...
+pairing_failed: დაწყვილება ვერ მოხერხდა
+password: პაროლი
+provide_address: შეიყვანეთ მისამართი
+provide_password: შეიყვანეთ მომხმარებლის სახელი და პაროლი
+provide_pin: შეიყვანეთ PIN
+scanning: მიმდინარეობს მოწყობილობების სკანირება...
+unpair: გაუქმება
+unpair_failed: დაწყვილების გაუქმება ვერ მოხერხდა
+username: მომხმარებლის სახელი

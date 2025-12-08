@@ -44,7 +44,7 @@
     </button>
     <input
       type="range"
-      class="quick-settings-slider"
+      data-skin="flat"
       value={brightnessValue}
       oninput={onBrightnessChange}
       min={state.brightness.min}

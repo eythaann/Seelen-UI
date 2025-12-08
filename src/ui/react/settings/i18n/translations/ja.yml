@@ -219,8 +219,6 @@ toolbar:
   delay_to_hide: 隠れるまでの遅延
   delay_to_show: 表示が遅れる
   dock_side: ポジション
-  dynamic_color: ダイナミックカラー
-  dynamic_color_tooltip: フォーカスされたウィンドウに基づく動的な背景色と前景色を有効にする。(色はテーマによって上書きできます)
   enable: ツールバーを有効にする
   height: 高さ
   hide_mode:
@@ -229,7 +227,6 @@ toolbar:
     on_overlap: オーバーラップ時
   label: ツールバーの設定
   placeholder: {}
-  show_hibernate: 電源メニューにハイバネートボタンを表示する
 update:
   available: 更新が利用可能です！
   channel: 更新チャンネル

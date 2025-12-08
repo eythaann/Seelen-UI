@@ -34,7 +34,7 @@
 />
 
 <style>
-  :global(.react-icon) {
+  :global(.slu-icon) {
     height: 1rem;
     width: max-content;
     display: inline-block;

@@ -235,10 +235,6 @@ toolbar:
   delay_to_hide: Delay sa pagtatago
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon
-  dynamic_color: Dinamikong Kulay
-  dynamic_color_tooltip: >-
-    Paganahin ang mga dynamic na background at foreground na kulay batay sa
-    nakatutok na window. (Ang mga kulay ay maaaring ma -overridden ng mga tema)
   enable: Paganahin ang magarbong toolbar
   height: Taas
   hide_mode:
@@ -247,7 +243,6 @@ toolbar:
     on_overlap: Sa overlap
   label: Toolbar
   placeholder: {}
-  show_hibernate: Ipakita ang pindutan ng hibernate sa menu ng kuryente
 update:
   available: Mag -update Magagamit!
   channel: I -update ang channel

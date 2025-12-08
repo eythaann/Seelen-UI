@@ -1,0 +1,24 @@
+available: Налични устройства
+cancel: Отказ
+confirm: Потвърдете
+confirm_only: Потвърдете сдвояването
+confirm_pin: Потвърдете, че ПИН кодът съвпада
+connected: Свързан
+disconnect: Прекъснете връзката
+display_pin: Въведете този PIN на устройството
+lowenergy: Ниска енергия
+more: Още Bluetooth настройки
+no_adapter: Няма намерен Bluetooth адаптер
+not_found: Няма намерени устройства
+pair: чифт
+paired: Сдвоени
+pairing: Сдвояване...
+pairing_failed: Неуспешно сдвояване
+password: Парола
+provide_address: Въведете адрес
+provide_password: Въведете потребителско име и парола
+provide_pin: Въведете PIN
+scanning: Сканира се за устройства...
+unpair: Раздвояване
+unpair_failed: Премахването на двойката не бе успешно
+username: Потребителско име

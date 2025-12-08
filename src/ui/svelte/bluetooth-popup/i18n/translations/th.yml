@@ -1,0 +1,24 @@
+available: อุปกรณ์ที่มีอยู่
+cancel: ยกเลิก
+confirm: ยืนยัน
+confirm_only: ยืนยันการจับคู่
+confirm_pin: ยืนยันว่า PIN ตรงกัน
+connected: เชื่อมต่อแล้ว
+disconnect: ตัดการเชื่อมต่อ
+display_pin: ป้อน PIN นี้บนอุปกรณ์
+lowenergy: พลังงานต่ำ
+more: การตั้งค่าบลูทูธเพิ่มเติม
+no_adapter: ไม่พบอะแดปเตอร์บลูทูธ
+not_found: ไม่พบอุปกรณ์
+pair: คู่
+paired: จับคู่แล้ว
+pairing: กำลังจับคู่...
+pairing_failed: การจับคู่ล้มเหลว
+password: รหัสผ่าน
+provide_address: กรอกที่อยู่
+provide_password: กรอกชื่อผู้ใช้และรหัสผ่าน
+provide_pin: ป้อนรหัส PIN
+scanning: กำลังสแกนหาอุปกรณ์...
+unpair: เลิกจับคู่
+unpair_failed: การเลิกจับคู่ล้มเหลว
+username: ชื่อผู้ใช้

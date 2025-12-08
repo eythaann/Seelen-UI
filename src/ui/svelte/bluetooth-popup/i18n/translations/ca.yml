@@ -1,0 +1,24 @@
+available: Dispositius disponibles
+cancel: Cancel·la
+confirm: Confirmeu
+confirm_only: Confirmeu l'aparellament
+confirm_pin: Confirmeu que el PIN coincideixi
+connected: Connectat
+disconnect: Desconnecta
+display_pin: Introduïu aquest PIN al dispositiu
+lowenergy: Baixa energia
+more: Més configuració de Bluetooth
+no_adapter: No s'ha trobat cap adaptador Bluetooth
+not_found: No s'ha trobat cap dispositiu
+pair: Parella
+paired: Parellat
+pairing: Maridatge...
+pairing_failed: S'ha produït un error en l'aparellament
+password: Contrasenya
+provide_address: Introduïu l'adreça
+provide_password: Introduïu el nom d'usuari i la contrasenya
+provide_pin: Introduïu el PIN
+scanning: S'estan buscant dispositius...
+unpair: Desvincular
+unpair_failed: S'ha produït un error en desvincular
+username: Nom d'usuari

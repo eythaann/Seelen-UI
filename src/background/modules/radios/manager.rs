@@ -44,7 +44,7 @@ impl RadioManager {
         })?;
 
         // Start enumeration (blocks until initial enumeration completes)
-        let devices = enumerator.start()?;
+        let devices = enumerator.start_blocking()?;
 
         // Map DeviceInformation to (Radio, i64) with state change handler
         let radios: Result<Vec<SluRadioDevice>> = devices
@@ -76,7 +76,7 @@ impl RadioManager {
     fn on_event(&self, event: &DeviceEvent) -> Result<()> {
         match event {
             DeviceEvent::Added(id) => {
-                let radio = SluRadioDevice::create(&id)?;
+                let radio = SluRadioDevice::create(id)?;
                 self.radios.upsert(id.clone(), radio);
             }
             DeviceEvent::Updated(_id) => {}

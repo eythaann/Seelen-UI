@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: Penundaan untuk bersembunyi
   delay_to_show: Keterlambatan untuk ditampilkan
   dock_side: Posisi
-  dynamic_color: Warna Dinamis
-  dynamic_color_tooltip: >-
-    Aktifkan warna latar belakang dan latar depan yang dinamis berdasarkan
-    jendela terfokus. (Warna dapat ditimpa oleh tema)
   enable: Aktifkan toolbar mewah
   height: Tinggi
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: Di tumpang tindih
   label: Toolbar
   placeholder: {}
-  show_hibernate: Menampilkan tombol hibernasi pada menu daya
 update:
   available: Perbarui Tersedia!
   channel: Perbarui saluran

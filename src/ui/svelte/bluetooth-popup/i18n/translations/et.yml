@@ -1,0 +1,24 @@
+available: Saadaolevad seadmed
+cancel: Tühista
+confirm: Kinnita
+confirm_only: Kinnitage sidumine
+confirm_pin: Veenduge, et PIN-kood ühtib
+connected: Ühendatud
+disconnect: Katkesta ühendus
+display_pin: Sisestage see PIN-kood seadmesse
+lowenergy: Madal energia
+more: Rohkem Bluetoothi ​​seadeid
+no_adapter: Bluetoothi ​​adapterit ei leitud
+not_found: Ühtegi seadet ei leitud
+pair: Paari
+paired: Paaritud
+pairing: Sidumine...
+pairing_failed: Sidumine ebaõnnestus
+password: Parool
+provide_address: Sisestage aadress
+provide_password: Sisesta kasutajanimi ja parool
+provide_pin: Sisestage PIN-kood
+scanning: Seadmete otsimine...
+unpair: Katkestage sidumine
+unpair_failed: Sidumine ebaõnnestus
+username: Kasutajanimi

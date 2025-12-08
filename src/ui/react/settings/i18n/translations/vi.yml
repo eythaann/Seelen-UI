@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
-  dynamic_color: Màu sắc động
-  dynamic_color_tooltip: >-
-    Kích hoạt nền động và màu nền dựa trên cửa sổ tập trung. (Màu sắc có thể bị
-    ghi đè bởi các chủ đề)
   enable: Kích hoạt thanh công cụ ưa thích
   height: Chiều cao
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: Trên sự chồng chéo
   label: Thanh công cụ
   placeholder: {}
-  show_hibernate: Hiển thị nút Hibernate trên Menu Power
 update:
   available: Cập nhật có sẵn!
   channel: Cập nhật kênh

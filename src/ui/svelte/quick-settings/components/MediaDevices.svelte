@@ -70,7 +70,7 @@
     </button>
     <input
       type="range"
-      class="quick-settings-slider"
+      data-skin="flat"
       value={defaultInput.volume}
       oninput={(e) => onVolumeChange(defaultInput.id, e)}
       min={0}

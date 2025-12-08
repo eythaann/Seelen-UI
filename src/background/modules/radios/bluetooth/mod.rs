@@ -10,6 +10,7 @@ pub enum BluetoothDeviceType {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[allow(clippy::enum_variant_names)]
 pub enum BluetoothManagerEvent {
     DeviceAdded(String, BluetoothDeviceType),
     DeviceUpdated(String, BluetoothDeviceType),

@@ -221,10 +221,6 @@ toolbar:
   delay_to_hide: ล่าช้าในการซ่อน
   delay_to_show: ล่าช้าในการแสดง
   dock_side: ตำแหน่ง
-  dynamic_color: สีแบบไดนามิก
-  dynamic_color_tooltip: >-
-    เปิดใช้งานพื้นหลังแบบไดนามิกและสีเบื้องหน้าตามหน้าต่างที่โฟกัส
-    (สีสามารถถูกแทนที่ด้วยธีม)
   enable: เปิดใช้งานแถบเครื่องมือแฟนซี
   height: ความสูง
   hide_mode:
@@ -233,7 +229,6 @@ toolbar:
     on_overlap: เมื่อทับซ้อนกัน
   label: แถบเครื่องมือ
   placeholder: {}
-  show_hibernate: แสดงปุ่มไฮเบอร์เนตบนเมนูพลังงาน
 update:
   available: อัปเดตพร้อมใช้งาน!
   channel: อัปเดตช่อง

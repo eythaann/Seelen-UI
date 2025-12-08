@@ -29,6 +29,7 @@ type DeviceChangeCallback = Arc<dyn Fn(DeviceEvent) + Send + Sync + 'static>;
 /// - During initial enumeration (before `start()` completes), `Added` events are captured but NOT propagated
 /// - After enumeration completes, all events (Added/Updated/Removed) are propagated to the callback
 /// - This prevents duplicate notifications for devices that exist at startup
+#[allow(dead_code)]
 pub struct DeviceEnumerator {
     watcher: DeviceWatcher,
     devices: Arc<Mutex<Vec<DeviceInformation>>>,
@@ -129,9 +130,7 @@ impl DeviceEnumerator {
 
                             // Remove device from our internal list
                             devices.lock().retain(|dev| {
-                                dev.Id()
-                                    .map(|dev_id| dev_id.to_string() != id_str)
-                                    .unwrap_or(true)
+                                dev.Id().map(|dev_id| dev_id != id_str).unwrap_or(true)
                             });
 
                             // Notify callback
@@ -177,7 +176,7 @@ impl DeviceEnumerator {
     ///
     /// This method blocks until the initial enumeration is complete, ensuring that
     /// all existing devices are discovered before returning.
-    pub fn start(&self) -> Result<Vec<DeviceInformation>> {
+    pub fn start_blocking(&self) -> Result<Vec<DeviceInformation>> {
         // Start the watcher
         self.watcher.Start()?;
 
@@ -190,9 +189,10 @@ impl DeviceEnumerator {
         Ok(self.devices.lock().clone())
     }
 
-    /// Returns a snapshot of all currently known devices
-    pub fn devices(&self) -> Vec<DeviceInformation> {
-        self.devices.lock().clone()
+    pub fn start(&self) -> Result<()> {
+        self.enumeration_completed.store(true, Ordering::Release);
+        self.watcher.Start()?;
+        Ok(())
     }
 }
 

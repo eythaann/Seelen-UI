@@ -1,0 +1,188 @@
+.bluetooth-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .bluetooth-no-adapter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: var(--color-gray-500);
+    font-style: italic;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .bluetooth-radio-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 6px;
+    background-color: var(--color-gray-100);
+    border-radius: 8px;
+
+    .bluetooth-radio-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--color-gray-900);
+    }
+
+    .bluetooth-radio-switch {
+      cursor: pointer;
+    }
+  }
+
+  .bt-list {
+    display: flex;
+    flex-direction: column;
+
+    &:not(:last-child) {
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--color-gray-300);
+    }
+
+    .bt-list-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding-left: 8px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--color-gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      .bluetooth-scanning {
+        display: flex;
+        align-items: center;
+        color: var(--color-gray-500);
+
+        .slu-icon {
+          animation: rotateToTheLeft 1s linear infinite;
+        }
+      }
+    }
+
+    .bt-list-devices {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      max-height: 300px;
+      overflow-x: visible;
+      overflow-y: auto;
+
+      .bt-device {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 8px;
+        border-radius: 8px;
+        transition: background-color 0.2s;
+
+        &:hover, &:focus {
+          outline: none;
+          background-color: var(--color-gray-200);
+        }
+
+        &.bt-device-selected {
+          background-color: rgba(var(--system-accent-color-rgb), 0.2);
+        }
+
+        .bt-device-info {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .bt-device-name {
+            flex: 1;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+
+        .bt-device-loading {
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .bt-device-pairing {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-top: 12px;
+
+          .bt-device-pairing-message {
+            font-size: 0.85rem;
+            color: var(--color-gray-600);
+            font-style: italic;
+          }
+
+          .bt-device-pin-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px 12px;
+            background-color: rgba(var(--config-accent-color-rgb), 0.1);
+            border: 2px solid var(--system-accent-color);
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: "Courier New", monospace;
+            letter-spacing: 0.3em;
+            color: var(--color-gray-900);
+            user-select: text;
+          }
+        }
+
+        .bt-device-actions {
+          display: flex;
+          justify-content: flex-end;
+          gap: 8px;
+          margin-top: 12px;
+        }
+
+        .bt-device-error {
+          margin-top: 8px;
+          padding: 8px;
+          background-color: var(--color-red-100);
+          border-radius: 6px;
+          color: var(--color-red-600);
+          font-size: 0.8rem;
+          text-align: center;
+        }
+      }
+
+      .bluetooth-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        color: var(--color-gray-500);
+        font-style: italic;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .bluetooth-footer {
+    > button {
+      font-weight: 600;
+    }
+  }
+}
+
+@keyframes rotateToTheLeft {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

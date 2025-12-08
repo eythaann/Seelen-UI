@@ -161,6 +161,8 @@ windows = { workspace = true, features = [
     "Security_Credentials",
     "Devices_Custom",
     "Devices_Bluetooth",
+    "Devices_Bluetooth_Rfcomm",
+    "Devices_Bluetooth_GenericAttributeProfile",
     "Devices_Enumeration",
     "Devices_Radios",
     "Devices_WiFi",

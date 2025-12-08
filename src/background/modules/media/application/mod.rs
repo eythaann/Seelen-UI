@@ -197,7 +197,7 @@ impl MediaManager {
 
         self.players.initialize()?;
 
-        Self::subscribe(|event| {
+        let eid = Self::subscribe(|event| {
             let is_changing_players = matches!(
                 event,
                 MediaEvent::MediaPlayerAdded(_)
@@ -213,6 +213,7 @@ impl MediaManager {
                 MEDIA_MANAGER.players.update_recommended_player();
             }
         });
+        Self::set_event_handler_priority(&eid, 1);
 
         Ok(())
     }

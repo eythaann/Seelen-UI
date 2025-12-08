@@ -10,9 +10,7 @@ pub struct SluRadioDevice {
     pub id: String,
     pub raw: Radio,
     pub cache: RadioDevice,
-
-    state_changed_handler: TypedEventHandler<Radio, windows_core::IInspectable>,
-    token: i64,
+    state_changed_token: i64,
 }
 
 impl SluRadioDevice {
@@ -20,7 +18,7 @@ impl SluRadioDevice {
         let radio = Radio::FromIdAsync(&device_id.into())?.get()?;
 
         let id = device_id.to_string();
-        let handler = TypedEventHandler::new(
+        let state_changed_token = radio.StateChanged(&TypedEventHandler::new(
             move |sender: &Option<Radio>, _args: &Option<windows_core::IInspectable>| {
                 // Get the state OUTSIDE the lock to avoid deadlock
                 // The Windows API call (State()) can trigger re-entrant events
@@ -34,15 +32,13 @@ impl SluRadioDevice {
                 }
                 Ok(())
             },
-        );
-        let token = radio.StateChanged(&handler)?;
+        ))?;
 
         Ok(SluRadioDevice {
             id: device_id.to_string(),
             cache: Self::to_serializable(device_id, &radio)?,
             raw: radio,
-            state_changed_handler: handler,
-            token,
+            state_changed_token,
         })
     }
 
@@ -61,5 +57,11 @@ impl SluRadioDevice {
             kind,
             is_enabled: radio.State().is_ok_and(|s| s == RadioState::On),
         })
+    }
+}
+
+impl Drop for SluRadioDevice {
+    fn drop(&mut self) {
+        let _ = self.raw.RemoveStateChanged(self.state_changed_token);
     }
 }

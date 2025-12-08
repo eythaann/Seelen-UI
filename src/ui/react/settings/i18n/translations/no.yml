@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
-  dynamic_color: Dynamisk farge
-  dynamic_color_tooltip: >-
-    Aktiver dynamisk bakgrunn og forgrunnsfarger basert på fokusert vindu.
-    (Farger kan overstyres av temaer)
   enable: Aktiver fancy verktøylinje
   height: Høyde
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: På overlapping
   label: Verktøylinje
   placeholder: {}
-  show_hibernate: Vis dvalemodus på strømmenyen
 update:
   available: Oppdatering tilgjengelig!
   channel: Oppdateringskanal

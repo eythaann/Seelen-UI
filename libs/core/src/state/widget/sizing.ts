@@ -13,6 +13,9 @@ export function autoSizeWebviewBasedOnContent(
 ): () => void {
   const { onResize } = options;
 
+  // Disable resizing by the user
+  webview.setResizable(false);
+
   const updateSize = async () => {
     const contentWidth = Math.floor(element.scrollWidth);
     const contentHeight = Math.floor(element.scrollHeight);

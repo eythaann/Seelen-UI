@@ -227,10 +227,6 @@ toolbar:
   delay_to_hide: Kuchelewa kujificha
   delay_to_show: Kuchelewa kuonyesha
   dock_side: Msimamo
-  dynamic_color: Rangi ya nguvu
-  dynamic_color_tooltip: >-
-    Wezesha asili ya nguvu na rangi za mbele kulingana na dirisha lililolenga.
-    (Rangi zinaweza kupitishwa na mada)
   enable: Wezesha zana ya dhana
   height: Urefu
   hide_mode:
@@ -239,7 +235,6 @@ toolbar:
     on_overlap: Juu ya mwingiliano
   label: Zana
   placeholder: {}
-  show_hibernate: Onyesha kitufe cha Hibernate kwenye menyu ya nguvu
 update:
   available: Sasisha inapatikana!
   channel: Sasisha kituo

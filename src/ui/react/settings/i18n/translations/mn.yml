@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Нуухыг хойшлуулах
   delay_to_show: Үзүүлэхийг хойшлуулсан
   dock_side: Байрлал
-  dynamic_color: Доникийн өнгө
-  dynamic_color_tooltip: >-
-    Динамик арын дэвсгэр ба урд талбайн өнгийг төвлөрүүлсэн цонхноос идэвхжүүл.
-    (Өнгө нь сэдвээр хүчингүй болгож болно)
   enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
   height: Өндөрлөг
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: Давхардсан дээр
   label: Балтсний хайрцагны хэрэгсэл
   placeholder: {}
-  show_hibernate: Power цэс дээр Hibernate товчийг харуул
 update:
   available: Шинэчлэх боломжтой!
   channel: Суваг шинэчлэх

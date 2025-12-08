@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
-  dynamic_color: დინამიური ფერი
-  dynamic_color_tooltip: >-
-    ჩართეთ დინამიური ფონის და წინა პლანზე ფოკუსირებული ფანჯრის საფუძველზე.
-    (ფერები შეიძლება გადალახოს თემებით)
   enable: ჩართეთ ლამაზი პანელი
   height: სიმაღლე
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: გადახურვაზე
   label: ინსტრუმენტთა პანელი
   placeholder: {}
-  show_hibernate: აჩვენეთ ღილაკი Hibernate ღილაკზე დენის მენიუში
 update:
   available: განახლება ხელმისაწვდომია!
   channel: განაახლეთ არხი

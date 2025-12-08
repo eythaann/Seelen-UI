@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Opóźnienie ukrycia
   delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja
-  dynamic_color: Dynamiczny kolor
-  dynamic_color_tooltip: >-
-    Włącz dynamiczne kolory tła i pierwszego planu w oparciu o okno, na którym
-    skupiono uwagę. (Kolory mogą być zastępowane przez motywy)
   enable: Włącz pasek narzędzi
   height: Wysokość
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Kiedy zasłania
   label: Pasek narzędzi
   placeholder: {}
-  show_hibernate: Wyświetlanie przycisku hibernacji w menu zasilania
 update:
   available: Dostępna aktualizacja!
   channel: Kanał aktualizacji

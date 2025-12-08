@@ -220,8 +220,6 @@ toolbar:
   delay_to_hide: 숨기기 지연
   delay_to_show: 표시 지연
   dock_side: 위치
-  dynamic_color: 동적 색상
-  dynamic_color_tooltip: 초점이 맞춰진 창을 기준으로 동적 배경 및 전경색을 사용하도록 설정합니다. (테마에 따라 색상을 재정의할 수 있음)
   enable: 툴바 활성화
   height: 높이
   hide_mode:
@@ -230,7 +228,6 @@ toolbar:
     on_overlap: 오버랩 시
   label: 도구 모음
   placeholder: {}
-  show_hibernate: 전원 메뉴에 최대 절전 모드 버튼 표시
 update:
   available: 사용 가능한 업데이트가 존재합니다!
   channel: 업데이트 채널

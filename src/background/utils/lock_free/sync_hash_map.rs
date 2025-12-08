@@ -36,7 +36,11 @@ where
         self.0.lock().remove(key)
     }
 
-    pub fn contains_key(&self, key: &K) -> bool {
+    pub fn contains_key<Q: ?Sized>(&self, key: &Q) -> bool
+    where
+        K: Borrow<Q>,
+        Q: Eq + Hash,
+    {
         self.0.lock().contains_key(key)
     }
 

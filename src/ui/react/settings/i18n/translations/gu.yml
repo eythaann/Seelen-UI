@@ -228,10 +228,6 @@ toolbar:
   delay_to_hide: છુપાવવામાં વિલંબ
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
-  dynamic_color: ગતિશીલ રંગ
-  dynamic_color_tooltip: >-
-    ધ્યાન કેન્દ્રિત વિંડોના આધારે ગતિશીલ પૃષ્ઠભૂમિ અને અગ્રભૂમિ રંગોને સક્ષમ
-    કરો. (થીમ્સ દ્વારા રંગો ઓવરરાઇડ કરી શકાય છે)
   enable: ફેન્સી ટૂલબાર સક્ષમ કરો
   height: ઊંચાઈ
   hide_mode:
@@ -240,7 +236,6 @@ toolbar:
     on_overlap: ઓવરલેપ પર
   label: વમળ
   placeholder: {}
-  show_hibernate: પાવર મેનૂ પર હાઇબરનેટ બટન બતાવો
 update:
   available: અપડેટ ઉપલબ્ધ!
   channel: અપડેટ

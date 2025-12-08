@@ -1,0 +1,24 @@
+available: Dostupni uređaji
+cancel: Otkazati
+confirm: Potvrdi
+confirm_only: Potvrdite uparivanje
+confirm_pin: Potvrdite podudaranje PIN-a
+connected: Povezan
+disconnect: Prekini vezu
+display_pin: Unesite ovaj PIN na uređaj
+lowenergy: Niska energija
+more: Više Bluetooth postavki
+no_adapter: Nije pronađen Bluetooth adapter
+not_found: Nema pronađenih uređaja
+pair: Par
+paired: Uparen
+pairing: Uparivanje...
+pairing_failed: Uparivanje nije uspjelo
+password: Lozinka
+provide_address: Unesite adresu
+provide_password: Unesite korisničko ime i lozinku
+provide_pin: Unesite PIN
+scanning: Traženje uređaja...
+unpair: Poništi uparivanje
+unpair_failed: Poništavanje uparivanja nije uspjelo
+username: Korisničko ime

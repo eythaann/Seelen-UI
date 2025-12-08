@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք
-  dynamic_color: Դինամիկ գույն
-  dynamic_color_tooltip: >-
-    Միացնել դինամիկ ֆոնային եւ առաջին պլանների գույները, որոնք հիմնված են
-    կենտրոնացած պատուհանի վրա: (Գույները կարող են շրջանցվել թեմաներով)
   enable: Միացնել Fancy Toolbar- ը
   height: Բարձրություն
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Համընկնման վրա
   label: Գործիքագոտու
   placeholder: {}
-  show_hibernate: Show ույց տալ ձմեռել կոճակը էներգիայի ցանկում
 update:
   available: 'Թարմացրեք մատչելի:'
   channel: Թարմացրեք ալիքը

@@ -103,7 +103,4 @@ slu_events_declaration! {
     RadiosChanged(Vec<RadioDevice>) as "radio::changed",
 
     BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
-    BluetoothDiscoveredDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-discovered-devices-changed",
-    BluetoothPairShowPin(BluetoothDevicePairShowPinRequest) as "bluetooth-pair-show-pin",
-    BluetoothPairRequestPin as "bluetooth-pair-request-pin",
 }

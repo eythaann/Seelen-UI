@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: Délai avant de masquer
   delay_to_show: Délai avant d'afficher
   dock_side: Position
-  dynamic_color: Couleurs dynamiques
-  dynamic_color_tooltip: >-
-    Active les couleurs dynamiques d'arrière-plan et d'avant-plan en fonction de
-    la fenêtre ciblée. (Les couleurs peuvent être remplacées par des thèmes)
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: Sur chevauchement
   label: Barre d'outils
   placeholder: {}
-  show_hibernate: Afficher la veille prolongée dans le menu Marche/Arrêt
 update:
   available: Mise à jour disponible !
   channel: Canal de mise à jour

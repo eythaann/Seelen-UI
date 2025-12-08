@@ -2,6 +2,10 @@
 
 ## [2.4.10]
 
+### refactor
+
+- entire rewrite of the bluetooth module.
+
 ### fix
 
 - ghost items on dock and window manager.
