@@ -9,6 +9,7 @@
 ### fix
 
 - ghost items on dock and window manager.
+- missing messages to the service on startup.
 
 ## [2.4.9]
 
