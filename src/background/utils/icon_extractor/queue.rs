@@ -4,7 +4,7 @@ use crate::{error::Result, event_manager, log_error, windows_api::types::AppUser
 
 use super::{_extract_and_save_icon_from_file, _extract_and_save_icon_umid};
 
-pub static ICON_EXTRACTOR: LazyLock<IconExtractor> = LazyLock::new(IconExtractor::new);
+pub static ICON_EXTRACTOR: LazyLock<IconExtractor> = LazyLock::new(IconExtractor::create);
 
 pub struct IconExtractor {}
 
@@ -17,7 +17,7 @@ pub enum IconExtractorRequest {
 event_manager!(IconExtractor, IconExtractorRequest);
 
 impl IconExtractor {
-    fn new() -> Self {
+    fn create() -> Self {
         let extractor = Self {};
         Self::subscribe(|request| {
             log_error!(Self::process(request));

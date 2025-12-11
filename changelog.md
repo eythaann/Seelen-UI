@@ -6,6 +6,10 @@
 
 - entire rewrite of the bluetooth module.
 
+### enhancements
+
+- expose complementary colors of the system accent to css.
+
 ### fix
 
 - ghost items on dock and window manager.

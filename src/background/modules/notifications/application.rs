@@ -132,7 +132,8 @@ impl NotificationManager {
             }
         }
 
-        Self::subscribe(|e| log_error!(Self::process_event(e)));
+        let eid = Self::subscribe(|e| log_error!(Self::process_event(e)));
+        Self::set_event_handler_priority(&eid, 1);
         Ok(())
     }
 

@@ -90,8 +90,8 @@ body {
     justify-content: center;
     gap: 4px;
     padding: 0 8px;
-    background-color: var(--config-accent-color);
-    color: var(--color-persist-white);
+    background-color: var(--system-accent-color);
+    color: var(--color-fixed-white);
     border-radius: 6px;
     transition: background-color 0.2s ease-in-out;
     font-size: 0.9rem;

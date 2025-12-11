@@ -3,7 +3,6 @@ import type { Wallpaper as IWallpaper, WallpaperInstanceSettings } from "@seelen
 import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 import { List } from "../../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
-import { Wrapper } from "../../utils/Wrapper.ts";
 
 export const SUPPORTED_IMAGE_WALLPAPER_EXTENSIONS = [
   "apng",
@@ -39,7 +38,12 @@ export class WallpaperList extends List<IWallpaper> {
   }
 }
 
-export class WallpaperConfiguration extends Wrapper<WallpaperInstanceSettings> {
+export interface WallpaperConfiguration extends WallpaperInstanceSettings {}
+export class WallpaperConfiguration {
+  constructor(plain: WallpaperInstanceSettings) {
+    Object.assign(this, plain);
+  }
+
   static default(): Promise<WallpaperConfiguration> {
     return newFromInvoke(this, SeelenCommand.StateGetDefaultWallpaperSettings);
   }

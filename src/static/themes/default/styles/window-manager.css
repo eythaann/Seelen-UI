@@ -2,10 +2,10 @@
   &.wm-leaf-with-borders {
     border-style: solid;
     border-width: var(--config-border-width);
-    border-color: var(--config-accent-light-color);
+    border-color: var(--system-accent-light-color);
 
     &.wm-leaf-focused {
-      border-color: var(--config-accent-lighter-color);
+      border-color: var(--system-accent-lighter-color);
     }
   }
 }
@@ -21,7 +21,7 @@
     padding: 0 10px;
     gap: var(--config-containers-gap);
     border-radius: 10px;
-    background-color: var(--color-persist-gray-900);
+    background-color: var(--color-fixed-gray-900);
     color: #fefefe;
     font-size: 0.85rem;
 
@@ -45,7 +45,7 @@
       }
 
       &.wm-stack-bar-item-active {
-        color: var(--config-accent-lighter-color);
+        color: var(--system-accent-lighter-color);
       }
     }
   }

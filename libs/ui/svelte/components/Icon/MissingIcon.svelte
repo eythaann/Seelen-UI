@@ -87,6 +87,6 @@
     mask-size: contain;
     mask-position: center;
     mask-mode: luminance;
-    background-color: var(--config-accent-light-color);
+    background-color: var(--system-accent-light-color);
   }
 </style>

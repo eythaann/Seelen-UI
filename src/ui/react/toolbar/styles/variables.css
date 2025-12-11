@@ -2,8 +2,8 @@
   --config-height: 30px;
   --config-padding-at-side: 14px;
 
-  --config-accent-color: #ff0000;
-  --config-accent-color-rgb: 255, 0, 0;
+  --system-accent-color: #ff0000;
+  --system-accent-color-rgb: 255, 0, 0;
 
   --config-time-before-hide: 800ms;
   --config-time-before-show: 100ms;

@@ -32,11 +32,11 @@
   gap: 6px;
 
   &:hover {
-    background-color: rgba(var(--config-accent-color-rgb), 0.2);
+    background-color: rgba(var(--system-accent-color-rgb), 0.2);
   }
 
   &:active {
-    background-color: rgba(var(--config-accent-color-rgb), 0.4);
+    background-color: rgba(var(--system-accent-color-rgb), 0.4);
   }
 }
 
@@ -135,13 +135,13 @@
 }
 
 .ft-bar {
-  color: var(--color-persist-gray-100);
+  color: var(--color-fixed-gray-100);
   transition: color 0.2s linear;
 
   > .bg-layers {
     // we skip the first layer, to avoid break user themes, as before v2.2 the first layer was a noise layer
     > .bg-layer-2 {
-      background-color: var(--color-persist-gray-900);
+      background-color: var(--color-fixed-gray-900);
       transition: background-color 0.2s linear;
       will-change: background-color;
     }
@@ -173,7 +173,7 @@
 
       &.workspace-dot-active {
         width: 18px;
-        background-color: var(--config-accent-color);
+        background-color: var(--system-accent-color);
       }
     }
   }
@@ -188,7 +188,7 @@
   }
 
   &.ft-bar-item-active {
-    color: var(--config-accent-color);
+    color: var(--system-accent-color);
   }
 }
 
@@ -238,7 +238,7 @@
   top: 0;
   right: 0;
   transform: translate(25%, -25%);
-  background-color: var(--config-accent-color);
+  background-color: var(--system-accent-color);
   color: #efefef;
   height: 12px;
   min-width: 12px;
@@ -293,7 +293,7 @@
       }
 
       &.wlan-entry-selected {
-        background-color: rgba(var(--config-accent-color-rgb), 0.2);
+        background-color: rgba(var(--system-accent-color-rgb), 0.2);
       }
 
       .wlan-entry-info {
@@ -578,7 +578,7 @@
     color: var(--color-gray-600);
   }
   66% {
-    color: var(--config-accent-color);
+    color: var(--system-accent-color);
   }
   100% {
     color: var(--color-gray-600);
@@ -728,7 +728,7 @@
       padding: 0 4px;
 
       &:hover {
-        color: var(--config-accent-color);
+        color: var(--system-accent-color);
         background-color: var(--color-gray-200);
       }
     }
@@ -747,7 +747,7 @@
         border-radius: 4px;
 
         &:hover {
-          color: var(--config-accent-color);
+          color: var(--system-accent-color);
           background-color: var(--color-gray-200);
         }
       }
@@ -768,7 +768,7 @@
 
     &.calendar-cell-selected {
       background-color: var(--color-gray-100);
-      color: var(--config-accent-color);
+      color: var(--system-accent-color);
     }
 
     &:hover {
@@ -776,7 +776,7 @@
     }
 
     &.calendar-cell-today {
-      background-color: rgba(var(--config-accent-color-rgb), 0.2);
+      background-color: rgba(var(--system-accent-color-rgb), 0.2);
     }
 
     &.calendar-cell-month {
@@ -946,7 +946,7 @@
       padding: 8px 10px;
 
       &.keyboard-selector-entry-active {
-        background-color: rgba(var(--config-accent-color-rgb), 0.4);
+        background-color: rgba(var(--system-accent-color-rgb), 0.4);
       }
 
       .keyboard-selector-entry-info {

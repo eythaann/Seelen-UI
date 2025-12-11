@@ -40,7 +40,7 @@ input[type="text"][data-skin="default"] {
   transition: border-color 0.2s;
 
   &:focus {
-    border-color: rgba(var(--config-accent-color-rgb), 0.8);
+    border-color: rgba(var(--system-accent-color-rgb), 0.8);
   }
 
   &[data-error="true"] {

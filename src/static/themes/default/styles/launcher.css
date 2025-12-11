@@ -6,12 +6,12 @@ body {
 }
 
 :root {
-  --accent-color-by-scheme: var(--config-accent-dark-color);
+  --accent-color-by-scheme: var(--system-accent-dark-color);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --accent-color-by-scheme: var(--config-accent-light-color);
+    --accent-color-by-scheme: var(--system-accent-light-color);
   }
 }
 
@@ -151,7 +151,7 @@ body {
 
   &:focus,
   &:focus-visible {
-    outline: 2px solid rgba(var(--config-accent-dark-color-rgb), 0.8);
+    outline: 2px solid rgba(var(--system-accent-dark-color-rgb), 0.8);
     z-index: 2;
   }
 

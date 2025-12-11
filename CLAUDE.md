@@ -340,9 +340,7 @@ Create `src/static/themes/default/styles/<widget-name>.scss`:
 
 **Important CSS Variables:**
 
-- `--config-background-color` - Widget background
-- `--config-foreground-color` - Widget foreground/text
-- `--config-accent-color` - Accent color
+- `--system-accent-color` - Accent color
 - Use existing mixins from `shared.scss` for consistency
 
 #### 3. Set Up Svelte Application
