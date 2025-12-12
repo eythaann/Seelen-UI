@@ -29,9 +29,7 @@ export async function triggerWidget(widgetId: WidgetId, itemId: string): Promise
   const rootRect = document.getElementById("root")!.getBoundingClientRect();
   const isTopPosition = $settings.value.position === FancyToolbarSide.Top;
 
-  const y = isTopPosition
-    ? windowY + toPhysicalPixels(rootRect.bottom + 10)
-    : windowY + toPhysicalPixels(rootRect.top - 10);
+  const y = isTopPosition ? windowY + toPhysicalPixels(rootRect.bottom) : windowY + toPhysicalPixels(rootRect.top);
 
   await invoke(SeelenCommand.TriggerWidget, {
     payload: {

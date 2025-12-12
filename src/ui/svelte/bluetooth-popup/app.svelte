@@ -57,7 +57,7 @@
   }
 </script>
 
-<div class="slu-popover bluetooth-popup">
+<div class="slu-standard-popover bluetooth-popup">
   {#if !bluetoothRadio}
     <div class="bluetooth-no-adapter">
       {$t("no_adapter")}
@@ -131,15 +131,3 @@
     {/if}
   {/if}
 </div>
-
-<style>
-  :global(body) {
-    background-color: transparent;
-    overflow: hidden;
-  }
-
-  :global(#root) {
-    width: min-content;
-    height: min-content;
-  }
-</style>

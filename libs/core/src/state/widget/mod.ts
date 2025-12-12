@@ -118,7 +118,7 @@ export class Widget {
   }
 
   /** Returns the default config of the widget, declared on the widget definition */
-  getDefaultConfig(): ThirdPartyWidgetSettings {
+  public getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
     for (const { group } of this.def.settings) {
       for (const entry of group) {
@@ -244,8 +244,9 @@ export class Widget {
   }
 
   /**
-   * Will initialize the widget based on the preset, this function won't show the widget.
-   * You need to call `webview.show()` to show the widget.
+   * Will initialize the widget based on the preset and mark it as `pending`, this function won't show the widget.
+   * This should be called before any other action on the widget. After this you should call
+   * `ready` to mark the widget as ready and show it.
    */
   public async init(): Promise<void> {
     switch (this.def.preset) {
@@ -261,6 +262,17 @@ export class Widget {
         await this.applyPopupPreset();
         break;
     }
+  }
+
+  /**
+   * Will mark the widget as `ready` and pool pending triggers.
+   * Other tasks as showing the widget will be performed depending on the preset.
+   */
+  public async ready(): Promise<void> {
+    if (this.def.preset === WidgetPreset.Desktop || this.def.preset === WidgetPreset.Overlay) {
+      await this.webview.show();
+    }
+    // todo pool pending triggers
   }
 
   public onTrigger(cb: (args: WidgetTriggerPayload) => void): void {

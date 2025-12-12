@@ -8,7 +8,7 @@
 
     interpolate-size: allow-keywords; /* This enables animations between keywords (auto, min-content, etc) */
     scroll-behavior: smooth;
-    font-size: 100%;
+    font-size: 100%; /* determines the size of the rem unit */
   }
 
   *,

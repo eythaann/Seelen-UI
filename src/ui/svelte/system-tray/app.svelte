@@ -41,7 +41,7 @@
   ];
 </script>
 
-<div class={["slu-popover", "system-tray"]}>
+<div class={["slu-standard-popover", "system-tray"]}>
   {#each state.trayItems as item}
     {#if item.is_visible && (!item.guid || !GUIDS_TO_IGNORE.includes(item.guid))}
       <button
@@ -86,15 +86,3 @@
     {/if}
   {/each}
 </div>
-
-<style>
-  :global(body) {
-    background-color: transparent;
-    overflow: hidden;
-  }
-
-  :global(#root) {
-    width: min-content;
-    height: min-content;
-  }
-</style>

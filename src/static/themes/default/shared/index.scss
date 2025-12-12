@@ -20,13 +20,29 @@
   outline-color: var(--system-accent-color);
 }
 
-// todo refactor these
-.slu-popover {
+// Standard for popover
+body:has(.slu-standard-popover) {
+  background-color: transparent;
+  overflow: hidden;
+
+  > #root,
+  > #app {
+    width: min-content;
+    height: min-content;
+    overflow: hidden; // disable margin collapse
+  }
+}
+
+.slu-standard-popover {
+  --margin: 10px;
+
   width: 300px;
   background-color: var(--color-gray-50);
   color: var(--color-gray-900);
   border-radius: 10px;
   padding: 10px;
+  margin: 10px; // this margin will allow the box-shadow to be visible
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
   font-size: 0.8rem;
 }
 

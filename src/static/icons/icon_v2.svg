@@ -1,0 +1,23 @@
+<svg width="100%" height="100%" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="inner-shadow">
+      <feFlood flood-color="#000" />
+      <feComposite operator="out" in2="SourceGraphic" />
+      <feMorphology operator="dilate" radius="2" />
+      <feGaussianBlur stdDeviation="10" />
+      <feComposite operator="atop" in2="SourceGraphic" />
+    </filter>
+
+    <linearGradient id="bg-gradient" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color: #fa2317; stop-opacity: 1" />
+      <stop offset="50%" style="stop-color: #ac4ef4; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: #006cfa; stop-opacity: 1" />
+    </linearGradient>
+  </defs>
+  <!-- <rect width="100%" height="100%" rx="20%" ry="20%" fill="#0f0f0f" /> -->
+
+  <rect width="100%" height="100%" rx="16%" ry="16%" fill="url(#bg-gradient)" filter="url(#inner-shadow)" />
+
+  <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="#fafafa" stroke-width="4%" stroke-dasharray="10.9% 3.95%" />
+  <line x1="50%" y1="50%" x2="100%" y2="50%" stroke="#fafafa" stroke-width="4%" stroke-dasharray="9.5% 4%" />
+</svg>

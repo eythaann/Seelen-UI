@@ -17,7 +17,7 @@
   }
 </script>
 
-<div class={["slu-popover", "quick-settings"]}>
+<div class={["slu-standard-popover", "quick-settings"]}>
   <RadioButtons />
   <BrightnessControl />
   <MediaDevices />
@@ -32,15 +32,3 @@
     </button>
   </div>
 </div>
-
-<style>
-  :global(body) {
-    background-color: transparent;
-    overflow: hidden;
-  }
-
-  :global(#root) {
-    width: min-content;
-    height: min-content;
-  }
-</style>

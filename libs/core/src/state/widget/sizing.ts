@@ -42,6 +42,13 @@ export function autoSizeWebviewBasedOnContent(
   // Initial size update
   updateSize();
 
+  // Ensure size on focus, this is a workaround for cropped popups issue
+  webview.onFocusChanged(({ payload: focused }) => {
+    if (focused) {
+      updateSize();
+    }
+  });
+
   // Update size when content changes
   const observer = new MutationObserver(() => {
     updateSize();
