@@ -9,11 +9,13 @@
 ### enhancements
 
 - expose complementary colors of the system accent to css.
+- change theme config url from input to local file selector.
 
 ### fix
 
 - ghost items on dock and window manager.
 - missing messages to the service on startup.
+- options field on theme settings rendering an input instead of selector.
 
 ## [2.4.9]
 
