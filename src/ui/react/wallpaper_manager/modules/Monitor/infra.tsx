@@ -1,8 +1,9 @@
 import { batch, useComputed, useSignal, useSignalEffect } from "@preact/signals";
 import type { PhysicalMonitor, WallpaperId } from "@seelen-ui/lib/types";
 import { Wallpaper as WallpaperComponent } from "@shared/components/Wallpaper";
+import { useTranslation } from "react-i18next";
 
-import { $muted, $paused, $settings, $wallpapers } from "../shared/state.ts";
+import { $muted, $paused, $performance_mode, $settings, $wallpapers } from "../shared/state.ts";
 import { $get_active_wallpapers, $relativeMonitors } from "./derived.ts";
 
 export function MonitorContainers() {
@@ -21,6 +22,7 @@ export function MonitorContainers() {
  * 3. performance mode will disable video wallpapers
  */
 function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
+  const { t } = useTranslation();
   const $render_old = useSignal(false);
   const $current_was_loaded = useSignal(false);
 
@@ -140,6 +142,7 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
           onLoad={() => ($current_was_loaded.value = true)}
           paused={$paused.value}
           muted={$muted.value || !monitor.isPrimary}
+          pausedMessage={$performance_mode.value !== "Disabled" ? t("paused_by_performance_mode") : undefined}
         />,
       ]}
     </div>

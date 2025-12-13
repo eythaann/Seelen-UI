@@ -17,6 +17,7 @@ interface BaseProps {
   onLoad?: () => void;
   muted?: boolean;
   paused?: boolean;
+  pausedMessage?: string;
   out?: boolean;
 }
 
@@ -65,6 +66,9 @@ export function Wallpaper(props: BaseProps) {
             backgroundColor: config.overlayColor,
           }}
         />
+      )}
+      {props.pausedMessage && props.paused && $loaded.value && (
+        <div className={cs.pausedMessage}>{props.pausedMessage}</div>
       )}
     </div>
   );
