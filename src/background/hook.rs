@@ -59,12 +59,47 @@ impl HookManager {
             return;
         }
 
-        log_error!(Self::event_tx().send((WinEvent::from(event), Window::from(origin))));
-
+        // deprecated code refactor this on future.
         if FULL_STATE.load().is_weg_enabled() {
             // raw events should be only used for a fastest and immediately processing
             log_error!(SeelenWeg::process_raw_win_event(event, origin));
         }
+
+        let event = WinEvent::from(event);
+        let origin = Window::from(origin);
+        Self::send((event, origin));
+
+        for event in event.get_synthetics(&origin).unwrap_or_default() {
+            Self::send((event, origin));
+        }
+    }
+
+    fn start() {
+        let eid = Self::subscribe(|(event, mut origin)| {
+            if event == WinEvent::SystemForeground {
+                origin = Window::get_foregrounded(); // sometimes this event is emited with the wrong origin
+            }
+            Self::process_event(event, origin);
+        });
+        Self::set_event_handler_priority(&eid, 1);
+
+        spawn_named_thread("WinEventHook", move || unsafe {
+            SetWinEventHook(
+                EVENT_MIN,
+                EVENT_MAX,
+                None,
+                Some(HookManager::raw_win_event_hook_recv),
+                0,
+                0,
+                0,
+            );
+
+            let mut msg: MSG = MSG::default();
+            while GetMessageW(&mut msg, None, 0, 0).as_bool() {
+                let _ = TranslateMessage(&msg);
+                DispatchMessageW(&msg);
+            }
+        });
     }
 
     fn log_event(event: WinEvent, origin: Window) {
@@ -83,7 +118,7 @@ impl HookManager {
             }
         };
         if event == WinEvent::ObjectDestroy {
-            return log::debug!("{:?}({:0x})", event_value, origin.address());
+            return log::debug!("{event_value:?}({:0x})", origin.address());
         }
         log::debug!("{event_value:?} | {origin:?}");
     }
@@ -91,27 +126,30 @@ impl HookManager {
     fn process_event(event: WinEvent, origin: Window) {
         Self::log_event(event, origin);
 
-        let shoup_update_focused = matches!(
-            event,
-            WinEvent::SystemForeground
-                | WinEvent::SyntheticForegroundLocationChange
-                | WinEvent::ObjectNameChange
-                | WinEvent::SystemMoveSizeStart
-                | WinEvent::SystemMoveSizeEnd
-                | WinEvent::SyntheticMaximizeStart
-                | WinEvent::SyntheticMaximizeEnd
-                | WinEvent::SyntheticFullscreenStart
-                | WinEvent::SyntheticFullscreenEnd
-        );
+        // TODO: optimize this, update independent fields instead of the whole struct
+        {
+            let shoup_update_focused = matches!(
+                event,
+                WinEvent::SystemForeground
+                    | WinEvent::SyntheticForegroundLocationChange
+                    | WinEvent::ObjectNameChange
+                    | WinEvent::SystemMoveSizeStart
+                    | WinEvent::SystemMoveSizeEnd
+                    | WinEvent::SyntheticMaximizeStart
+                    | WinEvent::SyntheticMaximizeEnd
+                    | WinEvent::SyntheticFullscreenStart
+                    | WinEvent::SyntheticFullscreenEnd
+            );
 
-        if shoup_update_focused && origin.is_focused() {
-            get_app_handle()
-                .emit(
-                    SeelenEvent::GlobalFocusChanged,
-                    origin.as_focused_app_information(),
-                )
-                .wrap_error()
-                .log_error();
+            if shoup_update_focused && origin.is_focused() {
+                get_app_handle()
+                    .emit(
+                        SeelenEvent::GlobalFocusChanged,
+                        origin.as_focused_app_information(),
+                    )
+                    .wrap_error()
+                    .log_error();
+            }
         }
 
         log_error!(SluWorkspacesManager::on_win_event(event, &origin), event);
@@ -146,39 +184,8 @@ impl HookManager {
 
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
-    init_zombie_window_killer()?;
-
-    spawn_named_thread("WinEventHook", move || unsafe {
-        SetWinEventHook(
-            EVENT_MIN,
-            EVENT_MAX,
-            None,
-            Some(HookManager::raw_win_event_hook_recv),
-            0,
-            0,
-            0,
-        );
-
-        HookManager::subscribe(|(event, mut origin)| {
-            if event == WinEvent::SystemForeground {
-                origin = Window::get_foregrounded(); // sometimes event is emited with wrong origin
-            }
-
-            let synthetics = event.get_synthetics(&origin);
-            HookManager::process_event(event, origin);
-            if let Ok(synthetics) = synthetics {
-                for synthetic_event in synthetics {
-                    HookManager::process_event(synthetic_event, origin)
-                }
-            }
-        });
-
-        let mut msg: MSG = MSG::default();
-        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
-            let _ = TranslateMessage(&msg);
-            DispatchMessageW(&msg);
-        }
-    });
+    init_zombie_window_killer();
+    HookManager::start();
 
     spawn_named_thread("MouseEventHook", || {
         let handle = get_app_handle();
@@ -211,7 +218,7 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
     Ok(())
 }
 
-pub fn init_zombie_window_killer() -> Result<()> {
+pub fn init_zombie_window_killer() {
     let existing_windows = Arc::new(RwLock::new(HashSet::new()));
 
     let dict = existing_windows.clone();
@@ -243,11 +250,9 @@ pub fn init_zombie_window_killer() -> Result<()> {
                 let window = Window::from(*addr);
                 if !window.is_window() {
                     log::trace!("Reaping window: {:0x}", window.address());
-                    log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
+                    HookManager::send((WinEvent::ObjectDestroy, window));
                 }
             }
         }
     });
-
-    Ok(())
 }

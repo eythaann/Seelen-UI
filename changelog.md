@@ -13,9 +13,11 @@
 
 ### fix
 
+- no updating data attribute on toolbar for maximized windows on background.
 - ghost items on dock and window manager.
 - missing messages to the service on startup.
 - options field on theme settings rendering an input instead of selector.
+- missing events on app windows hook.
 
 ## [2.4.9]
 

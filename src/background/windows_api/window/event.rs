@@ -1,6 +1,7 @@
 use std::sync::LazyLock;
 
 use crate::error::Result;
+use crate::hook::HookManager;
 use crate::windows_api::window::Window;
 use windows::Win32::UI::WindowsAndMessaging::*;
 
@@ -199,6 +200,17 @@ impl From<u32> for WinEvent {
 }
 
 static CACHE: LazyLock<scc::HashMap<isize, WindowCache>> = LazyLock::new(scc::HashMap::new);
+static LAZY_LOCATION_CHANGE_EVENT: LazyLock<slu_utils::Throttle<isize>> = LazyLock::new(|| {
+    slu_utils::throttle(
+        |addr| {
+            let window = Window::from(addr);
+            if window.is_focused() {
+                HookManager::send((WinEvent::SyntheticForegroundLocationChange, window));
+            }
+        },
+        std::time::Duration::from_millis(100),
+    )
+});
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct WindowCache {
@@ -234,7 +246,7 @@ impl WinEvent {
 
         match self {
             Self::ObjectLocationChange if origin.is_focused() => {
-                synthetics.push(Self::SyntheticForegroundLocationChange);
+                LAZY_LOCATION_CHANGE_EVENT.call(origin.address());
 
                 let before = Self::get_or_init_cache_for(origin);
                 let now = WindowCache::from(origin);
