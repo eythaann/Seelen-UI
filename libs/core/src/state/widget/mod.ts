@@ -271,12 +271,14 @@ export class Widget {
 
   /**
    * Will mark the widget as `ready` and pool pending triggers.
-   * Other tasks as showing the widget will be performed depending on the preset.
+   *
+   * If the widget is not lazy this will inmediately show the widget.
+   * Lazy widget should be shown on trigger action.
    */
   public async ready(): Promise<void> {
     await this.autoSizer?.execute();
 
-    if (this.def.preset === WidgetPreset.Desktop || this.def.preset === WidgetPreset.Overlay) {
+    if (!this.def.lazy) {
       await this.webview.show();
     }
 
