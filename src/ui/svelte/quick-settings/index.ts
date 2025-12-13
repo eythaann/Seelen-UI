@@ -5,11 +5,12 @@ import { Widget } from "@seelen-ui/lib";
 import "@shared/styles/reset.css";
 import "@shared/styles/colors.css";
 
-const widget = Widget.getCurrent();
-await widget.init();
+const root = document.getElementById("root")!;
 
-let root = document.getElementById("root")!;
-widget.autoSizeWebviewByElement(root);
+const widget = Widget.getCurrent();
+await widget.init({
+  autoSizeByContent: root,
+});
 
 mount(App, {
   target: root,

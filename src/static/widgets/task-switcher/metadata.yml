@@ -5,5 +5,4 @@ metadata:
 instances: Single
 loader: Internal
 preset: Overlay
-lazy: true
 hidden: true

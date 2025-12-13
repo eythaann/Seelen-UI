@@ -11,6 +11,7 @@
 
   onMount(() => {
     setup(state);
+    Widget.getCurrent().ready();
   });
 
   function onCancel() {

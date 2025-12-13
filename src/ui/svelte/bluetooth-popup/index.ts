@@ -6,13 +6,14 @@ import { Widget } from "@seelen-ui/lib";
 import "@shared/styles/reset.css";
 import "@shared/styles/colors.css";
 
-await loadTranslations();
+const root = document.getElementById("root")!;
 
 const widget = Widget.getCurrent();
-await widget.init();
+await widget.init({
+  autoSizeByContent: root,
+});
 
-let root = document.getElementById("root")!;
-widget.autoSizeWebviewByElement(root);
+await loadTranslations();
 
 mount(App, {
   target: root,

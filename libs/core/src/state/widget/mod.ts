@@ -41,7 +41,7 @@ export class WidgetList extends List<IWidget> {
   }
 }
 
-interface WidgetInformation {
+export interface WidgetInformation {
   /** decoded webview label */
   label: string;
   /** Will be present if the widget replicas is set to by monitor */
@@ -50,6 +50,27 @@ interface WidgetInformation {
   instanceId: string | null;
   /** params present on the webview label */
   params: { readonly [key in string]?: string };
+}
+
+export interface InitWidgetOptions {
+  /**
+   * @default !widget.lazy
+   */
+  show?: boolean;
+
+  /**
+   * Will auto size the widget to the content size of the element
+   * @example
+   *  autoSizeByContent: document.body,
+   *  autoSizeByContent: document.getElementById("root"),
+   * @default undefined
+   */
+  autoSizeByContent?: HTMLElement | null;
+}
+
+interface WidgetInternalState {
+  initialized: boolean;
+  ready: boolean;
 }
 
 /**
@@ -66,6 +87,11 @@ export class Widget {
   public readonly webview: WebviewWindow;
 
   private autoSizer?: WidgetAutoSizer;
+  private initOptions: InitWidgetOptions = {};
+  private runtimeState: WidgetInternalState = {
+    initialized: false,
+    ready: false,
+  };
 
   private constructor(widget: IWidget) {
     this.def = widget;
@@ -168,21 +194,28 @@ export class Widget {
   private async applyPopupPreset(): Promise<void> {
     await Promise.all([...this.applyInvisiblePreset()]);
 
-    // auto close on focus lost
+    // closing when not in use to save resources
     const closeOnTimeout = debounce(() => {
       // this.webview.close(); todo
-    }, 5000);
+    }, 10_000);
 
-    this.webview.onFocusChanged((e) => {
-      if (e.payload) {
-        closeOnTimeout.cancel();
+    const hideWebview = debounce(() => {
+      this.webview.hide();
+      closeOnTimeout();
+    }, 100);
+
+    this.webview.onFocusChanged(({ payload: focused }) => {
+      if (focused) {
+        hideWebview.cancel();
       } else {
-        this.webview.hide();
-        closeOnTimeout();
+        hideWebview();
       }
     });
 
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
+      // avoid flickering when clicking a button that triggers the widget
+      hideWebview.cancel();
+
       if (desiredPosition) {
         const { width, height } = await this.webview.outerSize();
         const pos = await adjustPostionByPlacement({
@@ -196,12 +229,13 @@ export class Widget {
         await this.webview.setPosition(new PhysicalPosition(pos.x, pos.y));
       }
       await this.webview.show();
+      await this.webview.setFocus();
     });
   }
 
   /**
-   * Will restore the saved position and size of the widget after that
-   * will store the position and size of the widget on change.
+   * Will restore the saved position and size of the widget on start,
+   * after that will store the position and size of the widget on change.
    */
   public async persistPositionAndSize(): Promise<void> {
     const storage = globalThis.window.localStorage;
@@ -242,17 +276,20 @@ export class Widget {
     );
   }
 
-  // this will monitor the element and resize the webview accordingly
-  public autoSizeWebviewByElement(element: HTMLElement = document.body): void {
-    this.autoSizer = new WidgetAutoSizer(this.webview, element);
-  }
-
   /**
    * Will initialize the widget based on the preset and mark it as `pending`, this function won't show the widget.
    * This should be called before any other action on the widget. After this you should call
    * `ready` to mark the widget as ready and show it.
    */
-  public async init(): Promise<void> {
+  public async init(options: InitWidgetOptions = {}): Promise<void> {
+    if (this.runtimeState.initialized) {
+      console.warn(`Widget already initialized`);
+      return;
+    }
+
+    this.runtimeState.initialized = true;
+    this.initOptions = options;
+
     switch (this.def.preset) {
       case WidgetPreset.None:
         break;
@@ -266,7 +303,12 @@ export class Widget {
         await this.applyPopupPreset();
         break;
     }
+
     await startThemingTool();
+
+    if (options.autoSizeByContent) {
+      this.autoSizer = new WidgetAutoSizer(this.webview, options.autoSizeByContent);
+    }
   }
 
   /**
@@ -276,9 +318,19 @@ export class Widget {
    * Lazy widget should be shown on trigger action.
    */
   public async ready(): Promise<void> {
+    if (!this.runtimeState.initialized) {
+      throw new Error(`Widget was not initialized before ready`);
+    }
+
+    if (this.runtimeState.ready) {
+      console.warn(`Widget is already ready`);
+      return;
+    }
+
+    this.runtimeState.ready = true;
     await this.autoSizer?.execute();
 
-    if (!this.def.lazy) {
+    if (this.initOptions.show ?? !this.def.lazy) {
       await this.webview.show();
     }
 

@@ -19,7 +19,6 @@ export async function setup(state: State) {
   });
 
   await updateSize(state);
-  await widget.init();
 }
 
 async function updateSize(state: State) {

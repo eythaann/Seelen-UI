@@ -5,7 +5,6 @@
 
   onMount(() => {
     let widget = Widget.getCurrent();
-    widget.webview.show();
     widget.webview.emitTo(widget.webview.label, "complete-setup");
     widget.ready();
   });
