@@ -1,4 +1,33 @@
+import { UIColors } from "../../system_state/ui_colors.ts";
 import { RuntimeStyleSheet } from "../../utils/DOM.ts";
+import { Settings } from "../settings/mod.ts";
+import { ThemeList } from "./mod.ts";
+
+/**
+ * This will apply the active themes for this widget, and automatically update
+ * when the themes or settings change. Also will add the systehm ui colors to the document.
+ */
+export async function startThemingTool(): Promise<void> {
+  let settings = await Settings.getAsync();
+  let themes = await ThemeList.getAsync();
+
+  await ThemeList.onChange((newThemes) => {
+    themes = newThemes;
+    themes.applyToDocument(settings.activeThemes, settings.byTheme);
+  });
+
+  await Settings.onChange((newSettings) => {
+    settings = newSettings;
+    themes.applyToDocument(settings.activeThemes, settings.byTheme);
+  });
+
+  (await UIColors.getAsync()).setAsCssVariables();
+  await UIColors.onChange((colors) => colors.setAsCssVariables());
+
+  startDateCssVariables();
+
+  themes.applyToDocument(settings.activeThemes, settings.byTheme);
+}
 
 export function startDateCssVariables(): void {
   // Set initial values immediately

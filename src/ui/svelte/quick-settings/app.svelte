@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import type { WidgetId } from "@seelen-ui/lib/types";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import BrightnessControl from "./components/BrightnessControl.svelte";
@@ -15,6 +15,10 @@
       payload: { id: "@seelen/power-menu" as WidgetId },
     });
   }
+
+  $effect(() => {
+    Widget.getCurrent().ready();
+  });
 </script>
 
 <div class={["slu-standard-popover", "quick-settings"]}>

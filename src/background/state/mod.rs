@@ -62,15 +62,22 @@ impl FullState {
         }
     }
 
-    pub fn is_widget_enabled(&self, widget: &Widget) -> bool {
-        match self.settings.by_widget.others.get(&widget.id) {
+    pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
+        match self.settings.by_widget.others.get(widget_id) {
             Some(config) => config.enabled,
-            None => widget.metadata.internal.bundled, // only internal widgets are enabled by default
+            None => {
+                // only internal widgets are enabled by default
+                RESOURCES
+                    .widgets
+                    .read(widget_id, |_, widget| widget.metadata.internal.bundled)
+                    .is_some_and(|is_bundled| is_bundled)
+            }
         }
     }
 
+    #[allow(dead_code)]
     pub fn is_widget_enable_on_monitor(&self, widget: &Widget, monitor_id: &MonitorId) -> bool {
-        if !self.is_widget_enabled(widget) {
+        if !self.is_widget_enabled(&widget.id) {
             return false;
         }
 

@@ -1,17 +1,10 @@
-use std::collections::HashMap;
-
-use seelen_core::{
-    resource::WidgetId,
-    state::{WidgetInstanceMode, WidgetLoader},
-    system_state::MonitorId,
-};
+use seelen_core::system_state::MonitorId;
 
 use crate::{
     error::Result,
-    resources::RESOURCES,
-    state::application::{FullState, FULL_STATE},
+    state::application::FullState,
     widgets::{
-        loader::WidgetInstance, toolbar::FancyToolbar, weg::SeelenWeg,
+        manager::WIDGET_MANAGER, toolbar::FancyToolbar, weg::SeelenWeg,
         window_manager::instance::WindowManagerV2,
     },
     windows_api::monitor::MonitorView,
@@ -25,8 +18,6 @@ pub struct SluMonitorInstance {
     pub toolbar: Option<FancyToolbar>,
     pub weg: Option<SeelenWeg>,
     pub wm: Option<WindowManagerV2>,
-    // new widgets storage
-    pub widgets: HashMap<WidgetId, WidgetInstance>,
 }
 
 impl SluMonitorInstance {
@@ -38,7 +29,6 @@ impl SluMonitorInstance {
             toolbar: None,
             weg: None,
             wm: None,
-            widgets: HashMap::new(),
         };
         instance.load_settings(settings)?;
         instance.ensure_positions()?;
@@ -82,37 +72,6 @@ impl SluMonitorInstance {
         Ok(())
     }
 
-    pub fn reload_widgets(&mut self) -> Result<()> {
-        // unload uninstalled widgets
-        self.widgets
-            .retain(|key, _| RESOURCES.widgets.contains(key));
-
-        let mut to_load = Vec::new();
-        RESOURCES.widgets.scan(|k, w| {
-            if w.loader != WidgetLoader::Legacy {
-                to_load.push((k.clone(), w.clone()));
-            }
-        });
-
-        let state = FULL_STATE.load();
-        for (key, widget) in to_load {
-            if !state.is_widget_enable_on_monitor(&widget, &self.main_target_id) {
-                self.widgets.remove(&key); // unload disabled widgets
-                continue;
-            }
-
-            if !self.widgets.contains_key(&key) {
-                let monitor_id: Option<&str> = match widget.instances {
-                    WidgetInstanceMode::ReplicaByMonitor => Some(&self.main_target_id),
-                    _ => None,
-                };
-                self.widgets
-                    .insert(key.clone(), WidgetInstance::load(&widget, monitor_id)?);
-            }
-        }
-        Ok(())
-    }
-
     pub fn load_settings(&mut self, state: &FullState) -> Result<()> {
         if state.is_bar_enabled_on_monitor(&self.main_target_id) {
             self.add_toolbar()?;
@@ -132,7 +91,7 @@ impl SluMonitorInstance {
             self.wm = None;
         }
 
-        self.reload_widgets()?;
+        WIDGET_MANAGER.refresh()?;
         Ok(())
     }
 }

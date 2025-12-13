@@ -5,11 +5,13 @@
 ### refactor
 
 - entire rewrite of the bluetooth module.
+- internal widgets loader.
 
 ### enhancements
 
 - expose complementary colors of the system accent to css.
 - change theme config url from input to local file selector.
+- lazy widgets initialization.
 
 ### fix
 

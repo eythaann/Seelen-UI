@@ -1,7 +1,7 @@
 use seelen_core::{handlers::SeelenEvent, resource::ResourceKind};
 use tauri::Emitter;
 
-use crate::{app::get_app_handle, error::Result};
+use crate::{app::get_app_handle, error::Result, widgets::manager::WIDGET_MANAGER};
 
 use super::ResourceManager;
 
@@ -12,6 +12,7 @@ impl ResourceManager {
             widgets.push(v.clone());
         });
         get_app_handle().emit(SeelenEvent::StateWidgetsChanged, widgets)?;
+        WIDGET_MANAGER.refresh()?;
         Ok(())
     }
 

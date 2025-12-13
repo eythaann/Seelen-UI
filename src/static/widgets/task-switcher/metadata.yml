@@ -3,5 +3,5 @@ icon: PiSelectionForegroundDuotone
 metadata:
   displayName: !extend i18n/display_name.yml
 instances: Single
-loader: Legacy
+loader: Internal
 hidden: true

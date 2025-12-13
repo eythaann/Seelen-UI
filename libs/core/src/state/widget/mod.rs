@@ -32,6 +32,8 @@ pub struct Widget {
     pub settings: WidgetSettingsDeclarationList,
     /// Widget configuration preset
     pub preset: WidgetPreset,
+    /// If true, the widget webview won't be created until it is requested via trigger action.
+    pub lazy: bool,
     /// How many instances are allowed of this widget.
     pub instances: WidgetInstanceMode,
     /// If true, the widget will not be shown on the Settings Navigation as a Tab, but it will
@@ -178,7 +180,7 @@ impl Widget {
 pub struct WidgetTriggerPayload {
     pub id: WidgetId,
     pub monitor_id: Option<MonitorId>,
-    pub instance_id: Option<String>,
+    pub instance_id: Option<uuid::Uuid>,
     /// Desired position to show the widget
     pub desired_position: Option<(i32, i32)>,
     /// This will be used to align the widget at the desired position
@@ -220,10 +222,19 @@ impl WidgetTriggerPayload {
     }
 }
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
 #[ts(repr(enum = name))]
 pub enum Alignment {
     Start,
     Center,
     End,
+}
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
+pub enum WidgetStatus {
+    Pending,
+    Creating,
+    Mounting,
+    Ready,
+    CrashedOnLoad,
 }

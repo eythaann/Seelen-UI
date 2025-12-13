@@ -10,6 +10,7 @@ export function App() {
       widget.webview.center();
     });
     widget.autoSizeWebviewByElement(document.getElementById("root")!);
+    widget.ready();
   }, []);
 
   return <Bar />;

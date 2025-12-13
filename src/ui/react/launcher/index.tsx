@@ -10,6 +10,7 @@ import { initStore, store } from "./modules/shared/store/infra.ts";
 import { App } from "./App.tsx";
 import { registerDocumentEvents } from "./events.ts";
 import i18n, { loadTranslations } from "./i18n/index.ts";
+import { Widget } from "@seelen-ui/lib";
 
 import "@shared/styles/reset.css";
 import "@shared/styles/colors.css";
@@ -17,6 +18,9 @@ import "@shared/styles/colors.css";
 await declareDocumentAsLayeredHitbox();
 await loadTranslations();
 await initStore();
+
+await Widget.getCurrent().init();
+
 registerDocumentEvents();
 disableAnimationsOnPerformanceMode();
 

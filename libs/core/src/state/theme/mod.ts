@@ -10,9 +10,6 @@ import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mo
 import { List } from "../../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { Widget } from "../widget/mod.ts";
-import { Settings } from "../settings/mod.ts";
-import { UIColors } from "../../system_state/ui_colors.ts";
-import { startDateCssVariables } from "./theming.ts";
 
 export class ThemeList extends List<ITheme> {
   static getAsync(): Promise<ThemeList> {
@@ -87,7 +84,7 @@ export class Theme {
     const styleElement = document.createElement("style");
     styleElement.id = this.id;
     styleElement.textContent = styles;
-    styleElement.setAttribute("data-resource-type", "theme");
+    styleElement.setAttribute("data-source", "theme");
     document.head.appendChild(styleElement);
   }
 
@@ -113,34 +110,11 @@ function iterateVariableDefinitions(
   }
 }
 
-export function removeAllThemeStyles(): void {
-  const elements = document.querySelectorAll(`style[data-resource-type="theme"]`);
+function removeAllThemeStyles(): void {
+  const elements = document.querySelectorAll(`style[data-source="theme"]`);
   for (const element of elements) {
-    element.remove();
+    if (element instanceof HTMLStyleElement) {
+      element.remove();
+    }
   }
-}
-
-/**
- * This will apply the active themes for this widget, and automatically update
- * when the themes or settings change. Also will add the systehm ui colors to the document.
- */
-export async function startThemingTool(): Promise<void> {
-  let settings = await Settings.getAsync();
-  let themes = await ThemeList.getAsync();
-
-  await ThemeList.onChange((newThemes) => {
-    themes = newThemes;
-    themes.applyToDocument(settings.activeThemes, settings.byTheme);
-  });
-
-  await Settings.onChange((newSettings) => {
-    settings = newSettings;
-    themes.applyToDocument(settings.activeThemes, settings.byTheme);
-  });
-
-  (await UIColors.getAsync()).setAsCssVariables();
-  await UIColors.onChange((colors) => colors.setAsCssVariables());
-
-  themes.applyToDocument(settings.activeThemes, settings.byTheme);
-  startDateCssVariables();
 }

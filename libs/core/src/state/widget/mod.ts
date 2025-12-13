@@ -3,10 +3,11 @@ import {
   type Widget as IWidget,
   type WidgetId,
   WidgetPreset,
+  WidgetStatus,
   type WidgetTriggerPayload,
   type WsdGroupEntry,
 } from "@seelen-ui/types";
-import { SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
+import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 import { List } from "../../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { getCurrentWebviewWindow, type WebviewWindow } from "@tauri-apps/api/webviewWindow";
@@ -14,9 +15,9 @@ import { decodeBase64Url } from "@std/encoding";
 import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";
-import { autoSizeWebviewBasedOnContent } from "./sizing.ts";
-import type { EventCallback } from "@tauri-apps/api/event";
+import { WidgetAutoSizer } from "./sizing.ts";
 import { adjustPostionByPlacement } from "./positioning.ts";
+import { startThemingTool } from "../theme/theming.ts";
 
 export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
 export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
@@ -63,6 +64,8 @@ export class Widget {
   public readonly decoded: WidgetInformation;
   /** current webview window */
   public readonly webview: WebviewWindow;
+
+  private autoSizer?: WidgetAutoSizer;
 
   private constructor(widget: IWidget) {
     this.def = widget;
@@ -147,8 +150,8 @@ export class Widget {
       ...this.applyInvisiblePreset(),
       // Desktop widgets are always on bottom
       this.webview.setAlwaysOnBottom(true),
+      this.persistPositionAndSize(),
     ]);
-    await this.persistPositionAndSize();
   }
 
   /** Will apply the recommended settings for an overlay widget */
@@ -157,12 +160,13 @@ export class Widget {
       ...this.applyInvisiblePreset(),
       // Overlay widgets are always on top
       this.webview.setAlwaysOnTop(true),
+      this.persistPositionAndSize(),
     ]);
   }
 
   /** Will apply the recommended settings for a popup widget */
   private async applyPopupPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset(), this.webview.setResizable(false)]);
+    await Promise.all([...this.applyInvisiblePreset()]);
 
     // auto close on focus lost
     const closeOnTimeout = debounce(() => {
@@ -240,7 +244,7 @@ export class Widget {
 
   // this will monitor the element and resize the webview accordingly
   public autoSizeWebviewByElement(element: HTMLElement = document.body): void {
-    autoSizeWebviewBasedOnContent(this.webview, element);
+    this.autoSizer = new WidgetAutoSizer(this.webview, element);
   }
 
   /**
@@ -262,6 +266,7 @@ export class Widget {
         await this.applyPopupPreset();
         break;
     }
+    await startThemingTool();
   }
 
   /**
@@ -269,25 +274,22 @@ export class Widget {
    * Other tasks as showing the widget will be performed depending on the preset.
    */
   public async ready(): Promise<void> {
+    await this.autoSizer?.execute();
+
     if (this.def.preset === WidgetPreset.Desktop || this.def.preset === WidgetPreset.Overlay) {
       await this.webview.show();
     }
-    // todo pool pending triggers
+
+    // this will mark the widget as ready, and send pending trigger event if exists
+    await invoke(SeelenCommand.SetCurrentWidgetStatus, { status: WidgetStatus.Ready });
   }
 
   public onTrigger(cb: (args: WidgetTriggerPayload) => void): void {
-    const fn: EventCallback<WidgetTriggerPayload> = ({ payload }) => {
-      const { id, monitorId, instanceId } = payload;
-      if (
-        id !== this.id ||
-        (monitorId && monitorId !== this.decoded.monitorId) ||
-        (instanceId && instanceId !== this.decoded.instanceId)
-      ) {
-        return;
-      }
+    this.webview.listen<WidgetTriggerPayload>(SeelenEvent.WidgetTriggered, ({ payload }) => {
+      // fix for cutted popups, ensure correct size on trigger.
+      // await this.autoSizer?.execute();
       cb(payload);
-    };
-    subscribe(SeelenEvent.WidgetTriggered, fn.bind(this));
+    });
   }
 }
 

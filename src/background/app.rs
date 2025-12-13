@@ -1,18 +1,15 @@
-use std::{
-    collections::HashMap,
-    sync::{atomic::AtomicBool, Arc, LazyLock},
-};
+use std::sync::{atomic::AtomicBool, Arc, LazyLock};
 
 use parking_lot::Mutex;
-use seelen_core::{handlers::SeelenEvent, system_state::MonitorId};
+use seelen_core::system_state::MonitorId;
 use slu_ipc::messages::SvcAction;
-use tauri::{AppHandle, Listener, Wry};
+use tauri::{AppHandle, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
 use crate::{
     app_instance::SluMonitorInstance,
     cli::ServicePipe,
-    error::{Result, ResultLogExt},
+    error::Result,
     hook::register_win_hook,
     log_error,
     modules::{
@@ -27,8 +24,6 @@ use crate::{
     virtual_desktops::get_vd_manager,
     widgets::{
         launcher::SeelenRofi,
-        loader::WidgetInstance,
-        task_switcher::TaskSwitcher,
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
         window_manager::instance::WindowManagerV2,
@@ -55,9 +50,6 @@ pub struct Seelen {
     pub instances: Vec<SluMonitorInstance>,
     pub wall: Option<SeelenWall>,
     pub rofi: Option<SeelenRofi>,
-    pub task_switcher: Option<TaskSwitcher>,
-    #[allow(dead_code)]
-    pub widgets: HashMap<String, WidgetInstance>,
 }
 
 /* ============== Getters ============== */
@@ -85,13 +77,6 @@ impl Seelen {
             let wall = SeelenWall::new()?;
             log_error!(wall.update_position());
             self.wall = Some(wall)
-        }
-        Ok(())
-    }
-
-    fn add_task_switcher(&mut self) -> Result<()> {
-        if self.task_switcher.is_none() {
-            self.task_switcher = Some(TaskSwitcher::new()?);
         }
         Ok(())
     }
@@ -138,7 +123,6 @@ impl Seelen {
             monitor.load_settings(state)?;
         }
 
-        self.add_task_switcher()?;
         self.refresh_windows_positions()?;
         Ok(())
     }
@@ -170,7 +154,6 @@ impl Seelen {
         // order is important
         create_background_window()?;
         declare_system_events_handlers()?;
-        self.add_task_switcher()?;
 
         if state.is_rofi_enabled() {
             self.add_rofi()?;
@@ -205,15 +188,6 @@ impl Seelen {
         if state.are_shortcuts_enabled() {
             ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
         }
-
-        get_app_handle().listen(SeelenEvent::StateWidgetsChanged, |_| {
-            std::thread::spawn(|| {
-                let mut guard = trace_lock!(SEELEN);
-                for monitor in &mut guard.instances {
-                    monitor.reload_widgets().log_error();
-                }
-            });
-        });
 
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())

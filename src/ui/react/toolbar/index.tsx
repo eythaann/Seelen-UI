@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { registerStoreEvents, store } from "./modules/shared/store/infra.ts";
 
 import { App } from "./app.tsx";
+import { Widget } from "@seelen-ui/lib";
 
 import i18n, { loadTranslations } from "./i18n/index.ts";
 
@@ -20,6 +21,8 @@ await declareDocumentAsLayeredHitbox();
 await registerStoreEvents();
 await loadTranslations();
 disableAnimationsOnPerformanceMode();
+
+await Widget.getCurrent().init();
 
 const container = getRootContainer();
 createRoot(container).render(

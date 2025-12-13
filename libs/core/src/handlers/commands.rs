@@ -162,6 +162,7 @@ slu_commands_declaration! {
 
     // Widgets
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
+    SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
 
     // Shell

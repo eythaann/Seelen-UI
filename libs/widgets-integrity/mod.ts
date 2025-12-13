@@ -2,13 +2,12 @@
 // but was fixed on https://github.com/tauri-apps/wry/pull/1531 so now this script is used to initialize
 // the console logger to capture any error on the main script
 
-import { wrapConsoleV2 } from "./ConsoleWrapper.ts";
-wrapConsoleV2();
+import "./ConsoleWrapper.ts";
 
 import type { FocusedApp, Widget } from "@seelen-ui/lib/types";
 import { _invoke, WebviewInformation } from "libs/widgets-integrity/_tauri";
 
-import { removeDefaultWebviewActions } from "@shared/setup.ts";
+import { removeDefaultWebviewActions } from "libs/widgets-integrity/setup.ts";
 
 const indexJsCode = fetch("./index.js").then((res) => res.text());
 
@@ -30,11 +29,13 @@ document.head.appendChild(script);
 // remove default browser actions, we don't need them
 removeDefaultWebviewActions();
 
+// trigger garbage collection
 setTimeout(() => {
   window.gc?.();
 }, 1000);
 
 if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
+  // workaround for tauri/webview2 memory leak
   setTimeout(async () => {
     const app = await _invoke<FocusedApp>("get_focused_app");
     if (!app.exe?.endsWith("seelen-ui.exe")) {

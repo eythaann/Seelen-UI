@@ -7,5 +7,6 @@ instances: Single
 loader: Internal
 preset: Popup
 hidden: true
+lazy: true
 plugins:
   - !extend ./toolbar-plugin.yml

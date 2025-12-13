@@ -1,40 +1,81 @@
 pub mod launcher;
 pub mod loader;
+pub mod manager;
 pub mod popups;
 pub mod task_switcher;
 pub mod toolbar;
 pub mod wallpaper_manager;
+pub mod webview;
 pub mod weg;
 pub mod window_manager;
 
-use std::path::PathBuf;
+use std::{path::PathBuf, sync::LazyLock};
 
-use seelen_core::{handlers::SeelenEvent, state::WidgetTriggerPayload};
+use seelen_core::{
+    handlers::SeelenEvent,
+    state::{WidgetStatus, WidgetTriggerPayload},
+};
 use tauri::{Emitter, Manager};
 
 use crate::{
     app::get_app_handle,
     error::Result,
-    utils::{constants::SEELEN_COMMON, WidgetWebviewLabel},
+    state::application::FULL_STATE,
+    utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap, WidgetWebviewLabel},
+    widgets::manager::WIDGET_MANAGER,
 };
+
+static PENDING_TRIGGERS: LazyLock<SyncHashMap<WidgetWebviewLabel, WidgetTriggerPayload>> =
+    LazyLock::new(SyncHashMap::new);
+
+#[tauri::command(async)]
+pub fn set_current_widget_status(
+    webview: tauri::WebviewWindow,
+    status: WidgetStatus,
+) -> Result<()> {
+    let label = WidgetWebviewLabel::try_from_raw(webview.label())?;
+    WIDGET_MANAGER.set_status(&label, status);
+
+    if let Some(pending) = PENDING_TRIGGERS.remove(&label) {
+        get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &pending)?;
+    }
+    Ok(())
+}
 
 #[tauri::command(async)]
 pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
-    get_app_handle().emit(SeelenEvent::WidgetTriggered, &payload)?;
+    let state = FULL_STATE.load();
+    if !state.is_widget_enabled(&payload.id) {
+        return Err("Can't trigger a disabled widget".into());
+    }
+
+    let monitor_id = payload.monitor_id.as_ref().map(|id| id.to_string());
+    let label = WidgetWebviewLabel::new(
+        &payload.id,
+        monitor_id.as_deref(),
+        payload.instance_id.as_ref(),
+    );
+
+    if !WIDGET_MANAGER.is_ready(&label) {
+        log::warn!(
+            "Trying to trigger widget that is not ready: {}",
+            label.decoded
+        );
+        PENDING_TRIGGERS.upsert(label.clone(), payload);
+
+        WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
+            c.start_webview(&label);
+        });
+        return Ok(());
+    }
+
+    get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &payload)?;
     Ok(())
 }
 
 #[tauri::command(async)]
 pub fn get_self_window_handle(webview: tauri::WebviewWindow<tauri::Wry>) -> Result<isize> {
     Ok(webview.hwnd()?.0 as isize)
-}
-
-pub trait TrustedWidget {
-    const ID: &'static str;
-
-    fn title() -> String {
-        Self::ID.to_string()
-    }
 }
 
 pub fn show_settings() -> Result<()> {

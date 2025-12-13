@@ -5,6 +5,7 @@
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import { t } from "./i18n";
   import BluetoothDevice from "./components/BluetoothDevice.svelte";
+  import { Widget } from "@seelen-ui/lib";
 
   // Filter devices to avoid duplicates (same name, prefer non-LE version)
   const uniqueDevices = $derived.by(() => {
@@ -55,6 +56,10 @@
       });
     }
   }
+
+  $effect(() => {
+    Widget.getCurrent().ready();
+  });
 </script>
 
 <div class="slu-standard-popover bluetooth-popup">

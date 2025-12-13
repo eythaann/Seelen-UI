@@ -1,4 +1,4 @@
-import { SeelenCommand, startThemingTool } from "@seelen-ui/lib";
+import { SeelenCommand, Widget } from "@seelen-ui/lib";
 import { getRootContainer } from "@shared";
 import { declareDocumentAsLayeredHitbox } from "@shared/layered";
 import { disableAnimationsOnPerformanceMode } from "@shared/performance";
@@ -18,7 +18,7 @@ import "./styles/global.css";
 
 await declareDocumentAsLayeredHitbox();
 await loadTranslations();
-await startThemingTool();
+await Widget.getCurrent().init();
 
 disableAnimationsOnPerformanceMode();
 

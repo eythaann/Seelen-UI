@@ -9,6 +9,7 @@ pub mod virtual_desktop;
 mod winver;
 
 use base64::Engine;
+use seelen_core::resource::WidgetId;
 use uuid::Uuid;
 pub use winver::*;
 
@@ -180,11 +181,14 @@ pub fn convert_file_to_src(path: &Path) -> String {
     format!("{base}{encoded}")
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct WidgetWebviewLabel {
     /// this should be used as the real webview label
     pub raw: String,
     /// this is the decoded label, useful for debugging and logging
     pub decoded: String,
+    /// widget id from this label was created
+    pub widget_id: WidgetId,
 }
 
 impl WidgetWebviewLabel {
@@ -213,7 +217,26 @@ impl WidgetWebviewLabel {
         Self {
             raw: base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label),
             decoded: label,
+            widget_id: WidgetId::from(widget_id),
         }
+    }
+
+    pub fn try_from_raw(raw: &str) -> Result<Self> {
+        let decoded = base64::engine::general_purpose::URL_SAFE_NO_PAD.decode(raw)?;
+        let decoded = String::from_utf8(decoded)?;
+        let widget_id = WidgetId::from(decoded.split('?').next().expect("Invalid label"));
+
+        Ok(Self {
+            raw: raw.to_string(),
+            decoded,
+            widget_id,
+        })
+    }
+}
+
+impl std::fmt::Display for WidgetWebviewLabel {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.decoded)
     }
 }
 
