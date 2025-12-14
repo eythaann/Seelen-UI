@@ -61,7 +61,7 @@ export class Theme {
         @property ${def.name} {
           syntax: "${def.syntax}";
           inherits: true;
-          initial-value: ${def.initialValue}${"initialValueUnit" in def ? def.initialValueUnit : ""}
+          initial-value: ${def.initialValue}${"initialValueUnit" in def ? def.initialValueUnit : ""};
         }
       `;
     });
@@ -75,7 +75,7 @@ export class Theme {
     styles += `@layer ${layerName}-shared {\n${this.sharedStyles}\n}\n`;
 
     const variablesContent = Object.entries(varValues)
-      .filter(([name]) => isValidCssVariableName(name))
+      .filter(([name, _value]) => isValidCssVariableName(name))
       .map(([name, value]) => `${name}: ${value || ""};`)
       .join("\n");
     styles += `@layer ${layerName} {\n:root {${variablesContent}}\n${this.styles[widgetId] ?? ""}\n}\n`;

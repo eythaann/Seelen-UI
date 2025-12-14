@@ -22,6 +22,7 @@
 - options field on theme settings rendering an input instead of selector.
 - missing events on app windows hook.
 - wasted space reserved for tiling window manager when dock/toolbar are disabled on monitor.
+- fix missing variables values on default percentages for theme variables.
 
 ## [2.4.9]
 

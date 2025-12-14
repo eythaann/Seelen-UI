@@ -75,7 +75,11 @@ pub enum ThemeVariableDefinition {
     /// --var-name: 10%
     /// --var-name: 10vw
     /// ```
-    #[serde(rename = "<length>")]
+    #[serde(
+        rename = "<length-percentage>",
+        alias = "<length>",
+        alias = "<percentage>"
+    )]
     Length(ThemeVariableWithUnit<f64>),
     /// This will allow to users to set any number, without units.
     /// Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/number \
