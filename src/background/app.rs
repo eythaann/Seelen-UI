@@ -109,7 +109,7 @@ impl Seelen {
             false => WindowManagerV2::clear_state(),
         }
 
-        match state.is_rofi_enabled() {
+        match state.is_launcher_enabled() {
             true => self.add_rofi()?,
             false => self.rofi = None,
         }
@@ -155,7 +155,7 @@ impl Seelen {
         create_background_window()?;
         declare_system_events_handlers()?;
 
-        if state.is_rofi_enabled() {
+        if state.is_launcher_enabled() {
             self.add_rofi()?;
         }
 

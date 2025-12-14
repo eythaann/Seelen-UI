@@ -21,6 +21,7 @@
 - missing messages to the service on startup.
 - options field on theme settings rendering an input instead of selector.
 - missing events on app windows hook.
+- wasted space reserved for tiling window manager when dock/toolbar are disabled on monitor.
 
 ## [2.4.9]
 

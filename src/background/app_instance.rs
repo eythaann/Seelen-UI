@@ -36,16 +36,16 @@ impl SluMonitorInstance {
     }
 
     pub fn ensure_positions(&mut self) -> Result<()> {
-        let win32_monitor = self.view.as_win32_monitor()?;
+        let monitor = self.view.as_win32_monitor()?;
 
         if let Some(bar) = &mut self.toolbar {
-            bar.set_position(win32_monitor.handle())?;
+            bar.set_position(&monitor)?;
         }
         if let Some(weg) = &mut self.weg {
-            weg.set_position(win32_monitor.handle())?;
+            weg.set_position(&monitor)?;
         }
         if let Some(wm) = &mut self.wm {
-            wm.set_position(win32_monitor.handle())?;
+            wm.set_position(&monitor)?;
             WindowManagerV2::force_retiling()?;
         }
         Ok(())

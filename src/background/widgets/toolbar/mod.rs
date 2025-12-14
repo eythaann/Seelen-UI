@@ -7,15 +7,12 @@ use crate::{
     log_error,
     state::application::FULL_STATE,
     widgets::WebviewArgs,
-    windows_api::{AppBarData, WindowsApi},
+    windows_api::{monitor::Monitor, AppBarData, WindowsApi},
 };
 use base64::Engine;
 use seelen_core::state::{FancyToolbarSide, HideMode};
 use tauri::WebviewWindow;
-use windows::Win32::{
-    Foundation::{HWND, RECT},
-    Graphics::Gdi::HMONITOR,
-};
+use windows::Win32::Foundation::{HWND, RECT};
 
 pub struct FancyToolbar {
     window: WebviewWindow,
@@ -93,21 +90,20 @@ impl FancyToolbar {
         Ok(window)
     }
 
-    pub fn get_toolbar_height_on_monitor(monitor: HMONITOR) -> Result<i32> {
+    pub fn get_toolbar_height_on_monitor(monitor: &Monitor) -> Result<i32> {
         let state = FULL_STATE.load();
         let settings = &state.settings.by_widget.fancy_toolbar;
-        let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(monitor)?;
-        let text_scale_factor = WindowsApi::get_text_scale_factor()?;
-        Ok((settings.height as f64 * monitor_scale_factor * text_scale_factor) as i32)
+        let scale_factor = monitor.scale_factor()?;
+        Ok((settings.height as f64 * scale_factor) as i32)
     }
 
-    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
+    pub fn set_position(&mut self, monitor: &Monitor) -> Result<()> {
         let hwnd = HWND(self.hwnd()?.0);
 
         let state = FULL_STATE.load();
         let settings = &state.settings.by_widget.fancy_toolbar;
 
-        let monitor_info = WindowsApi::monitor_info(monitor)?;
+        let monitor_info = WindowsApi::monitor_info(monitor.handle())?;
         let rc_monitor = monitor_info.monitorInfo.rcMonitor;
 
         let real_height = Self::get_toolbar_height_on_monitor(monitor)?;
@@ -152,7 +148,7 @@ impl FancyToolbar {
         if self.webview_rect == WindowsApi::get_outer_window_rect(hwnd)? {
             return Ok(()); // position is ok no need to reposition
         }
-        self.set_position(WindowsApi::monitor_from_window(hwnd))?;
+        self.set_position(&Monitor::from(WindowsApi::monitor_from_window(hwnd)))?;
         Ok(())
     }
 }

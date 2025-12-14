@@ -5,9 +5,7 @@ use seelen_core::{
 };
 use std::sync::Arc;
 use tauri::{Listener, WebviewWindow};
-use windows::Win32::{
-    Foundation::HWND, Graphics::Gdi::HMONITOR, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS,
-};
+use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS};
 
 use crate::{
     app::get_app_handle,
@@ -19,7 +17,7 @@ use crate::{
     widgets::{
         toolbar::FancyToolbar, weg::SeelenWeg, window_manager::state::WM_STATE, WebviewArgs,
     },
-    windows_api::WindowsApi,
+    windows_api::{monitor::Monitor, WindowsApi},
 };
 
 pub struct WindowManagerV2 {
@@ -101,16 +99,19 @@ impl WindowManagerV2 {
         Ok(window)
     }
 
-    pub fn set_position(&self, monitor: HMONITOR) -> Result<()> {
+    pub fn set_position(&self, monitor: &Monitor) -> Result<()> {
         let state = FULL_STATE.load();
         let toolbar_config = &state.settings.by_widget.fancy_toolbar;
         let weg_config = &state.settings.by_widget.weg;
 
+        let is_toolbar_enabled = state.is_bar_enabled_on_monitor(&monitor.stable_id2()?);
+        let is_weg_enabled = state.is_weg_enabled_on_monitor(&monitor.stable_id2()?);
+
         let hwnd = HWND(self.hwnd()?.0);
-        let monitor_info = WindowsApi::monitor_info(monitor)?;
+        let monitor_info = WindowsApi::monitor_info(monitor.handle())?;
 
         let mut rect = monitor_info.monitorInfo.rcMonitor;
-        if toolbar_config.enabled && toolbar_config.hide_mode != HideMode::Always {
+        if is_toolbar_enabled && toolbar_config.hide_mode != HideMode::Always {
             let toolbar_size = FancyToolbar::get_toolbar_height_on_monitor(monitor)?;
             match state.settings.by_widget.fancy_toolbar.position {
                 FancyToolbarSide::Top => {
@@ -122,7 +123,7 @@ impl WindowManagerV2 {
             }
         }
 
-        if weg_config.enabled && weg_config.hide_mode != HideMode::Always {
+        if is_weg_enabled && weg_config.hide_mode != HideMode::Always {
             let weg_size = SeelenWeg::get_weg_size_on_monitor(monitor)?;
             match weg_config.position {
                 SeelenWegSide::Top => {
