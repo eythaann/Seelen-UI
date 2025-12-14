@@ -30,8 +30,7 @@ impl WidgetManager {
     pub fn is_ready(&self, label: &WidgetWebviewLabel) -> bool {
         self.groups
             .get(&label.widget_id, |c| {
-                c.instances
-                    .any(|(k, i)| k == label && i.state == WidgetStatus::Ready)
+                c.instances.any(|(k, i)| k == label && i.is_ready())
             })
             .unwrap_or(false)
     }
@@ -39,7 +38,7 @@ impl WidgetManager {
     pub fn set_status(&self, label: &WidgetWebviewLabel, status: WidgetStatus) {
         self.groups.get(&label.widget_id, |c| {
             c.instances.get(label, |instance| {
-                instance.state = status;
+                instance.set_status(status);
             });
         });
     }

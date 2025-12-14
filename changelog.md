@@ -12,6 +12,7 @@
 - expose complementary colors of the system accent to css.
 - change theme config url from input to local file selector.
 - lazy widgets initialization.
+- auto closing of popup widgets to save resources.
 - show paused message on wallpaper manager.
 
 ### fix

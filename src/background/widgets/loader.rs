@@ -6,7 +6,7 @@ use uuid::Uuid;
 use crate::{
     state::application::FULL_STATE,
     utils::{lock_free::SyncHashMap, WidgetWebviewLabel},
-    widgets::webview::WidgetWebview,
+    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview},
 };
 
 pub struct WidgetContainer {
@@ -54,30 +54,65 @@ impl WidgetContainer {
 pub struct WidgetInstance {
     pub label: WidgetWebviewLabel,
     window: Option<WidgetWebview>,
-    pub state: WidgetStatus,
+    _status: WidgetStatus,
 }
 
 impl WidgetInstance {
     fn create(widget: &Widget, monitor_id: Option<&str>, instance_id: Option<&Uuid>) -> Self {
         let label = WidgetWebviewLabel::new(&widget.id, monitor_id, instance_id);
-        log::info!("Creating {:?}", label.decoded);
+        log::info!("Registering widget {label}");
         Self {
             label,
             window: None,
-            state: WidgetStatus::Pending,
+            _status: WidgetStatus::Pending,
         }
     }
 
+    pub fn status(&self) -> &WidgetStatus {
+        &self._status
+    }
+
+    pub fn set_status(&mut self, status: WidgetStatus) {
+        log::trace!("{} status changed to: {:?}", self.label, status);
+        self._status = status;
+    }
+
+    pub fn is_ready(&self) -> bool {
+        self.window.is_some() && self.status() == &WidgetStatus::Ready
+    }
+
     fn start_webview(&mut self, definition: &Widget) {
-        if self.state == WidgetStatus::Pending {
-            self.state = WidgetStatus::Creating;
-            self.window = WidgetWebview::create(definition, &self.label).ok();
+        if self.status() == &WidgetStatus::Pending {
+            self.set_status(WidgetStatus::Creating);
+
+            match WidgetWebview::create(definition, &self.label) {
+                Ok(window) => {
+                    let label = self.label.clone();
+                    window.0.on_window_event(move |event| {
+                        if let tauri::WindowEvent::Destroyed = event {
+                            WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
+                                c.instances.get(&label, |w| {
+                                    w.window = None;
+                                    w.set_status(WidgetStatus::Pending);
+                                });
+                            });
+                        }
+                    });
+
+                    self.window = Some(window);
+                    self.set_status(WidgetStatus::Mounting);
+                }
+                Err(err) => {
+                    log::error!("Failed to create webview: {}", err);
+                    self.set_status(WidgetStatus::CrashedOnLoad);
+                }
+            }
         }
     }
 }
 
 impl Drop for WidgetInstance {
     fn drop(&mut self) {
-        log::info!("Dropping {:?}", self.label.decoded);
+        log::info!("Dropping {:?}", self.label);
     }
 }

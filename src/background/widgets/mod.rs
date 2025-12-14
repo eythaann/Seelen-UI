@@ -57,10 +57,7 @@ pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
     );
 
     if !WIDGET_MANAGER.is_ready(&label) {
-        log::warn!(
-            "Trying to trigger widget that is not ready: {}",
-            label.decoded
-        );
+        log::warn!("Trying to trigger widget that is not ready: {label}");
         PENDING_TRIGGERS.upsert(label.clone(), payload);
 
         WIDGET_MANAGER.groups.get(&label.widget_id, |c| {

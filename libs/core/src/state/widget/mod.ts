@@ -194,10 +194,10 @@ export class Widget {
   private async applyPopupPreset(): Promise<void> {
     await Promise.all([...this.applyInvisiblePreset()]);
 
-    // closing when not in use to save resources
+    // auto close after 1 minute when not in use to save resources
     const closeOnTimeout = debounce(() => {
-      // this.webview.close(); todo
-    }, 10_000);
+      this.webview.close();
+    }, 60_000);
 
     const hideWebview = debounce(() => {
       this.webview.hide();
