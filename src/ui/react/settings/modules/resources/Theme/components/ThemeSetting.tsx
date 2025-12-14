@@ -72,7 +72,7 @@ function renderInput(
       );
     }
 
-    case "<length>": {
+    case "<length-percentage>": {
       const numericValue = userStoredValue ? parseFloat(userStoredValue) : definition.initialValue;
       const unit = userStoredValue?.replace(/[\d.]+/, "") || definition.initialValueUnit;
 
