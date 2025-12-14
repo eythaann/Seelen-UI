@@ -167,6 +167,12 @@ jobs:
           echo "Signing ${PATH2}..."
           tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH2"
 
+      - name: Remove self-signed MSIX files
+        run: |
+          echo "Removing self-signed .msix files from bundles..."
+          find ./bundles -name "*.msix" -type f -delete
+          echo "Self-signed .msix files removed (Store-signed MSIX will be added later by msix.yml workflow)"
+
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
         with:

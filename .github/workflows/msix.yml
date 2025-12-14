@@ -1,4 +1,4 @@
-name: Upload store MSIX to release
+name: Pull MSIX from Store
 
 permissions:
   contents: write
@@ -39,8 +39,9 @@ jobs:
       - name: Upload store MSIX to release
         uses: JasonWei512/Upload-Microsoft-Store-MSIX-Package-to-GitHub-Release@v1
         with:
-          store-id: 9p67c2d4t9fb
+          store-id: 9P67C2D4T9FB
           token: ${{ secrets.GITHUB_TOKEN }}
+          asset-name-pattern: Seelen.UI_{version}_{arch}
 
   msix-to-winget:
     name: MSIX to Winget
