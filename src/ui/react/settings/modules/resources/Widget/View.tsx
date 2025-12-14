@@ -41,11 +41,11 @@ export function WidgetConfiguration({
   const [selectedInstance, setSelectedInstance] = useState<string | null>(null);
 
   const widget = useSelector(selectWidgetDeclaration(widgetId));
-  const rootConfig = useSelector(selectWidgetConfig(widgetId)) ||
-    { enabled: true };
-  const monitorConfig = useSelector(
-    selectMonitorWidgetConfig(widgetId, monitorId),
-  );
+  const rootConfig = useSelector(selectWidgetConfig(widgetId)) || {
+    enabled: widget?.loader !== "Legacy" && !!widget?.metadata.bundled,
+  };
+
+  const monitorConfig = useSelector(selectMonitorWidgetConfig(widgetId, monitorId));
   const areDevToolsEnabled = useSelector(RootSelectors.devTools);
 
   const { t } = useTranslation();
@@ -82,9 +82,7 @@ export function WidgetConfiguration({
     d(RootActions.patchWidgetConfig({ widgetId, config: { [key]: value } }));
   };
 
-  const instances = Object.keys(rootConfig.$instances || {}).map((
-    instanceId,
-  ) => ({
+  const instances = Object.keys(rootConfig.$instances || {}).map((instanceId) => ({
     label: `Instance ${instanceId.slice(0, 6)}`,
     value: instanceId,
   }));
@@ -96,17 +94,14 @@ export function WidgetConfiguration({
     ...(monitorConfig || {}),
   };
 
-  const showToggleEnabled = !monitorId ||
-    widget.instances === "ReplicaByMonitor";
+  const showToggleEnabled = !monitorId || widget.instances === "ReplicaByMonitor";
 
   return (
     <>
       {showToggleEnabled && (
         <SettingsGroup>
           <SettingsOption>
-            <b>
-              {monitorId ? t("widget.enable_for_monitor") : t("widget.enable")}
-            </b>
+            <b>{monitorId ? t("widget.enable_for_monitor") : t("widget.enable")}</b>
             <Switch
               checked={config.enabled}
               onChange={(value) => {
@@ -148,7 +143,7 @@ export function WidgetConfiguration({
           </SettingsSubGroup>
           {!!monitorId && (
             <SettingsSubGroup label={<b>Raw Monitor Patch</b>}>
-              <pre>{monitorConfig ? JSON.stringify(monitorConfig, null, 2) : 'Inherited'}</pre>
+              <pre>{monitorConfig ? JSON.stringify(monitorConfig, null, 2) : "Inherited"}</pre>
             </SettingsSubGroup>
           )}
         </SettingsGroup>
