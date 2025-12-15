@@ -70,7 +70,7 @@ try {
 
   // sign installer with local certificate (this is for testing only) store changes the cert in the windows store
   let out2 = execSync(
-    `msixHeroCli sign -f ./.cert/Seelen.pfx -p seelen -t http://time.certum.pl ${installer_msix_path}`,
+    `msixHeroCli sign -f ./.cert/Seelen.pfx -p Seelen -t http://time.certum.pl ${installer_msix_path}`,
   );
   console.info(out2.toString());
 } catch (error) {
