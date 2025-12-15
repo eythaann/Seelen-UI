@@ -23,6 +23,7 @@ pub struct SeelenCommon {
     weg_items: PathBuf,
     toolbar_items: PathBuf,
     icons: PathBuf,
+    system_icon_pack: PathBuf,
     user_themes: PathBuf,
     bundled_themes: PathBuf,
     user_plugins: PathBuf,
@@ -64,6 +65,7 @@ impl SeelenCommon {
             weg_items: data_dir.join("seelenweg_items_v2.yml"),
             toolbar_items: data_dir.join("toolbar_items.yml"),
             icons: data_dir.join("iconpacks"),
+            system_icon_pack: cache_dir.join("gen-icon-pack"),
             sounds: data_dir.join("soundpacks"),
             user_themes: data_dir.join("themes"),
             bundled_themes: resource_dir.join("static/themes"),
@@ -121,6 +123,10 @@ impl SeelenCommon {
 
     pub fn history_path(&self) -> &Path {
         &self.history
+    }
+
+    pub fn system_icon_pack_path(&self) -> &Path {
+        &self.system_icon_pack
     }
 
     pub fn user_icons_path(&self) -> &Path {

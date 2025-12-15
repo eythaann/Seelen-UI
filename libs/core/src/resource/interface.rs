@@ -92,6 +92,7 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
     fn save(&self) -> Result<()> {
         let mut save_path = self.metadata().internal.path.to_path_buf();
         if save_path.is_dir() {
+            std::fs::create_dir_all(&save_path)?;
             save_path = search_resource_entrypoint(&save_path)
                 .unwrap_or_else(|| save_path.join("metadata.yml"));
         }

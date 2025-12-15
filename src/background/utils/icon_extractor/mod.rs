@@ -33,8 +33,7 @@ use std::path::{Path, PathBuf};
 use crate::error::Result;
 use crate::modules::apps::application::msix::MsixAppsManager;
 use crate::modules::start::application::START_MENU_MANAGER;
-use crate::state::application::FULL_STATE;
-use crate::trace_lock;
+use crate::resources::RESOURCES;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::date_based_hex_id;
 use crate::windows_api::types::AppUserModelId;
@@ -401,20 +400,17 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
     let is_lnk_file = origin_ext == "lnk";
     let is_url_file = origin_ext == "url";
 
-    let mutex = FULL_STATE.load().icon_packs.clone();
-    let mut icon_manager = trace_lock!(mutex);
     if is_exe_file || is_lnk_file || is_url_file {
-        if icon_manager.has_app_icon(None, Some(origin)) {
+        if RESOURCES.has_app_icon(None, Some(origin)) {
             return Ok(());
         }
-    } else if icon_manager.get_file_icon(origin).is_some() {
+    } else if RESOURCES.has_shared_file_icon(origin) {
         return Ok(());
     }
 
     let file_name = origin.file_name().ok_or("Failed to get file name")?;
     let filestem = origin.file_stem().ok_or("Failed to get file stem")?;
 
-    let root = SEELEN_COMMON.user_icons_path().join("system");
     let gen_icon_filename = format!("{}_{}.png", filestem.to_string_lossy(), date_based_hex_id());
     let mut gen_icon = Icon {
         base: Some(gen_icon_filename.clone()),
@@ -426,9 +422,12 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
     if origin_ext == "url" {
         if let Ok(icon) = get_icon_from_url_file(origin) {
             gen_icon.is_aproximately_square = is_aproximately_a_square(&icon);
-            icon.save(root.join(&gen_icon_filename))?;
-            icon_manager.add_system_app_icon(None, Some(origin), gen_icon);
-            icon_manager.write_system_icon_pack()?;
+            icon.save(
+                SEELEN_COMMON
+                    .system_icon_pack_path()
+                    .join(&gen_icon_filename),
+            )?;
+            RESOURCES.add_system_app_icon(None, Some(origin), gen_icon);
         }
         return Ok(());
     }
@@ -446,11 +445,8 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
             .extension()
             .is_some_and(|ext| ext.to_string_lossy().to_lowercase() != "ico")
         {
-            drop(icon_manager);
             _extract_and_save_icon_from_file(&lnk_icon_path, umid.clone())?;
-            let mut icon_manager = trace_lock!(mutex);
-            icon_manager.add_system_icon_redirect(umid, origin, &lnk_icon_path);
-            icon_manager.write_system_icon_pack()?;
+            RESOURCES.add_system_icon_redirect(umid, origin, &lnk_icon_path);
             return Ok(());
         }
     }
@@ -467,15 +463,22 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
     gen_icon.is_aproximately_square = is_aproximately_a_square(&icon);
 
     if is_exe_file || is_lnk_file {
-        icon.save(root.join(&gen_icon_filename))?;
-        icon_manager.add_system_app_icon(umid.as_deref(), Some(origin), gen_icon);
+        icon.save(
+            SEELEN_COMMON
+                .system_icon_pack_path()
+                .join(&gen_icon_filename),
+        )?;
+        RESOURCES.add_system_app_icon(umid.as_deref(), Some(origin), gen_icon);
     } else {
         let gen_icon_filename = format!("{}_{}.png", origin_ext, date_based_hex_id());
-        icon.save(root.join(&gen_icon_filename))?;
+        icon.save(
+            SEELEN_COMMON
+                .system_icon_pack_path()
+                .join(&gen_icon_filename),
+        )?;
         gen_icon.base = Some(gen_icon_filename);
-        icon_manager.add_system_file_icon(&origin_ext, gen_icon);
+        RESOURCES.add_system_file_icon(&origin_ext, gen_icon);
     }
-    icon_manager.write_system_icon_pack()?;
 
     Ok(())
 }
@@ -486,14 +489,12 @@ pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) {
 
 /// returns the path of the icon extracted from the app with the specified package app user model id.
 pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
-    let icon_manager_mutex = FULL_STATE.load().icon_packs.clone();
     match aumid {
         AppUserModelId::Appx(app_umid) => {
             let msix_manager = MsixAppsManager::instance();
             let path = msix_manager.get_app_path(app_umid)?;
             {
-                let manager = trace_lock!(icon_manager_mutex);
-                if manager.has_app_icon(Some(aumid.as_str()), path.as_deref()) {
+                if RESOURCES.has_app_icon(Some(aumid.as_str()), path.as_deref()) {
                     return Ok(());
                 }
             }
@@ -502,7 +503,6 @@ pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
             let mut gen_icon = Icon::default();
             let (light_path, dark_path) = msix_manager.get_app_icon_path(app_umid)?;
 
-            let root = SEELEN_COMMON.user_icons_path().join("system");
             let name = date_based_hex_id();
 
             let light_rgba = image::open(&light_path)?.to_rgba8();
@@ -512,21 +512,32 @@ pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
                 let dark_rgba = image::open(&dark_path)?.to_rgba8();
                 let dark_rgba = crop_transparent_borders(&dark_rgba);
 
-                light_rgba.save(root.join(format!("{name}_light.png")))?;
-                dark_rgba.save(root.join(format!("{name}_dark.png")))?;
+                light_rgba.save(
+                    SEELEN_COMMON
+                        .system_icon_pack_path()
+                        .join(format!("{name}_light.png")),
+                )?;
+                dark_rgba.save(
+                    SEELEN_COMMON
+                        .system_icon_pack_path()
+                        .join(format!("{name}_dark.png")),
+                )?;
 
                 gen_icon.light = Some(format!("{name}_light.png"));
                 gen_icon.dark = Some(format!("{name}_dark.png"));
             } else {
-                light_rgba.save(root.join(format!("{name}.png")))?;
+                light_rgba.save(
+                    SEELEN_COMMON
+                        .system_icon_pack_path()
+                        .join(format!("{name}.png")),
+                )?;
                 gen_icon.base = Some(format!("{name}.png"));
             }
 
             gen_icon.is_aproximately_square = is_aproximately_a_square(&light_rgba);
 
-            let mut icon_manager = trace_lock!(icon_manager_mutex);
-            icon_manager.add_system_app_icon(Some(app_umid), path.as_deref(), gen_icon);
-            icon_manager.write_system_icon_pack()
+            RESOURCES.add_system_app_icon(Some(app_umid), path.as_deref(), gen_icon);
+            Ok(())
         }
         AppUserModelId::PropertyStore(app_umid) => {
             let start = START_MENU_MANAGER.load();
@@ -535,8 +546,7 @@ pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
                 .ok_or(format!("No shortcut found for umid {app_umid}"))?;
 
             {
-                let manager = trace_lock!(icon_manager_mutex);
-                if manager.has_app_icon(Some(aumid.as_str()), Some(&lnk.path)) {
+                if RESOURCES.has_app_icon(Some(aumid.as_str()), Some(&lnk.path)) {
                     return Ok(());
                 }
             }

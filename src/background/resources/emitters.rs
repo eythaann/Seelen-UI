@@ -36,9 +36,17 @@ impl ResourceManager {
 
     pub fn emit_icon_packs(&self) -> Result<()> {
         let mut icon_packs = Vec::new();
+
+        // Add system icon pack if it exists
+        if let Some(system_pack) = self.system_icon_pack.lock().as_ref() {
+            icon_packs.push(std::sync::Arc::new(system_pack.clone()));
+        }
+
+        // Add user icon packs
         self.icon_packs.scan(|_, v| {
             icon_packs.push(v.clone());
         });
+
         get_app_handle().emit(SeelenEvent::StateIconPacksChanged, icon_packs)?;
         Ok(())
     }

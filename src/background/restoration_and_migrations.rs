@@ -71,22 +71,21 @@ impl RestorationAndMigration {
             std::fs::remove_dir_all(&old_path)?;
         }
 
-        // temporal folder to group artifacts
+        // remove old generated icon pack (path changed in v2.4.10)
+        let old_path = SEELEN_COMMON.user_icons_path().join("system");
+        if old_path.exists() {
+            std::fs::remove_dir_all(old_path)?;
+        }
+
         std::fs::create_dir_all(SEELEN_COMMON.app_temp_dir())?;
 
-        let create_if_needed = move |folder: &str| -> Result<()> {
-            let path = data_path.join(folder);
-            if !path.exists() {
-                std::fs::create_dir_all(path)?;
-            }
-            Ok(())
-        };
-        create_if_needed("themes")?;
-        create_if_needed("iconpacks/system")?;
-        create_if_needed("wallpapers")?;
-        create_if_needed("soundpacks")?;
-        create_if_needed("plugins")?;
-        create_if_needed("widgets")?;
+        std::fs::create_dir_all(SEELEN_COMMON.user_themes_path())?;
+        std::fs::create_dir_all(SEELEN_COMMON.user_icons_path())?;
+        std::fs::create_dir_all(SEELEN_COMMON.user_wallpapers_path())?;
+        std::fs::create_dir_all(SEELEN_COMMON.user_sounds_path())?;
+        std::fs::create_dir_all(SEELEN_COMMON.user_plugins_path())?;
+        std::fs::create_dir_all(SEELEN_COMMON.user_widgets_path())?;
+
         Self::recreate_profiles()?;
 
         Ok(())

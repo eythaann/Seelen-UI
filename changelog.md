@@ -6,6 +6,7 @@
 
 - entire rewrite of the bluetooth module.
 - internal widgets loader.
+- internal generated icon pack logic.
 
 ### enhancements
 
