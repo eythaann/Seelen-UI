@@ -6,14 +6,13 @@ $base-noise-010: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp
   height: 100vh;
   background-image: url($base-noise-010);
   background-color: #000d;
+  color: #fcfcfc;
 
   .power-menu {
-    padding: 10% 10% 14%;
-    color: #fcfcfc;
-
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
 
     .power-menu-user {
@@ -44,10 +43,13 @@ $base-noise-010: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp
     .power-menu-list {
       flex: 1;
       width: 100%;
+      max-width: 1200px;
+      max-height: 500px;
+
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: 1fr 1fr;
-      gap: 20px;
+      gap: 25px;
 
       .power-menu-item {
         position: relative;
@@ -56,7 +58,7 @@ $base-noise-010: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp
         height: 100%;
         border-radius: 16px;
         background-color: rgba(var(--system-accent-darker-color-rgb), 0.5);
-        color: #fcfcfc;
+        color: #fafafa;
 
         display: flex;
         flex-direction: column;
@@ -64,13 +66,15 @@ $base-noise-010: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp
         justify-content: center;
         gap: 1rem;
 
+        transition: background-color 0.2s ease, transform 0.2s ease;
+
         &:hover {
           background-color: rgba(var(--system-accent-dark-color-rgb), 0.5);
+          transform: scale(1.05);
         }
 
         &:active {
-          background-color: rgba(var(--system-accent-dark-color-rgb), 0.5);
-          transform: scale(0.95);
+          background-color: rgba(var(--system-accent-darker-color-rgb), 0.5);
         }
 
         &:focus-visible {
@@ -78,12 +82,19 @@ $base-noise-010: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp
         }
 
         .slu-icon {
-          height: 30% !important;
+          height: 40% !important;
         }
 
         .power-menu-item-label {
+          margin-bottom: -2.2rem; // hack to center the icon
           font-size: 1.2rem;
           font-weight: 600;
+          opacity: 0;
+          transition: opacity 0.2s ease;
+        }
+
+        &:hover .power-menu-item-label {
+          opacity: 1;
         }
       }
     }
