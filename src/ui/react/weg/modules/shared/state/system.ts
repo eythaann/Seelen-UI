@@ -32,16 +32,27 @@ await subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
 await $mouse_pos.init();
 
 export const $mouse_at_edge = computed<SeelenWegSide | null>(() => {
-  if ($mouse_pos.value.y === $current_monitor.value.rect.top) {
+  const box = $current_monitor.value.rect;
+  const x = $mouse_pos.value.x;
+  const y = $mouse_pos.value.y;
+
+  if (x < box.left || x > box.right || y < box.top || y > box.bottom) {
+    return null;
+  }
+
+  if (y === box.top) {
     return SeelenWegSide.Top;
   }
-  if ($mouse_pos.value.x === $current_monitor.value.rect.left) {
+
+  if (x === box.left) {
     return SeelenWegSide.Left;
   }
-  if ($mouse_pos.value.y === $current_monitor.value.rect.bottom - 1) {
+
+  if (y === box.bottom - 1) {
     return SeelenWegSide.Bottom;
   }
-  if ($mouse_pos.value.x === $current_monitor.value.rect.right - 1) {
+
+  if (x === box.right - 1) {
     return SeelenWegSide.Right;
   }
   return null;

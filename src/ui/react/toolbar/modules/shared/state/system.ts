@@ -27,10 +27,19 @@ await subscribe(SeelenEvent.GlobalMouseMove, $mouse_pos.setByPayload);
 await $mouse_pos.init();
 
 export const $mouse_at_edge = computed<FancyToolbarSide | null>(() => {
-  if ($mouse_pos.value[1] === $current_monitor.value.rect.top) {
+  const box = $current_monitor.value.rect;
+  const x = $mouse_pos.value[0];
+  const y = $mouse_pos.value[1];
+
+  if (x < box.left || x > box.right || y < box.top || y > box.bottom) {
+    return null;
+  }
+
+  if (y === box.top) {
     return FancyToolbarSide.Top;
   }
-  if ($mouse_pos.value[1] === $current_monitor.value.rect.bottom - 1) {
+
+  if (y === box.bottom - 1) {
     return FancyToolbarSide.Bottom;
   }
   return null;
