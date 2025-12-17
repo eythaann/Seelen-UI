@@ -16,8 +16,8 @@ function updateJsonVersion(filePath: string, version: string): void {
   fs.writeFileSync(filePath, JSON.stringify(json, null, 2));
 }
 
-function updateChangelog(version: string): void {
-  if (version.includes("-")) {
+function updateChangelog(version: string, forceUpdate = false): void {
+  if (version.includes("-") && !forceUpdate) {
     console.log("Skipping changelog update for pre-release version");
     return;
   }
@@ -28,46 +28,20 @@ function updateChangelog(version: string): void {
   console.log(`✓ Changelog updated for version ${version}`);
 }
 
-function createGitTag(version: string): void {
-  const tag = `v${version}`;
-  execSync(`git tag -s ${tag} -m "${tag}"`, { stdio: "inherit" });
-  console.log(`✓ Git tag ${tag} created`);
+function replaceChangelogVersion(oldVersion: string, newVersion: string): void {
+  let content = fs.readFileSync("changelog.md", "utf-8");
+  content = content.replace(`## [${oldVersion}]`, `## [${newVersion}]`);
+  fs.writeFileSync("changelog.md", content);
+  console.log(`✓ Changelog version updated from ${oldVersion} to ${newVersion}`);
 }
 
-async function main(args: string[]) {
-  const argv = await yargs(hideBin(args))
-    .version(false)
-    .option("version", {
-      type: "string",
-      description: "Version to set (defaults to current package.json version)",
-      demandOption: false,
-    })
-    .option("set-changelog", {
-      type: "boolean",
-      default: false,
-      description: "Add a new changelog entry for the version",
-    })
-    .option("create-tag", {
-      type: "boolean",
-      default: false,
-      description: "Create a signed git tag for the version",
-    }).argv;
+function createGitCommit(message: string): void {
+  execSync("git add .", { stdio: "inherit" });
+  execSync(`git commit -m "${message}"`, { stdio: "inherit" });
+  console.log(`✓ Git commit created: ${message}`);
+}
 
-  // Get version from package.json if not provided
-  const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
-  const version = argv.version || packageJson.version;
-
-  console.log(`Using version: ${version}`);
-
-  const shouldSetChangelog = argv["set-changelog"];
-  const shouldCreateTag = argv["create-tag"];
-
-  // If only creating tag, skip file updates
-  if (shouldCreateTag && !argv.version) {
-    createGitTag(version);
-    return;
-  }
-
+function updateAllVersions(version: string): void {
   // Update library versions
   console.log("Updating library versions...");
   updateCargoVersion("./libs/core/Cargo.toml", version);
@@ -77,26 +51,59 @@ async function main(args: string[]) {
   // Update app versions
   console.log("Updating app versions...");
   updateCargoVersion("./src/Cargo.toml", version);
+  const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
   packageJson.version = version;
   fs.writeFileSync("./package.json", JSON.stringify(packageJson, null, 2) + "\n");
   console.log("✓ App versions updated");
 
-  // Update changelog if requested
-  if (shouldSetChangelog) {
-    updateChangelog(version);
-  }
-
-  // Create tag if requested
-  if (shouldCreateTag) {
-    createGitTag(version);
-  }
-
-  console.log(`\n✓ Version ${version} set successfully`);
-
-  // cargo check to update the lockfile
+  // Update lockfiles
   execSync("cargo check", { stdio: "inherit" });
-  // npm install to update the lockfile
   execSync("npm install", { stdio: "inherit" });
+}
+
+async function main(args: string[]) {
+  await yargs(hideBin(args))
+    .version(false)
+    .command(
+      "start <version>",
+      "Start the development of a new release",
+      (yargs) => {
+        return yargs.positional("version", {
+          type: "string",
+          describe: "Version to start",
+          demandOption: true,
+        });
+      },
+      ({ version }) => {
+        console.log(`Starting release with version: ${version}`);
+
+        updateAllVersions(version);
+        updateChangelog(`${version}-dev`, true);
+
+        console.log(`\n✓ Version ${version} set successfully`);
+
+        createGitCommit(`chore(release): start v${version}`);
+      },
+    )
+    .command(
+      "finish",
+      "Finish the current nightly release",
+      () => {},
+      () => {
+        const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
+        const currentVersion = packageJson.version;
+
+        console.log(`Finishing release: ${currentVersion}`);
+
+        replaceChangelogVersion(`${currentVersion}-dev`, currentVersion);
+
+        console.log(`\n✓ Version ${currentVersion} set successfully`);
+
+        createGitCommit(`chore(release): finish v${currentVersion}`);
+      },
+    )
+    .demandCommand(1, "You must provide a command (start or finish)")
+    .help().argv;
 }
 
 main(process.argv);
