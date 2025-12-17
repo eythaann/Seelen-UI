@@ -7,7 +7,7 @@ use tauri::{AppHandle, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
 use crate::{
-    app_instance::SluMonitorInstance,
+    app_instance::LegacyWidgetMonitorContainer,
     cli::ServicePipe,
     error::Result,
     hook::register_win_hook,
@@ -28,7 +28,7 @@ use crate::{
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
         window_manager::instance::WindowManagerV2,
     },
-    windows_api::{event_window::create_background_window, monitor::MonitorView, Com},
+    windows_api::{event_window::create_background_window, monitor::DisplayView, Com},
     APP_HANDLE,
 };
 
@@ -47,15 +47,15 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
 /** Struct should be initialized first before calling any other methods */
 #[derive(Default)]
 pub struct Seelen {
-    pub instances: Vec<SluMonitorInstance>,
+    pub widgets_per_display: Vec<LegacyWidgetMonitorContainer>,
     pub wall: Option<SeelenWall>,
     pub rofi: Option<SeelenRofi>,
 }
 
 /* ============== Getters ============== */
 impl Seelen {
-    pub fn instances_mut(&mut self) -> &mut Vec<SluMonitorInstance> {
-        &mut self.instances
+    pub fn instances_mut(&mut self) -> &mut Vec<LegacyWidgetMonitorContainer> {
+        &mut self.widgets_per_display
     }
 
     pub fn is_running() -> bool {
@@ -85,7 +85,7 @@ impl Seelen {
         if let Some(wall) = &self.wall {
             wall.update_position()?;
         }
-        for instance in &mut self.instances {
+        for instance in &mut self.widgets_per_display {
             instance.ensure_positions()?;
         }
         Ok(())
@@ -119,7 +119,7 @@ impl Seelen {
             false => self.wall = None,
         }
 
-        for monitor in &mut self.instances {
+        for monitor in &mut self.widgets_per_display {
             monitor.load_settings(state)?;
         }
 
@@ -168,7 +168,7 @@ impl Seelen {
         }
 
         log::trace!("Enumerating Monitors & Creating Instances");
-        for view in MonitorManager::get_all_views()? {
+        for view in MonitorManager::instance().read_all_views()? {
             self.add_monitor(view)?;
         }
 
@@ -199,17 +199,24 @@ impl Seelen {
         release_system_events_handlers();
     }
 
-    fn add_monitor(&mut self, view: MonitorView) -> Result<()> {
+    fn add_monitor(&mut self, view: DisplayView) -> Result<()> {
         let state = FULL_STATE.load();
-        self.instances.push(SluMonitorInstance::new(view, &state)?);
+        self.widgets_per_display
+            .push(LegacyWidgetMonitorContainer::new(
+                view.primary_target()?.stable_id()?,
+                &state,
+            )?);
         self.refresh_windows_positions()?;
+        // why this is here? TODO: refactor this.
         trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }
 
     fn remove_monitor(&mut self, id: &MonitorId) -> Result<()> {
-        self.instances.retain(|m| &m.main_target_id != id);
+        self.widgets_per_display
+            .retain(|m| &m.view_primary_target_id != id);
         self.refresh_windows_positions()?;
+        // why this is here? TODO: refactor this.
         trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }

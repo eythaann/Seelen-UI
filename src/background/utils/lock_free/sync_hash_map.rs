@@ -77,6 +77,14 @@ where
     {
         self.0.lock().iter().any(f)
     }
+
+    pub fn take(&self) -> HashMap<K, V> {
+        self.0.lock().drain().collect()
+    }
+
+    pub fn replace(&self, value: HashMap<K, V>) {
+        *self.0.lock() = value;
+    }
 }
 
 #[allow(dead_code)]

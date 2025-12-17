@@ -8,7 +8,6 @@ use crate::{
         apps::infrastructure::register_app_win_events,
         language::register_language_events,
         media::infrastructure::{register_media_events, release_media_events},
-        monitors::infrastructure::register_monitor_webview_events,
         network::infrastructure::register_network_events,
         notifications::infrastructure::{
             register_notification_events, release_notification_events,
@@ -31,7 +30,6 @@ pub fn declare_system_events_handlers() -> Result<()> {
     register_notification_events();
     register_media_events();
     register_user_events();
-    log_error!(register_monitor_webview_events());
     register_system_settings_events();
     register_power_events();
     register_language_events();

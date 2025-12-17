@@ -1,15 +1,11 @@
 use std::sync::atomic::{AtomicIsize, AtomicU32, Ordering};
 use windows::Win32::{
-    Devices::Display::GUID_DEVINTERFACE_MONITOR,
-    Foundation::{HWND, LPARAM, LRESULT, RECT, WPARAM},
+    Foundation::{HWND, LPARAM, LRESULT, WPARAM},
     System::Power::RegisterSuspendResumeNotification,
     UI::WindowsAndMessaging::{
         CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
-        RegisterClassW, RegisterDeviceNotificationW, RegisterShellHookWindow,
-        RegisterWindowMessageW, TranslateMessage, DBT_DEVTYP_DEVICEINTERFACE,
-        DEVICE_NOTIFY_WINDOW_HANDLE, DEV_BROADCAST_DEVICEINTERFACE_W, HWND_TOPMOST, MSG,
-        SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, WINDOW_EX_STYLE, WINDOW_STYLE, WM_DESTROY,
-        WNDCLASSW,
+        RegisterClassW, RegisterShellHookWindow, RegisterWindowMessageW, TranslateMessage,
+        DEVICE_NOTIFY_WINDOW_HANDLE, MSG, WINDOW_EX_STYLE, WINDOW_STYLE, WM_DESTROY, WNDCLASSW,
     },
 };
 
@@ -62,32 +58,6 @@ impl BgWindowProc {
 
         let handle: isize = hwnd.0 as isize;
         BACKGROUND_HWND.store(handle, Ordering::Relaxed);
-        // keep the window on top
-        std::thread::spawn(move || loop {
-            let _ = WindowsApi::set_position(
-                HWND(handle as _),
-                Some(HWND_TOPMOST),
-                &RECT::default(),
-                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
-            );
-            std::thread::sleep(std::time::Duration::from_millis(100));
-        });
-
-        // register window to recieve device notifications for monitor changes
-        {
-            let mut notification_filter = DEV_BROADCAST_DEVICEINTERFACE_W {
-                dbcc_size: std::mem::size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>() as u32,
-                dbcc_devicetype: DBT_DEVTYP_DEVICEINTERFACE.0,
-                dbcc_reserved: 0,
-                dbcc_classguid: GUID_DEVINTERFACE_MONITOR,
-                dbcc_name: [0; 1],
-            };
-            RegisterDeviceNotificationW(
-                hwnd.into(),
-                &mut notification_filter as *mut _ as *mut _,
-                DEVICE_NOTIFY_WINDOW_HANDLE,
-            )?;
-        }
 
         // register window to recieve shell events
         {

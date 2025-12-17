@@ -378,7 +378,7 @@ impl SeelenWegState {
         let mut result = HashMap::new();
         let state = FULL_STATE.load();
 
-        for monitor in MonitorEnumerator::get_all_v2()? {
+        for monitor in MonitorEnumerator::enumerate_win32()? {
             let monitor_id = monitor.stable_id()?.into();
             if !state.is_weg_enabled_on_monitor(&monitor_id) {
                 continue;

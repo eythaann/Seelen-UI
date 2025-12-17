@@ -123,7 +123,7 @@ impl WmCommand {
                 #[cfg(debug_assertions)]
                 {
                     let guard = trace_lock!(crate::app::SEELEN);
-                    for instance in &guard.instances {
+                    for instance in &guard.widgets_per_display {
                         if let Some(wm) = &instance.wm {
                             wm.window.open_devtools();
                         }

@@ -2,30 +2,28 @@ use seelen_core::system_state::MonitorId;
 
 use crate::{
     error::Result,
+    modules::monitors::MonitorManager,
     state::application::FullState,
     widgets::{
         manager::WIDGET_MANAGER, toolbar::FancyToolbar, weg::SeelenWeg,
         window_manager::instance::WindowManagerV2,
     },
-    windows_api::monitor::MonitorView,
 };
 
-/// This struct stores the widgets of a monitor
-pub struct SluMonitorInstance {
-    pub view: MonitorView,
-    pub main_target_id: MonitorId,
+/// This struct stores the widgets for a display view
+pub struct LegacyWidgetMonitorContainer {
+    // the primary target id of the display view for this container was created
+    pub view_primary_target_id: MonitorId,
     // legacy widgets
     pub toolbar: Option<FancyToolbar>,
     pub weg: Option<SeelenWeg>,
     pub wm: Option<WindowManagerV2>,
 }
 
-impl SluMonitorInstance {
-    pub fn new(view: MonitorView, settings: &FullState) -> Result<Self> {
-        let main_target_id = view.primary_target()?.stable_id2()?;
+impl LegacyWidgetMonitorContainer {
+    pub fn new(view_primary_target_id: MonitorId, settings: &FullState) -> Result<Self> {
         let mut instance = Self {
-            view,
-            main_target_id,
+            view_primary_target_id,
             toolbar: None,
             weg: None,
             wm: None,
@@ -36,7 +34,9 @@ impl SluMonitorInstance {
     }
 
     pub fn ensure_positions(&mut self) -> Result<()> {
-        let monitor = self.view.as_win32_monitor()?;
+        let monitor = MonitorManager::instance()
+            .get_display_view_for_target(&self.view_primary_target_id)?
+            .as_win32_monitor()?;
 
         if let Some(bar) = &mut self.toolbar {
             bar.set_position(&monitor)?;
@@ -53,39 +53,39 @@ impl SluMonitorInstance {
 
     fn add_toolbar(&mut self) -> Result<()> {
         if self.toolbar.is_none() {
-            self.toolbar = Some(FancyToolbar::new(&self.main_target_id)?);
+            self.toolbar = Some(FancyToolbar::new(&self.view_primary_target_id)?);
         }
         Ok(())
     }
 
     fn add_weg(&mut self) -> Result<()> {
         if self.weg.is_none() {
-            self.weg = Some(SeelenWeg::new(&self.main_target_id)?);
+            self.weg = Some(SeelenWeg::new(&self.view_primary_target_id)?);
         }
         Ok(())
     }
 
     fn add_wm(&mut self) -> Result<()> {
         if self.wm.is_none() {
-            self.wm = Some(WindowManagerV2::new(&self.main_target_id)?)
+            self.wm = Some(WindowManagerV2::new(&self.view_primary_target_id)?)
         }
         Ok(())
     }
 
     pub fn load_settings(&mut self, state: &FullState) -> Result<()> {
-        if state.is_bar_enabled_on_monitor(&self.main_target_id) {
+        if state.is_bar_enabled_on_monitor(&self.view_primary_target_id) {
             self.add_toolbar()?;
         } else {
             self.toolbar = None;
         }
 
-        if state.is_weg_enabled_on_monitor(&self.main_target_id) {
+        if state.is_weg_enabled_on_monitor(&self.view_primary_target_id) {
             self.add_weg()?;
         } else {
             self.weg = None;
         }
 
-        if state.is_window_manager_enabled_on_monitor(&self.main_target_id) {
+        if state.is_window_manager_enabled_on_monitor(&self.view_primary_target_id) {
             self.add_wm()?;
         } else {
             self.wm = None;
@@ -96,5 +96,5 @@ impl SluMonitorInstance {
     }
 }
 
-unsafe impl Send for SluMonitorInstance {}
-unsafe impl Sync for SluMonitorInstance {}
+unsafe impl Send for LegacyWidgetMonitorContainer {}
+unsafe impl Sync for LegacyWidgetMonitorContainer {}

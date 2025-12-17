@@ -2,6 +2,10 @@
 
 ## [2.5.0-dev]
 
+### enhancements
+
+- improve display changes events.
+
 ## [2.4.11]
 
 ### fix
