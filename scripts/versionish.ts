@@ -86,6 +86,24 @@ async function main(args: string[]) {
       },
     )
     .command(
+      "ci <version>",
+      "Set version for CI builds (no git commit)",
+      (yargs) => {
+        return yargs.positional("version", {
+          type: "string",
+          describe: "Version to set",
+          demandOption: true,
+        });
+      },
+      ({ version }) => {
+        console.log(`Setting version for CI: ${version}`);
+
+        updateAllVersions(version);
+
+        console.log(`\n✓ Version ${version} set successfully (no commit)`);
+      },
+    )
+    .command(
       "finish",
       "Finish the current nightly release",
       () => {},
@@ -102,7 +120,7 @@ async function main(args: string[]) {
         createGitCommit(`chore(release): finish v${currentVersion}`);
       },
     )
-    .demandCommand(1, "You must provide a command (start or finish)")
+    .demandCommand(1, "You must provide a command (start, ci, or finish)")
     .help().argv;
 }
 

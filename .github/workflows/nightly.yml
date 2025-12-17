@@ -81,7 +81,7 @@ jobs:
 
       - name: Set Version
         run: |
-          npm run versionish -- --version ${{ needs.update-tag.outputs.nightly-version }}
+          npx tsx scripts/versionish.ts ci ${{ needs.update-tag.outputs.nightly-version }}
 
       - name: Build Hook DLL
         run: cargo build --release --target ${{ matrix.target }} -p sluhk
