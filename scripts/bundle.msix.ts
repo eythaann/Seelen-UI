@@ -57,6 +57,11 @@ fs.copyFileSync(`target/${target}/release/seelen-ui.exe`, `${buildFolder}/seelen
 fs.copyFileSync(`target/${target}/release/slu-service.exe`, `${buildFolder}/slu-service.exe`);
 fs.copyFileSync(`target/${target}/release/splash.exe`, `${buildFolder}/splash.exe`);
 
+// add pdb files if debug
+if (pre || target === "./") {
+  fs.copyFileSync(`target/${target}/release/seelen_ui.pdb`, `${buildFolder}/seelen_ui.pdb`);
+}
+
 // dlls
 fs.copyFileSync(`target/${target}/release/sluhk.dll`, `${buildFolder}/sluhk.dll`);
 

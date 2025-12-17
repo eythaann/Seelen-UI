@@ -2,6 +2,10 @@
 
 ## [2.4.11]
 
+### fix
+
+- tray not working on MSIX installation.
+
 ## [2.4.10]
 
 ### refactor

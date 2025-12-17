@@ -17,7 +17,7 @@ your system to trust nighly msix packages.
 4. Run the following command
 
 ```pwsh
-$password = ConvertTo-SecureString -String seelen -Force -AsPlainText
+$password = ConvertTo-SecureString -String Seelen -Force -AsPlainText
 Import-PfxCertificate -FilePath .\Seelen.pfx -CertStoreLocation Cert:\LocalMachine\root -Password $password
 ```
 

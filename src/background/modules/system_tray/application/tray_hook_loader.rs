@@ -10,7 +10,10 @@ use windows::{
 };
 
 use crate::{
-    error::ResultLogExt, modules::system_tray::application::util::Util, windows_api::WindowsApi,
+    error::{Result, ResultLogExt},
+    modules::system_tray::application::util::Util,
+    utils::constants::SEELEN_COMMON,
+    windows_api::WindowsApi,
 };
 
 // ============================================================================
@@ -37,7 +40,7 @@ pub struct TrayHookLoader {
 impl TrayHookLoader {
     /// Creates a new loader, loads the DLL and installs the hook
     /// Events will be sent automatically through AppIpc
-    pub fn new() -> crate::Result<Self> {
+    pub fn new() -> Result<Self> {
         let dll_path = Self::get_dll_path()?;
         let dll_handle = Self::load_dll(&dll_path)?;
         let call_msg_proc = Self::get_proc_address::<GetMsgProcFn>(dll_handle, "CallWndProc")?;
@@ -65,25 +68,41 @@ impl TrayHookLoader {
         })
     }
 
-    /// Gets the DLL path
-    fn get_dll_path() -> crate::Result<PathBuf> {
+    /// Gets the DLL path, copying it to SEELEN_COMMON temp directory to avoid
+    /// permission issues with MSIX installations (WindowsApps folder is restricted)
+    fn get_dll_path() -> Result<PathBuf> {
         let exe_path = std::env::current_exe()?;
         let exe_dir = exe_path
             .parent()
             .ok_or("Failed to get executable directory")?;
 
         // The DLL should be in the same directory as the executable
-        let dll_path = exe_dir.join("sluhk.dll");
-
-        if !dll_path.exists() {
-            return Err(format!("DLL not found at: {}", dll_path.display()).into());
+        let source_dll_path = exe_dir.join("sluhk.dll");
+        if !source_dll_path.exists() {
+            return Err(format!("DLL not found at: {}", source_dll_path.display()).into());
         }
 
-        Ok(dll_path)
+        // Copy to temp directory to ensure accessibility for hooks
+        // (MSIX installations in WindowsApps have restricted permissions)
+        let temp_dir = SEELEN_COMMON.app_temp_dir();
+        std::fs::create_dir_all(temp_dir)?;
+        let target_dll_path = temp_dir.join("sluhk.dll");
+
+        // Use read & write instead of copy to avoid encryption issues on MSIX/APPX
+        // when copying across different volumes (e.g., S: to C:)
+        let content = std::fs::read(&source_dll_path)?;
+        std::fs::write(&target_dll_path, content)?;
+        log::info!(
+            "Tray hook DLL copied from {} to {}",
+            source_dll_path.display(),
+            target_dll_path.display()
+        );
+
+        Ok(target_dll_path)
     }
 
     /// Loads the DLL into memory
-    fn load_dll(path: &Path) -> crate::Result<HMODULE> {
+    fn load_dll(path: &Path) -> Result<HMODULE> {
         let path_wide: Vec<u16> = path
             .to_string_lossy()
             .encode_utf16()
@@ -97,7 +116,7 @@ impl TrayHookLoader {
     }
 
     /// Gets the address of an exported function
-    fn get_proc_address<F>(dll_handle: HMODULE, name: &str) -> crate::Result<F> {
+    fn get_proc_address<F>(dll_handle: HMODULE, name: &str) -> Result<F> {
         let name_cstr = std::ffi::CString::new(name)
             .map_err(|e| format!("Invalid function name '{}': {}", name, e))?;
 
