@@ -86,6 +86,17 @@ impl ResourceManager {
             )?;
         }
 
+        // Ensure show desktop icon
+        let icon_path = sys_icons_path.join("show-desktop.svg");
+        if !icon_path.exists() {
+            std::fs::copy(
+                SEELEN_COMMON
+                    .app_resource_dir()
+                    .join("static/icons/desktop.svg"),
+                icon_path,
+            )?;
+        }
+
         Ok(())
     }
 
@@ -137,6 +148,20 @@ impl ResourceManager {
                 icon: Icon {
                     base: Some("folder-icon.svg".to_owned()),
                     mask: Some("folder-icon.svg".to_owned()),
+                    ..Default::default()
+                },
+            }));
+        }
+
+        // Check and add show desktop icon entry if missing
+        let has_show_desktop = system_pack.entries.iter().any(
+            |entry| matches!(entry, IconPackEntry::Custom(e) if e.key == "@seelen/weg::show-desktop"),
+        );
+        if !has_show_desktop {
+            system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+                key: "@seelen/weg::show-desktop".to_owned(),
+                icon: Icon {
+                    base: Some("show-desktop.svg".to_owned()),
                     ..Default::default()
                 },
             }));

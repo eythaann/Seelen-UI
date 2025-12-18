@@ -26,6 +26,7 @@ import { MainContextMenu } from "./ContextMenu.tsx";
 import { ItemsDropableContainer } from "./ItemsContainer.tsx";
 import { componentByModule } from "./mappins.tsx";
 import { $bar_should_be_hidden, $lastFocusedOnMonitor, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
+import { ShowDesktopButton } from "./CornerAction.tsx";
 
 interface Container {
   id: string;
@@ -147,7 +148,9 @@ export function FancyToolbar() {
         data-focused-is-maximized={!!$lastFocusedOnMonitor.value?.isMaximized}
         data-focused-is-overlay={!!$lastFocusedOnMonitor.value?.isSeelenOverlay}
       >
+        <ShowDesktopButton />
         <BackgroundByLayersV2 prefix="ft-bar" />
+
         <DndContext
           collisionDetection={closestCorners}
           onDragStart={({ active }: DragStartEvent) => {
@@ -163,6 +166,8 @@ export function FancyToolbar() {
           {$containers.value.map(({ id, items }) => <ItemsDropableContainer key={id} id={id} items={items} />)}
           <DragOverlay>{draggingItem && componentByModule(draggingItem)}</DragOverlay>
         </DndContext>
+
+        <ShowDesktopButton />
       </div>
     </AnimatedDropdown>
   );

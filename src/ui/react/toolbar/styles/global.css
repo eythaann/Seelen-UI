@@ -103,3 +103,17 @@ body {
     }
   }
 }
+
+.ft-corner-button {
+  position: absolute;
+  width: 10px;
+  height: 100%;
+
+  &:first-child {
+    left: 0;
+  }
+
+  &:last-child {
+    right: 0;
+  }
+}

@@ -9,8 +9,7 @@ import { $dock_state, $dock_state_actions } from "../shared/state/items.ts";
 import { WegItemType } from "@seelen-ui/lib/types";
 
 export function getSeelenWegMenu(t: TFunction): ItemType[] {
-  const isRestrictedBar = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator)
-        .length > 0 &&
+  const isRestrictedBar = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length > 0 &&
     $dock_state.value.items.every((item) => item.type === WegItemType.Temporal && item.pinDisabled);
 
   if (isRestrictedBar) {
@@ -36,14 +35,6 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
 
   return [
     {
-      key: "add-media-module",
-      label: t("taskbar_menu.media"),
-      icon: <Icon iconName="PiMusicNotesPlusFill" />,
-      onClick() {
-        $dock_state_actions.addMediaModule();
-      },
-    },
-    {
       key: "add-start-module",
       label: t("taskbar_menu.start"),
       icon: <Icon iconName="BsWindows" size={14} />,
@@ -51,6 +42,23 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
         $dock_state_actions.addStartModule();
       },
     },
+    {
+      key: "add-toggle-desktop-module",
+      label: t("taskbar_menu.desktop"),
+      icon: <Icon iconName="IoDesktop" size={14} />,
+      onClick() {
+        $dock_state_actions.addDesktopModule();
+      },
+    },
+    {
+      key: "add-media-module",
+      label: t("taskbar_menu.media"),
+      icon: <Icon iconName="PiMusicNotesPlusFill" />,
+      onClick() {
+        $dock_state_actions.addMediaModule();
+      },
+    },
+
     {
       type: "divider",
     },
@@ -91,11 +99,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     },
     {
       key: "reoder",
-      icon: (
-        <Icon
-          iconName={$dock_state.value.isReorderDisabled ? "CgLockUnlock" : "CgLock"}
-        />
-      ),
+      icon: <Icon iconName={$dock_state.value.isReorderDisabled ? "CgLockUnlock" : "CgLock"} />,
       label: t(
         $dock_state.value.isReorderDisabled ? "context_menu.reorder_enable" : "context_menu.reorder_disable",
       ),

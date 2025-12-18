@@ -10,24 +10,15 @@ import { $dock_state_actions } from "../../shared/state/items.ts";
 import { WegItemType } from "@seelen-ui/lib/types";
 
 export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
-  if (item.type === WegItemType.Media) {
+  if (
+    item.type === WegItemType.ShowDesktop ||
+    item.type === WegItemType.Media ||
+    item.type === WegItemType.StartMenu
+  ) {
     return [
       {
         key: "remove",
-        label: t("media_menu.remove"),
-        icon: <Icon iconName="CgExtensionRemove" />,
-        onClick() {
-          $dock_state_actions.remove(item.id);
-        },
-      },
-    ];
-  }
-
-  if (item.type === WegItemType.StartMenu) {
-    return [
-      {
-        key: "remove",
-        label: t("start_menu.remove"),
+        label: t("context_menu.remove_module"),
         icon: <Icon iconName="CgExtensionRemove" />,
         onClick() {
           $dock_state_actions.remove(item.id);

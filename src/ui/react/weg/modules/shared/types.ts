@@ -7,6 +7,7 @@ export type TemporalWegItem = Extract<WegItem, { type: "Temporal" }>;
 export type SeparatorWegItem = Extract<WegItem, { type: "Separator" }>;
 export type MediaWegItem = Extract<WegItem, { type: "Media" }>;
 export type StartMenuWegItem = Extract<WegItem, { type: "StartMenu" }>;
+export type ShowDesktopWegItem = Extract<WegItem, { type: "ShowDesktop" }>;
 
 /** @alias */
 export type SwItem = WegItem;

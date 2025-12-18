@@ -66,6 +66,7 @@ fn temporalise_collection(source: &Vec<WegItem>) -> Vec<WegItem> {
             WegItem::Separator { id: _ }
             | WegItem::Media { id: _ }
             | WegItem::StartMenu { id: _ } => {}
+            WegItem::ShowDesktop { id: _ } => {}
         }
     }
 

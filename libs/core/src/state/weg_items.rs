@@ -98,6 +98,9 @@ pub enum WegItem {
     StartMenu {
         id: String,
     },
+    ShowDesktop {
+        id: String,
+    },
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
@@ -108,6 +111,7 @@ pub enum WegItemType {
     Separator,
     Media,
     StartMenu,
+    ShowDesktop,
 }
 
 impl WegItem {
@@ -118,6 +122,7 @@ impl WegItem {
             WegItem::Separator { id } => id,
             WegItem::Media { id } => id,
             WegItem::StartMenu { id } => id,
+            WegItem::ShowDesktop { id } => id,
         }
     }
 
@@ -128,6 +133,7 @@ impl WegItem {
             WegItem::Separator { id } => *id = identifier,
             WegItem::Media { id } => *id = identifier,
             WegItem::StartMenu { id } => *id = identifier,
+            WegItem::ShowDesktop { id } => *id = identifier,
         }
     }
 }
@@ -148,7 +154,10 @@ impl Default for WegItems {
     fn default() -> Self {
         Self {
             is_reorder_disabled: false,
-            left: vec![WegItem::StartMenu { id: String::new() }],
+            left: vec![
+                WegItem::StartMenu { id: String::new() },
+                WegItem::ShowDesktop { id: String::new() },
+            ],
             center: vec![WegItem::Pinned(PinnedWegItemData {
                 id: String::new(),
                 umid: None,

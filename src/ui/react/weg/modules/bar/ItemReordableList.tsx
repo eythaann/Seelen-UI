@@ -28,6 +28,7 @@ import type { SwItem } from "../shared/types.ts";
 
 import { $dock_state } from "../shared/state/items.ts";
 import { DraggableItem } from "./DraggableItem.tsx";
+import { ShowDesktopModule } from "../item/infra/ShowDesktop.tsx";
 
 export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
   const $active_id = useSignal<string | null>(null);
@@ -40,8 +41,7 @@ export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
   });
   const sensors = useSensors(pointerSensor);
 
-  const isEmpty = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator)
-    .length === 0;
+  const isEmpty = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length === 0;
 
   function handleDragStart(e: DragStartEvent) {
     $active_id.value = e.active.id as string;
@@ -80,15 +80,13 @@ export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
             disabled={$dock_state.value.isReorderDisabled}
           >
             {$dock_state.value.items.map((item) => (
-              <DraggableItem item={item}>
+              <DraggableItem item={item} key={item.id}>
                 {ItemByType(item, false)}
               </DraggableItem>
             ))}
           </SortableContext>
         )}
-        <DragOverlay>
-          {dragginItem && ItemByType(dragginItem, true)}
-        </DragOverlay>
+        <DragOverlay>{dragginItem && ItemByType(dragginItem, true)}</DragOverlay>
       </div>
     </DndContext>
   );
@@ -106,12 +104,16 @@ function ItemByType(item: SwItem, isOverlay: boolean) {
     return <UserApplication key={item.id} item={item} isOverlay={isOverlay} />;
   }
 
-  if (item.type === WegItemType.Media) {
-    return <MediaSession key={item.id} item={item} />;
-  }
-
   if (item.type === WegItemType.StartMenu) {
     return <StartMenu key={item.id} item={item} />;
+  }
+
+  if (item.type === WegItemType.ShowDesktop) {
+    return <ShowDesktopModule key={item.id} item={item} />;
+  }
+
+  if (item.type === WegItemType.Media) {
+    return <MediaSession key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.Separator) {

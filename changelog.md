@@ -2,6 +2,11 @@
 
 ## [2.5.0-dev]
 
+### features
+
+- add corner actions on toolbar.
+- add toggle desktop module on dock.
+
 ### enhancements
 
 - improve display changes events.

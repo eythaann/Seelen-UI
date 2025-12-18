@@ -3,16 +3,16 @@ use seelen_core::{
     system_state::{FocusedApp, UserAppWindow, UserApplication},
 };
 use tauri::Emitter;
-use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
+use windows::Win32::UI::Shell::{IShellDispatch6, Shell};
 
 use crate::{
     app::get_app_handle,
-    error::{ErrorMap, ResultLogExt},
+    error::{ErrorMap, Result, ResultLogExt},
     modules::{
         apps::application::{UserAppsManager, USER_APPS_MANAGER},
         input::Mouse,
     },
-    windows_api::window::Window,
+    windows_api::{window::Window, Com},
 };
 
 pub fn register_app_win_events() {
@@ -48,11 +48,10 @@ pub fn get_user_app_windows() -> Vec<UserAppWindow> {
 
 /// This function is called show_desktop but acts more like minimize_all
 #[tauri::command(async)]
-pub fn show_desktop() {
-    USER_APPS_MANAGER.interactable_windows.for_each(|data| {
-        let win = Window::from(data.hwnd);
-        if !win.is_minimized() {
-            win.show_window_async(SW_MINIMIZE).log_error();
-        }
-    });
+pub fn show_desktop() -> Result<()> {
+    Com::run_with_context(|| {
+        let shell: IShellDispatch6 = Com::create_instance(&Shell)?;
+        unsafe { shell.ToggleDesktop()? };
+        Ok(())
+    })
 }

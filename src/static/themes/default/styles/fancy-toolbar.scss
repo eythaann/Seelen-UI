@@ -979,3 +979,15 @@
     }
   }
 }
+
+.ft-corner-button {
+  transition: backdrop-filter 0.2s ease;
+
+  &:hover {
+    backdrop-filter: invert(0.2);
+  }
+
+  &:active {
+    backdrop-filter: invert(0.3);
+  }
+}

@@ -14,18 +14,20 @@ app_menu:
 context_menu:
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
+  remove_module: Remove Module
 media:
   not_playing: Nothing is playing
-media_menu:
-  remove: Remove Media Module
-start_menu:
-  remove: Remove Start Module
+start:
+  label: Start Menu
+show_desktop:
+  label: Show Desktop
 taskbar_menu:
   add_file: Pin Custom File
   add_folder: Pin Custom Folder
   media: Add Media Module
   settings: Settings
   start: Add Start Module
+  desktop: Add Desktop Module
   task_manager: Task Manager
 weg:
   empty: No items to show
