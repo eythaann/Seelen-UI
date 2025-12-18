@@ -17,7 +17,7 @@ pub struct Brightness {
     pub current: u32,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
 pub struct MonitorId(pub String);
 
 identifier_impl!(MonitorId, String);

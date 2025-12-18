@@ -16,6 +16,7 @@
 ### fix
 
 - tray not working on MSIX installation.
+- shortcuts not being enabled by default but widgets yes.
 
 ## [2.4.10]
 

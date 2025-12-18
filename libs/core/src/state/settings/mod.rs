@@ -16,6 +16,7 @@ use serde_alias::serde_alias;
 use ts_rs::TS;
 
 use crate::resource::WidgetId;
+use crate::system_state::MonitorId;
 use crate::{
     error::Result,
     rect::Rect,
@@ -427,7 +428,7 @@ pub struct Settings {
     #[serde(skip_serializing)]
     launcher: Option<SeelenLauncherSettings>,
     /// list of monitors and their configurations
-    pub monitors_v3: HashMap<String, MonitorConfiguration>,
+    pub monitors_v3: HashMap<MonitorId, MonitorConfiguration>,
     /// app shortcuts settings
     pub shortcuts: SluShortcutsSettings,
     /// list of selected themes as filename as backguard compatibility for versions before v2.3.8, will be removed in v3
@@ -604,14 +605,27 @@ impl Settings {
         Ok(())
     }
 
-    // This indicates if the widget is enabled on general, doesn't take in care
-    // by monitor or by instance settings.
+    /// This indicates if the widget is enabled on general, doesn't take in care multi-instances
     pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
         self.by_widget.is_enabled(widget_id)
     }
 
     pub fn set_widget_enabled(&mut self, widget_id: &WidgetId, enabled: bool) {
         self.by_widget.set_enabled(widget_id, enabled);
+    }
+
+    pub fn is_widget_enabled_on_monitor(
+        &self,
+        widget_id: &WidgetId,
+        monitor_id: &MonitorId,
+    ) -> bool {
+        if !self.is_widget_enabled(widget_id) {
+            return false;
+        }
+        // default to true as new connected monitors should be enabled
+        self.monitors_v3
+            .get(monitor_id)
+            .is_none_or(|monitor_config| monitor_config.by_widget.is_widget_enabled(widget_id))
     }
 }
 

@@ -7,8 +7,7 @@ use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
         value::{KnownPlugin, PluginValue},
-        WegPinnedItemsVisibility, WegTemporalItemsVisibility, WidgetLoader, WindowManagerLayout,
-        WorkspaceId,
+        WegPinnedItemsVisibility, WegTemporalItemsVisibility, WindowManagerLayout, WorkspaceId,
     },
     system_state::MonitorId,
 };
@@ -18,22 +17,7 @@ use crate::resources::RESOURCES;
 
 impl FullState {
     pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
-        // read user stored settings
-        if self.settings.is_widget_enabled(widget_id) {
-            return true;
-        }
-
-        // new bundled widgets with not user config are enabled by default
-        if !self.settings.by_widget.others.contains_key(widget_id) {
-            return RESOURCES
-                .widgets
-                .read(widget_id, |_, widget| {
-                    widget.loader != WidgetLoader::Legacy && widget.metadata.internal.bundled
-                })
-                .is_some_and(|is_bundled| is_bundled);
-        }
-
-        false
+        self.settings.is_widget_enabled(widget_id)
     }
 
     pub fn is_widget_enable_on_monitor(
@@ -41,13 +25,8 @@ impl FullState {
         widget_id: &WidgetId,
         monitor_id: &MonitorId,
     ) -> bool {
-        if !self.is_widget_enabled(widget_id) {
-            return false;
-        }
         self.settings
-            .monitors_v3
-            .get(monitor_id.as_str())
-            .is_none_or(|monitor_config| monitor_config.by_widget.is_widget_enabled(widget_id))
+            .is_widget_enabled_on_monitor(widget_id, monitor_id)
     }
 
     pub fn is_weg_enabled(&self) -> bool {
