@@ -133,6 +133,9 @@ impl Seelen {
             MonitorManagerEvent::ViewAdded(view) => {
                 log_error!(guard.add_monitor(view));
             }
+            MonitorManagerEvent::ViewsChanged => {
+                log_error!(guard.refresh_windows_positions());
+            }
             MonitorManagerEvent::ViewRemoved(id) => {
                 log_error!(guard.remove_monitor(&id));
             }

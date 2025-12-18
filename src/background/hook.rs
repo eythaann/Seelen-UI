@@ -25,7 +25,7 @@ use crate::{
     app::{get_app_handle, Seelen, SEELEN},
     error::{ErrorMap, Result, ResultLogExt},
     event_manager, log_error,
-    modules::input::{domain::Point, Mouse},
+    modules::input::Mouse,
     state::application::FULL_STATE,
     trace_lock,
     utils::spawn_named_thread,
@@ -187,14 +187,25 @@ pub fn register_win_hook() -> Result<()> {
     init_zombie_window_killer();
     HookManager::start();
 
+    let eid = HookManager::subscribe(|(event, origin)| match event {
+        WinEvent::SystemMoveSizeStart => {
+            origin.set_dragging(true);
+        }
+        WinEvent::SystemMoveSizeEnd => {
+            origin.set_dragging(false);
+        }
+        _ => (),
+    });
+    HookManager::set_event_handler_priority(&eid, 2);
+
     spawn_named_thread("MouseEventHook", || {
         let handle = get_app_handle();
-        let mut last_pos = Point::default();
+        let mut last_pos = seelen_core::Point::default();
         let sleep_time = Duration::from_millis(100); // 10fps
         loop {
             if let Ok(pos) = Mouse::get_cursor_pos() {
                 if last_pos != pos {
-                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.x(), pos.y()]);
+                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.x, pos.y]);
                     last_pos = pos;
                 }
             }

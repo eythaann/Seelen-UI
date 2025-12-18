@@ -6,10 +6,7 @@ use windows::{
     Win32::Graphics::Gdi::HMONITOR,
 };
 
-use crate::{
-    error::Result,
-    modules::{input::domain::Point, monitors::MonitorManager},
-};
+use crate::{error::Result, modules::monitors::MonitorManager};
 use seelen_core::{rect::Rect, system_state::MonitorId};
 
 use super::{MonitorEnumerator, WindowsApi};
@@ -33,8 +30,8 @@ impl From<isize> for Monitor {
     }
 }
 
-impl From<&Point> for Monitor {
-    fn from(point: &Point) -> Self {
+impl From<&seelen_core::Point> for Monitor {
+    fn from(point: &seelen_core::Point) -> Self {
         let hmonitor = WindowsApi::monitor_from_point(point);
         Self(hmonitor)
     }

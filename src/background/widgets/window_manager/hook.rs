@@ -1,27 +1,14 @@
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
-use seelen_core::{rect::Rect, state::WmNodeKind};
-use std::sync::Arc;
+use seelen_core::state::WmNodeKind;
 
 use crate::{
     error::Result,
-    modules::input::Mouse,
     trace_lock,
     virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager, MINIMIZED_BY_WORKSPACES},
     widgets::window_manager::node_ext::WmNodeExt,
-    windows_api::{
-        monitor::Monitor,
-        window::{event::WinEvent, Window},
-    },
+    windows_api::window::{event::WinEvent, Window},
 };
 
 use super::{cli::Axis, state::WM_STATE, WindowManagerV2};
-
-lazy_static! {
-    static ref SystemMoveSizeStartRect: Arc<Mutex<Rect>> = Arc::new(Mutex::new(Rect::default()));
-    static ref SystemMoveSizeStartMonitor: Arc<Mutex<Monitor>> =
-        Arc::new(Mutex::new(Monitor::from(0)));
-}
 
 impl WindowManagerV2 {
     pub fn process_vd_event(event: &VirtualDesktopEvent) -> Result<()> {
@@ -60,14 +47,14 @@ impl WindowManagerV2 {
             return Ok(());
         }
 
-        if *trace_lock!(SystemMoveSizeStartMonitor) != window.monitor() {
+        /* if *trace_lock!(SystemMoveSizeStartMonitor) != window.monitor() {
             log::trace!("window moved of monitor");
             Self::remove(window)?;
             Self::add(window)?;
             return Ok(());
-        }
+        } */
 
-        let initial_rect = trace_lock!(SystemMoveSizeStartRect);
+        let initial_rect = window.get_rect_before_dragging()?;
         let end_rect = window.inner_rect()?;
 
         let initial_width = (initial_rect.right - initial_rect.left) as f32;
@@ -81,16 +68,23 @@ impl WindowManagerV2 {
 
         // not resized only dragged/moved
         if initial_width == new_width && initial_height == new_height {
-            if let Some(workspace) = state.get_workspace_state_for_window(window) {
-                if let Some(node) =
-                    workspace.get_node_at_point(&Mouse::get_cursor_pos()?, &[window.address()])
-                {
-                    if let Some(face) = node.face() {
+            let Some(workspace) = state.get_workspace_state_for_window(window) else {
+                return Ok(());
+            };
+
+            let current_rect = window.inner_rect()?;
+            if let Some(node) = workspace.get_nearest_node_to_rect(&current_rect) {
+                if let Some(face) = node.face() {
+                    if &face != window
+                            // don't swap if nearest is not overlapped
+                            && current_rect.intersection(&face.inner_rect()?).is_some()
+                    {
                         workspace.swap_nodes_containing_window(window, &face)?;
                     }
                 }
-                Self::render_workspace(&monitor_id, workspace)?;
             }
+
+            Self::render_workspace(&monitor_id, workspace)?;
             return Ok(());
         }
 
@@ -126,12 +120,6 @@ impl WindowManagerV2 {
 
     pub fn process_win_event(event: WinEvent, window: &Window) -> Result<()> {
         match event {
-            WinEvent::SystemMoveSizeStart => {
-                if Self::is_tiled(window) {
-                    *trace_lock!(SystemMoveSizeStartRect) = window.inner_rect()?;
-                    *trace_lock!(SystemMoveSizeStartMonitor) = window.monitor();
-                }
-            }
             WinEvent::SystemMoveSizeEnd => {
                 Self::system_move_size_end(window)?;
             }

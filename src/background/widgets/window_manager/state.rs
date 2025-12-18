@@ -8,12 +8,12 @@ use parking_lot::Mutex;
 use seelen_core::{
     rect::Rect,
     state::{WindowManagerLayout, WmNode, WmNodeKind, WorkspaceId},
+    Point,
 };
 
 use crate::{
     error::Result,
     log_error,
-    modules::input::domain::Point,
     state::application::FULL_STATE,
     virtual_desktops::get_vd_manager,
     widgets::window_manager::{
@@ -307,11 +307,17 @@ impl WmWorkspaceState {
         self.layout.structure.trace(window)
     }
 
-    pub fn get_node_at_point(&mut self, point: &Point, ignore: &[isize]) -> Option<&mut WmNode> {
+    #[allow(dead_code)]
+    pub fn get_node_at_point(&self, point: &Point) -> Option<&WmNode> {
+        self.layout.structure.get_node_at_point(point).ok()?
+    }
+
+    pub fn get_nearest_node_to_rect(&self, rect: &Rect) -> Option<&WmNode> {
         self.layout
             .structure
-            .get_node_at_point(point, ignore)
+            .get_nearest_node_to_rect(rect)
             .ok()?
+            .map(|(n, _)| n)
     }
 
     pub fn toggle_monocle(&mut self) {

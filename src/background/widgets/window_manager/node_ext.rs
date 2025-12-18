@@ -1,11 +1,13 @@
 use evalexpr::{context_map, eval_with_context, HashMapContext};
 use itertools::Itertools;
-use seelen_core::state::{WmNode, WmNodeKind};
+use seelen_core::{
+    state::{WmNode, WmNodeKind},
+    Point, Rect,
+};
 use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_RESTORE};
 
 use crate::{
-    error::Result, modules::input::domain::Point, widgets::window_manager::cli::NodeSiblingSide,
-    windows_api::window::Window,
+    error::Result, widgets::window_manager::cli::NodeSiblingSide, windows_api::window::Window,
 };
 
 pub trait WmNodeExt {
@@ -17,7 +19,8 @@ pub trait WmNodeExt {
     /// trace the way to the window
     fn trace(&self, window: &Window) -> Vec<&Self>;
 
-    fn get_node_at_point(&mut self, point: &Point, ignore: &[isize]) -> Result<Option<&mut Self>>;
+    fn get_node_at_point(&self, point: &Point) -> Result<Option<&Self>>;
+    fn get_nearest_node_to_rect(&self, rect: &Rect) -> Result<Option<(&Self, i32)>>;
 
     /// trace and get the inmediate silbings of the node
     fn get_siblings_at_side(&self, window: &Window, side: &NodeSiblingSide) -> Vec<&Self>;
@@ -281,28 +284,65 @@ impl WmNodeExt for WmNode {
         None
     }
 
-    fn get_node_at_point(&mut self, point: &Point, ignore: &[isize]) -> Result<Option<&mut Self>> {
+    fn get_node_at_point(&self, point: &Point) -> Result<Option<&Self>> {
         match self.kind {
             WmNodeKind::Leaf | WmNodeKind::Stack => {
                 if let Some(handle) = self.active {
-                    if ignore.contains(&handle) {
-                        return Ok(None);
-                    }
                     let window = Window::from(handle);
-                    if point.is_inside_rect(&window.inner_rect()?) {
+                    if window.get_rect_before_dragging()?.contains(point) {
                         return Ok(Some(self));
                     }
                 }
             }
             WmNodeKind::Horizontal | WmNodeKind::Vertical => {
-                for child in self.children.iter_mut() {
-                    if let Some(node) = child.get_node_at_point(point, ignore)? {
+                for child in &self.children {
+                    if let Some(node) = child.get_node_at_point(point)? {
                         return Ok(Some(node));
                     }
                 }
             }
         }
         Ok(None)
+    }
+
+    /// returns None if the node is empty
+    /// uses the closest corners algorithm to find the nearest node
+    fn get_nearest_node_to_rect(&self, rect: &Rect) -> Result<Option<(&Self, i32)>> {
+        match self.kind {
+            WmNodeKind::Leaf | WmNodeKind::Stack => {
+                if let Some(handle) = self.active {
+                    let window = Window::from(handle);
+                    let window_rect = window.get_rect_before_dragging()?;
+                    let window_corners = window_rect.corners();
+                    let search_corners = rect.corners();
+
+                    // Find minimum distance between corresponding corners
+                    // corners() returns: [top-left, top-right, bottom-right, bottom-left]
+                    let mut min_distance = i32::MAX;
+                    for i in 0..4 {
+                        let distance = search_corners[i].distance_squared(&window_corners[i]);
+                        if distance < min_distance {
+                            min_distance = distance;
+                        }
+                    }
+
+                    Ok(Some((self, min_distance)))
+                } else {
+                    Ok(None)
+                }
+            }
+            WmNodeKind::Horizontal | WmNodeKind::Vertical => {
+                let mut nearest: Option<(&Self, i32)> = None;
+                for child in &self.children {
+                    if let Some((node, distance)) = child.get_nearest_node_to_rect(rect)? {
+                        if nearest.is_none() || distance < nearest.unwrap().1 {
+                            nearest = Some((node, distance));
+                        }
+                    }
+                }
+                Ok(nearest)
+            }
+        }
     }
 
     fn hide_non_active(&self) -> Result<()> {

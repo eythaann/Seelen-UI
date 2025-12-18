@@ -3,10 +3,12 @@ pub mod event;
 
 use seelen_core::{rect::Rect, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
+use std::sync::atomic::Ordering;
+use std::sync::Arc;
 use std::{
     fmt::{Debug, Display},
     path::PathBuf,
-    sync::LazyLock,
+    sync::{atomic::AtomicIsize, LazyLock},
 };
 
 use windows::{
@@ -24,6 +26,7 @@ use crate::{
     cli::ServicePipe,
     error::Result,
     modules::{apps::application::is_interactable_window, start::application::START_MENU_MANAGER},
+    utils::lock_free::TracedMutex,
     widgets::{
         launcher::SeelenRofi, toolbar::FancyToolbar, wallpaper_manager::SeelenWall,
         weg::instance::SeelenWeg, window_manager::instance::WindowManagerV2,
@@ -33,6 +36,11 @@ use crate::{
 use super::{
     monitor::Monitor, process::Process, types::AppUserModelId, WindowEnumerator, WindowsApi,
 };
+
+static DRAGGING_WINDOW: AtomicIsize = AtomicIsize::new(0);
+static LAST_DRAGGED_WINDOW: AtomicIsize = AtomicIsize::new(0);
+static DRAGGED_WINDOW_RECT_BEFORE_DRAG: LazyLock<Arc<TracedMutex<Option<Rect>>>> =
+    LazyLock::new(|| Arc::new(TracedMutex::new(None)));
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Window(HWND);
@@ -367,5 +375,39 @@ impl Window {
             ServicePipe::request(SvcAction::SetForeground(self.address()))
         } */
         WindowsApi::set_foreground(self.hwnd())
+    }
+
+    pub fn is_dragging(&self) -> bool {
+        DRAGGING_WINDOW.load(Ordering::SeqCst) == self.address()
+    }
+
+    pub fn is_last_dragged(&self) -> bool {
+        LAST_DRAGGED_WINDOW.load(Ordering::SeqCst) == self.address()
+    }
+
+    pub fn set_dragging(&self, dragging: bool) {
+        if dragging {
+            DRAGGING_WINDOW.store(self.address(), Ordering::SeqCst);
+            LAST_DRAGGED_WINDOW.store(self.address(), Ordering::SeqCst);
+            *DRAGGED_WINDOW_RECT_BEFORE_DRAG.lock() = self.inner_rect().ok();
+        } else {
+            DRAGGING_WINDOW.store(0, Ordering::SeqCst);
+            // *DRAGGING_WINDOW_RECT_BEFORE_DRAG.lock() = None; we don't clean up to allow be used on drag end
+        }
+    }
+
+    /// if dragging returns the rect of the window before dragging
+    /// otherwise returns the current rect
+    pub fn get_rect_before_dragging(&self) -> Result<Rect> {
+        if self.is_dragging() || self.is_last_dragged() {
+            let guard = DRAGGED_WINDOW_RECT_BEFORE_DRAG.lock();
+            if let Some(rect) = guard.as_ref() {
+                Ok(rect.clone())
+            } else {
+                self.inner_rect()
+            }
+        } else {
+            self.inner_rect()
+        }
     }
 }

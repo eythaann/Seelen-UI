@@ -25,7 +25,7 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
     // map and filter step
     for (hwnd, rect) in positions {
         let window = Window::from(hwnd);
-        if !window.is_window() || window.is_minimized() {
+        if !window.is_window() || window.is_minimized() || window.is_dragging() {
             continue;
         }
 
@@ -45,7 +45,7 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
 
     SCHEDULED_POSITIONS.scan(|k, v| {
         let window = Window::from(*k);
-        if window.is_window() && !window.is_minimized() {
+        if window.is_window() && !window.is_minimized() && !window.is_dragging() {
             list.insert(*k, v.clone());
         }
     });

@@ -137,6 +137,7 @@ windows = { workspace = true, features = [
     "Win32_Media_Audio_Apo",
     "Win32_Media_DeviceManager",
     "Graphics",
+    "Graphics_Display",
     "Media",
     "Media_Audio",
     "Media_Render",

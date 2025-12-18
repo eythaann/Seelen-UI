@@ -5,6 +5,11 @@
 ### enhancements
 
 - improve display changes events.
+- tiling window manager now swap windows by center point on drag end.
+
+### fix
+
+- window manager moving windows being currently dragged by the user.
 
 ## [2.4.11]
 

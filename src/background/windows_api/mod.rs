@@ -47,8 +47,8 @@ use windows::{
             PHYSICAL_MONITOR,
         },
         Foundation::{
-            CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT, STATUS_SUCCESS,
-            WPARAM,
+            CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, POINT, RECT,
+            STATUS_SUCCESS, WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -120,7 +120,7 @@ use windows::{
 use crate::{
     error::{Result, WindowsResultExt},
     hook::HookManager,
-    modules::input::{domain::Point, Keyboard, Mouse},
+    modules::input::{Keyboard, Mouse},
     windows_api::window::{event::WinEvent, Window},
 };
 
@@ -792,13 +792,29 @@ impl WindowsApi {
 
     pub fn monitor_from_cursor_point() -> HMONITOR {
         if let Ok(point) = Mouse::get_cursor_pos() {
-            return unsafe { MonitorFromPoint(*point.as_ref(), MONITOR_DEFAULTTOPRIMARY) };
+            return unsafe {
+                MonitorFromPoint(
+                    POINT {
+                        x: point.x,
+                        y: point.y,
+                    },
+                    MONITOR_DEFAULTTOPRIMARY,
+                )
+            };
         }
         Self::primary_monitor()
     }
 
-    pub fn monitor_from_point(point: &Point) -> HMONITOR {
-        unsafe { MonitorFromPoint(*point.as_ref(), MONITOR_DEFAULTTOPRIMARY) }
+    pub fn monitor_from_point(point: &seelen_core::Point) -> HMONITOR {
+        unsafe {
+            MonitorFromPoint(
+                POINT {
+                    x: point.x,
+                    y: point.y,
+                },
+                MONITOR_DEFAULTTOPRIMARY,
+            )
+        }
     }
 
     pub fn primary_monitor() -> HMONITOR {

@@ -8,13 +8,14 @@ use windows::{
         DisplayManagerPathsFailedOrInvalidatedEventArgs,
     },
     Foundation::TypedEventHandler,
+    Win32::UI::WindowsAndMessaging::WM_DISPLAYCHANGE,
 };
 
 use crate::{
     error::{Result, ResultLogExt},
-    event_manager, log_error,
+    event_manager,
     utils::lock_free::SyncHashMap,
-    windows_api::monitor::DisplayView,
+    windows_api::{event_window::subscribe_to_background_window, monitor::DisplayView},
 };
 
 static MONITOR_MANAGER: LazyLock<MonitorManager> = LazyLock::new(|| {
@@ -38,6 +39,7 @@ pub struct MonitorManager {
 pub enum MonitorManagerEvent {
     ViewAdded(DisplayView),
     ViewRemoved(MonitorId),
+    ViewsChanged,
 }
 
 event_manager!(MonitorManager, MonitorManagerEvent);
@@ -95,6 +97,14 @@ impl MonitorManager {
             .ok();
 
         self.display_manager.Start()?;
+        subscribe_to_background_window(|event, _w_param, _l_param| {
+            if event == WM_DISPLAYCHANGE {
+                log::debug!("Displays changed");
+                Self::send(MonitorManagerEvent::ViewsChanged);
+                Self::check_for_display_changes().log_error();
+            }
+            Ok(())
+        });
         Ok(())
     }
 
@@ -128,12 +138,13 @@ impl MonitorManager {
         Ok(())
     }
 
+    // this only detects changes on the display adapters like connect/disconnect of displays
     fn on_changed(
-        sender: &Option<DisplayManager>,
+        _sender: &Option<DisplayManager>,
         args: &Option<DisplayManagerChangedEventArgs>,
     ) -> windows_core::Result<()> {
         log::trace!("DisplayManager changed");
-        Self::process_display_change(sender).log_error();
+        Self::check_for_display_changes().log_error();
 
         // Critical!: app will crash if this is not set
         if let Some(args) = args {
@@ -143,12 +154,12 @@ impl MonitorManager {
     }
 
     fn on_paths_failed_or_invalidated(
-        sender: &Option<DisplayManager>,
+        _sender: &Option<DisplayManager>,
         args: &Option<DisplayManagerPathsFailedOrInvalidatedEventArgs>,
     ) -> windows_core::Result<()> {
         log::trace!("DisplayManager paths failed or invalidated");
         // Treat this as a change event
-        Self::process_display_change(sender).log_error();
+        Self::check_for_display_changes().log_error();
 
         // Critical!: app will crash if this is not set
         if let Some(args) = args {
@@ -157,38 +168,38 @@ impl MonitorManager {
         Ok(())
     }
 
-    fn process_display_change(sender: &Option<DisplayManager>) -> windows_core::Result<()> {
-        if let Some(sender) = sender {
-            let current_state = sender.TryReadCurrentStateForAllTargets()?.State()?;
+    fn check_for_display_changes() -> windows_core::Result<()> {
+        let current_state = Self::instance()
+            .display_manager
+            .TryReadCurrentStateForAllTargets()?
+            .State()?;
 
-            let mut current_views = HashMap::new();
-            for view in current_state.Views()? {
-                let view = DisplayView::from(view);
-                let id = match view.primary_target().and_then(|t| t.stable_id()) {
-                    Ok(id) => id,
-                    Err(_) => continue,
-                };
-                current_views.insert(id, view);
-            }
-
-            let mut old_views = Self::instance().state_views.to_hash_map();
-
-            // new monitors were added
-            for id in current_views.keys() {
-                let was_already_present = old_views.remove(id).is_none();
-                if was_already_present {
-                    log_error!(Self::event_tx()
-                        .send(MonitorManagerEvent::ViewAdded(current_views[id].clone())));
-                }
-            }
-
-            // residuals were removed/disconnected
-            for (id, _) in old_views {
-                log_error!(Self::event_tx().send(MonitorManagerEvent::ViewRemoved(id)));
-            }
-
-            Self::instance().state_views.replace(current_views);
+        let mut current_views = HashMap::new();
+        for view in current_state.Views()? {
+            let view = DisplayView::from(view);
+            let id = match view.primary_target().and_then(|t| t.stable_id()) {
+                Ok(id) => id,
+                Err(_) => continue,
+            };
+            current_views.insert(id, view);
         }
+
+        let mut old_views = Self::instance().state_views.to_hash_map();
+
+        // new monitors were added
+        for id in current_views.keys() {
+            let was_already_present = old_views.remove(id).is_none();
+            if was_already_present {
+                Self::send(MonitorManagerEvent::ViewAdded(current_views[id].clone()));
+            }
+        }
+
+        // residuals were removed/disconnected
+        for (id, _) in old_views {
+            Self::send(MonitorManagerEvent::ViewRemoved(id));
+        }
+
+        Self::instance().state_views.replace(current_views);
         Ok(())
     }
 
