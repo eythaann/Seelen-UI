@@ -323,6 +323,10 @@ wm:
     offset: Offset granice
     width: Širina granice
   description: Opis
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: Sortiraj (promijeni redoslijed prozora tokom prevlačenja)
+    swap: Zamijeni (zamijeni prozore na kraju povlačenja)
   enable: Omogući oblaganje menadžera prozora
   layout: Izgled
   resize_delta: Promijenite veličinu Delta (%)

@@ -12,17 +12,19 @@ app_menu:
   run_as: Pokreni kao administrator
   unpin: Raskoš
 context_menu:
+  remove_module: Ukloni modul
   reorder_disable: Zaključajte zadaću
   reorder_enable: Otključajte zadaću
 media:
   not_playing: Ništa se ne igra
-media_menu:
-  remove: Uklonite medijski modul
-start_menu:
-  remove: Uklonite modul Start
+show_desktop:
+  label: Prikaži radnu površinu
+start:
+  label: Izbornik Start
 taskbar_menu:
   add_file: PIN prilagođena datoteka
   add_folder: PIN prilagođena mapa
+  desktop: Dodaj Desktop Module
   media: Dodajte medijski modul
   settings: postavke
   start: Dodajte modul za start

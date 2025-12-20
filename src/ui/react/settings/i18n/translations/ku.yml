@@ -324,6 +324,10 @@ wm:
     offset: Berdewamiya sînor
     width: Berfirehiya sînor
   description: Terîf
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: Rêzkirin (dema dikişîne paceyan ji nû ve rêz bike)
+    swap: Swap (paceyên li ser dawiya kaşkirinê biguherînin)
   enable: Gerînendeyê Windowê ya Tilî bikar bînin
   layout: Rêz
   resize_delta: Delta Resize (%)

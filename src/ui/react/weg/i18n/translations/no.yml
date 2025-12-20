@@ -12,17 +12,19 @@ app_menu:
   run_as: Kjør som administrator
   unpin: Upinn
 context_menu:
+  remove_module: Fjern modulen
   reorder_disable: Lås oppgavelinje
   reorder_enable: Lås opp oppgavelinje
 media:
   not_playing: Ingenting spiller
-media_menu:
-  remove: Fjern mediemodulen
-start_menu:
-  remove: Fjern startmodulen
+show_desktop:
+  label: Vis skrivebord
+start:
+  label: Start-menyen
 taskbar_menu:
   add_file: Pin tilpasset fil
   add_folder: Pin tilpasset mappe
+  desktop: Legg til skrivebordsmodul
   media: Legg til mediemodul
   settings: Innstillinger
   start: Legg til startmodul

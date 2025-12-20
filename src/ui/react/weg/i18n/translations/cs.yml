@@ -12,17 +12,19 @@ app_menu:
   run_as: Spustit jako administrátor
   unpin: Odepnout
 context_menu:
+  remove_module: Odebrat modul
   reorder_disable: Uzamčení hlavního panelu
   reorder_enable: Odemknutí hlavního panelu
 media:
   not_playing: Nic nehraje
-media_menu:
-  remove: Odebrat mediální modul
-start_menu:
-  remove: Odstranit startovací modul
+show_desktop:
+  label: Zobrazit plochu
+start:
+  label: Nabídka Start
 taskbar_menu:
   add_file: Připnout vlastní soubor
   add_folder: Připnout vlastní složku
+  desktop: Přidat modul plochy
   media: Přidat mediální modul
   settings: Nastavení
   start: Přidat startovací modul

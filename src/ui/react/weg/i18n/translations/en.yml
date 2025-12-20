@@ -12,22 +12,22 @@ app_menu:
   run_as: Run as Administrator
   unpin: Unpin
 context_menu:
+  remove_module: Remove Module
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
-  remove_module: Remove Module
 media:
   not_playing: Nothing is playing
-start:
-  label: Start Menu
 show_desktop:
   label: Show Desktop
+start:
+  label: Start Menu
 taskbar_menu:
   add_file: Pin Custom File
   add_folder: Pin Custom Folder
+  desktop: Add Desktop Module
   media: Add Media Module
   settings: Settings
   start: Add Start Module
-  desktop: Add Desktop Module
   task_manager: Task Manager
 weg:
   empty: No items to show

@@ -12,17 +12,19 @@ app_menu:
   run_as: Ადმინისტრატორის სახელით გაშვება
   unpin: გაუქმება
 context_menu:
+  remove_module: მოდულის ამოღება
   reorder_disable: ჩაკეტეთ დავალების პანელი
   reorder_enable: განბლოკეთ დავალების ზოლი
 media:
   not_playing: არაფერი თამაშობს
-media_menu:
-  remove: წაშალეთ მედია მოდული
-start_menu:
-  remove: წაშალეთ დაწყების მოდული
+show_desktop:
+  label: დესკტოპის ჩვენება
+start:
+  label: დაწყება მენიუ
 taskbar_menu:
   add_file: Pin Custom File
   add_folder: Pin Custom Folder
+  desktop: დესკტოპის მოდულის დამატება
   media: დაამატეთ მედია მოდული
   settings: პარამეტრები
   start: დაამატეთ დაწყების მოდული

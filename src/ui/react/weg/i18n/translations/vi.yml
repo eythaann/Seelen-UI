@@ -12,17 +12,19 @@ app_menu:
   run_as: Chạy như quản trị viên
   unpin: Giải nén
 context_menu:
+  remove_module: Xóa mô-đun
   reorder_disable: Khóa thanh tác vụ
   reorder_enable: Mở khóa Thanh nhiệm vụ
 media:
   not_playing: Không có gì đang chơi
-media_menu:
-  remove: Loại bỏ mô -đun phương tiện
-start_menu:
-  remove: Xóa mô -đun bắt đầu
+show_desktop:
+  label: Hiển thị màn hình
+start:
+  label: Trình đơn Bắt đầu
 taskbar_menu:
   add_file: Pin tùy chỉnh tệp
   add_folder: Pin thư mục tùy chỉnh
+  desktop: Thêm mô-đun máy tính để bàn
   media: Thêm mô -đun phương tiện
   settings: Cài đặt
   start: Thêm mô -đun bắt đầu

@@ -323,6 +323,10 @@ wm:
     offset: Gränsförskjutning
     width: Gränsbredd
   description: Beskrivning
+  drag_behavior: Drabeteende
+  drag_behavior_options:
+    sort: Sortera (ordna om fönster medan du drar)
+    swap: Byt (byta fönster på dragänden)
   enable: Aktivera kakelfönsterhanterare
   layout: Layout
   resize_delta: Ändra ändra delta (%)

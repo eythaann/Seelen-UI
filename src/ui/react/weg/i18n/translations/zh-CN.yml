@@ -12,17 +12,19 @@ app_menu:
   run_as: 以管理员身份运行
   unpin: 取消固定
 context_menu:
+  remove_module: 移除模块
   reorder_disable: 锁定任务栏
   reorder_enable: 解锁任务栏
 media:
   not_playing: 未播放任何内容
-media_menu:
-  remove: 移除媒体模块
-start_menu:
-  remove: 移除开始模块
+show_desktop:
+  label: 显示桌面
+start:
+  label: 开始菜单
 taskbar_menu:
   add_file: 固定自定义文件
   add_folder: 固定自定义文件夹
+  desktop: 添加桌面模块
   media: 添加媒体模块
   settings: 设置
   start: 添加启动模块

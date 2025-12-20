@@ -12,17 +12,19 @@ app_menu:
   run_as: প্রশাসক হিসাবে চালান
   unpin: আনপিন
 context_menu:
+  remove_module: মডিউল সরান
   reorder_disable: লক টাস্কবার
   reorder_enable: টাস্কবার আনলক করুন
 media:
   not_playing: কিছুই খেলছে না
-media_menu:
-  remove: মিডিয়া মডিউল সরান
-start_menu:
-  remove: স্টার্ট মডিউল সরান
+show_desktop:
+  label: ডেস্কটপ দেখান
+start:
+  label: স্টার্ট মেনু
 taskbar_menu:
   add_file: কাস্টম ফাইল পিন করুন
   add_folder: পিন কাস্টম ফোল্ডার
+  desktop: ডেস্কটপ মডিউল যোগ করুন
   media: মিডিয়া মডিউল যুক্ত করুন
   settings: সেটিংস
   start: স্টার্ট মডিউল যুক্ত করুন

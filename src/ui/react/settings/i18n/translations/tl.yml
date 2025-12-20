@@ -329,6 +329,10 @@ wm:
     offset: Border Offset
     width: Lapad ng hangganan
   description: Paglalarawan
+  drag_behavior: I-drag ang Gawi
+  drag_behavior_options:
+    sort: Pagbukud-bukurin (muling ayusin ang mga bintana habang nagda-drag)
+    swap: Magpalit (magpalit ng mga bintana sa dulo ng pag-drag)
   enable: Paganahin ang manager ng window window
   layout: Layout
   resize_delta: Baguhin ang laki ng Delta (%)

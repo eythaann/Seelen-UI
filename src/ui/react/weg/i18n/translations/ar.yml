@@ -12,17 +12,19 @@ app_menu:
   run_as: تشغيل كمسؤول
   unpin: إزالة التثبيت
 context_menu:
+  remove_module: إزالة الوحدة النمطية
   reorder_disable: قفل شريط المهام
   reorder_enable: فتح شريط المهام
 media:
   not_playing: لا توجد ملفات
-media_menu:
-  remove: حذف وحدة الوسائط
-start_menu:
-  remove: حذف وحدة البداية
+show_desktop:
+  label: إظهار سطح المكتب
+start:
+  label: قائمة ابدأ
 taskbar_menu:
   add_file: ثبت الملف
   add_folder: ثبت المجلد
+  desktop: إضافة وحدة سطح المكتب
   media: أضف وحدة الوسائط
   settings: الأعدادات
   start: أضف وحدة البداية

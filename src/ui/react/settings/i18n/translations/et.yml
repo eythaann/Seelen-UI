@@ -322,6 +322,10 @@ wm:
     offset: Piiride nihke
     width: Piirilaius
   description: Kirjeldus
+  drag_behavior: Lohistuskäitumine
+  drag_behavior_options:
+    sort: Sorteeri (akende järjestamine lohistamise ajal ümber)
+    swap: Vaheta (vahetage aknad lohistamise lõpus)
   enable: Luba plaatide aknahaldur
   layout: Paigutus
   resize_delta: Suuruse muutmine delta (%)

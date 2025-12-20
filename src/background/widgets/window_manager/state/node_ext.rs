@@ -7,7 +7,9 @@ use seelen_core::{
 use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_RESTORE};
 
 use crate::{
-    error::Result, widgets::window_manager::cli::NodeSiblingSide, windows_api::window::Window,
+    error::Result,
+    widgets::window_manager::{cli::NodeSiblingSide, state::WM_LAYOUT_RECTS},
+    windows_api::window::Window,
 };
 
 pub trait WmNodeExt {
@@ -293,7 +295,12 @@ impl WmNodeExt for WmNode {
             WmNodeKind::Leaf | WmNodeKind::Stack => {
                 if let Some(handle) = self.active {
                     let window = Window::from(handle);
-                    if window.get_rect_before_dragging()?.contains(point) {
+                    // Use expected rect from WM_LAYOUT_RECTS if available, otherwise use current inner rect
+                    let window_rect = WM_LAYOUT_RECTS
+                        .get(&handle, |v| v.clone())
+                        .unwrap_or_else(|| window.inner_rect().unwrap_or_default());
+
+                    if window_rect.contains(point) {
                         return Ok(Some(self));
                     }
                 }
@@ -316,7 +323,11 @@ impl WmNodeExt for WmNode {
             WmNodeKind::Leaf | WmNodeKind::Stack => {
                 if let Some(handle) = self.active {
                     let window = Window::from(handle);
-                    let window_rect = window.get_rect_before_dragging()?;
+                    // Use expected rect from WM_LAYOUT_RECTS if available, otherwise use current inner rect
+                    let window_rect = WM_LAYOUT_RECTS
+                        .get(&handle, |v| v.clone())
+                        .unwrap_or_else(|| window.inner_rect().unwrap_or_default());
+
                     let window_corners = window_rect.corners();
                     let search_corners = rect.corners();
 

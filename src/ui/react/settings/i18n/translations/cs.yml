@@ -325,6 +325,10 @@ wm:
     offset: Posun hranice
     width: Šířka hranice
   description: Popis
+  drag_behavior: Chování přetažení
+  drag_behavior_options:
+    sort: Řadit (změnit pořadí oken při přetahování)
+    swap: Zaměnit (vyměnit okna na konci přetažení)
   enable: Povolit správce oken
   layout: Rozložení
   resize_delta: Změna velikosti (%)

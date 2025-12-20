@@ -325,6 +325,10 @@ wm:
     offset: Gwrthbwyso ar y ffin
     width: Lled
   description: Disgrifiadau
+  drag_behavior: Ymddygiad Llusgo
+  drag_behavior_options:
+    sort: Trefnu (ail-archebu ffenestri wrth lusgo)
+    swap: Cyfnewid (cyfnewid ffenestri ar y pen llusgo)
   enable: Galluogi Rheolwr Ffenestr Teils
   layout: Gynllun
   resize_delta: Newid maint Delta (%)

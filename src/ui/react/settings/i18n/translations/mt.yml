@@ -325,6 +325,10 @@ wm:
     offset: Offset tal-fruntiera
     width: Wisa 'tal-fruntiera
   description: Deskrizzjoni
+  drag_behavior: Drag Imġieba
+  drag_behavior_options:
+    sort: Issortja (ordna mill-ġdid it-twieqi waqt li tkaxkar)
+    swap: Ibdel (tbiddel it-twieqi fit-tarf tat-tkaxkir)
   enable: Ippermetti maniġer tat-tieqa tal-madum
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)

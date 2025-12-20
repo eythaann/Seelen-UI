@@ -325,6 +325,10 @@ wm:
     offset: Vyrovnanie
     width: Šírka hranice
   description: Opis
+  drag_behavior: Správanie ťahania
+  drag_behavior_options:
+    sort: Triediť (zmeniť poradie okien počas ťahania)
+    swap: Vymeniť (vymeniť okná na konci ťahania)
   enable: Povoľte správcu okien obkladov
   layout: Usporiadanie
   resize_delta: Zmeňte veľkosť delty (%)

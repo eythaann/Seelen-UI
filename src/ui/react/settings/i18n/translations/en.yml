@@ -322,6 +322,10 @@ wm:
     offset: Border Offset
     width: Border Width
   description: Description
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: Sort (reorder windows while dragging)
+    swap: Swap (swap windows on drag end)
   enable: Enable Tiling Window Manager
   layout: Layout
   resize_delta: Resize Delta (%)

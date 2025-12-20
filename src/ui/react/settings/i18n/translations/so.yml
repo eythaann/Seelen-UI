@@ -327,6 +327,10 @@ wm:
     offset: Xudduud xadka
     width: Xadka ballaca
   description: Sifo
+  drag_behavior: Jiid Dhaqanka
+  drag_behavior_options:
+    sort: Kala sooc (dib u hagaaji daaqadaha markaad jiidanayso)
+    swap: Isku beddel (ku beddel daaqadaha dhamaadka jiida)
   enable: U oggolow maamulaha daaqadda daaqadda
   layout: Khariidad
   resize_delta: Dib u dhig Delta (%)

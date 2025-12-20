@@ -327,6 +327,10 @@ wm:
     offset: Desplazamiento del borde
     width: Anchura del borde
   description: Descripción
+  drag_behavior: Comportamiento de arrastre
+  drag_behavior_options:
+    sort: Ordenar (reordenar ventanas mientras arrastra)
+    swap: Intercambiar (intercambiar ventanas al final del arrastre)
   enable: Activar el gestor de ventanas en mosaico
   layout: Diseño
   resize_delta: Redimensionar Delta (%)

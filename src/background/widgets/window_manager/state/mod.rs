@@ -18,6 +18,7 @@ use crate::{
     event_manager, log_error,
     state::application::FULL_STATE,
     trace_lock,
+    utils::lock_free::SyncHashMap,
     virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
     widgets::window_manager::{
         handler::{schedule_window_position, set_app_windows_positions},
@@ -36,6 +37,8 @@ pub static WM_STATE: LazyLock<Arc<Mutex<WmState>>> = LazyLock::new(|| {
         state
     }))
 });
+
+pub static WM_LAYOUT_RECTS: LazyLock<SyncHashMap<isize, Rect>> = LazyLock::new(SyncHashMap::new);
 
 #[derive(Debug, Default)]
 pub struct WmState {

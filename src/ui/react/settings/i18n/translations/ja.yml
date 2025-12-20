@@ -313,6 +313,10 @@ wm:
     offset: 境界線の余白
     width: 線幅
   description: 説明
+  drag_behavior: ドラッグ動作
+  drag_behavior_options:
+    sort: 並べ替え (ドラッグしながらウィンドウの順序を変更)
+    swap: スワップ (ドラッグ終了時にウィンドウをスワップ)
   enable: タイリングウィンドウマネージャーを有効にする
   layout: レイアウト
   resize_delta: リサイズ時の変化率（％）

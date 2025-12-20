@@ -193,23 +193,6 @@ impl SeelenWegSettings {
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-pub struct Border {
-    pub enabled: bool,
-    pub width: f64,
-    pub offset: f64,
-}
-
-#[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
-pub struct FloatingWindowSettings {
-    pub width: f64,
-    pub height: f64,
-}
-
-#[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
 pub struct WindowManagerSettings {
     /// enable or disable the tiling window manager
     pub enabled: bool,
@@ -231,6 +214,34 @@ pub struct WindowManagerSettings {
     pub default_layout: PluginId,
     /// window manager animations
     pub animations: WmAnimations,
+    /// window manager drag behavior
+    pub drag_behavior: WmDragBehavior,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum WmDragBehavior {
+    /// While dragging the windows on the layout will be sorted.
+    Sort,
+    /// On drag end the dragged and the overlaped will be swapped.
+    Swap,
+}
+
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
+pub struct Border {
+    pub enabled: bool,
+    pub width: f64,
+    pub offset: f64,
+}
+
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
+pub struct FloatingWindowSettings {
+    pub width: f64,
+    pub height: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -244,7 +255,7 @@ pub struct WmAnimations {
 impl Default for WmAnimations {
     fn default() -> Self {
         Self {
-            enabled: false,
+            enabled: true,
             duration_ms: 200,
             ease_function: "EaseOut".into(),
         }
@@ -283,6 +294,7 @@ impl Default for WindowManagerSettings {
             floating: FloatingWindowSettings::default(),
             default_layout: "@default/wm-bspwm".into(),
             animations: WmAnimations::default(),
+            drag_behavior: WmDragBehavior::Sort,
         }
     }
 }

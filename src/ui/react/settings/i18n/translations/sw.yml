@@ -321,6 +321,10 @@ wm:
     offset: Kukabiliana na mpaka
     width: Upana wa mpaka
   description: Maelezo
+  drag_behavior: Tabia ya Kuburuta
+  drag_behavior_options:
+    sort: Panga (panga upya madirisha huku ukiburuta)
+    swap: Badili (badilisha madirisha kwenye mwisho wa buruta)
   enable: Washa Meneja wa Dirisha la Tiling
   layout: Mpangilio
   resize_delta: Rudisha Delta (%)

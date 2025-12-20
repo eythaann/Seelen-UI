@@ -12,17 +12,19 @@ app_menu:
   run_as: વહીવટકર્તા તરીકે ચલાવો
   unpin: ખોળવું
 context_menu:
+  remove_module: મોડ્યુલ દૂર કરો
   reorder_disable: ટાસ્કબાર
   reorder_enable: ટાસ્કબારને અનલ lock ક કરો
 media:
   not_playing: કંઈ રમી રહ્યું નથી
-media_menu:
-  remove: મીડિયા મોડ્યુલ દૂર કરો
-start_menu:
-  remove: પ્રારંભ મોડ્યુલ દૂર કરો
+show_desktop:
+  label: ડેસ્કટોપ બતાવો
+start:
+  label: સ્ટાર્ટ મેનૂ
 taskbar_menu:
   add_file: પિન કસ્ટમ ફાઇલ
   add_folder: પિન કસ્ટમ ફોલ્ડર
+  desktop: ડેસ્કટોપ મોડ્યુલ ઉમેરો
   media: મીડિયા મોડ્યુલ ઉમેરો
   settings: સેટિંગ્સ
   start: પ્રારંભ મોડ્યુલ ઉમેરો

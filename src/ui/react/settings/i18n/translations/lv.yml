@@ -325,6 +325,10 @@ wm:
     offset: Robežas kompensācija
     width: Apmales platums
   description: Apraksts
+  drag_behavior: Vilkšanas uzvedība
+  drag_behavior_options:
+    sort: Kārtot (pārkārtot logus, velkot)
+    swap: Apmainīt (apmainīt logus vilkšanas beigās)
   enable: Iespējot flīzēšanas logu pārvaldnieku
   layout: Izkārtojums
   resize_delta: Delta izmēra maiņa (%)

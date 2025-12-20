@@ -6,6 +6,7 @@
 
 - add corner actions on toolbar.
 - add toggle desktop module on dock.
+- allow layout sorting by windows dragging on the tiling window manager.
 
 ### enhancements
 

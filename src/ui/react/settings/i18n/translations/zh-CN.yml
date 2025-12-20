@@ -310,6 +310,10 @@ wm:
     offset: 边框偏移
     width: 边框宽度
   description: 描述
+  drag_behavior: 拖动行为
+  drag_behavior_options:
+    sort: 排序（拖动时重新排序窗口）
+    swap: 交换（在拖动端交换窗口）
   enable: 启用平铺窗口管理器
   layout: 布局
   resize_delta: 大小调整增量（%）

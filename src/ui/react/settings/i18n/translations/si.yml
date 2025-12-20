@@ -324,6 +324,10 @@ wm:
     offset: මායිම් ඕෆ්සෙට්
     width: මායිම් පළල
   description: විස්තර
+  drag_behavior: ඇදගෙන යාමේ හැසිරීම
+  drag_behavior_options:
+    sort: වර්ග කරන්න (ඇදගෙන යන අතරතුර කවුළු නැවත සකසන්න)
+    swap: Swap (drag end මත windows swap)
   enable: ටයිල්ලිං කවුළු කළමනාකරු සක්රීය කරන්න
   layout: පිරිසැලසුම
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)

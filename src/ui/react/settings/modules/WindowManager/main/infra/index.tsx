@@ -72,12 +72,9 @@ export function WindowManagerSettings() {
         </SettingsGroup>
 
         <GlobalPaddings />
-        <OthersConfigs />
-        <SettingsGroup>
-          <BorderSettings />
-        </SettingsGroup>
-
+        <BorderSettings />
         <WmAnimationsSettings />
+        <OthersConfigs />
       </ConfigProvider>
     </>
   );

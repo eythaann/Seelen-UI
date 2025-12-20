@@ -316,6 +316,10 @@ wm:
     offset: Iparun aala
     width: Iwọn aala
   description: Isapejuwe
+  drag_behavior: Fa Iwa
+  drag_behavior_options:
+    sort: Too (tunto awọn window lakoko ti o nfa)
+    swap: Paṣipaa (paṣipaa awọn window ni ipari fifa)
   enable: Jeki oludari window
   layout: Agbekalẹ
   resize_delta: Tun ṣe Delta (%)

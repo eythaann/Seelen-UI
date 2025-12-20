@@ -325,6 +325,10 @@ wm:
     offset: Kenar Ofseti
     width: Kenar Genişliği
   description: Açıklama
+  drag_behavior: Sürükleme Davranışı
+  drag_behavior_options:
+    sort: Sırala (sürüklerken pencereleri yeniden sıralayın)
+    swap: Değiştir (sürükleme ucunda pencereleri değiştir)
   enable: Döşeme Pencere Yöneticisini Etkinleştir
   layout: Düzen
   resize_delta: Yeniden Boyutlandırma Değişimi (%)

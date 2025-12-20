@@ -323,6 +323,10 @@ wm:
     offset: Grenz Offäll
     width: Grenz Breet
   description: Broessdatsch
+  drag_behavior: Drag Behuelen
+  drag_behavior_options:
+    sort: Sortéieren (Fënstere nei bestellen beim zéien)
+    swap: Tauschen (Swap Fënsteren um Drag End)
   enable: Aktivéiert Fenster-Manager
   layout: Lueden
   resize_delta: Resize Delta (%)

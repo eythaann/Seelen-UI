@@ -12,17 +12,19 @@ app_menu:
   run_as: انتظامیہ کے طورپر چلانا
   unpin: انپن
 context_menu:
+  remove_module: ماڈیول کو ہٹا دیں
   reorder_disable: لاک ٹاسک بار
   reorder_enable: ٹاسک بار کو غیر مقفل کریں
 media:
   not_playing: کچھ نہیں کھیل رہا ہے
-media_menu:
-  remove: میڈیا ماڈیول کو ہٹا دیں
-start_menu:
-  remove: اسٹارٹ ماڈیول کو ہٹا دیں
+show_desktop:
+  label: ڈیسک ٹاپ دکھائیں
+start:
+  label: مینو شروع کریں
 taskbar_menu:
   add_file: کسٹم فائل کو پن کریں
   add_folder: کسٹم فولڈر کو پن
+  desktop: ڈیسک ٹاپ ماڈیول شامل کریں
   media: میڈیا ماڈیول شامل کریں
   settings: ترتیبات
   start: اسٹارٹ ماڈیول شامل کریں

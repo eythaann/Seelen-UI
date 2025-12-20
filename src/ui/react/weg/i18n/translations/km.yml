@@ -12,17 +12,19 @@ app_menu:
   run_as: ដំណើរការ​ជា​រ​អ្នកគ្រប់គ្រង
   unpin: អក្គោអិន
 context_menu:
+  remove_module: យកម៉ូឌុលចេញ
   reorder_disable: ចាក់សោរបារភារកិច្ច
   reorder_enable: ដោះសោរបារភារកិច្ច
 media:
   not_playing: គ្មានអ្វីកំពុងលេងទេ
-media_menu:
-  remove: យកម៉ូឌុលមេឌៀចេញ
-start_menu:
-  remove: យកម៉ូឌុលចាប់ផ្តើមចេញ
+show_desktop:
+  label: បង្ហាញផ្ទៃតុ
+start:
+  label: ម៉ឺនុយចាប់ផ្តើម
 taskbar_menu:
   add_file: លេខកូដសម្ងាត់លេខសម្ងាត់
   add_folder: ថតម្ជុលផ្ទាល់ខ្លួន
+  desktop: បន្ថែមម៉ូឌុលផ្ទៃតុ
   media: បន្ថែមម៉ូឌុលមេឌៀបន្ថែម
   settings: ការកំណត់
   start: បន្ថែមម៉ូឌុលចាប់ផ្តើម

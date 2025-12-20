@@ -319,6 +319,10 @@ wm:
     offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
     width: ਬਾਰਡਰ ਚੌੜਾਈ
   description: ਵਰਣਨ
+  drag_behavior: ਡਰੈਗ ਵਿਵਹਾਰ
+  drag_behavior_options:
+    sort: ਕ੍ਰਮਬੱਧ (ਖਿੱਚਣ ਵੇਲੇ ਵਿੰਡੋਜ਼ ਨੂੰ ਮੁੜ ਕ੍ਰਮਬੱਧ ਕਰੋ)
+    swap: ਸਵੈਪ (ਡਰੈਗ ਐਂਡ 'ਤੇ ਵਿੰਡੋਜ਼ ਨੂੰ ਸਵੈਪ ਕਰੋ)
   enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਟਾਇਲਿੰਗ ਯੋਗ ਕਰੋ
   layout: ਖਾਕਾ
   resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)

@@ -325,6 +325,10 @@ wm:
     offset: Compensació fronterera
     width: Amplada de la frontera
   description: Descripció
+  drag_behavior: Comportament de l'arrossegament
+  drag_behavior_options:
+    sort: Ordena (reordena les finestres mentre arrossegues)
+    swap: Canvi (canvi de finestres a l'extrem d'arrossegament)
   enable: Activa el gestor de finestres de rajoles
   layout: Pla
   resize_delta: Redimensiona el delta (%)

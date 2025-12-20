@@ -12,17 +12,19 @@ app_menu:
   run_as: Запустить от администратора
   unpin: Открепить
 context_menu:
+  remove_module: Удалить модуль
   reorder_disable: Заблокировать панель
   reorder_enable: Разблокировать панель
 media:
   not_playing: Ничего не играет
-media_menu:
-  remove: Удалить модуль медиа
-start_menu:
-  remove: Удалить модуль «Пуск»
+show_desktop:
+  label: Показать рабочий стол
+start:
+  label: Меню «Пуск»
 taskbar_menu:
   add_file: Добавить файл
   add_folder: Добавить папку
+  desktop: Добавить модуль рабочего стола
   media: Добавить модуль медиа
   settings: Настройки
   start: Добавить модуль «Пуск»

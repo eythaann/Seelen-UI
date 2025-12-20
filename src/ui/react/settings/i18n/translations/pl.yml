@@ -325,6 +325,10 @@ wm:
     offset: Przesunięcie granic
     width: Szerokość granicy
   description: Opis
+  drag_behavior: Przeciągnij zachowanie
+  drag_behavior_options:
+    sort: Sortuj (zmieniaj kolejność okien podczas przeciągania)
+    swap: Zamień (zamień okna po przeciągnięciu)
   enable: Włącz menedżer rozmieszczenia okien
   layout: Układ
   resize_delta: Delta rozmiaru (%)

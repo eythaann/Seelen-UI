@@ -325,6 +325,10 @@ wm:
     offset: Ertzaren desplazamendua
     width: Ertzaren zabalera
   description: Deskribapen
+  drag_behavior: Arrastatu portaera
+  drag_behavior_options:
+    sort: Ordenatu (berrantolatu leihoak arrastatu bitartean)
+    swap: Trukatu (trukatu leihoak arrastatu amaieran)
   enable: Gaitu fitxa leiho kudeatzailea
   layout: Diseinu
   resize_delta: RETIZE DELTA (%)

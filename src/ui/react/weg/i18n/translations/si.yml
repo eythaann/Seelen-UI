@@ -12,17 +12,19 @@ app_menu:
   run_as: පරිපාලක ලෙස ක්රියාත්මක වන්න
   unpin: UNTIN
 context_menu:
+  remove_module: මොඩියුලය ඉවත් කරන්න
   reorder_disable: අගුළු කාර්ය තීරුව
   reorder_enable: කාර්ය තීරු අගුළු ඇරීම
 media:
   not_playing: කිසිවක් සෙල්ලම් කරන්නේ නැත
-media_menu:
-  remove: මාධ්ය මොඩියුලය ඉවත් කරන්න
-start_menu:
-  remove: ආරම්භක මොඩියුලය ඉවත් කරන්න
+show_desktop:
+  label: ඩෙස්ක්ටොප් පෙන්වන්න
+start:
+  label: ආරම්භක මෙනුව
 taskbar_menu:
   add_file: පින් අභිරුචි ගොනුව
   add_folder: පින් අභිරුචි ෆෝල්ඩරය
+  desktop: ඩෙස්ක්ටොප් මොඩියුලය එක් කරන්න
   media: මාධ්ය මොඩියුලය එක් කරන්න
   settings: සැකසීම්
   start: ආරම්භක මොඩියුලය එක් කරන්න

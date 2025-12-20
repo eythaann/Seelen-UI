@@ -324,6 +324,10 @@ wm:
     offset: بارڈر آفسیٹ
     width: بارڈر کی چوڑائی
   description: تفصیل
+  drag_behavior: ڈریگ سلوک
+  drag_behavior_options:
+    sort: ترتیب دیں (گھسیٹتے وقت ونڈوز کو دوبارہ ترتیب دیں)
+    swap: تبادلہ (ڈریگ اینڈ پر ونڈوز تبدیل)
   enable: ٹائلنگ ونڈو مینیجر کو فعال کریں
   layout: ترتیب
   resize_delta: ڈیلٹا کا سائز (٪)

@@ -323,6 +323,10 @@ wm:
     offset: Landamæri offset
     width: Breidd landamæra
   description: Lýsing
+  drag_behavior: Draga hegðun
+  drag_behavior_options:
+    sort: Raða (endurraða gluggum á meðan þú dregur)
+    swap: Skipta (skipta um glugga á dragenda)
   enable: Virkja flísagluggastjóra
   layout: Skipulag
   resize_delta: Breyta stærð delta (%)

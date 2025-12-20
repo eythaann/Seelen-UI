@@ -323,6 +323,10 @@ wm:
     offset: Border Offset
     width: Grænsebredde
   description: Beskrivelse
+  drag_behavior: Træk adfærd
+  drag_behavior_options:
+    sort: Sorter (omarranger vinduer, mens du trækker)
+    swap: Swap (byt vinduer ved træk-enden)
   enable: Aktivér flisevindue manager
   layout: Layout
   resize_delta: Ændre størrelse på Delta (%)

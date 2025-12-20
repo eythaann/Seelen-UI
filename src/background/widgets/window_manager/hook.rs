@@ -1,14 +1,19 @@
-use seelen_core::state::WmNodeKind;
+use seelen_core::state::{WmDragBehavior, WmNodeKind};
 
 use crate::{
     error::Result,
+    state::application::FULL_STATE,
     trace_lock,
     virtual_desktops::MINIMIZED_BY_WORKSPACES,
     widgets::window_manager::state::node_ext::WmNodeExt,
     windows_api::window::{event::WinEvent, Window},
 };
 
-use super::{cli::Axis, state::WM_STATE, WindowManagerV2};
+use super::{
+    cli::Axis,
+    state::{WM_LAYOUT_RECTS, WM_STATE},
+    WindowManagerV2,
+};
 
 impl WindowManagerV2 {
     fn system_move_size_end(window: &Window) -> Result<()> {
@@ -16,13 +21,6 @@ impl WindowManagerV2 {
         if !state.is_tiled(window) {
             return Ok(());
         }
-
-        /* if *trace_lock!(SystemMoveSizeStartMonitor) != window.monitor() {
-            log::trace!("window moved of monitor");
-            Self::remove(window)?;
-            Self::add(window)?;
-            return Ok(());
-        } */
 
         let initial_rect = window.get_rect_before_dragging()?;
         let end_rect = window.inner_rect()?;
@@ -35,18 +33,22 @@ impl WindowManagerV2 {
 
         // not resized only dragged/moved
         if initial_width == new_width && initial_height == new_height {
-            let Some(workspace) = state.get_workspace_state_for_window(window) else {
-                return Ok(());
-            };
+            // Check drag behavior setting - only swap on drag end if set to Swap
+            let drag_behavior = FULL_STATE.load().settings.by_widget.wm.drag_behavior;
+            if drag_behavior == WmDragBehavior::Swap {
+                let Some(workspace) = state.get_workspace_state_for_window(window) else {
+                    return Ok(());
+                };
 
-            let current_rect = window.inner_rect()?;
-            if let Some(node) = workspace.get_nearest_node_to_rect(&current_rect) {
-                if let Some(face) = node.face() {
-                    if &face != window
-                            // don't swap if nearest is not overlapped
-                            && current_rect.intersection(&face.inner_rect()?).is_some()
-                    {
-                        workspace.swap_nodes_containing_window(window, &face)?;
+                let current_rect = window.inner_rect()?;
+                if let Some(node) = workspace.get_nearest_node_to_rect(&current_rect) {
+                    if let Some(face) = node.face() {
+                        if &face != window
+                                // don't swap if nearest is not overlapped
+                                && current_rect.intersection(&face.inner_rect()?).is_some()
+                        {
+                            workspace.swap_nodes_containing_window(window, &face)?;
+                        }
                     }
                 }
             }
@@ -77,8 +79,42 @@ impl WindowManagerV2 {
         Ok(())
     }
 
+    fn synthetic_foreground_location_change(window: &Window) -> Result<()> {
+        // Only process if drag behavior is Sort and window is being dragged
+        let drag_behavior = FULL_STATE.load().settings.by_widget.wm.drag_behavior;
+        if drag_behavior != WmDragBehavior::Sort || !window.is_dragging() {
+            return Ok(());
+        }
+
+        let mut state = trace_lock!(WM_STATE);
+        if !state.is_tiled(window) {
+            return Ok(());
+        }
+
+        let Some(workspace) = state.get_workspace_state_for_window(window) else {
+            return Ok(());
+        };
+
+        let current_rect = window.inner_rect()?;
+        if let Some(node) = workspace.get_nearest_node_to_rect(&current_rect) {
+            if let Some(face) = node.face() {
+                if &face != window
+                        // don't swap if nearest is not overlapped
+                        && current_rect.intersection(&face.inner_rect()?).is_some()
+                {
+                    workspace.swap_nodes_containing_window(window, &face)?;
+                }
+            }
+        }
+
+        Ok(())
+    }
+
     pub fn process_win_event(event: WinEvent, window: &Window) -> Result<()> {
         match event {
+            WinEvent::SyntheticForegroundLocationChange => {
+                Self::synthetic_foreground_location_change(window)?;
+            }
             WinEvent::SystemMoveSizeEnd => {
                 Self::system_move_size_end(window)?;
                 Self::force_retiling()?;
@@ -105,6 +141,10 @@ impl WindowManagerV2 {
                 if !state.is_managed(window) && Self::should_be_managed(window.hwnd()) {
                     state.add(window)?;
                 }
+            }
+            WinEvent::ObjectDestroy => {
+                // Clean up expected rect for destroyed window
+                WM_LAYOUT_RECTS.remove(&window.address());
             }
             _ => {}
         };

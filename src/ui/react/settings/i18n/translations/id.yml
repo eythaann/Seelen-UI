@@ -327,6 +327,10 @@ wm:
     offset: Offset perbatasan
     width: Lebar perbatasan
   description: Keterangan
+  drag_behavior: Perilaku Seret
+  drag_behavior_options:
+    sort: Sortir (urutkan ulang jendela sambil menyeret)
+    swap: Swap (menukar jendela pada drag end)
   enable: Aktifkan Manajer Jendela Ubin
   layout: Tata letak
   resize_delta: Ubah Ubah Delta (%)

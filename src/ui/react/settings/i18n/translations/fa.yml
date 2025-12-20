@@ -324,6 +324,10 @@ wm:
     offset: جبران مرز
     width: عرض مرز
   description: شرح
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: مرتب سازی (ترتیب مجدد پنجره ها در حین کشیدن)
+    swap: تعویض (تعویض پنجره ها در انتهای کشیدن)
   enable: مدیر پنجره کاشی کاری را فعال کنید
   layout: چیدمان
   resize_delta: تغییر اندازه دلتا (٪)

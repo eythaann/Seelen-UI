@@ -324,6 +324,10 @@ wm:
     offset: Sərhəd əvəzinə
     width: Sərhəd eni
   description: Təsvir
+  drag_behavior: Sürükləmə Davranışı
+  drag_behavior_options:
+    sort: Sırala (sürükləyərkən pəncərələri yenidən sırala)
+    swap: Swap (sürük sonunda pəncərələri dəyişdirin)
   enable: Tiling pəncərə menecerini aktivləşdirin
   layout: Sxem
   resize_delta: Delta'nın ölçüsünü (%)

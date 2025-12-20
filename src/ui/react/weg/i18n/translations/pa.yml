@@ -12,17 +12,19 @@ app_menu:
   run_as: ਪ੍ਰਬੰਧਕ ਦੇ ਤੌਰ ਤੇ ਚਲਾਓ
   unpin: Unpin
 context_menu:
+  remove_module: ਮੋਡੀਊਲ ਹਟਾਓ
   reorder_disable: ਟਾਸਕਬਾਰ ਨੂੰ ਲਾਕ ਕਰੋ
   reorder_enable: ਟਾਸਕਬਾਰ ਨੂੰ ਅਨਲੌਕ ਕਰੋ
 media:
   not_playing: ਕੁਝ ਨਹੀਂ ਖੇਡ ਰਿਹਾ
-media_menu:
-  remove: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਹਟਾਓ
-start_menu:
-  remove: ਸਟਾਰਟ ਮੋਡੀ .ਲ ਹਟਾਓ
+show_desktop:
+  label: ਡੈਸਕਟਾਪ ਦਿਖਾਓ
+start:
+  label: ਸਟਾਰਟ ਮੀਨੂ
 taskbar_menu:
   add_file: ਪਿੰਨ ਕਸਟਮ ਫਾਈਲ
   add_folder: ਪਿੰਨ ਕਸਟਮ ਫੋਲਡਰ
+  desktop: ਡੈਸਕਟਾਪ ਮੋਡੀਊਲ ਸ਼ਾਮਲ ਕਰੋ
   media: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਸ਼ਾਮਲ ਕਰੋ
   settings: ਸੈਟਿੰਗਾਂ
   start: ਸਟਾਰਟ ਮੋਡੀ ule ਲ ਸ਼ਾਮਲ ਕਰੋ

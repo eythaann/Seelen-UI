@@ -12,17 +12,19 @@ app_menu:
   run_as: Администратороор ажиллуулах
   unpin: Нууц
 context_menu:
+  remove_module: Модуль устгах
   reorder_disable: Түгжих ажлын самбар
   reorder_enable: Taskbar түгжээг тайл
 media:
   not_playing: Юу ч тоглоогүй байна
-media_menu:
-  remove: МЭДЭЭЛЛИЙН МЭДЭЭЛЛИЙН МЭДЭЭЛЭЛ
-start_menu:
-  remove: Эхлэх модулийг устгах
+show_desktop:
+  label: Ширээний компьютерийг харуулах
+start:
+  label: Эхлэх цэс
 taskbar_menu:
   add_file: PIN захиалгын файл
   add_folder: Пин захиалгын хавтас
+  desktop: Ширээний модуль нэмнэ үү
   media: Медиа модулийг нэмнэ
   settings: Тохиргоо
   start: Эхлэх модулийг нэмнэ үү

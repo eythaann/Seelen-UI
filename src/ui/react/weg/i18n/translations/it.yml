@@ -12,17 +12,19 @@ app_menu:
   run_as: Esegui come Amministratore
   unpin: Rimuovi
 context_menu:
+  remove_module: Rimuovi modulo
   reorder_disable: Blocco della barra delle applicazioni
   reorder_enable: Sbloccare la barra delle applicazioni
 media:
   not_playing: Nulla in riproduzione
-media_menu:
-  remove: Rimuovi Modulo Media
-start_menu:
-  remove: Rimuovi Modulo Start
+show_desktop:
+  label: Mostra scrivania
+start:
+  label: Menù di avvio
 taskbar_menu:
   add_file: Aggiungi File Personalizzato
   add_folder: Aggiungi Cartella Personalizzata
+  desktop: Aggiungi modulo desktop
   media: Aggiungi Modulo Media
   settings: Impostazioni
   start: Aggiungi Modulo Start

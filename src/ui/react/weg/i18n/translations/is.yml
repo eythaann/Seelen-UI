@@ -12,17 +12,19 @@ app_menu:
   run_as: Hlaupa sem stjórnandi
   unpin: Taka úr
 context_menu:
+  remove_module: Fjarlægðu einingu
   reorder_disable: Læstu verkstiku
   reorder_enable: Opnaðu verkefnastiku
 media:
   not_playing: Ekkert er að spila
-media_menu:
-  remove: Fjarlægðu miðlunareininguna
-start_menu:
-  remove: Fjarlægðu upphafseininguna
+show_desktop:
+  label: Sýna skjáborð
+start:
+  label: Start Valmynd
 taskbar_menu:
   add_file: Pinna sérsniðna skrá
   add_folder: Pinna sérsniðna möppu
+  desktop: Bæta við skrifborðseiningu
   media: Bættu við Media Module
   settings: Stillingar
   start: Bættu við Start Module

@@ -327,6 +327,10 @@ wm:
     offset: Décalage de bordure
     width: Largeur de la bordure
   description: Description
+  drag_behavior: Comportement de traînée
+  drag_behavior_options:
+    sort: Trier (réorganiser les fenêtres en les faisant glisser)
+    swap: Swap (échanger les fenêtres à la fin du glissement)
   enable: Activer le gestionnaire de fenêtres en mosaïque
   layout: Disposition
   resize_delta: Delta de redimensionnement (%)

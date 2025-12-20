@@ -12,17 +12,19 @@ app_menu:
   run_as: Εκτελέστε ως διαχειριστής
   unpin: Ξεκαρφιτσώνω
 context_menu:
+  remove_module: Αφαιρέστε τη μονάδα
   reorder_disable: Κλείδωμα γραμμής εργασιών
   reorder_enable: Ξεκλείδωμα της γραμμής εργασιών
 media:
   not_playing: Τίποτα δεν παίζει
-media_menu:
-  remove: Αφαιρέστε τη μονάδα μέσων
-start_menu:
-  remove: Αφαιρέστε την ενότητα εκκίνησης
+show_desktop:
+  label: Εμφάνιση επιφάνειας εργασίας
+start:
+  label: Μενού Έναρξη
 taskbar_menu:
   add_file: PIN προσαρμοσμένο αρχείο
   add_folder: Pin προσαρμοσμένος φάκελος
+  desktop: Προσθήκη μονάδας επιφάνειας εργασίας
   media: Προσθήκη ενότητας μέσων
   settings: Ρυθμίσεις
   start: Προσθήκη μονάδας εκκίνησης

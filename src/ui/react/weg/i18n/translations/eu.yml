@@ -12,17 +12,19 @@ app_menu:
   run_as: Exekutatu administratzaile gisa
   unpin: Desjendu
 context_menu:
+  remove_module: Kendu modulua
   reorder_disable: Blokeatu ataza barra
   reorder_enable: Desblokeatu ataza barra
 media:
   not_playing: Ez da ezer jolasten
-media_menu:
-  remove: Kendu multimedia modulua
-start_menu:
-  remove: Kendu hasierako modulua
+show_desktop:
+  label: Erakutsi mahaigaina
+start:
+  label: Hasi menua
 taskbar_menu:
   add_file: PIN fitxategi pertsonalizatua
   add_folder: Pin karpeta pertsonalizatua
+  desktop: Gehitu mahaigaineko modulua
   media: Gehitu multimedia modulua
   settings: Ezarpenak
   start: Gehitu abiapuntu modulua

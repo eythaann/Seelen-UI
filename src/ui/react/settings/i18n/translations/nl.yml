@@ -325,6 +325,10 @@ wm:
     offset: Grens offset
     width: Grensbreedte
   description: Beschrijving
+  drag_behavior: Sleepgedrag
+  drag_behavior_options:
+    sort: Sorteren (vensters opnieuw ordenen tijdens slepen)
+    swap: Wisselen (vensters verwisselen aan het einde van het slepen)
   enable: Schakel Tiling Window Manager in
   layout: Lay -out
   resize_delta: Wijzig de wijzers van delta (%)

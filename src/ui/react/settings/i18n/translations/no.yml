@@ -325,6 +325,10 @@ wm:
     offset: Grenseforskyvning
     width: Grensebredde
   description: Beskrivelse
+  drag_behavior: Dra-atferd
+  drag_behavior_options:
+    sort: Sorter (omorganiser vinduer mens du drar)
+    swap: Bytt (bytt vinduer på dra-enden)
   enable: Aktiver flislegging av vindusleder
   layout: Oppsett
   resize_delta: Endre størrelse på Delta (%)

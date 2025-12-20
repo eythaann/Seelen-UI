@@ -314,6 +314,10 @@ wm:
     offset: 테두리 여백
     width: 테두리 너비
   description: 설명
+  drag_behavior: 드래그 동작
+  drag_behavior_options:
+    sort: 정렬(드래그하는 동안 창 재정렬)
+    swap: 교환(드래그 끝에서 창 교환)
   enable: 타일링 윈도우 관리자 활성화
   layout: 레이아웃
   resize_delta: 크기 조정 수치 (%)

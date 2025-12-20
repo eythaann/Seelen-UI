@@ -325,6 +325,10 @@ wm:
     offset: Offset Bordo
     width: Larghezza Bordo
   description: Descrizione
+  drag_behavior: Comportamento di trascinamento
+  drag_behavior_options:
+    sort: Ordina (riordina le finestre durante il trascinamento)
+    swap: Scambia (scambia le finestre alla fine del trascinamento)
   enable: Abilita Gestore delle Finestre a Tiling
   layout: Layout
   resize_delta: Delta Ridimensionamento (percento)

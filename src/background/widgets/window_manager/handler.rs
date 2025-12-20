@@ -12,7 +12,7 @@ use crate::{
     cli::ServicePipe,
     error::{Result, ResultLogExt},
     state::application::{performance::PERFORMANCE_MODE, FULL_STATE},
-    widgets::window_manager::state::{WmState, WM_STATE},
+    widgets::window_manager::state::{WmState, WM_LAYOUT_RECTS, WM_STATE},
     windows_api::{window::Window, WindowsApi},
 };
 use seelen_core::{
@@ -35,7 +35,13 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
     // map and filter step
     for (hwnd, rect) in positions {
         let window = Window::from(hwnd);
-        if !window.is_window() || window.is_minimized() || window.is_dragging() {
+        if !window.is_window() || window.is_minimized() {
+            continue;
+        }
+
+        WM_LAYOUT_RECTS.upsert(hwnd, rect.clone());
+        // avoid to move window while dragging
+        if window.is_dragging() {
             continue;
         }
 

@@ -320,6 +320,10 @@ wm:
     offset: Border Offset
     width: ຄວາມກວ້າງຊາຍແດນ
   description: ລາຍລະອຽດ
+  drag_behavior: ພຶດຕິກໍາການລາກ
+  drag_behavior_options:
+    sort: ຈັດຮຽງ (ຈັດຮຽງໜ້າຕ່າງໃໝ່ໃນຂະນະທີ່ລາກ)
+    swap: Swap (ສະຫຼັບປ່ອງຢ້ຽມຢູ່ປາຍລາກ)
   enable: ເປີດໃຊ້ຜູ້ຈັດການປ່ອງຢ້ຽມກະເບື້ອງ
   layout: ແຜນຜັງ
   resize_delta: ປັບຂະໜາດ Delta (%)

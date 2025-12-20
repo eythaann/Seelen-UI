@@ -12,17 +12,19 @@ app_menu:
   run_as: 管理者として実行
   unpin: ピン留めを解除
 context_menu:
+  remove_module: モジュールの削除
   reorder_disable: タスクバーをロック
   reorder_enable: タスクバーのロック解除
 media:
   not_playing: 何も再生されていません
-media_menu:
-  remove: メディアモジュールを削除
-start_menu:
-  remove: スタートメニューを削除
+show_desktop:
+  label: デスクトップを表示
+start:
+  label: スタートメニュー
 taskbar_menu:
   add_file: ファイルを追加
   add_folder: フォルダを追加
+  desktop: デスクトップモジュールの追加
   media: メディアモジュールを追加
   settings: 設定
   start: 開始モジュールを追加

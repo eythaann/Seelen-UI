@@ -12,17 +12,19 @@ app_menu:
   run_as: Kör som administratör
   unpin: Lutande
 context_menu:
+  remove_module: Ta bort modulen
   reorder_disable: Lås aktivitetsfältet
   reorder_enable: Lås upp aktivitetsfältet
 media:
   not_playing: Ingenting spelar
-media_menu:
-  remove: Ta bort mediemodulen
-start_menu:
-  remove: Ta bort startmodulen
+show_desktop:
+  label: Visa skrivbordet
+start:
+  label: Startmenyn
 taskbar_menu:
   add_file: Pin Custom File
   add_folder: Stift anpassad mapp
+  desktop: Lägg till skrivbordsmodul
   media: Lägg till mediemodul
   settings: Inställningar
   start: Lägg till startmodul

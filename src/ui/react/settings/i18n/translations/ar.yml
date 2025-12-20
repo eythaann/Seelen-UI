@@ -316,6 +316,10 @@ wm:
     offset: إزاحة الحدود
     width: عرض الحدود
   description: الوصف
+  drag_behavior: سلوك السحب
+  drag_behavior_options:
+    sort: فرز (إعادة ترتيب النوافذ أثناء السحب)
+    swap: مبادلة (تبديل النوافذ عند نهاية السحب)
   enable: تفعيل مدير نافذة البلاط
   layout: التخطيط
   resize_delta: غير حجم دلتا (%)

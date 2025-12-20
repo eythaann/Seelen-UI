@@ -323,6 +323,10 @@ wm:
     offset: სასაზღვრო ოფსეტური
     width: საზღვრის სიგანე
   description: აღწერილობა
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: სორტირება (გადააწყვეთ ფანჯრები გადატანისას)
+    swap: შეცვალეთ (გაცვალეთ ფანჯრები ჩავლებით)
   enable: ჩართეთ ფილების ფანჯრის მენეჯერი
   layout: გამოფენა
   resize_delta: დელტას ზომის შეცვლა (%)

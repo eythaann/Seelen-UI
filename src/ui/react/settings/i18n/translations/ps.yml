@@ -319,6 +319,10 @@ wm:
     offset: پوله
     width: د بريد سور
   description: تفصیل
+  drag_behavior: د چلولو چلند
+  drag_behavior_options:
+    sort: ترتیب کړئ (د ځړولو پرمهال کړکۍ بیا تنظیم کړئ)
+    swap: تبادله (د ډریګ په پای کې کړکۍ بدلول)
   enable: د ټی بایټس کړکۍ مدیر فعال کړئ
   layout: ترتیب
   resize_delta: د ډیلټا (٪) ریموټ کړئ

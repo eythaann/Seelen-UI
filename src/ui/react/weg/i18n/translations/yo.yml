@@ -12,17 +12,19 @@ app_menu:
   run_as: Run bi alakoso
   unpin: Ainidi
 context_menu:
+  remove_module: Yọ Module kuro
   reorder_disable: Nutbar tiipa
   reorder_enable: Ṣii ṣiṣẹ Iṣẹ-ṣiṣe Ṣii silẹ
 media:
   not_playing: Ko si ohun ti ndun
-media_menu:
-  remove: Mu Module Media kuro
-start_menu:
-  remove: Yọ module bẹrẹ
+show_desktop:
+  label: Ṣe afihan Ojú-iṣẹ
+start:
+  label: Bẹrẹ Akojọ aṣyn
 taskbar_menu:
   add_file: Faili aṣa
   add_folder: Folda aṣa aṣa
+  desktop: Fi Ojú-iṣẹ Module
   media: Ṣafikun module Media
   settings: Eto
   start: Ṣafikun module Bẹrẹ

@@ -327,6 +327,10 @@ wm:
     offset: Umngcele we-Offset
     width: Ububanzi bomngcele
   description: Ukufanisa
+  drag_behavior: Hudula Ukuziphatha
+  drag_behavior_options:
+    sort: Hlunga (hlela kabusha amawindi ngenkathi uhudula)
+    swap: Shintsha (shintshanisa amawindi ekugcineni kokuhudula)
   enable: Nika amandla umphathi wewindi elijabulisayo
   layout: Isakhiwo
   resize_delta: Shintsha usayizi DEDTA (%)

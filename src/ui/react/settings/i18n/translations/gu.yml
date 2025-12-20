@@ -322,6 +322,10 @@ wm:
     offset: બોર્ડર ઓફસેટ
     width: સરહદની પહોળાઈ
   description: વર્ણન
+  drag_behavior: ખેંચો વર્તન
+  drag_behavior_options:
+    sort: સૉર્ટ કરો (ડ્રેગ કરતી વખતે વિંડોઝને ફરીથી ગોઠવો)
+    swap: સ્વેપ (ડ્રેગ એન્ડ પર વિન્ડોઝ સ્વેપ)
   enable: ટાઇલિંગ વિંડો મેનેજરને સક્ષમ કરો
   layout: લેઆઉટ
   resize_delta: ડેલ્ટાનું કદ બદલો (%)

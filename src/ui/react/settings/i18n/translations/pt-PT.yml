@@ -325,6 +325,10 @@ wm:
     offset: Offset de borda
     width: Largura da fronteira
   description: Descrição
+  drag_behavior: Comportamento de arrastar
+  drag_behavior_options:
+    sort: Classificar (reordenar janelas enquanto arrasta)
+    swap: Trocar (trocar janelas ao arrastar)
   enable: Habilitar gerente de janela de ladrilhos
   layout: Esquema
   resize_delta: Redimensionar delta (%)

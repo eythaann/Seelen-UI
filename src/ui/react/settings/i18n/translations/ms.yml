@@ -325,6 +325,10 @@ wm:
     offset: Mengimbangi sempadan
     width: Lebar sempadan
   description: Penerangan
+  drag_behavior: Gelagat Seret
+  drag_behavior_options:
+    sort: Isih (susun semula tetingkap semasa menyeret)
+    swap: Tukar (tukar tetingkap pada hujung seret)
   enable: Dayakan pengurus tetingkap jubin
   layout: Susun atur
   resize_delta: Saiz semula delta (%)

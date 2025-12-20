@@ -12,17 +12,19 @@ app_menu:
   run_as: Wek Rêvebir bisekinin
   unpin: Unpin
 context_menu:
+  remove_module: Modulê jêbirin
   reorder_disable: Taskbar Lock
   reorder_enable: Taskbar Unlock
 media:
   not_playing: Tiştek nayê lîstin
-media_menu:
-  remove: Modela medyayê rakin
-start_menu:
-  remove: Modela Destpêkê rakirin
+show_desktop:
+  label: Sermaseyê nîşan bide
+start:
+  label: Pêşeka Destpêkê
 taskbar_menu:
   add_file: Pelê Custom Pel
   add_folder: Peldanka Pêvekirî
+  desktop: Modula Sermaseyê zêde bikin
   media: Modela medyayê lê zêde bike
   settings: Settings
   start: Modulê dest pê bikin

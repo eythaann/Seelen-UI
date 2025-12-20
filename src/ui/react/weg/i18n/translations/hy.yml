@@ -12,17 +12,19 @@ app_menu:
   run_as: Գործարկել որպես ադմինիստրատոր
   unpin: Անապաղում
 context_menu:
+  remove_module: Հեռացնել մոդուլը
   reorder_disable: Կողպեք առաջադրանքներիբար
   reorder_enable: Բացել աշխատանքային գիծը
 media:
   not_playing: Ոչինչ չի խաղում
-media_menu:
-  remove: Հեռացրեք մեդիա մոդուլը
-start_menu:
-  remove: Հեռացրեք Սկսել մոդուլը
+show_desktop:
+  label: Ցուցադրել աշխատասեղան
+start:
+  label: Սկսել ցանկը
 taskbar_menu:
   add_file: PIN պատվերով ֆայլ
   add_folder: PIN Custom թղթապանակ
+  desktop: Ավելացնել աշխատասեղանի մոդուլ
   media: Ավելացնել մեդիա մոդուլ
   settings: Կարգավորումներ
   start: Ավելացնել Սկսել մոդուլը

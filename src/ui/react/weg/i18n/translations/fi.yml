@@ -12,17 +12,19 @@ app_menu:
   run_as: Suorita järjestelmänvalvojana
   unpin: Purkaa
 context_menu:
+  remove_module: Poista moduuli
   reorder_disable: Lukitse tehtäväpalkki
   reorder_enable: Tehtäväpalkin lukituksen avaaminen
 media:
   not_playing: Mikään ei pelaa
-media_menu:
-  remove: Poista mediamoduuli
-start_menu:
-  remove: Poista Start -moduuli
+show_desktop:
+  label: Näytä työpöytä
+start:
+  label: Käynnistä-valikko
 taskbar_menu:
   add_file: Pin mukautettu tiedosto
   add_folder: Pin Custom -kansio
+  desktop: Lisää työpöytämoduuli
   media: Lisää mediamoduuli
   settings: Asetukset
   start: Lisää aloitusmoduuli

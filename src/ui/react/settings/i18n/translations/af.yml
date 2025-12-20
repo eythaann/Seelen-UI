@@ -325,6 +325,10 @@ wm:
     offset: Grens offset
     width: Grenswydte
   description: Beskrywing
+  drag_behavior: Sleepgedrag
+  drag_behavior_options:
+    sort: Sorteer (herrangskik vensters terwyl jy sleep)
+    swap: Ruil (ruil vensters op sleepkant)
   enable: Aktiveer teëlvensterbestuurder
   layout: Uitleg
   resize_delta: Verander die grootte delta (%)

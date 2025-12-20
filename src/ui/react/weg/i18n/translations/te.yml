@@ -12,17 +12,19 @@ app_menu:
   run_as: నిర్వాహకుడిగా అమలు చేయండి
   unpin: అన్పిన్
 context_menu:
+  remove_module: మాడ్యూల్‌ని తీసివేయండి
   reorder_disable: టాస్క్‌బార్ లాక్
   reorder_enable: టాస్క్‌బార్‌ను అన్‌లాక్ చేయండి
 media:
   not_playing: ఏమీ ఆడటం లేదు
-media_menu:
-  remove: మీడియా మాడ్యూల్ తొలగించండి
-start_menu:
-  remove: ప్రారంభ మాడ్యూల్ తొలగించండి
+show_desktop:
+  label: డెస్క్‌టాప్‌ని చూపించు
+start:
+  label: ప్రారంభ మెను
 taskbar_menu:
   add_file: కస్టమ్ ఫైల్‌ను పిన్ చేయండి
   add_folder: కస్టమ్ ఫోల్డర్‌ను పిన్ చేయండి
+  desktop: డెస్క్‌టాప్ మాడ్యూల్‌ని జోడించండి
   media: మీడియా మాడ్యూల్ జోడించండి
   settings: సెట్టింగ్‌లు
   start: ప్రారంభ మాడ్యూల్ జోడించండి

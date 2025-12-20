@@ -327,6 +327,10 @@ wm:
     offset: Randversatz
     width: Randbreite
   description: Beschreibung
+  drag_behavior: Drag-Verhalten
+  drag_behavior_options:
+    sort: Sortieren (Fenster beim Ziehen neu anordnen)
+    swap: Tauschen (Fenster am Ende des Ziehens tauschen)
   enable: Aktivieren Sie den Tiling Window Manager
   layout: Layout
   resize_delta: Relative Größenänderung (%)

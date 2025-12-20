@@ -12,17 +12,19 @@ app_menu:
   run_as: Tumakbo bilang Administrator
   unpin: Unpin
 context_menu:
+  remove_module: Alisin ang Module
   reorder_disable: I -lock ang taskbar
   reorder_enable: I -unlock ang taskbar
 media:
   not_playing: Walang naglalaro
-media_menu:
-  remove: Alisin ang module ng media
-start_menu:
-  remove: Alisin ang Start Module
+show_desktop:
+  label: Ipakita ang Desktop
+start:
+  label: Start Menu
 taskbar_menu:
   add_file: Pin pasadyang file
   add_folder: Pin pasadyang folder
+  desktop: Magdagdag ng Desktop Module
   media: Magdagdag ng module ng media
   settings: Mga setting
   start: Magdagdag ng Start Module

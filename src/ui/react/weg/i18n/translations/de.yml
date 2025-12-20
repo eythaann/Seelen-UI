@@ -12,17 +12,19 @@ app_menu:
   run_as: Als Administrator ausführen
   unpin: Lösen
 context_menu:
+  remove_module: Modul entfernen
   reorder_disable: Taskleiste sperren
   reorder_enable: Taskleiste entsperren
 media:
   not_playing: Nichts spielt
-media_menu:
-  remove: Medienmodul entfernen
-start_menu:
-  remove: Startmodul entfernen
+show_desktop:
+  label: Desktop anzeigen
+start:
+  label: Startmenü
 taskbar_menu:
   add_file: PIN benutzerdefinierte Datei
   add_folder: Pin benutzerdefinierte Ordner
+  desktop: Desktop-Modul hinzufügen
   media: Medienmodul hinzufügen
   settings: Einstellungen
   start: Startmodul hinzufügen

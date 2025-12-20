@@ -12,17 +12,19 @@ app_menu:
   run_as: Als administrator uitvoeren
   unpin: Losmaken
 context_menu:
+  remove_module: Module verwijderen
   reorder_disable: Taakbalk vergrendelen
   reorder_enable: Taakbalk ontgrendelen
 media:
   not_playing: Niets speelt
-media_menu:
-  remove: Verwijder de mediamodule
-start_menu:
-  remove: Verwijder de startmodule
+show_desktop:
+  label: Bureaublad weergeven
+start:
+  label: Startmenu
 taskbar_menu:
   add_file: Pin aangepaste bestand
   add_folder: Pin aangepaste map
+  desktop: Voeg bureaubladmodule toe
   media: Voeg mediamodule toe
   settings: Instellingen
   start: Startmodule toevoegen

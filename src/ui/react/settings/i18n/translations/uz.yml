@@ -325,6 +325,10 @@ wm:
     offset: Chegara ofset
     width: Chegara kengligi
   description: Tavsif
+  drag_behavior: Harakatni tortish
+  drag_behavior_options:
+    sort: Saralash (tortish paytida oynalarni qayta tartiblash)
+    swap: Almashtirish (drag oxirida oynalarni almashtirish)
   enable: Tiling oyna boshqaruvchisini yoqing
   layout: Tartib
   resize_delta: Delta (%) ni o'zgartiring

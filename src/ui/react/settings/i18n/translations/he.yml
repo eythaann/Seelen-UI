@@ -316,6 +316,10 @@ wm:
     offset: קיזוז גבול
     width: רוחב גבול
   description: תיאור
+  drag_behavior: התנהגות גרירה
+  drag_behavior_options:
+    sort: מיון (סדר מחדש את החלונות תוך כדי גרירה)
+    swap: החלפה (החלפה של חלונות בקצה הגרירה)
   enable: אפשר מנהל חלונות אריחים
   layout: מערך
   resize_delta: שינוי גודל דלתא (%)

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector, useDispatchCallback } from "../../share
 import { BorderSelectors } from "../../shared/store/app/selectors.ts";
 import { BorderActions } from "./app.ts";
 
-import { SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 
 export const BorderSettings = () => {
   const enabled = useAppSelector(BorderSelectors.enabled);
@@ -29,22 +29,24 @@ export const BorderSettings = () => {
   });
 
   return (
-    <SettingsSubGroup
-      label={
+    <SettingsGroup>
+      <SettingsSubGroup
+        label={
+          <SettingsOption>
+            <span>{t("wm.border.enable")}</span>
+            <Switch value={enabled} onChange={toggleEnabled} />
+          </SettingsOption>
+        }
+      >
         <SettingsOption>
-          <span>{t("wm.border.enable")}</span>
-          <Switch value={enabled} onChange={toggleEnabled} />
+          <span>{t("wm.border.offset")}</span>
+          <InputNumber value={offset} onChange={updateOffset} />
         </SettingsOption>
-      }
-    >
-      <SettingsOption>
-        <span>{t("wm.border.offset")}</span>
-        <InputNumber value={offset} onChange={updateOffset} />
-      </SettingsOption>
-      <SettingsOption>
-        <span>{t("wm.border.width")}</span>
-        <InputNumber value={width} onChange={updateWidth} />
-      </SettingsOption>
-    </SettingsSubGroup>
+        <SettingsOption>
+          <span>{t("wm.border.width")}</span>
+          <InputNumber value={width} onChange={updateWidth} />
+        </SettingsOption>
+      </SettingsSubGroup>
+    </SettingsGroup>
   );
 };

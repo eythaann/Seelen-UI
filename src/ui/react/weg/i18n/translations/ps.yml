@@ -12,17 +12,19 @@ app_menu:
   run_as: د مدیر په توګه چلول
   unpin: غیر رنګ
 context_menu:
+  remove_module: موډل لرې کړئ
   reorder_disable: ټاسک بار
   reorder_enable: د ټاسلف بار
 media:
   not_playing: هیڅ شی نه لوبیږی
-media_menu:
-  remove: د میډیا ماډل لرې کړئ
-start_menu:
-  remove: د پیل ماډل لرې کړئ
+show_desktop:
+  label: ډیسټاپ وښایاست
+start:
+  label: د پیل مینو
 taskbar_menu:
   add_file: دود دودیز فایل
   add_folder: د ګمرکونو فولډر
+  desktop: د ډیسټاپ ماډل اضافه کړئ
   media: د میډیا موډول اضافه کړئ
   settings: ترتیبات
   start: د پیل ماډل اضافه کړئ

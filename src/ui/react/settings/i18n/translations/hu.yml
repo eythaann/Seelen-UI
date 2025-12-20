@@ -324,6 +324,10 @@ wm:
     offset: Határ eltolás
     width: Határszélesség
   description: Leírás
+  drag_behavior: Húzási viselkedés
+  drag_behavior_options:
+    sort: Rendezés (ablakok átrendezése húzás közben)
+    swap: Csere (ablak cseréje a húzás végén)
   enable: Engedélyezze a csempe ablakkezelőt
   layout: Elrendezés
   resize_delta: Átméretezze a DELTA -t (%)

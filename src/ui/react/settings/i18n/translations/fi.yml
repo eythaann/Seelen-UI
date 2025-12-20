@@ -325,6 +325,10 @@ wm:
     offset: Rajan siirtyminen
     width: Rajan leveys
   description: Kuvaus
+  drag_behavior: Vetokäyttäytyminen
+  drag_behavior_options:
+    sort: Lajittele (järjestä ikkunat uudelleen vetäessäsi)
+    swap: Vaihda (vaihda ikkunoita vetämällä)
   enable: Ota laatta -ikkunanhallinta käyttöön
   layout: Layout
   resize_delta: Muuttaa Delta (%)

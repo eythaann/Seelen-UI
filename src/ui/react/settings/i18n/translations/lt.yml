@@ -321,6 +321,10 @@ wm:
     offset: Sienos poslinkis
     width: Sienos plotis
   description: apibūdinimas
+  drag_behavior: Vilkimo elgsena
+  drag_behavior_options:
+    sort: Rūšiuoti (pertvarkykite langus vilkdami)
+    swap: Sukeisti (keisti langus vilkimo pabaigoje)
   enable: Įgalinkite plytelių langų tvarkyklę
   layout: Išdėstymas
   resize_delta: Pakeisti deltos dydį (%)

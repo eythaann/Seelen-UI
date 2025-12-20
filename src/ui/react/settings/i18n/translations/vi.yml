@@ -324,6 +324,10 @@ wm:
     offset: Biên giới bù đắp
     width: Chiều rộng biên giới
   description: Sự miêu tả
+  drag_behavior: Hành vi kéo
+  drag_behavior_options:
+    sort: Sắp xếp (sắp xếp lại các cửa sổ trong khi kéo)
+    swap: Hoán đổi (hoán đổi cửa sổ ở đầu kéo)
   enable: Bật trình quản lý cửa sổ ốp lát
   layout: Cách trình bày
   resize_delta: Thay đổi kích thước delta (%)

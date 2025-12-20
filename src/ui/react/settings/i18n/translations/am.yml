@@ -315,6 +315,10 @@ wm:
     offset: ድንበር ማካካሻ
     width: ድንበር ስፋት
   description: መግለጫ
+  drag_behavior: ጎትት ባህሪ
+  drag_behavior_options:
+    sort: ደርድር (በመጎተት ላይ መስኮቶችን እንደገና ይዘዙ)
+    swap: ስዋፕ (በመጎተት መጨረሻ ላይ መስኮቶችን ይቀያይሩ)
   enable: የታሸገ መስኮት አቀናባሪን ያንቁ
   layout: አቀማመጥ
   resize_delta: ዴልታ (%)
