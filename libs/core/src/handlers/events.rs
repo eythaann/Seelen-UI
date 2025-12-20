@@ -74,9 +74,9 @@ slu_events_declaration! {
 
     ColorsChanged(UIColors) as "colors-changed",
 
-    WMSetReservation as "set-reservation",
-    WMForceRetiling as "wm-force-retiling",
-    WMSetLayout(WmNode) as "wm-set-layout",
+    WMSetReservation as "wm::set-reservation",
+    WMForceRetiling as "wm::force-retiling",
+    WMTreeChanged(WmRenderTree) as "wm::tree-changed",
 
     PopupContentChanged(SluPopupConfig) as "popup-content-changed",
 

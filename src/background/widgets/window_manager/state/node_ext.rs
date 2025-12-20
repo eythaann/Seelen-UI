@@ -38,7 +38,7 @@ pub trait WmNodeExt {
     /// gets the first leaf node having a window, follows node priority.
     fn face(&self) -> Option<Window>;
 
-    fn hide_non_active(&self) -> Result<()>;
+    fn process_stacks(&self) -> Result<()>;
 }
 
 fn create_context(len: usize, is_reindexing: bool) -> HashMapContext {
@@ -208,6 +208,10 @@ impl WmNodeExt for WmNode {
                 return Err("FULL".into());
             }
         }
+
+        if self.kind == WmNodeKind::Stack {
+            self.process_stacks()?;
+        }
         Ok(())
     }
 
@@ -345,13 +349,13 @@ impl WmNodeExt for WmNode {
         }
     }
 
-    fn hide_non_active(&self) -> Result<()> {
+    fn process_stacks(&self) -> Result<()> {
         match self.kind {
             WmNodeKind::Leaf | WmNodeKind::Stack => {
-                if let Some(handle) = self.active {
+                if let Some(active) = self.active {
                     for addr in &self.windows {
                         let window = Window::from(*addr);
-                        if *addr == handle {
+                        if *addr == active {
                             if window.is_minimized() {
                                 window.show_window(SW_RESTORE)?;
                             }
@@ -363,7 +367,7 @@ impl WmNodeExt for WmNode {
             }
             WmNodeKind::Horizontal | WmNodeKind::Vertical => {
                 for child in self.children.iter() {
-                    child.hide_non_active()?;
+                    child.process_stacks()?;
                 }
             }
         }

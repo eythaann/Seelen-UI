@@ -6,7 +6,6 @@ use owo_colors::OwoColorize;
 use seelen_core::constants::SUPPORTED_LANGUAGES;
 use seelen_core::resource::ResourceText;
 use seelen_core::state::RelaunchArguments;
-use seelen_core::system_state::MonitorId;
 use seelen_core::{command_handler_list, system_state::Color};
 
 use tauri::{Builder, WebviewWindow, Wry};
@@ -23,7 +22,6 @@ use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 use crate::utils::is_running_as_appx;
 use crate::utils::pwsh::PwshScript;
-use crate::virtual_desktops::get_vd_manager;
 use crate::widgets::show_settings;
 use crate::windows_api::hdc::DeviceContext;
 use crate::windows_api::window::event::WinEvent;
@@ -142,11 +140,6 @@ async fn set_auto_start(enabled: bool) -> Result<()> {
 #[tauri::command(async)]
 async fn get_auto_start_status() -> Result<bool> {
     Seelen::is_auto_start_enabled()
-}
-
-#[tauri::command(async)]
-fn switch_workspace(monitor_id: MonitorId, idx: usize) -> Result<()> {
-    get_vd_manager().switch_to(&monitor_id, idx)
 }
 
 #[tauri::command(async)]

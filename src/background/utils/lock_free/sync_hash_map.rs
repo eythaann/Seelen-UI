@@ -53,6 +53,26 @@ where
         self.0.lock().get_mut(key).map(f)
     }
 
+    /// If key does not exist, it will be created with default value
+    pub fn get_or_default<Q, F, R>(&self, key: Q, f: F) -> R
+    where
+        V: Default,
+        Q: Into<K>,
+        F: FnOnce(&mut V) -> R,
+    {
+        f(self.0.lock().entry(key.into()).or_default())
+    }
+
+    /// If key does not exist, it will be created using the provided constructor function
+    pub fn get_or_insert<Q, C, F, R>(&self, key: Q, constructor: C, f: F) -> R
+    where
+        Q: Into<K>,
+        C: FnOnce() -> V,
+        F: FnOnce(&mut V) -> R,
+    {
+        f(self.0.lock().entry(key.into()).or_insert_with(constructor))
+    }
+
     pub fn for_each<F>(&self, f: F)
     where
         F: FnMut((&K, &mut V)),
@@ -112,5 +132,14 @@ where
 {
     fn from(value: HashMap<K, V>) -> Self {
         Self(TracedMutex::new(value))
+    }
+}
+
+impl<K, V> Default for SyncHashMap<K, V>
+where
+    K: Eq + Hash,
+{
+    fn default() -> Self {
+        Self::new()
     }
 }

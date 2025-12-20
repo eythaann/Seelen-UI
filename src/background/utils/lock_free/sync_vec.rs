@@ -9,6 +9,13 @@ impl<T> SyncVec<T> {
         Self(TracedMutex::new(Vec::new()))
     }
 
+    pub fn contains(&self, item: &T) -> bool
+    where
+        T: PartialEq,
+    {
+        self.0.lock().contains(item)
+    }
+
     pub fn len(&self) -> usize {
         self.0.lock().len()
     }
@@ -53,5 +60,11 @@ impl<T: Clone> SyncVec<T> {
 impl<T> From<Vec<T>> for SyncVec<T> {
     fn from(value: Vec<T>) -> Self {
         Self(TracedMutex::new(value))
+    }
+}
+
+impl<T> Default for SyncVec<T> {
+    fn default() -> Self {
+        Self::new()
     }
 }

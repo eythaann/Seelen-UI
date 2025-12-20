@@ -37,7 +37,9 @@ pub struct MonitorManager {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum MonitorManagerEvent {
-    ViewAdded(DisplayView),
+    /// the id used is the view primary target id
+    ViewAdded(MonitorId),
+    /// the id used is the view primary target id
     ViewRemoved(MonitorId),
     ViewsChanged,
 }
@@ -188,9 +190,8 @@ impl MonitorManager {
 
         // new monitors were added
         for id in current_views.keys() {
-            let was_already_present = old_views.remove(id).is_none();
-            if was_already_present {
-                Self::send(MonitorManagerEvent::ViewAdded(current_views[id].clone()));
+            if old_views.remove(id).is_none() {
+                Self::send(MonitorManagerEvent::ViewAdded(id.clone()));
             }
         }
 

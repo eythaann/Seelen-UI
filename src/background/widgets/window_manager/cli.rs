@@ -4,12 +4,11 @@ use serde::{Deserialize, Serialize};
 use crate::error::Result;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
-use crate::virtual_desktops::get_vd_manager;
-use crate::widgets::window_manager::node_ext::WmNodeExt;
-use crate::widgets::window_manager::state::WmWorkspaceState;
+use crate::virtual_desktops::SluWorkspacesManager2;
+use crate::widgets::window_manager::state::node_ext::WmNodeExt;
+use crate::widgets::window_manager::state::{WmState, WmStateEvent, WmWorkspaceState};
 use crate::windows_api::window::Window;
 
-use super::instance::WindowManagerV2;
 use super::state::WM_STATE;
 
 #[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
@@ -136,17 +135,8 @@ impl WmCommand {
                     Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
                 };
 
-                let mut state = trace_lock!(WM_STATE);
+                let state = trace_lock!(WM_STATE);
                 state.update_size(&foreground, Axis::Horizontal, percentage, false)?;
-
-                let monitor_id = foreground.monitor_id();
-                let current_workspace = get_vd_manager()
-                    .get_active_workspace_id(&monitor_id)
-                    .clone();
-                WindowManagerV2::render_workspace(
-                    &monitor_id,
-                    state.get_workspace_state(&current_workspace),
-                )?;
             }
             WmCommand::Height { action } => {
                 let percentage = match action {
@@ -154,17 +144,8 @@ impl WmCommand {
                     Sizing::Decrease => -FULL_STATE.load().settings.by_widget.wm.resize_delta,
                 };
 
-                let mut state = trace_lock!(WM_STATE);
+                let state = trace_lock!(WM_STATE);
                 state.update_size(&foreground, Axis::Vertical, percentage, false)?;
-
-                let monitor_id = foreground.monitor_id();
-                let current_workspace = get_vd_manager()
-                    .get_active_workspace_id(&monitor_id)
-                    .clone();
-                WindowManagerV2::render_workspace(
-                    &monitor_id,
-                    state.get_workspace_state(&current_workspace),
-                )?;
             }
             WmCommand::Reserve { .. } => {
                 // self.reserve(side)?;
@@ -189,20 +170,18 @@ impl WmCommand {
                         workspace.unmanage(&foreground);
                         workspace.add_to_floats(&foreground)?;
                     }
-
-                    WindowManagerV2::render_workspace(&foreground.monitor_id(), workspace)?;
                 }
             }
             WmCommand::ToggleMonocle => {
                 let monitor_id = foreground.monitor_id();
-                let workspace = get_vd_manager()
-                    .get_active_workspace_id(&monitor_id)
-                    .clone();
+                let workspace = SluWorkspacesManager2::instance()
+                    .monitors
+                    .get(&monitor_id, |m| m.active_workspace_id().clone())
+                    .ok_or("Monitor not found")?;
 
                 let mut state = trace_lock!(WM_STATE);
                 let workspace = state.get_workspace_state(&workspace);
                 workspace.toggle_monocle();
-                WindowManagerV2::render_workspace(&monitor_id, workspace)?;
             }
             WmCommand::Focus { side } => {
                 let mut state = trace_lock!(WM_STATE);
@@ -232,7 +211,6 @@ impl WmCommand {
                     match siblings.first().and_then(|sibling| sibling.face()) {
                         Some(sibling) => {
                             workspace.swap_nodes_containing_window(&foreground, &sibling)?;
-                            WindowManagerV2::render_workspace(&foreground.monitor_id(), workspace)?;
                         }
                         None => {
                             log::warn!("There is no node at {side:?} to be swapped");
@@ -264,8 +242,8 @@ impl WmCommand {
                 };
 
                 node.active = Some(node.windows[next_idx]);
-
-                WindowManagerV2::render_workspace(&foreground.monitor_id(), workspace)?;
+                node.process_stacks()?;
+                WmState::send(WmStateEvent::Changed);
             }
         };
 

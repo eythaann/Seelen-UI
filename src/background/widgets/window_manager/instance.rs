@@ -3,8 +3,7 @@ use seelen_core::{
     state::{FancyToolbarSide, HideMode, SeelenWegSide},
     system_state::MonitorId,
 };
-use std::sync::Arc;
-use tauri::{Listener, WebviewWindow};
+use tauri::WebviewWindow;
 use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS};
 
 use crate::{
@@ -12,11 +11,7 @@ use crate::{
     error::Result,
     log_error,
     state::application::FULL_STATE,
-    trace_lock,
-    virtual_desktops::get_vd_manager,
-    widgets::{
-        toolbar::FancyToolbar, weg::SeelenWeg, window_manager::state::WM_STATE, WebviewArgs,
-    },
+    widgets::{toolbar::FancyToolbar, weg::SeelenWeg, WebviewArgs},
     windows_api::{monitor::Monitor, WindowsApi},
 };
 
@@ -43,14 +38,6 @@ impl WindowManagerV2 {
 
     pub fn hwnd(&self) -> Result<HWND> {
         Ok(HWND(self.window.hwnd()?.0))
-    }
-
-    pub fn get_label(monitor_id: &str) -> String {
-        base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(format!(
-            "{}?monitorId={}",
-            Self::TARGET,
-            monitor_id
-        ))
     }
 
     fn create_window(monitor_id: &MonitorId) -> Result<WebviewWindow> {
@@ -81,20 +68,6 @@ impl WindowManagerV2 {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
-
-        let monitor_id = Arc::new(monitor_id.to_owned());
-
-        window.listen("complete-setup", move |_event| {
-            let monitor_id = monitor_id.clone();
-
-            std::thread::spawn(move || -> Result<()> {
-                let mut state = trace_lock!(WM_STATE);
-                let workspace = state
-                    .get_workspace_state(get_vd_manager().get_active_workspace_id(&monitor_id));
-                Self::render_workspace(&monitor_id, workspace)?;
-                Ok(())
-            });
-        });
 
         Ok(window)
     }

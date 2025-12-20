@@ -1,35 +1,16 @@
-import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, UIColors, WegItems, Widget } from "@seelen-ui/lib";
-import type { FocusedApp, WindowManagerSettings, WmNode } from "@seelen-ui/lib/types";
+import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
+import type { FocusedApp, WindowManagerSettings } from "@seelen-ui/lib/types";
 
 import { NodeUtils } from "./utils.ts";
+import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
-let layout = $state<WmNode | null>(null);
-await Widget.getCurrent().webview.listen<WmNode>(SeelenEvent.WMSetLayout, (e) => {
-  layout = e.payload;
-});
+let layouts = lazyRune(() => invoke(SeelenCommand.WmGetRenderTree));
+await subscribe(SeelenEvent.WMTreeChanged, layouts.setByPayload);
+await layouts.init();
 
-const getOpenApps = (items: WegItems) => {
-  return items.inner.left
-    .concat(items.inner.center)
-    .concat(items.inner.right)
-    .flatMap((item) => {
-      if ("windows" in item) {
-        return [
-          {
-            path: item.path,
-            umid: item.umid,
-            windows: item.windows,
-          },
-        ];
-      }
-      return [];
-    });
-};
-
-let openApps = $state(getOpenApps(await WegItems.getNonFiltered()));
-WegItems.onChange(async () => {
-  openApps = getOpenApps(await WegItems.getNonFiltered());
-});
+let interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
+await subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
+await interactables.init();
 
 let forceRepositioning = $state(0);
 await subscribe(SeelenEvent.WMForceRetiling, () => {
@@ -42,11 +23,21 @@ await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
 });
 
 let overlayVisible = $derived.by(() => {
-  return focusedApp.isSeelenOverlay ||
-    (!!layout &&
-      NodeUtils.contains(layout, focusedApp.hwnd) &&
+  if (focusedApp.isSeelenOverlay) {
+    return true;
+  }
+
+  for (const layout of Object.values(layouts.value)) {
+    if (
+      NodeUtils.contains(layout!, focusedApp.hwnd) &&
       !focusedApp.isMaximized &&
-      !focusedApp.isFullscreened);
+      !focusedApp.isFullscreened
+    ) {
+      return true;
+    }
+  }
+
+  return false;
 });
 
 let settings = $state<WindowManagerSettings>((await Settings.getAsync()).windowManager);
@@ -55,9 +46,6 @@ Settings.onChange((s) => (settings = s.windowManager));
 // =================================================
 //                  CSS variables
 // =================================================
-
-(await UIColors.getAsync()).setAsCssVariables();
-UIColors.onChange((colors) => colors.setAsCssVariables());
 
 $effect.root(() => {
   $effect(() => {
@@ -82,14 +70,14 @@ $effect.root(() => {
 
 export type State = _State;
 class _State {
-  get layout() {
-    return layout;
-  }
-  get openApps() {
-    return openApps;
+  getLayout(monitorId: string) {
+    return layouts.value[monitorId] || null;
   }
   get forceRepositioning() {
     return forceRepositioning;
+  }
+  get interactables() {
+    return interactables.value;
   }
   get focusedApp() {
     return focusedApp;

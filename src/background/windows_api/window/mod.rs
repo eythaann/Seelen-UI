@@ -1,6 +1,7 @@
 pub mod cache;
 pub mod event;
 
+use seelen_core::state::WorkspaceId;
 use seelen_core::{rect::Rect, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
 use std::sync::atomic::Ordering;
@@ -22,6 +23,7 @@ use windows::{
     },
 };
 
+use crate::virtual_desktops::SluWorkspacesManager2;
 use crate::{
     cli::ServicePipe,
     error::Result,
@@ -226,6 +228,25 @@ impl Window {
         self.monitor()
             .stable_id2()
             .unwrap_or_else(|_| MonitorId("null".to_string()))
+    }
+
+    pub fn workspace_id(&self) -> Result<WorkspaceId> {
+        let win_id = self.address();
+        let monitor_id = self.monitor_id();
+        let workspace_id = SluWorkspacesManager2::instance()
+            .monitors
+            .get(&monitor_id, |monitor| {
+                monitor.workspaces.iter().find_map(|w| {
+                    if w.windows.contains(&win_id) {
+                        Some(w.id.clone())
+                    } else {
+                        None
+                    }
+                })
+            })
+            .ok_or("Monitor not found")?
+            .ok_or("This window is not binded to a seelen ui workspace")?;
+        Ok(workspace_id)
     }
 
     pub fn is_window(&self) -> bool {

@@ -1,15 +1,25 @@
-use std::{collections::HashMap, sync::LazyLock};
+use std::{
+    collections::HashMap,
+    sync::{LazyLock, Once},
+};
 
 use slu_ipc::messages::SvcAction;
+use tauri::Emitter;
 use windows::Win32::UI::WindowsAndMessaging::SW_NORMAL;
 
 use crate::{
+    app::get_app_handle,
     cli::ServicePipe,
-    error::Result,
+    error::{Result, ResultLogExt},
     state::application::{performance::PERFORMANCE_MODE, FULL_STATE},
+    widgets::window_manager::state::{WmState, WM_STATE},
     windows_api::{window::Window, WindowsApi},
 };
-use seelen_core::{rect::Rect, state::PerformanceMode};
+use seelen_core::{
+    handlers::SeelenEvent,
+    rect::Rect,
+    state::{PerformanceMode, WmRenderTree},
+};
 
 static SCHEDULED_POSITIONS: LazyLock<scc::HashMap<isize, Rect>> = LazyLock::new(scc::HashMap::new);
 
@@ -73,4 +83,21 @@ pub fn request_focus(hwnd: isize) -> Result<()> {
     }
     window.focus()?;
     Ok(())
+}
+
+#[tauri::command(async)]
+pub fn wm_get_render_tree() -> WmRenderTree {
+    static TAURI_EVENT_REGISTRATION: Once = Once::new();
+    TAURI_EVENT_REGISTRATION.call_once(|| {
+        WmState::subscribe(|_event| {
+            get_app_handle()
+                .emit(
+                    SeelenEvent::WMTreeChanged,
+                    &WM_STATE.lock().get_render_tree(),
+                )
+                .log_error();
+        });
+    });
+
+    WM_STATE.lock().get_render_tree()
 }

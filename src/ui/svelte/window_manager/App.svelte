@@ -4,10 +4,8 @@
   import Layout from "./modules/layout/infra/Layout.svelte";
 
   onMount(() => {
-    let widget = Widget.getCurrent();
-    widget.webview.emitTo(widget.webview.label, "complete-setup");
-    widget.ready();
+    Widget.getCurrent().ready();
   });
 </script>
 
-<Layout />
+<Layout monitorId={Widget.getCurrent().decoded.monitorId!} />

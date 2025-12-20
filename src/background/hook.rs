@@ -29,7 +29,6 @@ use crate::{
     state::application::FULL_STATE,
     trace_lock,
     utils::spawn_named_thread,
-    virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager, SluWorkspacesManager},
     widgets::{weg::SeelenWeg, window_manager::instance::WindowManagerV2},
     windows_api::{
         window::{event::WinEvent, Window},
@@ -79,7 +78,7 @@ impl HookManager {
             if event == WinEvent::SystemForeground {
                 origin = Window::get_foregrounded(); // sometimes this event is emited with the wrong origin
             }
-            Self::process_event(event, origin);
+            Self::legacy_process_event(event, origin);
         });
         Self::set_event_handler_priority(&eid, 1);
 
@@ -123,7 +122,7 @@ impl HookManager {
         log::debug!("{event_value:?} | {origin:?}");
     }
 
-    fn process_event(event: WinEvent, origin: Window) {
+    fn legacy_process_event(event: WinEvent, origin: Window) {
         Self::log_event(event, origin);
 
         // TODO: optimize this, update independent fields instead of the whole struct
@@ -151,8 +150,6 @@ impl HookManager {
                     .log_error();
             }
         }
-
-        log_error!(SluWorkspacesManager::on_win_event(event, &origin), event);
 
         let app_state = FULL_STATE.load();
         if app_state.is_weg_enabled() {
@@ -196,8 +193,9 @@ pub fn register_win_hook() -> Result<()> {
         }
         _ => (),
     });
-    HookManager::set_event_handler_priority(&eid, 2);
+    HookManager::set_event_handler_priority(&eid, 3);
 
+    // todo move this to input/mouse/keyboard module
     spawn_named_thread("MouseEventHook", || {
         let handle = get_app_handle();
         let mut last_pos = seelen_core::Point::default();
@@ -213,19 +211,6 @@ pub fn register_win_hook() -> Result<()> {
         }
     });
 
-    SluWorkspacesManager::subscribe(|e| log_error!(process_vd_event(e)));
-    Ok(())
-}
-
-pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
-    if FULL_STATE.load().is_window_manager_enabled() {
-        WindowManagerV2::process_vd_event(&event)?;
-    }
-
-    get_app_handle().emit(
-        SeelenEvent::VirtualDesktopsChanged,
-        get_vd_manager().desktops(),
-    )?;
     Ok(())
 }
 

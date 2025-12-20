@@ -1,3 +1,5 @@
+pub mod node_ext;
+
 use std::{
     collections::HashMap,
     sync::{Arc, LazyLock},
@@ -7,29 +9,30 @@ use itertools::Itertools;
 use parking_lot::Mutex;
 use seelen_core::{
     rect::Rect,
-    state::{WindowManagerLayout, WmNode, WmNodeKind, WorkspaceId},
+    state::{WindowManagerLayout, WmNode, WmNodeKind, WmRenderTree, WorkspaceId},
     Point,
 };
 
 use crate::{
-    error::Result,
-    log_error,
+    error::{Result, ResultLogExt},
+    event_manager, log_error,
     state::application::FULL_STATE,
-    virtual_desktops::get_vd_manager,
+    trace_lock,
+    virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
     widgets::window_manager::{
         handler::{schedule_window_position, set_app_windows_positions},
         instance::WindowManagerV2,
-        node_ext::WmNodeExt,
     },
     windows_api::window::Window,
 };
 
 use super::cli::Axis;
+use node_ext::WmNodeExt;
 
 pub static WM_STATE: LazyLock<Arc<Mutex<WmState>>> = LazyLock::new(|| {
     Arc::new(Mutex::new({
         let mut state = WmState::default();
-        state.recreate();
+        state.initialize();
         state
     }))
 });
@@ -39,20 +42,92 @@ pub struct WmState {
     pub layouts: HashMap<WorkspaceId, WmWorkspaceState>,
 }
 
+#[derive(Debug, Clone)]
+pub enum WmStateEvent {
+    Changed,
+}
+
+event_manager!(WmState, WmStateEvent);
+
 impl WmState {
+    pub fn get_render_tree(&self) -> WmRenderTree {
+        let mut render_tree = HashMap::new();
+        let vd = SluWorkspacesManager2::instance();
+        vd.monitors.for_each(|(mid, monitor)| {
+            let active_workspace_id = monitor.active_workspace_id();
+            if let Some(w) = self.layouts.get(active_workspace_id) {
+                render_tree.insert(mid.clone(), w.layout.structure.clone());
+            }
+        });
+        WmRenderTree(render_tree)
+    }
+
     /// will enumarate all monitors and workspaces
-    pub fn recreate(&mut self) {
-        let vd = get_vd_manager();
-        for workspace in vd.iter_workspaces() {
-            let mut w_state = WmWorkspaceState::new(&workspace.id);
-            for w in &workspace.windows {
-                let window = Window::from(*w);
-                if WindowManagerV2::should_be_managed(window.hwnd()) {
-                    w_state.add_to_tiles(&window);
+    pub fn initialize(&mut self) {
+        let vd = SluWorkspacesManager2::instance();
+        vd.monitors.for_each(|(_, monitor)| {
+            for workspace in &monitor.workspaces {
+                let mut w_state = WmWorkspaceState::new(&workspace.id);
+                for w in &workspace.windows {
+                    let window = Window::from(*w);
+                    if WindowManagerV2::should_be_managed(window.hwnd()) {
+                        w_state.add_to_tiles(&window);
+                    }
+                }
+                self.layouts.insert(workspace.id.clone(), w_state);
+            }
+        });
+
+        SluWorkspacesManager2::subscribe(|event| {
+            trace_lock!(WM_STATE).process_vd_event(&event).log_error();
+        });
+    }
+
+    pub fn process_vd_event(&mut self, event: &VirtualDesktopEvent) -> Result<()> {
+        match event {
+            VirtualDesktopEvent::DesktopChanged { .. } => {
+                // TODO: implement Self::discard_reservation()?;
+                Self::send(WmStateEvent::Changed);
+            }
+            VirtualDesktopEvent::WindowAdded { window, desktop: _ } => {
+                let window = &Window::from(*window);
+                if !self.is_managed(window) && WindowManagerV2::should_be_managed(window.hwnd()) {
+                    self.add(window)?;
                 }
             }
-            self.layouts.insert(workspace.id.clone(), w_state);
+            VirtualDesktopEvent::WindowMoved { window, .. } => {
+                let window = &Window::from(*window);
+                if self.is_managed(window) {
+                    self.remove(window)?;
+                    self.add(window)?;
+                }
+            }
+            VirtualDesktopEvent::WindowRemoved { window } => {
+                let window = &Window::from(*window);
+                if self.is_managed(window) {
+                    self.remove(window)?;
+                }
+            }
+            _ => {}
         }
+        Ok(())
+    }
+
+    pub fn add(&mut self, window: &Window) -> Result<()> {
+        let workspace_id = window.workspace_id()?;
+        let wm_workspace = self.get_workspace_state(&workspace_id);
+        wm_workspace.add_to_tiles(window);
+        Ok(())
+    }
+
+    pub fn remove(&mut self, window: &Window) -> Result<()> {
+        for workspace in self.layouts.values_mut() {
+            if workspace.is_managed(window) {
+                workspace.unmanage(window);
+                break;
+            }
+        }
+        Ok(())
     }
 
     pub fn is_managed(&self, window: &Window) -> bool {
@@ -73,10 +148,22 @@ impl WmState {
         &mut self,
         window: &Window,
     ) -> Option<&mut WmWorkspaceState> {
-        let window_workspace = get_vd_manager()
-            .workspace_containing_window(&window.address())
-            .map(|w| w.id.clone())?;
-        Some(self.get_workspace_state(&window_workspace))
+        let window_id = window.address();
+        let vd = SluWorkspacesManager2::instance();
+
+        // Search for the workspace containing this window
+        let mut window_workspace: Option<WorkspaceId> = None;
+        vd.monitors.for_each(|(_, monitor)| {
+            for workspace in &monitor.workspaces {
+                if workspace.windows.contains(&window_id) {
+                    window_workspace = Some(workspace.id.clone());
+                    return;
+                }
+            }
+        });
+
+        let workspace_id = window_workspace?;
+        Some(self.get_workspace_state(&workspace_id))
     }
 
     /// # Parameters
@@ -95,9 +182,12 @@ impl WmState {
         relative: bool,
     ) -> Result<()> {
         let monitor_id = window.monitor_id();
-        let current_workspace = get_vd_manager()
-            .get_active_workspace_id(&monitor_id)
-            .clone();
+        let vd = SluWorkspacesManager2::instance();
+
+        let current_workspace = vd
+            .monitors
+            .get(&monitor_id, |monitor| monitor.active_workspace_id().clone())
+            .ok_or("Monitor not found")?;
 
         let Some(w) = self.layouts.get(&current_workspace) else {
             return Ok(());
@@ -183,6 +273,7 @@ impl WmState {
             n.grow_factor.set(n.grow_factor.get() - to_reduce);
         }
 
+        WmState::send(WmStateEvent::Changed);
         Ok(())
     }
 }
@@ -242,7 +333,10 @@ impl WmWorkspaceState {
 
         log::trace!("floating window ({window_id:x})");
         self.layout.floating_windows.push(window_id);
-        Self::set_rect_to_float_initial_size(window)
+        Self::set_rect_to_float_initial_size(window)?;
+
+        WmState::send(WmStateEvent::Changed);
+        Ok(())
     }
 
     pub fn add_to_tiles(&mut self, window: &Window) {
@@ -258,6 +352,7 @@ impl WmWorkspaceState {
         for w in residual {
             log_error!(self.add_to_floats(&Window::from(w)));
         }
+        WmState::send(WmStateEvent::Changed);
     }
 
     pub fn unmanage(&mut self, window: &Window) {
@@ -268,6 +363,7 @@ impl WmWorkspaceState {
         for w in residual {
             log_error!(self.add_to_floats(&Window::from(w)));
         }
+        WmState::send(WmStateEvent::Changed);
     }
 
     pub fn is_floating(&self, window_id: &isize) -> bool {
@@ -286,6 +382,7 @@ impl WmWorkspaceState {
         if a == b {
             return Ok(());
         }
+
         log::trace!(
             "swapping nodes containing windows ({:x}, {:x})",
             a.address(),
@@ -300,6 +397,8 @@ impl WmWorkspaceState {
             std::mem::swap(&mut node_a.active, &mut node_b.active);
             std::mem::swap(&mut node_a.windows, &mut node_b.windows);
         }
+
+        WmState::send(WmStateEvent::Changed);
         Ok(())
     }
 
@@ -333,7 +432,8 @@ impl WmWorkspaceState {
                 windows,
                 max_stack_size: None,
                 ..Default::default()
-            }
+            };
+            self.layout.structure.process_stacks().log_error();
         } else {
             let windows = self.layout.structure.drain();
             self.layout.structure = FULL_STATE.load().get_wm_layout(&self.id).structure;
@@ -341,5 +441,7 @@ impl WmWorkspaceState {
                 self.add_to_tiles(&Window::from(w));
             }
         }
+
+        WmState::send(WmStateEvent::Changed);
     }
 }

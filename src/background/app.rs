@@ -21,14 +21,12 @@ use crate::{
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::discord::start_discord_rpc,
-    virtual_desktops::get_vd_manager,
     widgets::{
         launcher::SeelenRofi,
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
-        window_manager::instance::WindowManagerV2,
     },
-    windows_api::{event_window::create_background_window, monitor::DisplayView, Com},
+    windows_api::{event_window::create_background_window, Com},
     APP_HANDLE,
 };
 
@@ -101,14 +99,6 @@ impl Seelen {
             SeelenWeg::restore_taskbar()?;
         }
 
-        match state.is_window_manager_enabled() {
-            true => {
-                WindowManagerV2::init_state();
-                WindowManagerV2::enumerate_all_windows()?;
-            }
-            false => WindowManagerV2::clear_state(),
-        }
-
         match state.is_launcher_enabled() {
             true => self.add_rofi()?,
             false => self.rofi = None,
@@ -130,8 +120,8 @@ impl Seelen {
     fn on_monitor_event(event: MonitorManagerEvent) {
         let mut guard = trace_lock!(SEELEN);
         match event {
-            MonitorManagerEvent::ViewAdded(view) => {
-                log_error!(guard.add_monitor(view));
+            MonitorManagerEvent::ViewAdded(id) => {
+                log_error!(guard.add_monitor(id));
             }
             MonitorManagerEvent::ViewsChanged => {
                 log_error!(guard.refresh_windows_positions());
@@ -172,18 +162,13 @@ impl Seelen {
 
         log::trace!("Enumerating Monitors & Creating Instances");
         for view in MonitorManager::instance().read_all_views()? {
-            self.add_monitor(view)?;
+            self.add_monitor(view.primary_target()?.stable_id()?)?;
         }
 
         MonitorManager::subscribe(Self::on_monitor_event);
         SystemSettings::subscribe(Self::on_system_settings_change);
 
         self.refresh_windows_positions()?;
-
-        get_vd_manager().list_windows_into_respective_workspace()?;
-        if state.is_window_manager_enabled() {
-            WindowManagerV2::enumerate_all_windows()?;
-        }
 
         register_win_hook()?;
         start_discord_rpc()?;
@@ -202,13 +187,10 @@ impl Seelen {
         release_system_events_handlers();
     }
 
-    fn add_monitor(&mut self, view: DisplayView) -> Result<()> {
+    fn add_monitor(&mut self, monitor_id: MonitorId) -> Result<()> {
         let state = FULL_STATE.load();
         self.widgets_per_display
-            .push(LegacyWidgetMonitorContainer::new(
-                view.primary_target()?.stable_id()?,
-                &state,
-            )?);
+            .push(LegacyWidgetMonitorContainer::new(monitor_id, &state)?);
         self.refresh_windows_positions()?;
         // why this is here? TODO: refactor this.
         trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;

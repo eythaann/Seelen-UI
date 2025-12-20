@@ -39,7 +39,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
   });
 
   const workspaces = $virtual_desktop.value?.workspaces || [];
-  const activeWorkspace = $virtual_desktop.value?.current_workspace;
+  const activeWorkspace = $virtual_desktop.value?.active_workspace;
 
   const { mode } = module;
   const commonProps = {
