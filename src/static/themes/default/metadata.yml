@@ -17,4 +17,5 @@ styles:
   "@seelen/system-tray": !include styles/tray-menu.scss
   "@seelen/quick-settings": !include styles/quick-settings.scss
   "@seelen/bluetooth-popup": !include styles/bluetooth-popup.scss
+  "@seelen/workspaces-viewer": !include styles/workspaces-viewer.scss
 sharedStyles: !include ./shared/index.scss

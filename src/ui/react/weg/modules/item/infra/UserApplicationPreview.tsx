@@ -1,37 +1,19 @@
 import { SeelenCommand } from "@seelen-ui/lib";
-import { Icon } from "@shared/components/Icon";
+import { Icon, MissingIcon } from "@shared/components/Icon";
 import { cx } from "@shared/styles";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
-import { listen } from "@tauri-apps/api/event";
-import { tempDir } from "@tauri-apps/api/path";
-import { Spin } from "antd";
-import { type MouseEvent, useEffect, useReducer, useState } from "react";
+import type { MouseEvent } from "react";
 
 import type { HWND } from "../../shared/types.ts";
 
-import { $delayedFocused, $settings } from "../../shared/state/mod.ts";
+import { $delayedFocused, $previews, $settings } from "../../shared/state/mod.ts";
 interface PreviewProps {
   title: string;
   hwnd: HWND;
 }
 
-const TEMP_FOLDER = await tempDir();
-
 export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
-  const imageUrl = convertFileSrc(`${TEMP_FOLDER}${hwnd}.png`);
-
-  const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-
-  useEffect(() => {
-    const unlisten = listen(`weg-preview-update-${hwnd}`, () => {
-      setImageSrc(imageUrl);
-      forceUpdate(_);
-    });
-    return () => {
-      unlisten.then((unlisten) => unlisten()).catch(console.error);
-    };
-  }, []);
+  const preview = $previews.value[hwnd];
 
   const onClose = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -63,15 +45,14 @@ export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
       </div>
       {$settings.value.thumbnailGenerationEnabled && (
         <div className="weg-item-preview-image-container">
-          {imageSrc
+          {preview
             ? (
               <img
                 className="weg-item-preview-image"
-                src={imageSrc + `?${new Date().getTime()}`}
-                onError={() => setImageSrc(null)}
+                src={convertFileSrc(preview.path) + "?v=" + preview.hash}
               />
             )
-            : <Spin className="weg-item-preview-spin" />}
+            : <MissingIcon />}
         </div>
       )}
     </div>

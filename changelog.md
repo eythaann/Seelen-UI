@@ -7,15 +7,18 @@
 - add corner actions on toolbar.
 - add toggle desktop module on dock.
 - allow layout sorting by windows dragging on the tiling window manager.
+- workspaces viewer gui.
 
 ### enhancements
 
 - improve display changes events.
 - tiling window manager now swap windows by center point on drag end.
+- improve windows preview system.
 
 ### fix
 
 - window manager moving windows being currently dragged by the user.
+- power menu on multi-monitor setups.
 
 ## [2.4.11]
 

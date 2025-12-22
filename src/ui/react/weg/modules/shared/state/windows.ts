@@ -12,6 +12,10 @@ export const $interactables = lazySignal(() => invoke(SeelenCommand.GetUserAppWi
 await subscribe(SeelenEvent.UserAppWindowsChanged, $interactables.setByPayload);
 await $interactables.init();
 
+export const $previews = lazySignal(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
+await subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, $previews.setByPayload);
+await $previews.init();
+
 /** Used to check which window was last focused on interactions with the current window */
 export const $delayedFocused = signal<FocusedApp | null>(null);
 

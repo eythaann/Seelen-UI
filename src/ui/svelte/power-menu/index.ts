@@ -12,6 +12,23 @@ await loadTranslations();
 const widget = Widget.getCurrent();
 await widget.init();
 
+// play with zoom level to reset device pixel ratio to 1:1
+await widget.webview.setZoom(1 / (await widget.webview.scaleFactor()));
+widget.webview.onScaleChanged(({ payload }) => {
+  widget.webview.setZoom(1 / payload.scaleFactor);
+});
+
+widget.webview.setResizable(false);
+widget.webview.onFocusChanged((e) => {
+  if (!e.payload) {
+    widget.webview.hide();
+  }
+});
+widget.onTrigger(async () => {
+  await widget.webview.show();
+  await widget.webview.setFocus();
+});
+
 mount(App, {
   target: getRootContainer(),
 });

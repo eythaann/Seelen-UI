@@ -10,6 +10,7 @@
     "log:default",
     "core:event:default",
     "core:webview:default",
+    "core:webview:allow-set-webview-zoom",
     "core:path:default",
     "core:app:default",
     "dialog:default",

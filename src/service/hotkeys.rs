@@ -168,6 +168,7 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> 
         SendToWorkspace { index } => cmd!["vd", "send-to-workspace", index],
         CreateNewWorkspace => cmd!["vd", "create-new-workspace"],
         DestroyCurrentWorkspace => cmd!["vd", "destroy-current-workspace"],
+        ToggleWorkspacesView => cmd!["vd", "toggle-workspaces-view"],
         // wallpaper manager
         CycleWallpaperNext => cmd!["wallpaper", "next"],
         CycleWallpaperPrev => cmd!["wallpaper", "prev"],

@@ -1,11 +1,9 @@
 use std::{ffi::OsStr, path::PathBuf};
 
-use image::ImageFormat;
 use seelen_core::{
     state::{PinnedWegItemData, RelaunchArguments, WegItem, WegItemSubtype, WegItems},
     system_state::MonitorId,
 };
-use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
@@ -17,8 +15,6 @@ use crate::{
     windows_api::{window::Window, WindowsApi},
 };
 use windows::Win32::UI::WindowsAndMessaging::{SW_SHOWMINNOACTIVE, WM_CLOSE};
-
-use super::SeelenWeg;
 
 #[tauri::command(async)]
 pub fn state_get_weg_items(monitor_id: Option<MonitorId>) -> WegItems {
@@ -32,38 +28,6 @@ pub fn state_get_weg_items(monitor_id: Option<MonitorId>) -> WegItems {
             .unwrap_or_else(|| guard.items.clone());
     }
     guard.items.clone()
-}
-
-#[tauri::command(async)]
-pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
-    let temp_dir = std::env::temp_dir();
-
-    for addr in handles {
-        let window = Window::from(addr);
-
-        if !window.is_visible() || window.is_minimized() {
-            continue;
-        }
-
-        let image = SeelenWeg::capture_window(window.hwnd());
-        if let Some(image) = image {
-            let rect = WindowsApi::get_inner_window_rect(window.hwnd())?;
-            let shadow = WindowsApi::shadow_rect(window.hwnd())?;
-            let width = rect.right - rect.left;
-            let height = rect.bottom - rect.top;
-
-            let image = image.crop_imm(
-                shadow.left.unsigned_abs(),
-                shadow.top.unsigned_abs(),
-                width as u32,
-                height as u32,
-            );
-
-            image.save_with_format(temp_dir.join(format!("{addr}.png")), ImageFormat::Png)?;
-            get_app_handle().emit(format!("weg-preview-update-{addr}").as_str(), ())?;
-        }
-    }
-    Ok(())
 }
 
 #[tauri::command(async)]

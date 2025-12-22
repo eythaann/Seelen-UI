@@ -1,15 +1,17 @@
+use std::collections::HashMap;
+
 use seelen_core::{
     handlers::SeelenEvent,
-    system_state::{FocusedApp, UserAppWindow, UserApplication},
+    system_state::{FocusedApp, UserAppWindow, UserAppWindowPreview, UserApplication},
 };
 use tauri::Emitter;
 use windows::Win32::UI::Shell::{IShellDispatch6, Shell};
 
 use crate::{
     app::get_app_handle,
-    error::{ErrorMap, Result, ResultLogExt},
+    error::{Result, ResultLogExt},
     modules::{
-        apps::application::{UserAppsManager, USER_APPS_MANAGER},
+        apps::application::{previews::WinPreviewManager, UserAppsManager, USER_APPS_MANAGER},
         input::Mouse,
     },
     windows_api::{window::Window, Com},
@@ -20,7 +22,15 @@ pub fn register_app_win_events() {
         let items = get_user_app_windows();
         get_app_handle()
             .emit(SeelenEvent::UserAppWindowsChanged, items)
-            .wrap_error()
+            .log_error();
+    });
+
+    WinPreviewManager::subscribe(|_| {
+        get_app_handle()
+            .emit(
+                SeelenEvent::UserAppWindowsPreviewsChanged,
+                WinPreviewManager::instance().previews.to_hash_map(),
+            )
             .log_error();
     });
 }
@@ -44,6 +54,11 @@ pub fn get_user_applications() -> Vec<UserApplication> {
 #[tauri::command(async)]
 pub fn get_user_app_windows() -> Vec<UserAppWindow> {
     USER_APPS_MANAGER.interactable_windows.to_vec()
+}
+
+#[tauri::command(async)]
+pub fn get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview> {
+    WinPreviewManager::instance().previews.to_hash_map()
 }
 
 /// This function is called show_desktop but acts more like minimize_all

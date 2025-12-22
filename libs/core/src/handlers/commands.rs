@@ -175,6 +175,7 @@ slu_commands_declaration! {
     SetUserFolderLimit = set_user_folder_limit(folder_type: FolderType, amount: usize),
     GerUserApplications = get_user_applications() -> Vec<UserApplication>,
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
+    GetUserAppWindowsPreviews = get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview>,
 
     // Media
     GetMediaDevices = get_media_devices() -> [Vec<MediaDevice>; 2],
@@ -205,7 +206,6 @@ slu_commands_declaration! {
     WegCloseApp = weg_close_app(hwnd: isize),
     WegKillApp = weg_kill_app(hwnd: isize),
     WegToggleWindowState = weg_toggle_window_state(hwnd: isize, was_focused: bool),
-    WegRequestUpdatePreviews = weg_request_update_previews(handles: Vec<isize>),
     WegPinItem = weg_pin_item(path: PathBuf),
 
     // Windows Manager

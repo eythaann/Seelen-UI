@@ -1,16 +1,15 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { options } from "./options";
-  import { setup } from "./actions";
   import { state } from "./state.svelte";
   import { convertFileSrc } from "@tauri-apps/api/core";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import { Widget } from "@seelen-ui/lib";
   import { t } from "./i18n";
   import { MissingIcon } from "libs/ui/svelte/components/Icon";
+  import { scale } from "framer-motion";
 
   onMount(() => {
-    setup(state);
     Widget.getCurrent().ready();
   });
 
@@ -18,12 +17,24 @@
     Widget.getCurrent().webview.hide();
   }
 
-  const width = $derived(
-    (state.menuRect.right - state.menuRect.left) / globalThis.devicePixelRatio
-  );
-  const height = $derived(
-    (state.menuRect.bottom - state.menuRect.top) / globalThis.devicePixelRatio
-  );
+  const menu = $derived.by(() => {
+    if (!state.primaryMonitor) {
+      return null;
+    }
+
+    const {
+      primaryMonitor: { rect, scaleFactor },
+    } = state;
+
+    return {
+      x: rect.left,
+      y: rect.top,
+      // we reduce the size and later scale it, to get the correct display by dpi aware
+      width: (rect.right - rect.left) / scaleFactor,
+      height: (rect.bottom - rect.top) / scaleFactor,
+      scale: scaleFactor,
+    };
+  });
 </script>
 
 <div
@@ -37,41 +48,45 @@
     }
   }}
 >
-  <div
-    class="power-menu"
-    style:position="fixed"
-    style:left="{state.menuRect.left / globalThis.devicePixelRatio}px"
-    style:top="{state.menuRect.top / globalThis.devicePixelRatio}px"
-    style:width="{width}px"
-    style:height="{height}px"
-  >
-    <div class="power-menu-user">
-      {#if state.user.profilePicturePath}
-        <img
-          class="power-menu-user-profile"
-          src={convertFileSrc(state.user.profilePicturePath)}
-          alt=""
-        />
-      {:else}
-        <MissingIcon class="power-menu-user-profile" />
-      {/if}
-      <div class="power-menu-user-email">
-        {state.user.email}
+  {#if menu}
+    <div
+      class="power-menu"
+      style:position="fixed"
+      style:left={menu.x + "px"}
+      style:top={menu.y + "px"}
+      style:width={menu.width + "px"}
+      style:height={menu.height + "px"}
+      style:transform={`scale(${menu.scale})`}
+      style:transform-origin="left top"
+    >
+      <div class="power-menu-user">
+        {#if state.user.profilePicturePath}
+          <img
+            class="power-menu-user-profile"
+            src={convertFileSrc(state.user.profilePicturePath)}
+            alt=""
+          />
+        {:else}
+          <MissingIcon class="power-menu-user-profile" />
+        {/if}
+        <div class="power-menu-user-email">
+          {state.user.email}
+        </div>
       </div>
+      <div class="power-menu-bye-bye">{$t("goodbye", { 0: state.user.name })}</div>
+      <ul class="power-menu-list">
+        {#each options as option}
+          <li>
+            <button onclick={option.onClick} class="power-menu-item">
+              <Icon iconName={option.icon as any} />
+              <span class="power-menu-item-label">{$t(option.key)}</span>
+            </button>
+          </li>
+        {/each}
+      </ul>
+      <!-- <div class="power-menu-uptime">{$t("uptime")}: 2 hours 30 minutes</div> -->
     </div>
-    <div class="power-menu-bye-bye">{$t("goodbye", { 0: state.user.name })}</div>
-    <ul class="power-menu-list">
-      {#each options as option}
-        <li>
-          <button onclick={option.onClick} class="power-menu-item">
-            <Icon iconName={option.icon as any} />
-            <span class="power-menu-item-label">{$t(option.key)}</span>
-          </button>
-        </li>
-      {/each}
-    </ul>
-    <!-- <div class="power-menu-uptime">{$t("uptime")}: 2 hours 30 minutes</div> -->
-  </div>
+  {/if}
 </div>
 
 <style>

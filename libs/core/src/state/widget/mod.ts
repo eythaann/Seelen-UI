@@ -54,10 +54,11 @@ export interface WidgetInformation {
 
 export interface InitWidgetOptions {
   /**
+   * If show the widget on Ready
+   *
    * @default !widget.lazy
    */
   show?: boolean;
-
   /**
    * Will auto size the widget to the content size of the element
    * @example
@@ -66,6 +67,14 @@ export interface InitWidgetOptions {
    * @default undefined
    */
   autoSizeByContent?: HTMLElement | null;
+  /**
+   * Will save the position and size of the widget on change.
+   * This is intedeed to be used when the size and position of the widget is
+   * allowed to be changed by the user, Normally used on desktop widgets.
+   *
+   * @default widget.preset === "Desktop"
+   */
+  saveAndRestoreLastRect?: boolean;
 }
 
 interface WidgetInternalState {
@@ -176,7 +185,6 @@ export class Widget {
       ...this.applyInvisiblePreset(),
       // Desktop widgets are always on bottom
       this.webview.setAlwaysOnBottom(true),
-      this.persistPositionAndSize(),
     ]);
   }
 
@@ -186,7 +194,6 @@ export class Widget {
       ...this.applyInvisiblePreset(),
       // Overlay widgets are always on top
       this.webview.setAlwaysOnTop(true),
-      this.persistPositionAndSize(),
     ]);
   }
 
@@ -308,6 +315,8 @@ export class Widget {
 
     if (options.autoSizeByContent) {
       this.autoSizer = new WidgetAutoSizer(this.webview, options.autoSizeByContent);
+    } else if (options.saveAndRestoreLastRect ?? this.def.preset === WidgetPreset.Desktop) {
+      await this.persistPositionAndSize();
     }
   }
 

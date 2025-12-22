@@ -855,6 +855,7 @@ impl WindowsApi {
         Ok(Self::monitor_info(hmonitor)?.monitorInfo.rcMonitor)
     }
 
+    /// returns the difference between outer window rect and inner window rect
     pub fn shadow_rect(hwnd: HWND) -> Result<RECT> {
         let outer_rect = Self::get_outer_window_rect(hwnd)?;
         let inner_rect = Self::get_inner_window_rect(hwnd)?;

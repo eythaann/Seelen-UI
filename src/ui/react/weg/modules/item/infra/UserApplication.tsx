@@ -5,7 +5,7 @@ import { useWindowFocusChange } from "@shared/hooks";
 import { cx } from "@shared/styles";
 import { invoke } from "@tauri-apps/api/core";
 import moment from "moment";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
@@ -56,14 +56,6 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       setOpenContextMenu(false);
     }
   });
-
-  useEffect(() => {
-    if (openPreview && $settings.value.thumbnailGenerationEnabled) {
-      invoke(SeelenCommand.WegRequestUpdatePreviews, {
-        handles: item.windows.map((w) => w.handle),
-      });
-    }
-  }, [openPreview]);
 
   const notificationsCount = $notifications.value.filter((n) => n.appUmid === item.umid).length;
   const itemLabel = $settings.value.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;

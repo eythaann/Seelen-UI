@@ -40,24 +40,6 @@ hr {
   margin: 5px 0;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-500);
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-gray-600);
-}
-
 b {
   font-weight: 600;
 }

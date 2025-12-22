@@ -8,9 +8,7 @@ pub use instance::SeelenWeg;
 
 use std::thread::JoinHandle;
 
-use image::{DynamicImage, RgbaImage};
 use weg_items_impl::SEELEN_WEG_STATE;
-use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{SW_HIDE, SW_SHOWNORMAL},
@@ -41,13 +39,6 @@ impl SeelenWeg {
         weg.update_window_info(window);
         weg.emit_to_webview()?;
         Ok(())
-    }
-
-    pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {
-        capture_window(hwnd.0 as isize).ok().map(|buf| {
-            let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap_or_default();
-            DynamicImage::ImageRgba8(image)
-        })
     }
 }
 

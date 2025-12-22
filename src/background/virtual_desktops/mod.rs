@@ -82,6 +82,7 @@ impl SluWorkspacesManager2 {
     /// or add a warning message to users.
     fn initialize(&mut self) -> Result<()> {
         // ensure saved windows are still valid.
+        // todo: check if thery are on correct monitor
         self.for_each_workspace(|workspace| {
             workspace
                 .windows

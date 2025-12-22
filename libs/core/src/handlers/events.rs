@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::state::*;
 use crate::system_state::*;
 
@@ -55,6 +57,7 @@ slu_events_declaration! {
     UserFolderChanged(FolderChangedArgs) as "user-folder-changed",
     UserApplicationsChanged(Vec<UserApplication>) as "user::applications-changed",
     UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
+    UserAppWindowsPreviewsChanged(HashMap<isize, UserAppWindowPreview>) as "user::windows-previews-changed",
 
     MediaSessions(Vec<MediaPlayer>) as "media-sessions",
     MediaDevices([Vec<MediaDevice>; 2]) as "media::devices",

@@ -49,3 +49,12 @@ pub struct ProcessInformation {
     pub id: u32,
     pub path: Option<PathBuf>,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct UserAppWindowPreview {
+    pub hash: String,
+    pub path: PathBuf,
+    pub width: u32,
+    pub height: u32,
+}

@@ -35,6 +35,13 @@ impl<T> SyncVec<T> {
         self.0.lock().iter_mut().for_each(f);
     }
 
+    pub fn map<F, R>(&self, f: F) -> Vec<R>
+    where
+        F: FnMut(&mut T) -> R,
+    {
+        self.0.lock().iter_mut().map(f).collect()
+    }
+
     pub fn retain<F>(&self, f: F)
     where
         F: FnMut(&T) -> bool,

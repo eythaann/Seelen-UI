@@ -6,7 +6,7 @@ pub struct PhysicalMonitor {
     pub id: MonitorId,
     pub name: String,
     pub rect: Rect,
-    pub dpi: f64,
+    pub scale_factor: f64,
     pub is_primary: bool,
 }
 
