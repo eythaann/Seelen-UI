@@ -302,7 +302,6 @@ weg:
       all: Tous
       label: Visibilité des éléments non épinglés
       on_monitor: Sur le moniteur
-    thumbnail_generation_enabled: Générer des vignettes au survol de l'article
     visible_separators: Séparateurs visibles
   label: Dock/Barre des tâches
   margin: Marge

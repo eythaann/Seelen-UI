@@ -295,7 +295,6 @@ weg:
       all: ທັງໝົດ
       label: ການເບິ່ງເຫັນລາຍການທີ່ບໍ່ໄດ້ປັກໝຸດ
       on_monitor: ໃນ Monitor
-    thumbnail_generation_enabled: ສ້າງຮູບຫຍໍ້ກ່ຽວກັບສິນຄ້າ
     visible_separators: ຕົວແຍກທີ່ເບິ່ງເຫັນໄດ້
   label: Dock/Taskbar
   margin: ຂອບ

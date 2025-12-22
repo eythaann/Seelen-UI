@@ -296,7 +296,6 @@ weg:
       all: Visi
       label: Atsegtų elementų matomumas
       on_monitor: Ant monitoriaus
-    thumbnail_generation_enabled: Generuoti miniatiūras, kai elementas užvedamas ant pelės žymeklio
     visible_separators: Matomi separatoriai
   label: „Dock“/„Taskbar“
   margin: Paraštė

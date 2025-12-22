@@ -300,7 +300,6 @@ weg:
       all: Visi
       label: Atsprausto vienumu redzamība
       on_monitor: Uz monitora
-    thumbnail_generation_enabled: Ģenerēt sīktēlus, kad vienums tiek novietots ar kursoru
     visible_separators: Redzami atdalītāji
   label: Doks/uzdevumjosla
   margin: Robeža

@@ -300,7 +300,6 @@ weg:
       all: Tots
       label: Visibilitat dels elements sense fixar
       on_monitor: Al monitor
-    thumbnail_generation_enabled: Generar miniatures a l'article que es pot fer
     visible_separators: Separadors visibles
   label: Moll/barra de tasques
   margin: Marge

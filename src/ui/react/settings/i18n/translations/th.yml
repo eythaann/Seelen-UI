@@ -290,7 +290,6 @@ weg:
       all: ทั้งหมด
       label: การมองเห็นรายการที่เลิกปักหมุด
       on_monitor: บนจอภาพ
-    thumbnail_generation_enabled: สร้างภาพขนาดย่อบนรายการโฮเวอร์
     visible_separators: ตัวแยกที่มองเห็นได้
   label: แท่นวาง/บาร์
   margin: ระยะขอบ

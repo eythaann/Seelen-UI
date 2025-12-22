@@ -300,7 +300,6 @@ weg:
       all: Alle
       label: Synlighet for frigjorte elementer
       on_monitor: På monitor
-    thumbnail_generation_enabled: Generer miniatyrbilder på varen sveve
     visible_separators: Synlige separatorer
   label: Dock/oppgavelinje
   margin: Margin

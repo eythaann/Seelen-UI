@@ -299,7 +299,6 @@ weg:
       all: Све
       label: Видљивост откачених ставки
       on_monitor: На монитору
-    thumbnail_generation_enabled: Генерирајте сличице на предмету
     visible_separators: Видљиви сепаратори
   label: Доцк / трака задатака
   margin: Маргина

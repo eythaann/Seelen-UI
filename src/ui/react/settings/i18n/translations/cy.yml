@@ -300,7 +300,6 @@ weg:
       all: Pawb
       label: Eitemau heb eu Pinio Gwelededd
       on_monitor: Ar Fonitor
-    thumbnail_generation_enabled: Cynhyrchu mân -luniau ar hofran eitem
     visible_separators: Gwahanyddion gweladwy
   label: Doc/bar tasgau
   margin: Ngherlong

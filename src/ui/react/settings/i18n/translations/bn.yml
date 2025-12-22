@@ -302,7 +302,6 @@ weg:
       all: সব
       label: আনপিন করা আইটেম দৃশ্যমানতা
       on_monitor: মনিটরে
-    thumbnail_generation_enabled: আইটেম হোভারে থাম্বনেইল তৈরি করুন
     visible_separators: দৃশ্যমান বিভাজক
   label: ডক/টাস্কবার
   margin: মার্জিন

@@ -288,7 +288,6 @@ weg:
       all: 全て
       label: 固定されていないアイテムの表示設定
       on_monitor: モニター上
-    thumbnail_generation_enabled: アイテムのホバー時にサムネイルを生成
     visible_separators: セパレーターを表示する
   label: ドック（タスクバー）
   margin: ドックの隙間

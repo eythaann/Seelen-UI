@@ -299,7 +299,6 @@ weg:
       all: تمام
       label: ان پن کردہ آئٹمز کی مرئیت
       on_monitor: مانیٹر پر
-    thumbnail_generation_enabled: آئٹم ہوور پر تھمب نیل تیار کریں
     visible_separators: مرئی جداکار
   label: ٹاسک بار
   margin: مارجن

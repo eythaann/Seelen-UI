@@ -298,7 +298,6 @@ weg:
       all: Бүгд
       label: Тодруулаагүй зүйлсийн харагдах байдал
       on_monitor: Монитор дээр
-    thumbnail_generation_enabled: Барааны Hover дээр Thumbnails үүсгэх
     visible_separators: Харагдах тусгаарлагч
   label: Док / Taskbar
   margin: Саруулган өвс

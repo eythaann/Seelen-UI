@@ -290,7 +290,6 @@ weg:
       all: ሁሉም
       label: ያልተሰካ እቃዎች ታይነት
       on_monitor: በሞኒተር ላይ
-    thumbnail_generation_enabled: በንጥል ላይ ያሉ ድንክዬዎችን ማመንጨት
     visible_separators: የሚታዩ መለያዎች
   label: Dock / Accorbar
   margin: ህዳግ

@@ -297,7 +297,6 @@ weg:
       all: All
       label: Unpinned Items Visibility
       on_monitor: On Monitor
-    thumbnail_generation_enabled: Generate thumbnails on item hover
     visible_separators: Visible Separators
   label: Dock/Taskbar
   margin: Margin

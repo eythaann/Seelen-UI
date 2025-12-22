@@ -291,7 +291,6 @@ weg:
       all: الجميع
       label: رؤية العناصر غير المثبتة
       on_monitor: على الشاشة
-    thumbnail_generation_enabled: إنشاء صور مصغرة عند تحريك العنصر
     visible_separators: الفواصل المرئية
   label: قفص الاتهام / شريط المهام
   margin: الهامش

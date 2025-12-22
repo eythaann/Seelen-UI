@@ -298,7 +298,6 @@ weg:
       all: Alla
       label: Synlighet för lossade objekt
       on_monitor: På bildskärm
-    thumbnail_generation_enabled: Generera miniatyrbilder när objektet rör sig
     visible_separators: Synliga separatorer
   label: Docka/arbetsfält
   margin: Marginal

@@ -300,7 +300,6 @@ weg:
       all: Semua
       label: Keterlihatan Item Dinyahsemat
       on_monitor: Pada Monitor
-    thumbnail_generation_enabled: Menjana gambar kecil pada hover item
     visible_separators: Pemisah yang kelihatan
   label: Dock/Taskbar
   margin: Margin

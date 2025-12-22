@@ -297,7 +297,6 @@ weg:
       all: ទាំងអស់។
       label: ភាពមើលឃើញធាតុដែលមិនបានខ្ទាស់
       on_monitor: នៅលើម៉ូនីទ័រ
-    thumbnail_generation_enabled: បង្កើតរូបភាពតូចលើការសំកាំងរបស់ធាតុ
     visible_separators: សញ្ញាបំបែកដែលអាចមើលឃើញ
   label: ចត/របារភារកិច្ច
   margin: រឹម

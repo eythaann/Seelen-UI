@@ -299,7 +299,6 @@ weg:
       all: Hamısı
       label: Saxlanmamış Elementlərin Görünüşü
       on_monitor: Monitorda
-    thumbnail_generation_enabled: Hover-də eskizlər yaradın
     visible_separators: Görünən ayırıcılar
   label: Dock / tapşırıq çubuğu
   margin: Kənarə

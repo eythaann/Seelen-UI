@@ -297,7 +297,6 @@ weg:
       all: Kõik
       label: Kinnitamata üksuste nähtavus
       on_monitor: Monitoril
-    thumbnail_generation_enabled: Loo pisipildid objekti hõljumisel
     visible_separators: Nähtavad eraldajad
   label: Dokk/ülesanderiba
   margin: Marginaal

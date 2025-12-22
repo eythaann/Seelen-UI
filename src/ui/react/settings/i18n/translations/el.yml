@@ -301,7 +301,6 @@ weg:
       all: Ολοι
       label: Ορατότητα ξεκαρφιτσωμένων αντικειμένων
       on_monitor: Στην οθόνη
-    thumbnail_generation_enabled: Δημιουργία μικρογραφιών κατά το hover του στοιχείου
     visible_separators: Ορατοί διαχωριστές
   label: Λέσχη εργασιών
   margin: Περιθώριο

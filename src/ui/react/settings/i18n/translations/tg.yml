@@ -297,7 +297,6 @@ weg:
       all: Ҳама
       label: Намоиши ҷузъҳои ҷудонашуда
       on_monitor: Дар Монитор
-    thumbnail_generation_enabled: Обунаи ангур дар болои ашё
     visible_separators: Бандиаткунандагони намоён
   label: Dock / супоришҳо
   margin: Маржа

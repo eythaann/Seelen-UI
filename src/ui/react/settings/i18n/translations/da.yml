@@ -298,7 +298,6 @@ weg:
       all: Alle
       label: Synlighed af frigjorte elementer
       on_monitor: På monitor
-    thumbnail_generation_enabled: Generer miniaturebilleder, når du holder musen over et element
     visible_separators: Synlige separatorer
   label: Dock/proceslinje
   margin: Margin

@@ -300,7 +300,6 @@ weg:
       all: Wszystkie ekrany
       label: Widoczność uruchomionych aplikacji
       on_monitor: Jeden ekran
-    thumbnail_generation_enabled: Miniatury po najechaniu na element
     visible_separators: Widoczne separatory
   label: Dock/Pasek zadań
   margin: Margines

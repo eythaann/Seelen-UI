@@ -300,7 +300,6 @@ weg:
       all: Almal
       label: Sigbaarheid van ontspelde items
       on_monitor: Op Monitor
-    thumbnail_generation_enabled: Genereer duimnaels op die item hover
     visible_separators: Sigbare skeiers
   label: Dock/Taakbalk
   margin: Marge

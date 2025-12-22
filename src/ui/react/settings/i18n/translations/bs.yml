@@ -298,7 +298,6 @@ weg:
       all: Sve
       label: Vidljivost nezakačenih stavki
       on_monitor: Na monitoru
-    thumbnail_generation_enabled: Generirajte sličice na povuci
     visible_separators: Vidljivi separatori
   label: Dock / programska traka
   margin: Marža

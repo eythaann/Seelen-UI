@@ -302,7 +302,6 @@ weg:
       all: Toate
       label: Vizibilitatea elementelor nefixate
       on_monitor: Pe monitor
-    thumbnail_generation_enabled: Generarea de miniaturi la trecerea elementului
     visible_separators: Separatoare vizibile
   label: Dock/Bara de activități
   margin: Marjă

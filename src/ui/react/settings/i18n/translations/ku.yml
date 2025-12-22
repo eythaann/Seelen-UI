@@ -299,7 +299,6 @@ weg:
       all: Gişt
       label: Dîtina Tiştên Nepînekirî
       on_monitor: Li ser Monitor
-    thumbnail_generation_enabled: Thumbnails li ser tiştên hover bikin
     visible_separators: Dabeşên Visible
   label: Dock / Taskbar
   margin: Radihêj

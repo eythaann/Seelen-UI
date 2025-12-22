@@ -300,7 +300,6 @@ weg:
       all: Tutto
       label: Visibilità degli elementi non bloccati
       on_monitor: Sul monitor
-    thumbnail_generation_enabled: Generare miniature al passaggio del mouse sugli elementi
     visible_separators: Separatori Visibili
   label: Dock/Barra delle Attività
   margin: Margine

@@ -300,7 +300,6 @@ weg:
       all: Բոլորը
       label: Չամրացված տարրերի տեսանելիություն
       on_monitor: Մոնիտորի վրա
-    thumbnail_generation_enabled: Ստեղծեք մանրապատկերներ Hover իրերի վրա
     visible_separators: Տեսանելի տարանջատիչներ
   label: Dock / Taskbar
   margin: Լուսանցք

@@ -300,7 +300,6 @@ weg:
       all: Kollha
       label: Oġġetti Unpinned Viżibilità
       on_monitor: Fuq Monitor
-    thumbnail_generation_enabled: Iġġenera minjaturi fuq l-oġġett li jtellgħu
     visible_separators: Separaturi viżibbli
   label: Dock / Taskbar
   margin: Marġni

@@ -299,7 +299,6 @@ weg:
       all: Minden
       label: Rögzített elemek láthatósága
       on_monitor: Monitoron
-    thumbnail_generation_enabled: Miniatűrök létrehozása az elem lebegtetésekor
     visible_separators: Látható elválasztók
   label: Dokk/tálca
   margin: Árrés

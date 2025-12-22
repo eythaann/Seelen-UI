@@ -297,7 +297,6 @@ weg:
       all: બધા
       label: અનપિન કરેલ આઇટમ્સની દૃશ્યતા
       on_monitor: મોનિટર પર
-    thumbnail_generation_enabled: આઇટમ હોવર પર થંબનેલ્સ બનાવો
     visible_separators: દૃશ્યમાન વિભાજક
   label: ડોક/ટાસ્કબાર
   margin: માર્જિન

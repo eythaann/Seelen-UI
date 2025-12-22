@@ -130,8 +130,6 @@ pub struct SeelenWegSettings {
     pub pinned_items_visibility: WegPinnedItemsVisibility,
     /// Dock position
     pub position: SeelenWegSide,
-    /// Decides whether the application hoover should generate thumbnails or just list the names instead
-    pub thumbnail_generation_enabled: bool,
     /// enable or disable the instance counter visibility on weg instance
     pub show_instance_counter: bool,
     /// enable or disable the window title visibility for opened apps
@@ -163,7 +161,6 @@ impl Default for SeelenWegSettings {
             mode: SeelenWegMode::MinContent,
             hide_mode: HideMode::OnOverlap,
             position: SeelenWegSide::Bottom,
-            thumbnail_generation_enabled: true,
             visible_separators: true,
             show_instance_counter: true,
             show_window_title: false,

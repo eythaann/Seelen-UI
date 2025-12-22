@@ -302,7 +302,6 @@ weg:
       all: Dhammaan
       label: Aragtida Shayada Furan
       on_monitor: On Monitor
-    thumbnail_generation_enabled: Abuur thumbnails on sheyga
     visible_separators: Kala-sooca muuqda
   label: Dock / Tootshar
   margin: Margin

@@ -300,7 +300,6 @@ weg:
       all: Všetky
       label: Viditeľnosť nepripnutých položiek
       on_monitor: Na monitore
-    thumbnail_generation_enabled: Generovanie miniatúr pri umiestnení položky na myši
     visible_separators: Viditeľné oddeľovače
   label: Prístavný panel
   margin: Okraj

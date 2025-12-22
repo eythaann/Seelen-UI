@@ -296,7 +296,6 @@ weg:
       all: Wote
       label: Mwonekano wa Vipengee Vilivyobanduliwa
       on_monitor: Kwenye Monitor
-    thumbnail_generation_enabled: Tengeneza vijipicha kwenye hover ya bidhaa
     visible_separators: Watenganisho unaoonekana
   label: Dock/Taskbar
   margin: Margin

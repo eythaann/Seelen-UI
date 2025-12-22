@@ -302,7 +302,6 @@ weg:
       all: Todos
       label: Visibilidad de los elementos no fijados
       on_monitor: En monitor
-    thumbnail_generation_enabled: Generar miniaturas al pasar el ratón por encima de un elemento
     visible_separators: Separadores visibles
   label: Muelle/Barra de Muelle
   margin: Margen

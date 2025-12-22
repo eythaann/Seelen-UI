@@ -300,7 +300,6 @@ weg:
       all: Sve
       label: Vidljivost otkvačenih stavki
       on_monitor: Na monitoru
-    thumbnail_generation_enabled: Generirati sličice na predmetu lebde
     visible_separators: Vidljivi separatori
   label: Pristanište/trag
   margin: Margina

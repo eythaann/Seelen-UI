@@ -291,7 +291,6 @@ weg:
       all: כל
       label: נראות פריטים לא מוצמדים
       on_monitor: על מוניטור
-    thumbnail_generation_enabled: צור תמונות ממוזערות על ריחוף פריט
     visible_separators: מפרידים גלויים
   label: שורת המזח/המשימות
   margin: שולים

@@ -298,7 +298,6 @@ weg:
       all: ყველა
       label: ჩამაგრებული ერთეულების ხილვადობა
       on_monitor: მონიტორზე
-    thumbnail_generation_enabled: წარმოქმენით მინიატურები
     visible_separators: ხილული გამყოფი
   label: დოკ/დავალების ზოლი
   margin: ზღვარი

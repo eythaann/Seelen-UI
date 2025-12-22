@@ -298,7 +298,6 @@ weg:
       all: అన్నీ
       label: అన్‌పిన్ చేయబడిన అంశాల దృశ్యమానత
       on_monitor: మానిటర్‌లో
-    thumbnail_generation_enabled: ఐటెమ్ హోవర్‌పై సూక్ష్మచిత్రాలను రూపొందించండి
     visible_separators: కనిపించే సెపరేటర్లు
   label: డాక్/టాస్క్‌బార్
   margin: మార్జిన్

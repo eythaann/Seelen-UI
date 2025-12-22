@@ -298,7 +298,6 @@ weg:
       all: All
       label: Unpinned Elementer Visibilitéit
       on_monitor: Op Monitor
-    thumbnail_generation_enabled: Generéiere Miniatur op Artikel Hover
     visible_separators: Sechsi seichtbar Seperure
   label: Dock / Taskbar
   margin: Den Jean-Margin

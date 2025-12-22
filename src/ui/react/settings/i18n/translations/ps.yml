@@ -294,7 +294,6 @@ weg:
       all: ټول
       label: د ناپاک شوي توکو لید لید
       on_monitor: په مانیټر کې
-    thumbnail_generation_enabled: د توکو هورټ کې تمبینونه پیدا کړئ
     visible_separators: لیدلي جلا کونکي
   label: ډیک / ټاسک بار
   margin: حاشیه

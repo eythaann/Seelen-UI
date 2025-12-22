@@ -285,7 +285,6 @@ weg:
       all: 全部
       label: 未固定项目的可见性
       on_monitor: 在监视器上
-    thumbnail_generation_enabled: 项目悬停时生成缩略图
     visible_separators: 可见分隔符
   label: Dock / 任务栏
   margin: 边距

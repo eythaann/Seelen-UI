@@ -298,7 +298,6 @@ weg:
       all: Allt
       label: Sýnileiki ófestra hluta
       on_monitor: Á Skjár
-    thumbnail_generation_enabled: Búðu til smámyndir á hlutnum sveima
     visible_separators: Sýnilegir skilju
   label: Bryggju/verkefnabar
   margin: Framlegð

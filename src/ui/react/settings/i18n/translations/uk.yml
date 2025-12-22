@@ -298,7 +298,6 @@ weg:
       all: всі
       label: Видимість незакріплених елементів
       on_monitor: На моніторі
-    thumbnail_generation_enabled: Генерувати мініатюри при наведенні на елемент
     visible_separators: Видимі розділювачі
   label: Панель завдань
   margin: Зовнішній відступ

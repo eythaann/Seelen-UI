@@ -302,7 +302,6 @@ weg:
       all: Semua
       label: Visibilitas Item yang Tidak Disematkan
       on_monitor: Di Monitor
-    thumbnail_generation_enabled: Menghasilkan gambar mini pada hover item
     visible_separators: Pemisah yang terlihat
   label: Dock/Taskbar
   margin: Batas

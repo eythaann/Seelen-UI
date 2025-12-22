@@ -294,7 +294,6 @@ weg:
       all: ਸਾਰੇ
       label: ਅਨਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ
       on_monitor: ਮਾਨੀਟਰ 'ਤੇ
-    thumbnail_generation_enabled: ਆਈਟਮ ਹੋਵਰ 'ਤੇ ਥੰਬਨੇਲ ਤਿਆਰ ਕਰੋ
     visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
   label: ਡੌਕ/ਟਾਸਕਬਾਰ
   margin: ਹਾਸ਼ੀਏ

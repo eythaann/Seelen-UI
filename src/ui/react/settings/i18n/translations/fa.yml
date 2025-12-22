@@ -299,7 +299,6 @@ weg:
       all: همه
       label: قابلیت مشاهده موارد پین نشده
       on_monitor: روی مانیتور
-    thumbnail_generation_enabled: ریز عکسها را در شناور آیتم ایجاد کنید
     visible_separators: جداکننده های قابل مشاهده
   label: اسکله/نوار وظیفه
   margin: لبه

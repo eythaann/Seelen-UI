@@ -301,7 +301,6 @@ weg:
       all: सभी
       label: अनपिन किए गए आइटम दृश्यता
       on_monitor: मॉनिटर पर
-    thumbnail_generation_enabled: आइटम होवर पर थंबनेल उत्पन्न करें
     visible_separators: दृश्य विभाजक
   label: डॉक/टास्टरबार
   margin: अंतर

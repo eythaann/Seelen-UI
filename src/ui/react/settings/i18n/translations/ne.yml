@@ -299,7 +299,6 @@ weg:
       all: सबै
       label: अनपिन गरिएका वस्तुहरूको दृश्यता
       on_monitor: मोनिटरमा
-    thumbnail_generation_enabled: वस्तु होभरमा थम्बनेलहरू उत्पन्न गर्नुहोस्
     visible_separators: दृश्य बिल्कुलरहरू
   label: डक / टास्कबार
   margin: स्पानलिन

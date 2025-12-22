@@ -300,7 +300,6 @@ weg:
       all: Tümü
       label: Sabitlenmemiş Öğelerin Görünürlüğü
       on_monitor: Monitörde
-    thumbnail_generation_enabled: Öğenin üzerine gelindiğinde küçük resimler oluştur
     visible_separators: Görünür Ayırıcılar
   label: Dock/Görev Çubuğu
   margin: Kenar Boşluğu

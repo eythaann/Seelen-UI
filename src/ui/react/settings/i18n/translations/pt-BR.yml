@@ -300,7 +300,6 @@ weg:
       all: Todos
       label: Visibilidade de itens não fixados
       on_monitor: No monitor
-    thumbnail_generation_enabled: Gerar miniaturas no itens pairar
     visible_separators: Separadores Visíveis
   label: Dock/barra de tarefas
   margin: Margem

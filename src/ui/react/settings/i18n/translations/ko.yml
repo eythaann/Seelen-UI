@@ -289,7 +289,6 @@ weg:
       all: 모두
       label: 고정 해제된 항목 가시성
       on_monitor: 모니터에서
-    thumbnail_generation_enabled: 항목 마우스를 가져가면 썸네일 생성
     visible_separators: 구분선 표시
   label: 독/작업 표시줄
   margin: 바깥 여백

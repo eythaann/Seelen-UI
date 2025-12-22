@@ -300,7 +300,6 @@ weg:
       all: Kaikki
       label: Irrotettujen kohteiden näkyvyys
       on_monitor: Monitorissa
-    thumbnail_generation_enabled: Luo pikkukuvia kohteen leijailun yhteydessä
     visible_separators: Näkyvät erottimet
   label: Telakka/tehtäväpalkki
   margin: Marginaali

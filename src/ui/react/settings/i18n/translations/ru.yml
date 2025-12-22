@@ -300,7 +300,6 @@ weg:
       all: Все
       label: Видимость незакрепленных элементов
       on_monitor: На мониторе
-    thumbnail_generation_enabled: Создание миниатюр при наведении на элемент
     visible_separators: Разделители
   label: Панель задач
   margin: Внешний отступ

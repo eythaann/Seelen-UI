@@ -300,7 +300,6 @@ weg:
       all: Alle
       label: Zichtbaarheid van losgemaakte items
       on_monitor: Op monitor
-    thumbnail_generation_enabled: Genereer miniaturen bij item hover
     visible_separators: Zichtbare scheiders
   label: Dock/taakbalk
   margin: Marge
