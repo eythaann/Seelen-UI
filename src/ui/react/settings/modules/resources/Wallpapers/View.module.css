@@ -1,0 +1,34 @@
+.previewContainer {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 10px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  overflow: hidden;
+  border-radius: 10px;
+
+  animation-name: shrink-on-scroll;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  animation-timeline: scroll();
+  animation-range: 0px 200px;
+}
+
+@keyframes shrink-on-scroll {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 30vw;
+  }
+}

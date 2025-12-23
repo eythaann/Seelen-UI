@@ -99,6 +99,21 @@ pub struct ResourceMetadata {
     pub internal: InternalResourceMetadata,
 }
 
+impl ResourceMetadata {
+    /// Returns the directory of where the resource is stored
+    pub fn directory(&self) -> Result<PathBuf> {
+        Ok(if self.internal.path.is_dir() {
+            self.internal.path.clone()
+        } else {
+            self.internal
+                .path
+                .parent()
+                .ok_or("No Parent")?
+                .to_path_buf()
+        })
+    }
+}
+
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct InternalResourceMetadata {

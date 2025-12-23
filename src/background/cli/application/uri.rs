@@ -335,17 +335,17 @@ async fn download_remote_wallpapers(wallpaper: &mut Wallpaper) -> Result<()> {
         return Ok(());
     }
 
-    let folder_to_store = &wallpaper.metadata.internal.path;
+    let folder_to_store = wallpaper.metadata.directory()?;
 
     // Download the main wallpaper file
     if let Some(url) = &wallpaper.url {
-        let filename = download_remote_asset(url, folder_to_store).await?;
+        let filename = download_remote_asset(url, &folder_to_store).await?;
         wallpaper.filename = Some(filename);
     }
 
     // Download the thumbnail
     if let Some(thumbnail_url) = &wallpaper.thumbnail_url {
-        let thumbnail_filename = download_remote_asset(thumbnail_url, folder_to_store).await?;
+        let thumbnail_filename = download_remote_asset(thumbnail_url, &folder_to_store).await?;
         wallpaper.thumbnail_filename = Some(thumbnail_filename);
     }
 

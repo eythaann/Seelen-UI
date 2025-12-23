@@ -17,6 +17,8 @@
 - tiling window manager now swap windows by center point on drag end.
 - improve windows preview system.
 - improvements on wallpaper manager syncronization and changes.
+- settings UX improvements.
+- extraction on local video wallpapers thumbnails.
 
 ### fix
 

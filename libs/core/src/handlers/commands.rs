@@ -100,6 +100,7 @@ slu_commands_declaration! {
     // wallpaper
     WallpaperNext = wallpaper_next(),
     WallpaperPrev = wallpaper_prev(),
+    WallpaperSaveThumbnail = wallpaper_save_thumbnail(wallpaper_id: ResourceId, thumbnail_bytes: Vec<u8>),
 
     // General
     Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>),

@@ -29,15 +29,7 @@ export function getWallpaperStyles(config: WallpaperInstanceSettings) {
   const transforms: string[] = [];
   const filters: string[] = [];
 
-  const {
-    flipHorizontal,
-    flipVertical,
-    blur,
-    saturation,
-    contrast,
-    objectFit,
-    objectPosition,
-  } = config;
+  const { flipHorizontal, flipVertical, blur, saturation, contrast, objectFit, objectPosition } = config;
 
   styles.objectFit = objectFit;
   styles.objectPosition = objectPosition;
@@ -54,8 +46,13 @@ export function getWallpaperStyles(config: WallpaperInstanceSettings) {
     filters.push(`blur(${blur}px)`);
   }
 
-  filters.push(`saturate(${saturation})`); // 0 is allowed
-  filters.push(`contrast(${contrast})`); // 0 is allowed
+  if (saturation !== 1) {
+    filters.push(`saturate(${saturation})`); // 0 is allowed
+  }
+
+  if (contrast !== 1) {
+    filters.push(`contrast(${contrast})`); // 0 is allowed
+  }
 
   if (transforms.length > 0) {
     styles.transform = transforms.join(" ");

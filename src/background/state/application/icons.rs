@@ -12,6 +12,7 @@ pub async fn download_remote_icons(pack: &mut IconPack) -> Result<()> {
         return Ok(());
     }
 
+    let folder_to_store = pack.metadata.directory()?;
     let mut entries = Vec::new();
 
     for entry in &pack.remote_entries {
@@ -20,16 +21,14 @@ pub async fn download_remote_icons(pack: &mut IconPack) -> Result<()> {
         match &mut new_entry {
             IconPackEntry::Unique(entry) => {
                 if let Some(icon) = &mut entry.icon {
-                    *icon = download_entry_icons(icon, &pack.metadata.internal.path).await?;
+                    *icon = download_entry_icons(icon, &folder_to_store).await?;
                 }
             }
             IconPackEntry::Shared(entry) => {
-                entry.icon =
-                    download_entry_icons(&entry.icon, &pack.metadata.internal.path).await?;
+                entry.icon = download_entry_icons(&entry.icon, &folder_to_store).await?;
             }
             IconPackEntry::Custom(entry) => {
-                entry.icon =
-                    download_entry_icons(&entry.icon, &pack.metadata.internal.path).await?;
+                entry.icon = download_entry_icons(&entry.icon, &folder_to_store).await?;
             }
         }
 

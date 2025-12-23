@@ -249,6 +249,8 @@ wall:
   wallpaper_collection: Wallpaper Collection
   wallpaper_settings: Wallpaper Settings
   workspace_collections: Workspace Collections
+  generating_thumbnails: Generating Wallpaper Thumbnails
+  processing_video: Processing video
   fit:
     contain: Contain
     cover: Cover

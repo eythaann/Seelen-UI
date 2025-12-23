@@ -1,11 +1,18 @@
 use std::sync::Once;
 
-use seelen_core::{handlers::SeelenEvent, state::VirtualDesktops, system_state::MonitorId};
+use seelen_core::{
+    handlers::SeelenEvent,
+    resource::{SluResource, WallpaperId},
+    state::{VirtualDesktops, Wallpaper},
+    system_state::MonitorId,
+};
 use tauri::Emitter;
 
 use crate::{
     app::get_app_handle,
     error::{Result, ResultLogExt},
+    resources::RESOURCES,
+    utils::date_based_hex_id,
     virtual_desktops::SluWorkspacesManager2,
 };
 
@@ -41,4 +48,20 @@ pub fn wallpaper_next() {
 #[tauri::command(async)]
 pub fn wallpaper_prev() {
     super::wallpapers::WorkspaceWallpapersManager::previous();
+}
+
+#[tauri::command(async)]
+pub fn wallpaper_save_thumbnail(wallpaper_id: WallpaperId, thumbnail_bytes: Vec<u8>) -> Result<()> {
+    let Some(wallpaper) = RESOURCES.wallpapers.get(&wallpaper_id) else {
+        return Err("Invalid wallpaper id".into());
+    };
+
+    let thumbnail_filename = format!("thumbnail_{}.jpg", date_based_hex_id());
+    let thumbnail_path = wallpaper.metadata.directory()?.join(&thumbnail_filename);
+    std::fs::write(&thumbnail_path, &thumbnail_bytes)?;
+
+    let mut wallpaper_mut = Wallpaper::clone(&wallpaper);
+    wallpaper_mut.thumbnail_filename = Some(thumbnail_filename);
+    wallpaper_mut.save()?;
+    Ok(())
 }

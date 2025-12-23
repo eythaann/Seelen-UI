@@ -12,6 +12,8 @@ import { newSelectors, RootActions } from "../../shared/store/app/reducer.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 
+import styles from "./View.module.css";
+
 const playbackSpeeds: `${PlaybackSpeed}`[] = [
   "xDot25",
   "xDot5",
@@ -59,18 +61,10 @@ export function SingleWallpaperView() {
 
   return (
     <>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "16 / 9",
-          backgroundColor: "#000",
-          overflow: "hidden",
-          marginBottom: "10px",
-          borderRadius: "10px",
-        }}
-      >
-        <Wallpaper definition={editingWallpaper} config={config} muted />
+      <div className={styles.previewContainer}>
+        <div className={styles.preview}>
+          <Wallpaper definition={editingWallpaper} config={config} muted />
+        </div>
       </div>
 
       <SettingsGroup>

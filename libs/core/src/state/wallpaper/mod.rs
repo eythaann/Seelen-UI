@@ -74,6 +74,14 @@ impl SluResource for Wallpaper {
                 }
             }
         }
+
+        // remove thumbnail if doesn't exist
+        if let Some(filename) = &self.thumbnail_filename {
+            let thumbnail_path = self.metadata.internal.path.join(filename);
+            if !thumbnail_path.exists() {
+                self.thumbnail_filename = None;
+            }
+        }
     }
 
     fn validate(&self) -> Result<()> {

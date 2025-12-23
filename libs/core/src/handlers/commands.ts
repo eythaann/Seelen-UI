@@ -4,6 +4,7 @@ export enum SeelenCommand {
   SwitchWorkspace = "switch_workspace",
   WallpaperNext = "wallpaper_next",
   WallpaperPrev = "wallpaper_prev",
+  WallpaperSaveThumbnail = "wallpaper_save_thumbnail",
   Run = "run",
   RunAsAdmin = "run_as_admin",
   GetFocusedApp = "get_focused_app",
