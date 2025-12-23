@@ -2,7 +2,6 @@ import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { type File, FolderType } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import type { IconName } from "libs/ui/react/components/Icon/icons.ts";
 import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { path } from "@tauri-apps/api";
 import { t } from "i18next";
@@ -16,6 +15,7 @@ import { Selectors } from "../../shared/store/app.ts";
 
 import { UserFolder } from "./UserFolder.tsx";
 import { UserProfile } from "./UserProfile.tsx";
+import type { IconName } from "libs/ui/icons.ts";
 
 function folderTypeToIcon(
   folderType: FolderType,

@@ -1,7 +1,6 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Resource, ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import type { IconName } from "libs/ui/react/components/Icon/icons.ts";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
@@ -12,6 +11,7 @@ import { useTranslation } from "react-i18next";
 
 import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
+import type { IconName } from "libs/ui/icons.ts";
 
 type AnyResource = {
   id: ResourceId;

@@ -47,11 +47,11 @@ export async function extractIcons(): Promise<void> {
       fs.writeFileSync(path.join(ICONS_DIR, `${name}.svg`), svg);
     }
 
-    tsFile += `\n  | keyof typeof import('react-icons/${entry}')`;
+    tsFile += `\n  | keyof typeof import("react-icons/${entry}")`;
   }
 
   tsFile += ";\n";
-  fs.writeFileSync("./libs/widgets-shared/components/Icon/icons.ts", tsFile);
+  fs.writeFileSync("./libs/ui/icons.ts", tsFile);
 
   console.timeEnd("Lazy Icons");
 }
