@@ -67,7 +67,7 @@ export function Wallpaper(props: BaseProps) {
           }}
         />
       )}
-      {props.pausedMessage && props.paused && $loaded.value && (
+      {props.pausedMessage && props.paused && $loaded.value && definition?.type === "Video" && (
         <div className={cs.pausedMessage}>{props.pausedMessage}</div>
       )}
     </div>

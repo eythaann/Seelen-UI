@@ -22,6 +22,7 @@
 
 - window manager moving windows being currently dragged by the user.
 - power menu on multi-monitor setups.
+- showing paused message on no video wallpapers.
 
 ## [2.4.11]
 
