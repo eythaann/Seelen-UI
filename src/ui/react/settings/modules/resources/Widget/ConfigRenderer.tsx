@@ -1,5 +1,5 @@
 import type { WidgetSettingsDeclarationList, WsdGroupEntry, WsdItem } from "@seelen-ui/lib/types";
-import { ResourceText } from "@shared/components/ResourceText";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { ColorPicker, Input, InputNumber, Select, Slider, Switch } from "antd";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";

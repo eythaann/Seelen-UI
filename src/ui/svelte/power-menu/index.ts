@@ -1,4 +1,4 @@
-import { getRootContainer } from "@shared";
+import { getRootContainer } from "libs/ui/react/utils/index.ts";
 import { mount } from "svelte";
 import App from "./app.svelte";
 import { loadTranslations } from "./i18n/index.ts";

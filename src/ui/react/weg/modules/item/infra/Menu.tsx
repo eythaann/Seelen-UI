@@ -1,5 +1,5 @@
 import { SeelenCommand } from "@seelen-ui/lib";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { invoke } from "@tauri-apps/api/core";
 import type { ItemType } from "antd/es/menu/interface";
 import type { TFunction } from "i18next";

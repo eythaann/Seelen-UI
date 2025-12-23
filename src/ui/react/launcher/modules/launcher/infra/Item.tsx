@@ -1,14 +1,14 @@
 import { SeelenCommand } from "@seelen-ui/lib";
 import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
-import { FileIcon } from "@shared/components/Icon";
-import { OverflowTooltip } from "@shared/components/OverflowTooltip";
+import { FileIcon } from "libs/ui/react/components/Icon/index.tsx";
+import { OverflowTooltip } from "libs/ui/react/components/OverflowTooltip/index.tsx";
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Menu } from "antd";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import type { StartMenuApp } from "../../shared/store/domain.ts";
 

@@ -1,5 +1,5 @@
 import { type AppConfig, AppExtraFlag } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Input, Modal, Switch, Table, Tooltip } from "antd";
 import type { ColumnsType, ColumnType } from "antd/es/table";
 import type { TFunction } from "i18next";

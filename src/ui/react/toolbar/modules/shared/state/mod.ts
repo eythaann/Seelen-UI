@@ -1,7 +1,7 @@
 import { computed, signal } from "@preact/signals";
 import { Settings } from "@seelen-ui/lib";
 import { type FancyToolbarSettings, FancyToolbarSide } from "@seelen-ui/lib/types";
-import { toPhysicalPixels } from "@shared";
+import { toPhysicalPixels } from "libs/ui/react/utils";
 import { $current_monitor } from "./system";
 
 const initialSettings = await Settings.getAsync();

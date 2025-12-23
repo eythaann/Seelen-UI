@@ -1,7 +1,7 @@
-import type { IconName } from "@shared/components/Icon/icons";
+import type { IconName } from "libs/ui/react/components/Icon/icons.ts";
 import type { HTMLAttributes } from "preact/compat";
 
-import { cx } from "../../styles.ts";
+import { cx } from "../../utils/styling.ts";
 import InlineSVG from "../InlineSvg/index.tsx";
 import cs from "./index.module.css";
 

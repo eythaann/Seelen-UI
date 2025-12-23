@@ -125,7 +125,7 @@ pub fn check_for_webview_optimal_state(app: &tauri::AppHandle) -> Result<()> {
     let window = tauri::WebviewWindowBuilder::new(
         app,
         &label,
-        tauri::WebviewUrl::App("vanilla/integrity/index.html".into()),
+        tauri::WebviewUrl::App("vanilla/integrity".into()),
     )
     .visible(false)
     .data_directory(args.data_directory())

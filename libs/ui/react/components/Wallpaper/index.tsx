@@ -1,12 +1,12 @@
 import { useSignal } from "@preact/signals";
 import { WallpaperConfiguration } from "@seelen-ui/lib";
 import { type Wallpaper, type WallpaperInstanceSettings, WallpaperKind } from "@seelen-ui/lib/types";
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import type { ComponentChildren } from "preact";
 import { useEffect, useMemo, useRef } from "preact/hooks";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { getPlaybackRate, getWallpaperStyles } from "./utils.ts";
 import cs from "./index.module.css";

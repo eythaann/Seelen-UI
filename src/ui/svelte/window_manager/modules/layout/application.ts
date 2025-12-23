@@ -1,6 +1,6 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Rect } from "@seelen-ui/lib/types";
-import { toPhysicalPixels } from "@shared";
+import { toPhysicalPixels } from "libs/ui/react/utils";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import type { State } from "../shared/state.svelte";
 

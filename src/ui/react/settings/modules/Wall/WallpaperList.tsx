@@ -1,9 +1,9 @@
 import { useSignal } from "@preact/signals";
 import { ResourceKind, type WallpaperId } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import { ResourceText } from "@shared/components/ResourceText";
-import { VerticalSortableSelect } from "@shared/components/SortableSelector";
-import { Wallpaper } from "@shared/components/Wallpaper";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { VerticalSortableSelect } from "src/ui/react/settings/components/SortableSelector/index.tsx";
+import { Wallpaper } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { Button, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 

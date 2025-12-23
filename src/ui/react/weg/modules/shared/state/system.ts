@@ -1,7 +1,7 @@
 import { computed, signal } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { SeelenWegSide } from "@seelen-ui/lib/types";
-import { lazySignal } from "@shared/LazySignal";
+import { lazySignal } from "libs/ui/react/utils/LazySignal";
 
 const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
 

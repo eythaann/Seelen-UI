@@ -1,4 +1,4 @@
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling.ts";
 
 import type { SeparatorWegItem } from "../../shared/types.ts";
 

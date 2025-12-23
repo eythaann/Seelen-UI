@@ -16,8 +16,8 @@ import { useSignal } from "@preact/signals";
 import { throttle } from "lodash";
 import type { ComponentChildren } from "preact";
 import { useMemo } from "preact/hooks";
+import { genericHandleDragOver } from "../../../../../../libs/ui/react/utils/DndKit/utils.ts";
 
-import { genericHandleDragOver } from "../DndKit/utils.ts";
 import cs from "./index.module.css";
 
 interface Props<T> {
@@ -63,14 +63,10 @@ export function VerticalSortableSelect<T extends string>({
     $dragging_id.value = e.active.id as string;
   }
 
-  const _handleDragOver = useMemo(
-    () => throttle(genericHandleDragOver<T>, 100),
-    [],
-  );
+  const _handleDragOver = useMemo(() => throttle(genericHandleDragOver<T>, 100), []);
   function handleDragOver(e: DragOverEvent) {
     _handleDragOver(e, containers, (newContainers) => {
-      const enabledIds = newContainers.find((c) => c.id === "enabled")?.items ??
-        [];
+      const enabledIds = newContainers.find((c) => c.id === "enabled")?.items ?? [];
       onChange(enabledIds);
     });
   }
@@ -101,20 +97,11 @@ export function VerticalSortableSelect<T extends string>({
       <div className={cs.container}>
         {containers.map(({ id, items }) => (
           <div className={cs.box}>
-            <div className={cs.header}>
-              {id === "enabled" ? "Enabled" : "Disabled"}
-            </div>
-            <DndDropableAndSortableContainer
-              key={id}
-              id={id}
-              items={items}
-              className={cs.list}
-            >
+            <div className={cs.header}>{id === "enabled" ? "Enabled" : "Disabled"}</div>
+            <DndDropableAndSortableContainer key={id} id={id} items={items} className={cs.list}>
               {items.map((id) => (
                 <Entry key={id} value={id} disabled={disabled}>
-                  <div className={cs.item}>
-                    {options.find(({ value }) => value === id)?.label}
-                  </div>
+                  <div className={cs.item}>{options.find(({ value }) => value === id)?.label}</div>
                 </Entry>
               ))}
             </DndDropableAndSortableContainer>
@@ -159,14 +146,7 @@ function Entry({
   children: ComponentChildren;
   disabled: boolean;
 }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: value,
     disabled,
     animateLayoutChanges: () => false,

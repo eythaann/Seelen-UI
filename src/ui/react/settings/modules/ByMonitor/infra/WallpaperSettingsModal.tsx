@@ -1,5 +1,5 @@
 import { useComputed } from "@preact/signals";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Modal, Select } from "antd";
 import { type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";

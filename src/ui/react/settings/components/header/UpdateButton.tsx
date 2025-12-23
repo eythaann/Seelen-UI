@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon";
 import { Badge, Button, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

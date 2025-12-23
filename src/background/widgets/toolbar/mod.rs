@@ -68,7 +68,7 @@ impl FancyToolbar {
         let window = tauri::WebviewWindowBuilder::new(
             manager,
             Self::label(monitor_id),
-            tauri::WebviewUrl::App("react/toolbar/index.html".into()),
+            tauri::WebviewUrl::App("react/toolbar".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)

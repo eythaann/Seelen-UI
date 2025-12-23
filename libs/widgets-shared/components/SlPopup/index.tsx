@@ -1,14 +1,14 @@
 import { useSignal, useSignalEffect } from "@preact/signals";
-import { useDebounce } from "@shared/hooks";
-import { $is_this_webview_focused } from "@shared/signals";
-import { cx } from "@shared/styles";
+import { useDebounce } from "libs/ui/react/utils/hooks.ts";
+import { $is_this_webview_focused } from "libs/ui/react/utils/signals.ts";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { cloneElement, type ComponentChild, type VNode } from "preact";
 import { type ForwardedRef, forwardRef, type JSX } from "preact/compat";
 import { createPortal, type CSSProperties, type HTMLAttributes, useCallback, useEffect, useRef } from "preact/compat";
 
 import type { LegacyCustomAnimationProps } from "../AnimatedWrappers/domain.ts";
 
-import { mergeRefs } from "../mergeRefs.ts";
+import { mergeRefs } from "./mergeRefs.ts";
 import { calculateElementPosition } from "./positioning.ts";
 
 import "./base.css";

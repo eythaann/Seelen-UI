@@ -1,6 +1,6 @@
 import { computed, effect, signal } from "@preact/signals";
 import { HideMode } from "@seelen-ui/lib/types";
-import { $is_this_webview_focused } from "@shared/signals";
+import { $is_this_webview_focused } from "libs/ui/react/utils/signals.ts";
 import { debounce } from "lodash";
 
 import { $mouse_at_edge } from "./system.ts";

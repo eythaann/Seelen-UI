@@ -1,6 +1,6 @@
 import Sandbox from "@nyariv/sandboxjs";
-import { FileIcon, Icon } from "@shared/components/Icon";
-import type { IconName } from "@shared/components/Icon/icons";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
+import type { IconName } from "libs/ui/react/components/Icon/icons.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { memo, useEffect, useState } from "react";
 import { z } from "zod";

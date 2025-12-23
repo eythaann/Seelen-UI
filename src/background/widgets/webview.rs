@@ -20,11 +20,9 @@ impl WidgetWebview {
             }
             WidgetLoader::Internal => {
                 let resource_name = widget.id.resource_name();
-                tauri::WebviewUrl::App(format!("svelte/{resource_name}/index.html").into())
+                tauri::WebviewUrl::App(format!("svelte/{resource_name}").into())
             }
-            WidgetLoader::ThirdParty => {
-                tauri::WebviewUrl::App("vanilla/third_party/index.html".into())
-            }
+            WidgetLoader::ThirdParty => tauri::WebviewUrl::App("vanilla/third_party".into()),
         };
 
         let window: tauri::WebviewWindow =

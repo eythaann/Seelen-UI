@@ -1,7 +1,7 @@
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { Icon } from "@shared/components/Icon";
-import { useWindowFocusChange } from "@shared/hooks";
-import { cx } from "@shared/styles";
+import { Icon } from "libs/ui/react/components/Icon";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks";
+import { cx } from "libs/ui/react/utils/styling";
 import { Calendar, Row } from "antd";
 import type { CalendarMode, HeaderRender } from "antd/es/calendar/generateCalendar";
 import moment from "moment";
@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import "./infra.css";
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra";
 
 const short_week_days = {
   inner: ["Su", "Mn", "Tu", "We", "Th", "Fr", "Sa"],

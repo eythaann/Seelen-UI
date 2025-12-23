@@ -13,7 +13,7 @@ import {
   UserDetails,
   VideosFolder,
 } from "@seelen-ui/lib";
-import { StateBuilder } from "@shared/StateBuilder";
+import { StateBuilder } from "libs/ui/react/utils/StateBuilder.ts";
 
 import type { RootState } from "./domain.ts";
 import { PowerMode } from "node_modules/@seelen-ui/lib/esm/gen/types/PowerMode";

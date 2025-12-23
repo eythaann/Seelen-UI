@@ -1,7 +1,7 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { FolderType } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import { cx } from "@shared/styles";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { path } from "@tauri-apps/api";
 import { t } from "i18next";
 import { useState } from "react";

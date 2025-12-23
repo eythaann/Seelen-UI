@@ -1,14 +1,14 @@
 import { SeelenCommand } from "@seelen-ui/lib";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { FileIcon } from "@shared/components/Icon";
-import { useWindowFocusChange } from "@shared/hooks";
-import { cx } from "@shared/styles";
+import { FileIcon } from "libs/ui/react/components/Icon/index.tsx";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { invoke } from "@tauri-apps/api/core";
 import moment from "moment";
 import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import type { PinnedWegItem, TemporalWegItem } from "../../shared/types.ts";
 

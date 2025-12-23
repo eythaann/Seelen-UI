@@ -1,4 +1,4 @@
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling";
 import type { HTMLAttributes } from "react";
 
 import cs from "./infra.module.css";

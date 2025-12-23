@@ -1,4 +1,4 @@
-import { useDarkMode } from "@shared/styles";
+import { useDarkMode } from "libs/ui/react/utils/styling.ts";
 import { ConfigProvider, theme } from "antd";
 import { useSelector } from "react-redux";
 

@@ -1,5 +1,5 @@
 import { process } from "@seelen-ui/lib/tauri";
-import { ResourceText } from "@shared/components/ResourceText";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { Button } from "antd";
 import React from "react";

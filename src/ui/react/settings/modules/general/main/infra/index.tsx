@@ -1,5 +1,5 @@
 import { SupportedLanguages } from "@seelen-ui/lib";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Input, Select, Switch, Tooltip } from "antd";
 import { type ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";

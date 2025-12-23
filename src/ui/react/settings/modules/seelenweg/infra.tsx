@@ -1,5 +1,5 @@
 import { HideMode, SeelenWegMode, SeelenWegSide } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 

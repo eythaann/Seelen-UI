@@ -1,7 +1,7 @@
 import { useComputed } from "@preact/signals";
 import { SeelenWegSide } from "@seelen-ui/lib/types";
-import { FileIcon, Icon } from "@shared/components/Icon";
-import { cx } from "@shared/styles";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import { resolve, resourceDir } from "@tauri-apps/api/path";
 import { Button } from "antd";

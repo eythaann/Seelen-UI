@@ -1,9 +1,9 @@
-import { lazySignal } from "@shared/LazySignal";
+import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { Settings } from "@seelen-ui/lib";
 import { computed, effect } from "@preact/signals";
 import i18n from "../../../i18n";
 import { $current_monitor } from "./system";
-import { toPhysicalPixels } from "@shared";
+import { toPhysicalPixels } from "libs/ui/react/utils";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
 
 export const $settings = lazySignal(async () => {

@@ -1,5 +1,5 @@
 import type { WidgetId } from "@seelen-ui/lib/types";
-import { useDeepCompareEffect } from "@shared/hooks";
+import { useDeepCompareEffect } from "libs/ui/react/utils/hooks.ts";
 import { useEffect, useState } from "preact/compat";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";

@@ -1,6 +1,6 @@
 import { SeelenWindowManagerWidgetId } from "@seelen-ui/lib";
 import type { PluginId } from "@seelen-ui/lib/types";
-import { ResourceText } from "@shared/components/ResourceText";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { ConfigProvider, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";

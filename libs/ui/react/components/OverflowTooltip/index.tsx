@@ -1,7 +1,7 @@
 import { Tooltip, type TooltipProps } from "antd";
 import { memo, useEffect, useRef, useState } from "react";
 
-import { cx } from "../../styles.ts";
+import { cx } from "../../utils/styling.ts";
 import cs from "./index.module.css";
 
 interface Props {

@@ -1,5 +1,5 @@
-import { $system_colors } from "@shared/signals";
-import { useDarkMode } from "@shared/styles";
+import { $system_colors } from "libs/ui/react/utils/signals.ts";
+import { useDarkMode } from "libs/ui/react/utils/styling.ts";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { ConfigProvider, theme } from "antd";
 

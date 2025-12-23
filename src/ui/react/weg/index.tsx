@@ -1,7 +1,7 @@
 import { SeelenCommand, Widget } from "@seelen-ui/lib";
-import { getRootContainer } from "@shared";
-import { declareDocumentAsLayeredHitbox } from "@shared/layered";
-import { disableAnimationsOnPerformanceMode } from "@shared/performance";
+import { getRootContainer } from "libs/ui/react/utils/index.ts";
+import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
+import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance.ts";
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { createRoot } from "react-dom/client";

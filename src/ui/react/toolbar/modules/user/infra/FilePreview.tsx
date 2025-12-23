@@ -1,7 +1,7 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { File } from "@seelen-ui/lib/types";
-import { WindowsDateFileTimeToDate } from "@shared";
-import { FileIcon } from "@shared/components/Icon";
+import { WindowsDateFileTimeToDate } from "libs/ui/react/utils";
+import { FileIcon } from "libs/ui/react/components/Icon";
 import { Tooltip } from "antd";
 import moment from "moment";
 

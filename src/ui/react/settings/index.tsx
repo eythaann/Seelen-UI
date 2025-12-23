@@ -1,4 +1,4 @@
-import { getRootContainer } from "@shared";
+import { getRootContainer } from "libs/ui/react/utils/index.ts";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";

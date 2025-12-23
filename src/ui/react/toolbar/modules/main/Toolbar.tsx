@@ -13,11 +13,11 @@ import { arrayMove } from "@dnd-kit/sortable";
 import { useComputed, useSignal } from "@preact/signals";
 import type { ToolbarItem2 } from "@seelen-ui/lib/types";
 import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
-import { useWindowFocusChange } from "@shared/hooks";
-import { cx } from "@shared/styles";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { useState } from "react";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { $toolbar_state } from "../shared/state/items.ts";
 import { $settings } from "../shared/state/mod.ts";

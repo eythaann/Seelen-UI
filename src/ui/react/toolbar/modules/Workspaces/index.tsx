@@ -4,14 +4,14 @@ import { useComputed } from "@preact/signals";
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import { type WorkspaceToolbarItem, WorkspaceToolbarItemMode } from "@seelen-ui/lib/types";
 import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
-import { useThrottle, useWindowFocusChange } from "@shared/hooks";
-import { cx } from "@shared/styles";
+import { useThrottle, useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { Menu, Tooltip } from "antd";
 import { type HTMLAttributes, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { CommonItemContextMenu } from "../item/infra/ContextMenu.tsx";
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { $toolbar_state } from "../shared/state/items.ts";
 import { $virtual_desktop } from "../shared/state/system.ts";

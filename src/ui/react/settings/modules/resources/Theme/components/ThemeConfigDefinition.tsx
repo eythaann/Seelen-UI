@@ -1,5 +1,5 @@
 import type { ThemeConfigDefinition as ThemeConfigDef, ThemeId } from "@seelen-ui/lib/types";
-import { ResourceText } from "@shared/components/ResourceText";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import type { ReactNode } from "react";
 
 import { SettingsGroup, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";

@@ -1,5 +1,5 @@
-import { declareDocumentAsLayeredHitbox } from "@shared/layered";
-import { disableAnimationsOnPerformanceMode } from "@shared/performance";
+import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered";
+import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance";
 import { mount } from "svelte";
 import App from "./App.svelte";
 import { Widget } from "@seelen-ui/lib";

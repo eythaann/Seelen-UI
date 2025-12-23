@@ -1,23 +1,21 @@
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import React, { type ImgHTMLAttributes } from "react";
 
 import { iconPackManager } from "./common.ts";
 import cs from "./index.module.css";
 
-interface SpecificIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {
-  name: string;
-}
+interface MissingIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {}
 
-interface SpecificIconState {
+interface MissingIconState {
   src: string | null;
   mask: string | null;
   isAproximatelySquare: boolean;
 }
 
 const darkModeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
-function getSpecificIcon(name: string): SpecificIconState {
-  const icon = iconPackManager.getCustomIcon(name);
+function getMissingIcon(): MissingIconState {
+  const icon = iconPackManager.getMissingIcon();
   if (icon) {
     return {
       src: (darkModeQuery.matches ? icon.dark : icon.light) || icon.base,
@@ -28,27 +26,19 @@ function getSpecificIcon(name: string): SpecificIconState {
   return { src: null, mask: null, isAproximatelySquare: false };
 }
 
-export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIconState> {
+export class MissingIcon extends React.Component<MissingIconProps, MissingIconState> {
   unlistener: UnlistenFn | null = null;
 
-  constructor(props: SpecificIconProps) {
+  constructor(props: MissingIconProps) {
     super(props);
     this.updateSrc = this.updateSrc.bind(this);
 
-    this.state = {
-      ...getSpecificIcon(this.props.name),
-    };
+    this.state = getMissingIcon();
 
     darkModeQuery.addEventListener("change", this.updateSrc);
     iconPackManager.onChange(this.updateSrc).then((unlistener) => {
       this.unlistener = unlistener;
     });
-  }
-
-  componentDidUpdate(prevProps: Readonly<SpecificIconProps>): void {
-    if (this.props.name !== prevProps.name) {
-      this.updateSrc();
-    }
   }
 
   componentWillUnmount(): void {
@@ -58,20 +48,20 @@ export class SpecificIcon extends React.Component<SpecificIconProps, SpecificIco
   }
 
   updateSrc(): void {
-    this.setState(getSpecificIcon(this.props.name));
+    this.setState(getMissingIcon());
   }
 
   render(): React.ReactNode {
-    const { name: _name, ...imgProps } = this.props;
-    if (!this.state.src) {
-      return null;
-    }
+    const dataProps = Object.entries(this.props)
+      .filter(([k]) => k.startsWith("data-"))
+      .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
 
     return (
-      <figure {...imgProps} className={cx(cs.outer, imgProps.className)}>
-        <img src={this.state.src} />
+      <figure {...this.props} className={cx(cs.outer, this.props.className)}>
+        <img {...dataProps} src={this.state.src || ""} />
         {this.state.mask && (
           <div
+            {...dataProps}
             className={cs.mask}
             style={{ maskImage: `url('${this.state.mask}')` }}
           />

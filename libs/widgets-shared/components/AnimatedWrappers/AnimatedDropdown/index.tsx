@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 import type { LegacyCustomAnimationProps } from "../domain.ts";
 
-import { useDebounce } from "../../../hooks.ts";
-import { cx } from "../../../styles.ts";
+import { useDebounce } from "../../../../ui/react/utils/hooks.ts";
+import { cx } from "../../../../ui/react/utils/styling.ts";
 
 export interface AnimatedDropwonProps extends DropdownProps {
   animationDescription: LegacyCustomAnimationProps;

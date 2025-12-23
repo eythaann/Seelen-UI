@@ -1,9 +1,9 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Resource, ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import type { IconName } from "@shared/components/Icon/icons";
-import { ResourceText } from "@shared/components/ResourceText";
-import { cx } from "@shared/styles";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import type { IconName } from "libs/ui/react/components/Icon/icons.ts";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Button, Popconfirm, Tooltip } from "antd";
 import type { ComponentChildren } from "preact";

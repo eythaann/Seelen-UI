@@ -1,6 +1,6 @@
 import { computed, signal } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, UIColors } from "@seelen-ui/lib";
-import { lazySignal } from "@shared/LazySignal";
+import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { debounce } from "lodash";
 
 const initial = await Settings.getAsync();

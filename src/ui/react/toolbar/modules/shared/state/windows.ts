@@ -4,9 +4,9 @@ import { type FocusedApp, HideMode } from "@seelen-ui/lib/types";
 import { debounce } from "lodash";
 import { $settings, $widget_rect } from "./mod";
 import { $mouse_at_edge } from "./system";
-import { $is_this_webview_focused } from "@shared/signals";
+import { $is_this_webview_focused } from "libs/ui/react/utils/signals";
 import { $there_are_open_popups } from "@shared/components/AnimatedWrappers/PopupsState";
-import { lazySignal } from "@shared/LazySignal";
+import { lazySignal } from "libs/ui/react/utils/LazySignal";
 
 const widget = Widget.getCurrent();
 

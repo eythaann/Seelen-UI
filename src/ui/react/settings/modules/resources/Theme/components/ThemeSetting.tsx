@@ -1,6 +1,6 @@
 import type { ThemeId, ThemeVariableDefinition } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import { ResourceText } from "@shared/components/ResourceText";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { Button, ColorPicker, Input, InputNumber, Select, Slider, Space, Tooltip } from "antd";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";

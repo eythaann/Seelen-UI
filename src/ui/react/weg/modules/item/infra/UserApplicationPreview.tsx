@@ -1,5 +1,5 @@
 import { SeelenCommand } from "@seelen-ui/lib";
-import { Icon, MissingIcon } from "@shared/components/Icon";
+import { Icon, MissingIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import type { MouseEvent } from "react";
 

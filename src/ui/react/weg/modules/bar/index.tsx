@@ -1,8 +1,8 @@
 import { SeelenWegMode, SeelenWegSide } from "@seelen-ui/lib/types";
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { WithContextMenu } from "../../components/WithContextMenu.tsx";
 import { $dock_should_be_hidden, $settings } from "../shared/state/mod.ts";

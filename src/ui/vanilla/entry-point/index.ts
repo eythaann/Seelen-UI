@@ -5,9 +5,9 @@
 import "./ConsoleWrapper.ts";
 
 import type { FocusedApp, Widget } from "@seelen-ui/lib/types";
-import { _invoke, WebviewInformation } from "libs/widgets-integrity/_tauri";
+import { _invoke, WebviewInformation } from "src/ui/vanilla/entry-point/_tauri.ts";
 
-import { removeDefaultWebviewActions } from "libs/widgets-integrity/setup.ts";
+import { removeDefaultWebviewActions } from "src/ui/vanilla/entry-point/setup.ts";
 
 const indexJsCode = fetch("./index.js").then((res) => res.text());
 

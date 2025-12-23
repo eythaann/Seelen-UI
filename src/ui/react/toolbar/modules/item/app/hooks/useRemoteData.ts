@@ -1,5 +1,5 @@
 import type { RemoteDataDeclaration } from "@seelen-ui/lib/types";
-import { useDeepCompareEffect } from "@shared/hooks";
+import { useDeepCompareEffect } from "libs/ui/react/utils/hooks";
 import { useRef, useState } from "preact/compat";
 
 /**

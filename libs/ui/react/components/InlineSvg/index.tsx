@@ -1,4 +1,4 @@
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling";
 import { type HTMLAttributes, useEffect, useState } from "react";
 
 import cs from "./index.module.css";

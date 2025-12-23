@@ -1,6 +1,6 @@
 import { IconPackManager } from "@seelen-ui/lib";
 import type { SeelenCommandGetIconArgs } from "@seelen-ui/lib/types";
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import React, { type ImgHTMLAttributes } from "react";
 

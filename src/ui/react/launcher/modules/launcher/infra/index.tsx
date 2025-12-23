@@ -1,5 +1,5 @@
 import { IconPackManager, SeelenCommand } from "@seelen-ui/lib";
-import { useWindowFocusChange } from "@shared/hooks";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Checkbox, Spin, Tooltip } from "antd";

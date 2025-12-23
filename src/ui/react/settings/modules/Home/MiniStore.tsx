@@ -1,5 +1,5 @@
 import type { Resource } from "@seelen-ui/lib/types";
-import { ResourceText } from "@shared/components/ResourceText";
+import { ResourceText } from "libs/ui/react/components/ResourceText";
 import { Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

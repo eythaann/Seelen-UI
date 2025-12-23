@@ -1,6 +1,6 @@
 import { batch, useComputed, useSignal, useSignalEffect } from "@preact/signals";
 import type { PhysicalMonitor, WallpaperId } from "@seelen-ui/lib/types";
-import { Wallpaper as WallpaperComponent } from "@shared/components/Wallpaper";
+import { Wallpaper as WallpaperComponent } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { useTranslation } from "react-i18next";
 
 import { $muted, $paused, $performance_mode, $settings, $virtualDesktops, $wallpapers } from "../shared/state.ts";

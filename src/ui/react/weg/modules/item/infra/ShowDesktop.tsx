@@ -1,10 +1,10 @@
 import { SeelenCommand } from "@seelen-ui/lib";
-import { SpecificIcon } from "@shared/components/Icon";
+import { SpecificIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { invoke } from "@tauri-apps/api/core";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import type { ShowDesktopWegItem } from "../../shared/types.ts";
 

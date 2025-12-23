@@ -1,16 +1,16 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { type File, FolderType } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { Icon } from "@shared/components/Icon";
-import type { IconName } from "@shared/components/Icon/icons";
-import { useWindowFocusChange } from "@shared/hooks";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import type { IconName } from "libs/ui/react/components/Icon/icons.ts";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { path } from "@tauri-apps/api";
 import { t } from "i18next";
 import type { VNode } from "preact";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { Selectors } from "../../shared/store/app.ts";
 

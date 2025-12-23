@@ -1,11 +1,11 @@
 import type { GenericToolbarItem, TextToolbarItem } from "@seelen-ui/lib/types";
 import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
-import { useWindowFocusChange } from "@shared/hooks";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { Menu } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { CommonItemContextMenu } from "./ContextMenu.tsx";
 import { InnerItem, type InnerItemProps } from "./Inner.tsx";

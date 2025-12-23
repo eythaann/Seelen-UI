@@ -1,4 +1,4 @@
-import { lazySignal } from "@shared/LazySignal";
+import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import type { FocusedApp } from "@seelen-ui/lib/types";
 import { $widget_rect } from "./settings";

@@ -1,6 +1,6 @@
 import { SeelenCommand } from "@seelen-ui/lib";
 import type { MediaPlayer } from "@seelen-ui/lib/types";
-import { FileIcon, Icon } from "@shared/components/Icon";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { path } from "@tauri-apps/api";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import { Button, Tooltip } from "antd";

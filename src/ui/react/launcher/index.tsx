@@ -1,6 +1,6 @@
-import { getRootContainer } from "@shared/index";
-import { declareDocumentAsLayeredHitbox } from "@shared/layered";
-import { disableAnimationsOnPerformanceMode } from "@shared/performance";
+import { getRootContainer } from "libs/ui/react/utils/index";
+import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
+import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance.ts";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";

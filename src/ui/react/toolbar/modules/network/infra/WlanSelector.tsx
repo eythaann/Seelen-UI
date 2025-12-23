@@ -1,8 +1,8 @@
 import { SeelenCommand } from "@seelen-ui/lib";
 import type { WlanBssEntry } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { Icon } from "@shared/components/Icon";
-import { useWindowFocusChange } from "@shared/hooks";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { invoke } from "@tauri-apps/api/core";
 import { Tooltip } from "antd";
 import type { VNode } from "preact";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { Selectors } from "../../shared/store/app.ts";
 

@@ -1,7 +1,7 @@
 // This file is for testing, not final implementation yet.
 
 import type { WidgetId } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Modal } from "antd";
 import { type ReactNode, useState } from "react";
 

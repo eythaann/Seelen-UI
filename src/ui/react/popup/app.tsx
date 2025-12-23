@@ -1,8 +1,8 @@
 import { signal } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import type { SluPopupConfig, SluPopupContent as ISluPopupContent } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import type { IconName } from "@shared/components/Icon/icons";
+import { Icon } from "libs/ui/react/components/Icon";
+import type { IconName } from "libs/ui/react/components/Icon/icons";
 
 const currentWidget = Widget.getCurrent();
 const state = signal<SluPopupConfig>({

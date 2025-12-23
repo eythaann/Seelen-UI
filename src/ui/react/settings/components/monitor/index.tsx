@@ -1,4 +1,4 @@
-import { Wallpaper } from "@shared/components/Wallpaper";
+import { Wallpaper } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { useSelector } from "react-redux";
 
 import { newSelectors } from "../../modules/shared/store/app/reducer.ts";

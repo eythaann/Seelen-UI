@@ -7,9 +7,9 @@ import type {
   ToastBindingChild,
   ToastImage,
 } from "@seelen-ui/lib/types";
-import { WindowsDateFileTimeToDate } from "@shared";
-import { FileIcon, Icon } from "@shared/components/Icon";
-import { cx } from "@shared/styles";
+import { WindowsDateFileTimeToDate } from "libs/ui/react/utils";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon";
+import { cx } from "libs/ui/react/utils/styling";
 import { Select, Tooltip } from "antd";
 import { motion } from "framer-motion";
 import moment from "moment";

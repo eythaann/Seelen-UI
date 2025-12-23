@@ -10,7 +10,7 @@ import {
   type WallpaperInstanceSettings,
   type WidgetId,
 } from "@seelen-ui/lib/types";
-import { StateBuilder } from "@shared/StateBuilder";
+import { StateBuilder } from "libs/ui/react/utils/StateBuilder.ts";
 import { cloneDeep, pick } from "lodash";
 
 import { AppsConfigSlice } from "../../../appsConfigurations/app/reducer.ts";
