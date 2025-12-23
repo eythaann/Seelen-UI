@@ -3,7 +3,7 @@
   import { state } from "../state.svelte";
   import { convertFileSrc } from "@tauri-apps/api/core";
   import { Icon, MissingIcon, FileIcon } from "libs/ui/svelte/components/Icon";
-  import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 
   interface Props {
     hwnd: number;
@@ -23,6 +23,7 @@
   onclick={(e) => {
     e.stopPropagation();
     invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: false });
+    Widget.getCurrent().webview.hide();
   }}
   onkeydown={(e) => {
     if (e.key === "Enter" || e.key === " ") {

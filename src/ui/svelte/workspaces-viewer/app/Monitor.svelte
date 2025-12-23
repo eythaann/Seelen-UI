@@ -3,7 +3,9 @@
   import Workspace from "./Workspace.svelte";
   import { state } from "../state.svelte";
   import type { PhysicalMonitor } from "@seelen-ui/lib/types";
+  import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon } from "libs/ui/svelte/components/Icon";
+  import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
 
   const props: { monitor: PhysicalMonitor } = $props();
   const { monitor } = props;
@@ -15,6 +17,17 @@
   const activeWorkspace = $derived(
     vdMonitor?.workspaces.find((w) => w.id === vdMonitor?.active_workspace)
   );
+
+  const activeWallpaper = $derived(state.findWallpaper(activeWorkspace?.wallpaper));
+
+  async function createWorkspace(e: MouseEvent) {
+    e.stopPropagation();
+    try {
+      await invoke(SeelenCommand.CreateWorkspace, { monitorId: monitor.id });
+    } catch (error) {
+      console.error("Failed to create workspace:", error);
+    }
+  }
 </script>
 
 <div
@@ -27,6 +40,10 @@
   style:transform={`scale(${monitor.scaleFactor})`}
   style:transform-origin="left top"
 >
+  <div class="active-wallpaper">
+    <Wallpaper definition={activeWallpaper} static muted />
+  </div>
+
   <div class="workspaces">
     {#if vdMonitor}
       {#each vdMonitor.workspaces as workspace, index}
@@ -34,7 +51,7 @@
       {/each}
     {/if}
 
-    <button class="add-workspace">
+    <button class="add-workspace" onclick={createWorkspace}>
       <Icon iconName="IoAdd" />
     </button>
   </div>

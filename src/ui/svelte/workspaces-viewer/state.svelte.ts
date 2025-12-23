@@ -1,10 +1,15 @@
 import { invoke, type Rect, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
+import type { Wallpaper } from "@seelen-ui/lib/types";
 import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { lazyRune } from "libs/ui/svelte/utils";
 
 let monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
 await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 await monitors.init();
+
+let wallpapers = lazyRune(() => invoke(SeelenCommand.StateGetWallpapers));
+await subscribe(SeelenEvent.StateWallpapersChanged, wallpapers.setByPayload);
+await wallpapers.init();
 
 let desktopRect = $derived.by(() => {
   let rect: Rect = { top: 0, left: 0, right: 0, bottom: 0 };
@@ -74,6 +79,14 @@ class State {
   }
   get previews() {
     return previews.value;
+  }
+  get wallpapers() {
+    return wallpapers.value;
+  }
+
+  findWallpaper(wallpaperId: string | undefined | null): Wallpaper | undefined {
+    if (!wallpaperId) return undefined;
+    return this.wallpapers.find((w) => w.id === wallpaperId);
   }
 }
 

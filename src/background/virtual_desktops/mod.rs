@@ -19,6 +19,7 @@ use crate::modules::monitors::{MonitorManager, MonitorManagerEvent};
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::lock_free::{SyncHashMap, SyncVec};
 use crate::utils::Debouncer;
+use crate::virtual_desktops::wallpapers::WorkspaceWallpapersManager;
 use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
 use crate::{event_manager, log_error};
@@ -393,10 +394,12 @@ impl SluWorkspacesManager2 {
             .monitors
             .get(monitor_id, |monitor| monitor.add_workspace())
             .ok_or("Monitor not found")?;
-
-        // Update workspace index
         self.workspace_index
             .upsert(workspace_id.clone(), monitor_id.clone());
+
+        // Set wallpaper to the new workspace
+        WorkspaceWallpapersManager::update_workspace_wallpapers_internal(self);
+
         Self::send(VirtualDesktopEvent::DesktopCreated(workspace_id.clone()));
         self.request_save();
         Ok(workspace_id)
@@ -424,6 +427,22 @@ impl SluWorkspacesManager2 {
         // Remove from workspace index
         self.workspace_index.remove(workspace_id);
         Self::send(VirtualDesktopEvent::DesktopDestroyed(workspace_id.clone()));
+        self.request_save();
+        Ok(())
+    }
+
+    /// Rename a workspace on a specific monitor
+    pub fn rename_desktop(
+        &self,
+        monitor_id: &MonitorId,
+        workspace_id: &WorkspaceId,
+        name: Option<String>,
+    ) -> Result<()> {
+        self.monitors
+            .get(monitor_id, |monitor| {
+                monitor.rename_workspace(workspace_id, name)
+            })
+            .ok_or("Monitor not found")??;
         self.request_save();
         Ok(())
     }

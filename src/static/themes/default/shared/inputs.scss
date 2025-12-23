@@ -41,6 +41,7 @@ input[type="text"][data-skin="default"] {
 
   &:focus {
     border-color: rgba(var(--system-accent-color-rgb), 0.8);
+    outline: none;
   }
 
   &[data-error="true"] {
@@ -55,6 +56,40 @@ input[type="text"][data-skin="default"] {
   &:disabled {
     background-color: var(--color-gray-100);
     color: var(--color-gray-600);
+    cursor: default;
+  }
+}
+
+input[type="text"][data-skin="transparent"] {
+  width: 100%;
+  padding: 4px 8px;
+
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  font-size: 0.9rem;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &:focus {
+    background-color: var(--color-gray-50);
+    border-color: rgba(var(--system-accent-color-rgb), 0.8);
+    outline: none;
+  }
+
+  &[data-error="true"] {
+    border-color: var(--color-red-600);
+  }
+
+  &:read-only {
+    background-color: transparent;
+    cursor: default;
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    background-color: transparent;
     cursor: default;
   }
 }

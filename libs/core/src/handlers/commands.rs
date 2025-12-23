@@ -95,7 +95,10 @@ macro_rules! slu_commands_declaration {
 slu_commands_declaration! {
     // virtual desktops
     StateGetVirtualDesktops = get_virtual_desktops() -> VirtualDesktops,
-    SwitchWorkspace = switch_workspace(monitor_id: MonitorId, idx: usize),
+    SwitchWorkspace = switch_workspace(workspace_id: WorkspaceId),
+    CreateWorkspace = create_workspace(monitor_id: MonitorId) -> WorkspaceId,
+    DestroyWorkspace = destroy_workspace(workspace_id: WorkspaceId),
+    RenameWorkspace = rename_workspace(workspace_id: WorkspaceId, name: Option<String>),
 
     // wallpaper
     WallpaperNext = wallpaper_next(),

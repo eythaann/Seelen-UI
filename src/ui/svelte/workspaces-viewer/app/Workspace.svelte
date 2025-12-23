@@ -1,6 +1,9 @@
 <script lang="ts">
   import type { DesktopWorkspace } from "@seelen-ui/lib/types";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { Icon } from "libs/ui/svelte/components/Icon";
+  import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
+  import { state as store } from "../state.svelte";
 
   interface Props {
     index: number;
@@ -9,6 +12,53 @@
   }
 
   let { workspace, index, active }: Props = $props();
+
+  const wallpaper = $derived(store.findWallpaper(workspace.wallpaper));
+
+  let workspaceName = $state(workspace.name || "");
+
+  $effect(() => {
+    workspaceName = workspace.name || "";
+  });
+
+  async function switchWorkspace() {
+    if (active) return;
+    // hide first to allow show the change animation to the user
+    await Widget.getCurrent().webview.hide();
+    await invoke(SeelenCommand.SwitchWorkspace, {
+      workspaceId: workspace.id,
+    });
+  }
+
+  async function destroyWorkspace(e: MouseEvent) {
+    e.stopPropagation();
+    await invoke(SeelenCommand.DestroyWorkspace, {
+      workspaceId: workspace.id,
+    });
+  }
+
+  async function handleNameChange() {
+    const newName = workspaceName.trim();
+    if (newName === (workspace.name || "")) return;
+
+    try {
+      await invoke(SeelenCommand.RenameWorkspace, {
+        workspaceId: workspace.id,
+        name: newName || null,
+      });
+    } catch (error) {
+      console.error("Failed to rename workspace:", error);
+      workspaceName = workspace.name || "";
+    }
+  }
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === "Enter") {
+      handleNameChange();
+    } else if (e.key === "Escape") {
+      workspaceName = workspace.name || "";
+    }
+  }
 </script>
 
 <div
@@ -18,68 +68,31 @@
   tabindex="0"
   onclick={(e) => {
     e.stopPropagation();
+    switchWorkspace();
   }}
   onkeydown={(e) => {
     if (e.key === "Enter" || e.key === " ") {
-      e.currentTarget?.click();
+      switchWorkspace();
     }
   }}
 >
   <div class="workspace-header">
-    <span class="workspace-name">{workspace.name || `Workspace ${index + 1}`}</span>
-    <button data-skin="transparent">
+    <input
+      type="text"
+      bind:value={workspaceName}
+      data-skin="transparent"
+      class="workspace-name-input"
+      placeholder={`Workspace ${index + 1}`}
+      onblur={handleNameChange}
+      onkeydown={handleKeyDown}
+      onclick={(e) => e.stopPropagation()}
+    />
+    <button data-skin="transparent" onclick={destroyWorkspace}>
       <Icon iconName="TbX" />
     </button>
   </div>
 
   <div class="workspace-preview">
-    <div class="default-wallpaper">
-      <div class="bg-layers">
-        <div class="bg-layer-1"></div>
-        <div class="bg-layer-2"></div>
-      </div>
-    </div>
+    <Wallpaper definition={wallpaper} static muted />
   </div>
 </div>
-
-<style>
-  .default-wallpaper {
-    width: 100%;
-    height: 100%;
-
-    > .bg-layers {
-      position: relative;
-      width: 100%;
-      height: 100%;
-
-      > .bg-layer-1 {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-
-        background: linear-gradient(
-          to bottom,
-          var(--system-accent-darkest-color),
-          var(--system-accent-color),
-          var(--system-accent-darkest-color)
-        );
-      }
-
-      > .bg-layer-2 {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-
-        background: linear-gradient(
-          to bottom,
-          var(--system-accent-dark-color),
-          var(--system-accent-lightest-color)
-        );
-        mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' id='svg' viewBox='0 0 1440 790' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0,800 C 0,800 0,160 0,160 C 104.43062200956939,139.54066985645932 208.86124401913878,119.08133971291866 297,128 C 385.1387559808612,136.91866028708134 456.9856459330142,175.2153110047847 540,178 C 623.0143540669858,180.7846889952153 717.1961722488038,148.05741626794256 816,150 C 914.8038277511962,151.94258373205744 1018.2296650717703,188.555023923445 1123,196 C 1227.7703349282297,203.444976076555 1333.8851674641148,181.7224880382775 1440,160 C 1440,160 1440,800 1440,800 Z' stroke='none' stroke-width='0' fill='%23FFFFFF' fill-opacity='0.265' class='path-0' style='transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 300ms; transition-delay: 150ms;'%3E%3C/path%3E%3Cpath d='M 0,800 C 0,800 0,320 0,320 C 120.88995215311004,343.9138755980861 241.7799043062201,367.82775119617224 335,373 C 428.2200956937799,378.17224880382776 493.77033492822966,364.60287081339715 576,343 C 658.2296650717703,321.39712918660285 757.1387559808612,291.76076555023917 869,287 C 980.8612440191388,282.23923444976083 1105.6746411483252,302.354066985646 1203,312 C 1300.3253588516748,321.645933014354 1370.1626794258373,320.822966507177 1440,320 C 1440,320 1440,800 1440,800 Z' stroke='none' stroke-width='0' fill='%23FFFFFF' fill-opacity='0.4' class='path-1' style='transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 300ms; transition-delay: 150ms;'%3E%3C/path%3E%3Cpath d='M 0,800 C 0,800 0,480 0,480 C 116.71770334928229,477.07177033492826 233.43540669856458,474.14354066985646 330,462 C 426.5645933014354,449.85645933014354 502.97607655502395,428.49760765550246 593,421 C 683.023923444976,413.50239234449754 786.6602870813399,419.8660287081339 891,432 C 995.3397129186601,444.1339712918661 1100.382775119617,462.0382775119617 1192,471 C 1283.617224880383,479.9617224880383 1361.8086124401916,479.98086124401914 1440,480 C 1440,480 1440,800 1440,800 Z' stroke='none' stroke-width='0' fill='%23FFFFFF' fill-opacity='0.53' class='path-2' style='transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 300ms; transition-delay: 150ms;'%3E%3C/path%3E%3Cpath d='M 0,800 C 0,800 0,640 0,640 C 117.33014354066987,611.6746411483253 234.66028708133973,583.3492822966507 339,587 C 443.33971291866027,590.6507177033493 534.688995215311,626.2775119617224 621,629 C 707.311004784689,631.7224880382776 788.5837320574162,601.5406698564593 883,614 C 977.4162679425838,626.4593301435407 1084.9760765550238,681.5598086124402 1180,693 C 1275.0239234449762,704.4401913875598 1357.5119617224882,672.22009569378 1440,640 C 1440,640 1440,800 1440,800 Z' stroke='none' stroke-width='0' fill='%23FFFFFF' fill-opacity='1' class='path-3' style='transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 300ms; transition-delay: 150ms;'%3E%3C/path%3E%3C/svg%3E");
-        mask-repeat: no-repeat;
-        mask-position: bottom;
-        mask-size: cover;
-      }
-    }
-  }
-</style>

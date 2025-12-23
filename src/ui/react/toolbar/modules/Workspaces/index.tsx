@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useComputed } from "@preact/signals";
-import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { type WorkspaceToolbarItem, WorkspaceToolbarItemMode } from "@seelen-ui/lib/types";
 import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
 import { useThrottle, useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
@@ -21,18 +21,9 @@ interface Props {
   onContextMenu?: (e: MouseEvent) => void;
 }
 
-let monitorId = Widget.getCurrent().decoded.monitorId!;
-
 function InnerWorkspacesModule({ module, ...rest }: Props) {
   const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: module.id,
     disabled: isReorderDisabled.value,
     animateLayoutChanges: () => false,
@@ -65,7 +56,8 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
       const index = workspaces.findIndex((w) => w.id === activeWorkspace);
       const newIndex = isUp ? index - 1 : index + 1;
       if (newIndex >= 0 && newIndex < workspaces.length) {
-        invoke(SeelenCommand.SwitchWorkspace, { monitorId, idx: newIndex });
+        let workspace = workspaces[newIndex]!;
+        invoke(SeelenCommand.SwitchWorkspace, { workspaceId: workspace.id });
       }
     },
     500,
@@ -84,10 +76,10 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
         }}
       >
         <ul className="ft-bar-item-content workspaces">
-          {workspaces.map((w, idx) => (
+          {workspaces.map((w) => (
             <li
               key={w.id}
-              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { monitorId, idx })}
+              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { workspaceId: w.id })}
               className={cx("workspace-dot", {
                 "workspace-dot-active": w.id === activeWorkspace,
               })}
@@ -123,7 +115,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
                 "ft-bar-item-clickable": true,
                 "ft-bar-item-active": w.id === activeWorkspace,
               })}
-              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { monitorId, idx })}
+              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { workspaceId: w.id })}
             >
               <div className="ft-bar-item-content">
                 <span>
@@ -164,10 +156,7 @@ export function WorkspacesModule({ module }: Props) {
       trigger={["contextMenu"]}
       dropdownRender={() => (
         <BackgroundByLayersV2 className="ft-bar-item-context-menu-container">
-          <Menu
-            className="ft-bar-item-context-menu"
-            items={CommonItemContextMenu(t, module)}
-          />
+          <Menu className="ft-bar-item-context-menu" items={CommonItemContextMenu(t, module)} />
         </BackgroundByLayersV2>
       )}
     >

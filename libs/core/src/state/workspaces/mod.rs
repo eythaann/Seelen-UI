@@ -132,6 +132,21 @@ impl VirtualDesktopMonitor {
         self.workspaces.remove(idx_to_delete);
         Ok(())
     }
+
+    /// Rename a workspace by id
+    pub fn rename_workspace(
+        &mut self,
+        workspace_id: &WorkspaceId,
+        name: Option<String>,
+    ) -> Result<()> {
+        let workspace = self
+            .workspaces
+            .iter_mut()
+            .find(|w| &w.id == workspace_id)
+            .ok_or("Workspace not found")?;
+        workspace.name = name;
+        Ok(())
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]

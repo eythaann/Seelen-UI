@@ -36,8 +36,35 @@ pub fn get_virtual_desktops() -> VirtualDesktops {
 }
 
 #[tauri::command(async)]
-pub fn switch_workspace(monitor_id: MonitorId, idx: usize) -> Result<()> {
-    get_vd_manager().switch_to(&monitor_id, idx)
+pub fn switch_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
+    let manager = get_vd_manager();
+    let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+    manager.switch_to_id(&monitor_id, &workspace_id)
+}
+
+#[tauri::command(async)]
+pub fn create_workspace(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
+    let vd = get_vd_manager();
+    let workspace_id = vd.create_desktop(&monitor_id)?;
+    vd.switch_to_id(&monitor_id, &workspace_id)?;
+    Ok(workspace_id)
+}
+
+#[tauri::command(async)]
+pub fn destroy_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
+    let manager = get_vd_manager();
+    let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+    manager.destroy_desktop(&monitor_id, &workspace_id)
+}
+
+#[tauri::command(async)]
+pub fn rename_workspace(
+    workspace_id: seelen_core::state::WorkspaceId,
+    name: Option<String>,
+) -> Result<()> {
+    let manager = get_vd_manager();
+    let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+    manager.rename_desktop(&monitor_id, &workspace_id, name)
 }
 
 #[tauri::command(async)]
