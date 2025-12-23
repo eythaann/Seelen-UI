@@ -6,8 +6,8 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT, WPARAM},
     Graphics::Gdi::{InvalidateRect, UpdateWindow},
     UI::WindowsAndMessaging::{
-        FindWindowA, FindWindowExA, PostMessageW, SetParent, SetWindowLongPtrW, SetWindowPos,
-        GWL_EXSTYLE, GWL_STYLE, HWND_BOTTOM, SWP_ASYNCWINDOWPOS, SWP_FRAMECHANGED, SWP_NOACTIVATE,
+        FindWindowA, FindWindowExA, GetParent, PostMessageW, SetParent, SetWindowLongPtrW,
+        SetWindowPos, GWL_EXSTYLE, GWL_STYLE, HWND_BOTTOM, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
         SWP_NOMOVE, SWP_NOOWNERZORDER, SWP_NOSIZE, WS_CHILDWINDOW, WS_EX_ACCEPTFILES,
         WS_EX_APPWINDOW, WS_EX_NOREDIRECTIONBITMAP, WS_EX_WINDOWEDGE,
     },
@@ -110,12 +110,7 @@ impl SeelenWall {
                 };
 
                 WindowsApi::move_window(main_hwnd, &relative_rect)?;
-                WindowsApi::set_position(
-                    main_hwnd,
-                    None,
-                    &relative_rect,
-                    SWP_ASYNCWINDOWPOS | SWP_FRAMECHANGED,
-                )?;
+                WindowsApi::set_position(main_hwnd, None, &relative_rect, SWP_ASYNCWINDOWPOS)?;
             }
             Err(e) => {
                 log::warn!(
@@ -124,12 +119,7 @@ impl SeelenWall {
                 );
                 // Fallback to absolute positioning without parent
                 WindowsApi::move_window(main_hwnd, &rect)?;
-                WindowsApi::set_position(
-                    main_hwnd,
-                    None,
-                    &rect,
-                    SWP_ASYNCWINDOWPOS | SWP_FRAMECHANGED,
-                )?;
+                WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
                 self.window.set_always_on_bottom(true)?;
             }
         }
@@ -229,7 +219,11 @@ impl SeelenWall {
             .ok_or("WorkerW not found for standard desktop")?;
 
         unsafe {
-            SetParent(hwnd, Some(worker_w))?;
+            // Check if already parented to WorkerW to avoid flicker
+            let current_parent = GetParent(hwnd).ok();
+            if current_parent != Some(worker_w) {
+                SetParent(hwnd, Some(worker_w))?;
+            }
 
             // Position at bottom of z-order
             SetWindowPos(
@@ -253,18 +247,24 @@ impl SeelenWall {
             .ok_or("DefView not found for raised desktop")?;
 
         unsafe {
-            let mut style = WindowsApi::get_styles(hwnd);
-            style |= WS_CHILDWINDOW;
-            SetWindowLongPtrW(hwnd, GWL_STYLE, style.0 as isize);
+            // Check if already parented to Progman to avoid flicker
+            let current_parent = GetParent(hwnd).ok();
+            let needs_reparent = current_parent != Some(desktop_info.progman);
 
-            let mut ex_style = WindowsApi::get_ex_styles(hwnd);
-            ex_style &= !WS_EX_ACCEPTFILES;
-            ex_style &= !WS_EX_APPWINDOW;
-            ex_style &= !WS_EX_WINDOWEDGE; // this can be removed wait for https://github.com/tauri-apps/tao/issues/1153
-            SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex_style.0 as isize);
+            if needs_reparent {
+                let mut style = WindowsApi::get_styles(hwnd);
+                style |= WS_CHILDWINDOW;
+                SetWindowLongPtrW(hwnd, GWL_STYLE, style.0 as isize);
 
-            // Set parent to Progman
-            SetParent(hwnd, Some(desktop_info.progman))?;
+                let mut ex_style = WindowsApi::get_ex_styles(hwnd);
+                ex_style &= !WS_EX_ACCEPTFILES;
+                ex_style &= !WS_EX_APPWINDOW;
+                ex_style &= !WS_EX_WINDOWEDGE; // this can be removed wait for https://github.com/tauri-apps/tao/issues/1153
+                SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex_style.0 as isize);
+
+                // Set parent to Progman
+                SetParent(hwnd, Some(desktop_info.progman))?;
+            }
 
             // Position wallpaper below DefView in z-order
             WindowsApi::set_position(

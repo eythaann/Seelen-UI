@@ -9,6 +9,8 @@ pub enum VirtualDesktopEvent {
         monitor: MonitorId,
         workspace: WorkspaceId,
     },
+    /// Emitted when the virtual desktops state changes (e.g., wallpapers updated)
+    StateChanged,
     // DesktopNameChanged(WorkspaceId, String),
     /* DesktopMoved {
         desktop: WorkspaceId,

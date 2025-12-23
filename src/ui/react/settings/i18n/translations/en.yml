@@ -245,6 +245,10 @@ wall:
   blur: Blur
   contrast: Contrast
   enable: Enable Wallpaper Manager
+  monitor_collection: Monitor Collection
+  wallpaper_collection: Wallpaper Collection
+  wallpaper_settings: Wallpaper Settings
+  workspace_collections: Workspace Collections
   fit:
     contain: Contain
     cover: Cover
@@ -271,6 +275,17 @@ wall:
   saturation: Saturation
   seconds: seconds
   withOverlay: With Overlay
+  collections: Collections
+  create_collection: Create Collection
+  edit_collection: Edit Collection
+  delete_collection: Delete Collection
+  collection_name: Collection Name
+  default_collection: Default Collection
+  select_collection: Select Collection
+  no_collections: No collections created yet. Click the + button to create one.
+  create: Create
+  cancel: Cancel
+  close: Close
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide

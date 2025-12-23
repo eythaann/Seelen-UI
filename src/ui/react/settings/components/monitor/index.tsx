@@ -1,11 +1,10 @@
-import { SeelenWallWidgetId } from "@seelen-ui/lib";
-import type { WallpaperId } from "@seelen-ui/lib/types";
 import { Wallpaper } from "@shared/components/Wallpaper";
 import { useSelector } from "react-redux";
 
 import { newSelectors } from "../../modules/shared/store/app/reducer.ts";
 
 import cs from "./index.module.css";
+import { $virtual_desktops } from "../../modules/shared/signals.ts";
 
 interface Props {
   monitorId: string;
@@ -17,15 +16,10 @@ export function Monitor({ monitorId, width = 1920, height = 1080 }: Props) {
   const wallpapers = useSelector(newSelectors.wallpapers);
   const wallpaperSettings = useSelector(newSelectors.byWallpaper);
 
-  const baseEnabled = useSelector(newSelectors.wall.backgroundsV2);
+  const monitor = $virtual_desktops.value.monitors[monitorId];
+  const workspace = monitor?.workspaces.find((w) => w.id === monitor.active_workspace);
 
-  const configByMonitor = useSelector(newSelectors.monitorsV3);
-  const monitorPatch = monitorId ? configByMonitor[monitorId] : null;
-
-  const enabledOnMonitor = monitorPatch?.byWidget[SeelenWallWidgetId]
-    ?.backgroundsV2 as WallpaperId[];
-  const wallpaperId = enabledOnMonitor ? enabledOnMonitor[0] : baseEnabled[0];
-
+  const wallpaperId = workspace?.wallpaper;
   const wallpaper = wallpapers.find((w) => w.id === wallpaperId);
 
   const style: React.CSSProperties = {
@@ -39,10 +33,7 @@ export function Monitor({ monitorId, width = 1920, height = 1080 }: Props) {
 
   return (
     <div className={cs.monitorContainer}>
-      <div
-        className={cs.monitor}
-        style={style}
-      >
+      <div className={cs.monitor} style={style}>
         <div className={cs.screen}>
           <Wallpaper
             definition={wallpaper}

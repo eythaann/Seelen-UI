@@ -220,6 +220,10 @@ impl FullState {
             log::info!("Wallpapers changed");
             RESOURCES.load_all_of_type(ResourceKind::Wallpaper)?;
             RESOURCES.emit_wallpapers()?;
+
+            if self.sanitize_wallpaper_collections() {
+                self.emit_settings()?;
+            }
         }
 
         // important: settings changed should be the last one to avoid use unexisting state

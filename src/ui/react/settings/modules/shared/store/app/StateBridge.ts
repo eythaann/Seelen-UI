@@ -26,6 +26,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     "byTheme",
     "byWallpaper",
     "performanceMode",
+    "wallpaperCollections",
   ]);
 
   // migration since v2.1.0

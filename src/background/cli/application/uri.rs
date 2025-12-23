@@ -188,12 +188,7 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
                             .set_widget_enabled(&friendly_id.clone().into(), true);
                     }
                     ResourceKind::Wallpaper => {
-                        state
-                            .settings
-                            .by_widget
-                            .wall
-                            .backgrounds_v2
-                            .push(friendly_id.clone().into());
+                        // TODO: HANDLE BY NEW COLLECTION
                     }
                     _ => {}
                 }

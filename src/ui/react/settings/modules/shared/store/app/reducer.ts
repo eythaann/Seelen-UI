@@ -5,6 +5,7 @@ import {
   type SeelenWallSettings,
   type ThemeId,
   UpdateChannel,
+  type WallpaperCollection,
   type WallpaperId,
   type WallpaperInstanceSettings,
   type WidgetId,
@@ -57,6 +58,7 @@ const initialState: RootState = {
   byWidget: defaultSettings.inner.byWidget,
   byTheme: {},
   byWallpaper: {},
+  wallpaperCollections: [],
   performanceMode: defaultSettings.performanceMode,
 };
 
@@ -266,6 +268,80 @@ export const RootSlice = createSlice({
       const { themeId } = action.payload;
       state.byTheme[themeId] = {};
       state.toBeSaved = true;
+    },
+    addWallpaperCollection: (
+      state,
+      action: PayloadAction<WallpaperCollection>,
+    ) => {
+      state.toBeSaved = true;
+      state.wallpaperCollections.push(action.payload);
+    },
+    updateWallpaperCollection: (
+      state,
+      action: PayloadAction<WallpaperCollection>,
+    ) => {
+      state.toBeSaved = true;
+      const index = state.wallpaperCollections.findIndex(
+        (c) => c.id === action.payload.id,
+      );
+      if (index !== -1) {
+        state.wallpaperCollections[index] = action.payload;
+      }
+    },
+    deleteWallpaperCollection: (state, action: PayloadAction<string>) => {
+      state.toBeSaved = true;
+      state.wallpaperCollections = state.wallpaperCollections.filter(
+        (c) => c.id !== action.payload,
+      );
+      // Reset default collection if it was deleted
+      if (state.wall.defaultCollection === action.payload) {
+        state.wall.defaultCollection = null;
+      }
+      // Reset monitor collections if they were using this collection
+      Object.values(state.monitorsV3).forEach((monitor) => {
+        if (monitor!.wallpaperCollection === action.payload) {
+          monitor!.wallpaperCollection = null;
+        }
+      });
+    },
+    setDefaultWallpaperCollection: (
+      state,
+      action: PayloadAction<string | null>,
+    ) => {
+      state.toBeSaved = true;
+      state.wall.defaultCollection = action.payload;
+    },
+    setMonitorWallpaperCollection: (
+      state,
+      action: PayloadAction<{ monitorId: string; collectionId: string | null }>,
+    ) => {
+      const { monitorId, collectionId } = action.payload;
+      const monitor = state.monitorsV3[monitorId];
+      if (!monitor) {
+        return;
+      }
+      state.toBeSaved = true;
+      monitor.wallpaperCollection = collectionId;
+    },
+    setWorkspaceWallpaperCollection: (
+      state,
+      action: PayloadAction<{
+        monitorId: string;
+        workspaceId: string;
+        collectionId: string | null;
+      }>,
+    ) => {
+      const { monitorId, workspaceId, collectionId } = action.payload;
+      const monitor = state.monitorsV3[monitorId];
+      if (!monitor) {
+        return;
+      }
+      state.toBeSaved = true;
+      monitor.byWorkspace ??= {};
+      monitor.byWorkspace[workspaceId] ??= {
+        wallpaperCollection: null,
+      };
+      monitor.byWorkspace[workspaceId]!.wallpaperCollection = collectionId;
     },
   },
   selectors: selectorsFor(initialState),

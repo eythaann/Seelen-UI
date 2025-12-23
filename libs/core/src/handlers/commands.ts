@@ -2,6 +2,8 @@
 export enum SeelenCommand {
   StateGetVirtualDesktops = "get_virtual_desktops",
   SwitchWorkspace = "switch_workspace",
+  WallpaperNext = "wallpaper_next",
+  WallpaperPrev = "wallpaper_prev",
   Run = "run",
   RunAsAdmin = "run_as_admin",
   GetFocusedApp = "get_focused_app",

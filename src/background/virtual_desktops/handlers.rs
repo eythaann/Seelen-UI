@@ -32,3 +32,13 @@ pub fn get_virtual_desktops() -> VirtualDesktops {
 pub fn switch_workspace(monitor_id: MonitorId, idx: usize) -> Result<()> {
     get_vd_manager().switch_to(&monitor_id, idx)
 }
+
+#[tauri::command(async)]
+pub fn wallpaper_next() {
+    super::wallpapers::WorkspaceWallpapersManager::next();
+}
+
+#[tauri::command(async)]
+pub fn wallpaper_prev() {
+    super::wallpapers::WorkspaceWallpapersManager::previous();
+}

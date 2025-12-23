@@ -1,6 +1,7 @@
 pub mod cli;
 pub mod events;
 pub mod handlers;
+pub mod wallpapers;
 
 use std::collections::HashMap;
 use std::fs::File;
@@ -75,6 +76,9 @@ impl SluWorkspacesManager2 {
             Err(_) => Default::default(),
         });
         manager.initialize().log_error();
+
+        // Initialize wallpaper manager and set initial wallpapers
+        wallpapers::WorkspaceWallpapersManager::init(&manager);
         manager
     }
 

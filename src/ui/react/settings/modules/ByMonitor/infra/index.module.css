@@ -1,7 +1,6 @@
 .itemContainer {
-  height: 35vh;
   display: grid;
-  grid-template-columns: minmax(35vh, 1fr) 2fr;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
   grid-template-rows: 100%;
   gap: 10px;
 
@@ -17,17 +16,10 @@
       font-size: 1.2rem;
       line-height: 1.2em;
       text-align: center;
-    }
-
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       width: 100%;
-
-      > button {
-        flex: 1;
-      }
     }
   }
 

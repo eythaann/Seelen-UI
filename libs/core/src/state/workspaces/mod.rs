@@ -2,7 +2,7 @@ use std::collections::{HashMap, HashSet};
 
 use uuid::Uuid;
 
-use crate::{error::Result, identifier_impl, system_state::MonitorId};
+use crate::{error::Result, identifier_impl, resource::WallpaperId, system_state::MonitorId};
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -140,6 +140,7 @@ pub struct DesktopWorkspace {
     pub name: Option<String>,
     /// react-icon icon name
     pub icon: Option<String>,
+    pub wallpaper: Option<WallpaperId>,
     #[serde(default)]
     pub windows: Vec<isize>,
 }
@@ -150,12 +151,13 @@ impl DesktopWorkspace {
             id: WorkspaceId(Uuid::new_v4().to_string()),
             name: None,
             icon: None,
+            wallpaper: None,
             windows: Vec::new(),
         }
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
 pub struct WorkspaceId(pub String);
 
 identifier_impl!(WorkspaceId, String);

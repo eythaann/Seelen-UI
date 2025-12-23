@@ -97,6 +97,10 @@ slu_commands_declaration! {
     StateGetVirtualDesktops = get_virtual_desktops() -> VirtualDesktops,
     SwitchWorkspace = switch_workspace(monitor_id: MonitorId, idx: usize),
 
+    // wallpaper
+    WallpaperNext = wallpaper_next(),
+    WallpaperPrev = wallpaper_prev(),
+
     // General
     Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>),
     RunAsAdmin = run_as_admin(program: PathBuf, args: Option<RelaunchArguments>),

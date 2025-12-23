@@ -312,14 +312,6 @@
   .weg-item-display-name {
     white-space: nowrap;
   }
-
-  .weg-item-preview-scrollbar {
-    &:has(.weg-item-preview-thumbnail-disabled) {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-  }
 }
 
 .weg-item-preview {
@@ -329,10 +321,6 @@
 
 .weg-item-preview-topbar {
   margin: 0 0 8px 0;
-
-  .weg-item-preview-thumbnail-disabled & {
-    margin: 0;
-  }
 }
 
 .weg-item-preview-title {

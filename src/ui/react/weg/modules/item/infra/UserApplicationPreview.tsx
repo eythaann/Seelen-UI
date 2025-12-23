@@ -1,12 +1,11 @@
 import { SeelenCommand } from "@seelen-ui/lib";
 import { Icon, MissingIcon } from "@shared/components/Icon";
-import { cx } from "@shared/styles";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import type { MouseEvent } from "react";
 
 import type { HWND } from "../../shared/types.ts";
 
-import { $delayedFocused, $previews, $settings } from "../../shared/state/mod.ts";
+import { $delayedFocused, $previews } from "../../shared/state/mod.ts";
 interface PreviewProps {
   title: string;
   hwnd: HWND;
@@ -22,9 +21,7 @@ export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
 
   return (
     <div
-      className={cx("weg-item-preview", {
-        "weg-item-preview-thumbnail-disabled": !$settings.value.thumbnailGenerationEnabled,
-      })}
+      className="weg-item-preview"
       onClick={() => {
         invoke(SeelenCommand.WegToggleWindowState, {
           hwnd,
@@ -43,18 +40,16 @@ export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
           <Icon iconName="IoClose" />
         </div>
       </div>
-      {$settings.value.thumbnailGenerationEnabled && (
-        <div className="weg-item-preview-image-container">
-          {preview
-            ? (
-              <img
-                className="weg-item-preview-image"
-                src={convertFileSrc(preview.path) + "?v=" + preview.hash}
-              />
-            )
-            : <MissingIcon />}
-        </div>
-      )}
+      <div className="weg-item-preview-image-container">
+        {preview
+          ? (
+            <img
+              className="weg-item-preview-image"
+              src={convertFileSrc(preview.path) + "?v=" + preview.hash}
+            />
+          )
+          : <MissingIcon />}
+      </div>
     </div>
   );
 };

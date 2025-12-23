@@ -1,6 +1,7 @@
 @layer basic-widget-reset {
   :root {
     font-size: 100%; /* determines the size of the rem unit */
+    color-scheme: light dark;
     interpolate-size: allow-keywords;
   }
 

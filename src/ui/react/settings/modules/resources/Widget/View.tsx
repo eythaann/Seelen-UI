@@ -1,4 +1,3 @@
-import { SeelenWallWidgetId } from "@seelen-ui/lib";
 import type { WidgetId } from "@seelen-ui/lib/types";
 import { Switch } from "antd";
 import { useState } from "react";
@@ -12,7 +11,6 @@ import { RootSelectors } from "../../shared/store/app/selectors.ts";
 import type { RootState } from "../../shared/store/domain.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
-import { WallpaperList } from "../../Wall/WallpaperList.tsx";
 import { RenderBySettingsDeclaration } from "./ConfigRenderer.tsx";
 import { WidgetInstanceSelector } from "./InstanceSelector.tsx";
 
@@ -132,9 +130,6 @@ export function WidgetConfiguration({
         onConfigChange={onConfigChange}
         isByMonitor={!!monitorId}
       />
-
-      {/* special case */}
-      {widgetId === SeelenWallWidgetId && <WallpaperList monitorId={monitorId} />}
 
       {areDevToolsEnabled && (
         <SettingsGroup>

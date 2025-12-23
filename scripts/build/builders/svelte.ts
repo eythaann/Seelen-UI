@@ -24,6 +24,7 @@ export function createSvelteBuildConfig(
     sourcemap: !args.isProd,
     treeShaking: true,
     format: "esm",
+    target: "esnext",
     outdir: DIST_DIR,
     outbase: `./${UI_DIR}`,
     loader: {
@@ -32,7 +33,11 @@ export function createSvelteBuildConfig(
     plugins: [
       sveltePlugin({
         cache: false,
-        preprocess: sveltePreprocess(),
+        preprocess: sveltePreprocess({
+          postcss: {
+            plugins: [],
+          },
+        }),
       }),
       createCopyPublicPlugin(appFolders),
     ],

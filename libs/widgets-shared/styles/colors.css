@@ -24,6 +24,10 @@
  * - Use --color-fixed-* for brand colors, illustrations, or theme-independent visuals
  */
 
+:root {
+  color-scheme: light dark;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-white: #000000;

@@ -1,6 +1,7 @@
 use std::path::Path;
 
 use url::Url;
+use uuid::Uuid;
 
 use crate::{
     error::Result,
@@ -148,4 +149,12 @@ impl Wallpaper {
 
         Ok(wallpaper)
     }
+}
+
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct WallpaperCollection {
+    pub id: Uuid,
+    pub name: String,
+    pub wallpapers: Vec<WallpaperId>,
 }

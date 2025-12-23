@@ -19,6 +19,7 @@ export function createVanillaBuildConfig(
     sourcemap: !args.isProd,
     treeShaking: true,
     format: "esm",
+    target: "esnext",
     outdir: "./dist",
     loader: {
       ".yml": "text",

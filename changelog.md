@@ -8,12 +8,15 @@
 - add toggle desktop module on dock.
 - allow layout sorting by windows dragging on the tiling window manager.
 - workspaces viewer gui.
+- wallpapers per monitor and per workspace.
+- wallpaper collections.
 
 ### enhancements
 
 - improve display changes events.
 - tiling window manager now swap windows by center point on drag end.
 - improve windows preview system.
+- improvements on wallpaper manager syncronization and changes.
 
 ### fix
 

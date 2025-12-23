@@ -16,6 +16,7 @@ use serde_alias::serde_alias;
 use ts_rs::TS;
 
 use crate::resource::WidgetId;
+use crate::state::WallpaperCollection;
 use crate::system_state::MonitorId;
 use crate::{
     error::Result,
@@ -368,20 +369,23 @@ impl SeelenLauncherSettings {
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWallSettings {
     pub enabled: bool,
-    pub backgrounds_v2: Vec<WallpaperId>,
     /// update interval in seconds
     pub interval: u32,
     /// randomize order
     pub randomize: bool,
+    pub default_collection: Option<uuid::Uuid>,
+    /// deprecated, this field will be removed on v3
+    pub backgrounds_v2: Option<Vec<WallpaperId>>,
 }
 
 impl Default for SeelenWallSettings {
     fn default() -> Self {
         Self {
             enabled: true,
-            backgrounds_v2: vec![],
+            backgrounds_v2: None,
             interval: 60,
             randomize: false,
+            default_collection: None,
         }
     }
 }
@@ -472,6 +476,8 @@ pub struct Settings {
     pub by_theme: HashMap<ThemeId, ThemeSettings>,
     /// settings for each background
     pub by_wallpaper: HashMap<WallpaperId, WallpaperInstanceSettings>,
+    /// list of wallpaper collections
+    pub wallpaper_collections: Vec<WallpaperCollection>,
     /// Performance options
     pub performance_mode: PerformanceModeSettings,
 }
@@ -499,6 +505,7 @@ impl Default for Settings {
             by_widget: SettingsByWidget::default(),
             by_theme: HashMap::new(),
             by_wallpaper: HashMap::new(),
+            wallpaper_collections: Vec::new(),
         }
     }
 }
@@ -533,6 +540,25 @@ impl Settings {
         if let Some(launcher) = self.launcher.take() {
             dict.launcher = launcher;
         }
+
+        // Migrate backgrounds_v2 to wallpaper collection
+        if let Some(backgrounds) = self.by_widget.wall.backgrounds_v2.take() {
+            if !backgrounds.is_empty() {
+                let collection = WallpaperCollection {
+                    id: uuid::Uuid::new_v4(),
+                    name: "Migrated".to_string(),
+                    wallpapers: backgrounds,
+                };
+
+                // Set as default collection if no default is set
+                if self.by_widget.wall.default_collection.is_none() {
+                    self.by_widget.wall.default_collection = Some(collection.id);
+                }
+
+                self.wallpaper_collections.push(collection);
+            }
+        }
+
         Ok(())
     }
 
