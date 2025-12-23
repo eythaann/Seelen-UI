@@ -414,6 +414,18 @@ impl Default for UpdaterSettings {
     }
 }
 
+// ========================== Start of Week ==============================
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+#[derive(Default)]
+pub enum StartOfWeek {
+    #[default]
+    Monday,
+    Sunday,
+    Saturday,
+}
+
 // ======================== Final Settings Struct ===============================
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -459,6 +471,8 @@ pub struct Settings {
     pub language: Option<String>,
     /// MomentJS date format
     pub date_format: String,
+    /// Start of week for calendar
+    pub start_of_week: StartOfWeek,
     /// Updater Settings
     pub updater: UpdaterSettings,
     /// Custom settings for widgets
@@ -501,6 +515,7 @@ impl Default for Settings {
             dev_tools: false,
             language: Some(Self::get_system_language()),
             date_format: "ddd D MMM, hh:mm A".to_owned(),
+            start_of_week: StartOfWeek::default(),
             updater: UpdaterSettings::default(),
             by_widget: SettingsByWidget::default(),
             by_theme: HashMap::new(),

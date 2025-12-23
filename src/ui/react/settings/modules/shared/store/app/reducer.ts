@@ -3,6 +3,7 @@ import { UIColors } from "@seelen-ui/lib";
 import {
   type IconPackId,
   type SeelenWallSettings,
+  StartOfWeek,
   type ThemeId,
   UpdateChannel,
   type WallpaperCollection,
@@ -47,6 +48,7 @@ const initialState: RootState = {
   drpc: true,
   language: navigator.language.split("-")[0] || "en",
   dateFormat: "ddd D MMM, hh:mm A",
+  startOfWeek: StartOfWeek.Monday,
   colors: UIColors.default().inner,
   updater: {
     channel: UpdateChannel.Release,
@@ -89,6 +91,7 @@ export const RootSlice = createSlice({
     },
     setShortcuts: toBeSaved(reducers.setShortcuts),
     setDateFormat: toBeSaved(reducers.setDateFormat),
+    setStartOfWeek: toBeSaved(reducers.setStartOfWeek),
     setWall: toBeSaved(reducers.setWall),
     setLauncher: toBeSaved(reducers.setLauncher),
     setDevTools: toBeSaved(reducers.setDevTools),

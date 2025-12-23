@@ -1,18 +1,22 @@
 import { computed, signal } from "@preact/signals";
 import { Settings } from "@seelen-ui/lib";
-import { type FancyToolbarSettings, FancyToolbarSide } from "@seelen-ui/lib/types";
+import { FancyToolbarSide } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils";
 import { $current_monitor } from "./system";
 
 const initialSettings = await Settings.getAsync();
-export const $settings = signal<FancyToolbarSettings & Pick<Settings, "dateFormat">>({
+export const $settings = signal({
   ...initialSettings.fancyToolbar,
+  language: initialSettings.language || "en",
   dateFormat: initialSettings.dateFormat,
+  startOfWeek: initialSettings.startOfWeek,
 });
 Settings.onChange(
   (settings) => ($settings.value = {
     ...settings.fancyToolbar,
+    language: settings.language || "en",
     dateFormat: settings.dateFormat,
+    startOfWeek: settings.startOfWeek,
   }),
 );
 

@@ -101,6 +101,10 @@ general:
     available: Available Icon Packs
     selected: Active Icon Packs
   language: Language
+  monday: Monday
+  saturday: Saturday
+  start_of_week: Start of Week
+  sunday: Sunday
   performance_mode:
     on_battery: On Battery
     on_energy_saver: On Energy Saver

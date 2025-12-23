@@ -10,6 +10,7 @@
 - workspaces viewer gui.
 - wallpapers per monitor and per workspace.
 - wallpaper collections.
+- allow set start of week on calendars.
 
 ### enhancements
 
