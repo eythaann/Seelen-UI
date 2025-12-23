@@ -58,7 +58,7 @@ impl SeelenWall {
         let builder = tauri::WebviewWindowBuilder::new(
             handle,
             label,
-            tauri::WebviewUrl::App("react/wallpaper_manager".into()),
+            tauri::WebviewUrl::App("react/wallpaper_manager/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)

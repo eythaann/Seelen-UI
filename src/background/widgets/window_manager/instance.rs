@@ -49,7 +49,7 @@ impl WindowManagerV2 {
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             label,
-            tauri::WebviewUrl::App("svelte/window_manager".into()),
+            tauri::WebviewUrl::App("svelte/window_manager/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)
