@@ -4,13 +4,12 @@ use std::{
 };
 
 use slu_ipc::messages::SvcAction;
-use tauri::Emitter;
 use windows::Win32::UI::WindowsAndMessaging::SW_NORMAL;
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     cli::ServicePipe,
-    error::{Result, ResultLogExt},
+    error::Result,
     state::application::{performance::PERFORMANCE_MODE, FULL_STATE},
     widgets::window_manager::state::{WmState, WM_LAYOUT_RECTS, WM_STATE},
     windows_api::{window::Window, WindowsApi},
@@ -96,12 +95,10 @@ pub fn wm_get_render_tree() -> WmRenderTree {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
         WmState::subscribe(|_event| {
-            get_app_handle()
-                .emit(
-                    SeelenEvent::WMTreeChanged,
-                    &WM_STATE.lock().get_render_tree(),
-                )
-                .log_error();
+            emit_to_webviews(
+                SeelenEvent::WMTreeChanged,
+                &WM_STATE.lock().get_render_tree(),
+            );
         });
     });
 

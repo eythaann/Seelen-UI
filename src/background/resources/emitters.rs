@@ -1,7 +1,6 @@
 use seelen_core::{handlers::SeelenEvent, resource::ResourceKind};
-use tauri::Emitter;
 
-use crate::{app::get_app_handle, error::Result, widgets::manager::WIDGET_MANAGER};
+use crate::{app::emit_to_webviews, error::Result, widgets::manager::WIDGET_MANAGER};
 
 use super::ResourceManager;
 
@@ -11,7 +10,7 @@ impl ResourceManager {
         self.widgets.scan(|_, v| {
             widgets.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StateWidgetsChanged, widgets)?;
+        emit_to_webviews(SeelenEvent::StateWidgetsChanged, widgets);
         WIDGET_MANAGER.refresh()?;
         Ok(())
     }
@@ -21,7 +20,7 @@ impl ResourceManager {
         self.themes.scan(|_, v| {
             themes.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StateThemesChanged, themes)?;
+        emit_to_webviews(SeelenEvent::StateThemesChanged, themes);
         Ok(())
     }
 
@@ -30,7 +29,7 @@ impl ResourceManager {
         self.plugins.scan(|_, v| {
             plugins.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StatePluginsChanged, plugins)?;
+        emit_to_webviews(SeelenEvent::StatePluginsChanged, plugins);
         Ok(())
     }
 
@@ -47,7 +46,7 @@ impl ResourceManager {
             icon_packs.push(v.clone());
         });
 
-        get_app_handle().emit(SeelenEvent::StateIconPacksChanged, icon_packs)?;
+        emit_to_webviews(SeelenEvent::StateIconPacksChanged, icon_packs);
         Ok(())
     }
 
@@ -56,7 +55,7 @@ impl ResourceManager {
         self.wallpapers.scan(|_, v| {
             wallpaper.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StateWallpapersChanged, wallpaper)?;
+        emit_to_webviews(SeelenEvent::StateWallpapersChanged, wallpaper);
         Ok(())
     }
 

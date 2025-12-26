@@ -1,15 +1,18 @@
-use std::sync::{atomic::AtomicBool, Arc, LazyLock};
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    Arc, LazyLock,
+};
 
 use parking_lot::Mutex;
 use seelen_core::system_state::MonitorId;
 use slu_ipc::messages::SvcAction;
-use tauri::{AppHandle, Wry};
+use tauri::{AppHandle, Emitter, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
 use crate::{
     app_instance::LegacyWidgetMonitorContainer,
     cli::ServicePipe,
-    error::Result,
+    error::{Result, ResultLogExt},
     hook::register_win_hook,
     log_error,
     modules::{
@@ -26,7 +29,10 @@ use crate::{
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
     },
-    windows_api::{event_window::create_background_window, Com},
+    windows_api::{
+        event_window::{create_background_window, IS_INTERACTIVE_SESSION},
+        Com,
+    },
     APP_HANDLE,
 };
 
@@ -40,6 +46,18 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
     APP_HANDLE
         .get()
         .expect("get_app_handle called but app is still not initialized")
+}
+
+pub fn emit_to_webviews<S>(event: &str, payload: S)
+where
+    S: serde::Serialize + Clone,
+{
+    // log::trace!("Emitting {event} to webviews");
+    if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+        // log::debug!("Skipping event {event} because session is not active");
+        return;
+    }
+    get_app_handle().emit(event, payload).log_error();
 }
 
 /** Struct should be initialized first before calling any other methods */

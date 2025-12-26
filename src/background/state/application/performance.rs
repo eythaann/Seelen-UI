@@ -2,11 +2,10 @@ use std::sync::LazyLock;
 
 use arc_swap::ArcSwap;
 use seelen_core::{handlers::SeelenEvent, state::PerformanceMode, system_state::PowerMode};
-use tauri::{Emitter, Listener};
+use tauri::Listener;
 
 use crate::{
-    app::get_app_handle,
-    error::{ErrorMap, ResultLogExt},
+    app::{emit_to_webviews, get_app_handle},
     hook::HookManager,
     modules::power::infrastructure::{get_batteries, get_power_mode, get_power_status},
     state::application::FULL_STATE,
@@ -67,9 +66,6 @@ fn check_for_changes() {
     if current != *stored {
         log::trace!("Seelen UI performance mode changed to {current:?}");
         PERFORMANCE_MODE.store(std::sync::Arc::new(current));
-        get_app_handle()
-            .emit(SeelenEvent::StatePerformanceModeChanged, current)
-            .wrap_error()
-            .log_error();
+        emit_to_webviews(SeelenEvent::StatePerformanceModeChanged, current);
     }
 }

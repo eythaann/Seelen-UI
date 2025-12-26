@@ -21,13 +21,13 @@ use windows::{
         KnownNotificationBindings,
         Management::{UserNotificationListener, UserNotificationListenerAccessStatus},
         NotificationKinds, ToastNotificationManager, ToastNotificationManagerForUser,
-        UserNotification, UserNotificationChangedEventArgs,
+        UserNotification, UserNotificationChangedEventArgs, UserNotificationChangedKind,
     },
 };
 
 use crate::{
     app::get_app_handle,
-    error::Result,
+    error::{Result, ResultLogExt},
     event_manager, log_error,
     modules::{
         apps::application::msix::get_hightest_quality_posible_for_uwp_image,
@@ -35,7 +35,10 @@ use crate::{
     },
     trace_lock,
     utils::{convert_file_to_src, icon_extractor::extract_and_save_icon_umid, spawn_named_thread},
-    windows_api::{traits::EventRegistrationTokenExt, types::AppUserModelId, WindowsApi},
+    windows_api::{
+        event_window::IS_INTERACTIVE_SESSION, traits::EventRegistrationTokenExt,
+        types::AppUserModelId, WindowsApi,
+    },
 };
 
 lazy_static! {
@@ -59,7 +62,6 @@ pub struct NotificationManager {
     notifications: Vec<AppNotification>,
     manager: ToastNotificationManagerForUser,
     listener: UserNotificationListener,
-    event_handler: TypedEventHandler<UserNotificationListener, UserNotificationChangedEventArgs>,
     event_token: Option<EventRegistrationToken>,
 }
 
@@ -73,7 +75,6 @@ impl NotificationManager {
             notifications: Vec::new(),
             manager: ToastNotificationManager::GetDefault()?,
             listener: UserNotificationListener::Current()?,
-            event_handler: TypedEventHandler::new(Self::internal_notifications_change),
             event_token: None,
         })
     }
@@ -116,7 +117,10 @@ impl NotificationManager {
         }
 
         // TODO: this only works on MSIX/APPX/UWP builds so idk how to make it work on win32 apps
-        match self.listener.NotificationChanged(&self.event_handler) {
+        match self
+            .listener
+            .NotificationChanged(&TypedEventHandler::new(Self::on_notifications_change))
+        {
             Ok(token) => self.event_token = Some(token.as_event_token()),
             Err(error) => {
                 log::warn!("Failed to register winrt notification change handler: {error}");
@@ -124,8 +128,12 @@ impl NotificationManager {
                 spawn_named_thread("Notification Manager", || -> Result<()> {
                     RELEASED.store(false, Ordering::SeqCst);
                     while !RELEASED.load(Ordering::Acquire) {
-                        log_error!(Self::internal_notifications_change(&None, &None));
                         std::thread::sleep(std::time::Duration::from_secs(1));
+                        // Pause when session is not interactive to reduce CPU usage
+                        if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                            continue;
+                        }
+                        Self::manual_notifications_loop().log_error();
                     }
                     Ok(())
                 });
@@ -145,10 +153,30 @@ impl NotificationManager {
         Ok(())
     }
 
-    fn internal_notifications_change(
-        _listener: &Option<UserNotificationListener>,
-        _args: &Option<UserNotificationChangedEventArgs>,
+    fn on_notifications_change(
+        listener: &Option<UserNotificationListener>,
+        args: &Option<UserNotificationChangedEventArgs>,
     ) -> windows_core::Result<()> {
+        let (Some(_listener), Some(args)) = (listener, args) else {
+            return Ok(());
+        };
+
+        let change_kind = args.ChangeKind()?;
+        let changed_id = args.UserNotificationId()?;
+
+        match change_kind {
+            UserNotificationChangedKind::Added => {
+                Self::send(NotificationEvent::Added(changed_id));
+            }
+            UserNotificationChangedKind::Removed => {
+                Self::send(NotificationEvent::Removed(changed_id));
+            }
+            _ => {}
+        }
+        Ok(())
+    }
+
+    fn manual_notifications_loop() -> Result<()> {
         let listener = { UserNotificationListener::Current()? };
         let mut old_toasts = { trace_lock!(LOADED_NOTIFICATIONS).clone() };
 
@@ -158,13 +186,13 @@ impl NotificationManager {
         {
             let id: u32 = u_notification.Id()?;
             if !old_toasts.contains(&id) {
-                log_error!(Self::event_tx().send(NotificationEvent::Added(id)));
+                Self::send(NotificationEvent::Added(id))
             }
             old_toasts.remove(&id);
         }
 
         for id in old_toasts {
-            log_error!(Self::event_tx().send(NotificationEvent::Removed(id)));
+            Self::send(NotificationEvent::Removed(id))
         }
         Ok(())
     }

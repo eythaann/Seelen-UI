@@ -22,7 +22,7 @@ use crate::{
     error::Result,
     event_manager, log_error,
     utils::spawn_named_thread,
-    windows_api::{string_utils::WindowsString, WindowsApi},
+    windows_api::{event_window::IS_INTERACTIVE_SESSION, string_utils::WindowsString, WindowsApi},
 };
 
 lazy_static! {
@@ -52,6 +52,13 @@ impl LanguageManager {
             let hkl = unsafe { GetKeyboardLayout(0) };
             LAST_LOADED_HKL.store(hkl.0 as _, Ordering::Relaxed);
             loop {
+                std::thread::sleep(std::time::Duration::from_secs(1));
+
+                // Pause when session is not interactive to reduce CPU usage
+                if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                    continue;
+                }
+
                 let (_, focused_thread) =
                     WindowsApi::window_thread_process_id(WindowsApi::get_foreground_window());
                 let current = unsafe { GetKeyboardLayout(focused_thread) }.0 as usize;
@@ -60,7 +67,6 @@ impl LanguageManager {
                     log::info!("Keyboard layout changed to {current:08X?}");
                     log_error!(Self::event_tx().send(LanguageEvent::KeyboardLayoutChanged(current)));
                 }
-                std::thread::sleep(std::time::Duration::from_secs(1));
             }
         });
         Ok(())

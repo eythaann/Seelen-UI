@@ -9,12 +9,9 @@ use seelen_core::{
     system_state::{SysTrayIcon, SysTrayIconId},
 };
 use slu_ipc::messages::Win32TrayEvent;
-use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle,
-    error::{ErrorMap, ResultLogExt},
-    modules::system_tray::application::tray_hook_loader::TrayHookLoader,
+    app::emit_to_webviews, modules::system_tray::application::tray_hook_loader::TrayHookLoader,
     utils::lock_free::SyncHashMap,
 };
 
@@ -51,10 +48,7 @@ impl SystemTrayManager {
     /// This method should be called from the AppIpc handler
     pub fn handle_tray_event(event: Win32TrayEvent) {
         if let Some(_event) = Self::instance().process_event(event) {
-            get_app_handle()
-                .emit(SeelenEvent::SystemTrayChanged, Self::instance().icons())
-                .wrap_error()
-                .log_error();
+            emit_to_webviews(SeelenEvent::SystemTrayChanged, Self::instance().icons());
         }
     }
 }

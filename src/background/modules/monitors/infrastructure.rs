@@ -4,11 +4,10 @@ use seelen_core::{
     handlers::SeelenEvent,
     system_state::{Brightness, PhysicalMonitor},
 };
-use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle,
-    error::{Result, ResultLogExt},
+    app::emit_to_webviews,
+    error::Result,
     windows_api::{monitor::Monitor, MonitorEnumerator},
 };
 
@@ -19,9 +18,7 @@ fn get_monitor_manager() -> &'static MonitorManager {
     TAURI_EVENT_REGISTRATION.call_once(|| {
         MonitorManager::subscribe(|_event| {
             if let Ok(monitors) = get_connected_monitors() {
-                get_app_handle()
-                    .emit(SeelenEvent::SystemMonitorsChanged, monitors)
-                    .log_error();
+                emit_to_webviews(SeelenEvent::SystemMonitorsChanged, monitors);
             }
         });
     });

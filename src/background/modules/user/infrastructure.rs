@@ -1,10 +1,8 @@
 use seelen_core::handlers::SeelenEvent;
-use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     error::Result,
-    log_error,
     modules::user::{UserManagerEvent, USER_MANAGER},
     trace_lock,
 };
@@ -17,16 +15,16 @@ pub fn register_user_events() {
     UserManager::subscribe(|event| match event {
         UserManagerEvent::UserUpdated() => {
             let guard = trace_lock!(USER_MANAGER);
-            log_error!(get_app_handle().emit(SeelenEvent::UserChanged, &guard.user));
+            emit_to_webviews(SeelenEvent::UserChanged, &guard.user);
         }
         UserManagerEvent::FolderChanged(folder) => {
-            log_error!(get_app_handle().emit(
+            emit_to_webviews(
                 SeelenEvent::UserFolderChanged,
                 FolderChangedArgs {
                     of_folder: folder,
                     content: Some(get_user_folder_content(folder)),
-                }
-            ));
+                },
+            );
         }
     });
 }

@@ -4,9 +4,8 @@ use seelen_core::{
     handlers::SeelenEvent,
     state::{GenericToolbarItem, Placeholder, TextToolbarItem, ToolbarItem, ToolbarItem2},
 };
-use tauri::Emitter;
 
-use crate::{app::get_app_handle, error::Result, utils::constants::SEELEN_COMMON};
+use crate::{app::emit_to_webviews, error::Result, utils::constants::SEELEN_COMMON};
 
 use super::FullState;
 
@@ -42,7 +41,7 @@ impl FullState {
     }
 
     pub fn emit_toolbar_items(&self) -> Result<()> {
-        get_app_handle().emit(SeelenEvent::StateToolbarItemsChanged, &self.toolbar_items)?;
+        emit_to_webviews(SeelenEvent::StateToolbarItemsChanged, &self.toolbar_items);
         Ok(())
     }
 

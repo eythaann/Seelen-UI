@@ -1,3 +1,5 @@
+use std::sync::atomic::Ordering;
+
 use seelen_core::{state::AppExtraFlag, system_state::UserAppWindow};
 use windows::Win32::UI::WindowsAndMessaging::{
     WS_CHILD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW, WS_MINIMIZEBOX,
@@ -9,6 +11,7 @@ use crate::{
     state::application::FULL_STATE,
     utils::spawn_named_thread,
     windows_api::{
+        event_window::IS_INTERACTIVE_SESSION,
         window::{event::WinEvent, Window},
         WindowEnumerator, WindowsApi,
     },
@@ -27,6 +30,12 @@ impl UserAppsManager {
 
         spawn_named_thread("InteractableWindowsRevalidator", || loop {
             std::thread::sleep(std::time::Duration::from_millis(2000));
+
+            // Pause when session is not interactive to reduce CPU usage
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                continue;
+            }
+
             Self::instance().interactable_windows.retain(|w| {
                 let window = Window::from(w.hwnd);
                 if window.is_interactable_and_not_hidden() {

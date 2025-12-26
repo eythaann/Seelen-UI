@@ -52,6 +52,7 @@ pub fn launch_seelen_ui() -> Result<()> {
 }
 
 pub fn kill_all_seelen_ui_processes() -> Result<()> {
+    log::info!("Killing all Seelen UI processes");
     let mut sys = sysinfo::System::new();
     sys.refresh_processes();
     let instances: Vec<_> = sys
@@ -95,7 +96,8 @@ unsafe extern "system" fn power_sleep_resume_proc(
 ) -> u32 {
     log::debug!("Received power event: {event}");
     if event == PBT_APMRESUMESUSPEND {
-        kill_all_seelen_ui_processes().unwrap();
+        // this probably won't be needed anymore
+        // kill_all_seelen_ui_processes().unwrap();
     }
     0
 }

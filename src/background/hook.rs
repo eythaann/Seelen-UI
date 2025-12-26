@@ -9,7 +9,6 @@ use std::{
 
 use parking_lot::RwLock;
 use seelen_core::handlers::SeelenEvent;
-use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
     UI::{
@@ -22,8 +21,8 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::{get_app_handle, Seelen, SEELEN},
-    error::{ErrorMap, Result, ResultLogExt},
+    app::{emit_to_webviews, Seelen, SEELEN},
+    error::{Result, ResultLogExt},
     event_manager, log_error,
     modules::input::Mouse,
     state::application::FULL_STATE,
@@ -31,6 +30,7 @@ use crate::{
     utils::spawn_named_thread,
     widgets::{weg::SeelenWeg, window_manager::instance::WindowManagerV2},
     windows_api::{
+        event_window::IS_INTERACTIVE_SESSION,
         window::{event::WinEvent, Window},
         WindowEnumerator,
     },
@@ -55,6 +55,13 @@ impl HookManager {
         _dwms_event_time: u32,
     ) {
         if id_object != OBJID_WINDOW.0 || !Seelen::is_running() {
+            return;
+        }
+
+        // CRITICAL: Skip event processing when session is not interactive (locked/switched)
+        // This prevents excessive CPU usage from processing thousands of events per second
+        // when the user has locked the screen or switched users
+        if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
             return;
         }
 
@@ -141,13 +148,10 @@ impl HookManager {
             );
 
             if shoup_update_focused && origin.is_focused() {
-                get_app_handle()
-                    .emit(
-                        SeelenEvent::GlobalFocusChanged,
-                        origin.as_focused_app_information(),
-                    )
-                    .wrap_error()
-                    .log_error();
+                emit_to_webviews(
+                    SeelenEvent::GlobalFocusChanged,
+                    origin.as_focused_app_information(),
+                );
             }
         }
 
@@ -197,13 +201,18 @@ pub fn register_win_hook() -> Result<()> {
 
     // todo move this to input/mouse/keyboard module
     spawn_named_thread("MouseEventHook", || {
-        let handle = get_app_handle();
         let mut last_pos = seelen_core::Point::default();
         let sleep_time = Duration::from_millis(100); // 10fps
         loop {
+            // Pause when session is not interactive to reduce CPU usage
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                std::thread::sleep(Duration::from_secs(1));
+                continue;
+            }
+
             if let Ok(pos) = Mouse::get_cursor_pos() {
                 if last_pos != pos {
-                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.x, pos.y]);
+                    emit_to_webviews(SeelenEvent::GlobalMouseMove, &[pos.x, pos.y]);
                     last_pos = pos;
                 }
             }
@@ -241,6 +250,12 @@ pub fn init_zombie_window_killer() {
 
         loop {
             std::thread::sleep(std::time::Duration::from_secs(1));
+
+            // Pause when session is not interactive to reduce CPU usage
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                continue;
+            }
+
             let guard = existing_windows.write();
             for addr in guard.iter() {
                 let window = Window::from(*addr);

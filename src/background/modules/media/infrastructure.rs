@@ -1,9 +1,8 @@
 use seelen_core::handlers::SeelenEvent;
-use tauri::Emitter;
 use windows::{core::GUID, Win32::Media::Audio::ISimpleAudioVolume};
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     error::Result,
     log_error,
     modules::media::{application::MEDIA_MANAGER, domain::MediaDevice},
@@ -26,10 +25,10 @@ pub fn register_media_events() {
             | MediaEvent::MediaPlayerPropertiesChanged { .. }
             | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
             | MediaEvent::MediaPlayerTimelineChanged { .. } => {
-                log_error!(get_app_handle().emit(
+                emit_to_webviews(
                     SeelenEvent::MediaSessions,
-                    MEDIA_MANAGER.players.playing.values()
-                ));
+                    MEDIA_MANAGER.players.playing.values(),
+                );
             }
             MediaEvent::DeviceAdded(_)
             | MediaEvent::DeviceRemoved(_)
@@ -38,14 +37,12 @@ pub fn register_media_events() {
             | MediaEvent::DeviceSessionAdded { .. }
             | MediaEvent::DeviceSessionRemoved { .. }
             | MediaEvent::DeviceSessionVolumeChanged { .. } => {
-                let app = get_app_handle();
-
                 let inputs = MEDIA_MANAGER.inputs.values();
                 let outputs = MEDIA_MANAGER.outputs.values();
 
-                log_error!(app.emit(SeelenEvent::MediaDevices, (&inputs, &outputs)));
-                log_error!(app.emit(SeelenEvent::MediaInputs, &inputs));
-                log_error!(app.emit(SeelenEvent::MediaOutputs, &outputs));
+                emit_to_webviews(SeelenEvent::MediaDevices, (&inputs, &outputs));
+                emit_to_webviews(SeelenEvent::MediaInputs, &inputs);
+                emit_to_webviews(SeelenEvent::MediaOutputs, &outputs);
             }
         });
     });

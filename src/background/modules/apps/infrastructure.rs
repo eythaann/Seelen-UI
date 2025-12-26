@@ -4,12 +4,11 @@ use seelen_core::{
     handlers::SeelenEvent,
     system_state::{FocusedApp, UserAppWindow, UserAppWindowPreview, UserApplication},
 };
-use tauri::Emitter;
 use windows::Win32::UI::Shell::{IShellDispatch6, Shell};
 
 use crate::{
-    app::get_app_handle,
-    error::{Result, ResultLogExt},
+    app::emit_to_webviews,
+    error::Result,
     modules::{
         apps::application::{previews::WinPreviewManager, UserAppsManager, USER_APPS_MANAGER},
         input::Mouse,
@@ -20,18 +19,14 @@ use crate::{
 pub fn register_app_win_events() {
     UserAppsManager::subscribe(|_event| {
         let items = get_user_app_windows();
-        get_app_handle()
-            .emit(SeelenEvent::UserAppWindowsChanged, items)
-            .log_error();
+        emit_to_webviews(SeelenEvent::UserAppWindowsChanged, items);
     });
 
     WinPreviewManager::subscribe(|_| {
-        get_app_handle()
-            .emit(
-                SeelenEvent::UserAppWindowsPreviewsChanged,
-                WinPreviewManager::instance().previews.to_hash_map(),
-            )
-            .log_error();
+        emit_to_webviews(
+            SeelenEvent::UserAppWindowsPreviewsChanged,
+            WinPreviewManager::instance().previews.to_hash_map(),
+        );
     });
 }
 

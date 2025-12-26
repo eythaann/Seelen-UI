@@ -20,6 +20,7 @@
 - improvements on wallpaper manager syncronization and changes.
 - settings UX improvements.
 - extraction on local video wallpapers thumbnails.
+- avoid reload the UI while playing as this can cause fps drops.
 
 ### fix
 
@@ -28,6 +29,7 @@
 - showing paused message on no video wallpapers.
 - app not working on local accounts.
 - app and service not running if already running on another session.
+- high cpu usage while user session inactive.
 
 ## [2.4.11]
 

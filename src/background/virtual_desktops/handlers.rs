@@ -6,13 +6,9 @@ use seelen_core::{
     state::{VirtualDesktops, Wallpaper},
     system_state::MonitorId,
 };
-use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle,
-    error::{Result, ResultLogExt},
-    resources::RESOURCES,
-    utils::date_based_hex_id,
+    app::emit_to_webviews, error::Result, resources::RESOURCES, utils::date_based_hex_id,
     virtual_desktops::SluWorkspacesManager2,
 };
 
@@ -21,9 +17,7 @@ fn get_vd_manager() -> &'static SluWorkspacesManager2 {
     TAURI_EVENT_REGISTRATION.call_once(|| {
         SluWorkspacesManager2::subscribe(|_event| {
             let payload: VirtualDesktops = SluWorkspacesManager2::instance().into();
-            get_app_handle()
-                .emit(SeelenEvent::VirtualDesktopsChanged, payload)
-                .log_error();
+            emit_to_webviews(SeelenEvent::VirtualDesktopsChanged, payload);
         });
     });
 

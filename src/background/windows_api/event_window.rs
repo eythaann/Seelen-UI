@@ -1,15 +1,21 @@
-use std::sync::atomic::{AtomicIsize, AtomicU32, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicIsize, AtomicU32, Ordering};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, WPARAM},
-    System::Power::RegisterSuspendResumeNotification,
+    System::{
+        Power::RegisterSuspendResumeNotification,
+        RemoteDesktop::{WTSRegisterSessionNotification, NOTIFY_FOR_THIS_SESSION},
+    },
     UI::WindowsAndMessaging::{
         CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
         RegisterClassW, RegisterShellHookWindow, RegisterWindowMessageW, TranslateMessage,
-        DEVICE_NOTIFY_WINDOW_HANDLE, MSG, WINDOW_EX_STYLE, WINDOW_STYLE, WM_DESTROY, WNDCLASSW,
+        DEVICE_NOTIFY_WINDOW_HANDLE, MSG, WINDOW_EX_STYLE, WINDOW_STYLE, WM_DESTROY,
+        WM_WTSSESSION_CHANGE, WNDCLASSW, WTS_SESSION_LOCK, WTS_SESSION_LOGOFF, WTS_SESSION_LOGON,
+        WTS_SESSION_UNLOCK,
     },
 };
 
 use crate::{
+    app::emit_to_webviews,
     error::{Result, WindowsResultExt},
     event_manager, log_error,
     utils::spawn_named_thread,
@@ -19,6 +25,10 @@ use super::{string_utils::WindowsString, WindowsApi};
 
 pub static WM_SHELLHOOKMESSAGE: AtomicU32 = AtomicU32::new(u32::MAX);
 pub static BACKGROUND_HWND: AtomicIsize = AtomicIsize::new(0);
+
+/// Global flag to track if the current session is interactive (not locked/switched).
+/// Used to pause background threads and event processing when the session is not interactive.
+pub static IS_INTERACTIVE_SESSION: AtomicBool = AtomicBool::new(true);
 
 pub struct BgWindowProc {}
 
@@ -70,6 +80,10 @@ impl BgWindowProc {
         let _resume_suspend_handle =
             RegisterSuspendResumeNotification(hwnd.into(), DEVICE_NOTIFY_WINDOW_HANDLE)?;
 
+        // Register for session change notifications (lock/unlock, user switch, etc.)
+        // This is critical for pausing background threads when session is not interactive
+        WTSRegisterSessionNotification(hwnd, NOTIFY_FOR_THIS_SESSION)?;
+
         done.send(())?;
         let mut msg = MSG::default();
 
@@ -90,6 +104,23 @@ impl BgWindowProc {
         if msg == WM_DESTROY {
             PostQuitMessage(0);
             return LRESULT(0);
+        }
+
+        // Handle session change notifications to pause background processing
+        // when the session is locked or user switches
+        if msg == WM_WTSSESSION_CHANGE {
+            match w_param.0 as u32 {
+                WTS_SESSION_LOCK | WTS_SESSION_LOGOFF => {
+                    log::info!("Session locked/logged off - pausing background event processing");
+                    IS_INTERACTIVE_SESSION.store(false, Ordering::Release);
+                }
+                WTS_SESSION_UNLOCK | WTS_SESSION_LOGON => {
+                    log::info!("Session unlocked/logged on - resuming background event processing");
+                    IS_INTERACTIVE_SESSION.store(true, Ordering::Release);
+                    emit_to_webviews("internal::session_resumed", ());
+                }
+                _ => {}
+            }
         }
 
         Self::send((msg, w_param.0, l_param.0));

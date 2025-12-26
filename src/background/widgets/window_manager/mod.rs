@@ -6,14 +6,13 @@ pub mod state;
 
 use instance::WindowManagerV2;
 use seelen_core::{handlers::SeelenEvent, state::AppExtraFlag};
-use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{WS_EX_TOPMOST, WS_SIZEBOX},
 };
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     error::Result,
     state::application::FULL_STATE,
     windows_api::{window::Window, WindowsApi},
@@ -56,7 +55,7 @@ impl WindowManagerV2 {
     }
 
     pub fn force_retiling() -> Result<()> {
-        get_app_handle().emit(SeelenEvent::WMForceRetiling, ())?;
+        emit_to_webviews(SeelenEvent::WMForceRetiling, ());
         Ok(())
     }
 }

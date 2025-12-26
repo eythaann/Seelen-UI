@@ -2,25 +2,20 @@ use seelen_core::{
     handlers::SeelenEvent,
     system_state::{BluetoothDevice, DevicePairingAnswer, DevicePairingNeededAction},
 };
-use tauri::Emitter;
 use windows::Devices::Enumeration::{DevicePairingResultStatus, DeviceUnpairingResultStatus};
 
 use crate::{
-    app::get_app_handle,
-    error::{Result, ResultLogExt},
-    modules::radios::bluetooth::manager::BluetoothManager,
+    app::emit_to_webviews, error::Result, modules::radios::bluetooth::manager::BluetoothManager,
 };
 
 fn get_bluetooth_manager() -> &'static BluetoothManager {
     static INIT: std::sync::Once = std::sync::Once::new();
     INIT.call_once(|| {
         BluetoothManager::subscribe(|_e| {
-            get_app_handle()
-                .emit(
-                    SeelenEvent::BluetoothDevicesChanged,
-                    BluetoothManager::instance().get_all_devices(),
-                )
-                .log_error();
+            emit_to_webviews(
+                SeelenEvent::BluetoothDevicesChanged,
+                BluetoothManager::instance().get_all_devices(),
+            );
         });
     });
     BluetoothManager::instance()

@@ -5,6 +5,7 @@
 import "./ConsoleWrapper.ts";
 
 import type { FocusedApp, Widget } from "@seelen-ui/lib/types";
+import { listen } from "@tauri-apps/api/event";
 import { _invoke, WebviewInformation } from "src/ui/vanilla/entry-point/_tauri.ts";
 
 import { removeDefaultWebviewActions } from "src/ui/vanilla/entry-point/setup.ts";
@@ -38,9 +39,19 @@ if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
   // workaround for tauri/webview2 memory leak
   setTimeout(async () => {
     const app = await _invoke<FocusedApp>("get_focused_app");
+    // avoid reload the UI while playing as this can cause fps drops
+    if (app.isFullscreened) {
+      return;
+    }
+
     if (!app.exe?.endsWith("seelen-ui.exe")) {
       console.trace("Reloading widget.");
       location.reload();
     }
   }, 60_000 * 10); // every 10 minutes
 }
+
+listen("internal::session_resumed", () => {
+  console.trace("Reloading widget.");
+  location.reload();
+});

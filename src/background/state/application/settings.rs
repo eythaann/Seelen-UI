@@ -1,8 +1,7 @@
 use seelen_core::{handlers::SeelenEvent, state::Settings};
-use tauri::Emitter;
 
 use crate::{
-    app::{get_app_handle, SEELEN},
+    app::{emit_to_webviews, SEELEN},
     error::Result,
     resources::RESOURCES,
     trace_lock,
@@ -14,7 +13,7 @@ use super::FullState;
 
 impl FullState {
     pub(super) fn emit_settings(&self) -> Result<()> {
-        get_app_handle().emit(SeelenEvent::StateSettingsChanged, &self.settings)?;
+        emit_to_webviews(SeelenEvent::StateSettingsChanged, &self.settings);
 
         trace_lock!(SEELEN).on_settings_change(self)?;
         trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;

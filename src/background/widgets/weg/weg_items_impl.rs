@@ -14,10 +14,9 @@ use std::{
     sync::{Arc, LazyLock},
     time::{SystemTime, UNIX_EPOCH},
 };
-use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     error::{Result, ResultLogExt},
     modules::{
         apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
@@ -138,8 +137,7 @@ impl SeelenWegState {
     }
 
     pub fn emit_to_webview(&mut self) -> Result<()> {
-        let handle = get_app_handle();
-        handle.emit(SeelenEvent::StateWegItemsChanged, ())?;
+        emit_to_webviews(SeelenEvent::StateWegItemsChanged, ());
         Ok(())
     }
 

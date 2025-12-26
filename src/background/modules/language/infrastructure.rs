@@ -1,7 +1,6 @@
 use seelen_core::{handlers::SeelenEvent, system_state::SystemLanguage};
-use tauri::Emitter;
 
-use crate::{app::get_app_handle, error::Result, trace_lock};
+use crate::{app::emit_to_webviews, error::Result, trace_lock};
 
 use super::application::{LanguageEvent, LanguageManager, LANGUAGE_MANAGER};
 
@@ -23,9 +22,7 @@ pub fn register_language_events() {
                         }
                     };
                 }
-                get_app_handle()
-                    .emit(SeelenEvent::SystemLanguagesChanged, &lang_manager.languages)
-                    .unwrap();
+                emit_to_webviews(SeelenEvent::SystemLanguagesChanged, &lang_manager.languages);
             }
         });
     });
