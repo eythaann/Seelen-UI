@@ -27,19 +27,18 @@ pub const MAX_RETRIES: u32 = 3;
 
 /// IPC trait for common connection operations
 pub trait IPC {
-    const PATH: &'static str;
+    fn path() -> String;
 
     #[allow(async_fn_in_trait)]
     async fn server_process_id() -> Result<u32> {
-        let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
+        let stream = AsyncDuplexPipeStream::connect_by_path(Self::path()).await?;
         let pid = stream.server_process_id()?;
         write_to_ipc_stream(&stream, &[]).await?;
         Ok(pid)
     }
 
-    /// returns the server process id
     fn test_connection() -> Result<()> {
-        let stream = DuplexPipeStream::connect_by_path(Self::PATH)?;
+        let stream = DuplexPipeStream::connect_by_path(Self::path())?;
         let response = send_to_ipc_stream_blocking(&stream, &[])?;
         response.ok()
     }

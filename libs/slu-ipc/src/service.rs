@@ -7,6 +7,7 @@ use interprocess::os::windows::named_pipe::{
 };
 
 use crate::{
+    app::current_session_id,
     common::{
         IPC, create_security_descriptor, read_from_ipc_stream, send_to_ipc_stream, send_with_retry,
         write_to_ipc_stream,
@@ -20,7 +21,17 @@ pub struct ServiceIpc {
 }
 
 impl IPC for ServiceIpc {
-    const PATH: &'static str = r"\\.\pipe\seelen-ui-service";
+    fn path() -> String {
+        let session_id = current_session_id().unwrap_or(0);
+        Self::path_with_session(session_id)
+    }
+}
+
+impl ServiceIpc {
+    /// Constructs the pipe path for a specific session ID
+    pub fn path_with_session(session_id: u32) -> String {
+        format!(r"\\.\pipe\seelen-ui-service-{}", session_id)
+    }
 }
 
 impl ServiceIpc {
@@ -32,7 +43,7 @@ impl ServiceIpc {
         let sd = create_security_descriptor()?;
 
         let listener = PipeListenerOptions::new()
-            .path(Self::PATH)
+            .path(Self::path())
             .security_descriptor(Some(sd))
             .create_tokio_duplex::<Bytes>()?;
 
@@ -102,7 +113,7 @@ impl ServiceIpc {
     }
 
     async fn try_send(data: &[u8]) -> Result<IpcResponse> {
-        let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
+        let stream = AsyncDuplexPipeStream::connect_by_path(Self::path()).await?;
         send_to_ipc_stream(&stream, data).await
     }
 }

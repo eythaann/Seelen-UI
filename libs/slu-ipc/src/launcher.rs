@@ -20,7 +20,9 @@ pub struct LauncherIpc {
 }
 
 impl IPC for LauncherIpc {
-    const PATH: &'static str = r"\\.\pipe\seelen-ui-launcher";
+    fn path() -> String {
+        r"\\.\pipe\seelen-ui-launcher".to_string()
+    }
 }
 
 impl LauncherIpc {
@@ -31,7 +33,7 @@ impl LauncherIpc {
         let sd = create_security_descriptor()?;
 
         let listener = PipeListenerOptions::new()
-            .path(Self::PATH)
+            .path(Self::path())
             .security_descriptor(Some(sd))
             .create_tokio_duplex::<Bytes>()?;
 
@@ -77,7 +79,7 @@ impl LauncherIpc {
     }
 
     pub async fn send(message: LauncherMessage) -> Result<()> {
-        let stream = AsyncDuplexPipeStream::connect_by_path(Self::PATH).await?;
+        let stream = AsyncDuplexPipeStream::connect_by_path(Self::path()).await?;
         send_to_ipc_stream(&stream, &message.to_bytes()?)
             .await?
             .ok()

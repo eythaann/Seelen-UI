@@ -29,19 +29,17 @@ impl SelfPipe {
 
     fn handle_message(message: AppMessage) -> IpcResponse {
         match message {
-            AppMessage::Cli(argv) => match Self::_handle_cli_message(argv) {
-                Ok(()) => IpcResponse::Success,
-                Err(err) => IpcResponse::Err(err.to_string()),
-            },
+            AppMessage::Cli(argv) => {
+                if let Err(err) = Self::_handle_cli_message(argv) {
+                    return IpcResponse::Err(err.to_string());
+                }
+            }
             AppMessage::TrayChanged(event) => {
                 SystemTrayManager::handle_tray_event(event);
-                IpcResponse::Success
             }
-            AppMessage::Debug(_msg) => {
-                // log::debug!("{_msg}");
-                IpcResponse::Success
-            }
+            AppMessage::Debug(_msg) => {}
         }
+        IpcResponse::Success
     }
 
     pub fn start_listener() -> Result<()> {

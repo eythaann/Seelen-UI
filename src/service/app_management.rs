@@ -1,49 +1,57 @@
-use std::{
-    process::Command,
-    sync::atomic::{AtomicUsize, Ordering},
-};
+use std::process::Command;
 
+use slu_ipc::{AppIpc, IPC};
 use windows::Win32::{
     Foundation::HANDLE,
     System::Power::{
         RegisterSuspendResumeNotification, DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS, HPOWERNOTIFY,
     },
-    UI::{
-        Shell::{FOLDERID_LocalAppData, FOLDERID_Windows},
-        WindowsAndMessaging::{DEVICE_NOTIFY_CALLBACK, PBT_APMRESUMESUSPEND},
-    },
+    UI::WindowsAndMessaging::{DEVICE_NOTIFY_CALLBACK, PBT_APMRESUMESUSPEND},
 };
 
-use crate::{
-    enviroment::was_installed_using_msix, error::Result, was_started_from_startup_action,
-    windows_api::WindowsApi,
-};
+use crate::{enviroment::was_installed_using_msix, error::Result};
 
-pub static GUI_RESTARTED_COUNTER: AtomicUsize = AtomicUsize::new(0);
+/// Starts monitoring the Seelen UI app for the current session
+/// Restarts it if it crashes unexpectedly
+pub fn start_app_monitoring() {
+    std::thread::spawn(move || {
+        let mut crash_counter = 0;
+        loop {
+            std::thread::sleep(std::time::Duration::from_secs(1));
 
+            if AppIpc::can_stablish_connection() {
+                continue;
+            }
+
+            log::info!("Seelen UI was closed unexpectedly.");
+            crash_counter += 1;
+            if crash_counter > 10 {
+                break;
+            }
+
+            #[cfg(not(debug_assertions))]
+            crate::log_error!(launch_seelen_ui());
+        }
+    });
+}
+
+/// will start the app on the interactive session
 pub fn launch_seelen_ui() -> Result<()> {
-    let explorer = WindowsApi::known_folder(FOLDERID_Windows)?.join("explorer.exe");
-
-    let app_path = if was_installed_using_msix() {
-        WindowsApi::known_folder(FOLDERID_LocalAppData)?
-            .join("Microsoft\\WindowsApps\\seelen-ui.exe")
-    } else {
-        std::env::current_exe()?.with_file_name("seelen-ui.exe")
-    };
-
-    let mut args = Vec::new();
-    if was_started_from_startup_action() {
-        args.push("--startup".to_string());
-    }
-
-    let lnk_file = WindowsApi::create_temp_shortcut(&app_path, &args.join(" "))?;
-    // start it using explorer to spawn it as unelevated
-    Command::new(explorer).arg(&lnk_file).status()?;
-    std::fs::remove_file(&lnk_file)?;
+    // start it using explorer to spawn it as unelevated and as current interactive user
+    Command::new("explorer.exe")
+        .arg(&if was_installed_using_msix() {
+            "shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App".to_string()
+        } else {
+            std::env::current_exe()?
+                .with_file_name("seelen-ui.exe")
+                .to_string_lossy()
+                .to_string()
+        })
+        .status()?;
     Ok(())
 }
 
-pub fn kill_seelen_ui_processes() -> Result<()> {
+pub fn kill_all_seelen_ui_processes() -> Result<()> {
     let mut sys = sysinfo::System::new();
     sys.refresh_processes();
     let instances: Vec<_> = sys
@@ -54,22 +62,7 @@ pub fn kill_seelen_ui_processes() -> Result<()> {
     for instance in instances {
         instance.kill();
     }
-    GUI_RESTARTED_COUNTER.store(0, Ordering::SeqCst);
     Ok(())
-}
-
-/// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registersuspendresumenotification
-/// https://learn.microsoft.com/en-us/windows/win32/api/powrprof/nc-powrprof-device_notify_callback_routine
-unsafe extern "system" fn power_sleep_resume_proc(
-    _context: *const core::ffi::c_void,
-    event: u32,
-    _setting: *const core::ffi::c_void,
-) -> u32 {
-    log::debug!("Received power event: {event}");
-    if event == PBT_APMRESUMESUSPEND {
-        kill_seelen_ui_processes().unwrap();
-    }
-    0
 }
 
 /// on Dropped will unregister all the handlers
@@ -91,4 +84,18 @@ pub fn start_listening_system_events() -> Result<SystemEventHandlers> {
     }?;
 
     Ok(SystemEventHandlers { power: handler })
+}
+
+/// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registersuspendresumenotification
+/// https://learn.microsoft.com/en-us/windows/win32/api/powrprof/nc-powrprof-device_notify_callback_routine
+unsafe extern "system" fn power_sleep_resume_proc(
+    _context: *const core::ffi::c_void,
+    event: u32,
+    _setting: *const core::ffi::c_void,
+) -> u32 {
+    log::debug!("Received power event: {event}");
+    if event == PBT_APMRESUMESUSPEND {
+        kill_all_seelen_ui_processes().unwrap();
+    }
+    0
 }

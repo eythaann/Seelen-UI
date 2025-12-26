@@ -11,6 +11,7 @@ static ANIMATION_INSTANCE: LazyLock<tokio::sync::Mutex<Option<AppWinAnimation>>>
 async fn _process_action(command: SvcAction) -> Result<()> {
     match command {
         SvcAction::Stop => crate::exit(0),
+        // -----------------------------------------------------------------------
         SvcAction::SetStartup(enabled) => TaskSchedulerHelper::set_run_on_logon(enabled)?,
         SvcAction::ShowWindow { hwnd, command } => WindowsApi::show_window(hwnd, command)?,
         SvcAction::ShowWindowAsync { hwnd, command } => {
@@ -83,6 +84,7 @@ async fn _process_action(command: SvcAction) -> Result<()> {
 }
 
 pub async fn process_action(command: SvcAction) -> IpcResponse {
+    log::trace!("Processing action: {:?}", command);
     match _process_action(command).await {
         Ok(()) => IpcResponse::Success,
         Err(err) => IpcResponse::Err(err.to_string()),

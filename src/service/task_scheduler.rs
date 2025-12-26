@@ -43,11 +43,13 @@ impl TaskSchedulerHelper {
             TASK_LOGON_INTERACTIVE_TOKEN,
             &Default::default(),
         )?;
+        log::debug!("Registered task {}", task_name);
         Ok(())
     }
 
     /// this task handles the startup of the service and the app on login
     pub fn create_service_task() -> Result<()> {
+        log::debug!("Creating service task...");
         let service_path = if was_installed_using_msix() {
             WindowsApi::known_folder(FOLDERID_LocalAppData)?
                 .join("Microsoft\\WindowsApps\\slu-service.exe")

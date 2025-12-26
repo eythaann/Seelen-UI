@@ -10,6 +10,8 @@ pub enum Error {
     SerdeJson(#[from] serde_json::Error),
     #[error("IPC Timeout: {0}")]
     Timeout(String),
+    #[error("Windows: {0}")]
+    Windows(#[from] windows::core::Error),
 }
 
 pub type Result<T = ()> = core::result::Result<T, Error>;

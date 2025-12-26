@@ -59,9 +59,6 @@ enum CliRoutingStrategy {
 #[derive(Debug, clap::Parser)]
 #[command(version, name = "Seelen UI")]
 pub struct AppCli {
-    /// Indicates that the app was invoked from the start up action.
-    #[arg(long, default_value_t)]
-    startup: bool,
     /// Unused flag
     #[arg(long, default_value_t)]
     silent: bool,
@@ -155,10 +152,6 @@ fn parse_cli_args() -> AppCli {
 
 /// Configure global flags based on CLI arguments
 fn configure_global_flags(cli: &AppCli) {
-    if cli.startup {
-        crate::STARTUP.store(true, Ordering::SeqCst);
-    }
-
     if cli.silent {
         crate::SILENT.store(true, Ordering::SeqCst);
     }

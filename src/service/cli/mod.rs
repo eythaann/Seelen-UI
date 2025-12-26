@@ -1,8 +1,6 @@
 pub mod processing;
 
-use std::sync::atomic::Ordering;
-
-use slu_ipc::{messages::SvcAction, AppIpc, ServiceIpc, IPC};
+use slu_ipc::{messages::SvcAction, ServiceIpc};
 
 use clap::{Arg, ArgAction, Command};
 
@@ -46,13 +44,6 @@ pub fn get_cli() -> Command {
 pub async fn handle_console_client() -> Result<()> {
     let matches = get_cli().get_matches();
     let subcommand = matches.subcommand();
-
-    if matches.get_flag("startup") {
-        // --startup flag is added when service is invoked from task scheduler
-        // but this can be invoked by the main app too, so we only considerate as startup if
-        // the main app is not running and flag is present
-        crate::STARTUP.store(!AppIpc::can_stablish_connection(), Ordering::SeqCst);
-    }
 
     match subcommand {
         Some((ServiceSubcommands::INSTALL, _)) => {

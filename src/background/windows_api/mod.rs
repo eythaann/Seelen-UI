@@ -232,17 +232,12 @@ impl WindowsApi {
         unsafe { GetCurrentThreadId() }
     }
 
-    pub fn current_session_id() -> Result<u32> {
+    pub fn current_session_id() -> u32 {
         let process_id = Self::current_process_id();
         let mut session_id = 0;
-
-        unsafe {
-            if ProcessIdToSessionId(process_id, &mut session_id).is_ok() {
-                Ok(session_id)
-            } else {
-                Err("could not determine current session id".into())
-            }
-        }
+        // this should never fail for own process
+        unsafe { ProcessIdToSessionId(process_id, &mut session_id).expect("Can't get session id") };
+        session_id
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
