@@ -128,12 +128,6 @@ impl Theme {
                 std::fs::read_to_string(path.join("theme.wm.css"))?,
             );
         }
-        if path.join("theme.launcher.css").exists() {
-            theme.styles.insert(
-                WidgetId::known_launcher(),
-                std::fs::read_to_string(path.join("theme.launcher.css"))?,
-            );
-        }
         if path.join("theme.wall.css").exists() {
             theme.styles.insert(
                 WidgetId::known_wall(),

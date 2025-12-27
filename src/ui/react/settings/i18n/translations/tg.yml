@@ -1,16 +1,6 @@
 action:
   confirm: Шумо мутмаъин ҳастед?
   confirm_body: Ин амал бекор карда намешавад.
-app_launcher:
-  enable: Фаъолсозии Apple
-  launch_on:
-    mouse_over: Муш болои
-    primary: ибтидоӣ
-  monitor: Нишон додани назорат
-  runners:
-    cmd: Фармон
-    explorer: Давидан
-    label: Давандагон
 apps_configurations:
   app:
     bindings: Бодед
@@ -102,6 +92,7 @@ general:
     available: Бастаҳои нишонаи дастрас
     selected: Бастаҳои нишонаи фаъол
   language: Забон
+  monday: Душанбе
   performance_mode:
     on_battery: Аз рӯи батарея
     on_energy_saver: Оид ба сарфкунандаи энергия
@@ -110,7 +101,10 @@ general:
       extreme: Шадид
       minimal: Ҳадди аққал
     plugged: Васл кардан ё пур кардани барқ
+  saturday: шанбе
+  start_of_week: Оғози ҳафта
   startup: Оғози кор?
+  sunday: Якшанбе
   theme:
     available: Мавзӯъҳои дастрас
     selected: Мавзӯъҳои фаъол
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: Ба фазои пешина гузаред
     switch_workspace: Гузаштан ба роҳҳои корӣ {{0}}
     toggle_float: Ҳолати шинокунандаи шино
-    toggle_launcher: Гузариш
     toggle_monocle: Реҷаи монокзори роҳ
   readonly_tooltip: Ин як миёнабурҳои ягона аст
   reset: Аз нав танзимкунии пешфарз
@@ -243,7 +236,16 @@ update:
 wall:
   backgrounds: Обои обу
   blur: Гул
+  cancel: Бекор кардан
+  close: Пӯшед
+  collection_name: Номи коллексия
+  collections: Маҷмӯаҳо
   contrast: Зиддият
+  create: Эҷод кунед
+  create_collection: Маҷмӯа эҷод кунед
+  default_collection: Коллексияи пешфарз
+  delete_collection: Маҷмӯаро нест кунед
+  edit_collection: Маҷмӯаро таҳрир кунед
   enable: Фаъолсозии менеҷери обои
   fit:
     contain: Нигоҳубин кардан
@@ -251,11 +253,16 @@ wall:
     fill: Пур кардан
   flipHorizontal: Flip уфуқ
   flipVertical: Флип амудӣ
+  generating_thumbnails: Эҷоди ангораи обои
   hours: соат
   interval: Тағйироти ҳар як
   minutes: дақиқа
+  monitor_collection: Маҷмӯаи монитор
   muted: Аудити видеоӣ
   no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
+  no_collections: >-
+    Ҳанӯз коллексия эҷод нашудааст. Барои сохтани як тугма тугмаи + -ро клик
+    кунед.
   objectFit: Замина
   objectPosition: Мавқеи заминавӣ
   overlayColor: Ранги пурраи
@@ -267,10 +274,15 @@ wall:
     left: Бесоҳибмонда
     right: Рост
     top: Боло
+  processing_video: Коркарди видео
   random: Велосипедро тасодуфан
   saturation: Соф
   seconds: сонияҳо
+  select_collection: Коллексияро интихоб кунед
+  wallpaper_collection: Маҷмӯаи обои
+  wallpaper_settings: Танзимоти обои
   withOverlay: Бо overlay
+  workspace_collections: Коллексияҳои фазои корӣ
 weg:
   auto_hide: Худкор Пинҳон кардани
   delay_to_hide: Таъхир барои пинҳон кардан

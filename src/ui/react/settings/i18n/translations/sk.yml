@@ -1,16 +1,6 @@
 action:
   confirm: Si si istý?
   confirm_body: Táto akcia sa nedá vrátiť späť.
-app_launcher:
-  enable: Povoliť spúšťač aplikácií
-  launch_on:
-    mouse_over: Prejdite myšou
-    primary: Primárne
-  monitor: Monitorovať, aby sa ukázal
-  runners:
-    cmd: Príkaz
-    explorer: Spustenie
-    label: Bežec
 apps_configurations:
   app:
     bindings: Viazanie (POZNÁMKA sú potrebné obe možnosti)
@@ -102,6 +92,7 @@ general:
     available: Dostupné balíčky ikon
     selected: Balíky aktívnych ikon
   language: Jazyk
+  monday: pondelok
   performance_mode:
     on_battery: Batéria
     on_energy_saver: Na šetrič energie
@@ -110,7 +101,10 @@ general:
       extreme: Extrémny
       minimal: Minimálny
     plugged: Zapojené alebo nabíjanie
+  saturday: sobota
+  start_of_week: Začiatok týždňa
   startup: Spustiť pri štarte?
+  sunday: nedeľa
   theme:
     available: Dostupné témy
     selected: Aktívne témy
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Prepnite na predchádzajúci pracovný priestor
     switch_workspace: Prepnite na pracovný priestor {{0}}
     toggle_float: Prepínanie plavákového režimu okna
-    toggle_launcher: Prepínanie spúšťača
     toggle_monocle: Prepnite režim Monocle Workspace
   readonly_tooltip: Toto je skratka iba na čítanie
   reset: Reset na predvolené hodnoty
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Tapety
   blur: Rozmazanie
+  cancel: Zrušiť
+  close: Zavrieť
+  collection_name: Názov zbierky
+  collections: zbierky
   contrast: Kontrast
+  create: Vytvorte
+  create_collection: Vytvoriť zbierku
+  default_collection: Predvolená kolekcia
+  delete_collection: Odstrániť zbierku
+  edit_collection: Upraviť kolekciu
   enable: Povoliť manažéra tapiet
   fit:
     contain: Obsahuje
@@ -254,11 +256,16 @@ wall:
     fill: Naplňte stránku
   flipHorizontal: Flip Horizontálne
   flipVertical: Flip Vertical
+  generating_thumbnails: Generovanie miniatúr tapety
   hours: hodiny
   interval: Vymeňte tapetu každý
   minutes: minúta
+  monitor_collection: Zbierka monitorov
   muted: Stlmiť zvuk videa
   no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
+  no_collections: >-
+    Zatiaľ nie sú vytvorené žiadne zbierky. Kliknutím na tlačidlo + ho
+    vytvoríte.
   objectFit: Pozadie Fit
   objectPosition: Pozadie Pozícia
   overlayColor: Farba prekrytia
@@ -270,10 +277,15 @@ wall:
     left: Vľavo
     right: Vpravo
     top: Top
+  processing_video: Spracovanie videa
   random: Randomizovať prezentáciu
   saturation: Nasýtenie
   seconds: sekundy
+  select_collection: Vyberte položku Zbierka
+  wallpaper_collection: Kolekcia tapiet
+  wallpaper_settings: Nastavenia tapety
   withOverlay: S prekrytím
+  workspace_collections: Kolekcie pracovného priestoru
 weg:
   auto_hide: Automaticky skryť
   delay_to_hide: Odložiť skryť

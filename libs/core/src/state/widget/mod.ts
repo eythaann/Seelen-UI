@@ -24,7 +24,6 @@ export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
 export const SeelenWegWidgetId: WidgetId = "@seelen/weg" as WidgetId;
 export const SeelenToolbarWidgetId: WidgetId = "@seelen/fancy-toolbar" as WidgetId;
 export const SeelenWindowManagerWidgetId: WidgetId = "@seelen/window-manager" as WidgetId;
-export const SeelenLauncherWidgetId: WidgetId = "@seelen/launcher" as WidgetId;
 export const SeelenWallWidgetId: WidgetId = "@seelen/wallpaper-manager" as WidgetId;
 
 export class WidgetList extends List<IWidget> {

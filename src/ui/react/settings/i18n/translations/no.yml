@@ -1,16 +1,6 @@
 action:
   confirm: Er du sikker?
   confirm_body: Denne handlingen kan ikke angres.
-app_launcher:
-  enable: Aktiver appstarter
-  launch_on:
-    mouse_over: Hold musen over
-    primary: Primær
-  monitor: Overvåke for å vise
-  runners:
-    cmd: Kommando
-    explorer: Løp
-    label: Løpere
 apps_configurations:
   app:
     bindings: Binding (Merk begge alternativene er påkrevd)
@@ -102,6 +92,7 @@ general:
     available: Tilgjengelige ikonpakker
     selected: Aktive ikonpakker
   language: Språk
+  monday: mandag
   performance_mode:
     on_battery: På batteri
     on_energy_saver: På energisparer
@@ -110,7 +101,10 @@ general:
       extreme: Ekstrem
       minimal: Minimal
     plugged: Plugget eller lading
+  saturday: lørdag
+  start_of_week: Ukestart
   startup: Kjør ved oppstart?
+  sunday: søndag
   theme:
     available: Tilgjengelige temaer
     selected: Aktive temaer
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Bytt til tidligere arbeidsområde
     switch_workspace: Bytt til arbeidsområdet {{0}}
     toggle_float: Veksle vindu float -modus
-    toggle_launcher: Veksle Launcher
     toggle_monocle: Veksle arbeidsområde monokelmodus
   readonly_tooltip: Dette er en leselinje-snarvei
   reset: Tilbakestill til standardverdier
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Bakgrunnsbilder
   blur: Uskarpe
+  cancel: Kansellere
+  close: Lukke
+  collection_name: Samlingens navn
+  collections: Samlinger
   contrast: Kontrast
+  create: Skape
+  create_collection: Opprett samling
+  default_collection: Standard samling
+  delete_collection: Slett samling
+  edit_collection: Rediger samling
   enable: Aktiver bakgrunnssjef
   fit:
     contain: Inneholde
@@ -254,11 +256,14 @@ wall:
     fill: Fylle
   flipHorizontal: Flip horisontalt
   flipVertical: Flip vertikal
+  generating_thumbnails: Generer bakgrunnsminiatyrbilder
   hours: timer
   interval: Endre bakgrunnsbilde hver
   minutes: minutter
+  monitor_collection: Overvåk samling
   muted: Demp videolyd
   no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
+  no_collections: Ingen samlinger opprettet ennå. Klikk på +-knappen for å opprette en.
   objectFit: Bakgrunns passform
   objectPosition: Bakgrunnsposisjon
   overlayColor: Overleggsfarge
@@ -270,10 +275,15 @@ wall:
     left: Igjen
     right: Høyre
     top: Topp
+  processing_video: Behandler video
   random: Randomiser lysbildefremvisning
   saturation: Metning
   seconds: sekunder
+  select_collection: Velg Samling
+  wallpaper_collection: Tapet samling
+  wallpaper_settings: Bakgrunnsinnstillinger
   withOverlay: Med overlegg
+  workspace_collections: Arbeidsområdesamlinger
 weg:
   auto_hide: Skjul automatisk
   delay_to_hide: Utsett å skjule

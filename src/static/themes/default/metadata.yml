@@ -8,7 +8,6 @@ metadata:
     - window-manager
 styles:
   "@seelen/fancy-toolbar": !include styles/fancy-toolbar.scss
-  "@seelen/launcher": !include styles/launcher.css
   "@seelen/power-menu": !include styles/power-menu.scss
   "@seelen/task-switcher": !include styles/task-switcher.scss
   "@seelen/wallpaper-manager": !include styles/wallpaper-manager.css

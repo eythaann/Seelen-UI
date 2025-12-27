@@ -1,16 +1,6 @@
 action:
   confirm: Biztos vagy benne?
   confirm_body: Ezt a műveletet nem lehet visszavonni.
-app_launcher:
-  enable: Engedélyezze az alkalmazás indítóját
-  launch_on:
-    mouse_over: Vigye fel az egeret
-    primary: Elsődleges
-  monitor: Monitor, hogy megmutassa
-  runners:
-    cmd: Parancs
-    explorer: Fut
-    label: Futók
 apps_configurations:
   app:
     bindings: Kötés (vegye figyelembe, hogy mindkét lehetőség szükséges)
@@ -103,6 +93,7 @@ general:
     available: Elérhető ikoncsomagok
     selected: Aktív ikoncsomagok
   language: Nyelv
+  monday: hétfő
   performance_mode:
     on_battery: Akkumulátorra
     on_energy_saver: Az energiatakarékosról
@@ -111,7 +102,10 @@ general:
       extreme: Szélső
       minimal: Minimális
     plugged: Bedugva vagy töltés
+  saturday: szombat
+  start_of_week: Hét kezdete
   startup: Futtatni indításkor?
+  sunday: vasárnap
   theme:
     available: Elérhető témák
     selected: Aktív témák
@@ -208,7 +202,6 @@ shortcuts:
     switch_to_previous_workspace: Váltás az előző munkaterületre
     switch_workspace: Váltás a munkaterületre {{0}}
     toggle_float: Windows úszó mód váltása
-    toggle_launcher: Váltóindító
     toggle_monocle: Váltás a munkaterület monokle módja
   readonly_tooltip: Ez egy csak olvasható parancsikon
   reset: Alapértelmezés visszaállítása az alapértelmezésekre
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: Háttérképek
   blur: Elmosódás
+  cancel: Mégsem
+  close: Közeli
+  collection_name: Gyűjtemény neve
+  collections: Gyűjtemények
   contrast: Kontraszt
+  create: Teremt
+  create_collection: Gyűjtemény létrehozása
+  default_collection: Alapértelmezett gyűjtemény
+  delete_collection: Gyűjtemény törlése
+  edit_collection: Gyűjtemény szerkesztése
   enable: Engedélyezze a háttérképkezelőt
   fit:
     contain: Tartalmazza a  címet.
@@ -253,11 +255,16 @@ wall:
     fill: Töltse ki a  címet.
   flipHorizontal: Flip vízszintes
   flipVertical: Flip függőleges
+  generating_thumbnails: Háttérkép miniatűrök generálása
   hours: órák
   interval: Változtasd meg minden háttérképet
   minutes: jegyzőkönyv
+  monitor_collection: Monitor gyűjtemény
   muted: Videó hang némítása
   no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
+  no_collections: >-
+    Még nem jött létre gyűjtemény. Kattintson a + gombra, hogy létrehozzon
+    egyet.
   objectFit: Háttér illeszkedés
   objectPosition: Háttér Pozíció
   overlayColor: Overlay szín
@@ -269,10 +276,15 @@ wall:
     left: Balra
     right: Jobbra
     top: Top
+  processing_video: Videó feldolgozása
   random: Véletlenszerűsítse a diavetítést
   saturation: Telítettség
   seconds: másodpercek
+  select_collection: Válassza a Gyűjtemény lehetőséget
+  wallpaper_collection: Háttérkép gyűjtemény
+  wallpaper_settings: Háttérkép beállításai
   withOverlay: Overlay-vel
+  workspace_collections: Munkaterület-gyűjtemények
 weg:
   auto_hide: Automatikus elrejtés
   delay_to_hide: Késleltesse az elrejtést

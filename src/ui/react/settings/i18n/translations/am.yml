@@ -1,16 +1,6 @@
 action:
   confirm: ኧረ
   confirm_body: ይህ እርምጃ ሊቀለበስ አይችልም.
-app_launcher:
-  enable: የመተግበሪያ አስጀማሪን አንቃ
-  launch_on:
-    mouse_over: መዳፊት አልቋል
-    primary: ዋና
-  monitor: ለማሳየት መከታተል
-  runners:
-    cmd: ትእዛዝ
-    explorer: ሩጫ
-    label: ሯጮች
 apps_configurations:
   app:
     bindings: ማሰሪያ (ሁለቱንም አማራጮች ልብ ይበሉ)
@@ -100,6 +90,7 @@ general:
     available: የሚገኙ የአዶ ጥቅሎች
     selected: ንቁ አዶ ጥቅሎች
   language: ቋንቋ
+  monday: ሰኞ
   performance_mode:
     on_battery: ባትሪ ላይ
     on_energy_saver: በሃይል ቆጣቢ ላይ
@@ -108,7 +99,10 @@ general:
       extreme: በጣም
       minimal: አነስተኛ
     plugged: ተሰኪ ወይም መሙላት
+  saturday: ቅዳሜ
+  start_of_week: የሳምንቱ መጀመሪያ
   startup: ጅምር ላይ ይሮጡ?
+  sunday: እሁድ
   theme:
     available: የሚገኙ ገጽታዎች
     selected: ንቁ ገጽታዎች
@@ -201,7 +195,6 @@ shortcuts:
     switch_to_previous_workspace: ወደ ቀዳሚው የስራ ቦታ ይቀይሩ
     switch_workspace: ወደ የሥራ ቦታ ቀይር {{0}}}
     toggle_float: የመስኮት ተንሳፋፊ ሁነታን ይቀያይሩ
-    toggle_launcher: አስጀማሪን ይቀያይሩ
     toggle_monocle: የስራ ቦታ ቦታን ይቀያይሩ
   readonly_tooltip: ይህ የተነበበ ብቻ አቋራጭ ነው
   reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
@@ -236,7 +229,16 @@ update:
 wall:
   backgrounds: የግድግዳ ወረቀቶች
   blur: ብዥታ
+  cancel: ሰርዝ
+  close: ገጠመ
+  collection_name: የስብስብ ስም
+  collections: ስብስቦች
   contrast: ንፅፅር
+  create: ፍጠር
+  create_collection: ስብስብ ይፍጠሩ
+  default_collection: ነባሪ ስብስብ
+  delete_collection: ስብስብን ሰርዝ
+  edit_collection: ስብስብ አርትዕ
   enable: የግድግዳ ወረቀት ሥራ አስኪያጅን ያንቁ
   fit:
     contain: መያዝ
@@ -244,11 +246,14 @@ wall:
     fill: ሙላ
   flipHorizontal: አግድም
   flipVertical: ቀጥ ያለ አቀባዊ
+  generating_thumbnails: የግድግዳ ወረቀት ድንክዬዎችን በማመንጨት ላይ
   hours: ሰዓታት
   interval: የግድግዳ ወረቀት እያንዳንዱን ይለውጡ
   minutes: ደቂቃዎች
+  monitor_collection: ስብስብን ተቆጣጠር
   muted: ድምጸ-ከል ቪዲዮ ኦዲዮ
   no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
+  no_collections: እስካሁን ምንም ስብስቦች አልተፈጠሩም። ለመፍጠር የ+ ቁልፍን ጠቅ ያድርጉ።
   objectFit: ዳራ ተስማሚ
   objectPosition: የጀርባ አቀማመጥ
   overlayColor: የተደራቢ ቀለም
@@ -260,10 +265,15 @@ wall:
     left: ግራ
     right: ቀኝ
     top: ከላይ
+  processing_video: ቪዲዮን በመስራት ላይ
   random: የዘፈቀደ ተንሸራታች ትዕይንት
   saturation: ማሞቂያ
   seconds: ሰከንዶች
+  select_collection: ስብስብ ይምረጡ
+  wallpaper_collection: የግድግዳ ወረቀት ስብስብ
+  wallpaper_settings: የግድግዳ ወረቀት ቅንጅቶች
   withOverlay: በተደራቢ
+  workspace_collections: የስራ ቦታ ስብስቦች
 weg:
   auto_hide: ራስ-ሰር መደበቅ
   delay_to_hide: ለመደበቅ መዘግየት

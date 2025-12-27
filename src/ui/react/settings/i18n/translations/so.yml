@@ -1,16 +1,6 @@
 action:
   confirm: Ma hubtaa?
   confirm_body: Ficilkan lama beddeli karo.
-app_launcher:
-  enable: U oggolow appka bilaabista
-  launch_on:
-    mouse_over: Jiirku wuu dhammaaday
-    primary: Asal ahaan
-  monitor: Kormeer si loo muujiyo
-  runners:
-    cmd: Amrid
-    explorer: Ordid
-    label: Orodyahannada
 apps_configurations:
   app:
     bindings: Xirashada (Xusuusin labada ikhtiyaar ayaa loo baahan yahay)
@@ -105,6 +95,7 @@ general:
     available: Xirmooyinka Icon ee la heli karo
     selected: Xirmooyinka Astaanta Firfircoon
   language: Af
+  monday: Isniin
   performance_mode:
     on_battery: Batteriga
     on_energy_saver: Ku Saabsan Tamarta Saver
@@ -113,7 +104,10 @@ general:
       extreme: Xad-dhaaf ah
       minimal: Aan yahayeexan
     plugged: Xirxiran ama ku dallac
+  saturday: Sabti
+  start_of_week: Bilawga Todobaadka
   startup: Ku orod bilowga?
+  sunday: Axad
   theme:
     available: Mawduucyada la heli karo
     selected: Mawduucyada Firfircoon
@@ -212,7 +206,6 @@ shortcuts:
     switch_to_previous_workspace: U beddelo shaqooyin hore
     switch_workspace: U beddelo goobta shaqada {{0}}
     toggle_float: Ku wareeji xarkaha suuqa
-    toggle_launcher: Tirggle Bilaash
     toggle_monocle: TOGGLE MODOCLE MoCOCLE Mode
   readonly_tooltip: Tani waa gaagaaban oo keliya oo keliya
   reset: Dib u dejiso defafyada
@@ -248,7 +241,16 @@ update:
 wall:
   backgrounds: Darf-biyoodka
   blur: Jilicsan
+  cancel: Jooji
+  close: Xir
+  collection_name: Magaca Ururinta
+  collections: Ururinta
   contrast: Is barbar dhigidda
+  create: Abuur
+  create_collection: Abuur Ururinta
+  default_collection: Ururinta asalka ah
+  delete_collection: Tirtir Ururinta
+  edit_collection: Wax ka beddel Ururinta
   enable: Awood u yeelo maamulaha derbiga
   fit:
     contain: Ka koobasho
@@ -256,11 +258,14 @@ wall:
     fill: Buuxin
   flipHorizontal: Flip siman
   flipVertical: Flip vertical
+  generating_thumbnails: Soo saarida Sawir-gacmeedka Waraaqda
   hours: saacadood
   interval: Beddel wadooyinka si kasta
   minutes: daqiiqo
+  monitor_collection: La Soco Ururinta
   muted: Muuqaalka Muuqaalka Mate
   no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
+  no_collections: Weli wax ururin ah lama abuurin Guji badhanka + si aad mid u abuurto.
   objectFit: Asalka taam
   objectPosition: Booska asalka ah
   overlayColor: Midab ka sarreeya
@@ -272,10 +277,15 @@ wall:
     left: Bidix
     right: Sax
     top: Dusha kore
+  processing_video: Hagaajinta muuqaalka
   random: Kala sooc slideshow
   saturation: SATION
   seconds: sekan
+  select_collection: Dooro Ururinta
+  wallpaper_collection: Ururinta Warqadaha
+  wallpaper_settings: Dejinta Warqadaha
   withOverlay: Iyadoo lagu daboolay
+  workspace_collections: Ururinta Goobta Shaqada
 weg:
   auto_hide: Auto qaraha
   delay_to_hide: Dib u dhig si loo qariyo

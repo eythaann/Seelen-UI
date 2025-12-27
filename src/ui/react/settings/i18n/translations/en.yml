@@ -1,16 +1,6 @@
 action:
   confirm: Are you sure?
   confirm_body: This action cannot be undone.
-app_launcher:
-  enable: Enable App Launcher
-  launch_on:
-    mouse_over: Mouse over
-    primary: Primary
-  monitor: Monitor to show
-  runners:
-    cmd: Command
-    explorer: Run
-    label: Runners
 apps_configurations:
   app:
     bindings: Binding (note both options are required)
@@ -102,9 +92,6 @@ general:
     selected: Active Icon Packs
   language: Language
   monday: Monday
-  saturday: Saturday
-  start_of_week: Start of Week
-  sunday: Sunday
   performance_mode:
     on_battery: On Battery
     on_energy_saver: On Energy Saver
@@ -113,7 +100,10 @@ general:
       extreme: Extreme
       minimal: Minimal
     plugged: Plugged or Charging
+  saturday: Saturday
+  start_of_week: Start of Week
   startup: Run on startup?
+  sunday: Sunday
   theme:
     available: Available Themes
     selected: Active Themes
@@ -210,7 +200,6 @@ shortcuts:
     switch_to_previous_workspace: Switch to Previous Workspace
     switch_workspace: Switch to Workspace {{0}}
     toggle_float: Toggle Window Float Mode
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: This is a read-only shortcut
   reset: Reset to Defaults
@@ -247,25 +236,31 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Blur
+  cancel: Cancel
+  close: Close
+  collection_name: Collection Name
+  collections: Collections
   contrast: Contrast
+  create: Create
+  create_collection: Create Collection
+  default_collection: Default Collection
+  delete_collection: Delete Collection
+  edit_collection: Edit Collection
   enable: Enable Wallpaper Manager
-  monitor_collection: Monitor Collection
-  wallpaper_collection: Wallpaper Collection
-  wallpaper_settings: Wallpaper Settings
-  workspace_collections: Workspace Collections
-  generating_thumbnails: Generating Wallpaper Thumbnails
-  processing_video: Processing video
   fit:
     contain: Contain
     cover: Cover
     fill: Fill
   flipHorizontal: Flip Horizontal
   flipVertical: Flip Vertical
+  generating_thumbnails: Generating Wallpaper Thumbnails
   hours: hours
   interval: Change wallpaper every
   minutes: minutes
+  monitor_collection: Monitor Collection
   muted: Mute video audio
   no_background: Empty slideshow, using theme's background instead.
+  no_collections: No collections created yet. Click the + button to create one.
   objectFit: Background Fit
   objectPosition: Background Position
   overlayColor: Overlay Color
@@ -277,21 +272,15 @@ wall:
     left: Left
     right: Right
     top: Top
+  processing_video: Processing video
   random: Randomize slideshow
   saturation: Saturation
   seconds: seconds
-  withOverlay: With Overlay
-  collections: Collections
-  create_collection: Create Collection
-  edit_collection: Edit Collection
-  delete_collection: Delete Collection
-  collection_name: Collection Name
-  default_collection: Default Collection
   select_collection: Select Collection
-  no_collections: No collections created yet. Click the + button to create one.
-  create: Create
-  cancel: Cancel
-  close: Close
+  wallpaper_collection: Wallpaper Collection
+  wallpaper_settings: Wallpaper Settings
+  withOverlay: With Overlay
+  workspace_collections: Workspace Collections
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide

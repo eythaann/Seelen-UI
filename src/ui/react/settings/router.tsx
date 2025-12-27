@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router";
 
-import { AppLauncherSettings } from "./modules/AppLauncher/infra.tsx";
 import { AppsConfiguration } from "./modules/appsConfigurations/infra/infra.tsx";
 import { SettingsByMonitor } from "./modules/ByMonitor/infra/index.tsx";
 import { DeveloperTools } from "./modules/developer/infra.tsx";
@@ -32,7 +31,6 @@ export function Routing() {
           path={RoutePath.SettingsByMonitor}
           Component={SettingsByMonitor}
         />
-        <Route path={RoutePath.AppLauncher} Component={AppLauncherSettings} />
         <Route path={RoutePath.WallpaperManager} Component={WallSettings} />
         <Route path={RoutePath.Shortcuts} Component={Shortcuts} />
         <Route

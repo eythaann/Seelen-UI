@@ -7,7 +7,7 @@ use crate::resource::WidgetId;
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(tag = "name", rename_all = "snake_case")]
 pub enum SluHotkeyAction {
-    ToggleLauncher,
+    ToggleAppsMenu,
     ToggleWorkspacesView,
     // ==========================
     TaskNext {
@@ -210,7 +210,7 @@ impl SluShortcutsSettings {
         let wm = "@seelen/window-manager";
 
         vec![
-            SluHotkey::new(ToggleLauncher, ["Win", "S"]).attached_to("@seelen/launcher"),
+            SluHotkey::new(ToggleAppsMenu, ["Win"]).attached_to("@seelen/apps-menu"),
             // Task switching and viewer
             SluHotkey::new(
                 TaskNext {

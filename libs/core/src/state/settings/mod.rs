@@ -297,72 +297,6 @@ impl Default for WindowManagerSettings {
     }
 }
 
-// ================= Seelen Launcher ================
-
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
-pub enum SeelenLauncherMonitor {
-    Primary,
-    #[serde(alias = "Mouse-Over")]
-    MouseOver,
-}
-
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
-pub struct SeelenLauncherRunner {
-    pub id: String,
-    pub label: String,
-    pub program: String,
-    pub readonly: bool,
-}
-
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-pub struct LauncherHistory(HashMap<String, Vec<String>>);
-
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
-pub struct SeelenLauncherSettings {
-    pub enabled: bool,
-    pub monitor: SeelenLauncherMonitor,
-    pub runners: Vec<SeelenLauncherRunner>,
-}
-
-impl Default for SeelenLauncherSettings {
-    fn default() -> Self {
-        Self {
-            enabled: false,
-            monitor: SeelenLauncherMonitor::MouseOver,
-            runners: vec![
-                SeelenLauncherRunner {
-                    id: "RUN".to_owned(),
-                    label: "t:app_launcher.runners.explorer".to_owned(),
-                    program: "explorer.exe".to_owned(),
-                    readonly: true,
-                },
-                SeelenLauncherRunner {
-                    id: "CMD".to_owned(),
-                    label: "t:app_launcher.runners.cmd".to_owned(),
-                    program: "cmd.exe".to_owned(),
-                    readonly: true,
-                },
-            ],
-        }
-    }
-}
-
-impl SeelenLauncherSettings {
-    pub fn sanitize(&mut self) {
-        let mut dict = HashSet::new();
-        self.runners
-            .retain(|runner| !runner.program.is_empty() && dict.insert(runner.program.clone()));
-        for runner in &mut self.runners {
-            if runner.id.is_empty() {
-                runner.id = uuid::Uuid::new_v4().to_string();
-            }
-        }
-    }
-}
-
 // ================= Seelen Wall ================
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -448,10 +382,6 @@ pub struct Settings {
     #[ts(skip)]
     #[serde(skip_serializing)]
     wall: Option<SeelenWallSettings>,
-    /// @deprecated since v2.1.0, will be removed in v3.0.0
-    #[ts(skip)]
-    #[serde(skip_serializing)]
-    launcher: Option<SeelenLauncherSettings>,
     /// list of monitors and their configurations
     pub monitors_v3: HashMap<MonitorId, MonitorConfiguration>,
     /// app shortcuts settings
@@ -503,7 +433,6 @@ impl Default for Settings {
             seelenweg: None,
             window_manager: None,
             wall: None,
-            launcher: None,
             // ---
             performance_mode: PerformanceModeSettings::default(),
             shortcuts: SluShortcutsSettings::default(),
@@ -552,9 +481,6 @@ impl Settings {
         if let Some(wall) = self.wall.take() {
             dict.wall = wall;
         }
-        if let Some(launcher) = self.launcher.take() {
-            dict.launcher = launcher;
-        }
 
         // Migrate backgrounds_v2 to wallpaper collection
         if let Some(backgrounds) = self.by_widget.wall.backgrounds_v2.take() {
@@ -588,8 +514,6 @@ impl Settings {
     }
 
     pub fn sanitize(&mut self) -> Result<()> {
-        self.by_widget.launcher.sanitize();
-
         if self.language.is_none() {
             self.language = Some(Self::get_system_language());
         }

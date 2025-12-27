@@ -1,16 +1,6 @@
 action:
   confirm: Är du säker?
   confirm_body: Denna åtgärd kan inte ångras.
-app_launcher:
-  enable: Aktivera App Launcher
-  launch_on:
-    mouse_over: Musen över
-    primary: Primär
-  monitor: Övervaka att visa
-  runners:
-    cmd: Kommando
-    explorer: Sikt
-    label: Löpare
 apps_configurations:
   app:
     bindings: Bindning (Observera att båda alternativen krävs)
@@ -102,6 +92,7 @@ general:
     available: Tillgängliga ikonpaket
     selected: Aktiva ikonpaket
   language: Språk
+  monday: måndag
   performance_mode:
     on_battery: På batteri
     on_energy_saver: På energisparare
@@ -110,7 +101,10 @@ general:
       extreme: Extrem
       minimal: Minimal
     plugged: Ansluten eller laddning
+  saturday: lördag
+  start_of_week: Veckans början
   startup: Köras vid start?
+  sunday: söndag
   theme:
     available: Tillgängliga teman
     selected: Aktiva teman
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: Byt till tidigare arbetsyta
     switch_workspace: Byt till Workspace {{0}}
     toggle_float: Växla fönsterflödesläge
-    toggle_launcher: Växla launcher
     toggle_monocle: Växla arbetsyta Monocle -läge
   readonly_tooltip: Detta är en skrivskyddad genväg
   reset: Återställas till standardvärden
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: Tapeter
   blur: Blur
+  cancel: Avboka
+  close: Nära
+  collection_name: Samlingens namn
+  collections: Samlingar
   contrast: Kontrast
+  create: Skapa
+  create_collection: Skapa samling
+  default_collection: Standardsamling
+  delete_collection: Ta bort samling
+  edit_collection: Redigera samling
   enable: Aktivera tapetchef
   fit:
     contain: Innehåller
@@ -252,11 +254,14 @@ wall:
     fill: Fylla
   flipHorizontal: Vänd horisontellt
   flipVertical: Vänd vertikal
+  generating_thumbnails: Generera bakgrundsminiatyrer
   hours: timme
   interval: Ändra tapeter varje
   minutes: minuter
+  monitor_collection: Övervaka samling
   muted: Stäng av videoljud
   no_background: Tomt bildspel, med temas bakgrund istället.
+  no_collections: Inga samlingar har skapats ännu. Klicka på knappen + för att skapa en.
   objectFit: Bakgrund Passform
   objectPosition: Bakgrund Position
   overlayColor: Färg på överlägg
@@ -268,10 +273,15 @@ wall:
     left: Vänster
     right: Rätt
     top: Topp
+  processing_video: Bearbetar video
   random: Slumpmässig bildspel
   saturation: Mättnad
   seconds: sekunder
+  select_collection: Välj Samling
+  wallpaper_collection: Tapetsamling
+  wallpaper_settings: Bakgrundsinställningar
   withOverlay: Med överlägg
+  workspace_collections: Arbetsyta samlingar
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dröjsmål att gömma sig

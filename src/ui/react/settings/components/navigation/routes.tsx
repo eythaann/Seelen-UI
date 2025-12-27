@@ -7,7 +7,6 @@ export enum RoutePath {
   Resource = "/resources",
   FancyToolbar = "/widget/seelen/fancy-toolbar",
   WindowManager = "/widget/seelen/window-manager",
-  AppLauncher = "/widget/seelen/launcher",
   WallpaperManager = "/widget/seelen/wallpaper-manager",
   SeelenWeg = "/widget/seelen/weg",
   Shortcuts = "/shortcuts",

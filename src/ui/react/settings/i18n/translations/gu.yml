@@ -1,16 +1,6 @@
 action:
   confirm: તમને ખાતરી છે?
   confirm_body: આ ક્રિયા પૂર્વવત્ કરી શકાતી નથી.
-app_launcher:
-  enable: એપ્લિકેશન લ laun ંચરને સક્ષમ કરો
-  launch_on:
-    mouse_over: માઉસ ઉપર
-    primary: પ્રાથમિક
-  monitor: બતાવવા માટે નિરીક્ષણ કરો
-  runners:
-    cmd: આદેશ આપવો
-    explorer: દોડવું
-    label: દોડવીરો
 apps_configurations:
   app:
     bindings: બંધનકર્તા (નોંધો કે બંને વિકલ્પો જરૂરી છે)
@@ -102,6 +92,7 @@ general:
     available: ઉપલબ્ધ આઇકન પેક
     selected: સક્રિય આઇકન પેક્સ
   language: ભાષા
+  monday: સોમવાર
   performance_mode:
     on_battery: બેટરી પર
     on_energy_saver: Energy ર્જા બચતકાર પર
@@ -110,7 +101,10 @@ general:
       extreme: આત્યંતિક
       minimal: પ્રમાણસર
     plugged: પ્લગ અથવા ચાર્જિંગ
+  saturday: શનિવાર
+  start_of_week: સપ્તાહની શરૂઆત
   startup: સ્ટાર્ટઅપ પર ચલાવો?
+  sunday: રવિવાર
   theme:
     available: ઉપલબ્ધ થીમ્સ
     selected: સક્રિય થીમ્સ
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: પાછલા વર્કસ્પેસ પર સ્વિચ કરો
     switch_workspace: વર્કસ્પેસ પર સ્વિચ કરો {{0}}
     toggle_float: ટ g ગલ વિંડો ફ્લોટ મોડ
-    toggle_launcher: ટ og ગલ લ la ંચરે
     toggle_monocle: ટ g ગલ વર્કસ્પેસ મોનોક્લ મોડ
   readonly_tooltip: આ ફક્ત એક વાંચવા માટે શોર્ટકટ છે
   reset: ડિફોલ્ટ પર ફરીથી સેટ કરો
@@ -243,7 +236,16 @@ update:
 wall:
   backgrounds: વ wallpapers લપેપર્સ
   blur: અસ્પષ્ટતા
+  cancel: રદ કરો
+  close: બંધ કરો
+  collection_name: સંગ્રહનું નામ
+  collections: સંગ્રહો
   contrast: વિપરીત
+  create: બનાવો
+  create_collection: સંગ્રહ બનાવો
+  default_collection: ડિફૉલ્ટ કલેક્શન
+  delete_collection: સંગ્રહ કાઢી નાખો
+  edit_collection: સંગ્રહ સંપાદિત કરો
   enable: વ wallp લપેપર મેનેજરને સક્ષમ કરો
   fit:
     contain: સમાવવું
@@ -251,11 +253,14 @@ wall:
     fill: ભરવું
   flipHorizontal: આડું
   flipVertical: Verીટી પચે
+  generating_thumbnails: વૉલપેપર થંબનેલ્સ જનરેટ કરી રહ્યાં છીએ
   hours: સમય
   interval: દરેક વ wallp લપેપર બદલો
   minutes: પ્રકાર
+  monitor_collection: મોનિટર કલેક્શન
   muted: વિડિઓ ઑડિઓ મ્યૂટ કરો
   no_background: તેના બદલે થીમની પૃષ્ઠભૂમિનો ઉપયોગ કરીને ખાલી સ્લાઇડશો.
+  no_collections: હજી સુધી કોઈ સંગ્રહ બનાવ્યો નથી. એક બનાવવા માટે + બટન પર ક્લિક કરો.
   objectFit: પૃષ્ઠભૂમિ
   objectPosition: પૃષ્ઠભૂમિ
   overlayColor: Overંચો રંગ
@@ -267,10 +272,15 @@ wall:
     left: ડાબી બાજુ
     right: અધિકાર
     top: ટોચ
+  processing_video: વિડિઓ પર પ્રક્રિયા કરી રહ્યું છે
   random: સ્લાઇડશોને રેન્ડમાઇઝ કરો
   saturation: સચોટતા
   seconds: સેકન્ડ
+  select_collection: સંગ્રહ પસંદ કરો
+  wallpaper_collection: વૉલપેપર કલેક્શન
+  wallpaper_settings: વૉલપેપર સેટિંગ્સ
   withOverlay: ઓવરલે સાથે
+  workspace_collections: વર્કસ્પેસ સંગ્રહો
 weg:
   auto_hide: સ્વતઃ છુપાવો
   delay_to_hide: છુપાવવામાં વિલંબ

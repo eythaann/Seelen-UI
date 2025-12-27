@@ -175,8 +175,6 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> 
         CycleWallpaperPrev => cmd!["wallpaper", "prev"],
         // Weg
         StartWegApp { index } => cmd!["weg", "foreground-or-run-app", index],
-        // App Launcher / Start Menu
-        ToggleLauncher => cmd!["launcher", "toggle"],
         // Window Manager
         IncreaseWidth => cmd!["wm", "width", "increase"],
         DecreaseWidth => cmd!["wm", "width", "decrease"],

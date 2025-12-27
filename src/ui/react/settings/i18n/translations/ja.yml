@@ -1,16 +1,6 @@
 action:
   confirm: 本気ですか？
   confirm_body: このアクションを元に戻すことはできません。
-app_launcher:
-  enable: アプリランチャーを有効にする
-  launch_on:
-    mouse_over: マウスのあるモニター
-    primary: プライマリモニター
-  monitor: 表示するモニター
-  runners:
-    cmd: コマンド プロンプト
-    explorer: エクスプローラー
-    label: アプリ
 apps_configurations:
   app:
     bindings: バインディング（両方のオプションが必要です）
@@ -98,6 +88,7 @@ general:
     available: 利用可能なアイコン パック
     selected: アクティブなアイコン パック
   language: 言語
+  monday: 月曜日
   performance_mode:
     on_battery: バッテリー上
     on_energy_saver: エネルギーセーバーについて
@@ -106,7 +97,10 @@ general:
       extreme: 過激
       minimal: 最小限
     plugged: プラグまたは充電
+  saturday: 土曜日
+  start_of_week: 週の始まり
   startup: 起動時に実行する
+  sunday: 日曜日
   theme:
     available: 利用可能なテーマ
     selected: アクティブなテーマ
@@ -199,7 +193,6 @@ shortcuts:
     switch_to_previous_workspace: 前のワークスペースに切り替えます
     switch_workspace: ワークスペースに切り替えます{{0}}
     toggle_float: ウィンドウフロートモードを切り替えます
-    toggle_launcher: トグルランチャー
     toggle_monocle: ワークスペースモノクルモードのトグル
   readonly_tooltip: これは読み取り専用のショートカットです
   reset: デフォルトにリセットします
@@ -234,7 +227,16 @@ update:
 wall:
   backgrounds: 壁紙
   blur: ブラー
+  cancel: キャンセル
+  close: 近い
+  collection_name: コレクション名
+  collections: コレクション
   contrast: コントラスト
+  create: 作成する
+  create_collection: コレクションの作成
+  default_collection: デフォルトのコレクション
+  delete_collection: コレクションの削除
+  edit_collection: コレクションの編集
   enable: 壁紙マネージャーを有効にします
   fit:
     contain: コンテイン
@@ -242,11 +244,14 @@ wall:
     fill: 充填
   flipHorizontal: 水平フリップ
   flipVertical: 垂直フリップ
+  generating_thumbnails: 壁紙のサムネイルの生成
   hours: 時間
   interval: 壁紙を毎回変更します
   minutes: 分
+  monitor_collection: モニター収集
   muted: ビデオの音声をミュートする
   no_background: 壁紙に使用するファイルを選択
+  no_collections: まだコレクションは作成されていません。 + ボタンをクリックして作成します。
   objectFit: バックグラウンド・フィット
   objectPosition: バックグラウンド
   overlayColor: オーバーレイカラー
@@ -258,10 +263,15 @@ wall:
     left: 左
     right: 右
     top: トップ
+  processing_video: ビデオの処理
   random: スライドショーをランダム化します
   saturation: 飽和
   seconds: 秒
+  select_collection: コレクションの選択
+  wallpaper_collection: 壁紙コレクション
+  wallpaper_settings: 壁紙設定
   withOverlay: オーバーレイ付き
+  workspace_collections: ワークスペースコレクション
 weg:
   auto_hide: 自動的に隠す
   delay_to_hide: 隠れるまでの遅延

@@ -1,16 +1,6 @@
 action:
   confirm: Bạn có chắc không?
   confirm_body: Hành động này không thể được hoàn tác.
-app_launcher:
-  enable: Bật trình khởi chạy ứng dụng
-  launch_on:
-    mouse_over: Di chuột qua
-    primary: Sơ đẳng
-  monitor: Giám sát để hiển thị
-  runners:
-    cmd: Yêu cầu
-    explorer: Chạy
-    label: Người chạy bộ
 apps_configurations:
   app:
     bindings: Binding (Lưu ý cả hai tùy chọn đều được yêu cầu)
@@ -103,6 +93,7 @@ general:
     available: Gói biểu tượng có sẵn
     selected: Gói biểu tượng hoạt động
   language: Ngôn ngữ
+  monday: Thứ hai
   performance_mode:
     on_battery: Trên pin
     on_energy_saver: Trên tiết kiệm năng lượng
@@ -111,7 +102,10 @@ general:
       extreme: Vô cùng
       minimal: Tối thiểu
     plugged: Cắm hoặc sạc
+  saturday: Thứ bảy
+  start_of_week: Đầu tuần
   startup: Chạy khi khởi động?
+  sunday: Chủ nhật
   theme:
     available: Chủ đề có sẵn
     selected: Chủ đề đang hoạt động
@@ -208,7 +202,6 @@ shortcuts:
     switch_to_previous_workspace: Chuyển sang không gian làm việc trước đó
     switch_workspace: Chuyển sang không gian làm việc {{0}}
     toggle_float: Chuyển đổi chế độ nổi của cửa sổ
-    toggle_launcher: Chuyển đổi trình khởi chạy
     toggle_monocle: Chuyển đổi chế độ Monocle không gian làm việc
   readonly_tooltip: Đây là một lối tắt chỉ đọc
   reset: Đặt lại về mặc định
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: Hình nền
   blur: Mờ
+  cancel: Hủy bỏ
+  close: Đóng
+  collection_name: Tên bộ sưu tập
+  collections: Bộ sưu tập
   contrast: Sự tương phản
+  create: Tạo nên
+  create_collection: Tạo bộ sưu tập
+  default_collection: Bộ sưu tập mặc định
+  delete_collection: Xóa bộ sưu tập
+  edit_collection: Chỉnh sửa bộ sưu tập
   enable: Bật trình quản lý hình nền
   fit:
     contain: Bao gồm
@@ -253,11 +255,14 @@ wall:
     fill: Đổ đầy
   flipHorizontal: Lật ngang
   flipVertical: Lật dọc
+  generating_thumbnails: Tạo hình thu nhỏ hình nền
   hours: giờ
   interval: Thay đổi hình nền mỗi
   minutes: phút
+  monitor_collection: Bộ sưu tập giám sát
   muted: Tắt âm thanh video
   no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
+  no_collections: Chưa có bộ sưu tập nào được tạo. Nhấp vào nút + để tạo một cái.
   objectFit: Phù hợp với nền
   objectPosition: Vị trí nền
   overlayColor: Màu lớp phủ
@@ -269,10 +274,15 @@ wall:
     left: Bên trái
     right: Phải
     top: Đứng đầu
+  processing_video: Đang xử lý video
   random: Slideshow ngẫu nhiên
   saturation: Bão hòa
   seconds: giây
+  select_collection: Chọn Bộ sưu tập
+  wallpaper_collection: Bộ sưu tập hình nền
+  wallpaper_settings: Cài đặt hình nền
   withOverlay: Với lớp phủ
+  workspace_collections: Bộ sưu tập không gian làm việc
 weg:
   auto_hide: Tự động ẩn
   delay_to_hide: Trì hoãn việc ẩn giấu

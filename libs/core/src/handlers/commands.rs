@@ -157,7 +157,6 @@ slu_commands_declaration! {
     StateGetSettings = state_get_settings(path: Option<PathBuf>) -> Settings,
     StateWriteSettings = state_write_settings(settings: Settings),
     StateGetSpecificAppsConfigurations = state_get_specific_apps_configurations() -> Vec<AppConfig> ,
-    StateGetHistory = state_get_history() -> LauncherHistory,
     StateGetPlugins = state_get_plugins() -> Vec<Plugin>,
     StateGetWidgets = state_get_widgets() -> Vec<Widget>,
     StateGetIconPacks = state_get_icon_packs() -> Vec<IconPack>,
@@ -220,9 +219,6 @@ slu_commands_declaration! {
     WmGetRenderTree = wm_get_render_tree() -> WmRenderTree,
     SetAppWindowsPositions = set_app_windows_positions(positions: HashMap<isize, Rect>),
     RequestFocus = request_focus(hwnd: isize),
-
-    // App Launcher
-    LauncherGetApps = launcher_get_apps() -> Vec<StartMenuItem>,
 
     // Slu Popups
     CreatePopup = create_popup(config: SluPopupConfig) -> uuid::Uuid,

@@ -1,16 +1,6 @@
 action:
   confirm: Er du sikker?
   confirm_body: Denne handling kan ikke fortrydes.
-app_launcher:
-  enable: Aktivér app Launcher
-  launch_on:
-    mouse_over: Hold musen over
-    primary: Primær
-  monitor: Overvågning at vise
-  runners:
-    cmd: Kommando
-    explorer: Løbe
-    label: Løbere
 apps_configurations:
   app:
     bindings: Binding (note begge muligheder er påkrævet)
@@ -102,6 +92,7 @@ general:
     available: Tilgængelige ikonpakker
     selected: Aktive ikonpakker
   language: Sprog
+  monday: mandag
   performance_mode:
     on_battery: På batteri
     on_energy_saver: På energibesparende
@@ -110,7 +101,10 @@ general:
       extreme: Ekstrem
       minimal: Minimal
     plugged: Tilsluttet eller opladning
+  saturday: lørdag
+  start_of_week: Start på ugen
   startup: Kør ved opstart?
+  sunday: søndag
   theme:
     available: Tilgængelige temaer
     selected: Aktive temaer
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: Skift til forrige arbejdsområde
     switch_workspace: Skift til arbejdsområde {{0}}
     toggle_float: Skift mellem vinduets flydende tilstand
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Skift arbejdsområdets Monocle-tilstand
   readonly_tooltip: Dette er en skrivebeskyttet genvej
   reset: Nulstil til standardindstillinger
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: Baggrunde
   blur: Sløring
+  cancel: Ophæve
+  close: Tæt
+  collection_name: Samlingens navn
+  collections: Samlinger
   contrast: Kontrast
+  create: Skabe
+  create_collection: Opret samling
+  default_collection: Standard samling
+  delete_collection: Slet samling
+  edit_collection: Rediger samling
   enable: Aktivér tapet manager
   fit:
     contain: Indeholder
@@ -252,11 +254,14 @@ wall:
     fill: Fyld
   flipHorizontal: Vend vandret
   flipVertical: Vend lodret
+  generating_thumbnails: Generering af tapetminiaturer
   hours: timer
   interval: Skift tapet hver
   minutes: minutter
+  monitor_collection: Monitor Indsamling
   muted: Slå videolyd fra
   no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
+  no_collections: Ingen samlinger oprettet endnu. Klik på knappen + for at oprette en.
   objectFit: Baggrundstilpasning
   objectPosition: Baggrundsposition
   overlayColor: Overlay-farve
@@ -268,10 +273,15 @@ wall:
     left: Til venstre
     right: Til højre
     top: Til toppen
+  processing_video: Behandler video
   random: Randomiser slideshow
   saturation: Mætning
   seconds: sekunder
+  select_collection: Vælg Samling
+  wallpaper_collection: Tapet samling
+  wallpaper_settings: Baggrundsindstillinger
   withOverlay: Med overlay
+  workspace_collections: Arbejdsrumssamlinger
 weg:
   auto_hide: Auto skjul
   delay_to_hide: Forsink med at skjule

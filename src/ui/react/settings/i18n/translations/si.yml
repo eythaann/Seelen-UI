@@ -1,16 +1,6 @@
 action:
   confirm: ඔයාට විශ්වාස ද?
   confirm_body: මෙම ක්රියාව අහෝසි කළ නොහැක.
-app_launcher:
-  enable: යෙදුම් දියත් කරන්නා සක්රීය කරන්න
-  launch_on:
-    mouse_over: මූසිකය ඉවරයි
-    primary: ප්රාථමික
-  monitor: පෙන්වීමට අධීක්ෂණය
-  runners:
-    cmd: විධානය
-    explorer: දුවන්න
-    label: ධාවකයන්
 apps_configurations:
   app:
     bindings: බැඳීම (විකල්ප දෙකම අවශ්‍ය බව සලකන්න)
@@ -103,6 +93,7 @@ general:
     available: පවතින අයිකන ඇසුරුම්
     selected: ක්‍රියාකාරී අයිකන ඇසුරුම්
   language: භාෂාව
+  monday: සඳුදා
   performance_mode:
     on_battery: බැටරි මත
     on_energy_saver: බලශක්ති ඉතිරිය
@@ -111,7 +102,10 @@ general:
       extreme: අන්ත
       minimal: අවම
     plugged: ප්ලග් හෝ ආරෝපණය
+  saturday: සෙනසුරාදා
+  start_of_week: සතියේ ආරම්භය
   startup: ආරම්භයේදී ධාවනය කරන්නද?
+  sunday: ඉරිදා
   theme:
     available: පවතින තේමා
     selected: ක්රියාකාරී තේමාවන්
@@ -208,7 +202,6 @@ shortcuts:
     switch_to_previous_workspace: පෙර වැඩබිම වෙත මාරු වන්න
     switch_workspace: වැඩබිම් වෙත මාරු වන්න {{0}}
     toggle_float: කවුළුව පාවෙන ප්රකාරය ටොගල කරන්න
-    toggle_launcher: ටොගල් දියත් කරන්නා
     toggle_monocle: වැඩබිම මෝනොකැක් මාදිලිය ටොගල කරන්න
   readonly_tooltip: මෙය කියවීමට පමණක් කෙටිමඟකි
   reset: පෙරනිමි වෙත නැවත සකසන්න
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: බිතුපත්
   blur: බ්ලර්
+  cancel: අවලංගු කරන්න
+  close: වසන්න
+  collection_name: එකතුවේ නම
+  collections: එකතු කිරීම්
   contrast: වෙනස
+  create: නිර්මාණය කරන්න
+  create_collection: එකතුවක් සාදන්න
+  default_collection: පෙරනිමි එකතුව
+  delete_collection: එකතුව මකන්න
+  edit_collection: එකතුව සංස්කරණය කරන්න
   enable: බිතුපත් කළමනාකරු සක්රීය කරන්න
   fit:
     contain: අඩංගු
@@ -253,11 +255,14 @@ wall:
     fill: පුරවන්න
   flipHorizontal: ෆ්ලිප් හොරයිසොන්ටමල්
   flipVertical: සිරස් රෝග
+  generating_thumbnails: Wallpaper Thumbnails උත්පාදනය කිරීම
   hours: පැය
   interval: සෑම කෙනෙකුම බිතුපත වෙනස් කරන්න
   minutes: මිනිත්තු
+  monitor_collection: නිරීක්ෂණ එකතුව
   muted: වීඩියෝ ශ්‍රව්‍ය නිශ්ශබ්ද කරන්න
   no_background: හිස් විනිවිදක දර්ශනය, ඒ වෙනුවට තේමාවේ පසුබිම භාවිතා කිරීම.
+  no_collections: තවම එකතුවක් සාදා නැත. එකක් සෑදීමට + බොත්තම ක්ලික් කරන්න.
   objectFit: පසුබිම් යෝග්යතාවය
   objectPosition: පසුබිම් පිහිටීම
   overlayColor: ආවරණයේ වර්ණය
@@ -269,10 +274,15 @@ wall:
     left: වමට
     right: අයිතිය
     top: ඉහළට
+  processing_video: වීඩියෝ සැකසීම
   random: සසම්භාවී විනිවිදක දර්ශනය
   saturation: සන්තෘප්තිය
   seconds: තත්පර
+  select_collection: එකතුව තෝරන්න
+  wallpaper_collection: බිතුපත් එකතුව
+  wallpaper_settings: බිතුපත් සැකසීම්
   withOverlay: ආවරණය සමඟ
+  workspace_collections: වැඩ ඉඩ එකතු කිරීම්
 weg:
   auto_hide: ස්වයංක්‍රීය සඟවන්න
   delay_to_hide: සැඟවීමට ප්රමාද

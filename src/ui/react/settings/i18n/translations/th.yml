@@ -1,16 +1,6 @@
 action:
   confirm: คุณแน่ใจหรือไม่?
   confirm_body: การกระทำนี้ไม่สามารถยกเลิกได้
-app_launcher:
-  enable: เปิดใช้งานแอป Launcher
-  launch_on:
-    mouse_over: เลื่อนเมาส์ไป
-    primary: หลัก
-  monitor: ตรวจสอบเพื่อแสดง
-  runners:
-    cmd: สั่งการ
-    explorer: วิ่ง
-    label: นักวิ่ง
 apps_configurations:
   app:
     bindings: การเชื่อม (หมายเหตุทั้งสองตัวเลือกเป็นสิ่งจำเป็น)
@@ -99,6 +89,7 @@ general:
     available: ชุดไอคอนที่มีอยู่
     selected: ชุดไอคอนที่ใช้งานอยู่
   language: ภาษา
+  monday: วันจันทร์
   performance_mode:
     on_battery: บนแบตเตอรี่
     on_energy_saver: ประหยัดพลังงาน
@@ -107,7 +98,10 @@ general:
       extreme: สุดขีด
       minimal: น้อยที่สุด
     plugged: เสียบหรือชาร์จ
+  saturday: วันเสาร์
+  start_of_week: เริ่มต้นสัปดาห์
   startup: วิ่งเมื่อเริ่มต้น?
+  sunday: วันอาทิตย์
   theme:
     available: ธีมที่มีจำหน่าย
     selected: ธีมที่ใช้งานอยู่
@@ -200,7 +194,6 @@ shortcuts:
     switch_to_previous_workspace: เปลี่ยนไปใช้พื้นที่ทำงานก่อนหน้า
     switch_workspace: สลับไปที่ WorksPace {{0}}
     toggle_float: สลับโหมดลอยหน้าต่าง
-    toggle_launcher: Toggle Launcher
     toggle_monocle: สลับโหมดเวิร์กสเปซ Monocle
   readonly_tooltip: นี่คือทางลัดแบบอ่านอย่างเดียว
   reset: รีเซ็ตเป็นค่าเริ่มต้น
@@ -236,7 +229,16 @@ update:
 wall:
   backgrounds: วอลเปเปอร์
   blur: เบลอ
+  cancel: ยกเลิก
+  close: ปิด
+  collection_name: ชื่อคอลเลกชัน
+  collections: คอลเลกชัน
   contrast: ตัดกัน
+  create: สร้าง
+  create_collection: สร้างคอลเลกชัน
+  default_collection: คอลเลกชันเริ่มต้น
+  delete_collection: ลบคอลเลกชั่น
+  edit_collection: แก้ไขคอลเลกชัน
   enable: เปิดใช้งานผู้จัดการวอลล์เปเปอร์
   fit:
     contain: บรรจุ
@@ -244,11 +246,14 @@ wall:
     fill: เติม
   flipHorizontal: พลิกแนวนอน
   flipVertical: พลิกแนวตั้ง
+  generating_thumbnails: กำลังสร้างรูปขนาดย่อของวอลเปเปอร์
   hours: ชั่วโมง
   interval: เปลี่ยนวอลล์เปเปอร์ทุก ๆ
   minutes: นาที
+  monitor_collection: ตรวจสอบคอลเลกชัน
   muted: ปิดเสียงวิดีโอ
   no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
+  no_collections: ยังไม่มีการสร้างคอลเลกชัน คลิกปุ่ม + เพื่อสร้าง
   objectFit: พื้นหลังพอดี
   objectPosition: ตำแหน่งพื้นหลัง
   overlayColor: สีซ้อนทับ
@@ -260,10 +265,15 @@ wall:
     left: ซ้าย
     right: ขวา
     top: สูงสุด
+  processing_video: กำลังประมวลผลวิดีโอ
   random: สุ่มสไลด์โชว์
   saturation: ความอิ่มตัว
   seconds: ไม่กี่วินาที
+  select_collection: เลือกคอลเลกชัน
+  wallpaper_collection: คอลเลกชันวอลล์เปเปอร์
+  wallpaper_settings: การตั้งค่าวอลเปเปอร์
   withOverlay: ด้วยการซ้อนทับ
+  workspace_collections: คอลเลกชันพื้นที่ทำงาน
 weg:
   auto_hide: ซ่อนอัตโนมัติ
   delay_to_hide: ล่าช้าในการซ่อน

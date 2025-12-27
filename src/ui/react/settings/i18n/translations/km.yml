@@ -1,16 +1,6 @@
 action:
   confirm: តើអ្នកប្រាកដទេ?
   confirm_body: សកម្មភាពនេះមិនអាចធ្វើវិញបានទេ។
-app_launcher:
-  enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
-  launch_on:
-    mouse_over: កណ្ដុរលើ
-    primary: បឋមសិក្សា
-  monitor: ម៉ូនីទ័របង្ហាញ
-  runners:
-    cmd: ការបង្គាប់
-    explorer: ការរត់
-    label: រត់តមនាង
 apps_configurations:
   app:
     bindings: ការចង (ចំណាំជម្រើសទាំងពីរត្រូវបានទាមទារ)
@@ -102,6 +92,7 @@ general:
     available: កញ្ចប់រូបតំណាងដែលមាន
     selected: កញ្ចប់រូបតំណាងសកម្ម
   language: ភាសា
+  monday: ថ្ងៃច័ន្ទ
   performance_mode:
     on_battery: នៅលើថ្ម
     on_energy_saver: នៅលើអ្នកសន្សំថាមពល
@@ -110,7 +101,10 @@ general:
       extreme: ខ្លាមងបមផុត
       minimal: ដេលអឹមតីម
     plugged: ដោតឬសាក
+  saturday: ថ្ងៃសៅរ៍
+  start_of_week: ការចាប់ផ្តើមនៃសប្តាហ៍
   startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
+  sunday: ថ្ងៃអាទិត្យ
   theme:
     available: ស្បែកដែលអាចប្រើបាន
     selected: ស្បែកសកម្ម
@@ -206,7 +200,6 @@ shortcuts:
     switch_to_previous_workspace: ប្តូរទៅកន្លែងធ្វើការមុន
     switch_workspace: ប្តូរទៅកន្លែងធ្វើការ {{0}}
     toggle_float: បិទបើករបៀបអណ្តែតបង្អួច
-    toggle_launcher: បិទបើកដំណើរការ
     toggle_monocle: បិទបើករបៀបម៉ូនីកឃែរ
   readonly_tooltip: នេះគឺជាផ្លូវកាត់ដែលបានតែអាន
   reset: កំណត់ឡើងវិញនូវលំនាំដើម
@@ -243,7 +236,16 @@ update:
 wall:
   backgrounds: ផាបផេច
   blur: ព្រមម៉ុន
+  cancel: បោះបង់
+  close: បិទ
+  collection_name: ឈ្មោះបណ្តុំ
+  collections: បណ្តុំ
   contrast: ធេវីអាេយមានផាបផ្ទុយក្នា
+  create: បង្កើត
+  create_collection: បង្កើតបណ្តុំ
+  default_collection: ការប្រមូលលំនាំដើម
+  delete_collection: លុបបណ្តុំ
+  edit_collection: កែសម្រួលបណ្តុំ
   enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
   fit:
     contain: មាន
@@ -251,11 +253,14 @@ wall:
     fill: ញាត់
   flipHorizontal: ត្រឡប់ផ្ដេក
   flipVertical: ត្រឡប់បញ្ឈរ
+  generating_thumbnails: ការបង្កើតរូបភាពតូចៗនៃផ្ទាំងរូបភាព
   hours: ម៉ោង
   interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរៀងរាល់
   minutes: បីតោ
+  monitor_collection: ការប្រមូលម៉ូនីទ័រ
   muted: អូឌីយ៉ូវីដេអូបិទ
   no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
+  no_collections: មិនទាន់បានបង្កើតបណ្តុំនៅឡើយទេ។ ចុចប៊ូតុង + ដើម្បីបង្កើតមួយ។
   objectFit: សមផ្ទៃខាងក្រោយសមស្រប
   objectPosition: ទីតាំងផ្ទៃខាងក្រោយ
   overlayColor: ពណ៌គម្រប
@@ -267,10 +272,15 @@ wall:
     left: ឆេវង
     right: ខាងស្ដាម
     top: ឯផ្ទលើ
+  processing_video: ដំណើរការវីដេអូ
   random: ការបញ្ចាំងស្លាយចៃដន្យដោយចៃដន្យ
   saturation: ផាបថបតរ
   seconds: វិនាទី
+  select_collection: ជ្រើសរើសបណ្តុំ
+  wallpaper_collection: ការប្រមូលផ្ទាំងរូបភាព
+  wallpaper_settings: ការកំណត់ផ្ទាំងរូបភាព
   withOverlay: ជាមួយនឹងការត្រួតលើគ្នា
+  workspace_collections: ការប្រមូលកន្លែងធ្វើការ
 weg:
   auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
   delay_to_hide: ពន្យារពេលដើម្បីលាក់

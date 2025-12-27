@@ -1,16 +1,6 @@
 action:
   confirm: Bist du sicher?
   confirm_body: Diese Aktion kann nicht rückgängig gemacht werden.
-app_launcher:
-  enable: App Launcher aktivieren
-  launch_on:
-    mouse_over: Maus drüber
-    primary: Primär
-  monitor: Monitor zum Anzeigen
-  runners:
-    cmd: Befehl
-    explorer: Run
-    label: Runner
 apps_configurations:
   app:
     bindings: Bindung (beide Optionen sind erforderlich)
@@ -104,6 +94,7 @@ general:
     available: Verfügbare Icon-Pakete
     selected: Aktive Icon-Pakete
   language: Sprache
+  monday: Montag
   performance_mode:
     on_battery: Batterie
     on_energy_saver: Auf Energiesparer
@@ -112,7 +103,10 @@ general:
       extreme: Extrem
       minimal: Minimal
     plugged: Verstopft oder aufgeladen
+  saturday: Samstag
+  start_of_week: Wochenbeginn
   startup: Beim Hochfahren ausführen?
+  sunday: Sonntag
   theme:
     available: Verfügbare Themen
     selected: Aktive Themen
@@ -211,7 +205,6 @@ shortcuts:
     switch_to_previous_workspace: Wechseln Sie zum vorherigen Arbeitsbereich
     switch_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
     toggle_float: Wechselfensterfloatmodus umschalten
-    toggle_launcher: Launcher umschalten
     toggle_monocle: Umschalten des Arbeitsbereichs Monocle -Modus
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
   reset: Auf Standards zurücksetzen
@@ -248,7 +241,16 @@ update:
 wall:
   backgrounds: Hintergrundbilder
   blur: Unschärfe
+  cancel: Stornieren
+  close: Schließen
+  collection_name: Sammlungsname
+  collections: Sammlungen
   contrast: Kontrast
+  create: Erstellen
+  create_collection: Sammlung erstellen
+  default_collection: Standardsammlung
+  delete_collection: Sammlung löschen
+  edit_collection: Sammlung bearbeiten
   enable: Tapetenmanager aktivieren
   fit:
     contain: Enthält
@@ -256,11 +258,16 @@ wall:
     fill: Füllen Sie
   flipHorizontal: Horizontal spiegeln
   flipVertical: Vertikal drehen
+  generating_thumbnails: Generieren von Hintergrundbild-Miniaturansichten
   hours: Std.
   interval: Wechseln Sie die Hintergrundbild
   minutes: Minuten
+  monitor_collection: Sammlung überwachen
   muted: Video-Audio stumm schalten
   no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
+  no_collections: >-
+    Es wurden noch keine Sammlungen erstellt. Klicken Sie auf die Schaltfläche
+    „+“, um eins zu erstellen.
   objectFit: Hintergrund Passform
   objectPosition: Hintergrund Position
   overlayColor: Überlagerungsfarbe
@@ -272,10 +279,15 @@ wall:
     left: Links
     right: Rechts
     top: Top
+  processing_video: Video verarbeiten
   random: Die Diashow randomisieren
   saturation: Sättigung
   seconds: Sekunden
+  select_collection: Wählen Sie Sammlung
+  wallpaper_collection: Tapetensammlung
+  wallpaper_settings: Hintergrundeinstellungen
   withOverlay: Mit Overlay
+  workspace_collections: Arbeitsbereichssammlungen
 weg:
   auto_hide: Automatisch ausblenden
   delay_to_hide: Verzögerung zum Verstecken

@@ -133,7 +133,6 @@ impl<'de> Deserialize<'de> for ResourceId {
                     "toolbar" => WidgetId::known_toolbar().0,
                     "weg" => WidgetId::known_weg().0,
                     "wm" => WidgetId::known_wm().0,
-                    "launcher" => WidgetId::known_launcher().0,
                     "wall" => WidgetId::known_wall().0,
                     "settings" => WidgetId::known_settings().0,
                     "popup" => WidgetId::known_popup().0,
@@ -177,9 +176,6 @@ impl WidgetId {
     }
     pub fn known_wm() -> Self {
         "@seelen/window-manager".into()
-    }
-    pub fn known_launcher() -> Self {
-        "@seelen/launcher".into()
     }
     pub fn known_wall() -> Self {
         "@seelen/wallpaper-manager".into()

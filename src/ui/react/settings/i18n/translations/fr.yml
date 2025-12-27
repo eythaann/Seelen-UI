@@ -1,16 +1,6 @@
 action:
   confirm: Es-tu sûr?
   confirm_body: Cette action ne peut pas être annulée.
-app_launcher:
-  enable: Activer le lanceur d'applications
-  launch_on:
-    mouse_over: Passez la souris
-    primary: Primaire
-  monitor: Moniteur à afficher
-  runners:
-    cmd: Commande
-    explorer: Explorateur
-    label: Lanceurs
 apps_configurations:
   app:
     bindings: Raccourcis (notez que les deux options sont nécessaires)
@@ -104,6 +94,7 @@ general:
     available: Packs d'icônes disponibles
     selected: Packs d'icônes actifs
   language: Langue
+  monday: Lundi
   performance_mode:
     on_battery: Sur la batterie
     on_energy_saver: Sur l'énergie
@@ -112,7 +103,10 @@ general:
       extreme: Extrême
       minimal: Minimal
     plugged: Bouchée ou charge
+  saturday: Samedi
+  start_of_week: Début de semaine
   startup: Lancer au démarrage ?
+  sunday: Dimanche
   theme:
     available: Thèmes disponibles
     selected: Thèmes actifs
@@ -211,7 +205,6 @@ shortcuts:
     switch_to_previous_workspace: Passez à l'espace de travail précédent
     switch_workspace: Passez à Workspace {{0}}
     toggle_float: Mode de flotteur de fenêtre à bascule
-    toggle_launcher: Lanceur de basculement
     toggle_monocle: Mode monocle d'espace de travail à bascule
   readonly_tooltip: Ceci est un raccourci en lecture seule
   reset: Réinitialiser les valeurs par défaut
@@ -248,7 +241,16 @@ update:
 wall:
   backgrounds: Fonds d'écran
   blur: Flou
+  cancel: Annuler
+  close: Fermer
+  collection_name: Nom de la collection
+  collections: Collections
   contrast: Contraste
+  create: Créer
+  create_collection: Créer une collection
+  default_collection: Collection par défaut
+  delete_collection: Supprimer la collection
+  edit_collection: Modifier la collection
   enable: Activer le gestionnaire de fonds d'écran
   fit:
     contain: Contenir
@@ -256,11 +258,16 @@ wall:
     fill: Remplir
   flipHorizontal: Retournement horizontal
   flipVertical: Flip Vertical
+  generating_thumbnails: Générer des vignettes de fond d'écran
   hours: heures
   interval: Changer de fond d'écran toutes les
   minutes: minutes
+  monitor_collection: Collection de moniteurs
   muted: Couper le son de la vidéo
   no_background: Liste vide, le fond d'écran du thème sera utilisé.
+  no_collections: >-
+    Aucune collection créée pour l'instant. Cliquez sur le bouton + pour en
+    créer un.
   objectFit: Conforme à l'arrière-plan
   objectPosition: Position d'arrière-plan
   overlayColor: Couleur de la superposition
@@ -272,10 +279,15 @@ wall:
     left: Gauche
     right: Droit
     top: Haut de page
+  processing_video: Traitement vidéo
   random: Diaporama aléatoire
   saturation: Saturation
   seconds: secondes
+  select_collection: Sélectionnez une collection
+  wallpaper_collection: Collection de papiers peints
+  wallpaper_settings: Paramètres du papier peint
   withOverlay: Avec recouvrement
+  workspace_collections: Collections d'espaces de travail
 weg:
   auto_hide: Masquage automatique
   delay_to_hide: Délai avant masquage

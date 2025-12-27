@@ -1,16 +1,6 @@
 action:
   confirm: Та итгэлтэй байна уу?
   confirm_body: Энэ үйлдлийг буцаах боломжгүй.
-app_launcher:
-  enable: App Leader-ийг идэвхжүүлэх
-  launch_on:
-    mouse_over: Хулганы дээгүүр
-    primary: Үндсэн
-  monitor: Бие шоу хийх террут
-  runners:
-    cmd: Тушаах
-    explorer: Урсгал
-    label: Төгс эелдэг
 apps_configurations:
   app:
     bindings: Батлах (Анхааруулга хоёулаа сонголтыг оруулах шаардлагатай)
@@ -103,6 +93,7 @@ general:
     available: Боломжтой Icon багцууд
     selected: Идэвхтэй дүрсний багцууд
   language: Хэл
+  monday: Даваа гараг
   performance_mode:
     on_battery: Зайтай
     on_energy_saver: Эрчим хүч хэмнэгч дээр
@@ -111,7 +102,10 @@ general:
       extreme: Түйлын
       minimal: Бага
     plugged: Залгасан эсвэл цэнэглэж байна
+  saturday: Бямба гариг
+  start_of_week: Долоо хоногийн эхлэл
   startup: Эхлэх үед гүйх үү?
+  sunday: Ням гараг
   theme:
     available: Боломжтой загварууд
     selected: Идэвхтэй сэдэв
@@ -208,7 +202,6 @@ shortcuts:
     switch_to_previous_workspace: Өмнөх ажлын талбар руу шилжих
     switch_workspace: Ажлын талбар руу шилжих {{0}}
     toggle_float: Windows Hoad Mode-ийг сэлгэх
-    toggle_launcher: Logge Launcher
     toggle_monocle: Ажлын талбар монокле горимыг сэлгэх
   readonly_tooltip: Энэ бол зөвхөн унших товчлол юм
   reset: Үндсэндээ тохируулах
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: Ханын цаас
   blur: Тайлбарал
+  cancel: Цуцлах
+  close: Хаах
+  collection_name: Цуглуулгын нэр
+  collections: Цуглуулга
   contrast: Эрс ялгаа
+  create: Үүсгэх
+  create_collection: Цуглуулга үүсгэх
+  default_collection: Өгөгдмөл цуглуулга
+  delete_collection: Цуглуулгыг устгах
+  edit_collection: Цуглуулга засварлах
   enable: Wallpaper менежерийг идэвхжүүлэх
   fit:
     contain: Агуулах
@@ -252,11 +254,14 @@ wall:
     fill: Дүүрэх
   flipHorizontal: Хөндлөнгийн хэвтээ
   flipVertical: Босоо босоо
+  generating_thumbnails: Дэлгэцийн өнгөц зураг үүсгэж байна
   hours: цаг
   interval: Ханын цаасыг өөрчлөх
   minutes: хоёр хоног
+  monitor_collection: Мониторын цуглуулга
   muted: Дуугүй видео аудио
   no_background: Хоосон слайпешт, оронд нь.
+  no_collections: Одоогоор цуглуулгаа үүсгээгүй байна. + товчийг дарж нэгийг үүсгэнэ үү.
   objectFit: Суурь тохирох
   objectPosition: Арын байрлал
   overlayColor: Давхардсан өнгө
@@ -268,10 +273,15 @@ wall:
     left: Зүүн
     right: Зөв байх
     top: Таг
+  processing_video: Видеог боловсруулж байна
   random: Санамсаргүй байдлаар Slideshes
   saturation: Цэнгэхны бэлтгэл, төгсөг
   seconds: хоёр цаг
+  select_collection: Цуглуулга сонгоно уу
+  wallpaper_collection: Дэлгэцийн зургийн цуглуулга
+  wallpaper_settings: Дэлгэцийн зурагны тохиргоо
   withOverlay: Давхцаж байна
+  workspace_collections: Ажлын талбарын цуглуулга
 weg:
   auto_hide: Авто гүнд
   delay_to_hide: Нуухыг хойшлуулах

@@ -1,16 +1,6 @@
 action:
   confirm: ທ່ານແນ່ໃຈບໍ່?
   confirm_body: ການກະທໍານີ້ບໍ່ສາມາດເຮັດໄດ້.
-app_launcher:
-  enable: ເປີດໃຊ້ງານ App Launcher
-  launch_on:
-    mouse_over: ເມົ້າເທິງ
-    primary: ປະຖົມ
-  monitor: ຕິດຕາມເພື່ອສະແດງ
-  runners:
-    cmd: ບັນຊາ
-    explorer: ແລ່ນ
-    label: ນັກແລ່ນ
 apps_configurations:
   app:
     bindings: ການຜູກມັດ (ຫມາຍເຫດທັງສອງທາງເລືອກແມ່ນຈໍາເປັນ)
@@ -100,6 +90,7 @@ general:
     available: ໄອຄອນຊອງທີ່ມີໃຫ້
     selected: ຊຸດໄອຄອນທີ່ໃຊ້ໄດ້
   language: ພາສາ
+  monday: ວັນຈັນ
   performance_mode:
     on_battery: ສຸດແບັດເຕີຣີ
     on_energy_saver: ກ່ຽວກັບປະຫຍັດພະລັງງານ
@@ -108,7 +99,10 @@ general:
       extreme: ທີ່ຮ້າຍ
       minimal: ຫນ້ອຍ
     plugged: ສຽບຫລືສາກໄຟ
+  saturday: ວັນເສົາ
+  start_of_week: ເລີ່ມຕົ້ນອາທິດ
   startup: ດໍາເນີນການກ່ຽວກັບການເລີ່ມຕົ້ນ?
+  sunday: ວັນອາທິດ
   theme:
     available: ຮູບແບບສີສັນທີ່ມີຢູ່
     selected: ຮູບແບບການເຄື່ອນໄຫວ
@@ -203,7 +197,6 @@ shortcuts:
     switch_to_previous_workspace: ປ່ຽນເປັນບ່ອນເຮັດວຽກທີ່ຜ່ານມາ
     switch_workspace: ປ່ຽນໄປເຮັດວຽກຢູ່ Workspace {{0}}
     toggle_float: ຮູບແບບການເລື່ອນຂອງປ່ອງຢ້ຽມ
-    toggle_launcher: ສະຫຼັບເປີດຕົວ
     toggle_monocle: ຮູບແບບ Monecle Workspace
   readonly_tooltip: ນີ້ແມ່ນທາງລັດທີ່ອ່ານເທົ່ານັ້ນ
   reset: ຕັ້ງຄ່າຄືນໃຫມ່
@@ -241,7 +234,16 @@ update:
 wall:
   backgrounds: ຮູບວໍເປເປີ
   blur: ມົວ
+  cancel: ຍົກເລີກ
+  close: ປິດ
+  collection_name: ຊື່ຄໍເລັກຊັນ
+  collections: ຄໍເລັກຊັນ
   contrast: ຄວາມແຕກຕ່າງ
+  create: ສ້າງ
+  create_collection: ສ້າງຄໍເລັກຊັນ
+  default_collection: ການເກັບຄ່າເລີ່ມຕົ້ນ
+  delete_collection: ລຶບຄໍເລັກຊັນ
+  edit_collection: ແກ້ໄຂຄໍເລັກຊັນ
   enable: ເປີດໃຊ້ Wallpaper Manager
   fit:
     contain: ບັນຈຸ
@@ -249,11 +251,14 @@ wall:
     fill: ຕື່ມຂໍ້ມູນ
   flipHorizontal: flip ອອກຕາມລວງນອນ
   flipVertical: ພິກແນວຕັ້ງ
+  generating_thumbnails: ກຳລັງສ້າງຮູບຫຍໍ້ຂອງວໍເປເປີ
   hours: ຊົ່ວໂມງ
   interval: ປ່ຽນຮູບວໍເປເປີທຸກ
   minutes: ນາທີ
+  monitor_collection: ຕິດຕາມການເກັບກໍາ
   muted: ສຽງ mute ສຽງສຽງ
   no_background: ການສະໄລ້ທີ່ເປົ່າ, ໂດຍໃຊ້ພື້ນຫລັງຂອງຫົວຂໍ້ແທນ.
+  no_collections: ຍັງບໍ່ມີການສ້າງຄໍເລັກຊັນເທື່ອ. ຄລິກປຸ່ມ + ເພື່ອສ້າງອັນ.
   objectFit: ປະຫວັດຄວາມເປັນມາ
   objectPosition: ຕໍາແຫນ່ງພື້ນຫລັງ
   overlayColor: ສີ Overlay
@@ -265,10 +270,15 @@ wall:
     left: ກ່ໍາ
     right: ຖືກຕ້ອງ
     top: ທາງເທີງ
+  processing_video: ກຳລັງປະມວນຜົນວິດີໂອ
   random: ແບບສະໄລດູນແບບສຸ່ມ
   saturation: ອີ່ມຕົວ
   seconds: ວິນາທີ
+  select_collection: ເລືອກຄໍເລັກຊັນ
+  wallpaper_collection: ການເກັບພາບພື້ນຫຼັງ
+  wallpaper_settings: ການຕັ້ງຄ່າຮູບວໍເປເປີ
   withOverlay: ດ້ວຍການຊ້ອນກັນ
+  workspace_collections: ການເກັບພື້ນທີ່ເຮັດວຽກ
 weg:
   auto_hide: ເຊື່ອງອັດຕະໂນມັດ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ

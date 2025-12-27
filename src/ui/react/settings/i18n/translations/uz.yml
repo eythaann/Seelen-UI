@@ -1,16 +1,6 @@
 action:
   confirm: Ishonasizmi?
   confirm_body: Ushbu harakatni bekor qilib bo'lmaydi.
-app_launcher:
-  enable: APP ishga tushirishni yoqish
-  launch_on:
-    mouse_over: Sichqoncha ustiga
-    primary: Asosiy
-  monitor: Ko'rish uchun monitor
-  runners:
-    cmd: Buyruq
-    explorer: Yugurish
-    label: Yuguruvchilar
 apps_configurations:
   app:
     bindings: Bog'lash (eslatma ikkalasi ham talab qilinadi)
@@ -104,6 +94,7 @@ general:
     available: Mavjud piktogramma to'plamlari
     selected: Faol piktogramma to'plamlari
   language: Til
+  monday: dushanba
   performance_mode:
     on_battery: Batareyada
     on_energy_saver: Energiya tejash bo'yicha
@@ -112,7 +103,10 @@ general:
       extreme: Haddan tashqari
       minimal: Minimal
     plugged: Ulangan yoki zaryadlash
+  saturday: shanba
+  start_of_week: Hafta boshi
   startup: Ishga tushirishda ishlaydimi?
+  sunday: yakshanba
   theme:
     available: Mavjud mavzular
     selected: Faol mavzular
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Oldingi ish joyiga o'tish
     switch_workspace: Ish maydoni {{0}}
     toggle_float: Oynaning sath rejimini o'zgartiring
-    toggle_launcher: Yoquvchi ishga tushirish
     toggle_monocle: Ish maydoni Monokle rejimini o'zgartiring
   readonly_tooltip: Bu faqat o'qish faqat yorliqidir
   reset: Standartlarga qayta o'rnating
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Fon rasmlari
   blur: Puflamoq
+  cancel: Bekor qilish
+  close: Yopish
+  collection_name: To'plam nomi
+  collections: To'plamlar
   contrast: Qarama-qarshilik
+  create: Yaratish
+  create_collection: To'plam yaratish
+  default_collection: Birlamchi toʻplam
+  delete_collection: To'plamni o'chirish
+  edit_collection: To'plamni tahrirlash
   enable: Fon rasmi menejerini yoqing
   fit:
     contain: O'z ichiga olgan
@@ -254,11 +256,16 @@ wall:
     fill: To'ldirmoq
   flipHorizontal: Gorizontalental
   flipVertical: Vertikal vertikal
+  generating_thumbnails: Fon rasmi eskizlari yaratilmoqda
   hours: soat
   interval: Har bir devor rasmini o'zgartiring
   minutes: daqiqa
+  monitor_collection: Monitor to'plami
   muted: Ovozni o'chirish
   no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
+  no_collections: >-
+    Hozircha hech qanday kolleksiya yaratilmagan. Uni yaratish uchun + tugmasini
+    bosing.
   objectFit: Fon mos
   objectPosition: Fon holati
   overlayColor: Overlay rang
@@ -270,10 +277,15 @@ wall:
     left: Chapda
     right: To'g'ri
     top: Eng yuqori
+  processing_video: Videoga ishlov berilmoqda
   random: Tasodifiy slayd-shou
   saturation: To'yinganlik
   seconds: soniya
+  select_collection: To'plamni tanlang
+  wallpaper_collection: Fon rasmi to'plami
+  wallpaper_settings: Fon rasmi sozlamalari
   withOverlay: Qopqoq bilan
+  workspace_collections: Ish maydoni to'plamlari
 weg:
   auto_hide: Avtomatik yashirish
   delay_to_hide: Yashirish uchun kechikish

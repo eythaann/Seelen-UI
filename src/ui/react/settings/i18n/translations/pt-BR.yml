@@ -1,16 +1,6 @@
 action:
   confirm: Tem certeza?
   confirm_body: Esta ação não pode ser desfeita.
-app_launcher:
-  enable: Ativar Lançador de Aplicativos
-  launch_on:
-    mouse_over: Ao passar o mouse
-    primary: Primário
-  monitor: Monitor para exibir
-  runners:
-    cmd: Comando
-    explorer: Executar
-    label: Executores
 apps_configurations:
   app:
     bindings: Vinculação (ambas as opções são obrigatórias)
@@ -102,6 +92,7 @@ general:
     available: Pacotes de ícones disponíveis
     selected: Pacotes de ícones ativos
   language: Idioma
+  monday: Segunda-feira
   performance_mode:
     on_battery: Na bateria
     on_energy_saver: Em economia de energia
@@ -110,7 +101,10 @@ general:
       extreme: Extremo
       minimal: Mínimo
     plugged: Conectado ou carregamento
+  saturday: Sábado
+  start_of_week: Início da semana
   startup: Executar na inicialização?
+  sunday: Domingo
   theme:
     available: Temas disponíveis
     selected: Temas ativos
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Mudar para o espaço de trabalho anterior
     switch_workspace: Mudar para o espaço de trabalho {{0}}
     toggle_float: Alterne o modo de flutuação da janela
-    toggle_launcher: TOGLGLE Lançador
     toggle_monocle: Alternar o modo de monocle na área de trabalho
   readonly_tooltip: Este é um atalho somente leitura
   reset: Redefinir para padrões
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Papéis de parede
   blur: Desfoque
+  cancel: Cancelar
+  close: Fechar
+  collection_name: Nome da coleção
+  collections: Coleções
   contrast: Contraste
+  create: Criar
+  create_collection: Criar coleção
+  default_collection: Coleção padrão
+  delete_collection: Excluir coleção
+  edit_collection: Editar coleção
   enable: Ativar gerente de papel de parede
   fit:
     contain: Conter
@@ -254,11 +256,14 @@ wall:
     fill: Preencher
   flipHorizontal: Virar na horizontal
   flipVertical: Virar vertical
+  generating_thumbnails: Gerando miniaturas de papel de parede
   hours: horas
   interval: Troque o papel de parede todos
   minutes: minutos
+  monitor_collection: Coleção de monitores
   muted: Silenciar áudio de vídeo
   no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
+  no_collections: Nenhuma coleção criada ainda. Clique no botão + para criar um.
   objectFit: Ajuste do plano de fundo
   objectPosition: Posição de fundo
   overlayColor: Cor da sobreposição
@@ -270,10 +275,15 @@ wall:
     left: Esquerda
     right: Certo
     top: Topo
+  processing_video: Processando vídeo
   random: Randomize Slideshow
   saturation: Saturação
   seconds: segundas
+  select_collection: Selecione a coleção
+  wallpaper_collection: Coleção de papéis de parede
+  wallpaper_settings: Configurações de papel de parede
   withOverlay: Com sobreposição
+  workspace_collections: Coleções de espaço de trabalho
 weg:
   auto_hide: Ocultar automaticamente
   delay_to_hide: Demora para esconder

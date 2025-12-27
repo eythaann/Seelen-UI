@@ -25,7 +25,6 @@ use crate::{
     trace_lock,
     utils::discord::start_discord_rpc,
     widgets::{
-        launcher::SeelenRofi,
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
     },
@@ -65,7 +64,6 @@ where
 pub struct Seelen {
     pub widgets_per_display: Vec<LegacyWidgetMonitorContainer>,
     pub wall: Option<SeelenWall>,
-    pub rofi: Option<SeelenRofi>,
 }
 
 /* ============== Getters ============== */
@@ -81,13 +79,6 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
-    fn add_rofi(&mut self) -> Result<()> {
-        if self.rofi.is_none() {
-            self.rofi = Some(SeelenRofi::new()?);
-        }
-        Ok(())
-    }
-
     fn add_wall(&mut self) -> Result<()> {
         if self.wall.is_none() {
             let wall = SeelenWall::new()?;
@@ -115,11 +106,6 @@ impl Seelen {
             SeelenWeg::hide_taskbar();
         } else {
             SeelenWeg::restore_taskbar()?;
-        }
-
-        match state.is_launcher_enabled() {
-            true => self.add_rofi()?,
-            false => self.rofi = None,
         }
 
         match state.is_wall_enabled() {
@@ -165,10 +151,6 @@ impl Seelen {
         // order is important
         create_background_window()?;
         declare_system_events_handlers()?;
-
-        if state.is_launcher_enabled() {
-            self.add_rofi()?;
-        }
 
         if state.is_wall_enabled() {
             self.add_wall()?;

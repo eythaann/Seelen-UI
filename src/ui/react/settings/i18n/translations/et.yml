@@ -1,16 +1,6 @@
 action:
   confirm: Kas olete kindel?
   confirm_body: Seda toimingut ei saa tagasi võtta.
-app_launcher:
-  enable: Luba rakenduse käivitaja
-  launch_on:
-    mouse_over: Kursor üle
-    primary: Esmane
-  monitor: Monitor, mida näidata
-  runners:
-    cmd: Käsk
-    explorer: Jooksma
-    label: Jooksjad
 apps_configurations:
   app:
     bindings: Sidumine (pange tähele mõlemat suvandit)
@@ -101,6 +91,7 @@ general:
     available: Saadaval ikoonipaketid
     selected: Aktiivsed ikoonipaketid
   language: Keel
+  monday: esmaspäev
   performance_mode:
     on_battery: Akul
     on_energy_saver: Energiasäästjal
@@ -109,7 +100,10 @@ general:
       extreme: Äärmuslik
       minimal: Minimaalne
     plugged: Ühendatud või laadimine
+  saturday: laupäeval
+  start_of_week: Nädala algus
   startup: Kas joosta startup?
+  sunday: pühapäev
   theme:
     available: Saadaolevad teemad
     selected: Aktiivsed teemad
@@ -206,7 +200,6 @@ shortcuts:
     switch_to_previous_workspace: Lülitage eelmisele tööalale
     switch_workspace: Lülitage tööruumi {{0}}
     toggle_float: Lülitage akna ujukrežiim
-    toggle_launcher: Lülituskaketi
     toggle_monocle: Tööruumi monokli režiimi lülitamine
   readonly_tooltip: See on kirjutuskaitstud otsetee
   reset: Lähtestage vaikeseadetele
@@ -243,7 +236,16 @@ update:
 wall:
   backgrounds: Taustapildid
   blur: Blur
+  cancel: Tühista
+  close: Sule
+  collection_name: Kollektsiooni nimi
+  collections: Kollektsioonid
   contrast: Kontrast
+  create: Loo
+  create_collection: Loo kollektsioon
+  default_collection: Vaikekogu
+  delete_collection: Kustuta kogu
+  edit_collection: Redigeeri kogu
   enable: Luba tapeedihaldur
   fit:
     contain: Sisaldab
@@ -251,11 +253,14 @@ wall:
     fill: Täitke
   flipHorizontal: Flip Horisontaalne
   flipVertical: Flip vertikaalne
+  generating_thumbnails: Taustapildi pisipiltide loomine
   hours: tööaeg
   interval: Vahetage tapeeti iga
   minutes: protokoll
+  monitor_collection: Monitori kollektsioon
   muted: Video heli vaigistamine
   no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
+  no_collections: Ühtegi kogu pole veel loodud. Selle loomiseks klõpsake nuppu +.
   objectFit: Taust sobivus
   objectPosition: Taustapositsioon
   overlayColor: Kattekihi värv
@@ -267,10 +272,15 @@ wall:
     left: Vasakpoolne
     right: Õigus
     top: Top
+  processing_video: Video töötlemine
   random: Randoriseeri slaidiseanss
   saturation: Küllastumine
   seconds: sekundid
+  select_collection: Valige Kogu
+  wallpaper_collection: Tapeedikogu
+  wallpaper_settings: Taustapildi seaded
   withOverlay: Koos kattekihiga
+  workspace_collections: Tööruumi kogud
 weg:
   auto_hide: Automaatne peida
   delay_to_hide: Viivitage peitmine

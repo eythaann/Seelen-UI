@@ -1,16 +1,6 @@
 action:
   confirm: დარწმუნებული ხარ?
   confirm_body: ეს ქმედება შეუძლებელია.
-app_launcher:
-  enable: ჩართეთ აპლიკაციის გამშვები
-  launch_on:
-    mouse_over: მაუსი ზევით
-    primary: პირველადი
-  monitor: მონიტორის ჩვენება
-  runners:
-    cmd: ბრძანება
-    explorer: სირბილი
-    label: მორბენალი
 apps_configurations:
   app:
     bindings: სავალდებულო (შენიშვნა საჭიროა ორივე ვარიანტი)
@@ -102,6 +92,7 @@ general:
     available: ხელმისაწვდომი ხატების პაკეტები
     selected: აქტიური ხატების პაკეტები
   language: Ენა
+  monday: ორშაბათი
   performance_mode:
     on_battery: ბატარეაზე
     on_energy_saver: ენერგიის დაზოგვაზე
@@ -110,7 +101,10 @@ general:
       extreme: უკიდურესი
       minimal: მინიმალური
     plugged: ჩართული ან დატენვა
+  saturday: შაბათი
+  start_of_week: კვირის დასაწყისი
   startup: გაშვებით გაშვებით?
+  sunday: კვირა
   theme:
     available: ხელმისაწვდომი თემები
     selected: აქტიური თემები
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: გადახვიდეთ წინა სამუშაო ადგილებზე
     switch_workspace: გადადით სამუშაო ადგილებზე {{0}}
     toggle_float: გადარიცხეთ ფანჯრის float რეჟიმი
-    toggle_launcher: გადარიცხვის გამშვები
     toggle_monocle: გადართეთ სამუშაო ადგილის მონოკლის რეჟიმი
   readonly_tooltip: ეს არის მხოლოდ წაკითხული მალსახმობი
   reset: გადატვირთვა ნაგულისხმევებზე
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: ფონები
   blur: დაბენა
+  cancel: გაუქმება
+  close: დახურვა
+  collection_name: კოლექციის სახელი
+  collections: კოლექციები
   contrast: წინააღმდეგობა
+  create: შექმნა
+  create_collection: შექმენით კოლექცია
+  default_collection: ნაგულისხმევი კოლექცია
+  delete_collection: კოლექციის წაშლა
+  edit_collection: კოლექციის რედაქტირება
   enable: ჩართეთ ფონი მენეჯერი
   fit:
     contain: დატევა
@@ -252,11 +254,14 @@ wall:
     fill: გავსება
   flipHorizontal: Flip Horizontal
   flipVertical: ფლიპ ვერტიკალური
+  generating_thumbnails: ფონის მინიატურების გენერირება
   hours: საათი
   interval: შეცვალეთ ფონი ყველა
   minutes: წუთი
+  monitor_collection: მონიტორების კოლექცია
   muted: ვიდეო აუდიოს დადუმება
   no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
+  no_collections: კოლექციები ჯერ არ არის შექმნილი. ერთის შესაქმნელად დააწკაპუნეთ + ღილაკს.
   objectFit: ფონის შესაფერისი
   objectPosition: ფონის პოზიცია
   overlayColor: გადახურული ფერი
@@ -268,10 +273,15 @@ wall:
     left: მარცხენა
     right: სწორი
     top: თავი
+  processing_video: მიმდინარეობს ვიდეოს დამუშავება
   random: რანდომიზაცია სლაიდშოუ
   saturation: გაჯერება
   seconds: წამები
+  select_collection: აირჩიეთ კოლექცია
+  wallpaper_collection: ფონების კოლექცია
+  wallpaper_settings: ფონი პარამეტრები
   withOverlay: გადახურვით
+  workspace_collections: სამუშაო სივრცის კოლექციები
 weg:
   auto_hide: Ავტომატური დამალვა
   delay_to_hide: დაგვიანებით დამალვა

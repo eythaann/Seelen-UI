@@ -1,16 +1,6 @@
 action:
   confirm: Ṣe o da ọ loju?
   confirm_body: Iṣe yii ko le ṣe atunṣe.
-app_launcher:
-  enable: Jeki Ifilọlẹ app
-  launch_on:
-    mouse_over: Asin ti pari
-    primary: Alakoko
-  monitor: Atẹle lati fihan
-  runners:
-    cmd: Paṣẹ
-    explorer: Sare
-    label: Awọn asayan
 apps_configurations:
   app:
     bindings: Dide (Ṣe akiyesi awọn aṣayan mejeeji ni a nilo)
@@ -100,6 +90,7 @@ general:
     available: Awọn akopọ Aami ti o wa
     selected: Awọn akopọ Aami ti nṣiṣe lọwọ
   language: Ede
+  monday: Monday
   performance_mode:
     on_battery: Lori batiri
     on_energy_saver: Lori Ipamọ Agbara
@@ -108,7 +99,10 @@ general:
       extreme: Ipẹkun
       minimal: Ayọkuro
     plugged: Pulọọgi tabi gbigba agbara
+  saturday: Satidee
+  start_of_week: Ibẹrẹ Ọsẹ
   startup: Ṣiṣe lori ibẹrẹ?
+  sunday: Sunday
   theme:
     available: Awọn akori to wa
     selected: Awọn akori ti nṣiṣe lọwọ
@@ -201,7 +195,6 @@ shortcuts:
     switch_to_previous_workspace: Yipada si ibi-iṣẹ iṣaaju
     switch_workspace: Yipada si ibi-iṣẹ {0}
     toggle_float: Oniropin window leefofo loju omi
-    toggle_launcher: Ifiwele tinggle
     toggle_monocle: Toggle Servicepace Ipo Monocle
   readonly_tooltip: Eyi jẹ ọna abuja-kika
   reset: Tun si awọn aseku
@@ -237,7 +230,16 @@ update:
 wall:
   backgrounds: Ogiri ogiri
   blur: Abẹ
+  cancel: Fagilee
+  close: Sunmọ
+  collection_name: Orukọ gbigba
+  collections: Awọn akojọpọ
   contrast: Ifiwera
+  create: Ṣẹda
+  create_collection: Ṣẹda Gbigba
+  default_collection: Gbigba aiyipada
+  delete_collection: Pa Gbigba
+  edit_collection: Ṣatunkọ Gbigba
   enable: Mu oluṣakoso ogiri ṣiṣẹ
   fit:
     contain: Ni ninu
@@ -245,11 +247,14 @@ wall:
     fill: Kun
   flipHorizontal: Isipade pejọ
   flipVertical: Yi inaro
+  generating_thumbnails: Awọn eekanna atanpako Iṣẹṣọ ogiri
   hours: wakati
   interval: Ayipada ogiri ni gbogbo
   minutes: iṣẹju
+  monitor_collection: Atẹle Gbigba
   muted: Free Voio fidio
   no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
+  no_collections: Ko si awọn akojọpọ ti a ṣẹda sibẹsibẹ. Tẹ bọtini + lati ṣẹda ọkan.
   objectFit: Abẹla abẹlẹ
   objectPosition: Ipo abẹlẹ
   overlayColor: Awọ botay
@@ -261,10 +266,15 @@ wall:
     left: Osi
     right: Titọ
     top: Oke
+  processing_video: Fidio ti n ṣiṣẹ
   random: Afikun ifaworanhan
   saturation: Itẹlọrun
   seconds: aaya
+  select_collection: Yan Gbigba
+  wallpaper_collection: Gbigba ogiri
+  wallpaper_settings: Eto Iṣẹṣọ ogiri
   withOverlay: Pẹlu apọju
+  workspace_collections: Awọn akojọpọ aaye iṣẹ
 weg:
   auto_hide: Ibi ipamọ aifọwọyi
   delay_to_hide: Idaduro lati tọju

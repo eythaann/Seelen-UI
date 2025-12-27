@@ -1,16 +1,6 @@
 action:
   confirm: Emin misin?
   confirm_body: Bu eylem geri alınamaz.
-app_launcher:
-  enable: Uygulama Başlatıcısını Etkinleştir
-  launch_on:
-    mouse_over: Fare üzerine gelince
-    primary: Birincil
-  monitor: Gösterilecek Monitör
-  runners:
-    cmd: Komut İstemi
-    explorer: Dosya Gezgini
-    label: Başlatıcılar
 apps_configurations:
   app:
     bindings: Tuş Ataması (her iki seçenek de gereklidir)
@@ -102,6 +92,7 @@ general:
     available: Mevcut Simge Paketleri
     selected: Aktif Simge Paketleri
   language: Dil
+  monday: Pazartesi
   performance_mode:
     on_battery: Aküde
     on_energy_saver: Enerji tasarrufu üzerine
@@ -110,7 +101,10 @@ general:
       extreme: Aşırı
       minimal: Minimal
     plugged: Tıkalı veya şarj
+  saturday: Cumartesi
+  start_of_week: Hafta Başı
   startup: Başlangıçta çalıştır
+  sunday: Pazar
   theme:
     available: Mevcut Temalar
     selected: Aktif Temalar
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Önceki çalışma alanına geçin
     switch_workspace: Çalışma alanına geç {{0}}
     toggle_float: Pencere şamandıra modunu geçiş
-    toggle_launcher: Başlatıcı
     toggle_monocle: Çalışma Alanı Monokle Modunu Değiştirin
   readonly_tooltip: Bu salt okunur bir kısayol
   reset: Varsayılanlara sıfırlayın
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Duvar Kağıtları
   blur: Bulanıklık
+  cancel: İptal etmek
+  close: Kapalı
+  collection_name: Koleksiyon Adı
+  collections: Koleksiyonlar
   contrast: Kontrast
+  create: Yaratmak
+  create_collection: Koleksiyon Oluştur
+  default_collection: Varsayılan Koleksiyon
+  delete_collection: Koleksiyonu Sil
+  edit_collection: Koleksiyonu Düzenle
   enable: Duvar Kağıdı Yöneticisini Etkinleştir
   fit:
     contain: Konteyner
@@ -254,11 +256,16 @@ wall:
     fill: Doldur
   flipHorizontal: Yatay Çevirme
   flipVertical: Dikey Çevirme
+  generating_thumbnails: Duvar Kağıdı Küçük Resimleri Oluşturma
   hours: saat
   interval: Duvar kağıdı değiştirme aralığı
   minutes: dakika
+  monitor_collection: Monitör Koleksiyonu
   muted: Video sesini kapat
   no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
+  no_collections: >-
+    Henüz koleksiyon oluşturulmadı. Bir tane oluşturmak için + düğmesine
+    tıklayın.
   objectFit: Arka Plan Uyumu
   objectPosition: Arka Plan Pozisyonu
   overlayColor: Kaplama Rengi
@@ -270,10 +277,15 @@ wall:
     left: Sol
     right: Doğru.
     top: Üst
+  processing_video: Video işleniyor
   random: Rastgele slayt gösterisi
   saturation: Doygunluk
   seconds: saniye
+  select_collection: Koleksiyon Seç
+  wallpaper_collection: Duvar Kağıdı Koleksiyonu
+  wallpaper_settings: Duvar Kağıdı Ayarları
   withOverlay: Kaplama ile
+  workspace_collections: Çalışma Alanı Koleksiyonları
 weg:
   auto_hide: Otomatik Gizle
   delay_to_hide: Gizleme gecikmesi

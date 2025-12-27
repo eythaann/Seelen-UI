@@ -1,16 +1,6 @@
 action:
   confirm: Oletko varma?
   confirm_body: Tätä toimintaa ei voida kumota.
-app_launcher:
-  enable: Ota sovelluksen kantoraketti käyttöön
-  launch_on:
-    mouse_over: Vie hiiri päälle
-    primary: Ensisijainen
-  monitor: Tarkkailla
-  runners:
-    cmd: Komento
-    explorer: Juoksua
-    label: Juoksijat
 apps_configurations:
   app:
     bindings: Sidonta (huomautus tarvitaan molemmat vaihtoehdot)
@@ -104,6 +94,7 @@ general:
     available: Saatavilla kuvakepaketit
     selected: Aktiiviset kuvakepaketit
   language: Kieli
+  monday: maanantai
   performance_mode:
     on_battery: Akun päällä
     on_energy_saver: Energiansäästäjällä
@@ -112,7 +103,10 @@ general:
       extreme: Äärimmäinen
       minimal: Minimaalinen
     plugged: Kytketty tai lataus
+  saturday: lauantai
+  start_of_week: Viikon alku
   startup: Suorittaa käynnistyksen yhteydessä?
+  sunday: sunnuntai
   theme:
     available: Käytettävissä olevat teemat
     selected: Aktiiviset teemat
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Vaihda edelliseen työtilaan
     switch_workspace: Vaihda työtilaan {{0}}
     toggle_float: Vaihda ikkunan kelluva tila
-    toggle_launcher: Vaihda kantoraketti
     toggle_monocle: Vaihda työtilan monokle -tila
   readonly_tooltip: Tämä on vain luku-pikakuvake
   reset: Palauta laiminlyöntiin
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Taustakuvat
   blur: Sumeus
+  cancel: Peruuttaa
+  close: Lähellä
+  collection_name: Kokoelman nimi
+  collections: Kokoelmat
   contrast: Kontrasti
+  create: Luoda
+  create_collection: Luo kokoelma
+  default_collection: Oletuskokoelma
+  delete_collection: Poista kokoelma
+  edit_collection: Muokkaa kokoelmaa
   enable: Ota taustakuvan johtaja käyttöön
   fit:
     contain: Sisältää
@@ -254,11 +256,14 @@ wall:
     fill: Täytä
   flipHorizontal: Käännä vaakasuora
   flipVertical: Flip pystysuora
+  generating_thumbnails: Taustakuvien pikkukuvien luominen
   hours: tuntia
   interval: Vaihda taustakuva jokainen
   minutes: minuutti
+  monitor_collection: Näytön kokoelma
   muted: Mykistä videon ääni
   no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
+  no_collections: Kokoelmia ei ole vielä luotu. Luo sellainen napsauttamalla +-painiketta.
   objectFit: Tausta Fit
   objectPosition: Tausta Asema
   overlayColor: Päällekkäisväri
@@ -270,10 +275,15 @@ wall:
     left: Vasen
     right: Oikea
     top: Top
+  processing_video: Videota käsitellään
   random: Satunnaista diaesitys
   saturation: Saturaatio
   seconds: sekunti
+  select_collection: Valitse Kokoelma
+  wallpaper_collection: Taustakuva kokoelma
+  wallpaper_settings: Taustakuvan asetukset
   withOverlay: Päällysteen kanssa
+  workspace_collections: Työtilakokoelmat
 weg:
   auto_hide: Automaattinen piilo
   delay_to_hide: Viive piilottaa

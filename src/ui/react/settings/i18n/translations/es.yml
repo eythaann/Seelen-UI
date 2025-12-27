@@ -1,16 +1,6 @@
 action:
   confirm: ¿Está seguro?
   confirm_body: Esta acción no se puede deshacer.
-app_launcher:
-  enable: Activar App Launcher
-  launch_on:
-    mouse_over: Pasar el ratón por encima
-    primary: Principal
-  monitor: Monitor para mostrar
-  runners:
-    cmd: Comando
-    explorer: Ejecutar
-    label: Corredores
 apps_configurations:
   app:
     bindings: Encuadernación (ambas opciones son obligatorias)
@@ -104,6 +94,7 @@ general:
     available: Paquetes de iconos disponibles
     selected: Packs de iconos activos
   language: Idioma
+  monday: Lunes
   performance_mode:
     on_battery: Con batería
     on_energy_saver: Save de energía
@@ -112,7 +103,10 @@ general:
       extreme: Extremo
       minimal: Mínimo
     plugged: Enchufado o carga
+  saturday: Sábado
+  start_of_week: Inicio de semana
   startup: ¿Se ejecuta al iniciar con Windows?
+  sunday: Domingo
   theme:
     available: Temas disponibles
     selected: Temas activos
@@ -211,7 +205,6 @@ shortcuts:
     switch_to_previous_workspace: Cambiar al espacio de trabajo anterior
     switch_workspace: Cambiar al espacio de trabajo {{0}}
     toggle_float: Modo de flotación de la ventana de alternativa
-    toggle_launcher: Alternar lanzador
     toggle_monocle: Modo de monocle del espacio de trabajo de al revés
   readonly_tooltip: Este es un atajo de solo lectura
   reset: Reiniciar a los valores predeterminados
@@ -248,7 +241,16 @@ update:
 wall:
   backgrounds: Fondos de pantalla
   blur: Desenfoque
+  cancel: Cancelar
+  close: Cerca
+  collection_name: Nombre de la colección
+  collections: Colecciones
   contrast: Contraste
+  create: Crear
+  create_collection: Crear colección
+  default_collection: Colección predeterminada
+  delete_collection: Eliminar colección
+  edit_collection: Editar colección
   enable: Activar el gestor de fondos de pantalla
   fit:
     contain: Contiene
@@ -256,11 +258,14 @@ wall:
     fill: Rellene
   flipHorizontal: Voltear horizontal
   flipVertical: Voltear vertical
+  generating_thumbnails: Generando miniaturas de fondos de pantalla
   hours: horas
   interval: Cambia el fondo de pantalla cada
   minutes: minutos
+  monitor_collection: Colección de monitores
   muted: Silenciar audio de vídeo
   no_background: Presentación de fondos vacía, utilizando el fondo del tema en su lugar.
+  no_collections: Aún no se han creado colecciones. Haga clic en el botón + para crear uno.
   objectFit: Ajuste de fondo
   objectPosition: Antecedentes
   overlayColor: Color de superposición
@@ -272,10 +277,15 @@ wall:
     left: Izquierda
     right: Derecha
     top: Top
+  processing_video: Procesando vídeo
   random: Cambio de fondo aleatorio
   saturation: Saturación
   seconds: segundos
+  select_collection: Seleccionar colección
+  wallpaper_collection: Colección de papel tapiz
+  wallpaper_settings: Configuración del fondo de pantalla
   withOverlay: Con superposición
+  workspace_collections: Colecciones de espacios de trabajo
 weg:
   auto_hide: Auto Ocultar
   delay_to_hide: Retrasar para ocultar

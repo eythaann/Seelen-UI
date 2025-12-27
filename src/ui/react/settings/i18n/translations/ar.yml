@@ -1,16 +1,6 @@
 action:
   confirm: هل أنت متأكد؟
   confirm_body: لا يمكن التراجع عن هذا الإجراء.
-app_launcher:
-  enable: تمكين مشغل التطبيقات
-  launch_on:
-    mouse_over: مرر الماوس
-    primary: أساسي
-  monitor: الشاشة
-  runners:
-    cmd: الأوامر
-    explorer: أستكشف
-    label: المتسابقين
 apps_configurations:
   app:
     bindings: الزامي (لاحظ أن كلا الخيارين مطلوبه)
@@ -100,6 +90,7 @@ general:
     available: حزم الأيقونات المتوفرة
     selected: حزم الأيقونات النشطة
   language: اللغات
+  monday: الاثنين
   performance_mode:
     on_battery: على البطارية
     on_energy_saver: على توفير الطاقة
@@ -108,7 +99,10 @@ general:
       extreme: أقصى
       minimal: الحد الأدنى
     plugged: توصيل أو شحن
+  saturday: السبت
+  start_of_week: بداية الأسبوع
   startup: تفعيل عند تشغيل الكمبيوتر؟
+  sunday: الأحد
   theme:
     available: السمات المتاحة
     selected: المواضيع النشطة
@@ -201,7 +195,6 @@ shortcuts:
     switch_to_previous_workspace: التبديل إلى مساحة العمل السابقة
     switch_workspace: التبديل إلى مساحة العمل {{0}}
     toggle_float: تبديل النافذة وضع تعويم
-    toggle_launcher: تبديل قاذفة
     toggle_monocle: تبديل وضع مساحة العمل monocle
   readonly_tooltip: هذا اختصار للقراءة فقط
   reset: إعادة ضبط على الافتراضات
@@ -237,7 +230,16 @@ update:
 wall:
   backgrounds: خلفيات
   blur: الضبابية
+  cancel: يلغي
+  close: يغلق
+  collection_name: اسم المجموعة
+  collections: المجموعات
   contrast: التباين
+  create: يخلق
+  create_collection: إنشاء مجموعة
+  default_collection: المجموعة الافتراضية
+  delete_collection: حذف المجموعة
+  edit_collection: تحرير المجموعة
   enable: تمكين مدير الخلفيات
   fit:
     contain: احتواء
@@ -245,11 +247,14 @@ wall:
     fill: تعبئة
   flipHorizontal: قلب أفقي
   flipVertical: قلب عمودي
+  generating_thumbnails: توليد الصور المصغرة للجدران
   hours: ساعات
   interval: تغيير الخلفية كل
   minutes: دقائق
+  monitor_collection: مجموعة المراقبة
   muted: كتم صوت الفيديو
   no_background: بدون خلفية
+  no_collections: لم يتم إنشاء أي مجموعات حتى الآن. انقر فوق الزر + لإنشاء واحدة.
   objectFit: الخلفية الملائمة
   objectPosition: موقف الخلفية
   overlayColor: لون التراكب
@@ -261,10 +266,15 @@ wall:
     left: يسار
     right: صحيح
     top: أعلى
+  processing_video: معالجة الفيديو
   random: عرض عشوائي للشرائح
   saturation: التشبع
   seconds: ثوان
+  select_collection: حدد المجموعة
+  wallpaper_collection: مجموعة خلفيات
+  wallpaper_settings: إعدادات ورق الحائط
   withOverlay: مع تراكب
+  workspace_collections: مجموعات مساحة العمل
 weg:
   auto_hide: الأخفاء التلقائي
   delay_to_hide: تأخير الأخفاء

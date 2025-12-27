@@ -47,7 +47,6 @@ async function completeTranslationsFor(localesDir: string) {
 await completeTranslationsFor("src/ui/react/toolbar/i18n/translations");
 await completeTranslationsFor("src/ui/react/weg/i18n/translations");
 await completeTranslationsFor("src/ui/react/settings/i18n/translations");
-await completeTranslationsFor("src/ui/react/launcher/i18n/translations");
 await completeTranslationsFor("src/ui/react/wallpaper_manager/i18n/translations");
 
 await completeTranslationsFor("src/ui/svelte/power-menu/i18n/translations");

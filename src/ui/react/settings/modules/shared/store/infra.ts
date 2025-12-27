@@ -92,7 +92,6 @@ export async function registerStoreEvents() {
       windowManager: settings.windowManager,
       seelenweg: settings.seelenweg,
       wall: settings.wall,
-      launcher: settings.launcher,
     };
     store.dispatch(RootActions.setState(newState));
   });
@@ -129,7 +128,6 @@ export const LoadSettingsToStore = async (customPath?: string) => {
       windowManager: settings.windowManager,
       seelenweg: settings.seelenweg,
       wall: settings.wall,
-      launcher: settings.launcher,
     }),
   );
 

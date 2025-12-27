@@ -1,16 +1,6 @@
 action:
   confirm: 你确定吗？
   confirm_body: 该动作不能撤消。
-app_launcher:
-  enable: 启用应用程序启动器
-  launch_on:
-    mouse_over: 鼠标悬停
-    primary: 基本的
-  monitor: 要显示的显示器
-  runners:
-    cmd: 命令
-    explorer: 运行
-    label: 运行程序
 apps_configurations:
   app:
     bindings: 绑定（注意两个选项均为必填项）
@@ -95,6 +85,7 @@ general:
     available: 可用的图标包
     selected: 活动图标包
   language: 语言
+  monday: 周一
   performance_mode:
     on_battery: 在电池上
     on_energy_saver: 在能量储蓄方面
@@ -103,7 +94,10 @@ general:
       extreme: 极端
       minimal: 最小
     plugged: 插入或充电
+  saturday: 周六
+  start_of_week: 一周开始
   startup: 开机自启
+  sunday: 星期日
   theme:
     available: 可用主题
     selected: 活跃主题
@@ -196,7 +190,6 @@ shortcuts:
     switch_to_previous_workspace: 切换到以前的工作区
     switch_workspace: 切换到工作区{{0}}
     toggle_float: 切换窗口浮点模式
-    toggle_launcher: 切换发射器
     toggle_monocle: 切换工作区单片模式
   readonly_tooltip: 这是只读的捷径
   reset: 重置为默认值
@@ -231,7 +224,16 @@ update:
 wall:
   backgrounds: 壁纸
   blur: 模糊
+  cancel: 取消
+  close: 关闭
+  collection_name: 收藏名称
+  collections: 收藏
   contrast: 对比
+  create: 创造
+  create_collection: 创建收藏
+  default_collection: 默认集合
+  delete_collection: 删除集合
+  edit_collection: 编辑收藏
   enable: 启用壁纸管理器
   fit:
     contain: 包含
@@ -239,11 +241,14 @@ wall:
     fill: 填写
   flipHorizontal: 水平翻转
   flipVertical: 垂直翻转
+  generating_thumbnails: 生成壁纸缩略图
   hours: 小时
   interval: 更换壁纸的时间间隔
   minutes: 分钟
+  monitor_collection: 监控集合
   muted: 将视频音频静音
   no_background: 空幻灯片，使用主题背景。
+  no_collections: 尚未创建任何集合。 单击 + 按钮创建一个。
   objectFit: 背景适合
   objectPosition: 背景职位
   overlayColor: 叠加颜色
@@ -255,10 +260,15 @@ wall:
     left: 左侧
     right: 对
     top: 返回顶部
+  processing_video: 处理视频
   random: 随机更改壁纸
   saturation: 饱和度
   seconds: 秒
+  select_collection: 选择系列
+  wallpaper_collection: 壁纸合集
+  wallpaper_settings: 壁纸设置
   withOverlay: 带覆盖层
+  workspace_collections: 工作区集合
 weg:
   auto_hide: 自动隐藏
   delay_to_hide: 隐藏延迟

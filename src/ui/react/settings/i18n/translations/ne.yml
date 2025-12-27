@@ -1,16 +1,6 @@
 action:
   confirm: के तपाइँ निश्चित हुनुहुन्छ?
   confirm_body: यो कार्य पूर्ववत गर्न सकिदैन।
-app_launcher:
-  enable: अनुप्रयोग सुरुवातकर्तालाई सक्षम गर्नुहोस्
-  launch_on:
-    mouse_over: माउस माथि
-    primary: प्राथमिक
-  monitor: देखाउनको लागि मोनिटर
-  runners:
-    cmd: आदेश
-    explorer: दगुर्ने काम
-    label: धागक
 apps_configurations:
   app:
     bindings: बाध्यकारी (नोटहरू दुबै विकल्पहरू आवश्यक छन्)
@@ -102,6 +92,7 @@ general:
     available: उपलब्ध आइकन प्याकहरू
     selected: सक्रिय आइकन प्याकहरू
   language: भाषा
+  monday: सोमबार
   performance_mode:
     on_battery: ब्याट्री मा
     on_energy_saver: ऊर्जा सेभरमा
@@ -110,7 +101,10 @@ general:
       extreme: अत्यधिक
       minimal: न्यूनतम
     plugged: प्लग वा चार्ज गर्दै
+  saturday: शनिबार
+  start_of_week: हप्ताको सुरुवात
   startup: स्टार्टअपमा भाग्नुहोस्?
+  sunday: आइतबार
   theme:
     available: उपलब्ध विषयवस्तुहरू
     selected: सक्रिय विषयवस्तुहरू
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: अघिल्लो कार्यक्षेत्रमा स्विच गर्नुहोस्
     switch_workspace: कार्यक्षेत्रमा स्विच {0}}
     toggle_float: टगलल विन्डो फ्लोट मोड
-    toggle_launcher: लन्चचर टगल
     toggle_monocle: टगलस्प्लिप मोयर्सिल मोनोकल मोड
   readonly_tooltip: यो एक पढ्न-मात्र सर्टकट हो
   reset: पूर्वनिर्धारित गर्न रिसेट गर्नुहोस्
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: वालपेपरहरू
   blur: स्वरर्नु
+  cancel: रद्द गर्नुहोस्
+  close: बन्द गर्नुहोस्
+  collection_name: संग्रहको नाम
+  collections: सङ्ग्रहहरू
   contrast: विषमता
+  create: सिर्जना गर्नुहोस्
+  create_collection: संग्रह सिर्जना गर्नुहोस्
+  default_collection: पूर्वनिर्धारित संग्रह
+  delete_collection: संग्रह मेटाउनुहोस्
+  edit_collection: सङ्ग्रह सम्पादन गर्नुहोस्
   enable: वालपेपर प्रबन्धक सक्षम गर्नुहोस्
   fit:
     contain: भित्र हुनु
@@ -253,11 +255,16 @@ wall:
     fill: भर्नु
   flipHorizontal: फ्लिप तेर्सो
   flipVertical: फ्लिप ठाडो
+  generating_thumbnails: वालपेपर थम्बनेलहरू उत्पन्न गर्दै
   hours: घण्टा
   interval: वालपेपर परिवर्तन गर्नुहोस्
   minutes: मिनेट
+  monitor_collection: मोनिटर संग्रह
   muted: भिडियो अडियो म्युट गर्नुहोस्
   no_background: खाली स्लाइडजेशन, यसको सट्टा थिमको पृष्ठभूमि प्रयोग गर्दै।
+  no_collections: >-
+    अहिलेसम्म कुनै सङ्ग्रहहरू सिर्जना गरिएको छैन। एउटा सिर्जना गर्न + बटन क्लिक
+    गर्नुहोस्।
   objectFit: पृष्ठभूमि फिट
   objectPosition: पृष्ठभूमि स्थिति
   overlayColor: ओभरलाइ रंग
@@ -269,10 +276,15 @@ wall:
     left: देब्रे
     right: ठिक
     top: टुप्पो
+  processing_video: भिडियो प्रशोधन गर्दै
   random: अनियमित रूपमा स्लाइड्स स्लाइड
   saturation: संतृप्ति
   seconds: सेकेन्ड
+  select_collection: संग्रह चयन गर्नुहोस्
+  wallpaper_collection: वालपेपर संग्रह
+  wallpaper_settings: वालपेपर सेटिङहरू
   withOverlay: ओभरले साथ
+  workspace_collections: कार्यक्षेत्र संग्रहहरू
 weg:
   auto_hide: 'स्वत: लुकाउने'
   delay_to_hide: लुकाउन ढिलाइ

@@ -1,16 +1,6 @@
 action:
   confirm: Piştrastin?
   confirm_body: Ev çalakî nikare were paşguh kirin.
-app_launcher:
-  enable: Launcher App çalak bikin
-  launch_on:
-    mouse_over: Mişk li ser
-    primary: Bingehîn
-  monitor: Monitor to Show
-  runners:
-    cmd: Ferman
-    explorer: Rev
-    label: Runners
 apps_configurations:
   app:
     bindings: Binding (Nîşe her du vebijark hewce ne)
@@ -102,6 +92,7 @@ general:
     available: Pakêtên îkonê yên berdest
     selected: Pakêtên Îkonên Çalak
   language: Ziman
+  monday: Duşem
   performance_mode:
     on_battery: Li ser batterê
     on_energy_saver: Li ser Saveravdêriya Enerjiyê
@@ -110,7 +101,10 @@ general:
       extreme: Bêfêhm zêde
       minimal: Minimal
     plugged: Plug kirin an drav kirin
+  saturday: Şemî
+  start_of_week: Destpêka Hefteyê
   startup: Li ser destpêka bisekinin?
+  sunday: Yekşem
   theme:
     available: Mijarên Berdest
     selected: Mijarên Çalak
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Vegere qada xebata berê
     switch_workspace: Switch to Workspace {{0}}
     toggle_float: Mode Float Float Toggle
-    toggle_launcher: Destpêka Toggle
     toggle_monocle: Mode Mode Monocle Workspace Toggle
   readonly_tooltip: Ev kurteyek xwendinê ye
   reset: Reset to Default
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Şîn
+  cancel: Bişûndekirin
+  close: Nêzîkî
+  collection_name: Navê Koleksiyonê
+  collections: Collections
   contrast: Dijîtî
+  create: Xûliqandin
+  create_collection: Koleksiyonê çêbikin
+  default_collection: Berhevoka Bingehîn
+  delete_collection: Koleksiyonê jêbirin
+  edit_collection: Edit Collection
   enable: Gerînendeyê Wallpaper çalak bike
   fit:
     contain: Bêdengman
@@ -253,11 +255,14 @@ wall:
     fill: Tijîkirin
   flipHorizontal: Flip horizontî
   flipVertical: Flip Vertical
+  generating_thumbnails: Çêkirina Thumbnails Wallpaper
   hours: demjimêr
   interval: Her kesê biguherînin
   minutes: deqq
+  monitor_collection: Monitor Collection
   muted: Dengê vîdyoyê qut bike
   no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
+  no_collections: Hê berhevok nehatine çêkirin. Bişkojka + bikirtînin da ku yek çêbikin.
   objectFit: Background Fit
   objectPosition: Positiona paşîn
   overlayColor: Rengê dorpêçkirî
@@ -269,10 +274,15 @@ wall:
     left: Çep
     right: Rast
     top: Kop
+  processing_video: Vîdyoyê pêvajoyê
   random: Slideshow Randomize
   saturation: Satutionation
   seconds: seconds
+  select_collection: Hilbijêre Collection
+  wallpaper_collection: Collection Wallpaper
+  wallpaper_settings: Mîhengên Wallpaper
   withOverlay: Bi sernav
+  workspace_collections: Koleksiyonên Cihê Xebatê
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dereng ji bo veşartinê

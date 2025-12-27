@@ -1,16 +1,6 @@
 action:
   confirm: مطمئن هستید؟
   confirm_body: این عمل نمی تواند خنثی شود.
-app_launcher:
-  enable: پرتاب برنامه را فعال کنید
-  launch_on:
-    mouse_over: ماوس روی
-    primary: اولیه
-  monitor: نظارت برای نمایش
-  runners:
-    cmd: فرمان
-    explorer: دویدن
-    label: دونده
 apps_configurations:
   app:
     bindings: اتصال (توجه داشته باشید هر دو گزینه مورد نیاز است)
@@ -104,6 +94,7 @@ general:
     available: بسته‌های آیکون موجود
     selected: بسته های آیکون فعال
   language: زبان
+  monday: دوشنبه
   performance_mode:
     on_battery: در باتری
     on_energy_saver: در مورد صرفه جویی در انرژی
@@ -112,7 +103,10 @@ general:
       extreme: شدید
       minimal: حداقل
     plugged: وصل شده یا شارژ
+  saturday: شنبه
+  start_of_week: شروع هفته
   startup: در راه اندازی اجرا می شود؟
+  sunday: یکشنبه
   theme:
     available: تم های موجود
     selected: تم های فعال
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: به فضای کاری قبلی بروید
     switch_workspace: تغییر به فضای کاری {{0}}
     toggle_float: حالت شناور پنجره
-    toggle_launcher: پرتاب کننده
     toggle_monocle: حالت مونوکلر فضای کاری را تغییر دهید
   readonly_tooltip: این یک میانبر فقط خواندنی است
   reset: تنظیم مجدد به پیش فرض
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: تصاویر پس زمینه
   blur: مبهم
+  cancel: لغو کنید
+  close: بستن
+  collection_name: نام مجموعه
+  collections: مجموعه ها
   contrast: کنتراست
+  create: ایجاد کنید
+  create_collection: ایجاد مجموعه
+  default_collection: مجموعه پیش‌فرض
+  delete_collection: حذف مجموعه
+  edit_collection: ویرایش مجموعه
   enable: مدیر تصویر زمینه را فعال کنید
   fit:
     contain: حاوی بودن
@@ -253,11 +255,14 @@ wall:
     fill: پر کردن
   flipHorizontal: تلنگر افقی
   flipVertical: به صورت عمودی
+  generating_thumbnails: ایجاد تصاویر ریز کاغذ دیواری
   hours: ساعت
   interval: کاغذ دیواری را تغییر دهید
   minutes: دقایقی
+  monitor_collection: مجموعه مانیتور
   muted: صدای ویدیو را بی صدا کنید
   no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
+  no_collections: هنوز هیچ مجموعه ای ایجاد نشده است. برای ایجاد یک دکمه + را کلیک کنید.
   objectFit: متناسب با پس زمینه
   objectPosition: موقعیت پس زمینه
   overlayColor: رنگ روکش
@@ -269,10 +274,15 @@ wall:
     left: چپ
     right: حق
     top: بالا
+  processing_video: در حال پردازش ویدیو
   random: نمایش پرده ای تصادفی
   saturation: اشباع
   seconds: ثانیه
+  select_collection: مجموعه را انتخاب کنید
+  wallpaper_collection: مجموعه کاغذ دیواری
+  wallpaper_settings: تنظیمات کاغذ دیواری
   withOverlay: با روکش
+  workspace_collections: مجموعه های فضای کاری
 weg:
   auto_hide: پنهان خودکار
   delay_to_hide: تاخیر برای پنهان شدن

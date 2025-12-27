@@ -1,16 +1,6 @@
 action:
   confirm: Una uhakika?
   confirm_body: Kitendo hiki hakiwezi kufutwa.
-app_launcher:
-  enable: Wezesha Kizindua cha Programu
-  launch_on:
-    mouse_over: Panya juu
-    primary: Msingi
-  monitor: Fuatilia kuonyesha
-  runners:
-    cmd: Amri
-    explorer: Kukimbia
-    label: Wakimbiaji
 apps_configurations:
   app:
     bindings: Kufunga (kumbuka chaguzi zote mbili zinahitajika)
@@ -101,6 +91,7 @@ general:
     available: Vifurushi vya ikoni vinavyopatikana
     selected: Vifurushi vya ikoni zinazotumika
   language: Lugha
+  monday: Jumatatu
   performance_mode:
     on_battery: Kwenye betri
     on_energy_saver: Kwenye Saver ya Nishati
@@ -109,7 +100,10 @@ general:
       extreme: Uliokithiri
       minimal: Ndogo
     plugged: Kuziba au kuchaji
+  saturday: Jumamosi
+  start_of_week: Mwanzo wa Wiki
   startup: Kuendesha kuanza?
+  sunday: Jumapili
   theme:
     available: Mandhari Zinazopatikana
     selected: Mandhari Inayotumika
@@ -206,7 +200,6 @@ shortcuts:
     switch_to_previous_workspace: Badilisha kwenye nafasi ya kazi ya hapo awali
     switch_workspace: Badilika kwa nafasi ya kazi {{0}}
     toggle_float: Badilisha modi ya kuelea ya dirisha
-    toggle_launcher: Kubadilisha kizindua
     toggle_monocle: Badilisha modi ya nafasi ya kazi
   readonly_tooltip: Hii ni njia ya mkato ya kusoma tu
   reset: Rudisha kwa defaults
@@ -242,7 +235,16 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Blur
+  cancel: Ghairi
+  close: Funga
+  collection_name: Jina la Mkusanyiko
+  collections: Mikusanyiko
   contrast: Tofauti
+  create: Unda
+  create_collection: Unda Mkusanyiko
+  default_collection: Mkusanyiko Chaguomsingi
+  delete_collection: Futa Mkusanyiko
+  edit_collection: Hariri Mkusanyiko
   enable: Washa Meneja wa Ukuta
   fit:
     contain: Kuwa na
@@ -250,11 +252,14 @@ wall:
     fill: Jaza
   flipHorizontal: Flip usawa
   flipVertical: Flip wima
+  generating_thumbnails: Inazalisha Vijipicha vya Mandhari
   hours: masaa
   interval: Badilisha Ukuta kila
   minutes: dakika
+  monitor_collection: Fuatilia Mkusanyiko
   muted: Sauti ya Video ya Bubu
   no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
+  no_collections: Bado hakuna mikusanyiko iliyoundwa. Bofya kitufe cha + ili kuunda moja.
   objectFit: Msingi wa kifafa
   objectPosition: Msimamo wa nyuma
   overlayColor: Rangi ya juu
@@ -266,10 +271,15 @@ wall:
     left: Kushoto
     right: Kulia
     top: Juu
+  processing_video: Inachakata video
   random: Sisitiza slideshow
   saturation: Kueneza
   seconds: sekunde
+  select_collection: Chagua Mkusanyiko
+  wallpaper_collection: Ukusanyaji wa Mandhari
+  wallpaper_settings: Mipangilio ya Mandhari
   withOverlay: Na overlay
+  workspace_collections: Mikusanyiko ya Nafasi ya Kazi
 weg:
   auto_hide: Kujificha kiotomatiki
   delay_to_hide: Kuchelewa kujificha

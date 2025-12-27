@@ -1,16 +1,6 @@
 action:
   confirm: Ertu viss?
   confirm_body: Ekki er hægt að afturkalla þessa aðgerð.
-app_launcher:
-  enable: Virkja App Launcher
-  launch_on:
-    mouse_over: Mús yfir
-    primary: Aðal
-  monitor: Fylgjast með því að sýna
-  runners:
-    cmd: Skipan
-    explorer: Hlaupa
-    label: Hlauparar
 apps_configurations:
   app:
     bindings: Binding (athugaðu að báðir valkostirnir eru nauðsynlegir)
@@ -102,6 +92,7 @@ general:
     available: Lausir táknpakkar
     selected: Virkir táknpakkar
   language: Tungumál
+  monday: mánudag
   performance_mode:
     on_battery: Á rafhlöðu
     on_energy_saver: Á orkusparnað
@@ -110,7 +101,10 @@ general:
       extreme: Öfgafullt
       minimal: Lágmarks
     plugged: Tengt eða hleðsla
+  saturday: laugardag
+  start_of_week: Upphaf vikunnar
   startup: Hlaupa í gangsetningu?
+  sunday: sunnudag
   theme:
     available: Þemu í boði
     selected: Virk þemu
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: Skiptu yfir í fyrri vinnusvæði
     switch_workspace: Skiptu yfir í vinnusvæði {{0}}
     toggle_float: Skiptu um glugga flotastillingu
-    toggle_launcher: Skiptu um sjósetja
     toggle_monocle: Skiptu um vinnusvæði Monocle Mode
   readonly_tooltip: Þetta er aðeins skrifvarinn
   reset: Endurstilla í vanskil
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: Veggfóður
   blur: Þoka
+  cancel: Hætta við
+  close: Loka
+  collection_name: Nafn safns
+  collections: Söfn
   contrast: Andstæður
+  create: Búa til
+  create_collection: Búðu til safn
+  default_collection: Sjálfgefið safn
+  delete_collection: Eyða safni
+  edit_collection: Breyta safni
   enable: Virkja veggfóðursstjóra
   fit:
     contain: Inniheldur
@@ -252,11 +254,14 @@ wall:
     fill: Fylltu
   flipHorizontal: Flip Lárétt
   flipVertical: Flip lóðrétt
+  generating_thumbnails: Búa til veggfóðursmámyndir
   hours: klukkustundir
   interval: Skiptu um veggfóður hvert
   minutes: mínútur
+  monitor_collection: Fylgjast með safni
   muted: Slökkva á myndhljóði
   no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
+  no_collections: Engin söfn búin til ennþá. Smelltu á + hnappinn til að búa til einn.
   objectFit: Bakgrunnur passa
   objectPosition: Bakgrunnsstaða
   overlayColor: Yfirlag litur
@@ -268,10 +273,15 @@ wall:
     left: Vinstri
     right: Ekki satt
     top: Efst
+  processing_video: Vinnur myndband
   random: Slendandi myndasýning
   saturation: Mettun
   seconds: sekúndur
+  select_collection: Veldu Safn
+  wallpaper_collection: Veggfóður safn
+  wallpaper_settings: Veggfóðurstillingar
   withOverlay: Með yfirlagi
+  workspace_collections: Vinnusöfn
 weg:
   auto_hide: Sjálfvirk fela
   delay_to_hide: Seinkun á að fela

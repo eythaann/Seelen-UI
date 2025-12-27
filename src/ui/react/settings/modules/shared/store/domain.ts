@@ -5,7 +5,6 @@ import type {
   PhysicalMonitor,
   Plugin,
   Profile,
-  SeelenLauncherSettings,
   SeelenWallSettings,
   SeelenWegSettings,
   Settings,
@@ -34,6 +33,5 @@ export interface RootState extends Settings {
   fancyToolbar: FancyToolbarSettings;
   seelenweg: SeelenWegSettings;
   wall: SeelenWallSettings;
-  launcher: SeelenLauncherSettings;
   windowManager: WindowManagerSettings;
 }

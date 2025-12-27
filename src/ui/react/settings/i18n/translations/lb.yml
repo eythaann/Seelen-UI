@@ -1,16 +1,6 @@
 action:
   confirm: Bass du secher?
   confirm_body: Dës Aktioun kann net annuléiert ginn.
-app_launcher:
-  enable: Aktivéiert App Launcher
-  launch_on:
-    mouse_over: Maus iwwer
-    primary: Primär
-  monitor: Monitor fir ze weisen
-  runners:
-    cmd: Kommun de Kommentar
-    explorer: Lafe
-    label: Leefer
 apps_configurations:
   app:
     bindings: Bindend (Notiz béid Optiounen sinn erfuerderlech)
@@ -102,6 +92,7 @@ general:
     available: Verfügbar Ikon Packs
     selected: Aktiv Ikon Packs
   language: Sprooche
+  monday: Méindeg
   performance_mode:
     on_battery: Op Batterie
     on_energy_saver: Op Energiespuer
@@ -110,7 +101,10 @@ general:
       extreme: Extrem
       minimal: Minimal
     plugged: Ugeschloss oder opluede
+  saturday: Samschdeg
+  start_of_week: Start vun der Woch
   startup: Run op Startup?
+  sunday: Sonndeg
   theme:
     available: Verfügbar Themen
     selected: Aktiv Themen
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: Wiesselt op virdrun Aarbechtsberäich
     switch_workspace: Schalt op Aarbechtsberäich {{0}}
     toggle_float: Toggle Fenster Float Modus
-    toggle_launcher: Toggle launcher
     toggle_monocle: Toggle Workspace Monocle Modus
   readonly_tooltip: Dëst ass e Lies-nëmme Mangel
   reset: Reset op Defaults
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Blour
+  cancel: Ofbriechen
+  close: Zoumaachen
+  collection_name: Sammlung Numm
+  collections: Kollektiounen
   contrast: Kontrad
+  create: Schafen
+  create_collection: Schafen Kollektioun
+  default_collection: Standard Kollektioun
+  delete_collection: Läschen Kollektioun
+  edit_collection: Kollektioun änneren
   enable: Aktivéiert Wallpaper Manager
   fit:
     contain: Enthalen
@@ -252,11 +254,16 @@ wall:
     fill: Fëllt
   flipHorizontal: Flip horizontal
   flipVertical: Flip vertikal
+  generating_thumbnails: Generéiere Wallpaper Thumbnails
   hours: Stonnen.
   interval: Änneren Wallpaper all
   minutes: Minutte vun der Minutten
+  monitor_collection: Monitor Kollektioun
   muted: Demp Video Audio
   no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
+  no_collections: >-
+    Keng Kollektiounen erstallt nach. Klickt op de + Knäppchen fir een ze
+    kreéieren.
   objectFit: Hannergrond fit
   objectPosition: Hannergrënn Positioun
   overlayColor: Iwwerlauschteren Faarf
@@ -268,10 +275,15 @@ wall:
     left: Lénks
     right: Riets
     top: Uewen
+  processing_video: Video veraarbecht
   random: Zoufälleg Slideshow
   saturation: Saturatioun
   seconds: Sekonnen
+  select_collection: Wielt Kollektioun
+  wallpaper_collection: Wallpaper Kollektioun
+  wallpaper_settings: Wallpaper Astellunge
   withOverlay: Mat Overlay
+  workspace_collections: Aarbechtsberäich Kollektiounen
 weg:
   auto_hide: Automatesch
   delay_to_hide: Verspéidung ze verstoppen

@@ -88,7 +88,6 @@ slu_events_declaration! {
     StateToolbarItemsChanged(Placeholder) as "toolbar-items",
     StateThemesChanged(Vec<Theme>) as "themes",
     StateSettingsByAppChanged(Vec<AppConfig>) as "settings-by-app",
-    StateHistoryChanged(LauncherHistory) as "history",
     StateIconPacksChanged(Vec<IconPack>) as "icon-packs",
     StatePluginsChanged(Vec<Plugin>) as "plugins-changed",
     StateWidgetsChanged(Vec<Widget>) as "widgets-changed",

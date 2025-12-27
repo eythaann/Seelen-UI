@@ -1,16 +1,6 @@
 action:
   confirm: Ziur al zaude?
   confirm_body: Ekintza hau ezin da desegin.
-app_launcher:
-  enable: Gaitu aplikazioaren abiarazlea
-  launch_on:
-    mouse_over: Sagua pasa
-    primary: Lehen mailakoa
-  monitor: Monitorea erakusteko
-  runners:
-    cmd: Agindu
-    explorer: Korrika
-    label: Kornollari
 apps_configurations:
   app:
     bindings: Lotura (kontuan bi aukerak behar dira)
@@ -102,6 +92,7 @@ general:
     available: Eskuragarri dauden ikono paketeak
     selected: Ikono pakete aktiboak
   language: Mintzaira
+  monday: astelehena
   performance_mode:
     on_battery: Bateria gainean
     on_energy_saver: Energia aurrezteari buruz
@@ -110,7 +101,10 @@ general:
       extreme: Muturreko
       minimal: Gutxien
     plugged: Entxufatua edo kargatzea
+  saturday: Larunbata
+  start_of_week: Astearen hasiera
   startup: Korrika abiaraztean?
+  sunday: Igandea
   theme:
     available: Eskuragarri dauden gaiak
     selected: Gai aktiboak
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Aldatu aurreko lan-eremura
     switch_workspace: Aldatu lan-eremura {{0}}
     toggle_float: Txandakatu leiho karroza modua
-    toggle_launcher: Txandakatu abiarazlea
     toggle_monocle: Txandakatu Workspace Monocle modua
   readonly_tooltip: Hau irakurtzeko lasterbidea da
   reset: Berrezarri lehenetsitakoak
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Horma-irudiak
   blur: Lau lauak
+  cancel: Utzi
+  close: Itxi
+  collection_name: Bildumaren izena
+  collections: Bildumak
   contrast: Kontraste
+  create: Sortu
+  create_collection: Sortu bilduma
+  default_collection: Bilduma lehenetsia
+  delete_collection: Ezabatu bilduma
+  edit_collection: Editatu bilduma
   enable: Gaitu horma-kudeatzailea
   fit:
     contain: Eduki
@@ -254,11 +256,14 @@ wall:
     fill: Bete
   flipHorizontal: Flip horizontala
   flipVertical: Irauli bertikala
+  generating_thumbnails: Horma-irudi txikiak sortzea
   hours: ordire ordu
   interval: Aldatu horma-irudia guztietan
   minutes: minutuak
+  monitor_collection: Monitore bilduma
   muted: Ezkutatu bideoaren audioa
   no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
+  no_collections: Oraindik ez da bildumarik sortu. Egin klik + botoian bat sortzeko.
   objectFit: Atzeko planoaren moldaketa
   objectPosition: Atzeko planoaren posizioa
   overlayColor: Overlay kolorea
@@ -270,10 +275,15 @@ wall:
     left: Ezker
     right: Zuzen
     top: Tontor
+  processing_video: Bideoa prozesatzen
   random: Aurkezpen diaporama
   saturation: Saturazio
   seconds: bizkarbete
+  select_collection: Hautatu Bilduma
+  wallpaper_collection: Horma-irudi bilduma
+  wallpaper_settings: Horma-paperaren ezarpenak
   withOverlay: Gainjartzearekin
+  workspace_collections: Lan-esparruko bildumak
 weg:
   auto_hide: Ezkutatu automatikoa
   delay_to_hide: Ezkutatzeko atzeratu

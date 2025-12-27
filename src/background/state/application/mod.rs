@@ -19,10 +19,7 @@ use notify_debouncer_full::{
 };
 use seelen_core::{
     resource::ResourceKind,
-    state::{
-        AppsConfigurationList, CssStyles, LauncherHistory, Profile, SluPopupConfig,
-        SluPopupContent, WegItems,
-    },
+    state::{AppsConfigurationList, CssStyles, Profile, SluPopupConfig, SluPopupContent, WegItems},
 };
 use std::{
     collections::HashSet,
@@ -54,7 +51,6 @@ pub struct FullState {
     pub settings_by_app: AppsConfigurationList,
     pub weg_items: WegItems,
     pub toolbar_items: Placeholder,
-    pub launcher_history: LauncherHistory,
 }
 
 unsafe impl Sync for FullState {}
@@ -69,7 +65,6 @@ impl FullState {
             settings_by_app: AppsConfigurationList::default(),
             weg_items: WegItems::default(),
             toolbar_items: Self::initial_toolbar_items(),
-            launcher_history: LauncherHistory::default(),
         };
         manager.load_all()?; // ScaDaned log shows a deadlock here.
         manager.start_listeners()?;
@@ -178,12 +173,6 @@ impl FullState {
                 log::info!("Toolbar Items changed");
                 self.emit_toolbar_items()?;
             }
-        }
-
-        if history_changed {
-            log::info!("History changed");
-            self.load_history();
-            self.emit_history()?;
         }
 
         if app_configs_changed {
@@ -334,23 +323,6 @@ impl FullState {
         }
     }
 
-    fn _load_history(&mut self) -> Result<()> {
-        let history_path = SEELEN_COMMON.history_path();
-        if history_path.exists() {
-            self.launcher_history = serde_yaml::from_str(&std::fs::read_to_string(history_path)?)?;
-        } else {
-            std::fs::write(history_path, serde_yaml::to_string(&self.launcher_history)?)?;
-        }
-        Ok(())
-    }
-
-    fn load_history(&mut self) {
-        if let Err(e) = self._load_history() {
-            log::error!("Error loading history: {e}");
-            Self::show_corrupted_state_to_user(SEELEN_COMMON.history_path());
-        }
-    }
-
     /// We log each step on this cuz for some reason a deadlock is happening somewhere.
     fn load_all(&mut self) -> Result<()> {
         log::trace!("Initial load: settings");
@@ -364,9 +336,6 @@ impl FullState {
 
         log::trace!("Initial load: settings by app");
         self.load_settings_by_app();
-
-        log::trace!("Initial load: history");
-        self.load_history();
 
         log::trace!("Initial load: profiles");
         self.load_profiles()?;

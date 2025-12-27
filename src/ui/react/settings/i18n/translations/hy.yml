@@ -1,16 +1,6 @@
 action:
   confirm: Վստահ եք
   confirm_body: 'Այս գործողությունը չի կարող վերացնել:'
-app_launcher:
-  enable: Միացնել ծրագրի արձակումը
-  launch_on:
-    mouse_over: Մկնիկը վերջացել է
-    primary: Առաջնային
-  monitor: Մոնիտոր, ցույց տալու համար
-  runners:
-    cmd: Հրաման
-    explorer: Վազք
-    label: Վազողներ
 apps_configurations:
   app:
     bindings: Պարտադիր (նշում է, որ երկու տարբերակները պարտադիր են)
@@ -104,6 +94,7 @@ general:
     available: Հասանելի պատկերակների փաթեթներ
     selected: Ակտիվ պատկերակների փաթեթներ
   language: Լեզու
+  monday: Երկուշաբթի
   performance_mode:
     on_battery: Մարտկոցի վրա
     on_energy_saver: Էներգախնայողաբար
@@ -112,7 +103,10 @@ general:
       extreme: Ծայրահեղություն
       minimal: Նվազագույն
     plugged: Միացված կամ լիցքավորող
+  saturday: շաբաթ օրը
+  start_of_week: Շաբաթվա սկիզբ
   startup: 'Գործարկման վրա գործարկեք:'
+  sunday: Կիրակի
   theme:
     available: Հասանելի թեմաներ
     selected: Ակտիվ թեմաներ
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Անցեք նախորդ աշխատանքային տարածքին
     switch_workspace: Անցեք Workspace- ին {{0}}
     toggle_float: Անջատեք պատուհանի լողացող ռեժիմը
-    toggle_launcher: Գործարկելարկը
     toggle_monocle: Փոփոխեք Workspace Monocle ռեժիմը
   readonly_tooltip: Սա ընթերցված դյուրանցում է
   reset: Վերականգնել կանխադրված
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Պաստառներ
   blur: Բութ
+  cancel: Չեղարկել
+  close: Փակել
+  collection_name: Հավաքածուի անվանումը
+  collections: Հավաքածուներ
   contrast: Հակադրություն
+  create: Ստեղծել
+  create_collection: Ստեղծել Հավաքածու
+  default_collection: Կանխադրված հավաքածու
+  delete_collection: Ջնջել հավաքածուն
+  edit_collection: Խմբագրել հավաքածուն
   enable: Միացրեք Պաստառների կառավարիչը
   fit:
     contain: Պարունակել
@@ -254,11 +256,14 @@ wall:
     fill: Լցնել
   flipHorizontal: Ծխնելույզ հորիզոնական
   flipVertical: Մատով ուղղահայաց
+  generating_thumbnails: Պաստառի մանրապատկերների ստեղծում
   hours: ժամ
   interval: Ամեն ինչ փոխեք պաստառ
   minutes: րոպե
+  monitor_collection: Մոնիտորների հավաքածու
   muted: Անջատել վիդեո ձայնը
   no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
+  no_collections: 'Դեռևս ոչ մի հավաքածու չի ստեղծվել: Մեկը ստեղծելու համար սեղմեք + կոճակը:'
   objectFit: Ֆոնային տեղավորումը
   objectPosition: Ֆոնային դիրքը
   overlayColor: Ծածկույթի գույն
@@ -270,10 +275,15 @@ wall:
     left: Ձախ
     right: Իրավունք
     top: Գագաթ
+  processing_video: Տեսանյութի մշակում
   random: Պատահականացրեք սլայդերի ցուցադրումը
   saturation: Հագեցում
   seconds: վայրկյան
+  select_collection: Ընտրեք Հավաքածու
+  wallpaper_collection: Պաստառների հավաքածու
+  wallpaper_settings: Պաստառի կարգավորումներ
   withOverlay: Ծածկով
+  workspace_collections: Աշխատանքային տարածքների հավաքածուներ
 weg:
   auto_hide: Ավտոմատ թաքցնել
   delay_to_hide: Հետաձգել թաքցնելը

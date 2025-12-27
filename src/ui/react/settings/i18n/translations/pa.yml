@@ -1,16 +1,6 @@
 action:
   confirm: ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
   confirm_body: ਇਸ ਕਿਰਿਆ ਨੂੰ ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ.
-app_launcher:
-  enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
-  launch_on:
-    mouse_over: ਮਾਊਸ ਓਵਰ
-    primary: ਪ੍ਰਾਇਮਰੀ
-  monitor: ਦਿਖਾਉਣ ਲਈ ਨਿਗਰਾਨੀ
-  runners:
-    cmd: ਕਮਾਂਡ
-    explorer: ਚਲਾਓ
-    label: ਦੌੜਾਕ
 apps_configurations:
   app:
     bindings: ਬਾਈਡਿੰਗ (ਨੋਟ ਕਰੋ ਕਿ ਦੋਵੇਂ ਵਿਕਲਪ ਲੋੜੀਂਦੇ ਹਨ)
@@ -98,6 +88,7 @@ general:
     available: ਉਪਲਬਧ ਆਈਕਨ ਪੈਕ
     selected: ਐਕਟਿਵ ਆਈਕਨ ਪੈਕ
   language: ਭਾਸ਼ਾ
+  monday: ਸੋਮਵਾਰ
   performance_mode:
     on_battery: ਬੈਟਰੀ ਤੇ
     on_energy_saver: Energy ਰਜਾ ਸੇਵਰ ਤੇ
@@ -106,7 +97,10 @@ general:
       extreme: ਅੱਤ
       minimal: ਘੱਟੋ ਘੱਟ
     plugged: ਪਲੱਗ ਕੀਤਾ ਜਾਂ ਚਾਰਜ ਕਰਨਾ
+  saturday: ਸ਼ਨੀਵਾਰ
+  start_of_week: ਹਫ਼ਤੇ ਦੀ ਸ਼ੁਰੂਆਤ
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
+  sunday: ਐਤਵਾਰ
   theme:
     available: ਉਪਲਬਧ ਥੀਮ
     selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ
@@ -203,7 +197,6 @@ shortcuts:
     switch_to_previous_workspace: ਪਿਛਲੇ ਵਰਕਸਪੇਸ ਤੇ ਜਾਓ
     switch_workspace: ਵਰਕਸਪੇਸ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ {{0}}}
     toggle_float: ਵਿੰਡੋ ਫਲੋਟ ਮੋਡ ਬਦਲੋ
-    toggle_launcher: ਟੌਗਲ ਲਾਂਚਰ
     toggle_monocle: ਵਰਕਸਪੇਸ ਮੋਨੋਕਲ ਮੋਡ ਟੌਗਲ ਕਰੋ
   readonly_tooltip: ਇਹ ਸਿਰਫ ਇਕੋ ਸ਼ਾਰਟਕੱਟ ਹੈ
   reset: ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈਟ ਕਰੋ
@@ -240,7 +233,16 @@ update:
 wall:
   backgrounds: ਵਾਲਪੇਪਰ
   blur: ਧੁੰਦਲਾ
+  cancel: ਰੱਦ ਕਰੋ
+  close: ਬੰਦ ਕਰੋ
+  collection_name: ਸੰਗ੍ਰਹਿ ਦਾ ਨਾਮ
+  collections: ਸੰਗ੍ਰਹਿ
   contrast: ਇਸ ਦੇ ਉਲਟ
+  create: ਬਣਾਓ
+  create_collection: ਸੰਗ੍ਰਹਿ ਬਣਾਓ
+  default_collection: ਪੂਰਵ-ਨਿਰਧਾਰਤ ਸੰਗ੍ਰਹਿ
+  delete_collection: ਸੰਗ੍ਰਹਿ ਮਿਟਾਓ
+  edit_collection: ਸੰਗ੍ਰਹਿ ਦਾ ਸੰਪਾਦਨ ਕਰੋ
   enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   fit:
     contain: ਸ਼ਾਮਲ
@@ -248,11 +250,14 @@ wall:
     fill: ਭਰੋ
   flipHorizontal: ਹਰੀਜੱਟਲ ਫਲਿੱਪ ਕਰੋ
   flipVertical: ਲੰਬਕਾਰੀ ਫਲਿੱਪ ਕਰੋ
+  generating_thumbnails: ਵਾਲਪੇਪਰ ਥੰਬਨੇਲ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ
   hours: ਘੰਟੇ
   interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
   minutes: ਮਿੰਟ
+  monitor_collection: ਨਿਗਰਾਨ ਸੰਗ੍ਰਹਿ
   muted: ਵੀਡੀਓ ਆਡੀਓ ਨੂੰ ਮਿਊਟ ਕਰੋ
   no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
+  no_collections: ਅਜੇ ਤੱਕ ਕੋਈ ਸੰਗ੍ਰਹਿ ਨਹੀਂ ਬਣਾਇਆ ਗਿਆ। ਇੱਕ ਬਣਾਉਣ ਲਈ + ਬਟਨ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।
   objectFit: ਪਿਛੋਕੜ ਫਿਟ
   objectPosition: ਪਿਛੋਕੜ ਦੀ ਸਥਿਤੀ
   overlayColor: ਓਵਰਲੇ ਰੰਗ
@@ -264,10 +269,15 @@ wall:
     left: ਖੱਬੇ
     right: ਸੱਜੇ
     top: ਸਿਖਰ
+  processing_video: ਵੀਡੀਓ 'ਤੇ ਪ੍ਰਕਿਰਿਆ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ
   random: ਸਿਲਾਈਡ ਸਲਾਈਡ ਸ਼ੋਅ
   saturation: ਸੰਤ੍ਰਿਪਤ
   seconds: ਸਕਿੰਟ
+  select_collection: ਸੰਗ੍ਰਹਿ ਚੁਣੋ
+  wallpaper_collection: ਵਾਲਪੇਪਰ ਸੰਗ੍ਰਹਿ
+  wallpaper_settings: ਵਾਲਪੇਪਰ ਸੈਟਿੰਗਾਂ
   withOverlay: ਓਵਰਲੇਅ ਦੇ ਨਾਲ
+  workspace_collections: ਵਰਕਸਪੇਸ ਸੰਗ੍ਰਹਿ
 weg:
   auto_hide: ਆਟੋ ਓਹਲੇ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ

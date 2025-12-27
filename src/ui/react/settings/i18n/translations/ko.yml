@@ -1,16 +1,6 @@
 action:
   confirm: 확실합니까?
   confirm_body: 이 조치는 취소 할 수 없습니다.
-app_launcher:
-  enable: 앱 런처 활성화
-  launch_on:
-    mouse_over: 마우스 오버
-    primary: 주요한
-  monitor: 보여줄 화면
-  runners:
-    cmd: 명령
-    explorer: 탐색
-    label: 실행 프로그램
 apps_configurations:
   app:
     bindings: 바인딩 (두 옵션 모두 필요)
@@ -99,6 +89,7 @@ general:
     available: 사용 가능한 아이콘 팩
     selected: 현재 아이콘 팩
   language: 언어
+  monday: 월요일
   performance_mode:
     on_battery: 배터리에
     on_energy_saver: 에너지 세이버에서
@@ -107,7 +98,10 @@ general:
       extreme: 극심한
       minimal: 최소
     plugged: 플러그 또는 충전
+  saturday: 토요일
+  start_of_week: 주의 시작
   startup: 시작 시 실행
+  sunday: 일요일
   theme:
     available: 사용 가능한 테마
     selected: 현재 테마
@@ -200,7 +194,6 @@ shortcuts:
     switch_to_previous_workspace: 이전 작업 공간으로 전환하십시오
     switch_workspace: 작업 공간으로 전환 {{0}}
     toggle_float: 토글 윈도우 플로트 모드
-    toggle_launcher: 토글 런처
     toggle_monocle: 작업 공간 모노클 모드 토글
   readonly_tooltip: 이것은 읽기 전용 단축키입니다
   reset: 기본값으로 재설정하십시오
@@ -235,7 +228,16 @@ update:
 wall:
   backgrounds: 배경화면
   blur: 블러
+  cancel: 취소
+  close: 닫다
+  collection_name: 컬렉션 이름
+  collections: 컬렉션
   contrast: 대비
+  create: 만들다
+  create_collection: 컬렉션 만들기
+  default_collection: 기본 컬렉션
+  delete_collection: 컬렉션 삭제
+  edit_collection: 컬렉션 편집
   enable: 배경화면 관리자 활성화
   fit:
     contain: 포함
@@ -243,11 +245,14 @@ wall:
     fill: 채우기
   flipHorizontal: 가로로 뒤집기
   flipVertical: 세로로 뒤집기
+  generating_thumbnails: 배경화면 썸네일 생성
   hours: 시간
   interval: 배경화면 변경 주기
   minutes: 분
+  monitor_collection: 모니터 컬렉션
   muted: 비디오 오디오 음소거
   no_background: 배경화면이 없으면, 테마에 내장된 배경화면을 대신 사용합니다.
+  no_collections: 아직 생성된 컬렉션이 없습니다. + 버튼을 클릭하여 생성하세요.
   objectFit: 배경 맞춤
   objectPosition: 배경 위치
   overlayColor: 오버레이 색상
@@ -259,10 +264,15 @@ wall:
     left: 왼쪽
     right: 오른쪽
     top: Top
+  processing_video: 비디오 처리 중
   random: 슬라이드 쇼 무작위
   saturation: 채도
   seconds: 초
+  select_collection: 컬렉션 선택
+  wallpaper_collection: 배경화면 모음
+  wallpaper_settings: 배경화면 설정
   withOverlay: 오버레이 사용
+  workspace_collections: 작업공간 컬렉션
 weg:
   auto_hide: 자동 숨기기
   delay_to_hide: 숨기기 지연

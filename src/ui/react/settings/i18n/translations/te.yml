@@ -1,16 +1,6 @@
 action:
   confirm: మీకు ఖచ్చితంగా తెలుసా?
   confirm_body: ఈ చర్యను రద్దు చేయలేము.
-app_launcher:
-  enable: అనువర్తన లాంచర్‌ను ప్రారంభించండి
-  launch_on:
-    mouse_over: పైగా మౌస్
-    primary: ప్రాథమిక
-  monitor: చూపించడానికి మానిటర్
-  runners:
-    cmd: కమాండ్
-    explorer: రన్
-    label: రన్నర్లు
 apps_configurations:
   app:
     bindings: బైండింగ్ (రెండు ఎంపికలు అవసరమని గమనించండి)
@@ -102,6 +92,7 @@ general:
     available: అందుబాటులో ఉన్న ఐకాన్ ప్యాక్‌లు
     selected: సక్రియ ఐకాన్ ప్యాక్‌లు
   language: భాష
+  monday: సోమవారం
   performance_mode:
     on_battery: బ్యాటరీపై
     on_energy_saver: ఎనర్జీ సేవర్‌పై
@@ -110,7 +101,10 @@ general:
       extreme: ఎక్స్‌ట్రీమ్
       minimal: కనిష్ట
     plugged: ప్లగ్డ్ లేదా ఛార్జింగ్
+  saturday: శనివారం
+  start_of_week: వారం ప్రారంభం
   startup: స్టార్టప్‌లో అమలు చేయాలా?
+  sunday: ఆదివారం
   theme:
     available: అందుబాటులో ఉన్న థీమ్‌లు
     selected: క్రియాశీల థీమ్‌లు
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: మునుపటి వర్క్‌స్పేస్‌కు మారండి
     switch_workspace: వర్క్‌స్పేస్‌కు మారండి {{0}}
     toggle_float: విండో ఫ్లోట్ మోడ్‌ను టోగుల్ చేయండి
-    toggle_launcher: టోగుల్ లాంచర్
     toggle_monocle: వర్క్‌స్పేస్ మోనోకిల్ మోడ్‌ను టోగుల్ చేయండి
   readonly_tooltip: ఇది చదవడానికి మాత్రమే సత్వరమార్గం
   reset: డిఫాల్ట్‌లకు రీసెట్ చేయండి
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: వాల్‌పేపర్లు
   blur: బ్లర్
+  cancel: రద్దు చేయి
+  close: మూసివేయి
+  collection_name: సేకరణ పేరు
+  collections: సేకరణలు
   contrast: దీనికి విరుద్ధంగా
+  create: సృష్టించు
+  create_collection: సేకరణను సృష్టించండి
+  default_collection: డిఫాల్ట్ సేకరణ
+  delete_collection: సేకరణను తొలగించండి
+  edit_collection: సేకరణను సవరించండి
   enable: వాల్పేపర్ మేనేజర్‌ను ప్రారంభించండి
   fit:
     contain: కలిగి
@@ -252,11 +254,16 @@ wall:
     fill: పూరించండి
   flipHorizontal: క్షితిజ సమాంతరంగా తిప్పండి
   flipVertical: ఫ్లిప్ నిలువు
+  generating_thumbnails: వాల్‌పేపర్ థంబ్‌నెయిల్‌లను రూపొందిస్తోంది
   hours: గంటలు
   interval: ప్రతి వాల్‌పేపర్‌ను మార్చండి
   minutes: నిమిషాలు
+  monitor_collection: సేకరణను పర్యవేక్షించండి
   muted: వీడియో ఆడియోను మ్యూట్ చేయండి
   no_background: ఖాళీ స్లైడ్‌షో, బదులుగా థీమ్ యొక్క నేపథ్యాన్ని ఉపయోగించి.
+  no_collections: >-
+    ఇంకా సేకరణలు ఏవీ సృష్టించబడలేదు. ఒకదాన్ని సృష్టించడానికి + బటన్‌ను క్లిక్
+    చేయండి.
   objectFit: నేపథ్య సరిపోతుంది
   objectPosition: నేపథ్య స్థానం
   overlayColor: అతివ్యాప్తి రంగు
@@ -268,10 +275,15 @@ wall:
     left: ఎడమ
     right: కుడి
     top: టాప్
+  processing_video: వీడియోను ప్రాసెస్ చేస్తోంది
   random: రాండమైజ్ స్లైడ్‌షో
   saturation: సంతృప్తత
   seconds: సెకన్లు
+  select_collection: సేకరణను ఎంచుకోండి
+  wallpaper_collection: వాల్‌పేపర్ కలెక్షన్
+  wallpaper_settings: వాల్‌పేపర్ సెట్టింగ్‌లు
   withOverlay: అతివ్యాప్తితో
+  workspace_collections: కార్యస్థల సేకరణలు
 weg:
   auto_hide: ఆటో దాచు
   delay_to_hide: దాచడానికి ఆలస్యం

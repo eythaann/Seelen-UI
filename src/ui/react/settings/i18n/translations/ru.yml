@@ -1,16 +1,6 @@
 action:
   confirm: Вы уверены?
   confirm_body: Это действие не может быть отменено.
-app_launcher:
-  enable: Включить лаунчер приложений
-  launch_on:
-    mouse_over: Местоположение курсора
-    primary: Основной
-  monitor: Монитор для отображения
-  runners:
-    cmd: Командная строка
-    explorer: Проводник
-    label: Ярлыки
 apps_configurations:
   app:
     bindings: Привязка (оба параметра обязательны)
@@ -104,6 +94,7 @@ general:
     available: Доступные пакеты значков
     selected: Активные пакеты значков
   language: Язык
+  monday: Понедельник
   performance_mode:
     on_battery: На батареи
     on_energy_saver: На энергетическую экономию
@@ -112,7 +103,10 @@ general:
       extreme: Крайний
       minimal: Минимальный
     plugged: Подключен или зарядка
+  saturday: Суббота
+  start_of_week: Начало недели
   startup: Автозапуск при включении системы
+  sunday: Воскресенье
   theme:
     available: Доступные темы
     selected: Активные темы
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Переключиться на предыдущее рабочее пространство
     switch_workspace: Переключить на рабочее пространство {{0}}
     toggle_float: Переключать режим плавания окна
-    toggle_launcher: Переключение пусковой установки
     toggle_monocle: Toggle Workspace Monocle режим
   readonly_tooltip: Это ярлык только для чтения
   reset: Сбросить по умолчанию
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Обои
   blur: Пятно
+  cancel: Отмена
+  close: Закрывать
+  collection_name: Название коллекции
+  collections: Коллекции
   contrast: Контраст
+  create: Создавать
+  create_collection: Создать коллекцию
+  default_collection: Коллекция по умолчанию
+  delete_collection: Удалить коллекцию
+  edit_collection: Редактировать коллекцию
   enable: Включить менеджер обоев
   fit:
     contain: Содержите
@@ -254,11 +256,14 @@ wall:
     fill: Наполнение
   flipHorizontal: Переворот по горизонтали
   flipVertical: Флип вертикальный
+  generating_thumbnails: Создание миниатюр обоев
   hours: часы
   interval: Менять обои через
   minutes: минуты
+  monitor_collection: Коллекция мониторов
   muted: Отключить звук видео
   no_background: Пустое слайд-шоу (используется фон темы)
+  no_collections: Коллекции пока не созданы. Нажмите кнопку +, чтобы создать его.
   objectFit: Фоновая подгонка
   objectPosition: Фоновая позиция
   overlayColor: Цвет наложения
@@ -270,10 +275,15 @@ wall:
     left: Слева
     right: Справа
     top: Топ
+  processing_video: Обработка видео
   random: Случайный порядок
   saturation: Насыщенность
   seconds: секунды
+  select_collection: Выбрать коллекцию
+  wallpaper_collection: Коллекция обоев
+  wallpaper_settings: Настройки обоев
   withOverlay: С накладкой
+  workspace_collections: Коллекции рабочих областей
 weg:
   auto_hide: Автоскрытие
   delay_to_hide: Задержка, чтобы скрыть

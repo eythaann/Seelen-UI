@@ -1,16 +1,6 @@
 action:
   confirm: Adakah anda pasti?
   confirm_body: Tindakan ini tidak dapat dibatalkan.
-app_launcher:
-  enable: Dayakan Pelancar App
-  launch_on:
-    mouse_over: Tetikus ke atas
-    primary: utama
-  monitor: Pantau untuk menunjukkan
-  runners:
-    cmd: Perintah
-    explorer: Jalankan
-    label: Pelari
 apps_configurations:
   app:
     bindings: Mengikat (perhatikan kedua -dua pilihan diperlukan)
@@ -102,6 +92,7 @@ general:
     available: Pek Ikon Tersedia
     selected: Pek Ikon Aktif
   language: Bahasa
+  monday: Isnin
   performance_mode:
     on_battery: Pada bateri
     on_energy_saver: Pada Penjimat Tenaga
@@ -110,7 +101,10 @@ general:
       extreme: Melampau
       minimal: Minimum
     plugged: Dipasang atau mengecas
+  saturday: Sabtu
+  start_of_week: Permulaan Minggu
   startup: Jalankan permulaan?
+  sunday: Ahad
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
     switch_workspace: Tukar ke ruang kerja {{0}}
     toggle_float: Mod Terapung Togel Togel
-    toggle_launcher: Pelancar togol
     toggle_monocle: Mod Monocle Workspace Togol
   readonly_tooltip: Ini adalah jalan pintas baca sahaja
   reset: Tetapkan semula ke lalai
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Kertas dinding
   blur: Kabur
+  cancel: Batal
+  close: tutup
+  collection_name: Nama Koleksi
+  collections: Koleksi
   contrast: Kontras
+  create: Buat
+  create_collection: Buat Koleksi
+  default_collection: Koleksi Lalai
+  delete_collection: Padamkan Koleksi
+  edit_collection: Edit Koleksi
   enable: Dayakan Pengurus Wallpaper
   fit:
     contain: Mengandungi
@@ -254,11 +256,14 @@ wall:
     fill: Mengisi
   flipHorizontal: Flip mendatar
   flipVertical: Flip menegak
+  generating_thumbnails: Menjana Gambar Kecil Kertas Dinding
   hours: jam
   interval: Tukar kertas dinding setiap
   minutes: minit
+  monitor_collection: Koleksi Pantau
   muted: Audio video bisu
   no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
+  no_collections: Tiada koleksi dibuat lagi. Klik butang + untuk mencipta satu.
   objectFit: Latar belakang sesuai
   objectPosition: Kedudukan latar belakang
   overlayColor: Warna overlay
@@ -270,10 +275,15 @@ wall:
     left: Kiri
     right: Betul
     top: Atas
+  processing_video: Memproses video
   random: Rawak tayangan slaid
   saturation: Ketepuan
   seconds: saat
+  select_collection: Pilih Koleksi
+  wallpaper_collection: Koleksi Kertas Dinding
+  wallpaper_settings: Tetapan Kertas Dinding
   withOverlay: Dengan overlay
+  workspace_collections: Koleksi Ruang Kerja
 weg:
   auto_hide: Menyembunyikan auto
   delay_to_hide: Bertangguh untuk bersembunyi

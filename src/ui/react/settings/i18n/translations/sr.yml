@@ -1,16 +1,6 @@
 action:
   confirm: Јесте ли сигурни?
   confirm_body: Ова радња се не може поништити.
-app_launcher:
-  enable: Омогући бацач апликација
-  launch_on:
-    mouse_over: Пређите мишем
-    primary: Примарни
-  monitor: Монитор за приказивање
-  runners:
-    cmd: Командант
-    explorer: Трчати
-    label: Тркачи
 apps_configurations:
   app:
     bindings: Везивање (белешка су обе опције потребне)
@@ -104,6 +94,7 @@ general:
     available: Доступни пакети икона
     selected: Активни пакети икона
   language: Језик
+  monday: понедељак
   performance_mode:
     on_battery: На батерији
     on_energy_saver: На уштеду енергије
@@ -112,7 +103,10 @@ general:
       extreme: Екстремни
       minimal: Минималан
     plugged: Прикључен или пуњење
+  saturday: Субота
+  start_of_week: Почетак недеље
   startup: Ради на покретању?
+  sunday: недеља
   theme:
     available: Доступне теме
     selected: Активне теме
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Пређите на претходни радни простор
     switch_workspace: Пређите на радни простор {{0}}
     toggle_float: Укључивање прозора Флоат режим
-    toggle_launcher: Пребацивање бацача
     toggle_monocle: Укључите режим Монокла Моноцле Воркспаце
   readonly_tooltip: Ово је пречица само за читање
   reset: Ресетујте на подразумеване вредности
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: Позадине
   blur: Замутити
+  cancel: Откажи
+  close: Затвори
+  collection_name: Назив колекције
+  collections: Збирке
   contrast: Контраст
+  create: Креирај
+  create_collection: Направите колекцију
+  default_collection: Подразумевана колекција
+  delete_collection: Избриши колекцију
+  edit_collection: Уреди колекцију
   enable: Омогућите менаџера позадина
   fit:
     contain: Садрзати
@@ -253,11 +255,16 @@ wall:
     fill: Нанети
   flipHorizontal: Флип хоризонтално
   flipVertical: Вертикални
+  generating_thumbnails: Генерисање сличица позадине
   hours: сати
   interval: Промените позадину сваком
   minutes: минут
+  monitor_collection: Монитор Цоллецтион
   muted: Искључите звук видео записа
   no_background: Празан презентацију, уместо тога користећи прибор за тему.
+  no_collections: >-
+    Још увек није направљена ниједна збирка. Кликните на дугме + да бисте га
+    креирали.
   objectFit: Позадина погодна
   objectPosition: Позадински положај
   overlayColor: Прекривање боје
@@ -269,10 +276,15 @@ wall:
     left: Лево
     right: У праву
     top: На врху
+  processing_video: Обрада видео записа
   random: Рандомизе СлидеСхов
   saturation: Засићење
   seconds: секунди
+  select_collection: Изаберите Колекција
+  wallpaper_collection: Колекција тапета
+  wallpaper_settings: Подешавања позадине
   withOverlay: Са прекривањем
+  workspace_collections: Збирке радног простора
 weg:
   auto_hide: Аутоматска кожа
   delay_to_hide: Одложите да бисте се сакрили

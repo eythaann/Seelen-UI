@@ -1,16 +1,6 @@
 action:
   confirm: তুমি কি নিশ্চিত?
   confirm_body: এই ক্রিয়াটি পূর্বাবস্থায় ফিরে যেতে পারে না।
-app_launcher:
-  enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
-  launch_on:
-    mouse_over: মাউস ওভার
-    primary: প্রাথমিক
-  monitor: দেখানোর জন্য মনিটর
-  runners:
-    cmd: কমান্ড
-    explorer: চালানো
-    label: রানার্স
 apps_configurations:
   app:
     bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
@@ -104,6 +94,7 @@ general:
     available: উপলব্ধ আইকন প্যাক
     selected: সক্রিয় আইকন প্যাক
   language: ভাষা
+  monday: সোমবার
   performance_mode:
     on_battery: ব্যাটারিতে
     on_energy_saver: শক্তি সঞ্চয় উপর
@@ -112,7 +103,10 @@ general:
       extreme: চরম
       minimal: ন্যূনতম
     plugged: প্লাগ বা চার্জিং
+  saturday: শনিবার
+  start_of_week: সপ্তাহের শুরু
   startup: প্রারম্ভকালে চালানো?
+  sunday: রবিবার
   theme:
     available: উপলব্ধ থিম
     selected: সক্রিয় থিম
@@ -211,7 +205,6 @@ shortcuts:
     switch_to_previous_workspace: পূর্ববর্তী কর্মক্ষেত্রে স্যুইচ করুন
     switch_workspace: ওয়ার্কস্পেসে স্যুইচ করুন {{0}}
     toggle_float: টগল উইন্ডো ফ্লোট মোড
-    toggle_launcher: টগল লঞ্চার
     toggle_monocle: টগল ওয়ার্কস্পেস মনোকল মোড
   readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
   reset: ডিফল্ট পুনরায় সেট করুন
@@ -248,7 +241,16 @@ update:
 wall:
   backgrounds: ওয়ালপেপার
   blur: অস্পষ্টতা
+  cancel: বাতিল করুন
+  close: বন্ধ
+  collection_name: সংগ্রহের নাম
+  collections: সংগ্রহ
   contrast: বিপরীতে
+  create: তৈরি করুন
+  create_collection: সংগ্রহ তৈরি করুন
+  default_collection: ডিফল্ট সংগ্রহ
+  delete_collection: সংগ্রহ মুছুন
+  edit_collection: সংগ্রহ সম্পাদনা করুন
   enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
   fit:
     contain: ধারণ করে
@@ -256,11 +258,14 @@ wall:
     fill: পূরণ করুন
   flipHorizontal: অনুভূমিক ফ্লিপ
   flipVertical: উল্লম্ব ফ্লিপ
+  generating_thumbnails: ওয়ালপেপার থাম্বনেল তৈরি করা হচ্ছে
   hours: ঘন্টা
   interval: প্রতিটি ওয়ালপেপার পরিবর্তন করুন
   minutes: মিনিট
+  monitor_collection: সংগ্রহ মনিটর
   muted: ভিডিও অডিও নিঃশব্দ করুন
   no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
+  no_collections: এখনো কোনো সংগ্রহ তৈরি করা হয়নি। একটি তৈরি করতে + বোতামে ক্লিক করুন।
   objectFit: পটভূমি ফিট
   objectPosition: পটভূমি অবস্থান
   overlayColor: ওভারলে রঙ
@@ -272,10 +277,15 @@ wall:
     left: বাম
     right: ঠিক আছে
     top: শীর্ষ
+  processing_video: ভিডিও প্রসেস করা হচ্ছে
   random: এলোমেলোভাবে স্লাইডশো
   saturation: স্যাচুরেশন
   seconds: সেকেন্ড
+  select_collection: সংগ্রহ নির্বাচন করুন
+  wallpaper_collection: ওয়ালপেপার সংগ্রহ
+  wallpaper_settings: ওয়ালপেপার সেটিংস
   withOverlay: ওভারলে সহ
+  workspace_collections: ওয়ার্কস্পেস সংগ্রহ
 weg:
   auto_hide: স্বয়ং চামড়া
   delay_to_hide: আড়াল করতে বিলম্ব

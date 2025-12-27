@@ -2,7 +2,6 @@ import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mo
 
 import type {
   FancyToolbarSettings,
-  SeelenLauncherSettings,
   SeelenWallSettings,
   SeelenWegSettings,
   Settings as ISettings,
@@ -13,7 +12,6 @@ import type {
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { invoke } from "../../handlers/mod.ts";
 import {
-  SeelenLauncherWidgetId,
   SeelenToolbarWidgetId,
   SeelenWallWidgetId,
   SeelenWegWidgetId,
@@ -85,10 +83,6 @@ export class Settings {
 
   get windowManager(): WindowManagerSettings {
     return this.getBundledWidgetConfig(SeelenWindowManagerWidgetId);
-  }
-
-  get launcher(): SeelenLauncherSettings {
-    return this.getBundledWidgetConfig(SeelenLauncherWidgetId);
   }
 
   get wall(): SeelenWallSettings {

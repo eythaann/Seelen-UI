@@ -1,16 +1,6 @@
 action:
   confirm: Ydych chi'n sicr?
   confirm_body: Ni ellir dadwneud y weithred hon.
-app_launcher:
-  enable: Galluogi lansiwr app
-  launch_on:
-    mouse_over: Llygoden drosodd
-    primary: Cynradd
-  monitor: Monitor i ddangos
-  runners:
-    cmd: Gorchmynnwn
-    explorer: Redych
-    label: Rhedwyr
 apps_configurations:
   app:
     bindings: Rhwymo (nodwch fod angen y ddau opsiwn)
@@ -102,6 +92,7 @@ general:
     available: Pecynnau Eicon Ar Gael
     selected: Pecynnau Eicon Actif
   language: Iaith
+  monday: Dydd Llun
   performance_mode:
     on_battery: Ar fatri
     on_energy_saver: Ar arbed ynni
@@ -110,7 +101,10 @@ general:
       extreme: Eithafol
       minimal: Lleiaf posibl
     plugged: Plygio neu wefru
+  saturday: dydd Sadwrn
+  start_of_week: Dechrau'r Wythnos
   startup: Rhedeg ar gychwyn?
+  sunday: Sul
   theme:
     available: Themâu sydd ar Gael
     selected: Themâu Gweithredol
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Newid i Workpace Blaenorol
     switch_workspace: Newid i Workpace {{0}}
     toggle_float: Modd arnofio ffenestr togl
-    toggle_launcher: Lansiwr Toggle
     toggle_monocle: Toggle Workpace Monocle Modd
   readonly_tooltip: Llwybr byr darllen yn unig yw hwn
   reset: Ailosod i ddiffygion
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Papurau Wal
   blur: Aneglur
+  cancel: Canslo
+  close: Cau
+  collection_name: Enw Casgliad
+  collections: Casgliadau
   contrast: Gyferbynnwch
+  create: Creu
+  create_collection: Creu Casgliad
+  default_collection: Casgliad Diofyn
+  delete_collection: Dileu Casgliad
+  edit_collection: Casgliad Golygu
   enable: Galluogi Rheolwr Papur Wal
   fit:
     contain: Gynhwysaf
@@ -254,11 +256,14 @@ wall:
     fill: Lanwem
   flipHorizontal: Fflip llorweddol
   flipVertical: Fflip fertigol
+  generating_thumbnails: Cynhyrchu Mân-luniau Papur Wal
   hours: oriau
   interval: Newid papur wal bob
   minutes: munudau
+  monitor_collection: Casgliad Monitro
   muted: Tewi sain fideo
   no_background: Sioe sleidiau gwag, gan ddefnyddio cefndir thema yn lle.
+  no_collections: Dim casgliadau wedi eu creu eto. Cliciwch ar y botwm + i greu un.
   objectFit: Ffit Cefndir
   objectPosition: Safle cefndir
   overlayColor: Lliw Troshaen
@@ -270,10 +275,15 @@ wall:
     left: Gadawaf
     right: Dde
     top: Brigant
+  processing_video: Prosesu fideo
   random: Sioe sleidiau ar hap
   saturation: Dirlawnder
   seconds: eiliadau
+  select_collection: Dewiswch Casgliad
+  wallpaper_collection: Casgliad Papur Wal
+  wallpaper_settings: Gosodiadau Papur Wal
   withOverlay: Gyda throshaen
+  workspace_collections: Casgliadau Gweithle
 weg:
   auto_hide: Cuddio awto
   delay_to_hide: Oedi i guddio

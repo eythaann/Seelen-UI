@@ -1,16 +1,6 @@
 action:
   confirm: Сигурен ли си?
   confirm_body: Това действие не може да бъде отменено.
-app_launcher:
-  enable: Активирайте стартиращия APP
-  launch_on:
-    mouse_over: Мишка върху
-    primary: Първичен
-  monitor: Монитор да се покаже
-  runners:
-    cmd: Команда
-    explorer: Изпълнете
-    label: Бегачи
 apps_configurations:
   app:
     bindings: Обвързване (Забележете, че и двете опции са необходими)
@@ -104,6 +94,7 @@ general:
     available: Налични пакети с икони
     selected: Активни пакети с икони
   language: Език
+  monday: понеделник
   performance_mode:
     on_battery: На батерия
     on_energy_saver: На Saver Energy
@@ -112,7 +103,10 @@ general:
       extreme: Крайно
       minimal: Минимален
     plugged: Включени или зареждане
+  saturday: Събота
+  start_of_week: Начало на седмицата
   startup: Да се ​​стартирате при стартиране?
+  sunday: неделя
   theme:
     available: Налични теми
     selected: Активни теми
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Превключете към предишното работно пространство
     switch_workspace: Превключете в работно пространство {{0}}
     toggle_float: Toggle Window Float Mode
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: Това е пряк път само за четене
   reset: Нулирайте по подразбиране
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Тапети
   blur: Размазване
+  cancel: Отказ
+  close: затвори
+  collection_name: Име на колекцията
+  collections: Колекции
   contrast: Контраст
+  create: Създавайте
+  create_collection: Създаване на колекция
+  default_collection: Колекция по подразбиране
+  delete_collection: Изтриване на колекция
+  edit_collection: Редактиране на колекция
   enable: Активирайте мениджъра на тапети
   fit:
     contain: Съдържат
@@ -254,11 +256,16 @@ wall:
     fill: Напълнете
   flipHorizontal: Хоризонтално обръщане
   flipVertical: Вертикално обръщане
+  generating_thumbnails: Генериране на тапети с миниатюри
   hours: часове
   interval: Променете тапетите всеки
   minutes: минути
+  monitor_collection: Колекция монитори
   muted: Заглушаване на видео аудио
   no_background: Празно слайдшоу, вместо това използвайки фона на темата.
+  no_collections: >-
+    Все още няма създадени колекции. Щракнете върху бутона +, за да създадете
+    такъв.
   objectFit: Подходящ фон
   objectPosition: Фонова позиция
   overlayColor: Цвят на наслагване
@@ -270,10 +277,15 @@ wall:
     left: Вляво
     right: Вдясно
     top: Топ
+  processing_video: Обработка на видео
   random: Рандомизиране слайдшоу
   saturation: Насищане
   seconds: секунди
+  select_collection: Изберете Колекция
+  wallpaper_collection: Колекция тапети
+  wallpaper_settings: Настройки на тапета
   withOverlay: С наслагване
+  workspace_collections: Колекции на работното пространство
 weg:
   auto_hide: Автоматично скриване
   delay_to_hide: Забавяне, за да се скрие

@@ -1,4 +1,3 @@
-pub mod launcher;
 pub mod loader;
 pub mod manager;
 pub mod popups;

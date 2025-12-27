@@ -1,16 +1,6 @@
 action:
   confirm: Sigurado ka ba?
   confirm_body: Ang pagkilos na ito ay hindi maaaring magawa.
-app_launcher:
-  enable: Paganahin ang launcher ng app
-  launch_on:
-    mouse_over: Itapat ng mouse
-    primary: Pangunahin
-  monitor: Subaybayan upang ipakita
-  runners:
-    cmd: Utos
-    explorer: Tumakbo
-    label: Mga mananakbo
 apps_configurations:
   app:
     bindings: Ang pagbubuklod (tandaan ang parehong mga pagpipilian ay kinakailangan)
@@ -106,6 +96,7 @@ general:
     available: Magagamit na Mga Icon Pack
     selected: Mga Aktibong Icon Pack
   language: Wika
+  monday: Lunes
   performance_mode:
     on_battery: Sa baterya
     on_energy_saver: Sa enerhiya saver
@@ -114,7 +105,10 @@ general:
       extreme: Matinding
       minimal: Minimal
     plugged: Naka -plug o singilin
+  saturday: Sabado
+  start_of_week: Simula ng Linggo
   startup: Patakbuhin sa Startup?
+  sunday: Linggo
   theme:
     available: Magagamit na Mga Tema
     selected: Mga Aktibong Tema
@@ -213,7 +207,6 @@ shortcuts:
     switch_to_previous_workspace: Lumipat sa nakaraang workspace
     switch_workspace: Lumipat sa workspace {{0}}
     toggle_float: Toggle window float mode
-    toggle_launcher: Toggle launcher
     toggle_monocle: Toggle workspace monocle mode
   readonly_tooltip: Ito ay isang shortcut na basahin lamang
   reset: I -reset sa mga default
@@ -250,7 +243,16 @@ update:
 wall:
   backgrounds: Wallpaper
   blur: Malabo
+  cancel: Kanselahin
+  close: Isara
+  collection_name: Pangalan ng Koleksyon
+  collections: Mga koleksyon
   contrast: Kaibahan
+  create: Lumikha
+  create_collection: Lumikha ng Koleksyon
+  default_collection: Default na Koleksyon
+  delete_collection: Tanggalin ang Koleksyon
+  edit_collection: I-edit ang Koleksyon
   enable: Paganahin ang manager ng wallpaper
   fit:
     contain: Naglalaman
@@ -258,11 +260,14 @@ wall:
     fill: Punan
   flipHorizontal: I -flip ang pahalang
   flipVertical: Flip vertical
+  generating_thumbnails: Pagbuo ng Mga Thumbnail ng Wallpaper
   hours: oras
   interval: Baguhin ang wallpaper bawat
   minutes: minuto
+  monitor_collection: Monitor Collection
   muted: Mute Video Audio
   no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
+  no_collections: Wala pang nagawang koleksyon. I-click ang + button para gumawa ng isa.
   objectFit: Pagkasyahin sa background
   objectPosition: Posisyon sa background
   overlayColor: Kulay ng overlay
@@ -274,10 +279,15 @@ wall:
     left: Kaliwa
     right: Tama
     top: Tuktok
+  processing_video: Pinoproseso ang video
   random: Randomize slideshow
   saturation: Saturation
   seconds: segundo
+  select_collection: Piliin ang Koleksyon
+  wallpaper_collection: Koleksyon ng Wallpaper
+  wallpaper_settings: Mga Setting ng Wallpaper
   withOverlay: Na may overlay
+  workspace_collections: Mga Koleksyon ng Workspace
 weg:
   auto_hide: Auto itago
   delay_to_hide: Delay sa pagtatago

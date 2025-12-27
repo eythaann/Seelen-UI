@@ -1,16 +1,6 @@
 action:
   confirm: 你確定嗎？
   confirm_body: 該動作不能撤消。
-app_launcher:
-  enable: 啟用應用啟動器
-  launch_on:
-    mouse_over: 鼠標結束
-    primary: 基本的
-  monitor: 顯示顯示
-  runners:
-    cmd: 命令
-    explorer: 跑步
-    label: 跑步者
 apps_configurations:
   app:
     bindings: 綁定（需要兩個選項）
@@ -97,6 +87,7 @@ general:
     available: 可用的圖標包
     selected: 活動圖標包
   language: 語言
+  monday: 週一
   performance_mode:
     on_battery: 在電池上
     on_energy_saver: 在能量儲蓄方面
@@ -105,7 +96,10 @@ general:
       extreme: 極端
       minimal: 最小
     plugged: 插入或充電
+  saturday: 週六
+  start_of_week: 一周開始
   startup: 在啟動上運行？
+  sunday: 星期日
   theme:
     available: 可用的主題
     selected: 主題主題
@@ -198,7 +192,6 @@ shortcuts:
     switch_to_previous_workspace: 切換到以前的工作區
     switch_workspace: 切換到工作區{{0}}
     toggle_float: 切換窗口浮點模式
-    toggle_launcher: 切換發射器
     toggle_monocle: 切換工作區單片模式
   readonly_tooltip: 這是只讀的捷徑
   reset: 重置為默認值
@@ -233,7 +226,16 @@ update:
 wall:
   backgrounds: 壁紙
   blur: 模糊
+  cancel: 取消
+  close: 關閉
+  collection_name: 收藏名稱
+  collections: 收藏
   contrast: 對比
+  create: 創造
+  create_collection: 創建收藏
+  default_collection: 默認集合
+  delete_collection: 刪除集合
+  edit_collection: 編輯收藏
   enable: 啟用壁紙經理
   fit:
     contain: 包含
@@ -241,11 +243,14 @@ wall:
     fill: 充滿
   flipHorizontal: 翻轉水平
   flipVertical: 翻轉垂直
+  generating_thumbnails: 生成壁紙縮略圖
   hours: 小時
   interval: 每次更改牆紙
   minutes: 分鐘
+  monitor_collection: 監控集合
   muted: 將視頻音頻靜音
   no_background: 使用主題的背景為空幻燈片。
+  no_collections: 尚未創建任何集合。 單擊 + 按鈕創建一個。
   objectFit: 背景擬合
   objectPosition: 背景位置
   overlayColor: 覆蓋顏色
@@ -257,10 +262,15 @@ wall:
     left: 左邊
     right: 正確的
     top: 頂部
+  processing_video: 處理視頻
   random: 隨機化幻燈片
   saturation: 飽和
   seconds: 秒
+  select_collection: 選擇系列
+  wallpaper_collection: 壁紙合集
+  wallpaper_settings: 壁紙設置
   withOverlay: 使用覆蓋
+  workspace_collections: 工作區集合
 weg:
   auto_hide: 自動隱藏
   delay_to_hide: 延遲隱藏

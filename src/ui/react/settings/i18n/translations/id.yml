@@ -1,16 +1,6 @@
 action:
   confirm: Apa kamu yakin?
   confirm_body: Tindakan ini tidak bisa dibatalkan.
-app_launcher:
-  enable: Aktifkan peluncur aplikasi
-  launch_on:
-    mouse_over: Arahkan mouse
-    primary: Utama
-  monitor: Monitor untuk ditampilkan
-  runners:
-    cmd: Memerintah
-    explorer: Berlari
-    label: Pelari
 apps_configurations:
   app:
     bindings: Mengikat (perhatikan kedua opsi itu diperlukan)
@@ -104,6 +94,7 @@ general:
     available: Paket Ikon yang Tersedia
     selected: Paket Ikon Aktif
   language: Bahasa
+  monday: Senin
   performance_mode:
     on_battery: Pada baterai
     on_energy_saver: Tentang Penghemat Energi
@@ -112,7 +103,10 @@ general:
       extreme: Ekstrim
       minimal: Minimal
     plugged: Terhubung atau pengisian daya
+  saturday: Sabtu
+  start_of_week: Awal Minggu
   startup: Jalankan saat startup?
+  sunday: Minggu
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif
@@ -211,7 +205,6 @@ shortcuts:
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
     switch_workspace: Beralih ke Workspace {{0}}
     toggle_float: Toggle Window Float Mode
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Sakelar Mode Monokel Workspace
   readonly_tooltip: Ini adalah jalan pintas yang hanya membaca
   reset: Reset ke default
@@ -248,7 +241,16 @@ update:
 wall:
   backgrounds: Wallpaper
   blur: Blur
+  cancel: Membatalkan
+  close: Menutup
+  collection_name: Nama Koleksi
+  collections: Koleksi
   contrast: Kontras
+  create: Membuat
+  create_collection: Buat Koleksi
+  default_collection: Koleksi Bawaan
+  delete_collection: Hapus Koleksi
+  edit_collection: Sunting Koleksi
   enable: Aktifkan Manajer Wallpaper
   fit:
     contain: Berisi
@@ -256,11 +258,14 @@ wall:
     fill: Isi
   flipHorizontal: Balik Horizontal
   flipVertical: Balik Vertikal
+  generating_thumbnails: Menghasilkan Gambar Mini Wallpaper
   hours: jam
   interval: Ubah wallpaper setiap
   minutes: menit
+  monitor_collection: Koleksi Pantau
   muted: Bisukan audio video
   no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
+  no_collections: Belum ada koleksi yang dibuat. Klik tombol + untuk membuatnya.
   objectFit: Kesesuaian Latar Belakang
   objectPosition: Posisi Latar Belakang
   overlayColor: Warna Hamparan
@@ -272,10 +277,15 @@ wall:
     left: Kiri
     right: Benar.
     top: Atas
+  processing_video: Memproses video
   random: Mengacak tayangan slide
   saturation: Kejenuhan
   seconds: detik
+  select_collection: Pilih Koleksi
+  wallpaper_collection: Koleksi Kertas Dinding
+  wallpaper_settings: Pengaturan Wallpaper
   withOverlay: Dengan Overlay
+  workspace_collections: Koleksi Ruang Kerja
 weg:
   auto_hide: Sembunyi otomatis
   delay_to_hide: Penundaan untuk bersembunyi

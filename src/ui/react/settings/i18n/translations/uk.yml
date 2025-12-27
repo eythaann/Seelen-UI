@@ -1,16 +1,6 @@
 action:
   confirm: Ви впевнені?
   confirm_body: Цю дію не можна скасувати.
-app_launcher:
-  enable: Увімкнути швидкий запуск
-  launch_on:
-    mouse_over: Наведіть курсор миші
-    primary: Основний
-  monitor: Монітор, на якому показати вікно
-  runners:
-    cmd: Командний рядок
-    explorer: Запуск
-    label: Налаштування запуску
 apps_configurations:
   app:
     bindings: Прив'язка (візьміть до уваги, що обидва варіанти потрібні)
@@ -102,6 +92,7 @@ general:
     available: Доступні пакети іконок
     selected: Активні пакети іконки
   language: Мова
+  monday: понеділок
   performance_mode:
     on_battery: На акумулятор
     on_energy_saver: На енергозбереженні
@@ -110,7 +101,10 @@ general:
       extreme: Екстремальний
       minimal: Мінімальний
     plugged: Підключений або заряджається
+  saturday: Субота
+  start_of_week: Початок тижня
   startup: Запускати разом з Windows?
+  sunday: неділя
   theme:
     available: Доступні теми
     selected: Активні теми
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: Перехід на попередню робочу область
     switch_workspace: Переключення на робочу область {{0}}
     toggle_float: Перемикайте режим віконного поплавця
-    toggle_launcher: Перемикач запуску
     toggle_monocle: Перемикайте режим монокльної роботи робочої області
   readonly_tooltip: Це ярлик лише для читання
   reset: Скидання за замовчуванням
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: Шпалери
   blur: Плямистість.
+  cancel: Скасувати
+  close: Закрити
+  collection_name: Назва колекції
+  collections: Колекції
   contrast: Контраст
+  create: Створити
+  create_collection: Створити колекцію
+  default_collection: Колекція за замовчуванням
+  delete_collection: Видалити колекцію
+  edit_collection: Редагувати колекцію
   enable: Увімкнути менеджер шпалер
   fit:
     contain: Містити
@@ -252,11 +254,14 @@ wall:
     fill: Заповніть.
   flipHorizontal: Горизонтальне перевертання
   flipVertical: Фліп Вертикальний
+  generating_thumbnails: Створення мініатюр шпалер
   hours: години
   interval: Зміна шпалер кожні
   minutes: хвилини
+  monitor_collection: Колекція моніторів
   muted: Вимкнути звук відео
   no_background: Слайдів не знайдено, натомість застосовано фон теми.
+  no_collections: Ще немає створених колекцій. Натисніть кнопку +, щоб створити його.
   objectFit: Підгонка фону
   objectPosition: Вихідна позиція
   overlayColor: Колір накладання
@@ -268,10 +273,15 @@ wall:
     left: Ліворуч.
     right: Так.
     top: Верхня частина
+  processing_video: Обробка відео
   random: Випадковий порядок слайд-шоу
   saturation: Насиченість
   seconds: секунди
+  select_collection: Виберіть Колекція
+  wallpaper_collection: Колекція шпалер
+  wallpaper_settings: Налаштування шпалер
   withOverlay: З накладанням
+  workspace_collections: Колекції робочої області
 weg:
   auto_hide: Автоматично приховувати
   delay_to_hide: Затримка приховання

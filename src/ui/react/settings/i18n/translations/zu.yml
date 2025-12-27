@@ -1,16 +1,6 @@
 action:
   confirm: Uqinisekile?
   confirm_body: Lesi senzo asinakungcola.
-app_launcher:
-  enable: Nika amandla isiqalisi sohlelo lokusebenza
-  launch_on:
-    mouse_over: Igundane phezu
-    primary: Okuyinhloko
-  monitor: Qapha ukukhombisa
-  runners:
-    cmd: Juba
-    explorer: Gijima
-    label: Abagebhe
 apps_configurations:
   app:
     bindings: Ukubopha (inothi zombili izinketho ziyadingeka)
@@ -104,6 +94,7 @@ general:
     available: Amaphekhi esithonjana atholakalayo
     selected: Amaphekhi Wesithonjana Asebenzayo
   language: Ulimi
+  monday: UMsombuluko
   performance_mode:
     on_battery: Ebhethri
     on_energy_saver: Ku-Sergy Saver
@@ -112,7 +103,10 @@ general:
       extreme: '-Dlulele'
       minimal: '-Ncilula'
     plugged: Ixhunyiwe noma ishaja
+  saturday: NgoMgqibelo
+  start_of_week: Ukuqala Kweviki
   startup: Gijima ekuqaleni?
+  sunday: NgeSonto
   theme:
     available: Izingqikithi Ezitholakalayo
     selected: Izindikimba ezisebenzayo
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Shintshela endaweni yokusebenza edlule
     switch_workspace: Shintshela endaweni yokusebenza {{0}}
     toggle_float: Imodi yewindows Float Float
-    toggle_launcher: Guqula Isiqalisi
     toggle_monocle: Guqula imodi ye-monocle ye-workspace
   readonly_tooltip: Lesi isinqamuleli esifundwayo kuphela
   reset: Setha kabusha okuzenzakalelayo
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Ama-Wallpaper
   blur: Impumpula
+  cancel: Khansela
+  close: Vala
+  collection_name: Igama Leqoqo
+  collections: Amaqoqo
   contrast: Ukuqhathanisa
+  create: Dala
+  create_collection: Dala Iqoqo
+  default_collection: Iqoqo elizenzakalelayo
+  delete_collection: Susa Iqoqo
+  edit_collection: Hlela Iqoqo
   enable: Nika amandla umphathi wangemuva
   fit:
     contain: Qukethe
@@ -254,13 +256,18 @@ wall:
     fill: Gcwalisa
   flipHorizontal: Flip ovundlile
   flipVertical: Flip mpo
+  generating_thumbnails: Ikhiqiza Izithonjana zangemuva
   hours: amahora
   interval: Shintsha iphepha lokunamathisela odongeni
   minutes: imizuzu
+  monitor_collection: Gada Iqoqo
   muted: Thulisa Video Audio
   no_background: >-
     Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
     esikhundleni.
+  no_collections: >-
+    Awekho amaqoqo adaliwe okwamanje. Chofoza inkinobho ethi + ukuze udale
+    eyodwa.
   objectFit: Isendlalelo semuva
   objectPosition: Isikhundla sangemuva
   overlayColor: Umbala obheke phambili
@@ -272,10 +279,15 @@ wall:
     left: '-Bunxele'
     right: Ngakwesokudla
     top: Isihloko
+  processing_video: Icubungula ividiyo
   random: Nge-slideshow engahleliwe
   saturation: Ukutacwaba
   seconds: imisa
+  select_collection: Khetha Iqoqo
+  wallpaper_collection: Ukuqoqwa kwamaphephadonga
+  wallpaper_settings: Izilungiselelo zangemuva
   withOverlay: Ngokumbondelana
+  workspace_collections: Amaqoqo wendawo yokusebenza
 weg:
   auto_hide: Fihla okuzenzakalelayo
   delay_to_hide: Libazise ukucasha

@@ -1,16 +1,6 @@
 action:
   confirm: क्या आपको यकीन है?
   confirm_body: इस एक्शन को वापस नहीं किया जा सकता।
-app_launcher:
-  enable: ऐप लॉन्चर सक्षम करें
-  launch_on:
-    mouse_over: माउस के ऊपर
-    primary: प्राथमिक
-  monitor: दिखाने के लिए मॉनिटर
-  runners:
-    cmd: आज्ञा
-    explorer: दौड़ना
-    label: धावकों
 apps_configurations:
   app:
     bindings: बाइंडिंग (ध्यान दें कि दोनों विकल्पों की आवश्यकता है)
@@ -104,6 +94,7 @@ general:
     available: उपलब्ध चिह्न पैक
     selected: सक्रिय चिह्न पैक
   language: भाषा
+  monday: सोमवार
   performance_mode:
     on_battery: बैटरी पर
     on_energy_saver: ऊर्जा सेवर पर
@@ -112,7 +103,10 @@ general:
       extreme: चरम
       minimal: न्यूनतम
     plugged: प्लग या चार्जिंग
+  saturday: शनिवार
+  start_of_week: सप्ताह की शुरुआत
   startup: स्टार्टअप पर चलाएं?
+  sunday: रविवार
   theme:
     available: उपलब्ध थीम्स
     selected: सक्रिय विषय-वस्तु
@@ -211,7 +205,6 @@ shortcuts:
     switch_to_previous_workspace: पिछले कार्यक्षेत्र पर स्विच करें
     switch_workspace: कार्यक्षेत्र {{0}} पर स्विच करें
     toggle_float: टॉगल विंडो फ्लोट मोड
-    toggle_launcher: टॉगल लॉन्चर
     toggle_monocle: टॉगल वर्कस्पेस मोनोकल मोड
   readonly_tooltip: यह केवल एक रीड-शॉर्टकट है
   reset: डिफ़ॉल्ट पर पुनः सेट करें
@@ -247,7 +240,16 @@ update:
 wall:
   backgrounds: वॉलपेपर
   blur: कलंक
+  cancel: रद्द करना
+  close: बंद करना
+  collection_name: संग्रह का नाम
+  collections: संग्रह
   contrast: अंतर
+  create: बनाएं
+  create_collection: संग्रह बनाएँ
+  default_collection: डिफ़ॉल्ट संग्रह
+  delete_collection: संग्रह हटाएँ
+  edit_collection: संग्रह संपादित करें
   enable: वॉलपेपर प्रबंधक सक्षम करें
   fit:
     contain: रोकना
@@ -255,11 +257,14 @@ wall:
     fill: भरना
   flipHorizontal: क्षैतिज
   flipVertical: तलवाड़ा
+  generating_thumbnails: वॉलपेपर थंबनेल उत्पन्न करना
   hours: घंटे
   interval: वॉलपेपर हर बदलें
   minutes: मिनट
+  monitor_collection: मॉनिटर संग्रह
   muted: वीडियो ऑडियो म्यूट करें
   no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
+  no_collections: अभी तक कोई संग्रह नहीं बनाया गया. एक बनाने के लिए + बटन पर क्लिक करें।
   objectFit: पृष्ठभूमि फिट
   objectPosition: पृष्ठभूमि स्थिति
   overlayColor: ओवरले रंग
@@ -271,10 +276,15 @@ wall:
     left: बाएं
     right: सही
     top: शीर्ष
+  processing_video: वीडियो संसाधित किया जा रहा है
   random: यादृच्छिक स्लाइड शो
   saturation: परिपूर्णता
   seconds: सेकंड
+  select_collection: संग्रह का चयन करें
+  wallpaper_collection: वॉलपेपर संग्रह
+  wallpaper_settings: वॉलपेपर सेटिंग्स
   withOverlay: ओवरले के साथ
+  workspace_collections: कार्यक्षेत्र संग्रह
 weg:
   auto_hide: खुद से छिपना
   delay_to_hide: छिपाने में देरी

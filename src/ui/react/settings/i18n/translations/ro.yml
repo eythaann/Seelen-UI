@@ -1,16 +1,6 @@
 action:
   confirm: Ești sigur?
   confirm_body: Această acțiune nu poate fi anulată.
-app_launcher:
-  enable: Activați lansatorul de aplicații
-  launch_on:
-    mouse_over: Trece cu mouse-ul peste
-    primary: Primar
-  monitor: Monitor pentru a arăta
-  runners:
-    cmd: Comanda
-    explorer: Alerga
-    label: Alergători
 apps_configurations:
   app:
     bindings: Legare (notă ambele opțiuni sunt necesare)
@@ -104,6 +94,7 @@ general:
     available: Pachete de pictograme disponibile
     selected: Pachete de pictograme active
   language: Limba
+  monday: luni
   performance_mode:
     on_battery: Pe baterie
     on_energy_saver: Pe economia de energie
@@ -112,7 +103,10 @@ general:
       extreme: Extrem
       minimal: Minim
     plugged: Conectat sau încărcat
+  saturday: sâmbătă
+  start_of_week: Începutul săptămânii
   startup: Rulați la pornire?
+  sunday: duminică
   theme:
     available: Teme disponibile
     selected: Teme active
@@ -211,7 +205,6 @@ shortcuts:
     switch_to_previous_workspace: Treceți la spațiul de lucru anterior
     switch_workspace: Treceți la Workspace {{0}}
     toggle_float: Comutați modul de plutire a ferestrei
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Comutați modul monocle al spațiului de lucru
   readonly_tooltip: Aceasta este o scurtătură numai pentru citire
   reset: Resetați la valorile implicite
@@ -248,7 +241,16 @@ update:
 wall:
   backgrounds: Imagini de fundal
   blur: Ceață
+  cancel: Anula
+  close: Aproape
+  collection_name: Numele colecției
+  collections: Colecții
   contrast: Contrast
+  create: Crea
+  create_collection: Creați o colecție
+  default_collection: Colecție implicită
+  delete_collection: Șterge colecția
+  edit_collection: Editați colecția
   enable: Activați manager de tapet
   fit:
     contain: Conține
@@ -256,11 +258,14 @@ wall:
     fill: Umpleți
   flipHorizontal: Flip orizontal
   flipVertical: Flip vertical
+  generating_thumbnails: Generarea miniaturilor de fundal
   hours: ore
   interval: Schimbați tapet fiecare
   minutes: minute
+  monitor_collection: Colecția de monitor
   muted: Dezactivați sunetul video
   no_background: Slideshow gol, folosind în schimb fundalul temei.
+  no_collections: Nicio colecție încă creată. Faceți clic pe butonul + pentru a crea unul.
   objectFit: Potrivire în fundal
   objectPosition: Poziția de fundal
   overlayColor: Culoare suprapunere
@@ -272,10 +277,15 @@ wall:
     left: Stânga
     right: Corect
     top: Sus
+  processing_video: Se procesează videoclipul
   random: Prezentare de diapozitive aleatorie
   saturation: Saturație
   seconds: secunde
+  select_collection: Selectați Colecție
+  wallpaper_collection: Colecția de imagini de fundal
+  wallpaper_settings: Setări de fundal
   withOverlay: Cu suprapunere
+  workspace_collections: Colecții de spațiu de lucru
 weg:
   auto_hide: Ascundere automată
   delay_to_hide: Întârzie să te ascunzi

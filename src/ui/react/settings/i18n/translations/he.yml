@@ -1,16 +1,6 @@
 action:
   confirm: אתה בטוח?
   confirm_body: לא ניתן לבטל פעולה זו.
-app_launcher:
-  enable: הפעל משגר אפליקציות
-  launch_on:
-    mouse_over: העכבר מעל
-    primary: יְסוֹדִי
-  monitor: צג כדי להציג
-  runners:
-    cmd: פְּקוּדָה
-    explorer: לָרוּץ
-    label: רצים
 apps_configurations:
   app:
     bindings: כריכה (שימו לב לשתי האפשרויות נדרשות)
@@ -100,6 +90,7 @@ general:
     available: חבילות אייקונים זמינות
     selected: ערכות אייקונים פעילות
   language: שפה
+  monday: יוֹם שֵׁנִי
   performance_mode:
     on_battery: על סוללה
     on_energy_saver: על חוסך אנרגיה
@@ -108,7 +99,10 @@ general:
       extreme: קיצוני
       minimal: מִינִימָלִי
     plugged: מחובר או טעינה
+  saturday: שַׁבָּת
+  start_of_week: תחילת השבוע
   startup: לרוץ בהפעלה?
+  sunday: יוֹם רִאשׁוֹן
   theme:
     available: ערכות נושא זמינות
     selected: ערכות נושא פעילות
@@ -201,7 +195,6 @@ shortcuts:
     switch_to_previous_workspace: עבור לסביבת העבודה הקודמת
     switch_workspace: עברו לסביבת עבודה {{0}}
     toggle_float: החלף מצב צף חלון
-    toggle_launcher: Thinggle Thanger
     toggle_monocle: החלף את מצב המונוקל של סביבת העבודה
   readonly_tooltip: זהו קיצור דרך לקריאה בלבד
   reset: אפס לברירות מחדל
@@ -237,7 +230,16 @@ update:
 wall:
   backgrounds: טפטים
   blur: לְטַשׁטֵשׁ
+  cancel: לְבַטֵל
+  close: לִסְגוֹר
+  collection_name: שם האוסף
+  collections: אוספים
   contrast: לְהַשְׁווֹת
+  create: לִיצוֹר
+  create_collection: צור אוסף
+  default_collection: אוסף ברירת מחדל
+  delete_collection: מחק אוסף
+  edit_collection: ערוך אוסף
   enable: אפשר מנהל טפטים
   fit:
     contain: לְהַכִיל
@@ -245,11 +247,14 @@ wall:
     fill: לְמַלֵא
   flipHorizontal: הפוך אופקי
   flipVertical: הפוך אנכי
+  generating_thumbnails: יצירת תמונות ממוזערות של טפטים
   hours: שעות
   interval: החלף טפטים כל
   minutes: דקות
+  monitor_collection: אוסף מוניטור
   muted: השתקת אודיו של וידאו
   no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
+  no_collections: עדיין לא נוצרו אוספים. לחץ על הלחצן + כדי ליצור אחד.
   objectFit: כושר רקע
   objectPosition: מיקום רקע
   overlayColor: צבע שכבה
@@ -261,10 +266,15 @@ wall:
     left: שְׁמֹאל
     right: יָמִינָה
     top: רֹאשׁ
+  processing_video: מעבד וידאו
   random: מצגת שקופיות אקראית
   saturation: רִוּוּי
   seconds: שניות
+  select_collection: בחר אוסף
+  wallpaper_collection: אוסף טפטים
+  wallpaper_settings: הגדרות טפט
   withOverlay: עם שכבת -על
+  workspace_collections: אוספי סביבת עבודה
 weg:
   auto_hide: הסתר אוטומטי
   delay_to_hide: עיכוב להסתיר

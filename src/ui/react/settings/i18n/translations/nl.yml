@@ -1,16 +1,6 @@
 action:
   confirm: Weet je het zeker?
   confirm_body: Deze actie kan niet ongedaan worden gemaakt.
-app_launcher:
-  enable: Schakel App Launcher in
-  launch_on:
-    mouse_over: Muis er overheen
-    primary: Primair
-  monitor: Monitor om te laten zien
-  runners:
-    cmd: Commando
-    explorer: Uitvoeren
-    label: Uitvoerders
 apps_configurations:
   app:
     bindings: Binding (beide opties zijn vereist)
@@ -102,6 +92,7 @@ general:
     available: Beschikbare pictogrampakketten
     selected: Actieve pictogrampakketten
   language: Taal
+  monday: Maandag
   performance_mode:
     on_battery: Op de batterij
     on_energy_saver: Op energiebespaarder
@@ -110,7 +101,10 @@ general:
       extreme: Extreem
       minimal: Minimaal
     plugged: Aangesloten of opladen
+  saturday: Zaterdag
+  start_of_week: Begin van de week
   startup: Uitvoeren bij het starten?
+  sunday: Zondag
   theme:
     available: Beschikbare thema's
     selected: Actieve thema's
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: Schakel over naar vorige werkruimte
     switch_workspace: Schakel over naar werkruimte {{0}}
     toggle_float: Schakelvenster Float -modus
-    toggle_launcher: Schakelwerper
     toggle_monocle: Schakel de werkruimte Monocle -modus
   readonly_tooltip: Dit is een alleen-lezen snelkoppeling
   reset: Reset naar standaardwaarden
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: Achtergronden
   blur: Vervagen
+  cancel: Annuleren
+  close: Dichtbij
+  collection_name: Collectienaam
+  collections: Collecties
   contrast: Contrast
+  create: Creëren
+  create_collection: Verzameling maken
+  default_collection: Standaardcollectie
+  delete_collection: Verzameling verwijderen
+  edit_collection: Verzameling bewerken
   enable: Schakel wallpaper manager in
   fit:
     contain: Bevat
@@ -252,13 +254,18 @@ wall:
     fill: Vullen
   flipHorizontal: Flip Horizontaal
   flipVertical: Verticaal klappen
+  generating_thumbnails: Achtergrondminiaturen genereren
   hours: uren
   interval: Verander wallpaper elke
   minutes: notulen
+  monitor_collection: Monitor-collectie
   muted: Video-audio dempen
   no_background: >-
     Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
     thema.
+  no_collections: >-
+    Er zijn nog geen collecties aangemaakt. Klik op de knop + om er een te
+    maken.
   objectFit: Achtergrond
   objectPosition: Achtergrond Positie
   overlayColor: Overlay Kleur
@@ -270,10 +277,15 @@ wall:
     left: Links
     right: Rechts
     top: Top
+  processing_video: Video verwerken
   random: Randomize diavoorstelling
   saturation: Verzadiging
   seconds: seconden
+  select_collection: Selecteer Verzameling
+  wallpaper_collection: Behangcollectie
+  wallpaper_settings: Achtergrondinstellingen
   withOverlay: Met overlay
+  workspace_collections: Werkruimtecollecties
 weg:
   auto_hide: Automatisch Verbergen
   delay_to_hide: Vertraging om te verbergen

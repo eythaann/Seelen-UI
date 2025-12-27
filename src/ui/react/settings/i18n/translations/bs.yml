@@ -1,16 +1,6 @@
 action:
   confirm: Jeste li sigurni?
   confirm_body: Ova akcija se ne može poništiti.
-app_launcher:
-  enable: Omogući pokretač aplikacija
-  launch_on:
-    mouse_over: Pređite mišem
-    primary: Primarno
-  monitor: Monitor za prikaz
-  runners:
-    cmd: Naredba
-    explorer: Trčati
-    label: Trkači
 apps_configurations:
   app:
     bindings: Vezanje (napominje su obavezne opcije)
@@ -102,6 +92,7 @@ general:
     available: Dostupni paketi ikona
     selected: Aktivni paketi ikona
   language: Jezik
+  monday: ponedjeljak
   performance_mode:
     on_battery: Na bateriji
     on_energy_saver: Na uštedu energije
@@ -110,7 +101,10 @@ general:
       extreme: Ekstremno
       minimal: Minimalan
     plugged: Uključen ili punjenje
+  saturday: Subota
+  start_of_week: Početak sedmice
   startup: Trčite na pokretanju?
+  sunday: Nedjelja
   theme:
     available: Dostupne teme
     selected: Aktivne teme
@@ -207,7 +201,6 @@ shortcuts:
     switch_to_previous_workspace: Prebacite se na prethodni radni prostor
     switch_workspace: Prebacite se na radni prostor {{0}}
     toggle_float: Preklopni režim plovka prozora
-    toggle_launcher: Prebacite pokretač
     toggle_monocle: Toggle Workspace Monocle mod
   readonly_tooltip: Ovo je prečica za čitanje
   reset: Resetiranje na zadane vrijednosti
@@ -244,7 +237,16 @@ update:
 wall:
   backgrounds: Pozadine
   blur: Zamutiti
+  cancel: Otkaži
+  close: Zatvori
+  collection_name: Naziv kolekcije
+  collections: Zbirke
   contrast: Kontrast
+  create: Kreiraj
+  create_collection: Kreiraj kolekciju
+  default_collection: Default Collection
+  delete_collection: Izbriši kolekciju
+  edit_collection: Uredi kolekciju
   enable: Omogućite menadžer pozadina
   fit:
     contain: Sadržiti
@@ -252,11 +254,14 @@ wall:
     fill: Ispuniti
   flipHorizontal: Flip horizontalni
   flipVertical: Okrenuti vertikalu
+  generating_thumbnails: Generiranje sličica pozadine
   hours: sati
   interval: Promijenite pozadinu svake
   minutes: minuta
+  monitor_collection: Monitor Collection
   muted: Isključite zvuk video zapisa
   no_background: Prazno prezentacija, koristeći temu, umjesto toga.
+  no_collections: Još nema kreiranih kolekcija. Kliknite na dugme + da ga kreirate.
   objectFit: Pozadina fit
   objectPosition: Pozadinsko pozicija
   overlayColor: Boja prekrivanja
@@ -268,10 +273,15 @@ wall:
     left: Lijevo
     right: Pravo
     top: Vrh
+  processing_video: Obrada videa
   random: Randomizirajte prezentaciju
   saturation: Zasićenje
   seconds: sekundi
+  select_collection: Odaberite Kolekcija
+  wallpaper_collection: Kolekcija tapeta
+  wallpaper_settings: Postavke pozadine
   withOverlay: Sa prekrivanjem
+  workspace_collections: Zbirke radnog prostora
 weg:
   auto_hide: Auto se sakrio
   delay_to_hide: Odložite da se sakrijete

@@ -12,9 +12,4 @@ impl FullState {
         );
         Ok(())
     }
-
-    pub(super) fn emit_history(&self) -> Result<()> {
-        emit_to_webviews(SeelenEvent::StateHistoryChanged, &self.launcher_history);
-        Ok(())
-    }
 }

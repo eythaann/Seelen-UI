@@ -1,16 +1,6 @@
 action:
   confirm: Дали сте сигурни?
   confirm_body: Оваа акција не може да се разоткрие.
-app_launcher:
-  enable: Овозможете фрлач на апликации
-  launch_on:
-    mouse_over: Глувчето над
-    primary: Примарен
-  monitor: Монитор за да се покаже
-  runners:
-    cmd: Команда
-    explorer: Трчај
-    label: Тркачи
 apps_configurations:
   app:
     bindings: Обврзувачки (Забележете дека се потребни и двете опции)
@@ -104,6 +94,7 @@ general:
     available: Достапни пакети со икони
     selected: Пакети со активни икони
   language: Јазик
+  monday: понеделник
   performance_mode:
     on_battery: На батеријата
     on_energy_saver: На заштеда на енергија
@@ -112,7 +103,10 @@ general:
       extreme: Екстремни
       minimal: Минимално
     plugged: Вклучен или полнење
+  saturday: сабота
+  start_of_week: Почеток на неделата
   startup: Стартувам на стартување?
+  sunday: недела
   theme:
     available: Достапни теми
     selected: Активни теми
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Префрлете се на претходниот работен простор
     switch_workspace: Префрлете се на работниот простор {{0}}
     toggle_float: Вклучување на режимот на плови на прозорецот
-    toggle_launcher: Завртете го фрлачот
     toggle_monocle: Вклучете го режимот на монокет на работниот простор
   readonly_tooltip: Ова е кратенка само за читање
   reset: Ресетирање на стандардно
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Позадини
   blur: Замаглување
+  cancel: Откажи
+  close: Затвори
+  collection_name: Име на колекцијата
+  collections: Колекции
   contrast: Контраст
+  create: Креирај
+  create_collection: Креирај колекција
+  default_collection: Стандардна колекција
+  delete_collection: Избришете ја колекцијата
+  edit_collection: Уреди колекција
   enable: Овозможете менаџер на тапети
   fit:
     contain: Содржат
@@ -254,11 +256,14 @@ wall:
     fill: Пополнете
   flipHorizontal: Флип хоризонтално
   flipVertical: Флип вертикална
+  generating_thumbnails: Создавање сликички за позадина
   hours: часови
   interval: Променете ја позадината на секој
   minutes: минути
+  monitor_collection: Колекција на монитори
   muted: Исклучете го звукот на видеото
   no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
+  no_collections: Сè уште нема создадени колекции. Кликнете на копчето + за да креирате едно.
   objectFit: Подготвување на позадината
   objectPosition: Позиција во позадина
   overlayColor: Боја на преклопување
@@ -270,10 +275,15 @@ wall:
     left: Лево
     right: Десно
     top: Горе
+  processing_video: Се обработува видео
   random: Рандомизирајте го слајдшоу
   saturation: Заситеност
   seconds: секунди
+  select_collection: Изберете Колекција
+  wallpaper_collection: Колекција на тапети
+  wallpaper_settings: Поставки за позадина
   withOverlay: Со преклоп
+  workspace_collections: Колекции на работниот простор
 weg:
   auto_hide: Автоматско скриј
   delay_to_hide: Одложување за сокривање

@@ -1,16 +1,6 @@
 action:
   confirm: کیا آپ کو یقین ہے؟
   confirm_body: اس عمل کو ختم نہیں کیا جاسکتا۔
-app_launcher:
-  enable: ایپ لانچر کو فعال کریں
-  launch_on:
-    mouse_over: ماؤس اوور
-    primary: پرائمری
-  monitor: ظاہر کرنے کے لئے مانیٹر
-  runners:
-    cmd: حکم
-    explorer: چلائیں
-    label: رنرز
 apps_configurations:
   app:
     bindings: بائنڈنگ (نوٹ دونوں اختیارات کی ضرورت ہے)
@@ -102,6 +92,7 @@ general:
     available: دستیاب آئیکن پیک
     selected: ایکٹو آئیکن پیک
   language: زبان
+  monday: پیر
   performance_mode:
     on_battery: بیٹری پر
     on_energy_saver: انرجی سیور پر
@@ -110,7 +101,10 @@ general:
       extreme: انتہائی
       minimal: کم سے کم
     plugged: پلگ ان یا چارجنگ
+  saturday: ہفتہ
+  start_of_week: ہفتے کا آغاز
   startup: اسٹارٹ اپ پر چلائیں؟
+  sunday: اتوار
   theme:
     available: دستیاب تھیمز
     selected: ایکٹو تھیمز
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: پچھلے ورک اسپیس پر سوئچ کریں
     switch_workspace: ورک اسپیس {{0}} پر سوئچ کریں
     toggle_float: ٹوگل ونڈو فلوٹ موڈ
-    toggle_launcher: ٹوگل لانچر
     toggle_monocle: ٹوگل ورک اسپیس مونوکل وضع
   readonly_tooltip: یہ صرف ایک پڑھنے والا شارٹ کٹ ہے
   reset: ڈیفالٹس کو دوبارہ ترتیب دیں
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: وال پیپر
   blur: دھندلا
+  cancel: منسوخ کریں
+  close: بند کریں
+  collection_name: جمع کرنے کا نام
+  collections: مجموعے
   contrast: اس کے برعکس
+  create: تخلیق کریں
+  create_collection: مجموعہ بنائیں
+  default_collection: پہلے سے طے شدہ مجموعہ
+  delete_collection: مجموعہ حذف کریں
+  edit_collection: مجموعہ میں ترمیم کریں
   enable: وال پیپر مینیجر کو فعال کریں
   fit:
     contain: مشتمل
@@ -253,11 +255,14 @@ wall:
     fill: پُر کریں
   flipHorizontal: افقی پلٹائیں
   flipVertical: عمودی پلٹائیں
+  generating_thumbnails: وال پیپر تھمب نیل تیار کرنا
   hours: گھنٹے
   interval: ہر ایک وال پیپر کو تبدیل کریں
   minutes: منٹ
+  monitor_collection: مانیٹر کلیکشن
   muted: خاموش ویڈیو آڈیو
   no_background: اس کے بجائے تھیم کے پس منظر کا استعمال کرتے ہوئے ، خالی سلائیڈ شو۔
+  no_collections: ابھی تک کوئی مجموعہ پیدا نہیں ہوا۔ ایک بنانے کے لئے + بٹن پر کلک کریں۔
   objectFit: پس منظر فٹ
   objectPosition: پس منظر کی پوزیشن
   overlayColor: اوورلے رنگ
@@ -269,10 +274,15 @@ wall:
     left: بائیں
     right: دائیں
     top: اوپر
+  processing_video: پروسیسنگ ویڈیو
   random: سلائیڈ شو کو بے ترتیب بنائیں
   saturation: سنترپتی
   seconds: سیکنڈ
+  select_collection: مجموعہ منتخب کریں
+  wallpaper_collection: وال پیپر مجموعہ
+  wallpaper_settings: وال پیپر کی ترتیبات
   withOverlay: اوورلے کے ساتھ
+  workspace_collections: ورک اسپیس کلیکشن
 weg:
   auto_hide: خود بخود چھپ جانا
   delay_to_hide: چھپانے میں تاخیر

@@ -1,16 +1,6 @@
 action:
   confirm: Jsi si jistý?
   confirm_body: Tuto akci nelze vrátit zpět.
-app_launcher:
-  enable: Povolit spouštěč aplikací
-  launch_on:
-    mouse_over: Přejeďte myší
-    primary: Primární
-  monitor: Zobrazit monitor
-  runners:
-    cmd: Příkaz
-    explorer: Spustit
-    label: Běžci
 apps_configurations:
   app:
     bindings: Vazba (jsou vyžadovány obě možnosti)
@@ -102,6 +92,7 @@ general:
     available: Dostupné balíčky ikon
     selected: Aktivní balíčky ikon
   language: Jazyk
+  monday: pondělí
   performance_mode:
     on_battery: Na baterii
     on_energy_saver: Na spořič energie
@@ -110,7 +101,10 @@ general:
       extreme: Extrémní
       minimal: Minimální
     plugged: Připojené nebo nabíjení
+  saturday: sobota
+  start_of_week: Začátek týdne
   startup: Spoustit při každém startu?
+  sunday: neděle
   theme:
     available: Dostupné motivy
     selected: Aktivní motivy
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Přepnutí na předchozí pracovní plochu
     switch_workspace: Přepnutí na pracovní plochu {{0}}
     toggle_float: Přepínání režimu plovoucího okna
-    toggle_launcher: Přepínání spouštěče
     toggle_monocle: Přepínání režimu Monokl na pracovní ploše
   readonly_tooltip: Toto je zkratka pouze pro čtení
   reset: Obnovení výchozího nastavení
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Tapety
   blur: Rozmazání
+  cancel: Zrušit
+  close: Blízko
+  collection_name: Název sbírky
+  collections: Sbírky
   contrast: Kontrast
+  create: Vytvořit
+  create_collection: Vytvořit sbírku
+  default_collection: Výchozí kolekce
+  delete_collection: Smazat sbírku
+  edit_collection: Upravit sbírku
   enable: Povolit správce tapet
   fit:
     contain: Obsahuje
@@ -254,11 +256,14 @@ wall:
     fill: Naplňte
   flipHorizontal: Flip Horizontální
   flipVertical: Flip Vertical
+  generating_thumbnails: Generování miniatur tapet
   hours: hodiny
   interval: Změňte tapetu každých
   minutes: minuty
+  monitor_collection: Sbírka monitorů
   muted: Ztlumit zvuk videa
   no_background: Prázdná prezentace, použití pozadí motivu.
+  no_collections: Dosud nebyly vytvořeny žádné sbírky. Kliknutím na tlačítko + jej vytvoříte.
   objectFit: Pozadí Fit
   objectPosition: Pozice v pozadí
   overlayColor: Barva překrytí
@@ -270,10 +275,15 @@ wall:
     left: Vlevo
     right: Vpravo
     top: Nahoru
+  processing_video: Zpracování videa
   random: Randomize prezentace
   saturation: Nasycení
   seconds: sekundy
+  select_collection: Vyberte Sbírka
+  wallpaper_collection: Kolekce tapet
+  wallpaper_settings: Nastavení tapety
   withOverlay: S překrytím
+  workspace_collections: Kolekce pracovního prostoru
 weg:
   auto_hide: Automatické skrytí
   delay_to_hide: Zpoždění schování

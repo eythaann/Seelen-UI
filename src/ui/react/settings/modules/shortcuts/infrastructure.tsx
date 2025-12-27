@@ -72,8 +72,6 @@ export function Shortcuts() {
         />
       </SettingsGroup>
 
-      <SettingsGroup>{groups.launcher.map(mapHokey)}</SettingsGroup>
-
       <SettingsGroup>{groups.virtualDesktop.main.map(mapHokey)}</SettingsGroup>
 
       <SettingsGroup>

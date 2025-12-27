@@ -33,7 +33,6 @@ export enum SeelenEvent {
   StateToolbarItemsChanged = "toolbar-items",
   StateThemesChanged = "themes",
   StateSettingsByAppChanged = "settings-by-app",
-  StateHistoryChanged = "history",
   StateIconPacksChanged = "icon-packs",
   StatePluginsChanged = "plugins-changed",
   StateWidgetsChanged = "widgets-changed",

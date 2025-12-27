@@ -1,16 +1,6 @@
 action:
   confirm: ایا تاسو ډاډه یاست؟
   confirm_body: دا عمل نشي خلاصولی.
-app_launcher:
-  enable: د اپلیکیشن لیسچر وړ کړئ
-  launch_on:
-    mouse_over: موږک پورته کړ
-    primary: لومړني
-  monitor: څارنه کول
-  runners:
-    cmd: قومانده
-    explorer: منډه وهل
-    label: چلوونکي
 apps_configurations:
   app:
     bindings: تړل (په یادداشت کې دواړه اختیارونه اړین دي)
@@ -101,6 +91,7 @@ general:
     available: د آیکون کڅوړې شتون لري
     selected: د فعال آیکون بسته
   language: ژبه
+  monday: دوشنبه
   performance_mode:
     on_battery: په بیټرۍ کې
     on_energy_saver: د انرژي سیور باندې
@@ -109,7 +100,10 @@ general:
       extreme: ډیر
       minimal: لږترلږه
     plugged: فلګ یا چارج کول
+  saturday: شنبه
+  start_of_week: د اونۍ پیل
   startup: په پیل کې چلول؟
+  sunday: یک شنبه
   theme:
     available: شته موضوعات
     selected: فعال موضوعات
@@ -204,7 +198,6 @@ shortcuts:
     switch_to_previous_workspace: پخوانیو ورکشاپ ته واړوئ
     switch_workspace: د کارځای ته لاړشئ {0 0}}
     toggle_float: د کړکۍ د فلوټ حالت
-    toggle_launcher: د تورالو لانچر
     toggle_monocle: د رواپیز دستیس مونو سپیکشن حالت
   readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
   reset: د افلاسیون لپاره بیا تنظیمول
@@ -240,7 +233,16 @@ update:
 wall:
   backgrounds: والپيپرونه
   blur: روښانه
+  cancel: لغوه کړئ
+  close: تړل
+  collection_name: د راټولولو نوم
+  collections: راټولونه
   contrast: برعکس
+  create: جوړ کړئ
+  create_collection: ټولګه جوړه کړئ
+  default_collection: ډیفالټ ټولګه
+  delete_collection: ټولګه ړنګه کړئ
+  edit_collection: ټولګه ترمیم کړئ
   enable: د وال پیپر مدیر فعال کړئ
   fit:
     contain: پکې شامل دي
@@ -248,11 +250,14 @@ wall:
     fill: ډکول
   flipHorizontal: فلیپ افقي
   flipVertical: فلیپ عمودي
+  generating_thumbnails: د وال پیپر تمبیلونه پیدا کول
   hours: ساعتونه
   interval: په وال پیپر بدل کړئ
   minutes: دقیقې
+  monitor_collection: د څارنې ټولګه
   muted: د ویډیو آډیو خاموش کړئ
   no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
+  no_collections: تراوسه هیڅ ټولګه نه ده جوړه شوې. د جوړولو لپاره + تڼۍ کلیک وکړئ.
   objectFit: شالید فټ
   objectPosition: شالید وضعیت
   overlayColor: ډیر رنګ رنګ
@@ -264,10 +269,15 @@ wall:
     left: کیڼ
     right: ښي
     top: سر
+  processing_video: د ویډیو پروسس کول
   random: تصادفي سلایډ
   saturation: تړل
   seconds: ثانیې
+  select_collection: ټولګه وټاکئ
+  wallpaper_collection: د وال پیپر ټولګه
+  wallpaper_settings: د وال پیپر ترتیبات
   withOverlay: د
+  workspace_collections: د کار ځای ټولګه
 weg:
   auto_hide: آٹو پټول
   delay_to_hide: د پټولو لپاره ځنډ

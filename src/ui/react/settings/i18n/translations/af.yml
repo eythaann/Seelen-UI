@@ -1,16 +1,6 @@
 action:
   confirm: Is jy seker?
   confirm_body: Hierdie aksie kan nie ongedaan gemaak word nie.
-app_launcher:
-  enable: Aktiveer App Launcher
-  launch_on:
-    mouse_over: Muis oor
-    primary: Primêr
-  monitor: Monitor om te wys
-  runners:
-    cmd: Kommandeer
-    explorer: Wedloop
-    label: Hardlopers
 apps_configurations:
   app:
     bindings: Binding (let op albei opsies is nodig)
@@ -102,6 +92,7 @@ general:
     available: Beskikbare ikoonpakkette
     selected: Aktiewe ikoonpakkette
   language: Taal
+  monday: Maandag
   performance_mode:
     on_battery: Op battery
     on_energy_saver: Op energiebesparing
@@ -110,7 +101,10 @@ general:
       extreme: Uiterste
       minimal: Minimaal
     plugged: Ingeprop of laai
+  saturday: Saterdag
+  start_of_week: Begin van week
   startup: Hardloop met opstart?
+  sunday: Sondag
   theme:
     available: Beskikbare temas
     selected: Aktiewe temas
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Skakel oor na vorige werkruimte
     switch_workspace: Skakel oor na WorkSpace {{0}}
     toggle_float: Wisselvenstervlotmodus
-    toggle_launcher: Wisselaar Launcher
     toggle_monocle: Toggle Workspace Monocle -modus
   readonly_tooltip: Dit is 'n leesalleen kortpad
   reset: Stel weer in standaard
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Agtergronde
   blur: Vervaag
+  cancel: Kanselleer
+  close: Maak toe
+  collection_name: Versameling Naam
+  collections: Versamelings
   contrast: Kontras
+  create: Skep
+  create_collection: Skep versameling
+  default_collection: Verstekversameling
+  delete_collection: Vee versameling uit
+  edit_collection: Wysig versameling
   enable: Aktiveer agtergrondbestuurder
   fit:
     contain: Bedwing
@@ -254,11 +256,14 @@ wall:
     fill: Vul
   flipHorizontal: Flip horisontaal
   flipVertical: Flip vertikaal
+  generating_thumbnails: Genereer plakpapier-kleinkiekies
   hours: ure
   interval: Verander die muurpapier elke
   minutes: minute
+  monitor_collection: Monitor versameling
   muted: Demp video-oudio
   no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
+  no_collections: Geen versamelings is nog geskep nie. Klik op die +-knoppie om een ​​te skep.
   objectFit: Agtergrond pas
   objectPosition: Agtergrondposisie
   overlayColor: Oorlegkleur
@@ -270,10 +275,15 @@ wall:
     left: Links
     right: Regs
     top: Kruin
+  processing_video: Verwerk video
   random: Randomize skyfievertoning
   saturation: Versadiging
   seconds: sekondes
+  select_collection: Kies Versameling
+  wallpaper_collection: Muurpapierversameling
+  wallpaper_settings: Muurpapier instellings
   withOverlay: Met oorleg
+  workspace_collections: Werkspasie Versamelings
 weg:
   auto_hide: Outo -vel
   delay_to_hide: Vertraag om weg te steek

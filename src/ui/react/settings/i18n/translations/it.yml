@@ -1,16 +1,6 @@
 action:
   confirm: Sei sicuro?
   confirm_body: Questa azione non può essere annullata.
-app_launcher:
-  enable: Abilita Launcher delle App
-  launch_on:
-    mouse_over: Passa il mouse
-    primary: Primario
-  monitor: Monitor da mostrare
-  runners:
-    cmd: Comando
-    explorer: Esegui
-    label: Runner
 apps_configurations:
   app:
     bindings: Associazione (nota che entrambe le opzioni sono richieste)
@@ -102,6 +92,7 @@ general:
     available: Pacchetti di icone disponibili
     selected: Pacchetti di icone attivi
   language: Lingua
+  monday: Lunedi
   performance_mode:
     on_battery: Su batteria
     on_energy_saver: Sull'energia risparmiando
@@ -110,7 +101,10 @@ general:
       extreme: Estremo
       minimal: Minimo
     plugged: Collegato o ricarica
+  saturday: Sabato
+  start_of_week: Inizio settimana
   startup: Eseguire all'avvio?
+  sunday: Domenica
   theme:
     available: Temi disponibili
     selected: Temi attivi
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Passa all'area di lavoro precedente
     switch_workspace: Passa a Workspace {{0}}
     toggle_float: Attiva la modalità galleggiante della finestra
-    toggle_launcher: Attiva il lanciarazzi
     toggle_monocle: Attivare la modalità monoclo dell'area di lavoro
   readonly_tooltip: Questo è un collegamento di sola lettura
   reset: Ripristina le impostazioni predefinite
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Sfondi
   blur: Sfocatura
+  cancel: Cancellare
+  close: Vicina
+  collection_name: Nome della raccolta
+  collections: Collezioni
   contrast: Contrasto
+  create: Creare
+  create_collection: Crea raccolta
+  default_collection: Raccolta predefinita
+  delete_collection: Elimina raccolta
+  edit_collection: Modifica raccolta
   enable: Abilita Gestore degli Sfondi
   fit:
     contain: Contenere
@@ -254,11 +256,14 @@ wall:
     fill: Riempimento
   flipHorizontal: Capovolgimento orizzontale
   flipVertical: Flip verticale
+  generating_thumbnails: Generazione di miniature di sfondi
   hours: ore
   interval: Cambia sfondo ogni
   minutes: minuti
+  monitor_collection: Monitorare la raccolta
   muted: Disattiva l'audio del video
   no_background: Slideshow vuoto, usa invece lo sfondo del tema.
+  no_collections: Nessuna raccolta creata ancora. Fare clic sul pulsante + per crearne uno.
   objectFit: Sfondo adatto
   objectPosition: Posizione di fondo
   overlayColor: Colore di sovrapposizione
@@ -270,10 +275,15 @@ wall:
     left: A sinistra
     right: Diritto
     top: In alto
+  processing_video: Elaborazione video
   random: Slideshow casuale
   saturation: Saturazione
   seconds: secondi
+  select_collection: Seleziona Raccolta
+  wallpaper_collection: Collezione di sfondi
+  wallpaper_settings: Impostazioni dello sfondo
   withOverlay: Con sovrapposizione
+  workspace_collections: Raccolte di aree di lavoro
 weg:
   auto_hide: Nascondi automaticamente
   delay_to_hide: Ritardo per nascondere

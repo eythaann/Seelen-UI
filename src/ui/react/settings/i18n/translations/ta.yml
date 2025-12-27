@@ -1,16 +1,6 @@
 action:
   confirm: நீங்கள் உறுதியாக இருக்கிறீர்களா?
   confirm_body: இந்த செயலை செயல்தவிர்க்க முடியாது.
-app_launcher:
-  enable: பயன்பாட்டு துவக்கியை இயக்கவும்
-  launch_on:
-    mouse_over: சுட்டி முடிந்துவிட்டது
-    primary: முதன்மை
-  monitor: காண்பிக்க கண்காணிக்கவும்
-  runners:
-    cmd: கட்டளை
-    explorer: ஓடு
-    label: ஓட்டப்பந்தய வீரர்கள்
 apps_configurations:
   app:
     bindings: பிணைப்பு (இரண்டு விருப்பங்களும் தேவை என்பதை நினைவில் கொள்ளவும்)
@@ -103,6 +93,7 @@ general:
     available: கிடைக்கும் ஐகான் பேக்குகள்
     selected: செயலில் உள்ள ஐகான் பேக்குகள்
   language: மொழி
+  monday: திங்கட்கிழமை
   performance_mode:
     on_battery: பேட்டரியில்
     on_energy_saver: ஆற்றல் சேமிப்பாளரில்
@@ -111,7 +102,10 @@ general:
       extreme: எக்ஸ்ட்ரீம்
       minimal: குறைந்தபட்ச
     plugged: செருகப்பட்ட அல்லது சார்ஜ்
+  saturday: சனிக்கிழமை
+  start_of_week: வாரத்தின் தொடக்கம்
   startup: தொடக்கத்தில் இயக்கவா?
+  sunday: ஞாயிறு
   theme:
     available: கிடைக்கும் தீம்கள்
     selected: செயலில் உள்ள தீம்கள்
@@ -208,7 +202,6 @@ shortcuts:
     switch_to_previous_workspace: முந்தைய பணியிடத்திற்கு மாறவும்
     switch_workspace: பணியிடத்திற்கு மாறவும் {{0}}
     toggle_float: சாளர மிதவை பயன்முறையை மாற்றவும்
-    toggle_launcher: துவக்கி மாற்றவும்
     toggle_monocle: பணியிட மோனோக்கிள் பயன்முறையை மாற்றவும்
   readonly_tooltip: இது படிக்க மட்டும் குறுக்குவழி
   reset: இயல்புநிலைகளுக்கு மீட்டமைக்கவும்
@@ -245,7 +238,16 @@ update:
 wall:
   backgrounds: வால்பேப்பர்கள்
   blur: மங்கலானது
+  cancel: ரத்து செய்
+  close: மூடு
+  collection_name: சேகரிப்பு பெயர்
+  collections: தொகுப்புகள்
   contrast: மாறுபாடு
+  create: உருவாக்கு
+  create_collection: சேகரிப்பை உருவாக்கவும்
+  default_collection: இயல்புநிலை சேகரிப்பு
+  delete_collection: சேகரிப்பை நீக்கு
+  edit_collection: தொகுப்பைத் திருத்து
   enable: வால்பேப்பர் மேலாளரை இயக்கவும்
   fit:
     contain: கட்டுப்படுத்தவும்
@@ -253,11 +255,16 @@ wall:
     fill: நிரப்பவும்
   flipHorizontal: கிடைமட்டமாக புரட்டவும்
   flipVertical: செங்குத்து புரட்டவும்
+  generating_thumbnails: வால்பேப்பர் சிறு உருவங்களை உருவாக்குகிறது
   hours: மணி
   interval: ஒவ்வொரு வால்பேப்பரையும் மாற்றவும்
   minutes: நிமிடங்கள்
+  monitor_collection: சேகரிப்பைக் கண்காணிக்கவும்
   muted: வீடியோ ஆடியோவை முடக்கு
   no_background: வெற்று ஸ்லைடுஷோ, அதற்கு பதிலாக கருப்பொருளின் பின்னணியைப் பயன்படுத்துகிறது.
+  no_collections: >-
+    இதுவரை தொகுப்புகள் எதுவும் உருவாக்கப்படவில்லை. ஒன்றை உருவாக்க + பொத்தானைக்
+    கிளிக் செய்யவும்.
   objectFit: பின்னணி பொருத்தம்
   objectPosition: பின்னணி நிலை
   overlayColor: மேலடுக்கு நிறம்
@@ -269,10 +276,15 @@ wall:
     left: இடது
     right: சரி
     top: மேல்
+  processing_video: வீடியோவை செயலாக்குகிறது
   random: ஸ்லைடுஷோவை சீரற்றதாக்குங்கள்
   saturation: செறிவு
   seconds: விநாடிகள்
+  select_collection: சேகரிப்பைத் தேர்ந்தெடுக்கவும்
+  wallpaper_collection: வால்பேப்பர் சேகரிப்பு
+  wallpaper_settings: வால்பேப்பர் அமைப்புகள்
   withOverlay: மேலடுக்கு
+  workspace_collections: பணியிட தொகுப்புகள்
 weg:
   auto_hide: தானாக மறை
   delay_to_hide: மறைக்க தாமதம்

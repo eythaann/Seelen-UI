@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{
     by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPackEntry,
-    LauncherHistory, PerformanceMode, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
+    PerformanceMode, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -41,11 +41,6 @@ pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Resu
     }
     guard.write_weg_items(&items)?;
     Ok(())
-}
-
-#[tauri::command(async)]
-pub fn state_get_history() -> LauncherHistory {
-    FULL_STATE.load().launcher_history.clone()
 }
 
 #[tauri::command(async)]

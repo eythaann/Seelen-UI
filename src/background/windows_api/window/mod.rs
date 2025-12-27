@@ -30,8 +30,8 @@ use crate::{
     modules::{apps::application::is_interactable_window, start::application::START_MENU_MANAGER},
     utils::lock_free::TracedMutex,
     widgets::{
-        launcher::SeelenRofi, toolbar::FancyToolbar, wallpaper_manager::SeelenWall,
-        weg::instance::SeelenWeg, window_manager::instance::WindowManagerV2,
+        toolbar::FancyToolbar, wallpaper_manager::SeelenWall, weg::instance::SeelenWeg,
+        window_manager::instance::WindowManagerV2,
     },
 };
 
@@ -333,7 +333,6 @@ impl Window {
                 FancyToolbar::TITLE,
                 WindowManagerV2::TITLE,
                 SeelenWeg::TITLE,
-                SeelenRofi::TITLE,
                 SeelenWall::TITLE,
             ]
             .contains(&self.title().as_str())

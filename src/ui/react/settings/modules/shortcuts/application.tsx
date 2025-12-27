@@ -1,7 +1,6 @@
 import type { SluHotkey } from "@seelen-ui/lib/types";
 
 interface Groups {
-  launcher: SluHotkey[];
   windowManager: {
     state: SluHotkey[];
     sizing: SluHotkey[];
@@ -22,7 +21,6 @@ interface Groups {
 
 export function getHotkeysGroups(hotkeys: SluHotkey[]): Groups {
   const groups: Groups = {
-    launcher: [],
     windowManager: {
       state: [],
       sizing: [],
@@ -47,10 +45,6 @@ export function getHotkeysGroups(hotkeys: SluHotkey[]): Groups {
     } = hotkey;
 
     switch (name) {
-      // launcher
-      case "toggle_launcher":
-        groups.launcher.push(hotkey);
-        break;
       // window manager
       case "increase_width":
       case "decrease_width":

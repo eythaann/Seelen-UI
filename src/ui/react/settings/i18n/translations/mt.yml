@@ -1,16 +1,6 @@
 action:
   confirm: Int żgur?
   confirm_body: Din l-azzjoni ma tistax titneħħa.
-app_launcher:
-  enable: Enable App Launcher
-  launch_on:
-    mouse_over: Mouse fuq
-    primary: Primarja
-  monitor: Tissorvelja biex turi
-  runners:
-    cmd: Kmand
-    explorer: Ġirja
-    label: Runners
 apps_configurations:
   app:
     bindings: Torbot (innota ż-żewġ għażliet huma meħtieġa)
@@ -104,6 +94,7 @@ general:
     available: Pakketti ta' Ikoni Disponibbli
     selected: Pakketti tal-Ikoni Attivi
   language: Lingwa
+  monday: it-Tnejn
   performance_mode:
     on_battery: Fuq batterija
     on_energy_saver: Fuq l-enerġija li tiffranka
@@ -112,7 +103,10 @@ general:
       extreme: Estrem
       minimal: Minimu
     plugged: Imqabbad jew iċċarġjar
+  saturday: is-Sibt
+  start_of_week: Bidu tal-Ġimgħa
   startup: Mexxi fuq l-istartjar?
+  sunday: il-Ħadd
   theme:
     available: Temi Disponibbli
     selected: Temi Attivi
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Aqleb għall-ispazju ta 'xogħol preċedenti
     switch_workspace: Aqleb għal Workspace {{0}}
     toggle_float: Toggle Window Float Mode
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: Din hija shortcut li jinqara biss
   reset: Irrisettja għal nuqqasijiet
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Ċċajpar
+  cancel: Ikkanċella
+  close: Agħlaq
+  collection_name: Isem tal-Ġbir
+  collections: Kollezzjonijiet
   contrast: Kuntrast
+  create: Oħloq
+  create_collection: Oħloq Ġbir
+  default_collection: Ġbir Default
+  delete_collection: Ħassar Ġbir
+  edit_collection: Edit Ġbir
   enable: Enable Wallpaper Manager
   fit:
     contain: Fihom
@@ -254,11 +256,14 @@ wall:
     fill: Imla
   flipHorizontal: Flip orizzontali
   flipVertical: Flip vertikali
+  generating_thumbnails: Ġenerazzjoni tal-Minjaturi tal-Wallpaper
   hours: sigħat
   interval: Ibdel il-wallpaper kull
   minutes: minuti
+  monitor_collection: Ġbir Monitor
   muted: Mute video awdjo
   no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
+  no_collections: S'issa ma nħolqotx kollezzjonijiet. Ikklikkja l-buttuna + biex toħloq waħda.
   objectFit: L-isfond jaqbel
   objectPosition: Pożizzjoni ta 'sfond
   overlayColor: Kulur overlay
@@ -270,10 +275,15 @@ wall:
     left: Xellug
     right: Dritt
     top: Quċċata
+  processing_video: Ipproċessar tal-vidjo
   random: Randomize slideshow
   saturation: Saturazzjoni
   seconds: sekondi
+  select_collection: Agħżel Ġbir
+  wallpaper_collection: Ġbir tal-wallpaper
+  wallpaper_settings: Settings tal-wallpaper
   withOverlay: Bil-overlay
+  workspace_collections: Kollezzjonijiet tal-Ispazji tax-Xogħol
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dewmien biex jinħbew

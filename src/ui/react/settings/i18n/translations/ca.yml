@@ -1,16 +1,6 @@
 action:
   confirm: Esteu segur?
   confirm_body: Aquesta acció no es pot desfer.
-app_launcher:
-  enable: Activa el llançador d'aplicacions
-  launch_on:
-    mouse_over: Passa el ratolí
-    primary: primària
-  monitor: Monitoritzar per mostrar
-  runners:
-    cmd: Manar
-    explorer: Dirigir
-    label: Corredors
 apps_configurations:
   app:
     bindings: Enquadernació (nota les dues opcions són necessàries)
@@ -102,6 +92,7 @@ general:
     available: Paquets d'icones disponibles
     selected: Paquets d'icones actius
   language: Llenguatge
+  monday: dilluns
   performance_mode:
     on_battery: A la bateria
     on_energy_saver: A l'estalvi d'energia
@@ -110,7 +101,10 @@ general:
       extreme: Extrem
       minimal: Mínim
     plugged: Tassa o càrrega
+  saturday: dissabte
+  start_of_week: Inici de setmana
   startup: Executeu la posada en marxa?
+  sunday: diumenge
   theme:
     available: Temes disponibles
     selected: Temes actius
@@ -209,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: Canvieu a l'espai de treball anterior
     switch_workspace: Switch a Workspace {{0}}
     toggle_float: Mode de flotació de la finestra de commutació
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Mode Monocle de l'espai de treball
   readonly_tooltip: Aquesta és una drecera de només lectura
   reset: Restableix als valors predeterminats
@@ -246,7 +239,16 @@ update:
 wall:
   backgrounds: Fons de pantalla
   blur: Borrosa
+  cancel: Cancel·la
+  close: Tancar
+  collection_name: Nom de la col·lecció
+  collections: Col·leccions
   contrast: Contrast
+  create: Crear
+  create_collection: Crea col·lecció
+  default_collection: Col·lecció per defecte
+  delete_collection: Suprimeix la col·lecció
+  edit_collection: Edita la col·lecció
   enable: Activa el gestor de fons de pantalla
   fit:
     contain: Contenir
@@ -254,11 +256,14 @@ wall:
     fill: Replenar
   flipHorizontal: Flipeu horitzontal
   flipVertical: Flip vertical
+  generating_thumbnails: Generació de miniatures de fons de pantalla
   hours: hores
   interval: Canvieu el fons de pantalla cada
   minutes: minuts
+  monitor_collection: Col·lecció de monitors
   muted: Silencia l'àudio del vídeo
   no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
+  no_collections: Encara no s'ha creat cap col·lecció. Feu clic al botó + per crear-ne un.
   objectFit: Fixació de fons
   objectPosition: Posició de fons
   overlayColor: Color de superposició
@@ -270,10 +275,15 @@ wall:
     left: Esquerre
     right: Dret
     top: Cim
+  processing_video: Processament de vídeo
   random: Randomize Show de diapositives
   saturation: Saturació
   seconds: segons
+  select_collection: Seleccioneu Col·lecció
+  wallpaper_collection: Col·lecció de fons de pantalla
+  wallpaper_settings: Configuració del fons de pantalla
   withOverlay: Amb superposició
+  workspace_collections: Col·leccions d'espais de treball
 weg:
   auto_hide: Amaga automàtic
   delay_to_hide: Tarda en amagar-se
