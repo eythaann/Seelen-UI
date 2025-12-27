@@ -273,6 +273,9 @@ impl WinEvent {
 
                 CACHE.upsert(origin.address(), now);
             }
+            Self::SystemMoveSizeEnd => {
+                LAZY_LOCATION_CHANGE_EVENT.terminate();
+            }
             Self::ObjectDestroy => {
                 CACHE.remove(&origin.address());
             }

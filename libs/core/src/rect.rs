@@ -71,9 +71,9 @@ impl Point {
     }
 
     pub fn distance_squared(&self, other: &Point) -> i32 {
-        let dx = self.x - other.x;
-        let dy = self.y - other.y;
-        dx * dx + dy * dy
+        let dx = self.x.saturating_sub(other.x);
+        let dy = self.y.saturating_sub(other.y);
+        dx.saturating_pow(2).saturating_add(dy.saturating_pow(2))
     }
 
     pub fn distance(&self, other: &Point) -> f64 {

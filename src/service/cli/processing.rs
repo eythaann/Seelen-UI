@@ -1,12 +1,12 @@
 use std::sync::LazyLock;
 
-use positioning::{easings::Easing, AppWinAnimation, Positioner};
+use positioning::{easings::Easing, AnimationOrchestrator, PositionerBuilder};
 use slu_ipc::messages::{IpcResponse, SvcAction};
 
 use crate::{error::Result, task_scheduler::TaskSchedulerHelper, windows_api::WindowsApi};
 
-static ANIMATION_INSTANCE: LazyLock<tokio::sync::Mutex<Option<AppWinAnimation>>> =
-    LazyLock::new(|| tokio::sync::Mutex::new(None));
+static ANIMATION_ORCHESTRATOR: LazyLock<AnimationOrchestrator> =
+    LazyLock::new(AnimationOrchestrator::new);
 
 async fn _process_action(command: SvcAction) -> Result<()> {
     match command {
@@ -31,16 +31,9 @@ async fn _process_action(command: SvcAction) -> Result<()> {
             animation_duration,
             easing,
         } => {
-            // the guards avoid playing multiple animations at the same time.
-            let mut guard = ANIMATION_INSTANCE.lock().await;
-            if let Some(mut last) = guard.take() {
-                last.interrupt();
-                last.wait();
-            }
-
-            let mut positioner = Positioner::new();
+            let mut builder = PositionerBuilder::new();
             for (hwnd, rect) in list {
-                positioner.add(
+                builder.add(
                     hwnd,
                     positioning::rect::Rect {
                         x: rect.left,
@@ -52,18 +45,23 @@ async fn _process_action(command: SvcAction) -> Result<()> {
             }
 
             if !animated {
-                positioner.place()?;
+                builder.place()?;
                 return Ok(());
             }
 
             let easing = Easing::from_name(&easing).unwrap_or(Easing::Linear);
-            let animation =
-                positioner.place_animated(animation_duration, easing, move |result| {
+            // The orchestrator will automatically interrupt only the windows in this batch
+            // if they're already animating, without affecting other windows
+            ANIMATION_ORCHESTRATOR.animate_batch(
+                builder.build(),
+                animation_duration,
+                easing,
+                move |result| {
                     if let Err(err) = result {
                         log::error!("Animated window placement failed: {err}");
                     }
-                })?;
-            *guard = Some(animation);
+                },
+            )?;
         }
         SvcAction::SetForeground(hwnd) => WindowsApi::set_foreground(hwnd)?,
         SvcAction::SetSettings(settings) => {

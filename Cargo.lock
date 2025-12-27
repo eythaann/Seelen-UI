@@ -5366,6 +5366,7 @@ version = "0.0.0"
 dependencies = [
  "keyframe",
  "log",
+ "scc",
  "thiserror 2.0.17",
  "windows 0.59.0",
 ]

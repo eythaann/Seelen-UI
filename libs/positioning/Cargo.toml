@@ -9,4 +9,5 @@ workspace = true
 thiserror = { workspace = true }
 log = { workspace = true }
 keyframe = "1.1.1"
-windows = { workspace = true, features = ["Win32_Foundation", "Win32_UI_WindowsAndMessaging"] }
+scc = { workspace = true }
+windows = { workspace = true, features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_UI_WindowsAndMessaging"] }
