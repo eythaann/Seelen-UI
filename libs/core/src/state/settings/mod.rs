@@ -299,6 +299,15 @@ impl Default for WindowManagerSettings {
 
 // ================= Seelen Wall ================
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum MultimonitorBehaviour {
+    /// Each monitor has its own wallpaper
+    PerMonitor,
+    /// Single wallpaper extended across all monitors
+    Extend,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWallSettings {
@@ -308,6 +317,8 @@ pub struct SeelenWallSettings {
     /// randomize order
     pub randomize: bool,
     pub default_collection: Option<uuid::Uuid>,
+    /// multimonitor behaviour
+    pub multimonitor_behaviour: MultimonitorBehaviour,
     /// deprecated, this field will be removed on v3
     pub backgrounds_v2: Option<Vec<WallpaperId>>,
 }
@@ -320,6 +331,7 @@ impl Default for SeelenWallSettings {
             interval: 60,
             randomize: false,
             default_collection: None,
+            multimonitor_behaviour: MultimonitorBehaviour::PerMonitor,
         }
     }
 }

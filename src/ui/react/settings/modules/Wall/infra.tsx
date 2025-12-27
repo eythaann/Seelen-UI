@@ -7,6 +7,7 @@ import { Link } from "react-router";
 
 import { newSelectors, RootActions } from "../shared/store/app/reducer.ts";
 
+import { MultimonitorBehaviour } from "@seelen-ui/lib/types";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 import { WallpaperList } from "./WallpaperList.tsx";
 import cs from "./index.module.css";
@@ -123,6 +124,29 @@ export function WallSettings() {
 
       <SettingsGroup>
         <SettingsOption
+          label={<b>{t("wall.multimonitor_behaviour")}</b>}
+          action={
+            <Select
+              style={{ width: 200 }}
+              value={wall.multimonitorBehaviour}
+              onChange={(value) => patchWallSettings({ multimonitorBehaviour: value })}
+              options={[
+                {
+                  label: t("wall.per_monitor"),
+                  value: MultimonitorBehaviour.PerMonitor,
+                },
+                {
+                  label: t("wall.extend"),
+                  value: MultimonitorBehaviour.Extend,
+                },
+              ]}
+            />
+          }
+        />
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption
           label={<b>{t("wall.random")}</b>}
           action={
             <Switch
@@ -179,7 +203,9 @@ export function WallSettings() {
         >
           {wallpaperCollections.length === 0
             ? (
-              <div style={{ padding: "16px", textAlign: "center", color: "var(--config-text-muted)" }}>
+              <div
+                style={{ padding: "16px", textAlign: "center", color: "var(--config-text-muted)" }}
+              >
                 {t("wall.no_collections")}
               </div>
             )
@@ -198,7 +224,13 @@ export function WallSettings() {
                         )}
                         <span>
                           {collection.name}
-                          <span style={{ marginLeft: 4, color: "var(--config-text-muted)", fontSize: "0.9em" }}>
+                          <span
+                            style={{
+                              marginLeft: 4,
+                              color: "var(--config-text-muted)",
+                              fontSize: "0.9em",
+                            }}
+                          >
                             ({collection.wallpapers.length})
                           </span>
                         </span>
@@ -212,7 +244,11 @@ export function WallSettings() {
                           </Button>
                         </Tooltip>
                         <Tooltip title={t("wall.delete_collection")}>
-                          <Button size="small" danger onClick={() => handleDeleteCollection(collection.id)}>
+                          <Button
+                            size="small"
+                            danger
+                            onClick={() => handleDeleteCollection(collection.id)}
+                          >
                             <Icon iconName="IoTrash" />
                           </Button>
                         </Tooltip>

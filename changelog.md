@@ -11,6 +11,7 @@
 - wallpapers per monitor and per workspace.
 - wallpaper collections.
 - allow set start of week on calendars.
+- extended wallpapers across all monitors.
 
 ### enhancements
 

@@ -258,6 +258,9 @@ wall:
   interval: Change wallpaper every
   minutes: minutes
   monitor_collection: Monitor Collection
+  multimonitor_behaviour: Multimonitor Behaviour
+  per_monitor: Per monitor
+  extend: Extend primary
   muted: Mute video audio
   no_background: Empty slideshow, using theme's background instead.
   no_collections: No collections created yet. Click the + button to create one.
