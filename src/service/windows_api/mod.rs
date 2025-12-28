@@ -2,13 +2,8 @@ pub mod app_bar;
 pub mod com;
 pub mod iterator;
 
-use std::{
-    ffi::OsString,
-    os::windows::ffi::OsStringExt,
-    path::{Path, PathBuf},
-};
+use std::{ffi::OsString, os::windows::ffi::OsStringExt, path::PathBuf};
 
-use com::Com;
 use windows::Win32::{
     Foundation::{HANDLE, HWND, LUID},
     Security::{
@@ -16,21 +11,24 @@ use windows::Win32::{
         TOKEN_ADJUST_PRIVILEGES, TOKEN_PRIVILEGES, TOKEN_QUERY,
     },
     System::{
-        Com::IPersistFile,
         Console::GetConsoleWindow,
-        Threading::{AttachThreadInput, GetCurrentProcess, GetCurrentThreadId, OpenProcessToken},
+        RemoteDesktop::ProcessIdToSessionId,
+        Threading::{
+            AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
+            OpenProcessToken,
+        },
     },
     UI::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
-        Shell::{IShellLinkW, SHGetKnownFolderPath, ShellLink, KF_FLAG_DEFAULT},
+        Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
         WindowsAndMessaging::{
-            BringWindowToTop, FindWindowW, GetClassNameW, GetForegroundWindow,
+            BringWindowToTop, FindWindowW, GetClassNameW, GetForegroundWindow, GetWindowTextW,
             GetWindowThreadProcessId, IsIconic, SetWindowPos, ShowWindow, ShowWindowAsync,
             SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
         },
     },
 };
-use windows_core::{Interface, PCWSTR};
+use windows_core::PCWSTR;
 
 use crate::{
     error::{Result, WindowsResultExt},
@@ -144,8 +142,20 @@ impl WindowsApi {
         unsafe { GetCurrentProcess() }
     }
 
+    pub fn current_process_id() -> u32 {
+        unsafe { GetCurrentProcessId() }
+    }
+
     pub fn current_thread_id() -> u32 {
         unsafe { GetCurrentThreadId() }
+    }
+
+    pub fn current_session_id() -> u32 {
+        let process_id = Self::current_process_id();
+        let mut session_id = 0;
+        // this should never fail for own process
+        unsafe { ProcessIdToSessionId(process_id, &mut session_id).expect("Can't get session id") };
+        session_id
     }
 
     pub fn open_current_process_token() -> Result<HANDLE> {
@@ -183,26 +193,6 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn create_temp_shortcut(program: &Path, args: &str) -> Result<PathBuf> {
-        Com::run_with_context(|| unsafe {
-            let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
-
-            let program = WindowsString::from_os_string(program.as_os_str());
-            shell_link.SetPath(program.as_pcwstr())?;
-
-            let arguments = WindowsString::from_str(args);
-            shell_link.SetArguments(arguments.as_pcwstr())?;
-
-            let temp_dir = std::env::temp_dir();
-            let lnk_path = temp_dir.join(format!("{}.lnk", uuid::Uuid::new_v4()));
-            let lnk_path_wide = WindowsString::from_os_string(lnk_path.as_os_str());
-
-            let persist_file: IPersistFile = shell_link.cast()?;
-            persist_file.Save(lnk_path_wide.as_pcwstr(), true)?;
-            Ok(lnk_path)
-        })
-    }
-
     // change to some crate like dirs to allow multiple platforms
     pub fn known_folder(folder_id: windows::core::GUID) -> Result<PathBuf> {
         let path = unsafe { SHGetKnownFolderPath(&folder_id, KF_FLAG_DEFAULT, None)? };
@@ -214,6 +204,13 @@ impl WindowsApi {
     pub fn get_class(hwnd: HWND) -> String {
         let mut text: [u16; 512] = [0; 512];
         let len = unsafe { GetClassNameW(hwnd, &mut text) };
+        let length = usize::try_from(len).unwrap_or(0);
+        String::from_utf16_lossy(&text[..length])
+    }
+
+    pub fn get_title(hwnd: HWND) -> String {
+        let mut text: [u16; 512] = [0; 512];
+        let len = unsafe { GetWindowTextW(hwnd, &mut text) };
         let length = usize::try_from(len).unwrap_or(0);
         String::from_utf16_lossy(&text[..length])
     }

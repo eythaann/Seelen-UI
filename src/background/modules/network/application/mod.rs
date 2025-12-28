@@ -4,6 +4,7 @@ pub mod v2;
 use std::{
     env::temp_dir,
     net::{IpAddr, UdpSocket},
+    sync::atomic::Ordering,
 };
 
 use seelen_core::system_state::{NetworkAdapter, WlanProfile};
@@ -29,7 +30,7 @@ use crate::{
     app::get_app_handle,
     error::Result,
     utils::{pwsh::PwshScript, spawn_named_thread},
-    windows_api::Com,
+    windows_api::{event_window::IS_INTERACTIVE_SESSION, Com},
 };
 
 use super::domain::adapter_to_slu_net_adapter;
@@ -145,6 +146,13 @@ impl NetworkManager {
                 let mut last_ip = None;
 
                 loop {
+                    std::thread::sleep(std::time::Duration::from_millis(5000));
+
+                    // Pause when session is not interactive to reduce CPU usage
+                    if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                        continue;
+                    }
+
                     let current_state = unsafe { list_manager.GetConnectivity() }.ok();
                     if let (Some(current_state), Some(last_state)) = (current_state, last_state) {
                         if current_state != last_state {
@@ -168,7 +176,6 @@ impl NetworkManager {
                         }
                     }
                     last_state = current_state;
-                    std::thread::sleep(std::time::Duration::from_millis(5000));
                 }
             });
 

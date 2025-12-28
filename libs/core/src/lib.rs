@@ -1,3 +1,4 @@
+pub mod constants;
 pub mod error;
 pub mod handlers;
 pub mod rect;
@@ -7,6 +8,7 @@ pub mod system_state;
 pub mod utils;
 
 pub use error::SeelenLibError;
+pub use rect::*;
 
 #[macro_use(Serialize, Deserialize)]
 extern crate serde;

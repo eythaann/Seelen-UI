@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: হালনাগাদ
     ok_readonly: নতুন হিসাবে সম্পাদনা
     options:
-      float: ভাসা
-      force: জোর পরিচালনা
-      hidden: ডক/টাস্কবার থেকে লুকান
-      pinned: পিনড
-      unmanage: আনম্যানেজ
+      NoInteractive: কোন ইন্টারেক্টিভ
+      VdPinned: সমস্ত কর্মক্ষেত্রে দেখান
+      WmFloat: Twm - ভাসতে শুরু করুন
+      WmForce: Twm - ফোর্স ম্যানেজ
+      WmUnmanage: Twm - Unmanage
     options_label: অতিরিক্ত বিকল্প
     title_create: '{{নাম}} তৈরি করা'
     title_edit: সম্পাদনা {{নাম}}
@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: আড়াল করতে বিলম্ব
   delay_to_show: দেখাতে বিলম্ব
   dock_side: অবস্থান
-  dynamic_color: গতিশীল রঙ
-  dynamic_color_tooltip: >-
-    ফোকাসযুক্ত উইন্ডোর উপর ভিত্তি করে গতিশীল পটভূমি এবং অগ্রভাগের রঙগুলি সক্ষম
-    করুন। (রঙগুলি থিম দ্বারা ওভাররাইড করা যায়)
   enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
   height: উচ্চতা
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: ওভারল্যাপে
   label: সরঞ্জামদণ্ড
   placeholder: {}
-  show_hibernate: পাওয়ার মেনুতে হাইবারনেট বোতাম দেখান
 update:
   available: আপডেট উপলব্ধ!
   channel: আপডেট চ্যানেল
@@ -307,7 +302,6 @@ weg:
       all: সব
       label: আনপিন করা আইটেম দৃশ্যমানতা
       on_monitor: মনিটরে
-    thumbnail_generation_enabled: আইটেম হোভারে থাম্বনেইল তৈরি করুন
     visible_separators: দৃশ্যমান বিভাজক
   label: ডক/টাস্কবার
   margin: মার্জিন
@@ -332,6 +326,10 @@ wm:
     offset: সীমান্ত অফসেট
     width: সীমানার প্রশস্থতা
   description: বর্ণনা
+  drag_behavior: টেনে আনার আচরণ
+  drag_behavior_options:
+    sort: সাজান (ড্র্যাগ করার সময় উইন্ডোজ পুনরায় সাজান)
+    swap: অদলবদল (ড্র্যাগ এন্ডে সোয়াপ উইন্ডো)
   enable: টাইলিং উইন্ডো ম্যানেজার সক্ষম করুন
   layout: বিন্যাস
   resize_delta: পুনরায় আকার ডেল্টা (%)

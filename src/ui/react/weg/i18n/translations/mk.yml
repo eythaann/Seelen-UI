@@ -12,17 +12,19 @@ app_menu:
   run_as: Работи како администратор
   unpin: Unpin
 context_menu:
+  remove_module: Отстранете го модулот
   reorder_disable: Заклучете ја лентата со задачи
   reorder_enable: Отклучете ја лентата со задачи
 media:
   not_playing: Ништо не игра
-media_menu:
-  remove: Отстранете го модулот за медиуми
-start_menu:
-  remove: Отстранете го модулот за почеток
+show_desktop:
+  label: Прикажи работна површина
+start:
+  label: Старт мени
 taskbar_menu:
   add_file: Пинк за прилагодена датотека
   add_folder: ПИНСКИ ПАТНИЦА
+  desktop: Додадете модул за работна површина
   media: Додадете медиумски модул
   settings: Поставки
   start: Додадете модул за почеток

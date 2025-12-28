@@ -25,10 +25,10 @@ apps_configurations:
     options:
       float: 浮动
       force: 强制管理
-      hidden: 从 Dock / 任务栏隐藏
+      hidden: 从 Dock / 任务栏 隐藏
       pinned: 固定
       unmanage: 取消管理
-    options_label: 额外选项
+    options_label: 其他
     title_create: 创建 {{name}}
     title_edit: 编辑 {{name}}
     title_readonly: 查看 {{name}}
@@ -211,12 +211,12 @@ start:
   title: 欢迎！
 toolbar:
   auto_hide: 自动隐藏
-  delay_to_hide: 隐藏延迟
-  delay_to_show: 显示延迟
-  dock_side: 位置
-  dynamic_color: 动态颜色
-  dynamic_color_tooltip: 根据聚焦窗口启用动态背景和前景颜色。（颜色可被主题覆盖）
-  enable: 启用花式工具栏
+  delay_to_hide: 延迟隐藏
+  delay_to_show: 延迟显示
+  dock_side: 职位
+  dynamic_color: 动态色彩
+  dynamic_color_tooltip: 根据聚焦窗口启用动态背景和前景颜色。(颜色可由主题覆盖）
+  enable: 启用精美工具栏
   height: 高度
   hide_mode:
     always: 总是
@@ -224,7 +224,7 @@ toolbar:
     on_overlap: 重叠时
   label: 工具栏
   placeholder: {}
-  show_hibernate: 在电源菜单中显示休眠按钮
+  show_hibernate: 在电源菜单上显示休眠按钮
 update:
   available: 有可用更新！
   channel: 更新通道
@@ -284,9 +284,9 @@ weg:
     size: 项目大小
     temporal_visibility:
       all: 全部
-      label: 非固定项目可见性
-      on_monitor: 在当前显示器上
-    thumbnail_generation_enabled: 悬停时生成缩略图
+      label: 未固定项目的可见性
+      on_monitor: 在监视器上
+    thumbnail_generation_enabled: 项目悬停时生成缩略图
     visible_separators: 可见分隔符
   label: Dock / 任务栏
   margin: 边距
@@ -311,6 +311,10 @@ wm:
     offset: 边框偏移
     width: 边框宽度
   description: 描述
+  drag_behavior: 拖动行为
+  drag_behavior_options:
+    sort: 排序（拖动时重新排序窗口）
+    swap: 交换（在拖动端交换窗口）
   enable: 启用平铺窗口管理器
   layout: 布局
   resize_delta: 调整大小增量（%）

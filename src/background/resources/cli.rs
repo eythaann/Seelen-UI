@@ -6,7 +6,12 @@ use seelen_core::{
 };
 use serde::{Deserialize, Serialize};
 
-use crate::{error::Result, resources::RESOURCES};
+use crate::{
+    cli::application::{CommandExecutionMode, SluCliCommand},
+    error::Result,
+    exposed::translate_file,
+    resources::RESOURCES,
+};
 
 /// Manage the Seelen Resources.
 #[derive(Debug, Serialize, Deserialize, clap::Args)]
@@ -35,9 +40,44 @@ enum SubCommand {
         kind: ClapResourceKind,
         path: PathBuf,
     },
+    /// Translates a resource text file to all the supported languages by Seelen UI
+    /// this file should contain the source language key and value in order to be translated.
+    ///
+    /// Example:
+    /// ```yaml
+    /// # The file will be completed with the rest of the supported languages
+    /// en: Some text to be translated
+    /// ```
+    ///
+    Translate {
+        /// The file to be translated
+        path: PathBuf,
+        /// The source language of the file, by default `en`
+        source_lang: Option<String>,
+    },
+}
+
+impl SluCliCommand for SubCommand {
+    fn execution_mode(&self) -> CommandExecutionMode {
+        match self {
+            // Commands that execute directly (don't need main instance running)
+            SubCommand::Bundle { .. } => CommandExecutionMode::Direct,
+            SubCommand::Translate { .. } => CommandExecutionMode::Direct,
+            // Commands that need main instance (use default)
+            SubCommand::Load { .. } => CommandExecutionMode::MainInstance,
+            SubCommand::Unload { .. } => CommandExecutionMode::MainInstance,
+        }
+    }
+}
+
+impl SluCliCommand for ResourceManagerCli {
+    fn execution_mode(&self) -> CommandExecutionMode {
+        self.subcommand.execution_mode()
+    }
 }
 
 impl ResourceManagerCli {
+    /// Processes commands that need to run in the main Seelen UI instance
     pub fn process(self) -> Result<()> {
         match self.subcommand {
             SubCommand::Load { kind, path } => {
@@ -52,6 +92,17 @@ impl ResourceManagerCli {
                 RESOURCES.manual.remove(&path);
                 RESOURCES.emit_kind_changed(&kind)?;
             }
+            // Direct commands should not reach here
+            _ => {
+                return Err("This command should be executed directly in console".into());
+            }
+        }
+        Ok(())
+    }
+
+    /// Processes commands that execute directly in the console
+    pub async fn process_direct(self) -> Result<()> {
+        match self.subcommand {
             SubCommand::Bundle { kind, path } => {
                 let mut to_store_path = path.clone();
 
@@ -99,8 +150,20 @@ impl ResourceManagerCli {
                         return Err("Not implemented".into());
                     }
                 }
+                println!(
+                    "Bundle created successfully at: {}",
+                    to_store_path.display()
+                );
+            }
+            SubCommand::Translate { path, source_lang } => {
+                translate_file(path, source_lang).await?
+            }
+            // MainInstance commands should not reach here
+            _ => {
+                return Err("This command needs Seelen UI to be running".into());
             }
         }
+
         Ok(())
     }
 }

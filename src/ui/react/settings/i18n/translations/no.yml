@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Oppdater
     ok_readonly: Rediger som ny
     options:
-      float: Flyte
-      force: Force Manag
-      hidden: Gjemme deg for dock/oppgavelinje
-      pinned: Festet
-      unmanage: Unmanage
+      NoInteractive: Ingen interaktiv
+      VdPinned: Vis i alle arbeidsområder
+      WmFloat: Twm - Start flytende
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Ekstra alternativer
     title_create: Opprette {{name}}
     title_edit: Redigering {{name}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
-  dynamic_color: Dynamisk farge
-  dynamic_color_tooltip: >-
-    Aktiver dynamisk bakgrunn og forgrunnsfarger basert på fokusert vindu.
-    (Farger kan overstyres av temaer)
   enable: Aktiver fancy verktøylinje
   height: Høyde
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: På overlapping
   label: Verktøylinje
   placeholder: {}
-  show_hibernate: Vis dvalemodus på strømmenyen
 update:
   available: Oppdatering tilgjengelig!
   channel: Oppdateringskanal
@@ -305,7 +300,6 @@ weg:
       all: Alle
       label: Synlighet for frigjorte elementer
       on_monitor: På monitor
-    thumbnail_generation_enabled: Generer miniatyrbilder på varen sveve
     visible_separators: Synlige separatorer
   label: Dock/oppgavelinje
   margin: Margin
@@ -330,6 +324,10 @@ wm:
     offset: Grenseforskyvning
     width: Grensebredde
   description: Beskrivelse
+  drag_behavior: Dra-atferd
+  drag_behavior_options:
+    sort: Sorter (omorganiser vinduer mens du drar)
+    swap: Bytt (bytt vinduer på dra-enden)
   enable: Aktiver flislegging av vindusleder
   layout: Oppsett
   resize_delta: Endre størrelse på Delta (%)

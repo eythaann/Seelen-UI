@@ -20,12 +20,14 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     "devTools",
     "language",
     "dateFormat",
+    "startOfWeek",
     "updater",
     "byWidget",
     "drpc",
     "byTheme",
     "byWallpaper",
     "performanceMode",
+    "wallpaperCollections",
   ]);
 
   // migration since v2.1.0

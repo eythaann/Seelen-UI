@@ -1,0 +1,63 @@
+.quick-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .radio-buttons-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+
+    .radio-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+
+      background-color: var(--color-gray-100);
+      color: var(--color-gray-900);
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+      padding: 12px 8px;
+      border-radius: 10px;
+
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-height: 80px;
+
+      &:hover {
+        background: var(--color-gray-200);
+      }
+
+      &.radio-button-enabled {
+        background-color: var(--system-accent-dark-color);
+        color: var(--color-gray-50);
+
+        &:hover {
+          background-color: var(--system-accent-darker-color);
+        }
+      }
+
+      .radio-button-label {
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        line-height: 1.2;
+      }
+    }
+  }
+
+  .quick-settings-item {
+    display: grid;
+    grid-template-columns: 30px 1fr 30px;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .quick-settings-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+}

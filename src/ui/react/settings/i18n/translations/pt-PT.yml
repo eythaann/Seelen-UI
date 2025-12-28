@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Atualização
     ok_readonly: Editar como novo
     options:
-      float: Flutuar
-      force: Gerenciamento de força
-      hidden: Esconda -se da doca/barra de tarefas
-      pinned: Presa
-      unmanage: Não -gerente
+      NoInteractive: Não interativo
+      VdPinned: Mostrar em todos os espaços de trabalho
+      WmFloat: Twm - Comece a flutuar
+      WmForce: Twm - Forçar Gerenciamento
+      WmUnmanage: Twm - Não gerenciar
     options_label: Opções extras
     title_create: Criando {{nome}}
     title_edit: Edição {{name}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Atraso para se esconder
   delay_to_show: Atraso para mostrar
   dock_side: Posição
-  dynamic_color: Cor dinâmica
-  dynamic_color_tooltip: >-
-    Habilite as cores dinâmicas de fundo e primeiro plano com base na janela
-    focada. (As cores podem ser substituídas pelos temas)
   enable: Ativar barra de ferramentas sofisticada
   height: Altura
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Em sobreposição
   label: Barra de ferramentas
   placeholder: {}
-  show_hibernate: Mostre o botão Hibernate no menu Power
 update:
   available: Atualização disponível!
   channel: Atualizar canal
@@ -305,7 +300,6 @@ weg:
       all: Tudo
       label: Visibilidade dos itens não ingênicos
       on_monitor: No monitor
-    thumbnail_generation_enabled: Gerar miniaturas no itens pairar
     visible_separators: Separadores visíveis
   label: Dock/Task Bar
   margin: Margem
@@ -330,6 +324,10 @@ wm:
     offset: Offset de borda
     width: Largura da fronteira
   description: Descrição
+  drag_behavior: Comportamento de arrastar
+  drag_behavior_options:
+    sort: Classificar (reordenar janelas enquanto arrasta)
+    swap: Trocar (trocar janelas ao arrastar)
   enable: Habilitar gerente de janela de ladrilhos
   layout: Esquema
   resize_delta: Redimensionar delta (%)

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Sasisha
     ok_readonly: Hariri kama mpya
     options:
-      float: Kuelea
-      force: Nguvu kusimamia
-      hidden: Ficha kutoka Dock/Taskbar
-      pinned: Iliyoandikwa
-      unmanage: Kuhama
+      NoInteractive: Hakuna maingiliano
+      VdPinned: Onyesha katika nafasi zote za kazi
+      WmFloat: TWM - anza kuelea
+      WmForce: TWM - Nguvu Kusimamia
+      WmUnmanage: TWM - UnManage
     options_label: Chaguzi za ziada
     title_create: Kuunda {{jina}}
     title_edit: Kuhariri {{jina}}
@@ -227,10 +227,6 @@ toolbar:
   delay_to_hide: Kuchelewa kujificha
   delay_to_show: Kuchelewa kuonyesha
   dock_side: Msimamo
-  dynamic_color: Rangi ya nguvu
-  dynamic_color_tooltip: >-
-    Wezesha asili ya nguvu na rangi za mbele kulingana na dirisha lililolenga.
-    (Rangi zinaweza kupitishwa na mada)
   enable: Wezesha zana ya dhana
   height: Urefu
   hide_mode:
@@ -239,7 +235,6 @@ toolbar:
     on_overlap: Juu ya mwingiliano
   label: Zana
   placeholder: {}
-  show_hibernate: Onyesha kitufe cha Hibernate kwenye menyu ya nguvu
 update:
   available: Sasisha inapatikana!
   channel: Sasisha kituo
@@ -301,7 +296,6 @@ weg:
       all: Wote
       label: Mwonekano wa Vipengee Vilivyobanduliwa
       on_monitor: Kwenye Monitor
-    thumbnail_generation_enabled: Tengeneza vijipicha kwenye hover ya bidhaa
     visible_separators: Watenganisho unaoonekana
   label: Dock/Taskbar
   margin: Margin
@@ -326,6 +320,10 @@ wm:
     offset: Kukabiliana na mpaka
     width: Upana wa mpaka
   description: Maelezo
+  drag_behavior: Tabia ya Kuburuta
+  drag_behavior_options:
+    sort: Panga (panga upya madirisha huku ukiburuta)
+    swap: Badili (badilisha madirisha kwenye mwisho wa buruta)
   enable: Washa Meneja wa Dirisha la Tiling
   layout: Mpangilio
   resize_delta: Rudisha Delta (%)

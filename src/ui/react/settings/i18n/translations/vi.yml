@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Cập nhật
     ok_readonly: Chỉnh sửa như mới
     options:
-      float: Trôi nổi
-      force: Quản lý lực lượng
-      hidden: Ẩn từ Dock/Thanh tác vụ
-      pinned: Ghim
-      unmanage: Không quản lý
+      NoInteractive: Không tương tác
+      VdPinned: Hiển thị trong tất cả không gian làm việc
+      WmFloat: Twm - Bắt đầu nổi
+      WmForce: Twm - Quản lý lực lượng
+      WmUnmanage: Twm - Bỏ quản lý
     options_label: Tùy chọn bổ sung
     title_create: Tạo {{name}}
     title_edit: Chỉnh sửa {{name}}
@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
-  dynamic_color: Màu sắc động
-  dynamic_color_tooltip: >-
-    Kích hoạt nền động và màu nền dựa trên cửa sổ tập trung. (Màu sắc có thể bị
-    ghi đè bởi các chủ đề)
   enable: Kích hoạt thanh công cụ ưa thích
   height: Chiều cao
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: Trên sự chồng chéo
   label: Thanh công cụ
   placeholder: {}
-  show_hibernate: Hiển thị nút Hibernate trên Menu Power
 update:
   available: Cập nhật có sẵn!
   channel: Cập nhật kênh
@@ -304,7 +299,6 @@ weg:
       all: Tất cả
       label: Hiển thị các mục đã được bỏ ghim
       on_monitor: Trên màn hình
-    thumbnail_generation_enabled: Tạo hình thu nhỏ trên vật phẩm di chuột
     visible_separators: Phân tách có thể nhìn thấy
   label: Dock/Thanh tác vụ
   margin: Lề
@@ -329,6 +323,10 @@ wm:
     offset: Biên giới bù đắp
     width: Chiều rộng biên giới
   description: Sự miêu tả
+  drag_behavior: Hành vi kéo
+  drag_behavior_options:
+    sort: Sắp xếp (sắp xếp lại các cửa sổ trong khi kéo)
+    swap: Hoán đổi (hoán đổi cửa sổ ở đầu kéo)
   enable: Bật trình quản lý cửa sổ ốp lát
   layout: Cách trình bày
   resize_delta: Thay đổi kích thước delta (%)

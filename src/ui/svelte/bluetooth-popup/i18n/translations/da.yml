@@ -1,0 +1,24 @@
+available: Tilgængelige enheder
+cancel: Ophæve
+confirm: Bekræfte
+confirm_only: Bekræft parring
+confirm_pin: Bekræft, at PIN-koden stemmer overens
+connected: Forbundet
+disconnect: Afbryde
+display_pin: Indtast denne PIN-kode på enheden
+lowenergy: Lav energi
+more: Flere Bluetooth-indstillinger
+no_adapter: Ingen Bluetooth-adapter fundet
+not_found: Ingen enheder fundet
+pair: Par
+paired: Parret
+pairing: Parrer...
+pairing_failed: Parring mislykkedes
+password: Adgangskode
+provide_address: Indtast adresse
+provide_password: Indtast brugernavn og adgangskode
+provide_pin: Indtast PIN-kode
+scanning: Scanner efter enheder...
+unpair: Fjern parring
+unpair_failed: Ophævelse af parring mislykkedes
+username: Brugernavn

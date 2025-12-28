@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ਅਪਡੇਟ
     ok_readonly: ਨਵੇਂ ਵਜੋਂ ਸੰਪਾਦਿਤ ਕਰੋ
     options:
-      float: ਫਲੋਟ
-      force: ਫੋਰਸ ਪ੍ਰਬੰਧਨ
-      hidden: ਡੌਕ / ਟਾਸਕਬਾਰ ਤੋਂ ਲੁਕੋ
-      pinned: ਪਿੰਨ ਕੀਤਾ
-      unmanage: ਅਪ੍ਰਬੰਧਿਤ ਕਰੋ
+      NoInteractive: ਕੋਈ ਇੰਟਰਐਕਟਿਵ ਨਹੀਂ
+      VdPinned: ਸਾਰੇ ਵਰਕਸਪੇਸ ਵਿੱਚ ਦਿਖਾਓ
+      WmFloat: Twm - ਫਲੋਟਿੰਗ ਸ਼ੁਰੂ ਕਰੋ
+      WmForce: Twm - ਫੋਰਸ ਪ੍ਰਬੰਧਨ
+      WmUnmanage: Twm - ਅਪ੍ਰਬੰਧਿਤ
     options_label: ਵਾਧੂ ਵਿਕਲਪ
     title_create: '{{name}} ਬਣਾਉਣਾ'
     title_edit: ਸੰਪਾਦਨ {ime neame}
@@ -225,10 +225,6 @@ toolbar:
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   dock_side: ਸਥਿਤੀ
-  dynamic_color: ਗਤੀਸ਼ੀਲ ਰੰਗ
-  dynamic_color_tooltip: >-
-    ਫੋਕਸ ਕੀਤੇ ਵਿੰਡੋ ਦੇ ਅਧਾਰ ਤੇ ਗਤੀਸ਼ੀਲ ਬੈਕਗ੍ਰਾਉਂਡ ਅਤੇ ਫੋਰਗਰਾਉਂਡ ਦੇ ਰੰਗਾਂ ਨੂੰ
-    ਸਮਰੱਥ ਕਰੋ. (ਰੰਗ ਥੀਮ ਦੁਆਰਾ ਅਣਡਿੱਠਾ ਕਰ ਸਕਦੇ ਹਨ)
   enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   height: ਉਚਾਈ
   hide_mode:
@@ -237,7 +233,6 @@ toolbar:
     on_overlap: ਓਵਰਲੈਪ 'ਤੇ
   label: ਟੂਲਬਾਰ
   placeholder: {}
-  show_hibernate: ਪਾਵਰ ਮੇਨੂ 'ਤੇ ਹਾਈਬਰਨੇਟ ਬਟਨ ਦਿਖਾਓ
 update:
   available: ਅਪਡੇਟ ਉਪਲਬਧ!
   channel: ਚੈਨਲ ਅਪਡੇਟ ਕਰੋ
@@ -299,7 +294,6 @@ weg:
       all: ਸਾਰੇ
       label: ਅਨਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ
       on_monitor: ਮਾਨੀਟਰ 'ਤੇ
-    thumbnail_generation_enabled: ਆਈਟਮ ਹੋਵਰ 'ਤੇ ਥੰਬਨੇਲ ਤਿਆਰ ਕਰੋ
     visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
   label: ਡੌਕ/ਟਾਸਕਬਾਰ
   margin: ਹਾਸ਼ੀਏ
@@ -324,6 +318,10 @@ wm:
     offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
     width: ਬਾਰਡਰ ਚੌੜਾਈ
   description: ਵਰਣਨ
+  drag_behavior: ਡਰੈਗ ਵਿਵਹਾਰ
+  drag_behavior_options:
+    sort: ਕ੍ਰਮਬੱਧ (ਖਿੱਚਣ ਵੇਲੇ ਵਿੰਡੋਜ਼ ਨੂੰ ਮੁੜ ਕ੍ਰਮਬੱਧ ਕਰੋ)
+    swap: ਸਵੈਪ (ਡਰੈਗ ਐਂਡ 'ਤੇ ਵਿੰਡੋਜ਼ ਨੂੰ ਸਵੈਪ ਕਰੋ)
   enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਟਾਇਲਿੰਗ ਯੋਗ ਕਰੋ
   layout: ਖਾਕਾ
   resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)

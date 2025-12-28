@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: อัปเดต
     ok_readonly: แก้ไขเป็นใหม่
     options:
-      float: ลอย
-      force: บังคับให้จัดการ
-      hidden: ซ่อนจากท่าเรือ/บาร์
-      pinned: ที่ถูกตรึง
-      unmanage: ไม่มีการจัดการ
+      NoInteractive: ไม่มีการโต้ตอบ
+      VdPinned: แสดงในพื้นที่ทำงานทั้งหมด
+      WmFloat: Twm - เริ่มลอยตัว
+      WmForce: Twm - บังคับจัดการ
+      WmUnmanage: Twm - ยกเลิกการจัดการ
     options_label: ตัวเลือกพิเศษ
     title_create: การสร้าง {{ชื่อ}}
     title_edit: การแก้ไข {{ชื่อ}}
@@ -221,10 +221,6 @@ toolbar:
   delay_to_hide: ล่าช้าในการซ่อน
   delay_to_show: ล่าช้าในการแสดง
   dock_side: ตำแหน่ง
-  dynamic_color: สีแบบไดนามิก
-  dynamic_color_tooltip: >-
-    เปิดใช้งานพื้นหลังแบบไดนามิกและสีเบื้องหน้าตามหน้าต่างที่โฟกัส
-    (สีสามารถถูกแทนที่ด้วยธีม)
   enable: เปิดใช้งานแถบเครื่องมือแฟนซี
   height: ความสูง
   hide_mode:
@@ -233,7 +229,6 @@ toolbar:
     on_overlap: เมื่อทับซ้อนกัน
   label: แถบเครื่องมือ
   placeholder: {}
-  show_hibernate: แสดงปุ่มไฮเบอร์เนตบนเมนูพลังงาน
 update:
   available: อัปเดตพร้อมใช้งาน!
   channel: อัปเดตช่อง
@@ -295,7 +290,6 @@ weg:
       all: ทั้งหมด
       label: การมองเห็นรายการที่เลิกปักหมุด
       on_monitor: บนจอภาพ
-    thumbnail_generation_enabled: สร้างภาพขนาดย่อบนรายการโฮเวอร์
     visible_separators: ตัวแยกที่มองเห็นได้
   label: แท่นวาง/บาร์
   margin: ระยะขอบ
@@ -320,6 +314,10 @@ wm:
     offset: ชดเชยพรมแดน
     width: ความกว้างชายแดน
   description: คำอธิบาย
+  drag_behavior: พฤติกรรมการลาก
+  drag_behavior_options:
+    sort: จัดเรียง (เรียงลำดับหน้าต่างใหม่ขณะลาก)
+    swap: สลับ (สลับหน้าต่างที่ปลายลาก)
   enable: เปิดใช้งานตัวจัดการหน้าต่างปูกระเบื้อง
   layout: เค้าโครง
   resize_delta: ปรับขนาดเดลต้า (%)

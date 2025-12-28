@@ -12,17 +12,19 @@ app_menu:
   run_as: እንደ አስተዳዳሪ ይሮጡ
   unpin: እየቀነሰ ይሄዳል
 context_menu:
+  remove_module: ሞጁሉን አስወግድ
   reorder_disable: የተግባር አሞሌ
   reorder_enable: የተካሄደውን ሥራ ይክፈቱ
 media:
   not_playing: ምንም የሚጫወት የለም
-media_menu:
-  remove: የሚዲያ ሞዱል ያስወግዱ
-start_menu:
-  remove: የጀግንነት ሞዱልን ያስወግዱ
+show_desktop:
+  label: ዴስክቶፕን አሳይ
+start:
+  label: የጀምር ምናሌ
 taskbar_menu:
   add_file: የፒን ብጁ ፋይል
   add_folder: የፒን ብጁ አቃፊ
+  desktop: የዴስክቶፕ ሞጁል አክል
   media: የሚዲያ ሞዱል ያክሉ
   settings: ቅንብሮች
   start: የመነሻ ሞጁል ያክሉ

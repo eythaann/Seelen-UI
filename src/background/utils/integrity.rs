@@ -5,13 +5,18 @@ use itertools::Itertools;
 use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
+use windows::Win32::{
+    Foundation::{GetLastError, ERROR_ALREADY_EXISTS},
+    System::Threading::CreateMutexW,
+    UI::Shell::FOLDERID_Windows,
+};
 
 use crate::{
     error::Result,
     is_local_dev,
-    utils::{constants::SEELEN_COMMON, is_running_as_appx},
+    utils::{is_running_as_appx, was_installed_using_msix},
     widgets::WebviewArgs,
-    windows_api::WindowsApi,
+    windows_api::{string_utils::WindowsString, WindowsApi},
 };
 
 use super::spawn_named_thread;
@@ -137,7 +142,7 @@ pub fn check_for_webview_optimal_state(app: &tauri::AppHandle) -> Result<()> {
     Ok(())
 }
 
-pub fn start_integrity_thread(app: tauri::AppHandle) {
+fn start_integrity_thread(app: tauri::AppHandle) {
     spawn_named_thread("Integrity", move || {
         // Maximum number of attempts to validate the webview state (max: 5 seconds)
         let mut remaining_attempts = 50;
@@ -153,8 +158,48 @@ pub fn start_integrity_thread(app: tauri::AppHandle) {
 }
 
 pub fn restart_as_appx() -> Result<!> {
-    std::process::Command::new(SEELEN_COMMON.system_dir().join("explorer.exe"))
+    let explorer = WindowsApi::known_folder(FOLDERID_Windows)?.join("explorer.exe");
+    std::process::Command::new(explorer)
         .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
         .spawn()?;
     std::process::exit(0);
+}
+
+pub fn restart_as_interactive_user() -> Result<!> {
+    // start it using explorer to spawn it as unelevated and as current interactive user
+    let explorer = WindowsApi::known_folder(FOLDERID_Windows)?.join("explorer.exe");
+    let arg = if was_installed_using_msix() {
+        "shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App".to_string()
+    } else {
+        std::env::current_exe()?.to_string_lossy().to_string()
+    };
+    std::process::Command::new(explorer).arg(&arg).spawn()?;
+    std::process::exit(0);
+}
+
+// https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-createmutexw
+pub fn is_already_running() -> bool {
+    unsafe {
+        let session_id = WindowsApi::current_session_id();
+        let mutex_name = format!("Local\\Seelen-UI-Instance-{}", session_id);
+        let mutex_name_wide = WindowsString::from_str(&mutex_name);
+
+        // Try to create a named mutex specific to the current session
+        let Ok(handle) = CreateMutexW(None, true, mutex_name_wide.as_pcwstr()) else {
+            // Failed to create mutex, assume not running to be safe
+            log::warn!("Failed to create instance mutex, proceeding anyway");
+            return false;
+        };
+
+        // if mutex existed before, another instance is already running for this session
+        let last_error = GetLastError();
+        if last_error == ERROR_ALREADY_EXISTS {
+            return true;
+        }
+
+        // This is the first instance for this session
+        // Keep the handle alive by leaking it (will be released when process exits)
+        Box::leak(Box::new(handle));
+        false
+    }
 }

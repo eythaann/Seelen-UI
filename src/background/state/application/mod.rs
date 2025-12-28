@@ -10,7 +10,6 @@ mod weg_items;
 pub use icons::download_remote_icons;
 
 use arc_swap::ArcSwap;
-use icons::IconPacksManager;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use notify_debouncer_full::{
@@ -18,13 +17,15 @@ use notify_debouncer_full::{
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
-use parking_lot::Mutex;
 use seelen_core::{
     resource::ResourceKind,
-    state::{CssStyles, LauncherHistory, Profile, SluPopupConfig, SluPopupContent, WegItems},
+    state::{
+        AppsConfigurationList, CssStyles, LauncherHistory, Profile, SluPopupConfig,
+        SluPopupContent, WegItems,
+    },
 };
 use std::{
-    collections::{HashSet, VecDeque},
+    collections::HashSet,
     path::{Path, PathBuf},
     sync::Arc,
     time::Duration,
@@ -50,12 +51,10 @@ pub struct FullState {
     // ======== data ========
     pub profiles: Vec<Profile>,
     pub settings: Settings,
-    pub settings_by_app: VecDeque<AppConfig>,
+    pub settings_by_app: AppsConfigurationList,
     pub weg_items: WegItems,
     pub toolbar_items: Placeholder,
     pub launcher_history: LauncherHistory,
-    // ====== resources ========
-    pub icon_packs: Arc<Mutex<IconPacksManager>>,
 }
 
 unsafe impl Sync for FullState {}
@@ -67,11 +66,10 @@ impl FullState {
             // ======== data ========
             profiles: Vec::new(),
             settings: Settings::default(),
-            settings_by_app: VecDeque::new(),
+            settings_by_app: AppsConfigurationList::default(),
             weg_items: WegItems::default(),
             toolbar_items: Self::initial_toolbar_items(),
             launcher_history: LauncherHistory::default(),
-            icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
         };
         manager.load_all()?; // ScaDaned log shows a deadlock here.
         manager.start_listeners()?;
@@ -99,7 +97,6 @@ impl FullState {
 
     fn process_changes(&mut self, changed: &HashSet<PathBuf>) -> Result<()> {
         let mut icons_changed = false;
-        let mut system_icons_changed = false;
         let mut weg_items_changed = false;
         let mut toolbar_items_changed = false;
         let mut history_changed = false;
@@ -114,9 +111,6 @@ impl FullState {
         for path in changed {
             if !icons_changed && path.starts_with(SEELEN_COMMON.user_icons_path()) {
                 icons_changed = true;
-                if !system_icons_changed {
-                    system_icons_changed = path.to_string_lossy().contains("system");
-                }
             };
 
             if !weg_items_changed && path == SEELEN_COMMON.weg_items_path() {
@@ -168,14 +162,6 @@ impl FullState {
             }
         }
 
-        if icons_changed {
-            log::info!("Icon Packs changed");
-            if !system_icons_changed {
-                self.load_icons_packs(false)?;
-            }
-            self.emit_icon_packs()?;
-        }
-
         if weg_items_changed {
             let old = self.weg_items.clone();
             self.read_weg_items();
@@ -200,16 +186,22 @@ impl FullState {
             self.emit_history()?;
         }
 
+        if app_configs_changed {
+            log::info!("Specific App Configuration changed");
+            self.load_settings_by_app();
+            self.emit_settings_by_app()?;
+        }
+
         if themes_changed {
             log::info!("Theme changed");
             RESOURCES.load_all_of_type(ResourceKind::Theme)?;
             RESOURCES.emit_themes()?;
         }
 
-        if app_configs_changed {
-            log::info!("Specific App Configuration changed");
-            self.load_settings_by_app();
-            self.emit_settings_by_app()?;
+        if icons_changed {
+            log::info!("Icon Packs changed");
+            RESOURCES.load_all_of_type(ResourceKind::IconPack)?;
+            RESOURCES.emit_icon_packs()?;
         }
 
         if plugins_changed {
@@ -228,6 +220,10 @@ impl FullState {
             log::info!("Wallpapers changed");
             RESOURCES.load_all_of_type(ResourceKind::Wallpaper)?;
             RESOURCES.emit_wallpapers()?;
+
+            if self.sanitize_wallpaper_collections() {
+                self.emit_settings()?;
+            }
         }
 
         // important: settings changed should be the last one to avoid use unexisting state
@@ -327,9 +323,7 @@ impl FullState {
             self.settings_by_app.extend(apps);
         }
 
-        self.settings_by_app
-            .iter_mut()
-            .for_each(|app| app.identifier.perform_cache());
+        self.settings_by_app.prepare();
         Ok(())
     }
 
@@ -373,21 +367,6 @@ impl FullState {
 
         log::trace!("Initial load: history");
         self.load_history();
-
-        log::trace!("Initial load: themes");
-        RESOURCES.load_all_of_type(ResourceKind::Theme)?;
-
-        log::trace!("Initial load: plugins");
-        RESOURCES.load_all_of_type(ResourceKind::Plugin)?;
-
-        log::trace!("Initial load: widgets");
-        RESOURCES.load_all_of_type(ResourceKind::Widget)?;
-
-        log::trace!("Initial load: wallpapers");
-        RESOURCES.load_all_of_type(ResourceKind::Wallpaper)?;
-
-        log::trace!("Initial load: icons packs");
-        self.load_icons_packs(true)?;
 
         log::trace!("Initial load: profiles");
         self.load_profiles()?;

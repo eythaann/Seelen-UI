@@ -1,0 +1,24 @@
+available: ອຸປະກອນທີ່ມີຢູ່
+cancel: ຍົກເລີກ
+confirm: ຢືນຢັນ
+confirm_only: ຢືນຢັນການຈັບຄູ່
+confirm_pin: ຢືນຢັນວ່າ PIN Matches
+connected: ເຊື່ອມໂຍງ
+disconnect: ຕັດຂາດ
+display_pin: ໃສ່ PIN ນີ້ໃນອຸປະກອນ
+lowenergy: ພະລັງງານຕ່ໍາ
+more: ການຕັ້ງຄ່າ Bluetooth ເພີ່ມເຕີມ
+no_adapter: ບໍ່ພົບຜູ້ດັດແປງ bluetooth
+not_found: ບໍ່ພົບອຸປະກອນໃດ
+pair: ຄູ່
+paired: ຈັບຄູ່
+pairing: ຄູ່ ...
+pairing_failed: ການຈັບຄູ່ສົບຜົນສໍາເລັດ
+password: ລະຫັດຜ່ານ
+provide_address: ໃສ່ທີ່ຢູ່
+provide_password: ໃສ່ຊື່ຜູ້ໃຊ້ແລະລະຫັດຜ່ານ
+provide_pin: ໃສ່ເຂັມ
+scanning: ສະແກນສໍາລັບອຸປະກອນ ...
+unpair: ບໍ່ເອົາໃຈໃສ່ Unpair
+unpair_failed: ລົ້ມເຫລວທີ່ບໍ່ສາມາດຍົກເວັ້ນໄດ້
+username: ສັນຍາລັກ

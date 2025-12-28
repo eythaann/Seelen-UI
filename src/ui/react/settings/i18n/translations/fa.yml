@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: به روز رسانی
     ok_readonly: ویرایش به عنوان جدید
     options:
-      float: شناور
-      force: زور مدیریت
-      hidden: مخفی کردن از حوض/نوار وظیفه
-      pinned: بریده شده
-      unmanage: از بین بردن
+      NoInteractive: بدون تعامل
+      VdPinned: نمایش در همه فضاهای کاری
+      WmFloat: Twm - شناور را شروع کنید
+      WmForce: Twm - مدیریت نیرو
+      WmUnmanage: Twm - مدیریت کنید
     options_label: گزینه های اضافی
     title_create: ایجاد {{name}}
     title_edit: ویرایش {{نام}}
@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
-  dynamic_color: رنگ پویا
-  dynamic_color_tooltip: >-
-    پس زمینه پویا و رنگهای پیش زمینه را بر اساس پنجره متمرکز فعال کنید. (رنگ ها
-    را می توان با مضامین نادیده گرفت)
   enable: نوار ابزار فانتزی را فعال کنید
   height: قد
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: روی همپوشانی
   label: نوار ابزار
   placeholder: {}
-  show_hibernate: دکمه Hibernate را در منوی Power نشان دهید
 update:
   available: بروزرسانی موجود!
   channel: کانال
@@ -304,7 +299,6 @@ weg:
       all: همه
       label: قابلیت مشاهده موارد پین نشده
       on_monitor: روی مانیتور
-    thumbnail_generation_enabled: ریز عکسها را در شناور آیتم ایجاد کنید
     visible_separators: جداکننده های قابل مشاهده
   label: اسکله/نوار وظیفه
   margin: لبه
@@ -329,6 +323,10 @@ wm:
     offset: جبران مرز
     width: عرض مرز
   description: شرح
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: مرتب سازی (ترتیب مجدد پنجره ها در حین کشیدن)
+    swap: تعویض (تعویض پنجره ها در انتهای کشیدن)
   enable: مدیر پنجره کاشی کاری را فعال کنید
   layout: چیدمان
   resize_delta: تغییر اندازه دلتا (٪)

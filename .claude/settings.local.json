@@ -4,7 +4,9 @@
       "Bash",
       "Read",
       "Edit",
-      "Write"
+      "Write",
+      "WebFetch(domain:github.com)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

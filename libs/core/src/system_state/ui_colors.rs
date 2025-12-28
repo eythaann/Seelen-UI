@@ -15,7 +15,7 @@ pub struct UIColors {
 }
 
 /// since v2.2.0 this should be used to handle every used color in the app
-#[derive(Debug, Default, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, TS)]
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Color {
     pub r: u8,

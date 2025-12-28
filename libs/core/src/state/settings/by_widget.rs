@@ -35,7 +35,11 @@ impl SettingsByWidget {
             "@seelen/window-manager" => self.wm.enabled,
             "@seelen/wallpaper-manager" => self.wall.enabled,
             "@seelen/launcher" => self.launcher.enabled,
-            _ => self.others.get(widget_id).is_some_and(|s| s.enabled),
+            _ => match self.others.get(widget_id) {
+                Some(settings) => settings.enabled,
+                // only official widgets are enabled by default
+                None => widget_id.starts_with("@seelen"),
+            },
         }
     }
 
@@ -46,11 +50,17 @@ impl SettingsByWidget {
             "@seelen/window-manager" => self.wm.enabled = enabled,
             "@seelen/wallpaper-manager" => self.wall.enabled = enabled,
             "@seelen/launcher" => self.launcher.enabled = enabled,
-            _ => {
-                if let Some(s) = self.others.get_mut(widget_id) {
-                    s.enabled = enabled;
+            _ => match self.others.entry(widget_id.clone()) {
+                std::collections::hash_map::Entry::Occupied(mut o) => {
+                    o.get_mut().enabled = enabled;
                 }
-            }
+                std::collections::hash_map::Entry::Vacant(v) => {
+                    v.insert(ThirdPartyWidgetSettings {
+                        enabled,
+                        ..Default::default()
+                    });
+                }
+            },
         }
     }
 }

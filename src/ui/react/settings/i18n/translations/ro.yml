@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Actualizați
     ok_readonly: Editați ca nou
     options:
-      float: Pluti
-      force: Forța gestionează
-      hidden: Ascundeți -vă de doc/bara de activități
-      pinned: Fixat
-      unmanage: Ne gestionare
+      NoInteractive: Nu interactiv
+      VdPinned: Afișați în toate spațiile de lucru
+      WmFloat: Twm - Începeți să plutească
+      WmForce: Twm - Gestionarea forței
+      WmUnmanage: Twm - Unmanage
     options_label: Opțiuni suplimentare
     title_create: Crearea {{nume}}
     title_edit: Editare {{nume}}
@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
   dock_side: Poziția
-  dynamic_color: Culoare dinamică
-  dynamic_color_tooltip: >-
-    Activați culorile dinamice de fundal și prim-plan în funcție de fereastra
-    focalizată. (Culorile pot fi înlocuite de teme)
   enable: Activați bara de instrumente fantezistă
   height: Înălţime
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: Pe suprapunere
   label: Bara de instrumente
   placeholder: {}
-  show_hibernate: Afișați butonul de hibernare în meniul de pornire
 update:
   available: Actualizare disponibilă!
   channel: Actualizare canal
@@ -307,7 +302,6 @@ weg:
       all: Toate
       label: Vizibilitatea elementelor nefixate
       on_monitor: Pe monitor
-    thumbnail_generation_enabled: Generarea de miniaturi la trecerea elementului
     visible_separators: Separatoare vizibile
   label: Dock/Bara de activități
   margin: Marjă
@@ -332,6 +326,10 @@ wm:
     offset: Offset de frontieră
     width: Lățimea graniței
   description: Descriere
+  drag_behavior: Comportament de tragere
+  drag_behavior_options:
+    sort: Sortare (reordonează ferestrele în timp ce trageți)
+    swap: Schimbați (schimbați ferestrele la capătul de tragere)
   enable: Activați managerul de ferestre de gresie
   layout: Aspect
   resize_delta: Redimensionați delta (%)

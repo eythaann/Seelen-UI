@@ -6,12 +6,12 @@ body {
 }
 
 :root {
-  --accent-color-by-scheme: var(--config-accent-dark-color);
+  --accent-color-by-scheme: var(--system-accent-dark-color);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --accent-color-by-scheme: var(--config-accent-light-color);
+    --accent-color-by-scheme: var(--system-accent-light-color);
   }
 }
 
@@ -22,24 +22,6 @@ body {
   translate: -50% -50%;
   height: 50lvh;
   aspect-ratio: 1 / 1;
-
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--color-gray-400);
-    border-radius: 8px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-gray-500);
-  }
 }
 
 .launcher {
@@ -151,7 +133,7 @@ body {
 
   &:focus,
   &:focus-visible {
-    outline: 2px solid rgba(var(--config-accent-dark-color-rgb), 0.8);
+    outline: 2px solid rgba(var(--system-accent-dark-color-rgb), 0.8);
     z-index: 2;
   }
 

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Olaangs
     ok_readonly: Ännert als nei
     options:
-      float: Schwammen
-      force: Kraaft managen
-      hidden: Verstoppen vun Dock / Taskbar
-      pinned: Verbonnen
-      unmanage: Unmanage
+      NoInteractive: Keng interaktiv
+      VdPinned: Show an all Aarbechtsberäicher
+      WmFloat: Twm - Start Floating
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Extra Optiounen
     title_create: Erstellen {{Numm}}
     title_edit: Ännert {{Numm}}
@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Verspéidung ze verstoppen
   delay_to_show: Verspéidung fir ze weisen
   dock_side: Positioun un
-  dynamic_color: Dynamesch Faarf
-  dynamic_color_tooltip: >-
-    Aktivéiert dynamesch Hannergrond a Virdergrond Faarwen baséiert op
-    fokusséiert Fënster. (Faarwen kënne vu Themen iwwerschriwwe ginn)
   enable: Aktivéiert Fore Toolbar
   height: Héicht
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: Op Iwwerlappung
   label: TO-tcstar
   placeholder: {}
-  show_hibernate: Show Hibernate Knäppchen op Power Menu
 update:
   available: Update verfügbar!
   channel: Update Kanal
@@ -303,7 +298,6 @@ weg:
       all: All
       label: Unpinned Elementer Visibilitéit
       on_monitor: Op Monitor
-    thumbnail_generation_enabled: Generéiere Miniatur op Artikel Hover
     visible_separators: Sechsi seichtbar Seperure
   label: Dock / Taskbar
   margin: Den Jean-Margin
@@ -328,6 +322,10 @@ wm:
     offset: Grenz Offäll
     width: Grenz Breet
   description: Broessdatsch
+  drag_behavior: Drag Behuelen
+  drag_behavior_options:
+    sort: Sortéieren (Fënstere nei bestellen beim zéien)
+    swap: Tauschen (Swap Fënsteren um Drag End)
   enable: Aktivéiert Fenster-Manager
   layout: Lueden
   resize_delta: Resize Delta (%)

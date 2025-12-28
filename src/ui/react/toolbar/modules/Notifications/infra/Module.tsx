@@ -1,6 +1,6 @@
 import type { NotificationsToolbarItem } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { useWindowFocusChange } from "@shared/hooks";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { Popover } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";

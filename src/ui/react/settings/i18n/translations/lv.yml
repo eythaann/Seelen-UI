@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Atjaunināt
     ok_readonly: Rediģēt kā jaunu
     options:
-      float: Peldēt
-      force: Piespiest pārvaldīt
-      hidden: Paslēpties no doka/uzdevumjoslas
-      pinned: Saspiests
-      unmanage: Pārvalde
+      NoInteractive: Nav interaktīvu
+      VdPinned: Rādīt visās darbvietās
+      WmFloat: Twm — Sākt peldēt
+      WmForce: "Twm\_— piespiedu pārvaldība"
+      WmUnmanage: "Twm\_— nepārvaldīt"
     options_label: Papildu iespējas
     title_create: Izveidot {{name}}
     title_edit: Rediģēšana {{name}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
-  dynamic_color: Dinamiskā krāsa
-  dynamic_color_tooltip: >-
-    Iespēja izmantot dinamiskas fona un priekšplāna krāsas atkarībā no fokusētā
-    loga. (Krāsas var pārspēt ar tēmām)
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Uz pārklāšanās
   label: Rīkjosla
   placeholder: {}
-  show_hibernate: Rādīt hibernēšanas pogu barošanas izvēlnē
 update:
   available: Pieejams atjauninājums!
   channel: Atjaunināt kanālu
@@ -305,7 +300,6 @@ weg:
       all: Visi
       label: Atsprausto vienumu redzamība
       on_monitor: Uz monitora
-    thumbnail_generation_enabled: Ģenerēt sīktēlus, kad vienums tiek novietots ar kursoru
     visible_separators: Redzami atdalītāji
   label: Doks/uzdevumjosla
   margin: Robeža
@@ -330,6 +324,10 @@ wm:
     offset: Robežas kompensācija
     width: Apmales platums
   description: Apraksts
+  drag_behavior: Vilkšanas uzvedība
+  drag_behavior_options:
+    sort: Kārtot (pārkārtot logus, velkot)
+    swap: Apmainīt (apmainīt logus vilkšanas beigās)
   enable: Iespējot flīzēšanas logu pārvaldnieku
   layout: Izkārtojums
   resize_delta: Delta izmēra maiņa (%)

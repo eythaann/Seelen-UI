@@ -1,0 +1,24 @@
+available: Доступни уређаји
+cancel: Откажи
+confirm: Потврди
+confirm_only: Потврдите упаривање
+confirm_pin: Потврдите да се ПИН подудара
+connected: Повезано
+disconnect: Прекини везу
+display_pin: Унесите овај ПИН на уређају
+lowenergy: Ниска енергија
+more: Још Блуетоотх подешавања
+no_adapter: Није пронађен Блуетоотх адаптер
+not_found: Није пронађен ниједан уређај
+pair: Пар
+paired: Упарено
+pairing: Упаривање...
+pairing_failed: Упаривање није успело
+password: Лозинка
+provide_address: Унесите адресу
+provide_password: Унесите корисничко име и лозинку
+provide_pin: Унесите ПИН
+scanning: Скенирање уређаја...
+unpair: Унпаир
+unpair_failed: Опозивање упаривања није успело
+username: Корисничко име

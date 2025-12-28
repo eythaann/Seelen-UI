@@ -767,7 +767,6 @@ Section Uninstall
   ; Delete the app directory and its content from disk
   ; Copy main executable
   Delete "$INSTDIR\${MAINBINARYNAME}.exe"
-  ; Delete "$INSTDIR\seelen_ui.pdb" ;slu
 
   ; Delete resources
   {{#each resources}}

@@ -1,0 +1,24 @@
+available: Tillgängliga enheter
+cancel: Avboka
+confirm: Bekräfta
+confirm_only: Bekräfta ihopparningen
+confirm_pin: Bekräfta att PIN-koden matchar
+connected: Ansluten
+disconnect: Koppla från
+display_pin: Ange denna PIN-kod på enheten
+lowenergy: Låg energi
+more: Fler Bluetooth-inställningar
+no_adapter: Ingen Bluetooth-adapter hittades
+not_found: Inga enheter hittades
+pair: Par
+paired: Parat
+pairing: Parning...
+pairing_failed: Det gick inte att koppla ihop
+password: Lösenord
+provide_address: Ange adress
+provide_password: Ange användarnamn och lösenord
+provide_pin: Ange PIN-kod
+scanning: Söker efter enheter...
+unpair: Ta bort paret
+unpair_failed: Det gick inte att ta bort parkopplingen
+username: Användarnamn

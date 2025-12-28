@@ -1,40 +1,18 @@
 import { SeelenCommand } from "@seelen-ui/lib";
-import { Icon } from "@shared/components/Icon";
-import { cx } from "@shared/styles";
+import { Icon, MissingIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
-import { listen } from "@tauri-apps/api/event";
-import { tempDir } from "@tauri-apps/api/path";
-import { Spin } from "antd";
-import { type MouseEvent, useEffect, useReducer, useState } from "react";
+import type { MouseEvent } from "react";
 
-import type { HWND } from "../../shared/store/domain.ts";
+import type { HWND } from "../../shared/types.ts";
 
-import { $settings } from "../../shared/state/mod.ts";
+import { $delayedFocused, $previews } from "../../shared/state/mod.ts";
 interface PreviewProps {
   title: string;
   hwnd: HWND;
-  isFocused: boolean;
 }
 
-const TEMP_FOLDER = await tempDir();
-
-export const UserApplicationPreview = (
-  { title, hwnd, isFocused }: PreviewProps,
-) => {
-  const imageUrl = convertFileSrc(`${TEMP_FOLDER}${hwnd}.png`);
-
-  const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-
-  useEffect(() => {
-    const unlisten = listen(`weg-preview-update-${hwnd}`, () => {
-      setImageSrc(imageUrl);
-      forceUpdate(_);
-    });
-    return () => {
-      unlisten.then((unlisten) => unlisten()).catch(console.error);
-    };
-  }, []);
+export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
+  const preview = $previews.value[hwnd];
 
   const onClose = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -43,15 +21,17 @@ export const UserApplicationPreview = (
 
   return (
     <div
-      className={cx("weg-item-preview", {
-        "weg-item-preview-thumbnail-disabled": !$settings.value
-          .thumbnailGenerationEnabled,
-      })}
+      className="weg-item-preview"
       onClick={() => {
         invoke(SeelenCommand.WegToggleWindowState, {
           hwnd,
-          wasFocused: isFocused,
+          wasFocused: $delayedFocused.value?.hwnd === hwnd,
         });
+      }}
+      onAuxClick={(e) => {
+        if (e.button === 1) {
+          invoke(SeelenCommand.WegCloseApp, { hwnd });
+        }
       }}
     >
       <div className="weg-item-preview-topbar">
@@ -60,19 +40,16 @@ export const UserApplicationPreview = (
           <Icon iconName="IoClose" />
         </div>
       </div>
-      {$settings.value.thumbnailGenerationEnabled && (
-        <div className="weg-item-preview-image-container">
-          {imageSrc
-            ? (
-              <img
-                className="weg-item-preview-image"
-                src={imageSrc + `?${new Date().getTime()}`}
-                onError={() => setImageSrc(null)}
-              />
-            )
-            : <Spin className="weg-item-preview-spin" />}
-        </div>
-      )}
+      <div className="weg-item-preview-image-container">
+        {preview
+          ? (
+            <img
+              className="weg-item-preview-image"
+              src={convertFileSrc(preview.path) + "?v=" + preview.hash}
+            />
+          )
+          : <MissingIcon />}
+      </div>
     </div>
   );
 };

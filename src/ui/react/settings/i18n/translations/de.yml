@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Ändern
     ok_readonly: Als neu bearbeiten
     options:
-      float: Schwebend
-      force: Verwaltung erzwingen
-      hidden: Vor Dock/Taskleiste verstecken
-      pinned: Angeheftet
-      unmanage: Nicht verwalten
+      NoInteractive: Keine Interaktivität
+      VdPinned: In allen Arbeitsbereichen anzeigen
+      WmFloat: Twm – Beginnen Sie mit dem Schweben
+      WmForce: Twm – Force Manage
+      WmUnmanage: Twm – Nicht verwalten
     options_label: Zusätzliche Optionen
     title_create: '{{name}} erstellen'
     title_edit: Bearbeitung {{Name}}
@@ -233,11 +233,6 @@ toolbar:
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
-  dynamic_color: Dynamische Farbe
-  dynamic_color_tooltip: >-
-    Aktivieren Sie dynamische Hintergrund- und Vordergrundfarben, die auf dem
-    fokussierten Fenster basieren. (Farben können von Themes überschrieben
-    werden)
   enable: Elegante Werkzeugleiste aktivieren
   height: Höhe
   hide_mode:
@@ -246,7 +241,6 @@ toolbar:
     on_overlap: Auf Überlappung
   label: Symbolleiste
   placeholder: {}
-  show_hibernate: Schaltfläche "Ruhezustand" im Menü "Energie" anzeigen
 update:
   available: Update verfügbar!
   channel: Update-Kanal
@@ -308,7 +302,6 @@ weg:
       all: Alle
       label: Sichtbarkeit nicht angehefteter Elemente
       on_monitor: Auf dem Monitor
-    thumbnail_generation_enabled: Erzeugen von Miniaturbildern beim Hovern eines Artikels
     visible_separators: Sichtbare Trennzeichen
   label: Dock/Taskleiste
   margin: Rand
@@ -333,6 +326,10 @@ wm:
     offset: Randversatz
     width: Randbreite
   description: Beschreibung
+  drag_behavior: Drag-Verhalten
+  drag_behavior_options:
+    sort: Sortieren (Fenster beim Ziehen neu anordnen)
+    swap: Tauschen (Fenster am Ende des Ziehens tauschen)
   enable: Aktivieren Sie den Tiling Window Manager
   layout: Layout
   resize_delta: Relative Größenänderung (%)

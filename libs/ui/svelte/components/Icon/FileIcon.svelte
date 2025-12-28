@@ -96,7 +96,7 @@
     {#if state.mask}
       <div
         {...dataProps}
-        class="slu-icon-mask sl-mask"
+        class="slu-icon-mask"
         style="mask-image: url('{state.mask}')"
       ></div>
     {/if}
@@ -125,6 +125,6 @@
     mask-size: contain;
     mask-position: center;
     mask-mode: luminance;
-    background-color: var(--config-accent-light-color);
+    background-color: var(--system-accent-light-color);
   }
 </style>

@@ -1,6 +1,6 @@
 [package]
 name = "seelen-ui"
-version = "2.4.6"
+version = "2.5.0"
 description = "Seelen UI Background"
 authors = ["eythaann"]
 license = "AGPL-3.0"
@@ -26,6 +26,7 @@ tauri-build = { workspace = true, features = [] }
 
 [dependencies]
 slu-ipc = { workspace = true }
+slu-utils = { workspace = true }
 positioning = { workspace = true }
 tauri = { workspace = true, features = ["devtools", "protocol-asset"] }
 tauri-plugin-fs = { workspace = true }
@@ -136,6 +137,7 @@ windows = { workspace = true, features = [
     "Win32_Media_Audio_Apo",
     "Win32_Media_DeviceManager",
     "Graphics",
+    "Graphics_Display",
     "Media",
     "Media_Audio",
     "Media_Render",
@@ -160,6 +162,8 @@ windows = { workspace = true, features = [
     "Security_Credentials",
     "Devices_Custom",
     "Devices_Bluetooth",
+    "Devices_Bluetooth_Rfcomm",
+    "Devices_Bluetooth_GenericAttributeProfile",
     "Devices_Enumeration",
     "Devices_Radios",
     "Devices_WiFi",

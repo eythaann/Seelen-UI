@@ -12,17 +12,19 @@ app_menu:
   run_as: Kør som administrator
   unpin: Unpin
 context_menu:
+  remove_module: Fjern modul
   reorder_disable: Lås proceslinjen
   reorder_enable: Lås proceslinjen op
 media:
   not_playing: Intet spiller
-media_menu:
-  remove: Fjern mediemodulet
-start_menu:
-  remove: Fjern startmodulet
+show_desktop:
+  label: Vis skrivebord
+start:
+  label: Startmenu
 taskbar_menu:
   add_file: Pin brugerdefineret fil
   add_folder: Pin brugerdefineret mappe
+  desktop: Tilføj skrivebordsmodul
   media: Tilføj mediemodul
   settings: Indstillinger
   start: Tilføj startmodul

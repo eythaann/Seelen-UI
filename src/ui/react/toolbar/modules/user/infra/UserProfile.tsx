@@ -1,6 +1,6 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { User } from "@seelen-ui/lib/types";
-import { Icon, MissingIcon } from "@shared/components/Icon";
+import { Icon, MissingIcon } from "libs/ui/react/components/Icon";
 import { path } from "@tauri-apps/api";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Tooltip } from "antd";

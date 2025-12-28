@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: અપડેટ કરો
     ok_readonly: નવા તરીકે સંપાદિત કરો
     options:
-      float: ફ્લોટ
-      force: ફોર્સ મેનેજ કરો
-      hidden: ડોક/ટાસ્કબારથી છુપાવો
-      pinned: પિન કરેલ
-      unmanage: અનમેનેજ કરો
+      NoInteractive: કોઈ ઇન્ટરેક્ટિવ નથી
+      VdPinned: તમામ કાર્યસ્થળોમાં બતાવો
+      WmFloat: Twm - ફ્લોટિંગ શરૂ કરો
+      WmForce: Twm - ફોર્સ મેનેજ કરો
+      WmUnmanage: Twm - unmanage
     options_label: વધારાના વિકલ્પો
     title_create: '{{name}} બનાવી રહ્યાં છીએ'
     title_edit: સંપાદન {{નામ}}
@@ -228,10 +228,6 @@ toolbar:
   delay_to_hide: છુપાવવામાં વિલંબ
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
-  dynamic_color: ગતિશીલ રંગ
-  dynamic_color_tooltip: >-
-    ધ્યાન કેન્દ્રિત વિંડોના આધારે ગતિશીલ પૃષ્ઠભૂમિ અને અગ્રભૂમિ રંગોને સક્ષમ
-    કરો. (થીમ્સ દ્વારા રંગો ઓવરરાઇડ કરી શકાય છે)
   enable: ફેન્સી ટૂલબાર સક્ષમ કરો
   height: ઊંચાઈ
   hide_mode:
@@ -240,7 +236,6 @@ toolbar:
     on_overlap: ઓવરલેપ પર
   label: વમળ
   placeholder: {}
-  show_hibernate: પાવર મેનૂ પર હાઇબરનેટ બટન બતાવો
 update:
   available: અપડેટ ઉપલબ્ધ!
   channel: અપડેટ
@@ -302,7 +297,6 @@ weg:
       all: બધા
       label: અનપિન કરેલ આઇટમ્સની દૃશ્યતા
       on_monitor: મોનિટર પર
-    thumbnail_generation_enabled: આઇટમ હોવર પર થંબનેલ્સ બનાવો
     visible_separators: દૃશ્યમાન વિભાજક
   label: ડોક/ટાસ્કબાર
   margin: માર્જિન
@@ -327,6 +321,10 @@ wm:
     offset: બોર્ડર ઓફસેટ
     width: સરહદની પહોળાઈ
   description: વર્ણન
+  drag_behavior: ખેંચો વર્તન
+  drag_behavior_options:
+    sort: સૉર્ટ કરો (ડ્રેગ કરતી વખતે વિંડોઝને ફરીથી ગોઠવો)
+    swap: સ્વેપ (ડ્રેગ એન્ડ પર વિન્ડોઝ સ્વેપ)
   enable: ટાઇલિંગ વિંડો મેનેજરને સક્ષમ કરો
   layout: લેઆઉટ
   resize_delta: ડેલ્ટાનું કદ બદલો (%)

@@ -1,6 +1,6 @@
 import { Alignment, FancyToolbarSide, type WidgetId } from "@seelen-ui/lib/types";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { toPhysicalPixels } from "@shared";
+import { toPhysicalPixels } from "libs/ui/react/utils/index.ts";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { $settings } from "../../../shared/state/mod.ts";
 
@@ -29,9 +29,7 @@ export async function triggerWidget(widgetId: WidgetId, itemId: string): Promise
   const rootRect = document.getElementById("root")!.getBoundingClientRect();
   const isTopPosition = $settings.value.position === FancyToolbarSide.Top;
 
-  const y = isTopPosition
-    ? windowY + toPhysicalPixels(rootRect.bottom + 10)
-    : windowY + toPhysicalPixels(rootRect.top - 10);
+  const y = isTopPosition ? windowY + toPhysicalPixels(rootRect.bottom) : windowY + toPhysicalPixels(rootRect.top);
 
   await invoke(SeelenCommand.TriggerWidget, {
     payload: {

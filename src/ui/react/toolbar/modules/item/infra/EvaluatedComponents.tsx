@@ -1,6 +1,5 @@
 import Sandbox from "@nyariv/sandboxjs";
-import { FileIcon, Icon } from "@shared/components/Icon";
-import type { IconName } from "@shared/components/Icon/icons";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { memo, useEffect, useState } from "react";
 import { z } from "zod";
@@ -140,7 +139,7 @@ const EvaluatedReactIconPropsSchema = z.object({
   size: z.number().optional(),
 });
 function EvaluatedReactIcon({ name, size }: EvaluatedReactIconProps) {
-  return <Icon iconName={name as IconName} size={size} />;
+  return <Icon iconName={name as any} size={size} />;
 }
 
 type EvaluatedImageProps = z.infer<typeof EvaluatedImagePropsSchema>;

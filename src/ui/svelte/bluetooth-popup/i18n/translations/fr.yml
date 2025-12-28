@@ -1,0 +1,24 @@
+available: Appareils disponibles
+cancel: Annuler
+confirm: Confirmer
+confirm_only: Confirmer l'appairage
+confirm_pin: Confirmez que le code PIN correspond
+connected: Connecté
+disconnect: Déconnecter
+display_pin: Entrez ce code PIN sur l'appareil
+lowenergy: Faible consommation d'énergie
+more: Plus de paramètres Bluetooth
+no_adapter: Aucun adaptateur Bluetooth trouvé
+not_found: Aucun appareil trouvé
+pair: Paire
+paired: Jumelé
+pairing: L'appariement...
+pairing_failed: Échec du couplage
+password: Mot de passe
+provide_address: Entrez l'adresse
+provide_password: Entrez le nom d'utilisateur et le mot de passe
+provide_pin: Entrez le code PIN
+scanning: Recherche d'appareils...
+unpair: Dissocier
+unpair_failed: Échec de la dissociation
+username: Nom d'utilisateur

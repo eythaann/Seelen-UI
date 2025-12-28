@@ -4,10 +4,9 @@ use seelen_core::{
     handlers::SeelenEvent,
     state::{WegItem, WegItems},
 };
-use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle, error::Result, modules::apps::application::msix::MsixAppsManager,
+    app::emit_to_webviews, error::Result, modules::apps::application::msix::MsixAppsManager,
     trace_lock, utils::constants::SEELEN_COMMON, widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
 };
 
@@ -30,7 +29,7 @@ impl FullState {
     }
 
     pub fn emit_weg_items(&self) -> Result<()> {
-        get_app_handle().emit(SeelenEvent::StateWegItemsChanged, &self.weg_items)?;
+        emit_to_webviews(SeelenEvent::StateWegItemsChanged, &self.weg_items);
         trace_lock!(SEELEN_WEG_STATE).on_stored_changed(self.weg_items.clone())?;
         Ok(())
     }

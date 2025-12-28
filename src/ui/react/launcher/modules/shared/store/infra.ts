@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { LauncherHistory, SeelenCommand, Settings, startThemingTool, UIColors } from "@seelen-ui/lib";
+import { LauncherHistory, SeelenCommand, Settings, UIColors } from "@seelen-ui/lib";
 import { invoke } from "@tauri-apps/api/core";
 
 import { Actions, RootSlice } from "./app.ts";
@@ -40,5 +40,4 @@ export async function initStore() {
   });
 
   await initUIColors();
-  await startThemingTool();
 }

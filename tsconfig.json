@@ -29,10 +29,10 @@
     "baseUrl": ".",
     "paths": {
       "@icons": [
-        "libs/widgets-shared/components/Icon/icons.ts"
+        "libs/ui/react/components/Icon/icons.ts"
       ],
       "@shared": [
-        "libs/widgets-shared/index.ts"
+        "libs/ui/react/utils/index.ts"
       ],
       "@shared/*": [
         "libs/widgets-shared/*"

@@ -3,20 +3,21 @@ import {
   type Widget as IWidget,
   type WidgetId,
   WidgetPreset,
+  WidgetStatus,
   type WidgetTriggerPayload,
   type WsdGroupEntry,
 } from "@seelen-ui/types";
-import { SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
+import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 import { List } from "../../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { getCurrentWebviewWindow, type WebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { decodeBase64Url } from "@std/encoding/base64url";
+import { decodeBase64Url } from "@std/encoding";
 import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";
-import { autoSizeWebviewBasedOnContent } from "./sizing.ts";
-import type { EventCallback } from "@tauri-apps/api/event";
+import { WidgetAutoSizer } from "./sizing.ts";
 import { adjustPostionByPlacement } from "./positioning.ts";
+import { startThemingTool } from "../theme/theming.ts";
 
 export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
 export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
@@ -40,7 +41,7 @@ export class WidgetList extends List<IWidget> {
   }
 }
 
-interface WidgetInformation {
+export interface WidgetInformation {
   /** decoded webview label */
   label: string;
   /** Will be present if the widget replicas is set to by monitor */
@@ -49,6 +50,36 @@ interface WidgetInformation {
   instanceId: string | null;
   /** params present on the webview label */
   params: { readonly [key in string]?: string };
+}
+
+export interface InitWidgetOptions {
+  /**
+   * If show the widget on Ready
+   *
+   * @default !widget.lazy
+   */
+  show?: boolean;
+  /**
+   * Will auto size the widget to the content size of the element
+   * @example
+   *  autoSizeByContent: document.body,
+   *  autoSizeByContent: document.getElementById("root"),
+   * @default undefined
+   */
+  autoSizeByContent?: HTMLElement | null;
+  /**
+   * Will save the position and size of the widget on change.
+   * This is intedeed to be used when the size and position of the widget is
+   * allowed to be changed by the user, Normally used on desktop widgets.
+   *
+   * @default widget.preset === "Desktop"
+   */
+  saveAndRestoreLastRect?: boolean;
+}
+
+interface WidgetInternalState {
+  initialized: boolean;
+  ready: boolean;
 }
 
 /**
@@ -63,6 +94,13 @@ export class Widget {
   public readonly decoded: WidgetInformation;
   /** current webview window */
   public readonly webview: WebviewWindow;
+
+  private autoSizer?: WidgetAutoSizer;
+  private initOptions: InitWidgetOptions = {};
+  private runtimeState: WidgetInternalState = {
+    initialized: false,
+    ready: false,
+  };
 
   private constructor(widget: IWidget) {
     this.def = widget;
@@ -118,7 +156,7 @@ export class Widget {
   }
 
   /** Returns the default config of the widget, declared on the widget definition */
-  getDefaultConfig(): ThirdPartyWidgetSettings {
+  public getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
     for (const { group } of this.def.settings) {
       for (const entry of group) {
@@ -148,7 +186,6 @@ export class Widget {
       // Desktop widgets are always on bottom
       this.webview.setAlwaysOnBottom(true),
     ]);
-    await this.persistPositionAndSize();
   }
 
   /** Will apply the recommended settings for an overlay widget */
@@ -162,23 +199,30 @@ export class Widget {
 
   /** Will apply the recommended settings for a popup widget */
   private async applyPopupPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset(), this.webview.setResizable(false)]);
+    await Promise.all([...this.applyInvisiblePreset()]);
 
-    // auto close on focus lost
+    // auto close after 1 minute when not in use to save resources
     const closeOnTimeout = debounce(() => {
-      // this.webview.close(); todo
-    }, 5000);
+      this.webview.close();
+    }, 60_000);
 
-    this.webview.onFocusChanged((e) => {
-      if (e.payload) {
-        closeOnTimeout.cancel();
+    const hideWebview = debounce(() => {
+      this.webview.hide();
+      closeOnTimeout();
+    }, 100);
+
+    this.webview.onFocusChanged(({ payload: focused }) => {
+      if (focused) {
+        hideWebview.cancel();
       } else {
-        this.webview.hide();
-        closeOnTimeout();
+        hideWebview();
       }
     });
 
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
+      // avoid flickering when clicking a button that triggers the widget
+      hideWebview.cancel();
+
       if (desiredPosition) {
         const { width, height } = await this.webview.outerSize();
         const pos = await adjustPostionByPlacement({
@@ -192,12 +236,13 @@ export class Widget {
         await this.webview.setPosition(new PhysicalPosition(pos.x, pos.y));
       }
       await this.webview.show();
+      await this.webview.setFocus();
     });
   }
 
   /**
-   * Will restore the saved position and size of the widget after that
-   * will store the position and size of the widget on change.
+   * Will restore the saved position and size of the widget on start,
+   * after that will store the position and size of the widget on change.
    */
   public async persistPositionAndSize(): Promise<void> {
     const storage = globalThis.window.localStorage;
@@ -238,16 +283,20 @@ export class Widget {
     );
   }
 
-  // this will monitor the element and resize the webview accordingly
-  public autoSizeWebviewByElement(element: HTMLElement = document.body): void {
-    autoSizeWebviewBasedOnContent(this.webview, element);
-  }
-
   /**
-   * Will initialize the widget based on the preset, this function won't show the widget.
-   * You need to call `webview.show()` to show the widget.
+   * Will initialize the widget based on the preset and mark it as `pending`, this function won't show the widget.
+   * This should be called before any other action on the widget. After this you should call
+   * `ready` to mark the widget as ready and show it.
    */
-  public async init(): Promise<void> {
+  public async init(options: InitWidgetOptions = {}): Promise<void> {
+    if (this.runtimeState.initialized) {
+      console.warn(`Widget already initialized`);
+      return;
+    }
+
+    this.runtimeState.initialized = true;
+    this.initOptions = options;
+
     switch (this.def.preset) {
       case WidgetPreset.None:
         break;
@@ -261,21 +310,49 @@ export class Widget {
         await this.applyPopupPreset();
         break;
     }
+
+    await startThemingTool();
+
+    if (options.autoSizeByContent) {
+      this.autoSizer = new WidgetAutoSizer(this.webview, options.autoSizeByContent);
+    } else if (options.saveAndRestoreLastRect ?? this.def.preset === WidgetPreset.Desktop) {
+      await this.persistPositionAndSize();
+    }
+  }
+
+  /**
+   * Will mark the widget as `ready` and pool pending triggers.
+   *
+   * If the widget is not lazy this will inmediately show the widget.
+   * Lazy widget should be shown on trigger action.
+   */
+  public async ready(): Promise<void> {
+    if (!this.runtimeState.initialized) {
+      throw new Error(`Widget was not initialized before ready`);
+    }
+
+    if (this.runtimeState.ready) {
+      console.warn(`Widget is already ready`);
+      return;
+    }
+
+    this.runtimeState.ready = true;
+    await this.autoSizer?.execute();
+
+    if (this.initOptions.show ?? !this.def.lazy) {
+      await this.webview.show();
+    }
+
+    // this will mark the widget as ready, and send pending trigger event if exists
+    await invoke(SeelenCommand.SetCurrentWidgetStatus, { status: WidgetStatus.Ready });
   }
 
   public onTrigger(cb: (args: WidgetTriggerPayload) => void): void {
-    const fn: EventCallback<WidgetTriggerPayload> = ({ payload }) => {
-      const { id, monitorId, instanceId } = payload;
-      if (
-        id !== this.id ||
-        (monitorId && monitorId !== this.decoded.monitorId) ||
-        (instanceId && instanceId !== this.decoded.instanceId)
-      ) {
-        return;
-      }
+    this.webview.listen<WidgetTriggerPayload>(SeelenEvent.WidgetTriggered, ({ payload }) => {
+      // fix for cutted popups, ensure correct size on trigger.
+      // await this.autoSizer?.execute();
       cb(payload);
-    };
-    subscribe(SeelenEvent.WidgetTriggered, fn.bind(this));
+    });
   }
 }
 

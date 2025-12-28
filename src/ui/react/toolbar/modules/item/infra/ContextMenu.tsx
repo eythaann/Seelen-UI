@@ -1,5 +1,5 @@
 import type { ToolbarItem } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import type { TFunction } from "i18next";
 
 import { $actions } from "../../shared/state/items.ts";

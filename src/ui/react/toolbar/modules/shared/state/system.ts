@@ -1,34 +1,45 @@
-import { computed, signal } from "@preact/signals";
+import { computed } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { FancyToolbarSide } from "@seelen-ui/lib/types";
+import { lazySignal } from "libs/ui/react/utils/LazySignal";
 
 const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
 
-const initialDesktops = await invoke(SeelenCommand.StateGetVirtualDesktops);
-export const $virtual_desktop = signal(
-  initialDesktops.monitors[currentMonitorId],
-);
-subscribe(SeelenEvent.VirtualDesktopsChanged, (e) => {
+export const $virtual_desktop = lazySignal(async () => {
+  const initialDesktops = await invoke(SeelenCommand.StateGetVirtualDesktops);
+  return initialDesktops.monitors[currentMonitorId];
+});
+await subscribe(SeelenEvent.VirtualDesktopsChanged, (e) => {
   $virtual_desktop.value = e.payload.monitors[currentMonitorId];
 });
+await $virtual_desktop.init();
 
-const $monitors = signal(await invoke(SeelenCommand.SystemGetMonitors));
-subscribe(SeelenEvent.SystemMonitorsChanged, (e) => {
-  $monitors.value = e.payload;
-});
+export const $monitors = lazySignal(() => invoke(SeelenCommand.SystemGetMonitors));
+await subscribe(SeelenEvent.SystemMonitorsChanged, $monitors.setByPayload);
+await $monitors.init();
 
-const $current_monitor = computed(() => $monitors.value.find((m) => m.id === currentMonitorId)!);
+export const $current_monitor = computed(
+  () => $monitors.value.find((m) => m.id === currentMonitorId)!,
+);
 
-const $mouse_pos = signal({ x: 0, y: 0 });
-subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
-  $mouse_pos.value = { x, y };
-});
+const $mouse_pos = lazySignal(() => invoke(SeelenCommand.GetMousePosition));
+await subscribe(SeelenEvent.GlobalMouseMove, $mouse_pos.setByPayload);
+await $mouse_pos.init();
 
 export const $mouse_at_edge = computed<FancyToolbarSide | null>(() => {
-  if ($mouse_pos.value.y === $current_monitor.value.rect.top) {
+  const box = $current_monitor.value.rect;
+  const x = $mouse_pos.value[0];
+  const y = $mouse_pos.value[1];
+
+  if (x < box.left || x > box.right || y < box.top || y > box.bottom) {
+    return null;
+  }
+
+  if (y === box.top) {
     return FancyToolbarSide.Top;
   }
-  if ($mouse_pos.value.y === $current_monitor.value.rect.bottom - 1) {
+
+  if (y === box.bottom - 1) {
     return FancyToolbarSide.Bottom;
   }
   return null;

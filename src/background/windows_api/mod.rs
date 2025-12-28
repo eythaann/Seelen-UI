@@ -1,5 +1,6 @@
 mod app_bar;
 mod com;
+mod devices;
 pub mod event_window;
 pub mod hdc;
 mod iterator;
@@ -13,7 +14,9 @@ pub mod window;
 
 pub use app_bar::*;
 pub use com::*;
+pub use devices::*;
 pub use iterator::*;
+
 use itertools::Itertools;
 use process::ProcessInformationFlag;
 use string_utils::WindowsString;
@@ -44,8 +47,8 @@ use windows::{
             PHYSICAL_MONITOR,
         },
         Foundation::{
-            CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT, STATUS_SUCCESS,
-            WPARAM,
+            CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, POINT, RECT,
+            STATUS_SUCCESS, WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -117,7 +120,7 @@ use windows::{
 use crate::{
     error::{Result, WindowsResultExt},
     hook::HookManager,
-    modules::input::{domain::Point, Keyboard, Mouse},
+    modules::input::{Keyboard, Mouse},
     windows_api::window::{event::WinEvent, Window},
 };
 
@@ -193,10 +196,10 @@ impl WindowsApi {
         parent: Option<HWND>,
         after: Option<HWND>,
         title: Option<String>,
-        class: Option<String>,
+        class: Option<impl Into<String>>,
     ) -> Result<HWND> {
         let title = WindowsString::from(title.unwrap_or_default());
-        let class = WindowsString::from(class.unwrap_or_default());
+        let class = WindowsString::from(class.map(Into::into).unwrap_or_default());
         let found = unsafe {
             FindWindowExW(
                 parent,
@@ -229,17 +232,12 @@ impl WindowsApi {
         unsafe { GetCurrentThreadId() }
     }
 
-    pub fn current_session_id() -> Result<u32> {
+    pub fn current_session_id() -> u32 {
         let process_id = Self::current_process_id();
         let mut session_id = 0;
-
-        unsafe {
-            if ProcessIdToSessionId(process_id, &mut session_id).is_ok() {
-                Ok(session_id)
-            } else {
-                Err("could not determine current session id".into())
-            }
-        }
+        // this should never fail for own process
+        unsafe { ProcessIdToSessionId(process_id, &mut session_id).expect("Can't get session id") };
+        session_id
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
@@ -789,13 +787,29 @@ impl WindowsApi {
 
     pub fn monitor_from_cursor_point() -> HMONITOR {
         if let Ok(point) = Mouse::get_cursor_pos() {
-            return unsafe { MonitorFromPoint(*point.as_ref(), MONITOR_DEFAULTTOPRIMARY) };
+            return unsafe {
+                MonitorFromPoint(
+                    POINT {
+                        x: point.x,
+                        y: point.y,
+                    },
+                    MONITOR_DEFAULTTOPRIMARY,
+                )
+            };
         }
         Self::primary_monitor()
     }
 
-    pub fn monitor_from_point(point: &Point) -> HMONITOR {
-        unsafe { MonitorFromPoint(*point.as_ref(), MONITOR_DEFAULTTOPRIMARY) }
+    pub fn monitor_from_point(point: &seelen_core::Point) -> HMONITOR {
+        unsafe {
+            MonitorFromPoint(
+                POINT {
+                    x: point.x,
+                    y: point.y,
+                },
+                MONITOR_DEFAULTTOPRIMARY,
+            )
+        }
     }
 
     pub fn primary_monitor() -> HMONITOR {
@@ -836,6 +850,7 @@ impl WindowsApi {
         Ok(Self::monitor_info(hmonitor)?.monitorInfo.rcMonitor)
     }
 
+    /// returns the difference between outer window rect and inner window rect
     pub fn shadow_rect(hwnd: HWND) -> Result<RECT> {
         let outer_rect = Self::get_outer_window_rect(hwnd)?;
         let inner_rect = Self::get_inner_window_rect(hwnd)?;

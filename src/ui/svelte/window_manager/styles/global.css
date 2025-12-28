@@ -8,10 +8,10 @@ body {
 }
 
 #root {
+  height: 100%;
+  width: 100%;
   padding-top: calc(var(--config-padding) + var(--config-margin-top));
   padding-left: calc(var(--config-padding) + var(--config-margin-left));
   padding-right: calc(var(--config-padding) + var(--config-margin-right));
   padding-bottom: calc(var(--config-padding) + var(--config-margin-bottom));
-  height: 100%;
-  width: 100%;
 }

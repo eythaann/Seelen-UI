@@ -1,5 +1,5 @@
-import type { AppConfig } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { type AppConfig, AppExtraFlag } from "@seelen-ui/lib/types";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Input, Modal, Switch, Table, Tooltip } from "antd";
 import type { ColumnsType, ColumnType } from "antd/es/table";
 import type { TFunction } from "i18next";
@@ -15,17 +15,13 @@ import { cx } from "../../shared/utils/app.ts";
 import { getSorterByBool, getSorterByText } from "../app/filters.ts";
 import { AppsConfigActions } from "../app/reducer.ts";
 
-import { type AppConfigurationExtended, WmApplicationOptions } from "../domain.ts";
+import type { AppConfigurationExtended } from "../domain.ts";
 
 import { ExportApps } from "../../shared/store/storeApi.ts";
 import { EditAppModal } from "./EditModal.tsx";
 import cs from "./index.module.css";
 
-const ReadonlySwitch = (
-  value: boolean,
-  record: AppConfigurationExtended,
-  _index: number,
-) => {
+const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index: number) => {
   return (
     <Switch
       value={value}
@@ -62,17 +58,19 @@ const getColumns = (t: TFunction): ColumnsType<AppConfigurationExtended> => {
       },
       sorter: getSorterByText("category"),
     },
-    ...Object.values(WmApplicationOptions).map(
-      (option) => ({
-        title: t(`apps_configurations.app.options.${option}`),
-        dataIndex: option,
-        key: option,
-        align: "center",
-        width: 140,
-        render: ReadonlySwitch,
-        sorter: getSorterByBool(option),
-      } as ColumnType<AppConfigurationExtended>),
-    ),
+    ...Object.values(AppExtraFlag)
+      .filter((option) => option !== AppExtraFlag.Unknown)
+      .map(
+        (option) => ({
+          title: t(`apps_configurations.app.options.${option}`),
+          dataIndex: option,
+          key: option,
+          align: "center",
+          width: 140,
+          render: ReadonlySwitch,
+          sorter: getSorterByBool(option),
+        } as ColumnType<AppConfigurationExtended>),
+      ),
     {
       title: <ActionsTitle />,
       key: "operation",
@@ -99,12 +97,7 @@ function ActionsTitle() {
 
   return (
     <div>
-      <EditAppModal
-        open={isModalOpen}
-        isNew
-        onSave={onSave}
-        onCancel={onCancel}
-      />
+      <EditAppModal open={isModalOpen} isNew onSave={onSave} onCancel={onCancel} />
       <Button className={cs.newBtn} type="primary" onClick={showModal}>
         {t("apps_configurations.new")}
       </Button>
@@ -112,9 +105,7 @@ function ActionsTitle() {
   );
 }
 
-function Actions(
-  { record }: { record: AppConfigurationExtended; index: number },
-) {
+function Actions({ record }: { record: AppConfigurationExtended; index: number }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -142,10 +133,7 @@ function Actions(
           readonlyApp={record.isBundled ? record : undefined}
         />
       )}
-      <Button
-        type={record.isBundled ? "default" : "primary"}
-        onClick={showModal}
-      >
+      <Button type={record.isBundled ? "default" : "primary"} onClick={showModal}>
         {record.isBundled ? <Icon iconName="FaEye" /> : <Icon iconName="MdOutlineEdit" />}
       </Button>
     </div>
@@ -259,19 +247,10 @@ export function AppsConfiguration() {
         <Button onClick={exportApps} disabled={!selectedAppsKey.length}>
           {t("apps_configurations.export")}
         </Button>
-        <Button
-          type="primary"
-          danger
-          disabled={!selectedAppsKey.length}
-          onClick={confirmDelete}
-        >
+        <Button type="primary" danger disabled={!selectedAppsKey.length} onClick={confirmDelete}>
           {t("apps_configurations.delete")}
         </Button>
-        <Button
-          onClick={performSwap}
-          type="primary"
-          disabled={selectedAppsKey.length !== 2}
-        >
+        <Button onClick={performSwap} type="primary" disabled={selectedAppsKey.length !== 2}>
           {t("apps_configurations.swap")}
         </Button>
       </div>

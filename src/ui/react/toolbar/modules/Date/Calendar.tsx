@@ -1,126 +1,222 @@
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { Icon } from "@shared/components/Icon";
-import { useWindowFocusChange } from "@shared/hooks";
-import { cx } from "@shared/styles";
-import { Calendar, Row } from "antd";
-import type { CalendarMode, HeaderRender } from "antd/es/calendar/generateCalendar";
+import { Icon } from "libs/ui/react/components/Icon";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks";
+import { cx } from "libs/ui/react/utils/styling";
 import moment from "moment";
 import type { VNode } from "preact";
-import momentGenerateConfig from "rc-picker/es/generate/moment";
-import { useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { batch, useComputed, useSignal, useSignalEffect } from "@preact/signals";
 
 import "./infra.css";
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra";
+import { $settings } from "../shared/state/mod.ts";
+import { useCallback } from "preact/hooks";
 
-const short_week_days = {
-  inner: ["Su", "Mn", "Tu", "We", "Th", "Fr", "Sa"],
-};
+type CalendarMode = "month" | "year";
 
-const MomentCalendar = Calendar.generateCalendar({
-  ...momentGenerateConfig,
-  locale: {
-    ...momentGenerateConfig.locale,
-    getShortWeekDays: () => short_week_days.inner,
-  },
-});
+interface CalendarHeaderProps {
+  date: moment.Moment;
+  viewMode: CalendarMode;
+  onDateChange: (date: moment.Moment) => void;
+  onViewModeChange: (mode: CalendarMode) => void;
+}
 
-const DateCalendarHeader: HeaderRender<moment.Moment> = (props) => {
-  const { type, value: date, onChange, onTypeChange } = props;
+function CalendarHeader({ date, viewMode, onDateChange, onViewModeChange }: CalendarHeaderProps) {
+  const handlePrevious = () => {
+    const newDate = date.clone().add(-1, viewMode === "month" ? "months" : "years");
+    onDateChange(newDate);
+  };
 
-  if (type === "month") {
-    return (
-      <Row className="calendar-header">
-        <span className="calendar-date" onClick={() => onTypeChange("year")}>
-          {date.format("MMMM YYYY")}
-        </span>
-        <div className="calendar-actions">
-          <button
-            className="calendar-navigator"
-            onClick={() => onChange(date.clone().add(-1, "months"))}
-          >
-            <Icon iconName="AiOutlineLeft" />
-          </button>
-          <button
-            className="calendar-navigator"
-            onClick={() => onChange(moment().locale(date.locale()))}
-          >
-            <Icon iconName="AiOutlineHome" />
-          </button>
-          <button
-            className="calendar-navigator"
-            onClick={() => onChange(date.clone().add(1, "months"))}
-          >
-            <Icon iconName="AiOutlineRight" />
-          </button>
-        </div>
-      </Row>
-    );
-  }
+  const handleNext = () => {
+    const newDate = date.clone().add(1, viewMode === "month" ? "months" : "years");
+    onDateChange(newDate);
+  };
+
+  const handleToday = () => {
+    onDateChange(moment().locale(date.locale()));
+  };
+
+  const toggleViewMode = () => {
+    onViewModeChange(viewMode === "month" ? "year" : "month");
+  };
 
   return (
-    <Row className="calendar-header">
-      <span className="calendar-date" onClick={() => onTypeChange("month")}>
-        {date.format("YYYY")}
+    <div className="calendar-header">
+      <span className="calendar-date" onClick={toggleViewMode}>
+        {viewMode === "month" ? date.format("MMMM YYYY") : date.format("YYYY")}
       </span>
       <div className="calendar-actions">
-        <div className="calendar-header-placeholder" />
-        <button
-          className="calendar-navigator"
-          onClick={() => onChange(date.clone().add(-1, "years"))}
-        >
+        <button className="calendar-navigator" onClick={handlePrevious}>
           <Icon iconName="AiOutlineLeft" />
         </button>
-        <button
-          className="calendar-navigator"
-          onClick={() => onChange(moment().locale(date.locale()))}
-        >
+        <button className="calendar-navigator" onClick={handleToday}>
           <Icon iconName="AiOutlineHome" />
         </button>
-        <button
-          className="calendar-navigator"
-          onClick={() => onChange(date.clone().add(1, "years"))}
-        >
+        <button className="calendar-navigator" onClick={handleNext}>
           <Icon iconName="AiOutlineRight" />
         </button>
       </div>
-    </Row>
+    </div>
   );
-};
+}
+
+interface MonthViewProps {
+  date: moment.Moment;
+  selectedDate: moment.Moment;
+  weekDays: string[];
+  onDateSelect: (date: moment.Moment) => void;
+}
+
+function MonthView({ date, selectedDate, weekDays, onDateSelect }: MonthViewProps) {
+  const today = moment();
+  const startOfMonth = date.clone().startOf("month");
+  const endOfMonth = date.clone().endOf("month");
+  const startDate = startOfMonth.clone().startOf("week");
+  const endDate = endOfMonth.clone().endOf("week");
+
+  const weeks: moment.Moment[][] = [];
+  let currentWeek: moment.Moment[] = [];
+  let currentDate = startDate.clone();
+
+  while (currentDate.isSameOrBefore(endDate, "day")) {
+    currentWeek.push(currentDate.clone());
+    if (currentWeek.length === 7) {
+      weeks.push(currentWeek);
+      currentWeek = [];
+    }
+    currentDate.add(1, "day");
+  }
+
+  return (
+    <div className="calendar-month-view">
+      <div className="calendar-weekdays">
+        {weekDays.map((day, index) => (
+          <div key={index} className="calendar-weekday">
+            {day}
+          </div>
+        ))}
+      </div>
+      <div className="calendar-days">
+        {weeks.map((week, weekIndex) => (
+          <div key={weekIndex} className="calendar-week">
+            {week.map((day, dayIndex) => {
+              const isToday = day.isSame(today, "day");
+              const isSelected = day.isSame(selectedDate, "day");
+              const isOffMonth = day.month() !== date.month();
+
+              return (
+                <div
+                  key={dayIndex}
+                  className={cx("calendar-cell", {
+                    "calendar-cell-today": isToday,
+                    "calendar-cell-selected": isSelected,
+                    "calendar-cell-off-month": isOffMonth,
+                  })}
+                  onClick={() => onDateSelect(day)}
+                >
+                  {day.format("D")}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+interface YearViewProps {
+  date: moment.Moment;
+  onMonthSelect: (date: moment.Moment) => void;
+}
+
+function YearView({ date, onMonthSelect }: YearViewProps) {
+  const today = moment();
+  const months: moment.Moment[] = [];
+
+  for (let i = 0; i < 12; i++) {
+    months.push(date.clone().month(i).startOf("month"));
+  }
+
+  return (
+    <div className="calendar-year-view">
+      {months.map((month, index) => {
+        const isCurrentMonth = month.isSame(today, "month");
+
+        return (
+          <div
+            key={index}
+            className={cx("calendar-month-cell", {
+              "calendar-month-cell-current": isCurrentMonth,
+            })}
+            onClick={() => onMonthSelect(month)}
+          >
+            {month.format("MMMM")}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 function DateCalendar() {
-  const { i18n } = useTranslation();
+  const $language = useComputed(() => $settings.value.language);
+  const $start_of_week = useComputed(() => $settings.value.startOfWeek);
 
-  const [date, setDate] = useState(moment().locale(i18n.language));
-  const [viewMode, setViewMode] = useState<CalendarMode | undefined>("month");
+  const $date = useSignal(moment().locale($language.value));
+  const $selectedDate = useSignal(moment().locale($language.value));
+  const $viewMode = useSignal<CalendarMode>("month");
+  const $weekDays = useSignal<string[]>([]);
 
-  useEffect(() => {
-    setDate(date.locale(i18n.language));
-    const start = date.clone().startOf("isoWeek");
-    short_week_days.inner = [
-      start.day(0).format("dd"),
-      start.day(1).format("dd"),
-      start.day(2).format("dd"),
-      start.day(3).format("dd"),
-      start.day(4).format("dd"),
-      start.day(5).format("dd"),
-      start.day(6).format("dd"),
-      start.day(7).format("dd"),
-    ];
-  }, [i18n.language]);
+  useSignalEffect(() => {
+    // Map StartOfWeek enum to moment day numbers (0 = Sunday, 1 = Monday, 6 = Saturday)
+    const startDayMap = {
+      Sunday: 0,
+      Monday: 1,
+      Saturday: 6,
+    };
+    const startDay = startDayMap[$start_of_week.value];
+
+    // Configure moment locale to use the selected start of week
+    moment.updateLocale($language.value, {
+      week: {
+        dow: startDay,
+      },
+    });
+
+    // Generate week days starting from the configured day
+    const weekStart = moment().locale($language.value).startOf("week");
+    const newShortWeekDays = Array.from({ length: 7 }, (_, i) => weekStart.clone().add(i, "days").format("dd"));
+
+    batch(() => {
+      $weekDays.value = newShortWeekDays;
+      $date.value = $date.value.locale($language.value);
+      $selectedDate.value = $selectedDate.value.locale($language.value);
+    });
+  });
 
   const onWheel = useCallback((e: WheelEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
     const isUp = e.deltaY < 0;
-    setDate((date) =>
-      date
-        .clone()
-        .startOf("month")
-        .add(isUp ? 1 : -1, viewMode as moment.unitOfTime.Base)
-    );
+    $date.value = $date.value
+      .clone()
+      .add(isUp ? 1 : -1, $viewMode.value === "month" ? "months" : "years");
   }, []);
+
+  const handleDateSelect = (date: moment.Moment) => {
+    batch(() => {
+      $selectedDate.value = date;
+      $date.value = date;
+    });
+  };
+
+  const handleMonthSelect = (date: moment.Moment) => {
+    batch(() => {
+      $date.value = date;
+      $viewMode.value = "month";
+    });
+  };
 
   return (
     <BackgroundByLayersV2
@@ -128,56 +224,34 @@ function DateCalendar() {
       prefix="calendar"
       onContextMenu={(e) => e.stopPropagation()}
     >
-      <div onWheel={onWheel}>
-        <MomentCalendar
-          value={date}
-          onChange={setDate}
-          onPanelChange={(_, mode) => setViewMode(mode)}
-          className="calendar"
-          fullscreen={false}
-          mode={viewMode}
-          headerRender={DateCalendarHeader}
-          fullCellRender={(current, info) =>
-            info.type == "date"
-              ? (
-                <div
-                  className={cx("calendar-cell-value", {
-                    "calendar-cell-selected": current.isSame(date, "date"),
-                    "calendar-cell-today": current.isSame(info.today, "date"),
-                    "calendar-cell-off-month": current.month() != date.month(),
-                  })}
-                  onClick={() => setDate(current)}
-                >
-                  {Number(current.format("DD"))}
-                </div>
-              )
-              : (
-                <div
-                  className={cx("calendar-cell-value", "calendar-cell-month", {
-                    "calendar-cell-today": current
-                      .startOf("month")
-                      .isSame(info.today.startOf("month"), "date"),
-                  })}
-                  onClick={() => {
-                    setDate(current);
-                    setViewMode("month");
-                  }}
-                >
-                  {current.format("MMMM")}
-                </div>
-              )}
+      <div className="calendar" onWheel={onWheel}>
+        <CalendarHeader
+          date={$date.value}
+          viewMode={$viewMode.value}
+          onDateChange={(date) => ($date.value = date)}
+          onViewModeChange={(mode) => ($viewMode.value = mode)}
         />
+        {$viewMode.value === "month"
+          ? (
+            <MonthView
+              date={$date.value}
+              selectedDate={$selectedDate.value}
+              weekDays={$weekDays.value}
+              onDateSelect={handleDateSelect}
+            />
+          )
+          : <YearView date={$date.value} onMonthSelect={handleMonthSelect} />}
       </div>
     </BackgroundByLayersV2>
   );
 }
 
 export function WithDateCalendar({ children }: { children: VNode }) {
-  const [openPreview, setOpenPreview] = useState(false);
+  const $openPreview = useSignal(false);
 
   useWindowFocusChange((focused) => {
     if (!focused) {
-      setOpenPreview(false);
+      $openPreview.value = false;
     }
   });
 
@@ -187,9 +261,9 @@ export function WithDateCalendar({ children }: { children: VNode }) {
         openAnimationName: "calendar-open",
         closeAnimationName: "calendar-close",
       }}
-      open={openPreview}
+      open={$openPreview.value}
       trigger="click"
-      onOpenChange={setOpenPreview}
+      onOpenChange={(value) => ($openPreview.value = value)}
       content={<DateCalendar />}
     >
       {children}

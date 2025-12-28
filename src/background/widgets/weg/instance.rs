@@ -1,14 +1,9 @@
 use base64::Engine;
-use seelen_core::{
-    handlers::SeelenEvent,
-    state::{FancyToolbarSide, HideMode, SeelenWegSide},
-};
-use serde::Serialize;
-use tauri::{Emitter, WebviewWindow, Wry};
+use seelen_core::state::{FancyToolbarSide, HideMode, SeelenWegSide};
+use tauri::{WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::{HWND, RECT},
-    Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS,
 };
 
 use crate::{
@@ -16,12 +11,8 @@ use crate::{
     error::Result,
     log_error,
     state::application::FULL_STATE,
-    utils::{
-        are_overlaped,
-        constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
-    },
     widgets::{toolbar::FancyToolbar, WebviewArgs},
-    windows_api::{window::Window, AppBarData, WindowsApi},
+    windows_api::{monitor::Monitor, AppBarData, WindowsApi},
 };
 
 pub struct SeelenWeg {
@@ -30,8 +21,6 @@ pub struct SeelenWeg {
     pub theoretical_rect: RECT,
     /// This is the webview/window rect
     pub webview_rect: RECT,
-    pub overlaped_by: Option<Window>,
-    pub hidden: bool,
 }
 
 impl Drop for SeelenWeg {
@@ -87,112 +76,33 @@ impl SeelenWeg {
     pub fn new(postfix: &str) -> Result<Self> {
         let weg = Self {
             window: Self::create_window(postfix)?,
-            overlaped_by: None,
             theoretical_rect: RECT::default(),
             webview_rect: RECT::default(),
-            hidden: false,
         };
         Ok(weg)
     }
 
-    fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
-        self.window.emit_to(self.window.label(), event, payload)?;
-        Ok(())
-    }
-
-    fn is_overlapping(&self, window: &Window) -> Result<bool> {
-        let window_rect = WindowsApi::get_inner_window_rect(window.hwnd())?;
-        Ok(are_overlaped(&self.theoretical_rect, &window_rect))
-    }
-
-    pub fn set_overlaped(&mut self, overlaped_by: Option<Window>) -> Result<()> {
-        if self.overlaped_by != overlaped_by {
-            self.emit(SeelenEvent::WegOverlaped, overlaped_by.is_some())?;
-        }
-        self.overlaped_by = overlaped_by;
-        let is_fullscreen = self.overlaped_by.is_some_and(|w| w.is_fullscreen());
-        if is_fullscreen {
-            self.hide()?;
-        } else {
-            self.show()?;
-        }
-        Ok(())
-    }
-
-    pub fn handle_overlaped_status(&mut self, window: &Window) -> Result<()> {
-        let is_overlaped = self.is_overlapping(window)?
-            && !window.is_desktop()
-            && !window.is_seelen_overlay()
-            && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str())
-            && !OVERLAP_BLACK_LIST_BY_EXE.contains(
-                &window
-                    .process()
-                    .program_exe_name()
-                    .unwrap_or_default()
-                    .as_str(),
-            );
-
-        if is_overlaped {
-            return self.set_overlaped(Some(*window));
-        }
-
-        if self.overlaped_by.is_some()
-            && WindowsApi::monitor_from_window(self.hwnd()?) == window.monitor().handle()
-        {
-            self.set_overlaped(None)?;
-        }
-        Ok(())
-    }
-
-    pub fn hide(&mut self) -> Result<()> {
-        if self.hidden {
-            return Ok(());
-        }
-        WindowsApi::show_window_async(self.hwnd()?, SW_HIDE)?;
-        self.hidden = true;
-        self.window.emit_to(
-            self.window.label(),
-            SeelenEvent::HandleLayeredHitboxes,
-            false,
-        )?;
-        Ok(())
-    }
-
-    pub fn show(&mut self) -> Result<()> {
-        if !self.hidden {
-            return Ok(());
-        }
-        WindowsApi::show_window_async(self.hwnd()?, SW_SHOWNOACTIVATE)?;
-        self.hidden = false;
-        self.window.emit_to(
-            self.window.label(),
-            SeelenEvent::HandleLayeredHitboxes,
-            true,
-        )?;
-        Ok(())
-    }
-
-    pub fn get_weg_size_on_monitor(monitor: HMONITOR) -> Result<i32> {
+    pub fn get_weg_size_on_monitor(monitor: &Monitor) -> Result<i32> {
         let state = FULL_STATE.load();
-        let settings = &state.settings.by_widget.weg;
-        let monitor_dpi = WindowsApi::get_monitor_scale_factor(monitor)?;
-        let text_scale_factor = WindowsApi::get_text_scale_factor()?;
-        let total_size = (settings.total_size() as f64 * monitor_dpi * text_scale_factor) as i32;
+        let settings: &seelen_core::state::SeelenWegSettings = &state.settings.by_widget.weg;
+        let total_size = (settings.total_size() as f64 * monitor.scale_factor()?) as i32;
         Ok(total_size)
     }
 
-    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
+    pub fn set_position(&mut self, monitor: &Monitor) -> Result<()> {
         let state = FULL_STATE.load();
         let toolbar_config = &state.settings.by_widget.fancy_toolbar;
+        let is_toolbar_enabled = state.is_bar_enabled_on_monitor(&monitor.stable_id2()?);
+
         let settings = &state.settings.by_widget.weg;
 
         let hwnd = HWND(self.hwnd()?.0);
-        let monitor_info = WindowsApi::monitor_info(monitor)?;
+        let monitor_info = WindowsApi::monitor_info(monitor.handle())?;
 
         self.theoretical_rect = monitor_info.monitorInfo.rcMonitor;
         self.webview_rect = monitor_info.monitorInfo.rcMonitor;
 
-        if toolbar_config.enabled && toolbar_config.hide_mode != HideMode::Always {
+        if is_toolbar_enabled && toolbar_config.hide_mode != HideMode::Always {
             let toolbar_size = FancyToolbar::get_toolbar_height_on_monitor(monitor)?;
             match state.settings.by_widget.fancy_toolbar.position {
                 FancyToolbarSide::Top => {
@@ -246,7 +156,7 @@ impl SeelenWeg {
         if self.webview_rect == WindowsApi::get_outer_window_rect(hwnd)? {
             return Ok(()); // position is ok no need to reposition
         }
-        self.set_position(WindowsApi::monitor_from_window(hwnd))?;
+        self.set_position(&Monitor::from(WindowsApi::monitor_from_window(hwnd)))?;
         Ok(())
     }
 }

@@ -1,0 +1,24 @@
+available: የሚገኙ መሣሪያዎች
+cancel: ይቅር
+confirm: አረጋግጥ
+confirm_only: ማሰራጫ ያረጋግጡ
+confirm_pin: ፒን ይዛመዳል ያረጋግጡ
+connected: ተገናኝቷል
+disconnect: ያላቅቁ
+display_pin: በመሣሪያው ላይ ይህንን ፒን ያስገቡ
+lowenergy: ዝቅተኛ ኃይል
+more: ተጨማሪ የብሉቱዝ ቅንብሮች
+no_adapter: ምንም ብሉቱዝ አስማሚ አልተገኘም
+not_found: ምንም መሣሪያዎች አልተገኙም
+pair: ጥንድ ጥንድ
+paired: የተጣመሩ
+pairing: ማጣመር ...
+pairing_failed: ማሰራጨት አልተሳካም
+password: የይለፍ ቃል
+provide_address: አድራሻ ያስገቡ
+provide_password: የተጠቃሚ ስም እና የይለፍ ቃል ያስገቡ
+provide_pin: ፒን ያስገቡ
+scanning: ለመሳሪያዎች መቃኘት ...
+unpair: ያልተነከረ
+unpair_failed: ያልተሳካ አልተሳካም
+username: የተጠቃሚ ስም

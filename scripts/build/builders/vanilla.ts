@@ -3,6 +3,7 @@
 import esbuild from "esbuild";
 import { createCopyPublicPlugin } from "../plugins/index.ts";
 import type { BuildArgs } from "../types.ts";
+import { DIST_DIR, UI_DIR } from "../config.ts";
 
 /**
  * Creates esbuild configuration for Vanilla TypeScript applications
@@ -19,7 +20,9 @@ export function createVanillaBuildConfig(
     sourcemap: !args.isProd,
     treeShaking: true,
     format: "esm",
-    outdir: "./dist",
+    target: "esnext",
+    outdir: DIST_DIR,
+    outbase: `./${UI_DIR}`,
     loader: {
       ".yml": "text",
       ".svg": "text",

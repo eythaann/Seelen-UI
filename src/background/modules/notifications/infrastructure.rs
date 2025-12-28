@@ -1,14 +1,13 @@
 use std::collections::HashMap;
 
 use seelen_core::{handlers::SeelenEvent, system_state::AppNotification};
-use tauri::Emitter;
 use windows::{
     core::GUID,
     Win32::UI::Notifications::{INotificationActivationCallback, NOTIFICATION_USER_INPUT_DATA},
 };
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     error::Result,
     log_error,
     modules::notifications::application::{get_toast_activator_clsid, NotificationManager},
@@ -23,10 +22,10 @@ pub fn register_notification_events() {
         log_error!(trace_lock!(NOTIFICATION_MANAGER).initialize());
 
         NotificationManager::subscribe(|_event| {
-            log_error!(get_app_handle().emit(
+            emit_to_webviews(
                 SeelenEvent::Notifications,
                 trace_lock!(NOTIFICATION_MANAGER).notifications(),
-            ));
+            );
         });
     });
 }

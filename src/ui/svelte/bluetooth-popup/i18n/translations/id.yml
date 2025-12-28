@@ -1,0 +1,24 @@
+available: Perangkat yang Tersedia
+cancel: Membatalkan
+confirm: Mengonfirmasi
+confirm_only: Konfirmasikan penyandingan
+confirm_pin: Konfirmasikan bahwa PIN cocok
+connected: Terhubung
+disconnect: Memutuskan
+display_pin: Masukkan PIN ini pada perangkat
+lowenergy: Energi Rendah
+more: Pengaturan Bluetooth Lainnya
+no_adapter: Tidak ada adaptor Bluetooth yang ditemukan
+not_found: Tidak ada perangkat yang ditemukan
+pair: Pasangan
+paired: Dipasangkan
+pairing: Memasangkan...
+pairing_failed: Penyandingan gagal
+password: Kata sandi
+provide_address: Masukkan alamat
+provide_password: Masukkan nama pengguna dan kata sandi
+provide_pin: Masukkan PIN
+scanning: Memindai perangkat...
+unpair: Putuskan pasangan
+unpair_failed: Gagal melepas pasangan
+username: Nama belakang

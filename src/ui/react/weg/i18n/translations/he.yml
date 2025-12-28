@@ -12,17 +12,19 @@ app_menu:
   run_as: הפעל כמנהל
   unpin: בטל הצמדה
 context_menu:
+  remove_module: הסר מודול
   reorder_disable: נעל את שורת המשימות
   reorder_enable: ביטול נעילת שורת המשימות
 media:
   not_playing: שום דבר לא משחק
-media_menu:
-  remove: הסר את מודול המדיה
-start_menu:
-  remove: הסר את מודול ההתחלה
+show_desktop:
+  label: הצג את שולחן העבודה
+start:
+  label: תפריט התחל
 taskbar_menu:
   add_file: הצמד קובץ מותאם אישית
   add_folder: הצמד תיקייה בהתאמה אישית
+  desktop: הוסף מודול שולחן עבודה
   media: הוסף מודול מדיה
   settings: הגדרות
   start: הוסף מודול התחל

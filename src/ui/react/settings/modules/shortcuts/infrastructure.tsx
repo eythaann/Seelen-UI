@@ -1,6 +1,6 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import type { SluHotkey } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Input, Switch, Tooltip } from "antd";
 import Compact from "antd/es/space/Compact";
 import { cloneDeep } from "lodash";

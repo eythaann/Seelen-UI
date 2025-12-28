@@ -1,7 +1,7 @@
 import { SeelenCommand } from "@seelen-ui/lib";
 import type { MediaDevice } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import { OverflowTooltip } from "@shared/components/OverflowTooltip";
+import { Icon } from "libs/ui/react/components/Icon";
+import { OverflowTooltip } from "libs/ui/react/components/OverflowTooltip";
 import { invoke } from "@tauri-apps/api/core";
 import { Button, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";

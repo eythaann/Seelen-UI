@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Kemas kini
     ok_readonly: Edit sebagai baru
     options:
-      float: Terapung
-      force: Daya mengurus
-      hidden: Sembunyikan dari Dock/Taskbar
-      pinned: Disematkan
-      unmanage: Unmanage
+      NoInteractive: Tiada interaktif
+      VdPinned: Tunjukkan di semua ruang kerja
+      WmFloat: TWM - Mula Terapung
+      WmForce: TWM - Mengurus daya
+      WmUnmanage: TWM - Unmanage
     options_label: Pilihan tambahan
     title_create: Menciptakan {{name}}
     title_edit: Penyuntingan {{name}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan
-  dynamic_color: Warna dinamik
-  dynamic_color_tooltip: >-
-    Dayakan latar belakang dinamik dan warna latar depan berdasarkan tetingkap
-    fokus. (Warna boleh ditindih oleh tema)
   enable: Dayakan bar alat mewah
   height: Ketinggian
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Bertindih
   label: Bar alat
   placeholder: {}
-  show_hibernate: Tunjukkan butang hibernate pada menu kuasa
 update:
   available: Kemas kini tersedia!
   channel: Kemas kini saluran
@@ -305,7 +300,6 @@ weg:
       all: Semua
       label: Keterlihatan Item Dinyahsemat
       on_monitor: Pada Monitor
-    thumbnail_generation_enabled: Menjana gambar kecil pada hover item
     visible_separators: Pemisah yang kelihatan
   label: Dock/Taskbar
   margin: Margin
@@ -330,6 +324,10 @@ wm:
     offset: Mengimbangi sempadan
     width: Lebar sempadan
   description: Penerangan
+  drag_behavior: Gelagat Seret
+  drag_behavior_options:
+    sort: Isih (susun semula tetingkap semasa menyeret)
+    swap: Tukar (tukar tetingkap pada hujung seret)
   enable: Dayakan pengurus tetingkap jubin
   layout: Susun atur
   resize_delta: Saiz semula delta (%)

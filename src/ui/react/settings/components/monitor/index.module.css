@@ -1,6 +1,6 @@
 .monitorContainer {
   height: 100%;
-  aspect-ratio: 1 / 1;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,7 @@
 
 .monitor {
   border-radius: 12px;
-  background-color: var(--color-persist-gray-800);
+  background-color: var(--color-fixed-gray-800);
   padding: 5px;
 
   .screen {

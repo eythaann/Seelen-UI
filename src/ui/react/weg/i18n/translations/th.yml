@@ -12,17 +12,19 @@ app_menu:
   run_as: เรียกใช้เป็นผู้ดูแลระบบ
   unpin: คลาย
 context_menu:
+  remove_module: ถอดโมดูลออก
   reorder_disable: ล็อคแถบงาน
   reorder_enable: ปลดล็อกแถบงาน
 media:
   not_playing: ไม่มีอะไรเล่น
-media_menu:
-  remove: ลบโมดูลสื่อ
-start_menu:
-  remove: ลบโมดูลเริ่มต้น
+show_desktop:
+  label: แสดงเดสก์ท็อป
+start:
+  label: เมนูเริ่ม
 taskbar_menu:
   add_file: ไฟล์ที่กำหนดเองพิน
   add_folder: โฟลเดอร์ที่กำหนดเองพิน
+  desktop: เพิ่มโมดูลเดสก์ท็อป
   media: เพิ่มโมดูลสื่อ
   settings: การตั้งค่า
   start: เพิ่มโมดูลเริ่มต้น

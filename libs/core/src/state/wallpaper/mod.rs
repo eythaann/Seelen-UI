@@ -1,6 +1,7 @@
 use std::path::Path;
 
 use url::Url;
+use uuid::Uuid;
 
 use crate::{
     error::Result,
@@ -11,14 +12,37 @@ use crate::{
 };
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Wallpaper {
     pub id: WallpaperId,
     pub metadata: ResourceMetadata,
+    pub r#type: WallpaperKind,
+
     pub url: Option<Url>,
-    pub thumbnail_url: Option<Url>,
     pub filename: Option<String>,
+
+    pub thumbnail_url: Option<Url>,
+    #[serde(alias = "thumbnail_filename")]
     pub thumbnail_filename: Option<String>,
+
+    /// Only used if the wallpaper type is `Layered`.\
+    /// Custom css that will be applied only on this wallpaper.
+    pub css: Option<String>,
+}
+
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum WallpaperKind {
+    #[serde(alias = "image")]
+    Image,
+    #[serde(alias = "video")]
+    Video,
+    #[serde(alias = "layered")]
+    Layered,
+    /// used for wallpapers created before v2.4.9, will be changed on sanitization
+    #[default]
+    Unsupported,
 }
 
 impl SluResource for Wallpaper {
@@ -30,6 +54,41 @@ impl SluResource for Wallpaper {
 
     fn metadata_mut(&mut self) -> &mut ResourceMetadata {
         &mut self.metadata
+    }
+
+    fn sanitize(&mut self) {
+        // migration step for old wallpapers
+        if WallpaperKind::Unsupported == self.r#type {
+            if let Some(filename) = &self.filename {
+                if Self::SUPPORTED_VIDEOS
+                    .iter()
+                    .any(|ext| filename.ends_with(ext))
+                {
+                    self.r#type = WallpaperKind::Video;
+                }
+                if Self::SUPPORTED_IMAGES
+                    .iter()
+                    .any(|ext| filename.ends_with(ext))
+                {
+                    self.r#type = WallpaperKind::Image;
+                }
+            }
+        }
+
+        // remove thumbnail if doesn't exist
+        if let Some(filename) = &self.thumbnail_filename {
+            let thumbnail_path = self.metadata.internal.path.join(filename);
+            if !thumbnail_path.exists() {
+                self.thumbnail_filename = None;
+            }
+        }
+    }
+
+    fn validate(&self) -> Result<()> {
+        if self.r#type == WallpaperKind::Unsupported {
+            return Err("Unsupported wallpaper extension".into());
+        }
+        Ok(())
     }
 }
 
@@ -74,9 +133,18 @@ impl Wallpaper {
             std::fs::rename(path, folder_to_store.join(&filename))?;
         }
 
+        let r#type = if Self::SUPPORTED_IMAGES.contains(&ext.as_str()) {
+            WallpaperKind::Image
+        } else if Self::SUPPORTED_VIDEOS.contains(&ext.as_str()) {
+            WallpaperKind::Video
+        } else {
+            WallpaperKind::Unsupported
+        };
+
         let wallpaper = Self {
             id,
             metadata,
+            r#type,
             filename: Some(filename.clone()),
             thumbnail_filename: if Self::SUPPORTED_IMAGES.contains(&ext.as_str()) {
                 Some(filename)
@@ -89,4 +157,12 @@ impl Wallpaper {
 
         Ok(wallpaper)
     }
+}
+
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct WallpaperCollection {
+    pub id: Uuid,
+    pub name: String,
+    pub wallpapers: Vec<WallpaperId>,
 }

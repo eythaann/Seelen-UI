@@ -1,5 +1,5 @@
-import { useInterval } from "@shared/hooks";
-import { cx } from "@shared/styles";
+import { useInterval } from "libs/ui/react/utils/hooks";
+import { cx } from "libs/ui/react/utils/styling";
 import { Button, Skeleton } from "antd";
 import { useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";

@@ -1,0 +1,24 @@
+available: الأجهزة المتوفرة
+cancel: يلغي
+confirm: يتأكد
+confirm_only: تأكيد الاقتران
+confirm_pin: تأكد من تطابق رقم التعريف الشخصي
+connected: متصل
+disconnect: قطع الاتصال
+display_pin: أدخل رقم التعريف الشخصي هذا على الجهاز
+lowenergy: طاقة منخفضة
+more: المزيد من إعدادات البلوتوث
+no_adapter: لم يتم العثور على محول Bluetooth
+not_found: لم يتم العثور على أي أجهزة
+pair: زوج
+paired: يقترن
+pairing: الاقتران...
+pairing_failed: فشل الاقتران
+password: كلمة المرور
+provide_address: أدخل العنوان
+provide_password: أدخل اسم المستخدم وكلمة المرور
+provide_pin: أدخل رقم التعريف الشخصي
+scanning: جارٍ البحث عن الأجهزة...
+unpair: إلغاء الاقتران
+unpair_failed: فشل إلغاء الاقتران
+username: اسم المستخدم

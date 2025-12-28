@@ -1,0 +1,24 @@
+available: Достапни уреди
+cancel: Откажи
+confirm: Потврди
+confirm_only: Потврдете го спарувањето
+confirm_pin: Потврдете дека PIN-кодот се совпаѓа
+connected: Поврзан
+disconnect: Исклучете се
+display_pin: Внесете го овој PIN на уредот
+lowenergy: Ниска енергија
+more: Повеќе поставки за Bluetooth
+no_adapter: Не е пронајден адаптер за Bluetooth
+not_found: Не се пронајдени уреди
+pair: Пар
+paired: Спарени
+pairing: Спарување...
+pairing_failed: Спарувањето не успеа
+password: Лозинка
+provide_address: Внесете адреса
+provide_password: Внесете корисничко име и лозинка
+provide_pin: Внесете PIN
+scanning: Скенирање уреди...
+unpair: Откажи го
+unpair_failed: Откажувањето на спарувањето не успеа
+username: Корисничко име

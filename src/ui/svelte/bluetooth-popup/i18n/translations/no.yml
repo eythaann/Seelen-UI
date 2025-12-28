@@ -1,0 +1,24 @@
+available: Tilgjengelige enheter
+cancel: Kansellere
+confirm: Bekrefte
+confirm_only: Bekreft sammenkobling
+confirm_pin: Bekreft at PIN-koden stemmer overens
+connected: Tilkoblet
+disconnect: Frakople
+display_pin: Skriv inn denne PIN-koden på enheten
+lowenergy: Lavenergi
+more: Flere Bluetooth-innstillinger
+no_adapter: Finner ingen Bluetooth-adapter
+not_found: Ingen enheter funnet
+pair: Par
+paired: Sammenkoblet
+pairing: Sammenkobling...
+pairing_failed: Sammenkobling mislyktes
+password: Passord
+provide_address: Skriv inn adresse
+provide_password: Skriv inn brukernavn og passord
+provide_pin: Skriv inn PIN
+scanning: Skanner etter enheter...
+unpair: Fjern paring
+unpair_failed: Oppheving av paring mislyktes
+username: Brukernavn

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: UDÛDEPATE
     ok_readonly: Wekî nû biguherînin
     options:
-      float: Avbazîn
-      force: Hêza birêvebirin
-      hidden: Ji Dock / Taskbar veşêrin
-      pinned: Pinned
-      unmanage: Nedar
+      NoInteractive: No Interactive
+      VdPinned: Di hemî cîhên xebatê de nîşan bide
+      WmFloat: Twm - Destpêkirina Floating
+      WmForce: Twm - Birêvebirina Hêzê
+      WmUnmanage: Twm - Birêvebirin
     options_label: Vebijarkên zêde
     title_create: Afirandina {NAME}
     title_edit: Verastkirin {{name}}
@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
-  dynamic_color: Rengê dînamîkî
-  dynamic_color_tooltip: >-
-    Backgroundavdêriya Dînamîk û rengên pêşîn ên li ser bingeha pencereya
-    mijûlkirî çalak bikin. (Colors dikare ji hêla mijaran ve were şandin)
   enable: Vebijêrkek Fancy Vebijêrin
   height: Bilindî
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: Li ser hevgirtinê
   label: Toolbar
   placeholder: {}
-  show_hibernate: Bişkojka Hibernate li ser menuya hêzê nîşan bide
 update:
   available: Nûvekirin!
   channel: Kanala Nûve
@@ -304,7 +299,6 @@ weg:
       all: Gişt
       label: Dîtina Tiştên Nepînekirî
       on_monitor: Li ser Monitor
-    thumbnail_generation_enabled: Thumbnails li ser tiştên hover bikin
     visible_separators: Dabeşên Visible
   label: Dock / Taskbar
   margin: Radihêj
@@ -329,6 +323,10 @@ wm:
     offset: Berdewamiya sînor
     width: Berfirehiya sînor
   description: Terîf
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: Rêzkirin (dema dikişîne paceyan ji nû ve rêz bike)
+    swap: Swap (paceyên li ser dawiya kaşkirinê biguherînin)
   enable: Gerînendeyê Windowê ya Tilî bikar bînin
   layout: Rêz
   resize_delta: Delta Resize (%)

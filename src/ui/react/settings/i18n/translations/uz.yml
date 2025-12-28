@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Yangilamoq
     ok_readonly: Yangi sifatida tahrirlash
     options:
-      float: Suzmoq
-      force: Kuchni boshqarish
-      hidden: Dock / vazifalar panelidan yashirish
-      pinned: Zebo
-      unmanage: Ishtiyoq
+      NoInteractive: Interaktiv interfaol yo'q
+      VdPinned: Barcha ish joylarida ko'rsatish
+      WmFloat: TWM - suzishni boshlang
+      WmForce: TWM - kuchni boshqarish
+      WmUnmanage: TWM - Ungelaj
     options_label: Qo'shimcha variantlar
     title_create: '{{Ism}} yaratish'
     title_edit: '{{Ismi}} tahrirlash'
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya
-  dynamic_color: Dinamik rang
-  dynamic_color_tooltip: >-
-    Fokuslangan oynada dinamik fon va oldingi ranglarni yoqish. (Ranglar
-    mavzular tomonidan bekor qilinishi mumkin)
   enable: Fashr asboblar panelini yoqing
   height: Balandlik
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Bir-biriga yopishgan holda
   label: Asboblar paneli
   placeholder: {}
-  show_hibernate: Quvvat menyusidagi Xolernate tugmasini bosing
 update:
   available: Yangilanish mavjud!
   channel: Kanalni yangilash
@@ -305,7 +300,6 @@ weg:
       all: Hammasi
       label: Ochilmagan elementlarning ko'rinishi
       on_monitor: Monitorda
-    thumbnail_generation_enabled: Hover Hover-da eskizlarni yarating
     visible_separators: Ko'rinadigan ajratuvchi
   label: Dok / vazifalar paneli
   margin: Marja
@@ -330,6 +324,10 @@ wm:
     offset: Chegara ofset
     width: Chegara kengligi
   description: Tavsif
+  drag_behavior: Harakatni tortish
+  drag_behavior_options:
+    sort: Saralash (tortish paytida oynalarni qayta tartiblash)
+    swap: Almashtirish (drag oxirida oynalarni almashtirish)
   enable: Tiling oyna boshqaruvchisini yoqing
   layout: Tartib
   resize_delta: Delta (%) ni o'zgartiring

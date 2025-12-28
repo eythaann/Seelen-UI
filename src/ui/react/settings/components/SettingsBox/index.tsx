@@ -1,4 +1,4 @@
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon";
 import { ConfigProvider, Tooltip } from "antd";
 import type { ComponentChildren } from "preact";
 

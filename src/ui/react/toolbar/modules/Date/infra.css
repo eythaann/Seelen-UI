@@ -1,10 +1,73 @@
 .calendar-container {
-  .calendar, .ant-picker-panel {
-    background: transparent;
+  .calendar {
+    min-width: 280px;
+    user-select: none;
   }
 
-  .ant-picker-cell {
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .calendar-date {
+    cursor: pointer;
+  }
+
+  .calendar-actions {
+    display: flex;
+  }
+
+  .calendar-navigator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .calendar-month-view {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .calendar-weekday {
     text-align: center;
-    vertical-align: middle;
+  }
+
+  .calendar-days {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendar-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .calendar-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .calendar-year-view {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .calendar-month-cell {
+    text-align: center;
+    cursor: pointer;
   }
 }

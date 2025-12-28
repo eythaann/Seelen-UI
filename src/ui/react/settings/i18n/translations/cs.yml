@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Aktualizovat
     ok_readonly: Upravit jako nové
     options:
-      float: Desetinné číslo
-      force: Správa Silou
-      hidden: Skrýt na liště/hlavním panelu
-      pinned: Připnuto
-      unmanage: Nespravovat
+      NoInteractive: Žádná interaktivní
+      VdPinned: Zobrazit ve všech pracovních prostorech
+      WmFloat: Twm - Spustit plovoucí
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm – Unmanage
     options_label: Další možnosti
     title_create: Vytváření {{name}}
     title_edit: Úpravy {{name}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Zpoždění schování
   delay_to_show: Zpoždění zobrazení
   dock_side: Pozice
-  dynamic_color: Dynamická barva
-  dynamic_color_tooltip: >-
-    Povolení dynamických barev pozadí a popředí na základě zaměřeného okna.
-    (Barvy lze přepsat pomocí motivů)
   enable: Povolte ozdobný panel nástrojů
   height: Výška
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Na překrytí
   label: Panel nástrojů
   placeholder: {}
-  show_hibernate: Zobrazení tlačítka hibernace v nabídce napájení
 update:
   available: Aktualizace k dispozici!
   channel: Aktualizovat kanál
@@ -305,7 +300,6 @@ weg:
       all: Vše
       label: Viditelnost nepřipnutých položek
       on_monitor: Na monitoru
-    thumbnail_generation_enabled: Generování miniatur při najetí na položku
     visible_separators: Viditelné oddělovače
   label: Lišta/Hlavní panel
   margin: Okraj
@@ -330,6 +324,10 @@ wm:
     offset: Posun hranice
     width: Šířka hranice
   description: Popis
+  drag_behavior: Chování přetažení
+  drag_behavior_options:
+    sort: Řadit (změnit pořadí oken při přetahování)
+    swap: Zaměnit (vyměnit okna na konci přetažení)
   enable: Povolit správce oken
   layout: Rozložení
   resize_delta: Změna velikosti (%)

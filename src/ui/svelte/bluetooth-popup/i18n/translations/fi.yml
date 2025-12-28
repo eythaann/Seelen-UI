@@ -1,0 +1,24 @@
+available: Käytettävissä olevat laitteet
+cancel: Peruuttaa
+confirm: Vahvistaa
+confirm_only: Vahvista pariliitos
+confirm_pin: Varmista, että PIN-koodi vastaa
+connected: Yhdistetty
+disconnect: Katkaise yhteys
+display_pin: Syötä tämä PIN-koodi laitteeseen
+lowenergy: Matala energia
+more: Lisää Bluetooth-asetuksia
+no_adapter: Bluetooth-sovitinta ei löydy
+not_found: Laitteita ei löytynyt
+pair: Pari
+paired: Paritettu
+pairing: Muodostetaan laiteparia...
+pairing_failed: Pariliitos epäonnistui
+password: Salasana
+provide_address: Anna osoite
+provide_password: Anna käyttäjätunnus ja salasana
+provide_pin: Anna PIN-koodi
+scanning: Haetaan laitteita...
+unpair: Poista pariliitos
+unpair_failed: Pariliitoksen purkaminen epäonnistui
+username: Käyttäjätunnus

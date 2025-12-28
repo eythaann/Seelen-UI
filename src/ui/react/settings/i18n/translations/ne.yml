@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: अद्यावधिक गर्नुहोस्
     ok_readonly: नयाँ जस्तै सम्पादन गर्नुहोस्
     options:
-      float: उत्रनु
-      force: शक्ति प्रबन्ध
-      hidden: डक / टास्कबारबाट लुकाउनुहोस्
-      pinned: गाइन्ड लाग्यो
-      unmanage: अज्ञात
+      NoInteractive: कुनै अन्तरक्रियात्मक छैन
+      VdPinned: सबै कार्यस्थानहरूमा देखाउनुहोस्
+      WmFloat: Twm - फ्लोटिंग सुरु गर्नुहोस्
+      WmForce: Twm - बल व्यवस्थापन
+      WmUnmanage: Twm - अप्रबन्ध गर्नुहोस्
     options_label: अतिरिक्त विकल्पहरू
     title_create: '{{Neame नाम} सिर्जना गर्दै}'
     title_edit: '{{{{नाम} ..'
@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
   dock_side: स्थिति
-  dynamic_color: गतिशील र color ्ग
-  dynamic_color_tooltip: >-
-    ध्यान केन्द्रित विन्डोमा आधारित गतिशील पृष्ठभूमि र अग्रभूमिहरू प्रयोगहरू
-    सक्षम गर्नुहोस्। (रंगहरू थिम द्वारा ओभरराइड गर्न सकिन्छ)
   enable: फैन्सी उपकरणपट्टी सक्षम गर्नुहोस्
   height: ऊचाई
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: ओभरल्यापमा
   label: औजारपरो
   placeholder: {}
-  show_hibernate: पावर मेनूमा हाइबरनेट बटन देखाउनुहोस्
 update:
   available: अपडेट उपलब्ध!
   channel: अद्यावधिक च्यानल
@@ -304,7 +299,6 @@ weg:
       all: सबै
       label: अनपिन गरिएका वस्तुहरूको दृश्यता
       on_monitor: मोनिटरमा
-    thumbnail_generation_enabled: वस्तु होभरमा थम्बनेलहरू उत्पन्न गर्नुहोस्
     visible_separators: दृश्य बिल्कुलरहरू
   label: डक / टास्कबार
   margin: स्पानलिन
@@ -329,6 +323,10 @@ wm:
     offset: सीमा अफसेट
     width: सीमा चौडाई
   description: वर्णन
+  drag_behavior: तान्नुहोस् व्यवहार
+  drag_behavior_options:
+    sort: 'क्रमबद्ध गर्नुहोस् (तान्दा विन्डोहरू पुन: क्रमबद्ध गर्नुहोस्)'
+    swap: स्वैप (ड्र्याग एन्डमा विन्डोज स्वैप)
   enable: टलिंग विन्डो प्रबन्धक सक्षम गर्नुहोस्
   layout: नक्शा
   resize_delta: रिसाइज डेल्टा (%)

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Actualización
     ok_readonly: Editar como nuevo
     options:
-      float: Flotador
-      force: Forzar la gestión
-      hidden: Ocultar del dock/barra de tareas
-      pinned: Pinned
-      unmanage: No gestionar
+      NoInteractive: Sin interactivo
+      VdPinned: Mostrar en todos los espacios de trabajo
+      WmFloat: Twm - Empezar a flotar
+      WmForce: Twm - Gestión de fuerza
+      WmUnmanage: Twm - No administrar
     options_label: Opciones adicionales
     title_create: Crear {{nombre}}
     title_edit: Editar {{nombre}}
@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: Retrasar para ocultar
   delay_to_show: Retraso para mostrar
   dock_side: Posición
-  dynamic_color: Color dinámico
-  dynamic_color_tooltip: >-
-    Habilitar colores dinámicos de fondo y primer plano basados en la ventana
-    enfocada. (Los temas pueden anular los colores)
   enable: Activar la barra de herramientas Fancy
   height: Altura
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: Sobre el solapamiento
   label: Barra de herramientas
   placeholder: {}
-  show_hibernate: Mostrar el botón de hibernación en el menú de encendido
 update:
   available: Actualización disponible
   channel: Canal de actualización
@@ -307,7 +302,6 @@ weg:
       all: Todos
       label: Visibilidad de los elementos no fijados
       on_monitor: En monitor
-    thumbnail_generation_enabled: Generar miniaturas al pasar el ratón por encima de un elemento
     visible_separators: Separadores visibles
   label: Muelle/Barra de Muelle
   margin: Margen
@@ -332,6 +326,10 @@ wm:
     offset: Desplazamiento del borde
     width: Anchura del borde
   description: Descripción
+  drag_behavior: Comportamiento de arrastre
+  drag_behavior_options:
+    sort: Ordenar (reordenar ventanas mientras arrastra)
+    swap: Intercambiar (intercambiar ventanas al final del arrastre)
   enable: Activar el gestor de ventanas en mosaico
   layout: Diseño
   resize_delta: Redimensionar Delta (%)

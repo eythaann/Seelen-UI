@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Imudojuiwọn
     ok_readonly: Satunkọ bi tuntun
     options:
-      float: Leke
-      force: Ṣakoso ṣakoso
-      hidden: Tọju lati dock / forbar
-      pinned: Pin
-      unmanage: Aileyẹ
+      NoInteractive: Ko si ohun-ini
+      VdPinned: Fihan ninu gbogbo awọn ibi-iṣẹ
+      WmFloat: TWM - Bẹrẹ lilefoofo loju omi
+      WmForce: TWM - Ṣakoso ipa
+      WmUnmanage: TWM - aigbagbọ
     options_label: Awọn aṣayan afikun
     title_create: Ṣiṣẹda {Orukọ}}
     title_edit: Ṣiṣatunṣe {{Orukọ}}
@@ -222,10 +222,6 @@ toolbar:
   delay_to_hide: Idaduro lati tọju
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo
-  dynamic_color: Awọ ti o ni agbara
-  dynamic_color_tooltip: >-
-    Mu ipilẹ pada sile ati awọn awọ iwaju ti o da lori window aifọwọyi. (Awọn
-    awọ le ṣe ni agbara nipasẹ awọn akori)
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
   height: Giga
   hide_mode:
@@ -234,7 +230,6 @@ toolbar:
     on_overlap: Lori agbekọja
   label: Ọpa irinṣẹ
   placeholder: {}
-  show_hibernate: Fihan bọtini Hibernate lori Akojọ Akojọ
 update:
   available: Imudojuiwọn wa!
   channel: Ohun elo imudojuiwọn
@@ -296,7 +291,6 @@ weg:
       all: Gbogbo
       label: Hihan Awọn nkan ti a ko pin
       on_monitor: Lori Atẹle
-    thumbnail_generation_enabled: Ṣe agbekalẹ awọn eekanna atanpako lori rababa nkan
     visible_separators: Awọn iyatọ ti o han
   label: Dock / forkbar
   margin: Ẹlẹsin
@@ -321,6 +315,10 @@ wm:
     offset: Iparun aala
     width: Iwọn aala
   description: Isapejuwe
+  drag_behavior: Fa Iwa
+  drag_behavior_options:
+    sort: Too (tunto awọn window lakoko ti o nfa)
+    swap: Paṣipaa (paṣipaa awọn window ni ipari fifa)
   enable: Jeki oludari window
   layout: Agbekalẹ
   resize_delta: Tun ṣe Delta (%)

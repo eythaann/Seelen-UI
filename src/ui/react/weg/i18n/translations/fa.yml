@@ -12,17 +12,19 @@ app_menu:
   run_as: به عنوان مدیر اجرا کنید
   unpin: باز کردن
 context_menu:
+  remove_module: حذف ماژول
   reorder_disable: نوار وظیفه قفل
   reorder_enable: نوار کار را باز کنید
 media:
   not_playing: هیچ چیز بازی نمی کند
-media_menu:
-  remove: ماژول رسانه را حذف کنید
-start_menu:
-  remove: ماژول شروع را حذف کنید
+show_desktop:
+  label: نمایش دسکتاپ
+start:
+  label: منوی شروع
 taskbar_menu:
   add_file: پرونده سفارشی
   add_folder: پوشه سفارشی پین
+  desktop: اضافه کردن ماژول دسکتاپ
   media: ماژول رسانه را اضافه کنید
   settings: تنظیمات
   start: ماژول شروع را اضافه کنید

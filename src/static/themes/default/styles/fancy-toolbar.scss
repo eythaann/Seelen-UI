@@ -32,11 +32,11 @@
   gap: 6px;
 
   &:hover {
-    background-color: rgba(var(--config-accent-color-rgb), 0.2);
+    background-color: rgba(var(--system-accent-color-rgb), 0.2);
   }
 
   &:active {
-    background-color: rgba(var(--config-accent-color-rgb), 0.4);
+    background-color: rgba(var(--system-accent-color-rgb), 0.4);
   }
 }
 
@@ -100,26 +100,6 @@
   }
 }
 
-* {
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--color-gray-400);
-    border-radius: 8px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-gray-500);
-  }
-}
-
 #root {
   font-size: 0.8rem;
   font-weight: 500;
@@ -135,13 +115,13 @@
 }
 
 .ft-bar {
-  color: var(--color-persist-gray-100);
+  color: var(--color-fixed-gray-100);
   transition: color 0.2s linear;
 
   > .bg-layers {
     // we skip the first layer, to avoid break user themes, as before v2.2 the first layer was a noise layer
     > .bg-layer-2 {
-      background-color: var(--color-persist-gray-900);
+      background-color: var(--color-fixed-gray-900);
       transition: background-color 0.2s linear;
       will-change: background-color;
     }
@@ -150,18 +130,6 @@
   // &[data-there-is-maximized-on-background="true"] {} (this attribute exist but is unused)
   // &[data-focused-is-maximized="true"] {} (this attribute exist but is unused)
   // &[data-focused-is-overlay="true"] {} (this attribute exist but is unused)
-
-  &[data-dynamic-color="true"] {
-    // --color-focused-app-foreground (this var exist but is unused)
-    color: var(--color-maximized-on-bg-foreground, var(--color-persist-gray-100));
-
-    > .bg-layers {
-      > .bg-layer-2 {
-        // --color-focused-app-background (this var exist but is unused)
-        background-color: var(--color-maximized-on-bg-background, var(--color-persist-gray-900));
-      }
-    }
-  }
 }
 
 .ft-bar-item {
@@ -185,7 +153,7 @@
 
       &.workspace-dot-active {
         width: 18px;
-        background-color: var(--config-accent-color);
+        background-color: var(--system-accent-color);
       }
     }
   }
@@ -200,7 +168,7 @@
   }
 
   &.ft-bar-item-active {
-    color: var(--config-accent-color);
+    color: var(--system-accent-color);
   }
 }
 
@@ -250,7 +218,7 @@
   top: 0;
   right: 0;
   transform: translate(25%, -25%);
-  background-color: var(--config-accent-color);
+  background-color: var(--system-accent-color);
   color: #efefef;
   height: 12px;
   min-width: 12px;
@@ -259,45 +227,6 @@
 
   &:empty {
     display: none;
-  }
-}
-
-.quick-access {
-  @extend %popup;
-  width: 300px;
-  position: relative;
-  gap: 4px;
-
-  .quick-access-header {
-    z-index: 1;
-    font-weight: 600;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .quick-access-item {
-    z-index: 1;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-
-    .ant-slider {
-      flex: 1;
-    }
-  }
-
-  .quick-access-footer {
-    z-index: 1;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .quick-access-footer-button {
-    @extend %actionable-button;
   }
 }
 
@@ -344,7 +273,7 @@
       }
 
       &.wlan-entry-selected {
-        background-color: rgba(var(--config-accent-color-rgb), 0.2);
+        background-color: rgba(var(--system-accent-color-rgb), 0.2);
       }
 
       .wlan-entry-info {
@@ -484,7 +413,6 @@
   }
 }
 
-.quick-access-label,
 .media-control-label {
   font-size: 0.8rem;
   font-weight: 600;
@@ -630,7 +558,7 @@
     color: var(--color-gray-600);
   }
   66% {
-    color: var(--config-accent-color);
+    color: var(--system-accent-color);
   }
   100% {
     color: var(--color-gray-600);
@@ -766,73 +694,114 @@
   width: 350px;
 
   .calendar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 6px;
+    margin-bottom: 16px;
+    padding: 0 4px;
 
     .calendar-date {
-      font-size: 1.2em;
-      text-transform: capitalize;
-      transition: 0.2s ease-in;
-      transition-property: color, background-color;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 4px 8px;
       border-radius: 4px;
-      padding: 0 4px;
+      transition: background-color 0.2s;
 
       &:hover {
-        color: var(--config-accent-color);
         background-color: var(--color-gray-200);
       }
     }
 
     .calendar-actions {
-      display: flex;
-      align-items: center;
-      gap: 2px;
+      gap: 4px;
 
       .calendar-navigator {
-        font-size: 1.2em;
-        padding: 3px 8px;
-        background-color: transparent;
-        transition: 0.2s ease-in;
-        transition-property: color, background-color;
+        background: transparent;
         border-radius: 4px;
+        color: inherit;
+        transition: background-color 0.2s;
 
         &:hover {
-          color: var(--config-accent-color);
           background-color: var(--color-gray-200);
+        }
+
+        &:active {
+          background-color: var(--color-gray-300);
         }
       }
     }
   }
 
-  .calendar-cell-value {
-    --margin: 4px;
-    position: relative;
-    transition: background-color 0.2s ease-in;
-    border-radius: 4px;
-    width: calc(100% - var(--margin) * 2);
-    height: calc(100% - var(--margin) * 2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: var(--margin);
+  .calendar-month-view {
+    gap: 4px;
+  }
 
-    &.calendar-cell-selected {
-      background-color: var(--color-gray-100);
-      color: var(--config-accent-color);
+  .calendar-weekdays {
+    gap: 4px;
+    margin-bottom: 4px;
+
+    .calendar-weekday {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 0;
+      opacity: 0.7;
     }
+  }
+
+  .calendar-days {
+    gap: 4px;
+  }
+
+  .calendar-week {
+    gap: 4px;
+  }
+
+  .calendar-cell {
+    border-radius: 4px;
+    font-size: 13px;
+    transition: all 0.2s;
 
     &:hover {
       background-color: var(--color-gray-200);
     }
 
-    &.calendar-cell-today {
-      background-color: rgba(var(--config-accent-color-rgb), 0.2);
+    &.calendar-cell-off-month {
+      opacity: 0.3;
     }
 
-    &.calendar-cell-month {
-      text-transform: capitalize;
+    &.calendar-cell-today {
+      font-weight: 700;
+      color: var(--system-accent-color);
+    }
+
+    &.calendar-cell-selected {
+      background-color: var(--system-accent-color);
+      color: white;
+      font-weight: 600;
+
+      &:hover {
+        background-color: var(--system-accent-color);
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .calendar-year-view {
+    gap: 8px;
+    padding: 4px;
+
+    .calendar-month-cell {
+      padding: 16px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: var(--color-gray-200);
+      }
+
+      &.calendar-month-cell-current {
+        font-weight: 700;
+        color: var(--system-accent-color);
+      }
     }
   }
 }
@@ -998,7 +967,7 @@
       padding: 8px 10px;
 
       &.keyboard-selector-entry-active {
-        background-color: rgba(var(--config-accent-color-rgb), 0.4);
+        background-color: rgba(var(--system-accent-color-rgb), 0.4);
       }
 
       .keyboard-selector-entry-info {
@@ -1032,69 +1001,14 @@
   }
 }
 
-.bluetooth {
-  @extend %popup;
+.ft-corner-button {
+  transition: backdrop-filter 0.2s ease;
 
-  .bluetooth-title {
-    @extend %section-title;
-
-    .bluetooth-refresh {
-      @extend %actionable-button;
-      .slu-icon {
-        color: var(--color-gray-900);
-        animation: rotateToTheLeft 1s linear infinite;
-      }
-    }
+  &:hover {
+    backdrop-filter: invert(0.2);
   }
 
-  .bluetooth-entries {
-    @extend %list;
-    border-bottom: 1px solid var(--color-gray-300);
-    padding-bottom: 10px;
-    overflow-y: auto;
-    max-height: 30vh;
-
-    .bluetooth-entry {
-      @extend %list;
-      align-items: flex-end;
-      padding: 12px 10px;
-      border-radius: 8px;
-      gap: 10px;
-
-      &:hover {
-        background-color: var(--color-gray-200);
-      }
-
-      &.bluetooth-entry-selected {
-        background-color: rgba(var(--config-accent-color-rgb), 0.2);
-      }
-
-      .bluetooth-entry-info {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-
-        .bluetooth-entry-info-label {
-          @extend %overflowable-text;
-          flex: 1;
-        }
-      }
-    }
-
-    .bluetooth-empty {
-      @extend %flex-centered;
-      height: 100px;
-      font-style: italic;
-    }
-  }
-
-  .bluetooth-footer {
-    .bluetooth-footer-more-button {
-      @extend %actionable-button;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--color-gray-600);
-    }
+  &:active {
+    backdrop-filter: invert(0.3);
   }
 }

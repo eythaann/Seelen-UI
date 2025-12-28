@@ -12,17 +12,19 @@ app_menu:
   run_as: Запустити від імені адміністратора
   unpin: Відкріпити
 context_menu:
+  remove_module: Видалити модуль
   reorder_disable: Блокування панелі завдань
   reorder_enable: Розблокувати панель завдань
 media:
   not_playing: Аудіо не відтворюється
-media_menu:
-  remove: Приховати медіа модуль
-start_menu:
-  remove: Приховати кнопку Пуск
+show_desktop:
+  label: Показати робочий стіл
+start:
+  label: Меню Пуск
 taskbar_menu:
   add_file: Закріпити власний файл
   add_folder: Закріпити власну папку
+  desktop: Додайте модуль робочого столу
   media: Додати медіа модуль
   settings: Налаштування
   start: Додати кнопку Пуск

@@ -24,32 +24,28 @@ mod windows_api;
 extern crate rust_i18n;
 i18n!("background/i18n", fallback = "en");
 
-#[macro_use]
-extern crate lazy_static;
-
 use std::sync::{atomic::AtomicBool, OnceLock};
 
 use app::{Seelen, SEELEN};
 use cli::{application::handle_console_client, SelfPipe, ServicePipe};
 use error::Result;
 use exposed::register_invoke_handler;
-use itertools::Itertools;
 use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
     integrity::{
-        check_for_webview_optimal_state, print_initial_information, register_panic_hook,
-        restart_as_appx, validate_webview_runtime_is_installed,
+        check_for_webview_optimal_state, is_already_running, print_initial_information,
+        register_panic_hook, restart_as_appx, restart_as_interactive_user,
+        validate_webview_runtime_is_installed,
     },
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
 
-use crate::app::get_app_handle;
+use crate::{app::get_app_handle, windows_api::WindowsApi};
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static TOKIO_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
 static SILENT: AtomicBool = AtomicBool::new(false);
-static STARTUP: AtomicBool = AtomicBool::new(false);
 static VERBOSE: AtomicBool = AtomicBool::new(false);
 
 pub fn is_local_dev() -> bool {
@@ -106,25 +102,20 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
     }
 }
 
-fn is_already_runnning() -> bool {
-    let mut sys = sysinfo::System::new();
-    sys.refresh_processes();
-    sys.processes()
-        .values()
-        .filter(|p| p.exe().is_some_and(|path| path.ends_with("seelen-ui.exe")))
-        .collect_vec()
-        .len()
-        > 1
-}
-
 #[tokio::main]
 async fn main() -> Result<()> {
     register_panic_hook();
     handle_console_client().await?;
 
-    if is_already_runnning() {
+    if is_already_running() {
         SelfPipe::request_open_settings().await?;
         return Ok(());
+    }
+
+    // GUI must run as interactive user (not elevated)
+    if WindowsApi::is_elevated()? {
+        log::info!("GUI was started with elevated privileges, restarting as interactive user...");
+        restart_as_interactive_user()?;
     }
 
     if was_installed_using_msix() && !is_running_as_appx() {

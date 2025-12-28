@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: עדכון
     ok_readonly: ערוך כחדש
     options:
-      float: לָצוּף
-      force: נהל בכוח
-      hidden: הסתר ממעגן/שורת משימות
-      pinned: מוצמד
-      unmanage: לא מנוהל
+      NoInteractive: אין אינטראקטיבי
+      VdPinned: הצג בכל סביבות העבודה
+      WmFloat: Twm - התחל לצוף
+      WmForce: Twm - ניהול כוח
+      WmUnmanage: Twm - בטל ניהול
     options_label: אפשרויות נוספות
     title_create: יצירת {{name}}
     title_edit: עריכה {{name}}
@@ -222,10 +222,6 @@ toolbar:
   delay_to_hide: השהה הסתרה
   delay_to_show: השהה הצגה
   dock_side: מצב
-  dynamic_color: צבע דינמי
-  dynamic_color_tooltip: >-
-    אפשר צבעי רקע דינאמי וצבעי חזית המבוססים על חלון ממוקד. (צבעים יכולים להתבגר
-    על ידי נושאים)
   enable: אפשר
   height: גובה
   hide_mode:
@@ -234,7 +230,6 @@ toolbar:
     on_overlap: על חפיפה
   label: סרגל כלים
   placeholder: {}
-  show_hibernate: הצג כפתור שינה בתפריט ההפעלה
 update:
   available: עדכון זמין!
   channel: ערוץ עדכונים
@@ -296,7 +291,6 @@ weg:
       all: כל
       label: נראות פריטים לא מוצמדים
       on_monitor: על מוניטור
-    thumbnail_generation_enabled: צור תמונות ממוזערות על ריחוף פריט
     visible_separators: מפרידים גלויים
   label: שורת המזח/המשימות
   margin: שולים
@@ -321,6 +315,10 @@ wm:
     offset: קיזוז גבול
     width: רוחב גבול
   description: תיאור
+  drag_behavior: התנהגות גרירה
+  drag_behavior_options:
+    sort: מיון (סדר מחדש את החלונות תוך כדי גרירה)
+    swap: החלפה (החלפה של חלונות בקצה הגרירה)
   enable: אפשר מנהל חלונות אריחים
   layout: מערך
   resize_delta: שינוי גודל דלתא (%)

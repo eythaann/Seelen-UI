@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ዝመና
     ok_readonly: እንደ አዲስ ያርትዑ
     options:
-      float: ተንሳፋፊ
-      force: ኃይል ማስተዳደር
-      hidden: ከ Dock / Actorbar ይደብቁ
-      pinned: ተያይ ated ል
-      unmanage: አለመግባባት
+      NoInteractive: በይነተገናኝ የለም
+      VdPinned: በሁሉም የስራ ቦታዎች ውስጥ አሳይ
+      WmFloat: Twm - ተንሳፋፊ ጅምር
+      WmForce: Twm - ኃይል ያስተዳድሩ
+      WmUnmanage: Twm - አለመግባባት
     options_label: ተጨማሪ አማራጮች
     title_create: '{{{ስም} መፍጠር}}'
     title_edit: አርት editing {{ስም}}}
@@ -221,8 +221,6 @@ toolbar:
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
   dock_side: አቀማመጥ
-  dynamic_color: ተለዋዋጭ ቀለም
-  dynamic_color_tooltip: በተተኮረ መስኮት ላይ በመመርኮዝ ተለዋዋጭ ዳራ እና የፊት ቀለሞችን ያንቁ. (ቀለሞች በግምቶች መካተት ይችላሉ)
   enable: Fangance የመሳሪያ አሞሌን ያንቁ
   height: ቁመት
   hide_mode:
@@ -231,7 +229,6 @@ toolbar:
     on_overlap: መደራረብ ላይ
   label: የመሣሪያ አሞሌ
   placeholder: {}
-  show_hibernate: በሀይል ምናሌ ላይ የ Heberberate ቁልፍን አሳይ
 update:
   available: ዝመና ይገኛል!
   channel: ጣቢያውን አዘምን
@@ -293,7 +290,6 @@ weg:
       all: ሁሉም
       label: ያልተሰካ እቃዎች ታይነት
       on_monitor: በሞኒተር ላይ
-    thumbnail_generation_enabled: በንጥል ላይ ያሉ ድንክዬዎችን ማመንጨት
     visible_separators: የሚታዩ መለያዎች
   label: Dock / Accorbar
   margin: ህዳግ
@@ -318,6 +314,10 @@ wm:
     offset: ድንበር ማካካሻ
     width: ድንበር ስፋት
   description: መግለጫ
+  drag_behavior: ጎትት ባህሪ
+  drag_behavior_options:
+    sort: ደርድር (በመጎተት ላይ መስኮቶችን እንደገና ይዘዙ)
+    swap: ስዋፕ (በመጎተት መጨረሻ ላይ መስኮቶችን ይቀያይሩ)
   enable: የታሸገ መስኮት አቀናባሪን ያንቁ
   layout: አቀማመጥ
   resize_delta: ዴልታ (%)

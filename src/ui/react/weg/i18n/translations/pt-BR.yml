@@ -12,17 +12,19 @@ app_menu:
   run_as: Executar como administrador
   unpin: Desafixar
 context_menu:
+  remove_module: Remover Módulo
   reorder_disable: Bloquear barra de tarefas
   reorder_enable: Desbloquear barra de tarefas
 media:
   not_playing: Nada está tocando
-media_menu:
-  remove: Remover módulo de mídia
-start_menu:
-  remove: Remover módulo Iniciar
+show_desktop:
+  label: Mostrar área de trabalho
+start:
+  label: Menu Iniciar
 taskbar_menu:
   add_file: Fixar arquivo personalizado
   add_folder: Fixar pasta personalizada
+  desktop: Adicionar módulo de área de trabalho
   media: Adicionar módulo de mídia
   settings: Configurações
   start: Adicionar módulo Iniciar

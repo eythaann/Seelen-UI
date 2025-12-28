@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ອັບເດດ
     ok_readonly: ແກ້ໄຂເປັນໃໝ່
     options:
-      float: ລອຍ
-      force: ບັງຄັບໃຫ້ຈັດການ
-      hidden: ເຊື່ອງຈາກ Dock / Taskbar
-      pinned: ປັກໝຸດ
-      unmanage: ຍົກເລີກການຈັດການ
+      NoInteractive: ບໍ່ມີການໂຕ້ຕອບກັນ
+      VdPinned: ສະແດງໃນທຸກບ່ອນເຮັດວຽກ
+      WmFloat: twm - ເລີ່ມຕົ້ນລອຍ
+      WmForce: twm - ກໍາລັງແຮງງານຄຸ້ມຄອງ
+      WmUnmanage: twm - unmanage
     options_label: ທາງເລືອກພິເສດ
     title_create: ການສ້າງ {{name}}
     title_edit: ການແກ້ໄຂ {{ne name}}}
@@ -226,10 +226,6 @@ toolbar:
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
-  dynamic_color: ສີແບບເຄື່ອນໄຫວ
-  dynamic_color_tooltip: >-
-    ເປີດໃຊ້ພື້ນຫລັງແບບເຄື່ອນໄຫວແລະສີພື້ນຖານໂດຍອີງໃສ່ຫນ້າຕ່າງທີ່ສຸມໃສ່.
-    (ສີສາມາດຖືກໂອນໂດຍຫົວຂໍ້)
   enable: ເປີດໃຊ້ແຖບເຄື່ອງມື Fancy
   height: ຄວາມສູງ
   hide_mode:
@@ -238,7 +234,6 @@ toolbar:
     on_overlap: ທັບຊ້ອນກັນ
   label: ແຖບເຄື່ອງມື
   placeholder: {}
-  show_hibernate: ສະແດງປຸ່ມ hibernate ໃນເມນູພະລັງງານ
 update:
   available: ປັບປຸງໃຫ້ທັນສະໄຫມ!
   channel: ຊ່ອງທາງການປັບປຸງ
@@ -300,7 +295,6 @@ weg:
       all: ທັງໝົດ
       label: ການເບິ່ງເຫັນລາຍການທີ່ບໍ່ໄດ້ປັກໝຸດ
       on_monitor: ໃນ Monitor
-    thumbnail_generation_enabled: ສ້າງຮູບຫຍໍ້ກ່ຽວກັບສິນຄ້າ
     visible_separators: ຕົວແຍກທີ່ເບິ່ງເຫັນໄດ້
   label: Dock/Taskbar
   margin: ຂອບ
@@ -325,6 +319,10 @@ wm:
     offset: Border Offset
     width: ຄວາມກວ້າງຊາຍແດນ
   description: ລາຍລະອຽດ
+  drag_behavior: ພຶດຕິກໍາການລາກ
+  drag_behavior_options:
+    sort: ຈັດຮຽງ (ຈັດຮຽງໜ້າຕ່າງໃໝ່ໃນຂະນະທີ່ລາກ)
+    swap: Swap (ສະຫຼັບປ່ອງຢ້ຽມຢູ່ປາຍລາກ)
   enable: ເປີດໃຊ້ຜູ້ຈັດການປ່ອງຢ້ຽມກະເບື້ອງ
   layout: ແຜນຜັງ
   resize_delta: ປັບຂະໜາດ Delta (%)

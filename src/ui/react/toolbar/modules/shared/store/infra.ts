@@ -1,30 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
   BluetoothDevices,
-  Color,
   DocumentsFolder,
   DownloadsFolder,
   LanguageList,
   MusicFolder,
   PicturesFolder,
   RecentFolder,
-  SeelenCommand,
   SeelenEvent,
   Settings,
-  startThemingTool,
   subscribe,
   UserDetails,
   VideosFolder,
 } from "@seelen-ui/lib";
-import type { FancyToolbarSettings, FocusedApp } from "@seelen-ui/lib/types";
-import { invoke } from "@tauri-apps/api/core";
-import { listen as listenGlobal } from "@tauri-apps/api/event";
-import { debounce, throttle } from "lodash";
+import type { FancyToolbarSettings } from "@seelen-ui/lib/types";
+import { throttle } from "lodash";
 
 import { lazySlice, RootActions, RootSlice } from "./app.ts";
 
 import i18n from "../../../i18n/index.ts";
-import { $settings } from "../state/mod.ts";
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -36,63 +30,6 @@ export const store = configureStore({
 });
 
 lazySlice(store.dispatch);
-
-const removeFocusedColorCssVars = () => {
-  document.documentElement.style.removeProperty("--color-focused-app-background");
-  document.documentElement.style.removeProperty("--color-focused-app-foreground");
-};
-
-async function initFocusedColorSystem() {
-  let optimisticFocused: FocusedApp | null = null;
-
-  const setFocused = debounce((app: FocusedApp) => {
-    store.dispatch(RootActions.setFocused(app));
-  }, 200);
-
-  const updateFocusedColor = async () => {
-    if (!optimisticFocused || !$settings.value.dynamicColor) {
-      return;
-    }
-
-    let color = new Color(await invoke(SeelenCommand.SystemGetForegroundWindowColor));
-    if (color.inner.a === 0) {
-      removeFocusedColorCssVars();
-      return;
-    }
-
-    const luminance = color.calcLuminance();
-    const background = color.toHexString();
-    const foreground = luminance / 255 > 0.5 ? "var(--color-persist-gray-900)" : "var(--color-persist-gray-100)";
-
-    document.documentElement.style.setProperty("--color-focused-app-background", background);
-    document.documentElement.style.setProperty("--color-focused-app-foreground", foreground);
-
-    store.dispatch(
-      RootActions.addWindowColor([
-        optimisticFocused.hwnd,
-        {
-          background,
-          foreground,
-        },
-      ]),
-    );
-  };
-
-  await listenGlobal("hidden::remove-focused-color", removeFocusedColorCssVars);
-
-  globalThis.setInterval(updateFocusedColor, 350);
-  await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
-    const app = e.payload;
-    optimisticFocused = app;
-
-    setFocused(app);
-    if (!app.isSeelenOverlay) {
-      setFocused.flush();
-    }
-
-    updateFocusedColor();
-  });
-}
 
 export async function registerStoreEvents() {
   Settings.getAsync().then(loadSettings);
@@ -158,13 +95,6 @@ export async function registerStoreEvents() {
   MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
 
   BluetoothDevices.onChange((devices) => store.dispatch(RootActions.setBluetoothDevices(devices.all())));
-  BluetoothDevices.onDiscoveredDevicesChange((devices) =>
-    store.dispatch(RootActions.setDiscoveredBluetoothDevices(devices.all()))
-  );
-
-  await initFocusedColorSystem();
-
-  await startThemingTool();
 }
 
 function loadSettingsCSS(settings: FancyToolbarSettings) {
@@ -177,7 +107,4 @@ function loadSettingsCSS(settings: FancyToolbarSettings) {
 function loadSettings(settings: Settings) {
   i18n.changeLanguage(settings.inner.language || undefined);
   loadSettingsCSS(settings.fancyToolbar);
-  if (!settings.fancyToolbar.dynamicColor) {
-    removeFocusedColorCssVars();
-  }
 }

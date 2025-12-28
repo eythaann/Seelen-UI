@@ -1,102 +1,66 @@
 import { useSignal } from "@preact/signals";
-import { SeelenWallWidgetId } from "@seelen-ui/lib";
 import { ResourceKind, type WallpaperId } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import { ResourceText } from "@shared/components/ResourceText";
-import { VerticalSortableSelect } from "@shared/components/SortableSelector";
-import { Wallpaper } from "@shared/components/Wallpaper";
-import { Button, Modal, Switch } from "antd";
-import { useTranslation } from "react-i18next";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { VerticalSortableSelect } from "src/ui/react/settings/components/SortableSelector/index.tsx";
+import { Wallpaper } from "libs/ui/react/components/Wallpaper/index.tsx";
+import { Button, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
 import { newSelectors, RootActions } from "../shared/store/app/reducer.ts";
 
-import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
 import { ResourcePortrait } from "../resources/ResourceCard.tsx";
 import cs from "./index.module.css";
 
 interface Props {
-  monitorId?: string;
+  collectionId: string;
 }
 
-export function WallpaperList({ monitorId }: Props) {
+export function WallpaperList({ collectionId }: Props) {
   const $toPreview = useSignal<WallpaperId | null>(null);
 
-  const baseEnabled = useSelector(newSelectors.wall.backgroundsV2);
-
-  const configByMonitor = useSelector(newSelectors.monitorsV3);
-  const monitorPatch = monitorId ? configByMonitor[monitorId] : null;
-
   const wallpapers = useSelector(newSelectors.wallpapers);
+  const wallpaperCollections = useSelector(newSelectors.wallpaperCollections);
+
+  const collection = wallpaperCollections.find((c) => c.id === collectionId);
 
   const d = useDispatch();
-  const { t } = useTranslation();
 
-  function onChangeEnabled(backgroundsV2: WallpaperId[]) {
-    if (!monitorId) {
-      d(RootActions.patchWall({ backgroundsV2 }));
+  function onChangeEnabled(wallpaperIds: WallpaperId[]) {
+    if (!collection) {
       return;
     }
 
     d(
-      RootActions.patchWidgetMonitorConfig({
-        monitorId,
-        widgetId: SeelenWallWidgetId,
-        config: { backgroundsV2 },
+      RootActions.updateWallpaperCollection({
+        ...collection,
+        wallpapers: wallpaperIds,
       }),
     );
   }
 
-  function setInherited(value: boolean) {
-    if (!monitorId) {
-      return;
-    }
-
-    d(
-      RootActions.patchWidgetMonitorConfig({
-        monitorId,
-        widgetId: SeelenWallWidgetId,
-        config: { backgroundsV2: value ? null : [] },
-      }),
-    );
+  if (!collection) {
+    return null;
   }
-
-  const enabledOnMonitor = monitorPatch?.byWidget[SeelenWallWidgetId]
-    ?.backgroundsV2 as WallpaperId[];
-  const isInherited = !!monitorId && !enabledOnMonitor;
-  const enabled = enabledOnMonitor ?? baseEnabled;
 
   const previewing = $toPreview.value ? wallpapers.find((w) => w.id === $toPreview.value) : null;
+
   return (
-    <SettingsGroup>
-      {monitorId && (
-        <SettingsOption
-          label={t("inherit")}
-          action={<Switch value={isInherited} onChange={setInherited} />}
-        />
-      )}
+    <div style={{ height: "60vh" }}>
       <VerticalSortableSelect
-        disabled={isInherited}
         options={wallpapers.map((w) => ({
           value: w.id,
           label: (
             <div className={cs.entryLabel}>
               <ResourcePortrait resource={w} kind={ResourceKind.Wallpaper} />
-              <ResourceText
-                className={cs.entryName}
-                text={w.metadata.displayName}
-              />
-              <Button
-                type="text"
-                size="small"
-                onClick={() => ($toPreview.value = w.id)}
-              >
+              <ResourceText className={cs.entryName} text={w.metadata.displayName} />
+              <Button type="text" size="small" onClick={() => ($toPreview.value = w.id)}>
                 <Icon iconName="FaEye" />
               </Button>
             </div>
           ),
         }))}
-        enabled={enabled}
+        enabled={collection.wallpapers}
         onChange={onChangeEnabled}
       />
       <Modal
@@ -107,9 +71,9 @@ export function WallpaperList({ monitorId }: Props) {
         centered
       >
         <div className={cs.preview}>
-          {previewing && <Wallpaper definition={previewing} />}
+          {previewing && <Wallpaper definition={previewing} muted />}
         </div>
       </Modal>
-    </SettingsGroup>
+    </div>
   );
 }

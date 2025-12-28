@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Update
     ok_readonly: Bewerken als nieuw
     options:
-      float: Zweven
-      force: Geforceerd beheren
-      hidden: Verbergen zich voor Dock/Taskbar
-      pinned: Vastgemaakt
-      unmanage: Niet beheren
+      NoInteractive: Geen interactief
+      VdPinned: Toon in alle werkruimten
+      WmFloat: Twm - Begin met zweven
+      WmForce: Twm - Forceer beheer
+      WmUnmanage: Twm - Niet beheren
     options_label: Extra opties
     title_create: Het maken van {{name}}
     title_edit: Bewerken {{name}}
@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
   dock_side: Positie
-  dynamic_color: Dynamische kleur
-  dynamic_color_tooltip: >-
-    Dynamische achtergrond- en voorgrondkleuren inschakelen op basis van het
-    gefocuste venster. (Kleuren kunnen worden overschreven door thema's)
   enable: Schakel fancy werkbalk in
   height: Hoogte
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: Op overlap
   label: Werkbalk
   placeholder: {}
-  show_hibernate: Toon slaapstandknop in energiemenu
 update:
   available: Update beschikbaar!
   channel: Updatekanaal
@@ -305,7 +300,6 @@ weg:
       all: Alle
       label: Zichtbaarheid van losgemaakte items
       on_monitor: Op monitor
-    thumbnail_generation_enabled: Genereer miniaturen bij item hover
     visible_separators: Zichtbare scheiders
   label: Dock/taakbalk
   margin: Marge
@@ -330,6 +324,10 @@ wm:
     offset: Grens offset
     width: Grensbreedte
   description: Beschrijving
+  drag_behavior: Sleepgedrag
+  drag_behavior_options:
+    sort: Sorteren (vensters opnieuw ordenen tijdens slepen)
+    swap: Wisselen (vensters verwisselen aan het einde van het slepen)
   enable: Schakel Tiling Window Manager in
   layout: Lay -out
   resize_delta: Wijzig de wijzers van delta (%)

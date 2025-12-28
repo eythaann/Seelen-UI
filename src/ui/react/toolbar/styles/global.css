@@ -23,11 +23,11 @@ body {
   }
 
   &:has(.ft-bar-hidden.top:not(:hover)) {
-    transform: translate(0, calc(var(--config-height) * -1));
+    transform: translate3d(0, calc(var(--config-height) * -1), 0);
   }
 
   &:has(.ft-bar-hidden.bottom:not(:hover)) {
-    transform: translate(0, calc(var(--config-height)));
+    transform: translate3d(0, calc(var(--config-height)), 0);
   }
 }
 
@@ -101,5 +101,19 @@ body {
       overflow: hidden;
       white-space: pre;
     }
+  }
+}
+
+.ft-corner-button {
+  position: absolute;
+  width: 10px;
+  height: 100%;
+
+  &:first-child {
+    left: 0;
+  }
+
+  &:last-child {
+    right: 0;
   }
 }

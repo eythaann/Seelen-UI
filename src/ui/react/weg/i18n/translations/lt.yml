@@ -12,17 +12,19 @@ app_menu:
   run_as: Vykdykite kaip administratorius
   unpin: Unpin
 context_menu:
+  remove_module: Pašalinti modulį
   reorder_disable: Užrakinti užduočių juostą
   reorder_enable: Užduočių juostos atrakinimas
 media:
   not_playing: Niekas nežaidžia
-media_menu:
-  remove: Pašalinkite medijos modulį
-start_menu:
-  remove: Pašalinkite pradžios modulį
+show_desktop:
+  label: Rodyti darbalaukį
+start:
+  label: Pradėti meniu
 taskbar_menu:
   add_file: PIN pasirinktinis failas
   add_folder: PIN pasirinktinis aplankas
+  desktop: Pridėti darbalaukio modulį
   media: Pridėkite laikmenos modulį
   settings: Nustatymai
   start: Pridėkite pradžios modulį

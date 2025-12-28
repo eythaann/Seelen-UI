@@ -432,12 +432,23 @@ pub struct Placeholder {
 }
 
 impl Placeholder {
+    fn migrate_plugin_id(id: PluginId) -> PluginId {
+        match id.as_str() {
+            "@default/system-tray" => "@seelen/tb-system-tray".into(),
+            "@default/quick-settings" => "@seelen/tb-quick-settings".into(),
+            "@default/bluetooth" => "@seelen/tb-bluetooth-popup".into(),
+            _ => id,
+        }
+    }
+
     fn sanitize_items(dict: &mut HashSet<String>, items: Vec<ToolbarItem2>) -> Vec<ToolbarItem2> {
         let mut result = Vec::new();
         for item in items {
             match item {
                 ToolbarItem2::Plugin(id) => {
+                    let id = Self::migrate_plugin_id(id);
                     let str_id = id.to_string();
+
                     if !dict.contains(&str_id) && id.is_valid() {
                         dict.insert(str_id);
                         result.push(ToolbarItem2::Plugin(id));
@@ -447,6 +458,7 @@ impl Placeholder {
                     if item.id().is_empty() {
                         item.set_id(uuid::Uuid::new_v4().to_string());
                     }
+
                     if !dict.contains(&item.id()) {
                         dict.insert(item.id());
                         result.push(ToolbarItem2::Inline(item));

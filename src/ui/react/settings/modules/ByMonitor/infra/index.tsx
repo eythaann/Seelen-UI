@@ -1,6 +1,6 @@
-import { SeelenWallWidgetId } from "@seelen-ui/lib";
 import type { PhysicalMonitor, Widget } from "@seelen-ui/lib/types";
-import { ResourceText } from "@shared/components/ResourceText";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 import { newSelectors } from "../../shared/store/app/reducer.ts";
@@ -8,6 +8,7 @@ import { newSelectors } from "../../shared/store/app/reducer.ts";
 import { Monitor } from "../../../components/monitor/index.tsx";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 import { WidgetSettingsModal } from "./WidgetSettingsModal.tsx";
+import { WallpaperSettingsModal } from "./WallpaperSettingsModal.tsx";
 import cs from "./index.module.css";
 
 interface MonitorConfigProps {
@@ -16,12 +17,13 @@ interface MonitorConfigProps {
 
 export function MonitorConfig({ device }: MonitorConfigProps) {
   const widgets = useSelector(newSelectors.widgets);
+  const { t } = useTranslation();
 
   return (
     <SettingsGroup>
       <div className={cs.itemContainer}>
         <div className={cs.itemLeft}>
-          <div className={cs.label}>{device.name}</div>
+          <div className={cs.label}>{device.name || device.id}</div>
           <Monitor
             monitorId={device.id}
             width={device.rect.right - device.rect.left}
@@ -36,6 +38,19 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
                 {device.rect.right - device.rect.left} x {device.rect.bottom - device.rect.top}
               </div>
             </SettingsOption>
+            <SettingsOption>
+              <b>{t("wall.wallpaper_collection")}</b>
+              <WallpaperSettingsModal
+                monitorId={device.id}
+                title={
+                  <>
+                    {device.name || device.id}
+                    {" / "}
+                    {t("wall.wallpaper_settings")}
+                  </>
+                }
+              />
+            </SettingsOption>
           </SettingsGroup>
 
           <SettingsGroup>
@@ -48,7 +63,7 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
                     monitorId={device.id}
                     title={
                       <>
-                        {device.name}
+                        {device.name || device.id}
                         {" / "}
                         <ResourceText text={widget.metadata.displayName} />
                       </>
@@ -84,11 +99,6 @@ export function SettingsByMonitor() {
 
 function isConfigurableByMonitor(widget: Widget) {
   if (widget.instances === "ReplicaByMonitor") {
-    return true;
-  }
-
-  // special case
-  if (widget.id === SeelenWallWidgetId) {
     return true;
   }
 

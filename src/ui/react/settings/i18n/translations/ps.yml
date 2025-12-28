@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: تازه کول
     ok_readonly: د نوي په توګه
     options:
-      float: فلوټ
-      force: د ځواک اداره کول
-      hidden: د ډیک / ټاسک بار څخه پټول
-      pinned: پینټ شوی
-      unmanage: بې وسلې کول
+      NoInteractive: نه متقابل عمل
+      VdPinned: په ټولو کاري ځایونو کې ښکاره کړئ
+      WmFloat: Twm - تیریدل پیل کړئ
+      WmForce: Twm - د ځواک اداره کول
+      WmUnmanage: Twm - بې نظمه کول
     options_label: اضافي اختیارونه
     title_create: '{{}} رامینځته کول'
     title_edit: ترمیم. {{}}
@@ -225,10 +225,6 @@ toolbar:
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
-  dynamic_color: متحرک رنګ
-  dynamic_color_tooltip: >-
-    د متمرکز کړکۍ پراساس د متحرک شالید او مخکیني رنګونو فعال کړئ. (رنګونه کولی
-    شي د موضوعاتو لخوا پراخه شي)
   enable: د فینسي تورې پټه وړتیا وړ کړئ
   height: لوړوالی
   hide_mode:
@@ -237,7 +233,6 @@ toolbar:
     on_overlap: پر اوورلیپ
   label: توکپټه
   placeholder: {}
-  show_hibernate: د بریښنا مینو کې د هایبرټ ت button ۍ ښودل
 update:
   available: اوسمهالول شتون لري!
   channel: چینل تازه کول
@@ -299,7 +294,6 @@ weg:
       all: ټول
       label: د ناپاک شوي توکو لید لید
       on_monitor: په مانیټر کې
-    thumbnail_generation_enabled: د توکو هورټ کې تمبینونه پیدا کړئ
     visible_separators: لیدلي جلا کونکي
   label: ډیک / ټاسک بار
   margin: حاشیه
@@ -324,6 +318,10 @@ wm:
     offset: پوله
     width: د بريد سور
   description: تفصیل
+  drag_behavior: د چلولو چلند
+  drag_behavior_options:
+    sort: ترتیب کړئ (د ځړولو پرمهال کړکۍ بیا تنظیم کړئ)
+    swap: تبادله (د ډریګ په پای کې کړکۍ بدلول)
   enable: د ټی بایټس کړکۍ مدیر فعال کړئ
   layout: ترتیب
   resize_delta: د ډیلټا (٪) ریموټ کړئ

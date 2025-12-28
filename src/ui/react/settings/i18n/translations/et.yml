@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Värskendama
     ok_readonly: Redigeerimine uuena
     options:
-      float: Ujuk
-      force: Jõudu juhtima
-      hidden: Peida doki/ülesanderiba eest
-      pinned: Kinnitatud
-      unmanage: Juhtimine
+      NoInteractive: Pole interaktiivset
+      VdPinned: Kuva kõikides tööruumides
+      WmFloat: Twm – alusta ujumist
+      WmForce: Twm – jõu haldamine
+      WmUnmanage: Twm – haldamata
     options_label: Lisavalikud
     title_create: '{{Name}} loomine'
     title_edit: Redigeerimine {{nimi}}
@@ -228,10 +228,6 @@ toolbar:
   delay_to_hide: Viivitage peitmine
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
-  dynamic_color: Dünaamiline värv
-  dynamic_color_tooltip: >-
-    Võimaldab dünaamilise tausta- ja esiplaanivärvi, mis põhineb fookustatud
-    aknal. (Värve saab teemade abil muuta)
   enable: Luba väljamõeldud tööriistariba
   height: Kõrgus
   hide_mode:
@@ -240,7 +236,6 @@ toolbar:
     on_overlap: Kattumises
   label: Tööriistariba
   placeholder: {}
-  show_hibernate: Näita hibernatsiooni nuppu toite menüüs
 update:
   available: Värskendage saadaval!
   channel: Värskenduskanal
@@ -302,7 +297,6 @@ weg:
       all: Kõik
       label: Kinnitamata üksuste nähtavus
       on_monitor: Monitoril
-    thumbnail_generation_enabled: Loo pisipildid objekti hõljumisel
     visible_separators: Nähtavad eraldajad
   label: Dokk/ülesanderiba
   margin: Marginaal
@@ -327,6 +321,10 @@ wm:
     offset: Piiride nihke
     width: Piirilaius
   description: Kirjeldus
+  drag_behavior: Lohistuskäitumine
+  drag_behavior_options:
+    sort: Sorteeri (akende järjestamine lohistamise ajal ümber)
+    swap: Vaheta (vahetage aknad lohistamise lõpus)
   enable: Luba plaatide aknahaldur
   layout: Paigutus
   resize_delta: Suuruse muutmine delta (%)

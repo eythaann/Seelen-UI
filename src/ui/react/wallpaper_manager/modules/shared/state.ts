@@ -1,5 +1,6 @@
 import { computed, signal } from "@preact/signals";
-import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, UIColors, WallpaperList } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, UIColors } from "@seelen-ui/lib";
+import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { debounce } from "lodash";
 
 const initial = await Settings.getAsync();
@@ -37,6 +38,10 @@ subscribe(SeelenEvent.GlobalMouseMove, () => {
   setAsIdle();
 });
 
+export const $muted = computed(() => {
+  return $focused.value.class !== "Progman";
+});
+
 export const $paused = computed(() => {
   return (
     $idle.value ||
@@ -46,13 +51,18 @@ export const $paused = computed(() => {
   );
 });
 
-export const $monitors = signal(await invoke(SeelenCommand.SystemGetMonitors));
-subscribe(SeelenEvent.SystemMonitorsChanged, ({ payload }) => {
-  $monitors.value = payload;
-});
+export const $monitors = lazySignal(() => invoke(SeelenCommand.SystemGetMonitors));
+await subscribe(SeelenEvent.SystemMonitorsChanged, $monitors.setByPayload);
+await $monitors.init();
 
-export const $wallpapers = signal((await WallpaperList.getAsync()).asArray());
-WallpaperList.onChange((wallpapers) => ($wallpapers.value = wallpapers.asArray()));
+export const $virtualDesktops = lazySignal(() => invoke(SeelenCommand.StateGetVirtualDesktops));
+await subscribe(SeelenEvent.VirtualDesktopsChanged, $virtualDesktops.setByPayload);
+await $virtualDesktops.init();
 
-export const $performance_mode = signal(await invoke(SeelenCommand.StateGetPerformanceMode));
-subscribe(SeelenEvent.StatePerformanceModeChanged, (e) => ($performance_mode.value = e.payload));
+export const $wallpapers = lazySignal(() => invoke(SeelenCommand.StateGetWallpapers));
+await subscribe(SeelenEvent.StateWallpapersChanged, $wallpapers.setByPayload);
+await $wallpapers.init();
+
+export const $performance_mode = lazySignal(() => invoke(SeelenCommand.StateGetPerformanceMode));
+await subscribe(SeelenEvent.StatePerformanceModeChanged, $performance_mode.setByPayload);
+await $performance_mode.init();

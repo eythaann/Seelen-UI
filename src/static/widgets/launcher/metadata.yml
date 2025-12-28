@@ -1,0 +1,6 @@
+id: "@seelen/launcher"
+icon: MdRocketLaunch
+metadata:
+  displayName: !extend i18n/display_name.yml
+loader: Legacy
+instances: ReplicaByMonitor

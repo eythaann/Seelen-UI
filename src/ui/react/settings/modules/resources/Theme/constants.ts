@@ -1,0 +1,18 @@
+export const CSS_UNITS = [
+  "px",
+  "%",
+  "rem",
+  "em",
+  "vh",
+  "vw",
+  "vmin",
+  "vmax",
+  "ch",
+  "ex",
+  "dvh",
+  "dvw",
+  "lvh",
+  "lvw",
+  "svh",
+  "svw",
+] as const;

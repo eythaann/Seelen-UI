@@ -1,0 +1,176 @@
+.workspaces-viewer {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000; // just in case wallpaper fails
+
+  .monitor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+
+    .active-wallpaper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      filter: blur(10px);
+    }
+
+    .windows {
+      width: 100%;
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .window {
+        --header-size: 40px;
+        position: relative;
+        padding-top: var(--header-size);
+
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        background: var(--color-gray-100);
+        flex-shrink: 0;
+        overflow: hidden;
+        width: fit-content;
+
+        .window-header {
+          position: absolute; // avoids taking in care the size of the title for the parent size.
+          height: var(--header-size);
+          top: 0;
+          left: 0;
+          width: 100%;
+
+          display: grid;
+          grid-template-columns: 20px 1fr min-content;
+          align-items: center;
+
+          gap: 10px;
+          padding: 10px;
+          border-bottom: 1px solid var(--color-gray-300);
+
+          .window-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+
+        .window-preview-container {
+          min-width: 160px;
+          min-height: 90px;
+          width: fit-content;
+          max-width: 640px;
+          max-height: 360px;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .window-preview {
+            width: auto;
+            height: auto;
+          }
+
+          .window-no-preview {
+            width: 30px;
+          }
+        }
+      }
+    }
+
+    .workspaces {
+      background: var(--color-gray-100);
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+
+      width: min-content;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      .workspace {
+        position: relative;
+        width: 230px;
+        border-radius: 10px;
+        background: var(--color-gray-100);
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+        padding: 8px;
+        flex-shrink: 0;
+
+        .workspace-header {
+          display: flex;
+          margin-bottom: 10px;
+          align-items: center;
+          gap: 10px;
+
+          .workspace-name-input {
+            flex: 1;
+            font-weight: 600;
+
+            &::placeholder {
+              color: inherit;
+            }
+          }
+        }
+
+        .workspace-preview {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16/9;
+          border-radius: 8px;
+          overflow: hidden;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: -4px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60%;
+          border-radius: 4px;
+          height: 4px;
+          background-color: transparent;
+          transition: background-color 0.2s ease;
+        }
+
+        &.workspace-active {
+          &::before {
+            background-color: var(--system-accent-color);
+          }
+        }
+      }
+
+      .add-workspace {
+        width: 230px;
+        flex-shrink: 0;
+
+        border-radius: 8px;
+        background: var(--color-gray-100);
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

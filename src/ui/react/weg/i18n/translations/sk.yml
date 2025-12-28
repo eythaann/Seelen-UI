@@ -12,17 +12,19 @@ app_menu:
   run_as: Spustiť ako správca
   unpin: Zaniknúť
 context_menu:
+  remove_module: Odstráňte modul
   reorder_disable: Uzamknutie panela úloh
   reorder_enable: Odomknutie panela úloh
 media:
   not_playing: Nič nehrá
-media_menu:
-  remove: Odstráňte mediálny modul
-start_menu:
-  remove: Odstráňte modul Štart
+show_desktop:
+  label: Zobraziť pracovnú plochu
+start:
+  label: Ponuka Štart
 taskbar_menu:
   add_file: Vlastný súbor
   add_folder: Vlastný priečinok
+  desktop: Pridať modul pracovnej plochy
   media: Pridať mediálny modul
   settings: Nastavenia
   start: Pridať štartový modul

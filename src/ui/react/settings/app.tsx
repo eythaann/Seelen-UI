@@ -1,4 +1,4 @@
-import { useDarkMode } from "@shared/styles";
+import { useDarkMode } from "libs/ui/react/utils/styling.ts";
 import { ConfigProvider, theme } from "antd";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { newSelectors } from "./modules/shared/store/app/reducer.ts";
 
 import { Routing } from "./router.tsx";
+import { ThumbnailGeneratorModal } from "./components/ThumbnailGeneratorModal/index.tsx";
 
 export function App() {
   const isDarkMode = useDarkMode();
@@ -30,6 +31,7 @@ export function App() {
       }}
     >
       <Routing />
+      <ThumbnailGeneratorModal />
     </ConfigProvider>
   );
 }

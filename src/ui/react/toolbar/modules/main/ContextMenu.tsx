@@ -1,18 +1,18 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { PluginId } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { Icon } from "@shared/components/Icon";
-import type { IconName } from "@shared/components/Icon/icons";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Checkbox, Flex, Input, Menu, Space } from "antd";
 import type { MenuItemType } from "antd/es/menu/interface";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { RestoreToDefault } from "./application.ts";
 
 import { $actions, $plugins, $toolbar_state } from "../shared/state/items.ts";
+import type { IconName } from "libs/ui/icons.ts";
 
 export function MainContextMenu() {
   const [customText, setCustomText] = useState("");

@@ -1,15 +1,24 @@
-use std::{collections::HashMap, sync::LazyLock};
+use std::{
+    collections::HashMap,
+    sync::{LazyLock, Once},
+};
 
 use slu_ipc::messages::SvcAction;
 use windows::Win32::UI::WindowsAndMessaging::SW_NORMAL;
 
 use crate::{
+    app::emit_to_webviews,
     cli::ServicePipe,
     error::Result,
     state::application::{performance::PERFORMANCE_MODE, FULL_STATE},
+    widgets::window_manager::state::{WmState, WM_LAYOUT_RECTS, WM_STATE},
     windows_api::{window::Window, WindowsApi},
 };
-use seelen_core::{rect::Rect, state::PerformanceMode};
+use seelen_core::{
+    handlers::SeelenEvent,
+    rect::Rect,
+    state::{PerformanceMode, WmRenderTree},
+};
 
 static SCHEDULED_POSITIONS: LazyLock<scc::HashMap<isize, Rect>> = LazyLock::new(scc::HashMap::new);
 
@@ -29,6 +38,12 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
             continue;
         }
 
+        WM_LAYOUT_RECTS.upsert(hwnd, rect.clone());
+        // avoid to move window while dragging
+        if window.is_dragging() {
+            continue;
+        }
+
         if window.is_maximized() {
             window.show_window(SW_NORMAL)?; // unmaximize
         }
@@ -45,7 +60,7 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
 
     SCHEDULED_POSITIONS.scan(|k, v| {
         let window = Window::from(*k);
-        if window.is_window() && !window.is_minimized() {
+        if window.is_window() && !window.is_minimized() && !window.is_dragging() {
             list.insert(*k, v.clone());
         }
     });
@@ -73,4 +88,19 @@ pub fn request_focus(hwnd: isize) -> Result<()> {
     }
     window.focus()?;
     Ok(())
+}
+
+#[tauri::command(async)]
+pub fn wm_get_render_tree() -> WmRenderTree {
+    static TAURI_EVENT_REGISTRATION: Once = Once::new();
+    TAURI_EVENT_REGISTRATION.call_once(|| {
+        WmState::subscribe(|_event| {
+            emit_to_webviews(
+                SeelenEvent::WMTreeChanged,
+                &WM_STATE.lock().get_render_tree(),
+            );
+        });
+    });
+
+    WM_STATE.lock().get_render_tree()
 }

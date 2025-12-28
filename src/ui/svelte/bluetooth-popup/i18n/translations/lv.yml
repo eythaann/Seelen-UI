@@ -1,0 +1,24 @@
+available: Pieejamās ierīces
+cancel: Atcelt
+confirm: Apstiprināt
+confirm_only: Apstipriniet savienošanu pārī
+confirm_pin: Apstipriniet, ka PIN atbilst
+connected: Savienots
+disconnect: Atvienot
+display_pin: Ievadiet šo PIN ierīcē
+lowenergy: Zema enerģija
+more: Vairāk Bluetooth iestatījumu
+no_adapter: Nav atrasts neviens Bluetooth adapteris
+not_found: Netika atrasta neviena ierīce
+pair: Pāris
+paired: Sapārots
+pairing: Notiek savienošana pārī...
+pairing_failed: Savienošana pārī neizdevās
+password: Parole
+provide_address: Ievadiet adresi
+provide_password: Ievadiet lietotājvārdu un paroli
+provide_pin: Ievadiet PIN
+scanning: Notiek ierīču meklēšana...
+unpair: Atvienot pārī
+unpair_failed: Atvienošana pārī neizdevās
+username: Lietotājvārds

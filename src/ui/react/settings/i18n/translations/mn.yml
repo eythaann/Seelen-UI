@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Шинэчлэх
     ok_readonly: Шинэ болгон засах
     options:
-      float: Нисэн өнгөрөх
-      force: Хүч удирдах
-      hidden: Док / Taskbar-аас нуух
-      pinned: Ан хатуу
-      unmanage: Нээлттэй
+      NoInteractive: Интерактив байхгүй
+      VdPinned: Бүх ажлын талбарт үзүүлэх
+      WmFloat: Twm - хөвөх эхлэл
+      WmForce: Twm - хүчээр удирдах
+      WmUnmanage: Twm - Нэхэвч
     options_label: Нэмий сонголт
     title_create: Үүсгэх {{нэр}}}
     title_edit: Засварлах {{нэр}}}
@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Нуухыг хойшлуулах
   delay_to_show: Үзүүлэхийг хойшлуулсан
   dock_side: Байрлал
-  dynamic_color: Доникийн өнгө
-  dynamic_color_tooltip: >-
-    Динамик арын дэвсгэр ба урд талбайн өнгийг төвлөрүүлсэн цонхноос идэвхжүүл.
-    (Өнгө нь сэдвээр хүчингүй болгож болно)
   enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
   height: Өндөрлөг
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: Давхардсан дээр
   label: Балтсний хайрцагны хэрэгсэл
   placeholder: {}
-  show_hibernate: Power цэс дээр Hibernate товчийг харуул
 update:
   available: Шинэчлэх боломжтой!
   channel: Суваг шинэчлэх
@@ -303,7 +298,6 @@ weg:
       all: Бүгд
       label: Тодруулаагүй зүйлсийн харагдах байдал
       on_monitor: Монитор дээр
-    thumbnail_generation_enabled: Барааны Hover дээр Thumbnails үүсгэх
     visible_separators: Харагдах тусгаарлагч
   label: Док / Taskbar
   margin: Саруулган өвс
@@ -328,6 +322,10 @@ wm:
     offset: Хилийн офсет
     width: Хилийн өргөн
   description: Тодорхойлолт / төрөл анги
+  drag_behavior: Чирэх зан үйл
+  drag_behavior_options:
+    sort: Эрэмбэлэх (чирэх үед цонхны дарааллыг өөрчлөх)
+    swap: Солих (цонхыг чирэх төгсгөлд солих)
   enable: Цонхны менежерийг идэвхжүүлэх боломжийг олгох
   layout: Төлөвлөгөө
   resize_delta: Дельтааг өөрчлөх (%)

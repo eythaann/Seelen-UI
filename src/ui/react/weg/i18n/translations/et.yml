@@ -12,17 +12,19 @@ app_menu:
   run_as: Joosta administraatorina
   unpin: Lahti keelama
 context_menu:
+  remove_module: Eemalda moodul
   reorder_disable: Ülesanderiba lukustamine
   reorder_enable: Avage tegumiriba avamine
 media:
   not_playing: Miski ei mängi
-media_menu:
-  remove: Eemaldage meediumimoodul
-start_menu:
-  remove: Eemaldage algusmoodul
+show_desktop:
+  label: Kuva töölaud
+start:
+  label: Menüü Start
 taskbar_menu:
   add_file: PIN -i kohandatud fail
   add_folder: PIN -i kohandatud kaust
+  desktop: Lisage töölauamoodul
   media: Lisage meediumimoodul
   settings: Seaded
   start: Lisage käivitusmoodul

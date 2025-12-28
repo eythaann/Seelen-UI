@@ -1,6 +1,6 @@
 use seelen_core::{
     resource::{ResourceId, ResourceKind, SluResource},
-    state::{Plugin, Theme, Wallpaper, Widget},
+    state::{IconPack, Plugin, Theme, Wallpaper, Widget},
 };
 
 use crate::{error::Result, log_error, resources::RESOURCES};
@@ -96,4 +96,31 @@ pub fn state_get_wallpapers() -> Vec<Arc<Wallpaper>> {
         wallpapers.push(v.clone());
     });
     wallpapers
+}
+
+#[tauri::command(async)]
+pub fn state_get_icon_packs() -> Vec<Arc<IconPack>> {
+    let mut icon_packs = Vec::new();
+
+    // Add system icon pack if it exists
+    if let Some(system_pack) = RESOURCES.system_icon_pack.lock().as_ref() {
+        icon_packs.push(Arc::new(system_pack.clone()));
+    }
+
+    // Add user icon packs
+    RESOURCES.icon_packs.scan(|_, v| {
+        icon_packs.push(v.clone());
+    });
+
+    icon_packs
+}
+
+#[tauri::command(async)]
+pub fn state_delete_cached_icons() -> Result<()> {
+    if let Some(pack) = RESOURCES.system_icon_pack.lock().take() {
+        pack.delete()?;
+    }
+    RESOURCES.ensure_system_icon_pack()?;
+    RESOURCES.emit_icon_packs()?;
+    Ok(())
 }

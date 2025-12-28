@@ -11,7 +11,6 @@ import { MediaModule } from "../media/infra/Module.tsx";
 import { NetworkModule } from "../network/infra/Module.tsx";
 import { NotificationsModule } from "../Notifications/infra/Module.tsx";
 import { PowerModule } from "../Power/infra.tsx";
-import { SettingsModule } from "../QuickAccess/infra.tsx";
 import { UserModule } from "../user/infra/Module.tsx";
 
 import { $plugins } from "../shared/state/items.ts";
@@ -27,7 +26,7 @@ const modulesByType: Record<
   [ToolbarModuleType.Date]: memo(DateModule),
   [ToolbarModuleType.Power]: memo(PowerModule),
   [ToolbarModuleType.Keyboard]: memo(KeyboardModule),
-  [ToolbarModuleType.Settings]: memo(SettingsModule),
+  [ToolbarModuleType.Settings]: memo(TextItem),
   [ToolbarModuleType.Workspaces]: memo(WorkspacesModule),
   [ToolbarModuleType.Bluetooth]: memo(BluetoothModule),
   [ToolbarModuleType.Network]: memo(NetworkModule),

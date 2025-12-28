@@ -12,17 +12,19 @@ app_menu:
   run_as: Jalankan sebagai administrator
   unpin: Membuka peniti
 context_menu:
+  remove_module: Hapus Modul
   reorder_disable: Mengunci bilah tugas
   reorder_enable: Buka kunci bilah tugas
 media:
   not_playing: Tidak ada yang bermain
-media_menu:
-  remove: Hapus Modul Media
-start_menu:
-  remove: Hapus modul Mulai
+show_desktop:
+  label: Tampilkan Desktop
+start:
+  label: Menu Mulai
 taskbar_menu:
   add_file: Pin file khusus
   add_folder: Pin folder khusus
+  desktop: Tambahkan Modul Desktop
   media: Tambahkan modul media
   settings: Pengaturan
   start: Tambahkan modul Mulai

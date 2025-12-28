@@ -12,17 +12,19 @@ app_menu:
   run_as: Hardloop as administrateur
   unpin: Unpin
 context_menu:
+  remove_module: Verwyder module
   reorder_disable: Sluit taakbalk
   reorder_enable: Ontsluit taakbalk
 media:
   not_playing: Niks speel nie
-media_menu:
-  remove: Verwyder die media -module
-start_menu:
-  remove: Verwyder beginmodule
+show_desktop:
+  label: Wys lessenaar
+start:
+  label: Begin Kieslys
 taskbar_menu:
   add_file: Pin Custom File
   add_folder: Pin Custom Folder
+  desktop: Voeg lessenaarmodule by
   media: Voeg mediasmodule by
   settings: Instellings
   start: Voeg beginmodule by

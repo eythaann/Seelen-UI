@@ -14,10 +14,9 @@ use std::{
     sync::{Arc, LazyLock},
     time::{SystemTime, UNIX_EPOCH},
 };
-use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     error::{Result, ResultLogExt},
     modules::{
         apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
@@ -66,6 +65,7 @@ fn temporalise_collection(source: &Vec<WegItem>) -> Vec<WegItem> {
             WegItem::Separator { id: _ }
             | WegItem::Media { id: _ }
             | WegItem::StartMenu { id: _ } => {}
+            WegItem::ShowDesktop { id: _ } => {}
         }
     }
 
@@ -137,8 +137,7 @@ impl SeelenWegState {
     }
 
     pub fn emit_to_webview(&mut self) -> Result<()> {
-        let handle = get_app_handle();
-        handle.emit(SeelenEvent::StateWegItemsChanged, ())?;
+        emit_to_webviews(SeelenEvent::StateWegItemsChanged, ());
         Ok(())
     }
 
@@ -378,7 +377,7 @@ impl SeelenWegState {
         let mut result = HashMap::new();
         let state = FULL_STATE.load();
 
-        for monitor in MonitorEnumerator::get_all_v2()? {
+        for monitor in MonitorEnumerator::enumerate_win32()? {
             let monitor_id = monitor.stable_id()?.into();
             if !state.is_weg_enabled_on_monitor(&monitor_id) {
                 continue;

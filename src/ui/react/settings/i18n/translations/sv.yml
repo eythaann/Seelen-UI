@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Uppdatering
     ok_readonly: Redigera som ny
     options:
-      float: Flyta
-      force: Tvinga sig
-      hidden: Gömma sig från docka/aktivitetsfält
-      pinned: Fästad
-      unmanage: Obehandla
+      NoInteractive: Ingen interaktiv
+      VdPinned: Visa i alla arbetsytor
+      WmFloat: Twm - Börja flyta
+      WmForce: Twm - Force Hantera
+      WmUnmanage: Twm - Unmanage
     options_label: Extra alternativ
     title_create: Skapa {{name}}
     title_edit: Redigera {{name}}
@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Dröjsmål att gömma sig
   delay_to_show: Fördröjning att visa
   dock_side: Position
-  dynamic_color: Dynamisk färg
-  dynamic_color_tooltip: >-
-    Aktivera dynamiska bakgrunds- och förgrundsfärger baserat på fokuserat
-    fönster. (Färgerna kan åsidosättas av teman)
   enable: Aktivera snyggt verktygsfält
   height: Höjd
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: På överlappning
   label: Verktygsfält
   placeholder: {}
-  show_hibernate: Visa knappen för viloläge i Power-menyn
 update:
   available: Uppdatering tillgänglig!
   channel: Uppdateringskanal
@@ -303,7 +298,6 @@ weg:
       all: Alla
       label: Synlighet för lossade objekt
       on_monitor: På bildskärm
-    thumbnail_generation_enabled: Generera miniatyrbilder när objektet rör sig
     visible_separators: Synliga separatorer
   label: Docka/arbetsfält
   margin: Marginal
@@ -328,6 +322,10 @@ wm:
     offset: Gränsförskjutning
     width: Gränsbredd
   description: Beskrivning
+  drag_behavior: Drabeteende
+  drag_behavior_options:
+    sort: Sortera (ordna om fönster medan du drar)
+    swap: Byt (byta fönster på dragänden)
   enable: Aktivera kakelfönsterhanterare
   layout: Layout
   resize_delta: Ändra ändra delta (%)

@@ -75,7 +75,11 @@ pub enum ThemeVariableDefinition {
     /// --var-name: 10%
     /// --var-name: 10vw
     /// ```
-    #[serde(rename = "<length>")]
+    #[serde(
+        rename = "<length-percentage>",
+        alias = "<length>",
+        alias = "<percentage>"
+    )]
     Length(ThemeVariableWithUnit<f64>),
     /// This will allow to users to set any number, without units.
     /// Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/number \
@@ -91,7 +95,8 @@ pub enum ThemeVariableDefinition {
     /// ```css
     /// --var-name: url("https://example.com/image.png")
     /// ```
-    /// ### Warning: using this will make your resource dependent of the url and network connection.
+    /// This will be rendered as a file input on select file the url version of the path will be stored.
+    /// Initial value will be ignored.
     #[serde(rename = "<url>")]
     Url(ThemeVariable<String>),
 }
@@ -99,40 +104,37 @@ pub enum ThemeVariableDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct ThemeVariable<T> {
+    /// Css variable name, example: `--my-css-variable`
+    pub name: CssVariableName,
     /// Label to show to the user on Settings.
     pub label: ResourceText,
     /// Extra details to show to the user under the label on Settings.
-    #[serde(default)]
     pub description: Option<ResourceText>,
     /// Will be rendered as a icon with a tooltip side the label.
-    #[serde(default)]
     pub tip: Option<ResourceText>,
-    /// Css variable name, example: `--my-css-variable`
-    pub name: CssVariableName,
+
     /// Initial variable value, if not manually set by the user.
     pub initial_value: T,
+
+    /// syntax = <string> min length of the input.\
+    /// syntax = <number> min value of the input.
+    pub min: Option<f64>,
+    /// syntax = <string> max length of the input.\
+    /// syntax = <number> max value of the input.
+    pub max: Option<f64>,
+    /// Only used if syntax is `<number>`, setting this will make the input a slider
+    pub step: Option<f64>,
+
     /// If present, this will be rendered as a selector of options instead of an input.
     /// `initial_value` should be present in this list.
-    #[serde(default)]
     pub options: Option<Vec<T>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct ThemeVariableWithUnit<T> {
-    /// Label to show to the user on Settings.
-    pub label: ResourceText,
-    /// Extra details to show to the user under the label on Settings.
-    #[serde(default)]
-    pub description: Option<ResourceText>,
-    /// Will be rendered as a icon with a tooltip side the label.
-    #[serde(default)]
-    pub tip: Option<ResourceText>,
-    /// Css variable name, example: `--my-css-variable`
-    pub name: CssVariableName,
-    /// Initial variable value, if not manually set by the user.
-    pub initial_value: T,
-    /// Css unit, example: `px`
+    #[serde(flatten)]
+    pub _extends: ThemeVariable<T>,
     pub initial_value_unit: String,
 }
 

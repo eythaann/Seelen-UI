@@ -1,84 +1,118 @@
-use seelen_core::state::{Widget, WidgetLoader};
+use std::sync::Arc;
+
+use seelen_core::state::{Widget, WidgetInstanceMode, WidgetStatus};
+use uuid::Uuid;
 
 use crate::{
-    app::get_app_handle, error::Result, state::application::FULL_STATE, utils::WidgetWebviewLabel,
-    widgets::WebviewArgs,
+    state::application::FULL_STATE,
+    utils::{lock_free::SyncHashMap, WidgetWebviewLabel},
+    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview},
 };
 
+pub struct WidgetContainer {
+    pub definition: Arc<Widget>,
+    pub instances: SyncHashMap<WidgetWebviewLabel, WidgetInstance>,
+}
+
+impl WidgetContainer {
+    pub fn create(widget: Arc<Widget>) -> Self {
+        let instances = SyncHashMap::new();
+
+        match widget.instances {
+            WidgetInstanceMode::Single => {
+                let instance = WidgetInstance::create(&widget, None, None);
+                instances.upsert(instance.label.clone(), instance);
+            }
+            WidgetInstanceMode::Multiple => {
+                for replica_id in FULL_STATE.load().get_widget_instances_ids(&widget.id) {
+                    let instance = WidgetInstance::create(&widget, None, Some(&replica_id));
+                    instances.upsert(instance.label.clone(), instance);
+                }
+            }
+            WidgetInstanceMode::ReplicaByMonitor => {}
+        }
+
+        Self {
+            definition: widget,
+            instances,
+        }
+    }
+
+    pub fn start_all_webviews(&self) {
+        self.instances.for_each(|(_k, v)| {
+            v.start_webview(&self.definition);
+        });
+    }
+
+    pub fn start_webview(&self, label: &WidgetWebviewLabel) {
+        self.instances.get(label, |instance| {
+            instance.start_webview(&self.definition);
+        });
+    }
+}
+
 pub struct WidgetInstance {
-    /// main window label
-    label: WidgetWebviewLabel,
-    /// main window
-    window: tauri::WebviewWindow,
-    /// this will be filled only if widget instances is set to multiple
-    extra_instances: Vec<(WidgetWebviewLabel, tauri::WebviewWindow)>,
+    pub label: WidgetWebviewLabel,
+    window: Option<WidgetWebview>,
+    _status: WidgetStatus,
+}
+
+impl WidgetInstance {
+    fn create(widget: &Widget, monitor_id: Option<&str>, instance_id: Option<&Uuid>) -> Self {
+        let label = WidgetWebviewLabel::new(&widget.id, monitor_id, instance_id);
+        log::info!("Registering widget {label}");
+        Self {
+            label,
+            window: None,
+            _status: WidgetStatus::Pending,
+        }
+    }
+
+    pub fn status(&self) -> &WidgetStatus {
+        &self._status
+    }
+
+    pub fn set_status(&mut self, status: WidgetStatus) {
+        log::trace!("{} status changed to: {:?}", self.label, status);
+        self._status = status;
+    }
+
+    pub fn is_ready(&self) -> bool {
+        self.window.is_some() && self.status() == &WidgetStatus::Ready
+    }
+
+    fn start_webview(&mut self, definition: &Widget) {
+        if self.status() == &WidgetStatus::Pending {
+            self.set_status(WidgetStatus::Creating);
+
+            match WidgetWebview::create(definition, &self.label) {
+                Ok(window) => {
+                    let label = self.label.clone();
+                    window.0.on_window_event(move |event| {
+                        if let tauri::WindowEvent::Destroyed = event {
+                            WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
+                                c.instances.get(&label, |w| {
+                                    w.window = None;
+                                    w.set_status(WidgetStatus::Pending);
+                                });
+                            });
+                        }
+                    });
+
+                    self.window = Some(window);
+                    self.set_status(WidgetStatus::Mounting);
+                }
+                Err(err) => {
+                    log::error!("Failed to create webview: {}", err);
+                    self.set_status(WidgetStatus::CrashedOnLoad);
+                }
+            }
+        }
+    }
 }
 
 impl Drop for WidgetInstance {
     fn drop(&mut self) {
-        log::info!("Dropping {:?}", self.label.decoded);
-        let _ = self.window.destroy();
-
-        for (label, window) in self.extra_instances.drain(..) {
-            log::info!("Dropping {:?}", label.decoded);
-            let _ = window.destroy();
-        }
-    }
-}
-
-impl WidgetInstance {
-    pub fn load(widget: &Widget, monitor_id: Option<&str>) -> Result<Self> {
-        let label = WidgetWebviewLabel::new(&widget.id, monitor_id, None);
-        log::info!("Creating {:?}", label.decoded);
-
-        let state = FULL_STATE.load();
-        let title = widget.metadata.display_name.get(state.locale());
-        let window = Self::create_window(widget, title, &label)?;
-
-        let mut extra_instances = vec![];
-        for ins in state.get_widget_instances_ids(&widget.id) {
-            let label = WidgetWebviewLabel::new(&widget.id, monitor_id, Some(&ins));
-            let window = Self::create_window(widget, title, &label)?;
-            extra_instances.push((label, window));
-        }
-
-        let instance = Self {
-            label,
-            window,
-            extra_instances,
-        };
-
-        Ok(instance)
-    }
-
-    fn create_window(
-        widget: &Widget,
-        title: &str,
-        label: &WidgetWebviewLabel,
-    ) -> Result<tauri::WebviewWindow> {
-        let args = WebviewArgs::new().disable_gpu();
-
-        let url = match widget.loader {
-            WidgetLoader::Legacy => {
-                return Err("Legacy widgets are not supported by the new widget loader".into());
-            }
-            WidgetLoader::Internal => {
-                let resource_name = widget.id.resource_name();
-                tauri::WebviewUrl::App(format!("svelte/{resource_name}/index.html").into())
-            }
-            WidgetLoader::ThirdParty => {
-                tauri::WebviewUrl::App("vanilla/third_party/index.html".into())
-            }
-        };
-
-        let window = tauri::WebviewWindowBuilder::new(get_app_handle(), &label.raw, url)
-            .title(title)
-            .transparent(true)
-            .visible(false)
-            .data_directory(args.data_directory())
-            .additional_browser_args(&args.to_string())
-            .build()?;
-
-        Ok(window)
+        log::info!("Dropping {:?}", self.label);
     }
 }

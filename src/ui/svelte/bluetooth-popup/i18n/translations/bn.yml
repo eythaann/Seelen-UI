@@ -1,0 +1,24 @@
+available: উপলব্ধ ডিভাইস
+cancel: বাতিল করুন
+confirm: নিশ্চিত করুন
+confirm_only: পেয়ারিং নিশ্চিত করুন
+confirm_pin: নিশ্চিত করুন যে পিন মিলছে
+connected: সংযুক্ত
+disconnect: সংযোগ বিচ্ছিন্ন করুন
+display_pin: ডিভাইসে এই পিনটি লিখুন
+lowenergy: কম শক্তি
+more: আরও ব্লুটুথ সেটিংস
+no_adapter: কোনো ব্লুটুথ অ্যাডাপ্টার পাওয়া যায়নি
+not_found: কোনো ডিভাইস পাওয়া যায়নি
+pair: জোড়া
+paired: জোড়া হয়েছে
+pairing: পেয়ার করা হচ্ছে...
+pairing_failed: পেয়ার করা ব্যর্থ হয়েছে৷
+password: পাসওয়ার্ড
+provide_address: ঠিকানা লিখুন
+provide_password: ব্যবহারকারীর নাম এবং পাসওয়ার্ড লিখুন
+provide_pin: পিন লিখুন
+scanning: ডিভাইসের জন্য স্ক্যান করা হচ্ছে...
+unpair: আনপেয়ার করুন
+unpair_failed: যুক্ত করা ব্যর্থ হয়েছে৷
+username: ব্যবহারকারীর নাম

@@ -1,0 +1,24 @@
+available: Available Devices
+cancel: Cancel
+confirm: Confirm
+confirm_only: Confirm pairing
+confirm_pin: Confirm that the PIN matches
+connected: Connected
+disconnect: Disconnect
+display_pin: Enter this PIN on the device
+lowenergy: Low Energy
+more: More Bluetooth Settings
+no_adapter: No Bluetooth adapter found
+not_found: No devices found
+pair: Pair
+paired: Paired
+pairing: Pairing...
+pairing_failed: Pairing failed
+password: Password
+provide_address: Enter address
+provide_password: Enter username and password
+provide_pin: Enter PIN
+scanning: Scanning for devices...
+unpair: Unpair
+unpair_failed: Unpairing failed
+username: Username

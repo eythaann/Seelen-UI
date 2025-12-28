@@ -1,0 +1,24 @@
+available: Dispozitive disponibile
+cancel: Anula
+confirm: Confirma
+confirm_only: Confirmați asocierea
+confirm_pin: Confirmați că PIN-ul se potrivește
+connected: Conectat
+disconnect: Deconecta
+display_pin: Introduceți acest PIN pe dispozitiv
+lowenergy: Energie scăzută
+more: Mai multe setări Bluetooth
+no_adapter: Nu a fost găsit niciun adaptor Bluetooth
+not_found: Nu s-au găsit dispozitive
+pair: Pereche
+paired: Împerecheate
+pairing: Asociere...
+pairing_failed: Asocierea nu a reușit
+password: Parolă
+provide_address: Introdu adresa
+provide_password: Introduceți numele de utilizator și parola
+provide_pin: Introduceți codul PIN
+scanning: Se scanează pentru dispozitive...
+unpair: Deconectați
+unpair_failed: Deconectarea nu a reușit
+username: Nume de utilizator

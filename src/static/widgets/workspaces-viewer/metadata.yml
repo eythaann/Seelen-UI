@@ -1,0 +1,8 @@
+id: "@seelen/workspaces-viewer"
+metadata:
+  displayName: !extend i18n/display_name.yml
+instances: Single
+loader: Internal
+preset: Overlay
+hidden: true
+lazy: true

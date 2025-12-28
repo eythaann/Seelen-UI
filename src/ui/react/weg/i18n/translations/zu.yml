@@ -12,17 +12,19 @@ app_menu:
   run_as: Gijima njengomlawuli
   unpin: Unpin
 context_menu:
+  remove_module: Susa Imojuli
   reorder_disable: Khiya i-taskbar
   reorder_enable: Vula i-Taskbar
 media:
   not_playing: Akukho okudlalayo
-media_menu:
-  remove: Susa imodyuli yabezindaba
-start_menu:
-  remove: Susa imodyuli yokuqala
+show_desktop:
+  label: Bonisa Ideskithophu
+start:
+  label: Qala Imenyu
 taskbar_menu:
   add_file: I-PIN ifayela ngokwezifiso
   add_folder: Ifolda yangokwezifiso
+  desktop: Engeza Imojula yedeskithophu
   media: Faka imodyuli yabezindaba
   settings: Izilungiselelo
   start: Faka imodyuli yokuqala

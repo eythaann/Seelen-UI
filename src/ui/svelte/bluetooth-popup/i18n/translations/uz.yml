@@ -1,0 +1,24 @@
+available: Mavjud qurilmalar
+cancel: Bekor qilmoq
+confirm: Tasdiqlamoq
+confirm_only: Juftlashtirishni tasdiqlang
+confirm_pin: Pin o'yinlarini tasdiqlang
+connected: Ulangan
+disconnect: Ajratmoq
+display_pin: Qurilmada ushbu PIN kodini kiriting
+lowenergy: Kam energiya
+more: Bluetooth sozlamalari
+no_adapter: Bluetooth adapteri topilmadi
+not_found: Hech qanday qurilmalar topilmadi
+pair: Juftlik
+paired: Juft
+pairing: Ulanish ...
+pairing_failed: Ulanish muvaffaqiyatsiz tugadi
+password: Parol
+provide_address: Manzilni kiriting
+provide_password: Foydalanuvchi nomi va parolni kiriting
+provide_pin: PIN kodini kiriting
+scanning: Qurilmalar uchun skanerlash ...
+unpair: Yechmoq
+unpair_failed: Biror ishlamay qolmadi
+username: Foydalanuvchi nomi

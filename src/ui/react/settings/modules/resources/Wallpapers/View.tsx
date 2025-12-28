@@ -1,8 +1,8 @@
 import { SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS, WallpaperConfiguration } from "@seelen-ui/lib";
 import type { PlaybackSpeed, WallpaperId, WallpaperInstanceSettings } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import { ResourceText } from "@shared/components/ResourceText";
-import { Wallpaper } from "@shared/components/Wallpaper";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { Wallpaper } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { Button, ColorPicker, Select, Slider, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,8 @@ import { useParams } from "react-router";
 import { newSelectors, RootActions } from "../../shared/store/app/reducer.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
+
+import styles from "./View.module.css";
 
 const playbackSpeeds: `${PlaybackSpeed}`[] = [
   "xDot25",
@@ -59,18 +61,10 @@ export function SingleWallpaperView() {
 
   return (
     <>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "16 / 9",
-          backgroundColor: "#000",
-          overflow: "hidden",
-          marginBottom: "10px",
-          borderRadius: "10px",
-        }}
-      >
-        <Wallpaper definition={editingWallpaper} config={config} />
+      <div className={styles.previewContainer}>
+        <div className={styles.preview}>
+          <Wallpaper definition={editingWallpaper} config={config} muted />
+        </div>
       </div>
 
       <SettingsGroup>

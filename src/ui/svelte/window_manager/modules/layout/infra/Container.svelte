@@ -1,6 +1,5 @@
 <script lang="ts">
   import { WmNodeKind } from "@seelen-ui/lib/types";
-  import { cx } from "@shared/styles";
   import type { Node } from "../domain.ts";
   import { NodeUtils } from "../../shared/utils.ts";
   import Leaf from "./containers/Leaf.svelte";
@@ -22,7 +21,7 @@
   {:else if node.type === WmNodeKind.Horizontal || node.type === WmNodeKind.Vertical}
     <div
       style:flex-grow={node.growFactor}
-      class={cx("wm-container", `wm-${node.type.toLowerCase()}`)}
+      class={["wm-container", `wm-${node.type.toLowerCase()}`]}
     >
       {#each node.children as child, idx (idx)}
         <Container node={child} />

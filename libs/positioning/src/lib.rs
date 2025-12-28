@@ -5,6 +5,7 @@ pub mod minimization;
 pub mod rect;
 
 use std::collections::HashMap;
+use std::sync::Arc;
 
 use crate::{
     api::{force_redraw_window, get_window_rect, is_explorer, position_window},
@@ -14,12 +15,12 @@ use crate::{
 };
 
 #[derive(Debug, Default)]
-pub struct Positioner {
+pub struct PositionerBuilder {
     /// key-pair of window id and its desired position
     pub to_positioning: HashMap<isize, Rect>,
 }
 
-pub struct WinDataForAnimation {
+struct WinDataForAnimation {
     hwnd: isize,
     from: Rect,
     to: Rect,
@@ -27,7 +28,7 @@ pub struct WinDataForAnimation {
     is_explorer: bool,
 }
 
-impl Positioner {
+impl PositionerBuilder {
     pub fn new() -> Self {
         Self::default()
     }
@@ -52,93 +53,81 @@ impl Positioner {
         Ok(())
     }
 
-    /// Place all windows to their desired position with animation,
-    /// this will lock the thread until the animation is finished.
-    pub fn place_animated(
-        &self,
-        duration_ms: u64,
-        easing: Easing,
-        on_end: impl Fn(Result<bool>) + Sync + Send + 'static,
-    ) -> Result<AppWinAnimation> {
-        let mut animation = AppWinAnimation::new(duration_ms, easing);
-        animation.batch = self.to_positioning.clone();
-        animation.start(on_end)?;
-        Ok(animation)
+    /// Get the batch as a HashMap
+    pub fn build(self) -> HashMap<isize, Rect> {
+        self.to_positioning
     }
 }
 
-pub struct AppWinAnimation {
-    batch: HashMap<isize, Rect>,
-    easing: Easing,
-    duration_ms: u64,
-    animation_interrupt_signals: Vec<std::sync::mpsc::Sender<()>>,
-    animation_threads: Vec<std::thread::JoinHandle<()>>,
+/// Manages the animation of a single window
+pub struct WindowAnimation {
+    hwnd: isize,
+    interrupt_signal: Option<std::sync::mpsc::Sender<()>>,
+    animation_thread: Option<std::thread::JoinHandle<()>>,
 }
 
-impl AppWinAnimation {
-    fn new(duration_ms: u64, easing: Easing) -> Self {
+impl WindowAnimation {
+    fn new() -> Self {
         Self {
-            batch: HashMap::new(),
-            easing,
-            duration_ms,
-            animation_interrupt_signals: Vec::new(),
-            animation_threads: Vec::new(),
+            hwnd: 0,
+            interrupt_signal: None,
+            animation_thread: None,
         }
     }
 
-    fn start<F>(&mut self, on_end: F) -> Result<()>
+    /// Start animating this window. If already animating, interrupt and restart.
+    fn start<F>(
+        &mut self,
+        hwnd: isize,
+        target_rect: Rect,
+        easing: Easing,
+        duration_ms: u64,
+        on_end: Arc<F>,
+    ) -> Result<()>
     where
         F: Fn(Result<bool>) + Sync + Send + 'static,
     {
-        self.interrupt(); // interrupt previous animation if any
-        self.wait(); // ensure previous run of this animation is finished
-        let mut list = Vec::new();
+        // Interrupt any existing animation for this window
+        self.interrupt();
+        self.wait();
 
-        for (win_id, desired_rect) in self.batch.iter() {
-            let initial_rect = get_window_rect(*win_id)?;
-            let is_size_changing = initial_rect.width != desired_rect.width
-                || initial_rect.height != desired_rect.height;
-            let is_position_changing =
-                initial_rect.x != desired_rect.x || initial_rect.y != desired_rect.y;
-            // skip windows that are already in the desired position
-            if !is_size_changing && !is_position_changing {
-                continue;
-            }
-            list.push(WinDataForAnimation {
-                hwnd: *win_id,
-                from: initial_rect,
-                to: *desired_rect,
-                is_size_changing,
-                is_explorer: is_explorer(*win_id)?,
-            });
-        }
+        self.hwnd = hwnd;
 
-        // there is nothing to animate
-        if list.is_empty() {
+        // Get initial rect
+        let initial_rect = get_window_rect(hwnd)?;
+        let is_size_changing =
+            initial_rect.width != target_rect.width || initial_rect.height != target_rect.height;
+        let is_position_changing =
+            initial_rect.x != target_rect.x || initial_rect.y != target_rect.y;
+
+        // Skip if already in position
+        if !is_size_changing && !is_position_changing {
             return Ok(());
         }
 
-        let easing = self.easing;
-        let animation_duration = std::time::Duration::from_millis(self.duration_ms);
+        let data = WinDataForAnimation {
+            hwnd,
+            from: initial_rect,
+            to: target_rect,
+            is_size_changing,
+            is_explorer: is_explorer(hwnd)?,
+        };
 
-        let on_end = std::sync::Arc::new(on_end);
-        for data in list {
-            let (tx, rx) = std::sync::mpsc::channel::<()>();
+        let (tx, rx) = std::sync::mpsc::channel::<()>();
+        let animation_duration = std::time::Duration::from_millis(duration_ms);
 
-            let on_end = on_end.clone();
-            let thread = std::thread::spawn(move || {
-                let result = Self::perform(&data, easing, animation_duration, rx);
-                on_end(result);
-            });
+        let thread = std::thread::spawn(move || {
+            let result = Self::perform(&data, easing, animation_duration, rx);
+            on_end(result);
+        });
 
-            self.animation_interrupt_signals.push(tx);
-            self.animation_threads.push(thread);
-        }
+        self.interrupt_signal = Some(tx);
+        self.animation_thread = Some(thread);
 
         Ok(())
     }
 
-    /// returns true if animation was interrupted/canceled
+    /// Returns true if animation was interrupted/canceled
     fn perform(
         data: &WinDataForAnimation,
         easing: Easing,
@@ -175,7 +164,7 @@ impl AppWinAnimation {
         }
 
         if !interrupted {
-            log::trace!("Animation completed in {frames} frames");
+            log::trace!("Animation({:?}) completed in {frames} frames", data.hwnd);
             let _ = force_redraw_window(data.hwnd);
         }
 
@@ -183,24 +172,84 @@ impl AppWinAnimation {
     }
 
     pub fn is_running(&self) -> bool {
-        !self.animation_threads.is_empty()
+        self.animation_thread.is_some()
     }
 
-    /// Interrupt the animation
-    pub fn interrupt(&mut self) {
-        let signals = std::mem::take(&mut self.animation_interrupt_signals);
-        for signal in signals {
+    fn interrupt(&mut self) {
+        if let Some(signal) = self.interrupt_signal.take() {
             let _ = signal.send(());
         }
     }
 
-    /// Wait for the animation to finish, and return the result of the last performed animation
-    pub fn wait(&mut self) {
-        let threads = std::mem::take(&mut self.animation_threads);
-        for animation_thread in threads {
-            animation_thread
-                .join()
-                .expect("Join animation thread failed");
+    fn wait(&mut self) {
+        if let Some(thread) = self.animation_thread.take() {
+            let _ = thread.join();
         }
+    }
+}
+
+impl Drop for WindowAnimation {
+    fn drop(&mut self) {
+        self.interrupt();
+        self.wait();
+    }
+}
+
+/// Orchestrates animations for multiple windows, allowing per-window interruption
+pub struct AnimationOrchestrator {
+    animations: scc::HashMap<isize, WindowAnimation>,
+}
+
+impl AnimationOrchestrator {
+    pub fn new() -> Self {
+        Self {
+            animations: scc::HashMap::new(),
+        }
+    }
+
+    /// Animate a batch of windows with the given duration and easing.
+    /// If a window in the batch is already animating, it will be interrupted and restarted.
+    /// Other windows not in the batch will continue animating uninterrupted.
+    pub fn animate_batch<F>(
+        &self,
+        batch: HashMap<isize, Rect>,
+        duration_ms: u64,
+        easing: Easing,
+        on_end: F,
+    ) -> Result<()>
+    where
+        F: Fn(Result<bool>) + Sync + Send + 'static,
+    {
+        let on_end = Arc::new(on_end);
+        for (hwnd, rect) in batch {
+            self.animate_window(hwnd, rect, duration_ms, easing, on_end.clone())?;
+        }
+        Ok(())
+    }
+
+    fn animate_window<F>(
+        &self,
+        hwnd: isize,
+        target_rect: Rect,
+        duration_ms: u64,
+        easing: Easing,
+        on_end: Arc<F>,
+    ) -> Result<()>
+    where
+        F: Fn(Result<bool>) + Sync + Send + 'static,
+    {
+        // Start animation (this will interrupt any existing animation for this window only)
+        let mut animation = self
+            .animations
+            .entry(hwnd)
+            .or_insert_with(WindowAnimation::new);
+        animation.start(hwnd, target_rect, easing, duration_ms, on_end)?;
+        Ok(())
+    }
+}
+
+impl Default for AnimationOrchestrator {
+    fn default() -> Self {
+        Self::new()
     }
 }

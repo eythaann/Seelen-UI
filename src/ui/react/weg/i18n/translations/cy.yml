@@ -12,17 +12,19 @@ app_menu:
   run_as: Rhedeg fel Gweinyddwr
   unpin: Dadleuon
 context_menu:
+  remove_module: Dileu Modiwl
   reorder_disable: Bar tasgau clo
   reorder_enable: Datgloi Bar Tasg
 media:
   not_playing: Nid oes dim yn chwarae
-media_menu:
-  remove: Dileu Modiwl Cyfryngau
-start_menu:
-  remove: Tynnwch y modiwl cychwyn
+show_desktop:
+  label: Dangos Penbwrdd
+start:
+  label: Dewislen Cychwyn
 taskbar_menu:
   add_file: Pin ffeil arfer
   add_folder: Pin ffolder arfer
+  desktop: Ychwanegu Modiwl Penbwrdd
   media: Ychwanegu Modiwl Cyfryngau
   settings: Gosodiadau
   start: Ychwanegu Modiwl Start

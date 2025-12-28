@@ -13,7 +13,9 @@ pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
     let mut founds = Vec::new();
     WindowEnumerator::new().for_each(|hwnd| {
         let class = WindowsApi::get_class(hwnd);
-        if class == "Shell_TrayWnd" || class == "Shell_SecondaryTrayWnd" {
+        if (class == "Shell_TrayWnd" || class == "Shell_SecondaryTrayWnd")
+            && WindowsApi::get_title(hwnd).is_empty()
+        {
             founds.push(hwnd);
         }
     })?;

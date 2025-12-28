@@ -2,8 +2,12 @@
   import { SystrayIconAction, type SysTrayIconId } from "@seelen-ui/lib/types";
   import { state } from "./state.svelte";
   import { convertFileSrc } from "@tauri-apps/api/core";
-  import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { MissingIcon } from "libs/ui/svelte/components/Icon";
+
+  $effect(() => {
+    Widget.getCurrent().ready();
+  });
 
   function onClick(event: MouseEvent, id: SysTrayIconId) {
     // prevent be triggered by double click
@@ -41,27 +45,27 @@
   ];
 </script>
 
-<div class="system-tray">
+<div class={["slu-standard-popover", "system-tray"]}>
   {#each state.trayItems as item}
     {#if item.is_visible && (!item.guid || !GUIDS_TO_IGNORE.includes(item.guid))}
       <button
         class="system-tray-item"
-        on:click={(e) => onClick(e, item.stable_id)}
-        on:dblclick={(e) => onDoubleClick(e, item.stable_id)}
-        on:contextmenu={(e) => onClick(e, item.stable_id)}
-        on:mouseenter={() => {
+        onclick={(e) => onClick(e, item.stable_id)}
+        ondblclick={(e) => onDoubleClick(e, item.stable_id)}
+        oncontextmenu={(e) => onClick(e, item.stable_id)}
+        onmouseenter={() => {
           /* invoke(SeelenCommand.SendSystemTrayIconAction, {
             id: item.stable_id,
             action: SystrayIconAction.HoverEnter,
           }); */
         }}
-        on:mousemove={() => {
+        onmousemove={() => {
           /* invoke(SeelenCommand.SendSystemTrayIconAction, {
             id: item.stable_id,
             action: SystrayIconAction.HoverMove,
           }); */
         }}
-        on:mouseleave={() => {
+        onmouseleave={() => {
           /* invoke(SeelenCommand.SendSystemTrayIconAction, {
             id: item.stable_id,
             action: SystrayIconAction.HoverLeave,
@@ -86,15 +90,3 @@
     {/if}
   {/each}
 </div>
-
-<style>
-  :global(body) {
-    background-color: transparent;
-    overflow: hidden;
-  }
-
-  :global(#root) {
-    width: min-content;
-    height: min-content;
-  }
-</style>

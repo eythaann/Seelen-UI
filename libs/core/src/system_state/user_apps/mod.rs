@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use crate::system_state::MonitorId;
+use crate::{rect::Rect, system_state::MonitorId};
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
@@ -8,12 +8,15 @@ pub struct FocusedApp {
     pub hwnd: isize,
     pub monitor: MonitorId,
     pub title: String,
+    pub class: String,
     pub name: String,
-    pub exe: Option<PathBuf>, // todo remove this and refactor weg items to a shared windows state
-    pub umid: Option<String>, // todo remove this and refactor weg items to a shared windows state
+    pub exe: Option<PathBuf>,
+    pub umid: Option<String>,
     pub is_maximized: bool,
     pub is_fullscreened: bool,
     pub is_seelen_overlay: bool,
+    /// this is the rect of the window, without the shadow.
+    pub rect: Option<Rect>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -45,4 +48,13 @@ pub struct UserAppWindow {
 pub struct ProcessInformation {
     pub id: u32,
     pub path: Option<PathBuf>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct UserAppWindowPreview {
+    pub hash: String,
+    pub path: PathBuf,
+    pub width: u32,
+    pub height: u32,
 }

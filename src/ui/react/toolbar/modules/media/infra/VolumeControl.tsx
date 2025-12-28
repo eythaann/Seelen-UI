@@ -1,5 +1,5 @@
 import { SeelenCommand } from "@seelen-ui/lib";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon";
 import { invoke } from "@tauri-apps/api/core";
 import { Slider, Tooltip } from "antd";
 import { throttle } from "lodash";

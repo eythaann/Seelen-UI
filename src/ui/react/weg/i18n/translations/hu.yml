@@ -12,17 +12,19 @@ app_menu:
   run_as: Futtatás rendszergazdaként
   unpin: Kibont
 context_menu:
+  remove_module: Modul eltávolítása
   reorder_disable: Feladatsáv zárolása
   reorder_enable: Feloldja a tálcát
 media:
   not_playing: Semmi sem játszik
-media_menu:
-  remove: Távolítsa el a média modult
-start_menu:
-  remove: Távolítsa el a Start modult
+show_desktop:
+  label: Asztal megjelenítése
+start:
+  label: Start menü
 taskbar_menu:
   add_file: Pin egyedi fájl
   add_folder: Pin egyéni mappa
+  desktop: Asztali modul hozzáadása
   media: Adjon hozzá média modult
   settings: Beállítások elemre
   start: Adja hozzá a Start modult

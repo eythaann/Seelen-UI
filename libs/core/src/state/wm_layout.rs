@@ -1,17 +1,10 @@
-use std::cell::Cell;
+use std::{cell::Cell, collections::HashMap};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
-pub enum WmNodeKind {
-    /// node will not grow, this is the final node.
-    Leaf,
-    /// node will grow on z-axis
-    Stack,
-    /// node will grow on y-axis
-    Vertical,
-    /// node will grow on x-axis
-    Horizontal,
-}
+use crate::system_state::MonitorId;
+
+#[derive(Debug, Serialize, Deserialize, JsonSchema, TS)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+pub struct WmRenderTree(pub HashMap<MonitorId, WmNode>);
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -98,21 +91,17 @@ impl Default for WmNode {
     }
 }
 
-impl std::fmt::Display for WmNode {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self.kind {
-            WmNodeKind::Vertical | WmNodeKind::Horizontal => {
-                let children = self
-                    .children
-                    .iter()
-                    .map(|n| n.to_string())
-                    .collect::<Vec<_>>();
-                write!(f, "{:?} Container [{}]", self.kind, children.join(", "))
-            }
-            WmNodeKind::Leaf => write!(f, "Leaf({:?})", self.windows.first()),
-            WmNodeKind::Stack => write!(f, "Stack({:?})", self.windows),
-        }
-    }
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum WmNodeKind {
+    /// node will not grow, this is the final node.
+    Leaf,
+    /// node will grow on z-axis
+    Stack,
+    /// node will grow on y-axis
+    Vertical,
+    /// node will grow on x-axis
+    Horizontal,
 }
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]

@@ -1,0 +1,22 @@
+[package]
+name = "sluhk"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_System_LibraryLoader",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Shell",
+    "Win32_System_DataExchange",
+] }
+windows-core = { workspace = true }
+parking_lot = { workspace = true }
+uuid = { workspace = true, features = ["serde"] }
+
+# Usamos la librería IPC del proyecto
+slu-ipc = { path = "../../libs/slu-ipc" }

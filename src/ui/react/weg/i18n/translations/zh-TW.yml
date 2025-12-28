@@ -12,17 +12,19 @@ app_menu:
   run_as: 作為管理員運行
   unpin: Uncin
 context_menu:
+  remove_module: 移除模塊
   reorder_disable: 鎖任務欄
   reorder_enable: 解鎖任務欄
 media:
   not_playing: 什麼都沒有玩
-media_menu:
-  remove: 刪除媒體模塊
-start_menu:
-  remove: 刪除開始模塊
+show_desktop:
+  label: 顯示桌面
+start:
+  label: 開始菜單
 taskbar_menu:
   add_file: 引導自定義文件
   add_folder: 引腳自定義文件夾
+  desktop: 添加桌面模塊
   media: 添加媒體模塊
   settings: 設定
   start: 添加開始模塊

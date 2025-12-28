@@ -1,4 +1,5 @@
 import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../handlers/mod.ts";
+import { RuntimeStyleSheet } from "../utils/DOM.ts";
 import { newFromInvoke, newOnEvent } from "../utils/State.ts";
 import type { Color as IColor, UIColors as IUIColors } from "@seelen-ui/types";
 
@@ -29,38 +30,51 @@ export class UIColors {
   }
 
   setAsCssVariables(): void {
-    const id = "system-ui-color-variables";
-    document.getElementById(id)?.remove();
-    const element = document.createElement("style");
-    element.id = id;
-    element.textContent = ":root {\n";
+    const oldStyles = new RuntimeStyleSheet("@deprecated/system-colors");
+    const newStyles = new RuntimeStyleSheet("@runtime/system-colors");
 
     for (const [key, value] of Object.entries(this.inner)) {
       if (typeof value !== "string") {
         continue;
       }
-      const hex = value.replace("#", "").slice(0, 6);
-      const color = parseInt(hex, 16);
-      const r = (color >> 16) & 255;
-      const g = (color >> 8) & 255;
-      const b = color & 255;
+
+      const color = Color.fromHex(value);
+      const { r, g, b } = color;
 
       // replace rust snake case with kebab case
       const name = key.replace("_", "-");
-      element.textContent += `--system-${name}-color: ${value.slice(0, 7)};\n`;
-      element.textContent += `--system-${name}-color-rgb: ${r}, ${g}, ${b};\n`;
 
       // @deprecated old names
-      element.textContent += `--config-${name}-color: ${value.slice(0, 7)};\n`;
-      element.textContent += `--config-${name}-color-rgb: ${r}, ${g}, ${b};\n`;
+      oldStyles.addVariable(`--config-${name}-color`, value.slice(0, 7));
+      oldStyles.addVariable(`--config-${name}-color-rgb`, `${r}, ${g}, ${b}`);
+
+      if (name.startsWith("accent")) {
+        newStyles.addVariable(`--system-${name}-color`, value.slice(0, 7));
+        newStyles.addVariable(`--system-${name}-color-rgb`, `${r}, ${g}, ${b}`);
+
+        const complement = color.complementary();
+        newStyles.addVariable(`--system-${name}-complementary-color`, complement.toHexString());
+        newStyles.addVariable(
+          `--system-${name}-complementary-color-rgb`,
+          `${complement.r}, ${complement.g}, ${complement.b}`,
+        );
+      }
     }
 
-    document.head.appendChild(element);
+    oldStyles.applyToDocument();
+    newStyles.applyToDocument();
   }
 }
 
+export interface Color extends IColor {}
+
 export class Color {
-  constructor(public inner: IColor) {}
+  constructor(obj: IColor) {
+    this.r = obj.r;
+    this.g = obj.g;
+    this.b = obj.b;
+    this.a = obj.a;
+  }
 
   /** generates a random solid color */
   static random(): Color {
@@ -70,6 +84,41 @@ export class Color {
       b: Math.floor(Math.random() * 255),
       a: 255,
     });
+  }
+
+  static fromHex(hex: string): Color {
+    if (hex.startsWith("#")) {
+      hex = hex.slice(1);
+    }
+
+    if (hex.length === 3) {
+      hex = hex
+        .split("")
+        .map((char) => `${char}${char}`)
+        .join("");
+    }
+
+    if (hex.length === 6) {
+      hex = hex.padStart(8, "f");
+    }
+
+    const color = parseInt(hex.replace("#", ""), 16);
+    return new Color({
+      r: (color >> 24) & 255,
+      g: (color >> 16) & 255,
+      b: (color >> 8) & 255,
+      a: color & 255,
+    });
+  }
+
+  toHexString(): string {
+    return (
+      "#" +
+      this.r.toString(16).padStart(2, "0") +
+      this.g.toString(16).padStart(2, "0") +
+      this.b.toString(16).padStart(2, "0") +
+      (this.a === 255 ? "" : this.a.toString(16).padStart(2, "0"))
+    );
   }
 
   private getRuntimeStyleSheet(): HTMLStyleElement {
@@ -102,16 +151,6 @@ export class Color {
     sheet.textContent = lines.join("\n");
   }
 
-  toHexString(): string {
-    return (
-      "#" +
-      this.inner.r.toString(16).padStart(2, "0") +
-      this.inner.g.toString(16).padStart(2, "0") +
-      this.inner.b.toString(16).padStart(2, "0") +
-      this.inner.a.toString(16).padStart(2, "0")
-    );
-  }
-
   /**
    * @param name the name of the color
    * the name will be parsed to lower kebab case and remove non-alphanumeric characters
@@ -128,8 +167,8 @@ export class Color {
 
     this.insertIntoStyleSheet({
       [`--color-${parsedName}`]: this.toHexString(),
-      [`--color-${parsedName}-rgb`]: `${this.inner.r}, ${this.inner.g}, ${this.inner.b}`,
-      [`--color-${parsedName}-rgba`]: `${this.inner.r}, ${this.inner.g}, ${this.inner.b}, ${this.inner.a}`,
+      [`--color-${parsedName}-rgb`]: `${this.r}, ${this.g}, ${this.b}`,
+      [`--color-${parsedName}-rgba`]: `${this.r}, ${this.g}, ${this.b}, ${this.a}`,
     });
   }
 
@@ -140,15 +179,23 @@ export class Color {
    * @returns a number between 0 and 255
    */
   calcLuminance(accuracy?: boolean): number {
-    const { r, g, b } = this.inner;
     if (accuracy) {
       // gamma correction
-      const gR = r ** 2.2;
-      const gG = g ** 2.2;
-      const gB = b ** 2.2;
+      const gR = this.r ** 2.2;
+      const gG = this.g ** 2.2;
+      const gB = this.b ** 2.2;
       return (0.299 * gR + 0.587 * gG + 0.114 * gB) ** (1 / 2.2);
     }
     // standard algorithm
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    return 0.2126 * this.r + 0.7152 * this.g + 0.0722 * this.b;
+  }
+
+  complementary(): Color {
+    return new Color({
+      r: 255 - this.r,
+      g: 255 - this.g,
+      b: 255 - this.b,
+      a: this.a,
+    });
   }
 }

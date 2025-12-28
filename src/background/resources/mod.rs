@@ -1,6 +1,7 @@
 pub mod cli;
 pub mod commands;
 mod emitters;
+mod system_icon_pack;
 
 use std::{
     path::{Path, PathBuf},
@@ -13,25 +14,39 @@ use seelen_core::{
 };
 
 use crate::{
-    error::Result,
-    utils::{constants::SEELEN_COMMON, date_based_hex_id},
+    error::{Result, ResultLogExt},
+    utils::{constants::SEELEN_COMMON, date_based_hex_id, lock_free::TracedMutex},
 };
 
-pub static RESOURCES: LazyLock<Arc<ResourceManager>> =
-    LazyLock::new(|| Arc::new(ResourceManager::default()));
+pub static RESOURCES: LazyLock<Arc<ResourceManager>> = LazyLock::new(|| {
+    let resources = ResourceManager::default();
+    resources.initialize();
+    Arc::new(resources)
+});
 
 #[derive(Default)]
 pub struct ResourceManager {
     pub themes: scc::HashMap<ThemeId, Arc<Theme>>,
     pub plugins: scc::HashMap<PluginId, Arc<Plugin>>,
     pub widgets: scc::HashMap<WidgetId, Arc<Widget>>,
-    pub icon_packs: scc::HashMap<IconPackId, Arc<IconPack>>,
     pub wallpapers: scc::HashMap<WallpaperId, Arc<Wallpaper>>,
+    /// this list doesn't include the system icon pack, this is managed by the system_icon_pack field.
+    pub icon_packs: scc::HashMap<IconPackId, Arc<IconPack>>,
+    /// current system icon pack
+    pub system_icon_pack: Arc<TracedMutex<Option<IconPack>>>,
     /// list of manual loaded resources
     pub manual: scc::HashSet<PathBuf>,
 }
 
 impl ResourceManager {
+    fn initialize(&self) {
+        self.load_all_of_type(ResourceKind::Theme).log_error();
+        self.load_all_of_type(ResourceKind::Plugin).log_error();
+        self.load_all_of_type(ResourceKind::Widget).log_error();
+        self.load_all_of_type(ResourceKind::Wallpaper).log_error();
+        self.load_all_of_type(ResourceKind::IconPack).log_error();
+    }
+
     pub fn load(&self, kind: &ResourceKind, path: &Path) -> Result<()> {
         match kind {
             ResourceKind::Theme => {
@@ -94,11 +109,20 @@ impl ResourceManager {
                     .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
             }
             ResourceKind::IconPack => {
-                let mut icon_pack = IconPack::load(path)?;
-                icon_pack.metadata.internal.bundled =
-                    path == SEELEN_COMMON.user_icons_path().join("system");
-                self.icon_packs
-                    .upsert(icon_pack.id.clone(), Arc::new(icon_pack));
+                let is_system = path == SEELEN_COMMON.system_icon_pack_path();
+                if is_system {
+                    let mut system_pack = self.system_icon_pack.lock();
+                    if system_pack.is_none() {
+                        let mut icon_pack = IconPack::load(path)?;
+                        icon_pack.metadata.internal.bundled = true;
+                        // we only read the system icon pack once, after that it is entirely runtime managed
+                        *system_pack = Some(icon_pack);
+                    }
+                } else {
+                    let icon_pack = IconPack::load(path)?;
+                    self.icon_packs
+                        .upsert(icon_pack.id.clone(), Arc::new(icon_pack));
+                }
             }
             ResourceKind::SoundPack => {
                 // feature not implemented
@@ -199,8 +223,11 @@ impl ResourceManager {
     }
 
     pub fn load_all_of_type(&self, kind: ResourceKind) -> Result<()> {
+        log::trace!("Loading {kind:?}s");
+
         let entries = Self::get_entries_for_type(&kind)?;
         self.unload_all(&kind);
+
         for entry in entries.into_iter().flatten().flatten() {
             match self.load(&kind, &entry.path()) {
                 Ok(_) => {}
@@ -208,6 +235,13 @@ impl ResourceManager {
                     log::error!("Failed to load {kind:?}, error: {e}");
                 }
             }
+        }
+
+        if kind == ResourceKind::IconPack {
+            // try load system icon pack
+            let _ = self.load(&kind, SEELEN_COMMON.system_icon_pack_path());
+            // creates the system icon pack if not loaded
+            self.ensure_system_icon_pack()?;
         }
         Ok(())
     }

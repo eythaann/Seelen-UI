@@ -12,17 +12,19 @@ app_menu:
   run_as: U ordo sidii maamule
   unpin: Aan qarin
 context_menu:
+  remove_module: Ka saar Module
   reorder_disable: Qufulka Qufulka
   reorder_enable: Unlock Taskbarbar
 media:
   not_playing: Ma jiraan wax ciyaaraya
-media_menu:
-  remove: Ka saar cutubka warbaahinta
-start_menu:
-  remove: Ka saar cutubka bilowga
+show_desktop:
+  label: Muuji Desktop
+start:
+  label: Bilow Menu
 taskbar_menu:
   add_file: Faylka caadada PIN
   add_folder: Faylkaaga caadada PIN
+  desktop: Kudar Module Desktop
   media: Ku dar module warbaahinta
   settings: Dejinta
   start: Ku dar cutubka bilowga

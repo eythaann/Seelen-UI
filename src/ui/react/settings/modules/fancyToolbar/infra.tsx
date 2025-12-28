@@ -1,6 +1,6 @@
 import { FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import { Button, InputNumber, Select, Switch, Tooltip } from "antd";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { Button, InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -56,18 +56,6 @@ export function FancyToolbarSettings() {
               ))}
             </Button.Group>
           </SettingsOption>
-          <SettingsOption>
-            <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-              {t("toolbar.dynamic_color")}
-              <Tooltip title={t("toolbar.dynamic_color_tooltip")}>
-                <Icon iconName="LuCircleHelp" />
-              </Tooltip>
-            </span>
-            <Switch
-              checked={settings.dynamicColor}
-              onChange={(value) => dispatch(FancyToolbarActions.setDynamicColor(value))}
-            />
-          </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
 
@@ -108,16 +96,6 @@ export function FancyToolbarSettings() {
             />
           </SettingsOption>
         </SettingsSubGroup>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t("toolbar.show_hibernate")}</b>
-          <Switch
-            checked={settings.showHibernateButton}
-            onChange={(value) => dispatch(FancyToolbarActions.setShowHibernateButton(value))}
-          />
-        </SettingsOption>
       </SettingsGroup>
     </>
   );

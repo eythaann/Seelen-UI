@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: යාවත්කාලීන කරන්න
     ok_readonly: නව ලෙස සංස්කරණය කරන්න
     options:
-      float: පාවෙන
-      force: බල කළමනාකරණය
-      hidden: තටාකයේ / කාර්ය තීරුවෙන් සඟවන්න
-      pinned: පින් කර ඇත
-      unmanage: කළමනාකරණය කරන්න
+      NoInteractive: අන්තර්ක්‍රියාකාරී නැත
+      VdPinned: සියලුම වැඩබිම්වල පෙන්වන්න
+      WmFloat: Twm - පාවෙන ආරම්භ කරන්න
+      WmForce: Twm - බල කළමනාකරණය
+      WmUnmanage: Twm - කළමනාකරණය කරන්න
     options_label: අමතර විකල්ප
     title_create: '{{name}} නිර්මාණය කරමින්'
     title_edit: සංස්කරණය {{name}}
@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: සැඟවීමට ප්රමාද
   delay_to_show: පෙන්වීමට ප්‍රමාදය
   dock_side: තනතුර
-  dynamic_color: ගතික වර්ණය
-  dynamic_color_tooltip: >-
-    අවධානය යොමු වූ කවුළුව මත පදනම්ව ගතික පසුබිම සහ පෙරබිම් වර්ණ සක්රීය කරන්න.
-    (වර්ණ තේමාවන් විසින් අභිබවා යා හැකිය)
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
   height: උස
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: අතිච්ඡාදනය මත
   label: මෙවලම් තීරුව
   placeholder: {}
-  show_hibernate: බල මෙනුවෙහි ශිශිරතාංක බොත්තම පෙන්වන්න
 update:
   available: යාවත්කාලීන කිරීම!
   channel: නාලිකාව යාවත්කාලීන කරන්න
@@ -304,7 +299,6 @@ weg:
       all: සියල්ල
       label: ඇමුණුම් නොකළ අයිතම දෘශ්‍යතාව
       on_monitor: මොනිටරය මත
-    thumbnail_generation_enabled: අයිතමයේ සැරිසරන සිඟිති රූප ජනනය කරන්න
     visible_separators: දෘශ්‍ය බෙදුම්කරුවන්
   label: ඩොක්/කාර්ය තීරුව
   margin: ආන්තිකය
@@ -329,6 +323,10 @@ wm:
     offset: මායිම් ඕෆ්සෙට්
     width: මායිම් පළල
   description: විස්තර
+  drag_behavior: ඇදගෙන යාමේ හැසිරීම
+  drag_behavior_options:
+    sort: වර්ග කරන්න (ඇදගෙන යන අතරතුර කවුළු නැවත සකසන්න)
+    swap: Swap (drag end මත windows swap)
   enable: ටයිල්ලිං කවුළු කළමනාකරු සක්රීය කරන්න
   layout: පිරිසැලසුම
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)

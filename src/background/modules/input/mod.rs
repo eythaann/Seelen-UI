@@ -1,5 +1,4 @@
 pub mod application;
-pub mod domain;
 pub mod infrastructure;
 
 use std::cmp::max;
@@ -9,9 +8,9 @@ use std::str::Chars;
 use std::thread::sleep;
 use std::time::Duration;
 
-use domain::Point;
 use phf::phf_map;
 use phf::phf_set;
+use seelen_core::Point;
 use windows::Win32::UI::Input::KeyboardAndMouse::*;
 use windows::Win32::UI::WindowsAndMessaging::GetCursorPos;
 use windows::Win32::UI::WindowsAndMessaging::GetSystemMetrics;
@@ -592,14 +591,14 @@ impl Mouse {
 
     /// Retrieves the position of the mouse cursor, in screen coordinates.
     pub fn get_cursor_pos() -> Result<Point> {
-        let mut pos: Point = Point::default();
-        unsafe { GetCursorPos(pos.as_mut())? };
-        Ok(pos)
+        let mut pos = windows::Win32::Foundation::POINT::default();
+        unsafe { GetCursorPos(&mut pos)? };
+        Ok(Point::new(pos.x, pos.y))
     }
 
     /// Moves the cursor to the specified screen coordinates.
     pub fn set_cursor_pos(pos: Point) -> Result<()> {
-        unsafe { SetCursorPos(pos.x(), pos.y())? };
+        unsafe { SetCursorPos(pos.x, pos.y)? };
         Ok(())
     }
 
@@ -615,16 +614,16 @@ impl Mouse {
     /// mouse.move_to(Point::new(10, 20)).unwrap();
     /// mouse.move_to(Point::new(1000,800)).unwrap();
     /// ```
-    pub fn move_to(&self, target: Point) -> Result<()> {
+    pub fn move_to(&self, target: &Point) -> Result<()> {
         let (width, height) = get_screen_size()?;
-        let x = min(max(0, target.x()), width);
-        let y = min(max(0, target.y()), height);
+        let x = min(max(0, target.x), width);
+        let y = min(max(0, target.y), height);
         let target = Point::new(x, y);
 
         if self.move_time > 0 {
             let source = Self::get_cursor_pos()?;
-            let delta_x = target.x() - source.x();
-            let delta_y = target.y() - source.y();
+            let delta_x = target.x - source.x;
+            let delta_y = target.y - source.y;
 
             let delta = max(delta_x.abs(), delta_y.abs());
             let steps = delta / 20;
@@ -633,7 +632,7 @@ impl Mouse {
                 let step_y = delta_y / steps;
                 let interval = Duration::from_millis(self.move_time / steps as u64);
                 for i in 1..steps {
-                    let pos = Point::new(source.x() + step_x * i, source.y() + step_y * i);
+                    let pos = Point::new(source.x + step_x * i, source.y + step_y * i);
                     Self::set_cursor_pos(pos)?;
                     sleep(interval);
                 }
@@ -655,12 +654,12 @@ impl Mouse {
     /// ```
     pub fn click(&self, pos: Point) -> Result<()> {
         if self.auto_move {
-            self.move_to(pos)?;
+            self.move_to(&pos)?;
         }
 
         self.before_click()?;
-        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTDOWN)?;
-        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTUP)?;
+        self.mouse_event(pos.x, pos.y, MOUSEEVENTF_LEFTDOWN)?;
+        self.mouse_event(pos.x, pos.y, MOUSEEVENTF_LEFTUP)?;
         self.after_click()?;
 
         Ok(())
@@ -678,18 +677,18 @@ impl Mouse {
     /// ```
     pub fn double_click(&self, pos: Point) -> Result<()> {
         if self.auto_move {
-            self.move_to(pos)?;
+            self.move_to(&pos)?;
         }
 
         self.before_click()?;
 
-        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTDOWN)?;
-        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTUP)?;
+        self.mouse_event(pos.x, pos.y, MOUSEEVENTF_LEFTDOWN)?;
+        self.mouse_event(pos.x, pos.y, MOUSEEVENTF_LEFTUP)?;
 
         sleep(Duration::from_millis(max(200, self.interval)));
 
-        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTDOWN)?;
-        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_LEFTUP)?;
+        self.mouse_event(pos.x, pos.y, MOUSEEVENTF_LEFTDOWN)?;
+        self.mouse_event(pos.x, pos.y, MOUSEEVENTF_LEFTUP)?;
 
         self.after_click()?;
 
@@ -708,12 +707,12 @@ impl Mouse {
     /// ```
     pub fn right_click(&self, pos: Point) -> Result<()> {
         if self.auto_move {
-            self.move_to(pos)?;
+            self.move_to(&pos)?;
         }
 
         self.before_click()?;
-        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_RIGHTDOWN)?;
-        self.mouse_event(pos.x(), pos.y(), MOUSEEVENTF_RIGHTUP)?;
+        self.mouse_event(pos.x, pos.y, MOUSEEVENTF_RIGHTDOWN)?;
+        self.mouse_event(pos.x, pos.y, MOUSEEVENTF_RIGHTUP)?;
         self.after_click()?;
 
         Ok(())

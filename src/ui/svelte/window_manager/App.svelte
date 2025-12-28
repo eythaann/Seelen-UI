@@ -1,13 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
+  import { Widget } from "@seelen-ui/lib";
   import Layout from "./modules/layout/infra/Layout.svelte";
 
   onMount(() => {
-    let view = getCurrentWebviewWindow();
-    view.show();
-    view.emitTo(view.label, "complete-setup");
+    Widget.getCurrent().ready();
   });
 </script>
 
-<Layout />
+<Layout monitorId={Widget.getCurrent().decoded.monitorId!} />

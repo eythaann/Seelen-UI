@@ -1,6 +1,6 @@
-import { getRootContainer } from "@shared";
-import { declareDocumentAsLayeredHitbox } from "@shared/layered";
-import { disableAnimationsOnPerformanceMode } from "@shared/performance";
+import { getRootContainer } from "libs/ui/react/utils/index.ts";
+import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
+import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance.ts";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { registerStoreEvents, store } from "./modules/shared/store/infra.ts";
 
 import { App } from "./app.tsx";
+import { Widget } from "@seelen-ui/lib";
 
 import i18n, { loadTranslations } from "./i18n/index.ts";
 
@@ -20,6 +21,8 @@ await declareDocumentAsLayeredHitbox();
 await registerStoreEvents();
 await loadTranslations();
 disableAnimationsOnPerformanceMode();
+
+await Widget.getCurrent().init();
 
 const container = getRootContainer();
 createRoot(container).render(

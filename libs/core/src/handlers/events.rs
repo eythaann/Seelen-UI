@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::state::*;
 use crate::system_state::*;
 
@@ -55,13 +57,10 @@ slu_events_declaration! {
     UserFolderChanged(FolderChangedArgs) as "user-folder-changed",
     UserApplicationsChanged(Vec<UserApplication>) as "user::applications-changed",
     UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
-
-    BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
-    BluetoothDiscoveredDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-discovered-devices-changed",
-    BluetoothPairShowPin(BluetoothDevicePairShowPinRequest) as "bluetooth-pair-show-pin",
-    BluetoothPairRequestPin as "bluetooth-pair-request-pin",
+    UserAppWindowsPreviewsChanged(HashMap<isize, UserAppWindowPreview>) as "user::windows-previews-changed",
 
     MediaSessions(Vec<MediaPlayer>) as "media-sessions",
+    MediaDevices([Vec<MediaDevice>; 2]) as "media::devices",
     MediaInputs(Vec<MediaDevice>) as "media-inputs",
     MediaOutputs(Vec<MediaDevice>) as "media-outputs",
 
@@ -78,13 +77,9 @@ slu_events_declaration! {
 
     ColorsChanged(UIColors) as "colors-changed",
 
-    ToolbarOverlaped(bool) as "set-auto-hide",
-
-    WegOverlaped(bool) as "set-auto-hide",
-
-    WMSetReservation as "set-reservation",
-    WMForceRetiling as "wm-force-retiling",
-    WMSetLayout(WmNode) as "wm-set-layout",
+    WMSetReservation as "wm::set-reservation",
+    WMForceRetiling as "wm::force-retiling",
+    WMTreeChanged(WmRenderTree) as "wm::tree-changed",
 
     PopupContentChanged(SluPopupConfig) as "popup-content-changed",
 
@@ -106,4 +101,9 @@ slu_events_declaration! {
     StatePerformanceModeChanged(PerformanceMode) as "state::performance-mode-changed",
 
     WidgetTriggered(WidgetTriggerPayload) as "widget::triggered",
+
+    // Radios
+    RadiosChanged(Vec<RadioDevice>) as "radio::changed",
+
+    BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
 }

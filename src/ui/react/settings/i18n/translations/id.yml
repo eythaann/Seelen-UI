@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Memperbarui
     ok_readonly: Edit sebagai baru
     options:
-      float: Mengambang
-      force: Memaksa mengelola
-      hidden: Sembunyikan dari Dock/Taskbar
-      pinned: Disematkan
-      unmanage: Tidak mengelola
+      NoInteractive: Tidak Ada Interaktif
+      VdPinned: Tampilkan di semua ruang kerja
+      WmFloat: Twm - Mulai Mengambang
+      WmForce: Twm - Paksa Kelola
+      WmUnmanage: Twm - Batalkan pengelolaan
     options_label: Opsi tambahan
     title_create: Membuat {{name}}
     title_edit: Mengedit {{name}}
@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: Penundaan untuk bersembunyi
   delay_to_show: Keterlambatan untuk ditampilkan
   dock_side: Posisi
-  dynamic_color: Warna Dinamis
-  dynamic_color_tooltip: >-
-    Aktifkan warna latar belakang dan latar depan yang dinamis berdasarkan
-    jendela terfokus. (Warna dapat ditimpa oleh tema)
   enable: Aktifkan toolbar mewah
   height: Tinggi
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: Di tumpang tindih
   label: Toolbar
   placeholder: {}
-  show_hibernate: Menampilkan tombol hibernasi pada menu daya
 update:
   available: Perbarui Tersedia!
   channel: Perbarui saluran
@@ -307,7 +302,6 @@ weg:
       all: Semua
       label: Visibilitas Item yang Tidak Disematkan
       on_monitor: Di Monitor
-    thumbnail_generation_enabled: Menghasilkan gambar mini pada hover item
     visible_separators: Pemisah yang terlihat
   label: Dock/Taskbar
   margin: Batas
@@ -332,6 +326,10 @@ wm:
     offset: Offset perbatasan
     width: Lebar perbatasan
   description: Keterangan
+  drag_behavior: Perilaku Seret
+  drag_behavior_options:
+    sort: Sortir (urutkan ulang jendela sambil menyeret)
+    swap: Swap (menukar jendela pada drag end)
   enable: Aktifkan Manajer Jendela Ubin
   layout: Tata letak
   resize_delta: Ubah Ubah Delta (%)

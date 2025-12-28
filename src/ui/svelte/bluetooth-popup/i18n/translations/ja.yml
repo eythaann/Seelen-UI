@@ -1,0 +1,24 @@
+available: 利用可能なデバイス
+cancel: キャンセル
+confirm: 確認する
+confirm_only: ペアリングを確認する
+confirm_pin: PIN が一致することを確認します
+connected: 接続済み
+disconnect: 切断する
+display_pin: デバイスにこの PIN を入力してください
+lowenergy: 低エネルギー
+more: その他の Bluetooth 設定
+no_adapter: Bluetooth アダプターが見つかりません
+not_found: デバイスが見つかりません
+pair: ペア
+paired: ペアリング済み
+pairing: ペアリング中...
+pairing_failed: ペアリングに失敗しました
+password: パスワード
+provide_address: 住所を入力してください
+provide_password: ユーザー名とパスワードを入力してください
+provide_pin: PINを入力してください
+scanning: デバイスをスキャンしています...
+unpair: ペアリングを解除する
+unpair_failed: ペアリングの解除に失敗しました
+username: ユーザー名

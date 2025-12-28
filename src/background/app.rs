@@ -1,16 +1,16 @@
-use std::{
-    collections::HashMap,
-    sync::{atomic::AtomicBool, Arc, LazyLock},
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    Arc, LazyLock,
 };
 
 use parking_lot::Mutex;
-use seelen_core::{handlers::SeelenEvent, system_state::MonitorId};
+use seelen_core::system_state::MonitorId;
 use slu_ipc::messages::SvcAction;
-use tauri::{AppHandle, Listener, Wry};
+use tauri::{AppHandle, Emitter, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
 use crate::{
-    app_instance::SluMonitorInstance,
+    app_instance::LegacyWidgetMonitorContainer,
     cli::ServicePipe,
     error::{Result, ResultLogExt},
     hook::register_win_hook,
@@ -24,16 +24,15 @@ use crate::{
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::discord::start_discord_rpc,
-    virtual_desktops::get_vd_manager,
     widgets::{
         launcher::SeelenRofi,
-        loader::WidgetInstance,
-        task_switcher::TaskSwitcher,
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
-        window_manager::instance::WindowManagerV2,
     },
-    windows_api::{event_window::create_background_window, monitor::MonitorView, Com},
+    windows_api::{
+        event_window::{create_background_window, IS_INTERACTIVE_SESSION},
+        Com,
+    },
     APP_HANDLE,
 };
 
@@ -49,21 +48,30 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
         .expect("get_app_handle called but app is still not initialized")
 }
 
+pub fn emit_to_webviews<S>(event: &str, payload: S)
+where
+    S: serde::Serialize + Clone,
+{
+    // log::trace!("Emitting {event} to webviews");
+    if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+        // log::debug!("Skipping event {event} because session is not active");
+        return;
+    }
+    get_app_handle().emit(event, payload).log_error();
+}
+
 /** Struct should be initialized first before calling any other methods */
 #[derive(Default)]
 pub struct Seelen {
-    pub instances: Vec<SluMonitorInstance>,
+    pub widgets_per_display: Vec<LegacyWidgetMonitorContainer>,
     pub wall: Option<SeelenWall>,
     pub rofi: Option<SeelenRofi>,
-    pub task_switcher: Option<TaskSwitcher>,
-    #[allow(dead_code)]
-    pub widgets: HashMap<String, WidgetInstance>,
 }
 
 /* ============== Getters ============== */
 impl Seelen {
-    pub fn instances_mut(&mut self) -> &mut Vec<SluMonitorInstance> {
-        &mut self.instances
+    pub fn instances_mut(&mut self) -> &mut Vec<LegacyWidgetMonitorContainer> {
+        &mut self.widgets_per_display
     }
 
     pub fn is_running() -> bool {
@@ -83,15 +91,8 @@ impl Seelen {
     fn add_wall(&mut self) -> Result<()> {
         if self.wall.is_none() {
             let wall = SeelenWall::new()?;
-            wall.update_position()?;
+            log_error!(wall.update_position());
             self.wall = Some(wall)
-        }
-        Ok(())
-    }
-
-    fn add_task_switcher(&mut self) -> Result<()> {
-        if self.task_switcher.is_none() {
-            self.task_switcher = Some(TaskSwitcher::new()?);
         }
         Ok(())
     }
@@ -100,7 +101,7 @@ impl Seelen {
         if let Some(wall) = &self.wall {
             wall.update_position()?;
         }
-        for instance in &mut self.instances {
+        for instance in &mut self.widgets_per_display {
             instance.ensure_positions()?;
         }
         Ok(())
@@ -116,15 +117,7 @@ impl Seelen {
             SeelenWeg::restore_taskbar()?;
         }
 
-        match state.is_window_manager_enabled() {
-            true => {
-                WindowManagerV2::init_state();
-                WindowManagerV2::enumerate_all_windows()?;
-            }
-            false => WindowManagerV2::clear_state(),
-        }
-
-        match state.is_rofi_enabled() {
+        match state.is_launcher_enabled() {
             true => self.add_rofi()?,
             false => self.rofi = None,
         }
@@ -134,11 +127,10 @@ impl Seelen {
             false => self.wall = None,
         }
 
-        for monitor in &mut self.instances {
+        for monitor in &mut self.widgets_per_display {
             monitor.load_settings(state)?;
         }
 
-        self.add_task_switcher()?;
         self.refresh_windows_positions()?;
         Ok(())
     }
@@ -146,8 +138,11 @@ impl Seelen {
     fn on_monitor_event(event: MonitorManagerEvent) {
         let mut guard = trace_lock!(SEELEN);
         match event {
-            MonitorManagerEvent::ViewAdded(view) => {
-                log_error!(guard.add_monitor(view));
+            MonitorManagerEvent::ViewAdded(id) => {
+                log_error!(guard.add_monitor(id));
+            }
+            MonitorManagerEvent::ViewsChanged => {
+                log_error!(guard.refresh_windows_positions());
             }
             MonitorManagerEvent::ViewRemoved(id) => {
                 log_error!(guard.remove_monitor(&id));
@@ -170,9 +165,8 @@ impl Seelen {
         // order is important
         create_background_window()?;
         declare_system_events_handlers()?;
-        self.add_task_switcher()?;
 
-        if state.is_rofi_enabled() {
+        if state.is_launcher_enabled() {
             self.add_rofi()?;
         }
 
@@ -185,8 +179,8 @@ impl Seelen {
         }
 
         log::trace!("Enumerating Monitors & Creating Instances");
-        for view in MonitorManager::get_all_views()? {
-            self.add_monitor(view)?;
+        for view in MonitorManager::instance().read_all_views()? {
+            self.add_monitor(view.primary_target()?.stable_id()?)?;
         }
 
         MonitorManager::subscribe(Self::on_monitor_event);
@@ -194,26 +188,12 @@ impl Seelen {
 
         self.refresh_windows_positions()?;
 
-        get_vd_manager().list_windows_into_respective_workspace()?;
-        if state.is_window_manager_enabled() {
-            WindowManagerV2::enumerate_all_windows()?;
-        }
-
         register_win_hook()?;
         start_discord_rpc()?;
 
         if state.are_shortcuts_enabled() {
             ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
         }
-
-        get_app_handle().listen(SeelenEvent::StateWidgetsChanged, |_| {
-            std::thread::spawn(|| {
-                let mut guard = trace_lock!(SEELEN);
-                for monitor in &mut guard.instances {
-                    monitor.reload_widgets().log_error();
-                }
-            });
-        });
 
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
@@ -225,17 +205,21 @@ impl Seelen {
         release_system_events_handlers();
     }
 
-    fn add_monitor(&mut self, view: MonitorView) -> Result<()> {
+    fn add_monitor(&mut self, monitor_id: MonitorId) -> Result<()> {
         let state = FULL_STATE.load();
-        self.instances.push(SluMonitorInstance::new(view, &state)?);
+        self.widgets_per_display
+            .push(LegacyWidgetMonitorContainer::new(monitor_id, &state)?);
         self.refresh_windows_positions()?;
+        // why this is here? TODO: refactor this.
         trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }
 
     fn remove_monitor(&mut self, id: &MonitorId) -> Result<()> {
-        self.instances.retain(|m| &m.main_target_id != id);
+        self.widgets_per_display
+            .retain(|m| &m.view_primary_target_id != id);
         self.refresh_windows_positions()?;
+        // why this is here? TODO: refactor this.
         trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }

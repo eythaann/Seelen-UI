@@ -12,17 +12,19 @@ app_menu:
   run_as: Ҳамчун мудир кор кунед
   unpin: Ватанӣ
 context_menu:
+  remove_module: Модулро хориҷ кунед
   reorder_disable: Қулфи супоришҳо
   reorder_enable: Қулфи панел
 media:
   not_playing: Ҳеҷ чиз бозӣ намекунад
-media_menu:
-  remove: Модули ВАО-ро хориҷ кунед
-start_menu:
-  remove: Модули оғозро хориҷ кунед
+show_desktop:
+  label: Мизи кориро нишон диҳед
+start:
+  label: Менюи оғоз
 taskbar_menu:
   add_file: Файли фармоишии PIN
   add_folder: Папкаи фармоишии PIN
+  desktop: Иловаи модули мизи корӣ
   media: Иловаи модули ВАО
   settings: Танзимотҳо
   start: Иловаи модули оғоз

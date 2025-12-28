@@ -4,9 +4,8 @@ use seelen_core::{
     handlers::SeelenEvent,
     state::{GenericToolbarItem, Placeholder, TextToolbarItem, ToolbarItem, ToolbarItem2},
 };
-use tauri::Emitter;
 
-use crate::{app::get_app_handle, error::Result, utils::constants::SEELEN_COMMON};
+use crate::{app::emit_to_webviews, error::Result, utils::constants::SEELEN_COMMON};
 
 use super::FullState;
 
@@ -30,19 +29,19 @@ impl FullState {
             right: vec![
                 ToolbarItem2::Plugin("@seelen/tb-system-tray".into()),
                 ToolbarItem2::Plugin("@default/keyboard".into()),
-                ToolbarItem2::Plugin("@default/bluetooth".into()),
+                ToolbarItem2::Plugin("@seelen/tb-bluetooth-popup".into()),
                 ToolbarItem2::Plugin("@default/network".into()),
                 ToolbarItem2::Plugin("@default/media".into()),
                 ToolbarItem2::Plugin("@default/power".into()),
                 ToolbarItem2::Plugin("@default/notifications".into()),
-                ToolbarItem2::Plugin("@default/quick-settings".into()),
+                ToolbarItem2::Plugin("@seelen/tb-quick-settings".into()),
             ],
             ..Default::default()
         }
     }
 
     pub fn emit_toolbar_items(&self) -> Result<()> {
-        get_app_handle().emit(SeelenEvent::StateToolbarItemsChanged, &self.toolbar_items)?;
+        emit_to_webviews(SeelenEvent::StateToolbarItemsChanged, &self.toolbar_items);
         Ok(())
     }
 

@@ -1,0 +1,24 @@
+available: מכשירים זמינים
+cancel: לְבַטֵל
+confirm: לְאַשֵׁר
+confirm_only: אשר את ההתאמה
+confirm_pin: אשר שה-PIN תואם
+connected: מְחוּבָּר
+disconnect: לְנַתֵק
+display_pin: הזן PIN זה במכשיר
+lowenergy: אנרגיה נמוכה
+more: הגדרות Bluetooth נוספות
+no_adapter: לא נמצא מתאם Bluetooth
+not_found: לא נמצאו מכשירים
+pair: זוּג
+paired: מְזוּוָג
+pairing: צִמוּד...
+pairing_failed: ההתאמה נכשלה
+password: סִיסמָה
+provide_address: הזן כתובת
+provide_password: הזן שם משתמש וסיסמה
+provide_pin: הזן PIN
+scanning: סורק לאיתור מכשירים...
+unpair: בטל התאמה
+unpair_failed: ביטול ההתאמה נכשל
+username: שם משתמש

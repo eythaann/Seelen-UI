@@ -1,6 +1,6 @@
 import type { AppNotification } from "@seelen-ui/lib/types";
-import { WindowsDateFileTimeToDate } from "@shared";
-import { useInterval } from "@shared/hooks";
+import { WindowsDateFileTimeToDate } from "libs/ui/react/utils/index.ts";
+import { useInterval } from "libs/ui/react/utils/hooks.ts";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

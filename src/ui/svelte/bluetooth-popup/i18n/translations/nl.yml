@@ -1,0 +1,24 @@
+available: Beschikbare apparaten
+cancel: Annuleren
+confirm: Bevestigen
+confirm_only: Bevestig het koppelen
+confirm_pin: Controleer of de pincode overeenkomt
+connected: Aangesloten
+disconnect: Verbreek de verbinding
+display_pin: Voer deze pincode in op het apparaat
+lowenergy: Lage energie
+more: Meer Bluetooth-instellingen
+no_adapter: Geen Bluetooth-adapter gevonden
+not_found: Geen apparaten gevonden
+pair: Paar
+paired: Gekoppeld
+pairing: Koppelen...
+pairing_failed: Koppelen is mislukt
+password: Wachtwoord
+provide_address: Voer adres in
+provide_password: Voer gebruikersnaam en wachtwoord in
+provide_pin: Voer pincode in
+scanning: Scannen naar apparaten...
+unpair: Ontkoppelen
+unpair_failed: Ontkoppelen is mislukt
+username: Gebruikersnaam

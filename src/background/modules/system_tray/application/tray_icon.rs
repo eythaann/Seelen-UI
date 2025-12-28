@@ -15,14 +15,11 @@ use windows::Win32::{
 };
 
 use crate::{
-    modules::system_tray::application::{
-        tray_spy::{IconEventData, Win32TrayEvent},
-        util::Util,
-        SystemTrayManager,
-    },
+    modules::system_tray::application::{util::Util, SystemTrayManager},
     utils::{constants::SEELEN_COMMON, icon_extractor::convert_hicon_to_rgba_image},
-    windows_api::WindowsApi,
+    windows_api::{window::Window, WindowsApi},
 };
+use slu_ipc::messages::{IconEventData, Win32TrayEvent};
 
 /// Events that can be emitted by `Systray`.
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -64,9 +61,26 @@ impl SystemTrayManager {
     ///
     /// Returns `None` if the event should be ignored (e.g. if an icon that
     /// doesn't exist was removed).
-    pub(super) fn process_event(&self, event: Win32TrayEvent) -> Option<SystrayEvent> {
+    pub(super) fn process_event(&self, mut event: Win32TrayEvent) -> Option<SystrayEvent> {
+        // set application name if not tooltip is set
+        match &mut event {
+            Win32TrayEvent::IconAdd { data: icon_data }
+            | Win32TrayEvent::IconUpdate { data: icon_data } => {
+                if icon_data.tooltip.as_ref().is_none() {
+                    if let Some(window_handle) = icon_data.window_handle {
+                        let window = Window::from(window_handle);
+                        if let Ok(name) = window.app_display_name() {
+                            icon_data.tooltip = Some(name);
+                        }
+                    }
+                }
+            }
+            _ => {}
+        }
+
         match &event {
-            Win32TrayEvent::IconAdd(icon_data) | Win32TrayEvent::IconUpdate(icon_data) => {
+            Win32TrayEvent::IconAdd { data: icon_data }
+            | Win32TrayEvent::IconUpdate { data: icon_data } => {
                 let found_icon_id = self.find_icon(icon_data).map(|icon| icon.stable_id.clone());
 
                 let found_icon = match found_icon_id {
@@ -129,8 +143,6 @@ impl SystemTrayManager {
                         .upsert(to_update.stable_id.clone(), to_update.clone());
                     Some(SystrayEvent::IconUpdate(to_update.clone()))
                 } else {
-                    log::info!("Tray icon added: {:?}", icon_data);
-
                     // Icon doesn't exist yet, so add new icon. Skip icons that
                     // cannot be identified.
                     let stable_id = icon_data.guid.map(SysTrayIconId::Guid).or({
@@ -141,6 +153,8 @@ impl SystemTrayManager {
                             _ => None,
                         }
                     })?;
+
+                    log::trace!("Tray icon added: {}", stable_id);
 
                     let mut icon_image_hash = None;
                     let mut icon_path = None;
@@ -174,12 +188,10 @@ impl SystemTrayManager {
                     Some(SystrayEvent::IconAdd(icon))
                 }
             }
-            Win32TrayEvent::IconRemove(icon_data) => {
-                log::info!("Tray icon removed: {:?}", icon_data);
-
+            Win32TrayEvent::IconRemove { data: icon_data } => {
                 let icon_id = self.find_icon(icon_data).map(|icon| icon.stable_id.clone());
-
                 if let Some(icon_id) = icon_id {
+                    log::trace!("Tray icon removed: {}", icon_id);
                     self.icons.remove(&icon_id);
                     Some(SystrayEvent::IconRemove(icon_id))
                 } else {
@@ -195,7 +207,7 @@ impl SystemTrayManager {
         icon_id: &SysTrayIconId,
         action: &SystrayIconAction,
     ) -> crate::Result<()> {
-        log::info!("Sending icon action: {:?} to: {:?}", action, icon_id);
+        log::trace!("Sending icon action: {:?} to: {:?}", action, icon_id);
         let icon = self
             .icons
             .get(icon_id, |v| v.clone())

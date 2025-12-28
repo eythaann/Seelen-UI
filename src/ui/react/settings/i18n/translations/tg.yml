@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Навсозӣ
     ok_readonly: Ҳамчун нав
     options:
-      float: Шино кардан
-      force: Идоракунии қувва
-      hidden: Аз док / паноҳгоҳ пинҳон кунед
-      pinned: Пинҳон
-      unmanage: Тасдиқнашаванда
+      NoInteractive: Ягон интерактивӣ нест
+      VdPinned: Дар ҳама ҷойҳои корӣ нишон диҳед
+      WmFloat: Дугоник - Оғози шино
+      WmForce: Twr - Идоракунии қувва
+      WmUnmanage: Twrm - Noweragage
     options_label: Имконоти иловагӣ
     title_create: Эҷоди {{НОМИ}}
     title_edit: Таҳрир {{НОМ}}
@@ -228,10 +228,6 @@ toolbar:
   delay_to_hide: Таъхир барои пинҳон кардан
   delay_to_show: Таъхир барои нишон додан
   dock_side: Вазъият
-  dynamic_color: Ранги динамикӣ
-  dynamic_color_tooltip: >-
-    Дар асоси равзанаи мазкур замина ва рангҳои динамикаро фаъол созед. (Рангҳо
-    метавонанд аз ҷониби мавзӯъҳо аз нав баҳо дода шаванд)
   enable: Дастрас кардани панели футболи
   height: Баландӣ
   hide_mode:
@@ -240,7 +236,6 @@ toolbar:
     on_overlap: Дар такрори
   label: Асбобу
   placeholder: {}
-  show_hibernate: Тугмаи Hibernate -ро дар менюи энергетикӣ нишон диҳед
 update:
   available: Навсозӣ!
   channel: Навсозӣ канал
@@ -302,7 +297,6 @@ weg:
       all: Ҳама
       label: Намоиши ҷузъҳои ҷудонашуда
       on_monitor: Дар Монитор
-    thumbnail_generation_enabled: Обунаи ангур дар болои ашё
     visible_separators: Бандиаткунандагони намоён
   label: Dock / супоришҳо
   margin: Маржа
@@ -327,6 +321,10 @@ wm:
     offset: Ҳафтаи сарҳад
     width: Паҳнои сарҳад
   description: Тасвирӣ
+  drag_behavior: Рафтори кашолакунӣ
+  drag_behavior_options:
+    sort: Мураттаб кардан (аз нав тартиби тирезаҳо ҳангоми кашолакунӣ)
+    swap: Своп (иваз кардани тирезаҳо дар охири кашолакунӣ)
   enable: Фаъолсозии мудири тиреза
   layout: Тарҳ
   resize_delta: Татбиқи Delta (%)

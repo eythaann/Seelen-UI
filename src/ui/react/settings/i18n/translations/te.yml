@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: నవీకరించు
     ok_readonly: కొత్తదిగా సవరించండి
     options:
-      float: ఫ్లోట్
-      force: బలవంతంగా నిర్వహించండి
-      hidden: డాక్/టాస్క్‌బార్ నుండి దాచండి
-      pinned: పిన్ చేయబడింది
-      unmanage: నిర్వహించవద్దు
+      NoInteractive: ఇంటరాక్టివ్ లేదు
+      VdPinned: అన్ని వర్క్‌స్పేస్‌లలో చూపించు
+      WmFloat: Twm - ఫ్లోటింగ్ ప్రారంభించండి
+      WmForce: Twm - బలవంతంగా నిర్వహించండి
+      WmUnmanage: Twm - నిర్వహించవద్దు
     options_label: అదనపు ఎంపికలు
     title_create: '{{name}}ని సృష్టిస్తోంది'
     title_edit: సవరణ {{పేరు}}
@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం
-  dynamic_color: డైనమిక్ రంగు
-  dynamic_color_tooltip: >-
-    ఫోకస్డ్ విండో ఆధారంగా డైనమిక్ నేపథ్యం మరియు ముందుభాగం రంగులను ప్రారంభించండి.
-    (రంగులను ఇతివృత్తాల ద్వారా భర్తీ చేయవచ్చు)
   enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
   height: ఎత్తు
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: అతివ్యాప్తిపై
   label: టూల్‌బార్
   placeholder: {}
-  show_hibernate: పవర్ మెనులో హైబర్నేట్ బటన్‌ను చూపించు
 update:
   available: నవీకరణ అందుబాటులో ఉంది!
   channel: ఛానెల్‌ను నవీకరించండి
@@ -303,7 +298,6 @@ weg:
       all: అన్నీ
       label: అన్‌పిన్ చేయబడిన అంశాల దృశ్యమానత
       on_monitor: మానిటర్‌లో
-    thumbnail_generation_enabled: ఐటెమ్ హోవర్‌పై సూక్ష్మచిత్రాలను రూపొందించండి
     visible_separators: కనిపించే సెపరేటర్లు
   label: డాక్/టాస్క్‌బార్
   margin: మార్జిన్
@@ -328,6 +322,10 @@ wm:
     offset: సరిహద్దు ఆఫ్‌సెట్
     width: అంచు వెడల్పు
   description: వివరణ
+  drag_behavior: డ్రాగ్ బిహేవియర్
+  drag_behavior_options:
+    sort: క్రమబద్ధీకరించు (డ్రాగ్ చేస్తున్నప్పుడు విండోలను క్రమాన్ని మార్చండి)
+    swap: స్వాప్ (డ్రాగ్ ఎండ్‌లో విండోలను స్వాప్ చేయండి)
   enable: టైలింగ్ విండో మేనేజర్‌ను ప్రారంభించండి
   layout: లేఅవుట్
   resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి

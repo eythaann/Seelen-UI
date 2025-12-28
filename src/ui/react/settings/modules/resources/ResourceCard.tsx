@@ -1,9 +1,8 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Resource, ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
-import type { IconName } from "@shared/components/Icon/icons";
-import { ResourceText } from "@shared/components/ResourceText";
-import { cx } from "@shared/styles";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Button, Popconfirm, Tooltip } from "antd";
 import type { ComponentChildren } from "preact";
@@ -12,6 +11,7 @@ import { useTranslation } from "react-i18next";
 
 import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
+import type { IconName } from "libs/ui/icons.ts";
 
 type AnyResource = {
   id: ResourceId;
@@ -153,29 +153,15 @@ function ResourcePortraitInner({ resource, kind }: ResourcePortraitProps) {
 
   if (kind === "Wallpaper") {
     const wallpaper = resource as Wallpaper;
-    if (wallpaper.thumbnail_filename) {
+    if (wallpaper.thumbnailFilename) {
       return (
         <img
-          src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.thumbnail_filename}`)}
+          src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.thumbnailFilename}`)}
           style={{ filter: "blur(0.4px)" }}
           loading="lazy"
         />
       );
     }
-
-    /* if (
-        wallpaper.filename &&
-        SUPPORTED_VIDEO_WALLPAPER_EXTENSIONS.includes(wallpaper.filename.split('.').pop()!)
-      ) {
-        return (
-          <video
-            src={convertFileSrc(`${resource.metadata.path}\\${wallpaper.filename}`)}
-            controls={false}
-            preload="metadata"
-            style={{ filter: 'blur(0.4px)' }}
-          />
-        );
-      } */
   }
 
   return <ResourceIcon kind={kind} />;

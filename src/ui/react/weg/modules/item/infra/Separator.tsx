@@ -1,6 +1,6 @@
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling.ts";
 
-import type { SeparatorWegItem } from "../../shared/store/domain.ts";
+import type { SeparatorWegItem } from "../../shared/types.ts";
 
 import { HardcodedSeparator1, HardcodedSeparator2 } from "../../shared/state/items.ts";
 import { $settings } from "../../shared/state/mod.ts";

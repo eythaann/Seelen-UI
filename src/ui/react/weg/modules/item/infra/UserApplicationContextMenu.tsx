@@ -1,23 +1,20 @@
 import { SeelenCommand } from "@seelen-ui/lib";
-import { FileIcon, Icon } from "@shared/components/Icon";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { invoke } from "@tauri-apps/api/core";
 import type { MenuProps } from "antd";
 import type { ItemType } from "antd/es/menu/interface";
 import type { TFunction } from "i18next";
 
-import { isPinnedApp } from "../../shared/store/app.ts";
-
-import type { PinnedWegItem, TemporalWegItem } from "../../shared/store/domain.ts";
+import type { PinnedWegItem, TemporalWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
+import { $settings } from "../../shared/state/settings.ts";
 
 export function getUserApplicationContextMenu(
   t: TFunction,
   item: PinnedWegItem | TemporalWegItem,
-  devTools: boolean,
-  showEndTask: boolean,
 ): ItemType[] {
-  const isPinned = isPinnedApp(item);
+  const isPinned = item.type === "Pinned";
 
   const menu: MenuProps["items"] = [];
 
@@ -66,13 +63,7 @@ export function getUserApplicationContextMenu(
     {
       key: "weg_run_new",
       label: item.displayName,
-      icon: (
-        <FileIcon
-          className="weg-context-menu-item-icon"
-          path={item.path}
-          umid={item.umid}
-        />
-      ),
+      icon: <FileIcon className="weg-context-menu-item-icon" path={item.path} umid={item.umid} />,
       onClick: () => {
         invoke(SeelenCommand.Run, {
           program: item.relaunchProgram,
@@ -105,16 +96,14 @@ export function getUserApplicationContextMenu(
     return menu;
   }
 
-  if (devTools) {
+  if ($settings.value.devTools) {
     menu.push({
       key: "weg_copy_hwnd",
       label: t("app_menu.copy_handles"),
       icon: <Icon iconName="AiOutlineCopy" />,
       onClick: () =>
         navigator.clipboard.writeText(
-          JSON.stringify(
-            item.windows.map((window) => window.handle.toString(16)),
-          ),
+          JSON.stringify(item.windows.map((window) => window.handle.toString(16))),
         ),
     });
   }
@@ -131,7 +120,7 @@ export function getUserApplicationContextMenu(
     danger: true,
   });
 
-  if (showEndTask) {
+  if ($settings.value.showEndTask) {
     menu.push({
       key: "weg_kill_app",
       label: item.windows.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),

@@ -1,1 +1,72 @@
+fi: Lisää työkalupalkkiin kohteen, joka näyttää akkujen tilan ja järjestelmän virran tilan.
+nl: Voegt een werkbalkitem toe dat de status van de batterijen en de energiestatus van het systeem toont.
+yo: Ṣafikun nkan irinṣẹ irinṣẹ ti o fihan ipinle ti awọn batiri ati ipo agbara eto.
+ms: Menambah item bar alat yang menunjukkan keadaan bateri dan keadaan kuasa sistem.
+sk: Pridá položku panela nástrojov, ktorá zobrazuje stav batérií a stav napájania systému.
+tg: Ададҳои панели асбобҳоеро илова мекунад, ки вазъи батареяҳо ва давлати қудрати системаро нишон медиҳад.
+cs: Přidá položku panelu nástrojů, která zobrazuje stav baterií a stav napájení systému.
+lv: Pievieno rīkjoslas vienumu, kas parāda akumulatoru stāvokli un sistēmas jaudas stāvokli.
+fa: یک مورد نوار ابزار را اضافه می کند که وضعیت باتری ها و وضعیت قدرت سیستم را نشان می دهد.
+bs: Dodaje stavku trake sa alatkama koja prikazuje stanje baterija i stanje napajanja sistema.
+da: Tilføjer et værktøjslinjeelement, der viser batteriernes tilstand og systemets strømtilstand.
+hr: Dodaje stavku alatne trake koja prikazuje stanje baterija i stanje napajanja sustava.
+te: బ్యాటరీల స్థితి మరియు సిస్టమ్ పవర్ స్థితిని చూపే టూల్‌బార్ అంశాన్ని జోడిస్తుంది.
+lo: ເພີ່ມລາຍການແຖບເຄື່ອງມືທີ່ສະແດງໃຫ້ເຫັນສະພາບຂອງແບດເຕີຣີ້ແລະລັດ Power Power.
+id: Menambahkan item toolbar yang menunjukkan status baterai dan status daya sistem.
+ku: Tiştek toolbarê zêde dike ku rewşa batariyan û rewşa hêza pergalê nîşan dide.
+bg: Добавя елемент от лентата с инструменти, който показва състоянието на батериите и състоянието на захранване на системата.
+pa: ਇੱਕ ਟੂਲਬਾਰ ਆਈਟਮ ਜੋੜਦਾ ਹੈ ਜੋ ਬੈਟਰੀਆਂ ਦੀ ਸਥਿਤੀ ਅਤੇ ਸਿਸਟਮ ਪਾਵਰ ਸਥਿਤੀ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ।
+sr: Додаје ставку траке са алаткама која приказује стање батерија и стање напајања система.
+cy: Yn ychwanegu eitem bar offer sy'n dangos cyflwr y batris a chyflwr pŵer y system.
+zu: Ingeza into yamathuluzi ekhombisa isimo samabhethri kanye nesimo samandla esistimu.
+el: Προσθέτει ένα στοιχείο γραμμής εργαλείων που δείχνει την κατάσταση των μπαταριών και την κατάσταση ισχύος του συστήματος.
+az: Batareyaların vəziyyətini və sistem güc vəziyyətini göstərən bir alət çubuğu maddəsi əlavə edir.
+tr: Pillerin durumunu ve sistem güç durumunu gösteren bir araç çubuğu öğesi ekler.
+sw: Inaongeza kipengee cha zana kinachoonyesha hali ya betri na hali ya nguvu ya mfumo.
+af: Voeg 'n nutsbalkitem by wat die toestand van die batterye en die stelselkragtoestand wys.
+th: เพิ่มรายการแถบเครื่องมือที่แสดงสถานะของแบตเตอรี่และสถานะพลังงานของระบบ
+ta: பேட்டரிகளின் நிலை மற்றும் சிஸ்டம் பவர் நிலையைக் காட்டும் கருவிப்பட்டி உருப்படியைச் சேர்க்கிறது.
+no: Legger til et verktøylinjeelement som viser statusen til batteriene og systemets strømtilstand.
+ur: ایک ٹول بار آئٹم شامل کرتا ہے جو بیٹریاں اور سسٹم پاور اسٹیٹ کی حالت کو ظاہر کرتا ہے۔
+mt: Iżżid oġġett tal-bar tal-għodda li juri l-istat tal-batteriji u l-istat tal-enerġija tas-sistema.
+ro: Adaugă un element din bara de instrumente care arată starea bateriilor și starea de alimentare a sistemului.
+bn: একটি টুলবার আইটেম যোগ করে যা ব্যাটারির অবস্থা এবং সিস্টেম পাওয়ার অবস্থা দেখায়।
+mk: Додава ставка од лентата со алатки што ја прикажува состојбата на батериите и состојбата на моќноста на системот.
+eu: Tresna-barrako elementu bat gehitzen du, baterien egoera eta sistemaren energia-egoera erakusten dituena.
+it: Aggiunge un elemento della barra degli strumenti che mostra lo stato delle batterie e lo stato di alimentazione del sistema.
+sv: Lägger till ett verktygsfält som visar batteriernas tillstånd och systemets strömtillstånd.
+pl: Dodaje element paska narzędzi pokazujący stan akumulatorów i stan zasilania systemu.
+ru: Добавляет элемент панели инструментов, который показывает состояние батарей и состояние питания системы.
+pt-BR: Adds a toolbar item that shows the state of the batteries and the system power state.
+hi: एक टूलबार आइटम जोड़ता है जो बैटरियों की स्थिति और सिस्टम पावर स्थिति दिखाता है।
+km: បន្ថែមធាតុរបារឧបករណ៍ដែលបង្ហាញពីស្ថានភាពនៃអាគុយនិងរដ្ឋថាមពលប្រព័ន្ធ។
+ka: ამატებს ინსტრუმენტთა ზოლს, რომელიც აჩვენებს ბატარეების მდგომარეობას და სისტემის სიმძლავრის მდგომარეობას.
+am: የባለሙያዎችን ሁኔታ እና የስርዓት ኃይል ሁኔታን የሚያሳይ የመሣሪያ አሞሌ መሳሪያ ያክላል.
+vi: Thêm mục thanh công cụ hiển thị trạng thái của pin và trạng thái nguồn của hệ thống.
+lb: Füügt e Toolbar Element, deen den Zoustand vun de Batterien an de Systemkraaftstaat weist.
 en: Adds a toolbar item that shows the state of the batteries and the system power state.
+ca: Afegeix un element de la barra d'eines que mostra l'estat de les bateries i l'estat d'alimentació del sistema.
+tl: Nagdaragdag ng isang item ng toolbar na nagpapakita ng estado ng mga baterya at estado ng kapangyarihan ng system.
+zh-CN: 添加一个工具栏项，显示电池状态和系统电源状态。
+et: Lisab tööriistariba üksuse, mis näitab akude olekut ja süsteemi toiteolekut.
+is: Bætir við atriði á tækjastiku sem sýnir stöðu rafhlöðanna og orkustöðu kerfisins.
+he: מוסיף פריט בסרגל כלים המציג את מצב הסוללות ואת מצב צריכת החשמל של המערכת.
+es: Agrega un elemento de la barra de herramientas que muestra el estado de las baterías y el estado de energía del sistema.
+pt-PT: Adiciona um item da barra de ferramentas que mostra o estado das baterias e o estado de energia do sistema.
+si: බැටරිවල තත්ත්වය සහ පද්ධති බල තත්ත්වය පෙන්වන මෙවලම් තීරු අයිතමයක් එක් කරයි.
+uk: Додає елемент панелі інструментів, який показує стан батарей і стан живлення системи.
+lt: Pridedamas įrankių juostos elementas, rodantis baterijų būseną ir sistemos maitinimo būseną.
+ja: バッテリーの状態とシステムの電源状態を表示するツールバー項目を追加します。
+ar: إضافة عنصر شريط أدوات يوضح حالة البطاريات وحالة طاقة النظام.
+zh-TW: 添加一個工具欄項，顯示電池狀態和系統電源狀態。
+uz: Batareyalar va tizim quvvatining holatini ko'rsatadigan asboblar panelini qo'shadi.
+hu: Hozzáad egy elemet az eszköztárhoz, amely megmutatja az akkumulátorok állapotát és a rendszer tápellátási állapotát.
+ne: ब्याट्रीको अवस्था र प्रणालीको शक्ति अवस्था देखाउने उपकरणपट्टी वस्तु थप्छ।
+ps: د وسیلې بار توکي اضافه کوي چې د بیټرۍ حالت او د سیسټم بریښنا حالت ښیې.
+mn: Батерей, системийн хүчний төлөв байдлыг харуулсан багаж самбарыг нэмж өгдөг.
+de: Fügt ein Symbolleistenelement hinzu, das den Zustand der Batterien und den Energiestatus des Systems anzeigt.
+gu: ટૂલબાર આઇટમ ઉમેરે છે જે બેટરીની સ્થિતિ અને સિસ્ટમ પાવર સ્ટેટ દર્શાવે છે.
+hy: "Ավելացնում է գործիքագոտու տարր, որը ցույց է տալիս մարտկոցների վիճակը և համակարգի էներգիայի վիճակը:"
+so: Waxay ku dartaa shey qalab aalad ah oo muujinaya gobolka baytariyada iyo gobolka awoodda nidaamka.
+fr: Ajoute un élément de barre d'outils qui affiche l'état des batteries et l'état d'alimentation du système.
+ko: 배터리 상태와 시스템 전원 상태를 표시하는 도구 모음 항목을 추가합니다.

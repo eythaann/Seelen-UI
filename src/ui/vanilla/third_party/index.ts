@@ -1,4 +1,4 @@
-import { disableAnimationsOnPerformanceMode } from "@shared/performance";
+import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance";
 
 import "@shared/styles/colors.css";
 import "./reset.css";

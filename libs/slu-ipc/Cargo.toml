@@ -14,3 +14,8 @@ interprocess = { workspace = true, features = ["tokio"] }
 seelen-core = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
+uuid = { workspace = true, features = ["serde"] }
+windows = { workspace = true, features = [
+    "Win32_System_RemoteDesktop",
+    "Win32_System_Pipes",
+] }

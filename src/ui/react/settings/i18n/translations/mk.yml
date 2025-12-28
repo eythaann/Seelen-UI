@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Ажурирање
     ok_readonly: Уреди како ново
     options:
-      float: Плови
-      force: Управување со сила
-      hidden: Скриј од пристаништето/лентата со задачи
-      pinned: Закачен
-      unmanage: Unmanage
+      NoInteractive: Нема интерактивна
+      VdPinned: Прикажи во сите работни простори
+      WmFloat: Twm - Почнете да лебдите
+      WmForce: Twm - Управување со сила
+      WmUnmanage: Twm - Не управувај
     options_label: Дополнителни опции
     title_create: Креирање {{име}}
     title_edit: Уредување {{име}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
   dock_side: Позиција
-  dynamic_color: Динамична боја
-  dynamic_color_tooltip: >-
-    Овозможете динамични бои во позадина и преден план врз основа на фокусиран
-    прозорец. (Боите можат да бидат презаситени од темите)
   enable: Овозможете фенси лента со алатки
   height: Висина
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: На преклопување
   label: Лента со алатки
   placeholder: {}
-  show_hibernate: Покажете го копчето Hibernate на менито за напојување
 update:
   available: Ажурирање достапно!
   channel: Ажурирање на каналот
@@ -305,7 +300,6 @@ weg:
       all: Сите
       label: Видливост на откачени ставки
       on_monitor: На монитор
-    thumbnail_generation_enabled: Генерираат сликички на лебди на артикли
     visible_separators: Видливи сепаратори
   label: Док/лента со задачи
   margin: Маргина
@@ -330,6 +324,10 @@ wm:
     offset: Офсет за граница
     width: Ширина на границата
   description: Опис
+  drag_behavior: Повлечете однесување
+  drag_behavior_options:
+    sort: Подреди (прередете ги прозорците додека се влечете)
+    swap: Заменете (заменете ги прозорците на крајот на влечење)
   enable: Овозможете менаџер на прозорецот за плочки
   layout: Распоред
   resize_delta: Променете ја големината на Делта (%)

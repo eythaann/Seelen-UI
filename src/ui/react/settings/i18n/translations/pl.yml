@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Edytuj
     ok_readonly: Edytuj jako nowy
     options:
-      float: Platforma
-      force: Siła zarządza
-      hidden: Ukryj się przed dokiem/paskiem zadań
-      pinned: Przypięty
-      unmanage: Niezarządzanie
+      NoInteractive: Brak interaktywnego
+      VdPinned: Pokaż we wszystkich obszarach roboczych
+      WmFloat: Twm - Zacznij pływać
+      WmForce: Twm – Zarządzanie siłami
+      WmUnmanage: Twm — nie zarządzaj
     options_label: Dodatkowe opcje
     title_create: Tworzenie {{nazwa}}
     title_edit: Edycja {{nazwa}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Opóźnienie ukrycia
   delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja
-  dynamic_color: Dynamiczny kolor
-  dynamic_color_tooltip: >-
-    Włącz dynamiczne kolory tła i pierwszego planu w oparciu o okno, na którym
-    skupiono uwagę. (Kolory mogą być zastępowane przez motywy)
   enable: Włącz pasek narzędzi
   height: Wysokość
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Kiedy zasłania
   label: Pasek narzędzi
   placeholder: {}
-  show_hibernate: Wyświetlanie przycisku hibernacji w menu zasilania
 update:
   available: Dostępna aktualizacja!
   channel: Kanał aktualizacji
@@ -305,7 +300,6 @@ weg:
       all: Wszystkie ekrany
       label: Widoczność uruchomionych aplikacji
       on_monitor: Jeden ekran
-    thumbnail_generation_enabled: Miniatury po najechaniu na element
     visible_separators: Widoczne separatory
   label: Dock/Pasek zadań
   margin: Margines
@@ -330,6 +324,10 @@ wm:
     offset: Przesunięcie granic
     width: Szerokość granicy
   description: Opis
+  drag_behavior: Przeciągnij zachowanie
+  drag_behavior_options:
+    sort: Sortuj (zmieniaj kolejność okien podczas przeciągania)
+    swap: Zamień (zamień okna po przeciągnięciu)
   enable: Włącz menedżer rozmieszczenia okien
   layout: Układ
   resize_delta: Delta rozmiaru (%)

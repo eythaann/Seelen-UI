@@ -1,9 +1,3 @@
-.backgroundAdd {
-  align-self: flex-end;
-  width: 40px;
-  margin-right: 8px;
-}
-
 .interval {
   display: flex;
   flex-wrap: wrap;

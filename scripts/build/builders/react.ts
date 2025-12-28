@@ -22,6 +22,7 @@ export function createReactBuildConfig(
     sourcemap: !args.isProd,
     treeShaking: true,
     format: "esm",
+    target: "esnext",
     outdir: DIST_DIR,
     outbase: `./${UI_DIR}`,
     jsx: "automatic",
@@ -32,6 +33,7 @@ export function createReactBuildConfig(
       CssModulesPlugin({
         localsConvention: "camelCase",
         pattern: "do-not-use-on-themes-[local]-[hash]",
+        targets: {}, // this disables the transpilation of features.
       }),
       createCopyPublicPlugin(appFolders),
     ],

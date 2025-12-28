@@ -26,21 +26,21 @@ $wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox
   }
 
   .bg-layer-6 {
-    background-color: var(--config-accent-dark-color);
+    background-color: var(--system-accent-dark-color);
     animation-delay: -2s;
     animation-duration: 7s;
     animation-name: move-forever-1;
   }
 
   .bg-layer-7 {
-    background-color: var(--config-accent-light-color);
+    background-color: var(--system-accent-light-color);
     animation-delay: -3s;
     animation-duration: 10s;
     animation-name: move-forever-2;
   }
 
   .bg-layer-8 {
-    background-color: var(--config-accent-lighter-color);
+    background-color: var(--system-accent-lighter-color);
     animation-delay: -4s;
     animation-duration: 13s;
     animation-name: move-forever-3;

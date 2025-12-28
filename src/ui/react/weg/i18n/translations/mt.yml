@@ -12,17 +12,19 @@ app_menu:
   run_as: Mexxi bħala amministratur
   unpin: Unpin
 context_menu:
+  remove_module: Neħħi Modulu
   reorder_disable: Lock Taskbar
   reorder_enable: Nisfruttaw taskbar
 media:
   not_playing: Xejn ma jilgħab
-media_menu:
-  remove: Neħħi l-modulu tal-midja
-start_menu:
-  remove: Neħħi l-modulu tal-bidu
+show_desktop:
+  label: Uri Desktop
+start:
+  label: Start Menu
 taskbar_menu:
   add_file: Fajl tad-dwana pin
   add_folder: Folder Custom Pin
+  desktop: Żid il-Modulu tad-Desktop
   media: Żid il-modulu tal-midja
   settings: Settings
   start: Żid il-modulu tal-bidu

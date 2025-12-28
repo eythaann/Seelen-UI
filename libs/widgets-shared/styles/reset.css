@@ -6,9 +6,18 @@
     --primary-color: var(--color-gray-900);
     --secondary-color: var(--color-gray-50);
 
+    color-scheme: light dark;
+
     interpolate-size: allow-keywords; /* This enables animations between keywords (auto, min-content, etc) */
+    transition-behavior: allow-discrete; /* allow transitions between discrete values (display, content-visibility) */
+
     scroll-behavior: smooth;
-    font-size: 100%;
+    -webkit-overflow-scrolling: touch;
+
+    font-size: 100%; /* determines the size of the rem unit */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   *,
@@ -114,9 +123,6 @@
     color: var(--primary-color);
     background-color: var(--secondary-color);
     hyphens: auto;
-    font-smooth: always;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   hr {

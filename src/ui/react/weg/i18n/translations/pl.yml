@@ -12,17 +12,19 @@ app_menu:
   run_as: Uruchom jako administrator
   unpin: Odepnij
 context_menu:
+  remove_module: Usuń moduł
   reorder_disable: Zablokuj pasek zadań
   reorder_enable: Odblokuj pasek zadań
 media:
   not_playing: Nic nie gra
-media_menu:
-  remove: Usuń moduł multimediów
-start_menu:
-  remove: Usuń przycisk start
+show_desktop:
+  label: Pokaż pulpit
+start:
+  label: Menu startowe
 taskbar_menu:
   add_file: Dodaj skrót
   add_folder: Dodaj folder
+  desktop: Dodaj moduł pulpitu
   media: Dodaj moduł multimediów
   settings: Ustawienia
   start: Dodaj przycisk Start

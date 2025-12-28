@@ -1,5 +1,5 @@
 import { SupportedLanguages } from "@seelen-ui/lib";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Input, Select, Switch, Tooltip } from "antd";
 import { type ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,7 @@ export function General() {
   const autostartStatus = useSelector(RootSelectors.autostart);
   const language = useSelector(RootSelectors.language);
   const dateFormat = useSelector(RootSelectors.dateFormat);
+  const startOfWeek = useSelector(RootSelectors.startOfWeek);
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -96,6 +97,19 @@ export function General() {
             placeholder="YYYY-MM-DD"
             value={dateFormat}
             onChange={onDateFormatChange}
+          />
+        </SettingsOption>
+        <SettingsOption>
+          <b>{t("general.start_of_week")}</b>
+          <Select
+            style={{ width: "200px" }}
+            value={startOfWeek}
+            options={[
+              { label: t("general.monday"), value: "Monday" },
+              { label: t("general.sunday"), value: "Sunday" },
+              { label: t("general.saturday"), value: "Saturday" },
+            ]}
+            onSelect={(value) => dispatch(RootActions.setStartOfWeek(value))}
           />
         </SettingsOption>
       </SettingsGroup>

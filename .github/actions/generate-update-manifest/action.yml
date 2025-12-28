@@ -137,3 +137,18 @@ runs:
           });
 
           core.info('✅ Successfully generated and uploaded latest.json');
+
+          // Delete .sig files from release assets
+          core.info('Deleting .sig files from release assets');
+          const sigAssets = assets.filter(a => a.name.endsWith('.sig'));
+
+          for (const sigAsset of sigAssets) {
+            core.info(`Deleting ${sigAsset.name}`);
+            await github.rest.repos.deleteReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              asset_id: sigAsset.id,
+            });
+          }
+
+          core.info(`✅ Deleted ${sigAssets.length} .sig file(s) from release`);

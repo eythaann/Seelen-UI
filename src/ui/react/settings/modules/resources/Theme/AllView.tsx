@@ -1,6 +1,6 @@
 import { SeelenCommand } from "@seelen-ui/lib";
 import { ResourceKind, type Theme, type ThemeId } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { path } from "@tauri-apps/api";
 import { invoke } from "@tauri-apps/api/core";
 import { Button, Switch } from "antd";

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Ažurirati
     ok_readonly: Uredi kao novo
     options:
-      float: Lebdjeti
-      force: Sile upravljati
-      hidden: Sakrij se sa pristaništa / zadataka
-      pinned: Prikvačen
-      unmanage: Nevenjački
+      NoInteractive: No Interactive
+      VdPinned: Prikaži u svim radnim prostorima
+      WmFloat: Twm - Počnite plutati
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Dodatne opcije
     title_create: Stvarajući {{ime}}
     title_edit: Uređivanje {{ime}}
@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
   dock_side: Položaj
-  dynamic_color: Dinamička boja
-  dynamic_color_tooltip: >-
-    Omogućite dinamičku pozadinu i boje prednjeg plana na osnovu fokusiranog
-    prozora. (Boje se mogu prevladati od tema)
   enable: Omogući fantastičnu alatnu traku
   height: Visina
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: Na preklapanje
   label: Alatna traka
   placeholder: {}
-  show_hibernate: Prikaži dugme Hibernate na meniju napajanja
 update:
   available: Ažuriraj dostupno!
   channel: Ažuriraj kanal
@@ -303,7 +298,6 @@ weg:
       all: Sve
       label: Vidljivost nezakačenih stavki
       on_monitor: Na monitoru
-    thumbnail_generation_enabled: Generirajte sličice na povuci
     visible_separators: Vidljivi separatori
   label: Dock / programska traka
   margin: Marža
@@ -328,6 +322,10 @@ wm:
     offset: Offset granice
     width: Širina granice
   description: Opis
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: Sortiraj (promijeni redoslijed prozora tokom prevlačenja)
+    swap: Zamijeni (zamijeni prozore na kraju povlačenja)
   enable: Omogući oblaganje menadžera prozora
   layout: Izgled
   resize_delta: Promijenite veličinu Delta (%)

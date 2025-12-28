@@ -12,17 +12,19 @@ app_menu:
   run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
   unpin: unppin
 context_menu:
+  remove_module: ເອົາໂມດູນອອກ
   reorder_disable: ລັອກ task task
   reorder_enable: ປົດລ taskbar taskbar
 media:
   not_playing: ບໍ່ມີຫຍັງຫຼີ້ນ
-media_menu:
-  remove: ເອົາ Module ສື່
-start_menu:
-  remove: ເອົາໂມດູນເລີ່ມຕົ້ນ
+show_desktop:
+  label: ສະແດງ Desktop
+start:
+  label: ເມນູເລີ່ມຕົ້ນ
 taskbar_menu:
   add_file: PIN File Custom
   add_folder: PIN Custom FOLLER
+  desktop: ເພີ່ມໂມດູນ Desktop
   media: ຕື່ມການໂມດູນສື່
   settings: ການຕັ້ງຄ່າ
   start: ເພີ່ມໂມດູນ Start

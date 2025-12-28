@@ -1,4 +1,6 @@
-use seelen_core::system_state::UserAppWindow;
+use std::sync::atomic::Ordering;
+
+use seelen_core::{state::AppExtraFlag, system_state::UserAppWindow};
 use windows::Win32::UI::WindowsAndMessaging::{
     WS_CHILD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW, WS_MINIMIZEBOX,
 };
@@ -6,8 +8,10 @@ use windows::Win32::UI::WindowsAndMessaging::{
 use crate::{
     hook::HookManager,
     modules::apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
+    state::application::FULL_STATE,
     utils::spawn_named_thread,
     windows_api::{
+        event_window::IS_INTERACTIVE_SESSION,
         window::{event::WinEvent, Window},
         WindowEnumerator, WindowsApi,
     },
@@ -17,7 +21,7 @@ impl UserAppsManager {
     pub(super) fn init_listing_app_windows() -> Vec<UserAppWindow> {
         let mut initial = Vec::new();
         let _ = WindowEnumerator::new().for_each(|window| {
-            if is_interactable_and_not_hidden(&window) {
+            if is_interactable_window(&window) {
                 initial.push(window.to_serializable());
             }
         });
@@ -25,10 +29,22 @@ impl UserAppsManager {
         HookManager::subscribe(|(event, window)| Self::on_win_event(event, window));
 
         spawn_named_thread("InteractableWindowsRevalidator", || loop {
-            std::thread::sleep(std::time::Duration::from_millis(1000));
-            Self::instance()
-                .interactable_windows
-                .retain(|w| is_interactable_and_not_hidden(&Window::from(w.hwnd)));
+            std::thread::sleep(std::time::Duration::from_millis(2000));
+
+            // Pause when session is not interactive to reduce CPU usage
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                continue;
+            }
+
+            Self::instance().interactable_windows.retain(|w| {
+                let window = Window::from(w.hwnd);
+                if window.is_interactable_and_not_hidden() {
+                    true
+                } else {
+                    Self::send(UserAppsEvent::WinRemoved(window.address()));
+                    false
+                }
+            });
         });
 
         initial
@@ -39,14 +55,14 @@ impl UserAppsManager {
 
         match event {
             WinEvent::ObjectCreate | WinEvent::ObjectShow => {
-                if !is_interactable && is_interactable_and_not_hidden(&window) {
+                if !is_interactable && is_interactable_window(&window) {
                     USER_APPS_MANAGER.add_win(&window);
                     Self::send(UserAppsEvent::WinAdded(window.address()));
                 }
             }
-            WinEvent::ObjectNameChange => {
+            WinEvent::ObjectNameChange | WinEvent::ObjectParentChange => {
                 let was_interactable = is_interactable;
-                is_interactable = is_interactable_and_not_hidden(&window);
+                is_interactable = is_interactable_window(&window);
                 match (was_interactable, is_interactable) {
                     (false, true) => {
                         USER_APPS_MANAGER.add_win(&window);
@@ -58,15 +74,16 @@ impl UserAppsManager {
                     }
                     _ => {}
                 }
-            }
-            WinEvent::ObjectParentChange => {
+
                 // re-check for UWP apps that on creation starts without a parent
-                if let Some(parent) = window.parent() {
-                    if !USER_APPS_MANAGER.contains_win(&parent)
-                        && parent.is_interactable_and_not_hidden()
-                    {
-                        USER_APPS_MANAGER.add_win(&parent);
-                        Self::send(UserAppsEvent::WinAdded(parent.address()));
+                if event == WinEvent::ObjectParentChange {
+                    if let Some(parent) = window.parent() {
+                        if !USER_APPS_MANAGER.contains_win(&parent)
+                            && parent.is_interactable_and_not_hidden()
+                        {
+                            USER_APPS_MANAGER.add_win(&parent);
+                            Self::send(UserAppsEvent::WinAdded(parent.address()));
+                        }
                     }
                 }
             }
@@ -115,9 +132,9 @@ impl UserAppsManager {
 /// for the users.
 ///
 /// As windows properties can change, this should be reevaluated on every change.
-pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
+pub fn is_interactable_window(window: &Window) -> bool {
     // It must be a visible Window and not cloaked
-    if !window.is_visible() || window.is_cloaked() {
+    if !window.is_window() || !window.is_visible() || window.is_cloaked() {
         return false;
     }
 
@@ -164,6 +181,26 @@ pub fn is_interactable_and_not_hidden(window: &Window) -> bool {
 
     if process.is_frozen().unwrap_or(false) {
         return false;
+    }
+
+    let to_validate = match window.get_frame_creator() {
+        Ok(None) => return false, // not found
+        Ok(Some(creator)) => creator,
+        Err(_) => *window, // window is not a frame
+    };
+
+    let guard = FULL_STATE.load();
+    match guard.get_app_config_by_window(to_validate.hwnd()) {
+        Ok(Some(config)) => {
+            if config.options.contains(&AppExtraFlag::NoInteractive) {
+                return false;
+            }
+        }
+        Ok(_) => {}
+        Err(err) => {
+            log::error!("Error getting app config: {err}");
+            return false;
+        }
     }
 
     true

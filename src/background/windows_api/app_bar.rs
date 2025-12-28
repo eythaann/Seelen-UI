@@ -4,8 +4,8 @@ use seelen_core::state::{FancyToolbarSide, SeelenWegSide};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT},
     UI::Shell::{
-        SHAppBarMessage, ABE_BOTTOM, ABE_LEFT, ABE_RIGHT, ABE_TOP, ABM_GETSTATE, ABM_NEW,
-        ABM_REMOVE, ABM_SETPOS, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA,
+        SHAppBarMessage, ABE_BOTTOM, ABE_LEFT, ABE_RIGHT, ABE_TOP, ABM_NEW, ABM_REMOVE, ABM_SETPOS,
+        ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA,
     },
 };
 
@@ -80,11 +80,6 @@ impl AppBarData {
             hWnd: hwnd,
             ..Default::default()
         })
-    }
-
-    pub fn state(&self) -> AppBarDataState {
-        let mut data = self.0;
-        AppBarDataState::from(unsafe { SHAppBarMessage(ABM_GETSTATE, &mut data) as u32 })
     }
 
     pub fn set_state(&self, state: AppBarDataState) {

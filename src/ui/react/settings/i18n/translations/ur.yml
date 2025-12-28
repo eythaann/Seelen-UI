@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: اپ ڈیٹ
     ok_readonly: نئے کے طور پر ترمیم کریں
     options:
-      float: فلوٹ
-      force: فورس
-      hidden: گودی/ٹاسک بار سے چھپائیں
-      pinned: پن
-      unmanage: غیر منظم
+      NoInteractive: کوئی انٹرایکٹو نہیں
+      VdPinned: تمام ورک اسپیس میں دکھائیں
+      WmFloat: TWM - تیرنا شروع کریں
+      WmForce: TWM - فورس کا انتظام کریں
+      WmUnmanage: TWM - غیر منظم
     options_label: اضافی اختیارات
     title_create: '{{نام}} بنانا'
     title_edit: ترمیم {{نام}}
@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: چھپانے میں تاخیر
   delay_to_show: دکھانے میں تاخیر
   dock_side: پوزیشن
-  dynamic_color: متحرک رنگ
-  dynamic_color_tooltip: >-
-    مرکوز ونڈو پر مبنی متحرک پس منظر اور پیش منظر کے رنگوں کو فعال کریں۔ (رنگوں
-    کو تھیمز کے ذریعہ زیر کیا جاسکتا ہے)
   enable: فینسی ٹول بار کو فعال کریں
   height: اونچائی
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: اوورلیپ پر
   label: ٹول بار
   placeholder: {}
-  show_hibernate: پاور مینو پر ہائبرنیٹ بٹن دکھائیں
 update:
   available: تازہ کاری دستیاب!
   channel: چینل کو اپ ڈیٹ کریں
@@ -304,7 +299,6 @@ weg:
       all: تمام
       label: ان پن کردہ آئٹمز کی مرئیت
       on_monitor: مانیٹر پر
-    thumbnail_generation_enabled: آئٹم ہوور پر تھمب نیل تیار کریں
     visible_separators: مرئی جداکار
   label: ٹاسک بار
   margin: مارجن
@@ -329,6 +323,10 @@ wm:
     offset: بارڈر آفسیٹ
     width: بارڈر کی چوڑائی
   description: تفصیل
+  drag_behavior: ڈریگ سلوک
+  drag_behavior_options:
+    sort: ترتیب دیں (گھسیٹتے وقت ونڈوز کو دوبارہ ترتیب دیں)
+    swap: تبادلہ (ڈریگ اینڈ پر ونڈوز تبدیل)
   enable: ٹائلنگ ونڈو مینیجر کو فعال کریں
   layout: ترتیب
   resize_delta: ڈیلٹا کا سائز (٪)

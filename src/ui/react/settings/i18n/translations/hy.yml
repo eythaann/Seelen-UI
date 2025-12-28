@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Թարմացում
     ok_readonly: Խմբագրել որպես նոր
     options:
-      float: Լողացող
-      force: Ուժի կառավարում
-      hidden: Թաքցնել նավահանգիստից / առաջադրանք
-      pinned: Փածսյա
-      unmanage: Անօդաչուր
+      NoInteractive: Ինտերակտիվ չկա
+      VdPinned: Ցուցադրել բոլոր աշխատանքային տարածքներում
+      WmFloat: Twm - Սկսեք լողալ
+      WmForce: Twm - ուժի կառավարում
+      WmUnmanage: Twm - Չկառավարել
     options_label: Լրացուցիչ ընտրանքներ
     title_create: Ստեղծելով {{name}
     title_edit: Խմբագրում {{name}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք
-  dynamic_color: Դինամիկ գույն
-  dynamic_color_tooltip: >-
-    Միացնել դինամիկ ֆոնային եւ առաջին պլանների գույները, որոնք հիմնված են
-    կենտրոնացած պատուհանի վրա: (Գույները կարող են շրջանցվել թեմաներով)
   enable: Միացնել Fancy Toolbar- ը
   height: Բարձրություն
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Համընկնման վրա
   label: Գործիքագոտու
   placeholder: {}
-  show_hibernate: Show ույց տալ ձմեռել կոճակը էներգիայի ցանկում
 update:
   available: 'Թարմացրեք մատչելի:'
   channel: Թարմացրեք ալիքը
@@ -305,7 +300,6 @@ weg:
       all: Բոլորը
       label: Չամրացված տարրերի տեսանելիություն
       on_monitor: Մոնիտորի վրա
-    thumbnail_generation_enabled: Ստեղծեք մանրապատկերներ Hover իրերի վրա
     visible_separators: Տեսանելի տարանջատիչներ
   label: Dock / Taskbar
   margin: Լուսանցք
@@ -330,6 +324,10 @@ wm:
     offset: Սահմանի օֆսեթ
     width: Սահմանի լայնությունը
   description: Նկարագրություն
+  drag_behavior: Քաշել վարքագիծը
+  drag_behavior_options:
+    sort: Տեսակավորել (վերադասավորել պատուհանները քաշելիս)
+    swap: Փոխանակում (փոխանակեք պատուհանները՝ քաշելու վերջում)
   enable: Միացնել սալիկապատման պատուհանի կառավարիչը
   layout: Դասավորություն
   resize_delta: Չափափոխել դելտան (%)

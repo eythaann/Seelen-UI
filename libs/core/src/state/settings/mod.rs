@@ -16,6 +16,8 @@ use serde_alias::serde_alias;
 use ts_rs::TS;
 
 use crate::resource::WidgetId;
+use crate::state::WallpaperCollection;
+use crate::system_state::MonitorId;
 use crate::{
     error::Result,
     rect::Rect,
@@ -45,10 +47,6 @@ pub struct FancyToolbarSettings {
     pub delay_to_show: u32,
     /// delay to hide the toolbar on Mouse Leave in milliseconds
     pub delay_to_hide: u32,
-    /// show the hibernate button on power menu
-    pub show_hibernate_button: bool,
-    /// enable or disable dynamic color based on maximized focused window (themes can override this)
-    pub dynamic_color: bool,
 }
 
 impl Default for FancyToolbarSettings {
@@ -60,8 +58,6 @@ impl Default for FancyToolbarSettings {
             hide_mode: HideMode::Never,
             delay_to_show: 100,
             delay_to_hide: 800,
-            show_hibernate_button: false,
-            dynamic_color: true,
         }
     }
 }
@@ -135,8 +131,6 @@ pub struct SeelenWegSettings {
     pub pinned_items_visibility: WegPinnedItemsVisibility,
     /// Dock position
     pub position: SeelenWegSide,
-    /// Decides whether the application hoover should generate thumbnails or just list the names instead
-    pub thumbnail_generation_enabled: bool,
     /// enable or disable the instance counter visibility on weg instance
     pub show_instance_counter: bool,
     /// enable or disable the window title visibility for opened apps
@@ -168,7 +162,6 @@ impl Default for SeelenWegSettings {
             mode: SeelenWegMode::MinContent,
             hide_mode: HideMode::OnOverlap,
             position: SeelenWegSide::Bottom,
-            thumbnail_generation_enabled: true,
             visible_separators: true,
             show_instance_counter: true,
             show_window_title: false,
@@ -198,23 +191,6 @@ impl SeelenWegSettings {
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
-pub struct Border {
-    pub enabled: bool,
-    pub width: f64,
-    pub offset: f64,
-}
-
-#[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
-pub struct FloatingWindowSettings {
-    pub width: f64,
-    pub height: f64,
-}
-
-#[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
 pub struct WindowManagerSettings {
     /// enable or disable the tiling window manager
     pub enabled: bool,
@@ -236,6 +212,34 @@ pub struct WindowManagerSettings {
     pub default_layout: PluginId,
     /// window manager animations
     pub animations: WmAnimations,
+    /// window manager drag behavior
+    pub drag_behavior: WmDragBehavior,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum WmDragBehavior {
+    /// While dragging the windows on the layout will be sorted.
+    Sort,
+    /// On drag end the dragged and the overlaped will be swapped.
+    Swap,
+}
+
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
+pub struct Border {
+    pub enabled: bool,
+    pub width: f64,
+    pub offset: f64,
+}
+
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
+pub struct FloatingWindowSettings {
+    pub width: f64,
+    pub height: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -249,7 +253,7 @@ pub struct WmAnimations {
 impl Default for WmAnimations {
     fn default() -> Self {
         Self {
-            enabled: false,
+            enabled: true,
             duration_ms: 200,
             ease_function: "EaseOut".into(),
         }
@@ -288,6 +292,7 @@ impl Default for WindowManagerSettings {
             floating: FloatingWindowSettings::default(),
             default_layout: "@default/wm-bspwm".into(),
             animations: WmAnimations::default(),
+            drag_behavior: WmDragBehavior::Sort,
         }
     }
 }
@@ -364,20 +369,23 @@ impl SeelenLauncherSettings {
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWallSettings {
     pub enabled: bool,
-    pub backgrounds_v2: Vec<WallpaperId>,
     /// update interval in seconds
     pub interval: u32,
     /// randomize order
     pub randomize: bool,
+    pub default_collection: Option<uuid::Uuid>,
+    /// deprecated, this field will be removed on v3
+    pub backgrounds_v2: Option<Vec<WallpaperId>>,
 }
 
 impl Default for SeelenWallSettings {
     fn default() -> Self {
         Self {
             enabled: true,
-            backgrounds_v2: vec![],
+            backgrounds_v2: None,
             interval: 60,
             randomize: false,
+            default_collection: None,
         }
     }
 }
@@ -404,6 +412,18 @@ impl Default for UpdaterSettings {
             channel: UpdateChannel::Release,
         }
     }
+}
+
+// ========================== Start of Week ==============================
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+#[derive(Default)]
+pub enum StartOfWeek {
+    #[default]
+    Monday,
+    Sunday,
+    Saturday,
 }
 
 // ======================== Final Settings Struct ===============================
@@ -433,7 +453,7 @@ pub struct Settings {
     #[serde(skip_serializing)]
     launcher: Option<SeelenLauncherSettings>,
     /// list of monitors and their configurations
-    pub monitors_v3: HashMap<String, MonitorConfiguration>,
+    pub monitors_v3: HashMap<MonitorId, MonitorConfiguration>,
     /// app shortcuts settings
     pub shortcuts: SluShortcutsSettings,
     /// list of selected themes as filename as backguard compatibility for versions before v2.3.8, will be removed in v3
@@ -451,6 +471,8 @@ pub struct Settings {
     pub language: Option<String>,
     /// MomentJS date format
     pub date_format: String,
+    /// Start of week for calendar
+    pub start_of_week: StartOfWeek,
     /// Updater Settings
     pub updater: UpdaterSettings,
     /// Custom settings for widgets
@@ -468,6 +490,8 @@ pub struct Settings {
     pub by_theme: HashMap<ThemeId, ThemeSettings>,
     /// settings for each background
     pub by_wallpaper: HashMap<WallpaperId, WallpaperInstanceSettings>,
+    /// list of wallpaper collections
+    pub wallpaper_collections: Vec<WallpaperCollection>,
     /// Performance options
     pub performance_mode: PerformanceModeSettings,
 }
@@ -491,10 +515,12 @@ impl Default for Settings {
             dev_tools: false,
             language: Some(Self::get_system_language()),
             date_format: "ddd D MMM, hh:mm A".to_owned(),
+            start_of_week: StartOfWeek::default(),
             updater: UpdaterSettings::default(),
             by_widget: SettingsByWidget::default(),
             by_theme: HashMap::new(),
             by_wallpaper: HashMap::new(),
+            wallpaper_collections: Vec::new(),
         }
     }
 }
@@ -529,6 +555,25 @@ impl Settings {
         if let Some(launcher) = self.launcher.take() {
             dict.launcher = launcher;
         }
+
+        // Migrate backgrounds_v2 to wallpaper collection
+        if let Some(backgrounds) = self.by_widget.wall.backgrounds_v2.take() {
+            if !backgrounds.is_empty() {
+                let collection = WallpaperCollection {
+                    id: uuid::Uuid::new_v4(),
+                    name: "Migrated".to_string(),
+                    wallpapers: backgrounds,
+                };
+
+                // Set as default collection if no default is set
+                if self.by_widget.wall.default_collection.is_none() {
+                    self.by_widget.wall.default_collection = Some(collection.id);
+                }
+
+                self.wallpaper_collections.push(collection);
+            }
+        }
+
         Ok(())
     }
 
@@ -610,14 +655,27 @@ impl Settings {
         Ok(())
     }
 
-    // This indicates if the widget is enabled on general, doesn't take in care
-    // by monitor or by instance settings.
+    /// This indicates if the widget is enabled on general, doesn't take in care multi-instances
     pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
         self.by_widget.is_enabled(widget_id)
     }
 
     pub fn set_widget_enabled(&mut self, widget_id: &WidgetId, enabled: bool) {
         self.by_widget.set_enabled(widget_id, enabled);
+    }
+
+    pub fn is_widget_enabled_on_monitor(
+        &self,
+        widget_id: &WidgetId,
+        monitor_id: &MonitorId,
+    ) -> bool {
+        if !self.is_widget_enabled(widget_id) {
+            return false;
+        }
+        // default to true as new connected monitors should be enabled
+        self.monitors_v3
+            .get(monitor_id)
+            .is_none_or(|monitor_config| monitor_config.by_widget.is_widget_enabled(widget_id))
     }
 }
 

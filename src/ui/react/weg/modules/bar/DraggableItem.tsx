@@ -1,9 +1,9 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import type { HTMLAttributes, PropsWithChildren } from "preact/compat";
 
-import type { SwItem } from "../shared/store/domain.ts";
+import type { SwItem } from "../shared/types.ts";
 
 interface Props extends PropsWithChildren {
   item: SwItem;

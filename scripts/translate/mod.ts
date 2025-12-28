@@ -39,10 +39,7 @@ async function completeTranslationsFor(localesDir: string) {
       translation = yaml.load(readFileSync(filePath, "utf8"));
     }
 
-    const translated = await yamlTranslator.translate_to(
-      targetLang.value,
-      translation,
-    );
+    const translated = await yamlTranslator.translate_to(targetLang.value, translation);
     writeFileSync(filePath, yaml.dump(deepSortObject(translated)));
   }
 }
@@ -51,7 +48,9 @@ await completeTranslationsFor("src/ui/react/toolbar/i18n/translations");
 await completeTranslationsFor("src/ui/react/weg/i18n/translations");
 await completeTranslationsFor("src/ui/react/settings/i18n/translations");
 await completeTranslationsFor("src/ui/react/launcher/i18n/translations");
+await completeTranslationsFor("src/ui/react/wallpaper_manager/i18n/translations");
 
 await completeTranslationsFor("src/ui/svelte/power-menu/i18n/translations");
+await completeTranslationsFor("src/ui/svelte/bluetooth-popup/i18n/translations");
 
 await completeTranslationsFor("src/background/i18n");

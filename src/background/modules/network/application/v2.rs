@@ -1,19 +1,12 @@
-use windows::{
-    Devices::Radios::RadioKind,
-    Networking::{
-        Connectivity::NetworkInformation,
-        NetworkOperators::{
-            NetworkOperatorTetheringManager, TetheringOperationStatus,
-            TetheringWiFiAuthenticationKind, TetheringWiFiBand,
-        },
+use windows::Networking::{
+    Connectivity::NetworkInformation,
+    NetworkOperators::{
+        NetworkOperatorTetheringManager, TetheringOperationStatus, TetheringWiFiAuthenticationKind,
+        TetheringWiFiBand,
     },
 };
 
-use crate::{
-    error::Result,
-    modules::{network::domain::Hotspot, shared::radio::RADIO_MANAGER},
-    trace_lock,
-};
+use crate::{error::Result, modules::network::domain::Hotspot};
 
 #[derive(Debug)]
 #[allow(dead_code)]
@@ -29,16 +22,6 @@ pub enum NetworkManagerEventV2 {}
 impl NetworkManagerV2 {
     pub fn new() -> Self {
         Self {}
-    }
-
-    pub fn toggle_wifi(&self, enabled: bool) -> Result<()> {
-        let radios = trace_lock!(RADIO_MANAGER);
-        if enabled {
-            radios.turn_on_radios(RadioKind::WiFi)?;
-        } else {
-            radios.turn_off_radios(RadioKind::WiFi)?;
-        }
-        Ok(())
     }
 
     pub fn hotspot() -> Result<Option<Hotspot>> {

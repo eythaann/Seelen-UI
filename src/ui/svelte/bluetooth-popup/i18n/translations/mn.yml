@@ -1,0 +1,24 @@
+available: Байгаа төхөөрөмжүүд
+cancel: Цуаах
+confirm: Батлах
+confirm_only: Баталж баталгаажуулах
+confirm_pin: ПИН-ийн тоглолтыг баталгаажуулна уу
+connected: Холбоотой
+disconnect: Тусгаарлах
+display_pin: Энэ PIN-г төхөөрөмж дээр оруулна уу
+lowenergy: Бага эрчим хүч
+more: Илүү их Bluetooth Settings
+no_adapter: Блютүүт эмнэлэгт олдсонгүй
+not_found: Ямар ч төхөөрөмж олдсонгүй
+pair: Хос
+paired: Хосчилсон
+pairing: Хүлээж ...
+pairing_failed: Хугацаа нь
+password: Нууц үг
+provide_address: Хаягаа оруулна гэрт оруулна уу
+provide_password: Хэрэглэгчийн нэр, нууц үгийг оруулна уу
+provide_pin: PIN кодыг оруулна уу
+scanning: Төхөөрөмжийг скан хийх ...
+unpair: Суллал
+unpair_failed: Унтарч ажил амжилтгүй боллоо
+username: Хэрэглэгчийн

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Düzenle
     ok_readonly: Yeni Olarak Düzenle
     options:
-      float: Yüzer
-      force: Zorla Yönet
-      hidden: Dock/Görev Çubuğunda Gizle
-      pinned: Sabitlenmiş
-      unmanage: Yönetim Dışında Tut
+      NoInteractive: Etkileşimli Değil
+      VdPinned: Tüm çalışma alanlarında göster
+      WmFloat: Twm - Kaymaya Başla
+      WmForce: Twm - Yönetmeyi Zorla
+      WmUnmanage: Twm - Yönetimi kaldır
     options_label: Ekstra Seçenekler
     title_create: '{{Name}} Oluşturuluyor'
     title_edit: '{{name}} Düzenleniyor'
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Gizleme gecikmesi
   delay_to_show: Gösterme gecikmesi
   dock_side: Pozisyon
-  dynamic_color: Dinamik Renk
-  dynamic_color_tooltip: >-
-    Odaklanılan pencereye göre dinamik arka plan ve ön plan renklerini
-    etkinleştirin. (Renkler temalar tarafından geçersiz kılınabilir)
   enable: Araç Çubuğunu Etkinleştir
   height: Yükseklik
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Üst üste binme durumunda
   label: Araç Çubuğu
   placeholder: {}
-  show_hibernate: Güç menüsünde hazırda bekletme düğmesini göster
 update:
   available: Güncelleme Mevcut!
   channel: Güncelleme kanalı
@@ -305,7 +300,6 @@ weg:
       all: Tümü
       label: Sabitlenmemiş Öğelerin Görünürlüğü
       on_monitor: Monitörde
-    thumbnail_generation_enabled: Öğenin üzerine gelindiğinde küçük resimler oluştur
     visible_separators: Görünür Ayırıcılar
   label: Dock/Görev Çubuğu
   margin: Kenar Boşluğu
@@ -330,6 +324,10 @@ wm:
     offset: Kenar Ofseti
     width: Kenar Genişliği
   description: Açıklama
+  drag_behavior: Sürükleme Davranışı
+  drag_behavior_options:
+    sort: Sırala (sürüklerken pencereleri yeniden sıralayın)
+    swap: Değiştir (sürükleme ucunda pencereleri değiştir)
   enable: Döşeme Pencere Yöneticisini Etkinleştir
   layout: Düzen
   resize_delta: Yeniden Boyutlandırma Değişimi (%)

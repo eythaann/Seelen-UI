@@ -4,22 +4,25 @@ use seelen_core::{
     handlers::SeelenEvent,
     system_state::{NetworkAdapter, WlanProfile},
 };
-use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Networking::NetworkListManager::{
     INetworkListManager, NetworkListManager, NLM_CONNECTIVITY_IPV4_INTERNET,
     NLM_CONNECTIVITY_IPV6_INTERNET,
 };
 
-use crate::{app::get_app_handle, error::Result, log_error, utils::sleep_millis, windows_api::Com};
+use crate::{
+    app::{emit_to_webviews, get_app_handle},
+    error::Result,
+    utils::sleep_millis,
+    windows_api::Com,
+};
 
 use super::application::{get_local_ip_address, NetworkManager};
 
 fn emit_networks(ip: String, adapters: Vec<NetworkAdapter>, has_internet: bool) {
-    let handle = get_app_handle();
-    log_error!(handle.emit(SeelenEvent::NetworkDefaultLocalIp, ip));
-    log_error!(handle.emit(SeelenEvent::NetworkAdapters, adapters));
-    log_error!(handle.emit(SeelenEvent::NetworkInternetConnection, has_internet));
+    emit_to_webviews(SeelenEvent::NetworkDefaultLocalIp, ip);
+    emit_to_webviews(SeelenEvent::NetworkAdapters, adapters);
+    emit_to_webviews(SeelenEvent::NetworkInternetConnection, has_internet);
 }
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
@@ -87,8 +90,7 @@ async fn try_connect_to_profile(ssid: &str) -> Result<bool> {
 pub fn wlan_start_scanning() {
     log::trace!("Start scanning networks");
     NetworkManager::start_scanning(|list| {
-        let app = get_app_handle();
-        log_error!(app.emit(SeelenEvent::NetworkWlanScanned, &list));
+        emit_to_webviews(SeelenEvent::NetworkWlanScanned, &list);
     });
 }
 

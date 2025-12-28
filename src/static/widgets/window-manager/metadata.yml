@@ -1,0 +1,6 @@
+id: "@seelen/window-manager"
+icon: BsGrid1X2Fill
+metadata:
+  displayName: !extend i18n/display_name.yml
+loader: Legacy
+instances: ReplicaByMonitor

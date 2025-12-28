@@ -1,4 +1,4 @@
-import { createSlice, type Dispatch, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type Dispatch } from "@reduxjs/toolkit";
 import {
   BluetoothDevices,
   DesktopFolder,
@@ -12,10 +12,8 @@ import {
   SeelenCommand,
   UserDetails,
   VideosFolder,
-  WegItems,
-  Widget,
 } from "@seelen-ui/lib";
-import { StateBuilder } from "@shared/StateBuilder";
+import { StateBuilder } from "libs/ui/react/utils/StateBuilder.ts";
 
 import type { RootState } from "./domain.ts";
 import { PowerMode } from "node_modules/@seelen-ui/lib/esm/gen/types/PowerMode";
@@ -30,10 +28,8 @@ const initialState: RootState = {
   userPicturesFolder: [],
   userVideosFolder: [],
   userMusicFolder: [],
-  focused: null,
   env: (await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>,
   bluetoothDevices: (await BluetoothDevices.getAsync()).all(),
-  discoveredBluetoothDevices: BluetoothDevices.default().all(),
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
     acLineStatus: 255,
@@ -54,8 +50,6 @@ const initialState: RootState = {
   mediaInputs: [],
   notifications: [],
   languages: [],
-  openApps: [],
-  windowColorByHandle: {},
 };
 
 export const RootSlice = createSlice({
@@ -63,15 +57,6 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    addWindowColor(
-      state,
-      action: PayloadAction<[number, { background: string; foreground: string }]>,
-    ) {
-      state.windowColorByHandle[`${action.payload[0]}`] = action.payload[1];
-    },
-    removeWindowColor(state, action: PayloadAction<number>) {
-      delete state.windowColorByHandle[`${action.payload}`];
-    },
   },
 });
 
@@ -95,27 +80,6 @@ export async function lazySlice(d: Dispatch) {
 
   LanguageList.getAsync().then((list) => d(RootActions.setLanguages(list.asArray())));
 
-  const onGetWegItems = (items: WegItems) => {
-    const apps = items.inner.left
-      .concat(items.inner.center)
-      .concat(items.inner.right)
-      .map((d) => {
-        if ("windows" in d) {
-          return d.windows;
-        }
-        return [];
-      })
-      .flat()
-      .toSorted((a, b) => Number(b.lastActive - a.lastActive));
-    d(RootActions.setOpenApps(apps));
-  };
-
-  let monitorId = Widget.getCurrent().decoded.monitorId!;
-  WegItems.getForMonitor(monitorId).then(onGetWegItems);
-  WegItems.onChange(() => {
-    WegItems.getForMonitor(monitorId).then(onGetWegItems);
-  });
-
   const obj = {
     userRecentFolder: (await RecentFolder.getAsync()).asArray(),
     userDesktopFolder: (await DesktopFolder.getAsync()).asArray(),
@@ -125,6 +89,7 @@ export async function lazySlice(d: Dispatch) {
     userVideosFolder: (await VideosFolder.getAsync()).asArray(),
     userMusicFolder: (await MusicFolder.getAsync()).asArray(),
   };
+
   d(RootActions.setUserRecentFolder(obj.userRecentFolder));
   d(RootActions.setUserDesktopFolder(obj.userDesktopFolder));
   d(RootActions.setUserDocumentsFolder(obj.userDocumentsFolder));

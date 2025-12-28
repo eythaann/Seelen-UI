@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Opdateer
     ok_readonly: Wysig as nuut
     options:
-      float: Dryf
-      force: Kragbestuur
-      hidden: Verberg van die beskuldigdebalk/taakbalk
-      pinned: Vasgaan
-      unmanage: Onhandiging
+      NoInteractive: Geen interaktief nie
+      VdPinned: Wys in alle werkruimtes
+      WmFloat: Twm - Begin dryf
+      WmForce: Twm - Force Bestuur
+      WmUnmanage: Twm - Onbestuur
     options_label: Ekstra opsies
     title_create: Skep {{name}}
     title_edit: Redigering {{name}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
   dock_side: Posisie
-  dynamic_color: Dinamiese kleur
-  dynamic_color_tooltip: >-
-    Aktiveer dinamiese agtergrond en voorgrondkleure gebaseer op gefokusde
-    venster. (Kleure kan deur temas oorheers word)
   enable: Aktiveer Fancy Toolbar
   height: Hoogte
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Op oorvleueling
   label: Werkbalk
   placeholder: {}
-  show_hibernate: Wys Hibernate -knoppie op Power Menu
 update:
   available: Opdatering beskikbaar!
   channel: Update Channel
@@ -305,7 +300,6 @@ weg:
       all: Almal
       label: Sigbaarheid van ontspelde items
       on_monitor: Op Monitor
-    thumbnail_generation_enabled: Genereer duimnaels op die item hover
     visible_separators: Sigbare skeiers
   label: Dock/Taakbalk
   margin: Marge
@@ -330,6 +324,10 @@ wm:
     offset: Grens offset
     width: Grenswydte
   description: Beskrywing
+  drag_behavior: Sleepgedrag
+  drag_behavior_options:
+    sort: Sorteer (herrangskik vensters terwyl jy sleep)
+    swap: Ruil (ruil vensters op sleepkant)
   enable: Aktiveer teëlvensterbestuurder
   layout: Uitleg
   resize_delta: Verander die grootte delta (%)

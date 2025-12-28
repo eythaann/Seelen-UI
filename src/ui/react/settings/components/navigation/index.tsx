@@ -1,5 +1,5 @@
-import { Icon } from "@shared/components/Icon";
-import { ResourceText } from "@shared/components/ResourceText";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { Tooltip } from "antd";
 import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";

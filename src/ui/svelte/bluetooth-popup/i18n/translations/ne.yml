@@ -1,0 +1,24 @@
+available: उपलब्ध यन्त्रहरू
+cancel: रद्द गर्नुहोस्
+confirm: पुष्टि गर्नुहोस्
+confirm_only: जोडी पुष्टि गर्नुहोस्
+confirm_pin: पुष्टि गर्नुहोस् कि PIN मेल खान्छ
+connected: जडान भयो
+disconnect: जडान विच्छेद गर्नुहोस्
+display_pin: यन्त्रमा यो PIN प्रविष्ट गर्नुहोस्
+lowenergy: कम ऊर्जा
+more: थप ब्लुटुथ सेटिङहरू
+no_adapter: कुनै ब्लुटुथ एडाप्टर फेला परेन
+not_found: कुनै पनि उपकरण फेला परेन
+pair: जोडी
+paired: जोडा बनाइयो
+pairing: जोडा बनाउँदै...
+pairing_failed: जोडा बनाउन असफल भयो
+password: पासवर्ड
+provide_address: ठेगाना प्रविष्ट गर्नुहोस्
+provide_password: प्रयोगकर्ता नाम र पासवर्ड प्रविष्ट गर्नुहोस्
+provide_pin: PIN प्रविष्ट गर्नुहोस्
+scanning: यन्त्रहरू स्क्यान गर्दै...
+unpair: जोडा हटाउनुहोस्
+unpair_failed: जोडा हटाउन असफल भयो
+username: प्रयोगकर्ता नाम

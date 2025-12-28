@@ -2,9 +2,8 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPack,
-    IconPackEntry, LauncherHistory, PerformanceMode, Profile, Wallpaper, WegItems,
-    WegPinnedItemsVisibility,
+    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPackEntry,
+    LauncherHistory, PerformanceMode, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -13,7 +12,6 @@ use crate::{
     error::Result,
     log_error,
     state::application::performance::PERFORMANCE_MODE,
-    trace_lock,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::{window::Window, WindowsApi},
 };
@@ -22,13 +20,6 @@ use super::{
     application::FULL_STATE,
     domain::{AppConfig, Placeholder, Settings},
 };
-
-#[tauri::command(async)]
-pub fn state_get_icon_packs() -> Vec<IconPack> {
-    let mutex = FULL_STATE.load().icon_packs.clone();
-    let icon_packs = trace_lock!(mutex);
-    icon_packs.owned_list()
-}
 
 #[tauri::command(async)]
 pub fn state_get_toolbar_items() -> Placeholder {
@@ -137,16 +128,6 @@ pub fn state_request_wallpaper_addition() -> Result<()> {
 #[tauri::command(async)]
 pub fn state_get_profiles() -> Vec<Profile> {
     FULL_STATE.load().profiles.clone()
-}
-
-#[tauri::command(async)]
-pub fn state_delete_cached_icons() -> Result<()> {
-    let mutex = FULL_STATE.load().icon_packs.clone();
-    let mut icon_manager = trace_lock!(mutex);
-    icon_manager.clear_system_icons()?;
-    icon_manager.sanitize_system_icon_pack(false)?;
-    icon_manager.write_system_icon_pack()?;
-    Ok(())
 }
 
 #[tauri::command(async)]

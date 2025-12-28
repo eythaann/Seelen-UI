@@ -7,83 +7,51 @@ use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
         value::{KnownPlugin, PluginValue},
-        WegPinnedItemsVisibility, WegTemporalItemsVisibility, Widget, WidgetInstanceMode,
-        WindowManagerLayout, WorkspaceId,
+        WegPinnedItemsVisibility, WegTemporalItemsVisibility, WindowManagerLayout, WorkspaceId,
     },
     system_state::MonitorId,
 };
 use uuid::Uuid;
 
-use crate::{resources::RESOURCES, windows_api::monitor::Monitor};
+use crate::resources::RESOURCES;
 
 impl FullState {
+    pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
+        self.settings.is_widget_enabled(widget_id)
+    }
+
+    pub fn is_widget_enable_on_monitor(
+        &self,
+        widget_id: &WidgetId,
+        monitor_id: &MonitorId,
+    ) -> bool {
+        self.settings
+            .is_widget_enabled_on_monitor(widget_id, monitor_id)
+    }
+
     pub fn is_weg_enabled(&self) -> bool {
-        self.settings.by_widget.weg.enabled
+        self.is_widget_enabled(&WidgetId::known_weg())
     }
 
-    pub fn is_weg_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
-        let is_global_enabled = self.is_weg_enabled();
-        match self.settings.monitors_v3.get(monitor_id.as_str()) {
-            Some(config) => {
-                is_global_enabled && config.by_widget.is_widget_enabled(&WidgetId::known_weg())
-            }
-            None => is_global_enabled,
-        }
-    }
-
+    #[allow(dead_code)]
     pub fn is_bar_enabled(&self) -> bool {
-        self.settings.by_widget.fancy_toolbar.enabled
-    }
-
-    pub fn is_bar_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
-        let is_global_enabled = self.is_bar_enabled();
-        match self.settings.monitors_v3.get(monitor_id.as_str()) {
-            Some(config) => {
-                is_global_enabled
-                    && config
-                        .by_widget
-                        .is_widget_enabled(&WidgetId::known_toolbar())
-            }
-            None => is_global_enabled,
-        }
+        self.is_widget_enabled(&WidgetId::known_toolbar())
     }
 
     pub fn is_window_manager_enabled(&self) -> bool {
-        self.settings.by_widget.wm.enabled
+        self.is_widget_enabled(&WidgetId::known_wm())
+    }
+
+    pub fn is_weg_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
+        self.is_widget_enable_on_monitor(&WidgetId::known_weg(), monitor_id)
+    }
+
+    pub fn is_bar_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
+        self.is_widget_enable_on_monitor(&WidgetId::known_toolbar(), monitor_id)
     }
 
     pub fn is_window_manager_enabled_on_monitor(&self, monitor_id: &MonitorId) -> bool {
-        let is_global_enabled = self.is_window_manager_enabled();
-        match self.settings.monitors_v3.get(monitor_id.as_str()) {
-            Some(config) => {
-                is_global_enabled && config.by_widget.is_widget_enabled(&WidgetId::known_wm())
-            }
-            None => is_global_enabled,
-        }
-    }
-
-    pub fn is_widget_enabled(&self, widget: &Widget) -> bool {
-        match self.settings.by_widget.others.get(&widget.id) {
-            Some(config) => config.enabled,
-            None => widget.metadata.internal.bundled, // only internal widgets are enabled by default
-        }
-    }
-
-    pub fn is_widget_enable_on_monitor(&self, widget: &Widget, monitor_id: &MonitorId) -> bool {
-        if !self.is_widget_enabled(widget) {
-            return false;
-        }
-
-        match widget.instances {
-            WidgetInstanceMode::ReplicaByMonitor => self
-                .settings
-                .monitors_v3
-                .get(monitor_id.as_str())
-                .is_none_or(|monitor_config| {
-                    monitor_config.by_widget.is_widget_enabled(&widget.id)
-                }),
-            _ => Monitor::primary().stable_id2().ok().as_ref() == Some(monitor_id),
-        }
+        self.is_widget_enable_on_monitor(&WidgetId::known_wm(), monitor_id)
     }
 
     pub fn get_widget_instances_ids(&self, widget_id: &WidgetId) -> Vec<Uuid> {
@@ -97,12 +65,12 @@ impl FullState {
         }
     }
 
-    pub fn is_rofi_enabled(&self) -> bool {
-        self.settings.by_widget.launcher.enabled
+    pub fn is_launcher_enabled(&self) -> bool {
+        self.is_widget_enabled(&WidgetId::known_launcher())
     }
 
     pub fn is_wall_enabled(&self) -> bool {
-        self.settings.by_widget.wall.enabled
+        self.is_widget_enabled(&WidgetId::known_wall())
     }
 
     pub fn are_shortcuts_enabled(&self) -> bool {

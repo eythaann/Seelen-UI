@@ -3,6 +3,7 @@
   DetailPrint 'Exec: $1'
   nsExec::Exec $1
   Pop $0
+
   StrCpy $1 "taskkill.exe /F /T /IM seelen-ui.exe"
   DetailPrint 'Exec: $1'
   nsExec::Exec $1
@@ -12,6 +13,14 @@
   ${If} ${FileExists} "$INSTDIR\static\*.*"
     DetailPrint 'Cleaning static folder from previous installation...'
     RMDir /r "$INSTDIR\static"
+  ${EndIf}
+
+  FILE /a "${__FILEDIR__}\..\..\sluhk.dll" ;
+
+  ; Include PDB file only for nightly builds
+  ${StrLoc} $0 "${VERSION}" "nightly" ">"
+  ${If} $0 != ""
+    FILE /a "${__FILEDIR__}\..\..\seelen_ui.pdb"
   ${EndIf}
 !macroend
 

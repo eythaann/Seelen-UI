@@ -70,15 +70,6 @@ export function discoverEntryPoints(): EntryPointInfo[] {
     }
   }
 
-  // Add widgets integrity module
-  if (fs.existsSync("./libs/widgets-integrity/mod.ts")) {
-    entryPoints.push({
-      path: "./libs/widgets-integrity/mod.ts",
-      framework: "vanilla",
-      folder: "widgets-integrity",
-    });
-  }
-
   return entryPoints;
 }
 

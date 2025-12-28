@@ -36,6 +36,14 @@ pub enum ResourceText {
 impl ResourceText {
     const MISSING_TEXT: &'static str = "!?";
 
+    /// Returns true if the text exists for the given lang
+    pub fn has(&self, lang: &str) -> bool {
+        match self {
+            ResourceText::En(_) => lang == "en",
+            ResourceText::Localized(map) => map.get(lang).is_some_and(|t| !t.is_empty()),
+        }
+    }
+
     /// Returns the text by lang, uses `en` as fallback.
     /// If no text fallback found will return `!?`
     pub fn get(&self, lang: &str) -> &str {
@@ -48,6 +56,18 @@ impl ResourceText {
                     None => Self::MISSING_TEXT,
                 },
             },
+        }
+    }
+
+    pub fn set(&mut self, lang: impl Into<String>, value: impl Into<String>) {
+        if let ResourceText::En(v) = self {
+            let mut dict = HashMap::new();
+            dict.insert("en".to_string(), v.to_string());
+            *self = ResourceText::Localized(dict);
+        }
+
+        if let ResourceText::Localized(dict) = self {
+            dict.insert(lang.into(), value.into());
         }
     }
 }
@@ -73,8 +93,25 @@ pub struct ResourceMetadata {
     /// Developers are responsible to update the resource so when resource does not
     /// match the current app version, the resource will be shown with a warning message
     pub app_target_version: Option<(u32, u32, u32)>,
+    /// Extra metadata for the resource
+    pub extras: HashMap<String, String>,
     #[serde(flatten, skip_deserializing)]
     pub internal: InternalResourceMetadata,
+}
+
+impl ResourceMetadata {
+    /// Returns the directory of where the resource is stored
+    pub fn directory(&self) -> Result<PathBuf> {
+        Ok(if self.internal.path.is_dir() {
+            self.internal.path.clone()
+        } else {
+            self.internal
+                .path
+                .parent()
+                .ok_or("No Parent")?
+                .to_path_buf()
+        })
+    }
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
@@ -96,6 +133,7 @@ impl Default for ResourceMetadata {
             banner: None,
             screenshots: Vec::new(),
             tags: Vec::new(),
+            extras: HashMap::new(),
             app_target_version: None,
             internal: InternalResourceMetadata::default(),
         }

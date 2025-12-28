@@ -9,7 +9,6 @@ use std::{
 
 use parking_lot::RwLock;
 use seelen_core::handlers::SeelenEvent;
-use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
     UI::{
@@ -22,16 +21,16 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::{get_app_handle, Seelen, SEELEN},
-    error::{ErrorMap, Result, ResultLogExt},
+    app::{emit_to_webviews, Seelen, SEELEN},
+    error::{Result, ResultLogExt},
     event_manager, log_error,
-    modules::input::{domain::Point, Mouse},
+    modules::input::Mouse,
     state::application::FULL_STATE,
     trace_lock,
     utils::spawn_named_thread,
-    virtual_desktops::{events::VirtualDesktopEvent, get_vd_manager, SluWorkspacesManager},
     widgets::{weg::SeelenWeg, window_manager::instance::WindowManagerV2},
     windows_api::{
+        event_window::IS_INTERACTIVE_SESSION,
         window::{event::WinEvent, Window},
         WindowEnumerator,
     },
@@ -59,12 +58,54 @@ impl HookManager {
             return;
         }
 
-        log_error!(Self::event_tx().send((WinEvent::from(event), Window::from(origin))));
+        // CRITICAL: Skip event processing when session is not interactive (locked/switched)
+        // This prevents excessive CPU usage from processing thousands of events per second
+        // when the user has locked the screen or switched users
+        if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+            return;
+        }
 
+        // deprecated code refactor this on future.
         if FULL_STATE.load().is_weg_enabled() {
             // raw events should be only used for a fastest and immediately processing
             log_error!(SeelenWeg::process_raw_win_event(event, origin));
         }
+
+        let event = WinEvent::from(event);
+        let origin = Window::from(origin);
+        Self::send((event, origin));
+
+        for event in event.get_synthetics(&origin).unwrap_or_default() {
+            Self::send((event, origin));
+        }
+    }
+
+    fn start() {
+        let eid = Self::subscribe(|(event, mut origin)| {
+            if event == WinEvent::SystemForeground {
+                origin = Window::get_foregrounded(); // sometimes this event is emited with the wrong origin
+            }
+            Self::legacy_process_event(event, origin);
+        });
+        Self::set_event_handler_priority(&eid, 1);
+
+        spawn_named_thread("WinEventHook", move || unsafe {
+            SetWinEventHook(
+                EVENT_MIN,
+                EVENT_MAX,
+                None,
+                Some(HookManager::raw_win_event_hook_recv),
+                0,
+                0,
+                0,
+            );
+
+            let mut msg: MSG = MSG::default();
+            while GetMessageW(&mut msg, None, 0, 0).as_bool() {
+                let _ = TranslateMessage(&msg);
+                DispatchMessageW(&msg);
+            }
+        });
     }
 
     fn log_event(event: WinEvent, origin: Window) {
@@ -83,37 +124,36 @@ impl HookManager {
             }
         };
         if event == WinEvent::ObjectDestroy {
-            return log::debug!("{:?}({:0x})", event_value, origin.address());
+            return log::debug!("{event_value:?}({:0x})", origin.address());
         }
         log::debug!("{event_value:?} | {origin:?}");
     }
 
-    fn process_event(event: WinEvent, origin: Window) {
+    fn legacy_process_event(event: WinEvent, origin: Window) {
         Self::log_event(event, origin);
 
-        let shoup_update_focused = matches!(
-            event,
-            WinEvent::SystemForeground
-                | WinEvent::ObjectNameChange
-                | WinEvent::SystemMoveSizeStart
-                | WinEvent::SystemMoveSizeEnd
-                | WinEvent::SyntheticMaximizeStart
-                | WinEvent::SyntheticMaximizeEnd
-                | WinEvent::SyntheticFullscreenStart
-                | WinEvent::SyntheticFullscreenEnd
-        );
+        // TODO: optimize this, update independent fields instead of the whole struct
+        {
+            let shoup_update_focused = matches!(
+                event,
+                WinEvent::SystemForeground
+                    | WinEvent::SyntheticForegroundLocationChange
+                    | WinEvent::ObjectNameChange
+                    | WinEvent::SystemMoveSizeStart
+                    | WinEvent::SystemMoveSizeEnd
+                    | WinEvent::SyntheticMaximizeStart
+                    | WinEvent::SyntheticMaximizeEnd
+                    | WinEvent::SyntheticFullscreenStart
+                    | WinEvent::SyntheticFullscreenEnd
+            );
 
-        if shoup_update_focused && origin.is_focused() {
-            get_app_handle()
-                .emit(
+            if shoup_update_focused && origin.is_focused() {
+                emit_to_webviews(
                     SeelenEvent::GlobalFocusChanged,
                     origin.as_focused_app_information(),
-                )
-                .wrap_error()
-                .log_error();
+                );
+            }
         }
-
-        log_error!(SluWorkspacesManager::on_win_event(event, &origin), event);
 
         let app_state = FULL_STATE.load();
         if app_state.is_weg_enabled() {
@@ -145,48 +185,34 @@ impl HookManager {
 
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
-    init_zombie_window_killer()?;
+    init_zombie_window_killer();
+    HookManager::start();
 
-    spawn_named_thread("WinEventHook", move || unsafe {
-        SetWinEventHook(
-            EVENT_MIN,
-            EVENT_MAX,
-            None,
-            Some(HookManager::raw_win_event_hook_recv),
-            0,
-            0,
-            0,
-        );
-
-        HookManager::subscribe(|(event, mut origin)| {
-            if event == WinEvent::SystemForeground {
-                origin = Window::get_foregrounded(); // sometimes event is emited with wrong origin
-            }
-
-            let synthetics = event.get_synthetics(&origin);
-            HookManager::process_event(event, origin);
-            if let Ok(synthetics) = synthetics {
-                for synthetic_event in synthetics {
-                    HookManager::process_event(synthetic_event, origin)
-                }
-            }
-        });
-
-        let mut msg: MSG = MSG::default();
-        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
-            let _ = TranslateMessage(&msg);
-            DispatchMessageW(&msg);
+    let eid = HookManager::subscribe(|(event, origin)| match event {
+        WinEvent::SystemMoveSizeStart => {
+            origin.set_dragging(true);
         }
+        WinEvent::SystemMoveSizeEnd => {
+            origin.set_dragging(false);
+        }
+        _ => (),
     });
+    HookManager::set_event_handler_priority(&eid, 3);
 
+    // todo move this to input/mouse/keyboard module
     spawn_named_thread("MouseEventHook", || {
-        let handle = get_app_handle();
-        let mut last_pos = Point::default();
+        let mut last_pos = seelen_core::Point::default();
         let sleep_time = Duration::from_millis(100); // 10fps
         loop {
+            // Pause when session is not interactive to reduce CPU usage
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                std::thread::sleep(Duration::from_secs(1));
+                continue;
+            }
+
             if let Ok(pos) = Mouse::get_cursor_pos() {
                 if last_pos != pos {
-                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.x(), pos.y()]);
+                    emit_to_webviews(SeelenEvent::GlobalMouseMove, &[pos.x, pos.y]);
                     last_pos = pos;
                 }
             }
@@ -194,23 +220,10 @@ pub fn register_win_hook() -> Result<()> {
         }
     });
 
-    SluWorkspacesManager::subscribe(|e| log_error!(process_vd_event(e)));
     Ok(())
 }
 
-pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
-    if FULL_STATE.load().is_window_manager_enabled() {
-        WindowManagerV2::process_vd_event(&event)?;
-    }
-
-    get_app_handle().emit(
-        SeelenEvent::VirtualDesktopsChanged,
-        get_vd_manager().desktops(),
-    )?;
-    Ok(())
-}
-
-pub fn init_zombie_window_killer() -> Result<()> {
+pub fn init_zombie_window_killer() {
     let existing_windows = Arc::new(RwLock::new(HashSet::new()));
 
     let dict = existing_windows.clone();
@@ -237,16 +250,20 @@ pub fn init_zombie_window_killer() -> Result<()> {
 
         loop {
             std::thread::sleep(std::time::Duration::from_secs(1));
+
+            // Pause when session is not interactive to reduce CPU usage
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                continue;
+            }
+
             let guard = existing_windows.write();
             for addr in guard.iter() {
                 let window = Window::from(*addr);
                 if !window.is_window() {
-                    // log::trace!("Reaping window: {:0x}", window.address());
-                    log_error!(HookManager::event_tx().send((WinEvent::ObjectDestroy, window)));
+                    log::trace!("Reaping window: {:0x}", window.address());
+                    HookManager::send((WinEvent::ObjectDestroy, window));
                 }
             }
         }
     });
-
-    Ok(())
 }

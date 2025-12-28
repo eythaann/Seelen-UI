@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Aggiorna
     ok_readonly: Modifica come Nuovo
     options:
-      float: Fluttuante
-      force: Forza Gestione
-      hidden: Nascondi da dock/barra delle attività
-      pinned: Fissato
-      unmanage: Non Gestire
+      NoInteractive: Non interattivo
+      VdPinned: Mostra in tutte le aree di lavoro
+      WmFloat: Twm - Inizia a fluttuare
+      WmForce: Twm - Gestione della forza
+      WmUnmanage: Twm - Non gestibile
     options_label: Opzioni Extra
     title_create: Crea {{name}}
     title_edit: Modifica {{name}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Ritardo per nascondere
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
-  dynamic_color: Colore dinamico
-  dynamic_color_tooltip: >-
-    Abilita i colori dinamici di sfondo e primo piano in base alla finestra
-    focalizzata. (I colori possono essere sovrascritti dai temi).
   enable: Abilita Barra Fancy
   height: Altezza
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Sulla sovrapposizione
   label: Barra
   placeholder: {}
-  show_hibernate: Mostra il pulsante di ibernazione nel menu di alimentazione
 update:
   available: Aggiornamento Disponibile!
   channel: Canale di Aggiornamento
@@ -305,7 +300,6 @@ weg:
       all: Tutto
       label: Visibilità degli elementi non bloccati
       on_monitor: Sul monitor
-    thumbnail_generation_enabled: Generare miniature al passaggio del mouse sugli elementi
     visible_separators: Separatori Visibili
   label: Dock/Barra delle Attività
   margin: Margine
@@ -330,6 +324,10 @@ wm:
     offset: Offset Bordo
     width: Larghezza Bordo
   description: Descrizione
+  drag_behavior: Comportamento di trascinamento
+  drag_behavior_options:
+    sort: Ordina (riordina le finestre durante il trascinamento)
+    swap: Scambia (scambia le finestre alla fine del trascinamento)
   enable: Abilita Gestore delle Finestre a Tiling
   layout: Layout
   resize_delta: Delta Ridimensionamento (percento)

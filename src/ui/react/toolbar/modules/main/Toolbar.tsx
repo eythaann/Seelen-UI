@@ -13,24 +13,20 @@ import { arrayMove } from "@dnd-kit/sortable";
 import { useComputed, useSignal } from "@preact/signals";
 import type { ToolbarItem2 } from "@seelen-ui/lib/types";
 import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
-import { useWindowFocusChange } from "@shared/hooks";
-import { cx } from "@shared/styles";
-import { isEqual } from "lodash";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
+import { cx } from "libs/ui/react/utils/styling.ts";
+import { useState } from "react";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
-
-import { Selectors } from "../shared/store/app.ts";
-
-import type { RootState } from "../shared/store/domain.ts";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { $toolbar_state } from "../shared/state/items.ts";
-import { $bar_should_be_hidden, $settings } from "../shared/state/mod.ts";
+import { $settings } from "../shared/state/mod.ts";
 import { matchIds } from "../shared/utils.ts";
 import { MainContextMenu } from "./ContextMenu.tsx";
 import { ItemsDropableContainer } from "./ItemsContainer.tsx";
 import { componentByModule } from "./mappins.tsx";
+import { $bar_should_be_hidden, $lastFocusedOnMonitor, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
+import { ShowDesktopButton } from "./CornerAction.tsx";
 
 interface Container {
   id: string;
@@ -55,10 +51,6 @@ export function FancyToolbar() {
   ]);
 
   const [openContextMenu, setOpenContextMenu] = useState(false);
-
-  const focusedWindow = useSelector(Selectors.focused);
-
-  const data = useBarData();
 
   useWindowFocusChange((focused) => {
     if (!focused) {
@@ -152,12 +144,13 @@ export function FancyToolbar() {
         className={cx("ft-bar", $settings.value.position.toLowerCase(), {
           "ft-bar-hidden": $bar_should_be_hidden.value,
         })}
-        data-there-is-maximized-on-background={data.thereIsMaximizedOnBg}
-        data-focused-is-maximized={!!focusedWindow?.isMaximized}
-        data-focused-is-overlay={!!focusedWindow?.isSeelenOverlay}
-        data-dynamic-color={$settings.value.dynamicColor}
+        data-there-is-maximized-on-background={$thereIsMaximizedOnBg.value}
+        data-focused-is-maximized={!!$lastFocusedOnMonitor.value?.isMaximized}
+        data-focused-is-overlay={!!$lastFocusedOnMonitor.value?.isSeelenOverlay}
       >
+        <ShowDesktopButton />
         <BackgroundByLayersV2 prefix="ft-bar" />
+
         <DndContext
           collisionDetection={closestCorners}
           onDragStart={({ active }: DragStartEvent) => {
@@ -173,37 +166,9 @@ export function FancyToolbar() {
           {$containers.value.map(({ id, items }) => <ItemsDropableContainer key={id} id={id} items={items} />)}
           <DragOverlay>{draggingItem && componentByModule(draggingItem)}</DragOverlay>
         </DndContext>
+
+        <ShowDesktopButton />
       </div>
     </AnimatedDropdown>
   );
-}
-
-function useBarData() {
-  const maximizedOnBg = useSelector((state: RootState) => {
-    return state.openApps.find((app) => app.isZoomed && !app.isIconic);
-  });
-
-  const colors = useSelector(Selectors.windowColorByHandle, isEqual);
-  const color = maximizedOnBg ? colors[String(maximizedOnBg.handle)] : undefined;
-
-  useEffect(() => {
-    if (color) {
-      document.documentElement.style.setProperty(
-        "--color-maximized-on-bg-background",
-        color.background,
-      );
-      document.documentElement.style.setProperty(
-        "--color-maximized-on-bg-foreground",
-        color.foreground,
-      );
-    } else {
-      document.documentElement.style.removeProperty("--color-maximized-on-bg-background");
-      document.documentElement.style.removeProperty("--color-maximized-on-bg-foreground");
-    }
-  }, [color]);
-
-  return {
-    thereIsMaximizedOnBg: !!maximizedOnBg,
-    dynamicBarColor: color,
-  };
 }

@@ -2,14 +2,11 @@ mod brightness;
 
 use itertools::Itertools;
 use windows::{
-    Devices::Display::Core::{DisplayTarget, DisplayView},
+    Devices::Display::Core::{DisplayTarget, DisplayView as WinRTDisplayView},
     Win32::Graphics::Gdi::HMONITOR,
 };
 
-use crate::{
-    error::Result,
-    modules::{input::domain::Point, monitors::MonitorManager},
-};
+use crate::{error::Result, modules::monitors::MonitorManager};
 use seelen_core::{rect::Rect, system_state::MonitorId};
 
 use super::{MonitorEnumerator, WindowsApi};
@@ -33,8 +30,8 @@ impl From<isize> for Monitor {
     }
 }
 
-impl From<&Point> for Monitor {
-    fn from(point: &Point) -> Self {
+impl From<&seelen_core::Point> for Monitor {
+    fn from(point: &seelen_core::Point) -> Self {
         let hmonitor = WindowsApi::monitor_from_point(point);
         Self(hmonitor)
     }
@@ -48,7 +45,7 @@ impl Monitor {
     }
 
     pub fn index(&self) -> Result<usize> {
-        let monitors = MonitorEnumerator::get_all_v2()?;
+        let monitors = MonitorEnumerator::enumerate_win32()?;
         let (idx, _) = monitors
             .into_iter()
             .find_position(|monitor| monitor == self)
@@ -64,8 +61,8 @@ impl Monitor {
         self.0 == WindowsApi::primary_monitor()
     }
 
-    pub fn as_monitor_view(&self) -> Result<MonitorView> {
-        MonitorManager::view_at(self.index()? as u32)
+    pub fn as_monitor_view(&self) -> Result<DisplayView> {
+        MonitorManager::instance().read_view_at(self.index()? as u32)
     }
 
     pub fn name(&self) -> Result<String> {
@@ -73,11 +70,11 @@ impl Monitor {
     }
 
     pub fn stable_id(&self) -> Result<String> {
-        self.as_monitor_view()?.primary_target()?.stable_id()
+        Ok(self.as_monitor_view()?.primary_target()?.stable_id()?.0)
     }
 
     pub fn stable_id2(&self) -> Result<MonitorId> {
-        self.as_monitor_view()?.primary_target()?.stable_id2()
+        self.as_monitor_view()?.primary_target()?.stable_id()
     }
 
     pub fn rect(&self) -> Result<Rect> {
@@ -98,13 +95,20 @@ impl Monitor {
 }
 
 /// represents a display screen view (one view can be shown in multiple displays 'mirrors')
+///
+/// # Safety
+/// this is unsafe of store for long sessions as this object could be invalid on display changes
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct MonitorView(DisplayView);
+pub struct DisplayView(WinRTDisplayView);
 
-impl MonitorView {
-    pub fn index(&self) -> Result<usize> {
+impl DisplayView {
+    fn index(&self) -> Result<usize> {
         let searching_id = self.primary_target()?.stable_id()?;
-        for (idx, view) in MonitorManager::get_all_views()?.into_iter().enumerate() {
+        for (idx, view) in MonitorManager::instance()
+            .read_all_views()?
+            .into_iter()
+            .enumerate()
+        {
             let current_id = view.primary_target()?.stable_id()?;
             if current_id == searching_id {
                 return Ok(idx);
@@ -114,7 +118,7 @@ impl MonitorView {
     }
 
     pub fn as_win32_monitor(&self) -> Result<Monitor> {
-        let win32_views = MonitorEnumerator::get_all_v2()?;
+        let win32_views = MonitorEnumerator::enumerate_win32()?;
         let monitor = win32_views.get(self.index()?).copied();
         Ok(monitor.ok_or("Invalid or expired monitor view")?)
     }
@@ -132,8 +136,8 @@ impl MonitorView {
     }
 }
 
-impl From<DisplayView> for MonitorView {
-    fn from(view: DisplayView) -> Self {
+impl From<WinRTDisplayView> for DisplayView {
+    fn from(view: WinRTDisplayView) -> Self {
         Self(view)
     }
 }
@@ -142,11 +146,7 @@ impl From<DisplayView> for MonitorView {
 pub struct MonitorTarget(DisplayTarget);
 
 impl MonitorTarget {
-    pub fn stable_id(&self) -> Result<String> {
-        Ok(self.0.StableMonitorId()?.to_string())
-    }
-
-    pub fn stable_id2(&self) -> Result<MonitorId> {
+    pub fn stable_id(&self) -> Result<MonitorId> {
         Ok(self.0.StableMonitorId()?.to_string().into())
     }
 

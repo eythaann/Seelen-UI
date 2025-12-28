@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Eguneratu
     ok_readonly: Editatu berria
     options:
-      float: Flotatu
-      force: Indar kudeatzea
-      hidden: Ezkutatu kai / ataza-barran
-      pinned: Pipe
-      unmanage: Loraza
+      NoInteractive: Ez interaktiborik
+      VdPinned: Erakutsi laneko gune guztietan
+      WmFloat: Twm - Hasi flotatzen
+      WmForce: Twm - Indarra kudeatu
+      WmUnmanage: Twm - Deskudeatu
     options_label: Aukera gehigarriak
     title_create: '{{Name}} sortzea'
     title_edit: '{{Name}} edizioa'
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
-  dynamic_color: Kolore dinamikoa
-  dynamic_color_tooltip: >-
-    Gaitu fokatutako leihoan oinarritutako atzeko plano eta lehen planoko kolore
-    dinamikoak. (Koloreak gaiak gainditu daitezke)
   enable: Gaitu tresna-barra
   height: Luzera
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Gainjartzean
   label: Tresna barra
   placeholder: {}
-  show_hibernate: Erakutsi Hibernate botoia Power Menuan
 update:
   available: Eguneratu eskuragarri!
   channel: Eguneratu kanala
@@ -305,7 +300,6 @@ weg:
       all: Denak
       label: Ainguratu gabeko elementuen ikusgaitasuna
       on_monitor: Monitorean
-    thumbnail_generation_enabled: Sortu miniatura igotzeko elementuan
     visible_separators: Ikusgai bereizgailuak
   label: Dock / ataza barra
   margin: Emandar
@@ -330,6 +324,10 @@ wm:
     offset: Ertzaren desplazamendua
     width: Ertzaren zabalera
   description: Deskribapen
+  drag_behavior: Arrastatu portaera
+  drag_behavior_options:
+    sort: Ordenatu (berrantolatu leihoak arrastatu bitartean)
+    swap: Trukatu (trukatu leihoak arrastatu amaieran)
   enable: Gaitu fitxa leiho kudeatzailea
   layout: Diseinu
   resize_delta: RETIZE DELTA (%)

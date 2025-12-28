@@ -75,6 +75,9 @@ jobs:
           winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
+      - name: Build Hook DLL
+        run: cargo build --release --target ${{ matrix.target }} -p sluhk
+
       - name: Build
         run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
 
@@ -164,6 +167,12 @@ jobs:
           echo "Signing ${PATH2}..."
           tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH2"
 
+      - name: Remove self-signed MSIX files
+        run: |
+          echo "Removing self-signed .msix files from bundles..."
+          find ./bundles -name "*.msix" -type f -delete
+          echo "Self-signed .msix files removed (Store-signed MSIX will be added later by msix.yml workflow)"
+
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
         with:
@@ -194,23 +203,8 @@ jobs:
           PartnerCenterClientSecret: ${{ secrets.MS_CLIENT_SECRET }}
           SBDisableTelemetry: true
 
-  generate-update-file:
-    needs: [create-release, sign-and-upload]
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
-      - uses: ./.github/actions/generate-update-manifest
-        with:
-          release-id: ${{ needs.create-release.outputs.release_id }}
-          version: ${{ env.PACKAGE_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
   publish-release:
-    needs: [create-release, generate-update-file]
+    needs: [create-release, sign-and-upload]
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -228,6 +222,21 @@ jobs:
               release_id: process.env.releaseId,
               draft: false,
             });
+
+  generate-update-file:
+    needs: [create-release, publish-release]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+      - uses: ./.github/actions/generate-update-manifest
+        with:
+          release-id: ${{ needs.create-release.outputs.release_id }}
+          version: ${{ env.PACKAGE_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   discord:
     needs: publish-release

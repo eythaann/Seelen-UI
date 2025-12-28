@@ -1,5 +1,5 @@
 import { type AppIdentifier, AppIdentifierType, MatchingStrategy } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Input, Select, Switch } from "antd";
 import { cloneDeep } from "lodash";
 import { useTranslation } from "react-i18next";

@@ -6,25 +6,13 @@ use crate::{
     error::Result,
     log_error,
     state::application::FULL_STATE,
-    utils::{
-        are_overlaped,
-        constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
-    },
     widgets::WebviewArgs,
-    windows_api::{window::Window, AppBarData, WindowsApi},
+    windows_api::{monitor::Monitor, AppBarData, WindowsApi},
 };
 use base64::Engine;
-use seelen_core::{
-    handlers::SeelenEvent,
-    state::{FancyToolbarSide, HideMode},
-};
-use serde::Serialize;
-use tauri::{Emitter, WebviewWindow};
-use windows::Win32::{
-    Foundation::{HWND, RECT},
-    Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SW_HIDE, SW_SHOWNOACTIVATE},
-};
+use seelen_core::state::{FancyToolbarSide, HideMode};
+use tauri::WebviewWindow;
+use windows::Win32::Foundation::{HWND, RECT};
 
 pub struct FancyToolbar {
     window: WebviewWindow,
@@ -32,8 +20,6 @@ pub struct FancyToolbar {
     pub theoretical_rect: RECT,
     /// This is the webview/window rect
     pub webview_rect: RECT,
-    overlaped_by: Option<Window>,
-    hidden: bool,
 }
 
 impl Drop for FancyToolbar {
@@ -56,86 +42,7 @@ impl FancyToolbar {
             window: Self::create_window(monitor)?,
             theoretical_rect: RECT::default(),
             webview_rect: RECT::default(),
-            overlaped_by: None,
-            hidden: false,
         })
-    }
-
-    pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
-        self.window.emit_to(self.window.label(), event, payload)?;
-        Ok(())
-    }
-
-    fn is_overlapping(&self, window: &Window) -> Result<bool> {
-        let window_rect = WindowsApi::get_inner_window_rect(window.hwnd())?;
-        Ok(are_overlaped(&self.theoretical_rect, &window_rect))
-    }
-
-    pub fn set_overlaped(&mut self, overlaped_by: Option<Window>) -> Result<()> {
-        if self.overlaped_by != overlaped_by {
-            self.emit(SeelenEvent::ToolbarOverlaped, overlaped_by.is_some())?;
-        }
-        self.overlaped_by = overlaped_by;
-        let is_fullscreen = self.overlaped_by.is_some_and(|w| w.is_fullscreen());
-        if is_fullscreen {
-            self.hide()?;
-        } else {
-            self.show()?;
-        }
-        Ok(())
-    }
-
-    pub fn handle_overlaped_status(&mut self, window: &Window) -> Result<()> {
-        let is_overlaped = self.is_overlapping(window)?
-            && !window.is_desktop()
-            && !window.is_seelen_overlay()
-            && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str())
-            && !OVERLAP_BLACK_LIST_BY_EXE.contains(
-                &window
-                    .process()
-                    .program_exe_name()
-                    .unwrap_or_default()
-                    .as_str(),
-            );
-
-        if is_overlaped {
-            return self.set_overlaped(Some(*window));
-        }
-
-        if self.overlaped_by.is_some()
-            && WindowsApi::monitor_from_window(self.hwnd()?) == window.monitor().handle()
-        {
-            self.set_overlaped(None)?;
-        }
-        Ok(())
-    }
-
-    pub fn hide(&mut self) -> Result<()> {
-        if self.hidden {
-            return Ok(());
-        }
-        WindowsApi::show_window_async(self.hwnd()?, SW_HIDE)?;
-        self.hidden = true;
-        self.window.emit_to(
-            self.window.label(),
-            SeelenEvent::HandleLayeredHitboxes,
-            false,
-        )?;
-        Ok(())
-    }
-
-    pub fn show(&mut self) -> Result<()> {
-        if !self.hidden {
-            return Ok(());
-        }
-        WindowsApi::show_window_async(self.hwnd()?, SW_SHOWNOACTIVATE)?;
-        self.hidden = false;
-        self.window.emit_to(
-            self.window.label(),
-            SeelenEvent::HandleLayeredHitboxes,
-            true,
-        )?;
-        Ok(())
     }
 }
 
@@ -179,24 +86,24 @@ impl FancyToolbar {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
+
         Ok(window)
     }
 
-    pub fn get_toolbar_height_on_monitor(monitor: HMONITOR) -> Result<i32> {
+    pub fn get_toolbar_height_on_monitor(monitor: &Monitor) -> Result<i32> {
         let state = FULL_STATE.load();
         let settings = &state.settings.by_widget.fancy_toolbar;
-        let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(monitor)?;
-        let text_scale_factor = WindowsApi::get_text_scale_factor()?;
-        Ok((settings.height as f64 * monitor_scale_factor * text_scale_factor) as i32)
+        let scale_factor = monitor.scale_factor()?;
+        Ok((settings.height as f64 * scale_factor) as i32)
     }
 
-    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
+    pub fn set_position(&mut self, monitor: &Monitor) -> Result<()> {
         let hwnd = HWND(self.hwnd()?.0);
 
         let state = FULL_STATE.load();
         let settings = &state.settings.by_widget.fancy_toolbar;
 
-        let monitor_info = WindowsApi::monitor_info(monitor)?;
+        let monitor_info = WindowsApi::monitor_info(monitor.handle())?;
         let rc_monitor = monitor_info.monitorInfo.rcMonitor;
 
         let real_height = Self::get_toolbar_height_on_monitor(monitor)?;
@@ -227,8 +134,12 @@ impl FancyToolbar {
         };
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(hwnd, &real_rect)?;
-        WindowsApi::set_position(hwnd, None, &real_rect, SWP_ASYNCWINDOWPOS)?;
+        self.window
+            .set_position(tauri::PhysicalPosition::new(real_rect.left, real_rect.top))?;
+        self.window.set_size(tauri::PhysicalSize::new(
+            real_rect.right - real_rect.left,
+            real_rect.bottom - real_rect.top,
+        ))?;
         Ok(())
     }
 
@@ -237,7 +148,7 @@ impl FancyToolbar {
         if self.webview_rect == WindowsApi::get_outer_window_rect(hwnd)? {
             return Ok(()); // position is ok no need to reposition
         }
-        self.set_position(WindowsApi::monitor_from_window(hwnd))?;
+        self.set_position(&Monitor::from(WindowsApi::monitor_from_window(hwnd)))?;
         Ok(())
     }
 }

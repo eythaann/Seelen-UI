@@ -1,5 +1,5 @@
 import { HideMode, SeelenWegMode, SeelenWegSide } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 
@@ -165,13 +165,6 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.spaceBetweenItems}
               onChange={(value) => dispatch(SeelenWegActions.setSpaceBetweenItems(value || 0))}
-            />
-          </SettingsOption>
-          <SettingsOption>
-            <div>{t("weg.items.thumbnail_generation_enabled")}</div>
-            <Switch
-              checked={settings.thumbnailGenerationEnabled}
-              onChange={(value) => dispatch(SeelenWegActions.setThumbnailGenerationEnabled(value))}
             />
           </SettingsOption>
           <SettingsOption>

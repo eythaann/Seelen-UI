@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Päivittää
     ok_readonly: Muokata UUSIA
     options:
-      float: Kellua
-      force: Voimankäyttö
-      hidden: Piiloutua telakalta/tehtäväpalkista
-      pinned: Kiinnitetty
-      unmanage: Hallinta
+      NoInteractive: Ei interaktiivista
+      VdPinned: Näytä kaikissa työtiloissa
+      WmFloat: Twm - Aloita kelluminen
+      WmForce: Twm - Pakota hallinta
+      WmUnmanage: Twm - Ei hallintaa
     options_label: Ylimääräiset vaihtoehdot
     title_create: '{{Nimi}} luominen'
     title_edit: Muokkaaminen {{nimi}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
   dock_side: Asema
-  dynamic_color: Dynaaminen väri
-  dynamic_color_tooltip: >-
-    Ota käyttöön dynaamiset tausta- ja etualavärit, jotka perustuvat
-    tarkennettuun ikkunaan. (Teemat voivat ohittaa värit).
   enable: Ota hieno työkalurivi käyttöön
   height: Korkeus
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Päällekkäin
   label: Työkalurivi
   placeholder: {}
-  show_hibernate: Näytä lepotilapainike virtapainikkeessa
 update:
   available: Päivitä saatavilla!
   channel: Päivityskanava
@@ -305,7 +300,6 @@ weg:
       all: Kaikki
       label: Irrotettujen kohteiden näkyvyys
       on_monitor: Monitorissa
-    thumbnail_generation_enabled: Luo pikkukuvia kohteen leijailun yhteydessä
     visible_separators: Näkyvät erottimet
   label: Telakka/tehtäväpalkki
   margin: Marginaali
@@ -330,6 +324,10 @@ wm:
     offset: Rajan siirtyminen
     width: Rajan leveys
   description: Kuvaus
+  drag_behavior: Vetokäyttäytyminen
+  drag_behavior_options:
+    sort: Lajittele (järjestä ikkunat uudelleen vetäessäsi)
+    swap: Vaihda (vaihda ikkunoita vetämällä)
   enable: Ota laatta -ikkunanhallinta käyttöön
   layout: Layout
   resize_delta: Muuttaa Delta (%)

@@ -18,7 +18,7 @@ async function getArgs() {
   };
 }
 
-const [major, minor, patch, nightly_date] = packageJson.version.split(/[\.\+]/);
+const [major, minor, patch, pre, _build_number] = packageJson.version.split(/[\.\+\-]/);
 if (major === undefined || minor === undefined || patch === undefined) {
   throw new Error("Invalid package version");
 }
@@ -42,10 +42,8 @@ fs.mkdirSync(bundleFolder, { recursive: true });
 
 // we skip revision here because greater numbers than 65535 are not supported on msix
 const appxPackageVersion = `${major}.${minor}.${patch}.0`;
-const fileVersion = nightly_date ? packageJson.version : appxPackageVersion;
-const installer_msix_path = path.resolve(
-  `${bundleFolder}/Seelen.SeelenUI_${fileVersion}_${arch}__p6yyn03m1894e.msix`,
-);
+const fileVersion = pre ? packageJson.version : appxPackageVersion;
+const installer_msix_path = path.resolve(`${bundleFolder}/Seelen.UI_${fileVersion}_${arch}.msix`);
 
 // Add manifest
 const manifest = fs
@@ -55,8 +53,17 @@ const manifest = fs
 fs.writeFileSync(`${buildFolder}/AppxManifest.xml`, manifest);
 
 // Add binaries
-fs.copyFileSync(`target/${target}/release/slu-service.exe`, `${buildFolder}/slu-service.exe`);
 fs.copyFileSync(`target/${target}/release/seelen-ui.exe`, `${buildFolder}/seelen-ui.exe`);
+fs.copyFileSync(`target/${target}/release/slu-service.exe`, `${buildFolder}/slu-service.exe`);
+fs.copyFileSync(`target/${target}/release/splash.exe`, `${buildFolder}/splash.exe`);
+
+// add pdb files if debug
+if (pre || target === "./") {
+  fs.copyFileSync(`target/${target}/release/seelen_ui.pdb`, `${buildFolder}/seelen_ui.pdb`);
+}
+
+// dlls
+fs.copyFileSync(`target/${target}/release/sluhk.dll`, `${buildFolder}/sluhk.dll`);
 
 // Add resources
 fs.cpSync("src/static", `${buildFolder}/static`, { recursive: true });
@@ -68,7 +75,7 @@ try {
 
   // sign installer with local certificate (this is for testing only) store changes the cert in the windows store
   let out2 = execSync(
-    `msixHeroCli sign -f ./.cert/Seelen.pfx -p seelen -t http://time.certum.pl ${installer_msix_path}`,
+    `msixHeroCli sign -f ./.cert/Seelen.pfx -p Seelen -t http://time.certum.pl ${installer_msix_path}`,
   );
   console.info(out2.toString());
 } catch (error) {

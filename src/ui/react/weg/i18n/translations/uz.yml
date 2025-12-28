@@ -12,17 +12,19 @@ app_menu:
   run_as: Administrator sifatida yugurish
   unpin: Chetlashmoq
 context_menu:
+  remove_module: Modulni olib tashlash
   reorder_disable: Qulf vazifasi paneli
   reorder_enable: Vazifalar panelini oching
 media:
   not_playing: Hech narsa o'ynamaydi
-media_menu:
-  remove: Media modulini olib tashlang
-start_menu:
-  remove: Boshlash moduliini olib tashlang
+show_desktop:
+  label: Ish stolini ko'rsatish
+start:
+  label: Boshlash menyusi
 taskbar_menu:
   add_file: PIN-kod
   add_folder: Shaxsiy papka
+  desktop: Ish stoli modulini qo'shing
   media: Media modul qo'shing
   settings: Sozlamalar
   start: Boshlash moduli qo'shing

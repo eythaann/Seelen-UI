@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ClassValue } from "svelte/elements";
-  import type { IconName } from "./icons";
   import InlineSVG from "./InlineSVG.svelte";
+  import type { IconName } from "libs/ui/icons";
 
   interface Props {
     iconName: IconName;
@@ -29,12 +29,12 @@
 <InlineSVG
   {...rest}
   src={`/icons/${iconName}.svg`}
-  class={["slu-icon", "react-icon", className]}
+  class={["slu-icon", className]}
   style={computedStyle}
 />
 
 <style>
-  :global(.react-icon) {
+  :global(.slu-icon) {
     height: 1rem;
     width: max-content;
     display: inline-block;

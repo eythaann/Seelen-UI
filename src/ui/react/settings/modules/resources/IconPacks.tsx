@@ -1,6 +1,6 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { type IconPack, type IconPackId, ResourceKind } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { path } from "@tauri-apps/api";
 import { Button, Switch } from "antd";
 import { Reorder } from "framer-motion";

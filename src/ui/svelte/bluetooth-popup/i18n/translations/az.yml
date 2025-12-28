@@ -1,0 +1,24 @@
+available: Mövcud qurğular
+cancel: Ləğv etmək
+confirm: Təsdiq etmək
+confirm_only: Cütləşmə təsdiqləyin
+confirm_pin: PİN uyğun olduğunu təsdiqləyin
+connected: Bağlı
+disconnect: Ayırd etmək
+display_pin: Cihazdakı bu pini daxil edin
+lowenergy: Aşağı enerji
+more: Daha çox bluetooth parametrləri
+no_adapter: Bluetooth adapteri tapılmadı
+not_found: Heç bir cihaz tapılmadı
+pair: Cütləşdirmək
+paired: Qoşalaşmış
+pairing: Cütləşmə ...
+pairing_failed: Cütləşmə uğursuz oldu
+password: Parol
+provide_address: Addamaq
+provide_password: İstifadəçi adı və şifrənizi daxil edin
+provide_pin: Pin daxil etmək
+scanning: Cihazlar üçün tarama ...
+unpair: Çəpər
+unpair_failed: Uğursuzluq uğursuz oldu
+username: İstifadəçi adı

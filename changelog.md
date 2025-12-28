@@ -1,21 +1,123 @@
 # Changelog
 
+## [2.5.0-dev]
+
+### features
+
+- add corner actions on toolbar.
+- add toggle desktop module on dock.
+- allow layout sorting by windows dragging on the tiling window manager.
+- workspaces viewer gui.
+- wallpapers per monitor and per workspace.
+- wallpaper collections.
+- allow set start of week on calendars.
+
+### enhancements
+
+- improve display changes events.
+- tiling window manager now swap windows by center point on drag end.
+- improve windows preview system.
+- improvements on wallpaper manager syncronization and changes.
+- settings UX improvements.
+- extraction on local video wallpapers thumbnails.
+- avoid reload the UI while playing as this can cause fps drops.
+
+### fix
+
+- window manager moving windows being currently dragged by the user.
+- power menu on multi-monitor setups.
+- showing paused message on no video wallpapers.
+- app not working on local accounts.
+- app and service not running if already running on another session.
+- high cpu usage while user session inactive.
+
+## [2.4.11]
+
+### fix
+
+- tray not working on MSIX installation.
+- shortcuts not being enabled by default but widgets yes.
+
+## [2.4.10]
+
+### refactor
+
+- entire rewrite of the bluetooth module.
+- internal widgets loader.
+- internal generated icon pack logic.
+
+### enhancements
+
+- expose complementary colors of the system accent to css.
+- change theme config url from input to local file selector.
+- lazy widgets initialization.
+- auto closing of popup widgets to save resources.
+- show paused message on wallpaper manager.
+
+### fix
+
+- no updating data attribute on toolbar for maximized windows on background.
+- ghost items on dock and window manager.
+- missing messages to the service on startup.
+- options field on theme settings rendering an input instead of selector.
+- missing events on app windows hook.
+- wasted space reserved for tiling window manager when dock/toolbar are disabled on monitor.
+- fix missing variables values on default percentages for theme variables.
+- #1290 dock and toolbar showing on other monitors when mouse is at edge of screen.
+
+## [2.4.9]
+
+### features
+
+- implement wallpaper downloads.
+- add new wallpaper type "layered" it allows create unique wallpaper via css.
+- new css variables added related to the date (hour, minute, day, month, year).
+
+## [2.4.8]
+
+### enhancements
+
+- toolbar overlapped and hidden state.
+- addition of pdb files on nightly builds.
+- interactable windows matching system.
+
+### fix
+
+- crash caused by wallpaper manager.
+- toolbar being shown while using fullscreen apps.
+- dock being shown while using fullscreen apps.
+
+## [2.4.7]
+
+### features
+
+- add new cli command to tranlate resource texts.
+
+### enhancements
+
+- improve window manager matching system.
+
 ## [2.4.6]
 
 ### features
 
 - add new cli command to bundle resources.
+- allow close window using middle click on dock item preview.
 
 ### refactor
 
 - remove export resource button from settings.
 - remake wm ui from react to svelte (this reduced 10mb of ram usage).
+- remove native shell window hook, instead use win32 hooks via dlls.
 
 ### fix
 
 - infity switching loop on workspaces.
 - memory leak on long sessions.
 - external links not working.
+- wallpaper manager corner barder radius.
+- windows overlaping the toolbar and dock when autohide is disabled.
+- Power Menu not showing corrently on multiple monitors (#1266).
 
 ## [2.4.5]
 

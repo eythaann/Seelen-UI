@@ -1,4 +1,4 @@
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 

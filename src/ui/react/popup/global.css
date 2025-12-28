@@ -53,20 +53,6 @@ body {
     width: 100%;
     padding: 12px 16px;
     overflow: auto;
-
-    &::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--color-gray-500);
-      border-radius: 8px;
-    }
   }
 
   .footer {
@@ -90,8 +76,8 @@ body {
     justify-content: center;
     gap: 4px;
     padding: 0 8px;
-    background-color: var(--config-accent-color);
-    color: var(--color-persist-white);
+    background-color: var(--system-accent-color);
+    color: var(--color-fixed-white);
     border-radius: 6px;
     transition: background-color 0.2s ease-in-out;
     font-size: 0.9rem;

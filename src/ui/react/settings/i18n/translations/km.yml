@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: ធ្វើបច្ចុប្បន្នភាព
     ok_readonly: កែសម្រួលដូចថ្មី។
     options:
-      float: អណ្តែត
-      force: គ្រប់គ្រងដោយបង្ខំ
-      hidden: លាក់ខ្លួនពីចត / ភារកិច្ច
-      pinned: ខ្ទាស់
-      unmanage: មិនគ្រប់គ្រង
+      NoInteractive: គ្មានអន្តរកម្ម
+      VdPinned: បង្ហាញនៅក្នុងកន្លែងធ្វើការទាំងអស់
+      WmFloat: TWM - ចាប់ផ្តើមអណ្តែត
+      WmForce: TWM - គ្រប់គ្រងកម្លាំង
+      WmUnmanage: TWM - Unmanage
     options_label: ជម្រើសបន្ថែម
     title_create: ការបង្កើត {{name}}
     title_edit: ការកែសម្រួល {{ឈ្មោះ}}
@@ -228,10 +228,6 @@ toolbar:
   delay_to_hide: ពន្យារពេលដើម្បីលាក់
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
   dock_side: តីតាមង
-  dynamic_color: ពណ៌ថាមវន្ត
-  dynamic_color_tooltip: >-
-    បើកដំណើរការផ្ទៃខាងក្រោយថាមវន្តនិងពណ៌ខាងមុខដោយផ្អែកលើបង្អួចដែលផ្តោតអារម្មណ៍។
-    (ពណ៌អាចត្រូវបានបដិសេធដោយស្បែក)
   enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
   height: កម្ពស់
   hide_mode:
@@ -240,7 +236,6 @@ toolbar:
     on_overlap: នៅលើការត្រួតស៊ីគ្នា។
   label: របាររបន៍របយ័ត្ន។ រប
   placeholder: {}
-  show_hibernate: បង្ហាញប៊ូតុង hibernate នៅលើ menu enu
 update:
   available: មានបច្ចុប្បន្នភាព!
   channel: ឆានែលធ្វើបច្ចុប្បន្នភាព
@@ -302,7 +297,6 @@ weg:
       all: ទាំងអស់។
       label: ភាពមើលឃើញធាតុដែលមិនបានខ្ទាស់
       on_monitor: នៅលើម៉ូនីទ័រ
-    thumbnail_generation_enabled: បង្កើតរូបភាពតូចលើការសំកាំងរបស់ធាតុ
     visible_separators: សញ្ញាបំបែកដែលអាចមើលឃើញ
   label: ចត/របារភារកិច្ច
   margin: រឹម
@@ -327,6 +321,10 @@ wm:
     offset: ព្រំដែនអុហ្វសិត
     width: ទទឹងព្រំដែន
   description: ការពិពណ៌នា
+  drag_behavior: ឥរិយាបទអូស
+  drag_behavior_options:
+    sort: តម្រៀប (តម្រៀបបង្អួចឡើងវិញពេលកំពុងអូស)
+    swap: ប្តូរ (ប្តូរបង្អួចនៅលើចុងអូស)
   enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងបង្អួច
   layout: ប្លង់
   resize_delta: ប្តូរទំហំដីសណ្តរ (%)

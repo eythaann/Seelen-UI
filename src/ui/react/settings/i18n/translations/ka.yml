@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: განახლება
     ok_readonly: რედაქტირება როგორც ახალი
     options:
-      float: ტივტივი
-      force: ძალის მართვა
-      hidden: დამალვა დოკიდან/დავალებისგან
-      pinned: დადგენილება
-      unmanage: გაუგებრობა
+      NoInteractive: არ არის ინტერაქტიული
+      VdPinned: ჩვენება ყველა სამუშაო სივრცეში
+      WmFloat: Twm - დაიწყე მცურავი
+      WmForce: Twm - ძალის მართვა
+      WmUnmanage: Twm - გაუქმება
     options_label: დამატებითი პარამეტრები
     title_create: '{{სახელის შექმნა}}'
     title_edit: რედაქტირება {{სახელი}}
@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
-  dynamic_color: დინამიური ფერი
-  dynamic_color_tooltip: >-
-    ჩართეთ დინამიური ფონის და წინა პლანზე ფოკუსირებული ფანჯრის საფუძველზე.
-    (ფერები შეიძლება გადალახოს თემებით)
   enable: ჩართეთ ლამაზი პანელი
   height: სიმაღლე
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: გადახურვაზე
   label: ინსტრუმენტთა პანელი
   placeholder: {}
-  show_hibernate: აჩვენეთ ღილაკი Hibernate ღილაკზე დენის მენიუში
 update:
   available: განახლება ხელმისაწვდომია!
   channel: განაახლეთ არხი
@@ -303,7 +298,6 @@ weg:
       all: ყველა
       label: ჩამაგრებული ერთეულების ხილვადობა
       on_monitor: მონიტორზე
-    thumbnail_generation_enabled: წარმოქმენით მინიატურები
     visible_separators: ხილული გამყოფი
   label: დოკ/დავალების ზოლი
   margin: ზღვარი
@@ -328,6 +322,10 @@ wm:
     offset: სასაზღვრო ოფსეტური
     width: საზღვრის სიგანე
   description: აღწერილობა
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: სორტირება (გადააწყვეთ ფანჯრები გადატანისას)
+    swap: შეცვალეთ (გაცვალეთ ფანჯრები ჩავლებით)
   enable: ჩართეთ ფილების ფანჯრის მენეჯერი
   layout: გამოფენა
   resize_delta: დელტას ზომის შეცვლა (%)

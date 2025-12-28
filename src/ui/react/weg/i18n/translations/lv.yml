@@ -12,17 +12,19 @@ app_menu:
   run_as: Izpildīt kā administratoram
   unpin: Neslēpt
 context_menu:
+  remove_module: Noņemiet moduli
   reorder_disable: Uzdevumjoslas bloķēšana
   reorder_enable: Uzdevumjoslas atbloķēšana
 media:
   not_playing: Nekas nespēlē
-media_menu:
-  remove: Noņemiet multivides moduli
-start_menu:
-  remove: Noņemiet sākuma moduli
+show_desktop:
+  label: Rādīt darbvirsmu
+start:
+  label: Sākt izvēlne
 taskbar_menu:
   add_file: Piesprauž pielāgotu failu
   add_folder: Piespraudiet pielāgoto mapi
+  desktop: Pievienojiet darbvirsmas moduli
   media: Pievienojiet multivides moduli
   settings: Iestatījumi
   start: Pievienojiet starta moduli

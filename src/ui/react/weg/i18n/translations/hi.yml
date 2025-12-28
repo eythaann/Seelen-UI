@@ -12,17 +12,19 @@ app_menu:
   run_as: व्यवस्थापक के रूप में चलाएं
   unpin: अनपिन
 context_menu:
+  remove_module: मॉड्यूल निकालें
   reorder_disable: लॉक टास्कबार
   reorder_enable: टास्कबार अनलॉक करें
 media:
   not_playing: कुछ भी नहीं खेल रहा है
-media_menu:
-  remove: मीडिया मॉड्यूल निकालें
-start_menu:
-  remove: प्रारंभ मॉड्यूल निकालें
+show_desktop:
+  label: डेक्सटोप दिखाओ
+start:
+  label: शुरुआत की सूची
 taskbar_menu:
   add_file: पिन कस्टम फ़ाइल
   add_folder: पिन कस्टम फ़ोल्डर
+  desktop: डेस्कटॉप मॉड्यूल जोड़ें
   media: मीडिया मॉड्यूल जोड़ें
   settings: सेटिंग्स
   start: स्टार्ट मॉड्यूल जोड़ें

@@ -12,17 +12,19 @@ app_menu:
   run_as: Jalankan sebagai pentadbir
   unpin: Unpin
 context_menu:
+  remove_module: Keluarkan Modul
   reorder_disable: Kunci bar tugas
   reorder_enable: Buka kunci bar tugas
 media:
   not_playing: Tidak ada yang bermain
-media_menu:
-  remove: Keluarkan modul media
-start_menu:
-  remove: Keluarkan Modul Mula
+show_desktop:
+  label: Tunjukkan Desktop
+start:
+  label: Menu Mula
 taskbar_menu:
   add_file: Fail tersuai pin
   add_folder: Pin folder adat
+  desktop: Tambah Modul Desktop
   media: Tambah Modul Media
   settings: tetapan
   start: Tambah Modul Mula

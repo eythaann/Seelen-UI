@@ -1,42 +1,15 @@
 use std::{
     path::{Path, PathBuf},
-    sync::Arc,
+    sync::{Arc, LazyLock},
 };
 
-use itertools::Itertools;
-use lazy_static::lazy_static;
 use tauri::Manager;
 use windows::Win32::UI::Shell::FOLDERID_Windows;
 
 use crate::{app::get_app_handle, windows_api::WindowsApi};
 
-lazy_static! {
-    pub static ref SEELEN_COMMON: Arc<SeelenCommon> = Arc::new(SeelenCommon::new());
-
-    /**
-     * Some UWP apps like WhatsApp are resized after be opened,
-     * this list will be used to resize them back after a delay.
-     */
-    pub static ref FORCE_RETILING_AFTER_ADD: Vec<String> = ["WhatsApp"]
-    .iter()
-    .map(|x| x.to_string())
-    .collect_vec();
-}
-
-pub static NATIVE_UI_POPUP_CLASSES: [&str; 3] = [
-    "ForegroundStaging",            // Task Switching and Task View
-    "XamlExplorerHostIslandWindow", // Task Switching, Task View and other popups
-    "ControlCenterWindow",          // Windows 11 right panel with quick settings
-];
-
-pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 6] = [
-    "msedgewebview2.exe",
-    "SearchHost.exe",
-    "StartMenuExperienceHost.exe",
-    "ShellExperienceHost.exe",
-    "GameBar.exe",      // Windows Xbox Game Bar
-    "SnippingTool.exe", // Windows Snipping Tool
-];
+pub static SEELEN_COMMON: LazyLock<Arc<SeelenCommon>> =
+    LazyLock::new(|| Arc::new(SeelenCommon::new()));
 
 pub struct SeelenCommon {
     // general
@@ -50,6 +23,7 @@ pub struct SeelenCommon {
     weg_items: PathBuf,
     toolbar_items: PathBuf,
     icons: PathBuf,
+    system_icon_pack: PathBuf,
     user_themes: PathBuf,
     bundled_themes: PathBuf,
     user_plugins: PathBuf,
@@ -91,6 +65,7 @@ impl SeelenCommon {
             weg_items: data_dir.join("seelenweg_items_v2.yml"),
             toolbar_items: data_dir.join("toolbar_items.yml"),
             icons: data_dir.join("iconpacks"),
+            system_icon_pack: cache_dir.join("gen-icon-pack"),
             sounds: data_dir.join("soundpacks"),
             user_themes: data_dir.join("themes"),
             bundled_themes: resource_dir.join("static/themes"),
@@ -148,6 +123,10 @@ impl SeelenCommon {
 
     pub fn history_path(&self) -> &Path {
         &self.history
+    }
+
+    pub fn system_icon_pack_path(&self) -> &Path {
+        &self.system_icon_pack
     }
 
     pub fn user_icons_path(&self) -> &Path {

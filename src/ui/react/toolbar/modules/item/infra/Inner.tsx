@@ -2,7 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useComputed } from "@preact/signals";
 import type { ToolbarItem } from "@seelen-ui/lib/types";
-import { cx } from "@shared/styles";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { Tooltip } from "antd";
 import type { HTMLAttributes } from "preact/compat";
 

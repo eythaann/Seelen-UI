@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Оновити
     ok_readonly: Редагувати як нове
     options:
-      float: Плаваюче
-      force: Змусити
-      hidden: Сховати з панелі завдань
-      pinned: Закріплений
-      unmanage: Не керувати
+      NoInteractive: Немає інтерактиву
+      VdPinned: Показати в усіх робочих областях
+      WmFloat: Twm - почати плавати
+      WmForce: Twm – примусове керування
+      WmUnmanage: Twm - Скасувати керування
     options_label: Додаткові варіанти
     title_create: Створення {{name}}
     title_edit: Редагування {{name}}
@@ -229,10 +229,6 @@ toolbar:
   delay_to_hide: Затримка приховання
   delay_to_show: Затримка показу
   dock_side: Посада
-  dynamic_color: Динамічний колір
-  dynamic_color_tooltip: >-
-    Увімкнути динамічні кольори тла та переднього плану на основі сфокусованого
-    вікна. (Кольори можуть бути замінені темами)
   enable: Увімкнути панель інструментів
   height: Висота
   hide_mode:
@@ -241,7 +237,6 @@ toolbar:
     on_overlap: При перекритті
   label: Панель інструментів
   placeholder: {}
-  show_hibernate: Показати кнопку переходу в сплячий режим у меню живлення
 update:
   available: Доступне оновлення!
   channel: Канал оновлення
@@ -303,7 +298,6 @@ weg:
       all: всі
       label: Видимість незакріплених елементів
       on_monitor: На моніторі
-    thumbnail_generation_enabled: Генерувати мініатюри при наведенні на елемент
     visible_separators: Видимі розділювачі
   label: Панель завдань
   margin: Зовнішній відступ
@@ -328,6 +322,10 @@ wm:
     offset: Зміщення кордону
     width: Ширина кордону
   description: Опис
+  drag_behavior: Поведінка перетягування
+  drag_behavior_options:
+    sort: Сортування (зміна порядку вікон під час перетягування)
+    swap: Swap (міняти місцями вікна на кінці перетягування)
   enable: Увімкнути менеджер вікон
   layout: Макет
   resize_delta: Змінити розмір дельти (%)

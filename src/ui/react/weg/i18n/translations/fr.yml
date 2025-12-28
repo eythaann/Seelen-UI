@@ -12,17 +12,19 @@ app_menu:
   run_as: Exécuter en tant qu'administrateur
   unpin: Détacher
 context_menu:
+  remove_module: Supprimer le module
   reorder_disable: Verrouiller la barre des tâches
   reorder_enable: Déverrouiller la barre des tâches
 media:
   not_playing: Vide
-media_menu:
-  remove: Masquer le module multimédia
-start_menu:
-  remove: Masquer le module "Menu démarrer"
+show_desktop:
+  label: Afficher le bureau
+start:
+  label: Menu Démarrer
 taskbar_menu:
   add_file: Épingler un fichier
   add_folder: Épingler un dossier
+  desktop: Ajouter un module de bureau
   media: Afficher le module multimédia
   settings: Paramètres
   start: Afficher le module "Menu démarrer"

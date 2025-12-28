@@ -2,8 +2,10 @@ use std::collections::HashMap;
 use std::os::windows::process::CommandExt;
 use std::path::PathBuf;
 
+use owo_colors::OwoColorize;
+use seelen_core::constants::SUPPORTED_LANGUAGES;
+use seelen_core::resource::ResourceText;
 use seelen_core::state::RelaunchArguments;
-use seelen_core::system_state::MonitorId;
 use seelen_core::{command_handler_list, system_state::Color};
 
 use tauri::{Builder, WebviewWindow, Wry};
@@ -20,7 +22,6 @@ use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 use crate::utils::is_running_as_appx;
 use crate::utils::pwsh::PwshScript;
-use crate::virtual_desktops::get_vd_manager;
 use crate::widgets::show_settings;
 use crate::windows_api::hdc::DeviceContext;
 use crate::windows_api::window::event::WinEvent;
@@ -142,11 +143,6 @@ async fn get_auto_start_status() -> Result<bool> {
 }
 
 #[tauri::command(async)]
-fn switch_workspace(monitor_id: MonitorId, idx: usize) -> Result<()> {
-    get_vd_manager().switch_to(&monitor_id, idx)
-}
-
-#[tauri::command(async)]
 fn send_keys(keys: String) -> Result<()> {
     Keyboard::new().send_keys(&keys)
 }
@@ -209,25 +205,91 @@ async fn install_last_available_update() -> Result<()> {
     Ok(())
 }
 
-#[tauri::command(async)]
-async fn translate_text(
-    source: String,
-    source_lang: String,
-    mut target_lang: String,
-) -> Result<String> {
+pub async fn translate_file(path: PathBuf, source_lang: Option<String>) -> Result<()> {
+    let file = std::fs::File::open(&path)?;
+    let mut texts: ResourceText = serde_yaml::from_reader(file)?;
+
+    let code = match source_lang {
+        Some(source_lang) => source_lang,
+        None => "en".to_string(),
+    };
+
+    if !texts.has(&code) {
+        return Err(format!("Source Language ({code}) not found.").into());
+    }
+
+    let source = texts.get(&code).to_owned();
+    let total = SUPPORTED_LANGUAGES.len();
+
+    let longest_lang = SUPPORTED_LANGUAGES
+        .iter()
+        .map(|lang| lang.en_label.len())
+        .max()
+        .unwrap_or(0);
+
+    for (idx, lang) in SUPPORTED_LANGUAGES.iter().enumerate() {
+        let step = if idx < 9 {
+            format!("0{}", idx + 1)
+        } else {
+            (idx + 1).to_string()
+        };
+
+        // fill with spaces to fit max length
+        let label = format!(
+            "{}{}",
+            lang.en_label,
+            " ".repeat(longest_lang - lang.en_label.len())
+        );
+
+        if texts.has(lang.value) {
+            println!(
+                "[{step}/{total}] {} => {}",
+                label.bright_black(),
+                "Skipped".bright_black()
+            );
+            continue;
+        }
+
+        match _translate_text(&source, &code, lang.value).await {
+            Ok(value) => {
+                println!(
+                    "[{step}/{total}] {} => \"{}\"",
+                    label.bold().bright_green(),
+                    value
+                );
+                texts.set(lang.value.to_string(), value);
+            }
+            Err(err) => {
+                eprintln!(
+                    "[{step}/{total}] {} => Error translating to {} ({}): {}",
+                    label.bold().bright_red(),
+                    lang.en_label,
+                    lang.value,
+                    err
+                );
+            }
+        }
+    }
+
+    let file = std::fs::File::create(&path)?;
+    serde_yaml::to_writer(file, &texts)?;
+    Ok(())
+}
+
+async fn _translate_text(source: &str, source_lang: &str, mut target_lang: &str) -> Result<String> {
     use translators::GoogleTranslator;
     let translator = GoogleTranslator::default();
 
     if target_lang == "zh" {
-        target_lang = "zh-CN".to_string();
+        target_lang = "zh-CN";
     }
 
     if target_lang == "pt" {
-        target_lang = "pt-BR".to_string();
+        target_lang = "pt-BR";
     }
 
     let translated = translator
-        .translate_async(&source, &source_lang, &target_lang)
+        .translate_async(source, source_lang, target_lang)
         .await?;
     Ok(translated)
 }
@@ -243,13 +305,14 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::widgets::*;
 
     use crate::modules::apps::infrastructure::*;
-    use crate::modules::bluetooth::infrastructure::*;
     use crate::modules::language::*;
     use crate::modules::media::infrastructure::*;
     use crate::modules::monitors::infrastructure::*;
     use crate::modules::network::infrastructure::*;
     use crate::modules::notifications::infrastructure::*;
     use crate::modules::power::infrastructure::*;
+    use crate::modules::radios::bluetooth::handlers::*;
+    use crate::modules::radios::handlers::*;
     use crate::modules::system_settings::infrastructure::*;
     use crate::modules::system_tray::infrastructure::*;
     use crate::modules::user::infrastructure::*;

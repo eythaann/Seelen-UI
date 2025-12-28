@@ -95,13 +95,23 @@ macro_rules! slu_commands_declaration {
 slu_commands_declaration! {
     // virtual desktops
     StateGetVirtualDesktops = get_virtual_desktops() -> VirtualDesktops,
-    SwitchWorkspace = switch_workspace(monitor_id: MonitorId, idx: usize),
+    SwitchWorkspace = switch_workspace(workspace_id: WorkspaceId),
+    CreateWorkspace = create_workspace(monitor_id: MonitorId) -> WorkspaceId,
+    DestroyWorkspace = destroy_workspace(workspace_id: WorkspaceId),
+    RenameWorkspace = rename_workspace(workspace_id: WorkspaceId, name: Option<String>),
+
+    // wallpaper
+    WallpaperNext = wallpaper_next(),
+    WallpaperPrev = wallpaper_prev(),
+    WallpaperSaveThumbnail = wallpaper_save_thumbnail(wallpaper_id: ResourceId, thumbnail_bytes: Vec<u8>),
 
     // General
     Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>),
     RunAsAdmin = run_as_admin(program: PathBuf, args: Option<RelaunchArguments>),
 
     GetFocusedApp = get_focused_app() -> FocusedApp,
+    GetMousePosition = get_mouse_position() -> [i32; 2],
+
     IsDevMode = is_dev_mode() -> bool,
     IsAppxPackage = is_appx_package() -> bool,
     OpenFile = open_file(path: PathBuf),
@@ -123,9 +133,6 @@ slu_commands_declaration! {
     CheckForUpdates = check_for_updates() -> bool,
     // Restart the app after install the update so it returns a promise resolved with `never`
     InstallLastAvailableUpdate = install_last_available_update(),
-
-    // miscellaneous
-    TranslateText = translate_text(source: String, source_lang: String, target_lang: String) -> String,
 
     // System
     SystemGetForegroundWindowColor = get_foreground_window_color() -> Color,
@@ -163,6 +170,8 @@ slu_commands_declaration! {
 
     // Widgets
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
+    SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
+    GetSelfWindowId = get_self_window_handle() -> isize,
 
     // Shell
     GetNativeShellWallpaper = get_native_shell_wallpaper() -> PathBuf,
@@ -174,14 +183,7 @@ slu_commands_declaration! {
     SetUserFolderLimit = set_user_folder_limit(folder_type: FolderType, amount: usize),
     GerUserApplications = get_user_applications() -> Vec<UserApplication>,
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
-
-    //Bluetooth
-    GetConnectedBluetoothDevices = get_connected_bluetooth_devices() -> Vec<BluetoothDevice>,
-    StartBluetoothScanning = start_bluetooth_scanning(),
-    StopBluetoothScanning = stop_bluetooth_scanning(),
-    PairBluetoothDevice = pair_bluetooth_device(address: u64),
-    ForgetBluetoothDevice = forget_bluetooth_device(id: String),
-    ConfirmBluetoothDevicePair = confirm_bluetooth_device_pair(accept: bool, passphrase: String),
+    GetUserAppWindowsPreviews = get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview>,
 
     // Media
     GetMediaDevices = get_media_devices() -> [Vec<MediaDevice>; 2],
@@ -212,10 +214,10 @@ slu_commands_declaration! {
     WegCloseApp = weg_close_app(hwnd: isize),
     WegKillApp = weg_kill_app(hwnd: isize),
     WegToggleWindowState = weg_toggle_window_state(hwnd: isize, was_focused: bool),
-    WegRequestUpdatePreviews = weg_request_update_previews(handles: Vec<isize>),
     WegPinItem = weg_pin_item(path: PathBuf),
 
     // Windows Manager
+    WmGetRenderTree = wm_get_render_tree() -> WmRenderTree,
     SetAppWindowsPositions = set_app_windows_positions(positions: HashMap<isize, Rect>),
     RequestFocus = request_focus(hwnd: isize),
 
@@ -248,4 +250,17 @@ slu_commands_declaration! {
         args: String,
         input_data: HashMap<String, String>,
     ),
+
+    // Radios
+    GetRadios = get_radios() -> Vec<RadioDevice>,
+    SetRadioState = set_radios_state(kind: RadioDeviceKind, enabled: bool),
+
+    // Bluetooth
+    GetBluetoothDevices = get_bluetooth_devices() -> Vec<BluetoothDevice>,
+    StartBluetoothScanning = start_bluetooth_scanning(),
+    StopBluetoothScanning = stop_bluetooth_scanning(),
+    RequestPairBluetoothDevice = request_pair_bluetooth_device(id: String) -> DevicePairingNeededAction,
+    ConfirmBluetoothDevicePairing = confirm_bluetooth_device_pairing(id: String, answer: DevicePairingAnswer),
+    DisconnectBluetoothDevice = disconnect_bluetooth_device(id: String),
+    ForgetBluetoothDevice = forget_bluetooth_device(id: String),
 }

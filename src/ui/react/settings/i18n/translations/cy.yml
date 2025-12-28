@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Diweddara ’
     ok_readonly: Golygu fel NEWYDD
     options:
-      float: Harnofion
-      force: Rheoli Llu
-      hidden: Cuddio rhag doc/bar tasg
-      pinned: Pined
-      unmanage: Di -reol
+      NoInteractive: Dim Rhyngweithiol
+      VdPinned: Dangoswch ym mhob man gwaith
+      WmFloat: Twm - Dechrau arnofio
+      WmForce: Twm - Rheolwr yr Heddlu
+      WmUnmanage: Twm - Unmanage
     options_label: Opsiynau ychwanegol
     title_create: Creu {{enw}}
     title_edit: Golygu {{enw}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Oedi i guddio
   delay_to_show: Oedi i ddangos
   dock_side: Safle
-  dynamic_color: Lliw deinamig
-  dynamic_color_tooltip: >-
-    Galluogi cefndir deinamig a lliwiau blaendir yn seiliedig ar ffenestr â
-    ffocws. (Gellir diystyru lliwiau gan themâu)
   enable: Galluogi bar offer ffansi
   height: Uchder
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Ar gorgyffwrdd
   label: Bariau
   placeholder: {}
-  show_hibernate: Dangos botwm gaeafgysgu ar y ddewislen pŵer
 update:
   available: Diweddariad ar gael!
   channel: Diweddaru Sianel
@@ -305,7 +300,6 @@ weg:
       all: Pawb
       label: Eitemau heb eu Pinio Gwelededd
       on_monitor: Ar Fonitor
-    thumbnail_generation_enabled: Cynhyrchu mân -luniau ar hofran eitem
     visible_separators: Gwahanyddion gweladwy
   label: Doc/bar tasgau
   margin: Ngherlong
@@ -330,6 +324,10 @@ wm:
     offset: Gwrthbwyso ar y ffin
     width: Lled
   description: Disgrifiadau
+  drag_behavior: Ymddygiad Llusgo
+  drag_behavior_options:
+    sort: Trefnu (ail-archebu ffenestri wrth lusgo)
+    swap: Cyfnewid (cyfnewid ffenestri ar y pen llusgo)
   enable: Galluogi Rheolwr Ffenestr Teils
   layout: Gynllun
   resize_delta: Newid maint Delta (%)

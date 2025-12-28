@@ -1,12 +1,12 @@
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { Icon } from "@shared/components/Icon";
-import { useWindowFocusChange } from "@shared/hooks";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { debounce } from "lodash";
 import type { VNode } from "preact";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { BackgroundByLayersV2 } from "@shared/components/BackgroundByLayers/infra";
+import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { selectDefaultOutput } from "../application.ts";
 

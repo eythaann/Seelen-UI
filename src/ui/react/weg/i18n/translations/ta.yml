@@ -12,17 +12,19 @@ app_menu:
   run_as: நிர்வாகியாக செயல்படுங்கள்
   unpin: Unpin
 context_menu:
+  remove_module: தொகுதியை அகற்று
   reorder_disable: பணிப்பட்டியைப் பூட்டவும்
   reorder_enable: பணிப்பட்டியைத் திறக்கவும்
 media:
   not_playing: எதுவும் விளையாடுவதில்லை
-media_menu:
-  remove: மீடியா தொகுதியை அகற்று
-start_menu:
-  remove: தொடக்க தொகுதியை அகற்று
+show_desktop:
+  label: டெஸ்க்டாப்பைக் காட்டு
+start:
+  label: தொடக்க மெனு
 taskbar_menu:
   add_file: தனிப்பயன் கோப்பை முள்
   add_folder: தனிப்பயன் கோப்புறையை முள்
+  desktop: டெஸ்க்டாப் தொகுதியைச் சேர்க்கவும்
   media: மீடியா தொகுதி சேர்க்கவும்
   settings: அமைப்புகள்
   start: தொடக்க தொகுதி சேர்க்கவும்

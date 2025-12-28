@@ -1,5 +1,5 @@
 import type { WidgetId } from "@seelen-ui/lib/types";
-import { Icon } from "@shared/components/Icon";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Select, Space } from "antd";
 import { useDispatch } from "react-redux";
 

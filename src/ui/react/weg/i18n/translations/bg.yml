@@ -12,17 +12,19 @@ app_menu:
   run_as: Изпълни като администратор
   unpin: Unpin
 context_menu:
+  remove_module: Премахване на модула
   reorder_disable: Заключване на лентата на задачите
   reorder_enable: Отключване на лентата на задачите
 media:
   not_playing: Нищо не играе
-media_menu:
-  remove: Премахване на медийния модул
-start_menu:
-  remove: Премахване на стартовия модул
+show_desktop:
+  label: Показване на работния плот
+start:
+  label: Старт меню
 taskbar_menu:
   add_file: ПИН Персонализиран файл
   add_folder: ПИН Персонализирана папка
+  desktop: Добавяне на десктоп модул
   media: Добавете медиен модул
   settings: Настройки
   start: Добавете старт модул

@@ -111,7 +111,7 @@ impl WindowEnumerator {
 pub struct MonitorEnumerator;
 
 impl MonitorEnumerator {
-    pub fn get_all_v2() -> Result<Vec<Monitor>> {
+    pub fn enumerate_win32() -> Result<Vec<Monitor>> {
         let mut handles = Vec::new();
 
         unsafe extern "system" fn get_handles_proc(

@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Mettre à jour
     ok_readonly: Modifier en tant que nouveau
     options:
-      float: Flottant
-      force: Forcer la gestion
-      hidden: Masquer du dock/de la barre des tâches
-      pinned: Épinglé
-      unmanage: Ne pas gérer
+      NoInteractive: Pas d'interactivité
+      VdPinned: Afficher dans tous les espaces de travail
+      WmFloat: Twm - Commencer à flotter
+      WmForce: Twm - Forcer la gestion
+      WmUnmanage: Twm - Annuler la gestion
     options_label: Options supplémentaires
     title_create: Création de {{name}}
     title_edit: Modification de {{nom}}
@@ -233,10 +233,6 @@ toolbar:
   delay_to_hide: Délai avant de masquer
   delay_to_show: Délai avant d'afficher
   dock_side: Position
-  dynamic_color: Couleurs dynamiques
-  dynamic_color_tooltip: >-
-    Active les couleurs dynamiques d'arrière-plan et d'avant-plan en fonction de
-    la fenêtre ciblée. (Les couleurs peuvent être remplacées par des thèmes)
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
   hide_mode:
@@ -245,7 +241,6 @@ toolbar:
     on_overlap: Sur chevauchement
   label: Barre d'outils
   placeholder: {}
-  show_hibernate: Afficher la veille prolongée dans le menu Marche/Arrêt
 update:
   available: Mise à jour disponible !
   channel: Canal de mise à jour
@@ -307,7 +302,6 @@ weg:
       all: Tous
       label: Visibilité des éléments non épinglés
       on_monitor: Sur le moniteur
-    thumbnail_generation_enabled: Générer des vignettes au survol de l'article
     visible_separators: Séparateurs visibles
   label: Dock/Barre des tâches
   margin: Marge
@@ -332,6 +326,10 @@ wm:
     offset: Décalage de bordure
     width: Largeur de la bordure
   description: Description
+  drag_behavior: Comportement de traînée
+  drag_behavior_options:
+    sort: Trier (réorganiser les fenêtres en les faisant glisser)
+    swap: Swap (échanger les fenêtres à la fin du glissement)
   enable: Activer le gestionnaire de fenêtres en mosaïque
   layout: Disposition
   resize_delta: Delta de redimensionnement (%)

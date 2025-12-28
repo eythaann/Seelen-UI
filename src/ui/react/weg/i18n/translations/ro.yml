@@ -12,17 +12,19 @@ app_menu:
   run_as: Rulat ca administrator
   unpin: Unpin
 context_menu:
+  remove_module: Eliminați modulul
   reorder_disable: Blocarea barei de activități
   reorder_enable: Deblocați bara de activități
 media:
   not_playing: Nimic nu se joacă
-media_menu:
-  remove: Eliminați modulul media
-start_menu:
-  remove: Eliminați modulul de pornire
+show_desktop:
+  label: Arată Desktop
+start:
+  label: Meniul Start
 taskbar_menu:
   add_file: Fișier personalizat
   add_folder: Pin folder personalizat
+  desktop: Adăugați modul desktop
   media: Adăugați modul media
   settings: Setări
   start: Adăugați modulul de pornire

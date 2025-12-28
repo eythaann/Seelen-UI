@@ -3,9 +3,17 @@
   import { state } from "../../shared/state.svelte.ts";
   import Container from "./Container.svelte";
 
+  interface Props {
+    monitorId: string;
+  }
+
+  let { monitorId }: Props = $props();
+
+  let layout = $derived(state.getLayout(monitorId));
+
   // Retrigger repositioning when dependencies change
   $effect(() => {
-    state.layout;
+    layout;
     state.forceRepositioning;
     requestPositioningOfLeaves(state);
   });
@@ -16,8 +24,8 @@
   });
 </script>
 
-{#if state.layout}
-  <Container node={state.layout} />
+{#if layout}
+  <Container node={layout} />
 {/if}
 
 <style>

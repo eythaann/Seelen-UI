@@ -12,17 +12,19 @@ app_menu:
   run_as: प्रशासक रूपमा चलाउन
   unpin: चुस्नु
 context_menu:
+  remove_module: मोड्युल हटाउनुहोस्
   reorder_disable: लक टकबार लक
   reorder_enable: टास्कबार अनलक गर्नुहोस्
 media:
   not_playing: केहि खेल्दैन
-media_menu:
-  remove: मिडिया मोड्युल हटाउनुहोस्
-start_menu:
-  remove: सुरु मोड्युल हटाउनुहोस्
+show_desktop:
+  label: डेस्कटप देखाउनुहोस्
+start:
+  label: सुरु मेनु
 taskbar_menu:
   add_file: पिन अनुकूलन फाइल
   add_folder: पिन कस्टम फोल्डर
+  desktop: डेस्कटप मोड्युल थप्नुहोस्
   media: मिडिया मोड्युल थप्नुहोस्
   settings: सेटिङहरू
   start: स्टार्ट मोड्युल थप्नुहोस्

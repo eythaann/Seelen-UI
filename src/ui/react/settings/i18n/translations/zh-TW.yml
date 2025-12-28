@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: 更新
     ok_readonly: 編輯為新
     options:
-      float: 漂浮
-      force: 力管理
-      hidden: 隱藏碼頭/任務欄
-      pinned: 固定
-      unmanage: 不受限制
+      NoInteractive: 沒有互動
+      VdPinned: 在所有工作區中顯示
+      WmFloat: Twm - 開始浮動
+      WmForce: Twm - 強制管理
+      WmUnmanage: Twm - 取消管理
     options_label: 額外的選擇
     title_create: 創建{{name}}
     title_edit: 編輯{{name}}
@@ -218,8 +218,6 @@ toolbar:
   delay_to_hide: 延遲隱藏
   delay_to_show: 延遲顯示
   dock_side: 位置
-  dynamic_color: 動態顏色
-  dynamic_color_tooltip: 基於聚焦窗口啟用動態背景和前景顏色。 （顏色可以被主題覆蓋）
   enable: 啟用高檔工具欄
   height: 高度
   hide_mode:
@@ -228,7 +226,6 @@ toolbar:
     on_overlap: 在重疊
   label: 工具欄
   placeholder: {}
-  show_hibernate: 在電源菜單上顯示Hibernate按鈕
 update:
   available: 更新可用！
   channel: 更新頻道
@@ -290,7 +287,6 @@ weg:
       all: 全部
       label: 未鎖定的物品可見性
       on_monitor: 在顯示器上
-    thumbnail_generation_enabled: 在項目懸停上生成縮略圖
     visible_separators: 可見的分離器
   label: 碼頭/任務欄
   margin: 利潤
@@ -315,6 +311,10 @@ wm:
     offset: 邊界偏移
     width: 邊界寬度
   description: 描述
+  drag_behavior: 拖動行為
+  drag_behavior_options:
+    sort: 排序（拖動時重新排序窗口）
+    swap: 交換（在拖動端交換窗口）
   enable: 啟用平鋪窗口管理器
   layout: 佈局
   resize_delta: 調整三角洲大小（％）

@@ -4,11 +4,11 @@ use slu_ipc::{
     AppIpc,
 };
 
-use crate::{cli::application::AppCli, error::Result};
+use crate::{cli::application::AppCli, error::Result, modules::system_tray::SystemTrayManager};
 
 pub struct SelfPipe;
 impl SelfPipe {
-    fn _handle_message(mut argv: Vec<String>) -> Result<()> {
+    fn _handle_cli_message(mut argv: Vec<String>) -> Result<()> {
         if argv.is_empty() {
             return Ok(());
         }
@@ -27,11 +27,19 @@ impl SelfPipe {
         Ok(())
     }
 
-    fn handle_message(argv: Vec<String>) -> IpcResponse {
-        match Self::_handle_message(argv) {
-            Ok(()) => IpcResponse::Success,
-            Err(err) => IpcResponse::Err(err.to_string()),
+    fn handle_message(message: AppMessage) -> IpcResponse {
+        match message {
+            AppMessage::Cli(argv) => {
+                if let Err(err) = Self::_handle_cli_message(argv) {
+                    return IpcResponse::Err(err.to_string());
+                }
+            }
+            AppMessage::TrayChanged(event) => {
+                SystemTrayManager::handle_tray_event(event);
+            }
+            AppMessage::Debug(_msg) => {}
         }
+        IpcResponse::Success
     }
 
     pub fn start_listener() -> Result<()> {
@@ -40,7 +48,7 @@ impl SelfPipe {
     }
 
     pub async fn request_open_settings() -> Result<()> {
-        AppIpc::send(AppMessage(vec!["settings".to_owned()])).await?;
+        AppIpc::send(AppMessage::Cli(vec!["settings".to_owned()])).await?;
         Ok(())
     }
 }

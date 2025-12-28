@@ -1,0 +1,24 @@
+available: Διαθέσιμες Συσκευές
+cancel: Ματαίωση
+confirm: Επιβεβαιώνω
+confirm_only: Επιβεβαιώστε τη σύζευξη
+confirm_pin: Επιβεβαιώστε ότι το PIN ταιριάζει
+connected: Συνδεδεμένος
+disconnect: Αποσυνδέω
+display_pin: Εισαγάγετε αυτό το PIN στη συσκευή
+lowenergy: Χαμηλής Ενέργειας
+more: Περισσότερες ρυθμίσεις Bluetooth
+no_adapter: Δεν βρέθηκε προσαρμογέας Bluetooth
+not_found: Δεν βρέθηκαν συσκευές
+pair: Ζεύγος
+paired: Ζευγάρισε
+pairing: Σύζευξη...
+pairing_failed: Η σύζευξη απέτυχε
+password: Σύνθημα
+provide_address: Εισαγάγετε τη διεύθυνση
+provide_password: Εισαγάγετε όνομα χρήστη και κωδικό πρόσβασης
+provide_pin: Εισαγάγετε το PIN
+scanning: Σάρωση για συσκευές...
+unpair: Κατάργηση ζεύξης
+unpair_failed: Η κατάργηση σύζευξης απέτυχε
+username: Όνομα χρήστη

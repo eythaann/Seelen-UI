@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: 適用
     ok_readonly: 新規設定を作成
     options:
-      float: フロート
-      force: 強制的に操作
-      hidden: ドック/タスクバーから隠す
-      pinned: ピン留め
-      unmanage: 管理しない
+      NoInteractive: インタラクティブなし
+      VdPinned: すべてのワークスペースに表示
+      WmFloat: Twm - フローティングを開始
+      WmForce: Twm - 強制管理
+      WmUnmanage: Twm - 管理解除
     options_label: 追加の設定
     title_create: '{{name}}を作成する'
     title_edit: 編集{{name}}
@@ -219,8 +219,6 @@ toolbar:
   delay_to_hide: 隠れるまでの遅延
   delay_to_show: 表示が遅れる
   dock_side: ポジション
-  dynamic_color: ダイナミックカラー
-  dynamic_color_tooltip: フォーカスされたウィンドウに基づく動的な背景色と前景色を有効にする。(色はテーマによって上書きできます)
   enable: ツールバーを有効にする
   height: 高さ
   hide_mode:
@@ -229,7 +227,6 @@ toolbar:
     on_overlap: オーバーラップ時
   label: ツールバーの設定
   placeholder: {}
-  show_hibernate: 電源メニューにハイバネートボタンを表示する
 update:
   available: 更新が利用可能です！
   channel: 更新チャンネル
@@ -291,7 +288,6 @@ weg:
       all: 全て
       label: 固定されていないアイテムの表示設定
       on_monitor: モニター上
-    thumbnail_generation_enabled: アイテムのホバー時にサムネイルを生成
     visible_separators: セパレーターを表示する
   label: ドック（タスクバー）
   margin: ドックの隙間
@@ -316,6 +312,10 @@ wm:
     offset: 境界線の余白
     width: 線幅
   description: 説明
+  drag_behavior: ドラッグ動作
+  drag_behavior_options:
+    sort: 並べ替え (ドラッグしながらウィンドウの順序を変更)
+    swap: スワップ (ドラッグ終了時にウィンドウをスワップ)
   enable: タイリングウィンドウマネージャーを有効にする
   layout: レイアウト
   resize_delta: リサイズ時の変化率（％）

@@ -2,11 +2,10 @@ use seelen_core::{
     handlers::SeelenEvent,
     system_state::{Battery, PowerMode, PowerStatus},
 };
-use tauri::Emitter;
 use windows::Win32::System::Shutdown::{EWX_LOGOFF, EWX_REBOOT, EWX_SHUTDOWN, SHTDN_REASON_NONE};
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     error::Result,
     log_error,
     modules::power::application::{PowerManagerEvent, POWER_MANAGER},
@@ -18,18 +17,15 @@ pub use super::application::PowerManager;
 
 pub fn register_power_events() {
     let _guard = trace_lock!(POWER_MANAGER);
-    PowerManager::subscribe(|event| {
-        let handle = get_app_handle();
-        match event {
-            PowerManagerEvent::PowerStatusChanged(status) => {
-                log_error!(handle.emit(SeelenEvent::PowerStatus, status));
-            }
-            PowerManagerEvent::BatteriesChanged(batteries) => {
-                log_error!(handle.emit(SeelenEvent::BatteriesStatus, batteries));
-            }
-            PowerManagerEvent::PowerModeChanged(mode) => {
-                log_error!(handle.emit(SeelenEvent::PowerMode, mode));
-            }
+    PowerManager::subscribe(|event| match event {
+        PowerManagerEvent::PowerStatusChanged(status) => {
+            emit_to_webviews(SeelenEvent::PowerStatus, status);
+        }
+        PowerManagerEvent::BatteriesChanged(batteries) => {
+            emit_to_webviews(SeelenEvent::BatteriesStatus, batteries);
+        }
+        PowerManagerEvent::PowerModeChanged(mode) => {
+            emit_to_webviews(SeelenEvent::PowerMode, mode);
         }
     });
 }

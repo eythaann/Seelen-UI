@@ -12,17 +12,19 @@ app_menu:
   run_as: Kukimbia kama msimamizi
   unpin: Unpin
 context_menu:
+  remove_module: Ondoa Moduli
   reorder_disable: Lock Taskbar
   reorder_enable: Fungua Taskbar
 media:
   not_playing: Hakuna kinachocheza
-media_menu:
-  remove: Ondoa moduli ya media
-start_menu:
-  remove: Ondoa moduli ya kuanza
+show_desktop:
+  label: Onyesha Eneo-kazi
+start:
+  label: Anza Menyu
 taskbar_menu:
   add_file: Piga faili ya kawaida
   add_folder: Piga folda ya kawaida
+  desktop: Ongeza Moduli ya Eneo-kazi
   media: Ongeza moduli ya media
   settings: Mipangilio
   start: Ongeza moduli ya kuanza

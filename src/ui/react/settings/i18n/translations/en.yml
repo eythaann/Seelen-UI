@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Update
     ok_readonly: Edit as New
     options:
-      float: Float
-      force: Force Manage
-      hidden: Hide from dock/taskbar
-      pinned: Pinned
-      unmanage: Unmanage
+      NoInteractive: No Interactive
+      VdPinned: Show in all workspaces
+      WmFloat: Twm - Start Floating
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Extra Options
     title_create: Creating {{name}}
     title_edit: Editing {{name}}
@@ -101,6 +101,10 @@ general:
     available: Available Icon Packs
     selected: Active Icon Packs
   language: Language
+  monday: Monday
+  saturday: Saturday
+  start_of_week: Start of Week
+  sunday: Sunday
   performance_mode:
     on_battery: On Battery
     on_energy_saver: On Energy Saver
@@ -228,10 +232,6 @@ toolbar:
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position
-  dynamic_color: Dynamic Color
-  dynamic_color_tooltip: >-
-    Enable dynamic background and foreground colors based on focused window.
-    (Colors can be overridden by themes)
   enable: Enable Fancy Toolbar
   height: Height
   hide_mode:
@@ -240,7 +240,6 @@ toolbar:
     on_overlap: On overlap
   label: Toolbar
   placeholder: {}
-  show_hibernate: Show hibernate button on power menu
 update:
   available: Update Available!
   channel: Update Channel
@@ -250,6 +249,12 @@ wall:
   blur: Blur
   contrast: Contrast
   enable: Enable Wallpaper Manager
+  monitor_collection: Monitor Collection
+  wallpaper_collection: Wallpaper Collection
+  wallpaper_settings: Wallpaper Settings
+  workspace_collections: Workspace Collections
+  generating_thumbnails: Generating Wallpaper Thumbnails
+  processing_video: Processing video
   fit:
     contain: Contain
     cover: Cover
@@ -276,6 +281,17 @@ wall:
   saturation: Saturation
   seconds: seconds
   withOverlay: With Overlay
+  collections: Collections
+  create_collection: Create Collection
+  edit_collection: Edit Collection
+  delete_collection: Delete Collection
+  collection_name: Collection Name
+  default_collection: Default Collection
+  select_collection: Select Collection
+  no_collections: No collections created yet. Click the + button to create one.
+  create: Create
+  cancel: Cancel
+  close: Close
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide
@@ -302,7 +318,6 @@ weg:
       all: All
       label: Unpinned Items Visibility
       on_monitor: On Monitor
-    thumbnail_generation_enabled: Generate thumbnails on item hover
     visible_separators: Visible Separators
   label: Dock/Taskbar
   margin: Margin
@@ -327,6 +342,10 @@ wm:
     offset: Border Offset
     width: Border Width
   description: Description
+  drag_behavior: Drag Behavior
+  drag_behavior_options:
+    sort: Sort (reorder windows while dragging)
+    swap: Swap (swap windows on drag end)
   enable: Enable Tiling Window Manager
   layout: Layout
   resize_delta: Resize Delta (%)

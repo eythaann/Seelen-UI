@@ -1,4 +1,3 @@
-import { path } from "@seelen-ui/lib/tauri";
 import type { Icon, IconPackEntry } from "@seelen-ui/lib/types";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Input } from "antd";
@@ -10,13 +9,7 @@ import { newSelectors } from "../shared/store/app/reducer.ts";
 import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
 import cs from "./index.module.css";
 
-const parent = await path.resolve(
-  await path.appDataDir(),
-  "iconpacks",
-  "system",
-);
-
-function resolveAsSrc(icon: Icon): Icon {
+function resolveAsSrc(parent: string, icon: Icon): Icon {
   return {
     base: icon.base ? convertFileSrc(`${parent}\\${icon.base}`) : null,
     light: icon.light ? convertFileSrc(`${parent}\\${icon.light}`) : null,
@@ -38,7 +31,7 @@ export function IconPackEditorView() {
         .map((e) => {
           const newEntry = { ...e };
           if (newEntry.icon) {
-            newEntry.icon = resolveAsSrc(newEntry.icon);
+            newEntry.icon = resolveAsSrc(system.metadata.path, newEntry.icon);
           }
           return newEntry;
         }) || []
@@ -151,8 +144,7 @@ function containsSearched(entry: IconPackEntry, filterValue: string) {
     (entry.type === "unique" &&
       (!!entry.path?.toLowerCase().includes(searchString) ||
         !!entry.umid?.toLowerCase().includes(searchString))) ||
-    (entry.type === "shared" &&
-      entry.extension.toLowerCase().includes(searchString)) ||
+    (entry.type === "shared" && entry.extension.toLowerCase().includes(searchString)) ||
     (entry.type === "custom" && entry.key.toLowerCase().includes(searchString))
   );
 }

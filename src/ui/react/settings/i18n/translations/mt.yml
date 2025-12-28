@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Aġġornament
     ok_readonly: Editja bħala ġdida
     options:
-      float: Galleġġjant
-      force: Forza ta 'tmexxija
-      hidden: Aħbi mill-baċir / taskbar
-      pinned: Imqabbad
-      unmanage: Mhux immaniġġjat
+      NoInteractive: Nru Interattiv
+      VdPinned: Uri fl-ispazji tax-xogħol kollha
+      WmFloat: Twm - Ibda f'wiċċ l-ilma
+      WmForce: Twm - Force Manage
+      WmUnmanage: Twm - Unmanage
     options_label: Għażliet żejda
     title_create: Ħolqien ta '{{isem}}
     title_edit: Editjar {{isem}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
-  dynamic_color: Kulur dinamiku
-  dynamic_color_tooltip: >-
-    Ippermetti l-isfond dinamiku u l-kuluri tat-tagħrif miksub ibbażati fuq
-    tieqa ffokata. (Il-kuluri jistgħu jiġu mwarrba bit-temi)
   enable: Jippermetti toolbar tal-fancy
   height: Għoli
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Fuq koinċidenza
   label: Toolbar
   placeholder: {}
-  show_hibernate: Uri buttuna Hibernate fuq il-menu tal-qawwa
 update:
   available: Aġġornament disponibbli!
   channel: Aġġorna l-kanal
@@ -305,7 +300,6 @@ weg:
       all: Kollha
       label: Oġġetti Unpinned Viżibilità
       on_monitor: Fuq Monitor
-    thumbnail_generation_enabled: Iġġenera minjaturi fuq l-oġġett li jtellgħu
     visible_separators: Separaturi viżibbli
   label: Dock / Taskbar
   margin: Marġni
@@ -330,6 +324,10 @@ wm:
     offset: Offset tal-fruntiera
     width: Wisa 'tal-fruntiera
   description: Deskrizzjoni
+  drag_behavior: Drag Imġieba
+  drag_behavior_options:
+    sort: Issortja (ordna mill-ġdid it-twieqi waqt li tkaxkar)
+    swap: Ibdel (tbiddel it-twieqi fit-tarf tat-tkaxkir)
   enable: Ippermetti maniġer tat-tieqa tal-madum
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)

@@ -3,7 +3,7 @@ import { WegItems, Widget } from "@seelen-ui/lib";
 import { type WegItem, WegItemType } from "@seelen-ui/lib/types";
 import { debounce } from "lodash";
 
-import type { SeparatorWegItem } from "../store/domain.ts";
+import type { SeparatorWegItem } from "../types.ts";
 
 interface DockState {
   isReorderDisabled: boolean;
@@ -47,13 +47,9 @@ function stateToStored(state: DockState): WegItems {
 }
 
 let monitorId = Widget.getCurrent().decoded.monitorId!;
-export const $dock_state = signal(
-  getStateFromStored(await WegItems.getForMonitor(monitorId)),
-);
+export const $dock_state = signal(getStateFromStored(await WegItems.getForMonitor(monitorId)));
 WegItems.onChange(async () => {
-  $dock_state.value = getStateFromStored(
-    await WegItems.getForMonitor(monitorId),
-  );
+  $dock_state.value = getStateFromStored(await WegItems.getForMonitor(monitorId));
 });
 
 $dock_state.subscribe(
@@ -92,9 +88,7 @@ export const $dock_state_actions = {
     };
   },
   addMediaModule() {
-    if (
-      !$dock_state.value.items.some((current) => current.type === WegItemType.Media)
-    ) {
+    if (!$dock_state.value.items.some((current) => current.type === WegItemType.Media)) {
       const newItems = [...$dock_state.value.items];
       newItems.push({
         id: crypto.randomUUID(),
@@ -104,13 +98,21 @@ export const $dock_state_actions = {
     }
   },
   addStartModule() {
-    if (
-      !$dock_state.value.items.some((current) => current.type === WegItemType.StartMenu)
-    ) {
+    if (!$dock_state.value.items.some((current) => current.type === WegItemType.StartMenu)) {
       const newItems = [...$dock_state.value.items];
       newItems.unshift({
         id: crypto.randomUUID(),
         type: WegItemType.StartMenu,
+      });
+      $dock_state.value = { ...$dock_state.value, items: newItems };
+    }
+  },
+  addDesktopModule() {
+    if (!$dock_state.value.items.some((current) => current.type === WegItemType.ShowDesktop)) {
+      const newItems = [...$dock_state.value.items];
+      newItems.unshift({
+        id: crypto.randomUUID(),
+        type: WegItemType.ShowDesktop,
       });
       $dock_state.value = { ...$dock_state.value, items: newItems };
     }

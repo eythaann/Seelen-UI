@@ -1,6 +1,6 @@
 import { useComputed } from "@preact/signals";
 import type { DateToolbarItem } from "@seelen-ui/lib/types";
-import { useSyncClockInterval } from "@shared/hooks";
+import { useSyncClockInterval } from "libs/ui/react/utils/hooks.ts";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

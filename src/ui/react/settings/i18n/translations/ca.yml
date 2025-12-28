@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Actualitzar
     ok_readonly: Edita com a nou
     options:
-      float: Surar
-      force: Gestionar la força
-      hidden: Amagueu del moll/barra de tasques
-      pinned: Fixada
-      unmanage: Implacable
+      NoInteractive: No interactiu
+      VdPinned: Mostra a tots els espais de treball
+      WmFloat: Twm - Comença a flotar
+      WmForce: Twm - Força de gestió
+      WmUnmanage: Twm - Desadministrar
     options_label: Opcions addicionals
     title_create: Creació {{nom}}
     title_edit: Edició {{nom}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
   dock_side: Posició
-  dynamic_color: Color dinàmic
-  dynamic_color_tooltip: >-
-    Activa els colors dinàmics de fons i en primer pla basats en la finestra
-    centrada. (Els colors es poden anul·lar per temes)
   enable: Activa la barra d’eines de luxe
   height: Altura
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Sobre la superposició
   label: Barra d’eines
   placeholder: {}
-  show_hibernate: Mostra el botó hibernat al menú d'alimentació
 update:
   available: Actualitzeu disponible.
   channel: Canal d'actualització
@@ -305,7 +300,6 @@ weg:
       all: Tots
       label: Visibilitat dels elements sense fixar
       on_monitor: Al monitor
-    thumbnail_generation_enabled: Generar miniatures a l'article que es pot fer
     visible_separators: Separadors visibles
   label: Moll/barra de tasques
   margin: Marge
@@ -330,6 +324,10 @@ wm:
     offset: Compensació fronterera
     width: Amplada de la frontera
   description: Descripció
+  drag_behavior: Comportament de l'arrossegament
+  drag_behavior_options:
+    sort: Ordena (reordena les finestres mentre arrossegues)
+    swap: Canvi (canvi de finestres a l'extrem d'arrossegament)
   enable: Activa el gestor de finestres de rajoles
   layout: Pla
   resize_delta: Redimensiona el delta (%)

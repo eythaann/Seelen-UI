@@ -1,0 +1,24 @@
+available: Dispositivos disponíveis
+cancel: Cancelar
+confirm: Confirmar
+confirm_only: Confirmar emparelhamento
+confirm_pin: Confirme se o PIN corresponde
+connected: Conectada
+disconnect: Desconectar
+display_pin: Insira este PIN no dispositivo
+lowenergy: Baixa energia
+more: Mais configurações de Bluetooth
+no_adapter: Nenhum adaptador Bluetooth encontrado
+not_found: Nenhum dispositivo encontrado
+pair: Par
+paired: Emparelhada
+pairing: Emparelhamento...
+pairing_failed: Falha no pareamento
+password: Palavra-passe
+provide_address: Insira o endereço
+provide_password: Digite nome de usuário e senha
+provide_pin: Insira o PIN
+scanning: Procurando dispositivos...
+unpair: Desemparelhar
+unpair_failed: Falha ao desemparelhar
+username: Nome de usuário

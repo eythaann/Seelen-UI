@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Settings, UIColors } from "@seelen-ui/lib";
-import { StateBuilder } from "@shared/StateBuilder";
+import { StateBuilder } from "libs/ui/react/utils/StateBuilder.ts";
 
 import type { LauncherState } from "./domain.ts";
 

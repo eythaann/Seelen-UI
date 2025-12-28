@@ -12,17 +12,19 @@ app_menu:
   run_as: Yönetici Olarak Çalıştır
   unpin: Sabitlenmeyi Kaldır
 context_menu:
+  remove_module: Modülü Kaldır
   reorder_disable: Görev çubuğunu kilitle
   reorder_enable: Görev çubuğunun kilidini aç
 media:
   not_playing: Hiçbir şey oynamıyor
-media_menu:
-  remove: Medya Modülünü Kaldır
-start_menu:
-  remove: Başlat Modülünü Kaldır
+show_desktop:
+  label: Masaüstünü Göster
+start:
+  label: Başlat Menüsü
 taskbar_menu:
   add_file: Özel Dosya Sabitle
   add_folder: Özel Klasör Sabitle
+  desktop: Masaüstü Modülü Ekle
   media: Medya Modülü Ekle
   settings: Ayarlar
   start: Başlat Modülü Ekle

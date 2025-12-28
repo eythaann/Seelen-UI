@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Buyekeza
     ok_readonly: Hlela njengomusha
     options:
-      float: Thwala amaphiko
-      force: Cindezela Phatha
-      hidden: Fihla kusuka edokodweni / ye-taskbar
-      pinned: Uphinisiwe
-      unmanage: Ugeage
+      NoInteractive: Akukho okusebenzayo
+      VdPinned: Khombisa kuzo zonke izindawo zokusebenza
+      WmFloat: I-TWM - Qala ukuntanta
+      WmForce: I-TWM - Force Phatha
+      WmUnmanage: I-TWM - UNANMARAGE
     options_label: Izinketho Ezengeziwe
     title_create: Ukudala {{igama}}
     title_edit: Ukuhlela {{igama}}
@@ -231,10 +231,6 @@ toolbar:
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
-  dynamic_color: Umbala we-Dynamic
-  dynamic_color_tooltip: >-
-    Nika amandla ingemuva elinamandla nemibala engaphambili esekelwe ewindini
-    eligxile. (Imibala ingaba ngaphezulu kwezindikimba)
   enable: Nika amandla amathuluzi e-fancy
   height: Ubude
   hide_mode:
@@ -243,7 +239,6 @@ toolbar:
     on_overlap: Ngokugqagqana
   label: Indawo yamathuluzi
   placeholder: {}
-  show_hibernate: Khombisa inkinobho ye-hibernate kwimenyu yamandla
 update:
   available: Ukuvuselelwa Kuyatholakala!
   channel: Isiteshi sokuvuselela
@@ -307,7 +302,6 @@ weg:
       all: Konke
       label: Ukubonakala Kwezinto Ezingaphiniwe
       on_monitor: Ku-Monitor
-    thumbnail_generation_enabled: Khiqiza izithonjana entweni hover
     visible_separators: Abahlukanisi ababonakalayo
   label: Dock / taskbar
   margin: Image
@@ -332,6 +326,10 @@ wm:
     offset: Umngcele we-Offset
     width: Ububanzi bomngcele
   description: Ukufanisa
+  drag_behavior: Hudula Ukuziphatha
+  drag_behavior_options:
+    sort: Hlunga (hlela kabusha amawindi ngenkathi uhudula)
+    swap: Shintsha (shintshanisa amawindi ekugcineni kokuhudula)
   enable: Nika amandla umphathi wewindi elijabulisayo
   layout: Isakhiwo
   resize_delta: Shintsha usayizi DEDTA (%)

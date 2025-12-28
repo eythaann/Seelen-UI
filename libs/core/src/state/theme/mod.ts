@@ -10,8 +10,6 @@ import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mo
 import { List } from "../../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { Widget } from "../widget/mod.ts";
-import { Settings } from "../settings/mod.ts";
-import { UIColors } from "../../system_state/ui_colors.ts";
 
 export class ThemeList extends List<ITheme> {
   static getAsync(): Promise<ThemeList> {
@@ -63,17 +61,21 @@ export class Theme {
         @property ${def.name} {
           syntax: "${def.syntax}";
           inherits: true;
-          initial-value: ${def.initialValue}${"initialValueUnit" in def ? def.initialValueUnit : ""}
+          initial-value: ${def.initialValue}${"initialValueUnit" in def ? def.initialValueUnit : ""};
         }
       `;
     });
 
     const layerName = "theme-" +
-      this.metadata.path.toLowerCase().replaceAll(/[^a-zA-Z0-9]/g, "_");
+      this.id
+        .toLowerCase()
+        .replaceAll("@", "")
+        .replaceAll(/[^a-zA-Z0-9\-\_]/g, "_");
+
     styles += `@layer ${layerName}-shared {\n${this.sharedStyles}\n}\n`;
 
     const variablesContent = Object.entries(varValues)
-      .filter(([name]) => isValidCssVariableName(name))
+      .filter(([name, _value]) => isValidCssVariableName(name))
       .map(([name, value]) => `${name}: ${value || ""};`)
       .join("\n");
     styles += `@layer ${layerName} {\n:root {${variablesContent}}\n${this.styles[widgetId] ?? ""}\n}\n`;
@@ -82,7 +84,7 @@ export class Theme {
     const styleElement = document.createElement("style");
     styleElement.id = this.id;
     styleElement.textContent = styles;
-    styleElement.setAttribute("data-resource-type", "theme");
+    styleElement.setAttribute("data-source", "theme");
     document.head.appendChild(styleElement);
   }
 
@@ -108,35 +110,11 @@ function iterateVariableDefinitions(
   }
 }
 
-export function removeAllThemeStyles(): void {
-  const elements = document.querySelectorAll(
-    `style[data-resource-type="theme"]`,
-  );
+function removeAllThemeStyles(): void {
+  const elements = document.querySelectorAll(`style[data-source="theme"]`);
   for (const element of elements) {
-    element.remove();
+    if (element instanceof HTMLStyleElement) {
+      element.remove();
+    }
   }
-}
-
-/**
- * This will apply the active themes for this widget, and automatically update
- * when the themes or settings change. Also will add the systehm ui colors to the document.
- */
-export async function startThemingTool(): Promise<void> {
-  let settings = await Settings.getAsync();
-  let themes = await ThemeList.getAsync();
-
-  await ThemeList.onChange((newThemes) => {
-    themes = newThemes;
-    themes.applyToDocument(settings.activeThemes, settings.byTheme);
-  });
-
-  await Settings.onChange((newSettings) => {
-    settings = newSettings;
-    themes.applyToDocument(settings.activeThemes, settings.byTheme);
-  });
-
-  (await UIColors.getAsync()).setAsCssVariables();
-  await UIColors.onChange((colors) => colors.setAsCssVariables());
-
-  themes.applyToDocument(settings.activeThemes, settings.byTheme);
 }

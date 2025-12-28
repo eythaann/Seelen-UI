@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: Aktuallaşdırmaq
     ok_readonly: Yeni kimi redaktə edin
     options:
-      float: Sal
-      force: İdarə etmək
-      hidden: Dock / tapşırıq çubuğundan gizləyin
-      pinned: Sancaq
-      unmanage: Qüsursuz
+      NoInteractive: İnteraktiv yoxdur
+      VdPinned: Bütün iş yerlərində göstərin
+      WmFloat: TWM - üzənlərə başlayın
+      WmForce: TWM - Güc idarə edin
+      WmUnmanage: TWM - Unmanage
     options_label: Əlavə seçimlər
     title_create: Yaratmaq {{ad}}
     title_edit: Redaktə {{ad}}
@@ -230,10 +230,6 @@ toolbar:
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
-  dynamic_color: Dinamik rəng
-  dynamic_color_tooltip: >-
-    Diqqət edilmiş pəncərəyə əsaslanan dinamik fon və ön rəngləri aktivləşdirin.
-    (Rənglər mövzular tərəfindən ləğv edilə bilər)
   enable: Zərif alət çubuğunu aktivləşdirin
   height: Hündürlük
   hide_mode:
@@ -242,7 +238,6 @@ toolbar:
     on_overlap: Üst-üstə düşür
   label: Alət çubuğu
   placeholder: {}
-  show_hibernate: Güc menyusunda Hibernate düyməsini göstərin
 update:
   available: YENİLƏNİB!
   channel: Kanal yeniləmə
@@ -304,7 +299,6 @@ weg:
       all: Hamısı
       label: Saxlanmamış Elementlərin Görünüşü
       on_monitor: Monitorda
-    thumbnail_generation_enabled: Hover-də eskizlər yaradın
     visible_separators: Görünən ayırıcılar
   label: Dock / tapşırıq çubuğu
   margin: Kənarə
@@ -329,6 +323,10 @@ wm:
     offset: Sərhəd əvəzinə
     width: Sərhəd eni
   description: Təsvir
+  drag_behavior: Sürükləmə Davranışı
+  drag_behavior_options:
+    sort: Sırala (sürükləyərkən pəncərələri yenidən sırala)
+    swap: Swap (sürük sonunda pəncərələri dəyişdirin)
   enable: Tiling pəncərə menecerini aktivləşdirin
   layout: Sxem
   resize_delta: Delta'nın ölçüsünü (%)

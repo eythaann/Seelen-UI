@@ -12,17 +12,19 @@ app_menu:
   run_as: Executa com administrador
   unpin: Desfeta
 context_menu:
+  remove_module: Elimina el mòdul
   reorder_disable: Barra de tasques de bloqueig
   reorder_enable: Desbloqueja la barra de tasques
 media:
   not_playing: Res està jugant
-media_menu:
-  remove: Elimina el mòdul de suports
-start_menu:
-  remove: Elimina el mòdul d'inici
+show_desktop:
+  label: Mostra l'escriptori
+start:
+  label: Menú d'inici
 taskbar_menu:
   add_file: Pin el fitxer personalitzat
   add_folder: Pin carpeta personalitzada
+  desktop: Afegeix un mòdul d'escriptori
   media: Afegiu el mòdul de suports
   settings: Configuració
   start: Afegiu el mòdul d'inici

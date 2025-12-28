@@ -2,12 +2,10 @@ use std::borrow::Borrow;
 use std::collections::HashMap;
 use std::hash::Hash;
 
-use parking_lot::Mutex;
-
-use crate::trace_lock;
+use crate::utils::lock_free::TracedMutex;
 
 /// Wrapper for `Mutex<HashMap<K, V>>` with simplifies the API and prevents deadlocks
-pub struct SyncHashMap<K, V>(Mutex<HashMap<K, V>>);
+pub struct SyncHashMap<K, V>(TracedMutex<HashMap<K, V>>);
 
 #[allow(dead_code, clippy::multiple_bound_locations)]
 impl<K, V> SyncHashMap<K, V>
@@ -15,19 +13,19 @@ where
     K: Eq + Hash,
 {
     pub fn new() -> Self {
-        Self(Mutex::new(HashMap::new()))
+        Self(TracedMutex::new(HashMap::new()))
     }
 
     pub fn len(&self) -> usize {
-        trace_lock!(self.0).len()
+        self.0.lock().len()
     }
 
     pub fn is_empty(&self) -> bool {
-        trace_lock!(self.0).is_empty()
+        self.0.lock().is_empty()
     }
 
     pub fn upsert(&self, key: K, value: V) -> Option<V> {
-        trace_lock!(self.0).insert(key, value)
+        self.0.lock().insert(key, value)
     }
 
     pub fn remove<Q: ?Sized>(&self, key: &Q) -> Option<V>
@@ -35,11 +33,15 @@ where
         K: Borrow<Q>,
         Q: Eq + Hash,
     {
-        trace_lock!(self.0).remove(key)
+        self.0.lock().remove(key)
     }
 
-    pub fn contains_key(&self, key: &K) -> bool {
-        trace_lock!(self.0).contains_key(key)
+    pub fn contains_key<Q: ?Sized>(&self, key: &Q) -> bool
+    where
+        K: Borrow<Q>,
+        Q: Eq + Hash,
+    {
+        self.0.lock().contains_key(key)
     }
 
     pub fn get<Q: ?Sized, F, R>(&self, key: &Q, f: F) -> Option<R>
@@ -48,32 +50,60 @@ where
         Q: Eq + Hash,
         F: FnOnce(&mut V) -> R,
     {
-        trace_lock!(self.0).get_mut(key).map(f)
+        self.0.lock().get_mut(key).map(f)
+    }
+
+    /// If key does not exist, it will be created with default value
+    pub fn get_or_default<Q, F, R>(&self, key: Q, f: F) -> R
+    where
+        V: Default,
+        Q: Into<K>,
+        F: FnOnce(&mut V) -> R,
+    {
+        f(self.0.lock().entry(key.into()).or_default())
+    }
+
+    /// If key does not exist, it will be created using the provided constructor function
+    pub fn get_or_insert<Q, C, F, R>(&self, key: Q, constructor: C, f: F) -> R
+    where
+        Q: Into<K>,
+        C: FnOnce() -> V,
+        F: FnOnce(&mut V) -> R,
+    {
+        f(self.0.lock().entry(key.into()).or_insert_with(constructor))
     }
 
     pub fn for_each<F>(&self, f: F)
     where
         F: FnMut((&K, &mut V)),
     {
-        trace_lock!(self.0).iter_mut().for_each(f);
+        self.0.lock().iter_mut().for_each(f);
     }
 
     pub fn retain<F>(&self, f: F)
     where
         F: FnMut(&K, &mut V) -> bool,
     {
-        trace_lock!(self.0).retain(f);
+        self.0.lock().retain(f);
     }
 
     pub fn clear(&self) {
-        trace_lock!(self.0).clear();
+        self.0.lock().clear();
     }
 
     pub fn any<F>(&self, f: F) -> bool
     where
         F: FnMut((&K, &V)) -> bool,
     {
-        trace_lock!(self.0).iter().any(f)
+        self.0.lock().iter().any(f)
+    }
+
+    pub fn take(&self) -> HashMap<K, V> {
+        self.0.lock().drain().collect()
+    }
+
+    pub fn replace(&self, value: HashMap<K, V>) {
+        *self.0.lock() = value;
     }
 }
 
@@ -84,15 +114,15 @@ where
     V: Clone,
 {
     pub fn to_hash_map(&self) -> HashMap<K, V> {
-        trace_lock!(self.0).clone()
+        self.0.lock().clone()
     }
 
     pub fn keys(&self) -> Vec<K> {
-        trace_lock!(self.0).keys().cloned().collect()
+        self.0.lock().keys().cloned().collect()
     }
 
     pub fn values(&self) -> Vec<V> {
-        trace_lock!(self.0).values().cloned().collect()
+        self.0.lock().values().cloned().collect()
     }
 }
 
@@ -101,6 +131,15 @@ where
     K: Eq + Hash,
 {
     fn from(value: HashMap<K, V>) -> Self {
-        Self(Mutex::new(value))
+        Self(TracedMutex::new(value))
+    }
+}
+
+impl<K, V> Default for SyncHashMap<K, V>
+where
+    K: Eq + Hash,
+{
+    fn default() -> Self {
+        Self::new()
     }
 }

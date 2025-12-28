@@ -1,8 +1,7 @@
 use seelen_core::{handlers::SeelenEvent, system_state::UIColors};
-use tauri::Emitter;
 
 use crate::{
-    app::get_app_handle,
+    app::emit_to_webviews,
     error::Result,
     log_error,
     modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
@@ -12,9 +11,7 @@ use crate::{
 use super::application::SYSTEM_SETTINGS;
 
 fn emit_colors(colors: &UIColors) {
-    get_app_handle()
-        .emit(SeelenEvent::ColorsChanged, colors)
-        .expect("failed to emit");
+    emit_to_webviews(SeelenEvent::ColorsChanged, colors);
 }
 
 pub fn register_system_settings_events() {

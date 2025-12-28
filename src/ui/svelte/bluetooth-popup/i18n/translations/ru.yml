@@ -1,0 +1,24 @@
+available: Доступные устройства
+cancel: Отмена
+confirm: Подтверждать
+confirm_only: Подтвердить сопряжение
+confirm_pin: Подтвердите, что PIN-код совпадает
+connected: Подключено
+disconnect: Отключить
+display_pin: Введите этот PIN-код на устройстве
+lowenergy: Низкая энергия
+more: Дополнительные настройки Bluetooth
+no_adapter: Bluetooth-адаптер не найден
+not_found: Устройства не найдены
+pair: Пара
+paired: Парный
+pairing: Сопряжение...
+pairing_failed: Сопряжение не удалось
+password: Пароль
+provide_address: Введите адрес
+provide_password: Введите имя пользователя и пароль
+provide_pin: Введите PIN-код
+scanning: Сканирование устройств...
+unpair: Отсоединить
+unpair_failed: Отключение не удалось
+username: Имя пользователя

@@ -61,7 +61,7 @@ impl RegistryVirtualDesktopManager {
     fn get_virtual_desktops_folder() -> Result<RegKey> {
         let hkcu = RegKey::predef(HKEY_CURRENT_USER);
         Ok(if is_windows_10() {
-            let session_id = WindowsApi::current_session_id()?;
+            let session_id = WindowsApi::current_session_id();
             hkcu.open_subkey(format!(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\{session_id}\VirtualDesktops"))?
         } else {
             hkcu.open_subkey(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops")?

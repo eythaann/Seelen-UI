@@ -1,7 +1,6 @@
 use seelen_core::{handlers::SeelenEvent, resource::ResourceKind};
-use tauri::Emitter;
 
-use crate::{app::get_app_handle, error::Result};
+use crate::{app::emit_to_webviews, error::Result, widgets::manager::WIDGET_MANAGER};
 
 use super::ResourceManager;
 
@@ -11,7 +10,8 @@ impl ResourceManager {
         self.widgets.scan(|_, v| {
             widgets.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StateWidgetsChanged, widgets)?;
+        emit_to_webviews(SeelenEvent::StateWidgetsChanged, widgets);
+        WIDGET_MANAGER.refresh()?;
         Ok(())
     }
 
@@ -20,7 +20,7 @@ impl ResourceManager {
         self.themes.scan(|_, v| {
             themes.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StateThemesChanged, themes)?;
+        emit_to_webviews(SeelenEvent::StateThemesChanged, themes);
         Ok(())
     }
 
@@ -29,16 +29,24 @@ impl ResourceManager {
         self.plugins.scan(|_, v| {
             plugins.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StatePluginsChanged, plugins)?;
+        emit_to_webviews(SeelenEvent::StatePluginsChanged, plugins);
         Ok(())
     }
 
     pub fn emit_icon_packs(&self) -> Result<()> {
         let mut icon_packs = Vec::new();
+
+        // Add system icon pack if it exists
+        if let Some(system_pack) = self.system_icon_pack.lock().as_ref() {
+            icon_packs.push(std::sync::Arc::new(system_pack.clone()));
+        }
+
+        // Add user icon packs
         self.icon_packs.scan(|_, v| {
             icon_packs.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StateIconPacksChanged, icon_packs)?;
+
+        emit_to_webviews(SeelenEvent::StateIconPacksChanged, icon_packs);
         Ok(())
     }
 
@@ -47,7 +55,7 @@ impl ResourceManager {
         self.wallpapers.scan(|_, v| {
             wallpaper.push(v.clone());
         });
-        get_app_handle().emit(SeelenEvent::StateWallpapersChanged, wallpaper)?;
+        emit_to_webviews(SeelenEvent::StateWallpapersChanged, wallpaper);
         Ok(())
     }
 

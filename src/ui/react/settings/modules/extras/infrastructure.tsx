@@ -1,7 +1,7 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { process } from "@seelen-ui/lib/tauri";
-import { isDev, wasInstalledUsingMSIX } from "@shared";
-import { Icon } from "@shared/components/Icon";
+import { isDev, wasInstalledUsingMSIX } from "libs/ui/react/utils/index.ts";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Select, Switch, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

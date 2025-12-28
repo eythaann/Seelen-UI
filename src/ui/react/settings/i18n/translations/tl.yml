@@ -23,11 +23,11 @@ apps_configurations:
     ok_edit: I -update
     ok_readonly: I -edit bilang bago
     options:
-      float: Lumutang
-      force: Pamahalaan ang Pamahalaan
-      hidden: Itago mula sa pantalan/taskbar
-      pinned: Naka -pin
-      unmanage: Hindi namamahala
+      NoInteractive: Walang interactive
+      VdPinned: Ipakita sa lahat ng mga lugar ng trabaho
+      WmFloat: TWM - Simulan ang lumulutang
+      WmForce: TWM - Pamahalaan ang Pamahalaan
+      WmUnmanage: TWM - hindi namamahala
     options_label: Dagdag na mga pagpipilian
     title_create: Lumilikha ng {{pangalan}}
     title_edit: Pag -edit {{pangalan}}
@@ -235,10 +235,6 @@ toolbar:
   delay_to_hide: Delay sa pagtatago
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon
-  dynamic_color: Dinamikong Kulay
-  dynamic_color_tooltip: >-
-    Paganahin ang mga dynamic na background at foreground na kulay batay sa
-    nakatutok na window. (Ang mga kulay ay maaaring ma -overridden ng mga tema)
   enable: Paganahin ang magarbong toolbar
   height: Taas
   hide_mode:
@@ -247,7 +243,6 @@ toolbar:
     on_overlap: Sa overlap
   label: Toolbar
   placeholder: {}
-  show_hibernate: Ipakita ang pindutan ng hibernate sa menu ng kuryente
 update:
   available: Mag -update Magagamit!
   channel: I -update ang channel
@@ -309,7 +304,6 @@ weg:
       all: Lahat
       label: Visibility ng Mga Na-unpin na Item
       on_monitor: Sa Monitor
-    thumbnail_generation_enabled: Bumuo ng mga thumbnail sa item hover
     visible_separators: Visible Separator
   label: Dock/Taskbar
   margin: Margin
@@ -334,6 +328,10 @@ wm:
     offset: Border Offset
     width: Lapad ng hangganan
   description: Paglalarawan
+  drag_behavior: I-drag ang Gawi
+  drag_behavior_options:
+    sort: Pagbukud-bukurin (muling ayusin ang mga bintana habang nagda-drag)
+    swap: Magpalit (magpalit ng mga bintana sa dulo ng pag-drag)
   enable: Paganahin ang manager ng window window
   layout: Layout
   resize_delta: Baguhin ang laki ng Delta (%)

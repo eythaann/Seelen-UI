@@ -1,10 +1,10 @@
 :root {
-  --dock-item-hover-color: rgba(var(--config-accent-light-color-rgb), 0.2);
+  --dock-item-hover-color: rgba(var(--system-accent-light-color-rgb), 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --dock-item-hover-color: rgba(var(--config-accent-color-rgb), 0.2);
+    --dock-item-hover-color: rgba(var(--system-accent-color-rgb), 0.2);
   }
 }
 
@@ -199,7 +199,7 @@
     top: 0;
     right: 0;
     transform: translate(25%, -25%);
-    background-color: var(--config-accent-color);
+    background-color: var(--system-accent-color);
     color: #efefef;
     height: 16px;
     min-width: 16px;
@@ -265,7 +265,7 @@
     }
 
     &.weg-item-open-sign-focused {
-      background-color: var(--config-accent-color);
+      background-color: var(--system-accent-color);
 
       .vertical & {
         height: 50%;
@@ -312,14 +312,6 @@
   .weg-item-display-name {
     white-space: nowrap;
   }
-
-  .weg-item-preview-scrollbar {
-    &:has(.weg-item-preview-thumbnail-disabled) {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-  }
 }
 
 .weg-item-preview {
@@ -329,10 +321,6 @@
 
 .weg-item-preview-topbar {
   margin: 0 0 8px 0;
-
-  .weg-item-preview-thumbnail-disabled & {
-    margin: 0;
-  }
 }
 
 .weg-item-preview-title {
@@ -351,9 +339,5 @@
 }
 
 .weg-item-preview-image {
-  --empty-rule: "delete me on use";
-}
-
-.weg-item-preview-spin {
   --empty-rule: "delete me on use";
 }
