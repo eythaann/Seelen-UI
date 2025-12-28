@@ -1,6 +1,8 @@
 use seelen_core::state::{shortcuts::SluHotkeyAction, Settings};
 use slu_ipc::{messages::AppMessage, AppIpc};
-use win_hotkeys::{error::WHKError, events::KeyboardInputEvent, Hotkey, HotkeyManager, VKey};
+use win_hotkeys::{
+    error::WHKError, events::KeyboardInputEvent, Hotkey, HotkeyManager, TriggerTiming, VKey,
+};
 
 use crate::{
     app_management::kill_all_seelen_ui_processes, error::Result, exit, get_async_handler, log_error,
@@ -24,6 +26,10 @@ pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
             }
         }
 
+        if slu_hotkey.keys.is_empty() {
+            continue 'registration;
+        }
+
         let mut vkeys = Vec::new();
         for key in &slu_hotkey.keys {
             let vkey = match VKey::from_keyname(key) {
@@ -37,8 +43,7 @@ pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
         }
 
         let action = slu_hotkey.action;
-
-        let hotkey = Hotkey::from_keys(vkeys).action(move || {
+        let mut hotkey = Hotkey::from_keys(&vkeys).action(move || {
             log::trace!("Hotkey triggered: {action:?}");
             match action {
                 SluHotkeyAction::MiscForceRestart => {
@@ -58,6 +63,11 @@ pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
                 });
             }
         });
+
+        if vkeys.len() == 1 {
+            hotkey.trigger_timing = TriggerTiming::OnKeyUp;
+            hotkey.strict_sequence = true;
+        }
 
         log_error!(manager.register_hotkey(hotkey), slu_hotkey);
     }
@@ -83,8 +93,8 @@ pub async fn start_shortcut_registration() -> Result<()> {
     let on_keyboard_event = move |event| {
         handle.spawn(async {
             match event {
-                KeyboardInputEvent::KeyDown { vk_code, state } => {
-                    if VKey::from_vk_code(vk_code) == VKey::Escape {
+                KeyboardInputEvent::KeyDown { key, state } => {
+                    if key == VKey::Escape {
                         return;
                     }
                     let keys = state.pressing.iter().map(|vkey| vkey.to_string()).collect();

@@ -4411,7 +4411,7 @@ version = "0.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77e878c846a8abae00dd069496dbe8751b16ac1c3d6bd2a7283a938e8228f90d"
 dependencies = [
- "proc-macro-crate 3.4.0",
+ "proc-macro-crate 1.3.1",
  "proc-macro2",
  "quote",
  "syn 2.0.106",
@@ -9109,7 +9109,7 @@ checksum = "dd7cf3379ca1aac9eea11fba24fd7e315d621f8dfe35c8d7d2be8b793726e07d"
 [[package]]
 name = "win-hotkeys"
 version = "0.5.1"
-source = "git+https://github.com/Seelen-Inc/windows-keyboard-hook.git#6974d20e7dc2b7c07ca928010b04ff9d1229cd61"
+source = "git+https://github.com/Seelen-Inc/windows-keyboard-hook.git#c0b01adb2806dfd9e2053bacc4c747dd984fca9f"
 dependencies = [
  "arc-swap",
  "crossbeam-channel",
