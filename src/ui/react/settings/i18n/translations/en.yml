@@ -144,6 +144,7 @@ reset_all_to_default: Reset all to default values
 reset_to_default: Reset to default value
 resources:
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
+  corrupted_wallpaper: Failed to extract thumbnail - corrupted or unsupported video format
   delete: Delete Resource
   discover: Discover more resources
   has_update: An update is available
@@ -254,6 +255,9 @@ wall:
   flipHorizontal: Flip Horizontal
   flipVertical: Flip Vertical
   generating_thumbnails: Generating Wallpaper Thumbnails
+  corrupted_wallpapers_message: 'Corrupted wallpapers, consider deleting these:'
+  thumbnail_generation_complete: Thumbnail Generation Complete
+  thumbnail_generation_finished: Thumbnail generation has finished successfully
   hours: hours
   interval: Change wallpaper every
   minutes: minutes

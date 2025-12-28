@@ -119,7 +119,8 @@
   }
 
   .warning,
-  .danger {
+  .danger,
+  .corrupted {
     position: absolute;
     bottom: 8px;
     right: 8px;

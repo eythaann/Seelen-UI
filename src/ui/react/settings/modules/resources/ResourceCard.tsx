@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
 import type { IconName } from "libs/ui/icons.ts";
+import { $corruptedWallpapers } from "../shared/signals.ts";
 
 type AnyResource = {
   id: ResourceId;
@@ -26,6 +27,7 @@ interface ResourceCardProps {
 
 export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
   const [hasUpdate, setHasUpdate] = useState(false);
+  const isCorrupted = kind === "Wallpaper" && $corruptedWallpapers.value.has(resource.id);
 
   const { t } = useTranslation();
 
@@ -57,29 +59,32 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
       (majorTarget === major && minorTarget > minor) ||
       (majorTarget === major && minorTarget === minor && patchTarget > patch));
 
-  const showWarning = targetIsOlder && !resource.metadata.bundled;
-  const showDanger = targetIsNewer && !resource.metadata.bundled;
-
   const resourceLink = `https://seelen.io/resources/${resource.id.replace("@", "")}`;
   return (
     <div
       className={cx(cs.card, {
-        [cs.warn!]: showWarning,
-        [cs.danger!]: showDanger,
+        [cs.warn!]: targetIsOlder,
+        [cs.danger!]: targetIsNewer || isCorrupted,
       })}
     >
       <ResourcePortrait resource={resource} kind={kind}>
-        {showWarning && (
+        {targetIsOlder && (
           <Tooltip title={t("resources.outdated")}>
             <Icon iconName="IoWarning" className={cs.warning} />
           </Tooltip>
         )}
-        {showDanger && (
+        {targetIsNewer && (
           <Tooltip title={t("resources.app_outdated")}>
             <Icon iconName="IoWarning" className={cs.danger} />
           </Tooltip>
         )}
+        {isCorrupted && (
+          <Tooltip title={t("resources.corrupted_wallpaper")}>
+            <Icon iconName="MdErrorOutline" className={cs.corrupted} />
+          </Tooltip>
+        )}
       </ResourcePortrait>
+
       <div className={cs.info}>
         <b>
           <ResourceText text={resource.metadata.displayName} />
@@ -94,6 +99,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
             )}
         </p>
       </div>
+
       <div className={cs.actions}>
         <div className={cs.actionsTop}>
           {hasUpdate && (
