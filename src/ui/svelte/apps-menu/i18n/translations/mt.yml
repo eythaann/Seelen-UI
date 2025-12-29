@@ -1,0 +1,7 @@
+all: L-Apps kollha
+no_apps: Ma nstabet l-ebda app
+no_pinned_apps: Ebda apps ippinjat
+pin: Pin
+pinned: Pinnjati
+start: Ibda
+unpin: Unpin

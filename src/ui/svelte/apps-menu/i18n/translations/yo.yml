@@ -1,0 +1,7 @@
+all: Gbogbo Apps
+no_apps: Ko si awọn ohun elo ti a rii
+no_pinned_apps: Ko si awọn ohun elo pinni
+pin: Pin
+pinned: Pinni
+start: Bẹrẹ
+unpin: Yọ kuro

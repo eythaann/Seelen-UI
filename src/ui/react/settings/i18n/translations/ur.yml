@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     اس وسیلہ کے لئے مناسب طریقے سے کام کرنے کے لئے سیلین UI کا ایک نیا ورژن
     درکار ہے۔
+  corrupted_wallpaper: تھمب نیل نکالنے میں ناکام - خراب یا غیر تعاون یافتہ ویڈیو فارمیٹ
   delete: وسائل کو حذف کریں
   discover: مزید وسائل دریافت کریں
   has_update: ایک تازہ کاری دستیاب ہے
@@ -243,12 +244,14 @@ wall:
   collection_name: جمع کرنے کا نام
   collections: مجموعے
   contrast: اس کے برعکس
+  corrupted_wallpapers_message: 'خراب وال پیپرز ، ان کو حذف کرنے پر غور کریں:'
   create: تخلیق کریں
   create_collection: مجموعہ بنائیں
   default_collection: پہلے سے طے شدہ مجموعہ
   delete_collection: مجموعہ حذف کریں
   edit_collection: مجموعہ میں ترمیم کریں
   enable: وال پیپر مینیجر کو فعال کریں
+  extend: پرائمری میں توسیع کریں
   fit:
     contain: مشتمل
     cover: کور
@@ -260,6 +263,7 @@ wall:
   interval: ہر ایک وال پیپر کو تبدیل کریں
   minutes: منٹ
   monitor_collection: مانیٹر کلیکشن
+  multimonitor_behaviour: کثیر الجہتی سلوک
   muted: خاموش ویڈیو آڈیو
   no_background: اس کے بجائے تھیم کے پس منظر کا استعمال کرتے ہوئے ، خالی سلائیڈ شو۔
   no_collections: ابھی تک کوئی مجموعہ پیدا نہیں ہوا۔ ایک بنانے کے لئے + بٹن پر کلک کریں۔
@@ -267,6 +271,7 @@ wall:
   objectPosition: پس منظر کی پوزیشن
   overlayColor: اوورلے رنگ
   overlayMixBlendMode: اوورلے مکس مرکب موڈ
+  per_monitor: فی مانیٹر
   playback: پلے بیک کی رفتار
   position:
     bottom: نیچے
@@ -279,6 +284,8 @@ wall:
   saturation: سنترپتی
   seconds: سیکنڈ
   select_collection: مجموعہ منتخب کریں
+  thumbnail_generation_complete: تھمب نیل جنریشن مکمل
+  thumbnail_generation_finished: تھمب نیل جنریشن نے کامیابی کے ساتھ ختم کیا ہے
   wallpaper_collection: وال پیپر مجموعہ
   wallpaper_settings: وال پیپر کی ترتیبات
   withOverlay: اوورلے کے ساتھ

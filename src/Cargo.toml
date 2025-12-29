@@ -151,6 +151,7 @@ windows = { workspace = true, features = [
     "UI_Core",
     "UI_Notifications_Management",
     "UI_ViewManagement",
+    "UI_StartScreen",
     "deprecated",
     "Win32_NetworkManagement_IpHelper",
     "Win32_NetworkManagement_Ndis",

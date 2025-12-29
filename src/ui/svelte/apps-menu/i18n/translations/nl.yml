@@ -1,0 +1,7 @@
+all: Alle apps
+no_apps: Geen apps gevonden
+no_pinned_apps: Geen vastgezette apps
+pin: Pin
+pinned: Vastgezet
+start: Begin
+unpin: Losmaken

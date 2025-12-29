@@ -145,6 +145,7 @@ reset_all_to_default: កំណត់ឡើងវិញទាំងអស់ទ�
 reset_to_default: កំណត់ឡើងវិញទៅតម្លៃលំនាំដើម
 resources:
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
+  corrupted_wallpaper: បរាជ័យក្នុងការទាញយករូបភាពតូច - ទ្រង់ទ្រាយវីដេអូខូច ឬមិនគាំទ្រ
   delete: លុបធនធាន
   discover: ស្វែងយល់ពីធនធានបន្ថែម
   has_update: ការធ្វើបច្ចុប្បន្នភាពមាន
@@ -241,12 +242,14 @@ wall:
   collection_name: ឈ្មោះបណ្តុំ
   collections: បណ្តុំ
   contrast: ធេវីអាេយមានផាបផ្ទុយក្នា
+  corrupted_wallpapers_message: ផ្ទាំងរូបភាពខូច សូមពិចារណាលុបទាំងនេះ៖
   create: បង្កើត
   create_collection: បង្កើតបណ្តុំ
   default_collection: ការប្រមូលលំនាំដើម
   delete_collection: លុបបណ្តុំ
   edit_collection: កែសម្រួលបណ្តុំ
   enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
+  extend: ពង្រីកបឋម
   fit:
     contain: មាន
     cover: រកប
@@ -258,6 +261,7 @@ wall:
   interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរៀងរាល់
   minutes: បីតោ
   monitor_collection: ការប្រមូលម៉ូនីទ័រ
+  multimonitor_behaviour: ឥរិយាបថពហុម៉ូនីទ័រ
   muted: អូឌីយ៉ូវីដេអូបិទ
   no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
   no_collections: មិនទាន់បានបង្កើតបណ្តុំនៅឡើយទេ។ ចុចប៊ូតុង + ដើម្បីបង្កើតមួយ។
@@ -265,6 +269,7 @@ wall:
   objectPosition: ទីតាំងផ្ទៃខាងក្រោយ
   overlayColor: ពណ៌គម្រប
   overlayMixBlendMode: លាបពណ៌លាយបញ្ចូលគ្នា
+  per_monitor: ក្នុងមួយម៉ូនីទ័រ
   playback: ល្បឿនចាក់សារថ្មី
   position:
     bottom: ក្ដិត / បាត
@@ -277,6 +282,8 @@ wall:
   saturation: ផាបថបតរ
   seconds: វិនាទី
   select_collection: ជ្រើសរើសបណ្តុំ
+  thumbnail_generation_complete: ការបង្កើតរូបភាពតូចបានបញ្ចប់
+  thumbnail_generation_finished: ការបង្កើតរូបភាពតូចបានបញ្ចប់ដោយជោគជ័យ
   wallpaper_collection: ការប្រមូលផ្ទាំងរូបភាព
   wallpaper_settings: ការកំណត់ផ្ទាំងរូបភាព
   withOverlay: ជាមួយនឹងការត្រួតលើគ្នា

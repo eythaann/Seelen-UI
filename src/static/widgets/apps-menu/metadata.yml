@@ -1,0 +1,8 @@
+id: "@seelen/apps-menu"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+instances: Single
+loader: Internal
+hidden: true
+lazy: true

@@ -1,0 +1,7 @@
+all: Aplikazio guztiak
+no_apps: Ez da aplikaziorik aurkitu
+no_pinned_apps: Ez dago ainguratutako aplikaziorik
+pin: Pin
+pinned: Ainguratuta
+start: Hasi
+unpin: Kendu aingura

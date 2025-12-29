@@ -312,6 +312,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::modules::power::infrastructure::*;
     use crate::modules::radios::bluetooth::handlers::*;
     use crate::modules::radios::handlers::*;
+    use crate::modules::start::infrastructure::*;
     use crate::modules::system_settings::infrastructure::*;
     use crate::modules::system_tray::infrastructure::*;
     use crate::modules::user::infrastructure::*;

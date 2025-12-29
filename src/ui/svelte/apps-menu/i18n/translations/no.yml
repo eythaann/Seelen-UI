@@ -1,0 +1,7 @@
+all: Alle apper
+no_apps: Ingen apper funnet
+no_pinned_apps: Ingen festede apper
+pin: Pin
+pinned: Festet
+start: Start
+unpin: Løsne

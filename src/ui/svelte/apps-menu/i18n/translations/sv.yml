@@ -1,0 +1,7 @@
+all: Alla appar
+no_apps: Inga appar hittades
+no_pinned_apps: Inga fästa appar
+pin: Stift
+pinned: Fäst
+start: Start
+unpin: Lossa

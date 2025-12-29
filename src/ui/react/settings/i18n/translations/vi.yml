@@ -146,6 +146,9 @@ reset_all_to_default: Đặt lại tất cả về giá trị mặc định
 reset_to_default: Đặt lại về giá trị mặc định
 resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
+  corrupted_wallpaper: >-
+    Không thể trích xuất hình thu nhỏ - định dạng video bị hỏng hoặc không được
+    hỗ trợ
   delete: Xóa tài nguyên
   discover: Khám phá thêm tài nguyên
   has_update: Một bản cập nhật có sẵn
@@ -243,12 +246,14 @@ wall:
   collection_name: Tên bộ sưu tập
   collections: Bộ sưu tập
   contrast: Sự tương phản
+  corrupted_wallpapers_message: 'Hình nền bị hỏng, hãy cân nhắc việc xóa những hình nền này:'
   create: Tạo nên
   create_collection: Tạo bộ sưu tập
   default_collection: Bộ sưu tập mặc định
   delete_collection: Xóa bộ sưu tập
   edit_collection: Chỉnh sửa bộ sưu tập
   enable: Bật trình quản lý hình nền
+  extend: Mở rộng chính
   fit:
     contain: Bao gồm
     cover: Che phủ
@@ -260,6 +265,7 @@ wall:
   interval: Thay đổi hình nền mỗi
   minutes: phút
   monitor_collection: Bộ sưu tập giám sát
+  multimonitor_behaviour: Hành vi đa màn hình
   muted: Tắt âm thanh video
   no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
   no_collections: Chưa có bộ sưu tập nào được tạo. Nhấp vào nút + để tạo một cái.
@@ -267,6 +273,7 @@ wall:
   objectPosition: Vị trí nền
   overlayColor: Màu lớp phủ
   overlayMixBlendMode: Chế độ trộn trộn lớp phủ
+  per_monitor: Mỗi màn hình
   playback: Tốc độ phát lại
   position:
     bottom: Đáy
@@ -279,6 +286,8 @@ wall:
   saturation: Bão hòa
   seconds: giây
   select_collection: Chọn Bộ sưu tập
+  thumbnail_generation_complete: Hoàn tất việc tạo hình thu nhỏ
+  thumbnail_generation_finished: Việc tạo hình thu nhỏ đã kết thúc thành công
   wallpaper_collection: Bộ sưu tập hình nền
   wallpaper_settings: Cài đặt hình nền
   withOverlay: Với lớp phủ

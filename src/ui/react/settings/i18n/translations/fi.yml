@@ -147,6 +147,9 @@ reset_all_to_default: Nollaa kaikki oletusarvot
 reset_to_default: Nollaa oletusarvoon
 resources:
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
+  corrupted_wallpaper: >-
+    Pikkukuvan purkaminen epäonnistui – videomuoto on vioittunut tai sitä ei
+    tueta
   delete: Poistaa resurssi
   discover: Löydä lisää resursseja
   has_update: Päivitys on käytettävissä
@@ -244,12 +247,14 @@ wall:
   collection_name: Kokoelman nimi
   collections: Kokoelmat
   contrast: Kontrasti
+  corrupted_wallpapers_message: 'Vioittuneet taustakuvat, harkitse näiden poistamista:'
   create: Luoda
   create_collection: Luo kokoelma
   default_collection: Oletuskokoelma
   delete_collection: Poista kokoelma
   edit_collection: Muokkaa kokoelmaa
   enable: Ota taustakuvan johtaja käyttöön
+  extend: Laajenna ensisijaista
   fit:
     contain: Sisältää
     cover: Kansi
@@ -261,6 +266,7 @@ wall:
   interval: Vaihda taustakuva jokainen
   minutes: minuutti
   monitor_collection: Näytön kokoelma
+  multimonitor_behaviour: Multimonitorin käyttäytyminen
   muted: Mykistä videon ääni
   no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
   no_collections: Kokoelmia ei ole vielä luotu. Luo sellainen napsauttamalla +-painiketta.
@@ -268,6 +274,7 @@ wall:
   objectPosition: Tausta Asema
   overlayColor: Päällekkäisväri
   overlayMixBlendMode: Päällekkäinen sekoitus sekoitustila
+  per_monitor: per monitori
   playback: Toistonopeus
   position:
     bottom: Pohja
@@ -280,6 +287,8 @@ wall:
   saturation: Saturaatio
   seconds: sekunti
   select_collection: Valitse Kokoelma
+  thumbnail_generation_complete: Pikkukuvien luominen valmis
+  thumbnail_generation_finished: Pikkukuvien luominen on päättynyt onnistuneesti
   wallpaper_collection: Taustakuva kokoelma
   wallpaper_settings: Taustakuvan asetukset
   withOverlay: Päällysteen kanssa

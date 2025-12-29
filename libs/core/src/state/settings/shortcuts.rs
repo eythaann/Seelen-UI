@@ -210,7 +210,9 @@ impl SluShortcutsSettings {
         let wm = "@seelen/window-manager";
 
         vec![
-            SluHotkey::new(ToggleAppsMenu, ["Win"]).attached_to("@seelen/apps-menu"),
+            SluHotkey::new(ToggleAppsMenu, ["Win"])
+                .system()
+                .attached_to("@seelen/apps-menu"),
             // Task switching and viewer
             SluHotkey::new(
                 TaskNext {

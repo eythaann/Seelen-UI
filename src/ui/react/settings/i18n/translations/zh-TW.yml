@@ -140,6 +140,7 @@ reset_all_to_default: 重置全部默認值
 reset_to_default: 重置為默認值
 resources:
   app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。
+  corrupted_wallpaper: 無法提取縮略圖 - 視頻格式已損壞或不受支持
   delete: 刪除資源
   discover: 發現更多資源
   has_update: 有更新可用
@@ -231,12 +232,14 @@ wall:
   collection_name: 收藏名稱
   collections: 收藏
   contrast: 對比
+  corrupted_wallpapers_message: 損壞的壁紙，請考慮刪除這些：
   create: 創造
   create_collection: 創建收藏
   default_collection: 默認集合
   delete_collection: 刪除集合
   edit_collection: 編輯收藏
   enable: 啟用壁紙經理
+  extend: 延長小學
   fit:
     contain: 包含
     cover: 覆蓋
@@ -248,6 +251,7 @@ wall:
   interval: 每次更改牆紙
   minutes: 分鐘
   monitor_collection: 監控集合
+  multimonitor_behaviour: 多顯示器行為
   muted: 將視頻音頻靜音
   no_background: 使用主題的背景為空幻燈片。
   no_collections: 尚未創建任何集合。 單擊 + 按鈕創建一個。
@@ -255,6 +259,7 @@ wall:
   objectPosition: 背景位置
   overlayColor: 覆蓋顏色
   overlayMixBlendMode: 疊加混合混合模式
+  per_monitor: 每台顯示器
   playback: 播放速度
   position:
     bottom: 底部
@@ -267,6 +272,8 @@ wall:
   saturation: 飽和
   seconds: 秒
   select_collection: 選擇系列
+  thumbnail_generation_complete: 縮略圖生成完成
+  thumbnail_generation_finished: 縮略圖生成已成功完成
   wallpaper_collection: 壁紙合集
   wallpaper_settings: 壁紙設置
   withOverlay: 使用覆蓋

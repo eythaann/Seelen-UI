@@ -145,6 +145,9 @@ reset_all_to_default: Nulstil alt til standardværdier
 reset_to_default: Nulstil til standardværdi
 resources:
   app_outdated: Denne ressource kræver en nyere version af Seelen UI for at fungere korrekt.
+  corrupted_wallpaper: >-
+    Kunne ikke udtrække miniaturebilledet - beskadiget eller ikke-understøttet
+    videoformat
   delete: Slet ressource
   discover: Opdag flere ressourcer
   has_update: En opdatering er tilgængelig
@@ -242,12 +245,14 @@ wall:
   collection_name: Samlingens navn
   collections: Samlinger
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Ødelagte tapeter, overvej at slette disse:'
   create: Skabe
   create_collection: Opret samling
   default_collection: Standard samling
   delete_collection: Slet samling
   edit_collection: Rediger samling
   enable: Aktivér tapet manager
+  extend: Forlæng primær
   fit:
     contain: Indeholder
     cover: Omslag
@@ -259,6 +264,7 @@ wall:
   interval: Skift tapet hver
   minutes: minutter
   monitor_collection: Monitor Indsamling
+  multimonitor_behaviour: Multimonitor-adfærd
   muted: Slå videolyd fra
   no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
   no_collections: Ingen samlinger oprettet endnu. Klik på knappen + for at oprette en.
@@ -266,6 +272,7 @@ wall:
   objectPosition: Baggrundsposition
   overlayColor: Overlay-farve
   overlayMixBlendMode: Overlay Mix Blend Mode
+  per_monitor: Per skærm
   playback: Afspilningshastighed
   position:
     bottom: I bunden
@@ -278,6 +285,8 @@ wall:
   saturation: Mætning
   seconds: sekunder
   select_collection: Vælg Samling
+  thumbnail_generation_complete: Generering af miniaturebilleder er fuldført
+  thumbnail_generation_finished: Generering af miniaturebilleder er afsluttet
   wallpaper_collection: Tapet samling
   wallpaper_settings: Baggrundsindstillinger
   withOverlay: Med overlay

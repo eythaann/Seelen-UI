@@ -17,8 +17,9 @@ use crate::{
     resources::cli::ResourceManagerCli,
     virtual_desktops::cli::VirtualDesktopCli,
     widgets::{
-        popups::cli::PopupsCli, show_settings, task_switcher::cli::TaskSwitcherClient,
-        weg::cli::WegCli, window_manager::cli::WindowManagerCli,
+        cli::WidgetCli, popups::cli::PopupsCli, show_settings,
+        task_switcher::cli::TaskSwitcherClient, weg::cli::WegCli,
+        window_manager::cli::WindowManagerCli,
     },
 };
 
@@ -77,6 +78,7 @@ pub enum AppCliCommand {
     WindowManager(WindowManagerCli),
     Popup(PopupsCli),
     Weg(WegCli),
+    Widget(WidgetCli),
     Resource(ResourceManagerCli),
     Win32(Win32Cli),
     Art(ArtCli),
@@ -267,6 +269,9 @@ impl AppCliCommand {
             }
             AppCliCommand::Weg(command) => {
                 command.process()?;
+            }
+            AppCliCommand::Widget(command) => {
+                command.run()?;
             }
             AppCliCommand::Resource(command) => {
                 command.process()?;

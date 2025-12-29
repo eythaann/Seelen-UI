@@ -1,0 +1,7 @@
+all: Alle apps
+no_apps: Ingen apps fundet
+no_pinned_apps: Ingen fastgjorte apps
+pin: Stift
+pinned: Fastgjort
+start: Starte
+unpin: Frigør

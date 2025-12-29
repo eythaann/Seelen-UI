@@ -1,0 +1,7 @@
+all: Бүх програмууд
+no_apps: Ямар ч програм олдсонгүй
+no_pinned_apps: Тогтсон апп алга
+pin: Pin
+pinned: Бэхэлсэн
+start: Эхлэх
+unpin: Буулгах

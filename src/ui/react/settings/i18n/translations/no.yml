@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     Denne ressursen krever en nyere versjon av Seelen UI for å fungere
     ordentlig.
+  corrupted_wallpaper: Kunne ikke pakke ut miniatyrbildet – ødelagt eller ikke støttet videoformat
   delete: Slett ressurs
   discover: Oppdag flere ressurser
   has_update: En oppdatering er tilgjengelig
@@ -244,12 +245,14 @@ wall:
   collection_name: Samlingens navn
   collections: Samlinger
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Ødelagte bakgrunnsbilder, vurder å slette disse:'
   create: Skape
   create_collection: Opprett samling
   default_collection: Standard samling
   delete_collection: Slett samling
   edit_collection: Rediger samling
   enable: Aktiver bakgrunnssjef
+  extend: Utvid primær
   fit:
     contain: Inneholde
     cover: Dekke
@@ -261,6 +264,7 @@ wall:
   interval: Endre bakgrunnsbilde hver
   minutes: minutter
   monitor_collection: Overvåk samling
+  multimonitor_behaviour: Multimonitor-atferd
   muted: Demp videolyd
   no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
   no_collections: Ingen samlinger opprettet ennå. Klikk på +-knappen for å opprette en.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Bakgrunnsposisjon
   overlayColor: Overleggsfarge
   overlayMixBlendMode: Overlegg blandingsmodus
+  per_monitor: Per skjerm
   playback: Avspillingshastighet
   position:
     bottom: Bunn
@@ -280,6 +285,8 @@ wall:
   saturation: Metning
   seconds: sekunder
   select_collection: Velg Samling
+  thumbnail_generation_complete: Generering av miniatyrbilder er fullført
+  thumbnail_generation_finished: Generering av miniatyrbilder er fullført
   wallpaper_collection: Tapet samling
   wallpaper_settings: Bakgrunnsinnstillinger
   withOverlay: Med overlegg

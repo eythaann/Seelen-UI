@@ -20,7 +20,7 @@ use crate::{
     error::{Result, ResultLogExt},
     modules::{
         apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
-        start::application::START_MENU_MANAGER,
+        start::application::StartMenuManager,
     },
     state::application::FULL_STATE,
     trace_lock,
@@ -213,7 +213,7 @@ impl SeelenWegState {
                     )
                 }
                 AppUserModelId::PropertyStore(umid) => {
-                    let start_menu_manager = START_MENU_MANAGER.load();
+                    let start_menu_manager = StartMenuManager::instance();
                     let shortcut = start_menu_manager.get_by_file_umid(umid);
 
                     // some apps like librewolf don't have a shortcut with the same umid

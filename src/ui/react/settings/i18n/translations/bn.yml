@@ -149,6 +149,7 @@ resources:
   app_outdated: >-
     এই সংস্থানটির জন্য সঠিকভাবে কাজ করার জন্য সিলেন ইউআইয়ের একটি নতুন সংস্করণ
     প্রয়োজন।
+  corrupted_wallpaper: থাম্বনেল বের করতে ব্যর্থ হয়েছে - দূষিত বা অসমর্থিত ভিডিও বিন্যাস
   delete: সংস্থান মুছুন
   discover: আরও সংস্থান আবিষ্কার করুন
   has_update: একটি আপডেট উপলব্ধ
@@ -246,12 +247,14 @@ wall:
   collection_name: সংগ্রহের নাম
   collections: সংগ্রহ
   contrast: বিপরীতে
+  corrupted_wallpapers_message: 'দূষিত ওয়ালপেপার, এগুলি মুছে ফেলার কথা বিবেচনা করুন:'
   create: তৈরি করুন
   create_collection: সংগ্রহ তৈরি করুন
   default_collection: ডিফল্ট সংগ্রহ
   delete_collection: সংগ্রহ মুছুন
   edit_collection: সংগ্রহ সম্পাদনা করুন
   enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
+  extend: প্রাথমিক প্রসারিত
   fit:
     contain: ধারণ করে
     cover: কভার
@@ -263,6 +266,7 @@ wall:
   interval: প্রতিটি ওয়ালপেপার পরিবর্তন করুন
   minutes: মিনিট
   monitor_collection: সংগ্রহ মনিটর
+  multimonitor_behaviour: মাল্টিমনিটর আচরণ
   muted: ভিডিও অডিও নিঃশব্দ করুন
   no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
   no_collections: এখনো কোনো সংগ্রহ তৈরি করা হয়নি। একটি তৈরি করতে + বোতামে ক্লিক করুন।
@@ -270,6 +274,7 @@ wall:
   objectPosition: পটভূমি অবস্থান
   overlayColor: ওভারলে রঙ
   overlayMixBlendMode: ওভারলে মিক্স মিশ্রণ মোড
+  per_monitor: মনিটর প্রতি
   playback: প্লেব্যাক গতি
   position:
     bottom: নীচে
@@ -282,6 +287,8 @@ wall:
   saturation: স্যাচুরেশন
   seconds: সেকেন্ড
   select_collection: সংগ্রহ নির্বাচন করুন
+  thumbnail_generation_complete: থাম্বনেইল জেনারেশন সম্পূর্ণ
+  thumbnail_generation_finished: থাম্বনেইল জেনারেশন সফলভাবে শেষ হয়েছে
   wallpaper_collection: ওয়ালপেপার সংগ্রহ
   wallpaper_settings: ওয়ালপেপার সেটিংস
   withOverlay: ওভারলে সহ

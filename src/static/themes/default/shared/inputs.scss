@@ -27,7 +27,8 @@ input[type="range"][data-skin="flat"] {
   }
 }
 
-input[type="text"][data-skin="default"] {
+input[type="text"][data-skin="default"],
+input[type="search"][data-skin="default"] {
   width: 100%;
   padding: 8px 12px;
 
@@ -60,7 +61,8 @@ input[type="text"][data-skin="default"] {
   }
 }
 
-input[type="text"][data-skin="transparent"] {
+input[type="text"][data-skin="transparent"],
+input[type="search"][data-skin="transparent"] {
   width: 100%;
   padding: 4px 8px;
 

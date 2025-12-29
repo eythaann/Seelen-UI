@@ -1,0 +1,7 @@
+all: Semua Apl
+no_apps: Tiada apl ditemui
+no_pinned_apps: Tiada apl yang disematkan
+pin: Pin
+pinned: Disemat
+start: Mulakan
+unpin: Nyahsemat

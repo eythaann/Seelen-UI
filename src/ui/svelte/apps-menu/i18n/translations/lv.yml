@@ -1,0 +1,7 @@
+all: Visas lietotnes
+no_apps: Nav atrasta neviena lietotne
+no_pinned_apps: Nav piespraustu lietotņu
+pin: Piespraust
+pinned: Piesprausts
+start: Sākt
+unpin: Atspraust

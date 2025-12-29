@@ -43,4 +43,5 @@ export enum SeelenEvent {
   WidgetTriggered = "widget::triggered",
   RadiosChanged = "radio::changed",
   BluetoothDevicesChanged = "bluetooth-devices-changed",
+  StartMenuItemsChanged = "start-menu::items-changed",
 }

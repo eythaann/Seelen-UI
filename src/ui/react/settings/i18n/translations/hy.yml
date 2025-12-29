@@ -147,6 +147,7 @@ reset_all_to_default: Վերագործարկեք բոլորին լռելյայն
 reset_to_default: Վերագործարկեք կանխադրված արժեքը
 resources:
   app_outdated: 'Այս ռեսուրսը պահանջում է Seelen UI- ի նոր տարբերակը `ճիշտ աշխատելու համար:'
+  corrupted_wallpaper: Չհաջողվեց հանել մանրապատկերը՝ վնասված կամ չաջակցվող տեսանյութի ձևաչափ
   delete: Delete նջել ռեսուրսը
   discover: Բացահայտեք ավելի շատ ռեսուրսներ
   has_update: Թարմացումն առկա է
@@ -244,12 +245,14 @@ wall:
   collection_name: Հավաքածուի անվանումը
   collections: Հավաքածուներ
   contrast: Հակադրություն
+  corrupted_wallpapers_message: Կոռումպացված պաստառներ, մտածեք ջնջել դրանք.
   create: Ստեղծել
   create_collection: Ստեղծել Հավաքածու
   default_collection: Կանխադրված հավաքածու
   delete_collection: Ջնջել հավաքածուն
   edit_collection: Խմբագրել հավաքածուն
   enable: Միացրեք Պաստառների կառավարիչը
+  extend: Ընդլայնել առաջնային
   fit:
     contain: Պարունակել
     cover: Ծածկոց
@@ -261,6 +264,7 @@ wall:
   interval: Ամեն ինչ փոխեք պաստառ
   minutes: րոպե
   monitor_collection: Մոնիտորների հավաքածու
+  multimonitor_behaviour: Մուլտիմոնիտորի վարքագիծ
   muted: Անջատել վիդեո ձայնը
   no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
   no_collections: 'Դեռևս ոչ մի հավաքածու չի ստեղծվել: Մեկը ստեղծելու համար սեղմեք + կոճակը:'
@@ -268,6 +272,7 @@ wall:
   objectPosition: Ֆոնային դիրքը
   overlayColor: Ծածկույթի գույն
   overlayMixBlendMode: Ծածկույթի խառնուրդի խառնուրդի ռեժիմ
+  per_monitor: Մեկ մոնիտորի համար
   playback: Նվագարկման արագություն
   position:
     bottom: Հատակից
@@ -280,6 +285,8 @@ wall:
   saturation: Հագեցում
   seconds: վայրկյան
   select_collection: Ընտրեք Հավաքածու
+  thumbnail_generation_complete: Մանրապատկերների ստեղծումն ավարտված է
+  thumbnail_generation_finished: Մանրապատկերների ստեղծումը հաջողությամբ ավարտվեց
   wallpaper_collection: Պաստառների հավաքածու
   wallpaper_settings: Պաստառի կարգավորումներ
   withOverlay: Ծածկով

@@ -1,0 +1,7 @@
+all: Ҳама Барномаҳо
+no_apps: Ягон барнома ёфт нашуд
+no_pinned_apps: Ягон барномаҳои pinned
+pin: Пин
+pinned: Пайваст
+start: Оғоз
+unpin: Бекор кардан

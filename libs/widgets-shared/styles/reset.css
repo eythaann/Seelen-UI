@@ -1,12 +1,6 @@
 @layer reset {
   :root {
-    --main-typo:
-      system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
-    --primary-color: var(--color-gray-900);
-    --secondary-color: var(--color-gray-50);
-
-    color-scheme: light dark;
+    color-scheme: light dark; /* enables light and dark mode as well light-dark() function */
 
     interpolate-size: allow-keywords; /* This enables animations between keywords (auto, min-content, etc) */
     transition-behavior: allow-discrete; /* allow transitions between discrete values (display, content-visibility) */
@@ -119,9 +113,9 @@
   body {
     font-size: 1em;
     line-height: 1.4em;
-    font-family: var(--main-typo);
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
+    font-family: system-ui;
+    color: var(--color-gray-900);
+    background-color: var(--color-gray-50);
     hyphens: auto;
   }
 

@@ -5,7 +5,7 @@ use std::{
 
 use windows::ApplicationModel::{AppInfo, Package};
 
-use crate::{error::Result, log_error, modules::apps::application::msix_manifest::PackageManifest};
+use crate::{error::Result, modules::apps::application::msix_manifest::PackageManifest};
 
 static UWP_LIGHTUNPLATED_POSTFIX: &str = "_altform-lightunplated";
 static UWP_UNPLATED_POSTFIX: &str = "_altform-unplated";
@@ -25,47 +25,17 @@ static UWP_SCALE_POSTFIXES: &[&str] = &[
 ];
 
 pub struct MsixAppsManager {
-    // key: package family name, value: app manifest
-    // packages: scc::HashMap<String, PackageManifest>, // too slow
+    _priv: (),
 }
 
 impl MsixAppsManager {
     fn new() -> Self {
-        Self {
-            // packages: scc::HashMap::new(),
-        }
+        Self { _priv: () }
     }
 
     pub fn instance() -> &'static Self {
-        static MSIX_APPS_MANAGER: LazyLock<MsixAppsManager> = LazyLock::new(|| {
-            let m = MsixAppsManager::new();
-            log_error!(m.enumerate_all_apps());
-            m
-        });
+        static MSIX_APPS_MANAGER: LazyLock<MsixAppsManager> = LazyLock::new(MsixAppsManager::new);
         &MSIX_APPS_MANAGER
-    }
-
-    fn enumerate_all_apps(&self) -> Result<()> {
-        /* let m = PackageManager::new()?;
-        let packages = m.FindPackagesByUserSecurityId(&"".into())?; // error access denied
-
-        for pack in packages {
-            if let Ok(manifest) = PackageManifest::try_read_for(&pack) {
-                self.packages
-                    .upsert(pack.Id()?.FamilyName()?.to_string_lossy(), manifest);
-            }
-        } */
-
-        // debug save on json on debug mode
-        /* #[cfg(debug_assertions)]
-        {
-            let mut data = vec![];
-            self.packages.scan(|_key, value| data.push(value.clone()));
-            let json = serde_json::to_vec_pretty(&data)?;
-            std::fs::write("./msix_apps.json", json)?;
-        } */
-
-        Ok(())
     }
 
     /// Some apps like PWA on edge can be stored as UWP apps and don't have an executable path,

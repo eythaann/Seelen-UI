@@ -147,6 +147,7 @@ reset_all_to_default: Ресетирајте ги сите на стандард
 reset_to_default: Ресетирање на стандардна вредност
 resources:
   app_outdated: Овој ресурс бара понова верзија на Seelen UI да работи правилно.
+  corrupted_wallpaper: Не успеа да се извлече сликичка - оштетен или неподдржан видео формат
   delete: Избришете ресурс
   discover: Откријте повеќе ресурси
   has_update: Достапно е ажурирање
@@ -244,12 +245,14 @@ wall:
   collection_name: Име на колекцијата
   collections: Колекции
   contrast: Контраст
+  corrupted_wallpapers_message: 'Оштетени позадини, размислете да ги избришете овие:'
   create: Креирај
   create_collection: Креирај колекција
   default_collection: Стандардна колекција
   delete_collection: Избришете ја колекцијата
   edit_collection: Уреди колекција
   enable: Овозможете менаџер на тапети
+  extend: Прошири основно
   fit:
     contain: Содржат
     cover: Покритие
@@ -261,6 +264,7 @@ wall:
   interval: Променете ја позадината на секој
   minutes: минути
   monitor_collection: Колекција на монитори
+  multimonitor_behaviour: Однесување на мултимонитор
   muted: Исклучете го звукот на видеото
   no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
   no_collections: Сè уште нема создадени колекции. Кликнете на копчето + за да креирате едно.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Позиција во позадина
   overlayColor: Боја на преклопување
   overlayMixBlendMode: Режим на мешавина од мешавина од преклопување
+  per_monitor: По монитор
   playback: Брзина на репродукција
   position:
     bottom: Дно
@@ -280,6 +285,8 @@ wall:
   saturation: Заситеност
   seconds: секунди
   select_collection: Изберете Колекција
+  thumbnail_generation_complete: Генерирањето сликички е завршено
+  thumbnail_generation_finished: Генерирањето сликички заврши успешно
   wallpaper_collection: Колекција на тапети
   wallpaper_settings: Поставки за позадина
   withOverlay: Со преклоп

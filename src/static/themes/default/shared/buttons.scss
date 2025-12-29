@@ -32,7 +32,7 @@ button[data-skin="solid"] {
   }
 }
 
-button[data-skin="outline"] {
+button[data-skin="default"] {
   @extend %common;
   padding: 4px 10px;
   background-color: var(--color-gray-50);

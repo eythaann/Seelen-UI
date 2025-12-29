@@ -1,0 +1,7 @@
+all: Sve aplikacije
+no_apps: Nema pronađenih aplikacija
+no_pinned_apps: Nema prikvačenih aplikacija
+pin: Pin
+pinned: Prikvačeno
+start: Start
+unpin: Otkvači

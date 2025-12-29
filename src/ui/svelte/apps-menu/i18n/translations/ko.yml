@@ -1,0 +1,7 @@
+all: 모든 앱
+no_apps: 앱을 찾을 수 없습니다.
+no_pinned_apps: 고정된 앱 없음
+pin: 핀
+pinned: 고정됨
+start: 시작
+unpin: 고정 해제

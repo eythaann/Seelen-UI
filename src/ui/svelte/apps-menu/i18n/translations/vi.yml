@@ -1,0 +1,7 @@
+all: Tất cả ứng dụng
+no_apps: Không tìm thấy ứng dụng nào
+no_pinned_apps: Không có ứng dụng nào được ghim
+pin: Ghim
+pinned: Đã ghim
+start: Bắt đầu
+unpin: Bỏ ghim

@@ -147,6 +147,7 @@ reset_all_to_default: Ресетујте све за подразумеване 
 reset_to_default: Ресетујте на подразумевану вредност
 resources:
   app_outdated: Овај ресурс захтева новију верзију СЕЕЛЕН-а да ради правилно.
+  corrupted_wallpaper: Екстраховање сличице није успело – оштећен или неподржан видео формат
   delete: Избриши ресурс
   discover: Откријте више ресурса
   has_update: Доступно је ажурирање
@@ -243,12 +244,14 @@ wall:
   collection_name: Назив колекције
   collections: Збирке
   contrast: Контраст
+  corrupted_wallpapers_message: 'Оштећене позадине, размислите о брисању ових:'
   create: Креирај
   create_collection: Направите колекцију
   default_collection: Подразумевана колекција
   delete_collection: Избриши колекцију
   edit_collection: Уреди колекцију
   enable: Омогућите менаџера позадина
+  extend: Продужите примарни
   fit:
     contain: Садрзати
     cover: Покривати
@@ -260,6 +263,7 @@ wall:
   interval: Промените позадину сваком
   minutes: минут
   monitor_collection: Монитор Цоллецтион
+  multimonitor_behaviour: Мултимонитор Бехавиор
   muted: Искључите звук видео записа
   no_background: Празан презентацију, уместо тога користећи прибор за тему.
   no_collections: >-
@@ -269,6 +273,7 @@ wall:
   objectPosition: Позадински положај
   overlayColor: Прекривање боје
   overlayMixBlendMode: Режим прекривене мешавине помешања
+  per_monitor: По монитору
   playback: Брзина репродукције
   position:
     bottom: Дно
@@ -281,6 +286,8 @@ wall:
   saturation: Засићење
   seconds: секунди
   select_collection: Изаберите Колекција
+  thumbnail_generation_complete: Генерисање сличица је завршено
+  thumbnail_generation_finished: Генерисање сличица је успешно завршено
   wallpaper_collection: Колекција тапета
   wallpaper_settings: Подешавања позадине
   withOverlay: Са прекривањем

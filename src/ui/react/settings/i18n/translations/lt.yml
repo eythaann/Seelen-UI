@@ -145,6 +145,9 @@ reset_all_to_default: Iš naujo nustatyti visas numatytąsias vertes
 reset_to_default: Iš naujo nustatyti numatytąją vertę
 resources:
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
+  corrupted_wallpaper: >-
+    Nepavyko išskleisti miniatiūros – sugadintas arba nepalaikomas vaizdo įrašo
+    formatas
   delete: Ištrinti šaltinį
   discover: Atraskite daugiau išteklių
   has_update: Galimas atnaujinimas
@@ -240,12 +243,14 @@ wall:
   collection_name: Kolekcijos pavadinimas
   collections: Kolekcijos
   contrast: Kontrastas
+  corrupted_wallpapers_message: 'Sugadinti fono paveikslėliai, apsvarstykite galimybę ištrinti šiuos:'
   create: Sukurti
   create_collection: Sukurti kolekciją
   default_collection: Numatytoji kolekcija
   delete_collection: Ištrinti kolekciją
   edit_collection: Redaguoti kolekciją
   enable: Įgalinkite tapetų tvarkytuvę
+  extend: Prailginti pirminį
   fit:
     contain: Sudėtis
     cover: Viršelis
@@ -257,6 +262,7 @@ wall:
   interval: Keiskite tapetų kiekvieną
   minutes: minutės
   monitor_collection: Monitorių kolekcija
+  multimonitor_behaviour: Daugelio monitorių elgesys
   muted: Nutildyti vaizdo garsą
   no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
   no_collections: Kol kas nesukurta jokių kolekcijų. Spustelėkite mygtuką +, kad sukurtumėte.
@@ -264,6 +270,7 @@ wall:
   objectPosition: Pagrindinė padėtis
   overlayColor: Perdangos spalva
   overlayMixBlendMode: Perdangos mišinio režimas
+  per_monitor: Vienam monitoriui
   playback: Atkūrimo greitis
   position:
     bottom: Dugnas
@@ -276,6 +283,8 @@ wall:
   saturation: Sodrumas
   seconds: sekundės
   select_collection: Pasirinkite Kolekcija
+  thumbnail_generation_complete: Miniatiūrų generavimas baigtas
+  thumbnail_generation_finished: Miniatiūrų generavimas sėkmingai baigtas
   wallpaper_collection: Tapetų kolekcija
   wallpaper_settings: Fono nustatymai
   withOverlay: Su perdanga

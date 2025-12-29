@@ -147,6 +147,9 @@ resources:
   app_outdated: >-
     Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş
     bixebite.
+  corrupted_wallpaper: >-
+    Derxistina wêneya piçûk bi ser neket - formata vîdyoyê ya xerabûyî an nayê
+    piştgirî kirin
   delete: Avkaniyê jêbirin
   discover: Zêdetir çavkaniyên kifş bikin
   has_update: Nûvekirinek heye
@@ -243,12 +246,14 @@ wall:
   collection_name: Navê Koleksiyonê
   collections: Collections
   contrast: Dijîtî
+  corrupted_wallpapers_message: 'Dîwarên xerabûyî, bifikire ku van jêbirin:'
   create: Xûliqandin
   create_collection: Koleksiyonê çêbikin
   default_collection: Berhevoka Bingehîn
   delete_collection: Koleksiyonê jêbirin
   edit_collection: Edit Collection
   enable: Gerînendeyê Wallpaper çalak bike
+  extend: Seretayî dirêj bikin
   fit:
     contain: Bêdengman
     cover: Lihêv
@@ -260,6 +265,7 @@ wall:
   interval: Her kesê biguherînin
   minutes: deqq
   monitor_collection: Monitor Collection
+  multimonitor_behaviour: Behavior Multimonitor
   muted: Dengê vîdyoyê qut bike
   no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
   no_collections: Hê berhevok nehatine çêkirin. Bişkojka + bikirtînin da ku yek çêbikin.
@@ -267,6 +273,7 @@ wall:
   objectPosition: Positiona paşîn
   overlayColor: Rengê dorpêçkirî
   overlayMixBlendMode: Overlay Mode Blend
+  per_monitor: Per monitor
   playback: Leza Playback
   position:
     bottom: Erd
@@ -279,6 +286,8 @@ wall:
   saturation: Satutionation
   seconds: seconds
   select_collection: Hilbijêre Collection
+  thumbnail_generation_complete: Nifşa Thumbnail Biqede
+  thumbnail_generation_finished: Çêkirina pîçikan bi serfirazî qediya
   wallpaper_collection: Collection Wallpaper
   wallpaper_settings: Mîhengên Wallpaper
   withOverlay: Bi sernav

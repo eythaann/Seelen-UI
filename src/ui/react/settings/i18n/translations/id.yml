@@ -149,6 +149,7 @@ resources:
   app_outdated: >-
     Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat
     berfungsi dengan baik.
+  corrupted_wallpaper: Gagal mengekstrak thumbnail - format video rusak atau tidak didukung
   delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya
   has_update: Pembaruan tersedia
@@ -246,12 +247,14 @@ wall:
   collection_name: Nama Koleksi
   collections: Koleksi
   contrast: Kontras
+  corrupted_wallpapers_message: 'Wallpaper rusak, pertimbangkan untuk menghapus ini:'
   create: Membuat
   create_collection: Buat Koleksi
   default_collection: Koleksi Bawaan
   delete_collection: Hapus Koleksi
   edit_collection: Sunting Koleksi
   enable: Aktifkan Manajer Wallpaper
+  extend: Perpanjang primer
   fit:
     contain: Berisi
     cover: Penutup
@@ -263,6 +266,7 @@ wall:
   interval: Ubah wallpaper setiap
   minutes: menit
   monitor_collection: Koleksi Pantau
+  multimonitor_behaviour: Perilaku Multimonitor
   muted: Bisukan audio video
   no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
   no_collections: Belum ada koleksi yang dibuat. Klik tombol + untuk membuatnya.
@@ -270,6 +274,7 @@ wall:
   objectPosition: Posisi Latar Belakang
   overlayColor: Warna Hamparan
   overlayMixBlendMode: Mode Campuran Campuran Hamparan
+  per_monitor: Per monitor
   playback: Kecepatan pemutaran
   position:
     bottom: Bawah
@@ -282,6 +287,8 @@ wall:
   saturation: Kejenuhan
   seconds: detik
   select_collection: Pilih Koleksi
+  thumbnail_generation_complete: Pembuatan Gambar Kecil Selesai
+  thumbnail_generation_finished: Pembuatan thumbnail telah selesai dengan sukses
   wallpaper_collection: Koleksi Kertas Dinding
   wallpaper_settings: Pengaturan Wallpaper
   withOverlay: Dengan Overlay

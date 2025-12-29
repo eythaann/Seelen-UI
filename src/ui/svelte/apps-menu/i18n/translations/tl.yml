@@ -1,0 +1,7 @@
+all: Lahat ng Apps
+no_apps: Walang nakitang app
+no_pinned_apps: Walang naka-pin na app
+pin: Pin
+pinned: Naka-pin
+start: Magsimula
+unpin: I-unpin

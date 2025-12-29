@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
     iawn.
+  corrupted_wallpaper: Wedi methu echdynnu mân-lun - fformat fideo llygredig neu heb ei gefnogi
   delete: Dileu Adnodd
   discover: Darganfyddwch fwy o adnoddau
   has_update: Mae diweddariad ar gael
@@ -244,12 +245,14 @@ wall:
   collection_name: Enw Casgliad
   collections: Casgliadau
   contrast: Gyferbynnwch
+  corrupted_wallpapers_message: 'Papurau wal llygredig, ystyriwch ddileu''r rhain:'
   create: Creu
   create_collection: Creu Casgliad
   default_collection: Casgliad Diofyn
   delete_collection: Dileu Casgliad
   edit_collection: Casgliad Golygu
   enable: Galluogi Rheolwr Papur Wal
+  extend: Ymestyn cynradd
   fit:
     contain: Gynhwysaf
     cover: Orchuddia ’
@@ -261,6 +264,7 @@ wall:
   interval: Newid papur wal bob
   minutes: munudau
   monitor_collection: Casgliad Monitro
+  multimonitor_behaviour: Ymddygiad Amlfonitro
   muted: Tewi sain fideo
   no_background: Sioe sleidiau gwag, gan ddefnyddio cefndir thema yn lle.
   no_collections: Dim casgliadau wedi eu creu eto. Cliciwch ar y botwm + i greu un.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Safle cefndir
   overlayColor: Lliw Troshaen
   overlayMixBlendMode: Modd cyfuniad cymysgedd troshaen
+  per_monitor: Fesul monitor
   playback: Cyflymder chwarae
   position:
     bottom: Waelod
@@ -280,6 +285,8 @@ wall:
   saturation: Dirlawnder
   seconds: eiliadau
   select_collection: Dewiswch Casgliad
+  thumbnail_generation_complete: Cynhyrchu Mân-luniau Wedi'i Gyflawni
+  thumbnail_generation_finished: Mae cynhyrchu mân-luniau wedi gorffen yn llwyddiannus
   wallpaper_collection: Casgliad Papur Wal
   wallpaper_settings: Gosodiadau Papur Wal
   withOverlay: Gyda throshaen

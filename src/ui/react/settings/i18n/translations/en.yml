@@ -242,12 +242,14 @@ wall:
   collection_name: Collection Name
   collections: Collections
   contrast: Contrast
+  corrupted_wallpapers_message: 'Corrupted wallpapers, consider deleting these:'
   create: Create
   create_collection: Create Collection
   default_collection: Default Collection
   delete_collection: Delete Collection
   edit_collection: Edit Collection
   enable: Enable Wallpaper Manager
+  extend: Extend primary
   fit:
     contain: Contain
     cover: Cover
@@ -255,16 +257,11 @@ wall:
   flipHorizontal: Flip Horizontal
   flipVertical: Flip Vertical
   generating_thumbnails: Generating Wallpaper Thumbnails
-  corrupted_wallpapers_message: 'Corrupted wallpapers, consider deleting these:'
-  thumbnail_generation_complete: Thumbnail Generation Complete
-  thumbnail_generation_finished: Thumbnail generation has finished successfully
   hours: hours
   interval: Change wallpaper every
   minutes: minutes
   monitor_collection: Monitor Collection
   multimonitor_behaviour: Multimonitor Behaviour
-  per_monitor: Per monitor
-  extend: Extend primary
   muted: Mute video audio
   no_background: Empty slideshow, using theme's background instead.
   no_collections: No collections created yet. Click the + button to create one.
@@ -272,6 +269,7 @@ wall:
   objectPosition: Background Position
   overlayColor: Overlay Color
   overlayMixBlendMode: Overlay Mix Blend Mode
+  per_monitor: Per monitor
   playback: Playback speed
   position:
     bottom: Bottom
@@ -284,6 +282,8 @@ wall:
   saturation: Saturation
   seconds: seconds
   select_collection: Select Collection
+  thumbnail_generation_complete: Thumbnail Generation Complete
+  thumbnail_generation_finished: Thumbnail generation has finished successfully
   wallpaper_collection: Wallpaper Collection
   wallpaper_settings: Wallpaper Settings
   withOverlay: With Overlay

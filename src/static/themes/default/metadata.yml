@@ -7,6 +7,7 @@ metadata:
     - toolbar
     - window-manager
 styles:
+  # for devs: key is the id of the target widget and value is the relative path to the style
   "@seelen/fancy-toolbar": !include styles/fancy-toolbar.scss
   "@seelen/power-menu": !include styles/power-menu.scss
   "@seelen/task-switcher": !include styles/task-switcher.scss
@@ -17,4 +18,5 @@ styles:
   "@seelen/quick-settings": !include styles/quick-settings.scss
   "@seelen/bluetooth-popup": !include styles/bluetooth-popup.scss
   "@seelen/workspaces-viewer": !include styles/workspaces-viewer.scss
+  "@seelen/apps-menu": !include styles/apps-menu.scss
 sharedStyles: !include ./shared/index.scss

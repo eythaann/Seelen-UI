@@ -105,4 +105,7 @@ slu_events_declaration! {
     RadiosChanged(Vec<RadioDevice>) as "radio::changed",
 
     BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
+
+    // Start Menu
+    StartMenuItemsChanged(Vec<StartMenuItem>) as "start-menu::items-changed",
 }

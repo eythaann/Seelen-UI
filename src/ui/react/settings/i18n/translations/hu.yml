@@ -146,6 +146,7 @@ reset_all_to_default: Mindent visszaállít az alapértelmezett értékekre
 reset_to_default: Alapértelmezett értékre visszaállítása
 resources:
   app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
+  corrupted_wallpaper: Nem sikerült a miniatűr kibontása – sérült vagy nem támogatott videóformátum
   delete: Az erőforrás törlése
   discover: További források felfedezése
   has_update: Frissítés érhető el
@@ -243,12 +244,14 @@ wall:
   collection_name: Gyűjtemény neve
   collections: Gyűjtemények
   contrast: Kontraszt
+  corrupted_wallpapers_message: 'Sérült háttérképek, fontolja meg ezek törlését:'
   create: Teremt
   create_collection: Gyűjtemény létrehozása
   default_collection: Alapértelmezett gyűjtemény
   delete_collection: Gyűjtemény törlése
   edit_collection: Gyűjtemény szerkesztése
   enable: Engedélyezze a háttérképkezelőt
+  extend: Hosszabbítsa meg az elsődleges
   fit:
     contain: Tartalmazza a  címet.
     cover: Borító
@@ -260,6 +263,7 @@ wall:
   interval: Változtasd meg minden háttérképet
   minutes: jegyzőkönyv
   monitor_collection: Monitor gyűjtemény
+  multimonitor_behaviour: Többmonitoros viselkedés
   muted: Videó hang némítása
   no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
   no_collections: >-
@@ -269,6 +273,7 @@ wall:
   objectPosition: Háttér Pozíció
   overlayColor: Overlay szín
   overlayMixBlendMode: Overlay Mix keverési mód
+  per_monitor: Monitoronként
   playback: Lejátszási sebesség
   position:
     bottom: Alul
@@ -281,6 +286,8 @@ wall:
   saturation: Telítettség
   seconds: másodpercek
   select_collection: Válassza a Gyűjtemény lehetőséget
+  thumbnail_generation_complete: A miniatűrök generálása kész
+  thumbnail_generation_finished: A miniatűrök generálása sikeresen befejeződött
   wallpaper_collection: Háttérkép gyűjtemény
   wallpaper_settings: Háttérkép beállításai
   withOverlay: Overlay-vel

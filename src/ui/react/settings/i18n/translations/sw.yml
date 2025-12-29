@@ -144,6 +144,7 @@ reset_all_to_default: Rudisha yote kwa maadili ya msingi
 reset_to_default: Rudisha kwa thamani ya msingi
 resources:
   app_outdated: Rasilimali hii inahitaji toleo jipya la Seelen UI kufanya kazi vizuri.
+  corrupted_wallpaper: Imeshindwa kutoa kijipicha - umbizo la video mbovu au ambalo halitumiki
   delete: Futa rasilimali
   discover: Gundua rasilimali zaidi
   has_update: Sasisho linapatikana
@@ -240,12 +241,14 @@ wall:
   collection_name: Jina la Mkusanyiko
   collections: Mikusanyiko
   contrast: Tofauti
+  corrupted_wallpapers_message: 'Mandhari zilizoharibika, zingatia kufuta hizi:'
   create: Unda
   create_collection: Unda Mkusanyiko
   default_collection: Mkusanyiko Chaguomsingi
   delete_collection: Futa Mkusanyiko
   edit_collection: Hariri Mkusanyiko
   enable: Washa Meneja wa Ukuta
+  extend: Ongeza msingi
   fit:
     contain: Kuwa na
     cover: Funika
@@ -257,6 +260,7 @@ wall:
   interval: Badilisha Ukuta kila
   minutes: dakika
   monitor_collection: Fuatilia Mkusanyiko
+  multimonitor_behaviour: Tabia ya Multimonitor
   muted: Sauti ya Video ya Bubu
   no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
   no_collections: Bado hakuna mikusanyiko iliyoundwa. Bofya kitufe cha + ili kuunda moja.
@@ -264,6 +268,7 @@ wall:
   objectPosition: Msimamo wa nyuma
   overlayColor: Rangi ya juu
   overlayMixBlendMode: Njia ya mchanganyiko wa mchanganyiko
+  per_monitor: Kwa mfuatiliaji
   playback: Kasi ya kucheza
   position:
     bottom: Chini
@@ -276,6 +281,8 @@ wall:
   saturation: Kueneza
   seconds: sekunde
   select_collection: Chagua Mkusanyiko
+  thumbnail_generation_complete: Uzalishaji wa Kijipicha Umekamilika
+  thumbnail_generation_finished: Uzalishaji wa kijipicha umekamilika
   wallpaper_collection: Ukusanyaji wa Mandhari
   wallpaper_settings: Mipangilio ya Mandhari
   withOverlay: Na overlay

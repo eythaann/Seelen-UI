@@ -150,6 +150,9 @@ resources:
   app_outdated: >-
     Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah
     u shaqeynaya.
+  corrupted_wallpaper: >-
+    Ku guuldareystay in la soo saaro thumbnail - qaab muuqaal ah oo xumaaday ama
+    aan la taageerin
   delete: Tirtir Kheyraadka
   discover: Soo hel ilo badan
   has_update: Cusboonaysiin ayaa la heli karaa
@@ -246,12 +249,14 @@ wall:
   collection_name: Magaca Ururinta
   collections: Ururinta
   contrast: Is barbar dhigidda
+  corrupted_wallpapers_message: 'Warqadaha gidaarka ah ee jaban, tixgeli inaad tirtirto kuwan:'
   create: Abuur
   create_collection: Abuur Ururinta
   default_collection: Ururinta asalka ah
   delete_collection: Tirtir Ururinta
   edit_collection: Wax ka beddel Ururinta
   enable: Awood u yeelo maamulaha derbiga
+  extend: Kordhi aasaasiga
   fit:
     contain: Ka koobasho
     cover: Daboolid
@@ -263,6 +268,7 @@ wall:
   interval: Beddel wadooyinka si kasta
   minutes: daqiiqo
   monitor_collection: La Soco Ururinta
+  multimonitor_behaviour: Habdhaqanka Kormeeraha Badan
   muted: Muuqaalka Muuqaalka Mate
   no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
   no_collections: Weli wax ururin ah lama abuurin Guji badhanka + si aad mid u abuurto.
@@ -270,6 +276,7 @@ wall:
   objectPosition: Booska asalka ah
   overlayColor: Midab ka sarreeya
   overlayMixBlendMode: Isku-darka iskudarka isku-darka
+  per_monitor: Kormeere kasta
   playback: Xawaaraha ciyaarta
   position:
     bottom: Hoos
@@ -282,6 +289,8 @@ wall:
   saturation: SATION
   seconds: sekan
   select_collection: Dooro Ururinta
+  thumbnail_generation_complete: Jiilka thumbnail oo Dhamaystiran
+  thumbnail_generation_finished: Jiilkii thumbnail waxa uu u dhamaaday si guul leh
   wallpaper_collection: Ururinta Warqadaha
   wallpaper_settings: Dejinta Warqadaha
   withOverlay: Iyadoo lagu daboolay

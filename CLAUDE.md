@@ -100,6 +100,147 @@ Each UI app follows hexagonal architecture with:
 - **Windows API**: Native Windows system calls and COM interfaces
 - **Virtual Desktops**: Windows virtual desktop integration
 
+### System Modules Architecture (Modern Pattern)
+
+**CRITICAL**: All system modules in `src/background/modules/` should follow the **modern architecture pattern** using
+singleton lazy initialization and lazy subscription for events to send to webviews.
+
+#### Modern Pattern (STANDARD - Use This)
+
+Modern modules like `monitors`, `radios`, and `start` follow this architecture:
+
+**File Structure:**
+
+```
+src/background/modules/<module>/
+├── mod.rs              # Module exports
+├── application.rs      # Core business logic with Manager singleton
+├── infrastructure.rs   # Tauri commands and event handlers (handlers.rs in some modules)
+└── domain.rs          # Domain types and logic (optional)
+```
+
+**infrastructure.rs (or handlers.rs) Pattern:**
+
+```rust
+use std::sync::Once;
+use seelen_core::{handlers::SeelenEvent, system_state::YourType};
+use crate::{app::emit_to_webviews, error::Result};
+use super::{YourManager, YourEvent};
+
+/// Lazy initialization wrapper that registers Tauri events on first access
+/// This keeps Tauri logic separate from system logic while ensuring lazy initialization
+fn get_your_manager() -> &'static YourManager {
+    static TAURI_EVENT_REGISTRATION: Once = Once::new();
+    TAURI_EVENT_REGISTRATION.call_once(|| {
+        YourManager::subscribe(|event| {
+            // Emit to webviews when internal events occur
+            if let Ok(data) = get_your_data() {
+                emit_to_webviews(SeelenEvent::YourDataChanged, data);
+            }
+        });
+    });
+    YourManager::instance()
+}
+
+#[tauri::command(async)]
+pub fn get_your_data() -> Result<Vec<YourType>> {
+    let manager = get_your_manager();
+    Ok(manager.get_data())
+}
+```
+
+**application.rs Pattern:**
+
+```rust
+use std::sync::LazyLock;
+
+pub struct YourManager {
+    // Your fields
+}
+
+#[derive(Debug, Clone)]
+pub enum YourEvent {
+    DataChanged,
+}
+
+// Macro creates the event subscription system
+event_manager!(YourManager, YourEvent);
+
+impl YourManager {
+    fn new() -> Self {
+        YourManager {
+            // Initialize fields
+        }
+    }
+
+    pub fn instance() -> &'static Self {
+        static MANAGER: LazyLock<YourManager> = LazyLock::new(|| {
+            let mut manager = YourManager::new();
+            manager.init().log_error();
+            manager
+        });
+        &MANAGER
+    }
+
+    fn init(&mut self) -> Result<()> {
+        // Setup system listeners that send internal events
+        self.setup_listeners()?;
+        Ok(())
+    }
+
+    fn setup_listeners(&mut self) -> Result<()> {
+        // Listen to system events and emit internal events
+        // Example: file watcher, Windows events, etc.
+        Ok(())
+    }
+
+    pub fn get_data(&self) -> Vec<YourType> {
+        // Return data
+    }
+}
+```
+
+**Key Benefits:**
+
+1. **Separation of Concerns**: System logic (application.rs) is separate from Tauri integration (infrastructure.rs)
+2. **Lazy Initialization**: Manager only initializes when first accessed
+3. **Lazy Event Registration**: Tauri events only register when first command is called
+4. **Thread-Safe**: Uses `Once` to ensure single initialization even with concurrent access
+5. **Event-Driven**: Internal events allow multiple subscribers without tight coupling
+
+**Adding to libs/core:**
+
+When adding a new module, update:
+
+1. `libs/core/src/handlers/commands.rs`:
+   ```rust
+   slu_commands_declaration! {
+       // Your Module
+       GetYourData = get_your_data() -> Vec<YourType>,
+   }
+   ```
+
+2. `libs/core/src/handlers/events.rs`:
+   ```rust
+   slu_events_declaration! {
+       YourDataChanged(Vec<YourType>) as "your-module::data-changed",
+   }
+   ```
+
+3. Regenerate bindings: `cd libs/core && deno task build:rs`
+
+#### Legacy Pattern (Deprecated - Needs Migration)
+
+Some older modules may use different patterns without lazy initialization or proper event separation. These should be
+migrated to the modern pattern when feasible. Examples include modules that:
+
+- Directly call `emit_to_webviews` from business logic instead of using the event system
+- Don't use the `event_manager!` macro for subscription management
+- Initialize eagerly instead of using lazy initialization
+- Mix Tauri-specific code with system integration logic
+
+**If you encounter legacy patterns, prefer the modern pattern for new code and consider refactoring when appropriate.**
+
 ## Key Technologies
 
 ### Frontend

@@ -1,0 +1,7 @@
+all: Wszystkie aplikacje
+no_apps: Nie znaleziono aplikacji
+no_pinned_apps: Brak przypiętych aplikacji
+pin: Szpilka
+pinned: Przypięty
+start: Start
+unpin: Odpiąć

@@ -149,6 +149,7 @@ resources:
   app_outdated: >-
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a
     funcționa corect.
+  corrupted_wallpaper: Nu s-a extras miniatura - format video corupt sau neacceptat
   delete: Ștergeți resursa
   discover: Descoperiți mai multe resurse
   has_update: O actualizare este disponibilă
@@ -246,12 +247,14 @@ wall:
   collection_name: Numele colecției
   collections: Colecții
   contrast: Contrast
+  corrupted_wallpapers_message: 'Imagini de fundal corupte, luați în considerare ștergerea acestora:'
   create: Crea
   create_collection: Creați o colecție
   default_collection: Colecție implicită
   delete_collection: Șterge colecția
   edit_collection: Editați colecția
   enable: Activați manager de tapet
+  extend: Extindeți primarul
   fit:
     contain: Conține
     cover: Acoperire
@@ -263,6 +266,7 @@ wall:
   interval: Schimbați tapet fiecare
   minutes: minute
   monitor_collection: Colecția de monitor
+  multimonitor_behaviour: Comportamentul multimonitor
   muted: Dezactivați sunetul video
   no_background: Slideshow gol, folosind în schimb fundalul temei.
   no_collections: Nicio colecție încă creată. Faceți clic pe butonul + pentru a crea unul.
@@ -270,6 +274,7 @@ wall:
   objectPosition: Poziția de fundal
   overlayColor: Culoare suprapunere
   overlayMixBlendMode: Mod de amestecare suprapunere Mix
+  per_monitor: Per monitor
   playback: Viteza de redare
   position:
     bottom: Fund
@@ -282,6 +287,8 @@ wall:
   saturation: Saturație
   seconds: secunde
   select_collection: Selectați Colecție
+  thumbnail_generation_complete: Generarea miniaturii finalizată
+  thumbnail_generation_finished: Generarea miniaturilor s-a încheiat cu succes
   wallpaper_collection: Colecția de imagini de fundal
   wallpaper_settings: Setări de fundal
   withOverlay: Cu suprapunere

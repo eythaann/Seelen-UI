@@ -1,0 +1,7 @@
+all: Alle toepassings
+no_apps: Geen programme gevind nie
+no_pinned_apps: Geen vasgespelde programme nie
+pin: Speld vas
+pinned: Vasgespeld
+start: Begin
+unpin: Ontspeld

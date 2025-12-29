@@ -1,0 +1,7 @@
+all: Totes les aplicacions
+no_apps: No s'ha trobat cap aplicació
+no_pinned_apps: No hi ha aplicacions fixades
+pin: Pin
+pinned: Fixat
+start: Comença
+unpin: Desenganxa

@@ -145,6 +145,7 @@ reset_all_to_default: Poništite sve na zadane vrijednosti
 reset_to_default: Resetiranje na zadanu vrijednost
 resources:
   app_outdated: Ovaj resurs zahtijeva noviju verziju Seelen Ui da radi pravilno.
+  corrupted_wallpaper: Ekstrahiranje sličice nije uspjelo - oštećen ili nepodržan video format
   delete: Izbriši resurs
   discover: Otkrijte više resursa
   has_update: Dostupno je ažuriranje
@@ -242,12 +243,14 @@ wall:
   collection_name: Naziv kolekcije
   collections: Zbirke
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Oštećene pozadine, razmislite o brisanju ovih:'
   create: Kreiraj
   create_collection: Kreiraj kolekciju
   default_collection: Default Collection
   delete_collection: Izbriši kolekciju
   edit_collection: Uredi kolekciju
   enable: Omogućite menadžer pozadina
+  extend: Produžite primarni
   fit:
     contain: Sadržiti
     cover: Pokriti
@@ -259,6 +262,7 @@ wall:
   interval: Promijenite pozadinu svake
   minutes: minuta
   monitor_collection: Monitor Collection
+  multimonitor_behaviour: Multimonitor Behavior
   muted: Isključite zvuk video zapisa
   no_background: Prazno prezentacija, koristeći temu, umjesto toga.
   no_collections: Još nema kreiranih kolekcija. Kliknite na dugme + da ga kreirate.
@@ -266,6 +270,7 @@ wall:
   objectPosition: Pozadinsko pozicija
   overlayColor: Boja prekrivanja
   overlayMixBlendMode: Prekrivač miks mod mješavine
+  per_monitor: Po monitoru
   playback: Brzina reprodukcije
   position:
     bottom: Dno
@@ -278,6 +283,8 @@ wall:
   saturation: Zasićenje
   seconds: sekundi
   select_collection: Odaberite Kolekcija
+  thumbnail_generation_complete: Generacija sličica je završena
+  thumbnail_generation_finished: Generiranje sličica je uspješno završeno
   wallpaper_collection: Kolekcija tapeta
   wallpaper_settings: Postavke pozadine
   withOverlay: Sa prekrivanjem

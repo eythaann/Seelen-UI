@@ -147,6 +147,7 @@ reset_all_to_default: تنظیم مجدد همه به مقادیر پیش فرض
 reset_to_default: تنظیم مجدد به مقدار پیش فرض
 resources:
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
+  corrupted_wallpaper: استخراج تصویر کوچک انجام نشد - فرمت ویدیو خراب یا پشتیبانی نشده است
   delete: منبع را حذف کنید
   discover: منابع بیشتری را کشف کنید
   has_update: به روزرسانی در دسترس است
@@ -243,12 +244,14 @@ wall:
   collection_name: نام مجموعه
   collections: مجموعه ها
   contrast: کنتراست
+  corrupted_wallpapers_message: 'والپیپرهای خراب، این موارد را حذف کنید:'
   create: ایجاد کنید
   create_collection: ایجاد مجموعه
   default_collection: مجموعه پیش‌فرض
   delete_collection: حذف مجموعه
   edit_collection: ویرایش مجموعه
   enable: مدیر تصویر زمینه را فعال کنید
+  extend: اولیه را گسترش دهید
   fit:
     contain: حاوی بودن
     cover: پوشش
@@ -260,6 +263,7 @@ wall:
   interval: کاغذ دیواری را تغییر دهید
   minutes: دقایقی
   monitor_collection: مجموعه مانیتور
+  multimonitor_behaviour: رفتار چند مانیتور
   muted: صدای ویدیو را بی صدا کنید
   no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
   no_collections: هنوز هیچ مجموعه ای ایجاد نشده است. برای ایجاد یک دکمه + را کلیک کنید.
@@ -267,6 +271,7 @@ wall:
   objectPosition: موقعیت پس زمینه
   overlayColor: رنگ روکش
   overlayMixBlendMode: حالت مخلوط مخلوط روکش
+  per_monitor: در هر مانیتور
   playback: سرعت پخش
   position:
     bottom: پایین
@@ -279,6 +284,8 @@ wall:
   saturation: اشباع
   seconds: ثانیه
   select_collection: مجموعه را انتخاب کنید
+  thumbnail_generation_complete: تولید ریز عکسها کامل شد
+  thumbnail_generation_finished: تولید تصویر بند انگشتی با موفقیت به پایان رسید
   wallpaper_collection: مجموعه کاغذ دیواری
   wallpaper_settings: تنظیمات کاغذ دیواری
   withOverlay: با روکش

@@ -32,7 +32,7 @@ use std::path::{Path, PathBuf};
 
 use crate::error::Result;
 use crate::modules::apps::application::msix::MsixAppsManager;
-use crate::modules::start::application::START_MENU_MANAGER;
+use crate::modules::start::application::StartMenuManager;
 use crate::resources::RESOURCES;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::date_based_hex_id;
@@ -540,7 +540,7 @@ pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
             Ok(())
         }
         AppUserModelId::PropertyStore(app_umid) => {
-            let start = START_MENU_MANAGER.load();
+            let start = StartMenuManager::instance();
             let lnk = start
                 .get_by_file_umid(app_umid)
                 .ok_or(format!("No shortcut found for umid {app_umid}"))?;

@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     Hierdie hulpbron vereis dat 'n nuwer weergawe van Seelen UI behoorlik moet
     werk.
+  corrupted_wallpaper: Kon nie kleinkiekie onttrek nie - korrupte of ongesteunde videoformaat
   delete: Vee hulpbron uit
   discover: Ontdek meer bronne
   has_update: '''N Opdatering is beskikbaar'
@@ -244,12 +245,14 @@ wall:
   collection_name: Versameling Naam
   collections: Versamelings
   contrast: Kontras
+  corrupted_wallpapers_message: 'Korrupte agtergronde, oorweeg dit om hierdie uit te vee:'
   create: Skep
   create_collection: Skep versameling
   default_collection: Verstekversameling
   delete_collection: Vee versameling uit
   edit_collection: Wysig versameling
   enable: Aktiveer agtergrondbestuurder
+  extend: Verleng primêre
   fit:
     contain: Bedwing
     cover: Bedekking
@@ -261,6 +264,7 @@ wall:
   interval: Verander die muurpapier elke
   minutes: minute
   monitor_collection: Monitor versameling
+  multimonitor_behaviour: Multimonitor Gedrag
   muted: Demp video-oudio
   no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
   no_collections: Geen versamelings is nog geskep nie. Klik op die +-knoppie om een ​​te skep.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Agtergrondposisie
   overlayColor: Oorlegkleur
   overlayMixBlendMode: Overlay Mix mengmodus
+  per_monitor: Per monitor
   playback: Playback Speed
   position:
     bottom: Bodem
@@ -280,6 +285,8 @@ wall:
   saturation: Versadiging
   seconds: sekondes
   select_collection: Kies Versameling
+  thumbnail_generation_complete: Kleinkiekie-generasie voltooi
+  thumbnail_generation_finished: Kleinkiekiegenerering is suksesvol voltooi
   wallpaper_collection: Muurpapierversameling
   wallpaper_settings: Muurpapier instellings
   withOverlay: Met oorleg

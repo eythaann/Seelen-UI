@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     यो स्रोतको आवश्यकता छ हेर्नुहोस् UI लाई राम्रोसँग काम गर्नको लागि नयाँ
     संस्करण आवश्यक छ।
+  corrupted_wallpaper: थम्बनेल निकाल्न असफल भयो - भ्रष्ट वा असमर्थित भिडियो ढाँचा
   delete: स्रोत मेट्नुहोस्
   discover: अधिक स्रोतहरू पत्ता लगाउनुहोस्
   has_update: एक अपडेट उपलब्ध छ
@@ -243,12 +244,14 @@ wall:
   collection_name: संग्रहको नाम
   collections: सङ्ग्रहहरू
   contrast: विषमता
+  corrupted_wallpapers_message: 'भ्रष्ट वालपेपरहरू, यी मेटाउने विचार गर्नुहोस्:'
   create: सिर्जना गर्नुहोस्
   create_collection: संग्रह सिर्जना गर्नुहोस्
   default_collection: पूर्वनिर्धारित संग्रह
   delete_collection: संग्रह मेटाउनुहोस्
   edit_collection: सङ्ग्रह सम्पादन गर्नुहोस्
   enable: वालपेपर प्रबन्धक सक्षम गर्नुहोस्
+  extend: प्राथमिक विस्तार गर्नुहोस्
   fit:
     contain: भित्र हुनु
     cover: आवरण
@@ -260,6 +263,7 @@ wall:
   interval: वालपेपर परिवर्तन गर्नुहोस्
   minutes: मिनेट
   monitor_collection: मोनिटर संग्रह
+  multimonitor_behaviour: मल्टिमोनिटर व्यवहार
   muted: भिडियो अडियो म्युट गर्नुहोस्
   no_background: खाली स्लाइडजेशन, यसको सट्टा थिमको पृष्ठभूमि प्रयोग गर्दै।
   no_collections: >-
@@ -269,6 +273,7 @@ wall:
   objectPosition: पृष्ठभूमि स्थिति
   overlayColor: ओभरलाइ रंग
   overlayMixBlendMode: ओभरले मिक्स मिश्रण मोड
+  per_monitor: प्रति मोनिटर
   playback: प्लेब्याक गति
   position:
     bottom: पिंध
@@ -281,6 +286,8 @@ wall:
   saturation: संतृप्ति
   seconds: सेकेन्ड
   select_collection: संग्रह चयन गर्नुहोस्
+  thumbnail_generation_complete: थम्बनेल जेनेरेसन पूरा भयो
+  thumbnail_generation_finished: थम्बनेल उत्पादन सफलतापूर्वक समाप्त भयो
   wallpaper_collection: वालपेपर संग्रह
   wallpaper_settings: वालपेपर सेटिङहरू
   withOverlay: ओभरले साथ

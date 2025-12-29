@@ -147,6 +147,9 @@ reset_all_to_default: Setha kabusha konke kumanani azenzakalelayo
 reset_to_default: Setha kabusha ngenani elizenzakalelayo
 resources:
   app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
+  corrupted_wallpaper: >-
+    Yehlulekile ukukhipha isithonjana - ifomethi yevidiyo eyonakele noma
+    engasekelwe
   delete: Susa insiza
   discover: Thola izinsiza ezengeziwe
   has_update: Isibuyekezo siyatholakala
@@ -244,12 +247,14 @@ wall:
   collection_name: Igama Leqoqo
   collections: Amaqoqo
   contrast: Ukuqhathanisa
+  corrupted_wallpapers_message: 'Izithombe zangemuva ezonakele, cabanga ukususa lezi:'
   create: Dala
   create_collection: Dala Iqoqo
   default_collection: Iqoqo elizenzakalelayo
   delete_collection: Susa Iqoqo
   edit_collection: Hlela Iqoqo
   enable: Nika amandla umphathi wangemuva
+  extend: Nweba okuyinhloko
   fit:
     contain: Qukethe
     cover: Mbathisa
@@ -261,6 +266,7 @@ wall:
   interval: Shintsha iphepha lokunamathisela odongeni
   minutes: imizuzu
   monitor_collection: Gada Iqoqo
+  multimonitor_behaviour: Ukuziphatha kwe-Multimonitor
   muted: Thulisa Video Audio
   no_background: >-
     Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
@@ -272,6 +278,7 @@ wall:
   objectPosition: Isikhundla sangemuva
   overlayColor: Umbala obheke phambili
   overlayMixBlendMode: Hlanganisa imodi ehlanganisiwe
+  per_monitor: Ngemonitha ngayinye
   playback: Ijubane lokudlala
   position:
     bottom: Esinqeni
@@ -284,6 +291,8 @@ wall:
   saturation: Ukutacwaba
   seconds: imisa
   select_collection: Khetha Iqoqo
+  thumbnail_generation_complete: Ukukhiqizwa Kwesithonjana Kuqediwe
+  thumbnail_generation_finished: Ukwenziwa kwezithonjana kuqede ngempumelelo
   wallpaper_collection: Ukuqoqwa kwamaphephadonga
   wallpaper_settings: Izilungiselelo zangemuva
   withOverlay: Ngokumbondelana

@@ -166,9 +166,11 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> 
     let command = match action {
         // task switcher
         TaskNext { select_on_key_up } => {
+            // todo: change for "widget", "trigger",
             cmd!["task-switcher", "select-next-task"; select_on_key_up => "--auto-confirm"]
         }
         TaskPrev { select_on_key_up } => {
+            // todo: change for "widget", "trigger",
             cmd!["task-switcher", "select-previous-task"; select_on_key_up => "--auto-confirm"]
         }
         // Virtual Desktop
@@ -180,6 +182,8 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> 
         CreateNewWorkspace => cmd!["vd", "create-new-workspace"],
         DestroyCurrentWorkspace => cmd!["vd", "destroy-current-workspace"],
         ToggleWorkspacesView => cmd!["vd", "toggle-workspaces-view"],
+        // apps menu
+        ToggleAppsMenu => cmd!["widget", "trigger", "@seelen/apps-menu"],
         // wallpaper manager
         CycleWallpaperNext => cmd!["wallpaper", "next"],
         CycleWallpaperPrev => cmd!["wallpaper", "prev"],

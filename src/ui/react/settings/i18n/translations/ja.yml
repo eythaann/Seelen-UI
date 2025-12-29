@@ -141,6 +141,7 @@ reset_all_to_default: すべてをデフォルト値に戻す
 reset_to_default: デフォルト値にリセット
 resources:
   app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
+  corrupted_wallpaper: サムネイルの抽出に失敗しました - 破損したビデオ形式またはサポートされていないビデオ形式です
   delete: リソースを削除します
   discover: その他のリソース
   has_update: アップデートが利用可能です
@@ -232,12 +233,14 @@ wall:
   collection_name: コレクション名
   collections: コレクション
   contrast: コントラスト
+  corrupted_wallpapers_message: 壁紙が破損している場合は、削除することを検討してください。
   create: 作成する
   create_collection: コレクションの作成
   default_collection: デフォルトのコレクション
   delete_collection: コレクションの削除
   edit_collection: コレクションの編集
   enable: 壁紙マネージャーを有効にします
+  extend: プライマリを拡張する
   fit:
     contain: コンテイン
     cover: カバー
@@ -249,6 +252,7 @@ wall:
   interval: 壁紙を毎回変更します
   minutes: 分
   monitor_collection: モニター収集
+  multimonitor_behaviour: マルチモニターの動作
   muted: ビデオの音声をミュートする
   no_background: 壁紙に使用するファイルを選択
   no_collections: まだコレクションは作成されていません。 + ボタンをクリックして作成します。
@@ -256,6 +260,7 @@ wall:
   objectPosition: バックグラウンド
   overlayColor: オーバーレイカラー
   overlayMixBlendMode: オーバーレイミックスブレンドモード
+  per_monitor: モニターごと
   playback: 再生速度
   position:
     bottom: ボトム
@@ -268,6 +273,8 @@ wall:
   saturation: 飽和
   seconds: 秒
   select_collection: コレクションの選択
+  thumbnail_generation_complete: サムネイルの生成が完了しました
+  thumbnail_generation_finished: サムネイルの生成が正常に終了しました
   wallpaper_collection: 壁紙コレクション
   wallpaper_settings: 壁紙設定
   withOverlay: オーバーレイ付き

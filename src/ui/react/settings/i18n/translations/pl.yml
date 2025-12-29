@@ -147,6 +147,9 @@ reset_all_to_default: Przywróć wartości domyślne
 reset_to_default: Przywróć wartość domyślną
 resources:
   app_outdated: Ten zasób wymaga nowszej wersji Seelen UI do poprawnego działania.
+  corrupted_wallpaper: >-
+    Nie udało się wyodrębnić miniatury — uszkodzony lub nieobsługiwany format
+    wideo
   delete: Usuń zasób
   discover: Odkryj więcej zasobów
   has_update: Aktualizacja jest dostępna
@@ -244,12 +247,14 @@ wall:
   collection_name: Nazwa kolekcji
   collections: Kolekcje
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Uszkodzone tapety. Rozważ ich usunięcie:'
   create: Tworzyć
   create_collection: Utwórz kolekcję
   default_collection: Kolekcja domyślna
   delete_collection: Usuń kolekcję
   edit_collection: Edytuj kolekcję
   enable: Włącz menedżer tapet
+  extend: Rozszerz podstawowy
   fit:
     contain: Zawierać
     cover: Okładka
@@ -261,6 +266,7 @@ wall:
   interval: Zmień tapetę co
   minutes: minut
   monitor_collection: Kolekcja monitorów
+  multimonitor_behaviour: Zachowanie wielu monitorów
   muted: Wycisz dźwięk wideo
   no_background: Brak tapet, używane są tapety motywu systemu Windows.
   no_collections: Nie utworzono jeszcze żadnych kolekcji. Kliknij przycisk +, aby go utworzyć.
@@ -268,6 +274,7 @@ wall:
   objectPosition: Pozycja w tle
   overlayColor: Kolor nakładki
   overlayMixBlendMode: Tryb mieszania nakładki
+  per_monitor: Na monitor
   playback: Prędkość odtwarzania
   position:
     bottom: Dół
@@ -280,6 +287,8 @@ wall:
   saturation: Nasycenie
   seconds: sekund
   select_collection: Wybierz opcję Kolekcja
+  thumbnail_generation_complete: Generowanie miniatur zostało ukończone
+  thumbnail_generation_finished: Generowanie miniatury zakończyło się pomyślnie
   wallpaper_collection: Kolekcja tapet
   wallpaper_settings: Ustawienia tapety
   withOverlay: Z nakładką

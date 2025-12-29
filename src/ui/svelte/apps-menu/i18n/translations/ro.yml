@@ -1,0 +1,7 @@
+all: Toate aplicațiile
+no_apps: Nu s-au găsit aplicații
+no_pinned_apps: Fără aplicații fixate
+pin: Pin
+pinned: Fixat
+start: Început
+unpin: Anulați fixarea

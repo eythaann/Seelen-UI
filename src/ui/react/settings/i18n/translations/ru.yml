@@ -147,6 +147,7 @@ reset_all_to_default: Сброс всех значений по умолчани
 reset_to_default: Сброс на значение по умолчанию
 resources:
   app_outdated: Для корректной работы этого ресурса требуется более новая версия Seelen UI.
+  corrupted_wallpaper: 'Не удалось извлечь миниатюру: формат видео поврежден или не поддерживается.'
   delete: Удалить ресурс
   discover: Откройте для себя больше ресурсов
   has_update: Доступно обновление
@@ -244,12 +245,14 @@ wall:
   collection_name: Название коллекции
   collections: Коллекции
   contrast: Контраст
+  corrupted_wallpapers_message: 'Поврежденные обои, рассмотрите возможность их удаления:'
   create: Создавать
   create_collection: Создать коллекцию
   default_collection: Коллекция по умолчанию
   delete_collection: Удалить коллекцию
   edit_collection: Редактировать коллекцию
   enable: Включить менеджер обоев
+  extend: Продлить основной
   fit:
     contain: Содержите
     cover: Обложка
@@ -261,6 +264,7 @@ wall:
   interval: Менять обои через
   minutes: минуты
   monitor_collection: Коллекция мониторов
+  multimonitor_behaviour: Поведение нескольких мониторов
   muted: Отключить звук видео
   no_background: Пустое слайд-шоу (используется фон темы)
   no_collections: Коллекции пока не созданы. Нажмите кнопку +, чтобы создать его.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Фоновая позиция
   overlayColor: Цвет наложения
   overlayMixBlendMode: Режим наложения "Перекрытие
+  per_monitor: На монитор
   playback: Скорость воспроизведения
   position:
     bottom: Дно
@@ -280,6 +285,8 @@ wall:
   saturation: Насыщенность
   seconds: секунды
   select_collection: Выбрать коллекцию
+  thumbnail_generation_complete: Создание миниатюр завершено
+  thumbnail_generation_finished: Создание миниатюр успешно завершено
   wallpaper_collection: Коллекция обоев
   wallpaper_settings: Настройки обоев
   withOverlay: С накладкой

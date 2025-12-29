@@ -1,0 +1,7 @@
+all: ټول اطلاقات
+no_apps: هیڅ ایپس ونه موندل شو
+no_pinned_apps: هیڅ پینډ شوي ایپس نشته
+pin: پن
+pinned: پنډ شوی
+start: پیل
+unpin: خلاص کړئ

@@ -143,6 +143,9 @@ reset_all_to_default: Tun gbogbo rẹ si awọn iye aifọwọyi
 reset_to_default: Tunto si iye aiyipada
 resources:
   app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
+  corrupted_wallpaper: >-
+    Kuna lati jade eekanna atanpako - ibajẹ tabi ọna kika fidio ti ko ṣe
+    atilẹyin
   delete: Paarẹ awọn olu
   discover: Ṣawari awọn orisun diẹ sii
   has_update: Imudojuiwọn wa
@@ -235,12 +238,14 @@ wall:
   collection_name: Orukọ gbigba
   collections: Awọn akojọpọ
   contrast: Ifiwera
+  corrupted_wallpapers_message: 'Awọn iṣẹṣọ ogiri ti bajẹ, ronu piparẹ awọn wọnyi:'
   create: Ṣẹda
   create_collection: Ṣẹda Gbigba
   default_collection: Gbigba aiyipada
   delete_collection: Pa Gbigba
   edit_collection: Ṣatunkọ Gbigba
   enable: Mu oluṣakoso ogiri ṣiṣẹ
+  extend: Fa akọkọ
   fit:
     contain: Ni ninu
     cover: Ideri
@@ -252,6 +257,7 @@ wall:
   interval: Ayipada ogiri ni gbogbo
   minutes: iṣẹju
   monitor_collection: Atẹle Gbigba
+  multimonitor_behaviour: Multimonitor Ihuwasi
   muted: Free Voio fidio
   no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
   no_collections: Ko si awọn akojọpọ ti a ṣẹda sibẹsibẹ. Tẹ bọtini + lati ṣẹda ọkan.
@@ -259,6 +265,7 @@ wall:
   objectPosition: Ipo abẹlẹ
   overlayColor: Awọ botay
   overlayMixBlendMode: Igbẹpọ dapọ Ipo Ipa
+  per_monitor: Fun atẹle
   playback: Iyara ṣiṣiṣẹsẹhin
   position:
     bottom: Isalẹ
@@ -271,6 +278,8 @@ wall:
   saturation: Itẹlọrun
   seconds: aaya
   select_collection: Yan Gbigba
+  thumbnail_generation_complete: Ipilẹ eekanna atanpako Pari
+  thumbnail_generation_finished: Iran eekanna atanpako ti pari ni aṣeyọri
   wallpaper_collection: Gbigba ogiri
   wallpaper_settings: Eto Iṣẹṣọ ogiri
   withOverlay: Pẹlu apọju

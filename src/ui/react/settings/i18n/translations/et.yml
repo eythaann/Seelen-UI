@@ -144,6 +144,9 @@ reset_all_to_default: Nullida kõik vaikeväärtused
 reset_to_default: Nullida vaikimisi väärtus
 resources:
   app_outdated: Selle ressursi korralikuks kasutamiseks on vaja Seelen UI uuemat versiooni.
+  corrupted_wallpaper: >-
+    Pisipildi ekstraktimine ebaõnnestus – videovorming on rikutud või seda ei
+    toetata
   delete: Ressurss kustutama
   discover: Avasta rohkem ressursse
   has_update: Värskendus on saadaval
@@ -241,12 +244,14 @@ wall:
   collection_name: Kollektsiooni nimi
   collections: Kollektsioonid
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Rikutud taustapildid, kaaluge nende kustutamist:'
   create: Loo
   create_collection: Loo kollektsioon
   default_collection: Vaikekogu
   delete_collection: Kustuta kogu
   edit_collection: Redigeeri kogu
   enable: Luba tapeedihaldur
+  extend: Laiendage esmast
   fit:
     contain: Sisaldab
     cover: Kaane
@@ -258,6 +263,7 @@ wall:
   interval: Vahetage tapeeti iga
   minutes: protokoll
   monitor_collection: Monitori kollektsioon
+  multimonitor_behaviour: Mitme monitori käitumine
   muted: Video heli vaigistamine
   no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
   no_collections: Ühtegi kogu pole veel loodud. Selle loomiseks klõpsake nuppu +.
@@ -265,6 +271,7 @@ wall:
   objectPosition: Taustapositsioon
   overlayColor: Kattekihi värv
   overlayMixBlendMode: Overlay Mix segamisrežiim
+  per_monitor: Monitori kohta
   playback: Taasesituse kiirus
   position:
     bottom: Alumine
@@ -277,6 +284,8 @@ wall:
   saturation: Küllastumine
   seconds: sekundid
   select_collection: Valige Kogu
+  thumbnail_generation_complete: Pisipiltide genereerimine on lõpetatud
+  thumbnail_generation_finished: Pisipiltide genereerimine on edukalt lõppenud
   wallpaper_collection: Tapeedikogu
   wallpaper_settings: Taustapildi seaded
   withOverlay: Koos kattekihiga

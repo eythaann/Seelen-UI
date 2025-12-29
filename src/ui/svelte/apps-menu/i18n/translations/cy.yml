@@ -1,0 +1,7 @@
+all: Pob Ap
+no_apps: Heb ganfod apiau
+no_pinned_apps: Dim apps wedi'u pinio
+pin: Pin
+pinned: Wedi'i binio
+start: Cychwyn
+unpin: Dad-binio

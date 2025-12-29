@@ -149,6 +149,7 @@ resources:
   app_outdated: >-
     इस संसाधन को ठीक से काम करने के लिए सेलेन यूआई के एक नए संस्करण की आवश्यकता
     होती है।
+  corrupted_wallpaper: थंबनेल निकालने में विफल - दूषित या असमर्थित वीडियो प्रारूप
   delete: संसाधन हटाएं
   discover: अधिक संसाधनों की खोज करें
   has_update: एक अपडेट उपलब्ध है
@@ -245,12 +246,14 @@ wall:
   collection_name: संग्रह का नाम
   collections: संग्रह
   contrast: अंतर
+  corrupted_wallpapers_message: 'दूषित वॉलपेपर, इन्हें हटाने पर विचार करें:'
   create: बनाएं
   create_collection: संग्रह बनाएँ
   default_collection: डिफ़ॉल्ट संग्रह
   delete_collection: संग्रह हटाएँ
   edit_collection: संग्रह संपादित करें
   enable: वॉलपेपर प्रबंधक सक्षम करें
+  extend: प्राथमिक बढ़ाएँ
   fit:
     contain: रोकना
     cover: ढकना
@@ -262,6 +265,7 @@ wall:
   interval: वॉलपेपर हर बदलें
   minutes: मिनट
   monitor_collection: मॉनिटर संग्रह
+  multimonitor_behaviour: मल्टीमॉनिटर व्यवहार
   muted: वीडियो ऑडियो म्यूट करें
   no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
   no_collections: अभी तक कोई संग्रह नहीं बनाया गया. एक बनाने के लिए + बटन पर क्लिक करें।
@@ -269,6 +273,7 @@ wall:
   objectPosition: पृष्ठभूमि स्थिति
   overlayColor: ओवरले रंग
   overlayMixBlendMode: ओवरले मिश्रण मिश्रण मोड
+  per_monitor: प्रति मॉनिटर
   playback: प्लेबैक गति
   position:
     bottom: तल
@@ -281,6 +286,8 @@ wall:
   saturation: परिपूर्णता
   seconds: सेकंड
   select_collection: संग्रह का चयन करें
+  thumbnail_generation_complete: थंबनेल जनरेशन पूर्ण
+  thumbnail_generation_finished: थंबनेल पीढ़ी सफलतापूर्वक समाप्त हो गई है
   wallpaper_collection: वॉलपेपर संग्रह
   wallpaper_settings: वॉलपेपर सेटिंग्स
   withOverlay: ओवरले के साथ

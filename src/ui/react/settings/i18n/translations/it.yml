@@ -147,6 +147,9 @@ resources:
   app_outdated: >-
     Questa risorsa richiede una versione più recente di Seelen UI per funzionare
     correttamente.
+  corrupted_wallpaper: >-
+    Impossibile estrarre la miniatura: formato video danneggiato o non
+    supportato
   delete: Elimina risorsa
   discover: Scoprire altre risorse
   has_update: È disponibile un aggiornamento
@@ -244,12 +247,14 @@ wall:
   collection_name: Nome della raccolta
   collections: Collezioni
   contrast: Contrasto
+  corrupted_wallpapers_message: 'Sfondi danneggiati, valuta la possibilità di eliminarli:'
   create: Creare
   create_collection: Crea raccolta
   default_collection: Raccolta predefinita
   delete_collection: Elimina raccolta
   edit_collection: Modifica raccolta
   enable: Abilita Gestore degli Sfondi
+  extend: Estendi primario
   fit:
     contain: Contenere
     cover: Copertina
@@ -261,6 +266,7 @@ wall:
   interval: Cambia sfondo ogni
   minutes: minuti
   monitor_collection: Monitorare la raccolta
+  multimonitor_behaviour: Comportamento multimonitor
   muted: Disattiva l'audio del video
   no_background: Slideshow vuoto, usa invece lo sfondo del tema.
   no_collections: Nessuna raccolta creata ancora. Fare clic sul pulsante + per crearne uno.
@@ -268,6 +274,7 @@ wall:
   objectPosition: Posizione di fondo
   overlayColor: Colore di sovrapposizione
   overlayMixBlendMode: Modalità di miscelazione della sovrapposizione
+  per_monitor: Per monitor
   playback: Velocità di riproduzione
   position:
     bottom: Fondo
@@ -280,6 +287,8 @@ wall:
   saturation: Saturazione
   seconds: secondi
   select_collection: Seleziona Raccolta
+  thumbnail_generation_complete: Generazione delle miniature completata
+  thumbnail_generation_finished: La generazione delle miniature è stata completata correttamente
   wallpaper_collection: Collezione di sfondi
   wallpaper_settings: Impostazioni dello sfondo
   withOverlay: Con sovrapposizione

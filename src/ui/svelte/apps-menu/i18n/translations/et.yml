@@ -1,0 +1,7 @@
+all: Kõik rakendused
+no_apps: Rakendusi ei leitud
+no_pinned_apps: Kinnitatud rakendusi pole
+pin: Pin
+pinned: Kinnitatud
+start: Alusta
+unpin: Vabastage

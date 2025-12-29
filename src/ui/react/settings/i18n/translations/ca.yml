@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     Aquest recurs requereix una versió més recent de la interfície d'usuari de
     Seelen per funcionar correctament.
+  corrupted_wallpaper: 'No s''ha pogut extreure la miniatura: format de vídeo danyat o no compatible'
   delete: Esborra el recurs
   discover: Descobriu més recursos
   has_update: Hi ha disponible una actualització
@@ -244,12 +245,14 @@ wall:
   collection_name: Nom de la col·lecció
   collections: Col·leccions
   contrast: Contrast
+  corrupted_wallpapers_message: 'Fons de pantalla danyats, penseu a suprimir-los:'
   create: Crear
   create_collection: Crea col·lecció
   default_collection: Col·lecció per defecte
   delete_collection: Suprimeix la col·lecció
   edit_collection: Edita la col·lecció
   enable: Activa el gestor de fons de pantalla
+  extend: Ampliar primària
   fit:
     contain: Contenir
     cover: Tapa
@@ -261,6 +264,7 @@ wall:
   interval: Canvieu el fons de pantalla cada
   minutes: minuts
   monitor_collection: Col·lecció de monitors
+  multimonitor_behaviour: Comportament multimonitor
   muted: Silencia l'àudio del vídeo
   no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
   no_collections: Encara no s'ha creat cap col·lecció. Feu clic al botó + per crear-ne un.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Posició de fons
   overlayColor: Color de superposició
   overlayMixBlendMode: Mode de barreja de barreja de superposició
+  per_monitor: Per monitor
   playback: Velocitat de reproducció
   position:
     bottom: Fons
@@ -280,6 +285,8 @@ wall:
   saturation: Saturació
   seconds: segons
   select_collection: Seleccioneu Col·lecció
+  thumbnail_generation_complete: S'ha completat la generació de miniatures
+  thumbnail_generation_finished: La generació de miniatures ha finalitzat correctament
   wallpaper_collection: Col·lecció de fons de pantalla
   wallpaper_settings: Configuració del fons de pantalla
   withOverlay: Amb superposició

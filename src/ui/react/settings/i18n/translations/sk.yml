@@ -147,6 +147,9 @@ resources:
   app_outdated: >-
     Tento zdroj si na správne fungovanie vyžaduje novšiu verziu používateľského
     rozhrania Seelen.
+  corrupted_wallpaper: >-
+    Nepodarilo sa extrahovať miniatúru – poškodený alebo nepodporovaný formát
+    videa
   delete: Vymazať zdroj
   discover: Objavte ďalšie zdroje
   has_update: K dispozícii je aktualizácia
@@ -244,12 +247,14 @@ wall:
   collection_name: Názov zbierky
   collections: zbierky
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Poškodené tapety, zvážte ich odstránenie:'
   create: Vytvorte
   create_collection: Vytvoriť zbierku
   default_collection: Predvolená kolekcia
   delete_collection: Odstrániť zbierku
   edit_collection: Upraviť kolekciu
   enable: Povoliť manažéra tapiet
+  extend: Predĺžte primárne
   fit:
     contain: Obsahuje
     cover: Obal
@@ -261,6 +266,7 @@ wall:
   interval: Vymeňte tapetu každý
   minutes: minúta
   monitor_collection: Zbierka monitorov
+  multimonitor_behaviour: Multimonitorové správanie
   muted: Stlmiť zvuk videa
   no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
   no_collections: >-
@@ -270,6 +276,7 @@ wall:
   objectPosition: Pozadie Pozícia
   overlayColor: Farba prekrytia
   overlayMixBlendMode: Režim prekrývania Mix
+  per_monitor: Na jeden monitor
   playback: Rýchlosť prehrávania
   position:
     bottom: Spodná časť
@@ -282,6 +289,8 @@ wall:
   saturation: Nasýtenie
   seconds: sekundy
   select_collection: Vyberte položku Zbierka
+  thumbnail_generation_complete: Generovanie miniatúr je dokončené
+  thumbnail_generation_finished: Generovanie miniatúr bolo úspešne ukončené
   wallpaper_collection: Kolekcia tapiet
   wallpaper_settings: Nastavenia tapety
   withOverlay: S prekrytím

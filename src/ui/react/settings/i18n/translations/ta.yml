@@ -146,6 +146,9 @@ reset_all_to_default: இயல்புநிலை மதிப்புகள
 reset_to_default: இயல்புநிலை மதிப்புக்கு மீட்டமைக்கவும்
 resources:
   app_outdated: இந்த வளத்திற்கு சரியாக வேலை செய்ய சீலன் UI இன் புதிய பதிப்பு தேவைப்படுகிறது.
+  corrupted_wallpaper: >-
+    சிறுபடத்தைப் பிரித்தெடுப்பதில் தோல்வி - சிதைந்த அல்லது ஆதரிக்கப்படாத வீடியோ
+    வடிவம்
   delete: வளத்தை நீக்கு
   discover: மேலும் ஆதாரங்களைக் கண்டறியவும்
   has_update: புதுப்பிப்பு கிடைக்கிறது
@@ -243,12 +246,14 @@ wall:
   collection_name: சேகரிப்பு பெயர்
   collections: தொகுப்புகள்
   contrast: மாறுபாடு
+  corrupted_wallpapers_message: 'சிதைந்த வால்பேப்பர்கள், இவற்றை நீக்குவதைக் கவனியுங்கள்:'
   create: உருவாக்கு
   create_collection: சேகரிப்பை உருவாக்கவும்
   default_collection: இயல்புநிலை சேகரிப்பு
   delete_collection: சேகரிப்பை நீக்கு
   edit_collection: தொகுப்பைத் திருத்து
   enable: வால்பேப்பர் மேலாளரை இயக்கவும்
+  extend: முதன்மையை நீட்டவும்
   fit:
     contain: கட்டுப்படுத்தவும்
     cover: கவர்
@@ -260,6 +265,7 @@ wall:
   interval: ஒவ்வொரு வால்பேப்பரையும் மாற்றவும்
   minutes: நிமிடங்கள்
   monitor_collection: சேகரிப்பைக் கண்காணிக்கவும்
+  multimonitor_behaviour: மல்டிமோனிட்டர் நடத்தை
   muted: வீடியோ ஆடியோவை முடக்கு
   no_background: வெற்று ஸ்லைடுஷோ, அதற்கு பதிலாக கருப்பொருளின் பின்னணியைப் பயன்படுத்துகிறது.
   no_collections: >-
@@ -269,6 +275,7 @@ wall:
   objectPosition: பின்னணி நிலை
   overlayColor: மேலடுக்கு நிறம்
   overlayMixBlendMode: மேலடுக்கு கலவை கலவை பயன்முறை
+  per_monitor: ஒரு மானிட்டருக்கு
   playback: பின்னணி வேகம்
   position:
     bottom: கீழே
@@ -281,6 +288,8 @@ wall:
   saturation: செறிவு
   seconds: விநாடிகள்
   select_collection: சேகரிப்பைத் தேர்ந்தெடுக்கவும்
+  thumbnail_generation_complete: சிறுபட உருவாக்கம் முடிந்தது
+  thumbnail_generation_finished: சிறுபட உருவாக்கம் வெற்றிகரமாக முடிந்தது
   wallpaper_collection: வால்பேப்பர் சேகரிப்பு
   wallpaper_settings: வால்பேப்பர் அமைப்புகள்
   withOverlay: மேலடுக்கு

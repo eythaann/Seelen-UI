@@ -145,6 +145,7 @@ reset_all_to_default: Ҳама ба арзишҳои пешфарз
 reset_to_default: Аз нав танзимкунии арзиши пешфарз
 resources:
   app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.
+  corrupted_wallpaper: Истихроҷи ангораи видео - формати вайроншуда ё дастгирӣнашаванда
   delete: Манбаъро нест мекунад
   discover: Нахуст захираҳои бештарро кашф кунед
   has_update: Навсозӣ дастрас аст
@@ -241,12 +242,14 @@ wall:
   collection_name: Номи коллексия
   collections: Маҷмӯаҳо
   contrast: Зиддият
+  corrupted_wallpapers_message: 'Обои вайроншуда, тоза кардани инҳоро баррасӣ кунед:'
   create: Эҷод кунед
   create_collection: Маҷмӯа эҷод кунед
   default_collection: Коллексияи пешфарз
   delete_collection: Маҷмӯаро нест кунед
   edit_collection: Маҷмӯаро таҳрир кунед
   enable: Фаъолсозии менеҷери обои
+  extend: Давом додани ибтидоӣ
   fit:
     contain: Нигоҳубин кардан
     cover: Пӯшидан
@@ -258,6 +261,7 @@ wall:
   interval: Тағйироти ҳар як
   minutes: дақиқа
   monitor_collection: Маҷмӯаи монитор
+  multimonitor_behaviour: Рафтори мултимониторӣ
   muted: Аудити видеоӣ
   no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
   no_collections: >-
@@ -267,6 +271,7 @@ wall:
   objectPosition: Мавқеи заминавӣ
   overlayColor: Ранги пурраи
   overlayMixBlendMode: Реҷаи омехтаи пурраи омехта
+  per_monitor: Ба як монитор
   playback: Суръати бозӣ
   position:
     bottom: Тагпо
@@ -279,6 +284,8 @@ wall:
   saturation: Соф
   seconds: сонияҳо
   select_collection: Коллексияро интихоб кунед
+  thumbnail_generation_complete: Насли тасвири ангора анҷом ёфт
+  thumbnail_generation_finished: Насли эскиз бомуваффақият анҷом ёфт
   wallpaper_collection: Маҷмӯаи обои
   wallpaper_settings: Танзимоти обои
   withOverlay: Бо overlay

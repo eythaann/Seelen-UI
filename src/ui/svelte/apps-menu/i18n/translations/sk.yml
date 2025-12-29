@@ -1,0 +1,7 @@
+all: Všetky aplikácie
+no_apps: Nenašli sa žiadne aplikácie
+no_pinned_apps: Žiadne pripnuté aplikácie
+pin: Pin
+pinned: Pripnuté
+start: Štart
+unpin: Odopnúť

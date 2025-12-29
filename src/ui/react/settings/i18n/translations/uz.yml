@@ -147,6 +147,9 @@ reset_all_to_default: Barcha standart qiymatlarni qayta o'rnating
 reset_to_default: Standart qiymatni qayta o'rnating
 resources:
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
+  corrupted_wallpaper: >-
+    Eskizni chiqarib boʻlmadi - buzilgan yoki qoʻllab-quvvatlanmaydigan video
+    formati
   delete: Resurslarni o'chirish
   discover: Ko'proq resurslarni kashf eting
   has_update: Yangilanish mavjud
@@ -244,12 +247,14 @@ wall:
   collection_name: To'plam nomi
   collections: To'plamlar
   contrast: Qarama-qarshilik
+  corrupted_wallpapers_message: 'Buzilgan fon rasmlari, ularni o''chirishni o''ylab ko''ring:'
   create: Yaratish
   create_collection: To'plam yaratish
   default_collection: Birlamchi toʻplam
   delete_collection: To'plamni o'chirish
   edit_collection: To'plamni tahrirlash
   enable: Fon rasmi menejerini yoqing
+  extend: Birlamchini kengaytiring
   fit:
     contain: O'z ichiga olgan
     cover: Qopqoq
@@ -261,6 +266,7 @@ wall:
   interval: Har bir devor rasmini o'zgartiring
   minutes: daqiqa
   monitor_collection: Monitor to'plami
+  multimonitor_behaviour: Multimonitor xatti-harakati
   muted: Ovozni o'chirish
   no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
   no_collections: >-
@@ -270,6 +276,7 @@ wall:
   objectPosition: Fon holati
   overlayColor: Overlay rang
   overlayMixBlendMode: Ortiqcha aralashtirish rejimini aralashtiring
+  per_monitor: Monitor uchun
   playback: Qayta tinglash tezligi
   position:
     bottom: Pastki
@@ -282,6 +289,8 @@ wall:
   saturation: To'yinganlik
   seconds: soniya
   select_collection: To'plamni tanlang
+  thumbnail_generation_complete: Eskiz yaratish tugallandi
+  thumbnail_generation_finished: Eskiz yaratish muvaffaqiyatli yakunlandi
   wallpaper_collection: Fon rasmi to'plami
   wallpaper_settings: Fon rasmi sozlamalari
   withOverlay: Qopqoq bilan

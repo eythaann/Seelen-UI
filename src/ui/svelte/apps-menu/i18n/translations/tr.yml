@@ -1,0 +1,7 @@
+all: Tüm Uygulamalar
+no_apps: Hiçbir uygulama bulunamadı
+no_pinned_apps: Sabitlenmiş uygulama yok
+pin: Sabitle
+pinned: Sabitlendi
+start: Başlangıç
+unpin: Sabitlemeyi kaldır

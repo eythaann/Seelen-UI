@@ -1,0 +1,7 @@
+all: Tutte le app
+no_apps: Nessuna app trovata
+no_pinned_apps: Nessuna app bloccata
+pin: Spillo
+pinned: Appuntato
+start: Inizio
+unpin: Sblocca

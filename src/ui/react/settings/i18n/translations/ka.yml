@@ -145,6 +145,7 @@ reset_all_to_default: ყველა ნაგულისხმევი მ�
 reset_to_default: ნაგულისხმევი მნიშვნელობის გადატვირთვა
 resources:
   app_outdated: ეს რესურსი მოითხოვს Seelen UI– ს ახალ ვერსიას, რომ სწორად იმუშაოს.
+  corrupted_wallpaper: ესკიზის ამოღება ვერ მოხერხდა - ვიდეო ფორმატი დაზიანებულია ან მხარდაუჭერელია
   delete: წაშალეთ რესურსი
   discover: აღმოაჩინეთ მეტი რესურსი
   has_update: განახლება ხელმისაწვდომია
@@ -242,12 +243,14 @@ wall:
   collection_name: კოლექციის სახელი
   collections: კოლექციები
   contrast: წინააღმდეგობა
+  corrupted_wallpapers_message: 'დაზიანებული ფონები, განიხილეთ მათი წაშლა:'
   create: შექმნა
   create_collection: შექმენით კოლექცია
   default_collection: ნაგულისხმევი კოლექცია
   delete_collection: კოლექციის წაშლა
   edit_collection: კოლექციის რედაქტირება
   enable: ჩართეთ ფონი მენეჯერი
+  extend: გააფართოვეთ პირველადი
   fit:
     contain: დატევა
     cover: სახურავი
@@ -259,6 +262,7 @@ wall:
   interval: შეცვალეთ ფონი ყველა
   minutes: წუთი
   monitor_collection: მონიტორების კოლექცია
+  multimonitor_behaviour: მულტიმონიტორის ქცევა
   muted: ვიდეო აუდიოს დადუმება
   no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
   no_collections: კოლექციები ჯერ არ არის შექმნილი. ერთის შესაქმნელად დააწკაპუნეთ + ღილაკს.
@@ -266,6 +270,7 @@ wall:
   objectPosition: ფონის პოზიცია
   overlayColor: გადახურული ფერი
   overlayMixBlendMode: Overlay Mix Blend Mode
+  per_monitor: თითო მონიტორზე
   playback: აღწარმოების სიჩქარე
   position:
     bottom: ძირი
@@ -278,6 +283,8 @@ wall:
   saturation: გაჯერება
   seconds: წამები
   select_collection: აირჩიეთ კოლექცია
+  thumbnail_generation_complete: მინიატურების გენერაცია დასრულებულია
+  thumbnail_generation_finished: ესკიზების შექმნა წარმატებით დასრულდა
   wallpaper_collection: ფონების კოლექცია
   wallpaper_settings: ფონი პარამეტრები
   withOverlay: გადახურვით

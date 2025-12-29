@@ -1,12 +1,15 @@
 use std::path::PathBuf;
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct StartMenuItem {
     pub path: PathBuf,
     pub umid: Option<String>,
     pub toast_activator: Option<String>,
     /// Will be present if the item is a shortcut
     pub target: Option<PathBuf>,
+    /// Display name for the item
+    pub display_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, TS)]

@@ -206,16 +206,16 @@
       <div class="bt-device-actions">
         {#if device.paired}
           {#if device.canDisconnect}
-            <button data-skin="outline" onclick={handleDisconnect} disabled={loading}>
+            <button data-skin="default" onclick={handleDisconnect} disabled={loading}>
               {$t("disconnect")}
             </button>
           {/if}
-          <button data-skin="outline" onclick={handleForget} disabled={loading}>
+          <button data-skin="default" onclick={handleForget} disabled={loading}>
             {$t("unpair")}
           </button>
         {:else}
           {#if pairingAction}
-            <button data-skin="outline" onclick={handleCancelPair} disabled={loading}>
+            <button data-skin="default" onclick={handleCancelPair} disabled={loading}>
               {$t("cancel")}
             </button>
           {/if}

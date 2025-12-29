@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
     gerekir.
+  corrupted_wallpaper: Küçük resim çıkarılamadı - bozuk veya desteklenmeyen video biçimi
   delete: Kaynağı Sil
   discover: Daha fazla kaynak keşfedin
   has_update: Bir güncelleme mevcuttur
@@ -244,12 +245,14 @@ wall:
   collection_name: Koleksiyon Adı
   collections: Koleksiyonlar
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Bozuk duvar kağıtları, şunları silmeyi düşünün:'
   create: Yaratmak
   create_collection: Koleksiyon Oluştur
   default_collection: Varsayılan Koleksiyon
   delete_collection: Koleksiyonu Sil
   edit_collection: Koleksiyonu Düzenle
   enable: Duvar Kağıdı Yöneticisini Etkinleştir
+  extend: Birincil'i genişlet
   fit:
     contain: Konteyner
     cover: Kapak
@@ -261,6 +264,7 @@ wall:
   interval: Duvar kağıdı değiştirme aralığı
   minutes: dakika
   monitor_collection: Monitör Koleksiyonu
+  multimonitor_behaviour: Çoklu Monitör Davranışı
   muted: Video sesini kapat
   no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
   no_collections: >-
@@ -270,6 +274,7 @@ wall:
   objectPosition: Arka Plan Pozisyonu
   overlayColor: Kaplama Rengi
   overlayMixBlendMode: Kaplama Karışım Karışım Modu
+  per_monitor: Monitör başına
   playback: Oynatma hızı
   position:
     bottom: Alt
@@ -282,6 +287,8 @@ wall:
   saturation: Doygunluk
   seconds: saniye
   select_collection: Koleksiyon Seç
+  thumbnail_generation_complete: Küçük Resim Oluşturma Tamamlandı
+  thumbnail_generation_finished: Küçük resim oluşturma başarıyla tamamlandı
   wallpaper_collection: Duvar Kağıdı Koleksiyonu
   wallpaper_settings: Duvar Kağıdı Ayarları
   withOverlay: Kaplama ile

@@ -102,16 +102,19 @@ function isConfigurableByMonitor(widget: Widget) {
     return true;
   }
 
-  for (const { group } of widget.settings) {
-    for (const entry of group) {
-      const stack = [entry];
+  // Check if any setting item allows configuration by monitor
+  const stack = [...widget.settings];
 
-      while (stack.length > 0) {
-        const entry = stack.pop()!;
-        if (entry.config.allowSetByMonitor) {
-          return true;
-        }
-        stack.push(...entry.children);
+  while (stack.length > 0) {
+    const definition = stack.pop()!;
+
+    // If it's a group, add its items to the stack
+    if ("group" in definition) {
+      stack.push(...definition.group.items);
+    } else {
+      // It's a setting item, check if it allows configuration by monitor
+      if (definition.allowSetByMonitor) {
+        return true;
       }
     }
   }

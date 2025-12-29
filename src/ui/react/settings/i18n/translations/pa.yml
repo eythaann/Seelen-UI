@@ -141,6 +141,7 @@ reset_all_to_default: ਸਾਰੇ ਡਿਫੌਲਟ ਮੁੱਲਾਂ ਤੇ 
 reset_to_default: ਡਿਫੌਲਟ ਵੈਲਯੂ ਤੇ ਰੀਸੈਟ ਕਰੋ
 resources:
   app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
+  corrupted_wallpaper: ਥੰਬਨੇਲ ਨੂੰ ਐਕਸਟਰੈਕਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ - ਖਰਾਬ ਜਾਂ ਅਸਮਰਥਿਤ ਵੀਡੀਓ ਫਾਰਮੈਟ
   delete: ਸਰੋਤ ਨੂੰ ਮਿਟਾਓ
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ
   has_update: ਇੱਕ ਅਪਡੇਟ ਉਪਲਬਧ ਹੈ
@@ -238,12 +239,14 @@ wall:
   collection_name: ਸੰਗ੍ਰਹਿ ਦਾ ਨਾਮ
   collections: ਸੰਗ੍ਰਹਿ
   contrast: ਇਸ ਦੇ ਉਲਟ
+  corrupted_wallpapers_message: 'ਖਰਾਬ ਵਾਲਪੇਪਰ, ਇਹਨਾਂ ਨੂੰ ਮਿਟਾਉਣ ''ਤੇ ਵਿਚਾਰ ਕਰੋ:'
   create: ਬਣਾਓ
   create_collection: ਸੰਗ੍ਰਹਿ ਬਣਾਓ
   default_collection: ਪੂਰਵ-ਨਿਰਧਾਰਤ ਸੰਗ੍ਰਹਿ
   delete_collection: ਸੰਗ੍ਰਹਿ ਮਿਟਾਓ
   edit_collection: ਸੰਗ੍ਰਹਿ ਦਾ ਸੰਪਾਦਨ ਕਰੋ
   enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  extend: ਪ੍ਰਾਇਮਰੀ ਵਧਾਓ
   fit:
     contain: ਸ਼ਾਮਲ
     cover: ਕਵਰ
@@ -255,6 +258,7 @@ wall:
   interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
   minutes: ਮਿੰਟ
   monitor_collection: ਨਿਗਰਾਨ ਸੰਗ੍ਰਹਿ
+  multimonitor_behaviour: ਮਲਟੀਮੋਨੀਟਰ ਵਿਵਹਾਰ
   muted: ਵੀਡੀਓ ਆਡੀਓ ਨੂੰ ਮਿਊਟ ਕਰੋ
   no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
   no_collections: ਅਜੇ ਤੱਕ ਕੋਈ ਸੰਗ੍ਰਹਿ ਨਹੀਂ ਬਣਾਇਆ ਗਿਆ। ਇੱਕ ਬਣਾਉਣ ਲਈ + ਬਟਨ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।
@@ -262,6 +266,7 @@ wall:
   objectPosition: ਪਿਛੋਕੜ ਦੀ ਸਥਿਤੀ
   overlayColor: ਓਵਰਲੇ ਰੰਗ
   overlayMixBlendMode: ਓਵਰਲੇਅ ਮਿਕਸ ਬਰੇਂਡ ਮੋਡ
+  per_monitor: ਪ੍ਰਤੀ ਮਾਨੀਟਰ
   playback: ਪਲੇਬੈਕ ਸਪੀਡ
   position:
     bottom: ਤਲ
@@ -274,6 +279,8 @@ wall:
   saturation: ਸੰਤ੍ਰਿਪਤ
   seconds: ਸਕਿੰਟ
   select_collection: ਸੰਗ੍ਰਹਿ ਚੁਣੋ
+  thumbnail_generation_complete: ਥੰਬਨੇਲ ਜਨਰੇਸ਼ਨ ਪੂਰਾ ਹੋਇਆ
+  thumbnail_generation_finished: ਥੰਬਨੇਲ ਬਣਾਉਣਾ ਸਫਲਤਾਪੂਰਵਕ ਸਮਾਪਤ ਹੋ ਗਿਆ ਹੈ
   wallpaper_collection: ਵਾਲਪੇਪਰ ਸੰਗ੍ਰਹਿ
   wallpaper_settings: ਵਾਲਪੇਪਰ ਸੈਟਿੰਗਾਂ
   withOverlay: ਓਵਰਲੇਅ ਦੇ ਨਾਲ

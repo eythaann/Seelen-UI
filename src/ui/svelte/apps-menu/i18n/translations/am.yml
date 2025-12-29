@@ -1,0 +1,7 @@
+all: ሁሉም መተግበሪያዎች
+no_apps: ምንም መተግበሪያዎች አልተገኙም።
+no_pinned_apps: ምንም የተሰኩ መተግበሪያዎች የሉም
+pin: ፒን
+pinned: ተሰክቷል።
+start: ጀምር
+unpin: ንቀል

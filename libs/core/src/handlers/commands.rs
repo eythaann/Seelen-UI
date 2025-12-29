@@ -259,4 +259,7 @@ slu_commands_declaration! {
     ConfirmBluetoothDevicePairing = confirm_bluetooth_device_pairing(id: String, answer: DevicePairingAnswer),
     DisconnectBluetoothDevice = disconnect_bluetooth_device(id: String),
     ForgetBluetoothDevice = forget_bluetooth_device(id: String),
+
+    // Start Menu
+    GetStartMenuItems = get_start_menu_items() -> Vec<StartMenuItem>,
 }

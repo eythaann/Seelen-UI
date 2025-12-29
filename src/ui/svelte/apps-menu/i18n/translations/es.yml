@@ -1,0 +1,7 @@
+all: Todas las aplicaciones
+no_apps: No se encontraron aplicaciones
+no_pinned_apps: No hay aplicaciones fijadas
+pin: Alfiler
+pinned: Fijado
+start: Comenzar
+unpin: Desprender

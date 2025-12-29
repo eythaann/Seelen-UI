@@ -56,11 +56,25 @@ impl<T> SyncVec<T> {
     pub fn drain(&self) -> Vec<T> {
         self.0.lock().drain(..).collect()
     }
+
+    pub fn replace(&self, value: Vec<T>) {
+        *self.0.lock() = value;
+    }
 }
 
 impl<T: Clone> SyncVec<T> {
     pub fn to_vec(&self) -> Vec<T> {
         self.0.lock().clone()
+    }
+
+    pub fn find(&self, f: impl Fn(&T) -> bool) -> Option<T> {
+        let items = self.0.lock();
+        for item in items.iter() {
+            if f(item) {
+                return Some(item.clone());
+            }
+        }
+        None
     }
 }
 

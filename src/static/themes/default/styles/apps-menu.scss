@@ -1,0 +1,137 @@
+:root {
+  --bg: oklch(80% 0 0 / 0.4);
+  --bg-light: oklch(from var(--bg) calc(l + 0.2) c h);
+
+  @media (prefers-color-scheme: dark) {
+    --bg: oklch(20% 0 0 / 0.4);
+  }
+}
+
+body {
+  background-color: transparent;
+}
+
+.apps-menu {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+
+  .apps-menu-header {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 1px solid var(--color-gray-300);
+
+    button {
+      flex-shrink: 0;
+    }
+  }
+
+  .apps-menu-body {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .apps-menu-footer {
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid var(--color-gray-300);
+  }
+}
+
+.pinned-view {
+  --spacing-x: 5%;
+  padding: 20px 10%;
+
+  .pinned-view-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px var(--spacing-x);
+
+    // .app-item {...}
+  }
+
+  .pinned-view-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-500);
+    font-style: italic;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
+
+.all-apps-view {
+  $spacing-x: 5%;
+  $columns: 7;
+
+  padding: 20px $spacing-x;
+
+  .all-apps-view-list {
+    display: grid;
+    grid-template-columns: repeat($columns, minmax(0, 1fr));
+    gap: 10px $spacing-x;
+
+    // .app-item {...}
+  }
+}
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+
+  &:hover {
+    background-color: var(--bg-light);
+  }
+
+  .app-item-icon {
+    width: 40px;
+    aspect-ratio: 1/1;
+  }
+
+  .app-item-name {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+}
+
+.context-menu {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+  padding: 4px 0;
+
+  .context-menu-item {
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #333;
+    display: block;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+}

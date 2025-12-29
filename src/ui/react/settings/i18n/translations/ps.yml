@@ -144,6 +144,7 @@ reset_all_to_default: ټول ډیفالټ ارزښتونو ته تنظیم کړ�
 reset_to_default: د ډیفالټ ارزښت ته بیا تنظیمول
 resources:
   app_outdated: دا سرچینه د سم کار کولو لپاره یو نوي نسخه ته اړتیا لري.
+  corrupted_wallpaper: د تمبنیل په ایستلو کې پاتې راغلی - فاسد یا غیر ملاتړ شوی ویډیو بڼه
   delete: سرچینه حذف کړئ
   discover: ډیرې سرچینې ومومئ
   has_update: یو اوسمهال شتون لري
@@ -238,12 +239,14 @@ wall:
   collection_name: د راټولولو نوم
   collections: راټولونه
   contrast: برعکس
+  corrupted_wallpapers_message: 'فاسد وال پیپرونه، د دې حذف کولو په اړه غور وکړئ:'
   create: جوړ کړئ
   create_collection: ټولګه جوړه کړئ
   default_collection: ډیفالټ ټولګه
   delete_collection: ټولګه ړنګه کړئ
   edit_collection: ټولګه ترمیم کړئ
   enable: د وال پیپر مدیر فعال کړئ
+  extend: لومړني پراخ کړئ
   fit:
     contain: پکې شامل دي
     cover: پوښ
@@ -255,6 +258,7 @@ wall:
   interval: په وال پیپر بدل کړئ
   minutes: دقیقې
   monitor_collection: د څارنې ټولګه
+  multimonitor_behaviour: ملټي مانیټر چلند
   muted: د ویډیو آډیو خاموش کړئ
   no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
   no_collections: تراوسه هیڅ ټولګه نه ده جوړه شوې. د جوړولو لپاره + تڼۍ کلیک وکړئ.
@@ -262,6 +266,7 @@ wall:
   objectPosition: شالید وضعیت
   overlayColor: ډیر رنګ رنګ
   overlayMixBlendMode: د انکشکې مخلوط حالت
+  per_monitor: د څارنې لپاره
   playback: د بیا غږولو سرعت
   position:
     bottom: ښکته
@@ -274,6 +279,8 @@ wall:
   saturation: تړل
   seconds: ثانیې
   select_collection: ټولګه وټاکئ
+  thumbnail_generation_complete: د تمبیل تولید بشپړ شو
+  thumbnail_generation_finished: د تمبیل تولید په بریالیتوب سره پای ته ورسید
   wallpaper_collection: د وال پیپر ټولګه
   wallpaper_settings: د وال پیپر ترتیبات
   withOverlay: د

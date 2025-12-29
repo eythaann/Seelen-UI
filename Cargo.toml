@@ -2,13 +2,18 @@ cargo-features = ["profile-rustflags", "codegen-backend"]
 
 [profile.dev]
 debug = "full"
-strip = "symbols"
+strip = false
+opt-level = 0
 incremental = true
 rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
+[profile.rust-analyzer]
+inherits = "dev"
+debug = false
+
 [profile.release]
 debug = "limited"
-strip = "symbols"
+strip = true
 opt-level = "z"
 lto = true
 codegen-units = 1

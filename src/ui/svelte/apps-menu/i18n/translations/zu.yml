@@ -1,0 +1,7 @@
+all: Zonke Izinhlelo zokusebenza
+no_apps: Azikho izinhlelo zokusebenza ezitholiwe
+no_pinned_apps: Azikho izinhlelo zokusebenza eziphiniwe
+pin: Phina
+pinned: Kuphiniwe
+start: Qala
+unpin: Susa ukuphina

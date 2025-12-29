@@ -145,6 +145,7 @@ reset_all_to_default: Endurstilla allt í sjálfgefin gildi
 reset_to_default: Endurstilla í sjálfgefið gildi
 resources:
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
+  corrupted_wallpaper: Mistókst að draga út smámynd - skemmd eða óstudd myndbandssnið
   delete: Eyða auðlindinni
   discover: Uppgötvaðu fleiri úrræði
   has_update: Uppfærsla er í boði
@@ -242,12 +243,14 @@ wall:
   collection_name: Nafn safns
   collections: Söfn
   contrast: Andstæður
+  corrupted_wallpapers_message: 'Skemmt veggfóður, íhugaðu að eyða þessum:'
   create: Búa til
   create_collection: Búðu til safn
   default_collection: Sjálfgefið safn
   delete_collection: Eyða safni
   edit_collection: Breyta safni
   enable: Virkja veggfóðursstjóra
+  extend: Framlengja prófkjör
   fit:
     contain: Inniheldur
     cover: Cover
@@ -259,6 +262,7 @@ wall:
   interval: Skiptu um veggfóður hvert
   minutes: mínútur
   monitor_collection: Fylgjast með safni
+  multimonitor_behaviour: Fjölskjár hegðun
   muted: Slökkva á myndhljóði
   no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
   no_collections: Engin söfn búin til ennþá. Smelltu á + hnappinn til að búa til einn.
@@ -266,6 +270,7 @@ wall:
   objectPosition: Bakgrunnsstaða
   overlayColor: Yfirlag litur
   overlayMixBlendMode: Yfirlagsblöndublöndunarstilling
+  per_monitor: Á hvern skjá
   playback: Spilunarhraði
   position:
     bottom: Botn
@@ -278,6 +283,8 @@ wall:
   saturation: Mettun
   seconds: sekúndur
   select_collection: Veldu Safn
+  thumbnail_generation_complete: Smámyndagerð lokið
+  thumbnail_generation_finished: Smámyndagerð hefur lokið með góðum árangri
   wallpaper_collection: Veggfóður safn
   wallpaper_settings: Veggfóðurstillingar
   withOverlay: Með yfirlagi

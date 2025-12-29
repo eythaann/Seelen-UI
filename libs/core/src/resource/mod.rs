@@ -33,6 +33,12 @@ pub enum ResourceText {
     Localized(HashMap<String, String>),
 }
 
+impl Default for ResourceText {
+    fn default() -> Self {
+        Self::En(String::new())
+    }
+}
+
 impl ResourceText {
     const MISSING_TEXT: &'static str = "!?";
 

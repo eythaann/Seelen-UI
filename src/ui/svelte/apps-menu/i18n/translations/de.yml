@@ -1,0 +1,7 @@
+all: Alle Apps
+no_apps: Keine Apps gefunden
+no_pinned_apps: Keine angehefteten Apps
+pin: Stift
+pinned: Angepinnt
+start: Start
+unpin: Lösen

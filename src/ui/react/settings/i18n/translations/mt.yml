@@ -147,6 +147,9 @@ reset_all_to_default: Irrisettja l-valuri kollha tal-inadempjenza
 reset_to_default: Irrisettja għall-valur awtomatiku
 resources:
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
+  corrupted_wallpaper: >-
+    Naqas milli jiġi estratt thumbnail - format tal-vidjo korrotta jew mhux
+    appoġġjata
   delete: Ħassar ir-riżorsa
   discover: Skopri aktar riżorsi
   has_update: Aġġornament huwa disponibbli
@@ -244,12 +247,14 @@ wall:
   collection_name: Isem tal-Ġbir
   collections: Kollezzjonijiet
   contrast: Kuntrast
+  corrupted_wallpapers_message: 'Wallpapers korrotta, ikkunsidra li tħassar dawn:'
   create: Oħloq
   create_collection: Oħloq Ġbir
   default_collection: Ġbir Default
   delete_collection: Ħassar Ġbir
   edit_collection: Edit Ġbir
   enable: Enable Wallpaper Manager
+  extend: Estendi primarja
   fit:
     contain: Fihom
     cover: Għata
@@ -261,6 +266,7 @@ wall:
   interval: Ibdel il-wallpaper kull
   minutes: minuti
   monitor_collection: Ġbir Monitor
+  multimonitor_behaviour: Multimonitor Imġieba
   muted: Mute video awdjo
   no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
   no_collections: S'issa ma nħolqotx kollezzjonijiet. Ikklikkja l-buttuna + biex toħloq waħda.
@@ -268,6 +274,7 @@ wall:
   objectPosition: Pożizzjoni ta 'sfond
   overlayColor: Kulur overlay
   overlayMixBlendMode: Modalità ta 'taħlita ta' taħlita overlay
+  per_monitor: Għal kull monitor
   playback: Veloċità tad-daqq
   position:
     bottom: Qiegħ
@@ -280,6 +287,8 @@ wall:
   saturation: Saturazzjoni
   seconds: sekondi
   select_collection: Agħżel Ġbir
+  thumbnail_generation_complete: Ġenerazzjoni Thumbnail Tlesti
+  thumbnail_generation_finished: Il-ġenerazzjoni ta' miniatures spiċċat b'suċċess
   wallpaper_collection: Ġbir tal-wallpaper
   wallpaper_settings: Settings tal-wallpaper
   withOverlay: Bil-overlay

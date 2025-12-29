@@ -1,0 +1,7 @@
+all: Öll forrit
+no_apps: Engin forrit fundust
+no_pinned_apps: Engin fest forrit
+pin: Pinna
+pinned: Festist
+start: Byrjaðu
+unpin: Losaðu

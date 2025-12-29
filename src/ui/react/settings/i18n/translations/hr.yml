@@ -147,6 +147,9 @@ resources:
   app_outdated: >-
     Ovaj resurs zahtijeva da novija verzija Seelen korisničkog sučelja radi
     ispravno.
+  corrupted_wallpaper: >-
+    Izdvajanje minijature nije uspjelo - format videozapisa je oštećen ili nije
+    podržan
   delete: Izbriši resurs
   discover: Otkrijte više resursa
   has_update: Dostupno je ažuriranje
@@ -244,12 +247,14 @@ wall:
   collection_name: Naziv zbirke
   collections: Zbirke
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Oštećene pozadine, razmislite o brisanju ovih:'
   create: Stvoriti
   create_collection: Stvori zbirku
   default_collection: Zadana zbirka
   delete_collection: Izbriši zbirku
   edit_collection: Uredi zbirku
   enable: Omogući upravitelja pozadina
+  extend: Proširi primarni
   fit:
     contain: Obuzdati
     cover: Poklopac
@@ -261,6 +266,7 @@ wall:
   interval: Promijenite pozadinu svaku
   minutes: minute
   monitor_collection: Zbirka monitora
+  multimonitor_behaviour: Ponašanje više monitora
   muted: Isključi video zvuk
   no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
   no_collections: Još nije stvorena nijedna zbirka. Kliknite gumb + da biste ga izradili.
@@ -268,6 +274,7 @@ wall:
   objectPosition: Pozadinski položaj
   overlayColor: Boja prekrivanja
   overlayMixBlendMode: Način miješanja preklapanja mješavine
+  per_monitor: Po monitoru
   playback: Brzina reprodukcije
   position:
     bottom: Dno
@@ -280,6 +287,8 @@ wall:
   saturation: Zasićenost
   seconds: sekundi
   select_collection: Odaberite Zbirka
+  thumbnail_generation_complete: Generiranje sličica dovršeno
+  thumbnail_generation_finished: Generiranje sličica je uspješno završeno
   wallpaper_collection: Zbirka tapeta
   wallpaper_settings: Postavke pozadine
   withOverlay: S prekrivanjem

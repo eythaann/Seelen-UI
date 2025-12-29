@@ -147,6 +147,7 @@ reset_all_to_default: Visu noklusējuma vērtību atiestatīšana
 reset_to_default: Atiestatīt noklusējuma vērtību
 resources:
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
+  corrupted_wallpaper: "Neizdevās izvilkt sīktēlu\_— bojāts vai neatbalstīts video formāts"
   delete: Dzēst resursu
   discover: Atklājiet vairāk resursu
   has_update: Ir pieejams atjauninājums
@@ -244,12 +245,14 @@ wall:
   collection_name: Kolekcijas nosaukums
   collections: Kolekcijas
   contrast: Kontrasts
+  corrupted_wallpapers_message: 'Bojātas tapetes, apsveriet iespēju dzēst šīs tapetes:'
   create: Izveidot
   create_collection: Izveidot kolekciju
   default_collection: Noklusējuma kolekcija
   delete_collection: Dzēst kolekciju
   edit_collection: Rediģēt kolekciju
   enable: Iespējot fona attēlu pārvaldnieku
+  extend: Pagarināt primāro
   fit:
     contain: Satur
     cover: Vāks
@@ -261,6 +264,7 @@ wall:
   interval: Mainiet fona attēlus katru
   minutes: protokols
   monitor_collection: Monitoru kolekcija
+  multimonitor_behaviour: Vairāku monitoru uzvedība
   muted: Izslēgt video audio
   no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
   no_collections: >-
@@ -270,6 +274,7 @@ wall:
   objectPosition: Pamatinformācija Pozīcija
   overlayColor: Pārklājuma krāsa
   overlayMixBlendMode: Pārklājuma sajaukšanas režīms
+  per_monitor: Uz monitoru
   playback: Atskaņošanas ātrums
   position:
     bottom: Apakšējā daļa
@@ -282,6 +287,8 @@ wall:
   saturation: Piesātinājums
   seconds: sekundes
   select_collection: Atlasiet Kolekcija
+  thumbnail_generation_complete: Sīktēlu ģenerēšana ir pabeigta
+  thumbnail_generation_finished: Sīktēlu ģenerēšana ir veiksmīgi pabeigta
   wallpaper_collection: Tapešu kolekcija
   wallpaper_settings: Tapetes iestatījumi
   withOverlay: Ar pārklājumu

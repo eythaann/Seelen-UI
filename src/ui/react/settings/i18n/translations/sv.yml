@@ -145,6 +145,9 @@ reset_all_to_default: Återställ alla till standardvärden
 reset_to_default: Återställ till standardvärde
 resources:
   app_outdated: Denna resurs kräver en nyare version av Seelen UI för att fungera korrekt.
+  corrupted_wallpaper: >-
+    Det gick inte att extrahera miniatyrbilden - skadat eller videoformat som
+    inte stöds
   delete: Radera resurs
   discover: Upptäck fler resurser
   has_update: En uppdatering är tillgänglig
@@ -242,12 +245,14 @@ wall:
   collection_name: Samlingens namn
   collections: Samlingar
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Skadade bakgrundsbilder, överväg att ta bort dessa:'
   create: Skapa
   create_collection: Skapa samling
   default_collection: Standardsamling
   delete_collection: Ta bort samling
   edit_collection: Redigera samling
   enable: Aktivera tapetchef
+  extend: Förläng primär
   fit:
     contain: Innehåller
     cover: Omslag
@@ -259,6 +264,7 @@ wall:
   interval: Ändra tapeter varje
   minutes: minuter
   monitor_collection: Övervaka samling
+  multimonitor_behaviour: Multimonitors beteende
   muted: Stäng av videoljud
   no_background: Tomt bildspel, med temas bakgrund istället.
   no_collections: Inga samlingar har skapats ännu. Klicka på knappen + för att skapa en.
@@ -266,6 +272,7 @@ wall:
   objectPosition: Bakgrund Position
   overlayColor: Färg på överlägg
   overlayMixBlendMode: Overlay Mix Blandningsläge
+  per_monitor: Per bildskärm
   playback: Uppspelningshastighet
   position:
     bottom: Botten
@@ -278,6 +285,8 @@ wall:
   saturation: Mättnad
   seconds: sekunder
   select_collection: Välj Samling
+  thumbnail_generation_complete: Generering av miniatyrbilder är klar
+  thumbnail_generation_finished: Generering av miniatyrbilder har slutförts framgångsrikt
   wallpaper_collection: Tapetsamling
   wallpaper_settings: Bakgrundsinställningar
   withOverlay: Med överlägg

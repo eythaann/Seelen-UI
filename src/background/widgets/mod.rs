@@ -1,3 +1,4 @@
+pub mod cli;
 pub mod loader;
 pub mod manager;
 pub mod popups;

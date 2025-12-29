@@ -151,6 +151,9 @@ resources:
   app_outdated: >-
     Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
     Seelen UI upang gumana nang maayos.
+  corrupted_wallpaper: >-
+    Nabigong i-extract ang thumbnail - sira o hindi sinusuportahang format ng
+    video
   delete: Tanggalin ang mapagkukunan
   discover: Tuklasin ang higit pang mga mapagkukunan
   has_update: Magagamit ang isang pag -update
@@ -248,12 +251,14 @@ wall:
   collection_name: Pangalan ng Koleksyon
   collections: Mga koleksyon
   contrast: Kaibahan
+  corrupted_wallpapers_message: 'Mga sirang wallpaper, isaalang-alang ang pagtanggal ng mga ito:'
   create: Lumikha
   create_collection: Lumikha ng Koleksyon
   default_collection: Default na Koleksyon
   delete_collection: Tanggalin ang Koleksyon
   edit_collection: I-edit ang Koleksyon
   enable: Paganahin ang manager ng wallpaper
+  extend: Palawakin ang pangunahin
   fit:
     contain: Naglalaman
     cover: Takpan
@@ -265,6 +270,7 @@ wall:
   interval: Baguhin ang wallpaper bawat
   minutes: minuto
   monitor_collection: Monitor Collection
+  multimonitor_behaviour: Pag-uugali ng Multimonitor
   muted: Mute Video Audio
   no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
   no_collections: Wala pang nagawang koleksyon. I-click ang + button para gumawa ng isa.
@@ -272,6 +278,7 @@ wall:
   objectPosition: Posisyon sa background
   overlayColor: Kulay ng overlay
   overlayMixBlendMode: Overlay Mix Blend Mode
+  per_monitor: Bawat monitor
   playback: Bilis ng pag -playback
   position:
     bottom: Ilalim
@@ -284,6 +291,8 @@ wall:
   saturation: Saturation
   seconds: segundo
   select_collection: Piliin ang Koleksyon
+  thumbnail_generation_complete: Kumpleto na ang Pagbuo ng Thumbnail
+  thumbnail_generation_finished: Matagumpay na natapos ang pagbuo ng thumbnail
   wallpaper_collection: Koleksyon ng Wallpaper
   wallpaper_settings: Mga Setting ng Wallpaper
   withOverlay: Na may overlay

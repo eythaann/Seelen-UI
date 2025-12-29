@@ -148,6 +148,9 @@ resources:
   app_outdated: >-
     Αυτός ο πόρος απαιτεί μια νεότερη έκδοση του Seelen UI για να λειτουργήσει
     σωστά.
+  corrupted_wallpaper: >-
+    Αποτυχία εξαγωγής μικρογραφίας - κατεστραμμένη ή μη υποστηριζόμενη μορφή
+    βίντεο
   delete: Διαγραφή πόρου
   discover: Ανακαλύψτε περισσότερους πόρους
   has_update: Μια ενημέρωση είναι διαθέσιμη
@@ -245,12 +248,14 @@ wall:
   collection_name: Όνομα συλλογής
   collections: Συλλογές
   contrast: Αντίθεση
+  corrupted_wallpapers_message: 'Κατεστραμμένες ταπετσαρίες, σκεφτείτε να τις διαγράψετε:'
   create: Δημιουργώ
   create_collection: Δημιουργία συλλογής
   default_collection: Προεπιλεγμένη συλλογή
   delete_collection: Διαγραφή συλλογής
   edit_collection: Επεξεργασία συλλογής
   enable: Ενεργοποίηση διαχειριστή ταπετσαρίας
+  extend: Επέκταση πρωτοβάθμιας
   fit:
     contain: Περιέχει
     cover: Εξώφυλλο
@@ -262,6 +267,7 @@ wall:
   interval: Αλλάξτε ταπετσαρία κάθε
   minutes: πρακτικά
   monitor_collection: Συλλογή οθονών
+  multimonitor_behaviour: Συμπεριφορά πολλαπλών οθονών
   muted: Σίγαση ήχου βίντεο
   no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
   no_collections: >-
@@ -271,6 +277,7 @@ wall:
   objectPosition: Ιστορικό Θέση
   overlayColor: Χρώμα επικάλυψης
   overlayMixBlendMode: Λειτουργία ανάμειξης μίξης επικάλυψης
+  per_monitor: Ανά οθόνη
   playback: Ταχύτητα αναπαραγωγής
   position:
     bottom: Κάτω μέρος
@@ -283,6 +290,8 @@ wall:
   saturation: Κορεσμός
   seconds: δευτερόλεπτα
   select_collection: Επιλέξτε Συλλογή
+  thumbnail_generation_complete: Ολοκληρώθηκε η δημιουργία μικρογραφιών
+  thumbnail_generation_finished: Η δημιουργία μικρογραφιών ολοκληρώθηκε με επιτυχία
   wallpaper_collection: Συλλογή ταπετσαριών
   wallpaper_settings: Ρυθμίσεις ταπετσαρίας
   withOverlay: Με επικάλυψη

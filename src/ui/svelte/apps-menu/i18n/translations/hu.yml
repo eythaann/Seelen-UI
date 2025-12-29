@@ -1,0 +1,7 @@
+all: Minden alkalmazás
+no_apps: Nem találhatók alkalmazások
+no_pinned_apps: Nincsenek rögzített alkalmazások
+pin: Pin
+pinned: Rögzítve
+start: Indul
+unpin: Kibont

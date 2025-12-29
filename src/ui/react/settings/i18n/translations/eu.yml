@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona
     dezan.
+  corrupted_wallpaper: Ezin izan da atera miniatura - hondatuta edo onartzen ez den bideo formatua
   delete: Baliabidea ezabatu
   discover: Ezagutu baliabide gehiago
   has_update: Eguneratze bat eskuragarri dago
@@ -244,12 +245,14 @@ wall:
   collection_name: Bildumaren izena
   collections: Bildumak
   contrast: Kontraste
+  corrupted_wallpapers_message: 'Hondatutako horma-paperak, kontuan hartu hauek ezabatzea:'
   create: Sortu
   create_collection: Sortu bilduma
   default_collection: Bilduma lehenetsia
   delete_collection: Ezabatu bilduma
   edit_collection: Editatu bilduma
   enable: Gaitu horma-kudeatzailea
+  extend: Lehen mailakoa luzatzea
   fit:
     contain: Eduki
     cover: Estalki
@@ -261,6 +264,7 @@ wall:
   interval: Aldatu horma-irudia guztietan
   minutes: minutuak
   monitor_collection: Monitore bilduma
+  multimonitor_behaviour: Monitore anitzeko portaera
   muted: Ezkutatu bideoaren audioa
   no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
   no_collections: Oraindik ez da bildumarik sortu. Egin klik + botoian bat sortzeko.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Atzeko planoaren posizioa
   overlayColor: Overlay kolorea
   overlayMixBlendMode: Overlay nahastu nahasketa modua
+  per_monitor: Monitore bakoitzeko
   playback: Erreproduzitzeko abiadura
   position:
     bottom: Azpi
@@ -280,6 +285,8 @@ wall:
   saturation: Saturazio
   seconds: bizkarbete
   select_collection: Hautatu Bilduma
+  thumbnail_generation_complete: Miniaturak sortzea amaituta
+  thumbnail_generation_finished: Miniaturak sortzea ondo amaitu da
   wallpaper_collection: Horma-irudi bilduma
   wallpaper_settings: Horma-paperaren ezarpenak
   withOverlay: Gainjartzearekin

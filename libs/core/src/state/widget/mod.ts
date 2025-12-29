@@ -1,11 +1,12 @@
 import {
   type ThirdPartyWidgetSettings,
   type Widget as IWidget,
+  type WidgetConfigDefinition,
   type WidgetId,
   WidgetPreset,
+  type WidgetSettingItem,
   WidgetStatus,
   type WidgetTriggerPayload,
-  type WsdGroupEntry,
 } from "@seelen-ui/types";
 import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 import { List } from "../../utils/List.ts";
@@ -144,23 +145,31 @@ export class Widget {
     );
   }
 
-  private static getEntryDefaultValues(entry: WsdGroupEntry): Record<string, unknown> {
-    const config: Record<string, unknown> = {
-      [entry.config.key]: entry.config.defaultValue,
-    };
-    for (const item of entry.children) {
-      Object.assign(config, Widget.getEntryDefaultValues(item));
+  private static getDefinitionDefaultValues(definition: WidgetConfigDefinition): Record<string, unknown> {
+    const config: Record<string, unknown> = {};
+
+    // Check if it's a group (has "group" property)
+    if ("group" in definition) {
+      // Recursively process all items in the group
+      for (const item of definition.group.items) {
+        Object.assign(config, Widget.getDefinitionDefaultValues(item));
+      }
+    } else {
+      // It's a setting item, extract key and defaultValue
+      const item = definition as WidgetSettingItem;
+      if ("key" in item && "defaultValue" in item) {
+        config[item.key] = item.defaultValue;
+      }
     }
+
     return config;
   }
 
   /** Returns the default config of the widget, declared on the widget definition */
   public getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
-    for (const { group } of this.def.settings) {
-      for (const entry of group) {
-        Object.assign(config, Widget.getEntryDefaultValues(entry));
-      }
+    for (const definition of this.def.settings) {
+      Object.assign(config, Widget.getDefinitionDefaultValues(definition));
     }
     return config;
   }

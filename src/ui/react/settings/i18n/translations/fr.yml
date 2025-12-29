@@ -149,6 +149,7 @@ resources:
   app_outdated: >-
     Cette ressource nécessite une version plus récente de Seelen UI pour
     fonctionner correctement.
+  corrupted_wallpaper: "Échec de l'extraction de la vignette\_: format vidéo corrompu ou non pris en charge"
   delete: Supprimer les ressources
   discover: Découvrez d'autres ressources
   has_update: Une mise à jour est disponible
@@ -246,12 +247,14 @@ wall:
   collection_name: Nom de la collection
   collections: Collections
   contrast: Contraste
+  corrupted_wallpapers_message: "Fonds d'écran corrompus, pensez à les supprimer\_:"
   create: Créer
   create_collection: Créer une collection
   default_collection: Collection par défaut
   delete_collection: Supprimer la collection
   edit_collection: Modifier la collection
   enable: Activer le gestionnaire de fonds d'écran
+  extend: Étendre le primaire
   fit:
     contain: Contenir
     cover: Couverture
@@ -263,6 +266,7 @@ wall:
   interval: Changer de fond d'écran toutes les
   minutes: minutes
   monitor_collection: Collection de moniteurs
+  multimonitor_behaviour: Comportement multi-écrans
   muted: Couper le son de la vidéo
   no_background: Liste vide, le fond d'écran du thème sera utilisé.
   no_collections: >-
@@ -272,6 +276,7 @@ wall:
   objectPosition: Position d'arrière-plan
   overlayColor: Couleur de la superposition
   overlayMixBlendMode: Mode de mélange de la superposition
+  per_monitor: Par moniteur
   playback: Vitesse de lecture
   position:
     bottom: Le fond
@@ -284,6 +289,8 @@ wall:
   saturation: Saturation
   seconds: secondes
   select_collection: Sélectionnez une collection
+  thumbnail_generation_complete: Génération de vignettes terminée
+  thumbnail_generation_finished: La génération des vignettes s'est terminée avec succès
   wallpaper_collection: Collection de papiers peints
   wallpaper_settings: Paramètres du papier peint
   withOverlay: Avec recouvrement

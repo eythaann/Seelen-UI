@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     Este recurso exige que uma versão mais recente da UI Seelen funcione
     corretamente.
+  corrupted_wallpaper: Falha ao extrair miniatura – formato de vídeo corrompido ou incompatível
   delete: Excluir recursos
   discover: Descubra mais recursos
   has_update: Uma atualização está disponível
@@ -244,12 +245,14 @@ wall:
   collection_name: Nome da coleção
   collections: Coleções
   contrast: Contraste
+  corrupted_wallpapers_message: 'Papéis de parede corrompidos, considere excluí-los:'
   create: Criar
   create_collection: Criar coleção
   default_collection: Coleção padrão
   delete_collection: Excluir coleção
   edit_collection: Editar coleção
   enable: Ativar gerente de papel de parede
+  extend: Estender primário
   fit:
     contain: Conter
     cover: Cobertura
@@ -261,6 +264,7 @@ wall:
   interval: Troque o papel de parede todos
   minutes: minutos
   monitor_collection: Coleção de monitores
+  multimonitor_behaviour: Comportamento multimonitor
   muted: Silenciar áudio de vídeo
   no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
   no_collections: Nenhuma coleção criada ainda. Clique no botão + para criar um.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Posição de fundo
   overlayColor: Cor de sobreposição
   overlayMixBlendMode: Modo de mistura de sobreposição
+  per_monitor: Por monitor
   playback: Velocidade de reprodução
   position:
     bottom: Fundo
@@ -280,6 +285,8 @@ wall:
   saturation: Saturação
   seconds: segundas
   select_collection: Selecione a coleção
+  thumbnail_generation_complete: Geração de miniaturas concluída
+  thumbnail_generation_finished: A geração da miniatura foi concluída com sucesso
   wallpaper_collection: Coleção de papéis de parede
   wallpaper_settings: Configurações de papel de parede
   withOverlay: Com sobreposição

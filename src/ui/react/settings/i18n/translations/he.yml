@@ -143,6 +143,7 @@ reset_all_to_default: אפס את כל ערכי ברירת המחדל
 reset_to_default: אפס לערך ברירת המחדל
 resources:
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
+  corrupted_wallpaper: חילוץ התמונה הממוזערת נכשל - פורמט וידאו פגום או לא נתמך
   delete: מחק משאב
   discover: לגלות משאבים נוספים
   has_update: ניתן לקבל עדכון
@@ -235,12 +236,14 @@ wall:
   collection_name: שם האוסף
   collections: אוספים
   contrast: לְהַשְׁווֹת
+  corrupted_wallpapers_message: 'רקעים פגומים, שקול למחוק את אלה:'
   create: לִיצוֹר
   create_collection: צור אוסף
   default_collection: אוסף ברירת מחדל
   delete_collection: מחק אוסף
   edit_collection: ערוך אוסף
   enable: אפשר מנהל טפטים
+  extend: הארך את היסוד
   fit:
     contain: לְהַכִיל
     cover: לְכַסוֹת
@@ -252,6 +255,7 @@ wall:
   interval: החלף טפטים כל
   minutes: דקות
   monitor_collection: אוסף מוניטור
+  multimonitor_behaviour: התנהגות מולטימוניטור
   muted: השתקת אודיו של וידאו
   no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
   no_collections: עדיין לא נוצרו אוספים. לחץ על הלחצן + כדי ליצור אחד.
@@ -259,6 +263,7 @@ wall:
   objectPosition: מיקום רקע
   overlayColor: צבע שכבה
   overlayMixBlendMode: מצב תערובת תערובת שכבה
+  per_monitor: לכל מוניטור
   playback: מהירות ההפעלה
   position:
     bottom: תַחתִית
@@ -271,6 +276,8 @@ wall:
   saturation: רִוּוּי
   seconds: שניות
   select_collection: בחר אוסף
+  thumbnail_generation_complete: יצירת תמונות ממוזערות הושלמה
+  thumbnail_generation_finished: יצירת התמונות הממוזערות הסתיים בהצלחה
   wallpaper_collection: אוסף טפטים
   wallpaper_settings: הגדרות טפט
   withOverlay: עם שכבת -על

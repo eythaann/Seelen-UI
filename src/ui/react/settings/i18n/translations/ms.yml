@@ -147,6 +147,7 @@ resources:
   app_outdated: >-
     Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan
     baik.
+  corrupted_wallpaper: Gagal mengeluarkan lakaran kecil - format video rosak atau tidak disokong
   delete: Padam sumber
   discover: Cari lebih banyak sumber
   has_update: Kemas kini ada
@@ -244,12 +245,14 @@ wall:
   collection_name: Nama Koleksi
   collections: Koleksi
   contrast: Kontras
+  corrupted_wallpapers_message: 'Kertas dinding rosak, pertimbangkan untuk memadam ini:'
   create: Buat
   create_collection: Buat Koleksi
   default_collection: Koleksi Lalai
   delete_collection: Padamkan Koleksi
   edit_collection: Edit Koleksi
   enable: Dayakan Pengurus Wallpaper
+  extend: Lanjutkan utama
   fit:
     contain: Mengandungi
     cover: Penutup
@@ -261,6 +264,7 @@ wall:
   interval: Tukar kertas dinding setiap
   minutes: minit
   monitor_collection: Koleksi Pantau
+  multimonitor_behaviour: Kelakuan Multimonitor
   muted: Audio video bisu
   no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
   no_collections: Tiada koleksi dibuat lagi. Klik butang + untuk mencipta satu.
@@ -268,6 +272,7 @@ wall:
   objectPosition: Kedudukan latar belakang
   overlayColor: Warna overlay
   overlayMixBlendMode: Mod campuran campuran overlay
+  per_monitor: Setiap monitor
   playback: Kelajuan main balik
   position:
     bottom: Bawah
@@ -280,6 +285,8 @@ wall:
   saturation: Ketepuan
   seconds: saat
   select_collection: Pilih Koleksi
+  thumbnail_generation_complete: Penjanaan Thumbnail Selesai
+  thumbnail_generation_finished: Penjanaan imej kecil telah berjaya diselesaikan
   wallpaper_collection: Koleksi Kertas Dinding
   wallpaper_settings: Tetapan Kertas Dinding
   withOverlay: Dengan overlay

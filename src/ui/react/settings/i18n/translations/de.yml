@@ -149,6 +149,9 @@ resources:
   app_outdated: >-
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
     funktionieren.
+  corrupted_wallpaper: >-
+    Miniaturansicht konnte nicht extrahiert werden – beschädigtes oder nicht
+    unterstütztes Videoformat
   delete: Ressource löschen
   discover: Weitere Ressourcen entdecken
   has_update: Ein Update ist verfügbar
@@ -246,12 +249,14 @@ wall:
   collection_name: Sammlungsname
   collections: Sammlungen
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Beschädigte Hintergrundbilder. Löschen Sie diese:'
   create: Erstellen
   create_collection: Sammlung erstellen
   default_collection: Standardsammlung
   delete_collection: Sammlung löschen
   edit_collection: Sammlung bearbeiten
   enable: Tapetenmanager aktivieren
+  extend: Grundschule verlängern
   fit:
     contain: Enthält
     cover: Abdeckung
@@ -263,6 +268,7 @@ wall:
   interval: Wechseln Sie die Hintergrundbild
   minutes: Minuten
   monitor_collection: Sammlung überwachen
+  multimonitor_behaviour: Multimonitor-Verhalten
   muted: Video-Audio stumm schalten
   no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
   no_collections: >-
@@ -272,6 +278,7 @@ wall:
   objectPosition: Hintergrund Position
   overlayColor: Überlagerungsfarbe
   overlayMixBlendMode: Mischmodus Überlagerung
+  per_monitor: Pro Monitor
   playback: Wiedergabegeschwindigkeit
   position:
     bottom: Unten
@@ -284,6 +291,8 @@ wall:
   saturation: Sättigung
   seconds: Sekunden
   select_collection: Wählen Sie Sammlung
+  thumbnail_generation_complete: Miniaturbild-Erstellung abgeschlossen
+  thumbnail_generation_finished: Die Miniaturbildgenerierung wurde erfolgreich abgeschlossen
   wallpaper_collection: Tapetensammlung
   wallpaper_settings: Hintergrundeinstellungen
   withOverlay: Mit Overlay

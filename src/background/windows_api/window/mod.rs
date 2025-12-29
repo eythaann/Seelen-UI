@@ -27,7 +27,7 @@ use crate::virtual_desktops::SluWorkspacesManager2;
 use crate::{
     cli::ServicePipe,
     error::Result,
-    modules::{apps::application::is_interactable_window, start::application::START_MENU_MANAGER},
+    modules::{apps::application::is_interactable_window, start::application::StartMenuManager},
     utils::lock_free::TracedMutex,
     widgets::{
         toolbar::FancyToolbar, wallpaper_manager::SeelenWall, weg::instance::SeelenWeg,
@@ -130,7 +130,7 @@ impl Window {
                 ));
             }
 
-            let guard = START_MENU_MANAGER.load();
+            let guard = StartMenuManager::instance();
             let item = guard.get_by_target(&path)?;
             Some(AppUserModelId::PropertyStore(item.umid.clone()?))
         } else {

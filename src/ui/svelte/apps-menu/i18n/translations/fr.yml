@@ -1,0 +1,7 @@
+all: Toutes les applications
+no_apps: Aucune application trouvée
+no_pinned_apps: Aucune application épinglée
+pin: Épingle
+pinned: Épinglé
+start: Commencer
+unpin: Détacher

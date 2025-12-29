@@ -142,6 +142,7 @@ reset_all_to_default: 모두 기본값으로 초기화
 reset_to_default: 기본값으로 재설정
 resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
+  corrupted_wallpaper: 썸네일 추출 실패 - 손상되었거나 지원되지 않는 비디오 형식
   delete: 리소스 삭제
   discover: 더 많은 리소스 살펴보기
   has_update: 업데이트를 사용할 수 있습니다
@@ -233,12 +234,14 @@ wall:
   collection_name: 컬렉션 이름
   collections: 컬렉션
   contrast: 대비
+  corrupted_wallpapers_message: '손상된 배경화면은 삭제하는 것이 좋습니다:'
   create: 만들다
   create_collection: 컬렉션 만들기
   default_collection: 기본 컬렉션
   delete_collection: 컬렉션 삭제
   edit_collection: 컬렉션 편집
   enable: 배경화면 관리자 활성화
+  extend: 기본 확장
   fit:
     contain: 포함
     cover: 커버
@@ -250,6 +253,7 @@ wall:
   interval: 배경화면 변경 주기
   minutes: 분
   monitor_collection: 모니터 컬렉션
+  multimonitor_behaviour: 다중 모니터 동작
   muted: 비디오 오디오 음소거
   no_background: 배경화면이 없으면, 테마에 내장된 배경화면을 대신 사용합니다.
   no_collections: 아직 생성된 컬렉션이 없습니다. + 버튼을 클릭하여 생성하세요.
@@ -257,6 +261,7 @@ wall:
   objectPosition: 배경 위치
   overlayColor: 오버레이 색상
   overlayMixBlendMode: 오버레이 믹스 블렌드 모드
+  per_monitor: 모니터당
   playback: 재생 속도
   position:
     bottom: 하단
@@ -269,6 +274,8 @@ wall:
   saturation: 채도
   seconds: 초
   select_collection: 컬렉션 선택
+  thumbnail_generation_complete: 썸네일 생성 완료
+  thumbnail_generation_finished: 썸네일 생성이 성공적으로 완료되었습니다.
   wallpaper_collection: 배경화면 모음
   wallpaper_settings: 배경화면 설정
   withOverlay: 오버레이 사용

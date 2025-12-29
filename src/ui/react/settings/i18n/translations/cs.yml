@@ -147,6 +147,9 @@ resources:
   app_outdated: >-
     Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského
     rozhraní Seelen.
+  corrupted_wallpaper: >-
+    Nepodařilo se extrahovat miniaturu – poškozený nebo nepodporovaný formát
+    videa
   delete: Odstranit zdroj
   discover: Objevte další zdroje
   has_update: K dispozici je aktualizace
@@ -244,12 +247,14 @@ wall:
   collection_name: Název sbírky
   collections: Sbírky
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Poškozené tapety, zvažte smazání těchto:'
   create: Vytvořit
   create_collection: Vytvořit sbírku
   default_collection: Výchozí kolekce
   delete_collection: Smazat sbírku
   edit_collection: Upravit sbírku
   enable: Povolit správce tapet
+  extend: Prodloužit primární
   fit:
     contain: Obsahuje
     cover: Obálka
@@ -261,6 +266,7 @@ wall:
   interval: Změňte tapetu každých
   minutes: minuty
   monitor_collection: Sbírka monitorů
+  multimonitor_behaviour: Multimonitorové chování
   muted: Ztlumit zvuk videa
   no_background: Prázdná prezentace, použití pozadí motivu.
   no_collections: Dosud nebyly vytvořeny žádné sbírky. Kliknutím na tlačítko + jej vytvoříte.
@@ -268,6 +274,7 @@ wall:
   objectPosition: Pozice v pozadí
   overlayColor: Barva překrytí
   overlayMixBlendMode: Režim prolnutí překryvné směsi
+  per_monitor: Na monitor
   playback: Rychlost přehrávání
   position:
     bottom: Spodní část
@@ -280,6 +287,8 @@ wall:
   saturation: Nasycení
   seconds: sekundy
   select_collection: Vyberte Sbírka
+  thumbnail_generation_complete: Generování náhledů dokončeno
+  thumbnail_generation_finished: Generování náhledů bylo úspěšně dokončeno
   wallpaper_collection: Kolekce tapet
   wallpaper_settings: Nastavení tapety
   withOverlay: S překrytím

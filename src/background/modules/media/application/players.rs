@@ -22,7 +22,7 @@ use crate::{
             application::{MediaEvent, MediaManager},
             domain::MediaPlayer,
         },
-        start::application::START_MENU_MANAGER,
+        start::application::StartMenuManager,
     },
     utils::{icon_extractor::extract_and_save_icon_umid, lock_free::SyncHashMap},
     windows_api::{traits::EventRegistrationTokenExt, types::AppUserModelId, WindowsApi},
@@ -213,7 +213,7 @@ impl MediaPlayersManager {
                 .DisplayName()?
                 .to_string_lossy(),
             AppUserModelId::PropertyStore(umid) => {
-                let start = START_MENU_MANAGER.load();
+                let start = StartMenuManager::instance();
                 let shortcut = start.get_by_file_umid(umid);
                 match shortcut {
                     Some(shortcut) => shortcut

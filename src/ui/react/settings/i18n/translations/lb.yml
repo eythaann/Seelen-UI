@@ -145,6 +145,7 @@ reset_all_to_default: Reset all op Standardwäerter
 reset_to_default: Reset op Standardwäert
 resources:
   app_outdated: Dës Ressource brauch eng nei Versioun vu Seelen Ui fir richteg ze schaffen.
+  corrupted_wallpaper: Ausgefall Miniatur Extrait - korrupt oder net ënnerstëtzt Video Format
   delete: Läschen Ressource
   discover: Entdeckt méi Ressourcen
   has_update: En Update ass verfügbar
@@ -242,12 +243,14 @@ wall:
   collection_name: Sammlung Numm
   collections: Kollektiounen
   contrast: Kontrad
+  corrupted_wallpapers_message: 'Korrupt Tapeten, betruecht dës ze läschen:'
   create: Schafen
   create_collection: Schafen Kollektioun
   default_collection: Standard Kollektioun
   delete_collection: Läschen Kollektioun
   edit_collection: Kollektioun änneren
   enable: Aktivéiert Wallpaper Manager
+  extend: Primär verlängeren
   fit:
     contain: Enthalen
     cover: Zouzedoen
@@ -259,6 +262,7 @@ wall:
   interval: Änneren Wallpaper all
   minutes: Minutte vun der Minutten
   monitor_collection: Monitor Kollektioun
+  multimonitor_behaviour: Multimonitor Behuelen
   muted: Demp Video Audio
   no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
   no_collections: >-
@@ -268,6 +272,7 @@ wall:
   objectPosition: Hannergrënn Positioun
   overlayColor: Iwwerlauschteren Faarf
   overlayMixBlendMode: Overlay Mix vermëschen Modus
+  per_monitor: Pro Monitor
   playback: Spillversuch
   position:
     bottom: Siwenn
@@ -280,6 +285,8 @@ wall:
   saturation: Saturatioun
   seconds: Sekonnen
   select_collection: Wielt Kollektioun
+  thumbnail_generation_complete: Thumbnail Generatioun Komplett
+  thumbnail_generation_finished: Thumbnail Generatioun ass erfollegräich ofgeschloss
   wallpaper_collection: Wallpaper Kollektioun
   wallpaper_settings: Wallpaper Astellunge
   withOverlay: Mat Overlay

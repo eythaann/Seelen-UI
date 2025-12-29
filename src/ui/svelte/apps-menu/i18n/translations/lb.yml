@@ -1,0 +1,7 @@
+all: All Apps
+no_apps: Keng Apps fonnt
+no_pinned_apps: Keng gespaarten Apps
+pin: Pin
+pinned: Befestegt
+start: Start
+unpin: Unpin

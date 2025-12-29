@@ -1,0 +1,7 @@
+all: Visos programos
+no_apps: Nerasta jokių programų
+no_pinned_apps: Nėra prisegtų programų
+pin: Smeigtukas
+pinned: Prisegta
+start: Pradėti
+unpin: Atsegti

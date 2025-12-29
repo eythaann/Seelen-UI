@@ -31,7 +31,7 @@ use crate::{
     event_manager, log_error,
     modules::{
         apps::application::msix::get_hightest_quality_posible_for_uwp_image,
-        start::application::START_MENU_MANAGER,
+        start::application::StartMenuManager,
     },
     trace_lock,
     utils::{convert_file_to_src, icon_extractor::extract_and_save_icon_umid, spawn_named_thread},
@@ -414,7 +414,7 @@ fn get_text_from_toast(toast: &Toast) -> String {
 pub fn get_toast_activator_clsid(app_umid: &AppUserModelId) -> Result<String> {
     match app_umid {
         AppUserModelId::PropertyStore(umid) => {
-            let guard = START_MENU_MANAGER.load();
+            let guard = StartMenuManager::instance();
             if let Some(item) = guard.get_by_file_umid(umid) {
                 let clsid = WindowsApi::get_file_toast_activator(&item.path)?;
                 return Ok(clsid);

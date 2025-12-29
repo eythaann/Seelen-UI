@@ -1,0 +1,7 @@
+all: Programu Zote
+no_apps: Hakuna programu zilizopatikana
+no_pinned_apps: Hakuna programu zilizobandikwa
+pin: Bandika
+pinned: Imebandikwa
+start: Anza
+unpin: Bandua

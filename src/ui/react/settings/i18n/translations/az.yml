@@ -146,6 +146,7 @@ resources:
   app_outdated: >-
     Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını
     tələb edir.
+  corrupted_wallpaper: Miniatürü çıxarmaq alınmadı - zədələnmiş və ya dəstəklənməyən video formatı
   delete: Resurs silmək
   discover: Daha çox mənbəyi kəşf edin
   has_update: Bir yeniləmə mövcuddur
@@ -243,12 +244,14 @@ wall:
   collection_name: Kolleksiya Adı
   collections: Kolleksiyalar
   contrast: Əksinə
+  corrupted_wallpapers_message: 'Zədələnmiş divar kağızları, bunları silməyi düşünün:'
   create: Yaradın
   create_collection: Kolleksiya yaradın
   default_collection: Defolt Kolleksiya
   delete_collection: Kolleksiyanı silin
   edit_collection: Kolleksiyaya düzəliş edin
   enable: Divar kağızı menecerini aktivləşdirin
+  extend: Əsası genişləndirin
   fit:
     contain: Ehtiva etmək
     cover: Örtük
@@ -260,6 +263,7 @@ wall:
   interval: Divar kağızı hər birini dəyişdirin
   minutes: dəqiqəlik
   monitor_collection: Monitor kolleksiyası
+  multimonitor_behaviour: Multimonitor Davranışı
   muted: Səssiz video audio
   no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
   no_collections: Hələ kolleksiya yaradılmayıb. Yaratmaq üçün + düyməsini basın.
@@ -267,6 +271,7 @@ wall:
   objectPosition: Fon mövqeyi
   overlayColor: Örtük rəngi
   overlayMixBlendMode: Qarışıq qarışığı rejimi
+  per_monitor: Monitor başına
   playback: Sürətini çalın
   position:
     bottom: Dibli
@@ -279,6 +284,8 @@ wall:
   saturation: Doydurma
   seconds: saniyə
   select_collection: Kolleksiya seçin
+  thumbnail_generation_complete: Miniatürlərin yaradılması tamamlandı
+  thumbnail_generation_finished: Miniatür yaradılması uğurla tamamlandı
   wallpaper_collection: Divar kağızı Kolleksiyası
   wallpaper_settings: Divar kağızı Parametrləri
   withOverlay: Örtülü ilə

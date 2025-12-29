@@ -145,6 +145,7 @@ reset_all_to_default: Alles resetten naar standaardwaarden
 reset_to_default: Terugzetten naar standaardwaarde
 resources:
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
+  corrupted_wallpaper: Kan miniatuur niet extraheren - beschadigd of niet-ondersteund videoformaat
   delete: Verwijder resource
   discover: Ontdek meer bronnen
   has_update: Er is een update beschikbaar
@@ -242,12 +243,14 @@ wall:
   collection_name: Collectienaam
   collections: Collecties
   contrast: Contrast
+  corrupted_wallpapers_message: 'Beschadigde achtergronden, overweeg deze te verwijderen:'
   create: Creëren
   create_collection: Verzameling maken
   default_collection: Standaardcollectie
   delete_collection: Verzameling verwijderen
   edit_collection: Verzameling bewerken
   enable: Schakel wallpaper manager in
+  extend: Primair uitbreiden
   fit:
     contain: Bevat
     cover: Omslag
@@ -259,6 +262,7 @@ wall:
   interval: Verander wallpaper elke
   minutes: notulen
   monitor_collection: Monitor-collectie
+  multimonitor_behaviour: Multimonitor-gedrag
   muted: Video-audio dempen
   no_background: >-
     Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
@@ -270,6 +274,7 @@ wall:
   objectPosition: Achtergrond Positie
   overlayColor: Overlay Kleur
   overlayMixBlendMode: Overlay Mix Mengmodus
+  per_monitor: Per monitor
   playback: Afspeelsnelheid
   position:
     bottom: Bodem
@@ -282,6 +287,8 @@ wall:
   saturation: Verzadiging
   seconds: seconden
   select_collection: Selecteer Verzameling
+  thumbnail_generation_complete: Het genereren van miniaturen is voltooid
+  thumbnail_generation_finished: Het genereren van miniaturen is met succes voltooid
   wallpaper_collection: Behangcollectie
   wallpaper_settings: Achtergrondinstellingen
   withOverlay: Met overlay

@@ -138,6 +138,7 @@ reset_all_to_default: 全部重置为默认值
 reset_to_default: 重置为默认值
 resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
+  corrupted_wallpaper: 无法提取缩略图 - 视频格式已损坏或不受支持
   delete: 删除资源
   discover: 发现更多资源
   has_update: 有更新可用
@@ -229,12 +230,14 @@ wall:
   collection_name: 收藏名称
   collections: 收藏
   contrast: 对比
+  corrupted_wallpapers_message: 损坏的壁纸，请考虑删除这些：
   create: 创造
   create_collection: 创建收藏
   default_collection: 默认集合
   delete_collection: 删除集合
   edit_collection: 编辑收藏
   enable: 启用壁纸管理器
+  extend: 延长小学
   fit:
     contain: 包含
     cover: 封面
@@ -246,6 +249,7 @@ wall:
   interval: 更换壁纸的时间间隔
   minutes: 分钟
   monitor_collection: 监控集合
+  multimonitor_behaviour: 多显示器行为
   muted: 将视频音频静音
   no_background: 空幻灯片，使用主题背景。
   no_collections: 尚未创建任何集合。 单击 + 按钮创建一个。
@@ -253,6 +257,7 @@ wall:
   objectPosition: 背景职位
   overlayColor: 叠加颜色
   overlayMixBlendMode: 叠加混合混合模式
+  per_monitor: 每台显示器
   playback: 播放速度
   position:
     bottom: 底部
@@ -265,6 +270,8 @@ wall:
   saturation: 饱和度
   seconds: 秒
   select_collection: 选择系列
+  thumbnail_generation_complete: 缩略图生成完成
+  thumbnail_generation_finished: 缩略图生成已成功完成
   wallpaper_collection: 壁纸合集
   wallpaper_settings: 壁纸设置
   withOverlay: 带覆盖层
