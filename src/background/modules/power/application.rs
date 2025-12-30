@@ -136,18 +136,23 @@ impl PowerManager {
 
     fn on_bg_window_proc(msg: u32, w_param: usize, _l_param: isize) -> Result<()> {
         if msg == WM_POWERBROADCAST && w_param as u32 == PBT_APMPOWERSTATUSCHANGE {
-            let mut guard = trace_lock!(POWER_MANAGER);
-            let new_status = Self::get_power_status()?;
+        // Delay battery refresh after resume to avoid stale Windows battery data
+      std::thread::spawn(|| {
+        std::thread::sleep(std::time::Duration::from_millis(1200));
+        let mut guard = trace_lock!(POWER_MANAGER);
+        if let Ok(new_status) = PowerManager::get_power_status() {
             if guard.power_status.ac_line_status != new_status.ac_line_status {
-                let batteries = Self::get_batteries()?;
-                guard.batteries = batteries.clone();
-                Self::send(PowerManagerEvent::BatteriesChanged(batteries));
+                if let Ok(batteries) = PowerManager::get_batteries() {
+                    guard.batteries = batteries.clone();
+                    PowerManager::send(PowerManagerEvent::BatteriesChanged(batteries));
+                }
             }
-            log::trace!("Power status changed to {new_status:?}");
             guard.power_status = new_status.clone();
-            Self::send(PowerManagerEvent::PowerStatusChanged(new_status));
+            PowerManager::send(PowerManagerEvent::PowerStatusChanged(new_status));
         }
-        Ok(())
+    });
+}
+      Ok(())
     }
 
     pub fn release(&mut self) {

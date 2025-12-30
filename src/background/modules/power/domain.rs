@@ -28,6 +28,9 @@ pub fn power_mode_to_serializable(mode: EFFECTIVE_POWER_MODE) -> PowerMode {
 }
 
 pub fn battery_to_slu_battery(battery: battery::Battery) -> Result<Battery> {
+
+    battery.refresh()?;
+    
     let percentage = (battery.state_of_charge().value * 100.0).round();
 
     Ok(Battery {
