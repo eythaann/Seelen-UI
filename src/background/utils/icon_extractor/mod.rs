@@ -371,6 +371,15 @@ fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     get_icon_from_file(&path)
 }
 
+
+fn get_file_mtime(path: &Path) -> Option<u64> {
+    std::fs::metadata(path)
+        .and_then(|m| m.modified())
+        .ok()
+        .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+        .map(|d| d.as_secs())
+}
+
 pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) {
     IconExtractor::request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
 }
@@ -427,7 +436,7 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
                     .system_icon_pack_path()
                     .join(&gen_icon_filename),
             )?;
-            RESOURCES.add_system_app_icon(None, Some(origin), gen_icon);
+            RESOURCES.add_system_app_icon(None, Some(origin), gen_icon, get_file_mtime(origin));
         }
         return Ok(());
     }
@@ -446,7 +455,7 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
             .is_some_and(|ext| ext.to_string_lossy().to_lowercase() != "ico")
         {
             _extract_and_save_icon_from_file(&lnk_icon_path, umid.clone())?;
-            RESOURCES.add_system_icon_redirect(umid, origin, &lnk_icon_path);
+            RESOURCES.add_system_icon_redirect(umid, origin, &lnk_icon_path, get_file_mtime(origin));
             return Ok(());
         }
     }
@@ -468,7 +477,7 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
                 .system_icon_pack_path()
                 .join(&gen_icon_filename),
         )?;
-        RESOURCES.add_system_app_icon(umid.as_deref(), Some(origin), gen_icon);
+        RESOURCES.add_system_app_icon(umid.as_deref(), Some(origin), gen_icon, get_file_mtime(origin));
     } else {
         let gen_icon_filename = format!("{}_{}.png", origin_ext, date_based_hex_id());
         icon.save(
@@ -536,7 +545,7 @@ pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
 
             gen_icon.is_aproximately_square = is_aproximately_a_square(&light_rgba);
 
-            RESOURCES.add_system_app_icon(Some(app_umid), path.as_deref(), gen_icon);
+            RESOURCES.add_system_app_icon(Some(app_umid), path.as_deref(), gen_icon, None);
             Ok(())
         }
         AppUserModelId::PropertyStore(app_umid) => {

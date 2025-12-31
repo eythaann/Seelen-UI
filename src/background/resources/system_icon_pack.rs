@@ -195,7 +195,7 @@ impl ResourceManager {
         Ok(())
     }
 
-    pub fn add_system_app_icon(&self, umid: Option<&str>, path: Option<&Path>, icon: Icon) {
+    pub fn add_system_app_icon(&self, umid: Option<&str>, path: Option<&Path>, icon: Icon, mtime: Option<u64>) {
         if umid.is_none() && path.is_none() {
             return;
         }
@@ -205,19 +205,21 @@ impl ResourceManager {
                 path: path.map(|p| p.to_path_buf()),
                 redirect: None,
                 icon: Some(icon),
+                mtime,
             }));
         });
         self.request_save_system_icon_pack();
         self.emit_icon_packs().log_error();
     }
 
-    pub fn add_system_icon_redirect(&self, umid: Option<String>, origin: &Path, redirect: &Path) {
+    pub fn add_system_icon_redirect(&self, umid: Option<String>, origin: &Path, redirect: &Path, mtime: Option<u64>) {
         self.with_system_pack(|system_pack| {
             system_pack.add_entry(IconPackEntry::Unique(UniqueIconPackEntry {
                 umid,
                 path: Some(origin.to_path_buf()),
                 redirect: Some(redirect.to_path_buf()),
                 icon: None,
+                mtime,
             }));
         });
         self.request_save_system_icon_pack();
@@ -250,8 +252,18 @@ impl ResourceManager {
                     .is_some_and(|sub| root_path.join(sub).exists()))
     }
 
+    fn get_file_mtime(path: &Path) -> Option<u64> {
+        std::fs::metadata(path)
+            .and_then(|m| m.modified())
+            .ok()
+            .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+            .map(|d| d.as_secs())
+    }
+
     /// Get icon pack by app user model id, filename or path
     pub fn has_app_icon(&self, umid: Option<&str>, path: Option<&Path>) -> bool {
+        let current_mtime = path.and_then(Self::get_file_mtime);
+
         self.with_system_pack(|system_pack| {
             let lower_path = path.map(|p| p.to_string_lossy().to_lowercase());
 
@@ -278,6 +290,13 @@ impl ResourceManager {
                 }
 
                 if let Some(entry) = found {
+                    // Check if source file was modified since icon was cached
+                    if let (Some(cached_mtime), Some(current)) = (entry.mtime, current_mtime) {
+                        if cached_mtime != current {
+                            return false;
+                        }
+                    }
+
                     if entry.redirect.is_some() {
                         return true;
                     }
