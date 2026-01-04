@@ -3,11 +3,13 @@ import { mount } from "svelte";
 import App from "./App.svelte";
 import { loadTranslations } from "./i18n/index.ts";
 import { Widget } from "@seelen-ui/lib";
-import { hideTriggered, showTriggered } from "./positioning.svelte.ts";
+import { onTriggered } from "./positioning.svelte.ts";
 
 import "@shared/styles/reset.css";
 import "@shared/styles/colors.css";
 import { Effect } from "@tauri-apps/api/window";
+import { debounce } from "lodash";
+import { globalState } from "./state.svelte.ts";
 
 await loadTranslations();
 
@@ -28,18 +30,24 @@ await Promise.all([
   webview.setResizable(false),
 ]);
 
-/* widget.webview.onFocusChanged((e) => {
-  if (!e.payload) {
-    widget.webview.hide();
+const hideDelayed = debounce(() => {
+  globalState.showing = false;
+}, 100);
+
+widget.webview.onFocusChanged((e) => {
+  if (e.payload) {
+    hideDelayed.cancel();
+  } else {
+    hideDelayed();
   }
 });
- */
+
 widget.onTrigger(async (args) => {
   const visible = await widget.webview.isVisible();
   if (visible) {
-    hideTriggered();
+    globalState.showing = false;
   } else {
-    showTriggered(args.monitorId);
+    onTriggered(args.monitorId);
   }
 });
 

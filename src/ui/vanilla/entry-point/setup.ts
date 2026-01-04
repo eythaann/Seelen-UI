@@ -6,10 +6,7 @@ export function removeDefaultWebviewActions(): void {
     }
 
     // Prevent closing the window (Alt+F4 / Cmd+Q on macOS)
-    if (
-      (event.altKey && event.key === "F4") ||
-      (event.metaKey && event.key === "q")
-    ) {
+    if ((event.altKey && event.key === "F4") || (event.metaKey && event.key === "q")) {
       event.preventDefault();
     }
 
@@ -42,4 +39,24 @@ export function removeDefaultWebviewActions(): void {
   globalThis.addEventListener("drop", (e) => e.preventDefault());
   globalThis.addEventListener("dragover", (e) => e.preventDefault());
   globalThis.addEventListener("dragstart", (e) => e.preventDefault());
+}
+
+export function applyUserExperienceImprovements(): void {
+  document.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+
+    const target = e.target as HTMLElement;
+    if (target.getAttribute("role") !== "button") return;
+
+    if (e.defaultPrevented) return;
+    e.preventDefault();
+
+    target.classList.add("pressed");
+    target.click();
+
+    // Remover la clase después de la animación
+    setTimeout(() => {
+      target.classList.remove("simulated-active");
+    }, 150);
+  });
 }

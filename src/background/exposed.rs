@@ -19,7 +19,9 @@ use crate::hook::HookManager;
 use crate::modules::input::Keyboard;
 
 use crate::utils::constants::SEELEN_COMMON;
-use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
+use crate::utils::icon_extractor::{
+    request_icon_extraction_from_file, request_icon_extraction_from_umid,
+};
 use crate::utils::is_running_as_appx;
 use crate::utils::pwsh::PwshScript;
 use crate::widgets::show_settings;
@@ -151,10 +153,10 @@ fn send_keys(keys: String) -> Result<()> {
 #[tauri::command(async)]
 fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Result<()> {
     if let Some(umid) = umid {
-        extract_and_save_icon_umid(&umid.into());
+        request_icon_extraction_from_umid(&umid.into());
     }
     if let Some(path) = path {
-        extract_and_save_icon_from_file(&path);
+        request_icon_extraction_from_file(&path);
     }
     Ok(())
 }

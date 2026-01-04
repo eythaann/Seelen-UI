@@ -34,7 +34,9 @@ use crate::{
         start::application::StartMenuManager,
     },
     trace_lock,
-    utils::{convert_file_to_src, icon_extractor::extract_and_save_icon_umid, spawn_named_thread},
+    utils::{
+        convert_file_to_src, icon_extractor::request_icon_extraction_from_umid, spawn_named_thread,
+    },
     windows_api::{
         event_window::IS_INTERACTIVE_SESSION, traits::EventRegistrationTokenExt,
         types::AppUserModelId, WindowsApi,
@@ -385,7 +387,7 @@ impl NotificationManager {
         };
 
         // pre-extraction to avoid flickering on the ui
-        extract_and_save_icon_umid(&app_umid.to_string().into());
+        request_icon_extraction_from_umid(&app_umid.to_string().into());
 
         self.notifications.push(AppNotification {
             id: u_notification.Id()?,

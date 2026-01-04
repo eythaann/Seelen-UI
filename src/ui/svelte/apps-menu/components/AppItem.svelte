@@ -6,11 +6,18 @@
 
   interface Props {
     item: StartMenuItem;
+    idx: number;
     pinned?: boolean;
     class?: string;
   }
 
-  let { item, pinned = false, class: className = "" }: Props = $props();
+  let { item, idx, pinned = false, class: className = "" }: Props = $props();
+
+  const itemId = $derived(item.umid || item.path);
+  const isPreselected = $derived(
+    globalState.preselectedItem === itemId ||
+    (idx === 0 && !globalState.preselectedItem)
+  );
 
   let contextMenuVisible = $state(false);
   let contextMenuX = $state(0);
@@ -55,6 +62,8 @@
 
 <div
   class="app-item"
+  class:preselected={isPreselected && globalState.searchQuery}
+  data-item-id={itemId}
   onclick={handleClick}
   oncontextmenu={handleContextMenu}
   role="button"
@@ -64,9 +73,12 @@
       e.currentTarget.click();
     }
   }}
+  onfocus={() => {
+    globalState.preselectedItem = itemId;
+  }}
 >
   <FileIcon class="app-item-icon" path={item.path} umid={item.umid} />
-  <div class="app-item-name">
+  <div class="app-item-name" title={item.display_name}>
     {item.display_name}
   </div>
 </div>

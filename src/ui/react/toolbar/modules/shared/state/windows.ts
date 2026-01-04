@@ -72,13 +72,6 @@ effect(() => {
 
   let isMouseOverEdge = $mouse_at_edge.value === $settings.value.position;
 
-  console.log({
-    isOverlapped: $is_tb_overlapped.value,
-    isFocused: $is_this_webview_focused.value,
-    hasOpenPopups: $there_are_open_popups.value,
-    isMouseOverEdge,
-  });
-
   switch ($settings.value.hideMode) {
     case HideMode.Never:
       hidden = false;

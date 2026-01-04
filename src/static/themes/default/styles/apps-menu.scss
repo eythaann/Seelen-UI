@@ -1,3 +1,5 @@
+$columns: 7;
+
 :root {
   --bg: oklch(80% 0 0 / 0.4);
   --bg-light: oklch(from var(--bg) calc(l + 0.2) c h);
@@ -42,73 +44,108 @@ body {
     width: 100%;
     padding: 10px;
     border-top: 1px solid var(--color-gray-300);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
   }
 }
 
 .pinned-view {
-  --spacing-x: 5%;
-  padding: 20px 10%;
+  padding: 2rem;
+  height: 100%;
 
   .pinned-view-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px var(--spacing-x);
+    grid-template-columns: repeat($columns, 1fr);
+    gap: 1rem;
 
-    // .app-item {...}
+    // .app-item {}
   }
 
-  .pinned-view-empty {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-gray-500);
-    font-style: italic;
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
+  // .pinned-view-empty {}
 }
 
 .all-apps-view {
-  $spacing-x: 5%;
-  $columns: 7;
-
-  padding: 20px $spacing-x;
+  padding: 2rem;
+  height: 100%;
 
   .all-apps-view-list {
     display: grid;
-    grid-template-columns: repeat($columns, minmax(0, 1fr));
-    gap: 10px $spacing-x;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: 1rem;
 
-    // .app-item {...}
+    // .app-item {}
   }
+
+  // .all-apps-view-empty {}
+}
+
+.pinned-view-empty,
+.all-apps-view-empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-700);
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .app-item {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 2;
+
   align-items: center;
-  justify-content: center;
+  justify-items: center;
   gap: 10px;
   padding: 10px;
+
+  transition: all 100ms ease;
 
   &:hover {
     background-color: var(--bg-light);
   }
 
+  &.preselected {
+    background-color: var(--bg-light);
+    outline: 2px solid var(--system-accent-color);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
   .app-item-icon {
-    width: 40px;
+    width: 60%;
     aspect-ratio: 1/1;
+    border-radius: 16%;
+    overflow: hidden;
+
+    &:not([data-shape="square"]) {
+      padding: 8%;
+      background-color: var(--color-gray-100);
+    }
   }
 
   .app-item-name {
     width: 100%;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+
     text-align: center;
     font-size: 0.85rem;
+    line-height: 1.2em;
+    font-weight: 600;
   }
 }
 

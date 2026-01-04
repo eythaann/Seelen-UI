@@ -6,5 +6,4 @@ export enum StartDisplayMode {
 export enum StartView {
   All = "all",
   Favorites = "favorites",
-  Search = "search",
 }

@@ -24,7 +24,7 @@ use crate::{
         },
         start::application::StartMenuManager,
     },
-    utils::{icon_extractor::extract_and_save_icon_umid, lock_free::SyncHashMap},
+    utils::{icon_extractor::request_icon_extraction_from_umid, lock_free::SyncHashMap},
     windows_api::{traits::EventRegistrationTokenExt, types::AppUserModelId, WindowsApi},
 };
 
@@ -228,7 +228,7 @@ impl MediaPlayersManager {
         };
 
         // pre-extraction to avoid flickering on the ui
-        extract_and_save_icon_umid(&source_app_umid);
+        request_icon_extraction_from_umid(&source_app_umid);
         self.playing.upsert(
             source_app_umid.to_string(),
             MediaPlayer {

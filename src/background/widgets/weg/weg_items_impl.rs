@@ -26,7 +26,7 @@ use crate::{
     trace_lock,
     utils::{
         constants::SEELEN_COMMON,
-        icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
+        icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
     },
     windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
 };
@@ -202,7 +202,7 @@ impl SeelenWegState {
             match umid {
                 AppUserModelId::Appx(umid) => {
                     // pre-extraction to avoid flickering on the ui
-                    extract_and_save_icon_umid(&AppUserModelId::Appx(umid.clone()));
+                    request_icon_extraction_from_umid(&AppUserModelId::Appx(umid.clone()));
                     (
                         SEELEN_COMMON
                             .system_dir()
@@ -219,7 +219,9 @@ impl SeelenWegState {
                     // some apps like librewolf don't have a shortcut with the same umid
                     if let Some(shortcut) = &shortcut {
                         // pre-extraction to avoid flickering on the ui
-                        extract_and_save_icon_umid(&AppUserModelId::PropertyStore(umid.clone()));
+                        request_icon_extraction_from_umid(&AppUserModelId::PropertyStore(
+                            umid.clone(),
+                        ));
                         path = shortcut.path.clone();
                         display_name = path
                             .file_stem()
@@ -228,7 +230,7 @@ impl SeelenWegState {
                             .to_string();
                     } else {
                         // pre-extraction to avoid flickering on the ui
-                        extract_and_save_icon_from_file(&path);
+                        request_icon_extraction_from_file(&path);
                     }
 
                     // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
@@ -256,7 +258,7 @@ impl SeelenWegState {
             }
         } else {
             // pre-extraction to avoid flickering on the ui
-            extract_and_save_icon_from_file(&path);
+            request_icon_extraction_from_file(&path);
             (path.to_string_lossy().to_string(), None)
         };
 

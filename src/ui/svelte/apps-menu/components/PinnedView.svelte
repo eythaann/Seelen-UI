@@ -6,8 +6,8 @@
 
 <div class="pinned-view">
   <div class="pinned-view-list">
-    {#each globalState.pinnedItems as item (globalState.getItemId(item))}
-      <AppItem {item} pinned={true} class="pinned-view-item" />
+    {#each globalState.pinnedItems as item, idx (globalState.getItemId(item))}
+      <AppItem {item} {idx} pinned={true} class="pinned-view-item" />
     {/each}
   </div>
 

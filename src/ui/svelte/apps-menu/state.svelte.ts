@@ -82,8 +82,13 @@ class State {
   togglePin = togglePin;
   getItemId = getItemId;
 
+  desiredMonitorId = $state<string | null>(null);
+  showing = $state(false);
+
   #displayMode = persistentRune("StartDisplayMode", StartDisplayMode.Normal);
-  #view = $state(StartView.Favorites);
+  view = $state(StartView.Favorites);
+  searchQuery = $state("");
+  preselectedItem = $state<string | null>(null);
 
   get monitors() {
     return monitors.value;
@@ -103,14 +108,6 @@ class State {
 
   set displayMode(value: StartDisplayMode) {
     this.#displayMode.value = value;
-  }
-
-  get view() {
-    return this.#view;
-  }
-
-  set view(value: StartView) {
-    this.#view = value;
   }
 }
 

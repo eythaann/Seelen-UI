@@ -12,7 +12,6 @@ import { Notification } from "./Notification.tsx";
 
 export function Notifications() {
   const notifications = useSelector(Selectors.notifications);
-  console.log({ notifications });
 
   const { t } = useTranslation();
 

@@ -4,14 +4,11 @@ import type { PhysicalMonitor } from "@seelen-ui/lib/types";
 import { globalState } from "./state.svelte";
 import { StartDisplayMode, StartView } from "./constants";
 
-let desiredMonitorId = $state<string | null>();
-let showAfterPositioning = $state({ value: false });
-
 let monitorToShow = $derived.by(() => {
   let targetMonitor: PhysicalMonitor | undefined;
 
-  if (desiredMonitorId) {
-    targetMonitor = globalState.monitors.find((m) => m.id === desiredMonitorId);
+  if (globalState.desiredMonitorId) {
+    targetMonitor = globalState.monitors.find((m) => m.id === globalState.desiredMonitorId);
   }
 
   // Fallback to primary monitor if not found or not specified
@@ -44,35 +41,33 @@ async function placeCenteredToMonitor(targetMonitor: PhysicalMonitor): Promise<v
     y = Math.round(monitorCenterY - height / 2);
   }
 
-  console.debug("WTF???", globalState.displayMode, monitorWidth, monitorHeight, width, height);
-
   await widget.webview.setShadow(globalState.displayMode === StartDisplayMode.Normal);
   await widget.webview.setPosition(new PhysicalPosition(x, y));
   await widget.webview.setSize(new PhysicalSize({ width, height }));
 
-  if (showAfterPositioning.value) {
+  if (globalState.showing) {
     await widget.webview.show();
+    await widget.webview.setFocus();
   }
 }
 
 $effect.root(() => {
   $effect(() => {
     globalState.displayMode;
-    showAfterPositioning.value;
-
-    if (monitorToShow && showAfterPositioning.value) {
+    if (monitorToShow && globalState.showing) {
       placeCenteredToMonitor(monitorToShow);
+    }
+  });
+
+  $effect(() => {
+    if (!globalState.showing) {
+      Widget.getCurrent().webview.hide();
     }
   });
 });
 
-export function showTriggered(monitorId?: string | null) {
+export function onTriggered(monitorId?: string | null) {
   globalState.view = StartView.Favorites;
-  desiredMonitorId = monitorId;
-  showAfterPositioning.value = true;
-}
-
-export function hideTriggered() {
-  showAfterPositioning.value = false;
-  Widget.getCurrent().webview.hide();
+  globalState.desiredMonitorId = monitorId || null;
+  globalState.showing = true;
 }

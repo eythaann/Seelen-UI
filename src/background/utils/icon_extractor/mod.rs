@@ -1,4 +1,5 @@
 mod queue;
+
 use image::{GenericImageView, ImageBuffer, RgbaImage};
 use itertools::Itertools;
 use queue::{IconExtractor, IconExtractorRequest};
@@ -348,8 +349,6 @@ pub fn is_aproximately_a_square(rgba_image: &RgbaImage) -> bool {
     true
 }
 
-// maintain this function as documentation for url files
-#[allow(dead_code)]
 fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     let file = std::fs::File::open(path)?;
     let reader = std::io::BufReader::new(file);
@@ -371,16 +370,12 @@ fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     get_icon_from_file(&path)
 }
 
-pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) {
-    IconExtractor::request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
-}
-
 /// returns the path of the icon extracted from the executable or copied if is an UWP app.
 ///
 /// If the icon already exists, it returns the path instead overriding, this is needed for allow user custom icons.
 ///
 /// umid on this case only applys to Property Store umid
-pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> Result<()> {
+fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> Result<()> {
     if !origin.exists() || origin.is_dir() {
         return Err(format!("File not found: {}", origin.display()).into());
     }
@@ -420,15 +415,14 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
     log::trace!("Extracting icon for {file_name:?}");
 
     if origin_ext == "url" {
-        if let Ok(icon) = get_icon_from_url_file(origin) {
-            gen_icon.is_aproximately_square = is_aproximately_a_square(&icon);
-            icon.save(
-                SEELEN_COMMON
-                    .system_icon_pack_path()
-                    .join(&gen_icon_filename),
-            )?;
-            RESOURCES.add_system_app_icon(None, Some(origin), gen_icon);
-        }
+        let image = get_icon_from_url_file(origin)?;
+        gen_icon.is_aproximately_square = is_aproximately_a_square(&image);
+        image.save(
+            SEELEN_COMMON
+                .system_icon_pack_path()
+                .join(&gen_icon_filename),
+        )?;
+        RESOURCES.add_system_app_icon(None, Some(origin), gen_icon);
         return Ok(());
     }
 
@@ -483,12 +477,8 @@ pub fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> 
     Ok(())
 }
 
-pub fn extract_and_save_icon_umid(aumid: &AppUserModelId) {
-    IconExtractor::request(IconExtractorRequest::AppUMID(aumid.clone()));
-}
-
 /// returns the path of the icon extracted from the app with the specified package app user model id.
-pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
+fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
     match aumid {
         AppUserModelId::Appx(app_umid) => {
             let msix_manager = MsixAppsManager::instance();
@@ -555,4 +545,12 @@ pub fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
             Ok(())
         }
     }
+}
+
+pub fn request_icon_extraction_from_file<T: AsRef<Path>>(path: T) {
+    IconExtractor::request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
+}
+
+pub fn request_icon_extraction_from_umid(aumid: &AppUserModelId) {
+    IconExtractor::request(IconExtractorRequest::AppUMID(aumid.clone()));
 }
