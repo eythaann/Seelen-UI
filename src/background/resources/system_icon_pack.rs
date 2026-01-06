@@ -195,10 +195,11 @@ impl ResourceManager {
         Ok(())
     }
 
-    pub fn add_system_app_icon(&self, umid: Option<&str>, path: Option<&Path>, icon: Icon, mtime: Option<u64>) {
+    pub fn add_system_app_icon(&self, umid: Option<&str>, path: Option<&Path>, icon: Icon) {
         if umid.is_none() && path.is_none() {
             return;
         }
+        let mtime = path.and_then(Self::get_file_mtime);
         self.with_system_pack(|system_pack| {
             system_pack.add_entry(IconPackEntry::Unique(UniqueIconPackEntry {
                 umid: umid.map(|s| s.to_string()),
@@ -212,7 +213,8 @@ impl ResourceManager {
         self.emit_icon_packs().log_error();
     }
 
-    pub fn add_system_icon_redirect(&self, umid: Option<String>, origin: &Path, redirect: &Path, mtime: Option<u64>) {
+    pub fn add_system_icon_redirect(&self, umid: Option<String>, origin: &Path, redirect: &Path) {
+        let mtime = Self::get_file_mtime(origin);
         self.with_system_pack(|system_pack| {
             system_pack.add_entry(IconPackEntry::Unique(UniqueIconPackEntry {
                 umid,
