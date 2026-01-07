@@ -371,7 +371,6 @@ fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     get_icon_from_file(&path)
 }
 
-
 pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) {
     IconExtractor::request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
 }
