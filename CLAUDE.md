@@ -298,6 +298,14 @@ To prevent deadlocks, always acquire locks in this order:
 - Add translations to the appropriate YAML files in `i18n/translations/`
 - Use the established i18n keys and patterns
 
+**IMPORTANT - Translation Workflow:**
+
+- **DO NOT** run `npm run translate` during active development
+- Postpone translation tasks until you are ready to commit
+- Having many changed translation files during development is disruptive
+- Add translations manually to files as needed during development, then run the translate command before the final
+  commit
+
 ### State Management
 
 #### Redux Toolkit (Component State)

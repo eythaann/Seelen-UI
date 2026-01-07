@@ -1,5 +1,6 @@
 all: All Apps
 back: Back
+folder: Folder
 no_matching_items: No items found matching your search
 no_pinned_apps: No pinned apps
 pin: Pin

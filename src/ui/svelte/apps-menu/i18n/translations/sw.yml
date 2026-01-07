@@ -1,4 +1,5 @@
 all: Programu Zote
+folder: Folda
 no_apps: Hakuna programu zilizopatikana
 no_pinned_apps: Hakuna programu zilizobandikwa
 pin: Bandika

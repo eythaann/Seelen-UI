@@ -1,4 +1,5 @@
 all: Todas las aplicaciones
+folder: Carpeta
 no_apps: No se encontraron aplicaciones
 no_pinned_apps: No hay aplicaciones fijadas
 pin: Alfiler

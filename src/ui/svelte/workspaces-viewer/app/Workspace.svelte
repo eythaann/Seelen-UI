@@ -15,7 +15,7 @@
 
   const wallpaper = $derived(store.findWallpaper(workspace.wallpaper));
 
-  let workspaceName = $state(workspace.name || "");
+  let workspaceName = $state("");
 
   $effect(() => {
     workspaceName = workspace.name || "";

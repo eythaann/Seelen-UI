@@ -8,7 +8,7 @@ import type { FocusedApp, Widget } from "@seelen-ui/lib/types";
 import { listen } from "@tauri-apps/api/event";
 import { _invoke, WebviewInformation } from "src/ui/vanilla/entry-point/_tauri.ts";
 
-import { removeDefaultWebviewActions } from "src/ui/vanilla/entry-point/setup.ts";
+import { hookLocalStorage, removeDefaultWebviewActions } from "src/ui/vanilla/entry-point/setup.ts";
 
 const indexJsCode = fetch("./index.js").then((res) => res.text());
 
@@ -29,6 +29,7 @@ document.head.appendChild(script);
 
 // remove default browser actions, we don't need them
 removeDefaultWebviewActions();
+hookLocalStorage(currentWidgetId);
 
 // trigger garbage collection
 setTimeout(() => {

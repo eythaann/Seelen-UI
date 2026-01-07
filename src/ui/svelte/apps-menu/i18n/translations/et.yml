@@ -1,4 +1,5 @@
 all: Kõik rakendused
+folder: Kaust
 no_apps: Rakendusi ei leitud
 no_pinned_apps: Kinnitatud rakendusi pole
 pin: Pin

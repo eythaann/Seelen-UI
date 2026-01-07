@@ -1,4 +1,5 @@
 all: Aplikazio guztiak
+folder: Karpeta
 no_apps: Ez da aplikaziorik aurkitu
 no_pinned_apps: Ez dago ainguratutako aplikaziorik
 pin: Pin

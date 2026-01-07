@@ -1,9 +1,13 @@
+import type { ZodSchema } from "zod";
+
 export class PersistentRune<T> {
   private _value: T;
   private storeKey: string;
+  private schema?: ZodSchema<T>;
 
-  constructor(storeKey: string, initial: T) {
+  constructor(storeKey: string, initial: T, schema?: ZodSchema<T>) {
     this.storeKey = storeKey;
+    this.schema = schema;
 
     // Try to load from localStorage, fallback to initial value
     const stored = this.loadFromStorage();
@@ -16,9 +20,16 @@ export class PersistentRune<T> {
       if (item === null) {
         return null;
       }
-      return JSON.parse(item) as T;
-    } catch (error) {
-      console.error(`Failed to load from localStorage (key: ${this.storeKey}):`, error);
+
+      const parsed = JSON.parse(item);
+      if (this.schema) {
+        return this.schema.parse(parsed);
+      }
+
+      return parsed as T;
+    } catch (err) {
+      console.error(`Failed to load from localStorage (key: ${this.storeKey}):`, err);
+      localStorage.removeItem(this.storeKey);
       return null;
     }
   }
@@ -47,7 +58,17 @@ export class PersistentRune<T> {
  * @example
  * const count = persistentRune('counter', 0);
  * count.value++; // Automatically saved to localStorage
+ *
+ * @example with zod validation
+ * import { z } from 'zod';
+ * const schema = z.number();
+ * const count = persistentRune('counter', 0, schema);
+ * count.value++; // Validated and saved to localStorage
  */
-export function persistentRune<T>(storeKey: string, initial: T): PersistentRune<T> {
-  return new PersistentRune(storeKey, initial);
+export function persistentRune<T>(
+  storeKey: string,
+  initial: T,
+  schema?: ZodSchema<T>,
+): PersistentRune<T> {
+  return new PersistentRune(storeKey, initial, schema);
 }

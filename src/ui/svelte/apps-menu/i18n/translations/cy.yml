@@ -1,4 +1,5 @@
 all: Pob Ap
+folder: Ffolder
 no_apps: Heb ganfod apiau
 no_pinned_apps: Dim apps wedi'u pinio
 pin: Pin

@@ -2,8 +2,7 @@
   import { onMount } from "svelte";
   import { t } from "./i18n";
   import { Widget } from "@seelen-ui/lib";
-  import PinnedView from "./components/PinnedView.svelte";
-  import AllAppsView from "./components/AllAppsView.svelte";
+  import StartMenuBody from "./components/StartMenuBody.svelte";
   import { globalState } from "./state.svelte";
   import { StartDisplayMode, StartView } from "./constants";
   import { Icon } from "libs/ui/svelte/components/Icon";
@@ -46,11 +45,9 @@
         let element: HTMLElement | null = null;
 
         if (globalState.preselectedItem) {
-          element = document.querySelector(
-            `[data-item-id="${globalState.preselectedItem}"]`
-          ) as HTMLElement;
+          element = document.querySelector(`[data-item-id="${globalState.preselectedItem}"]`);
         } else {
-          element = document.querySelector(".app-item") as HTMLElement;
+          element = document.querySelector(".app-item");
         }
 
         if (element) {
@@ -121,13 +118,7 @@
     </button>
   </div>
 
-  <div class="apps-menu-body">
-    {#if globalState.view === StartView.Favorites}
-      <PinnedView />
-    {:else if globalState.view === StartView.All}
-      <AllAppsView />
-    {/if}
-  </div>
+  <StartMenuBody />
 
   <div class="apps-menu-footer">
     <button

@@ -1,4 +1,5 @@
 all: Toutes les applications
+folder: Dossier
 no_apps: Aucune application trouvée
 no_pinned_apps: Aucune application épinglée
 pin: Épingle

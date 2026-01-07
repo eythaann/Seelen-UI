@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use slu_utils::{debounce, Debounce};
 
 use crate::{
-    error::Result,
+    error::{Result, ResultLogExt},
     event_manager,
     utils::{constants::SEELEN_COMMON, lock_free::SyncVec},
     windows_api::types::AppUserModelId,
@@ -31,7 +31,7 @@ impl IconExtractor {
             failures: SyncVec::new(),
             save_failures: debounce(
                 |_| {
-                    let path = SEELEN_COMMON.app_cache_dir().join("icon_failures");
+                    let path = SEELEN_COMMON.app_cache_dir().join("icon_failures.yml");
                     if let Ok(file) = std::fs::File::create(&path) {
                         let _ = serde_yaml::to_writer(file, &Self::instance().failures.to_vec());
                     }
@@ -40,23 +40,31 @@ impl IconExtractor {
             ),
         };
 
-        let cached = SEELEN_COMMON.app_cache_dir().join("icon_failures");
-        if cached.exists() {
-            if let Ok(buff) = std::fs::read(cached) {
-                extractor.failures = serde_yaml::from_slice::<Vec<IconExtractorRequest>>(&buff)
-                    .unwrap_or_default()
-                    .into();
-            }
-        }
+        extractor.init().log_error();
 
         Self::subscribe(|request| {
+            let m = Self::instance();
+            if m.failures.contains(&request) {
+                return;
+            }
+
             if let Err(err) = Self::process(&request) {
                 log::error!("Failed to extract icon: {err}");
-                Self::instance().failures.push(request);
-                Self::instance().save_failures.call(());
+                m.failures.push(request);
+                m.save_failures.call(());
             }
         });
         extractor
+    }
+
+    pub fn init(&mut self) -> Result<()> {
+        let cached = SEELEN_COMMON.app_cache_dir().join("icon_failures.yml");
+        if cached.exists() {
+            let buff = std::fs::read(cached)?;
+            let failures = serde_yaml::from_slice::<Vec<IconExtractorRequest>>(&buff)?;
+            self.failures = failures.into();
+        }
+        Ok(())
     }
 
     pub fn instance() -> &'static IconExtractor {
@@ -64,10 +72,7 @@ impl IconExtractor {
         &ICON_EXTRACTOR
     }
 
-    pub fn request(request: IconExtractorRequest) {
-        if Self::instance().failures.contains(&request) {
-            return;
-        }
+    pub fn request(&self, request: IconExtractorRequest) {
         Self::send(request);
     }
 

@@ -1,78 +1,79 @@
 <script lang="ts">
   import type { StartMenuItem } from "@seelen-ui/lib/types";
+  import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { globalState } from "../state.svelte";
-  import { t } from "../i18n";
+  import { useSortable } from "@dnd-kit-svelte/svelte/sortable";
+  import { useDraggable, useDroppable } from "@dnd-kit-svelte/svelte";
 
   interface Props {
     item: StartMenuItem;
     idx: number;
-    pinned?: boolean;
-    class?: string;
+    onContextMenu: (event: MouseEvent, itemId: string) => void;
+    draggable?: boolean;
+    isActiveDropzone?: boolean;
+    isInsideFolder?: boolean;
   }
 
-  let { item, idx, pinned = false, class: className = "" }: Props = $props();
+  let {
+    item,
+    idx,
+    onContextMenu,
+    draggable = true,
+    isActiveDropzone = false,
+    isInsideFolder = false,
+  }: Props = $props();
 
   const itemId = $derived(item.umid || item.path);
   const isPreselected = $derived(
-    globalState.preselectedItem === itemId ||
-    (idx === 0 && !globalState.preselectedItem)
+    globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem)
   );
 
-  let contextMenuVisible = $state(false);
-  let contextMenuX = $state(0);
-  let contextMenuY = $state(0);
+  /* const sortableData = useSortable({
+    id: () => itemId,
+    index: () => idx,
+    disabled: () => !sortable || true,
+    type: "app",
+  }); */
+
+  const draggableData = useDraggable({
+    id: () => itemId,
+    disabled: () => !draggable,
+    type: () => isInsideFolder ? "folder-item" : "app",
+  });
+
+  const dropableData = useDroppable({
+    id: () => itemId,
+    accept: ["app", "folder"],
+    type: "dropzone",
+    disabled: () => isInsideFolder,
+  });
+
+  function handleClick(event: MouseEvent) {
+    globalState.showing = false; // inmediate close
+    if (item.umid) {
+      invoke(SeelenCommand.OpenFile, { path: `shell:AppsFolder\\${item.umid}` });
+    } else if (item.path) {
+      invoke(SeelenCommand.OpenFile, { path: item.path });
+    }
+  }
 
   function handleContextMenu(event: MouseEvent) {
-    event.preventDefault();
-    contextMenuX = event.clientX;
-    contextMenuY = event.clientY;
-    contextMenuVisible = true;
+    onContextMenu(event, itemId);
   }
 
-  function handleTogglePin() {
-    globalState.togglePin(item);
-    contextMenuVisible = false;
-  }
-
-  function handleClick() {
-    // TODO: Launch application
-  }
-
-  function handleClickOutside(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    if (!target.closest(".context-menu")) {
-      contextMenuVisible = false;
-    }
-  }
-
-  $effect(() => {
-    if (contextMenuVisible) {
-      document.addEventListener("click", handleClickOutside);
-      // document.addEventListener("contextmenu", handleClickOutside);
-
-      return () => {
-        document.removeEventListener("click", handleClickOutside);
-        // document.removeEventListener("contextmenu", handleClickOutside);
-      };
-    }
-    return undefined;
-  });
+  // class:is-dragging={sortableData.isDragging.current}
 </script>
 
-<div
+<button
+  {@attach dropableData.ref}
+  {@attach draggableData.ref}
+  data-item-id={itemId}
   class="app-item"
   class:preselected={isPreselected && globalState.searchQuery}
-  data-item-id={itemId}
+  class:is-drop-target={isActiveDropzone}
   onclick={handleClick}
   oncontextmenu={handleContextMenu}
-  role="button"
-  tabindex="0"
-  onkeydown={(e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.currentTarget.click();
-    }
-  }}
   onfocus={() => {
     globalState.preselectedItem = itemId;
   }}
@@ -81,31 +82,4 @@
   <div class="app-item-name" title={item.display_name}>
     {item.display_name}
   </div>
-</div>
-
-{#if contextMenuVisible}
-  <div
-    class="context-menu"
-    style="left: {contextMenuX}px; top: {contextMenuY}px;"
-    onclick={(e) => e.stopPropagation()}
-    oncontextmenu={(e) => e.stopPropagation()}
-    role="menu"
-    tabindex="0"
-    onkeydown={(e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.currentTarget.click();
-      }
-    }}
-  >
-    <button class="context-menu-item" onclick={handleTogglePin}>
-      {pinned || globalState.isPinned(item) ? $t("unpin") : $t("pin")}
-    </button>
-  </div>
-{/if}
-
-<style>
-  :global(.context-menu) {
-    position: fixed;
-    z-index: 1000;
-  }
-</style>
+</button>

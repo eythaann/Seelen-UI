@@ -1,4 +1,5 @@
 all: Alle apps
+folder: Mappe
 no_apps: Ingen apps fundet
 no_pinned_apps: Ingen fastgjorte apps
 pin: Stift

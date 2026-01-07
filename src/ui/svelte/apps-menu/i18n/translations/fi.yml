@@ -1,4 +1,5 @@
 all: Kaikki sovellukset
+folder: Kansio
 no_apps: Sovelluksia ei löytynyt
 no_pinned_apps: Ei kiinnitettyjä sovelluksia
 pin: Pin

@@ -1,4 +1,5 @@
 all: Tüm Uygulamalar
+folder: Klasör
 no_apps: Hiçbir uygulama bulunamadı
 no_pinned_apps: Sabitlenmiş uygulama yok
 pin: Sabitle

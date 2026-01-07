@@ -1,4 +1,5 @@
 all: 所有應用程序
+folder: 資料夾
 no_apps: 沒有找到應用程序
 no_pinned_apps: 沒有固定的應用程序
 pin: 別針

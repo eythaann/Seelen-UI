@@ -1,4 +1,5 @@
 all: Totes les aplicacions
+folder: Carpeta
 no_apps: No s'ha trobat cap aplicació
 no_pinned_apps: No hi ha aplicacions fixades
 pin: Pin

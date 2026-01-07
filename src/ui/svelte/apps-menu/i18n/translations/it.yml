@@ -1,4 +1,5 @@
 all: Tutte le app
+folder: Cartella
 no_apps: Nessuna app trovata
 no_pinned_apps: Nessuna app bloccata
 pin: Spillo

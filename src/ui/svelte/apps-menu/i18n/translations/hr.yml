@@ -1,4 +1,5 @@
 all: Sve aplikacije
+folder: Mapa
 no_apps: Nema pronađenih aplikacija
 no_pinned_apps: Nema prikvačenih aplikacija
 pin: Pin

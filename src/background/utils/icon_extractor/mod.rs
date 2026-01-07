@@ -548,9 +548,9 @@ fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
 }
 
 pub fn request_icon_extraction_from_file<T: AsRef<Path>>(path: T) {
-    IconExtractor::request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
+    IconExtractor::instance().request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
 }
 
 pub fn request_icon_extraction_from_umid(aumid: &AppUserModelId) {
-    IconExtractor::request(IconExtractorRequest::AppUMID(aumid.clone()));
+    IconExtractor::instance().request(IconExtractorRequest::AppUMID(aumid.clone()));
 }

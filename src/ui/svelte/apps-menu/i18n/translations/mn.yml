@@ -1,4 +1,5 @@
 all: Бүх програмууд
+folder: Хавтас
 no_apps: Ямар ч програм олдсонгүй
 no_pinned_apps: Тогтсон апп алга
 pin: Pin

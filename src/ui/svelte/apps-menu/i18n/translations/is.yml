@@ -1,4 +1,5 @@
 all: Öll forrit
+folder: Mappa
 no_apps: Engin forrit fundust
 no_pinned_apps: Engin fest forrit
 pin: Pinna

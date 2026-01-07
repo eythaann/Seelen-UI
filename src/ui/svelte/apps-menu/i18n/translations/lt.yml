@@ -1,4 +1,5 @@
 all: Visos programos
+folder: Aplankas
 no_apps: Nerasta jokių programų
 no_pinned_apps: Nėra prisegtų programų
 pin: Smeigtukas

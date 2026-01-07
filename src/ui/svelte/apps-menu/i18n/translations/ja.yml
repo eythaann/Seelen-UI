@@ -1,4 +1,5 @@
 all: すべてのアプリ
+folder: フォルダー
 no_apps: アプリが見つかりませんでした
 no_pinned_apps: 固定されたアプリはありません
 pin: ピン

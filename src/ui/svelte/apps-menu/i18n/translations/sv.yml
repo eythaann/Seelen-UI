@@ -1,4 +1,5 @@
 all: Alla appar
+folder: Mapp
 no_apps: Inga appar hittades
 no_pinned_apps: Inga fästa appar
 pin: Stift

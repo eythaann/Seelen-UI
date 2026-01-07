@@ -3,7 +3,7 @@
   import { RadioDeviceKind, type RadioDevice } from "@seelen-ui/lib/types";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { state } from "../state.svelte";
-  import type { IconName } from "@icons";
+  import type { IconName } from "libs/ui/icons";
 
   function getRadioIcon(kind: RadioDeviceKind): IconName {
     switch (kind) {

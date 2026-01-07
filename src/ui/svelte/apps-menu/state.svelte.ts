@@ -11,62 +11,177 @@ const startMenuItems = lazyRune(() => invoke(SeelenCommand.GetStartMenuItems));
 await subscribe(SeelenEvent.StartMenuItemsChanged, startMenuItems.setByPayload);
 await startMenuItems.init();
 
-// Pinned items stored in localStorage
-const PINNED_STORAGE_KEY = "seelen-apps-menu-pinned";
-
-function loadPinnedItems(): string[] {
-  try {
-    const stored = localStorage.getItem(PINNED_STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
+// Folder and pinned items types
+export interface FavFolderItem {
+  type: "folder";
+  itemId: string;
+  name: string;
+  itemIds: string[];
 }
 
-function savePinnedItems(pinned: string[]) {
-  localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(pinned));
+export interface FavAppItem {
+  type: "app";
+  itemId: string;
 }
+
+export type FavPinnedItem = FavAppItem | FavFolderItem;
+
+const pinnedItems = persistentRune<FavPinnedItem[]>("pinned", []);
 
 // Get unique identifier for an item
 function getItemId(item: StartMenuItem): string {
   return item.umid || item.path;
 }
 
-// Pinned items state (array of item IDs)
-let pinnedItemIds = $state<string[]>(loadPinnedItems());
-
-const pinnedItems = $derived.by(() => {
-  const items = startMenuItems.value;
-  return pinnedItemIds
-    .map((id) => items.find((item) => getItemId(item) === id))
-    .filter((item): item is StartMenuItem => item !== undefined);
-});
-
-// Check if item is pinned
+// Check if an item is pinned
 function isPinned(item: StartMenuItem): boolean {
-  return pinnedItemIds.includes(getItemId(item));
+  const itemId = getItemId(item);
+  return pinnedItems.value.some((pinned) => {
+    if (pinned.type === "app") {
+      return pinned.itemId === itemId;
+    } else {
+      return pinned.itemIds.includes(itemId);
+    }
+  });
 }
 
-// Toggle pin status
-function togglePin(item: StartMenuItem) {
-  const id = getItemId(item);
+// Toggle pin status of an item
+function togglePin(item: StartMenuItem): void {
+  const itemId = getItemId(item);
+  const currentPinned = pinnedItems.value;
+
   if (isPinned(item)) {
-    pinnedItemIds = pinnedItemIds.filter((pinnedId) => pinnedId !== id);
+    // Unpin: remove from apps or folders
+    pinnedItems.value = currentPinned
+      .map((pinned) => {
+        if (pinned.type === "app") {
+          return pinned.itemId === itemId ? null : pinned;
+        } else {
+          const newItemIds = pinned.itemIds.filter((id) => id !== itemId);
+          // Remove folder if it has less than 2 items
+          if (newItemIds.length < 2) {
+            return null;
+          }
+          return { ...pinned, itemIds: newItemIds };
+        }
+      })
+      .filter((item): item is FavPinnedItem => item !== null);
   } else {
-    pinnedItemIds = [...pinnedItemIds, id];
+    // Pin: add as app item
+    pinnedItems.value = [...currentPinned, { type: "app", itemId: itemId }];
   }
-  savePinnedItems(pinnedItemIds);
+}
+
+// Update entire pinned items array
+function updatePinnedItems(items: FavPinnedItem[]): void {
+  pinnedItems.value = items;
+}
+
+// Create a new folder from two app items at a specific position
+function createFolder(itemId1: string, itemId2: string, targetIdx?: number): FavFolderItem {
+  const newFolder: FavFolderItem = {
+    type: "folder",
+    itemId: crypto.randomUUID(),
+    name: "",
+    itemIds: [itemId1, itemId2],
+  };
+
+  // Remove both items if they exist as standalone apps
+  const filtered = pinnedItems.value.filter(
+    (item) => !(item.type === "app" && (item.itemId === itemId1 || item.itemId === itemId2)),
+  );
+
+  // Insert folder at target position or at end
+  if (targetIdx !== undefined && targetIdx >= 0 && targetIdx <= filtered.length) {
+    const before = filtered.slice(0, targetIdx);
+    const after = filtered.slice(targetIdx);
+    pinnedItems.value = [...before, newFolder, ...after];
+  } else {
+    pinnedItems.value = [...filtered, newFolder];
+  }
+
+  return newFolder;
+}
+
+// Add an item to an existing folder
+function addItemToFolder(folderId: string, itemId: string): void {
+  pinnedItems.value = pinnedItems.value.map((pinned) => {
+    if (pinned.type === "folder" && pinned.itemId === folderId) {
+      // Check if item already exists in folder
+      if (!pinned.itemIds.includes(itemId)) {
+        return { ...pinned, itemIds: [...pinned.itemIds, itemId] };
+      }
+    }
+    return pinned;
+  });
+
+  // Remove the item if it exists as standalone app
+  pinnedItems.value = pinnedItems.value.filter(
+    (item) => !(item.type === "app" && item.itemId === itemId),
+  );
+}
+
+// Update folder properties
+function updateFolder(
+  folderId: string,
+  updates: Partial<Omit<FavFolderItem, "type" | "id">>,
+): void {
+  pinnedItems.value = pinnedItems.value.map((pinned) => {
+    if (pinned.type === "folder" && pinned.itemId === folderId) {
+      return { ...pinned, ...updates };
+    }
+    return pinned;
+  });
+}
+
+// Merge source folder into target folder
+function mergeFolders(sourceFolderId: string, targetFolderId: string): void {
+  const sourceFolder = pinnedItems.value.find(
+    (item) => item.type === "folder" && item.itemId === sourceFolderId,
+  ) as FavFolderItem | undefined;
+
+  if (!sourceFolder) {
+    return;
+  }
+
+  // Add all items from source folder to target folder
+  pinnedItems.value = pinnedItems.value.map((pinned) => {
+    if (pinned.type === "folder" && pinned.itemId === targetFolderId) {
+      // Merge items, avoiding duplicates
+      const mergedItemIds = [...new Set([...pinned.itemIds, ...sourceFolder.itemIds])];
+      return { ...pinned, itemIds: mergedItemIds };
+    }
+    return pinned;
+  });
+
+  // Remove the source folder
+  pinnedItems.value = pinnedItems.value.filter(
+    (item) => !(item.type === "folder" && item.itemId === sourceFolderId),
+  );
 }
 
 // Verify pinned items still exist
 function verifyPinnedItems() {
   const items = startMenuItems.value;
   const validIds = new Set(items.map(getItemId));
-  const validPinned = pinnedItemIds.filter((id) => validIds.has(id));
 
-  if (validPinned.length !== pinnedItemIds.length) {
-    pinnedItemIds = validPinned;
-    savePinnedItems(pinnedItemIds);
+  const validPinned = pinnedItems.value
+    .map((pinned) => {
+      if (pinned.type === "app") {
+        return validIds.has(pinned.itemId) ? pinned : null;
+      } else {
+        const validItemIds = pinned.itemIds.filter((id) => validIds.has(id));
+        // Remove folder if it has less than 2 items
+        if (validItemIds.length < 2) {
+          return null;
+        }
+        return { ...pinned, itemIds: validItemIds };
+      }
+    })
+    .filter((item): item is FavPinnedItem => item !== null);
+
+  if (validPinned.length !== pinnedItems.value.length) {
+    pinnedItems.value = validPinned;
   }
 }
 
@@ -81,6 +196,11 @@ class State {
   isPinned = isPinned;
   togglePin = togglePin;
   getItemId = getItemId;
+  updatePinnedItems = updatePinnedItems;
+  createFolder = createFolder;
+  addItemToFolder = addItemToFolder;
+  updateFolder = updateFolder;
+  mergeFolders = mergeFolders;
 
   desiredMonitorId = $state<string | null>(null);
   showing = $state(false);
@@ -95,7 +215,11 @@ class State {
   }
 
   get pinnedItems() {
-    return pinnedItems;
+    return pinnedItems.value;
+  }
+
+  set pinnedItems(value: FavPinnedItem[]) {
+    pinnedItems.value = value;
   }
 
   get allItems() {
@@ -109,17 +233,11 @@ class State {
   set displayMode(value: StartDisplayMode) {
     this.#displayMode.value = value;
   }
+
+  // Get StartMenuItem by ID
+  getMenuItem(id: string): StartMenuItem | undefined {
+    return this.allItems.find((item) => getItemId(item) === id);
+  }
 }
 
 export const globalState = new State();
-
-/* $effect.root(() => {
-  $effect(() => {
-    if (globalState.displayMode === StartDisplayMode.Fullscreen) {
-      Widget.getCurrent().webview.setShadow(false);
-    } else {
-      Widget.getCurrent().webview.setShadow(true);
-    }
-  });
-});
- */

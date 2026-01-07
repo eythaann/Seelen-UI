@@ -1,4 +1,5 @@
 all: Toate aplicațiile
+folder: Dosar
 no_apps: Nu s-au găsit aplicații
 no_pinned_apps: Fără aplicații fixate
 pin: Pin

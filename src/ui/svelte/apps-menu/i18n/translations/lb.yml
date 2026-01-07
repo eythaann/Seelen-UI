@@ -1,4 +1,5 @@
 all: All Apps
+folder: Dossier
 no_apps: Keng Apps fonnt
 no_pinned_apps: Keng gespaarten Apps
 pin: Pin

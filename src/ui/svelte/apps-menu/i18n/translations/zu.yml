@@ -1,4 +1,5 @@
 all: Zonke Izinhlelo zokusebenza
+folder: Ifolda
 no_apps: Azikho izinhlelo zokusebenza ezitholiwe
 no_pinned_apps: Azikho izinhlelo zokusebenza eziphiniwe
 pin: Phina

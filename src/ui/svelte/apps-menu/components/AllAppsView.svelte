@@ -4,6 +4,13 @@
   import { t } from "../i18n";
   import AppItem from "./AppItem.svelte";
   import * as fuzzySearch from "@m31coding/fuzzy-search";
+  import { DragDropProvider } from "@dnd-kit-svelte/svelte";
+
+  interface Props {
+    onContextMenu: (event: MouseEvent, itemId: string) => void;
+  }
+
+  let { onContextMenu }: Props = $props();
 
   // this only will change when start items change
   const items = $derived.by(() => {
@@ -27,30 +34,37 @@
     searcher.indexEntities(
       items,
       (item) => `${item.path}_${item.umid}`,
-      (item) => [item.display_name, item.path, item.umid || ""]
+      (item) => {
+        let terms = [item.display_name];
+        /* let parts = item.path.split(/[\\/]/g);
+        terms.push(parts.slice(-3).join(" ")); */
+        return terms;
+      }
     );
     return searcher;
   });
 
   const filteredItems = $derived.by(() => {
     if (globalState.searchQuery) {
-      let result = searcher.getMatches(new fuzzySearch.Query(globalState.searchQuery));
+      let result = searcher.getMatches(new fuzzySearch.Query(globalState.searchQuery, 21));
       return result.matches.map((match) => match.entity);
     }
     return items;
   });
 </script>
 
-<div class="all-apps-view">
-  <div class="all-apps-view-list">
-    {#each filteredItems as item, idx (item.umid || item.path)}
-      <AppItem {item} {idx} class="all-apps-view-item" />
-    {/each}
-  </div>
-
-  {#if filteredItems.length === 0 && globalState.searchQuery.length > 0}
-    <div class="all-apps-view-empty">
-      {$t("no_matching_items")}
+<DragDropProvider>
+  <div class="all-apps-view">
+    <div class="all-apps-view-list">
+      {#each filteredItems as item, idx (item.umid || item.path)}
+        <AppItem {item} {idx} {onContextMenu} draggable={false} />
+      {/each}
     </div>
-  {/if}
-</div>
+
+    {#if filteredItems.length === 0 && globalState.searchQuery.length > 0}
+      <div class="all-apps-view-empty">
+        {$t("no_matching_items")}
+      </div>
+    {/if}
+  </div>
+</DragDropProvider>

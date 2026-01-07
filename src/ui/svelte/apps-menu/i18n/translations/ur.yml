@@ -1,4 +1,5 @@
 all: تمام ایپس
+folder: فولڈر
 no_apps: کوئی ایپس نہیں ملی
 no_pinned_apps: کوئی پنڈ ایپس نہیں
 pin: پن

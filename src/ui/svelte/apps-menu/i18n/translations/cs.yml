@@ -1,4 +1,5 @@
 all: Všechny aplikace
+folder: Složka
 no_apps: Nebyly nalezeny žádné aplikace
 no_pinned_apps: Žádné připnuté aplikace
 pin: Kolík

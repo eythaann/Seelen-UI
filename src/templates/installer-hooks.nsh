@@ -15,12 +15,12 @@
     RMDir /r "$INSTDIR\static"
   ${EndIf}
 
-  FILE /a "${__FILEDIR__}\..\..\sluhk.dll" ;
+  File /a "${__FILEDIR__}\..\..\sluhk.dll" ;
 
   ; Include PDB file only for nightly builds
   ${StrLoc} $0 "${VERSION}" "nightly" ">"
   ${If} $0 != ""
-    FILE /a "${__FILEDIR__}\..\..\seelen_ui.pdb"
+    File /a "${__FILEDIR__}\..\..\seelen_ui.pdb"
   ${EndIf}
 !macroend
 

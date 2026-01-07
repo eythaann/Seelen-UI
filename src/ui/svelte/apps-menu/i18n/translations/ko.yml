@@ -1,4 +1,5 @@
 all: 모든 앱
+folder: 폴더
 no_apps: 앱을 찾을 수 없습니다.
 no_pinned_apps: 고정된 앱 없음
 pin: 핀

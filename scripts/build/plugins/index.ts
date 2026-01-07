@@ -42,3 +42,59 @@ export function createCopyPublicPlugin(appFolders: string[]): esbuild.Plugin {
     },
   };
 }
+
+/**
+ * Logger plugin to track build lifecycle events
+ * - Logs build start with framework name
+ * - Logs build completion with timing and result status
+ * - Logs errors and warnings if any occur
+ */
+export function createLoggerPlugin(
+  frameworkName: string,
+  entryPointsCount: number,
+  isWatchMode: boolean,
+): esbuild.Plugin {
+  let startTime = 0;
+
+  return {
+    name: "logger",
+    setup(build) {
+      build.onStart(() => {
+        startTime = Date.now();
+        const mode = isWatchMode ? "watch" : "build";
+        console.info(
+          `⚙  ${frameworkName}: Starting ${mode} for ${entryPointsCount} app${entryPointsCount !== 1 ? "s" : ""}...`,
+        );
+      });
+
+      build.onEnd((result) => {
+        const duration = Date.now() - startTime;
+        const hasErrors = result.errors.length > 0;
+        const hasWarnings = result.warnings.length > 0;
+
+        if (hasErrors) {
+          console.error(
+            `✗ ${frameworkName}: Build failed with ${result.errors.length} error${
+              result.errors.length !== 1 ? "s" : ""
+            } (${duration}ms)`,
+          );
+          return;
+        }
+
+        if (hasWarnings) {
+          console.warn(
+            `⚠ ${frameworkName}: Built with ${result.warnings.length} warning${
+              result.warnings.length !== 1 ? "s" : ""
+            } (${duration}ms)`,
+          );
+        }
+
+        if (isWatchMode) {
+          console.info(`✓ ${frameworkName}: Watching for changes (${duration}ms)`);
+        } else {
+          console.info(`✓ ${frameworkName}: Build completed (${duration}ms)`);
+        }
+      });
+    },
+  };
+}

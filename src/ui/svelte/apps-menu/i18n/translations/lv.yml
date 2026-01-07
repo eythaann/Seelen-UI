@@ -1,4 +1,5 @@
 all: Visas lietotnes
+folder: Mape
 no_apps: Nav atrasta neviena lietotne
 no_pinned_apps: Nav piespraustu lietotņu
 pin: Piespraust

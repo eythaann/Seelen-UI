@@ -1,4 +1,5 @@
 all: Minden alkalmazás
+folder: Mappa
 no_apps: Nem találhatók alkalmazások
 no_pinned_apps: Nincsenek rögzített alkalmazások
 pin: Pin

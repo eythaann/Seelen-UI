@@ -42,7 +42,7 @@
 
 {#if defaultOutput}
   <div class="quick-settings-item">
-    <button data-skin="transparent" onclick={() => toggleMute(defaultOutput.id)}>
+    <button data-skin="transparent" onclick={() => toggleMute(defaultOutput!.id)}>
       <Icon
         iconName={defaultOutput.muted ? "IoVolumeMuteOutline" : "IoVolumeHighOutline"}
         size={20}
@@ -52,7 +52,7 @@
       type="range"
       data-skin="flat"
       value={defaultOutput.volume}
-      oninput={(e) => onVolumeChange(defaultOutput.id, e)}
+      oninput={(e) => onVolumeChange(defaultOutput!.id, e)}
       min={0}
       max={1}
       step={0.01}
@@ -65,14 +65,14 @@
 
 {#if defaultInput}
   <div class="quick-settings-item">
-    <button data-skin="transparent" onclick={() => toggleMute(defaultInput.id)}>
+    <button data-skin="transparent" onclick={() => toggleMute(defaultInput!.id)}>
       <Icon iconName={defaultInput.muted ? "BiMicrophoneOff" : "BiMicrophone"} size={20} />
     </button>
     <input
       type="range"
       data-skin="flat"
       value={defaultInput.volume}
-      oninput={(e) => onVolumeChange(defaultInput.id, e)}
+      oninput={(e) => onVolumeChange(defaultInput!.id, e)}
       min={0}
       max={1}
       step={0.01}

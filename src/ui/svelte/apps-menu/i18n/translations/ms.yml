@@ -1,4 +1,5 @@
 all: Semua Apl
+folder: Folder
 no_apps: Tiada apl ditemui
 no_pinned_apps: Tiada apl yang disematkan
 pin: Pin

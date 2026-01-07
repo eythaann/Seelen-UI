@@ -1,4 +1,5 @@
 all: Todos os aplicativos
+folder: Pasta
 no_apps: Nenhum aplicativo encontrado
 no_pinned_apps: Nenhum aplicativo fixado
 pin: Alfinete

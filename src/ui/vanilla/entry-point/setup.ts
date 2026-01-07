@@ -43,20 +43,64 @@ export function removeDefaultWebviewActions(): void {
 
 export function applyUserExperienceImprovements(): void {
   document.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.defaultPrevented) return;
     if (e.key !== "Enter" && e.key !== " ") return;
 
     const target = e.target as HTMLElement;
     if (target.getAttribute("role") !== "button") return;
 
+    target.dataset["ux-active"] = "true";
+  });
+
+  document.addEventListener("keyup", (e: KeyboardEvent) => {
     if (e.defaultPrevented) return;
-    e.preventDefault();
+    if (e.key !== "Enter" && e.key !== " ") return;
 
-    target.classList.add("pressed");
-    target.click();
+    const target = e.target as HTMLElement;
+    if (target.getAttribute("role") !== "button") return;
 
-    // Remover la clase después de la animación
-    setTimeout(() => {
-      target.classList.remove("simulated-active");
-    }, 150);
+    if (target.dataset["ux-active"] !== "true") {
+      target.dataset["ux-active"] = "false";
+
+      if ("click" in target) {
+        target.click();
+      }
+    }
+  });
+}
+
+/** The purpose of this is avoid collition of keys, taking in care that all widgets share same origin */
+export function hookLocalStorage(widgetId: string) {
+  const nativeLocalStorage = window.localStorage;
+
+  class MyLocalStorage implements Storage {
+    get length() {
+      return nativeLocalStorage.length;
+    }
+
+    setItem(key: string, value: string) {
+      nativeLocalStorage.setItem(`${widgetId}:${key}`, value);
+    }
+
+    getItem(key: string) {
+      return nativeLocalStorage.getItem(`${widgetId}:${key}`);
+    }
+
+    removeItem(key: string) {
+      nativeLocalStorage.removeItem(`${widgetId}:${key}`);
+    }
+
+    key(index: number) {
+      return nativeLocalStorage.key(index);
+    }
+
+    clear() {
+      nativeLocalStorage.clear();
+    }
+  }
+
+  Object.defineProperty(window, "localStorage", {
+    value: new MyLocalStorage(),
+    writable: true,
   });
 }

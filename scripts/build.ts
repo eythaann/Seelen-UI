@@ -43,7 +43,6 @@ async function main() {
   const allAppFolders = entryPoints.map((entry) => entry.folder);
 
   // Step 4: Build all frameworks in parallel
-  console.info("Starting parallel builds...\n");
   console.time("Total build time");
 
   await Promise.all([

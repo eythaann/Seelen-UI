@@ -1,4 +1,5 @@
 all: L-Apps kollha
+folder: Folder
 no_apps: Ma nstabet l-ebda app
 no_pinned_apps: Ebda apps ippinjat
 pin: Pin

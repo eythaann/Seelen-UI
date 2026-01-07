@@ -1,4 +1,5 @@
 all: 所有应用程序
+folder: 文件夹
 no_apps: 没有找到应用程序
 no_pinned_apps: 没有固定的应用程序
 pin: 别针

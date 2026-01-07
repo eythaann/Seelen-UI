@@ -1,4 +1,5 @@
 all: Alle apps
+folder: Map
 no_apps: Geen apps gevonden
 no_pinned_apps: Geen vastgezette apps
 pin: Pin

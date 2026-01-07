@@ -1,4 +1,5 @@
 all: Ҳама Барномаҳо
+folder: Ҷузвдон
 no_apps: Ягон барнома ёфт нашуд
 no_pinned_apps: Ягон барномаҳои pinned
 pin: Пин

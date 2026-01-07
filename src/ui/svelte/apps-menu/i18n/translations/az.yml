@@ -1,4 +1,5 @@
 all: Bütün Proqramlar
+folder: Qovluq
 no_apps: Heç bir proqram tapılmadı
 no_pinned_apps: Saxlanmış proqram yoxdur
 pin: Pin

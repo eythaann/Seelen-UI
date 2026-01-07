@@ -1,4 +1,5 @@
 all: Semua Aplikasi
+folder: Folder
 no_apps: Tidak ada aplikasi yang ditemukan
 no_pinned_apps: Tidak ada aplikasi yang disematkan
 pin: Pin

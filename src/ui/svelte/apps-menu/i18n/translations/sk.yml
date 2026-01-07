@@ -1,4 +1,5 @@
 all: Všetky aplikácie
+folder: Priečinok
 no_apps: Nenašli sa žiadne aplikácie
 no_pinned_apps: Žiadne pripnuté aplikácie
 pin: Pin

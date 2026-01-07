@@ -1,4 +1,5 @@
 all: Tất cả ứng dụng
+folder: Thư mục
 no_apps: Không tìm thấy ứng dụng nào
 no_pinned_apps: Không có ứng dụng nào được ghim
 pin: Ghim

@@ -54,6 +54,7 @@
             pin: pinInput || null,
             username: usernameInput || null,
             password: passwordInput || null,
+            address: null,
           },
         });
         pairingAction = null;
@@ -80,6 +81,7 @@
           pin: null,
           username: null,
           password: null,
+          address: null,
         },
       }).catch((e) => {
         console.error("Cancel pairing error:", e);
@@ -107,6 +109,8 @@
         return $t("provide_password");
       case "ProvideAddress":
         return $t("provide_address");
+      case "None":
+        return "";
     }
   }
 

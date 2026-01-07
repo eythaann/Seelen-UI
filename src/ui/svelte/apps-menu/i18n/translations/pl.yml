@@ -1,4 +1,5 @@
 all: Wszystkie aplikacje
+folder: Folder
 no_apps: Nie znaleziono aplikacji
 no_pinned_apps: Brak przypiętych aplikacji
 pin: Szpilka
