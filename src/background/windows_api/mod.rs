@@ -7,7 +7,6 @@ mod iterator;
 pub mod monitor;
 pub mod process;
 pub mod string_utils;
-pub mod traits;
 pub mod types;
 pub mod undocumented;
 pub mod window;

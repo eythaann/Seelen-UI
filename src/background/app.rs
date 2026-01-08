@@ -21,7 +21,7 @@ use crate::{
     },
     restoration_and_migrations::RestorationAndMigration,
     state::application::{FullState, FULL_STATE},
-    system::{declare_system_events_handlers, release_system_events_handlers},
+    system::declare_system_events_handlers,
     trace_lock,
     utils::discord::start_discord_rpc,
     widgets::{
@@ -184,7 +184,6 @@ impl Seelen {
     /// Stop and release all resources
     pub fn stop(&self) {
         SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
-        release_system_events_handlers();
     }
 
     fn add_monitor(&mut self, monitor_id: MonitorId) -> Result<()> {

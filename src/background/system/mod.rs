@@ -5,10 +5,8 @@ use crate::{
     error::Result,
     log_error,
     modules::{
-        apps::infrastructure::register_app_win_events,
-        language::register_language_events,
+        apps::infrastructure::register_app_win_events, language::register_language_events,
         network::infrastructure::register_network_events,
-        system_settings::infrastructure::{register_system_settings_events, release_colors_events},
         user::infrastructure::register_user_events,
     },
 };
@@ -23,13 +21,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
 
     register_app_win_events();
     register_user_events();
-    register_system_settings_events();
     register_language_events();
-    // power events are registered lazily on first access
+    // power and system_settings events are registered lazily on first access
     Ok(())
-}
-
-pub fn release_system_events_handlers() {
-    release_colors_events();
-    // power events are released automatically on drop
 }

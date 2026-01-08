@@ -69,11 +69,22 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
   - Uses `Arc<Mutex<>>` for thread-safe mutable state access from Windows callbacks
   - Proper separation between system logic (application.rs) and Tauri integration (infrastructure.rs)
 
+### 7. **system_settings** ✅
+
+- **File**: `src/background/modules/system_settings/infrastructure.rs`
+- **Pattern**: Uses `Once` for lazy event registration, LazyLock singleton with `instance()` method
+- **Status**: ✅ MODERN - Reference implementation
+- **Notes**:
+  - Migrated from `lazy_static!` to `LazyLock`
+  - Only stores i64 tokens, not TypedEventHandler instances
+  - Proper separation between system logic (application.rs) and Tauri integration (infrastructure.rs)
+  - Removed unnecessary thread spawn from event registration
+
 ---
 
 ## ❌ Modules Requiring Migration (Legacy Pattern)
 
-### 7. **network** ❌
+### 8. **network** ❌
 
 - **File**: `src/background/modules/network/infrastructure.rs`
 - **Current Pattern**:
@@ -83,39 +94,32 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 - **Estimated Effort**: Low-Medium
 - **Notes**: Relatively straightforward migration
 
-### 8. **apps** ❌
+### 9. **apps** ❌
 
 - **File**: `src/background/modules/apps/infrastructure.rs`
 - **Current Pattern**: Unknown (needs analysis)
 - **Migration Priority**: MEDIUM
 - **Estimated Effort**: Unknown
 
-### 9. **user** ❌
+### 10. **user** ❌
 
 - **File**: `src/background/modules/user/infrastructure.rs`
 - **Current Pattern**: Unknown (needs analysis)
 - **Migration Priority**: MEDIUM
 - **Estimated Effort**: Unknown
 
-### 10. **language** ❌
+### 11. **language** ❌
 
 - **File**: `src/background/modules/language/infrastructure.rs`
 - **Current Pattern**: Unknown (needs analysis)
 - **Migration Priority**: LOW (less frequently used)
 - **Estimated Effort**: Unknown
 
-### 11. **input** ❌
+### 12. **input** ❌
 
 - **File**: `src/background/modules/input/infrastructure.rs`
 - **Current Pattern**: Unknown (needs analysis)
 - **Migration Priority**: LOW (specialized functionality)
-- **Estimated Effort**: Unknown
-
-### 12. **system_settings** ❌
-
-- **File**: `src/background/modules/system_settings/infrastructure.rs`
-- **Current Pattern**: Unknown (needs analysis)
-- **Migration Priority**: LOW
 - **Estimated Effort**: Unknown
 
 ### 13. **system_tray** ❌
