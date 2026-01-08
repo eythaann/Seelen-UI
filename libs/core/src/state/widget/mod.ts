@@ -259,7 +259,7 @@ export class Widget {
     const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${label}::${k}`));
 
     if (x && y) {
-      const pos = new PhysicalPosition(Number(x), Number(y));
+      const pos = new PhysicalPosition(Math.round(Number(x)), Math.round(Number(y)));
       // check if the stored position is still valid
       const monitor = await monitorFromPoint(pos.x, pos.y);
       if (monitor) {
@@ -268,7 +268,7 @@ export class Widget {
     }
 
     if (width && height) {
-      const size = new PhysicalSize(Number(width), Number(height));
+      const size = new PhysicalSize(Math.round(Number(width)), Math.round(Number(height)));
       await this.webview.setSize(size);
     }
 

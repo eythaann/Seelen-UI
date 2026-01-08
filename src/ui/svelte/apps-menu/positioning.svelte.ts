@@ -31,8 +31,8 @@ async function placeCenteredToMonitor(targetMonitor: PhysicalMonitor): Promise<v
   let height = monitorHeight;
 
   if (globalState.displayMode === StartDisplayMode.Normal) {
-    width = Math.min(monitorWidth * 0.6, 1200 * targetMonitor.scaleFactor);
-    height = Math.min(monitorHeight * 0.6, 1200 * targetMonitor.scaleFactor);
+    width = Math.round(Math.min(monitorWidth * 0.6, 1200 * targetMonitor.scaleFactor));
+    height = Math.round(Math.min(monitorHeight * 0.6, 1200 * targetMonitor.scaleFactor));
 
     const monitorCenterX = targetMonitor.rect.left + monitorWidth / 2;
     const monitorCenterY = targetMonitor.rect.top + monitorHeight / 2;
