@@ -19,7 +19,7 @@ use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
     modules::{
-        apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
+        apps::application::{UserAppWinEvent, UserAppsManager, USER_APPS_MANAGER},
         start::application::StartMenuManager,
     },
     state::application::FULL_STATE,
@@ -111,22 +111,21 @@ impl SeelenWegState {
         };
 
         UserAppsManager::subscribe(|e| match e {
-            UserAppsEvent::WinAdded(addr) => {
+            UserAppWinEvent::Added(addr) => {
                 let mut guard = trace_lock!(SEELEN_WEG_STATE);
                 guard.add(&Window::from(addr)).log_error();
                 guard.emit_to_webview().log_error();
             }
-            UserAppsEvent::WinUpdated(addr) => {
+            UserAppWinEvent::Updated(addr) => {
                 let mut guard = trace_lock!(SEELEN_WEG_STATE);
                 guard.update_window_info(&Window::from(addr));
                 guard.emit_to_webview().log_error();
             }
-            UserAppsEvent::WinRemoved(addr) => {
+            UserAppWinEvent::Removed(addr) => {
                 let mut guard = trace_lock!(SEELEN_WEG_STATE);
                 guard.remove(&Window::from(addr));
                 guard.emit_to_webview().log_error();
             }
-            _ => {}
         });
 
         USER_APPS_MANAGER.interactable_windows.for_each(|w| {

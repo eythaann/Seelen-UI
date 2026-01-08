@@ -7,7 +7,7 @@ use win_screenshot::prelude::capture_window;
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
-    modules::apps::application::{UserAppsEvent, UserAppsManager},
+    modules::apps::application::{UserAppWinEvent, UserAppsManager},
     utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap},
     windows_api::{window::Window, WindowsApi},
 };
@@ -53,15 +53,15 @@ impl WinPreviewManager {
         });
 
         UserAppsManager::subscribe(|e| match e {
-            UserAppsEvent::WinAdded(addr) => {
+            UserAppWinEvent::Added(addr) => {
                 let window = Window::from(addr);
                 WINDOWS_PREVIEWS.capture_window(&window).log_error();
             }
-            UserAppsEvent::WinUpdated(addr) => {
+            UserAppWinEvent::Updated(addr) => {
                 let window = Window::from(addr);
                 WINDOWS_PREVIEWS.capture_window(&window).log_error();
             }
-            UserAppsEvent::WinRemoved(addr) => {
+            UserAppWinEvent::Removed(addr) => {
                 if let Some(preview) = WINDOWS_PREVIEWS.previews.remove(&addr) {
                     if preview.path.exists() {
                         std::fs::remove_file(&preview.path).log_error();
@@ -69,7 +69,6 @@ impl WinPreviewManager {
                     Self::send(WinPreviewEvent::Cleaned(addr));
                 }
             }
-            _ => {}
         });
         Ok(())
     }

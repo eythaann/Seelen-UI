@@ -84,11 +84,23 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
     - Spawns dedicated thread for keyboard layout monitoring
     - Lazy initialization with modern pattern
 
+### 8. **apps** ✅
+
+- **File**: `src/background/modules/apps/infrastructure.rs`
+- **Pattern**: Uses `Once` for lazy event registration, LazyLock singleton with `instance()` method
+- **Status**: ✅ MODERN - Reference implementation
+- **Notes**:
+  - Already had modern architecture (LazyLock, SyncVec, instance method)
+  - Added lazy Tauri event registration with `Once` pattern
+  - Eliminated manual `register_app_win_events()` call
+  - Registers both UserAppsManager and WinPreviewManager events on first access
+  - Uses `SyncVec` for thread-safe window list management
+
 ---
 
 ## ❌ Modules Requiring Migration (Legacy Pattern)
 
-### 8. **network** ❌
+### 9. **network** ❌
 
 - **File**: `src/background/modules/network/infrastructure.rs`
 - **Current Pattern**:
@@ -97,13 +109,6 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 - **Migration Priority**: MEDIUM
 - **Estimated Effort**: Low-Medium
 - **Notes**: Relatively straightforward migration
-
-### 9. **apps** ❌
-
-- **File**: `src/background/modules/apps/infrastructure.rs`
-- **Current Pattern**: Unknown (needs analysis)
-- **Migration Priority**: MEDIUM
-- **Estimated Effort**: Unknown
 
 ### 10. **user** ❌
 

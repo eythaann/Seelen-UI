@@ -1,8 +1,8 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::Once};
 
 use seelen_core::{
     handlers::SeelenEvent,
-    system_state::{FocusedApp, UserAppWindow, UserAppWindowPreview, UserApplication},
+    system_state::{FocusedApp, UserAppWindow, UserAppWindowPreview},
 };
 use windows::Win32::UI::Shell::{IShellDispatch6, Shell};
 
@@ -10,24 +10,32 @@ use crate::{
     app::emit_to_webviews,
     error::Result,
     modules::{
-        apps::application::{previews::WinPreviewManager, UserAppsManager, USER_APPS_MANAGER},
+        apps::application::{previews::WinPreviewManager, UserAppsManager},
         input::Mouse,
     },
     windows_api::{window::Window, Com},
 };
 
-pub fn register_app_win_events() {
-    UserAppsManager::subscribe(|_event| {
-        let items = get_user_app_windows();
-        emit_to_webviews(SeelenEvent::UserAppWindowsChanged, items);
-    });
+/// Lazy initialization wrapper that registers Tauri events on first access
+/// This keeps Tauri logic separate from system logic while ensuring lazy initialization
+fn get_apps_manager() -> &'static UserAppsManager {
+    static TAURI_EVENT_REGISTRATION: Once = Once::new();
+    TAURI_EVENT_REGISTRATION.call_once(|| {
+        UserAppsManager::subscribe(|_event| {
+            emit_to_webviews(
+                SeelenEvent::UserAppWindowsChanged,
+                UserAppsManager::instance().interactable_windows.to_vec(),
+            );
+        });
 
-    WinPreviewManager::subscribe(|_| {
-        emit_to_webviews(
-            SeelenEvent::UserAppWindowsPreviewsChanged,
-            WinPreviewManager::instance().previews.to_hash_map(),
-        );
+        WinPreviewManager::subscribe(|_| {
+            emit_to_webviews(
+                SeelenEvent::UserAppWindowsPreviewsChanged,
+                WinPreviewManager::instance().previews.to_hash_map(),
+            );
+        });
     });
+    UserAppsManager::instance()
 }
 
 #[tauri::command(async)]
@@ -37,22 +45,18 @@ pub fn get_focused_app() -> FocusedApp {
 
 #[tauri::command(async)]
 pub fn get_mouse_position() -> [i32; 2] {
-    let point = Mouse::get_cursor_pos().unwrap_or_default();
+    let point: seelen_core::Point = Mouse::get_cursor_pos().unwrap_or_default();
     [point.x, point.y]
 }
 
 #[tauri::command(async)]
-pub fn get_user_applications() -> Vec<UserApplication> {
-    Vec::new()
-}
-
-#[tauri::command(async)]
 pub fn get_user_app_windows() -> Vec<UserAppWindow> {
-    USER_APPS_MANAGER.interactable_windows.to_vec()
+    get_apps_manager().interactable_windows.to_vec()
 }
 
 #[tauri::command(async)]
 pub fn get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview> {
+    get_apps_manager();
     WinPreviewManager::instance().previews.to_hash_map()
 }
 

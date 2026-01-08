@@ -55,7 +55,6 @@ slu_events_declaration! {
 
     UserChanged(User) as "user-changed",
     UserFolderChanged(FolderChangedArgs) as "user-folder-changed",
-    UserApplicationsChanged(Vec<UserApplication>) as "user::applications-changed",
     UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
     UserAppWindowsPreviewsChanged(HashMap<isize, UserAppWindowPreview>) as "user::windows-previews-changed",
 

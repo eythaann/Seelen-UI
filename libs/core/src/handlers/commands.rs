@@ -180,7 +180,6 @@ slu_commands_declaration! {
     GetUser = get_user() -> User,
     GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<File>,
     SetUserFolderLimit = set_user_folder_limit(folder_type: FolderType, amount: usize),
-    GerUserApplications = get_user_applications() -> Vec<UserApplication>,
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
     GetUserAppWindowsPreviews = get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview>,
 

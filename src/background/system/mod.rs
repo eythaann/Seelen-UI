@@ -5,7 +5,6 @@ use crate::{
     error::Result,
     log_error,
     modules::{
-        apps::infrastructure::register_app_win_events,
         network::infrastructure::register_network_events,
         user::infrastructure::register_user_events,
     },
@@ -19,8 +18,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
         log_error!(register_network_events());
     });
 
-    register_app_win_events();
     register_user_events();
-    // power, system_settings, and language events are registered lazily on first access
+    // power, system_settings, language, and apps events are registered lazily on first access
     Ok(())
 }

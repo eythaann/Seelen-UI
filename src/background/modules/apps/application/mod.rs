@@ -19,16 +19,13 @@ pub struct UserAppsManager {
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum UserAppsEvent {
-    WinAdded(isize),
-    WinUpdated(isize),
-    WinRemoved(isize),
-    AppAdded,
-    AppUpdated,
-    AppRemoved,
+pub enum UserAppWinEvent {
+    Added(isize),
+    Updated(isize),
+    Removed(isize),
 }
 
-event_manager!(UserAppsManager, UserAppsEvent);
+event_manager!(UserAppsManager, UserAppWinEvent);
 
 impl UserAppsManager {
     fn init() -> Self {
