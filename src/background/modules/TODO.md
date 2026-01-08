@@ -107,11 +107,23 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
   - Proper separation between system logic (application.rs) and Tauri integration (infrastructure.rs)
   - Events triggered from IPC handler now emit internal events instead of directly calling emit_to_webviews
 
+### 10. **user** ✅
+
+- **File**: `src/background/modules/user/infrastructure.rs`
+- **Pattern**: Uses `Once` for lazy event registration, LazyLock singleton with `instance()` method
+- **Status**: ✅ MODERN - Reference implementation
+- **Notes**:
+  - Migrated from `lazy_static!` + `Arc<Mutex<>>` to `LazyLock` pattern
+  - Moved `emit_to_webviews` from application layer to infrastructure layer
+  - Eliminated manual `register_user_events()` call
+  - Proper separation between system logic (application.rs) and Tauri integration (infrastructure.rs)
+  - Events now registered lazily on first Tauri command access
+
 ---
 
 ## ❌ Modules Requiring Migration (Legacy Pattern)
 
-### 10. **network** ❌
+### 11. **network** ❌
 
 - **File**: `src/background/modules/network/infrastructure.rs`
 - **Current Pattern**:
@@ -120,13 +132,6 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 - **Migration Priority**: MEDIUM
 - **Estimated Effort**: Low-Medium
 - **Notes**: Relatively straightforward migration
-
-### 11. **user** ❌
-
-- **File**: `src/background/modules/user/infrastructure.rs`
-- **Current Pattern**: Unknown (needs analysis)
-- **Migration Priority**: MEDIUM
-- **Estimated Effort**: Unknown
 
 ---
 

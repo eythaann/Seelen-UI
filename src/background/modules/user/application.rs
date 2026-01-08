@@ -1,4 +1,3 @@
-use lazy_static::lazy_static;
 use notify_debouncer_full::{
     new_debouncer,
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
@@ -10,7 +9,7 @@ use std::{
     collections::{HashMap, HashSet},
     os::windows::fs::MetadataExt,
     path::{Path, PathBuf},
-    sync::Arc,
+    sync::{Arc, LazyLock},
     time::Duration,
 };
 use tauri::Manager;
@@ -29,12 +28,6 @@ use crate::{
 };
 
 use super::domain::PictureQuality;
-
-lazy_static! {
-    pub static ref USER_MANAGER: Arc<Mutex<UserManager>> = Arc::new(Mutex::new(
-        UserManager::new().expect("Failed to create user manager")
-    ));
-}
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UserManagerEvent {
@@ -63,6 +56,15 @@ unsafe impl Send for UserManagerEvent {}
 event_manager!(UserManager, UserManagerEvent);
 
 impl UserManager {
+    pub fn instance() -> &'static Arc<Mutex<Self>> {
+        static USER_MANAGER: LazyLock<Arc<Mutex<UserManager>>> = LazyLock::new(|| {
+            Arc::new(Mutex::new(
+                UserManager::new().expect("Failed to create user manager"),
+            ))
+        });
+        &USER_MANAGER
+    }
+
     fn get_path_from_folder(folder_type: &FolderType) -> Option<PathBuf> {
         let resolver = get_app_handle().path();
         match folder_type {
@@ -204,7 +206,7 @@ impl UserManager {
                 continue;
             }
 
-            let mut guard = trace_lock!(USER_MANAGER);
+            let mut guard = trace_lock!(Self::instance());
             if let Some(model) = guard.folders.get_mut(&folder_type) {
                 model.content = Self::get_folder_content(model.path.clone(), model.limit)?;
                 log_error!(Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type)));

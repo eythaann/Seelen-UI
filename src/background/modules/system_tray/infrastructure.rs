@@ -15,7 +15,7 @@ fn get_system_tray_manager() -> &'static SystemTrayManager {
         SystemTrayManager::subscribe(|_event| {
             emit_to_webviews(
                 SeelenEvent::SystemTrayChanged,
-                get_system_tray_manager().icons(),
+                SystemTrayManager::instance().icons(),
             );
         });
     });
