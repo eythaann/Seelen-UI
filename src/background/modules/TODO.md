@@ -96,11 +96,22 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
   - Registers both UserAppsManager and WinPreviewManager events on first access
   - Uses `SyncVec` for thread-safe window list management
 
+### 9. **system_tray** ✅
+
+- **File**: `src/background/modules/system_tray/infrastructure.rs`
+- **Pattern**: Uses `Once` for lazy event registration, LazyLock singleton with `instance()` method
+- **Status**: ✅ MODERN - Reference implementation
+- **Notes**:
+  - Moved `emit_to_webviews` from application layer to infrastructure layer
+  - Added `SystemTrayEvent` enum with event_manager! macro
+  - Proper separation between system logic (application.rs) and Tauri integration (infrastructure.rs)
+  - Events triggered from IPC handler now emit internal events instead of directly calling emit_to_webviews
+
 ---
 
 ## ❌ Modules Requiring Migration (Legacy Pattern)
 
-### 9. **network** ❌
+### 10. **network** ❌
 
 - **File**: `src/background/modules/network/infrastructure.rs`
 - **Current Pattern**:
@@ -110,18 +121,11 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 - **Estimated Effort**: Low-Medium
 - **Notes**: Relatively straightforward migration
 
-### 10. **user** ❌
+### 11. **user** ❌
 
 - **File**: `src/background/modules/user/infrastructure.rs`
 - **Current Pattern**: Unknown (needs analysis)
 - **Migration Priority**: MEDIUM
-- **Estimated Effort**: Unknown
-
-### 12. **system_tray** ❌
-
-- **File**: `src/background/modules/system_tray/infrastructure.rs`
-- **Current Pattern**: Unknown (needs analysis)
-- **Migration Priority**: HIGH (core UI component)
 - **Estimated Effort**: Unknown
 
 ---

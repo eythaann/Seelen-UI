@@ -4,14 +4,11 @@ mod util;
 
 use std::sync::LazyLock;
 
-use seelen_core::{
-    handlers::SeelenEvent,
-    system_state::{SysTrayIcon, SysTrayIconId},
-};
+use seelen_core::system_state::{SysTrayIcon, SysTrayIconId};
 use slu_ipc::messages::Win32TrayEvent;
 
 use crate::{
-    app::emit_to_webviews, modules::system_tray::application::tray_hook_loader::TrayHookLoader,
+    event_manager, modules::system_tray::application::tray_hook_loader::TrayHookLoader,
     utils::lock_free::SyncHashMap,
 };
 
@@ -19,6 +16,13 @@ pub struct SystemTrayManager {
     icons: SyncHashMap<SysTrayIconId, SysTrayIcon>,
     _loader: Option<TrayHookLoader>,
 }
+
+#[derive(Debug, Clone)]
+pub enum SystemTrayEvent {
+    Changed,
+}
+
+event_manager!(SystemTrayManager, SystemTrayEvent);
 
 impl SystemTrayManager {
     fn create() -> Self {
@@ -48,7 +52,7 @@ impl SystemTrayManager {
     /// This method should be called from the AppIpc handler
     pub fn handle_tray_event(event: Win32TrayEvent) {
         if let Some(_event) = Self::instance().process_event(event) {
-            emit_to_webviews(SeelenEvent::SystemTrayChanged, Self::instance().icons());
+            Self::send(SystemTrayEvent::Changed);
         }
     }
 }
