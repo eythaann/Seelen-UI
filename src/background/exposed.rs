@@ -306,7 +306,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::widgets::*;
 
     use crate::modules::apps::infrastructure::*;
-    use crate::modules::language::*;
     use crate::modules::media::devices::infrastructure::*;
     use crate::modules::media::players::infrastructure::*;
     use crate::modules::monitors::infrastructure::*;
@@ -317,6 +316,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::modules::radios::handlers::*;
     use crate::modules::start::infrastructure::*;
     use crate::modules::system_settings::infrastructure::*;
+    use crate::modules::system_settings::language::infrastructure::*;
     use crate::modules::system_tray::infrastructure::*;
     use crate::modules::user::infrastructure::*;
 

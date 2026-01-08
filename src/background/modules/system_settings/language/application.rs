@@ -1,11 +1,9 @@
 use std::sync::{
     atomic::{AtomicUsize, Ordering},
-    Arc,
+    LazyLock,
 };
 
 use itertools::Itertools;
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
 use seelen_core::system_state::{KeyboardLayout, SystemLanguage};
 use windows::Win32::{
     Globalization::{
@@ -19,34 +17,53 @@ use windows::Win32::{
 use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
 
 use crate::{
-    error::Result,
+    error::{Result, ResultLogExt},
     event_manager, log_error,
-    utils::spawn_named_thread,
+    utils::{lock_free::SyncVec, spawn_named_thread},
     windows_api::{event_window::IS_INTERACTIVE_SESSION, string_utils::WindowsString, WindowsApi},
 };
 
-lazy_static! {
-    pub static ref LANGUAGE_MANAGER: Arc<Mutex<LanguageManager>> =
-        Arc::new(Mutex::new(LanguageManager::default()));
-}
+static LANGUAGE_MANAGER: LazyLock<LanguageManager> = LazyLock::new(|| {
+    let mut manager = LanguageManager::new();
+    manager.init().log_error();
+    manager
+});
 
 static LAST_LOADED_HKL: AtomicUsize = AtomicUsize::new(0);
 
 event_manager!(LanguageManager, LanguageEvent);
 
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub enum LanguageEvent {
     KeyboardLayoutChanged(usize),
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct LanguageManager {
-    pub languages: Vec<SystemLanguage>,
+    languages: SyncVec<SystemLanguage>,
 }
 
 impl LanguageManager {
-    pub fn init(&mut self) -> Result<()> {
-        self.languages = Self::enum_langs()?;
+    pub fn instance() -> &'static Self {
+        &LANGUAGE_MANAGER
+    }
+
+    fn new() -> Self {
+        Self {
+            languages: SyncVec::new(),
+        }
+    }
+
+    fn init(&mut self) -> Result<()> {
+        self.languages.replace(Self::enum_langs()?);
+
+        let eid = Self::subscribe(|_| {
+            if let Ok(langs) = Self::enum_langs() {
+                Self::instance().languages.replace(langs);
+            }
+        });
+        Self::set_event_handler_priority(&eid, 1);
 
         spawn_named_thread("Keyboard Layout Monitor", || {
             let hkl = unsafe { GetKeyboardLayout(0) };
@@ -193,19 +210,7 @@ impl LanguageManager {
         Ok(())
     }
 
-    /// Returns true if keyboard layout was changed\
-    /// Returns false if keyboard layout wasn't found
-    pub fn update_active(&mut self, hkl: usize) -> bool {
-        let hkl = format!("{hkl:08X}");
-        let mut found = false;
-        for lang in self.languages.iter_mut() {
-            for keyboard in lang.input_methods.iter_mut() {
-                keyboard.active = keyboard.handle == hkl;
-                if keyboard.active {
-                    found = true;
-                }
-            }
-        }
-        found
+    pub fn get_languages(&self) -> Vec<SystemLanguage> {
+        self.languages.to_vec()
     }
 }

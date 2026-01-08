@@ -1,6 +1,7 @@
 use crate::utils::lock_free::TracedMutex;
 
 /// Wrapper for `Mutex<Vec<T>>` with simplifies the API and prevents deadlocks
+#[derive(Debug)]
 pub struct SyncVec<T>(TracedMutex<Vec<T>>);
 
 #[allow(dead_code)]

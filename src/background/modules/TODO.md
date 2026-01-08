@@ -79,6 +79,10 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
   - Only stores i64 tokens, not TypedEventHandler instances
   - Proper separation between system logic (application.rs) and Tauri integration (infrastructure.rs)
   - Removed unnecessary thread spawn from event registration
+  - **Sub-module: language** ✅ - Keyboard layout management integrated as sub-module
+    - Uses `SyncVec` internally instead of external Mutex
+    - Spawns dedicated thread for keyboard layout monitoring
+    - Lazy initialization with modern pattern
 
 ---
 
@@ -108,21 +112,14 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 - **Migration Priority**: MEDIUM
 - **Estimated Effort**: Unknown
 
-### 11. **language** ❌
-
-- **File**: `src/background/modules/language/infrastructure.rs`
-- **Current Pattern**: Unknown (needs analysis)
-- **Migration Priority**: LOW (less frequently used)
-- **Estimated Effort**: Unknown
-
-### 12. **input** ❌
+### 11. **input** ❌
 
 - **File**: `src/background/modules/input/infrastructure.rs`
 - **Current Pattern**: Unknown (needs analysis)
 - **Migration Priority**: LOW (specialized functionality)
 - **Estimated Effort**: Unknown
 
-### 13. **system_tray** ❌
+### 12. **system_tray** ❌
 
 - **File**: `src/background/modules/system_tray/infrastructure.rs`
 - **Current Pattern**: Unknown (needs analysis)
