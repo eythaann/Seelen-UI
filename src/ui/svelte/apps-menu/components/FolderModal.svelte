@@ -22,26 +22,18 @@
     }))
   );
 
-  function handleKeyDown(e: KeyboardEvent) {
-    e.stopPropagation();
-    if (e.key === "Escape") {
-      onClose();
-    }
-  }
-
-  function handleOverlayClick(e: MouseEvent) {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  }
+  let dialog = $state<HTMLDialogElement>();
 </script>
 
-<div
-  role="dialog"
-  tabindex="-1"
-  class="folder-modal-overlay"
-  onclick={handleOverlayClick}
-  onkeydown={handleKeyDown}
+<dialog
+  bind:this={dialog}
+  open
+  class="folder-modal"
+  closedby="any"
+  onkeydown={(e) => {
+    e.stopPropagation(); // avoid window keydown events for navigation
+  }}
+  onclose={onClose}
 >
   <DragDropProvider
     onDragOver={(event) => {
@@ -59,6 +51,53 @@
           itemIds: newItems.map((item) => item.id),
         });
       }
+    }}
+    onDragEnd={(event) => {
+      const { source } = event.operation;
+      if (!dialog || !source || !source.element) {
+        return;
+      }
+
+      let rect = source.element.getBoundingClientRect();
+      let dialogRect = dialog.getBoundingClientRect();
+
+      const hasIntersection =
+        rect.right > dialogRect.left &&
+        rect.left < dialogRect.right &&
+        rect.bottom > dialogRect.top &&
+        rect.top < dialogRect.bottom;
+
+      if (hasIntersection) {
+        return;
+      }
+
+      const draggedItemId = source.id as string;
+      const newItemIds = folder.itemIds.filter((id) => id !== draggedItemId);
+
+      // Update folder with new items or handle folder removal
+      if (newItemIds.length >= 2) {
+        globalState.updateFolder(folder.itemId, { itemIds: newItemIds });
+      }
+      // Folder has only 1 item left, convert to app and remove folder
+      else if (newItemIds.length === 1) {
+        const remainingItemId = newItemIds[0]!;
+        globalState.pinnedItems = globalState.pinnedItems
+          .filter((item) => !(item.type === "folder" && item.itemId === folder.itemId))
+          .concat({ type: "app", itemId: remainingItemId });
+      }
+      // Folder is empty, just remove it
+      else {
+        globalState.pinnedItems = globalState.pinnedItems.filter(
+          (item) => !(item.type === "folder" && item.itemId === folder.itemId)
+        );
+      }
+
+      // Add dragged item as standalone app
+      globalState.pinnedItems = [
+        ...globalState.pinnedItems,
+        { type: "app", itemId: draggedItemId },
+      ];
+      onClose();
     }}
   >
     <div class="folder-modal">
@@ -79,6 +118,7 @@
             <AppItem
               {item}
               {idx}
+              isInsideFolder={true}
               onContextMenu={(event) => {
                 onContextMenu(event, id);
               }}
@@ -88,4 +128,4 @@
       </div>
     </div>
   </DragDropProvider>
-</div>
+</dialog>

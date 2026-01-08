@@ -1,7 +1,7 @@
 import { globalState } from "./state.svelte";
 
 export function navigateInDirection(direction: "up" | "down" | "left" | "right"): void {
-  const allItems = Array.from(document.querySelectorAll(".app-item")) as HTMLElement[];
+  const allItems = Array.from(document.querySelectorAll(".app")) as HTMLElement[];
   if (allItems.length === 0) return;
 
   let currentElement: HTMLElement | null = null;

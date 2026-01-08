@@ -56,7 +56,7 @@ body {
     grid-template-columns: repeat(var(--columns), 1fr);
     gap: 1rem;
 
-    // .app-item {}
+    // .app {}
   }
 
   // .pinned-view-empty {}
@@ -71,7 +71,7 @@ body {
     grid-template-columns: repeat(var(--columns), 1fr);
     gap: 1rem;
 
-    // .app-item {}
+    // .app {}
   }
 
   // .all-apps-view-empty {}
@@ -90,18 +90,14 @@ body {
   font-weight: 600;
 }
 
-.app-item {
+.app {
   display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 2;
 
   align-items: center;
   justify-items: center;
   gap: 10px;
   padding: 10px;
   border-radius: 10px;
-
-  transition: all 100ms ease;
 
   &:hover {
     background-color: var(--bg-light);
@@ -121,12 +117,12 @@ body {
     border: 3px dashed var(--system-accent-color);
     transform: scale(1.05);
 
-    .app-item-name {
+    .app-name {
       opacity: 0;
     }
   }
 
-  .app-item-icon {
+  .app-icon {
     width: 60%;
     aspect-ratio: 1/1;
     border-radius: 16%;
@@ -138,8 +134,9 @@ body {
     }
   }
 
-  .app-item-name {
+  .app-name {
     width: 100%;
+    height: 2.4em;
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -170,7 +167,10 @@ body {
     border: none;
     font-size: 14px;
     color: #333;
-    display: block;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 
     &:hover {
       background-color: #f0f0f0;
@@ -179,18 +179,14 @@ body {
 }
 
 // Folder styles
-.folder-item {
+.folder {
   display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 2;
 
   align-items: center;
   justify-items: center;
   gap: 10px;
   padding: 10px;
   border-radius: 10px;
-
-  transition: all 100ms ease;
 
   &:hover {
     background-color: var(--bg-light);
@@ -210,12 +206,12 @@ body {
     border: 3px dashed var(--system-accent-color);
     transform: scale(1.05);
 
-    .folder-item-name {
+    .folder-name {
       opacity: 0;
     }
   }
 
-  .folder-item-grid {
+  .folder-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -229,14 +225,14 @@ body {
     border-radius: 16%;
     overflow: hidden;
 
-    .folder-item-preview {
+    .folder-preview {
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
 
-      .folder-item-preview-icon {
+      .folder-preview-icon {
         width: 100%;
         height: 100%;
         border-radius: 16%;
@@ -250,8 +246,9 @@ body {
     }
   }
 
-  .folder-item-name {
+  .folder-name {
     width: 100%;
+    height: 2.4em;
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -266,46 +263,43 @@ body {
   }
 }
 
-// Folder modal styles
-.folder-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: RGB(from var(--color-gray-100) r g b / 0.2);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+.folder-modal {
+  width: 70vw;
+  height: 70vh;
+  margin: auto;
+  z-index: 100;
 
-  .folder-modal {
-    width: 70%;
-    height: 70%;
-    background-color: RGB(from var(--color-gray-100) r g b / 0.95);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+  background-color: RGB(from var(--color-gray-100) r g b / 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 
-    .folder-modal-content {
-      padding: 2rem;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
+  &::backdrop {
+    background: RGB(from var(--color-gray-100) r g b / 0.3);
+    backdrop-filter: blur(4px);
+  }
 
-    .folder-modal-name {}
+  .folder-modal-content {
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 
-    .folder-modal-items {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(var(--folder-columns), 1fr);
-      gap: 1rem;
+  .folder-modal-name {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+  }
 
-      // .app-item { .. }
-    }
+  .folder-modal-items {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(var(--folder-columns), 1fr);
+    gap: 1rem;
+
+    // .app { .. }
   }
 }

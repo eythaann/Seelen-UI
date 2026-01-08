@@ -47,7 +47,7 @@
         if (globalState.preselectedItem) {
           element = document.querySelector(`[data-item-id="${globalState.preselectedItem}"]`);
         } else {
-          element = document.querySelector(".app-item");
+          element = document.querySelector(".app");
         }
 
         if (element) {

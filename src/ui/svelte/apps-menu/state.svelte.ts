@@ -160,6 +160,30 @@ function mergeFolders(sourceFolderId: string, targetFolderId: string): void {
   );
 }
 
+// Disband a folder, converting all items to individual apps
+function disbandFolder(folderId: string): void {
+  const folder = pinnedItems.value.find(
+    (item) => item.type === "folder" && item.itemId === folderId,
+  ) as FavFolderItem | undefined;
+
+  if (!folder) {
+    return;
+  }
+
+  const folderIndex = pinnedItems.value.findIndex((item) => item.itemId === folderId);
+  const withoutFolder = pinnedItems.value.filter((item) => item.itemId !== folderId);
+  const newApps: FavAppItem[] = folder.itemIds.map((itemId) => ({
+    type: "app",
+    itemId,
+  }));
+
+  pinnedItems.value = [
+    ...withoutFolder.slice(0, folderIndex),
+    ...newApps,
+    ...withoutFolder.slice(folderIndex),
+  ];
+}
+
 // Verify pinned items still exist
 function verifyPinnedItems() {
   const items = startMenuItems.value;
@@ -201,6 +225,7 @@ class State {
   addItemToFolder = addItemToFolder;
   updateFolder = updateFolder;
   mergeFolders = mergeFolders;
+  disbandFolder = disbandFolder;
 
   desiredMonitorId = $state<string | null>(null);
   showing = $state(false);

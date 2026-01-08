@@ -16,6 +16,11 @@
   let { folder, idx, onContextMenu, isActiveDropzone = false }: Props = $props();
 
   let isModalOpen = $state(false);
+  $effect(() => {
+    if (!globalState.showing) {
+      isModalOpen = false;
+    }
+  });
 
   const isPreselected = $derived(
     globalState.preselectedItem === folder.itemId || (idx === 0 && !globalState.preselectedItem)
@@ -29,15 +34,14 @@
     }))
   );
 
-  const draggableData = useDraggable({
+  const draggable = useDraggable({
     id: () => folder.itemId,
     type: "folder",
   });
 
-  const dropableData = useDroppable({
+  const droppable = useDroppable({
     id: () => folder.itemId,
-    accept: ["app", "folder"],
-    type: "dropzone",
+    type: "folder",
   });
 
   function openModal() {
@@ -50,11 +54,13 @@
 </script>
 
 <button
-  {@attach dropableData.ref}
-  {@attach draggableData.ref}
+  {@attach draggable.ref}
+  {@attach droppable.ref}
   data-item-id={folder.itemId}
-  class="folder-item"
+  class="folder"
   class:preselected={isPreselected && globalState.searchQuery}
+  class:is-dragging={draggable.isDragging.current}
+  class:is-dropping={draggable.isDropping.current}
   class:is-drop-target={isActiveDropzone}
   onclick={openModal}
   oncontextmenu={(event) => {
@@ -64,14 +70,14 @@
     globalState.preselectedItem = folder.itemId;
   }}
 >
-  <div class="folder-item-grid">
+  <div class="folder-grid">
     {#each expandedItems.slice(0, 4) as app}
-      <div class="folder-item-preview">
-        <FileIcon class="folder-item-preview-icon" path={app.item.path} umid={app.item.umid} />
+      <div class="folder-preview">
+        <FileIcon class="folder-preview-icon" path={app.item.path} umid={app.item.umid} />
       </div>
     {/each}
   </div>
-  <div class="folder-item-name" title={folderName}>
+  <div class="folder-name" title={folderName}>
     {folderName}
   </div>
 </button>

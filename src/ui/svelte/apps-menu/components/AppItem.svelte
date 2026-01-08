@@ -3,7 +3,6 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { globalState } from "../state.svelte";
-  import { useSortable } from "@dnd-kit-svelte/svelte/sortable";
   import { useDraggable, useDroppable } from "@dnd-kit-svelte/svelte";
 
   interface Props {
@@ -19,7 +18,7 @@
     item,
     idx,
     onContextMenu,
-    draggable = true,
+    draggable: isDraggable = true,
     isActiveDropzone = false,
     isInsideFolder = false,
   }: Props = $props();
@@ -29,24 +28,17 @@
     globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem)
   );
 
-  /* const sortableData = useSortable({
+  const draggable = useDraggable({
     id: () => itemId,
-    index: () => idx,
-    disabled: () => !sortable || true,
-    type: "app",
-  }); */
-
-  const draggableData = useDraggable({
-    id: () => itemId,
-    disabled: () => !draggable,
-    type: () => isInsideFolder ? "folder-item" : "app",
+    disabled: () => !isDraggable,
+    type: () => (isInsideFolder ? "grouped-app" : "app"),
   });
 
-  const dropableData = useDroppable({
+  const droppable = useDroppable({
     id: () => itemId,
-    accept: ["app", "folder"],
-    type: "dropzone",
-    disabled: () => isInsideFolder,
+    disabled: () => !isDraggable,
+    accept: () => (isInsideFolder ? "grouped-app" : ["folder", "app"]),
+    type: () => (isInsideFolder ? "grouped-app" : "app"),
   });
 
   function handleClick(event: MouseEvent) {
@@ -66,11 +58,13 @@
 </script>
 
 <button
-  {@attach dropableData.ref}
-  {@attach draggableData.ref}
+  {@attach draggable.ref}
+  {@attach droppable.ref}
   data-item-id={itemId}
-  class="app-item"
+  class="app"
   class:preselected={isPreselected && globalState.searchQuery}
+  class:is-dragging={draggable.isDragging.current}
+  class:is-dropping={draggable.isDropping.current}
   class:is-drop-target={isActiveDropzone}
   onclick={handleClick}
   oncontextmenu={handleContextMenu}
@@ -78,8 +72,8 @@
     globalState.preselectedItem = itemId;
   }}
 >
-  <FileIcon class="app-item-icon" path={item.path} umid={item.umid} />
-  <div class="app-item-name" title={item.display_name}>
+  <FileIcon class="app-icon" path={item.path} umid={item.umid} />
+  <div class="app-name" title={item.display_name}>
     {item.display_name}
   </div>
 </button>

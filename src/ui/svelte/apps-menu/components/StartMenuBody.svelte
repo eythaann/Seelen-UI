@@ -5,6 +5,7 @@
   import PinnedView from "./PinnedView.svelte";
   import AllAppsView from "./AllAppsView.svelte";
   import { t } from "../i18n";
+  import { Icon } from "libs/ui/svelte/components/Icon";
 
   let contextMenu = $state<HTMLDivElement>();
   let contextMenuVisible = $state(false);
@@ -24,6 +25,14 @@
     activeContextMenuItemData ? globalState.isPinned(activeContextMenuItemData) : false
   );
 
+  const activeContextMenuIsFolder = $derived.by(() => {
+    if (!activeContextMenuItem) return false;
+    const folder = globalState.pinnedItems.find(
+      (item) => item.type === "folder" && item.itemId === activeContextMenuItem
+    );
+    return !!folder;
+  });
+
   function handleContextMenu(event: MouseEvent, itemId: string) {
     contextMenuX = event.clientX;
     contextMenuY = event.clientY;
@@ -34,6 +43,14 @@
   function handleTogglePin() {
     if (activeContextMenuItemData) {
       globalState.togglePin(activeContextMenuItemData);
+    }
+    contextMenuVisible = false;
+    activeContextMenuItem = null;
+  }
+
+  function handleDisbandFolder() {
+    if (activeContextMenuItem) {
+      globalState.disbandFolder(activeContextMenuItem);
     }
     contextMenuVisible = false;
     activeContextMenuItem = null;
@@ -85,9 +102,17 @@
       }
     }}
   >
-    <button class="context-menu-item" onclick={handleTogglePin}>
-      {activeContextMenuItemPinned ? $t("unpin") : $t("pin")}
-    </button>
+    {#if activeContextMenuIsFolder}
+      <button class="context-menu-item" onclick={handleDisbandFolder}>
+        <Icon iconName="GiExpand" />
+        <span>{$t("disband")}</span>
+      </button>
+    {:else}
+      <button class="context-menu-item" onclick={handleTogglePin}>
+        <Icon iconName={activeContextMenuItemPinned ? "TbPinnedOff" : "TbPin"} />
+        <span>{activeContextMenuItemPinned ? $t("unpin") : $t("pin")}</span>
+      </button>
+    {/if}
   </div>
 {/if}
 
