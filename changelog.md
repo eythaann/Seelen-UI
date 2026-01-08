@@ -23,6 +23,7 @@
 - settings UX improvements.
 - extraction on local video wallpapers thumbnails.
 - avoid reload the UI while playing as this can cause fps drops.
+- reduce memory usage!
 
 ### fix
 

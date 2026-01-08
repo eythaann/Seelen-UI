@@ -125,47 +125,47 @@ pub fn show_app_settings() {
 }
 
 pub struct WebviewArgs {
-    pub args: Vec<String>,
+    common_args: Vec<String>,
+    extra_args: Vec<String>,
 }
 
 impl WebviewArgs {
-    const BASE_1: &str = "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection";
-    const BASE_2: &str = "--no-first-run --disable-site-isolation-trials --disable-background-timer-throttling --V8Maglev";
+    const BASE_OPT: &str = "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer";
+    const BASE_OPT2: &str =
+        "--no-first-run --disable-site-isolation-trials --disable-background-timer-throttling";
+    const PERFORMANCE_OPT: &str = "--enable-low-end-device-mode --in-process-gpu --V8Maglev";
 
     pub fn new() -> Self {
-        // --disk-cache-size=0
         Self {
-            args: vec![Self::BASE_1.to_string(), Self::BASE_2.to_string()],
+            common_args: vec![
+                Self::BASE_OPT.to_string(),
+                Self::BASE_OPT2.to_string(),
+                Self::PERFORMANCE_OPT.to_string(),
+            ],
+            extra_args: vec![],
         }
     }
 
-    pub fn with(mut self, arg: &str) -> Self {
-        self.args.push(arg.to_string());
+    pub fn disable_gpu(self) -> Self {
+        // if window manager is enabled (that is expected thing) having 2 processes one with gpu and another without,
+        // is worse than having them together with gpu enabled so this is the reason why this is currently ignored.
+        // self.extra_args.push("--disable-gpu --disable-software-rasterizer".to_string());
         self
     }
 
-    pub fn disable_gpu(self) -> Self {
-        self.with("--disable-gpu")
-    }
-
     pub fn data_directory(&self) -> PathBuf {
-        // remove bases
-        let mut args = self.args.clone();
-        args.remove(0);
-        args.remove(0);
-
-        if args.is_empty() {
+        if self.extra_args.is_empty() {
             SEELEN_COMMON.app_cache_dir().to_path_buf()
         } else {
             SEELEN_COMMON
                 .app_cache_dir()
-                .join(args.join("").replace("-", ""))
+                .join(self.extra_args.join("").replace("-", ""))
         }
     }
 }
 
 impl std::fmt::Display for WebviewArgs {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.args.join(" "))
+        write!(f, "{}", self.common_args.join(" "))
     }
 }
