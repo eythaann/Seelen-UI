@@ -15,11 +15,11 @@ use crate::{
     error::{Result, ResultLogExt},
     hook::register_win_hook,
     log_error,
+    migrations::RestorationAndMigration,
     modules::{
         monitors::{MonitorManager, MonitorManagerEvent},
         system_settings::application::{SystemSettings, SystemSettingsEvent},
     },
-    restoration_and_migrations::RestorationAndMigration,
     state::application::{FullState, FULL_STATE},
     trace_lock,
     utils::discord::start_discord_rpc,
@@ -102,9 +102,9 @@ impl Seelen {
         ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
 
         if state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar();
+            SeelenWeg::hide_native_taskbar();
         } else {
-            SeelenWeg::restore_taskbar()?;
+            SeelenWeg::restore_native_taskbar()?;
         }
 
         match state.is_wall_enabled() {
@@ -142,20 +142,13 @@ impl Seelen {
     }
 
     pub fn start(&mut self) -> Result<()> {
-        RestorationAndMigration::run_full()?;
+        RestorationAndMigration::run()?;
 
         let state = FULL_STATE.load();
         rust_i18n::set_locale(state.locale());
 
-        // order is important
-        create_background_window()?;
-
         if state.is_wall_enabled() {
             self.add_wall()?;
-        }
-
-        if state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar();
         }
 
         log::trace!("Enumerating Monitors & Creating Instances");
@@ -163,18 +156,15 @@ impl Seelen {
             self.add_monitor(view.primary_target()?.stable_id()?)?;
         }
 
+        self.refresh_windows_positions()?;
+
+        create_background_window()?;
+        register_win_hook()?;
         MonitorManager::subscribe(Self::on_monitor_event);
         SystemSettings::subscribe(Self::on_system_settings_change);
 
-        self.refresh_windows_positions()?;
-
-        register_win_hook()?;
         start_discord_rpc()?;
-
-        if state.are_shortcuts_enabled() {
-            ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
-        }
-
+        ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }

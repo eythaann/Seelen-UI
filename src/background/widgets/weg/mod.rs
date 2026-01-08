@@ -59,7 +59,7 @@ pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
 }
 
 impl SeelenWeg {
-    pub fn hide_taskbar() -> JoinHandle<()> {
+    pub fn hide_native_taskbar() -> JoinHandle<()> {
         std::thread::spawn(move || match get_taskbars_handles() {
             Ok(handles) => {
                 let mut attempts = 0;
@@ -77,7 +77,7 @@ impl SeelenWeg {
         })
     }
 
-    pub fn restore_taskbar() -> Result<()> {
+    pub fn restore_native_taskbar() -> Result<()> {
         for hwnd in get_taskbars_handles()? {
             AppBarData::from_handle(hwnd).set_state(AppBarDataState::AlwaysOnTop);
             WindowsApi::show_window_async(hwnd, SW_SHOWNORMAL)?;

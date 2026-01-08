@@ -37,9 +37,9 @@ impl FancyToolbar {
         Ok(HWND(self.window.hwnd()?.0))
     }
 
-    pub fn new(monitor: &str) -> Result<Self> {
+    pub fn new(monitor_id: &str) -> Result<Self> {
         Ok(Self {
-            window: Self::create_window(monitor)?,
+            window: Self::create_window(monitor_id)?,
             theoretical_rect: RECT::default(),
             webview_rect: RECT::default(),
         })

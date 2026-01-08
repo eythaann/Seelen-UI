@@ -73,12 +73,13 @@ impl SeelenWeg {
         Ok(window)
     }
 
-    pub fn new(postfix: &str) -> Result<Self> {
+    pub fn new(monitor_id: &str) -> Result<Self> {
         let weg = Self {
-            window: Self::create_window(postfix)?,
+            window: Self::create_window(monitor_id)?,
             theoretical_rect: RECT::default(),
             webview_rect: RECT::default(),
         };
+        SeelenWeg::hide_native_taskbar();
         Ok(weg)
     }
 

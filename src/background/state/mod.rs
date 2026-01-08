@@ -69,10 +69,6 @@ impl FullState {
         self.is_widget_enabled(&WidgetId::known_wall())
     }
 
-    pub fn are_shortcuts_enabled(&self) -> bool {
-        self.settings.shortcuts.enabled
-    }
-
     pub fn get_wm_layout(&self, workspace_id: &WorkspaceId) -> WindowManagerLayout {
         let base = WindowManagerLayout::default();
 

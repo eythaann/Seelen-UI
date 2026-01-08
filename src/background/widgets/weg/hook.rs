@@ -76,7 +76,7 @@ impl SeelenWeg {
                     .iter()
                     .any(|t| t == &class || t == &parent_class)
                 {
-                    Self::hide_taskbar();
+                    Self::hide_native_taskbar();
                     return Ok(());
                 }
 
