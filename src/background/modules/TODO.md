@@ -49,18 +49,19 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 
 ---
 
-## ❌ Modules Requiring Migration (Legacy Pattern)
-
-### 5. **notifications** ❌
+### 5. **notifications** ✅
 
 - **File**: `src/background/modules/notifications/infrastructure.rs`
-- **Current Pattern**:
-  - Uses `register_notification_events()` function called manually
-  - Uses `trace_lock!` macro instead of proper singleton
-  - Has `release_notification_events()` cleanup function
-- **Migration Priority**: HIGH (user-facing)
-- **Estimated Effort**: Medium
-- **Notes**: Needs careful handling of COM activation callbacks
+- **Pattern**: Uses `Once` for lazy event registration, LazyLock singleton
+- **Status**: ✅ MODERN - Reference implementation
+- **Notes**:
+  - WinRT event handler stored only as i64 token
+  - Drop trait implemented for automatic cleanup
+  - LOADED_NOTIFICATIONS uses Mutex<HashSet> for thread-safe notification tracking
+
+---
+
+## ❌ Modules Requiring Migration (Legacy Pattern)
 
 ### 6. **network** ❌
 
@@ -171,7 +172,6 @@ pub struct WinRTObjectWrapper {
 
 impl WinRTObjectWrapper {
     pub fn create(object: SomeWinRTObject) -> Result<Self> {
-        // Windows-rs clones the handler, so we don't store it
         let token = object.SomeEvent(&TypedEventHandler::new(Self::on_event))?;
         Ok(Self { object, event_token: token })
     }

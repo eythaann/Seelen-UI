@@ -281,7 +281,6 @@ pub struct WinRTObjectWrapper {
 
 impl WinRTObjectWrapper {
     pub fn create(object: SomeWinRTObject) -> Result<Self> {
-        // Windows-rs clones the handler, so we create it inline
         let token = object.SomeEvent(&TypedEventHandler::new(Self::on_event))?;
 
         Ok(Self {

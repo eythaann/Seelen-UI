@@ -8,9 +8,6 @@ use crate::{
         apps::infrastructure::register_app_win_events,
         language::register_language_events,
         network::infrastructure::register_network_events,
-        notifications::infrastructure::{
-            register_notification_events, release_notification_events,
-        },
         power::infrastructure::{register_power_events, release_power_events},
         system_settings::infrastructure::{register_system_settings_events, release_colors_events},
         user::infrastructure::register_user_events,
@@ -26,7 +23,6 @@ pub fn declare_system_events_handlers() -> Result<()> {
     });
 
     register_app_win_events();
-    register_notification_events();
     register_user_events();
     register_system_settings_events();
     register_power_events();
@@ -35,7 +31,6 @@ pub fn declare_system_events_handlers() -> Result<()> {
 }
 
 pub fn release_system_events_handlers() {
-    release_notification_events();
     release_power_events();
     release_colors_events();
 }
