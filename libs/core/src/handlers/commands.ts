@@ -18,7 +18,7 @@ export enum SeelenCommand {
   SelectFileOnExplorer = "select_file_on_explorer",
   GetUserEnvs = "get_user_envs",
   ShowAppSettings = "show_app_settings",
-  SendKeys = "send_keys",
+  ShowStartMenu = "show_start_menu",
   GetIcon = "get_icon",
   SimulateFullscreen = "simulate_fullscreen",
   ShowDesktop = "show_desktop",

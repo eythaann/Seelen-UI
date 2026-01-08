@@ -19,10 +19,11 @@ use tauri::{Emitter, Manager};
 
 use crate::{
     app::get_app_handle,
-    error::Result,
+    error::{Result, ResultLogExt},
     state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap, WidgetWebviewLabel},
     widgets::manager::WIDGET_MANAGER,
+    windows_api::input::Keyboard,
 };
 
 static PENDING_TRIGGERS: LazyLock<SyncHashMap<WidgetWebviewLabel, WidgetTriggerPayload>> =
@@ -103,6 +104,24 @@ pub fn show_settings() -> Result<()> {
         }
     }
     Ok(())
+}
+
+#[tauri::command(async)]
+pub fn show_start_menu() -> Result<()> {
+    let guard = FULL_STATE.load();
+    if guard.is_widget_enabled(&"@seelen/apps-menu".into()) {
+        trigger_widget(WidgetTriggerPayload::new("@seelen/apps-menu".into()))?;
+        return Ok(());
+    }
+    // trick for showing the native start menu
+    Keyboard::new().send_keys("{win}")
+}
+
+// https://docs.rs/tauri/latest/tauri/window/struct.WindowBuilder.html#known-issues
+// https://github.com/tauri-apps/wry/issues/583
+#[tauri::command(async)]
+pub fn show_app_settings() {
+    show_settings().log_error();
 }
 
 pub struct WebviewArgs {

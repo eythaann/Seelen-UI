@@ -117,13 +117,6 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 - **Migration Priority**: MEDIUM
 - **Estimated Effort**: Unknown
 
-### 11. **input** ❌
-
-- **File**: `src/background/modules/input/infrastructure.rs`
-- **Current Pattern**: Unknown (needs analysis)
-- **Migration Priority**: LOW (specialized functionality)
-- **Estimated Effort**: Unknown
-
 ### 12. **system_tray** ❌
 
 - **File**: `src/background/modules/system_tray/infrastructure.rs`

@@ -3,6 +3,7 @@ mod com;
 mod devices;
 pub mod event_window;
 pub mod hdc;
+pub mod input;
 mod iterator;
 pub mod monitor;
 pub mod process;
@@ -119,8 +120,10 @@ use windows::{
 use crate::{
     error::{Result, WindowsResultExt},
     hook::HookManager,
-    modules::input::{Keyboard, Mouse},
-    windows_api::window::{event::WinEvent, Window},
+    windows_api::{
+        input::{Keyboard, Mouse},
+        window::{event::WinEvent, Window},
+    },
 };
 
 #[macro_export]

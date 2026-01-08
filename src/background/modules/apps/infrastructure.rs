@@ -9,11 +9,8 @@ use windows::Win32::UI::Shell::{IShellDispatch6, Shell};
 use crate::{
     app::emit_to_webviews,
     error::Result,
-    modules::{
-        apps::application::{previews::WinPreviewManager, UserAppsManager},
-        input::Mouse,
-    },
-    windows_api::{window::Window, Com},
+    modules::apps::application::{previews::WinPreviewManager, UserAppsManager},
+    windows_api::{input::Mouse, window::Window, Com},
 };
 
 /// Lazy initialization wrapper that registers Tauri events on first access
@@ -45,7 +42,7 @@ pub fn get_focused_app() -> FocusedApp {
 
 #[tauri::command(async)]
 pub fn get_mouse_position() -> [i32; 2] {
-    let point: seelen_core::Point = Mouse::get_cursor_pos().unwrap_or_default();
+    let point = Mouse::get_cursor_pos().unwrap_or_default();
     [point.x, point.y]
 }
 

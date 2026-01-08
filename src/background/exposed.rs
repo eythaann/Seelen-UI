@@ -16,20 +16,18 @@ use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WIND
 use crate::app::{get_app_handle, Seelen};
 use crate::error::Result;
 use crate::hook::HookManager;
-use crate::modules::input::Keyboard;
 
+use crate::utils;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::icon_extractor::{
     request_icon_extraction_from_file, request_icon_extraction_from_umid,
 };
 use crate::utils::is_running_as_appx;
 use crate::utils::pwsh::PwshScript;
-use crate::widgets::show_settings;
 use crate::windows_api::hdc::DeviceContext;
 use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
-use crate::{log_error, utils};
 
 #[tauri::command(async)]
 pub fn open_file(path: String) -> Result<()> {
@@ -127,13 +125,6 @@ pub fn get_user_envs() -> HashMap<String, String> {
     std::env::vars().collect::<HashMap<String, String>>()
 }
 
-// https://docs.rs/tauri/latest/tauri/window/struct.WindowBuilder.html#known-issues
-// https://github.com/tauri-apps/wry/issues/583
-#[tauri::command(async)]
-fn show_app_settings() {
-    log_error!(show_settings());
-}
-
 #[tauri::command(async)]
 async fn set_auto_start(enabled: bool) -> Result<()> {
     Seelen::set_auto_start(enabled)
@@ -142,11 +133,6 @@ async fn set_auto_start(enabled: bool) -> Result<()> {
 #[tauri::command(async)]
 async fn get_auto_start_status() -> Result<bool> {
     Seelen::is_auto_start_enabled()
-}
-
-#[tauri::command(async)]
-fn send_keys(keys: String) -> Result<()> {
-    Keyboard::new().send_keys(&keys)
 }
 
 // used to request icon extraction

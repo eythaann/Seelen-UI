@@ -118,7 +118,7 @@ slu_commands_declaration! {
     SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),
     GetUserEnvs = get_user_envs() -> HashMap<String, String>,
     ShowAppSettings = show_app_settings(),
-    SendKeys = send_keys(keys: String),
+    ShowStartMenu = show_start_menu(),
     GetIcon = get_icon(
         #[ts(optional = nullable)]
         path: Option<PathBuf>,
