@@ -15,8 +15,6 @@ use crate::{
     utils::lock_free::SyncHashMap,
 };
 
-static SYSTEM_TRAY_MANAGER: LazyLock<SystemTrayManager> = LazyLock::new(SystemTrayManager::create);
-
 pub struct SystemTrayManager {
     icons: SyncHashMap<SysTrayIconId, SysTrayIcon>,
     _loader: Option<TrayHookLoader>,
@@ -41,6 +39,8 @@ impl SystemTrayManager {
     }
 
     pub fn instance() -> &'static Self {
+        static SYSTEM_TRAY_MANAGER: LazyLock<SystemTrayManager> =
+            LazyLock::new(SystemTrayManager::create);
         &SYSTEM_TRAY_MANAGER
     }
 

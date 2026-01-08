@@ -1,4 +1,4 @@
-use std::{ffi::OsStr, time::Duration};
+use std::{ffi::OsStr, path::PathBuf, sync::LazyLock, time::Duration};
 
 use seelen_core::system_state::{MediaPlayerOwner, MediaPlayerTimeline};
 use windows::{
@@ -11,24 +11,17 @@ use windows::{
         MediaPropertiesChangedEventArgs, PlaybackInfoChangedEventArgs, SessionsChangedEventArgs,
         TimelinePropertiesChangedEventArgs,
     },
-    Win32::System::WinRT::EventRegistrationToken,
 };
 
 use crate::{
     error::{Result, ResultLogExt},
-    log_error,
-    modules::{
-        media::{
-            application::{MediaEvent, MediaManager},
-            domain::MediaPlayer,
-        },
-        start::application::StartMenuManager,
-    },
+    event_manager,
+    modules::start::application::StartMenuManager,
     utils::{icon_extractor::request_icon_extraction_from_umid, lock_free::SyncHashMap},
-    windows_api::{traits::EventRegistrationTokenExt, types::AppUserModelId, WindowsApi},
+    windows_api::{types::AppUserModelId, WindowsApi},
 };
 
-use super::{MediaManagerEvents, MEDIA_MANAGER};
+use super::domain::{MediaPlayer, MediaPlayerSession};
 
 fn timeline_from_raw(
     raw: GlobalSystemMediaTransportControlsSessionTimelineProperties,
@@ -44,68 +37,83 @@ fn timeline_from_raw(
     })
 }
 
-pub struct MediaPlayersManager {
-    pub playing: SyncHashMap<String, MediaPlayer>,
-
-    manager: GlobalSystemMediaTransportControlsSessionManager,
-    manager_event_handler: TypedEventHandler<
-        GlobalSystemMediaTransportControlsSessionManager,
-        SessionsChangedEventArgs,
-    >,
-
-    sessions: SyncHashMap<String, GlobalSystemMediaTransportControlsSession>,
-    properties_event_handler: TypedEventHandler<
-        GlobalSystemMediaTransportControlsSession,
-        MediaPropertiesChangedEventArgs,
-    >,
-    playback_event_handler:
-        TypedEventHandler<GlobalSystemMediaTransportControlsSession, PlaybackInfoChangedEventArgs>,
-    timeline_event_handler: TypedEventHandler<
-        GlobalSystemMediaTransportControlsSession,
-        TimelinePropertiesChangedEventArgs,
-    >,
-    /// session id -> (media properties changed event, playback info changed event, timeline changed event)
-    event_tokens: SyncHashMap<
-        String,
-        (
-            EventRegistrationToken,
-            EventRegistrationToken,
-            EventRegistrationToken,
-        ),
-    >,
+#[derive(Debug, Clone)]
+pub enum PlayersEvent {
+    PlayerAdded(GlobalSystemMediaTransportControlsSession),
+    PlayerRemoved(String),
+    CleanRequested,
+    PropertiesChanged {
+        id: String,
+        title: String,
+        author: String,
+        thumbnail: Option<PathBuf>,
+    },
+    PlaybackStatusChanged {
+        id: String,
+        playing: bool,
+    },
+    TimelineChanged {
+        id: String,
+        timeline: MediaPlayerTimeline,
+    },
 }
 
-unsafe impl Send for MediaPlayersManager {}
+unsafe impl Send for PlayersEvent {}
 
-impl MediaPlayersManager {
-    pub fn new() -> Result<Self> {
+event_manager!(PlayersManager, PlayersEvent);
+
+pub struct PlayersManager {
+    playing: SyncHashMap<String, MediaPlayer>,
+    sessions: SyncHashMap<String, MediaPlayerSession>,
+    manager: GlobalSystemMediaTransportControlsSessionManager,
+}
+
+unsafe impl Send for PlayersManager {}
+unsafe impl Sync for PlayersManager {}
+
+impl PlayersManager {
+    fn new() -> Result<Self> {
         let manager = GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?.get()?;
 
         Ok(Self {
             playing: SyncHashMap::new(),
-            manager,
-            manager_event_handler: TypedEventHandler::new(
-                MediaManagerEvents::on_media_players_changed,
-            ),
             sessions: SyncHashMap::new(),
-            event_tokens: SyncHashMap::new(),
-            properties_event_handler: TypedEventHandler::new(
-                MediaManagerEvents::on_media_player_properties_changed,
-            ),
-            timeline_event_handler: TypedEventHandler::new(
-                MediaManagerEvents::on_media_player_timeline_changed,
-            ),
-            playback_event_handler: TypedEventHandler::new(
-                MediaManagerEvents::on_media_player_playback_changed,
-            ),
+            manager,
         })
+    }
+
+    pub fn instance() -> &'static Self {
+        static MANAGER: LazyLock<PlayersManager> = LazyLock::new(|| {
+            let mut manager = PlayersManager::new().expect("Failed to create players manager");
+            unsafe { manager.init().log_error() };
+            manager
+        });
+        &MANAGER
+    }
+
+    unsafe fn init(&mut self) -> Result<()> {
+        for session in self.manager.GetSessions()? {
+            self.load_session(session)?;
+        }
+        self.update_recommended_player();
+
+        self.manager
+            .SessionsChanged(&TypedEventHandler::new(Self::on_media_players_changed))?;
+
+        let eid = Self::subscribe(|event| {
+            PlayersManager::instance().process_event(&event).log_error();
+            PlayersManager::instance().update_recommended_player();
+        });
+        Self::set_event_handler_priority(&eid, 1);
+
+        Ok(())
     }
 
     pub fn get_media_player(
         &self,
         umid: &str,
     ) -> Option<GlobalSystemMediaTransportControlsSession> {
-        self.sessions.get(umid, |session| session.clone())
+        self.sessions.get(umid, |session| session.session.clone())
     }
 
     pub fn get_recommended_player_id(&self) -> Result<String> {
@@ -116,20 +124,13 @@ impl MediaPlayersManager {
             .to_string_lossy())
     }
 
-    pub unsafe fn initialize(&self) -> Result<()> {
-        for session in self.manager.GetSessions()? {
-            self.load_session(session)?;
-        }
-
-        self.update_recommended_player();
-        self.manager.SessionsChanged(&self.manager_event_handler)?;
-
-        Ok(())
+    pub fn get_playing_sessions(&self) -> Vec<MediaPlayer> {
+        self.playing.values()
     }
 
-    pub fn process_event(&self, event: &MediaEvent) -> Result<()> {
+    fn process_event(&self, event: &PlayersEvent) -> Result<()> {
         match event {
-            MediaEvent::MediaPlayerAdded(session) => {
+            PlayersEvent::PlayerAdded(session) => {
                 let id = session.SourceAppUserModelId()?.to_string_lossy();
                 let already_exists = self
                     .playing
@@ -151,49 +152,48 @@ impl MediaPlayersManager {
                 }
                 self.load_session(session.clone())?;
             }
-            MediaEvent::MediaPlayerRemoved(id) => {
+            PlayersEvent::PlayerRemoved(id) => {
                 self.playing.get(id, |player| {
                     player.removed_at = Some(std::time::Instant::now());
                     std::thread::spawn(move || {
-                        std::thread::sleep(Duration::from_millis(1500));
-                        MediaManager::send(MediaEvent::MediaPlayerCleanRequested);
+                        std::thread::sleep(Duration::from_millis(1000));
+                        PlayersManager::send(PlayersEvent::CleanRequested);
                     });
                 });
             }
-            MediaEvent::MediaPlayerCleanRequested => {
+            PlayersEvent::CleanRequested => {
                 self.release_pending_players()?;
             }
-            MediaEvent::MediaPlayerPropertiesChanged {
+            PlayersEvent::PropertiesChanged {
                 id,
                 title,
                 author,
                 thumbnail,
             } => {
                 self.playing.get(id, |player| {
-                    player.title = title.clone();
-                    player.author = author.clone();
-                    player.thumbnail = thumbnail.clone();
+                    player.base.title = title.clone();
+                    player.base.author = author.clone();
+                    player.base.thumbnail = thumbnail.clone();
                 });
             }
-            MediaEvent::MediaPlayerPlaybackStatusChanged { id, playing } => {
+            PlayersEvent::PlaybackStatusChanged { id, playing } => {
                 self.playing.get(id, |player| {
-                    player.playing = *playing;
+                    player.base.playing = *playing;
                 });
             }
-            MediaEvent::MediaPlayerTimelineChanged { id, timeline } => {
+            PlayersEvent::TimelineChanged { id, timeline } => {
                 self.playing.get(id, |player| {
-                    player.timeline = timeline.clone();
+                    player.base.timeline = timeline.clone();
                 });
             }
-            _ => {}
         }
         Ok(())
     }
 
-    pub fn update_recommended_player(&self) {
+    fn update_recommended_player(&self) {
         if let Ok(recommended) = self.get_recommended_player_id() {
             self.playing.for_each(|(_, player)| {
-                player.default = player.umid == recommended;
+                player.base.default = player.base.umid == recommended;
             });
         }
     }
@@ -232,37 +232,33 @@ impl MediaPlayersManager {
         self.playing.upsert(
             source_app_umid.to_string(),
             MediaPlayer {
-                umid: source_app_umid.to_string(),
-                title: properties.Title().unwrap_or_default().to_string_lossy(),
-                author: properties.Artist().unwrap_or_default().to_string_lossy(),
-                owner: MediaPlayerOwner { name: display_name },
-                thumbnail: properties
-                    .Thumbnail()
-                    .ok()
-                    .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
-                playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
-                timeline: timeline_from_raw(timeline)?,
-                default: false,
+                base: seelen_core::system_state::MediaPlayer {
+                    umid: source_app_umid.to_string(),
+                    title: properties.Title().unwrap_or_default().to_string_lossy(),
+                    author: properties.Artist().unwrap_or_default().to_string_lossy(),
+                    owner: MediaPlayerOwner { name: display_name },
+                    thumbnail: properties
+                        .Thumbnail()
+                        .ok()
+                        .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
+                    playing: status
+                        == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
+                    timeline: timeline_from_raw(timeline)?,
+                    default: false,
+                },
                 removed_at: None,
             },
         );
 
-        // listen for media transport events
-        self.event_tokens.upsert(
-            source_app_umid.to_string(),
-            (
-                session
-                    .MediaPropertiesChanged(&self.properties_event_handler)?
-                    .as_event_token(),
-                session
-                    .PlaybackInfoChanged(&self.playback_event_handler)?
-                    .as_event_token(),
-                session
-                    .TimelinePropertiesChanged(&self.timeline_event_handler)?
-                    .as_event_token(),
-            ),
-        );
-        self.sessions.upsert(source_app_umid.to_string(), session);
+        let wrapped_session = MediaPlayerSession::create(
+            session,
+            &TypedEventHandler::new(Self::on_media_player_properties_changed),
+            &TypedEventHandler::new(Self::on_media_player_playback_changed),
+            &TypedEventHandler::new(Self::on_media_player_timeline_changed),
+        )?;
+
+        self.sessions
+            .upsert(source_app_umid.to_string(), wrapped_session);
         Ok(())
     }
 
@@ -283,105 +279,88 @@ impl MediaPlayersManager {
     }
 
     fn release_session(&self, player_id: &str) -> Result<()> {
-        if let Some(session) = self.sessions.remove(player_id) {
-            if let Some((properties_token, playback_token, timeline_token)) =
-                self.event_tokens.remove(player_id)
-            {
-                session.RemoveMediaPropertiesChanged(properties_token.value)?;
-                session.RemovePlaybackInfoChanged(playback_token.value)?;
-                session.RemoveTimelinePropertiesChanged(timeline_token.value)?;
-            }
-        }
+        // Remove session from map - Drop trait will handle event unregistration
+        self.sessions.remove(player_id);
         self.playing.remove(player_id);
         Ok(())
     }
 
-    /// Release all resources
-    /// should be called on application exit
-    pub fn release(&self) {
-        for id in self.playing.keys() {
-            self.release_session(&id).log_error();
-        }
-    }
-}
-
-impl MediaManagerEvents {
-    pub(super) fn on_media_players_changed(
+    fn on_media_players_changed(
         session_manager: &Option<GlobalSystemMediaTransportControlsSessionManager>,
         _args: &Option<SessionsChangedEventArgs>,
     ) -> windows_core::Result<()> {
         if let Some(session_manager) = session_manager {
             let mut current_list = Vec::new();
-            MEDIA_MANAGER.players.playing.for_each(|(_, session)| {
+            PlayersManager::instance().playing.for_each(|(_, session)| {
                 if session.removed_at.is_none() {
-                    current_list.push(session.umid.clone());
+                    current_list.push(session.base.umid.clone());
                 }
             });
 
-            let tx = MediaManager::event_tx();
+            let tx = PlayersManager::event_tx();
             for session in session_manager.GetSessions()? {
                 let id = session.SourceAppUserModelId()?.to_string();
                 if !current_list.contains(&id) {
-                    let _ = tx.send(MediaEvent::MediaPlayerAdded(session));
+                    let _ = tx.send(PlayersEvent::PlayerAdded(session));
                 }
                 current_list.retain(|x| *x != id);
             }
 
             for id in current_list {
-                let _ = tx.send(MediaEvent::MediaPlayerRemoved(id));
+                let _ = tx.send(PlayersEvent::PlayerRemoved(id));
             }
         }
         Ok(())
     }
 
-    pub(super) fn on_media_player_properties_changed(
+    fn on_media_player_properties_changed(
         session: &Option<GlobalSystemMediaTransportControlsSession>,
         _args: &Option<MediaPropertiesChangedEventArgs>,
     ) -> windows_core::Result<()> {
         if let Some(session) = session {
             let id = session.SourceAppUserModelId()?.to_string();
             let properties = session.TryGetMediaPropertiesAsync()?.get()?;
-            let tx = MediaManager::event_tx();
-            let result = tx.send(MediaEvent::MediaPlayerPropertiesChanged {
+            let tx = PlayersManager::event_tx();
+            let result = tx.send(PlayersEvent::PropertiesChanged {
                 id,
                 title: properties.Title()?.to_string(),
                 author: properties.Artist()?.to_string(),
                 thumbnail: WindowsApi::extract_thumbnail_from_ref(properties.Thumbnail()?).ok(),
             });
-            log_error!(result);
+            result.log_error();
         }
         Ok(())
     }
 
-    pub(super) fn on_media_player_playback_changed(
+    fn on_media_player_playback_changed(
         session: &Option<GlobalSystemMediaTransportControlsSession>,
         _args: &Option<PlaybackInfoChangedEventArgs>,
     ) -> windows_core::Result<()> {
         if let Some(session) = session {
             let playback = session.GetPlaybackInfo()?;
             let player_id = session.SourceAppUserModelId()?;
-            let tx = MediaManager::event_tx();
-            let event = MediaEvent::MediaPlayerPlaybackStatusChanged {
+            let tx = PlayersManager::event_tx();
+            let event = PlayersEvent::PlaybackStatusChanged {
                 id: player_id.to_string(),
                 playing: playback.PlaybackStatus()?
                     == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
             };
-            log_error!(tx.send(event));
+            tx.send(event).log_error();
         }
         Ok(())
     }
 
-    pub(super) fn on_media_player_timeline_changed(
+    fn on_media_player_timeline_changed(
         session: &Option<GlobalSystemMediaTransportControlsSession>,
         _args: &Option<TimelinePropertiesChangedEventArgs>,
     ) -> windows_core::Result<()> {
         if let Some(session) = session {
-            let tx = MediaManager::event_tx();
-            let event = MediaEvent::MediaPlayerTimelineChanged {
+            let tx = PlayersManager::event_tx();
+            let event = PlayersEvent::TimelineChanged {
                 id: session.SourceAppUserModelId()?.to_string(),
                 timeline: timeline_from_raw(session.GetTimelineProperties()?)?,
             };
-            log_error!(tx.send(event));
+            tx.send(event).log_error();
         }
         Ok(())
     }

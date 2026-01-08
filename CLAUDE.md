@@ -241,6 +241,170 @@ migrated to the modern pattern when feasible. Examples include modules that:
 
 **If you encounter legacy patterns, prefer the modern pattern for new code and consider refactoring when appropriate.**
 
+### WinRT Wrapper Pattern for Automatic Resource Management
+
+**CRITICAL**: When working with Windows Runtime (WinRT) objects that use event subscriptions, always use the wrapper
+pattern to ensure proper resource cleanup.
+
+#### Why Wrappers Are Needed
+
+WinRT objects (like `GlobalSystemMediaTransportControlsSession`, `DisplayManager`, etc.) often require:
+
+- Event registration on initialization
+- Event unregistration on cleanup
+- Proper COM object lifetime management
+
+Without wrappers, you must manually track tokens and call cleanup methods, which is error-prone and leads to resource
+leaks.
+
+#### TypedEventHandler Storage (IMPORTANT)
+
+**Windows-rs clones handlers internally** - you do NOT need to store `TypedEventHandler` instances:
+
+- ✅ **CORRECT**: Create handlers inline, only store tokens
+- ❌ **INCORRECT**: Store `TypedEventHandler` in struct fields
+
+**Token Types:**
+
+- WinRT events use `i64` tokens (e.g., `MediaPropertiesChanged`)
+- Win32 events use `EventRegistrationToken` wrapper (e.g., `IAudioEndpointVolume`)
+
+#### Wrapper Pattern Implementation
+
+**Structure:**
+
+```rust
+pub struct WinRTObjectWrapper {
+    pub object: SomeWinRTObject,
+    event_token: i64,  // Store token, not handler
+}
+
+impl WinRTObjectWrapper {
+    pub fn create(object: SomeWinRTObject) -> Result<Self> {
+        // Windows-rs clones the handler, so we create it inline
+        let token = object.SomeEvent(&TypedEventHandler::new(Self::on_event))?;
+
+        Ok(Self {
+            object,
+            event_token: token,
+        })
+    }
+
+    fn on_event(
+        sender: &Option<SomeWinRTObject>,
+        args: &Option<SomeEventArgs>,
+    ) -> windows_core::Result<()> {
+        // Handle event
+        Ok(())
+    }
+}
+
+impl Drop for WinRTObjectWrapper {
+    fn drop(&mut self) {
+        // Automatic cleanup - called when wrapper is dropped
+        self.object.RemoveSomeEvent(self.event_token).log_error();
+    }
+}
+```
+
+**Usage in Manager:**
+
+```rust
+pub struct SomeManager {
+    // Store wrappers, not raw objects
+    sessions: SyncHashMap<String, WinRTObjectWrapper>,
+}
+
+impl SomeManager {
+    fn add_session(&self, raw_object: SomeWinRTObject) -> Result<()> {
+        // Wrap object with automatic event registration
+        let wrapper = WinRTObjectWrapper::create(raw_object)?;
+
+        // Store wrapper - Drop will handle cleanup
+        self.sessions.insert(id, wrapper);
+        Ok(())
+    }
+
+    fn remove_session(&self, id: &str) {
+        // Simply remove - Drop automatically unregisters events
+        self.sessions.remove(id);
+    }
+}
+```
+
+#### Real Examples
+
+**1. MediaPlayerSession** (`src/background/modules/media/players/domain.rs`):
+
+- Wraps `GlobalSystemMediaTransportControlsSession`
+- Registers 3 events (properties, playback, timeline) in `create()`
+- Stores 3 `i64` tokens
+- Unregisters all events in `Drop`
+- No manual cleanup needed anywhere
+
+**2. MediaPlayer Wrapper Pattern** (same file):
+
+For domain structs that mirror core types but need additional fields, use wrapper pattern instead of mirror structs:
+
+```rust
+// ✅ CORRECT: Wrapper pattern
+pub struct MediaPlayer {
+    pub base: seelen_core::system_state::MediaPlayer,
+    pub removed_at: Option<Instant>,  // Additional field
+}
+
+impl serde::Serialize for MediaPlayer {
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        self.base.serialize(serializer)  // Delegate to base
+    }
+}
+
+// Usage: player.base.title, player.base.umid, etc.
+```
+
+```rust
+// ❌ INCORRECT: Mirror struct (duplicate fields)
+pub struct MediaPlayer {
+    pub umid: String,
+    pub title: String,
+    pub author: String,
+    // ... duplicating all fields from core::MediaPlayer
+    pub removed_at: Option<Instant>,
+}
+```
+
+**Why use wrappers over mirrors:**
+
+- No field duplication
+- Single source of truth (core library)
+- Automatic schema updates when core changes
+- Serialization delegates to base struct
+
+#### Benefits
+
+1. **Automatic Cleanup**: `Drop` ensures resources are always freed
+2. **No Manual Tracking**: No need for separate token collections
+3. **Type Safety**: Wrapper encapsulates COM object lifecycle
+4. **Simplified Code**: Manager just inserts/removes from map
+5. **No Resource Leaks**: Compiler guarantees cleanup
+
+#### When to Use Wrappers
+
+✅ **Use wrappers for:**
+
+- WinRT objects with event subscriptions
+- Objects requiring cleanup on removal
+- COM objects with complex lifecycle
+
+❌ **Don't use wrappers for:**
+
+- Simple data structures
+- Objects without events
+- Temporary/local objects
+
 ## Key Technologies
 
 ### Frontend

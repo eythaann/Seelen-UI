@@ -12,6 +12,7 @@
 - wallpaper collections.
 - allow set start of week on calendars.
 - extended wallpapers across all monitors.
+- new start menu widget.
 
 ### enhancements
 

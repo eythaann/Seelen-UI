@@ -37,20 +37,19 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 - **Pattern**: Recently migrated to modern pattern
 - **Status**: ✅ MODERN - Reference implementation
 
+### 4. **media** ✅
+
+- **Files**: `src/background/modules/media/{devices,players}/infrastructure.rs`
+- **Pattern**: Split into two separate managers (DevicesManager and PlayersManager)
+- **Status**: ✅ MODERN - Reference implementation
+- **Notes**:
+  - Split into separate `devices` and `players` modules
+  - Both follow modern pattern with LazyLock and Once
+  - Drop trait implemented for automatic resource cleanup
+
 ---
 
 ## ❌ Modules Requiring Migration (Legacy Pattern)
-
-### 4. **media** ❌
-
-- **File**: `src/background/modules/media/infrastructure.rs`
-- **Current Pattern**:
-  - Uses `register_media_events()` function called manually
-  - Direct `emit_to_webviews` calls from event subscribers
-  - No lazy event registration
-- **Migration Priority**: HIGH (core functionality)
-- **Estimated Effort**: Medium
-- **Notes**: Complex module with multiple media sources (players, devices, sessions)
 
 ### 5. **notifications** ❌
 
@@ -146,6 +145,44 @@ When migrating a module to the modern pattern, ensure:
 - [ ] Move system event listeners to `setup_listeners()`
 - [ ] Remove Tauri-specific code from application layer
 - [ ] Use `ResultLogExt::log_error()` for error handling
+
+### WinRT Event Handler Best Practices
+
+**IMPORTANT: TypedEventHandlers do NOT need to be stored**
+
+- Windows-rs clones handlers internally, so storing them is unnecessary
+- Only store event tokens (as `i64` for WinRT, `EventRegistrationToken` for Win32)
+- Create handlers inline when registering events
+
+**Wrapper Structs for Automatic Resource Management**
+
+- For WinRT objects with event subscriptions, create wrapper structs
+- Register events in `create()` or `new()` method, store tokens
+- Unregister events in `Drop` implementation
+- Use wrappers instead of mirror structs to encapsulate COM lifecycle
+
+**Example Pattern:**
+
+```rust
+pub struct WinRTObjectWrapper {
+    pub object: SomeWinRTObject,
+    event_token: i64,  // WinRT uses i64
+}
+
+impl WinRTObjectWrapper {
+    pub fn create(object: SomeWinRTObject) -> Result<Self> {
+        // Windows-rs clones the handler, so we don't store it
+        let token = object.SomeEvent(&TypedEventHandler::new(Self::on_event))?;
+        Ok(Self { object, event_token: token })
+    }
+}
+
+impl Drop for WinRTObjectWrapper {
+    fn drop(&mut self) {
+        self.object.RemoveSomeEvent(self.event_token).log_error();
+    }
+}
+```
 
 ### Commands & Events (libs/core)
 
