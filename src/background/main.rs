@@ -12,7 +12,6 @@ mod modules;
 mod resources;
 mod restoration_and_migrations;
 mod state;
-mod system;
 mod tauri_context;
 mod tauri_plugins;
 mod utils;

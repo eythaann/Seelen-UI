@@ -78,6 +78,10 @@ export async function lazySlice(d: Dispatch) {
 
   invoke(SeelenCommand.GetMediaSessions).then((sessions) => d(RootActions.setMediaSessions(sessions)));
 
+  invoke(SeelenCommand.GetNetworkDefaultLocalIp).then((ip) => d(RootActions.setNetworkLocalIp(ip)));
+  invoke(SeelenCommand.GetNetworkAdapters).then((adapters) => d(RootActions.setNetworkAdapters(adapters)));
+  invoke(SeelenCommand.GetNetworkInternetConnection).then((online) => d(RootActions.setOnline(online)));
+
   LanguageList.getAsync().then((list) => d(RootActions.setLanguages(list.asArray())));
 
   const obj = {

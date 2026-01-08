@@ -21,7 +21,6 @@ use crate::{
     },
     restoration_and_migrations::RestorationAndMigration,
     state::application::{FullState, FULL_STATE},
-    system::declare_system_events_handlers,
     trace_lock,
     utils::discord::start_discord_rpc,
     widgets::{
@@ -150,7 +149,6 @@ impl Seelen {
 
         // order is important
         create_background_window()?;
-        declare_system_events_handlers()?;
 
         if state.is_wall_enabled() {
             self.add_wall()?;

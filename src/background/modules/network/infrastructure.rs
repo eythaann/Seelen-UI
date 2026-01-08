@@ -1,9 +1,6 @@
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Once;
 
-use seelen_core::{
-    handlers::SeelenEvent,
-    system_state::{NetworkAdapter, WlanProfile},
-};
+use seelen_core::{handlers::SeelenEvent, system_state::WlanProfile};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Networking::NetworkListManager::{
     INetworkListManager, NetworkListManager, NLM_CONNECTIVITY_IPV4_INTERNET,
@@ -17,51 +14,31 @@ use crate::{
     windows_api::Com,
 };
 
-use super::application::{get_local_ip_address, NetworkManager};
+use super::application::{get_local_ip_address, NetworkManager, NetworkManagerEvent};
 
-fn emit_networks(ip: String, adapters: Vec<NetworkAdapter>, has_internet: bool) {
-    emit_to_webviews(SeelenEvent::NetworkDefaultLocalIp, ip);
-    emit_to_webviews(SeelenEvent::NetworkAdapters, adapters);
-    emit_to_webviews(SeelenEvent::NetworkInternetConnection, has_internet);
-}
+fn get_network_manager() -> &'static NetworkManager {
+    static TAURI_EVENT_REGISTRATION: Once = Once::new();
+    TAURI_EVENT_REGISTRATION.call_once(|| {
+        NetworkManager::subscribe(|event| match event {
+            NetworkManagerEvent::ConnectivityChanged { connectivity, ip } => {
+                log::trace!(target: "network", "Connectivity changed: {connectivity:?}");
+                if let Ok(adapters) = NetworkManager::get_adapters() {
+                    let has_internet_ipv4 = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
+                        == NLM_CONNECTIVITY_IPV4_INTERNET.0;
+                    let has_internet_ipv6 = connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
+                        == NLM_CONNECTIVITY_IPV6_INTERNET.0;
 
-static REGISTERED: AtomicBool = AtomicBool::new(false);
-pub fn register_network_events() -> Result<()> {
-    if !REGISTERED.load(Ordering::Acquire) {
-        REGISTERED.store(true, Ordering::Release);
-        log::trace!("Registering network events");
-        NetworkManager::register_events(move |connectivity, ip| {
-            log::trace!(target: "network", "Connectivity changed: {connectivity:?}");
-            if let Ok(adapters) = NetworkManager::get_adapters() {
-                let has_internet_ipv4 = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
-                    == NLM_CONNECTIVITY_IPV4_INTERNET.0;
-                let has_internet_ipv6 = connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
-                    == NLM_CONNECTIVITY_IPV6_INTERNET.0;
-
-                emit_networks(ip, adapters, has_internet_ipv4 || has_internet_ipv6);
+                    emit_to_webviews(SeelenEvent::NetworkDefaultLocalIp, ip);
+                    emit_to_webviews(SeelenEvent::NetworkAdapters, adapters);
+                    emit_to_webviews(
+                        SeelenEvent::NetworkInternetConnection,
+                        has_internet_ipv4 || has_internet_ipv6,
+                    );
+                }
             }
         });
-    }
-
-    std::thread::spawn(|| -> Result<()> {
-        if let (Ok(ip), Ok(adapters)) = (get_local_ip_address(), NetworkManager::get_adapters()) {
-            let has_internet = Com::run_with_context(|| {
-                let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
-                let connectivity = unsafe { list_manager.GetConnectivity()? };
-
-                let has_internet_ipv4 = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
-                    == NLM_CONNECTIVITY_IPV4_INTERNET.0;
-                let has_internet_ipv6 = connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
-                    == NLM_CONNECTIVITY_IPV6_INTERNET.0;
-
-                Ok(has_internet_ipv4 || has_internet_ipv6)
-            })?;
-            emit_networks(ip, adapters, has_internet);
-        }
-        Ok(())
     });
-
-    Ok(())
+    NetworkManager::instance()
 }
 
 async fn try_connect_to_profile(ssid: &str) -> Result<bool> {
@@ -88,6 +65,7 @@ async fn try_connect_to_profile(ssid: &str) -> Result<bool> {
 
 #[tauri::command(async)]
 pub fn wlan_start_scanning() {
+    get_network_manager();
     log::trace!("Start scanning networks");
     NetworkManager::start_scanning(|list| {
         emit_to_webviews(SeelenEvent::NetworkWlanScanned, &list);
@@ -96,17 +74,20 @@ pub fn wlan_start_scanning() {
 
 #[tauri::command(async)]
 pub fn wlan_stop_scanning() {
+    get_network_manager();
     log::trace!("Stop scanning networks");
     NetworkManager::stop_scanning();
 }
 
 #[tauri::command(async)]
 pub async fn wlan_get_profiles() -> Result<Vec<WlanProfile>> {
+    get_network_manager();
     NetworkManager::get_wifi_profiles().await
 }
 
 #[tauri::command(async)]
 pub async fn wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> Result<bool> {
+    get_network_manager();
     if let Some(passphrase) = password {
         NetworkManager::add_profile(&ssid, &passphrase, hidden).await?;
     } else {
@@ -129,5 +110,34 @@ pub async fn wlan_connect(ssid: String, password: Option<String>, hidden: bool) 
 
 #[tauri::command(async)]
 pub async fn wlan_disconnect() -> Result<()> {
+    get_network_manager();
     NetworkManager::disconnect_all()
+}
+
+#[tauri::command(async)]
+pub fn get_network_default_local_ip() -> Result<String> {
+    get_network_manager();
+    get_local_ip_address()
+}
+
+#[tauri::command(async)]
+pub fn get_network_adapters() -> Result<Vec<seelen_core::system_state::NetworkAdapter>> {
+    get_network_manager();
+    NetworkManager::get_adapters()
+}
+
+#[tauri::command(async)]
+pub fn get_network_internet_connection() -> Result<bool> {
+    get_network_manager();
+    Com::run_with_context(|| {
+        let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
+        let connectivity = unsafe { list_manager.GetConnectivity()? };
+
+        let has_internet_ipv4 =
+            connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0 == NLM_CONNECTIVITY_IPV4_INTERNET.0;
+        let has_internet_ipv6 =
+            connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0 == NLM_CONNECTIVITY_IPV6_INTERNET.0;
+
+        Ok(has_internet_ipv4 || has_internet_ipv6)
+    })
 }

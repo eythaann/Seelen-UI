@@ -107,7 +107,9 @@ singleton lazy initialization and lazy subscription for events to send to webvie
 
 #### Modern Pattern (STANDARD - Use This)
 
-Modern modules like `monitors`, `radios`, and `start` follow this architecture:
+**ALL system modules** in `src/background/modules/` now follow this modern architecture pattern. Reference
+implementations include: `monitors`, `radios`, `start`, `media`, `notifications`, `power`, `system_settings`, `apps`,
+`system_tray`, `user`, and `network`.
 
 **File Structure:**
 
@@ -229,17 +231,20 @@ When adding a new module, update:
 
 3. Regenerate bindings: `cd libs/core && deno task build:rs`
 
-#### Legacy Pattern (Deprecated - Needs Migration)
+#### Migration Status
 
-Some older modules may use different patterns without lazy initialization or proper event separation. These should be
-migrated to the modern pattern when feasible. Examples include modules that:
+**✅ All system modules have been successfully migrated to the modern pattern.**
 
-- Directly call `emit_to_webviews` from business logic instead of using the event system
-- Don't use the `event_manager!` macro for subscription management
-- Initialize eagerly instead of using lazy initialization
-- Mix Tauri-specific code with system integration logic
+All modules in `src/background/modules/` now follow the modern architecture with:
 
-**If you encounter legacy patterns, prefer the modern pattern for new code and consider refactoring when appropriate.**
+- ✅ Lazy initialization using `LazyLock`
+- ✅ Event-driven architecture using `event_manager!` macro
+- ✅ Lazy Tauri event registration using `Once` pattern
+- ✅ Proper separation between system logic (application.rs) and Tauri integration (infrastructure.rs)
+- ✅ No direct `emit_to_webviews` calls from business logic
+
+**When creating new system modules**, strictly follow the modern pattern described above. The legacy patterns (eager
+initialization, `lazy_static!`, `AtomicBool` registration tracking, direct event emission) are no longer acceptable.
 
 ### WinRT Wrapper Pattern for Automatic Resource Management
 

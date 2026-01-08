@@ -231,6 +231,9 @@ slu_commands_declaration! {
     WlanStopScanning = wlan_stop_scanning(),
     WlanConnect = wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> bool,
     WlanDisconnect = wlan_disconnect(),
+    GetNetworkDefaultLocalIp = get_network_default_local_ip() -> String,
+    GetNetworkAdapters = get_network_adapters() -> Vec<NetworkAdapter>,
+    GetNetworkInternetConnection = get_network_internet_connection() -> bool,
 
     // system tray
     GetSystemTrayIcons = get_system_tray_icons() -> Vec<SysTrayIcon>,
