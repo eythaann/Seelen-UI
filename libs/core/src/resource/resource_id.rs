@@ -67,7 +67,8 @@ impl ResourceId {
     pub fn validate(&self) -> Result<(), String> {
         if !self.is_valid() {
             return Err(format!(
-                "Invalid resource id, should follow the regex: {}",
+                "Invalid resource id ({}), should follow the regex: {}",
+                self.0,
                 Self::regex()
             ));
         }
@@ -135,6 +136,7 @@ impl<'de> Deserialize<'de> for ResourceId {
                     "wm" => WidgetId::known_wm().0,
                     "wall" => WidgetId::known_wall().0,
                     "settings" => WidgetId::known_settings().0,
+                    "launcher" => "@deprecated/launcher".into(),
                     "popup" => WidgetId::known_popup().0,
                     _ => ResourceId(value.to_string()),
                 };
