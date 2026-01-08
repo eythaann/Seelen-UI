@@ -59,11 +59,21 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
   - Drop trait implemented for automatic cleanup
   - LOADED_NOTIFICATIONS uses Mutex<HashSet> for thread-safe notification tracking
 
+### 6. **power** ✅
+
+- **File**: `src/background/modules/power/infrastructure.rs`
+- **Pattern**: Uses `Once` for lazy event registration, LazyLock singleton with `instance()` method
+- **Status**: ✅ MODERN - Reference implementation
+- **Notes**:
+  - Implements wake-up event handling with 2-second timeout to refresh stale power state
+  - Uses `Arc<Mutex<>>` for thread-safe mutable state access from Windows callbacks
+  - Proper separation between system logic (application.rs) and Tauri integration (infrastructure.rs)
+
 ---
 
 ## ❌ Modules Requiring Migration (Legacy Pattern)
 
-### 6. **network** ❌
+### 7. **network** ❌
 
 - **File**: `src/background/modules/network/infrastructure.rs`
 - **Current Pattern**:
@@ -73,16 +83,9 @@ See `CLAUDE.md` section "System Modules Architecture (Modern Pattern)" for compl
 - **Estimated Effort**: Low-Medium
 - **Notes**: Relatively straightforward migration
 
-### 7. **apps** ❌
+### 8. **apps** ❌
 
 - **File**: `src/background/modules/apps/infrastructure.rs`
-- **Current Pattern**: Unknown (needs analysis)
-- **Migration Priority**: MEDIUM
-- **Estimated Effort**: Unknown
-
-### 8. **power** ❌
-
-- **File**: `src/background/modules/power/infrastructure.rs`
 - **Current Pattern**: Unknown (needs analysis)
 - **Migration Priority**: MEDIUM
 - **Estimated Effort**: Unknown

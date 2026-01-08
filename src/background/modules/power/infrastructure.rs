@@ -1,3 +1,5 @@
+use std::sync::Once;
+
 use seelen_core::{
     handlers::SeelenEvent,
     system_state::{Battery, PowerMode, PowerStatus},
@@ -8,45 +10,48 @@ use crate::{
     app::emit_to_webviews,
     error::Result,
     log_error,
-    modules::power::application::{PowerManagerEvent, POWER_MANAGER},
+    modules::power::application::{PowerManager, PowerManagerEvent},
     trace_lock,
     windows_api::WindowsApi,
 };
 
-pub use super::application::PowerManager;
-
-pub fn register_power_events() {
-    let _guard = trace_lock!(POWER_MANAGER);
-    PowerManager::subscribe(|event| match event {
-        PowerManagerEvent::PowerStatusChanged(status) => {
-            emit_to_webviews(SeelenEvent::PowerStatus, status);
-        }
-        PowerManagerEvent::BatteriesChanged(batteries) => {
-            emit_to_webviews(SeelenEvent::BatteriesStatus, batteries);
-        }
-        PowerManagerEvent::PowerModeChanged(mode) => {
-            emit_to_webviews(SeelenEvent::PowerMode, mode);
-        }
+/// Lazy initialization wrapper that registers Tauri events on first access
+/// This keeps Tauri logic separate from system logic while ensuring lazy initialization
+fn get_power_manager() {
+    static TAURI_EVENT_REGISTRATION: Once = Once::new();
+    TAURI_EVENT_REGISTRATION.call_once(|| {
+        PowerManager::subscribe(|event| match event {
+            PowerManagerEvent::PowerStatusChanged(status) => {
+                emit_to_webviews(SeelenEvent::PowerStatus, status);
+            }
+            PowerManagerEvent::BatteriesChanged(batteries) => {
+                emit_to_webviews(SeelenEvent::BatteriesStatus, batteries);
+            }
+            PowerManagerEvent::PowerModeChanged(mode) => {
+                emit_to_webviews(SeelenEvent::PowerMode, mode);
+            }
+        });
     });
-}
-
-pub fn release_power_events() {
-    trace_lock!(POWER_MANAGER).release();
+    // Access the lazy lock to ensure initialization
+    let _ = &*trace_lock!(PowerManager::instance());
 }
 
 #[tauri::command(async)]
 pub fn get_power_status() -> PowerStatus {
-    trace_lock!(POWER_MANAGER).power_status.clone()
+    get_power_manager();
+    trace_lock!(PowerManager::instance()).power_status.clone()
 }
 
 #[tauri::command(async)]
 pub fn get_power_mode() -> PowerMode {
-    trace_lock!(POWER_MANAGER).current_power_mode
+    get_power_manager();
+    trace_lock!(PowerManager::instance()).current_power_mode
 }
 
 #[tauri::command(async)]
 pub fn get_batteries() -> Vec<Battery> {
-    trace_lock!(POWER_MANAGER).batteries.clone()
+    get_power_manager();
+    trace_lock!(PowerManager::instance()).batteries.clone()
 }
 
 #[tauri::command(async)]
