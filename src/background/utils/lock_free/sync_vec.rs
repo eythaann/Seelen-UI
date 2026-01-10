@@ -61,6 +61,13 @@ impl<T> SyncVec<T> {
     pub fn replace(&self, value: Vec<T>) {
         *self.0.lock() = value;
     }
+
+    pub fn sort_by<F>(&self, compare: F)
+    where
+        F: FnMut(&T, &T) -> std::cmp::Ordering,
+    {
+        self.0.lock().sort_by(compare);
+    }
 }
 
 impl<T: Clone> SyncVec<T> {

@@ -1,4 +1,3 @@
-import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered";
 import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance";
 import { mount } from "svelte";
 import App from "./App.svelte";
@@ -12,11 +11,10 @@ const root = document.getElementById("root")!;
 const widget = Widget.getCurrent();
 await widget.init({
   show: false,
-  autoSizeByContent: root,
 });
+await widget.webview.setResizable(false);
 
 disableAnimationsOnPerformanceMode();
-await declareDocumentAsLayeredHitbox();
 
 mount(App, {
   target: root,

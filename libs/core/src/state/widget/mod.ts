@@ -1,4 +1,5 @@
 import {
+  type Rect,
   type ThirdPartyWidgetSettings,
   type Widget as IWidget,
   type WidgetConfigDefinition,
@@ -129,12 +130,10 @@ export class Widget {
     return [id as WidgetId, query];
   }
 
-  /** Will throw if the library is being used on a non Seelen UI environment */
-  static getCurrentWidgetId(): WidgetId {
-    return this.getCurrent().id;
-  }
-
-  /** Will throw if the library is being used on a non Seelen UI environment */
+  /**
+   * Alternative accesor for the current running widget.\
+   * Will throw if the library is being used on a non Seelen UI environment
+   */
   static getCurrent(): Widget {
     const scope = globalThis as ExtendedGlobalThis;
     if (!scope.__SLU_WIDGET) {
@@ -145,7 +144,14 @@ export class Widget {
     );
   }
 
-  private static getDefinitionDefaultValues(definition: WidgetConfigDefinition): Record<string, unknown> {
+  /** The current running widget */
+  static get self() {
+    return Widget.getCurrent();
+  }
+
+  private static getDefinitionDefaultValues(
+    definition: WidgetConfigDefinition,
+  ): Record<string, unknown> {
     const config: Record<string, unknown> = {};
 
     // Check if it's a group (has "group" property)
@@ -360,6 +366,18 @@ export class Widget {
       // fix for cutted popups, ensure correct size on trigger.
       // await this.autoSizer?.execute();
       cb(payload);
+    });
+  }
+
+  /** If animations are enabled this will animate the movement of the widget */
+  public async setPosition(rect: Rect): Promise<void> {
+    await invoke(SeelenCommand.SetSelfPosition, {
+      rect: {
+        left: Math.round(rect.left),
+        top: Math.round(rect.top),
+        right: Math.round(rect.right),
+        bottom: Math.round(rect.bottom),
+      },
     });
   }
 }

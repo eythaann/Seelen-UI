@@ -1,6 +1,5 @@
 import { invoke, type Rect, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import type { Wallpaper } from "@seelen-ui/lib/types";
-import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { lazyRune } from "libs/ui/svelte/utils";
 
 let monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
@@ -38,20 +37,8 @@ const relativeMonitors = $derived.by(() => {
 });
 
 $effect.root(() => {
-  async function updateSize(rect: Rect) {
-    let webview = Widget.getCurrent().webview;
-    await webview.setPosition(new PhysicalPosition(rect.left, rect.top));
-    await webview.setSize(
-      new PhysicalSize({
-        width: rect.right - rect.left,
-        height: rect.bottom - rect.top,
-      }),
-    );
-  }
-
   $effect(() => {
-    // as this is async we pass the deps as argument to be scoped to this effect
-    updateSize(desktopRect);
+    Widget.self.setPosition(desktopRect);
   });
 });
 

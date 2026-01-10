@@ -171,6 +171,7 @@ slu_commands_declaration! {
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
+    SetSelfPosition = set_self_position(rect: Rect),
 
     // Shell
     GetNativeShellWallpaper = get_native_shell_wallpaper() -> PathBuf,

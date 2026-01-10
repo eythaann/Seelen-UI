@@ -14,7 +14,7 @@ export class PluginList extends List<Plugin> {
   }
 
   forCurrentWidget(): Plugin[] {
-    const target = Widget.getCurrentWidgetId();
+    const target = Widget.self.id;
     return this.inner.filter((plugin) => plugin.target === target);
   }
 }

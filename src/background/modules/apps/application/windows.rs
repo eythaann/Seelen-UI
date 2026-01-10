@@ -54,6 +54,21 @@ impl UserAppsManager {
         let mut is_interactable = USER_APPS_MANAGER.contains_win(&window);
 
         match event {
+            WinEvent::SystemForeground => {
+                if is_interactable {
+                    let hwnd = window.address();
+                    USER_APPS_MANAGER.interactable_windows.sort_by(|a, b| {
+                        if a.hwnd == hwnd {
+                            std::cmp::Ordering::Less
+                        } else if b.hwnd == hwnd {
+                            std::cmp::Ordering::Greater
+                        } else {
+                            std::cmp::Ordering::Equal
+                        }
+                    });
+                    Self::send(UserAppWinEvent::Updated(window.address()));
+                }
+            }
             WinEvent::ObjectCreate | WinEvent::ObjectShow => {
                 if !is_interactable && is_interactable_window(&window) {
                     USER_APPS_MANAGER.add_win(&window);

@@ -14,8 +14,10 @@ use std::{path::PathBuf, sync::LazyLock};
 use seelen_core::{
     handlers::SeelenEvent,
     state::{WidgetStatus, WidgetTriggerPayload},
+    Rect,
 };
 use tauri::{Emitter, Manager};
+use windows::Win32::UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS;
 
 use crate::{
     app::get_app_handle,
@@ -23,7 +25,7 @@ use crate::{
     state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap, WidgetWebviewLabel},
     widgets::manager::WIDGET_MANAGER,
-    windows_api::input::Keyboard,
+    windows_api::{input::Keyboard, WindowsApi},
 };
 
 static PENDING_TRIGGERS: LazyLock<SyncHashMap<WidgetWebviewLabel, WidgetTriggerPayload>> =
@@ -74,6 +76,22 @@ pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
 #[tauri::command(async)]
 pub fn get_self_window_handle(webview: tauri::WebviewWindow<tauri::Wry>) -> Result<isize> {
     Ok(webview.hwnd()?.0 as isize)
+}
+
+#[tauri::command(async)]
+pub fn set_self_position(webview: tauri::WebviewWindow<tauri::Wry>, rect: Rect) -> Result<()> {
+    use windows::Win32::Foundation::{HWND, RECT};
+    let hwnd = HWND(webview.hwnd()?.0);
+    let rect = RECT {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+    };
+    // pre set position for resize in case of multiples dpi
+    WindowsApi::move_window(hwnd, &rect)?;
+    WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
+    Ok(())
 }
 
 pub fn show_settings() -> Result<()> {

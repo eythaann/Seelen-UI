@@ -55,6 +55,7 @@ export enum SeelenCommand {
   TriggerWidget = "trigger_widget",
   SetCurrentWidgetStatus = "set_current_widget_status",
   GetSelfWindowId = "get_self_window_handle",
+  SetSelfPosition = "set_self_position",
   GetNativeShellWallpaper = "get_native_shell_wallpaper",
   SetNativeShellWallpaper = "set_native_shell_wallpaper",
   GetUser = "get_user",
