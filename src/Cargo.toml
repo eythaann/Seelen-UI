@@ -174,7 +174,7 @@ windows = { workspace = true, features = [
 ] }
 time = { workspace = true, features = ["formatting", "local-offset"] }
 scc = { workspace = true }
-open = "5.3.2"
+open = "5.3.3"
 iced = { version = "0.13.1", features = ["image", "svg"] }
 
 [features]
