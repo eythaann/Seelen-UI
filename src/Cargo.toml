@@ -23,9 +23,7 @@ path = "splash/main.rs"
 
 [build-dependencies]
 tauri-build = { workspace = true, features = [] }
-sha2 = { workspace = true }
-minisign = { workspace = true }
-base64 = { workspace = true }
+slu-utils = { workspace = true }
 
 [dependencies]
 slu-ipc = { workspace = true }
@@ -79,6 +77,7 @@ translators = { workspace = true, features = ["google", "tokio-async"] }
 rand = { workspace = true }
 discord-rich-presence = { workspace = true }
 win-hotkeys = { workspace = true }
+walkdir = { workspace = true }
 tokio = { workspace = true }
 seelen-core = { workspace = true }
 windows = { workspace = true, features = [

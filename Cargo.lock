@@ -6814,7 +6814,6 @@ dependencies = [
  "itertools 0.12.1",
  "lazy_static",
  "log",
- "minisign",
  "notify-debouncer-full",
  "open",
  "os_info",
@@ -6832,7 +6831,6 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_yaml",
- "sha2",
  "slu-ipc",
  "slu-utils",
  "sysinfo",
@@ -6853,6 +6851,7 @@ dependencies = [
  "url",
  "urlencoding",
  "uuid 1.19.0",
+ "walkdir",
  "widestring",
  "win-hotkeys",
  "win-screenshot",
@@ -7246,6 +7245,11 @@ dependencies = [
 [[package]]
 name = "slu-utils"
 version = "0.0.1"
+dependencies = [
+ "base64 0.22.1",
+ "minisign",
+ "sha2",
+]
 
 [[package]]
 name = "sluhk"

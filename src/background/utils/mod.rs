@@ -22,7 +22,6 @@ use std::{
 };
 
 use itertools::Itertools;
-use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use windows::{
     core::GUID,
@@ -110,11 +109,11 @@ macro_rules! trace_lock {
     }};
 }
 
-lazy_static! {
-    pub static ref PERFORMANCE_HELPER: Mutex<PerformanceHelper> = Mutex::new(PerformanceHelper {
+pub static PERFORMANCE_HELPER: LazyLock<Mutex<PerformanceHelper>> = LazyLock::new(|| {
+    Mutex::new(PerformanceHelper {
         time: HashMap::new(),
-    });
-}
+    })
+});
 
 pub struct PerformanceHelper {
     time: HashMap<String, Instant>,

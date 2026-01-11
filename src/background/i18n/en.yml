@@ -1,11 +1,5 @@
 cancel: Cancel
 done: Done
-drivers:
-  got_it: Got it
-  monitor_disabled: >-
-    It appears that some monitor drivers are disabled. Please enable them to let
-    Seelen UI work properly.
-  monitor_disabled_title: Monitor drivers are disabled
 resource:
   added: A new resource has been added
   download_failed_body: >-
@@ -26,6 +20,12 @@ runtime:
   outdated_description: >-
     Seelen UI requires Webview2 Runtime %{min_version} or higher. Please update
     it.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
+  files_integrity: |-
+    We couldn't verify the integrity of the application files.
+    This can happen if files were modified, corrupted, or the installation is incomplete.
+    For security reasons, Seelen UI cannot continue.
+    Please reinstall it from the official website.
 service:
   not_running: Seelen UI Service not running
   not_running_description: >-

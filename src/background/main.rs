@@ -33,9 +33,8 @@ use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
     integrity::{
-        check_for_webview_optimal_state, is_already_running, print_initial_information,
-        register_panic_hook, restart_as_appx, restart_as_interactive_user,
-        validate_webview_runtime_is_installed,
+        is_already_running, print_initial_information, register_panic_hook, restart_as_appx,
+        restart_as_interactive_user,
     },
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
@@ -55,50 +54,6 @@ pub fn get_tokio_handle() -> &'static tokio::runtime::Handle {
     TOKIO_RUNTIME_HANDLE
         .get()
         .expect("Tokio runtime was not initialized")
-}
-
-async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
-    print_initial_information();
-    validate_webview_runtime_is_installed(app_handle)?;
-    SelfPipe::start_listener()?;
-
-    if !ServicePipe::is_running() {
-        ServicePipe::start_service().await?;
-    }
-
-    check_for_webview_optimal_state(app_handle)?;
-
-    trace_lock!(SEELEN).start()?;
-    trace_lock!(PERFORMANCE_HELPER).end("setup");
-    Ok(())
-}
-
-fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
-    match event {
-        tauri::RunEvent::Ready => {
-            log::info!("Tauri Application is ready.");
-        }
-        tauri::RunEvent::Resumed => {
-            log::info!("Tauri Event Loop was resumed.");
-        }
-        tauri::RunEvent::ExitRequested { api, code, .. } => match code {
-            Some(code) => {
-                // if exit code is 0 it means that the app was closed by the user
-                if code == 0 {
-                    log_error!(ServicePipe::request(SvcAction::Stop));
-                }
-            }
-            // prevent close background on webview windows closing
-            None => api.prevent_exit(),
-        },
-        tauri::RunEvent::Exit => {
-            log::info!("───────────────────── Exiting Seelen UI ─────────────────────");
-            if Seelen::is_running() {
-                trace_lock!(SEELEN).stop();
-            }
-        }
-        _ => {}
-    }
 }
 
 #[tokio::main]
@@ -151,4 +106,49 @@ async fn main() -> Result<()> {
     tauri::async_runtime::set(tokio::runtime::Handle::current());
     app.run(app_callback);
     Ok(())
+}
+
+async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
+    print_initial_information();
+    utils::integrity::validate_webview_runtime_is_installed(app_handle)?;
+    // utils::integrity::ensure_bundle_files_integrity(app_handle)?;
+
+    SelfPipe::start_listener()?;
+    if !ServicePipe::is_running() {
+        ServicePipe::start_service().await?;
+    }
+
+    utils::integrity::check_for_webview_optimal_state(app_handle)?;
+
+    trace_lock!(SEELEN).start()?;
+    trace_lock!(PERFORMANCE_HELPER).end("setup");
+    Ok(())
+}
+
+fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
+    match event {
+        tauri::RunEvent::Ready => {
+            log::info!("Tauri Application is ready.");
+        }
+        tauri::RunEvent::Resumed => {
+            log::info!("Tauri Event Loop was resumed.");
+        }
+        tauri::RunEvent::ExitRequested { api, code, .. } => match code {
+            Some(code) => {
+                // if exit code is 0 it means that the app was closed by the user
+                if code == 0 {
+                    log_error!(ServicePipe::request(SvcAction::Stop));
+                }
+            }
+            // prevent close background on webview windows closing
+            None => api.prevent_exit(),
+        },
+        tauri::RunEvent::Exit => {
+            log::info!("───────────────────── Exiting Seelen UI ─────────────────────");
+            if Seelen::is_running() {
+                trace_lock!(SEELEN).stop();
+            }
+        }
+        _ => {}
+    }
 }
