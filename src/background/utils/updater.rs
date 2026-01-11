@@ -6,6 +6,8 @@ use crate::{app::get_app_handle, cli::ServicePipe, error::Result, state::applica
 
 use super::is_running_as_appx;
 
+pub static SIGN_PUB_KEY: &str = "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK";
+
 pub async fn check_for_updates() -> Result<Option<Update>> {
     if tauri::is_dev() || is_running_as_appx() {
         return Ok(None);
@@ -18,6 +20,7 @@ pub async fn check_for_updates() -> Result<Option<Update>> {
     if channel == UpdateChannel::Nightly {
         let updater: tauri_plugin_updater::Updater = get_app_handle()
             .updater_builder()
+            .pubkey(SIGN_PUB_KEY)
             .endpoints(vec![
                 "https://github.com/eythaann/Seelen-UI/releases/download/nightly/latest.json"
                     .try_into()
@@ -31,6 +34,7 @@ pub async fn check_for_updates() -> Result<Option<Update>> {
     if update.is_none() {
         let updater: tauri_plugin_updater::Updater = get_app_handle()
             .updater_builder()
+            .pubkey(SIGN_PUB_KEY)
             .endpoints(vec![
                 "https://github.com/eythaann/Seelen-UI/releases/latest/download/latest.json"
                     .try_into()
