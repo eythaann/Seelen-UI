@@ -94,6 +94,9 @@
     ]
   },
   "plugins": {
+    "updater": {
+      "pubkey": ""
+    },
     "deep-link": {
       "mobile": [],
       "desktop": {
