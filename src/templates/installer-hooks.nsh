@@ -16,6 +16,8 @@
   ${EndIf}
 
   File /a "${__FILEDIR__}\..\..\sluhk.dll"
+  File /a "${__FILEDIR__}\..\..\SHA256SUMS"
+  File /a "${__FILEDIR__}\..\..\SHA256SUMS.sig"
 
   ; Include PDB file only for nightly builds
   ${StrLoc} $0 "${VERSION}" "nightly" ">"

@@ -41,9 +41,7 @@
     "licenseFile": "../LICENSE",
     "homepage": "https://github.com/eythaann/Seelen-UI",
     "resources": {
-      "static": "static",
-      "gen/SHA256SUMS": "SHA256SUMS",
-      "gen/SHA256SUMS.sig": "SHA256SUMS.sig"
+      "static": "static"
     },
     "targets": [
       "nsis"
@@ -67,17 +65,17 @@
           "bulgarian",
           "dutch",
           "english",
+          "french",
           "german",
           "japanese",
           "korean",
           "portuguesebr",
           "russian",
-          "tradchinese",
           "simpchinese",
-          "french",
           "spanish",
-          "turkish",
-          "swedish"
+          "swedish",
+          "tradchinese",
+          "turkish"
         ]
       }
     },
