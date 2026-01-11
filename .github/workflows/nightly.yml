@@ -94,6 +94,7 @@ jobs:
             target/${{ matrix.target }}/release/*.dll
             target/${{ matrix.target }}/release/SHA256SUMS
             target/${{ matrix.target }}/release/SHA256SUMS.sig
+            target/${{ matrix.target }}/release/seelen_ui.pdb
 
   merge-binaries:
     needs: build

@@ -47,12 +47,14 @@ if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
 
     if (!app.exe?.endsWith("seelen-ui.exe")) {
       console.trace("Reloading widget.");
-      location.reload();
+      // add a query hash to force be a new page
+      location.search = `r=${Date.now()}`;
     }
   }, 60_000 * 10); // every 10 minutes
 }
 
 listen("internal::session_resumed", () => {
   console.trace("Reloading widget.");
-  location.reload();
+  // add a query hash to force be a new page
+  location.search = `r=${Date.now()}`;
 });

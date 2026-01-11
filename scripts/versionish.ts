@@ -41,7 +41,7 @@ function createGitCommit(message: string): void {
   console.log(`✓ Git commit created: ${message}`);
 }
 
-function updateAllVersions(version: string): void {
+function updateAllVersions(version: string, skipLockfiles = false): void {
   // Update library versions
   console.log("Updating library versions...");
   updateCargoVersion("./libs/core/Cargo.toml", version);
@@ -56,9 +56,13 @@ function updateAllVersions(version: string): void {
   fs.writeFileSync("./package.json", JSON.stringify(packageJson, null, 2) + "\n");
   console.log("✓ App versions updated");
 
-  // Update lockfiles
-  execSync("cargo check", { stdio: "inherit" });
-  execSync("npm install", { stdio: "inherit" });
+  // Update lockfiles (skip in CI)
+  if (!skipLockfiles) {
+    execSync("cargo check", { stdio: "inherit" });
+    execSync("npm install", { stdio: "inherit" });
+  } else {
+    console.log("⊘ Skipping lockfile updates (CI mode)");
+  }
 }
 
 async function main(args: string[]) {
@@ -98,7 +102,7 @@ async function main(args: string[]) {
       ({ version }) => {
         console.log(`Setting version for CI: ${version}`);
 
-        updateAllVersions(version);
+        updateAllVersions(version, true);
 
         console.log(`\n✓ Version ${version} set successfully (no commit)`);
       },
