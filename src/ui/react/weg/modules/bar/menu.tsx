@@ -1,12 +1,11 @@
-import { SeelenCommand } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { dialog } from "@seelen-ui/lib/tauri";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { invoke } from "@tauri-apps/api/core";
 import type { ItemType } from "antd/es/menu/interface";
 import type { TFunction } from "i18next";
 
 import { $dock_state, $dock_state_actions } from "../shared/state/items.ts";
-import { WegItemType } from "@seelen-ui/lib/types";
+import { WegItemType, type WidgetId } from "@seelen-ui/lib/types";
 
 export function getSeelenWegMenu(t: TFunction): ItemType[] {
   const isRestrictedBar = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length > 0 &&
@@ -27,7 +26,9 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
         label: t("taskbar_menu.settings"),
         icon: <Icon iconName="RiSettings4Fill" />,
         onClick() {
-          invoke(SeelenCommand.ShowAppSettings);
+          invoke(SeelenCommand.TriggerWidget, {
+            payload: { id: "@seelen/settings" as WidgetId },
+          });
         },
       },
     ];
@@ -123,7 +124,9 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       label: t("taskbar_menu.settings"),
       icon: <Icon iconName="RiSettings4Fill" />,
       onClick() {
-        invoke(SeelenCommand.ShowAppSettings);
+        invoke(SeelenCommand.TriggerWidget, {
+          payload: { id: "@seelen/settings" as WidgetId },
+        });
       },
     },
   ];

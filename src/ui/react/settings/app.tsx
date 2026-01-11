@@ -2,6 +2,7 @@ import { useDarkMode } from "libs/ui/react/utils/styling.ts";
 import { ConfigProvider, theme } from "antd";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Widget } from "@seelen-ui/lib";
 
 import { newSelectors } from "./modules/shared/store/app/reducer.ts";
 
@@ -18,6 +19,8 @@ export function App() {
       splashscreen?.classList.add("vanish");
       setTimeout(() => splashscreen?.classList.add("hidden"), 300);
     }, 300);
+
+    Widget.self.ready();
   }, []);
 
   return (

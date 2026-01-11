@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import type { PluginId } from "@seelen-ui/lib/types";
+import type { PluginId, WidgetId } from "@seelen-ui/lib/types";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Checkbox, Flex, Input, Menu, Space } from "antd";
@@ -76,10 +76,7 @@ export function MainContextMenu() {
                                   }
                                 }}
                               />
-                              <Button
-                                type="primary"
-                                onClick={addCustomTextToToolbar}
-                              >
+                              <Button type="primary" onClick={addCustomTextToToolbar}>
                                 <Icon iconName="MdOutlineTextFields" />
                               </Button>
                             </Space.Compact>
@@ -129,11 +126,7 @@ export function MainContextMenu() {
           },
           {
             key: "reoder",
-            icon: (
-              <Icon
-                iconName={$toolbar_state.value.isReorderDisabled ? "VscUnlock" : "VscLock"}
-              />
-            ),
+            icon: <Icon iconName={$toolbar_state.value.isReorderDisabled ? "VscUnlock" : "VscLock"} />,
             label: t(
               $toolbar_state.value.isReorderDisabled ? "context_menu.reorder_enable" : "context_menu.reorder_disable",
             ),
@@ -157,7 +150,9 @@ export function MainContextMenu() {
             icon: <Icon iconName="RiSettings4Fill" />,
             label: t("context_menu.settings"),
             onClick() {
-              invoke(SeelenCommand.ShowAppSettings);
+              invoke(SeelenCommand.TriggerWidget, {
+                payload: { id: "@seelen/settings" as WidgetId },
+              });
             },
           },
         ]}

@@ -145,7 +145,7 @@ export class Widget {
   }
 
   /** The current running widget */
-  static get self() {
+  static get self(): Widget {
     return Widget.getCurrent();
   }
 

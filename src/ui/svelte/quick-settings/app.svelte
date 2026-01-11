@@ -7,7 +7,9 @@
   import RadioButtons from "./components/RadioButtons.svelte";
 
   function openAppSettings() {
-    invoke(SeelenCommand.ShowAppSettings);
+    invoke(SeelenCommand.TriggerWidget, {
+      payload: { id: "@seelen/settings" as WidgetId },
+    });
   }
 
   function openPowerMenu() {

@@ -18,6 +18,10 @@ impl WidgetWebview {
             WidgetLoader::Legacy => {
                 return Err("Legacy widgets are not supported by the new widget loader".into());
             }
+            WidgetLoader::InternalReact => {
+                let resource_name = widget.id.resource_name();
+                tauri::WebviewUrl::App(format!("react/{resource_name}/index.html").into())
+            }
             WidgetLoader::Internal => {
                 let resource_name = widget.id.resource_name();
                 tauri::WebviewUrl::App(format!("svelte/{resource_name}/index.html").into())

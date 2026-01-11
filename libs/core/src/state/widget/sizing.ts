@@ -11,7 +11,7 @@ export class WidgetAutoSizer {
     this.setup();
   }
 
-  private setup() {
+  private setup(): () => void {
     // Disable resizing by the user
     this.webview.setResizable(false);
 
@@ -30,7 +30,7 @@ export class WidgetAutoSizer {
     };
   }
 
-  async execute() {
+  async execute(): Promise<void> {
     const contentWidth = this.element.scrollWidth;
     const contentHeight = this.element.scrollHeight;
 

@@ -104,7 +104,7 @@ impl WidgetInstance {
                 }
                 Err(err) => {
                     log::error!("Failed to create webview: {}", err);
-                    self.set_status(WidgetStatus::CrashedOnLoad);
+                    self.set_status(WidgetStatus::CrashedOnCreation);
                 }
             }
         }

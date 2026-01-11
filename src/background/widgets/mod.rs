@@ -16,12 +16,12 @@ use seelen_core::{
     state::{WidgetStatus, WidgetTriggerPayload},
     Rect,
 };
-use tauri::{Emitter, Manager};
+use tauri::Emitter;
 use windows::Win32::UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS;
 
 use crate::{
     app::get_app_handle,
-    error::{Result, ResultLogExt},
+    error::Result,
     state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap, WidgetWebviewLabel},
     widgets::manager::WIDGET_MANAGER,
@@ -95,33 +95,7 @@ pub fn set_self_position(webview: tauri::WebviewWindow<tauri::Wry>, rect: Rect) 
 }
 
 pub fn show_settings() -> Result<()> {
-    log::trace!("Show settings window");
-    let label = WidgetWebviewLabel::new("@seelen/settings", None, None);
-    let handle = get_app_handle();
-    match handle.get_webview_window(&label.raw) {
-        Some(window) => {
-            window.unminimize()?;
-            window.set_focus()?;
-        }
-        None => {
-            let args = WebviewArgs::new().disable_gpu();
-            tauri::WebviewWindowBuilder::new(
-                handle,
-                label.raw,
-                tauri::WebviewUrl::App("react/settings/index.html".into()),
-            )
-            .title("Settings")
-            .inner_size(800.0, 500.0)
-            .min_inner_size(600.0, 400.0)
-            .visible(false)
-            .decorations(false)
-            .center()
-            .data_directory(args.data_directory())
-            .additional_browser_args(&args.to_string())
-            .build()?;
-        }
-    }
-    Ok(())
+    trigger_widget(WidgetTriggerPayload::new("@seelen/settings".into()))
 }
 
 #[tauri::command(async)]
@@ -133,13 +107,6 @@ pub fn show_start_menu() -> Result<()> {
     }
     // trick for showing the native start menu
     Keyboard::new().send_keys("{win}")
-}
-
-// https://docs.rs/tauri/latest/tauri/window/struct.WindowBuilder.html#known-issues
-// https://github.com/tauri-apps/wry/issues/583
-#[tauri::command(async)]
-pub fn show_app_settings() {
-    show_settings().log_error();
 }
 
 pub struct WebviewArgs {
