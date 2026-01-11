@@ -24,6 +24,8 @@ path = "splash/main.rs"
 [build-dependencies]
 tauri-build = { workspace = true, features = [] }
 sha2 = { workspace = true }
+minisign = { workspace = true }
+base64 = { workspace = true }
 
 [dependencies]
 slu-ipc = { workspace = true }

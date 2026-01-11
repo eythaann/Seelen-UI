@@ -78,14 +78,10 @@ jobs:
         run: cargo build --release --target ${{ matrix.target }} -p sluhk
 
       - name: Build
-        run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
-
-      - name: Sign check sums file
         env:
-          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        run: |
-          npx tauri signer sign --verbose "target/${{ matrix.target }}/release/SHA256SUMS"
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
 
       - name: Upload binaries to artifacts
         id: upload-binaries
@@ -282,8 +278,8 @@ jobs:
 
       - name: Tauri Updater Signature
         env:
-          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          SIGNING_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         run: |
           npm install -g @tauri-apps/cli
 
@@ -296,9 +292,9 @@ jobs:
           PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
 
           echo "Signing ${PATH1}..."
-          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH1"
+          tauri signer sign --verbose "$PATH1"
           echo "Signing ${PATH2}..."
-          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH2"
+          tauri signer sign --verbose "$PATH2"
 
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
