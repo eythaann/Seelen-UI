@@ -1,10 +1,5 @@
 cancel: لغوه کول
 done: شوی
-drivers:
-  got_it: ور واخیست
-  monitor_disabled: >-
-    داسې بریښي چې ځینې نظارت کونکي معلولین معیوب دي. مهرباني وکړئ دوی ته وړتیا ورکړئ چې زنګ ووهي.
-  monitor_disabled_title: د چلوونکو څارنه معلولیت لري
 resource:
   added: یو نوی سرچینه اضافه شوې
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: د سازونې فایل فاسد شوی، پرځای یې د ډیفالټ ارزښتونو په کارولو سره.
   corrupted_file_path: فاسد فایل لاره
   download: د ډاونلوډ پاڼې ته لاړ شئ
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 د چلولو وخت ونه موندل شو
   not_found_description: Seelen UI د Webview2 Runtime ته اړتیا لري. مهرباني وکړئ دا نصب کړئ.
   outdated: WebView2 د چلولو وخت زوړ شوی
