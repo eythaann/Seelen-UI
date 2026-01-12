@@ -1,10 +1,5 @@
 cancel: రద్దు చేయండి
 done: పూర్తయింది
-drivers:
-  got_it: వచ్చింది
-  monitor_disabled: >-
-    కొంతమంది మానిటర్ డ్రైవర్లు నిలిపివేయబడినట్లు కనిపిస్తోంది. దయచేసి సీలెన్ యుఐని సరిగ్గా పని చేయడానికి వీలు కల్పించండి.
-  monitor_disabled_title: మానిటర్ డ్రైవర్లు నిలిపివేయబడ్డాయి
 resource:
   added: కొత్త వనరు జోడించబడింది
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: బదులుగా డిఫాల్ట్ విలువలను ఉపయోగించి కాన్ఫిగరేషన్ ఫైల్ పాడైంది.
   corrupted_file_path: పాడైన ఫైల్ మార్గం
   download: డౌన్‌లోడ్ పేజీకి వెళ్లండి
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 రన్‌టైమ్ కనుగొనబడలేదు
   not_found_description: Seelen UIకి Webview2 రన్‌టైమ్ అవసరం. దయచేసి దీన్ని ఇన్‌స్టాల్ చేయండి.
   outdated: WebView2 రన్‌టైమ్ పాతది
