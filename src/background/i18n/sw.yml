@@ -1,10 +1,5 @@
 cancel: Ghairi
 done: Imekamilika
-drivers:
-  got_it: Nimepata
-  monitor_disabled: >-
-    Inatokea kwamba madereva wengine wa kuangalia ni walemavu. Tafadhali wawezeshe kuruhusu Seelen UI ifanye kazi vizuri.
-  monitor_disabled_title: Madereva wa kufuatilia ni walemavu
 resource:
   added: Rasilimali mpya imeongezwa
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Faili ya usanidi imeharibiwa, kwa kutumia maadili ya msingi badala yake.
   corrupted_file_path: Njia ya faili iliyoharibiwa
   download: Nenda kwenye ukurasa wa kupakua
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: Muda wa utekelezaji wa WebView2 haujapatikana
   not_found_description: Seelen UI inahitaji Webview2 Runtime. Tafadhali isakinishe.
   outdated: WebView2 Runtime imepitwa na wakati
