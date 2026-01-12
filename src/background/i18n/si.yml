@@ -1,10 +1,5 @@
 cancel: අවලංගු කරන්න
 done: කළා
-drivers:
-  got_it: තේරුම් ගත්තා ද
-  monitor_disabled: >-
-    සමහර මොනිටර් රියදුරන් අක්රීය කර ඇති බව පෙනේ. II UI නිසි ලෙස වැඩ කිරීමට කරුණාකර ඒවා සක්රීය කරන්න.
-  monitor_disabled_title: අධීක්ෂණ රියදුරන් අක්රීය කර ඇත
 resource:
   added: නව සම්පතක් එකතු කර ඇත
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: ඒ වෙනුවට පෙරනිමි අගයන් භාවිතා කරමින් වින්යාස ගොනුවක් දූෂිත වේ.
   corrupted_file_path: දූෂිත ගොනු මාර්ගය
   download: බාගැනීම් පිටුවට යන්න
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 ධාවන කාලය හමු නොවීය
   not_found_description: Seelen UI සඳහා Webview2 ධාවන කාලය අවශ්‍යයි. කරුණාකර එය ස්ථාපනය කරන්න.
   outdated: WebView2 ධාවන කාලය යල් පැන ඇත
