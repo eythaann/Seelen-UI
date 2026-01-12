@@ -1,10 +1,5 @@
 cancel: Отказати
 done: Доношен
-drivers:
-  got_it: Схватио
-  monitor_disabled: >-
-    Чини се да су неки покретачи монитора онемогућени. Молимо вас да им омогућите да правилно обавештавају СЕЕЛЕН УИ.
-  monitor_disabled_title: Возачи монитора су онемогућени
 resource:
   added: Додат је нови ресурс
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Конфигурациона датотека је оштећена, користећи задане вредности уместо тога.
   corrupted_file_path: Оштећени пут датотека
   download: Идите на страницу за преузимање
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: ВебВиев2 Рунтиме није пронађено
   not_found_description: Сеелен УИ захтева Вебвиев2 Рунтиме. Молимо вас да га инсталирате.
   outdated: ВебВиев2 Рунтиме је застарео
