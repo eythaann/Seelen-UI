@@ -1,10 +1,5 @@
 cancel: გაუქმება
 done: გაკეთებული
-drivers:
-  got_it: მიიღო
-  monitor_disabled: >-
-    როგორც ჩანს, ზოგიერთი მონიტორის მძღოლი გამორთულია. გთხოვთ, გაუშვათ, რომ Seelen UI- ს სწორად იმუშაონ.
-  monitor_disabled_title: მონიტორის მძღოლები გამორთულია
 resource:
   added: დაემატა ახალი რესურსი
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: კონფიგურაციის ფაილი კორუმპირებულია, ამის ნაცვლად ნაგულისხმევი მნიშვნელობების გამოყენებით.
   corrupted_file_path: კორუმპირებული ფაილის გზა
   download: გადადით ჩამოტვირთვის გვერდზე
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime ვერ მოიძებნა
   not_found_description: Seelen UI მოითხოვს Webview2 Runtime-ს. გთხოვთ დააინსტალიროთ.
   outdated: WebView2 Runtime მოძველებულია
