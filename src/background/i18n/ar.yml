@@ -1,10 +1,5 @@
 cancel: يلغي
 done: منتهي
-drivers:
-  got_it: حصلت عليه
-  monitor_disabled: >-
-    يبدو أن بعض برامج تشغيل الشاشة معطلة. يرجى تمكينها للسماح لواجهة Seelen UI بالعمل بشكل صحيح.
-  monitor_disabled_title: تم تعطيل برامج تشغيل الشاشة
 resource:
   added: تمت إضافة مورد جديد
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: ملف التكوين تالف، باستخدام قيم افتراضية بدلاً من ذلك.
   corrupted_file_path: مسار الملف التالف
   download: انتقل إلى صفحة التنزيل
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: لم يتم العثور على وقت تشغيل WebView2
   not_found_description: تتطلب واجهة مستخدم Seelen وقت تشغيل Webview2. الرجاء تثبيته.
   outdated: وقت تشغيل WebView2 قديم
