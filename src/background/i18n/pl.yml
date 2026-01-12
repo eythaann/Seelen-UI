@@ -1,10 +1,5 @@
 cancel: Anulować
 done: Zrobione
-drivers:
-  got_it: Rozumiem
-  monitor_disabled: >-
-    Wygląda na to, że niektóre sterowniki monitora są wyłączone. Włącz je, aby Seelen UI działał poprawnie.
-  monitor_disabled_title: Sterowniki monitora są wyłączone
 resource:
   added: Dodano nowy zasób
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Plik konfiguracyjny jest uszkodzony i zamiast niego używane są wartości domyślne.
   corrupted_file_path: Uszkodzona ścieżka pliku
   download: Przejdź do strony pobierania
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: Nie znaleziono środowiska uruchomieniowego WebView2
   not_found_description: Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2. Zainstaluj go.
   outdated: Środowisko wykonawcze WebView2 jest nieaktualne
