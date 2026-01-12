@@ -1,10 +1,5 @@
 cancel: Ματαίωση
 done: Γινώμενος
-drivers:
-  got_it: Το πήρα
-  monitor_disabled: >-
-    Φαίνεται ότι ορισμένα προγράμματα οδήγησης οθόνης είναι απενεργοποιημένα. Παρακαλούμε ενεργοποιήστε τους για να λειτουργήσει σωστά το Seelen UI.
-  monitor_disabled_title: Οι οδηγοί οθόνης είναι απενεργοποιημένοι
 resource:
   added: Προστέθηκε ένας νέος πόρος
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Ένα αρχείο ρυθμίσεων έχει καταστραφεί, χρησιμοποιώντας προεπιλεγμένες τιμές.
   corrupted_file_path: Κατεστραμμένη διαδρομή αρχείου
   download: Μεταβείτε στη σελίδα λήψης
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: Ο χρόνος εκτέλεσης WebView2 δεν βρέθηκε
   not_found_description: Το Seelen UI απαιτεί Webview2 Runtime. Εγκαταστήστε το.
   outdated: Ο χρόνος εκτέλεσης WebView2 είναι ξεπερασμένος
