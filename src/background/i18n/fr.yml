@@ -1,10 +1,5 @@
 cancel: Annuler
 done: Fait
-drivers:
-  got_it: Je l'ai
-  monitor_disabled: >-
-    Il semble que certains pilotes de moniteur soient désactivés. Veuillez les activer pour permettre à Seelen UI de fonctionner correctement.
-  monitor_disabled_title: Les pilotes de moniteur sont désactivés
 resource:
   added: Une nouvelle ressource a été ajoutée
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Un fichier de configuration est corrompu et utilise des valeurs par défaut.
   corrupted_file_path: Chemin d'accès au fichier corrompu
   download: Aller à la page de téléchargement
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: Le moteur d'exécution WebView2 est introuvable
   not_found_description: L'interface utilisateur de Seelen nécessite le runtime Webview2. Veuillez l'installer.
   outdated: WebView2 Runtime obsolète
