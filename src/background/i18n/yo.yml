@@ -1,10 +1,5 @@
 cancel: Fagilee
 done: Ṣe
-drivers:
-  got_it: Ṣe o ri
-  monitor_disabled: >-
-    O han pe diẹ ninu awọn awakọ atẹle ni alaabo. Jọwọ jẹ ki wọn jẹ ki wọn jẹ ki wọn jẹ ki wọn ṣiṣẹ daradara.
-  monitor_disabled_title: Atẹle awọn awakọ jẹ alaabo
 resource:
   added: A ti ṣafikun awọn orisun titun
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Faili iṣeto kan jẹ ibajẹ, lilo awọn iye aifọwọyi dipo.
   corrupted_file_path: Ọna faili ibajẹ
   download: Lọ si oju-iwe igbasilẹ
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 asiko isise ko ri
   not_found_description: Seelen UI nilo Webview2 Runtime. Jọwọ fi sii.
   outdated: WebView2 Runtime ti igba atijọ
