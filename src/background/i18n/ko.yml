@@ -1,10 +1,5 @@
 cancel: 취소
 done: 완료
-drivers:
-  got_it: 알겠습니다.
-  monitor_disabled: >-
-    일부 모니터 드라이버가 비활성화되어 있는 것 같습니다. Seelen UI가 제대로 작동하도록 활성화해 주세요.
-  monitor_disabled_title: 모니터 드라이버가 비활성화됨
 resource:
   added: 새로운 리소스가 추가되었습니다.
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: 구성 파일이 손상되어 기본값 대신 기본값을 사용합니다.
   corrupted_file_path: 손상된 파일 경로
   download: 다운로드 페이지로 이동
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 런타임을 찾을 수 없습니다.
   not_found_description: Seelen UI에는 Webview2 런타임이 필요합니다. 설치해 주세요.
   outdated: WebView2 런타임이 오래됨
