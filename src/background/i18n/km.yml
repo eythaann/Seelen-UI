@@ -1,10 +1,5 @@
 cancel: លប់ចោល
 done: រ្យេឱដេនោ
-drivers:
-  got_it: ទទួលបានវា
-  monitor_disabled: >-
-    វាបង្ហាញថាកម្មវិធីបញ្ជាម៉ូនីទ័រមួយចំនួនត្រូវបានបិទ។ សូមអនុញ្ញាតឱ្យពួកគេអនុញ្ញាតឱ្យ Seelle UI ធ្វើការបានត្រឹមត្រូវ។
-  monitor_disabled_title: កម្មវិធីបញ្ជាត្រួតពិនិត្យត្រូវបានបិទ
 resource:
   added: ធនធានថ្មីត្រូវបានបន្ថែម
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: ឯកសារកំណត់រចនាសម្ព័ន្ធត្រូវបានខូចដោយប្រើតម្លៃលំនាំដើមជំនួសវិញ។
   corrupted_file_path: ផ្លូវឯកសារខូចខូច
   download: ចូលទៅកាន់ទំព័រទាញយក
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime រកមិនឃើញទេ។
   not_found_description: Seelen UI ទាមទារ Webview2 Runtime ។ សូមដំឡើងវា។
   outdated: WebView2 Runtime ហួសសម័យ
