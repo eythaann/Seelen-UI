@@ -6,7 +6,7 @@ use ts_rs::TS;
 
 use crate::resource::{IconPackId, ResourceKind, ResourceMetadata, SluResource};
 
-#[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct IconPack {

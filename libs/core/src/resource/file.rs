@@ -81,21 +81,21 @@ impl SluResourceFile {
     where
         T: DeserializeOwned,
     {
-        let mut resource = serde_json::value::Map::new();
+        let mut obj = serde_json::value::Map::new();
 
-        resource.insert(
+        obj.insert(
             "id".to_string(),
-            serde_json::Value::String(self.resource.friendly_id.to_string()),
+            serde_json::Value::String(self.resource.id.to_string()),
         );
-        resource.insert(
+
+        obj.insert(
             "metadata".to_string(),
             serde_json::to_value(&self.resource.metadata)?,
         );
 
         let data = self.data.0.as_object().ok_or("invalid data")?;
-        resource.append(&mut data.clone());
+        obj.append(&mut data.clone());
 
-        let parsed = serde_json::from_value(resource.into())?;
-        Ok(parsed)
+        Ok(serde_json::from_value(obj.into())?)
     }
 }

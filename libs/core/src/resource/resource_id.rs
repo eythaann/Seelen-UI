@@ -1,109 +1,133 @@
 use std::sync::LazyLock;
 
-use serde::{de::Visitor, Deserialize, Deserializer};
+use serde::{de::Visitor, Deserialize, Deserializer, Serialize};
 
 use crate::error::Result;
 
-#[macro_export(local_inner_macros)]
-macro_rules! identifier_impl {
-    ($type:ty, $inner:ty) => {
-        impl std::ops::Deref for $type {
-            type Target = $inner;
-            fn deref(&self) -> &Self::Target {
-                &self.0
-            }
-        }
-
-        impl std::ops::DerefMut for $type {
-            fn deref_mut(&mut self) -> &mut Self::Target {
-                &mut self.0
-            }
-        }
-
-        impl From<&str> for $type {
-            fn from(value: &str) -> Self {
-                Self(<$inner>::from(value))
-            }
-        }
-
-        impl From<String> for $type {
-            fn from(value: String) -> Self {
-                Self(<$inner>::from(value))
-            }
-        }
-
-        impl From<&String> for $type {
-            fn from(value: &String) -> Self {
-                Self(<$inner>::from(value))
-            }
-        }
-
-        impl std::fmt::Display for $type {
-            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                ::std::write!(f, "{}", self.0)
-            }
-        }
-    };
-}
-
-/// Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`
-#[derive(Debug, Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Serialize, JsonSchema, TS)]
+/// For local resources this will be an visual id composed of the creator username and the resource name. e.g. `@username/resource-name`
+/// For downloaded resources this will be an UUID.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, JsonSchema, TS)]
 #[ts(type = "string & { __brand: 'ResourceId' }")]
-pub struct ResourceId(String);
-
-static REGEX: LazyLock<regex::Regex> = LazyLock::new(|| {
-    regex::Regex::new(r"^@[a-zA-Z][\w\-]{1,30}[a-zA-Z0-9]\/[a-zA-Z][\w\-]+[a-zA-Z0-9]$").unwrap()
-});
+pub enum ResourceId {
+    Local(String),
+    Remote(uuid::Uuid),
+}
 
 impl ResourceId {
     fn regex() -> &'static regex::Regex {
+        static REGEX: LazyLock<regex::Regex> = LazyLock::new(|| {
+            regex::Regex::new(r"^@[a-zA-Z][\w\-]{1,30}[a-zA-Z0-9]\/[a-zA-Z][\w\-]+[a-zA-Z0-9]$")
+                .unwrap()
+        });
         &REGEX
     }
 
     pub fn is_valid(&self) -> bool {
-        Self::regex().is_match(&self.0)
+        match self {
+            ResourceId::Local(id) => Self::regex().is_match(id),
+            ResourceId::Remote(_) => true, // UUIDs are always valid
+        }
     }
 
     pub fn validate(&self) -> Result<(), String> {
         if !self.is_valid() {
+            let id_str = match self {
+                ResourceId::Local(id) => id.as_str(),
+                ResourceId::Remote(_) => return Ok(()), // UUIDs are always valid
+            };
             return Err(format!(
                 "Invalid resource id ({}), should follow the regex: {}",
-                self.0,
+                id_str,
                 Self::regex()
             ));
         }
         Ok(())
     }
 
-    /// Creator username of the resource
-    ///
-    /// # Safety
-    ///
-    /// The string is a valid resource id
-    pub fn creator(&self) -> String {
-        self.0
-            .split('/')
-            .next()
-            .unwrap()
-            .trim_start_matches('@')
-            .to_string()
+    pub fn as_str(&self) -> &str {
+        match self {
+            ResourceId::Local(id) => id.as_str(),
+            ResourceId::Remote(_) => "",
+        }
     }
 
-    /// Name of the resource
-    ///
-    /// # Safety
-    ///
-    /// The string is a valid resource id
-    pub fn resource_name(&self) -> String {
-        self.0.split('/').next_back().unwrap().to_string()
+    pub fn starts_with(&self, prefix: &str) -> bool {
+        match self {
+            ResourceId::Local(id) => id.starts_with(prefix),
+            ResourceId::Remote(_) => false,
+        }
+    }
+
+    /// Creator username of the resource, will be none for remote resources
+    pub fn creator(&self) -> Option<String> {
+        match self {
+            ResourceId::Local(id) => Some(
+                id.split('/')
+                    .next()
+                    .unwrap()
+                    .trim_start_matches('@')
+                    .to_string(),
+            ),
+            ResourceId::Remote(_) => None,
+        }
+    }
+
+    /// Name of the resource, will be none for remote resources
+    pub fn resource_name(&self) -> Option<String> {
+        match self {
+            ResourceId::Local(id) => Some(id.split('/').nth(1).unwrap().to_string()),
+            ResourceId::Remote(_) => None,
+        }
     }
 }
 
-identifier_impl!(ResourceId, String);
-
 impl Default for ResourceId {
     fn default() -> Self {
-        Self("@unknown/unknown".to_owned())
+        Self::Local("@unknown/unknown".to_owned())
+    }
+}
+
+impl From<&str> for ResourceId {
+    fn from(value: &str) -> Self {
+        Self::from(value.to_string())
+    }
+}
+
+impl From<String> for ResourceId {
+    fn from(value: String) -> Self {
+        // Try to parse as UUID first, otherwise treat as local ID
+        if let Ok(uuid) = uuid::Uuid::try_parse(&value) {
+            ResourceId::Remote(uuid)
+        } else {
+            ResourceId::Local(value)
+        }
+    }
+}
+
+impl From<uuid::Uuid> for ResourceId {
+    fn from(value: uuid::Uuid) -> Self {
+        ResourceId::Remote(value)
+    }
+}
+
+impl std::fmt::Display for ResourceId {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ResourceId::Local(id) => write!(f, "{}", id),
+            ResourceId::Remote(uuid) => write!(f, "{}", uuid),
+        }
+    }
+}
+
+impl Serialize for ResourceId {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        match self {
+            ResourceId::Local(id) => serializer.serialize_str(id),
+            ResourceId::Remote(id) => serializer.serialize_str(&id.to_string()),
+        }
     }
 }
 
@@ -121,7 +145,7 @@ impl<'de> Deserialize<'de> for ResourceId {
                 write!(
                     formatter,
                     "a string matching the resource ID pattern: {}",
-                    REGEX.as_str()
+                    ResourceId::regex().as_str()
                 )
             }
 
@@ -138,8 +162,16 @@ impl<'de> Deserialize<'de> for ResourceId {
                     "settings" => WidgetId::known_settings().0,
                     "launcher" => "@deprecated/launcher".into(),
                     "popup" => WidgetId::known_popup().0,
-                    _ => ResourceId(value.to_string()),
+                    _ => {
+                        // Try to parse as UUID first, otherwise treat as local ID
+                        if let Ok(uuid) = uuid::Uuid::try_parse(value) {
+                            ResourceId::Remote(uuid)
+                        } else {
+                            ResourceId::Local(value.to_string())
+                        }
+                    }
                 };
+
                 id.validate().map_err(serde::de::Error::custom)?;
                 Ok(id)
             }
@@ -156,7 +188,13 @@ macro_rules! resource_id_variant {
             Debug, Clone, Hash, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS,
         )]
         pub struct $name(ResourceId);
-        identifier_impl!($name, ResourceId);
+        crate::identifier_impl!($name, ResourceId);
+
+        impl From<ResourceId> for $name {
+            fn from(value: ResourceId) -> Self {
+                Self(value)
+            }
+        }
     };
 }
 

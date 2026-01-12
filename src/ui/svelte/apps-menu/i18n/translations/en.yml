@@ -3,6 +3,7 @@ back: Back
 disband: Disband Folder
 folder: Folder
 no_matching_items: No items found matching your search
-no_pinned_apps: No pinned apps
+welcome_message: Welcome to the Seelen UI app menu.
+welcome_message2: On this tab, you can pin your favorite apps.
 pin: Pin
 unpin: Unpin

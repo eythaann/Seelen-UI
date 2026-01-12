@@ -9,10 +9,14 @@ pub mod webview;
 pub mod weg;
 pub mod window_manager;
 
-use std::{path::PathBuf, sync::LazyLock};
+use std::{
+    path::{Path, PathBuf},
+    sync::LazyLock,
+};
 
 use seelen_core::{
     handlers::SeelenEvent,
+    resource::ResourceId,
     state::{WidgetStatus, WidgetTriggerPayload},
     Rect,
 };
@@ -23,8 +27,8 @@ use crate::{
     app::get_app_handle,
     error::Result,
     state::application::FULL_STATE,
-    utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap, WidgetWebviewLabel},
-    widgets::manager::WIDGET_MANAGER,
+    utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap},
+    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebviewLabel},
     windows_api::{input::Keyboard, WindowsApi},
 };
 
@@ -74,12 +78,12 @@ pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn get_self_window_handle(webview: tauri::WebviewWindow<tauri::Wry>) -> Result<isize> {
+pub fn get_self_window_handle(webview: tauri::WebviewWindow) -> Result<isize> {
     Ok(webview.hwnd()?.0 as isize)
 }
 
 #[tauri::command(async)]
-pub fn set_self_position(webview: tauri::WebviewWindow<tauri::Wry>, rect: Rect) -> Result<()> {
+pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()> {
     use windows::Win32::Foundation::{HWND, RECT};
     let hwnd = HWND(webview.hwnd()?.0);
     let rect = RECT {
@@ -109,48 +113,59 @@ pub fn show_start_menu() -> Result<()> {
     Keyboard::new().send_keys("{win}")
 }
 
-pub struct WebviewArgs {
-    common_args: Vec<String>,
-    extra_args: Vec<String>,
+#[tauri::command(async)]
+pub fn write_data_file(
+    webview: tauri::WebviewWindow,
+    filename: String,
+    content: String,
+) -> Result<()> {
+    let base_path = widget_data_dir(&webview)?;
+    let path = resolve_safe_path(&base_path, &filename)?;
+    std::fs::write(path, content)?;
+    Ok(())
 }
 
-impl WebviewArgs {
-    const BASE_OPT: &str = "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer";
-    const BASE_OPT2: &str =
-        "--no-first-run --disable-site-isolation-trials --disable-background-timer-throttling";
-    const PERFORMANCE_OPT: &str = "--enable-low-end-device-mode --in-process-gpu --V8Maglev";
-
-    pub fn new() -> Self {
-        Self {
-            common_args: vec![
-                Self::BASE_OPT.to_string(),
-                Self::BASE_OPT2.to_string(),
-                Self::PERFORMANCE_OPT.to_string(),
-            ],
-            extra_args: vec![],
-        }
-    }
-
-    pub fn disable_gpu(self) -> Self {
-        // if window manager is enabled (that is expected thing) having 2 processes one with gpu and another without,
-        // is worse than having them together with gpu enabled so this is the reason why this is currently ignored.
-        // self.extra_args.push("--disable-gpu --disable-software-rasterizer".to_string());
-        self
-    }
-
-    pub fn data_directory(&self) -> PathBuf {
-        if self.extra_args.is_empty() {
-            SEELEN_COMMON.app_cache_dir().to_path_buf()
-        } else {
-            SEELEN_COMMON
-                .app_cache_dir()
-                .join(self.extra_args.join("").replace("-", ""))
-        }
-    }
+#[tauri::command(async)]
+pub fn read_data_file(webview: tauri::WebviewWindow, filename: String) -> Result<String> {
+    let base_path = widget_data_dir(&webview)?;
+    let path = resolve_safe_path(&base_path, &filename)?;
+    Ok(std::fs::read_to_string(path)?)
 }
 
-impl std::fmt::Display for WebviewArgs {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.common_args.join(" "))
+fn widget_data_dir(webview: &tauri::WebviewWindow) -> Result<PathBuf> {
+    let label = WidgetWebviewLabel::try_from_raw(webview.label())?;
+    let data_dir = SEELEN_COMMON.app_data_dir().join("data");
+
+    let folder = match &*label.widget_id {
+        ResourceId::Local(id) => id.trim_start_matches("@").replace("/", "-"),
+        ResourceId::Remote(uuid) => uuid.to_string(),
+    };
+
+    let path = data_dir.join(folder);
+    std::fs::create_dir_all(&path)?;
+    Ok(path)
+}
+
+fn resolve_safe_path(base: &Path, filename: &str) -> Result<PathBuf> {
+    let filename_path = PathBuf::from(filename);
+
+    if filename_path.is_absolute() {
+        return Err("Absolute paths are not allowed".into());
     }
+
+    let joined = base.join(filename_path);
+    let base_canon = base.canonicalize()?;
+
+    let target_canon = joined.canonicalize().or_else(|_| {
+        // if file does not exist, canonicalize the parent
+        let parent = joined.parent().ok_or("Invalid path")?;
+        let parent_canon = parent.canonicalize()?;
+        Result::Ok(parent_canon.join(joined.file_name().ok_or("Invalid filename")?))
+    })?;
+
+    if !target_canon.starts_with(&base_canon) {
+        return Err("Path traversal attempt detected >:(".into());
+    }
+
+    Ok(target_canon)
 }

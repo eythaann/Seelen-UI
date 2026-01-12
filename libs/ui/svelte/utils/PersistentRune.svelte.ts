@@ -1,44 +1,57 @@
 import type { ZodSchema } from "zod";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { debounce } from "lodash";
 
 export class PersistentRune<T> {
   private _value: T;
   private storeKey: string;
   private schema?: ZodSchema<T>;
+  private debouncedSave: ReturnType<typeof debounce>;
 
-  constructor(storeKey: string, initial: T, schema?: ZodSchema<T>) {
+  private constructor(storeKey: string, initial: T, schema?: ZodSchema<T>) {
     this.storeKey = storeKey;
     this.schema = schema;
-
-    // Try to load from localStorage, fallback to initial value
-    const stored = this.loadFromStorage();
-    this._value = $state(stored ?? initial);
+    this._value = $state(initial);
+    this.debouncedSave = debounce(this.saveToFile.bind(this), 500);
   }
 
-  private loadFromStorage(): T | null {
-    try {
-      const item = localStorage.getItem(this.storeKey);
-      if (item === null) {
-        return null;
-      }
+  static async create<T>(
+    storeKey: string,
+    initial: T,
+    schema?: ZodSchema<T>,
+  ): Promise<PersistentRune<T>> {
+    const rune = new PersistentRune(storeKey, initial, schema);
+    const stored = await rune.loadFromFile();
+    rune._value = stored ?? initial;
+    return rune;
+  }
 
-      const parsed = JSON.parse(item);
+  private async loadFromFile(): Promise<T | null> {
+    try {
+      const content = await invoke(SeelenCommand.ReadFile, {
+        filename: `${this.storeKey}.json`,
+      });
+
+      const parsed = JSON.parse(content);
       if (this.schema) {
         return this.schema.parse(parsed);
       }
 
       return parsed as T;
-    } catch (err) {
-      console.error(`Failed to load from localStorage (key: ${this.storeKey}):`, err);
-      localStorage.removeItem(this.storeKey);
+    } catch {
+      // File doesn't exist or is invalid, ignore
       return null;
     }
   }
 
-  private saveToStorage(value: T): void {
+  private async saveToFile(value: T): Promise<void> {
     try {
-      localStorage.setItem(this.storeKey, JSON.stringify(value));
+      await invoke(SeelenCommand.WriteFile, {
+        filename: `${this.storeKey}.json`,
+        content: JSON.stringify(value),
+      });
     } catch (error) {
-      console.error(`Failed to save to localStorage (key: ${this.storeKey}):`, error);
+      console.error(`Failed to save to file (key: ${this.storeKey}):`, error);
     }
   }
 
@@ -48,7 +61,7 @@ export class PersistentRune<T> {
 
   set value(value: T) {
     this._value = value;
-    this.saveToStorage(value);
+    this.debouncedSave(value);
   }
 }
 
@@ -56,19 +69,19 @@ export class PersistentRune<T> {
  * Helper function to create a PersistentRune
  *
  * @example
- * const count = persistentRune('counter', 0);
- * count.value++; // Automatically saved to localStorage
+ * const count = await persistentRune('counter', 0);
+ * count.value++; // Automatically saved to file
  *
  * @example with zod validation
  * import { z } from 'zod';
  * const schema = z.number();
- * const count = persistentRune('counter', 0, schema);
- * count.value++; // Validated and saved to localStorage
+ * const count = await persistentRune('counter', 0, schema);
+ * count.value++; // Validated and saved to file
  */
 export function persistentRune<T>(
   storeKey: string,
   initial: T,
   schema?: ZodSchema<T>,
-): PersistentRune<T> {
-  return new PersistentRune(storeKey, initial, schema);
+): Promise<PersistentRune<T>> {
+  return PersistentRune.create(storeKey, initial, schema);
 }

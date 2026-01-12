@@ -5,8 +5,8 @@ use uuid::Uuid;
 
 use crate::{
     state::application::FULL_STATE,
-    utils::{lock_free::SyncHashMap, WidgetWebviewLabel},
-    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview},
+    utils::lock_free::SyncHashMap,
+    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview, WidgetWebviewLabel},
 };
 
 pub struct WidgetContainer {

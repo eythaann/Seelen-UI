@@ -18,7 +18,6 @@ pub struct SeelenCommon {
     cache_dir: PathBuf,
     temp_dir: PathBuf,
     // specifits
-    history: PathBuf,
     settings: PathBuf,
     weg_items: PathBuf,
     toolbar_items: PathBuf,
@@ -60,7 +59,6 @@ impl SeelenCommon {
             WindowsApi::known_folder(FOLDERID_Windows).expect("Failed to get system dir");
 
         Self {
-            history: data_dir.join("history"),
             settings: data_dir.join("settings.json"),
             weg_items: data_dir.join("seelenweg_items_v2.yml"),
             toolbar_items: data_dir.join("toolbar_items.yml"),
@@ -119,10 +117,6 @@ impl SeelenCommon {
 
     pub fn toolbar_items_path(&self) -> &Path {
         &self.toolbar_items
-    }
-
-    pub fn history_path(&self) -> &Path {
-        &self.history
     }
 
     pub fn system_icon_pack_path(&self) -> &Path {

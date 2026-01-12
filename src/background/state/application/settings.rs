@@ -24,10 +24,55 @@ impl FullState {
         let path = SEELEN_COMMON.settings_path();
         if path.exists() {
             self.settings = Settings::load(path)?;
+            self.migration_v2_5_0()?;
             self.sanitize_wallpaper_collections();
         } else {
             self.write_settings()?; // create initial settings file
         }
+        Ok(())
+    }
+
+    /// Resources id changed for remote/downloaded resources.
+    fn migration_v2_5_0(&mut self) -> Result<()> {
+        RESOURCES.themes.scan(|k, v| {
+            let Some(remote) = &v.metadata.internal.remote else {
+                return;
+            };
+            let old_id = remote.friendly_id.clone().into();
+            let Some(config) = self.settings.by_theme.remove(&old_id) else {
+                return;
+            };
+            self.settings.by_theme.insert(k.clone(), config);
+        });
+
+        RESOURCES.wallpapers.scan(|k, v| {
+            let Some(remote) = &v.metadata.internal.remote else {
+                return;
+            };
+            let old_id = remote.friendly_id.clone().into();
+            let Some(config) = self.settings.by_wallpaper.remove(&old_id) else {
+                return;
+            };
+            self.settings.by_wallpaper.insert(k.clone(), config);
+        });
+
+        RESOURCES.widgets.scan(|k, v| {
+            let Some(remote) = &v.metadata.internal.remote else {
+                return;
+            };
+
+            let old_id = remote.friendly_id.clone().into();
+            if let Some(config) = self.settings.by_widget.others.remove(&old_id) {
+                self.settings.by_widget.others.insert(k.clone(), config);
+            };
+
+            self.settings.monitors_v3.values_mut().for_each(|monitor| {
+                if let Some(config) = monitor.by_widget.remove(&old_id) {
+                    monitor.by_widget.insert(k.clone(), config);
+                };
+            })
+        });
+
         Ok(())
     }
 

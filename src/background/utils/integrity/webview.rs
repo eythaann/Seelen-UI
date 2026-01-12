@@ -5,7 +5,7 @@ use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{error::Result, widgets::WebviewArgs};
+use crate::{error::Result, widgets::webview::WebviewArgs};
 
 use super::spawn_named_thread;
 

@@ -11,7 +11,7 @@ use crate::{
     error::Result,
     log_error,
     state::application::FULL_STATE,
-    widgets::{toolbar::FancyToolbar, weg::SeelenWeg, WebviewArgs},
+    widgets::{toolbar::FancyToolbar, webview::WebviewArgs, weg::SeelenWeg},
     windows_api::{monitor::Monitor, WindowsApi},
 };
 

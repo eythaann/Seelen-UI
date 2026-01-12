@@ -94,7 +94,6 @@ impl FullState {
         let mut icons_changed = false;
         let mut weg_items_changed = false;
         let mut toolbar_items_changed = false;
-        let mut history_changed = false;
         let mut themes_changed = false;
         let mut app_configs_changed = false;
         let mut plugins_changed = false;
@@ -114,10 +113,6 @@ impl FullState {
 
             if !toolbar_items_changed && path == SEELEN_COMMON.toolbar_items_path() {
                 toolbar_items_changed = true;
-            }
-
-            if !history_changed && path == SEELEN_COMMON.history_path() {
-                history_changed = true;
             }
 
             if !themes_changed
@@ -253,7 +248,6 @@ impl FullState {
             SEELEN_COMMON.weg_items_path(),
             SEELEN_COMMON.toolbar_items_path(),
             SEELEN_COMMON.user_app_configs_path(),
-            SEELEN_COMMON.history_path(),
             SEELEN_COMMON.user_icons_path(),
             SEELEN_COMMON.user_themes_path(),
             SEELEN_COMMON.user_plugins_path(),

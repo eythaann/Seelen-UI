@@ -171,6 +171,8 @@ slu_commands_declaration! {
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
     SetSelfPosition = set_self_position(rect: Rect),
+    WriteFile = write_data_file(filename: String, content: String),
+    ReadFile = read_data_file(filename: String) -> String,
 
     // Shell
     GetNativeShellWallpaper = get_native_shell_wallpaper() -> PathBuf,

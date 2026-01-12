@@ -145,7 +145,8 @@
 
   {#if globalState.pinnedItems.length === 0}
     <div class="pinned-view-empty">
-      {$t("no_pinned_apps")}
+      <p>{$t("welcome_message")}</p>
+      <p>{$t("welcome_message2")}</p>
     </div>
   {/if}
 </div>

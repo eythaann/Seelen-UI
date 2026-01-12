@@ -6,7 +6,7 @@ use crate::{
     error::Result,
     log_error,
     state::application::FULL_STATE,
-    widgets::WebviewArgs,
+    widgets::webview::WebviewArgs,
     windows_api::{monitor::Monitor, AppBarData, WindowsApi},
 };
 use base64::Engine;

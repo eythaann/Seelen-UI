@@ -26,7 +26,7 @@ export interface FavAppItem {
 
 export type FavPinnedItem = FavAppItem | FavFolderItem;
 
-const pinnedItems = persistentRune<FavPinnedItem[]>("pinned", []);
+const pinnedItems = await persistentRune<FavPinnedItem[]>("favorites", []);
 
 // Get unique identifier for an item
 function getItemId(item: StartMenuItem): string {
@@ -216,6 +216,7 @@ $effect.root(() => {
   });
 });
 
+const displayMode = await persistentRune("display_mode", StartDisplayMode.Normal);
 class State {
   isPinned = isPinned;
   togglePin = togglePin;
@@ -230,7 +231,6 @@ class State {
   desiredMonitorId = $state<string | null>(null);
   showing = $state(false);
 
-  #displayMode = persistentRune("StartDisplayMode", StartDisplayMode.Normal);
   view = $state(StartView.Favorites);
   searchQuery = $state("");
   preselectedItem = $state<string | null>(null);
@@ -252,11 +252,11 @@ class State {
   }
 
   get displayMode() {
-    return this.#displayMode.value;
+    return displayMode.value;
   }
 
   set displayMode(value: StartDisplayMode) {
-    this.#displayMode.value = value;
+    displayMode.value = value;
   }
 
   // Get StartMenuItem by ID
