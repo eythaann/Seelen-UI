@@ -1,10 +1,5 @@
 cancel: Chansliff
 done: Wedi gwneud
-drivers:
-  got_it: GOT IT
-  monitor_disabled: >-
-    Mae'n ymddangos bod rhai gyrwyr monitro yn anabl. Os gwelwch yn dda eu galluogi i adael i Seelen UI weithio'n iawn.
-  monitor_disabled_title: Monitro gyrwyr yn anabl
 resource:
   added: Ychwanegwyd adnodd newydd
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Mae ffeil ffurfweddu yn llygredig, gan ddefnyddio gwerthoedd diofyn yn lle.
   corrupted_file_path: Llwybr Ffeil Llygredig
   download: Ewch i'r dudalen lawrlwytho
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime heb ei ganfod
   not_found_description: Mae Seelen UI angen Amser Rhedeg Webview2. Os gwelwch yn dda gosod.
   outdated: WebView2 Runtime wedi dyddio
