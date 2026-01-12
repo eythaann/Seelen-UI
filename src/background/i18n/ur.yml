@@ -1,10 +1,5 @@
 cancel: منسوخ کریں
 done: کیا
-drivers:
-  got_it: مل گیا
-  monitor_disabled: >-
-    ایسا لگتا ہے کہ کچھ مانیٹر ڈرائیور غیر فعال ہیں۔ براہ کرم ان کو قابل بنائیں کہ سیلین UI کو صحیح طریقے سے کام کرنے دیں۔
-  monitor_disabled_title: مانیٹر ڈرائیور غیر فعال ہیں
 resource:
   added: ایک نیا وسیلہ شامل کیا گیا ہے
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: اس کے بجائے پہلے سے طے شدہ اقدار کا استعمال کرتے ہوئے ، کنفیگریشن فائل خراب ہوگئی ہے۔
   corrupted_file_path: خراب فائل کا راستہ
   download: ڈاؤن لوڈ صفحہ پر جائیں۔
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 رن ٹائم نہیں ملا
   not_found_description: Seelen UI کو Webview2 رن ٹائم کی ضرورت ہے۔ براہ کرم اسے انسٹال کریں۔
   outdated: WebView2 رن ٹائم پرانا ہے۔
