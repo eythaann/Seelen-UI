@@ -1,10 +1,5 @@
 cancel: Kanselleer
 done: Gedoen
-drivers:
-  got_it: Het dit
-  monitor_disabled: >-
-    Dit wil voorkom asof sommige monitorbestuurders gedeaktiveer is. Stel hulle in staat om Seelen UI behoorlik te laat werk.
-  monitor_disabled_title: Monitorbestuurders is gedeaktiveer
 resource:
   added: '''N Nuwe hulpbron is bygevoeg'
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: '''N Konfigurasielêer word beskadig, met behulp van standaardwaardes.'
   corrupted_file_path: Korrupte lêerpad
   download: Gaan na die aflaai bladsy
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Looptyd nie gevind nie
   not_found_description: Seelen UI vereis Webview2 Runtime. Installeer dit asseblief.
   outdated: WebView2 Looptyd verouderd
