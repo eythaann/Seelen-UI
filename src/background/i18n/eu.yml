@@ -1,10 +1,5 @@
 cancel: Indargabetu
 done: Egin
-drivers:
-  got_it: Lortu dut
-  monitor_disabled: >-
-    Badirudi kontrolatzaile batzuk desgaituta daudela. Mesedez, gaitu Seelen Ui behar bezala funtziona dezan.
-  monitor_disabled_title: Kontrolatzaile kontrolatzaileak desgaituta daude
 resource:
   added: Baliabide berri bat gehitu da
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Konfigurazio fitxategia hondatuta dago, horren ordez balio lehenetsiak erabiliz.
   corrupted_file_path: Fitxategiaren bide hondatua
   download: Joan deskarga orrira
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime ez da aurkitu
   not_found_description: Seelen UI-k Webview2 Runtime behar du. Mesedez, instala ezazu.
   outdated: WebView2 Exekuzio-denbora zaharkituta dago
