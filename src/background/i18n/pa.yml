@@ -1,10 +1,5 @@
 cancel: ਰੱਦ ਕਰੋ
 done: ਕੀਤਾ
-drivers:
-  got_it: ਮਿਲ ਗਿਆ
-  monitor_disabled: >-
-    ਇਹ ਜਾਪਦਾ ਹੈ ਕਿ ਕੁਝ ਨਿਗਰਾਨੀ ਕਰਨ ਵਾਲੇ ਡਰਾਈਵਰ ਅਯੋਗ ਹਨ. ਕਿਰਪਾ ਕਰਕੇ ਉਨ੍ਹਾਂ ਨੂੰ ਯੋਗ ਕਰੋ ਤਾਂ ਜੋ ਤੁਹਾਨੂੰ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਦਿਓ.
-  monitor_disabled_title: ਡਰਾਈਵਰਾਂ ਦੀ ਨਿਗਰਾਨੀ ਅਯੋਗ ਹੈ
 resource:
   added: ਇੱਕ ਨਵਾਂ ਸਰੋਤ ਜੋੜਿਆ ਗਿਆ ਹੈ
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: ਇਸ ਦੀ ਬਜਾਏ ਡਿਫਾਲਟ ਮੁੱਲਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਸੰਰਚਨਾ ਫਾਇਲ ਖਰਾਬ ਹੋ ਗਈ ਹੈ.
   corrupted_file_path: ਖਰਾਬ ਫਾਈਲ ਮਾਰਗ
   download: ਡਾਊਨਲੋਡ ਪੰਨੇ 'ਤੇ ਜਾਓ
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 ਰਨਟਾਈਮ ਨਹੀਂ ਮਿਲਿਆ
   not_found_description: Seelen UI ਨੂੰ Webview2 ਰਨਟਾਈਮ ਦੀ ਲੋੜ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰੋ।
   outdated: WebView2 ਰਨਟਾਈਮ ਪੁਰਾਣਾ
