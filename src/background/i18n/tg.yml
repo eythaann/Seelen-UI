@@ -1,10 +1,5 @@
 cancel: Манъ кардан
 done: Анҷом
-drivers:
-  got_it: Гир онро
-  monitor_disabled: >-
-    Чунин ба назар мерасад, ки баъзе ронандагони мониторинг ғайрифаъоланд. Лутфан ба онҳо имкон диҳед, ки ui дуруст кор кунед.
-  monitor_disabled_title: Мониторинги ронандагон хомӯш карда мешаванд
 resource:
   added: Як манбаи нав илова карда шуд
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Файли танзимот вайрон шудааст, бо истифода аз арзишҳои пешфарз ба ҷои.
   corrupted_file_path: Роҳи фасли файл
   download: Ба саҳифаи зеркашӣ гузаред
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: Вақти иҷрои WebView2 ёфт нашуд
   not_found_description: Seelen UI вақти Webview2-ро талаб мекунад. Лутфан онро насб кунед.
   outdated: WebView2 Runtime кӯҳна шудааст
