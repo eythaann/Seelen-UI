@@ -48,7 +48,7 @@ jobs:
 
             return nightlyVersion;
 
-  build:
+  build-binaries:
     needs: update-tag
     strategy:
       fail-fast: false
@@ -97,7 +97,7 @@ jobs:
             target/${{ matrix.target }}/release/seelen_ui.pdb
 
   merge-binaries:
-    needs: build
+    needs: build-binaries
     runs-on: ubuntu-latest
     outputs:
       artifact-id: ${{ steps.merge-binaries.outputs.artifact-id }}
