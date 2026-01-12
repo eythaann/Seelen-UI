@@ -1,10 +1,5 @@
 cancel: Avboka
 done: Gjort
-drivers:
-  got_it: Jag har den
-  monitor_disabled: >-
-    Det verkar som om vissa bildskärmsdrivrutiner är inaktiverade. Vänligen aktivera dem så att Seelen UI fungerar korrekt.
-  monitor_disabled_title: Drivrutiner för bildskärm är inaktiverade
 resource:
   added: En ny resurs har lagts till
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: En konfigurationsfil är skadad och standardvärden används i stället.
   corrupted_file_path: Felaktig filsökväg
   download: Gå till nedladdningssidan
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime hittades inte
   not_found_description: Seelen UI kräver Webview2 Runtime. Installera den.
   outdated: WebView2 Runtime föråldrad
