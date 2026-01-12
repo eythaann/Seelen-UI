@@ -1,10 +1,5 @@
 cancel: বাতিল
 done: সম্পন্ন
-drivers:
-  got_it: এটা পেয়েছি
-  monitor_disabled: >-
-    এটি প্রদর্শিত হয় যে কিছু মনিটর ড্রাইভার অক্ষম রয়েছে। সিলেন ইউআইকে সঠিকভাবে কাজ করতে দিন দয়া করে তাদের সক্ষম করুন।
-  monitor_disabled_title: মনিটর ড্রাইভারগুলি অক্ষম করা হয়
 resource:
   added: একটি নতুন সংস্থান যুক্ত করা হয়েছে
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: পরিবর্তে ডিফল্ট মানগুলি ব্যবহার করে একটি কনফিগারেশন ফাইল দূষিত হয়।
   corrupted_file_path: দূষিত ফাইল পাথ
   download: ডাউনলোড পেজে যান
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 রানটাইম পাওয়া যায়নি
   not_found_description: Seelen UI এর জন্য Webview2 রানটাইম প্রয়োজন। এটা ইনস্টল করুন.
   outdated: WebView2 রানটাইম পুরানো
