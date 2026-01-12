@@ -1,10 +1,5 @@
 cancel: Batalkan
 done: Selesai
-drivers:
-  got_it: Mendapatnya
-  monitor_disabled: >-
-    Nampaknya beberapa pemandu monitor dilumpuhkan. Sila membolehkan mereka membiarkan Seelen UI berfungsi dengan baik.
-  monitor_disabled_title: Pemantauan pemantauan dilumpuhkan
 resource:
   added: Sumber baru telah ditambah
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Fail konfigurasi rosak, menggunakan nilai lalai.
   corrupted_file_path: Laluan fail yang rosak
   download: Pergi ke halaman muat turun
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime tidak ditemui
   not_found_description: UI Seelen memerlukan Webview2 Runtime. Sila pasang.
   outdated: WebView2 Runtime sudah lapuk
