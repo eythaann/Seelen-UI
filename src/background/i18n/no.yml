@@ -1,10 +1,5 @@
 cancel: Kansellere
 done: Ferdig
-drivers:
-  got_it: Har det
-  monitor_disabled: >-
-    Det ser ut til at noen overvåkningsførere er deaktivert. La dem gjøre dem i stand til å la Seelen UI fungere ordentlig.
-  monitor_disabled_title: Monitor drivere er deaktivert
 resource:
   added: En ny ressurs er lagt til
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: En konfigurasjonsfil er ødelagt ved å bruke standardverdier i stedet.
   corrupted_file_path: Ødelagt filsti
   download: Gå til nedlastingssiden
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime ikke funnet
   not_found_description: Seelen UI krever Webview2 Runtime. Vennligst installer den.
   outdated: WebView2 Runtime utdatert
