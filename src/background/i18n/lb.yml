@@ -1,11 +1,5 @@
 cancel: Ofbriechen
 done: Verdataktioun
-drivers:
-  got_it: Krut et
-  monitor_disabled: >-
-    Et schéngt, datt e puer Monitor Chauffeuren behënnert ginn. Aktivéiert
-    hinnen hinnen ze gesinn ze gesinn.
-  monitor_disabled_title: Monitor Chauffeuren sinn ausgeschalt
 resource:
   added: Eng nei Ressource gouf bäigefüügt
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: Eng Konfiguratiounsdatei ass beschiedegt, déi Standard Wäerter amplaz.
   corrupted_file_path: Korrupt Dateiwee
   download: Gitt op d'Download Säit
+  files_integrity: >-
+    Mir konnten d'Integritéit vun den Applikatiounsdateien net verifizéieren.
+
+    Dëst ka geschéien wann Dateien geännert goufen, korrupt sinn oder
+    d'Installatioun onkomplett ass.
+
+    Aus Sécherheetsgrënn kann Seelen UI net weidergoen.
+
+    Installéiert w.e.g. et vun der offizieller Websäit.
+  files_integrity_title: Sécherheetsalarm - Dateien Integritéitscheck ausgefall
   not_found: WebView2 Runtime net fonnt
   not_found_description: Seelen UI erfuerdert Webview2 Runtime. Weg installéieren et.
   outdated: WebView2 Runtime veroudert

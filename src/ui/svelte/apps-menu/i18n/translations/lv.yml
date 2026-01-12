@@ -1,8 +1,8 @@
 all: Visas lietotnes
+back: Atpakaļ
+disband: Izformēt mapi
 folder: Mape
-no_apps: Nav atrasta neviena lietotne
+no_matching_items: Nav atrasts neviens vienums, kas atbilstu jūsu meklēšanai
 no_pinned_apps: Nav piespraustu lietotņu
 pin: Piespraust
-pinned: Piesprausts
-start: Sākt
 unpin: Atspraust

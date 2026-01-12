@@ -1,8 +1,8 @@
 all: Totes les aplicacions
+back: Enrere
+disband: Dissoldre la carpeta
 folder: Carpeta
-no_apps: No s'ha trobat cap aplicació
+no_matching_items: No s'ha trobat cap element que coincideixi amb la vostra cerca
 no_pinned_apps: No hi ha aplicacions fixades
 pin: Pin
-pinned: Fixat
-start: Comença
 unpin: Desenganxa

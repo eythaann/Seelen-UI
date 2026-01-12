@@ -1,8 +1,8 @@
 all: सभी ऐप्स
+back: पीछे
+disband: फ़ोल्डर विघटित करें
 folder: फ़ोल्डर
-no_apps: कोई ऐप्स नहीं मिला
+no_matching_items: आपकी खोज से मेल खाता कोई आइटम नहीं मिला
 no_pinned_apps: कोई पिन किया हुआ ऐप्स नहीं
 pin: नत्थी करना
-pinned: पिन की गई
-start: शुरू
 unpin: अनपिन

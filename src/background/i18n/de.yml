@@ -1,11 +1,5 @@
 cancel: Stornieren
 done: Erledigt
-drivers:
-  got_it: Verstanden
-  monitor_disabled: >-
-    Es scheint, dass einige Monitortreiber deaktiviert sind. Bitte aktivieren
-    Sie diese, damit Seelen UI richtig funktioniert.
-  monitor_disabled_title: Monitortreiber sind deaktiviert
 resource:
   added: Es wurde eine neue Ressource hinzugefügt
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
     Standardwerte.
   corrupted_file_path: Korrupter Dateipfad
   download: Gehen Sie zur Download-Seite
+  files_integrity: >-
+    Wir konnten die Integrität der Anwendungsdateien nicht überprüfen.
+
+    Dies kann passieren, wenn Dateien geändert oder beschädigt wurden oder die
+    Installation unvollständig ist.
+
+    Aus Sicherheitsgründen kann Seelen UI nicht fortgesetzt werden.
+
+    Bitte installieren Sie es erneut von der offiziellen Website.
+  files_integrity_title: Sicherheitswarnung – Dateiintegritätsprüfung fehlgeschlagen
   not_found: WebView2-Laufzeit nicht gefunden
   not_found_description: >-
     Für die Seelen-Benutzeroberfläche ist Webview2 Runtime erforderlich. Bitte

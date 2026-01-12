@@ -1,8 +1,8 @@
 all: Tutte le app
+back: Indietro
+disband: Sciogli cartella
 folder: Cartella
-no_apps: Nessuna app trovata
+no_matching_items: Nessun articolo trovato corrispondente alla tua ricerca
 no_pinned_apps: Nessuna app bloccata
 pin: Spillo
-pinned: Appuntato
-start: Inizio
 unpin: Sblocca

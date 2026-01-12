@@ -1,8 +1,8 @@
 all: Todos os aplicativos
+back: Costas
+disband: Dissolver pasta
 folder: Pasta
-no_apps: Nenhum aplicativo encontrado
+no_matching_items: Nenhum item encontrado que corresponda à sua pesquisa
 no_pinned_apps: Nenhum aplicativo fixado
 pin: Pino
-pinned: Fixada
-start: Iniciar
 unpin: Liberar

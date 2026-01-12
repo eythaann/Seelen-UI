@@ -1,8 +1,8 @@
 all: Alle Apps
+back: Zurück
+disband: Ordner auflösen
 folder: Ordner
-no_apps: Keine Apps gefunden
+no_matching_items: Es wurden keine Artikel gefunden, die Ihrer Suche entsprechen
 no_pinned_apps: Keine angehefteten Apps
 pin: Stift
-pinned: Angepinnt
-start: Start
 unpin: Lösen

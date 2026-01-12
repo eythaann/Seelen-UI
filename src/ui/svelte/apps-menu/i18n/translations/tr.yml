@@ -1,8 +1,8 @@
 all: Tüm Uygulamalar
+back: Geri
+disband: Klasörü Dağıt
 folder: Klasör
-no_apps: Hiçbir uygulama bulunamadı
+no_matching_items: Aramanızla eşleşen öğe bulunamadı
 no_pinned_apps: Sabitlenmiş uygulama yok
 pin: Sabitle
-pinned: Sabitlendi
-start: Başlangıç
 unpin: Sabitlemeyi kaldır

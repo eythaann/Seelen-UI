@@ -1,8 +1,8 @@
 all: Alle apper
+back: Tilbake
+disband: Oppløs mappe
 folder: Mappe
-no_apps: Ingen apper funnet
+no_matching_items: Ingen elementer funnet som samsvarer med søket ditt
 no_pinned_apps: Ingen festede apper
 pin: Pin
-pinned: Festet
-start: Start
 unpin: Løsne

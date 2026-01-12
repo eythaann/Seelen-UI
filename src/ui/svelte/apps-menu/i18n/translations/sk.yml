@@ -1,8 +1,8 @@
 all: Všetky aplikácie
+back: Späť
+disband: Rozpustiť priečinok
 folder: Priečinok
-no_apps: Nenašli sa žiadne aplikácie
+no_matching_items: Nenašli sa žiadne položky zodpovedajúce vášmu vyhľadávaniu
 no_pinned_apps: Žiadne pripnuté aplikácie
 pin: Pin
-pinned: Pripnuté
-start: Štart
 unpin: Odopnúť

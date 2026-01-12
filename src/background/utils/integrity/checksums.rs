@@ -11,13 +11,8 @@ use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 /// Public key for minisign verification (same as updater)
 const MINISIGN_PUBLIC_KEY: &str = "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK";
 
-#[allow(dead_code)]
 pub fn ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()> {
-    // Skip validation in development mode
-    if tauri::is_dev() {
-        log::info!("Skipping files integrity validation in development mode");
-        return Ok(());
-    }
+    log::trace!("Validating bundle files integrity");
 
     let install_dir = app.path().resource_dir()?;
     let static_path = install_dir.join("static");
@@ -35,11 +30,14 @@ pub fn ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()> {
         return Err("Checksums file not found".into());
     }
 
-    if let Err(err) =
-        verify_external_signature(&checksums_path, &signature_path, MINISIGN_PUBLIC_KEY)
-    {
-        show_integrity_dialog();
-        return Err(err);
+    // Skip signature validation in development mode
+    if !tauri::is_dev() {
+        if let Err(err) =
+            verify_external_signature(&checksums_path, &signature_path, MINISIGN_PUBLIC_KEY)
+        {
+            show_integrity_dialog();
+            return Err(err);
+        }
     }
 
     if let Err(err) = validate_directory_checksums(&static_path, &checksums_path) {
@@ -74,12 +72,9 @@ fn validate_directory_checksums(base_path: &Path, checksums_path: &Path) -> Resu
         actual_checksums.add(relative_path)?;
     }
 
-    // println!("Expected: {:#?}\nActual: {:#?}", expected_checksums, actual_checksums);
-
-    // Compare checksums
     let diffs = expected_checksums.compare(&actual_checksums);
     if !diffs.is_empty() {
-        log::error!("Checksums does not match: {:#?}", diffs);
+        log::error!("Checksums mismatch: {:#?}", diffs);
         return Err("Checksums does not match".into());
     }
 

@@ -1,8 +1,8 @@
 all: Wszystkie aplikacje
+back: Z powrotem
+disband: Rozwiąż folder
 folder: Folder
-no_apps: Nie znaleziono aplikacji
+no_matching_items: Nie znaleziono żadnych elementów pasujących do Twojego wyszukiwania
 no_pinned_apps: Brak przypiętych aplikacji
 pin: Szpilka
-pinned: Przypięty
-start: Start
 unpin: Odpiąć

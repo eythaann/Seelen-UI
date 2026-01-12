@@ -1,8 +1,8 @@
 all: Semua Aplikasi
+back: Kembali
+disband: Bubarkan Folder
 folder: Folder
-no_apps: Tidak ada aplikasi yang ditemukan
+no_matching_items: Tidak ada item yang cocok dengan pencarian Anda
 no_pinned_apps: Tidak ada aplikasi yang disematkan
 pin: Pin
-pinned: Disematkan
-start: Awal
 unpin: Membuka peniti

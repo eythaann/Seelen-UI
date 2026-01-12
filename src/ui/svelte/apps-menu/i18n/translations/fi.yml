@@ -1,8 +1,8 @@
 all: Kaikki sovellukset
+back: Takaisin
+disband: Pura kansio
 folder: Kansio
-no_apps: Sovelluksia ei löytynyt
+no_matching_items: Hakuasi vastaavia kohteita ei löytynyt
 no_pinned_apps: Ei kiinnitettyjä sovelluksia
 pin: Pin
-pinned: Kiinnitetty
-start: Aloita
 unpin: Irrota kiinnitys

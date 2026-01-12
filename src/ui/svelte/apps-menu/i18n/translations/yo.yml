@@ -1,8 +1,8 @@
 all: Gbogbo Apps
+back: Pada
+disband: Tu Folda
 folder: Foda
-no_apps: Ko si awọn ohun elo ti a rii
+no_matching_items: Ko si ohun kan ti o baamu wiwa rẹ
 no_pinned_apps: Ko si awọn ohun elo pinni
 pin: Pin
-pinned: Pinni
-start: Bẹrẹ
 unpin: Yọ kuro

@@ -14,18 +14,22 @@ runtime:
   corrupted_file: A configuration file is corrupted, using default values instead.
   corrupted_file_path: Corrupted file path
   download: Go to download page
+  files_integrity: >-
+    We couldn't verify the integrity of the application files.
+
+    This can happen if files were modified, corrupted, or the installation is
+    incomplete.
+
+    For security reasons, Seelen UI cannot continue.
+
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime not found
   not_found_description: Seelen UI requires Webview2 Runtime. Please install it.
   outdated: WebView2 Runtime outdated
   outdated_description: >-
     Seelen UI requires Webview2 Runtime %{min_version} or higher. Please update
     it.
-  files_integrity_title: Security Alert - Files Integrity Check Failed
-  files_integrity: |-
-    We couldn't verify the integrity of the application files.
-    This can happen if files were modified, corrupted, or the installation is incomplete.
-    For security reasons, Seelen UI cannot continue.
-    Please reinstall it from the official website.
 service:
   not_running: Seelen UI Service not running
   not_running_description: >-

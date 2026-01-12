@@ -1,11 +1,5 @@
 cancel: Ləğv etmək
 done: Tamamlandı
-drivers:
-  got_it: Alıb içmək
-  monitor_disabled: >-
-    Bəzi monitor sürücülərin əlil olduğu görünür. Zəhmət olmasa, Seelen UI'nin
-    düzgün işləməsinə imkan verin.
-  monitor_disabled_title: Monitor sürücülər deaktivdir
 resource:
   added: Yeni bir qaynaq əlavə edildi
   download_failed_body: >-
@@ -22,6 +16,18 @@ runtime:
     pozulur.
   corrupted_file_path: Pozulmuş fayl yolu
   download: Yükləmə səhifəsinə keçin
+  files_integrity: >-
+    Tətbiq fayllarının bütövlüyünü yoxlaya bilmədik.
+
+    Bu, fayllar dəyişdirildikdə, zədələndikdə və ya quraşdırma tamamlanmadıqda
+    baş verə bilər.
+
+    Təhlükəsizlik səbəbləri ilə Seelen UI davam edə bilməz.
+
+    Lütfən, onu rəsmi saytdan yenidən quraşdırın.
+  files_integrity_title: >-
+    Təhlükəsizlik Xəbərdarlığı - Faylların bütövlüyünün yoxlanılması uğursuz
+    oldu
   not_found: WebView2 İcra vaxtı tapılmadı
   not_found_description: Seelen UI Webview2 Runtime tələb edir. Zəhmət olmasa quraşdırın.
   outdated: WebView2 İcra vaxtı köhnəlmişdir

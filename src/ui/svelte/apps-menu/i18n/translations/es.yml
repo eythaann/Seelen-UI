@@ -1,8 +1,8 @@
 all: Todas las aplicaciones
+back: Atrás
+disband: Disolver carpeta
 folder: Carpeta
-no_apps: No se encontraron aplicaciones
+no_matching_items: No se encontraron artículos que coincidan con su búsqueda
 no_pinned_apps: No hay aplicaciones fijadas
 pin: Alfiler
-pinned: Fijado
-start: Comenzar
 unpin: Desprender

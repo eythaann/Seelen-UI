@@ -1,8 +1,8 @@
 all: Sve aplikacije
+back: Nazad
+disband: Raspusti mapu
 folder: Mapa
-no_apps: Nema pronađenih aplikacija
+no_matching_items: Nema pronađenih stavki koje odgovaraju vašem pretraživanju
 no_pinned_apps: Nema prikvačenih aplikacija
 pin: Pin
-pinned: Prikvačeno
-start: Start
 unpin: Otkvači

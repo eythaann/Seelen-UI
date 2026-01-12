@@ -1,8 +1,8 @@
 all: Zonke Izinhlelo zokusebenza
+back: Emuva
+disband: Khipha Ifolda
 folder: Ifolda
-no_apps: Azikho izinhlelo zokusebenza ezitholiwe
+no_matching_items: Azikho izinto ezitholakele ezifana nosesho lwakho
 no_pinned_apps: Azikho izinhlelo zokusebenza eziphiniwe
 pin: Phina
-pinned: Kuphiniwe
-start: Qala
 unpin: Susa ukuphina

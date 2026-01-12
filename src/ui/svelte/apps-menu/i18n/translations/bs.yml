@@ -1,8 +1,8 @@
 all: Sve aplikacije
+back: Nazad
+disband: Disband Folder
 folder: Folder
-no_apps: Nije pronađena nijedna aplikacija
+no_matching_items: Nema pronađenih artikala koji odgovaraju vašem pretraživanju
 no_pinned_apps: Nema zakačenih aplikacija
 pin: Pin
-pinned: Zakačen
-start: Počni
 unpin: Otkvači

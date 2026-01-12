@@ -1,8 +1,8 @@
 all: Lahat ng Apps
+back: Bumalik
+disband: I-disband ang Folder
 folder: Folder
-no_apps: Walang nakitang app
+no_matching_items: Walang nakitang mga item na tumutugma sa iyong paghahanap
 no_pinned_apps: Walang naka-pin na app
 pin: Pin
-pinned: Naka-pin
-start: Magsimula
 unpin: I-unpin

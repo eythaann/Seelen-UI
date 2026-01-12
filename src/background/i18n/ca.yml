@@ -1,11 +1,5 @@
 cancel: Cancel·lar
 done: Fer
-drivers:
-  got_it: Ho tinc
-  monitor_disabled: >-
-    Sembla que alguns controladors de monitor estan desactivats. Si us plau,
-    permeteu -los que Seelen Ui funcioni correctament.
-  monitor_disabled_title: Els controladors de monitorització estan desactivats
 resource:
   added: S'ha afegit un nou recurs
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
     predeterminats.
   corrupted_file_path: Ruta del fitxer corromput
   download: Aneu a la pàgina de descàrrega
+  files_integrity: >-
+    No hem pogut verificar la integritat dels fitxers de l'aplicació.
+
+    Això pot passar si els fitxers es van modificar, es van malmetre o la
+    instal·lació està incompleta.
+
+    Per motius de seguretat, la interfície d'usuari de Seelen no pot continuar.
+
+    Torneu-lo a instal·lar des del lloc web oficial.
+  files_integrity_title: 'Alerta de seguretat: la comprovació d''integritat dels fitxers ha fallat'
   not_found: No s'ha trobat el temps d'execució de WebView2
   not_found_description: La interfície d'usuari de Seelen requereix Webview2 Runtime. Instal·leu-lo.
   outdated: Temps d'execució de WebView2 obsolet

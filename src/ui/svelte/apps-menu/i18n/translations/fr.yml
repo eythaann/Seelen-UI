@@ -1,8 +1,8 @@
 all: Toutes les applications
+back: Dos
+disband: Supprimer le dossier
 folder: Dossier
-no_apps: Aucune application trouvée
+no_matching_items: Aucun article trouvé correspondant à votre recherche
 no_pinned_apps: Aucune application épinglée
 pin: Épingle
-pinned: Épinglé
-start: Commencer
 unpin: Détacher

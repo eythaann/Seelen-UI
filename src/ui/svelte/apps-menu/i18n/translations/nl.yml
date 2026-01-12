@@ -1,8 +1,8 @@
 all: Alle apps
+back: Rug
+disband: Map ontbinden
 folder: Map
-no_apps: Geen apps gevonden
+no_matching_items: Er zijn geen items gevonden die overeenkomen met uw zoekopdracht
 no_pinned_apps: Geen vastgezette apps
 pin: Pin
-pinned: Vastgezet
-start: Begin
 unpin: Losmaken

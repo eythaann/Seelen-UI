@@ -1,8 +1,8 @@
 all: Všechny aplikace
+back: Zadní
+disband: Rozpustit složku
 folder: Složka
-no_apps: Nebyly nalezeny žádné aplikace
+no_matching_items: Nebyly nalezeny žádné položky odpovídající vašemu hledání
 no_pinned_apps: Žádné připnuté aplikace
 pin: Kolík
-pinned: Připnuto
-start: Start
 unpin: Odepnout

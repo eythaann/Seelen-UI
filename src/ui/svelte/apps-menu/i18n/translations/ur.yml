@@ -1,8 +1,8 @@
 all: تمام ایپس
+back: واپس
+disband: فولڈر کو ختم کریں
 folder: فولڈر
-no_apps: کوئی ایپس نہیں ملی
+no_matching_items: آپ کی تلاش سے ملنے والی کوئی چیز نہیں ملی
 no_pinned_apps: کوئی پنڈ ایپس نہیں
 pin: پن
-pinned: پن
-start: شروع کریں
 unpin: انپن

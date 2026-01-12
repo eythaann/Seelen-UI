@@ -1,8 +1,8 @@
 all: ټول اطلاقات
+back: شاته
+disband: فولډر منحل کړئ
 folder: پوښۍ
-no_apps: هیڅ ایپس ونه موندل شو
+no_matching_items: ستاسو د لټون سره سمون خوري هیڅ توکي ونه موندل شول
 no_pinned_apps: هیڅ پینډ شوي ایپس نشته
 pin: پن
-pinned: پنډ شوی
-start: پیل
 unpin: خلاص کړئ

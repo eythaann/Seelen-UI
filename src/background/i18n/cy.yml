@@ -1,11 +1,5 @@
 cancel: Chansliff
 done: Wedi gwneud
-drivers:
-  got_it: GOT IT
-  monitor_disabled: >-
-    Mae'n ymddangos bod rhai gyrwyr monitro yn anabl. Os gwelwch yn dda eu
-    galluogi i adael i Seelen UI weithio'n iawn.
-  monitor_disabled_title: Monitro gyrwyr yn anabl
 resource:
   added: Ychwanegwyd adnodd newydd
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: Mae ffeil ffurfweddu yn llygredig, gan ddefnyddio gwerthoedd diofyn yn lle.
   corrupted_file_path: Llwybr Ffeil Llygredig
   download: Ewch i'r dudalen lawrlwytho
+  files_integrity: >-
+    Ni allem wirio cywirdeb y ffeiliau cais.
+
+    Gall hyn ddigwydd os cafodd ffeiliau eu haddasu, eu llygru, neu os yw'r
+    gosodiad yn anghyflawn.
+
+    Am resymau diogelwch, ni all Seelen UI barhau.
+
+    Ailosodwch ef o'r wefan swyddogol.
+  files_integrity_title: Rhybudd Diogelwch - Methwyd Gwirio Cywirdeb Ffeiliau
   not_found: WebView2 Runtime heb ei ganfod
   not_found_description: Mae Seelen UI angen Amser Rhedeg Webview2. Os gwelwch yn dda gosod.
   outdated: WebView2 Runtime wedi dyddio

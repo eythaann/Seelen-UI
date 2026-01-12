@@ -1,8 +1,8 @@
 all: બધી એપ્સ
+back: પાછળ
+disband: ફોલ્ડર વિખેરી નાખો
 folder: ફોલ્ડર
-no_apps: કોઈ એપ્સ મળી નથી
+no_matching_items: તમારી શોધ સાથે મેળ ખાતી કોઈ આઇટમ મળી નથી
 no_pinned_apps: કોઈ પિન કરેલ એપ્લિકેશનો નથી
 pin: પિન
-pinned: પિન કરેલ
-start: શરૂ કરો
 unpin: અનપિન કરો

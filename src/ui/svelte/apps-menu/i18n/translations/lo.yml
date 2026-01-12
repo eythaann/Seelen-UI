@@ -1,8 +1,8 @@
 all: ແອັບທັງໝົດ
+back: ກັບຄືນໄປບ່ອນ
+disband: Disband Folder
 folder: ໂຟລເດີ
-no_apps: ບໍ່ພົບແອັບ
+no_matching_items: ບໍ່ພົບລາຍການທີ່ກົງກັບການຊອກຫາຂອງທ່ານ
 no_pinned_apps: ບໍ່ມີແອັບທີ່ປັກໝຸດໄວ້
 pin: ປັກໝຸດ
-pinned: ປັກໝຸດ
-start: ເລີ່ມ
 unpin: ຖອນປັກໝຸດ

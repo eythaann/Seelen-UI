@@ -1,8 +1,8 @@
 all: All Apps
+back: Dib u noqo
+disband: Kala dir galka
 folder: Galka
-no_apps: Wax apps ah lama helin
+no_matching_items: Lama helin wax ku habboon raadintaada
 no_pinned_apps: Ma jiraan apps ku xidhan
 pin: Pin
-pinned: Ku dheggan
-start: Bilow
 unpin: Furi

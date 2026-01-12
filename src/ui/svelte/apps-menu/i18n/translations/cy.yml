@@ -1,8 +1,8 @@
 all: Pob Ap
+back: Yn ol
+disband: Ffolder Diddymu
 folder: Ffolder
-no_apps: Heb ganfod apiau
+no_matching_items: Ni chanfuwyd unrhyw eitemau sy'n cyfateb i'ch chwiliad
 no_pinned_apps: Dim apps wedi'u pinio
 pin: Pin
-pinned: Wedi'i binio
-start: Cychwyn
 unpin: Dad-binio

@@ -1,8 +1,8 @@
 all: Ҳама Барномаҳо
+back: Бозгашт
+disband: Папкаро пароканда кунед
 folder: Ҷузвдон
-no_apps: Ягон барнома ёфт нашуд
+no_matching_items: Ягон адад ба ҷустуҷӯи шумо ёфт нашуд
 no_pinned_apps: Ягон барномаҳои pinned
 pin: Пин
-pinned: Пайваст
-start: Оғоз
 unpin: Бекор кардан

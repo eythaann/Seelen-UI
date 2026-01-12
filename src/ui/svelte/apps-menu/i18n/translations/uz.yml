@@ -1,8 +1,8 @@
 all: Barcha ilovalar
+back: Orqaga
+disband: Jildni tarqatish
 folder: Papka
-no_apps: Hech qanday ilova topilmadi
+no_matching_items: Qidiruvingizga mos narsa topilmadi
 no_pinned_apps: Hech qanday mahkamlangan ilova yoʻq
 pin: Pin
-pinned: Qadalgan
-start: Boshlash
 unpin: Yechish

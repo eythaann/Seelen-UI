@@ -1,8 +1,8 @@
 all: Kõik rakendused
+back: Tagasi
+disband: Laiali kaust
 folder: Kaust
-no_apps: Rakendusi ei leitud
+no_matching_items: Teie otsingule vastavaid üksusi ei leitud
 no_pinned_apps: Kinnitatud rakendusi pole
 pin: Pin
-pinned: Kinnitatud
-start: Alusta
 unpin: Vabastage

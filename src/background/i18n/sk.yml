@@ -1,11 +1,5 @@
 cancel: Zrušiť
 done: Vykonaný
-drivers:
-  got_it: Mám to
-  monitor_disabled: >-
-    Zdá sa, že niektoré ovládače monitora sú vypnuté. Povoľte ich, aby
-    používateľské rozhranie Seelen UI fungovalo správne.
-  monitor_disabled_title: Ovládače monitora sú vypnuté
 resource:
   added: Bol pridaný nový zdroj
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
     hodnoty.
   corrupted_file_path: Poškodená cesta k súboru
   download: Prejdite na stránku sťahovania
+  files_integrity: >-
+    Nepodarilo sa nám overiť integritu súborov aplikácie.
+
+    To sa môže stať, ak boli súbory upravené, poškodené alebo inštalácia nie je
+    dokončená.
+
+    Z bezpečnostných dôvodov nemôže používateľské rozhranie Seelen pokračovať.
+
+    Preinštalujte ho z oficiálnej webovej stránky.
+  files_integrity_title: Bezpečnostné upozornenie – kontrola integrity súborov zlyhala
   not_found: WebView2 Runtime sa nenašlo
   not_found_description: >-
     Používateľské rozhranie Seelen vyžaduje Webview2 Runtime. Nainštalujte si

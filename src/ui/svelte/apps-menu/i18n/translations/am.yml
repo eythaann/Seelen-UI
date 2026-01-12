@@ -1,8 +1,8 @@
 all: ሁሉም መተግበሪያዎች
+back: ተመለስ
+disband: አቃፊን አሰናብት
 folder: አቃፊ
-no_apps: ምንም መተግበሪያዎች አልተገኙም።
+no_matching_items: ከእርስዎ ፍለጋ ጋር የሚዛመዱ ምንም ንጥሎች አልተገኙም።
 no_pinned_apps: ምንም የተሰኩ መተግበሪያዎች የሉም
 pin: ፒን
-pinned: ተሰክቷል።
-start: ጀምር
 unpin: ንቀል

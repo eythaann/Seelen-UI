@@ -111,7 +111,7 @@ async fn main() -> Result<()> {
 async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     print_initial_information();
     utils::integrity::validate_webview_runtime_is_installed(app_handle)?;
-    // utils::integrity::ensure_bundle_files_integrity(app_handle)?;
+    utils::integrity::ensure_bundle_files_integrity(app_handle)?;
 
     SelfPipe::start_listener()?;
     if !ServicePipe::is_running() {

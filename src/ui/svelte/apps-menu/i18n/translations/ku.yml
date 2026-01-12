@@ -1,8 +1,8 @@
 all: Hemû Apps
+back: Paş
+disband: Peldanka hilweşînin
 folder: Peldank
-no_apps: Serlêdan nehat dîtin
+no_matching_items: Tiştek li gorî lêgerîna we nehat dîtin
 no_pinned_apps: Tu sepanên pînekirî tune
 pin: Derzî
-pinned: Pînekirin
-start: Destpêkirin
 unpin: Rakin

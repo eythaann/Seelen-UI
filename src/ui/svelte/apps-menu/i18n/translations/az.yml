@@ -1,8 +1,8 @@
 all: Bütün Proqramlar
+back: Geri
+disband: Qovluğu ləğv edin
 folder: Qovluq
-no_apps: Heç bir proqram tapılmadı
+no_matching_items: Axtarışınıza uyğun heç bir element tapılmadı
 no_pinned_apps: Saxlanmış proqram yoxdur
 pin: Pin
-pinned: Saxlanmış
-start: Başlayın
 unpin: Sancağı çıxarın

@@ -1,11 +1,5 @@
 cancel: Otkazati
 done: Završen
-drivers:
-  got_it: Dobio sam
-  monitor_disabled: >-
-    Čini se da su neki pokretači monitora onemogućeni. Molimo vas da im
-    omogućite da seelen sučelja radi ispravno.
-  monitor_disabled_title: Pokretači monitora su onemogućeni
 resource:
   added: Dodan je novi resurs
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
   corrupted_file: Konfiguracijska datoteka je oštećena, koristeći zadane vrijednosti.
   corrupted_file_path: Ispravljena staza datoteke
   download: Idi na stranicu za preuzimanje
+  files_integrity: >-
+    Nismo mogli provjeriti integritet aplikacijskih datoteka.
+
+    To se može dogoditi ako su datoteke izmijenjene, oštećene ili instalacija
+    nije dovršena.
+
+    Iz sigurnosnih razloga, Seelen UI ne može nastaviti.
+
+    Ponovno ga instalirajte sa službene web stranice.
+  files_integrity_title: Sigurnosno upozorenje - Provjera integriteta datoteka nije uspjela
   not_found: WebView2 Runtime nije pronađen
   not_found_description: Seelen UI zahtijeva Webview2 Runtime. Molimo instalirajte ga.
   outdated: WebView2 Runtime je zastario

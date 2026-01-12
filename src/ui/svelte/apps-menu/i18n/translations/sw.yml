@@ -1,8 +1,8 @@
 all: Programu Zote
+back: Nyuma
+disband: Ondoa Folda
 folder: Folda
-no_apps: Hakuna programu zilizopatikana
+no_matching_items: Hakuna vipengee vilivyopatikana vinavyolingana na utafutaji wako
 no_pinned_apps: Hakuna programu zilizobandikwa
 pin: Bandika
-pinned: Imebandikwa
-start: Anza
 unpin: Bandua

@@ -1,8 +1,8 @@
 all: Aplikazio guztiak
+back: Itzuli
+disband: Desegin karpeta
 folder: Karpeta
-no_apps: Ez da aplikaziorik aurkitu
+no_matching_items: Ez da aurkitu zure bilaketarekin bat datorren elementurik
 no_pinned_apps: Ez dago ainguratutako aplikaziorik
 pin: Pin
-pinned: Ainguratuta
-start: Hasi
 unpin: Kendu aingura

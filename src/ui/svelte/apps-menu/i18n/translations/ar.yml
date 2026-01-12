@@ -1,8 +1,8 @@
 all: جميع التطبيقات
+back: خلف
+disband: حل المجلد
 folder: مجلد
-no_apps: لم يتم العثور على أي تطبيقات
+no_matching_items: لم يتم العثور على عناصر مطابقة لبحثك
 no_pinned_apps: لا توجد تطبيقات مثبتة
 pin: دبوس
-pinned: مثبت
-start: يبدأ
 unpin: إزالة التثبيت

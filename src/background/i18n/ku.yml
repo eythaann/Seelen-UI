@@ -1,11 +1,5 @@
 cancel: Bişûndekirin
 done: Dank
-drivers:
-  got_it: Min girt
-  monitor_disabled: >-
-    Ew xuya dike ku hin ajokarên çavdêriyê neçalak in. Ji kerema xwe wan çalak
-    bikin da ku dev ji SEELEN UI bi rengek baş bixebitin.
-  monitor_disabled_title: Ajokarên çavdêriyê neçalak in
 resource:
   added: Resavkaniyek nû hatiye zêdekirin
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: Pelek mîhengê hilweşandî ye, li şûna nirxên xwerû bikar tîne.
   corrupted_file_path: Rêya pelê hilweşandî
   download: Biçe rûpela daxistinê
+  files_integrity: >-
+    Me nekarî yekitiya pelên serîlêdanê verast bikin.
+
+    Heke pel hatine guheztin, xerakirin, an sazkirin ne temam be ev dikare
+    bibe.
+
+    Ji ber sedemên ewlehiyê, Seelen UI nikare berdewam bike.
+
+    Ji kerema xwe wê ji malpera fermî ji nû ve saz bikin.
+  files_integrity_title: Hişyariya Ewlekariyê - Kontrolkirina Yekbûna Pelan têk çû
   not_found: WebView2 Runtime nehat dîtin
   not_found_description: Seelen UI hewceyê Webview2 Runtime hewce dike. Ji kerema xwe saz bikin.
   outdated: WebView2 Runtime kevn bûye

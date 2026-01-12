@@ -1,8 +1,8 @@
 all: Visos programos
+back: Atgal
+disband: Išskleisti aplanką
 folder: Aplankas
-no_apps: Nerasta jokių programų
+no_matching_items: Nerasta prekių, atitinkančių jūsų paiešką
 no_pinned_apps: Nėra prisegtų programų
 pin: Smeigtukas
-pinned: Prisegta
-start: Pradėti
 unpin: Atsegti

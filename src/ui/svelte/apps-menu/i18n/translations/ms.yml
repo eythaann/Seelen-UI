@@ -1,8 +1,8 @@
 all: Semua Apl
+back: belakang
+disband: Bubarkan Folder
 folder: Folder
-no_apps: Tiada apl ditemui
+no_matching_items: Tiada item ditemui sepadan dengan carian anda
 no_pinned_apps: Tiada apl yang disematkan
 pin: Pin
-pinned: Disemat
-start: Mulakan
 unpin: Nyahsemat

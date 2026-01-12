@@ -1,11 +1,5 @@
 cancel: Annuleren
 done: Klaar
-drivers:
-  got_it: Ik heb het
-  monitor_disabled: >-
-    Het lijkt erop dat sommige beeldschermstuurprogramma's zijn uitgeschakeld.
-    Schakel deze in om Seelen UI goed te laten werken.
-  monitor_disabled_title: Monitorstuurprogramma's zijn uitgeschakeld
 resource:
   added: Er is een nieuwe bron toegevoegd
   download_failed_body: >-
@@ -22,6 +16,18 @@ runtime:
     gebruikt.
   corrupted_file_path: Corrupt bestandspad
   download: Ga naar de downloadpagina
+  files_integrity: >-
+    We konden de integriteit van de applicatiebestanden niet verifiëren.
+
+    Dit kan gebeuren als bestanden zijn gewijzigd of beschadigd of als de
+    installatie onvolledig is.
+
+    Om veiligheidsredenen kan de Seelen UI niet doorgaan.
+
+    Installeer het opnieuw vanaf de officiële website.
+  files_integrity_title: >-
+    Beveiligingswaarschuwing - Controle van de integriteit van bestanden is
+    mislukt
   not_found: WebView2 Runtime niet gevonden
   not_found_description: >-
     De Seelen-gebruikersinterface vereist Webview2 Runtime. Installeer het

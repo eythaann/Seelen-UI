@@ -1,9 +1,5 @@
 cancel: 取消
 done: 完畢
-drivers:
-  got_it: 知道了
-  monitor_disabled: 看來某些監視器驅動程序被禁用。 請讓他們讓Seelen UI正常工作。
-  monitor_disabled_title: 監視驅動程序被禁用
 resource:
   added: 添加了一個新資源
   download_failed_body: 下載資源時出現問題，請向Seelen開發人員團隊報告。
@@ -16,6 +12,12 @@ runtime:
   corrupted_file: 使用默認值改為損壞配置文件。
   corrupted_file_path: 損壞的文件路徑
   download: 轉到下載頁面
+  files_integrity: |-
+    我們無法驗證應用程序文件的完整性。
+    如果文件被修改、損壞或安裝不完整，則可能會發生這種情況。
+    出於安全原因，Seelen UI 無法繼續。
+    請從官方網站重新安裝。
+  files_integrity_title: 安全警報 - 文件完整性檢查失敗
   not_found: WebView2運行時找不到
   not_found_description: Seelen UI需要WebView2運行時。 請安裝。
   outdated: WebView2運行時過時

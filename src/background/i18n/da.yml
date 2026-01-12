@@ -1,11 +1,5 @@
 cancel: Ophæve
 done: Færdig
-drivers:
-  got_it: Jeg har det
-  monitor_disabled: >-
-    Det ser ud til, at nogle skærmdrivere er deaktiveret. Aktivér dem venligst,
-    så Seelen UI kan fungere korrekt.
-  monitor_disabled_title: Skærmdrivere er deaktiveret
 resource:
   added: En ny ressource er blevet tilføjet
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: En konfigurationsfil er beskadiget og bruger standardværdier i stedet.
   corrupted_file_path: Beskadiget filsti
   download: Gå til downloadsiden
+  files_integrity: >-
+    Vi kunne ikke bekræfte integriteten af ​​applikationsfilerne.
+
+    Dette kan ske, hvis filer er blevet ændret, ødelagt, eller installationen er
+    ufuldstændig.
+
+    Af sikkerhedsmæssige årsager kan Seelen UI ikke fortsætte.
+
+    Geninstaller det fra den officielle hjemmeside.
+  files_integrity_title: Sikkerhedsadvarsel - Filintegritetstjek mislykkedes
   not_found: WebView2 Runtime ikke fundet
   not_found_description: Seelen UI kræver Webview2 Runtime. Installer det venligst.
   outdated: WebView2 Runtime forældet

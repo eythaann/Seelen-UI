@@ -1,8 +1,8 @@
 all: All Apps
+back: Zréck
+disband: Opléisen Dossier
 folder: Dossier
-no_apps: Keng Apps fonnt
+no_matching_items: Keng Artikele fonnt déi mat Ärer Sich passen
 no_pinned_apps: Keng gespaarten Apps
 pin: Pin
-pinned: Befestegt
-start: Start
 unpin: Unpin

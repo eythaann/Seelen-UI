@@ -1,11 +1,5 @@
 cancel: Cancelar
 done: Hecho
-drivers:
-  got_it: Entendido.
-  monitor_disabled: >-
-    Parece que algunos controladores de monitor están deshabilitados. Por favor,
-    actívalos para que Seelen UI funcione correctamente.
-  monitor_disabled_title: Los controladores de monitor están desactivados
 resource:
   added: Se ha añadido un nuevo recurso
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
     su lugar.
   corrupted_file_path: Ruta de archivo dañada
   download: Ir a la página de descarga
+  files_integrity: >-
+    No pudimos verificar la integridad de los archivos de la aplicación.
+
+    Esto puede suceder si los archivos fueron modificados, dañados o la
+    instalación está incompleta.
+
+    Por razones de seguridad, Seelen UI no puede continuar.
+
+    Vuelva a instalarlo desde el sitio web oficial.
+  files_integrity_title: "Alerta de seguridad: error en la comprobación de integridad de archivos"
   not_found: Tiempo de ejecución de WebView2 no encontrado
   not_found_description: >-
     La interfaz de usuario de Seelen requiere Webview2 Runtime. Por favor

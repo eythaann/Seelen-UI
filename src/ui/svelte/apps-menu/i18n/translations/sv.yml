@@ -1,8 +1,8 @@
 all: Alla appar
+back: Tillbaka
+disband: Upplös mapp
 folder: Mapp
-no_apps: Inga appar hittades
+no_matching_items: Inga objekt hittades som matchar din sökning
 no_pinned_apps: Inga fästa appar
 pin: Stift
-pinned: Fäst
-start: Start
 unpin: Lossa

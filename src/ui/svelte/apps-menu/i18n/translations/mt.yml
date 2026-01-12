@@ -1,8 +1,8 @@
 all: L-Apps kollha
+back: Lura
+disband: Xolja Folder
 folder: Folder
-no_apps: Ma nstabet l-ebda app
+no_matching_items: Ma nstab l-ebda oġġett li jaqbel mat-tfittxija tiegħek
 no_pinned_apps: Ebda apps ippinjat
 pin: Pin
-pinned: Pinnjati
-start: Ibda
 unpin: Unpin

@@ -1,8 +1,8 @@
 all: Alle apps
+back: Tilbage
+disband: Opløs mappe
 folder: Mappe
-no_apps: Ingen apps fundet
+no_matching_items: Der blev ikke fundet nogen varer, der matcher din søgning
 no_pinned_apps: Ingen fastgjorte apps
 pin: Stift
-pinned: Fastgjort
-start: Starte
 unpin: Frigør

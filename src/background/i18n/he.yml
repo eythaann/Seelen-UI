@@ -1,11 +1,5 @@
 cancel: לְבַטֵל
 done: נַעֲשָׂה
-drivers:
-  got_it: קיבלתי את זה
-  monitor_disabled: >-
-    נראה כי נהגי צג מסוימים מושבתים. אנא אפשר להם לאפשר לממשק המשתמש של Seelen
-    לעבוד כמו שצריך.
-  monitor_disabled_title: נהגי המוניטור מושבתים
 resource:
   added: נוסף משאב חדש
   download_failed_body: משהו השתבש בזמן הורדת המשאב, אנא דווח עליו לצוות המפתחים של Seelen.
@@ -18,6 +12,12 @@ runtime:
   corrupted_file: קובץ תצורה פגום, באמצעות ערכי ברירת מחדל במקום זאת.
   corrupted_file_path: נתיב קובץ פגום
   download: הורדות
+  files_integrity: |-
+    לא הצלחנו לאמת את תקינות קבצי היישום.
+    זה יכול לקרות אם הקבצים שונו, נפגמו או שההתקנה לא הושלמה.
+    מסיבות אבטחה, ממשק המשתמש של Seelen לא יכול להמשיך.
+    נא להתקין אותו מחדש מהאתר הרשמי.
+  files_integrity_title: התראת אבטחה - בדיקת תקינות הקבצים נכשלה
   not_found: זמן ריצה של WebView2 לא נמצא
   not_found_description: ממשק המשתמש של Seelen דורש זמן ריצה של Webview2. נא להתקין אותו.
   outdated: זמן ריצה של WebView2 מיושן

@@ -1,8 +1,8 @@
 all: Öll forrit
+back: Til baka
+disband: Slepptu möppu
 folder: Mappa
-no_apps: Engin forrit fundust
+no_matching_items: Engin atriði fundust sem passa við leitina þína
 no_pinned_apps: Engin fest forrit
 pin: Pinna
-pinned: Festist
-start: Byrjaðu
 unpin: Losaðu

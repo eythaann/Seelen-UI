@@ -1,8 +1,8 @@
 all: Minden alkalmazás
+back: Vissza
+disband: Mappa feloldása
 folder: Mappa
-no_apps: Nem találhatók alkalmazások
+no_matching_items: Nem található a keresésnek megfelelő elem
 no_pinned_apps: Nincsenek rögzített alkalmazások
 pin: Pin
-pinned: Rögzítve
-start: Indul
 unpin: Kibont

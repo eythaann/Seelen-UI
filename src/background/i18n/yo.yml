@@ -1,11 +1,5 @@
 cancel: Fagilee
 done: Ṣe
-drivers:
-  got_it: Ṣe o ri
-  monitor_disabled: >-
-    O han pe diẹ ninu awọn awakọ atẹle ni alaabo. Jọwọ jẹ ki wọn jẹ ki wọn jẹ ki
-    wọn jẹ ki wọn ṣiṣẹ daradara.
-  monitor_disabled_title: Atẹle awọn awakọ jẹ alaabo
 resource:
   added: A ti ṣafikun awọn orisun titun
   download_failed_body: >-
@@ -20,6 +14,12 @@ runtime:
   corrupted_file: Faili iṣeto kan jẹ ibajẹ, lilo awọn iye aifọwọyi dipo.
   corrupted_file_path: Ọna faili ibajẹ
   download: Lọ si oju-iwe igbasilẹ
+  files_integrity: |-
+    A ko le mọ daju otitọ ti awọn faili ohun elo naa.
+    Eyi le ṣẹlẹ ti awọn faili ba yipada, bajẹ, tabi fifi sori ẹrọ ko pe.
+    Fun awọn idi aabo, Seelen UI ko le tẹsiwaju.
+    Jọwọ tun fi sii lati oju opo wẹẹbu osise.
+  files_integrity_title: Itaniji Aabo - Ṣayẹwo Iduroṣinṣin Awọn faili kuna
   not_found: WebView2 asiko isise ko ri
   not_found_description: Seelen UI nilo Webview2 Runtime. Jọwọ fi sii.
   outdated: WebView2 Runtime ti igba atijọ

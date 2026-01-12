@@ -1,9 +1,5 @@
 cancel: ይቅር
 done: ተከናውኗል
-drivers:
-  got_it: ገባኝ
-  monitor_disabled: አንዳንድ የተቆጣጠረ ሾፌሮች ተሰናክለዋል. እባክዎን እንዲተኩልዎት እንዲፈቅድላቸው ያነቃቸዋል.
-  monitor_disabled_title: ተቆጣጣሪ ነጂዎች ተሰናክለዋል
 resource:
   added: አዲስ ሀብት ታክሏል
   download_failed_body: ሀብቱን በማወጅበት ጊዜ አንድ ነገር ተሳስቷል, እባክዎን ለታና ancer ቡድን ያሳውቁ.
@@ -16,6 +12,12 @@ runtime:
   corrupted_file: የውቅረት ፋይል ተበላሽቷል, ይልቁንስ ነባሪ እሴቶችን በመጠቀም ተበላሽቷል.
   corrupted_file_path: የተበላሸ ፋይል መንገድ
   download: ወደ ማውረድ ገጽ ይሂዱ
+  files_integrity: |-
+    የመተግበሪያ ፋይሎችን ትክክለኛነት ማረጋገጥ አልቻልንም።
+    ፋይሎች ከተሻሻሉ፣ ከተበላሹ ወይም መጫኑ ካልተሟላ ይሄ ሊከሰት ይችላል።
+    ለደህንነት ሲባል Seelen UI መቀጠል አይችልም።
+    እባክዎ ከኦፊሴላዊው ድር ጣቢያ እንደገና ይጫኑት።
+  files_integrity_title: የደህንነት ማንቂያ - የፋይሎች ትክክለኛነት ማረጋገጥ አልተሳካም።
   not_found: WebView2 Runtime አልተገኘም።
   not_found_description: Seelen UI Webview2 Runtime ያስፈልገዋል። እባክዎ ይጫኑት።
   outdated: WebView2 Runtime ጊዜው አልፎበታል።
