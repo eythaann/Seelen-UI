@@ -1,10 +1,5 @@
 cancel: रद्द करना
 done: हो गया
-drivers:
-  got_it: समझ गया
-  monitor_disabled: >-
-    ऐसा प्रतीत होता है कि कुछ मॉनिटर ड्राइवर अक्षम हैं। कृपया उन्हें सेलेन यूआई को ठीक से काम करने में सक्षम करें।
-  monitor_disabled_title: मॉनिटर ड्राइवर अक्षम हैं
 resource:
   added: एक नया संसाधन जोड़ा गया है
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: एक कॉन्फ़िगरेशन फ़ाइल दूषित है, इसके बजाय डिफ़ॉल्ट मानों का उपयोग करके।
   corrupted_file_path: दूषित फ़ाइल पथ
   download: डाउनलोड पेज पर जाएं
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 रनटाइम नहीं मिला
   not_found_description: सीलेन यूआई को वेबव्यू2 रनटाइम की आवश्यकता है। कृपया इसे इंस्टॉल करें.
   outdated: WebView2 रनटाइम पुराना हो गया
