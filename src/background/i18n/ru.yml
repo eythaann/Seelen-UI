@@ -1,10 +1,5 @@
 cancel: Отмена
 done: Сделанный
-drivers:
-  got_it: Есть
-  monitor_disabled: >-
-    Похоже, что некоторые драйверы монитора отключены. Пожалуйста, включите их, чтобы Seelen UI работал правильно.
-  monitor_disabled_title: Драйверы монитора отключены
 resource:
   added: Добавлен новый ресурс
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Файл конфигурации поврежден, вместо него используются значения по умолчанию.
   corrupted_file_path: Поврежденный путь к файлу
   download: Перейти на страницу загрузки
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: Среда выполнения WebView2 не найдена
   not_found_description: Для пользовательского интерфейса Seelen требуется среда выполнения Webview2. Пожалуйста, установите его.
   outdated: Среда выполнения WebView2 устарела
