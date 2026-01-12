@@ -1,10 +1,5 @@
 cancel: Kanselahin
 done: Tapos na
-drivers:
-  got_it: Nakuha mo na
-  monitor_disabled: >-
-    Lumilitaw na ang ilang mga driver ng monitor ay hindi pinagana. Mangyaring paganahin ang mga ito upang hayaan ang Seelen UI na gumana nang maayos.
-  monitor_disabled_title: Ang mga driver ng monitor ay hindi pinagana
 resource:
   added: Ang isang bagong mapagkukunan ay naidagdag
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Ang isang file ng pagsasaayos ay nasira, gamit ang mga default na halaga sa halip.
   corrupted_file_path: Nasira na landas ng file
   download: Pumunta sa pahina ng pag-download
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: Hindi nahanap ang WebView2 Runtime
   not_found_description: Ang Seelen UI ay nangangailangan ng Webview2 Runtime. Mangyaring i-install ito.
   outdated: Luma na ang Runtime ng WebView2
