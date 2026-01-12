@@ -1,10 +1,5 @@
 cancel: Töröl
 done: Kész
-drivers:
-  got_it: Megvan.
-  monitor_disabled: >-
-    Úgy tűnik, hogy egyes monitorillesztők le vannak tiltva. Kérjük, engedélyezze őket, hogy a Seelen UI megfelelően működjön.
-  monitor_disabled_title: A monitor illesztőprogramok letiltva
 resource:
   added: Egy új erőforrás került hozzáadásra
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Egy konfigurációs fájl sérült, helyette alapértelmezett értékeket használ.
   corrupted_file_path: Megrongált fájl elérési útvonal
   download: Menjen a letöltési oldalra
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: A WebView2 futási környezet nem található
   not_found_description: A Seelen felhasználói felületéhez Webview2 Runtime szükséges. Kérjük, telepítse.
   outdated: WebView2 Runtime elavult
