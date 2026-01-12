@@ -1,10 +1,5 @@
 cancel: Цуаах
 done: Хийх
-drivers:
-  got_it: Үүнийг авсан
-  monitor_disabled: >-
-    Зарим мониторын драйверуудыг идэвхгүй болгосон байх шиг байна. Seelen Ui ажлыг зөв ажиллуулахыг зөвшөөрнө үү.
-  monitor_disabled_title: Хяналтын драйверуудыг идэвхгүй болгосон байна
 resource:
   added: Шинэ нөөц нэмэгдсэн
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Тохируулгын файл эвдэрсэн, оронд нь үндсэн утгыг ашиглана.
   corrupted_file_path: Авлисан файлын зам
   download: Татаж авах хуудас руу очно уу
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Ажиллах цаг олдсонгүй
   not_found_description: Seelen UI нь Webview2 Runtime шаарддаг. Үүнийг суулгана уу.
   outdated: WebView2 Ажиллах хугацаа хуучирсан
