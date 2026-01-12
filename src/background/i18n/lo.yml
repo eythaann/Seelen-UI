@@ -1,10 +1,5 @@
 cancel: ຍົກເລີກ
 done: ແລ້ວ? ແລ້ວ
-drivers:
-  got_it: ໄດ້ມັນ
-  monitor_disabled: >-
-    ມັນປະກົດວ່າຄົນຂັບລົດຕິດຕາມກວດກາບາງຄົນຖືກປິດໃຊ້ງານ. ກະລຸນາເຮັດໃຫ້ພວກເຂົາສາມາດປ່ອຍໃຫ້ SEENLEN UI ເຮັດວຽກໄດ້ຢ່າງຖືກຕ້ອງ.
-  monitor_disabled_title: ຕິດຕາມກວດກາຄົນຂັບລົດຖືກປິດໃຊ້ງານ
 resource:
   added: ຊັບພະຍາກອນໃຫມ່ໄດ້ຖືກເພີ່ມເຂົ້າມາແລ້ວ
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: ເອກະສານການຕັ້ງຄ່າແມ່ນເສຍຫາຍ, ໂດຍໃຊ້ຄຸນຄ່າເລີ່ມຕົ້ນແທນ.
   corrupted_file_path: ເສັ້ນທາງເອກະສານທີ່ເສີຍຫາຍ
   download: ໄປທີ່ໜ້າດາວໂຫຼດ
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: ບໍ່ພົບ WebView2 Runtime
   not_found_description: Seelen UI ຕ້ອງການ Webview2 Runtime. ກະລຸນາຕິດຕັ້ງມັນ.
   outdated: WebView2 Runtime ລ້າສະໄຫມ
