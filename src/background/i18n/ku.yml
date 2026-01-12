@@ -1,10 +1,5 @@
 cancel: Bişûndekirin
 done: Dank
-drivers:
-  got_it: Min girt
-  monitor_disabled: >-
-    Ew xuya dike ku hin ajokarên çavdêriyê neçalak in. Ji kerema xwe wan çalak bikin da ku dev ji SEELEN UI bi rengek baş bixebitin.
-  monitor_disabled_title: Ajokarên çavdêriyê neçalak in
 resource:
   added: Resavkaniyek nû hatiye zêdekirin
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Pelek mîhengê hilweşandî ye, li şûna nirxên xwerû bikar tîne.
   corrupted_file_path: Rêya pelê hilweşandî
   download: Biçe rûpela daxistinê
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime nehat dîtin
   not_found_description: Seelen UI hewceyê Webview2 Runtime hewce dike. Ji kerema xwe saz bikin.
   outdated: WebView2 Runtime kevn bûye
