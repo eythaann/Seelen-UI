@@ -1,10 +1,5 @@
 cancel: Burin
 done: Sameeyey
-drivers:
-  got_it: Helay
-  monitor_disabled: >-
-    Waxay umuuqataa in qaar ka mid ah darawalada kormeeraha ay naafo yihiin. Fadlan u oggolow inay u oggolaadaan in Selen Ui si sax ah u shaqeynayo.
-  monitor_disabled_title: Darawalada kormeeraha ayaa naafo ah
 resource:
   added: Kheyraad Cusub ayaa lagu daray
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Faylka qaabeynta ayaa la musuqmaasuqay, iyadoo la adeegsanayo qiimayaasha caadiga ah halkii.
   corrupted_file_path: Jidka faylka ee musuqmaasuqa
   download: Tag bogga soo dejinta
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime lama helin
   not_found_description: Seelen UI wuxuu u baahan yahay Webview2 Runtime. Fadlan rakib
   outdated: WebView2 Runtime waa dhacay
