@@ -1,10 +1,5 @@
 cancel: Anula
 done: Făcut
-drivers:
-  got_it: Am înțeles
-  monitor_disabled: >-
-    Se pare că unele drivere de monitor sunt dezactivate. Vă rugăm să le activați pentru ca Seelen UI să funcționeze corect.
-  monitor_disabled_title: Driverele monitorului sunt dezactivate
 resource:
   added: O nouă resursă a fost adăugată
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Un fișier de configurare este corupt, utilizând în schimb valorile implicite.
   corrupted_file_path: Calea fișierului coruptă
   download: Accesați pagina de descărcare
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime nu a fost găsit
   not_found_description: Seelen UI necesită Webview2 Runtime. Vă rugăm să o instalați.
   outdated: WebView2 Runtime depășit
