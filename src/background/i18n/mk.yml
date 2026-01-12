@@ -1,10 +1,5 @@
 cancel: Откажи
 done: Готово
-drivers:
-  got_it: Го добив
-  monitor_disabled: >-
-    Се чини дека некои возачи на монитори се оневозможени. Ве молиме, овозможете им да им дозволите на Seelen UI да работи правилно.
-  monitor_disabled_title: Возачите на монитор се оневозможени
 resource:
   added: Додаден е нов ресурс
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Датотеката за конфигурација е расипана, наместо тоа, користејќи стандардни вредности.
   corrupted_file_path: Расипана патека на датотеки
   download: Одете на страницата за преземање
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime не е пронајдено
   not_found_description: Seelen UI бара Webview2 Runtime. Ве молиме инсталирајте го.
   outdated: WebView2 Runtime е застарено
