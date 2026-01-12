@@ -1,10 +1,5 @@
 cancel: 取消
 done: 完成
-drivers:
-  got_it: 了解
-  monitor_disabled: >-
-    看起來部分顯示器驅動程式已被停用，請啟用這些驅動程式以讓 Seelen UI 正常運作。
-  monitor_disabled_title: 顯示器驅動程式已停用
 resource:
   added: 已新增資源
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: 設定檔已損毀，將改用預設值。
   corrupted_file_path: 損毀的檔案路徑
   download: 前往下載頁面
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: 找不到 WebView2 執行階段
   not_found_description: Seelen UI 需要 WebView2 執行階段，請安裝它。
   outdated: WebView2 執行階段版本過舊
