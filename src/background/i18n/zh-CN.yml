@@ -1,10 +1,5 @@
 cancel: 取消
 done: 完毕
-drivers:
-  got_it: 明白
-  monitor_disabled: >-
-    某些显示器驱动程序似乎被禁用。请启用它们，以便 Seelen UI 正常工作。
-  monitor_disabled_title: 显示器驱动程序已禁用
 resource:
   added: 新增资源
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: 配置文件已损坏，使用默认值代替。
   corrupted_file_path: 文件路径损坏
   download: 前往下载页面
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: 未找到 WebView2 运行时
   not_found_description: Seelen UI 需要 Webview2 运行时。请安装它。
   outdated: WebView2 运行时已过时
