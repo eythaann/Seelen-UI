@@ -1,10 +1,5 @@
 cancel: Hlikihla
 done: Usulile
-drivers:
-  got_it: Ngiyitholile
-  monitor_disabled: >-
-    Kubonakala sengathi abanye abashayeli abaqashile bakhutshaziwe. Sicela ubanikeze amandla okuvumela i-Seelen UI isebenze kahle.
-  monitor_disabled_title: Abaqaphi abashayeli bayakhutshazwa
 resource:
   added: Kufakwe insiza entsha
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Ifayela lokucushwa lonakalisiwe, kusetshenziswa amanani azenzakalelayo esikhundleni salokho.
   corrupted_file_path: Indlela yefayela eyonakele
   download: Iya ekhasini lokulanda
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: Isikhathi sokusebenza se-WebView2 asitholakali
   not_found_description: I-Seelen UI idinga isikhathi sokusebenza se-Webview2. Sicela uyifake.
   outdated: I-WebView2 Runtime isiphelelwe yisikhathi
