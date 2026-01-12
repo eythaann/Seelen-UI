@@ -1,10 +1,5 @@
 cancel: Hætta við
 done: Gert
-drivers:
-  got_it: Fékk það
-  monitor_disabled: >-
-    Svo virðist sem sumir eftirlitsbílstjórar séu óvirkir. Vinsamlegast gerðu þeim kleift að láta Seelen UI virka almennilega.
-  monitor_disabled_title: Fylgstu ökumenn eru óvirkir
 resource:
   added: Nýjum auðlind hefur verið bætt við
   download_failed_body: >-
@@ -18,6 +13,12 @@ runtime:
   corrupted_file: Stillingarskrá er skemmd og notar sjálfgefin gildi í staðinn.
   corrupted_file_path: Skemmd skráarleið
   download: Farðu á niðurhalssíðuna
+  files_integrity: >-
+    We couldn't verify the integrity of the application files. 
+    This can happen if files were modified, corrupted, or the installation is incomplete. 
+    For security reasons, Seelen UI cannot continue. 
+    Please reinstall it from the official website.
+  files_integrity_title: Security Alert - Files Integrity Check Failed
   not_found: WebView2 Runtime fannst ekki
   not_found_description: Seelen UI krefst Webview2 Runtime. Vinsamlegast settu það upp.
   outdated: WebView2 Runtime úreltur
