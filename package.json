@@ -54,7 +54,7 @@
     "@types/express": "^5.0.0",
     "@types/glob": "^8.1.0",
     "@types/js-yaml": "^4.0.9",
-    "@types/lodash": "^4.17.7",
+    "@types/lodash": "^4.17.23",
     "@types/node": "^20.11.19",
     "@types/react-dom": "^18.2.19",
     "@types/yargs": "^17.0.33",
