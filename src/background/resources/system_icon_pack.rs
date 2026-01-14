@@ -1,5 +1,6 @@
 use std::{path::Path, sync::LazyLock};
 
+use seelen_core::chrono::{DateTime, Utc};
 use seelen_core::{
     resource::{ResourceText, SluResource},
     state::{
@@ -199,12 +200,15 @@ impl ResourceManager {
         if umid.is_none() && path.is_none() {
             return;
         }
+
+        let source_mtime = path.and_then(last_edit_at);
         self.with_system_pack(|system_pack| {
             system_pack.add_entry(IconPackEntry::Unique(UniqueIconPackEntry {
                 umid: umid.map(|s| s.to_string()),
                 path: path.map(|p| p.to_path_buf()),
                 redirect: None,
                 icon: Some(icon),
+                source_mtime,
             }));
         });
         self.request_save_system_icon_pack();
@@ -212,12 +216,14 @@ impl ResourceManager {
     }
 
     pub fn add_system_icon_redirect(&self, umid: Option<String>, origin: &Path, redirect: &Path) {
+        let source_mtime = last_edit_at(origin);
         self.with_system_pack(|system_pack| {
             system_pack.add_entry(IconPackEntry::Unique(UniqueIconPackEntry {
                 umid,
                 path: Some(origin.to_path_buf()),
                 redirect: Some(redirect.to_path_buf()),
                 icon: None,
+                source_mtime,
             }));
         });
         self.request_save_system_icon_pack();
@@ -252,6 +258,8 @@ impl ResourceManager {
 
     /// Get icon pack by app user model id, filename or path
     pub fn has_app_icon(&self, umid: Option<&str>, path: Option<&Path>) -> bool {
+        let current_mtime = path.and_then(last_edit_at);
+
         self.with_system_pack(|system_pack| {
             let lower_path = path.map(|p| p.to_string_lossy().to_lowercase());
 
@@ -278,8 +286,15 @@ impl ResourceManager {
                 }
 
                 if let Some(entry) = found {
+                    // Check if source file was modified since icon was cached, for invalidation
+                    if let (Some(cached), Some(current)) = (entry.source_mtime, current_mtime) {
+                        if cached != current {
+                            return false;
+                        }
+                    }
+
                     if entry.redirect.is_some() {
-                        return true;
+                        return self.has_app_icon(None, entry.redirect.as_deref());
                     }
 
                     if let Some(icon) = &entry.icon {
@@ -312,4 +327,10 @@ impl ResourceManager {
             false
         })
     }
+}
+
+fn last_edit_at(path: &Path) -> Option<DateTime<Utc>> {
+    let meta = std::fs::metadata(path).ok()?;
+    let date = meta.modified().ok()?;
+    Some(date.into())
 }

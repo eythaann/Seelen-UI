@@ -1,5 +1,6 @@
 use std::path::PathBuf;
 
+use chrono::{DateTime, Utc};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
@@ -93,6 +94,9 @@ pub struct UniqueIconPackEntry {
     pub redirect: Option<PathBuf>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub icon: Option<Icon>,
+    /// Source file modification time for cache invalidation
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub source_mtime: Option<DateTime<Utc>>,
 }
 
 /// Intended to store file icons by extension
