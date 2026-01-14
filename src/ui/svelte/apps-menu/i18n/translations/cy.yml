@@ -3,6 +3,7 @@ back: Yn ol
 disband: Ffolder Diddymu
 folder: Ffolder
 no_matching_items: Ni chanfuwyd unrhyw eitemau sy'n cyfateb i'ch chwiliad
-no_pinned_apps: Dim apps wedi'u pinio
 pin: Pin
 unpin: Dad-binio
+welcome_message: Croeso i ddewislen app Seelen UI.
+welcome_message2: Ar y tab hwn, gallwch binio'ch hoff apiau.

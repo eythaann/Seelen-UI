@@ -20,9 +20,6 @@ context_menu:
   restore: Taastada vaikimisi
   settings: Seaded
   task_manager: Tegumihaldur
-keyboard:
-  more: Rohkem klaviatuuri seadeid
-  title: Klaviatuuri paigutus
 media:
   default_multimedia_volume: Multimeedia maht
   device:

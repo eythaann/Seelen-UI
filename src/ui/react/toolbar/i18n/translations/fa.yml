@@ -20,9 +20,6 @@ context_menu:
   restore: بازگرداندن به طور پیش فرض
   settings: تنظیمات
   task_manager: Task Manager
-keyboard:
-  more: تنظیمات صفحه کلید بیشتر
-  title: چیدمان صفحه کلید
 media:
   default_multimedia_volume: حجم چند رسانه ای
   device:

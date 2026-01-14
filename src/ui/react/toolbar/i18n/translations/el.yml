@@ -20,9 +20,6 @@ context_menu:
   restore: Επαναφορά στην προεπιλογή
   settings: Ρυθμίσεις
   task_manager: Task Manager
-keyboard:
-  more: Περισσότερες ρυθμίσεις πληκτρολογίου
-  title: Διάταξη πληκτρολογίου
 media:
   default_multimedia_volume: Όγκος πολυμέσων
   device:

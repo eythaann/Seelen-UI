@@ -20,9 +20,6 @@ context_menu:
   restore: Alapértelmezett állapot visszaállítása
   settings: Beállítások
   task_manager: Feladatkezelő
-keyboard:
-  more: További billentyűzet-beállítások
-  title: Billentyűzetkiosztás
 media:
   default_multimedia_volume: Alapértelmezett médiakötet
   device:

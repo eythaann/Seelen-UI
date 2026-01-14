@@ -20,9 +20,6 @@ context_menu:
   restore: Przywróć domyślne
   settings: Ustawienia
   task_manager: Menedżer zadań
-keyboard:
-  more: Więcej ustawień klawiatury
-  title: Układ klawiatury
 media:
   default_multimedia_volume: Poziomy głośności
   device:

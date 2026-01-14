@@ -948,59 +948,6 @@
   }
 }
 
-.keyboard-selector {
-  @extend %popup;
-
-  .keyboard-selector-header {
-    @extend %section-title;
-  }
-
-  .keyboard-selector-body {
-    @extend %list;
-
-    .keyboard-selector-entry {
-      @extend %actionable-button;
-      display: grid;
-      grid-template-columns: 20px 1fr;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
-
-      &.keyboard-selector-entry-active {
-        background-color: rgba(var(--system-accent-color-rgb), 0.4);
-      }
-
-      .keyboard-selector-entry-info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-
-        .keyboard-selector-entry-lang {
-          font-weight: 600;
-          @extend %overflowable-text;
-        }
-
-        .keyboard-selector-entry-keyboard {
-          font-size: 0.7em;
-          line-height: 1.2em;
-          font-weight: 600;
-          color: var(--color-gray-600);
-          @extend %overflowable-text;
-        }
-      }
-    }
-  }
-
-  .keyboard-selector-footer {
-    .keyboard-selector-footer-button {
-      @extend %actionable-button;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--color-gray-600);
-    }
-  }
-}
-
 .ft-corner-button {
   transition: backdrop-filter 0.2s ease;
 

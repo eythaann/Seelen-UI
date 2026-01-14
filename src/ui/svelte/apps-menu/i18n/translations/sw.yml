@@ -3,6 +3,7 @@ back: Nyuma
 disband: Ondoa Folda
 folder: Folda
 no_matching_items: Hakuna vipengee vilivyopatikana vinavyolingana na utafutaji wako
-no_pinned_apps: Hakuna programu zilizobandikwa
 pin: Bandika
 unpin: Bandua
+welcome_message: Karibu kwenye menyu ya programu ya Seelen UI.
+welcome_message2: Kwenye kichupo hiki, unaweza kubandika programu unazopenda.

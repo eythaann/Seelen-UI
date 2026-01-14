@@ -20,9 +20,6 @@ context_menu:
   restore: デフォルトに戻す
   settings: SeelenUIの設定
   task_manager: タスクマネージャー
-keyboard:
-  more: その他のキーボード設定
-  title: キーボードレイアウト
 media:
   default_multimedia_volume: デフォルトの音量
   device:

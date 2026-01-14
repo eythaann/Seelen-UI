@@ -20,9 +20,6 @@ context_menu:
   restore: აღადგინეთ ნაგულისხმევი
   settings: პარამეტრები
   task_manager: სამუშაო მენეჯერი
-keyboard:
-  more: კლავიშების მეტი პარამეტრები
-  title: კლავიშის განლაგება
 media:
   default_multimedia_volume: მულტიმედიური მოცულობა
   device:

@@ -3,6 +3,7 @@ back: Kembali
 disband: Bubarkan Folder
 folder: Folder
 no_matching_items: Tidak ada item yang cocok dengan pencarian Anda
-no_pinned_apps: Tidak ada aplikasi yang disematkan
 pin: Pin
 unpin: Membuka peniti
+welcome_message: Selamat datang di menu aplikasi Seelen UI.
+welcome_message2: Di tab ini, Anda dapat menyematkan aplikasi favorit Anda.

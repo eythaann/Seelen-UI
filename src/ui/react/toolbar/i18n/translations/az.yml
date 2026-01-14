@@ -20,9 +20,6 @@ context_menu:
   restore: Defolt olaraq bərpa edin
   settings: Parametrlər
   task_manager: Tapşırıq meneceri
-keyboard:
-  more: Daha çox klaviatura parametrləri
-  title: Klaviatura düzeni
 media:
   default_multimedia_volume: Multimedia həcmi
   device:

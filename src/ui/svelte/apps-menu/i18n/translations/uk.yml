@@ -3,6 +3,7 @@ back: Назад
 disband: Розформувати папку
 folder: Папка
 no_matching_items: Не знайдено елементів, що відповідають вашому пошуку
-no_pinned_apps: Немає закріплених програм
 pin: Pin
 unpin: Відкріпити
+welcome_message: Ласкаво просимо в меню програми Seelen UI.
+welcome_message2: На цій вкладці ви можете закріпити улюблені програми.

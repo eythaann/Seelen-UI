@@ -20,9 +20,6 @@ context_menu:
   restore: Lehenetsitako lehenetsia
   settings: Ezarpenak
   task_manager: Zereginen kudeatzailea
-keyboard:
-  more: Teklatuaren ezarpen gehiago
-  title: Teklatuko diseinua
 media:
   default_multimedia_volume: Multimedia bolumena
   device:

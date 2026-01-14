@@ -3,6 +3,7 @@ back: Takaisin
 disband: Pura kansio
 folder: Kansio
 no_matching_items: Hakuasi vastaavia kohteita ei löytynyt
-no_pinned_apps: Ei kiinnitettyjä sovelluksia
 pin: Pin
 unpin: Irrota kiinnitys
+welcome_message: Tervetuloa Seelen UI -sovellusvalikkoon.
+welcome_message2: Tällä välilehdellä voit kiinnittää suosikkisovelluksesi.

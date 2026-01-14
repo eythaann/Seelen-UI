@@ -20,9 +20,6 @@ context_menu:
   restore: Ibalik sa default
   settings: Mga setting
   task_manager: Task Manager
-keyboard:
-  more: Higit pang mga setting ng keyboard
-  title: Layout ng keyboard
 media:
   default_multimedia_volume: Dami ng multimedia
   device:

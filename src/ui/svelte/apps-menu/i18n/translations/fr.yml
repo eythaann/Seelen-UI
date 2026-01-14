@@ -3,6 +3,7 @@ back: Dos
 disband: Supprimer le dossier
 folder: Dossier
 no_matching_items: Aucun article trouvé correspondant à votre recherche
-no_pinned_apps: Aucune application épinglée
 pin: Épingle
 unpin: Détacher
+welcome_message: Bienvenue dans le menu de l'application Seelen UI.
+welcome_message2: Sur cet onglet, vous pouvez épingler vos applications préférées.

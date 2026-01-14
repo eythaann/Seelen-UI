@@ -3,6 +3,7 @@ back: 戻る
 disband: フォルダの解散
 folder: フォルダー
 no_matching_items: 検索に一致するアイテムは見つかりませんでした
-no_pinned_apps: 固定されたアプリはありません
 pin: ピン
 unpin: 固定を解除する
+welcome_message: Seelen UI アプリ メニューへようこそ。
+welcome_message2: このタブでは、お気に入りのアプリをピン留めできます。

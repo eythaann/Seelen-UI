@@ -20,9 +20,6 @@ context_menu:
   restore: Palauta oletusasetukset
   settings: Asetukset
   task_manager: Tehtävienhallinta
-keyboard:
-  more: Lisää näppäimistön asetuksia
-  title: Näppäimistön asettelu
 media:
   default_multimedia_volume: Multimedian äänenvoimakkuus
   device:

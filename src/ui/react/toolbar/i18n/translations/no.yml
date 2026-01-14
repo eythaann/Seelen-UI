@@ -20,9 +20,6 @@ context_menu:
   restore: Gjenopprett til standard
   settings: Innstillinger
   task_manager: Oppgavebehandling
-keyboard:
-  more: Flere tastaturinnstillinger
-  title: Tastaturoppsett
 media:
   default_multimedia_volume: Multimedia -volum
   device:

@@ -20,9 +20,6 @@ context_menu:
   restore: Herstel na standaard
   settings: Instellings
   task_manager: Taakbestuurder
-keyboard:
-  more: Meer sleutelbordinstellings
-  title: Sleutelborduitleg
 media:
   default_multimedia_volume: Multimedia volume
   device:

@@ -20,9 +20,6 @@ context_menu:
   restore: Buyisela ezenzakalelayo
   settings: Izilungiselelo
   task_manager: Umphathi Womsebenzi
-keyboard:
-  more: Izilungiselelo eziningi zekhibhodi
-  title: Ukuhlelwa kwekhibhodi
 media:
   default_multimedia_volume: Ivolumu yemultimedia
   device:

@@ -14,14 +14,10 @@ runtime:
   corrupted_file: Konfiguratsioonifail on rikutud, kasutades selle asemel vaikeväärtusi.
   corrupted_file_path: Vigastatud faili tee
   download: Minge allalaadimislehele
-  files_integrity: >-
+  files_integrity: |-
     Meil ei õnnestunud rakendusfailide terviklikkust kontrollida.
-
-    See võib juhtuda, kui faile on muudetud, rikutud või installimine on
-    poolik.
-
+    See võib juhtuda, kui faile on muudetud, rikutud või installimine on poolik.
     Turvakaalutlustel ei saa Seelen UI jätkata.
-
     Installige see uuesti ametlikult veebisaidilt.
   files_integrity_title: Turvahoiatus – failide terviklikkuse kontroll ebaõnnestus
   not_found: WebView2 käitusaega ei leitud

@@ -20,9 +20,6 @@ context_menu:
   restore: Kembalikan ke Default
   settings: Pengaturan
   task_manager: Manajer Tugas
-keyboard:
-  more: Pengaturan Papan Ketik Lainnya
-  title: Tata Letak Papan Ketik
 media:
   default_multimedia_volume: Volume Multimedia
   device:

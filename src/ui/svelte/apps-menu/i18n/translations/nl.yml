@@ -3,6 +3,7 @@ back: Rug
 disband: Map ontbinden
 folder: Map
 no_matching_items: Er zijn geen items gevonden die overeenkomen met uw zoekopdracht
-no_pinned_apps: Geen vastgezette apps
 pin: Pin
 unpin: Losmaken
+welcome_message: Welkom bij het Seelen UI-appmenu.
+welcome_message2: Op dit tabblad kunt u uw favoriete apps vastzetten.

@@ -20,9 +20,6 @@ context_menu:
   restore: Барқарор кардан
   settings: Танзимотҳо
   task_manager: Менеҷери вазифа
-keyboard:
-  more: Танзимоти клавиатура
-  title: Тарҳбандии клавиатура
 media:
   default_multimedia_volume: Ҳаҷми мултимедиявӣ
   device:

@@ -3,6 +3,7 @@ back: Z powrotem
 disband: Rozwiąż folder
 folder: Folder
 no_matching_items: Nie znaleziono żadnych elementów pasujących do Twojego wyszukiwania
-no_pinned_apps: Brak przypiętych aplikacji
 pin: Szpilka
 unpin: Odpiąć
+welcome_message: Witamy w menu aplikacji Seelen UI.
+welcome_message2: Na tej karcie możesz przypiąć swoje ulubione aplikacje.

@@ -20,9 +20,6 @@ context_menu:
   restore: Obnovenie predvoleného nastavenia
   settings: Nastavenia
   task_manager: Správca úloh
-keyboard:
-  more: Ďalšie nastavenia klávesnice
-  title: Rozloženie klávesnice
 media:
   default_multimedia_volume: Multimediálny objem
   device:

@@ -3,6 +3,7 @@ back: Atgal
 disband: Išskleisti aplanką
 folder: Aplankas
 no_matching_items: Nerasta prekių, atitinkančių jūsų paiešką
-no_pinned_apps: Nėra prisegtų programų
 pin: Smeigtukas
 unpin: Atsegti
+welcome_message: Sveiki atvykę į Seelen UI programos meniu.
+welcome_message2: Šiame skirtuke galite prisegti mėgstamiausias programas.

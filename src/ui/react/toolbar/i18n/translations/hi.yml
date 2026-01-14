@@ -20,9 +20,6 @@ context_menu:
   restore: डिफ़ॉल्ट रूप से पुनर्स्थापित करें
   settings: सेटिंग्स
   task_manager: कार्य प्रबंधक
-keyboard:
-  more: अधिक कीबोर्ड सेटिंग्स
-  title: कीबोर्ड विन्यास
 media:
   default_multimedia_volume: बहुरूपी मात्रा
   device:

@@ -3,6 +3,7 @@ back: Vissza
 disband: Mappa feloldása
 folder: Mappa
 no_matching_items: Nem található a keresésnek megfelelő elem
-no_pinned_apps: Nincsenek rögzített alkalmazások
 pin: Pin
 unpin: Kibont
+welcome_message: Üdvözöljük a Seelen UI alkalmazás menüjében.
+welcome_message2: Ezen a lapon rögzítheti kedvenc alkalmazásait.

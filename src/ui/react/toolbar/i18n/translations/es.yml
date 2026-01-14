@@ -20,9 +20,6 @@ context_menu:
   restore: Restablecer valores por defecto
   settings: Ajustes
   task_manager: Administrador de tareas
-keyboard:
-  more: Más ajustes del teclado
-  title: Disposición del teclado
 media:
   default_multimedia_volume: Volumen multimedia
   device:

@@ -20,9 +20,6 @@ context_menu:
   restore: 還原為默認
   settings: 設定
   task_manager: 工作管理員
-keyboard:
-  more: 更多鍵盤設置
-  title: 鍵盤佈局
 media:
   default_multimedia_volume: 多媒體體積
   device:

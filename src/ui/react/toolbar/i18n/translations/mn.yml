@@ -20,9 +20,6 @@ context_menu:
   restore: Анхдагч болгож сэргээнэ үү
   settings: Тохиргоо
   task_manager: Ажлын менежер
-keyboard:
-  more: Илүү олон гарын тохиргоо
-  title: Товчлоггоо өмуур
 media:
   default_multimedia_volume: Мультимедиа муж
   device:

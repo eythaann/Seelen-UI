@@ -20,9 +20,6 @@ context_menu:
   restore: Atkurti numatytąjį nustatymą
   settings: Nustatymai
   task_manager: Užduočių tvarkyklė
-keyboard:
-  more: Daugiau klaviatūros nustatymų
-  title: Klaviatūros išdėstymas
 media:
   default_multimedia_volume: Daugialypės terpės apimtis
   device:

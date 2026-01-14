@@ -20,9 +20,6 @@ context_menu:
   restore: Irrestawra lil Default
   settings: Settings
   task_manager: Task Manager
-keyboard:
-  more: Aktar settings tat-tastiera
-  title: Tqassim tat-tastiera
 media:
   default_multimedia_volume: Volum multimedjali
   device:

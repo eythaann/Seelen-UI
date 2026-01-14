@@ -20,9 +20,6 @@ context_menu:
   restore: Відновити за замовчуванням
   settings: Налаштування
   task_manager: Диспетчер задач
-keyboard:
-  more: Більше налаштувань клавіатури
-  title: Розкладка клавіатури
 media:
   default_multimedia_volume: Мультимедійна гучність
   device:

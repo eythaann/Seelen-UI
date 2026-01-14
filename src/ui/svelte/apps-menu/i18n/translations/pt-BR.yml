@@ -3,6 +3,7 @@ back: Voltar
 disband: Dissolver pasta
 folder: Pasta
 no_matching_items: Nenhum item encontrado que corresponda à sua pesquisa
-no_pinned_apps: Nenhum aplicativo fixado
 pin: Alfinete
 unpin: Liberar
+welcome_message: Bem-vindo ao menu do aplicativo Seelen UI.
+welcome_message2: Nesta guia você pode fixar seus aplicativos favoritos.

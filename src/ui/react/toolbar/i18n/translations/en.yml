@@ -20,9 +20,6 @@ context_menu:
   restore: Restore to Default
   settings: Settings
   task_manager: Task Manager
-keyboard:
-  more: More Keyboard Settings
-  title: Keyboard Layout
 media:
   default_multimedia_volume: Multimedia Volume
   device:

@@ -20,9 +20,6 @@ context_menu:
   restore: ડિફ default લ્ટ પર પુન restore સ્થાપિત કરો
   settings: સેટિંગ્સ
   task_manager: ટાસ્ક મેનેજર
-keyboard:
-  more: વધુ કીબોર્ડ સેટિંગ્સ
-  title: પાટિયું લેઆઉટ
 media:
   default_multimedia_volume: બહુમાળ વોલ્યુમ
   device:

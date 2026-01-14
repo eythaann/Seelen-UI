@@ -20,9 +20,6 @@ context_menu:
   restore: Obnovení výchozího nastavení
   settings: Nastavení
   task_manager: Správce úloh
-keyboard:
-  more: Další nastavení klávesnice
-  title: Rozložení klávesnice
 media:
   default_multimedia_volume: Multimediální hlasitost
   device:

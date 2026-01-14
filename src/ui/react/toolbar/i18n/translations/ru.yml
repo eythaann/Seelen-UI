@@ -20,9 +20,6 @@ context_menu:
   restore: Восстановить по умолчанию
   settings: Настройки
   task_manager: Диспетчер задач
-keyboard:
-  more: Другие настройки клавиатуры
-  title: Раскладка клавиатуры
 media:
   default_multimedia_volume: Громкость устройств мультимедиа
   device:

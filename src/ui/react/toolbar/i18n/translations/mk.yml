@@ -20,9 +20,6 @@ context_menu:
   restore: Враќање на стандардно
   settings: Поставки
   task_manager: Управувач со задачи
-keyboard:
-  more: Повеќе поставки за тастатура
-  title: Распоред на тастатура
 media:
   default_multimedia_volume: Мултимедијален волумен
   device:

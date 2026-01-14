@@ -20,9 +20,6 @@ context_menu:
   restore: 恢复到默认值
   settings: 设置
   task_manager: 任务管理器
-keyboard:
-  more: 更多键盘设置
-  title: 键盘布局
 media:
   default_multimedia_volume: 多媒体音量
   device:

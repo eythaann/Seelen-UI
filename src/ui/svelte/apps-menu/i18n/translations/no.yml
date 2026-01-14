@@ -3,6 +3,7 @@ back: Tilbake
 disband: Oppløs mappe
 folder: Mappe
 no_matching_items: Ingen elementer funnet som samsvarer med søket ditt
-no_pinned_apps: Ingen festede apper
 pin: Pin
 unpin: Løsne
+welcome_message: Velkommen til Seelen UI-appmenyen.
+welcome_message2: På denne fanen kan du feste favorittappene dine.

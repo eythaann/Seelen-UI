@@ -20,9 +20,6 @@ context_menu:
   restore: ຟື້ນຟູໃຫ້ເປັນຄ່າເລີ່ມຕົ້ນ
   settings: ການຕັ້ງຄ່າ
   task_manager: Task Manager
-keyboard:
-  more: ການຕັ້ງຄ່າແປ້ນພິມເພີ່ມເຕີມ
-  title: ຮູບແບບ keyboard
 media:
   default_multimedia_volume: ປະລິມານມັນຕິມີເດຍ
   device:

@@ -20,9 +20,6 @@ context_menu:
   restore: Adfer i Ddiffyg
   settings: Gosodiadau
   task_manager: Rheolwr Tasg
-keyboard:
-  more: Mwy o osodiadau bysellfwrdd
-  title: Cynllun Allweddell
 media:
   default_multimedia_volume: Cyfrol amlgyfrwng
   device:

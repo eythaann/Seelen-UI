@@ -20,9 +20,6 @@ context_menu:
   restore: Wiederherstellen auf Standard
   settings: Einstellungen
   task_manager: Task-Manager
-keyboard:
-  more: Weitere Tastatur-Einstellungen
-  title: Tastatur-Layout
 media:
   default_multimedia_volume: Multimedia-Volumen
   device:

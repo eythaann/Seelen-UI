@@ -1,0 +1,22 @@
+id: "@seelen/tb-keyboard-selector"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: FaRegKeyboard
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: keyboard
+  tooltip: return [activeLang.name, " - ", activeKeyboard.displayName]
+  template: |-
+    const inputsLenght = activeLang.keyboardLayouts.length;
+    return [
+      activeLangPrefix,
+      inputsLenght > 1 ? " - " : "",
+      inputsLenght > 1 ? activeKeyboardPrefix : ""
+    ]
+  style:
+    flexShrink: 0
+    width: min-content
+    fontWeight: 600
+  onClickV2: |-
+    trigger("@seelen/keyboard-selector");

@@ -3,6 +3,7 @@ back: Nazad
 disband: Disband Folder
 folder: Folder
 no_matching_items: Nema pronađenih artikala koji odgovaraju vašem pretraživanju
-no_pinned_apps: Nema zakačenih aplikacija
 pin: Pin
 unpin: Otkvači
+welcome_message: Dobrodošli u meni aplikacije Seelen UI.
+welcome_message2: Na ovoj kartici možete zakačiti svoje omiljene aplikacije.

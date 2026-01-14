@@ -20,9 +20,6 @@ context_menu:
   restore: Vratite do zadane vrijednosti
   settings: Postavke
   task_manager: Task Manager
-keyboard:
-  more: Više postavki tastature
-  title: Izgled tastature
 media:
   default_multimedia_volume: MULTIMEDIA VOLUME
   device:

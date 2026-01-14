@@ -1,4 +1,3 @@
-import type { SystemLanguage } from "@seelen-ui/lib";
 import type {
   AppNotification,
   Battery,
@@ -9,6 +8,7 @@ import type {
   NetworkAdapter,
   PowerMode,
   PowerStatus,
+  SystemLanguage,
   User,
   WlanBssEntry,
 } from "@seelen-ui/lib/types";

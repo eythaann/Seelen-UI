@@ -20,9 +20,6 @@ context_menu:
   restore: Restaurarea la setările implicite
   settings: Setări
   task_manager: Manager de activități
-keyboard:
-  more: Mai multe setări ale tastaturii
-  title: Layout tastatură
 media:
   default_multimedia_volume: Volum multimedia
   device:

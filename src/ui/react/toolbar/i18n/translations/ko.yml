@@ -20,9 +20,6 @@ context_menu:
   restore: 기본값으로 복원
   settings: 설정
   task_manager: 작업 관리자
-keyboard:
-  more: 더 많은 키보드 설정
-  title: 키보드 레이아웃
 media:
   default_multimedia_volume: 멀티미디어 볼륨
   device:

@@ -20,9 +20,6 @@ context_menu:
   restore: Ripristino delle impostazioni predefinite
   settings: Impostazioni
   task_manager: Gestione Attività
-keyboard:
-  more: Altre impostazioni della tastiera
-  title: Layout della tastiera
 media:
   default_multimedia_volume: Volume multimediale
   device:

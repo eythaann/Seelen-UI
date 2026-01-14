@@ -52,5 +52,6 @@ await completeTranslationsFor("src/ui/react/wallpaper_manager/i18n/translations"
 await completeTranslationsFor("src/ui/svelte/power-menu/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/bluetooth-popup/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/apps-menu/i18n/translations");
+await completeTranslationsFor("src/ui/svelte/keyboard-selector/i18n/translations");
 
 await completeTranslationsFor("src/background/i18n");

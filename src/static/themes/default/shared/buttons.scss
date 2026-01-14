@@ -1,9 +1,9 @@
 %common {
-  padding: 4px;
-  border-radius: 6px;
+  padding: 0.5em 0.75em;
+  border-radius: 0.5em;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.75em;
 }
 
 button[data-skin="transparent"] {
@@ -20,7 +20,6 @@ button[data-skin="transparent"] {
 
 button[data-skin="solid"] {
   @extend %common;
-  padding: 4px 10px;
   background-color: var(--system-accent-color);
 
   &:hover {
@@ -34,7 +33,6 @@ button[data-skin="solid"] {
 
 button[data-skin="default"] {
   @extend %common;
-  padding: 4px 10px;
   background-color: var(--color-gray-50);
   border: 1px solid var(--color-gray-300);
 

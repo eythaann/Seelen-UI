@@ -20,9 +20,6 @@ context_menu:
   restore: पूर्वनिर्धारित गर्न पुनर्स्थापना
   settings: सेटिङहरू
   task_manager: कार्य प्रबन्धक
-keyboard:
-  more: अधिक कुञ्जीपाटी सेटिंग्स
-  title: कीबोर्ड लेआउट
 media:
   default_multimedia_volume: मल्टिमेडिया भोल्युम
   device:

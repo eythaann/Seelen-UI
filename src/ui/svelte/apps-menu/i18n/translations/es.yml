@@ -3,6 +3,7 @@ back: Atrás
 disband: Disolver carpeta
 folder: Carpeta
 no_matching_items: No se encontraron artículos que coincidan con su búsqueda
-no_pinned_apps: No hay aplicaciones fijadas
 pin: Alfiler
 unpin: Desprender
+welcome_message: Bienvenido al menú de la aplicación Seelen UI.
+welcome_message2: En esta pestaña, puedes fijar tus aplicaciones favoritas.

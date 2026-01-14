@@ -22,9 +22,8 @@ fn get_language_manager() -> &'static LanguageManager {
 }
 
 #[tauri::command(async)]
-pub fn get_system_languages() -> Result<Vec<SystemLanguage>> {
-    get_language_manager();
-    LanguageManager::enum_langs()
+pub fn get_system_languages() -> Vec<SystemLanguage> {
+    get_language_manager().get_languages()
 }
 
 #[tauri::command(async)]

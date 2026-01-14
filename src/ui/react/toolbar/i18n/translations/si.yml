@@ -20,9 +20,6 @@ context_menu:
   restore: පෙරනිමියට ප්රතිස්ථාපනය කරන්න
   settings: සැකසීම්
   task_manager: කාර්ය කළමනාකරු
-keyboard:
-  more: තවත් යතුරුපුවරු සැකසුම්
-  title: යතුරුපුවරු පිරිසැලසුම
 media:
   default_multimedia_volume: බහුමාධ්ය පරිමාව
   device:

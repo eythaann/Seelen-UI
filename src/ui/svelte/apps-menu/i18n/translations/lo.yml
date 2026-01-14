@@ -3,6 +3,7 @@ back: ກັບຄືນໄປບ່ອນ
 disband: Disband Folder
 folder: ໂຟລເດີ
 no_matching_items: ບໍ່ພົບລາຍການທີ່ກົງກັບການຊອກຫາຂອງທ່ານ
-no_pinned_apps: ບໍ່ມີແອັບທີ່ປັກໝຸດໄວ້
 pin: ປັກໝຸດ
 unpin: ຖອນປັກໝຸດ
+welcome_message: ຍິນດີຕ້ອນຮັບສູ່ເມນູແອັບ Seelen UI.
+welcome_message2: ໃນແຖບນີ້, ທ່ານສາມາດປັກໝຸດແອັບທີ່ທ່ານມັກໄດ້.

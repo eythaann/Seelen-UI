@@ -20,9 +20,6 @@ context_menu:
   restore: Dib u soo celinta
   settings: Dejinta
   task_manager: Maareeyaha Hawsha
-keyboard:
-  more: Meelo badan oo keyboard ah
-  title: Qaabka Keyboard
 media:
   default_multimedia_volume: Mugga mugga badan
   device:

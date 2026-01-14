@@ -20,9 +20,6 @@ context_menu:
   restore: Återställ till standard
   settings: Inställningar
   task_manager: Task Manager
-keyboard:
-  more: Fler inställningar för tangentbord
-  title: Layout för tangentbord
 media:
   default_multimedia_volume: Multimedia Volym
   device:

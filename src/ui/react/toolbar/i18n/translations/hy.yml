@@ -20,9 +20,6 @@ context_menu:
   restore: Վերականգնել լռելյայն
   settings: Կարգավորումներ
   task_manager: Առաջադրանքների կառավարիչ
-keyboard:
-  more: Ստեղնաշարի ավելի շատ պարամետրեր
-  title: Ստեղնաշարի դասավորություն
 media:
   default_multimedia_volume: Մուլտիմեդիա ծավալը
   device:

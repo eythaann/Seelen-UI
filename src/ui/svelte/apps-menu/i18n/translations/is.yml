@@ -3,6 +3,7 @@ back: Til baka
 disband: Slepptu möppu
 folder: Mappa
 no_matching_items: Engin atriði fundust sem passa við leitina þína
-no_pinned_apps: Engin fest forrit
 pin: Pinna
 unpin: Losaðu
+welcome_message: Velkomin í Seelen UI app valmyndina.
+welcome_message2: Á þessum flipa geturðu fest uppáhaldsforritin þín.

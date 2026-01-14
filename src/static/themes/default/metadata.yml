@@ -7,7 +7,9 @@ metadata:
     - toolbar
     - window-manager
 styles:
-  # for devs: key is the id of the target widget and value is the relative path to the style
+  # For devs: key is the id of the target widget and value is the relative path to the style.
+  # For third-party widgets uses the real widget id, friendly ids are only for bundle or local themes,
+  # as friendly ids are not stable.
   "@seelen/fancy-toolbar": !include styles/fancy-toolbar.scss
   "@seelen/power-menu": !include styles/power-menu.scss
   "@seelen/task-switcher": !include styles/task-switcher.scss
@@ -19,4 +21,5 @@ styles:
   "@seelen/bluetooth-popup": !include styles/bluetooth-popup.scss
   "@seelen/workspaces-viewer": !include styles/workspaces-viewer.scss
   "@seelen/apps-menu": !include styles/apps-menu.scss
+  "@seelen/keyboard-selector": !include styles/keyboard-selector.scss
 sharedStyles: !include ./shared/index.scss

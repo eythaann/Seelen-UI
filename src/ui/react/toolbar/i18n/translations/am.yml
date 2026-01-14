@@ -20,9 +20,6 @@ context_menu:
   restore: ወደ ነባሪነት ይመልሱ
   settings: ቅንብሮች
   task_manager: ተግባር አስተዳዳሪ
-keyboard:
-  more: ተጨማሪ የቁልፍ ሰሌዳ ቅንብሮች
-  title: የቁልፍ ሰሌዳ አቀማመጥ
 media:
   default_multimedia_volume: መልቲሚዲያ መጠን
   device:

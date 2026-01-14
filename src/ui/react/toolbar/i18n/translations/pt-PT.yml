@@ -20,9 +20,6 @@ context_menu:
   restore: Restaurar para padrão
   settings: Configurações
   task_manager: Gerente de tarefas
-keyboard:
-  more: Mais configurações de teclado
-  title: Layout do teclado
 media:
   default_multimedia_volume: Volume multimídia
   device:

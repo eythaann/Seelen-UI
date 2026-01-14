@@ -20,9 +20,6 @@ context_menu:
   restore: Terugzetten naar standaard
   settings: Instellingen
   task_manager: Taakbeheer
-keyboard:
-  more: Meer toetsenbordinstellingen
-  title: Toetsenbordindeling
 media:
   default_multimedia_volume: Multimedia-volume
   device:

@@ -3,6 +3,7 @@ back: Tagasi
 disband: Laiali kaust
 folder: Kaust
 no_matching_items: Teie otsingule vastavaid üksusi ei leitud
-no_pinned_apps: Kinnitatud rakendusi pole
 pin: Pin
 unpin: Vabastage
+welcome_message: Tere tulemast Seeleni kasutajaliidese rakenduse menüüsse.
+welcome_message2: Sellel vahekaardil saate kinnitada oma lemmikrakendused.

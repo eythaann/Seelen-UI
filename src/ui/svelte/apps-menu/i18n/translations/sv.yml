@@ -3,6 +3,7 @@ back: Tillbaka
 disband: Upplös mapp
 folder: Mapp
 no_matching_items: Inga objekt hittades som matchar din sökning
-no_pinned_apps: Inga fästa appar
 pin: Stift
 unpin: Lossa
+welcome_message: Välkommen till Seelen UI-appmenyn.
+welcome_message2: På den här fliken kan du fästa dina favoritappar.

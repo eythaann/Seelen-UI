@@ -20,9 +20,6 @@ context_menu:
   restore: שחזר לברירת מחדל
   settings: הגדרות
   task_manager: מנהל משימות
-keyboard:
-  more: הגדרות מקלדת נוספות
-  title: פריסת מקלדת
 media:
   default_multimedia_volume: עוצמת קול מולטימדיה
   device:

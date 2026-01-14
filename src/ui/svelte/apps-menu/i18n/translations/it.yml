@@ -3,6 +3,7 @@ back: Indietro
 disband: Sciogli cartella
 folder: Cartella
 no_matching_items: Nessun articolo trovato corrispondente alla tua ricerca
-no_pinned_apps: Nessuna app bloccata
 pin: Spillo
 unpin: Sblocca
+welcome_message: Benvenuto nel menu dell'app Seelen UI.
+welcome_message2: In questa scheda puoi aggiungere le tue app preferite.

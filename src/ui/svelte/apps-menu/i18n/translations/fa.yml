@@ -3,6 +3,7 @@ back: برگشت
 disband: پوشه را از بین ببرید
 folder: پوشه
 no_matching_items: هیچ موردی مطابق با جستجوی شما یافت نشد
-no_pinned_apps: هیچ برنامه پین ​​شده ای وجود ندارد
 pin: سنجاق
 unpin: پین را بردارید
+welcome_message: به منوی اپلیکیشن Seelen UI خوش آمدید.
+welcome_message2: در این تب می توانید اپلیکیشن های مورد علاقه خود را پین کنید.

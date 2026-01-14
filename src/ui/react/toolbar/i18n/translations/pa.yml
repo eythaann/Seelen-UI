@@ -20,9 +20,6 @@ context_menu:
   restore: ਡਿਫੌਲਟ ਤੇ ਰੀਸਟੋਰ ਕਰੋ
   settings: ਸੈਟਿੰਗਾਂ
   task_manager: ਟਾਸਕ ਮੈਨੇਜਰ
-keyboard:
-  more: ਹੋਰ ਕੀਬੋਰਡ ਸੈਟਿੰਗਾਂ
-  title: ਕੀਬੋਰਡ ਲੇਆਉਟ
 media:
   default_multimedia_volume: ਮਲਟੀਮੀਡੀਆ ਵਾਲੀਅਮ
   device:

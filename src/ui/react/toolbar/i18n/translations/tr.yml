@@ -20,9 +20,6 @@ context_menu:
   restore: Varsayılana Geri Yükle
   settings: Ayarlar
   task_manager: Görev Yöneticisi
-keyboard:
-  more: Daha Fazla Klavye Ayarı
-  title: Klavye Düzeni
 media:
   default_multimedia_volume: Multimedya Hacmi
   device:

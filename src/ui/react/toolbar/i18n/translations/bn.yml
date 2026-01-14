@@ -20,9 +20,6 @@ context_menu:
   restore: ডিফল্ট পুনরুদ্ধার
   settings: সেটিংস
   task_manager: টাস্ক ম্যানেজার
-keyboard:
-  more: আরও কীবোর্ড সেটিংস
-  title: কীবোর্ড লেআউট
 media:
   default_multimedia_volume: মাল্টিমিডিয়া ভলিউম
   device:

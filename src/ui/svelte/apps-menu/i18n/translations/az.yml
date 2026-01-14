@@ -3,6 +3,7 @@ back: Geri
 disband: Qovluğu ləğv edin
 folder: Qovluq
 no_matching_items: Axtarışınıza uyğun heç bir element tapılmadı
-no_pinned_apps: Saxlanmış proqram yoxdur
 pin: Pin
 unpin: Sancağı çıxarın
+welcome_message: Seelen UI tətbiq menyusuna xoş gəlmisiniz.
+welcome_message2: Bu tabda siz sevimli proqramlarınızı sanclaya bilərsiniz.

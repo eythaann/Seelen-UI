@@ -20,9 +20,6 @@ context_menu:
   restore: الاستعادة إلى الوضع الافتراضي
   settings: إعدادات
   task_manager: مدير المهام
-keyboard:
-  more: المزيد من إعدادات لوحة المفاتيح
-  title: تخطيط لوحة المفاتيح
 media:
   default_multimedia_volume: حجم الوسائط المتعددة
   device:

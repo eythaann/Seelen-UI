@@ -20,9 +20,6 @@ context_menu:
   restore: Restaureu a Default
   settings: Configuració
   task_manager: Gestor de tasques
-keyboard:
-  more: Més configuració del teclat
-  title: Disposició del teclat
 media:
   default_multimedia_volume: Volum multimèdia
   device:

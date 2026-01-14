@@ -20,9 +20,6 @@ context_menu:
   restore: Gendan til standard
   settings: Indstillinger
   task_manager: Task Manager
-keyboard:
-  more: Flere tastaturindstillinger
-  title: Tastaturlayout
 media:
   default_multimedia_volume: Multimedievolumen
   device:

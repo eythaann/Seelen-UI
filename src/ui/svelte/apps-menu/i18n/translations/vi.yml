@@ -3,6 +3,7 @@ back: Mặt sau
 disband: Giải tán thư mục
 folder: Thư mục
 no_matching_items: Không tìm thấy mục nào phù hợp với tìm kiếm của bạn
-no_pinned_apps: Không có ứng dụng nào được ghim
 pin: Ghim
 unpin: Bỏ ghim
+welcome_message: Chào mừng bạn đến với menu ứng dụng Seelen UI.
+welcome_message2: Trên tab này, bạn có thể ghim các ứng dụng yêu thích của mình.

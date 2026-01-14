@@ -20,9 +20,6 @@ context_menu:
   restore: Odatiy holga qaytaring
   settings: Sozlamalar
   task_manager: Vazifa menejeri
-keyboard:
-  more: Ko'proq klaviatura sozlamalari
-  title: Klaviatura tartibi
 media:
   default_multimedia_volume: Multimedia hajmi
   device:

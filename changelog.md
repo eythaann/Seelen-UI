@@ -34,6 +34,7 @@
 - app and service not running if already running on another session.
 - high cpu usage while user session inactive.
 - fix stale battery percentage on sleep wake up.
+- click on keyboard layout no changing the layout on the system.
 
 ## [2.4.11]
 

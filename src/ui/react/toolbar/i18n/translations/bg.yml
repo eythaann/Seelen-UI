@@ -20,9 +20,6 @@ context_menu:
   restore: Възстановяване на настройките по подразбиране
   settings: Настройки
   task_manager: Диспечер на задачите
-keyboard:
-  more: Още настройки на клавиатурата
-  title: Разположение на клавиатурата
 media:
   default_multimedia_volume: Обем на мултимедията
   device:

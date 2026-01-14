@@ -20,9 +20,6 @@ context_menu:
   restore: คืนค่าเป็นค่าเริ่มต้น
   settings: การตั้งค่า
   task_manager: ตัวจัดการงาน
-keyboard:
-  more: การตั้งค่าแป้นพิมพ์เพิ่มเติม
-  title: เค้าโครงแป้นพิมพ์
 media:
   default_multimedia_volume: ปริมาณมัลติมีเดีย
   device:

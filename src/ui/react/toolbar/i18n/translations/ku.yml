@@ -20,9 +20,6 @@ context_menu:
   restore: Restore to Default
   settings: Settings
   task_manager: Gerînendetiya Peywiran
-keyboard:
-  more: Mîhengên bêtir klavyeyê
-  title: Bişkojka Keyboard
 media:
   default_multimedia_volume: Volume Multimedia
   device:

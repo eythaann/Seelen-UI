@@ -20,9 +20,6 @@ context_menu:
   restore: Atjaunot noklusējuma iestatījumus
   settings: Iestatījumi
   task_manager: Uzdevumu pārvaldnieks
-keyboard:
-  more: Vairāk tastatūras iestatījumu
-  title: Tastatūras izkārtojums
 media:
   default_multimedia_volume: Multivides apjoms
   device:

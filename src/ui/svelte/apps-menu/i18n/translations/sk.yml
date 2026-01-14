@@ -3,6 +3,7 @@ back: Späť
 disband: Rozpustiť priečinok
 folder: Priečinok
 no_matching_items: Nenašli sa žiadne položky zodpovedajúce vášmu vyhľadávaniu
-no_pinned_apps: Žiadne pripnuté aplikácie
 pin: Pin
 unpin: Odopnúť
+welcome_message: Vitajte v ponuke aplikácie Seelen UI.
+welcome_message2: Na tejto karte môžete pripnúť svoje obľúbené aplikácie.

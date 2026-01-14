@@ -20,9 +20,6 @@ context_menu:
   restore: Vratite u zadani
   settings: postavke
   task_manager: Upravitelj zadataka
-keyboard:
-  more: Više postavki tipkovnice
-  title: Izgled tipkovnice
 media:
   default_multimedia_volume: Multimedijski volumen
   device:

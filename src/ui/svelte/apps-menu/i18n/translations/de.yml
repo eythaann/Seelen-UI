@@ -3,6 +3,7 @@ back: Zurück
 disband: Ordner auflösen
 folder: Ordner
 no_matching_items: Es wurden keine Artikel gefunden, die Ihrer Suche entsprechen
-no_pinned_apps: Keine angehefteten Apps
 pin: Stift
 unpin: Lösen
+welcome_message: Willkommen im Menü der Seelen UI-App.
+welcome_message2: Auf dieser Registerkarte können Sie Ihre Lieblings-Apps anpinnen.

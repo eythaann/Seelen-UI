@@ -20,9 +20,6 @@ context_menu:
   restore: Rejesha kwa chaguo -msingi
   settings: Mipangilio
   task_manager: Meneja wa Kazi
-keyboard:
-  more: Mipangilio ya kibodi zaidi
-  title: Mpangilio wa kibodi
 media:
   default_multimedia_volume: Kiasi cha multimedia
   device:
