@@ -118,6 +118,8 @@ interface ThemeItemProps {
 }
 
 function ThemeItem({ theme, checked, onToggle }: ThemeItemProps) {
+  let query = new URLSearchParams();
+  query.set("id", theme.id);
   return (
     <ResourceCard
       resource={theme}
@@ -125,7 +127,7 @@ function ThemeItem({ theme, checked, onToggle }: ThemeItemProps) {
       actions={
         <>
           {theme.settings.length > 0 && (
-            <NavLink to={`/theme/${theme.id.replace("@", "")}`}>
+            <NavLink to={`/theme?${query}`}>
               <Button type="text">
                 <Icon iconName="RiSettings4Fill" />
               </Button>

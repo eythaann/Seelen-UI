@@ -3,7 +3,7 @@ import { Switch } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useSearchParams } from "react-router";
 
 import { RootActions } from "../../shared/store/app/reducer.ts";
 import { RootSelectors } from "../../shared/store/app/selectors.ts";
@@ -50,7 +50,7 @@ export function WidgetConfiguration({
   const d = useDispatch();
 
   if (!widget) {
-    return <div>wow 404 !?</div>;
+    return <div>404</div>;
   }
 
   const onConfigChange = (key: string, value: any) => {
@@ -148,7 +148,6 @@ export function WidgetConfiguration({
 }
 
 export function WidgetView() {
-  const { username, resourceName } = useParams<"username" | "resourceName">();
-  const widgetId = `@${username}/${resourceName}` as WidgetId;
-  return <WidgetConfiguration widgetId={widgetId} />;
+  const [searchParams] = useSearchParams();
+  return <WidgetConfiguration widgetId={searchParams.get("id") as WidgetId} />;
 }

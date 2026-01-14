@@ -27,31 +27,19 @@ export function Routing() {
         <Route index Component={Home} />
         <Route path={RoutePath.General} Component={General} />
         <Route path={RoutePath.Resource + "/*"} Component={ResourcesView} />
-        <Route
-          path={RoutePath.SettingsByMonitor}
-          Component={SettingsByMonitor}
-        />
+        <Route path={RoutePath.SettingsByMonitor} Component={SettingsByMonitor} />
         <Route path={RoutePath.WallpaperManager} Component={WallSettings} />
         <Route path={RoutePath.Shortcuts} Component={Shortcuts} />
-        <Route
-          path={RoutePath.SettingsByApplication}
-          Component={AppsConfiguration}
-        />
+        <Route path={RoutePath.SettingsByApplication} Component={AppsConfiguration} />
         <Route path={RoutePath.Extras} Component={Information} />
         <Route path={RoutePath.SeelenWeg} Component={SeelenWegSettings} />
-        <Route
-          path={RoutePath.WindowManager}
-          Component={WindowManagerSettings}
-        />
+        <Route path={RoutePath.WindowManager} Component={WindowManagerSettings} />
         <Route path={RoutePath.FancyToolbar} Component={FancyToolbarSettings} />
         <Route path={RoutePath.DevTools} Component={DeveloperTools} />
         <Route path={RoutePath.IconPackEditor} Component={IconPackEditorView} />
-        <Route path="widget/:username/:resourceName" Component={WidgetView} />
-        <Route path="theme/:username/:resourceName" Component={ThemeView} />
-        <Route
-          path="wallpaper/:username/:resourceName"
-          Component={SingleWallpaperView}
-        />
+        <Route path="widget" Component={WidgetView} />
+        <Route path="theme" Component={ThemeView} />
+        <Route path="wallpaper" Component={SingleWallpaperView} />
       </Route>
     </Routes>
   );

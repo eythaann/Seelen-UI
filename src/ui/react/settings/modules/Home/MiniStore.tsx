@@ -56,7 +56,7 @@ export function RemoteResources() {
           return (
             <a
               key={resource.id}
-              href={`https://seelen.io/resources/${resource.friendlyId.replace("@", "")}`}
+              href={`https://seelen.io/resources/${resource.id}`}
               target="_blank"
               className={cs.resource}
             >

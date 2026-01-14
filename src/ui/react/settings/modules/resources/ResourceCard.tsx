@@ -33,10 +33,11 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
 
   useEffect(() => {
     async function checkUpdate() {
-      if (!resource.metadata.filename.endsWith(".slu")) {
+      if (resource.id.startsWith("@")) {
         return;
       }
-      const res = await fetch(`https://product.seelen.io/resource/${resource.id.replace("@", "")}`);
+
+      const res = await fetch(`https://product.seelen.io/resource/${resource.id}`);
       const remoteResource: Resource = await res.json();
       const lastUpdateRelease = new Date(remoteResource.updatedAt);
       const writtenAt = new Date(resource.metadata.writtenAt);
@@ -59,7 +60,6 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
       (majorTarget === major && minorTarget > minor) ||
       (majorTarget === major && minorTarget === minor && patchTarget > patch));
 
-  const resourceLink = `https://seelen.io/resources/${resource.id.replace("@", "")}`;
   return (
     <div
       className={cx(cs.card, {
@@ -90,10 +90,10 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
           <ResourceText text={resource.metadata.displayName} />
         </b>
         <p>
-          {resource.metadata.bundled || resource.id.startsWith("@user")
+          {resource.id.startsWith("@")
             ? <span>{resource.id}</span>
             : (
-              <a href={resourceLink} target="_blank">
+              <a href={`https://seelen.io/resources/${resource.id}`} target="_blank">
                 {resource.id}
               </a>
             )}
@@ -104,7 +104,11 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
         <div className={cs.actionsTop}>
           {hasUpdate && (
             <Tooltip title={t("resources.has_update")} placement="left">
-              <Button type="link" href={resourceLink + "?update"} target="_blank">
+              <Button
+                type="link"
+                href={`https://seelen.io/resources/${resource.id}?update`}
+                target="_blank"
+              >
                 <Icon iconName="MdUpdate" />
               </Button>
             </Tooltip>

@@ -6,7 +6,7 @@ import { Wallpaper } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { Button, ColorPicker, Select, Slider, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useSearchParams } from "react-router";
 
 import { newSelectors, RootActions } from "../../shared/store/app/reducer.ts";
 
@@ -32,8 +32,8 @@ const playbackSpeedOptions = playbackSpeeds.map((s) => ({
 const defaultWallpaperConfig = await WallpaperConfiguration.default();
 
 export function SingleWallpaperView() {
-  const { username, resourceName } = useParams<"username" | "resourceName">();
-  const resourceId = `@${username}/${resourceName}` as WallpaperId;
+  const [searchParams] = useSearchParams();
+  const resourceId = searchParams.get("id") as WallpaperId;
 
   const wallpaper = useSelector(newSelectors.wallpapers);
   const editingWallpaper = wallpaper.find((wallpaper) => wallpaper.id === resourceId);

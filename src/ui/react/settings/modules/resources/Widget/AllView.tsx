@@ -58,7 +58,7 @@ export function WidgetsView() {
             actions={
               <>
                 {!["@seelen/settings", "@seelen/popup"].includes(widget.id) && (
-                  <NavLink to={`/widget/${widget.id.replace("@", "")}`}>
+                  <NavLink to={`/widget?${new URLSearchParams({ id: widget.id })}`}>
                     <Button type="text">
                       <Icon iconName="RiSettings4Fill" />
                     </Button>

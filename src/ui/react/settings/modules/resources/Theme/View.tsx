@@ -2,7 +2,7 @@ import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useSearchParams } from "react-router";
 
 import { RootActions } from "../../shared/store/app/reducer.ts";
 import type { RootState } from "../../shared/store/domain.ts";
@@ -11,13 +11,15 @@ import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/i
 import { ThemeConfigDefinition } from "./components/ThemeConfigDefinition.tsx";
 
 export function ThemeView() {
-  const { username, resourceName } = useParams<"username" | "resourceName">();
-  const theme = useSelector((state: RootState) => {
-    return state.availableThemes.find((t) => t.id === `@${username}/${resourceName}`);
-  });
-
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
+  const theme = useSelector((state: RootState) => {
+    return state.availableThemes.find((t) => t.id === id);
+  });
 
   const handleReset = () => {
     dispatch(RootActions.resetThemeVariables({ themeId: theme!.id }));

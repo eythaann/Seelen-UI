@@ -90,8 +90,8 @@ export const Navigation = memo(() => {
             .map((widget) => (
               <Item
                 key={widget.id}
-                route={`/widget/${widget.id.replace("@", "")}`}
-                isActive={location.pathname === `/widget/${widget.id.replace("@", "")}`}
+                route={`/widget?${new URLSearchParams({ id: widget.id })}`}
+                isActive={location.pathname === `/widget?${new URLSearchParams({ id: widget.id })}`}
                 collapsed={collapsed}
                 label={<ResourceText text={widget.metadata.displayName} />}
                 icon={<Icon iconName={(widget.icon as any) || "BiSolidWidget"} />}
@@ -108,8 +108,8 @@ export const Navigation = memo(() => {
                 .map((theme) => (
                   <Item
                     key={theme.id}
-                    route={`/theme/${theme.id.replace("@", "")}`}
-                    isActive={location.pathname === `/theme/${theme.id.replace("@", "")}`}
+                    route={`/theme?${new URLSearchParams({ id: theme.id })}`}
+                    isActive={location.pathname === `/theme?${new URLSearchParams({ id: theme.id })}`}
                     collapsed={collapsed}
                     label={<ResourceText text={theme.metadata.displayName} />}
                     icon={<Icon iconName="BiSolidPalette" />}
