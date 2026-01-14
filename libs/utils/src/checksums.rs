@@ -26,16 +26,23 @@ impl CheckSums {
         Self(HashMap::new())
     }
 
+    /// Add file content with hash calculation, normalizing path
+    ///
+    /// This method calculates the SHA-256 hash of the provided content
+    /// and stores it with the normalized path (forward slashes).
+    pub fn raw_add<P: AsRef<Path>>(&mut self, content: &[u8], path: P) {
+        let hash = calculate_sha256(content);
+        let normalized = PathBuf::from(path.as_ref().to_string_lossy().replace("\\", "/"));
+        self.0.insert(normalized, hash);
+    }
+
     /// Add file by reading, hashing, and normalizing path
     pub fn add<P: AsRef<Path>>(&mut self, path: P) -> Result<(), String> {
         let path = path.as_ref();
         let content =
             std::fs::read(path).map_err(|e| format!("Failed to read {}: {}", path.display(), e))?;
 
-        let hash = calculate_sha256(&content);
-        let normalized = PathBuf::from(path.to_string_lossy().replace("\\", "/"));
-
-        self.0.insert(normalized, hash);
+        self.raw_add(&content, path);
         Ok(())
     }
 

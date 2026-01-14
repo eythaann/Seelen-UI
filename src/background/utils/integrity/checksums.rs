@@ -69,7 +69,11 @@ fn validate_directory_checksums(base_path: &Path, checksums_path: &Path) -> Resu
         let relative_path = path
             .strip_prefix(base_path.parent().unwrap())
             .expect("Strip failed");
-        actual_checksums.add(relative_path)?;
+
+        // Read file using full path, but store checksum with relative path
+        let content =
+            std::fs::read(path).map_err(|e| format!("Failed to read {}: {}", path.display(), e))?;
+        actual_checksums.raw_add(&content, relative_path);
     }
 
     let diffs = expected_checksums.compare(&actual_checksums);
