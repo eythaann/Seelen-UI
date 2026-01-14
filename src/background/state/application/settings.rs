@@ -34,26 +34,40 @@ impl FullState {
 
     /// Resources id changed for remote/downloaded resources.
     fn migration_v2_5_0(&mut self) -> Result<()> {
-        RESOURCES.themes.scan(|k, v| {
-            let Some(remote) = &v.metadata.internal.remote else {
+        RESOURCES.themes.scan(|new_id, theme| {
+            let Some(remote) = &theme.metadata.internal.remote else {
                 return;
             };
+
             let old_id = remote.friendly_id.clone().into();
-            let Some(config) = self.settings.by_theme.remove(&old_id) else {
-                return;
+            if let Some(config) = self.settings.by_theme.remove(&old_id) {
+                self.settings.by_theme.insert(new_id.clone(), config);
             };
-            self.settings.by_theme.insert(k.clone(), config);
+
+            for id in &mut self.settings.active_themes {
+                if id == &old_id {
+                    *id = new_id.clone();
+                }
+            }
         });
 
-        RESOURCES.wallpapers.scan(|k, v| {
-            let Some(remote) = &v.metadata.internal.remote else {
+        RESOURCES.wallpapers.scan(|new_id, wallpaper| {
+            let Some(remote) = &wallpaper.metadata.internal.remote else {
                 return;
             };
+
             let old_id = remote.friendly_id.clone().into();
-            let Some(config) = self.settings.by_wallpaper.remove(&old_id) else {
-                return;
+            if let Some(config) = self.settings.by_wallpaper.remove(&old_id) {
+                self.settings.by_wallpaper.insert(new_id.clone(), config);
             };
-            self.settings.by_wallpaper.insert(k.clone(), config);
+
+            for collection in &mut self.settings.wallpaper_collections {
+                for id in &mut collection.wallpapers {
+                    if id == &old_id {
+                        *id = new_id.clone();
+                    }
+                }
+            }
         });
 
         RESOURCES.widgets.scan(|k, v| {
