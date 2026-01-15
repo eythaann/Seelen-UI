@@ -39,7 +39,7 @@
     "@tauri-apps/cli": "^2.9.6",
     "esbuild-svelte": "^0.9.3",
     "preact": "^10.27.1",
-    "preact-render-to-string": "^6.6.1",
+    "preact-render-to-string": "^6.6.5",
     "react-router": "^7.6.0",
     "rehype-stringify": "^10.0.1",
     "remark-gfm": "^4.0.1",
