@@ -156,6 +156,7 @@ resources:
   outdated: >-
     Hierdie hulpbron is ontwerp vir 'n ouer weergawe van Seelen UI en werk
     moontlik nie behoorlik nie.
+  see_on_website: Sien op webwerf
 save: Red
 save_and_restart: Stoor en herbegin
 see_more: Sien meer

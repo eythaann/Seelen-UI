@@ -158,6 +158,7 @@ resources:
   outdated: >-
     Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a
     nemusí fungovat správně.
+  see_on_website: Viz na webu
 save: Uložit
 save_and_restart: Uložit a restartovat
 see_more: Viz více

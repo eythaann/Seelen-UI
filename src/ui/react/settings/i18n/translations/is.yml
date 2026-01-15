@@ -154,6 +154,7 @@ resources:
   outdated: >-
     Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað
     rétt.
+  see_on_website: Sjá á heimasíðu
 save: Vista
 save_and_restart: Vista og endurræsa
 see_more: Sjáðu meira

@@ -156,6 +156,7 @@ resources:
   outdated: >-
     Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala
     funtzionatuko.
+  see_on_website: Ikus webgunean
 save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
 see_more: Ikusi gehiago

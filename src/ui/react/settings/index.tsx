@@ -16,6 +16,7 @@ import "@shared/styles/colors.css";
 import "./styles/variables.css";
 import "@shared/styles/reset.css";
 import "./styles/global.css";
+import "@shared/styles/RichText.css";
 
 const { webview } = Widget.self;
 

@@ -1,7 +1,7 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Resource, ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { ResourceText, ResourceTextAsMarkdown } from "libs/ui/react/components/ResourceText/index.tsx";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Button, Popconfirm, Tooltip } from "antd";
@@ -85,36 +85,43 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
         )}
       </ResourcePortrait>
 
-      <div className={cs.info}>
-        <b>
-          <ResourceText text={resource.metadata.displayName} />
-        </b>
-        <p>
-          {resource.id.startsWith("@")
-            ? <span>{resource.id}</span>
-            : (
-              <a href={`https://seelen.io/resources/${resource.id}`} target="_blank">
-                {resource.id}
-              </a>
-            )}
-        </p>
-      </div>
+      <div className={cs.header}>
+        <ResourceText className={cs.title} text={resource.metadata.displayName} />
 
-      <div className={cs.actions}>
         <div className={cs.actionsTop}>
+          {!resource.id.startsWith("@") && (
+            <Tooltip title={t("resources.see_on_website")}>
+              <Button
+                type="link"
+                href={`https://seelen.io/resources/${compressUuid(resource.id)}`}
+                target="_blank"
+              >
+                <Icon iconName="TbWorldShare" />
+              </Button>
+            </Tooltip>
+          )}
+
           {hasUpdate && (
             <Tooltip title={t("resources.has_update")} placement="left">
               <Button
                 type="link"
-                href={`https://seelen.io/resources/${resource.id}?update`}
+                href={`https://seelen.io/resources/${compressUuid(resource.id)}?update`}
                 target="_blank"
               >
                 <Icon iconName="MdUpdate" />
               </Button>
             </Tooltip>
           )}
+
           {actions}
         </div>
+      </div>
+
+      <div className={cs.body}>
+        <ResourceTextAsMarkdown text={resource.metadata.description} />
+      </div>
+
+      <div className={cs.footer}>
         {!resource.metadata.bundled && resource.metadata.path.includes("com.seelen.seelen-ui") && (
           <Tooltip title={t("resources.delete")} placement="left">
             <Popconfirm
@@ -153,7 +160,7 @@ interface ResourcePortraitProps {
 }
 
 export function ResourceIcon({ kind }: { kind: ResourceKind }) {
-  return <Icon className={cs.kindIcon} iconName={icons[kind]} />;
+  return <Icon className={cs.kindIcon} iconName={icons[kind]!} />;
 }
 
 function ResourcePortraitInner({ resource, kind }: ResourcePortraitProps) {
@@ -184,4 +191,15 @@ export function ResourcePortrait({ resource, kind, children }: ResourcePortraitP
       {children}
     </figure>
   );
+}
+
+export function compressUuid(uuid: string): string {
+  let hex = uuid.replace(/-/g, "");
+  let data = String.fromCharCode.apply(
+    null,
+    hex.match(/\w{2}/g)!.map(function (a) {
+      return parseInt(a, 16);
+    }),
+  );
+  return btoa(data).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
 }

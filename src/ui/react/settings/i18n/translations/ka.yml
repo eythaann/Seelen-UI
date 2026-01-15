@@ -154,6 +154,7 @@ resources:
   outdated: >-
     ეს რესურსი შეიქმნა Seelen UI- ს ძველი ვერსიისთვის და შესაძლოა არ იმუშაოს
     სწორად.
+  see_on_website: იხილეთ საიტზე
 save: Გადარჩენა
 save_and_restart: შენახვა და გადატვირთვა
 see_more: იხილეთ მეტი

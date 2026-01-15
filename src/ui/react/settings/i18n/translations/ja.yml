@@ -148,6 +148,7 @@ resources:
   import_wallpapers: ローカル壁紙のインポート
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
+  see_on_website: ウェブサイトで見る
 save: 保存
 save_and_restart: 保存して再起動
 see_more: もっと見る

@@ -158,6 +158,7 @@ resources:
   outdated: >-
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se
     välttämättä toimi oikein.
+  see_on_website: Katso nettisivuilta
 save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 see_more: Katso lisää

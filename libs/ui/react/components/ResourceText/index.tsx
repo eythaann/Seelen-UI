@@ -1,35 +1,70 @@
 import type { ResourceText as IResourceText } from "@seelen-ui/lib/types";
 import { useTranslation } from "react-i18next";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import { useEffect } from "preact/hooks";
+import { useSignal } from "@preact/signals";
 
 interface Props {
   className?: string;
   text?: IResourceText;
-  noFallback?: boolean;
 }
 
-export function ResourceText({ text, className, noFallback }: Props) {
+export function ResourceText({ text, className }: Props) {
   const {
     i18n: { language },
   } = useTranslation();
 
   if (!text) {
-    if (noFallback) {
-      return null;
-    }
-    return <span className={className}>null!?</span>;
+    return null;
   }
-
   if (typeof text === "string") {
     return <span className={className}>{text}</span>;
   }
 
   const text2 = text[language] || text["en"];
   if (!text2) {
-    if (noFallback) {
-      return null;
+    return null;
+  }
+  return <span className={className}>{text2}</span>;
+}
+
+interface MarkdownViewerProps {
+  text: IResourceText;
+}
+
+export function ResourceTextAsMarkdown({ text }: MarkdownViewerProps) {
+  const html = useSignal("");
+  const {
+    i18n: { language },
+  } = useTranslation();
+
+  useEffect(() => {
+    let input = typeof text === "string" ? text : text[language] || text["en"];
+    if (!input) {
+      html.value = "";
+      return;
     }
-    return <span className={className}>null!?</span>;
+    safeMarkdownToHtml(input).then((content) => (html.value = content));
+  }, [text, language]);
+
+  if (!html.value) {
+    return null;
   }
 
-  return <span className={className}>{text2}</span>;
+  return <div className="richText" dangerouslySetInnerHTML={{ __html: html.value }} />;
+}
+
+/** this can be used on untrusted markdown, ex user inputs */
+export async function safeMarkdownToHtml(markdown: string): Promise<string> {
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkGfm) // enable GitHub Flavored Markdown
+    .use(remarkRehype) // allow conversion of markdown to html
+    .use(rehypeStringify) // convert html to string
+    .process(markdown);
+  return result.toString();
 }

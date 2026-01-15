@@ -154,6 +154,7 @@ resources:
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju Seelena UI-a i možda neće
     raditi ispravno.
+  see_on_website: Vidi na web stranici
 save: Sačuvati
 save_and_restart: Spremi i ponovno pokretanje
 see_more: Pogledajte više

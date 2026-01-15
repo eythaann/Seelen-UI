@@ -156,6 +156,7 @@ resources:
   outdated: >-
     Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün
     çalışmayabilir.
+  see_on_website: Web sitesinde gör
 save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 see_more: Daha Fazla Gör

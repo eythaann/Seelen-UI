@@ -153,6 +153,7 @@ resources:
   outdated: >-
     This resource was designed for an older version of Seelen UI and might not
     work properly.
+  see_on_website: See on website
 save: Save
 save_and_restart: Save & Restart
 see_more: See More

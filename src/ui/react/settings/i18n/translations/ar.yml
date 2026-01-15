@@ -150,6 +150,7 @@ resources:
   import_wallpapers: استيراد الخلفيات المحلية
   open_folder: فتح مجلد الموارد
   outdated: تم تصميم هذا المورد لإصدار أقدم من Seelen UI وقد لا يعمل بشكل صحيح.
+  see_on_website: انظر على الموقع
 save: حفظ
 save_and_restart: حفظ وإعد التشغيل
 see_more: شاهد المزيد

@@ -156,6 +156,7 @@ resources:
   outdated: >-
     این منبع برای نسخه قدیمی تر Seelen UI طراحی شده است و ممکن است به درستی کار
     نکند.
+  see_on_website: در وب سایت ببینید
 save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
 see_more: بیشتر ببینید

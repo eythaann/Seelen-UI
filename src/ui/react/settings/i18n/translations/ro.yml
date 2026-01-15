@@ -158,6 +158,7 @@ resources:
   outdated: >-
     Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și
     este posibil să nu funcționeze corect.
+  see_on_website: Vezi pe site
 save: Salvați
 save_and_restart: Salvați și reporniți
 see_more: A se vedea mai mult

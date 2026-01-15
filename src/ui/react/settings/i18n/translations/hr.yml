@@ -158,6 +158,7 @@ resources:
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju seelen korisničkog sučelja i
     možda neće raditi ispravno.
+  see_on_website: Vidi na web stranici
 save: Uštedjeti
 save_and_restart: Spremi i ponovno pokrenite
 see_more: Pogledajte više

@@ -155,6 +155,7 @@ resources:
   outdated: >-
     See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi
     korralikult töötada.
+  see_on_website: Vaata kodulehelt
 save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
 see_more: Vaata lähemalt

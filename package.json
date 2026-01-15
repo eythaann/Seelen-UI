@@ -41,7 +41,12 @@
     "preact": "^10.27.1",
     "preact-render-to-string": "^6.6.1",
     "react-router": "^7.6.0",
-    "svelte-preprocess": "^6.0.3"
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "svelte-preprocess": "^6.0.3",
+    "unified": "^11.0.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",

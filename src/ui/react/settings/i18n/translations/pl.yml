@@ -158,6 +158,7 @@ resources:
   outdated: >-
     Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
     działać poprawnie.
+  see_on_website: Zobacz na stronie internetowej
 save: Zastosuj
 save_and_restart: Zastosuj i uruchom ponownie
 see_more: Zobacz więcej

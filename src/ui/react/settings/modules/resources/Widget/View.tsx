@@ -13,6 +13,10 @@ import type { RootState } from "../../shared/store/domain.ts";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 import { RenderBySettingsDeclaration } from "./ConfigRenderer.tsx";
 import { WidgetInstanceSelector } from "./InstanceSelector.tsx";
+import { SeelenWegSettings } from "../../seelenweg/infra.tsx";
+import { WindowManagerSettings } from "../../WindowManager/main/infra/index.tsx";
+import { FancyToolbarSettings } from "../../fancyToolbar/infra.tsx";
+import { WallSettings } from "../../Wall/infra.tsx";
 
 const selectMonitorWidgetConfig = (id: WidgetId, monitorId?: string) => (state: RootState) => {
   if (!monitorId) {
@@ -149,5 +153,23 @@ export function WidgetConfiguration({
 
 export function WidgetView() {
   const [searchParams] = useSearchParams();
-  return <WidgetConfiguration widgetId={searchParams.get("id") as WidgetId} />;
+  const widgetId = searchParams.get("id") as WidgetId;
+
+  if (widgetId === "@seelen/weg") {
+    return <SeelenWegSettings />;
+  }
+
+  if (widgetId === "@seelen/window-manager") {
+    return <WindowManagerSettings />;
+  }
+
+  if (widgetId === "@seelen/fancy-toolbar") {
+    return <FancyToolbarSettings />;
+  }
+
+  if (widgetId === "@seelen/wallpaper-manager") {
+    return <WallSettings />;
+  }
+
+  return <WidgetConfiguration widgetId={widgetId} />;
 }

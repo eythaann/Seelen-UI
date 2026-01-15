@@ -156,6 +156,7 @@ resources:
   outdated: >-
     Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na
     fyddai'n gweithio'n iawn.
+  see_on_website: Gweler ar y wefan
 save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 see_more: Gweld mwy

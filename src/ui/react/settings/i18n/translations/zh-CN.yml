@@ -145,6 +145,7 @@ resources:
   import_wallpapers: 导入本地壁纸
   open_folder: 打开资源文件夹
   outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
+  see_on_website: 见网站
 save: 保存
 save_and_restart: 保存并重启应用
 see_more: 查看更多

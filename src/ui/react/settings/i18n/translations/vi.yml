@@ -157,6 +157,7 @@ resources:
   outdated: >-
     Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không
     hoạt động đúng.
+  see_on_website: Xem trên trang web
 save: Cứu
 save_and_restart: Lưu & Khởi động lại
 see_more: Xem thêm

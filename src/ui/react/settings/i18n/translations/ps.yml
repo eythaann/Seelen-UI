@@ -151,6 +151,7 @@ resources:
   import_wallpapers: ځایی وال پیپرونه وارد کړئ
   open_folder: د سرچینو پوښۍ خلاصه کړئ
   outdated: دا سرچینه د ښایسته UI زاړه نسخه لپاره ډیزاین شوې وه او شاید سم کار ونه کړي.
+  see_on_website: په ویب پاڼه کې وګورئ
 save: خوندي کړئ
 save_and_restart: خوندي کول او بیا پیل کړئ
 see_more: نور وګوره

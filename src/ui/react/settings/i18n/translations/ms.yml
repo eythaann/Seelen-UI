@@ -156,6 +156,7 @@ resources:
   outdated: >-
     Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi
     dengan baik.
+  see_on_website: Lihat di laman web
 save: Simpan
 save_and_restart: Jimat & mulakan semula
 see_more: Lihat lagi

@@ -149,6 +149,7 @@ resources:
   import_wallpapers: นำเข้าวอลเปเปอร์ในท้องถิ่น
   open_folder: เปิดโฟลเดอร์ทรัพยากร
   outdated: ทรัพยากรนี้ได้รับการออกแบบมาสำหรับ Seelen UI รุ่นเก่าและอาจทำงานไม่ถูกต้อง
+  see_on_website: ดูบนเว็บไซต์
 save: บันทึก
 save_and_restart: บันทึกและรีสตาร์ท
 see_more: ดูเพิ่มเติม

@@ -152,6 +152,7 @@ resources:
   outdated: >-
     ຊັບພະຍາກອນນີ້ໄດ້ຖືກອອກແບບມາສໍາລັບ Apen ຂອງ Searen UI
     ແລະອາດຈະບໍ່ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
+  see_on_website: ເບິ່ງຢູ່ໃນເວັບໄຊທ໌
 save: ບັນທຶກ
 save_and_restart: ບັນທຶກແລະ Restart
 see_more: ເບິ່ງເພີ່ມເຕີມ

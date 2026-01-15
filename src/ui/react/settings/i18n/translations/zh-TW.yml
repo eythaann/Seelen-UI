@@ -147,6 +147,7 @@ resources:
   import_wallpapers: 導入本地壁紙
   open_folder: 打開資源文件夾
   outdated: 該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
+  see_on_website: 見網站
 save: 節省
 save_and_restart: 保存和重新啟動
 see_more: 查看更多

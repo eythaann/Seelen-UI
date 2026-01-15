@@ -150,6 +150,7 @@ resources:
   import_wallpapers: ייבא טפטים מקומיים
   open_folder: פתיחת תיקיית משאבים
   outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.
+  see_on_website: ראה באתר
 save: להציל
 save_and_restart: שמור והפעלה מחדש
 see_more: ראה עוד

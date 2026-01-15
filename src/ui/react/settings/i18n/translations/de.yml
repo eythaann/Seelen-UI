@@ -160,6 +160,7 @@ resources:
   outdated: >-
     Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und
     funktioniert möglicherweise nicht richtig.
+  see_on_website: Siehe auf der Website
 save: Speichern
 save_and_restart: Speichern & neu starten
 see_more: Mehr sehen

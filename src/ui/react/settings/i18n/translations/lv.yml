@@ -156,6 +156,7 @@ resources:
   outdated: >-
     Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties
     pareizi.
+  see_on_website: Skatīt vietnē
 save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 see_more: Skatīt vairāk

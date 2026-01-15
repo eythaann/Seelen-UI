@@ -156,6 +156,7 @@ resources:
   outdated: >-
     Aquest recurs va ser dissenyat per a una versió anterior de la interfície
     d'usuari de Seelen i pot no funcionar correctament.
+  see_on_website: Veure al lloc web
 save: Estalviar
 save_and_restart: Desar i reiniciar
 see_more: Veure més

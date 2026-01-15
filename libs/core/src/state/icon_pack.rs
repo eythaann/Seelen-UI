@@ -96,6 +96,7 @@ pub struct UniqueIconPackEntry {
     pub icon: Option<Icon>,
     /// Source file modification time for cache invalidation
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[ts(optional = nullable)]
     pub source_mtime: Option<DateTime<Utc>>,
 }
 

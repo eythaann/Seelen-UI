@@ -154,6 +154,7 @@ resources:
   outdated: >-
     Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
     mogelijk niet goed.
+  see_on_website: Zie op website
 save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 see_more: Meer zien

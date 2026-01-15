@@ -47,17 +47,21 @@
   }
 
   .card {
-    display: grid;
-    grid-template-columns: 100px 1fr auto;
+    width: 100%;
+    height: 120px;
     padding: 10px;
     border-radius: 18px;
-    gap: 10px;
-    background-color: var(--color-gray-50);
-    cursor: grab;
 
-    &.warn {
-      /* border: 1px solid var(--color-yellow-100); */
-    }
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: min-content 1fr min-content;
+    gap: 4px 10px;
+
+    background-color: var(--color-gray-50);
+
+    /* &.warn {
+      border: 1px solid var(--color-yellow-100);
+    } */
 
     &.danger {
       background-color: var(--color-red-200);
@@ -65,28 +69,25 @@
       color: var(--color-red-1200);
     }
 
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      overflow: hidden;
+    .portrait {
+      grid-column: 1 / 2;
+      grid-row: 1 / 4;
+    }
 
-      > span {
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+      gap: 8px;
+
+      .title {
+        font-weight: 600;
+        font-size: 1.1rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-
-      a {
-        color: var(--color-blue-800);
-      }
-    }
-
-    .actions {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-end;
 
       .actionsTop {
         display: flex;
@@ -94,12 +95,24 @@
         gap: 8px;
       }
     }
+
+    .body {
+      overflow: auto;
+      padding-right: 8px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+    }
   }
 }
 
 .portrait {
   background-color: var(--color-gray-200);
-  border-radius: 8px;
+  border-radius: 10px;
   aspect-ratio: 1/1;
   display: flex;
   align-items: center;

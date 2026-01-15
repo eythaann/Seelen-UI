@@ -150,6 +150,7 @@ resources:
   import_wallpapers: የአካባቢያዊ የግድግዳ ወረቀቶች ያስመጡ
   open_folder: ክፍት የመረጃ ምንጭ አቃፊ
   outdated: ይህ የመረጃ ሀብት ለተረጋጋሪ ዌይ ስሪት ለተጨማሪ ስሪት የተሰራ ሲሆን በትክክል ላይሰራ ይችላል.
+  see_on_website: በድር ጣቢያው ላይ ይመልከቱ
 save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
 see_more: ተጨማሪ ይመልከቱ

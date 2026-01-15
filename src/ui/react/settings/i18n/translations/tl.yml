@@ -162,6 +162,7 @@ resources:
   outdated: >-
     Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
     Seelen UI at maaaring hindi gumana nang maayos.
+  see_on_website: Tingnan sa website
 save: I -save
 save_and_restart: I -save at i -restart
 see_more: Makita pa

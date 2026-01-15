@@ -156,6 +156,7 @@ resources:
   outdated: >-
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
     tinkamai.
+  see_on_website: Žiūrėti svetainėje
 save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 see_more: Žiūrėti daugiau
