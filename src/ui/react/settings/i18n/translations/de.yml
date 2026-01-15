@@ -161,6 +161,10 @@ resources:
     Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und
     funktioniert möglicherweise nicht richtig.
   see_on_website: Siehe auf der Website
+review_request:
+  not_now: Nicht jetzt
+  sure: Sicher!
+  title: Gefällt dir die Benutzeroberfläche von Seelen?
 save: Speichern
 save_and_restart: Speichern & neu starten
 see_more: Mehr sehen
@@ -217,14 +221,6 @@ sides:
   left: Links
   right: Rechts
   top: Oben
-start:
-  message: >-
-    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem
-    integrierten Fenstermanager, um dein Windows-Erlebnis zu verbessern! Erkunde
-    eine neue Ära der Effizienz und Multitasking mit unserer intuitiven
-    Oberfläche und fortschrittlichen Funktionen.
-  message_accent: Optimiere deine Produktivität mit Stil!
-  title: Willkommen!
 toolbar:
   auto_hide: Automatisch ausblenden
   delay_to_hide: Verzögerung zum Verstecken
@@ -333,6 +329,18 @@ weg:
   padding: Polsterung
   show_end_task: Beendete Aufgabe in der Taskleiste anzeigen
   width: Breite
+welcome:
+  give_a_review: Geben Sie eine Bewertung ab
+  message: >-
+    Seelen UI ist eine kostenlose Open-Source-Desktopumgebung für Windows. Hier
+    haben Sie die volle Kontrolle über das Aussehen und Verhalten Ihres Desktops
+    und können jedes Detail an Ihren Arbeitsablauf und Stil anpassen.
+  ok: Fangen wir an!
+  review: >-
+    Wenn Ihnen die Nutzung der Seelen-Benutzeroberfläche Spaß macht, denken Sie
+    darüber nach, eine Bewertung im Store abzugeben – Ihr Feedback trägt dazu
+    bei, dass das Projekt wächst und sich verbessert.
+  title: Willkommen bei Seelen UI!
 widget:
   enable: Aktivieren Sie dieses Widget
   enable_for_monitor: Auf diesem Monitor aktivieren

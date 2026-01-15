@@ -159,6 +159,10 @@ resources:
     Ovaj je resurs dizajniran za stariju verziju seelen korisničkog sučelja i
     možda neće raditi ispravno.
   see_on_website: Vidi na web stranici
+review_request:
+  not_now: Ne sad
+  sure: Naravno!
+  title: Uživate li u Seelen korisničkom sučelju?
 save: Uštedjeti
 save_and_restart: Spremi i ponovno pokrenite
 see_more: Pogledajte više
@@ -215,14 +219,6 @@ sides:
   left: Lijevo
   right: Pravo
   top: Vrh
-start:
-  message: >-
-    Dobrodošli na Seelen UI, Ultimate Desktop okruženje s ugrađenim popločanim
-    Windows Managerom kako bi se poboljšalo vaše iskustvo Windows! Istražite
-    novu eru učinkovitosti i multitaskinga s našim intuitivnim sučeljem i
-    naprednim značajkama.
-  message_accent: Optimizirajte svoju produktivnost stilom!
-  title: Dobrodošli!
 toolbar:
   auto_hide: Auto sakrij
   delay_to_hide: Odgoda za skrivanje
@@ -329,6 +325,18 @@ weg:
   padding: Jadnja
   show_end_task: Pokažite krajnji zadatak na zadaćama
   width: Širina
+welcome:
+  give_a_review: Dajte recenziju
+  message: >-
+    Seelen UI je besplatno desktop okruženje otvorenog koda za Windows. Ovdje
+    imate potpunu kontrolu nad izgledom i ponašanjem vaše radne površine, što
+    vam omogućuje da prilagodite svaki detalj kako bi odgovarao vašem tijeku
+    rada i stilu.
+  ok: Počnimo!
+  review: >-
+    Ako volite koristiti Seelen UI, razmislite o tome da ostavite recenziju u
+    trgovini - vaše povratne informacije pomažu razvoju i poboljšanju projekta.
+  title: Dobro došli u Seelen UI!
 widget:
   enable: Omogući ovaj widget
   enable_for_monitor: Omogućite ovaj monitor

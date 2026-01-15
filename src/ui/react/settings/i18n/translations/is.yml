@@ -155,6 +155,10 @@ resources:
     Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað
     rétt.
   see_on_website: Sjá á heimasíðu
+review_request:
+  not_now: Ekki núna
+  sure: Jú!
+  title: Hefurðu gaman af Seelen UI?
 save: Vista
 save_and_restart: Vista og endurræsa
 see_more: Sjáðu meira
@@ -211,14 +215,6 @@ sides:
   left: Vinstri
   right: Ekki satt
   top: Efst
-start:
-  message: >-
-    Verið velkomin í Seelen HÍ, fullkominn skrifborðsumhverfi með innbyggðan
-    flísar Windows Manager til að auka Windows upplifun þína! Kannaðu nýtt
-    tímabil skilvirkni og fjölverkavinnslu með leiðandi viðmóti okkar og
-    háþróaðri eiginleika.
-  message_accent: Fínstilltu framleiðni þína með stæl!
-  title: Velkominn!
 toolbar:
   auto_hide: Sjálfvirk fela
   delay_to_hide: Seinkun á að fela
@@ -325,6 +321,18 @@ weg:
   padding: Padding
   show_end_task: Sýna lokverkefni í verkstikunni
   width: Breidd
+welcome:
+  give_a_review: Gefðu umsögn
+  message: >-
+    Seelen UI er ókeypis og opið skrifborðsumhverfi fyrir Windows. Hér hefur þú
+    fulla stjórn á því hvernig skjáborðið þitt lítur út og hegðar sér, sem gerir
+    þér kleift að sérsníða hvert smáatriði til að passa við vinnuflæði þitt og
+    stíl.
+  ok: Byrjum!
+  review: >-
+    Ef þú hefur gaman af því að nota Seelen UI skaltu íhuga að skilja eftir
+    umsögn um verslunina - athugasemdir þínar hjálpa verkefninu að vaxa og bæta.
+  title: Velkomin í Seelen HÍ!
 widget:
   enable: Virkja þennan búnað
   enable_for_monitor: Virkja á þessum skjá

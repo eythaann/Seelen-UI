@@ -156,6 +156,10 @@ resources:
     See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi
     korralikult töötada.
   see_on_website: Vaata kodulehelt
+review_request:
+  not_now: Mitte praegu
+  sure: Muidugi!
+  title: Kas teile meeldib Seeleni kasutajaliides?
 save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
 see_more: Vaata lähemalt
@@ -212,14 +216,6 @@ sides:
   left: Vasakul
   right: Paremale
   top: Tipus
-start:
-  message: >-
-    Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
-    inkorporeeritud plaatidega Windowsi halduriga, et täiustada oma Windows
-    kogemust! Uurige meie intuitiivse liidese ja edasijõudnute funktsioonidega
-    uut tõhususe ja multitegumtöötluse ajastut.
-  message_accent: Optimeerige oma tootlikkust stiiliga!
-  title: Tere tulemast!
 toolbar:
   auto_hide: Automaatne peida
   delay_to_hide: Viivitage peitmine
@@ -326,6 +322,18 @@ weg:
   padding: Polsterdamine
   show_end_task: Ülesande lõpuülesande kuvamine tegumiribal
   width: Laius
+welcome:
+  give_a_review: Andke ülevaade
+  message: >-
+    Seelen UI on tasuta ja avatud lähtekoodiga töölauakeskkond Windowsi jaoks.
+    Siin on teil täielik kontroll selle üle, kuidas teie töölaud välja näeb ja
+    käitub, võimaldades teil kohandada iga detaili oma töövoo ja stiiliga
+    sobivaks.
+  ok: Alustame!
+  review: >-
+    Kui teile meeldib Seeleni kasutajaliidese kasutamine, kaaluge poes arvustuse
+    jätmist – teie tagasiside aitab projektil kasvada ja täiustada.
+  title: Tere tulemast Seeleni kasutajaliidese!
 widget:
   enable: Võta see vidin kasutusele
   enable_for_monitor: Lubatud sellel monitoril

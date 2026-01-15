@@ -157,6 +157,10 @@ resources:
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
     tinkamai.
   see_on_website: Žiūrėti svetainėje
+review_request:
+  not_now: Ne dabar
+  sure: Žinoma!
+  title: Mėgaukitės Seelen vartotojo sąsaja?
 save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 see_more: Žiūrėti daugiau
@@ -211,14 +215,6 @@ sides:
   left: Kairėje
   right: Teisingai
   top: Viršus
-start:
-  message: >-
-    Sveiki atvykę į „Seelen UI“, „Ultimate Desktop“ aplinką su „Incorporated“
-    plytelių „Windows Manager“, kad patobulintumėte „Windows“ patirtį! Naršykite
-    naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi intuityvia
-    sąsaja ir pažangiomis funkcijomis.
-  message_accent: Optimizuokite savo produktyvumą stiliumi!
-  title: Sveiki!
 toolbar:
   auto_hide: Automatinis slėptuvė
   delay_to_hide: Vėluoti paslėpti
@@ -325,6 +321,18 @@ weg:
   padding: Paminkštinimas
   show_end_task: Užduoties juostoje rodyti pabaigos užduotį
   width: Plotis
+welcome:
+  give_a_review: Pateikite apžvalgą
+  message: >-
+    Seelen UI yra nemokama atvirojo kodo darbalaukio aplinka, skirta Windows.
+    Čia galite visiškai valdyti, kaip atrodo ir veikia jūsų darbalaukis, todėl
+    galite tinkinti kiekvieną detalę, kad ji atitiktų jūsų darbo eigą ir stilių.
+  ok: Pradėkime!
+  review: >-
+    Jei jums patinka naudoti Seelen vartotojo sąsają, apsvarstykite galimybę
+    palikti atsiliepimą parduotuvėje – jūsų atsiliepimai padeda projektui augti
+    ir tobulėti.
+  title: Sveiki atvykę į Seelen vartotojo sąsają!
 widget:
   enable: Įjungti šį valdiklį
   enable_for_monitor: Įjungti šiame monitoriuje

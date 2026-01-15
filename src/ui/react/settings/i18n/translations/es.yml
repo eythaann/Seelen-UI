@@ -159,6 +159,10 @@ resources:
     Este recurso fue diseñado para una versión anterior de Seelen UI y podría no
     funcionar correctamente.
   see_on_website: Ver en el sitio web
+review_request:
+  not_now: Ahora no
+  sure: ¡Seguro!
+  title: ¿Disfrutas de la interfaz de usuario de Seelen?
 save: Guardar
 save_and_restart: Guardar y reiniciar
 see_more: Ver más
@@ -215,14 +219,6 @@ sides:
   left: Izquierda
   right: Derecha
   top: Top
-start:
-  message: >-
-    Bienvenido a Seelen UI, el Entorno de Escritorio definitivo con un gestor de
-    ventanas en mosaico incorporado para mejorar tu experiencia Windows. Explora
-    una nueva era de eficiencia y multitarea con nuestra interfaz intuitiva y
-    funciones avanzadas.
-  message_accent: Optimice su productividad con estilo
-  title: Bienvenido.
 toolbar:
   auto_hide: Auto Ocultar
   delay_to_hide: Retrasar para ocultar
@@ -329,6 +325,18 @@ weg:
   padding: Acolchado
   show_end_task: Mostrar la tarea final en la barra de tareas
   width: Anchura
+welcome:
+  give_a_review: Dar una reseña
+  message: >-
+    Seelen UI es un entorno de escritorio gratuito y de código abierto para
+    Windows. Aquí tienes control total sobre el aspecto y el comportamiento de
+    tu escritorio, lo que te permite personalizar cada detalle para que coincida
+    con tu flujo de trabajo y estilo.
+  ok: ¡Empecemos!
+  review: >-
+    Si le gusta usar Seelen UI, considere dejar una reseña en la tienda; sus
+    comentarios ayudan a que el proyecto crezca y mejore.
+  title: ¡Bienvenido a la interfaz de usuario de Seelen!
 widget:
   enable: Activar este widget
   enable_for_monitor: Activar en este monitor

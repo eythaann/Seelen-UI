@@ -157,6 +157,10 @@ resources:
     Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala
     funtzionatuko.
   see_on_website: Ikus webgunean
+review_request:
+  not_now: Orain ez
+  sure: Noski!
+  title: Seelen UI gozatzen?
 save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
 see_more: Ikusi gehiago
@@ -213,14 +217,6 @@ sides:
   left: Ezker
   right: Zuzen
   top: Tontor
-start:
-  message: >-
-    Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
-    kudeatzailearekin txertatu zure Windows esperientzia hobetzeko! Arakatu
-    eraginkortasunaren eta multiataza aro berria gure interfaze intuitiboarekin
-    eta ezaugarri aurreratuekin.
-  message_accent: Optimizatu zure produktibitatea estiloarekin!
-  title: Ongi etorri!
 toolbar:
   auto_hide: Ezkutatu automatikoa
   delay_to_hide: Ezkutatzeko atzeratu
@@ -327,6 +323,18 @@ weg:
   padding: Betegarri
   show_end_task: Erakutsi zeregin-barran
   width: Zabalera
+welcome:
+  give_a_review: Iritzia eman
+  message: >-
+    Seelen UI kode irekiko mahaigaineko ingurunea da Windows-erako. Hemen zure
+    mahaigainaren itxura eta portaeraren gaineko kontrol osoa daukazu, eta
+    xehetasun guztiak pertsonaliza ditzakezu zure lan-fluxuarekin eta
+    estiloarekin bat etortzeko.
+  ok: Has gaitezen!
+  review: >-
+    Seelen UI erabiltzea gustatzen bazaizu, kontuan hartu berrikuspena dendan
+    uztea; zure iritziak proiektua hazten eta hobetzen laguntzen du.
+  title: Ongi etorri Seelen UI-ra!
 widget:
   enable: Gaitu widget hau
   enable_for_monitor: Gaitu monitore honetan

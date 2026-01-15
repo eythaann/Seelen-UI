@@ -154,6 +154,10 @@ resources:
     Rasilimali hii ilibuniwa kwa toleo la zamani la Seelen UI na linaweza
     kufanya kazi vizuri.
   see_on_website: Tazama kwenye tovuti
+review_request:
+  not_now: Si sasa
+  sure: Hakika!
+  title: Je, unafurahia UI ya Seelen?
 save: Kuokoa
 save_and_restart: Okoa na uanze tena
 see_more: Tazama zaidi
@@ -210,13 +214,6 @@ sides:
   left: Kushoto
   right: Haki
   top: Juu
-start:
-  message: >-
-    Karibu Seelen UI, mazingira ya mwisho ya desktop na meneja wa Windows
-    aliyeingizwa ili kuongeza uzoefu wako wa Windows! Chunguza enzi mpya ya
-    ufanisi na multitasking na interface yetu ya angavu na sifa za hali ya juu.
-  message_accent: Boresha tija yako na mtindo!
-  title: Karibu!
 toolbar:
   auto_hide: Kujificha kiotomatiki
   delay_to_hide: Kuchelewa kujificha
@@ -323,6 +320,18 @@ weg:
   padding: Padding
   show_end_task: Onyesha kazi ya mwisho katika Taskbar
   width: Upana
+welcome:
+  give_a_review: Toa Uhakiki
+  message: >-
+    Seelen UI ni mazingira ya bure na ya wazi ya eneo-kazi kwa Windows. Hapa una
+    udhibiti kamili wa jinsi eneo-kazi lako linavyoonekana na kufanya kazi,
+    hivyo kukuruhusu kubinafsisha kila undani ili kuendana na utendakazi na
+    mtindo wako.
+  ok: Hebu tuanze!
+  review: >-
+    Ikiwa unafurahia kutumia Seelen UI, zingatia kuacha ukaguzi kwenye duka -
+    maoni yako husaidia mradi kukua na kuboreka.
+  title: Karibu kwenye Seelen UI!
 widget:
   enable: Wezesha widget hii
   enable_for_monitor: Wezesha kwenye mfuatiliaji huu

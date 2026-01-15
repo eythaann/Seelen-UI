@@ -148,6 +148,10 @@ resources:
   open_folder: 打開資源文件夾
   outdated: 該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
   see_on_website: 見網站
+review_request:
+  not_now: 現在不要
+  sure: 當然！
+  title: 喜歡 Seelen UI 嗎？
 save: 節省
 save_and_restart: 保存和重新啟動
 see_more: 查看更多
@@ -202,12 +206,6 @@ sides:
   left: 左邊
   right: 正確的
   top: 頂部
-start:
-  message: >-
-    歡迎來到Seelen UI，這是終極台式機環境，並帶有合併的瓷磚Windows Manager，以增強您的Windows體驗！
-    通過我們的直觀界面和高級功能探索效率和多任務的新時代。
-  message_accent: 通過風格優化您的生產力！
-  title: 歡迎！
 toolbar:
   auto_hide: 自動隱藏
   delay_to_hide: 延遲隱藏
@@ -314,6 +312,14 @@ weg:
   padding: 填充
   show_end_task: 在任務欄中顯示最終任務
   width: 寬度
+welcome:
+  give_a_review: 發表評論
+  message: >-
+    Seelen UI 是一個適用於 Windows 的免費開源桌面環境。
+    在這裡，您可以完全控制桌面的外觀和行為，允許您自定義每個細節以匹配您的工作流程和風格。
+  ok: 讓我們開始吧！
+  review: 如果您喜歡使用 Seelen UI，請考慮在商店中留下評論 - 您的反饋有助於項目的成長和改進。
+  title: 歡迎來到Seelen UI！
 widget:
   enable: 啟用這個小部件
   enable_for_monitor: 在此顯示器上啟用

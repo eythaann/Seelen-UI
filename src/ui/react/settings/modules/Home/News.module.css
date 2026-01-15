@@ -1,7 +1,7 @@
 .notices {
   width: 100%;
   height: 50vh;
-  gap: 10px;
+  gap: var(--spacing-s);
   display: grid;
   grid-template-rows: 1fr min-content;
 
@@ -28,7 +28,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: min-content min-content;
-      padding: 20px 20px 10px 20px;
+      padding: var(--spacing-l);
       background: linear-gradient(transparent, #000a 100%);
       color: white;
 
@@ -51,7 +51,7 @@
         grid-column: 2 / 3;
         grid-row: 1 / 3;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: flex-end;
       }
     }
@@ -62,7 +62,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: var(--spacing-s);
 
     .paginationDot {
       width: 10px;

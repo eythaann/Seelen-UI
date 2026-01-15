@@ -159,6 +159,10 @@ resources:
     Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak
     berfungsi dengan baik.
   see_on_website: Lihat di situs web
+review_request:
+  not_now: Tidak sekarang
+  sure: Tentu!
+  title: Menikmati Seelen UI?
 save: Menyimpan
 save_and_restart: Simpan & restart
 see_more: Lihat Lebih Lanjut
@@ -215,14 +219,6 @@ sides:
   left: Kiri
   right: Benar
   top: Atas
-start:
-  message: >-
-    Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
-    Manager yang digabungkan untuk meningkatkan pengalaman Windows Anda!
-    Jelajahi era baru efisiensi dan multitasking dengan antarmuka intuitif dan
-    fitur canggih kami.
-  message_accent: Optimalkan produktivitas Anda dengan gaya!
-  title: Selamat datang!
 toolbar:
   auto_hide: Persembunyian otomatis
   delay_to_hide: Penundaan untuk bersembunyi
@@ -329,6 +325,18 @@ weg:
   padding: Lapisan
   show_end_task: Menampilkan tugas akhir di bilah tugas
   width: Lebar
+welcome:
+  give_a_review: Berikan Ulasan
+  message: >-
+    Seelen UI adalah lingkungan desktop sumber terbuka dan gratis untuk Windows.
+    Di sini Anda memiliki kendali penuh atas tampilan dan perilaku desktop Anda,
+    memungkinkan Anda menyesuaikan setiap detail agar sesuai dengan alur kerja
+    dan gaya Anda.
+  ok: Mari kita mulai!
+  review: >-
+    Jika Anda senang menggunakan Seelen UI, pertimbangkan untuk meninggalkan
+    ulasan di toko — masukan Anda membantu proyek tumbuh dan meningkat.
+  title: Selamat datang di Seelen UI!
 widget:
   enable: Aktifkan widget ini
   enable_for_monitor: Aktifkan pada monitor ini

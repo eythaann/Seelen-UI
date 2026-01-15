@@ -316,6 +316,7 @@ pub struct SeelenWallSettings {
     pub interval: u32,
     /// randomize order
     pub randomize: bool,
+    /// collection id, if none default wallpaper will be used
     pub default_collection: Option<uuid::Uuid>,
     /// multimonitor behaviour
     pub multimonitor_behaviour: MultimonitorBehaviour,
@@ -328,7 +329,7 @@ impl Default for SeelenWallSettings {
         Self {
             enabled: true,
             backgrounds_v2: None,
-            interval: 60,
+            interval: 300, // 5min
             randomize: false,
             default_collection: None,
             multimonitor_behaviour: MultimonitorBehaviour::PerMonitor,

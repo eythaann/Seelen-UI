@@ -159,6 +159,10 @@ resources:
     Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze
     kahle.
   see_on_website: Bona kuwebhusayithi
+review_request:
+  not_now: Hhayi manje
+  sure: Impela!
+  title: Ujabulela i-Seelen UI?
 save: Hlenga
 save_and_restart: Gcina futhi Qalisa kabusha
 see_more: Buka Okuningi
@@ -215,14 +219,6 @@ sides:
   left: '-Bunxele'
   right: Ngakwesokudla
   top: Isihloko
-start:
-  message: >-
-    Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
-    ofakiwe wokuthuthukisa isipiliyoni sakho seWindows! Hlola inkathi entsha
-    yokusebenza kahle kanye ne-multitasking nge-interface yethu enembile nezici
-    ezithuthukile.
-  message_accent: Lungiselela umkhiqizo wakho ngesitayela!
-  title: Uyemukelwa!
 toolbar:
   auto_hide: Fihla okuzenzakalelayo
   delay_to_hide: Libazise ukucasha
@@ -333,6 +329,18 @@ weg:
   padding: Idilidi
   show_end_task: Khombisa umsebenzi wokugcina kubha yomsebenzi
   width: Ububanzi
+welcome:
+  give_a_review: Nikeza Isibuyekezo
+  message: >-
+    I-Seelen UI iyindawo yamahhala nevulekile yedeskithophu yeWindows. Lapha
+    unokulawula okugcwele kokuthi ideskithophu yakho ibukeka futhi iziphatha
+    kanjani, okukuvumela ukuthi wenze ngendlela oyifisayo yonke imininingwane
+    ukuze ihambisane nokuhamba komsebenzi wakho nesitayela.
+  ok: Ake siqale!
+  review: >-
+    Uma uthanda ukusebenzisa i-Seelen UI, cabanga ukushiya isibuyekezo esitolo —
+    impendulo yakho isiza iphrojekthi ukuthi ikhule futhi ithuthuke.
+  title: Siyakwamukela ku-Seelen UI!
 widget:
   enable: Nika amandla lewijethi
   enable_for_monitor: Nika amandla kulo mqaphi

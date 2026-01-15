@@ -157,6 +157,10 @@ resources:
     Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties
     pareizi.
   see_on_website: Skatīt vietnē
+review_request:
+  not_now: Ne tagad
+  sure: Protams!
+  title: Vai jums patīk Seelen UI?
 save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 see_more: Skatīt vairāk
@@ -213,14 +217,6 @@ sides:
   left: Atstāts
   right: Pa labi
   top: Tops
-start:
-  message: >-
-    Laipni lūdzam Seelen Ui, galvenajā darbvirsmas vidē ar iestrādātu flīzes
-    Windows Manager, lai uzlabotu jūsu Windows pieredzi! Izpētiet jaunu
-    efektivitātes un daudzuzdevumu laikmetu ar mūsu intuitīvo interfeisu un
-    uzlabotajām funkcijām.
-  message_accent: Optimizējiet savu produktivitāti ar stilu!
-  title: Laipni lūdzam!
 toolbar:
   auto_hide: Auto paslēpt
   delay_to_hide: Aizkavē paslēpties
@@ -329,6 +325,16 @@ weg:
   padding: Polsterējums
   show_end_task: Parādīt beigu uzdevumu uzdevumjoslā
   width: Platums
+welcome:
+  give_a_review: Sniedziet atsauksmi
+  message: >-
+    Seelen UI ir bezmaksas atvērtā koda darbvirsmas vide operētājsistēmai
+    Windows. Šeit jums ir pilnīga kontrole pār jūsu darbvirsmas izskatu un
+    darbību, ļaujot pielāgot katru detaļu, lai tā atbilstu jūsu darbplūsmai un
+    stilam.
+  ok: Sāksim!
+  review: "Ja jums patīk izmantot Seelen UI, apsveriet iespēju atstāt atsauksmi par veikalu\_— jūsu atsauksmes palīdz projektam augt un uzlaboties."
+  title: Laipni lūdzam Seelen lietotāja saskarnē!
 widget:
   enable: Ieslēgt šo logrīku
   enable_for_monitor: Ieslēgt šajā monitorā

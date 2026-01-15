@@ -159,6 +159,10 @@ resources:
     Questa risorsa è stata progettata per una versione precedente di Seelen UI e
     potrebbe non funzionare correttamente.
   see_on_website: Vedi sul sito web
+review_request:
+  not_now: Non adesso
+  sure: Sicuro!
+  title: Ti piace l'interfaccia utente di Seelen?
 save: Salva
 save_and_restart: Salva e Riavvia
 see_more: Per saperne di più
@@ -215,14 +219,6 @@ sides:
   left: Sinistra
   right: Destra
   top: Alto
-start:
-  message: >-
-    Benvenuti in Seelen UI, l'ambiente desktop definitivo con un gestore delle
-    finestre a tiling incorporato per migliorare la vostra esperienza Windows!
-    Esplorate una nuova era di efficienza e multitasking con la nostra
-    interfaccia intuitiva e funzionalità avanzate.
-  message_accent: Ottimizzate la vostra produttività con stile!
-  title: Benvenuti!
 toolbar:
   auto_hide: Nascondi automaticamente
   delay_to_hide: Ritardo per nascondere
@@ -329,6 +325,19 @@ weg:
   padding: Spaziatura
   show_end_task: Mostra la fine dell'attività nella barra delle applicazioni
   width: Larghezza
+welcome:
+  give_a_review: Dai una recensione
+  message: >-
+    Seelen UI è un ambiente desktop gratuito e open source per Windows. Qui hai
+    il pieno controllo sull'aspetto e sul comportamento del tuo desktop,
+    permettendoti di personalizzare ogni dettaglio per adattarlo al tuo flusso
+    di lavoro e al tuo stile.
+  ok: Iniziamo!
+  review: >-
+    Se ti piace utilizzare l'interfaccia utente di Seelen, valuta la possibilità
+    di lasciare una recensione nello store: il tuo feedback aiuta il progetto a
+    crescere e migliorare.
+  title: Benvenuti nell'interfaccia utente di Seelen!
 widget:
   enable: Abilitare questo widget
   enable_for_monitor: Abilita su questo monitor

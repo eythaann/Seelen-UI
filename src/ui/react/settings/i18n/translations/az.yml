@@ -156,6 +156,10 @@ resources:
     Bu qaynaq Seelen UI-nin köhnə bir versiyası üçün hazırlanmış və düzgün
     işləməyə bilər.
   see_on_website: Veb saytında baxın
+review_request:
+  not_now: İndi yox
+  sure: Əlbəttə!
+  title: Seelen UI-dən zövq alırsınız?
 save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
 see_more: Daha çoxuna baxın
@@ -212,14 +216,6 @@ sides:
   left: Sol
   right: Haqlı
   top: Üst
-start:
-  message: >-
-    Windows təcrübənizi artırmaq üçün birləşdirilmiş bir kirəmit windows
-    meneceri olan son masa üstü mühiti Seelen Ui-yə xoş gəlmisiniz! İntuitiv
-    interfeysimiz və inkişaf etmiş xüsusiyyətlərimizlə yeni bir səmərəlilik və
-    çoklu bir dövrü araşdırın.
-  message_accent: Üslubla məhsuldarlığınızı optimallaşdırın!
-  title: Xoş gəliş edin!
 toolbar:
   auto_hide: Avtomatik gizlətmək
   delay_to_hide: Gizlətmək üçün gecikmə
@@ -326,6 +322,17 @@ weg:
   padding: Paddend
   show_end_task: Tapşırıq çubuğunda son tapşırığı göstərin
   width: Geniştəhər
+welcome:
+  give_a_review: Rəy verin
+  message: >-
+    Seelen UI Windows üçün pulsuz və açıq mənbəli iş masası mühitidir. Burada iş
+    masanızın necə göründüyünə və davranışına tam nəzarət edirsiniz, bu da sizə
+    hər bir detalı iş axınınıza və üslubunuza uyğunlaşdırmağa imkan verir.
+  ok: Başlayaq!
+  review: >-
+    Seelen UI-dən istifadə etməkdən zövq alırsınızsa, mağazada rəy yazmağı
+    düşünün – rəyiniz layihənin böyüməsinə və təkmilləşdirilməsinə kömək edir.
+  title: Seelen UI-ə xoş gəlmisiniz!
 widget:
   enable: Bu widgetı aktivləşdirin
   enable_for_monitor: Bu monitorda aktivləşdirin

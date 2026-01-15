@@ -157,6 +157,10 @@ resources:
     Hierdie hulpbron is ontwerp vir 'n ouer weergawe van Seelen UI en werk
     moontlik nie behoorlik nie.
   see_on_website: Sien op webwerf
+review_request:
+  not_now: Nie nou nie
+  sure: Sekerlik!
+  title: Geniet jy van Seelen UI?
 save: Red
 save_and_restart: Stoor en herbegin
 see_more: Sien meer
@@ -213,14 +217,6 @@ sides:
   left: Links
   right: Regs
   top: Top
-start:
-  message: >-
-    Welkom by Seelen UI, die uiteindelike tafelrekenaaromgewing met 'n ingelyfde
-    teëlbestuurder om u Windows -ervaring te verbeter! Ontdek 'n nuwe era van
-    doeltreffendheid en multitasking met ons intuïtiewe koppelvlak en gevorderde
-    funksies.
-  message_accent: Optimaliseer u produktiwiteit met styl!
-  title: Welkom!
 toolbar:
   auto_hide: Outomatiese vel
   delay_to_hide: Vertraag om weg te steek
@@ -327,6 +323,17 @@ weg:
   padding: Opvulling
   show_end_task: Toon eindtaak in die taakbalk
   width: Wydte
+welcome:
+  give_a_review: Gee 'n resensie
+  message: >-
+    Seelen UI is 'n gratis en oopbron lessenaaromgewing vir Windows. Hier het jy
+    volle beheer oor hoe jou lessenaar lyk en optree, sodat jy elke detail kan
+    aanpas om by jou werkvloei en styl te pas.
+  ok: Kom ons begin!
+  review: >-
+    As jy daarvan hou om Seelen UI te gebruik, oorweeg dit om 'n resensie in die
+    winkel te gee - jou terugvoer help die projek om te groei en te verbeter.
+  title: Welkom by Seelen UI!
 widget:
   enable: Aktiveer hierdie widget
   enable_for_monitor: Aktiveer op hierdie monitor

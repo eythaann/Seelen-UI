@@ -155,6 +155,10 @@ resources:
     Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
     mogelijk niet goed.
   see_on_website: Zie op website
+review_request:
+  not_now: Niet nu
+  sure: Zeker!
+  title: Geniet je van de Seelen-gebruikersinterface?
 save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 see_more: Meer zien
@@ -211,14 +215,6 @@ sides:
   left: Links
   right: Rechts
   top: Bovenkant
-start:
-  message: >-
-    Welkom bij Seelen UI, de ultieme desktopomgeving met een opgenomen Tiling
-    Windows Manager om uw Windows -ervaring te verbeteren! Verken een nieuw
-    tijdperk van efficiëntie en multitasking met onze intuïtieve interface en
-    geavanceerde functies.
-  message_accent: Optimaliseer uw productiviteit met stijl!
-  title: Welkom!
 toolbar:
   auto_hide: Automatisch verbergen
   delay_to_hide: Vertraging om te verbergen
@@ -329,6 +325,18 @@ weg:
   padding: Vulling
   show_end_task: Taak beëindigen in taakbalk weergeven
   width: Breedte
+welcome:
+  give_a_review: Geef een recensie
+  message: >-
+    Seelen UI is een gratis en open source desktopomgeving voor Windows. Hier
+    heeft u volledige controle over hoe uw bureaublad eruitziet en zich
+    gedraagt, zodat u elk detail kunt aanpassen aan uw workflow en stijl.
+  ok: Laten we beginnen!
+  review: >-
+    Als u de Seelen UI graag gebruikt, overweeg dan om een ​​recensie achter te
+    laten in de winkel. Uw feedback helpt het project te groeien en te
+    verbeteren.
+  title: Welkom bij de Seelen-gebruikersinterface!
 widget:
   enable: Deze widget inschakelen
   enable_for_monitor: Inschakelen op deze monitor

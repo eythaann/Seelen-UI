@@ -20,7 +20,6 @@ export function WallSettings() {
   const [time, setTime] = useState({
     hours: Math.floor(interval / 3600),
     minutes: Math.floor((interval / 60) % 60),
-    seconds: interval % 60,
   });
 
   const [editingCollectionId, setEditingCollectionId] = useState<string | null>(null);
@@ -37,7 +36,6 @@ export function WallSettings() {
     setTime({
       hours: Math.floor(interval / 3600),
       minutes: Math.floor((interval / 60) % 60),
-      seconds: interval % 60,
     });
   }, [interval]);
 
@@ -55,11 +53,11 @@ export function WallSettings() {
     patchWallSettings({ enabled });
   }
 
-  const updateTime = (key: "hours" | "minutes" | "seconds", value: number | null) => {
+  const updateTime = (key: "hours" | "minutes", value: number | null) => {
     if (value === null) return;
     const newTime = { ...time, [key]: Math.floor(value) };
     setTime(newTime);
-    const newInterval = Math.max(newTime.hours * 3600 + newTime.minutes * 60 + newTime.seconds, 1);
+    const newInterval = Math.max(newTime.hours * 3600 + newTime.minutes * 60, 60);
     patchWallSettings({ interval: newInterval });
   };
 
@@ -159,12 +157,12 @@ export function WallSettings() {
           label={<b>{t("wall.interval")}</b>}
           action={
             <div className={cs.interval}>
-              {["hours", "minutes", "seconds"].map((unit) => (
+              {["hours", "minutes"].map((unit) => (
                 <div key={unit}>
                   <b>{t(`wall.${unit}`)}:</b>
                   <InputNumber
                     value={time[unit as keyof typeof time]}
-                    onChange={(value) => updateTime(unit as "hours" | "minutes" | "seconds", value)}
+                    onChange={(value) => updateTime(unit as "hours" | "minutes", value)}
                     min={0}
                     style={{ width: 50 }}
                   />

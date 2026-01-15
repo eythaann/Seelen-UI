@@ -162,6 +162,10 @@ resources:
     Kheyraadkan waxaa loogu talagalay in nooc ka weyn oo ah Selelel Ui oo laga
     yaabo inuu si sax ah u shaqeyn.
   see_on_website: Ka eeg bogga internetka
+review_request:
+  not_now: Hadda maaha
+  sure: Hubaal!
+  title: Ku raaxaysiga Seelen UI?
 save: Badbaadin
 save_and_restart: Badbaadin & Dib u bilow
 see_more: Arag in dheeraad ah
@@ -218,13 +222,6 @@ sides:
   left: Bidix
   right: Sax
   top: Dusha kore
-start:
-  message: >-
-    Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
-    maamulaha Windows-ka oo lagu daro Maareeyaha Windows Sahamiyaan marxalad
-    cusub oo hufnaan iyo fara badan
-  message_accent: Ku dadaal wax soo saarkaaga qaabka!
-  title: Soo dhawow!
 toolbar:
   auto_hide: Auto qaraha
   delay_to_hide: Dib u dhig si loo qariyo
@@ -331,6 +328,19 @@ weg:
   padding: Suur
   show_end_task: Muuji shaqada dhamaadka ee Tooska
   width: Ballac
+welcome:
+  give_a_review: Dib u eegis sii
+  message: >-
+    Seelen UI waa goob desktop il bilaash ah oo furan oo loogu talagalay
+    Windows. Halkan waxa aad si buuxda gacanta ugu haysaa sida uu desktop-kaagu
+    u eg yahay una dhaqmo, taas oo kuu ogolaanaysa in aad habayso tafaasiil
+    kasta si uu u waafajiyo socodka shaqadaada iyo qaabkaaga.
+  ok: Aan bilowno!
+  review: >-
+    Haddii aad ku raaxaysato isticmaalka Seelen UI, tixgeli inaad dib u eegis
+    kaga tagto dukaanka - jawaab celintaadu waxay caawisaa mashruuca inuu koro
+    oo horumaro.
+  title: Ku soo dhawoow Seelen UI!
 widget:
   enable: U oggolow widget-kaan
   enable_for_monitor: U oggolow kormeerkan

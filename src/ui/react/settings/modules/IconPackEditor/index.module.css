@@ -1,19 +1,19 @@
 .iconGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--spacing-s);
 
   .iconContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: var(--spacing-2xs);
 
     .iconBox {
       width: 128px;
       height: 128px;
       border-radius: 20px;
-      padding: 20px;
+      padding: var(--spacing-l);
       background-color: #9c9c9c;
       box-shadow: 1px 1px 1px #0005;
 

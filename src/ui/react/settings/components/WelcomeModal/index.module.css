@@ -1,0 +1,29 @@
+.welcome {
+  :global(.ant-modal-confirm-content) {
+    text-align: justify;
+    b {
+      font-weight: 600;
+    }
+  }
+
+  :global(.ant-modal-title) {
+    font-size: 1.4rem;
+  }
+}
+
+.starRating {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-m);
+
+  .star {
+    cursor: pointer;
+    color: var(--color-gray-400);
+    transition: color 100ms ease-in-out;
+
+    &.filled {
+      color: #ffc107;
+    }
+  }
+}

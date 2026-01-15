@@ -156,6 +156,10 @@ resources:
     Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,
     hogy nem működik megfelelően.
   see_on_website: Lásd a weboldalon
+review_request:
+  not_now: Most nem
+  sure: Persze!
+  title: Élvezed a Seelen felhasználói felületet?
 save: Megment
 save_and_restart: Mentés és újraindítás
 see_more: Lásd még
@@ -212,14 +216,6 @@ sides:
   left: Bal
   right: Jobb
   top: Felső
-start:
-  message: >-
-    Üdvözöljük a Seelen UI -ban, az Ultimate Desktop környezetben egy beépített
-    burkolólap Windows Manager -rel, hogy javítsa a Windows élményét! Fedezze
-    fel a hatékonyság és a multitasking új korszakát az intuitív felületünkkel
-    és a fejlett funkciókkal.
-  message_accent: Optimalizálja a termelékenységet stílusosan!
-  title: Üdvözöljük!
 toolbar:
   auto_hide: Autóbizalom
   delay_to_hide: Késleltesse az elrejtést
@@ -328,6 +324,18 @@ weg:
   padding: Párnázás
   show_end_task: A feladat befejezésének megjelenítése a feladatsorban
   width: Szélesség
+welcome:
+  give_a_review: Adj véleményt
+  message: >-
+    A Seelen UI egy ingyenes és nyílt forráskódú asztali környezet Windowshoz.
+    Itt teljes mértékben irányíthatja az asztali számítógép megjelenését és
+    viselkedését, így minden részletet személyre szabhat a munkafolyamatának és
+    stílusának megfelelően.
+  ok: Kezdjük!
+  review: >-
+    Ha szívesen használja a Seelen UI-t, fontolja meg, hogy véleményt írjon az
+    áruházban – visszajelzése segíti a projekt növekedését és fejlődését.
+  title: Üdvözöljük a Seelen UI-n!
 widget:
   enable: Engedélyezze ezt a widgetet
   enable_for_monitor: Engedélyezés ezen a monitoron

@@ -79,7 +79,7 @@ export const Header = () => {
   const ExtraInfo = RouteExtraInfo[location.pathname];
 
   return (
-    <div className={cs.Header} data-tauri-drag-region>
+    <div className={cs.header} data-tauri-drag-region>
       <div className={cs.title}>
         {label}
         {ExtraInfo && <ExtraInfo />}

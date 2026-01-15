@@ -159,6 +159,10 @@ resources:
     Vê çavkaniyê ji bo guhertoyek kevn a Seelen UI hate çêkirin û dibe ku bi
     rengek baş kar neke.
   see_on_website: Li ser malperê bibînin
+review_request:
+  not_now: Guhê xwe nedenê
+  sure: Emîn!
+  title: Ji Seelen UI-ê kêfxweş dibin?
 save: Rizgarkirin
 save_and_restart: Save & Restart
 see_more: Bêtir bibînin
@@ -215,13 +219,6 @@ sides:
   left: Çep
   right: Rast
   top: Kop
-start:
-  message: >-
-    Welcome to Seelen Ui, hawîrdora desktopê ya paşîn a bi navgînek pencereya bi
-    navgîniya Windows-ê re ku ezmûna Windows zêde bike! Li ser serdemek nû û
-    pirrjimar bi navbeynkariya intuitive û taybetmendiyên pêşkeftî vekolînin.
-  message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
-  title: Bi xêr hatî!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dereng ji bo veşartinê
@@ -328,6 +325,19 @@ weg:
   padding: Padding
   show_end_task: Di peywira peywirê de peywira dawiyê nîşan bide
   width: Berî
+welcome:
+  give_a_review: Bidin Review
+  message: >-
+    Seelen UI ji bo Windows-ê hawîrdorek sermaseya belaş û çavkaniya vekirî ye.
+    Li vir kontrola we ya bêkêmasî heye ka sermaseya we çawa xuya dike û
+    tevdigere, ku dihêle hûn her hûrgulî xweş bikin da ku li gorî xebata xwe û
+    şêwaza xwe tevbigerin.
+  ok: Ka em dest pê bikin!
+  review: >-
+    Heke hûn ji karanîna Seelen UI-yê hez dikin, bifikirin ku li ser firotgehê
+    nirxandinek bihêlin - nerînên we ji projeyê re dibe alîkar ku mezin bibe û
+    pêşve bibe.
+  title: Hûn bi xêr hatin Seelen UI!
 widget:
   enable: Vê widgetê çalak bikin
   enable_for_monitor: Li ser vê çavdêriyê çalak bikin

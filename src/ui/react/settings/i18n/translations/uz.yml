@@ -159,6 +159,10 @@ resources:
     Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri
     ishlamasligi mumkin.
   see_on_website: Veb-saytda ko'ring
+review_request:
+  not_now: Hozir emas
+  sure: Albatta!
+  title: Seelen UI yoqyapsizmi?
 save: Tejash
 save_and_restart: Saqlang va qayta yoqing
 see_more: Ko'proq ko'rish
@@ -215,14 +219,6 @@ sides:
   left: Chapda
   right: To'g'ri
   top: Eng yuqori
-start:
-  message: >-
-    Windows tajribangizni oshirish uchun "Windows" bosh murabbiyi bo'lgan
-    Windows menejeriga ega Seelen UI-ga xush kelibsiz! Bizning intuitiv
-    interfeysimiz va rivojlangan xususiyatlarimiz bilan samaradorlik va ko'p
-    bosqichli yangi davrni o'rganing.
-  message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
-  title: Xush kelibsiz!
 toolbar:
   auto_hide: Avtomatik yashirish
   delay_to_hide: Yashirish uchun kechikish
@@ -331,6 +327,19 @@ weg:
   padding: Plomba
   show_end_task: Vazifalar panelida tugatish vazifasini ko'rsating
   width: Kenglik
+welcome:
+  give_a_review: Sharh bering
+  message: >-
+    Seelen UI Windows uchun bepul va ochiq manbali ish stoli muhitidir. Bu yerda
+    siz ish stolingiz qanday koʻrinishi va oʻzini tutishini toʻliq nazorat qila
+    olasiz, bu sizga har bir detalni ish jarayoni va uslubingizga mos ravishda
+    sozlash imkonini beradi.
+  ok: Boshlaymiz!
+  review: >-
+    Agar siz Seelen UI-dan foydalanishni yoqtirsangiz, do'konda sharh qoldiring
+    - fikr-mulohazalaringiz loyihani rivojlantirish va yaxshilashga yordam
+    beradi.
+  title: Seelen UI-ga xush kelibsiz!
 widget:
   enable: Bu vidjetni yoqing
   enable_for_monitor: Ushbu monitorga yoqish

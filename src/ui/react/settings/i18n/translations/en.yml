@@ -154,6 +154,10 @@ resources:
     This resource was designed for an older version of Seelen UI and might not
     work properly.
   see_on_website: See on website
+review_request:
+  not_now: Not now
+  sure: Sure!
+  title: Enjoying Seelen UI?
 save: Save
 save_and_restart: Save & Restart
 see_more: See More
@@ -210,14 +214,6 @@ sides:
   left: Left
   right: Right
   top: Top
-start:
-  message: >-
-    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated
-    tiling windows manager to enhance your Windows experience! Explore a new era
-    of efficiency and multitasking with our intuitive interface and advanced
-    features.
-  message_accent: Optimize your productivity with style!
-  title: Welcome!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide
@@ -324,6 +320,17 @@ weg:
   padding: Padding
   show_end_task: Show end task in taskbar
   width: Width
+welcome:
+  give_a_review: Give a Review
+  message: >-
+    Seelen UI is a free and open source desktop environment for Windows. Here
+    you have full control over how your desktop looks and behaves, allowing you
+    to customize every detail to match your workflow and style.
+  ok: Let's start!
+  review: >-
+    If you enjoy using Seelen UI, consider leaving a review on the store — your
+    feedback helps the project grow and improve.
+  title: Welcome to Seelen UI!
 widget:
   enable: Enable this widget
   enable_for_monitor: Enable on this monitor

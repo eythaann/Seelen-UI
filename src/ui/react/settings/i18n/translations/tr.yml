@@ -157,6 +157,10 @@ resources:
     Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün
     çalışmayabilir.
   see_on_website: Web sitesinde gör
+review_request:
+  not_now: Şimdi değil
+  sure: Elbette!
+  title: Seelen kullanıcı arayüzünden memnun musunuz?
 save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 see_more: Daha Fazla Gör
@@ -213,14 +217,6 @@ sides:
   left: Sol
   right: Sağ
   top: Üst
-start:
-  message: >-
-    Seelen UI'a hoş geldiniz! Windows deneyiminizi geliştirmek için entegre
-    döşeme pencere yöneticisi ile en iyi masaüstü ortamı. Kullanıcı dostu
-    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevde yeni bir
-    çağı keşfedin.
-  message_accent: Verimliliğinizi stil ile optimize edin!
-  title: Hoş Geldiniz!
 toolbar:
   auto_hide: Otomatik Gizle
   delay_to_hide: Gizleme gecikmesi
@@ -329,6 +325,19 @@ weg:
   padding: İç Boşluk
   show_end_task: Görev çubuğunda görevi sonlandırmayı göster
   width: Genişlik
+welcome:
+  give_a_review: Yorum Yapın
+  message: >-
+    Seelen UI, Windows için ücretsiz ve açık kaynaklı bir masaüstü ortamıdır.
+    Burada masaüstünüzün nasıl görüneceği ve nasıl davranacağı üzerinde tam
+    kontrole sahip olursunuz; böylece her ayrıntıyı iş akışınıza ve stilinize
+    uyacak şekilde özelleştirebilirsiniz.
+  ok: Haydi başlayalım!
+  review: >-
+    Seelen kullanıcı arayüzünü kullanmaktan hoşlanıyorsanız mağazaya bir
+    inceleme bırakmayı düşünün; geri bildiriminiz projenin büyümesine ve
+    gelişmesine yardımcı olur.
+  title: Seelen kullanıcı arayüzüne hoş geldiniz!
 widget:
   enable: Bu widget'ı etkinleştir
   enable_for_monitor: Bu monitörde etkinleştir

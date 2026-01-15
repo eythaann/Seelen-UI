@@ -157,6 +157,10 @@ resources:
     Den här resursen är utformad för en äldre version av Seelen UI och kanske
     inte fungerar korrekt.
   see_on_website: Se på hemsidan
+review_request:
+  not_now: Inte nu
+  sure: Säker!
+  title: Gillar du Seelen UI?
 save: Spara
 save_and_restart: Spara och starta om
 see_more: Se mer
@@ -213,14 +217,6 @@ sides:
   left: Vänster
   right: Höger
   top: Topp
-start:
-  message: >-
-    Välkommen till Seelen UI, den ultimata skrivbordsmiljön med en införlivad
-    kakling Windows Manager för att förbättra din Windows -upplevelse! Utforska
-    en ny era av effektivitet och multitasking med vårt intuitiva gränssnitt och
-    avancerade funktioner.
-  message_accent: Optimera din produktivitet med stil!
-  title: Välkommen!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dröjsmål att gömma sig
@@ -327,6 +323,17 @@ weg:
   padding: Stoppning
   show_end_task: Visa slutuppgift i aktivitetsfältet
   width: Bredd
+welcome:
+  give_a_review: Ge en recension
+  message: >-
+    Seelen UI är en gratis skrivbordsmiljö med öppen källkod för Windows. Här
+    har du full kontroll över hur ditt skrivbord ser ut och beter sig, så att du
+    kan anpassa varje detalj för att matcha ditt arbetsflöde och din stil.
+  ok: Låt oss börja!
+  review: >-
+    Om du gillar att använda Seelen UI, överväg att lämna en recension i butiken
+    – din feedback hjälper projektet att växa och förbättras.
+  title: Välkommen till Seelen UI!
 widget:
   enable: Aktivera denna widget
   enable_for_monitor: Aktivera på denna bildskärm

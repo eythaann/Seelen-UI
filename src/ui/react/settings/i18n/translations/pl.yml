@@ -159,6 +159,10 @@ resources:
     Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
     działać poprawnie.
   see_on_website: Zobacz na stronie internetowej
+review_request:
+  not_now: Nie teraz
+  sure: Jasne!
+  title: Podoba Ci się interfejs użytkownika Seelen?
 save: Zastosuj
 save_and_restart: Zastosuj i uruchom ponownie
 see_more: Zobacz więcej
@@ -215,14 +219,6 @@ sides:
   left: Lewo
   right: Prawo
   top: Góra
-start:
-  message: >-
-    Witamy w Seelen UI, kompletnym środowisku pulpitu zawierającym menadżer
-    rozmieszczenia okien, który sprawi że korzystanie z systemu Windows stanie
-    się przyjemniejsze! Przejdź na wyższy poziom produktywności dzięki naszemu
-    intuicyjnemu interfejsowi i zaawansowanym funkcjom.
-  message_accent: Zwiększ swoją produktywność w świetnym stylu!
-  title: Witaj!
 toolbar:
   auto_hide: Automatyczne ukrywanie
   delay_to_hide: Opóźnienie ukrycia
@@ -329,6 +325,17 @@ weg:
   padding: Wysokość tła
   show_end_task: Pokaż zadanie końcowe na pasku zadań
   width: Szerokość
+welcome:
+  give_a_review: Wystaw recenzję
+  message: >-
+    Seelen UI to bezpłatne środowisko graficzne typu open source dla systemu
+    Windows. Tutaj masz pełną kontrolę nad wyglądem i zachowaniem pulpitu, co
+    pozwala dostosować każdy szczegół do Twojego przepływu pracy i stylu.
+  ok: Zacznijmy!
+  review: >-
+    Jeśli lubisz korzystać z interfejsu użytkownika Seelen, rozważ pozostawienie
+    recenzji w sklepie — Twoja opinia pomoże rozwijać i ulepszać projekt.
+  title: Witamy w interfejsie Seelen!
 widget:
   enable: Włącz ten widżet
   enable_for_monitor: Włącz na tym monitorze

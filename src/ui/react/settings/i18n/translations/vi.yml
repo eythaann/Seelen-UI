@@ -158,6 +158,10 @@ resources:
     Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không
     hoạt động đúng.
   see_on_website: Xem trên trang web
+review_request:
+  not_now: Không phải bây giờ
+  sure: Chắc chắn!
+  title: Bạn thích giao diện người dùng Seelen?
 save: Cứu
 save_and_restart: Lưu & Khởi động lại
 see_more: Xem thêm
@@ -214,14 +218,6 @@ sides:
   left: Bên trái
   right: Phải
   top: Đứng đầu
-start:
-  message: >-
-    Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
-    quản lý Windows được kết hợp để nâng cao trải nghiệm Windows của bạn! Khám
-    phá một kỷ nguyên mới của hiệu quả và đa nhiệm với giao diện trực quan và
-    các tính năng nâng cao của chúng tôi.
-  message_accent: Tối ưu hóa năng suất của bạn với phong cách!
-  title: Chào mừng!
 toolbar:
   auto_hide: Tự động ẩn
   delay_to_hide: Trì hoãn việc ẩn giấu
@@ -328,6 +324,18 @@ weg:
   padding: Đệm
   show_end_task: Hiển thị nhiệm vụ kết thúc trong thanh tác vụ
   width: Chiều rộng
+welcome:
+  give_a_review: Đưa ra đánh giá
+  message: >-
+    Seelen UI là môi trường máy tính để bàn nguồn mở và miễn phí dành cho
+    Windows. Tại đây, bạn có toàn quyền kiểm soát giao diện và hoạt động của màn
+    hình, cho phép bạn tùy chỉnh mọi chi tiết để phù hợp với quy trình làm việc
+    và phong cách của mình.
+  ok: Hãy bắt đầu!
+  review: >-
+    Nếu bạn thích sử dụng Seelen UI, hãy cân nhắc để lại đánh giá trên cửa hàng
+    - phản hồi của bạn sẽ giúp dự án phát triển và cải thiện.
+  title: Chào mừng bạn đến với giao diện người dùng Seelen!
 widget:
   enable: Kích hoạt tiện ích này
   enable_for_monitor: Bật trên màn hình này

@@ -157,6 +157,10 @@ resources:
     Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi
     dengan baik.
   see_on_website: Lihat di laman web
+review_request:
+  not_now: bukan sekarang
+  sure: Pasti!
+  title: Menikmati UI Seelen?
 save: Simpan
 save_and_restart: Jimat & mulakan semula
 see_more: Lihat lagi
@@ -213,14 +217,6 @@ sides:
   left: Dibiarkan
   right: Betul
   top: Atas
-start:
-  message: >-
-    Selamat datang ke Seelen UI, persekitaran desktop muktamad dengan Pengurus
-    Windows Tiling yang diperbadankan untuk meningkatkan pengalaman Windows
-    anda! Terokai era kecekapan baru dan multitasking dengan antara muka
-    intuitif dan ciri canggih kami.
-  message_accent: Mengoptimumkan produktiviti anda dengan gaya!
-  title: Selamat datang!
 toolbar:
   auto_hide: Menyembunyikan auto
   delay_to_hide: Bertangguh untuk bersembunyi
@@ -327,6 +323,19 @@ weg:
   padding: Padding
   show_end_task: Tunjukkan tugas akhir di bar tugas
   width: Lebar
+welcome:
+  give_a_review: Berikan Ulasan
+  message: >-
+    UI Seelen ialah persekitaran desktop sumber terbuka dan percuma untuk
+    Windows. Di sini anda mempunyai kawalan penuh ke atas rupa dan gelagat
+    desktop anda, membolehkan anda menyesuaikan setiap butiran agar sepadan
+    dengan aliran kerja dan gaya anda.
+  ok: Mari mulakan!
+  review: >-
+    Jika anda gemar menggunakan UI Seelen, pertimbangkan untuk meninggalkan
+    ulasan di kedai — maklum balas anda membantu projek berkembang dan bertambah
+    baik.
+  title: Selamat datang ke UI Seelen!
 widget:
   enable: Dayakan widget ini
   enable_for_monitor: Dayakan di monitor ini

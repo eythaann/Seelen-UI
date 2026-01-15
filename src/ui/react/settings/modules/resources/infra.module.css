@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 1fr;
-  gap: 10px;
+  gap: var(--spacing-s);
   width: 100%;
   height: 100%;
 
@@ -13,7 +13,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: var(--spacing-xs);
     border: 2px solid var(--color-gray-300);
     border-radius: 8px;
 
@@ -32,30 +32,30 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: var(--spacing-s);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-s);
 
   .reorderGroup {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--spacing-s);
   }
 
   .card {
     width: 100%;
     height: 120px;
-    padding: 10px;
+    padding: var(--spacing-s);
     border-radius: 18px;
 
     display: grid;
     grid-template-columns: 100px 1fr;
     grid-template-rows: min-content 1fr min-content;
-    gap: 4px 10px;
+    gap: var(--spacing-2xs) var(--spacing-s);
 
     background-color: var(--color-gray-50);
 
@@ -79,11 +79,11 @@
       align-items: center;
       justify-content: space-between;
       overflow: hidden;
-      gap: 8px;
+      gap: var(--spacing-xs);
 
       .title {
         font-weight: 600;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -92,20 +92,20 @@
       .actionsTop {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: var(--spacing-xs);
       }
     }
 
     .body {
       overflow: auto;
-      padding-right: 8px;
+      padding-right: var(--spacing-xs);
     }
 
     .footer {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      gap: 8px;
+      gap: var(--spacing-xs);
     }
   }
 }

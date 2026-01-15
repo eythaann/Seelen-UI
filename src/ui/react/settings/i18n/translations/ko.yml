@@ -150,6 +150,10 @@ resources:
   open_folder: 리소스 폴더 열기
   outdated: 이 리소스는 이전 버전의 Seelen UI용으로 설계되었으며 제대로 작동하지 않을 수 있습니다.
   see_on_website: 웹사이트에서 확인하세요
+review_request:
+  not_now: 지금은 아님
+  sure: 확신하는!
+  title: Seelen UI를 즐기고 계시나요?
 save: 저장
 save_and_restart: 저장 및 재시작
 see_more: 자세히 보기
@@ -204,12 +208,6 @@ sides:
   left: 왼쪽
   right: 오른쪽
   top: 위
-start:
-  message: >-
-    Seelen UI에 오신 것을 환영합니다. Windows 경험을 향상시키기 위해 타일링 윈도우 매니저가 포함된 궁극의 데스크탑
-    환경입니다! 직관적인 인터페이스와 고급 기능을 통해 효율성과 멀티태스킹의 새로운 시대를 탐험해 보세요.
-  message_accent: 스타일로 생산성을 최적화하세요!
-  title: 환영합니다!
 toolbar:
   auto_hide: 자동 숨기기
   delay_to_hide: 숨기기 지연
@@ -316,6 +314,14 @@ weg:
   padding: 안쪽 여백
   show_end_task: 작업 표시줄에 종료 작업 표시
   width: 너비
+welcome:
+  give_a_review: 리뷰를 남겨주세요
+  message: >-
+    Seelen UI는 Windows용 무료 오픈 소스 데스크톱 환경입니다. 여기에서 데스크탑의 모양과 동작을 완전히 제어할 수 있으므로
+    작업 흐름과 스타일에 맞게 모든 세부 사항을 사용자 정의할 수 있습니다.
+  ok: 시작하자!
+  review: Seelen UI를 즐겨 사용하신다면 스토어에 리뷰를 남겨보세요. 여러분의 피드백은 프로젝트 성장과 개선에 도움이 됩니다.
+  title: Seelen UI에 오신 것을 환영합니다!
 widget:
   enable: 이 위젯 활성화
   enable_for_monitor: 이 모니터에서 활성화

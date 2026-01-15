@@ -159,6 +159,10 @@ resources:
     Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a
     nemusí fungovat správně.
   see_on_website: Viz na webu
+review_request:
+  not_now: Teď ne
+  sure: Jasně!
+  title: Líbí se vám uživatelské rozhraní Seelen?
 save: Uložit
 save_and_restart: Uložit a restartovat
 see_more: Viz více
@@ -215,14 +219,6 @@ sides:
   left: Vlevo
   right: Vpravo
   top: Svršek
-start:
-  message: >-
-    Vítejte v SEELEN UI, Ultimate Desktop Environment s začleněným manažerem
-    oken, aby se zlepšil Vaší zkušenost se systémem Windows! Objevte novou éru
-    účinnosti a multitaskingu s naším intuitivním rozhraním a pokročilými
-    funkcemi.
-  message_accent: Optimalizujte svou produktivitu se stylem!
-  title: Vítejte!
 toolbar:
   auto_hide: Automaticky skrýt
   delay_to_hide: Zpoždění schování
@@ -329,6 +325,18 @@ weg:
   padding: Padding
   show_end_task: Zobrazení koncové úlohy na hlavním panelu
   width: Šířka
+welcome:
+  give_a_review: Dejte recenzi
+  message: >-
+    Seelen UI je bezplatné a open source desktopové prostředí pro Windows. Zde
+    máte plnou kontrolu nad tím, jak váš desktop vypadá a chová se, což vám
+    umožňuje přizpůsobit každý detail tak, aby odpovídal vašemu pracovnímu
+    postupu a stylu.
+  ok: Začněme!
+  review: >-
+    Pokud rádi používáte Seelen UI, zvažte zanechání recenze v obchodě – vaše
+    zpětná vazba pomáhá projektu růst a zlepšovat se.
+  title: Vítejte v uživatelském rozhraní Seelen!
 widget:
   enable: Povolení tohoto widgetu
   enable_for_monitor: Povolit na tomto monitoru

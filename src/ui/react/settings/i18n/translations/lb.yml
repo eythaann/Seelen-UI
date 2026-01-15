@@ -155,6 +155,10 @@ resources:
     Dës Ressource gouf fir eng méi al Versioun vu seelen UI entworf a sech net
     richteg schaffen.
   see_on_website: Gesinn op Websäit
+review_request:
+  not_now: Net elo
+  sure: Sécher!
+  title: Genéisst Seelen UI?
 save: Spuerwäit
 save_and_restart: Spuert & nei starten
 see_more: Méi gesinn
@@ -211,14 +215,6 @@ sides:
   left: Lénks
   right: Riets
   top: Uewen
-start:
-  message: >-
-    Wëllkomm fir ze gesinn Ui, den ultimativen Desktop Ëmfeld mat engem agebaute
-    Fournisseur Manager fir Är Windows Erfarung ze verbesseren! Entdeckt eng nei
-    Ära vun Effizienz a Multits mat eisen intuitiven Interface a
-    fortgeschratgeschen Features.
-  message_accent: Optimiséiert Är Produktivitéit mam Stil!
-  title: Wëllkomm!
 toolbar:
   auto_hide: Automatesch
   delay_to_hide: Verspéidung ze verstoppen
@@ -327,6 +323,18 @@ weg:
   padding: Padding
   show_end_task: Show Enn Aufgab an der Taskbar
   width: Breet
+welcome:
+  give_a_review: Gëff eng Iwwerpréiwung
+  message: >-
+    Seelen UI ass e gratis an Open Source Desktop-Ëmfeld fir Windows. Hei hutt
+    Dir voll Kontroll iwwer wéi Ären Desktop ausgesäit a behuelen, wat Iech
+    erlaabt all Detail ze personaliséieren fir Äre Workflow a Stil ze passen.
+  ok: Loosst eis ufänken!
+  review: >-
+    Wann Dir genéisst Seelen UI ze benotzen, betruecht eng Iwwerpréiwung am
+    Geschäft ze loossen - Äre Feedback hëlleft de Projet ze wuessen a
+    verbesseren.
+  title: Wëllkomm op Seelen UI!
 widget:
   enable: Aktivéiert dëse Widget
   enable_for_monitor: Aktivéiert op dësem Monitor

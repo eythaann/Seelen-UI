@@ -149,6 +149,10 @@ resources:
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
   see_on_website: ウェブサイトで見る
+review_request:
+  not_now: 今じゃない
+  sure: もちろん！
+  title: Seelen UI をお楽しみですか?
 save: 保存
 save_and_restart: 保存して再起動
 see_more: もっと見る
@@ -203,12 +207,6 @@ sides:
   left: 左
   right: 右
   top: 上
-start:
-  message: >-
-    SeelenUIにようこそ！ 組み込みのタイル型ウィンドウマネージャーを備えた究極のデスクトップ環境で、あなたのWindows での体験を向上させます！
-    直感的なインターフェースと高度な機能で効率的なマルチタスクの新時代を探求しましょう。
-  message_accent: あなた好みのスタイリングで生産性を最適化！
-  title: ようこそ！
 toolbar:
   auto_hide: 自動的に隠す
   delay_to_hide: 隠れるまでの遅延
@@ -315,6 +313,16 @@ weg:
   padding: 余白
   show_end_task: タスクバーに終了タスクを表示する
   width: ドックの幅
+welcome:
+  give_a_review: レビューを投稿する
+  message: >-
+    Seelen UI は、Windows 用の無料のオープンソース
+    デスクトップ環境です。ここでは、デスクトップの外観や動作を完全に制御でき、ワークフローやスタイルに合わせてあらゆる詳細をカスタマイズできます。
+  ok: 始めましょう！
+  review: >-
+    Seelen UI
+    の使用を楽しんでいる場合は、ストアにレビューを残すことを検討してください。あなたのフィードバックはプロジェクトの成長と改善に役立ちます。
+  title: Seelen UI へようこそ!
 widget:
   enable: このウィジェットを有効にする
   enable_for_monitor: このモニターで有効にする

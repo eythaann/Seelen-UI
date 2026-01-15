@@ -1,13 +1,13 @@
-.Header {
+.header {
   height: 100%;
   border-bottom: 1px solid var(--color-gray-200);
   font-weight: 600;
-  padding: 0 14px;
+  padding: 0 var(--spacing-s);
   display: flex;
   display: grid;
   grid-template-columns: 1fr min-content;
   align-items: center;
-  gap: 10px;
+  gap: var(--spacing-s);
   app-region: drag;
 
   button {
@@ -20,7 +20,7 @@
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-s);
     overflow: hidden;
 
     a:hover {
@@ -38,6 +38,6 @@
   .actions {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: var(--spacing-2xs);
   }
 }

@@ -157,6 +157,10 @@ resources:
     Aquest recurs va ser dissenyat per a una versió anterior de la interfície
     d'usuari de Seelen i pot no funcionar correctament.
   see_on_website: Veure al lloc web
+review_request:
+  not_now: Ara no
+  sure: Segur!
+  title: Us agrada la interfície d'usuari de Seelen?
 save: Estalviar
 save_and_restart: Desar i reiniciar
 see_more: Veure més
@@ -213,14 +217,6 @@ sides:
   left: Esquerre
   right: Dret
   top: Superior
-start:
-  message: >-
-    Benvingut a la interfície d'usuari de Seelen, l'entorn d'escriptori
-    definitiu amb un gestor de Windows de rajoles incorporat per millorar la
-    vostra experiència de Windows. Exploreu una nova era d’eficiència i
-    multitasca amb la nostra interfície intuïtiva i les funcions avançades.
-  message_accent: Optimitzeu la vostra productivitat amb estil.
-  title: Benvingut!
 toolbar:
   auto_hide: Auto amaga
   delay_to_hide: Tarda en amagar-se
@@ -327,6 +323,18 @@ weg:
   padding: Encoir
   show_end_task: Mostra la tasca final a la barra de tasques
   width: Amplada
+welcome:
+  give_a_review: Fes una ressenya
+  message: >-
+    Seelen UI és un entorn d'escriptori gratuït i de codi obert per a Windows.
+    Aquí teniu un control total sobre com es veu i es comporta el vostre
+    escriptori, cosa que us permet personalitzar tots els detalls perquè
+    coincideixin amb el vostre flux de treball i estil.
+  ok: Comencem!
+  review: >-
+    Si us agrada utilitzar Seelen UI, penseu a deixar una ressenya a la botiga:
+    els vostres comentaris ajuden el projecte a créixer i millorar.
+  title: Benvingut a Seelen UI!
 widget:
   enable: Activa aquest widget
   enable_for_monitor: Activa en aquest monitor

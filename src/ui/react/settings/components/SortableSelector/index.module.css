@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 10px;
+  gap: var(--spacing-s);
 }
 
 .box {
@@ -25,17 +25,17 @@
   }
 
   .list {
-    padding: 10px;
+    padding: var(--spacing-s);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--spacing-s);
     overflow-y: auto;
   }
 }
 
 .item {
-  padding: 8px;
-  border-radius: 8px;
+  padding: var(--spacing-xs);
+  border-radius: var(--config-border-radius);
   background-color: var(--color-white);
   cursor: grab;
   overflow: hidden;

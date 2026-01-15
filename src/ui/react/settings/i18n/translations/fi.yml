@@ -159,6 +159,10 @@ resources:
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se
     välttämättä toimi oikein.
   see_on_website: Katso nettisivuilta
+review_request:
+  not_now: Ei nyt
+  sure: Varma!
+  title: Pidätkö Seelen-käyttöliittymästä?
 save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 see_more: Katso lisää
@@ -215,14 +219,6 @@ sides:
   left: Vasen
   right: Oikea
   top: Ylhäältä
-start:
-  message: >-
-    Tervetuloa Seelen UI: hen, Ultimate Desktop -ympäristöön, jossa on
-    sisällytetty laatoitus Windows Manager, parantaaksesi Windows -kokemustasi!
-    Tutustu uuteen tehokkuuden ja monitehtavan aikakauteen intuitiivisella
-    rajapinnalla ja edistyneillä ominaisuuksilla.
-  message_accent: Optimoi tuottavuus tyylillä!
-  title: Tervetuloa!
 toolbar:
   auto_hide: Automaattinen piilo
   delay_to_hide: Viive piilottaa
@@ -329,6 +325,18 @@ weg:
   padding: Pehmuste
   show_end_task: Näyttää lopetetun tehtävän tehtäväpalkissa
   width: Leveys
+welcome:
+  give_a_review: Anna arvostelu
+  message: >-
+    Seelen UI on ilmainen ja avoimen lähdekoodin työpöytäympäristö Windowsille.
+    Täällä voit hallita täysin sitä, miten työpöytäsi näyttää ja käyttäytyy,
+    joten voit mukauttaa jokaisen yksityiskohdan työnkulkusi ja tyylisi
+    mukaiseksi.
+  ok: Aloitetaan!
+  review: >-
+    Jos pidät Seelen-käyttöliittymän käytöstä, harkitse arvostelun jättämistä
+    kauppaan – palautteesi auttaa projektia kasvamaan ja kehittymään.
+  title: Tervetuloa Seelen-käyttöliittymään!
 widget:
   enable: Ota tämä widget käyttöön
   enable_for_monitor: Ota käyttöön tällä näytöllä

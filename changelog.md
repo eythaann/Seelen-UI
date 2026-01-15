@@ -35,6 +35,7 @@
 - high cpu usage while user session inactive.
 - fix stale battery percentage on sleep wake up.
 - click on keyboard layout no changing the layout on the system.
+- window labels not being shown on dock.
 
 ## [2.4.11]
 

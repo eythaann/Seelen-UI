@@ -157,6 +157,10 @@ resources:
     Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na
     fyddai'n gweithio'n iawn.
   see_on_website: Gweler ar y wefan
+review_request:
+  not_now: Ddim nawr
+  sure: Cadarn!
+  title: Yn mwynhau Seelen UI?
 save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 see_more: Gweld mwy
@@ -213,14 +217,6 @@ sides:
   left: Chwith
   right: Dde
   top: Brigant
-start:
-  message: >-
-    Croeso i Seelen UI, yr amgylchedd bwrdd gwaith yn y pen draw gyda rheolwr
-    ffenestri teils corfforedig i wella'ch profiad Windows! Archwiliwch oes
-    newydd o effeithlonrwydd ac amldasgio gyda'n rhyngwyneb greddfol a'n
-    nodweddion uwch.
-  message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
-  title: Croeso!
 toolbar:
   auto_hide: Cuddio awto
   delay_to_hide: Oedi i guddio
@@ -327,6 +323,18 @@ weg:
   padding: Padin
   show_end_task: Dangos tasg diwedd yn y bar tasgau
   width: Lled
+welcome:
+  give_a_review: Rhowch Adolygiad
+  message: >-
+    Mae Seelen UI yn amgylchedd bwrdd gwaith ffynhonnell agored am ddim ar gyfer
+    Windows. Yma mae gennych reolaeth lawn dros sut mae'ch bwrdd gwaith yn
+    edrych ac yn ymddwyn, sy'n eich galluogi i addasu pob manylyn i gyd-fynd
+    â'ch llif gwaith a'ch steil.
+  ok: Gadewch i ni ddechrau!
+  review: >-
+    Os ydych chi'n mwynhau defnyddio Seelen UI, ystyriwch adael adolygiad ar y
+    siop - mae eich adborth yn helpu'r prosiect i dyfu a gwella.
+  title: Croeso i UI Seelen!
 widget:
   enable: Galluogi'r teclyn hwn
   enable_for_monitor: Galluogi ar y monitor hwn

@@ -185,6 +185,7 @@
     flex: 1;
     font-size: max(calc(var(--config-item-size) / 3), 12px);
     font-weight: 600;
+    z-index: 1;
 
     .vertical & {
       display: none;

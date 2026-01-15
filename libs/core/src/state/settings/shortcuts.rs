@@ -109,6 +109,7 @@ impl SluHotkey {
 
     pub fn system(mut self) -> Self {
         self.system = true;
+        self.readonly = true;
         self
     }
 

@@ -159,6 +159,10 @@ resources:
     Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u
     tista' ma taħdimx sew.
   see_on_website: Ara fuq il-websajt
+review_request:
+  not_now: Mhux issa
+  sure: Żgur!
+  title: Tgawdi Seelen UI?
 save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
 see_more: Ara aktar
@@ -215,14 +219,6 @@ sides:
   left: Xellug
   right: Dritt
   top: Quċċata
-start:
-  message: >-
-    Merħba għal Seelen UI, l-ambjent tad-desktop aħħari b'maniġġ tal-Windows
-    tal-madum inkorporat biex itejjeb l-esperjenza tal-Windows tiegħek! Esplora
-    era ġdida ta 'effiċjenza u multitasking bl-interface intuwittiv tagħna u
-    karatteristiċi avvanzati.
-  message_accent: Ottimizza l-produttività tiegħek bl-istil!
-  title: Merħba!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dewmien biex jinħbew
@@ -329,6 +325,18 @@ weg:
   padding: Ikkuttunar
   show_end_task: Uri l-kompitu finali fit-taskbar
   width: Wisa '
+welcome:
+  give_a_review: Agħti Reviżjoni
+  message: >-
+    Seelen UI huwa ambjent desktop b'xejn u open source għall-Windows. Hawnhekk
+    għandek kontroll sħiħ fuq kif id-desktop tiegħek jidher u jaġixxi, li
+    jippermettilek tippersonalizza kull dettall biex jaqbel mal-fluss tax-xogħol
+    u l-istil tiegħek.
+  ok: Nibdew!
+  review: >-
+    Jekk tieħu pjaċir tuża Seelen UI, ikkunsidra li tħalli reviżjoni fuq
+    il-maħżen — ir-rispons tiegħek jgħin lill-proġett jikber u jitjieb.
+  title: Merħba għal Seelen UI!
 widget:
   enable: Ippermetti dan il-widget
   enable_for_monitor: Jippermetti fuq dan il-monitor

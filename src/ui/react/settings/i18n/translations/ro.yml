@@ -159,6 +159,10 @@ resources:
     Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și
     este posibil să nu funcționeze corect.
   see_on_website: Vezi pe site
+review_request:
+  not_now: Nu acum
+  sure: Sigur!
+  title: Vă bucurați de Seelen UI?
 save: Salvați
 save_and_restart: Salvați și reporniți
 see_more: A se vedea mai mult
@@ -215,14 +219,6 @@ sides:
   left: Stânga
   right: Dreapta
   top: Top
-start:
-  message: >-
-    Bine ați venit la Seelen UI, mediul de desktop final cu un manager Windows
-    de gresie încorporat pentru a vă îmbunătăți experiența Windows! Explorați o
-    nouă eră de eficiență și multitasking cu interfața noastră intuitivă și
-    caracteristicile avansate.
-  message_accent: Optimizează -ți productivitatea cu stil!
-  title: Bine ati venit!
 toolbar:
   auto_hide: Ascunde auto
   delay_to_hide: Întârzie să te ascunzi
@@ -329,6 +325,19 @@ weg:
   padding: Căptușeală
   show_end_task: Afișarea sarcinii finale în bara de activități
   width: Lăţime
+welcome:
+  give_a_review: Dă o recenzie
+  message: >-
+    Seelen UI este un mediu desktop gratuit și open source pentru Windows. Aici
+    aveți control deplin asupra modului în care arată și se comportă desktopul,
+    permițându-vă să personalizați fiecare detaliu pentru a se potrivi cu fluxul
+    și stilul dvs. de lucru.
+  ok: Să începem!
+  review: >-
+    Dacă vă place să utilizați Seelen UI, luați în considerare să lăsați o
+    recenzie în magazin - feedbackul dvs. ajută proiectul să crească și să se
+    îmbunătățească.
+  title: Bun venit la Seelen UI!
 widget:
   enable: Activați acest widget
   enable_for_monitor: Activați pe acest monitor

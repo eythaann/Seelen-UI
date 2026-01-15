@@ -44,14 +44,14 @@
   }
 
   :global(.ant-pagination) {
-    margin-top: 10px !important;
+    margin-top: var(--spacing-s) !important;
     margin-bottom: 0 !important;
   }
 }
 
 .editModal {
   :global(.ant-modal-body) {
-    padding-right: 10px;
+    padding-right: var(--spacing-s);
   }
 
   :global(.ant-select) {
@@ -64,7 +64,7 @@
   bottom: 15px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--spacing-s);
 
   button {
     width: 80px;

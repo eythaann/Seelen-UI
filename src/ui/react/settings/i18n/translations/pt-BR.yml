@@ -157,6 +157,10 @@ resources:
     Esse recurso foi projetado para uma versão mais antiga da interface do
     usuário da Seelen e pode não funcionar corretamente.
   see_on_website: Veja no site
+review_request:
+  not_now: Agora não
+  sure: Clara!
+  title: Gostando da interface do Seelen?
 save: Salvar
 save_and_restart: Salve e reinicie
 see_more: Veja mais
@@ -213,14 +217,6 @@ sides:
   left: Esquerda
   right: Direita
   top: Topo
-start:
-  message: >-
-    Bem-vindo ao Seelen UI, o melhor ambiente de área de trabalho com um
-    gerenciador de janelas lado a lado incorporado para aprimorar sua
-    experiência com o Windows! Explore uma nova era de eficiência e multitarefa
-    com nossa interface intuitiva e recursos avançados.
-  message_accent: Otimize sua produtividade com estilo!
-  title: Bem-vindo!
 toolbar:
   auto_hide: Esconder automaticamente
   delay_to_hide: Demora para esconder
@@ -327,6 +323,18 @@ weg:
   padding: Preenchimento
   show_end_task: Mostrar tarefa final na barra de tarefas
   width: Largura
+welcome:
+  give_a_review: Dê uma avaliação
+  message: >-
+    Seelen UI é um ambiente de desktop gratuito e de código aberto para Windows.
+    Aqui você tem controle total sobre a aparência e o comportamento de sua área
+    de trabalho, permitindo personalizar cada detalhe para combinar com seu
+    fluxo de trabalho e estilo.
+  ok: Vamos começar!
+  review: >-
+    Se você gosta de usar a UI Seelen, considere deixar um comentário na loja –
+    seu feedback ajuda o projeto a crescer e melhorar.
+  title: Bem-vindo à UI da Seelen!
 widget:
   enable: Ativar esse widget
   enable_for_monitor: Ativar neste monitor

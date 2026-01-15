@@ -153,6 +153,10 @@ resources:
   open_folder: Ṣii folda Ipilẹṣẹ
   outdated: A ṣe orisun yii fun ẹya atijọ ti Silen Ui ati pe ko le ma ṣiṣẹ daradara.
   see_on_website: Wo lori aaye ayelujara
+review_request:
+  not_now: Ko bayi
+  sure: Daju!
+  title: Ngbadun Seelen UI?
 save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
 see_more: Wo diẹ sii
@@ -207,13 +211,6 @@ sides:
   left: Osi
   right: Titọ
   top: Oke
-start:
-  message: >-
-    Kaabọ si Sielen UI, agbegbe tabili ti o gaju pẹlu ipilẹ Windows Manager lati
-    jẹki iriri Windows rẹ! Ṣawari akoko ti o ni ṣiṣe ati multitasking pẹlu wa
-    ati awọn ẹya ti ilọsiwaju.
-  message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
-  title: Kaabọ!
 toolbar:
   auto_hide: Ibi ipamọ aifọwọyi
   delay_to_hide: Idaduro lati tọju
@@ -320,6 +317,17 @@ weg:
   padding: Fidigọdi silẹ
   show_end_task: Fihan iṣẹ ṣiṣe ni iṣẹ-ṣiṣe
   width: Fifẹ
+welcome:
+  give_a_review: Fun Atunwo
+  message: >-
+    Seelen UI jẹ ọfẹ ati agbegbe tabili orisun ṣiṣi fun Windows. Nibi o ni
+    iṣakoso ni kikun lori bii tabili tabili rẹ ṣe n wo ati ihuwasi, gbigba ọ
+    laaye lati ṣe akanṣe gbogbo alaye lati baamu iṣan-iṣẹ ati aṣa rẹ.
+  ok: Jẹ ká bẹrẹ!
+  review: >-
+    Ti o ba gbadun lilo Seelen UI, ronu fifi atunyẹwo silẹ lori ile itaja - esi
+    rẹ ṣe iranlọwọ fun iṣẹ akanṣe lati dagba ati ilọsiwaju.
+  title: Kaabọ si Seelen UI!
 widget:
   enable: Mu ẹrọ ailorukọ yii ṣiṣẹ
   enable_for_monitor: Mu ṣiṣẹ lori atẹle yii

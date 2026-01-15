@@ -37,7 +37,7 @@ body {
 }
 
 hr {
-  margin: 5px 0;
+  margin: var(--spacing-2xs) 0;
 }
 
 b {
@@ -54,5 +54,5 @@ b {
 }
 
 .ant-modal-content {
-  padding: 12px 24px !important;
+  padding: var(--spacing-m) var(--spacing-xl) !important;
 }

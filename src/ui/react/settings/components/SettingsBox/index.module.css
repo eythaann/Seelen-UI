@@ -2,23 +2,24 @@
   flex: 1;
   background-color: light-dark(rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.1));
   border-radius: var(--config-border-radius);
-  padding: 10px 14px;
+  padding: var(--spacing-s);
   overflow: hidden;
 
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-s);
   }
 
   .content {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--spacing-s);
   }
 
   .setting {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 12px;
+    gap: var(--spacing-s);
+    align-items: center;
 
     :global(.ant-input) {
       max-width: 150px;
@@ -33,12 +34,13 @@
     }
 
     .info {
+      height: 100%;
       grid-column: 1 / 2;
       display: flex;
       flex-direction: column;
 
       .label {
-        gap: 5px;
+        gap: var(--spacing-2xs);
         display: flex;
         align-items: center;
         font-weight: 600;
@@ -59,20 +61,20 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 6px;
+      gap: var(--spacing-xs);
     }
   }
 
   .subgroup {
     .subtitle {
-      margin-bottom: 10px;
-      font-size: 1.1rem;
+      margin-bottom: var(--spacing-xs);
+      font-size: 1rem;
       line-height: 1.4em;
       font-weight: 600;
     }
 
     .content {
-      padding-left: 10px;
+      padding-left: var(--spacing-s);
       border-left: 1.5px solid light-dark(#0002, #fff2);
 
       .label {

@@ -2,7 +2,6 @@ import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import type { SluHotkey } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Input, Switch, Tooltip } from "antd";
-import Compact from "antd/es/space/Compact";
 import { cloneDeep } from "lodash";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -74,9 +73,7 @@ export function Shortcuts() {
 
       <SettingsGroup>{groups.virtualDesktop.main.map(mapHokey)}</SettingsGroup>
 
-      <SettingsGroup>
-        {groups.virtualDesktop.switch.map(mapHokey)}
-      </SettingsGroup>
+      <SettingsGroup>{groups.virtualDesktop.switch.map(mapHokey)}</SettingsGroup>
 
       <SettingsGroup>{groups.virtualDesktop.move.map(mapHokey)}</SettingsGroup>
 
@@ -86,13 +83,9 @@ export function Shortcuts() {
 
       <SettingsGroup>{groups.windowManager.sizing.map(mapHokey)}</SettingsGroup>
 
-      <SettingsGroup>
-        {groups.windowManager.positioning.map(mapHokey)}
-      </SettingsGroup>
+      <SettingsGroup>{groups.windowManager.positioning.map(mapHokey)}</SettingsGroup>
 
-      <SettingsGroup>
-        {groups.windowManager.tilingFocus.map(mapHokey)}
-      </SettingsGroup>
+      <SettingsGroup>{groups.windowManager.tilingFocus.map(mapHokey)}</SettingsGroup>
 
       {/* TODO implement live layout modification */}
       {/* <SettingsGroup>{groups.windowManager.tilingLayout.map(mapHokey)}</SettingsGroup> */}
@@ -112,15 +105,20 @@ interface ShortcutProps {
   onChanged: (keys: string[]) => void;
 }
 
-function Shortcut({ hotkey: { action, keys }, onChanged }: ShortcutProps) {
+function Shortcut({ hotkey: { action, keys, readonly, system }, onChanged }: ShortcutProps) {
   const { t } = useTranslation();
 
   const args: Record<string, number | string> = "index" in action ? { 0: action.index } : {};
 
   function onEdit() {
+    if (readonly || system) {
+      return;
+    }
+
     invoke(SeelenCommand.RequestToUserInputShortcut, {
       callbackEvent: "finished",
     });
+
     Widget.getCurrent().webview.once<null | string[]>("finished", (e) => {
       if (e.payload) {
         onChanged(e.payload);
@@ -132,14 +130,9 @@ function Shortcut({ hotkey: { action, keys }, onChanged }: ShortcutProps) {
     <SettingsOption
       label={t(`shortcuts.labels.${action.name}`, args)}
       action={
-        <Compact>
-          <Input value={keys.join(" + ")} readOnly />
-          <Tooltip title={t("shortcuts.readonly_tooltip")}>
-            <Button onClick={onEdit} style={{ minWidth: 32 }}>
-              <Icon iconName="AiOutlineEdit" />
-            </Button>
-          </Tooltip>
-        </Compact>
+        <Tooltip title={readonly || system ? t("shortcuts.readonly_tooltip") : undefined} placement="left">
+          <Input value={keys.join(" + ")} readOnly onClick={onEdit} />
+        </Tooltip>
       }
     />
   );

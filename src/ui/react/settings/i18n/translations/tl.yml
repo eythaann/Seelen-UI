@@ -163,6 +163,10 @@ resources:
     Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
     Seelen UI at maaaring hindi gumana nang maayos.
   see_on_website: Tingnan sa website
+review_request:
+  not_now: Hindi ngayon
+  sure: Oo naman!
+  title: Nasisiyahan sa Seelen UI?
 save: I -save
 save_and_restart: I -save at i -restart
 see_more: Makita pa
@@ -219,14 +223,6 @@ sides:
   left: Kaliwa
   right: Tama
   top: Tuktok
-start:
-  message: >-
-    Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
-    may isang isinama na tiling windows manager upang mapahusay ang iyong
-    karanasan sa Windows! Galugarin ang isang bagong panahon ng kahusayan at
-    multitasking sa aming intuitive interface at mga advanced na tampok.
-  message_accent: I -optimize ang iyong pagiging produktibo sa estilo!
-  title: Maligayang pagdating!
 toolbar:
   auto_hide: Auto itago
   delay_to_hide: Delay sa pagtatago
@@ -333,6 +329,19 @@ weg:
   padding: Padding
   show_end_task: Ipakita ang pagtatapos ng gawain sa taskbar
   width: Lapad
+welcome:
+  give_a_review: Magbigay ng Review
+  message: >-
+    Ang Seelen UI ay isang libre at open source na desktop environment para sa
+    Windows. Dito mayroon kang ganap na kontrol sa hitsura at pag-uugali ng
+    iyong desktop, na nagbibigay-daan sa iyong i-customize ang bawat detalye
+    upang tumugma sa iyong daloy ng trabaho at istilo.
+  ok: Magsimula na tayo!
+  review: >-
+    Kung masisiyahan ka sa paggamit ng Seelen UI, isaalang-alang ang pag-iwan ng
+    review sa tindahan — ang iyong feedback ay nakakatulong sa proyekto na
+    lumago at umunlad.
+  title: Maligayang pagdating sa Seelen UI!
 widget:
   enable: Paganahin ang widget na ito
   enable_for_monitor: Paganahin sa monitor na ito
