@@ -82,7 +82,7 @@
     "readable-types": "^4.0.0",
     "real-react-dom": "npm:react-dom@^18.2.0",
     "redux": "^5.0.1",
-    "svelte": "^5.46.1",
+    "svelte": "^5.46.4",
     "svelte-check": "^4.3.5",
     "toml": "^3.0.0",
     "tsx": "^4.19.3",
