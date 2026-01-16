@@ -1,9 +1,9 @@
 %common {
-  padding: 0.5em 0.75em;
-  border-radius: 0.5em;
+  padding: 0.25em 0.5em;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  gap: 0.75em;
+  gap: 0.5em;
 }
 
 button[data-skin="transparent"] {
