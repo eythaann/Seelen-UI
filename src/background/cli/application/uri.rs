@@ -5,8 +5,8 @@ use std::{
 
 use itertools::Itertools;
 use seelen_core::{
-    resource::{Resource, ResourceKind, SluResource, SluResourceFile},
-    state::{CssStyles, IconPack, SluPopupConfig, SluPopupContent, Wallpaper},
+    resource::{Resource, ResourceId, ResourceKind, SluResource, SluResourceFile},
+    state::{CssStyles, IconPack, SluPopupConfig, SluPopupContent, Wallpaper, WallpaperCollection},
 };
 use tauri::Listener;
 use uuid::Uuid;
@@ -157,43 +157,57 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
     let config = resource_to_popup_config(resource)?;
     pupups_manager.update(popup_id, config)?;
 
-    let id = resource.id;
-    let friendly_id = resource.friendly_id.to_string();
+    let used_id = ResourceId::Remote(resource.id);
     let kind = resource.kind.clone();
+
     let popup_id = *popup_id;
+    let display_name = {
+        let state = FULL_STATE.load();
+        resource
+            .metadata
+            .display_name
+            .get(state.locale())
+            .to_owned()
+    };
 
     let webview = pupups_manager
         .get_window_handle(&popup_id)
         .ok_or("Popup not found")?;
-    let token = webview.once(format!("resource::{id}::enable"), move |_e| {
+    let event = format!("resource::{}::enable", resource.id);
+
+    let token = webview.once(event, move |_e| {
         std::thread::spawn(move || {
             FULL_STATE.rcu(move |state| {
                 let mut state = state.cloned();
                 match kind {
                     ResourceKind::Theme => {
-                        state
-                            .settings
-                            .active_themes
-                            .push(friendly_id.clone().into());
+                        state.settings.active_themes.push(used_id.clone().into());
                     }
                     ResourceKind::IconPack => {
                         state
                             .settings
                             .active_icon_packs
-                            .push(friendly_id.clone().into());
+                            .push(used_id.clone().into());
                     }
                     ResourceKind::Widget => {
                         state
                             .settings
-                            .set_widget_enabled(&friendly_id.clone().into(), true);
+                            .set_widget_enabled(&used_id.clone().into(), true);
                     }
                     ResourceKind::Wallpaper => {
-                        // TODO: HANDLE BY NEW COLLECTION
+                        let collection = WallpaperCollection {
+                            id: Uuid::new_v4(),
+                            name: display_name.clone(),
+                            wallpapers: vec![used_id.clone().into()],
+                        };
+                        state.settings.by_widget.wall.default_collection = Some(collection.id);
+                        state.settings.wallpaper_collections.push(collection);
                     }
                     _ => {}
                 }
                 state
             });
+
             log_error!(FULL_STATE.load().write_settings());
             log_error!(POPUPS_MANAGER.lock().close_popup(&popup_id));
         });
