@@ -68,7 +68,7 @@ seelen-core = { path = "libs/core" }
 slu-ipc = { path = "libs/slu-ipc" }
 slu-utils = { path = "libs/utils" }
 positioning = { path = "libs/positioning" }
-sysinfo = "0.30.13"
+sysinfo = "0.37.2"
 tauri = "2.9.5"
 tauri-build = "2.5.3"
 tauri-plugin-autostart = "2.5.1"
