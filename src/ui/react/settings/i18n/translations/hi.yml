@@ -153,6 +153,7 @@ resources:
   delete: संसाधन हटाएं
   discover: अधिक संसाधनों की खोज करें
   has_update: एक अपडेट उपलब्ध है
+  high_impact: प्रदर्शन पर उच्च प्रभाव
   import_wallpapers: स्थानीय वॉलपेपर आयात करें
   open_folder: संसाधन फ़ोल्डर खोलें
   outdated: >-

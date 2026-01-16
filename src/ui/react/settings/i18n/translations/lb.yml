@@ -149,6 +149,7 @@ resources:
   delete: Läschen Ressource
   discover: Entdeckt méi Ressourcen
   has_update: En Update ass verfügbar
+  high_impact: Héich Impakt op Leeschtung
   import_wallpapers: Import lokal Wallpapers
   open_folder: Oppen Ressource Dossier
   outdated: >-

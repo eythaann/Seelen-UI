@@ -151,6 +151,7 @@ resources:
   delete: Dzēst resursu
   discover: Atklājiet vairāk resursu
   has_update: Ir pieejams atjauninājums
+  high_impact: Liela ietekme uz veiktspēju
   import_wallpapers: Importēt vietējās tapetes
   open_folder: Atvērt resursu mapi
   outdated: >-

@@ -151,6 +151,7 @@ resources:
   delete: Excluir recursos
   discover: Descubra mais recursos
   has_update: Uma atualização está disponível
+  high_impact: Alto impacto no desempenho
   import_wallpapers: Importar papéis de parede locais
   open_folder: Pasta de recursos aberta
   outdated: >-

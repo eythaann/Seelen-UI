@@ -151,6 +151,7 @@ resources:
   delete: Видалити ресурс
   discover: Відкрийте для себе більше ресурсів
   has_update: Доступне оновлення
+  high_impact: Великий вплив на продуктивність
   import_wallpapers: Імпортувати місцеві шпалери
   open_folder: Відкрийте папку з ресурсами
   outdated: >-

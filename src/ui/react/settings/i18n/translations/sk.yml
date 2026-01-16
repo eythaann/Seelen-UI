@@ -153,6 +153,7 @@ resources:
   delete: Vymazať zdroj
   discover: Objavte ďalšie zdroje
   has_update: K dispozícii je aktualizácia
+  high_impact: Vysoký vplyv na výkon
   import_wallpapers: Import miestnych tapiet
   open_folder: Otvorenie priečinka so zdrojmi
   outdated: >-

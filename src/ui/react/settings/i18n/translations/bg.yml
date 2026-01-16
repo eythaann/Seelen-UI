@@ -153,6 +153,7 @@ resources:
   delete: Изтриване на ресурс
   discover: Открийте още ресурси
   has_update: Налична е актуализация
+  high_impact: Силно въздействие върху производителността
   import_wallpapers: Импортиране на местни тапети
   open_folder: Отваряне на папката с ресурси
   outdated: >-

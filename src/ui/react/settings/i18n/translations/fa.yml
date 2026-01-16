@@ -151,6 +151,7 @@ resources:
   delete: منبع را حذف کنید
   discover: منابع بیشتری را کشف کنید
   has_update: به روزرسانی در دسترس است
+  high_impact: تاثیر زیاد بر عملکرد
   import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
   open_folder: پوشه منبع باز
   outdated: >-

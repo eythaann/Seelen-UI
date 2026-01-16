@@ -153,6 +153,7 @@ resources:
   delete: Usuń zasób
   discover: Odkryj więcej zasobów
   has_update: Aktualizacja jest dostępna
+  high_impact: Duży wpływ na wydajność
   import_wallpapers: Import lokalnych tapet
   open_folder: Otwórz folder zasobów
   outdated: >-

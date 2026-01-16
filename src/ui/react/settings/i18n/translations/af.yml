@@ -151,6 +151,7 @@ resources:
   delete: Vee hulpbron uit
   discover: Ontdek meer bronne
   has_update: '''N Opdatering is beskikbaar'
+  high_impact: Hoë impak op prestasie
   import_wallpapers: Voer plaaslike agtergronde in
   open_folder: Open Resource Folder
   outdated: >-

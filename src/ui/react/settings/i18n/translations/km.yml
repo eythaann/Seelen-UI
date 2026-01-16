@@ -149,6 +149,7 @@ resources:
   delete: លុបធនធាន
   discover: ស្វែងយល់ពីធនធានបន្ថែម
   has_update: ការធ្វើបច្ចុប្បន្នភាពមាន
+  high_impact: ឥទ្ធិពលខ្ពស់លើការអនុវត្ត
   import_wallpapers: នាំចូលផ្ទាំងរូបភាពក្នុងស្រុក
   open_folder: បើកថតធនធាន
   outdated: >-

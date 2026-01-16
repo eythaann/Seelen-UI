@@ -151,6 +151,7 @@ resources:
   delete: Kaynağı Sil
   discover: Daha fazla kaynak keşfedin
   has_update: Bir güncelleme mevcuttur
+  high_impact: Performans üzerinde yüksek etki
   import_wallpapers: Yerel duvar kağıtlarını içe aktarma
   open_folder: Kaynak klasörünü aç
   outdated: >-

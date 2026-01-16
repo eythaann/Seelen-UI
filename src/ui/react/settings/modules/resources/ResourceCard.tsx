@@ -23,9 +23,10 @@ interface ResourceCardProps {
   kind: ResourceKind;
   resource: AnyResource;
   actions?: React.ReactNode;
+  body?: React.ReactNode;
 }
 
-export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
+export function ResourceCard({ resource, kind, actions, body }: ResourceCardProps) {
   const [hasUpdate, setHasUpdate] = useState(false);
   const isCorrupted = kind === "Wallpaper" && $corruptedWallpapers.value.has(resource.id);
 
@@ -89,7 +90,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
         <ResourceText className={cs.title} text={resource.metadata.displayName} />
 
         <div className={cs.actionsTop}>
-          {!resource.id.startsWith("@") && (
+          {!resource.id.startsWith("@") && !hasUpdate && (
             <Tooltip title={t("resources.see_on_website")}>
               <Button
                 type="link"
@@ -118,7 +119,7 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
       </div>
 
       <div className={cs.body}>
-        <ResourceTextAsMarkdown text={resource.metadata.description} />
+        {body || <ResourceTextAsMarkdown text={resource.metadata.description} />}
       </div>
 
       <div className={cs.footer}>

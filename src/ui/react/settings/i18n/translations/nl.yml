@@ -149,6 +149,7 @@ resources:
   delete: Verwijder resource
   discover: Ontdek meer bronnen
   has_update: Er is een update beschikbaar
+  high_impact: Grote impact op de prestaties
   import_wallpapers: Lokale achtergronden importeren
   open_folder: Map met bronnen openen
   outdated: >-

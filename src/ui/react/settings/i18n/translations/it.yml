@@ -153,6 +153,7 @@ resources:
   delete: Elimina risorsa
   discover: Scoprire altre risorse
   has_update: È disponibile un aggiornamento
+  high_impact: Elevato impatto sulle prestazioni
   import_wallpapers: Importazione di sfondi locali
   open_folder: Aprire la cartella delle risorse
   outdated: >-

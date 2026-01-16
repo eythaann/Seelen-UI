@@ -150,6 +150,7 @@ resources:
   delete: සම්පත මකන්න
   discover: තවත් සම්පත් සොයා ගන්න
   has_update: යාවත්කාලීන කිරීමක් තිබේ
+  high_impact: කාර්ය සාධනය කෙරෙහි ඉහළ බලපෑමක්
   import_wallpapers: දේශීය බිතුපත් ආනයනය කරන්න
   open_folder: සම්පත් ෆෝල්ඩරය විවෘත කරන්න
   outdated: >-

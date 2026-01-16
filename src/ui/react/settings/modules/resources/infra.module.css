@@ -149,3 +149,30 @@
     color: var(--color-red-900);
   }
 }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2xs);
+
+  .tag {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-2xs);
+    border-radius: 6px;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-600);
+    font-size: 0.7rem;
+    line-height: 1em;
+
+    &.warn {
+      background-color: light-dark(#ffffb9, #4e4400);
+      color: var(--color-yellow-500);
+    }
+
+    &.danger {
+      background-color: var(--color-red-100);
+      color: var(--color-red-600);
+    }
+  }
+}

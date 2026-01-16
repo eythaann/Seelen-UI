@@ -148,6 +148,7 @@ resources:
   delete: Delete Resource
   discover: Discover more resources
   has_update: An update is available
+  high_impact: High impact on performance
   import_wallpapers: Import local wallpapers
   open_folder: Open resource folder
   outdated: >-

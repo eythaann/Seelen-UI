@@ -147,6 +147,7 @@ resources:
   delete: ລົບລ້າງຊັບພະຍາກອນ
   discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ
   has_update: ມີການປັບປຸງໃຫມ່
+  high_impact: ຜົນກະທົບສູງຕໍ່ການປະຕິບັດ
   import_wallpapers: ນໍາເຂົ້າຮູບວໍເປເປີທ້ອງຖິ່ນ
   open_folder: Open Opence Folder
   outdated: >-

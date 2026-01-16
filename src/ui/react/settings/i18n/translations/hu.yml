@@ -150,6 +150,7 @@ resources:
   delete: Az erőforrás törlése
   discover: További források felfedezése
   has_update: Frissítés érhető el
+  high_impact: Nagy hatás a teljesítményre
   import_wallpapers: Helyi háttérképek importálása
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-

@@ -151,6 +151,7 @@ resources:
   delete: Ištrinti šaltinį
   discover: Atraskite daugiau išteklių
   has_update: Galimas atnaujinimas
+  high_impact: Didelis poveikis našumui
   import_wallpapers: Importuoti vietinius ekrano užsklandas
   open_folder: Atidarykite išteklių aplanką
   outdated: >-

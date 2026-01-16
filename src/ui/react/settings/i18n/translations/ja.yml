@@ -145,6 +145,7 @@ resources:
   delete: リソースを削除します
   discover: その他のリソース
   has_update: アップデートが利用可能です
+  high_impact: パフォーマンスへの大きな影響
   import_wallpapers: ローカル壁紙のインポート
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。

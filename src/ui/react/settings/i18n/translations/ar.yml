@@ -147,6 +147,7 @@ resources:
   delete: حذف المورد
   discover: اكتشف المزيد من الموارد
   has_update: تحديث متاح
+  high_impact: تأثير كبير على الأداء
   import_wallpapers: استيراد الخلفيات المحلية
   open_folder: فتح مجلد الموارد
   outdated: تم تصميم هذا المورد لإصدار أقدم من Seelen UI وقد لا يعمل بشكل صحيح.

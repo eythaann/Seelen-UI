@@ -149,6 +149,7 @@ resources:
   delete: წაშალეთ რესურსი
   discover: აღმოაჩინეთ მეტი რესურსი
   has_update: განახლება ხელმისაწვდომია
+  high_impact: მაღალი გავლენა შესრულებაზე
   import_wallpapers: ადგილობრივი ფონების იმპორტი
   open_folder: ღია რესურსების საქაღალდე
   outdated: >-

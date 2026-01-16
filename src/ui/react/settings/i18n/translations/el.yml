@@ -154,6 +154,7 @@ resources:
   delete: Διαγραφή πόρου
   discover: Ανακαλύψτε περισσότερους πόρους
   has_update: Μια ενημέρωση είναι διαθέσιμη
+  high_impact: Υψηλό αντίκτυπο στην απόδοση
   import_wallpapers: Εισαγωγή τοπικών ταπετσαριών
   open_folder: Άνοιγμα φακέλου πόρων
   outdated: >-

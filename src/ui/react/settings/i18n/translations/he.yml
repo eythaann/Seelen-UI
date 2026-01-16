@@ -147,6 +147,7 @@ resources:
   delete: מחק משאב
   discover: לגלות משאבים נוספים
   has_update: ניתן לקבל עדכון
+  high_impact: השפעה רבה על הביצועים
   import_wallpapers: ייבא טפטים מקומיים
   open_folder: פתיחת תיקיית משאבים
   outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.

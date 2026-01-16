@@ -150,6 +150,7 @@ resources:
   delete: Resurs silmək
   discover: Daha çox mənbəyi kəşf edin
   has_update: Bir yeniləmə mövcuddur
+  high_impact: Performansa yüksək təsir
   import_wallpapers: Yerli divar kağızları idxal edin
   open_folder: Açıq Resurs qovluğu
   outdated: >-

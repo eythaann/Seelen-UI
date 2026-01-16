@@ -153,6 +153,7 @@ resources:
   delete: Poistaa resurssi
   discover: Löydä lisää resursseja
   has_update: Päivitys on käytettävissä
+  high_impact: Suuri vaikutus suorituskykyyn
   import_wallpapers: Tuo paikallisia taustakuvia
   open_folder: Avaa resurssikansio
   outdated: >-

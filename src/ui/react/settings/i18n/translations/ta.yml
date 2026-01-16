@@ -152,6 +152,7 @@ resources:
   delete: வளத்தை நீக்கு
   discover: மேலும் ஆதாரங்களைக் கண்டறியவும்
   has_update: புதுப்பிப்பு கிடைக்கிறது
+  high_impact: செயல்திறனில் அதிக தாக்கம்
   import_wallpapers: உள்ளூர் வால்பேப்பர்களை இறக்குமதி செய்யுங்கள்
   open_folder: திறந்த வள கோப்புறை
   outdated: >-

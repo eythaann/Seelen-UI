@@ -112,4 +112,9 @@
       padding: var(--spacing-xs) var(--spacing-s);
     }
   }
+
+  /* Reset last item margin */
+  *:last-child {
+    margin-bottom: 0;
+  }
 }

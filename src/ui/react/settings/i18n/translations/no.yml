@@ -151,6 +151,7 @@ resources:
   delete: Slett ressurs
   discover: Oppdag flere ressurser
   has_update: En oppdatering er tilgjengelig
+  high_impact: Høy innvirkning på ytelsen
   import_wallpapers: Importer lokale bakgrunnsbilder
   open_folder: Åpne ressursmappe
   outdated: >-

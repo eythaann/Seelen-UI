@@ -153,6 +153,7 @@ resources:
   delete: Ștergeți resursa
   discover: Descoperiți mai multe resurse
   has_update: O actualizare este disponibilă
+  high_impact: Impact mare asupra performanței
   import_wallpapers: Importați imagini de fundal locale
   open_folder: Deschideți folderul de resurse
   outdated: >-

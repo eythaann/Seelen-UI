@@ -151,6 +151,7 @@ resources:
   delete: Избриши ресурс
   discover: Откријте више ресурса
   has_update: Доступно је ажурирање
+  high_impact: Велики утицај на перформансе
   import_wallpapers: Увоз локалне позадине
   open_folder: Отворите мапу ресурса
   outdated: >-

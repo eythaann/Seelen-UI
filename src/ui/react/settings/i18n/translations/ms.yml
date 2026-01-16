@@ -151,6 +151,7 @@ resources:
   delete: Padam sumber
   discover: Cari lebih banyak sumber
   has_update: Kemas kini ada
+  high_impact: Kesan tinggi terhadap prestasi
   import_wallpapers: Mengimport kertas dinding tempatan
   open_folder: Buka Folder Sumber
   outdated: >-

@@ -153,6 +153,7 @@ resources:
   delete: Resurslarni o'chirish
   discover: Ko'proq resurslarni kashf eting
   has_update: Yangilanish mavjud
+  high_impact: Ishlashning yuqori ta'siri
   import_wallpapers: Mahalliy fon rasmlarini import qilish
   open_folder: Resurslar jildini oching
   outdated: >-

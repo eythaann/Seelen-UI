@@ -151,6 +151,7 @@ resources:
   delete: Radera resurs
   discover: Upptäck fler resurser
   has_update: En uppdatering är tillgänglig
+  high_impact: Hög inverkan på prestanda
   import_wallpapers: Importera lokala bakgrundsbilder
   open_folder: Öppna resursmappen
   outdated: >-

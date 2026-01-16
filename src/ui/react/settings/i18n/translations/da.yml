@@ -151,6 +151,7 @@ resources:
   delete: Slet ressource
   discover: Opdag flere ressourcer
   has_update: En opdatering er tilgængelig
+  high_impact: Stor indflydelse på ydeevnen
   import_wallpapers: Importer lokale baggrunde
   open_folder: Åbn ressourcemappen
   outdated: >-

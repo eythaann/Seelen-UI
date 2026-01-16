@@ -150,6 +150,7 @@ resources:
   delete: Ressurss kustutama
   discover: Avasta rohkem ressursse
   has_update: Värskendus on saadaval
+  high_impact: Suur mõju jõudlusele
   import_wallpapers: Kohalike taustapiltide importimine
   open_folder: Avage ressursside kaust
   outdated: >-

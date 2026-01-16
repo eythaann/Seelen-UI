@@ -155,6 +155,7 @@ resources:
   delete: Ressource löschen
   discover: Weitere Ressourcen entdecken
   has_update: Ein Update ist verfügbar
+  high_impact: Hoher Einfluss auf die Leistung
   import_wallpapers: Lokale Hintergrundbilder importieren
   open_folder: Ressourcenordner öffnen
   outdated: >-

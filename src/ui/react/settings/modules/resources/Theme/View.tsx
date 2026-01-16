@@ -9,6 +9,7 @@ import type { RootState } from "../../shared/store/domain.ts";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 
 import { ThemeConfigDefinition } from "./components/ThemeConfigDefinition.tsx";
+import { ResourceTextAsMarkdown } from "libs/ui/react/components/ResourceText/index.tsx";
 
 export function ThemeView() {
   const { t } = useTranslation();
@@ -31,6 +32,10 @@ export function ThemeView() {
 
   return (
     <>
+      <SettingsGroup>
+        <ResourceTextAsMarkdown text={theme.metadata.description} />
+      </SettingsGroup>
+
       <SettingsGroup>
         <SettingsOption
           label={t("reset_all_to_default")}

@@ -151,6 +151,7 @@ resources:
   delete: Esborra el recurs
   discover: Descobriu més recursos
   has_update: Hi ha disponible una actualització
+  high_impact: Alt impacte en el rendiment
   import_wallpapers: Importa fons de pantalla locals
   open_folder: Obrir la carpeta de recursos
   outdated: >-

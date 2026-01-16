@@ -149,6 +149,7 @@ resources:
   delete: Izbriši resurs
   discover: Otkrijte više resursa
   has_update: Dostupno je ažuriranje
+  high_impact: Veliki uticaj na performanse
   import_wallpapers: Uvoz lokalnih pozadina
   open_folder: Otvorite mapu resursa
   outdated: >-

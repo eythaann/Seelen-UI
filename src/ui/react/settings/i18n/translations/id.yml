@@ -153,6 +153,7 @@ resources:
   delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya
   has_update: Pembaruan tersedia
+  high_impact: Dampak tinggi pada kinerja
   import_wallpapers: Impor wallpaper lokal
   open_folder: Buka folder sumber daya
   outdated: >-

@@ -151,6 +151,7 @@ resources:
   delete: Baliabidea ezabatu
   discover: Ezagutu baliabide gehiago
   has_update: Eguneratze bat eskuragarri dago
+  high_impact: Errendimenduan eragin handia
   import_wallpapers: Inportatu tokiko horma-irudiak
   open_folder: Baliabide irekiko karpeta
   outdated: >-

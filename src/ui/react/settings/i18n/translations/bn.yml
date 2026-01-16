@@ -153,6 +153,7 @@ resources:
   delete: সংস্থান মুছুন
   discover: আরও সংস্থান আবিষ্কার করুন
   has_update: একটি আপডেট উপলব্ধ
+  high_impact: কর্মক্ষমতা উপর উচ্চ প্রভাব
   import_wallpapers: স্থানীয় ওয়ালপেপার আমদানি করুন
   open_folder: ওপেন রিসোর্স ফোল্ডার
   outdated: >-

@@ -145,6 +145,7 @@ resources:
   delete: ਸਰੋਤ ਨੂੰ ਮਿਟਾਓ
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ
   has_update: ਇੱਕ ਅਪਡੇਟ ਉਪਲਬਧ ਹੈ
+  high_impact: ਪ੍ਰਦਰਸ਼ਨ 'ਤੇ ਉੱਚ ਪ੍ਰਭਾਵ
   import_wallpapers: ਸਥਾਨਕ ਵਾਲਪੇਪਰ ਆਯਾਤ ਕਰੋ
   open_folder: ਓਪਨ ਸਰੋਤ ਫੋਲਡਰ
   outdated: >-

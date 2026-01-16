@@ -149,6 +149,7 @@ resources:
   delete: Eyða auðlindinni
   discover: Uppgötvaðu fleiri úrræði
   has_update: Uppfærsla er í boði
+  high_impact: Mikil áhrif á frammistöðu
   import_wallpapers: Flytja inn staðbundið veggfóður
   open_folder: Opin auðlindamappa
   outdated: >-

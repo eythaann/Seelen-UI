@@ -144,6 +144,7 @@ resources:
   delete: 刪除資源
   discover: 發現更多資源
   has_update: 有更新可用
+  high_impact: 對性能影響很大
   import_wallpapers: 導入本地壁紙
   open_folder: 打開資源文件夾
   outdated: 該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。

@@ -150,6 +150,7 @@ resources:
   delete: Нөөцийг устгах
   discover: Илүү их нөөцийг олж мэдэх
   has_update: Шинэчлэлт хийх боломжтой
+  high_impact: Гүйцэтгэлд өндөр нөлөө үзүүлдэг
   import_wallpapers: Орон нутгийн ханын цаас импортлох
   open_folder: Нээлттэй зөөврийн
   outdated: >-

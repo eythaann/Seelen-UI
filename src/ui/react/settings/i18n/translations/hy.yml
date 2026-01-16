@@ -151,6 +151,7 @@ resources:
   delete: Delete նջել ռեսուրսը
   discover: Բացահայտեք ավելի շատ ռեսուրսներ
   has_update: Թարմացումն առկա է
+  high_impact: Բարձր ազդեցություն կատարման վրա
   import_wallpapers: Ներմուծեք տեղական պաստառներ
   open_folder: Բացեք ռեսուրսների թղթապանակ
   outdated: >-

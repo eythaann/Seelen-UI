@@ -151,6 +151,7 @@ resources:
   delete: स्रोत मेट्नुहोस्
   discover: अधिक स्रोतहरू पत्ता लगाउनुहोस्
   has_update: एक अपडेट उपलब्ध छ
+  high_impact: प्रदर्शन मा उच्च प्रभाव
   import_wallpapers: स्थानीय वालपेपर आयात गर्नुहोस्
   open_folder: ओपन स्रोत फोल्डर
   outdated: >-

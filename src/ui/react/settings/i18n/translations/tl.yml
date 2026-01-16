@@ -157,6 +157,7 @@ resources:
   delete: Tanggalin ang mapagkukunan
   discover: Tuklasin ang higit pang mga mapagkukunan
   has_update: Magagamit ang isang pag -update
+  high_impact: Mataas na epekto sa pagganap
   import_wallpapers: Mag -import ng mga lokal na wallpaper
   open_folder: Buksan ang folder ng mapagkukunan
   outdated: >-
