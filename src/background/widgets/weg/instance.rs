@@ -3,7 +3,7 @@ use seelen_core::state::{FancyToolbarSide, HideMode, SeelenWegSide};
 use tauri::{WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::{HWND, RECT},
-    UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS,
+    UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SWP_NOSIZE},
 };
 
 use crate::{
@@ -100,39 +100,40 @@ impl SeelenWeg {
         let hwnd = HWND(self.hwnd()?.0);
         let monitor_info = WindowsApi::monitor_info(monitor.handle())?;
 
-        self.theoretical_rect = monitor_info.monitorInfo.rcMonitor;
-        self.webview_rect = monitor_info.monitorInfo.rcMonitor;
-
+        let mut work_area = monitor_info.monitorInfo.rcMonitor;
         if is_toolbar_enabled && toolbar_config.hide_mode != HideMode::Always {
             let toolbar_size = FancyToolbar::get_toolbar_height_on_monitor(monitor)?;
             match state.settings.by_widget.fancy_toolbar.position {
                 FancyToolbarSide::Top => {
-                    self.webview_rect.top += toolbar_size;
+                    work_area.top += toolbar_size;
                 }
                 FancyToolbarSide::Bottom => {
-                    self.webview_rect.bottom -= toolbar_size;
+                    work_area.bottom -= toolbar_size;
                 }
             }
         }
+
+        self.theoretical_rect = work_area;
+        self.webview_rect = work_area;
 
         // note: we reduce by 10px the webview size of the dock to avoid be matched as a fullscreen window
         let dock_size = Self::get_weg_size_on_monitor(monitor)?;
         match settings.position {
             SeelenWegSide::Left => {
                 self.theoretical_rect.right = self.theoretical_rect.left + dock_size;
-                self.webview_rect.right -= 10;
+                self.webview_rect.right = work_area.right - (work_area.right - work_area.left) / 2;
             }
             SeelenWegSide::Right => {
                 self.theoretical_rect.left = self.theoretical_rect.right - dock_size;
-                self.webview_rect.left += 10;
+                self.webview_rect.left = work_area.left + (work_area.right - work_area.left) / 2;
             }
             SeelenWegSide::Top => {
                 self.theoretical_rect.bottom = self.theoretical_rect.top + dock_size;
-                self.webview_rect.bottom -= 10;
+                self.webview_rect.bottom = work_area.top + (work_area.bottom - work_area.top) / 2;
             }
             SeelenWegSide::Bottom => {
                 self.theoretical_rect.top = self.theoretical_rect.bottom - dock_size;
-                self.webview_rect.top += 10;
+                self.webview_rect.top = work_area.bottom - (work_area.bottom - work_area.top) / 2;
             }
         }
 
@@ -147,7 +148,7 @@ impl SeelenWeg {
         };
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(hwnd, &self.webview_rect)?;
+        WindowsApi::set_position(hwnd, None, &self.webview_rect, SWP_NOSIZE)?;
         WindowsApi::set_position(hwnd, None, &self.webview_rect, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }

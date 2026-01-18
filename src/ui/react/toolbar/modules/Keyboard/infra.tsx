@@ -15,8 +15,6 @@ export function KeyboardModule({ module }: Props) {
   const activeLang = languages.find((l) => l.keyboardLayouts.some((k) => k.active)) || languages[0];
   const activeKeyboard = activeLang?.keyboardLayouts.find((k) => k.active) || activeLang?.keyboardLayouts[0];
 
-  console.log(languages);
-
   if (!activeLang || !activeKeyboard) {
     console.error("No active keyboard for unknown reason");
     return null;
