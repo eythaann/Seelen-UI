@@ -67,24 +67,3 @@ settings:
   power: ځواک
   restart: بیا روښانه کول
   title: امستنې
-userhome:
-  empty_list: هیڅ توکي نشته
-  folders:
-    desktop: ډیسټاپ
-    documents: لاسوندونه
-    downloads: کښته کوونې
-    more_items: نور وښایاست ...
-    music: میوزک
-    pictures: انځورونه
-    recent: پدې وروستیو کې کارول شوی
-    reduce_items: لږ وښایاست ...
-    title: د کارونکي عمومي لارښود
-    videos: ویډیوګانې
-  profile:
-    accounts: د حساب خلاصول
-    open_onedrive: یوډول ډایرکټر خلاص کړئ
-    open_user_folder: د کارونکي لارښود
-  seelen_options:
-    open_installation_folder: د خلاصې املیز فولډر خلاص کړئ
-    open_log_folder: د
-    title: د

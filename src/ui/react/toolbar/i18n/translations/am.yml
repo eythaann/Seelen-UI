@@ -67,24 +67,3 @@ settings:
   power: ኃይል
   restart: እንደገና ጀምር
   title: ቅንብሮች
-userhome:
-  empty_list: ምንም ዕቃዎች የሉም
-  folders:
-    desktop: ዴስክቶፕ
-    documents: ሰነዶች
-    downloads: ማውረድ
-    more_items: ተጨማሪ አሳይ ...
-    music: ሙዚቃ
-    pictures: ስዕሎች
-    recent: በቅርቡ ጥቅም ላይ የዋለው
-    reduce_items: ያነሰ አሳይ ...
-    title: የተጠቃሚ ዳይሬክቶች
-    videos: ቪዲዮዎች
-  profile:
-    accounts: የመለያ ቅንብሮች ይክፈቱ
-    open_onedrive: የ Oddrive ማውጫ ይክፈቱ
-    open_user_folder: የተከፈተ የተጠቃሚ ማውጫ
-  seelen_options:
-    open_installation_folder: የተከፈቱ የቀጥታ ቅንብሮች አቃፊ ይክፈቱ
-    open_log_folder: የተከፈተ የምስክር ወረቀት አቃፊ
-    title: ፈልገዋል

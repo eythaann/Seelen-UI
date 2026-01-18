@@ -19,7 +19,7 @@ export function RestoreToDefault() {
   $toolbar_state.value = {
     ...$toolbar_state.value,
     left: [
-      "@default/user-folder" as PluginId,
+      "@seelen/tb-user-menu" as PluginId,
       {
         id: crypto.randomUUID(),
         type: ToolbarModuleType.Text,
@@ -36,13 +36,14 @@ export function RestoreToDefault() {
     center: ["@default/date" as PluginId],
     right: [
       "@seelen/tb-system-tray" as PluginId,
-      "@default/keyboard" as PluginId,
-      "@default/bluetooth" as PluginId,
+      "@seelen/tb-keyboard-selector" as PluginId,
+      "@seelen/keyboard-selector" as PluginId,
+      "@seelen/tb-bluetooth-popup" as PluginId,
       "@default/network" as PluginId,
       "@default/media" as PluginId,
       "@default/power" as PluginId,
       "@default/notifications" as PluginId,
-      "@default/quick-settings" as PluginId,
+      "@seelen/tb-quick-settings" as PluginId,
     ],
   };
 }

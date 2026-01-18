@@ -67,24 +67,3 @@ settings:
   power: 電源
   restart: 再起動
   title: 設定
-userhome:
-  empty_list: アイテムがありません
-  folders:
-    desktop: デスクトップ
-    documents: ドキュメント
-    downloads: ダウンロード
-    more_items: もっと見る…
-    music: ミュージック
-    pictures: ピクチャ
-    recent: 最近使用されたもの
-    reduce_items: もっと見る
-    title: フォルダ
-    videos: ビデオ
-  profile:
-    accounts: アカウント設定
-    open_onedrive: OneDriveのフォルダを開く
-    open_user_folder: ユーザーフォルダを開く
-  seelen_options:
-    open_installation_folder: Seelenの設定フォルダを開く
-    open_log_folder: Seelenのログフォルダを開く
-    title: Seelenのフォルダ

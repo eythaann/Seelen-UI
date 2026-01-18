@@ -67,24 +67,3 @@ settings:
   power: Marche/Arrêt
   restart: Redémarrer
   title: Paramètres
-userhome:
-  empty_list: Aucun élément
-  folders:
-    desktop: Bureau
-    documents: Documents
-    downloads: Téléchargements
-    more_items: Afficher plus...
-    music: Musique
-    pictures: Images
-    recent: Documents récents
-    reduce_items: Montrer moins...
-    title: Dossiers utilisateur
-    videos: Vidéos
-  profile:
-    accounts: Ouvrir les paramètres du compte
-    open_onedrive: Ouvrir le dossier OneDrive
-    open_user_folder: Ouvrir le dossier utilisateur
-  seelen_options:
-    open_installation_folder: Dossier d'installation de Seelen
-    open_log_folder: Dossier des logs de Seelen
-    title: Dossiers Seelen

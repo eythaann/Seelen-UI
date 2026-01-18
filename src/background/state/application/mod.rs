@@ -2,7 +2,6 @@ mod apps_config;
 mod events;
 mod icons;
 pub mod performance;
-mod profiles;
 mod settings;
 mod toolbar_items;
 mod weg_items;
@@ -19,7 +18,7 @@ use notify_debouncer_full::{
 };
 use seelen_core::{
     resource::ResourceKind,
-    state::{AppsConfigurationList, CssStyles, Profile, SluPopupConfig, SluPopupContent, WegItems},
+    state::{AppsConfigurationList, CssStyles, SluPopupConfig, SluPopupContent, WegItems},
 };
 use std::{
     collections::HashSet,
@@ -46,7 +45,6 @@ lazy_static! {
 pub struct FullState {
     watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========
-    pub profiles: Vec<Profile>,
     pub settings: Settings,
     pub settings_by_app: AppsConfigurationList,
     pub weg_items: WegItems,
@@ -60,7 +58,6 @@ impl FullState {
         let mut manager = Self {
             watcher: Arc::new(None),
             // ======== data ========
-            profiles: Vec::new(),
             settings: Settings::default(),
             settings_by_app: AppsConfigurationList::default(),
             weg_items: WegItems::default(),
@@ -91,15 +88,16 @@ impl FullState {
     }
 
     fn process_changes(&mut self, changed: &HashSet<PathBuf>) -> Result<()> {
+        let mut widgets_changed = false;
         let mut icons_changed = false;
+        let mut themes_changed = false;
+        let mut plugins_changed = false;
+        let mut wallpapers_changed = false;
+
+        let mut settings_changed = false;
         let mut weg_items_changed = false;
         let mut toolbar_items_changed = false;
-        let mut themes_changed = false;
         let mut app_configs_changed = false;
-        let mut plugins_changed = false;
-        let mut widgets_changed = false;
-        let mut settings_changed = false;
-        let mut wallpapers_changed = false;
 
         // Single iteration over the changed paths
         for path in changed {
@@ -330,9 +328,6 @@ impl FullState {
 
         log::trace!("Initial load: settings by app");
         self.load_settings_by_app();
-
-        log::trace!("Initial load: profiles");
-        self.load_profiles()?;
         Ok(())
     }
 

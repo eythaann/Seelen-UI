@@ -1,0 +1,21 @@
+empty_list: Ingen varer
+folders:
+  desktop: Desktop
+  documents: Dokumenter
+  downloads: Downloads
+  more_items: Vis mere...
+  music: Musik
+  pictures: Billeder
+  recent: Nyligt brugt
+  reduce_items: Vis mindre...
+  title: Brugermapper
+  videos: Videoer
+profile:
+  accounts: Åbn kontoindstillinger
+  log_out: Log ud
+  open_onedrive: Åbn OneDrive-biblioteket
+  open_user_folder: Åbn brugermappe
+seelen_options:
+  open_installation_folder: Åbn mappen Seelen-indstillinger
+  open_log_folder: Åbn Seelen-logmappen
+  title: Seelen mapper

@@ -1,0 +1,21 @@
+empty_list: Nema predmeta
+folders:
+  desktop: Radna površina
+  documents: Dokumenti
+  downloads: Preuzimanja
+  more_items: Prikaži više...
+  music: Glazba
+  pictures: Slike
+  recent: Nedavno korišteno
+  reduce_items: Prikaži manje...
+  title: Korisnički imenici
+  videos: Video zapisi
+profile:
+  accounts: Otvorite postavke računa
+  log_out: Odjavi se
+  open_onedrive: Otvorite OneDrive direktorij
+  open_user_folder: Otvori korisnički imenik
+seelen_options:
+  open_installation_folder: Otvorite mapu postavki Seelen
+  open_log_folder: Otvorite mapu dnevnika Seelen
+  title: Seelen imenici

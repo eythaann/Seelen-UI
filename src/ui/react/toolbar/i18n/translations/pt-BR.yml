@@ -67,24 +67,3 @@ settings:
   power: Energia
   restart: Reiniciar
   title: Configurações
-userhome:
-  empty_list: Sem itens
-  folders:
-    desktop: Área de Trabalho
-    documents: Documentos
-    downloads: Downloads
-    more_items: Mostrar mais...
-    music: Música
-    pictures: Imagens
-    recent: Recentemente usados
-    reduce_items: Mostrar menos...
-    title: Diretórios de usuário
-    videos: Vídeos
-  profile:
-    accounts: Abrir configurações de conta
-    open_onedrive: Abrir pasta do OneDrive
-    open_user_folder: Abrir pasta do usuário
-  seelen_options:
-    open_installation_folder: Abrir pasta de instalação do Seelen
-    open_log_folder: Abrir pasta de logs do Seelen
-    title: Diretórios do Seelen

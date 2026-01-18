@@ -1,0 +1,21 @@
+empty_list: Nėra elementų
+folders:
+  desktop: Darbalaukis
+  documents: Dokumentai
+  downloads: Atsisiuntimai
+  more_items: Rodyti daugiau...
+  music: Muzika
+  pictures: Paveikslėliai
+  recent: Neseniai naudotas
+  reduce_items: Rodyti mažiau...
+  title: Vartotojų katalogai
+  videos: Vaizdo įrašai
+profile:
+  accounts: Atidarykite paskyros nustatymus
+  log_out: Atsijungti
+  open_onedrive: Atidarykite OneDrive katalogą
+  open_user_folder: Atidarykite vartotojo katalogą
+seelen_options:
+  open_installation_folder: Atidarykite Seelen nustatymų aplanką
+  open_log_folder: Atidarykite Seelen žurnalo aplanką
+  title: Seelen katalogai

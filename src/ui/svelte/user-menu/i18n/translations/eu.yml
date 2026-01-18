@@ -1,0 +1,21 @@
+empty_list: Ez dago elementurik
+folders:
+  desktop: Mahaigaina
+  documents: Dokumentuak
+  downloads: Deskargak
+  more_items: Erakutsi gehiago...
+  music: Musika
+  pictures: Irudiak
+  recent: Duela gutxi erabilia
+  reduce_items: Erakutsi gutxiago...
+  title: Erabiltzaileen direktorioa
+  videos: Bideoak
+profile:
+  accounts: Ireki kontuaren ezarpenak
+  log_out: Amaitu saioa
+  open_onedrive: Ireki OneDrive direktorioa
+  open_user_folder: Ireki erabiltzailearen direktorioa
+seelen_options:
+  open_installation_folder: Ireki Seelen ezarpenen karpeta
+  open_log_folder: Ireki Seelen erregistro-karpeta
+  title: Seelen direktorioak

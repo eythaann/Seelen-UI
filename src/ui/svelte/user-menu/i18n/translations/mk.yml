@@ -1,0 +1,21 @@
+empty_list: Нема ставки
+folders:
+  desktop: Десктоп
+  documents: Документи
+  downloads: Преземања
+  more_items: Прикажи повеќе...
+  music: Музика
+  pictures: Слики
+  recent: Неодамна користен
+  reduce_items: Прикажи помалку...
+  title: Кориснички директориуми
+  videos: Видеа
+profile:
+  accounts: Отворете ги поставките за сметката
+  log_out: Одјави се
+  open_onedrive: Отворете го директориумот OneDrive
+  open_user_folder: Отворете го корисничкиот директориум
+seelen_options:
+  open_installation_folder: Отворете ја папката за поставки Seelen
+  open_log_folder: Отворете ја папката за дневник Seelen
+  title: Селенски директориуми

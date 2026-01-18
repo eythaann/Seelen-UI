@@ -67,24 +67,3 @@ settings:
   power: Ubuqhwaga
   restart: Qalanisa
   title: Amasethingi
-userhome:
-  empty_list: Azikho izinto
-  folders:
-    desktop: Desktop
-    documents: Amadokhumenti
-    downloads: Ukulanda
-    more_items: Khombisa okuningi ...
-    music: Umculo
-    pictures: Isithombe
-    recent: Isanda kusetshenziswa
-    reduce_items: Khombisa okuncane ...
-    title: Izincwajanazo Zomsebenzisi
-    videos: Vigenanapho
-  profile:
-    accounts: Vula Izilungiselelo ze-Akhawunti
-    open_onedrive: Vula umkhombandlela we-OneDrive
-    open_user_folder: Vula umkhombandlela womsebenzisi
-  seelen_options:
-    open_installation_folder: Vula ifolda yezilungiselelo ze-Seelen Izilungiselelo
-    open_log_folder: Vula ifolda ye-weelen log
-    title: Izincwajana zeSeben

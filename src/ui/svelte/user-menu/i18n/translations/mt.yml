@@ -1,0 +1,21 @@
+empty_list: Ebda oġġetti
+folders:
+  desktop: Desktop
+  documents: Dokumenti
+  downloads: Downloads
+  more_items: Uri aktar...
+  music: Mużika
+  pictures: Stampi
+  recent: Użat reċentement
+  reduce_items: Uri inqas...
+  title: Direttorji tal-utenti
+  videos: Vidjows
+profile:
+  accounts: Iftaħ is-settings tal-kont
+  log_out: Log out
+  open_onedrive: Iftaħ id-direttorju OneDrive
+  open_user_folder: Iftaħ id-direttorju tal-utent
+seelen_options:
+  open_installation_folder: Iftaħ il-folder tas-settings ta' Seelen
+  open_log_folder: Iftaħ il-fowlder tal-log Seelen
+  title: Direttorji Seelen

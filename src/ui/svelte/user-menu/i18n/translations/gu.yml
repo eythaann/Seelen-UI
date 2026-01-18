@@ -1,0 +1,21 @@
+empty_list: કોઈ વસ્તુઓ નથી
+folders:
+  desktop: ડેસ્કટોપ
+  documents: દસ્તાવેજો
+  downloads: ડાઉનલોડ્સ
+  more_items: વધુ બતાવો...
+  music: સંગીત
+  pictures: ચિત્રો
+  recent: તાજેતરમાં વપરાયેલ
+  reduce_items: ઓછું બતાવો...
+  title: વપરાશકર્તા ડિરેક્ટરીઓ
+  videos: વિડિઓઝ
+profile:
+  accounts: એકાઉન્ટ સેટિંગ્સ ખોલો
+  log_out: લોગ આઉટ કરો
+  open_onedrive: OneDrive ડિરેક્ટરી ખોલો
+  open_user_folder: વપરાશકર્તા ડિરેક્ટરી ખોલો
+seelen_options:
+  open_installation_folder: સીલેન સેટિંગ્સ ફોલ્ડર ખોલો
+  open_log_folder: સીલેન લોગ ફોલ્ડર ખોલો
+  title: સીલેન ડિરેક્ટરીઓ

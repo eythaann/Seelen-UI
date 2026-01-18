@@ -67,24 +67,3 @@ settings:
   power: Botere
   restart: Berriro hasi
   title: Ezarpen
-userhome:
-  empty_list: Ez dago elementurik
-  folders:
-    desktop: Mahaigarri
-    documents: Agends
-    downloads: Deskarga
-    more_items: Erakutsi gehiago ...
-    music: Musika
-    pictures: Irudi
-    recent: Duela gutxi erabili
-    reduce_items: Erakutsi gutxiago ...
-    title: Erabiltzaileen direktorioak
-    videos: Bideo
-  profile:
-    accounts: Ireki kontuaren ezarpenak
-    open_onedrive: OneDrive direktorio irekia
-    open_user_folder: Erabiltzaileen direktorio irekia
-  seelen_options:
-    open_installation_folder: Ireki Seelen ezarpenen karpeta
-    open_log_folder: Ireki Seelen erregistro karpeta
-    title: Seelen direktorioak

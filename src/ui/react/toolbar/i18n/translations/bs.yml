@@ -67,24 +67,3 @@ settings:
   power: Snaga
   restart: Ponovo pokrenuti
   title: Postavke
-userhome:
-  empty_list: Nema predmeta
-  folders:
-    desktop: Radna površina
-    documents: Dokumenti
-    downloads: Preuzimanja
-    more_items: Prikaži više ...
-    music: Muzika
-    pictures: Slike
-    recent: Nedavno korišten
-    reduce_items: Prikaži manje ...
-    title: Korisnički direktoriji
-    videos: Video snimci
-  profile:
-    accounts: Postavke otvorenog računa
-    open_onedrive: Otvoreni direktorij OneDrive
-    open_user_folder: Otvoreni korisnički direktorij
-  seelen_options:
-    open_installation_folder: Otvorite mapu Seelen Settings
-    open_log_folder: Otvorena Seelen Dnevna mapa
-    title: Seelen direktoriji

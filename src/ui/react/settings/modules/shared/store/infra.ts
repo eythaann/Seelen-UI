@@ -5,7 +5,6 @@ import {
   IconPackList,
   MonitorConfiguration,
   PluginList,
-  ProfileList,
   Settings,
   ThemeList,
   UIColors,
@@ -148,7 +147,6 @@ export const LoadSettingsToStore = async (customPath?: string) => {
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
   store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));
-  store.dispatch(RootActions.setProfiles((await ProfileList.getAsync()).all()));
   store.dispatch(
     RootActions.setWallpapers((await WallpaperList.getAsync()).all()),
   );

@@ -1,0 +1,21 @@
+empty_list: අයිතම නැත
+folders:
+  desktop: ඩෙස්ක්ටොප්
+  documents: ලේඛන
+  downloads: බාගැනීම්
+  more_items: තව පෙන්වන්න...
+  music: සංගීතය
+  pictures: පින්තූර
+  recent: මෑතකදී භාවිතා කරන ලදී
+  reduce_items: අඩුවෙන් පෙන්වන්න...
+  title: පරිශීලක නාමාවලි
+  videos: වීඩියෝ
+profile:
+  accounts: ගිණුම් සැකසුම් විවෘත කරන්න
+  log_out: ලොග් අවුට් වෙන්න
+  open_onedrive: OneDrive නාමාවලිය විවෘත කරන්න
+  open_user_folder: පරිශීලක නාමාවලිය විවෘත කරන්න
+seelen_options:
+  open_installation_folder: Seelen සැකසුම් ෆෝල්ඩරය විවෘත කරන්න
+  open_log_folder: සීලෙන් ලොග් ෆෝල්ඩරය විවෘත කරන්න
+  title: සීලෙන් නාමාවලි

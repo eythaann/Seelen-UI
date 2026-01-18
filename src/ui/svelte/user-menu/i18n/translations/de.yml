@@ -1,0 +1,21 @@
+empty_list: Keine Artikel
+folders:
+  desktop: Desktop
+  documents: Unterlagen
+  downloads: Downloads
+  more_items: Mehr anzeigen...
+  music: Musik
+  pictures: Bilder
+  recent: Kürzlich verwendet
+  reduce_items: Weniger anzeigen...
+  title: Benutzerverzeichnisse
+  videos: Videos
+profile:
+  accounts: Kontoeinstellungen öffnen
+  log_out: Abmelden
+  open_onedrive: Öffnen Sie das OneDrive-Verzeichnis
+  open_user_folder: Benutzerverzeichnis öffnen
+seelen_options:
+  open_installation_folder: Öffnen Sie den Seelen-Einstellungsordner
+  open_log_folder: Öffnen Sie den Seelen-Protokollordner
+  title: Seelen-Verzeichnisse

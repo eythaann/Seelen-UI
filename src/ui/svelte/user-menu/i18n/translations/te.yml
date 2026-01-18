@@ -1,0 +1,21 @@
+empty_list: అంశాలు లేవు
+folders:
+  desktop: డెస్క్‌టాప్
+  documents: పత్రాలు
+  downloads: డౌన్‌లోడ్‌లు
+  more_items: మరింత చూపించు...
+  music: సంగీతం
+  pictures: చిత్రాలు
+  recent: ఇటీవల ఉపయోగించబడింది
+  reduce_items: తక్కువ చూపు...
+  title: వినియోగదారు డైరెక్టరీలు
+  videos: వీడియోలు
+profile:
+  accounts: ఖాతా సెట్టింగ్‌లను తెరవండి
+  log_out: లాగ్ అవుట్ చేయండి
+  open_onedrive: OneDrive డైరెక్టరీని తెరవండి
+  open_user_folder: వినియోగదారు డైరెక్టరీని తెరవండి
+seelen_options:
+  open_installation_folder: సీలెన్ సెట్టింగ్‌ల ఫోల్డర్‌ని తెరవండి
+  open_log_folder: సీలెన్ లాగ్ ఫోల్డర్‌ను తెరవండి
+  title: సీలెన్ డైరెక్టరీలు

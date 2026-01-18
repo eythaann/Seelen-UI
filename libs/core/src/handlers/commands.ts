@@ -47,7 +47,6 @@ export enum SeelenCommand {
   StateGetIconPacks = "state_get_icon_packs",
   StateGetWallpapers = "state_get_wallpapers",
   StateSetCustomIconPack = "state_add_icon_to_custom_icon_pack",
-  StateGetProfiles = "state_get_profiles",
   StateDeleteCachedIcons = "state_delete_cached_icons",
   StateRequestWallpaperAddition = "state_request_wallpaper_addition",
   StateGetPerformanceMode = "state_get_performance_mode",

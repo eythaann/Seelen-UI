@@ -1,0 +1,21 @@
+empty_list: Engir hlutir
+folders:
+  desktop: Skrifborð
+  documents: Skjöl
+  downloads: Niðurhal
+  more_items: Sýna meira...
+  music: Tónlist
+  pictures: Myndir
+  recent: Nýlega notað
+  reduce_items: Sýna minna...
+  title: Notendaskrár
+  videos: Myndbönd
+profile:
+  accounts: Opnaðu reikningsstillingar
+  log_out: Skráðu þig út
+  open_onedrive: Opnaðu OneDrive möppuna
+  open_user_folder: Opnaðu notendaskrá
+seelen_options:
+  open_installation_folder: Opnaðu Seelen stillingamöppuna
+  open_log_folder: Opnaðu Seelen log möppu
+  title: Seelen möppur

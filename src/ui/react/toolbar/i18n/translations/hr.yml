@@ -67,24 +67,3 @@ settings:
   power: Vlast
   restart: Ponovno pokrenuti
   title: Postavke
-userhome:
-  empty_list: Nema predmeta
-  folders:
-    desktop: Radna površina
-    documents: Dokumenti
-    downloads: Preuzimanja
-    more_items: Pokažite još ...
-    music: Glazba
-    pictures: Slika
-    recent: Nedavno korišteni
-    reduce_items: Pokažite manje ...
-    title: Korisničke direktorije
-    videos: Videozapisi
-  profile:
-    accounts: Otvorene postavke računa
-    open_onedrive: Otvoreni direktorij OneDrive
-    open_user_folder: Otvoreni korisnički direktorij
-  seelen_options:
-    open_installation_folder: Otvorite mapu Seelen Settings
-    open_log_folder: Otvorite mapu dnevnika Seelen
-    title: Seelen direktorij

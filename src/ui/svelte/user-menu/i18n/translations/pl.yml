@@ -1,0 +1,21 @@
+empty_list: Brak przedmiotów
+folders:
+  desktop: Pulpit
+  documents: Dokumenty
+  downloads: Pliki do pobrania
+  more_items: Pokaż więcej...
+  music: Muzyka
+  pictures: Kino
+  recent: Ostatnio używany
+  reduce_items: Pokaż mniej...
+  title: Katalogi użytkowników
+  videos: Filmy
+profile:
+  accounts: Otwórz ustawienia konta
+  log_out: Wyloguj się
+  open_onedrive: Otwórz katalog OneDrive
+  open_user_folder: Otwórz katalog użytkownika
+seelen_options:
+  open_installation_folder: Otwórz folder ustawień Seelen
+  open_log_folder: Otwórz folder dziennika Seelen
+  title: Katalogi Seelena

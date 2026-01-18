@@ -67,24 +67,3 @@ settings:
   power: Güç
   restart: Yeniden başlat
   title: Ayarlar
-userhome:
-  empty_list: Ürün yok
-  folders:
-    desktop: Masaüstü
-    documents: Belgeler
-    downloads: İndirmeler
-    more_items: Daha fazlasını göster...
-    music: Müzik
-    pictures: Resimler
-    recent: Yakın zamanda kullanılmış
-    reduce_items: Daha az göster...
-    title: Kullanıcı dizinleri
-    videos: Videolar
-  profile:
-    accounts: Hesap ayarlarını aç
-    open_onedrive: OneDrive dizinini açın
-    open_user_folder: Kullanıcı dizinini aç
-  seelen_options:
-    open_installation_folder: Seelen ayarlar klasörünü açın
-    open_log_folder: Seelen günlük klasörünü açın
-    title: Seelen dizinleri

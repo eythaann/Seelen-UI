@@ -67,24 +67,3 @@ settings:
   power: Kikapcsolás
   restart: Újraindítás
   title: Beállítások
-userhome:
-  empty_list: Nincs megjeleníthető elem
-  folders:
-    desktop: Asztal
-    documents: Dokumentumok
-    downloads: Letöltések
-    more_items: További elemek...
-    music: Zene
-    pictures: Képek
-    recent: Legutóbb használt
-    reduce_items: Kevesebb elem...
-    title: Felhasználói mappák
-    videos: Videók
-  profile:
-    accounts: Fiókbeállítások megnyitása
-    open_onedrive: OneDrive mappa megnyitása
-    open_user_folder: Felhasználói mappa megnyitása
-  seelen_options:
-    open_installation_folder: Seelen beállítások mappájának megnyitása
-    open_log_folder: Seelen napló mappájának megnyitása
-    title: Seelen mappák

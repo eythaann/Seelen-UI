@@ -67,24 +67,3 @@ settings:
   power: الطاقة
   restart: إعادة التشغيل
   title: إعدادات
-userhome:
-  empty_list: لا توجد عناصر
-  folders:
-    desktop: سطح المكتب
-    documents: المستندات
-    downloads: التنزيلات
-    more_items: اعرض المزيد...
-    music: الموسيقى
-    pictures: الصور
-    recent: استُخدمت مؤخراً
-    reduce_items: عرض أقل...
-    title: أدلة المستخدم
-    videos: مقاطع الفيديو
-  profile:
-    accounts: فتح إعدادات الحساب
-    open_onedrive: فتح دليل OneDrive
-    open_user_folder: فتح دليل المستخدم
-  seelen_options:
-    open_installation_folder: افتح مجلد إعدادات سيلين
-    open_log_folder: افتح مجلد سجل سيلين
-    title: دلائل سيلين

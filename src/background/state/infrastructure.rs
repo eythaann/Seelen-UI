@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{
     by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPackEntry,
-    PerformanceMode, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
+    PerformanceMode, Wallpaper, WegItems, WegPinnedItemsVisibility,
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -118,11 +118,6 @@ pub fn state_request_wallpaper_addition() -> Result<()> {
             }
         });
     Ok(())
-}
-
-#[tauri::command(async)]
-pub fn state_get_profiles() -> Vec<Profile> {
-    FULL_STATE.load().profiles.clone()
 }
 
 #[tauri::command(async)]

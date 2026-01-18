@@ -38,8 +38,6 @@ pub struct SeelenCommon {
 
     // @deprecated since v2.1.0
     user_placeholders: PathBuf,
-    profiles: PathBuf,
-    bundled_profiles: PathBuf,
 }
 
 #[allow(dead_code)]
@@ -75,8 +73,6 @@ impl SeelenCommon {
             widgets: data_dir.join("widgets"),
             bundled_widgets: resource_dir.join("static/widgets"),
             wallpapers: data_dir.join("wallpapers"),
-            profiles: data_dir.join("profiles"),
-            bundled_profiles: resource_dir.join("static/profiles"),
             // general
             data_dir,
             resource_dir,
@@ -170,13 +166,5 @@ impl SeelenCommon {
 
     pub fn user_wallpapers_path(&self) -> &Path {
         &self.wallpapers
-    }
-
-    pub fn user_profiles_path(&self) -> &Path {
-        &self.profiles
-    }
-
-    pub fn bundled_profiles_path(&self) -> &Path {
-        &self.bundled_profiles
     }
 }

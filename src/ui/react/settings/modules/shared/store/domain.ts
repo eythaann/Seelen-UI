@@ -4,7 +4,6 @@ import type {
   IconPack,
   PhysicalMonitor,
   Plugin,
-  Profile,
   SeelenWallSettings,
   SeelenWegSettings,
   Settings,
@@ -27,7 +26,6 @@ export interface RootState extends Settings {
   plugins: Plugin[];
   widgets: Widget[];
   wallpapers: Wallpaper[];
-  profiles: Profile[];
   connectedMonitors: PhysicalMonitor[];
   // migrated since v2.1.0 check src\apps\settings\modules\shared\store\app\StateBridge.ts
   fancyToolbar: FancyToolbarSettings;

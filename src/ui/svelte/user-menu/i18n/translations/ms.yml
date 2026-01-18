@@ -1,0 +1,21 @@
+empty_list: Tiada barang
+folders:
+  desktop: Desktop
+  documents: Dokumen
+  downloads: Muat turun
+  more_items: Tunjukkan lagi...
+  music: Muzik
+  pictures: Gambar
+  recent: Baru-baru ini digunakan
+  reduce_items: Kurangkan tunjukkan...
+  title: Direktori pengguna
+  videos: Video
+profile:
+  accounts: Buka tetapan akaun
+  log_out: Log keluar
+  open_onedrive: Buka direktori OneDrive
+  open_user_folder: Buka direktori pengguna
+seelen_options:
+  open_installation_folder: Buka folder tetapan Seelen
+  open_log_folder: Buka folder log Seelen
+  title: Direktori Seelen

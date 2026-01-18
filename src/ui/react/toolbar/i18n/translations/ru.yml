@@ -67,24 +67,3 @@ settings:
   power: Питание
   restart: Перезагрузка
   title: Настройки
-userhome:
-  empty_list: Нет предметов
-  folders:
-    desktop: Рабочий стол
-    documents: Документы
-    downloads: Загрузки
-    more_items: Показать еще...
-    music: Музыка
-    pictures: Изображения
-    recent: Недавно использованные
-    reduce_items: Показать меньше...
-    title: Пользовательские папки
-    videos: Видео
-  profile:
-    accounts: Настройки учетной записи
-    open_onedrive: Открыть папку OneDrive
-    open_user_folder: Открыть пользовательскую папку
-  seelen_options:
-    open_installation_folder: Открыть папку настроек Seelen
-    open_log_folder: Открыть папку журнала Seelen
-    title: Каталоги Seelen

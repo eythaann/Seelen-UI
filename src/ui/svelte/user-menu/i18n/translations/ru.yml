@@ -1,0 +1,21 @@
+empty_list: Нет товаров
+folders:
+  desktop: Рабочий стол
+  documents: Документы
+  downloads: Загрузки
+  more_items: Показать больше...
+  music: Музыка
+  pictures: Картинки
+  recent: Недавно использовано
+  reduce_items: Показать меньше...
+  title: Каталоги пользователей
+  videos: Видео
+profile:
+  accounts: Открыть настройки аккаунта
+  log_out: Выйти
+  open_onedrive: Открыть каталог OneDrive
+  open_user_folder: Открыть каталог пользователя
+seelen_options:
+  open_installation_folder: Открыть папку настроек Seelen
+  open_log_folder: Открыть папку журнала Seelen
+  title: Зеелен каталоги

@@ -1,0 +1,21 @@
+empty_list: Elementlar yoʻq
+folders:
+  desktop: Ish stoli
+  documents: Hujjatlar
+  downloads: Yuklashlar
+  more_items: Batafsil ko'rsatish...
+  music: Musiqa
+  pictures: Rasmlar
+  recent: Yaqinda ishlatilgan
+  reduce_items: Kamroq ko'rsatish...
+  title: Foydalanuvchi kataloglari
+  videos: Videolar
+profile:
+  accounts: Hisob sozlamalarini oching
+  log_out: Chiqish
+  open_onedrive: OneDrive katalogini oching
+  open_user_folder: Foydalanuvchi katalogini oching
+seelen_options:
+  open_installation_folder: Seelen sozlamalari papkasini oching
+  open_log_folder: Seelen jurnali papkasini oching
+  title: Ko'rilgan kataloglar

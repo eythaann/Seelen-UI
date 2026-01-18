@@ -31,7 +31,7 @@ export function Item(props: InnerItemProps) {
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
       trigger={["contextMenu"]}
-      dropdownRender={() => (
+      popupRender={() => (
         <BackgroundByLayersV2 className="ft-bar-item-context-menu-container">
           <Menu
             className="ft-bar-item-context-menu"

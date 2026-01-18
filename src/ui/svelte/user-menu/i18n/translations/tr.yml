@@ -1,0 +1,21 @@
+empty_list: Öğe yok
+folders:
+  desktop: Masaüstü
+  documents: Belgeler
+  downloads: İndirilenler
+  more_items: Daha fazlasını göster...
+  music: Müzik
+  pictures: Resimler
+  recent: Son kullanılan
+  reduce_items: Daha az göster...
+  title: Kullanıcı dizinleri
+  videos: Videolar
+profile:
+  accounts: Hesap ayarlarını aç
+  log_out: Oturumu kapat
+  open_onedrive: OneDrive dizinini aç
+  open_user_folder: Kullanıcı dizinini aç
+seelen_options:
+  open_installation_folder: Seelen ayarlar klasörünü aç
+  open_log_folder: Seelen günlük klasörünü aç
+  title: Seelen dizinleri

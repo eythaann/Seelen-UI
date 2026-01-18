@@ -1,0 +1,21 @@
+empty_list: Не ашё
+folders:
+  desktop: Мизи корӣ
+  documents: Ҳуҷҷатҳо
+  downloads: Боргириҳо
+  more_items: Намоиши бештар...
+  music: Мусиқӣ
+  pictures: Суратҳо
+  recent: Ба наздикӣ истифода бурда мешавад
+  reduce_items: Камтар нишон диҳед...
+  title: Феҳристҳои корбар
+  videos: Видеоҳо
+profile:
+  accounts: Танзимоти ҳисобро кушоед
+  log_out: Бароед
+  open_onedrive: Феҳристи OneDrive-ро кушоед
+  open_user_folder: Феҳристи корбарро кушоед
+seelen_options:
+  open_installation_folder: Папкаи танзимоти Seelenро кушоед
+  open_log_folder: Папкаи гузориши Seelenро кушоед
+  title: Феҳристҳои дидашуда

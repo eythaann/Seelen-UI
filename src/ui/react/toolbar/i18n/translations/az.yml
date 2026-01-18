@@ -67,24 +67,3 @@ settings:
   power: Güc
   restart: Yenidən başlamaq
   title: Parametrlər
-userhome:
-  empty_list: Nəhəng
-  folders:
-    desktop: Masaüstü
-    documents: Sənədləşdirmək
-    downloads: Yüklər
-    more_items: Daha çox göstər ...
-    music: Musiqi
-    pictures: Şəkillər
-    recent: Yaxınlarda istifadə olunur
-    reduce_items: Daha az göstər ...
-    title: İstifadəçi qovluqları
-    videos: Videonlar
-  profile:
-    accounts: Açıq hesab parametrləri
-    open_onedrive: Açıq OneDrive Kataloqu
-    open_user_folder: Açıq İstifadəçi Kataloqu
-  seelen_options:
-    open_installation_folder: SEELEN Parametrləri qovluğu açın
-    open_log_folder: Seelen Giriş Qovluqunu açın
-    title: Seelen qovluqları

@@ -67,24 +67,3 @@ settings:
   power: Мощност
   restart: Рестартирам
   title: Настройки
-userhome:
-  empty_list: Няма артикули
-  folders:
-    desktop: Настолен компютър
-    documents: Документи
-    downloads: Изтегляне
-    more_items: Покажи повече...
-    music: Музика
-    pictures: Снимки
-    recent: Наскоро използван
-    reduce_items: Покажи по-малко...
-    title: Потребителски директории
-    videos: Видеоклипове
-  profile:
-    accounts: Настройки на отворената сметка
-    open_onedrive: Отворете директорията на OneDrive
-    open_user_folder: Отваряне на потребителската директория
-  seelen_options:
-    open_installation_folder: Отворете папката с настройки на Seelen
-    open_log_folder: Отворете папката Seelen log
-    title: Директории Seelen

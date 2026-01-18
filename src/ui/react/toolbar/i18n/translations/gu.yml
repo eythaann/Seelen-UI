@@ -67,24 +67,3 @@ settings:
   power: શક્તિ
   restart: પુનઃપ્રારંભ
   title: પતાવટ
-userhome:
-  empty_list: કોઈ વસ્તુ
-  folders:
-    desktop: ડેસ્કટ .પ
-    documents: દસ્તાવેજી
-    downloads: નિવેદનો
-    more_items: વધુ બતાવો ...
-    music: સંગીત
-    pictures: ચિત્રો
-    recent: તાજેતરનો ઉપયોગ
-    reduce_items: ઓછું બતાવો ...
-    title: વપરાશકર્તા નિયામક
-    videos: વિડિઓઝ
-  profile:
-    accounts: એકાઉન્ટ સેટિંગ્સ ખોલો
-    open_onedrive: ખુલ્લી વનડ્રાઇવ ડિરેક્ટરી
-    open_user_folder: વપરાશકર્તા ડિરેક્ટરી ખોલો
-  seelen_options:
-    open_installation_folder: સીલેન સેટિંગ્સ ફોલ્ડર ખોલો
-    open_log_folder: સીલેન લોગ ફોલ્ડર ખોલો
-    title: સીલેન ડિજચરીઓ

@@ -1,0 +1,21 @@
+empty_list: Aucun article
+folders:
+  desktop: Bureau
+  documents: Documents
+  downloads: Téléchargements
+  more_items: Afficher plus...
+  music: Musique
+  pictures: Photos
+  recent: Récemment utilisé
+  reduce_items: Montrer moins...
+  title: Annuaires des utilisateurs
+  videos: Vidéos
+profile:
+  accounts: Ouvrir les paramètres du compte
+  log_out: Se déconnecter
+  open_onedrive: Ouvrir le répertoire OneDrive
+  open_user_folder: Ouvrir le répertoire des utilisateurs
+seelen_options:
+  open_installation_folder: Ouvrir le dossier des paramètres de Seelen
+  open_log_folder: Ouvrir le dossier du journal Seelen
+  title: Annuaires Seelen

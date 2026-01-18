@@ -67,24 +67,3 @@ settings:
   power: Võimsus
   restart: Taaskäivita
   title: Sätted
-userhome:
-  empty_list: Puuduvad esemed
-  folders:
-    desktop: Töölauaarvuti
-    documents: Dokumendid
-    downloads: Allalaadimine
-    more_items: Näita rohkem...
-    music: Muusika
-    pictures: Pildid
-    recent: Hiljuti kasutatud
-    reduce_items: Näita vähem...
-    title: Kasutajate kataloogid
-    videos: Videod
-  profile:
-    accounts: Avatud konto seaded
-    open_onedrive: Avage OneDrive'i kataloog
-    open_user_folder: Avatud kasutajakataloog
-  seelen_options:
-    open_installation_folder: Avage Seeleni seadete kaust
-    open_log_folder: Avage Seelen logi kaust
-    title: Seelen kataloogid

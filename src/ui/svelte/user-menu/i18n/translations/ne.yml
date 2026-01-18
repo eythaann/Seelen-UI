@@ -1,0 +1,21 @@
+empty_list: कुनै वस्तुहरू छैनन्
+folders:
+  desktop: डेस्कटप
+  documents: कागजातहरू
+  downloads: डाउनलोडहरू
+  more_items: थप देखाउनुहोस्...
+  music: संगीत
+  pictures: चित्रहरू
+  recent: हालै प्रयोग गरिएको
+  reduce_items: कम देखाउनुहोस्...
+  title: प्रयोगकर्ता निर्देशिकाहरू
+  videos: भिडियोहरू
+profile:
+  accounts: खाता सेटिङहरू खोल्नुहोस्
+  log_out: लग आउट गर्नुहोस्
+  open_onedrive: OneDrive डाइरेक्टरी खोल्नुहोस्
+  open_user_folder: प्रयोगकर्ता निर्देशिका खोल्नुहोस्
+seelen_options:
+  open_installation_folder: Seelen सेटिंग्स फोल्डर खोल्नुहोस्
+  open_log_folder: Seelen लग फोल्डर खोल्नुहोस्
+  title: Seelen निर्देशिकाहरू

@@ -1,0 +1,21 @@
+empty_list: কোনো আইটেম নেই
+folders:
+  desktop: ডেস্কটপ
+  documents: নথিপত্র
+  downloads: ডাউনলোড
+  more_items: আরো দেখান...
+  music: সঙ্গীত
+  pictures: ছবি
+  recent: সম্প্রতি ব্যবহৃত
+  reduce_items: কম দেখান...
+  title: ব্যবহারকারী ডিরেক্টরি
+  videos: ভিডিও
+profile:
+  accounts: অ্যাকাউন্ট সেটিংস খুলুন
+  log_out: লগ আউট করুন
+  open_onedrive: OneDrive ডিরেক্টরি খুলুন
+  open_user_folder: ব্যবহারকারী ডিরেক্টরি খুলুন
+seelen_options:
+  open_installation_folder: Seelen সেটিংস ফোল্ডার খুলুন
+  open_log_folder: Seelen লগ ফোল্ডার খুলুন
+  title: Seelen ডিরেক্টরি

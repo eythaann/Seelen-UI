@@ -18,7 +18,7 @@ import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";
 import { WidgetAutoSizer } from "./sizing.ts";
-import { adjustPostionByPlacement } from "./positioning.ts";
+import { adjustPostionByPlacement as adjustPositionByPlacement } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
 
 export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
@@ -239,16 +239,24 @@ export class Widget {
 
       if (desiredPosition) {
         const { width, height } = await this.webview.outerSize();
-        const pos = await adjustPostionByPlacement({
-          x: desiredPosition[0],
-          y: desiredPosition[1],
-          width,
-          height,
+        const adjusted = await adjustPositionByPlacement({
+          frame: {
+            x: desiredPosition[0],
+            y: desiredPosition[1],
+            width,
+            height,
+          },
           alignX,
           alignY,
         });
-        await this.webview.setPosition(new PhysicalPosition(pos.x, pos.y));
+        await this.setPosition({
+          left: adjusted.x,
+          top: adjusted.y,
+          right: adjusted.x + adjusted.width,
+          bottom: adjusted.y + adjusted.height,
+        });
       }
+
       await this.webview.show();
       await this.webview.setFocus();
     });
@@ -260,9 +268,8 @@ export class Widget {
    */
   public async persistPositionAndSize(): Promise<void> {
     const storage = globalThis.window.localStorage;
-    const { label } = this.webview;
 
-    const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${label}::${k}`));
+    const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${k}`));
 
     if (x && y) {
       const pos = new PhysicalPosition(Math.round(Number(x)), Math.round(Number(y)));
@@ -281,8 +288,8 @@ export class Widget {
     this.webview.onMoved(
       debounce((e) => {
         const { x, y } = e.payload;
-        storage.setItem(`${label}::x`, x.toString());
-        storage.setItem(`${label}::y`, y.toString());
+        storage.setItem(`x`, x.toString());
+        storage.setItem(`y`, y.toString());
         console.info(`Widget position saved: ${x} ${y}`);
       }, 500),
     );
@@ -290,8 +297,8 @@ export class Widget {
     this.webview.onResized(
       debounce((e) => {
         const { width, height } = e.payload;
-        storage.setItem(`${label}::width`, width.toString());
-        storage.setItem(`${label}::height`, height.toString());
+        storage.setItem(`width`, width.toString());
+        storage.setItem(`height`, height.toString());
         console.info(`Widget size saved: ${width} ${height}`);
       }, 500),
     );

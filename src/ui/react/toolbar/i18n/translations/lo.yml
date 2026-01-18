@@ -67,24 +67,3 @@ settings:
   power: ພະເດດ
   restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່
   title: ການກໍານົດ
-userhome:
-  empty_list: ບໍ່ມີສິນຄ້າຫຍັງ
-  folders:
-    desktop: ຂໍ້ທີ
-    documents: ເອກະສານ
-    downloads: ດາວໂຫລດ
-    more_items: ສະແດງໃຫ້ເຫັນຕື່ມ ...
-    music: ດົນຕີ
-    pictures: ຮູບພາບ
-    recent: ໃຊ້ໄດ້ບໍ່ດົນມານີ້
-    reduce_items: ສະແດງຫນ້ອຍ ...
-    title: ລາຍການຜູ້ໃຊ້
-    videos: ວິດີກ້າ
-  profile:
-    accounts: ເປີດການຕັ້ງຄ່າບັນຊີ
-    open_onedrive: ເປີດໄດເລກະທໍລີ signrive
-    open_user_folder: ເປີດໄດເລກະທໍລີຜູ້ໃຊ້
-  seelen_options:
-    open_installation_folder: ເປີດຮ້ານ Setten Settings
-    open_log_folder: ເປີດໂຟນເດີ LOGO STOEN
-    title: ລາຍການ SEELEN

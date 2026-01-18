@@ -67,24 +67,3 @@ settings:
   power: Moc
   restart: Reštart
   title: nastavenie
-userhome:
-  empty_list: Žiadne položky
-  folders:
-    desktop: Stolný počítač
-    documents: Dokumenty
-    downloads: Na stiahnutie
-    more_items: Zobraziť viac...
-    music: Hudba
-    pictures: Obrázky
-    recent: Nedávno použité
-    reduce_items: Zobraziť menej...
-    title: Adresáre používateľov
-    videos: Videá
-  profile:
-    accounts: Nastavenia otvoreného účtu
-    open_onedrive: Otvorenie adresára OneDrive
-    open_user_folder: Otvorenie používateľského adresára
-  seelen_options:
-    open_installation_folder: Otvorte priečinok s nastaveniami Seelen
-    open_log_folder: Otvorte priečinok denníka Seelen
-    title: Adresáre Seelen

@@ -67,24 +67,3 @@ settings:
   power: Erk
   restart: Destpêkirin
   title: Mîhengan
-userhome:
-  empty_list: Tiştek tune
-  folders:
-    desktop: Desktop
-    documents: Belge
-    downloads: Daxistin
-    more_items: Zêdetir ...
-    music: Mûzîk
-    pictures: Wêneyên wêne
-    recent: Herî dawî bikar anîn
-    reduce_items: Kêmtir nîşan bide ...
-    title: Rêbernameyên bikarhêner
-    videos: Videos
-  profile:
-    accounts: Mîhengên hesabê vekin
-    open_onedrive: Peldanka OneDrive vekirî
-    open_user_folder: Peldanka Bikarhêner veke
-  seelen_options:
-    open_installation_folder: Peldanka Mîhengên Seelen vekin
-    open_log_folder: Peldanka Log Seelen Open
-    title: Derhênerên Derveyî

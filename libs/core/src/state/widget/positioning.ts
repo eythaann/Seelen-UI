@@ -1,23 +1,17 @@
-import { monitorFromPoint } from "@tauri-apps/api/window";
-import { Alignment } from "@seelen-ui/types";
+import { monitorFromPoint, primaryMonitor } from "@tauri-apps/api/window";
+import { Alignment, type Frame } from "@seelen-ui/types";
 
 interface args {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  frame: Frame;
   alignX?: Alignment | null;
   alignY?: Alignment | null;
 }
 
 export async function adjustPostionByPlacement({
-  x,
-  y,
-  width,
-  height,
+  frame: { x, y, width, height },
   alignX,
   alignY,
-}: args): Promise<{ x: number; y: number }> {
+}: args): Promise<Frame> {
   if (alignX === Alignment.Center) {
     x -= width / 2;
   } else if (alignX === Alignment.Start) {
@@ -30,26 +24,21 @@ export async function adjustPostionByPlacement({
     y -= height;
   }
 
-  const fixed = await fitIntoMonitor({ x, y, width, height });
+  const newFrame = await fitIntoMonitor({ x, y, width, height });
   return {
-    x: Math.round(fixed.x),
-    y: Math.round(fixed.y),
+    x: Math.round(newFrame.x),
+    y: Math.round(newFrame.y),
+    width: Math.round(newFrame.width),
+    height: Math.round(newFrame.height),
   };
 }
 
-async function fitIntoMonitor({
-  x,
-  y,
-  width,
-  height,
-}: {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}): Promise<{ x: number; y: number }> {
-  const monitor = await monitorFromPoint(x, y);
+async function fitIntoMonitor({ x, y, width, height }: Frame): Promise<Frame> {
+  const monitor = (await monitorFromPoint(x, y)) || (await primaryMonitor());
   if (monitor) {
+    width = Math.min(width, monitor.size.width);
+    height = Math.min(height, monitor.size.height);
+
     const x2 = x + width;
     const y2 = y + height;
 
@@ -91,5 +80,7 @@ async function fitIntoMonitor({
   return {
     x,
     y,
+    width,
+    height,
   };
 }

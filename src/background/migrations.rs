@@ -1,10 +1,6 @@
 use tauri::{path::BaseDirectory, Manager};
 
-use crate::{
-    app::get_app_handle,
-    error::Result,
-    utils::{constants::SEELEN_COMMON, copy_dir_all},
-};
+use crate::{app::get_app_handle, error::Result, utils::constants::SEELEN_COMMON};
 
 pub struct RestorationAndMigration;
 
@@ -67,17 +63,6 @@ impl RestorationAndMigration {
         Ok(())
     }
 
-    fn recreate_profiles() -> Result<()> {
-        let user_profiles = SEELEN_COMMON.user_profiles_path();
-        if user_profiles.is_dir() && std::fs::read_dir(user_profiles)?.next().is_some() {
-            return Ok(());
-        }
-
-        let bundled_profiles = SEELEN_COMMON.bundled_profiles_path();
-        copy_dir_all(bundled_profiles, user_profiles)?;
-        Ok(())
-    }
-
     fn recreate_user_folders() -> Result<()> {
         std::fs::create_dir_all(SEELEN_COMMON.app_temp_dir())?;
 
@@ -87,8 +72,6 @@ impl RestorationAndMigration {
         std::fs::create_dir_all(SEELEN_COMMON.user_sounds_path())?;
         std::fs::create_dir_all(SEELEN_COMMON.user_plugins_path())?;
         std::fs::create_dir_all(SEELEN_COMMON.user_widgets_path())?;
-
-        Self::recreate_profiles()?;
         Ok(())
     }
 

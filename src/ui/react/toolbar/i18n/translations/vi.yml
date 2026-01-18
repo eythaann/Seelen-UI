@@ -67,24 +67,3 @@ settings:
   power: Quyền lực
   restart: Khởi động lại
   title: Cài đặt
-userhome:
-  empty_list: Không có mặt hàng
-  folders:
-    desktop: Máy tính để bàn
-    documents: Tài liệu
-    downloads: Tải xuống
-    more_items: Hiển thị thêm ...
-    music: Âm nhạc
-    pictures: Hình ảnh
-    recent: Gần đây được sử dụng
-    reduce_items: Hiển thị ít hơn ...
-    title: Thư mục người dùng
-    videos: Video
-  profile:
-    accounts: Mở cài đặt tài khoản
-    open_onedrive: Mở thư mục OneDrive
-    open_user_folder: Mở thư mục người dùng
-  seelen_options:
-    open_installation_folder: Mở thư mục Cài đặt Seelen
-    open_log_folder: Mở thư mục nhật ký Seelen
-    title: Thư mục Seelen

@@ -67,24 +67,3 @@ settings:
   power: Нерӯ
   restart: Оғози дубора
   title: Танзимот
-userhome:
-  empty_list: Ҳеҷ чиз нест
-  folders:
-    desktop: Мизи корӣ
-    documents: Ҳуҷҷатҳо
-    downloads: Боргириҳо
-    more_items: Мӯҳтарам ...
-    music: Мусиқӣ
-    pictures: Тасвирҳо
-    recent: Ба наздикӣ истифода бурд
-    reduce_items: Нишон диҳед ...
-    title: Директорҳои корбар
-    videos: Видео
-  profile:
-    accounts: Танзимоти ҳисоб
-    open_onedrive: Кушодани директорияи Ondrive
-    open_user_folder: Феҳристи кушодаи корбар
-  seelen_options:
-    open_installation_folder: Папкаи танзимоти Senelenро кушоед
-    open_log_folder: Папкаи сабти Seelen кушоед
-    title: Директори Селен

@@ -54,7 +54,6 @@ const initialState: RootState = {
   },
   plugins: [],
   widgets: [],
-  profiles: [],
   wallpapers: [],
   byWidget: defaultSettings.inner.byWidget,
   byTheme: {},

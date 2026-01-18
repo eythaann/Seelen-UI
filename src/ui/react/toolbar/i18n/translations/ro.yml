@@ -67,24 +67,3 @@ settings:
   power: Putere
   restart: Repornire
   title: Setări
-userhome:
-  empty_list: Nu există articole
-  folders:
-    desktop: Desktop
-    documents: Documente
-    downloads: Descărcări
-    more_items: Arată mai mult...
-    music: Muzică
-    pictures: Imagini
-    recent: Utilizate recent
-    reduce_items: Arată mai puțin...
-    title: Directoare utilizator
-    videos: Video
-  profile:
-    accounts: Deschideți setările contului
-    open_onedrive: Deschideți directorul OneDrive
-    open_user_folder: Deschideți directorul utilizatorului
-  seelen_options:
-    open_installation_folder: Deschideți folderul de setări Seelen
-    open_log_folder: Deschideți folderul jurnal Seelen
-    title: Directoare Seelen

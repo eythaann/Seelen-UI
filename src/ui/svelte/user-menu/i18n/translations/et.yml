@@ -1,0 +1,21 @@
+empty_list: Üksusi pole
+folders:
+  desktop: Töölaud
+  documents: Dokumendid
+  downloads: Allalaadimised
+  more_items: Näita rohkem...
+  music: Muusika
+  pictures: Pildid
+  recent: Hiljuti kasutatud
+  reduce_items: Näita vähem...
+  title: Kasutajate kataloogid
+  videos: Videod
+profile:
+  accounts: Avage konto seaded
+  log_out: Logi välja
+  open_onedrive: Avage OneDrive'i kataloog
+  open_user_folder: Ava kasutajakataloog
+seelen_options:
+  open_installation_folder: Avage Seeleni seadete kaust
+  open_log_folder: Avage Seeleni logikaust
+  title: Seeleni kataloogid

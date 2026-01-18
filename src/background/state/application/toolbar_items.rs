@@ -13,7 +13,7 @@ impl FullState {
     pub fn initial_toolbar_items() -> Placeholder {
         Placeholder {
             left: vec![
-                ToolbarItem2::Plugin("@default/user-folder".into()),
+                ToolbarItem2::Plugin("@seelen/tb-user-menu".into()),
                 ToolbarItem2::Inline(Box::new(ToolbarItem::Text(TextToolbarItem {
                     template: "return \"|\"".into(),
                     ..Default::default()

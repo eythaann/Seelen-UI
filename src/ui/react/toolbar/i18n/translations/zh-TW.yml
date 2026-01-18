@@ -67,24 +67,3 @@ settings:
   power: 力量
   restart: 重新啟動
   title: 設定
-userhome:
-  empty_list: 沒有項目
-  folders:
-    desktop: 桌面
-    documents: 文件
-    downloads: 下載
-    more_items: 顯示更多...
-    music: 音樂
-    pictures: 圖片
-    recent: 最近使用的
-    reduce_items: 少顯示...
-    title: 用戶目錄
-    videos: 影片
-  profile:
-    accounts: 打開帳戶設置
-    open_onedrive: 打開OneDrive目錄
-    open_user_folder: 打開用戶目錄
-  seelen_options:
-    open_installation_folder: 打開Seelen設置文件夾
-    open_log_folder: 打開Seelen日誌文件夾
-    title: Seelen目錄

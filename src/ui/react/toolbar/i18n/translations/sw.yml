@@ -67,24 +67,3 @@ settings:
   power: Nguvu
   restart: Anzisha tena
   title: Mipangilio
-userhome:
-  empty_list: Hakuna vitu
-  folders:
-    desktop: Desktop
-    documents: Hati
-    downloads: Upakuaji
-    more_items: Onyesha zaidi ...
-    music: Muziki
-    pictures: Picha
-    recent: Imetumika hivi karibuni
-    reduce_items: Onyesha kidogo ...
-    title: Saraka za watumiaji
-    videos: Video
-  profile:
-    accounts: Fungua mipangilio ya akaunti
-    open_onedrive: Fungua saraka ya OneDrive
-    open_user_folder: Saraka ya Mtumiaji Fungua
-  seelen_options:
-    open_installation_folder: Fungua folda ya Mipangilio ya Seelen
-    open_log_folder: Fungua folda ya logi ya Seelen
-    title: Saraka za Seelen

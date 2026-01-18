@@ -67,24 +67,3 @@ settings:
   power: Driva
   restart: Omstart
   title: inställningar
-userhome:
-  empty_list: Inga föremål
-  folders:
-    desktop: Skrivbord
-    documents: Dokument
-    downloads: Nedladdningar
-    more_items: Visa mer...
-    music: Musik
-    pictures: Bilder
-    recent: Nyligen använt
-    reduce_items: Visa mindre...
-    title: Användarkataloger
-    videos: Videor
-  profile:
-    accounts: Öppna kontoinställningar
-    open_onedrive: Öppna OneDrive-katalogen
-    open_user_folder: Öppna användarkatalogen
-  seelen_options:
-    open_installation_folder: Öppna Seelens inställningsmapp
-    open_log_folder: Öppna Seelen loggmapp
-    title: Seelen kataloger

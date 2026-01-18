@@ -67,24 +67,3 @@ settings:
   power: Хүч чадал
   restart: Дахин ачааллах
   title: Тохиргоо
-userhome:
-  empty_list: Зүйл байхгүй
-  folders:
-    desktop: Явган худлаа
-    documents: Дч дүрэм
-    downloads: Татаж авах
-    more_items: Илүү ихийг харуулах ...
-    music: Хөгжим
-    pictures: Зураг
-    recent: Саяхан ашигласан
-    reduce_items: Бага харуулах ...
-    title: Хэрэглэгчийн газар
-    videos: Видео бичлэг
-  profile:
-    accounts: Дансны тохиргоог нээх
-    open_onedrive: OnedRive директорыг нээх
-    open_user_folder: Хэрэглэгчийн нэрийг нээх
-  seelen_options:
-    open_installation_folder: Seelen Тохиргоо хавтсыг нээнэ үү
-    open_log_folder: Seelen Log хавтасыг нээнэ үү
-    title: Seeln директорууд

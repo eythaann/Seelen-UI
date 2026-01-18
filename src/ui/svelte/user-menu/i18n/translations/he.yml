@@ -1,0 +1,21 @@
+empty_list: אין פריטים
+folders:
+  desktop: שולחן עבודה
+  documents: מסמכים
+  downloads: הורדות
+  more_items: הצג עוד...
+  music: מוּסִיקָה
+  pictures: תמונות
+  recent: בשימוש לאחרונה
+  reduce_items: הצג פחות...
+  title: ספריות משתמשים
+  videos: סרטונים
+profile:
+  accounts: פתח את הגדרות החשבון
+  log_out: התנתק
+  open_onedrive: פתח את ספריית OneDrive
+  open_user_folder: פתח את ספריית המשתמש
+seelen_options:
+  open_installation_folder: פתח את תיקיית ההגדרות של Seelen
+  open_log_folder: פתח את תיקיית היומן של Seelen
+  title: ספריות של Seelen

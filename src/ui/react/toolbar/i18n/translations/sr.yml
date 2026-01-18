@@ -67,24 +67,3 @@ settings:
   power: Моћ
   restart: Поново покренути
   title: Подешавања
-userhome:
-  empty_list: Нема предмета
-  folders:
-    desktop: Радна површина
-    documents: Документи
-    downloads: Преузимања
-    more_items: Прикажи више ...
-    music: Музика
-    pictures: Слике
-    recent: Недавно коришћен
-    reduce_items: Прикажи мање ...
-    title: Корисничке именике
-    videos: Видеос
-  profile:
-    accounts: Подешавања отвореног налога
-    open_onedrive: Отворено ОнеДриве именик
-    open_user_folder: Отворите директориј усер
-  seelen_options:
-    open_installation_folder: Отворите директоријум Сеелен Сеттингс
-    open_log_folder: Отворите мапу Сеелен Лог
-    title: Сеелен директорији

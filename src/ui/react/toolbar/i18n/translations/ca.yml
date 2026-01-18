@@ -67,24 +67,3 @@ settings:
   power: Força
   restart: Reinicia
   title: Configuració
-userhome:
-  empty_list: Sense articles
-  folders:
-    desktop: Escriptori
-    documents: Documents
-    downloads: Descàrregues
-    more_items: Mostra més ...
-    music: Música
-    pictures: Imatges
-    recent: S'utilitza recentment
-    reduce_items: Mostra menys ...
-    title: Directoris d'usuaris
-    videos: Vídeos
-  profile:
-    accounts: Configuració del compte obert
-    open_onedrive: Obriu el directori OneDrive
-    open_user_folder: Obriu el directori d'usuaris
-  seelen_options:
-    open_installation_folder: Obriu la carpeta de configuració de Seelen
-    open_log_folder: Obriu la carpeta de registre de Seelen
-    title: Directoris de Seelen

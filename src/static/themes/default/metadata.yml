@@ -22,4 +22,5 @@ styles:
   "@seelen/workspaces-viewer": !include styles/workspaces-viewer.scss
   "@seelen/apps-menu": !include styles/apps-menu.scss
   "@seelen/keyboard-selector": !include styles/keyboard-selector.scss
+  "@seelen/user-menu": !include styles/user-menu.scss
 sharedStyles: !include ./shared/index.scss

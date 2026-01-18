@@ -67,24 +67,3 @@ settings:
   power: พลัง
   restart: เริ่มต้นใหม่
   title: การตั้งค่า
-userhome:
-  empty_list: ไม่มีรายการ
-  folders:
-    desktop: เดสก์ท็อป
-    documents: เอกสาร
-    downloads: การดาวน์โหลด
-    more_items: แสดงเพิ่มเติม ...
-    music: ดนตรี
-    pictures: รูปภาพ
-    recent: ใช้เมื่อเร็ว ๆ นี้
-    reduce_items: แสดงน้อยลง ...
-    title: ไดเรกทอรีผู้ใช้
-    videos: วิดีโอ
-  profile:
-    accounts: เปิดการตั้งค่าบัญชี
-    open_onedrive: เปิดไดเรกทอรี OneDrive
-    open_user_folder: เปิดไดเรกทอรีผู้ใช้
-  seelen_options:
-    open_installation_folder: เปิดโฟลเดอร์การตั้งค่า Seelen
-    open_log_folder: เปิดโฟลเดอร์ Seelen Log
-    title: ไดเรกทอรี Seelen

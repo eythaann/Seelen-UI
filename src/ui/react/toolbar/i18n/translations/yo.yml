@@ -67,24 +67,3 @@ settings:
   power: Agbara
   restart: Tun bẹrẹ
   title: Ètò
-userhome:
-  empty_list: Ko si awọn ohun kan
-  folders:
-    desktop: Tabili
-    documents: Awọn iwe aṣẹ
-    downloads: Igbasilẹ
-    more_items: Ṣe afihan diẹ sii ...
-    music: Orin
-    pictures: Awọn aworan
-    recent: Laipe lo
-    reduce_items: Fihan diẹ sii ...
-    title: Awọn ilana Olumulo
-    videos: Awọn fidio
-  profile:
-    accounts: Ṣii awọn eto iroyin
-    open_onedrive: Ṣii itọsọna ti odinẹ
-    open_user_folder: Ṣii itọsọna olumulo
-  seelen_options:
-    open_installation_folder: Ṣii folda Eto Sisen
-    open_log_folder: Ṣi sableber log
-    title: Awọn ilana nkan iwaju

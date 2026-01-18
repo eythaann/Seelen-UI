@@ -1,0 +1,21 @@
+empty_list: Ямар ч зүйл алга
+folders:
+  desktop: Ширээний компьютер
+  documents: Баримт бичиг
+  downloads: Татаж авсан зүйлс
+  more_items: Дэлгэрэнгүй харуулах...
+  music: Хөгжим
+  pictures: Зураг
+  recent: Саяхан ашигласан
+  reduce_items: Бага харуулах...
+  title: Хэрэглэгчийн лавлахууд
+  videos: Видеонууд
+profile:
+  accounts: Бүртгэлийн тохиргоог нээнэ үү
+  log_out: Гарах
+  open_onedrive: OneDrive лавлахыг нээнэ үү
+  open_user_folder: Хэрэглэгчийн лавлахыг нээх
+seelen_options:
+  open_installation_folder: Seelen тохиргооны хавтсыг нээнэ үү
+  open_log_folder: Seelen бүртгэлийн хавтсыг нээнэ үү
+  title: Seelen лавлахууд

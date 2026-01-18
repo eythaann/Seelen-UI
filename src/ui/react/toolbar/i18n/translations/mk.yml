@@ -67,24 +67,3 @@ settings:
   power: Моќ
   restart: Рестарт
   title: Поставки
-userhome:
-  empty_list: Нема предмети
-  folders:
-    desktop: Работна површина
-    documents: Документи
-    downloads: Преземања
-    more_items: Покажете повеќе ...
-    music: Музика
-    pictures: Слики
-    recent: Неодамна користено
-    reduce_items: Покажете помалку ...
-    title: Кориснички директориуми
-    videos: Видеа
-  profile:
-    accounts: Поставки за отворена сметка
-    open_onedrive: Отворен директориум на OneDrive
-    open_user_folder: Отворете го директориумот за корисници
-  seelen_options:
-    open_installation_folder: Отворете ја папката за поставки Seelen
-    open_log_folder: Отворете ја папката за дневник на Селен
-    title: Директориуми на Селен

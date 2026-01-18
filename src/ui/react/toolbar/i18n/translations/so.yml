@@ -67,24 +67,3 @@ settings:
   power: Awood
   restart: Dib u bilow
   title: Dejinta
-userhome:
-  empty_list: Wax walboo ah
-  folders:
-    desktop: Desktop
-    documents: Duqo
-    downloads: Soo dejiso
-    more_items: Muuji inbadan ...
-    music: Muusik
-    pictures: Sawirro
-    recent: Dhawaan la adeegsaday
-    reduce_items: Muuji wax ka yar ...
-    title: Tilmaamayaasha adeegsadaha
-    videos: Rikaanolo
-  profile:
-    accounts: Dejinta koontada furan
-    open_onedrive: Furan tusaha on-odedrive
-    open_user_folder: Tilmaanta isticmaale ee furan
-  seelen_options:
-    open_installation_folder: Fur Feejignaanta Selen Selen
-    open_log_folder: Fur Feejignaanta Selelen Log
-    title: Tilmaamayaasha SELEN

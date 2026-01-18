@@ -91,7 +91,6 @@ slu_events_declaration! {
     StatePluginsChanged(Vec<Plugin>) as "plugins-changed",
     StateWidgetsChanged(Vec<Widget>) as "widgets-changed",
     StateWallpapersChanged(Vec<Wallpaper>) as "UserResources::wallpapers-changed",
-    StateProfilesChanged(Vec<Profile>) as "profiles-changed",
 
     // system tray
     SystemTrayChanged(Vec<SysTrayIcon>) as "system-tray::changed",

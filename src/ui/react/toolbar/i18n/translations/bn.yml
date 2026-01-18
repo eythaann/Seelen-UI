@@ -67,24 +67,3 @@ settings:
   power: শক্তি
   restart: আবার শুরু
   title: সেটিংস
-userhome:
-  empty_list: কোনও আইটেম নেই
-  folders:
-    desktop: ডেস্কটপ
-    documents: নথি
-    downloads: ডাউনলোড
-    more_items: আরও দেখান ...
-    music: সংগীত
-    pictures: ছবি
-    recent: সম্প্রতি ব্যবহৃত
-    reduce_items: কম দেখান ...
-    title: ব্যবহারকারী ডিরেক্টরি
-    videos: ভিডিও
-  profile:
-    accounts: অ্যাকাউন্ট সেটিংস খুলুন
-    open_onedrive: ওয়ানড্রাইভ ডিরেক্টরি খুলুন
-    open_user_folder: ব্যবহারকারী ডিরেক্টরি খুলুন
-  seelen_options:
-    open_installation_folder: সিলেন সেটিংস ফোল্ডারটি খুলুন
-    open_log_folder: সিলেন লগ ফোল্ডারটি খুলুন
-    title: সিলেন ডিরেক্টরি

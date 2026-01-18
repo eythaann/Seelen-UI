@@ -1,0 +1,21 @@
+empty_list: Walang item
+folders:
+  desktop: Desktop
+  documents: Mga dokumento
+  downloads: Mga download
+  more_items: Magpakita ng higit pa...
+  music: Musika
+  pictures: Mga larawan
+  recent: Ginamit kamakailan
+  reduce_items: Magpakita ng mas kaunti...
+  title: Mga direktoryo ng gumagamit
+  videos: Mga video
+profile:
+  accounts: Buksan ang mga setting ng account
+  log_out: Log out
+  open_onedrive: Buksan ang direktoryo ng OneDrive
+  open_user_folder: Buksan ang direktoryo ng gumagamit
+seelen_options:
+  open_installation_folder: Buksan ang folder ng mga setting ng Seelen
+  open_log_folder: Buksan ang Seelen log folder
+  title: Mga direktoryo ng Seelen

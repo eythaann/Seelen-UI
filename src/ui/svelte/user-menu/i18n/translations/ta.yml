@@ -1,0 +1,21 @@
+empty_list: பொருட்கள் இல்லை
+folders:
+  desktop: டெஸ்க்டாப்
+  documents: ஆவணங்கள்
+  downloads: பதிவிறக்கங்கள்
+  more_items: மேலும் காட்டு...
+  music: இசை
+  pictures: படங்கள்
+  recent: சமீபத்தில் பயன்படுத்தப்பட்டது
+  reduce_items: குறைவாகக் காட்டு...
+  title: பயனர் கோப்பகங்கள்
+  videos: வீடியோக்கள்
+profile:
+  accounts: கணக்கு அமைப்புகளைத் திறக்கவும்
+  log_out: வெளியேறு
+  open_onedrive: OneDrive கோப்பகத்தைத் திறக்கவும்
+  open_user_folder: பயனர் கோப்பகத்தைத் திறக்கவும்
+seelen_options:
+  open_installation_folder: சீலன் அமைப்புகள் கோப்புறையைத் திறக்கவும்
+  open_log_folder: சீலன் பதிவு கோப்புறையைத் திறக்கவும்
+  title: சீலன் கோப்பகங்கள்

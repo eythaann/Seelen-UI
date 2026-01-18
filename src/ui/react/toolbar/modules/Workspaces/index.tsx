@@ -154,7 +154,7 @@ export function WorkspacesModule({ module }: Props) {
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
       trigger={["contextMenu"]}
-      dropdownRender={() => (
+      popupRender={() => (
         <BackgroundByLayersV2 className="ft-bar-item-context-menu-container">
           <Menu className="ft-bar-item-context-menu" items={CommonItemContextMenu(t, module)} />
         </BackgroundByLayersV2>

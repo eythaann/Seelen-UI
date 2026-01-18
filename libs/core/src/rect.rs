@@ -13,7 +13,25 @@ pub struct Rect {
     pub bottom: i32,
 }
 
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+pub struct Frame {
+    pub x: i32,
+    pub y: i32,
+    pub width: u32,
+    pub height: u32,
+}
+
 impl Rect {
+    pub fn as_frame(&self) -> Frame {
+        Frame {
+            x: self.left,
+            y: self.top,
+            width: (self.right - self.left) as u32,
+            height: (self.bottom - self.top) as u32,
+        }
+    }
+
     pub fn width(&self) -> i32 {
         self.right - self.left
     }

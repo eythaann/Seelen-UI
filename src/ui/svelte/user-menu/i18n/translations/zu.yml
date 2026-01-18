@@ -1,0 +1,21 @@
+empty_list: Azikho izinto
+folders:
+  desktop: Ideskithophu
+  documents: Amadokhumenti
+  downloads: Okulandiwe
+  more_items: Bonisa okwengeziwe...
+  music: Umculo
+  pictures: Izithombe
+  recent: Okusanda kusetshenziswa
+  reduce_items: Bonisa okuncane...
+  title: Izinkomba zomsebenzisi
+  videos: Amavidiyo
+profile:
+  accounts: Vula izilungiselelo ze-akhawunti
+  log_out: Phuma
+  open_onedrive: Vula umkhombandlela we-OneDrive
+  open_user_folder: Vula uhla lwemibhalo lomsebenzisi
+seelen_options:
+  open_installation_folder: Vula ifolda yezilungiselelo ze-Seelen
+  open_log_folder: Vula ifolda yelogi ye-Seelen
+  title: Seelen Izincwajana

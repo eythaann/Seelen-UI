@@ -1,0 +1,21 @@
+empty_list: لا توجد عناصر
+folders:
+  desktop: سطح المكتب
+  documents: وثائق
+  downloads: التنزيلات
+  more_items: عرض المزيد...
+  music: موسيقى
+  pictures: الصور
+  recent: استخدمت مؤخرا
+  reduce_items: عرض أقل...
+  title: أدلة المستخدم
+  videos: فيديوهات
+profile:
+  accounts: افتح إعدادات الحساب
+  log_out: تسجيل الخروج
+  open_onedrive: افتح دليل OneDrive
+  open_user_folder: افتح دليل المستخدم
+seelen_options:
+  open_installation_folder: افتح مجلد إعدادات Seelen
+  open_log_folder: افتح مجلد سجل Seelen
+  title: أدلة سيلين

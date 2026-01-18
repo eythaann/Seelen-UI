@@ -1,0 +1,21 @@
+empty_list: არ არის ელემენტი
+folders:
+  desktop: სამუშაო მაგიდა
+  documents: დოკუმენტები
+  downloads: ჩამოტვირთვები
+  more_items: მეტის ჩვენება...
+  music: მუსიკა
+  pictures: სურათები
+  recent: ცოტა ხნის წინ გამოყენებული
+  reduce_items: ნაკლების ჩვენება...
+  title: მომხმარებლის დირექტორიები
+  videos: ვიდეოები
+profile:
+  accounts: გახსენით ანგარიშის პარამეტრები
+  log_out: გასვლა
+  open_onedrive: გახსენით OneDrive დირექტორია
+  open_user_folder: გახსენით მომხმარებლის დირექტორია
+seelen_options:
+  open_installation_folder: გახსენით Seelen პარამეტრების საქაღალდე
+  open_log_folder: გახსენით Seelen ჟურნალის საქაღალდე
+  title: Seelen დირექტორიები

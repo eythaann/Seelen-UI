@@ -67,24 +67,3 @@ settings:
   power: Voima
   restart: Uudelleenkäynnistää
   title: asetukset
-userhome:
-  empty_list: Ei kohteita
-  folders:
-    desktop: Työpöytä
-    documents: Asiakirjat
-    downloads: Lataukset
-    more_items: Näytä lisää...
-    music: Musiikki
-    pictures: Kuvat
-    recent: Hiljattain käytetty
-    reduce_items: Näytä vähemmän...
-    title: Käyttäjien hakemistot
-    videos: Videot
-  profile:
-    accounts: Avaa tilin asetukset
-    open_onedrive: Avaa OneDrive-hakemisto
-    open_user_folder: Avaa käyttäjähakemisto
-  seelen_options:
-    open_installation_folder: Avaa Seelen-asetuskansio
-    open_log_folder: Avaa Seelen log-kansio
-    title: Seelen hakemistot

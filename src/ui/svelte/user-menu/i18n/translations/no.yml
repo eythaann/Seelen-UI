@@ -1,0 +1,21 @@
+empty_list: Ingen varer
+folders:
+  desktop: Skrivebord
+  documents: Dokumenter
+  downloads: Nedlastinger
+  more_items: Vis mer...
+  music: Musikk
+  pictures: Bilder
+  recent: Nylig brukt
+  reduce_items: Vis mindre...
+  title: Brukerkataloger
+  videos: Videoer
+profile:
+  accounts: Åpne kontoinnstillinger
+  log_out: Logg ut
+  open_onedrive: Åpne OneDrive-katalogen
+  open_user_folder: Åpne brukerkatalogen
+seelen_options:
+  open_installation_folder: Åpne mappen Seelen-innstillinger
+  open_log_folder: Åpne Seelen-loggmappen
+  title: Seelen-kataloger
