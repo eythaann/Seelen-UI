@@ -256,57 +256,59 @@ impl ResourceManager {
                     .is_some_and(|sub| root_path.join(sub).exists()))
     }
 
-    /// Get icon pack by app user model id, filename or path
-    pub fn has_app_icon(&self, umid: Option<&str>, path: Option<&Path>) -> bool {
+    /// Internal recursive function that checks for app icon without acquiring locks
+    fn _has_app_icon(system_pack: &IconPack, umid: Option<&str>, path: Option<&Path>) -> bool {
         let current_mtime = path.and_then(last_edit_at);
+        let lower_path = path.map(|p| p.to_string_lossy().to_lowercase());
 
-        self.with_system_pack(|system_pack| {
-            let lower_path = path.map(|p| p.to_string_lossy().to_lowercase());
+        for entry in &system_pack.entries {
+            let IconPackEntry::Unique(entry) = entry else {
+                continue;
+            };
 
-            for entry in &system_pack.entries {
-                let IconPackEntry::Unique(entry) = entry else {
-                    continue;
-                };
-
-                let mut found = None;
-                if let (Some(entry_umid), Some(umid)) = (&entry.umid, umid) {
-                    if entry_umid == umid {
-                        found = Some(entry);
-                    }
-                }
-
-                if found.is_none()
-                    && entry
-                        .path
-                        .as_ref()
-                        .map(|p| p.to_string_lossy().to_lowercase())
-                        == lower_path
-                {
+            let mut found = None;
+            if let (Some(entry_umid), Some(umid)) = (&entry.umid, umid) {
+                if entry_umid == umid {
                     found = Some(entry);
                 }
-
-                if let Some(entry) = found {
-                    // Check if source file was modified since icon was cached, for invalidation
-                    if let (Some(cached), Some(current)) = (entry.source_mtime, current_mtime) {
-                        if cached != current {
-                            return false;
-                        }
-                    }
-
-                    if entry.redirect.is_some() {
-                        return self.has_app_icon(None, entry.redirect.as_deref());
-                    }
-
-                    if let Some(icon) = &entry.icon {
-                        if Self::icon_exists(icon) {
-                            return true;
-                        }
-                    }
-                };
             }
 
-            false
-        })
+            if found.is_none()
+                && entry
+                    .path
+                    .as_ref()
+                    .map(|p| p.to_string_lossy().to_lowercase())
+                    == lower_path
+            {
+                found = Some(entry);
+            }
+
+            if let Some(entry) = found {
+                // Check if source file was modified since icon was cached, for invalidation
+                if let (Some(cached), Some(current)) = (entry.source_mtime, current_mtime) {
+                    if cached != current {
+                        return false;
+                    }
+                }
+
+                if let Some(redirect) = &entry.redirect {
+                    return Self::_has_app_icon(system_pack, None, Some(redirect));
+                }
+
+                if let Some(icon) = &entry.icon {
+                    if Self::icon_exists(icon) {
+                        return true;
+                    }
+                }
+            };
+        }
+
+        false
+    }
+
+    /// Get icon pack by app user model id, filename or path
+    pub fn has_app_icon(&self, umid: Option<&str>, path: Option<&Path>) -> bool {
+        self.with_system_pack(|system_pack| Self::_has_app_icon(system_pack, umid, path))
     }
 
     pub fn has_shared_file_icon(&self, path: &Path) -> bool {
