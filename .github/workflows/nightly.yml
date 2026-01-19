@@ -197,7 +197,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = "${{ needs.update-tag.outputs.nightly-version }}"
+          $version = ${{ needs.update-tag.outputs.nightly-version }}
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $setupFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
@@ -220,7 +220,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = "${{ needs.update-tag.outputs.nightly-version }}"
+          $version = ${{ needs.update-tag.outputs.nightly-version }}
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
           $normalFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
