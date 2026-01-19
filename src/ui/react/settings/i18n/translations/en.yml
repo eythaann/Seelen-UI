@@ -84,6 +84,9 @@ extras:
   links: Official Links
   relaunch: Relaunch
   version: Version
+  version_fixed: >-
+    The application and WebView2 Runtime versions are fixed.
+    This means that the application will not receive updates and the WebView2 Runtime will not be automatically updated with Windows updates.
 general:
   accent_color: Accent Color
   date_format: Date Format

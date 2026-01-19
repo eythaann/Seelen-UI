@@ -1,5 +1,7 @@
 use windows::Win32::Storage::Packaging::Appx::GetCurrentPackageId;
 
+use crate::utils::constants::SEELEN_COMMON;
+
 pub fn is_windows_10() -> bool {
     matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if (&10240..&22000).contains(&x))
 }
@@ -7,6 +9,10 @@ pub fn is_windows_10() -> bool {
 #[allow(dead_code)]
 pub fn is_windows_11() -> bool {
     matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22000)
+}
+
+pub fn has_fixed_runtime() -> bool {
+    SEELEN_COMMON.app_resource_dir().join("runtime").exists()
 }
 
 pub fn is_running_as_appx() -> bool {

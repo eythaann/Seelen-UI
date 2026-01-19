@@ -1,6 +1,4 @@
-import { SeelenCommand } from "@seelen-ui/lib";
 import type { ResourceText } from "@seelen-ui/lib/types";
-import { invoke } from "@tauri-apps/api/core";
 
 export function getRootContainer(): HTMLElement {
   const element = document.getElementById("root");
@@ -12,14 +10,6 @@ export function getRootContainer(): HTMLElement {
 
 export function toPhysicalPixels(size: number): number {
   return Math.round(size * globalThis.devicePixelRatio);
-}
-
-export function wasInstalledUsingMSIX(): Promise<boolean> {
-  return invoke(SeelenCommand.IsAppxPackage);
-}
-
-export function isDev(): Promise<boolean> {
-  return invoke(SeelenCommand.IsDevMode);
 }
 
 export function getResourceText(text: ResourceText, locale: string): string {

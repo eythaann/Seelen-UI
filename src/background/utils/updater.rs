@@ -2,14 +2,17 @@ use seelen_core::state::UpdateChannel;
 use slu_ipc::messages::SvcAction;
 use tauri_plugin_updater::{Update, UpdaterExt};
 
-use crate::{app::get_app_handle, cli::ServicePipe, error::Result, state::application::FULL_STATE};
+use crate::{
+    app::get_app_handle, cli::ServicePipe, error::Result, state::application::FULL_STATE,
+    utils::has_fixed_runtime,
+};
 
 use super::is_running_as_appx;
 
 pub static SIGN_PUB_KEY: &str = "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK";
 
 pub async fn check_for_updates() -> Result<Option<Update>> {
-    if tauri::is_dev() || is_running_as_appx() {
+    if tauri::is_dev() || has_fixed_runtime() || is_running_as_appx() {
         return Ok(None);
     }
 

@@ -22,7 +22,6 @@ use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::icon_extractor::{
     request_icon_extraction_from_file, request_icon_extraction_from_umid,
 };
-use crate::utils::is_running_as_appx;
 use crate::utils::pwsh::PwshScript;
 use crate::windows_api::hdc::DeviceContext;
 use crate::windows_api::window::event::WinEvent;
@@ -116,8 +115,13 @@ fn is_dev_mode() -> bool {
 }
 
 #[tauri::command(async)]
+fn has_fixed_runtime() -> bool {
+    crate::utils::has_fixed_runtime()
+}
+
+#[tauri::command(async)]
 fn is_appx_package() -> bool {
-    is_running_as_appx()
+    crate::utils::is_running_as_appx()
 }
 
 #[tauri::command(async)]

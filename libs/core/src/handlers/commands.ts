@@ -14,6 +14,7 @@ export enum SeelenCommand {
   GetMousePosition = "get_mouse_position",
   IsDevMode = "is_dev_mode",
   IsAppxPackage = "is_appx_package",
+  HasFixedRuntime = "has_fixed_runtime",
   OpenFile = "open_file",
   SelectFileOnExplorer = "select_file_on_explorer",
   GetUserEnvs = "get_user_envs",

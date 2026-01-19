@@ -114,6 +114,7 @@ slu_commands_declaration! {
 
     IsDevMode = is_dev_mode() -> bool,
     IsAppxPackage = is_appx_package() -> bool,
+    HasFixedRuntime = has_fixed_runtime() -> bool,
     OpenFile = open_file(path: PathBuf),
     SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),
     GetUserEnvs = get_user_envs() -> HashMap<String, String>,
