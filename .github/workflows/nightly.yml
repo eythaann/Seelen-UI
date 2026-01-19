@@ -211,7 +211,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          & "scripts/SetFixedRuntime.ps1" -Arch $arch
+          ./scripts/SetFixedRuntime.ps1 -Architecture $arch
 
       - name: Bundle with Fixed Runtime
         run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign

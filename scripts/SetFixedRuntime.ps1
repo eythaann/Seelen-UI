@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [ValidateSet("x64", "arm64")]
     [string]$Architecture = "x64"
 )
@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Setting up Fixed Runtime for architecture: $Architecture" -ForegroundColor Cyan
 
-$RuntimeDir = ".\src\runtime"
+$RuntimeDir = Resolve-Path ".\src\runtime" | Select-Object -ExpandProperty Path
 $ConfigPath = ".\src\tauri.conf.json"
 
 $CabFile = Get-ChildItem -Path $RuntimeDir -Filter "Microsoft.WebView2.FixedVersionRuntime.*.$Architecture.cab" | Select-Object -First 1
@@ -23,34 +23,30 @@ Write-Host "File found: $($CabFile.Name)" -ForegroundColor Green
 # Extract version from filename (e.g., "143.0.3650.139" from "Microsoft.WebView2.FixedVersionRuntime.143.0.3650.139.x64")
 if ($CabFile.BaseName -match '(\d+\.\d+\.\d+\.\d+)') {
     $Version = $Matches[1]
-} else {
+}
+else {
     Write-Error "Could not extract version from filename: $($CabFile.BaseName)"
     exit 1
 }
 
 $RuntimeFolderName = $Version
-$RuntimeFolder = Join-Path $RuntimeDir $RuntimeFolderName
 $OriginalRuntimeFolder = Join-Path $RuntimeDir $CabFile.BaseName
 
-if (Test-Path $RuntimeFolder) {
-    Write-Host "Runtime is already expanded at: $RuntimeFolder" -ForegroundColor Yellow
-} else {
-    Write-Host "Expanding $($CabFile.Name)..." -ForegroundColor Cyan
-    Expand "$($CabFile.FullName)" -F:* "$RuntimeDir"
+Write-Host "Expanding $($CabFile.Name)..." -ForegroundColor Cyan
+Expand "$($CabFile.FullName)" -F:* "$RuntimeDir"
 
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Error expanding CAB file"
-        exit 1
-    }
-
-    # Rename the extracted folder from full name to just version
-    if (Test-Path $OriginalRuntimeFolder) {
-        Write-Host "Renaming $($CabFile.BaseName) to $Version..." -ForegroundColor Cyan
-        Rename-Item -Path $OriginalRuntimeFolder -NewName $RuntimeFolderName
-    }
-
-    Write-Host "Runtime expanded successfully" -ForegroundColor Green
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Error expanding CAB file"
+    exit 1
 }
+
+# Rename the extracted folder from full name to just version
+if (Test-Path $OriginalRuntimeFolder) {
+    Write-Host "Renaming $($CabFile.BaseName) to $Version..." -ForegroundColor Cyan
+    Rename-Item -Path $OriginalRuntimeFolder -NewName $RuntimeFolderName
+}
+
+Write-Host "Runtime expanded successfully" -ForegroundColor Green
 
 $RelativePath = "runtime/$RuntimeFolderName"
 
@@ -69,7 +65,8 @@ $WebviewConfig = [PSCustomObject]@{
 
 if ($Config.bundle.windows.webviewInstallMode) {
     $Config.bundle.windows.webviewInstallMode = $WebviewConfig
-} else {
+}
+else {
     $Config.bundle.windows | Add-Member -MemberType NoteProperty -Name "webviewInstallMode" -Value $WebviewConfig
 }
 
