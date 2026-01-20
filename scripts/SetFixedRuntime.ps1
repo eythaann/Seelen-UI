@@ -49,7 +49,7 @@ $WebviewConfig = [PSCustomObject]@{
     type = "fixedRuntime"
     path = $RelativePath
 }
-$Config.bundle.windows.webviewInstallMode = $WebviewConfig
+$Config.bundle.windows | Add-Member -Force -MemberType NoteProperty -Name "webviewInstallMode" -Value $WebviewConfig
 
 $Config | ConvertTo-Json -Depth 100 | Set-Content $ConfigPath -Encoding UTF8
 
