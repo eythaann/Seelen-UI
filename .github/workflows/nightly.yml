@@ -213,6 +213,20 @@ jobs:
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
           ./scripts/SetFixedRuntime.ps1 -Architecture $arch
 
+      - name: Copy Runtime to target directory
+        shell: pwsh
+        run: |
+          $runtimeSource = Get-ChildItem -Path "src/runtime" -Directory | Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } | Select-Object -First 1
+          if ($runtimeSource) {
+            $targetRuntimeDir = "target/${{ matrix.target }}/release/runtime"
+            New-Item -ItemType Directory -Force -Path $targetRuntimeDir | Out-Null
+            Copy-Item -Path $runtimeSource.FullName -Destination "$targetRuntimeDir/$($runtimeSource.Name)" -Recurse -Force
+            Write-Output "Copied runtime from $($runtimeSource.FullName) to $targetRuntimeDir/$($runtimeSource.Name)"
+          } else {
+            Write-Error "Runtime version directory not found in src/runtime"
+            exit 1
+          }
+
       - name: Bundle with Fixed Runtime
         run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign
 

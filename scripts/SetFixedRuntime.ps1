@@ -30,21 +30,10 @@ else {
 }
 
 $RuntimeFolderName = $Version
-$OriginalRuntimeFolder = Join-Path $RuntimeDir $CabFile.BaseName
 
-Write-Host "Expanding $($CabFile.Name)..." -ForegroundColor Cyan
-Expand "$($CabFile.FullName)" -F:* "$RuntimeDir"
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "Error expanding CAB file"
-    exit 1
-}
-
-# Rename the extracted folder from full name to just version
-if (Test-Path $OriginalRuntimeFolder) {
-    Write-Host "Renaming $($CabFile.BaseName) to $Version..." -ForegroundColor Cyan
-    Rename-Item -Path $OriginalRuntimeFolder -NewName $RuntimeFolderName
-}
+mkdir "$RuntimeDir/temp" -Force
+Expand "$($CabFile.FullName)" -F:* "$RuntimeDir/temp/"
+Move-Item "$RuntimeDir\temp\$($CabFile.BaseName)" "$RuntimeDir\$Version"
 
 Write-Host "Runtime expanded successfully" -ForegroundColor Green
 
