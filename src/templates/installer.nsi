@@ -628,7 +628,6 @@ Section Install
 
   ; Copy main executable
   File "${MAINBINARYSRCPATH}"
-  ; FILE "${__FILEDIR__}\..\..\seelen_ui.pdb" ;slu
 
   ; Copy resources
   {{#each resources_dirs}}

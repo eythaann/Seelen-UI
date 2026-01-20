@@ -31,33 +31,25 @@ else {
 
 $RuntimeFolderName = $Version
 
-mkdir "$RuntimeDir/temp" -Force
-Expand "$($CabFile.FullName)" -F:* "$RuntimeDir/temp/"
-Move-Item "$RuntimeDir\temp\$($CabFile.BaseName)" "$RuntimeDir\$Version"
+# Clean up old files
+Remove-Item "$RuntimeDir\$($CabFile.BaseName)" -Force -Recurse -ErrorAction SilentlyContinue
+Remove-Item "$RuntimeDir\$Version" -Force -Recurse -ErrorAction SilentlyContinue
 
+# Extraction
+$file = $CabFile.FullName
+$destination = "$RuntimeDir"
+Start-Process -FilePath "cmd.exe" -ArgumentList "/c expand.exe `"$file`" -f:* `"$destination`" > nul 2>&1" -Wait -WindowStyle Hidden | Out-Null
+Move-Item "$RuntimeDir\$($CabFile.BaseName)" "$RuntimeDir\$Version"
 Write-Host "Runtime expanded successfully" -ForegroundColor Green
 
+# Update tauri config file
 $RelativePath = "runtime/$RuntimeFolderName"
-
-Write-Host "Updating tauri.conf.json..." -ForegroundColor Cyan
-
 $Config = Get-Content $ConfigPath -Raw | ConvertFrom-Json
-
-if (-not $Config.bundle.windows) {
-    $Config.bundle | Add-Member -MemberType NoteProperty -Name "windows" -Value ([PSCustomObject]@{})
-}
-
 $WebviewConfig = [PSCustomObject]@{
     type = "fixedRuntime"
     path = $RelativePath
 }
-
-if ($Config.bundle.windows.webviewInstallMode) {
-    $Config.bundle.windows.webviewInstallMode = $WebviewConfig
-}
-else {
-    $Config.bundle.windows | Add-Member -MemberType NoteProperty -Name "webviewInstallMode" -Value $WebviewConfig
-}
+$Config.bundle.windows.webviewInstallMode = $WebviewConfig
 
 $Config | ConvertTo-Json -Depth 100 | Set-Content $ConfigPath -Encoding UTF8
 

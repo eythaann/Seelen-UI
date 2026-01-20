@@ -10,10 +10,11 @@
   Pop $0
 
   ; Clean static folder to remove assets from previous versions
-  ${If} ${FileExists} "$INSTDIR\static\*.*"
-    DetailPrint 'Cleaning static folder from previous installation...'
-    RMDir /r "$INSTDIR\static"
-  ${EndIf}
+  DetailPrint 'Cleaning static folder from previous installation...'
+  RMDir /r "$INSTDIR\static"
+
+  DetailPrint 'Cleaning webview2 runtime from previous installation...'
+  RMDir /r "$INSTDIR\runtime"
 
   File /a "${__FILEDIR__}\..\..\sluhk.dll"
   File /a "${__FILEDIR__}\..\..\SHA256SUMS"
@@ -47,6 +48,11 @@
 !macroend
 
 !macro NSIS_HOOK_POSTUNINSTALL
+  Delete "$INSTDIR\sluhk.dll"
+  Delete "$INSTDIR\SHA256SUMS"
+  Delete "$INSTDIR\SHA256SUMS.sig"
+  Delete "$INSTDIR\seelen_ui.pdb"
+
   ; Refresh file associations icons
   !insertmacro UPDATEFILEASSOC
 !macroend

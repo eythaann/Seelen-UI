@@ -86,6 +86,11 @@ async fn main() -> Result<()> {
     app_builder = register_plugins(app_builder);
     app_builder = register_invoke_handler(app_builder);
 
+    // if no custom runtime is present, the app will use the installed with the system
+    if let Some(path) = crate::utils::get_fixed_runtime_path() {
+        std::env::set_var("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER", path);
+    }
+
     let app = app_builder
         .setup(|app| {
             APP_HANDLE.set(app.handle().to_owned()).unwrap();

@@ -1,6 +1,6 @@
-use windows::Win32::Storage::Packaging::Appx::GetCurrentPackageId;
+use std::path::PathBuf;
 
-use crate::utils::constants::SEELEN_COMMON;
+use windows::Win32::Storage::Packaging::Appx::GetCurrentPackageId;
 
 pub fn is_windows_10() -> bool {
     matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if (&10240..&22000).contains(&x))
@@ -12,7 +12,19 @@ pub fn is_windows_11() -> bool {
 }
 
 pub fn has_fixed_runtime() -> bool {
-    SEELEN_COMMON.app_resource_dir().join("runtime").exists()
+    std::env::var_os("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER").is_some()
+}
+
+pub fn get_fixed_runtime_path() -> Option<PathBuf> {
+    let exe = std::env::current_exe().ok()?;
+    let folder = exe.parent().and_then(|p| p.parent())?;
+    let read_dir = folder.join("runtime").read_dir().ok()?;
+    let runtime = read_dir.last()?.ok()?.path();
+    if runtime.join("msedgewebview2.exe").exists() {
+        Some(runtime)
+    } else {
+        None
+    }
 }
 
 pub fn is_running_as_appx() -> bool {
