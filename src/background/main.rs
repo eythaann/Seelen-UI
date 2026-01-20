@@ -68,7 +68,7 @@ async fn main() -> Result<()> {
 
     // GUI must run as interactive user (not elevated)
     if WindowsApi::is_elevated()? {
-        log::info!("GUI was started with elevated privileges, restarting as interactive user...");
+        println!("GUI was started with elevated privileges, restarting as interactive user...");
         restart_as_interactive_user()?;
     }
 
@@ -88,6 +88,7 @@ async fn main() -> Result<()> {
 
     // if no custom runtime is present, the app will use the installed with the system
     if let Some(path) = crate::utils::get_fixed_runtime_path() {
+        println!("Using fixed runtime: {path:?}");
         std::env::set_var("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER", path);
     }
 

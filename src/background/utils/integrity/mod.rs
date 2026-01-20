@@ -15,7 +15,7 @@ use windows::Win32::{
 use crate::{
     error::Result,
     is_local_dev,
-    utils::{is_running_as_appx, was_installed_using_msix},
+    utils::{has_fixed_runtime, is_running_as_appx, was_installed_using_msix},
     windows_api::{string_utils::WindowsString, WindowsApi},
 };
 
@@ -51,32 +51,42 @@ pub fn register_panic_hook() {
 }
 
 /// Prints information about the computer runtime context to help debugging.
+#[rustfmt::skip]
 pub fn print_initial_information() {
     let version = env!("CARGO_PKG_VERSION");
     let debug = if tauri::is_dev() { " (debug)" } else { "" };
     let local = if is_local_dev() { " (local)" } else { "" };
-    let msix = if is_running_as_appx() { " (msix)" } else { "" };
-    log::info!(
-        "───────────────────── Starting Seelen UI v{version}{local}{debug}{msix} ─────────────────────"
-    );
+
     let os = os_info::get();
     let sys_locale = seelen_core::state::Settings::get_locale();
-    log::info!("Arguments       : {:?}", std::env::args().collect_vec());
-    log::info!("Operating System: {}", os.os_type());
-    log::info!("  version       : {}", os.version());
-    log::info!("  edition       : {}", os.edition().unwrap_or("None"));
-    log::info!("  codename      : {}", os.codename().unwrap_or("None"));
-    log::info!("  bitness       : {}", os.bitness());
+
     log::info!(
-        "  architecture  : {}",
-        os.architecture().unwrap_or("Unknown")
+        "───────────────────── Starting Seelen UI v{version}{local}{debug} ─────────────────────"
     );
-    log::info!(
-        "  locate        : {}",
-        sys_locale.unwrap_or("Unknown".to_owned())
-    );
-    log::info!("WebView2 Runtime: {:?}", webview_version());
-    log::info!("Elevated        : {:?}", WindowsApi::is_elevated());
+
+    log::info!("Arguments        : {:?}", std::env::args().collect_vec());
+    log::info!("Working Directory: {:?}", std::env::current_dir());
+
+    log::info!("Operating System : {}", os.os_type());
+    log::info!("  version        : {}", os.version());
+    log::info!("  edition        : {}", os.edition().unwrap_or("None"));
+    log::info!("  codename       : {}", os.codename().unwrap_or("None"));
+    log::info!("  bitness        : {}", os.bitness());
+    log::info!("  architecture   : {}", os.architecture().unwrap_or("Unknown"));
+    log::info!("  locate         : {}", sys_locale.unwrap_or("Unknown".to_owned()));
+
+    /* let mut sys_info = sysinfo::System::new();
+    sys_info.refresh_cpu();
+    sys_info.refresh_memory();
+    log::info!("Specs");
+    log::info!("  CPU Threads    : {}", sys_info.cpus().len());
+    log::info!("  Memory         : {}GB", sys_info.total_memory() / 1024 / 1024 / 1024); */
+
+    log::info!("WebView2 Runtime : {:?}", webview_version());
+    log::info!("  Fixed          : {:?}", has_fixed_runtime());
+
+    log::info!("Build Profile    : {}", if cfg!(debug_assertions) { "debug" } else { "release" });
+    log::info!("  Bundled with   : {}", if is_running_as_appx() { "APPX/MSIX" } else { "NSIS" });
 }
 
 pub fn restart_as_appx() -> Result<!> {

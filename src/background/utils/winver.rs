@@ -17,8 +17,8 @@ pub fn has_fixed_runtime() -> bool {
 
 pub fn get_fixed_runtime_path() -> Option<PathBuf> {
     let exe = std::env::current_exe().ok()?;
-    let folder = exe.parent().and_then(|p| p.parent())?;
-    let read_dir = folder.join("runtime").read_dir().ok()?;
+    let install_dir = exe.parent()?;
+    let read_dir = install_dir.join("runtime").read_dir().ok()?;
     let runtime = read_dir.last()?.ok()?.path();
     if runtime.join("msedgewebview2.exe").exists() {
         Some(runtime)

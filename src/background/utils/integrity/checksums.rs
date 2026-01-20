@@ -49,7 +49,7 @@ pub fn ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()> {
 }
 
 fn validate_directory_checksums(base_path: &Path, checksums_path: &Path) -> Result<()> {
-    log::info!("Validating checksums for {}", base_path.display());
+    log::trace!("Validating checksums for {}", base_path.display());
 
     let checksums_content = std::fs::read(checksums_path)?;
     let expected_checksums = CheckSums::parse(&checksums_content)?;
@@ -82,7 +82,7 @@ fn validate_directory_checksums(base_path: &Path, checksums_path: &Path) -> Resu
         return Err("Checksums does not match".into());
     }
 
-    log::info!("All Checksums validated successfully");
+    log::trace!("All Checksums validated successfully");
     Ok(())
 }
 
@@ -91,7 +91,7 @@ fn verify_external_signature(file: &Path, signature_file: &Path, key_base64: &st
     let signature_content = std::fs::read_to_string(signature_file)?;
 
     slu_utils::signature::verify_minisign(&checksums_content, &signature_content, key_base64)?;
-    log::info!("Signature verification successful for {}", file.display());
+    log::trace!("Signature verification successful for {}", file.display());
     Ok(())
 }
 
