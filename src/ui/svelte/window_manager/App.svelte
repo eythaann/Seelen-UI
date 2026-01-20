@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Widget } from "@seelen-ui/lib";
-  import Layout from "./modules/layout/infra/Layout.svelte";
+  import Layout from "./layout/infra/Layout.svelte";
 
   onMount(() => {
     Widget.getCurrent().ready();

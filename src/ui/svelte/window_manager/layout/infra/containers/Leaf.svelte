@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { state } from "../../../shared/state.svelte.ts";
+  import { state } from "../../../state.svelte.ts";
   // import { ReservedContainer } from './reserved';
 
   interface Props {

@@ -39,7 +39,7 @@ subscribe(SeelenEvent.GlobalMouseMove, () => {
 });
 
 export const $muted = computed(() => {
-  return $focused.value.class !== "Progman";
+  return !["Progman", "SysListView32"].includes($focused.value.class);
 });
 
 export const $paused = computed(() => {

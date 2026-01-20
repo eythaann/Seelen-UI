@@ -1,21 +1,22 @@
 <script lang="ts">
   import { WmNodeKind } from "@seelen-ui/lib/types";
   import type { Node } from "../domain.ts";
-  import { NodeUtils } from "../../shared/utils.ts";
+  import { NodeUtils } from "../../utils.ts";
   import Leaf from "./containers/Leaf.svelte";
   import Stack from "./containers/Stack.svelte";
   import Container from "./Container.svelte";
 
   interface Props {
     node: Node;
+    overlayVisible: boolean;
   }
 
-  let { node }: Props = $props();
+  let { node, overlayVisible }: Props = $props();
 </script>
 
 {#if !NodeUtils.isEmpty(node)}
   {#if node.type === WmNodeKind.Stack}
-    <Stack {node} />
+    <Stack {node} {overlayVisible} />
   {:else if node.type === WmNodeKind.Leaf && node.active}
     <Leaf hwnd={node.active} growFactor={node.growFactor} />
   {:else if node.type === WmNodeKind.Horizontal || node.type === WmNodeKind.Vertical}
@@ -24,7 +25,7 @@
       class={["wm-container", `wm-${node.type.toLowerCase()}`]}
     >
       {#each node.children as child, idx (idx)}
-        <Container node={child} />
+        <Container node={child} {overlayVisible}/>
       {/each}
     </div>
   {/if}

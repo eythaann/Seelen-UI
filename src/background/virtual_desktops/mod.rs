@@ -100,6 +100,10 @@ impl SluWorkspacesManager2 {
                 if &workspace.id == monitor.active_workspace_id() {
                     workspace.restore();
                 } else {
+                    // allow resume workspaces correctly on change
+                    for addr in &workspace.windows {
+                        let _ = MINIMIZED_BY_WORKSPACES.insert(*addr);
+                    }
                     workspace.hide(true);
                 }
             }

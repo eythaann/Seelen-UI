@@ -14,8 +14,8 @@ use windows::Win32::{
     UI::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, MSG,
-            OBJID_WINDOW,
+            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
+            HSHELL_MONITORCHANGED, MSG, OBJID_WINDOW,
         },
     },
 };
@@ -29,7 +29,10 @@ use crate::{
     utils::spawn_named_thread,
     widgets::{weg::SeelenWeg, window_manager::instance::WindowManagerV2},
     windows_api::{
-        event_window::IS_INTERACTIVE_SESSION,
+        event_window::{
+            BgWindowProc, HSHELL_FULLSCREEN_ENTER, HSHELL_FULLSCREEN_EXIT, IS_INTERACTIVE_SESSION,
+            WM_SHELLHOOKMESSAGE,
+        },
         input::Mouse,
         window::{event::WinEvent, Window},
         WindowEnumerator,
@@ -74,10 +77,7 @@ impl HookManager {
         let event = WinEvent::from(event);
         let origin = Window::from(origin);
         Self::send((event, origin));
-
-        for event in event.get_synthetics(&origin).unwrap_or_default() {
-            Self::send((event, origin));
-        }
+        event.debounce_as_needed(&origin);
     }
 
     fn start() {
@@ -88,6 +88,24 @@ impl HookManager {
             Self::legacy_process_event(event, origin);
         });
         Self::set_event_handler_priority(&eid, 1);
+
+        BgWindowProc::subscribe(|(msg, wparam, lparam)| {
+            if msg == WM_SHELLHOOKMESSAGE.load(Ordering::Acquire) {
+                // println!("WM_SHELLHOOKMESSAGE: {msg} {wparam} {lparam}");
+                match wparam as u32 {
+                    HSHELL_MONITORCHANGED => {
+                        Self::send((WinEvent::SyntheticMonitorChanged, Window::from(lparam)));
+                    }
+                    HSHELL_FULLSCREEN_ENTER => {
+                        Self::send((WinEvent::SyntheticFullscreenStart, Window::from(lparam)));
+                    }
+                    HSHELL_FULLSCREEN_EXIT => {
+                        Self::send((WinEvent::SyntheticFullscreenEnd, Window::from(lparam)));
+                    }
+                    _ => {}
+                }
+            }
+        });
 
         spawn_named_thread("WinEventHook", move || unsafe {
             SetWinEventHook(
@@ -108,29 +126,21 @@ impl HookManager {
         });
     }
 
+    #[allow(dead_code)]
     fn log_event(event: WinEvent, origin: Window) {
-        if event == WinEvent::ObjectLocationChange || !LOG_WIN_EVENTS.load(Ordering::Acquire) {
+        use owo_colors::OwoColorize;
+        if event == WinEvent::ObjectLocationChange {
             return;
         }
-        let event_value = {
-            #[cfg(dev)]
-            {
-                use owo_colors::OwoColorize;
-                event.green()
-            }
-            #[cfg(not(dev))]
-            {
-                &event
-            }
-        };
+        let event_value = event.green();
         if event == WinEvent::ObjectDestroy {
-            return log::debug!("{event_value:?}({:0x})", origin.address());
+            return println!("{event_value:?}({:0x})", origin.address());
         }
-        log::debug!("{event_value:?} | {origin:?}");
+        println!("{event_value:?} | {origin:?}");
     }
 
     fn legacy_process_event(event: WinEvent, origin: Window) {
-        Self::log_event(event, origin);
+        // Self::log_event(event, origin);
 
         // TODO: optimize this, update independent fields instead of the whole struct
         {
@@ -141,8 +151,6 @@ impl HookManager {
                     | WinEvent::ObjectNameChange
                     | WinEvent::SystemMoveSizeStart
                     | WinEvent::SystemMoveSizeEnd
-                    | WinEvent::SyntheticMaximizeStart
-                    | WinEvent::SyntheticMaximizeEnd
                     | WinEvent::SyntheticFullscreenStart
                     | WinEvent::SyntheticFullscreenEnd
             );

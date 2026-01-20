@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Reservation } from "../../domain.ts";
-  import { state } from "../../../shared/state.svelte.ts";
+  import { state } from "../../../state.svelte.ts";
 
   interface Props {
     reservation: Reservation;

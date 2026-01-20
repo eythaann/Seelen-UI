@@ -84,7 +84,7 @@ impl WindowManagerV2 {
         let monitor_info = WindowsApi::monitor_info(monitor.handle())?;
 
         let mut rect = monitor_info.monitorInfo.rcMonitor;
-        if is_toolbar_enabled && toolbar_config.hide_mode != HideMode::Always {
+        if is_toolbar_enabled && toolbar_config.hide_mode == HideMode::Never {
             let toolbar_size = FancyToolbar::get_toolbar_height_on_monitor(monitor)?;
             match state.settings.by_widget.fancy_toolbar.position {
                 FancyToolbarSide::Top => {
@@ -96,7 +96,7 @@ impl WindowManagerV2 {
             }
         }
 
-        if is_weg_enabled && weg_config.hide_mode != HideMode::Always {
+        if is_weg_enabled && weg_config.hide_mode == HideMode::Never {
             let weg_size = SeelenWeg::get_weg_size_on_monitor(monitor)?;
             match weg_config.position {
                 SeelenWegSide::Top => {

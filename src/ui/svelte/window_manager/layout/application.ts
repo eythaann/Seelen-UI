@@ -2,7 +2,7 @@ import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Rect } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import type { State } from "../shared/state.svelte";
+import type { State } from "../state.svelte";
 
 export async function requestPositioningOfLeaves(state: State) {
   const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();

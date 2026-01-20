@@ -1,7 +1,6 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
 import type { FocusedApp, WindowManagerSettings } from "@seelen-ui/lib/types";
 
-import { NodeUtils } from "./utils.ts";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
 let layouts = lazyRune(() => invoke(SeelenCommand.WmGetRenderTree));
@@ -20,24 +19,6 @@ await subscribe(SeelenEvent.WMForceRetiling, () => {
 let focusedApp = $state<FocusedApp>(await invoke(SeelenCommand.GetFocusedApp));
 await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focusedApp = e.payload;
-});
-
-let overlayVisible = $derived.by(() => {
-  if (focusedApp.isSeelenOverlay) {
-    return true;
-  }
-
-  for (const layout of Object.values(layouts.value)) {
-    if (
-      NodeUtils.contains(layout!, focusedApp.hwnd) &&
-      !focusedApp.isMaximized &&
-      !focusedApp.isFullscreened
-    ) {
-      return true;
-    }
-  }
-
-  return false;
 });
 
 let settings = $state<WindowManagerSettings>((await Settings.getAsync()).windowManager);
@@ -81,9 +62,6 @@ class _State {
   }
   get focusedApp() {
     return focusedApp;
-  }
-  get overlayVisible() {
-    return overlayVisible;
   }
   get settings() {
     return settings;
