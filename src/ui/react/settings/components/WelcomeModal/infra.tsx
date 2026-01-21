@@ -56,6 +56,8 @@ export const WelcomeModal = () => {
   const openReviewAndMark = () => {
     invoke(SeelenCommand.OpenFile, { path: REVIEW_URL });
     localStorage.setItem("alreadyReviewed", "yes");
+    localStorage.setItem("welcomeShown", "yes");
+    setIsNewUser(false);
     setShowReviewModal(false);
   };
 
