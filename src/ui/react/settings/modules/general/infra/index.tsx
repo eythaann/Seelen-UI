@@ -3,28 +3,31 @@ import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Input, Select, Switch, Tooltip } from "antd";
 import { type ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
-import { startup } from "../../../shared/tauri/infra.ts";
-import { useAppDispatch } from "../../../shared/utils/infra.ts";
+import { startup } from "../../shared/tauri/infra.ts";
+import { autostart } from "../../../state/system.ts";
+import {
+  getDateFormat,
+  getLanguage,
+  getStartOfWeek,
+  setDateFormat,
+  setLanguage,
+  setStartOfWeek,
+} from "../application.ts";
 
-import { RootActions } from "../../../shared/store/app/reducer.ts";
-import { RootSelectors } from "../../../shared/store/app/selectors.ts";
-
-import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 import { Colors } from "./Colors.tsx";
 import { PerformanceSettings } from "./Performance.tsx";
 
 export function General() {
   const [changingAutostart, setChangingAutostart] = useState(false);
 
-  const autostartStatus = useSelector(RootSelectors.autostart);
-  const language = useSelector(RootSelectors.language);
-  const dateFormat = useSelector(RootSelectors.dateFormat);
-  const startOfWeek = useSelector(RootSelectors.startOfWeek);
+  const autostartStatus = autostart.value;
+  const language = getLanguage();
+  const dateFormat = getDateFormat();
+  const startOfWeek = getStartOfWeek();
 
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
 
   const onAutoStart = async (value: boolean) => {
     setChangingAutostart(true);
@@ -34,15 +37,14 @@ export function General() {
       } else {
         await startup.disable();
       }
-      dispatch(RootActions.setAutostart(await startup.isEnabled()));
+      autostart.value = await startup.isEnabled();
     } catch (e) {
       console.error(e);
     }
     setChangingAutostart(false);
   };
 
-  const onDateFormatChange = (e: ChangeEvent<HTMLInputElement>) =>
-    dispatch(RootActions.setDateFormat(e.currentTarget.value));
+  const onDateFormatChange = (e: ChangeEvent<HTMLInputElement>) => setDateFormat(e.currentTarget.value);
 
   return (
     <>
@@ -73,7 +75,7 @@ export function General() {
             style={{ width: "200px" }}
             value={language}
             options={[...SupportedLanguages]}
-            onSelect={(value) => dispatch(RootActions.setLanguage(value))}
+            onSelect={(value) => setLanguage(value)}
           />
         </SettingsOption>
         <SettingsOption>
@@ -109,7 +111,7 @@ export function General() {
               { label: t("general.sunday"), value: "Sunday" },
               { label: t("general.saturday"), value: "Saturday" },
             ]}
-            onSelect={(value) => dispatch(RootActions.setStartOfWeek(value))}
+            onSelect={(value) => setStartOfWeek(value)}
           />
         </SettingsOption>
       </SettingsGroup>

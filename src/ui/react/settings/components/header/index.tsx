@@ -4,39 +4,25 @@ import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { Button } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation, useSearchParams } from "react-router";
 
-import { SaveStore } from "../../modules/shared/store/infra.ts";
-import { useAppSelector } from "../../modules/shared/utils/infra.ts";
-
-import { RootActions } from "../../modules/shared/store/app/reducer.ts";
-import { RootSelectors } from "../../modules/shared/store/app/selectors.ts";
+import { shortcutsError } from "../../modules/shortcuts/application.ts";
 
 import { RouteExtraInfo } from "./ExtraInfo.tsx";
 import { UpdateButton } from "./UpdateButton.tsx";
 import cs from "./index.module.css";
+import { themes as themeList, widgets as widgetList } from "../../state/resources.ts";
+import { hasChanges, needRestart, restoreToLastSaved, saveSettings } from "../../state/mod.ts";
 
 export const Header = () => {
-  const widgets = useSelector(RootSelectors.widgets);
-  const themes = useSelector(RootSelectors.availableThemes);
-
-  const hasChanges = useAppSelector(RootSelectors.toBeSaved);
-  const shouldRestart = useAppSelector(RootSelectors.toBeRestarted);
-
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const cancelChanges = () => {
-    dispatch(RootActions.restoreToLastLoaded());
-  };
-
   const SaveOrQuit = async () => {
-    if (hasChanges) {
-      await SaveStore();
-      if (shouldRestart) {
+    if (hasChanges.value) {
+      await saveSettings();
+      if (needRestart.value) {
         await process.relaunch();
       }
     } else {
@@ -44,18 +30,18 @@ export const Header = () => {
     }
   };
 
-  const saveBtnLabel = shouldRestart ? t("save_and_restart") : t("save");
+  const saveBtnLabel = needRestart.value ? t("save_and_restart") : t("save");
 
   let label: React.ReactNode = <span>null!?</span>;
   let parts = location.pathname === "/" ? ["home"] : location.pathname.split("/").filter(Boolean);
 
   if (parts[0] === "widget") {
     const widgetId = searchParams.get("id");
-    const widget = widgets.find((w) => w.id === widgetId);
+    const widget = widgetList.value.find((w) => w.id === widgetId);
     label = widget ? <ResourceText text={widget.metadata.displayName} /> : <span>{widgetId}</span>;
   } else if (parts[0] === "theme") {
     const themeId = searchParams.get("id");
-    const theme = themes.find((t) => t.id === themeId);
+    const theme = themeList.value.find((t) => t.id === themeId);
     label = theme ? <ResourceText text={theme.metadata.displayName} /> : <span>{themeId}</span>;
   } else {
     if (parts[0] === "wallpaper") {
@@ -90,13 +76,19 @@ export const Header = () => {
           style={{ minWidth: 60 }}
           type="default"
           danger
-          disabled={!hasChanges}
-          onClick={cancelChanges}
+          disabled={!hasChanges.value}
+          onClick={restoreToLastSaved}
         >
           {t("cancel")}
         </Button>
-        <Button style={{ minWidth: 60 }} type="primary" danger={!hasChanges} onClick={SaveOrQuit}>
-          {hasChanges ? saveBtnLabel : t("close")}
+        <Button
+          style={{ minWidth: 60 }}
+          type="primary"
+          danger={!hasChanges.value}
+          disabled={hasChanges.value && shortcutsError.value.size > 0}
+          onClick={SaveOrQuit}
+        >
+          {hasChanges.value ? saveBtnLabel : t("close")}
         </Button>
       </div>
     </div>

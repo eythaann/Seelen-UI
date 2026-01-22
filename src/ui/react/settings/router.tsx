@@ -4,7 +4,7 @@ import { AppsConfiguration } from "./modules/appsConfigurations/infra/infra.tsx"
 import { SettingsByMonitor } from "./modules/ByMonitor/infra/index.tsx";
 import { DeveloperTools } from "./modules/developer/infra.tsx";
 import { Information } from "./modules/extras/infrastructure.tsx";
-import { General } from "./modules/general/main/infra/index.tsx";
+import { General } from "./modules/general/infra/index.tsx";
 import { ResourcesView } from "./modules/resources/infra.tsx";
 import { Shortcuts } from "./modules/shortcuts/infrastructure.tsx";
 

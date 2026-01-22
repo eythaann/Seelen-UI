@@ -1,7 +1,6 @@
-import type { Action, Slice } from "@reduxjs/toolkit";
 import type { TFunction } from "i18next";
 
-import type { HexColor, ReducersFor, SelectorsFor } from "./domain.ts";
+import type { HexColor } from "./domain.ts";
 
 type Args = undefined | string | { [x: string]: boolean | null | undefined };
 export const cx = (...args: Args[]): string => {
@@ -22,30 +21,8 @@ export const cx = (...args: Args[]): string => {
     .join(" ");
 };
 
-export const matcher = (slice: Slice) => (action: Action) => action.type.startsWith(slice.name);
-
-export const selectorsFor = <T extends anyObject>(
-  state: T,
-): SelectorsFor<T> => {
-  const selectors = {} as SelectorsFor<T>;
-  for (const key in state) {
-    selectors[key] = (state: T) => state[key];
-  }
-  return selectors;
-};
-
 export const capitalize = (text: string) => {
   return text.slice(0, 1).toUpperCase() + text.slice(1);
-};
-
-export const reducersFor = <T>(state: T): ReducersFor<T> => {
-  const reducers: any = {};
-  for (const key in state) {
-    reducers[`set${capitalize(key)}`] = (state: T, action: any) => {
-      state[key] = action.payload;
-    };
-  }
-  return reducers;
 };
 
 export const defaultOnNull = <T>(value: T | null | undefined, onNull: T): T => {

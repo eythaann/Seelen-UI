@@ -2,42 +2,42 @@ import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import type { SluHotkey } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Input, Switch, Tooltip } from "antd";
-import { cloneDeep } from "lodash";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-import { defaultSettings } from "../shared/store/app/default.ts";
-import { newSelectors, RootActions } from "../shared/store/app/reducer.ts";
-import { getHotkeysGroups } from "./application.tsx";
+import {
+  getHotkeysGroups,
+  getShortcutsConfig,
+  isWidgetEnabled,
+  resetShortcuts,
+  setShortcutsEnabled,
+  shortcutsError,
+  updateShortcut,
+  validateShortcuts,
+} from "./application.ts";
 
 import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
 
 export function Shortcuts() {
-  const { enabled, appCommands } = useSelector(newSelectors.shortcuts);
+  const shortcutsConfig = getShortcutsConfig();
+  const { enabled, appCommands } = shortcutsConfig;
 
-  const d = useDispatch();
   const { t } = useTranslation();
 
+  useEffect(() => {
+    validateShortcuts(appCommands);
+  }, [appCommands]);
+
   function onToogleShortcuts(enabled: boolean) {
-    d(RootActions.setShortcuts({ enabled, appCommands }));
+    setShortcutsEnabled(enabled);
   }
 
   function onShortcutChanged(id: string, keys: string[]) {
-    d(
-      RootActions.setShortcuts({
-        enabled,
-        appCommands: appCommands.map((c) => (c.id === id ? { ...c, keys } : c)),
-      }),
-    );
+    updateShortcut(id, keys);
   }
 
   function onReset() {
-    d(
-      RootActions.setShortcuts({
-        enabled,
-        appCommands: cloneDeep(defaultSettings.shortcuts.appCommands),
-      }),
-    );
+    resetShortcuts();
   }
 
   const groups = getHotkeysGroups(appCommands);
@@ -105,13 +105,19 @@ interface ShortcutProps {
   onChanged: (keys: string[]) => void;
 }
 
-function Shortcut({ hotkey: { action, keys, readonly, system }, onChanged }: ShortcutProps) {
+function Shortcut({
+  hotkey: { id, action, keys, readonly, system, attached_to },
+  onChanged,
+}: ShortcutProps) {
   const { t } = useTranslation();
 
+  const isEnabled = !attached_to || isWidgetEnabled(attached_to);
+
   const args: Record<string, number | string> = "index" in action ? { 0: action.index } : {};
+  const hasError = shortcutsError.value.has(id);
 
   function onEdit() {
-    if (readonly || system) {
+    if (readonly || system || !isEnabled) {
       return;
     }
 
@@ -120,18 +126,33 @@ function Shortcut({ hotkey: { action, keys, readonly, system }, onChanged }: Sho
     });
 
     Widget.getCurrent().webview.once<null | string[]>("finished", (e) => {
-      if (e.payload) {
+      // Cancel if user didn't input at least 2 keys
+      if (e.payload && e.payload.length >= 2) {
         onChanged(e.payload);
       }
     });
   }
 
+  let tooltipTitle: string | undefined;
+  if (readonly || system) {
+    tooltipTitle = t("shortcuts.readonly_tooltip");
+  } else if (hasError) {
+    tooltipTitle = t("shortcuts.duplicate_error");
+  }
+
   return (
     <SettingsOption
+      disabled={!isEnabled}
       label={t(`shortcuts.labels.${action.name}`, args)}
       action={
-        <Tooltip title={readonly || system ? t("shortcuts.readonly_tooltip") : undefined} placement="left">
-          <Input value={keys.join(" + ")} readOnly onClick={onEdit} />
+        <Tooltip title={tooltipTitle} placement="left">
+          <Input
+            value={keys.join(" + ")}
+            onClick={onEdit}
+            status={hasError ? "error" : undefined}
+            readOnly
+            disabled={!isEnabled}
+          />
         </Tooltip>
       }
     />

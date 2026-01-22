@@ -3,22 +3,18 @@ import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector } from "../shared/utils/infra.ts";
-
-import { RootSelectors } from "../shared/store/app/selectors.ts";
 import { OptionsFromEnum } from "../shared/utils/app.ts";
-import { SeelenWegActions } from "./app.ts";
+import { getWegConfig, patchWegConfig } from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 
 export const SeelenWegSettings = () => {
-  const settings = useAppSelector(RootSelectors.seelenweg);
+  const settings = getWegConfig();
 
-  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   const onToggleEnable = (value: boolean) => {
-    dispatch(SeelenWegActions.setEnabled(value));
+    patchWegConfig({ enabled: value });
   };
 
   return (
@@ -40,7 +36,7 @@ export const SeelenWegSettings = () => {
               style={{ width: "120px" }}
               value={settings.mode}
               options={OptionsFromEnum(t, SeelenWegMode, "weg.mode")}
-              onChange={(value) => dispatch(SeelenWegActions.setMode(value))}
+              onChange={(value) => patchWegConfig({ mode: value })}
             />
           </SettingsOption>
           <SettingsOption>
@@ -50,7 +46,7 @@ export const SeelenWegSettings = () => {
                 <Button
                   key={side}
                   type={side === settings.position ? "primary" : "default"}
-                  onClick={() => dispatch(SeelenWegActions.setPosition(side))}
+                  onClick={() => patchWegConfig({ position: side })}
                 >
                   <Icon iconName={`CgToolbar${side}`} size={18} />
                 </Button>
@@ -61,14 +57,14 @@ export const SeelenWegSettings = () => {
             <div>{t("weg.margin")}</div>
             <InputNumber
               value={settings.margin}
-              onChange={(value) => dispatch(SeelenWegActions.setMargin(value || 0))}
+              onChange={(value) => patchWegConfig({ margin: value || 0 })}
             />
           </SettingsOption>
           <SettingsOption>
             <div>{t("weg.padding")}</div>
             <InputNumber
               value={settings.padding}
-              onChange={(value) => dispatch(SeelenWegActions.setPadding(value || 0))}
+              onChange={(value) => patchWegConfig({ padding: value || 0 })}
             />
           </SettingsOption>
         </SettingsSubGroup>
@@ -83,7 +79,7 @@ export const SeelenWegSettings = () => {
                 style={{ width: "120px" }}
                 value={settings.hideMode}
                 options={OptionsFromEnum(t, HideMode, "weg.hide_mode")}
-                onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
+                onChange={(value) => patchWegConfig({ hideMode: value })}
               />
             </SettingsOption>
           }
@@ -94,9 +90,7 @@ export const SeelenWegSettings = () => {
               value={settings.delayToShow}
               min={0}
               disabled={settings.hideMode === HideMode.Never}
-              onChange={(value) => {
-                dispatch(SeelenWegActions.setDelayToShow(value || 0));
-              }}
+              onChange={(value) => patchWegConfig({ delayToShow: value || 0 })}
             />
           </SettingsOption>
           <SettingsOption>
@@ -105,9 +99,7 @@ export const SeelenWegSettings = () => {
               value={settings.delayToHide}
               min={0}
               disabled={settings.hideMode === HideMode.Never}
-              onChange={(value) => {
-                dispatch(SeelenWegActions.setDelayToHide(value || 0));
-              }}
+              onChange={(value) => patchWegConfig({ delayToHide: value || 0 })}
             />
           </SettingsOption>
         </SettingsSubGroup>
@@ -127,7 +119,7 @@ export const SeelenWegSettings = () => {
                   label: t("weg.items.temporal_visibility.on_monitor"),
                 },
               ]}
-              onChange={(value) => dispatch(SeelenWegActions.setTemporalItemsVisibility(value))}
+              onChange={(value) => patchWegConfig({ temporalItemsVisibility: value })}
             />
           </SettingsOption>
           <SettingsOption>
@@ -145,7 +137,7 @@ export const SeelenWegSettings = () => {
                   label: t("weg.items.pinned_visibility.when_primary"),
                 },
               ]}
-              onChange={(value) => dispatch(SeelenWegActions.setPinnedItemsVisibility(value))}
+              onChange={(value) => patchWegConfig({ pinnedItemsVisibility: value })}
             />
           </SettingsOption>
         </SettingsSubGroup>
@@ -157,35 +149,35 @@ export const SeelenWegSettings = () => {
             <div>{t("weg.items.size")}</div>
             <InputNumber
               value={settings.size}
-              onChange={(value) => dispatch(SeelenWegActions.setSize(value || 0))}
+              onChange={(value) => patchWegConfig({ size: value || 0 })}
             />
           </SettingsOption>
           <SettingsOption>
             <div>{t("weg.items.gap")}</div>
             <InputNumber
               value={settings.spaceBetweenItems}
-              onChange={(value) => dispatch(SeelenWegActions.setSpaceBetweenItems(value || 0))}
+              onChange={(value) => patchWegConfig({ spaceBetweenItems: value || 0 })}
             />
           </SettingsOption>
           <SettingsOption>
             <div>{t("weg.items.show_window_title")}</div>
             <Switch
               checked={settings.showWindowTitle}
-              onChange={(value) => dispatch(SeelenWegActions.setShowWindowTitle(value))}
+              onChange={(value) => patchWegConfig({ showWindowTitle: value })}
             />
           </SettingsOption>
           <SettingsOption>
             <div>{t("weg.items.show_instance_counter")}</div>
             <Switch
               checked={settings.showInstanceCounter}
-              onChange={(value) => dispatch(SeelenWegActions.setShowInstanceCounter(value))}
+              onChange={(value) => patchWegConfig({ showInstanceCounter: value })}
             />
           </SettingsOption>
           <SettingsOption>
             <div>{t("weg.items.visible_separators")}</div>
             <Switch
               checked={settings.visibleSeparators}
-              onChange={(value) => dispatch(SeelenWegActions.setVisibleSeparators(value))}
+              onChange={(value) => patchWegConfig({ visibleSeparators: value })}
             />
           </SettingsOption>
         </SettingsSubGroup>

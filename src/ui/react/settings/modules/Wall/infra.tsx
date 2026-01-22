@@ -2,10 +2,17 @@ import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Badge, Button, Input, InputNumber, Modal, Select, Switch, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 
-import { newSelectors, RootActions } from "../shared/store/app/reducer.ts";
+import {
+  addWallpaperCollection,
+  deleteWallpaperCollection,
+  getWallConfig,
+  getWallpaperCollections,
+  patchWallConfig,
+  setDefaultWallpaperCollection,
+  updateWallpaperCollection,
+} from "./application.ts";
 
 import { MultimonitorBehaviour } from "@seelen-ui/lib/types";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
@@ -13,8 +20,8 @@ import { WallpaperList } from "./WallpaperList.tsx";
 import cs from "./index.module.css";
 
 export function WallSettings() {
-  const wall = useSelector(newSelectors.wall);
-  const wallpaperCollections = useSelector(newSelectors.wallpaperCollections);
+  const wall = getWallConfig();
+  const wallpaperCollections = getWallpaperCollections();
   const { enabled, interval } = wall;
 
   const [time, setTime] = useState({
@@ -27,7 +34,6 @@ export function WallSettings() {
   const [isCreatingCollection, setIsCreatingCollection] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState("");
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const editingCollection = editingCollectionId ? wallpaperCollections.find((c) => c.id === editingCollectionId) : null;
@@ -45,12 +51,8 @@ export function WallSettings() {
     }
   }, [editingCollection]);
 
-  const patchWallSettings = (changes: Partial<typeof wall>) => {
-    dispatch(RootActions.patchWall({ ...changes }));
-  };
-
   function onChangeEnabled(enabled: boolean) {
-    patchWallSettings({ enabled });
+    patchWallConfig({ enabled });
   }
 
   const updateTime = (key: "hours" | "minutes", value: number | null) => {
@@ -58,7 +60,7 @@ export function WallSettings() {
     const newTime = { ...time, [key]: Math.floor(value) };
     setTime(newTime);
     const newInterval = Math.max(newTime.hours * 3600 + newTime.minutes * 60, 60);
-    patchWallSettings({ interval: newInterval });
+    patchWallConfig({ interval: newInterval });
   };
 
   const handleCreateCollection = () => {
@@ -76,7 +78,7 @@ export function WallSettings() {
       name: newCollectionName.trim(),
       wallpapers: [],
     };
-    dispatch(RootActions.addWallpaperCollection(newCollection));
+    addWallpaperCollection(newCollection);
     setIsCreatingCollection(false);
     setNewCollectionName("");
   };
@@ -93,12 +95,10 @@ export function WallSettings() {
   const handleSaveCollectionName = () => {
     if (!editingCollection || !editingCollectionName.trim()) return;
 
-    dispatch(
-      RootActions.updateWallpaperCollection({
-        ...editingCollection,
-        name: editingCollectionName.trim(),
-      }),
-    );
+    updateWallpaperCollection({
+      ...editingCollection,
+      name: editingCollectionName.trim(),
+    });
   };
 
   const handleCloseModal = () => {
@@ -108,7 +108,7 @@ export function WallSettings() {
   };
 
   const handleDeleteCollection = (id: string) => {
-    dispatch(RootActions.deleteWallpaperCollection(id));
+    deleteWallpaperCollection(id);
   };
 
   return (
@@ -127,7 +127,7 @@ export function WallSettings() {
             <Select
               style={{ width: 200 }}
               value={wall.multimonitorBehaviour}
-              onChange={(value) => patchWallSettings({ multimonitorBehaviour: value })}
+              onChange={(value) => patchWallConfig({ multimonitorBehaviour: value })}
               options={[
                 {
                   label: t("wall.per_monitor"),
@@ -149,7 +149,7 @@ export function WallSettings() {
           action={
             <Switch
               value={wall.randomize}
-              onChange={(randomize) => patchWallSettings({ randomize })}
+              onChange={(randomize) => patchWallConfig({ randomize })}
             />
           }
         />
@@ -266,7 +266,7 @@ export function WallSettings() {
             <Select
               style={{ width: 200 }}
               value={wall.defaultCollection ?? undefined}
-              onChange={(value) => dispatch(RootActions.setDefaultWallpaperCollection(value || null))}
+              onChange={(value) => setDefaultWallpaperCollection(value || null)}
               placeholder={t("wall.select_collection")}
               allowClear
             >

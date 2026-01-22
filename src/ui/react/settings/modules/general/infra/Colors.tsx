@@ -2,15 +2,14 @@ import { SeelenCommand } from "@seelen-ui/lib";
 import { invoke } from "@tauri-apps/api/core";
 import { ColorPicker } from "antd";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
-import { newSelectors } from "../../../shared/store/app/reducer.ts";
+import { uiColors } from "../../../state/system.ts";
 
-import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 import cs from "./index.module.css";
 
 export function Colors() {
-  const colors = useSelector(newSelectors.colors);
+  const colors = uiColors.value;
 
   const { t } = useTranslation();
 

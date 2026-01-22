@@ -3,10 +3,10 @@ import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Modal, Select } from "antd";
 import { type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
 import { $virtual_desktops } from "../../shared/signals";
-import { newSelectors, RootActions } from "../../shared/store/app/reducer.ts";
+import { setMonitorWallpaperCollection, setWorkspaceWallpaperCollection } from "../../Wall/application.ts";
+import { settings } from "../../../state/mod.ts";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 
 interface Props {
@@ -16,9 +16,8 @@ interface Props {
 
 export function WallpaperSettingsModal({ monitorId, title }: Props) {
   const [open, setOpen] = useState(false);
-  const wallpaperCollections = useSelector(newSelectors.wallpaperCollections);
-  const monitorsV3 = useSelector(newSelectors.monitorsV3);
-  const dispatch = useDispatch();
+  const wallpaperCollections = settings.value.wallpaperCollections;
+  const monitorsV3 = settings.value.monitorsV3;
   const { t } = useTranslation();
 
   const monitorConfig = monitorsV3[monitorId];
@@ -45,13 +44,7 @@ export function WallpaperSettingsModal({ monitorId, title }: Props) {
             <Select
               style={{ width: 300 }}
               value={selectedCollection ?? undefined}
-              onChange={(value) =>
-                dispatch(
-                  RootActions.setMonitorWallpaperCollection({
-                    monitorId,
-                    collectionId: value || null,
-                  }),
-                )}
+              onChange={(value) => setMonitorWallpaperCollection(monitorId, value || null)}
               placeholder={t("inherit")}
               allowClear
             >
@@ -79,14 +72,7 @@ export function WallpaperSettingsModal({ monitorId, title }: Props) {
                   <Select
                     style={{ width: 300 }}
                     value={workspaceCollection ?? undefined}
-                    onChange={(value) =>
-                      dispatch(
-                        RootActions.setWorkspaceWallpaperCollection({
-                          monitorId,
-                          workspaceId: workspace.id,
-                          collectionId: value || null,
-                        }),
-                      )}
+                    onChange={(value) => setWorkspaceWallpaperCollection(monitorId, workspace.id, value || null)}
                     placeholder={t("inherit")}
                     allowClear
                   >

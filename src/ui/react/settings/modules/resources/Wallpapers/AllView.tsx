@@ -4,19 +4,16 @@ import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { path } from "@tauri-apps/api";
 import { Button } from "antd";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router";
 
 import cs from "../infra.module.css";
 
-import { newSelectors } from "../../shared/store/app/reducer.ts";
+import { wallpapers } from "../../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 import { ResourceCard } from "../ResourceCard.tsx";
 
 export function AllWallpapersView() {
-  const wallpapers = useSelector(newSelectors.wallpapers);
-
   const { t } = useTranslation();
 
   return (
@@ -60,7 +57,7 @@ export function AllWallpapersView() {
       </SettingsGroup>
 
       <div className={cs.list}>
-        {wallpapers.map((resource) => <WallpaperItem key={resource.id} resource={resource} />)}
+        {wallpapers.value.map((resource) => <WallpaperItem key={resource.id} resource={resource} />)}
       </div>
     </>
   );

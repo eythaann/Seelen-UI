@@ -1,16 +1,14 @@
 import { Button, Flex, List, Modal, Progress } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
-import { newSelectors } from "../../modules/shared/store/app/reducer.ts";
 import { $corruptedWallpapers } from "../../modules/shared/signals.ts";
 import { generateThumbnails, getVideosWithoutThumbnail, type ThumbGenerationProgress } from "./thumbnailGenerator.ts";
 import { useSignal } from "@preact/signals";
+import { wallpapers } from "../../state/resources.ts";
 
 export function ThumbnailGeneratorModal() {
   const { t } = useTranslation();
-  const wallpapers = useSelector(newSelectors.wallpapers);
 
   const open = useSignal(false);
   const progress = useSignal<ThumbGenerationProgress | null>(null);
@@ -21,7 +19,7 @@ export function ThumbnailGeneratorModal() {
       return;
     }
 
-    const videosWithoutThumbnail = getVideosWithoutThumbnail(wallpapers);
+    const videosWithoutThumbnail = getVideosWithoutThumbnail(wallpapers.value);
 
     if (videosWithoutThumbnail.length > 0) {
       open.value = true;
@@ -38,7 +36,7 @@ export function ThumbnailGeneratorModal() {
     : 0;
 
   // Get corrupted wallpaper names
-  const corruptedWallpapers = wallpapers.filter((w) => $corruptedWallpapers.value.has(w.id));
+  const corruptedWallpapers = wallpapers.value.filter((w) => $corruptedWallpapers.value.has(w.id));
   const isFinished = percent === 100;
 
   return (

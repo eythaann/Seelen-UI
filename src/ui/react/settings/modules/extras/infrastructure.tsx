@@ -3,12 +3,11 @@ import { process } from "@seelen-ui/lib/tauri";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Select, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
 import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
 
-import { newSelectors, RootActions } from "../shared/store/app/reducer.ts";
+import { getDrpc, getUpdaterSettings, patchUpdaterSettings, setDrpc } from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 import { UpdateChannel } from "@seelen-ui/lib/types";
@@ -20,18 +19,17 @@ const [isDevMode, isMsixBuild, isFixed] = await Promise.all([
 ]);
 
 export function Information() {
-  const drpc = useSelector(newSelectors.drpc);
-  const updaterSettings = useSelector(newSelectors.updater);
+  const drpc = getDrpc();
+  const updaterSettings = getUpdaterSettings();
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   function onToggleDrpc(value: boolean) {
-    dispatch(RootActions.setDrpc(value));
+    setDrpc(value);
   }
 
   function onChangeUpdateChannel(channel: UpdateChannel) {
-    dispatch(RootActions.setUpdater({ ...updaterSettings, channel }));
+    patchUpdaterSettings({ channel });
   }
 
   return (

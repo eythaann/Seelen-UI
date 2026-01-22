@@ -2,13 +2,17 @@ import type { WidgetId } from "@seelen-ui/lib/types";
 import { Switch } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router";
 
-import { RootActions } from "../../shared/store/app/reducer.ts";
-import { RootSelectors } from "../../shared/store/app/selectors.ts";
-
-import type { RootState } from "../../shared/store/domain.ts";
+import {
+  getMonitorWidgetConfig,
+  getWidgetConfig,
+  patchWidgetConfig as patchWidget,
+  patchWidgetInstanceConfig as patchInstance,
+  patchWidgetMonitorConfig as patchMonitor,
+} from "./application.ts";
+import { widgets } from "../../../state/resources.ts";
+import { getDevTools } from "../../developer/application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 import { RenderBySettingsDeclaration } from "./ConfigRenderer.tsx";
@@ -17,21 +21,6 @@ import { SeelenWegSettings } from "../../seelenweg/infra.tsx";
 import { WindowManagerSettings } from "../../WindowManager/main/infra/index.tsx";
 import { FancyToolbarSettings } from "../../fancyToolbar/infra.tsx";
 import { WallSettings } from "../../Wall/infra.tsx";
-
-const selectMonitorWidgetConfig = (id: WidgetId, monitorId?: string) => (state: RootState) => {
-  if (!monitorId) {
-    return undefined;
-  }
-  return state.monitorsV3[monitorId]?.byWidget[id];
-};
-
-const selectWidgetConfig = (id: WidgetId) => (state: RootState) => {
-  return state.byWidget[id];
-};
-
-const selectWidgetDeclaration = (id: WidgetId) => (state: RootState) => {
-  return state.widgets.find((t) => t.id === id);
-};
 
 export function WidgetConfiguration({
   widgetId,
@@ -42,16 +31,15 @@ export function WidgetConfiguration({
 }) {
   const [selectedInstance, setSelectedInstance] = useState<string | null>(null);
 
-  const widget = useSelector(selectWidgetDeclaration(widgetId));
-  const rootConfig = useSelector(selectWidgetConfig(widgetId)) || {
+  const widget = widgets.value.find((t) => t.id === widgetId);
+  const rootConfig = getWidgetConfig(widgetId) || {
     enabled: widget?.loader !== "Legacy" && !!widget?.metadata.bundled,
   };
 
-  const monitorConfig = useSelector(selectMonitorWidgetConfig(widgetId, monitorId));
-  const areDevToolsEnabled = useSelector(RootSelectors.devTools);
+  const monitorConfig = monitorId ? getMonitorWidgetConfig(monitorId, widgetId) : undefined;
+  const areDevToolsEnabled = getDevTools();
 
   const { t } = useTranslation();
-  const d = useDispatch();
 
   if (!widget) {
     return <div>404</div>;
@@ -59,29 +47,17 @@ export function WidgetConfiguration({
 
   const onConfigChange = (key: string, value: any) => {
     if (monitorId) {
-      d(
-        RootActions.patchWidgetMonitorConfig({
-          monitorId,
-          widgetId,
-          config: { [key]: value },
-        }),
-      );
+      patchMonitor(monitorId, widgetId, { [key]: value });
       return;
     }
 
     // intances `enabled` always inherit from widget root config
     if (selectedInstance && key !== "enabled") {
-      d(
-        RootActions.patchWidgetInstanceConfig({
-          widgetId,
-          instanceId: selectedInstance,
-          config: { [key]: value },
-        }),
-      );
+      patchInstance(widgetId, selectedInstance, { [key]: value });
       return;
     }
 
-    d(RootActions.patchWidgetConfig({ widgetId, config: { [key]: value } }));
+    patchWidget(widgetId, { [key]: value });
   };
 
   const instances = Object.keys(rootConfig.$instances || {}).map((instanceId) => ({

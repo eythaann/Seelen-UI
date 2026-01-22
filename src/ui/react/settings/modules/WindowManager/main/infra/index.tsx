@@ -3,13 +3,11 @@ import type { PluginId } from "@seelen-ui/lib/types";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { ConfigProvider, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
 import { BorderSettings } from "../../border/infra.tsx";
 
-import { newSelectors } from "../../../shared/store/app/reducer.ts";
-import { RootSelectors } from "../../../shared/store/app/selectors.ts";
-import { WManagerSettingsActions } from "../app.ts";
+import { getWmConfig, setWmDefaultLayout, setWmEnabled } from "../../application.ts";
+import { plugins } from "../../../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox/index.tsx";
 import { WmAnimationsSettings } from "./Animations.tsx";
@@ -17,22 +15,20 @@ import { GlobalPaddings } from "./GlobalPaddings.tsx";
 import { OthersConfigs } from "./Others.tsx";
 
 export function WindowManagerSettings() {
-  const settings = useSelector(RootSelectors.windowManager);
-  const defaultLayout = useSelector(newSelectors.windowManager.defaultLayout);
-  const plugins = useSelector(RootSelectors.plugins);
+  const wmSettings = getWmConfig();
+  const defaultLayout = wmSettings.defaultLayout;
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const onToggleEnable = (value: boolean) => {
-    dispatch(WManagerSettingsActions.setEnabled(value));
+    setWmEnabled(value);
   };
 
   const onSelectLayout = (value: PluginId) => {
-    dispatch(WManagerSettingsActions.setDefaultLayout(value));
+    setWmDefaultLayout(value);
   };
 
-  const layouts = plugins.filter((plugin) => plugin.target === SeelenWindowManagerWidgetId);
+  const layouts = plugins.value.filter((plugin) => plugin.target === SeelenWindowManagerWidgetId);
   const usingLayout = layouts.find((plugin) => plugin.id === defaultLayout);
 
   return (
@@ -42,11 +38,11 @@ export function WindowManagerSettings() {
           <div>
             <b>{t("wm.enable")}</b>
           </div>
-          <Switch checked={settings.enabled} onChange={onToggleEnable} />
+          <Switch checked={wmSettings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
       </SettingsGroup>
 
-      <ConfigProvider componentDisabled={!settings.enabled}>
+      <ConfigProvider componentDisabled={!wmSettings.enabled}>
         <SettingsGroup>
           <SettingsOption>
             <div>

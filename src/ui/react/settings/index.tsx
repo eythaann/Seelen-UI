@@ -1,12 +1,9 @@
 import { getRootContainer } from "libs/ui/react/utils/index.ts";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
-import { Provider } from "react-redux";
 import { HashRouter } from "react-router";
 import { Widget } from "@seelen-ui/lib";
 import { LogicalSize } from "@seelen-ui/lib/tauri";
-
-import { LoadSettingsToStore, registerStoreEvents, store } from "./modules/shared/store/infra.ts";
 
 import { App } from "./app.tsx";
 
@@ -33,17 +30,13 @@ Widget.self.onTrigger(() => {
   webview.setFocus();
 });
 
-await LoadSettingsToStore();
-await registerStoreEvents();
 await loadTranslations();
 
 const container = getRootContainer();
 createRoot(container).render(
-  <Provider store={store}>
-    <I18nextProvider i18n={i18n}>
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </I18nextProvider>
-  </Provider>,
+  <I18nextProvider i18n={i18n}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </I18nextProvider>,
 );

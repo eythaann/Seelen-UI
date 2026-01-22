@@ -2,39 +2,30 @@ import type { Rect } from "@seelen-ui/lib";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, InputNumber } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
-import { useAppSelector } from "../../../shared/utils/infra.ts";
-
-import { SeelenWmSelectors } from "../../../shared/store/app/selectors.ts";
-import { WManagerSettingsActions } from "../app.ts";
+import { getWmConfig, setWmWorkspaceGap, setWmWorkspaceMargin, setWmWorkspacePadding } from "../../application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
 
 export const GlobalPaddings = () => {
-  const workspaceGap = useAppSelector(SeelenWmSelectors.workspaceGap);
-  const workspacePadding = useAppSelector(SeelenWmSelectors.workspacePadding);
-  const workAreaOffset = useAppSelector(SeelenWmSelectors.workspaceMargin);
-
-  const dispatch = useDispatch();
+  const wmConfig = getWmConfig();
+  const workspaceGap = wmConfig.workspaceGap;
+  const workspacePadding = wmConfig.workspacePadding;
+  const workAreaOffset = wmConfig.workspaceMargin;
 
   const onChangeGlobalOffset = (side: keyof Rect, value: number | null) => {
-    dispatch(
-      WManagerSettingsActions.setWorkspaceMargin({
-        ...workAreaOffset,
-        [side]: Math.round(value || 0),
-      }),
-    );
+    setWmWorkspaceMargin({
+      ...workAreaOffset,
+      [side]: Math.round(value || 0),
+    });
   };
 
   const onChangeDefaultGap = (value: number | null) => {
-    dispatch(WManagerSettingsActions.setWorkspaceGap(Math.round(value || 0)));
+    setWmWorkspaceGap(Math.round(value || 0));
   };
 
   const onChangeDefaultPadding = (value: number | null) => {
-    dispatch(
-      WManagerSettingsActions.setWorkspacePadding(Math.round(value || 0)),
-    );
+    setWmWorkspacePadding(Math.round(value || 0));
   };
 
   return (

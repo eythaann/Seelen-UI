@@ -6,20 +6,16 @@ import type { TFunction } from "i18next";
 import { cloneDeep, debounce } from "lodash";
 import { type ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
-import { useAppSelector } from "../../shared/utils/infra.ts";
-
-import { RootSelectors } from "../../shared/store/app/selectors.ts";
 import { cx } from "../../shared/utils/app.ts";
 import { getSorterByBool, getSorterByText } from "../app/filters.ts";
-import { AppsConfigActions } from "../app/reducer.ts";
 
 import type { AppConfigurationExtended } from "../domain.ts";
 
-import { ExportApps } from "../../shared/store/storeApi.ts";
 import { EditAppModal } from "./EditModal.tsx";
 import cs from "./index.module.css";
+import { appsConfigs } from "../../../state/resources.ts";
+import { actions } from "../app/reducer.ts";
 
 const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index: number) => {
   return (
@@ -85,13 +81,12 @@ const getColumns = (t: TFunction): ColumnsType<AppConfigurationExtended> => {
 function ActionsTitle() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const showModal = () => setIsModalOpen(true);
   const onCancel = () => setIsModalOpen(false);
   const onSave = (app: AppConfig) => {
-    dispatch(AppsConfigActions.push([app]));
+    actions.push([app]);
     setIsModalOpen(false);
   };
 
@@ -107,7 +102,6 @@ function ActionsTitle() {
 
 function Actions({ record }: { record: AppConfigurationExtended; index: number }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const dispatch = useDispatch();
 
   const showModal = () => setIsModalOpen(true);
   const onCancel = () => setIsModalOpen(false);
@@ -115,9 +109,9 @@ function Actions({ record }: { record: AppConfigurationExtended; index: number }
     if (record.isBundled) {
       let newApp = cloneDeep(app);
       newApp.isBundled = false;
-      dispatch(AppsConfigActions.push([newApp]));
+      actions.push([newApp]);
     } else {
-      dispatch(AppsConfigActions.replace({ idx: record.key, app }));
+      actions.replace({ idx: record.key, app });
     }
     setIsModalOpen(false);
   };
@@ -147,7 +141,7 @@ export function AppsConfiguration() {
   const [searched, setSearched] = useState("");
   const [data, setData] = useState<AppConfigurationExtended[]>([]);
 
-  const apps = useAppSelector(RootSelectors.appsConfigurations);
+  const apps = appsConfigs.value;
 
   useEffect(() => {
     const data: AppConfigurationExtended[] = [];
@@ -170,24 +164,11 @@ export function AppsConfiguration() {
     }, delay);
   }, [apps, searched]);
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const importApps = useCallback(async () => {
-    // TODO reimplement Import Apps
-    /* const yamlApps = await ImportApps();
-    const newApps = YamlToState_Apps(yamlApps);
-    dispatch(AppsConfigActions.push(newApps)); */
-  }, []);
-
   const performSwap = useCallback(() => {
-    dispatch(AppsConfigActions.swap(selectedAppsKey as [number, number]));
+    actions.swap(selectedAppsKey as [number, number]);
   }, [selectedAppsKey]);
-
-  const exportApps = useCallback(() => {
-    const appsToExport = selectedAppsKey.map((key) => apps[key]!);
-    ExportApps(appsToExport);
-  }, [apps, selectedAppsKey]);
 
   const confirmDelete = useCallback(() => {
     const modal = Modal.confirm({
@@ -195,7 +176,7 @@ export function AppsConfiguration() {
       content: t("apps_configurations.confirm_delete"),
       okText: t("delete"),
       onOk: () => {
-        dispatch(AppsConfigActions.deleteMany(selectedAppsKey));
+        actions.deleteMany(selectedAppsKey);
         setSelectedAppsKey([]);
         modal.destroy();
       },
@@ -243,10 +224,12 @@ export function AppsConfiguration() {
         }}
       />
       <div className={cs.footer}>
-        <Button onClick={importApps}>{t("apps_configurations.import")}</Button>
+        {
+          /* <Button onClick={importApps}>{t("apps_configurations.import")}</Button>
         <Button onClick={exportApps} disabled={!selectedAppsKey.length}>
           {t("apps_configurations.export")}
-        </Button>
+        </Button> */
+        }
         <Button type="primary" danger disabled={!selectedAppsKey.length} onClick={confirmDelete}>
           {t("apps_configurations.delete")}
         </Button>

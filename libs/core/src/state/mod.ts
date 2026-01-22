@@ -9,4 +9,3 @@ export * from "./icon_pack.ts";
 export * from "./plugin/mod.ts";
 export * from "./widget/mod.ts";
 export * from "./wallpaper/mod.ts";
-export * from "./startup.ts";

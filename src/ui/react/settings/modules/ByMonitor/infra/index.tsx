@@ -1,9 +1,9 @@
 import type { PhysicalMonitor, Widget } from "@seelen-ui/lib/types";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
-import { newSelectors } from "../../shared/store/app/reducer.ts";
+import { widgets } from "../../../state/resources.ts";
+import { monitors, settings } from "../../../state/mod.ts";
 
 import { Monitor } from "../../../components/monitor/index.tsx";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
@@ -16,7 +16,6 @@ interface MonitorConfigProps {
 }
 
 export function MonitorConfig({ device }: MonitorConfigProps) {
-  const widgets = useSelector(newSelectors.widgets);
   const { t } = useTranslation();
 
   return (
@@ -54,7 +53,7 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
           </SettingsGroup>
 
           <SettingsGroup>
-            {widgets.filter(isConfigurableByMonitor).map((widget) => {
+            {widgets.value.filter(isConfigurableByMonitor).map((widget) => {
               return (
                 <SettingsOption key={widget.id}>
                   <ResourceText text={widget.metadata.displayName} />
@@ -80,8 +79,8 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
 }
 
 export function SettingsByMonitor() {
-  const devices = useSelector(newSelectors.connectedMonitors);
-  const settingsByMonitor = useSelector(newSelectors.monitorsV3);
+  const devices = monitors.value;
+  const settingsByMonitor = settings.value.monitorsV3;
 
   return (
     <>

@@ -1,19 +1,17 @@
 import { PerformanceMode, type PerformanceModeSettings } from "@seelen-ui/lib/types";
 import { Select } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 
-import { newSelectors, RootActions } from "../../../shared/store/app/reducer.ts";
+import { getPerformanceMode, patchPerformanceMode } from "../application.ts";
 
 export function PerformanceSettings() {
-  const perf = useSelector(newSelectors.performanceMode);
+  const perf = getPerformanceMode();
 
   const { t } = useTranslation();
-  const d = useDispatch();
 
   function patchPerfSettings(patch: Partial<PerformanceModeSettings>) {
-    d(RootActions.setPerformanceMode({ ...perf, ...patch }));
+    patchPerformanceMode(patch);
   }
 
   const options: { label: string; value: PerformanceMode }[] = [

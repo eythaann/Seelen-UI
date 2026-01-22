@@ -6,13 +6,12 @@ import { invoke } from "@tauri-apps/api/core";
 import { Button, Switch, Tooltip } from "antd";
 import { Reorder } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router";
 
 import cs from "../infra.module.css";
 
-import { RootActions } from "../../shared/store/app/reducer.ts";
-import { RootSelectors } from "../../shared/store/app/selectors.ts";
+import { setActiveThemes, settings } from "../../../state/mod.ts";
+import { themes, widgets } from "../../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 import { ResourceCard } from "../ResourceCard.tsx";
@@ -20,28 +19,24 @@ import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { cx } from "../../shared/utils/app.ts";
 
 export function ThemesView() {
-  const activeIds = useSelector(RootSelectors.activeThemes);
-  const allThemes = useSelector(RootSelectors.availableThemes);
-  const widgets = useSelector(RootSelectors.widgets);
-
-  const dispatch = useDispatch();
+  const activeIds = settings.value.activeThemes;
   const { t } = useTranslation();
 
   function toggleTheme(themeId: ThemeId) {
     if (activeIds.includes(themeId)) {
-      dispatch(RootActions.setSelectedThemes(activeIds.filter((x) => x !== themeId)));
+      setActiveThemes(activeIds.filter((x) => x !== themeId));
     } else {
-      dispatch(RootActions.setSelectedThemes([...activeIds, themeId]));
+      setActiveThemes([...activeIds, themeId]);
     }
   }
 
   function onReorder(themes: ThemeId[]) {
-    dispatch(RootActions.setSelectedThemes(themes));
+    setActiveThemes(themes);
   }
 
   const disabled: Theme[] = [];
   const enabled: Theme[] = [];
-  for (const theme of allThemes) {
+  for (const theme of themes.value) {
     if (activeIds.includes(theme.id)) {
       enabled.push(theme);
     } else {
@@ -85,7 +80,7 @@ export function ThemesView() {
                 theme={theme}
                 onToggle={() => toggleTheme(theme.id)}
                 checked
-                widgets={widgets}
+                widgets={widgets.value}
               />
             </Reorder.Item>
           ))}
@@ -98,7 +93,7 @@ export function ThemesView() {
             theme={theme}
             onToggle={() => toggleTheme(theme.id)}
             checked={false}
-            widgets={widgets}
+            widgets={widgets.value}
           />
         ))}
       </div>

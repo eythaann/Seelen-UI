@@ -2,25 +2,29 @@ import { FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
-import { newSelectors } from "../shared/store/app/reducer.ts";
-import { RootSelectors } from "../shared/store/app/selectors.ts";
 import { OptionsFromEnum } from "../shared/utils/app.ts";
-import { FancyToolbarActions } from "./app.ts";
+import {
+  getToolbarConfig,
+  setToolbarDelayToHide,
+  setToolbarDelayToShow,
+  setToolbarEnabled,
+  setToolbarHeight,
+  setToolbarHideMode,
+  setToolbarPosition,
+} from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 
 export function FancyToolbarSettings() {
-  const settings = useSelector(RootSelectors.fancyToolbar);
-  const delayToShow = useSelector(newSelectors.fancyToolbar.delayToShow);
-  const delayToHide = useSelector(newSelectors.fancyToolbar.delayToHide);
+  const settings = getToolbarConfig();
+  const delayToShow = settings.delayToShow;
+  const delayToHide = settings.delayToHide;
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const onToggleEnable = (value: boolean) => {
-    dispatch(FancyToolbarActions.setEnabled(value));
+    setToolbarEnabled(value);
   };
 
   return (
@@ -38,7 +42,7 @@ export function FancyToolbarSettings() {
             <span>{t("toolbar.height")}</span>
             <InputNumber
               value={settings.height}
-              onChange={(value) => dispatch(FancyToolbarActions.setHeight(value || 0))}
+              onChange={(value) => setToolbarHeight(value || 0)}
               min={0}
             />
           </SettingsOption>
@@ -49,7 +53,7 @@ export function FancyToolbarSettings() {
                 <Button
                   key={side}
                   type={side === settings.position ? "primary" : "default"}
-                  onClick={() => dispatch(FancyToolbarActions.setPosition(side))}
+                  onClick={() => setToolbarPosition(side)}
                 >
                   <Icon iconName={`CgToolbar${side}`} size={18} />
                 </Button>
@@ -68,7 +72,7 @@ export function FancyToolbarSettings() {
                 style={{ width: "120px" }}
                 value={settings.hideMode}
                 options={OptionsFromEnum(t, HideMode, "toolbar.hide_mode")}
-                onChange={(value) => dispatch(FancyToolbarActions.setHideMode(value))}
+                onChange={(value) => setToolbarHideMode(value)}
               />
             </SettingsOption>
           }
@@ -79,9 +83,7 @@ export function FancyToolbarSettings() {
               value={delayToShow}
               min={0}
               disabled={settings.hideMode === HideMode.Never}
-              onChange={(value) => {
-                dispatch(FancyToolbarActions.setDelayToShow(value || 0));
-              }}
+              onChange={(value) => setToolbarDelayToShow(value || 0)}
             />
           </SettingsOption>
           <SettingsOption>
@@ -90,9 +92,7 @@ export function FancyToolbarSettings() {
               value={delayToHide}
               min={0}
               disabled={settings.hideMode === HideMode.Never}
-              onChange={(value) => {
-                dispatch(FancyToolbarActions.setDelayToHide(value || 0));
-              }}
+              onChange={(value) => setToolbarDelayToHide(value || 0)}
             />
           </SettingsOption>
         </SettingsSubGroup>

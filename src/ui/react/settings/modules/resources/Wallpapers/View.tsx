@@ -5,14 +5,15 @@ import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { Wallpaper } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { Button, ColorPicker, Select, Slider, Switch } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router";
 
-import { newSelectors, RootActions } from "../../shared/store/app/reducer.ts";
+import { patchWallpaperSettings, resetWallpaperSettings } from "./application.ts";
+import { wallpapers } from "../../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 
 import styles from "./View.module.css";
+import { settings } from "../../../state/mod.ts";
 
 const playbackSpeeds: `${PlaybackSpeed}`[] = [
   "xDot25",
@@ -35,28 +36,26 @@ export function SingleWallpaperView() {
   const [searchParams] = useSearchParams();
   const resourceId = searchParams.get("id") as WallpaperId;
 
-  const wallpaper = useSelector(newSelectors.wallpapers);
-  const editingWallpaper = wallpaper.find((wallpaper) => wallpaper.id === resourceId);
+  const editingWallpaper = wallpapers.value.find((wallpaper) => wallpaper.id === resourceId);
 
-  const storedSettings = useSelector(newSelectors.byWallpaper);
+  const storedSettings = settings.value.byWallpaper;
   const config = {
     ...defaultWallpaperConfig,
     ...(storedSettings[resourceId] || {}),
   };
 
-  const d = useDispatch();
   const { t } = useTranslation();
 
   if (!editingWallpaper) {
     return <div>Ups 404</div>;
   }
 
-  function patchWallSettings(patch: Partial<WallpaperInstanceSettings>) {
-    d(RootActions.patchWallpaperSettings({ id: resourceId, patch }));
+  function patchWallpaperConfig(patch: Partial<WallpaperInstanceSettings>) {
+    patchWallpaperSettings(resourceId, patch);
   }
 
   function onReset() {
-    d(RootActions.resetWallpaperSettings(resourceId));
+    resetWallpaperSettings(resourceId);
   }
 
   return (
@@ -89,7 +88,7 @@ export function SingleWallpaperView() {
               value={config.playbackSpeed}
               options={playbackSpeedOptions}
               onSelect={(playbackSpeed) => {
-                patchWallSettings({ playbackSpeed });
+                patchWallpaperConfig({ playbackSpeed });
               }}
             />
           }
@@ -101,7 +100,7 @@ export function SingleWallpaperView() {
             <Switch
               value={config.flipHorizontal}
               onChange={(flipHorizontal) => {
-                patchWallSettings({ flipHorizontal });
+                patchWallpaperConfig({ flipHorizontal });
               }}
             />
           }
@@ -113,7 +112,7 @@ export function SingleWallpaperView() {
             <Switch
               value={config.flipVertical}
               onChange={(flipVertical) => {
-                patchWallSettings({ flipVertical });
+                patchWallpaperConfig({ flipVertical });
               }}
             />
           }
@@ -127,7 +126,7 @@ export function SingleWallpaperView() {
               min={0}
               max={50}
               onChange={(blur) => {
-                patchWallSettings({ blur });
+                patchWallpaperConfig({ blur });
               }}
             />
           }
@@ -144,7 +143,7 @@ export function SingleWallpaperView() {
                 { label: t("wall.fit.fill"), value: "fill" },
               ]}
               onSelect={(objectFit) => {
-                patchWallSettings({ objectFit });
+                patchWallpaperConfig({ objectFit });
               }}
             />
           }
@@ -163,7 +162,7 @@ export function SingleWallpaperView() {
                 { label: t("wall.position.right"), value: "right" },
               ]}
               onSelect={(objectPosition) => {
-                patchWallSettings({ objectPosition });
+                patchWallpaperConfig({ objectPosition });
               }}
             />
           }
@@ -178,7 +177,7 @@ export function SingleWallpaperView() {
               step={0.01}
               max={2}
               onChange={(saturation) => {
-                patchWallSettings({ saturation });
+                patchWallpaperConfig({ saturation });
               }}
             />
           }
@@ -193,7 +192,7 @@ export function SingleWallpaperView() {
               step={0.01}
               max={2}
               onChange={(contrast) => {
-                patchWallSettings({ contrast });
+                patchWallpaperConfig({ contrast });
               }}
             />
           }
@@ -209,7 +208,7 @@ export function SingleWallpaperView() {
                 <Switch
                   value={config.withOverlay}
                   onChange={(withOverlay) => {
-                    patchWallSettings({ withOverlay });
+                    patchWallpaperConfig({ withOverlay });
                   }}
                 />
               }
@@ -242,7 +241,7 @@ export function SingleWallpaperView() {
                   { label: "plus-lighter", value: "plus-lighter" },
                 ]}
                 onSelect={(overlayMixBlendMode) => {
-                  patchWallSettings({ overlayMixBlendMode });
+                  patchWallpaperConfig({ overlayMixBlendMode });
                 }}
               />
             }
@@ -255,7 +254,7 @@ export function SingleWallpaperView() {
                 showText
                 value={config.overlayColor}
                 onChangeComplete={(color) => {
-                  patchWallSettings({ overlayColor: color.toHexString() });
+                  patchWallpaperConfig({ overlayColor: color.toHexString() });
                 }}
               />
             }
@@ -271,7 +270,7 @@ export function SingleWallpaperView() {
               <Switch
                 value={config.muted}
                 onChange={(muted) => {
-                  patchWallSettings({ muted });
+                  patchWallpaperConfig({ muted });
                 }}
               />
             }

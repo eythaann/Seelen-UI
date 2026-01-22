@@ -3,24 +3,19 @@ import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { Tooltip } from "antd";
 import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router";
 
-import { useAppSelector } from "../../modules/shared/utils/infra.ts";
-
-import { RootSelectors } from "../../modules/shared/store/app/selectors.ts";
 import { cx } from "../../modules/shared/utils/app.ts";
 
 import { RouteIcons, RoutePath } from "./routes.tsx";
 import cs from "./index.module.css";
+import { settings, themes, widgets } from "../../state/mod.ts";
 
 export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);
 
-  const widgets = useSelector(RootSelectors.widgets);
-  const themes = useAppSelector(RootSelectors.availableThemes);
-  const activeThemes = useAppSelector(RootSelectors.activeThemes);
-  const devTools = useAppSelector(RootSelectors.devTools);
+  const activeThemes = settings.value.activeThemes;
+  const devTools = settings.value.devTools;
 
   const { t } = useTranslation();
   const location = useLocation();
@@ -39,7 +34,7 @@ export const Navigation = memo(() => {
     );
   };
 
-  const themesDirectAccess = themes.filter(
+  const themesDirectAccess = themes.value.filter(
     (theme) => theme.settings.length && activeThemes.includes(theme.id),
   );
 
@@ -84,7 +79,7 @@ export const Navigation = memo(() => {
 
         <div className={cs.separator} />
         <div className={cs.group}>
-          {widgets
+          {widgets.value
             .filter((widget) => !widget.hidden)
             .toSorted((a, b) => a.id.localeCompare(b.id))
             .map((widget) => (

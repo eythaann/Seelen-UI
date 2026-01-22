@@ -1,4 +1,13 @@
-import type { SluHotkey } from "@seelen-ui/lib/types";
+import type { SluHotkey, SluShortcutsSettings } from "@seelen-ui/lib/types";
+import { signal } from "@preact/signals";
+import { settings } from "../../state/mod";
+import { Settings } from "@seelen-ui/lib";
+import type { WidgetId } from "@seelen-ui/lib/types";
+
+export const shortcutsError = signal<Set<string>>(new Set());
+
+// Load default settings for reset functionality
+const defaultSettings = await Settings.default();
 
 interface Groups {
   windowManager: {
@@ -119,4 +128,85 @@ export function getHotkeysGroups(hotkeys: SluHotkey[]): Groups {
   }
 
   return groups;
+}
+
+export function validateShortcuts(hotkeys: SluHotkey[]) {
+  const errors = new Set<string>();
+  const shortcutMap = new Map<string, string[]>();
+
+  for (const hotkey of hotkeys) {
+    if (hotkey.readonly || hotkey.system) {
+      continue;
+    }
+
+    const shortcutKey = hotkey.keys.join("+").toLowerCase();
+    if (!shortcutMap.has(shortcutKey)) {
+      shortcutMap.set(shortcutKey, []);
+    }
+    shortcutMap.get(shortcutKey)!.push(hotkey.id);
+  }
+
+  for (const [, ids] of shortcutMap) {
+    if (ids.length > 1) {
+      ids.forEach((id) => errors.add(id));
+    }
+  }
+
+  shortcutsError.value = errors;
+}
+
+/**
+ * Gets the current shortcuts configuration
+ */
+export function getShortcutsConfig(): SluShortcutsSettings {
+  return settings.value.shortcuts;
+}
+
+/**
+ * Sets the enabled state for shortcuts
+ */
+export function setShortcutsEnabled(enabled: boolean) {
+  settings.value = {
+    ...settings.value,
+    shortcuts: {
+      ...settings.value.shortcuts,
+      enabled,
+    },
+  };
+}
+
+/**
+ * Updates a specific shortcut by id
+ */
+export function updateShortcut(id: string, keys: string[]) {
+  const appCommands = settings.value.shortcuts.appCommands.map((c) => c.id === id ? { ...c, keys } : c);
+
+  settings.value = {
+    ...settings.value,
+    shortcuts: {
+      ...settings.value.shortcuts,
+      appCommands,
+    },
+  };
+}
+
+/**
+ * Resets all shortcuts to default values
+ */
+export function resetShortcuts() {
+  settings.value = {
+    ...settings.value,
+    shortcuts: {
+      enabled: settings.value.shortcuts.enabled,
+      appCommands: structuredClone(defaultSettings.shortcuts.appCommands),
+    },
+  };
+}
+
+/**
+ * Checks if a widget is enabled
+ */
+export function isWidgetEnabled(widgetId: WidgetId): boolean {
+  const widget = settings.value.byWidget[widgetId];
+  return !!widget?.enabled;
 }

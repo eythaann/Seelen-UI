@@ -5,40 +5,34 @@ import { path } from "@tauri-apps/api";
 import { Button, Switch } from "antd";
 import { Reorder } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
 import cs from "./infra.module.css";
 
-import { RootActions } from "../shared/store/app/reducer.ts";
-import { RootSelectors } from "../shared/store/app/selectors.ts";
+import { setActiveIconPacks, settings } from "../../state/mod.ts";
+import { iconPacks as allIconPacks } from "../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
 import { ResourceCard } from "./ResourceCard.tsx";
 
 export function IconPacksView() {
-  const activeIds = useSelector(RootSelectors.activeIconPacks);
-  const allIconPacks = useSelector(RootSelectors.availableIconPacks);
-
-  const dispatch = useDispatch();
+  const activeIds = settings.value.activeIconPacks;
   const { t } = useTranslation();
 
   function toggleIconPack(id: IconPackId) {
     if (activeIds.includes(id)) {
-      dispatch(
-        RootActions.setActiveIconPacks(activeIds.filter((x) => x !== id)),
-      );
+      setActiveIconPacks(activeIds.filter((x) => x !== id));
     } else {
-      dispatch(RootActions.setActiveIconPacks([...activeIds, id]));
+      setActiveIconPacks([...activeIds, id]);
     }
   }
 
   function onReorder(activeIconPacks: IconPackId[]) {
-    dispatch(RootActions.setActiveIconPacks(activeIconPacks));
+    setActiveIconPacks(activeIconPacks);
   }
 
   const disabled: IconPack[] = [];
   const enabled: IconPack[] = [];
-  for (const pack of allIconPacks) {
+  for (const pack of allIconPacks.value) {
     if (activeIds.includes(pack.id)) {
       enabled.push(pack);
     } else {

@@ -21,6 +21,10 @@
     gap: var(--spacing-s);
     align-items: center;
 
+    &.disabled {
+      opacity: 0.6;
+    }
+
     :global(.ant-input) {
       max-width: 150px;
     }
