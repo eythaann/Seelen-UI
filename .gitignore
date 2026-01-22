@@ -6,7 +6,7 @@ node_modules
 dist
 target
 gen
-src/runtime/**[!.cab]
+src/runtime
 
 # Submission Files
 /scripts/SBTemp

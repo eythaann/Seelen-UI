@@ -1,33 +1,43 @@
 param(
     [Parameter(Mandatory = $false)]
     [ValidateSet("x64", "arm64")]
-    [string]$Architecture = "x64"
+    [string]$Architecture = "x64",
+
+    [Parameter(Mandatory = $false)]
+    [string]$Version = "133.0.3065.92"
 )
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "Setting up Fixed Runtime for architecture: $Architecture" -ForegroundColor Cyan
+Write-Host "Setting up Fixed Runtime for architecture: $Architecture, version: $Version"
 
-$RuntimeDir = Resolve-Path ".\src\runtime" | Select-Object -ExpandProperty Path
+$RuntimeDir = ".\src\runtime"
 $ConfigPath = ".\src\tauri.conf.json"
 
-$CabFile = Get-ChildItem -Path $RuntimeDir -Filter "Microsoft.WebView2.FixedVersionRuntime.*.$Architecture.cab" | Select-Object -First 1
+mkdir $RuntimeDir -Force
 
-if (-not $CabFile) {
-    Write-Error "Could not find .cab file for architecture $Architecture in $RuntimeDir"
-    exit 1
-}
+# Build download URL
+$FileName = "Microsoft.WebView2.FixedVersionRuntime.$Version.$Architecture.cab"
+$DownloadUrl = "https://github.com/westinyang/WebView2RuntimeArchive/releases/download/$Version/$FileName"
+$CabFilePath = Join-Path $RuntimeDir $FileName
 
-Write-Host "File found: $($CabFile.Name)" -ForegroundColor Green
-
-# Extract version from filename (e.g., "143.0.3650.139" from "Microsoft.WebView2.FixedVersionRuntime.143.0.3650.139.x64")
-if ($CabFile.BaseName -match '(\d+\.\d+\.\d+\.\d+)') {
-    $Version = $Matches[1]
+# Download the .cab file if it doesn't exist
+if (Test-Path $CabFilePath) {
+    Write-Host "File already exists, skipping download: $FileName"
 }
 else {
-    Write-Error "Could not extract version from filename: $($CabFile.BaseName)"
-    exit 1
+    Write-Host "Downloading from: $DownloadUrl" -ForegroundColor Cyan
+    try {
+        Invoke-WebRequest -Uri $DownloadUrl -OutFile $CabFilePath -UseBasicParsing
+        Write-Host "Download completed: $FileName" -ForegroundColor Green
+    }
+    catch {
+        Write-Error "Failed to download file from $DownloadUrl. Error: $_"
+        exit 1
+    }
 }
+
+$CabFile = Get-Item $CabFilePath
 
 $RuntimeFolderName = $Version
 
@@ -54,4 +64,4 @@ $Config.bundle.windows | Add-Member -Force -MemberType NoteProperty -Name "webvi
 $Config | ConvertTo-Json -Depth 100 | Set-Content $ConfigPath -Encoding UTF8
 
 Write-Host "Configuration updated successfully" -ForegroundColor Green
-Write-Host "webviewInstallMode.path: $RelativePath" -ForegroundColor Green
+Write-Host "webviewInstallMode.path: $RelativePath"
