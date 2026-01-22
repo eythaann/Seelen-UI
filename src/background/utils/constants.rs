@@ -27,7 +27,6 @@ pub struct SeelenCommon {
     bundled_themes: PathBuf,
     user_plugins: PathBuf,
     bundled_plugins: PathBuf,
-    user_app_configs: PathBuf,
     bundled_app_configs: PathBuf,
     wallpapers: PathBuf,
     widgets: PathBuf,
@@ -67,7 +66,6 @@ impl SeelenCommon {
             bundled_themes: resource_dir.join("static/themes"),
             user_plugins: data_dir.join("plugins"),
             bundled_plugins: resource_dir.join("static/plugins"),
-            user_app_configs: data_dir.join("applications.yml"),
             bundled_app_configs: resource_dir.join("static/apps_templates"),
             user_placeholders: data_dir.join("placeholders"),
             widgets: data_dir.join("widgets"),
@@ -141,10 +139,6 @@ impl SeelenCommon {
 
     pub fn bundled_plugins_path(&self) -> &Path {
         &self.bundled_plugins
-    }
-
-    pub fn user_app_configs_path(&self) -> &Path {
-        &self.user_app_configs
     }
 
     pub fn bundled_app_configs_path(&self) -> &Path {

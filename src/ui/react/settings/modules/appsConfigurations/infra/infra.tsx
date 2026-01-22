@@ -14,8 +14,8 @@ import type { AppConfigurationExtended } from "../domain.ts";
 
 import { EditAppModal } from "./EditModal.tsx";
 import cs from "./index.module.css";
-import { appsConfigs } from "../../../state/resources.ts";
 import { actions } from "../app/reducer.ts";
+import { appsConfig } from "../../../state/mod.ts";
 
 const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index: number) => {
   return (
@@ -141,12 +141,10 @@ export function AppsConfiguration() {
   const [searched, setSearched] = useState("");
   const [data, setData] = useState<AppConfigurationExtended[]>([]);
 
-  const apps = appsConfigs.value;
-
   useEffect(() => {
     const data: AppConfigurationExtended[] = [];
 
-    apps.forEach((app, index) => data.unshift({ ...app, key: index }));
+    appsConfig.value.forEach((app, index) => data.unshift({ ...app, key: index }));
 
     setTimeout(() => {
       setData(
@@ -162,7 +160,7 @@ export function AppsConfiguration() {
       setLoading(false);
       setDelay(0);
     }, delay);
-  }, [apps, searched]);
+  }, [appsConfig.value, searched]);
 
   const { t } = useTranslation();
 
@@ -209,7 +207,7 @@ export function AppsConfiguration() {
         dataSource={data}
         columns={columns}
         pagination={{ pageSize: 25 }}
-        scroll={{ y: "calc(100vh - 150px)", x: "100vw" }}
+        scroll={{ y: "calc(100vh - 180px)", x: "100vw" }}
         className={cs.table}
         rowSelection={{
           selectedRowKeys: selectedAppsKey,

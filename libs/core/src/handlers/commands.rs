@@ -155,7 +155,7 @@ slu_commands_declaration! {
     StateGetToolbarItems = state_get_toolbar_items() -> Placeholder,
     StateGetSettings = state_get_settings(path: Option<PathBuf>) -> Settings,
     StateWriteSettings = state_write_settings(settings: Settings),
-    StateGetSpecificAppsConfigurations = state_get_specific_apps_configurations() -> Vec<AppConfig> ,
+    StateGetSettingsByApp = state_get_settings_by_app() -> Vec<AppConfig> ,
     StateGetPlugins = state_get_plugins() -> Vec<Plugin>,
     StateGetWidgets = state_get_widgets() -> Vec<Widget>,
     StateGetIconPacks = state_get_icon_packs() -> Vec<IconPack>,

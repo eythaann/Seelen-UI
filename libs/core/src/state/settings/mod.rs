@@ -3,7 +3,10 @@ pub mod by_monitor;
 pub mod by_theme;
 pub mod by_wallpaper;
 pub mod by_widget;
+pub mod settings_by_app;
 pub mod shortcuts;
+
+pub use settings_by_app::*;
 
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
@@ -321,18 +324,19 @@ pub struct SeelenWallSettings {
     /// multimonitor behaviour
     pub multimonitor_behaviour: MultimonitorBehaviour,
     /// deprecated, this field will be removed on v3
-    pub backgrounds_v2: Option<Vec<WallpaperId>>,
+    #[serde(alias = "backgroundsV2")]
+    pub deprecated_bgs: Option<Vec<WallpaperId>>,
 }
 
 impl Default for SeelenWallSettings {
     fn default() -> Self {
         Self {
             enabled: true,
-            backgrounds_v2: None,
             interval: 300, // 5min
             randomize: false,
             default_collection: None,
             multimonitor_behaviour: MultimonitorBehaviour::PerMonitor,
+            deprecated_bgs: None,
         }
     }
 }
@@ -379,22 +383,7 @@ pub enum StartOfWeek {
 #[serde(default, rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Settings {
-    /// @deprecated since v2.1.0, will be removed in v3.0.0
-    #[ts(skip)]
-    #[serde(skip_serializing)]
-    fancy_toolbar: Option<FancyToolbarSettings>,
-    ///@deprecated since v2.1.0, will be removed in v3.0.0
-    #[ts(skip)]
-    #[serde(skip_serializing)]
-    seelenweg: Option<SeelenWegSettings>,
-    /// @deprecated since v2.1.0, will be removed in v3.0.0
-    #[ts(skip)]
-    #[serde(skip_serializing)]
-    window_manager: Option<WindowManagerSettings>,
-    /// @deprecated since v2.1.0, will be removed in v3.0.0
-    #[ts(skip)]
-    #[serde(skip_serializing)]
-    wall: Option<SeelenWallSettings>,
+    pub by_app: AppsConfigurationList,
     /// list of monitors and their configurations
     pub monitors_v3: HashMap<MonitorId, MonitorConfiguration>,
     /// app shortcuts settings
@@ -442,11 +431,7 @@ pub struct Settings {
 impl Default for Settings {
     fn default() -> Self {
         Self {
-            fancy_toolbar: None,
-            seelenweg: None,
-            window_manager: None,
-            wall: None,
-            // ---
+            by_app: AppsConfigurationList::default(),
             performance_mode: PerformanceModeSettings::default(),
             shortcuts: SluShortcutsSettings::default(),
             drpc: false,
@@ -479,24 +464,9 @@ impl Settings {
         }
     }
 
-    /// Migrate old settings (before v2.1.0) (will be removed in v3.0.0)
     pub fn migrate(&mut self) -> Result<()> {
-        let dict = &mut self.by_widget;
-        if let Some(tb) = self.fancy_toolbar.take() {
-            dict.fancy_toolbar = tb;
-        }
-        if let Some(weg) = self.seelenweg.take() {
-            dict.weg = weg;
-        }
-        if let Some(wm) = self.window_manager.take() {
-            dict.wm = wm;
-        }
-        if let Some(wall) = self.wall.take() {
-            dict.wall = wall;
-        }
-
-        // Migrate backgrounds_v2 to wallpaper collection
-        if let Some(backgrounds) = self.by_widget.wall.backgrounds_v2.take() {
+        // Migrate step for v2.5
+        if let Some(backgrounds) = self.by_widget.wall.deprecated_bgs.take() {
             if !backgrounds.is_empty() {
                 let collection = WallpaperCollection {
                     id: uuid::Uuid::new_v4(),
@@ -539,6 +509,7 @@ impl Settings {
         self.dedup_icon_packs();
 
         self.shortcuts.sanitize();
+        self.by_app.prepare();
         Ok(())
     }
 
@@ -553,11 +524,18 @@ impl Settings {
 
         // Load shortcuts from sibling file if it exists
         if let (Some(parent), Some(stem)) = (path.parent(), path.file_stem()) {
-            let shortcuts_path = parent.join(format!("{}_shortcuts.json", stem.to_string_lossy()));
-            if shortcuts_path.exists() {
-                let file = File::open(&shortcuts_path)?;
+            let path = parent.join(format!("{}_shortcuts.json", stem.to_string_lossy()));
+            if path.exists() {
+                let file = File::open(&path)?;
                 file.lock_shared()?;
                 settings.shortcuts = serde_json::from_reader(&file)?;
+            }
+
+            let path = parent.join(format!("{}_by_app.yml", stem.to_string_lossy()));
+            if path.exists() {
+                let file = File::open(&path)?;
+                file.lock_shared()?;
+                settings.by_app = serde_yaml::from_reader(&file)?;
             }
         }
 
@@ -570,9 +548,11 @@ impl Settings {
         let path = path.as_ref();
 
         {
-            // Create a copy without shortcuts for main settings file
+            // Create a copy without splitted fields
             let mut settings_copy = serde_json::to_value(self)?;
-            settings_copy.as_object_mut().unwrap().remove("shortcuts");
+            let obj = settings_copy.as_object_mut().unwrap();
+            obj.remove("shortcuts");
+            obj.remove("byApp");
 
             let mut file = File::create(path)?;
             file.lock()?;
@@ -587,6 +567,12 @@ impl Settings {
             shortcuts_file.lock()?;
             serde_json::to_writer_pretty(&shortcuts_file, &self.shortcuts)?;
             shortcuts_file.flush()?;
+
+            let by_app_path = parent.join(format!("{}_by_app.yml", stem.to_string_lossy()));
+            let mut by_app_file = File::create(&by_app_path)?;
+            by_app_file.lock()?;
+            serde_yaml::to_writer(&by_app_file, &self.by_app)?;
+            by_app_file.flush()?;
         }
 
         Ok(())

@@ -58,5 +58,3 @@ export class Settings {
     return invoke(SeelenCommand.StateWriteSettings, { settings: this.inner });
   }
 }
-
-export * from "./settings_by_monitor.ts";

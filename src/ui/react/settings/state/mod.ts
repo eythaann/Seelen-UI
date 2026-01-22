@@ -5,7 +5,7 @@ import { Modal } from "antd";
 import { monitors } from "./system";
 import { cloneDeep } from "lodash";
 import i18n from "../i18n";
-import { iconPacks, themes } from "./resources";
+import { bundledAppConfigs, iconPacks, themes } from "./resources";
 
 export const settings = signal(await invoke(SeelenCommand.StateGetSettings, { path: null }));
 const initialSettings = signal(JSON.stringify(settings.value));
@@ -17,12 +17,7 @@ await subscribe(SeelenEvent.StateSettingsChanged, ({ payload }) => {
 export const hasChanges = computed(() => initialSettings.value !== JSON.stringify(settings.value));
 export const needRestart = signal(false);
 
-effect(() => {
-  const a = JSON.stringify(settings.value);
-  const b = initialSettings.value;
-
-  console.log({ a, b, diff: a !== b, hasChanges: hasChanges.value });
-});
+export const appsConfig = computed(() => [...bundledAppConfigs.value, ...settings.value.byApp]);
 
 export async function saveSettings() {
   try {

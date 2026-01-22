@@ -63,6 +63,17 @@ impl RestorationAndMigration {
         Ok(())
     }
 
+    fn migration_v2_5_0() -> Result<()> {
+        let old = SEELEN_COMMON.app_data_dir().join("applications.yml");
+        if old.exists() {
+            std::fs::rename(
+                old,
+                SEELEN_COMMON.app_data_dir().join("settings_by_app.yml"),
+            )?;
+        }
+        Ok(())
+    }
+
     fn recreate_user_folders() -> Result<()> {
         std::fs::create_dir_all(SEELEN_COMMON.app_temp_dir())?;
 
@@ -81,6 +92,7 @@ impl RestorationAndMigration {
         Self::migration_v2_1_0()?;
         Self::migration_v2_3_9()?;
         Self::migration_v2_4_10()?;
+        Self::migration_v2_5_0()?;
         Ok(())
     }
 }

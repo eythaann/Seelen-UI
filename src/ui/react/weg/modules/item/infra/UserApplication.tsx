@@ -1,9 +1,8 @@
-import { SeelenCommand } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
 import { FileIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { cx } from "libs/ui/react/utils/styling.ts";
-import { invoke } from "@tauri-apps/api/core";
 import moment from "moment";
 import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -70,6 +69,7 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
             program: item.relaunchProgram,
             args: item.relaunchArgs,
             workingDir: item.relaunchIn,
+            elevated: false,
           });
         } else {
           invoke(SeelenCommand.WegToggleWindowState, {

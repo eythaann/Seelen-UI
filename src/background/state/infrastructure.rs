@@ -80,7 +80,7 @@ pub fn state_write_settings(settings: Settings) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
+pub fn state_get_settings_by_app() -> Vec<AppConfig> {
     FULL_STATE
         .load()
         .settings_by_app

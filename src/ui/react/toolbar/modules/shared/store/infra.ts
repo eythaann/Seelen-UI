@@ -106,5 +106,5 @@ function loadSettingsCSS(settings: FancyToolbarSettings) {
 
 function loadSettings(settings: Settings) {
   i18n.changeLanguage(settings.inner.language || undefined);
-  loadSettingsCSS(settings.fancyToolbar);
+  loadSettingsCSS(settings.byWidget["@seelen/fancy-toolbar"]);
 }

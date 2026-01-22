@@ -21,6 +21,7 @@ export const wallpapers = lazySignal(() => invoke(SeelenCommand.StateGetWallpape
 await subscribe(SeelenEvent.StateWallpapersChanged, wallpapers.setByPayload);
 await wallpapers.init();
 
-export const appsConfigs = lazySignal(() => invoke(SeelenCommand.StateGetSpecificAppsConfigurations));
-await subscribe(SeelenEvent.StateSettingsByAppChanged, appsConfigs.setByPayload);
-await appsConfigs.init();
+// readonly configs
+export const bundledAppConfigs = lazySignal(() => invoke(SeelenCommand.StateGetSettingsByApp));
+await subscribe(SeelenEvent.StateSettingsByAppChanged, bundledAppConfigs.setByPayload);
+await bundledAppConfigs.init();

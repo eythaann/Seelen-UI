@@ -6,13 +6,13 @@ import { debounce } from "lodash";
 const initial = await Settings.getAsync();
 
 export const $settings = signal({
-  ...initial.wall,
+  ...initial.byWidget["@seelen/wallpaper-manager"],
   byWallpaper: initial.byWallpaper,
   byMonitor: initial.monitorsV3,
 });
 Settings.onChange(
   (settings) => ($settings.value = {
-    ...settings.wall,
+    ...settings.byWidget["@seelen/wallpaper-manager"],
     byWallpaper: settings.byWallpaper,
     byMonitor: settings.monitorsV3,
   }),

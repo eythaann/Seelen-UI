@@ -1,38 +1,50 @@
 import type { AppConfig } from "@seelen-ui/lib/types";
-import { appsConfigs } from "../../../state/resources";
+import { appsConfig, settings } from "../../../state/mod";
 
 interface AppPayload {
   idx: number;
 }
 
+function setConfigByApps(newState: AppConfig[]) {
+  settings.value = {
+    ...settings.value,
+    byApp: newState.filter((app) => !app.isBundled),
+  };
+}
+
 export const actions = {
   delete: (payload: number) => {
-    const newState = [...appsConfigs.value];
-    appsConfigs.value = newState.filter((_, idx) => idx !== payload);
+    const newState = [...appsConfig.value].filter((_, idx) => idx !== payload);
+    setConfigByApps(newState);
   },
+
   deleteMany: (payload: number[]) => {
-    const newState = [...appsConfigs.value];
-    appsConfigs.value = newState.filter((_, idx) => !payload.includes(idx));
+    const newState = [...appsConfig.value].filter((_, idx) => !payload.includes(idx));
+    setConfigByApps(newState);
   },
+
   push: (payload: AppConfig[]) => {
-    appsConfigs.value = [...appsConfigs.value, ...payload];
+    setConfigByApps([...appsConfig.value, ...payload]);
   },
+
   replace: (payload: AppPayload & { app: AppConfig }) => {
     const { idx, app } = payload;
-    const newState = [...appsConfigs.value];
+    const newState = [...appsConfig.value];
     newState[idx] = app;
-    appsConfigs.value = newState;
+    setConfigByApps(newState);
   },
+
   swap: (payload: [number, number]) => {
     const [idx1, idx2] = payload;
-    const App1 = appsConfigs.value[idx1];
-    const App2 = appsConfigs.value[idx2];
+    const App1 = appsConfig.value[idx1];
+    const App2 = appsConfig.value[idx2];
 
-    const newState = [...appsConfigs.value];
+    const newState = [...appsConfig.value];
     if (App1 && App2) {
       newState[idx1] = App2;
       newState[idx2] = App1;
     }
-    appsConfigs.value = newState;
+
+    setConfigByApps(newState);
   },
 };

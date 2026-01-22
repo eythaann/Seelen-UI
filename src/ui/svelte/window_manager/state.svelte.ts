@@ -21,8 +21,8 @@ await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focusedApp = e.payload;
 });
 
-let settings = $state<WindowManagerSettings>((await Settings.getAsync()).windowManager);
-Settings.onChange((s) => (settings = s.windowManager));
+let settings = $state<WindowManagerSettings>((await Settings.getAsync()).byWidget["@seelen/window-manager"]);
+Settings.onChange((s) => (settings = s.byWidget["@seelen/window-manager"]));
 
 // =================================================
 //                  CSS variables

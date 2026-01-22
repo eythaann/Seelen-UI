@@ -11,7 +11,7 @@ import type { AppConfigurationExtended } from "../domain.ts";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 import { Identifier } from "./Identifier.tsx";
 import cs from "./index.module.css";
-import { appsConfigs, settings } from "../../../state/mod.ts";
+import { appsConfig, settings } from "../../../state/mod.ts";
 
 interface Props {
   idx?: number;
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const getAppSelector = (idx: number | undefined, isNew: boolean) => {
-  return idx != null && !isNew ? appsConfigs.value[idx]! : cloneDeep(defaultAppConfig);
+  return idx != null && !isNew ? appsConfig.value[idx]! : cloneDeep(defaultAppConfig);
 };
 
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {

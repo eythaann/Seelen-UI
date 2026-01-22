@@ -179,7 +179,7 @@ pub struct AppConfig {
     #[serde(default)]
     pub options: Vec<AppExtraFlag>,
     /// is this config bundled with seelen ui.
-    #[serde(default)]
+    #[serde(skip_deserializing, skip_serializing_if = "AppConfig::is_false")]
     pub is_bundled: bool,
 }
 
@@ -187,9 +187,13 @@ impl AppConfig {
     pub fn prepare(&mut self) {
         self.identifier.prepare();
     }
+
+    fn is_false(b: &bool) -> bool {
+        !b
+    }
 }
 
-#[derive(Debug, Default, Clone)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 pub struct AppsConfigurationList(Vec<AppConfig>);
 
 impl AppsConfigurationList {
