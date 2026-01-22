@@ -75,7 +75,6 @@ devtools:
   install_folder: תיקיית התקנה
   load: טען
   settings_file: קובץ הגדרות
-  simulate_fullscreen: הדמיית אירוע במסך מלא
 extras:
   clear_icons: מטמון סמלי מערכת נקה
   clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
@@ -83,6 +82,9 @@ extras:
   links: קישורים רשמיים
   relaunch: השקה מחדש
   version: גרסה
+  version_fixed: >-
+    גרסאות היישום ו-WebView2 Runtime קבועות. המשמעות היא שהאפליקציה לא תקבל
+    עדכונים ו- WebView2 Runtime לא יעודכן אוטומטית עם עדכוני Windows.
 general:
   accent_color: צבע הדגשה
   date_format: פורמט תאריך

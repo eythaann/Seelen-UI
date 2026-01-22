@@ -77,7 +77,6 @@ devtools:
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   load: લોડ
   settings_file: સેટિંગ્સ ફાઇલ
-  simulate_fullscreen: પૂર્ણસ્ક્રીન ઇવેન્ટનું અનુકરણ કરો
 extras:
   clear_icons: સ્પષ્ટ સિસ્ટમ ચિહ્નો કેશ
   clear_icons_tooltip: બધા વિજેટો પર સંપૂર્ણ અસર કરવા માટે ફરીથી પ્રારંભ કરવાની જરૂર પડી શકે છે
@@ -85,6 +84,10 @@ extras:
   links: સત્તાવાર લિંક્સ
   relaunch: ફરીથી લોંચ કરો
   version: સંસ્કરણ
+  version_fixed: >-
+    એપ્લિકેશન અને WebView2 રનટાઇમ સંસ્કરણો નિશ્ચિત છે. આનો અર્થ એ છે કે
+    એપ્લિકેશન અપડેટ્સ પ્રાપ્ત કરશે નહીં અને WebView2 રનટાઇમ Windows અપડેટ્સ સાથે
+    આપમેળે અપડેટ થશે નહીં.
 general:
   accent_color: ઉચ્ચારણ રંગ
   date_format: તારીખ ફોર્મેટ

@@ -75,7 +75,6 @@ devtools:
   install_folder: የመጫን አቃፊ
   load: ጭነት
   settings_file: የቅንብሮች ፋይል
-  simulate_fullscreen: የሙሉ ስክሪን ክስተት አስመስለው
 extras:
   clear_icons: የስርዓት አዶዎች መሸጎጫ
   clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
@@ -83,6 +82,9 @@ extras:
   links: ኦፊሴላዊ አገናኞች
   relaunch: እንደገና መነገር
   version: ስሪት
+  version_fixed: >-
+    አፕሊኬሽኑ እና WebView2 Runtime ስሪቶች ተስተካክለዋል። ይህ ማለት አፕሊኬሽኑ ዝመናዎችን አይቀበልም እና የዌብ
+    ቪው2 Runtime በዊንዶውስ ዝመናዎች በራስ-ሰር አይዘመንም ማለት ነው።
 general:
   accent_color: የዝግጅት ቀለም
   date_format: የቀን ቅርጸት

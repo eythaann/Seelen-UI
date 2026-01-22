@@ -75,7 +75,6 @@ devtools:
   install_folder: Filese Fifi sori ẹrọ
   load: Ẹru
   settings_file: Faili eto
-  simulate_fullscreen: Ṣe afarawe iṣẹlẹ ni kikun iboju
 extras:
   clear_icons: Ko awọn ilana eto kuro
   clear_icons_tooltip: A le nilo atunbere lati ṣe ipa ni kikun lori gbogbo awọn ẹrọ ailorukọ
@@ -83,6 +82,10 @@ extras:
   links: Awọn ọna asopọ osise
   relaunch: Ṣadi
   version: Ẹya
+  version_fixed: >-
+    Ohun elo naa ati awọn ẹya asiko ṣiṣe WebView2 jẹ ti o wa titi. Eyi tumọ si
+    pe ohun elo naa kii yoo gba awọn imudojuiwọn ati WebView2 Runtime kii yoo ni
+    imudojuiwọn laifọwọyi pẹlu awọn imudojuiwọn Windows.
 general:
   accent_color: Awọ ara
   date_format: Ọna kika ọjọ

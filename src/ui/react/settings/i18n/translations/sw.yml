@@ -76,7 +76,6 @@ devtools:
   install_folder: Folda ya usanikishaji
   load: Mzigo
   settings_file: Faili ya mipangilio
-  simulate_fullscreen: Iga tukio la skrini nzima
 extras:
   clear_icons: Kashe ya icons za mfumo wazi
   clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
@@ -84,6 +83,10 @@ extras:
   links: Viungo rasmi
   relaunch: Kuzindua tena
   version: Toleo
+  version_fixed: >-
+    Programu na matoleo ya WebView2 Runtime yamerekebishwa. Hii ina maana kwamba
+    programu haitapokea masasisho na Muda wa Uendeshaji wa WebView2
+    hautasasishwa kiotomatiki na masasisho ya Windows.
 general:
   accent_color: Rangi ya lafudhi
   date_format: Muundo wa tarehe

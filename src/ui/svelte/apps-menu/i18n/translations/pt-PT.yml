@@ -3,7 +3,9 @@ back: Costas
 disband: Dissolver pasta
 folder: Pasta
 no_matching_items: Nenhum item encontrado que corresponda à sua pesquisa
+open_file_location: Abrir local do arquivo
 pin: Pino
+run_as_admin: Executar como administrador
 unpin: Liberar
 welcome_message: Bem-vindo ao menu do aplicativo Seelen UI.
 welcome_message2: Nesta guia você pode fixar seus aplicativos favoritos.

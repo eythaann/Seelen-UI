@@ -3,7 +3,9 @@ back: Bumalik
 disband: I-disband ang Folder
 folder: Folder
 no_matching_items: Walang nakitang mga item na tumutugma sa iyong paghahanap
+open_file_location: Buksan ang Lokasyon ng File
 pin: Pin
+run_as_admin: Patakbuhin bilang Administrator
 unpin: I-unpin
 welcome_message: Maligayang pagdating sa menu ng Seelen UI app.
 welcome_message2: Sa tab na ito, maaari mong i-pin ang iyong mga paboritong app.

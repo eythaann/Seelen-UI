@@ -88,7 +88,6 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
         display_name,
         path: path.clone(),
         is_dir: false,
-        relaunch_command: None,
         relaunch_program: path.to_string_lossy().to_string(),
         relaunch_args: None,
         relaunch_in: None,

@@ -77,7 +77,6 @@ devtools:
   install_folder: Папка встановлення
   load: Відкрити
   settings_file: Файл налаштувань
-  simulate_fullscreen: Симулювати повноекранну подію
 extras:
   clear_icons: Очистити кеш системних іконок
   clear_icons_tooltip: Може знадобитися перезапуск для повного набрання чинності для всіх віджетів
@@ -85,6 +84,10 @@ extras:
   links: Офіційні посилання
   relaunch: Перезапустити
   version: Версія
+  version_fixed: >-
+    Виправлено версії програми та WebView2 Runtime. Це означає, що програма не
+    отримуватиме оновлення, а WebView2 Runtime не буде автоматично оновлюватись
+    оновленнями Windows.
 general:
   accent_color: Основний колір
   date_format: Формат дати та часу

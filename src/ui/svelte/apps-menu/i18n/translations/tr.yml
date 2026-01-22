@@ -3,7 +3,9 @@ back: Geri
 disband: Klasörü Dağıt
 folder: Klasör
 no_matching_items: Aramanızla eşleşen öğe bulunamadı
+open_file_location: Dosya Konumunu Aç
 pin: Sabitle
+run_as_admin: Yönetici olarak çalıştır
 unpin: Sabitlemeyi kaldır
 welcome_message: Seelen UI uygulama menüsüne hoş geldiniz.
 welcome_message2: Bu sekmede favori uygulamalarınızı sabitleyebilirsiniz.

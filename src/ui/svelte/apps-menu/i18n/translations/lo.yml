@@ -3,7 +3,9 @@ back: ກັບຄືນໄປບ່ອນ
 disband: Disband Folder
 folder: ໂຟລເດີ
 no_matching_items: ບໍ່ພົບລາຍການທີ່ກົງກັບການຊອກຫາຂອງທ່ານ
+open_file_location: ເປີດສະຖານທີ່ໄຟລ໌
 pin: ປັກໝຸດ
+run_as_admin: ດໍາເນີນການເປັນ Administrator
 unpin: ຖອນປັກໝຸດ
 welcome_message: ຍິນດີຕ້ອນຮັບສູ່ເມນູແອັບ Seelen UI.
 welcome_message2: ໃນແຖບນີ້, ທ່ານສາມາດປັກໝຸດແອັບທີ່ທ່ານມັກໄດ້.

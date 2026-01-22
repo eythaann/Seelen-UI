@@ -77,7 +77,6 @@ devtools:
   install_folder: Pasta de instalação
   load: Carga
   settings_file: Arquivo de configurações
-  simulate_fullscreen: Simule o evento de tela cheia
 extras:
   clear_icons: Ícones do sistema limpo cache
   clear_icons_tooltip: Pode ser necessário reinício para entrar em vigor em todos os widgets
@@ -85,6 +84,10 @@ extras:
   links: Links oficiais
   relaunch: Relançar
   version: Versão
+  version_fixed: >-
+    As versões do aplicativo e do WebView2 Runtime foram corrigidas. Isso
+    significa que o aplicativo não receberá atualizações e o WebView2 Runtime
+    não será atualizado automaticamente com as atualizações do Windows.
 general:
   accent_color: Cor de destaque
   date_format: Formato de data

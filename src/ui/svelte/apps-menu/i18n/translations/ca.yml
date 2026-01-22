@@ -3,7 +3,9 @@ back: Enrere
 disband: Dissoldre la carpeta
 folder: Carpeta
 no_matching_items: No s'ha trobat cap element que coincideixi amb la vostra cerca
+open_file_location: Obriu la ubicació del fitxer
 pin: Pin
+run_as_admin: Executar com a administrador
 unpin: Desenganxa
 welcome_message: Benvingut al menú de l'aplicació Seelen UI.
 welcome_message2: En aquesta pestanya, podeu fixar les vostres aplicacions preferides.

@@ -77,7 +77,6 @@ devtools:
   install_folder: Carpeta d'instal·lació
   load: Carregar
   settings_file: Arxiu de configuració
-  simulate_fullscreen: Simula un esdeveniment a pantalla completa
 extras:
   clear_icons: Esborrar la memòria cau de les icones del sistema
   clear_icons_tooltip: Es pot requerir un reinici per tenir efecte sobre tots els ginys
@@ -85,6 +84,11 @@ extras:
   links: Enllaços oficials
   relaunch: Rellançar
   version: Versió
+  version_fixed: >-
+    Les versions de l'aplicació i WebView2 Runtime estan arreglades. Això vol
+    dir que l'aplicació no rebrà actualitzacions i que el temps d'execució de
+    WebView2 no s'actualitzarà automàticament amb les actualitzacions de
+    Windows.
 general:
   accent_color: Color d’accent
   date_format: Format de la data

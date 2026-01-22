@@ -73,7 +73,6 @@ devtools:
   install_folder: アプリのフォルダー
   load: ロード
   settings_file: 設定ファイル
-  simulate_fullscreen: 全画面イベントをシミュレートする
 extras:
   clear_icons: システムアイコンキャッシュをクリアする
   clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
@@ -81,6 +80,9 @@ extras:
   links: リンク
   relaunch: SeelenUIを再起動
   version: バージョン
+  version_fixed: >-
+    アプリケーションとWebView2 Runtimeのバージョンは修正されています。これは、アプリケーションが更新を受信せず、WebView2
+    ランタイムが Windows 更新で自動的に更新されないことを意味します。
 general:
   accent_color: アクセントカラー
   date_format: 日付形式

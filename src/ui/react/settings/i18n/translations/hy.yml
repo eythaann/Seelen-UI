@@ -77,7 +77,6 @@ devtools:
   install_folder: Տեղադրման պանակ
   load: Բեռ
   settings_file: Կարգավորումներ ֆայլ
-  simulate_fullscreen: Ամբողջաէկրան իրադարձությունների նմանակում
 extras:
   clear_icons: Մաքրել համակարգի սրբապատկերների քեշը
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Պաշտոնական հղումներ
   relaunch: Վերակառուցվել
   version: Տարբերակ
+  version_fixed: >-
+    Հավելվածը և WebView2 Runtime տարբերակները ամրագրված են: Սա նշանակում է, որ
+    հավելվածը թարմացումներ չի ստանա, և WebView2 Runtime-ն ավտոմատ կերպով չի
+    թարմացվի Windows-ի թարմացումներով:
 general:
   accent_color: Շեշտադրիչ գույն
   date_format: Ամսաթիվ ձեւաչափ

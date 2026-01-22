@@ -3,7 +3,9 @@ back: 戻る
 disband: フォルダの解散
 folder: フォルダー
 no_matching_items: 検索に一致するアイテムは見つかりませんでした
+open_file_location: ファイルの場所を開く
 pin: ピン
+run_as_admin: 管理者として実行
 unpin: 固定を解除する
 welcome_message: Seelen UI アプリ メニューへようこそ。
 welcome_message2: このタブでは、お気に入りのアプリをピン留めできます。

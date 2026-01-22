@@ -77,7 +77,6 @@ devtools:
   install_folder: Инсталациона мапа
   load: Оптеретити
   settings_file: Подешавања
-  simulate_fullscreen: Симулирајте догађај преко целог екрана
 extras:
   clear_icons: Цлеар Систем Ицонс Цацхе
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Званичне везе
   relaunch: Поновити
   version: Верзија
+  version_fixed: >-
+    Верзије апликације и ВебВиев2 Рунтиме су поправљене. То значи да апликација
+    неће примати ажурирања и да ВебВиев2 Рунтиме неће бити аутоматски ажуриран
+    ажурирањима за Виндовс.
 general:
   accent_color: Боја нагласности
   date_format: Формат датума

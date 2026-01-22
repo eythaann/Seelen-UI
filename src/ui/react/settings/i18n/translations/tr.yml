@@ -77,7 +77,6 @@ devtools:
   install_folder: Kurulum Klasörü
   load: Yükle
   settings_file: Ayarlar Dosyası
-  simulate_fullscreen: Tam ekran etkinliğini simüle et
 extras:
   clear_icons: Sistem Simgeleri Önbelleğini Temizle
   clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
@@ -85,6 +84,10 @@ extras:
   links: Resmi Bağlantılar
   relaunch: Yeniden Başlat
   version: Sürüm
+  version_fixed: >-
+    Uygulama ve WebView2 Çalışma Zamanı sürümleri düzeltildi. Bu, uygulamanın
+    güncellemeleri almayacağı ve WebView2 Çalışma Zamanının Windows
+    güncellemeleriyle otomatik olarak güncellenmeyeceği anlamına gelir.
 general:
   accent_color: Vurgu Rengi
   date_format: Tarih Biçimi

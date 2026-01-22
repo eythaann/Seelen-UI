@@ -77,7 +77,6 @@ devtools:
   install_folder: Folder instalacyjny
   load: Obciążenie
   settings_file: Plik ustawień
-  simulate_fullscreen: Symuluj wydarzenie na pełnym ekranie
 extras:
   clear_icons: Wyczyść pamięć podręczną ikon systemowych
   clear_icons_tooltip: >-
@@ -87,6 +86,11 @@ extras:
   links: Oficjalne linki
   relaunch: Wznów
   version: Wersja
+  version_fixed: >-
+    Wersje aplikacji i środowiska wykonawczego WebView2 zostały naprawione.
+    Oznacza to, że aplikacja nie będzie otrzymywać aktualizacji, a środowisko
+    wykonawcze WebView2 nie będzie automatycznie aktualizowane aktualizacjami
+    systemu Windows.
 general:
   accent_color: Kolor akcentu
   date_format: Format daty

@@ -77,7 +77,6 @@ devtools:
   install_folder: Asennuskansio
   load: Ladata
   settings_file: Asetustiedosto
-  simulate_fullscreen: Simuloi koko näytön tapahtumaa
 extras:
   clear_icons: Tyhjennä järjestelmän kuvakkeiden välimuisti
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Viralliset linkit
   relaunch: Käynnistää uudelleen
   version: Versio
+  version_fixed: >-
+    Sovellus ja WebView2 Runtime -versiot ovat kiinteät. Tämä tarkoittaa, että
+    sovellus ei saa päivityksiä ja WebView2 Runtime ei päivity automaattisesti
+    Windows-päivityksillä.
 general:
   accent_color: Korostusväri
   date_format: Päiväysmuoto

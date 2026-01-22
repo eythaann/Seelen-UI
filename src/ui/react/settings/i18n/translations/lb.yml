@@ -77,7 +77,6 @@ devtools:
   install_folder: Installatioun Dossier
   load: Lueden
   settings_file: Settytout-Datei
-  simulate_fullscreen: Simuléiert Vollbild Event
 extras:
   clear_icons: Kloer System Symboler Cache
   clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
@@ -85,6 +84,10 @@ extras:
   links: Offiziell Linken
   relaunch: Relatioun
   version: Erëm
+  version_fixed: >-
+    D'Applikatioun an d'WebView2 Runtime Versioune si fixéiert. Dëst bedeit datt
+    d'Applikatioun keng Updates kritt an de WebView2 Runtime gëtt net
+    automatesch mat Windows Updates aktualiséiert.
 general:
   accent_color: Akzenter Faarf
   date_format: Datum Format

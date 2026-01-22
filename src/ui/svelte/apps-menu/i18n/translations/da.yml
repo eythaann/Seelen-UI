@@ -3,7 +3,9 @@ back: Tilbage
 disband: Opløs mappe
 folder: Mappe
 no_matching_items: Der blev ikke fundet nogen varer, der matcher din søgning
+open_file_location: Åbn Filplacering
 pin: Stift
+run_as_admin: Kør som administrator
 unpin: Frigør
 welcome_message: Velkommen til Seelen UI-appmenuen.
 welcome_message2: På denne fane kan du fastgøre dine yndlingsapps.

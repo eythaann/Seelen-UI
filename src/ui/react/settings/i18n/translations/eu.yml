@@ -77,7 +77,6 @@ devtools:
   install_folder: Instalazio karpeta
   load: Zamatu
   settings_file: Ezarpenak fitxategia
-  simulate_fullscreen: Simulatu pantaila osoko gertaera
 extras:
   clear_icons: Garbitu sistemaren ikonoak cachea
   clear_icons_tooltip: Berrabiarazi behar da widget guztietan erabat indarrean egon dadin
@@ -85,6 +84,10 @@ extras:
   links: Lotura Ofizialak
   relaunch: Errorefrika
   version: Bertsio
+  version_fixed: >-
+    Aplikazioa eta WebView2 Runtime bertsioak konpondu dira. Horrek esan nahi du
+    aplikazioak ez dituela eguneraketak jasoko eta WebView2 Runtime ez dela
+    automatikoki eguneratuko Windows eguneratzeekin.
 general:
   accent_color: Azentu kolorea
   date_format: Data formatua

@@ -76,7 +76,6 @@ devtools:
   install_folder: Installation Folder
   load: Load
   settings_file: Settings File
-  simulate_fullscreen: Simulate fullscreen event
 extras:
   clear_icons: Clear System Icons Cache
   clear_icons_tooltip: A restart could be required to fully take effect on all widgets
@@ -85,8 +84,9 @@ extras:
   relaunch: Relaunch
   version: Version
   version_fixed: >-
-    The application and WebView2 Runtime versions are fixed.
-    This means that the application will not receive updates and the WebView2 Runtime will not be automatically updated with Windows updates.
+    The application and WebView2 Runtime versions are fixed. This means that the
+    application will not receive updates and the WebView2 Runtime will not be
+    automatically updated with Windows updates.
 general:
   accent_color: Accent Color
   date_format: Date Format

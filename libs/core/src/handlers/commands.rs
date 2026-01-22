@@ -106,17 +106,17 @@ slu_commands_declaration! {
     WallpaperSaveThumbnail = wallpaper_save_thumbnail(wallpaper_id: ResourceId, thumbnail_bytes: Vec<u8>),
 
     // General
-    Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>),
-    RunAsAdmin = run_as_admin(program: PathBuf, args: Option<RelaunchArguments>),
-
-    GetFocusedApp = get_focused_app() -> FocusedApp,
-    GetMousePosition = get_mouse_position() -> [i32; 2],
+    OpenFile = open_file(path: PathBuf),
+    SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),
+    Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>, elevated: bool),
 
     IsDevMode = is_dev_mode() -> bool,
     IsAppxPackage = is_appx_package() -> bool,
     HasFixedRuntime = has_fixed_runtime() -> bool,
-    OpenFile = open_file(path: PathBuf),
-    SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),
+
+    GetFocusedApp = get_focused_app() -> FocusedApp,
+    GetMousePosition = get_mouse_position() -> [i32; 2],
+
     GetUserEnvs = get_user_envs() -> HashMap<String, String>,
     ShowStartMenu = show_start_menu(),
     GetIcon = get_icon(
@@ -125,7 +125,6 @@ slu_commands_declaration! {
         #[ts(optional = nullable)]
         umid: Option<String>
     ),
-    SimulateFullscreen = simulate_fullscreen(),
     ShowDesktop = show_desktop(),
 
     RequestToUserInputShortcut = request_to_user_input_shortcut(callback_event: String),

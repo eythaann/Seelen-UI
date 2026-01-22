@@ -76,7 +76,6 @@ devtools:
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
   settings_file: Parametrlər faylı
-  simulate_fullscreen: Tam ekran hadisəsini simulyasiya edin
 extras:
   clear_icons: Sistem nişanlar önbelleği təmizləyin
   clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
@@ -84,6 +83,10 @@ extras:
   links: Rəsmi bağlantılar
   relaunch: Başsız
   version: Versiya
+  version_fixed: >-
+    Proqram və WebView2 Runtime versiyaları sabitdir. Bu o deməkdir ki, proqram
+    yeniləmələri qəbul etməyəcək və WebView2 Runtime avtomatik olaraq Windows
+    yeniləmələri ilə yenilənməyəcək.
 general:
   accent_color: Vurğu
   date_format: Tarix formatı

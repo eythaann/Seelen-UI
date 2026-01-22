@@ -76,7 +76,6 @@ devtools:
   install_folder: ថតឯកសារដំឡើង
   load: ផ្ទុក
   settings_file: ឯកសារការកំណត់
-  simulate_fullscreen: ក្លែងធ្វើព្រឹត្តិការណ៍ពេញអេក្រង់
 extras:
   clear_icons: សម្អាតឃ្លាំងសម្ងាត់ប្រព័ន្ធ
   clear_icons_tooltip: >-
@@ -85,6 +84,10 @@ extras:
   links: តំណភ្ជាប់ផ្លូវការ
   relaunch: បើកដំណើរការឡើងវិញ
   version: កំណែ
+  version_fixed: >-
+    កំណែកម្មវិធី និង WebView2 Runtime ត្រូវបានជួសជុល។
+    នេះមានន័យថាកម្មវិធីនឹងមិនទទួលបានការអាប់ដេតទេ ហើយ WebView2 Runtime
+    នឹងមិនត្រូវបានអាប់ដេតដោយស្វ័យប្រវត្តិជាមួយនឹងការអាប់ដេតវីនដូទេ។
 general:
   accent_color: ពណ៌សង្កត់សំឡេង
   date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ

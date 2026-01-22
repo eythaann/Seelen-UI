@@ -77,7 +77,6 @@ devtools:
   install_folder: پوشه نصب
   load: بار
   settings_file: پرونده تنظیمات
-  simulate_fullscreen: شبیه سازی رویداد تمام صفحه
 extras:
   clear_icons: حافظه نهان سیستم را پاک کنید
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: پیوندهای رسمی
   relaunch: مجدداً
   version: نسخه
+  version_fixed: >-
+    نسخه برنامه و WebView2 Runtime رفع شده است. این بدان معنی است که برنامه به
+    روز رسانی دریافت نمی کند و WebView2 Runtime به طور خودکار با به روز رسانی
+    ویندوز به روز نمی شود.
 general:
   accent_color: رنگ لهجه
   date_format: قالب تاریخ

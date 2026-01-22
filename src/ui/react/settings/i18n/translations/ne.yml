@@ -77,7 +77,6 @@ devtools:
   install_folder: स्थापना फोल्डर
   load: बोभ्क
   settings_file: सेटिंग्स फाइल
-  simulate_fullscreen: फुलस्क्रिन घटना सिमुलेट गर्नुहोस्
 extras:
   clear_icons: स्पष्ट प्रणाली आइकनहरू क्यास
   clear_icons_tooltip: 'सबै विजेटहरूमा पूर्ण रूपमा प्रभाव लिनको लागि एक पुन: सुरू गर्न आवश्यक पर्दछ'
@@ -85,6 +84,10 @@ extras:
   links: आधिकारिक लिंकहरू
   relaunch: पुनःस्था
   version: रुपान्तर
+  version_fixed: >-
+    अनुप्रयोग र WebView2 रनटाइम संस्करणहरू निश्चित छन्। यसको मतलब यो हो कि
+    अनुप्रयोगले अद्यावधिकहरू प्राप्त गर्दैन र WebView2 रनटाइम स्वचालित रूपमा
+    Windows अद्यावधिकहरूसँग अद्यावधिक हुनेछैन।
 general:
   accent_color: हिम्मता रंग
   date_format: मिति ढाँचा

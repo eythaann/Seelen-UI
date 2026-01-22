@@ -3,7 +3,9 @@ back: Tagasi
 disband: Laiali kaust
 folder: Kaust
 no_matching_items: Teie otsingule vastavaid üksusi ei leitud
+open_file_location: Avage faili asukoht
 pin: Pin
+run_as_admin: Käivita administraatorina
 unpin: Vabastage
 welcome_message: Tere tulemast Seeleni kasutajaliidese rakenduse menüüsse.
 welcome_message2: Sellel vahekaardil saate kinnitada oma lemmikrakendused.

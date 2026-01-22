@@ -3,7 +3,9 @@ back: ተመለስ
 disband: አቃፊን አሰናብት
 folder: አቃፊ
 no_matching_items: ከእርስዎ ፍለጋ ጋር የሚዛመዱ ምንም ንጥሎች አልተገኙም።
+open_file_location: የፋይል ቦታን ክፈት
 pin: ፒን
+run_as_admin: እንደ አስተዳዳሪ ያሂዱ
 unpin: ንቀል
 welcome_message: እንኳን ወደ Seelen UI መተግበሪያ ምናሌ በደህና መጡ።
 welcome_message2: በዚህ ትር ላይ የሚወዷቸውን መተግበሪያዎች መሰካት ይችላሉ።

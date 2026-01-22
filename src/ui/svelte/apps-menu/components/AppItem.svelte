@@ -25,7 +25,7 @@
 
   const itemId = $derived(item.umid || item.path);
   const isPreselected = $derived(
-    globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem)
+    globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem),
   );
 
   const draggable = useDraggable({
@@ -43,11 +43,8 @@
 
   function handleClick(event: MouseEvent) {
     globalState.showing = false; // inmediate close
-    if (item.umid) {
-      invoke(SeelenCommand.OpenFile, { path: `shell:AppsFolder\\${item.umid}` });
-    } else if (item.path) {
-      invoke(SeelenCommand.OpenFile, { path: item.path });
-    }
+    let program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
+    invoke(SeelenCommand.OpenFile, { path: program });
   }
 
   function handleContextMenu(event: MouseEvent) {

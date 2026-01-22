@@ -77,7 +77,6 @@ devtools:
   install_folder: Installasie -lêergids
   load: Vrag
   settings_file: Instellingslêer
-  simulate_fullscreen: Simuleer volskerm gebeurtenis
 extras:
   clear_icons: Maak stelselikone kas uit
   clear_icons_tooltip: '''N Herbegin kan nodig wees om alle widgets ten volle in werking te stel'
@@ -85,6 +84,10 @@ extras:
   links: Amptelike skakels
   relaunch: Herlaai
   version: Weergawe
+  version_fixed: >-
+    Die toepassing en WebView2 Runtime-weergawes is reggestel. Dit beteken dat
+    die toepassing nie opdaterings sal ontvang nie en die WebView2 Runtime sal
+    nie outomaties opgedateer word met Windows-opdaterings nie.
 general:
   accent_color: Aksentkleur
   date_format: Datumformaat

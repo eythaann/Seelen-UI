@@ -76,7 +76,6 @@ devtools:
   install_folder: Суулгалах хүрээ
   load: Ачих
   settings_file: Тохиргооын нэр
-  simulate_fullscreen: Бүтэн дэлгэцийн үйл явдлыг дуурайх
 extras:
   clear_icons: Системийн дүрсийг цэвэрлэх
   clear_icons_tooltip: >-
@@ -86,6 +85,10 @@ extras:
   links: Албан ёсны холбоос
   relaunch: OradAUN
   version: Таамаглал
+  version_fixed: >-
+    Аппликешн болон WebView2 Runtime хувилбаруудыг зассан. Энэ нь програм нь
+    шинэчлэлт хүлээн авахгүй бөгөөд WebView2 Runtime нь Windows шинэчлэлтүүдээр
+    автоматаар шинэчлэгдэхгүй гэсэн үг юм.
 general:
   accent_color: Эргүүлэг
   date_format: Огноо формат

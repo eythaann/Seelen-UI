@@ -77,7 +77,6 @@ devtools:
   install_folder: ইনস্টলেশন ফোল্ডার
   load: বোঝা
   settings_file: সেটিংস ফাইল
-  simulate_fullscreen: পূর্ণস্ক্রীন ইভেন্ট অনুকরণ
 extras:
   clear_icons: ক্লিয়ার সিস্টেম আইকন ক্যাশে
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: অফিসিয়াল লিঙ্ক
   relaunch: পুনরায় চালু
   version: সংস্করণ
+  version_fixed: >-
+    অ্যাপ্লিকেশন এবং WebView2 রানটাইম সংস্করণ স্থির করা হয়েছে। এর মানে হল যে
+    অ্যাপ্লিকেশনটি আপডেট পাবে না এবং WebView2 রানটাইম স্বয়ংক্রিয়ভাবে উইন্ডোজ
+    আপডেটের সাথে আপডেট হবে না।
 general:
   accent_color: সুরের ধাপের রঙ
   date_format: তারিখ ফর্ম্যাট

@@ -77,7 +77,6 @@ devtools:
   install_folder: Diegimo aplankas
   load: Įkelti
   settings_file: Nustatymų failas
-  simulate_fullscreen: Imituoti viso ekrano įvykį
 extras:
   clear_icons: Išvalyti sistemos piktogramų talpyklą
   clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
@@ -85,6 +84,10 @@ extras:
   links: Oficialios nuorodos
   relaunch: Atsikrauti
   version: Versija
+  version_fixed: >-
+    Programos ir „WebView2 Runtime“ versijos yra fiksuotos. Tai reiškia, kad
+    programa negaus naujinimų ir „WebView2 Runtime“ nebus automatiškai
+    atnaujinta naudojant „Windows“ naujinimus.
 general:
   accent_color: Akcento spalva
   date_format: Datos formatas

@@ -77,7 +77,6 @@ devtools:
   install_folder: ఇన్‌స్టాలేషన్ ఫోల్డర్
   load: లోడ్ చేయండి
   settings_file: సెట్టింగుల ఫైల్
-  simulate_fullscreen: పూర్తి స్క్రీన్ ఈవెంట్‌ను అనుకరించండి
 extras:
   clear_icons: క్లియర్ సిస్టమ్ చిహ్నాలు కాష్
   clear_icons_tooltip: అన్ని విడ్జెట్లపై పూర్తిగా అమలులోకి రావడానికి పున art ప్రారంభం అవసరం
@@ -85,6 +84,10 @@ extras:
   links: అధికారిక లింకులు
   relaunch: పునఃప్రారంభించండి
   version: 'సంస్కరణ: Telugu'
+  version_fixed: >-
+    అప్లికేషన్ మరియు WebView2 రన్‌టైమ్ వెర్షన్‌లు పరిష్కరించబడ్డాయి. దీని అర్థం
+    అప్లికేషన్ నవీకరణలను స్వీకరించదు మరియు Windows నవీకరణలతో WebView2 రన్‌టైమ్
+    స్వయంచాలకంగా నవీకరించబడదు.
 general:
   accent_color: యాస రంగు
   date_format: తేదీ ఆకృతి

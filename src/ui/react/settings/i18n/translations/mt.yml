@@ -77,7 +77,6 @@ devtools:
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
   settings_file: Settings Fajl
-  simulate_fullscreen: Issimula avveniment fullscreen
 extras:
   clear_icons: Ikoni tas-sistema ċara cache
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Rabtiet uffiċjali
   relaunch: Tnedija mill-ġdid
   version: Verżjoni
+  version_fixed: >-
+    L-applikazzjoni u l-verżjonijiet tal-WebView2 Runtime huma ffissati. Dan
+    ifisser li l-applikazzjoni mhux se tirċievi aġġornamenti u l-WebView2
+    Runtime mhux se jiġi aġġornat awtomatikament bl-aġġornamenti tal-Windows.
 general:
   accent_color: Kulur tal-aċċent
   date_format: Format tad-data

@@ -76,7 +76,6 @@ devtools:
   install_folder: Installi kaust
   load: Laadima
   settings_file: Seadete fail
-  simulate_fullscreen: Täisekraanil toimuva sündmuse simuleerimine
 extras:
   clear_icons: Tühjenda süsteemi ikoonide vahemälu
   clear_icons_tooltip: Kõigi vidinate täielikuks jõustumiseks võib olla vajalik taaskäivitamine.
@@ -84,6 +83,10 @@ extras:
   links: Ametlikud lingid
   relaunch: Taaskäivitama
   version: Versioon
+  version_fixed: >-
+    Rakenduse ja WebView2 Runtime versioonid on fikseeritud. See tähendab, et
+    rakendus ei saa värskendusi ja WebView2 Runtime ei värskendata automaatselt
+    Windowsi värskendustega.
 general:
   accent_color: Aktsentvärv
   date_format: Kuupäeva vorming

@@ -77,7 +77,6 @@ devtools:
   install_folder: Uppsetningarmöppu
   load: Hlaða
   settings_file: Stillingarskrá
-  simulate_fullscreen: Líktu eftir atburði á öllum skjánum
 extras:
   clear_icons: Hreinsa kerfistákn skyndiminni
   clear_icons_tooltip: Endurræsing gæti verið nauðsynleg til að taka gildi að fullu á allar búnaðir
@@ -85,6 +84,10 @@ extras:
   links: Opinberir hlekkir
   relaunch: Fylgdu aftur
   version: Útgáfa
+  version_fixed: >-
+    Forritið og WebView2 Runtime útgáfur eru fastar. Þetta þýðir að forritið fær
+    ekki uppfærslur og WebView2 Runtime verður ekki uppfært sjálfkrafa með
+    Windows uppfærslum.
 general:
   accent_color: Hreim litur
   date_format: Dagsetningarsnið

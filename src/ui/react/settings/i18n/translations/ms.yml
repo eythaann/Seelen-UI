@@ -77,7 +77,6 @@ devtools:
   install_folder: Folder pemasangan
   load: Beban
   settings_file: Fail tetapan
-  simulate_fullscreen: Simulasikan acara skrin penuh
 extras:
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
@@ -85,6 +84,10 @@ extras:
   links: Pautan Rasmi
   relaunch: Pelancaran semula
   version: Versi
+  version_fixed: >-
+    Aplikasi dan versi WebView2 Runtime telah ditetapkan. Ini bermakna bahawa
+    aplikasi tidak akan menerima kemas kini dan WebView2 Runtime tidak akan
+    dikemas kini secara automatik dengan kemas kini Windows.
 general:
   accent_color: Warna aksen
   date_format: Format tarikh

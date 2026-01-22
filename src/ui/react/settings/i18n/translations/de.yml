@@ -77,7 +77,6 @@ devtools:
   install_folder: Installationsordner
   load: Laden
   settings_file: Einstellungsdatei
-  simulate_fullscreen: Vollbildereignis simulieren
 extras:
   clear_icons: System-Symbol-Cache löschen
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Offizielle Links
   relaunch: Neu starten
   version: Version
+  version_fixed: >-
+    Die Anwendungs- und WebView2-Runtime-Versionen sind behoben. Dies bedeutet,
+    dass die Anwendung keine Updates erhält und die WebView2 Runtime nicht
+    automatisch mit Windows-Updates aktualisiert wird.
 general:
   accent_color: Akzentfarbe
   date_format: Datumsformat

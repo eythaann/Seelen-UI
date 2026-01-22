@@ -78,7 +78,6 @@ devtools:
   install_folder: Xeerka rakibaadda
   load: Xammuul
   settings_file: Faylka Dejinta
-  simulate_fullscreen: Isku day dhacdo shaashad buuxda
 extras:
   clear_icons: Calaamadaha Calaamadaha Camis Cast
   clear_icons_tooltip: >-
@@ -88,6 +87,10 @@ extras:
   links: Xiriirinta rasmiga ah
   relaunch: Dib u beer
   version: Werin
+  version_fixed: >-
+    Codsiga iyo nooca Runtime WebView2 waa go'an. Tani waxay ka dhigan tahay in
+    codsigu aanu heli doonin wax cusub oo WebView2 Runtime aan si toos ah loogu
+    cusboonaysiin doonin cusbooneysiinta Windows.
 general:
   accent_color: Midab caqabad
   date_format: Taariikh format

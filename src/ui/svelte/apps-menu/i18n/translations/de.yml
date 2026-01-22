@@ -3,7 +3,9 @@ back: Zurück
 disband: Ordner auflösen
 folder: Ordner
 no_matching_items: Es wurden keine Artikel gefunden, die Ihrer Suche entsprechen
+open_file_location: Öffnen Sie den Dateispeicherort
 pin: Stift
+run_as_admin: Als Administrator ausführen
 unpin: Lösen
 welcome_message: Willkommen im Menü der Seelen UI-App.
 welcome_message2: Auf dieser Registerkarte können Sie Ihre Lieblings-Apps anpinnen.

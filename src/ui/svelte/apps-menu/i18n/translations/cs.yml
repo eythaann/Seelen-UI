@@ -3,7 +3,9 @@ back: Zadní
 disband: Rozpustit složku
 folder: Složka
 no_matching_items: Nebyly nalezeny žádné položky odpovídající vašemu hledání
+open_file_location: Otevřete Umístění souboru
 pin: Kolík
+run_as_admin: Spustit jako správce
 unpin: Odepnout
 welcome_message: Vítejte v nabídce aplikace Seelen UI.
 welcome_message2: Na této kartě můžete připnout své oblíbené aplikace.

@@ -77,7 +77,6 @@ devtools:
   install_folder: Installasjonsmappe
   load: Laste
   settings_file: Innstillingsfilen
-  simulate_fullscreen: Simuler fullskjermhendelse
 extras:
   clear_icons: Klare systemikoner cache
   clear_icons_tooltip: Det kan kreves en omstart for å tre i kraft alle widgeter
@@ -85,6 +84,10 @@ extras:
   links: Offisielle lenker
   relaunch: Relanseres
   version: Versjon
+  version_fixed: >-
+    Applikasjonen og WebView2 Runtime-versjonene er fikset. Dette betyr at
+    applikasjonen ikke vil motta oppdateringer og WebView2 Runtime vil ikke
+    automatisk oppdateres med Windows-oppdateringer.
 general:
   accent_color: Aksentfarge
   date_format: Datoformat

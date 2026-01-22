@@ -77,7 +77,6 @@ devtools:
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
-  simulate_fullscreen: სრულეკრანიანი მოვლენის სიმულაცია
 extras:
   clear_icons: სუფთა სისტემის ხატები ქეში
   clear_icons_tooltip: გადატვირთვა შეიძლება საჭირო გახდეს, რომ სრულად იმოქმედოს ყველა ვიჯეტზე
@@ -85,6 +84,10 @@ extras:
   links: ოფიციალური ბმულები
   relaunch: გაუქმება
   version: ვერსია
+  version_fixed: >-
+    აპლიკაციისა და WebView2 Runtime ვერსიები დაფიქსირდა. ეს ნიშნავს, რომ
+    აპლიკაცია არ მიიღებს განახლებებს და WebView2 Runtime ავტომატურად არ
+    განახლდება Windows-ის განახლებებით.
 general:
   accent_color: აქცენტის ფერი
   date_format: თარიღის ფორმატი

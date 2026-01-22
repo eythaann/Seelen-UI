@@ -77,7 +77,6 @@ devtools:
   install_folder: Папка за инсталација
   load: Оптоварување
   settings_file: Датотека за поставки
-  simulate_fullscreen: Симулирајте настан на цел екран
 extras:
   clear_icons: Јасна кеш за икони на системот
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Официјални врски
   relaunch: Повторно започнување
   version: Верзија
+  version_fixed: >-
+    Апликацијата и верзиите WebView2 Runtime се поправени. Ова значи дека
+    апликацијата нема да прима ажурирања и WebView2 Runtime нема автоматски да
+    се ажурира со ажурирања на Windows.
 general:
   accent_color: Боја на акцент
   date_format: Формат на датум

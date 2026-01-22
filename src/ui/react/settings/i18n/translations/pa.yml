@@ -73,7 +73,6 @@ devtools:
   install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
-  simulate_fullscreen: ਪੂਰੀ ਸਕ੍ਰੀਨ ਇਵੈਂਟ ਦੀ ਨਕਲ ਕਰੋ
 extras:
   clear_icons: ਸਿਸਟਮ ਆਈਕਾਨ ਕੈਚੇ ਸਾਫ਼ ਕਰੋ
   clear_icons_tooltip: ਸਾਰੇ ਵਿਜੇਟਸ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਹੋਣ ਲਈ ਇੱਕ ਰੀਸਟਾਰਟ ਦੀ ਜ਼ਰੂਰਤ ਹੋ ਸਕਦੀ ਹੈ
@@ -81,6 +80,10 @@ extras:
   links: ਅਧਿਕਾਰਤ ਲਿੰਕ
   relaunch: ਮੁੜ-ਲਾਂਚ ਕਰੋ
   version: ਸੰਸਕਰਣ
+  version_fixed: >-
+    ਐਪਲੀਕੇਸ਼ਨ ਅਤੇ WebView2 ਰਨਟਾਈਮ ਸੰਸਕਰਣ ਸਥਿਰ ਹਨ। ਇਸਦਾ ਮਤਲਬ ਹੈ ਕਿ ਐਪਲੀਕੇਸ਼ਨ
+    ਅੱਪਡੇਟ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰੇਗੀ ਅਤੇ WebView2 ਰਨਟਾਈਮ ਨੂੰ ਵਿੰਡੋਜ਼ ਅੱਪਡੇਟ ਨਾਲ ਆਪਣੇ ਆਪ
+    ਅੱਪਡੇਟ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ।
 general:
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
   date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ

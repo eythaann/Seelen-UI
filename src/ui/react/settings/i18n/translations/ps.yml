@@ -76,7 +76,6 @@ devtools:
   install_folder: لګول فولډر
   load: بار
   settings_file: د امستنې دوتنه
-  simulate_fullscreen: د بشپړ سکرین پیښې انډول کړئ
 extras:
   clear_icons: د ایکسین عکس کې کیچ
   clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
@@ -84,6 +83,10 @@ extras:
   links: رسمي اړیکې
   relaunch: بیا پیل کول
   version: نسخه
+  version_fixed: >-
+    د غوښتنلیک او WebView2 د چلولو نسخه ثابته شوې. دا پدې مانا ده چې غوښتنلیک به
+    تازه معلومات ترلاسه نکړي او د WebView2 Runtime به په اوتومات ډول د وینډوز
+    تازه معلوماتو سره تازه نشي.
 general:
   accent_color: تیزس رنګ
   date_format: د نیټې ب .ه

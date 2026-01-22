@@ -77,7 +77,6 @@ devtools:
   install_folder: Folder Instalasi
   load: Memuat
   settings_file: File Pengaturan
-  simulate_fullscreen: Simulasikan acara layar penuh
 extras:
   clear_icons: Menghapus Cache Ikon Sistem
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Tautan resmi
   relaunch: Peluncuran kembali
   version: 'Versi: kapan'
+  version_fixed: >-
+    Versi aplikasi dan WebView2 Runtime telah diperbaiki. Artinya aplikasi tidak
+    akan menerima pembaruan dan WebView2 Runtime tidak akan diperbarui secara
+    otomatis dengan pembaruan Windows.
 general:
   accent_color: Aksen warna
   date_format: Format tanggal

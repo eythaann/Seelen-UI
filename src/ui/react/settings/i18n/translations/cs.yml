@@ -77,7 +77,6 @@ devtools:
   install_folder: Instalační složka
   load: Načíst
   settings_file: Nastavení souboru
-  simulate_fullscreen: Simulovat událost na celou obrazovku
 extras:
   clear_icons: Vymazání mezipaměti systémových ikon
   clear_icons_tooltip: Aby se plně projevily všechny widgety, mohlo by být nutné restartování.
@@ -85,6 +84,10 @@ extras:
   links: Oficiální odkazy
   relaunch: Znovu spustit
   version: Verze
+  version_fixed: >-
+    Verze aplikace a WebView2 Runtime jsou opraveny. To znamená, že aplikace
+    nebude přijímat aktualizace a WebView2 Runtime nebude automaticky
+    aktualizován aktualizacemi Windows.
 general:
   accent_color: Barvný nádech
   date_format: Formát datumu

@@ -3,7 +3,9 @@ back: Atrás
 disband: Disolver carpeta
 folder: Carpeta
 no_matching_items: No se encontraron artículos que coincidan con su búsqueda
+open_file_location: Abrir ubicación del archivo
 pin: Alfiler
+run_as_admin: Ejecutar como administradora
 unpin: Desprender
 welcome_message: Bienvenido al menú de la aplicación Seelen UI.
 welcome_message2: En esta pestaña, puedes fijar tus aplicaciones favoritas.

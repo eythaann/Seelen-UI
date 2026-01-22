@@ -77,7 +77,6 @@ devtools:
   install_folder: Instalēšanas mape
   load: Slodze
   settings_file: Iestatīšanas fails
-  simulate_fullscreen: Simulējiet pilnekrāna notikumu
 extras:
   clear_icons: Iztīrīt sistēmas ikonu kešatmiņu
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Oficiālas saites
   relaunch: Atsākšana
   version: Versija
+  version_fixed: >-
+    Lietojumprogramma un WebView2 Runtime versijas ir fiksētas. Tas nozīmē, ka
+    lietojumprogramma nesaņems atjauninājumus un WebView2 Runtime netiks
+    automātiski atjaunināts ar Windows atjauninājumiem.
 general:
   accent_color: Akcents
   date_format: Datuma formāts

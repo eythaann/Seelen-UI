@@ -74,7 +74,6 @@ devtools:
   install_folder: โฟลเดอร์การติดตั้ง
   load: โหลด
   settings_file: ไฟล์การตั้งค่า
-  simulate_fullscreen: จำลองเหตุการณ์แบบเต็มหน้าจอ
 extras:
   clear_icons: ล้างไอคอนระบบแคช
   clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
@@ -82,6 +81,10 @@ extras:
   links: ลิงค์อย่างเป็นทางการ
   relaunch: เปิดใหม่
   version: รุ่น
+  version_fixed: >-
+    เวอร์ชันของแอปพลิเคชันและ WebView2 Runtime ได้รับการแก้ไขแล้ว
+    ซึ่งหมายความว่าแอปพลิเคชันจะไม่ได้รับการอัพเดตและ WebView2 Runtime
+    จะไม่ได้รับการอัปเดตโดยอัตโนมัติด้วยการอัปเดต Windows
 general:
   accent_color: สีเน้น
   date_format: รูปแบบวันที่

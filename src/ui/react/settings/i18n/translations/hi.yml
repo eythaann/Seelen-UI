@@ -77,7 +77,6 @@ devtools:
   install_folder: स्थापना फ़ोल्डर
   load: भार
   settings_file: सेटिंग संचिका
-  simulate_fullscreen: फ़ुलस्क्रीन ईवेंट का अनुकरण करें
 extras:
   clear_icons: स्पष्ट प्रणाली आइकन कैश
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: आधिकारिक संबंध
   relaunch: 'पुन: लॉन्च'
   version: संस्करण
+  version_fixed: >-
+    एप्लिकेशन और WebView2 रनटाइम संस्करण ठीक हो गए हैं। इसका मतलब यह है कि
+    एप्लिकेशन को अपडेट प्राप्त नहीं होंगे और WebView2 रनटाइम स्वचालित रूप से
+    विंडोज अपडेट के साथ अपडेट नहीं होगा।
 general:
   accent_color: स्वरोंका रंग
   date_format: तारिख का प्रारूप

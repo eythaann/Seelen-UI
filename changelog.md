@@ -37,6 +37,7 @@
 - click on keyboard layout no changing the layout on the system.
 - window labels not being shown on dock.
 - tiling window manager not pausing on maximized/fullscreen apps.
+- run as admin not working on dock/taskbar.
 
 ## [2.4.11]
 

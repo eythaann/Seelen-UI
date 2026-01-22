@@ -77,7 +77,6 @@ devtools:
   install_folder: Ffolder gosod
   load: Lwythet
   settings_file: Ffeil Gosodiadau
-  simulate_fullscreen: Efelychu digwyddiad sgrin lawn
 extras:
   clear_icons: Storfa eiconau system glir
   clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
@@ -85,6 +84,10 @@ extras:
   links: Dolenni Swyddogol
   relaunch: Hail -deirion
   version: Fersiwn
+  version_fixed: >-
+    Mae'r cymhwysiad a fersiynau WebView2 Runtime yn sefydlog. Mae hyn yn golygu
+    na fydd y rhaglen yn derbyn diweddariadau ac ni fydd WebView2 Runtime yn
+    cael ei ddiweddaru'n awtomatig gyda diweddariadau Windows.
 general:
   accent_color: Lliw acen
   date_format: Fformat dyddiad

@@ -77,7 +77,6 @@ devtools:
   install_folder: Инсталационна папка
   load: Зареждане
   settings_file: Файл за настройки
-  simulate_fullscreen: Симулирайте събитие на цял екран
 extras:
   clear_icons: Изчистване на кеша на системните икони
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Официални връзки
   relaunch: Рестартиране
   version: Версия
+  version_fixed: >-
+    Версиите на приложението и WebView2 Runtime са коригирани. Това означава, че
+    приложението няма да получава актуализации и WebView2 Runtime няма да се
+    актуализира автоматично с актуализации на Windows.
 general:
   accent_color: Цвят на акцент
   date_format: Формат на дата

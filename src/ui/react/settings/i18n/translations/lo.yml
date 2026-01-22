@@ -75,7 +75,6 @@ devtools:
   install_folder: ໂຟນເດີການຕິດຕັ້ງ
   load: ໂຫຼດ
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
-  simulate_fullscreen: ຈຳລອງເຫດການເຕັມຈໍ
 extras:
   clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
   clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
@@ -83,6 +82,10 @@ extras:
   links: ການເຊື່ອມຕໍ່ຢ່າງເປັນທາງການ
   relaunch: ເປີດຄືນໃໝ່
   version: ຮຸ່ນ
+  version_fixed: >-
+    ແອັບພລິເຄຊັນ ແລະ WebView2 Runtime ເວີຊັ່ນຖືກແກ້ໄຂແລ້ວ.
+    ນີ້ຫມາຍຄວາມວ່າແອັບພລິເຄຊັນຈະບໍ່ໄດ້ຮັບການປັບປຸງແລະ WebView2 Runtime
+    ຈະບໍ່ຖືກປັບປຸງໂດຍອັດຕະໂນມັດກັບການປັບປຸງ Windows.
 general:
   accent_color: ສີສໍານຽງ
   date_format: ຮູບແບບວັນທີ

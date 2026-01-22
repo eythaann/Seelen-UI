@@ -77,7 +77,6 @@ devtools:
   install_folder: Folder de instalare
   load: Sarcină
   settings_file: Fișier de setări
-  simulate_fullscreen: Simulați un eveniment pe ecran complet
 extras:
   clear_icons: Ștergeți memoria cache a pictogramelor de sistem
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Link -uri oficiale
   relaunch: Relansare
   version: Versiune
+  version_fixed: >-
+    Aplicația și versiunile WebView2 Runtime sunt remediate. Aceasta înseamnă că
+    aplicația nu va primi actualizări și WebView2 Runtime nu va fi actualizat
+    automat cu actualizări Windows.
 general:
   accent_color: Culoare de accent
   date_format: Formatul datei

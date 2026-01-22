@@ -77,7 +77,6 @@ devtools:
   install_folder: Феҳристи насб
   load: Сарборӣ
   settings_file: Файлҳои танзимот
-  simulate_fullscreen: Ҳодисаи пурраи экранро тақлид кунед
 extras:
   clear_icons: Нишондиҳандаи системаи тозагӣ
   clear_icons_tooltip: Бозоғоз кардан мумкин аст, ки ба ҳама виджет пурра таъсир расонад
@@ -85,6 +84,10 @@ extras:
   links: Истеҳсоли расмӣ
   relaunch: Радкунӣ
   version: Версия
+  version_fixed: >-
+    Версияҳои барнома ва WebView2 Runtime собит шудаанд. Ин маънои онро дорад,
+    ки барнома навсозиҳоро қабул намекунад ва WebView2 Runtime бо навсозиҳои
+    Windows ба таври худкор нав карда намешавад.
 general:
   accent_color: Ранги ҳисоб
   date_format: Шакли сана

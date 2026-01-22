@@ -77,7 +77,6 @@ devtools:
   install_folder: Mapa za instalaciju
   load: Opterećenje
   settings_file: Datoteka postavki
-  simulate_fullscreen: Simulirajte događaj preko cijelog zaslona
 extras:
   clear_icons: Očistite predmemoriju ikona sustava
   clear_icons_tooltip: Ponovno pokretanje moglo bi se u potpunosti stupiti na sve widgete
@@ -85,6 +84,10 @@ extras:
   links: Službene veze
   relaunch: Ponovno pokretanje
   version: Verzija
+  version_fixed: >-
+    Verzije aplikacije i WebView2 Runtime su popravljene. To znači da aplikacija
+    neće primati ažuriranja i WebView2 Runtime neće biti automatski ažuriran
+    ažuriranjima za Windows.
 general:
   accent_color: Akcentna boja
   date_format: Format datuma

@@ -76,7 +76,6 @@ devtools:
   install_folder: Thư mục cài đặt
   load: Trọng tải
   settings_file: Cài đặt tập tin
-  simulate_fullscreen: Mô phỏng sự kiện toàn màn hình
 extras:
   clear_icons: Xóa bộ đệm biểu tượng hệ thống
   clear_icons_tooltip: >-
@@ -86,6 +85,10 @@ extras:
   links: Liên kết chính thức
   relaunch: Khởi động lại
   version: Phiên bản
+  version_fixed: >-
+    Ứng dụng và phiên bản WebView2 Runtime đã được sửa. Điều này có nghĩa là ứng
+    dụng sẽ không nhận được bản cập nhật và WebView2 Runtime sẽ không được tự
+    động cập nhật với các bản cập nhật Windows.
 general:
   accent_color: Màu nhấn
   date_format: Định dạng ngày

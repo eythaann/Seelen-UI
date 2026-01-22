@@ -38,10 +38,6 @@ export function DeveloperTools() {
     invoke(SeelenCommand.OpenFile, { path: await path.appDataDir() });
   }
 
-  async function simulateFullscreen(value: boolean) {
-    await invoke(SeelenCommand.SimulateFullscreen, { value });
-  }
-
   return (
     <>
       <SettingsGroup>
@@ -82,13 +78,6 @@ export function DeveloperTools() {
         <SettingsOption>
           <span>{t("devtools.custom_config_file")}:</span>
           <Button onClick={LoadCustomConfigFile}>{t("devtools.load")}</Button>
-        </SettingsOption>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t("devtools.simulate_fullscreen")}</b>
-          <Switch onChange={simulateFullscreen} />
         </SettingsOption>
       </SettingsGroup>
     </>

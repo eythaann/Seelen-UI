@@ -97,8 +97,8 @@ use windows::{
                 BHID_EnumItems, IEnumShellItems, IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
                 SHCreateItemFromParsingName, SHGetKnownFolderItem, SHGetKnownFolderPath,
-                SHLoadIndirectString, ShellLink, VirtualDesktopManager, KF_FLAG_DEFAULT,
-                SIGDN_NORMALDISPLAY,
+                SHLoadIndirectString, ShellExecuteExW, ShellLink, VirtualDesktopManager,
+                KF_FLAG_DEFAULT, SHELLEXECUTEINFOW, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 BringWindowToTop, FindWindowExW, GetClassNameW, GetDesktopWindow,
@@ -109,8 +109,9 @@ use windows::{
                 GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
                 SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
                 SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
-                WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX, WS_THICKFRAME,
+                SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
+                WS_THICKFRAME,
             },
         },
     },
@@ -585,37 +586,6 @@ impl WindowsApi {
         Ok(app_info)
     }
 
-    pub fn create_temp_shortcut(
-        program: &Path,
-        args: &str,
-        working_dir: Option<&Path>,
-    ) -> Result<PathBuf> {
-        let working_dir = working_dir.or_else(|| program.parent());
-
-        Com::run_with_context(|| unsafe {
-            let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
-
-            let program = WindowsString::from_os_string(program.as_os_str());
-            shell_link.SetPath(program.as_pcwstr())?;
-
-            let arguments = WindowsString::from_str(args);
-            shell_link.SetArguments(arguments.as_pcwstr())?;
-
-            if let Some(working_dir) = working_dir {
-                let working_dir = WindowsString::from_os_string(working_dir.as_os_str());
-                shell_link.SetWorkingDirectory(working_dir.as_pcwstr())?;
-            }
-
-            let temp_dir = std::env::temp_dir();
-            let lnk_path = temp_dir.join(format!("{}.lnk", uuid::Uuid::new_v4()));
-            let lnk_path_wide = WindowsString::from_os_string(lnk_path.as_os_str());
-
-            let persist_file: IPersistFile = shell_link.cast()?;
-            persist_file.Save(lnk_path_wide.as_pcwstr(), true)?;
-            Ok(lnk_path)
-        })
-    }
-
     /// return the program and arguments
     pub fn resolve_lnk_target(lnk_path: &Path) -> Result<(PathBuf, OsString)> {
         Com::run_with_context(|| {
@@ -1063,6 +1033,43 @@ impl WindowsApi {
             }
         }
 
+        Ok(())
+    }
+
+    pub fn execute(
+        program: String,
+        args: Option<String>,
+        working_dir: Option<PathBuf>,
+        elevated: bool,
+    ) -> Result<()> {
+        log::trace!("Running: {program:?} with args: {args:?} in working dir: {working_dir:?}");
+
+        let program = WindowsString::from_str(&program);
+        let args = args.map(WindowsString::from);
+        let working_dir = working_dir.map(WindowsString::from);
+
+        let runas = WindowsString::from_str("runas");
+
+        let mut info = SHELLEXECUTEINFOW {
+            cbSize: std::mem::size_of::<SHELLEXECUTEINFOW>() as _,
+            nShow: SW_SHOWNORMAL.0,
+            lpFile: program.as_pcwstr(),
+            lpParameters: match &args {
+                Some(args) => args.as_pcwstr(),
+                None => PCWSTR::null(),
+            },
+            lpDirectory: match &working_dir {
+                Some(working_dir) => working_dir.as_pcwstr(),
+                None => PCWSTR::null(),
+            },
+            lpVerb: match elevated {
+                true => runas.as_pcwstr(),
+                false => PCWSTR::null(),
+            },
+            ..Default::default()
+        };
+
+        unsafe { ShellExecuteExW(&mut info)? };
         Ok(())
     }
 }

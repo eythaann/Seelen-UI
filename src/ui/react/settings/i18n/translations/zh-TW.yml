@@ -72,7 +72,6 @@ devtools:
   install_folder: 安裝文件夾
   load: 載入
   settings_file: 設置文件
-  simulate_fullscreen: 模擬全屏事件
 extras:
   clear_icons: 清除系統圖標緩存
   clear_icons_tooltip: 可能需要重新啟動才能完全生效所有小部件
@@ -80,6 +79,7 @@ extras:
   links: 官方鏈接
   relaunch: 重新啟動
   version: 版本
+  version_fixed: 應用程序和 WebView2 運行時版本已修復。這意味著應用程序將不會接收更新，並且 WebView2 運行時也不會隨 Windows 更新自動更新。
 general:
   accent_color: 口音顏色
   date_format: 日期格式

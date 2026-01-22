@@ -77,7 +77,6 @@ devtools:
   install_folder: Cartella di Installazione
   load: Carica
   settings_file: File delle Impostazioni
-  simulate_fullscreen: Simula un evento a schermo intero
 extras:
   clear_icons: Cancella la cache delle icone di sistema
   clear_icons_tooltip: Potrebbe essere necessario un riavvio per avere effetto su tutti i widget.
@@ -85,6 +84,11 @@ extras:
   links: Link Ufficiali
   relaunch: Riavvia
   version: Versione
+  version_fixed: >-
+    Le versioni dell'applicazione e del runtime WebView2 sono fisse. Ciò
+    significa che l'applicazione non riceverà aggiornamenti e il runtime
+    WebView2 non verrà aggiornato automaticamente con gli aggiornamenti di
+    Windows.
 general:
   accent_color: Colore Accentuato
   date_format: Formato Data

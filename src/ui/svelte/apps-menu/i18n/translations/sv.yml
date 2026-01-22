@@ -3,7 +3,9 @@ back: Tillbaka
 disband: Upplös mapp
 folder: Mapp
 no_matching_items: Inga objekt hittades som matchar din sökning
+open_file_location: Öppna filplats
 pin: Stift
+run_as_admin: Kör som administratör
 unpin: Lossa
 welcome_message: Välkommen till Seelen UI-appmenyn.
 welcome_message2: På den här fliken kan du fästa dina favoritappar.

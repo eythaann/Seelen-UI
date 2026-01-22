@@ -75,7 +75,6 @@ devtools:
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
   settings_file: Pelê Mîhengan
-  simulate_fullscreen: Bûyera tevahî ekranê simule bikin
 extras:
   clear_icons: Îkonên pergala zelal cache
   clear_icons_tooltip: >-
@@ -85,6 +84,10 @@ extras:
   links: Girêdanên fermî
   relaunch: Berxwedêr
   version: Awa
+  version_fixed: >-
+    Serlêdan û guhertoyên WebView2 Runtime têne rast kirin. Ev tê vê wateyê ku
+    serîlêdan dê nûvekirinan wernegire û WebView2 Runtime dê bixweber bi
+    nûvekirinên Windows-ê re neyê nûve kirin.
 general:
   accent_color: Rengê Accent
   date_format: Formata Date

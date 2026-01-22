@@ -77,7 +77,6 @@ devtools:
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
-  simulate_fullscreen: Simuler l'événement plein écran
 extras:
   clear_icons: Effacer le cache des icônes du système
   clear_icons_tooltip: >-
@@ -87,6 +86,11 @@ extras:
   links: Liens officiels
   relaunch: Redémarrer Seelen UI
   version: Version
+  version_fixed: >-
+    Les versions de l'application et de WebView2 Runtime sont corrigées. Cela
+    signifie que l'application ne recevra pas de mises à jour et que WebView2
+    Runtime ne sera pas automatiquement mis à jour avec les mises à jour
+    Windows.
 general:
   accent_color: Couleur d'accentuation
   date_format: Format de la date

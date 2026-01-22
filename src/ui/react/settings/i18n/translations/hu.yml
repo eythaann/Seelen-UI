@@ -76,7 +76,6 @@ devtools:
   install_folder: Telepítési mappa
   load: Betöltés
   settings_file: Beállítási fájl
-  simulate_fullscreen: Teljes képernyős esemény szimulálása
 extras:
   clear_icons: Rendszerikonok gyorsítótárának törlése
   clear_icons_tooltip: >-
@@ -86,6 +85,10 @@ extras:
   links: Hivatalos linkek
   relaunch: Újraindít
   version: Változat
+  version_fixed: >-
+    Az alkalmazás és a WebView2 Runtime verziója rögzített. Ez azt jelenti, hogy
+    az alkalmazás nem kap frissítéseket, és a WebView2 Runtime nem frissül
+    automatikusan Windows-frissítésekkel.
 general:
   accent_color: Akcentus szín
   date_format: Dátum formátum

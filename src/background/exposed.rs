@@ -15,16 +15,13 @@ use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WIND
 
 use crate::app::{get_app_handle, Seelen};
 use crate::error::Result;
-use crate::hook::HookManager;
 
 use crate::utils;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::icon_extractor::{
     request_icon_extraction_from_file, request_icon_extraction_from_umid,
 };
-use crate::utils::pwsh::PwshScript;
 use crate::windows_api::hdc::DeviceContext;
-use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
 
@@ -58,55 +55,10 @@ async fn run(
     program: String,
     args: Option<RelaunchArguments>,
     working_dir: Option<PathBuf>,
+    elevated: bool,
 ) -> Result<()> {
-    let args = match args {
-        Some(args) => match args {
-            RelaunchArguments::String(args) => args,
-            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
-        },
-        None => String::new(),
-    };
-
-    log::trace!("Running: {program:?} {args} in {working_dir:?}");
-
-    // we create a link file to trick with explorer into a separated process
-    // and without elevation in case Seelen UI was running as admin
-    // this could take some delay like is creating a file but just are some milliseconds
-    // and this exposed funtion is intended to just run certain times
-    let lnk_file =
-        WindowsApi::create_temp_shortcut(&PathBuf::from(program), &args, working_dir.as_deref())?;
-    get_app_handle()
-        .shell()
-        .command(SEELEN_COMMON.system_dir().join("explorer.exe"))
-        .arg(&lnk_file)
-        .status()
-        .await?;
-    std::fs::remove_file(&lnk_file)?;
-    Ok(())
-}
-
-#[tauri::command(async)]
-async fn run_as_admin(program: PathBuf, args: Option<RelaunchArguments>) -> Result<()> {
-    let args = match args {
-        Some(args) => match args {
-            RelaunchArguments::String(args) => args,
-            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
-        },
-        None => String::new(),
-    };
-    log::trace!("Running as admin: {program:?} {args}");
-
-    let command = if args.is_empty() {
-        format!("Start-Process '{}' -Verb runAs", program.display())
-    } else {
-        format!(
-            "Start-Process '{}' -Verb runAs -ArgumentList '{}'",
-            program.display(),
-            args
-        )
-    };
-    PwshScript::new(command).execute().await?;
-    Ok(())
+    let args = args.map(|args| args.to_string());
+    WindowsApi::execute(program, args, working_dir, elevated)
 }
 
 #[tauri::command(async)]
@@ -148,17 +100,6 @@ fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Result<()> {
     if let Some(path) = path {
         request_icon_extraction_from_file(&path);
     }
-    Ok(())
-}
-
-#[tauri::command(async)]
-fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Result<()> {
-    let window = Window::from(webview.hwnd()?.0 as isize);
-    let event = match value {
-        true => WinEvent::SyntheticFullscreenStart,
-        false => WinEvent::SyntheticFullscreenEnd,
-    };
-    HookManager::event_tx().send((event, window))?;
     Ok(())
 }
 

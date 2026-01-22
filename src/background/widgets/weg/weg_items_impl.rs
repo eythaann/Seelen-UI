@@ -24,10 +24,7 @@ use crate::{
     },
     state::application::FULL_STATE,
     trace_lock,
-    utils::{
-        constants::SEELEN_COMMON,
-        icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
-    },
+    utils::icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
     windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
 };
 
@@ -202,14 +199,7 @@ impl SeelenWegState {
                 AppUserModelId::Appx(umid) => {
                     // pre-extraction to avoid flickering on the ui
                     request_icon_extraction_from_umid(&AppUserModelId::Appx(umid.clone()));
-                    (
-                        SEELEN_COMMON
-                            .system_dir()
-                            .join("explorer.exe")
-                            .to_string_lossy()
-                            .to_string(),
-                        Some(format!("shell:AppsFolder\\{umid}")),
-                    )
+                    (format!("shell:AppsFolder\\{umid}"), None)
                 }
                 AppUserModelId::PropertyStore(umid) => {
                     let start_menu_manager = StartMenuManager::instance();
@@ -241,14 +231,7 @@ impl SeelenWegState {
                         display_name = relaunch_display_name;
                         get_parts_of_inline_command(&relaunch_command)
                     } else if shortcut.is_some() {
-                        (
-                            SEELEN_COMMON
-                                .system_dir()
-                                .join("explorer.exe")
-                                .to_string_lossy()
-                                .to_string(),
-                            Some(format!("shell:AppsFolder\\{umid}")),
-                        )
+                        (format!("shell:AppsFolder\\{umid}"), None)
                     } else {
                         // process program path
                         (path.to_string_lossy().to_string(), None)
@@ -293,7 +276,6 @@ impl SeelenWegState {
             subtype: WegItemSubtype::App,
             umid,
             path,
-            relaunch_command: None,
             relaunch_program,
             relaunch_args,
             relaunch_in: None,

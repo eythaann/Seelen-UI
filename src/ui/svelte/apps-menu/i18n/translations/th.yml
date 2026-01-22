@@ -3,7 +3,9 @@ back: กลับ
 disband: ยุบโฟลเดอร์
 folder: โฟลเดอร์
 no_matching_items: ไม่พบรายการที่ตรงกับการค้นหาของคุณ
+open_file_location: เปิดตำแหน่งไฟล์
 pin: เข็มหมุด
+run_as_admin: เรียกใช้ในฐานะผู้ดูแลระบบ
 unpin: เลิกปักหมุด
 welcome_message: ยินดีต้อนรับสู่เมนูแอป Seelen UI
 welcome_message2: บนแท็บนี้ คุณสามารถปักหมุดแอปโปรดของคุณได้

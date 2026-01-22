@@ -76,7 +76,6 @@ devtools:
   install_folder: ස්ථාපන ෆෝල්ඩරය
   load: පැටවීම
   settings_file: සැකසුම් ගොනුව
-  simulate_fullscreen: සම්පූර්ණ තිර සිදුවීම අනුකරණය කරන්න
 extras:
   clear_icons: පැහැදිලි පද්ධති අයිකන හැඹිලිය
   clear_icons_tooltip: >-
@@ -86,6 +85,10 @@ extras:
   links: නිල සබැඳි
   relaunch: නැවත දියත් කරන්න
   version: පිටපත
+  version_fixed: >-
+    යෙදුම සහ WebView2 ධාවන කාල අනුවාද සවි කර ඇත. මෙයින් අදහස් වන්නේ යෙදුමට
+    යාවත්කාලීන නොලැබෙන අතර WebView2 ධාවන කාලය වින්ඩෝස් යාවත්කාලීන සමඟ
+    ස්වයංක්‍රීයව යාවත්කාලීන නොවන බවයි.
 general:
   accent_color: උච්චාරණ වර්ණය
   date_format: දිනය ආකෘතිය

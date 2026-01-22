@@ -77,7 +77,6 @@ devtools:
   install_folder: Installationsmappe
   load: belastning
   settings_file: Indstillinger fil
-  simulate_fullscreen: Simuler begivenhed i fuld skærm
 extras:
   clear_icons: Ryd cache for systemikoner
   clear_icons_tooltip: En genstart kan være nødvendig for at få fuld effekt på alle widgets
@@ -85,6 +84,10 @@ extras:
   links: Officielle links
   relaunch: Relancering
   version: Version
+  version_fixed: >-
+    Applikationen og WebView2 Runtime-versionerne er faste. Det betyder, at
+    applikationen ikke vil modtage opdateringer, og WebView2 Runtime vil ikke
+    automatisk blive opdateret med Windows-opdateringer.
 general:
   accent_color: Accentfarve
   date_format: Datoformat

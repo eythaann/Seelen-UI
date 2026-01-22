@@ -77,7 +77,6 @@ devtools:
   install_folder: Папка установки
   load: Загрузить
   settings_file: Файл настроек
-  simulate_fullscreen: Имитировать полноэкранное событие
 extras:
   clear_icons: Очистить кэш системных значков
   clear_icons_tooltip: >-
@@ -87,6 +86,10 @@ extras:
   links: Официальные ссылки
   relaunch: Перезапустить
   version: Версия
+  version_fixed: >-
+    Версии приложения и среды выполнения WebView2 исправлены. Это означает, что
+    приложение не будет получать обновления, а среда выполнения WebView2 не
+    будет автоматически обновляться обновлениями Windows.
 general:
   accent_color: Акцентный цвет
   date_format: Формат даты

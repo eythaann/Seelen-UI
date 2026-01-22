@@ -79,7 +79,6 @@ devtools:
   install_folder: Folder ng pag -install
   load: Mag -load
   settings_file: File ng mga setting
-  simulate_fullscreen: Gayahin ang fullscreen na kaganapan
 extras:
   clear_icons: I -clear ang Mga Icon ng System Cache
   clear_icons_tooltip: >-
@@ -89,6 +88,10 @@ extras:
   links: Opisyal na mga link
   relaunch: Muling pagsasaayos
   version: Bersyon
+  version_fixed: >-
+    Ang mga bersyon ng application at WebView2 Runtime ay naayos na.
+    Nangangahulugan ito na ang application ay hindi makakatanggap ng mga update
+    at ang WebView2 Runtime ay hindi awtomatikong maa-update sa Windows update.
 general:
   accent_color: Kulay ng accent
   date_format: Format ng petsa

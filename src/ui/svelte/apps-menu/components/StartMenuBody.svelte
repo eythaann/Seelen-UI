@@ -1,14 +1,13 @@
 <script lang="ts">
-  import type { StartMenuItem } from "@seelen-ui/lib/types";
   import { globalState } from "../state.svelte";
   import { StartView } from "../constants";
   import PinnedView from "./PinnedView.svelte";
   import AllAppsView from "./AllAppsView.svelte";
   import { t } from "../i18n";
   import { Icon } from "libs/ui/svelte/components/Icon";
+  import { invoke, SeelenCommand } from "@seelen-ui/lib";
 
   let contextMenu = $state<HTMLDivElement>();
-  let contextMenuVisible = $state(false);
   let contextMenuX = $state(0);
   let contextMenuY = $state(0);
   let activeContextMenuItem = $state<string | null>(null);
@@ -16,19 +15,19 @@
   const activeContextMenuItemData = $derived.by(() => {
     if (!activeContextMenuItem) return null;
     const item = globalState.allItems.find(
-      (item) => (item.umid || item.path) === activeContextMenuItem
+      (item) => (item.umid || item.path) === activeContextMenuItem,
     );
     return item || null;
   });
 
   const activeContextMenuItemPinned = $derived(
-    activeContextMenuItemData ? globalState.isPinned(activeContextMenuItemData) : false
+    activeContextMenuItemData ? globalState.isPinned(activeContextMenuItemData) : false,
   );
 
   const activeContextMenuIsFolder = $derived.by(() => {
     if (!activeContextMenuItem) return false;
     const folder = globalState.pinnedItems.find(
-      (item) => item.type === "folder" && item.itemId === activeContextMenuItem
+      (item) => item.type === "folder" && item.itemId === activeContextMenuItem,
     );
     return !!folder;
   });
@@ -36,7 +35,6 @@
   function handleContextMenu(event: MouseEvent, itemId: string) {
     contextMenuX = event.clientX;
     contextMenuY = event.clientY;
-    contextMenuVisible = true;
     activeContextMenuItem = itemId;
   }
 
@@ -44,7 +42,6 @@
     if (activeContextMenuItemData) {
       globalState.togglePin(activeContextMenuItemData);
     }
-    contextMenuVisible = false;
     activeContextMenuItem = null;
   }
 
@@ -52,16 +49,14 @@
     if (activeContextMenuItem) {
       globalState.disbandFolder(activeContextMenuItem);
     }
-    contextMenuVisible = false;
     activeContextMenuItem = null;
   }
 
   $effect(() => {
-    if (!contextMenuVisible) return;
+    if (activeContextMenuItem === null) return;
 
     const handleOutside = (event: MouseEvent) => {
       if (!contextMenu?.contains(event.target as HTMLElement)) {
-        contextMenuVisible = false;
         activeContextMenuItem = null;
       }
     };
@@ -87,7 +82,7 @@
   {/if}
 </div>
 
-{#if contextMenuVisible}
+{#if activeContextMenuItem}
   <div
     bind:this={contextMenu}
     class="context-menu"
@@ -112,6 +107,46 @@
         <Icon iconName={activeContextMenuItemPinned ? "TbPinnedOff" : "TbPin"} />
         <span>{activeContextMenuItemPinned ? $t("unpin") : $t("pin")}</span>
       </button>
+
+      {#if activeContextMenuItemData?.path}
+        <button
+          class="context-menu-item"
+          onclick={() => {
+            activeContextMenuItem = null;
+            globalState.showing = false;
+
+            invoke(SeelenCommand.SelectFileOnExplorer, { path: activeContextMenuItemData.path });
+          }}
+        >
+          <Icon iconName="MdOutlineMyLocation" />
+          <span>{$t("open_file_location")}</span>
+        </button>
+      {/if}
+
+      {#if activeContextMenuItemData?.umid || activeContextMenuItemData?.path
+          .toLowerCase()
+          .endsWith(".lnk")}
+        <button
+          class="context-menu-item"
+          onclick={() => {
+            activeContextMenuItem = null;
+            globalState.showing = false;
+
+            let program = activeContextMenuItemData.umid
+              ? `shell:AppsFolder\\${activeContextMenuItemData.umid}`
+              : activeContextMenuItemData.path;
+            invoke(SeelenCommand.Run, {
+              program,
+              args: null,
+              workingDir: null,
+              elevated: true,
+            });
+          }}
+        >
+          <Icon iconName="MdOutlineAdminPanelSettings" />
+          <span>{$t("run_as_admin")}</span>
+        </button>
+      {/if}
     {/if}
   </div>
 {/if}

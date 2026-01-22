@@ -75,7 +75,6 @@ devtools:
   install_folder: مجلد التثبيت
   load: تحميل
   settings_file: ملف الإعدادات
-  simulate_fullscreen: محاكاة حدث ملء الشاشة
 extras:
   clear_icons: مسح ذاكرة التخزين المؤقت لأيقونات النظام
   clear_icons_tooltip: قد تكون إعادة التشغيل مطلوبة لتدخل جميع الأدوات حيز التنفيذ بالكامل
@@ -83,6 +82,9 @@ extras:
   links: الروابط الرسمية
   relaunch: إعادة التشغيل
   version: الإصدار
+  version_fixed: >-
+    تم إصلاح إصدارات التطبيق وWebView2 Runtime. وهذا يعني أن التطبيق لن يتلقى
+    التحديثات ولن يتم تحديث WebView2 Runtime تلقائيًا بتحديثات Windows.
 general:
   accent_color: اللون الثانوي
   date_format: تنسيق التاريخ

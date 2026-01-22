@@ -77,7 +77,6 @@ devtools:
   install_folder: Ifolda yokufaka
   load: Thwala
   settings_file: Ifayela lezilungiselelo
-  simulate_fullscreen: Lingisa umcimbi wesikrini esigcwele
 extras:
   clear_icons: Sula i-Cold yesistimu ye-System
   clear_icons_tooltip: >-
@@ -87,6 +86,11 @@ extras:
   links: Izixhumanisi ezisemthethweni
   relaunch: Qondisa amandla ehlehliseyo
   version: Ukuhumushela
+  version_fixed: >-
+    Uhlelo lokusebenza kanye nezinguqulo ze-WebView2 Runtime zilungisiwe. Lokhu
+    kusho ukuthi uhlelo lokusebenza ngeke luthole ukubuyekezwa futhi Isikhathi
+    sokusebenza seWebView2 ngeke sibuyekezwe ngokuzenzakalelayo ngezibuyekezo
+    ze-Windows.
 general:
   accent_color: Umbala we-Accent
   date_format: Ifomethi yosuku
