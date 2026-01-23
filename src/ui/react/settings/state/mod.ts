@@ -40,9 +40,9 @@ export * from "./system";
 const defaultMonitorConfig = await invoke(SeelenCommand.StateGetDefaultMonitorSettings);
 effect(() => {
   const sanitized = settings.peek();
-  for (const monitor in monitors.value) {
-    if (!sanitized.monitorsV3[monitor]) {
-      sanitized.monitorsV3[monitor] = cloneDeep(defaultMonitorConfig);
+  for (const monitor of monitors.value) {
+    if (!sanitized.monitorsV3[monitor.id]) {
+      sanitized.monitorsV3[monitor.id] = cloneDeep(defaultMonitorConfig);
     }
   }
   batch(() => {
