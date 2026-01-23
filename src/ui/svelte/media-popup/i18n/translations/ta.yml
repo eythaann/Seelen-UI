@@ -1,0 +1,13 @@
+default_multimedia_volume: மல்டிமீடியா தொகுதி
+device:
+  channel:
+    system: கணினி ஒலிகள்
+  comunications: தொடர்புகள்
+  missing: சாதனம் இல்லை
+  mixer: தொகுதி கலவை
+  multimedia: மல்டிமீடியா
+  settings: மேலும் சாதன அமைப்புகள்
+  volume: சாதனத்தின் அளவு
+input_devices: உள்ளீட்டு சாதனங்கள்
+output_devices: வெளியீட்டு சாதனங்கள்
+players: மீடியா பிளேயர்கள்

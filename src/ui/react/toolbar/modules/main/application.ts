@@ -40,7 +40,7 @@ export function RestoreToDefault() {
       "@seelen/keyboard-selector" as PluginId,
       "@seelen/tb-bluetooth-popup" as PluginId,
       "@seelen/tb-network-popup" as PluginId,
-      "@default/media" as PluginId,
+      "@seelen/tb-media-popup" as PluginId,
       "@default/power" as PluginId,
       "@default/notifications" as PluginId,
       "@seelen/tb-quick-settings" as PluginId,

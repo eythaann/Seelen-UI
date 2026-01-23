@@ -1,0 +1,13 @@
+default_multimedia_volume: Dami ng Multimedia
+device:
+  channel:
+    system: Mga tunog ng system
+  comunications: Komunikasyon
+  missing: Nawawalang Device
+  mixer: Panghalo ng Dami
+  multimedia: Multimedia
+  settings: Higit pang Mga Setting ng Device
+  volume: Dami ng Device
+input_devices: Mga input device
+output_devices: Mga aparatong output
+players: Mga Media Player

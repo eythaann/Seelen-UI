@@ -1,0 +1,13 @@
+default_multimedia_volume: マルチメディアボリューム
+device:
+  channel:
+    system: システム音
+  comunications: コミュニケーション
+  missing: 紛失したデバイス
+  mixer: ボリュームミキサー
+  multimedia: マルチメディア
+  settings: その他のデバイス設定
+  volume: デバイスボリューム
+input_devices: 入力デバイス
+output_devices: 出力デバイス
+players: メディアプレーヤー

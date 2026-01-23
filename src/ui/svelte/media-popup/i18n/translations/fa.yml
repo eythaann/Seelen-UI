@@ -1,0 +1,13 @@
+default_multimedia_volume: حجم چند رسانه ای
+device:
+  channel:
+    system: صداهای سیستم
+  comunications: ارتباطات
+  missing: دستگاه گم شده
+  mixer: ولوم میکسر
+  multimedia: چند رسانه ای
+  settings: تنظیمات بیشتر دستگاه
+  volume: میزان صدای دستگاه
+input_devices: دستگاه های ورودی
+output_devices: دستگاه های خروجی
+players: پخش کننده های رسانه ای

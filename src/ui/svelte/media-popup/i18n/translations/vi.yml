@@ -1,0 +1,13 @@
+default_multimedia_volume: Khối lượng đa phương tiện
+device:
+  channel:
+    system: Âm thanh hệ thống
+  comunications: Truyền thông
+  missing: Thiếu thiết bị
+  mixer: Bộ trộn âm lượng
+  multimedia: đa phương tiện
+  settings: Thêm cài đặt thiết bị
+  volume: Âm lượng thiết bị
+input_devices: Thiết bị đầu vào
+output_devices: Thiết bị đầu ra
+players: Trình phát phương tiện

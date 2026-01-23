@@ -1,0 +1,13 @@
+default_multimedia_volume: মাল্টিমিডিয়া ভলিউম
+device:
+  channel:
+    system: সিস্টেম শব্দ
+  comunications: যোগাযোগ
+  missing: অনুপস্থিত ডিভাইস
+  mixer: ভলিউম মিক্সার
+  multimedia: মাল্টিমিডিয়া
+  settings: আরও ডিভাইস সেটিংস
+  volume: ডিভাইসের ভলিউম
+input_devices: ইনপুট ডিভাইস
+output_devices: আউটপুট ডিভাইস
+players: মিডিয়া প্লেয়ার

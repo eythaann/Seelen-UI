@@ -1,0 +1,13 @@
+default_multimedia_volume: Ҳаҷми мултимедиявӣ
+device:
+  channel:
+    system: Овозҳои система
+  comunications: Муошират
+  missing: Дастгоҳи гумшуда
+  mixer: Миксери ҳаҷми
+  multimedia: Мултимедиа
+  settings: Танзимоти бештари дастгоҳ
+  volume: Ҳаҷми дастгоҳ
+input_devices: Дастгоҳҳои воридотӣ
+output_devices: Дастгоҳҳои баромад
+players: Плеери медиа

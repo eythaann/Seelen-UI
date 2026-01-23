@@ -1,0 +1,13 @@
+default_multimedia_volume: Mugga Warbaahinta
+device:
+  channel:
+    system: Codka nidaamka
+  comunications: Isgaarsiinta
+  missing: Qalab maqan
+  mixer: Isku-dhafka mugga
+  multimedia: Multimedia
+  settings: Dejinta Aaladaha oo badan
+  volume: Qalabka Qalabka
+input_devices: Qalabka wax gelinta
+output_devices: Qalabka wax soo saarka
+players: Ciyaartoyda Warbaahinta

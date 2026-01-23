@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedijos garsumas
+device:
+  channel:
+    system: Sistemos garsai
+  comunications: Ryšiai
+  missing: Trūksta įrenginio
+  mixer: Tūrio maišytuvas
+  multimedia: Multimedija
+  settings: Daugiau įrenginio nustatymų
+  volume: Įrenginio garsumas
+input_devices: Įvesties įrenginiai
+output_devices: Išvesties įrenginiai
+players: Medijos grotuvai

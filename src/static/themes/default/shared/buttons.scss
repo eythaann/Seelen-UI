@@ -4,30 +4,44 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
+
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+div[data-behavior="group"] {
+  display: flex;
+
+  > button:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  > button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 
 button[data-skin="transparent"] {
   @extend %common;
+  border: 1px solid transparent;
 
   &:hover {
-    background-color: rgba(var(--system-accent-color-rgb), 0.2);
-  }
-
-  &:active {
-    background-color: rgba(var(--system-accent-color-rgb), 0.4);
+    background-color: oklch(from var(--system-accent-color) l c h / 0.2);
   }
 }
 
 button[data-skin="solid"] {
   @extend %common;
-  background-color: var(--system-accent-color);
+  background-color: var(--ui-color);
+  border: 1px solid var(--ui-color);
+  color: var(--color-gray-100);
 
   &:hover {
-    background-color: var(--system-accent-dark-color);
-  }
-
-  &:active {
-    background-color: var(--system-accent-darker-color);
+    background-color: var(--ui-hover-color);
+    border: 1px solid var(--ui-hover-color);
   }
 }
 
@@ -37,10 +51,6 @@ button[data-skin="default"] {
   border: 1px solid var(--color-gray-300);
 
   &:hover {
-    border: 1px solid var(--system-accent-color);
-  }
-
-  &:active {
-    border: 1px solid var(--system-accent-dark-color);
+    border: 1px solid var(--ui-hover-color);
   }
 }

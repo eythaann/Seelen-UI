@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedia volym
+device:
+  channel:
+    system: Systemet låter
+  comunications: Kommunikationer
+  missing: Enhet saknas
+  mixer: Volymmixer
+  multimedia: Multimedia
+  settings: Fler enhetsinställningar
+  volume: Enhetsvolym
+input_devices: Inmatningsenheter
+output_devices: Utdataenheter
+players: Mediaspelare

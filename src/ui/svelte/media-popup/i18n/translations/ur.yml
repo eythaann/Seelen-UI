@@ -1,0 +1,13 @@
+default_multimedia_volume: ملٹی میڈیا حجم
+device:
+  channel:
+    system: سسٹم کی آوازیں
+  comunications: مواصلات
+  missing: لاپتہ آلہ
+  mixer: حجم مکسر
+  multimedia: ملٹی میڈیا
+  settings: مزید آلہ کی ترتیبات
+  volume: ڈیوائس کا حجم
+input_devices: ان پٹ ڈیوائسز
+output_devices: آؤٹ پٹ ڈیوائسز
+players: میڈیا پلیئرز

@@ -12,6 +12,11 @@
 @import "./inputs.scss";
 @import "./buttons.scss";
 
+:root {
+  --ui-color: light-dark(var(--system-accent-dark-color), var(--system-accent-light-color));
+  --ui-hover-color: light-dark(var(--system-accent-darker-color), var(--system-accent-lighter-color));
+}
+
 // Accessibility Improvement
 *:focus-visible {
   outline-offset: 2px;

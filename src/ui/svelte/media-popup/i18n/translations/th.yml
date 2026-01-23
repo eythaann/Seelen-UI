@@ -1,0 +1,13 @@
+default_multimedia_volume: ปริมาณมัลติมีเดีย
+device:
+  channel:
+    system: เสียงของระบบ
+  comunications: การสื่อสาร
+  missing: อุปกรณ์ที่หายไป
+  mixer: มิกเซอร์ระดับเสียง
+  multimedia: มัลติมีเดีย
+  settings: การตั้งค่าอุปกรณ์เพิ่มเติม
+  volume: ระดับเสียงของอุปกรณ์
+input_devices: อุปกรณ์อินพุต
+output_devices: อุปกรณ์เอาท์พุต
+players: เครื่องเล่นสื่อ

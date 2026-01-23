@@ -1,0 +1,13 @@
+default_multimedia_volume: Kelantangan Multimedia
+device:
+  channel:
+    system: Bunyi sistem
+  comunications: Komunikasi
+  missing: Peranti Tiada
+  mixer: Pengadun Isipadu
+  multimedia: Multimedia
+  settings: Lagi Tetapan Peranti
+  volume: Kelantangan Peranti
+input_devices: Peranti input
+output_devices: Peranti output
+players: Pemain Media

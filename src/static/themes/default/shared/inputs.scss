@@ -6,14 +6,9 @@ input[type="range"] {
 }
 
 input[type="range"][data-skin="flat"] {
-  height: 25px;
-  border-radius: 10px;
+  height: 1.5rem;
+  border-radius: 0.5rem;
   background: var(--color-gray-300);
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background: var(--color-gray-400);
-  }
 
   &::-webkit-slider-runnable-track {
     appearance: none;
@@ -23,7 +18,13 @@ input[type="range"][data-skin="flat"] {
     appearance: none;
     width: 0;
     height: 0;
-    box-shadow: -100vw 0 0 100vw var(--system-accent-dark-color);
+    box-shadow: -100vw 0 0 100vw var(--ui-color);
+  }
+
+  &:hover {
+    &::-webkit-slider-thumb {
+      box-shadow: -100vw 0 0 100vw var(--ui-hover-color);
+    }
   }
 }
 
@@ -38,10 +39,9 @@ input[type="search"][data-skin="default"] {
   border-radius: 6px;
 
   font-size: 0.9rem;
-  transition: border-color 0.2s;
 
   &:focus {
-    border-color: rgba(var(--system-accent-color-rgb), 0.8);
+    border-color: var(--ui-hover-color);
     outline: none;
   }
 
@@ -72,11 +72,10 @@ input[type="search"][data-skin="transparent"] {
   border-radius: 6px;
 
   font-size: 0.9rem;
-  transition: border-color 0.2s, background-color 0.2s;
 
   &:focus {
     background-color: var(--color-gray-50);
-    border-color: rgba(var(--system-accent-color-rgb), 0.8);
+    border-color: var(--ui-hover-color);
     outline: none;
   }
 
@@ -121,7 +120,7 @@ input[type="checkbox"][data-skin="switch"] {
   }
 
   &:checked {
-    background-color: var(--system-accent-dark-color);
+    background-color: var(--ui-color);
 
     &::before {
       transform: translateX($width / 2);

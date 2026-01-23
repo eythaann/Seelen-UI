@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedia tovushi
+device:
+  channel:
+    system: Tizim tovushlari
+  comunications: Aloqa
+  missing: Qurilma yetishmayapti
+  mixer: Ovoz mikser
+  multimedia: Multimedia
+  settings: Qo'shimcha qurilma sozlamalari
+  volume: Qurilma ovozi
+input_devices: Kirish qurilmalari
+output_devices: Chiqish qurilmalari
+players: Media pleerlar

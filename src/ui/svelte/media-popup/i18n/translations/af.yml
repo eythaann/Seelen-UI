@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedia Volume
+device:
+  channel:
+    system: Stelselklanke
+  comunications: Kommunikasie
+  missing: Toestel ontbreek
+  mixer: Volumemenger
+  multimedia: Multimedia
+  settings: Meer toestelinstellings
+  volume: Toestelvolume
+input_devices: Invoer toestelle
+output_devices: Uitset toestelle
+players: Mediaspelers

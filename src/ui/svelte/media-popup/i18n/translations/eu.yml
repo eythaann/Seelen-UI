@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedia Bolumena
+device:
+  channel:
+    system: Sistemaren soinuak
+  comunications: Komunikazioak
+  missing: Gailua falta da
+  mixer: Bolumen nahasgailua
+  multimedia: Multimedia
+  settings: Gailuaren ezarpen gehiago
+  volume: Gailuaren bolumena
+input_devices: Sarrerako gailuak
+output_devices: Irteerako gailuak
+players: Multimedia erreproduzitzaileak

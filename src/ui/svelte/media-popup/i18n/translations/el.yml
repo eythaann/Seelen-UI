@@ -1,0 +1,13 @@
+default_multimedia_volume: Ένταση πολυμέσων
+device:
+  channel:
+    system: Ήχοι συστήματος
+  comunications: Διαβιβάσεις
+  missing: Λείπει συσκευή
+  mixer: Μίκτης έντασης ήχου
+  multimedia: Πολυμέσα
+  settings: Περισσότερες ρυθμίσεις συσκευής
+  volume: Ένταση της συσκευής
+input_devices: Συσκευές εισόδου
+output_devices: Συσκευές εξόδου
+players: Media Players

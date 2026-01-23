@@ -1,0 +1,21 @@
+id: "@seelen/tb-media-popup"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: IoVolumeHighOutline
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: media
+  template: |-
+    return isMuted
+      ? icon("IoVolumeMuteOutline")
+      : volume >= 0.66
+        ? icon("IoVolumeHighOutline")
+        : volume >= 0.33
+          ? icon("IoVolumeMediumOutline")
+          : volume != 0
+            ? icon("IoVolumeLowOutline")
+            : icon("IoVolumeOffOutline")
+  tooltip: 'return [t("placeholder.volume"), ": ", (volume * 100).toFixed(0), "%"]'
+  onClickV2: |-
+    trigger("@seelen/media-popup");

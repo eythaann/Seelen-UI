@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedia həcmi
+device:
+  channel:
+    system: Sistem səsləri
+  comunications: Rabitə
+  missing: Çatışmayan Cihaz
+  mixer: Həcmi qarışdırıcı
+  multimedia: Multimedia
+  settings: Daha çox Cihaz Parametrləri
+  volume: Cihazın həcmi
+input_devices: Giriş cihazları
+output_devices: Çıxış cihazları
+players: Media pleyerləri

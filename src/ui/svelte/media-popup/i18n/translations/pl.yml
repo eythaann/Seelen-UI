@@ -1,0 +1,13 @@
+default_multimedia_volume: Głośność multimediów
+device:
+  channel:
+    system: Dźwięki systemowe
+  comunications: Komunikacja
+  missing: Brakujące urządzenie
+  mixer: Mikser głośności
+  multimedia: Multimedia
+  settings: Więcej ustawień urządzenia
+  volume: Głośność urządzenia
+input_devices: Urządzenia wejściowe
+output_devices: Urządzenia wyjściowe
+players: Odtwarzacze multimedialne

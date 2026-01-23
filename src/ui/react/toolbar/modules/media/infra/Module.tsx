@@ -1,20 +1,16 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { MediaToolbarItem } from "@seelen-ui/lib/types";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Item } from "../../item/infra/infra.tsx";
 
 import { Selectors } from "../../shared/store/app.ts";
 
-import { WithMediaControls } from "./MediaControls.tsx";
-
 interface Props {
   module: MediaToolbarItem;
-  active?: boolean;
 }
 
-function MediaModuleItem({ module, active, ...rest }: Props) {
+export function MediaModule({ module, ...rest }: Props) {
   const {
     id,
     volume = 0,
@@ -45,19 +41,6 @@ function MediaModuleItem({ module, active, ...rest }: Props) {
       onWheel={module.withMediaControls ? onWheel : undefined}
       extraVars={{ volume, isMuted, inputVolume, inputIsMuted, mediaSession }}
       module={module}
-      active={active}
     />
   );
-}
-
-export function MediaModule({ module }: Props) {
-  const [open, setOpen] = useState(false);
-
-  return module.withMediaControls
-    ? (
-      <WithMediaControls setActive={setOpen}>
-        <MediaModuleItem module={module} active={open} />
-      </WithMediaControls>
-    )
-    : <MediaModuleItem module={module} />;
 }

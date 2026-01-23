@@ -1,0 +1,13 @@
+default_multimedia_volume: Volumul multimedia
+device:
+  channel:
+    system: Sunete de sistem
+  comunications: Comunicatii
+  missing: Dispozitiv lipsă
+  mixer: Mixer de volum
+  multimedia: Multimedia
+  settings: Mai multe setări pentru dispozitiv
+  volume: Volumul dispozitivului
+input_devices: Dispozitive de intrare
+output_devices: Dispozitive de ieșire
+players: Playere media

@@ -1,0 +1,13 @@
+default_multimedia_volume: កម្រិតសំឡេងពហុព័ត៌មាន
+device:
+  channel:
+    system: សំឡេងប្រព័ន្ធ
+  comunications: ទំនាក់ទំនង
+  missing: ឧបករណ៍ដែលបាត់
+  mixer: ឧបករណ៍លាយកម្រិតសំឡេង
+  multimedia: ពហុព័ត៌មាន
+  settings: ការកំណត់ឧបករណ៍ច្រើនទៀត
+  volume: បរិមាណឧបករណ៍
+input_devices: ឧបករណ៍បញ្ចូល
+output_devices: ឧបករណ៍បញ្ចេញ
+players: អ្នកលេងប្រព័ន្ធផ្សព្វផ្សាយ

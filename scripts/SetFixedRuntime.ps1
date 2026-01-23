@@ -4,7 +4,7 @@ param(
     [string]$Architecture = "x64",
 
     [Parameter(Mandatory = $false)]
-    [string]$Version = "133.0.3065.92"
+    [string]$Version = "143.0.3650.139"
 )
 
 $ErrorActionPreference = "Stop"
@@ -18,7 +18,7 @@ mkdir $RuntimeDir -Force
 
 # Build download URL
 $FileName = "Microsoft.WebView2.FixedVersionRuntime.$Version.$Architecture.cab"
-$DownloadUrl = "https://github.com/westinyang/WebView2RuntimeArchive/releases/download/$Version/$FileName"
+$DownloadUrl = "https://github.com/Seelen-Corp/webview2-archive/releases/download/$Version/$FileName"
 $CabFilePath = Join-Path $RuntimeDir $FileName
 
 # Download the .cab file if it doesn't exist

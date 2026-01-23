@@ -1,0 +1,13 @@
+default_multimedia_volume: ਮਲਟੀਮੀਡੀਆ ਵਾਲੀਅਮ
+device:
+  channel:
+    system: ਸਿਸਟਮ ਧੁਨੀਆਂ
+  comunications: ਸੰਚਾਰ
+  missing: ਗੁੰਮ ਜੰਤਰ
+  mixer: ਵਾਲੀਅਮ ਮਿਕਸਰ
+  multimedia: ਮਲਟੀਮੀਡੀਆ
+  settings: ਹੋਰ ਡਿਵਾਈਸ ਸੈਟਿੰਗਾਂ
+  volume: ਡਿਵਾਈਸ ਵਾਲੀਅਮ
+input_devices: ਇਨਪੁਟ ਡਿਵਾਈਸਾਂ
+output_devices: ਆਉਟਪੁੱਟ ਜੰਤਰ
+players: ਮੀਡੀਆ ਪਲੇਅਰ

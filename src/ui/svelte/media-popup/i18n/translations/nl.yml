@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimediavolume
+device:
+  channel:
+    system: Systeemgeluiden
+  comunications: Communicatie
+  missing: Ontbrekend apparaat
+  mixer: Volumemixer
+  multimedia: Multimediaal
+  settings: Meer apparaatinstellingen
+  volume: Apparaatvolume
+input_devices: Invoerapparaten
+output_devices: Uitvoerapparaten
+players: Mediaspelers

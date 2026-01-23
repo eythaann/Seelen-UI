@@ -1,0 +1,13 @@
+default_multimedia_volume: Մուլտիմեդիա Ծավալ
+device:
+  channel:
+    system: Համակարգի հնչյուններ
+  comunications: Հաղորդակցություններ
+  missing: Սարքը բացակայում է
+  mixer: Volume Mixer
+  multimedia: Մուլտիմեդիա
+  settings: Սարքի լրացուցիչ կարգավորումներ
+  volume: Սարքի ձայնը
+input_devices: Ներածման սարքեր
+output_devices: Ելքային սարքեր
+players: Մեդիա նվագարկիչներ

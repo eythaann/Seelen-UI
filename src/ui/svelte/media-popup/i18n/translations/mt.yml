@@ -1,0 +1,13 @@
+default_multimedia_volume: Volum Multimedia
+device:
+  channel:
+    system: Ħsejjes tas-sistema
+  comunications: Komunikazzjonijiet
+  missing: Apparat Nieqes
+  mixer: Volum Mixer
+  multimedia: Multimedia
+  settings: Aktar Settings tal-Apparat
+  volume: Volum tal-Apparat
+input_devices: Apparat tad-dħul
+output_devices: Apparat tal-ħruġ
+players: Media Players

@@ -1,0 +1,13 @@
+default_multimedia_volume: Margmiðlunarmagn
+device:
+  channel:
+    system: Kerfishljóð
+  comunications: Fjarskipti
+  missing: Tækið vantar
+  mixer: Rúmmálsblandari
+  multimedia: Margmiðlun
+  settings: Fleiri tækisstillingar
+  volume: Rúmmál tækis
+input_devices: Inntakstæki
+output_devices: Úttakstæki
+players: Fjölmiðlaspilarar

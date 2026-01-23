@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedian äänenvoimakkuus
+device:
+  channel:
+    system: Järjestelmän äänet
+  comunications: Viestintä
+  missing: Puuttuva laite
+  mixer: Äänenvoimakkuuden mikseri
+  multimedia: Multimedia
+  settings: Lisää laiteasetuksia
+  volume: Laitteen äänenvoimakkuus
+input_devices: Syöttölaitteet
+output_devices: Tulostuslaitteet
+players: Mediasoittimet
