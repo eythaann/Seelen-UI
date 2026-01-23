@@ -25,7 +25,7 @@ impl FullState {
                 }))),
                 ToolbarItem2::Plugin("@default/focused-app-title".into()),
             ],
-            center: vec![ToolbarItem2::Plugin("@default/date".into())],
+            center: vec![ToolbarItem2::Plugin("@seelen/tb-calendar-popup".into())],
             right: vec![
                 ToolbarItem2::Plugin("@seelen/tb-system-tray".into()),
                 ToolbarItem2::Plugin("@seelen/tb-keyboard-selector".into()),

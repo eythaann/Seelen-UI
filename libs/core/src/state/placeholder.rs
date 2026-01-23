@@ -440,6 +440,7 @@ impl Placeholder {
             "@default/keyboard" => "@seelen/tb-keyboard-selector".into(),
             "@default/user" => "@seelen/tb-user-menu".into(),
             "@default/network" => "@seelen/tb-network-popup".into(),
+            "@default/date" => "@seelen/tb-calendar-popup".into(),
             _ => id,
         }
     }

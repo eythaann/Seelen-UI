@@ -24,6 +24,7 @@ styles:
   "@seelen/keyboard-selector": !include styles/keyboard-selector.scss
   "@seelen/user-menu": !include styles/user-menu.scss
   "@seelen/network-popup": !include styles/network-popup.scss
+  "@seelen/calendar-popup": !include styles/calendar-popup.scss
 
 # shared styles across all widgets
 sharedStyles: !include ./shared/index.scss

@@ -33,7 +33,7 @@ export function RestoreToDefault() {
       } as ToolbarItem,
       "@default/focused-app-title" as PluginId,
     ],
-    center: ["@default/date" as PluginId],
+    center: ["@seelen/tb-calendar-popup" as PluginId],
     right: [
       "@seelen/tb-system-tray" as PluginId,
       "@seelen/tb-keyboard-selector" as PluginId,

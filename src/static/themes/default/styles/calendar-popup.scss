@@ -1,0 +1,148 @@
+.calendar-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .calendar {
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 0 4px;
+
+    .calendar-date {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--color-gray-200);
+      }
+    }
+
+    .calendar-actions {
+      display: flex;
+      gap: 4px;
+
+      .calendar-navigator {
+        background: transparent;
+        border: none;
+        border-radius: 4px;
+        color: inherit;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: var(--color-gray-200);
+        }
+
+        &:active {
+          background-color: var(--color-gray-300);
+        }
+      }
+    }
+  }
+
+  .calendar-month-view {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+
+    .calendar-weekday {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 0;
+      opacity: 0.7;
+      text-align: center;
+    }
+  }
+
+  .calendar-days {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .calendar-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .calendar-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-gray-200);
+    }
+
+    &.calendar-cell-off-month {
+      opacity: 0.3;
+    }
+
+    &.calendar-cell-today {
+      font-weight: 700;
+      color: var(--system-accent-color);
+    }
+
+    &.calendar-cell-selected {
+      background-color: var(--system-accent-color);
+      color: white;
+      font-weight: 600;
+
+      &:hover {
+        background-color: var(--system-accent-color);
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .calendar-year-view {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 4px;
+
+    .calendar-month-cell {
+      padding: 16px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        background-color: var(--color-gray-200);
+      }
+
+      &.calendar-month-cell-current {
+        font-weight: 700;
+        color: var(--system-accent-color);
+      }
+    }
+  }
+}
