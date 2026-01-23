@@ -57,5 +57,6 @@ await completeTranslationsFor("src/ui/svelte/keyboard-selector/i18n/translations
 await completeTranslationsFor("src/ui/svelte/user-menu/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/calendar-popup/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/media-popup/i18n/translations");
+await completeTranslationsFor("src/ui/svelte/notifications/i18n/translations");
 
 await completeTranslationsFor("src/background/i18n");

@@ -42,7 +42,7 @@ export function RestoreToDefault() {
       "@seelen/tb-network-popup" as PluginId,
       "@seelen/tb-media-popup" as PluginId,
       "@default/power" as PluginId,
-      "@default/notifications" as PluginId,
+      "@seelen/tb-notifications" as PluginId,
       "@seelen/tb-quick-settings" as PluginId,
     ],
   };

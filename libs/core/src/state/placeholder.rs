@@ -442,6 +442,7 @@ impl Placeholder {
             "@default/network" => "@seelen/tb-network-popup".into(),
             "@default/date" => "@seelen/tb-calendar-popup".into(),
             "@default/media" => "@seelen/tb-media-popup".into(),
+            "@default/notifications" => "@seelen/tb-notifications".into(),
             _ => id,
         }
     }

@@ -33,7 +33,7 @@ impl FullState {
                 ToolbarItem2::Plugin("@seelen/tb-network-popup".into()),
                 ToolbarItem2::Plugin("@seelen/tb-media-popup".into()),
                 ToolbarItem2::Plugin("@default/power".into()),
-                ToolbarItem2::Plugin("@default/notifications".into()),
+                ToolbarItem2::Plugin("@seelen/tb-notifications".into()),
                 ToolbarItem2::Plugin("@seelen/tb-quick-settings".into()),
             ],
             ..Default::default()

@@ -29,7 +29,8 @@ input[type="range"][data-skin="flat"] {
 }
 
 input[type="text"][data-skin="default"],
-input[type="search"][data-skin="default"] {
+input[type="search"][data-skin="default"],
+select[data-skin="default"] {
   width: 100%;
   padding: 8px 12px;
 

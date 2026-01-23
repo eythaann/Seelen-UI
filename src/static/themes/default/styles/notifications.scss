@@ -1,0 +1,139 @@
+.notifications-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 350px;
+  max-height: 700px;
+  padding: 10px;
+
+  .notifications-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > span {
+      font-weight: 600;
+    }
+  }
+
+  .notifications-popup-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10px;
+    margin: 0 -10px;
+  }
+
+  .notifications-popup-footer {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .notifications-popup-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-500);
+    font-weight: 600;
+    font-size: 0.8rem;
+    height: 200px;
+  }
+}
+
+.notification {
+  border-radius: 12px;
+  background-color: var(--color-gray-100);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  transition: scale 0.1s ease-in-out;
+
+  &:active:not(:has(button:active, input:active, select:active)) {
+    scale: 0.9;
+  }
+
+  .notification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 6px;
+    border-bottom: solid 1px var(--color-gray-300);
+    margin-bottom: 6px;
+
+    .notification-header-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--color-gray-800);
+      font-weight: 600;
+
+      .notification-icon {
+        width: 1.5em;
+      }
+    }
+  }
+
+  .notification-body {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    .notification-body-logo-image {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      width: 3rem;
+      height: 3rem;
+      margin-right: 10px;
+
+      &.notification-body-logo-image-circle {
+        border-radius: 50%;
+      }
+    }
+
+    .notification-body-content {
+      word-break: break-word;
+      overflow: hidden;
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+
+      > p:first-of-type {
+        font-weight: 600;
+      }
+
+      .notification-group {
+        display: flex;
+        gap: 6px;
+
+        .notification-subgroup {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    }
+
+    .notification-body-hero-image {
+      grid-column: 1 / 3;
+      grid-row: 2 / 3;
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      margin-top: 10px;
+    }
+  }
+
+  .notification-actions {
+    margin-top: 6px;
+    display: flex;
+    gap: 6px;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+
+    input,
+    select {
+      flex: 3;
+    }
+  }
+}

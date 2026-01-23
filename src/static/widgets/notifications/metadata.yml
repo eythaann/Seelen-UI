@@ -1,0 +1,12 @@
+id: "@seelen/notifications"
+icon: IoNotificationsOutline
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+instances: Single
+loader: Internal
+preset: Popup
+hidden: true
+lazy: true
+plugins:
+  - !extend ./toolbar-plugin.yml

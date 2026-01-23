@@ -1,0 +1,15 @@
+id: "@seelen/tb-notifications"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: IoNotificationsOutline
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: notifications
+  template: >-
+    return count > 0 ? icon("MdNotificationsActive") :
+    icon("MdOutlineNotifications")
+  badge: "return count > 0 ? count : null"
+  tooltip: 'return [t("placeholder.notifications"), ": ", count]'
+  onClickV2: |-
+    trigger("@seelen/notifications");
