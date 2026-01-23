@@ -34,19 +34,6 @@ media:
   input_devices: 输入设备
   output_devices: 输出设备
   players: 媒体播放器
-network:
-  available: 可用网络
-  connect: 连接
-  connected: 已连接
-  disconnect: 断开连接
-  hidden: 隐藏网络
-  more: 更多网络设置
-  not_found: 未找到 Wi-Fi 网络
-  placeholder:
-    password: 密码
-  saved: 已保存的网络
-  scanning: 扫描网络
-  secured: 加密网络
 notifications:
   clear: 全部清除
   empty: 无通知

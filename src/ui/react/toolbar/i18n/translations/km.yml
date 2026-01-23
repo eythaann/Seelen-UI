@@ -34,19 +34,6 @@ media:
   input_devices: ឧបករណ៍បញ្ចូល
   output_devices: ឧបករណ៍លទ្ធផល
   players: អ្នកលេងប្រព័ន្ធផ្សព្វផ្សាយ
-network:
-  available: បណ្តាញដែលមាន
-  connect: តផ្ជាប់
-  connected: បានភ្ជាប់ទៅ
-  disconnect: ផ្ដាច់
-  hidden: បណ្តាញដែលលាក់
-  more: ការកំណត់បណ្តាញច្រើនទៀត
-  not_found: រកមិនឃើញបណ្តាញ
-  placeholder:
-    password: ហក្យសមងាត់
-  saved: បណ្តាញដែលបានរក្សាទុក
-  scanning: កំពុងស្កេនរកបណ្តាញ
-  secured: បណ្តាញដែលបានអ៊ិនគ្រីប
 notifications:
   clear: ជម្រះទាំងអស់
   empty: គ្មានការជូនដំណឹង

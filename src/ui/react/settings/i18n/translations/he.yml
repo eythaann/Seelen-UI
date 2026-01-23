@@ -162,6 +162,7 @@ save: להציל
 save_and_restart: שמור והפעלה מחדש
 see_more: ראה עוד
 shortcuts:
+  duplicate_error: קיצור זה משוכפל
   enable: אפשר מערכת קיצורי דרך מובנים
   enable_tooltip: השבת אם תיישם מערכת קיצורי דרך משלך באמצעות לקוח ממשק המשתמש של Seelen
   labels:

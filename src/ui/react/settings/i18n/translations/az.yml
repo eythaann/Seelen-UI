@@ -168,6 +168,7 @@ save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
 see_more: Daha çoxuna baxın
 shortcuts:
+  duplicate_error: Bu qısayol dublikatdır
   enable: Quraşdırılmış qısa yol sistemini aktivləşdirin
   enable_tooltip: >-
     Seelen UI müştərisindən istifadə edərək öz qısa yol sisteminizi həyata

@@ -34,19 +34,6 @@ media:
   input_devices: Syöttölaitteet
   output_devices: Lähtölaitteet
   players: Mediapelaajat
-network:
-  available: Käytettävissä olevat verkot
-  connect: Kytkeä
-  connected: 'Yhdistetty:'
-  disconnect: Katkaista
-  hidden: Piilotettu verkko
-  more: Lisää verkkoasetuksia
-  not_found: Verkkoja ei löydy
-  placeholder:
-    password: Salasana
-  saved: Tallennetut verkot
-  scanning: Etsii verkkoja
-  secured: Salattu verkko
 notifications:
   clear: Tyhjennä kaikki
   empty: Ei ilmoituksia

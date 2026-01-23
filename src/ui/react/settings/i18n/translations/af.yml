@@ -169,6 +169,7 @@ save: Red
 save_and_restart: Stoor en herbegin
 see_more: Sien meer
 shortcuts:
+  duplicate_error: Hierdie kortpad is gedupliseer
   enable: Aktiveer ingeboude kortpadstelsel
   enable_tooltip: >-
     Deaktiveer as u u eie kortpadstelsel met behulp van die Seelen UI -kliënt

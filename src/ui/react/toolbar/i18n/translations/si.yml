@@ -34,19 +34,6 @@ media:
   input_devices: ආදාන උපාංග
   output_devices: නිමැවුම් උපාංග
   players: මාධ්ය වාදකයන්
-network:
-  available: පවතින ජාල
-  connect: සම්බන්ධ කරන්න
-  connected: වෙත සම්බන්ධ කර ඇත
-  disconnect: විසන්ධි කරන්න
-  hidden: සැඟවුණු ජාලය
-  more: තවත් ජාල සැකසුම්
-  not_found: ජාලක් හමු නොවීය
-  placeholder:
-    password: මුරපදය
-  saved: සුරැකි ජාල
-  scanning: ජාල සඳහා ස්කෑන් කිරීම
-  secured: සංකේතාත්මක ජාලය
 notifications:
   clear: සියල්ල ඉවත් කරන්න
   empty: දැනුම්දීම් නොමැත

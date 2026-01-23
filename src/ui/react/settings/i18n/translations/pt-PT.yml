@@ -169,6 +169,7 @@ save: Guardar
 save_and_restart: Salve e reinicie
 see_more: Veja mais
 shortcuts:
+  duplicate_error: Este atalho está duplicado
   enable: Habilitar o sistema de atalhos embutidos
   enable_tooltip: >-
     Desative se você implementar seu próprio sistema de atalhos usando o Seelen

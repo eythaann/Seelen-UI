@@ -165,6 +165,7 @@ save: ບັນທຶກ
 save_and_restart: ບັນທຶກແລະ Restart
 see_more: ເບິ່ງເພີ່ມເຕີມ
 shortcuts:
+  duplicate_error: ທາງລັດນີ້ຊໍ້າກັນ
   enable: ເປີດໃຊ້ລະບົບທາງລັດທີ່ມີຢູ່
   enable_tooltip: ປິດການໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດລະບົບທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ລູກຄ້າ Setelen Ui
   labels:

@@ -172,6 +172,7 @@ save: Enregistrer
 save_and_restart: Enregistrer et redémarrer
 see_more: Voir plus
 shortcuts:
+  duplicate_error: Ce raccourci est dupliqué
   enable: Activer le système de raccourcis intégrés
   enable_tooltip: >-
     Désactiver si vous implémentez votre propre système de raccourcis à l'aide

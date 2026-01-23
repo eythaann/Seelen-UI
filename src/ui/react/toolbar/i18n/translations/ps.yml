@@ -34,19 +34,6 @@ media:
   input_devices: ننوت وسایل
   output_devices: وتستۍ وسایل
   players: د میډیا لوبغاړي
-network:
-  available: شته شبکې
-  connect: نښلول
-  connected: سره نښلول شوی
-  disconnect: منحل
-  hidden: پټه شبکه
-  more: نور د شبکې تنظیمات
-  not_found: هیڅ جال ونه موندل شو
-  placeholder:
-    password: رمز
-  saved: خوندي شوي شبکې
-  scanning: د شبکو لپاره سکین کول
-  secured: کوډ شوی شبکه
 notifications:
   clear: ټول پاک کړه
   empty: خبرتیاوې نشته

@@ -167,6 +167,7 @@ save: Spuerwäit
 save_and_restart: Spuert & nei starten
 see_more: Méi gesinn
 shortcuts:
+  duplicate_error: Dës Ofkiirzung gëtt duplizéiert
   enable: Aktivéiert agebaut-in Shortcuts System
   enable_tooltip: >-
     Desaktivéiere wann Dir Ären eegene Ofkierzungsystem implementéiert, mat dem

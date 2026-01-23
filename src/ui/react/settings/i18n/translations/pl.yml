@@ -172,6 +172,7 @@ save: Zastosuj
 save_and_restart: Zastosuj i uruchom ponownie
 see_more: Zobacz więcej
 shortcuts:
+  duplicate_error: Ten skrót jest zduplikowany
   enable: Włącz wbudowany system skrótów
   enable_tooltip: >-
     Wyłącz, jeśli zaimplementujesz własny system skrótów za pomocą klienta

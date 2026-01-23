@@ -171,6 +171,7 @@ save: Guardar
 save_and_restart: Guardar y reiniciar
 see_more: Ver más
 shortcuts:
+  duplicate_error: Este atajo está duplicado.
   enable: Habilitar el sistema de accesos directos integrados
   enable_tooltip: >-
     Deshabilite si implementa su propio sistema de atajos utilizando el cliente

@@ -34,19 +34,6 @@ media:
   input_devices: Ẹrọ titẹ sii
   output_devices: Awọn ẹrọ iṣelọpọ
   players: Awọn oṣere Media
-network:
-  available: Awọn nẹtiwọki ti o wa
-  connect: Sopọ
-  connected: Ti sopọ si
-  disconnect: Ge kuro
-  hidden: Nẹtiwọki ti o farapamọ
-  more: Awọn eto nẹtiwọọki diẹ sii
-  not_found: Ko si awọn nẹtiwọki ti a rii
-  placeholder:
-    password: Ọrọ igbaniwọle
-  saved: Awọn nẹtiwọki ti a fipamọ
-  scanning: Ṣiṣayẹwo fun awọn nẹtiwọki
-  secured: Nẹtiwọọki ti paroko
 notifications:
   clear: Pa gbogbo run
   empty: Ko si awọn iwifunni

@@ -34,19 +34,6 @@ media:
   input_devices: Giriş cihazları
   output_devices: Çıkış cihazları
   players: Medya Oynatıcıları
-network:
-  available: Mevcut ağlar
-  connect: Bağlan
-  connected: 'Şuraya bağlanıldı:'
-  disconnect: Bağlantıyı Kes
-  hidden: Gizli Ağ
-  more: Daha Fazla Ağ Ayarı
-  not_found: Ağ bulunamadı
-  placeholder:
-    password: Şifre
-  saved: Kayıtlı ağlar
-  scanning: Ağlar taranıyor
-  secured: Şifreli ağ
 notifications:
   clear: Tümünü temizle
   empty: Bildirim yok

@@ -34,19 +34,6 @@ media:
   input_devices: Дастгоҳҳои вуруд
   output_devices: Дастгоҳҳои баромад
   players: Бозингарони ВАО
-network:
-  available: Шабакаҳои дастрас
-  connect: Пайваст кардан
-  connected: Ба
-  disconnect: Ьудо кардан
-  hidden: Шабакаи пинҳонӣ
-  more: Танзимоти шабака
-  not_found: Ягон шабакаҳо ёфт нашуд
-  placeholder:
-    password: Номи махфӣ
-  saved: Шабакаҳои захирашуда
-  scanning: Сканкунии шабакаҳо
-  secured: Шабакаи рамзгузорӣ
 notifications:
   clear: Тамоман тоза
   empty: Огоҳӣ

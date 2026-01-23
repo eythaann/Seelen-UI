@@ -34,19 +34,6 @@ media:
   input_devices: Մուտքային սարքեր
   output_devices: Արդյունքային սարքեր
   players: Մեդիա նվագարկիչներ
-network:
-  available: Հասանելի ցանցեր
-  connect: Միացնել
-  connected: Միացված է
-  disconnect: Անջատել
-  hidden: Թաքնված ցանց
-  more: Ավելի շատ ցանցային պարամետրեր
-  not_found: Networks անցեր չեն գտնվել
-  placeholder:
-    password: Գաղտնաբառ
-  saved: Պահպանված ցանցեր
-  scanning: Ցանցերի սկանավորում
-  secured: Կոդավորված ցանց
 notifications:
   clear: Մաքրել բոլորը
   empty: Ոչ մի ծանուցում

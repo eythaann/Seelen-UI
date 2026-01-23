@@ -34,19 +34,6 @@ media:
   input_devices: Thiết bị đầu vào
   output_devices: Thiết bị đầu ra
   players: Người chơi truyền thông
-network:
-  available: Mạng có sẵn
-  connect: Kết nối
-  connected: Đã kết nối với
-  disconnect: Ngắt kết nối
-  hidden: Mạng ẩn
-  more: Nhiều cài đặt mạng hơn
-  not_found: Không tìm thấy kết nối mạng
-  placeholder:
-    password: Mật khẩu
-  saved: Mạng đã lưu
-  scanning: Đang quét mạng
-  secured: Mạng được mã hóa
 notifications:
   clear: Rõ ràng tất cả
   empty: Không có thông báo

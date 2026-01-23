@@ -34,19 +34,6 @@ media:
   input_devices: Eingabegeräte
   output_devices: Ausgabegeräte
   players: Medienplayer
-network:
-  available: Verfügbare Netzwerke
-  connect: Verbinden
-  connected: Verbunden mit
-  disconnect: Trennen
-  hidden: Verstecktes Netzwerk
-  more: Weitere Netzwerkeinstellungen
-  not_found: Keine Netzwerke gefunden
-  placeholder:
-    password: Passwort
-  saved: Gespeicherte Netzwerke
-  scanning: Nach Netzwerken suchen
-  secured: Verschlüsseltes Netzwerk
 notifications:
   clear: Alle löschen
   empty: Keine Benachrichtigungen

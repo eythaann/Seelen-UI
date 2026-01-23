@@ -34,19 +34,6 @@ media:
   input_devices: Dispositivi di ingresso
   output_devices: Dispositivi di uscita
   players: Lettori Multimediali
-network:
-  available: Reti disponibili
-  connect: Connetti
-  connected: Connesso a
-  disconnect: Disconnetti
-  hidden: Rete Nascosta
-  more: Altre Impostazioni di Rete
-  not_found: Nessuna rete Wi-Fi trovata
-  placeholder:
-    password: Password
-  saved: Reti salvate
-  scanning: Scansione delle reti
-  secured: Rete criptata
 notifications:
   clear: Cancella tutto
   empty: Nessuna notifica

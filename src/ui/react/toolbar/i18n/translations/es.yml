@@ -34,19 +34,6 @@ media:
   input_devices: Dispositivos de entrada
   output_devices: Dispositivos de salida
   players: Reproductores de medios
-network:
-  available: Redes disponibles
-  connect: Conectar
-  connected: Conectado a
-  disconnect: Desconectar
-  hidden: Red oculta
-  more: Más configuraciones de red
-  not_found: No se encontraron redes
-  placeholder:
-    password: Contraseña
-  saved: Redes guardadas
-  scanning: Escaneo de redes
-  secured: Red cifrada
 notifications:
   clear: Borrar todo
   empty: Sin notificaciones

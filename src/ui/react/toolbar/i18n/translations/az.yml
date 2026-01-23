@@ -34,19 +34,6 @@ media:
   input_devices: Giriş cihazları
   output_devices: Çıxış cihazları
   players: Media oyunçuları
-network:
-  available: Mövcud şəbəkələr
-  connect: Qoşulmaq
-  connected: qoşuldu
-  disconnect: Ayırd etmək
-  hidden: Gizli şəbəkə
-  more: Daha çox şəbəkə parametrləri
-  not_found: Heç bir şəbəkə tapılmadı
-  placeholder:
-    password: Parol
-  saved: Saxlanan şəbəkələr
-  scanning: Şəbəkələrin skan edilməsi
-  secured: Şifrələnmiş şəbəkə
 notifications:
   clear: Hamısını təmizləmək
   empty: Bildiriş yoxdur

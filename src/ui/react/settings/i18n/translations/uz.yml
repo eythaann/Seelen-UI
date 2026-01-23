@@ -171,6 +171,7 @@ save: Tejash
 save_and_restart: Saqlang va qayta yoqing
 see_more: Ko'proq ko'rish
 shortcuts:
+  duplicate_error: Bu yorliq takrorlanadi
   enable: Ichki yorliqlar tizimini yoqing
   enable_tooltip: >-
     Seelen Ui mijozidan foydalanib o'zingizning yorliq tizimingizni amalga

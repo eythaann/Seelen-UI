@@ -34,19 +34,6 @@ media:
   input_devices: ອຸປະກອນປ້ອນຂໍ້ມູນ
   output_devices: ອຸປະກອນຜົນໄດ້ຮັບ
   players: ເຄື່ອງຫຼີ້ນສື່
-network:
-  available: ເຄືອຂ່າຍທີ່ມີຢູ່
-  connect: ເຊື່ອມຕໍ່
-  connected: ເຊື່ອມຕໍ່ກັບ
-  disconnect: ຕັດຂາດ
-  hidden: ເຄືອຂ່າຍທີ່ເຊື່ອງໄວ້
-  more: ການຕັ້ງຄ່າເຄືອຂ່າຍເພີ່ມເຕີມ
-  not_found: ບໍ່ພົບເຄືອຂ່າຍທີ່ພົບ
-  placeholder:
-    password: ລະຫັດຜ່ານ
-  saved: ເຄືອຂ່າຍທີ່ບັນທຶກໄວ້
-  scanning: ກຳລັງສະແກນຫາເຄືອຂ່າຍ
-  secured: ເຄືອຂ່າຍເຂົ້າລະຫັດ
 notifications:
   clear: ລ້າງທັງຫມົດ
   empty: ບໍ່ມີການແຈ້ງເຕືອນ

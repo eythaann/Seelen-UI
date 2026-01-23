@@ -34,19 +34,6 @@ media:
   input_devices: Устройства ввода
   output_devices: Устройства вывода
   players: Медиаплееры
-network:
-  available: Доступные сети
-  connect: Подключить
-  connected: Подключено к
-  disconnect: Отключить
-  hidden: Скрытая сеть
-  more: Дополнительные сетевые параметры
-  not_found: Сети Wi-Fi не найдены
-  placeholder:
-    password: Пароль
-  saved: Сохраненные сети
-  scanning: Сканирование сетей
-  secured: Защищённая сеть
 notifications:
   clear: Очистить все
   empty: Нет уведомлений

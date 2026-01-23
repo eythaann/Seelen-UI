@@ -34,19 +34,6 @@ media:
   input_devices: ఇన్పుట్ పరికరాలు
   output_devices: అవుట్పుట్ పరికరాలు
   players: మీడియా ప్లేయర్స్
-network:
-  available: అందుబాటులో ఉన్న నెట్‌వర్క్‌లు
-  connect: కనెక్ట్
-  connected: కనెక్ట్ చేయబడింది
-  disconnect: డిస్‌కనెక్ట్ చేయండి
-  hidden: దాచిన నెట్‌వర్క్
-  more: మరిన్ని నెట్‌వర్క్ సెట్టింగులు
-  not_found: నెట్‌వర్క్‌లు ఏవీ కనుగొనబడలేదు
-  placeholder:
-    password: పాస్వర్డ్
-  saved: సేవ్ చేసిన నెట్‌వర్క్‌లు
-  scanning: నెట్‌వర్క్‌ల కోసం స్కాన్ చేస్తోంది
-  secured: ఎన్‌క్రిప్టెడ్ నెట్‌వర్క్
 notifications:
   clear: అన్నీ క్లియర్ చేయండి
   empty: నోటిఫికేషన్‌లు లేవు

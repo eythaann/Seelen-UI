@@ -34,19 +34,6 @@ media:
   input_devices: Vifaa vya pembejeo
   output_devices: Vifaa vya pato
   players: Wachezaji wa media
-network:
-  available: Mitandao inayopatikana
-  connect: Unganisha
-  connected: Imeunganishwa kwa
-  disconnect: Kukatwa
-  hidden: Mtandao uliofichwa
-  more: Mipangilio zaidi ya mtandao
-  not_found: Hakuna mitandao iliyopatikana
-  placeholder:
-    password: Nenosiri
-  saved: Mitandao iliyohifadhiwa
-  scanning: Inatafuta mitandao
-  secured: Mtandao uliosimbwa kwa njia fiche
 notifications:
   clear: Futa zote
   empty: Hakuna arifa

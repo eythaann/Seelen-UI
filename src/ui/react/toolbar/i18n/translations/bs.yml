@@ -34,19 +34,6 @@ media:
   input_devices: Uređaji za unos
   output_devices: Izlazni uređaji
   players: Medijski igrači
-network:
-  available: Dostupne mreže
-  connect: Povezati
-  connected: Povezano na
-  disconnect: Prekinuti
-  hidden: Skrivena mreža
-  more: Više mrežnih postavki
-  not_found: Nisu pronađene mreže
-  placeholder:
-    password: Lozinka
-  saved: Sačuvane mreže
-  scanning: Skeniranje za mreže
-  secured: Šifrovana mreža
 notifications:
   clear: Očistiti sve
   empty: Nema obaveštenja

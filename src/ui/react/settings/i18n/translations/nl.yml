@@ -167,6 +167,7 @@ save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 see_more: Meer zien
 shortcuts:
+  duplicate_error: Deze snelkoppeling is gedupliceerd
   enable: Schakel ingebouwd snelkoppelsysteem in
   enable_tooltip: >-
     Schakel uit of u uw eigen snelkoppelsysteem implementeert met behulp van de

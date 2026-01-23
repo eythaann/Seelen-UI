@@ -34,19 +34,6 @@ media:
   input_devices: Inmatningsenheter
   output_devices: Utmatningsenheter
   players: Mediaspelare
-network:
-  available: Tillgängliga nätverk
-  connect: Ansluta
-  connected: Ansluten till
-  disconnect: Koppla ifrån
-  hidden: Doldnätverk
-  more: Fler nätverksinställningar
-  not_found: Inga nätverk hittades
-  placeholder:
-    password: Lösenord
-  saved: Sparade nätverk
-  scanning: Söker efter nätverk
-  secured: Krypterat nätverk
 notifications:
   clear: Rensa alla
   empty: Inga meddelanden

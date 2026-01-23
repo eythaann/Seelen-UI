@@ -34,19 +34,6 @@ media:
   input_devices: Inngangsenheter
   output_devices: Utgangsenheter
   players: Mediespillere
-network:
-  available: Tilgjengelige nettverk
-  connect: Koble
-  connected: Koblet til
-  disconnect: Koble fra
-  hidden: Skjult nettverk
-  more: Flere nettverksinnstillinger
-  not_found: Ingen nettverk funnet
-  placeholder:
-    password: Passord
-  saved: Lagrede nettverk
-  scanning: Skanner etter nettverk
-  secured: Kryptert nettverk
 notifications:
   clear: Fjern alle
   empty: Ingen varsler

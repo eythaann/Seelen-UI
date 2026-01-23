@@ -169,6 +169,7 @@ save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
 see_more: بیشتر ببینید
 shortcuts:
+  duplicate_error: این میانبر تکراری است
   enable: سیستم میانبر داخلی را فعال کنید
   enable_tooltip: >-
     اگر سیستم میانبر خود را با استفاده از مشتری Seelen UI پیاده سازی خواهید کرد

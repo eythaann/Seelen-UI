@@ -166,6 +166,7 @@ save: Save
 save_and_restart: Save & Restart
 see_more: See More
 shortcuts:
+  duplicate_error: This shortcut is duplicated
   enable: Enable built-in shortcuts system
   enable_tooltip: >-
     Disable if you will implement your own shortcuts system using the Seelen UI
@@ -212,7 +213,6 @@ shortcuts:
     toggle_float: Toggle Window Float Mode
     toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: This is a read-only shortcut
-  duplicate_error: This shortcut is duplicated
   reset: Reset to Defaults
 sides:
   bottom: Bottom

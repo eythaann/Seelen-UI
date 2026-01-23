@@ -34,19 +34,6 @@ media:
   input_devices: أجهزة الإدخال
   output_devices: أجهزة الإخراج
   players: مشغلات الوسائط
-network:
-  available: الشبكات المتاحة
-  connect: يتصل
-  connected: متصل
-  disconnect: قطع الاتصال
-  hidden: الشبكة المخفية
-  more: المزيد من إعدادات الشبكة
-  not_found: لم يتم العثور على شبكات
-  placeholder:
-    password: كلمة المرور
-  saved: الشبكات المحفوظة
-  scanning: البحث عن شبكات
-  secured: شبكة مشفرة
 notifications:
   clear: مسح الكل
   empty: لا توجد إخطارات

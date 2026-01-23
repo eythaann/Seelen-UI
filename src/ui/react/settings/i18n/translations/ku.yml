@@ -171,6 +171,7 @@ save: Rizgarkirin
 save_and_restart: Save & Restart
 see_more: Bêtir bibînin
 shortcuts:
+  duplicate_error: Ev kurtebir hatiye dubarekirin
   enable: Pergala kurtefîlmên çêkirî çalak bikin
   enable_tooltip: >-
     Heke hûn ê pergala kurteya xwe bi karanîna muwekîlê Seelen UI bikar bînin

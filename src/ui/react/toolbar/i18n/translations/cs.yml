@@ -34,19 +34,6 @@ media:
   input_devices: Vstupní zařízení
   output_devices: Výstupní zařízení
   players: Přehrávače médií
-network:
-  available: Dostupné sítě
-  connect: Připojit
-  connected: Připojeno k
-  disconnect: Odpojit
-  hidden: Skrytá síť
-  more: Více nastavení sítě
-  not_found: Žádné sítě nenalezeny
-  placeholder:
-    password: Heslo
-  saved: Uložené sítě
-  scanning: Vyhledávání sítí
-  secured: Šifrovaná síť
 notifications:
   clear: Vymazat vše
   empty: Žádné oznámení

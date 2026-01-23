@@ -166,6 +166,7 @@ save: Kuokoa
 save_and_restart: Okoa na uanze tena
 see_more: Tazama zaidi
 shortcuts:
+  duplicate_error: Njia hii ya mkato imerudiwa
   enable: Wezesha mfumo wa mkato uliojengwa ndani
   enable_tooltip: >-
     Lemaza ikiwa utatumia mfumo wako wa njia za mkato kwa kutumia mteja wa

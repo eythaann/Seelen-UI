@@ -34,19 +34,6 @@ media:
   input_devices: Peranti input
   output_devices: Peranti output
   players: Pemain media
-network:
-  available: Rangkaian yang tersedia
-  connect: Sambung
-  connected: Disambungkan ke
-  disconnect: Putuskan sambungan
-  hidden: Rangkaian Tersembunyi
-  more: Lebih banyak tetapan rangkaian
-  not_found: Tiada rangkaian dijumpai
-  placeholder:
-    password: Kata laluan
-  saved: Rangkaian yang disimpan
-  scanning: Mengimbas untuk rangkaian
-  secured: Rangkaian yang disulitkan
 notifications:
   clear: Kosongkan semua
   empty: Tiada pemberitahuan

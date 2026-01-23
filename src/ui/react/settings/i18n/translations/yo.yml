@@ -165,6 +165,7 @@ save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
 see_more: Wo diẹ sii
 shortcuts:
+  duplicate_error: Ọna abuja yii jẹ pidánpidán
   enable: Mu ṣiṣẹ eto awọn ọna abuja
   enable_tooltip: Muu Ti o ba yoo ṣe eto awọn ọna ọna abuja tirẹ nipa lilo alajọṣepọ UI
   labels:

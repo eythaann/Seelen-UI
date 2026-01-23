@@ -34,19 +34,6 @@ media:
   input_devices: อุปกรณ์อินพุต
   output_devices: อุปกรณ์เอาต์พุต
   players: เครื่องเล่นสื่อ
-network:
-  available: เครือข่ายที่มีอยู่
-  connect: เชื่อมต่อ
-  connected: เชื่อมต่อกับ
-  disconnect: ตัดการเชื่อมต่อ
-  hidden: เครือข่ายที่ซ่อน
-  more: การตั้งค่าเครือข่ายเพิ่มเติม
-  not_found: ไม่พบเครือข่าย
-  placeholder:
-    password: รหัสผ่าน
-  saved: เครือข่ายที่บันทึกไว้
-  scanning: กำลังสแกนหาเครือข่าย
-  secured: เครือข่ายที่เข้ารหัส
 notifications:
   clear: ล้างทั้งหมด
   empty: ไม่มีการแจ้งเตือน

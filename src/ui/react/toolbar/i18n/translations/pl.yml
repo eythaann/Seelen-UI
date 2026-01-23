@@ -34,19 +34,6 @@ media:
   input_devices: Urządzenia wejściowe
   output_devices: Urządzenia wyjściowe
   players: Odtwarzacze multimedialne
-network:
-  available: Dostępne sieci
-  connect: Połącz
-  connected: Połączony z
-  disconnect: Rozłącz
-  hidden: Ukryta sieć
-  more: Więcej ustawień sieciowych
-  not_found: Nie znaleziono sieci
-  placeholder:
-    password: Hasło
-  saved: Zapisane sieci
-  scanning: Skanowanie w poszukiwaniu sieci
-  secured: Sieć szyfrowana
 notifications:
   clear: Wyczyść wszystko
   empty: Brak powiadomień

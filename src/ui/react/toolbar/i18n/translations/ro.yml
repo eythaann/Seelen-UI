@@ -34,19 +34,6 @@ media:
   input_devices: Dispozitive de intrare
   output_devices: Dispozitive de ieșire
   players: Playere media
-network:
-  available: Rețele disponibile
-  connect: Conectați
-  connected: Conectat la
-  disconnect: Deconectat
-  hidden: Rețea ascunsă
-  more: Mai multe setări de rețea
-  not_found: Nu au fost găsite rețele
-  placeholder:
-    password: Parola
-  saved: Rețele salvate
-  scanning: Scanare pentru rețele
-  secured: Rețea criptată
 notifications:
   clear: Ștergeți toate
   empty: Nu există notificări

@@ -34,19 +34,6 @@ media:
   input_devices: आगत यंत्र
   output_devices: आउटपुट डिवाइस
   players: मीडिया -खिलाड़ी
-network:
-  available: उपलब्ध नेटवर्क
-  connect: जोड़ना
-  connected: से जुड़ा
-  disconnect: डिस्कनेक्ट
-  hidden: छिपा हुआ नेटवर्क
-  more: अधिक नेटवर्क सेटिंग्स
-  not_found: कोई नेटवर्क नहीं मिला
-  placeholder:
-    password: पासवर्ड
-  saved: सहेजे गए नेटवर्क
-  scanning: नेटवर्क के लिए स्कैनिंग
-  secured: एन्क्रिप्टेड नेटवर्क
 notifications:
   clear: सभी साफ करें
   empty: कोई सूचना नहीं

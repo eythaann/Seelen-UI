@@ -34,19 +34,6 @@ media:
   input_devices: የግቤት መሣሪያዎች
   output_devices: የውጤት መሣሪያዎች
   players: የሚዲያ ተጫዋቾች
-network:
-  available: የሚገኙ አውታረ መረቦች
-  connect: አገናኝ
-  connected: ጋር ተገናኝቷል።
-  disconnect: ያላቅቁ
-  hidden: የተደበቀ አውታረመረብ
-  more: ተጨማሪ የአውታረ መረብ ቅንብሮች
-  not_found: ምንም አውታረመረቦች አልተገኙም
-  placeholder:
-    password: የይለፍ ቃል
-  saved: የተቀመጡ አውታረ መረቦች
-  scanning: አውታረ መረቦችን በመቃኘት ላይ
-  secured: የተመሰጠረ አውታረ መረብ
 notifications:
   clear: ሁሉንም አጥራ
   empty: ማስታወቂያዎች የሉም

@@ -15,15 +15,6 @@
   }
 }
 
-@keyframes rotateToTheLeft {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
 %actionable-button {
   padding: 4px;
   border-radius: 6px;
@@ -227,96 +218,6 @@
 
   &:empty {
     display: none;
-  }
-}
-
-.wlan-selector {
-  @extend %popup;
-
-  .wlan-selector-title {
-    @extend %section-title;
-  }
-
-  .wlan-selector-refresh {
-    @extend %actionable-button;
-    .slu-icon {
-      color: var(--color-gray-900);
-      animation: rotateToTheLeft 1s linear infinite;
-    }
-  }
-
-  .wlan-selector-entries {
-    @extend %list;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--color-gray-300);
-    overflow-y: auto;
-    max-height: 30vh;
-
-    .wlan-selector-empty {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      font-style: italic;
-    }
-
-    .wlan-entry {
-      display: flex;
-      flex-direction: column;
-      min-height: min-content;
-      padding: 12px 10px;
-      border-radius: 8px;
-      gap: 10px;
-
-      &:hover {
-        background-color: var(--color-gray-200);
-      }
-
-      &.wlan-entry-selected {
-        background-color: rgba(var(--system-accent-color-rgb), 0.2);
-      }
-
-      .wlan-entry-info {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-weight: 600;
-        gap: 8px;
-
-        .wlan-entry-info-ssid {
-          flex: 1;
-          color: var(--color-gray-800);
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-
-        .wlan-entry-info-channel {
-          font-size: 0.5rem;
-          color: var(--color-gray-600);
-          border: 1px solid var(--color-gray-600);
-          border-radius: 4px;
-          padding: 2px 4px;
-        }
-      }
-
-      .wlan-entry-fields {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .wlan-entry-actions {
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
-  }
-
-  .wlan-selector-footer {
-    .wlan-selector-footer-button {
-      @extend %actionable-button;
-    }
   }
 }
 

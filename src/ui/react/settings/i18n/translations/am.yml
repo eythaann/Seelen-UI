@@ -162,6 +162,7 @@ save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
 see_more: ተጨማሪ ይመልከቱ
 shortcuts:
+  duplicate_error: ይህ አቋራጭ የተባዛ ነው።
   enable: አብሮገነብ አቋራጭ አቋራጭ ስርዓት
   enable_tooltip: የእራስዎን አቋራጮችን ስርዓት የሚተገበሩበትን የእራስዎን አቋራጮዎች ስርዓት የሚተገበሩ ከሆነ ያሰናክሉ
   labels:

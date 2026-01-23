@@ -169,6 +169,7 @@ save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 see_more: Daha Fazla Gör
 shortcuts:
+  duplicate_error: Bu kısayol kopyalandı
   enable: Dahili kısayol sistemini etkinleştirin
   enable_tooltip: >-
     Seelen UI istemcisini kullanarak kendi kısayol sisteminizi uygulayacaksanız

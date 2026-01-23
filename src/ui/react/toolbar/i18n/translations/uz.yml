@@ -34,19 +34,6 @@ media:
   input_devices: Kirish moslamalari
   output_devices: Chiqish moslamalari
   players: Media pleerlari
-network:
-  available: Mavjud tarmoqlar
-  connect: Ulanmoq
-  connected: ga ulangan
-  disconnect: Ajratmoq
-  hidden: Yashirin tarmoq
-  more: Ko'proq tarmoq sozlamalari
-  not_found: Tarmoq topilmadi
-  placeholder:
-    password: Parol
-  saved: Saqlangan tarmoqlar
-  scanning: Tarmoqlarni skanerlash
-  secured: Shifrlangan tarmoq
 notifications:
   clear: Hamma narsani tozalang
   empty: Hech qanday bildirishnomalar yo'q

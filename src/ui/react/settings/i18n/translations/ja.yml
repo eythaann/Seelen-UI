@@ -160,6 +160,7 @@ save: 保存
 save_and_restart: 保存して再起動
 see_more: もっと見る
 shortcuts:
+  duplicate_error: このショートカットは重複しています
   enable: ビルトインショートカットシステムを有効にします
   enable_tooltip: Seelen UIクライアントを使用して独自のショートカットシステムを実装する場合は無効にします
   labels:

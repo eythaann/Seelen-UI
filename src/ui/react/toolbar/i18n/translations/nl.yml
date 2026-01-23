@@ -34,19 +34,6 @@ media:
   input_devices: Invoerapparaten
   output_devices: Uitvoerapparaten
   players: Mediaspelers
-network:
-  available: Beschikbare netwerken
-  connect: Verbinden
-  connected: Verbonden met
-  disconnect: Verbinding verbreken
-  hidden: Verborgen netwerk
-  more: Meer netwerkinstellingen
-  not_found: Geen netwerken gevonden
-  placeholder:
-    password: Wachtwoord
-  saved: Opgeslagen netwerken
-  scanning: Scannen naar netwerken
-  secured: Versleuteld netwerk
 notifications:
   clear: Alles wissen
   empty: Geen meldingen

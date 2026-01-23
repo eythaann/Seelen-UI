@@ -34,19 +34,6 @@ media:
   input_devices: इनपुट उपकरणहरू
   output_devices: आउटपुट उपकरणहरू
   players: मिडिया खेलाडीहरु
-network:
-  available: उपलब्ध नेटवर्कहरू
-  connect: जोड्नु
-  connected: मा जोडिएको छ
-  disconnect: अलग गनु
-  hidden: लुकेको नेटवर्क
-  more: अधिक नेटवर्क सेटिंग्स
-  not_found: कुनै नेटवर्क फेला परेन
-  placeholder:
-    password: संकेत शब्द
-  saved: सुरक्षित नेटवर्कहरू
-  scanning: नेटवर्कहरूको लागि स्क्यान गर्दै
-  secured: ईन्क्रिप्टेड नेटवर्क
 notifications:
   clear: सबै खाली गर्नुहोस्
   empty: NOSESTIONES

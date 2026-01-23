@@ -173,6 +173,7 @@ save: Speichern
 save_and_restart: Speichern & neu starten
 see_more: Mehr sehen
 shortcuts:
+  duplicate_error: Diese Verknüpfung ist dupliziert
   enable: Aktivieren Sie ein integriertes Verknüpfungssystem
   enable_tooltip: >-
     Deaktivieren Sie, wenn Sie Ihr eigenes Verknüpfungssystem mit dem Seelen UI

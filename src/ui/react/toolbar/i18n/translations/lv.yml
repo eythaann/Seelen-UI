@@ -34,19 +34,6 @@ media:
   input_devices: Ievadierīces
   output_devices: Izejas ierīces
   players: Plašsaziņas līdzekļu spēlētāji
-network:
-  available: Pieejamie tīkli
-  connect: Savienot
-  connected: Savienots ar
-  disconnect: Atvienot
-  hidden: Slēpts tīkls
-  more: Vairāk tīkla iestatījumu
-  not_found: Neto atrasti tīkli
-  placeholder:
-    password: Parole
-  saved: Saglabātie tīkli
-  scanning: Tīklu meklēšana
-  secured: Šifrēts tīkls
 notifications:
   clear: Notīrīt visus
   empty: Nav paziņojumu

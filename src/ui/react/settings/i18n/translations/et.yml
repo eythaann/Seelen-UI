@@ -168,6 +168,7 @@ save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
 see_more: Vaata lähemalt
 shortcuts:
+  duplicate_error: See otsetee on dubleeritud
   enable: Luba sisseehitatud otseteede süsteem
   enable_tooltip: >-
     Keelake, kui rakendate oma otseteede süsteemi, kasutades seeneni

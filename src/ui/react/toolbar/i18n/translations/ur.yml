@@ -34,19 +34,6 @@ media:
   input_devices: ان پٹ ڈیوائسز
   output_devices: آؤٹ پٹ ڈیوائسز
   players: میڈیا پلیئرز
-network:
-  available: دستیاب نیٹ ورکس
-  connect: کنیکٹ
-  connected: سے جڑا ہوا ہے۔
-  disconnect: ڈسکنیکٹ
-  hidden: پوشیدہ نیٹ ورک
-  more: نیٹورک کی مزید معلومات
-  not_found: کوئی نیٹ ورک نہیں ملا
-  placeholder:
-    password: پاس ورڈ
-  saved: محفوظ کردہ نیٹ ورکس
-  scanning: نیٹ ورکس کے لیے سکیننگ
-  secured: خفیہ کردہ نیٹ ورک
 notifications:
   clear: سب کو صاف کریں
   empty: کوئی اطلاعات نہیں

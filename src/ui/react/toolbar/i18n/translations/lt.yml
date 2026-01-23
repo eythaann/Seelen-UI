@@ -34,19 +34,6 @@ media:
   input_devices: Įvesties įrenginiai
   output_devices: Išvesties įrenginiai
   players: Žiniasklaidos žaidėjai
-network:
-  available: Galimi tinklai
-  connect: Prisijungti
-  connected: Prisijungta prie
-  disconnect: Atjungti
-  hidden: Paslėptas tinklas
-  more: Daugiau tinklo nustatymų
-  not_found: Jokių tinklų nerasta
-  placeholder:
-    password: Slaptažodis
-  saved: Išsaugoti tinklai
-  scanning: Tinklų nuskaitymas
-  secured: Šifruotas tinklas
 notifications:
   clear: Išvalyti viską
   empty: Jokių pranešimų

@@ -34,19 +34,6 @@ media:
   input_devices: ઇનપુટ ઉપકરણો
   output_devices: ઉત્પાદન
   players: માધ્યમો ખેલાડીઓ
-network:
-  available: ઉપલબ્ધ નેટવર્ક્સ
-  connect: જોડાવા
-  connected: સાથે જોડાયેલ છે
-  disconnect: અલગ કરવું
-  hidden: છુપાયેલું નેટવર્ક
-  more: વધુ નેટવર્ક સેટિંગ્સ
-  not_found: કોઈ નેટવર્ક મળ્યાં નથી
-  placeholder:
-    password: પાસશ
-  saved: સાચવેલા નેટવર્ક્સ
-  scanning: નેટવર્ક્સ માટે સ્કેનિંગ
-  secured: એન્ક્રિપ્ટેડ નેટવર્ક
 notifications:
   clear: બધુ સાફ કરવું
   empty: કોઈ સૂચનાઓ

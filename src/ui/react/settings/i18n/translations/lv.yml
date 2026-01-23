@@ -169,6 +169,7 @@ save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 see_more: Skatīt vairāk
 shortcuts:
+  duplicate_error: Šī saīsne ir dublēta
   enable: Iespējot iebūvēto saīsņu sistēmu
   enable_tooltip: >-
     Atspējot, ja jūs ieviesīsit savu saīsņu sistēmu, izmantojot Seelen UI

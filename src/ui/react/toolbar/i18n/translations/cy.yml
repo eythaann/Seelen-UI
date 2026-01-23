@@ -34,19 +34,6 @@ media:
   input_devices: Dyfeisiau Mewnbwn
   output_devices: Dyfeisiau Allbwn
   players: Chwaraewyr cyfryngau
-network:
-  available: Rhwydweithiau sydd ar gael
-  connect: Chysyllta ’
-  connected: Wedi'i gysylltu â
-  disconnect: Ddatgysylltith
-  hidden: Rhwydwaith Cudd
-  more: Mwy o osodiadau rhwydwaith
-  not_found: Ni ddarganfuwyd unrhyw rwydweithiau
-  placeholder:
-    password: Gyfrinair
-  saved: Rhwydweithiau wedi'u cadw
-  scanning: Sganio am rwydweithiau
-  secured: Rhwydwaith wedi'i amgryptio
 notifications:
   clear: Clirio popeth
   empty: Dim Hysbysiadau

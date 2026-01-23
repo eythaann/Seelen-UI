@@ -169,6 +169,7 @@ save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 see_more: Žiūrėti daugiau
 shortcuts:
+  duplicate_error: Šis spartusis klavišas pasikartoja
   enable: Įgalinti įmontuotą nuorodų sistemą
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodų sistemą naudodami „Seelen UI“ klientą
   labels:

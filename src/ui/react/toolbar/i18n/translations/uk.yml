@@ -34,19 +34,6 @@ media:
   input_devices: Пристрої введення
   output_devices: Пристрої виводу
   players: Медіаплеєри
-network:
-  available: Доступні мережі
-  connect: Підключити
-  connected: Підключено до
-  disconnect: Відключити
-  hidden: Прихована мережа
-  more: Більше налаштувань мережі
-  not_found: Жодних мереж не знайдено
-  placeholder:
-    password: Пароль
-  saved: Збережені мережі
-  scanning: Сканування мереж
-  secured: Зашифрована мережа
 notifications:
   clear: Зачистити все.
   empty: Немає сповіщень

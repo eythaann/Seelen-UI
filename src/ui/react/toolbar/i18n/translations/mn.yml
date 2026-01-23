@@ -34,19 +34,6 @@ media:
   input_devices: Дурсгал дурсгалын төхөөрөмж
   output_devices: Гаралтын төхөөрөмжүүд
   players: Хэвлэл хэвлэл тоглогч
-network:
-  available: Боломжтой сүлжээнүүд
-  connect: Холбох
-  connected: '-д холбогдсон'
-  disconnect: Тусгаарлах
-  hidden: Цэг сонссон сүлж
-  more: Сүлжээний илүү олон тохиргоо
-  not_found: Сүлжээ олдсонгүй
-  placeholder:
-    password: Нууц үг
-  saved: Хадгалсан сүлжээнүүд
-  scanning: Сүлжээг хайж байна
-  secured: Шифрлэгдсэн сүлжээ
 notifications:
   clear: Бүгдийг цэвэрлэ
   empty: Мэдэгдэл байхгүй байна

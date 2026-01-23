@@ -34,19 +34,6 @@ media:
   input_devices: Bemeneti eszközök
   output_devices: Kimeneti eszközök
   players: Médialejátszók
-network:
-  available: Elérhető hálózatok
-  connect: Csatlakozás
-  connected: Csatlakozva ehhez
-  disconnect: Kapcsolat bontása
-  hidden: Rejtett hálózat
-  more: További hálózati beállítások
-  not_found: Nem találhatók Wi-Fi hálózatok
-  placeholder:
-    password: Jelszó
-  saved: Mentett hálózatok
-  scanning: Hálózatok keresése
-  secured: Titkosított hálózat
 notifications:
   clear: Összes törlése
   empty: Nincsenek értesítések

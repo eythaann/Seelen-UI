@@ -34,19 +34,6 @@ media:
   input_devices: ਇਨਪੁਟ ਜੰਤਰ
   output_devices: ਆਉਟਪੁੱਟ ਜੰਤਰ
   players: ਮੀਡੀਆ ਪਲੇਅਰ
-network:
-  available: ਉਪਲਬਧ ਨੈੱਟਵਰਕ
-  connect: ਕਨੈਕਟ ਕਰੋ
-  connected: ਨਾਲ ਜੁੜਿਆ ਹੋਇਆ ਹੈ
-  disconnect: ਡਿਸਕਨੈਕਟ
-  hidden: ਲੁਕਿਆ ਹੋਇਆ ਨੈਟਵਰਕ
-  more: ਹੋਰ ਨੈੱਟਵਰਕ ਸੈਟਿੰਗਾਂ
-  not_found: ਕੋਈ ਨੈੱਟਵਰਕ ਨਹੀਂ ਮਿਲਿਆ
-  placeholder:
-    password: ਪਾਸਵਰਡ
-  saved: ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਨੈੱਟਵਰਕ
-  scanning: ਨੈੱਟਵਰਕਾਂ ਲਈ ਸਕੈਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ
-  secured: ਐਨਕ੍ਰਿਪਟਡ ਨੈੱਟਵਰਕ
 notifications:
   clear: ਸਭ ਨੂੰ ਸਾਫ ਕਰੋ
   empty: ਕੋਈ ਨੋਟੀਫਿਕੇਸ਼ਨ ਨਹੀਂ

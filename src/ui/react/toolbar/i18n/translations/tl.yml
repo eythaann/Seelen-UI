@@ -34,19 +34,6 @@ media:
   input_devices: Mga aparato sa pag -input
   output_devices: Mga aparato ng output
   players: Mga manlalaro ng media
-network:
-  available: Magagamit na mga network
-  connect: Kumonekta
-  connected: Nakakonekta sa
-  disconnect: Idiskonekta
-  hidden: Nakatagong network
-  more: Higit pang mga setting ng network
-  not_found: Walang nahanap na mga network
-  placeholder:
-    password: Password
-  saved: Mga naka-save na network
-  scanning: Pag-scan para sa mga network
-  secured: Naka-encrypt na network
 notifications:
   clear: Malinaw ang lahat
   empty: Walang mga abiso

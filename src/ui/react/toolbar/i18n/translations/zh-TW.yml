@@ -34,19 +34,6 @@ media:
   input_devices: 輸入設備
   output_devices: 輸出設備
   players: 媒體播放器
-network:
-  available: 可用網絡
-  connect: 連接
-  connected: 連接到
-  disconnect: 斷開
-  hidden: 隱藏網絡
-  more: 更多網絡設置
-  not_found: 找不到Wi-Fi網絡
-  placeholder:
-    password: 密碼
-  saved: 保存的網絡
-  scanning: 掃描網絡
-  secured: 加密網絡
 notifications:
   clear: 清除全部
   empty: 沒有通知

@@ -34,19 +34,6 @@ media:
   input_devices: Dispositifs d'entrée
   output_devices: Dispositifs de sortie
   players: Lecteurs multimédias
-network:
-  available: Réseaux disponibles
-  connect: Connecter
-  connected: Connecté à
-  disconnect: Déconnecter
-  hidden: Réseau caché
-  more: Plus de paramètres réseau
-  not_found: Aucun réseau trouvé
-  placeholder:
-    password: Mot de passe
-  saved: Réseaux enregistrés
-  scanning: Recherche de réseaux
-  secured: Réseau crypté
 notifications:
   clear: Tout effacer
   empty: Aucune notification

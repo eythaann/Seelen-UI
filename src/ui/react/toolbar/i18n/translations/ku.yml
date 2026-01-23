@@ -34,19 +34,6 @@ media:
   input_devices: Amûrên input
   output_devices: Amûrên deriyê
   players: Lîstikên Medyayê
-network:
-  available: Torên berdest
-  connect: Bihevgirêdan
-  connected: Girêdayî
-  disconnect: Hevqetandin
-  hidden: Tora Hidden
-  more: Mîhengên bêtir torê
-  not_found: Tora torgilok nehat dîtin
-  placeholder:
-    password: Şîfre
-  saved: torên Saved
-  scanning: Ji bo toran lêgerîn
-  secured: Tora şîfrekirî
 notifications:
   clear: Hemî paqij bikin
   empty: No notifications

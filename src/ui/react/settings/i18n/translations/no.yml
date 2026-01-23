@@ -169,6 +169,7 @@ save: Lagre
 save_and_restart: Lagre og start på nytt
 see_more: Se mer
 shortcuts:
+  duplicate_error: Denne snarveien er duplisert
   enable: Aktiver innebygd snarveisystem
   enable_tooltip: >-
     Deaktiver om du implementerer ditt eget snarveisystem ved hjelp av Seelen UI

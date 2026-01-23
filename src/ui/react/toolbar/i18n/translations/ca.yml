@@ -34,19 +34,6 @@ media:
   input_devices: Dispositius d'entrada
   output_devices: Dispositius de sortida
   players: Reproductors de mitjans de comunicació
-network:
-  available: Xarxes disponibles
-  connect: Conectar
-  connected: Connectat a
-  disconnect: Desconectar
-  hidden: Xarxa oculta
-  more: Més configuració de xarxa
-  not_found: No es van trobar xarxes
-  placeholder:
-    password: Contrasenya
-  saved: Xarxes guardades
-  scanning: Escaneig de xarxes
-  secured: Xarxa xifrada
 notifications:
   clear: Esborrar tot
   empty: Sense notificacions

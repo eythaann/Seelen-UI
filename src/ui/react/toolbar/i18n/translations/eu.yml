@@ -34,19 +34,6 @@ media:
   input_devices: Sarrerako gailuak
   output_devices: Irteerako gailuak
   players: Komunikabideetako jokalariak
-network:
-  available: Eskuragarri dauden sareak
-  connect: Batu
-  connected: Honekin konektatuta
-  disconnect: Deskonektatu
-  hidden: Ezkutuko sarea
-  more: Sareko ezarpen gehiago
-  not_found: Ez da sarerik aurkitu
-  placeholder:
-    password: Kontrazeinu
-  saved: Gordetako sareak
-  scanning: Sareak bilatzen
-  secured: Sare zifratua
 notifications:
   clear: Garbitu guztiak
   empty: Ez da jakinarazpenik

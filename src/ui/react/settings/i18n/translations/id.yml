@@ -171,6 +171,7 @@ save: Menyimpan
 save_and_restart: Simpan & restart
 see_more: Lihat Lebih Lanjut
 shortcuts:
+  duplicate_error: Pintasan ini diduplikasi
   enable: Aktifkan sistem pintasan bawaan
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan sistem pintasan Anda sendiri

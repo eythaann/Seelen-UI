@@ -169,6 +169,7 @@ save: Spara
 save_and_restart: Spara och starta om
 see_more: Se mer
 shortcuts:
+  duplicate_error: Den här genvägen är duplicerad
   enable: Aktivera inbyggda genvägssystem
   enable_tooltip: >-
     Inaktivera om du kommer att implementera ditt eget genvägssystem med Seelen

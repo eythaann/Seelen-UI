@@ -172,6 +172,7 @@ save: Salva
 save_and_restart: Salva e Riavvia
 see_more: Per saperne di più
 shortcuts:
+  duplicate_error: Questa scorciatoia è duplicata
   enable: Abilita le scorciatoie integrate
   enable_tooltip: >-
     Disabilita se implementerai il tuo sistema di scorciatoie utilizzando il

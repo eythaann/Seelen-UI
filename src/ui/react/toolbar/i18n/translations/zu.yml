@@ -34,19 +34,6 @@ media:
   input_devices: Amadivayisi wokufaka
   output_devices: Amadivayisi okukhipha
   players: Abadlali beMedia
-network:
-  available: Amanethiwekhi atholakalayo
-  connect: Hlangana
-  connected: Kuxhunywe ku
-  disconnect: Thukulula
-  hidden: Inethiwekhi efihliwe
-  more: Izilungiselelo eziningi zenethiwekhi
-  not_found: Awekho amanethiwekhi atholakele
-  placeholder:
-    password: Igama lokuvunyelwa ukungena endaweni ethile
-  saved: Amanethiwekhi alondoloziwe
-  scanning: Iskenela amanethiwekhi
-  secured: Inethiwekhi ebethelwe
 notifications:
   clear: Sula konke
   empty: Azikho izaziso

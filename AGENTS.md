@@ -606,22 +606,20 @@ src/
 
 ### Step-by-Step Widget Creation
 
-#### 1. Create Static Widget Definition
+#### 1. Create Svelte Widget HTML
 
-Create `src/static/widgets/<widget-name>/index.html`:
+Create `src/ui/svelte/<widget-name>/public/index.html`:
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>Widget Name</title>
-    <link data-seelen-theme rel="stylesheet" />
-    <link data-seelen-styles rel="stylesheet" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="/vanilla/entry-point/index.js" type="module"></script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" data-seelen-app></script>
   </body>
 </html>
 ```
@@ -640,11 +638,7 @@ version: 1.0.0
 Create `src/static/themes/default/styles/<widget-name>.scss`:
 
 ```scss
-@import "shared";
-
 .widget-container {
-  @include default-widget-styles;
-
   // Widget-specific styles
   background: var(--config-background-color);
   color: var(--config-foreground-color);
@@ -658,23 +652,97 @@ Create `src/static/themes/default/styles/<widget-name>.scss`:
 **Important CSS Variables:**
 
 - `--system-accent-color` - Accent color
-- Use existing mixins from `shared.scss` for consistency
+- `--color-gray-*` - Gray scale colors (50-900)
+- `--color-red-*`, `--color-blue-*`, etc. - Semantic colors
+
+**Shared Styles with `data-skin`:**
+
+To avoid CSS class conflicts with external widgets and maintain consistency across all widgets, we use the `data-skin`
+attribute instead of CSS classes for common interactive elements:
+
+```svelte
+<!-- Buttons -->
+<button data-skin="default">Cancel</button>
+<button data-skin="solid">Confirm</button>
+<button data-skin="transparent">More Settings</button>
+
+<!-- Inputs -->
+<input type="text" data-skin="default" placeholder="Enter value" />
+<input type="password" data-skin="default" class:error={hasError} />
+
+<!-- Checkboxes/Switches -->
+<input type="checkbox" data-skin="switch" checked={enabled} />
+```
+
+**Available `data-skin` values:**
+
+- **Buttons**: `default`, `solid`, `transparent`
+- **Inputs**: `default`
+- **Checkboxes**: `switch`
+
+**Why `data-skin` instead of classes?**
+
+- ✅ **No conflicts**: External widgets can use their own CSS classes without interfering
+- ✅ **Consistency**: All widgets share the same look and feel automatically
+- ✅ **Maintainability**: Styling updates apply to all widgets from shared styles
+- ✅ **Clarity**: Clear separation between widget-specific classes and shared component styles
+
+**Example from production:**
+
+```scss
+// ❌ DON'T: Create custom button classes
+.my-button-primary {
+  background: var(--system-accent-color);
+  // ...
+}
+
+// ✅ DO: Use widget-specific classes for layout, data-skin for styling
+.my-widget {
+  .my-widget-actions {
+    display: flex;
+    gap: 8px;
+
+    // No button styling here - handled by data-skin
+  }
+}
+```
+
+```svelte
+<!-- ❌ DON'T: Use custom classes for buttons -->
+<button class="my-button-primary">Connect</button>
+
+<!-- ✅ DO: Use data-skin for consistent styling -->
+<button data-skin="solid">Connect</button>
+```
 
 #### 3. Set Up Svelte Application
 
 Create `src/ui/svelte/<widget-name>/index.ts`:
 
 ```typescript
-import App from "./App.svelte";
+import { mount } from "svelte";
+import App from "./app.svelte";
+import { loadTranslations } from "./i18n/index.ts";
+import { Widget } from "@seelen-ui/lib";
 
-const app = new App({
-  target: document.getElementById("root")!,
+import "@shared/styles/reset.css";
+import "@shared/styles/colors.css";
+
+const root = document.getElementById("root")!;
+
+const widget = Widget.getCurrent();
+await widget.init({
+  autoSizeByContent: root,
 });
 
-export default app;
+await loadTranslations();
+
+mount(App, {
+  target: root,
+});
 ```
 
-Create `src/ui/svelte/<widget-name>/App.svelte`:
+Create `src/ui/svelte/<widget-name>/app.svelte`:
 
 ```svelte
 <script lang="ts">
@@ -708,7 +776,7 @@ const $data = lazySignal<YourDataType[]>(async () => {
 });
 
 // Set up event listeners BEFORE initialization
-subscribe(SeelenEvent.YourDataChanged, (event) => {
+await subscribe(SeelenEvent.YourDataChanged, (event) => {
   $data.value = event.payload;
 });
 
@@ -764,7 +832,7 @@ The double-check pattern prevents race conditions:
 const $data = lazySignal(async () => await fetchData());
 
 // 2. Set up event listener (may fire during initialization)
-subscribe(SeelenEvent.DataChanged, (e) => {
+await subscribe(SeelenEvent.DataChanged, (e) => {
   $data.value = e.payload; // This sets initialized = true
 });
 

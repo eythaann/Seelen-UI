@@ -34,19 +34,6 @@ media:
   input_devices: Sisendseadmed
   output_devices: Väljundseadmed
   players: Meediamängijad
-network:
-  available: Saadaolevad võrgud
-  connect: Ühendama
-  connected: 'Ühendatud:'
-  disconnect: Ühenduse katkestama
-  hidden: Varjatud võrk
-  more: Rohkem võrguseadeid
-  not_found: Võrgustikke pole leitud
-  placeholder:
-    password: Parool
-  saved: Salvestatud võrgud
-  scanning: Võrkude otsimine
-  secured: Krüpteeritud võrk
 notifications:
   clear: Tühjenda kõik
   empty: Teated puuduvad

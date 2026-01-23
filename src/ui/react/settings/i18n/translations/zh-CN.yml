@@ -155,6 +155,7 @@ save: 保存
 save_and_restart: 保存并重启应用
 see_more: 查看更多
 shortcuts:
+  duplicate_error: 该快捷方式重复
   enable: 启用内置捷径系统
   enable_tooltip: 禁用您使用SEELEN UI客户端实现自己的快捷方式系统
   labels:

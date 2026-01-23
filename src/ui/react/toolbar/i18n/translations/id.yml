@@ -34,19 +34,6 @@ media:
   input_devices: Perangkat input
   output_devices: Perangkat keluaran
   players: Pemain Media
-network:
-  available: Jaringan yang tersedia
-  connect: Menghubung
-  connected: Terhubung ke
-  disconnect: Memutuskan
-  hidden: Jaringan tersembunyi
-  more: Lebih banyak pengaturan jaringan
-  not_found: Tidak ada jaringan yang ditemukan
-  placeholder:
-    password: Kata sandi
-  saved: Jaringan yang disimpan
-  scanning: Memindai jaringan
-  secured: Jaringan terenkripsi
 notifications:
   clear: Hapus semua
   empty: Tidak ada pemberitahuan

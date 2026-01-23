@@ -169,6 +169,7 @@ save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 see_more: Gweld mwy
 shortcuts:
+  duplicate_error: Mae'r llwybr byr hwn yn cael ei ddyblygu
   enable: Galluogi system llwybrau byr adeiledig
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch system llwybrau byr eich hun gan

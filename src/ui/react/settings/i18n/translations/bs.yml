@@ -167,6 +167,7 @@ save: Sačuvati
 save_and_restart: Spremi i ponovno pokretanje
 see_more: Pogledajte više
 shortcuts:
+  duplicate_error: Ova prečica je duplirana
   enable: Omogući ugrađene sistem prečaca
   enable_tooltip: >-
     Onemogućite ako ćete implementirati vlastite sustav prečaca pomoću klijenta

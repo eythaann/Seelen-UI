@@ -23,4 +23,7 @@ styles:
   "@seelen/apps-menu": !include styles/apps-menu.scss
   "@seelen/keyboard-selector": !include styles/keyboard-selector.scss
   "@seelen/user-menu": !include styles/user-menu.scss
+  "@seelen/network-popup": !include styles/network-popup.scss
+
+# shared styles across all widgets
 sharedStyles: !include ./shared/index.scss

@@ -171,6 +171,7 @@ save: Salvați
 save_and_restart: Salvați și reporniți
 see_more: A se vedea mai mult
 shortcuts:
+  duplicate_error: Această comandă rapidă este duplicată
   enable: Activați sistemul de comenzi rapide încorporate
   enable_tooltip: >-
     Dezactivați dacă veți implementa propriul sistem de comenzi rapide folosind

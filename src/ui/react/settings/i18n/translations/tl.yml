@@ -175,6 +175,7 @@ save: I -save
 save_and_restart: I -save at i -restart
 see_more: Makita pa
 shortcuts:
+  duplicate_error: Ang shortcut na ito ay nadoble
   enable: Paganahin ang built-in na mga shortcut system
   enable_tooltip: >-
     Huwag paganahin kung ipatutupad mo ang iyong sariling sistema ng mga

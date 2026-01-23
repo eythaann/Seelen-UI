@@ -168,6 +168,7 @@ save: Megment
 save_and_restart: Mentés és újraindítás
 see_more: Lásd még
 shortcuts:
+  duplicate_error: Ez a parancsikon megkettőződik
   enable: Engedélyezze a beépített parancsikonok rendszerét
   enable_tooltip: >-
     Tiltsa le, ha a Seelen UI kliens segítségével megvalósítja saját

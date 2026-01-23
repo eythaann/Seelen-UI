@@ -169,6 +169,7 @@ save: Gemme
 save_and_restart: Gem & genstart
 see_more: Se mere
 shortcuts:
+  duplicate_error: Denne genvej er duplikeret
   enable: Aktivér det indbyggede genvejssystem
   enable_tooltip: >-
     Deaktiver, hvis du vil implementere dit eget genvejssystem ved hjælp af

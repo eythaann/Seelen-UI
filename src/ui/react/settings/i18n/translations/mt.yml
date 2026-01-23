@@ -171,6 +171,7 @@ save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
 see_more: Ara aktar
 shortcuts:
+  duplicate_error: Din is-shortcut hija duplikata
   enable: Ippermetti s-sistema shortcuts inkorporati
   enable_tooltip: >-
     Itfi jekk timplimentax is-sistema shortcuts tiegħek stess billi tuża

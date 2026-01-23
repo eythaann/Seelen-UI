@@ -161,6 +161,7 @@ save: 저장
 save_and_restart: 저장 및 재시작
 see_more: 자세히 보기
 shortcuts:
+  duplicate_error: 이 바로가기가 중복되었습니다.
   enable: 내장 단축키 시스템을 활성화하십시오
   enable_tooltip: Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
   labels:

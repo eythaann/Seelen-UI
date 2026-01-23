@@ -34,19 +34,6 @@ media:
   input_devices: 入力デバイス
   output_devices: 出力デバイス
   players: メディアプレーヤー
-network:
-  available: 利用可能なネットワーク
-  connect: 接続
-  connected: 接続されています
-  disconnect: 切断
-  hidden: 非表示のネットワーク
-  more: 詳しい設定
-  not_found: ネットワークが見つかりません
-  placeholder:
-    password: パスワード
-  saved: 保存されたネットワーク
-  scanning: ネットワークのスキャン
-  secured: 暗号化されたネットワーク
 notifications:
   clear: すべてクリア
   empty: 通知なし

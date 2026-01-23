@@ -167,6 +167,7 @@ save: સાચવો
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
 see_more: વધુ જુઓ
 shortcuts:
+  duplicate_error: આ શોર્ટકટ ડુપ્લિકેટ છે
   enable: બિલ્ટ-ઇન શ shortc ર્ટકટ્સ સિસ્ટમને સક્ષમ કરો
   enable_tooltip: >-
     જો તમે સીલેન યુઆઈ ક્લાયંટનો ઉપયોગ કરીને તમારી પોતાની શ shortc ર્ટકટ્સ સિસ્ટમ

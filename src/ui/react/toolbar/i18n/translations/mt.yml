@@ -34,19 +34,6 @@ media:
   input_devices: Apparat ta 'input
   output_devices: Apparat tal-ħruġ
   players: Plejers tal-midja
-network:
-  available: Netwerks disponibbli
-  connect: Qabbad
-  connected: Konnessi ma'
-  disconnect: Skonnettja
-  hidden: Netwerk moħbi
-  more: Aktar settings tan-netwerk
-  not_found: Ma nstabu l-ebda netwerks
-  placeholder:
-    password: Password
-  saved: Netwerks salvati
-  scanning: Skennjar għal netwerks
-  secured: Netwerk kriptat
 notifications:
   clear: Ċar kollox
   empty: L-ebda notifika

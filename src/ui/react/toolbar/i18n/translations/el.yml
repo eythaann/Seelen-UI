@@ -34,19 +34,6 @@ media:
   input_devices: Συσκευές εισόδου
   output_devices: Συσκευές εξόδου
   players: Media players
-network:
-  available: Διαθέσιμα δίκτυα
-  connect: Συνδέω-συωδεομαι
-  connected: Συνδεδεμένο με
-  disconnect: Αποσυνδέω
-  hidden: Κρυμμένο δίκτυο
-  more: Περισσότερες ρυθμίσεις δικτύου
-  not_found: Δεν βρέθηκαν δίκτυα
-  placeholder:
-    password: Κωδικός πρόσβασης
-  saved: Αποθηκευμένα δίκτυα
-  scanning: Σάρωση για δίκτυα
-  secured: Κρυπτογραφημένο δίκτυο
 notifications:
   clear: Εκκαθάριση όλων
   empty: Δεν υπάρχουν ειδοποιήσεις

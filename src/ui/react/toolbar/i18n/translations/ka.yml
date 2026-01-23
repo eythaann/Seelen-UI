@@ -34,19 +34,6 @@ media:
   input_devices: შეყვანის მოწყობილობები
   output_devices: გამომავალი მოწყობილობები
   players: მედიის მოთამაშეები
-network:
-  available: ხელმისაწვდომი ქსელები
-  connect: დაკავშირება
-  connected: დაკავშირებულია
-  disconnect: გათიშვა
-  hidden: დამალული ქსელი
-  more: მეტი ქსელის პარამეტრები
-  not_found: ქსელები ვერ მოიძებნა
-  placeholder:
-    password: პაროლი
-  saved: შენახული ქსელები
-  scanning: სკანირება ქსელებისთვის
-  secured: დაშიფრული ქსელი
 notifications:
   clear: გასუფთავება
   empty: შეტყობინებები არ არის

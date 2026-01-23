@@ -34,19 +34,6 @@ media:
   input_devices: Input devices
   output_devices: Output devices
   players: Media Players
-network:
-  available: Available networks
-  connect: Connect
-  connected: Connected to
-  disconnect: Disconnect
-  hidden: Hidden Network
-  more: More Network Settings
-  not_found: No Wi-Fi networks found
-  placeholder:
-    password: Password
-  saved: Saved networks
-  scanning: Scanning for networks
-  secured: Encrypted network
 notifications:
   clear: Clear all
   empty: No notifications

@@ -34,19 +34,6 @@ media:
   input_devices: Input-enheder
   output_devices: Output-enheder
   players: Medieafspillere
-network:
-  available: Tilgængelige netværk
-  connect: Forbinde
-  connected: Forbundet til
-  disconnect: Koble fra
-  hidden: Skjult netværk
-  more: Flere netværksindstillinger
-  not_found: Ingen netværk fundet
-  placeholder:
-    password: Adgangskode
-  saved: Gemte netværk
-  scanning: Scanning efter netværk
-  secured: Krypteret netværk
 notifications:
   clear: Ryd alle
   empty: Ingen meddelelser

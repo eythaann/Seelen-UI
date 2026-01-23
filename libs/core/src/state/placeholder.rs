@@ -439,6 +439,7 @@ impl Placeholder {
             "@default/bluetooth" => "@seelen/tb-bluetooth-popup".into(),
             "@default/keyboard" => "@seelen/tb-keyboard-selector".into(),
             "@default/user" => "@seelen/tb-user-menu".into(),
+            "@default/network" => "@seelen/tb-network-popup".into(),
             _ => id,
         }
     }

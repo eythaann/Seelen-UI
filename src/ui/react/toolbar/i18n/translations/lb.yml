@@ -34,19 +34,6 @@ media:
   input_devices: Input Apparater
   output_devices: Ausgangsapparater
   players: Media Spiller
-network:
-  available: Verfügbar Netzwierker
-  connect: Connecten
-  connected: Verbonne mat
-  disconnect: Trennen
-  hidden: Verstoppt Netzwierk
-  more: Méi Netzwierk Astellunge
-  not_found: Keng Netzwierker fonnt
-  placeholder:
-    password: Passwuert
-  saved: Gespäichert Netzwierker
-  scanning: Scannen fir Netzwierker
-  secured: Verschlësselte Reseau
 notifications:
   clear: Emlotzen alleng
   empty: Keng Notifikatiounen

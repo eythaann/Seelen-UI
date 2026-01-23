@@ -170,6 +170,7 @@ save: Cứu
 save_and_restart: Lưu & Khởi động lại
 see_more: Xem thêm
 shortcuts:
+  duplicate_error: Phím tắt này bị trùng lặp
   enable: Bật hệ thống phím tắt tích hợp
   enable_tooltip: >-
     Tắt nếu bạn sẽ triển khai hệ thống phím tắt của riêng mình bằng cách sử dụng

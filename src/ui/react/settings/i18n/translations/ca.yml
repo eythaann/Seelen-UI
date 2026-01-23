@@ -170,6 +170,7 @@ save: Estalviar
 save_and_restart: Desar i reiniciar
 see_more: Veure més
 shortcuts:
+  duplicate_error: Aquesta drecera està duplicada
   enable: Activa el sistema integrat de dreceres
   enable_tooltip: >-
     Desactiveu si implementareu el vostre propi sistema de dreceres mitjançant

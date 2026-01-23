@@ -169,6 +169,7 @@ save: Simpan
 save_and_restart: Jimat & mulakan semula
 see_more: Lihat lagi
 shortcuts:
+  duplicate_error: Pintasan ini diduplikasi
   enable: Dayakan sistem pintasan terbina dalam
   enable_tooltip: >-
     Lumpuhkan jika anda akan melaksanakan sistem pintasan anda sendiri

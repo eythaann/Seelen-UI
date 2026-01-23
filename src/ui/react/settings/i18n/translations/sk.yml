@@ -171,6 +171,7 @@ save: Uložiť
 save_and_restart: Uložiť a reštartovať
 see_more: Pozri viac
 shortcuts:
+  duplicate_error: Táto skratka je duplikovaná
   enable: Povoliť vstavaný systém skratiek
   enable_tooltip: >-
     Zakážte, ak budete implementovať svoj vlastný systém skratiek pomocou

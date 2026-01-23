@@ -34,19 +34,6 @@ media:
   input_devices: Aaladaha wax soo galida
   output_devices: Qalabka wax soo saarka
   players: Ciyaartoyda warbaahinta
-network:
-  available: Shabakado la heli karo
-  connect: Ku xirid
-  connected: Ku xidhan
-  disconnect: Ka furid
-  hidden: Shabakada Qarsoon
-  more: Meelo badan oo shabakad ah
-  not_found: Shabakad lama helin
-  placeholder:
-    password: Eray sir
-  saved: Shabakado la keydiyay
-  scanning: Sawirka shabakadaha
-  secured: Shabakadda qarsoon
 notifications:
   clear: Caddee dhammaan
   empty: Wax wargelin ah

@@ -171,6 +171,7 @@ save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 see_more: Katso lisää
 shortcuts:
+  duplicate_error: Tämä pikanäppäin on kopioitu
   enable: Ota sisäänrakennettu pikakuvausjärjestelmä
   enable_tooltip: >-
     Poista käytöstä, jos otat käyttöön omat pikakuvausjärjestelmäsi Seelen UI

@@ -34,19 +34,6 @@ media:
   input_devices: מכשירי קלט
   output_devices: מכשירי פלט
   players: נגני מדיה
-network:
-  available: רשתות זמינות
-  connect: התחבר
-  connected: מחובר ל
-  disconnect: התנתק
-  hidden: רשת נסתרת
-  more: הגדרות רשת נוספות
-  not_found: לא נמצאו רשתות
-  placeholder:
-    password: סיסמה
-  saved: רשתות שמורות
-  scanning: סריקה לאיתור רשתות
-  secured: רשת מוצפנת
 notifications:
   clear: נקה הכל
   empty: אין התראות

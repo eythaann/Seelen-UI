@@ -34,19 +34,6 @@ media:
   input_devices: Insettoestelle
   output_devices: Uitsettoestelle
   players: Mediaspelers
-network:
-  available: Beskikbare netwerke
-  connect: Konnekteer
-  connected: Gekoppel aan
-  disconnect: Afsluit ??
-  hidden: Verborge netwerk
-  more: Meer netwerkinstellings
-  not_found: Geen netwerke gevind nie
-  placeholder:
-    password: Wagwoord
-  saved: Gestoorde netwerke
-  scanning: Soek vir netwerke
-  secured: Geënkripteerde netwerk
 notifications:
   clear: Duidelik alles
   empty: Geen kennisgewings nie

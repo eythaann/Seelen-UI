@@ -167,6 +167,7 @@ save: Vista
 save_and_restart: Vista og endurræsa
 see_more: Sjáðu meira
 shortcuts:
+  duplicate_error: Þessi flýtileið er afrituð
   enable: Virkja innbyggt flýtileiðkerfi
   enable_tooltip: >-
     Slökktu á ef þú munt innleiða þitt eigið flýtileiðkerfi með Seelen UI

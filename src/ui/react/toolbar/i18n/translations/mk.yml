@@ -34,19 +34,6 @@ media:
   input_devices: Внесување уреди
   output_devices: Излезни уреди
   players: Медиа плеери
-network:
-  available: Достапни мрежи
-  connect: Поврзете се
-  connected: Поврзан со
-  disconnect: Исклучување
-  hidden: Скриена мрежа
-  more: Повеќе мрежни поставки
-  not_found: Не се пронајдени мрежи
-  placeholder:
-    password: Лозинка
-  saved: Зачувани мрежи
-  scanning: Скенирање за мрежи
-  secured: Шифрирана мрежа
 notifications:
   clear: Исчистете ги сите
   empty: Нема известувања

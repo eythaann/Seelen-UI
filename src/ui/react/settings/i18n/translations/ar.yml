@@ -162,6 +162,7 @@ save: حفظ
 save_and_restart: حفظ وإعد التشغيل
 see_more: شاهد المزيد
 shortcuts:
+  duplicate_error: هذا الاختصار مكرر
   enable: تمكين نظام الاختصارات المدمجة
   enable_tooltip: تعطيل إذا كنت ستنفذ نظام الاختصارات الخاص بك باستخدام عميل Seelen UI
   labels:
