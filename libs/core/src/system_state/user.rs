@@ -5,7 +5,6 @@ use ts_rs::TS;
 #[derive(Debug, Copy, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
 #[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
 pub enum FolderType {
-    Unknown,
     Recent,
     Desktop,
     Downloads,
@@ -31,20 +30,12 @@ impl FolderType {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, TS)]
-#[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
-pub struct File {
-    pub path: PathBuf,
-    pub last_access_time: u64,
-}
-
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct FolderChangedArgs {
     pub of_folder: FolderType,
-    pub content: Option<Vec<File>>,
+    pub content: Vec<PathBuf>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, TS)]

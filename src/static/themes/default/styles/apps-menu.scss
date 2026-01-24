@@ -26,6 +26,14 @@ body {
     button {
       flex-shrink: 0;
     }
+
+    input[type="search"] {
+      flex: 1;
+    }
+
+    select {
+      width: 120px;
+    }
   }
 
   .apps-menu-body {
@@ -42,8 +50,27 @@ body {
 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 1rem;
+    justify-content: space-between;
+
+    .user-profile {
+      white-space: nowrap;
+      font-weight: 600;
+      font-size: 0.9rem;
+
+      .user-profile-picture {
+        height: 1.5rem !important;
+        width: 1.5rem !important;
+        border-radius: 50%;
+      }
+    }
+
+    .apps-menu-footer-left,
+    .apps-menu-footer-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
   }
 }
 

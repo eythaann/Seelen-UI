@@ -8,10 +8,11 @@
 
   interface Props extends SeelenCommandGetIconArgs {
     class?: ClassValue;
+    lazy?: boolean;
     [key: string]: any;
   }
 
-  let { path, umid, class: className, ...imgProps }: Props = $props();
+  let { path, umid, class: className, lazy, ...imgProps }: Props = $props();
 
   let mounted = { value: false };
   let state: IconState = $derived.by(() => {
@@ -42,7 +43,7 @@
     class={["slu-icon-outer", className]}
     data-shape={state.isAproximatelySquare ? "square" : "unknown"}
   >
-    <img src={state.src} alt="" />
+    <img src={state.src} alt="" loading={lazy ? "lazy" : "eager"} />
     {#if state.mask}
       <div class="slu-icon-mask" style="mask-image: url('{state.mask}')"></div>
     {/if}

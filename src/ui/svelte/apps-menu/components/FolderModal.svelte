@@ -1,6 +1,7 @@
 <script lang="ts">
-  import type { FavFolderItem } from "../state.svelte";
-  import { globalState } from "../state.svelte";
+  import type { StartMenuItem } from "@seelen-ui/lib/types";
+  import type { FavFolderItem } from "../state/mod.svelte";
+  import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
   import { DragDropProvider } from "@dnd-kit-svelte/svelte";
   import AppItem from "./AppItem.svelte";
@@ -9,7 +10,7 @@
   interface Props {
     folder: FavFolderItem;
     onClose: () => void;
-    onContextMenu: (event: MouseEvent, itemId: string) => void;
+    onContextMenu: (event: MouseEvent, item: StartMenuItem) => void;
   }
 
   let { folder, onClose, onContextMenu }: Props = $props();
@@ -115,14 +116,7 @@
 
         <div class="folder-modal-items">
           {#each expandedItems as { id, item }, idx (id)}
-            <AppItem
-              {item}
-              {idx}
-              isInsideFolder={true}
-              onContextMenu={(event) => {
-                onContextMenu(event, id);
-              }}
-            />
+            <AppItem {item} {idx} isInsideFolder={true} {onContextMenu} />
           {/each}
         </div>
       </div>

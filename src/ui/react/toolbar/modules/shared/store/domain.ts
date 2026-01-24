@@ -2,7 +2,6 @@ import type {
   AppNotification,
   Battery,
   BluetoothDevice,
-  File,
   MediaDevice,
   MediaPlayer,
   NetworkAdapter,
@@ -16,13 +15,6 @@ import type {
 export interface RootState {
   version: number;
   user: User | null;
-  userRecentFolder: File[];
-  userDesktopFolder: File[];
-  userDocumentsFolder: File[];
-  userDownloadsFolder: File[];
-  userPicturesFolder: File[];
-  userVideosFolder: File[];
-  userMusicFolder: File[];
   env: Record<string, string>;
   bluetoothDevices: BluetoothDevice[];
   powerStatus: PowerStatus;

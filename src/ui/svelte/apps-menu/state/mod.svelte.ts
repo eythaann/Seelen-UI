@@ -1,7 +1,11 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { StartMenuItem } from "@seelen-ui/lib/types";
 import { lazyRune, persistentRune } from "libs/ui/svelte/utils";
-import { StartDisplayMode, StartView } from "./constants";
+import { StartDisplayMode, StartView } from "../constants";
+
+const user = lazyRune(() => invoke(SeelenCommand.GetUser));
+await subscribe(SeelenEvent.UserChanged, user.setByPayload);
+await user.init();
 
 const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
 await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
@@ -234,6 +238,10 @@ class State {
   view = $state(StartView.Favorites);
   searchQuery = $state("");
   preselectedItem = $state<string | null>(null);
+
+  get user() {
+    return user.value;
+  }
 
   get monitors() {
     return monitors.value;

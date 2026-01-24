@@ -1,15 +1,16 @@
 <script lang="ts">
-  import type { FavFolderItem } from "../state.svelte";
+  import type { FavFolderItem } from "../state/mod.svelte";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
-  import { globalState } from "../state.svelte";
+  import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
   import { useDraggable, useDroppable } from "@dnd-kit-svelte/svelte";
   import FolderModal from "./FolderModal.svelte";
+  import type { StartMenuItem } from "@seelen-ui/lib/types";
 
   interface Props {
     folder: FavFolderItem;
     idx: number;
-    onContextMenu: (event: MouseEvent, itemId: string) => void;
+    onContextMenu: (event: MouseEvent, folder: FavFolderItem | StartMenuItem) => void;
     isActiveDropzone?: boolean;
   }
 
@@ -64,7 +65,7 @@
   class:is-drop-target={isActiveDropzone}
   onclick={openModal}
   oncontextmenu={(event) => {
-    onContextMenu(event, folder.itemId);
+    onContextMenu(event, folder);
   }}
   onfocus={() => {
     globalState.preselectedItem = folder.itemId;

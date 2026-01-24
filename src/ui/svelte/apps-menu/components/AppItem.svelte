@@ -2,16 +2,17 @@
   import type { StartMenuItem } from "@seelen-ui/lib/types";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
-  import { globalState } from "../state.svelte";
+  import { globalState } from "../state/mod.svelte";
   import { useDraggable, useDroppable } from "@dnd-kit-svelte/svelte";
 
   interface Props {
     item: StartMenuItem;
     idx: number;
-    onContextMenu: (event: MouseEvent, itemId: string) => void;
+    onContextMenu: (event: MouseEvent, item: StartMenuItem) => void;
     draggable?: boolean;
     isActiveDropzone?: boolean;
     isInsideFolder?: boolean;
+    lazy?: boolean;
   }
 
   let {
@@ -21,6 +22,7 @@
     draggable: isDraggable = true,
     isActiveDropzone = false,
     isInsideFolder = false,
+    lazy = false,
   }: Props = $props();
 
   const itemId = $derived(item.umid || item.path);
@@ -48,7 +50,7 @@
   }
 
   function handleContextMenu(event: MouseEvent) {
-    onContextMenu(event, itemId);
+    onContextMenu(event, item);
   }
 
   // class:is-dragging={sortableData.isDragging.current}
@@ -69,7 +71,7 @@
     globalState.preselectedItem = itemId;
   }}
 >
-  <FileIcon class="app-icon" path={item.path} umid={item.umid} />
+  <FileIcon class="app-icon" path={item.path} umid={item.umid} {lazy} />
   <div class="app-name" title={item.display_name}>
     {item.display_name}
   </div>

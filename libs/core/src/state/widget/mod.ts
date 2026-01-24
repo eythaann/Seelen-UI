@@ -385,7 +385,9 @@ export class Widget {
     debouncedClose.cancel();
     const hwnd = await invoke(SeelenCommand.GetSelfWindowId);
     await this.webview.show();
-    await invoke(SeelenCommand.RequestFocus, { hwnd });
+    await invoke(SeelenCommand.RequestFocus, { hwnd }).catch(() => {
+      console.warn(`Failed to focus widget: ${this.decoded.label}`);
+    });
   }
 
   public hide(closeAfterInactivity?: boolean): void {

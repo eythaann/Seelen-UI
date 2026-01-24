@@ -1,8 +1,8 @@
 import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { Widget } from "@seelen-ui/lib";
 import type { PhysicalMonitor } from "@seelen-ui/lib/types";
-import { globalState } from "./state.svelte";
-import { StartDisplayMode, StartView } from "./constants";
+import { globalState } from "./mod.svelte";
+import { StartDisplayMode, StartView } from "../constants";
 
 let monitorToShow = $derived.by(() => {
   let targetMonitor: PhysicalMonitor | undefined;

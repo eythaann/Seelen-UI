@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { globalState } from "./state.svelte";
+  import { globalState } from "./state/mod.svelte";
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import { t } from "./i18n";
   import UserProfile from "./components/UserProfile.svelte";
   import UserFolder from "./components/UserFolder.svelte";
   import { path } from "@tauri-apps/api";
+  import { knownFolders } from "./state/knownFolders.svelte";
 
   $effect(() => {
     Widget.getCurrent().ready();
@@ -25,8 +26,8 @@
 
   <hr />
   <span class="user-label">{$t("folders.title")}</span>
-  {#each globalState.folders as folder (folder.type)}
-    <UserFolder {folder} />
+  {#each Object.entries(knownFolders.value) as folder (folder[0])}
+    <UserFolder type={folder[0] as any} {...folder[1]} />
   {/each}
 
   <hr />

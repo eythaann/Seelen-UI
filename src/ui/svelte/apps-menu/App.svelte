@@ -1,14 +1,37 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { t } from "./i18n";
-  import { Widget } from "@seelen-ui/lib";
+  import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
+  import type { WidgetId } from "@seelen-ui/lib/types";
   import StartMenuBody from "./components/StartMenuBody.svelte";
-  import { globalState } from "./state.svelte";
+  import { globalState } from "./state/mod.svelte";
   import { StartDisplayMode, StartView } from "./constants";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { navigateInDirection } from "./keyboard-navigation";
+  import { convertFileSrc } from "@tauri-apps/api/core";
 
   let inputElement: HTMLInputElement | undefined = $state();
+
+  // Detect and manage query prefix
+  const queryPrefix = $derived.by(() => {
+    const query = globalState.searchQuery.trim();
+    const match = query.match(/^(apps|files|web):/i);
+    return match ? match[1]?.toLowerCase() || "" : "";
+  });
+
+  function handlePrefixChange(newPrefix: string) {
+    const query = globalState.searchQuery.trim();
+    const match = query.match(/^(apps|files|web):/i);
+    const search = match ? query.slice(match[0].length).trim() : query;
+
+    if (newPrefix) {
+      globalState.searchQuery = `${newPrefix}:${search ? " " + search : ""}`;
+    } else {
+      globalState.searchQuery = search;
+    }
+
+    inputElement?.focus();
+  }
 
   function handleDocKeyDown(event: KeyboardEvent) {
     switch (event.key) {
@@ -41,6 +64,21 @@
     switch (event.key) {
       case "Enter":
         event.preventDefault();
+
+        // Check for web: prefix
+        const query = globalState.searchQuery.trim();
+        const webPrefixMatch = query.match(/^web:/i);
+
+        if (webPrefixMatch) {
+          const searchQuery = query.slice(4).trim();
+          globalState.showing = false;
+          const encodedQuery = encodeURIComponent(searchQuery);
+          invoke(SeelenCommand.OpenFile, {
+            path: `https://www.google.com/search?q=${encodedQuery}`,
+          });
+          break;
+        }
+
         // Click on preselected item or first item if none selected
         let element: HTMLElement | null = null;
 
@@ -88,6 +126,24 @@
   onMount(() => {
     Widget.getCurrent().ready();
   });
+
+  function openUserMenu() {
+    invoke(SeelenCommand.TriggerWidget, {
+      payload: { id: "@seelen/user-menu" as WidgetId },
+    });
+  }
+
+  function openAppSettings() {
+    invoke(SeelenCommand.TriggerWidget, {
+      payload: { id: "@seelen/settings" as WidgetId },
+    });
+  }
+
+  function openPowerMenu() {
+    invoke(SeelenCommand.TriggerWidget, {
+      payload: { id: "@seelen/power-menu" as WidgetId },
+    });
+  }
 </script>
 
 <svelte:window onkeydown={handleDocKeyDown} />
@@ -101,6 +157,19 @@
       placeholder="Applications"
       onkeydown={handleInputKeyDown}
     />
+
+    {#if globalState.searchQuery}
+      <select
+        data-skin="default"
+        value={queryPrefix}
+        onchange={(e) => handlePrefixChange(e.currentTarget.value)}
+      >
+        <option value="">{$t("query.all")}</option>
+        <option value="apps">{$t("query.apps")}</option>
+        <option value="files">{$t("query.files")}</option>
+        <option value="web">{$t("query.web")}</option>
+      </select>
+    {/if}
 
     <button
       data-skin="default"
@@ -121,20 +190,46 @@
   <StartMenuBody />
 
   <div class="apps-menu-footer">
-    <button
-      data-skin="transparent"
-      onclick={() => {
-        globalState.displayMode =
-          globalState.displayMode === StartDisplayMode.Normal
-            ? StartDisplayMode.Fullscreen
-            : StartDisplayMode.Normal;
-      }}
-    >
-      <Icon
-        iconName={globalState.displayMode === StartDisplayMode.Fullscreen
-          ? "IoContract"
-          : "IoExpand"}
-      />
-    </button>
+    <div class="apps-menu-footer-left">
+      <button data-skin="transparent" class="user-profile" onclick={openUserMenu}>
+        {#if globalState.user.profilePicturePath}
+          <img
+            class="user-profile-picture"
+            src={convertFileSrc(globalState.user.profilePicturePath)}
+            alt={globalState.user.name}
+          />
+        {:else}
+          <Icon class="user-profile-picture" iconName="PiFolderUser" />
+        {/if}
+
+        <span>{globalState.user.name}</span>
+      </button>
+    </div>
+
+    <div class="apps-menu-footer-right">
+      <button data-skin="transparent" onclick={openAppSettings} title="App Settings">
+        <Icon iconName="RiSettings4Fill" />
+      </button>
+
+      <button data-skin="transparent" onclick={openPowerMenu} title="Power Menu">
+        <Icon iconName="IoPower" />
+      </button>
+
+      <button
+        data-skin="transparent"
+        onclick={() => {
+          globalState.displayMode =
+            globalState.displayMode === StartDisplayMode.Normal
+              ? StartDisplayMode.Fullscreen
+              : StartDisplayMode.Normal;
+        }}
+      >
+        <Icon
+          iconName={globalState.displayMode === StartDisplayMode.Fullscreen
+            ? "IoContract"
+            : "IoExpand"}
+        />
+      </button>
+    </div>
   </div>
 </div>

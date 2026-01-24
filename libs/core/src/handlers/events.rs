@@ -54,7 +54,7 @@ slu_events_declaration! {
     SystemLanguagesChanged(Vec<SystemLanguage>) as "system::languages-changed",
 
     UserChanged(User) as "user-changed",
-    UserFolderChanged(FolderChangedArgs) as "user-folder-changed",
+    UserFolderChanged(FolderChangedArgs) as "user::known-folder-changed",
     UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
     UserAppWindowsPreviewsChanged(HashMap<isize, UserAppWindowPreview>) as "user::windows-previews-changed",
 

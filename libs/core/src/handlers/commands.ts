@@ -60,7 +60,6 @@ export enum SeelenCommand {
   SetNativeShellWallpaper = "set_native_shell_wallpaper",
   GetUser = "get_user",
   GetUserFolderContent = "get_user_folder_content",
-  SetUserFolderLimit = "set_user_folder_limit",
   GetUserAppWindows = "get_user_app_windows",
   GetUserAppWindowsPreviews = "get_user_app_windows_previews",
   GetMediaDevices = "get_media_devices",

@@ -3,13 +3,13 @@ import { mount } from "svelte";
 import App from "./App.svelte";
 import { loadTranslations } from "./i18n/index.ts";
 import { Widget } from "@seelen-ui/lib";
-import { onTriggered } from "./positioning.svelte.ts";
+import { onTriggered } from "./state/positioning.svelte.ts";
 
 import "@shared/styles/reset.css";
 import "@shared/styles/colors.css";
 import { Effect } from "@tauri-apps/api/window";
 import { debounce } from "lodash";
-import { globalState } from "./state.svelte.ts";
+import { globalState } from "./state/mod.svelte.ts";
 
 await loadTranslations();
 

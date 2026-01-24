@@ -1,4 +1,4 @@
-import { globalState } from "./state.svelte";
+import { globalState } from "./state/mod.svelte";
 
 export function navigateInDirection(direction: "up" | "down" | "left" | "right"): void {
   const allItems = Array.from(document.querySelectorAll(".app")) as HTMLElement[];

@@ -1,18 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {
-  BluetoothDevices,
-  DocumentsFolder,
-  DownloadsFolder,
-  LanguageList,
-  MusicFolder,
-  PicturesFolder,
-  RecentFolder,
-  SeelenEvent,
-  Settings,
-  subscribe,
-  UserDetails,
-  VideosFolder,
-} from "@seelen-ui/lib";
+import { BluetoothDevices, LanguageList, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
 import type { FancyToolbarSettings } from "@seelen-ui/lib/types";
 import { throttle } from "lodash";
 
@@ -85,15 +72,6 @@ export async function registerStoreEvents() {
   });
 
   LanguageList.onChange((list) => store.dispatch(RootActions.setLanguages(list.asArray())));
-
-  UserDetails.onChange((details) => store.dispatch(RootActions.setUser(details.user)));
-  RecentFolder.onChange((details) => store.dispatch(RootActions.setUserRecentFolder(details.all())));
-  DocumentsFolder.onChange((details) => store.dispatch(RootActions.setUserDocumentsFolder(details.all())));
-  DownloadsFolder.onChange((details) => store.dispatch(RootActions.setUserDownloadsFolder(details.all())));
-  PicturesFolder.onChange((details) => store.dispatch(RootActions.setUserPicturesFolder(details.all())));
-  VideosFolder.onChange((details) => store.dispatch(RootActions.setUserVideosFolder(details.all())));
-  MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
-
   BluetoothDevices.onChange((devices) => store.dispatch(RootActions.setBluetoothDevices(devices.all())));
 }
 

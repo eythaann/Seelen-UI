@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { globalState } from "../state.svelte";
+  import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
   import AppItem from "./AppItem.svelte";
   import FolderItem from "./FolderItem.svelte";
@@ -8,8 +8,11 @@
   import type { UniqueIdentifier } from "@dnd-kit/core";
   import { debounce } from "lodash";
 
+  import type { StartMenuItem } from "@seelen-ui/lib/types";
+  import type { FavFolderItem } from "../state/mod.svelte";
+
   interface Props {
-    onContextMenu: (event: MouseEvent, itemId: string) => void;
+    onContextMenu: (event: MouseEvent, item: StartMenuItem | FavFolderItem) => void;
   }
 
   let { onContextMenu }: Props = $props();
