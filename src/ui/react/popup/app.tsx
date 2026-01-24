@@ -18,8 +18,7 @@ invoke(SeelenCommand.GetPopupConfig, {
   .then(async (data) => {
     state.value = data;
     currentWidget.webview.setTitle(getOnlyText(data.title));
-    await currentWidget.webview.show();
-    await currentWidget.webview.setFocus();
+    await currentWidget.show();
   })
   .catch((err) => {
     console.error(err);

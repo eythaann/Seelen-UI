@@ -46,8 +46,7 @@ async function placeCenteredToMonitor(targetMonitor: PhysicalMonitor): Promise<v
   await widget.webview.setSize(new PhysicalSize({ width, height }));
 
   if (globalState.showing) {
-    await widget.webview.show();
-    await widget.webview.setFocus();
+    await widget.show();
   }
 }
 

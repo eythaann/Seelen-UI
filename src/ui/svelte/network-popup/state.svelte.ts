@@ -25,24 +25,14 @@ await radios.init();
 let isScanning = $state(false);
 let selectedSsid = $state<string | null>(null);
 
-widget.onTrigger(async () => {
-  // Start scanning when popup is triggered
-  await invoke(SeelenCommand.WlanStartScanning);
-  isScanning = true;
-  webview.show();
-});
-
 webview.onFocusChanged(async (e) => {
-  if (!e.payload) {
-    // Stop scanning when popup loses focus
-    if (isScanning) {
-      await invoke(SeelenCommand.WlanStopScanning);
-      isScanning = false;
-    }
-
-    // Reset selection state
+  if (e.payload) {
+    await invoke(SeelenCommand.WlanStartScanning);
+    isScanning = true;
+  } else {
+    await invoke(SeelenCommand.WlanStopScanning);
+    isScanning = false;
     selectedSsid = null;
-    webview.hide();
   }
 });
 

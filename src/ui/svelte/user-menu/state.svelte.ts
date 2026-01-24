@@ -74,16 +74,9 @@ await Promise.all([
 
 // Local state
 let openCategory = $state<FolderType | null>(null);
-
-// Handle widget visibility
-widget.onTrigger(() => {
-  webview.show();
-});
-
 webview.onFocusChanged((e) => {
   if (!e.payload) {
     openCategory = null;
-    webview.hide();
   }
 });
 

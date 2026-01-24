@@ -1,10 +1,7 @@
-import { Settings, Widget } from "@seelen-ui/lib";
+import { Settings } from "@seelen-ui/lib";
 import type { Settings as SettingsType } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import moment from "moment";
-
-let widget = Widget.getCurrent();
-let webview = widget.webview;
 
 let settings = $state<SettingsType>(await Settings.getAsync());
 Settings.onChange((s) => (settings = s));
@@ -45,16 +42,6 @@ $effect.root(() => {
     date = date.locale(language);
     selectedDate = selectedDate.locale(language);
   });
-});
-
-widget.onTrigger(() => {
-  webview.show();
-});
-
-webview.onFocusChanged((e) => {
-  if (!e.payload) {
-    webview.hide();
-  }
 });
 
 class State {

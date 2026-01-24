@@ -215,14 +215,8 @@ export class Widget {
   private async applyPopupPreset(): Promise<void> {
     await Promise.all([...this.applyInvisiblePreset()]);
 
-    // auto close after 1 minute when not in use to save resources
-    const closeOnTimeout = debounce(() => {
-      this.webview.close();
-    }, 60_000);
-
     const hideWebview = debounce(() => {
-      this.webview.hide();
-      closeOnTimeout();
+      this.hide(true);
     }, 100);
 
     this.webview.onFocusChanged(({ payload: focused }) => {
@@ -257,8 +251,7 @@ export class Widget {
         });
       }
 
-      await this.webview.show();
-      await this.webview.setFocus();
+      await this.show();
     });
   }
 
@@ -361,7 +354,7 @@ export class Widget {
     await this.autoSizer?.execute();
 
     if (this.initOptions.show ?? !this.def.lazy) {
-      await this.webview.show();
+      await this.show();
     }
 
     // this will mark the widget as ready, and send pending trigger event if exists
@@ -387,7 +380,25 @@ export class Widget {
       },
     });
   }
+
+  public async show(): Promise<void> {
+    debouncedClose.cancel();
+    const hwnd = await invoke(SeelenCommand.GetSelfWindowId);
+    await this.webview.show();
+    await invoke(SeelenCommand.RequestFocus, { hwnd });
+  }
+
+  public hide(closeAfterInactivity?: boolean): void {
+    Widget.self.webview.hide();
+    if (closeAfterInactivity) {
+      debouncedClose();
+    }
+  }
 }
+
+const debouncedClose = debounce(() => {
+  Widget.self.webview.hide();
+}, 30_000);
 
 type ExtendedGlobalThis = typeof globalThis & {
   __SLU_WIDGET?: IWidget;

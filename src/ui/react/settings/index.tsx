@@ -17,13 +17,14 @@ import "@shared/styles/RichText.css";
 
 const { webview } = Widget.self;
 
+await Widget.self.init();
+
 webview.setDecorations(false);
 webview.setSizeConstraints({ minWidth: 600, minHeight: 400 });
 await webview.setSize(new LogicalSize(800, 500));
 await webview.center();
 
-await Widget.self.init();
-webview.show();
+await Widget.self.ready();
 
 Widget.self.onTrigger(() => {
   webview.unminimize();

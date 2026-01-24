@@ -9453,6 +9453,7 @@ dependencies = [
  "arc-swap",
  "crossbeam-channel",
  "num_enum",
+ "serde",
  "thiserror 2.0.17",
  "windows 0.60.0",
 ]

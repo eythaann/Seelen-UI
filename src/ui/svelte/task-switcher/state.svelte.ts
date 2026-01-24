@@ -84,9 +84,9 @@ export const globalState = new State();
 $effect.root(() => {
   $effect(() => {
     if (showing) {
-      widget.webview.show().then(() => widget.webview.setFocus());
+      widget.show();
     } else {
-      widget.webview.hide();
+      widget.hide();
     }
   });
 });
@@ -124,13 +124,25 @@ widget.onTrigger((payload) => {
 });
 
 widget.webview.onFocusChanged(({ payload }) => {
-  if (!payload) {
+  if (payload) {
+    invoke(SeelenCommand.GetKeyState, { key: "Alt" }).then((isPressing) => {
+      if (!isPressing) {
+        window.dispatchEvent(new KeyboardEvent("keyup", { key: "Alt" }));
+      }
+    });
+  } else {
     showing = false;
   }
 });
 
+window.onkeydown = (e) => {
+  if (e.key === "Escape") {
+    showing = false;
+  }
+};
+
 window.onkeyup = (e) => {
-  if (e.key === "Alt" && selectedWindow && autoConfirm) {
+  if (e.key === "Alt" && showing && selectedWindow && autoConfirm) {
     showing = false;
     invoke(SeelenCommand.WegToggleWindowState, {
       hwnd: selectedWindow,

@@ -116,6 +116,7 @@ slu_commands_declaration! {
 
     GetFocusedApp = get_focused_app() -> FocusedApp,
     GetMousePosition = get_mouse_position() -> [i32; 2],
+    GetKeyState = get_key_state(key: String) -> bool,
 
     GetUserEnvs = get_user_envs() -> HashMap<String, String>,
     ShowStartMenu = show_start_menu(),

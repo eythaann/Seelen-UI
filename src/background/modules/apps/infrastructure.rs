@@ -47,6 +47,20 @@ pub fn get_mouse_position() -> [i32; 2] {
 }
 
 #[tauri::command(async)]
+pub fn get_key_state(key: win_hotkeys::VKey) -> bool {
+    use win_hotkeys::state::KeyboardState;
+    use win_hotkeys::VKey;
+
+    if key == VKey::Menu {
+        return KeyboardState::async_is_key_down(VKey::Menu.to_vk_code())
+            || KeyboardState::async_is_key_down(VKey::LMenu.to_vk_code())
+            || KeyboardState::async_is_key_down(VKey::RMenu.to_vk_code());
+    }
+
+    KeyboardState::async_is_key_down(key.to_vk_code())
+}
+
+#[tauri::command(async)]
 pub fn get_user_app_windows() -> Vec<UserAppWindow> {
     get_apps_manager().interactable_windows.to_vec()
 }

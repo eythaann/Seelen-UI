@@ -86,7 +86,7 @@ urlencoding = "2.1.3"
 uuid = "1.19.0"
 walkdir = "2.5.0"
 widestring = "1.2.1"
-win-hotkeys = { git = "https://github.com/Seelen-Inc/windows-keyboard-hook.git" }
+win-hotkeys = { git = "https://github.com/Seelen-Inc/windows-keyboard-hook.git", features = ["serde"] }
 win-screenshot = "4.0.14"
 windows = "0.59.0"
 windows-core = "0.59.0"

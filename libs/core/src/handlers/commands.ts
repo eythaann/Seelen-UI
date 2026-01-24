@@ -16,6 +16,7 @@ export enum SeelenCommand {
   HasFixedRuntime = "has_fixed_runtime",
   GetFocusedApp = "get_focused_app",
   GetMousePosition = "get_mouse_position",
+  GetKeyState = "get_key_state",
   GetUserEnvs = "get_user_envs",
   ShowStartMenu = "show_start_menu",
   GetIcon = "get_icon",
