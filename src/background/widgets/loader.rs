@@ -9,6 +9,14 @@ use crate::{
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview, WidgetWebviewLabel},
 };
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum InstanceType {
+    /// Instances defined in user settings
+    Static,
+    /// Instances created dynamically during runtime
+    Runtime,
+}
+
 pub struct WidgetContainer {
     pub definition: Arc<Widget>,
     pub instances: SyncHashMap<WidgetWebviewLabel, WidgetInstance>,
@@ -20,12 +28,17 @@ impl WidgetContainer {
 
         match widget.instances {
             WidgetInstanceMode::Single => {
-                let instance = WidgetInstance::create(&widget, None, None);
+                let instance = WidgetInstance::create(&widget, None, None, InstanceType::Static);
                 instances.upsert(instance.label.clone(), instance);
             }
             WidgetInstanceMode::Multiple => {
                 for replica_id in FULL_STATE.load().get_widget_instances_ids(&widget.id) {
-                    let instance = WidgetInstance::create(&widget, None, Some(&replica_id));
+                    let instance = WidgetInstance::create(
+                        &widget,
+                        None,
+                        Some(&replica_id),
+                        InstanceType::Static,
+                    );
                     instances.upsert(instance.label.clone(), instance);
                 }
             }
@@ -49,20 +62,37 @@ impl WidgetContainer {
             instance.start_webview(&self.definition);
         });
     }
+
+    pub fn create_runtime_instance(&self, instance_id: &Uuid) {
+        let instance = WidgetInstance::create(
+            &self.definition,
+            None,
+            Some(instance_id),
+            InstanceType::Runtime,
+        );
+        self.instances.upsert(instance.label.clone(), instance);
+    }
 }
 
 pub struct WidgetInstance {
     pub label: WidgetWebviewLabel,
+    pub instance_type: InstanceType,
     window: Option<WidgetWebview>,
     _status: WidgetStatus,
 }
 
 impl WidgetInstance {
-    fn create(widget: &Widget, monitor_id: Option<&str>, instance_id: Option<&Uuid>) -> Self {
+    fn create(
+        widget: &Widget,
+        monitor_id: Option<&str>,
+        instance_id: Option<&Uuid>,
+        instance_type: InstanceType,
+    ) -> Self {
         let label = WidgetWebviewLabel::new(&widget.id, monitor_id, instance_id);
-        log::info!("Registering widget {label}");
+        log::info!("Starting widget instance: {label}");
         Self {
             label,
+            instance_type,
             window: None,
             _status: WidgetStatus::Pending,
         }
@@ -88,13 +118,23 @@ impl WidgetInstance {
             match WidgetWebview::create(definition, &self.label) {
                 Ok(window) => {
                     let label = self.label.clone();
+                    let instance_type = self.instance_type;
                     window.0.on_window_event(move |event| {
                         if let tauri::WindowEvent::Destroyed = event {
                             WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
-                                c.instances.get(&label, |w| {
-                                    w.window = None;
-                                    w.set_status(WidgetStatus::Pending);
-                                });
+                                match instance_type {
+                                    InstanceType::Runtime => {
+                                        // Remove runtime instances on destroy
+                                        c.instances.remove(&label);
+                                    }
+                                    InstanceType::Static => {
+                                        // Reset static instances to pending state
+                                        c.instances.get(&label, |w| {
+                                            w.window = None;
+                                            w.set_status(WidgetStatus::Pending);
+                                        });
+                                    }
+                                }
                             });
                         }
                     });

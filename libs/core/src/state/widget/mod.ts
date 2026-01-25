@@ -18,7 +18,7 @@ import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";
 import { WidgetAutoSizer } from "./sizing.ts";
-import { adjustPostionByPlacement as adjustPositionByPlacement } from "./positioning.ts";
+import { adjustPositionByPlacement } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
 
 export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
@@ -195,25 +195,17 @@ export class Widget {
 
   /** Will apply the recommended settings for a desktop widget */
   private async applyDesktopPreset(): Promise<void> {
-    await Promise.all([
-      ...this.applyInvisiblePreset(),
-      // Desktop widgets are always on bottom
-      this.webview.setAlwaysOnBottom(true),
-    ]);
+    await Promise.all([...this.applyInvisiblePreset(), this.webview.setAlwaysOnBottom(true)]);
   }
 
   /** Will apply the recommended settings for an overlay widget */
   private async applyOverlayPreset(): Promise<void> {
-    await Promise.all([
-      ...this.applyInvisiblePreset(),
-      // Overlay widgets are always on top
-      this.webview.setAlwaysOnTop(true),
-    ]);
+    await Promise.all([...this.applyInvisiblePreset(), this.webview.setAlwaysOnTop(true)]);
   }
 
   /** Will apply the recommended settings for a popup widget */
   private async applyPopupPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset()]);
+    await Promise.all([...this.applyInvisiblePreset(), this.webview.setAlwaysOnTop(true)]);
 
     const hideWebview = debounce(() => {
       this.hide(true);
@@ -235,8 +227,8 @@ export class Widget {
         const { width, height } = await this.webview.outerSize();
         const adjusted = await adjustPositionByPlacement({
           frame: {
-            x: desiredPosition[0],
-            y: desiredPosition[1],
+            x: desiredPosition.x,
+            y: desiredPosition.y,
             width,
             height,
           },
@@ -311,6 +303,16 @@ export class Widget {
     this.runtimeState.initialized = true;
     this.initOptions = options;
 
+    if (options.autoSizeByContent) {
+      this.autoSizer = new WidgetAutoSizer(this.webview, options.autoSizeByContent);
+      // fix for cutted popups, ensure correct size on trigger.
+      this.onTrigger(() => {
+        this.autoSizer?.execute();
+      });
+    } else if (options.saveAndRestoreLastRect ?? this.def.preset === WidgetPreset.Desktop) {
+      await this.persistPositionAndSize();
+    }
+
     switch (this.def.preset) {
       case WidgetPreset.None:
         break;
@@ -326,12 +328,6 @@ export class Widget {
     }
 
     await startThemingTool();
-
-    if (options.autoSizeByContent) {
-      this.autoSizer = new WidgetAutoSizer(this.webview, options.autoSizeByContent);
-    } else if (options.saveAndRestoreLastRect ?? this.def.preset === WidgetPreset.Desktop) {
-      await this.persistPositionAndSize();
-    }
   }
 
   /**
@@ -363,8 +359,6 @@ export class Widget {
 
   public onTrigger(cb: (args: WidgetTriggerPayload) => void): void {
     this.webview.listen<WidgetTriggerPayload>(SeelenEvent.WidgetTriggered, ({ payload }) => {
-      // fix for cutted popups, ensure correct size on trigger.
-      // await this.autoSizer?.execute();
       cb(payload);
     });
   }

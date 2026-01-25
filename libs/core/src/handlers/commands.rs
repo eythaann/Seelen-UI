@@ -1,7 +1,8 @@
 #[cfg(test)]
 use crate::{
     rect::Rect, resource::*, state::by_monitor::MonitorConfiguration,
-    state::by_wallpaper::WallpaperInstanceSettings, state::*, system_state::*,
+    state::by_wallpaper::WallpaperInstanceSettings, state::context_menu::*, state::*,
+    system_state::*,
 };
 #[cfg(test)]
 use std::{collections::HashMap, path::PathBuf};
@@ -168,6 +169,7 @@ slu_commands_declaration! {
 
     // Widgets
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
+    TriggerContextMenu = trigger_context_menu(menu: ContextMenu, forward_to: Option<String>),
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
     SetSelfPosition = set_self_position(rect: Rect),

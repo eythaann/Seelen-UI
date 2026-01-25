@@ -81,44 +81,6 @@
       backdrop-filter: brightness(3);
     }
   }
-
-  &.ft-bar-item-active {
-    color: var(--system-accent-color);
-  }
-}
-
-.ft-bar-item-context-menu-container,
-.tb-context-menu-container {
-  min-width: 160px;
-
-  .bg-layer-1 {
-    background-color: var(--color-gray-100);
-    border-radius: 10px;
-  }
-
-  .tb-context-menu {
-    max-height: 100vh;
-    overflow-y: auto;
-
-    > li {
-      min-height: min-content;
-    }
-
-    .tb-context-menu-module-item {
-      width: 240px;
-      display: grid;
-      grid-template-columns: 1rem 1rem 1fr;
-      align-items: center;
-      gap: 6px;
-
-      .tb-context-menu-module-item-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: 1.4em;
-      }
-    }
-  }
 }
 
 .ft-bar-item-content {

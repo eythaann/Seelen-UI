@@ -3,31 +3,28 @@ import { CSS } from "@dnd-kit/utilities";
 import { useComputed } from "@preact/signals";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { type WorkspaceToolbarItem, WorkspaceToolbarItemMode } from "@seelen-ui/lib/types";
-import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
-import { useThrottle, useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
+import { useThrottle } from "libs/ui/react/utils/hooks.ts";
 import { cx } from "libs/ui/react/utils/styling.ts";
-import { Menu, Tooltip } from "antd";
-import { type HTMLAttributes, useState } from "react";
-import { useTranslation } from "react-i18next";
-
-import { CommonItemContextMenu } from "../item/infra/ContextMenu.tsx";
-import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
+import { Tooltip } from "antd";
+import type { HTMLAttributes } from "react";
 
 import { $toolbar_state } from "../shared/state/items.ts";
 import { $virtual_desktop } from "../shared/state/system.ts";
+import { useItemContextMenu } from "../item/infra/ContextMenu.tsx";
 
 interface Props {
   module: WorkspaceToolbarItem;
-  onContextMenu?: (e: MouseEvent) => void;
 }
 
-function InnerWorkspacesModule({ module, ...rest }: Props) {
+export function WorkspacesModule({ module }: Props) {
   const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: module.id,
     disabled: isReorderDisabled.value,
     animateLayoutChanges: () => false,
   });
+
+  const { onContextMenu } = useItemContextMenu(module.id);
 
   const workspaces = $virtual_desktop.value?.workspaces || [];
   const activeWorkspace = $virtual_desktop.value?.active_workspace;
@@ -45,11 +42,6 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
       opacity: isDragging ? 0.3 : 1,
     },
   };
-
-  function onContextMenu(e: MouseEvent) {
-    rest.onContextMenu?.(e);
-    e.stopPropagation();
-  }
 
   const onWheel = useThrottle(
     (isUp: boolean) => {
@@ -69,7 +61,10 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
       <div
         {...commonProps}
         className="ft-bar-item"
-        onContextMenu={onContextMenu}
+        onContextMenu={(e) => {
+          e.stopPropagation();
+          onContextMenu();
+        }}
         onWheel={(e: WheelEvent) => {
           e.stopPropagation();
           onWheel(e.deltaY < 0);
@@ -94,7 +89,10 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
     <div
       {...commonProps}
       className="ft-bar-group"
-      onContextMenu={onContextMenu}
+      onContextMenu={(e) => {
+        e.stopPropagation();
+        onContextMenu();
+      }}
       onWheel={(e: WheelEvent) => {
         e.stopPropagation();
         onWheel(e.deltaY < 0);
@@ -113,7 +111,6 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
               style={module.style}
               className={cx("ft-bar-item", {
                 "ft-bar-item-clickable": true,
-                "ft-bar-item-active": w.id === activeWorkspace,
               })}
               onClick={() => invoke(SeelenCommand.SwitchWorkspace, { workspaceId: w.id })}
             >
@@ -127,40 +124,5 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
         );
       })}
     </div>
-  );
-}
-
-export function WorkspacesModule({ module }: Props) {
-  const [openContextMenu, setOpenContextMenu] = useState(false);
-
-  const { t } = useTranslation();
-
-  useWindowFocusChange((focused) => {
-    if (!focused) {
-      setOpenContextMenu(false);
-    }
-  });
-
-  if (!$virtual_desktop.value) {
-    return null;
-  }
-
-  return (
-    <AnimatedDropdown
-      animationDescription={{
-        openAnimationName: "ft-bar-item-context-menu-open",
-        closeAnimationName: "ft-bar-item-context-menu-close",
-      }}
-      open={openContextMenu}
-      onOpenChange={setOpenContextMenu}
-      trigger={["contextMenu"]}
-      popupRender={() => (
-        <BackgroundByLayersV2 className="ft-bar-item-context-menu-container">
-          <Menu className="ft-bar-item-context-menu" items={CommonItemContextMenu(t, module)} />
-        </BackgroundByLayersV2>
-      )}
-    >
-      <InnerWorkspacesModule module={module} />
-    </AnimatedDropdown>
   );
 }

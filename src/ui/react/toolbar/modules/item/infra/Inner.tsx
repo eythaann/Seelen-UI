@@ -10,12 +10,11 @@ import { EvaluateAction } from "../app/actionEvaluator.ts";
 import { useItemScope, useRemoteData } from "../app/hooks/index.ts";
 import { $toolbar_state } from "../../shared/state/items.ts";
 import { SanboxedComponent } from "./EvaluatedComponents.tsx";
+import { useItemContextMenu } from "./ContextMenu.tsx";
 
 export interface InnerItemProps extends HTMLAttributes<HTMLDivElement> {
   module: Omit<ToolbarItem, "type">;
   extraVars?: Record<string, any>;
-  active?: boolean;
-  clickable?: boolean;
   onClick?: (e: MouseEvent) => void;
 }
 
@@ -23,14 +22,14 @@ export function InnerItem(props: InnerItemProps) {
   const {
     extraVars = {},
     module,
-    active,
     onClick: onClickProp,
     children,
-    clickable = true,
     ...rest
   } = props;
 
   const { template, tooltip, onClickV2, style, id, badge, remoteData = {} } = module;
+
+  const { onContextMenu } = useItemContextMenu(id);
 
   const fetchedData = useRemoteData(remoteData);
   const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
@@ -67,9 +66,7 @@ export function InnerItem(props: InnerItemProps) {
           opacity: isDragging ? 0.3 : 1,
         }}
         className={cx("ft-bar-item", {
-          // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
-          "ft-bar-item-clickable": clickable || onClickV2,
-          "ft-bar-item-active": active,
+          "ft-bar-item-clickable": onClickProp || onClickV2,
         })}
         onClick={(e: MouseEvent) => {
           onClickProp?.(e);
@@ -79,7 +76,7 @@ export function InnerItem(props: InnerItemProps) {
         }}
         onContextMenu={(e: MouseEvent) => {
           e.stopPropagation();
-          (rest as any).onContextMenu?.(e);
+          onContextMenu();
         }}
       >
         <div className="ft-bar-item-content">

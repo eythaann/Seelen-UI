@@ -17,19 +17,22 @@ use std::{
 use seelen_core::{
     handlers::SeelenEvent,
     resource::ResourceId,
-    state::{WidgetStatus, WidgetTriggerPayload},
+    state::{context_menu::ContextMenu, WidgetInstanceMode, WidgetStatus, WidgetTriggerPayload},
     Rect,
 };
 use tauri::Emitter;
-use windows::Win32::UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS;
 
 use crate::{
     app::get_app_handle,
     error::Result,
+    resources::RESOURCES,
     state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap},
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebviewLabel},
-    windows_api::{input::Keyboard, WindowsApi},
+    windows_api::{
+        input::{Keyboard, Mouse},
+        WindowsApi,
+    },
 };
 
 static PENDING_TRIGGERS: LazyLock<SyncHashMap<WidgetWebviewLabel, WidgetTriggerPayload>> =
@@ -50,11 +53,17 @@ pub fn set_current_widget_status(
 }
 
 #[tauri::command(async)]
-pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
+pub fn trigger_widget(mut payload: WidgetTriggerPayload) -> Result<()> {
     let state = FULL_STATE.load();
     if !state.is_widget_enabled(&payload.id) {
         return Err("Can't trigger a disabled widget".into());
     }
+
+    let widget = RESOURCES
+        .widgets
+        .get(&payload.id)
+        .ok_or("Widget not found")?
+        .clone();
 
     let monitor_id = payload.monitor_id.as_ref().map(|id| id.to_string());
     let label = WidgetWebviewLabel::new(
@@ -63,8 +72,32 @@ pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
         payload.instance_id.as_ref(),
     );
 
+    match widget.instances {
+        WidgetInstanceMode::Single => {}
+        WidgetInstanceMode::ReplicaByMonitor => {
+            if payload.monitor_id.is_none() {
+                return Err("Monitor id is required for replica by monitor widgets".into());
+            }
+        }
+        WidgetInstanceMode::Multiple => {
+            let Some(instance_id) = &payload.instance_id else {
+                return Err("Instance id is required for multiple instance widgets".into());
+            };
+
+            WIDGET_MANAGER.groups.get(&payload.id, |container| {
+                if !container.instances.contains_key(&label) {
+                    container.create_runtime_instance(instance_id);
+                }
+            });
+        }
+    }
+
+    if payload.desired_position.is_none() {
+        payload.desired_position = Some(Mouse::get_cursor_pos()?);
+    }
+
     if !WIDGET_MANAGER.is_ready(&label) {
-        log::warn!("Trying to trigger widget that is not ready: {label}");
+        log::warn!("Trigger postponed, because widget instance is not ready: {label}");
         PENDING_TRIGGERS.upsert(label.clone(), payload);
 
         WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
@@ -78,6 +111,26 @@ pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
 }
 
 #[tauri::command(async)]
+pub fn trigger_context_menu(
+    webview: tauri::WebviewWindow,
+    menu: ContextMenu,
+    forward_to: Option<String>,
+) -> Result<()> {
+    let owner = WidgetWebviewLabel::try_from_raw(webview.label())?;
+
+    let mut payload = WidgetTriggerPayload::new("@seelen/context-menu".into());
+    payload.instance_id = Some(menu.identifier);
+
+    payload.add_custom_arg("menu", serde_json::to_value(menu)?);
+    payload.add_custom_arg("owner", serde_json::to_value(&owner.raw)?);
+    payload.add_custom_arg(
+        "forwardTo",
+        serde_json::to_value(forward_to.unwrap_or(owner.raw))?,
+    );
+    trigger_widget(payload)
+}
+
+#[tauri::command(async)]
 pub fn get_self_window_handle(webview: tauri::WebviewWindow) -> Result<isize> {
     Ok(webview.hwnd()?.0 as isize)
 }
@@ -85,6 +138,9 @@ pub fn get_self_window_handle(webview: tauri::WebviewWindow) -> Result<isize> {
 #[tauri::command(async)]
 pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()> {
     use windows::Win32::Foundation::{HWND, RECT};
+    use windows::Win32::Graphics::Gdi::*;
+    use windows::Win32::UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS;
+
     let hwnd = HWND(webview.hwnd()?.0);
     let rect = RECT {
         left: rect.left,
@@ -92,9 +148,19 @@ pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()
         right: rect.right,
         bottom: rect.bottom,
     };
+
     // pre set position for resize in case of multiples dpi
     WindowsApi::move_window(hwnd, &rect)?;
     WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
+    // ensure child windows are redrawn
+    unsafe {
+        let _ = RedrawWindow(
+            Some(hwnd),
+            None,
+            None,
+            RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_FRAME | RDW_ERASE,
+        );
+    }
     Ok(())
 }
 

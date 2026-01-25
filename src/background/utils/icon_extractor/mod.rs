@@ -446,10 +446,7 @@ fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> Resu
     }
 
     // try get the icon directly from the file
-    let icon = get_icon_from_file(origin).inspect_err(|_| {
-        log::trace!("Icon not found for {}", origin.display());
-    })?;
-
+    let icon = get_icon_from_file(origin)?;
     gen_icon.is_aproximately_square = is_aproximately_a_square(&icon);
 
     if is_exe_file || is_lnk_file {

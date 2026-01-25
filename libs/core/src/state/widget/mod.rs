@@ -1,3 +1,4 @@
+pub mod context_menu;
 pub mod declaration;
 
 use std::{collections::HashMap, path::Path};
@@ -13,6 +14,7 @@ use crate::{
     state::Plugin,
     system_state::MonitorId,
     utils::{search_resource_entrypoint, TsUnknown},
+    Point,
 };
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
@@ -164,16 +166,6 @@ pub enum WidgetPreset {
     Popup,
 }
 
-impl Widget {
-    pub fn instance_mode(&self) -> WidgetInstanceMode {
-        if self.preset == WidgetPreset::Popup {
-            WidgetInstanceMode::Single
-        } else {
-            self.instances
-        }
-    }
-}
-
 /// Arguments that could be passed on the trigger widget function, widgets decides if use it or not.
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
@@ -183,7 +175,7 @@ pub struct WidgetTriggerPayload {
     pub monitor_id: Option<MonitorId>,
     pub instance_id: Option<uuid::Uuid>,
     /// Desired position to show the widget
-    pub desired_position: Option<(i32, i32)>,
+    pub desired_position: Option<Point>,
     /// This will be used to align the widget at the desired position
     /// - start will set the widget at the left of point,
     /// - center will set the widget at the center of point,

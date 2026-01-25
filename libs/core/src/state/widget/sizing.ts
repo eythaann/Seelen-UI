@@ -1,12 +1,17 @@
 import type { WebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { LogicalSize } from "@tauri-apps/api/dpi";
+import { invoke } from "../../handlers/mod.ts";
+import { SeelenCommand } from "../../handlers/commands.ts";
+import { fitIntoMonitor } from "./positioning.ts";
 
 export interface AutoSizeOptions {
   onResize?: () => void;
 }
 
 export class WidgetAutoSizer {
-  constructor(private webview: WebviewWindow, private element: HTMLElement) {
+  constructor(
+    private webview: WebviewWindow,
+    private element: HTMLElement,
+  ) {
     this.execute = this.execute.bind(this);
     this.setup();
   }
@@ -15,37 +20,42 @@ export class WidgetAutoSizer {
     // Disable resizing by the user
     this.webview.setResizable(false);
 
-    // Update size when content changes
-    const observer = new MutationObserver(this.execute);
+    const observer = new ResizeObserver(this.execute);
     observer.observe(this.element, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      characterData: true,
+      box: "border-box",
     });
 
-    // Cleanup function
     return () => {
       observer.disconnect();
     };
   }
 
   async execute(): Promise<void> {
-    const contentWidth = this.element.scrollWidth;
-    const contentHeight = this.element.scrollHeight;
+    const newWidth = Math.ceil(this.element.scrollWidth * globalThis.window.devicePixelRatio);
+    const newHeight = Math.ceil(this.element.scrollHeight * globalThis.window.devicePixelRatio);
 
-    if (contentWidth < 1 || contentHeight < 1) {
+    if (newWidth < 1 || newHeight < 1) {
       return;
     }
 
-    const { width: physicalWidth, height: physicalHeight } = await this.webview.outerSize();
-    const logicalWidth = physicalWidth * globalThis.window.devicePixelRatio;
-    const logicalHeight = physicalHeight * globalThis.window.devicePixelRatio;
+    const [{ x, y }, { width, height }] = await Promise.all([
+      this.webview.outerPosition(),
+      this.webview.outerSize(),
+    ]);
 
     // Only update if the difference is more than 1px (avoid infinite loops from decimal differences)
-    if (Math.abs(contentWidth - logicalWidth) > 1 || Math.abs(contentHeight - logicalHeight) > 1) {
-      const size = new LogicalSize(contentWidth, contentHeight);
-      await this.webview.setSize(size);
+    if (Math.abs(newWidth - width) > 1 || Math.abs(newHeight - height) > 1) {
+      console.trace(`Auto resize from ${width}x${height} to ${newWidth}x${newHeight}`);
+
+      const frame = await fitIntoMonitor({ x, y, width: newWidth, height: newHeight });
+      await invoke(SeelenCommand.SetSelfPosition, {
+        rect: {
+          left: frame.x,
+          top: frame.y,
+          right: frame.x + frame.width,
+          bottom: frame.y + frame.height,
+        },
+      });
     }
   }
 }
