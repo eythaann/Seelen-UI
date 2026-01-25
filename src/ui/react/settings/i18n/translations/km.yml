@@ -1,16 +1,6 @@
 action:
   confirm: តើអ្នកប្រាកដទេ?
   confirm_body: សកម្មភាពនេះមិនអាចធ្វើវិញបានទេ។
-app_launcher:
-  enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
-  launch_on:
-    mouse_over: កណ្ដុរលើ
-    primary: បឋមសិក្សា
-  monitor: ម៉ូនីទ័របង្ហាញ
-  runners:
-    cmd: ការបង្គាប់
-    explorer: ការរត់
-    label: រត់តមនាង
 apps_configurations:
   app:
     bindings: ការចង (ចំណាំជម្រើសទាំងពីរត្រូវបានទាមទារ)
@@ -86,7 +76,6 @@ devtools:
   install_folder: ថតឯកសារដំឡើង
   load: ផ្ទុក
   settings_file: ឯកសារការកំណត់
-  simulate_fullscreen: ក្លែងធ្វើព្រឹត្តិការណ៍ពេញអេក្រង់
 extras:
   clear_icons: សម្អាតឃ្លាំងសម្ងាត់ប្រព័ន្ធ
   clear_icons_tooltip: >-
@@ -95,6 +84,10 @@ extras:
   links: តំណភ្ជាប់ផ្លូវការ
   relaunch: បើកដំណើរការឡើងវិញ
   version: កំណែ
+  version_fixed: >-
+    កំណែកម្មវិធី និង WebView2 Runtime ត្រូវបានជួសជុល។
+    នេះមានន័យថាកម្មវិធីនឹងមិនទទួលបានការអាប់ដេតទេ ហើយ WebView2 Runtime
+    នឹងមិនត្រូវបានអាប់ដេតដោយស្វ័យប្រវត្តិជាមួយនឹងការអាប់ដេតវីនដូទេ។
 general:
   accent_color: ពណ៌សង្កត់សំឡេង
   date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ
@@ -102,6 +95,7 @@ general:
     available: កញ្ចប់រូបតំណាងដែលមាន
     selected: កញ្ចប់រូបតំណាងសកម្ម
   language: ភាសា
+  monday: ថ្ងៃច័ន្ទ
   performance_mode:
     on_battery: នៅលើថ្ម
     on_energy_saver: នៅលើអ្នកសន្សំថាមពល
@@ -110,7 +104,10 @@ general:
       extreme: ខ្លាមងបមផុត
       minimal: ដេលអឹមតីម
     plugged: ដោតឬសាក
+  saturday: ថ្ងៃសៅរ៍
+  start_of_week: ការចាប់ផ្តើមនៃសប្តាហ៍
   startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
+  sunday: ថ្ងៃអាទិត្យ
   theme:
     available: ស្បែកដែលអាចប្រើបាន
     selected: ស្បែកសកម្ម
@@ -151,18 +148,26 @@ reset_all_to_default: កំណត់ឡើងវិញទាំងអស់ទ�
 reset_to_default: កំណត់ឡើងវិញទៅតម្លៃលំនាំដើម
 resources:
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
+  corrupted_wallpaper: បរាជ័យក្នុងការទាញយករូបភាពតូច - ទ្រង់ទ្រាយវីដេអូខូច ឬមិនគាំទ្រ
   delete: លុបធនធាន
   discover: ស្វែងយល់ពីធនធានបន្ថែម
   has_update: ការធ្វើបច្ចុប្បន្នភាពមាន
+  high_impact: ឥទ្ធិពលខ្ពស់លើការអនុវត្ត
   import_wallpapers: នាំចូលផ្ទាំងរូបភាពក្នុងស្រុក
   open_folder: បើកថតធនធាន
   outdated: >-
     ធនធាននេះត្រូវបានរចនាឡើងសម្រាប់កំណែចាស់របស់ Seeen UI
     ហើយប្រហែលជាមិនដំណើរការត្រឹមត្រូវទេ។
+  see_on_website: សូមមើលនៅលើគេហទំព័រ
+review_request:
+  not_now: មិនមែនឥឡូវនេះទេ។
+  sure: ប្រាកដណាស់!
+  title: រីករាយជាមួយ Seelen UI?
 save: រក្សាទុក
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
 see_more: មើលច្រើនទៀត
 shortcuts:
+  duplicate_error: ផ្លូវកាត់នេះត្រូវបានចម្លង
   enable: បើកដំណើរការប្រព័ន្ធផ្លូវកាត់ដែលភ្ជាប់មកជាមួយ
   enable_tooltip: >-
     បិទប្រសិនបើអ្នកនឹងអនុវត្តប្រព័ន្ធផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើម៉ាស៊ីនភ្ញៀវយូណេយូយូ
@@ -206,7 +211,6 @@ shortcuts:
     switch_to_previous_workspace: ប្តូរទៅកន្លែងធ្វើការមុន
     switch_workspace: ប្តូរទៅកន្លែងធ្វើការ {{0}}
     toggle_float: បិទបើករបៀបអណ្តែតបង្អួច
-    toggle_launcher: បិទបើកដំណើរការ
     toggle_monocle: បិទបើករបៀបម៉ូនីកឃែរ
   readonly_tooltip: នេះគឺជាផ្លូវកាត់ដែលបានតែអាន
   reset: កំណត់ឡើងវិញនូវលំនាំដើម
@@ -215,14 +219,6 @@ sides:
   left: ឆ្វេង
   right: ត្រូវហើយ។
   top: កំពូល
-start:
-  message: >-
-    សូមស្វាគមន៍មកកាន់ Seelen UI
-    ដែលជាបរិស្ថានផ្ទៃតុចុងក្រោយដែលមានកម្មវិធីគ្រប់គ្រងបង្អួចដាក់បញ្ចូល
-    ដើម្បីបង្កើនបទពិសោធន៍ Windows របស់អ្នក! ស្វែងរកយុគសម័យថ្មីនៃប្រសិទ្ធភាព
-    និងកិច្ចការច្រើនជាមួយនឹងចំណុចប្រទាក់វិចារណញាណរបស់យើង និងមុខងារកម្រិតខ្ពស់។
-  message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
-  title: សូមស្វាគមន៍!
 toolbar:
   auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
   delay_to_hide: ពន្យារពេលដើម្បីលាក់
@@ -243,23 +239,39 @@ update:
 wall:
   backgrounds: ផាបផេច
   blur: ព្រមម៉ុន
+  cancel: បោះបង់
+  close: បិទ
+  collection_name: ឈ្មោះបណ្តុំ
+  collections: បណ្តុំ
   contrast: ធេវីអាេយមានផាបផ្ទុយក្នា
+  corrupted_wallpapers_message: ផ្ទាំងរូបភាពខូច សូមពិចារណាលុបទាំងនេះ៖
+  create: បង្កើត
+  create_collection: បង្កើតបណ្តុំ
+  default_collection: ការប្រមូលលំនាំដើម
+  delete_collection: លុបបណ្តុំ
+  edit_collection: កែសម្រួលបណ្តុំ
   enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
+  extend: ពង្រីកបឋម
   fit:
     contain: មាន
     cover: រកប
     fill: ញាត់
   flipHorizontal: ត្រឡប់ផ្ដេក
   flipVertical: ត្រឡប់បញ្ឈរ
+  generating_thumbnails: ការបង្កើតរូបភាពតូចៗនៃផ្ទាំងរូបភាព
   hours: ម៉ោង
   interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរៀងរាល់
   minutes: បីតោ
+  monitor_collection: ការប្រមូលម៉ូនីទ័រ
+  multimonitor_behaviour: ឥរិយាបថពហុម៉ូនីទ័រ
   muted: អូឌីយ៉ូវីដេអូបិទ
   no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
+  no_collections: មិនទាន់បានបង្កើតបណ្តុំនៅឡើយទេ។ ចុចប៊ូតុង + ដើម្បីបង្កើតមួយ។
   objectFit: សមផ្ទៃខាងក្រោយសមស្រប
   objectPosition: ទីតាំងផ្ទៃខាងក្រោយ
   overlayColor: ពណ៌គម្រប
   overlayMixBlendMode: លាបពណ៌លាយបញ្ចូលគ្នា
+  per_monitor: ក្នុងមួយម៉ូនីទ័រ
   playback: ល្បឿនចាក់សារថ្មី
   position:
     bottom: ក្ដិត / បាត
@@ -267,10 +279,17 @@ wall:
     left: ឆេវង
     right: ខាងស្ដាម
     top: ឯផ្ទលើ
+  processing_video: ដំណើរការវីដេអូ
   random: ការបញ្ចាំងស្លាយចៃដន្យដោយចៃដន្យ
   saturation: ផាបថបតរ
   seconds: វិនាទី
+  select_collection: ជ្រើសរើសបណ្តុំ
+  thumbnail_generation_complete: ការបង្កើតរូបភាពតូចបានបញ្ចប់
+  thumbnail_generation_finished: ការបង្កើតរូបភាពតូចបានបញ្ចប់ដោយជោគជ័យ
+  wallpaper_collection: ការប្រមូលផ្ទាំងរូបភាព
+  wallpaper_settings: ការកំណត់ផ្ទាំងរូបភាព
   withOverlay: ជាមួយនឹងការត្រួតលើគ្នា
+  workspace_collections: ការប្រមូលកន្លែងធ្វើការ
 weg:
   auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
   delay_to_hide: ពន្យារពេលដើម្បីលាក់
@@ -306,6 +325,19 @@ weg:
   padding: ទ្រនាប់
   show_end_task: បង្ហាញភារកិច្ចបញ្ចប់នៅក្នុងរបារភារកិច្ច
   width: ទទឹង
+welcome:
+  give_a_review: ផ្តល់ការពិនិត្យឡើងវិញ
+  message: >-
+    Seelen UI គឺជាបរិស្ថានផ្ទៃតុឥតគិតថ្លៃ និងប្រភពបើកចំហសម្រាប់ Windows ។
+    នៅទីនេះអ្នកមានការគ្រប់គ្រងពេញលេញលើរបៀបដែលផ្ទៃតុរបស់អ្នកមើលទៅ និងឥរិយាបទ
+    ដែលអនុញ្ញាតឱ្យអ្នកកំណត់រាល់ព័ត៌មានលម្អិតដើម្បីផ្គូផ្គងលំហូរការងារ
+    និងរចនាប័ទ្មរបស់អ្នក។
+  ok: តោះចាប់ផ្តើម!
+  review: >-
+    ប្រសិនបើអ្នករីករាយនឹងការប្រើប្រាស់ Seelen UI
+    សូមពិចារណាចាកចេញពីការពិនិត្យឡើងវិញនៅលើហាង —
+    មតិកែលម្អរបស់អ្នកជួយឱ្យគម្រោងរីកចម្រើន និងប្រសើរឡើង។
+  title: សូមស្វាគមន៍មកកាន់ Seelen UI!
 widget:
   enable: បើកដំណើរការធាតុក្រាហ្វិកនេះ
   enable_for_monitor: បើកដំណើរការម៉ូនីទ័រនេះ

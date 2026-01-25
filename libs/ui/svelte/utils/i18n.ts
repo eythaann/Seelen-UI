@@ -10,10 +10,21 @@ function translate(locale: string, key: string, vars: Record<string, string> = {
   if (!locale) throw new Error(`no translation for key "${key}"`);
 
   // Grab the translation from the translations object.
-  let text = get(messages)[locale]?.[key];
+  // Support nested keys like "profile.log_out"
+  const keys = key.split(".");
+  let text = get(messages)[locale];
+  for (const k of keys) {
+    text = text?.[k];
+  }
+
   if (!text) {
     console.error(`no translation found for ${locale}.${key}`);
-    text = get(messages)["en"]?.[key] || key;
+    // Try fallback to English
+    let fallback = get(messages)["en"];
+    for (const k of keys) {
+      fallback = fallback?.[k];
+    }
+    text = fallback || key;
   }
 
   if (typeof text !== "string") {

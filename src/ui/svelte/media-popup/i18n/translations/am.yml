@@ -1,0 +1,13 @@
+default_multimedia_volume: የመልቲሚዲያ ድምጽ
+device:
+  channel:
+    system: የስርዓት ድምፆች
+  comunications: ግንኙነቶች
+  missing: የጠፋ መሳሪያ
+  mixer: የድምጽ ማደባለቅ
+  multimedia: መልቲሚዲያ
+  settings: ተጨማሪ የመሣሪያ ቅንብሮች
+  volume: የመሳሪያው መጠን
+input_devices: የግቤት መሳሪያዎች
+output_devices: የውጤት መሳሪያዎች
+players: የሚዲያ ተጫዋቾች

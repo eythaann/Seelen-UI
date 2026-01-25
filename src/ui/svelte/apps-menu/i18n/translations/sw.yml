@@ -1,0 +1,11 @@
+all: Programu Zote
+back: Nyuma
+disband: Ondoa Folda
+folder: Folda
+no_matching_items: Hakuna vipengee vilivyopatikana vinavyolingana na utafutaji wako
+open_file_location: Fungua Mahali pa Faili
+pin: Bandika
+run_as_admin: Endesha kama Msimamizi
+unpin: Bandua
+welcome_message: Karibu kwenye menyu ya programu ya Seelen UI.
+welcome_message2: Kwenye kichupo hiki, unaweza kubandika programu unazopenda.

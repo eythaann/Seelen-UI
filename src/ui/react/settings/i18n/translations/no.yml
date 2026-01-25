@@ -1,16 +1,6 @@
 action:
   confirm: Er du sikker?
   confirm_body: Denne handlingen kan ikke angres.
-app_launcher:
-  enable: Aktiver appstarter
-  launch_on:
-    mouse_over: Hold musen over
-    primary: Primær
-  monitor: Overvåke for å vise
-  runners:
-    cmd: Kommando
-    explorer: Løp
-    label: Løpere
 apps_configurations:
   app:
     bindings: Binding (Merk begge alternativene er påkrevd)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Installasjonsmappe
   load: Laste
   settings_file: Innstillingsfilen
-  simulate_fullscreen: Simuler fullskjermhendelse
 extras:
   clear_icons: Klare systemikoner cache
   clear_icons_tooltip: Det kan kreves en omstart for å tre i kraft alle widgeter
@@ -95,6 +84,10 @@ extras:
   links: Offisielle lenker
   relaunch: Relanseres
   version: Versjon
+  version_fixed: >-
+    Applikasjonen og WebView2 Runtime-versjonene er fikset. Dette betyr at
+    applikasjonen ikke vil motta oppdateringer og WebView2 Runtime vil ikke
+    automatisk oppdateres med Windows-oppdateringer.
 general:
   accent_color: Aksentfarge
   date_format: Datoformat
@@ -102,6 +95,7 @@ general:
     available: Tilgjengelige ikonpakker
     selected: Aktive ikonpakker
   language: Språk
+  monday: mandag
   performance_mode:
     on_battery: På batteri
     on_energy_saver: På energisparer
@@ -110,7 +104,10 @@ general:
       extreme: Ekstrem
       minimal: Minimal
     plugged: Plugget eller lading
+  saturday: lørdag
+  start_of_week: Ukestart
   startup: Kjør ved oppstart?
+  sunday: søndag
   theme:
     available: Tilgjengelige temaer
     selected: Aktive temaer
@@ -153,18 +150,26 @@ resources:
   app_outdated: >-
     Denne ressursen krever en nyere versjon av Seelen UI for å fungere
     ordentlig.
+  corrupted_wallpaper: Kunne ikke pakke ut miniatyrbildet – ødelagt eller ikke støttet videoformat
   delete: Slett ressurs
   discover: Oppdag flere ressurser
   has_update: En oppdatering er tilgjengelig
+  high_impact: Høy innvirkning på ytelsen
   import_wallpapers: Importer lokale bakgrunnsbilder
   open_folder: Åpne ressursmappe
   outdated: >-
     Denne ressursen ble designet for en eldre versjon av Seelen UI og fungerer
     kanskje ikke ordentlig.
+  see_on_website: Se på nettsiden
+review_request:
+  not_now: Ikke nå
+  sure: Sikker!
+  title: Liker du Seelen UI?
 save: Lagre
 save_and_restart: Lagre og start på nytt
 see_more: Se mer
 shortcuts:
+  duplicate_error: Denne snarveien er duplisert
   enable: Aktiver innebygd snarveisystem
   enable_tooltip: >-
     Deaktiver om du implementerer ditt eget snarveisystem ved hjelp av Seelen UI
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Bytt til tidligere arbeidsområde
     switch_workspace: Bytt til arbeidsområdet {{0}}
     toggle_float: Veksle vindu float -modus
-    toggle_launcher: Veksle Launcher
     toggle_monocle: Veksle arbeidsområde monokelmodus
   readonly_tooltip: Dette er en leselinje-snarvei
   reset: Tilbakestill til standardverdier
@@ -218,14 +222,6 @@ sides:
   left: Venstre
   right: Ikke sant
   top: Topp
-start:
-  message: >-
-    Velkommen til Seelen UI, Ultimate Desktop Environment med en innlemmet
-    tilflising av Windows Manager for å forbedre Windows -opplevelsen din!
-    Utforsk en ny epoke med effektivitet og multitasking med vårt intuitive
-    grensesnitt og avanserte funksjoner.
-  message_accent: Optimaliser produktiviteten din med stil!
-  title: Velkommen!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Utsett å skjule
@@ -246,23 +242,39 @@ update:
 wall:
   backgrounds: Bakgrunnsbilder
   blur: Uskarpe
+  cancel: Kansellere
+  close: Lukke
+  collection_name: Samlingens navn
+  collections: Samlinger
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Ødelagte bakgrunnsbilder, vurder å slette disse:'
+  create: Skape
+  create_collection: Opprett samling
+  default_collection: Standard samling
+  delete_collection: Slett samling
+  edit_collection: Rediger samling
   enable: Aktiver bakgrunnssjef
+  extend: Utvid primær
   fit:
     contain: Inneholde
     cover: Dekke
     fill: Fylle
   flipHorizontal: Flip horisontalt
   flipVertical: Flip vertikal
+  generating_thumbnails: Generer bakgrunnsminiatyrbilder
   hours: timer
   interval: Endre bakgrunnsbilde hver
   minutes: minutter
+  monitor_collection: Overvåk samling
+  multimonitor_behaviour: Multimonitor-atferd
   muted: Demp videolyd
   no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
+  no_collections: Ingen samlinger opprettet ennå. Klikk på +-knappen for å opprette en.
   objectFit: Bakgrunns passform
   objectPosition: Bakgrunnsposisjon
   overlayColor: Overleggsfarge
   overlayMixBlendMode: Overlegg blandingsmodus
+  per_monitor: Per skjerm
   playback: Avspillingshastighet
   position:
     bottom: Bunn
@@ -270,10 +282,17 @@ wall:
     left: Igjen
     right: Høyre
     top: Topp
+  processing_video: Behandler video
   random: Randomiser lysbildefremvisning
   saturation: Metning
   seconds: sekunder
+  select_collection: Velg Samling
+  thumbnail_generation_complete: Generering av miniatyrbilder er fullført
+  thumbnail_generation_finished: Generering av miniatyrbilder er fullført
+  wallpaper_collection: Tapet samling
+  wallpaper_settings: Bakgrunnsinnstillinger
   withOverlay: Med overlegg
+  workspace_collections: Arbeidsområdesamlinger
 weg:
   auto_hide: Skjul automatisk
   delay_to_hide: Utsett å skjule
@@ -309,6 +328,19 @@ weg:
   padding: Polstring
   show_end_task: Vis sluttoppgave i oppgavelinjen
   width: Bredde
+welcome:
+  give_a_review: Gi en anmeldelse
+  message: >-
+    Seelen UI er et gratis skrivebordsmiljø med åpen kildekode for Windows. Her
+    har du full kontroll over hvordan skrivebordet ditt ser ut og oppfører seg,
+    slik at du kan tilpasse hver detalj for å matche arbeidsflyten og stilen
+    din.
+  ok: La oss begynne!
+  review: >-
+    Hvis du liker å bruke Seelen UI, bør du vurdere å legge igjen en anmeldelse
+    i butikken – tilbakemeldingen din hjelper prosjektet med å vokse og forbedre
+    seg.
+  title: Velkommen til Seelen UI!
 widget:
   enable: Aktiver denne widgeten
   enable_for_monitor: Aktiver på denne skjermen

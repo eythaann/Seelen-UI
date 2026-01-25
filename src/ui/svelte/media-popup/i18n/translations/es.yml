@@ -1,0 +1,13 @@
+default_multimedia_volume: Volumen multimedia
+device:
+  channel:
+    system: Sonidos del sistema
+  comunications: Comunicaciones
+  missing: Dispositivo faltante
+  mixer: Mezclador de volumen
+  multimedia: Multimedia
+  settings: Más configuraciones del dispositivo
+  volume: Volumen del dispositivo
+input_devices: Dispositivos de entrada
+output_devices: Dispositivos de salida
+players: Reproductores multimedia

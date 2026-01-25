@@ -20,9 +20,6 @@ context_menu:
   restore: Restauréieren op Standard
   settings: Astellungen
   task_manager: Aufgab Manager
-keyboard:
-  more: Méi Keyboard Astellunge
-  title: Keyboard Layout
 media:
   default_multimedia_volume: Multimedia Volumen
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Input Apparater
   output_devices: Ausgangsapparater
   players: Media Spiller
-network:
-  available: Verfügbar Netzwierker
-  connect: Connecten
-  connected: Verbonne mat
-  disconnect: Trennen
-  hidden: Verstoppt Netzwierk
-  more: Méi Netzwierk Astellunge
-  not_found: Keng Netzwierker fonnt
-  placeholder:
-    password: Passwuert
-  saved: Gespäichert Netzwierker
-  scanning: Scannen fir Netzwierker
-  secured: Verschlësselte Reseau
 notifications:
   clear: Emlotzen alleng
   empty: Keng Notifikatiounen
@@ -70,24 +54,3 @@ settings:
   power: Kraaftbeldscht
   restart: Neistart
   title: Astellunge
-userhome:
-  empty_list: Keng Saachen
-  folders:
-    desktop: Desktop
-    documents: Visitungen
-    downloads: Downloads
-    more_items: Maacht méi ...
-    music: Musek
-    pictures: Fotoen
-    recent: Viru kuerzem benotzt
-    reduce_items: Séisse manner ...
-    title: Benotzer Direkter
-    videos: Videoen
-  profile:
-    accounts: Open Kont Astellunge
-    open_onedrive: Open Ondrive Verzeechnes
-    open_user_folder: Oppen Benotzer
-  seelen_options:
-    open_installation_folder: Open Senden Astellunge Folder
-    open_log_folder: Oppen Sockelen Log Folder
-    title: Gesinn Direkter

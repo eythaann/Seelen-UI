@@ -1,15 +1,15 @@
-.vscode
-dist
-.dist
-out
 node_modules
+
+.vscode
 .env
+
+dist
 target
 gen
+src/runtime
 
 # Submission Files
 /scripts/SBTemp
-monitoring.ps1
 
 # rust-analyzer
 rustc-ice-*.txt

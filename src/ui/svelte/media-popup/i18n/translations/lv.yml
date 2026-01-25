@@ -1,0 +1,13 @@
+default_multimedia_volume: Multivides apjoms
+device:
+  channel:
+    system: Sistēmas skaņas
+  comunications: Komunikācijas
+  missing: Trūkst ierīces
+  mixer: Skaļuma mikseris
+  multimedia: Multivide
+  settings: Vairāk ierīces iestatījumu
+  volume: Ierīces skaļums
+input_devices: Ievades ierīces
+output_devices: Izvades ierīces
+players: Multivides atskaņotāji

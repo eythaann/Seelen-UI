@@ -20,9 +20,6 @@ context_menu:
   restore: இயல்புநிலைக்கு மீட்டமைக்கவும்
   settings: அமைப்புகள்
   task_manager: பணி மேலாளர்
-keyboard:
-  more: மேலும் விசைப்பலகை அமைப்புகள்
-  title: விசைப்பலகை தளவமைப்பு
 media:
   default_multimedia_volume: மல்டிமீடியா தொகுதி
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: உள்ளீட்டு சாதனங்கள்
   output_devices: வெளியீட்டு சாதனங்கள்
   players: மீடியா பிளேயர்கள்
-network:
-  available: கிடைக்கும் நெட்வொர்க்குகள்
-  connect: இணைக்கவும்
-  connected: இணைக்கப்பட்டது
-  disconnect: துண்டிக்கவும்
-  hidden: மறைக்கப்பட்ட பிணையம்
-  more: மேலும் பிணைய அமைப்புகள்
-  not_found: நெட்வொர்க்குகள் எதுவும் கிடைக்கவில்லை
-  placeholder:
-    password: கடவுச்சொல்
-  saved: சேமிக்கப்பட்ட நெட்வொர்க்குகள்
-  scanning: நெட்வொர்க்குகளை ஸ்கேன் செய்கிறது
-  secured: மறைகுறியாக்கப்பட்ட நெட்வொர்க்
 notifications:
   clear: அனைத்தையும் அழிக்கவும்
   empty: அறிவிப்புகள் இல்லை
@@ -70,24 +54,3 @@ settings:
   power: சக்தி
   restart: மறுதொடக்கம்
   title: அமைப்புகள்
-userhome:
-  empty_list: உருப்படிகள் இல்லை
-  folders:
-    desktop: டெஸ்க்டாப்
-    documents: ஆவணங்கள்
-    downloads: பதிவிறக்கங்கள்
-    more_items: மேலும் காட்டு ...
-    music: இசை
-    pictures: படங்கள்
-    recent: சமீபத்தில் பயன்படுத்தப்பட்டது
-    reduce_items: குறைவாக காட்டு ...
-    title: பயனர் கோப்பகங்கள்
-    videos: வீடியோக்கள்
-  profile:
-    accounts: கணக்கு அமைப்புகளைத் திறக்கவும்
-    open_onedrive: திறந்த onedrive அடைவு
-    open_user_folder: பயனர் கோப்பகத்தைத் திறக்கவும்
-  seelen_options:
-    open_installation_folder: திறந்த சீலன் அமைப்புகள் கோப்புறையைத் திறக்கவும்
-    open_log_folder: சீலன் பதிவு கோப்புறையைத் திறக்கவும்
-    title: சீலன் கோப்பகங்கள்

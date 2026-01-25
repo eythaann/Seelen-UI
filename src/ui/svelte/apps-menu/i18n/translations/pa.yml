@@ -1,0 +1,11 @@
+all: ਸਾਰੀਆਂ ਐਪਾਂ
+back: ਪਿੱਛੇ
+disband: ਫੋਲਡਰ ਨੂੰ ਡਿਸਬੈਂਡ ਕਰੋ
+folder: ਫੋਲਡਰ
+no_matching_items: ਤੁਹਾਡੀ ਖੋਜ ਨਾਲ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਆਈਟਮ ਨਹੀਂ ਮਿਲੀ
+open_file_location: ਫਾਈਲ ਟਿਕਾਣਾ ਖੋਲ੍ਹੋ
+pin: ਪਿੰਨ
+run_as_admin: ਪ੍ਰਸ਼ਾਸਕ ਵਜੋਂ ਚਲਾਓ
+unpin: ਅਨਪਿੰਨ ਕਰੋ
+welcome_message: Seelen UI ਐਪ ਮੀਨੂ ਵਿੱਚ ਸੁਆਗਤ ਹੈ।
+welcome_message2: ਇਸ ਟੈਬ 'ਤੇ, ਤੁਸੀਂ ਆਪਣੀਆਂ ਮਨਪਸੰਦ ਐਪਾਂ ਨੂੰ ਪਿੰਨ ਕਰ ਸਕਦੇ ਹੋ।

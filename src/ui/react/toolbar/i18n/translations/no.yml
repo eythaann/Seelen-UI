@@ -20,9 +20,6 @@ context_menu:
   restore: Gjenopprett til standard
   settings: Innstillinger
   task_manager: Oppgavebehandling
-keyboard:
-  more: Flere tastaturinnstillinger
-  title: Tastaturoppsett
 media:
   default_multimedia_volume: Multimedia -volum
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Inngangsenheter
   output_devices: Utgangsenheter
   players: Mediespillere
-network:
-  available: Tilgjengelige nettverk
-  connect: Koble
-  connected: Koblet til
-  disconnect: Koble fra
-  hidden: Skjult nettverk
-  more: Flere nettverksinnstillinger
-  not_found: Ingen nettverk funnet
-  placeholder:
-    password: Passord
-  saved: Lagrede nettverk
-  scanning: Skanner etter nettverk
-  secured: Kryptert nettverk
 notifications:
   clear: Fjern alle
   empty: Ingen varsler
@@ -70,24 +54,3 @@ settings:
   power: Makt
   restart: Omstart
   title: Innstillinger
-userhome:
-  empty_list: Ingen ting
-  folders:
-    desktop: Skrivebord
-    documents: Dokumenter
-    downloads: Nedlastinger
-    more_items: Vis mer ...
-    music: Musikk
-    pictures: Bilder
-    recent: Nylig brukt
-    reduce_items: Vis mindre ...
-    title: Brukerkataloger
-    videos: Videoer
-  profile:
-    accounts: Åpne kontoinnstillinger
-    open_onedrive: Åpne OneDrive -katalogen
-    open_user_folder: Åpen brukerkatalog
-  seelen_options:
-    open_installation_folder: Åpne Seelen -innstillingsmappen
-    open_log_folder: Åpne Seelen -loggmappe
-    title: Seelen -kataloger

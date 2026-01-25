@@ -18,12 +18,6 @@ use crate::{
     windows_api::{event_window::subscribe_to_background_window, monitor::DisplayView},
 };
 
-static MONITOR_MANAGER: LazyLock<MonitorManager> = LazyLock::new(|| {
-    let mut m = MonitorManager::create().expect("Failed to create monitor manager");
-    m.initialize().log_error();
-    m
-});
-
 pub struct MonitorManager {
     state_views: SyncHashMap<MonitorId, DisplayView>,
     /// DisplayManager manages critical hardware so be sure to be correctly used, or will make the app crash.
@@ -70,6 +64,11 @@ impl MonitorManager {
     }
 
     pub fn instance() -> &'static MonitorManager {
+        static MONITOR_MANAGER: LazyLock<MonitorManager> = LazyLock::new(|| {
+            let mut m = MonitorManager::create().expect("Failed to create monitor manager");
+            m.initialize().log_error();
+            m
+        });
         &MONITOR_MANAGER
     }
 

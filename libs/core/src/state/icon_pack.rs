@@ -1,12 +1,13 @@
 use std::path::PathBuf;
 
+use chrono::{DateTime, Utc};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
 use crate::resource::{IconPackId, ResourceKind, ResourceMetadata, SluResource};
 
-#[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct IconPack {
@@ -93,6 +94,10 @@ pub struct UniqueIconPackEntry {
     pub redirect: Option<PathBuf>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub icon: Option<Icon>,
+    /// Source file modification time for cache invalidation
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[ts(optional = nullable)]
+    pub source_mtime: Option<DateTime<Utc>>,
 }
 
 /// Intended to store file icons by extension

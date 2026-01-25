@@ -6,13 +6,13 @@ import { debounce } from "lodash";
 const initial = await Settings.getAsync();
 
 export const $settings = signal({
-  ...initial.wall,
+  ...initial.byWidget["@seelen/wallpaper-manager"],
   byWallpaper: initial.byWallpaper,
   byMonitor: initial.monitorsV3,
 });
 Settings.onChange(
   (settings) => ($settings.value = {
-    ...settings.wall,
+    ...settings.byWidget["@seelen/wallpaper-manager"],
     byWallpaper: settings.byWallpaper,
     byMonitor: settings.monitorsV3,
   }),
@@ -39,7 +39,7 @@ subscribe(SeelenEvent.GlobalMouseMove, () => {
 });
 
 export const $muted = computed(() => {
-  return $focused.value.class !== "Progman";
+  return !["Progman", "SysListView32"].includes($focused.value.class);
 });
 
 export const $paused = computed(() => {

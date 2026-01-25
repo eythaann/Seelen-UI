@@ -20,9 +20,6 @@ context_menu:
   restore: Taastada vaikimisi
   settings: Seaded
   task_manager: Tegumihaldur
-keyboard:
-  more: Rohkem klaviatuuri seadeid
-  title: Klaviatuuri paigutus
 media:
   default_multimedia_volume: Multimeedia maht
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Sisendseadmed
   output_devices: Väljundseadmed
   players: Meediamängijad
-network:
-  available: Saadaolevad võrgud
-  connect: Ühendama
-  connected: 'Ühendatud:'
-  disconnect: Ühenduse katkestama
-  hidden: Varjatud võrk
-  more: Rohkem võrguseadeid
-  not_found: Võrgustikke pole leitud
-  placeholder:
-    password: Parool
-  saved: Salvestatud võrgud
-  scanning: Võrkude otsimine
-  secured: Krüpteeritud võrk
 notifications:
   clear: Tühjenda kõik
   empty: Teated puuduvad
@@ -70,24 +54,3 @@ settings:
   power: Võimsus
   restart: Taaskäivita
   title: Sätted
-userhome:
-  empty_list: Puuduvad esemed
-  folders:
-    desktop: Töölauaarvuti
-    documents: Dokumendid
-    downloads: Allalaadimine
-    more_items: Näita rohkem...
-    music: Muusika
-    pictures: Pildid
-    recent: Hiljuti kasutatud
-    reduce_items: Näita vähem...
-    title: Kasutajate kataloogid
-    videos: Videod
-  profile:
-    accounts: Avatud konto seaded
-    open_onedrive: Avage OneDrive'i kataloog
-    open_user_folder: Avatud kasutajakataloog
-  seelen_options:
-    open_installation_folder: Avage Seeleni seadete kaust
-    open_log_folder: Avage Seelen logi kaust
-    title: Seelen kataloogid

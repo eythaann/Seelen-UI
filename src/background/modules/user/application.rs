@@ -1,16 +1,14 @@
-use lazy_static::lazy_static;
 use notify_debouncer_full::{
     new_debouncer,
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
-    DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
+    DebounceEventResult, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::system_state::{File, FolderType, User};
+use seelen_core::system_state::{FolderType, User};
 use std::{
-    collections::{HashMap, HashSet},
-    os::windows::fs::MetadataExt,
-    path::{Path, PathBuf},
-    sync::Arc,
+    collections::HashMap,
+    path::PathBuf,
+    sync::{Arc, LazyLock},
     time::Duration,
 };
 use tauri::Manager;
@@ -30,31 +28,24 @@ use crate::{
 
 use super::domain::PictureQuality;
 
-lazy_static! {
-    pub static ref USER_MANAGER: Arc<Mutex<UserManager>> = Arc::new(Mutex::new(
-        UserManager::new().expect("Failed to create user manager")
-    ));
-}
-
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UserManagerEvent {
     #[allow(dead_code)]
-    UserUpdated(),
+    UserUpdated,
     FolderChanged(FolderType),
+}
+
+#[derive(Debug)]
+pub struct FolderDetails {
+    pub path: PathBuf,
+    pub content: Vec<PathBuf>,
+    _watcher: Debouncer<ReadDirectoryChangesWatcher, FileIdMap>,
 }
 
 #[derive(Debug)]
 pub struct UserManager {
     pub user: User,
-    pub folders: HashMap<FolderType, UserFolderDetails>,
-    folder_watcher: Option<Arc<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
-}
-
-#[derive(Debug)]
-pub struct UserFolderDetails {
-    pub path: PathBuf,
-    pub limit: usize,
-    pub content: Vec<File>,
+    pub folders: HashMap<FolderType, FolderDetails>,
 }
 
 unsafe impl Send for UserManager {}
@@ -63,6 +54,15 @@ unsafe impl Send for UserManagerEvent {}
 event_manager!(UserManager, UserManagerEvent);
 
 impl UserManager {
+    pub fn instance() -> &'static Arc<Mutex<Self>> {
+        static USER_MANAGER: LazyLock<Arc<Mutex<UserManager>>> = LazyLock::new(|| {
+            Arc::new(Mutex::new(
+                UserManager::new().expect("Failed to create user manager"),
+            ))
+        });
+        &USER_MANAGER
+    }
+
     fn get_path_from_folder(folder_type: &FolderType) -> Option<PathBuf> {
         let resolver = get_app_handle().path();
         match folder_type {
@@ -75,19 +75,7 @@ impl UserManager {
             FolderType::Pictures => resolver.picture_dir().ok(),
             FolderType::Videos => resolver.video_dir().ok(),
             FolderType::Music => resolver.audio_dir().ok(),
-            FolderType::Unknown => None,
         }
-    }
-
-    fn get_folder_from_path(path: &Path) -> FolderType {
-        for folder_type in FolderType::values() {
-            if let Some(folder_path) = Self::get_path_from_folder(folder_type) {
-                if path.starts_with(folder_path) {
-                    return *folder_type;
-                }
-            }
-        }
-        FolderType::Unknown
     }
 
     fn get_logged_on_user_sid() -> Result<String> {
@@ -97,39 +85,21 @@ impl UserManager {
         Ok(settings.get_value("LastLoggedOnUserSID")?)
     }
 
-    fn get_folder_content(path: PathBuf, limit: usize) -> Result<Vec<File>> {
+    fn get_folder_content(base_path: PathBuf) -> Result<Vec<PathBuf>> {
         let mut list = Vec::new();
 
-        for entry in std::fs::read_dir(path)?.flatten() {
-            let mut path = entry.path();
+        for entry in walkdir::WalkDir::new(base_path)
+            .follow_links(false)
+            .into_iter()
+            .flatten()
+        {
+            let path = entry.path();
             if !path.is_file() {
                 continue;
             }
-
-            if let Some(extension) = path.extension() {
-                if extension == "ini" {
-                    continue;
-                }
-                if extension == "lnk" {
-                    path = match WindowsApi::resolve_lnk_target(&path) {
-                        Ok((target, _)) if target.is_file() => target,
-                        _ => continue,
-                    };
-                }
-            }
-
-            list.push(File {
-                path,
-                last_access_time: entry.metadata()?.last_write_time(),
-            });
-
-            if list.len() >= limit {
-                break;
-            }
+            list.push(path.to_path_buf());
         }
 
-        list.sort_by_key(|item| item.last_access_time);
-        list.reverse();
         Ok(list)
     }
 
@@ -187,93 +157,59 @@ impl UserManager {
         user
     }
 
-    fn join_debounced_changes(events: Vec<DebouncedEvent>) -> HashSet<PathBuf> {
-        let mut result = HashSet::new();
-        for event in events {
-            for path in event.event.paths {
-                result.insert(path);
-            }
-        }
-        result
-    }
-
-    fn on_files_changed(changed: HashSet<PathBuf>) -> Result<()> {
-        for path in changed {
-            let folder_type = Self::get_folder_from_path(&path);
-            if folder_type == FolderType::Unknown {
-                continue;
-            }
-
-            let mut guard = trace_lock!(USER_MANAGER);
-            if let Some(model) = guard.folders.get_mut(&folder_type) {
-                model.content = Self::get_folder_content(model.path.clone(), model.limit)?;
-                log_error!(Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type)));
-            }
-        }
-        Ok(())
-    }
-
-    fn create_file_watcher(
-        &self,
-    ) -> Result<Arc<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>> {
-        let mut debouncer = new_debouncer(
-            Duration::from_millis(100),
+    fn create_folder_watcher(
+        folder_type: FolderType,
+    ) -> Result<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>> {
+        let debouncer = new_debouncer(
+            Duration::from_millis(300),
             None,
-            |result: DebounceEventResult| match result {
-                Ok(events) => {
-                    let paths = Self::join_debounced_changes(events);
-                    log_error!(Self::on_files_changed(paths));
+            move |result: DebounceEventResult| match result {
+                Ok(_events) => {
+                    log_error!(Self::reload_folder_content(folder_type));
                 }
                 Err(errors) => {
-                    log::error!("RecentFile Watcher Error: {errors:?}")
+                    log::error!("Folder Watcher Error for {:?}: {errors:?}", folder_type);
                 }
             },
         )?;
-        let watcher = debouncer.watcher();
-        for item in FolderType::values() {
-            if let Some(item) = self.folders.get(item) {
-                watcher.watch(&item.path, RecursiveMode::Recursive)?;
-            }
+        Ok(debouncer)
+    }
+
+    fn reload_folder_content(folder_type: FolderType) -> Result<()> {
+        let mut manager = trace_lock!(Self::instance());
+
+        if let Some(folder_details) = manager.folders.get_mut(&folder_type) {
+            folder_details.content = Self::get_folder_content(folder_details.path.clone())?;
+            drop(manager);
+            let _ = Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type));
         }
-        Ok(Arc::new(debouncer))
+
+        Ok(())
     }
 
     pub fn new() -> Result<Self> {
-        let mut instance = Self {
-            user: Self::get_logged_user(),
-            folder_watcher: None,
-            folders: HashMap::new(),
-        };
+        let mut folders = HashMap::new();
 
-        for folder in FolderType::values() {
-            match Self::get_path_from_folder(folder) {
-                Some(folder_path) => {
-                    instance.folders.insert(
-                        *folder,
-                        UserFolderDetails {
-                            path: folder_path.clone(),
-                            limit: 20,
-                            content: Self::get_folder_content(folder_path, 20)?,
-                        },
-                    );
-                }
-                None => {
-                    log::error!("Failed to get path for known user folder: {folder:?}");
-                }
+        for &folder_type in FolderType::values() {
+            if let Some(path) = Self::get_path_from_folder(&folder_type) {
+                let content = Self::get_folder_content(path.clone()).unwrap_or_default();
+                let mut watcher = Self::create_folder_watcher(folder_type)?;
+                watcher.watcher().watch(&path, RecursiveMode::Recursive)?;
+
+                folders.insert(
+                    folder_type,
+                    FolderDetails {
+                        path,
+                        content,
+                        _watcher: watcher,
+                    },
+                );
             }
         }
 
-        instance.folder_watcher = Some(instance.create_file_watcher()?);
-        // TODO add event listeners for account information changes.
-        Ok(instance)
-    }
-
-    pub fn set_folder_limit(&mut self, folder_type: FolderType, limit: usize) -> Result<()> {
-        if let Some(details) = self.folders.get_mut(&folder_type) {
-            details.limit = limit;
-            details.content = Self::get_folder_content(details.path.clone(), limit)?;
-        }
-        log_error!(Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type)));
-        Ok(())
+        Ok(Self {
+            user: Self::get_logged_user(),
+            folders,
+        })
     }
 }

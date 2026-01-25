@@ -20,9 +20,6 @@ context_menu:
   restore: Rejesha kwa chaguo -msingi
   settings: Mipangilio
   task_manager: Meneja wa Kazi
-keyboard:
-  more: Mipangilio ya kibodi zaidi
-  title: Mpangilio wa kibodi
 media:
   default_multimedia_volume: Kiasi cha multimedia
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Vifaa vya pembejeo
   output_devices: Vifaa vya pato
   players: Wachezaji wa media
-network:
-  available: Mitandao inayopatikana
-  connect: Unganisha
-  connected: Imeunganishwa kwa
-  disconnect: Kukatwa
-  hidden: Mtandao uliofichwa
-  more: Mipangilio zaidi ya mtandao
-  not_found: Hakuna mitandao iliyopatikana
-  placeholder:
-    password: Nenosiri
-  saved: Mitandao iliyohifadhiwa
-  scanning: Inatafuta mitandao
-  secured: Mtandao uliosimbwa kwa njia fiche
 notifications:
   clear: Futa zote
   empty: Hakuna arifa
@@ -70,24 +54,3 @@ settings:
   power: Nguvu
   restart: Anzisha tena
   title: Mipangilio
-userhome:
-  empty_list: Hakuna vitu
-  folders:
-    desktop: Desktop
-    documents: Hati
-    downloads: Upakuaji
-    more_items: Onyesha zaidi ...
-    music: Muziki
-    pictures: Picha
-    recent: Imetumika hivi karibuni
-    reduce_items: Onyesha kidogo ...
-    title: Saraka za watumiaji
-    videos: Video
-  profile:
-    accounts: Fungua mipangilio ya akaunti
-    open_onedrive: Fungua saraka ya OneDrive
-    open_user_folder: Saraka ya Mtumiaji Fungua
-  seelen_options:
-    open_installation_folder: Fungua folda ya Mipangilio ya Seelen
-    open_log_folder: Fungua folda ya logi ya Seelen
-    title: Saraka za Seelen

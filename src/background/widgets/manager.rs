@@ -9,8 +9,8 @@ use crate::{
     error::Result,
     resources::RESOURCES,
     state::application::FULL_STATE,
-    utils::{lock_free::SyncHashMap, WidgetWebviewLabel},
-    widgets::loader::WidgetContainer,
+    utils::lock_free::SyncHashMap,
+    widgets::{loader::WidgetContainer, WidgetWebviewLabel},
 };
 
 pub static WIDGET_MANAGER: LazyLock<WidgetManager> = LazyLock::new(WidgetManager::create);

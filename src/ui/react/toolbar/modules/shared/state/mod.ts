@@ -6,14 +6,14 @@ import { $current_monitor } from "./system";
 
 const initialSettings = await Settings.getAsync();
 export const $settings = signal({
-  ...initialSettings.fancyToolbar,
+  ...initialSettings.byWidget["@seelen/fancy-toolbar"],
   language: initialSettings.language || "en",
   dateFormat: initialSettings.dateFormat,
   startOfWeek: initialSettings.startOfWeek,
 });
 Settings.onChange(
   (settings) => ($settings.value = {
-    ...settings.fancyToolbar,
+    ...settings.byWidget["@seelen/fancy-toolbar"],
     language: settings.language || "en",
     dateFormat: settings.dateFormat,
     startOfWeek: settings.startOfWeek,

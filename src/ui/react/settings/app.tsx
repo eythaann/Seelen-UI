@@ -1,16 +1,15 @@
 import { useDarkMode } from "libs/ui/react/utils/styling.ts";
 import { ConfigProvider, theme } from "antd";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-
-import { newSelectors } from "./modules/shared/store/app/reducer.ts";
+import { Widget } from "@seelen-ui/lib";
 
 import { Routing } from "./router.tsx";
 import { ThumbnailGeneratorModal } from "./components/ThumbnailGeneratorModal/index.tsx";
+import { WelcomeModal } from "./components/WelcomeModal/infra.tsx";
+import { uiColors } from "./state/system.ts";
 
 export function App() {
   const isDarkMode = useDarkMode();
-  const colors = useSelector(newSelectors.colors);
 
   useEffect(() => {
     setTimeout(() => {
@@ -18,6 +17,8 @@ export function App() {
       splashscreen?.classList.add("vanish");
       setTimeout(() => splashscreen?.classList.add("hidden"), 300);
     }, 300);
+
+    Widget.self.ready();
   }, []);
 
   return (
@@ -25,13 +26,14 @@ export function App() {
       componentSize="small"
       theme={{
         token: {
-          colorPrimary: isDarkMode ? colors.accent_light : colors.accent_dark,
+          colorPrimary: isDarkMode ? uiColors.value.accent_light : uiColors.value.accent_dark,
         },
         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >
       <Routing />
       <ThumbnailGeneratorModal />
+      <WelcomeModal />
     </ConfigProvider>
   );
 }

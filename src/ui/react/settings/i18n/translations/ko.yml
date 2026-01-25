@@ -1,16 +1,6 @@
 action:
   confirm: 확실합니까?
   confirm_body: 이 조치는 취소 할 수 없습니다.
-app_launcher:
-  enable: 앱 런처 활성화
-  launch_on:
-    mouse_over: 마우스 오버
-    primary: 주요한
-  monitor: 보여줄 화면
-  runners:
-    cmd: 명령
-    explorer: 탐색
-    label: 실행 프로그램
 apps_configurations:
   app:
     bindings: 바인딩 (두 옵션 모두 필요)
@@ -84,7 +74,6 @@ devtools:
   install_folder: 설치 폴더
   load: 로드
   settings_file: 설정 파일
-  simulate_fullscreen: 전체 화면 이벤트 시뮬레이션
 extras:
   clear_icons: 시스템 아이콘 캐시 지우기
   clear_icons_tooltip: 모든 위젯에 완전히 적용하려면 다시 시작해야 할 수 있습니다.
@@ -92,6 +81,9 @@ extras:
   links: 공식 링크
   relaunch: 다시 시작
   version: 버전
+  version_fixed: >-
+    애플리케이션 및 WebView2 런타임 버전이 수정되었습니다. 이는 애플리케이션이 업데이트를 받지 않고 WebView2 Runtime이
+    Windows 업데이트로 자동 업데이트되지 않음을 의미합니다.
 general:
   accent_color: 강조 색상
   date_format: 날짜 형식
@@ -99,6 +91,7 @@ general:
     available: 사용 가능한 아이콘 팩
     selected: 현재 아이콘 팩
   language: 언어
+  monday: 월요일
   performance_mode:
     on_battery: 배터리에
     on_energy_saver: 에너지 세이버에서
@@ -107,7 +100,10 @@ general:
       extreme: 극심한
       minimal: 최소
     plugged: 플러그 또는 충전
+  saturday: 토요일
+  start_of_week: 주의 시작
   startup: 시작 시 실행
+  sunday: 일요일
   theme:
     available: 사용 가능한 테마
     selected: 현재 테마
@@ -148,16 +144,24 @@ reset_all_to_default: 모두 기본값으로 초기화
 reset_to_default: 기본값으로 재설정
 resources:
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
+  corrupted_wallpaper: 썸네일 추출 실패 - 손상되었거나 지원되지 않는 비디오 형식
   delete: 리소스 삭제
   discover: 더 많은 리소스 살펴보기
   has_update: 업데이트를 사용할 수 있습니다
+  high_impact: 성능에 큰 영향
   import_wallpapers: 로컬 배경화면 가져오기
   open_folder: 리소스 폴더 열기
   outdated: 이 리소스는 이전 버전의 Seelen UI용으로 설계되었으며 제대로 작동하지 않을 수 있습니다.
+  see_on_website: 웹사이트에서 확인하세요
+review_request:
+  not_now: 지금은 아님
+  sure: 확신하는!
+  title: Seelen UI를 즐기고 계시나요?
 save: 저장
 save_and_restart: 저장 및 재시작
 see_more: 자세히 보기
 shortcuts:
+  duplicate_error: 이 바로가기가 중복되었습니다.
   enable: 내장 단축키 시스템을 활성화하십시오
   enable_tooltip: Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
   labels:
@@ -200,7 +204,6 @@ shortcuts:
     switch_to_previous_workspace: 이전 작업 공간으로 전환하십시오
     switch_workspace: 작업 공간으로 전환 {{0}}
     toggle_float: 토글 윈도우 플로트 모드
-    toggle_launcher: 토글 런처
     toggle_monocle: 작업 공간 모노클 모드 토글
   readonly_tooltip: 이것은 읽기 전용 단축키입니다
   reset: 기본값으로 재설정하십시오
@@ -209,12 +212,6 @@ sides:
   left: 왼쪽
   right: 오른쪽
   top: 위
-start:
-  message: >-
-    Seelen UI에 오신 것을 환영합니다. Windows 경험을 향상시키기 위해 타일링 윈도우 매니저가 포함된 궁극의 데스크탑
-    환경입니다! 직관적인 인터페이스와 고급 기능을 통해 효율성과 멀티태스킹의 새로운 시대를 탐험해 보세요.
-  message_accent: 스타일로 생산성을 최적화하세요!
-  title: 환영합니다!
 toolbar:
   auto_hide: 자동 숨기기
   delay_to_hide: 숨기기 지연
@@ -235,23 +232,39 @@ update:
 wall:
   backgrounds: 배경화면
   blur: 블러
+  cancel: 취소
+  close: 닫다
+  collection_name: 컬렉션 이름
+  collections: 컬렉션
   contrast: 대비
+  corrupted_wallpapers_message: '손상된 배경화면은 삭제하는 것이 좋습니다:'
+  create: 만들다
+  create_collection: 컬렉션 만들기
+  default_collection: 기본 컬렉션
+  delete_collection: 컬렉션 삭제
+  edit_collection: 컬렉션 편집
   enable: 배경화면 관리자 활성화
+  extend: 기본 확장
   fit:
     contain: 포함
     cover: 커버
     fill: 채우기
   flipHorizontal: 가로로 뒤집기
   flipVertical: 세로로 뒤집기
+  generating_thumbnails: 배경화면 썸네일 생성
   hours: 시간
   interval: 배경화면 변경 주기
   minutes: 분
+  monitor_collection: 모니터 컬렉션
+  multimonitor_behaviour: 다중 모니터 동작
   muted: 비디오 오디오 음소거
   no_background: 배경화면이 없으면, 테마에 내장된 배경화면을 대신 사용합니다.
+  no_collections: 아직 생성된 컬렉션이 없습니다. + 버튼을 클릭하여 생성하세요.
   objectFit: 배경 맞춤
   objectPosition: 배경 위치
   overlayColor: 오버레이 색상
   overlayMixBlendMode: 오버레이 믹스 블렌드 모드
+  per_monitor: 모니터당
   playback: 재생 속도
   position:
     bottom: 하단
@@ -259,10 +272,17 @@ wall:
     left: 왼쪽
     right: 오른쪽
     top: Top
+  processing_video: 비디오 처리 중
   random: 슬라이드 쇼 무작위
   saturation: 채도
   seconds: 초
+  select_collection: 컬렉션 선택
+  thumbnail_generation_complete: 썸네일 생성 완료
+  thumbnail_generation_finished: 썸네일 생성이 성공적으로 완료되었습니다.
+  wallpaper_collection: 배경화면 모음
+  wallpaper_settings: 배경화면 설정
   withOverlay: 오버레이 사용
+  workspace_collections: 작업공간 컬렉션
 weg:
   auto_hide: 자동 숨기기
   delay_to_hide: 숨기기 지연
@@ -298,6 +318,14 @@ weg:
   padding: 안쪽 여백
   show_end_task: 작업 표시줄에 종료 작업 표시
   width: 너비
+welcome:
+  give_a_review: 리뷰를 남겨주세요
+  message: >-
+    Seelen UI는 Windows용 무료 오픈 소스 데스크톱 환경입니다. 여기에서 데스크탑의 모양과 동작을 완전히 제어할 수 있으므로
+    작업 흐름과 스타일에 맞게 모든 세부 사항을 사용자 정의할 수 있습니다.
+  ok: 시작하자!
+  review: Seelen UI를 즐겨 사용하신다면 스토어에 리뷰를 남겨보세요. 여러분의 피드백은 프로젝트 성장과 개선에 도움이 됩니다.
+  title: Seelen UI에 오신 것을 환영합니다!
 widget:
   enable: 이 위젯 활성화
   enable_for_monitor: 이 모니터에서 활성화

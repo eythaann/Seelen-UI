@@ -29,7 +29,7 @@ export const StartMenu = memo(({ item }: Props) => {
         className="weg-item weg-item-start"
         onClick={() => {
           if (!isStartMenuOpen) {
-            invoke(SeelenCommand.SendKeys, { keys: "{win}" });
+            invoke(SeelenCommand.ShowStartMenu);
           }
         }}
         onContextMenu={(e) => e.stopPropagation()}

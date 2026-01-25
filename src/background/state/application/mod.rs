@@ -1,8 +1,6 @@
 mod apps_config;
-mod events;
 mod icons;
 pub mod performance;
-mod profiles;
 mod settings;
 mod toolbar_items;
 mod weg_items;
@@ -10,7 +8,6 @@ mod weg_items;
 pub use icons::download_remote_icons;
 
 use arc_swap::ArcSwap;
-use itertools::Itertools;
 use lazy_static::lazy_static;
 use notify_debouncer_full::{
     new_debouncer,
@@ -19,10 +16,7 @@ use notify_debouncer_full::{
 };
 use seelen_core::{
     resource::ResourceKind,
-    state::{
-        AppsConfigurationList, CssStyles, LauncherHistory, Profile, SluPopupConfig,
-        SluPopupContent, WegItems,
-    },
+    state::{AppsConfigurationList, CssStyles, SluPopupConfig, SluPopupContent, WegItems},
 };
 use std::{
     collections::HashSet,
@@ -36,7 +30,7 @@ use crate::{
     widgets::popups::POPUPS_MANAGER,
 };
 
-use super::domain::{AppConfig, Placeholder, Settings};
+use super::domain::{Placeholder, Settings};
 
 lazy_static! {
     pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
@@ -49,12 +43,10 @@ lazy_static! {
 pub struct FullState {
     watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========
-    pub profiles: Vec<Profile>,
     pub settings: Settings,
     pub settings_by_app: AppsConfigurationList,
     pub weg_items: WegItems,
     pub toolbar_items: Placeholder,
-    pub launcher_history: LauncherHistory,
 }
 
 unsafe impl Sync for FullState {}
@@ -64,12 +56,10 @@ impl FullState {
         let mut manager = Self {
             watcher: Arc::new(None),
             // ======== data ========
-            profiles: Vec::new(),
             settings: Settings::default(),
             settings_by_app: AppsConfigurationList::default(),
             weg_items: WegItems::default(),
             toolbar_items: Self::initial_toolbar_items(),
-            launcher_history: LauncherHistory::default(),
         };
         manager.load_all()?; // ScaDaned log shows a deadlock here.
         manager.start_listeners()?;
@@ -96,16 +86,15 @@ impl FullState {
     }
 
     fn process_changes(&mut self, changed: &HashSet<PathBuf>) -> Result<()> {
+        let mut widgets_changed = false;
         let mut icons_changed = false;
+        let mut themes_changed = false;
+        let mut plugins_changed = false;
+        let mut wallpapers_changed = false;
+
+        let mut settings_changed = false;
         let mut weg_items_changed = false;
         let mut toolbar_items_changed = false;
-        let mut history_changed = false;
-        let mut themes_changed = false;
-        let mut app_configs_changed = false;
-        let mut plugins_changed = false;
-        let mut widgets_changed = false;
-        let mut settings_changed = false;
-        let mut wallpapers_changed = false;
 
         // Single iteration over the changed paths
         for path in changed {
@@ -121,22 +110,11 @@ impl FullState {
                 toolbar_items_changed = true;
             }
 
-            if !history_changed && path == SEELEN_COMMON.history_path() {
-                history_changed = true;
-            }
-
             if !themes_changed
                 && (path.starts_with(SEELEN_COMMON.user_themes_path())
                     || path.starts_with(SEELEN_COMMON.bundled_themes_path()))
             {
                 themes_changed = true;
-            }
-
-            if !app_configs_changed
-                && (path == SEELEN_COMMON.user_app_configs_path()
-                    || path.starts_with(SEELEN_COMMON.bundled_app_configs_path()))
-            {
-                app_configs_changed = true;
             }
 
             if !plugins_changed
@@ -178,18 +156,6 @@ impl FullState {
                 log::info!("Toolbar Items changed");
                 self.emit_toolbar_items()?;
             }
-        }
-
-        if history_changed {
-            log::info!("History changed");
-            self.load_history();
-            self.emit_history()?;
-        }
-
-        if app_configs_changed {
-            log::info!("Specific App Configuration changed");
-            self.load_settings_by_app();
-            self.emit_settings_by_app()?;
         }
 
         if themes_changed {
@@ -259,21 +225,14 @@ impl FullState {
         )?;
 
         let paths: Vec<&Path> = vec![
-            // user data
             SEELEN_COMMON.settings_path(),
             SEELEN_COMMON.weg_items_path(),
             SEELEN_COMMON.toolbar_items_path(),
-            SEELEN_COMMON.user_app_configs_path(),
-            SEELEN_COMMON.history_path(),
             SEELEN_COMMON.user_icons_path(),
             SEELEN_COMMON.user_themes_path(),
             SEELEN_COMMON.user_plugins_path(),
             SEELEN_COMMON.user_widgets_path(),
             SEELEN_COMMON.user_wallpapers_path(),
-            // bundled data
-            SEELEN_COMMON.bundled_themes_path(),
-            SEELEN_COMMON.bundled_plugins_path(),
-            SEELEN_COMMON.bundled_widgets_path(),
         ];
 
         for path in paths {
@@ -282,73 +241,6 @@ impl FullState {
 
         self.watcher = Arc::new(Some(debouncer));
         Ok(())
-    }
-
-    fn save_settings_by_app(&self) -> Result<()> {
-        let data = self
-            .settings_by_app
-            .iter()
-            .filter(|app| !app.is_bundled)
-            .cloned()
-            .collect_vec();
-        std::fs::write(
-            SEELEN_COMMON.user_app_configs_path(),
-            serde_yaml::to_string(&data)?,
-        )?;
-        Ok(())
-    }
-
-    fn _load_settings_by_app(&mut self) -> Result<()> {
-        let user_apps_path = SEELEN_COMMON.user_app_configs_path();
-        let apps_templates_path = SEELEN_COMMON.bundled_app_configs_path();
-
-        self.settings_by_app.clear();
-        if !user_apps_path.exists() {
-            // save empty array on appdata dir
-            self.save_settings_by_app()?;
-        }
-
-        for entry in apps_templates_path.read_dir()?.flatten() {
-            let content = std::fs::read_to_string(entry.path())?;
-            let mut apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
-            for app in apps.iter_mut() {
-                app.is_bundled = true;
-            }
-            self.settings_by_app.extend(apps);
-        }
-
-        if user_apps_path.exists() {
-            let content = std::fs::read_to_string(user_apps_path)?;
-            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
-            self.settings_by_app.extend(apps);
-        }
-
-        self.settings_by_app.prepare();
-        Ok(())
-    }
-
-    fn load_settings_by_app(&mut self) {
-        if let Err(e) = self._load_settings_by_app() {
-            log::error!("Error loading settings by app: {e}");
-            Self::show_corrupted_state_to_user(SEELEN_COMMON.user_app_configs_path());
-        }
-    }
-
-    fn _load_history(&mut self) -> Result<()> {
-        let history_path = SEELEN_COMMON.history_path();
-        if history_path.exists() {
-            self.launcher_history = serde_yaml::from_str(&std::fs::read_to_string(history_path)?)?;
-        } else {
-            std::fs::write(history_path, serde_yaml::to_string(&self.launcher_history)?)?;
-        }
-        Ok(())
-    }
-
-    fn load_history(&mut self) {
-        if let Err(e) = self._load_history() {
-            log::error!("Error loading history: {e}");
-            Self::show_corrupted_state_to_user(SEELEN_COMMON.history_path());
-        }
     }
 
     /// We log each step on this cuz for some reason a deadlock is happening somewhere.
@@ -364,12 +256,6 @@ impl FullState {
 
         log::trace!("Initial load: settings by app");
         self.load_settings_by_app();
-
-        log::trace!("Initial load: history");
-        self.load_history();
-
-        log::trace!("Initial load: profiles");
-        self.load_profiles()?;
         Ok(())
     }
 

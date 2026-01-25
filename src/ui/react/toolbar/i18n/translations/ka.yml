@@ -20,9 +20,6 @@ context_menu:
   restore: აღადგინეთ ნაგულისხმევი
   settings: პარამეტრები
   task_manager: სამუშაო მენეჯერი
-keyboard:
-  more: კლავიშების მეტი პარამეტრები
-  title: კლავიშის განლაგება
 media:
   default_multimedia_volume: მულტიმედიური მოცულობა
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: შეყვანის მოწყობილობები
   output_devices: გამომავალი მოწყობილობები
   players: მედიის მოთამაშეები
-network:
-  available: ხელმისაწვდომი ქსელები
-  connect: დაკავშირება
-  connected: დაკავშირებულია
-  disconnect: გათიშვა
-  hidden: დამალული ქსელი
-  more: მეტი ქსელის პარამეტრები
-  not_found: ქსელები ვერ მოიძებნა
-  placeholder:
-    password: პაროლი
-  saved: შენახული ქსელები
-  scanning: სკანირება ქსელებისთვის
-  secured: დაშიფრული ქსელი
 notifications:
   clear: გასუფთავება
   empty: შეტყობინებები არ არის
@@ -70,24 +54,3 @@ settings:
   power: ძალა
   restart: Რესტარტი
   title: პარამეტრები
-userhome:
-  empty_list: არ არის ნივთები
-  folders:
-    desktop: დესკტოპი
-    documents: დოკუმენტები
-    downloads: ჩამოტვირთვა
-    more_items: მეტი აჩვენე ...
-    music: მუსიკა
-    pictures: სურათები
-    recent: ახლახან გამოყენებული
-    reduce_items: აჩვენე ნაკლები ...
-    title: მომხმარებლის დირექტორიები
-    videos: ვიდეო
-  profile:
-    accounts: ღია ანგარიშის პარამეტრები
-    open_onedrive: გახსენით OneDrive დირექტორია
-    open_user_folder: გახსენით მომხმარებლის დირექტორია
-  seelen_options:
-    open_installation_folder: გახსენით Seelen პარამეტრების საქაღალდე
-    open_log_folder: გახსენით Seelen Log საქაღალდე
-    title: Seelen Directories

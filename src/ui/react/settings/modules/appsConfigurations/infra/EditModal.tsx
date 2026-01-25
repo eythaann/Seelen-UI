@@ -1,20 +1,17 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { type AppConfig, AppExtraFlag, type AppIdentifier } from "@seelen-ui/lib/types";
+import { AppExtraFlag, type AppIdentifier } from "@seelen-ui/lib/types";
 import { ConfigProvider, Input, Modal, Select, Switch } from "antd";
 import { cloneDeep } from "lodash";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
-import { ownSelector, RootSelectors } from "../../shared/store/app/selectors.ts";
 import { defaultAppConfig } from "../app/default.ts";
 
-import type { RootState } from "../../shared/store/domain.ts";
 import type { AppConfigurationExtended } from "../domain.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 import { Identifier } from "./Identifier.tsx";
 import cs from "./index.module.css";
+import { appsConfig, settings } from "../../../state/mod.ts";
 
 interface Props {
   idx?: number;
@@ -25,17 +22,15 @@ interface Props {
   readonlyApp?: AppConfigurationExtended;
 }
 
-const getAppSelector = (idx: number | undefined, isNew: boolean) =>
-  createSelector([ownSelector], (state: RootState): AppConfig => {
-    return idx != null && !isNew ? state.appsConfigurations[idx]! : cloneDeep(defaultAppConfig);
-  });
+const getAppSelector = (idx: number | undefined, isNew: boolean) => {
+  return idx != null && !isNew ? appsConfig.value[idx]! : cloneDeep(defaultAppConfig);
+};
 
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
   const { t } = useTranslation();
 
-  const _monitors = useSelector(RootSelectors.monitorsV3);
-  const monitors = Object.values(_monitors);
-  const _app = useSelector(getAppSelector(idx, !!isNew));
+  const monitors = Object.values(settings.value.monitorsV3);
+  const _app = getAppSelector(idx, !!isNew);
   const initialState = readonlyApp || _app;
   const isReadonly = !!readonlyApp;
 

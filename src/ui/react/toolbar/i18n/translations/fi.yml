@@ -20,9 +20,6 @@ context_menu:
   restore: Palauta oletusasetukset
   settings: Asetukset
   task_manager: Tehtävienhallinta
-keyboard:
-  more: Lisää näppäimistön asetuksia
-  title: Näppäimistön asettelu
 media:
   default_multimedia_volume: Multimedian äänenvoimakkuus
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Syöttölaitteet
   output_devices: Lähtölaitteet
   players: Mediapelaajat
-network:
-  available: Käytettävissä olevat verkot
-  connect: Kytkeä
-  connected: 'Yhdistetty:'
-  disconnect: Katkaista
-  hidden: Piilotettu verkko
-  more: Lisää verkkoasetuksia
-  not_found: Verkkoja ei löydy
-  placeholder:
-    password: Salasana
-  saved: Tallennetut verkot
-  scanning: Etsii verkkoja
-  secured: Salattu verkko
 notifications:
   clear: Tyhjennä kaikki
   empty: Ei ilmoituksia
@@ -70,24 +54,3 @@ settings:
   power: Voima
   restart: Uudelleenkäynnistää
   title: asetukset
-userhome:
-  empty_list: Ei kohteita
-  folders:
-    desktop: Työpöytä
-    documents: Asiakirjat
-    downloads: Lataukset
-    more_items: Näytä lisää...
-    music: Musiikki
-    pictures: Kuvat
-    recent: Hiljattain käytetty
-    reduce_items: Näytä vähemmän...
-    title: Käyttäjien hakemistot
-    videos: Videot
-  profile:
-    accounts: Avaa tilin asetukset
-    open_onedrive: Avaa OneDrive-hakemisto
-    open_user_folder: Avaa käyttäjähakemisto
-  seelen_options:
-    open_installation_folder: Avaa Seelen-asetuskansio
-    open_log_folder: Avaa Seelen log-kansio
-    title: Seelen hakemistot

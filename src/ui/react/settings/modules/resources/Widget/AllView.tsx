@@ -4,20 +4,17 @@ import { path } from "@tauri-apps/api";
 import { invoke } from "@tauri-apps/api/core";
 import { Button } from "antd";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router";
 
 import cs from "../infra.module.css";
 
-import { RootSelectors } from "../../shared/store/app/selectors.ts";
+import { widgets } from "../../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 import { ResourceCard } from "../ResourceCard.tsx";
 import { ResourceKind } from "node_modules/@seelen-ui/lib/esm/gen/types/ResourceKind";
 
 export function WidgetsView() {
-  const widgets = useSelector(RootSelectors.widgets);
-
   const { t } = useTranslation();
 
   return (
@@ -50,7 +47,7 @@ export function WidgetsView() {
       </SettingsGroup>
 
       <div className={cs.list}>
-        {widgets.map((widget) => (
+        {widgets.value.map((widget) => (
           <ResourceCard
             key={widget.id}
             resource={widget}
@@ -58,7 +55,7 @@ export function WidgetsView() {
             actions={
               <>
                 {!["@seelen/settings", "@seelen/popup"].includes(widget.id) && (
-                  <NavLink to={`/widget/${widget.id.replace("@", "")}`}>
+                  <NavLink to={`/widget?${new URLSearchParams({ id: widget.id })}`}>
                     <Button type="text">
                       <Icon iconName="RiSettings4Fill" />
                     </Button>

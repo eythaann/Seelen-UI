@@ -17,6 +17,14 @@ impl MonitorSettingsByWidget {
             .get(widget_id)
             .is_none_or(|settings| settings.enabled)
     }
+
+    pub fn remove(&mut self, widget_id: &WidgetId) -> Option<ThirdPartyWidgetSettings> {
+        self.0.remove(widget_id)
+    }
+
+    pub fn insert(&mut self, widget_id: WidgetId, settings: ThirdPartyWidgetSettings) {
+        self.0.insert(widget_id, settings);
+    }
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]

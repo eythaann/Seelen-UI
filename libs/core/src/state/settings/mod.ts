@@ -1,25 +1,9 @@
 import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 
-import type {
-  FancyToolbarSettings,
-  SeelenLauncherSettings,
-  SeelenWallSettings,
-  SeelenWegSettings,
-  Settings as ISettings,
-  ThirdPartyWidgetSettings,
-  WidgetId,
-  WindowManagerSettings,
-} from "@seelen-ui/types";
+import type { Settings as ISettings, ThirdPartyWidgetSettings } from "@seelen-ui/types";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { invoke } from "../../handlers/mod.ts";
-import {
-  SeelenLauncherWidgetId,
-  SeelenToolbarWidgetId,
-  SeelenWallWidgetId,
-  SeelenWegWidgetId,
-  SeelenWindowManagerWidgetId,
-  Widget,
-} from "../widget/mod.ts";
+import { Widget } from "../widget/mod.ts";
 
 export interface Settings extends ISettings {}
 export class Settings {
@@ -69,36 +53,8 @@ export class Settings {
     };
   }
 
-  private getBundledWidgetConfig<T extends ThirdPartyWidgetSettings>(id: WidgetId): T {
-    const config = this.inner.byWidget[id];
-    if (!config) throw new Error("Bundled widget settings not found");
-    return config as T;
-  }
-
-  get fancyToolbar(): FancyToolbarSettings {
-    return this.getBundledWidgetConfig(SeelenToolbarWidgetId);
-  }
-
-  get seelenweg(): SeelenWegSettings {
-    return this.getBundledWidgetConfig(SeelenWegWidgetId);
-  }
-
-  get windowManager(): WindowManagerSettings {
-    return this.getBundledWidgetConfig(SeelenWindowManagerWidgetId);
-  }
-
-  get launcher(): SeelenLauncherSettings {
-    return this.getBundledWidgetConfig(SeelenLauncherWidgetId);
-  }
-
-  get wall(): SeelenWallSettings {
-    return this.getBundledWidgetConfig(SeelenWallWidgetId);
-  }
-
   /** Will store the settings on disk */
   save(): Promise<void> {
     return invoke(SeelenCommand.StateWriteSettings, { settings: this.inner });
   }
 }
-
-export * from "./settings_by_monitor.ts";

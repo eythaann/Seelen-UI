@@ -1,0 +1,13 @@
+default_multimedia_volume: Мультимедиа дууны хэмжээ
+device:
+  channel:
+    system: Системийн дуу чимээ
+  comunications: Харилцаа холбоо
+  missing: Төхөөрөмж дутуу байна
+  mixer: Эзлэхүүн холигч
+  multimedia: Мультимедиа
+  settings: Төхөөрөмжийн нэмэлт тохиргоо
+  volume: Төхөөрөмжийн эзлэхүүн
+input_devices: Оролтын төхөөрөмжүүд
+output_devices: Гаралтын төхөөрөмжүүд
+players: Медиа тоглуулагч

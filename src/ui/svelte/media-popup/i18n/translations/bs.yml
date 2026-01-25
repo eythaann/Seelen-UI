@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedijalni volumen
+device:
+  channel:
+    system: Sistemski zvuci
+  comunications: Komunikacije
+  missing: Nedostaje uređaj
+  mixer: Volume Mixer
+  multimedia: Multimedija
+  settings: Više postavki uređaja
+  volume: Jačina zvuka uređaja
+input_devices: Ulazni uređaji
+output_devices: Izlazni uređaji
+players: Media Players

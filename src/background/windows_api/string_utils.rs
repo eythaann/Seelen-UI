@@ -18,13 +18,15 @@ impl WindowsString {
         }
     }
 
-    pub fn from_slice(s: &[u16]) -> Self {
-        Self { inner: s.to_vec() }
-    }
-
     pub fn from_str(s: &str) -> Self {
         Self {
             inner: s.encode_utf16().chain(Some(0)).collect(),
+        }
+    }
+
+    pub fn from_slice(s: &[u16]) -> Self {
+        Self {
+            inner: s.iter().copied().chain(Some(0)).collect(),
         }
     }
 
@@ -88,12 +90,6 @@ impl From<String> for WindowsString {
     }
 }
 
-impl From<&String> for WindowsString {
-    fn from(value: &String) -> Self {
-        Self::from_str(value)
-    }
-}
-
 impl From<&OsStr> for WindowsString {
     fn from(value: &OsStr) -> Self {
         Self::from_os_string(value)
@@ -103,6 +99,18 @@ impl From<&OsStr> for WindowsString {
 impl From<OsString> for WindowsString {
     fn from(value: OsString) -> Self {
         Self::from_os_string(&value)
+    }
+}
+
+impl From<&std::path::Path> for WindowsString {
+    fn from(value: &std::path::Path) -> Self {
+        Self::from_os_string(value.as_os_str())
+    }
+}
+
+impl From<std::path::PathBuf> for WindowsString {
+    fn from(value: std::path::PathBuf) -> Self {
+        Self::from_os_string(value.as_os_str())
     }
 }
 

@@ -1,16 +1,6 @@
 action:
   confirm: Piştrastin?
   confirm_body: Ev çalakî nikare were paşguh kirin.
-app_launcher:
-  enable: Launcher App çalak bikin
-  launch_on:
-    mouse_over: Mişk li ser
-    primary: Bingehîn
-  monitor: Monitor to Show
-  runners:
-    cmd: Ferman
-    explorer: Rev
-    label: Runners
 apps_configurations:
   app:
     bindings: Binding (Nîşe her du vebijark hewce ne)
@@ -85,7 +75,6 @@ devtools:
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
   settings_file: Pelê Mîhengan
-  simulate_fullscreen: Bûyera tevahî ekranê simule bikin
 extras:
   clear_icons: Îkonên pergala zelal cache
   clear_icons_tooltip: >-
@@ -95,6 +84,10 @@ extras:
   links: Girêdanên fermî
   relaunch: Berxwedêr
   version: Awa
+  version_fixed: >-
+    Serlêdan û guhertoyên WebView2 Runtime têne rast kirin. Ev tê vê wateyê ku
+    serîlêdan dê nûvekirinan wernegire û WebView2 Runtime dê bixweber bi
+    nûvekirinên Windows-ê re neyê nûve kirin.
 general:
   accent_color: Rengê Accent
   date_format: Formata Date
@@ -102,6 +95,7 @@ general:
     available: Pakêtên îkonê yên berdest
     selected: Pakêtên Îkonên Çalak
   language: Ziman
+  monday: Duşem
   performance_mode:
     on_battery: Li ser batterê
     on_energy_saver: Li ser Saveravdêriya Enerjiyê
@@ -110,7 +104,10 @@ general:
       extreme: Bêfêhm zêde
       minimal: Minimal
     plugged: Plug kirin an drav kirin
+  saturday: Şemî
+  start_of_week: Destpêka Hefteyê
   startup: Li ser destpêka bisekinin?
+  sunday: Yekşem
   theme:
     available: Mijarên Berdest
     selected: Mijarên Çalak
@@ -153,18 +150,28 @@ resources:
   app_outdated: >-
     Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş
     bixebite.
+  corrupted_wallpaper: >-
+    Derxistina wêneya piçûk bi ser neket - formata vîdyoyê ya xerabûyî an nayê
+    piştgirî kirin
   delete: Avkaniyê jêbirin
   discover: Zêdetir çavkaniyên kifş bikin
   has_update: Nûvekirinek heye
+  high_impact: Bandora bilind li ser performansê
   import_wallpapers: Dîwarên herêmî yên import bikin
   open_folder: Peldanka çavkaniya vekirî
   outdated: >-
     Vê çavkaniyê ji bo guhertoyek kevn a Seelen UI hate çêkirin û dibe ku bi
     rengek baş kar neke.
+  see_on_website: Li ser malperê bibînin
+review_request:
+  not_now: Guhê xwe nedenê
+  sure: Emîn!
+  title: Ji Seelen UI-ê kêfxweş dibin?
 save: Rizgarkirin
 save_and_restart: Save & Restart
 see_more: Bêtir bibînin
 shortcuts:
+  duplicate_error: Ev kurtebir hatiye dubarekirin
   enable: Pergala kurtefîlmên çêkirî çalak bikin
   enable_tooltip: >-
     Heke hûn ê pergala kurteya xwe bi karanîna muwekîlê Seelen UI bikar bînin
@@ -209,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: Vegere qada xebata berê
     switch_workspace: Switch to Workspace {{0}}
     toggle_float: Mode Float Float Toggle
-    toggle_launcher: Destpêka Toggle
     toggle_monocle: Mode Mode Monocle Workspace Toggle
   readonly_tooltip: Ev kurteyek xwendinê ye
   reset: Reset to Default
@@ -218,13 +224,6 @@ sides:
   left: Çep
   right: Rast
   top: Kop
-start:
-  message: >-
-    Welcome to Seelen Ui, hawîrdora desktopê ya paşîn a bi navgînek pencereya bi
-    navgîniya Windows-ê re ku ezmûna Windows zêde bike! Li ser serdemek nû û
-    pirrjimar bi navbeynkariya intuitive û taybetmendiyên pêşkeftî vekolînin.
-  message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
-  title: Bi xêr hatî!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dereng ji bo veşartinê
@@ -245,23 +244,39 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Şîn
+  cancel: Bişûndekirin
+  close: Nêzîkî
+  collection_name: Navê Koleksiyonê
+  collections: Collections
   contrast: Dijîtî
+  corrupted_wallpapers_message: 'Dîwarên xerabûyî, bifikire ku van jêbirin:'
+  create: Xûliqandin
+  create_collection: Koleksiyonê çêbikin
+  default_collection: Berhevoka Bingehîn
+  delete_collection: Koleksiyonê jêbirin
+  edit_collection: Edit Collection
   enable: Gerînendeyê Wallpaper çalak bike
+  extend: Seretayî dirêj bikin
   fit:
     contain: Bêdengman
     cover: Lihêv
     fill: Tijîkirin
   flipHorizontal: Flip horizontî
   flipVertical: Flip Vertical
+  generating_thumbnails: Çêkirina Thumbnails Wallpaper
   hours: demjimêr
   interval: Her kesê biguherînin
   minutes: deqq
+  monitor_collection: Monitor Collection
+  multimonitor_behaviour: Behavior Multimonitor
   muted: Dengê vîdyoyê qut bike
   no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
+  no_collections: Hê berhevok nehatine çêkirin. Bişkojka + bikirtînin da ku yek çêbikin.
   objectFit: Background Fit
   objectPosition: Positiona paşîn
   overlayColor: Rengê dorpêçkirî
   overlayMixBlendMode: Overlay Mode Blend
+  per_monitor: Per monitor
   playback: Leza Playback
   position:
     bottom: Erd
@@ -269,10 +284,17 @@ wall:
     left: Çep
     right: Rast
     top: Kop
+  processing_video: Vîdyoyê pêvajoyê
   random: Slideshow Randomize
   saturation: Satutionation
   seconds: seconds
+  select_collection: Hilbijêre Collection
+  thumbnail_generation_complete: Nifşa Thumbnail Biqede
+  thumbnail_generation_finished: Çêkirina pîçikan bi serfirazî qediya
+  wallpaper_collection: Collection Wallpaper
+  wallpaper_settings: Mîhengên Wallpaper
   withOverlay: Bi sernav
+  workspace_collections: Koleksiyonên Cihê Xebatê
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dereng ji bo veşartinê
@@ -308,6 +330,19 @@ weg:
   padding: Padding
   show_end_task: Di peywira peywirê de peywira dawiyê nîşan bide
   width: Berî
+welcome:
+  give_a_review: Bidin Review
+  message: >-
+    Seelen UI ji bo Windows-ê hawîrdorek sermaseya belaş û çavkaniya vekirî ye.
+    Li vir kontrola we ya bêkêmasî heye ka sermaseya we çawa xuya dike û
+    tevdigere, ku dihêle hûn her hûrgulî xweş bikin da ku li gorî xebata xwe û
+    şêwaza xwe tevbigerin.
+  ok: Ka em dest pê bikin!
+  review: >-
+    Heke hûn ji karanîna Seelen UI-yê hez dikin, bifikirin ku li ser firotgehê
+    nirxandinek bihêlin - nerînên we ji projeyê re dibe alîkar ku mezin bibe û
+    pêşve bibe.
+  title: Hûn bi xêr hatin Seelen UI!
 widget:
   enable: Vê widgetê çalak bikin
   enable_for_monitor: Li ser vê çavdêriyê çalak bikin

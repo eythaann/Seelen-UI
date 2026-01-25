@@ -1,16 +1,6 @@
 action:
   confirm: Esteu segur?
   confirm_body: Aquesta acció no es pot desfer.
-app_launcher:
-  enable: Activa el llançador d'aplicacions
-  launch_on:
-    mouse_over: Passa el ratolí
-    primary: primària
-  monitor: Monitoritzar per mostrar
-  runners:
-    cmd: Manar
-    explorer: Dirigir
-    label: Corredors
 apps_configurations:
   app:
     bindings: Enquadernació (nota les dues opcions són necessàries)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Carpeta d'instal·lació
   load: Carregar
   settings_file: Arxiu de configuració
-  simulate_fullscreen: Simula un esdeveniment a pantalla completa
 extras:
   clear_icons: Esborrar la memòria cau de les icones del sistema
   clear_icons_tooltip: Es pot requerir un reinici per tenir efecte sobre tots els ginys
@@ -95,6 +84,11 @@ extras:
   links: Enllaços oficials
   relaunch: Rellançar
   version: Versió
+  version_fixed: >-
+    Les versions de l'aplicació i WebView2 Runtime estan arreglades. Això vol
+    dir que l'aplicació no rebrà actualitzacions i que el temps d'execució de
+    WebView2 no s'actualitzarà automàticament amb les actualitzacions de
+    Windows.
 general:
   accent_color: Color d’accent
   date_format: Format de la data
@@ -102,6 +96,7 @@ general:
     available: Paquets d'icones disponibles
     selected: Paquets d'icones actius
   language: Llenguatge
+  monday: dilluns
   performance_mode:
     on_battery: A la bateria
     on_energy_saver: A l'estalvi d'energia
@@ -110,7 +105,10 @@ general:
       extreme: Extrem
       minimal: Mínim
     plugged: Tassa o càrrega
+  saturday: dissabte
+  start_of_week: Inici de setmana
   startup: Executeu la posada en marxa?
+  sunday: diumenge
   theme:
     available: Temes disponibles
     selected: Temes actius
@@ -153,18 +151,26 @@ resources:
   app_outdated: >-
     Aquest recurs requereix una versió més recent de la interfície d'usuari de
     Seelen per funcionar correctament.
+  corrupted_wallpaper: 'No s''ha pogut extreure la miniatura: format de vídeo danyat o no compatible'
   delete: Esborra el recurs
   discover: Descobriu més recursos
   has_update: Hi ha disponible una actualització
+  high_impact: Alt impacte en el rendiment
   import_wallpapers: Importa fons de pantalla locals
   open_folder: Obrir la carpeta de recursos
   outdated: >-
     Aquest recurs va ser dissenyat per a una versió anterior de la interfície
     d'usuari de Seelen i pot no funcionar correctament.
+  see_on_website: Veure al lloc web
+review_request:
+  not_now: Ara no
+  sure: Segur!
+  title: Us agrada la interfície d'usuari de Seelen?
 save: Estalviar
 save_and_restart: Desar i reiniciar
 see_more: Veure més
 shortcuts:
+  duplicate_error: Aquesta drecera està duplicada
   enable: Activa el sistema integrat de dreceres
   enable_tooltip: >-
     Desactiveu si implementareu el vostre propi sistema de dreceres mitjançant
@@ -209,7 +215,6 @@ shortcuts:
     switch_to_previous_workspace: Canvieu a l'espai de treball anterior
     switch_workspace: Switch a Workspace {{0}}
     toggle_float: Mode de flotació de la finestra de commutació
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Mode Monocle de l'espai de treball
   readonly_tooltip: Aquesta és una drecera de només lectura
   reset: Restableix als valors predeterminats
@@ -218,14 +223,6 @@ sides:
   left: Esquerre
   right: Dret
   top: Superior
-start:
-  message: >-
-    Benvingut a la interfície d'usuari de Seelen, l'entorn d'escriptori
-    definitiu amb un gestor de Windows de rajoles incorporat per millorar la
-    vostra experiència de Windows. Exploreu una nova era d’eficiència i
-    multitasca amb la nostra interfície intuïtiva i les funcions avançades.
-  message_accent: Optimitzeu la vostra productivitat amb estil.
-  title: Benvingut!
 toolbar:
   auto_hide: Auto amaga
   delay_to_hide: Tarda en amagar-se
@@ -246,23 +243,39 @@ update:
 wall:
   backgrounds: Fons de pantalla
   blur: Borrosa
+  cancel: Cancel·la
+  close: Tancar
+  collection_name: Nom de la col·lecció
+  collections: Col·leccions
   contrast: Contrast
+  corrupted_wallpapers_message: 'Fons de pantalla danyats, penseu a suprimir-los:'
+  create: Crear
+  create_collection: Crea col·lecció
+  default_collection: Col·lecció per defecte
+  delete_collection: Suprimeix la col·lecció
+  edit_collection: Edita la col·lecció
   enable: Activa el gestor de fons de pantalla
+  extend: Ampliar primària
   fit:
     contain: Contenir
     cover: Tapa
     fill: Replenar
   flipHorizontal: Flipeu horitzontal
   flipVertical: Flip vertical
+  generating_thumbnails: Generació de miniatures de fons de pantalla
   hours: hores
   interval: Canvieu el fons de pantalla cada
   minutes: minuts
+  monitor_collection: Col·lecció de monitors
+  multimonitor_behaviour: Comportament multimonitor
   muted: Silencia l'àudio del vídeo
   no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
+  no_collections: Encara no s'ha creat cap col·lecció. Feu clic al botó + per crear-ne un.
   objectFit: Fixació de fons
   objectPosition: Posició de fons
   overlayColor: Color de superposició
   overlayMixBlendMode: Mode de barreja de barreja de superposició
+  per_monitor: Per monitor
   playback: Velocitat de reproducció
   position:
     bottom: Fons
@@ -270,10 +283,17 @@ wall:
     left: Esquerre
     right: Dret
     top: Cim
+  processing_video: Processament de vídeo
   random: Randomize Show de diapositives
   saturation: Saturació
   seconds: segons
+  select_collection: Seleccioneu Col·lecció
+  thumbnail_generation_complete: S'ha completat la generació de miniatures
+  thumbnail_generation_finished: La generació de miniatures ha finalitzat correctament
+  wallpaper_collection: Col·lecció de fons de pantalla
+  wallpaper_settings: Configuració del fons de pantalla
   withOverlay: Amb superposició
+  workspace_collections: Col·leccions d'espais de treball
 weg:
   auto_hide: Amaga automàtic
   delay_to_hide: Tarda en amagar-se
@@ -309,6 +329,18 @@ weg:
   padding: Encoir
   show_end_task: Mostra la tasca final a la barra de tasques
   width: Amplada
+welcome:
+  give_a_review: Fes una ressenya
+  message: >-
+    Seelen UI és un entorn d'escriptori gratuït i de codi obert per a Windows.
+    Aquí teniu un control total sobre com es veu i es comporta el vostre
+    escriptori, cosa que us permet personalitzar tots els detalls perquè
+    coincideixin amb el vostre flux de treball i estil.
+  ok: Comencem!
+  review: >-
+    Si us agrada utilitzar Seelen UI, penseu a deixar una ressenya a la botiga:
+    els vostres comentaris ajuden el projecte a créixer i millorar.
+  title: Benvingut a Seelen UI!
 widget:
   enable: Activa aquest widget
   enable_for_monitor: Activa en aquest monitor

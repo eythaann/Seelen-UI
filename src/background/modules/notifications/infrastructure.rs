@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::Once};
 
 use seelen_core::{handlers::SeelenEvent, system_state::AppNotification};
 use windows::{
@@ -9,34 +9,26 @@ use windows::{
 use crate::{
     app::emit_to_webviews,
     error::Result,
-    log_error,
     modules::notifications::application::{get_toast_activator_clsid, NotificationManager},
-    trace_lock,
     windows_api::{string_utils::WindowsString, types::AppUserModelId, Com},
 };
 
-use super::application::NOTIFICATION_MANAGER;
-
-pub fn register_notification_events() {
-    std::thread::spawn(|| {
-        log_error!(trace_lock!(NOTIFICATION_MANAGER).initialize());
-
+fn get_notification_manager() -> &'static NotificationManager {
+    static TAURI_EVENT_REGISTRATION: Once = Once::new();
+    TAURI_EVENT_REGISTRATION.call_once(|| {
         NotificationManager::subscribe(|_event| {
             emit_to_webviews(
                 SeelenEvent::Notifications,
-                trace_lock!(NOTIFICATION_MANAGER).notifications(),
+                NotificationManager::instance().notifications(),
             );
         });
     });
-}
-
-pub fn release_notification_events() {
-    log_error!(trace_lock!(NOTIFICATION_MANAGER).release());
+    NotificationManager::instance()
 }
 
 #[tauri::command(async)]
 pub fn get_notifications() -> Vec<AppNotification> {
-    trace_lock!(NOTIFICATION_MANAGER).notifications().clone()
+    get_notification_manager().notifications()
 }
 
 // https://learn.microsoft.com/en-us/windows/win32/api/notificationactivationcallback/nf-notificationactivationcallback-inotificationactivationcallback-activate
@@ -84,11 +76,10 @@ pub fn activate_notification(
 
 #[tauri::command(async)]
 pub fn notifications_close(id: u32) -> Result<()> {
-    trace_lock!(NOTIFICATION_MANAGER).remove_notification(id)?;
-    Ok(())
+    get_notification_manager().remove_notification(id)
 }
 
 #[tauri::command(async)]
 pub fn notifications_close_all() -> Result<()> {
-    trace_lock!(NOTIFICATION_MANAGER).clear_notifications()
+    get_notification_manager().clear_notifications()
 }

@@ -1,0 +1,13 @@
+default_multimedia_volume: Volume Multimedia
+device:
+  channel:
+    system: Sîstema dengên
+  comunications: Communications
+  missing: Amûra winda
+  mixer: Volume Mixer
+  multimedia: Multimedia
+  settings: More Settings Device
+  volume: Volume Device
+input_devices: cîhazên Input
+output_devices: Amûrên derketinê
+players: Players Media

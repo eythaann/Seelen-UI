@@ -21,7 +21,7 @@ use crate::{
 impl WindowManagerV2 {
     fn should_be_managed(hwnd: HWND) -> bool {
         let window = Window::from(hwnd);
-        if !window.is_interactable_and_not_hidden() {
+        if !window.is_interactable_and_not_hidden() || window.is_minimized() {
             return false;
         }
 

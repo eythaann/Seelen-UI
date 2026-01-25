@@ -65,16 +65,8 @@ impl FullState {
         }
     }
 
-    pub fn is_launcher_enabled(&self) -> bool {
-        self.is_widget_enabled(&WidgetId::known_launcher())
-    }
-
     pub fn is_wall_enabled(&self) -> bool {
         self.is_widget_enabled(&WidgetId::known_wall())
-    }
-
-    pub fn are_shortcuts_enabled(&self) -> bool {
-        self.settings.shortcuts.enabled
     }
 
     pub fn get_wm_layout(&self, workspace_id: &WorkspaceId) -> WindowManagerLayout {

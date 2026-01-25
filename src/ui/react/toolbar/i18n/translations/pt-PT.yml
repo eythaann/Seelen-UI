@@ -20,9 +20,6 @@ context_menu:
   restore: Restaurar para padrão
   settings: Configurações
   task_manager: Gerente de tarefas
-keyboard:
-  more: Mais configurações de teclado
-  title: Layout do teclado
 media:
   default_multimedia_volume: Volume multimídia
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Dispositivos de entrada
   output_devices: Dispositivos de saída
   players: Players de mídia
-network:
-  available: Redes disponíveis
-  connect: Ligar
-  connected: Conectado a
-  disconnect: Desconectar
-  hidden: Rede oculta
-  more: Mais configurações de rede
-  not_found: Nenhuma rede Wi-Fi encontrada
-  placeholder:
-    password: Palavra-passe
-  saved: Redes salvas
-  scanning: Digitalização para redes
-  secured: Rede criptografada
 notifications:
   clear: Limpar tudo
   empty: Sem notificações
@@ -70,24 +54,3 @@ settings:
   power: Poder
   restart: Reiniciar
   title: Configurações
-userhome:
-  empty_list: Sem itens
-  folders:
-    desktop: Desktop
-    documents: Documentos
-    downloads: Downloads
-    more_items: Mostre mais ...
-    music: Música
-    pictures: Fotos
-    recent: Usado recentemente
-    reduce_items: Mostrar menos ...
-    title: Diretórios de usuário
-    videos: Vídeos
-  profile:
-    accounts: Abra as configurações da conta
-    open_onedrive: Open OneDrive Directory
-    open_user_folder: Diretório de usuário aberto
-  seelen_options:
-    open_installation_folder: Pasta de configurações de Seelen abra Seelen
-    open_log_folder: Pasta de log de Seelen aberta
-    title: Diretórios de Seelen

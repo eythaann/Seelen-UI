@@ -20,9 +20,6 @@ context_menu:
   restore: Restaurarea la setările implicite
   settings: Setări
   task_manager: Manager de activități
-keyboard:
-  more: Mai multe setări ale tastaturii
-  title: Layout tastatură
 media:
   default_multimedia_volume: Volum multimedia
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Dispozitive de intrare
   output_devices: Dispozitive de ieșire
   players: Playere media
-network:
-  available: Rețele disponibile
-  connect: Conectați
-  connected: Conectat la
-  disconnect: Deconectat
-  hidden: Rețea ascunsă
-  more: Mai multe setări de rețea
-  not_found: Nu au fost găsite rețele
-  placeholder:
-    password: Parola
-  saved: Rețele salvate
-  scanning: Scanare pentru rețele
-  secured: Rețea criptată
 notifications:
   clear: Ștergeți toate
   empty: Nu există notificări
@@ -70,24 +54,3 @@ settings:
   power: Putere
   restart: Repornire
   title: Setări
-userhome:
-  empty_list: Nu există articole
-  folders:
-    desktop: Desktop
-    documents: Documente
-    downloads: Descărcări
-    more_items: Arată mai mult...
-    music: Muzică
-    pictures: Imagini
-    recent: Utilizate recent
-    reduce_items: Arată mai puțin...
-    title: Directoare utilizator
-    videos: Video
-  profile:
-    accounts: Deschideți setările contului
-    open_onedrive: Deschideți directorul OneDrive
-    open_user_folder: Deschideți directorul utilizatorului
-  seelen_options:
-    open_installation_folder: Deschideți folderul de setări Seelen
-    open_log_folder: Deschideți folderul jurnal Seelen
-    title: Directoare Seelen

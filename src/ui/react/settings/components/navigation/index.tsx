@@ -3,24 +3,19 @@ import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { Tooltip } from "antd";
 import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router";
 
-import { useAppSelector } from "../../modules/shared/utils/infra.ts";
-
-import { RootSelectors } from "../../modules/shared/store/app/selectors.ts";
 import { cx } from "../../modules/shared/utils/app.ts";
 
 import { RouteIcons, RoutePath } from "./routes.tsx";
 import cs from "./index.module.css";
+import { settings, themes, widgets } from "../../state/mod.ts";
 
 export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);
 
-  const widgets = useSelector(RootSelectors.widgets);
-  const themes = useAppSelector(RootSelectors.availableThemes);
-  const activeThemes = useAppSelector(RootSelectors.activeThemes);
-  const devTools = useAppSelector(RootSelectors.devTools);
+  const activeThemes = settings.value.activeThemes;
+  const devTools = settings.value.devTools;
 
   const { t } = useTranslation();
   const location = useLocation();
@@ -39,7 +34,7 @@ export const Navigation = memo(() => {
     );
   };
 
-  const themesDirectAccess = themes.filter(
+  const themesDirectAccess = themes.value.filter(
     (theme) => theme.settings.length && activeThemes.includes(theme.id),
   );
 
@@ -84,14 +79,14 @@ export const Navigation = memo(() => {
 
         <div className={cs.separator} />
         <div className={cs.group}>
-          {widgets
+          {widgets.value
             .filter((widget) => !widget.hidden)
             .toSorted((a, b) => a.id.localeCompare(b.id))
             .map((widget) => (
               <Item
                 key={widget.id}
-                route={`/widget/${widget.id.replace("@", "")}`}
-                isActive={location.pathname === `/widget/${widget.id.replace("@", "")}`}
+                route={`/widget?${new URLSearchParams({ id: widget.id })}`}
+                isActive={location.pathname === `/widget?${new URLSearchParams({ id: widget.id })}`}
                 collapsed={collapsed}
                 label={<ResourceText text={widget.metadata.displayName} />}
                 icon={<Icon iconName={(widget.icon as any) || "BiSolidWidget"} />}
@@ -108,8 +103,8 @@ export const Navigation = memo(() => {
                 .map((theme) => (
                   <Item
                     key={theme.id}
-                    route={`/theme/${theme.id.replace("@", "")}`}
-                    isActive={location.pathname === `/theme/${theme.id.replace("@", "")}`}
+                    route={`/theme?${new URLSearchParams({ id: theme.id })}`}
+                    isActive={location.pathname === `/theme?${new URLSearchParams({ id: theme.id })}`}
                     collapsed={collapsed}
                     label={<ResourceText text={theme.metadata.displayName} />}
                     icon={<Icon iconName="BiSolidPalette" />}

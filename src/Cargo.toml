@@ -23,6 +23,7 @@ path = "splash/main.rs"
 
 [build-dependencies]
 tauri-build = { workspace = true, features = [] }
+slu-utils = { workspace = true }
 
 [dependencies]
 slu-ipc = { workspace = true }
@@ -76,6 +77,7 @@ translators = { workspace = true, features = ["google", "tokio-async"] }
 rand = { workspace = true }
 discord-rich-presence = { workspace = true }
 win-hotkeys = { workspace = true }
+walkdir = { workspace = true }
 tokio = { workspace = true }
 seelen-core = { workspace = true }
 windows = { workspace = true, features = [
@@ -88,7 +90,9 @@ windows = { workspace = true, features = [
     "Management_Deployment",
     "Win32_Globalization",
     "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_UI_Input_Ime",
     "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_TextServices",
     "Win32_UI_Shell",
     "Win32_UI_Shell_PropertiesSystem",
     "Win32_UI_Accessibility",
@@ -151,6 +155,7 @@ windows = { workspace = true, features = [
     "UI_Core",
     "UI_Notifications_Management",
     "UI_ViewManagement",
+    "UI_StartScreen",
     "deprecated",
     "Win32_NetworkManagement_IpHelper",
     "Win32_NetworkManagement_Ndis",
@@ -173,11 +178,10 @@ windows = { workspace = true, features = [
 ] }
 time = { workspace = true, features = ["formatting", "local-offset"] }
 scc = { workspace = true }
-open = "5.3.2"
+open = "5.3.3"
 iced = { version = "0.13.1", features = ["image", "svg"] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
 # If you use cargo directly instead of tauri's cli you can use this feature flag to switch between tauri's `dev` and `build` modes.
 custom-protocol = ["tauri/custom-protocol"]
-devtools = ["tauri/devtools"]

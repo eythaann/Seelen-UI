@@ -20,9 +20,6 @@ context_menu:
   restore: ወደ ነባሪነት ይመልሱ
   settings: ቅንብሮች
   task_manager: ተግባር አስተዳዳሪ
-keyboard:
-  more: ተጨማሪ የቁልፍ ሰሌዳ ቅንብሮች
-  title: የቁልፍ ሰሌዳ አቀማመጥ
 media:
   default_multimedia_volume: መልቲሚዲያ መጠን
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: የግቤት መሣሪያዎች
   output_devices: የውጤት መሣሪያዎች
   players: የሚዲያ ተጫዋቾች
-network:
-  available: የሚገኙ አውታረ መረቦች
-  connect: አገናኝ
-  connected: ጋር ተገናኝቷል።
-  disconnect: ያላቅቁ
-  hidden: የተደበቀ አውታረመረብ
-  more: ተጨማሪ የአውታረ መረብ ቅንብሮች
-  not_found: ምንም አውታረመረቦች አልተገኙም
-  placeholder:
-    password: የይለፍ ቃል
-  saved: የተቀመጡ አውታረ መረቦች
-  scanning: አውታረ መረቦችን በመቃኘት ላይ
-  secured: የተመሰጠረ አውታረ መረብ
 notifications:
   clear: ሁሉንም አጥራ
   empty: ማስታወቂያዎች የሉም
@@ -70,24 +54,3 @@ settings:
   power: ኃይል
   restart: እንደገና ጀምር
   title: ቅንብሮች
-userhome:
-  empty_list: ምንም ዕቃዎች የሉም
-  folders:
-    desktop: ዴስክቶፕ
-    documents: ሰነዶች
-    downloads: ማውረድ
-    more_items: ተጨማሪ አሳይ ...
-    music: ሙዚቃ
-    pictures: ስዕሎች
-    recent: በቅርቡ ጥቅም ላይ የዋለው
-    reduce_items: ያነሰ አሳይ ...
-    title: የተጠቃሚ ዳይሬክቶች
-    videos: ቪዲዮዎች
-  profile:
-    accounts: የመለያ ቅንብሮች ይክፈቱ
-    open_onedrive: የ Oddrive ማውጫ ይክፈቱ
-    open_user_folder: የተከፈተ የተጠቃሚ ማውጫ
-  seelen_options:
-    open_installation_folder: የተከፈቱ የቀጥታ ቅንብሮች አቃፊ ይክፈቱ
-    open_log_folder: የተከፈተ የምስክር ወረቀት አቃፊ
-    title: ፈልገዋል

@@ -1,11 +1,5 @@
 cancel: Atšaukti
 done: Padaryta
-drivers:
-  got_it: Turiu
-  monitor_disabled: >-
-    Atrodo, kad kai kurios monitoriaus tvarkyklės yra išjungtos. Įjunkite jas,
-    kad "Seelen UI" veiktų tinkamai.
-  monitor_disabled_title: Monitoriaus tvarkyklės yra išjungtos
 resource:
   added: Pridėtas naujas išteklius
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
     reikšmės.
   corrupted_file_path: Sugadintas failo kelias
   download: Eikite į atsisiuntimo puslapį
+  files_integrity: >-
+    Nepavyko patikrinti programos failų vientisumo.
+
+    Taip gali nutikti, jei failai buvo modifikuoti, sugadinti arba diegimas
+    nebaigtas.
+
+    Saugumo sumetimais Seelen vartotojo sąsaja negali tęstis.
+
+    Įdiekite jį iš naujo iš oficialios svetainės.
+  files_integrity_title: Saugos įspėjimas – nepavyko patikrinti failų vientisumo
   not_found: WebView2 vykdymo laikas nerastas
   not_found_description: „Seelen“ vartotojo sąsajai reikalinga „Webview2 Runtime“. Įdiekite jį.
   outdated: „WebView2“ vykdymo laikas pasenęs

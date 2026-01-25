@@ -1,0 +1,21 @@
+empty_list: Няма елементи
+folders:
+  desktop: Работен плот
+  documents: Документи
+  downloads: Изтегляния
+  more_items: Покажи още...
+  music: Музика
+  pictures: Снимки
+  recent: Наскоро използван
+  reduce_items: Покажи по-малко...
+  title: Потребителски директории
+  videos: Видеоклипове
+profile:
+  accounts: Отворете настройките на акаунта
+  log_out: Излезте
+  open_onedrive: Отворете директорията на OneDrive
+  open_user_folder: Отворете потребителската директория
+seelen_options:
+  open_installation_folder: Отворете папката с настройки на Seelen
+  open_log_folder: Отворете папката с журнал на Seelen
+  title: Seelen директории

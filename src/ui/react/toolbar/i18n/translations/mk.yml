@@ -20,9 +20,6 @@ context_menu:
   restore: Враќање на стандардно
   settings: Поставки
   task_manager: Управувач со задачи
-keyboard:
-  more: Повеќе поставки за тастатура
-  title: Распоред на тастатура
 media:
   default_multimedia_volume: Мултимедијален волумен
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Внесување уреди
   output_devices: Излезни уреди
   players: Медиа плеери
-network:
-  available: Достапни мрежи
-  connect: Поврзете се
-  connected: Поврзан со
-  disconnect: Исклучување
-  hidden: Скриена мрежа
-  more: Повеќе мрежни поставки
-  not_found: Не се пронајдени мрежи
-  placeholder:
-    password: Лозинка
-  saved: Зачувани мрежи
-  scanning: Скенирање за мрежи
-  secured: Шифрирана мрежа
 notifications:
   clear: Исчистете ги сите
   empty: Нема известувања
@@ -70,24 +54,3 @@ settings:
   power: Моќ
   restart: Рестарт
   title: Поставки
-userhome:
-  empty_list: Нема предмети
-  folders:
-    desktop: Работна површина
-    documents: Документи
-    downloads: Преземања
-    more_items: Покажете повеќе ...
-    music: Музика
-    pictures: Слики
-    recent: Неодамна користено
-    reduce_items: Покажете помалку ...
-    title: Кориснички директориуми
-    videos: Видеа
-  profile:
-    accounts: Поставки за отворена сметка
-    open_onedrive: Отворен директориум на OneDrive
-    open_user_folder: Отворете го директориумот за корисници
-  seelen_options:
-    open_installation_folder: Отворете ја папката за поставки Seelen
-    open_log_folder: Отворете ја папката за дневник на Селен
-    title: Директориуми на Селен

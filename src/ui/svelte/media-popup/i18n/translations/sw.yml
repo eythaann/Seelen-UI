@@ -1,0 +1,13 @@
+default_multimedia_volume: Sauti ya Multimedia
+device:
+  channel:
+    system: Sauti za mfumo
+  comunications: Mawasiliano
+  missing: Kifaa hakipo
+  mixer: Mchanganyiko wa Kiasi
+  multimedia: Multimedia
+  settings: Mipangilio Zaidi ya Kifaa
+  volume: Kiasi cha Kifaa
+input_devices: Vifaa vya kuingiza
+output_devices: Vifaa vya pato
+players: Vicheza media

@@ -1,11 +1,5 @@
 cancel: Hlikihla
 done: Usulile
-drivers:
-  got_it: Ngiyitholile
-  monitor_disabled: >-
-    Kubonakala sengathi abanye abashayeli abaqashile bakhutshaziwe. Sicela
-    ubanikeze amandla okuvumela i-Seelen UI isebenze kahle.
-  monitor_disabled_title: Abaqaphi abashayeli bayakhutshazwa
 resource:
   added: Kufakwe insiza entsha
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
     esikhundleni salokho.
   corrupted_file_path: Indlela yefayela eyonakele
   download: Iya ekhasini lokulanda
+  files_integrity: >-
+    Asikwazanga ukuqinisekisa ubuqotho bamafayela ohlelo lokusebenza.
+
+    Lokhu kungenzeka uma amafayela aye ashintshwa, wonakala, noma ukufakwa
+    kungaphelele.
+
+    Ngenxa yezizathu zokuphepha, i-Seelen UI ayikwazi ukuqhubeka.
+
+    Sicela uyifake kabusha kusuka kuwebhusayithi esemthethweni.
+  files_integrity_title: Isexwayiso Sokuphepha - Ukuhlola Ubuqotho Kwamafayela Kwehlulekile
   not_found: Isikhathi sokusebenza se-WebView2 asitholakali
   not_found_description: I-Seelen UI idinga isikhathi sokusebenza se-Webview2. Sicela uyifake.
   outdated: I-WebView2 Runtime isiphelelwe yisikhathi

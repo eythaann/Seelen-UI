@@ -138,7 +138,7 @@ export function FancyToolbar() {
       trigger={["contextMenu"]}
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
-      dropdownRender={() => <MainContextMenu />}
+      popupRender={() => <MainContextMenu />}
     >
       <div
         className={cx("ft-bar", $settings.value.position.toLowerCase(), {

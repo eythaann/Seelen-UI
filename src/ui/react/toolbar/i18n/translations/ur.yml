@@ -20,9 +20,6 @@ context_menu:
   restore: ڈیفالٹ میں بحال کریں
   settings: ترتیبات
   task_manager: ٹاسک مینیجر
-keyboard:
-  more: مزید کی بورڈ کی ترتیبات
-  title: کی بورڈ لے آؤٹ
 media:
   default_multimedia_volume: ملٹی میڈیا حجم
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: ان پٹ ڈیوائسز
   output_devices: آؤٹ پٹ ڈیوائسز
   players: میڈیا پلیئرز
-network:
-  available: دستیاب نیٹ ورکس
-  connect: کنیکٹ
-  connected: سے جڑا ہوا ہے۔
-  disconnect: ڈسکنیکٹ
-  hidden: پوشیدہ نیٹ ورک
-  more: نیٹورک کی مزید معلومات
-  not_found: کوئی نیٹ ورک نہیں ملا
-  placeholder:
-    password: پاس ورڈ
-  saved: محفوظ کردہ نیٹ ورکس
-  scanning: نیٹ ورکس کے لیے سکیننگ
-  secured: خفیہ کردہ نیٹ ورک
 notifications:
   clear: سب کو صاف کریں
   empty: کوئی اطلاعات نہیں
@@ -70,24 +54,3 @@ settings:
   power: پاور
   restart: ریسٹارٹ
   title: عنوان
-userhome:
-  empty_list: کوئی اشیاء نہیں
-  folders:
-    desktop: ڈیسک ٹاپ
-    documents: دستاویزات
-    downloads: ڈاؤن لوڈ
-    more_items: مزید دکھائیں ...
-    music: موسیقی
-    pictures: تصاویر
-    recent: حال ہی میں استعمال ہوا
-    reduce_items: کم دکھائیں ...
-    title: صارف ڈائریکٹریز
-    videos: ویڈیوز
-  profile:
-    accounts: اکاؤنٹ کی ترتیبات کھولیں
-    open_onedrive: اوپن ریو ڈائرکٹری کھولیں
-    open_user_folder: صارف کی ڈائرکٹری کھولیں
-  seelen_options:
-    open_installation_folder: سیلن کی ترتیبات کا فولڈر کھولیں
-    open_log_folder: سیلن لاگ فولڈر کھولیں
-    title: سیلن ڈائریکٹریز

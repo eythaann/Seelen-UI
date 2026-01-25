@@ -18,7 +18,6 @@ pub struct SeelenCommon {
     cache_dir: PathBuf,
     temp_dir: PathBuf,
     // specifits
-    history: PathBuf,
     settings: PathBuf,
     weg_items: PathBuf,
     toolbar_items: PathBuf,
@@ -28,7 +27,6 @@ pub struct SeelenCommon {
     bundled_themes: PathBuf,
     user_plugins: PathBuf,
     bundled_plugins: PathBuf,
-    user_app_configs: PathBuf,
     bundled_app_configs: PathBuf,
     wallpapers: PathBuf,
     widgets: PathBuf,
@@ -39,8 +37,6 @@ pub struct SeelenCommon {
 
     // @deprecated since v2.1.0
     user_placeholders: PathBuf,
-    profiles: PathBuf,
-    bundled_profiles: PathBuf,
 }
 
 #[allow(dead_code)]
@@ -60,7 +56,6 @@ impl SeelenCommon {
             WindowsApi::known_folder(FOLDERID_Windows).expect("Failed to get system dir");
 
         Self {
-            history: data_dir.join("history"),
             settings: data_dir.join("settings.json"),
             weg_items: data_dir.join("seelenweg_items_v2.yml"),
             toolbar_items: data_dir.join("toolbar_items.yml"),
@@ -71,14 +66,11 @@ impl SeelenCommon {
             bundled_themes: resource_dir.join("static/themes"),
             user_plugins: data_dir.join("plugins"),
             bundled_plugins: resource_dir.join("static/plugins"),
-            user_app_configs: data_dir.join("applications.yml"),
             bundled_app_configs: resource_dir.join("static/apps_templates"),
             user_placeholders: data_dir.join("placeholders"),
             widgets: data_dir.join("widgets"),
             bundled_widgets: resource_dir.join("static/widgets"),
             wallpapers: data_dir.join("wallpapers"),
-            profiles: data_dir.join("profiles"),
-            bundled_profiles: resource_dir.join("static/profiles"),
             // general
             data_dir,
             resource_dir,
@@ -121,10 +113,6 @@ impl SeelenCommon {
         &self.toolbar_items
     }
 
-    pub fn history_path(&self) -> &Path {
-        &self.history
-    }
-
     pub fn system_icon_pack_path(&self) -> &Path {
         &self.system_icon_pack
     }
@@ -153,10 +141,6 @@ impl SeelenCommon {
         &self.bundled_plugins
     }
 
-    pub fn user_app_configs_path(&self) -> &Path {
-        &self.user_app_configs
-    }
-
     pub fn bundled_app_configs_path(&self) -> &Path {
         &self.bundled_app_configs
     }
@@ -176,13 +160,5 @@ impl SeelenCommon {
 
     pub fn user_wallpapers_path(&self) -> &Path {
         &self.wallpapers
-    }
-
-    pub fn user_profiles_path(&self) -> &Path {
-        &self.profiles
-    }
-
-    pub fn bundled_profiles_path(&self) -> &Path {
-        &self.bundled_profiles
     }
 }

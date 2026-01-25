@@ -1,0 +1,11 @@
+all: Visos programos
+back: Atgal
+disband: Išskleisti aplanką
+folder: Aplankas
+no_matching_items: Nerasta prekių, atitinkančių jūsų paiešką
+open_file_location: Atidarykite failo vietą
+pin: Smeigtukas
+run_as_admin: Vykdyti kaip administratorius
+unpin: Atsegti
+welcome_message: Sveiki atvykę į Seelen UI programos meniu.
+welcome_message2: Šiame skirtuke galite prisegti mėgstamiausias programas.

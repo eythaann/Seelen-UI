@@ -1,0 +1,21 @@
+empty_list: Element yoxdur
+folders:
+  desktop: İş masası
+  documents: Sənədlər
+  downloads: Yükləmələr
+  more_items: Daha çox göstər...
+  music: Musiqi
+  pictures: Şəkillər
+  recent: Bu yaxınlarda istifadə olunub
+  reduce_items: Daha az göstər...
+  title: İstifadəçi kataloqları
+  videos: Videolar
+profile:
+  accounts: Hesab parametrlərini açın
+  log_out: Çıxın
+  open_onedrive: OneDrive qovluğunu açın
+  open_user_folder: İstifadəçi kataloqunu açın
+seelen_options:
+  open_installation_folder: Seelen parametrləri qovluğunu açın
+  open_log_folder: Seelen log qovluğunu açın
+  title: Görünən kataloqlar

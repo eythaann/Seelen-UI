@@ -185,6 +185,7 @@ export class IconPackManager {
     const { path, umid, __seen = new Set<string>() } = args as
       & SeelenCommandGetIconArgs
       & { __seen?: Set<string> };
+
     // If neither path nor UMID is provided, return null
     if (!path && !umid) {
       return null;

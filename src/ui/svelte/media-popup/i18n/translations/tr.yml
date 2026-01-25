@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedya Sesi
+device:
+  channel:
+    system: Sistem sesleri
+  comunications: İletişim
+  missing: Eksik Cihaz
+  mixer: Hacim Karıştırıcı
+  multimedia: Multimedya
+  settings: Diğer Cihaz Ayarları
+  volume: Cihaz Sesi
+input_devices: Giriş cihazları
+output_devices: Çıkış cihazları
+players: Medya Oynatıcıları

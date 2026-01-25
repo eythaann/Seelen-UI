@@ -11,7 +11,7 @@ import { MediaModule } from "../media/infra/Module.tsx";
 import { NetworkModule } from "../network/infra/Module.tsx";
 import { NotificationsModule } from "../Notifications/infra/Module.tsx";
 import { PowerModule } from "../Power/infra.tsx";
-import { UserModule } from "../user/infra/Module.tsx";
+import { UserModule } from "../user/index.tsx";
 
 import { $plugins } from "../shared/state/items.ts";
 import { WorkspacesModule } from "../Workspaces/index.tsx";

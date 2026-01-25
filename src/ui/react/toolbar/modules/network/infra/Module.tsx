@@ -1,26 +1,20 @@
 import type { NetworkToolbarItem } from "@seelen-ui/lib/types";
-import { emit } from "@tauri-apps/api/event";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { Item } from "../../item/infra/infra.tsx";
 
 import { Selectors } from "../../shared/store/app.ts";
 
-import { WithWlanSelector } from "./WlanSelector.tsx";
-
 interface Props {
-  active?: boolean;
   module: NetworkToolbarItem;
 }
 
-function NetworkModuleItem({ module, active, ...rest }: Props) {
+export function NetworkModule({ module, ...rest }: Props) {
   const networkAdapters = useSelector(Selectors.networkAdapters);
   const defaultIp = useSelector(Selectors.networkLocalIp);
   const online = useSelector(Selectors.online);
 
-  const usingAdapter = networkAdapters.find((i) => i.ipv4 === defaultIp) ||
-    null;
+  const usingAdapter = networkAdapters.find((i) => i.ipv4 === defaultIp) || null;
 
   return (
     <Item
@@ -31,23 +25,6 @@ function NetworkModuleItem({ module, active, ...rest }: Props) {
         usingInterface: usingAdapter,
       }}
       module={module}
-      active={active}
     />
   );
-}
-
-export function NetworkModule({ module }: Props) {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    emit("register-network-events");
-  }, []);
-
-  return module.withWlanSelector
-    ? (
-      <WithWlanSelector setActive={setOpen}>
-        <NetworkModuleItem module={module} active={open} />
-      </WithWlanSelector>
-    )
-    : <NetworkModuleItem module={module} />;
 }

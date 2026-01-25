@@ -20,9 +20,6 @@ context_menu:
   restore: Lehenetsitako lehenetsia
   settings: Ezarpenak
   task_manager: Zereginen kudeatzailea
-keyboard:
-  more: Teklatuaren ezarpen gehiago
-  title: Teklatuko diseinua
 media:
   default_multimedia_volume: Multimedia bolumena
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Sarrerako gailuak
   output_devices: Irteerako gailuak
   players: Komunikabideetako jokalariak
-network:
-  available: Eskuragarri dauden sareak
-  connect: Batu
-  connected: Honekin konektatuta
-  disconnect: Deskonektatu
-  hidden: Ezkutuko sarea
-  more: Sareko ezarpen gehiago
-  not_found: Ez da sarerik aurkitu
-  placeholder:
-    password: Kontrazeinu
-  saved: Gordetako sareak
-  scanning: Sareak bilatzen
-  secured: Sare zifratua
 notifications:
   clear: Garbitu guztiak
   empty: Ez da jakinarazpenik
@@ -70,24 +54,3 @@ settings:
   power: Botere
   restart: Berriro hasi
   title: Ezarpen
-userhome:
-  empty_list: Ez dago elementurik
-  folders:
-    desktop: Mahaigarri
-    documents: Agends
-    downloads: Deskarga
-    more_items: Erakutsi gehiago ...
-    music: Musika
-    pictures: Irudi
-    recent: Duela gutxi erabili
-    reduce_items: Erakutsi gutxiago ...
-    title: Erabiltzaileen direktorioak
-    videos: Bideo
-  profile:
-    accounts: Ireki kontuaren ezarpenak
-    open_onedrive: OneDrive direktorio irekia
-    open_user_folder: Erabiltzaileen direktorio irekia
-  seelen_options:
-    open_installation_folder: Ireki Seelen ezarpenen karpeta
-    open_log_folder: Ireki Seelen erregistro karpeta
-    title: Seelen direktorioak

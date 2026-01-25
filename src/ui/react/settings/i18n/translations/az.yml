@@ -1,16 +1,6 @@
 action:
   confirm: Əminsən?
   confirm_body: Bu hərəkət geri qaytarıla bilməz.
-app_launcher:
-  enable: Tətbiq başlatıcısını aktivləşdirin
-  launch_on:
-    mouse_over: Siçan üzərində
-    primary: İlkin
-  monitor: Göstərmək üçün monitor
-  runners:
-    cmd: Əmr etmək
-    explorer: Qaçmaq
-    label: Qaçışçı
 apps_configurations:
   app:
     bindings: Bağlama (hər iki variant tələb olunur)
@@ -86,7 +76,6 @@ devtools:
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
   settings_file: Parametrlər faylı
-  simulate_fullscreen: Tam ekran hadisəsini simulyasiya edin
 extras:
   clear_icons: Sistem nişanlar önbelleği təmizləyin
   clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
@@ -94,6 +83,10 @@ extras:
   links: Rəsmi bağlantılar
   relaunch: Başsız
   version: Versiya
+  version_fixed: >-
+    Proqram və WebView2 Runtime versiyaları sabitdir. Bu o deməkdir ki, proqram
+    yeniləmələri qəbul etməyəcək və WebView2 Runtime avtomatik olaraq Windows
+    yeniləmələri ilə yenilənməyəcək.
 general:
   accent_color: Vurğu
   date_format: Tarix formatı
@@ -101,6 +94,7 @@ general:
     available: Mövcud İkon Paketləri
     selected: Aktiv İkon Paketləri
   language: Dil
+  monday: bazar ertəsi
   performance_mode:
     on_battery: Batareyada
     on_energy_saver: Enerji qənaətçisi haqqında
@@ -109,7 +103,10 @@ general:
       extreme: Ekstremal
       minimal: Minimal
     plugged: Qoşuldu və ya şarj
+  saturday: şənbə
+  start_of_week: Həftənin başlanğıcı
   startup: Başlanğıcda qaçırsınız?
+  sunday: bazar günü
   theme:
     available: Mövcud Mövzular
     selected: Aktiv Mövzular
@@ -152,18 +149,26 @@ resources:
   app_outdated: >-
     Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını
     tələb edir.
+  corrupted_wallpaper: Miniatürü çıxarmaq alınmadı - zədələnmiş və ya dəstəklənməyən video formatı
   delete: Resurs silmək
   discover: Daha çox mənbəyi kəşf edin
   has_update: Bir yeniləmə mövcuddur
+  high_impact: Performansa yüksək təsir
   import_wallpapers: Yerli divar kağızları idxal edin
   open_folder: Açıq Resurs qovluğu
   outdated: >-
     Bu qaynaq Seelen UI-nin köhnə bir versiyası üçün hazırlanmış və düzgün
     işləməyə bilər.
+  see_on_website: Veb saytında baxın
+review_request:
+  not_now: İndi yox
+  sure: Əlbəttə!
+  title: Seelen UI-dən zövq alırsınız?
 save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
 see_more: Daha çoxuna baxın
 shortcuts:
+  duplicate_error: Bu qısayol dublikatdır
   enable: Quraşdırılmış qısa yol sistemini aktivləşdirin
   enable_tooltip: >-
     Seelen UI müştərisindən istifadə edərək öz qısa yol sisteminizi həyata
@@ -208,7 +213,6 @@ shortcuts:
     switch_to_previous_workspace: Əvvəlki iş sahəsinə keçin
     switch_workspace: İş sahəsinə keçin {{0}}
     toggle_float: Pəncərənin üzmə rejimini dəyişdirin
-    toggle_launcher: Başlatma qurğusu
     toggle_monocle: İş sahəsi Monocle rejimi keçid
   readonly_tooltip: Bu yalnız bir oxu qısa yoldur
   reset: Defoltlara yenidən qurun
@@ -217,14 +221,6 @@ sides:
   left: Sol
   right: Haqlı
   top: Üst
-start:
-  message: >-
-    Windows təcrübənizi artırmaq üçün birləşdirilmiş bir kirəmit windows
-    meneceri olan son masa üstü mühiti Seelen Ui-yə xoş gəlmisiniz! İntuitiv
-    interfeysimiz və inkişaf etmiş xüsusiyyətlərimizlə yeni bir səmərəlilik və
-    çoklu bir dövrü araşdırın.
-  message_accent: Üslubla məhsuldarlığınızı optimallaşdırın!
-  title: Xoş gəliş edin!
 toolbar:
   auto_hide: Avtomatik gizlətmək
   delay_to_hide: Gizlətmək üçün gecikmə
@@ -245,23 +241,39 @@ update:
 wall:
   backgrounds: Divar kağızları
   blur: Sönük
+  cancel: Ləğv et
+  close: Bağlayın
+  collection_name: Kolleksiya Adı
+  collections: Kolleksiyalar
   contrast: Əksinə
+  corrupted_wallpapers_message: 'Zədələnmiş divar kağızları, bunları silməyi düşünün:'
+  create: Yaradın
+  create_collection: Kolleksiya yaradın
+  default_collection: Defolt Kolleksiya
+  delete_collection: Kolleksiyanı silin
+  edit_collection: Kolleksiyaya düzəliş edin
   enable: Divar kağızı menecerini aktivləşdirin
+  extend: Əsası genişləndirin
   fit:
     contain: Ehtiva etmək
     cover: Örtük
     fill: Doldurmaq
   flipHorizontal: Üfüqi flip
   flipVertical: Şaquli sürüşmək
+  generating_thumbnails: Divar kağızı miniatürlərinin yaradılması
   hours: sair
   interval: Divar kağızı hər birini dəyişdirin
   minutes: dəqiqəlik
+  monitor_collection: Monitor kolleksiyası
+  multimonitor_behaviour: Multimonitor Davranışı
   muted: Səssiz video audio
   no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
+  no_collections: Hələ kolleksiya yaradılmayıb. Yaratmaq üçün + düyməsini basın.
   objectFit: Arxa plan
   objectPosition: Fon mövqeyi
   overlayColor: Örtük rəngi
   overlayMixBlendMode: Qarışıq qarışığı rejimi
+  per_monitor: Monitor başına
   playback: Sürətini çalın
   position:
     bottom: Dibli
@@ -269,10 +281,17 @@ wall:
     left: Sol
     right: Haqlı
     top: Üst
+  processing_video: Video işlənir
   random: Slayd şousu
   saturation: Doydurma
   seconds: saniyə
+  select_collection: Kolleksiya seçin
+  thumbnail_generation_complete: Miniatürlərin yaradılması tamamlandı
+  thumbnail_generation_finished: Miniatür yaradılması uğurla tamamlandı
+  wallpaper_collection: Divar kağızı Kolleksiyası
+  wallpaper_settings: Divar kağızı Parametrləri
   withOverlay: Örtülü ilə
+  workspace_collections: İş sahəsi kolleksiyaları
 weg:
   auto_hide: Avtomatik gizlətmək
   delay_to_hide: Gizlətmək üçün gecikmə
@@ -308,6 +327,17 @@ weg:
   padding: Paddend
   show_end_task: Tapşırıq çubuğunda son tapşırığı göstərin
   width: Geniştəhər
+welcome:
+  give_a_review: Rəy verin
+  message: >-
+    Seelen UI Windows üçün pulsuz və açıq mənbəli iş masası mühitidir. Burada iş
+    masanızın necə göründüyünə və davranışına tam nəzarət edirsiniz, bu da sizə
+    hər bir detalı iş axınınıza və üslubunuza uyğunlaşdırmağa imkan verir.
+  ok: Başlayaq!
+  review: >-
+    Seelen UI-dən istifadə etməkdən zövq alırsınızsa, mağazada rəy yazmağı
+    düşünün – rəyiniz layihənin böyüməsinə və təkmilləşdirilməsinə kömək edir.
+  title: Seelen UI-ə xoş gəlmisiniz!
 widget:
   enable: Bu widgetı aktivləşdirin
   enable_for_monitor: Bu monitorda aktivləşdirin

@@ -41,7 +41,10 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
                     )
                     .into());
                 }
-                file.try_parse_into()?
+
+                let mut parsed: Self = file.try_parse_into()?;
+                parsed.metadata_mut().internal.remote = Some(Box::new(file.resource.clone()));
+                parsed
             }
             _ => return Err("Invalid file extension".into()),
         };

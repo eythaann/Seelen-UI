@@ -1,16 +1,6 @@
 action:
   confirm: তুমি কি নিশ্চিত?
   confirm_body: এই ক্রিয়াটি পূর্বাবস্থায় ফিরে যেতে পারে না।
-app_launcher:
-  enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
-  launch_on:
-    mouse_over: মাউস ওভার
-    primary: প্রাথমিক
-  monitor: দেখানোর জন্য মনিটর
-  runners:
-    cmd: কমান্ড
-    explorer: চালানো
-    label: রানার্স
 apps_configurations:
   app:
     bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
@@ -87,7 +77,6 @@ devtools:
   install_folder: ইনস্টলেশন ফোল্ডার
   load: বোঝা
   settings_file: সেটিংস ফাইল
-  simulate_fullscreen: পূর্ণস্ক্রীন ইভেন্ট অনুকরণ
 extras:
   clear_icons: ক্লিয়ার সিস্টেম আইকন ক্যাশে
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: অফিসিয়াল লিঙ্ক
   relaunch: পুনরায় চালু
   version: সংস্করণ
+  version_fixed: >-
+    অ্যাপ্লিকেশন এবং WebView2 রানটাইম সংস্করণ স্থির করা হয়েছে। এর মানে হল যে
+    অ্যাপ্লিকেশনটি আপডেট পাবে না এবং WebView2 রানটাইম স্বয়ংক্রিয়ভাবে উইন্ডোজ
+    আপডেটের সাথে আপডেট হবে না।
 general:
   accent_color: সুরের ধাপের রঙ
   date_format: তারিখ ফর্ম্যাট
@@ -104,6 +97,7 @@ general:
     available: উপলব্ধ আইকন প্যাক
     selected: সক্রিয় আইকন প্যাক
   language: ভাষা
+  monday: সোমবার
   performance_mode:
     on_battery: ব্যাটারিতে
     on_energy_saver: শক্তি সঞ্চয় উপর
@@ -112,7 +106,10 @@ general:
       extreme: চরম
       minimal: ন্যূনতম
     plugged: প্লাগ বা চার্জিং
+  saturday: শনিবার
+  start_of_week: সপ্তাহের শুরু
   startup: প্রারম্ভকালে চালানো?
+  sunday: রবিবার
   theme:
     available: উপলব্ধ থিম
     selected: সক্রিয় থিম
@@ -155,18 +152,26 @@ resources:
   app_outdated: >-
     এই সংস্থানটির জন্য সঠিকভাবে কাজ করার জন্য সিলেন ইউআইয়ের একটি নতুন সংস্করণ
     প্রয়োজন।
+  corrupted_wallpaper: থাম্বনেল বের করতে ব্যর্থ হয়েছে - দূষিত বা অসমর্থিত ভিডিও বিন্যাস
   delete: সংস্থান মুছুন
   discover: আরও সংস্থান আবিষ্কার করুন
   has_update: একটি আপডেট উপলব্ধ
+  high_impact: কর্মক্ষমতা উপর উচ্চ প্রভাব
   import_wallpapers: স্থানীয় ওয়ালপেপার আমদানি করুন
   open_folder: ওপেন রিসোর্স ফোল্ডার
   outdated: >-
     এই সংস্থানটি সিলেন ইউআইয়ের একটি পুরানো সংস্করণের জন্য ডিজাইন করা হয়েছিল
     এবং এটি সঠিকভাবে কাজ নাও করতে পারে।
+  see_on_website: ওয়েবসাইটে দেখুন
+review_request:
+  not_now: এখন না
+  sure: নিশ্চিত!
+  title: Seelen UI উপভোগ করছেন?
 save: সংরক্ষণ
 save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
 see_more: আরও দেখুন
 shortcuts:
+  duplicate_error: এই শর্টকাট ডুপ্লিকেট করা হয়
   enable: অন্তর্নির্মিত শর্টকাট সিস্টেম সক্ষম করুন
   enable_tooltip: >-
     আপনি যদি সিলেন ইউআই ক্লায়েন্ট ব্যবহার করে নিজের শর্টকাট সিস্টেমটি প্রয়োগ
@@ -211,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: পূর্ববর্তী কর্মক্ষেত্রে স্যুইচ করুন
     switch_workspace: ওয়ার্কস্পেসে স্যুইচ করুন {{0}}
     toggle_float: টগল উইন্ডো ফ্লোট মোড
-    toggle_launcher: টগল লঞ্চার
     toggle_monocle: টগল ওয়ার্কস্পেস মনোকল মোড
   readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
   reset: ডিফল্ট পুনরায় সেট করুন
@@ -220,14 +224,6 @@ sides:
   left: বাম
   right: ঠিক আছে
   top: শীর্ষ
-start:
-  message: >-
-    আপনার উইন্ডোজ অভিজ্ঞতা বাড়ানোর জন্য একটি অন্তর্ভুক্ত টাইলিং উইন্ডোজ
-    ম্যানেজারের সাথে চূড়ান্ত ডেস্কটপ পরিবেশ সিলেন ইউআই -তে আপনাকে স্বাগতম!
-    আমাদের স্বজ্ঞাত ইন্টারফেস এবং উন্নত বৈশিষ্ট্যগুলির সাথে দক্ষতা এবং
-    মাল্টিটাস্কিংয়ের একটি নতুন যুগের সন্ধান করুন।
-  message_accent: স্টাইল দিয়ে আপনার উত্পাদনশীলতা অনুকূলিত করুন!
-  title: স্বাগত!
 toolbar:
   auto_hide: অটো আড়াল
   delay_to_hide: আড়াল করতে বিলম্ব
@@ -248,23 +244,39 @@ update:
 wall:
   backgrounds: ওয়ালপেপার
   blur: অস্পষ্টতা
+  cancel: বাতিল করুন
+  close: বন্ধ
+  collection_name: সংগ্রহের নাম
+  collections: সংগ্রহ
   contrast: বিপরীতে
+  corrupted_wallpapers_message: 'দূষিত ওয়ালপেপার, এগুলি মুছে ফেলার কথা বিবেচনা করুন:'
+  create: তৈরি করুন
+  create_collection: সংগ্রহ তৈরি করুন
+  default_collection: ডিফল্ট সংগ্রহ
+  delete_collection: সংগ্রহ মুছুন
+  edit_collection: সংগ্রহ সম্পাদনা করুন
   enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
+  extend: প্রাথমিক প্রসারিত
   fit:
     contain: ধারণ করে
     cover: কভার
     fill: পূরণ করুন
   flipHorizontal: অনুভূমিক ফ্লিপ
   flipVertical: উল্লম্ব ফ্লিপ
+  generating_thumbnails: ওয়ালপেপার থাম্বনেল তৈরি করা হচ্ছে
   hours: ঘন্টা
   interval: প্রতিটি ওয়ালপেপার পরিবর্তন করুন
   minutes: মিনিট
+  monitor_collection: সংগ্রহ মনিটর
+  multimonitor_behaviour: মাল্টিমনিটর আচরণ
   muted: ভিডিও অডিও নিঃশব্দ করুন
   no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
+  no_collections: এখনো কোনো সংগ্রহ তৈরি করা হয়নি। একটি তৈরি করতে + বোতামে ক্লিক করুন।
   objectFit: পটভূমি ফিট
   objectPosition: পটভূমি অবস্থান
   overlayColor: ওভারলে রঙ
   overlayMixBlendMode: ওভারলে মিক্স মিশ্রণ মোড
+  per_monitor: মনিটর প্রতি
   playback: প্লেব্যাক গতি
   position:
     bottom: নীচে
@@ -272,10 +284,17 @@ wall:
     left: বাম
     right: ঠিক আছে
     top: শীর্ষ
+  processing_video: ভিডিও প্রসেস করা হচ্ছে
   random: এলোমেলোভাবে স্লাইডশো
   saturation: স্যাচুরেশন
   seconds: সেকেন্ড
+  select_collection: সংগ্রহ নির্বাচন করুন
+  thumbnail_generation_complete: থাম্বনেইল জেনারেশন সম্পূর্ণ
+  thumbnail_generation_finished: থাম্বনেইল জেনারেশন সফলভাবে শেষ হয়েছে
+  wallpaper_collection: ওয়ালপেপার সংগ্রহ
+  wallpaper_settings: ওয়ালপেপার সেটিংস
   withOverlay: ওভারলে সহ
+  workspace_collections: ওয়ার্কস্পেস সংগ্রহ
 weg:
   auto_hide: স্বয়ং চামড়া
   delay_to_hide: আড়াল করতে বিলম্ব
@@ -311,6 +330,19 @@ weg:
   padding: প্যাডিং
   show_end_task: টাস্কবারে শেষ টাস্ক দেখান
   width: প্রস্থ
+welcome:
+  give_a_review: একটি পর্যালোচনা দিন
+  message: >-
+    Seelen UI হল উইন্ডোজের জন্য একটি বিনামূল্যের এবং ওপেন সোর্স ডেস্কটপ পরিবেশ।
+    এখানে আপনার ডেস্কটপ কেমন দেখায় এবং আচরণ করে তার উপর আপনার সম্পূর্ণ
+    নিয়ন্ত্রণ রয়েছে, আপনাকে আপনার কর্মপ্রবাহ এবং শৈলীর সাথে মেলে প্রতিটি বিবরণ
+    কাস্টমাইজ করার অনুমতি দেয়।
+  ok: শুরু করা যাক!
+  review: >-
+    আপনি যদি Seelen UI ব্যবহার করে উপভোগ করেন, তাহলে দোকানে একটি পর্যালোচনা করার
+    কথা বিবেচনা করুন — আপনার প্রতিক্রিয়া প্রকল্পের বৃদ্ধি এবং উন্নতিতে সাহায্য
+    করে।
+  title: Seelen UI তে স্বাগতম!
 widget:
   enable: এই উইজেট সক্ষম করুন
   enable_for_monitor: এই মনিটরে সক্ষম করুন

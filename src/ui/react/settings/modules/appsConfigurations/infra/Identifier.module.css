@@ -1,6 +1,6 @@
 .removeButton {
   display: flex;
-  gap: 6px;
+  gap: var(--spacing-xs);
   align-items: center;
   justify-content: center;
 }

@@ -20,9 +20,6 @@ context_menu:
   restore: Vratite do zadane vrijednosti
   settings: Postavke
   task_manager: Task Manager
-keyboard:
-  more: Više postavki tastature
-  title: Izgled tastature
 media:
   default_multimedia_volume: MULTIMEDIA VOLUME
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Uređaji za unos
   output_devices: Izlazni uređaji
   players: Medijski igrači
-network:
-  available: Dostupne mreže
-  connect: Povezati
-  connected: Povezano na
-  disconnect: Prekinuti
-  hidden: Skrivena mreža
-  more: Više mrežnih postavki
-  not_found: Nisu pronađene mreže
-  placeholder:
-    password: Lozinka
-  saved: Sačuvane mreže
-  scanning: Skeniranje za mreže
-  secured: Šifrovana mreža
 notifications:
   clear: Očistiti sve
   empty: Nema obaveštenja
@@ -70,24 +54,3 @@ settings:
   power: Snaga
   restart: Ponovo pokrenuti
   title: Postavke
-userhome:
-  empty_list: Nema predmeta
-  folders:
-    desktop: Radna površina
-    documents: Dokumenti
-    downloads: Preuzimanja
-    more_items: Prikaži više ...
-    music: Muzika
-    pictures: Slike
-    recent: Nedavno korišten
-    reduce_items: Prikaži manje ...
-    title: Korisnički direktoriji
-    videos: Video snimci
-  profile:
-    accounts: Postavke otvorenog računa
-    open_onedrive: Otvoreni direktorij OneDrive
-    open_user_folder: Otvoreni korisnički direktorij
-  seelen_options:
-    open_installation_folder: Otvorite mapu Seelen Settings
-    open_log_folder: Otvorena Seelen Dnevna mapa
-    title: Seelen direktoriji

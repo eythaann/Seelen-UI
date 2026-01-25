@@ -1,0 +1,11 @@
+all: Toutes les applications
+back: Dos
+disband: Supprimer le dossier
+folder: Dossier
+no_matching_items: Aucun article trouvé correspondant à votre recherche
+open_file_location: Emplacement du fichier ouvert
+pin: Épingle
+run_as_admin: Exécuter en tant qu'administrateur
+unpin: Détacher
+welcome_message: Bienvenue dans le menu de l'application Seelen UI.
+welcome_message2: Sur cet onglet, vous pouvez épingler vos applications préférées.

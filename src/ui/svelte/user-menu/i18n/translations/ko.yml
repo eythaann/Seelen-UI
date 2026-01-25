@@ -1,0 +1,21 @@
+empty_list: 항목 없음
+folders:
+  desktop: 데스크탑
+  documents: 서류
+  downloads: 다운로드
+  more_items: 더 보기...
+  music: 음악
+  pictures: 영화
+  recent: 최근에 사용됨
+  reduce_items: 간략히 보기...
+  title: 사용자 디렉토리
+  videos: 비디오
+profile:
+  accounts: 계정 설정 열기
+  log_out: 로그아웃
+  open_onedrive: OneDrive 디렉터리 열기
+  open_user_folder: 사용자 디렉토리 열기
+seelen_options:
+  open_installation_folder: Seelen 설정 폴더 열기
+  open_log_folder: Seelen 로그 폴더 열기
+  title: Seelen 디렉토리

@@ -24,6 +24,9 @@ use crate::{
 use super::{string_utils::WindowsString, WindowsApi};
 
 pub static WM_SHELLHOOKMESSAGE: AtomicU32 = AtomicU32::new(u32::MAX);
+pub const HSHELL_FULLSCREEN_ENTER: u32 = 53;
+pub const HSHELL_FULLSCREEN_EXIT: u32 = 54;
+
 pub static BACKGROUND_HWND: AtomicIsize = AtomicIsize::new(0);
 
 /// Global flag to track if the current session is interactive (not locked/switched).

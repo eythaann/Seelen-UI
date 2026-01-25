@@ -1,16 +1,6 @@
 action:
   confirm: ایا تاسو ډاډه یاست؟
   confirm_body: دا عمل نشي خلاصولی.
-app_launcher:
-  enable: د اپلیکیشن لیسچر وړ کړئ
-  launch_on:
-    mouse_over: موږک پورته کړ
-    primary: لومړني
-  monitor: څارنه کول
-  runners:
-    cmd: قومانده
-    explorer: منډه وهل
-    label: چلوونکي
 apps_configurations:
   app:
     bindings: تړل (په یادداشت کې دواړه اختیارونه اړین دي)
@@ -86,7 +76,6 @@ devtools:
   install_folder: لګول فولډر
   load: بار
   settings_file: د امستنې دوتنه
-  simulate_fullscreen: د بشپړ سکرین پیښې انډول کړئ
 extras:
   clear_icons: د ایکسین عکس کې کیچ
   clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
@@ -94,6 +83,10 @@ extras:
   links: رسمي اړیکې
   relaunch: بیا پیل کول
   version: نسخه
+  version_fixed: >-
+    د غوښتنلیک او WebView2 د چلولو نسخه ثابته شوې. دا پدې مانا ده چې غوښتنلیک به
+    تازه معلومات ترلاسه نکړي او د WebView2 Runtime به په اوتومات ډول د وینډوز
+    تازه معلوماتو سره تازه نشي.
 general:
   accent_color: تیزس رنګ
   date_format: د نیټې ب .ه
@@ -101,6 +94,7 @@ general:
     available: د آیکون کڅوړې شتون لري
     selected: د فعال آیکون بسته
   language: ژبه
+  monday: دوشنبه
   performance_mode:
     on_battery: په بیټرۍ کې
     on_energy_saver: د انرژي سیور باندې
@@ -109,7 +103,10 @@ general:
       extreme: ډیر
       minimal: لږترلږه
     plugged: فلګ یا چارج کول
+  saturday: شنبه
+  start_of_week: د اونۍ پیل
   startup: په پیل کې چلول؟
+  sunday: یک شنبه
   theme:
     available: شته موضوعات
     selected: فعال موضوعات
@@ -150,16 +147,24 @@ reset_all_to_default: ټول ډیفالټ ارزښتونو ته تنظیم کړ�
 reset_to_default: د ډیفالټ ارزښت ته بیا تنظیمول
 resources:
   app_outdated: دا سرچینه د سم کار کولو لپاره یو نوي نسخه ته اړتیا لري.
+  corrupted_wallpaper: د تمبنیل په ایستلو کې پاتې راغلی - فاسد یا غیر ملاتړ شوی ویډیو بڼه
   delete: سرچینه حذف کړئ
   discover: ډیرې سرچینې ومومئ
   has_update: یو اوسمهال شتون لري
+  high_impact: په فعالیت باندې لوړه اغیزه
   import_wallpapers: ځایی وال پیپرونه وارد کړئ
   open_folder: د سرچینو پوښۍ خلاصه کړئ
   outdated: دا سرچینه د ښایسته UI زاړه نسخه لپاره ډیزاین شوې وه او شاید سم کار ونه کړي.
+  see_on_website: په ویب پاڼه کې وګورئ
+review_request:
+  not_now: اوس نه
+  sure: ډاډه!
+  title: د Seelen UI څخه خوند اخلئ؟
 save: خوندي کړئ
 save_and_restart: خوندي کول او بیا پیل کړئ
 see_more: نور وګوره
 shortcuts:
+  duplicate_error: دا شارټ کټ نقل شوی دی
   enable: د جوړ شوي لنډیز سیسټم فعال کړئ
   enable_tooltip: >-
     غیر فعال کړئ که تاسو د اصلي UI پیرودونکي په کارولو سره خپل د لنډیو سیسټم پلي
@@ -204,7 +209,6 @@ shortcuts:
     switch_to_previous_workspace: پخوانیو ورکشاپ ته واړوئ
     switch_workspace: د کارځای ته لاړشئ {0 0}}
     toggle_float: د کړکۍ د فلوټ حالت
-    toggle_launcher: د تورالو لانچر
     toggle_monocle: د رواپیز دستیس مونو سپیکشن حالت
   readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
   reset: د افلاسیون لپاره بیا تنظیمول
@@ -213,13 +217,6 @@ sides:
   left: کیڼ
   right: ښي
   top: سر
-start:
-  message: >-
-    د زنګ وهلو ته ښه راغلاست، حتمي ډیسټاپ چاپیریال د خپل وینډوز تجربې ته وده
-    ورکولو لپاره د شامل شوي ټایټاپ وینډوز چاپیریال سره! زموږ د استثنایی بیرونځای
-    او پرمختللي ب shape و سره د اغیزمنتیا او ضرباتو نوې دوره وپلټئ.
-  message_accent: د سټایل سره خپل محصول غوره کړئ!
-  title: ښه راغلاست!
 toolbar:
   auto_hide: آٹو پټول
   delay_to_hide: د پټولو لپاره ځنډ
@@ -240,23 +237,39 @@ update:
 wall:
   backgrounds: والپيپرونه
   blur: روښانه
+  cancel: لغوه کړئ
+  close: تړل
+  collection_name: د راټولولو نوم
+  collections: راټولونه
   contrast: برعکس
+  corrupted_wallpapers_message: 'فاسد وال پیپرونه، د دې حذف کولو په اړه غور وکړئ:'
+  create: جوړ کړئ
+  create_collection: ټولګه جوړه کړئ
+  default_collection: ډیفالټ ټولګه
+  delete_collection: ټولګه ړنګه کړئ
+  edit_collection: ټولګه ترمیم کړئ
   enable: د وال پیپر مدیر فعال کړئ
+  extend: لومړني پراخ کړئ
   fit:
     contain: پکې شامل دي
     cover: پوښ
     fill: ډکول
   flipHorizontal: فلیپ افقي
   flipVertical: فلیپ عمودي
+  generating_thumbnails: د وال پیپر تمبیلونه پیدا کول
   hours: ساعتونه
   interval: په وال پیپر بدل کړئ
   minutes: دقیقې
+  monitor_collection: د څارنې ټولګه
+  multimonitor_behaviour: ملټي مانیټر چلند
   muted: د ویډیو آډیو خاموش کړئ
   no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
+  no_collections: تراوسه هیڅ ټولګه نه ده جوړه شوې. د جوړولو لپاره + تڼۍ کلیک وکړئ.
   objectFit: شالید فټ
   objectPosition: شالید وضعیت
   overlayColor: ډیر رنګ رنګ
   overlayMixBlendMode: د انکشکې مخلوط حالت
+  per_monitor: د څارنې لپاره
   playback: د بیا غږولو سرعت
   position:
     bottom: ښکته
@@ -264,10 +277,17 @@ wall:
     left: کیڼ
     right: ښي
     top: سر
+  processing_video: د ویډیو پروسس کول
   random: تصادفي سلایډ
   saturation: تړل
   seconds: ثانیې
+  select_collection: ټولګه وټاکئ
+  thumbnail_generation_complete: د تمبیل تولید بشپړ شو
+  thumbnail_generation_finished: د تمبیل تولید په بریالیتوب سره پای ته ورسید
+  wallpaper_collection: د وال پیپر ټولګه
+  wallpaper_settings: د وال پیپر ترتیبات
   withOverlay: د
+  workspace_collections: د کار ځای ټولګه
 weg:
   auto_hide: آٹو پټول
   delay_to_hide: د پټولو لپاره ځنډ
@@ -303,6 +323,17 @@ weg:
   padding: غالۍ
   show_end_task: په ټاسکبار کې د پای دنده ښودل
   width: پلنوالی
+welcome:
+  give_a_review: بیاکتنه ورکړئ
+  message: >-
+    سیلین UI د وینډوز لپاره وړیا او خلاص سرچینه ډیسټاپ چاپیریال دی. دلته تاسو
+    بشپړ کنټرول لرئ چې ستاسو ډیسټاپ څنګه ښکاري او چلند کوي، تاسو ته اجازه درکوي
+    چې ستاسو د کاري فلو او سټایل سره سمون لپاره هر توضیحات تنظیم کړئ.
+  ok: راځئ چې پیل وکړو!
+  review: >-
+    که تاسو د سیلین UI کارولو څخه خوند اخلئ ، په پلورنځي کې بیاکتنه پریږدئ -
+    ستاسو نظر د پروژې وده او وده کې مرسته کوي.
+  title: Seelen UI ته ښه راغلاست!
 widget:
   enable: دې ویجیټ وړ کړئ
   enable_for_monitor: پدې څارنه کې وړ کړئ

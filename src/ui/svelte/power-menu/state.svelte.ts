@@ -1,7 +1,6 @@
 import { invoke, type Rect, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
 import { locale } from "./i18n/index.ts";
 import { writable } from "svelte/store";
-import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
 let settings = writable(await Settings.getAsync());
@@ -26,20 +25,8 @@ let desktopRect = $derived.by(() => {
 });
 
 $effect.root(() => {
-  async function updateSize(rect: Rect) {
-    let webview = Widget.getCurrent().webview;
-    await webview.setPosition(new PhysicalPosition(rect.left, rect.top));
-    await webview.setSize(
-      new PhysicalSize({
-        width: rect.right - rect.left,
-        height: rect.bottom - rect.top,
-      }),
-    );
-  }
-
   $effect(() => {
-    // as this is async we pass the deps as argument to be scoped to this effect
-    updateSize(desktopRect);
+    Widget.self.setPosition(desktopRect);
   });
 });
 

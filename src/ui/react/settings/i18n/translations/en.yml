@@ -1,16 +1,6 @@
 action:
   confirm: Are you sure?
   confirm_body: This action cannot be undone.
-app_launcher:
-  enable: Enable App Launcher
-  launch_on:
-    mouse_over: Mouse over
-    primary: Primary
-  monitor: Monitor to show
-  runners:
-    cmd: Command
-    explorer: Run
-    label: Runners
 apps_configurations:
   app:
     bindings: Binding (note both options are required)
@@ -86,7 +76,6 @@ devtools:
   install_folder: Installation Folder
   load: Load
   settings_file: Settings File
-  simulate_fullscreen: Simulate fullscreen event
 extras:
   clear_icons: Clear System Icons Cache
   clear_icons_tooltip: A restart could be required to fully take effect on all widgets
@@ -94,6 +83,10 @@ extras:
   links: Official Links
   relaunch: Relaunch
   version: Version
+  version_fixed: >-
+    The application and WebView2 Runtime versions are fixed. This means that the
+    application will not receive updates and the WebView2 Runtime will not be
+    automatically updated with Windows updates.
 general:
   accent_color: Accent Color
   date_format: Date Format
@@ -102,9 +95,6 @@ general:
     selected: Active Icon Packs
   language: Language
   monday: Monday
-  saturday: Saturday
-  start_of_week: Start of Week
-  sunday: Sunday
   performance_mode:
     on_battery: On Battery
     on_energy_saver: On Energy Saver
@@ -113,7 +103,10 @@ general:
       extreme: Extreme
       minimal: Minimal
     plugged: Plugged or Charging
+  saturday: Saturday
+  start_of_week: Start of Week
   startup: Run on startup?
+  sunday: Sunday
   theme:
     available: Available Themes
     selected: Active Themes
@@ -154,18 +147,26 @@ reset_all_to_default: Reset all to default values
 reset_to_default: Reset to default value
 resources:
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
+  corrupted_wallpaper: Failed to extract thumbnail - corrupted or unsupported video format
   delete: Delete Resource
   discover: Discover more resources
   has_update: An update is available
+  high_impact: High impact on performance
   import_wallpapers: Import local wallpapers
   open_folder: Open resource folder
   outdated: >-
     This resource was designed for an older version of Seelen UI and might not
     work properly.
+  see_on_website: See on website
+review_request:
+  not_now: Not now
+  sure: Sure!
+  title: Enjoying Seelen UI?
 save: Save
 save_and_restart: Save & Restart
 see_more: See More
 shortcuts:
+  duplicate_error: This shortcut is duplicated
   enable: Enable built-in shortcuts system
   enable_tooltip: >-
     Disable if you will implement your own shortcuts system using the Seelen UI
@@ -210,7 +211,6 @@ shortcuts:
     switch_to_previous_workspace: Switch to Previous Workspace
     switch_workspace: Switch to Workspace {{0}}
     toggle_float: Toggle Window Float Mode
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: This is a read-only shortcut
   reset: Reset to Defaults
@@ -219,14 +219,6 @@ sides:
   left: Left
   right: Right
   top: Top
-start:
-  message: >-
-    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated
-    tiling windows manager to enhance your Windows experience! Explore a new era
-    of efficiency and multitasking with our intuitive interface and advanced
-    features.
-  message_accent: Optimize your productivity with style!
-  title: Welcome!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide
@@ -247,29 +239,39 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Blur
+  cancel: Cancel
+  close: Close
+  collection_name: Collection Name
+  collections: Collections
   contrast: Contrast
+  corrupted_wallpapers_message: 'Corrupted wallpapers, consider deleting these:'
+  create: Create
+  create_collection: Create Collection
+  default_collection: Default Collection
+  delete_collection: Delete Collection
+  edit_collection: Edit Collection
   enable: Enable Wallpaper Manager
-  monitor_collection: Monitor Collection
-  wallpaper_collection: Wallpaper Collection
-  wallpaper_settings: Wallpaper Settings
-  workspace_collections: Workspace Collections
-  generating_thumbnails: Generating Wallpaper Thumbnails
-  processing_video: Processing video
+  extend: Extend primary
   fit:
     contain: Contain
     cover: Cover
     fill: Fill
   flipHorizontal: Flip Horizontal
   flipVertical: Flip Vertical
+  generating_thumbnails: Generating Wallpaper Thumbnails
   hours: hours
   interval: Change wallpaper every
   minutes: minutes
+  monitor_collection: Monitor Collection
+  multimonitor_behaviour: Multimonitor Behaviour
   muted: Mute video audio
   no_background: Empty slideshow, using theme's background instead.
+  no_collections: No collections created yet. Click the + button to create one.
   objectFit: Background Fit
   objectPosition: Background Position
   overlayColor: Overlay Color
   overlayMixBlendMode: Overlay Mix Blend Mode
+  per_monitor: Per monitor
   playback: Playback speed
   position:
     bottom: Bottom
@@ -277,21 +279,17 @@ wall:
     left: Left
     right: Right
     top: Top
+  processing_video: Processing video
   random: Randomize slideshow
   saturation: Saturation
   seconds: seconds
-  withOverlay: With Overlay
-  collections: Collections
-  create_collection: Create Collection
-  edit_collection: Edit Collection
-  delete_collection: Delete Collection
-  collection_name: Collection Name
-  default_collection: Default Collection
   select_collection: Select Collection
-  no_collections: No collections created yet. Click the + button to create one.
-  create: Create
-  cancel: Cancel
-  close: Close
+  thumbnail_generation_complete: Thumbnail Generation Complete
+  thumbnail_generation_finished: Thumbnail generation has finished successfully
+  wallpaper_collection: Wallpaper Collection
+  wallpaper_settings: Wallpaper Settings
+  withOverlay: With Overlay
+  workspace_collections: Workspace Collections
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Delay to hide
@@ -327,6 +325,17 @@ weg:
   padding: Padding
   show_end_task: Show end task in taskbar
   width: Width
+welcome:
+  give_a_review: Give a Review
+  message: >-
+    Seelen UI is a free and open source desktop environment for Windows. Here
+    you have full control over how your desktop looks and behaves, allowing you
+    to customize every detail to match your workflow and style.
+  ok: Let's start!
+  review: >-
+    If you enjoy using Seelen UI, consider leaving a review on the store — your
+    feedback helps the project grow and improve.
+  title: Welcome to Seelen UI!
 widget:
   enable: Enable this widget
   enable_for_monitor: Enable on this monitor

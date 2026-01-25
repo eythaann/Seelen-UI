@@ -20,9 +20,6 @@ context_menu:
   restore: ડિફ default લ્ટ પર પુન restore સ્થાપિત કરો
   settings: સેટિંગ્સ
   task_manager: ટાસ્ક મેનેજર
-keyboard:
-  more: વધુ કીબોર્ડ સેટિંગ્સ
-  title: પાટિયું લેઆઉટ
 media:
   default_multimedia_volume: બહુમાળ વોલ્યુમ
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: ઇનપુટ ઉપકરણો
   output_devices: ઉત્પાદન
   players: માધ્યમો ખેલાડીઓ
-network:
-  available: ઉપલબ્ધ નેટવર્ક્સ
-  connect: જોડાવા
-  connected: સાથે જોડાયેલ છે
-  disconnect: અલગ કરવું
-  hidden: છુપાયેલું નેટવર્ક
-  more: વધુ નેટવર્ક સેટિંગ્સ
-  not_found: કોઈ નેટવર્ક મળ્યાં નથી
-  placeholder:
-    password: પાસશ
-  saved: સાચવેલા નેટવર્ક્સ
-  scanning: નેટવર્ક્સ માટે સ્કેનિંગ
-  secured: એન્ક્રિપ્ટેડ નેટવર્ક
 notifications:
   clear: બધુ સાફ કરવું
   empty: કોઈ સૂચનાઓ
@@ -70,24 +54,3 @@ settings:
   power: શક્તિ
   restart: પુનઃપ્રારંભ
   title: પતાવટ
-userhome:
-  empty_list: કોઈ વસ્તુ
-  folders:
-    desktop: ડેસ્કટ .પ
-    documents: દસ્તાવેજી
-    downloads: નિવેદનો
-    more_items: વધુ બતાવો ...
-    music: સંગીત
-    pictures: ચિત્રો
-    recent: તાજેતરનો ઉપયોગ
-    reduce_items: ઓછું બતાવો ...
-    title: વપરાશકર્તા નિયામક
-    videos: વિડિઓઝ
-  profile:
-    accounts: એકાઉન્ટ સેટિંગ્સ ખોલો
-    open_onedrive: ખુલ્લી વનડ્રાઇવ ડિરેક્ટરી
-    open_user_folder: વપરાશકર્તા ડિરેક્ટરી ખોલો
-  seelen_options:
-    open_installation_folder: સીલેન સેટિંગ્સ ફોલ્ડર ખોલો
-    open_log_folder: સીલેન લોગ ફોલ્ડર ખોલો
-    title: સીલેન ડિજચરીઓ

@@ -2,24 +2,31 @@ import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Badge, Button, Input, InputNumber, Modal, Select, Switch, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 
-import { newSelectors, RootActions } from "../shared/store/app/reducer.ts";
+import {
+  addWallpaperCollection,
+  deleteWallpaperCollection,
+  getWallConfig,
+  getWallpaperCollections,
+  patchWallConfig,
+  setDefaultWallpaperCollection,
+  updateWallpaperCollection,
+} from "./application.ts";
 
+import { MultimonitorBehaviour } from "@seelen-ui/lib/types";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 import { WallpaperList } from "./WallpaperList.tsx";
 import cs from "./index.module.css";
 
 export function WallSettings() {
-  const wall = useSelector(newSelectors.wall);
-  const wallpaperCollections = useSelector(newSelectors.wallpaperCollections);
+  const wall = getWallConfig();
+  const wallpaperCollections = getWallpaperCollections();
   const { enabled, interval } = wall;
 
   const [time, setTime] = useState({
     hours: Math.floor(interval / 3600),
     minutes: Math.floor((interval / 60) % 60),
-    seconds: interval % 60,
   });
 
   const [editingCollectionId, setEditingCollectionId] = useState<string | null>(null);
@@ -27,7 +34,6 @@ export function WallSettings() {
   const [isCreatingCollection, setIsCreatingCollection] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState("");
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const editingCollection = editingCollectionId ? wallpaperCollections.find((c) => c.id === editingCollectionId) : null;
@@ -36,7 +42,6 @@ export function WallSettings() {
     setTime({
       hours: Math.floor(interval / 3600),
       minutes: Math.floor((interval / 60) % 60),
-      seconds: interval % 60,
     });
   }, [interval]);
 
@@ -46,20 +51,16 @@ export function WallSettings() {
     }
   }, [editingCollection]);
 
-  const patchWallSettings = (changes: Partial<typeof wall>) => {
-    dispatch(RootActions.patchWall({ ...changes }));
-  };
-
   function onChangeEnabled(enabled: boolean) {
-    patchWallSettings({ enabled });
+    patchWallConfig({ enabled });
   }
 
-  const updateTime = (key: "hours" | "minutes" | "seconds", value: number | null) => {
+  const updateTime = (key: "hours" | "minutes", value: number | null) => {
     if (value === null) return;
     const newTime = { ...time, [key]: Math.floor(value) };
     setTime(newTime);
-    const newInterval = Math.max(newTime.hours * 3600 + newTime.minutes * 60 + newTime.seconds, 1);
-    patchWallSettings({ interval: newInterval });
+    const newInterval = Math.max(newTime.hours * 3600 + newTime.minutes * 60, 60);
+    patchWallConfig({ interval: newInterval });
   };
 
   const handleCreateCollection = () => {
@@ -77,7 +78,7 @@ export function WallSettings() {
       name: newCollectionName.trim(),
       wallpapers: [],
     };
-    dispatch(RootActions.addWallpaperCollection(newCollection));
+    addWallpaperCollection(newCollection);
     setIsCreatingCollection(false);
     setNewCollectionName("");
   };
@@ -94,12 +95,10 @@ export function WallSettings() {
   const handleSaveCollectionName = () => {
     if (!editingCollection || !editingCollectionName.trim()) return;
 
-    dispatch(
-      RootActions.updateWallpaperCollection({
-        ...editingCollection,
-        name: editingCollectionName.trim(),
-      }),
-    );
+    updateWallpaperCollection({
+      ...editingCollection,
+      name: editingCollectionName.trim(),
+    });
   };
 
   const handleCloseModal = () => {
@@ -109,7 +108,7 @@ export function WallSettings() {
   };
 
   const handleDeleteCollection = (id: string) => {
-    dispatch(RootActions.deleteWallpaperCollection(id));
+    deleteWallpaperCollection(id);
   };
 
   return (
@@ -123,11 +122,34 @@ export function WallSettings() {
 
       <SettingsGroup>
         <SettingsOption
+          label={<b>{t("wall.multimonitor_behaviour")}</b>}
+          action={
+            <Select
+              style={{ width: 200 }}
+              value={wall.multimonitorBehaviour}
+              onChange={(value) => patchWallConfig({ multimonitorBehaviour: value })}
+              options={[
+                {
+                  label: t("wall.per_monitor"),
+                  value: MultimonitorBehaviour.PerMonitor,
+                },
+                {
+                  label: t("wall.extend"),
+                  value: MultimonitorBehaviour.Extend,
+                },
+              ]}
+            />
+          }
+        />
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption
           label={<b>{t("wall.random")}</b>}
           action={
             <Switch
               value={wall.randomize}
-              onChange={(randomize) => patchWallSettings({ randomize })}
+              onChange={(randomize) => patchWallConfig({ randomize })}
             />
           }
         />
@@ -135,12 +157,12 @@ export function WallSettings() {
           label={<b>{t("wall.interval")}</b>}
           action={
             <div className={cs.interval}>
-              {["hours", "minutes", "seconds"].map((unit) => (
+              {["hours", "minutes"].map((unit) => (
                 <div key={unit}>
                   <b>{t(`wall.${unit}`)}:</b>
                   <InputNumber
                     value={time[unit as keyof typeof time]}
-                    onChange={(value) => updateTime(unit as "hours" | "minutes" | "seconds", value)}
+                    onChange={(value) => updateTime(unit as "hours" | "minutes", value)}
                     min={0}
                     style={{ width: 50 }}
                   />
@@ -179,7 +201,9 @@ export function WallSettings() {
         >
           {wallpaperCollections.length === 0
             ? (
-              <div style={{ padding: "16px", textAlign: "center", color: "var(--config-text-muted)" }}>
+              <div
+                style={{ padding: "16px", textAlign: "center", color: "var(--config-text-muted)" }}
+              >
                 {t("wall.no_collections")}
               </div>
             )
@@ -198,7 +222,13 @@ export function WallSettings() {
                         )}
                         <span>
                           {collection.name}
-                          <span style={{ marginLeft: 4, color: "var(--config-text-muted)", fontSize: "0.9em" }}>
+                          <span
+                            style={{
+                              marginLeft: 4,
+                              color: "var(--config-text-muted)",
+                              fontSize: "0.9em",
+                            }}
+                          >
                             ({collection.wallpapers.length})
                           </span>
                         </span>
@@ -212,7 +242,11 @@ export function WallSettings() {
                           </Button>
                         </Tooltip>
                         <Tooltip title={t("wall.delete_collection")}>
-                          <Button size="small" danger onClick={() => handleDeleteCollection(collection.id)}>
+                          <Button
+                            size="small"
+                            danger
+                            onClick={() => handleDeleteCollection(collection.id)}
+                          >
                             <Icon iconName="IoTrash" />
                           </Button>
                         </Tooltip>
@@ -232,7 +266,7 @@ export function WallSettings() {
             <Select
               style={{ width: 200 }}
               value={wall.defaultCollection ?? undefined}
-              onChange={(value) => dispatch(RootActions.setDefaultWallpaperCollection(value || null))}
+              onChange={(value) => setDefaultWallpaperCollection(value || null)}
               placeholder={t("wall.select_collection")}
               allowClear
             >

@@ -192,6 +192,12 @@
       }
     }
   });
+
+  $effect(() => {
+    if (videoElement) {
+      videoElement.playbackRate = getPlaybackRate(config.playbackSpeed)
+    }
+  })
 </script>
 
 <video
@@ -207,7 +213,6 @@
   playsinline
   disableRemotePlayback
   preload="auto"
-  playbackRate={getPlaybackRate(config.playbackSpeed)}
   onloadedmetadata={handleLoadedMetadata}
   onwaiting={handleWaiting}
   onplaying={handlePlaying}

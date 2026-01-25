@@ -5,9 +5,9 @@ import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { VerticalSortableSelect } from "src/ui/react/settings/components/SortableSelector/index.tsx";
 import { Wallpaper } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { Button, Modal } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 
-import { newSelectors, RootActions } from "../shared/store/app/reducer.ts";
+import { getWallpaperCollections, updateWallpaperCollection } from "./application.ts";
+import { wallpapers } from "../../state/resources.ts";
 
 import { ResourcePortrait } from "../resources/ResourceCard.tsx";
 import cs from "./index.module.css";
@@ -19,36 +19,30 @@ interface Props {
 export function WallpaperList({ collectionId }: Props) {
   const $toPreview = useSignal<WallpaperId | null>(null);
 
-  const wallpapers = useSelector(newSelectors.wallpapers);
-  const wallpaperCollections = useSelector(newSelectors.wallpaperCollections);
-
+  const wallpaperCollections = getWallpaperCollections();
   const collection = wallpaperCollections.find((c) => c.id === collectionId);
-
-  const d = useDispatch();
 
   function onChangeEnabled(wallpaperIds: WallpaperId[]) {
     if (!collection) {
       return;
     }
 
-    d(
-      RootActions.updateWallpaperCollection({
-        ...collection,
-        wallpapers: wallpaperIds,
-      }),
-    );
+    updateWallpaperCollection({
+      ...collection,
+      wallpapers: wallpaperIds,
+    });
   }
 
   if (!collection) {
     return null;
   }
 
-  const previewing = $toPreview.value ? wallpapers.find((w) => w.id === $toPreview.value) : null;
+  const previewing = $toPreview.value ? wallpapers.value.find((w) => w.id === $toPreview.value) : null;
 
   return (
     <div style={{ height: "60vh" }}>
       <VerticalSortableSelect
-        options={wallpapers.map((w) => ({
+        options={wallpapers.value.map((w) => ({
           value: w.id,
           label: (
             <div className={cs.entryLabel}>

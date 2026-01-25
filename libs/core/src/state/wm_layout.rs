@@ -4,7 +4,7 @@ use crate::system_state::MonitorId;
 
 #[derive(Debug, Serialize, Deserialize, JsonSchema, TS)]
 #[cfg_attr(feature = "gen-binds", ts(export))]
-pub struct WmRenderTree(pub HashMap<MonitorId, WmNode>);
+pub struct WmRenderTree(pub HashMap<MonitorId, WindowManagerLayout>);
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]

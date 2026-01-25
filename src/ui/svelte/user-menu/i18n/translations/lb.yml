@@ -1,0 +1,21 @@
+empty_list: Keng Elementer
+folders:
+  desktop: Desktop
+  documents: Dokumenter
+  downloads: Downloads
+  more_items: Méi weisen ...
+  music: Musek
+  pictures: Biller
+  recent: Kuerzem benotzt
+  reduce_items: Weist manner ...
+  title: Benotzer Verzeechnes
+  videos: Videoen
+profile:
+  accounts: Open Kont Astellunge
+  log_out: Ausloggen
+  open_onedrive: Open OneDrive Verzeechnes
+  open_user_folder: Öffnen vum Benotzerverzeichnis
+seelen_options:
+  open_installation_folder: Open Seelen Astellungen Dossier
+  open_log_folder: Open Seelen Log Dossier
+  title: Seelen directory

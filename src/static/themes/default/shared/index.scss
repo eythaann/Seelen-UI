@@ -12,6 +12,11 @@
 @import "./inputs.scss";
 @import "./buttons.scss";
 
+:root {
+  --ui-color: light-dark(var(--system-accent-dark-color), var(--system-accent-light-color));
+  --ui-hover-color: light-dark(var(--system-accent-darker-color), var(--system-accent-lighter-color));
+}
+
 // Accessibility Improvement
 *:focus-visible {
   outline-offset: 2px;
@@ -56,11 +61,16 @@ body:has(.slu-standard-popover) {
 
 .slu-standard-popover {
   width: 300px;
+  max-height: 700px;
+  overflow: auto;
+
+  padding: 10px;
+  margin: 10px; // this margin will allow the box-shadow to be visible
+
   background-color: var(--color-gray-50);
   color: var(--color-gray-900);
   border-radius: 10px;
-  padding: 10px;
-  margin: 10px; // this margin will allow the box-shadow to be visible
+
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
   font-size: 0.8rem;
 }

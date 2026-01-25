@@ -20,9 +20,6 @@ context_menu:
   restore: デフォルトに戻す
   settings: SeelenUIの設定
   task_manager: タスクマネージャー
-keyboard:
-  more: その他のキーボード設定
-  title: キーボードレイアウト
 media:
   default_multimedia_volume: デフォルトの音量
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: 入力デバイス
   output_devices: 出力デバイス
   players: メディアプレーヤー
-network:
-  available: 利用可能なネットワーク
-  connect: 接続
-  connected: 接続されています
-  disconnect: 切断
-  hidden: 非表示のネットワーク
-  more: 詳しい設定
-  not_found: ネットワークが見つかりません
-  placeholder:
-    password: パスワード
-  saved: 保存されたネットワーク
-  scanning: ネットワークのスキャン
-  secured: 暗号化されたネットワーク
 notifications:
   clear: すべてクリア
   empty: 通知なし
@@ -70,24 +54,3 @@ settings:
   power: 電源
   restart: 再起動
   title: 設定
-userhome:
-  empty_list: アイテムがありません
-  folders:
-    desktop: デスクトップ
-    documents: ドキュメント
-    downloads: ダウンロード
-    more_items: もっと見る…
-    music: ミュージック
-    pictures: ピクチャ
-    recent: 最近使用されたもの
-    reduce_items: もっと見る
-    title: フォルダ
-    videos: ビデオ
-  profile:
-    accounts: アカウント設定
-    open_onedrive: OneDriveのフォルダを開く
-    open_user_folder: ユーザーフォルダを開く
-  seelen_options:
-    open_installation_folder: Seelenの設定フォルダを開く
-    open_log_folder: Seelenのログフォルダを開く
-    title: Seelenのフォルダ

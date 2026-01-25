@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimeedia helitugevus
+device:
+  channel:
+    system: Süsteemi helid
+  comunications: Side
+  missing: Puuduv seade
+  mixer: Helitugevuse mikser
+  multimedia: Multimeedia
+  settings: Rohkem seadme seadeid
+  volume: Seadme helitugevus
+input_devices: Sisendseadmed
+output_devices: Väljundseadmed
+players: Meediamängijad

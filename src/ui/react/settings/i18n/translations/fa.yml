@@ -1,16 +1,6 @@
 action:
   confirm: مطمئن هستید؟
   confirm_body: این عمل نمی تواند خنثی شود.
-app_launcher:
-  enable: پرتاب برنامه را فعال کنید
-  launch_on:
-    mouse_over: ماوس روی
-    primary: اولیه
-  monitor: نظارت برای نمایش
-  runners:
-    cmd: فرمان
-    explorer: دویدن
-    label: دونده
 apps_configurations:
   app:
     bindings: اتصال (توجه داشته باشید هر دو گزینه مورد نیاز است)
@@ -87,7 +77,6 @@ devtools:
   install_folder: پوشه نصب
   load: بار
   settings_file: پرونده تنظیمات
-  simulate_fullscreen: شبیه سازی رویداد تمام صفحه
 extras:
   clear_icons: حافظه نهان سیستم را پاک کنید
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: پیوندهای رسمی
   relaunch: مجدداً
   version: نسخه
+  version_fixed: >-
+    نسخه برنامه و WebView2 Runtime رفع شده است. این بدان معنی است که برنامه به
+    روز رسانی دریافت نمی کند و WebView2 Runtime به طور خودکار با به روز رسانی
+    ویندوز به روز نمی شود.
 general:
   accent_color: رنگ لهجه
   date_format: قالب تاریخ
@@ -104,6 +97,7 @@ general:
     available: بسته‌های آیکون موجود
     selected: بسته های آیکون فعال
   language: زبان
+  monday: دوشنبه
   performance_mode:
     on_battery: در باتری
     on_energy_saver: در مورد صرفه جویی در انرژی
@@ -112,7 +106,10 @@ general:
       extreme: شدید
       minimal: حداقل
     plugged: وصل شده یا شارژ
+  saturday: شنبه
+  start_of_week: شروع هفته
   startup: در راه اندازی اجرا می شود؟
+  sunday: یکشنبه
   theme:
     available: تم های موجود
     selected: تم های فعال
@@ -153,18 +150,26 @@ reset_all_to_default: تنظیم مجدد همه به مقادیر پیش فرض
 reset_to_default: تنظیم مجدد به مقدار پیش فرض
 resources:
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
+  corrupted_wallpaper: استخراج تصویر کوچک انجام نشد - فرمت ویدیو خراب یا پشتیبانی نشده است
   delete: منبع را حذف کنید
   discover: منابع بیشتری را کشف کنید
   has_update: به روزرسانی در دسترس است
+  high_impact: تاثیر زیاد بر عملکرد
   import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
   open_folder: پوشه منبع باز
   outdated: >-
     این منبع برای نسخه قدیمی تر Seelen UI طراحی شده است و ممکن است به درستی کار
     نکند.
+  see_on_website: در وب سایت ببینید
+review_request:
+  not_now: الان نه
+  sure: مطمئنا!
+  title: از رابط کاربری Seelen لذت می برید؟
 save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
 see_more: بیشتر ببینید
 shortcuts:
+  duplicate_error: این میانبر تکراری است
   enable: سیستم میانبر داخلی را فعال کنید
   enable_tooltip: >-
     اگر سیستم میانبر خود را با استفاده از مشتری Seelen UI پیاده سازی خواهید کرد
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: به فضای کاری قبلی بروید
     switch_workspace: تغییر به فضای کاری {{0}}
     toggle_float: حالت شناور پنجره
-    toggle_launcher: پرتاب کننده
     toggle_monocle: حالت مونوکلر فضای کاری را تغییر دهید
   readonly_tooltip: این یک میانبر فقط خواندنی است
   reset: تنظیم مجدد به پیش فرض
@@ -218,13 +222,6 @@ sides:
   left: ترک کرد
   right: درست
   top: بالا
-start:
-  message: >-
-    به Seelen UI ، محیط دسک تاپ نهایی با یک مدیر کاشی کاری ویندوز برای تقویت
-    تجربه ویندوز خوش آمدید! دوره جدیدی از کارآیی و چند وظیفه ای را با رابط بصری
-    و ویژگی های پیشرفته ما کاوش کنید.
-  message_accent: بهره وری خود را با سبک بهینه کنید!
-  title: خوش آمدی!
 toolbar:
   auto_hide: پنهان خودکار
   delay_to_hide: تاخیر برای پنهان شدن
@@ -245,23 +242,39 @@ update:
 wall:
   backgrounds: تصاویر پس زمینه
   blur: مبهم
+  cancel: لغو کنید
+  close: بستن
+  collection_name: نام مجموعه
+  collections: مجموعه ها
   contrast: کنتراست
+  corrupted_wallpapers_message: 'والپیپرهای خراب، این موارد را حذف کنید:'
+  create: ایجاد کنید
+  create_collection: ایجاد مجموعه
+  default_collection: مجموعه پیش‌فرض
+  delete_collection: حذف مجموعه
+  edit_collection: ویرایش مجموعه
   enable: مدیر تصویر زمینه را فعال کنید
+  extend: اولیه را گسترش دهید
   fit:
     contain: حاوی بودن
     cover: پوشش
     fill: پر کردن
   flipHorizontal: تلنگر افقی
   flipVertical: به صورت عمودی
+  generating_thumbnails: ایجاد تصاویر ریز کاغذ دیواری
   hours: ساعت
   interval: کاغذ دیواری را تغییر دهید
   minutes: دقایقی
+  monitor_collection: مجموعه مانیتور
+  multimonitor_behaviour: رفتار چند مانیتور
   muted: صدای ویدیو را بی صدا کنید
   no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
+  no_collections: هنوز هیچ مجموعه ای ایجاد نشده است. برای ایجاد یک دکمه + را کلیک کنید.
   objectFit: متناسب با پس زمینه
   objectPosition: موقعیت پس زمینه
   overlayColor: رنگ روکش
   overlayMixBlendMode: حالت مخلوط مخلوط روکش
+  per_monitor: در هر مانیتور
   playback: سرعت پخش
   position:
     bottom: پایین
@@ -269,10 +282,17 @@ wall:
     left: چپ
     right: حق
     top: بالا
+  processing_video: در حال پردازش ویدیو
   random: نمایش پرده ای تصادفی
   saturation: اشباع
   seconds: ثانیه
+  select_collection: مجموعه را انتخاب کنید
+  thumbnail_generation_complete: تولید ریز عکسها کامل شد
+  thumbnail_generation_finished: تولید تصویر بند انگشتی با موفقیت به پایان رسید
+  wallpaper_collection: مجموعه کاغذ دیواری
+  wallpaper_settings: تنظیمات کاغذ دیواری
   withOverlay: با روکش
+  workspace_collections: مجموعه های فضای کاری
 weg:
   auto_hide: پنهان خودکار
   delay_to_hide: تاخیر برای پنهان شدن
@@ -308,6 +328,17 @@ weg:
   padding: لایه گذاری
   show_end_task: نمایش پایان کار در نوار وظیفه
   width: عرض
+welcome:
+  give_a_review: نظر بدهید
+  message: >-
+    Seelen UI یک محیط دسکتاپ رایگان و متن باز برای ویندوز است. در اینجا شما
+    کنترل کاملی بر نحوه ظاهر و رفتار دسکتاپ خود دارید و به شما این امکان را می
+    دهد که هر جزئیات را مطابق با جریان کار و سبک خود سفارشی کنید.
+  ok: بیایید شروع کنیم!
+  review: >-
+    اگر از استفاده از رابط کاربری Seelen لذت می برید، نظر خود را در فروشگاه
+    بگذارید - بازخورد شما به رشد و بهبود پروژه کمک می کند.
+  title: به UI Seelen خوش آمدید!
 widget:
   enable: این ویجت را فعال کنید
   enable_for_monitor: این مانیتور را فعال کنید

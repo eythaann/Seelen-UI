@@ -10,6 +10,10 @@ let windows = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
 await subscribe(SeelenEvent.UserAppWindowsChanged, windows.setByPayload);
 await windows.init();
 
+let previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
+await subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
+await previews.init();
+
 let focusedWinId = lazyRune(async () => (await invoke(SeelenCommand.GetFocusedApp)).hwnd);
 await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focusedWinId.value = e.payload.hwnd;
@@ -24,6 +28,65 @@ $effect.root(() => {
     if (!showing) {
       const win = windows.value.find((w) => w.hwnd === focusedWinId.value);
       selectedWindow = win?.hwnd || null;
+    }
+  });
+});
+
+class State {
+  get showing() {
+    return showing;
+  }
+
+  set showing(value: boolean) {
+    showing = value;
+  }
+
+  get windows() {
+    return windows.value;
+  }
+
+  get previews() {
+    return previews.value;
+  }
+
+  get selectedWindow() {
+    return selectedWindow;
+  }
+  set selectedWindow(value: number | null) {
+    selectedWindow = value;
+  }
+
+  /**
+   * Optimistically moves the selected window to the front of the array
+   * for fast UI responsiveness. The backend will send the updated order
+   * via events, but this provides immediate visual feedback.
+   */
+  moveSelectedToFront(hwnd: number) {
+    const currentWindows = windows.value;
+    const selectedIndex = currentWindows.findIndex((w) => w.hwnd === hwnd);
+
+    if (selectedIndex > 0) {
+      // Only reorder if not already at the front
+      const reordered = [
+        currentWindows[selectedIndex]!,
+        ...currentWindows.slice(0, selectedIndex),
+        ...currentWindows.slice(selectedIndex + 1),
+      ];
+      windows.value = reordered;
+    }
+  }
+}
+
+export const globalState = new State();
+
+// +++++++++++++++++++++++ Triggering +++++++++++++++++++++++
+
+$effect.root(() => {
+  $effect(() => {
+    if (showing) {
+      widget.show();
+    } else {
+      widget.hide();
     }
   });
 });
@@ -60,50 +123,50 @@ widget.onTrigger((payload) => {
   }
 });
 
-$effect.root(() => {
-  $effect(() => {
-    if (showing) {
-      widget.webview.show().then(() => widget.webview.setFocus());
-    } else {
-      widget.webview.hide();
-    }
-  });
-});
-
 widget.webview.onFocusChanged(({ payload }) => {
-  if (!payload) {
+  if (payload) {
+    invoke(SeelenCommand.GetKeyState, { key: "Alt" }).then((isPressing) => {
+      if (!isPressing) {
+        window.dispatchEvent(new KeyboardEvent("keyup", { key: "Alt" }));
+      }
+    });
+  } else {
     showing = false;
   }
 });
 
-window.onkeyup = (e) => {
-  if (e.key === "Alt" && selectedWindow && autoConfirm) {
-    invoke(SeelenCommand.WegToggleWindowState, {
-      hwnd: selectedWindow,
-      wasFocused: false,
-    });
+window.onkeydown = (e) => {
+  if (e.key === "Escape") {
     showing = false;
   }
 };
 
-class State {
-  get showing() {
-    return showing;
+window.onkeyup = (e) => {
+  if (e.key === "Alt" && showing && selectedWindow && autoConfirm) {
+    showing = false;
+    invoke(SeelenCommand.WegToggleWindowState, {
+      hwnd: selectedWindow,
+      wasFocused: false,
+    });
+    // Optimistically reorder UI before backend updates
+    globalState.moveSelectedToFront(selectedWindow);
   }
-  set showing(value: boolean) {
-    showing = value;
-  }
+};
 
-  get windows() {
-    return windows.value;
-  }
+// +++++++++++++++++++++++ Sizing +++++++++++++++++++++++
 
-  get selectedWindow() {
-    return selectedWindow;
-  }
-  set selectedWindow(value: number | null) {
-    selectedWindow = value;
-  }
-}
+let monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
+await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
+await monitors.init();
 
-export const globalState = new State();
+let primaryMonitor = $derived.by(() => {
+  return monitors.value.find((m) => m.isPrimary) || monitors.value[0];
+});
+
+$effect.root(() => {
+  $effect(() => {
+    if (primaryMonitor) {
+      Widget.getCurrent().setPosition(primaryMonitor.rect);
+    }
+  });
+});

@@ -1,0 +1,13 @@
+default_multimedia_volume: حجم الوسائط المتعددة
+device:
+  channel:
+    system: أصوات النظام
+  comunications: الاتصالات
+  missing: جهاز مفقود
+  mixer: خلاط الحجم
+  multimedia: الوسائط المتعددة
+  settings: المزيد من إعدادات الجهاز
+  volume: حجم الجهاز
+input_devices: أجهزة الإدخال
+output_devices: أجهزة الإخراج
+players: مشغلات الوسائط

@@ -4,7 +4,7 @@ pub mod v2;
 use std::{
     env::temp_dir,
     net::{IpAddr, UdpSocket},
-    sync::atomic::Ordering,
+    sync::{atomic::Ordering, LazyLock},
 };
 
 use seelen_core::system_state::{NetworkAdapter, WlanProfile};
@@ -29,11 +29,22 @@ use windows::Win32::{
 use crate::{
     app::get_app_handle,
     error::Result,
+    event_manager,
     utils::{pwsh::PwshScript, spawn_named_thread},
     windows_api::{event_window::IS_INTERACTIVE_SESSION, Com},
 };
 
 use super::domain::adapter_to_slu_net_adapter;
+
+#[derive(Debug, Clone)]
+pub enum NetworkManagerEvent {
+    ConnectivityChanged {
+        connectivity: NLM_CONNECTIVITY,
+        ip: String,
+    },
+}
+
+event_manager!(NetworkManager, NetworkManagerEvent);
 
 trait IterFromRaw {
     unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<NetworkAdapter>>;
@@ -57,6 +68,15 @@ impl IterFromRaw for NetworkAdapter {
 pub struct NetworkManager {}
 
 impl NetworkManager {
+    pub fn instance() -> &'static Self {
+        static NETWORK_MANAGER: LazyLock<NetworkManager> = LazyLock::new(|| {
+            let manager = NetworkManager {};
+            NetworkManager::start_monitoring();
+            manager
+        });
+        &NETWORK_MANAGER
+    }
+
     /* fn dot11_ssid_from_string(ssid: &str) -> Result<DOT11_SSID> {
         if ssid.len() > 32 {
             return Err("SSID too long (max 32 bytes)".into());
@@ -135,10 +155,7 @@ impl NetworkManager {
     }
 
     /// emit connectivity changes, always will emit the current state on registration
-    pub fn register_events<F>(cb: F)
-    where
-        F: Fn(NLM_CONNECTIVITY, String) + Send + 'static,
-    {
+    fn start_monitoring() {
         spawn_named_thread("Network Manager", move || {
             let result: Result<()> = Com::run_with_context(|| {
                 let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
@@ -158,7 +175,10 @@ impl NetworkManager {
                         if current_state != last_state {
                             if let Ok(ip) = get_local_ip_address_base() {
                                 last_ip = Some(ip);
-                                cb(current_state, ip.to_string());
+                                NetworkManager::send(NetworkManagerEvent::ConnectivityChanged {
+                                    connectivity: current_state,
+                                    ip: ip.to_string(),
+                                });
                             }
                         } else if current_state.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
                             == NLM_CONNECTIVITY_IPV4_INTERNET.0
@@ -168,7 +188,12 @@ impl NetworkManager {
                             let current_ip = get_local_ip_address_base().ok();
                             if let (Some(current_ip), Some(last_ip)) = (current_ip, last_ip) {
                                 if current_ip != last_ip {
-                                    cb(current_state, current_ip.to_string())
+                                    NetworkManager::send(
+                                        NetworkManagerEvent::ConnectivityChanged {
+                                            connectivity: current_state,
+                                            ip: current_ip.to_string(),
+                                        },
+                                    );
                                 }
                             }
 

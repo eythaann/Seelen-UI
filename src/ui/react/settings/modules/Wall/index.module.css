@@ -1,12 +1,12 @@
 .interval {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--spacing-xs);
 
   > div {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: var(--spacing-2xs);
   }
 }
 
@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: 48px 1fr 30px;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-xs);
 
   .entryName {
     overflow: hidden;

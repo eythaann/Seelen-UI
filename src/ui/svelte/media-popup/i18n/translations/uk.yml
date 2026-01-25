@@ -1,0 +1,13 @@
+default_multimedia_volume: Обсяг мультимедіа
+device:
+  channel:
+    system: Системні звуки
+  comunications: Комунікації
+  missing: Відсутній пристрій
+  mixer: Міксер гучності
+  multimedia: Мультимедіа
+  settings: Більше налаштувань пристрою
+  volume: Гучність пристрою
+input_devices: Пристрої введення
+output_devices: Пристрої виведення
+players: Медіаплеєри

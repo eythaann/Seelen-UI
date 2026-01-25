@@ -1,16 +1,6 @@
 action:
   confirm: Är du säker?
   confirm_body: Denna åtgärd kan inte ångras.
-app_launcher:
-  enable: Aktivera App Launcher
-  launch_on:
-    mouse_over: Musen över
-    primary: Primär
-  monitor: Övervaka att visa
-  runners:
-    cmd: Kommando
-    explorer: Sikt
-    label: Löpare
 apps_configurations:
   app:
     bindings: Bindning (Observera att båda alternativen krävs)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Installationsmapp
   load: Ladda
   settings_file: Inställningsfil
-  simulate_fullscreen: Simulera helskärmshändelse
 extras:
   clear_icons: Rensa cachen för systemikoner
   clear_icons_tooltip: En omstart kan krävas för att få full effekt på alla widgets
@@ -95,6 +84,10 @@ extras:
   links: Officiella länkar
   relaunch: Omstart
   version: Version
+  version_fixed: >-
+    Applikationen och WebView2 Runtime-versionerna är fixade. Detta innebär att
+    applikationen inte kommer att ta emot uppdateringar och WebView2 Runtime
+    kommer inte att uppdateras automatiskt med Windows-uppdateringar.
 general:
   accent_color: Accentfärg
   date_format: Datumformat
@@ -102,6 +95,7 @@ general:
     available: Tillgängliga ikonpaket
     selected: Aktiva ikonpaket
   language: Språk
+  monday: måndag
   performance_mode:
     on_battery: På batteri
     on_energy_saver: På energisparare
@@ -110,7 +104,10 @@ general:
       extreme: Extrem
       minimal: Minimal
     plugged: Ansluten eller laddning
+  saturday: lördag
+  start_of_week: Veckans början
   startup: Köras vid start?
+  sunday: söndag
   theme:
     available: Tillgängliga teman
     selected: Aktiva teman
@@ -151,18 +148,28 @@ reset_all_to_default: Återställ alla till standardvärden
 reset_to_default: Återställ till standardvärde
 resources:
   app_outdated: Denna resurs kräver en nyare version av Seelen UI för att fungera korrekt.
+  corrupted_wallpaper: >-
+    Det gick inte att extrahera miniatyrbilden - skadat eller videoformat som
+    inte stöds
   delete: Radera resurs
   discover: Upptäck fler resurser
   has_update: En uppdatering är tillgänglig
+  high_impact: Hög inverkan på prestanda
   import_wallpapers: Importera lokala bakgrundsbilder
   open_folder: Öppna resursmappen
   outdated: >-
     Den här resursen är utformad för en äldre version av Seelen UI och kanske
     inte fungerar korrekt.
+  see_on_website: Se på hemsidan
+review_request:
+  not_now: Inte nu
+  sure: Säker!
+  title: Gillar du Seelen UI?
 save: Spara
 save_and_restart: Spara och starta om
 see_more: Se mer
 shortcuts:
+  duplicate_error: Den här genvägen är duplicerad
   enable: Aktivera inbyggda genvägssystem
   enable_tooltip: >-
     Inaktivera om du kommer att implementera ditt eget genvägssystem med Seelen
@@ -207,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Byt till tidigare arbetsyta
     switch_workspace: Byt till Workspace {{0}}
     toggle_float: Växla fönsterflödesläge
-    toggle_launcher: Växla launcher
     toggle_monocle: Växla arbetsyta Monocle -läge
   readonly_tooltip: Detta är en skrivskyddad genväg
   reset: Återställas till standardvärden
@@ -216,14 +222,6 @@ sides:
   left: Vänster
   right: Höger
   top: Topp
-start:
-  message: >-
-    Välkommen till Seelen UI, den ultimata skrivbordsmiljön med en införlivad
-    kakling Windows Manager för att förbättra din Windows -upplevelse! Utforska
-    en ny era av effektivitet och multitasking med vårt intuitiva gränssnitt och
-    avancerade funktioner.
-  message_accent: Optimera din produktivitet med stil!
-  title: Välkommen!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dröjsmål att gömma sig
@@ -244,23 +242,39 @@ update:
 wall:
   backgrounds: Tapeter
   blur: Blur
+  cancel: Avboka
+  close: Nära
+  collection_name: Samlingens namn
+  collections: Samlingar
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Skadade bakgrundsbilder, överväg att ta bort dessa:'
+  create: Skapa
+  create_collection: Skapa samling
+  default_collection: Standardsamling
+  delete_collection: Ta bort samling
+  edit_collection: Redigera samling
   enable: Aktivera tapetchef
+  extend: Förläng primär
   fit:
     contain: Innehåller
     cover: Omslag
     fill: Fylla
   flipHorizontal: Vänd horisontellt
   flipVertical: Vänd vertikal
+  generating_thumbnails: Generera bakgrundsminiatyrer
   hours: timme
   interval: Ändra tapeter varje
   minutes: minuter
+  monitor_collection: Övervaka samling
+  multimonitor_behaviour: Multimonitors beteende
   muted: Stäng av videoljud
   no_background: Tomt bildspel, med temas bakgrund istället.
+  no_collections: Inga samlingar har skapats ännu. Klicka på knappen + för att skapa en.
   objectFit: Bakgrund Passform
   objectPosition: Bakgrund Position
   overlayColor: Färg på överlägg
   overlayMixBlendMode: Overlay Mix Blandningsläge
+  per_monitor: Per bildskärm
   playback: Uppspelningshastighet
   position:
     bottom: Botten
@@ -268,10 +282,17 @@ wall:
     left: Vänster
     right: Rätt
     top: Topp
+  processing_video: Bearbetar video
   random: Slumpmässig bildspel
   saturation: Mättnad
   seconds: sekunder
+  select_collection: Välj Samling
+  thumbnail_generation_complete: Generering av miniatyrbilder är klar
+  thumbnail_generation_finished: Generering av miniatyrbilder har slutförts framgångsrikt
+  wallpaper_collection: Tapetsamling
+  wallpaper_settings: Bakgrundsinställningar
   withOverlay: Med överlägg
+  workspace_collections: Arbetsyta samlingar
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dröjsmål att gömma sig
@@ -307,6 +328,17 @@ weg:
   padding: Stoppning
   show_end_task: Visa slutuppgift i aktivitetsfältet
   width: Bredd
+welcome:
+  give_a_review: Ge en recension
+  message: >-
+    Seelen UI är en gratis skrivbordsmiljö med öppen källkod för Windows. Här
+    har du full kontroll över hur ditt skrivbord ser ut och beter sig, så att du
+    kan anpassa varje detalj för att matcha ditt arbetsflöde och din stil.
+  ok: Låt oss börja!
+  review: >-
+    Om du gillar att använda Seelen UI, överväg att lämna en recension i butiken
+    – din feedback hjälper projektet att växa och förbättras.
+  title: Välkommen till Seelen UI!
 widget:
   enable: Aktivera denna widget
   enable_for_monitor: Aktivera på denna bildskärm

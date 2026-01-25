@@ -1,16 +1,6 @@
 action:
   confirm: Ishonasizmi?
   confirm_body: Ushbu harakatni bekor qilib bo'lmaydi.
-app_launcher:
-  enable: APP ishga tushirishni yoqish
-  launch_on:
-    mouse_over: Sichqoncha ustiga
-    primary: Asosiy
-  monitor: Ko'rish uchun monitor
-  runners:
-    cmd: Buyruq
-    explorer: Yugurish
-    label: Yuguruvchilar
 apps_configurations:
   app:
     bindings: Bog'lash (eslatma ikkalasi ham talab qilinadi)
@@ -87,7 +77,6 @@ devtools:
   install_folder: O'rnatish papkasini o'rnatish
   load: Yuklamoq
   settings_file: Sozlamalar fayli
-  simulate_fullscreen: Toʻliq ekranli hodisani simulyatsiya qilish
 extras:
   clear_icons: Tozalash tizimi piktogrammalari kesh
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Rasmiy havolalar
   relaunch: Qolma
   version: Versiya
+  version_fixed: >-
+    Ilova va WebView2 Runtime versiyalari aniqlangan. Bu shuni anglatadiki,
+    ilova yangilanishlarni olmaydi va WebView2 Runtime Windows yangilanishlari
+    bilan avtomatik ravishda yangilanmaydi.
 general:
   accent_color: Urg'u rangi
   date_format: Sana formati
@@ -104,6 +97,7 @@ general:
     available: Mavjud piktogramma to'plamlari
     selected: Faol piktogramma to'plamlari
   language: Til
+  monday: dushanba
   performance_mode:
     on_battery: Batareyada
     on_energy_saver: Energiya tejash bo'yicha
@@ -112,7 +106,10 @@ general:
       extreme: Haddan tashqari
       minimal: Minimal
     plugged: Ulangan yoki zaryadlash
+  saturday: shanba
+  start_of_week: Hafta boshi
   startup: Ishga tushirishda ishlaydimi?
+  sunday: yakshanba
   theme:
     available: Mavjud mavzular
     selected: Faol mavzular
@@ -153,18 +150,28 @@ reset_all_to_default: Barcha standart qiymatlarni qayta o'rnating
 reset_to_default: Standart qiymatni qayta o'rnating
 resources:
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
+  corrupted_wallpaper: >-
+    Eskizni chiqarib boʻlmadi - buzilgan yoki qoʻllab-quvvatlanmaydigan video
+    formati
   delete: Resurslarni o'chirish
   discover: Ko'proq resurslarni kashf eting
   has_update: Yangilanish mavjud
+  high_impact: Ishlashning yuqori ta'siri
   import_wallpapers: Mahalliy fon rasmlarini import qilish
   open_folder: Resurslar jildini oching
   outdated: >-
     Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri
     ishlamasligi mumkin.
+  see_on_website: Veb-saytda ko'ring
+review_request:
+  not_now: Hozir emas
+  sure: Albatta!
+  title: Seelen UI yoqyapsizmi?
 save: Tejash
 save_and_restart: Saqlang va qayta yoqing
 see_more: Ko'proq ko'rish
 shortcuts:
+  duplicate_error: Bu yorliq takrorlanadi
   enable: Ichki yorliqlar tizimini yoqing
   enable_tooltip: >-
     Seelen Ui mijozidan foydalanib o'zingizning yorliq tizimingizni amalga
@@ -209,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: Oldingi ish joyiga o'tish
     switch_workspace: Ish maydoni {{0}}
     toggle_float: Oynaning sath rejimini o'zgartiring
-    toggle_launcher: Yoquvchi ishga tushirish
     toggle_monocle: Ish maydoni Monokle rejimini o'zgartiring
   readonly_tooltip: Bu faqat o'qish faqat yorliqidir
   reset: Standartlarga qayta o'rnating
@@ -218,14 +224,6 @@ sides:
   left: Chapda
   right: To'g'ri
   top: Eng yuqori
-start:
-  message: >-
-    Windows tajribangizni oshirish uchun "Windows" bosh murabbiyi bo'lgan
-    Windows menejeriga ega Seelen UI-ga xush kelibsiz! Bizning intuitiv
-    interfeysimiz va rivojlangan xususiyatlarimiz bilan samaradorlik va ko'p
-    bosqichli yangi davrni o'rganing.
-  message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
-  title: Xush kelibsiz!
 toolbar:
   auto_hide: Avtomatik yashirish
   delay_to_hide: Yashirish uchun kechikish
@@ -246,23 +244,41 @@ update:
 wall:
   backgrounds: Fon rasmlari
   blur: Puflamoq
+  cancel: Bekor qilish
+  close: Yopish
+  collection_name: To'plam nomi
+  collections: To'plamlar
   contrast: Qarama-qarshilik
+  corrupted_wallpapers_message: 'Buzilgan fon rasmlari, ularni o''chirishni o''ylab ko''ring:'
+  create: Yaratish
+  create_collection: To'plam yaratish
+  default_collection: Birlamchi toʻplam
+  delete_collection: To'plamni o'chirish
+  edit_collection: To'plamni tahrirlash
   enable: Fon rasmi menejerini yoqing
+  extend: Birlamchini kengaytiring
   fit:
     contain: O'z ichiga olgan
     cover: Qopqoq
     fill: To'ldirmoq
   flipHorizontal: Gorizontalental
   flipVertical: Vertikal vertikal
+  generating_thumbnails: Fon rasmi eskizlari yaratilmoqda
   hours: soat
   interval: Har bir devor rasmini o'zgartiring
   minutes: daqiqa
+  monitor_collection: Monitor to'plami
+  multimonitor_behaviour: Multimonitor xatti-harakati
   muted: Ovozni o'chirish
   no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
+  no_collections: >-
+    Hozircha hech qanday kolleksiya yaratilmagan. Uni yaratish uchun + tugmasini
+    bosing.
   objectFit: Fon mos
   objectPosition: Fon holati
   overlayColor: Overlay rang
   overlayMixBlendMode: Ortiqcha aralashtirish rejimini aralashtiring
+  per_monitor: Monitor uchun
   playback: Qayta tinglash tezligi
   position:
     bottom: Pastki
@@ -270,10 +286,17 @@ wall:
     left: Chapda
     right: To'g'ri
     top: Eng yuqori
+  processing_video: Videoga ishlov berilmoqda
   random: Tasodifiy slayd-shou
   saturation: To'yinganlik
   seconds: soniya
+  select_collection: To'plamni tanlang
+  thumbnail_generation_complete: Eskiz yaratish tugallandi
+  thumbnail_generation_finished: Eskiz yaratish muvaffaqiyatli yakunlandi
+  wallpaper_collection: Fon rasmi to'plami
+  wallpaper_settings: Fon rasmi sozlamalari
   withOverlay: Qopqoq bilan
+  workspace_collections: Ish maydoni to'plamlari
 weg:
   auto_hide: Avtomatik yashirish
   delay_to_hide: Yashirish uchun kechikish
@@ -309,6 +332,19 @@ weg:
   padding: Plomba
   show_end_task: Vazifalar panelida tugatish vazifasini ko'rsating
   width: Kenglik
+welcome:
+  give_a_review: Sharh bering
+  message: >-
+    Seelen UI Windows uchun bepul va ochiq manbali ish stoli muhitidir. Bu yerda
+    siz ish stolingiz qanday koʻrinishi va oʻzini tutishini toʻliq nazorat qila
+    olasiz, bu sizga har bir detalni ish jarayoni va uslubingizga mos ravishda
+    sozlash imkonini beradi.
+  ok: Boshlaymiz!
+  review: >-
+    Agar siz Seelen UI-dan foydalanishni yoqtirsangiz, do'konda sharh qoldiring
+    - fikr-mulohazalaringiz loyihani rivojlantirish va yaxshilashga yordam
+    beradi.
+  title: Seelen UI-ga xush kelibsiz!
 widget:
   enable: Bu vidjetni yoqing
   enable_for_monitor: Ushbu monitorga yoqish

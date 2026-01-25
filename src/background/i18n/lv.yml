@@ -1,11 +1,5 @@
 cancel: Atcelt
 done: Darīts
-drivers:
-  got_it: Sapratu.
-  monitor_disabled: >-
-    Šķiet, ka daži monitora draiveri ir atspējoti. Lūdzu, iespējojiet tos, lai
-    Seelen UI darbotos pareizi.
-  monitor_disabled_title: Monitora draiveri ir atspējoti
 resource:
   added: Ir pievienots jauns resurss
   download_failed_body: >-
@@ -22,6 +16,12 @@ runtime:
     vērtības.
   corrupted_file_path: Bojāts faila ceļš
   download: Dodieties uz lejupielādes lapu
+  files_integrity: |-
+    Mēs nevarējām pārbaudīt lietojumprogrammu failu integritāti.
+    Tas var notikt, ja faili ir modificēti, bojāti vai instalēšana ir nepilnīga.
+    Drošības apsvērumu dēļ Seelen UI nevar turpināt.
+    Lūdzu, atkārtoti instalējiet to no oficiālās vietnes.
+  files_integrity_title: Drošības brīdinājums — failu integritātes pārbaude neizdevās
   not_found: WebView2 izpildlaiks nav atrasts
   not_found_description: Seelen UI ir nepieciešams Webview2 Runtime. Lūdzu, instalējiet to.
   outdated: WebView2 izpildlaiks ir novecojis

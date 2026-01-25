@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { Item } from "../item/infra/infra.tsx";
 
 import { $settings } from "../shared/state/mod.ts";
-import { WithDateCalendar } from "./Calendar.tsx";
 
 interface Props {
   module: DateToolbarItem;
@@ -44,9 +43,5 @@ export function DateModule({ module }: Props) {
     [$date_format.value, language],
   );
 
-  return (
-    <WithDateCalendar>
-      <Item extraVars={{ date }} module={module} />
-    </WithDateCalendar>
-  );
+  return <Item extraVars={{ date }} module={module} />;
 }

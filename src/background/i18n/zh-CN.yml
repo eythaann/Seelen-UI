@@ -1,8 +1,8 @@
 cancel: 取消
-done: 完成
+done: 完毕
 drivers:
-  got_it: 了解
-  monitor_disabled: 似乎某些显示器驱动程序已被禁用。请启用它们以确保 Seelen UI 正常工作。
+  got_it: 明白
+  monitor_disabled: 某些显示器驱动程序似乎被禁用。请启用它们，以便 Seelen UI 正常工作。
   monitor_disabled_title: 显示器驱动程序已禁用
 resource:
   added: 已添加新资源
@@ -16,6 +16,12 @@ runtime:
   corrupted_file: 配置文件已损坏，正在使用默认值。
   corrupted_file_path: 损坏的文件路径
   download: 前往下载页面
+  files_integrity: |-
+    我们无法验证应用程序文件的完整性。
+    如果文件被修改、损坏或安装不完整，则可能会发生这种情况。
+    出于安全原因，Seelen UI 无法继续。
+    请从官方网站重新安装。
+  files_integrity_title: 安全警报 - 文件完整性检查失败
   not_found: 未找到 WebView2 运行时
   not_found_description: Seelen UI 需要 Webview2 运行时。请安装它。
   outdated: WebView2 运行时版本过旧

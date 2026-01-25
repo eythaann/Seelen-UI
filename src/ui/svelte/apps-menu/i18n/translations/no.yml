@@ -1,0 +1,11 @@
+all: Alle apper
+back: Tilbake
+disband: Oppløs mappe
+folder: Mappe
+no_matching_items: Ingen elementer funnet som samsvarer med søket ditt
+open_file_location: Åpne filplassering
+pin: Pin
+run_as_admin: Kjør som administrator
+unpin: Løsne
+welcome_message: Velkommen til Seelen UI-appmenyen.
+welcome_message2: På denne fanen kan du feste favorittappene dine.

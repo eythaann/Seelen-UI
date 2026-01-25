@@ -1,11 +1,5 @@
 cancel: لغو کردن
 done: انجام شده
-drivers:
-  got_it: آن را
-  monitor_disabled: >-
-    به نظر می رسد که برخی از درایورهای مانیتور غیرفعال هستند. لطفاً آنها را فعال
-    کنید تا اجازه دهند Seelen UI به درستی کار کند.
-  monitor_disabled_title: رانندگان مانیتور غیرفعال هستند
 resource:
   added: یک منبع جدید اضافه شده است
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: به جای آن ، یک فایل پیکربندی خراب است.
   corrupted_file_path: مسیر پرونده فاسد شده
   download: به صفحه دانلود بروید
+  files_integrity: >-
+    ما نتوانستیم یکپارچگی فایل های برنامه را تأیید کنیم.
+
+    این ممکن است در صورتی اتفاق بیفتد که فایل‌ها اصلاح شده باشند، خراب شده باشند
+    یا نصب ناقص باشد.
+
+    به دلایل امنیتی، Seelen UI نمی تواند ادامه دهد.
+
+    لطفاً آن را مجدداً از وب سایت رسمی نصب کنید.
+  files_integrity_title: هشدار امنیتی - بررسی یکپارچگی فایل ها انجام نشد
   not_found: WebView2 Runtime یافت نشد
   not_found_description: رابط کاربری Seelen به Webview2 Runtime نیاز دارد. لطفا آن را نصب کنید.
   outdated: WebView2 Runtime قدیمی شده است

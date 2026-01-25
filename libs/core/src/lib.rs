@@ -7,6 +7,7 @@ pub mod state;
 pub mod system_state;
 pub mod utils;
 
+pub use chrono;
 pub use error::SeelenLibError;
 pub use rect::*;
 

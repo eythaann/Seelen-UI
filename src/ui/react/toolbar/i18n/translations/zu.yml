@@ -20,9 +20,6 @@ context_menu:
   restore: Buyisela ezenzakalelayo
   settings: Izilungiselelo
   task_manager: Umphathi Womsebenzi
-keyboard:
-  more: Izilungiselelo eziningi zekhibhodi
-  title: Ukuhlelwa kwekhibhodi
 media:
   default_multimedia_volume: Ivolumu yemultimedia
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Amadivayisi wokufaka
   output_devices: Amadivayisi okukhipha
   players: Abadlali beMedia
-network:
-  available: Amanethiwekhi atholakalayo
-  connect: Hlangana
-  connected: Kuxhunywe ku
-  disconnect: Thukulula
-  hidden: Inethiwekhi efihliwe
-  more: Izilungiselelo eziningi zenethiwekhi
-  not_found: Awekho amanethiwekhi atholakele
-  placeholder:
-    password: Igama lokuvunyelwa ukungena endaweni ethile
-  saved: Amanethiwekhi alondoloziwe
-  scanning: Iskenela amanethiwekhi
-  secured: Inethiwekhi ebethelwe
 notifications:
   clear: Sula konke
   empty: Azikho izaziso
@@ -70,24 +54,3 @@ settings:
   power: Ubuqhwaga
   restart: Qalanisa
   title: Amasethingi
-userhome:
-  empty_list: Azikho izinto
-  folders:
-    desktop: Desktop
-    documents: Amadokhumenti
-    downloads: Ukulanda
-    more_items: Khombisa okuningi ...
-    music: Umculo
-    pictures: Isithombe
-    recent: Isanda kusetshenziswa
-    reduce_items: Khombisa okuncane ...
-    title: Izincwajanazo Zomsebenzisi
-    videos: Vigenanapho
-  profile:
-    accounts: Vula Izilungiselelo ze-Akhawunti
-    open_onedrive: Vula umkhombandlela we-OneDrive
-    open_user_folder: Vula umkhombandlela womsebenzisi
-  seelen_options:
-    open_installation_folder: Vula ifolda yezilungiselelo ze-Seelen Izilungiselelo
-    open_log_folder: Vula ifolda ye-weelen log
-    title: Izincwajana zeSeben

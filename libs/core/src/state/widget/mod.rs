@@ -134,8 +134,9 @@ pub enum WidgetInstanceMode {
 pub enum WidgetLoader {
     /// Used for old internal widgets, similar to `Internal`.
     Legacy,
-    /// Used for internal bundled widgets, this will load the code from internal resources
-    /// and ignore the `js`, `css`, and `html` fields.
+    /// Used for internal bundled widgets, this will load the code from internal resources.
+    InternalReact,
+    /// Used for internal bundled widgets, this will load the code from internal resources.
     Internal,
     /// Used for third party widgets, this will load the code from the `js`, `css`, and `html` fields
     #[default]
@@ -229,12 +230,18 @@ pub enum Alignment {
     Center,
     End,
 }
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
 #[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
 pub enum WidgetStatus {
+    /// Widget has been registered, but not yet loaded
     Pending,
+    /// Webview window is being created
     Creating,
+    /// Widget javascript, html and css is being loaded
     Mounting,
+    /// Widget loaded and is ready
     Ready,
-    CrashedOnLoad,
+    /// Webview window failed to be created.
+    CrashedOnCreation,
 }

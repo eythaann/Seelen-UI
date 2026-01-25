@@ -16,7 +16,7 @@ export function AnimatedDropdown({
   children,
   open: openProp,
   onOpenChange,
-  dropdownRender,
+  popupRender,
   animationDescription,
   ...dropdownProps
 }: AnimatedDropwonProps) {
@@ -64,7 +64,7 @@ export function AnimatedDropdown({
         onOpenChange?.(open, event);
       }}
       {...dropdownProps}
-      dropdownRender={(origin) => dropdownRender && <div className={cx(classnames)}>{dropdownRender(origin)}</div>}
+      popupRender={(origin) => <div className={cx(classnames)}>{popupRender?.(origin) ?? origin}</div>}
     >
       {children}
     </Dropdown>

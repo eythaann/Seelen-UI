@@ -1,0 +1,21 @@
+empty_list: هیڅ توکي نشته
+folders:
+  desktop: ډیسټاپ
+  documents: اسناد
+  downloads: ډاونلوډونه
+  more_items: نور ښکاره کړئ ...
+  music: موسیقي
+  pictures: انځورونه
+  recent: په دې وروستیو کې کارول کیږي
+  reduce_items: لږ وښایاست...
+  title: د کارن لارښود
+  videos: ویډیوګانې
+profile:
+  accounts: د حساب ترتیبات خلاص کړئ
+  log_out: وتل
+  open_onedrive: د OneDrive لارښود خلاص کړئ
+  open_user_folder: د کارونکي لارښود خلاص کړئ
+seelen_options:
+  open_installation_folder: د سیلین ترتیبات فولډر خلاص کړئ
+  open_log_folder: د سیلین لاګ فولډر خلاص کړئ
+  title: سیلین لارښودونه

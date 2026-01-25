@@ -20,9 +20,6 @@ context_menu:
   restore: 恢复默认值
   settings: 设置
   task_manager: 任务管理器
-keyboard:
-  more: 更多键盘设置
-  title: 键盘布局
 media:
   default_multimedia_volume: 多媒体音量
   device:
@@ -40,15 +37,15 @@ media:
 network:
   available: 可用网络
   connect: 连接
-  connected: 已连接至
+  connected: 已连接
   disconnect: 断开连接
   hidden: 隐藏网络
   more: 更多网络设置
   not_found: 未找到 Wi-Fi 网络
   placeholder:
     password: 密码
-  saved: 已保存网络
-  scanning: 正在搜索网络
+  saved: 已保存的网络
+  scanning: 扫描网络
   secured: 加密网络
 notifications:
   clear: 全部清除
@@ -74,7 +71,7 @@ userhome:
   empty_list: 无项目
   folders:
     desktop: 桌面
-    documents: 文档
+    documents: 文件
     downloads: 下载
     more_items: 显示更多...
     music: 音乐

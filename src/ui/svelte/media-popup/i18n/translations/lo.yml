@@ -1,0 +1,13 @@
+default_multimedia_volume: ປະລິມານມັນຕິມີເດຍ
+device:
+  channel:
+    system: ສຽງລະບົບ
+  comunications: ການສື່ສານ
+  missing: ຂາດອຸປະກອນ
+  mixer: ເຄື່ອງປະສົມລະດັບສຽງ
+  multimedia: ມັນຕິມີເດຍ
+  settings: ການຕັ້ງຄ່າອຸປະກອນເພີ່ມເຕີມ
+  volume: ປະລິມານອຸປະກອນ
+input_devices: ອຸປະກອນປ້ອນ
+output_devices: ອຸປະກອນອອກ
+players: ເຄື່ອງຫຼິ້ນສື່

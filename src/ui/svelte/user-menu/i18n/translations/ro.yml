@@ -1,0 +1,21 @@
+empty_list: Fără articole
+folders:
+  desktop: Desktop
+  documents: Documente
+  downloads: Descărcări
+  more_items: Arată mai multe...
+  music: Muzică
+  pictures: Poze
+  recent: Folosit recent
+  reduce_items: Arată mai puțin...
+  title: Directoare de utilizatori
+  videos: Videoclipuri
+profile:
+  accounts: Deschideți setările contului
+  log_out: Deconectați-vă
+  open_onedrive: Deschideți directorul OneDrive
+  open_user_folder: Deschideți directorul de utilizatori
+seelen_options:
+  open_installation_folder: Deschideți folderul de setări Seelen
+  open_log_folder: Deschideți folderul de jurnal Seelen
+  title: directoarele Seelen

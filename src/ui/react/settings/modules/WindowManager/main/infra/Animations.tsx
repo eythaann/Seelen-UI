@@ -1,16 +1,14 @@
 import { InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
 
-import { SeelenWmSelectors } from "../../../shared/store/app/selectors.ts";
-import { WManagerSettingsActions } from "../app.ts";
+import { getWmConfig, setWmAnimations } from "../../application.ts";
 
 export function WmAnimationsSettings() {
-  const animations = useSelector(SeelenWmSelectors.animations);
+  const wmConfig = getWmConfig();
+  const animations = wmConfig.animations;
 
   const { t } = useTranslation();
-  const d = useDispatch();
 
   return (
     <SettingsGroup>
@@ -22,10 +20,10 @@ export function WmAnimationsSettings() {
               <Switch
                 checked={animations.enabled}
                 onChange={(value) => {
-                  d(WManagerSettingsActions.setAnimations({
+                  setWmAnimations({
                     ...animations,
                     enabled: value,
-                  }));
+                  });
                 }}
               />
             }
@@ -42,10 +40,10 @@ export function WmAnimationsSettings() {
               onChange={(value) => {
                 // TODO: the type is bigint but in reality it's a number, tis should be fixed on the types lib
                 let parsed = (value || 100) as unknown as bigint;
-                d(WManagerSettingsActions.setAnimations({
+                setWmAnimations({
                   ...animations,
                   durationMs: parsed,
-                }));
+                });
               }}
             />
           }
@@ -58,10 +56,10 @@ export function WmAnimationsSettings() {
               options={EaseFunctions}
               value={animations.easeFunction}
               onSelect={(value) => {
-                d(WManagerSettingsActions.setAnimations({
+                setWmAnimations({
                   ...animations,
                   easeFunction: value,
-                }));
+                });
               }}
               style={{ width: "150px" }}
             />

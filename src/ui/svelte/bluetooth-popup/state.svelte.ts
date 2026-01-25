@@ -24,24 +24,14 @@ await radios.init();
 let isScanning = $state(false);
 let selectedDeviceId = $state<string | null>(null);
 
-widget.onTrigger(async () => {
-  // Start scanning when popup is triggered
-  await invoke(SeelenCommand.StartBluetoothScanning);
-  isScanning = true;
-  webview.show();
-});
-
 webview.onFocusChanged(async (e) => {
   if (!e.payload) {
-    // Stop scanning when popup loses focus
-    if (isScanning) {
-      await invoke(SeelenCommand.StopBluetoothScanning);
-      isScanning = false;
-    }
-
-    // Reset selection state
+    await invoke(SeelenCommand.StartBluetoothScanning);
+    isScanning = true;
+  } else {
+    await invoke(SeelenCommand.StopBluetoothScanning);
+    isScanning = false;
     selectedDeviceId = null;
-    webview.hide();
   }
 });
 

@@ -1,0 +1,13 @@
+default_multimedia_volume: मल्टिमिडिया भोल्युम
+device:
+  channel:
+    system: प्रणाली ध्वनिहरू
+  comunications: सञ्चार
+  missing: हराएको यन्त्र
+  mixer: भोल्युम मिक्सर
+  multimedia: मल्टिमिडिया
+  settings: थप यन्त्र सेटिङहरू
+  volume: यन्त्र भोल्युम
+input_devices: इनपुट उपकरणहरू
+output_devices: आउटपुट उपकरणहरू
+players: मिडिया प्लेयरहरू

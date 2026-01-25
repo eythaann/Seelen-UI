@@ -20,9 +20,6 @@ context_menu:
   restore: Επαναφορά στην προεπιλογή
   settings: Ρυθμίσεις
   task_manager: Task Manager
-keyboard:
-  more: Περισσότερες ρυθμίσεις πληκτρολογίου
-  title: Διάταξη πληκτρολογίου
 media:
   default_multimedia_volume: Όγκος πολυμέσων
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Συσκευές εισόδου
   output_devices: Συσκευές εξόδου
   players: Media players
-network:
-  available: Διαθέσιμα δίκτυα
-  connect: Συνδέω-συωδεομαι
-  connected: Συνδεδεμένο με
-  disconnect: Αποσυνδέω
-  hidden: Κρυμμένο δίκτυο
-  more: Περισσότερες ρυθμίσεις δικτύου
-  not_found: Δεν βρέθηκαν δίκτυα
-  placeholder:
-    password: Κωδικός πρόσβασης
-  saved: Αποθηκευμένα δίκτυα
-  scanning: Σάρωση για δίκτυα
-  secured: Κρυπτογραφημένο δίκτυο
 notifications:
   clear: Εκκαθάριση όλων
   empty: Δεν υπάρχουν ειδοποιήσεις
@@ -70,24 +54,3 @@ settings:
   power: Εξουσία
   restart: Επανεκκίνηση
   title: Ρυθμίσεις
-userhome:
-  empty_list: Δεν υπάρχουν αντικείμενα
-  folders:
-    desktop: Επιτραπέζια επιφάνεια εργασίας
-    documents: Έγγραφα
-    downloads: Λήψεις
-    more_items: Περισσότερα...
-    music: Μουσική
-    pictures: Εικόνες
-    recent: Χρησιμοποιήθηκε πρόσφατα
-    reduce_items: Εμφάνιση λιγότερων...
-    title: Κατάλογοι χρηστών
-    videos: Βίντεο
-  profile:
-    accounts: Ρυθμίσεις ανοίγματος λογαριασμού
-    open_onedrive: Ανοίξτε τον κατάλογο OneDrive
-    open_user_folder: Άνοιγμα καταλόγου χρήστη
-  seelen_options:
-    open_installation_folder: Ανοίξτε το φάκελο ρυθμίσεων Seelen
-    open_log_folder: Ανοίξτε το φάκελο Seelen log
-    title: Κατάλογοι Seelen

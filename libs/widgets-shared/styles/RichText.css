@@ -1,0 +1,120 @@
+:root {
+  --spacing-2xs: 0.25rem; /* 4px  */
+  --spacing-xs: 0.5rem; /* 8px  */
+  --spacing-s: 0.75rem; /* 12px */
+  --spacing-m: 1rem; /* 16px */
+  --spacing-l: 1.25rem; /* 20px */
+  --spacing-xl: 1.5rem; /* 24px */
+  --spacing-2xl: 2rem; /* 32px */
+
+  --config-border-radius: 10px;
+}
+
+.richText {
+  p {
+    margin-bottom: var(--spacing-s);
+    text-align: justify;
+
+    sup {
+      vertical-align: super;
+    }
+  }
+
+  a {
+    display: inline-flex;
+    color: var(--color-blue-800);
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: var(--color-purple-1100);
+    }
+  }
+
+  strong,
+  b {
+    font-weight: 600;
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  blockquote {
+    padding-left: var(--spacing-l);
+    margin-bottom: var(--spacing-s);
+    border-left: 2px solid var(--color-gray-400);
+  }
+
+  ul,
+  ol {
+    margin-left: var(--spacing-l);
+    margin-bottom: var(--spacing-s);
+  }
+
+  ul > li {
+    list-style-type: disc;
+    ul > li {
+      list-style-type: circle;
+      ul > li {
+        list-style-type: square;
+      }
+    }
+  }
+
+  ol > li {
+    list-style-type: decimal;
+    ol > li {
+      list-style-type: lower-alpha;
+      ol > li {
+        list-style-type: lower-roman;
+      }
+    }
+  }
+
+  code {
+    background-color: var(--color-gray-200);
+    padding: var(--spacing-2xs) var(--spacing-xs);
+    border-radius: var(--spacing-2xs);
+  }
+
+  pre {
+    code {
+      display: block;
+      overflow-x: auto;
+      border-radius: var(--config-border-radius);
+      background-color: var(--color-persist-gray-900);
+      color: var(--color-persist-gray-100);
+      padding: var(--spacing-m) var(--spacing-l);
+      margin-bottom: var(--spacing-s);
+    }
+  }
+
+  table {
+    border-radius: var(--config-border-radius);
+    border-collapse: collapse;
+    margin-bottom: var(--spacing-s);
+
+    th {
+      font-weight: 600;
+
+      &:not([align]) {
+        text-align: left;
+      }
+    }
+
+    th,
+    td {
+      border: 1px solid var(--color-gray-400);
+      padding: var(--spacing-xs) var(--spacing-s);
+    }
+  }
+
+  /* Reset last item margin */
+  *:last-child {
+    margin-bottom: 0;
+  }
+}

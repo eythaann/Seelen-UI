@@ -50,7 +50,7 @@ export class Theme {
 
   /** Will add the styles targeting the current widget id */
   applyToDocument(varValues: ISettings["byTheme"][ResourceId] = {}): void {
-    const widgetId = Widget.getCurrentWidgetId();
+    const widgetId = Widget.self.id;
     let styles = ``;
 
     this.forEachVariableDefinition((def) => {

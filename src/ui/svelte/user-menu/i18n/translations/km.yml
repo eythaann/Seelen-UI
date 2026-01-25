@@ -1,0 +1,21 @@
+empty_list: គ្មានធាតុ
+folders:
+  desktop: ផ្ទៃតុ
+  documents: ឯកសារ
+  downloads: ការទាញយក
+  more_items: បង្ហាញបន្ថែម...
+  music: តន្ត្រី
+  pictures: រូបភាព
+  recent: បានប្រើថ្មីៗនេះ
+  reduce_items: បង្ហាញតិច...
+  title: ថតអ្នកប្រើប្រាស់
+  videos: វីដេអូ
+profile:
+  accounts: បើកការកំណត់គណនី
+  log_out: ចេញ
+  open_onedrive: បើកថត OneDrive
+  open_user_folder: បើកបញ្ជីអ្នកប្រើប្រាស់
+seelen_options:
+  open_installation_folder: បើកថតការកំណត់ Seelen
+  open_log_folder: បើកថតឯកសារ Seelen
+  title: បញ្ជីឈ្មោះ Seelen

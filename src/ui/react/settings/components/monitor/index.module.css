@@ -9,7 +9,7 @@
 .monitor {
   border-radius: 12px;
   background-color: var(--color-fixed-gray-800);
-  padding: 5px;
+  padding: var(--spacing-2xs);
 
   .screen {
     position: relative;

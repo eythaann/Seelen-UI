@@ -1,9 +1,8 @@
 import type { WidgetId } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Select, Space } from "antd";
-import { useDispatch } from "react-redux";
 
-import { RootActions } from "../../shared/store/app/reducer.ts";
+import { patchWidgetInstanceConfig, removeWidgetInstance } from "./application.ts";
 
 interface InstanceSelectorProps {
   widgetId: WidgetId;
@@ -18,15 +17,9 @@ interface InstanceSelectorProps {
 export function WidgetInstanceSelector(
   { widgetId, options, selected, onSelect }: InstanceSelectorProps,
 ) {
-  const d = useDispatch();
-
   const onInstanceCreated = () => {
     const instanceId = crypto.randomUUID();
-    d(RootActions.patchWidgetInstanceConfig({
-      widgetId,
-      instanceId,
-      config: {},
-    }));
+    patchWidgetInstanceConfig(widgetId, instanceId, {});
     onSelect(instanceId);
   };
 
@@ -35,7 +28,7 @@ export function WidgetInstanceSelector(
       const idx = options.findIndex((t) => t.value === selected);
       const newIdx = idx === 0 ? idx + 1 : idx - 1;
       onSelect(options[newIdx]?.value || null);
-      d(RootActions.removeWidgetInstance({ widgetId, instanceId: selected }));
+      removeWidgetInstance(widgetId, selected);
     }
   };
 

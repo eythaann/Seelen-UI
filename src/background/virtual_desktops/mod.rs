@@ -14,7 +14,7 @@ use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_
 
 use crate::error::{Result, ResultLogExt};
 use crate::hook::HookManager;
-use crate::modules::apps::application::{UserAppsEvent, UserAppsManager};
+use crate::modules::apps::application::{UserAppWinEvent, UserAppsManager};
 use crate::modules::monitors::{MonitorManager, MonitorManagerEvent};
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::lock_free::{SyncHashMap, SyncVec};
@@ -100,6 +100,10 @@ impl SluWorkspacesManager2 {
                 if &workspace.id == monitor.active_workspace_id() {
                     workspace.restore();
                 } else {
+                    // allow resume workspaces correctly on change
+                    for addr in &workspace.windows {
+                        let _ = MINIMIZED_BY_WORKSPACES.insert(*addr);
+                    }
                     workspace.hide(true);
                 }
             }
@@ -138,10 +142,10 @@ impl SluWorkspacesManager2 {
         });
 
         UserAppsManager::subscribe(|event| match event {
-            UserAppsEvent::WinAdded(addr) => {
+            UserAppWinEvent::Added(addr) => {
                 Self::instance().add_to_current_workspace(&Window::from(addr));
             }
-            UserAppsEvent::WinRemoved(addr) => {
+            UserAppWinEvent::Removed(addr) => {
                 Self::instance().remove(&Window::from(addr));
             }
             _ => {}

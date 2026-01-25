@@ -8,11 +8,10 @@ mod cli;
 mod error;
 mod exposed;
 mod hook;
+mod migrations;
 mod modules;
 mod resources;
-mod restoration_and_migrations;
 mod state;
-mod system;
 mod tauri_context;
 mod tauri_plugins;
 mod utils;
@@ -34,9 +33,8 @@ use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
     integrity::{
-        check_for_webview_optimal_state, is_already_running, print_initial_information,
-        register_panic_hook, restart_as_appx, restart_as_interactive_user,
-        validate_webview_runtime_is_installed,
+        is_already_running, print_initial_information, register_panic_hook, restart_as_appx,
+        restart_as_interactive_user,
     },
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
@@ -58,16 +56,75 @@ pub fn get_tokio_handle() -> &'static tokio::runtime::Handle {
         .expect("Tokio runtime was not initialized")
 }
 
+#[tokio::main]
+async fn main() -> Result<()> {
+    register_panic_hook();
+    handle_console_client().await?;
+
+    if is_already_running() {
+        SelfPipe::request_open_settings().await?;
+        return Ok(());
+    }
+
+    // GUI must run as interactive user (not elevated)
+    if WindowsApi::is_elevated()? {
+        println!("GUI was started with elevated privileges, restarting as interactive user...");
+        restart_as_interactive_user()?;
+    }
+
+    if was_installed_using_msix() && !is_running_as_appx() {
+        restart_as_appx()?;
+    }
+
+    TOKIO_RUNTIME_HANDLE
+        .set(tokio::runtime::Handle::current())
+        .expect("Failed to set runtime handle");
+
+    rust_i18n::set_locale(&seelen_core::state::Settings::get_system_language());
+    trace_lock!(PERFORMANCE_HELPER).start("setup");
+    let mut app_builder = tauri::Builder::default();
+    app_builder = register_plugins(app_builder);
+    app_builder = register_invoke_handler(app_builder);
+
+    // if no custom runtime is present, the app will use the installed with the system
+    if let Some(path) = crate::utils::get_fixed_runtime_path() {
+        println!("Using fixed runtime: {path:?}");
+        std::env::set_var("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER", path);
+    }
+
+    let app = app_builder
+        .setup(|app| {
+            APP_HANDLE.set(app.handle().to_owned()).unwrap();
+
+            tokio::spawn(async move {
+                let handle = get_app_handle();
+                if let Err(err) = setup(handle).await {
+                    log::error!("Error while setting up: {err:?}");
+                    handle.exit(1);
+                }
+            });
+            Ok(())
+        })
+        .build(tauri_context::get_context())
+        .expect("Error while building tauri application");
+
+    // share the current runtime with Tauri
+    tauri::async_runtime::set(tokio::runtime::Handle::current());
+    app.run(app_callback);
+    Ok(())
+}
+
 async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     print_initial_information();
-    validate_webview_runtime_is_installed(app_handle)?;
-    SelfPipe::start_listener()?;
+    utils::integrity::validate_webview_runtime_is_installed(app_handle)?;
+    utils::integrity::ensure_bundle_files_integrity(app_handle)?;
 
+    SelfPipe::start_listener()?;
     if !ServicePipe::is_running() {
         ServicePipe::start_service().await?;
     }
 
-    check_for_webview_optimal_state(app_handle)?;
+    utils::integrity::check_for_webview_optimal_state(app_handle)?;
 
     trace_lock!(SEELEN).start()?;
     trace_lock!(PERFORMANCE_HELPER).end("setup");
@@ -100,56 +157,4 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
         }
         _ => {}
     }
-}
-
-#[tokio::main]
-async fn main() -> Result<()> {
-    register_panic_hook();
-    handle_console_client().await?;
-
-    if is_already_running() {
-        SelfPipe::request_open_settings().await?;
-        return Ok(());
-    }
-
-    // GUI must run as interactive user (not elevated)
-    if WindowsApi::is_elevated()? {
-        log::info!("GUI was started with elevated privileges, restarting as interactive user...");
-        restart_as_interactive_user()?;
-    }
-
-    if was_installed_using_msix() && !is_running_as_appx() {
-        restart_as_appx()?;
-    }
-
-    TOKIO_RUNTIME_HANDLE
-        .set(tokio::runtime::Handle::current())
-        .expect("Failed to set runtime handle");
-
-    rust_i18n::set_locale(&seelen_core::state::Settings::get_system_language());
-    trace_lock!(PERFORMANCE_HELPER).start("setup");
-    let mut app_builder = tauri::Builder::default();
-    app_builder = register_plugins(app_builder);
-    app_builder = register_invoke_handler(app_builder);
-
-    let app = app_builder
-        .setup(|app| {
-            APP_HANDLE.set(app.handle().to_owned()).unwrap();
-
-            tokio::spawn(async move {
-                let handle = get_app_handle();
-                if let Err(err) = setup(handle).await {
-                    log::error!("Error while setting up: {err:?}");
-                    handle.exit(1);
-                }
-            });
-            Ok(())
-        })
-        .build(tauri_context::get_context())
-        .expect("Error while building tauri application");
-
-    // share the current runtime with Tauri
-    tauri::async_runtime::set(tokio::runtime::Handle::current());
-    app.run(app_callback);
-    Ok(())
 }

@@ -1,16 +1,6 @@
 action:
   confirm: Adakah anda pasti?
   confirm_body: Tindakan ini tidak dapat dibatalkan.
-app_launcher:
-  enable: Dayakan Pelancar App
-  launch_on:
-    mouse_over: Tetikus ke atas
-    primary: utama
-  monitor: Pantau untuk menunjukkan
-  runners:
-    cmd: Perintah
-    explorer: Jalankan
-    label: Pelari
 apps_configurations:
   app:
     bindings: Mengikat (perhatikan kedua -dua pilihan diperlukan)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Folder pemasangan
   load: Beban
   settings_file: Fail tetapan
-  simulate_fullscreen: Simulasikan acara skrin penuh
 extras:
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
@@ -95,6 +84,10 @@ extras:
   links: Pautan Rasmi
   relaunch: Pelancaran semula
   version: Versi
+  version_fixed: >-
+    Aplikasi dan versi WebView2 Runtime telah ditetapkan. Ini bermakna bahawa
+    aplikasi tidak akan menerima kemas kini dan WebView2 Runtime tidak akan
+    dikemas kini secara automatik dengan kemas kini Windows.
 general:
   accent_color: Warna aksen
   date_format: Format tarikh
@@ -102,6 +95,7 @@ general:
     available: Pek Ikon Tersedia
     selected: Pek Ikon Aktif
   language: Bahasa
+  monday: Isnin
   performance_mode:
     on_battery: Pada bateri
     on_energy_saver: Pada Penjimat Tenaga
@@ -110,7 +104,10 @@ general:
       extreme: Melampau
       minimal: Minimum
     plugged: Dipasang atau mengecas
+  saturday: Sabtu
+  start_of_week: Permulaan Minggu
   startup: Jalankan permulaan?
+  sunday: Ahad
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif
@@ -153,18 +150,26 @@ resources:
   app_outdated: >-
     Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan
     baik.
+  corrupted_wallpaper: Gagal mengeluarkan lakaran kecil - format video rosak atau tidak disokong
   delete: Padam sumber
   discover: Cari lebih banyak sumber
   has_update: Kemas kini ada
+  high_impact: Kesan tinggi terhadap prestasi
   import_wallpapers: Mengimport kertas dinding tempatan
   open_folder: Buka Folder Sumber
   outdated: >-
     Sumber ini direka untuk versi lama Seelen UI dan mungkin tidak berfungsi
     dengan baik.
+  see_on_website: Lihat di laman web
+review_request:
+  not_now: bukan sekarang
+  sure: Pasti!
+  title: Menikmati UI Seelen?
 save: Simpan
 save_and_restart: Jimat & mulakan semula
 see_more: Lihat lagi
 shortcuts:
+  duplicate_error: Pintasan ini diduplikasi
   enable: Dayakan sistem pintasan terbina dalam
   enable_tooltip: >-
     Lumpuhkan jika anda akan melaksanakan sistem pintasan anda sendiri
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
     switch_workspace: Tukar ke ruang kerja {{0}}
     toggle_float: Mod Terapung Togel Togel
-    toggle_launcher: Pelancar togol
     toggle_monocle: Mod Monocle Workspace Togol
   readonly_tooltip: Ini adalah jalan pintas baca sahaja
   reset: Tetapkan semula ke lalai
@@ -218,14 +222,6 @@ sides:
   left: Dibiarkan
   right: Betul
   top: Atas
-start:
-  message: >-
-    Selamat datang ke Seelen UI, persekitaran desktop muktamad dengan Pengurus
-    Windows Tiling yang diperbadankan untuk meningkatkan pengalaman Windows
-    anda! Terokai era kecekapan baru dan multitasking dengan antara muka
-    intuitif dan ciri canggih kami.
-  message_accent: Mengoptimumkan produktiviti anda dengan gaya!
-  title: Selamat datang!
 toolbar:
   auto_hide: Menyembunyikan auto
   delay_to_hide: Bertangguh untuk bersembunyi
@@ -246,23 +242,39 @@ update:
 wall:
   backgrounds: Kertas dinding
   blur: Kabur
+  cancel: Batal
+  close: tutup
+  collection_name: Nama Koleksi
+  collections: Koleksi
   contrast: Kontras
+  corrupted_wallpapers_message: 'Kertas dinding rosak, pertimbangkan untuk memadam ini:'
+  create: Buat
+  create_collection: Buat Koleksi
+  default_collection: Koleksi Lalai
+  delete_collection: Padamkan Koleksi
+  edit_collection: Edit Koleksi
   enable: Dayakan Pengurus Wallpaper
+  extend: Lanjutkan utama
   fit:
     contain: Mengandungi
     cover: Penutup
     fill: Mengisi
   flipHorizontal: Flip mendatar
   flipVertical: Flip menegak
+  generating_thumbnails: Menjana Gambar Kecil Kertas Dinding
   hours: jam
   interval: Tukar kertas dinding setiap
   minutes: minit
+  monitor_collection: Koleksi Pantau
+  multimonitor_behaviour: Kelakuan Multimonitor
   muted: Audio video bisu
   no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
+  no_collections: Tiada koleksi dibuat lagi. Klik butang + untuk mencipta satu.
   objectFit: Latar belakang sesuai
   objectPosition: Kedudukan latar belakang
   overlayColor: Warna overlay
   overlayMixBlendMode: Mod campuran campuran overlay
+  per_monitor: Setiap monitor
   playback: Kelajuan main balik
   position:
     bottom: Bawah
@@ -270,10 +282,17 @@ wall:
     left: Kiri
     right: Betul
     top: Atas
+  processing_video: Memproses video
   random: Rawak tayangan slaid
   saturation: Ketepuan
   seconds: saat
+  select_collection: Pilih Koleksi
+  thumbnail_generation_complete: Penjanaan Thumbnail Selesai
+  thumbnail_generation_finished: Penjanaan imej kecil telah berjaya diselesaikan
+  wallpaper_collection: Koleksi Kertas Dinding
+  wallpaper_settings: Tetapan Kertas Dinding
   withOverlay: Dengan overlay
+  workspace_collections: Koleksi Ruang Kerja
 weg:
   auto_hide: Menyembunyikan auto
   delay_to_hide: Bertangguh untuk bersembunyi
@@ -309,6 +328,19 @@ weg:
   padding: Padding
   show_end_task: Tunjukkan tugas akhir di bar tugas
   width: Lebar
+welcome:
+  give_a_review: Berikan Ulasan
+  message: >-
+    UI Seelen ialah persekitaran desktop sumber terbuka dan percuma untuk
+    Windows. Di sini anda mempunyai kawalan penuh ke atas rupa dan gelagat
+    desktop anda, membolehkan anda menyesuaikan setiap butiran agar sepadan
+    dengan aliran kerja dan gaya anda.
+  ok: Mari mulakan!
+  review: >-
+    Jika anda gemar menggunakan UI Seelen, pertimbangkan untuk meninggalkan
+    ulasan di kedai — maklum balas anda membantu projek berkembang dan bertambah
+    baik.
+  title: Selamat datang ke UI Seelen!
 widget:
   enable: Dayakan widget ini
   enable_for_monitor: Dayakan di monitor ini

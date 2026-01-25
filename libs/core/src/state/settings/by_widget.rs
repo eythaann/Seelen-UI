@@ -5,10 +5,7 @@ use uuid::Uuid;
 
 use crate::{resource::WidgetId, utils::TsUnknown};
 
-use super::{
-    FancyToolbarSettings, SeelenLauncherSettings, SeelenWallSettings, SeelenWegSettings,
-    WindowManagerSettings,
-};
+use super::{FancyToolbarSettings, SeelenWallSettings, SeelenWegSettings, WindowManagerSettings};
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default)]
@@ -21,8 +18,6 @@ pub struct SettingsByWidget {
     pub wm: WindowManagerSettings,
     #[serde(rename = "@seelen/wallpaper-manager")]
     pub wall: SeelenWallSettings,
-    #[serde(rename = "@seelen/launcher")]
-    pub launcher: SeelenLauncherSettings,
     #[serde(flatten)]
     pub others: HashMap<WidgetId, ThirdPartyWidgetSettings>,
 }
@@ -34,7 +29,6 @@ impl SettingsByWidget {
             "@seelen/fancy-toolbar" => self.fancy_toolbar.enabled,
             "@seelen/window-manager" => self.wm.enabled,
             "@seelen/wallpaper-manager" => self.wall.enabled,
-            "@seelen/launcher" => self.launcher.enabled,
             _ => match self.others.get(widget_id) {
                 Some(settings) => settings.enabled,
                 // only official widgets are enabled by default
@@ -49,7 +43,6 @@ impl SettingsByWidget {
             "@seelen/fancy-toolbar" => self.fancy_toolbar.enabled = enabled,
             "@seelen/window-manager" => self.wm.enabled = enabled,
             "@seelen/wallpaper-manager" => self.wall.enabled = enabled,
-            "@seelen/launcher" => self.launcher.enabled = enabled,
             _ => match self.others.entry(widget_id.clone()) {
                 std::collections::hash_map::Entry::Occupied(mut o) => {
                     o.get_mut().enabled = enabled;

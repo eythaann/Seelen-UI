@@ -6,13 +6,16 @@ use crate::{
     error::Result,
     log_error,
     state::application::FULL_STATE,
-    widgets::WebviewArgs,
+    widgets::webview::WebviewArgs,
     windows_api::{monitor::Monitor, AppBarData, WindowsApi},
 };
 use base64::Engine;
 use seelen_core::state::{FancyToolbarSide, HideMode};
 use tauri::WebviewWindow;
-use windows::Win32::Foundation::{HWND, RECT};
+use windows::Win32::{
+    Foundation::{HWND, RECT},
+    UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SWP_NOSIZE},
+};
 
 pub struct FancyToolbar {
     window: WebviewWindow,
@@ -37,9 +40,9 @@ impl FancyToolbar {
         Ok(HWND(self.window.hwnd()?.0))
     }
 
-    pub fn new(monitor: &str) -> Result<Self> {
+    pub fn new(monitor_id: &str) -> Result<Self> {
         Ok(Self {
-            window: Self::create_window(monitor)?,
+            window: Self::create_window(monitor_id)?,
             theoretical_rect: RECT::default(),
             webview_rect: RECT::default(),
         })
@@ -111,15 +114,14 @@ impl FancyToolbar {
         let mut real_rect = rc_monitor;
         self.theoretical_rect = rc_monitor;
 
-        // note: we reduce by 10px the webview of the toolbar to avoid be matched as a fullscreen window
         match settings.position {
             FancyToolbarSide::Top => {
                 self.theoretical_rect.bottom = rc_monitor.top + real_height;
-                real_rect.bottom -= 10;
+                real_rect.bottom = real_rect.top + (rc_monitor.bottom - rc_monitor.top) / 2;
             }
             FancyToolbarSide::Bottom => {
                 self.theoretical_rect.top = rc_monitor.bottom - real_height;
-                real_rect.top += 10;
+                real_rect.top = real_rect.bottom - (rc_monitor.bottom - rc_monitor.top) / 2;
             }
         }
 
@@ -134,12 +136,8 @@ impl FancyToolbar {
         };
 
         // pre set position for resize in case of multiples dpi
-        self.window
-            .set_position(tauri::PhysicalPosition::new(real_rect.left, real_rect.top))?;
-        self.window.set_size(tauri::PhysicalSize::new(
-            real_rect.right - real_rect.left,
-            real_rect.bottom - real_rect.top,
-        ))?;
+        WindowsApi::set_position(hwnd, None, &real_rect, SWP_NOSIZE)?;
+        WindowsApi::set_position(hwnd, None, &real_rect, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 

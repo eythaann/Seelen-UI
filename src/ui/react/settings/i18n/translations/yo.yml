@@ -1,16 +1,6 @@
 action:
   confirm: Ṣe o da ọ loju?
   confirm_body: Iṣe yii ko le ṣe atunṣe.
-app_launcher:
-  enable: Jeki Ifilọlẹ app
-  launch_on:
-    mouse_over: Asin ti pari
-    primary: Alakoko
-  monitor: Atẹle lati fihan
-  runners:
-    cmd: Paṣẹ
-    explorer: Sare
-    label: Awọn asayan
 apps_configurations:
   app:
     bindings: Dide (Ṣe akiyesi awọn aṣayan mejeeji ni a nilo)
@@ -85,7 +75,6 @@ devtools:
   install_folder: Filese Fifi sori ẹrọ
   load: Ẹru
   settings_file: Faili eto
-  simulate_fullscreen: Ṣe afarawe iṣẹlẹ ni kikun iboju
 extras:
   clear_icons: Ko awọn ilana eto kuro
   clear_icons_tooltip: A le nilo atunbere lati ṣe ipa ni kikun lori gbogbo awọn ẹrọ ailorukọ
@@ -93,6 +82,10 @@ extras:
   links: Awọn ọna asopọ osise
   relaunch: Ṣadi
   version: Ẹya
+  version_fixed: >-
+    Ohun elo naa ati awọn ẹya asiko ṣiṣe WebView2 jẹ ti o wa titi. Eyi tumọ si
+    pe ohun elo naa kii yoo gba awọn imudojuiwọn ati WebView2 Runtime kii yoo ni
+    imudojuiwọn laifọwọyi pẹlu awọn imudojuiwọn Windows.
 general:
   accent_color: Awọ ara
   date_format: Ọna kika ọjọ
@@ -100,6 +93,7 @@ general:
     available: Awọn akopọ Aami ti o wa
     selected: Awọn akopọ Aami ti nṣiṣe lọwọ
   language: Ede
+  monday: Monday
   performance_mode:
     on_battery: Lori batiri
     on_energy_saver: Lori Ipamọ Agbara
@@ -108,7 +102,10 @@ general:
       extreme: Ipẹkun
       minimal: Ayọkuro
     plugged: Pulọọgi tabi gbigba agbara
+  saturday: Satidee
+  start_of_week: Ibẹrẹ Ọsẹ
   startup: Ṣiṣe lori ibẹrẹ?
+  sunday: Sunday
   theme:
     available: Awọn akori to wa
     selected: Awọn akori ti nṣiṣe lọwọ
@@ -149,16 +146,26 @@ reset_all_to_default: Tun gbogbo rẹ si awọn iye aifọwọyi
 reset_to_default: Tunto si iye aiyipada
 resources:
   app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
+  corrupted_wallpaper: >-
+    Kuna lati jade eekanna atanpako - ibajẹ tabi ọna kika fidio ti ko ṣe
+    atilẹyin
   delete: Paarẹ awọn olu
   discover: Ṣawari awọn orisun diẹ sii
   has_update: Imudojuiwọn wa
+  high_impact: Ipa giga lori iṣẹ ṣiṣe
   import_wallpapers: Gbe awọn iṣẹṣọ ogiri agbegbe wọle
   open_folder: Ṣii folda Ipilẹṣẹ
   outdated: A ṣe orisun yii fun ẹya atijọ ti Silen Ui ati pe ko le ma ṣiṣẹ daradara.
+  see_on_website: Wo lori aaye ayelujara
+review_request:
+  not_now: Ko bayi
+  sure: Daju!
+  title: Ngbadun Seelen UI?
 save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
 see_more: Wo diẹ sii
 shortcuts:
+  duplicate_error: Ọna abuja yii jẹ pidánpidán
   enable: Mu ṣiṣẹ eto awọn ọna abuja
   enable_tooltip: Muu Ti o ba yoo ṣe eto awọn ọna ọna abuja tirẹ nipa lilo alajọṣepọ UI
   labels:
@@ -201,7 +208,6 @@ shortcuts:
     switch_to_previous_workspace: Yipada si ibi-iṣẹ iṣaaju
     switch_workspace: Yipada si ibi-iṣẹ {0}
     toggle_float: Oniropin window leefofo loju omi
-    toggle_launcher: Ifiwele tinggle
     toggle_monocle: Toggle Servicepace Ipo Monocle
   readonly_tooltip: Eyi jẹ ọna abuja-kika
   reset: Tun si awọn aseku
@@ -210,13 +216,6 @@ sides:
   left: Osi
   right: Titọ
   top: Oke
-start:
-  message: >-
-    Kaabọ si Sielen UI, agbegbe tabili ti o gaju pẹlu ipilẹ Windows Manager lati
-    jẹki iriri Windows rẹ! Ṣawari akoko ti o ni ṣiṣe ati multitasking pẹlu wa
-    ati awọn ẹya ti ilọsiwaju.
-  message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
-  title: Kaabọ!
 toolbar:
   auto_hide: Ibi ipamọ aifọwọyi
   delay_to_hide: Idaduro lati tọju
@@ -237,23 +236,39 @@ update:
 wall:
   backgrounds: Ogiri ogiri
   blur: Abẹ
+  cancel: Fagilee
+  close: Sunmọ
+  collection_name: Orukọ gbigba
+  collections: Awọn akojọpọ
   contrast: Ifiwera
+  corrupted_wallpapers_message: 'Awọn iṣẹṣọ ogiri ti bajẹ, ronu piparẹ awọn wọnyi:'
+  create: Ṣẹda
+  create_collection: Ṣẹda Gbigba
+  default_collection: Gbigba aiyipada
+  delete_collection: Pa Gbigba
+  edit_collection: Ṣatunkọ Gbigba
   enable: Mu oluṣakoso ogiri ṣiṣẹ
+  extend: Fa akọkọ
   fit:
     contain: Ni ninu
     cover: Ideri
     fill: Kun
   flipHorizontal: Isipade pejọ
   flipVertical: Yi inaro
+  generating_thumbnails: Awọn eekanna atanpako Iṣẹṣọ ogiri
   hours: wakati
   interval: Ayipada ogiri ni gbogbo
   minutes: iṣẹju
+  monitor_collection: Atẹle Gbigba
+  multimonitor_behaviour: Multimonitor Ihuwasi
   muted: Free Voio fidio
   no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
+  no_collections: Ko si awọn akojọpọ ti a ṣẹda sibẹsibẹ. Tẹ bọtini + lati ṣẹda ọkan.
   objectFit: Abẹla abẹlẹ
   objectPosition: Ipo abẹlẹ
   overlayColor: Awọ botay
   overlayMixBlendMode: Igbẹpọ dapọ Ipo Ipa
+  per_monitor: Fun atẹle
   playback: Iyara ṣiṣiṣẹsẹhin
   position:
     bottom: Isalẹ
@@ -261,10 +276,17 @@ wall:
     left: Osi
     right: Titọ
     top: Oke
+  processing_video: Fidio ti n ṣiṣẹ
   random: Afikun ifaworanhan
   saturation: Itẹlọrun
   seconds: aaya
+  select_collection: Yan Gbigba
+  thumbnail_generation_complete: Ipilẹ eekanna atanpako Pari
+  thumbnail_generation_finished: Iran eekanna atanpako ti pari ni aṣeyọri
+  wallpaper_collection: Gbigba ogiri
+  wallpaper_settings: Eto Iṣẹṣọ ogiri
   withOverlay: Pẹlu apọju
+  workspace_collections: Awọn akojọpọ aaye iṣẹ
 weg:
   auto_hide: Ibi ipamọ aifọwọyi
   delay_to_hide: Idaduro lati tọju
@@ -300,6 +322,17 @@ weg:
   padding: Fidigọdi silẹ
   show_end_task: Fihan iṣẹ ṣiṣe ni iṣẹ-ṣiṣe
   width: Fifẹ
+welcome:
+  give_a_review: Fun Atunwo
+  message: >-
+    Seelen UI jẹ ọfẹ ati agbegbe tabili orisun ṣiṣi fun Windows. Nibi o ni
+    iṣakoso ni kikun lori bii tabili tabili rẹ ṣe n wo ati ihuwasi, gbigba ọ
+    laaye lati ṣe akanṣe gbogbo alaye lati baamu iṣan-iṣẹ ati aṣa rẹ.
+  ok: Jẹ ká bẹrẹ!
+  review: >-
+    Ti o ba gbadun lilo Seelen UI, ronu fifi atunyẹwo silẹ lori ile itaja - esi
+    rẹ ṣe iranlọwọ fun iṣẹ akanṣe lati dagba ati ilọsiwaju.
+  title: Kaabọ si Seelen UI!
 widget:
   enable: Mu ẹrọ ailorukọ yii ṣiṣẹ
   enable_for_monitor: Mu ṣiṣẹ lori atẹle yii

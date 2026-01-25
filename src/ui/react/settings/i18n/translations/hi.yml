@@ -1,16 +1,6 @@
 action:
   confirm: क्या आपको यकीन है?
   confirm_body: इस एक्शन को वापस नहीं किया जा सकता।
-app_launcher:
-  enable: ऐप लॉन्चर सक्षम करें
-  launch_on:
-    mouse_over: माउस के ऊपर
-    primary: प्राथमिक
-  monitor: दिखाने के लिए मॉनिटर
-  runners:
-    cmd: आज्ञा
-    explorer: दौड़ना
-    label: धावकों
 apps_configurations:
   app:
     bindings: बाइंडिंग (ध्यान दें कि दोनों विकल्पों की आवश्यकता है)
@@ -87,7 +77,6 @@ devtools:
   install_folder: स्थापना फ़ोल्डर
   load: भार
   settings_file: सेटिंग संचिका
-  simulate_fullscreen: फ़ुलस्क्रीन ईवेंट का अनुकरण करें
 extras:
   clear_icons: स्पष्ट प्रणाली आइकन कैश
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: आधिकारिक संबंध
   relaunch: 'पुन: लॉन्च'
   version: संस्करण
+  version_fixed: >-
+    एप्लिकेशन और WebView2 रनटाइम संस्करण ठीक हो गए हैं। इसका मतलब यह है कि
+    एप्लिकेशन को अपडेट प्राप्त नहीं होंगे और WebView2 रनटाइम स्वचालित रूप से
+    विंडोज अपडेट के साथ अपडेट नहीं होगा।
 general:
   accent_color: स्वरोंका रंग
   date_format: तारिख का प्रारूप
@@ -104,6 +97,7 @@ general:
     available: उपलब्ध चिह्न पैक
     selected: सक्रिय चिह्न पैक
   language: भाषा
+  monday: सोमवार
   performance_mode:
     on_battery: बैटरी पर
     on_energy_saver: ऊर्जा सेवर पर
@@ -112,7 +106,10 @@ general:
       extreme: चरम
       minimal: न्यूनतम
     plugged: प्लग या चार्जिंग
+  saturday: शनिवार
+  start_of_week: सप्ताह की शुरुआत
   startup: स्टार्टअप पर चलाएं?
+  sunday: रविवार
   theme:
     available: उपलब्ध थीम्स
     selected: सक्रिय विषय-वस्तु
@@ -155,18 +152,26 @@ resources:
   app_outdated: >-
     इस संसाधन को ठीक से काम करने के लिए सेलेन यूआई के एक नए संस्करण की आवश्यकता
     होती है।
+  corrupted_wallpaper: थंबनेल निकालने में विफल - दूषित या असमर्थित वीडियो प्रारूप
   delete: संसाधन हटाएं
   discover: अधिक संसाधनों की खोज करें
   has_update: एक अपडेट उपलब्ध है
+  high_impact: प्रदर्शन पर उच्च प्रभाव
   import_wallpapers: स्थानीय वॉलपेपर आयात करें
   open_folder: संसाधन फ़ोल्डर खोलें
   outdated: >-
     यह संसाधन सीलेन यूआई के पुराने संस्करण के लिए डिज़ाइन किया गया था और ठीक से
     काम नहीं कर सकता है।
+  see_on_website: वेबसाइट पर देखें
+review_request:
+  not_now: अभी नहीं
+  sure: ज़रूर!
+  title: सेलेन यूआई का आनंद ले रहे हैं?
 save: बचाना
 save_and_restart: सहेजें और पुनरारंभ करें
 see_more: और देखें
 shortcuts:
+  duplicate_error: यह शॉर्टकट डुप्लिकेट है
   enable: अंतर्निहित शॉर्टकट सिस्टम सक्षम करें
   enable_tooltip: >-
     अक्षम करें यदि आप सेलेन यूआई क्लाइंट का उपयोग करके अपने स्वयं के शॉर्टकट
@@ -211,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: पिछले कार्यक्षेत्र पर स्विच करें
     switch_workspace: कार्यक्षेत्र {{0}} पर स्विच करें
     toggle_float: टॉगल विंडो फ्लोट मोड
-    toggle_launcher: टॉगल लॉन्चर
     toggle_monocle: टॉगल वर्कस्पेस मोनोकल मोड
   readonly_tooltip: यह केवल एक रीड-शॉर्टकट है
   reset: डिफ़ॉल्ट पर पुनः सेट करें
@@ -220,13 +224,6 @@ sides:
   left: बाएं
   right: सही
   top: शीर्ष
-start:
-  message: >-
-    सेलेन यूआई में आपका स्वागत है, अपने विंडोज अनुभव को बढ़ाने के लिए एक निगमित
-    टाइलिंग विंडोज मैनेजर के साथ अंतिम डेस्कटॉप वातावरण! हमारे सहज इंटरफ़ेस और
-    उन्नत सुविधाओं के साथ दक्षता और मल्टीटास्किंग के एक नए युग का अन्वेषण करें।
-  message_accent: शैली के साथ अपनी उत्पादकता का अनुकूलन करें!
-  title: स्वागत!
 toolbar:
   auto_hide: खुद से छिपना
   delay_to_hide: छिपाने में देरी
@@ -247,23 +244,39 @@ update:
 wall:
   backgrounds: वॉलपेपर
   blur: कलंक
+  cancel: रद्द करना
+  close: बंद करना
+  collection_name: संग्रह का नाम
+  collections: संग्रह
   contrast: अंतर
+  corrupted_wallpapers_message: 'दूषित वॉलपेपर, इन्हें हटाने पर विचार करें:'
+  create: बनाएं
+  create_collection: संग्रह बनाएँ
+  default_collection: डिफ़ॉल्ट संग्रह
+  delete_collection: संग्रह हटाएँ
+  edit_collection: संग्रह संपादित करें
   enable: वॉलपेपर प्रबंधक सक्षम करें
+  extend: प्राथमिक बढ़ाएँ
   fit:
     contain: रोकना
     cover: ढकना
     fill: भरना
   flipHorizontal: क्षैतिज
   flipVertical: तलवाड़ा
+  generating_thumbnails: वॉलपेपर थंबनेल उत्पन्न करना
   hours: घंटे
   interval: वॉलपेपर हर बदलें
   minutes: मिनट
+  monitor_collection: मॉनिटर संग्रह
+  multimonitor_behaviour: मल्टीमॉनिटर व्यवहार
   muted: वीडियो ऑडियो म्यूट करें
   no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
+  no_collections: अभी तक कोई संग्रह नहीं बनाया गया. एक बनाने के लिए + बटन पर क्लिक करें।
   objectFit: पृष्ठभूमि फिट
   objectPosition: पृष्ठभूमि स्थिति
   overlayColor: ओवरले रंग
   overlayMixBlendMode: ओवरले मिश्रण मिश्रण मोड
+  per_monitor: प्रति मॉनिटर
   playback: प्लेबैक गति
   position:
     bottom: तल
@@ -271,10 +284,17 @@ wall:
     left: बाएं
     right: सही
     top: शीर्ष
+  processing_video: वीडियो संसाधित किया जा रहा है
   random: यादृच्छिक स्लाइड शो
   saturation: परिपूर्णता
   seconds: सेकंड
+  select_collection: संग्रह का चयन करें
+  thumbnail_generation_complete: थंबनेल जनरेशन पूर्ण
+  thumbnail_generation_finished: थंबनेल पीढ़ी सफलतापूर्वक समाप्त हो गई है
+  wallpaper_collection: वॉलपेपर संग्रह
+  wallpaper_settings: वॉलपेपर सेटिंग्स
   withOverlay: ओवरले के साथ
+  workspace_collections: कार्यक्षेत्र संग्रह
 weg:
   auto_hide: खुद से छिपना
   delay_to_hide: छिपाने में देरी
@@ -310,6 +330,19 @@ weg:
   padding: गद्दी
   show_end_task: टास्कबार में अंतिम कार्य दिखाएं
   width: चौड़ाई
+welcome:
+  give_a_review: एक समीक्षा दें
+  message: >-
+    सीलेन यूआई विंडोज़ के लिए एक मुफ़्त और खुला स्रोत डेस्कटॉप वातावरण है। यहां
+    आपका डेस्कटॉप कैसा दिखता है और कैसे व्यवहार करता है, इस पर आपका पूरा
+    नियंत्रण होता है, जिससे आप अपने वर्कफ़्लो और शैली से मेल खाने के लिए हर
+    विवरण को अनुकूलित कर सकते हैं।
+  ok: चलो शुरू करो!
+  review: >-
+    यदि आप सेलेन यूआई का उपयोग करना पसंद करते हैं, तो स्टोर पर एक समीक्षा छोड़ने
+    पर विचार करें - आपकी प्रतिक्रिया परियोजना को बढ़ने और बेहतर बनाने में मदद
+    करती है।
+  title: सीलेन यूआई में आपका स्वागत है!
 widget:
   enable: इस विजेट को सक्षम करें
   enable_for_monitor: इस मॉनिटर पर सक्षम करें

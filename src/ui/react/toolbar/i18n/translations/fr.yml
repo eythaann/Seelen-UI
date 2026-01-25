@@ -20,9 +20,6 @@ context_menu:
   restore: Rétablir la valeur par défaut
   settings: Paramètres
   task_manager: Gestionnaire des tâches
-keyboard:
-  more: Autres paramètres du clavier
-  title: Disposition du clavier
 media:
   default_multimedia_volume: Volume multimédia
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Dispositifs d'entrée
   output_devices: Dispositifs de sortie
   players: Lecteurs multimédias
-network:
-  available: Réseaux disponibles
-  connect: Connecter
-  connected: Connecté à
-  disconnect: Déconnecter
-  hidden: Réseau caché
-  more: Plus de paramètres réseau
-  not_found: Aucun réseau trouvé
-  placeholder:
-    password: Mot de passe
-  saved: Réseaux enregistrés
-  scanning: Recherche de réseaux
-  secured: Réseau crypté
 notifications:
   clear: Tout effacer
   empty: Aucune notification
@@ -70,24 +54,3 @@ settings:
   power: Marche/Arrêt
   restart: Redémarrer
   title: Paramètres
-userhome:
-  empty_list: Aucun élément
-  folders:
-    desktop: Bureau
-    documents: Documents
-    downloads: Téléchargements
-    more_items: Afficher plus...
-    music: Musique
-    pictures: Images
-    recent: Documents récents
-    reduce_items: Montrer moins...
-    title: Dossiers utilisateur
-    videos: Vidéos
-  profile:
-    accounts: Ouvrir les paramètres du compte
-    open_onedrive: Ouvrir le dossier OneDrive
-    open_user_folder: Ouvrir le dossier utilisateur
-  seelen_options:
-    open_installation_folder: Dossier d'installation de Seelen
-    open_log_folder: Dossier des logs de Seelen
-    title: Dossiers Seelen

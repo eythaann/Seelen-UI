@@ -48,9 +48,8 @@ jobs:
 
             return nightlyVersion;
 
-  build:
-    needs:
-      - update-tag
+  build-binaries:
+    needs: update-tag
     strategy:
       fail-fast: false
       matrix:
@@ -71,6 +70,101 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
+      - name: Set Version
+        run: |
+          npx tsx scripts/versionish.ts ci ${{ needs.update-tag.outputs.nightly-version }}
+
+      - name: Build Hook DLL
+        run: cargo build --release --target ${{ matrix.target }} -p sluhk
+
+      - name: Build
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
+
+      - name: Upload binaries to artifacts
+        id: upload-binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: binaries-${{ matrix.target }}
+          path: |
+            target/${{ matrix.target }}/release/static/**/*
+            target/${{ matrix.target }}/release/*.exe
+            target/${{ matrix.target }}/release/*.dll
+            target/${{ matrix.target }}/release/SHA256SUMS
+            target/${{ matrix.target }}/release/SHA256SUMS.sig
+            target/${{ matrix.target }}/release/seelen_ui.pdb
+
+  merge-binaries:
+    needs: build-binaries
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-id: ${{ steps.merge-binaries.outputs.artifact-id }}
+    steps:
+      - name: Merge binaries artifacts
+        id: merge-binaries
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: binaries
+          pattern: binaries-*
+          separate-directories: true
+          delete-merged: true
+
+  sign-binaries:
+    needs: merge-binaries
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sign binaries with SignPath
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
+          project-slug: seelen-ui
+          signing-policy-slug: release-signing
+          artifact-configuration-slug: binaries
+          github-artifact-id: ${{ needs.merge-binaries.outputs.artifact-id }}
+          output-artifact-directory: signed-binaries
+          wait-for-completion: true
+
+      - name: Upload signed binaries by target
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-binaries-x86_64-pc-windows-msvc
+          path: signed-binaries/binaries-x86_64-pc-windows-msvc/**/*
+
+      - name: Upload signed binaries by target
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-binaries-aarch64-pc-windows-msvc
+          path: signed-binaries/binaries-aarch64-pc-windows-msvc/**/*
+
+  bundle:
+    needs:
+      - update-tag
+      - sign-binaries
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-2025
+            target: x86_64-pc-windows-msvc
+          - platform: windows-2025
+            target: aarch64-pc-windows-msvc
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true # needed to fetch fixed runtimes (.cab) files
+      - uses: ./.github/actions/setup
+        with:
+          rust-targets: ${{ matrix.target }}
+          cache-key-prefix: rust-bundle-${{ matrix.target }}
+
+      - name: Install frontend dependencies
+        run: npm install
+
       - name: Install MSIX dependencies
         shell: pwsh
         run: |
@@ -83,12 +177,11 @@ jobs:
         run: |
           npx tsx scripts/versionish.ts ci ${{ needs.update-tag.outputs.nightly-version }}
 
-      - name: Build Hook DLL
-        run: cargo build --release --target ${{ matrix.target }} -p sluhk
-
-      # If build fails we will be without a nightly build until the next push or workflow_dispatch
-      - name: Build
-        run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
+      - name: Download signed binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: signed-binaries-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release
 
       - name: Clean bundle folder from cache
         shell: pwsh
@@ -100,24 +193,76 @@ jobs:
           }
 
       - name: Bundle
-        env:
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }}
+        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign
+
+      - name: Rename normal bundle to temp
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
+          $version = ${{ needs.update-tag.outputs.nightly-version }}
+          $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
+          $setupFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
+          $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
+
+          if (Test-Path $setupFile) {
+            Move-Item -Path $setupFile -Destination $tempFile
+            Write-Output "Renamed $setupFile to $tempFile"
+          }
+
+      - name: Set Fixed Runtime
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
+          ./scripts/SetFixedRuntime.ps1 -Architecture $arch
+
+      - name: Copy Runtime to target directory
+        shell: pwsh
+        run: |
+          $runtimeSource = Get-ChildItem -Path "src/runtime" -Directory | Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } | Select-Object -First 1
+          if ($runtimeSource) {
+            $targetRuntimeDir = "target/${{ matrix.target }}/release/runtime"
+            New-Item -ItemType Directory -Force -Path $targetRuntimeDir | Out-Null
+            Copy-Item -Path $runtimeSource.FullName -Destination "$targetRuntimeDir/$($runtimeSource.Name)" -Recurse -Force
+            Write-Output "Copied runtime from $($runtimeSource.FullName) to $targetRuntimeDir/$($runtimeSource.Name)"
+          } else {
+            Write-Error "Runtime version directory not found in src/runtime"
+            exit 1
+          }
+
+      - name: Bundle with Fixed Runtime
+        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign
+
+      - name: Rename bundles
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
+          $version = ${{ needs.update-tag.outputs.nightly-version }}
+          $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
+          $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
+          $normalFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
+          $fixedFile = "$bundlePath/Seelen UI_${version}_${arch}-setup-fixed.exe"
+
+          if (Test-Path $normalFile) {
+            Move-Item -Path $normalFile -Destination $fixedFile
+            Write-Output "Renamed fixed runtime bundle to $fixedFile"
+          }
+
+          if (Test-Path $tempFile) {
+            Move-Item -Path $tempFile -Destination $normalFile
+            Write-Output "Renamed normal bundle back to $normalFile"
+          }
 
       - name: Bundle MSIX
         run: npx tsx scripts/bundle.msix.ts --target ${{ matrix.target }}
 
-      - name: Upload to artifacts
+      - name: Upload bundles to artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-bundles-${{ matrix.target }}
+          name: bundles-${{ matrix.target }}
           path: target/${{ matrix.target }}/release/bundle
 
-  merge-artifacts:
-    needs:
-      - update-tag
-      - build
+  marge-bundles:
+    needs: bundle
     runs-on: ubuntu-latest
     outputs:
       artifact-id: ${{ steps.upload-merged.outputs.artifact-id }}
@@ -126,14 +271,14 @@ jobs:
         id: upload-merged
         uses: actions/upload-artifact/merge@v4
         with:
-          name: build-bundles
-          pattern: build-bundles-*
+          name: bundles
+          pattern: bundles-*
           delete-merged: true
 
-  sign-and-upload:
+  sign-bundles:
     needs:
       - update-tag
-      - merge-artifacts
+      - marge-bundles
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -183,7 +328,8 @@ jobs:
           organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
           project-slug: seelen-ui
           signing-policy-slug: release-signing
-          github-artifact-id: ${{ needs.merge-artifacts.outputs.artifact-id }}
+          artifact-configuration-slug: bundles
+          github-artifact-id: ${{ needs.marge-bundles.outputs.artifact-id }}
           output-artifact-directory: bundles
 
       - name: File Tree
@@ -192,8 +338,8 @@ jobs:
 
       - name: Tauri Updater Signature
         env:
-          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          SIGNING_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         run: |
           npm install -g @tauri-apps/cli
 
@@ -206,9 +352,9 @@ jobs:
           PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
 
           echo "Signing ${PATH1}..."
-          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH1"
+          tauri signer sign --verbose "$PATH1"
           echo "Signing ${PATH2}..."
-          tauri signer sign --verbose -k "$SIGNING_KEY" -p "$SIGNING_PASSWORD" "$PATH2"
+          tauri signer sign --verbose "$PATH2"
 
       - name: Upload Signed Installers to release
         uses: softprops/action-gh-release@v2
@@ -221,7 +367,7 @@ jobs:
   generate-update-file:
     needs:
       - update-tag
-      - sign-and-upload
+      - sign-bundles
     permissions:
       contents: write
     runs-on: ubuntu-latest

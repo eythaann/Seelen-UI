@@ -19,15 +19,12 @@ use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
     modules::{
-        apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
-        start::application::START_MENU_MANAGER,
+        apps::application::{UserAppWinEvent, UserAppsManager, USER_APPS_MANAGER},
+        start::application::StartMenuManager,
     },
     state::application::FULL_STATE,
     trace_lock,
-    utils::{
-        constants::SEELEN_COMMON,
-        icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
-    },
+    utils::icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
     windows_api::{types::AppUserModelId, window::Window, MonitorEnumerator},
 };
 
@@ -111,22 +108,21 @@ impl SeelenWegState {
         };
 
         UserAppsManager::subscribe(|e| match e {
-            UserAppsEvent::WinAdded(addr) => {
+            UserAppWinEvent::Added(addr) => {
                 let mut guard = trace_lock!(SEELEN_WEG_STATE);
                 guard.add(&Window::from(addr)).log_error();
                 guard.emit_to_webview().log_error();
             }
-            UserAppsEvent::WinUpdated(addr) => {
+            UserAppWinEvent::Updated(addr) => {
                 let mut guard = trace_lock!(SEELEN_WEG_STATE);
                 guard.update_window_info(&Window::from(addr));
                 guard.emit_to_webview().log_error();
             }
-            UserAppsEvent::WinRemoved(addr) => {
+            UserAppWinEvent::Removed(addr) => {
                 let mut guard = trace_lock!(SEELEN_WEG_STATE);
                 guard.remove(&Window::from(addr));
                 guard.emit_to_webview().log_error();
             }
-            _ => {}
         });
 
         USER_APPS_MANAGER.interactable_windows.for_each(|w| {
@@ -202,24 +198,19 @@ impl SeelenWegState {
             match umid {
                 AppUserModelId::Appx(umid) => {
                     // pre-extraction to avoid flickering on the ui
-                    extract_and_save_icon_umid(&AppUserModelId::Appx(umid.clone()));
-                    (
-                        SEELEN_COMMON
-                            .system_dir()
-                            .join("explorer.exe")
-                            .to_string_lossy()
-                            .to_string(),
-                        Some(format!("shell:AppsFolder\\{umid}")),
-                    )
+                    request_icon_extraction_from_umid(&AppUserModelId::Appx(umid.clone()));
+                    (format!("shell:AppsFolder\\{umid}"), None)
                 }
                 AppUserModelId::PropertyStore(umid) => {
-                    let start_menu_manager = START_MENU_MANAGER.load();
+                    let start_menu_manager = StartMenuManager::instance();
                     let shortcut = start_menu_manager.get_by_file_umid(umid);
 
                     // some apps like librewolf don't have a shortcut with the same umid
                     if let Some(shortcut) = &shortcut {
                         // pre-extraction to avoid flickering on the ui
-                        extract_and_save_icon_umid(&AppUserModelId::PropertyStore(umid.clone()));
+                        request_icon_extraction_from_umid(&AppUserModelId::PropertyStore(
+                            umid.clone(),
+                        ));
                         path = shortcut.path.clone();
                         display_name = path
                             .file_stem()
@@ -228,7 +219,7 @@ impl SeelenWegState {
                             .to_string();
                     } else {
                         // pre-extraction to avoid flickering on the ui
-                        extract_and_save_icon_from_file(&path);
+                        request_icon_extraction_from_file(&path);
                     }
 
                     // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
@@ -240,14 +231,7 @@ impl SeelenWegState {
                         display_name = relaunch_display_name;
                         get_parts_of_inline_command(&relaunch_command)
                     } else if shortcut.is_some() {
-                        (
-                            SEELEN_COMMON
-                                .system_dir()
-                                .join("explorer.exe")
-                                .to_string_lossy()
-                                .to_string(),
-                            Some(format!("shell:AppsFolder\\{umid}")),
-                        )
+                        (format!("shell:AppsFolder\\{umid}"), None)
                     } else {
                         // process program path
                         (path.to_string_lossy().to_string(), None)
@@ -256,7 +240,7 @@ impl SeelenWegState {
             }
         } else {
             // pre-extraction to avoid flickering on the ui
-            extract_and_save_icon_from_file(&path);
+            request_icon_extraction_from_file(&path);
             (path.to_string_lossy().to_string(), None)
         };
 
@@ -292,7 +276,6 @@ impl SeelenWegState {
             subtype: WegItemSubtype::App,
             umid,
             path,
-            relaunch_command: None,
             relaunch_program,
             relaunch_args,
             relaunch_in: None,

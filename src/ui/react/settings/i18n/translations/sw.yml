@@ -1,16 +1,6 @@
 action:
   confirm: Una uhakika?
   confirm_body: Kitendo hiki hakiwezi kufutwa.
-app_launcher:
-  enable: Wezesha Kizindua cha Programu
-  launch_on:
-    mouse_over: Panya juu
-    primary: Msingi
-  monitor: Fuatilia kuonyesha
-  runners:
-    cmd: Amri
-    explorer: Kukimbia
-    label: Wakimbiaji
 apps_configurations:
   app:
     bindings: Kufunga (kumbuka chaguzi zote mbili zinahitajika)
@@ -86,7 +76,6 @@ devtools:
   install_folder: Folda ya usanikishaji
   load: Mzigo
   settings_file: Faili ya mipangilio
-  simulate_fullscreen: Iga tukio la skrini nzima
 extras:
   clear_icons: Kashe ya icons za mfumo wazi
   clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
@@ -94,6 +83,10 @@ extras:
   links: Viungo rasmi
   relaunch: Kuzindua tena
   version: Toleo
+  version_fixed: >-
+    Programu na matoleo ya WebView2 Runtime yamerekebishwa. Hii ina maana kwamba
+    programu haitapokea masasisho na Muda wa Uendeshaji wa WebView2
+    hautasasishwa kiotomatiki na masasisho ya Windows.
 general:
   accent_color: Rangi ya lafudhi
   date_format: Muundo wa tarehe
@@ -101,6 +94,7 @@ general:
     available: Vifurushi vya ikoni vinavyopatikana
     selected: Vifurushi vya ikoni zinazotumika
   language: Lugha
+  monday: Jumatatu
   performance_mode:
     on_battery: Kwenye betri
     on_energy_saver: Kwenye Saver ya Nishati
@@ -109,7 +103,10 @@ general:
       extreme: Uliokithiri
       minimal: Ndogo
     plugged: Kuziba au kuchaji
+  saturday: Jumamosi
+  start_of_week: Mwanzo wa Wiki
   startup: Kuendesha kuanza?
+  sunday: Jumapili
   theme:
     available: Mandhari Zinazopatikana
     selected: Mandhari Inayotumika
@@ -150,18 +147,26 @@ reset_all_to_default: Rudisha yote kwa maadili ya msingi
 reset_to_default: Rudisha kwa thamani ya msingi
 resources:
   app_outdated: Rasilimali hii inahitaji toleo jipya la Seelen UI kufanya kazi vizuri.
+  corrupted_wallpaper: Imeshindwa kutoa kijipicha - umbizo la video mbovu au ambalo halitumiki
   delete: Futa rasilimali
   discover: Gundua rasilimali zaidi
   has_update: Sasisho linapatikana
+  high_impact: Athari kubwa juu ya utendaji
   import_wallpapers: Ingiza wallpapers za mitaa
   open_folder: Fungua folda ya rasilimali
   outdated: >-
     Rasilimali hii ilibuniwa kwa toleo la zamani la Seelen UI na linaweza
     kufanya kazi vizuri.
+  see_on_website: Tazama kwenye tovuti
+review_request:
+  not_now: Si sasa
+  sure: Hakika!
+  title: Je, unafurahia UI ya Seelen?
 save: Kuokoa
 save_and_restart: Okoa na uanze tena
 see_more: Tazama zaidi
 shortcuts:
+  duplicate_error: Njia hii ya mkato imerudiwa
   enable: Wezesha mfumo wa mkato uliojengwa ndani
   enable_tooltip: >-
     Lemaza ikiwa utatumia mfumo wako wa njia za mkato kwa kutumia mteja wa
@@ -206,7 +211,6 @@ shortcuts:
     switch_to_previous_workspace: Badilisha kwenye nafasi ya kazi ya hapo awali
     switch_workspace: Badilika kwa nafasi ya kazi {{0}}
     toggle_float: Badilisha modi ya kuelea ya dirisha
-    toggle_launcher: Kubadilisha kizindua
     toggle_monocle: Badilisha modi ya nafasi ya kazi
   readonly_tooltip: Hii ni njia ya mkato ya kusoma tu
   reset: Rudisha kwa defaults
@@ -215,13 +219,6 @@ sides:
   left: Kushoto
   right: Haki
   top: Juu
-start:
-  message: >-
-    Karibu Seelen UI, mazingira ya mwisho ya desktop na meneja wa Windows
-    aliyeingizwa ili kuongeza uzoefu wako wa Windows! Chunguza enzi mpya ya
-    ufanisi na multitasking na interface yetu ya angavu na sifa za hali ya juu.
-  message_accent: Boresha tija yako na mtindo!
-  title: Karibu!
 toolbar:
   auto_hide: Kujificha kiotomatiki
   delay_to_hide: Kuchelewa kujificha
@@ -242,23 +239,39 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Blur
+  cancel: Ghairi
+  close: Funga
+  collection_name: Jina la Mkusanyiko
+  collections: Mikusanyiko
   contrast: Tofauti
+  corrupted_wallpapers_message: 'Mandhari zilizoharibika, zingatia kufuta hizi:'
+  create: Unda
+  create_collection: Unda Mkusanyiko
+  default_collection: Mkusanyiko Chaguomsingi
+  delete_collection: Futa Mkusanyiko
+  edit_collection: Hariri Mkusanyiko
   enable: Washa Meneja wa Ukuta
+  extend: Ongeza msingi
   fit:
     contain: Kuwa na
     cover: Funika
     fill: Jaza
   flipHorizontal: Flip usawa
   flipVertical: Flip wima
+  generating_thumbnails: Inazalisha Vijipicha vya Mandhari
   hours: masaa
   interval: Badilisha Ukuta kila
   minutes: dakika
+  monitor_collection: Fuatilia Mkusanyiko
+  multimonitor_behaviour: Tabia ya Multimonitor
   muted: Sauti ya Video ya Bubu
   no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
+  no_collections: Bado hakuna mikusanyiko iliyoundwa. Bofya kitufe cha + ili kuunda moja.
   objectFit: Msingi wa kifafa
   objectPosition: Msimamo wa nyuma
   overlayColor: Rangi ya juu
   overlayMixBlendMode: Njia ya mchanganyiko wa mchanganyiko
+  per_monitor: Kwa mfuatiliaji
   playback: Kasi ya kucheza
   position:
     bottom: Chini
@@ -266,10 +279,17 @@ wall:
     left: Kushoto
     right: Kulia
     top: Juu
+  processing_video: Inachakata video
   random: Sisitiza slideshow
   saturation: Kueneza
   seconds: sekunde
+  select_collection: Chagua Mkusanyiko
+  thumbnail_generation_complete: Uzalishaji wa Kijipicha Umekamilika
+  thumbnail_generation_finished: Uzalishaji wa kijipicha umekamilika
+  wallpaper_collection: Ukusanyaji wa Mandhari
+  wallpaper_settings: Mipangilio ya Mandhari
   withOverlay: Na overlay
+  workspace_collections: Mikusanyiko ya Nafasi ya Kazi
 weg:
   auto_hide: Kujificha kiotomatiki
   delay_to_hide: Kuchelewa kujificha
@@ -305,6 +325,18 @@ weg:
   padding: Padding
   show_end_task: Onyesha kazi ya mwisho katika Taskbar
   width: Upana
+welcome:
+  give_a_review: Toa Uhakiki
+  message: >-
+    Seelen UI ni mazingira ya bure na ya wazi ya eneo-kazi kwa Windows. Hapa una
+    udhibiti kamili wa jinsi eneo-kazi lako linavyoonekana na kufanya kazi,
+    hivyo kukuruhusu kubinafsisha kila undani ili kuendana na utendakazi na
+    mtindo wako.
+  ok: Hebu tuanze!
+  review: >-
+    Ikiwa unafurahia kutumia Seelen UI, zingatia kuacha ukaguzi kwenye duka -
+    maoni yako husaidia mradi kukua na kuboreka.
+  title: Karibu kwenye Seelen UI!
 widget:
   enable: Wezesha widget hii
   enable_for_monitor: Wezesha kwenye mfuatiliaji huu

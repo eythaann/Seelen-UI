@@ -1,0 +1,13 @@
+default_multimedia_volume: మల్టీమీడియా వాల్యూమ్
+device:
+  channel:
+    system: సిస్టమ్ శబ్దాలు
+  comunications: కమ్యూనికేషన్స్
+  missing: పరికరం లేదు
+  mixer: వాల్యూమ్ మిక్సర్
+  multimedia: మల్టీమీడియా
+  settings: మరిన్ని పరికర సెట్టింగ్‌లు
+  volume: పరికర వాల్యూమ్
+input_devices: ఇన్‌పుట్ పరికరాలు
+output_devices: అవుట్పుట్ పరికరాలు
+players: మీడియా ప్లేయర్స్

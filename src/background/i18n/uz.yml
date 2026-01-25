@@ -1,11 +1,5 @@
 cancel: Bekor qilmoq
 done: Bajarildi
-drivers:
-  got_it: Tushundim
-  monitor_disabled: >-
-    Ko'rinib turibdiki, ba'zi haydovchilar o'chirilgan. Iltimos, ularni Seelen
-    Ui to'g'ri ishlashga imkon berish imkoniyatini bering.
-  monitor_disabled_title: Monitor drayverlari o'chirilgan
 resource:
   added: Yangi manba qo'shildi
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
     buzilgan.
   corrupted_file_path: Buzilgan fayl yo'li
   download: Yuklab olish sahifasiga o'ting
+  files_integrity: >-
+    Ilova fayllari yaxlitligini tekshira olmadik.
+
+    Bu fayllar o'zgartirilgan, buzilgan yoki o'rnatish tugallanmagan bo'lsa
+    sodir bo'lishi mumkin.
+
+    Xavfsizlik nuqtai nazaridan Seelen UI davom eta olmaydi.
+
+    Iltimos, uni rasmiy veb-saytdan qayta o'rnating.
+  files_integrity_title: Xavfsizlik ogohlantirishi - Fayllar yaxlitligini tekshirish amalga oshmadi
   not_found: WebView2 ish vaqti topilmadi
   not_found_description: Seelen UI uchun Webview2 Runtime kerak. Iltimos, uni oʻrnating.
   outdated: WebView2 ish vaqti eskirgan

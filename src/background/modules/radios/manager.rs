@@ -11,12 +11,6 @@ use crate::{
     windows_api::{DeviceEnumerator, DeviceEvent, DeviceId},
 };
 
-static RADIO_MANAGER_INSTANCE: LazyLock<RadioManager> = LazyLock::new(|| {
-    let mut m = RadioManager::create();
-    log_error!(m.initialize());
-    m
-});
-
 pub struct RadioManager {
     pub radios: SyncHashMap<DeviceId, SluRadioDevice>,
     device_enumerator: Option<DeviceEnumerator>,
@@ -65,6 +59,11 @@ impl RadioManager {
     }
 
     pub fn instance() -> &'static Self {
+        static RADIO_MANAGER_INSTANCE: LazyLock<RadioManager> = LazyLock::new(|| {
+            let mut m = RadioManager::create();
+            log_error!(m.initialize());
+            m
+        });
         &RADIO_MANAGER_INSTANCE
     }
 

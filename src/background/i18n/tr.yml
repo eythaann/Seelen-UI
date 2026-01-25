@@ -1,11 +1,5 @@
 cancel: İptal etmek
 done: Tamamlamak
-drivers:
-  got_it: Anladım.
-  monitor_disabled: >-
-    Bazı monitör sürücülerinin devre dışı bırakıldığı görülüyor. Seelen UI'nin
-    düzgün çalışması için lütfen bunları etkinleştirin.
-  monitor_disabled_title: Monitör sürücüleri devre dışı bırakıldı
 resource:
   added: Yeni bir kaynak eklendi
   download_failed_body: >-
@@ -22,6 +16,16 @@ runtime:
     kullanılıyor.
   corrupted_file_path: Bozuk dosya yolu
   download: İndirme sayfasına git
+  files_integrity: >-
+    Uygulama dosyalarının bütünlüğünü doğrulayamadık.
+
+    Dosyalar değiştirilmiş, bozulmuşsa veya yükleme tamamlanmamışsa bu durum
+    meydana gelebilir.
+
+    Güvenlik nedeniyle Seelen kullanıcı arayüzü devam edemiyor.
+
+    Lütfen resmi web sitesinden yeniden yükleyin.
+  files_integrity_title: Güvenlik Uyarısı - Dosya Bütünlüğü Denetimi Başarısız
   not_found: WebView2 Çalışma Zamanı bulunamadı
   not_found_description: >-
     Seelen kullanıcı arayüzü Webview2 Çalışma Zamanı gerektirir. Lütfen

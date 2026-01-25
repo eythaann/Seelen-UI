@@ -20,9 +20,6 @@ context_menu:
   restore: ډیفالټ ته راګرځي
   settings: ترتیبات
   task_manager: د دندې مدیر
-keyboard:
-  more: نور د کی بورډ امستنې
-  title: کیبورډ ترتیب
 media:
   default_multimedia_volume: ملټي میډیا حجم
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: ننوت وسایل
   output_devices: وتستۍ وسایل
   players: د میډیا لوبغاړي
-network:
-  available: شته شبکې
-  connect: نښلول
-  connected: سره نښلول شوی
-  disconnect: منحل
-  hidden: پټه شبکه
-  more: نور د شبکې تنظیمات
-  not_found: هیڅ جال ونه موندل شو
-  placeholder:
-    password: رمز
-  saved: خوندي شوي شبکې
-  scanning: د شبکو لپاره سکین کول
-  secured: کوډ شوی شبکه
 notifications:
   clear: ټول پاک کړه
   empty: خبرتیاوې نشته
@@ -70,24 +54,3 @@ settings:
   power: ځواک
   restart: بیا روښانه کول
   title: امستنې
-userhome:
-  empty_list: هیڅ توکي نشته
-  folders:
-    desktop: ډیسټاپ
-    documents: لاسوندونه
-    downloads: کښته کوونې
-    more_items: نور وښایاست ...
-    music: میوزک
-    pictures: انځورونه
-    recent: پدې وروستیو کې کارول شوی
-    reduce_items: لږ وښایاست ...
-    title: د کارونکي عمومي لارښود
-    videos: ویډیوګانې
-  profile:
-    accounts: د حساب خلاصول
-    open_onedrive: یوډول ډایرکټر خلاص کړئ
-    open_user_folder: د کارونکي لارښود
-  seelen_options:
-    open_installation_folder: د خلاصې املیز فولډر خلاص کړئ
-    open_log_folder: د
-    title: د

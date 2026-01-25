@@ -1,26 +1,25 @@
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useSearchParams } from "react-router";
 
-import { RootActions } from "../../shared/store/app/reducer.ts";
-import type { RootState } from "../../shared/store/domain.ts";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 
 import { ThemeConfigDefinition } from "./components/ThemeConfigDefinition.tsx";
+import { ResourceTextAsMarkdown } from "libs/ui/react/components/ResourceText/index.tsx";
+import { resetThemeVariables } from "./application.ts";
+import { themes } from "../../../state/resources.ts";
 
 export function ThemeView() {
-  const { username, resourceName } = useParams<"username" | "resourceName">();
-  const theme = useSelector((state: RootState) => {
-    return state.availableThemes.find((t) => t.id === `@${username}/${resourceName}`);
-  });
-
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
+  const theme = themes.value.find((t) => t.id === id);
 
   const handleReset = () => {
-    dispatch(RootActions.resetThemeVariables({ themeId: theme!.id }));
+    resetThemeVariables(theme!.id);
   };
 
   if (!theme) {
@@ -29,6 +28,10 @@ export function ThemeView() {
 
   return (
     <>
+      <SettingsGroup>
+        <ResourceTextAsMarkdown text={theme.metadata.description} />
+      </SettingsGroup>
+
       <SettingsGroup>
         <SettingsOption
           label={t("reset_all_to_default")}

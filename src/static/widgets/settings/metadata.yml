@@ -1,8 +1,8 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Seelen-Inc/slu-lib/refs/heads/master/gen/schemas/widget.schema.json
 id: "@seelen/settings"
 icon: RiSettings4Fill
 metadata:
   displayName: !extend i18n/display_name.yml
 instances: Single
-loader: Legacy
+loader: InternalReact
 hidden: true
+lazy: true

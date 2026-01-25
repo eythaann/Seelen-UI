@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import cs from "./MiniStore.module.css";
+import { compressUuid } from "../resources/ResourceCard";
 
 export function ResourceSkeleton() {
   return (
@@ -56,7 +57,7 @@ export function RemoteResources() {
           return (
             <a
               key={resource.id}
-              href={`https://seelen.io/resources/${resource.friendlyId.replace("@", "")}`}
+              href={`https://seelen.io/resources/${compressUuid(resource.id)}`}
               target="_blank"
               className={cs.resource}
             >

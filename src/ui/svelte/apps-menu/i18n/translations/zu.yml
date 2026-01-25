@@ -1,0 +1,11 @@
+all: Zonke Izinhlelo zokusebenza
+back: Emuva
+disband: Khipha Ifolda
+folder: Ifolda
+no_matching_items: Azikho izinto ezitholakele ezifana nosesho lwakho
+open_file_location: Vula Indawo Yefayela
+pin: Phina
+run_as_admin: Sebenzisa njengomlawuli
+unpin: Susa ukuphina
+welcome_message: Siyakwamukela kumenyu yohlelo lokusebenza lwe-Seelen UI.
+welcome_message2: Kule thebhu, ungaphina izinhlelo zakho zokusebenza eziyintandokazi.

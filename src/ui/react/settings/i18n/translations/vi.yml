@@ -1,16 +1,6 @@
 action:
   confirm: Bạn có chắc không?
   confirm_body: Hành động này không thể được hoàn tác.
-app_launcher:
-  enable: Bật trình khởi chạy ứng dụng
-  launch_on:
-    mouse_over: Di chuột qua
-    primary: Sơ đẳng
-  monitor: Giám sát để hiển thị
-  runners:
-    cmd: Yêu cầu
-    explorer: Chạy
-    label: Người chạy bộ
 apps_configurations:
   app:
     bindings: Binding (Lưu ý cả hai tùy chọn đều được yêu cầu)
@@ -86,7 +76,6 @@ devtools:
   install_folder: Thư mục cài đặt
   load: Trọng tải
   settings_file: Cài đặt tập tin
-  simulate_fullscreen: Mô phỏng sự kiện toàn màn hình
 extras:
   clear_icons: Xóa bộ đệm biểu tượng hệ thống
   clear_icons_tooltip: >-
@@ -96,6 +85,10 @@ extras:
   links: Liên kết chính thức
   relaunch: Khởi động lại
   version: Phiên bản
+  version_fixed: >-
+    Ứng dụng và phiên bản WebView2 Runtime đã được sửa. Điều này có nghĩa là ứng
+    dụng sẽ không nhận được bản cập nhật và WebView2 Runtime sẽ không được tự
+    động cập nhật với các bản cập nhật Windows.
 general:
   accent_color: Màu nhấn
   date_format: Định dạng ngày
@@ -103,6 +96,7 @@ general:
     available: Gói biểu tượng có sẵn
     selected: Gói biểu tượng hoạt động
   language: Ngôn ngữ
+  monday: Thứ hai
   performance_mode:
     on_battery: Trên pin
     on_energy_saver: Trên tiết kiệm năng lượng
@@ -111,7 +105,10 @@ general:
       extreme: Vô cùng
       minimal: Tối thiểu
     plugged: Cắm hoặc sạc
+  saturday: Thứ bảy
+  start_of_week: Đầu tuần
   startup: Chạy khi khởi động?
+  sunday: Chủ nhật
   theme:
     available: Chủ đề có sẵn
     selected: Chủ đề đang hoạt động
@@ -152,18 +149,28 @@ reset_all_to_default: Đặt lại tất cả về giá trị mặc định
 reset_to_default: Đặt lại về giá trị mặc định
 resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
+  corrupted_wallpaper: >-
+    Không thể trích xuất hình thu nhỏ - định dạng video bị hỏng hoặc không được
+    hỗ trợ
   delete: Xóa tài nguyên
   discover: Khám phá thêm tài nguyên
   has_update: Một bản cập nhật có sẵn
+  high_impact: Tác động cao đến hiệu suất
   import_wallpapers: Nhập hình nền địa phương
   open_folder: Mở thư mục tài nguyên
   outdated: >-
     Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không
     hoạt động đúng.
+  see_on_website: Xem trên trang web
+review_request:
+  not_now: Không phải bây giờ
+  sure: Chắc chắn!
+  title: Bạn thích giao diện người dùng Seelen?
 save: Cứu
 save_and_restart: Lưu & Khởi động lại
 see_more: Xem thêm
 shortcuts:
+  duplicate_error: Phím tắt này bị trùng lặp
   enable: Bật hệ thống phím tắt tích hợp
   enable_tooltip: >-
     Tắt nếu bạn sẽ triển khai hệ thống phím tắt của riêng mình bằng cách sử dụng
@@ -208,7 +215,6 @@ shortcuts:
     switch_to_previous_workspace: Chuyển sang không gian làm việc trước đó
     switch_workspace: Chuyển sang không gian làm việc {{0}}
     toggle_float: Chuyển đổi chế độ nổi của cửa sổ
-    toggle_launcher: Chuyển đổi trình khởi chạy
     toggle_monocle: Chuyển đổi chế độ Monocle không gian làm việc
   readonly_tooltip: Đây là một lối tắt chỉ đọc
   reset: Đặt lại về mặc định
@@ -217,14 +223,6 @@ sides:
   left: Bên trái
   right: Phải
   top: Đứng đầu
-start:
-  message: >-
-    Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
-    quản lý Windows được kết hợp để nâng cao trải nghiệm Windows của bạn! Khám
-    phá một kỷ nguyên mới của hiệu quả và đa nhiệm với giao diện trực quan và
-    các tính năng nâng cao của chúng tôi.
-  message_accent: Tối ưu hóa năng suất của bạn với phong cách!
-  title: Chào mừng!
 toolbar:
   auto_hide: Tự động ẩn
   delay_to_hide: Trì hoãn việc ẩn giấu
@@ -245,23 +243,39 @@ update:
 wall:
   backgrounds: Hình nền
   blur: Mờ
+  cancel: Hủy bỏ
+  close: Đóng
+  collection_name: Tên bộ sưu tập
+  collections: Bộ sưu tập
   contrast: Sự tương phản
+  corrupted_wallpapers_message: 'Hình nền bị hỏng, hãy cân nhắc việc xóa những hình nền này:'
+  create: Tạo nên
+  create_collection: Tạo bộ sưu tập
+  default_collection: Bộ sưu tập mặc định
+  delete_collection: Xóa bộ sưu tập
+  edit_collection: Chỉnh sửa bộ sưu tập
   enable: Bật trình quản lý hình nền
+  extend: Mở rộng chính
   fit:
     contain: Bao gồm
     cover: Che phủ
     fill: Đổ đầy
   flipHorizontal: Lật ngang
   flipVertical: Lật dọc
+  generating_thumbnails: Tạo hình thu nhỏ hình nền
   hours: giờ
   interval: Thay đổi hình nền mỗi
   minutes: phút
+  monitor_collection: Bộ sưu tập giám sát
+  multimonitor_behaviour: Hành vi đa màn hình
   muted: Tắt âm thanh video
   no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
+  no_collections: Chưa có bộ sưu tập nào được tạo. Nhấp vào nút + để tạo một cái.
   objectFit: Phù hợp với nền
   objectPosition: Vị trí nền
   overlayColor: Màu lớp phủ
   overlayMixBlendMode: Chế độ trộn trộn lớp phủ
+  per_monitor: Mỗi màn hình
   playback: Tốc độ phát lại
   position:
     bottom: Đáy
@@ -269,10 +283,17 @@ wall:
     left: Bên trái
     right: Phải
     top: Đứng đầu
+  processing_video: Đang xử lý video
   random: Slideshow ngẫu nhiên
   saturation: Bão hòa
   seconds: giây
+  select_collection: Chọn Bộ sưu tập
+  thumbnail_generation_complete: Hoàn tất việc tạo hình thu nhỏ
+  thumbnail_generation_finished: Việc tạo hình thu nhỏ đã kết thúc thành công
+  wallpaper_collection: Bộ sưu tập hình nền
+  wallpaper_settings: Cài đặt hình nền
   withOverlay: Với lớp phủ
+  workspace_collections: Bộ sưu tập không gian làm việc
 weg:
   auto_hide: Tự động ẩn
   delay_to_hide: Trì hoãn việc ẩn giấu
@@ -308,6 +329,18 @@ weg:
   padding: Đệm
   show_end_task: Hiển thị nhiệm vụ kết thúc trong thanh tác vụ
   width: Chiều rộng
+welcome:
+  give_a_review: Đưa ra đánh giá
+  message: >-
+    Seelen UI là môi trường máy tính để bàn nguồn mở và miễn phí dành cho
+    Windows. Tại đây, bạn có toàn quyền kiểm soát giao diện và hoạt động của màn
+    hình, cho phép bạn tùy chỉnh mọi chi tiết để phù hợp với quy trình làm việc
+    và phong cách của mình.
+  ok: Hãy bắt đầu!
+  review: >-
+    Nếu bạn thích sử dụng Seelen UI, hãy cân nhắc để lại đánh giá trên cửa hàng
+    - phản hồi của bạn sẽ giúp dự án phát triển và cải thiện.
+  title: Chào mừng bạn đến với giao diện người dùng Seelen!
 widget:
   enable: Kích hoạt tiện ích này
   enable_for_monitor: Bật trên màn hình này

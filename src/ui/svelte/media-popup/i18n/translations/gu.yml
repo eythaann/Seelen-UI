@@ -1,0 +1,13 @@
+default_multimedia_volume: મલ્ટીમીડિયા વોલ્યુમ
+device:
+  channel:
+    system: સિસ્ટમ અવાજો
+  comunications: કોમ્યુનિકેશન્સ
+  missing: ઉપકરણ ખૂટે છે
+  mixer: વોલ્યુમ મિક્સર
+  multimedia: મલ્ટીમીડિયા
+  settings: વધુ ઉપકરણ સેટિંગ્સ
+  volume: ઉપકરણ વોલ્યુમ
+input_devices: ઇનપુટ ઉપકરણો
+output_devices: આઉટપુટ ઉપકરણો
+players: મીડિયા પ્લેયર્સ

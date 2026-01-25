@@ -34,8 +34,7 @@ impl SeelenWeg {
             }
             WinEvent::SystemMinimizeStart
             | WinEvent::SystemMinimizeEnd
-            | WinEvent::SyntheticMaximizeStart
-            | WinEvent::SyntheticMaximizeEnd => {
+            | WinEvent::SyntheticForegroundLocationChange => {
                 if Self::contains_app(window) {
                     Self::update_app(window)?;
                 }
@@ -76,7 +75,7 @@ impl SeelenWeg {
                     .iter()
                     .any(|t| t == &class || t == &parent_class)
                 {
-                    Self::hide_taskbar();
+                    Self::hide_native_taskbar();
                     return Ok(());
                 }
 

@@ -1,7 +1,7 @@
 // Svelte build configuration
 
 import esbuild from "esbuild";
-import { createCopyPublicPlugin } from "../plugins/index.ts";
+import { createCopyPublicPlugin, createLoggerPlugin } from "../plugins/index.ts";
 import type { BuildArgs } from "../types.ts";
 import sveltePlugin from "esbuild-svelte";
 import { sveltePreprocess } from "svelte-preprocess";
@@ -16,6 +16,7 @@ export function createSvelteBuildConfig(
   entryPoints: string[],
   appFolders: string[],
   args: BuildArgs,
+  isWatchMode: boolean,
 ): esbuild.BuildOptions {
   return {
     entryPoints,
@@ -25,12 +26,15 @@ export function createSvelteBuildConfig(
     treeShaking: true,
     format: "esm",
     target: "esnext",
+    platform: "browser",
     outdir: DIST_DIR,
     outbase: `./${UI_DIR}`,
     loader: {
       ".yml": "text",
     },
+    conditions: ["svelte"], // needed to support some imports
     plugins: [
+      createLoggerPlugin("Svelte", entryPoints.length, isWatchMode),
       sveltePlugin({
         cache: false,
         preprocess: sveltePreprocess({
@@ -58,15 +62,13 @@ export async function buildSvelte(
     return;
   }
 
-  const startTime = Date.now();
-  const config = createSvelteBuildConfig(entryPoints, appFolders, args);
+  const isWatchMode = args.serve;
+  const config = createSvelteBuildConfig(entryPoints, appFolders, args, isWatchMode);
 
-  if (args.serve) {
+  if (isWatchMode) {
     const ctx = await esbuild.context(config);
     await ctx.watch();
-    console.info(`✓ Svelte: ${entryPoints.length} apps watching for changes`);
   } else {
     await esbuild.build(config);
-    console.info(`✓ Svelte: ${entryPoints.length} apps built (${Date.now() - startTime}ms)`);
   }
 }

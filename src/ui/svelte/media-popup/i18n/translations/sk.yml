@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimediálny objem
+device:
+  channel:
+    system: Systémové zvuky
+  comunications: komunikácie
+  missing: Chýbajúce zariadenie
+  mixer: Objemový mixér
+  multimedia: Multimédiá
+  settings: Ďalšie nastavenia zariadenia
+  volume: Hlasitosť zariadenia
+input_devices: Vstupné zariadenia
+output_devices: Výstupné zariadenia
+players: Prehrávače médií

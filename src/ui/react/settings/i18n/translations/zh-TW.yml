@@ -1,16 +1,6 @@
 action:
   confirm: 你確定嗎？
   confirm_body: 該動作不能撤消。
-app_launcher:
-  enable: 啟用應用啟動器
-  launch_on:
-    mouse_over: 鼠標結束
-    primary: 基本的
-  monitor: 顯示顯示
-  runners:
-    cmd: 命令
-    explorer: 跑步
-    label: 跑步者
 apps_configurations:
   app:
     bindings: 綁定（需要兩個選項）
@@ -82,7 +72,6 @@ devtools:
   install_folder: 安裝文件夾
   load: 載入
   settings_file: 設置文件
-  simulate_fullscreen: 模擬全屏事件
 extras:
   clear_icons: 清除系統圖標緩存
   clear_icons_tooltip: 可能需要重新啟動才能完全生效所有小部件
@@ -90,6 +79,7 @@ extras:
   links: 官方鏈接
   relaunch: 重新啟動
   version: 版本
+  version_fixed: 應用程序和 WebView2 運行時版本已修復。這意味著應用程序將不會接收更新，並且 WebView2 運行時也不會隨 Windows 更新自動更新。
 general:
   accent_color: 口音顏色
   date_format: 日期格式
@@ -97,6 +87,7 @@ general:
     available: 可用的圖標包
     selected: 活動圖標包
   language: 語言
+  monday: 週一
   performance_mode:
     on_battery: 在電池上
     on_energy_saver: 在能量儲蓄方面
@@ -105,7 +96,10 @@ general:
       extreme: 極端
       minimal: 最小
     plugged: 插入或充電
+  saturday: 週六
+  start_of_week: 一周開始
   startup: 在啟動上運行？
+  sunday: 星期日
   theme:
     available: 可用的主題
     selected: 主題主題
@@ -146,16 +140,24 @@ reset_all_to_default: 重置全部默認值
 reset_to_default: 重置為默認值
 resources:
   app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。
+  corrupted_wallpaper: 無法提取縮略圖 - 視頻格式已損壞或不受支持
   delete: 刪除資源
   discover: 發現更多資源
   has_update: 有更新可用
+  high_impact: 對性能影響很大
   import_wallpapers: 導入本地壁紙
   open_folder: 打開資源文件夾
   outdated: 該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
+  see_on_website: 見網站
+review_request:
+  not_now: 現在不要
+  sure: 當然！
+  title: 喜歡 Seelen UI 嗎？
 save: 節省
 save_and_restart: 保存和重新啟動
 see_more: 查看更多
 shortcuts:
+  duplicate_error: 該快捷方式重複
   enable: 啟用內置捷徑系統
   enable_tooltip: 禁用您使用SEELEN UI客戶端實現自己的快捷方式系統
   labels:
@@ -198,7 +200,6 @@ shortcuts:
     switch_to_previous_workspace: 切換到以前的工作區
     switch_workspace: 切換到工作區{{0}}
     toggle_float: 切換窗口浮點模式
-    toggle_launcher: 切換發射器
     toggle_monocle: 切換工作區單片模式
   readonly_tooltip: 這是只讀的捷徑
   reset: 重置為默認值
@@ -207,12 +208,6 @@ sides:
   left: 左邊
   right: 正確的
   top: 頂部
-start:
-  message: >-
-    歡迎來到Seelen UI，這是終極台式機環境，並帶有合併的瓷磚Windows Manager，以增強您的Windows體驗！
-    通過我們的直觀界面和高級功能探索效率和多任務的新時代。
-  message_accent: 通過風格優化您的生產力！
-  title: 歡迎！
 toolbar:
   auto_hide: 自動隱藏
   delay_to_hide: 延遲隱藏
@@ -233,23 +228,39 @@ update:
 wall:
   backgrounds: 壁紙
   blur: 模糊
+  cancel: 取消
+  close: 關閉
+  collection_name: 收藏名稱
+  collections: 收藏
   contrast: 對比
+  corrupted_wallpapers_message: 損壞的壁紙，請考慮刪除這些：
+  create: 創造
+  create_collection: 創建收藏
+  default_collection: 默認集合
+  delete_collection: 刪除集合
+  edit_collection: 編輯收藏
   enable: 啟用壁紙經理
+  extend: 延長小學
   fit:
     contain: 包含
     cover: 覆蓋
     fill: 充滿
   flipHorizontal: 翻轉水平
   flipVertical: 翻轉垂直
+  generating_thumbnails: 生成壁紙縮略圖
   hours: 小時
   interval: 每次更改牆紙
   minutes: 分鐘
+  monitor_collection: 監控集合
+  multimonitor_behaviour: 多顯示器行為
   muted: 將視頻音頻靜音
   no_background: 使用主題的背景為空幻燈片。
+  no_collections: 尚未創建任何集合。 單擊 + 按鈕創建一個。
   objectFit: 背景擬合
   objectPosition: 背景位置
   overlayColor: 覆蓋顏色
   overlayMixBlendMode: 疊加混合混合模式
+  per_monitor: 每台顯示器
   playback: 播放速度
   position:
     bottom: 底部
@@ -257,10 +268,17 @@ wall:
     left: 左邊
     right: 正確的
     top: 頂部
+  processing_video: 處理視頻
   random: 隨機化幻燈片
   saturation: 飽和
   seconds: 秒
+  select_collection: 選擇系列
+  thumbnail_generation_complete: 縮略圖生成完成
+  thumbnail_generation_finished: 縮略圖生成已成功完成
+  wallpaper_collection: 壁紙合集
+  wallpaper_settings: 壁紙設置
   withOverlay: 使用覆蓋
+  workspace_collections: 工作區集合
 weg:
   auto_hide: 自動隱藏
   delay_to_hide: 延遲隱藏
@@ -296,6 +314,14 @@ weg:
   padding: 填充
   show_end_task: 在任務欄中顯示最終任務
   width: 寬度
+welcome:
+  give_a_review: 發表評論
+  message: >-
+    Seelen UI 是一個適用於 Windows 的免費開源桌面環境。
+    在這裡，您可以完全控制桌面的外觀和行為，允許您自定義每個細節以匹配您的工作流程和風格。
+  ok: 讓我們開始吧！
+  review: 如果您喜歡使用 Seelen UI，請考慮在商店中留下評論 - 您的反饋有助於項目的成長和改進。
+  title: 歡迎來到Seelen UI！
 widget:
   enable: 啟用這個小部件
   enable_for_monitor: 在此顯示器上啟用

@@ -1,16 +1,6 @@
 action:
   confirm: ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
   confirm_body: ਇਸ ਕਿਰਿਆ ਨੂੰ ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ.
-app_launcher:
-  enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
-  launch_on:
-    mouse_over: ਮਾਊਸ ਓਵਰ
-    primary: ਪ੍ਰਾਇਮਰੀ
-  monitor: ਦਿਖਾਉਣ ਲਈ ਨਿਗਰਾਨੀ
-  runners:
-    cmd: ਕਮਾਂਡ
-    explorer: ਚਲਾਓ
-    label: ਦੌੜਾਕ
 apps_configurations:
   app:
     bindings: ਬਾਈਡਿੰਗ (ਨੋਟ ਕਰੋ ਕਿ ਦੋਵੇਂ ਵਿਕਲਪ ਲੋੜੀਂਦੇ ਹਨ)
@@ -83,7 +73,6 @@ devtools:
   install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
-  simulate_fullscreen: ਪੂਰੀ ਸਕ੍ਰੀਨ ਇਵੈਂਟ ਦੀ ਨਕਲ ਕਰੋ
 extras:
   clear_icons: ਸਿਸਟਮ ਆਈਕਾਨ ਕੈਚੇ ਸਾਫ਼ ਕਰੋ
   clear_icons_tooltip: ਸਾਰੇ ਵਿਜੇਟਸ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਹੋਣ ਲਈ ਇੱਕ ਰੀਸਟਾਰਟ ਦੀ ਜ਼ਰੂਰਤ ਹੋ ਸਕਦੀ ਹੈ
@@ -91,6 +80,10 @@ extras:
   links: ਅਧਿਕਾਰਤ ਲਿੰਕ
   relaunch: ਮੁੜ-ਲਾਂਚ ਕਰੋ
   version: ਸੰਸਕਰਣ
+  version_fixed: >-
+    ਐਪਲੀਕੇਸ਼ਨ ਅਤੇ WebView2 ਰਨਟਾਈਮ ਸੰਸਕਰਣ ਸਥਿਰ ਹਨ। ਇਸਦਾ ਮਤਲਬ ਹੈ ਕਿ ਐਪਲੀਕੇਸ਼ਨ
+    ਅੱਪਡੇਟ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰੇਗੀ ਅਤੇ WebView2 ਰਨਟਾਈਮ ਨੂੰ ਵਿੰਡੋਜ਼ ਅੱਪਡੇਟ ਨਾਲ ਆਪਣੇ ਆਪ
+    ਅੱਪਡੇਟ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ।
 general:
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
   date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
@@ -98,6 +91,7 @@ general:
     available: ਉਪਲਬਧ ਆਈਕਨ ਪੈਕ
     selected: ਐਕਟਿਵ ਆਈਕਨ ਪੈਕ
   language: ਭਾਸ਼ਾ
+  monday: ਸੋਮਵਾਰ
   performance_mode:
     on_battery: ਬੈਟਰੀ ਤੇ
     on_energy_saver: Energy ਰਜਾ ਸੇਵਰ ਤੇ
@@ -106,7 +100,10 @@ general:
       extreme: ਅੱਤ
       minimal: ਘੱਟੋ ਘੱਟ
     plugged: ਪਲੱਗ ਕੀਤਾ ਜਾਂ ਚਾਰਜ ਕਰਨਾ
+  saturday: ਸ਼ਨੀਵਾਰ
+  start_of_week: ਹਫ਼ਤੇ ਦੀ ਸ਼ੁਰੂਆਤ
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
+  sunday: ਐਤਵਾਰ
   theme:
     available: ਉਪਲਬਧ ਥੀਮ
     selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ
@@ -147,18 +144,26 @@ reset_all_to_default: ਸਾਰੇ ਡਿਫੌਲਟ ਮੁੱਲਾਂ ਤੇ 
 reset_to_default: ਡਿਫੌਲਟ ਵੈਲਯੂ ਤੇ ਰੀਸੈਟ ਕਰੋ
 resources:
   app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
+  corrupted_wallpaper: ਥੰਬਨੇਲ ਨੂੰ ਐਕਸਟਰੈਕਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ - ਖਰਾਬ ਜਾਂ ਅਸਮਰਥਿਤ ਵੀਡੀਓ ਫਾਰਮੈਟ
   delete: ਸਰੋਤ ਨੂੰ ਮਿਟਾਓ
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ
   has_update: ਇੱਕ ਅਪਡੇਟ ਉਪਲਬਧ ਹੈ
+  high_impact: ਪ੍ਰਦਰਸ਼ਨ 'ਤੇ ਉੱਚ ਪ੍ਰਭਾਵ
   import_wallpapers: ਸਥਾਨਕ ਵਾਲਪੇਪਰ ਆਯਾਤ ਕਰੋ
   open_folder: ਓਪਨ ਸਰੋਤ ਫੋਲਡਰ
   outdated: >-
     ਇਹ ਸਰੋਤ ਸੰਸਥ UI ਦੇ ਪੁਰਾਣੇ ਸੰਸਕਰਣ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਸੀ ਅਤੇ ਸ਼ਾਇਦ ਸਹੀ ਤਰ੍ਹਾਂ
     ਕੰਮ ਨਾ ਕਰੇ.
+  see_on_website: ਵੈੱਬਸਾਈਟ 'ਤੇ ਦੇਖੋ
+review_request:
+  not_now: ਹਾਲੇ ਨਹੀਂ
+  sure: ਯਕੀਨਨ!
+  title: ਸੀਲੇਨ UI ਦਾ ਆਨੰਦ ਮਾਣ ਰਹੇ ਹੋ?
 save: ਸੇਵ ਕਰੋ
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
 see_more: ਹੋਰ ਦੇਖੋ
 shortcuts:
+  duplicate_error: ਇਹ ਸ਼ਾਰਟਕੱਟ ਡੁਪਲੀਕੇਟ ਹੈ
   enable: ਬਿਲਟ-ਇਨ ਸ਼ਾਰਟਕੱਟ ਸਿਸਟਮ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   enable_tooltip: >-
     ਅਯੋਗ ਕਰੋ ਜੇ ਤੁਸੀਂ ਵੇਖਿਆ UI ਕਲਾਇੰਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ੌਰਟਕਟ ਸਿਸਟਮ
@@ -203,7 +208,6 @@ shortcuts:
     switch_to_previous_workspace: ਪਿਛਲੇ ਵਰਕਸਪੇਸ ਤੇ ਜਾਓ
     switch_workspace: ਵਰਕਸਪੇਸ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ {{0}}}
     toggle_float: ਵਿੰਡੋ ਫਲੋਟ ਮੋਡ ਬਦਲੋ
-    toggle_launcher: ਟੌਗਲ ਲਾਂਚਰ
     toggle_monocle: ਵਰਕਸਪੇਸ ਮੋਨੋਕਲ ਮੋਡ ਟੌਗਲ ਕਰੋ
   readonly_tooltip: ਇਹ ਸਿਰਫ ਇਕੋ ਸ਼ਾਰਟਕੱਟ ਹੈ
   reset: ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈਟ ਕਰੋ
@@ -212,14 +216,6 @@ sides:
   left: ਖੱਬੇ
   right: ਸੱਜਾ
   top: ਸਿਖਰ
-start:
-  message: >-
-    Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
-    ਇਨਕੋਪੋਰੇਟਿਡ ਟਾਈਲਿੰਗ ਵਿੰਡੋਜ਼ ਮੈਨੇਜਰ ਦੇ ਨਾਲ ਅੰਤਮ ਡੈਸਕਟਾਪ ਵਾਤਾਵਰਨ! ਸਾਡੇ ਅਨੁਭਵੀ
-    ਇੰਟਰਫੇਸ ਅਤੇ ਉੱਨਤ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਨਾਲ ਕੁਸ਼ਲਤਾ ਅਤੇ ਮਲਟੀਟਾਸਕਿੰਗ ਦੇ ਇੱਕ ਨਵੇਂ ਯੁੱਗ
-    ਦੀ ਪੜਚੋਲ ਕਰੋ।
-  message_accent: ਸ਼ੈਲੀ ਨਾਲ ਆਪਣੀ ਉਤਪਾਦਕਤਾ ਨੂੰ ਅਨੁਕੂਲ ਬਣਾਓ!
-  title: ਜੀ ਆਇਆਂ ਨੂੰ!
 toolbar:
   auto_hide: ਆਟੋ ਓਹਲੇ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
@@ -240,23 +236,39 @@ update:
 wall:
   backgrounds: ਵਾਲਪੇਪਰ
   blur: ਧੁੰਦਲਾ
+  cancel: ਰੱਦ ਕਰੋ
+  close: ਬੰਦ ਕਰੋ
+  collection_name: ਸੰਗ੍ਰਹਿ ਦਾ ਨਾਮ
+  collections: ਸੰਗ੍ਰਹਿ
   contrast: ਇਸ ਦੇ ਉਲਟ
+  corrupted_wallpapers_message: 'ਖਰਾਬ ਵਾਲਪੇਪਰ, ਇਹਨਾਂ ਨੂੰ ਮਿਟਾਉਣ ''ਤੇ ਵਿਚਾਰ ਕਰੋ:'
+  create: ਬਣਾਓ
+  create_collection: ਸੰਗ੍ਰਹਿ ਬਣਾਓ
+  default_collection: ਪੂਰਵ-ਨਿਰਧਾਰਤ ਸੰਗ੍ਰਹਿ
+  delete_collection: ਸੰਗ੍ਰਹਿ ਮਿਟਾਓ
+  edit_collection: ਸੰਗ੍ਰਹਿ ਦਾ ਸੰਪਾਦਨ ਕਰੋ
   enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  extend: ਪ੍ਰਾਇਮਰੀ ਵਧਾਓ
   fit:
     contain: ਸ਼ਾਮਲ
     cover: ਕਵਰ
     fill: ਭਰੋ
   flipHorizontal: ਹਰੀਜੱਟਲ ਫਲਿੱਪ ਕਰੋ
   flipVertical: ਲੰਬਕਾਰੀ ਫਲਿੱਪ ਕਰੋ
+  generating_thumbnails: ਵਾਲਪੇਪਰ ਥੰਬਨੇਲ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ
   hours: ਘੰਟੇ
   interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
   minutes: ਮਿੰਟ
+  monitor_collection: ਨਿਗਰਾਨ ਸੰਗ੍ਰਹਿ
+  multimonitor_behaviour: ਮਲਟੀਮੋਨੀਟਰ ਵਿਵਹਾਰ
   muted: ਵੀਡੀਓ ਆਡੀਓ ਨੂੰ ਮਿਊਟ ਕਰੋ
   no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
+  no_collections: ਅਜੇ ਤੱਕ ਕੋਈ ਸੰਗ੍ਰਹਿ ਨਹੀਂ ਬਣਾਇਆ ਗਿਆ। ਇੱਕ ਬਣਾਉਣ ਲਈ + ਬਟਨ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।
   objectFit: ਪਿਛੋਕੜ ਫਿਟ
   objectPosition: ਪਿਛੋਕੜ ਦੀ ਸਥਿਤੀ
   overlayColor: ਓਵਰਲੇ ਰੰਗ
   overlayMixBlendMode: ਓਵਰਲੇਅ ਮਿਕਸ ਬਰੇਂਡ ਮੋਡ
+  per_monitor: ਪ੍ਰਤੀ ਮਾਨੀਟਰ
   playback: ਪਲੇਬੈਕ ਸਪੀਡ
   position:
     bottom: ਤਲ
@@ -264,10 +276,17 @@ wall:
     left: ਖੱਬੇ
     right: ਸੱਜੇ
     top: ਸਿਖਰ
+  processing_video: ਵੀਡੀਓ 'ਤੇ ਪ੍ਰਕਿਰਿਆ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ
   random: ਸਿਲਾਈਡ ਸਲਾਈਡ ਸ਼ੋਅ
   saturation: ਸੰਤ੍ਰਿਪਤ
   seconds: ਸਕਿੰਟ
+  select_collection: ਸੰਗ੍ਰਹਿ ਚੁਣੋ
+  thumbnail_generation_complete: ਥੰਬਨੇਲ ਜਨਰੇਸ਼ਨ ਪੂਰਾ ਹੋਇਆ
+  thumbnail_generation_finished: ਥੰਬਨੇਲ ਬਣਾਉਣਾ ਸਫਲਤਾਪੂਰਵਕ ਸਮਾਪਤ ਹੋ ਗਿਆ ਹੈ
+  wallpaper_collection: ਵਾਲਪੇਪਰ ਸੰਗ੍ਰਹਿ
+  wallpaper_settings: ਵਾਲਪੇਪਰ ਸੈਟਿੰਗਾਂ
   withOverlay: ਓਵਰਲੇਅ ਦੇ ਨਾਲ
+  workspace_collections: ਵਰਕਸਪੇਸ ਸੰਗ੍ਰਹਿ
 weg:
   auto_hide: ਆਟੋ ਓਹਲੇ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
@@ -303,6 +322,18 @@ weg:
   padding: ਪੈਡਿੰਗ
   show_end_task: ਟਾਸਕਬਾਰ ਵਿੱਚ ਅੰਤ ਦਾ ਕੰਮ ਵੇਖੋ
   width: ਚੌੜਾਈ
+welcome:
+  give_a_review: ਇੱਕ ਸਮੀਖਿਆ ਦਿਓ
+  message: >-
+    Seelen UI ਵਿੰਡੋਜ਼ ਲਈ ਇੱਕ ਮੁਫਤ ਅਤੇ ਓਪਨ ਸੋਰਸ ਡੈਸਕਟਾਪ ਵਾਤਾਵਰਣ ਹੈ। ਇੱਥੇ ਤੁਹਾਡੇ
+    ਕੋਲ ਤੁਹਾਡੇ ਡੈਸਕਟੌਪ ਦੇ ਦਿੱਖ ਅਤੇ ਵਿਵਹਾਰ 'ਤੇ ਪੂਰਾ ਨਿਯੰਤਰਣ ਹੈ, ਜਿਸ ਨਾਲ ਤੁਸੀਂ
+    ਆਪਣੇ ਵਰਕਫਲੋ ਅਤੇ ਸ਼ੈਲੀ ਨਾਲ ਮੇਲ ਕਰਨ ਲਈ ਹਰ ਵੇਰਵੇ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰ ਸਕਦੇ ਹੋ।
+  ok: ਆਓ ਸ਼ੁਰੂ ਕਰੀਏ!
+  review: >-
+    ਜੇਕਰ ਤੁਸੀਂ ਸੀਲੇਨ UI ਦੀ ਵਰਤੋਂ ਕਰਨ ਦਾ ਅਨੰਦ ਲੈਂਦੇ ਹੋ, ਤਾਂ ਸਟੋਰ 'ਤੇ ਇੱਕ ਸਮੀਖਿਆ
+    ਛੱਡਣ 'ਤੇ ਵਿਚਾਰ ਕਰੋ — ਤੁਹਾਡਾ ਫੀਡਬੈਕ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਵਧਣ ਅਤੇ ਬਿਹਤਰ ਬਣਾਉਣ ਵਿੱਚ ਮਦਦ
+    ਕਰਦਾ ਹੈ।
+  title: Seelen UI ਵਿੱਚ ਸੁਆਗਤ ਹੈ!
 widget:
   enable: ਇਸ ਵਿਦਜਿਟ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   enable_for_monitor: ਇਸ ਮਾਨੀਟਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ

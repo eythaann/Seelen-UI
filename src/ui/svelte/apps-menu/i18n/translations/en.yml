@@ -1,0 +1,17 @@
+all: All Apps
+back: Back
+disband: Disband Folder
+folder: Folder
+no_matching_items: No items found matching your search
+open_file_location: Open File Location
+pin: Pin
+run_as_admin: Run as Administrator
+unpin: Unpin
+welcome_message: Welcome to the Seelen UI app menu.
+welcome_message2: On this tab, you can pin your favorite apps.
+web_search: Press Enter to search the web
+query:
+  all: All
+  web: Web
+  apps: Apps
+  files: Files

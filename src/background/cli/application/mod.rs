@@ -12,14 +12,12 @@ use win32::Win32Cli;
 use windows::Win32::System::Console::{AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS};
 
 use crate::{
-    app::SEELEN,
     cli::application::{art::ArtCli, uri::process_uri},
     error::Result,
     resources::cli::ResourceManagerCli,
-    trace_lock,
     virtual_desktops::cli::VirtualDesktopCli,
     widgets::{
-        launcher::cli::AppLauncherCli, popups::cli::PopupsCli, show_settings,
+        cli::WidgetCli, popups::cli::PopupsCli, show_settings,
         task_switcher::cli::TaskSwitcherClient, weg::cli::WegCli,
         window_manager::cli::WindowManagerCli,
     },
@@ -77,10 +75,10 @@ pub enum AppCliCommand {
     Settings,
     VirtualDesk(VirtualDesktopCli),
     Debugger(DebuggerCli),
-    Launcher(AppLauncherCli),
     WindowManager(WindowManagerCli),
     Popup(PopupsCli),
     Weg(WegCli),
+    Widget(WidgetCli),
     Resource(ResourceManagerCli),
     Win32(Win32Cli),
     Art(ArtCli),
@@ -266,16 +264,14 @@ impl AppCliCommand {
             AppCliCommand::Debugger(command) => {
                 command.process()?;
             }
-            AppCliCommand::Launcher(command) => {
-                if let Some(rofi) = &mut trace_lock!(SEELEN).rofi {
-                    rofi.process(command)?;
-                }
-            }
             AppCliCommand::WindowManager(command) => {
                 command.process()?;
             }
             AppCliCommand::Weg(command) => {
                 command.process()?;
+            }
+            AppCliCommand::Widget(command) => {
+                command.run()?;
             }
             AppCliCommand::Resource(command) => {
                 command.process()?;

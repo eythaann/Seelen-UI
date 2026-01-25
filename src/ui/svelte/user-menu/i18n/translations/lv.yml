@@ -1,0 +1,21 @@
+empty_list: Nav vienumu
+folders:
+  desktop: Darbvirsma
+  documents: Dokumenti
+  downloads: Lejupielādes
+  more_items: Rādīt vairāk...
+  music: Mūzika
+  pictures: Bildes
+  recent: Nesen lietots
+  reduce_items: Rādīt mazāk...
+  title: Lietotāju katalogi
+  videos: Videoklipi
+profile:
+  accounts: Atveriet konta iestatījumus
+  log_out: Atteikties
+  open_onedrive: Atveriet OneDrive direktoriju
+  open_user_folder: Atveriet lietotāja direktoriju
+seelen_options:
+  open_installation_folder: Atveriet Seelen iestatījumu mapi
+  open_log_folder: Atveriet Seelen žurnāla mapi
+  title: Seelen katalogi

@@ -1,0 +1,21 @@
+empty_list: Žádné položky
+folders:
+  desktop: Desktop
+  documents: Dokumenty
+  downloads: Stahování
+  more_items: Zobrazit více...
+  music: Hudba
+  pictures: obrázky
+  recent: Nedávno použité
+  reduce_items: Zobrazit méně...
+  title: Uživatelské adresáře
+  videos: videa
+profile:
+  accounts: Otevřete nastavení účtu
+  log_out: Odhlaste se
+  open_onedrive: Otevřete adresář OneDrive
+  open_user_folder: Otevřete adresář uživatele
+seelen_options:
+  open_installation_folder: Otevřete složku nastavení Seelen
+  open_log_folder: Otevřete složku protokolu Seelen
+  title: Seelen adresáře

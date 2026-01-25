@@ -20,9 +20,6 @@ context_menu:
   restore: Восстановить по умолчанию
   settings: Настройки
   task_manager: Диспетчер задач
-keyboard:
-  more: Другие настройки клавиатуры
-  title: Раскладка клавиатуры
 media:
   default_multimedia_volume: Громкость устройств мультимедиа
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Устройства ввода
   output_devices: Устройства вывода
   players: Медиаплееры
-network:
-  available: Доступные сети
-  connect: Подключить
-  connected: Подключено к
-  disconnect: Отключить
-  hidden: Скрытая сеть
-  more: Дополнительные сетевые параметры
-  not_found: Сети Wi-Fi не найдены
-  placeholder:
-    password: Пароль
-  saved: Сохраненные сети
-  scanning: Сканирование сетей
-  secured: Защищённая сеть
 notifications:
   clear: Очистить все
   empty: Нет уведомлений
@@ -70,24 +54,3 @@ settings:
   power: Питание
   restart: Перезагрузка
   title: Настройки
-userhome:
-  empty_list: Нет предметов
-  folders:
-    desktop: Рабочий стол
-    documents: Документы
-    downloads: Загрузки
-    more_items: Показать еще...
-    music: Музыка
-    pictures: Изображения
-    recent: Недавно использованные
-    reduce_items: Показать меньше...
-    title: Пользовательские папки
-    videos: Видео
-  profile:
-    accounts: Настройки учетной записи
-    open_onedrive: Открыть папку OneDrive
-    open_user_folder: Открыть пользовательскую папку
-  seelen_options:
-    open_installation_folder: Открыть папку настроек Seelen
-    open_log_folder: Открыть папку журнала Seelen
-    title: Каталоги Seelen

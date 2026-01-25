@@ -20,9 +20,6 @@ context_menu:
   restore: Przywróć domyślne
   settings: Ustawienia
   task_manager: Menedżer zadań
-keyboard:
-  more: Więcej ustawień klawiatury
-  title: Układ klawiatury
 media:
   default_multimedia_volume: Poziomy głośności
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Urządzenia wejściowe
   output_devices: Urządzenia wyjściowe
   players: Odtwarzacze multimedialne
-network:
-  available: Dostępne sieci
-  connect: Połącz
-  connected: Połączony z
-  disconnect: Rozłącz
-  hidden: Ukryta sieć
-  more: Więcej ustawień sieciowych
-  not_found: Nie znaleziono sieci
-  placeholder:
-    password: Hasło
-  saved: Zapisane sieci
-  scanning: Skanowanie w poszukiwaniu sieci
-  secured: Sieć szyfrowana
 notifications:
   clear: Wyczyść wszystko
   empty: Brak powiadomień
@@ -70,24 +54,3 @@ settings:
   power: Zasilanie
   restart: Uruchom ponownie
   title: Ustawienia
-userhome:
-  empty_list: Brak przedmiotów
-  folders:
-    desktop: Pulpit
-    documents: Dokumenty
-    downloads: Pobrane
-    more_items: Pokaż więcej...
-    music: Muzyka
-    pictures: Obrazy
-    recent: Ostatnio używane
-    reduce_items: Pokaż mniej...
-    title: Katalog użytkownika
-    videos: Wideo
-  profile:
-    accounts: Ustawienia konta
-    open_onedrive: Otwórz katalog OneDrive
-    open_user_folder: Otwórz katalog użytkownika
-  seelen_options:
-    open_installation_folder: Otwórz folder ustawień Seelen
-    open_log_folder: Otwórz folder dziennika Seelen
-    title: Katalogi Seelen

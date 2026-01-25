@@ -1,0 +1,21 @@
+empty_list: Ma jiraan wax
+folders:
+  desktop: Desktop
+  documents: Dukumentiyada
+  downloads: Soo dejinta
+  more_items: Wax badan muuji...
+  music: Muusiga
+  pictures: Sawirro
+  recent: Dhawaan la isticmaalay
+  reduce_items: Muuji wax yar...
+  title: Hagaha isticmaalaha
+  videos: Muuqaalo
+profile:
+  accounts: Fur goobaha akoonnada
+  log_out: Ka bax
+  open_onedrive: Fur buugga OneDrive
+  open_user_folder: Fur hagaha isticmaalaha
+seelen_options:
+  open_installation_folder: Fur Seelen settings folder
+  open_log_folder: Fur Seelen log folder
+  title: Tilmaamaha Seelen

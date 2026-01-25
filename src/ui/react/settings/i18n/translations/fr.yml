@@ -1,16 +1,6 @@
 action:
   confirm: Es-tu sûr?
   confirm_body: Cette action ne peut pas être annulée.
-app_launcher:
-  enable: Activer le lanceur d'applications
-  launch_on:
-    mouse_over: Passez la souris
-    primary: Primaire
-  monitor: Moniteur à afficher
-  runners:
-    cmd: Commande
-    explorer: Explorateur
-    label: Lanceurs
 apps_configurations:
   app:
     bindings: Raccourcis (notez que les deux options sont nécessaires)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
-  simulate_fullscreen: Simuler l'événement plein écran
 extras:
   clear_icons: Effacer le cache des icônes du système
   clear_icons_tooltip: >-
@@ -97,6 +86,11 @@ extras:
   links: Liens officiels
   relaunch: Redémarrer Seelen UI
   version: Version
+  version_fixed: >-
+    Les versions de l'application et de WebView2 Runtime sont corrigées. Cela
+    signifie que l'application ne recevra pas de mises à jour et que WebView2
+    Runtime ne sera pas automatiquement mis à jour avec les mises à jour
+    Windows.
 general:
   accent_color: Couleur d'accentuation
   date_format: Format de la date
@@ -104,6 +98,7 @@ general:
     available: Packs d'icônes disponibles
     selected: Packs d'icônes actifs
   language: Langue
+  monday: Lundi
   performance_mode:
     on_battery: Sur la batterie
     on_energy_saver: Sur l'énergie
@@ -112,7 +107,10 @@ general:
       extreme: Extrême
       minimal: Minimal
     plugged: Bouchée ou charge
+  saturday: Samedi
+  start_of_week: Début de semaine
   startup: Lancer au démarrage ?
+  sunday: Dimanche
   theme:
     available: Thèmes disponibles
     selected: Thèmes actifs
@@ -155,18 +153,26 @@ resources:
   app_outdated: >-
     Cette ressource nécessite une version plus récente de Seelen UI pour
     fonctionner correctement.
+  corrupted_wallpaper: "Échec de l'extraction de la vignette\_: format vidéo corrompu ou non pris en charge"
   delete: Supprimer les ressources
   discover: Découvrez d'autres ressources
   has_update: Une mise à jour est disponible
+  high_impact: Impact élevé sur les performances
   import_wallpapers: Importer des fonds d'écran locaux
   open_folder: Ouvrir le dossier des ressources
   outdated: >-
     Cette ressource a été conçue pour une ancienne version de Seelen UI et peut
     ne pas fonctionner correctement.
+  see_on_website: Voir sur le site
+review_request:
+  not_now: Pas maintenant
+  sure: Bien sûr!
+  title: "Vous appréciez l'interface utilisateur de Seelen\_?"
 save: Enregistrer
 save_and_restart: Enregistrer et redémarrer
 see_more: Voir plus
 shortcuts:
+  duplicate_error: Ce raccourci est dupliqué
   enable: Activer le système de raccourcis intégrés
   enable_tooltip: >-
     Désactiver si vous implémentez votre propre système de raccourcis à l'aide
@@ -211,7 +217,6 @@ shortcuts:
     switch_to_previous_workspace: Passez à l'espace de travail précédent
     switch_workspace: Passez à Workspace {{0}}
     toggle_float: Mode de flotteur de fenêtre à bascule
-    toggle_launcher: Lanceur de basculement
     toggle_monocle: Mode monocle d'espace de travail à bascule
   readonly_tooltip: Ceci est un raccourci en lecture seule
   reset: Réinitialiser les valeurs par défaut
@@ -220,14 +225,6 @@ sides:
   left: Gauche
   right: Droite
   top: Haut
-start:
-  message: >-
-    Bienvenue sur Seelen UI, l'environnement de bureau ultime avec un
-    gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience
-    Windows ! Découvrez une nouvelle ère d'efficacité et de multitâche avec
-    notre interface intuitive et ses fonctionnalités avancées.
-  message_accent: Optimisez votre productivité avec style !
-  title: Bienvenue !
 toolbar:
   auto_hide: Masquer automatiquement
   delay_to_hide: Délai avant de masquer
@@ -248,23 +245,41 @@ update:
 wall:
   backgrounds: Fonds d'écran
   blur: Flou
+  cancel: Annuler
+  close: Fermer
+  collection_name: Nom de la collection
+  collections: Collections
   contrast: Contraste
+  corrupted_wallpapers_message: "Fonds d'écran corrompus, pensez à les supprimer\_:"
+  create: Créer
+  create_collection: Créer une collection
+  default_collection: Collection par défaut
+  delete_collection: Supprimer la collection
+  edit_collection: Modifier la collection
   enable: Activer le gestionnaire de fonds d'écran
+  extend: Étendre le primaire
   fit:
     contain: Contenir
     cover: Couverture
     fill: Remplir
   flipHorizontal: Retournement horizontal
   flipVertical: Flip Vertical
+  generating_thumbnails: Générer des vignettes de fond d'écran
   hours: heures
   interval: Changer de fond d'écran toutes les
   minutes: minutes
+  monitor_collection: Collection de moniteurs
+  multimonitor_behaviour: Comportement multi-écrans
   muted: Couper le son de la vidéo
   no_background: Liste vide, le fond d'écran du thème sera utilisé.
+  no_collections: >-
+    Aucune collection créée pour l'instant. Cliquez sur le bouton + pour en
+    créer un.
   objectFit: Conforme à l'arrière-plan
   objectPosition: Position d'arrière-plan
   overlayColor: Couleur de la superposition
   overlayMixBlendMode: Mode de mélange de la superposition
+  per_monitor: Par moniteur
   playback: Vitesse de lecture
   position:
     bottom: Le fond
@@ -272,10 +287,17 @@ wall:
     left: Gauche
     right: Droit
     top: Haut de page
+  processing_video: Traitement vidéo
   random: Diaporama aléatoire
   saturation: Saturation
   seconds: secondes
+  select_collection: Sélectionnez une collection
+  thumbnail_generation_complete: Génération de vignettes terminée
+  thumbnail_generation_finished: La génération des vignettes s'est terminée avec succès
+  wallpaper_collection: Collection de papiers peints
+  wallpaper_settings: Paramètres du papier peint
   withOverlay: Avec recouvrement
+  workspace_collections: Collections d'espaces de travail
 weg:
   auto_hide: Masquage automatique
   delay_to_hide: Délai avant masquage
@@ -311,6 +333,18 @@ weg:
   padding: Hauteur
   show_end_task: Afficher la tâche finale dans la barre des tâches
   width: Largeur
+welcome:
+  give_a_review: Donner un avis
+  message: >-
+    Seelen UI est un environnement de bureau gratuit et open source pour
+    Windows. Ici, vous avez un contrôle total sur l'apparence et le comportement
+    de votre bureau, vous permettant de personnaliser chaque détail en fonction
+    de votre flux de travail et de votre style.
+  ok: "Commençons\_!"
+  review: >-
+    Si vous aimez utiliser Seelen UI, pensez à laisser un avis sur la boutique :
+    vos commentaires aident le projet à se développer et à s'améliorer.
+  title: "Bienvenue dans l'interface utilisateur de Seelen\_!"
 widget:
   enable: Activer ce widget
   enable_for_monitor: Activer sur ce moniteur

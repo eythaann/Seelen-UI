@@ -10,8 +10,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 60px 0;
+    gap: var(--spacing-l);
+    padding: 4rem 0;
 
     > img {
       object-fit: contain;

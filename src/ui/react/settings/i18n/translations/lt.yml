@@ -1,16 +1,6 @@
 action:
   confirm: Ar tikrai?
   confirm_body: Šis veiksmas negali būti panaikintas.
-app_launcher:
-  enable: Įgalinti programos paleidimo priemonę
-  launch_on:
-    mouse_over: Užveskite pelės žymeklį
-    primary: Pirminis
-  monitor: Monitorius, kad parodytumėte
-  runners:
-    cmd: Komanda
-    explorer: Bėgti
-    label: Bėgikai
 apps_configurations:
   app:
     bindings: Įrišimas (pastaba yra būtinos abi parinktys)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Diegimo aplankas
   load: Įkelti
   settings_file: Nustatymų failas
-  simulate_fullscreen: Imituoti viso ekrano įvykį
 extras:
   clear_icons: Išvalyti sistemos piktogramų talpyklą
   clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
@@ -95,6 +84,10 @@ extras:
   links: Oficialios nuorodos
   relaunch: Atsikrauti
   version: Versija
+  version_fixed: >-
+    Programos ir „WebView2 Runtime“ versijos yra fiksuotos. Tai reiškia, kad
+    programa negaus naujinimų ir „WebView2 Runtime“ nebus automatiškai
+    atnaujinta naudojant „Windows“ naujinimus.
 general:
   accent_color: Akcento spalva
   date_format: Datos formatas
@@ -102,6 +95,7 @@ general:
     available: Galimi piktogramų paketai
     selected: Aktyvūs piktogramų paketai
   language: Kalba
+  monday: Pirmadienis
   performance_mode:
     on_battery: Ant akumuliatoriaus
     on_energy_saver: Dėl energijos taupymo
@@ -110,7 +104,10 @@ general:
       extreme: Kraštutinumas
       minimal: Minimalus
     plugged: Prijungtas ar įkrovimas
+  saturday: šeštadienis
+  start_of_week: Savaitės pradžia
   startup: Paleisti paleidimą?
+  sunday: sekmadienis
   theme:
     available: Galimos temos
     selected: Aktyvios temos
@@ -151,18 +148,28 @@ reset_all_to_default: Iš naujo nustatyti visas numatytąsias vertes
 reset_to_default: Iš naujo nustatyti numatytąją vertę
 resources:
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
+  corrupted_wallpaper: >-
+    Nepavyko išskleisti miniatiūros – sugadintas arba nepalaikomas vaizdo įrašo
+    formatas
   delete: Ištrinti šaltinį
   discover: Atraskite daugiau išteklių
   has_update: Galimas atnaujinimas
+  high_impact: Didelis poveikis našumui
   import_wallpapers: Importuoti vietinius ekrano užsklandas
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
     tinkamai.
+  see_on_website: Žiūrėti svetainėje
+review_request:
+  not_now: Ne dabar
+  sure: Žinoma!
+  title: Mėgaukitės Seelen vartotojo sąsaja?
 save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 see_more: Žiūrėti daugiau
 shortcuts:
+  duplicate_error: Šis spartusis klavišas pasikartoja
   enable: Įgalinti įmontuotą nuorodų sistemą
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodų sistemą naudodami „Seelen UI“ klientą
   labels:
@@ -205,7 +212,6 @@ shortcuts:
     switch_to_previous_workspace: Perjunkite į ankstesnę darbo vietą
     switch_workspace: Perjunkite į darbo vietą {{0}}
     toggle_float: Perjunkite lango plūdės režimą
-    toggle_launcher: „Toggle“ paleidimo priemonė
     toggle_monocle: Perjunkite darbo vietos monokle režimą
   readonly_tooltip: Tai tik skaitomas nuoroda
   reset: Iš naujo nustatykite pagal numatytuosius nustatymus
@@ -214,14 +220,6 @@ sides:
   left: Kairėje
   right: Teisingai
   top: Viršus
-start:
-  message: >-
-    Sveiki atvykę į „Seelen UI“, „Ultimate Desktop“ aplinką su „Incorporated“
-    plytelių „Windows Manager“, kad patobulintumėte „Windows“ patirtį! Naršykite
-    naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi intuityvia
-    sąsaja ir pažangiomis funkcijomis.
-  message_accent: Optimizuokite savo produktyvumą stiliumi!
-  title: Sveiki!
 toolbar:
   auto_hide: Automatinis slėptuvė
   delay_to_hide: Vėluoti paslėpti
@@ -242,23 +240,39 @@ update:
 wall:
   backgrounds: Tapetai
   blur: Neryškumas
+  cancel: Atšaukti
+  close: Uždaryti
+  collection_name: Kolekcijos pavadinimas
+  collections: Kolekcijos
   contrast: Kontrastas
+  corrupted_wallpapers_message: 'Sugadinti fono paveikslėliai, apsvarstykite galimybę ištrinti šiuos:'
+  create: Sukurti
+  create_collection: Sukurti kolekciją
+  default_collection: Numatytoji kolekcija
+  delete_collection: Ištrinti kolekciją
+  edit_collection: Redaguoti kolekciją
   enable: Įgalinkite tapetų tvarkytuvę
+  extend: Prailginti pirminį
   fit:
     contain: Sudėtis
     cover: Viršelis
     fill: Užpildykite
   flipHorizontal: Apversti horizontaliai
   flipVertical: Vertikalus apvertimas
+  generating_thumbnails: Fono paveikslėlių miniatiūrų generavimas
   hours: valandos
   interval: Keiskite tapetų kiekvieną
   minutes: minutės
+  monitor_collection: Monitorių kolekcija
+  multimonitor_behaviour: Daugelio monitorių elgesys
   muted: Nutildyti vaizdo garsą
   no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
+  no_collections: Kol kas nesukurta jokių kolekcijų. Spustelėkite mygtuką +, kad sukurtumėte.
   objectFit: Pagrindinė informacija Pritaikymas
   objectPosition: Pagrindinė padėtis
   overlayColor: Perdangos spalva
   overlayMixBlendMode: Perdangos mišinio režimas
+  per_monitor: Vienam monitoriui
   playback: Atkūrimo greitis
   position:
     bottom: Dugnas
@@ -266,10 +280,17 @@ wall:
     left: Kairėje pusėje
     right: Dešinė
     top: Viršuje
+  processing_video: Apdorojamas vaizdo įrašas
   random: Atsitiktinis skaidrių demonstravimas
   saturation: Sodrumas
   seconds: sekundės
+  select_collection: Pasirinkite Kolekcija
+  thumbnail_generation_complete: Miniatiūrų generavimas baigtas
+  thumbnail_generation_finished: Miniatiūrų generavimas sėkmingai baigtas
+  wallpaper_collection: Tapetų kolekcija
+  wallpaper_settings: Fono nustatymai
   withOverlay: Su perdanga
+  workspace_collections: Darbo vietos kolekcijos
 weg:
   auto_hide: Automatinis slėptuvė
   delay_to_hide: Vėluoti paslėpti
@@ -305,6 +326,18 @@ weg:
   padding: Paminkštinimas
   show_end_task: Užduoties juostoje rodyti pabaigos užduotį
   width: Plotis
+welcome:
+  give_a_review: Pateikite apžvalgą
+  message: >-
+    Seelen UI yra nemokama atvirojo kodo darbalaukio aplinka, skirta Windows.
+    Čia galite visiškai valdyti, kaip atrodo ir veikia jūsų darbalaukis, todėl
+    galite tinkinti kiekvieną detalę, kad ji atitiktų jūsų darbo eigą ir stilių.
+  ok: Pradėkime!
+  review: >-
+    Jei jums patinka naudoti Seelen vartotojo sąsają, apsvarstykite galimybę
+    palikti atsiliepimą parduotuvėje – jūsų atsiliepimai padeda projektui augti
+    ir tobulėti.
+  title: Sveiki atvykę į Seelen vartotojo sąsają!
 widget:
   enable: Įjungti šį valdiklį
   enable_for_monitor: Įjungti šiame monitoriuje

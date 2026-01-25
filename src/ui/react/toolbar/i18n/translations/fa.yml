@@ -20,9 +20,6 @@ context_menu:
   restore: بازگرداندن به طور پیش فرض
   settings: تنظیمات
   task_manager: Task Manager
-keyboard:
-  more: تنظیمات صفحه کلید بیشتر
-  title: چیدمان صفحه کلید
 media:
   default_multimedia_volume: حجم چند رسانه ای
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: دستگاه های ورودی
   output_devices: دستگاه های خروجی
   players: بازیکنان رسانه ای
-network:
-  available: شبکه های موجود
-  connect: وصل کردن
-  connected: متصل به
-  disconnect: قطع شدن
-  hidden: شبکه پنهان
-  more: تنظیمات بیشتر شبکه
-  not_found: هیچ شبکه ای پیدا نشده است
-  placeholder:
-    password: کلمه عبور
-  saved: شبکه های ذخیره شده
-  scanning: اسکن شبکه ها
-  secured: شبکه رمزگذاری شده
 notifications:
   clear: همه را پاک کنید
   empty: بدون اعلان
@@ -70,24 +54,3 @@ settings:
   power: قدرت
   restart: مجدداً
   title: تنظیمات
-userhome:
-  empty_list: هیچ موردی
-  folders:
-    desktop: دسکتاپ
-    documents: اسناد
-    downloads: بارگیری
-    more_items: نمایش بیشتر ...
-    music: موسیقی
-    pictures: عکس
-    recent: اخیراً استفاده شده است
-    reduce_items: کمتر نشان دهید ...
-    title: دایرکتوری های کاربر
-    videos: فیلم
-  profile:
-    accounts: تنظیمات حساب باز
-    open_onedrive: دایرکتوری OneDrive را باز کنید
-    open_user_folder: فهرست کاربر را باز کنید
-  seelen_options:
-    open_installation_folder: پوشه تنظیمات Seelen را باز کنید
-    open_log_folder: پوشه ورود به سیستم Seelen را باز کنید
-    title: دایرکتوری های Seelen

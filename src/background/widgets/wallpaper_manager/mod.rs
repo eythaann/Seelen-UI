@@ -17,7 +17,7 @@ use crate::{
     app::get_app_handle,
     error::Result,
     log_error, pcstr,
-    widgets::WebviewArgs,
+    widgets::webview::WebviewArgs,
     windows_api::{WindowEnumerator, WindowsApi},
 };
 

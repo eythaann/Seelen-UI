@@ -1,0 +1,21 @@
+empty_list: Hakuna vitu
+folders:
+  desktop: Eneo-kazi
+  documents: Nyaraka
+  downloads: Vipakuliwa
+  more_items: Onyesha zaidi...
+  music: Muziki
+  pictures: Picha
+  recent: Iliyotumiwa hivi karibuni
+  reduce_items: Onyesha kidogo...
+  title: Saraka za watumiaji
+  videos: Video
+profile:
+  accounts: Fungua mipangilio ya akaunti
+  log_out: Toka nje
+  open_onedrive: Fungua saraka ya OneDrive
+  open_user_folder: Fungua saraka ya mtumiaji
+seelen_options:
+  open_installation_folder: Fungua folda ya mipangilio ya Seelen
+  open_log_folder: Fungua folda ya kumbukumbu ya Seelen
+  title: Saraka za Seelen

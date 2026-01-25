@@ -1,0 +1,11 @@
+all: Tất cả ứng dụng
+back: Mặt sau
+disband: Giải tán thư mục
+folder: Thư mục
+no_matching_items: Không tìm thấy mục nào phù hợp với tìm kiếm của bạn
+open_file_location: Mở vị trí tệp
+pin: Ghim
+run_as_admin: Chạy với tư cách quản trị viên
+unpin: Bỏ ghim
+welcome_message: Chào mừng bạn đến với menu ứng dụng Seelen UI.
+welcome_message2: Trên tab này, bạn có thể ghim các ứng dụng yêu thích của mình.

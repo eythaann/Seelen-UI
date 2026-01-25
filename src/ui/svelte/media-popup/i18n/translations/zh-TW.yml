@@ -1,0 +1,13 @@
+default_multimedia_volume: 多媒體音量
+device:
+  channel:
+    system: 系統聲音
+  comunications: 通訊
+  missing: 丟失設備
+  mixer: 音量混合器
+  multimedia: 多媒體
+  settings: 更多設備設置
+  volume: 設備音量
+input_devices: 輸入設備
+output_devices: 輸出設備
+players: 媒體播放器

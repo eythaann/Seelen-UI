@@ -1,0 +1,21 @@
+empty_list: Nincsenek tételek
+folders:
+  desktop: Asztali
+  documents: Dokumentumok
+  downloads: Letöltések
+  more_items: Mutass többet...
+  music: Zene
+  pictures: Képek
+  recent: Nemrég használt
+  reduce_items: Mutass kevesebbet...
+  title: Felhasználói könyvtárak
+  videos: Videók
+profile:
+  accounts: Nyissa meg a fiókbeállításokat
+  log_out: Jelentkezzen ki
+  open_onedrive: Nyissa meg a OneDrive könyvtárat
+  open_user_folder: Nyissa meg a felhasználói könyvtárat
+seelen_options:
+  open_installation_folder: Nyissa meg a Seelen beállítások mappát
+  open_log_folder: Nyissa meg a Seelen naplómappát
+  title: Seelen könyvtárak

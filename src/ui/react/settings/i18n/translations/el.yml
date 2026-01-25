@@ -1,16 +1,6 @@
 action:
   confirm: Είστε σίγουροι;
   confirm_body: Αυτή η ενέργεια δεν μπορεί να ανατραπεί.
-app_launcher:
-  enable: Ενεργοποίηση εκτοξευτή εφαρμογών
-  launch_on:
-    mouse_over: Το ποντίκι πάνω
-    primary: Πρωταρχικός
-  monitor: Παρακολούθηση για εμφάνιση
-  runners:
-    cmd: Εντολή
-    explorer: Τρέξιμο
-    label: Δρομείς
 apps_configurations:
   app:
     bindings: Σύνδεση (σημειώστε ότι και οι δύο επιλογές απαιτούνται)
@@ -88,7 +78,6 @@ devtools:
   install_folder: Φάκελος εγκατάστασης
   load: Φορτώνω
   settings_file: Αρχείο ρυθμίσεων
-  simulate_fullscreen: Προσομοίωση συμβάντος πλήρους οθόνης
 extras:
   clear_icons: Εκκαθάριση προσωρινής μνήμης εικονιδίων συστήματος
   clear_icons_tooltip: Μπορεί να απαιτηθεί επανεκκίνηση για να ισχύσει πλήρως σε όλα τα widgets
@@ -96,6 +85,10 @@ extras:
   links: Επίσημοι σύνδεσμοι
   relaunch: Ξεκίνησα ξανά
   version: Εκδοχή
+  version_fixed: >-
+    Η εφαρμογή και η έκδοση WebView2 Runtime έχουν επιδιορθωθεί. Αυτό σημαίνει
+    ότι η εφαρμογή δεν θα λαμβάνει ενημερώσεις και ο χρόνος εκτέλεσης WebView2
+    δεν θα ενημερώνεται αυτόματα με ενημερώσεις των Windows.
 general:
   accent_color: Έμφαση στο χρώμα
   date_format: Μορφή ημερομηνίας
@@ -103,6 +96,7 @@ general:
     available: Διαθέσιμα πακέτα εικονιδίων
     selected: Ενεργά πακέτα εικονιδίων
   language: Γλώσσα
+  monday: Δευτέρα
   performance_mode:
     on_battery: Σε μπαταρία
     on_energy_saver: Σχετικά με την εξοικονόμηση ενέργειας
@@ -111,7 +105,10 @@ general:
       extreme: Ακρο
       minimal: Ελάχιστος
     plugged: Συνδεδεμένος ή φόρτιση
+  saturday: Σάββατο
+  start_of_week: Έναρξη Εβδομάδας
   startup: Εκτέλεση κατά την εκκίνηση;
+  sunday: Κυριακή
   theme:
     available: Διαθέσιμα θέματα
     selected: Ενεργά θέματα
@@ -154,18 +151,28 @@ resources:
   app_outdated: >-
     Αυτός ο πόρος απαιτεί μια νεότερη έκδοση του Seelen UI για να λειτουργήσει
     σωστά.
+  corrupted_wallpaper: >-
+    Αποτυχία εξαγωγής μικρογραφίας - κατεστραμμένη ή μη υποστηριζόμενη μορφή
+    βίντεο
   delete: Διαγραφή πόρου
   discover: Ανακαλύψτε περισσότερους πόρους
   has_update: Μια ενημέρωση είναι διαθέσιμη
+  high_impact: Υψηλό αντίκτυπο στην απόδοση
   import_wallpapers: Εισαγωγή τοπικών ταπετσαριών
   open_folder: Άνοιγμα φακέλου πόρων
   outdated: >-
     Αυτός ο πόρος σχεδιάστηκε για μια παλαιότερη έκδοση του Seelen UI και
     ενδέχεται να μην λειτουργεί σωστά.
+  see_on_website: Δείτε στην ιστοσελίδα
+review_request:
+  not_now: Όχι τώρα
+  sure: Σίγουρος!
+  title: Σας αρέσει το Seelen UI;
 save: Αποθηκεύσετε
 save_and_restart: Αποθήκευση & επανεκκίνηση
 see_more: Δείτε περισσότερα
 shortcuts:
+  duplicate_error: Αυτή η συντόμευση είναι διπλότυπη
   enable: Ενεργοποίηση ενσωματωμένου συστήματος συντομεύσεων
   enable_tooltip: >-
     Απενεργοποιήστε εάν θα εφαρμόσετε το δικό σας σύστημα συντομεύσεων
@@ -210,7 +217,6 @@ shortcuts:
     switch_to_previous_workspace: Μεταβείτε σε προηγούμενο χώρο εργασίας
     switch_workspace: Μεταβείτε στο χώρο εργασίας {{0}}
     toggle_float: Εναλλαγή παραθύρου Float Mode
-    toggle_launcher: Εναρκτήριο εκτοξευτή
     toggle_monocle: Εναλλαγή λειτουργίας Monocle Workspace
   readonly_tooltip: Αυτή είναι μια συντόμευση μόνο για ανάγνωση
   reset: Επαναφορά σε προεπιλογές
@@ -219,14 +225,6 @@ sides:
   left: Αριστερά
   right: σωστά
   top: Μπλουζα
-start:
-  message: >-
-    Καλώς ήλθατε στο Seelen UI, το Ultimate Desktop Environment με έναν
-    ενσωματωμένο διαχειριστή Windows για να βελτιώσετε την εμπειρία των Windows
-    ! Εξερευνήστε μια νέα εποχή αποτελεσματικότητας και πολλαπλών εργασιών με
-    την διαισθητική διεπαφή και τα προηγμένα χαρακτηριστικά μας.
-  message_accent: Βελτιστοποιήστε την παραγωγικότητά σας με στυλ!
-  title: Καλως ΗΡΘΑΤΕ!
 toolbar:
   auto_hide: Αυτόματη απόκρυψη
   delay_to_hide: Καθυστέρηση για απόκρυψη
@@ -247,23 +245,41 @@ update:
 wall:
   backgrounds: Ταπετσαρίες
   blur: Θολούρα
+  cancel: Ματαίωση
+  close: Κοντά
+  collection_name: Όνομα συλλογής
+  collections: Συλλογές
   contrast: Αντίθεση
+  corrupted_wallpapers_message: 'Κατεστραμμένες ταπετσαρίες, σκεφτείτε να τις διαγράψετε:'
+  create: Δημιουργώ
+  create_collection: Δημιουργία συλλογής
+  default_collection: Προεπιλεγμένη συλλογή
+  delete_collection: Διαγραφή συλλογής
+  edit_collection: Επεξεργασία συλλογής
   enable: Ενεργοποίηση διαχειριστή ταπετσαρίας
+  extend: Επέκταση πρωτοβάθμιας
   fit:
     contain: Περιέχει
     cover: Εξώφυλλο
     fill: Συμπλήρωση
   flipHorizontal: Αναδίπλωση οριζόντια
   flipVertical: Flip κάθετα
+  generating_thumbnails: Δημιουργία μικρογραφιών ταπετσαρίας
   hours: ώρες
   interval: Αλλάξτε ταπετσαρία κάθε
   minutes: πρακτικά
+  monitor_collection: Συλλογή οθονών
+  multimonitor_behaviour: Συμπεριφορά πολλαπλών οθονών
   muted: Σίγαση ήχου βίντεο
   no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
+  no_collections: >-
+    Δεν έχουν δημιουργηθεί ακόμη συλλογές. Κάντε κλικ στο κουμπί + για να
+    δημιουργήσετε ένα.
   objectFit: Φόντο Fit
   objectPosition: Ιστορικό Θέση
   overlayColor: Χρώμα επικάλυψης
   overlayMixBlendMode: Λειτουργία ανάμειξης μίξης επικάλυψης
+  per_monitor: Ανά οθόνη
   playback: Ταχύτητα αναπαραγωγής
   position:
     bottom: Κάτω μέρος
@@ -271,10 +287,17 @@ wall:
     left: Αριστερά
     right: Δεξιά
     top: Κορυφή
+  processing_video: Επεξεργασία βίντεο
   random: Τυχαία παρουσίαση
   saturation: Κορεσμός
   seconds: δευτερόλεπτα
+  select_collection: Επιλέξτε Συλλογή
+  thumbnail_generation_complete: Ολοκληρώθηκε η δημιουργία μικρογραφιών
+  thumbnail_generation_finished: Η δημιουργία μικρογραφιών ολοκληρώθηκε με επιτυχία
+  wallpaper_collection: Συλλογή ταπετσαριών
+  wallpaper_settings: Ρυθμίσεις ταπετσαρίας
   withOverlay: Με επικάλυψη
+  workspace_collections: Συλλογές χώρου εργασίας
 weg:
   auto_hide: Αυτόματη απόκρυψη
   delay_to_hide: Καθυστέρηση για απόκρυψη
@@ -310,6 +333,19 @@ weg:
   padding: Υλικό παραγεμίσματος
   show_end_task: Εμφάνιση της εργασίας τέλους στη γραμμή εργασιών
   width: Πλάτος
+welcome:
+  give_a_review: Δώστε μια κριτική
+  message: >-
+    Το Seelen UI είναι ένα δωρεάν και ανοιχτού κώδικα περιβάλλον επιφάνειας
+    εργασίας για Windows. Εδώ έχετε τον πλήρη έλεγχο της εμφάνισης και της
+    συμπεριφοράς της επιφάνειας εργασίας σας, επιτρέποντάς σας να προσαρμόσετε
+    κάθε λεπτομέρεια ώστε να ταιριάζει με τη ροή εργασίας και το στυλ σας.
+  ok: Ας ξεκινήσουμε!
+  review: >-
+    Εάν σας αρέσει να χρησιμοποιείτε το Seelen UI, σκεφτείτε να αφήσετε μια
+    κριτική στο κατάστημα — τα σχόλιά σας βοηθούν το έργο να αναπτυχθεί και να
+    βελτιωθεί.
+  title: Καλώς ήρθατε στο Seelen UI!
 widget:
   enable: Ενεργοποιήστε αυτό το widget
   enable_for_monitor: Ενεργοποίηση σε αυτή την οθόνη

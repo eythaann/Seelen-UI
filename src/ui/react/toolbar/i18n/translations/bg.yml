@@ -20,9 +20,6 @@ context_menu:
   restore: Възстановяване на настройките по подразбиране
   settings: Настройки
   task_manager: Диспечер на задачите
-keyboard:
-  more: Още настройки на клавиатурата
-  title: Разположение на клавиатурата
 media:
   default_multimedia_volume: Обем на мултимедията
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Входни устройства
   output_devices: Изходни устройства
   players: Медийни играчи
-network:
-  available: Налични мрежи
-  connect: Свържете се
-  connected: Свързан с
-  disconnect: Изключете
-  hidden: Скрита мрежа
-  more: Повече мрежови настройки
-  not_found: Не са намерени мрежи
-  placeholder:
-    password: Парола
-  saved: Запазени мрежи
-  scanning: Сканиране за мрежи
-  secured: Криптирана мрежа
 notifications:
   clear: Изчистване на всички
   empty: Няма известия
@@ -70,24 +54,3 @@ settings:
   power: Мощност
   restart: Рестартирам
   title: Настройки
-userhome:
-  empty_list: Няма артикули
-  folders:
-    desktop: Настолен компютър
-    documents: Документи
-    downloads: Изтегляне
-    more_items: Покажи повече...
-    music: Музика
-    pictures: Снимки
-    recent: Наскоро използван
-    reduce_items: Покажи по-малко...
-    title: Потребителски директории
-    videos: Видеоклипове
-  profile:
-    accounts: Настройки на отворената сметка
-    open_onedrive: Отворете директорията на OneDrive
-    open_user_folder: Отваряне на потребителската директория
-  seelen_options:
-    open_installation_folder: Отворете папката с настройки на Seelen
-    open_log_folder: Отворете папката Seelen log
-    title: Директории Seelen

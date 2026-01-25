@@ -1,7 +1,7 @@
 // Vanilla TypeScript build configuration
 
 import esbuild from "esbuild";
-import { createCopyPublicPlugin } from "../plugins/index.ts";
+import { createCopyPublicPlugin, createLoggerPlugin } from "../plugins/index.ts";
 import type { BuildArgs } from "../types.ts";
 import { DIST_DIR, UI_DIR } from "../config.ts";
 
@@ -12,6 +12,7 @@ export function createVanillaBuildConfig(
   entryPoints: string[],
   appFolders: string[],
   args: BuildArgs,
+  isWatchMode: boolean,
 ): esbuild.BuildOptions {
   return {
     entryPoints,
@@ -21,13 +22,17 @@ export function createVanillaBuildConfig(
     treeShaking: true,
     format: "esm",
     target: "esnext",
+    platform: "browser",
     outdir: DIST_DIR,
     outbase: `./${UI_DIR}`,
     loader: {
       ".yml": "text",
       ".svg": "text",
     },
-    plugins: [createCopyPublicPlugin(appFolders)],
+    plugins: [
+      createLoggerPlugin("Vanilla", entryPoints.length, isWatchMode),
+      createCopyPublicPlugin(appFolders),
+    ],
   };
 }
 
@@ -43,15 +48,13 @@ export async function buildVanilla(
     return;
   }
 
-  const startTime = Date.now();
-  const config = createVanillaBuildConfig(entryPoints, appFolders, args);
+  const isWatchMode = args.serve;
+  const config = createVanillaBuildConfig(entryPoints, appFolders, args, isWatchMode);
 
-  if (args.serve) {
+  if (isWatchMode) {
     const ctx = await esbuild.context(config);
     await ctx.watch();
-    console.info(`✓ Vanilla: ${entryPoints.length} apps watching for changes`);
   } else {
     await esbuild.build(config);
-    console.info(`✓ Vanilla: ${entryPoints.length} apps built (${Date.now() - startTime}ms)`);
   }
 }

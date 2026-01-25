@@ -1,0 +1,21 @@
+empty_list: Немає елементів
+folders:
+  desktop: Робочий стіл
+  documents: Документи
+  downloads: Завантаження
+  more_items: Показати більше...
+  music: музика
+  pictures: Картинки
+  recent: Нещодавно використаний
+  reduce_items: Показати менше...
+  title: Каталоги користувачів
+  videos: Відео
+profile:
+  accounts: Відкрийте налаштування облікового запису
+  log_out: Вийти
+  open_onedrive: Відкрийте каталог OneDrive
+  open_user_folder: Відкрити каталог користувача
+seelen_options:
+  open_installation_folder: Відкрийте папку налаштувань Seelen
+  open_log_folder: Відкрийте папку журналу Seelen
+  title: Довідники Seelen

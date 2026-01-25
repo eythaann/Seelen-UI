@@ -1,16 +1,6 @@
 action:
   confirm: Oletko varma?
   confirm_body: Tätä toimintaa ei voida kumota.
-app_launcher:
-  enable: Ota sovelluksen kantoraketti käyttöön
-  launch_on:
-    mouse_over: Vie hiiri päälle
-    primary: Ensisijainen
-  monitor: Tarkkailla
-  runners:
-    cmd: Komento
-    explorer: Juoksua
-    label: Juoksijat
 apps_configurations:
   app:
     bindings: Sidonta (huomautus tarvitaan molemmat vaihtoehdot)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Asennuskansio
   load: Ladata
   settings_file: Asetustiedosto
-  simulate_fullscreen: Simuloi koko näytön tapahtumaa
 extras:
   clear_icons: Tyhjennä järjestelmän kuvakkeiden välimuisti
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Viralliset linkit
   relaunch: Käynnistää uudelleen
   version: Versio
+  version_fixed: >-
+    Sovellus ja WebView2 Runtime -versiot ovat kiinteät. Tämä tarkoittaa, että
+    sovellus ei saa päivityksiä ja WebView2 Runtime ei päivity automaattisesti
+    Windows-päivityksillä.
 general:
   accent_color: Korostusväri
   date_format: Päiväysmuoto
@@ -104,6 +97,7 @@ general:
     available: Saatavilla kuvakepaketit
     selected: Aktiiviset kuvakepaketit
   language: Kieli
+  monday: maanantai
   performance_mode:
     on_battery: Akun päällä
     on_energy_saver: Energiansäästäjällä
@@ -112,7 +106,10 @@ general:
       extreme: Äärimmäinen
       minimal: Minimaalinen
     plugged: Kytketty tai lataus
+  saturday: lauantai
+  start_of_week: Viikon alku
   startup: Suorittaa käynnistyksen yhteydessä?
+  sunday: sunnuntai
   theme:
     available: Käytettävissä olevat teemat
     selected: Aktiiviset teemat
@@ -153,18 +150,28 @@ reset_all_to_default: Nollaa kaikki oletusarvot
 reset_to_default: Nollaa oletusarvoon
 resources:
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
+  corrupted_wallpaper: >-
+    Pikkukuvan purkaminen epäonnistui – videomuoto on vioittunut tai sitä ei
+    tueta
   delete: Poistaa resurssi
   discover: Löydä lisää resursseja
   has_update: Päivitys on käytettävissä
+  high_impact: Suuri vaikutus suorituskykyyn
   import_wallpapers: Tuo paikallisia taustakuvia
   open_folder: Avaa resurssikansio
   outdated: >-
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se
     välttämättä toimi oikein.
+  see_on_website: Katso nettisivuilta
+review_request:
+  not_now: Ei nyt
+  sure: Varma!
+  title: Pidätkö Seelen-käyttöliittymästä?
 save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 see_more: Katso lisää
 shortcuts:
+  duplicate_error: Tämä pikanäppäin on kopioitu
   enable: Ota sisäänrakennettu pikakuvausjärjestelmä
   enable_tooltip: >-
     Poista käytöstä, jos otat käyttöön omat pikakuvausjärjestelmäsi Seelen UI
@@ -209,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: Vaihda edelliseen työtilaan
     switch_workspace: Vaihda työtilaan {{0}}
     toggle_float: Vaihda ikkunan kelluva tila
-    toggle_launcher: Vaihda kantoraketti
     toggle_monocle: Vaihda työtilan monokle -tila
   readonly_tooltip: Tämä on vain luku-pikakuvake
   reset: Palauta laiminlyöntiin
@@ -218,14 +224,6 @@ sides:
   left: Vasen
   right: Oikea
   top: Ylhäältä
-start:
-  message: >-
-    Tervetuloa Seelen UI: hen, Ultimate Desktop -ympäristöön, jossa on
-    sisällytetty laatoitus Windows Manager, parantaaksesi Windows -kokemustasi!
-    Tutustu uuteen tehokkuuden ja monitehtavan aikakauteen intuitiivisella
-    rajapinnalla ja edistyneillä ominaisuuksilla.
-  message_accent: Optimoi tuottavuus tyylillä!
-  title: Tervetuloa!
 toolbar:
   auto_hide: Automaattinen piilo
   delay_to_hide: Viive piilottaa
@@ -246,23 +244,39 @@ update:
 wall:
   backgrounds: Taustakuvat
   blur: Sumeus
+  cancel: Peruuttaa
+  close: Lähellä
+  collection_name: Kokoelman nimi
+  collections: Kokoelmat
   contrast: Kontrasti
+  corrupted_wallpapers_message: 'Vioittuneet taustakuvat, harkitse näiden poistamista:'
+  create: Luoda
+  create_collection: Luo kokoelma
+  default_collection: Oletuskokoelma
+  delete_collection: Poista kokoelma
+  edit_collection: Muokkaa kokoelmaa
   enable: Ota taustakuvan johtaja käyttöön
+  extend: Laajenna ensisijaista
   fit:
     contain: Sisältää
     cover: Kansi
     fill: Täytä
   flipHorizontal: Käännä vaakasuora
   flipVertical: Flip pystysuora
+  generating_thumbnails: Taustakuvien pikkukuvien luominen
   hours: tuntia
   interval: Vaihda taustakuva jokainen
   minutes: minuutti
+  monitor_collection: Näytön kokoelma
+  multimonitor_behaviour: Multimonitorin käyttäytyminen
   muted: Mykistä videon ääni
   no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
+  no_collections: Kokoelmia ei ole vielä luotu. Luo sellainen napsauttamalla +-painiketta.
   objectFit: Tausta Fit
   objectPosition: Tausta Asema
   overlayColor: Päällekkäisväri
   overlayMixBlendMode: Päällekkäinen sekoitus sekoitustila
+  per_monitor: per monitori
   playback: Toistonopeus
   position:
     bottom: Pohja
@@ -270,10 +284,17 @@ wall:
     left: Vasen
     right: Oikea
     top: Top
+  processing_video: Videota käsitellään
   random: Satunnaista diaesitys
   saturation: Saturaatio
   seconds: sekunti
+  select_collection: Valitse Kokoelma
+  thumbnail_generation_complete: Pikkukuvien luominen valmis
+  thumbnail_generation_finished: Pikkukuvien luominen on päättynyt onnistuneesti
+  wallpaper_collection: Taustakuva kokoelma
+  wallpaper_settings: Taustakuvan asetukset
   withOverlay: Päällysteen kanssa
+  workspace_collections: Työtilakokoelmat
 weg:
   auto_hide: Automaattinen piilo
   delay_to_hide: Viive piilottaa
@@ -309,6 +330,18 @@ weg:
   padding: Pehmuste
   show_end_task: Näyttää lopetetun tehtävän tehtäväpalkissa
   width: Leveys
+welcome:
+  give_a_review: Anna arvostelu
+  message: >-
+    Seelen UI on ilmainen ja avoimen lähdekoodin työpöytäympäristö Windowsille.
+    Täällä voit hallita täysin sitä, miten työpöytäsi näyttää ja käyttäytyy,
+    joten voit mukauttaa jokaisen yksityiskohdan työnkulkusi ja tyylisi
+    mukaiseksi.
+  ok: Aloitetaan!
+  review: >-
+    Jos pidät Seelen-käyttöliittymän käytöstä, harkitse arvostelun jättämistä
+    kauppaan – palautteesi auttaa projektia kasvamaan ja kehittymään.
+  title: Tervetuloa Seelen-käyttöliittymään!
 widget:
   enable: Ota tämä widget käyttöön
   enable_for_monitor: Ota käyttöön tällä näytöllä

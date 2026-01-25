@@ -20,9 +20,6 @@ context_menu:
   restore: Анхдагч болгож сэргээнэ үү
   settings: Тохиргоо
   task_manager: Ажлын менежер
-keyboard:
-  more: Илүү олон гарын тохиргоо
-  title: Товчлоггоо өмуур
 media:
   default_multimedia_volume: Мультимедиа муж
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Дурсгал дурсгалын төхөөрөмж
   output_devices: Гаралтын төхөөрөмжүүд
   players: Хэвлэл хэвлэл тоглогч
-network:
-  available: Боломжтой сүлжээнүүд
-  connect: Холбох
-  connected: '-д холбогдсон'
-  disconnect: Тусгаарлах
-  hidden: Цэг сонссон сүлж
-  more: Сүлжээний илүү олон тохиргоо
-  not_found: Сүлжээ олдсонгүй
-  placeholder:
-    password: Нууц үг
-  saved: Хадгалсан сүлжээнүүд
-  scanning: Сүлжээг хайж байна
-  secured: Шифрлэгдсэн сүлжээ
 notifications:
   clear: Бүгдийг цэвэрлэ
   empty: Мэдэгдэл байхгүй байна
@@ -70,24 +54,3 @@ settings:
   power: Хүч чадал
   restart: Дахин ачааллах
   title: Тохиргоо
-userhome:
-  empty_list: Зүйл байхгүй
-  folders:
-    desktop: Явган худлаа
-    documents: Дч дүрэм
-    downloads: Татаж авах
-    more_items: Илүү ихийг харуулах ...
-    music: Хөгжим
-    pictures: Зураг
-    recent: Саяхан ашигласан
-    reduce_items: Бага харуулах ...
-    title: Хэрэглэгчийн газар
-    videos: Видео бичлэг
-  profile:
-    accounts: Дансны тохиргоог нээх
-    open_onedrive: OnedRive директорыг нээх
-    open_user_folder: Хэрэглэгчийн нэрийг нээх
-  seelen_options:
-    open_installation_folder: Seelen Тохиргоо хавтсыг нээнэ үү
-    open_log_folder: Seelen Log хавтасыг нээнэ үү
-    title: Seeln директорууд

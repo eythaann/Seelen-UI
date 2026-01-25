@@ -1,0 +1,67 @@
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.transfer {
+  :global(.ant-transfer-list) {
+    overflow: hidden;
+
+    :global(.ant-transfer-list-header) {
+      :global(.ant-transfer-list-header-selected) {
+        display: none;
+      }
+
+      :global(.ant-transfer-list-header-title) {
+        font-weight: 600;
+        text-align: center;
+      }
+    }
+
+    :global(.ant-transfer-list-body) {
+      background-color: var(--color-gray-50);
+      padding: var(--spacing-2xs) var(--spacing-xs);
+    }
+  }
+}
+
+.tagList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2xs);
+
+  .tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px var(--spacing-2xs);
+    height: 20px;
+    border-radius: 6px;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-900);
+    font-size: 0.5rem;
+    line-height: 10px;
+  }
+}
+
+.palette {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+
+  > div {
+    flex: 1;
+    height: 100%;
+  }
+}
+
+.wallpaperButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--spacing-l);
+}

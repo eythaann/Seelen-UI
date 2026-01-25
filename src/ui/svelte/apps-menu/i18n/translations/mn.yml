@@ -1,0 +1,11 @@
+all: Бүх програмууд
+back: Буцах
+disband: Фолдерыг хаах
+folder: Хавтас
+no_matching_items: Таны хайлтад тохирох зүйл олдсонгүй
+open_file_location: Файлын байршлыг нээх
+pin: Pin
+run_as_admin: Администратороор ажиллуулна уу
+unpin: Буулгах
+welcome_message: Seelen UI програмын цэсэнд тавтай морилно уу.
+welcome_message2: Энэ таб дээр та дуртай програмуудаа хавчуулж болно.

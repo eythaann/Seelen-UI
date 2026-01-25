@@ -1,11 +1,5 @@
 cancel: Zrušit
 done: Hotovo
-drivers:
-  got_it: Mám to
-  monitor_disabled: >-
-    Zdá se, že některé ovladače monitoru jsou zakázány. Povolte je, aby
-    uživatelské rozhraní Seelen fungovalo správně.
-  monitor_disabled_title: Ovladače monitoru jsou zakázány
 resource:
   added: Byl přidán nový zdroj
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: Konfigurační soubor je poškozen a místo něj se používají výchozí hodnoty.
   corrupted_file_path: Poškozená cesta k souboru
   download: Přejděte na stránku stahování
+  files_integrity: >-
+    Nepodařilo se nám ověřit integritu souborů aplikace.
+
+    K tomu může dojít, pokud byly soubory změněny, poškozeny nebo instalace není
+    úplná.
+
+    Z bezpečnostních důvodů nemůže Seelen UI pokračovat.
+
+    Nainstalujte jej znovu z oficiálních stránek.
+  files_integrity_title: Výstraha zabezpečení – Kontrola integrity souborů se nezdařila
   not_found: WebView2 Runtime nebyl nalezen
   not_found_description: Seelen UI vyžaduje Webview2 Runtime. Nainstalujte jej prosím.
   outdated: WebView2 Runtime je zastaralé

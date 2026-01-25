@@ -1,16 +1,6 @@
 action:
   confirm: Jeste li sigurni?
   confirm_body: Ova se radnja ne može poništiti.
-app_launcher:
-  enable: Omogućite pokretač aplikacija
-  launch_on:
-    mouse_over: Prijeđite mišem
-    primary: Primarni
-  monitor: Monitor za prikaz
-  runners:
-    cmd: Naredba
-    explorer: Trčanje
-    label: Trkači
 apps_configurations:
   app:
     bindings: Vezivanje (napomena potrebne su obje opcije)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Mapa za instalaciju
   load: Opterećenje
   settings_file: Datoteka postavki
-  simulate_fullscreen: Simulirajte događaj preko cijelog zaslona
 extras:
   clear_icons: Očistite predmemoriju ikona sustava
   clear_icons_tooltip: Ponovno pokretanje moglo bi se u potpunosti stupiti na sve widgete
@@ -95,6 +84,10 @@ extras:
   links: Službene veze
   relaunch: Ponovno pokretanje
   version: Verzija
+  version_fixed: >-
+    Verzije aplikacije i WebView2 Runtime su popravljene. To znači da aplikacija
+    neće primati ažuriranja i WebView2 Runtime neće biti automatski ažuriran
+    ažuriranjima za Windows.
 general:
   accent_color: Akcentna boja
   date_format: Format datuma
@@ -102,6 +95,7 @@ general:
     available: Dostupni paketi ikona
     selected: Aktivni paketi ikona
   language: Jezik
+  monday: ponedjeljak
   performance_mode:
     on_battery: Na bateriji
     on_energy_saver: Na uštedu energije
@@ -110,7 +104,10 @@ general:
       extreme: Ekstrem
       minimal: Minimalan
     plugged: Priključeno ili punjenje
+  saturday: subota
+  start_of_week: Početak tjedna
   startup: Trčati na startup?
+  sunday: nedjelja
   theme:
     available: Dostupne teme
     selected: Aktivne teme
@@ -153,18 +150,28 @@ resources:
   app_outdated: >-
     Ovaj resurs zahtijeva da novija verzija Seelen korisničkog sučelja radi
     ispravno.
+  corrupted_wallpaper: >-
+    Izdvajanje minijature nije uspjelo - format videozapisa je oštećen ili nije
+    podržan
   delete: Izbriši resurs
   discover: Otkrijte više resursa
   has_update: Dostupno je ažuriranje
+  high_impact: Veliki utjecaj na performanse
   import_wallpapers: Uvoz lokalnih pozadina
   open_folder: Mapa otvorenih resursa
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju seelen korisničkog sučelja i
     možda neće raditi ispravno.
+  see_on_website: Vidi na web stranici
+review_request:
+  not_now: Ne sad
+  sure: Naravno!
+  title: Uživate li u Seelen korisničkom sučelju?
 save: Uštedjeti
 save_and_restart: Spremi i ponovno pokrenite
 see_more: Pogledajte više
 shortcuts:
+  duplicate_error: Ovaj prečac je dupliciran
   enable: Omogući ugrađeni sustav prečaca
   enable_tooltip: >-
     Onemogući ako ćete implementirati vlastiti sustav prečaca pomoću klijenta
@@ -209,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: Prebacite se na prethodni radni prostor
     switch_workspace: Prebacite se na radni prostor {{0}}
     toggle_float: Prebacivanje prozora plutajući način
-    toggle_launcher: Pokretač prebacivanja
     toggle_monocle: Prebacite Monocle način rada radnog prostora
   readonly_tooltip: Ovo je prečac samo za čitanje
   reset: Ponovno postavite na zadane vrijednosti
@@ -218,14 +224,6 @@ sides:
   left: Lijevo
   right: Pravo
   top: Vrh
-start:
-  message: >-
-    Dobrodošli na Seelen UI, Ultimate Desktop okruženje s ugrađenim popločanim
-    Windows Managerom kako bi se poboljšalo vaše iskustvo Windows! Istražite
-    novu eru učinkovitosti i multitaskinga s našim intuitivnim sučeljem i
-    naprednim značajkama.
-  message_accent: Optimizirajte svoju produktivnost stilom!
-  title: Dobrodošli!
 toolbar:
   auto_hide: Auto sakrij
   delay_to_hide: Odgoda za skrivanje
@@ -246,23 +244,39 @@ update:
 wall:
   backgrounds: Pozadine
   blur: Zamutiti
+  cancel: Otkazati
+  close: Zatvoriti
+  collection_name: Naziv zbirke
+  collections: Zbirke
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Oštećene pozadine, razmislite o brisanju ovih:'
+  create: Stvoriti
+  create_collection: Stvori zbirku
+  default_collection: Zadana zbirka
+  delete_collection: Izbriši zbirku
+  edit_collection: Uredi zbirku
   enable: Omogući upravitelja pozadina
+  extend: Proširi primarni
   fit:
     contain: Obuzdati
     cover: Poklopac
     fill: Ispuniti
   flipHorizontal: Okrenuti vodoravni
   flipVertical: Okrenuti okomit
+  generating_thumbnails: Generiranje sličica pozadine
   hours: sate
   interval: Promijenite pozadinu svaku
   minutes: minute
+  monitor_collection: Zbirka monitora
+  multimonitor_behaviour: Ponašanje više monitora
   muted: Isključi video zvuk
   no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
+  no_collections: Još nije stvorena nijedna zbirka. Kliknite gumb + da biste ga izradili.
   objectFit: Fit
   objectPosition: Pozadinski položaj
   overlayColor: Boja prekrivanja
   overlayMixBlendMode: Način miješanja preklapanja mješavine
+  per_monitor: Po monitoru
   playback: Brzina reprodukcije
   position:
     bottom: Dno
@@ -270,10 +284,17 @@ wall:
     left: Lijevo
     right: Pravo
     top: Vrh
+  processing_video: Obrada videa
   random: Randomizirana prezentacija
   saturation: Zasićenost
   seconds: sekundi
+  select_collection: Odaberite Zbirka
+  thumbnail_generation_complete: Generiranje sličica dovršeno
+  thumbnail_generation_finished: Generiranje sličica je uspješno završeno
+  wallpaper_collection: Zbirka tapeta
+  wallpaper_settings: Postavke pozadine
   withOverlay: S prekrivanjem
+  workspace_collections: Zbirke radnog prostora
 weg:
   auto_hide: Auto sakrij
   delay_to_hide: Odgoda za skrivanje
@@ -309,6 +330,18 @@ weg:
   padding: Jadnja
   show_end_task: Pokažite krajnji zadatak na zadaćama
   width: Širina
+welcome:
+  give_a_review: Dajte recenziju
+  message: >-
+    Seelen UI je besplatno desktop okruženje otvorenog koda za Windows. Ovdje
+    imate potpunu kontrolu nad izgledom i ponašanjem vaše radne površine, što
+    vam omogućuje da prilagodite svaki detalj kako bi odgovarao vašem tijeku
+    rada i stilu.
+  ok: Počnimo!
+  review: >-
+    Ako volite koristiti Seelen UI, razmislite o tome da ostavite recenziju u
+    trgovini - vaše povratne informacije pomažu razvoju i poboljšanju projekta.
+  title: Dobro došli u Seelen UI!
 widget:
   enable: Omogući ovaj widget
   enable_for_monitor: Omogućite ovaj monitor

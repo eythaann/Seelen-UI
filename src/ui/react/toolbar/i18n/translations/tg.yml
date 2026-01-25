@@ -20,9 +20,6 @@ context_menu:
   restore: Барқарор кардан
   settings: Танзимотҳо
   task_manager: Менеҷери вазифа
-keyboard:
-  more: Танзимоти клавиатура
-  title: Тарҳбандии клавиатура
 media:
   default_multimedia_volume: Ҳаҷми мултимедиявӣ
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Дастгоҳҳои вуруд
   output_devices: Дастгоҳҳои баромад
   players: Бозингарони ВАО
-network:
-  available: Шабакаҳои дастрас
-  connect: Пайваст кардан
-  connected: Ба
-  disconnect: Ьудо кардан
-  hidden: Шабакаи пинҳонӣ
-  more: Танзимоти шабака
-  not_found: Ягон шабакаҳо ёфт нашуд
-  placeholder:
-    password: Номи махфӣ
-  saved: Шабакаҳои захирашуда
-  scanning: Сканкунии шабакаҳо
-  secured: Шабакаи рамзгузорӣ
 notifications:
   clear: Тамоман тоза
   empty: Огоҳӣ
@@ -70,24 +54,3 @@ settings:
   power: Нерӯ
   restart: Оғози дубора
   title: Танзимот
-userhome:
-  empty_list: Ҳеҷ чиз нест
-  folders:
-    desktop: Мизи корӣ
-    documents: Ҳуҷҷатҳо
-    downloads: Боргириҳо
-    more_items: Мӯҳтарам ...
-    music: Мусиқӣ
-    pictures: Тасвирҳо
-    recent: Ба наздикӣ истифода бурд
-    reduce_items: Нишон диҳед ...
-    title: Директорҳои корбар
-    videos: Видео
-  profile:
-    accounts: Танзимоти ҳисоб
-    open_onedrive: Кушодани директорияи Ondrive
-    open_user_folder: Феҳристи кушодаи корбар
-  seelen_options:
-    open_installation_folder: Папкаи танзимоти Senelenро кушоед
-    open_log_folder: Папкаи сабти Seelen кушоед
-    title: Директори Селен

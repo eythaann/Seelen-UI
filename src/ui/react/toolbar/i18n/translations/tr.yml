@@ -20,9 +20,6 @@ context_menu:
   restore: Varsayılana Geri Yükle
   settings: Ayarlar
   task_manager: Görev Yöneticisi
-keyboard:
-  more: Daha Fazla Klavye Ayarı
-  title: Klavye Düzeni
 media:
   default_multimedia_volume: Multimedya Hacmi
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Giriş cihazları
   output_devices: Çıkış cihazları
   players: Medya Oynatıcıları
-network:
-  available: Mevcut ağlar
-  connect: Bağlan
-  connected: 'Şuraya bağlanıldı:'
-  disconnect: Bağlantıyı Kes
-  hidden: Gizli Ağ
-  more: Daha Fazla Ağ Ayarı
-  not_found: Ağ bulunamadı
-  placeholder:
-    password: Şifre
-  saved: Kayıtlı ağlar
-  scanning: Ağlar taranıyor
-  secured: Şifreli ağ
 notifications:
   clear: Tümünü temizle
   empty: Bildirim yok
@@ -70,24 +54,3 @@ settings:
   power: Güç
   restart: Yeniden başlat
   title: Ayarlar
-userhome:
-  empty_list: Ürün yok
-  folders:
-    desktop: Masaüstü
-    documents: Belgeler
-    downloads: İndirmeler
-    more_items: Daha fazlasını göster...
-    music: Müzik
-    pictures: Resimler
-    recent: Yakın zamanda kullanılmış
-    reduce_items: Daha az göster...
-    title: Kullanıcı dizinleri
-    videos: Videolar
-  profile:
-    accounts: Hesap ayarlarını aç
-    open_onedrive: OneDrive dizinini açın
-    open_user_folder: Kullanıcı dizinini aç
-  seelen_options:
-    open_installation_folder: Seelen ayarlar klasörünü açın
-    open_log_folder: Seelen günlük klasörünü açın
-    title: Seelen dizinleri

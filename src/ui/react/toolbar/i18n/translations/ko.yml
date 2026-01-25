@@ -20,9 +20,6 @@ context_menu:
   restore: 기본값으로 복원
   settings: 설정
   task_manager: 작업 관리자
-keyboard:
-  more: 더 많은 키보드 설정
-  title: 키보드 레이아웃
 media:
   default_multimedia_volume: 멀티미디어 볼륨
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: 입력 장치
   output_devices: 출력 장치
   players: 미디어 플레이어
-network:
-  available: 사용 가능한 네트워크
-  connect: 연결
-  connected: 연결됨
-  disconnect: 연결 끊기
-  hidden: 숨겨진 네트워크
-  more: 추가 네트워크 설정
-  not_found: 네트워크를 찾을 수 없음
-  placeholder:
-    password: 비밀번호
-  saved: 저장된 네트워크
-  scanning: 네트워크 검색 중
-  secured: 암호화된 네트워크
 notifications:
   clear: 모두 지우기
   empty: 알림 없음
@@ -70,24 +54,3 @@ settings:
   power: 전원
   restart: 다시 시작
   title: 설정
-userhome:
-  empty_list: 항목 없음
-  folders:
-    desktop: 데스크톱
-    documents: 문서
-    downloads: 다운로드
-    more_items: 더 보기...
-    music: 음악
-    pictures: 사진
-    recent: 최근 사용
-    reduce_items: 덜 보기...
-    title: 사용자 디렉터리
-    videos: 동영상
-  profile:
-    accounts: 계정 설정 열기
-    open_onedrive: OneDrive 디렉터리 열기
-    open_user_folder: 사용자 디렉터리 열기
-  seelen_options:
-    open_installation_folder: Seelen 설정 폴더 열기
-    open_log_folder: Seelen 로그 폴더 열기
-    title: 디렉터리 보기

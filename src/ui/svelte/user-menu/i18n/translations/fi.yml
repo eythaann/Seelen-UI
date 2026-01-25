@@ -1,0 +1,21 @@
+empty_list: Ei kohteita
+folders:
+  desktop: Työpöytä
+  documents: Asiakirjat
+  downloads: Lataukset
+  more_items: Näytä lisää...
+  music: Musiikki
+  pictures: Kuvia
+  recent: Äskettäin käytetty
+  reduce_items: Näytä vähemmän...
+  title: Käyttäjähakemistot
+  videos: Videot
+profile:
+  accounts: Avaa tilin asetukset
+  log_out: Kirjaudu ulos
+  open_onedrive: Avaa OneDrive-hakemisto
+  open_user_folder: Avaa käyttäjähakemisto
+seelen_options:
+  open_installation_folder: Avaa Seelen-asetuskansio
+  open_log_folder: Avaa Seelen-lokikansio
+  title: Seelen-hakemistot

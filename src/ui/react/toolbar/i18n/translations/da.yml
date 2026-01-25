@@ -20,9 +20,6 @@ context_menu:
   restore: Gendan til standard
   settings: Indstillinger
   task_manager: Task Manager
-keyboard:
-  more: Flere tastaturindstillinger
-  title: Tastaturlayout
 media:
   default_multimedia_volume: Multimedievolumen
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Input-enheder
   output_devices: Output-enheder
   players: Medieafspillere
-network:
-  available: Tilgængelige netværk
-  connect: Forbinde
-  connected: Forbundet til
-  disconnect: Koble fra
-  hidden: Skjult netværk
-  more: Flere netværksindstillinger
-  not_found: Ingen netværk fundet
-  placeholder:
-    password: Adgangskode
-  saved: Gemte netværk
-  scanning: Scanning efter netværk
-  secured: Krypteret netværk
 notifications:
   clear: Ryd alle
   empty: Ingen meddelelser
@@ -70,24 +54,3 @@ settings:
   power: Magt
   restart: Genstart
   title: Indstillinger
-userhome:
-  empty_list: Ingen genstande
-  folders:
-    desktop: Skrivebord
-    documents: Dokumenter
-    downloads: Downloads
-    more_items: Vis mere...
-    music: Musik
-    pictures: Billeder
-    recent: Brugt for nylig
-    reduce_items: Vis mindre...
-    title: Brugerkataloger
-    videos: Videoer
-  profile:
-    accounts: Åbn kontoindstillinger
-    open_onedrive: Åbn OneDrive-biblioteket
-    open_user_folder: Åbn brugerkatalog
-  seelen_options:
-    open_installation_folder: Åbn mappen med Seelen-indstillinger
-    open_log_folder: Åbn Seelen-logmappen
-    title: Seelen-biblioteker

@@ -1,0 +1,21 @@
+empty_list: 沒有商品
+folders:
+  desktop: 桌面
+  documents: 文件
+  downloads: 下載
+  more_items: 顯示更多...
+  music: 音樂
+  pictures: 圖片
+  recent: 最近使用過
+  reduce_items: 顯示較少...
+  title: 用戶目錄
+  videos: 影片
+profile:
+  accounts: 開設賬戶設置
+  log_out: 退出
+  open_onedrive: 打開 OneDrive 目錄
+  open_user_folder: 打開用戶目錄
+seelen_options:
+  open_installation_folder: 打開 Seelen 設置文件夾
+  open_log_folder: 打開 Seelen 日誌文件夾
+  title: 塞倫目錄

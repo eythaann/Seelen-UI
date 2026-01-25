@@ -19,8 +19,13 @@ const ActionsScope = {
   open(path: string) {
     invoke(SeelenCommand.OpenFile, { path });
   },
-  run(program: string, args: string[], workingDir: string) {
-    invoke(SeelenCommand.Run, { program, args, workingDir });
+  run(
+    program: string,
+    args: string[] | null = null,
+    workingDir: string | null = null,
+    elevated: boolean = false,
+  ) {
+    invoke(SeelenCommand.Run, { program, args, workingDir, elevated });
   },
   copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);

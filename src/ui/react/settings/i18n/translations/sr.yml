@@ -1,16 +1,6 @@
 action:
   confirm: Јесте ли сигурни?
   confirm_body: Ова радња се не може поништити.
-app_launcher:
-  enable: Омогући бацач апликација
-  launch_on:
-    mouse_over: Пређите мишем
-    primary: Примарни
-  monitor: Монитор за приказивање
-  runners:
-    cmd: Командант
-    explorer: Трчати
-    label: Тркачи
 apps_configurations:
   app:
     bindings: Везивање (белешка су обе опције потребне)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Инсталациона мапа
   load: Оптеретити
   settings_file: Подешавања
-  simulate_fullscreen: Симулирајте догађај преко целог екрана
 extras:
   clear_icons: Цлеар Систем Ицонс Цацхе
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Званичне везе
   relaunch: Поновити
   version: Верзија
+  version_fixed: >-
+    Верзије апликације и ВебВиев2 Рунтиме су поправљене. То значи да апликација
+    неће примати ажурирања и да ВебВиев2 Рунтиме неће бити аутоматски ажуриран
+    ажурирањима за Виндовс.
 general:
   accent_color: Боја нагласности
   date_format: Формат датума
@@ -104,6 +97,7 @@ general:
     available: Доступни пакети икона
     selected: Активни пакети икона
   language: Језик
+  monday: понедељак
   performance_mode:
     on_battery: На батерији
     on_energy_saver: На уштеду енергије
@@ -112,7 +106,10 @@ general:
       extreme: Екстремни
       minimal: Минималан
     plugged: Прикључен или пуњење
+  saturday: Субота
+  start_of_week: Почетак недеље
   startup: Ради на покретању?
+  sunday: недеља
   theme:
     available: Доступне теме
     selected: Активне теме
@@ -153,18 +150,26 @@ reset_all_to_default: Ресетујте све за подразумеване 
 reset_to_default: Ресетујте на подразумевану вредност
 resources:
   app_outdated: Овај ресурс захтева новију верзију СЕЕЛЕН-а да ради правилно.
+  corrupted_wallpaper: Екстраховање сличице није успело – оштећен или неподржан видео формат
   delete: Избриши ресурс
   discover: Откријте више ресурса
   has_update: Доступно је ажурирање
+  high_impact: Велики утицај на перформансе
   import_wallpapers: Увоз локалне позадине
   open_folder: Отворите мапу ресурса
   outdated: >-
     Овај ресурс је дизајниран за старију верзију СЕЕЛЕН УИ и можда неће радити
     исправно.
+  see_on_website: Погледајте на веб страници
+review_request:
+  not_now: Не сада
+  sure: Наравно!
+  title: Уживате у корисничком интерфејсу Сеелен?
 save: сачувати
 save_and_restart: Сачувај и поново покрените
 see_more: Видети више
 shortcuts:
+  duplicate_error: Ова пречица је дуплирана
   enable: Омогућите уграђене системе пречаца
   enable_tooltip: >-
     Онемогућите ако ћете имплементирати сопствени систем пречаца помоћу СЕЕЛЕН
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Пређите на претходни радни простор
     switch_workspace: Пређите на радни простор {{0}}
     toggle_float: Укључивање прозора Флоат режим
-    toggle_launcher: Пребацивање бацача
     toggle_monocle: Укључите режим Монокла Моноцле Воркспаце
   readonly_tooltip: Ово је пречица само за читање
   reset: Ресетујте на подразумеване вредности
@@ -218,13 +222,6 @@ sides:
   left: Лево
   right: Јел тако
   top: На врху
-start:
-  message: >-
-    Добродошли у СЕЕЛЕН УИ, Ултимате Десктоп окружење са уграђеним виљушкар на
-    плочицем за повећање вашег Виндовс искуства! Истражите нову еру ефикасности
-    и више задатака са нашим интуитивним интерфејсом и напредним функцијама.
-  message_accent: Оптимизирајте своју продуктивност стилом!
-  title: Добродошли!
 toolbar:
   auto_hide: Аутоматска кожа
   delay_to_hide: Одложите да се сакријете
@@ -245,23 +242,41 @@ update:
 wall:
   backgrounds: Позадине
   blur: Замутити
+  cancel: Откажи
+  close: Затвори
+  collection_name: Назив колекције
+  collections: Збирке
   contrast: Контраст
+  corrupted_wallpapers_message: 'Оштећене позадине, размислите о брисању ових:'
+  create: Креирај
+  create_collection: Направите колекцију
+  default_collection: Подразумевана колекција
+  delete_collection: Избриши колекцију
+  edit_collection: Уреди колекцију
   enable: Омогућите менаџера позадина
+  extend: Продужите примарни
   fit:
     contain: Садрзати
     cover: Покривати
     fill: Нанети
   flipHorizontal: Флип хоризонтално
   flipVertical: Вертикални
+  generating_thumbnails: Генерисање сличица позадине
   hours: сати
   interval: Промените позадину сваком
   minutes: минут
+  monitor_collection: Монитор Цоллецтион
+  multimonitor_behaviour: Мултимонитор Бехавиор
   muted: Искључите звук видео записа
   no_background: Празан презентацију, уместо тога користећи прибор за тему.
+  no_collections: >-
+    Још увек није направљена ниједна збирка. Кликните на дугме + да бисте га
+    креирали.
   objectFit: Позадина погодна
   objectPosition: Позадински положај
   overlayColor: Прекривање боје
   overlayMixBlendMode: Режим прекривене мешавине помешања
+  per_monitor: По монитору
   playback: Брзина репродукције
   position:
     bottom: Дно
@@ -269,10 +284,17 @@ wall:
     left: Лево
     right: У праву
     top: На врху
+  processing_video: Обрада видео записа
   random: Рандомизе СлидеСхов
   saturation: Засићење
   seconds: секунди
+  select_collection: Изаберите Колекција
+  thumbnail_generation_complete: Генерисање сличица је завршено
+  thumbnail_generation_finished: Генерисање сличица је успешно завршено
+  wallpaper_collection: Колекција тапета
+  wallpaper_settings: Подешавања позадине
   withOverlay: Са прекривањем
+  workspace_collections: Збирке радног простора
 weg:
   auto_hide: Аутоматска кожа
   delay_to_hide: Одложите да бисте се сакрили
@@ -308,6 +330,19 @@ weg:
   padding: Подлокнути
   show_end_task: Прикажи крајњи задатак на траци задатака
   width: Ширина
+welcome:
+  give_a_review: Дајте рецензију
+  message: >-
+    Сеелен УИ је бесплатно десктоп окружење отвореног кода за Виндовс. Овде
+    имате потпуну контролу над изгледом и понашањем ваше радне површине, што вам
+    омогућава да прилагодите сваки детаљ како би одговарао вашем току рада и
+    стилу.
+  ok: Почнимо!
+  review: >-
+    Ако уживате у коришћењу корисничког интерфејса Сеелен, размислите о томе да
+    оставите рецензију у продавници — ваше повратне информације помажу да
+    пројекат расте и унапређује се.
+  title: Добродошли у Сеелен УИ!
 widget:
   enable: Омогућите овај виџет
   enable_for_monitor: Омогући на овом монитору

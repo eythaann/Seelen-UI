@@ -10,17 +10,20 @@
   Pop $0
 
   ; Clean static folder to remove assets from previous versions
-  ${If} ${FileExists} "$INSTDIR\static\*.*"
-    DetailPrint 'Cleaning static folder from previous installation...'
-    RMDir /r "$INSTDIR\static"
-  ${EndIf}
+  DetailPrint 'Cleaning static folder from previous installation...'
+  RMDir /r "$INSTDIR\static"
 
-  FILE /a "${__FILEDIR__}\..\..\sluhk.dll" ;
+  DetailPrint 'Cleaning webview2 runtime from previous installation...'
+  RMDir /r "$INSTDIR\runtime"
+
+  File /a "${__FILEDIR__}\..\..\sluhk.dll"
+  File /a "${__FILEDIR__}\..\..\SHA256SUMS"
+  File /a "${__FILEDIR__}\..\..\SHA256SUMS.sig"
 
   ; Include PDB file only for nightly builds
   ${StrLoc} $0 "${VERSION}" "nightly" ">"
   ${If} $0 != ""
-    FILE /a "${__FILEDIR__}\..\..\seelen_ui.pdb"
+    File /a "${__FILEDIR__}\..\..\seelen_ui.pdb"
   ${EndIf}
 !macroend
 
@@ -45,6 +48,11 @@
 !macroend
 
 !macro NSIS_HOOK_POSTUNINSTALL
+  Delete "$INSTDIR\sluhk.dll"
+  Delete "$INSTDIR\SHA256SUMS"
+  Delete "$INSTDIR\SHA256SUMS.sig"
+  Delete "$INSTDIR\seelen_ui.pdb"
+
   ; Refresh file associations icons
   !insertmacro UPDATEFILEASSOC
 !macroend

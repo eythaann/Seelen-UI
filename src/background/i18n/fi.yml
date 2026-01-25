@@ -1,11 +1,5 @@
 cancel: Peruuttaa
 done: Tehty
-drivers:
-  got_it: Sain sen
-  monitor_disabled: >-
-    Näyttää siltä, että jotkin näytönohjaimet on poistettu käytöstä. Ota ne
-    käyttöön, jotta Seelen UI toimisi oikein.
-  monitor_disabled_title: Näytön ohjaimet on poistettu käytöstä
 resource:
   added: Uusi resurssi on lisätty
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: Määritystiedosto on vioittunut ja käyttää sen sijaan oletusarvoja.
   corrupted_file_path: Vioittunut tiedostopolku
   download: Siirry lataussivulle
+  files_integrity: >-
+    Emme voineet varmistaa sovellustiedostojen eheyttä.
+
+    Tämä voi tapahtua, jos tiedostoja on muokattu, vioittunut tai asennus on
+    epätäydellinen.
+
+    Turvallisuussyistä Seelen UI ei voi jatkaa.
+
+    Asenna se uudelleen viralliselta verkkosivustolta.
+  files_integrity_title: Suojaushälytys – Tiedostojen eheyden tarkistus epäonnistui
   not_found: WebView2:n suoritusaikaa ei löydy
   not_found_description: Seelen-käyttöliittymä vaatii Webview2 Runtime -sovelluksen. Asenna se.
   outdated: WebView2 Runtime vanhentunut

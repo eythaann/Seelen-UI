@@ -20,9 +20,6 @@ context_menu:
   restore: Atkurti numatytąjį nustatymą
   settings: Nustatymai
   task_manager: Užduočių tvarkyklė
-keyboard:
-  more: Daugiau klaviatūros nustatymų
-  title: Klaviatūros išdėstymas
 media:
   default_multimedia_volume: Daugialypės terpės apimtis
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Įvesties įrenginiai
   output_devices: Išvesties įrenginiai
   players: Žiniasklaidos žaidėjai
-network:
-  available: Galimi tinklai
-  connect: Prisijungti
-  connected: Prisijungta prie
-  disconnect: Atjungti
-  hidden: Paslėptas tinklas
-  more: Daugiau tinklo nustatymų
-  not_found: Jokių tinklų nerasta
-  placeholder:
-    password: Slaptažodis
-  saved: Išsaugoti tinklai
-  scanning: Tinklų nuskaitymas
-  secured: Šifruotas tinklas
 notifications:
   clear: Išvalyti viską
   empty: Jokių pranešimų
@@ -70,24 +54,3 @@ settings:
   power: Galia
   restart: Perkrauti
   title: Nustatymai
-userhome:
-  empty_list: Jokių daiktų
-  folders:
-    desktop: Stalinis kompiuteris
-    documents: Dokumentai
-    downloads: Atsisiuntimai
-    more_items: Rodyti daugiau...
-    music: Muzika
-    pictures: Nuotraukos
-    recent: Neseniai naudotas
-    reduce_items: Rodyti mažiau...
-    title: Naudotojų katalogai
-    videos: Vaizdo įrašai
-  profile:
-    accounts: Atidarytos paskyros nustatymai
-    open_onedrive: Atidarykite "OneDrive" katalogą
-    open_user_folder: Atidarykite naudotojo katalogą
-  seelen_options:
-    open_installation_folder: Atidarykite "Seelen" nustatymų aplanką
-    open_log_folder: Atidarykite "Seelen" žurnalo aplanką
-    title: Seelen katalogai

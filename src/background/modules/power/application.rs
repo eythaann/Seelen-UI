@@ -13,12 +13,13 @@ use windows::Win32::{
         SystemServices::GUID_BATTERY_PERCENTAGE_REMAINING,
     },
     UI::WindowsAndMessaging::{
-        DEVICE_NOTIFY_CALLBACK, PBT_APMPOWERSTATUSCHANGE, WM_POWERBROADCAST,
+        DEVICE_NOTIFY_CALLBACK, PBT_APMPOWERSTATUSCHANGE, PBT_APMRESUMEAUTOMATIC,
+        PBT_APMRESUMESUSPEND, WM_POWERBROADCAST,
     },
 };
 
 use crate::{
-    error::Result,
+    error::{Result, ResultLogExt},
     event_manager,
     modules::power::domain::power_mode_to_serializable,
     trace_lock,
@@ -27,14 +28,9 @@ use crate::{
 
 use super::domain::{battery_to_slu_battery, power_status_to_serializable};
 
-pub static POWER_MANAGER: LazyLock<Arc<Mutex<PowerManager>>> = LazyLock::new(|| {
-    let pm = match PowerManager::try_create_instance() {
-        Ok(pm) => pm,
-        Err(err) => {
-            log::error!("Failed to create PowerManager instance: {err}");
-            PowerManager::default()
-        }
-    };
+static POWER_MANAGER: LazyLock<Arc<Mutex<PowerManager>>> = LazyLock::new(|| {
+    let mut pm = PowerManager::new();
+    pm.init().log_error();
     Arc::new(Mutex::new(pm))
 });
 
@@ -51,12 +47,18 @@ pub struct PowerManager {
 event_manager!(PowerManager, PowerManagerEvent);
 
 impl PowerManager {
-    fn try_create_instance() -> Result<Self> {
-        let mut instance = Self {
-            power_status: Self::get_power_status()?,
-            batteries: Self::get_batteries()?,
-            ..Default::default()
-        };
+    pub fn instance() -> &'static Arc<Mutex<Self>> {
+        &POWER_MANAGER
+    }
+
+    fn new() -> Self {
+        Self::default()
+    }
+
+    fn init(&mut self) -> Result<()> {
+        // Get initial power status and batteries
+        self.power_status = Self::get_power_status()?;
+        self.batteries = Self::get_batteries()?;
 
         // https://learn.microsoft.com/en-us/windows/win32/api/powersetting/nf-powersetting-powerregisterforeffectivepowermodenotifications#remarks
         unsafe {
@@ -68,7 +70,7 @@ impl PowerManager {
                 None,
                 &mut unregister_token_ptr,
             )?;
-            instance.power_mode_event_token = Some(unregister_token_ptr as isize);
+            self.power_mode_event_token = Some(unregister_token_ptr as isize);
         }
 
         // https://learn.microsoft.com/en-us/windows/win32/api/powersetting/nf-powersetting-powersettingregisternotification#remarks
@@ -87,12 +89,12 @@ impl PowerManager {
                 &mut unregister_token_ptr,
             )
             .ok()?;
-            instance.power_setting_battery_percent_token =
+            self.power_setting_battery_percent_token =
                 Some(HPOWERNOTIFY(unregister_token_ptr as isize));
         }
 
         subscribe_to_background_window(Self::on_bg_window_proc);
-        Ok(instance)
+        Ok(())
     }
 
     unsafe extern "system" fn on_effective_power_mode_change(
@@ -135,21 +137,55 @@ impl PowerManager {
     }
 
     fn on_bg_window_proc(msg: u32, w_param: usize, _l_param: isize) -> Result<()> {
-        if msg == WM_POWERBROADCAST && w_param as u32 == PBT_APMPOWERSTATUSCHANGE {
-            let mut guard = trace_lock!(POWER_MANAGER);
-            let new_status = Self::get_power_status()?;
-            if guard.power_status.ac_line_status != new_status.ac_line_status {
-                let batteries = Self::get_batteries()?;
-                guard.batteries = batteries.clone();
-                Self::send(PowerManagerEvent::BatteriesChanged(batteries));
-            }
-            log::trace!("Power status changed to {new_status:?}");
-            guard.power_status = new_status.clone();
-            Self::send(PowerManagerEvent::PowerStatusChanged(new_status));
+        if msg != WM_POWERBROADCAST {
+            return Ok(());
         }
+
+        match w_param as u32 {
+            PBT_APMPOWERSTATUSCHANGE => {
+                let mut guard = trace_lock!(POWER_MANAGER);
+                let new_status = Self::get_power_status()?;
+                if guard.power_status.ac_line_status != new_status.ac_line_status {
+                    let batteries = Self::get_batteries()?;
+                    guard.batteries = batteries.clone();
+                    Self::send(PowerManagerEvent::BatteriesChanged(batteries));
+                }
+                log::trace!("Power status changed to {new_status:?}");
+                guard.power_status = new_status.clone();
+                Self::send(PowerManagerEvent::PowerStatusChanged(new_status));
+            }
+            PBT_APMRESUMESUSPEND | PBT_APMRESUMEAUTOMATIC => {
+                log::trace!("System resuming from sleep, scheduling state refresh in 2 seconds");
+                // Spawn a task to refresh state after 2 seconds
+                // This is necessary because the power state may be stale immediately after wake up
+                tokio::spawn(async {
+                    tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+
+                    log::trace!("Refreshing power state after wake up");
+                    if let Ok(new_status) = Self::get_power_status() {
+                        let mut guard = trace_lock!(POWER_MANAGER);
+                        guard.power_status = new_status.clone();
+                        Self::send(PowerManagerEvent::PowerStatusChanged(new_status));
+                    }
+
+                    if let Ok(batteries) = Self::get_batteries() {
+                        let mut guard = trace_lock!(POWER_MANAGER);
+                        guard.batteries = batteries.clone();
+                        Self::send(PowerManagerEvent::BatteriesChanged(batteries));
+                    }
+
+                    let guard = trace_lock!(POWER_MANAGER);
+                    let current_mode = guard.current_power_mode;
+                    Self::send(PowerManagerEvent::PowerModeChanged(current_mode));
+                });
+            }
+            _ => {}
+        }
+
         Ok(())
     }
 
+    #[allow(dead_code)]
     pub fn release(&mut self) {
         if let Some(token) = self.power_mode_event_token.take() {
             let _ = unsafe { PowerUnregisterFromEffectivePowerModeNotifications(token as _) };

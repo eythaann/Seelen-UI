@@ -20,9 +20,6 @@ context_menu:
   restore: Վերականգնել լռելյայն
   settings: Կարգավորումներ
   task_manager: Առաջադրանքների կառավարիչ
-keyboard:
-  more: Ստեղնաշարի ավելի շատ պարամետրեր
-  title: Ստեղնաշարի դասավորություն
 media:
   default_multimedia_volume: Մուլտիմեդիա ծավալը
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Մուտքային սարքեր
   output_devices: Արդյունքային սարքեր
   players: Մեդիա նվագարկիչներ
-network:
-  available: Հասանելի ցանցեր
-  connect: Միացնել
-  connected: Միացված է
-  disconnect: Անջատել
-  hidden: Թաքնված ցանց
-  more: Ավելի շատ ցանցային պարամետրեր
-  not_found: Networks անցեր չեն գտնվել
-  placeholder:
-    password: Գաղտնաբառ
-  saved: Պահպանված ցանցեր
-  scanning: Ցանցերի սկանավորում
-  secured: Կոդավորված ցանց
 notifications:
   clear: Մաքրել բոլորը
   empty: Ոչ մի ծանուցում
@@ -70,24 +54,3 @@ settings:
   power: Հզորություն
   restart: Վերսկսել
   title: Կարգավորումներ
-userhome:
-  empty_list: Ոչ մի առարկա
-  folders:
-    desktop: Աշխատասեղան
-    documents: Փաստաթղթեր
-    downloads: Ներլցումներ
-    more_items: Show ուցադրել ավելին ...
-    music: Երաժշտություն
-    pictures: Նկարներ
-    recent: Վերջերս օգտագործված
-    reduce_items: Show ույց տալ ավելի քիչ ...
-    title: Օգտագործողի դիրեկտորիաներ
-    videos: Տեսանյութեր
-  profile:
-    accounts: Բաց հաշվի կարգավորումներ
-    open_onedrive: Բաց օծանելիքի տեղեկատու
-    open_user_folder: Բաց օգտվողի գրացուցակ
-  seelen_options:
-    open_installation_folder: Բացեք Seelen- ի պարամետրերի պանակ
-    open_log_folder: Բացեք seelen log թղթապանակ
-    title: Seelen դիրեկտորիաներ

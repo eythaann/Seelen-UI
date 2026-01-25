@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedia Volumen
+device:
+  channel:
+    system: System Kläng
+  comunications: Kommunikatiounen
+  missing: Vermësst Apparat
+  mixer: Volume Mixer
+  multimedia: Multimedia
+  settings: Méi Apparat Astellunge
+  volume: Apparat Volumen
+input_devices: Input Apparater
+output_devices: Ausgang Apparater
+players: Medien Spiller

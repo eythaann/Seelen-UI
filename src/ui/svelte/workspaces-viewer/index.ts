@@ -17,9 +17,9 @@ widget.webview.onScaleChanged(({ payload }) => {
 widget.webview.setResizable(false);
 widget.onTrigger(async () => {
   if (await widget.webview.isVisible()) {
-    widget.webview.hide();
+    widget.hide(true);
   } else {
-    widget.webview.show();
+    widget.show();
   }
 });
 

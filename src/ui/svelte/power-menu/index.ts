@@ -21,12 +21,11 @@ widget.webview.onScaleChanged(({ payload }) => {
 widget.webview.setResizable(false);
 widget.webview.onFocusChanged((e) => {
   if (!e.payload) {
-    widget.webview.hide();
+    widget.hide(true);
   }
 });
 widget.onTrigger(async () => {
-  await widget.webview.show();
-  await widget.webview.setFocus();
+  await widget.show();
 });
 
 mount(App, {

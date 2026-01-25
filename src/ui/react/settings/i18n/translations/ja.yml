@@ -1,16 +1,6 @@
 action:
   confirm: 本気ですか？
   confirm_body: このアクションを元に戻すことはできません。
-app_launcher:
-  enable: アプリランチャーを有効にする
-  launch_on:
-    mouse_over: マウスのあるモニター
-    primary: プライマリモニター
-  monitor: 表示するモニター
-  runners:
-    cmd: コマンド プロンプト
-    explorer: エクスプローラー
-    label: アプリ
 apps_configurations:
   app:
     bindings: バインディング（両方のオプションが必要です）
@@ -83,7 +73,6 @@ devtools:
   install_folder: アプリのフォルダー
   load: ロード
   settings_file: 設定ファイル
-  simulate_fullscreen: 全画面イベントをシミュレートする
 extras:
   clear_icons: システムアイコンキャッシュをクリアする
   clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
@@ -91,6 +80,9 @@ extras:
   links: リンク
   relaunch: SeelenUIを再起動
   version: バージョン
+  version_fixed: >-
+    アプリケーションとWebView2 Runtimeのバージョンは修正されています。これは、アプリケーションが更新を受信せず、WebView2
+    ランタイムが Windows 更新で自動的に更新されないことを意味します。
 general:
   accent_color: アクセントカラー
   date_format: 日付形式
@@ -98,6 +90,7 @@ general:
     available: 利用可能なアイコン パック
     selected: アクティブなアイコン パック
   language: 言語
+  monday: 月曜日
   performance_mode:
     on_battery: バッテリー上
     on_energy_saver: エネルギーセーバーについて
@@ -106,7 +99,10 @@ general:
       extreme: 過激
       minimal: 最小限
     plugged: プラグまたは充電
+  saturday: 土曜日
+  start_of_week: 週の始まり
   startup: 起動時に実行する
+  sunday: 日曜日
   theme:
     available: 利用可能なテーマ
     selected: アクティブなテーマ
@@ -147,16 +143,24 @@ reset_all_to_default: すべてをデフォルト値に戻す
 reset_to_default: デフォルト値にリセット
 resources:
   app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
+  corrupted_wallpaper: サムネイルの抽出に失敗しました - 破損したビデオ形式またはサポートされていないビデオ形式です
   delete: リソースを削除します
   discover: その他のリソース
   has_update: アップデートが利用可能です
+  high_impact: パフォーマンスへの大きな影響
   import_wallpapers: ローカル壁紙のインポート
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
+  see_on_website: ウェブサイトで見る
+review_request:
+  not_now: 今じゃない
+  sure: もちろん！
+  title: Seelen UI をお楽しみですか?
 save: 保存
 save_and_restart: 保存して再起動
 see_more: もっと見る
 shortcuts:
+  duplicate_error: このショートカットは重複しています
   enable: ビルトインショートカットシステムを有効にします
   enable_tooltip: Seelen UIクライアントを使用して独自のショートカットシステムを実装する場合は無効にします
   labels:
@@ -199,7 +203,6 @@ shortcuts:
     switch_to_previous_workspace: 前のワークスペースに切り替えます
     switch_workspace: ワークスペースに切り替えます{{0}}
     toggle_float: ウィンドウフロートモードを切り替えます
-    toggle_launcher: トグルランチャー
     toggle_monocle: ワークスペースモノクルモードのトグル
   readonly_tooltip: これは読み取り専用のショートカットです
   reset: デフォルトにリセットします
@@ -208,12 +211,6 @@ sides:
   left: 左
   right: 右
   top: 上
-start:
-  message: >-
-    SeelenUIにようこそ！ 組み込みのタイル型ウィンドウマネージャーを備えた究極のデスクトップ環境で、あなたのWindows での体験を向上させます！
-    直感的なインターフェースと高度な機能で効率的なマルチタスクの新時代を探求しましょう。
-  message_accent: あなた好みのスタイリングで生産性を最適化！
-  title: ようこそ！
 toolbar:
   auto_hide: 自動的に隠す
   delay_to_hide: 隠れるまでの遅延
@@ -234,23 +231,39 @@ update:
 wall:
   backgrounds: 壁紙
   blur: ブラー
+  cancel: キャンセル
+  close: 近い
+  collection_name: コレクション名
+  collections: コレクション
   contrast: コントラスト
+  corrupted_wallpapers_message: 壁紙が破損している場合は、削除することを検討してください。
+  create: 作成する
+  create_collection: コレクションの作成
+  default_collection: デフォルトのコレクション
+  delete_collection: コレクションの削除
+  edit_collection: コレクションの編集
   enable: 壁紙マネージャーを有効にします
+  extend: プライマリを拡張する
   fit:
     contain: コンテイン
     cover: カバー
     fill: 充填
   flipHorizontal: 水平フリップ
   flipVertical: 垂直フリップ
+  generating_thumbnails: 壁紙のサムネイルの生成
   hours: 時間
   interval: 壁紙を毎回変更します
   minutes: 分
+  monitor_collection: モニター収集
+  multimonitor_behaviour: マルチモニターの動作
   muted: ビデオの音声をミュートする
   no_background: 壁紙に使用するファイルを選択
+  no_collections: まだコレクションは作成されていません。 + ボタンをクリックして作成します。
   objectFit: バックグラウンド・フィット
   objectPosition: バックグラウンド
   overlayColor: オーバーレイカラー
   overlayMixBlendMode: オーバーレイミックスブレンドモード
+  per_monitor: モニターごと
   playback: 再生速度
   position:
     bottom: ボトム
@@ -258,10 +271,17 @@ wall:
     left: 左
     right: 右
     top: トップ
+  processing_video: ビデオの処理
   random: スライドショーをランダム化します
   saturation: 飽和
   seconds: 秒
+  select_collection: コレクションの選択
+  thumbnail_generation_complete: サムネイルの生成が完了しました
+  thumbnail_generation_finished: サムネイルの生成が正常に終了しました
+  wallpaper_collection: 壁紙コレクション
+  wallpaper_settings: 壁紙設定
   withOverlay: オーバーレイ付き
+  workspace_collections: ワークスペースコレクション
 weg:
   auto_hide: 自動的に隠す
   delay_to_hide: 隠れるまでの遅延
@@ -297,6 +317,16 @@ weg:
   padding: 余白
   show_end_task: タスクバーに終了タスクを表示する
   width: ドックの幅
+welcome:
+  give_a_review: レビューを投稿する
+  message: >-
+    Seelen UI は、Windows 用の無料のオープンソース
+    デスクトップ環境です。ここでは、デスクトップの外観や動作を完全に制御でき、ワークフローやスタイルに合わせてあらゆる詳細をカスタマイズできます。
+  ok: 始めましょう！
+  review: >-
+    Seelen UI
+    の使用を楽しんでいる場合は、ストアにレビューを残すことを検討してください。あなたのフィードバックはプロジェクトの成長と改善に役立ちます。
+  title: Seelen UI へようこそ!
 widget:
   enable: このウィジェットを有効にする
   enable_for_monitor: このモニターで有効にする

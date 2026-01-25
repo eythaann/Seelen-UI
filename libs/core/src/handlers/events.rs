@@ -54,8 +54,7 @@ slu_events_declaration! {
     SystemLanguagesChanged(Vec<SystemLanguage>) as "system::languages-changed",
 
     UserChanged(User) as "user-changed",
-    UserFolderChanged(FolderChangedArgs) as "user-folder-changed",
-    UserApplicationsChanged(Vec<UserApplication>) as "user::applications-changed",
+    UserFolderChanged(FolderChangedArgs) as "user::known-folder-changed",
     UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
     UserAppWindowsPreviewsChanged(HashMap<isize, UserAppWindowPreview>) as "user::windows-previews-changed",
 
@@ -88,12 +87,10 @@ slu_events_declaration! {
     StateToolbarItemsChanged(Placeholder) as "toolbar-items",
     StateThemesChanged(Vec<Theme>) as "themes",
     StateSettingsByAppChanged(Vec<AppConfig>) as "settings-by-app",
-    StateHistoryChanged(LauncherHistory) as "history",
     StateIconPacksChanged(Vec<IconPack>) as "icon-packs",
     StatePluginsChanged(Vec<Plugin>) as "plugins-changed",
     StateWidgetsChanged(Vec<Widget>) as "widgets-changed",
     StateWallpapersChanged(Vec<Wallpaper>) as "UserResources::wallpapers-changed",
-    StateProfilesChanged(Vec<Profile>) as "profiles-changed",
 
     // system tray
     SystemTrayChanged(Vec<SysTrayIcon>) as "system-tray::changed",
@@ -106,4 +103,7 @@ slu_events_declaration! {
     RadiosChanged(Vec<RadioDevice>) as "radio::changed",
 
     BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
+
+    // Start Menu
+    StartMenuItemsChanged(Vec<StartMenuItem>) as "start-menu::items-changed",
 }

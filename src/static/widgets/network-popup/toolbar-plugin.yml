@@ -1,0 +1,16 @@
+id: "@seelen/tb-network-popup"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: FaWifi
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: network
+  tooltip: >-
+    return online ? t("placeholder.ethernet_connected") :
+    t("placeholder.ethernet_disconnected")
+  template: >-
+    if (!online) return icon("TbWorldCancel"); if (usingInterface?.type ===
+    "IEEE80211") return icon("FaWifi"); return icon("FaComputer");
+  onClickV2: |-
+    trigger("@seelen/network-popup");

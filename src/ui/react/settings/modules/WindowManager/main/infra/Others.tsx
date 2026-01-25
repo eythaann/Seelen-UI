@@ -1,28 +1,24 @@
 import { InputNumber, Select } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
-import { useAppSelector } from "../../../shared/utils/infra.ts";
-
-import { SeelenWmSelectors } from "../../../shared/store/app/selectors.ts";
-import { WManagerSettingsActions } from "../app.ts";
+import { getWmConfig, setWmDragBehavior, setWmResizeDelta } from "../../application.ts";
 
 import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox/index.tsx";
 import { WmDragBehavior } from "@seelen-ui/lib/types";
 
 export const OthersConfigs = () => {
-  const resizeDelta = useAppSelector(SeelenWmSelectors.resizeDelta);
-  const dragBehavior = useAppSelector(SeelenWmSelectors.dragBehavior);
+  const wmConfig = getWmConfig();
+  const resizeDelta = wmConfig.resizeDelta;
+  const dragBehavior = wmConfig.dragBehavior;
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const onChangeResizeDelta = (value: number | null) => {
-    dispatch(WManagerSettingsActions.setResizeDelta(value || 0));
+    setWmResizeDelta(value || 0);
   };
 
   const onChangeDragBehavior = (value: WmDragBehavior) => {
-    dispatch(WManagerSettingsActions.setDragBehavior(value));
+    setWmDragBehavior(value);
   };
 
   return (

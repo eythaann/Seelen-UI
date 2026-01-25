@@ -1,0 +1,21 @@
+empty_list: Geen items
+folders:
+  desktop: Desktop
+  documents: Dokumente
+  downloads: Aflaaie
+  more_items: Wys meer...
+  music: Musiek
+  pictures: Prente
+  recent: Onlangs gebruik
+  reduce_items: Wys minder...
+  title: Gebruikersgidse
+  videos: Video's
+profile:
+  accounts: Maak rekeninginstellings oop
+  log_out: Teken uit
+  open_onedrive: Maak OneDrive-gids oop
+  open_user_folder: Maak gebruikersgids oop
+seelen_options:
+  open_installation_folder: Maak Seelen-instellingsmap oop
+  open_log_folder: Maak Seelen-loglêergids oop
+  title: Seelen-gidse

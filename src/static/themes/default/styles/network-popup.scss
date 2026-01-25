@@ -1,0 +1,159 @@
+.network-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .network-no-adapter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: var(--color-gray-500);
+    font-style: italic;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .network-radio-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 6px;
+    background-color: var(--color-gray-100);
+    border-radius: 8px;
+
+    .network-radio-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--color-gray-900);
+    }
+
+    .network-radio-switch {
+      cursor: pointer;
+    }
+  }
+
+  .network-section {
+    display: flex;
+    flex-direction: column;
+
+    &:not(:last-child) {
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--color-gray-300);
+    }
+
+    .network-section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding-left: 8px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--color-gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      .network-scanning {
+        display: flex;
+        align-items: center;
+        color: var(--color-gray-500);
+
+        .slu-icon {
+          animation: rotateToTheLeft 1s linear infinite;
+        }
+      }
+    }
+
+    .network-section-entries {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      max-height: 300px;
+      overflow-x: visible;
+      overflow-y: auto;
+
+      .wlan-entry {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 8px;
+        border-radius: 8px;
+        transition: background-color 0.2s;
+
+        &:hover, &:focus {
+          outline: none;
+          background-color: var(--color-gray-200);
+        }
+
+        &.wlan-entry-selected {
+          background-color: rgba(var(--system-accent-color-rgb), 0.2);
+        }
+
+        .wlan-entry-info {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .wlan-entry-ssid {
+            flex: 1;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .wlan-entry-band {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--color-gray-600);
+            border: 1px solid var(--color-gray-400);
+            border-radius: 4px;
+            padding: 2px 4px;
+          }
+        }
+
+        .wlan-entry-fields {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-top: 12px;
+        }
+
+        .wlan-entry-actions {
+          display: flex;
+          justify-content: flex-end;
+          gap: 8px;
+          margin-top: 12px;
+        }
+      }
+
+      .network-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        color: var(--color-gray-500);
+        font-style: italic;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .network-footer {
+    > button {
+      font-weight: 600;
+    }
+  }
+}
+
+@keyframes rotateToTheLeft {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

@@ -1,0 +1,190 @@
+.media-popup {
+  display: flex;
+  flex-direction: column;
+
+  // Main layout views
+  .media-main-view,
+  .media-device-view {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  // Common labels
+  .media-control-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-gray-600);
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  // Volume control component
+  .media-control-volume {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  // Device groups
+  .media-device-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  // Individual device item
+  .media-device {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--color-gray-100);
+    }
+
+    .media-device-name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+  }
+
+  // Media session list
+  .media-control-session-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  // Device detail view
+  .media-device-view {
+    .media-device-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+
+      .media-device-title {
+        font-size: 14px;
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .media-device-mixer {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .media-device-mixer-entry {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .media-device-mixer-entry-icon {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          height: 1rem;
+          width: 1rem;
+          margin-left: 0.25rem;
+        }
+      }
+    }
+
+    .media-device-footer {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--color-gray-300);
+    }
+  }
+}
+
+// Individual media session
+.media-session {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+
+  .media-session-blurred-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(10px);
+    opacity: 0.8;
+    z-index: 0;
+  }
+
+  .media-session-thumbnail-container {
+    position: relative;
+    z-index: 1;
+
+    .media-session-app-icon {
+      position: absolute !important;
+      right: 4px;
+      bottom: 4px;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .media-session-thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+
+  .media-session-info {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .media-session-title {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .media-session-author {
+      font-size: 12px;
+      opacity: 0.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .media-session-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+  }
+}

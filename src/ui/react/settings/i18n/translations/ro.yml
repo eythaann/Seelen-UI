@@ -1,16 +1,6 @@
 action:
   confirm: Ești sigur?
   confirm_body: Această acțiune nu poate fi anulată.
-app_launcher:
-  enable: Activați lansatorul de aplicații
-  launch_on:
-    mouse_over: Trece cu mouse-ul peste
-    primary: Primar
-  monitor: Monitor pentru a arăta
-  runners:
-    cmd: Comanda
-    explorer: Alerga
-    label: Alergători
 apps_configurations:
   app:
     bindings: Legare (notă ambele opțiuni sunt necesare)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Folder de instalare
   load: Sarcină
   settings_file: Fișier de setări
-  simulate_fullscreen: Simulați un eveniment pe ecran complet
 extras:
   clear_icons: Ștergeți memoria cache a pictogramelor de sistem
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Link -uri oficiale
   relaunch: Relansare
   version: Versiune
+  version_fixed: >-
+    Aplicația și versiunile WebView2 Runtime sunt remediate. Aceasta înseamnă că
+    aplicația nu va primi actualizări și WebView2 Runtime nu va fi actualizat
+    automat cu actualizări Windows.
 general:
   accent_color: Culoare de accent
   date_format: Formatul datei
@@ -104,6 +97,7 @@ general:
     available: Pachete de pictograme disponibile
     selected: Pachete de pictograme active
   language: Limba
+  monday: luni
   performance_mode:
     on_battery: Pe baterie
     on_energy_saver: Pe economia de energie
@@ -112,7 +106,10 @@ general:
       extreme: Extrem
       minimal: Minim
     plugged: Conectat sau încărcat
+  saturday: sâmbătă
+  start_of_week: Începutul săptămânii
   startup: Rulați la pornire?
+  sunday: duminică
   theme:
     available: Teme disponibile
     selected: Teme active
@@ -155,18 +152,26 @@ resources:
   app_outdated: >-
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a
     funcționa corect.
+  corrupted_wallpaper: Nu s-a extras miniatura - format video corupt sau neacceptat
   delete: Ștergeți resursa
   discover: Descoperiți mai multe resurse
   has_update: O actualizare este disponibilă
+  high_impact: Impact mare asupra performanței
   import_wallpapers: Importați imagini de fundal locale
   open_folder: Deschideți folderul de resurse
   outdated: >-
     Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și
     este posibil să nu funcționeze corect.
+  see_on_website: Vezi pe site
+review_request:
+  not_now: Nu acum
+  sure: Sigur!
+  title: Vă bucurați de Seelen UI?
 save: Salvați
 save_and_restart: Salvați și reporniți
 see_more: A se vedea mai mult
 shortcuts:
+  duplicate_error: Această comandă rapidă este duplicată
   enable: Activați sistemul de comenzi rapide încorporate
   enable_tooltip: >-
     Dezactivați dacă veți implementa propriul sistem de comenzi rapide folosind
@@ -211,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: Treceți la spațiul de lucru anterior
     switch_workspace: Treceți la Workspace {{0}}
     toggle_float: Comutați modul de plutire a ferestrei
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Comutați modul monocle al spațiului de lucru
   readonly_tooltip: Aceasta este o scurtătură numai pentru citire
   reset: Resetați la valorile implicite
@@ -220,14 +224,6 @@ sides:
   left: Stânga
   right: Dreapta
   top: Top
-start:
-  message: >-
-    Bine ați venit la Seelen UI, mediul de desktop final cu un manager Windows
-    de gresie încorporat pentru a vă îmbunătăți experiența Windows! Explorați o
-    nouă eră de eficiență și multitasking cu interfața noastră intuitivă și
-    caracteristicile avansate.
-  message_accent: Optimizează -ți productivitatea cu stil!
-  title: Bine ati venit!
 toolbar:
   auto_hide: Ascunde auto
   delay_to_hide: Întârzie să te ascunzi
@@ -248,23 +244,39 @@ update:
 wall:
   backgrounds: Imagini de fundal
   blur: Ceață
+  cancel: Anula
+  close: Aproape
+  collection_name: Numele colecției
+  collections: Colecții
   contrast: Contrast
+  corrupted_wallpapers_message: 'Imagini de fundal corupte, luați în considerare ștergerea acestora:'
+  create: Crea
+  create_collection: Creați o colecție
+  default_collection: Colecție implicită
+  delete_collection: Șterge colecția
+  edit_collection: Editați colecția
   enable: Activați manager de tapet
+  extend: Extindeți primarul
   fit:
     contain: Conține
     cover: Acoperire
     fill: Umpleți
   flipHorizontal: Flip orizontal
   flipVertical: Flip vertical
+  generating_thumbnails: Generarea miniaturilor de fundal
   hours: ore
   interval: Schimbați tapet fiecare
   minutes: minute
+  monitor_collection: Colecția de monitor
+  multimonitor_behaviour: Comportamentul multimonitor
   muted: Dezactivați sunetul video
   no_background: Slideshow gol, folosind în schimb fundalul temei.
+  no_collections: Nicio colecție încă creată. Faceți clic pe butonul + pentru a crea unul.
   objectFit: Potrivire în fundal
   objectPosition: Poziția de fundal
   overlayColor: Culoare suprapunere
   overlayMixBlendMode: Mod de amestecare suprapunere Mix
+  per_monitor: Per monitor
   playback: Viteza de redare
   position:
     bottom: Fund
@@ -272,10 +284,17 @@ wall:
     left: Stânga
     right: Corect
     top: Sus
+  processing_video: Se procesează videoclipul
   random: Prezentare de diapozitive aleatorie
   saturation: Saturație
   seconds: secunde
+  select_collection: Selectați Colecție
+  thumbnail_generation_complete: Generarea miniaturii finalizată
+  thumbnail_generation_finished: Generarea miniaturilor s-a încheiat cu succes
+  wallpaper_collection: Colecția de imagini de fundal
+  wallpaper_settings: Setări de fundal
   withOverlay: Cu suprapunere
+  workspace_collections: Colecții de spațiu de lucru
 weg:
   auto_hide: Ascundere automată
   delay_to_hide: Întârzie să te ascunzi
@@ -311,6 +330,19 @@ weg:
   padding: Căptușeală
   show_end_task: Afișarea sarcinii finale în bara de activități
   width: Lăţime
+welcome:
+  give_a_review: Dă o recenzie
+  message: >-
+    Seelen UI este un mediu desktop gratuit și open source pentru Windows. Aici
+    aveți control deplin asupra modului în care arată și se comportă desktopul,
+    permițându-vă să personalizați fiecare detaliu pentru a se potrivi cu fluxul
+    și stilul dvs. de lucru.
+  ok: Să începem!
+  review: >-
+    Dacă vă place să utilizați Seelen UI, luați în considerare să lăsați o
+    recenzie în magazin - feedbackul dvs. ajută proiectul să crească și să se
+    îmbunătățească.
+  title: Bun venit la Seelen UI!
 widget:
   enable: Activați acest widget
   enable_for_monitor: Activați pe acest monitor

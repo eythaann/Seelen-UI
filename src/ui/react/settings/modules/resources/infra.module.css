@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 1fr;
-  gap: 10px;
+  gap: var(--spacing-s);
   width: 100%;
   height: 100%;
 
@@ -13,7 +13,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: var(--spacing-xs);
     border: 2px solid var(--color-gray-300);
     border-radius: 8px;
 
@@ -32,32 +32,36 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: var(--spacing-s);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-s);
 
   .reorderGroup {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--spacing-s);
   }
 
   .card {
-    display: grid;
-    grid-template-columns: 100px 1fr auto;
-    padding: 10px;
+    width: 100%;
+    height: 120px;
+    padding: var(--spacing-s);
     border-radius: 18px;
-    gap: 10px;
-    background-color: var(--color-gray-50);
-    cursor: grab;
 
-    &.warn {
-      /* border: 1px solid var(--color-yellow-100); */
-    }
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: min-content 1fr min-content;
+    gap: var(--spacing-2xs) var(--spacing-s);
+
+    background-color: var(--color-gray-50);
+
+    /* &.warn {
+      border: 1px solid var(--color-yellow-100);
+    } */
 
     &.danger {
       background-color: var(--color-red-200);
@@ -65,41 +69,50 @@
       color: var(--color-red-1200);
     }
 
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      overflow: hidden;
+    .portrait {
+      grid-column: 1 / 2;
+      grid-row: 1 / 4;
+    }
 
-      > span {
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+      gap: var(--spacing-xs);
+
+      .title {
+        font-weight: 600;
+        font-size: 1.2rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      a {
-        color: var(--color-blue-800);
-      }
-    }
-
-    .actions {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-end;
-
       .actionsTop {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: var(--spacing-xs);
       }
+    }
+
+    .body {
+      overflow: auto;
+      padding-right: var(--spacing-xs);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: var(--spacing-xs);
     }
   }
 }
 
 .portrait {
   background-color: var(--color-gray-200);
-  border-radius: 8px;
+  border-radius: 10px;
   aspect-ratio: 1/1;
   display: flex;
   align-items: center;
@@ -119,7 +132,8 @@
   }
 
   .warning,
-  .danger {
+  .danger,
+  .corrupted {
     position: absolute;
     bottom: 8px;
     right: 8px;
@@ -133,5 +147,32 @@
 
   .danger {
     color: var(--color-red-900);
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2xs);
+
+  .tag {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-2xs);
+    border-radius: 6px;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-600);
+    font-size: 0.7rem;
+    line-height: 1em;
+
+    &.warn {
+      background-color: light-dark(#ffffb9, #4e4400);
+      color: var(--color-yellow-500);
+    }
+
+    &.danger {
+      background-color: var(--color-red-100);
+      color: var(--color-red-600);
+    }
   }
 }

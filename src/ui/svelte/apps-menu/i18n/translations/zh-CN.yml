@@ -1,0 +1,11 @@
+all: 所有应用程序
+back: 后退
+disband: 解散文件夹
+folder: 文件夹
+no_matching_items: 未找到与您的搜索相符的商品
+open_file_location: 打开文件位置
+pin: 别针
+run_as_admin: 以管理员身份运行
+unpin: 取消固定
+welcome_message: 欢迎使用 Seelen UI 应用程序菜单。
+welcome_message2: 在此选项卡上，您可以固定您最喜欢的应用程序。

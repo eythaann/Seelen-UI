@@ -21,15 +21,6 @@ pub struct FocusedApp {
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
-pub struct UserApplication {
-    pub name: String,
-    pub path: PathBuf,
-    pub umid: Option<String>,
-    pub is_in_start_menu: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[serde(rename_all = "camelCase")]
 pub struct UserAppWindow {
     pub hwnd: isize,
     pub monitor: MonitorId,

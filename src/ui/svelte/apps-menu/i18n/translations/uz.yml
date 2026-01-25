@@ -1,0 +1,11 @@
+all: Barcha ilovalar
+back: Orqaga
+disband: Jildni tarqatish
+folder: Papka
+no_matching_items: Qidiruvingizga mos narsa topilmadi
+open_file_location: Fayl joylashuvini oching
+pin: Pin
+run_as_admin: Administrator sifatida ishga tushirish
+unpin: Yechish
+welcome_message: Seelen UI ilovasi menyusiga xush kelibsiz.
+welcome_message2: Ushbu yorliqda siz sevimli ilovalaringizni mahkamlashingiz mumkin.

@@ -20,9 +20,6 @@ context_menu:
   restore: Врати на подразумевано
   settings: Подешавања
   task_manager: Таск Манагер
-keyboard:
-  more: Више подешавања тастатуре
-  title: Изглед тастатуре
 media:
   default_multimedia_volume: Мултимедијална количина
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Улазни уређаји
   output_devices: Излазни уређаји
   players: Медиа Играчи
-network:
-  available: Доступне мреже
-  connect: Повезати
-  connected: Повезано са
-  disconnect: Прекинути везу
-  hidden: Скривена мрежа
-  more: Више мрежних поставки
-  not_found: Није пронађена ниједна мрежа
-  placeholder:
-    password: Лозинка
-  saved: Сачуване мреже
-  scanning: Скенирање за мреже
-  secured: Шифрована мрежа
 notifications:
   clear: Очистити све
   empty: Нема обавештења
@@ -70,24 +54,3 @@ settings:
   power: Моћ
   restart: Поново покренути
   title: Подешавања
-userhome:
-  empty_list: Нема предмета
-  folders:
-    desktop: Радна површина
-    documents: Документи
-    downloads: Преузимања
-    more_items: Прикажи више ...
-    music: Музика
-    pictures: Слике
-    recent: Недавно коришћен
-    reduce_items: Прикажи мање ...
-    title: Корисничке именике
-    videos: Видеос
-  profile:
-    accounts: Подешавања отвореног налога
-    open_onedrive: Отворено ОнеДриве именик
-    open_user_folder: Отворите директориј усер
-  seelen_options:
-    open_installation_folder: Отворите директоријум Сеелен Сеттингс
-    open_log_folder: Отворите мапу Сеелен Лог
-    title: Сеелен директорији

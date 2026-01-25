@@ -1,16 +1,6 @@
 action:
   confirm: Weet je het zeker?
   confirm_body: Deze actie kan niet ongedaan worden gemaakt.
-app_launcher:
-  enable: Schakel App Launcher in
-  launch_on:
-    mouse_over: Muis er overheen
-    primary: Primair
-  monitor: Monitor om te laten zien
-  runners:
-    cmd: Commando
-    explorer: Uitvoeren
-    label: Uitvoerders
 apps_configurations:
   app:
     bindings: Binding (beide opties zijn vereist)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Installatiemap
   load: Laden
   settings_file: Instellingenbestand
-  simulate_fullscreen: Simuleer een gebeurtenis op volledig scherm
 extras:
   clear_icons: Systeempictogrammen cache wissen
   clear_icons_tooltip: Er kan een herstart nodig zijn om volledig effect te hebben op alle widgets
@@ -95,6 +84,10 @@ extras:
   links: Officiële links
   relaunch: Opnieuw starten
   version: Versie
+  version_fixed: >-
+    De applicatie- en WebView2 Runtime-versies staan ​​vast. Dit betekent dat de
+    applicatie geen updates ontvangt en dat de WebView2 Runtime niet automatisch
+    wordt bijgewerkt met Windows-updates.
 general:
   accent_color: Accent kleur
   date_format: Datumformaat
@@ -102,6 +95,7 @@ general:
     available: Beschikbare pictogrampakketten
     selected: Actieve pictogrampakketten
   language: Taal
+  monday: Maandag
   performance_mode:
     on_battery: Op de batterij
     on_energy_saver: Op energiebespaarder
@@ -110,7 +104,10 @@ general:
       extreme: Extreem
       minimal: Minimaal
     plugged: Aangesloten of opladen
+  saturday: Zaterdag
+  start_of_week: Begin van de week
   startup: Uitvoeren bij het starten?
+  sunday: Zondag
   theme:
     available: Beschikbare thema's
     selected: Actieve thema's
@@ -151,18 +148,26 @@ reset_all_to_default: Alles resetten naar standaardwaarden
 reset_to_default: Terugzetten naar standaardwaarde
 resources:
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
+  corrupted_wallpaper: Kan miniatuur niet extraheren - beschadigd of niet-ondersteund videoformaat
   delete: Verwijder resource
   discover: Ontdek meer bronnen
   has_update: Er is een update beschikbaar
+  high_impact: Grote impact op de prestaties
   import_wallpapers: Lokale achtergronden importeren
   open_folder: Map met bronnen openen
   outdated: >-
     Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
     mogelijk niet goed.
+  see_on_website: Zie op website
+review_request:
+  not_now: Niet nu
+  sure: Zeker!
+  title: Geniet je van de Seelen-gebruikersinterface?
 save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 see_more: Meer zien
 shortcuts:
+  duplicate_error: Deze snelkoppeling is gedupliceerd
   enable: Schakel ingebouwd snelkoppelsysteem in
   enable_tooltip: >-
     Schakel uit of u uw eigen snelkoppelsysteem implementeert met behulp van de
@@ -207,7 +212,6 @@ shortcuts:
     switch_to_previous_workspace: Schakel over naar vorige werkruimte
     switch_workspace: Schakel over naar werkruimte {{0}}
     toggle_float: Schakelvenster Float -modus
-    toggle_launcher: Schakelwerper
     toggle_monocle: Schakel de werkruimte Monocle -modus
   readonly_tooltip: Dit is een alleen-lezen snelkoppeling
   reset: Reset naar standaardwaarden
@@ -216,14 +220,6 @@ sides:
   left: Links
   right: Rechts
   top: Bovenkant
-start:
-  message: >-
-    Welkom bij Seelen UI, de ultieme desktopomgeving met een opgenomen Tiling
-    Windows Manager om uw Windows -ervaring te verbeteren! Verken een nieuw
-    tijdperk van efficiëntie en multitasking met onze intuïtieve interface en
-    geavanceerde functies.
-  message_accent: Optimaliseer uw productiviteit met stijl!
-  title: Welkom!
 toolbar:
   auto_hide: Automatisch verbergen
   delay_to_hide: Vertraging om te verbergen
@@ -244,25 +240,43 @@ update:
 wall:
   backgrounds: Achtergronden
   blur: Vervagen
+  cancel: Annuleren
+  close: Dichtbij
+  collection_name: Collectienaam
+  collections: Collecties
   contrast: Contrast
+  corrupted_wallpapers_message: 'Beschadigde achtergronden, overweeg deze te verwijderen:'
+  create: Creëren
+  create_collection: Verzameling maken
+  default_collection: Standaardcollectie
+  delete_collection: Verzameling verwijderen
+  edit_collection: Verzameling bewerken
   enable: Schakel wallpaper manager in
+  extend: Primair uitbreiden
   fit:
     contain: Bevat
     cover: Omslag
     fill: Vullen
   flipHorizontal: Flip Horizontaal
   flipVertical: Verticaal klappen
+  generating_thumbnails: Achtergrondminiaturen genereren
   hours: uren
   interval: Verander wallpaper elke
   minutes: notulen
+  monitor_collection: Monitor-collectie
+  multimonitor_behaviour: Multimonitor-gedrag
   muted: Video-audio dempen
   no_background: >-
     Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
     thema.
+  no_collections: >-
+    Er zijn nog geen collecties aangemaakt. Klik op de knop + om er een te
+    maken.
   objectFit: Achtergrond
   objectPosition: Achtergrond Positie
   overlayColor: Overlay Kleur
   overlayMixBlendMode: Overlay Mix Mengmodus
+  per_monitor: Per monitor
   playback: Afspeelsnelheid
   position:
     bottom: Bodem
@@ -270,10 +284,17 @@ wall:
     left: Links
     right: Rechts
     top: Top
+  processing_video: Video verwerken
   random: Randomize diavoorstelling
   saturation: Verzadiging
   seconds: seconden
+  select_collection: Selecteer Verzameling
+  thumbnail_generation_complete: Het genereren van miniaturen is voltooid
+  thumbnail_generation_finished: Het genereren van miniaturen is met succes voltooid
+  wallpaper_collection: Behangcollectie
+  wallpaper_settings: Achtergrondinstellingen
   withOverlay: Met overlay
+  workspace_collections: Werkruimtecollecties
 weg:
   auto_hide: Automatisch Verbergen
   delay_to_hide: Vertraging om te verbergen
@@ -309,6 +330,18 @@ weg:
   padding: Vulling
   show_end_task: Taak beëindigen in taakbalk weergeven
   width: Breedte
+welcome:
+  give_a_review: Geef een recensie
+  message: >-
+    Seelen UI is een gratis en open source desktopomgeving voor Windows. Hier
+    heeft u volledige controle over hoe uw bureaublad eruitziet en zich
+    gedraagt, zodat u elk detail kunt aanpassen aan uw workflow en stijl.
+  ok: Laten we beginnen!
+  review: >-
+    Als u de Seelen UI graag gebruikt, overweeg dan om een ​​recensie achter te
+    laten in de winkel. Uw feedback helpt het project te groeien en te
+    verbeteren.
+  title: Welkom bij de Seelen-gebruikersinterface!
 widget:
   enable: Deze widget inschakelen
   enable_for_monitor: Inschakelen op deze monitor

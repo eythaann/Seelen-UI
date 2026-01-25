@@ -20,9 +20,6 @@ context_menu:
   restore: පෙරනිමියට ප්රතිස්ථාපනය කරන්න
   settings: සැකසීම්
   task_manager: කාර්ය කළමනාකරු
-keyboard:
-  more: තවත් යතුරුපුවරු සැකසුම්
-  title: යතුරුපුවරු පිරිසැලසුම
 media:
   default_multimedia_volume: බහුමාධ්ය පරිමාව
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: ආදාන උපාංග
   output_devices: නිමැවුම් උපාංග
   players: මාධ්ය වාදකයන්
-network:
-  available: පවතින ජාල
-  connect: සම්බන්ධ කරන්න
-  connected: වෙත සම්බන්ධ කර ඇත
-  disconnect: විසන්ධි කරන්න
-  hidden: සැඟවුණු ජාලය
-  more: තවත් ජාල සැකසුම්
-  not_found: ජාලක් හමු නොවීය
-  placeholder:
-    password: මුරපදය
-  saved: සුරැකි ජාල
-  scanning: ජාල සඳහා ස්කෑන් කිරීම
-  secured: සංකේතාත්මක ජාලය
 notifications:
   clear: සියල්ල ඉවත් කරන්න
   empty: දැනුම්දීම් නොමැත
@@ -70,24 +54,3 @@ settings:
   power: බලය
   restart: යළි අරඹන්න
   title: සැකසුම්
-userhome:
-  empty_list: අයිතම නැත
-  folders:
-    desktop: ඩෙස්ක්ටොප්
-    documents: ලේඛන
-    downloads: බාගැනීම්
-    more_items: තවත් පෙන්වන්න ...
-    music: සංගීතය
-    pictures: පින්තූර
-    recent: මෑතකදී භාවිතා කර ඇත
-    reduce_items: අඩුවෙන් පෙන්වන්න ...
-    title: පරිශීලක නාමාවලි
-    videos: වීඩියෝ
-  profile:
-    accounts: ගිණුම් සැකසුම් විවෘත කරන්න
-    open_onedrive: OneDrive ඩිරෙක්ටරියක් විවෘත කරන්න
-    open_user_folder: පරිශීලක නාමාවලිය විවෘත කරන්න
-  seelen_options:
-    open_installation_folder: සලෝන් සැකසුම් ෆෝල්ඩරය විවෘත කරන්න
-    open_log_folder: Sonlen Log ෆෝල්ඩරය විවෘත කරන්න
-    title: සීලන් නාමාවලි

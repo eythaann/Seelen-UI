@@ -1,0 +1,13 @@
+default_multimedia_volume: ملټي میډیا حجم
+device:
+  channel:
+    system: د سیسټم غږونه
+  comunications: مخابراتو
+  missing: ورک شوی وسیله
+  mixer: د حجم مکسر
+  multimedia: ملټي میډیا
+  settings: د وسیلې نور ترتیبات
+  volume: د وسیلې حجم
+input_devices: د ننوتلو وسایل
+output_devices: د تولید وسایل
+players: د رسنیو لوبغاړي

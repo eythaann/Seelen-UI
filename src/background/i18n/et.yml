@@ -1,11 +1,5 @@
 cancel: Tühistama
 done: Tehtud
-drivers:
-  got_it: Sain selle
-  monitor_disabled: >-
-    Tundub, et mõned monitori draiverid on välja lülitatud. Palun lubage need,
-    et Seelen UI töötaks korralikult.
-  monitor_disabled_title: Monitori draiverid on välja lülitatud
 resource:
   added: Lisatud on uus ressurss
   download_failed_body: >-
@@ -20,6 +14,12 @@ runtime:
   corrupted_file: Konfiguratsioonifail on rikutud, kasutades selle asemel vaikeväärtusi.
   corrupted_file_path: Vigastatud faili tee
   download: Minge allalaadimislehele
+  files_integrity: |-
+    Meil ei õnnestunud rakendusfailide terviklikkust kontrollida.
+    See võib juhtuda, kui faile on muudetud, rikutud või installimine on poolik.
+    Turvakaalutlustel ei saa Seelen UI jätkata.
+    Installige see uuesti ametlikult veebisaidilt.
+  files_integrity_title: Turvahoiatus – failide terviklikkuse kontroll ebaõnnestus
   not_found: WebView2 käitusaega ei leitud
   not_found_description: Seeleni kasutajaliides nõuab Webview2 Runtime'i. Palun installige see.
   outdated: WebView2 käitusaeg on aegunud

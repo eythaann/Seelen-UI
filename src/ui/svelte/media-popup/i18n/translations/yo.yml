@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimedia Iwọn didun
+device:
+  channel:
+    system: Awọn ohun eto
+  comunications: Awọn ibaraẹnisọrọ
+  missing: Ohun elo ti o padanu
+  mixer: Adapọ iwọn didun
+  multimedia: Multimedia
+  settings: Die Device Eto
+  volume: Iwọn ẹrọ
+input_devices: Awọn ẹrọ ti nwọle
+output_devices: Awọn ẹrọ ti njade
+players: Awọn ẹrọ orin Media

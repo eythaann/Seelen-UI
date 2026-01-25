@@ -3,6 +3,7 @@ import { ConfigProvider, Tooltip } from "antd";
 import type { ComponentChildren } from "preact";
 
 import cs from "./index.module.css";
+import { cx } from "libs/ui/react/utils/styling";
 
 interface Props {
   children: React.ReactNode;
@@ -22,9 +23,7 @@ interface SubGroupProps {
   disabled?: boolean;
 }
 
-export const SettingsSubGroup = (
-  { children, label, disabled }: SubGroupProps,
-) => {
+export const SettingsSubGroup = ({ children, label, disabled }: SubGroupProps) => {
   return (
     <div className={cs.subgroup}>
       <div className={cs.subtitle}>{label}</div>
@@ -41,11 +40,12 @@ type OptionProps = {
   description?: ComponentChildren;
   action?: ComponentChildren;
   children?: ComponentChildren;
+  disabled?: boolean;
 };
 
 export const SettingsOption = (props: OptionProps) => {
   return (
-    <div className={cs.setting}>
+    <div className={cx(cs.setting, { [cs.disabled!]: props.disabled })}>
       {props.children
         ? (
           props.children
@@ -63,9 +63,7 @@ export const SettingsOption = (props: OptionProps) => {
               </div>
               {props.description && <div className={cs.description}>{props.description}</div>}
             </div>
-            <div className={cs.action}>
-              {props.action}
-            </div>
+            <div className={cs.action}>{props.action}</div>
           </>
         )}
     </div>

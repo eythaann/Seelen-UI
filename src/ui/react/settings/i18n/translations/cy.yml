@@ -1,16 +1,6 @@
 action:
   confirm: Ydych chi'n sicr?
   confirm_body: Ni ellir dadwneud y weithred hon.
-app_launcher:
-  enable: Galluogi lansiwr app
-  launch_on:
-    mouse_over: Llygoden drosodd
-    primary: Cynradd
-  monitor: Monitor i ddangos
-  runners:
-    cmd: Gorchmynnwn
-    explorer: Redych
-    label: Rhedwyr
 apps_configurations:
   app:
     bindings: Rhwymo (nodwch fod angen y ddau opsiwn)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Ffolder gosod
   load: Lwythet
   settings_file: Ffeil Gosodiadau
-  simulate_fullscreen: Efelychu digwyddiad sgrin lawn
 extras:
   clear_icons: Storfa eiconau system glir
   clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
@@ -95,6 +84,10 @@ extras:
   links: Dolenni Swyddogol
   relaunch: Hail -deirion
   version: Fersiwn
+  version_fixed: >-
+    Mae'r cymhwysiad a fersiynau WebView2 Runtime yn sefydlog. Mae hyn yn golygu
+    na fydd y rhaglen yn derbyn diweddariadau ac ni fydd WebView2 Runtime yn
+    cael ei ddiweddaru'n awtomatig gyda diweddariadau Windows.
 general:
   accent_color: Lliw acen
   date_format: Fformat dyddiad
@@ -102,6 +95,7 @@ general:
     available: Pecynnau Eicon Ar Gael
     selected: Pecynnau Eicon Actif
   language: Iaith
+  monday: Dydd Llun
   performance_mode:
     on_battery: Ar fatri
     on_energy_saver: Ar arbed ynni
@@ -110,7 +104,10 @@ general:
       extreme: Eithafol
       minimal: Lleiaf posibl
     plugged: Plygio neu wefru
+  saturday: dydd Sadwrn
+  start_of_week: Dechrau'r Wythnos
   startup: Rhedeg ar gychwyn?
+  sunday: Sul
   theme:
     available: Themâu sydd ar Gael
     selected: Themâu Gweithredol
@@ -153,18 +150,26 @@ resources:
   app_outdated: >-
     Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
     iawn.
+  corrupted_wallpaper: Wedi methu echdynnu mân-lun - fformat fideo llygredig neu heb ei gefnogi
   delete: Dileu Adnodd
   discover: Darganfyddwch fwy o adnoddau
   has_update: Mae diweddariad ar gael
+  high_impact: Effaith uchel ar berfformiad
   import_wallpapers: Mewnforio papurau wal lleol
   open_folder: Ffolder Adnoddau Agored
   outdated: >-
     Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na
     fyddai'n gweithio'n iawn.
+  see_on_website: Gweler ar y wefan
+review_request:
+  not_now: Ddim nawr
+  sure: Cadarn!
+  title: Yn mwynhau Seelen UI?
 save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 see_more: Gweld mwy
 shortcuts:
+  duplicate_error: Mae'r llwybr byr hwn yn cael ei ddyblygu
   enable: Galluogi system llwybrau byr adeiledig
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch system llwybrau byr eich hun gan
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Newid i Workpace Blaenorol
     switch_workspace: Newid i Workpace {{0}}
     toggle_float: Modd arnofio ffenestr togl
-    toggle_launcher: Lansiwr Toggle
     toggle_monocle: Toggle Workpace Monocle Modd
   readonly_tooltip: Llwybr byr darllen yn unig yw hwn
   reset: Ailosod i ddiffygion
@@ -218,14 +222,6 @@ sides:
   left: Chwith
   right: Dde
   top: Brigant
-start:
-  message: >-
-    Croeso i Seelen UI, yr amgylchedd bwrdd gwaith yn y pen draw gyda rheolwr
-    ffenestri teils corfforedig i wella'ch profiad Windows! Archwiliwch oes
-    newydd o effeithlonrwydd ac amldasgio gyda'n rhyngwyneb greddfol a'n
-    nodweddion uwch.
-  message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
-  title: Croeso!
 toolbar:
   auto_hide: Cuddio awto
   delay_to_hide: Oedi i guddio
@@ -246,23 +242,39 @@ update:
 wall:
   backgrounds: Papurau Wal
   blur: Aneglur
+  cancel: Canslo
+  close: Cau
+  collection_name: Enw Casgliad
+  collections: Casgliadau
   contrast: Gyferbynnwch
+  corrupted_wallpapers_message: 'Papurau wal llygredig, ystyriwch ddileu''r rhain:'
+  create: Creu
+  create_collection: Creu Casgliad
+  default_collection: Casgliad Diofyn
+  delete_collection: Dileu Casgliad
+  edit_collection: Casgliad Golygu
   enable: Galluogi Rheolwr Papur Wal
+  extend: Ymestyn cynradd
   fit:
     contain: Gynhwysaf
     cover: Orchuddia ’
     fill: Lanwem
   flipHorizontal: Fflip llorweddol
   flipVertical: Fflip fertigol
+  generating_thumbnails: Cynhyrchu Mân-luniau Papur Wal
   hours: oriau
   interval: Newid papur wal bob
   minutes: munudau
+  monitor_collection: Casgliad Monitro
+  multimonitor_behaviour: Ymddygiad Amlfonitro
   muted: Tewi sain fideo
   no_background: Sioe sleidiau gwag, gan ddefnyddio cefndir thema yn lle.
+  no_collections: Dim casgliadau wedi eu creu eto. Cliciwch ar y botwm + i greu un.
   objectFit: Ffit Cefndir
   objectPosition: Safle cefndir
   overlayColor: Lliw Troshaen
   overlayMixBlendMode: Modd cyfuniad cymysgedd troshaen
+  per_monitor: Fesul monitor
   playback: Cyflymder chwarae
   position:
     bottom: Waelod
@@ -270,10 +282,17 @@ wall:
     left: Gadawaf
     right: Dde
     top: Brigant
+  processing_video: Prosesu fideo
   random: Sioe sleidiau ar hap
   saturation: Dirlawnder
   seconds: eiliadau
+  select_collection: Dewiswch Casgliad
+  thumbnail_generation_complete: Cynhyrchu Mân-luniau Wedi'i Gyflawni
+  thumbnail_generation_finished: Mae cynhyrchu mân-luniau wedi gorffen yn llwyddiannus
+  wallpaper_collection: Casgliad Papur Wal
+  wallpaper_settings: Gosodiadau Papur Wal
   withOverlay: Gyda throshaen
+  workspace_collections: Casgliadau Gweithle
 weg:
   auto_hide: Cuddio awto
   delay_to_hide: Oedi i guddio
@@ -309,6 +328,18 @@ weg:
   padding: Padin
   show_end_task: Dangos tasg diwedd yn y bar tasgau
   width: Lled
+welcome:
+  give_a_review: Rhowch Adolygiad
+  message: >-
+    Mae Seelen UI yn amgylchedd bwrdd gwaith ffynhonnell agored am ddim ar gyfer
+    Windows. Yma mae gennych reolaeth lawn dros sut mae'ch bwrdd gwaith yn
+    edrych ac yn ymddwyn, sy'n eich galluogi i addasu pob manylyn i gyd-fynd
+    â'ch llif gwaith a'ch steil.
+  ok: Gadewch i ni ddechrau!
+  review: >-
+    Os ydych chi'n mwynhau defnyddio Seelen UI, ystyriwch adael adolygiad ar y
+    siop - mae eich adborth yn helpu'r prosiect i dyfu a gwella.
+  title: Croeso i UI Seelen!
 widget:
   enable: Galluogi'r teclyn hwn
   enable_for_monitor: Galluogi ar y monitor hwn

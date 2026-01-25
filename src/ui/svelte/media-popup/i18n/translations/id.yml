@@ -1,0 +1,13 @@
+default_multimedia_volume: Volume Multimedia
+device:
+  channel:
+    system: Suara sistem
+  comunications: Komunikasi
+  missing: Perangkat Hilang
+  mixer: Pengaduk Volume
+  multimedia: Multimedia
+  settings: Pengaturan Perangkat Lainnya
+  volume: Volume Perangkat
+input_devices: Perangkat masukan
+output_devices: Perangkat keluaran
+players: Pemutar Media

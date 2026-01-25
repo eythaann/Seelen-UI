@@ -437,6 +437,12 @@ impl Placeholder {
             "@default/system-tray" => "@seelen/tb-system-tray".into(),
             "@default/quick-settings" => "@seelen/tb-quick-settings".into(),
             "@default/bluetooth" => "@seelen/tb-bluetooth-popup".into(),
+            "@default/keyboard" => "@seelen/tb-keyboard-selector".into(),
+            "@default/user" => "@seelen/tb-user-menu".into(),
+            "@default/network" => "@seelen/tb-network-popup".into(),
+            "@default/date" => "@seelen/tb-calendar-popup".into(),
+            "@default/media" => "@seelen/tb-media-popup".into(),
+            "@default/notifications" => "@seelen/tb-notifications".into(),
             _ => id,
         }
     }

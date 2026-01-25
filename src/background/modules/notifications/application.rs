@@ -1,22 +1,19 @@
+use parking_lot::Mutex as ParkingLotMutex;
+use seelen_core::system_state::{
+    AppNotification, Toast, ToastActionActivationType, ToastBindingChild, ToastText,
+};
 use std::{
     collections::HashSet,
     path::PathBuf,
     sync::{
         atomic::{AtomicBool, Ordering},
-        Arc,
+        LazyLock,
     },
-};
-
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
-use seelen_core::system_state::{
-    AppNotification, Toast, ToastActionActivationType, ToastBindingChild, ToastText,
 };
 use tauri::Manager;
 use windows::{
     ApplicationModel::AppInfo,
     Foundation::{TypedEventHandler, Uri},
-    Win32::System::WinRT::EventRegistrationToken,
     UI::Notifications::{
         KnownNotificationBindings,
         Management::{UserNotificationListener, UserNotificationListenerAccessStatus},
@@ -31,24 +28,17 @@ use crate::{
     event_manager, log_error,
     modules::{
         apps::application::msix::get_hightest_quality_posible_for_uwp_image,
-        start::application::START_MENU_MANAGER,
+        start::application::StartMenuManager,
     },
-    trace_lock,
-    utils::{convert_file_to_src, icon_extractor::extract_and_save_icon_umid, spawn_named_thread},
-    windows_api::{
-        event_window::IS_INTERACTIVE_SESSION, traits::EventRegistrationTokenExt,
-        types::AppUserModelId, WindowsApi,
+    utils::{
+        convert_file_to_src, icon_extractor::request_icon_extraction_from_umid,
+        lock_free::SyncHashMap, spawn_named_thread,
     },
+    windows_api::{event_window::IS_INTERACTIVE_SESSION, types::AppUserModelId, WindowsApi},
 };
 
-lazy_static! {
-    pub static ref NOTIFICATION_MANAGER: Arc<Mutex<NotificationManager>> = Arc::new(Mutex::new(
-        NotificationManager::new().expect("Failed to create notification manager")
-    ));
-    pub static ref LOADED_NOTIFICATIONS: Arc<Mutex<HashSet<u32>>> =
-        Arc::new(Mutex::new(HashSet::new()));
-}
-
+static LOADED_NOTIFICATIONS: LazyLock<ParkingLotMutex<HashSet<u32>>> =
+    LazyLock::new(|| ParkingLotMutex::new(HashSet::new()));
 static RELEASED: AtomicBool = AtomicBool::new(true);
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -59,50 +49,63 @@ pub enum NotificationEvent {
 }
 
 pub struct NotificationManager {
-    notifications: Vec<AppNotification>,
+    notifications: SyncHashMap<u32, AppNotification>,
     manager: ToastNotificationManagerForUser,
     listener: UserNotificationListener,
-    event_token: Option<EventRegistrationToken>,
+    event_token: Option<i64>,
 }
 
 unsafe impl Send for NotificationManager {}
+unsafe impl Sync for NotificationManager {}
 
 event_manager!(NotificationManager, NotificationEvent);
 
 impl NotificationManager {
     fn new() -> Result<Self> {
         Ok(Self {
-            notifications: Vec::new(),
+            notifications: SyncHashMap::new(),
             manager: ToastNotificationManager::GetDefault()?,
             listener: UserNotificationListener::Current()?,
             event_token: None,
         })
     }
 
-    pub fn notifications(&self) -> &Vec<AppNotification> {
-        &self.notifications
+    pub fn instance() -> &'static Self {
+        static MANAGER: LazyLock<NotificationManager> = LazyLock::new(|| {
+            let mut manager =
+                NotificationManager::new().expect("Failed to create notification manager");
+            manager.init().log_error();
+            manager
+        });
+        &MANAGER
     }
 
-    pub fn remove_notification(&mut self, id: u32) -> Result<()> {
+    pub fn notifications(&self) -> Vec<AppNotification> {
+        let mut notifications = self.notifications.values();
+        notifications.sort_by(|a, b| b.date.cmp(&a.date));
+        notifications
+    }
+
+    pub fn remove_notification(&self, id: u32) -> Result<()> {
         self.listener.RemoveNotification(id)?;
-        Self::event_tx().send(NotificationEvent::Removed(id))?;
+        Self::send(NotificationEvent::Removed(id));
         Ok(())
     }
 
-    pub fn clear_notifications(&mut self) -> Result<()> {
+    pub fn clear_notifications(&self) -> Result<()> {
         let mut umids = HashSet::new();
-        for n in self.notifications() {
+        self.notifications.for_each(|(_, n)| {
             umids.insert(n.app_umid.clone());
-        }
+        });
         for umid in umids {
             let history = self.manager.History()?;
             history.ClearWithId(&umid.into())?;
         }
-        Self::event_tx().send(NotificationEvent::Cleared)?;
+        Self::send(NotificationEvent::Cleared);
         Ok(())
     }
 
-    pub fn initialize(&mut self) -> Result<()> {
+    fn init(&mut self) -> Result<()> {
         let access = self.listener.RequestAccessAsync()?.get()?;
         if access != UserNotificationListenerAccessStatus::Allowed {
             return Err("Failed to get notification access".into());
@@ -121,7 +124,7 @@ impl NotificationManager {
             .listener
             .NotificationChanged(&TypedEventHandler::new(Self::on_notifications_change))
         {
-            Ok(token) => self.event_token = Some(token.as_event_token()),
+            Ok(token) => self.event_token = Some(token),
             Err(error) => {
                 log::warn!("Failed to register winrt notification change handler: {error}");
                 // intead we use a thread
@@ -142,14 +145,6 @@ impl NotificationManager {
 
         let eid = Self::subscribe(|e| log_error!(Self::process_event(e)));
         Self::set_event_handler_priority(&eid, 1);
-        Ok(())
-    }
-
-    pub fn release(&mut self) -> Result<()> {
-        if let Some(token) = self.event_token.take() {
-            self.listener.RemoveNotificationChanged(token.value)?;
-        }
-        RELEASED.store(true, Ordering::Release);
         Ok(())
     }
 
@@ -178,7 +173,7 @@ impl NotificationManager {
 
     fn manual_notifications_loop() -> Result<()> {
         let listener = { UserNotificationListener::Current()? };
-        let mut old_toasts = { trace_lock!(LOADED_NOTIFICATIONS).clone() };
+        let mut old_toasts = LOADED_NOTIFICATIONS.lock().clone();
 
         for u_notification in listener
             .GetNotificationsAsync(NotificationKinds::Toast)?
@@ -198,19 +193,19 @@ impl NotificationManager {
     }
 
     fn process_event(event: NotificationEvent) -> Result<()> {
-        let mut manager = trace_lock!(NOTIFICATION_MANAGER);
+        let manager = NotificationManager::instance();
         match event {
             NotificationEvent::Added(id) => {
                 let u_notification = UserNotificationListener::Current()?.GetNotification(id)?;
                 manager.load_notification(u_notification)?;
             }
             NotificationEvent::Removed(id) => {
-                manager.notifications.retain(|n| n.id != id);
-                trace_lock!(LOADED_NOTIFICATIONS).remove(&id);
+                manager.notifications.remove(&id);
+                LOADED_NOTIFICATIONS.lock().remove(&id);
             }
             NotificationEvent::Cleared => {
                 manager.notifications.clear();
-                trace_lock!(LOADED_NOTIFICATIONS).clear();
+                LOADED_NOTIFICATIONS.lock().clear();
             }
         }
         Ok(())
@@ -308,10 +303,9 @@ impl NotificationManager {
     }
 
     // this function an in general all the notification system can still be improved on usability and performance
-    fn load_notification(&mut self, u_notification: UserNotification) -> Result<()> {
-        {
-            trace_lock!(LOADED_NOTIFICATIONS).insert(u_notification.Id()?);
-        }
+    fn load_notification(&self, u_notification: UserNotification) -> Result<()> {
+        let notification_id = u_notification.Id()?;
+        LOADED_NOTIFICATIONS.lock().insert(notification_id);
         let notification = u_notification.Notification()?;
 
         let app_info = match u_notification.AppInfo() {
@@ -385,18 +379,29 @@ impl NotificationManager {
         };
 
         // pre-extraction to avoid flickering on the ui
-        extract_and_save_icon_umid(&app_umid.to_string().into());
+        request_icon_extraction_from_umid(&app_umid.to_string().into());
 
-        self.notifications.push(AppNotification {
-            id: u_notification.Id()?,
-            app_umid: app_umid.to_string(),
-            app_name: display_info.DisplayName()?.to_string(),
-            app_description: display_info.Description()?.to_string(),
-            date: u_notification.CreationTime()?.UniversalTime,
-            content: notification_content,
-        });
-        self.notifications.sort_by(|a, b| b.date.cmp(&a.date));
+        self.notifications.upsert(
+            notification_id,
+            AppNotification {
+                id: notification_id,
+                app_umid: app_umid.to_string(),
+                app_name: display_info.DisplayName()?.to_string(),
+                app_description: display_info.Description()?.to_string(),
+                date: u_notification.CreationTime()?.UniversalTime,
+                content: notification_content,
+            },
+        );
         Ok(())
+    }
+}
+
+impl Drop for NotificationManager {
+    fn drop(&mut self) {
+        if let Some(token) = self.event_token.take() {
+            self.listener.RemoveNotificationChanged(token).log_error();
+        }
+        RELEASED.store(true, Ordering::Release);
     }
 }
 
@@ -414,7 +419,7 @@ fn get_text_from_toast(toast: &Toast) -> String {
 pub fn get_toast_activator_clsid(app_umid: &AppUserModelId) -> Result<String> {
     match app_umid {
         AppUserModelId::PropertyStore(umid) => {
-            let guard = START_MENU_MANAGER.load();
+            let guard = StartMenuManager::instance();
             if let Some(item) = guard.get_by_file_umid(umid) {
                 let clsid = WindowsApi::get_file_toast_activator(&item.path)?;
                 return Ok(clsid);

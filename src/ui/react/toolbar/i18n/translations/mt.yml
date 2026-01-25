@@ -20,9 +20,6 @@ context_menu:
   restore: Irrestawra lil Default
   settings: Settings
   task_manager: Task Manager
-keyboard:
-  more: Aktar settings tat-tastiera
-  title: Tqassim tat-tastiera
 media:
   default_multimedia_volume: Volum multimedjali
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Apparat ta 'input
   output_devices: Apparat tal-ħruġ
   players: Plejers tal-midja
-network:
-  available: Netwerks disponibbli
-  connect: Qabbad
-  connected: Konnessi ma'
-  disconnect: Skonnettja
-  hidden: Netwerk moħbi
-  more: Aktar settings tan-netwerk
-  not_found: Ma nstabu l-ebda netwerks
-  placeholder:
-    password: Password
-  saved: Netwerks salvati
-  scanning: Skennjar għal netwerks
-  secured: Netwerk kriptat
 notifications:
   clear: Ċar kollox
   empty: L-ebda notifika
@@ -70,24 +54,3 @@ settings:
   power: Qawwa
   restart: Erġa ibda
   title: Settings
-userhome:
-  empty_list: L-ebda oġġetti
-  folders:
-    desktop: Desktop
-    documents: Dokumenti
-    downloads: Downloads
-    more_items: Uri aktar ...
-    music: Mużika
-    pictures: Stampi
-    recent: Reċentement użat
-    reduce_items: Uri inqas ...
-    title: Direttorji tal-utent
-    videos: Vidjows
-  profile:
-    accounts: Settings tal-kont miftuħ
-    open_onedrive: Open OneDrive Directory
-    open_user_folder: Direttorju tal-Utent miftuħ
-  seelen_options:
-    open_installation_folder: Iftaħ il-folder tas-settings Seelen
-    open_log_folder: Iftaħ Seelen Log Folder
-    title: Direttorji Seelen

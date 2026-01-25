@@ -1,0 +1,13 @@
+default_multimedia_volume: მულტიმედიური მოცულობა
+device:
+  channel:
+    system: სისტემის ხმები
+  comunications: კომუნიკაციები
+  missing: მოწყობილობა აკლია
+  mixer: მოცულობის მიქსერი
+  multimedia: მულტიმედია
+  settings: სხვა მოწყობილობის პარამეტრები
+  volume: მოწყობილობის მოცულობა
+input_devices: შეყვანის მოწყობილობები
+output_devices: გამომავალი მოწყობილობები
+players: მედია ფლეერები

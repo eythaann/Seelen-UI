@@ -59,7 +59,7 @@ impl WmState {
         vd.monitors.for_each(|(mid, monitor)| {
             let active_workspace_id = monitor.active_workspace_id();
             if let Some(w) = self.layouts.get(active_workspace_id) {
-                render_tree.insert(mid.clone(), w.layout.structure.clone());
+                render_tree.insert(mid.clone(), w.layout.clone());
             }
         });
         WmRenderTree(render_tree)

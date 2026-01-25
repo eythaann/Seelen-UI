@@ -20,9 +20,6 @@ context_menu:
   restore: Endurheimta í sjálfgefið
   settings: Stillingar
   task_manager: Verkefnastjóri
-keyboard:
-  more: Fleiri lyklaborðsstillingar
-  title: Lyklaborð skipulag
 media:
   default_multimedia_volume: Margmiðlunarrúmmál
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Inntakstæki
   output_devices: Framleiðsla tæki
   players: Fjölmiðla leikmenn
-network:
-  available: Tiltæk netkerfi
-  connect: Tengdu
-  connected: Tengdur við
-  disconnect: Aftengdu
-  hidden: Falið net
-  more: Fleiri netstillingar
-  not_found: Engin net fundust
-  placeholder:
-    password: Lykilorð
-  saved: Vistað netkerfi
-  scanning: Leitar að netkerfum
-  secured: Dulkóðað net
 notifications:
   clear: Skýrt allt
   empty: Engar tilkynningar
@@ -70,24 +54,3 @@ settings:
   power: Máttur
   restart: Endurræsa
   title: Stillingar
-userhome:
-  empty_list: Engir hlutir
-  folders:
-    desktop: Skrifborð
-    documents: Skjöl
-    downloads: Niðurhal
-    more_items: Sýndu meira ...
-    music: Tónlist
-    pictures: Myndir
-    recent: Nýlega notað
-    reduce_items: Sýna minna ...
-    title: Notendaskrár
-    videos: Myndbönd
-  profile:
-    accounts: Opna reikningsstillingar
-    open_onedrive: Opna OneDrive skrá
-    open_user_folder: Opna notendaskrá
-  seelen_options:
-    open_installation_folder: Opnaðu Seelen Stillingar möppu
-    open_log_folder: Opnaðu Seelen Log möppu
-    title: Seelen möppur

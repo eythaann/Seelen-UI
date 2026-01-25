@@ -1,0 +1,13 @@
+default_multimedia_volume: 멀티미디어 볼륨
+device:
+  channel:
+    system: 시스템 소리
+  comunications: 연락
+  missing: 분실된 장치
+  mixer: 볼륨 믹서
+  multimedia: 멀티미디어
+  settings: 추가 장치 설정
+  volume: 장치 볼륨
+input_devices: 입력 장치
+output_devices: 출력 장치
+players: 미디어 플레이어

@@ -13,7 +13,7 @@ impl FullState {
     pub fn initial_toolbar_items() -> Placeholder {
         Placeholder {
             left: vec![
-                ToolbarItem2::Plugin("@default/user-folder".into()),
+                ToolbarItem2::Plugin("@seelen/tb-user-menu".into()),
                 ToolbarItem2::Inline(Box::new(ToolbarItem::Text(TextToolbarItem {
                     template: "return \"|\"".into(),
                     ..Default::default()
@@ -25,15 +25,15 @@ impl FullState {
                 }))),
                 ToolbarItem2::Plugin("@default/focused-app-title".into()),
             ],
-            center: vec![ToolbarItem2::Plugin("@default/date".into())],
+            center: vec![ToolbarItem2::Plugin("@seelen/tb-calendar-popup".into())],
             right: vec![
                 ToolbarItem2::Plugin("@seelen/tb-system-tray".into()),
-                ToolbarItem2::Plugin("@default/keyboard".into()),
+                ToolbarItem2::Plugin("@seelen/tb-keyboard-selector".into()),
                 ToolbarItem2::Plugin("@seelen/tb-bluetooth-popup".into()),
-                ToolbarItem2::Plugin("@default/network".into()),
-                ToolbarItem2::Plugin("@default/media".into()),
+                ToolbarItem2::Plugin("@seelen/tb-network-popup".into()),
+                ToolbarItem2::Plugin("@seelen/tb-media-popup".into()),
                 ToolbarItem2::Plugin("@default/power".into()),
-                ToolbarItem2::Plugin("@default/notifications".into()),
+                ToolbarItem2::Plugin("@seelen/tb-notifications".into()),
                 ToolbarItem2::Plugin("@seelen/tb-quick-settings".into()),
             ],
             ..Default::default()

@@ -20,9 +20,6 @@ context_menu:
   restore: Odatiy holga qaytaring
   settings: Sozlamalar
   task_manager: Vazifa menejeri
-keyboard:
-  more: Ko'proq klaviatura sozlamalari
-  title: Klaviatura tartibi
 media:
   default_multimedia_volume: Multimedia hajmi
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Kirish moslamalari
   output_devices: Chiqish moslamalari
   players: Media pleerlari
-network:
-  available: Mavjud tarmoqlar
-  connect: Ulanmoq
-  connected: ga ulangan
-  disconnect: Ajratmoq
-  hidden: Yashirin tarmoq
-  more: Ko'proq tarmoq sozlamalari
-  not_found: Tarmoq topilmadi
-  placeholder:
-    password: Parol
-  saved: Saqlangan tarmoqlar
-  scanning: Tarmoqlarni skanerlash
-  secured: Shifrlangan tarmoq
 notifications:
   clear: Hamma narsani tozalang
   empty: Hech qanday bildirishnomalar yo'q
@@ -70,24 +54,3 @@ settings:
   power: Kuch
   restart: Qayta ishga tushirish
   title: Sozlash
-userhome:
-  empty_list: Hech narsa yo'q
-  folders:
-    desktop: Ish stoli
-    documents: Hujjatlar
-    downloads: Yuklab olish
-    more_items: Ko'proq ma'lumot ...
-    music: Musiqa
-    pictures: Rasmlar
-    recent: Yaqinda ishlatilgan
-    reduce_items: Kamroq ko'rsatish ...
-    title: Foydalanuvchi kataloglari
-    videos: Videolar
-  profile:
-    accounts: Hisobni ochish sozlamalari
-    open_onedrive: OneDriv katalogni oching
-    open_user_folder: Foydalanuvchi katalogini ochish
-  seelen_options:
-    open_installation_folder: Suelen sozlamalari papkasini oching
-    open_log_folder: Suelen jurnali papkasini oching
-    title: Seelen kataloglari

@@ -20,9 +20,6 @@ context_menu:
   restore: ស្តារទៅលំនាំដើមវិញ
   settings: ការកំណត់
   task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
-keyboard:
-  more: ការកំណត់ក្តារចុចបន្ថែមទៀត
-  title: ប្លង់ក្តារចុច
 media:
   default_multimedia_volume: បរិមាណពហុព័ត៌មាន
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: ឧបករណ៍បញ្ចូល
   output_devices: ឧបករណ៍លទ្ធផល
   players: អ្នកលេងប្រព័ន្ធផ្សព្វផ្សាយ
-network:
-  available: បណ្តាញដែលមាន
-  connect: តផ្ជាប់
-  connected: បានភ្ជាប់ទៅ
-  disconnect: ផ្ដាច់
-  hidden: បណ្តាញដែលលាក់
-  more: ការកំណត់បណ្តាញច្រើនទៀត
-  not_found: រកមិនឃើញបណ្តាញ
-  placeholder:
-    password: ហក្យសមងាត់
-  saved: បណ្តាញដែលបានរក្សាទុក
-  scanning: កំពុងស្កេនរកបណ្តាញ
-  secured: បណ្តាញដែលបានអ៊ិនគ្រីប
 notifications:
   clear: ជម្រះទាំងអស់
   empty: គ្មានការជូនដំណឹង
@@ -70,24 +54,3 @@ settings:
   power: អមនាច
   restart: រ្យេដិតនោ
   title: ការកំណត់
-userhome:
-  empty_list: មិនមានធាតុ
-  folders:
-    desktop: ផ្ទៃតុ
-    documents: ឯកសារ
-    downloads: ដេលរេប្យនស់
-    more_items: បង្ហាញបន្ថែមទៀត ...
-    music: តន្រ្ដី
-    pictures: រូបភាព
-    recent: បានប្រើថ្មីៗនេះ
-    reduce_items: បង្ហាញតិច ...
-    title: ថតអ្នកប្រើ
-    videos: វីឌីអូ
-  profile:
-    accounts: បើកការកំណត់គណនី
-    open_onedrive: បើកថត OdeDrive
-    open_user_folder: បើកថតអ្នកប្រើប្រាស់
-  seelen_options:
-    open_installation_folder: បើកថតការកំណត់ SEEN
-    open_log_folder: បើកថតឯកសារកំណត់ហេតុ Seeen បើក
-    title: ថតឯកសារ Seel

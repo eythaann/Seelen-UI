@@ -1,0 +1,13 @@
+default_multimedia_volume: බහුමාධ්ය පරිමාව
+device:
+  channel:
+    system: පද්ධති ශබ්ද
+  comunications: සන්නිවේදන
+  missing: උපාංගය අතුරුදහන්
+  mixer: වෙළුම් මිශ්රකය
+  multimedia: බහුමාධ්ය
+  settings: තවත් උපාංග සැකසුම්
+  volume: උපාංග පරිමාව
+input_devices: ආදාන උපාංග
+output_devices: ප්රතිදාන උපාංග
+players: මාධ්ය වාදකයන්

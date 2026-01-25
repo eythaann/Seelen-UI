@@ -1,16 +1,6 @@
 action:
   confirm: Bass du secher?
   confirm_body: Dës Aktioun kann net annuléiert ginn.
-app_launcher:
-  enable: Aktivéiert App Launcher
-  launch_on:
-    mouse_over: Maus iwwer
-    primary: Primär
-  monitor: Monitor fir ze weisen
-  runners:
-    cmd: Kommun de Kommentar
-    explorer: Lafe
-    label: Leefer
 apps_configurations:
   app:
     bindings: Bindend (Notiz béid Optiounen sinn erfuerderlech)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Installatioun Dossier
   load: Lueden
   settings_file: Settytout-Datei
-  simulate_fullscreen: Simuléiert Vollbild Event
 extras:
   clear_icons: Kloer System Symboler Cache
   clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
@@ -95,6 +84,10 @@ extras:
   links: Offiziell Linken
   relaunch: Relatioun
   version: Erëm
+  version_fixed: >-
+    D'Applikatioun an d'WebView2 Runtime Versioune si fixéiert. Dëst bedeit datt
+    d'Applikatioun keng Updates kritt an de WebView2 Runtime gëtt net
+    automatesch mat Windows Updates aktualiséiert.
 general:
   accent_color: Akzenter Faarf
   date_format: Datum Format
@@ -102,6 +95,7 @@ general:
     available: Verfügbar Ikon Packs
     selected: Aktiv Ikon Packs
   language: Sprooche
+  monday: Méindeg
   performance_mode:
     on_battery: Op Batterie
     on_energy_saver: Op Energiespuer
@@ -110,7 +104,10 @@ general:
       extreme: Extrem
       minimal: Minimal
     plugged: Ugeschloss oder opluede
+  saturday: Samschdeg
+  start_of_week: Start vun der Woch
   startup: Run op Startup?
+  sunday: Sonndeg
   theme:
     available: Verfügbar Themen
     selected: Aktiv Themen
@@ -151,18 +148,26 @@ reset_all_to_default: Reset all op Standardwäerter
 reset_to_default: Reset op Standardwäert
 resources:
   app_outdated: Dës Ressource brauch eng nei Versioun vu Seelen Ui fir richteg ze schaffen.
+  corrupted_wallpaper: Ausgefall Miniatur Extrait - korrupt oder net ënnerstëtzt Video Format
   delete: Läschen Ressource
   discover: Entdeckt méi Ressourcen
   has_update: En Update ass verfügbar
+  high_impact: Héich Impakt op Leeschtung
   import_wallpapers: Import lokal Wallpapers
   open_folder: Oppen Ressource Dossier
   outdated: >-
     Dës Ressource gouf fir eng méi al Versioun vu seelen UI entworf a sech net
     richteg schaffen.
+  see_on_website: Gesinn op Websäit
+review_request:
+  not_now: Net elo
+  sure: Sécher!
+  title: Genéisst Seelen UI?
 save: Spuerwäit
 save_and_restart: Spuert & nei starten
 see_more: Méi gesinn
 shortcuts:
+  duplicate_error: Dës Ofkiirzung gëtt duplizéiert
   enable: Aktivéiert agebaut-in Shortcuts System
   enable_tooltip: >-
     Desaktivéiere wann Dir Ären eegene Ofkierzungsystem implementéiert, mat dem
@@ -207,7 +212,6 @@ shortcuts:
     switch_to_previous_workspace: Wiesselt op virdrun Aarbechtsberäich
     switch_workspace: Schalt op Aarbechtsberäich {{0}}
     toggle_float: Toggle Fenster Float Modus
-    toggle_launcher: Toggle launcher
     toggle_monocle: Toggle Workspace Monocle Modus
   readonly_tooltip: Dëst ass e Lies-nëmme Mangel
   reset: Reset op Defaults
@@ -216,14 +220,6 @@ sides:
   left: Lénks
   right: Riets
   top: Uewen
-start:
-  message: >-
-    Wëllkomm fir ze gesinn Ui, den ultimativen Desktop Ëmfeld mat engem agebaute
-    Fournisseur Manager fir Är Windows Erfarung ze verbesseren! Entdeckt eng nei
-    Ära vun Effizienz a Multits mat eisen intuitiven Interface a
-    fortgeschratgeschen Features.
-  message_accent: Optimiséiert Är Produktivitéit mam Stil!
-  title: Wëllkomm!
 toolbar:
   auto_hide: Automatesch
   delay_to_hide: Verspéidung ze verstoppen
@@ -244,23 +240,41 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Blour
+  cancel: Ofbriechen
+  close: Zoumaachen
+  collection_name: Sammlung Numm
+  collections: Kollektiounen
   contrast: Kontrad
+  corrupted_wallpapers_message: 'Korrupt Tapeten, betruecht dës ze läschen:'
+  create: Schafen
+  create_collection: Schafen Kollektioun
+  default_collection: Standard Kollektioun
+  delete_collection: Läschen Kollektioun
+  edit_collection: Kollektioun änneren
   enable: Aktivéiert Wallpaper Manager
+  extend: Primär verlängeren
   fit:
     contain: Enthalen
     cover: Zouzedoen
     fill: Fëllt
   flipHorizontal: Flip horizontal
   flipVertical: Flip vertikal
+  generating_thumbnails: Generéiere Wallpaper Thumbnails
   hours: Stonnen.
   interval: Änneren Wallpaper all
   minutes: Minutte vun der Minutten
+  monitor_collection: Monitor Kollektioun
+  multimonitor_behaviour: Multimonitor Behuelen
   muted: Demp Video Audio
   no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
+  no_collections: >-
+    Keng Kollektiounen erstallt nach. Klickt op de + Knäppchen fir een ze
+    kreéieren.
   objectFit: Hannergrond fit
   objectPosition: Hannergrënn Positioun
   overlayColor: Iwwerlauschteren Faarf
   overlayMixBlendMode: Overlay Mix vermëschen Modus
+  per_monitor: Pro Monitor
   playback: Spillversuch
   position:
     bottom: Siwenn
@@ -268,10 +282,17 @@ wall:
     left: Lénks
     right: Riets
     top: Uewen
+  processing_video: Video veraarbecht
   random: Zoufälleg Slideshow
   saturation: Saturatioun
   seconds: Sekonnen
+  select_collection: Wielt Kollektioun
+  thumbnail_generation_complete: Thumbnail Generatioun Komplett
+  thumbnail_generation_finished: Thumbnail Generatioun ass erfollegräich ofgeschloss
+  wallpaper_collection: Wallpaper Kollektioun
+  wallpaper_settings: Wallpaper Astellunge
   withOverlay: Mat Overlay
+  workspace_collections: Aarbechtsberäich Kollektiounen
 weg:
   auto_hide: Automatesch
   delay_to_hide: Verspéidung ze verstoppen
@@ -307,6 +328,18 @@ weg:
   padding: Padding
   show_end_task: Show Enn Aufgab an der Taskbar
   width: Breet
+welcome:
+  give_a_review: Gëff eng Iwwerpréiwung
+  message: >-
+    Seelen UI ass e gratis an Open Source Desktop-Ëmfeld fir Windows. Hei hutt
+    Dir voll Kontroll iwwer wéi Ären Desktop ausgesäit a behuelen, wat Iech
+    erlaabt all Detail ze personaliséieren fir Äre Workflow a Stil ze passen.
+  ok: Loosst eis ufänken!
+  review: >-
+    Wann Dir genéisst Seelen UI ze benotzen, betruecht eng Iwwerpréiwung am
+    Geschäft ze loossen - Äre Feedback hëlleft de Projet ze wuessen a
+    verbesseren.
+  title: Wëllkomm op Seelen UI!
 widget:
   enable: Aktivéiert dëse Widget
   enable_for_monitor: Aktivéiert op dësem Monitor

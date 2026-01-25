@@ -13,11 +13,4 @@ export const RouteExtraInfo: { [key: string]: AnyComponent } = {
       </Tooltip>
     );
   },
-  [RoutePath.AppLauncher]: () => {
-    /* const shortcut = useSelector(newSelectors.ahkVariables.toggleLauncher);
-    return (
-      <span style={{ fontSize: '0.9rem', color: 'var(--color-gray-500)' }}>({shortcut.fancy})</span>
-    ); */
-    return null;
-  },
 };

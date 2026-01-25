@@ -1,16 +1,6 @@
 action:
   confirm: Apa kamu yakin?
   confirm_body: Tindakan ini tidak bisa dibatalkan.
-app_launcher:
-  enable: Aktifkan peluncur aplikasi
-  launch_on:
-    mouse_over: Arahkan mouse
-    primary: Utama
-  monitor: Monitor untuk ditampilkan
-  runners:
-    cmd: Memerintah
-    explorer: Berlari
-    label: Pelari
 apps_configurations:
   app:
     bindings: Mengikat (perhatikan kedua opsi itu diperlukan)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Folder Instalasi
   load: Memuat
   settings_file: File Pengaturan
-  simulate_fullscreen: Simulasikan acara layar penuh
 extras:
   clear_icons: Menghapus Cache Ikon Sistem
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Tautan resmi
   relaunch: Peluncuran kembali
   version: 'Versi: kapan'
+  version_fixed: >-
+    Versi aplikasi dan WebView2 Runtime telah diperbaiki. Artinya aplikasi tidak
+    akan menerima pembaruan dan WebView2 Runtime tidak akan diperbarui secara
+    otomatis dengan pembaruan Windows.
 general:
   accent_color: Aksen warna
   date_format: Format tanggal
@@ -104,6 +97,7 @@ general:
     available: Paket Ikon yang Tersedia
     selected: Paket Ikon Aktif
   language: Bahasa
+  monday: Senin
   performance_mode:
     on_battery: Pada baterai
     on_energy_saver: Tentang Penghemat Energi
@@ -112,7 +106,10 @@ general:
       extreme: Ekstrim
       minimal: Minimal
     plugged: Terhubung atau pengisian daya
+  saturday: Sabtu
+  start_of_week: Awal Minggu
   startup: Jalankan saat startup?
+  sunday: Minggu
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif
@@ -155,18 +152,26 @@ resources:
   app_outdated: >-
     Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat
     berfungsi dengan baik.
+  corrupted_wallpaper: Gagal mengekstrak thumbnail - format video rusak atau tidak didukung
   delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya
   has_update: Pembaruan tersedia
+  high_impact: Dampak tinggi pada kinerja
   import_wallpapers: Impor wallpaper lokal
   open_folder: Buka folder sumber daya
   outdated: >-
     Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak
     berfungsi dengan baik.
+  see_on_website: Lihat di situs web
+review_request:
+  not_now: Tidak sekarang
+  sure: Tentu!
+  title: Menikmati Seelen UI?
 save: Menyimpan
 save_and_restart: Simpan & restart
 see_more: Lihat Lebih Lanjut
 shortcuts:
+  duplicate_error: Pintasan ini diduplikasi
   enable: Aktifkan sistem pintasan bawaan
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan sistem pintasan Anda sendiri
@@ -211,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
     switch_workspace: Beralih ke Workspace {{0}}
     toggle_float: Toggle Window Float Mode
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Sakelar Mode Monokel Workspace
   readonly_tooltip: Ini adalah jalan pintas yang hanya membaca
   reset: Reset ke default
@@ -220,14 +224,6 @@ sides:
   left: Kiri
   right: Benar
   top: Atas
-start:
-  message: >-
-    Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
-    Manager yang digabungkan untuk meningkatkan pengalaman Windows Anda!
-    Jelajahi era baru efisiensi dan multitasking dengan antarmuka intuitif dan
-    fitur canggih kami.
-  message_accent: Optimalkan produktivitas Anda dengan gaya!
-  title: Selamat datang!
 toolbar:
   auto_hide: Persembunyian otomatis
   delay_to_hide: Penundaan untuk bersembunyi
@@ -248,23 +244,39 @@ update:
 wall:
   backgrounds: Wallpaper
   blur: Blur
+  cancel: Membatalkan
+  close: Menutup
+  collection_name: Nama Koleksi
+  collections: Koleksi
   contrast: Kontras
+  corrupted_wallpapers_message: 'Wallpaper rusak, pertimbangkan untuk menghapus ini:'
+  create: Membuat
+  create_collection: Buat Koleksi
+  default_collection: Koleksi Bawaan
+  delete_collection: Hapus Koleksi
+  edit_collection: Sunting Koleksi
   enable: Aktifkan Manajer Wallpaper
+  extend: Perpanjang primer
   fit:
     contain: Berisi
     cover: Penutup
     fill: Isi
   flipHorizontal: Balik Horizontal
   flipVertical: Balik Vertikal
+  generating_thumbnails: Menghasilkan Gambar Mini Wallpaper
   hours: jam
   interval: Ubah wallpaper setiap
   minutes: menit
+  monitor_collection: Koleksi Pantau
+  multimonitor_behaviour: Perilaku Multimonitor
   muted: Bisukan audio video
   no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
+  no_collections: Belum ada koleksi yang dibuat. Klik tombol + untuk membuatnya.
   objectFit: Kesesuaian Latar Belakang
   objectPosition: Posisi Latar Belakang
   overlayColor: Warna Hamparan
   overlayMixBlendMode: Mode Campuran Campuran Hamparan
+  per_monitor: Per monitor
   playback: Kecepatan pemutaran
   position:
     bottom: Bawah
@@ -272,10 +284,17 @@ wall:
     left: Kiri
     right: Benar.
     top: Atas
+  processing_video: Memproses video
   random: Mengacak tayangan slide
   saturation: Kejenuhan
   seconds: detik
+  select_collection: Pilih Koleksi
+  thumbnail_generation_complete: Pembuatan Gambar Kecil Selesai
+  thumbnail_generation_finished: Pembuatan thumbnail telah selesai dengan sukses
+  wallpaper_collection: Koleksi Kertas Dinding
+  wallpaper_settings: Pengaturan Wallpaper
   withOverlay: Dengan Overlay
+  workspace_collections: Koleksi Ruang Kerja
 weg:
   auto_hide: Sembunyi otomatis
   delay_to_hide: Penundaan untuk bersembunyi
@@ -311,6 +330,18 @@ weg:
   padding: Lapisan
   show_end_task: Menampilkan tugas akhir di bilah tugas
   width: Lebar
+welcome:
+  give_a_review: Berikan Ulasan
+  message: >-
+    Seelen UI adalah lingkungan desktop sumber terbuka dan gratis untuk Windows.
+    Di sini Anda memiliki kendali penuh atas tampilan dan perilaku desktop Anda,
+    memungkinkan Anda menyesuaikan setiap detail agar sesuai dengan alur kerja
+    dan gaya Anda.
+  ok: Mari kita mulai!
+  review: >-
+    Jika Anda senang menggunakan Seelen UI, pertimbangkan untuk meninggalkan
+    ulasan di toko — masukan Anda membantu proyek tumbuh dan meningkat.
+  title: Selamat datang di Seelen UI!
 widget:
   enable: Aktifkan widget ini
   enable_for_monitor: Aktifkan pada monitor ini

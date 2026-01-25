@@ -1,16 +1,6 @@
 action:
   confirm: Vai esat pārliecināts?
   confirm_body: Šo darbību nevar atsaukt.
-app_launcher:
-  enable: Iespējot lietotņu palaišanas ierīci
-  launch_on:
-    mouse_over: Pārvietojiet peli virsū
-    primary: Primārais
-  monitor: Uzraudzīt, lai parādītu
-  runners:
-    cmd: Vadība
-    explorer: Izkropļot
-    label: Skrējēji
 apps_configurations:
   app:
     bindings: Iesiešana (ņemiet vērā, ka ir vajadzīgas abas opcijas)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Instalēšanas mape
   load: Slodze
   settings_file: Iestatīšanas fails
-  simulate_fullscreen: Simulējiet pilnekrāna notikumu
 extras:
   clear_icons: Iztīrīt sistēmas ikonu kešatmiņu
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Oficiālas saites
   relaunch: Atsākšana
   version: Versija
+  version_fixed: >-
+    Lietojumprogramma un WebView2 Runtime versijas ir fiksētas. Tas nozīmē, ka
+    lietojumprogramma nesaņems atjauninājumus un WebView2 Runtime netiks
+    automātiski atjaunināts ar Windows atjauninājumiem.
 general:
   accent_color: Akcents
   date_format: Datuma formāts
@@ -104,6 +97,7 @@ general:
     available: Pieejamie ikonu komplekti
     selected: Aktīvās ikonu pakotnes
   language: Valoda
+  monday: pirmdiena
   performance_mode:
     on_battery: Uz akumulatora
     on_energy_saver: Par enerģijas taupīšanu
@@ -112,7 +106,10 @@ general:
       extreme: Galējs
       minimal: Minimāls
     plugged: Pievienots vai uzlādēts
+  saturday: sestdiena
+  start_of_week: Nedēļas sākums
   startup: Skriet startup?
+  sunday: svētdiena
   theme:
     available: Pieejamie motīvi
     selected: Aktīvās tēmas
@@ -153,18 +150,26 @@ reset_all_to_default: Visu noklusējuma vērtību atiestatīšana
 reset_to_default: Atiestatīt noklusējuma vērtību
 resources:
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
+  corrupted_wallpaper: "Neizdevās izvilkt sīktēlu\_— bojāts vai neatbalstīts video formāts"
   delete: Dzēst resursu
   discover: Atklājiet vairāk resursu
   has_update: Ir pieejams atjauninājums
+  high_impact: Liela ietekme uz veiktspēju
   import_wallpapers: Importēt vietējās tapetes
   open_folder: Atvērt resursu mapi
   outdated: >-
     Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties
     pareizi.
+  see_on_website: Skatīt vietnē
+review_request:
+  not_now: Ne tagad
+  sure: Protams!
+  title: Vai jums patīk Seelen UI?
 save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 see_more: Skatīt vairāk
 shortcuts:
+  duplicate_error: Šī saīsne ir dublēta
   enable: Iespējot iebūvēto saīsņu sistēmu
   enable_tooltip: >-
     Atspējot, ja jūs ieviesīsit savu saīsņu sistēmu, izmantojot Seelen UI
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Pārslēdzieties uz iepriekšējo darbvietu
     switch_workspace: Pārslēdzieties uz darbvietu {{0}}
     toggle_float: Pārslēdziet loga pludiņa režīmu
-    toggle_launcher: Pārslēgt palaišanas ierīci
     toggle_monocle: Pārslēdziet darbvietas monokla režīmu
   readonly_tooltip: Tas ir tikai lasāms saīsne
   reset: Atiestatīt uz noklusējuma
@@ -218,14 +222,6 @@ sides:
   left: Atstāts
   right: Pa labi
   top: Tops
-start:
-  message: >-
-    Laipni lūdzam Seelen Ui, galvenajā darbvirsmas vidē ar iestrādātu flīzes
-    Windows Manager, lai uzlabotu jūsu Windows pieredzi! Izpētiet jaunu
-    efektivitātes un daudzuzdevumu laikmetu ar mūsu intuitīvo interfeisu un
-    uzlabotajām funkcijām.
-  message_accent: Optimizējiet savu produktivitāti ar stilu!
-  title: Laipni lūdzam!
 toolbar:
   auto_hide: Auto paslēpt
   delay_to_hide: Aizkavē paslēpties
@@ -246,23 +242,41 @@ update:
 wall:
   backgrounds: Tapetes
   blur: Blur
+  cancel: Atcelt
+  close: Aizvērt
+  collection_name: Kolekcijas nosaukums
+  collections: Kolekcijas
   contrast: Kontrasts
+  corrupted_wallpapers_message: 'Bojātas tapetes, apsveriet iespēju dzēst šīs tapetes:'
+  create: Izveidot
+  create_collection: Izveidot kolekciju
+  default_collection: Noklusējuma kolekcija
+  delete_collection: Dzēst kolekciju
+  edit_collection: Rediģēt kolekciju
   enable: Iespējot fona attēlu pārvaldnieku
+  extend: Pagarināt primāro
   fit:
     contain: Satur
     cover: Vāks
     fill: Aizpildiet
   flipHorizontal: Flip horizontāli
   flipVertical: Flip vertikālais
+  generating_thumbnails: Tapešu sīktēlu ģenerēšana
   hours: laiks
   interval: Mainiet fona attēlus katru
   minutes: protokols
+  monitor_collection: Monitoru kolekcija
+  multimonitor_behaviour: Vairāku monitoru uzvedība
   muted: Izslēgt video audio
   no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
+  no_collections: >-
+    Vēl nav izveidota neviena kolekcija. Noklikšķiniet uz pogas +, lai to
+    izveidotu.
   objectFit: Fona fona atbilstība
   objectPosition: Pamatinformācija Pozīcija
   overlayColor: Pārklājuma krāsa
   overlayMixBlendMode: Pārklājuma sajaukšanas režīms
+  per_monitor: Uz monitoru
   playback: Atskaņošanas ātrums
   position:
     bottom: Apakšējā daļa
@@ -270,10 +284,17 @@ wall:
     left: Kreisā
     right: Tiesības
     top: Top
+  processing_video: Notiek video apstrāde
   random: Randomizējiet slaidrādi
   saturation: Piesātinājums
   seconds: sekundes
+  select_collection: Atlasiet Kolekcija
+  thumbnail_generation_complete: Sīktēlu ģenerēšana ir pabeigta
+  thumbnail_generation_finished: Sīktēlu ģenerēšana ir veiksmīgi pabeigta
+  wallpaper_collection: Tapešu kolekcija
+  wallpaper_settings: Tapetes iestatījumi
   withOverlay: Ar pārklājumu
+  workspace_collections: Darbvietu kolekcijas
 weg:
   auto_hide: Auto paslēpt
   delay_to_hide: Aizkavē paslēpties
@@ -309,6 +330,16 @@ weg:
   padding: Polsterējums
   show_end_task: Parādīt beigu uzdevumu uzdevumjoslā
   width: Platums
+welcome:
+  give_a_review: Sniedziet atsauksmi
+  message: >-
+    Seelen UI ir bezmaksas atvērtā koda darbvirsmas vide operētājsistēmai
+    Windows. Šeit jums ir pilnīga kontrole pār jūsu darbvirsmas izskatu un
+    darbību, ļaujot pielāgot katru detaļu, lai tā atbilstu jūsu darbplūsmai un
+    stilam.
+  ok: Sāksim!
+  review: "Ja jums patīk izmantot Seelen UI, apsveriet iespēju atstāt atsauksmi par veikalu\_— jūsu atsauksmes palīdz projektam augt un uzlaboties."
+  title: Laipni lūdzam Seelen lietotāja saskarnē!
 widget:
   enable: Ieslēgt šo logrīku
   enable_for_monitor: Ieslēgt šajā monitorā

@@ -1,0 +1,13 @@
+default_multimedia_volume: Multimédiás kötet
+device:
+  channel:
+    system: Rendszerhangok
+  comunications: Kommunikáció
+  missing: Hiányzó Eszköz
+  mixer: Volume Mixer
+  multimedia: Multimédia
+  settings: További eszközbeállítások
+  volume: Eszköz hangereje
+input_devices: Bemeneti eszközök
+output_devices: Kimeneti eszközök
+players: Médialejátszók

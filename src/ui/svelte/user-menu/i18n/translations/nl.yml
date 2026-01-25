@@ -1,0 +1,21 @@
+empty_list: Geen artikelen
+folders:
+  desktop: Bureaublad
+  documents: Documenten
+  downloads: Downloads
+  more_items: Toon meer...
+  music: Muziek
+  pictures: Afbeeldingen
+  recent: Recent gebruikt
+  reduce_items: Toon minder...
+  title: Gebruikersmappen
+  videos: Video's
+profile:
+  accounts: Open accountinstellingen
+  log_out: Uitloggen
+  open_onedrive: Open de OneDrive-map
+  open_user_folder: Gebruikersmap openen
+seelen_options:
+  open_installation_folder: Open de map Seelen-instellingen
+  open_log_folder: Open de Seelen-logboekmap
+  title: Seelen-gidsen

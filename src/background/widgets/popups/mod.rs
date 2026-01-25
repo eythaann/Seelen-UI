@@ -12,7 +12,11 @@ use tauri::{
 };
 use uuid::Uuid;
 
-use crate::{app::get_app_handle, error::Result, utils::WidgetWebviewLabel, widgets::WebviewArgs};
+use crate::{
+    app::get_app_handle,
+    error::Result,
+    widgets::{webview::WebviewArgs, WidgetWebviewLabel},
+};
 
 pub static POPUPS_MANAGER: LazyLock<Mutex<PopupsManager>> = LazyLock::new(|| {
     Mutex::new(PopupsManager {

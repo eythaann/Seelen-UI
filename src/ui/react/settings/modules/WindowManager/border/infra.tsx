@@ -1,32 +1,29 @@
 import { InputNumber, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector, useDispatchCallback } from "../../shared/utils/infra.ts";
-
-import { BorderSelectors } from "../../shared/store/app/selectors.ts";
-import { BorderActions } from "./app.ts";
+import { getBorderConfig, setBorderEnabled, setBorderOffset, setBorderWidth } from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 
 export const BorderSettings = () => {
-  const enabled = useAppSelector(BorderSelectors.enabled);
-  const offset = useAppSelector(BorderSelectors.offset);
-  const width = useAppSelector(BorderSelectors.width);
+  const borderConfig = getBorderConfig();
+  const enabled = borderConfig.enabled;
+  const offset = borderConfig.offset;
+  const width = borderConfig.width;
 
-  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const toggleEnabled = useDispatchCallback((value: boolean) => {
-    dispatch(BorderActions.setEnabled(value));
-  });
+  const toggleEnabled = (value: boolean) => {
+    setBorderEnabled(value);
+  };
 
-  const updateOffset = useDispatchCallback((value: number | null) => {
-    dispatch(BorderActions.setOffset(value || 0));
-  });
+  const updateOffset = (value: number | null) => {
+    setBorderOffset(value || 0);
+  };
 
-  const updateWidth = useDispatchCallback((value: number | null) => {
-    dispatch(BorderActions.setWidth(value || 0));
-  });
+  const updateWidth = (value: number | null) => {
+    setBorderWidth(value || 0);
+  };
 
   return (
     <SettingsGroup>

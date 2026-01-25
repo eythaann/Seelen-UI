@@ -1,0 +1,21 @@
+empty_list: ਕੋਈ ਆਈਟਮਾਂ ਨਹੀਂ
+folders:
+  desktop: ਡੈਸਕਟਾਪ
+  documents: ਦਸਤਾਵੇਜ਼
+  downloads: ਡਾਊਨਲੋਡ
+  more_items: ਹੋਰ ਦਿਖਾਓ...
+  music: ਸੰਗੀਤ
+  pictures: ਤਸਵੀਰਾਂ
+  recent: ਹਾਲ ਹੀ ਵਿੱਚ ਵਰਤਿਆ
+  reduce_items: ਘੱਟ ਦਿਖਾਓ...
+  title: ਉਪਭੋਗਤਾ ਡਾਇਰੈਕਟਰੀਆਂ
+  videos: ਵੀਡੀਓਜ਼
+profile:
+  accounts: ਖਾਤਾ ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ
+  log_out: ਲੌਗ ਆਊਟ ਕਰੋ
+  open_onedrive: OneDrive ਡਾਇਰੈਕਟਰੀ ਖੋਲ੍ਹੋ
+  open_user_folder: ਉਪਭੋਗਤਾ ਡਾਇਰੈਕਟਰੀ ਖੋਲ੍ਹੋ
+seelen_options:
+  open_installation_folder: ਸੀਲੇਨ ਸੈਟਿੰਗਜ਼ ਫੋਲਡਰ ਖੋਲ੍ਹੋ
+  open_log_folder: ਸੀਲੇਨ ਲੌਗ ਫੋਲਡਰ ਖੋਲ੍ਹੋ
+  title: ਸੀਲਨ ਡਾਇਰੈਕਟਰੀਆਂ

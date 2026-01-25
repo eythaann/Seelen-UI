@@ -20,9 +20,6 @@ context_menu:
   restore: Alapértelmezett állapot visszaállítása
   settings: Beállítások
   task_manager: Feladatkezelő
-keyboard:
-  more: További billentyűzet-beállítások
-  title: Billentyűzetkiosztás
 media:
   default_multimedia_volume: Alapértelmezett médiakötet
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Bemeneti eszközök
   output_devices: Kimeneti eszközök
   players: Médialejátszók
-network:
-  available: Elérhető hálózatok
-  connect: Csatlakozás
-  connected: Csatlakozva ehhez
-  disconnect: Kapcsolat bontása
-  hidden: Rejtett hálózat
-  more: További hálózati beállítások
-  not_found: Nem találhatók Wi-Fi hálózatok
-  placeholder:
-    password: Jelszó
-  saved: Mentett hálózatok
-  scanning: Hálózatok keresése
-  secured: Titkosított hálózat
 notifications:
   clear: Összes törlése
   empty: Nincsenek értesítések
@@ -70,24 +54,3 @@ settings:
   power: Kikapcsolás
   restart: Újraindítás
   title: Beállítások
-userhome:
-  empty_list: Nincs megjeleníthető elem
-  folders:
-    desktop: Asztal
-    documents: Dokumentumok
-    downloads: Letöltések
-    more_items: További elemek...
-    music: Zene
-    pictures: Képek
-    recent: Legutóbb használt
-    reduce_items: Kevesebb elem...
-    title: Felhasználói mappák
-    videos: Videók
-  profile:
-    accounts: Fiókbeállítások megnyitása
-    open_onedrive: OneDrive mappa megnyitása
-    open_user_folder: Felhasználói mappa megnyitása
-  seelen_options:
-    open_installation_folder: Seelen beállítások mappájának megnyitása
-    open_log_folder: Seelen napló mappájának megnyitása
-    title: Seelen mappák

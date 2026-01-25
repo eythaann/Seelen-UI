@@ -1,6 +1,5 @@
-import { SeelenCommand } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { invoke } from "@tauri-apps/api/core";
 import type { MenuProps } from "antd";
 import type { ItemType } from "antd/es/menu/interface";
 import type { TFunction } from "i18next";
@@ -69,6 +68,7 @@ export function getUserApplicationContextMenu(
           program: item.relaunchProgram,
           args: item.relaunchArgs,
           workingDir: item.relaunchIn,
+          elevated: false,
         });
       },
     },
@@ -83,10 +83,11 @@ export function getUserApplicationContextMenu(
       label: t("app_menu.run_as"),
       icon: <Icon iconName="MdOutlineAdminPanelSettings" />,
       onClick: () => {
-        invoke(SeelenCommand.RunAsAdmin, {
+        invoke(SeelenCommand.Run, {
           program: item.relaunchProgram,
           args: item.relaunchArgs,
           workingDir: item.relaunchIn,
+          elevated: true,
         });
       },
     },

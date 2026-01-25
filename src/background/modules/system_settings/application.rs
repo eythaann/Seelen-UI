@@ -1,21 +1,15 @@
-use std::sync::Arc;
+use std::sync::LazyLock;
 
-use crate::{error::Result, event_manager, windows_api::traits::EventRegistrationTokenExt};
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
+use crate::{
+    error::{Result, ResultLogExt},
+    event_manager,
+};
 use seelen_core::system_state::UIColors;
 use windows::{
     Foundation::TypedEventHandler,
-    Win32::System::WinRT::EventRegistrationToken,
     UI::ViewManagement::{UIColorType, UISettings},
 };
 use windows_core::IInspectable;
-
-lazy_static! {
-    pub static ref SYSTEM_SETTINGS: Arc<Mutex<SystemSettings>> = Arc::new(Mutex::new(
-        SystemSettings::new().expect("Failed to create settings manager")
-    ));
-}
 
 fn color_to_string(color: windows::UI::Color) -> String {
     format!(
@@ -32,10 +26,8 @@ pub enum SystemSettingsEvent {
 
 pub struct SystemSettings {
     settings: UISettings,
-    color_event_handler: TypedEventHandler<UISettings, IInspectable>,
-    color_event_token: Option<EventRegistrationToken>,
-    text_scale_event_handler: TypedEventHandler<UISettings, IInspectable>,
-    text_scale_event_token: Option<EventRegistrationToken>,
+    color_event_token: Option<i64>,
+    text_scale_event_token: Option<i64>,
 }
 
 unsafe impl Send for SystemSettings {}
@@ -43,38 +35,37 @@ unsafe impl Send for SystemSettings {}
 event_manager!(SystemSettings, SystemSettingsEvent);
 
 impl SystemSettings {
-    fn new() -> Result<Self> {
-        let settings = Self {
-            settings: UISettings::new()?,
-            color_event_handler: TypedEventHandler::new(Self::internal_on_colors_change),
+    pub fn instance() -> &'static Self {
+        static SYSTEM_SETTINGS: LazyLock<SystemSettings> = LazyLock::new(|| {
+            let mut settings = SystemSettings::new();
+            settings.init().log_error();
+            settings
+        });
+        &SYSTEM_SETTINGS
+    }
+
+    fn new() -> Self {
+        Self {
+            settings: UISettings::new().expect("Failed to create UISettings"),
             color_event_token: None,
-            text_scale_event_handler: TypedEventHandler::new(Self::internal_on_text_scale_change),
             text_scale_event_token: None,
-        };
-        Ok(settings)
+        }
     }
 
-    pub fn initialize(&mut self) -> Result<()> {
-        self.color_event_token = Some(
-            self.settings
-                .ColorValuesChanged(&self.color_event_handler)?
-                .as_event_token(),
-        );
-        self.text_scale_event_token = Some(
-            self.settings
-                .TextScaleFactorChanged(&self.text_scale_event_handler)?
-                .as_event_token(),
-        );
-        Ok(())
-    }
+    fn init(&mut self) -> Result<()> {
+        // Register color change event
+        // Windows-rs clones the handler internally, so we don't need to store it
+        let color_token = self
+            .settings
+            .ColorValuesChanged(&TypedEventHandler::new(Self::internal_on_colors_change))?;
+        self.color_event_token = Some(color_token);
 
-    pub fn release(&mut self) -> Result<()> {
-        if let Some(token) = self.color_event_token.take() {
-            self.settings.RemoveColorValuesChanged(token.value)?;
-        }
-        if let Some(token) = self.text_scale_event_token.take() {
-            self.settings.RemoveTextScaleFactorChanged(token.value)?;
-        }
+        // Register text scale change event
+        let text_scale_token = self
+            .settings
+            .TextScaleFactorChanged(&TypedEventHandler::new(Self::internal_on_text_scale_change))?;
+        self.text_scale_event_token = Some(text_scale_token);
+
         Ok(())
     }
 
@@ -109,5 +100,19 @@ impl SystemSettings {
             // https://learn.microsoft.com/is-is/uwp/api/windows.ui.viewmanagement.uisettings.getcolorvalue?view=winrt-19041#remarks
             complement: None,
         })
+    }
+}
+
+impl Drop for SystemSettings {
+    fn drop(&mut self) {
+        if let Some(token) = self.color_event_token.take() {
+            self.settings.RemoveColorValuesChanged(token).log_error();
+        }
+
+        if let Some(deferral) = self.text_scale_event_token.take() {
+            self.settings
+                .RemoveTextScaleFactorChanged(deferral)
+                .log_error();
+        }
     }
 }

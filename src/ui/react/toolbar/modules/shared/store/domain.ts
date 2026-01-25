@@ -1,14 +1,13 @@
-import type { SystemLanguage } from "@seelen-ui/lib";
 import type {
   AppNotification,
   Battery,
   BluetoothDevice,
-  File,
   MediaDevice,
   MediaPlayer,
   NetworkAdapter,
   PowerMode,
   PowerStatus,
+  SystemLanguage,
   User,
   WlanBssEntry,
 } from "@seelen-ui/lib/types";
@@ -16,13 +15,6 @@ import type {
 export interface RootState {
   version: number;
   user: User | null;
-  userRecentFolder: File[];
-  userDesktopFolder: File[];
-  userDocumentsFolder: File[];
-  userDownloadsFolder: File[];
-  userPicturesFolder: File[];
-  userVideosFolder: File[];
-  userMusicFolder: File[];
   env: Record<string, string>;
   bluetoothDevices: BluetoothDevice[];
   powerStatus: PowerStatus;

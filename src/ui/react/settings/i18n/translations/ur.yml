@@ -1,16 +1,6 @@
 action:
   confirm: کیا آپ کو یقین ہے؟
   confirm_body: اس عمل کو ختم نہیں کیا جاسکتا۔
-app_launcher:
-  enable: ایپ لانچر کو فعال کریں
-  launch_on:
-    mouse_over: ماؤس اوور
-    primary: پرائمری
-  monitor: ظاہر کرنے کے لئے مانیٹر
-  runners:
-    cmd: حکم
-    explorer: چلائیں
-    label: رنرز
 apps_configurations:
   app:
     bindings: بائنڈنگ (نوٹ دونوں اختیارات کی ضرورت ہے)
@@ -87,7 +77,6 @@ devtools:
   install_folder: انسٹالیشن فولڈر
   load: لوڈ
   settings_file: سیٹنگ فاعل
-  simulate_fullscreen: پورے اسکرین ایونٹ کی تقلید کریں۔
 extras:
   clear_icons: صاف نظام شبیہیں کیشے
   clear_icons_tooltip: دوبارہ شروع کرنے کے لئے تمام ویجٹوں پر مکمل اثر ڈالنے کی ضرورت ہوسکتی ہے
@@ -95,6 +84,10 @@ extras:
   links: لنکس
   relaunch: دوبارہ لانچ
   version: ورژن
+  version_fixed: >-
+    ایپلی کیشن اور ویب ویو 2 رن ٹائم ورژن طے شدہ ہیں۔ اس کا مطلب یہ ہے کہ ایپلی
+    کیشن کو اپ ڈیٹس موصول نہیں ہوں گے اور ویب ویو 2 رن ٹائم کو ونڈوز کی تازہ
+    کاریوں کے ساتھ خود بخود اپ ڈیٹ نہیں کیا جائے گا۔
 general:
   accent_color: رنگ
   date_format: تاریخ کی شکل
@@ -102,6 +95,7 @@ general:
     available: دستیاب آئیکن پیک
     selected: ایکٹو آئیکن پیک
   language: زبان
+  monday: پیر
   performance_mode:
     on_battery: بیٹری پر
     on_energy_saver: انرجی سیور پر
@@ -110,7 +104,10 @@ general:
       extreme: انتہائی
       minimal: کم سے کم
     plugged: پلگ ان یا چارجنگ
+  saturday: ہفتہ
+  start_of_week: ہفتے کا آغاز
   startup: اسٹارٹ اپ پر چلائیں؟
+  sunday: اتوار
   theme:
     available: دستیاب تھیمز
     selected: ایکٹو تھیمز
@@ -153,18 +150,26 @@ resources:
   app_outdated: >-
     اس وسیلہ کے لئے مناسب طریقے سے کام کرنے کے لئے سیلین UI کا ایک نیا ورژن
     درکار ہے۔
+  corrupted_wallpaper: تھمب نیل نکالنے میں ناکام - خراب یا غیر تعاون یافتہ ویڈیو فارمیٹ
   delete: وسائل کو حذف کریں
   discover: مزید وسائل دریافت کریں
   has_update: ایک تازہ کاری دستیاب ہے
+  high_impact: کارکردگی پر زیادہ اثر
   import_wallpapers: مقامی وال پیپر درآمد کریں
   open_folder: اوپن ریسورس فولڈر
   outdated: >-
     یہ وسیلہ سیلین UI کے پرانے ورژن کے لئے ڈیزائن کیا گیا تھا اور ہوسکتا ہے کہ
     وہ صحیح طریقے سے کام نہ کرے۔
+  see_on_website: ویب سائٹ پر دیکھیں
+review_request:
+  not_now: اب نہیں
+  sure: یقینا!
+  title: سیلین UI سے لطف اندوز ہو رہے ہو؟
 save: محفوظ کریں
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
 see_more: مزید دیکھیں
 shortcuts:
+  duplicate_error: اس شارٹ کٹ کو نقل کیا گیا ہے
   enable: بلٹ ان شارٹ کٹ سسٹم کو فعال کریں
   enable_tooltip: >-
     اگر آپ سیلین UI کلائنٹ کا استعمال کرتے ہوئے اپنے شارٹ کٹ سسٹم کو نافذ کریں
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: پچھلے ورک اسپیس پر سوئچ کریں
     switch_workspace: ورک اسپیس {{0}} پر سوئچ کریں
     toggle_float: ٹوگل ونڈو فلوٹ موڈ
-    toggle_launcher: ٹوگل لانچر
     toggle_monocle: ٹوگل ورک اسپیس مونوکل وضع
   readonly_tooltip: یہ صرف ایک پڑھنے والا شارٹ کٹ ہے
   reset: ڈیفالٹس کو دوبارہ ترتیب دیں
@@ -218,13 +222,6 @@ sides:
   left: بائیں
   right: دائیں
   top: اوپر
-start:
-  message: >-
-    آپ کے ونڈوز کے تجربے کو بڑھانے کے لئے شامل ٹائلنگ ونڈوز مینیجر کے ساتھ حتمی
-    ڈیسک ٹاپ ماحول ، سیلین UI میں خوش آمدید! ہمارے بدیہی انٹرفیس اور جدید
-    خصوصیات کے ساتھ کارکردگی اور ملٹی ٹاسکنگ کے ایک نئے دور کو دریافت کریں۔
-  message_accent: اپنی صلاحیت کو انداز کے ساتھ بہتر بنائیں!
-  title: عنوان
 toolbar:
   auto_hide: آٹو چھپائیں
   delay_to_hide: چھپانے میں تاخیر
@@ -245,23 +242,39 @@ update:
 wall:
   backgrounds: وال پیپر
   blur: دھندلا
+  cancel: منسوخ کریں
+  close: بند کریں
+  collection_name: جمع کرنے کا نام
+  collections: مجموعے
   contrast: اس کے برعکس
+  corrupted_wallpapers_message: 'خراب وال پیپرز ، ان کو حذف کرنے پر غور کریں:'
+  create: تخلیق کریں
+  create_collection: مجموعہ بنائیں
+  default_collection: پہلے سے طے شدہ مجموعہ
+  delete_collection: مجموعہ حذف کریں
+  edit_collection: مجموعہ میں ترمیم کریں
   enable: وال پیپر مینیجر کو فعال کریں
+  extend: پرائمری میں توسیع کریں
   fit:
     contain: مشتمل
     cover: کور
     fill: پُر کریں
   flipHorizontal: افقی پلٹائیں
   flipVertical: عمودی پلٹائیں
+  generating_thumbnails: وال پیپر تھمب نیل تیار کرنا
   hours: گھنٹے
   interval: ہر ایک وال پیپر کو تبدیل کریں
   minutes: منٹ
+  monitor_collection: مانیٹر کلیکشن
+  multimonitor_behaviour: کثیر الجہتی سلوک
   muted: خاموش ویڈیو آڈیو
   no_background: اس کے بجائے تھیم کے پس منظر کا استعمال کرتے ہوئے ، خالی سلائیڈ شو۔
+  no_collections: ابھی تک کوئی مجموعہ پیدا نہیں ہوا۔ ایک بنانے کے لئے + بٹن پر کلک کریں۔
   objectFit: پس منظر فٹ
   objectPosition: پس منظر کی پوزیشن
   overlayColor: اوورلے رنگ
   overlayMixBlendMode: اوورلے مکس مرکب موڈ
+  per_monitor: فی مانیٹر
   playback: پلے بیک کی رفتار
   position:
     bottom: نیچے
@@ -269,10 +282,17 @@ wall:
     left: بائیں
     right: دائیں
     top: اوپر
+  processing_video: پروسیسنگ ویڈیو
   random: سلائیڈ شو کو بے ترتیب بنائیں
   saturation: سنترپتی
   seconds: سیکنڈ
+  select_collection: مجموعہ منتخب کریں
+  thumbnail_generation_complete: تھمب نیل جنریشن مکمل
+  thumbnail_generation_finished: تھمب نیل جنریشن نے کامیابی کے ساتھ ختم کیا ہے
+  wallpaper_collection: وال پیپر مجموعہ
+  wallpaper_settings: وال پیپر کی ترتیبات
   withOverlay: اوورلے کے ساتھ
+  workspace_collections: ورک اسپیس کلیکشن
 weg:
   auto_hide: خود بخود چھپ جانا
   delay_to_hide: چھپانے میں تاخیر
@@ -308,6 +328,18 @@ weg:
   padding: بھرتی
   show_end_task: ٹاسک بار میں اختتامی کام دکھائیں
   width: چوڑائی
+welcome:
+  give_a_review: ایک جائزہ دیں
+  message: >-
+    سیلن UI ونڈوز کے لئے ایک مفت اور اوپن سورس ڈیسک ٹاپ ماحول ہے۔ یہاں آپ کا
+    مکمل کنٹرول ہے کہ آپ کا ڈیسک ٹاپ کس طرح نظر آتا ہے اور برتاؤ کرتا ہے ، جس سے
+    آپ اپنے ورک فلو اور انداز سے ملنے کے لئے ہر تفصیل کو اپنی مرضی کے مطابق
+    بناتے ہیں۔
+  ok: آئیے شروع کریں!
+  review: >-
+    اگر آپ سیلین UI کے استعمال سے لطف اندوز ہوتے ہیں تو ، اسٹور پر جائزہ لینے پر
+    غور کریں - آپ کی رائے منصوبے کو بڑھنے اور بہتر بنانے میں مدد دیتی ہے۔
+  title: سیلین UI میں خوش آمدید!
 widget:
   enable: اس ویجیٹ کو فعال کریں
   enable_for_monitor: اس مانیٹر کو قابل بنائیں

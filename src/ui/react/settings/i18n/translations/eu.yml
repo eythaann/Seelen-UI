@@ -1,16 +1,6 @@
 action:
   confirm: Ziur al zaude?
   confirm_body: Ekintza hau ezin da desegin.
-app_launcher:
-  enable: Gaitu aplikazioaren abiarazlea
-  launch_on:
-    mouse_over: Sagua pasa
-    primary: Lehen mailakoa
-  monitor: Monitorea erakusteko
-  runners:
-    cmd: Agindu
-    explorer: Korrika
-    label: Kornollari
 apps_configurations:
   app:
     bindings: Lotura (kontuan bi aukerak behar dira)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Instalazio karpeta
   load: Zamatu
   settings_file: Ezarpenak fitxategia
-  simulate_fullscreen: Simulatu pantaila osoko gertaera
 extras:
   clear_icons: Garbitu sistemaren ikonoak cachea
   clear_icons_tooltip: Berrabiarazi behar da widget guztietan erabat indarrean egon dadin
@@ -95,6 +84,10 @@ extras:
   links: Lotura Ofizialak
   relaunch: Errorefrika
   version: Bertsio
+  version_fixed: >-
+    Aplikazioa eta WebView2 Runtime bertsioak konpondu dira. Horrek esan nahi du
+    aplikazioak ez dituela eguneraketak jasoko eta WebView2 Runtime ez dela
+    automatikoki eguneratuko Windows eguneratzeekin.
 general:
   accent_color: Azentu kolorea
   date_format: Data formatua
@@ -102,6 +95,7 @@ general:
     available: Eskuragarri dauden ikono paketeak
     selected: Ikono pakete aktiboak
   language: Mintzaira
+  monday: astelehena
   performance_mode:
     on_battery: Bateria gainean
     on_energy_saver: Energia aurrezteari buruz
@@ -110,7 +104,10 @@ general:
       extreme: Muturreko
       minimal: Gutxien
     plugged: Entxufatua edo kargatzea
+  saturday: Larunbata
+  start_of_week: Astearen hasiera
   startup: Korrika abiaraztean?
+  sunday: Igandea
   theme:
     available: Eskuragarri dauden gaiak
     selected: Gai aktiboak
@@ -153,18 +150,26 @@ resources:
   app_outdated: >-
     Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona
     dezan.
+  corrupted_wallpaper: Ezin izan da atera miniatura - hondatuta edo onartzen ez den bideo formatua
   delete: Baliabidea ezabatu
   discover: Ezagutu baliabide gehiago
   has_update: Eguneratze bat eskuragarri dago
+  high_impact: Errendimenduan eragin handia
   import_wallpapers: Inportatu tokiko horma-irudiak
   open_folder: Baliabide irekiko karpeta
   outdated: >-
     Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala
     funtzionatuko.
+  see_on_website: Ikus webgunean
+review_request:
+  not_now: Orain ez
+  sure: Noski!
+  title: Seelen UI gozatzen?
 save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
 see_more: Ikusi gehiago
 shortcuts:
+  duplicate_error: Lasterbide hau bikoiztuta dago
   enable: Gaitu zuzeneko lasterbideen sistema
   enable_tooltip: >-
     Desgaitu Seelen UI bezeroa erabiliz zure lasterbideen sistema ezartzen
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Aldatu aurreko lan-eremura
     switch_workspace: Aldatu lan-eremura {{0}}
     toggle_float: Txandakatu leiho karroza modua
-    toggle_launcher: Txandakatu abiarazlea
     toggle_monocle: Txandakatu Workspace Monocle modua
   readonly_tooltip: Hau irakurtzeko lasterbidea da
   reset: Berrezarri lehenetsitakoak
@@ -218,14 +222,6 @@ sides:
   left: Ezker
   right: Zuzen
   top: Tontor
-start:
-  message: >-
-    Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
-    kudeatzailearekin txertatu zure Windows esperientzia hobetzeko! Arakatu
-    eraginkortasunaren eta multiataza aro berria gure interfaze intuitiboarekin
-    eta ezaugarri aurreratuekin.
-  message_accent: Optimizatu zure produktibitatea estiloarekin!
-  title: Ongi etorri!
 toolbar:
   auto_hide: Ezkutatu automatikoa
   delay_to_hide: Ezkutatzeko atzeratu
@@ -246,23 +242,39 @@ update:
 wall:
   backgrounds: Horma-irudiak
   blur: Lau lauak
+  cancel: Utzi
+  close: Itxi
+  collection_name: Bildumaren izena
+  collections: Bildumak
   contrast: Kontraste
+  corrupted_wallpapers_message: 'Hondatutako horma-paperak, kontuan hartu hauek ezabatzea:'
+  create: Sortu
+  create_collection: Sortu bilduma
+  default_collection: Bilduma lehenetsia
+  delete_collection: Ezabatu bilduma
+  edit_collection: Editatu bilduma
   enable: Gaitu horma-kudeatzailea
+  extend: Lehen mailakoa luzatzea
   fit:
     contain: Eduki
     cover: Estalki
     fill: Bete
   flipHorizontal: Flip horizontala
   flipVertical: Irauli bertikala
+  generating_thumbnails: Horma-irudi txikiak sortzea
   hours: ordire ordu
   interval: Aldatu horma-irudia guztietan
   minutes: minutuak
+  monitor_collection: Monitore bilduma
+  multimonitor_behaviour: Monitore anitzeko portaera
   muted: Ezkutatu bideoaren audioa
   no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
+  no_collections: Oraindik ez da bildumarik sortu. Egin klik + botoian bat sortzeko.
   objectFit: Atzeko planoaren moldaketa
   objectPosition: Atzeko planoaren posizioa
   overlayColor: Overlay kolorea
   overlayMixBlendMode: Overlay nahastu nahasketa modua
+  per_monitor: Monitore bakoitzeko
   playback: Erreproduzitzeko abiadura
   position:
     bottom: Azpi
@@ -270,10 +282,17 @@ wall:
     left: Ezker
     right: Zuzen
     top: Tontor
+  processing_video: Bideoa prozesatzen
   random: Aurkezpen diaporama
   saturation: Saturazio
   seconds: bizkarbete
+  select_collection: Hautatu Bilduma
+  thumbnail_generation_complete: Miniaturak sortzea amaituta
+  thumbnail_generation_finished: Miniaturak sortzea ondo amaitu da
+  wallpaper_collection: Horma-irudi bilduma
+  wallpaper_settings: Horma-paperaren ezarpenak
   withOverlay: Gainjartzearekin
+  workspace_collections: Lan-esparruko bildumak
 weg:
   auto_hide: Ezkutatu automatikoa
   delay_to_hide: Ezkutatzeko atzeratu
@@ -309,6 +328,18 @@ weg:
   padding: Betegarri
   show_end_task: Erakutsi zeregin-barran
   width: Zabalera
+welcome:
+  give_a_review: Iritzia eman
+  message: >-
+    Seelen UI kode irekiko mahaigaineko ingurunea da Windows-erako. Hemen zure
+    mahaigainaren itxura eta portaeraren gaineko kontrol osoa daukazu, eta
+    xehetasun guztiak pertsonaliza ditzakezu zure lan-fluxuarekin eta
+    estiloarekin bat etortzeko.
+  ok: Has gaitezen!
+  review: >-
+    Seelen UI erabiltzea gustatzen bazaizu, kontuan hartu berrikuspena dendan
+    uztea; zure iritziak proiektua hazten eta hobetzen laguntzen du.
+  title: Ongi etorri Seelen UI-ra!
 widget:
   enable: Gaitu widget hau
   enable_for_monitor: Gaitu monitore honetan

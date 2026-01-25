@@ -20,9 +20,6 @@ context_menu:
   restore: Restore to Default
   settings: Settings
   task_manager: Task Manager
-keyboard:
-  more: More Keyboard Settings
-  title: Keyboard Layout
 media:
   default_multimedia_volume: Multimedia Volume
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Input devices
   output_devices: Output devices
   players: Media Players
-network:
-  available: Available networks
-  connect: Connect
-  connected: Connected to
-  disconnect: Disconnect
-  hidden: Hidden Network
-  more: More Network Settings
-  not_found: No Wi-Fi networks found
-  placeholder:
-    password: Password
-  saved: Saved networks
-  scanning: Scanning for networks
-  secured: Encrypted network
 notifications:
   clear: Clear all
   empty: No notifications
@@ -70,24 +54,3 @@ settings:
   power: Power
   restart: Restart
   title: Settings
-userhome:
-  empty_list: No items
-  folders:
-    desktop: Desktop
-    documents: Documents
-    downloads: Downloads
-    more_items: Show more...
-    music: Music
-    pictures: Pictures
-    recent: Recently used
-    reduce_items: Show less...
-    title: User directories
-    videos: Videos
-  profile:
-    accounts: Open account settings
-    open_onedrive: Open OneDrive directory
-    open_user_folder: Open user directory
-  seelen_options:
-    open_installation_folder: Open Seelen settings folder
-    open_log_folder: Open Seelen log folder
-    title: Seelen directories

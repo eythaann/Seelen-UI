@@ -1,15 +1,12 @@
-use std::{ops::Index, path::PathBuf};
+use std::ops::Index;
 
-use seelen_core::state::{RelaunchArguments, WegItem};
+use seelen_core::state::WegItem;
 use serde::{Deserialize, Serialize};
-use tauri_plugin_shell::ShellExt;
 use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
 
 use crate::{
-    app::get_app_handle,
     error::Result,
     trace_lock,
-    utils::constants::SEELEN_COMMON,
     widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
     windows_api::{monitor::Monitor, window::Window, WindowsApi},
 };
@@ -65,32 +62,13 @@ impl WegCli {
                             window.focus()?;
                         }
                     } else {
-                        let args = match &inner_data.relaunch_args {
-                            Some(args) => match args {
-                                RelaunchArguments::String(args) => args.clone(),
-                                RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
-                            },
-                            None => String::new(),
-                        };
-
-                        // we create a link file to trick with explorer into a separated process
-                        // and without elevation in case Seelen UI was running as admin
-                        // this could take some delay like is creating a file but just are some milliseconds
-                        // and this exposed funtion is intended to just run certain times
-                        let lnk_file = WindowsApi::create_temp_shortcut(
-                            &PathBuf::from(&inner_data.relaunch_program),
-                            &args,
-                            inner_data.relaunch_in.as_deref(),
-                        )?;
-                        tokio::spawn(async move {
-                            let _ = get_app_handle()
-                                .shell()
-                                .command(SEELEN_COMMON.system_dir().join("explorer.exe"))
-                                .arg(&lnk_file)
-                                .status()
-                                .await;
-                            let _ = std::fs::remove_file(&lnk_file);
-                        });
+                        let program = inner_data.relaunch_program.clone();
+                        let args = inner_data
+                            .relaunch_args
+                            .as_ref()
+                            .map(|args| args.to_string());
+                        let working_dir = inner_data.relaunch_in.clone();
+                        WindowsApi::execute(program, args, working_dir, false)?;
                     }
                 }
             }

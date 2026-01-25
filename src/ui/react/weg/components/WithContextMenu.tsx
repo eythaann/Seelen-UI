@@ -35,7 +35,7 @@ export function WithContextMenu({ children, items, onOpenChange }: Props) {
         }
       }}
       trigger={["contextMenu"]}
-      dropdownRender={() => (
+      popupRender={() => (
         <BackgroundByLayersV2
           className="weg-context-menu-container"
           prefix="menu"

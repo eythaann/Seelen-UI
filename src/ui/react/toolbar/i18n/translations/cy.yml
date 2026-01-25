@@ -20,9 +20,6 @@ context_menu:
   restore: Adfer i Ddiffyg
   settings: Gosodiadau
   task_manager: Rheolwr Tasg
-keyboard:
-  more: Mwy o osodiadau bysellfwrdd
-  title: Cynllun Allweddell
 media:
   default_multimedia_volume: Cyfrol amlgyfrwng
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Dyfeisiau Mewnbwn
   output_devices: Dyfeisiau Allbwn
   players: Chwaraewyr cyfryngau
-network:
-  available: Rhwydweithiau sydd ar gael
-  connect: Chysyllta ’
-  connected: Wedi'i gysylltu â
-  disconnect: Ddatgysylltith
-  hidden: Rhwydwaith Cudd
-  more: Mwy o osodiadau rhwydwaith
-  not_found: Ni ddarganfuwyd unrhyw rwydweithiau
-  placeholder:
-    password: Gyfrinair
-  saved: Rhwydweithiau wedi'u cadw
-  scanning: Sganio am rwydweithiau
-  secured: Rhwydwaith wedi'i amgryptio
 notifications:
   clear: Clirio popeth
   empty: Dim Hysbysiadau
@@ -70,24 +54,3 @@ settings:
   power: Bwerau
   restart: Ail-ddechrau
   title: Gosodiadau
-userhome:
-  empty_list: Dim eitemau
-  folders:
-    desktop: Nyrddiau gwaith
-    documents: Nogfennau
-    downloads: Lawrlwythiadau
-    more_items: Dangos mwy ...
-    music: Ngherddoriaeth
-    pictures: Luniau
-    recent: A ddefnyddiwyd yn ddiweddar
-    reduce_items: Dangos llai ...
-    title: Cyfeiriaduron Defnyddwyr
-    videos: Fideos
-  profile:
-    accounts: Gosodiadau Cyfrif Agored
-    open_onedrive: Cyfeiriadur OneDrive Open
-    open_user_folder: Agor Cyfeiriadur Defnyddiwr
-  seelen_options:
-    open_installation_folder: Agor Ffolder Gosodiadau Seeel
-    open_log_folder: Agor Ffolder Log Seelen
-    title: Cyfeiriaduron Seelen

@@ -106,26 +106,26 @@ slu_commands_declaration! {
     WallpaperSaveThumbnail = wallpaper_save_thumbnail(wallpaper_id: ResourceId, thumbnail_bytes: Vec<u8>),
 
     // General
-    Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>),
-    RunAsAdmin = run_as_admin(program: PathBuf, args: Option<RelaunchArguments>),
-
-    GetFocusedApp = get_focused_app() -> FocusedApp,
-    GetMousePosition = get_mouse_position() -> [i32; 2],
+    OpenFile = open_file(path: PathBuf),
+    SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),
+    Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>, elevated: bool),
 
     IsDevMode = is_dev_mode() -> bool,
     IsAppxPackage = is_appx_package() -> bool,
-    OpenFile = open_file(path: PathBuf),
-    SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),
+    HasFixedRuntime = has_fixed_runtime() -> bool,
+
+    GetFocusedApp = get_focused_app() -> FocusedApp,
+    GetMousePosition = get_mouse_position() -> [i32; 2],
+    GetKeyState = get_key_state(key: String) -> bool,
+
     GetUserEnvs = get_user_envs() -> HashMap<String, String>,
-    ShowAppSettings = show_app_settings(),
-    SendKeys = send_keys(keys: String),
+    ShowStartMenu = show_start_menu(),
     GetIcon = get_icon(
         #[ts(optional = nullable)]
         path: Option<PathBuf>,
         #[ts(optional = nullable)]
         umid: Option<String>
     ),
-    SimulateFullscreen = simulate_fullscreen(),
     ShowDesktop = show_desktop(),
 
     RequestToUserInputShortcut = request_to_user_input_shortcut(callback_event: String),
@@ -156,14 +156,12 @@ slu_commands_declaration! {
     StateGetToolbarItems = state_get_toolbar_items() -> Placeholder,
     StateGetSettings = state_get_settings(path: Option<PathBuf>) -> Settings,
     StateWriteSettings = state_write_settings(settings: Settings),
-    StateGetSpecificAppsConfigurations = state_get_specific_apps_configurations() -> Vec<AppConfig> ,
-    StateGetHistory = state_get_history() -> LauncherHistory,
+    StateGetSettingsByApp = state_get_settings_by_app() -> Vec<AppConfig> ,
     StateGetPlugins = state_get_plugins() -> Vec<Plugin>,
     StateGetWidgets = state_get_widgets() -> Vec<Widget>,
     StateGetIconPacks = state_get_icon_packs() -> Vec<IconPack>,
     StateGetWallpapers = state_get_wallpapers() -> Vec<Wallpaper>,
     StateSetCustomIconPack = state_add_icon_to_custom_icon_pack(icon: IconPackEntry),
-    StateGetProfiles = state_get_profiles() -> Vec<Profile>,
     StateDeleteCachedIcons = state_delete_cached_icons(),
     StateRequestWallpaperAddition = state_request_wallpaper_addition(),
     StateGetPerformanceMode = state_get_performance_mode() -> PerformanceMode,
@@ -172,6 +170,9 @@ slu_commands_declaration! {
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
+    SetSelfPosition = set_self_position(rect: Rect),
+    WriteFile = write_data_file(filename: String, content: String),
+    ReadFile = read_data_file(filename: String) -> String,
 
     // Shell
     GetNativeShellWallpaper = get_native_shell_wallpaper() -> PathBuf,
@@ -179,9 +180,7 @@ slu_commands_declaration! {
 
     // User
     GetUser = get_user() -> User,
-    GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<File>,
-    SetUserFolderLimit = set_user_folder_limit(folder_type: FolderType, amount: usize),
-    GerUserApplications = get_user_applications() -> Vec<UserApplication>,
+    GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<std::path::PathBuf>,
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
     GetUserAppWindowsPreviews = get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview>,
 
@@ -221,9 +220,6 @@ slu_commands_declaration! {
     SetAppWindowsPositions = set_app_windows_positions(positions: HashMap<isize, Rect>),
     RequestFocus = request_focus(hwnd: isize),
 
-    // App Launcher
-    LauncherGetApps = launcher_get_apps() -> Vec<StartMenuItem>,
-
     // Slu Popups
     CreatePopup = create_popup(config: SluPopupConfig) -> uuid::Uuid,
     UpdatePopup = update_popup(instance_id: uuid::Uuid, config: SluPopupConfig),
@@ -236,6 +232,9 @@ slu_commands_declaration! {
     WlanStopScanning = wlan_stop_scanning(),
     WlanConnect = wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> bool,
     WlanDisconnect = wlan_disconnect(),
+    GetNetworkDefaultLocalIp = get_network_default_local_ip() -> String,
+    GetNetworkAdapters = get_network_adapters() -> Vec<NetworkAdapter>,
+    GetNetworkInternetConnection = get_network_internet_connection() -> bool,
 
     // system tray
     GetSystemTrayIcons = get_system_tray_icons() -> Vec<SysTrayIcon>,
@@ -263,4 +262,7 @@ slu_commands_declaration! {
     ConfirmBluetoothDevicePairing = confirm_bluetooth_device_pairing(id: String, answer: DevicePairingAnswer),
     DisconnectBluetoothDevice = disconnect_bluetooth_device(id: String),
     ForgetBluetoothDevice = forget_bluetooth_device(id: String),
+
+    // Start Menu
+    GetStartMenuItems = get_start_menu_items() -> Vec<StartMenuItem>,
 }

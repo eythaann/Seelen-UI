@@ -2,36 +2,38 @@
   import type { UserAppWindow } from "@seelen-ui/lib/types";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { globalState } from "../state.svelte";
-  import { FileIcon } from "libs/ui/svelte/components/Icon";
+  import { FileIcon, Icon } from "libs/ui/svelte/components/Icon";
+  import MissingIcon from "libs/ui/svelte/components/Icon/MissingIcon.svelte";
+  import { convertFileSrc } from "@tauri-apps/api/core";
 
   interface Props {
-    data: UserAppWindow;
+    task: UserAppWindow;
     index: number;
   }
 
-  let { data, index }: Props = $props();
+  let { task, index }: Props = $props();
 
-  let buttonRef: HTMLButtonElement | undefined = $state();
-  let isSelected = $derived(data.hwnd === globalState.selectedWindow);
+  let boxRef: HTMLDivElement | undefined = $state();
+  const isSelected = $derived(task.hwnd === globalState.selectedWindow);
+  const preview = $derived(globalState.previews[task.hwnd]);
 
   // Focus button when selected
   $effect(() => {
-    if (isSelected && buttonRef) {
-      buttonRef.focus();
+    if (isSelected && boxRef) {
+      boxRef.focus();
     }
   });
 
   function handleKeyDown(e: KeyboardEvent) {
     // Handle Enter key to activate the window
-    if (e.key === "Enter") {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      buttonRef?.click();
+      boxRef?.click();
       return;
     }
 
     // Handle navigation keys
-    const isNavigationKey =
-      e.key === "Tab" || e.key === "ArrowRight" || e.key === "ArrowLeft";
+    const isNavigationKey = e.key === "Tab" || e.key === "ArrowRight" || e.key === "ArrowLeft";
 
     if (isNavigationKey) {
       e.preventDefault();
@@ -44,15 +46,17 @@
   }
 
   function handleClick() {
+    globalState.showing = false;
     invoke(SeelenCommand.WegToggleWindowState, {
-      hwnd: data.hwnd,
+      hwnd: task.hwnd,
       wasFocused: false,
     });
-    globalState.showing = false;
+    // Optimistically reorder UI before backend updates
+    globalState.moveSelectedToFront(task.hwnd);
   }
 
   function handleFocus() {
-    globalState.selectedWindow = data.hwnd;
+    globalState.selectedWindow = task.hwnd;
   }
 
   // Navigation helper functions
@@ -79,15 +83,33 @@
   }
 </script>
 
-<button
-  bind:this={buttonRef}
+<div
+  bind:this={boxRef}
   class="task"
+  role="button"
+  tabindex="0"
   onkeydown={handleKeyDown}
   onclick={handleClick}
   onfocus={handleFocus}
 >
-  <div class="task-icon">
-    <FileIcon umid={data.umid} path={data.process.path} />
+  <div class="task-header">
+    <FileIcon class="task-icon" umid={task.umid} path={task.process.path} />
+    <div class="task-title">{task.title}</div>
+    <button
+      data-skin="transparent"
+      onclick={(e) => {
+        e.stopPropagation();
+        invoke(SeelenCommand.WegCloseApp, { hwnd: task.hwnd });
+      }}
+    >
+      <Icon iconName="TbX" />
+    </button>
   </div>
-  <!-- <div class="task-title">{data.appName}</div> -->
-</button>
+  <div class="task-preview-container">
+    {#if preview}
+      <img class="task-preview" src={convertFileSrc(preview.path) + "?v=" + preview.hash} alt="" />
+    {:else}
+      <MissingIcon class="task-no-preview" />
+    {/if}
+  </div>
+</div>

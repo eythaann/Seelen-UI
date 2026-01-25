@@ -1,11 +1,5 @@
 cancel: Ikkanċella
 done: Magħmul
-drivers:
-  got_it: Ghandek
-  monitor_disabled: >-
-    Jidher li xi sewwieqa tal-monitoraġġ huma diżabbli. Jekk jogħġbok ħallihom
-    iħallu lil Seelen UI taħdem kif suppost.
-  monitor_disabled_title: Is-sewwieqa tal-monitoraġġ huma diżattivati
 resource:
   added: Ġiet miżjuda riżorsa ġdida
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: Fajl ta 'konfigurazzjoni huwa korrotta, billi tuża valuri default minflok.
   corrupted_file_path: Triq tal-fajl korrotta
   download: Mur fil-paġna tat-tniżżil
+  files_integrity: >-
+    Ma stajniex nivverifikaw l-integrità tal-fajls tal-applikazzjoni.
+
+    Dan jista 'jiġri jekk il-fajls ġew modifikati, korrotta, jew
+    l-installazzjoni ma tkunx kompluta.
+
+    Għal raġunijiet ta' sigurtà, Seelen UI ma tistax tkompli.
+
+    Jekk jogħġbok installa mill-ġdid mill-websajt uffiċjali.
+  files_integrity_title: Twissija tas-Sigurtà - Iċċekkjar tal-Integrità tal-Fajls Fallit
   not_found: WebView2 Runtime ma nstabx
   not_found_description: Seelen UI teħtieġ Webview2 Runtime. Jekk jogħġbok installah.
   outdated: WebView2 Runtime skadut

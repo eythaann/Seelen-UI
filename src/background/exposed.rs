@@ -15,19 +15,15 @@ use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WIND
 
 use crate::app::{get_app_handle, Seelen};
 use crate::error::Result;
-use crate::hook::HookManager;
-use crate::modules::input::Keyboard;
 
+use crate::utils;
 use crate::utils::constants::SEELEN_COMMON;
-use crate::utils::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
-use crate::utils::is_running_as_appx;
-use crate::utils::pwsh::PwshScript;
-use crate::widgets::show_settings;
+use crate::utils::icon_extractor::{
+    request_icon_extraction_from_file, request_icon_extraction_from_umid,
+};
 use crate::windows_api::hdc::DeviceContext;
-use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
-use crate::{log_error, utils};
 
 #[tauri::command(async)]
 pub fn open_file(path: String) -> Result<()> {
@@ -59,55 +55,10 @@ async fn run(
     program: String,
     args: Option<RelaunchArguments>,
     working_dir: Option<PathBuf>,
+    elevated: bool,
 ) -> Result<()> {
-    let args = match args {
-        Some(args) => match args {
-            RelaunchArguments::String(args) => args,
-            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
-        },
-        None => String::new(),
-    };
-
-    log::trace!("Running: {program:?} {args} in {working_dir:?}");
-
-    // we create a link file to trick with explorer into a separated process
-    // and without elevation in case Seelen UI was running as admin
-    // this could take some delay like is creating a file but just are some milliseconds
-    // and this exposed funtion is intended to just run certain times
-    let lnk_file =
-        WindowsApi::create_temp_shortcut(&PathBuf::from(program), &args, working_dir.as_deref())?;
-    get_app_handle()
-        .shell()
-        .command(SEELEN_COMMON.system_dir().join("explorer.exe"))
-        .arg(&lnk_file)
-        .status()
-        .await?;
-    std::fs::remove_file(&lnk_file)?;
-    Ok(())
-}
-
-#[tauri::command(async)]
-async fn run_as_admin(program: PathBuf, args: Option<RelaunchArguments>) -> Result<()> {
-    let args = match args {
-        Some(args) => match args {
-            RelaunchArguments::String(args) => args,
-            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
-        },
-        None => String::new(),
-    };
-    log::trace!("Running as admin: {program:?} {args}");
-
-    let command = if args.is_empty() {
-        format!("Start-Process '{}' -Verb runAs", program.display())
-    } else {
-        format!(
-            "Start-Process '{}' -Verb runAs -ArgumentList '{}'",
-            program.display(),
-            args
-        )
-    };
-    PwshScript::new(command).execute().await?;
-    Ok(())
+    let args = args.map(|args| args.to_string());
+    WindowsApi::execute(program, args, working_dir, elevated)
 }
 
 #[tauri::command(async)]
@@ -116,20 +67,18 @@ fn is_dev_mode() -> bool {
 }
 
 #[tauri::command(async)]
+fn has_fixed_runtime() -> bool {
+    crate::utils::has_fixed_runtime()
+}
+
+#[tauri::command(async)]
 fn is_appx_package() -> bool {
-    is_running_as_appx()
+    crate::utils::is_running_as_appx()
 }
 
 #[tauri::command(async)]
 pub fn get_user_envs() -> HashMap<String, String> {
     std::env::vars().collect::<HashMap<String, String>>()
-}
-
-// https://docs.rs/tauri/latest/tauri/window/struct.WindowBuilder.html#known-issues
-// https://github.com/tauri-apps/wry/issues/583
-#[tauri::command(async)]
-fn show_app_settings() {
-    log_error!(show_settings());
 }
 
 #[tauri::command(async)]
@@ -142,31 +91,15 @@ async fn get_auto_start_status() -> Result<bool> {
     Seelen::is_auto_start_enabled()
 }
 
-#[tauri::command(async)]
-fn send_keys(keys: String) -> Result<()> {
-    Keyboard::new().send_keys(&keys)
-}
-
 // used to request icon extraction
 #[tauri::command(async)]
 fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Result<()> {
     if let Some(umid) = umid {
-        extract_and_save_icon_umid(&umid.into());
+        request_icon_extraction_from_umid(&umid.into());
     }
     if let Some(path) = path {
-        extract_and_save_icon_from_file(&path);
+        request_icon_extraction_from_file(&path);
     }
-    Ok(())
-}
-
-#[tauri::command(async)]
-fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Result<()> {
-    let window = Window::from(webview.hwnd()?.0 as isize);
-    let event = match value {
-        true => WinEvent::SyntheticFullscreenStart,
-        false => WinEvent::SyntheticFullscreenEnd,
-    };
-    HookManager::event_tx().send((event, window))?;
     Ok(())
 }
 
@@ -298,22 +231,23 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::cli::*;
     use crate::state::infrastructure::*;
     use crate::virtual_desktops::handlers::*;
-    use crate::widgets::launcher::handler::*;
     use crate::widgets::popups::handlers::*;
     use crate::widgets::weg::handler::*;
     use crate::widgets::window_manager::handler::*;
     use crate::widgets::*;
 
     use crate::modules::apps::infrastructure::*;
-    use crate::modules::language::*;
-    use crate::modules::media::infrastructure::*;
+    use crate::modules::media::devices::infrastructure::*;
+    use crate::modules::media::players::infrastructure::*;
     use crate::modules::monitors::infrastructure::*;
     use crate::modules::network::infrastructure::*;
     use crate::modules::notifications::infrastructure::*;
     use crate::modules::power::infrastructure::*;
     use crate::modules::radios::bluetooth::handlers::*;
     use crate::modules::radios::handlers::*;
+    use crate::modules::start::infrastructure::*;
     use crate::modules::system_settings::infrastructure::*;
+    use crate::modules::system_settings::language::infrastructure::*;
     use crate::modules::system_tray::infrastructure::*;
     use crate::modules::user::infrastructure::*;
 

@@ -1,0 +1,21 @@
+empty_list: Dim eitemau
+folders:
+  desktop: Penbwrdd
+  documents: Dogfennau
+  downloads: Lawrlwythiadau
+  more_items: Dangos mwy...
+  music: Cerddoriaeth
+  pictures: Lluniau
+  recent: Defnyddiwyd yn ddiweddar
+  reduce_items: Dangos llai...
+  title: Cyfeiriaduron defnyddwyr
+  videos: Fideos
+profile:
+  accounts: Agor gosodiadau cyfrif
+  log_out: Allgofnodi
+  open_onedrive: Agor cyfeiriadur OneDrive
+  open_user_folder: Agor cyfeiriadur defnyddiwr
+seelen_options:
+  open_installation_folder: Agor ffolder gosodiadau Seelen
+  open_log_folder: Agor ffolder log Seelen
+  title: Cyfeiriaduron Seelen

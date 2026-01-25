@@ -1,0 +1,21 @@
+empty_list: Nessun articolo
+folders:
+  desktop: Desktop
+  documents: Documenti
+  downloads: Download
+  more_items: Mostra altro...
+  music: Musica
+  pictures: Immagini
+  recent: Usato di recente
+  reduce_items: Mostra meno...
+  title: Directory utente
+  videos: Video
+profile:
+  accounts: Apri le impostazioni dell'account
+  log_out: Esci
+  open_onedrive: Apri la directory di OneDrive
+  open_user_folder: Apri la directory utente
+seelen_options:
+  open_installation_folder: Apri la cartella delle impostazioni di Seelen
+  open_log_folder: Apri la cartella di registro di Seelen
+  title: Directory Seelen

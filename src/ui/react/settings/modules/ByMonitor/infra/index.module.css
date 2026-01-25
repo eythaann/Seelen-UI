@@ -2,14 +2,14 @@
   display: grid;
   grid-template-columns: minmax(200px, 1fr) 2fr;
   grid-template-rows: 100%;
-  gap: 10px;
+  gap: var(--spacing-s);
 
   .itemLeft {
     display: grid;
     grid-template-rows: min-content 1fr;
     justify-items: center;
     align-items: center;
-    gap: 5px;
+    gap: var(--spacing-2xs);
 
     .label {
       font-weight: 600;

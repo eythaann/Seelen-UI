@@ -205,8 +205,8 @@ impl WorkspaceWallpapersManager {
     /// Get the interval duration from settings (in seconds)
     fn get_interval_duration() -> Duration {
         let state = FULL_STATE.load();
-        let interval_seconds = state.settings.by_widget.wall.interval;
-        Duration::from_secs(interval_seconds as u64)
+        let interval_seconds = (state.settings.by_widget.wall.interval as u64).max(60); // At least 1 minute
+        Duration::from_secs(interval_seconds)
     }
 
     /// Main rotation loop

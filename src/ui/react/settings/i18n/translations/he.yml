@@ -1,16 +1,6 @@
 action:
   confirm: אתה בטוח?
   confirm_body: לא ניתן לבטל פעולה זו.
-app_launcher:
-  enable: הפעל משגר אפליקציות
-  launch_on:
-    mouse_over: העכבר מעל
-    primary: יְסוֹדִי
-  monitor: צג כדי להציג
-  runners:
-    cmd: פְּקוּדָה
-    explorer: לָרוּץ
-    label: רצים
 apps_configurations:
   app:
     bindings: כריכה (שימו לב לשתי האפשרויות נדרשות)
@@ -85,7 +75,6 @@ devtools:
   install_folder: תיקיית התקנה
   load: טען
   settings_file: קובץ הגדרות
-  simulate_fullscreen: הדמיית אירוע במסך מלא
 extras:
   clear_icons: מטמון סמלי מערכת נקה
   clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
@@ -93,6 +82,9 @@ extras:
   links: קישורים רשמיים
   relaunch: השקה מחדש
   version: גרסה
+  version_fixed: >-
+    גרסאות היישום ו-WebView2 Runtime קבועות. המשמעות היא שהאפליקציה לא תקבל
+    עדכונים ו- WebView2 Runtime לא יעודכן אוטומטית עם עדכוני Windows.
 general:
   accent_color: צבע הדגשה
   date_format: פורמט תאריך
@@ -100,6 +92,7 @@ general:
     available: חבילות אייקונים זמינות
     selected: ערכות אייקונים פעילות
   language: שפה
+  monday: יוֹם שֵׁנִי
   performance_mode:
     on_battery: על סוללה
     on_energy_saver: על חוסך אנרגיה
@@ -108,7 +101,10 @@ general:
       extreme: קיצוני
       minimal: מִינִימָלִי
     plugged: מחובר או טעינה
+  saturday: שַׁבָּת
+  start_of_week: תחילת השבוע
   startup: לרוץ בהפעלה?
+  sunday: יוֹם רִאשׁוֹן
   theme:
     available: ערכות נושא זמינות
     selected: ערכות נושא פעילות
@@ -149,16 +145,24 @@ reset_all_to_default: אפס את כל ערכי ברירת המחדל
 reset_to_default: אפס לערך ברירת המחדל
 resources:
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
+  corrupted_wallpaper: חילוץ התמונה הממוזערת נכשל - פורמט וידאו פגום או לא נתמך
   delete: מחק משאב
   discover: לגלות משאבים נוספים
   has_update: ניתן לקבל עדכון
+  high_impact: השפעה רבה על הביצועים
   import_wallpapers: ייבא טפטים מקומיים
   open_folder: פתיחת תיקיית משאבים
   outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.
+  see_on_website: ראה באתר
+review_request:
+  not_now: לא עכשיו
+  sure: בַּטוּחַ!
+  title: נהנה ממשק המשתמש של Seelen?
 save: להציל
 save_and_restart: שמור והפעלה מחדש
 see_more: ראה עוד
 shortcuts:
+  duplicate_error: קיצור זה משוכפל
   enable: אפשר מערכת קיצורי דרך מובנים
   enable_tooltip: השבת אם תיישם מערכת קיצורי דרך משלך באמצעות לקוח ממשק המשתמש של Seelen
   labels:
@@ -201,7 +205,6 @@ shortcuts:
     switch_to_previous_workspace: עבור לסביבת העבודה הקודמת
     switch_workspace: עברו לסביבת עבודה {{0}}
     toggle_float: החלף מצב צף חלון
-    toggle_launcher: Thinggle Thanger
     toggle_monocle: החלף את מצב המונוקל של סביבת העבודה
   readonly_tooltip: זהו קיצור דרך לקריאה בלבד
   reset: אפס לברירות מחדל
@@ -210,13 +213,6 @@ sides:
   left: שמאל
   right: ימין
   top: למעלה
-start:
-  message: >-
-    ברוך הבא ל- Seelen UI, סביבת שולחן העבודה האולטימטיבית עם מנהל Windows משולב
-    אריחים כדי לשפר את חווית Windows שלך! חקור עידן חדש של יעילות ורב משימות עם
-    הממשק האינטואיטיבי והתכונות המתקדמות שלנו.
-  message_accent: אופטימיזציה של הפרודוקטיביות שלך עם סגנון!
-  title: ברוך הבא!
 toolbar:
   auto_hide: הסתר אוטומטי
   delay_to_hide: השהה הסתרה
@@ -237,23 +233,39 @@ update:
 wall:
   backgrounds: טפטים
   blur: לְטַשׁטֵשׁ
+  cancel: לְבַטֵל
+  close: לִסְגוֹר
+  collection_name: שם האוסף
+  collections: אוספים
   contrast: לְהַשְׁווֹת
+  corrupted_wallpapers_message: 'רקעים פגומים, שקול למחוק את אלה:'
+  create: לִיצוֹר
+  create_collection: צור אוסף
+  default_collection: אוסף ברירת מחדל
+  delete_collection: מחק אוסף
+  edit_collection: ערוך אוסף
   enable: אפשר מנהל טפטים
+  extend: הארך את היסוד
   fit:
     contain: לְהַכִיל
     cover: לְכַסוֹת
     fill: לְמַלֵא
   flipHorizontal: הפוך אופקי
   flipVertical: הפוך אנכי
+  generating_thumbnails: יצירת תמונות ממוזערות של טפטים
   hours: שעות
   interval: החלף טפטים כל
   minutes: דקות
+  monitor_collection: אוסף מוניטור
+  multimonitor_behaviour: התנהגות מולטימוניטור
   muted: השתקת אודיו של וידאו
   no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
+  no_collections: עדיין לא נוצרו אוספים. לחץ על הלחצן + כדי ליצור אחד.
   objectFit: כושר רקע
   objectPosition: מיקום רקע
   overlayColor: צבע שכבה
   overlayMixBlendMode: מצב תערובת תערובת שכבה
+  per_monitor: לכל מוניטור
   playback: מהירות ההפעלה
   position:
     bottom: תַחתִית
@@ -261,10 +273,17 @@ wall:
     left: שְׁמֹאל
     right: יָמִינָה
     top: רֹאשׁ
+  processing_video: מעבד וידאו
   random: מצגת שקופיות אקראית
   saturation: רִוּוּי
   seconds: שניות
+  select_collection: בחר אוסף
+  thumbnail_generation_complete: יצירת תמונות ממוזערות הושלמה
+  thumbnail_generation_finished: יצירת התמונות הממוזערות הסתיים בהצלחה
+  wallpaper_collection: אוסף טפטים
+  wallpaper_settings: הגדרות טפט
   withOverlay: עם שכבת -על
+  workspace_collections: אוספי סביבת עבודה
 weg:
   auto_hide: הסתר אוטומטי
   delay_to_hide: עיכוב להסתיר
@@ -300,6 +319,17 @@ weg:
   padding: ריפוד
   show_end_task: הצג את משימת הסיום בשורת המשימות
   width: רוחב
+welcome:
+  give_a_review: תן סקירה
+  message: >-
+    ממשק המשתמש של Seelen הוא סביבת שולחן עבודה חינמית וקוד פתוח עבור Windows.
+    כאן יש לך שליטה מלאה על איך שולחן העבודה שלך נראה ומתנהג, מה שמאפשר לך
+    להתאים אישית כל פרט כך שיתאים לזרימת העבודה ולסגנון שלך.
+  ok: בואו נתחיל!
+  review: >-
+    אם אתה נהנה להשתמש בממשק המשתמש של Seelen, שקול להשאיר ביקורת בחנות - המשוב
+    שלך עוזר לפרויקט לצמוח ולהשתפר.
+  title: ברוכים הבאים לממשק המשתמש של Seelen!
 widget:
   enable: אפשר יישומון זה
   enable_for_monitor: אפשר בצג זה

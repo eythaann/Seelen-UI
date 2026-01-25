@@ -1,0 +1,21 @@
+empty_list: ບໍ່ມີລາຍການ
+folders:
+  desktop: ເດັສທັອບ
+  documents: ເອກະສານ
+  downloads: ດາວໂຫຼດ
+  more_items: ສະແດງເພີ່ມເຕີມ...
+  music: ດົນຕີ
+  pictures: ຮູບພາບ
+  recent: ໃຊ້ບໍ່ດົນມານີ້
+  reduce_items: ສະແດງໜ້ອຍລົງ...
+  title: ບັນຊີຜູ້ໃຊ້
+  videos: ວິດີໂອ
+profile:
+  accounts: ເປີດການຕັ້ງຄ່າບັນຊີ
+  log_out: ອອກຈາກລະບົບ
+  open_onedrive: ເປີດໄດເລກະທໍລີ OneDrive
+  open_user_folder: ເປີດໄດເລກະທໍລີຜູ້ໃຊ້
+seelen_options:
+  open_installation_folder: ເປີດໂຟນເດີ Seelen settings
+  open_log_folder: ເປີດໂຟນເດີບັນທຶກ Seelen
+  title: Seelen directory

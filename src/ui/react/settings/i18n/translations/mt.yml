@@ -1,16 +1,6 @@
 action:
   confirm: Int żgur?
   confirm_body: Din l-azzjoni ma tistax titneħħa.
-app_launcher:
-  enable: Enable App Launcher
-  launch_on:
-    mouse_over: Mouse fuq
-    primary: Primarja
-  monitor: Tissorvelja biex turi
-  runners:
-    cmd: Kmand
-    explorer: Ġirja
-    label: Runners
 apps_configurations:
   app:
     bindings: Torbot (innota ż-żewġ għażliet huma meħtieġa)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
   settings_file: Settings Fajl
-  simulate_fullscreen: Issimula avveniment fullscreen
 extras:
   clear_icons: Ikoni tas-sistema ċara cache
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Rabtiet uffiċjali
   relaunch: Tnedija mill-ġdid
   version: Verżjoni
+  version_fixed: >-
+    L-applikazzjoni u l-verżjonijiet tal-WebView2 Runtime huma ffissati. Dan
+    ifisser li l-applikazzjoni mhux se tirċievi aġġornamenti u l-WebView2
+    Runtime mhux se jiġi aġġornat awtomatikament bl-aġġornamenti tal-Windows.
 general:
   accent_color: Kulur tal-aċċent
   date_format: Format tad-data
@@ -104,6 +97,7 @@ general:
     available: Pakketti ta' Ikoni Disponibbli
     selected: Pakketti tal-Ikoni Attivi
   language: Lingwa
+  monday: it-Tnejn
   performance_mode:
     on_battery: Fuq batterija
     on_energy_saver: Fuq l-enerġija li tiffranka
@@ -112,7 +106,10 @@ general:
       extreme: Estrem
       minimal: Minimu
     plugged: Imqabbad jew iċċarġjar
+  saturday: is-Sibt
+  start_of_week: Bidu tal-Ġimgħa
   startup: Mexxi fuq l-istartjar?
+  sunday: il-Ħadd
   theme:
     available: Temi Disponibbli
     selected: Temi Attivi
@@ -153,18 +150,28 @@ reset_all_to_default: Irrisettja l-valuri kollha tal-inadempjenza
 reset_to_default: Irrisettja għall-valur awtomatiku
 resources:
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
+  corrupted_wallpaper: >-
+    Naqas milli jiġi estratt thumbnail - format tal-vidjo korrotta jew mhux
+    appoġġjata
   delete: Ħassar ir-riżorsa
   discover: Skopri aktar riżorsi
   has_update: Aġġornament huwa disponibbli
+  high_impact: Impatt għoli fuq il-prestazzjoni
   import_wallpapers: Importa wallpapers lokali
   open_folder: Folder tar-Riżorsi Miftuħa
   outdated: >-
     Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u
     tista' ma taħdimx sew.
+  see_on_website: Ara fuq il-websajt
+review_request:
+  not_now: Mhux issa
+  sure: Żgur!
+  title: Tgawdi Seelen UI?
 save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
 see_more: Ara aktar
 shortcuts:
+  duplicate_error: Din is-shortcut hija duplikata
   enable: Ippermetti s-sistema shortcuts inkorporati
   enable_tooltip: >-
     Itfi jekk timplimentax is-sistema shortcuts tiegħek stess billi tuża
@@ -209,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: Aqleb għall-ispazju ta 'xogħol preċedenti
     switch_workspace: Aqleb għal Workspace {{0}}
     toggle_float: Toggle Window Float Mode
-    toggle_launcher: Toggle Launcher
     toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: Din hija shortcut li jinqara biss
   reset: Irrisettja għal nuqqasijiet
@@ -218,14 +224,6 @@ sides:
   left: Xellug
   right: Dritt
   top: Quċċata
-start:
-  message: >-
-    Merħba għal Seelen UI, l-ambjent tad-desktop aħħari b'maniġġ tal-Windows
-    tal-madum inkorporat biex itejjeb l-esperjenza tal-Windows tiegħek! Esplora
-    era ġdida ta 'effiċjenza u multitasking bl-interface intuwittiv tagħna u
-    karatteristiċi avvanzati.
-  message_accent: Ottimizza l-produttività tiegħek bl-istil!
-  title: Merħba!
 toolbar:
   auto_hide: Auto Hide
   delay_to_hide: Dewmien biex jinħbew
@@ -246,23 +244,39 @@ update:
 wall:
   backgrounds: Wallpapers
   blur: Ċċajpar
+  cancel: Ikkanċella
+  close: Agħlaq
+  collection_name: Isem tal-Ġbir
+  collections: Kollezzjonijiet
   contrast: Kuntrast
+  corrupted_wallpapers_message: 'Wallpapers korrotta, ikkunsidra li tħassar dawn:'
+  create: Oħloq
+  create_collection: Oħloq Ġbir
+  default_collection: Ġbir Default
+  delete_collection: Ħassar Ġbir
+  edit_collection: Edit Ġbir
   enable: Enable Wallpaper Manager
+  extend: Estendi primarja
   fit:
     contain: Fihom
     cover: Għata
     fill: Imla
   flipHorizontal: Flip orizzontali
   flipVertical: Flip vertikali
+  generating_thumbnails: Ġenerazzjoni tal-Minjaturi tal-Wallpaper
   hours: sigħat
   interval: Ibdel il-wallpaper kull
   minutes: minuti
+  monitor_collection: Ġbir Monitor
+  multimonitor_behaviour: Multimonitor Imġieba
   muted: Mute video awdjo
   no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
+  no_collections: S'issa ma nħolqotx kollezzjonijiet. Ikklikkja l-buttuna + biex toħloq waħda.
   objectFit: L-isfond jaqbel
   objectPosition: Pożizzjoni ta 'sfond
   overlayColor: Kulur overlay
   overlayMixBlendMode: Modalità ta 'taħlita ta' taħlita overlay
+  per_monitor: Għal kull monitor
   playback: Veloċità tad-daqq
   position:
     bottom: Qiegħ
@@ -270,10 +284,17 @@ wall:
     left: Xellug
     right: Dritt
     top: Quċċata
+  processing_video: Ipproċessar tal-vidjo
   random: Randomize slideshow
   saturation: Saturazzjoni
   seconds: sekondi
+  select_collection: Agħżel Ġbir
+  thumbnail_generation_complete: Ġenerazzjoni Thumbnail Tlesti
+  thumbnail_generation_finished: Il-ġenerazzjoni ta' miniatures spiċċat b'suċċess
+  wallpaper_collection: Ġbir tal-wallpaper
+  wallpaper_settings: Settings tal-wallpaper
   withOverlay: Bil-overlay
+  workspace_collections: Kollezzjonijiet tal-Ispazji tax-Xogħol
 weg:
   auto_hide: Auto Hide
   delay_to_hide: Dewmien biex jinħbew
@@ -309,6 +330,18 @@ weg:
   padding: Ikkuttunar
   show_end_task: Uri l-kompitu finali fit-taskbar
   width: Wisa '
+welcome:
+  give_a_review: Agħti Reviżjoni
+  message: >-
+    Seelen UI huwa ambjent desktop b'xejn u open source għall-Windows. Hawnhekk
+    għandek kontroll sħiħ fuq kif id-desktop tiegħek jidher u jaġixxi, li
+    jippermettilek tippersonalizza kull dettall biex jaqbel mal-fluss tax-xogħol
+    u l-istil tiegħek.
+  ok: Nibdew!
+  review: >-
+    Jekk tieħu pjaċir tuża Seelen UI, ikkunsidra li tħalli reviżjoni fuq
+    il-maħżen — ir-rispons tiegħek jgħin lill-proġett jikber u jitjieb.
+  title: Merħba għal Seelen UI!
 widget:
   enable: Ippermetti dan il-widget
   enable_for_monitor: Jippermetti fuq dan il-monitor

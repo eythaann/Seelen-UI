@@ -1,0 +1,21 @@
+empty_list: アイテムがありません
+folders:
+  desktop: デスクトップ
+  documents: 書類
+  downloads: ダウンロード
+  more_items: もっと見る...
+  music: 音楽
+  pictures: 写真
+  recent: 最近使用した
+  reduce_items: 表示を減らす...
+  title: ユーザーディレクトリ
+  videos: 動画
+profile:
+  accounts: アカウント設定を開く
+  log_out: ログアウト
+  open_onedrive: OneDrive ディレクトリを開く
+  open_user_folder: ユーザーディレクトリを開く
+seelen_options:
+  open_installation_folder: Seelen設定フォルダーを開く
+  open_log_folder: Seelen ログ フォルダーを開く
+  title: ゼーレンディレクトリ

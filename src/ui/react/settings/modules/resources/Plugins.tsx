@@ -7,30 +7,26 @@ import { invoke } from "@tauri-apps/api/core";
 import { Button } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
 import cs from "./infra.module.css";
 
-import { RootSelectors } from "../shared/store/app/selectors.ts";
+import { plugins, widgets } from "../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
 import { ResourceCard } from "./ResourceCard.tsx";
 
 export function PluginsView() {
-  const widgets = useSelector(RootSelectors.widgets);
-  const plugins = useSelector(RootSelectors.plugins);
-
   const { t } = useTranslation();
 
   function targetLabel(target: string) {
-    const widget = widgets.find((w) => w.id === target);
+    const widget = widgets.value.find((w) => w.id === target);
     if (widget) {
       return <ResourceText text={widget.metadata.displayName} />;
     }
     return <span>{target}</span>;
   }
 
-  const groupedByTarget = plugins.reduce((acc, plugin) => {
+  const groupedByTarget = plugins.value.reduce((acc, plugin) => {
     acc[plugin.target] ??= {
       label: targetLabel(plugin.target),
       plugins: [],

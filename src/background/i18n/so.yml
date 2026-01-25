@@ -1,11 +1,5 @@
 cancel: Burin
 done: Sameeyey
-drivers:
-  got_it: Helay
-  monitor_disabled: >-
-    Waxay umuuqataa in qaar ka mid ah darawalada kormeeraha ay naafo yihiin.
-    Fadlan u oggolow inay u oggolaadaan in Selen Ui si sax ah u shaqeynayo.
-  monitor_disabled_title: Darawalada kormeeraha ayaa naafo ah
 resource:
   added: Kheyraad Cusub ayaa lagu daray
   download_failed_body: >-
@@ -24,6 +18,16 @@ runtime:
     caadiga ah halkii.
   corrupted_file_path: Jidka faylka ee musuqmaasuqa
   download: Tag bogga soo dejinta
+  files_integrity: >-
+    Waanu xaqiijin kari waynay daacadnimada faylasha codsiga
+
+    Tani waxay dhici kartaa haddii faylasha wax laga beddelay, la kharribmay,
+    ama rakibiddu aanay dhammaystirnayn.
+
+    Sababaha amniga, Seelen UI ma sii socon karo.
+
+    Fadlan dib uga soo dejiso degelka rasmiga ah
+  files_integrity_title: Digniin Amni - Hubinta daacadnimada faylalka waa guuldareystay
   not_found: WebView2 Runtime lama helin
   not_found_description: Seelen UI wuxuu u baahan yahay Webview2 Runtime. Fadlan rakib
   outdated: WebView2 Runtime waa dhacay

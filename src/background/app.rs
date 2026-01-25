@@ -15,17 +15,15 @@ use crate::{
     error::{Result, ResultLogExt},
     hook::register_win_hook,
     log_error,
+    migrations::RestorationAndMigration,
     modules::{
         monitors::{MonitorManager, MonitorManagerEvent},
         system_settings::application::{SystemSettings, SystemSettingsEvent},
     },
-    restoration_and_migrations::RestorationAndMigration,
     state::application::{FullState, FULL_STATE},
-    system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::discord::start_discord_rpc,
     widgets::{
-        launcher::SeelenRofi,
         wallpaper_manager::SeelenWall,
         weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
     },
@@ -65,7 +63,6 @@ where
 pub struct Seelen {
     pub widgets_per_display: Vec<LegacyWidgetMonitorContainer>,
     pub wall: Option<SeelenWall>,
-    pub rofi: Option<SeelenRofi>,
 }
 
 /* ============== Getters ============== */
@@ -81,13 +78,6 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
-    fn add_rofi(&mut self) -> Result<()> {
-        if self.rofi.is_none() {
-            self.rofi = Some(SeelenRofi::new()?);
-        }
-        Ok(())
-    }
-
     fn add_wall(&mut self) -> Result<()> {
         if self.wall.is_none() {
             let wall = SeelenWall::new()?;
@@ -112,14 +102,9 @@ impl Seelen {
         ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
 
         if state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar();
+            SeelenWeg::hide_native_taskbar();
         } else {
-            SeelenWeg::restore_taskbar()?;
-        }
-
-        match state.is_launcher_enabled() {
-            true => self.add_rofi()?,
-            false => self.rofi = None,
+            SeelenWeg::restore_native_taskbar()?;
         }
 
         match state.is_wall_enabled() {
@@ -157,25 +142,13 @@ impl Seelen {
     }
 
     pub fn start(&mut self) -> Result<()> {
-        RestorationAndMigration::run_full()?;
+        RestorationAndMigration::run()?;
 
         let state = FULL_STATE.load();
         rust_i18n::set_locale(state.locale());
 
-        // order is important
-        create_background_window()?;
-        declare_system_events_handlers()?;
-
-        if state.is_launcher_enabled() {
-            self.add_rofi()?;
-        }
-
         if state.is_wall_enabled() {
             self.add_wall()?;
-        }
-
-        if state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar();
         }
 
         log::trace!("Enumerating Monitors & Creating Instances");
@@ -183,18 +156,15 @@ impl Seelen {
             self.add_monitor(view.primary_target()?.stable_id()?)?;
         }
 
+        self.refresh_windows_positions()?;
+
+        create_background_window()?;
+        register_win_hook()?;
         MonitorManager::subscribe(Self::on_monitor_event);
         SystemSettings::subscribe(Self::on_system_settings_change);
 
-        self.refresh_windows_positions()?;
-
-        register_win_hook()?;
         start_discord_rpc()?;
-
-        if state.are_shortcuts_enabled() {
-            ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
-        }
-
+        ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }
@@ -202,7 +172,6 @@ impl Seelen {
     /// Stop and release all resources
     pub fn stop(&self) {
         SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
-        release_system_events_handlers();
     }
 
     fn add_monitor(&mut self, monitor_id: MonitorId) -> Result<()> {

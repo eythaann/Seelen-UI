@@ -15,7 +15,6 @@ windows = { workspace = true, features = [
     "Win32_System_DataExchange",
 ] }
 windows-core = { workspace = true }
-parking_lot = { workspace = true }
 uuid = { workspace = true, features = ["serde"] }
 
 # Usamos la librería IPC del proyecto

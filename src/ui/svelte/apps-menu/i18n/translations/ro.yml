@@ -1,0 +1,11 @@
+all: Toate aplicațiile
+back: Spate
+disband: Desfaceți folderul
+folder: Dosar
+no_matching_items: Nu s-au găsit articole care să corespundă căutării dvs
+open_file_location: Deschideți locația fișierului
+pin: Pin
+run_as_admin: Rulați ca administrator
+unpin: Anulați fixarea
+welcome_message: Bun venit la meniul aplicației Seelen UI.
+welcome_message2: În această filă, puteți fixa aplicațiile preferate.

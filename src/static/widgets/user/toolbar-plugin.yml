@@ -1,0 +1,14 @@
+id: "@seelen/tb-user-menu"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: FaRegCircleUser
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: user
+  tooltip: |-
+    return user.name;
+  template: |-
+    return [Image({ path: user.profilePicturePath }), ' ', user.name];
+  onClickV2: |-
+    trigger("@seelen/user-menu");

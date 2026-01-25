@@ -9,14 +9,14 @@ import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenW
 export const $settings = lazySignal(async () => {
   const settings = await Settings.getAsync();
   return {
-    ...settings.seelenweg,
+    ...settings.byWidget["@seelen/weg"],
     language: settings.language,
     devTools: settings.devTools,
   };
 });
 await Settings.onChange((settings) => {
   $settings.value = {
-    ...settings.seelenweg,
+    ...settings.byWidget["@seelen/weg"],
     language: settings.language,
     devTools: settings.devTools,
   };

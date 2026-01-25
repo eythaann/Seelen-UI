@@ -1,16 +1,6 @@
 action:
   confirm: Bist du sicher?
   confirm_body: Diese Aktion kann nicht rückgängig gemacht werden.
-app_launcher:
-  enable: App Launcher aktivieren
-  launch_on:
-    mouse_over: Maus drüber
-    primary: Primär
-  monitor: Monitor zum Anzeigen
-  runners:
-    cmd: Befehl
-    explorer: Run
-    label: Runner
 apps_configurations:
   app:
     bindings: Bindung (beide Optionen sind erforderlich)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Installationsordner
   load: Laden
   settings_file: Einstellungsdatei
-  simulate_fullscreen: Vollbildereignis simulieren
 extras:
   clear_icons: System-Symbol-Cache löschen
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Offizielle Links
   relaunch: Neu starten
   version: Version
+  version_fixed: >-
+    Die Anwendungs- und WebView2-Runtime-Versionen sind behoben. Dies bedeutet,
+    dass die Anwendung keine Updates erhält und die WebView2 Runtime nicht
+    automatisch mit Windows-Updates aktualisiert wird.
 general:
   accent_color: Akzentfarbe
   date_format: Datumsformat
@@ -104,6 +97,7 @@ general:
     available: Verfügbare Icon-Pakete
     selected: Aktive Icon-Pakete
   language: Sprache
+  monday: Montag
   performance_mode:
     on_battery: Batterie
     on_energy_saver: Auf Energiesparer
@@ -112,7 +106,10 @@ general:
       extreme: Extrem
       minimal: Minimal
     plugged: Verstopft oder aufgeladen
+  saturday: Samstag
+  start_of_week: Wochenbeginn
   startup: Beim Hochfahren ausführen?
+  sunday: Sonntag
   theme:
     available: Verfügbare Themen
     selected: Aktive Themen
@@ -155,18 +152,28 @@ resources:
   app_outdated: >-
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
     funktionieren.
+  corrupted_wallpaper: >-
+    Miniaturansicht konnte nicht extrahiert werden – beschädigtes oder nicht
+    unterstütztes Videoformat
   delete: Ressource löschen
   discover: Weitere Ressourcen entdecken
   has_update: Ein Update ist verfügbar
+  high_impact: Hoher Einfluss auf die Leistung
   import_wallpapers: Lokale Hintergrundbilder importieren
   open_folder: Ressourcenordner öffnen
   outdated: >-
     Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und
     funktioniert möglicherweise nicht richtig.
+  see_on_website: Siehe auf der Website
+review_request:
+  not_now: Nicht jetzt
+  sure: Sicher!
+  title: Gefällt dir die Benutzeroberfläche von Seelen?
 save: Speichern
 save_and_restart: Speichern & neu starten
 see_more: Mehr sehen
 shortcuts:
+  duplicate_error: Diese Verknüpfung ist dupliziert
   enable: Aktivieren Sie ein integriertes Verknüpfungssystem
   enable_tooltip: >-
     Deaktivieren Sie, wenn Sie Ihr eigenes Verknüpfungssystem mit dem Seelen UI
@@ -211,7 +218,6 @@ shortcuts:
     switch_to_previous_workspace: Wechseln Sie zum vorherigen Arbeitsbereich
     switch_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
     toggle_float: Wechselfensterfloatmodus umschalten
-    toggle_launcher: Launcher umschalten
     toggle_monocle: Umschalten des Arbeitsbereichs Monocle -Modus
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
   reset: Auf Standards zurücksetzen
@@ -220,14 +226,6 @@ sides:
   left: Links
   right: Rechts
   top: Oben
-start:
-  message: >-
-    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem
-    integrierten Fenstermanager, um dein Windows-Erlebnis zu verbessern! Erkunde
-    eine neue Ära der Effizienz und Multitasking mit unserer intuitiven
-    Oberfläche und fortschrittlichen Funktionen.
-  message_accent: Optimiere deine Produktivität mit Stil!
-  title: Willkommen!
 toolbar:
   auto_hide: Automatisch ausblenden
   delay_to_hide: Verzögerung zum Verstecken
@@ -248,23 +246,41 @@ update:
 wall:
   backgrounds: Hintergrundbilder
   blur: Unschärfe
+  cancel: Stornieren
+  close: Schließen
+  collection_name: Sammlungsname
+  collections: Sammlungen
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Beschädigte Hintergrundbilder. Löschen Sie diese:'
+  create: Erstellen
+  create_collection: Sammlung erstellen
+  default_collection: Standardsammlung
+  delete_collection: Sammlung löschen
+  edit_collection: Sammlung bearbeiten
   enable: Tapetenmanager aktivieren
+  extend: Grundschule verlängern
   fit:
     contain: Enthält
     cover: Abdeckung
     fill: Füllen Sie
   flipHorizontal: Horizontal spiegeln
   flipVertical: Vertikal drehen
+  generating_thumbnails: Generieren von Hintergrundbild-Miniaturansichten
   hours: Std.
   interval: Wechseln Sie die Hintergrundbild
   minutes: Minuten
+  monitor_collection: Sammlung überwachen
+  multimonitor_behaviour: Multimonitor-Verhalten
   muted: Video-Audio stumm schalten
   no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
+  no_collections: >-
+    Es wurden noch keine Sammlungen erstellt. Klicken Sie auf die Schaltfläche
+    „+“, um eins zu erstellen.
   objectFit: Hintergrund Passform
   objectPosition: Hintergrund Position
   overlayColor: Überlagerungsfarbe
   overlayMixBlendMode: Mischmodus Überlagerung
+  per_monitor: Pro Monitor
   playback: Wiedergabegeschwindigkeit
   position:
     bottom: Unten
@@ -272,10 +288,17 @@ wall:
     left: Links
     right: Rechts
     top: Top
+  processing_video: Video verarbeiten
   random: Die Diashow randomisieren
   saturation: Sättigung
   seconds: Sekunden
+  select_collection: Wählen Sie Sammlung
+  thumbnail_generation_complete: Miniaturbild-Erstellung abgeschlossen
+  thumbnail_generation_finished: Die Miniaturbildgenerierung wurde erfolgreich abgeschlossen
+  wallpaper_collection: Tapetensammlung
+  wallpaper_settings: Hintergrundeinstellungen
   withOverlay: Mit Overlay
+  workspace_collections: Arbeitsbereichssammlungen
 weg:
   auto_hide: Automatisch ausblenden
   delay_to_hide: Verzögerung zum Verstecken
@@ -311,6 +334,18 @@ weg:
   padding: Polsterung
   show_end_task: Beendete Aufgabe in der Taskleiste anzeigen
   width: Breite
+welcome:
+  give_a_review: Geben Sie eine Bewertung ab
+  message: >-
+    Seelen UI ist eine kostenlose Open-Source-Desktopumgebung für Windows. Hier
+    haben Sie die volle Kontrolle über das Aussehen und Verhalten Ihres Desktops
+    und können jedes Detail an Ihren Arbeitsablauf und Stil anpassen.
+  ok: Fangen wir an!
+  review: >-
+    Wenn Ihnen die Nutzung der Seelen-Benutzeroberfläche Spaß macht, denken Sie
+    darüber nach, eine Bewertung im Store abzugeben – Ihr Feedback trägt dazu
+    bei, dass das Projekt wächst und sich verbessert.
+  title: Willkommen bei Seelen UI!
 widget:
   enable: Aktivieren Sie dieses Widget
   enable_for_monitor: Auf diesem Monitor aktivieren

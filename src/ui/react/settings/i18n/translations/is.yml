@@ -1,16 +1,6 @@
 action:
   confirm: Ertu viss?
   confirm_body: Ekki er hægt að afturkalla þessa aðgerð.
-app_launcher:
-  enable: Virkja App Launcher
-  launch_on:
-    mouse_over: Mús yfir
-    primary: Aðal
-  monitor: Fylgjast með því að sýna
-  runners:
-    cmd: Skipan
-    explorer: Hlaupa
-    label: Hlauparar
 apps_configurations:
   app:
     bindings: Binding (athugaðu að báðir valkostirnir eru nauðsynlegir)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Uppsetningarmöppu
   load: Hlaða
   settings_file: Stillingarskrá
-  simulate_fullscreen: Líktu eftir atburði á öllum skjánum
 extras:
   clear_icons: Hreinsa kerfistákn skyndiminni
   clear_icons_tooltip: Endurræsing gæti verið nauðsynleg til að taka gildi að fullu á allar búnaðir
@@ -95,6 +84,10 @@ extras:
   links: Opinberir hlekkir
   relaunch: Fylgdu aftur
   version: Útgáfa
+  version_fixed: >-
+    Forritið og WebView2 Runtime útgáfur eru fastar. Þetta þýðir að forritið fær
+    ekki uppfærslur og WebView2 Runtime verður ekki uppfært sjálfkrafa með
+    Windows uppfærslum.
 general:
   accent_color: Hreim litur
   date_format: Dagsetningarsnið
@@ -102,6 +95,7 @@ general:
     available: Lausir táknpakkar
     selected: Virkir táknpakkar
   language: Tungumál
+  monday: mánudag
   performance_mode:
     on_battery: Á rafhlöðu
     on_energy_saver: Á orkusparnað
@@ -110,7 +104,10 @@ general:
       extreme: Öfgafullt
       minimal: Lágmarks
     plugged: Tengt eða hleðsla
+  saturday: laugardag
+  start_of_week: Upphaf vikunnar
   startup: Hlaupa í gangsetningu?
+  sunday: sunnudag
   theme:
     available: Þemu í boði
     selected: Virk þemu
@@ -151,18 +148,26 @@ reset_all_to_default: Endurstilla allt í sjálfgefin gildi
 reset_to_default: Endurstilla í sjálfgefið gildi
 resources:
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
+  corrupted_wallpaper: Mistókst að draga út smámynd - skemmd eða óstudd myndbandssnið
   delete: Eyða auðlindinni
   discover: Uppgötvaðu fleiri úrræði
   has_update: Uppfærsla er í boði
+  high_impact: Mikil áhrif á frammistöðu
   import_wallpapers: Flytja inn staðbundið veggfóður
   open_folder: Opin auðlindamappa
   outdated: >-
     Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað
     rétt.
+  see_on_website: Sjá á heimasíðu
+review_request:
+  not_now: Ekki núna
+  sure: Jú!
+  title: Hefurðu gaman af Seelen UI?
 save: Vista
 save_and_restart: Vista og endurræsa
 see_more: Sjáðu meira
 shortcuts:
+  duplicate_error: Þessi flýtileið er afrituð
   enable: Virkja innbyggt flýtileiðkerfi
   enable_tooltip: >-
     Slökktu á ef þú munt innleiða þitt eigið flýtileiðkerfi með Seelen UI
@@ -207,7 +212,6 @@ shortcuts:
     switch_to_previous_workspace: Skiptu yfir í fyrri vinnusvæði
     switch_workspace: Skiptu yfir í vinnusvæði {{0}}
     toggle_float: Skiptu um glugga flotastillingu
-    toggle_launcher: Skiptu um sjósetja
     toggle_monocle: Skiptu um vinnusvæði Monocle Mode
   readonly_tooltip: Þetta er aðeins skrifvarinn
   reset: Endurstilla í vanskil
@@ -216,14 +220,6 @@ sides:
   left: Vinstri
   right: Ekki satt
   top: Efst
-start:
-  message: >-
-    Verið velkomin í Seelen HÍ, fullkominn skrifborðsumhverfi með innbyggðan
-    flísar Windows Manager til að auka Windows upplifun þína! Kannaðu nýtt
-    tímabil skilvirkni og fjölverkavinnslu með leiðandi viðmóti okkar og
-    háþróaðri eiginleika.
-  message_accent: Fínstilltu framleiðni þína með stæl!
-  title: Velkominn!
 toolbar:
   auto_hide: Sjálfvirk fela
   delay_to_hide: Seinkun á að fela
@@ -244,23 +240,39 @@ update:
 wall:
   backgrounds: Veggfóður
   blur: Þoka
+  cancel: Hætta við
+  close: Loka
+  collection_name: Nafn safns
+  collections: Söfn
   contrast: Andstæður
+  corrupted_wallpapers_message: 'Skemmt veggfóður, íhugaðu að eyða þessum:'
+  create: Búa til
+  create_collection: Búðu til safn
+  default_collection: Sjálfgefið safn
+  delete_collection: Eyða safni
+  edit_collection: Breyta safni
   enable: Virkja veggfóðursstjóra
+  extend: Framlengja prófkjör
   fit:
     contain: Inniheldur
     cover: Cover
     fill: Fylltu
   flipHorizontal: Flip Lárétt
   flipVertical: Flip lóðrétt
+  generating_thumbnails: Búa til veggfóðursmámyndir
   hours: klukkustundir
   interval: Skiptu um veggfóður hvert
   minutes: mínútur
+  monitor_collection: Fylgjast með safni
+  multimonitor_behaviour: Fjölskjár hegðun
   muted: Slökkva á myndhljóði
   no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
+  no_collections: Engin söfn búin til ennþá. Smelltu á + hnappinn til að búa til einn.
   objectFit: Bakgrunnur passa
   objectPosition: Bakgrunnsstaða
   overlayColor: Yfirlag litur
   overlayMixBlendMode: Yfirlagsblöndublöndunarstilling
+  per_monitor: Á hvern skjá
   playback: Spilunarhraði
   position:
     bottom: Botn
@@ -268,10 +280,17 @@ wall:
     left: Vinstri
     right: Ekki satt
     top: Efst
+  processing_video: Vinnur myndband
   random: Slendandi myndasýning
   saturation: Mettun
   seconds: sekúndur
+  select_collection: Veldu Safn
+  thumbnail_generation_complete: Smámyndagerð lokið
+  thumbnail_generation_finished: Smámyndagerð hefur lokið með góðum árangri
+  wallpaper_collection: Veggfóður safn
+  wallpaper_settings: Veggfóðurstillingar
   withOverlay: Með yfirlagi
+  workspace_collections: Vinnusöfn
 weg:
   auto_hide: Sjálfvirk fela
   delay_to_hide: Seinkun á að fela
@@ -307,6 +326,18 @@ weg:
   padding: Padding
   show_end_task: Sýna lokverkefni í verkstikunni
   width: Breidd
+welcome:
+  give_a_review: Gefðu umsögn
+  message: >-
+    Seelen UI er ókeypis og opið skrifborðsumhverfi fyrir Windows. Hér hefur þú
+    fulla stjórn á því hvernig skjáborðið þitt lítur út og hegðar sér, sem gerir
+    þér kleift að sérsníða hvert smáatriði til að passa við vinnuflæði þitt og
+    stíl.
+  ok: Byrjum!
+  review: >-
+    Ef þú hefur gaman af því að nota Seelen UI skaltu íhuga að skilja eftir
+    umsögn um verslunina - athugasemdir þínar hjálpa verkefninu að vaxa og bæta.
+  title: Velkomin í Seelen HÍ!
 widget:
   enable: Virkja þennan búnað
   enable_for_monitor: Virkja á þessum skjá

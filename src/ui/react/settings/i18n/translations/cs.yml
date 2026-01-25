@@ -1,16 +1,6 @@
 action:
   confirm: Jsi si jistý?
   confirm_body: Tuto akci nelze vrátit zpět.
-app_launcher:
-  enable: Povolit spouštěč aplikací
-  launch_on:
-    mouse_over: Přejeďte myší
-    primary: Primární
-  monitor: Zobrazit monitor
-  runners:
-    cmd: Příkaz
-    explorer: Spustit
-    label: Běžci
 apps_configurations:
   app:
     bindings: Vazba (jsou vyžadovány obě možnosti)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Instalační složka
   load: Načíst
   settings_file: Nastavení souboru
-  simulate_fullscreen: Simulovat událost na celou obrazovku
 extras:
   clear_icons: Vymazání mezipaměti systémových ikon
   clear_icons_tooltip: Aby se plně projevily všechny widgety, mohlo by být nutné restartování.
@@ -95,6 +84,10 @@ extras:
   links: Oficiální odkazy
   relaunch: Znovu spustit
   version: Verze
+  version_fixed: >-
+    Verze aplikace a WebView2 Runtime jsou opraveny. To znamená, že aplikace
+    nebude přijímat aktualizace a WebView2 Runtime nebude automaticky
+    aktualizován aktualizacemi Windows.
 general:
   accent_color: Barvný nádech
   date_format: Formát datumu
@@ -102,6 +95,7 @@ general:
     available: Dostupné balíčky ikon
     selected: Aktivní balíčky ikon
   language: Jazyk
+  monday: pondělí
   performance_mode:
     on_battery: Na baterii
     on_energy_saver: Na spořič energie
@@ -110,7 +104,10 @@ general:
       extreme: Extrémní
       minimal: Minimální
     plugged: Připojené nebo nabíjení
+  saturday: sobota
+  start_of_week: Začátek týdne
   startup: Spoustit při každém startu?
+  sunday: neděle
   theme:
     available: Dostupné motivy
     selected: Aktivní motivy
@@ -153,18 +150,28 @@ resources:
   app_outdated: >-
     Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského
     rozhraní Seelen.
+  corrupted_wallpaper: >-
+    Nepodařilo se extrahovat miniaturu – poškozený nebo nepodporovaný formát
+    videa
   delete: Odstranit zdroj
   discover: Objevte další zdroje
   has_update: K dispozici je aktualizace
+  high_impact: Vysoký dopad na výkon
   import_wallpapers: Import místních tapet
   open_folder: Otevření složky se zdroji
   outdated: >-
     Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a
     nemusí fungovat správně.
+  see_on_website: Viz na webu
+review_request:
+  not_now: Teď ne
+  sure: Jasně!
+  title: Líbí se vám uživatelské rozhraní Seelen?
 save: Uložit
 save_and_restart: Uložit a restartovat
 see_more: Viz více
 shortcuts:
+  duplicate_error: Tato zkratka je duplicitní
   enable: Povolení vestavěného systému zkratek
   enable_tooltip: >-
     Zakázat, pokud budete implementovat vlastní systém zkratek pomocí klienta
@@ -209,7 +216,6 @@ shortcuts:
     switch_to_previous_workspace: Přepnutí na předchozí pracovní plochu
     switch_workspace: Přepnutí na pracovní plochu {{0}}
     toggle_float: Přepínání režimu plovoucího okna
-    toggle_launcher: Přepínání spouštěče
     toggle_monocle: Přepínání režimu Monokl na pracovní ploše
   readonly_tooltip: Toto je zkratka pouze pro čtení
   reset: Obnovení výchozího nastavení
@@ -218,14 +224,6 @@ sides:
   left: Vlevo
   right: Vpravo
   top: Svršek
-start:
-  message: >-
-    Vítejte v SEELEN UI, Ultimate Desktop Environment s začleněným manažerem
-    oken, aby se zlepšil Vaší zkušenost se systémem Windows! Objevte novou éru
-    účinnosti a multitaskingu s naším intuitivním rozhraním a pokročilými
-    funkcemi.
-  message_accent: Optimalizujte svou produktivitu se stylem!
-  title: Vítejte!
 toolbar:
   auto_hide: Automaticky skrýt
   delay_to_hide: Zpoždění schování
@@ -246,23 +244,39 @@ update:
 wall:
   backgrounds: Tapety
   blur: Rozmazání
+  cancel: Zrušit
+  close: Blízko
+  collection_name: Název sbírky
+  collections: Sbírky
   contrast: Kontrast
+  corrupted_wallpapers_message: 'Poškozené tapety, zvažte smazání těchto:'
+  create: Vytvořit
+  create_collection: Vytvořit sbírku
+  default_collection: Výchozí kolekce
+  delete_collection: Smazat sbírku
+  edit_collection: Upravit sbírku
   enable: Povolit správce tapet
+  extend: Prodloužit primární
   fit:
     contain: Obsahuje
     cover: Obálka
     fill: Naplňte
   flipHorizontal: Flip Horizontální
   flipVertical: Flip Vertical
+  generating_thumbnails: Generování miniatur tapet
   hours: hodiny
   interval: Změňte tapetu každých
   minutes: minuty
+  monitor_collection: Sbírka monitorů
+  multimonitor_behaviour: Multimonitorové chování
   muted: Ztlumit zvuk videa
   no_background: Prázdná prezentace, použití pozadí motivu.
+  no_collections: Dosud nebyly vytvořeny žádné sbírky. Kliknutím na tlačítko + jej vytvoříte.
   objectFit: Pozadí Fit
   objectPosition: Pozice v pozadí
   overlayColor: Barva překrytí
   overlayMixBlendMode: Režim prolnutí překryvné směsi
+  per_monitor: Na monitor
   playback: Rychlost přehrávání
   position:
     bottom: Spodní část
@@ -270,10 +284,17 @@ wall:
     left: Vlevo
     right: Vpravo
     top: Nahoru
+  processing_video: Zpracování videa
   random: Randomize prezentace
   saturation: Nasycení
   seconds: sekundy
+  select_collection: Vyberte Sbírka
+  thumbnail_generation_complete: Generování náhledů dokončeno
+  thumbnail_generation_finished: Generování náhledů bylo úspěšně dokončeno
+  wallpaper_collection: Kolekce tapet
+  wallpaper_settings: Nastavení tapety
   withOverlay: S překrytím
+  workspace_collections: Kolekce pracovního prostoru
 weg:
   auto_hide: Automatické skrytí
   delay_to_hide: Zpoždění schování
@@ -309,6 +330,18 @@ weg:
   padding: Padding
   show_end_task: Zobrazení koncové úlohy na hlavním panelu
   width: Šířka
+welcome:
+  give_a_review: Dejte recenzi
+  message: >-
+    Seelen UI je bezplatné a open source desktopové prostředí pro Windows. Zde
+    máte plnou kontrolu nad tím, jak váš desktop vypadá a chová se, což vám
+    umožňuje přizpůsobit každý detail tak, aby odpovídal vašemu pracovnímu
+    postupu a stylu.
+  ok: Začněme!
+  review: >-
+    Pokud rádi používáte Seelen UI, zvažte zanechání recenze v obchodě – vaše
+    zpětná vazba pomáhá projektu růst a zlepšovat se.
+  title: Vítejte v uživatelském rozhraní Seelen!
 widget:
   enable: Povolení tohoto widgetu
   enable_for_monitor: Povolit na tomto monitoru

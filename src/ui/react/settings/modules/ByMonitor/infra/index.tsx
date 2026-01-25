@@ -1,9 +1,9 @@
 import type { PhysicalMonitor, Widget } from "@seelen-ui/lib/types";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
-import { newSelectors } from "../../shared/store/app/reducer.ts";
+import { widgets } from "../../../state/resources.ts";
+import { monitors, settings } from "../../../state/mod.ts";
 
 import { Monitor } from "../../../components/monitor/index.tsx";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
@@ -16,7 +16,6 @@ interface MonitorConfigProps {
 }
 
 export function MonitorConfig({ device }: MonitorConfigProps) {
-  const widgets = useSelector(newSelectors.widgets);
   const { t } = useTranslation();
 
   return (
@@ -54,7 +53,7 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
           </SettingsGroup>
 
           <SettingsGroup>
-            {widgets.filter(isConfigurableByMonitor).map((widget) => {
+            {widgets.value.filter(isConfigurableByMonitor).map((widget) => {
               return (
                 <SettingsOption key={widget.id}>
                   <ResourceText text={widget.metadata.displayName} />
@@ -80,8 +79,8 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
 }
 
 export function SettingsByMonitor() {
-  const devices = useSelector(newSelectors.connectedMonitors);
-  const settingsByMonitor = useSelector(newSelectors.monitorsV3);
+  const devices = monitors.value;
+  const settingsByMonitor = settings.value.monitorsV3;
 
   return (
     <>
@@ -102,16 +101,19 @@ function isConfigurableByMonitor(widget: Widget) {
     return true;
   }
 
-  for (const { group } of widget.settings) {
-    for (const entry of group) {
-      const stack = [entry];
+  // Check if any setting item allows configuration by monitor
+  const stack = [...widget.settings];
 
-      while (stack.length > 0) {
-        const entry = stack.pop()!;
-        if (entry.config.allowSetByMonitor) {
-          return true;
-        }
-        stack.push(...entry.children);
+  while (stack.length > 0) {
+    const definition = stack.pop()!;
+
+    // If it's a group, add its items to the stack
+    if ("group" in definition) {
+      stack.push(...definition.group.items);
+    } else {
+      // It's a setting item, check if it allows configuration by monitor
+      if (definition.allowSetByMonitor) {
+        return true;
       }
     }
   }

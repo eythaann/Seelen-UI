@@ -1,11 +1,13 @@
 import {
+  type Rect,
   type ThirdPartyWidgetSettings,
   type Widget as IWidget,
+  type WidgetConfigDefinition,
   type WidgetId,
   WidgetPreset,
+  type WidgetSettingItem,
   WidgetStatus,
   type WidgetTriggerPayload,
-  type WsdGroupEntry,
 } from "@seelen-ui/types";
 import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 import { List } from "../../utils/List.ts";
@@ -16,7 +18,7 @@ import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";
 import { WidgetAutoSizer } from "./sizing.ts";
-import { adjustPostionByPlacement } from "./positioning.ts";
+import { adjustPostionByPlacement as adjustPositionByPlacement } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
 
 export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
@@ -24,7 +26,6 @@ export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
 export const SeelenWegWidgetId: WidgetId = "@seelen/weg" as WidgetId;
 export const SeelenToolbarWidgetId: WidgetId = "@seelen/fancy-toolbar" as WidgetId;
 export const SeelenWindowManagerWidgetId: WidgetId = "@seelen/window-manager" as WidgetId;
-export const SeelenLauncherWidgetId: WidgetId = "@seelen/launcher" as WidgetId;
 export const SeelenWallWidgetId: WidgetId = "@seelen/wallpaper-manager" as WidgetId;
 
 export class WidgetList extends List<IWidget> {
@@ -129,12 +130,10 @@ export class Widget {
     return [id as WidgetId, query];
   }
 
-  /** Will throw if the library is being used on a non Seelen UI environment */
-  static getCurrentWidgetId(): WidgetId {
-    return this.getCurrent().id;
-  }
-
-  /** Will throw if the library is being used on a non Seelen UI environment */
+  /**
+   * Alternative accesor for the current running widget.\
+   * Will throw if the library is being used on a non Seelen UI environment
+   */
   static getCurrent(): Widget {
     const scope = globalThis as ExtendedGlobalThis;
     if (!scope.__SLU_WIDGET) {
@@ -145,23 +144,38 @@ export class Widget {
     );
   }
 
-  private static getEntryDefaultValues(entry: WsdGroupEntry): Record<string, unknown> {
-    const config: Record<string, unknown> = {
-      [entry.config.key]: entry.config.defaultValue,
-    };
-    for (const item of entry.children) {
-      Object.assign(config, Widget.getEntryDefaultValues(item));
+  /** The current running widget */
+  static get self(): Widget {
+    return Widget.getCurrent();
+  }
+
+  private static getDefinitionDefaultValues(
+    definition: WidgetConfigDefinition,
+  ): Record<string, unknown> {
+    const config: Record<string, unknown> = {};
+
+    // Check if it's a group (has "group" property)
+    if ("group" in definition) {
+      // Recursively process all items in the group
+      for (const item of definition.group.items) {
+        Object.assign(config, Widget.getDefinitionDefaultValues(item));
+      }
+    } else {
+      // It's a setting item, extract key and defaultValue
+      const item = definition as WidgetSettingItem;
+      if ("key" in item && "defaultValue" in item) {
+        config[item.key] = item.defaultValue;
+      }
     }
+
     return config;
   }
 
   /** Returns the default config of the widget, declared on the widget definition */
   public getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
-    for (const { group } of this.def.settings) {
-      for (const entry of group) {
-        Object.assign(config, Widget.getEntryDefaultValues(entry));
-      }
+    for (const definition of this.def.settings) {
+      Object.assign(config, Widget.getDefinitionDefaultValues(definition));
     }
     return config;
   }
@@ -201,14 +215,8 @@ export class Widget {
   private async applyPopupPreset(): Promise<void> {
     await Promise.all([...this.applyInvisiblePreset()]);
 
-    // auto close after 1 minute when not in use to save resources
-    const closeOnTimeout = debounce(() => {
-      this.webview.close();
-    }, 60_000);
-
     const hideWebview = debounce(() => {
-      this.webview.hide();
-      closeOnTimeout();
+      this.hide(true);
     }, 100);
 
     this.webview.onFocusChanged(({ payload: focused }) => {
@@ -225,18 +233,25 @@ export class Widget {
 
       if (desiredPosition) {
         const { width, height } = await this.webview.outerSize();
-        const pos = await adjustPostionByPlacement({
-          x: desiredPosition[0],
-          y: desiredPosition[1],
-          width,
-          height,
+        const adjusted = await adjustPositionByPlacement({
+          frame: {
+            x: desiredPosition[0],
+            y: desiredPosition[1],
+            width,
+            height,
+          },
           alignX,
           alignY,
         });
-        await this.webview.setPosition(new PhysicalPosition(pos.x, pos.y));
+        await this.setPosition({
+          left: adjusted.x,
+          top: adjusted.y,
+          right: adjusted.x + adjusted.width,
+          bottom: adjusted.y + adjusted.height,
+        });
       }
-      await this.webview.show();
-      await this.webview.setFocus();
+
+      await this.show();
     });
   }
 
@@ -246,12 +261,11 @@ export class Widget {
    */
   public async persistPositionAndSize(): Promise<void> {
     const storage = globalThis.window.localStorage;
-    const { label } = this.webview;
 
-    const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${label}::${k}`));
+    const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${k}`));
 
     if (x && y) {
-      const pos = new PhysicalPosition(Number(x), Number(y));
+      const pos = new PhysicalPosition(Math.round(Number(x)), Math.round(Number(y)));
       // check if the stored position is still valid
       const monitor = await monitorFromPoint(pos.x, pos.y);
       if (monitor) {
@@ -260,15 +274,15 @@ export class Widget {
     }
 
     if (width && height) {
-      const size = new PhysicalSize(Number(width), Number(height));
+      const size = new PhysicalSize(Math.round(Number(width)), Math.round(Number(height)));
       await this.webview.setSize(size);
     }
 
     this.webview.onMoved(
       debounce((e) => {
         const { x, y } = e.payload;
-        storage.setItem(`${label}::x`, x.toString());
-        storage.setItem(`${label}::y`, y.toString());
+        storage.setItem(`x`, x.toString());
+        storage.setItem(`y`, y.toString());
         console.info(`Widget position saved: ${x} ${y}`);
       }, 500),
     );
@@ -276,8 +290,8 @@ export class Widget {
     this.webview.onResized(
       debounce((e) => {
         const { width, height } = e.payload;
-        storage.setItem(`${label}::width`, width.toString());
-        storage.setItem(`${label}::height`, height.toString());
+        storage.setItem(`width`, width.toString());
+        storage.setItem(`height`, height.toString());
         console.info(`Widget size saved: ${width} ${height}`);
       }, 500),
     );
@@ -340,7 +354,7 @@ export class Widget {
     await this.autoSizer?.execute();
 
     if (this.initOptions.show ?? !this.def.lazy) {
-      await this.webview.show();
+      await this.show();
     }
 
     // this will mark the widget as ready, and send pending trigger event if exists
@@ -354,7 +368,39 @@ export class Widget {
       cb(payload);
     });
   }
+
+  /** If animations are enabled this will animate the movement of the widget */
+  public async setPosition(rect: Rect): Promise<void> {
+    await invoke(SeelenCommand.SetSelfPosition, {
+      rect: {
+        left: Math.round(rect.left),
+        top: Math.round(rect.top),
+        right: Math.round(rect.right),
+        bottom: Math.round(rect.bottom),
+      },
+    });
+  }
+
+  public async show(): Promise<void> {
+    debouncedClose.cancel();
+    const hwnd = await invoke(SeelenCommand.GetSelfWindowId);
+    await this.webview.show();
+    await invoke(SeelenCommand.RequestFocus, { hwnd }).catch(() => {
+      console.warn(`Failed to focus widget: ${this.decoded.label}`);
+    });
+  }
+
+  public hide(closeAfterInactivity?: boolean): void {
+    Widget.self.webview.hide();
+    if (closeAfterInactivity) {
+      debouncedClose();
+    }
+  }
 }
+
+const debouncedClose = debounce(() => {
+  Widget.self.webview.hide();
+}, 30_000);
 
 type ExtendedGlobalThis = typeof globalThis & {
   __SLU_WIDGET?: IWidget;

@@ -11,6 +11,8 @@
 - wallpapers per monitor and per workspace.
 - wallpaper collections.
 - allow set start of week on calendars.
+- extended wallpapers across all monitors.
+- new start menu widget.
 
 ### enhancements
 
@@ -21,6 +23,7 @@
 - settings UX improvements.
 - extraction on local video wallpapers thumbnails.
 - avoid reload the UI while playing as this can cause fps drops.
+- reduce memory usage!
 
 ### fix
 
@@ -30,6 +33,12 @@
 - app not working on local accounts.
 - app and service not running if already running on another session.
 - high cpu usage while user session inactive.
+- fix stale battery percentage on sleep wake up.
+- click on keyboard layout no changing the layout on the system.
+- window labels not being shown on dock.
+- tiling window manager not pausing on maximized/fullscreen apps.
+- run as admin not working on dock/taskbar.
+- single key shortcuts not taking in care holded keys.
 
 ## [2.4.11]
 

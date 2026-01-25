@@ -7,8 +7,10 @@ metadata:
     - toolbar
     - window-manager
 styles:
+  # For devs: key is the id of the target widget and value is the relative path to the style.
+  # For third-party widgets uses the real widget id, friendly ids are only for bundle or local themes,
+  # as friendly ids are not stable.
   "@seelen/fancy-toolbar": !include styles/fancy-toolbar.scss
-  "@seelen/launcher": !include styles/launcher.css
   "@seelen/power-menu": !include styles/power-menu.scss
   "@seelen/task-switcher": !include styles/task-switcher.scss
   "@seelen/wallpaper-manager": !include styles/wallpaper-manager.css
@@ -18,4 +20,13 @@ styles:
   "@seelen/quick-settings": !include styles/quick-settings.scss
   "@seelen/bluetooth-popup": !include styles/bluetooth-popup.scss
   "@seelen/workspaces-viewer": !include styles/workspaces-viewer.scss
+  "@seelen/apps-menu": !include styles/apps-menu.scss
+  "@seelen/keyboard-selector": !include styles/keyboard-selector.scss
+  "@seelen/user-menu": !include styles/user-menu.scss
+  "@seelen/network-popup": !include styles/network-popup.scss
+  "@seelen/calendar-popup": !include styles/calendar-popup.scss
+  "@seelen/media-popup": !include styles/media-popup.scss
+  "@seelen/notifications": !include styles/notifications.scss
+
+# shared styles across all widgets
 sharedStyles: !include ./shared/index.scss

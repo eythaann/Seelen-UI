@@ -1,16 +1,6 @@
 action:
   confirm: Дали сте сигурни?
   confirm_body: Оваа акција не може да се разоткрие.
-app_launcher:
-  enable: Овозможете фрлач на апликации
-  launch_on:
-    mouse_over: Глувчето над
-    primary: Примарен
-  monitor: Монитор за да се покаже
-  runners:
-    cmd: Команда
-    explorer: Трчај
-    label: Тркачи
 apps_configurations:
   app:
     bindings: Обврзувачки (Забележете дека се потребни и двете опции)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Папка за инсталација
   load: Оптоварување
   settings_file: Датотека за поставки
-  simulate_fullscreen: Симулирајте настан на цел екран
 extras:
   clear_icons: Јасна кеш за икони на системот
   clear_icons_tooltip: >-
@@ -97,6 +86,10 @@ extras:
   links: Официјални врски
   relaunch: Повторно започнување
   version: Верзија
+  version_fixed: >-
+    Апликацијата и верзиите WebView2 Runtime се поправени. Ова значи дека
+    апликацијата нема да прима ажурирања и WebView2 Runtime нема автоматски да
+    се ажурира со ажурирања на Windows.
 general:
   accent_color: Боја на акцент
   date_format: Формат на датум
@@ -104,6 +97,7 @@ general:
     available: Достапни пакети со икони
     selected: Пакети со активни икони
   language: Јазик
+  monday: понеделник
   performance_mode:
     on_battery: На батеријата
     on_energy_saver: На заштеда на енергија
@@ -112,7 +106,10 @@ general:
       extreme: Екстремни
       minimal: Минимално
     plugged: Вклучен или полнење
+  saturday: сабота
+  start_of_week: Почеток на неделата
   startup: Стартувам на стартување?
+  sunday: недела
   theme:
     available: Достапни теми
     selected: Активни теми
@@ -153,18 +150,26 @@ reset_all_to_default: Ресетирајте ги сите на стандард
 reset_to_default: Ресетирање на стандардна вредност
 resources:
   app_outdated: Овој ресурс бара понова верзија на Seelen UI да работи правилно.
+  corrupted_wallpaper: Не успеа да се извлече сликичка - оштетен или неподдржан видео формат
   delete: Избришете ресурс
   discover: Откријте повеќе ресурси
   has_update: Достапно е ажурирање
+  high_impact: Високо влијание врз перформансите
   import_wallpapers: Увезете локални позадини
   open_folder: Отворена папка со ресурси
   outdated: >-
     Овој ресурс беше дизајниран за постара верзија на Seelen UI и можеби нема да
     работи правилно.
+  see_on_website: Видете на веб-страницата
+review_request:
+  not_now: Не сега
+  sure: Секако!
+  title: Уживате во Seelen UI?
 save: Зачувај
 save_and_restart: Зачувај и рестартирај
 see_more: Погледнете повеќе
 shortcuts:
+  duplicate_error: Оваа кратенка е дупликат
   enable: Овозможете вграден систем за кратенки
   enable_tooltip: >-
     Оневозможете ако го имплементирате вашиот сопствен систем на кратенки со
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Префрлете се на претходниот работен простор
     switch_workspace: Префрлете се на работниот простор {{0}}
     toggle_float: Вклучување на режимот на плови на прозорецот
-    toggle_launcher: Завртете го фрлачот
     toggle_monocle: Вклучете го режимот на монокет на работниот простор
   readonly_tooltip: Ова е кратенка само за читање
   reset: Ресетирање на стандардно
@@ -218,14 +222,6 @@ sides:
   left: Лево
   right: Десно
   top: Врв
-start:
-  message: >-
-    Добредојдовте во Seelen UI, крајната околина за десктоп со вграден менаџер
-    за прозорци за Windows за подобрување на вашето искуство со Windows!
-    Истражете нова ера на ефикасност и мултитаскинг со нашиот интуитивен
-    интерфејс и напредни карактеристики.
-  message_accent: Оптимизирајте ја вашата продуктивност со стил!
-  title: Добредојдовте!
 toolbar:
   auto_hide: Автоматско скриј
   delay_to_hide: Одложување за сокривање
@@ -246,23 +242,39 @@ update:
 wall:
   backgrounds: Позадини
   blur: Замаглување
+  cancel: Откажи
+  close: Затвори
+  collection_name: Име на колекцијата
+  collections: Колекции
   contrast: Контраст
+  corrupted_wallpapers_message: 'Оштетени позадини, размислете да ги избришете овие:'
+  create: Креирај
+  create_collection: Креирај колекција
+  default_collection: Стандардна колекција
+  delete_collection: Избришете ја колекцијата
+  edit_collection: Уреди колекција
   enable: Овозможете менаџер на тапети
+  extend: Прошири основно
   fit:
     contain: Содржат
     cover: Покритие
     fill: Пополнете
   flipHorizontal: Флип хоризонтално
   flipVertical: Флип вертикална
+  generating_thumbnails: Создавање сликички за позадина
   hours: часови
   interval: Променете ја позадината на секој
   minutes: минути
+  monitor_collection: Колекција на монитори
+  multimonitor_behaviour: Однесување на мултимонитор
   muted: Исклучете го звукот на видеото
   no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
+  no_collections: Сè уште нема создадени колекции. Кликнете на копчето + за да креирате едно.
   objectFit: Подготвување на позадината
   objectPosition: Позиција во позадина
   overlayColor: Боја на преклопување
   overlayMixBlendMode: Режим на мешавина од мешавина од преклопување
+  per_monitor: По монитор
   playback: Брзина на репродукција
   position:
     bottom: Дно
@@ -270,10 +282,17 @@ wall:
     left: Лево
     right: Десно
     top: Горе
+  processing_video: Се обработува видео
   random: Рандомизирајте го слајдшоу
   saturation: Заситеност
   seconds: секунди
+  select_collection: Изберете Колекција
+  thumbnail_generation_complete: Генерирањето сликички е завршено
+  thumbnail_generation_finished: Генерирањето сликички заврши успешно
+  wallpaper_collection: Колекција на тапети
+  wallpaper_settings: Поставки за позадина
   withOverlay: Со преклоп
+  workspace_collections: Колекции на работниот простор
 weg:
   auto_hide: Автоматско скриј
   delay_to_hide: Одложување за сокривање
@@ -309,6 +328,19 @@ weg:
   padding: Подлога
   show_end_task: Покажете задача за крај во лентата со задачи
   width: Ширина
+welcome:
+  give_a_review: Дајте преглед
+  message: >-
+    Seelen UI е бесплатна и работна околина со отворен код за Windows. Овде
+    имате целосна контрола врз тоа како изгледа и се однесува вашиот десктоп,
+    што ви овозможува да го приспособите секој детал за да одговара на вашиот
+    работен тек и стил.
+  ok: Да почнеме!
+  review: >-
+    Ако уживате во користењето на Seelen UI, размислете да оставите преглед во
+    продавницата - вашите повратни информации помагаат проектот да расте и да се
+    подобри.
+  title: Добредојдовте во Seelen UI!
 widget:
   enable: Овозможете го овој додаток
   enable_for_monitor: Овозможете на овој монитор

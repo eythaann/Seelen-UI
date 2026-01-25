@@ -4,7 +4,7 @@
   width: 100%;
   max-width: 600px;
   aspect-ratio: 16 / 9;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-s);
   z-index: 10;
   pointer-events: none;
 }

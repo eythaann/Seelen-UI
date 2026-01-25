@@ -112,6 +112,7 @@ impl Monitor {
         Ok(*main_physical_monitor)
     }
 
+    // Display Data Channel/Command Interface
     pub fn supports_ddcci(&self) -> Result<bool> {
         let physical_monitor = self.main_physical()?;
         let ddcci_is_supported = unsafe {

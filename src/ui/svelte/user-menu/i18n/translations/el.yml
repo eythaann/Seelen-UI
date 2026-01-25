@@ -1,0 +1,21 @@
+empty_list: Δεν υπάρχουν στοιχεία
+folders:
+  desktop: Επιτραπέζιος υπολογιστής
+  documents: Εγγραφα
+  downloads: Λήψεις
+  more_items: Εμφάνιση περισσότερων...
+  music: Μουσική
+  pictures: Εικόνες
+  recent: Χρησιμοποιήθηκε πρόσφατα
+  reduce_items: Εμφάνιση λιγότερων...
+  title: Καταλόγους χρηστών
+  videos: Βίντεο
+profile:
+  accounts: Ανοίξτε τις ρυθμίσεις λογαριασμού
+  log_out: Αποσυνδεθείτε
+  open_onedrive: Ανοίξτε τον κατάλογο του OneDrive
+  open_user_folder: Ανοίξτε τον κατάλογο χρήστη
+seelen_options:
+  open_installation_folder: Ανοίξτε το φάκελο ρυθμίσεων Seelen
+  open_log_folder: Ανοίξτε το φάκελο καταγραφής Seelen
+  title: Καταλόγους Seelen

@@ -20,9 +20,6 @@ context_menu:
   restore: Återställ till standard
   settings: Inställningar
   task_manager: Task Manager
-keyboard:
-  more: Fler inställningar för tangentbord
-  title: Layout för tangentbord
 media:
   default_multimedia_volume: Multimedia Volym
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Inmatningsenheter
   output_devices: Utmatningsenheter
   players: Mediaspelare
-network:
-  available: Tillgängliga nätverk
-  connect: Ansluta
-  connected: Ansluten till
-  disconnect: Koppla ifrån
-  hidden: Doldnätverk
-  more: Fler nätverksinställningar
-  not_found: Inga nätverk hittades
-  placeholder:
-    password: Lösenord
-  saved: Sparade nätverk
-  scanning: Söker efter nätverk
-  secured: Krypterat nätverk
 notifications:
   clear: Rensa alla
   empty: Inga meddelanden
@@ -70,24 +54,3 @@ settings:
   power: Driva
   restart: Omstart
   title: inställningar
-userhome:
-  empty_list: Inga föremål
-  folders:
-    desktop: Skrivbord
-    documents: Dokument
-    downloads: Nedladdningar
-    more_items: Visa mer...
-    music: Musik
-    pictures: Bilder
-    recent: Nyligen använt
-    reduce_items: Visa mindre...
-    title: Användarkataloger
-    videos: Videor
-  profile:
-    accounts: Öppna kontoinställningar
-    open_onedrive: Öppna OneDrive-katalogen
-    open_user_folder: Öppna användarkatalogen
-  seelen_options:
-    open_installation_folder: Öppna Seelens inställningsmapp
-    open_log_folder: Öppna Seelen loggmapp
-    title: Seelen kataloger

@@ -1,16 +1,6 @@
 action:
   confirm: Tem certeza?
   confirm_body: Esta ação não pode ser desfeita.
-app_launcher:
-  enable: Ativar Lançador de Aplicativos
-  launch_on:
-    mouse_over: Ao passar o mouse
-    primary: Primário
-  monitor: Monitor para exibir
-  runners:
-    cmd: Comando
-    explorer: Executar
-    label: Executores
 apps_configurations:
   app:
     bindings: Vinculação (ambas as opções são obrigatórias)
@@ -87,7 +77,6 @@ devtools:
   install_folder: Pasta de Instalação
   load: Carregar
   settings_file: Arquivo de Configurações
-  simulate_fullscreen: Simular evento de tela cheia
 extras:
   clear_icons: Limpar cache de ícones do sistema
   clear_icons_tooltip: Pode ser necessário reiniciar para aplicar a todos os widgets
@@ -95,6 +84,10 @@ extras:
   links: Links Oficiais
   relaunch: Reiniciar
   version: Versão
+  version_fixed: >-
+    As versões do aplicativo e do WebView2 Runtime foram corrigidas. Isso
+    significa que o aplicativo não receberá atualizações e o WebView2 Runtime
+    não será atualizado automaticamente com as atualizações do Windows.
 general:
   accent_color: Cor de destaque
   date_format: Formato de data
@@ -102,6 +95,7 @@ general:
     available: Pacotes de ícones disponíveis
     selected: Pacotes de ícones ativos
   language: Idioma
+  monday: Segunda-feira
   performance_mode:
     on_battery: Na bateria
     on_energy_saver: Em economia de energia
@@ -110,7 +104,10 @@ general:
       extreme: Extremo
       minimal: Mínimo
     plugged: Conectado ou carregamento
+  saturday: Sábado
+  start_of_week: Início da semana
   startup: Executar na inicialização?
+  sunday: Domingo
   theme:
     available: Temas disponíveis
     selected: Temas ativos
@@ -153,18 +150,26 @@ resources:
   app_outdated: >-
     Esse recurso requer uma versão mais recente da interface do usuário da
     Seelen para funcionar corretamente.
+  corrupted_wallpaper: Falha ao extrair miniatura – formato de vídeo corrompido ou incompatível
   delete: Excluir recursos
   discover: Descubra mais recursos
   has_update: Uma atualização está disponível
+  high_impact: Alto impacto no desempenho
   import_wallpapers: Importar papéis de parede locais
   open_folder: Abrir a pasta de recursos
   outdated: >-
     Esse recurso foi projetado para uma versão mais antiga da interface do
     usuário da Seelen e pode não funcionar corretamente.
+  see_on_website: Veja no site
+review_request:
+  not_now: Agora não
+  sure: Clara!
+  title: Gostando da interface do Seelen?
 save: Salvar
 save_and_restart: Salve e reinicie
 see_more: Veja mais
 shortcuts:
+  duplicate_error: Este atalho está duplicado
   enable: Habilitar o sistema de atalhos embutidos
   enable_tooltip: >-
     Desative se você implementar seu próprio sistema de atalhos usando o Seelen
@@ -209,7 +214,6 @@ shortcuts:
     switch_to_previous_workspace: Mudar para o espaço de trabalho anterior
     switch_workspace: Mudar para o espaço de trabalho {{0}}
     toggle_float: Alterne o modo de flutuação da janela
-    toggle_launcher: TOGLGLE Lançador
     toggle_monocle: Alternar o modo de monocle na área de trabalho
   readonly_tooltip: Este é um atalho somente leitura
   reset: Redefinir para padrões
@@ -218,14 +222,6 @@ sides:
   left: Esquerda
   right: Direita
   top: Topo
-start:
-  message: >-
-    Bem-vindo ao Seelen UI, o melhor ambiente de área de trabalho com um
-    gerenciador de janelas lado a lado incorporado para aprimorar sua
-    experiência com o Windows! Explore uma nova era de eficiência e multitarefa
-    com nossa interface intuitiva e recursos avançados.
-  message_accent: Otimize sua produtividade com estilo!
-  title: Bem-vindo!
 toolbar:
   auto_hide: Esconder automaticamente
   delay_to_hide: Demora para esconder
@@ -246,23 +242,39 @@ update:
 wall:
   backgrounds: Papéis de parede
   blur: Desfoque
+  cancel: Cancelar
+  close: Fechar
+  collection_name: Nome da coleção
+  collections: Coleções
   contrast: Contraste
+  corrupted_wallpapers_message: 'Papéis de parede corrompidos, considere excluí-los:'
+  create: Criar
+  create_collection: Criar coleção
+  default_collection: Coleção padrão
+  delete_collection: Excluir coleção
+  edit_collection: Editar coleção
   enable: Ativar gerente de papel de parede
+  extend: Estender primário
   fit:
     contain: Conter
     cover: Capa
     fill: Preencher
   flipHorizontal: Virar na horizontal
   flipVertical: Virar vertical
+  generating_thumbnails: Gerando miniaturas de papel de parede
   hours: horas
   interval: Troque o papel de parede todos
   minutes: minutos
+  monitor_collection: Coleção de monitores
+  multimonitor_behaviour: Comportamento multimonitor
   muted: Silenciar áudio de vídeo
   no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
+  no_collections: Nenhuma coleção criada ainda. Clique no botão + para criar um.
   objectFit: Ajuste do plano de fundo
   objectPosition: Posição de fundo
   overlayColor: Cor da sobreposição
   overlayMixBlendMode: Overlay Mix Blend Mode (Modo de mistura de sobreposição)
+  per_monitor: Por monitor
   playback: Velocidade de reprodução
   position:
     bottom: Parte inferior
@@ -270,10 +282,17 @@ wall:
     left: Esquerda
     right: Certo
     top: Topo
+  processing_video: Processando vídeo
   random: Randomize Slideshow
   saturation: Saturação
   seconds: segundas
+  select_collection: Selecione a coleção
+  thumbnail_generation_complete: Geração de miniaturas concluída
+  thumbnail_generation_finished: A geração da miniatura foi concluída com sucesso
+  wallpaper_collection: Coleção de papéis de parede
+  wallpaper_settings: Configurações de papel de parede
   withOverlay: Com sobreposição
+  workspace_collections: Coleções de espaço de trabalho
 weg:
   auto_hide: Ocultar automaticamente
   delay_to_hide: Demora para esconder
@@ -309,6 +328,18 @@ weg:
   padding: Preenchimento
   show_end_task: Mostrar tarefa final na barra de tarefas
   width: Largura
+welcome:
+  give_a_review: Dê uma avaliação
+  message: >-
+    Seelen UI é um ambiente de desktop gratuito e de código aberto para Windows.
+    Aqui você tem controle total sobre a aparência e o comportamento de sua área
+    de trabalho, permitindo personalizar cada detalhe para combinar com seu
+    fluxo de trabalho e estilo.
+  ok: Vamos começar!
+  review: >-
+    Se você gosta de usar a UI Seelen, considere deixar um comentário na loja –
+    seu feedback ajuda o projeto a crescer e melhorar.
+  title: Bem-vindo à UI da Seelen!
 widget:
   enable: Ativar esse widget
   enable_for_monitor: Ativar neste monitor

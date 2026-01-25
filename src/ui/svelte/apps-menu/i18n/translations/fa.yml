@@ -1,0 +1,11 @@
+all: همه برنامه ها
+back: برگشت
+disband: پوشه را از بین ببرید
+folder: پوشه
+no_matching_items: هیچ موردی مطابق با جستجوی شما یافت نشد
+open_file_location: مکان فایل را باز کنید
+pin: سنجاق
+run_as_admin: به عنوان Administrator اجرا شود
+unpin: پین را بردارید
+welcome_message: به منوی اپلیکیشن Seelen UI خوش آمدید.
+welcome_message2: در این تب می توانید اپلیکیشن های مورد علاقه خود را پین کنید.

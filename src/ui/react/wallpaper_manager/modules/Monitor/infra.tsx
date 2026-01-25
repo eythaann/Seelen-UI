@@ -1,12 +1,31 @@
 import { batch, useComputed, useSignal, useSignalEffect } from "@preact/signals";
-import type { PhysicalMonitor, WallpaperId } from "@seelen-ui/lib/types";
+import { MultimonitorBehaviour, type PhysicalMonitor, type WallpaperId } from "@seelen-ui/lib/types";
 import { Wallpaper as WallpaperComponent } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { useTranslation } from "react-i18next";
 
-import { $muted, $paused, $performance_mode, $settings, $virtualDesktops, $wallpapers } from "../shared/state.ts";
+import {
+  $monitors,
+  $muted,
+  $paused,
+  $performance_mode,
+  $settings,
+  $virtualDesktops,
+  $wallpapers,
+} from "../shared/state.ts";
 import { $relativeMonitors } from "./derived.ts";
 
 export function MonitorContainers() {
+  const isExtendMode = $settings.value.multimonitorBehaviour === MultimonitorBehaviour.Extend;
+
+  if (isExtendMode) {
+    const primaryMonitor = $monitors.value.find((m) => m.isPrimary) || $monitors.value[0];
+    if (!primaryMonitor) {
+      console.error("Primary monitor not found");
+      return null;
+    }
+    return <Monitor extended monitor={primaryMonitor} />;
+  }
+
   return $relativeMonitors.value.map((monitor) => {
     return <Monitor key={monitor.id} monitor={monitor} />;
   });
@@ -20,7 +39,7 @@ export function MonitorContainers() {
  *    - old wallpaper will persist for 1 second during transition
  * 3. performance mode will disable video wallpapers
  */
-function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
+function Monitor({ monitor, extended }: { monitor: PhysicalMonitor; extended?: boolean }) {
   const { t } = useTranslation();
   const $render_old = useSignal(false);
   const $current_was_loaded = useSignal(false);
@@ -72,17 +91,20 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
     console.error("Wallpaper not found (maybe removed?)", $current_id.value);
   }
 
+  let left = extended ? 0 : monitor.rect.left / globalThis.devicePixelRatio;
+  let top = extended ? 0 : monitor.rect.top / globalThis.devicePixelRatio;
+  let width = extended ? "100%" : (monitor.rect.right - monitor.rect.left) / globalThis.devicePixelRatio;
+  let height = extended ? "100%" : (monitor.rect.bottom - monitor.rect.top) / globalThis.devicePixelRatio;
+
   return (
     <div
       className="monitor"
       style={{
         position: "fixed",
-        left: monitor.rect.left / globalThis.devicePixelRatio,
-        top: monitor.rect.top / globalThis.devicePixelRatio,
-        width: (monitor.rect.right - monitor.rect.left) /
-          globalThis.devicePixelRatio,
-        height: (monitor.rect.bottom - monitor.rect.top) /
-          globalThis.devicePixelRatio,
+        left,
+        top,
+        width,
+        height,
       }}
     >
       {[
@@ -90,8 +112,7 @@ function Monitor({ monitor }: { monitor: PhysicalMonitor }) {
           <WallpaperComponent
             key={oldWallpaper?.id || "themed"}
             definition={oldWallpaper}
-            config={oldWallpaper &&
-              $settings.value.byWallpaper[oldWallpaper.id]}
+            config={oldWallpaper && $settings.value.byWallpaper[oldWallpaper.id]}
             paused // inmediately pause exiting wallpaper, to avoid gpu usage.
             out={$current_was_loaded.value}
           />

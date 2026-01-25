@@ -1,0 +1,21 @@
+empty_list: ไม่มีรายการ
+folders:
+  desktop: เดสก์ท็อป
+  documents: เอกสาร
+  downloads: ดาวน์โหลด
+  more_items: แสดงเพิ่มเติม...
+  music: ดนตรี
+  pictures: รูปภาพ
+  recent: ใช้ล่าสุด
+  reduce_items: แสดงน้อยลง...
+  title: ไดเร็กทอรีผู้ใช้
+  videos: วิดีโอ
+profile:
+  accounts: เปิดการตั้งค่าบัญชี
+  log_out: ออกจากระบบ
+  open_onedrive: เปิดไดเรกทอรี OneDrive
+  open_user_folder: เปิดไดเร็กทอรีผู้ใช้
+seelen_options:
+  open_installation_folder: เปิดโฟลเดอร์การตั้งค่า Seelen
+  open_log_folder: เปิดโฟลเดอร์บันทึก Seelen
+  title: ไดเร็กทอรี Seelen

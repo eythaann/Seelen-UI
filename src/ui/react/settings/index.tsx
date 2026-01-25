@@ -1,12 +1,9 @@
 import { getRootContainer } from "libs/ui/react/utils/index.ts";
-import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
-import { Provider } from "react-redux";
 import { HashRouter } from "react-router";
 import { Widget } from "@seelen-ui/lib";
-
-import { LoadSettingsToStore, registerStoreEvents, store } from "./modules/shared/store/infra.ts";
+import { LogicalSize } from "@seelen-ui/lib/tauri";
 
 import { App } from "./app.tsx";
 
@@ -16,22 +13,32 @@ import "@shared/styles/colors.css";
 import "./styles/variables.css";
 import "@shared/styles/reset.css";
 import "./styles/global.css";
+import "@shared/styles/RichText.css";
 
-getCurrentWebviewWindow().show();
+const { webview } = Widget.self;
 
-await LoadSettingsToStore();
-await registerStoreEvents();
+await Promise.all([
+  webview.setDecorations(false),
+  webview.setSizeConstraints({ minWidth: 600, minHeight: 400 }),
+  webview.setSize(new LogicalSize(800, 500)),
+]);
+await webview.center();
+
+await Widget.self.init();
+await Widget.self.show();
+
+Widget.self.onTrigger(() => {
+  webview.unminimize();
+  webview.setFocus();
+});
+
 await loadTranslations();
-
-await Widget.getCurrent().init();
 
 const container = getRootContainer();
 createRoot(container).render(
-  <Provider store={store}>
-    <I18nextProvider i18n={i18n}>
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </I18nextProvider>
-  </Provider>,
+  <I18nextProvider i18n={i18n}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </I18nextProvider>,
 );

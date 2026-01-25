@@ -1,11 +1,5 @@
 cancel: Membatalkan
 done: Selesai
-drivers:
-  got_it: Mengerti.
-  monitor_disabled: >-
-    Tampaknya beberapa driver monitor dinonaktifkan. Aktifkan driver tersebut
-    agar Seelen UI dapat berfungsi dengan baik.
-  monitor_disabled_title: Driver monitor dinonaktifkan
 resource:
   added: Sumber daya baru telah ditambahkan
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: File konfigurasi rusak, menggunakan nilai default sebagai gantinya.
   corrupted_file_path: Jalur file yang rusak
   download: Buka halaman unduh
+  files_integrity: >-
+    Kami tidak dapat memverifikasi integritas file aplikasi.
+
+    Hal ini dapat terjadi jika file telah diubah, rusak, atau instalasi tidak
+    lengkap.
+
+    Demi alasan keamanan, Seelen UI tidak dapat melanjutkan.
+
+    Silakan instal ulang dari situs resminya.
+  files_integrity_title: Peringatan Keamanan - Pemeriksaan Integritas File Gagal
   not_found: Waktu Proses WebView2 tidak ditemukan
   not_found_description: Seelen UI memerlukan Runtime Webview2. Silakan menginstalnya.
   outdated: Waktu Proses WebView2 sudah ketinggalan jaman

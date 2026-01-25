@@ -1,4 +1,4 @@
-pub mod launcher;
+pub mod cli;
 pub mod loader;
 pub mod manager;
 pub mod popups;
@@ -9,20 +9,27 @@ pub mod webview;
 pub mod weg;
 pub mod window_manager;
 
-use std::{path::PathBuf, sync::LazyLock};
+use std::{
+    path::{Path, PathBuf},
+    sync::LazyLock,
+};
 
 use seelen_core::{
     handlers::SeelenEvent,
+    resource::ResourceId,
     state::{WidgetStatus, WidgetTriggerPayload},
+    Rect,
 };
-use tauri::{Emitter, Manager};
+use tauri::Emitter;
+use windows::Win32::UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS;
 
 use crate::{
     app::get_app_handle,
     error::Result,
     state::application::FULL_STATE,
-    utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap, WidgetWebviewLabel},
-    widgets::manager::WIDGET_MANAGER,
+    utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap},
+    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebviewLabel},
+    windows_api::{input::Keyboard, WindowsApi},
 };
 
 static PENDING_TRIGGERS: LazyLock<SyncHashMap<WidgetWebviewLabel, WidgetTriggerPayload>> =
@@ -71,82 +78,94 @@ pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn get_self_window_handle(webview: tauri::WebviewWindow<tauri::Wry>) -> Result<isize> {
+pub fn get_self_window_handle(webview: tauri::WebviewWindow) -> Result<isize> {
     Ok(webview.hwnd()?.0 as isize)
 }
 
-pub fn show_settings() -> Result<()> {
-    log::trace!("Show settings window");
-    let label = WidgetWebviewLabel::new("@seelen/settings", None, None);
-    let handle = get_app_handle();
-    match handle.get_webview_window(&label.raw) {
-        Some(window) => {
-            window.unminimize()?;
-            window.set_focus()?;
-        }
-        None => {
-            let args = WebviewArgs::new().disable_gpu();
-            tauri::WebviewWindowBuilder::new(
-                handle,
-                label.raw,
-                tauri::WebviewUrl::App("react/settings/index.html".into()),
-            )
-            .title("Settings")
-            .inner_size(800.0, 500.0)
-            .min_inner_size(600.0, 400.0)
-            .visible(false)
-            .decorations(false)
-            .center()
-            .data_directory(args.data_directory())
-            .additional_browser_args(&args.to_string())
-            .build()?;
-        }
-    }
+#[tauri::command(async)]
+pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()> {
+    use windows::Win32::Foundation::{HWND, RECT};
+    let hwnd = HWND(webview.hwnd()?.0);
+    let rect = RECT {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+    };
+    // pre set position for resize in case of multiples dpi
+    WindowsApi::move_window(hwnd, &rect)?;
+    WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
     Ok(())
 }
 
-pub struct WebviewArgs {
-    pub args: Vec<String>,
+pub fn show_settings() -> Result<()> {
+    trigger_widget(WidgetTriggerPayload::new("@seelen/settings".into()))
 }
 
-impl WebviewArgs {
-    const BASE_1: &str = "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection";
-    const BASE_2: &str = "--no-first-run --disable-site-isolation-trials --disable-background-timer-throttling --V8Maglev";
-
-    pub fn new() -> Self {
-        // --disk-cache-size=0
-        Self {
-            args: vec![Self::BASE_1.to_string(), Self::BASE_2.to_string()],
-        }
+#[tauri::command(async)]
+pub fn show_start_menu() -> Result<()> {
+    let guard = FULL_STATE.load();
+    if guard.is_widget_enabled(&"@seelen/apps-menu".into()) {
+        trigger_widget(WidgetTriggerPayload::new("@seelen/apps-menu".into()))?;
+        return Ok(());
     }
-
-    pub fn with(mut self, arg: &str) -> Self {
-        self.args.push(arg.to_string());
-        self
-    }
-
-    pub fn disable_gpu(self) -> Self {
-        self.with("--disable-gpu")
-    }
-
-    pub fn data_directory(&self) -> PathBuf {
-        // remove bases
-        let mut args = self.args.clone();
-        args.remove(0);
-        args.remove(0);
-
-        if args.is_empty() {
-            SEELEN_COMMON.app_cache_dir().to_path_buf()
-        } else {
-            SEELEN_COMMON
-                .app_cache_dir()
-                .join(args.join("").replace("-", ""))
-        }
-    }
+    // trick for showing the native start menu
+    Keyboard::new().send_keys("{win}")
 }
 
-impl std::fmt::Display for WebviewArgs {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.args.join(" "))
+#[tauri::command(async)]
+pub fn write_data_file(
+    webview: tauri::WebviewWindow,
+    filename: String,
+    content: String,
+) -> Result<()> {
+    let base_path = widget_data_dir(&webview)?;
+    let path = resolve_safe_path(&base_path, &filename)?;
+    std::fs::write(path, content)?;
+    Ok(())
+}
+
+#[tauri::command(async)]
+pub fn read_data_file(webview: tauri::WebviewWindow, filename: String) -> Result<String> {
+    let base_path = widget_data_dir(&webview)?;
+    let path = resolve_safe_path(&base_path, &filename)?;
+    Ok(std::fs::read_to_string(path)?)
+}
+
+fn widget_data_dir(webview: &tauri::WebviewWindow) -> Result<PathBuf> {
+    let label = WidgetWebviewLabel::try_from_raw(webview.label())?;
+    let data_dir = SEELEN_COMMON.app_data_dir().join("data");
+
+    let folder = match &*label.widget_id {
+        ResourceId::Local(id) => id.trim_start_matches("@").replace("/", "-"),
+        ResourceId::Remote(uuid) => uuid.to_string(),
+    };
+
+    let path = data_dir.join(folder);
+    std::fs::create_dir_all(&path)?;
+    Ok(path)
+}
+
+fn resolve_safe_path(base: &Path, filename: &str) -> Result<PathBuf> {
+    let filename_path = PathBuf::from(filename);
+
+    if filename_path.is_absolute() {
+        return Err("Absolute paths are not allowed".into());
     }
+
+    let joined = base.join(filename_path);
+    let base_canon = base.canonicalize()?;
+
+    let target_canon = joined.canonicalize().or_else(|_| {
+        // if file does not exist, canonicalize the parent
+        let parent = joined.parent().ok_or("Invalid path")?;
+        let parent_canon = parent.canonicalize()?;
+        Result::Ok(parent_canon.join(joined.file_name().ok_or("Invalid filename")?))
+    })?;
+
+    if !target_canon.starts_with(&base_canon) {
+        return Err("Path traversal attempt detected >:(".into());
+    }
+
+    Ok(target_canon)
 }

@@ -20,9 +20,6 @@ context_menu:
   restore: Obnovení výchozího nastavení
   settings: Nastavení
   task_manager: Správce úloh
-keyboard:
-  more: Další nastavení klávesnice
-  title: Rozložení klávesnice
 media:
   default_multimedia_volume: Multimediální hlasitost
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Vstupní zařízení
   output_devices: Výstupní zařízení
   players: Přehrávače médií
-network:
-  available: Dostupné sítě
-  connect: Připojit
-  connected: Připojeno k
-  disconnect: Odpojit
-  hidden: Skrytá síť
-  more: Více nastavení sítě
-  not_found: Žádné sítě nenalezeny
-  placeholder:
-    password: Heslo
-  saved: Uložené sítě
-  scanning: Vyhledávání sítí
-  secured: Šifrovaná síť
 notifications:
   clear: Vymazat vše
   empty: Žádné oznámení
@@ -70,24 +54,3 @@ settings:
   power: Napájení
   restart: Restart
   title: Nastavení
-userhome:
-  empty_list: Žádné položky
-  folders:
-    desktop: Plocha
-    documents: Dokumenty
-    downloads: Stažené soubory
-    more_items: Zobrazit více...
-    music: Hudba
-    pictures: Obrázky
-    recent: Nedávno použité
-    reduce_items: Zobrazit méně...
-    title: Adresáře uživatelů
-    videos: Videa
-  profile:
-    accounts: Nastavení otevřeného účtu
-    open_onedrive: Otevření adresáře OneDrive
-    open_user_folder: Otevření uživatelského adresáře
-  seelen_options:
-    open_installation_folder: Otevřete složku nastavení Seelen
-    open_log_folder: Otevřete složku logů Seelen
-    title: Adresáře Seelen

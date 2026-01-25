@@ -1,0 +1,13 @@
+default_multimedia_volume: Cyfrol Amlgyfrwng
+device:
+  channel:
+    system: Synau system
+  comunications: Cyfathrebu
+  missing: Dyfais ar Goll
+  mixer: Cymysgydd Cyfrol
+  multimedia: Amlgyfrwng
+  settings: Mwy o Gosodiadau Dyfais
+  volume: Cyfrol Dyfais
+input_devices: Dyfeisiau mewnbwn
+output_devices: Dyfeisiau allbwn
+players: Chwaraewyr Cyfryngau

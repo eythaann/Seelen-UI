@@ -20,9 +20,6 @@ context_menu:
   restore: Відновити за замовчуванням
   settings: Налаштування
   task_manager: Диспетчер задач
-keyboard:
-  more: Більше налаштувань клавіатури
-  title: Розкладка клавіатури
 media:
   default_multimedia_volume: Мультимедійна гучність
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Пристрої введення
   output_devices: Пристрої виводу
   players: Медіаплеєри
-network:
-  available: Доступні мережі
-  connect: Підключити
-  connected: Підключено до
-  disconnect: Відключити
-  hidden: Прихована мережа
-  more: Більше налаштувань мережі
-  not_found: Жодних мереж не знайдено
-  placeholder:
-    password: Пароль
-  saved: Збережені мережі
-  scanning: Сканування мереж
-  secured: Зашифрована мережа
 notifications:
   clear: Зачистити все.
   empty: Немає сповіщень
@@ -70,24 +54,3 @@ settings:
   power: Живлення
   restart: Перезапустити
   title: Налаштування
-userhome:
-  empty_list: Немає предметів
-  folders:
-    desktop: Робочий стіл
-    documents: Документи
-    downloads: Завантаження
-    more_items: Показати більше...
-    music: Музика
-    pictures: Зображення
-    recent: Нещодавно використані
-    reduce_items: Показати менше...
-    title: Каталоги користувачів
-    videos: Відео
-  profile:
-    accounts: Налаштування відкритого рахунку
-    open_onedrive: Відкрийте каталог OneDrive
-    open_user_folder: Відкрити каталог користувача
-  seelen_options:
-    open_installation_folder: Відкрийте папку налаштувань Seelen
-    open_log_folder: Відкрийте папку журналу Seelen
-    title: Переглянуті каталоги

@@ -1,16 +1,6 @@
 action:
   confirm: Sigurado ka ba?
   confirm_body: Ang pagkilos na ito ay hindi maaaring magawa.
-app_launcher:
-  enable: Paganahin ang launcher ng app
-  launch_on:
-    mouse_over: Itapat ng mouse
-    primary: Pangunahin
-  monitor: Subaybayan upang ipakita
-  runners:
-    cmd: Utos
-    explorer: Tumakbo
-    label: Mga mananakbo
 apps_configurations:
   app:
     bindings: Ang pagbubuklod (tandaan ang parehong mga pagpipilian ay kinakailangan)
@@ -89,7 +79,6 @@ devtools:
   install_folder: Folder ng pag -install
   load: Mag -load
   settings_file: File ng mga setting
-  simulate_fullscreen: Gayahin ang fullscreen na kaganapan
 extras:
   clear_icons: I -clear ang Mga Icon ng System Cache
   clear_icons_tooltip: >-
@@ -99,6 +88,10 @@ extras:
   links: Opisyal na mga link
   relaunch: Muling pagsasaayos
   version: Bersyon
+  version_fixed: >-
+    Ang mga bersyon ng application at WebView2 Runtime ay naayos na.
+    Nangangahulugan ito na ang application ay hindi makakatanggap ng mga update
+    at ang WebView2 Runtime ay hindi awtomatikong maa-update sa Windows update.
 general:
   accent_color: Kulay ng accent
   date_format: Format ng petsa
@@ -106,6 +99,7 @@ general:
     available: Magagamit na Mga Icon Pack
     selected: Mga Aktibong Icon Pack
   language: Wika
+  monday: Lunes
   performance_mode:
     on_battery: Sa baterya
     on_energy_saver: Sa enerhiya saver
@@ -114,7 +108,10 @@ general:
       extreme: Matinding
       minimal: Minimal
     plugged: Naka -plug o singilin
+  saturday: Sabado
+  start_of_week: Simula ng Linggo
   startup: Patakbuhin sa Startup?
+  sunday: Linggo
   theme:
     available: Magagamit na Mga Tema
     selected: Mga Aktibong Tema
@@ -157,18 +154,28 @@ resources:
   app_outdated: >-
     Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
     Seelen UI upang gumana nang maayos.
+  corrupted_wallpaper: >-
+    Nabigong i-extract ang thumbnail - sira o hindi sinusuportahang format ng
+    video
   delete: Tanggalin ang mapagkukunan
   discover: Tuklasin ang higit pang mga mapagkukunan
   has_update: Magagamit ang isang pag -update
+  high_impact: Mataas na epekto sa pagganap
   import_wallpapers: Mag -import ng mga lokal na wallpaper
   open_folder: Buksan ang folder ng mapagkukunan
   outdated: >-
     Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
     Seelen UI at maaaring hindi gumana nang maayos.
+  see_on_website: Tingnan sa website
+review_request:
+  not_now: Hindi ngayon
+  sure: Oo naman!
+  title: Nasisiyahan sa Seelen UI?
 save: I -save
 save_and_restart: I -save at i -restart
 see_more: Makita pa
 shortcuts:
+  duplicate_error: Ang shortcut na ito ay nadoble
   enable: Paganahin ang built-in na mga shortcut system
   enable_tooltip: >-
     Huwag paganahin kung ipatutupad mo ang iyong sariling sistema ng mga
@@ -213,7 +220,6 @@ shortcuts:
     switch_to_previous_workspace: Lumipat sa nakaraang workspace
     switch_workspace: Lumipat sa workspace {{0}}
     toggle_float: Toggle window float mode
-    toggle_launcher: Toggle launcher
     toggle_monocle: Toggle workspace monocle mode
   readonly_tooltip: Ito ay isang shortcut na basahin lamang
   reset: I -reset sa mga default
@@ -222,14 +228,6 @@ sides:
   left: Kaliwa
   right: Tama
   top: Tuktok
-start:
-  message: >-
-    Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
-    may isang isinama na tiling windows manager upang mapahusay ang iyong
-    karanasan sa Windows! Galugarin ang isang bagong panahon ng kahusayan at
-    multitasking sa aming intuitive interface at mga advanced na tampok.
-  message_accent: I -optimize ang iyong pagiging produktibo sa estilo!
-  title: Maligayang pagdating!
 toolbar:
   auto_hide: Auto itago
   delay_to_hide: Delay sa pagtatago
@@ -250,23 +248,39 @@ update:
 wall:
   backgrounds: Wallpaper
   blur: Malabo
+  cancel: Kanselahin
+  close: Isara
+  collection_name: Pangalan ng Koleksyon
+  collections: Mga koleksyon
   contrast: Kaibahan
+  corrupted_wallpapers_message: 'Mga sirang wallpaper, isaalang-alang ang pagtanggal ng mga ito:'
+  create: Lumikha
+  create_collection: Lumikha ng Koleksyon
+  default_collection: Default na Koleksyon
+  delete_collection: Tanggalin ang Koleksyon
+  edit_collection: I-edit ang Koleksyon
   enable: Paganahin ang manager ng wallpaper
+  extend: Palawakin ang pangunahin
   fit:
     contain: Naglalaman
     cover: Takpan
     fill: Punan
   flipHorizontal: I -flip ang pahalang
   flipVertical: Flip vertical
+  generating_thumbnails: Pagbuo ng Mga Thumbnail ng Wallpaper
   hours: oras
   interval: Baguhin ang wallpaper bawat
   minutes: minuto
+  monitor_collection: Monitor Collection
+  multimonitor_behaviour: Pag-uugali ng Multimonitor
   muted: Mute Video Audio
   no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
+  no_collections: Wala pang nagawang koleksyon. I-click ang + button para gumawa ng isa.
   objectFit: Pagkasyahin sa background
   objectPosition: Posisyon sa background
   overlayColor: Kulay ng overlay
   overlayMixBlendMode: Overlay Mix Blend Mode
+  per_monitor: Bawat monitor
   playback: Bilis ng pag -playback
   position:
     bottom: Ilalim
@@ -274,10 +288,17 @@ wall:
     left: Kaliwa
     right: Tama
     top: Tuktok
+  processing_video: Pinoproseso ang video
   random: Randomize slideshow
   saturation: Saturation
   seconds: segundo
+  select_collection: Piliin ang Koleksyon
+  thumbnail_generation_complete: Kumpleto na ang Pagbuo ng Thumbnail
+  thumbnail_generation_finished: Matagumpay na natapos ang pagbuo ng thumbnail
+  wallpaper_collection: Koleksyon ng Wallpaper
+  wallpaper_settings: Mga Setting ng Wallpaper
   withOverlay: Na may overlay
+  workspace_collections: Mga Koleksyon ng Workspace
 weg:
   auto_hide: Auto itago
   delay_to_hide: Delay sa pagtatago
@@ -313,6 +334,19 @@ weg:
   padding: Padding
   show_end_task: Ipakita ang pagtatapos ng gawain sa taskbar
   width: Lapad
+welcome:
+  give_a_review: Magbigay ng Review
+  message: >-
+    Ang Seelen UI ay isang libre at open source na desktop environment para sa
+    Windows. Dito mayroon kang ganap na kontrol sa hitsura at pag-uugali ng
+    iyong desktop, na nagbibigay-daan sa iyong i-customize ang bawat detalye
+    upang tumugma sa iyong daloy ng trabaho at istilo.
+  ok: Magsimula na tayo!
+  review: >-
+    Kung masisiyahan ka sa paggamit ng Seelen UI, isaalang-alang ang pag-iwan ng
+    review sa tindahan — ang iyong feedback ay nakakatulong sa proyekto na
+    lumago at umunlad.
+  title: Maligayang pagdating sa Seelen UI!
 widget:
   enable: Paganahin ang widget na ito
   enable_for_monitor: Paganahin sa monitor na ito

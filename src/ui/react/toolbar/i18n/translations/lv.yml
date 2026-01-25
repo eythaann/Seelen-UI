@@ -20,9 +20,6 @@ context_menu:
   restore: Atjaunot noklusējuma iestatījumus
   settings: Iestatījumi
   task_manager: Uzdevumu pārvaldnieks
-keyboard:
-  more: Vairāk tastatūras iestatījumu
-  title: Tastatūras izkārtojums
 media:
   default_multimedia_volume: Multivides apjoms
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Ievadierīces
   output_devices: Izejas ierīces
   players: Plašsaziņas līdzekļu spēlētāji
-network:
-  available: Pieejamie tīkli
-  connect: Savienot
-  connected: Savienots ar
-  disconnect: Atvienot
-  hidden: Slēpts tīkls
-  more: Vairāk tīkla iestatījumu
-  not_found: Neto atrasti tīkli
-  placeholder:
-    password: Parole
-  saved: Saglabātie tīkli
-  scanning: Tīklu meklēšana
-  secured: Šifrēts tīkls
 notifications:
   clear: Notīrīt visus
   empty: Nav paziņojumu
@@ -70,24 +54,3 @@ settings:
   power: Spēks
   restart: Restartēt
   title: Iestatījumi
-userhome:
-  empty_list: Nav vienību
-  folders:
-    desktop: Darbvirsmas
-    documents: Dokumenti
-    downloads: Lejupielādes
-    more_items: Rādīt vairāk...
-    music: Mūzika
-    pictures: Attēli
-    recent: Nesen izmantots
-    reduce_items: Rādīt mazāk...
-    title: Lietotāju direktoriji
-    videos: Videoklipi
-  profile:
-    accounts: Atvērt konta iestatījumus
-    open_onedrive: Atveriet OneDrive direktoriju
-    open_user_folder: Atvērt lietotāja direktoriju
-  seelen_options:
-    open_installation_folder: Atveriet Seelen iestatījumu mapi
-    open_log_folder: Atveriet Seelen log mapi
-    title: Seelen katalogi

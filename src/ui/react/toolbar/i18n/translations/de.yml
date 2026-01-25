@@ -20,9 +20,6 @@ context_menu:
   restore: Wiederherstellen auf Standard
   settings: Einstellungen
   task_manager: Task-Manager
-keyboard:
-  more: Weitere Tastatur-Einstellungen
-  title: Tastatur-Layout
 media:
   default_multimedia_volume: Multimedia-Volumen
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Eingabegeräte
   output_devices: Ausgabegeräte
   players: Medienplayer
-network:
-  available: Verfügbare Netzwerke
-  connect: Verbinden
-  connected: Verbunden mit
-  disconnect: Trennen
-  hidden: Verstecktes Netzwerk
-  more: Weitere Netzwerkeinstellungen
-  not_found: Keine Netzwerke gefunden
-  placeholder:
-    password: Passwort
-  saved: Gespeicherte Netzwerke
-  scanning: Nach Netzwerken suchen
-  secured: Verschlüsseltes Netzwerk
 notifications:
   clear: Alle löschen
   empty: Keine Benachrichtigungen
@@ -70,24 +54,3 @@ settings:
   power: Leistung
   restart: Neustarten
   title: Einstellungen
-userhome:
-  empty_list: Keine Artikel
-  folders:
-    desktop: Schreibtisch
-    documents: Dokumente
-    downloads: Herunterladen
-    more_items: Mehr anzeigen...
-    music: Musik
-    pictures: Bilder
-    recent: Kürzlich verwendet
-    reduce_items: Weniger anzeigen...
-    title: Benutzerverzeichnisse
-    videos: Videos
-  profile:
-    accounts: Kontoeinstellungen öffnen
-    open_onedrive: OneDrive-Verzeichnis öffnen
-    open_user_folder: Benutzerverzeichnis öffnen
-  seelen_options:
-    open_installation_folder: Öffnen Sie den Ordner Seelen-Einstellungen
-    open_log_folder: Seelen-Log-Ordner öffnen
-    title: Seelenverzeichnisse

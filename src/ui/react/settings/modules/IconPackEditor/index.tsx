@@ -2,9 +2,8 @@ import type { Icon, IconPackEntry } from "@seelen-ui/lib/types";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Input } from "antd";
 import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
 
-import { newSelectors } from "../shared/store/app/reducer.ts";
+import { iconPacks } from "../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
 import cs from "./index.module.css";
@@ -21,10 +20,9 @@ function resolveAsSrc(parent: string, icon: Icon): Icon {
 
 export function IconPackEditorView() {
   const [filterValue, setFilterValue] = useState("");
-  const iconPacks = useSelector(newSelectors.availableIconPacks);
 
   const entries = useMemo(() => {
-    const system = iconPacks.find((i) => i.id === "@system/icon-pack");
+    const system = iconPacks.value.find((i) => i.id === "@system/icon-pack");
     return (
       system?.entries
         .filter((e) => containsSearched(e, filterValue))
@@ -36,7 +34,7 @@ export function IconPackEditorView() {
           return newEntry;
         }) || []
     );
-  }, [iconPacks, filterValue]);
+  }, [filterValue]);
 
   return (
     <>

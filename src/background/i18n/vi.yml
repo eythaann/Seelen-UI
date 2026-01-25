@@ -1,11 +1,5 @@
 cancel: Hủy bỏ
 done: Xong
-drivers:
-  got_it: Hiểu rồi
-  monitor_disabled: >-
-    Có vẻ như một số trình điều khiển màn hình bị vô hiệu hóa. Vui lòng cho phép
-    họ để Seelen UI hoạt động đúng.
-  monitor_disabled_title: Trình điều khiển theo dõi bị vô hiệu hóa
 resource:
   added: Một tài nguyên mới đã được thêm vào
   download_failed_body: >-
@@ -20,6 +14,16 @@ runtime:
   corrupted_file: Một tệp cấu hình bị hỏng, sử dụng các giá trị mặc định thay thế.
   corrupted_file_path: Đường dẫn tệp bị hỏng
   download: Đi tới trang tải xuống
+  files_integrity: >-
+    Chúng tôi không thể xác minh tính toàn vẹn của các tệp ứng dụng.
+
+    Điều này có thể xảy ra nếu tệp bị sửa đổi, bị hỏng hoặc quá trình cài đặt
+    chưa hoàn tất.
+
+    Vì lý do bảo mật, giao diện người dùng Seelen không thể tiếp tục.
+
+    Vui lòng cài đặt lại nó từ trang web chính thức.
+  files_integrity_title: Cảnh báo bảo mật - Kiểm tra tính toàn vẹn của tệp không thành công
   not_found: Không tìm thấy thời gian chạy WebView2
   not_found_description: Giao diện người dùng Seelen yêu cầu Thời gian chạy Webview2. Hãy cài đặt nó.
   outdated: Thời gian chạy WebView2 đã lỗi thời

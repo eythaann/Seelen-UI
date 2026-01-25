@@ -1,0 +1,13 @@
+default_multimedia_volume: मल्टीमीडिया वॉल्यूम
+device:
+  channel:
+    system: सिस्टम ध्वनियाँ
+  comunications: संचार
+  missing: गुम डिवाइस
+  mixer: वॉल्यूम मिक्सर
+  multimedia: मल्टीमीडिया
+  settings: अधिक डिवाइस सेटिंग्स
+  volume: डिवाइस वॉल्यूम
+input_devices: आगत यंत्र
+output_devices: आउटपुट डिवाइस
+players: मीडिया प्लेयर्स

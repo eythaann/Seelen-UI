@@ -1,47 +1,50 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AppConfig } from "@seelen-ui/lib/types";
-
-const initialState: AppConfig[] = [];
+import { appsConfig, settings } from "../../../state/mod";
 
 interface AppPayload {
   idx: number;
 }
 
-export const AppsConfigSlice = createSlice({
-  name: "monitors",
-  initialState,
-  reducers: {
-    delete: (state, action: PayloadAction<number>) => {
-      state.splice(action.payload, 1);
-    },
-    deleteMany: (state, action: PayloadAction<number[]>) => {
-      const newState: any[] = [...state];
-      action.payload.forEach((key) => {
-        newState[key] = undefined;
-      });
-      return newState.filter(Boolean);
-    },
-    push: (state, action: PayloadAction<AppConfig[]>) => {
-      state.push(...action.payload);
-    },
-    replace: (
-      state,
-      action: PayloadAction<AppPayload & { app: AppConfig }>,
-    ) => {
-      const { idx, app } = action.payload;
-      state[idx] = app;
-    },
-    swap: (state, action: PayloadAction<[number, number]>) => {
-      const [idx1, idx2] = action.payload;
-      const App1 = state[idx1];
-      const App2 = state[idx2];
+function setConfigByApps(newState: AppConfig[]) {
+  settings.value = {
+    ...settings.value,
+    byApp: newState.filter((app) => !app.isBundled),
+  };
+}
 
-      if (App1 && App2) {
-        state[idx1] = App2;
-        state[idx2] = App1;
-      }
-    },
+export const actions = {
+  delete: (payload: number) => {
+    const newState = [...appsConfig.value].filter((_, idx) => idx !== payload);
+    setConfigByApps(newState);
   },
-});
 
-export const AppsConfigActions = AppsConfigSlice.actions;
+  deleteMany: (payload: number[]) => {
+    const newState = [...appsConfig.value].filter((_, idx) => !payload.includes(idx));
+    setConfigByApps(newState);
+  },
+
+  push: (payload: AppConfig[]) => {
+    setConfigByApps([...appsConfig.value, ...payload]);
+  },
+
+  replace: (payload: AppPayload & { app: AppConfig }) => {
+    const { idx, app } = payload;
+    const newState = [...appsConfig.value];
+    newState[idx] = app;
+    setConfigByApps(newState);
+  },
+
+  swap: (payload: [number, number]) => {
+    const [idx1, idx2] = payload;
+    const App1 = appsConfig.value[idx1];
+    const App2 = appsConfig.value[idx2];
+
+    const newState = [...appsConfig.value];
+    if (App1 && App2) {
+      newState[idx1] = App2;
+      newState[idx2] = App1;
+    }
+
+    setConfigByApps(newState);
+  },
+};

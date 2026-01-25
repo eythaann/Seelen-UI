@@ -3,33 +3,6 @@
   height: 100%;
 }
 
-#splashscreen {
-  will-change: contents;
-  position: fixed;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: var(--color-gray-50);
-  transition: opacity 300ms linear;
-  opacity: 1;
-
-  &.hidden {
-    display: none;
-  }
-
-  &.vanish {
-    opacity: 0;
-  }
-
-  .splashscreen-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
 body {
   height: 100vh;
   width: 100vw;
@@ -37,7 +10,7 @@ body {
 }
 
 hr {
-  margin: 5px 0;
+  margin: var(--spacing-2xs) 0;
 }
 
 b {
@@ -54,5 +27,5 @@ b {
 }
 
 .ant-modal-content {
-  padding: 12px 24px !important;
+  padding: var(--spacing-m) var(--spacing-xl) !important;
 }

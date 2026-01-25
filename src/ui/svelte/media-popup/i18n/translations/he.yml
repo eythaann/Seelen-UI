@@ -1,0 +1,13 @@
+default_multimedia_volume: נפח מולטימדיה
+device:
+  channel:
+    system: צלילי מערכת
+  comunications: תקשורת
+  missing: מכשיר חסר
+  mixer: מיקסר נפח
+  multimedia: מולטימדיה
+  settings: הגדרות מכשיר נוספות
+  volume: עוצמת הקול של המכשיר
+input_devices: התקני קלט
+output_devices: התקני פלט
+players: נגני מדיה

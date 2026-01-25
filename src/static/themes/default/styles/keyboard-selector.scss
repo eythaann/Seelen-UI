@@ -1,0 +1,60 @@
+.keyboard-selector {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .keyboard-selector-header {
+    font-weight: 600;
+  }
+
+  .keyboard-selector-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .layout {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+
+      &:hover {
+        background-color: RGB(from var(--system-accent-color) r g b / 0.2);
+      }
+
+      &.layout-active {
+        background-color: RGB(from var(--system-accent-color) r g b / 0.4);
+      }
+
+      .layout-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .layout-lang {
+          font-weight: 600;
+        }
+
+        .layout-keyboard {
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: var(--color-gray-600);
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
+  .keyboard-selector-footer {
+    button {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-gray-600);
+    }
+  }
+}

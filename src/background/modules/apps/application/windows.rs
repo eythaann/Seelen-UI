@@ -7,7 +7,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
 
 use crate::{
     hook::HookManager,
-    modules::apps::application::{UserAppsEvent, UserAppsManager, USER_APPS_MANAGER},
+    modules::apps::application::{UserAppWinEvent, UserAppsManager, USER_APPS_MANAGER},
     state::application::FULL_STATE,
     utils::spawn_named_thread,
     windows_api::{
@@ -41,7 +41,7 @@ impl UserAppsManager {
                 if window.is_interactable_and_not_hidden() {
                     true
                 } else {
-                    Self::send(UserAppsEvent::WinRemoved(window.address()));
+                    Self::send(UserAppWinEvent::Removed(window.address()));
                     false
                 }
             });
@@ -54,10 +54,25 @@ impl UserAppsManager {
         let mut is_interactable = USER_APPS_MANAGER.contains_win(&window);
 
         match event {
+            WinEvent::SystemForeground => {
+                if is_interactable {
+                    let hwnd = window.address();
+                    USER_APPS_MANAGER.interactable_windows.sort_by(|a, b| {
+                        if a.hwnd == hwnd {
+                            std::cmp::Ordering::Less
+                        } else if b.hwnd == hwnd {
+                            std::cmp::Ordering::Greater
+                        } else {
+                            std::cmp::Ordering::Equal
+                        }
+                    });
+                    Self::send(UserAppWinEvent::Updated(window.address()));
+                }
+            }
             WinEvent::ObjectCreate | WinEvent::ObjectShow => {
                 if !is_interactable && is_interactable_window(&window) {
                     USER_APPS_MANAGER.add_win(&window);
-                    Self::send(UserAppsEvent::WinAdded(window.address()));
+                    Self::send(UserAppWinEvent::Added(window.address()));
                 }
             }
             WinEvent::ObjectNameChange | WinEvent::ObjectParentChange => {
@@ -66,11 +81,11 @@ impl UserAppsManager {
                 match (was_interactable, is_interactable) {
                     (false, true) => {
                         USER_APPS_MANAGER.add_win(&window);
-                        Self::send(UserAppsEvent::WinAdded(window.address()));
+                        Self::send(UserAppWinEvent::Added(window.address()));
                     }
                     (true, false) => {
                         USER_APPS_MANAGER.remove_win(&window);
-                        Self::send(UserAppsEvent::WinRemoved(window.address()));
+                        Self::send(UserAppWinEvent::Removed(window.address()));
                     }
                     _ => {}
                 }
@@ -82,7 +97,7 @@ impl UserAppsManager {
                             && parent.is_interactable_and_not_hidden()
                         {
                             USER_APPS_MANAGER.add_win(&parent);
-                            Self::send(UserAppsEvent::WinAdded(parent.address()));
+                            Self::send(UserAppWinEvent::Added(parent.address()));
                         }
                     }
                 }
@@ -91,13 +106,13 @@ impl UserAppsManager {
                 // UWP ApplicationFrameHosts are always hidden on minimize
                 if is_interactable && !window.is_frame().unwrap_or(false) {
                     USER_APPS_MANAGER.remove_win(&window);
-                    Self::send(UserAppsEvent::WinRemoved(window.address()));
+                    Self::send(UserAppWinEvent::Removed(window.address()));
                 }
             }
             WinEvent::ObjectDestroy => {
                 if is_interactable {
                     USER_APPS_MANAGER.remove_win(&window);
-                    Self::send(UserAppsEvent::WinRemoved(window.address()));
+                    Self::send(UserAppWinEvent::Removed(window.address()));
                 }
             }
             _ => {}
@@ -110,8 +125,7 @@ impl UserAppsManager {
                 WinEvent::ObjectNameChange
                     | WinEvent::SystemMinimizeStart
                     | WinEvent::SystemMinimizeEnd
-                    | WinEvent::SyntheticMaximizeStart
-                    | WinEvent::SyntheticMaximizeEnd
+                    | WinEvent::SyntheticForegroundLocationChange
                     | WinEvent::SyntheticFullscreenStart
                     | WinEvent::SyntheticFullscreenEnd
                     | WinEvent::SyntheticMonitorChanged
@@ -122,7 +136,7 @@ impl UserAppsManager {
                     *w = window.to_serializable();
                 }
             });
-            Self::send(UserAppsEvent::WinUpdated(window.address()));
+            Self::send(UserAppWinEvent::Updated(window.address()));
         }
     }
 }

@@ -1,9 +1,5 @@
 cancel: キャンセル
 done: 終わり
-drivers:
-  got_it: 了解
-  monitor_disabled: 一部のモニタドライバが無効になっているようです。Seelen UIを正しく動作させるには、これらのドライバを有効にしてください。
-  monitor_disabled_title: モニタドライバが無効
 resource:
   added: 新しいリソースが追加されました
   download_failed_body: リソースのダウンロード中に何か問題が発生しました。
@@ -16,6 +12,12 @@ runtime:
   corrupted_file: 設定ファイルが破損し、代わりにデフォルト値が使用されている。
   corrupted_file_path: 破損したファイルパス
   download: ダウンロードページを開く
+  files_integrity: |-
+    アプリケーション ファイルの整合性を確認できませんでした。
+    これは、ファイルが変更されたり破損したり、インストールが不完全な場合に発生する可能性があります。
+    セキュリティ上の理由により、Seelen UI は続行できません。
+    公式サイトから再インストールしてください。
+  files_integrity_title: セキュリティ警告 - ファイルの整合性チェックに失敗しました
   not_found: WebView2 ランタイムが見つかりません
   not_found_description: Seelen UI には Webview2 ランタイムが必要です。インストールしてください。
   outdated: WebView2 ランタイムが古いです

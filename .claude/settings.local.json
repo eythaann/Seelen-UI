@@ -2,13 +2,8 @@
   "permissions": {
     "allow": [
       "Bash",
-      "Read",
-      "Edit",
       "Write",
-      "WebFetch(domain:github.com)",
-      "WebSearch"
-    ],
-    "deny": [],
-    "ask": []
+      "Read"
+    ]
   }
 }

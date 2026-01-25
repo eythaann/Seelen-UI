@@ -1,16 +1,6 @@
 action:
   confirm: დარწმუნებული ხარ?
   confirm_body: ეს ქმედება შეუძლებელია.
-app_launcher:
-  enable: ჩართეთ აპლიკაციის გამშვები
-  launch_on:
-    mouse_over: მაუსი ზევით
-    primary: პირველადი
-  monitor: მონიტორის ჩვენება
-  runners:
-    cmd: ბრძანება
-    explorer: სირბილი
-    label: მორბენალი
 apps_configurations:
   app:
     bindings: სავალდებულო (შენიშვნა საჭიროა ორივე ვარიანტი)
@@ -87,7 +77,6 @@ devtools:
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
-  simulate_fullscreen: სრულეკრანიანი მოვლენის სიმულაცია
 extras:
   clear_icons: სუფთა სისტემის ხატები ქეში
   clear_icons_tooltip: გადატვირთვა შეიძლება საჭირო გახდეს, რომ სრულად იმოქმედოს ყველა ვიჯეტზე
@@ -95,6 +84,10 @@ extras:
   links: ოფიციალური ბმულები
   relaunch: გაუქმება
   version: ვერსია
+  version_fixed: >-
+    აპლიკაციისა და WebView2 Runtime ვერსიები დაფიქსირდა. ეს ნიშნავს, რომ
+    აპლიკაცია არ მიიღებს განახლებებს და WebView2 Runtime ავტომატურად არ
+    განახლდება Windows-ის განახლებებით.
 general:
   accent_color: აქცენტის ფერი
   date_format: თარიღის ფორმატი
@@ -102,6 +95,7 @@ general:
     available: ხელმისაწვდომი ხატების პაკეტები
     selected: აქტიური ხატების პაკეტები
   language: Ენა
+  monday: ორშაბათი
   performance_mode:
     on_battery: ბატარეაზე
     on_energy_saver: ენერგიის დაზოგვაზე
@@ -110,7 +104,10 @@ general:
       extreme: უკიდურესი
       minimal: მინიმალური
     plugged: ჩართული ან დატენვა
+  saturday: შაბათი
+  start_of_week: კვირის დასაწყისი
   startup: გაშვებით გაშვებით?
+  sunday: კვირა
   theme:
     available: ხელმისაწვდომი თემები
     selected: აქტიური თემები
@@ -151,18 +148,26 @@ reset_all_to_default: ყველა ნაგულისხმევი მ�
 reset_to_default: ნაგულისხმევი მნიშვნელობის გადატვირთვა
 resources:
   app_outdated: ეს რესურსი მოითხოვს Seelen UI– ს ახალ ვერსიას, რომ სწორად იმუშაოს.
+  corrupted_wallpaper: ესკიზის ამოღება ვერ მოხერხდა - ვიდეო ფორმატი დაზიანებულია ან მხარდაუჭერელია
   delete: წაშალეთ რესურსი
   discover: აღმოაჩინეთ მეტი რესურსი
   has_update: განახლება ხელმისაწვდომია
+  high_impact: მაღალი გავლენა შესრულებაზე
   import_wallpapers: ადგილობრივი ფონების იმპორტი
   open_folder: ღია რესურსების საქაღალდე
   outdated: >-
     ეს რესურსი შეიქმნა Seelen UI- ს ძველი ვერსიისთვის და შესაძლოა არ იმუშაოს
     სწორად.
+  see_on_website: იხილეთ საიტზე
+review_request:
+  not_now: ახლა არა
+  sure: რა თქმა უნდა!
+  title: მოგწონთ Seelen UI?
 save: Გადარჩენა
 save_and_restart: შენახვა და გადატვირთვა
 see_more: იხილეთ მეტი
 shortcuts:
+  duplicate_error: ეს მალსახმობი დუბლირებულია
   enable: ჩართეთ ჩამონტაჟებული მალსახმობების სისტემა
   enable_tooltip: >-
     გამორთეთ, თუ თქვენ განახორციელებთ თქვენს მალსახმობების სისტემას Seelen UI
@@ -207,7 +212,6 @@ shortcuts:
     switch_to_previous_workspace: გადახვიდეთ წინა სამუშაო ადგილებზე
     switch_workspace: გადადით სამუშაო ადგილებზე {{0}}
     toggle_float: გადარიცხეთ ფანჯრის float რეჟიმი
-    toggle_launcher: გადარიცხვის გამშვები
     toggle_monocle: გადართეთ სამუშაო ადგილის მონოკლის რეჟიმი
   readonly_tooltip: ეს არის მხოლოდ წაკითხული მალსახმობი
   reset: გადატვირთვა ნაგულისხმევებზე
@@ -216,14 +220,6 @@ sides:
   left: მარცხენა
   right: სწორი
   top: თავი
-start:
-  message: >-
-    კეთილი იყოს თქვენი მობრძანება Seelen UI- ში, საბოლოო დესკტოპის გარემოში,
-    რომელშიც შედის Windows Windows- ის მენეჯერი, თქვენი Windows გამოცდილების
-    გასაუმჯობესებლად! გამოიკვლიეთ ეფექტურობისა და მრავალმხრივი ახალი ეპოქა ჩვენი
-    ინტუიციური ინტერფეისით და მოწინავე მახასიათებლებით.
-  message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
-  title: კეთილი იყოს თქვენი მობრძანება!
 toolbar:
   auto_hide: ავტო დამალვა
   delay_to_hide: დაგვიანებით დამალვა
@@ -244,23 +240,39 @@ update:
 wall:
   backgrounds: ფონები
   blur: დაბენა
+  cancel: გაუქმება
+  close: დახურვა
+  collection_name: კოლექციის სახელი
+  collections: კოლექციები
   contrast: წინააღმდეგობა
+  corrupted_wallpapers_message: 'დაზიანებული ფონები, განიხილეთ მათი წაშლა:'
+  create: შექმნა
+  create_collection: შექმენით კოლექცია
+  default_collection: ნაგულისხმევი კოლექცია
+  delete_collection: კოლექციის წაშლა
+  edit_collection: კოლექციის რედაქტირება
   enable: ჩართეთ ფონი მენეჯერი
+  extend: გააფართოვეთ პირველადი
   fit:
     contain: დატევა
     cover: სახურავი
     fill: გავსება
   flipHorizontal: Flip Horizontal
   flipVertical: ფლიპ ვერტიკალური
+  generating_thumbnails: ფონის მინიატურების გენერირება
   hours: საათი
   interval: შეცვალეთ ფონი ყველა
   minutes: წუთი
+  monitor_collection: მონიტორების კოლექცია
+  multimonitor_behaviour: მულტიმონიტორის ქცევა
   muted: ვიდეო აუდიოს დადუმება
   no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
+  no_collections: კოლექციები ჯერ არ არის შექმნილი. ერთის შესაქმნელად დააწკაპუნეთ + ღილაკს.
   objectFit: ფონის შესაფერისი
   objectPosition: ფონის პოზიცია
   overlayColor: გადახურული ფერი
   overlayMixBlendMode: Overlay Mix Blend Mode
+  per_monitor: თითო მონიტორზე
   playback: აღწარმოების სიჩქარე
   position:
     bottom: ძირი
@@ -268,10 +280,17 @@ wall:
     left: მარცხენა
     right: სწორი
     top: თავი
+  processing_video: მიმდინარეობს ვიდეოს დამუშავება
   random: რანდომიზაცია სლაიდშოუ
   saturation: გაჯერება
   seconds: წამები
+  select_collection: აირჩიეთ კოლექცია
+  thumbnail_generation_complete: მინიატურების გენერაცია დასრულებულია
+  thumbnail_generation_finished: ესკიზების შექმნა წარმატებით დასრულდა
+  wallpaper_collection: ფონების კოლექცია
+  wallpaper_settings: ფონი პარამეტრები
   withOverlay: გადახურვით
+  workspace_collections: სამუშაო სივრცის კოლექციები
 weg:
   auto_hide: Ავტომატური დამალვა
   delay_to_hide: დაგვიანებით დამალვა
@@ -307,6 +326,18 @@ weg:
   padding: ბადება
   show_end_task: აჩვენეთ საბოლოო დავალება დავალების ზოლში
   width: სიგანე
+welcome:
+  give_a_review: მიეცით მიმოხილვა
+  message: >-
+    Seelen UI არის უფასო და ღია კოდის დესკტოპის გარემო Windows-ისთვის. აქ თქვენ
+    გაქვთ სრული კონტროლი იმაზე, თუ როგორ გამოიყურება და იქცევა თქვენი დესკტოპი,
+    რაც საშუალებას გაძლევთ დააკონფიგურიროთ ყველა დეტალი თქვენს სამუშაო პროცესსა
+    და სტილში.
+  ok: დავიწყოთ!
+  review: >-
+    თუ გსურთ Seelen UI-ის გამოყენება, განიხილეთ მიმოხილვის დატოვება მაღაზიაში –
+    თქვენი გამოხმაურება ეხმარება პროექტს ზრდასა და გაუმჯობესებაში.
+  title: კეთილი იყოს თქვენი მობრძანება Seelen UI-ში!
 widget:
   enable: ჩართეთ ეს ვიჯეტი
   enable_for_monitor: ჩართეთ ამ მონიტორზე

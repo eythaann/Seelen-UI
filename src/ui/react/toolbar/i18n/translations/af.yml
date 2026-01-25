@@ -20,9 +20,6 @@ context_menu:
   restore: Herstel na standaard
   settings: Instellings
   task_manager: Taakbestuurder
-keyboard:
-  more: Meer sleutelbordinstellings
-  title: Sleutelborduitleg
 media:
   default_multimedia_volume: Multimedia volume
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Insettoestelle
   output_devices: Uitsettoestelle
   players: Mediaspelers
-network:
-  available: Beskikbare netwerke
-  connect: Konnekteer
-  connected: Gekoppel aan
-  disconnect: Afsluit ??
-  hidden: Verborge netwerk
-  more: Meer netwerkinstellings
-  not_found: Geen netwerke gevind nie
-  placeholder:
-    password: Wagwoord
-  saved: Gestoorde netwerke
-  scanning: Soek vir netwerke
-  secured: Geënkripteerde netwerk
 notifications:
   clear: Duidelik alles
   empty: Geen kennisgewings nie
@@ -70,24 +54,3 @@ settings:
   power: Mag
   restart: Begin oor
   title: Instellings
-userhome:
-  empty_list: Geen items nie
-  folders:
-    desktop: Tafelblad
-    documents: Dokumente
-    downloads: Aflaai
-    more_items: Wys meer ...
-    music: Musiek
-    pictures: Foto's
-    recent: Onlangs gebruik
-    reduce_items: Wys minder ...
-    title: Gebruikersgidse
-    videos: Video's
-  profile:
-    accounts: Open rekeninginstellings
-    open_onedrive: Oop OneDrive Directory
-    open_user_folder: Open gebruikersgids
-  seelen_options:
-    open_installation_folder: Open Seelen Instellings -lêergids
-    open_log_folder: Maak Seelen Log -lêergids oop
-    title: Seelen Gidse

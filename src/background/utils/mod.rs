@@ -8,21 +8,16 @@ pub mod updater;
 pub mod virtual_desktop;
 mod winver;
 
-use base64::Engine;
-use seelen_core::resource::WidgetId;
-use uuid::Uuid;
 pub use winver::*;
 
 use std::{
     collections::HashMap,
-    fs,
     path::{Path, PathBuf},
     sync::{atomic::AtomicBool, Arc, LazyLock},
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
 use itertools::Itertools;
-use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use windows::{
     core::GUID,
@@ -110,11 +105,11 @@ macro_rules! trace_lock {
     }};
 }
 
-lazy_static! {
-    pub static ref PERFORMANCE_HELPER: Mutex<PerformanceHelper> = Mutex::new(PerformanceHelper {
+pub static PERFORMANCE_HELPER: LazyLock<Mutex<PerformanceHelper>> = LazyLock::new(|| {
+    Mutex::new(PerformanceHelper {
         time: HashMap::new(),
-    });
-}
+    })
+});
 
 pub struct PerformanceHelper {
     time: HashMap<String, Instant>,
@@ -152,20 +147,6 @@ where
     }
 }
 
-pub fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> Result<()> {
-    fs::create_dir_all(&dst)?;
-    for entry in fs::read_dir(src)? {
-        let entry = entry?;
-        let ty = entry.file_type()?;
-        if ty.is_dir() {
-            copy_dir_all(entry.path(), dst.as_ref().join(entry.file_name()))?;
-        } else {
-            fs::copy(entry.path(), dst.as_ref().join(entry.file_name()))?;
-        }
-    }
-    Ok(())
-}
-
 /// intended to work as converFileToSrc in JS side using tauri library
 pub fn convert_file_to_src(path: &Path) -> String {
     #[cfg(any(windows, target_os = "android"))]
@@ -179,65 +160,6 @@ pub fn convert_file_to_src(path: &Path) -> String {
         .to_string();
     let encoded = urlencoding::encode(&path);
     format!("{base}{encoded}")
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
-pub struct WidgetWebviewLabel {
-    /// this should be used as the real webview label
-    pub raw: String,
-    /// this is the decoded label, useful for debugging and logging
-    decoded: String,
-    /// widget id from this label was created
-    pub widget_id: WidgetId,
-}
-
-impl WidgetWebviewLabel {
-    pub fn new(widget_id: &str, monitor_id: Option<&str>, instance_id: Option<&Uuid>) -> Self {
-        let mut label = widget_id.to_string();
-        let with_monitor_id = monitor_id.is_some();
-        let with_instance_id = instance_id.is_some();
-        if with_monitor_id || with_instance_id {
-            label.push('?');
-        }
-
-        if let Some(monitor_id) = monitor_id {
-            label.push_str(&format!("monitorId={}", urlencoding::encode(monitor_id)));
-        }
-
-        if let Some(instance_id) = instance_id {
-            if with_monitor_id {
-                label.push('&');
-            }
-            label.push_str(&format!(
-                "instanceId={}",
-                urlencoding::encode(&instance_id.to_string())
-            ));
-        }
-
-        Self {
-            raw: base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label),
-            decoded: label,
-            widget_id: WidgetId::from(widget_id),
-        }
-    }
-
-    pub fn try_from_raw(raw: &str) -> Result<Self> {
-        let decoded = base64::engine::general_purpose::URL_SAFE_NO_PAD.decode(raw)?;
-        let decoded = String::from_utf8(decoded)?;
-        let widget_id = WidgetId::from(decoded.split('?').next().expect("Invalid label"));
-
-        Ok(Self {
-            raw: raw.to_string(),
-            decoded,
-            widget_id,
-        })
-    }
-}
-
-impl std::fmt::Display for WidgetWebviewLabel {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.decoded)
-    }
 }
 
 pub fn now_timestamp_as_millis() -> u64 {

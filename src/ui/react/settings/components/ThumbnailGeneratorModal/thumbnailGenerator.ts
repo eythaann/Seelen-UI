@@ -4,6 +4,7 @@ import { WallpaperKind } from "@seelen-ui/lib/types";
 import { convertFileSrc } from "@tauri-apps/api/core";
 
 import { extractThumbnailFromSource } from "./videoThumbnail.ts";
+import { $corruptedWallpapers } from "../../modules/shared/signals.ts";
 
 export interface ThumbGenerationProgress {
   current: number;
@@ -27,14 +28,17 @@ function getDisplayName(wallpaper: Wallpaper): string {
 
 /**
  * Filters video wallpapers that don't have a thumbnail
+ * Excludes corrupted wallpapers that failed extraction during this session
  */
 export function getVideosWithoutThumbnail(wallpapers: Wallpaper[]): Wallpaper[] {
+  const corruptedIds = $corruptedWallpapers.value;
   return wallpapers.filter(
     (wallpaper) =>
       wallpaper.type === WallpaperKind.Video &&
       !wallpaper.thumbnailFilename &&
       !wallpaper.thumbnailUrl &&
-      wallpaper.filename, // Only process if it has a local file
+      wallpaper.filename && // Only process if it has a local file
+      !corruptedIds.has(wallpaper.id), // Skip corrupted wallpapers
   );
 }
 
@@ -72,6 +76,8 @@ export async function generateThumbnails(
       const thumbnailBytes = await extractThumbnailFromSource(videoSrc, 0.9);
       if (!thumbnailBytes) {
         console.error(`Failed to extract thumbnail for ${wallpaper.id}`);
+        // Mark as corrupted - won't retry during this session
+        $corruptedWallpapers.value = new Set($corruptedWallpapers.value).add(wallpaper.id);
         continue;
       }
 
@@ -81,6 +87,8 @@ export async function generateThumbnails(
       });
     } catch (error) {
       console.error(`Error generating thumbnail for ${wallpaper.id}:`, error);
+      // Mark as corrupted - won't retry during this session
+      $corruptedWallpapers.value = new Set($corruptedWallpapers.value).add(wallpaper.id);
     }
   }
 

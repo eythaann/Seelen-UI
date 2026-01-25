@@ -1,0 +1,13 @@
+default_multimedia_volume: I-Multimedia Volume
+device:
+  channel:
+    system: Imisindo yesistimu
+  comunications: Ezokuxhumana
+  missing: Idivayisi engekho
+  mixer: I-Volume Mixer
+  multimedia: Multimedia
+  settings: Izilungiselelo Zedivayisi Ezengeziwe
+  volume: Ivolumu Yedivayisi
+input_devices: Amadivayisi okokufaka
+output_devices: Amadivayisi okukhiphayo
+players: Abadlali Bemidiya

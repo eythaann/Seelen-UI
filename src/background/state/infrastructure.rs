@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{
     by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPackEntry,
-    LauncherHistory, PerformanceMode, Profile, Wallpaper, WegItems, WegPinnedItemsVisibility,
+    PerformanceMode, Wallpaper, WegItems, WegPinnedItemsVisibility,
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -44,11 +44,6 @@ pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Resu
 }
 
 #[tauri::command(async)]
-pub fn state_get_history() -> LauncherHistory {
-    FULL_STATE.load().launcher_history.clone()
-}
-
-#[tauri::command(async)]
 pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
     if let Some(path) = path {
         Ok(Settings::load(path)?)
@@ -85,7 +80,7 @@ pub fn state_write_settings(settings: Settings) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
+pub fn state_get_settings_by_app() -> Vec<AppConfig> {
     FULL_STATE
         .load()
         .settings_by_app
@@ -123,11 +118,6 @@ pub fn state_request_wallpaper_addition() -> Result<()> {
             }
         });
     Ok(())
-}
-
-#[tauri::command(async)]
-pub fn state_get_profiles() -> Vec<Profile> {
-    FULL_STATE.load().profiles.clone()
 }
 
 #[tauri::command(async)]

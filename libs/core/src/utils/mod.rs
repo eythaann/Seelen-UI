@@ -16,6 +16,42 @@ macro_rules! __switch {
     } => { $($else)* };
 }
 
+#[macro_export(local_inner_macros)]
+macro_rules! identifier_impl {
+    ($type:ty, $inner:ty) => {
+        impl std::ops::Deref for $type {
+            type Target = $inner;
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+
+        impl std::ops::DerefMut for $type {
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+
+        impl From<&str> for $type {
+            fn from(value: &str) -> Self {
+                Self(<$inner>::from(value))
+            }
+        }
+
+        impl From<String> for $type {
+            fn from(value: String) -> Self {
+                Self(<$inner>::from(value))
+            }
+        }
+
+        impl std::fmt::Display for $type {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                ::std::write!(f, "{}", self.0)
+            }
+        }
+    };
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[ts(type = "unknown")]
 pub struct TsUnknown(pub serde_json::Value);

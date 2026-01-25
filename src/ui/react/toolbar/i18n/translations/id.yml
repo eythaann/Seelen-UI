@@ -20,9 +20,6 @@ context_menu:
   restore: Kembalikan ke Default
   settings: Pengaturan
   task_manager: Manajer Tugas
-keyboard:
-  more: Pengaturan Papan Ketik Lainnya
-  title: Tata Letak Papan Ketik
 media:
   default_multimedia_volume: Volume Multimedia
   device:
@@ -37,19 +34,6 @@ media:
   input_devices: Perangkat input
   output_devices: Perangkat keluaran
   players: Pemain Media
-network:
-  available: Jaringan yang tersedia
-  connect: Menghubung
-  connected: Terhubung ke
-  disconnect: Memutuskan
-  hidden: Jaringan tersembunyi
-  more: Lebih banyak pengaturan jaringan
-  not_found: Tidak ada jaringan yang ditemukan
-  placeholder:
-    password: Kata sandi
-  saved: Jaringan yang disimpan
-  scanning: Memindai jaringan
-  secured: Jaringan terenkripsi
 notifications:
   clear: Hapus semua
   empty: Tidak ada pemberitahuan
@@ -70,24 +54,3 @@ settings:
   power: Kekuatan
   restart: Mengulang kembali
   title: Pengaturan
-userhome:
-  empty_list: Tidak ada item
-  folders:
-    desktop: Desktop
-    documents: Dokumen
-    downloads: Unduhan
-    more_items: Tampilkan lebih banyak...
-    music: Musik
-    pictures: Gambar
-    recent: Baru-baru ini digunakan
-    reduce_items: Tampilkan lebih sedikit...
-    title: Direktori pengguna
-    videos: Video
-  profile:
-    accounts: Buka pengaturan akun
-    open_onedrive: Buka direktori OneDrive
-    open_user_folder: Buka direktori pengguna
-  seelen_options:
-    open_installation_folder: Buka folder pengaturan Seelen
-    open_log_folder: Buka folder log Seelen
-    title: Direktori Seelen

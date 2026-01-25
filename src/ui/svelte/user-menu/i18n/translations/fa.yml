@@ -1,0 +1,21 @@
+empty_list: هیچ موردی وجود ندارد
+folders:
+  desktop: دسکتاپ
+  documents: اسناد
+  downloads: دانلودها
+  more_items: نمایش بیشتر...
+  music: موسیقی
+  pictures: تصاویر
+  recent: اخیرا استفاده شده است
+  reduce_items: نشان دادن کمتر...
+  title: دایرکتوری های کاربر
+  videos: ویدیوها
+profile:
+  accounts: تنظیمات حساب را باز کنید
+  log_out: از سیستم خارج شوید
+  open_onedrive: دایرکتوری OneDrive را باز کنید
+  open_user_folder: دایرکتوری کاربر را باز کنید
+seelen_options:
+  open_installation_folder: پوشه تنظیمات Seelen را باز کنید
+  open_log_folder: پوشه log Seelen را باز کنید
+  title: دایرکتوری های Seelen

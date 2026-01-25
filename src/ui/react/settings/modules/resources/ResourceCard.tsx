@@ -1,7 +1,7 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Resource, ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { ResourceText, ResourceTextAsMarkdown } from "libs/ui/react/components/ResourceText/index.tsx";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Button, Popconfirm, Tooltip } from "antd";
@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
 import type { IconName } from "libs/ui/icons.ts";
+import { $corruptedWallpapers } from "../shared/signals.ts";
 
 type AnyResource = {
   id: ResourceId;
@@ -22,19 +23,22 @@ interface ResourceCardProps {
   kind: ResourceKind;
   resource: AnyResource;
   actions?: React.ReactNode;
+  body?: React.ReactNode;
 }
 
-export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
+export function ResourceCard({ resource, kind, actions, body }: ResourceCardProps) {
   const [hasUpdate, setHasUpdate] = useState(false);
+  const isCorrupted = kind === "Wallpaper" && $corruptedWallpapers.value.has(resource.id);
 
   const { t } = useTranslation();
 
   useEffect(() => {
     async function checkUpdate() {
-      if (!resource.metadata.filename.endsWith(".slu")) {
+      if (resource.id.startsWith("@")) {
         return;
       }
-      const res = await fetch(`https://product.seelen.io/resource/${resource.id.replace("@", "")}`);
+
+      const res = await fetch(`https://product.seelen.io/resource/${resource.id}`);
       const remoteResource: Resource = await res.json();
       const lastUpdateRelease = new Date(remoteResource.updatedAt);
       const writtenAt = new Date(resource.metadata.writtenAt);
@@ -57,54 +61,68 @@ export function ResourceCard({ resource, kind, actions }: ResourceCardProps) {
       (majorTarget === major && minorTarget > minor) ||
       (majorTarget === major && minorTarget === minor && patchTarget > patch));
 
-  const showWarning = targetIsOlder && !resource.metadata.bundled;
-  const showDanger = targetIsNewer && !resource.metadata.bundled;
-
-  const resourceLink = `https://seelen.io/resources/${resource.id.replace("@", "")}`;
   return (
     <div
       className={cx(cs.card, {
-        [cs.warn!]: showWarning,
-        [cs.danger!]: showDanger,
+        [cs.warn!]: targetIsOlder,
+        [cs.danger!]: targetIsNewer || isCorrupted,
       })}
     >
       <ResourcePortrait resource={resource} kind={kind}>
-        {showWarning && (
+        {targetIsOlder && (
           <Tooltip title={t("resources.outdated")}>
             <Icon iconName="IoWarning" className={cs.warning} />
           </Tooltip>
         )}
-        {showDanger && (
+        {targetIsNewer && (
           <Tooltip title={t("resources.app_outdated")}>
             <Icon iconName="IoWarning" className={cs.danger} />
           </Tooltip>
         )}
+        {isCorrupted && (
+          <Tooltip title={t("resources.corrupted_wallpaper")}>
+            <Icon iconName="MdErrorOutline" className={cs.corrupted} />
+          </Tooltip>
+        )}
       </ResourcePortrait>
-      <div className={cs.info}>
-        <b>
-          <ResourceText text={resource.metadata.displayName} />
-        </b>
-        <p>
-          {resource.metadata.bundled || resource.id.startsWith("@user")
-            ? <span>{resource.id}</span>
-            : (
-              <a href={resourceLink} target="_blank">
-                {resource.id}
-              </a>
-            )}
-        </p>
-      </div>
-      <div className={cs.actions}>
+
+      <div className={cs.header}>
+        <ResourceText className={cs.title} text={resource.metadata.displayName} />
+
         <div className={cs.actionsTop}>
+          {!resource.id.startsWith("@") && !hasUpdate && (
+            <Tooltip title={t("resources.see_on_website")}>
+              <Button
+                type="link"
+                href={`https://seelen.io/resources/${compressUuid(resource.id)}`}
+                target="_blank"
+              >
+                <Icon iconName="TbWorldShare" />
+              </Button>
+            </Tooltip>
+          )}
+
           {hasUpdate && (
             <Tooltip title={t("resources.has_update")} placement="left">
-              <Button type="link" href={resourceLink + "?update"} target="_blank">
+              <Button
+                type="link"
+                href={`https://seelen.io/resources/${compressUuid(resource.id)}?update`}
+                target="_blank"
+              >
                 <Icon iconName="MdUpdate" />
               </Button>
             </Tooltip>
           )}
+
           {actions}
         </div>
+      </div>
+
+      <div className={cs.body}>
+        {body || <ResourceTextAsMarkdown text={resource.metadata.description} />}
+      </div>
+
+      <div className={cs.footer}>
         {!resource.metadata.bundled && resource.metadata.path.includes("com.seelen.seelen-ui") && (
           <Tooltip title={t("resources.delete")} placement="left">
             <Popconfirm
@@ -143,7 +161,7 @@ interface ResourcePortraitProps {
 }
 
 export function ResourceIcon({ kind }: { kind: ResourceKind }) {
-  return <Icon className={cs.kindIcon} iconName={icons[kind]} />;
+  return <Icon className={cs.kindIcon} iconName={icons[kind]!} />;
 }
 
 function ResourcePortraitInner({ resource, kind }: ResourcePortraitProps) {
@@ -174,4 +192,15 @@ export function ResourcePortrait({ resource, kind, children }: ResourcePortraitP
       {children}
     </figure>
   );
+}
+
+export function compressUuid(uuid: string): string {
+  let hex = uuid.replace(/-/g, "");
+  let data = String.fromCharCode.apply(
+    null,
+    hex.match(/\w{2}/g)!.map(function (a) {
+      return parseInt(a, 16);
+    }),
+  );
+  return btoa(data).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
 }

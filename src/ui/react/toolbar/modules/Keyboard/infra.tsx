@@ -5,8 +5,6 @@ import { Item } from "../item/infra/infra.tsx";
 
 import { Selectors } from "../shared/store/app.ts";
 
-import { WithKeyboardSelector } from "./KeyboardList.tsx";
-
 interface Props {
   module: KeyboardToolbarItem;
 }
@@ -14,9 +12,8 @@ interface Props {
 export function KeyboardModule({ module }: Props) {
   const languages = useSelector(Selectors.languages);
 
-  const activeLang = languages.find((l) => l.inputMethods.some((k) => k.active)) || languages[0];
-  const activeKeyboard = activeLang?.inputMethods.find((k) => k.active) ||
-    activeLang?.inputMethods[0];
+  const activeLang = languages.find((l) => l.keyboardLayouts.some((k) => k.active)) || languages[0];
+  const activeKeyboard = activeLang?.keyboardLayouts.find((k) => k.active) || activeLang?.keyboardLayouts[0];
 
   if (!activeLang || !activeKeyboard) {
     console.error("No active keyboard for unknown reason");
@@ -39,17 +36,15 @@ export function KeyboardModule({ module }: Props) {
     : words[0]?.slice(0, 3).toLocaleUpperCase() || "";
 
   return (
-    <WithKeyboardSelector>
-      <Item
-        extraVars={{
-          activeLang,
-          activeKeyboard,
-          activeLangPrefix,
-          activeKeyboardPrefix,
-          languages,
-        }}
-        module={module}
-      />
-    </WithKeyboardSelector>
+    <Item
+      extraVars={{
+        activeLang,
+        activeKeyboard,
+        activeLangPrefix,
+        activeKeyboardPrefix,
+        languages,
+      }}
+      module={module}
+    />
   );
 }
