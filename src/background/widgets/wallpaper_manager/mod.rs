@@ -6,10 +6,11 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT, WPARAM},
     Graphics::Gdi::{InvalidateRect, UpdateWindow},
     UI::WindowsAndMessaging::{
-        FindWindowA, FindWindowExA, GetParent, PostMessageW, SetParent, SetWindowLongPtrW,
-        SetWindowPos, GWL_EXSTYLE, GWL_STYLE, HWND_BOTTOM, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-        SWP_NOMOVE, SWP_NOOWNERZORDER, SWP_NOSIZE, WS_CHILDWINDOW, WS_EX_ACCEPTFILES,
-        WS_EX_APPWINDOW, WS_EX_NOREDIRECTIONBITMAP, WS_EX_WINDOWEDGE,
+        FindWindowA, FindWindowExA, GetParent, GetWindow, PostMessageW, SetParent,
+        SetWindowLongPtrW, SetWindowPos, GWL_EXSTYLE, GWL_STYLE, GW_CHILD, GW_HWNDLAST,
+        HWND_BOTTOM, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOOWNERZORDER, SWP_NOSIZE,
+        WS_CHILDWINDOW, WS_EX_ACCEPTFILES, WS_EX_APPWINDOW, WS_EX_NOREDIRECTIONBITMAP,
+        WS_EX_WINDOWEDGE,
     },
 };
 
@@ -274,14 +275,38 @@ impl SeelenWall {
                 SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
             )?;
 
-            // Ensure WorkerW z-order is correct
+            // Ensure WorkerW z-order is correct (must be at absolute bottom)
             if let Some(worker_w) = desktop_info.worker_w {
-                WindowsApi::set_position(
-                    worker_w,
-                    Some(hwnd),
-                    &Default::default(),
-                    SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
-                )?;
+                Self::ensure_workerw_z_order(desktop_info.progman, worker_w)?;
+            }
+        }
+
+        Ok(())
+    }
+
+    /// Ensures WorkerW is at the bottom of the z-order
+    /// This is critical for the correct layering: ItemsView > Wallpaper > WorkerW
+    fn ensure_workerw_z_order(progman: HWND, worker_w: HWND) -> Result<()> {
+        unsafe {
+            // Get first child of Progman
+            if let Ok(first_child) = GetWindow(progman, GW_CHILD) {
+                // Get last child (last sibling) of Progman
+                if let Ok(last_child) = GetWindow(first_child, GW_HWNDLAST) {
+                    if last_child != worker_w {
+                        log::warn!("WorkerW is not at the bottom of z-order, repositioning...");
+
+                        // Position WorkerW at absolute bottom
+                        SetWindowPos(
+                            worker_w,
+                            Some(HWND_BOTTOM),
+                            0,
+                            0,
+                            0,
+                            0,
+                            SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
+                        )?;
+                    }
+                }
             }
         }
 

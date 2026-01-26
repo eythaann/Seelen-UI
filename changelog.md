@@ -43,6 +43,7 @@
 - tiling window manager not pausing on maximized/fullscreen apps.
 - run as admin not working on dock/taskbar.
 - single key shortcuts not taking in care holded keys.
+- wallpaper sometimes not showing on windows 11.
 
 ## [2.4.11]
 
