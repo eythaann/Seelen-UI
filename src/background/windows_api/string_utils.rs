@@ -47,6 +47,10 @@ impl WindowsString {
         self.len() == 0
     }
 
+    pub fn as_slice(&self) -> &[u16] {
+        &self.inner
+    }
+
     pub fn as_mut_slice(&mut self) -> &mut [u16] {
         &mut self.inner
     }

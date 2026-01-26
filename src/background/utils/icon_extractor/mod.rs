@@ -1,25 +1,5 @@
 mod queue;
 
-use image::{GenericImageView, ImageBuffer, RgbaImage};
-use itertools::Itertools;
-use queue::{IconExtractor, IconExtractorRequest};
-use windows::core::PCWSTR;
-use windows::Win32::Graphics::Gdi::{GetObjectW, BITMAP, BI_RGB};
-use windows::Win32::{
-    Graphics::Gdi::{
-        CreateCompatibleDC, DeleteDC, DeleteObject, GetDIBits, SelectObject, BITMAPINFO,
-        BITMAPINFOHEADER, DIB_RGB_COLORS,
-    },
-    Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES,
-    UI::{
-        Controls::{IImageList, ILD_TRANSPARENT},
-        Shell::{SHGetFileInfoW, SHGetImageList, SHFILEINFOW, SHGFI_SYSICONINDEX, SHIL_JUMBO},
-        WindowsAndMessaging::{DestroyIcon, GetIconInfoExW, HICON, ICONINFOEXW},
-    },
-};
-
-use seelen_core::state::Icon;
-
 #[cfg(target_arch = "x86_64")]
 use std::arch::x86_64::{
     __m128i, _mm_loadu_si128, _mm_setr_epi8, _mm_shuffle_epi8, _mm_storeu_si128,
@@ -31,14 +11,33 @@ use std::arch::aarch64::{uint8x16_t, vld1q_u8, vqtbl1q_u8, vst1q_u8};
 use std::io::BufRead;
 use std::path::{Path, PathBuf};
 
-use crate::error::Result;
-use crate::modules::apps::application::msix::MsixAppsManager;
-use crate::modules::start::application::StartMenuManager;
-use crate::resources::RESOURCES;
-use crate::utils::constants::SEELEN_COMMON;
-use crate::utils::date_based_hex_id;
-use crate::windows_api::types::AppUserModelId;
-use crate::windows_api::WindowsApi;
+use image::{GenericImageView, ImageBuffer, RgbaImage};
+use queue::{IconExtractor, IconExtractorRequest};
+use windows::Win32::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES;
+use windows::Win32::UI::Controls::{IImageList, ILD_TRANSPARENT};
+use windows::Win32::UI::Shell::{
+    SHGetFileInfoW, SHGetImageList, SHFILEINFOW, SHGFI_SYSICONINDEX, SHIL_JUMBO,
+};
+use windows::Win32::{
+    Graphics::Gdi::{
+        CreateCompatibleDC, DeleteDC, GetDIBits, GetObjectW, SelectObject, BITMAP, BITMAPINFO,
+        BITMAPINFOHEADER, BI_RGB, DIB_RGB_COLORS, HBITMAP,
+    },
+    UI::{
+        Shell::ExtractIconExW,
+        WindowsAndMessaging::{GetIconInfoExW, HICON, ICONINFOEXW},
+    },
+};
+
+use seelen_core::state::Icon;
+
+use crate::{
+    error::Result,
+    modules::{apps::application::msix::MsixAppsManager, start::application::StartMenuManager},
+    resources::RESOURCES,
+    utils::{constants::SEELEN_COMMON, date_based_hex_id},
+    windows_api::{string_utils::WindowsString, types::AppUserModelId, WindowsApi},
+};
 
 /// Convert BGRA to RGBA
 ///
@@ -93,9 +92,15 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
             return Err("Failed to get icon info".into());
         }
 
+        convert_hbitmap_to_rgba_image(icon_info.hbmColor)
+    }
+}
+
+pub fn convert_hbitmap_to_rgba_image(hbitmap: HBITMAP) -> Result<RgbaImage> {
+    unsafe {
         let mut bitmap = BITMAP::default();
         if GetObjectW(
-            icon_info.hbmColor.into(),
+            hbitmap.into(),
             std::mem::size_of::<BITMAP>() as i32,
             Some(&mut bitmap as *mut _ as *mut _),
         ) == 0
@@ -108,7 +113,7 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
 
         let hdc_screen = CreateCompatibleDC(None);
         let hdc_mem = CreateCompatibleDC(Some(hdc_screen));
-        let hbm_old = SelectObject(hdc_mem, icon_info.hbmColor.into());
+        let hbm_old = SelectObject(hdc_mem, hbitmap.into());
 
         let mut bmp_info = BITMAPINFO {
             bmiHeader: BITMAPINFOHEADER {
@@ -123,11 +128,11 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
             ..Default::default()
         };
 
-        let mut buffer: Vec<u8> = vec![0; (width * height * 4) as usize];
+        let mut buffer = vec![0u8; (width * height * 4) as usize];
 
         if GetDIBits(
             hdc_mem,
-            icon_info.hbmColor,
+            hbitmap,
             0,
             height as u32,
             Some(buffer.as_mut_ptr() as *mut _),
@@ -138,22 +143,17 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
             return Err("Failed to get dibits".into());
         }
 
-        // Clean up
+        // Cleanup GDI
         SelectObject(hdc_mem, hbm_old);
         DeleteDC(hdc_mem).ok()?;
         DeleteDC(hdc_screen).ok()?;
-        DeleteObject(icon_info.hbmColor.into()).ok()?;
-        DeleteObject(icon_info.hbmMask.into()).ok()?;
 
-        if bmp_info.bmiHeader.biBitCount != 32 {
-            return Err("Icon is not 32 bit".into());
-        }
-
+        // Alpha fix (important!)
         fix_alpha_channel(buffer.as_mut_slice());
         bgra_to_rgba(buffer.as_mut_slice());
 
         let image = ImageBuffer::from_raw(width as u32, height as u32, buffer)
-            .expect("Failed to create image buffer");
+            .ok_or("Failed to create image buffer")?;
         Ok(image)
     }
 }
@@ -272,18 +272,32 @@ pub fn crop_transparent_borders(rgba_image: &RgbaImage) -> RgbaImage {
         .to_image()
 }
 
-pub fn get_icon_from_file(path: &Path) -> Result<RgbaImage> {
+pub fn extract_icon_from_module(path: &Path, index: i32) -> Result<RgbaImage> {
+    let path = WindowsString::from(path);
+    unsafe {
+        let mut hicon = HICON::default();
+        let extracted = ExtractIconExW(path.as_pcwstr(), index, Some(&mut hicon), None, 1);
+        if extracted == 0 || hicon.is_invalid() {
+            return Err(format!("Icon index {index} not found").into());
+        }
+
+        let image = crop_transparent_borders(&convert_hicon_to_rgba_image(&hicon)?);
+        Ok(image)
+    }
+}
+
+pub fn get_shell_icon(path: &Path) -> Result<RgbaImage> {
     unsafe {
         let normalized = path
             .canonicalize()?
             .to_string_lossy()
             .trim_start_matches(r"\\?\")
             .to_owned();
-        let path_str = normalized.encode_utf16().chain(Some(0)).collect_vec();
+        let path = WindowsString::from(normalized);
 
         let mut file_info = SHFILEINFOW::default();
         let result = SHGetFileInfoW(
-            PCWSTR(path_str.as_ptr()),
+            path.as_pcwstr(),
             FILE_FLAGS_AND_ATTRIBUTES(0),
             Some(&mut file_info),
             std::mem::size_of::<SHFILEINFOW>() as u32,
@@ -307,67 +321,29 @@ pub fn get_icon_from_file(path: &Path) -> Result<RgbaImage> {
         // color depth is prioritized over size
         let icon = image_list.GetIcon(file_info.iIcon, ILD_TRANSPARENT.0)?;
         let image = crop_transparent_borders(&convert_hicon_to_rgba_image(&icon)?);
-        DestroyIcon(icon)?;
         Ok(image)
     }
-}
-
-const SQUARE_MARGIN: f32 = 0.1;
-const ASPECT_TOLERANCE: f32 = 0.05;
-const OPACITY_THRESHOLD: u8 = 254;
-
-pub fn is_aproximately_a_square(rgba_image: &RgbaImage) -> bool {
-    let (width, height) = rgba_image.dimensions();
-
-    // verify if the image is not empty
-    if width == 0 || height == 0 {
-        return false;
-    }
-
-    // verify if the image is a square
-    let aspect_ratio = width as f32 / height as f32;
-    if (aspect_ratio - 1.0).abs() > ASPECT_TOLERANCE {
-        return false;
-    }
-
-    // Calculate margin
-    let margin_x = (width as f32 * SQUARE_MARGIN) as u32;
-    let margin_y = (height as f32 * SQUARE_MARGIN) as u32;
-    let inner_width = width - 2 * margin_x;
-    let inner_height = height - 2 * margin_y;
-
-    // verify if the image is a square
-    for y in margin_y..margin_y + inner_height {
-        for x in margin_x..margin_x + inner_width {
-            let pixel = rgba_image.get_pixel(x, y);
-            if pixel.0[3] < OPACITY_THRESHOLD {
-                return false;
-            }
-        }
-    }
-
-    true
 }
 
 fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     let file = std::fs::File::open(path)?;
     let reader = std::io::BufReader::new(file);
 
-    let mut path = None;
+    let mut icon_file = None;
+    let mut _icon_idx: Option<i32> = None;
+
     // in theory .url files are encoded in UTF-8 so we don't need to use OsString
     for line in reader.lines() {
-        if let Some(stripped) = line?.strip_prefix("IconFile=") {
-            path = Some(PathBuf::from(stripped));
-            break;
+        let line = line?;
+        if let Some(stripped) = line.strip_prefix("IconFile=") {
+            icon_file = Some(PathBuf::from(stripped));
+        } else if let Some(stripped) = line.strip_prefix("IconIndex=") {
+            _icon_idx = Some(stripped.parse()?);
         }
     }
 
-    let path = match path {
-        Some(icon_file) => icon_file,
-        None => return Err("Failed to get icon".into()),
-    };
-
-    get_icon_from_file(&path)
+    let icon_file = icon_file.ok_or("Url does not have IconFile")?;
+    extract_icon_from_module(&icon_file, _icon_idx.unwrap_or(0))
 }
 
 /// returns the path of the icon extracted from the executable or copied if is an UWP app.
@@ -427,26 +403,17 @@ fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> Resu
     }
 
     if is_lnk_file {
-        let lnk_icon_path = match WindowsApi::resolve_lnk_custom_icon_path(origin) {
-            Ok(icon_path) => icon_path,
-            Err(_) => {
-                let (target, _) = WindowsApi::resolve_lnk_target(origin)?;
-                target
-            }
-        };
-
-        if lnk_icon_path
-            .extension()
-            .is_some_and(|ext| ext.to_string_lossy().to_lowercase() != "ico")
-        {
-            _extract_and_save_icon_from_file(&lnk_icon_path, umid.clone())?;
-            RESOURCES.add_system_icon_redirect(umid, origin, &lnk_icon_path);
+        let has_custom_icon = WindowsApi::resolve_lnk_custom_icon_path(origin).is_ok();
+        if !has_custom_icon {
+            let (target, _) = WindowsApi::resolve_lnk_target(origin)?;
+            _extract_and_save_icon_from_file(&target, umid.clone())?;
+            RESOURCES.add_system_icon_redirect(umid, origin, &target);
             return Ok(());
         }
     }
 
     // try get the icon directly from the file
-    let icon = get_icon_from_file(origin)?;
+    let icon = get_shell_icon(origin)?;
     gen_icon.is_aproximately_square = is_aproximately_a_square(&icon);
 
     if is_exe_file || is_lnk_file {
@@ -546,4 +513,41 @@ pub fn request_icon_extraction_from_file<T: AsRef<Path>>(path: T) {
 
 pub fn request_icon_extraction_from_umid(aumid: &AppUserModelId) {
     IconExtractor::instance().request(IconExtractorRequest::AppUMID(aumid.clone()));
+}
+
+const SQUARE_MARGIN: f32 = 0.1;
+const ASPECT_TOLERANCE: f32 = 0.05;
+const OPACITY_THRESHOLD: u8 = 254;
+
+pub fn is_aproximately_a_square(rgba_image: &RgbaImage) -> bool {
+    let (width, height) = rgba_image.dimensions();
+
+    // verify if the image is not empty
+    if width == 0 || height == 0 {
+        return false;
+    }
+
+    // verify if the image is a square
+    let aspect_ratio = width as f32 / height as f32;
+    if (aspect_ratio - 1.0).abs() > ASPECT_TOLERANCE {
+        return false;
+    }
+
+    // Calculate margin
+    let margin_x = (width as f32 * SQUARE_MARGIN) as u32;
+    let margin_y = (height as f32 * SQUARE_MARGIN) as u32;
+    let inner_width = width - 2 * margin_x;
+    let inner_height = height - 2 * margin_y;
+
+    // verify if the image is a square
+    for y in margin_y..margin_y + inner_height {
+        for x in margin_x..margin_x + inner_width {
+            let pixel = rgba_image.get_pixel(x, y);
+            if pixel.0[3] < OPACITY_THRESHOLD {
+                return false;
+            }
+        }
+    }
+
+    true
 }

@@ -13,6 +13,8 @@
   let { name, class: className, ...imgProps }: Props = $props();
 
   let state: IconState = $derived.by(() => {
+    // Depend on _version to trigger reactivity when icon pack changes
+    iconPackManager._version;
     const icon = iconPackManager.value.getMissingIcon();
     if (icon) {
       return {
