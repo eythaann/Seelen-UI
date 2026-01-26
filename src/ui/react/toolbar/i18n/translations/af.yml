@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% oor'
+  smart_charge: Smart Charge
 bluetooth:
   available: Beskikbare toestelle (nie gepaar nie)
   cancel: Kanselleer
@@ -40,14 +43,13 @@ notifications:
   settings: Meer kennisgewingsinstellings
   title: Kennisgewings
 placeholder:
-  battery_remaining: '% oorblywende'
   bluetooth_devices: Bluetooth & toestelle
   ethernet_connected: toegang tot die internet
   ethernet_disconnected: Geen internettoegang nie
   notifications: Kennisgewings
   settings: Vinnige instellings
-  smart_charge: '- Slim lading'
   volume: Volume
+plugged: Geprop
 settings:
   app_settings: Appinstellings
   brightness: Helderheid

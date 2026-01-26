@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% eftir'
+  smart_charge: Snjallhleðsla
 bluetooth:
   available: Laus tæki (ekki parað)
   cancel: Hætta við
@@ -40,14 +43,13 @@ notifications:
   settings: Fleiri tilkynningarstillingar
   title: Tilkynningar
 placeholder:
-  battery_remaining: '% eftir'
   bluetooth_devices: Bluetooth og tæki
   ethernet_connected: internet aðgangur
   ethernet_disconnected: Enginn internetaðgangur
   notifications: Tilkynningar
   settings: Fljótar stillingar
-  smart_charge: '- Snjall hleðsla'
   volume: Bindi
+plugged: Tengdur
 settings:
   app_settings: Forritastillingar
   brightness: Birtustig

@@ -84,7 +84,6 @@ slu_events_declaration! {
 
     StateSettingsChanged(Settings) as "settings-changed",
     StateWegItemsChanged as "weg-items",
-    StateToolbarItemsChanged(Placeholder) as "toolbar-items",
     StateThemesChanged(Vec<Theme>) as "themes",
     StateSettingsByAppChanged(Vec<AppConfig>) as "settings-by-app",
     StateIconPacksChanged(Vec<IconPack>) as "icon-packs",

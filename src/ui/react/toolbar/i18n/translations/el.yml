@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% που απομένει'
+  smart_charge: Έξυπνη φόρτιση
 bluetooth:
   available: Διαθέσιμες συσκευές (χωρίς ζεύξη)
   cancel: Ακύρωση
@@ -40,14 +43,13 @@ notifications:
   settings: Περισσότερες ρυθμίσεις ειδοποιήσεων
   title: Ειδοποιήσεις
 placeholder:
-  battery_remaining: '% υπόλοιπο'
   bluetooth_devices: Bluetooth & συσκευές
   ethernet_connected: πρόσβαση στο διαδίκτυο
   ethernet_disconnected: Χωρίς πρόσβαση στο Διαδίκτυο
   notifications: Ειδοποιήσεις
   settings: Γρήγορες ρυθμίσεις
-  smart_charge: '- έξυπνη χρέωση'
   volume: Ενταση ΗΧΟΥ
+plugged: Συνδεδεμένο
 settings:
   app_settings: Ρυθμίσεις εφαρμογής
   brightness: Φωτεινότητα

@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% మిగిలి ఉంది'
+  smart_charge: స్మార్ట్ ఛార్జ్
 bluetooth:
   available: అందుబాటులో ఉన్న పరికరాలు (జత చేయబడలేదు)
   cancel: రద్దు చేయండి
@@ -40,14 +43,13 @@ notifications:
   settings: మరిన్ని నోటిఫికేషన్ సెట్టింగులు
   title: నోటిఫికేషన్‌లు
 placeholder:
-  battery_remaining: '% మిగిలి ఉంది'
   bluetooth_devices: బ్లూటూత్ & పరికరాలు
   ethernet_connected: ఇంటర్నెట్ సదుపాయం
   ethernet_disconnected: ఇంటర్నెట్ సదుపాయం లేదు
   notifications: నోటిఫికేషన్‌లు
   settings: శీఘ్ర సెట్టింగులు
-  smart_charge: '- స్మార్ట్ ఛార్జ్'
   volume: వాల్యూమ్
+plugged: ప్లగ్ చేయబడింది
 settings:
   app_settings: అనువర్తన సెట్టింగులు
   brightness: ప్రకాశం

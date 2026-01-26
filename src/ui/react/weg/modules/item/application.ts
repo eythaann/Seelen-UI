@@ -1,7 +1,3 @@
-import { createSelector } from "@reduxjs/toolkit";
-
-import { Selectors } from "../shared/store/app.ts";
-
 /** Returns a number between 0 and 255 */
 export function calcLuminance(imageUrl: string): Promise<number> {
   return new Promise((resolve, reject) => {
@@ -45,8 +41,3 @@ export function calcLuminance(imageUrl: string): Promise<number> {
     };
   });
 }
-
-export const selectDefaultOutput = createSelector(
-  Selectors.mediaOutputs,
-  (mediaOutputs) => mediaOutputs.find((d) => d.isDefaultMultimedia),
-);

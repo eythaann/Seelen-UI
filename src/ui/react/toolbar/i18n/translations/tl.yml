@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% ang natitira'
+  smart_charge: Smart Charge
 bluetooth:
   available: Mga magagamit na aparato (hindi ipinares)
   cancel: Kanselahin
@@ -40,14 +43,13 @@ notifications:
   settings: Marami pang Mga Setting ng Mga Abiso
   title: Mga abiso
 placeholder:
-  battery_remaining: Nananatili
   bluetooth_devices: Bluetooth at mga aparato
   ethernet_connected: Internet access
   ethernet_disconnected: Walang internet access
   notifications: Mga abiso
   settings: Mabilis na mga setting
-  smart_charge: '- Smart Charge'
   volume: Dami
+plugged: Nakasaksak
 settings:
   app_settings: Mga Setting ng App
   brightness: Ningning

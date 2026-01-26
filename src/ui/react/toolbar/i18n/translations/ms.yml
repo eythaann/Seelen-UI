@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Baki'
+  smart_charge: Caj Pintar
 bluetooth:
   available: Peranti yang ada (tidak dipasangkan)
   cancel: Batalkan
@@ -40,14 +43,13 @@ notifications:
   settings: Lebih banyak tetapan pemberitahuan
   title: Pemberitahuan
 placeholder:
-  battery_remaining: '% tinggal'
   bluetooth_devices: Bluetooth & peranti
   ethernet_connected: akses internet
   ethernet_disconnected: Tiada akses Internet
   notifications: Pemberitahuan
   settings: Tetapan cepat
-  smart_charge: '- Caj pintar'
   volume: Kelantangan
+plugged: Terpasang
 settings:
   app_settings: Tetapan aplikasi
   brightness: Kecerahan

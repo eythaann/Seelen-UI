@@ -1,3 +1,6 @@
+battery:
+  remaining: 残り {{0}}%
+  smart_charge: スマートチャージ
 bluetooth:
   available: 利用可能なデバイス（ペアリングされていない）
   cancel: キャンセル
@@ -40,14 +43,13 @@ notifications:
   settings: その他の通知設定
   title: 通知
 placeholder:
-  battery_remaining: ％
   bluetooth_devices: Bluetoothとデバイス
   ethernet_connected: 接続されています
   ethernet_disconnected: 接続されていません
   notifications: 通知
   settings: SeelenUIの設定
-  smart_charge: '- スマートチャージが有効'
   volume: 音量
+plugged: 詰まった
 settings:
   app_settings: SeelenUIの設定
   brightness: 明るさ

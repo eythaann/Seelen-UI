@@ -1,3 +1,6 @@
+battery:
+  remaining: Liko {{0}} %
+  smart_charge: Išmanusis įkrovimas
 bluetooth:
   available: Turimi įrenginiai (nesuporuoti)
   cancel: Atšaukti
@@ -40,14 +43,13 @@ notifications:
   settings: Daugiau pranešimų nustatymų
   title: Pranešimai
 placeholder:
-  battery_remaining: '% liko'
   bluetooth_devices: „Bluetooth“ ir įrenginiai
   ethernet_connected: Interneto ryšys
   ethernet_disconnected: Jokios interneto prieigos
   notifications: Pranešimai
   settings: Greiti nustatymai
-  smart_charge: '- Išmanus mokestis'
   volume: Apimtis
+plugged: Prijungtas
 settings:
   app_settings: Programos nustatymai
   brightness: Ryškumas

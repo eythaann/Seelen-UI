@@ -1,4 +1,3 @@
-pub mod cli;
 pub mod hook;
 
 use crate::{
@@ -19,10 +18,7 @@ use windows::Win32::{
 
 pub struct FancyToolbar {
     window: WebviewWindow,
-    /// This is the GUI rect of the dock, not used as webview window rect
-    pub theoretical_rect: RECT,
-    /// This is the webview/window rect
-    pub webview_rect: RECT,
+    pub rect: RECT,
 }
 
 impl Drop for FancyToolbar {
@@ -43,8 +39,7 @@ impl FancyToolbar {
     pub fn new(monitor_id: &str) -> Result<Self> {
         Ok(Self {
             window: Self::create_window(monitor_id)?,
-            theoretical_rect: RECT::default(),
-            webview_rect: RECT::default(),
+            rect: RECT::default(),
         })
     }
 }
@@ -88,8 +83,6 @@ impl FancyToolbar {
         .additional_browser_args(&args.to_string())
         .build()?;
 
-        window.set_ignore_cursor_events(true)?;
-
         Ok(window)
     }
 
@@ -111,17 +104,13 @@ impl FancyToolbar {
 
         let real_height = Self::get_toolbar_height_on_monitor(monitor)?;
 
-        let mut real_rect = rc_monitor;
-        self.theoretical_rect = rc_monitor;
-
+        self.rect = rc_monitor;
         match settings.position {
             FancyToolbarSide::Top => {
-                self.theoretical_rect.bottom = rc_monitor.top + real_height;
-                real_rect.bottom = real_rect.top + (rc_monitor.bottom - rc_monitor.top) / 2;
+                self.rect.bottom = rc_monitor.top + real_height;
             }
             FancyToolbarSide::Bottom => {
-                self.theoretical_rect.top = rc_monitor.bottom - real_height;
-                real_rect.top = real_rect.bottom - (rc_monitor.bottom - rc_monitor.top) / 2;
+                self.rect.top = rc_monitor.bottom - real_height;
             }
         }
 
@@ -129,21 +118,21 @@ impl FancyToolbar {
         match settings.hide_mode {
             HideMode::Never => {
                 abd.set_edge(settings.position.into());
-                abd.set_rect(self.theoretical_rect);
+                abd.set_rect(self.rect);
                 abd.register_as_new_bar();
             }
             _ => abd.unregister_bar(),
         };
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::set_position(hwnd, None, &real_rect, SWP_NOSIZE)?;
-        WindowsApi::set_position(hwnd, None, &real_rect, SWP_ASYNCWINDOWPOS)?;
+        WindowsApi::set_position(hwnd, None, &self.rect, SWP_NOSIZE)?;
+        WindowsApi::set_position(hwnd, None, &self.rect, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 
     pub fn reposition_if_needed(&mut self) -> Result<()> {
         let hwnd = self.hwnd()?;
-        if self.webview_rect == WindowsApi::get_outer_window_rect(hwnd)? {
+        if self.rect == WindowsApi::get_outer_window_rect(hwnd)? {
             return Ok(()); // position is ok no need to reposition
         }
         self.set_position(&Monitor::from(WindowsApi::monitor_from_window(hwnd)))?;

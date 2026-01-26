@@ -27,9 +27,6 @@ const ActionsScope = {
   ) {
     invoke(SeelenCommand.Run, { program, args, workingDir, elevated });
   },
-  copyToClipboard(text: string) {
-    navigator.clipboard.writeText(text);
-  },
 };
 
 export async function EvaluateAction(code: string, scope: Record<string, any>) {

@@ -8,7 +8,7 @@ import { Button } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { calcLuminance } from "../../../../toolbar/modules/media/application.ts";
+import { calcLuminance } from "../application.ts";
 
 import type { MediaWegItem } from "../../shared/types.ts";
 

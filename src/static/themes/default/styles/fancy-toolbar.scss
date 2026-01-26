@@ -48,31 +48,6 @@
 }
 
 .ft-bar-item {
-  .workspaces {
-    height: var(--config-height);
-    max-height: 100%;
-    gap: 12px;
-
-    .workspace-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 3px;
-      background-color: currentColor;
-      transition-property: width, border-radius, background-color;
-      transition-duration: 200ms;
-      transition-timing-function: ease-out;
-
-      &:hover {
-        filter: brightness(0.8);
-      }
-
-      &.workspace-dot-active {
-        width: 18px;
-        background-color: var(--system-accent-color);
-      }
-    }
-  }
-
   &.ft-bar-item-clickable {
     padding: 1px 4px;
     border-radius: 6px;

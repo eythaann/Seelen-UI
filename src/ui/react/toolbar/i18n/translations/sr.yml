@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% преосталих'
+  smart_charge: Смарт Цхарге
 bluetooth:
   available: Доступни уређаји (нису упарени)
   cancel: Отказати
@@ -40,14 +43,13 @@ notifications:
   settings: Више поставки обавештења
   title: Обавештења
 placeholder:
-  battery_remaining: преостали%
   bluetooth_devices: Блуетоотх и уређаји
   ethernet_connected: Приступ интернету
   ethernet_disconnected: Нема приступа интернету
   notifications: Обавештења
   settings: Брза подешавања
-  smart_charge: '- паметно набој'
   volume: Запремина
+plugged: Плуггед
 settings:
   app_settings: Подешавања апликација
   brightness: Светлина

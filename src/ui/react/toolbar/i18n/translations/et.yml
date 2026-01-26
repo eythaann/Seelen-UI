@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% järelejäänud'
+  smart_charge: Nutikas laadimine
 bluetooth:
   available: Saadaval olevad seadmed (ei ole ühendatud)
   cancel: Tühista
@@ -40,14 +43,13 @@ notifications:
   settings: Rohkem teavituste seadistusi
   title: Teated
 placeholder:
-  battery_remaining: '% järelejäänud'
   bluetooth_devices: Bluetooth ja seadmed
   ethernet_connected: internetiühendus
   ethernet_disconnected: Interneti -ühendus pole
   notifications: Teatised
   settings: Kiired seaded
-  smart_charge: '- Nutikas tasu'
   volume: Maht
+plugged: Pistikuga ühendatud
 settings:
   app_settings: Rakenduse sätted
   brightness: Heledus

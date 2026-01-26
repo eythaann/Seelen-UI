@@ -74,7 +74,8 @@ metadata:
 icon: MdCenterFocusWeak
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: generic
-  template: return window.title
+  scopes:
+    - FocusedApp
+  template: return focusedApp.title
   style:
     flexShrink: 2

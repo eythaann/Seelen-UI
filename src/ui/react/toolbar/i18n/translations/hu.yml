@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Maradt'
+  smart_charge: Smart Charge
 bluetooth:
   available: Elérhető eszközök (nem párosított)
   cancel: Mégse
@@ -40,14 +43,13 @@ notifications:
   settings: További értesítési beállítások
   title: Értesítések
 placeholder:
-  battery_remaining: '% van hátra'
   bluetooth_devices: Bluetooth és eszközök
   ethernet_connected: Internet-hozzáférés
   ethernet_disconnected: Nincs internet-hozzáférés
   notifications: Értesítések
   settings: Gyorsbeállítások
-  smart_charge: ' - Intelligens töltés'
   volume: Hangerő
+plugged: Dugva
 settings:
   app_settings: Alkalmazásbeállítások
   brightness: Fényerő

@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Remaining'
+  smart_charge: Smart Charge
 bluetooth:
   available: Available Devices (Not Paired)
   cancel: Cancel
@@ -40,14 +43,13 @@ notifications:
   settings: More Notifications Settings
   title: Notifications
 placeholder:
-  battery_remaining: '% remaining'
   bluetooth_devices: Bluetooth & Devices
   ethernet_connected: Internet access
   ethernet_disconnected: No internet access
   notifications: Notifications
   settings: Quick Settings
-  smart_charge: ' - Smart Charge'
   volume: Volume
+plugged: Plugged
 settings:
   app_settings: App Settings
   brightness: Brightness

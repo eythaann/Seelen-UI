@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% restant'
+  smart_charge: Càrrega intel·ligent
 bluetooth:
   available: Dispositius disponibles (no emparellats)
   cancel: Cancel·lar
@@ -40,14 +43,13 @@ notifications:
   settings: Més configuració de notificacions
   title: Notificacions
 placeholder:
-  battery_remaining: '% restant'
   bluetooth_devices: Bluetooth i dispositius
   ethernet_connected: accés a Internet
   ethernet_disconnected: Sense accés a Internet
   notifications: Notificacions
   settings: Configuració ràpida
-  smart_charge: '- Càrrega intel·ligent'
   volume: Volum
+plugged: Endollat
 settings:
   app_settings: Configuració de l'aplicació
   brightness: Brillantor

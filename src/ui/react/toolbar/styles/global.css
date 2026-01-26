@@ -69,21 +69,6 @@ body {
   }
 }
 
-.ft-bar-item-tooltip {
-  .ft-bar.top & {
-    top: calc(var(--config-height) + 4px) !important; /* Override inline style */
-  }
-  .ft-bar.bottom & {
-    bottom: calc(var(--config-height) + 4px) !important; /* Override inline style */
-  }
-}
-
-.ft-bar-group {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
 .ft-bar-item {
   display: flex;
   align-items: center;
@@ -106,6 +91,7 @@ body {
 
 .ft-corner-button {
   position: absolute;
+  z-index: 1;
   width: 10px;
   height: 100%;
 

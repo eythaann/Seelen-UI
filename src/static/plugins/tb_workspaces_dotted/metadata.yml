@@ -1,0 +1,9 @@
+id: "@default/workspaces-dotted"
+metadata:
+  displayName: !extend i18n/display_name.yml
+icon: HiDotsHorizontal
+target: "@seelen/fancy-toolbar"
+plugin:
+  scopes:
+    - Workspaces
+  template: !include plugin/template.js

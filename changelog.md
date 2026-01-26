@@ -25,6 +25,10 @@
 - avoid reload the UI while playing as this can cause fps drops.
 - reduce memory usage!
 
+### refactor
+
+- toolbar items structure (breaking change).
+
 ### fix
 
 - window manager moving windows being currently dragged by the user.

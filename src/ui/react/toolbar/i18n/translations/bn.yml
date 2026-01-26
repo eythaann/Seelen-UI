@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% বাকি'
+  smart_charge: স্মার্ট চার্জ
 bluetooth:
   available: উপলব্ধ ডিভাইস (জোড় নয়)
   cancel: বাতিল
@@ -40,14 +43,13 @@ notifications:
   settings: আরও বিজ্ঞপ্তি সেটিংস
   title: বিজ্ঞপ্তি
 placeholder:
-  battery_remaining: '% অবশিষ্ট'
   bluetooth_devices: ব্লুটুথ এবং ডিভাইস
   ethernet_connected: ইন্টারনেট সুবিধা
   ethernet_disconnected: কোনও ইন্টারনেট অ্যাক্সেস নেই
   notifications: বিজ্ঞপ্তি
   settings: দ্রুত সেটিংস
-  smart_charge: '- স্মার্ট চার্জ'
   volume: ভলিউম
+plugged: প্লাগ করা হয়েছে
 settings:
   app_settings: অ্যাপ সেটিংস
   brightness: উজ্জ্বলতা

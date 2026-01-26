@@ -5,7 +5,8 @@ metadata:
 icon: FaCalendar
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: date
+  scopes:
+    - Date
   template: return date
   onClickV2: |-
     trigger("@seelen/calendar-popup");

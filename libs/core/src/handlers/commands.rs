@@ -154,7 +154,7 @@ slu_commands_declaration! {
     StateGetThemes = state_get_themes() -> Vec<Theme>,
     StateGetWegItems = state_get_weg_items(monitor_id: Option<MonitorId>) -> WegItems,
     StateWriteWegItems = state_write_weg_items(items: WegItems),
-    StateGetToolbarItems = state_get_toolbar_items() -> Placeholder,
+    StateGetToolbarItems = state_get_toolbar_items() -> ToolbarState,
     StateGetSettings = state_get_settings(path: Option<PathBuf>) -> Settings,
     StateWriteSettings = state_write_settings(settings: Settings),
     StateGetSettingsByApp = state_get_settings_by_app() -> Vec<AppConfig> ,

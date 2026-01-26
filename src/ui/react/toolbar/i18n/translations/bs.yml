@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% preostalo'
+  smart_charge: Smart Charge
 bluetooth:
   available: Dostupni uređaji (nisu upareni)
   cancel: Otkazati
@@ -40,14 +43,13 @@ notifications:
   settings: Više obavijesti Postavke
   title: Obavijesti
 placeholder:
-  battery_remaining: preostalo%
   bluetooth_devices: Bluetooth i uređaji
   ethernet_connected: pristup Internetu
   ethernet_disconnected: Nema pristupa internetu
   notifications: Obavijesti
   settings: Brze postavke
-  smart_charge: '- pametna optužba'
   volume: Zapremina
+plugged: Plugged
 settings:
   app_settings: Postavke aplikacija
   brightness: Svjetlost

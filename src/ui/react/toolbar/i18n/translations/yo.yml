@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% to ku'
+  smart_charge: Smart idiyele
 bluetooth:
   available: Awọn ẹrọ ti o wa (ko so pọ)
   cancel: Fagilee
@@ -40,14 +43,13 @@ notifications:
   settings: Awọn ifiranṣẹ iwifunni diẹ sii
   title: Awọn iwifunni
 placeholder:
-  battery_remaining: '% ti o ku'
   bluetooth_devices: Bluetooth & awọn ẹrọ
   ethernet_connected: Wiwọle Intanẹẹti
   ethernet_disconnected: Ko si wiwọle intanẹẹti ko si
   notifications: Awọn iwifunni
   settings: Eto Awọn ọna
-  smart_charge: '- Awọn iṣakoso Smart'
   volume: Iwọn didun
+plugged: Ti so pọ
 settings:
   app_settings: Eto App
   brightness: Didan

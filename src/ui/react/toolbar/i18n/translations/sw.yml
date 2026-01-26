@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Imesalia'
+  smart_charge: Smart Charge
 bluetooth:
   available: Vifaa vinavyopatikana (sio paired)
   cancel: Ghairi
@@ -40,14 +43,13 @@ notifications:
   settings: Mipangilio ya Arifa zaidi
   title: Arifa
 placeholder:
-  battery_remaining: Imebaki
   bluetooth_devices: Bluetooth & vifaa
   ethernet_connected: Ufikiaji wa mtandao
   ethernet_disconnected: Hakuna ufikiaji wa mtandao
   notifications: Arifa
   settings: Mipangilio ya haraka
-  smart_charge: '- Smart Charge'
   volume: Kiasi
+plugged: Imechomekwa
 settings:
   app_settings: Mipangilio ya programu
   brightness: Mwangaza

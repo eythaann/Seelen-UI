@@ -5,7 +5,8 @@ metadata:
 icon: IoPower
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: generic
+  scopes:
+    - Power
   tooltip: |-
     return "Power Menu";
   template: |-

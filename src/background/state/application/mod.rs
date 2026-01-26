@@ -30,7 +30,7 @@ use crate::{
     widgets::popups::POPUPS_MANAGER,
 };
 
-use super::domain::{Placeholder, Settings};
+use super::domain::{Settings, ToolbarState};
 
 lazy_static! {
     pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
@@ -46,7 +46,7 @@ pub struct FullState {
     pub settings: Settings,
     pub settings_by_app: AppsConfigurationList,
     pub weg_items: WegItems,
-    pub toolbar_items: Placeholder,
+    pub toolbar_items: ToolbarState,
 }
 
 unsafe impl Sync for FullState {}
@@ -94,7 +94,6 @@ impl FullState {
 
         let mut settings_changed = false;
         let mut weg_items_changed = false;
-        let mut toolbar_items_changed = false;
 
         // Single iteration over the changed paths
         for path in changed {
@@ -104,10 +103,6 @@ impl FullState {
 
             if !weg_items_changed && path == SEELEN_COMMON.weg_items_path() {
                 weg_items_changed = true;
-            }
-
-            if !toolbar_items_changed && path == SEELEN_COMMON.toolbar_items_path() {
-                toolbar_items_changed = true;
             }
 
             if !themes_changed
@@ -146,15 +141,6 @@ impl FullState {
             if old != self.weg_items {
                 log::info!("Weg Items changed");
                 self.emit_weg_items()?;
-            }
-        }
-
-        if toolbar_items_changed {
-            let old = self.toolbar_items.clone();
-            self.read_toolbar_items();
-            if old != self.toolbar_items {
-                log::info!("Toolbar Items changed");
-                self.emit_toolbar_items()?;
             }
         }
 
@@ -227,7 +213,6 @@ impl FullState {
         let paths: Vec<&Path> = vec![
             SEELEN_COMMON.settings_path(),
             SEELEN_COMMON.weg_items_path(),
-            SEELEN_COMMON.toolbar_items_path(),
             SEELEN_COMMON.user_icons_path(),
             SEELEN_COMMON.user_themes_path(),
             SEELEN_COMMON.user_plugins_path(),
@@ -248,14 +233,15 @@ impl FullState {
         log::trace!("Initial load: settings");
         self.read_settings();
 
+        log::trace!("Initial load: bundled settings by app");
+        self.load_bundled_settings_by_app();
+
         log::trace!("Initial load: weg items");
         self.read_weg_items();
 
         log::trace!("Initial load: toolbar items");
         self.read_toolbar_items();
 
-        log::trace!("Initial load: settings by app");
-        self.load_settings_by_app();
         Ok(())
     }
 

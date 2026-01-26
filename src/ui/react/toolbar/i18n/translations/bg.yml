@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Остават'
+  smart_charge: Интелигентно зареждане
 bluetooth:
   available: Налични устройства (не са сдвоени)
   cancel: Отмяна на
@@ -40,14 +43,13 @@ notifications:
   settings: Още настройки за известия
   title: Известия
 placeholder:
-  battery_remaining: '% остава'
   bluetooth_devices: Bluetooth & устройства
   ethernet_connected: достъп до интернет
   ethernet_disconnected: Няма достъп до интернет
   notifications: Известия
   settings: Бързи настройки
-  smart_charge: '- Smart Charge'
   volume: Сила на звука
+plugged: Запушен
 settings:
   app_settings: Настройки на приложението
   brightness: Яркост

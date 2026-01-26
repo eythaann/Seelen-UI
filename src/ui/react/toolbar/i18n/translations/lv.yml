@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% atlikuši'
+  smart_charge: Viedā uzlāde
 bluetooth:
   available: Pieejamās ierīces (nav savienotas pārī)
   cancel: Atcelt
@@ -40,14 +43,13 @@ notifications:
   settings: Vairāk paziņojumu iestatījumu
   title: Paziņojumi
 placeholder:
-  battery_remaining: '% atliekas'
   bluetooth_devices: Bluetooth & ierīces
   ethernet_connected: Interneta pieslēgums
   ethernet_disconnected: Nav piekļuves internetam
   notifications: Paziņojumi
   settings: Ātrie iestatījumi
-  smart_charge: '- Viedā maksa'
   volume: Tilpums
+plugged: Pieslēgts
 settings:
   app_settings: Lietotņu iestatījumi
   brightness: Spilgtums

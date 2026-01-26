@@ -5,7 +5,8 @@ metadata:
 icon: PiBatteryMediumFill
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: power
+  scopes:
+    - Power
   tooltip: !include plugin/tooltip.js
   template: !include plugin/template.js
   onClickV2: open("ms-settings:powersleep")

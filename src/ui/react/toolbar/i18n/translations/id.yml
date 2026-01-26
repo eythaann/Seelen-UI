@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Tersisa'
+  smart_charge: Pengisian Cerdas
 bluetooth:
   available: Perangkat yang Tersedia (Tidak Dipasangkan)
   cancel: Batal
@@ -40,14 +43,13 @@ notifications:
   settings: Pengaturan Pemberitahuan Lainnya
   title: Pemberitahuan
 placeholder:
-  battery_remaining: '% tersisa'
   bluetooth_devices: Bluetooth & perangkat
   ethernet_connected: Akses internet
   ethernet_disconnected: Tidak ada akses internet
   notifications: Pemberitahuan
   settings: Pengaturan Cepat
-  smart_charge: '- Biaya Cerdas'
   volume: Volume
+plugged: Terpasang
 settings:
   app_settings: Pengaturan aplikasi
   brightness: Kecerahan

@@ -5,7 +5,8 @@ metadata:
 icon: FaWifi
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: network
+  scopes:
+    - Network
   tooltip: >-
     return online ? t("placeholder.ethernet_connected") :
     t("placeholder.ethernet_disconnected")

@@ -5,7 +5,8 @@ metadata:
 icon: IoVolumeHighOutline
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: media
+  scopes:
+    - Media
   template: |-
     return isMuted
       ? icon("IoVolumeMuteOutline")

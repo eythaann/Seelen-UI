@@ -29,7 +29,6 @@ export enum SeelenEvent {
   PopupContentChanged = "popup-content-changed",
   StateSettingsChanged = "settings-changed",
   StateWegItemsChanged = "weg-items",
-  StateToolbarItemsChanged = "toolbar-items",
   StateThemesChanged = "themes",
   StateSettingsByAppChanged = "settings-by-app",
   StateIconPacksChanged = "icon-packs",

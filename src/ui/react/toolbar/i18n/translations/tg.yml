@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% боқимонда'
+  smart_charge: Заряди интеллектуалӣ
 bluetooth:
   available: Дастгоҳҳои дастрас (ҷуфтнашаванда нестанд)
   cancel: Манъ кардан
@@ -40,14 +43,13 @@ notifications:
   settings: Танзимоти огоҳиномаи огоҳӣ
   title: Огоҳиҳо
 placeholder:
-  battery_remaining: '% боқимонда'
   bluetooth_devices: Bluetooth & Дастгоҳҳо
   ethernet_connected: Дастрасии Интернет
   ethernet_disconnected: Дастрасии Интернет надорад
   notifications: Огоҳиҳо
   settings: Танзимоти фаврӣ
-  smart_charge: '- СПАЛ'
   volume: Баланд
+plugged: Васл карда шудааст
 settings:
   app_settings: Танзимоти барнома
   brightness: Равшанӣ

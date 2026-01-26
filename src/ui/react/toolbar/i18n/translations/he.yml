@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% נותרו'
+  smart_charge: טעינה חכמה
 bluetooth:
   available: מכשירים זמינים
   cancel: ביטול
@@ -40,14 +43,13 @@ notifications:
   settings: הגדרות התראות נוספות
   title: התראות
 placeholder:
-  battery_remaining: '% נותר'
   bluetooth_devices: Bluetooth ומכשירים
   ethernet_connected: גישה לאינטרנט
   ethernet_disconnected: אין גישה לאינטרנט
   notifications: התראות
   settings: הגדרות מהירות
-  smart_charge: '- חיוב חכם'
   volume: עוצמת קול
+plugged: פָּקוּק
 settings:
   app_settings: הגדרות אפליקציה
   brightness: בהירות

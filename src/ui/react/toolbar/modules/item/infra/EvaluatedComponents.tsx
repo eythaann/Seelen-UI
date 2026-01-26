@@ -1,7 +1,7 @@
 import Sandbox from "@nyariv/sandboxjs";
 import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { memo, useEffect, useState } from "react";
+import { useMemo } from "react";
 import { z } from "zod";
 
 import { EvaluateAction } from "../app/actionEvaluator.ts";
@@ -46,29 +46,59 @@ function compileCode(code: string) {
   }
 }
 
-export const SanboxedComponent = memo(_SanboxedComponent);
-function _SanboxedComponent({ code, scope }: SanboxedComponentProps) {
-  const [compiled, setCompiled] = useState(() => compileCode(code));
+export function useSandboxedCode({ code, scope }: SanboxedComponentProps): unknown {
+  const compiled = useMemo(() => compileCode(code), [code]);
 
-  useEffect(() => {
-    setCompiled(compileCode(code));
-  }, [code]);
+  const computed = useMemo(() => {
+    if (!compiled) {
+      return null;
+    }
 
-  if (!compiled) {
-    return <span>!?</span>;
-  }
+    try {
+      return compiled?.executor({ ...scope, ...ComponentCreatorScope }).run();
+    } catch (error) {
+      const { env: _, ...rest } = scope;
 
-  try {
-    const content = compiled.executor({ ...scope, ...ComponentCreatorScope }).run();
-    return <ElementsFromEvaluated content={content} />;
-  } catch (_error) {
-    const { env: _, ...rest } = scope;
-    console.error("Error executing component:", { scope: rest });
-    return <span>!?</span>;
+      console.error("Error while executing JS sandboxed code:", {
+        code,
+        scope: rest,
+        error,
+      });
+      return null;
+    }
+  }, [compiled, scope]);
+
+  return computed;
+}
+
+export function StringFromEvaluated({ content }: { content: unknown }): string {
+  switch (typeof content) {
+    case "string":
+      return content;
+    case "number":
+    case "boolean":
+    case "bigint":
+      return String(content);
+    case "object":
+      if (content === null) {
+        return "";
+      }
+
+      if (Array.isArray(content)) {
+        return content
+          .map((item: unknown) => {
+            return StringFromEvaluated({ content: item });
+          })
+          .join("");
+      }
+
+      return "";
+    default:
+      return "";
   }
 }
 
-function ElementsFromEvaluated({ content }: { content: unknown }) {
+export function ElementsFromEvaluated({ content }: { content: unknown }) {
   switch (typeof content) {
     case "string":
       return <span>{content}</span>;
@@ -120,6 +150,7 @@ const EvaluatedButtonPropsSchema = z.object({
 function EvaluatedButton({ style, content, onClick }: EvaluatedButtonProps) {
   return (
     <button
+      data-skin="transparent"
       style={style}
       onClick={() => {
         if (onClick) {

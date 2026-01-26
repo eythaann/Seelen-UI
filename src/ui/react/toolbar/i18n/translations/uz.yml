@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% qoldi'
+  smart_charge: Smart zaryadlash
 bluetooth:
   available: Mavjud qurilmalar (biriktirilmagan)
   cancel: Bekor qilmoq
@@ -40,14 +43,13 @@ notifications:
   settings: Ko'proq xabarnomalar sozlamalari
   title: Bildirishnoma
 placeholder:
-  battery_remaining: '% Qolgan'
   bluetooth_devices: Bluetooth va qurilmalar
   ethernet_connected: Internetga ulanish
   ethernet_disconnected: Internetga kirish yo'q
   notifications: Bildirishnoma
   settings: Tez sozlamalar
-  smart_charge: '- aqlli zaryad'
   volume: Hajmi
+plugged: Ulangan
 settings:
   app_settings: Ilova sozlamalari
   brightness: Yorqinlik

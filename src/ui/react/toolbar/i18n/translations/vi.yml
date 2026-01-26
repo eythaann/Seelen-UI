@@ -1,3 +1,6 @@
+battery:
+  remaining: Còn lại {{0}}%
+  smart_charge: Sạc thông minh
 bluetooth:
   available: Các thiết bị có sẵn (không được ghép nối)
   cancel: Hủy bỏ
@@ -40,14 +43,13 @@ notifications:
   settings: Nhiều cài đặt thông báo
   title: Thông báo
 placeholder:
-  battery_remaining: '% còn lại'
   bluetooth_devices: Bluetooth & thiết bị
   ethernet_connected: truy cập Internet
   ethernet_disconnected: Không có kết nối mạng
   notifications: Thông báo
   settings: Cài đặt nhanh
-  smart_charge: '- Phí thông minh'
   volume: Âm lượng
+plugged: Đã cắm
 settings:
   app_settings: Cài đặt ứng dụng
   brightness: Độ sáng

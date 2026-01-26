@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}} % tilbage'
+  smart_charge: Smart Charge
 bluetooth:
   available: Tilgængelige enheder (ikke parret)
   cancel: Annuller
@@ -40,14 +43,13 @@ notifications:
   settings: Flere indstillinger for notifikationer
   title: Meddelelser
 placeholder:
-  battery_remaining: '% resterende'
   bluetooth_devices: Bluetooth & enheder
   ethernet_connected: Internetadgang
   ethernet_disconnected: Ingen internetadgang
   notifications: Underretninger
   settings: Hurtige indstillinger
-  smart_charge: '- Smart opladning'
   volume: Bind
+plugged: Tilsluttet
 settings:
   app_settings: Appindstillinger
   brightness: Lysstyrke

@@ -1,3 +1,6 @@
+battery:
+  remaining: "{{0}}\_% verbleibend"
+  smart_charge: Intelligentes Laden
 bluetooth:
   available: Verfügbare Geräte (nicht gepaart)
   cancel: Abbrechen
@@ -40,14 +43,13 @@ notifications:
   settings: Weitere Einstellungen für Benachrichtigungen
   title: Benachrichtigungen
 placeholder:
-  battery_remaining: '% verbleibend'
   bluetooth_devices: Bluetooth & Geräte
   ethernet_connected: Internetzugang
   ethernet_disconnected: Kein Internetzugang
   notifications: Benachrichtigungen
   settings: Schnelleinstellungen
-  smart_charge: ' - Intelligentes Laden'
   volume: Lautstärke
+plugged: Eingesteckt
 settings:
   app_settings: App-Einstellungen
   brightness: Helligkeit

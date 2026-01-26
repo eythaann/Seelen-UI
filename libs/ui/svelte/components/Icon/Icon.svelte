@@ -37,6 +37,7 @@
   :global(.slu-icon) {
     height: 1rem;
     width: max-content;
+    min-width: max-content;
     display: inline-block;
 
     > :global(svg) {

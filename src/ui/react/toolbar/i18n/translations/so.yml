@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% hadhay'
+  smart_charge: Lacag Wacan
 bluetooth:
   available: Aaladda la heli karo (ma aha mid lammaane)
   cancel: Burin
@@ -40,14 +43,13 @@ notifications:
   settings: Meelo badan oo ogeysiisyo ah
   title: Ogeysiisyada
 placeholder:
-  battery_remaining: '% haray'
   bluetooth_devices: Bluetooth & aaladda
   ethernet_connected: Helitaanka Internetka
   ethernet_disconnected: Marin internet ah
   notifications: Ogeysiisyada
   settings: Meel deg deg ah
-  smart_charge: '- SMART SAXIIXA'
   volume: Mug
+plugged: Ku xidhan
 settings:
   app_settings: App Goobaha
   brightness: Dhalaalaya

@@ -5,7 +5,8 @@ metadata:
 icon: IoNotificationsOutline
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: notifications
+  scopes:
+    - Notifications
   template: >-
     return count > 0 ? icon("MdNotificationsActive") :
     icon("MdOutlineNotifications")

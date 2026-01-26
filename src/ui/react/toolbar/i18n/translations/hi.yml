@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% शेष'
+  smart_charge: स्मार्ट चार्ज
 bluetooth:
   available: उपलब्ध उपकरण (युग्मित नहीं)
   cancel: रद्द करना
@@ -40,14 +43,13 @@ notifications:
   settings: अधिक सूचनाएँ सेटिंग्स
   title: अधिसूचना
 placeholder:
-  battery_remaining: '% शेष'
   bluetooth_devices: ब्लूटूथ और डिवाइस
   ethernet_connected: इंटरनेट का उपयोग
   ethernet_disconnected: इंटरनेट की सुविधा नहीं है
   notifications: अधिसूचना
   settings: त्वरित सेटिंग
-  smart_charge: '- स्मार्ट चार्ज'
   volume: आयतन
+plugged: प्लग
 settings:
   app_settings: एप्लिकेशन सेटिंग
   brightness: चमक

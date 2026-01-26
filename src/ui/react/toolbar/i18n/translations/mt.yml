@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Fadal'
+  smart_charge: Ħlas Intelliġenti
 bluetooth:
   available: Apparat disponibbli (mhux imqabbad)
   cancel: Ikkanċella
@@ -40,14 +43,13 @@ notifications:
   settings: Aktar settings ta 'notifiki
   title: Notifiki
 placeholder:
-  battery_remaining: '% jibqa '''
   bluetooth_devices: Bluetooth & Apparat
   ethernet_connected: Aċċess għall-Internet
   ethernet_disconnected: L-ebda aċċess għall-internet
   notifications: Notifiki
   settings: Settings ta 'malajr
-  smart_charge: '- ħlas intelliġenti'
   volume: Volum
+plugged: Ipplaggjat
 settings:
   app_settings: Settings tal-App
   brightness: Luminożità

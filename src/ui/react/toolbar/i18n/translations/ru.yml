@@ -1,3 +1,6 @@
+battery:
+  remaining: Осталось {{0}}%
+  smart_charge: Умная зарядка
 bluetooth:
   available: Доступные устройства (не сопряженные)
   cancel: Отмена
@@ -40,14 +43,13 @@ notifications:
   settings: Другие настройки уведомлений
   title: Уведомления
 placeholder:
-  battery_remaining: '% осталось'
   bluetooth_devices: Bluetooth и устройства
   ethernet_connected: Сеть
   ethernet_disconnected: Нет сети
   notifications: Уведомления
   settings: Быстрые настройки
-  smart_charge: '- Умная зарядка'
   volume: Громкость
+plugged: Заткнуто
 settings:
   app_settings: Настройки приложения
   brightness: Яркость

@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% resterend'
+  smart_charge: Slim opladen
 bluetooth:
   available: Beschikbare apparaten (niet gekoppeld)
   cancel: Annuleren
@@ -40,14 +43,13 @@ notifications:
   settings: Meer instellingen voor meldingen
   title: Meldingen
 placeholder:
-  battery_remaining: '% resterend'
   bluetooth_devices: Bluetooth & apparaten
   ethernet_connected: internet toegang
   ethernet_disconnected: Geen toegang tot het internet
   notifications: Meldingen
   settings: Snelle instellingen
-  smart_charge: ' - Slimme lading'
   volume: Volume
+plugged: Aangesloten
 settings:
   app_settings: App instellingen
   brightness: Helderheid
