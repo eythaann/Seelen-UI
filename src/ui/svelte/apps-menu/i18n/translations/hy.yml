@@ -5,7 +5,13 @@ folder: Պանակ
 no_matching_items: Ձեր որոնմանը համապատասխանող տարրեր չեն գտնվել
 open_file_location: Բացեք Ֆայլի գտնվելու վայրը
 pin: Փին
+query:
+  all: Բոլորը
+  apps: Հավելվածներ
+  files: Ֆայլեր
+  web: Վեբ
 run_as_admin: Գործարկել որպես ադմինիստրատոր
 unpin: Ապամրացնել
+web_search: Սեղմեք Enter՝ համացանցում որոնելու համար
 welcome_message: 'Բարի գալուստ Seelen UI հավելվածի ընտրացանկ:'
 welcome_message2: 'Այս ներդիրում կարող եք ամրացնել ձեր սիրած հավելվածները:'

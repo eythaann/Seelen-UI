@@ -5,7 +5,13 @@ folder: Folder
 no_matching_items: Ma nstab l-ebda oġġett li jaqbel mat-tfittxija tiegħek
 open_file_location: Open File Location
 pin: Pin
+query:
+  all: Kollha
+  apps: Apps
+  files: Fajls
+  web: Web
 run_as_admin: Mexxi bħala Amministratur
 unpin: Unpin
+web_search: Agħfas Enter biex tfittex il-web
 welcome_message: Merħba fil-menu tal-app Seelen UI.
 welcome_message2: Fuq din it-tab, tista' tippinja l-apps favoriti tiegħek.

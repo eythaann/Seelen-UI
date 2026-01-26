@@ -5,7 +5,13 @@ folder: ෆෝල්ඩරය
 no_matching_items: ඔබගේ සෙවුමට ගැලපෙන අයිතම කිසිවක් හමු නොවීය
 open_file_location: ගොනු ස්ථානය විවෘත කරන්න
 pin: පින් කරන්න
+query:
+  all: සියල්ල
+  apps: යෙදුම්
+  files: ගොනු
+  web: වෙබ්
 run_as_admin: පරිපාලක ලෙස ධාවනය කරන්න
 unpin: ඇමුණුම ඉවත් කරන්න
+web_search: වෙබය සෙවීමට Enter ඔබන්න
 welcome_message: Seelen UI යෙදුම් මෙනුව වෙත සාදරයෙන් පිළිගනිමු.
 welcome_message2: මෙම ටැබය මත, ඔබට ඔබේ ප්‍රියතම යෙදුම් ඇමිණිය හැක.

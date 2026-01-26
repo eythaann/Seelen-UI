@@ -5,7 +5,13 @@ folder: Aplankas
 no_matching_items: Nerasta prekių, atitinkančių jūsų paiešką
 open_file_location: Atidarykite failo vietą
 pin: Smeigtukas
+query:
+  all: Visi
+  apps: Programėlės
+  files: Failai
+  web: Žiniatinklis
 run_as_admin: Vykdyti kaip administratorius
 unpin: Atsegti
+web_search: Norėdami ieškoti žiniatinklyje, paspauskite Enter
 welcome_message: Sveiki atvykę į Seelen UI programos meniu.
 welcome_message2: Šiame skirtuke galite prisegti mėgstamiausias programas.

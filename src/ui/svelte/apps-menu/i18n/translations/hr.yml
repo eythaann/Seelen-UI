@@ -5,7 +5,13 @@ folder: Mapa
 no_matching_items: Nema pronađenih stavki koje odgovaraju vašem pretraživanju
 open_file_location: Otvorite lokaciju datoteke
 pin: Pin
+query:
+  all: Sve
+  apps: aplikacije
+  files: Datoteke
+  web: Web
 run_as_admin: Pokreni kao administrator
 unpin: Otkvači
+web_search: Pritisnite Enter za pretraživanje weba
 welcome_message: Dobro došli u izbornik aplikacije Seelen UI.
 welcome_message2: Na ovoj kartici možete prikvačiti svoje omiljene aplikacije.

@@ -5,7 +5,13 @@ folder: โฟลเดอร์
 no_matching_items: ไม่พบรายการที่ตรงกับการค้นหาของคุณ
 open_file_location: เปิดตำแหน่งไฟล์
 pin: เข็มหมุด
+query:
+  all: ทั้งหมด
+  apps: แอพ
+  files: ไฟล์
+  web: เว็บ
 run_as_admin: เรียกใช้ในฐานะผู้ดูแลระบบ
 unpin: เลิกปักหมุด
+web_search: กด Enter เพื่อค้นหาเว็บ
 welcome_message: ยินดีต้อนรับสู่เมนูแอป Seelen UI
 welcome_message2: บนแท็บนี้ คุณสามารถปักหมุดแอปโปรดของคุณได้

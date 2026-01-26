@@ -5,7 +5,13 @@ folder: Galka
 no_matching_items: Lama helin wax ku habboon raadintaada
 open_file_location: Fur Goobta Faylka
 pin: Pin
+query:
+  all: Dhammaan
+  apps: Apps
+  files: Faylasha
+  web: Shabakadda
 run_as_admin: U orda sidii Maamule
 unpin: Furi
+web_search: Taabo Gelida si aad u baadho shabakada
 welcome_message: Ku soo dhawoow liiska abka Seelen UI.
 welcome_message2: Taabkan, waxaad ku dhejin kartaa abka aad jeceshahay.

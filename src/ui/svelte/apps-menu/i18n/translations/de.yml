@@ -5,7 +5,13 @@ folder: Ordner
 no_matching_items: Es wurden keine Artikel gefunden, die Ihrer Suche entsprechen
 open_file_location: Öffnen Sie den Dateispeicherort
 pin: Stift
+query:
+  all: Alle
+  apps: Apps
+  files: Dateien
+  web: Web
 run_as_admin: Als Administrator ausführen
 unpin: Lösen
+web_search: Drücken Sie die Eingabetaste, um das Internet zu durchsuchen
 welcome_message: Willkommen im Menü der Seelen UI-App.
 welcome_message2: Auf dieser Registerkarte können Sie Ihre Lieblings-Apps anpinnen.

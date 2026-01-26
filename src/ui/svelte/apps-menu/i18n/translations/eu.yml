@@ -5,7 +5,13 @@ folder: Karpeta
 no_matching_items: Ez da aurkitu zure bilaketarekin bat datorren elementurik
 open_file_location: Ireki fitxategiaren kokapena
 pin: Pin
+query:
+  all: Denak
+  apps: Aplikazioak
+  files: Fitxategiak
+  web: Weba
 run_as_admin: Exekutatu Administratzaile gisa
 unpin: Kendu aingura
+web_search: Sakatu Sartu sarean bilatzeko
 welcome_message: Ongi etorri Seelen UI aplikazioaren menura.
 welcome_message2: Fitxa honetan, gogoko dituzun aplikazioak aingura ditzakezu.

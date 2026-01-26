@@ -5,7 +5,13 @@ folder: Složka
 no_matching_items: Nebyly nalezeny žádné položky odpovídající vašemu hledání
 open_file_location: Otevřete Umístění souboru
 pin: Kolík
+query:
+  all: Vše
+  apps: Aplikace
+  files: Soubory
+  web: Web
 run_as_admin: Spustit jako správce
 unpin: Odepnout
+web_search: Stisknutím klávesy Enter vyhledáte na webu
 welcome_message: Vítejte v nabídce aplikace Seelen UI.
 welcome_message2: Na této kartě můžete připnout své oblíbené aplikace.

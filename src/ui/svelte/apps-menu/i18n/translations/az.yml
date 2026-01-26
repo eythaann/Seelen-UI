@@ -5,7 +5,13 @@ folder: Qovluq
 no_matching_items: Axtarışınıza uyğun heç bir element tapılmadı
 open_file_location: Fayl yerini açın
 pin: Pin
+query:
+  all: Hamısı
+  apps: Proqramlar
+  files: Fayllar
+  web: Veb
 run_as_admin: Administrator olaraq işə salın
 unpin: Sancağı çıxarın
+web_search: Vebdə axtarış etmək üçün Enter düyməsini basın
 welcome_message: Seelen UI tətbiq menyusuna xoş gəlmisiniz.
 welcome_message2: Bu tabda siz sevimli proqramlarınızı sanclaya bilərsiniz.

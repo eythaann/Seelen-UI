@@ -5,7 +5,13 @@ folder: Mapp
 no_matching_items: Inga objekt hittades som matchar din sökning
 open_file_location: Öppna filplats
 pin: Stift
+query:
+  all: Alla
+  apps: Appar
+  files: Filer
+  web: Web
 run_as_admin: Kör som administratör
 unpin: Lossa
+web_search: Tryck på Retur för att söka på webben
 welcome_message: Välkommen till Seelen UI-appmenyn.
 welcome_message2: På den här fliken kan du fästa dina favoritappar.

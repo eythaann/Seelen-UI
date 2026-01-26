@@ -5,7 +5,13 @@ folder: Ҷузвдон
 no_matching_items: Ягон адад ба ҷустуҷӯи шумо ёфт нашуд
 open_file_location: Ҷойгиршавии файлро кушоед
 pin: Пин
+query:
+  all: Ҳама
+  apps: Барномаҳо
+  files: Файлҳо
+  web: Веб
 run_as_admin: Ҳамчун администратор иҷро кунед
 unpin: Бекор кардан
+web_search: Барои ҷустуҷӯи веб Enter-ро пахш кунед
 welcome_message: Хуш омадед ба менюи барномаи Seelen UI.
 welcome_message2: Дар ин ҷадвал шумо метавонед барномаҳои дӯстдоштаи худро пиндор кунед.

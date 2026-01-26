@@ -5,7 +5,13 @@ folder: फोल्डर
 no_matching_items: तपाईको खोजसँग मेल खाने कुनै वस्तुहरू फेला परेनन्
 open_file_location: फाइल स्थान खोल्नुहोस्
 pin: पिन
+query:
+  all: सबै
+  apps: एपहरू
+  files: फाइलहरू
+  web: वेब
 run_as_admin: प्रशासकको रूपमा चलाउनुहोस्
 unpin: अनपिन गर्नुहोस्
+web_search: वेब खोज्न इन्टर थिच्नुहोस्
 welcome_message: Seelen UI एप मेनुमा स्वागत छ।
 welcome_message2: यस ट्याबमा, तपाईंले आफ्नो मनपर्ने एपहरू पिन गर्न सक्नुहुन्छ।

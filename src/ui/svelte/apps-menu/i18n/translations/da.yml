@@ -5,7 +5,13 @@ folder: Mappe
 no_matching_items: Der blev ikke fundet nogen varer, der matcher din søgning
 open_file_location: Åbn Filplacering
 pin: Stift
+query:
+  all: Alle
+  apps: Apps
+  files: Filer
+  web: Web
 run_as_admin: Kør som administrator
 unpin: Frigør
+web_search: Tryk på Enter for at søge på nettet
 welcome_message: Velkommen til Seelen UI-appmenuen.
 welcome_message2: På denne fane kan du fastgøre dine yndlingsapps.

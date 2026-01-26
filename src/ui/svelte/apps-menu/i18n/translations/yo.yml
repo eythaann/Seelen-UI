@@ -5,7 +5,13 @@ folder: Foda
 no_matching_items: Ko si ohun kan ti o baamu wiwa rẹ
 open_file_location: Ṣii Ibi Faili
 pin: Pin
+query:
+  all: Gbogbo
+  apps: Awọn ohun elo
+  files: Awọn faili
+  web: Ayelujara
 run_as_admin: Ṣiṣe bi Alakoso
 unpin: Yọ kuro
+web_search: Tẹ Tẹ lati wa wẹẹbu
 welcome_message: Kaabo si Seelen UI app akojọ.
 welcome_message2: Lori taabu yii, o le pin awọn ohun elo ayanfẹ rẹ.

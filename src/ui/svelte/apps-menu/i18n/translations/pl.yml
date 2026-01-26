@@ -5,7 +5,13 @@ folder: Folder
 no_matching_items: Nie znaleziono żadnych elementów pasujących do Twojego wyszukiwania
 open_file_location: Otwórz lokalizację pliku
 pin: Szpilka
+query:
+  all: Wszystko
+  apps: Aplikacje
+  files: Akta
+  web: Sieć
 run_as_admin: Uruchom jako administrator
 unpin: Odpiąć
+web_search: Naciśnij Enter, aby przeszukać Internet
 welcome_message: Witamy w menu aplikacji Seelen UI.
 welcome_message2: Na tej karcie możesz przypiąć swoje ulubione aplikacje.

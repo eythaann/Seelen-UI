@@ -5,7 +5,13 @@ folder: Mape
 no_matching_items: Nav atrasts neviens vienums, kas atbilstu jūsu meklēšanai
 open_file_location: Atveriet Faila atrašanās vietu
 pin: Piespraust
+query:
+  all: Visi
+  apps: Lietotnes
+  files: Faili
+  web: Web
 run_as_admin: Palaist kā administrators
 unpin: Atspraust
+web_search: Nospiediet Enter, lai meklētu tīmeklī
 welcome_message: Laipni lūdzam Seelen UI lietotnes izvēlnē.
 welcome_message2: Šajā cilnē varat piespraust savas iecienītākās lietotnes.
