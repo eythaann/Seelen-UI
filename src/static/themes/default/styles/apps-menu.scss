@@ -5,7 +5,8 @@
 }
 
 body {
-  background-color: transparent;
+  background-color: light-dark(#fff8, #0008);
+  overflow: hidden;
 }
 
 .apps-menu {
@@ -155,7 +156,11 @@ body {
     width: 60%;
     aspect-ratio: 1/1;
     border-radius: 16%;
-    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+
+    img {
+      border-radius: 16%;
+    }
 
     &:not([data-shape="square"]) {
       padding: 8%;
@@ -249,10 +254,10 @@ body {
     aspect-ratio: 1/1;
     gap: 4%;
     padding: 8%;
+    box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
 
     background-color: RGB(from var(--color-gray-100) r g b / 0.6);
     border-radius: 16%;
-    overflow: hidden;
 
     .folder-preview {
       width: 100%;

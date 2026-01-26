@@ -1,29 +1,30 @@
-use std::collections::HashMap;
-use std::os::windows::process::CommandExt;
-use std::path::PathBuf;
+use std::{collections::HashMap, os::windows::process::CommandExt, path::PathBuf};
 
 use owo_colors::OwoColorize;
-use seelen_core::constants::SUPPORTED_LANGUAGES;
-use seelen_core::resource::ResourceText;
-use seelen_core::state::RelaunchArguments;
-use seelen_core::{command_handler_list, system_state::Color};
+use seelen_core::{
+    command_handler_list,
+    constants::SUPPORTED_LANGUAGES,
+    resource::ResourceText,
+    state::RelaunchArguments,
+    system_state::{Color, StartMenuLayout, StartMenuLayoutItem},
+};
 
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use translators::Translator;
 use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW};
 
-use crate::app::{get_app_handle, Seelen};
-use crate::error::Result;
-
-use crate::utils;
-use crate::utils::constants::SEELEN_COMMON;
-use crate::utils::icon_extractor::{
-    request_icon_extraction_from_file, request_icon_extraction_from_umid,
+use crate::{
+    app::{get_app_handle, Seelen},
+    error::Result,
+    utils::{
+        self,
+        constants::SEELEN_COMMON,
+        icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
+        pwsh::PwshScript,
+    },
+    windows_api::{hdc::DeviceContext, string_utils::WindowsString, window::Window, WindowsApi},
 };
-use crate::windows_api::hdc::DeviceContext;
-use crate::windows_api::window::Window;
-use crate::windows_api::WindowsApi;
 
 #[tauri::command(async)]
 pub fn open_file(path: String) -> Result<()> {
@@ -225,6 +226,29 @@ async fn _translate_text(source: &str, source_lang: &str, mut target_lang: &str)
         .translate_async(source, source_lang, target_lang)
         .await?;
     Ok(translated)
+}
+
+#[tauri::command(async)]
+async fn get_native_start_menu() -> Result<StartMenuLayout> {
+    let output_path = SEELEN_COMMON.app_cache_dir().join("start-layout.json");
+    let output_path_str = output_path.to_string_lossy().to_string();
+
+    let script =
+        PwshScript::new(format!("Export-StartLayout -Path '{}'", output_path_str)).inline_command();
+    script.execute().await?;
+
+    let file = std::fs::File::open(&output_path)?;
+    let mut layout: StartMenuLayout = serde_json::from_reader(file)?;
+
+    for item in &mut layout.pinned_list {
+        if let StartMenuLayoutItem::DesktopAppLink(path) = item {
+            let source = WindowsString::from_str(path);
+            let expanded = WindowsApi::resolve_environment_variables(&source)?;
+            *item = StartMenuLayoutItem::DesktopAppLink(expanded.to_string());
+        }
+    }
+
+    Ok(layout)
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {

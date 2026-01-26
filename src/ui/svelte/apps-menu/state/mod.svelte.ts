@@ -1,7 +1,8 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
-import type { StartMenuItem } from "@seelen-ui/lib/types";
+import type { StartMenuItem, StartMenuLayoutItem } from "@seelen-ui/lib/types";
 import { lazyRune, persistentRune } from "libs/ui/svelte/utils";
 import { StartDisplayMode, StartView } from "../constants";
+import type { unionToIntersection } from "readable-types";
 
 const user = lazyRune(() => invoke(SeelenCommand.GetUser));
 await subscribe(SeelenEvent.UserChanged, user.setByPayload);
@@ -30,11 +31,41 @@ export interface FavAppItem {
 
 export type FavPinnedItem = FavAppItem | FavFolderItem;
 
-const pinnedItems = await persistentRune<FavPinnedItem[]>("favorites", []);
+const initialState: FavPinnedItem[] = [];
+type JoinStartMenuLayoutItem = unionToIntersection<StartMenuLayoutItem>;
+
+try {
+  const layout = await invoke(SeelenCommand.GetNativeStartMenu);
+  for (const _item of layout.pinnedList) {
+    let item = _item as JoinStartMenuLayoutItem;
+
+    if (item.desktopAppLink) {
+      let path = item.desktopAppLink.toLowerCase();
+      const found = startMenuItems.value.find((i) => i.path.toLowerCase() === path);
+
+      if (found) {
+        initialState.push({
+          type: "app",
+          itemId: getItemId(found),
+        });
+        continue;
+      }
+    }
+
+    initialState.push({
+      type: "app",
+      itemId: item.packagedAppId || item.destopAppId || item.desktopAppLink,
+    });
+  }
+} catch (error) {
+  console.error("Failed to get native pinned items:", error);
+}
+
+const pinnedItems = await persistentRune<FavPinnedItem[]>("favorites", initialState);
 
 // Get unique identifier for an item
 function getItemId(item: StartMenuItem): string {
-  return item.umid || item.path;
+  return item.umid || item.path.toLowerCase();
 }
 
 // Check if an item is pinned
