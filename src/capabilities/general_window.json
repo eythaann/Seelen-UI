@@ -54,6 +54,7 @@
     "core:window:allow-request-user-attention",
 
     "core:window:allow-set-focus",
+    "core:window:allow-set-focusable",
     "core:window:allow-set-cursor-grab",
     "core:window:allow-set-cursor-icon",
     "core:window:allow-set-cursor-position",

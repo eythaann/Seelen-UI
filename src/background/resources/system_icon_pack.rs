@@ -43,61 +43,26 @@ impl ResourceManager {
     fn sanitize_default_icons(sys_icons_path: &Path) -> Result<()> {
         std::fs::create_dir_all(sys_icons_path)?;
 
-        // Ensure missing icon
-        let missing_path = sys_icons_path.join("missing-icon.png");
-        if !missing_path.exists() {
-            std::fs::copy(
-                SEELEN_COMMON
-                    .app_resource_dir()
-                    .join("static/icons/missing.png"),
-                missing_path,
-            )?;
-        }
+        let ensure_icon = |filename: &str| {
+            let icon_path = sys_icons_path.join(filename);
+            if !icon_path.exists() {
+                std::fs::copy(
+                    SEELEN_COMMON
+                        .app_resource_dir()
+                        .join("static/icons")
+                        .join(filename),
+                    icon_path,
+                )?;
+            }
+            Result::Ok(())
+        };
 
-        // Ensure url icon
-        let url_path = sys_icons_path.join("url.png");
-        if !url_path.exists() {
-            std::fs::copy(
-                SEELEN_COMMON
-                    .app_resource_dir()
-                    .join("static/icons/url.png"),
-                url_path,
-            )?;
-        }
-
-        // Ensure start menu icon
-        let start_path = sys_icons_path.join("start-menu-icon.svg");
-        if !start_path.exists() {
-            std::fs::copy(
-                SEELEN_COMMON
-                    .app_resource_dir()
-                    .join("static/icons/start-menu.svg"),
-                start_path,
-            )?;
-        }
-
-        // Ensure folder icon
-        let folder_path = sys_icons_path.join("folder-icon.svg");
-        if !folder_path.exists() {
-            std::fs::copy(
-                SEELEN_COMMON
-                    .app_resource_dir()
-                    .join("static/icons/folder.svg"),
-                folder_path,
-            )?;
-        }
-
-        // Ensure show desktop icon
-        let icon_path = sys_icons_path.join("show-desktop.svg");
-        if !icon_path.exists() {
-            std::fs::copy(
-                SEELEN_COMMON
-                    .app_resource_dir()
-                    .join("static/icons/desktop.svg"),
-                icon_path,
-            )?;
-        }
-
+        ensure_icon("missing.png")?;
+        ensure_icon("music_thumbnail.jpg")?;
+        ensure_icon("url.png")?;
+        ensure_icon("start-menu.svg")?;
+        ensure_icon("folder.svg")?;
+        ensure_icon("desktop.svg")?;
         Ok(())
     }
 
@@ -105,68 +70,52 @@ impl ResourceManager {
     fn sanitize_default_entries(system_pack: &mut IconPack) {
         // Ensure missing icon is set
         system_pack.missing = Some(Icon {
-            base: Some("missing-icon.png".to_owned()),
+            base: Some("missing.png".to_owned()),
             ..Default::default()
         });
 
-        // Check and add url icon entry if missing
-        let has_url = system_pack
-            .entries
-            .iter()
-            .any(|entry| matches!(entry, IconPackEntry::Shared(e) if e.extension == "url"));
-        if !has_url {
-            system_pack.add_entry(IconPackEntry::Shared(SharedIconPackEntry {
-                extension: "url".to_string(),
-                icon: Icon {
-                    base: Some("url.png".to_owned()),
-                    ..Default::default()
-                },
-            }));
-        }
+        // add_entry will override if exists, or create if not
+        system_pack.add_entry(IconPackEntry::Shared(SharedIconPackEntry {
+            extension: "url".to_string(),
+            icon: Icon {
+                base: Some("url.png".to_owned()),
+                ..Default::default()
+            },
+        }));
 
-        // Check and add start menu icon entry if missing
-        let has_start_menu = system_pack.entries.iter().any(
-            |entry| matches!(entry, IconPackEntry::Custom(e) if e.key == "@seelen/weg::start-menu"),
-        );
-        if !has_start_menu {
-            system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
-                key: "@seelen/weg::start-menu".to_owned(),
-                icon: Icon {
-                    base: Some("start-menu-icon.svg".to_owned()),
-                    mask: Some("start-menu-icon.svg".to_owned()),
-                    ..Default::default()
-                },
-            }));
-        }
+        system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+            key: "@seelen/weg::start-menu".to_owned(),
+            icon: Icon {
+                base: Some("start-menu.svg".to_owned()),
+                mask: Some("start-menu.svg".to_owned()),
+                ..Default::default()
+            },
+        }));
 
-        // Check and add folder icon entry if missing
-        let has_folder = system_pack.entries.iter().any(
-            |entry| matches!(entry, IconPackEntry::Custom(e) if e.key == "@seelen/weg::folder"),
-        );
-        if !has_folder {
-            system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
-                key: "@seelen/weg::folder".to_owned(),
-                icon: Icon {
-                    base: Some("folder-icon.svg".to_owned()),
-                    mask: Some("folder-icon.svg".to_owned()),
-                    ..Default::default()
-                },
-            }));
-        }
+        system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+            key: "@seelen/weg::folder".to_owned(),
+            icon: Icon {
+                base: Some("folder.svg".to_owned()),
+                mask: Some("folder.svg".to_owned()),
+                ..Default::default()
+            },
+        }));
 
-        // Check and add show desktop icon entry if missing
-        let has_show_desktop = system_pack.entries.iter().any(
-            |entry| matches!(entry, IconPackEntry::Custom(e) if e.key == "@seelen/weg::show-desktop"),
-        );
-        if !has_show_desktop {
-            system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
-                key: "@seelen/weg::show-desktop".to_owned(),
-                icon: Icon {
-                    base: Some("show-desktop.svg".to_owned()),
-                    ..Default::default()
-                },
-            }));
-        }
+        system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+            key: "@seelen/weg::show-desktop".to_owned(),
+            icon: Icon {
+                base: Some("desktop.svg".to_owned()),
+                ..Default::default()
+            },
+        }));
+
+        system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+            key: "defaultPlayerThumbnail".to_owned(),
+            icon: Icon {
+                base: Some("music_thumbnail.jpg".to_owned()),
+                ..Default::default()
+            },
+        }));
     }
 
     pub fn ensure_system_icon_pack(&self) -> Result<()> {

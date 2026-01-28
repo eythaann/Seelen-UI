@@ -52,6 +52,7 @@ slu_events_declaration! {
 
     SystemMonitorsChanged(Vec<PhysicalMonitor>) as "system::monitors-changed",
     SystemLanguagesChanged(Vec<SystemLanguage>) as "system::languages-changed",
+    SystemBrightnessChanged(Brightness) as "system::brightness-changed",
 
     UserChanged(User) as "user-changed",
     UserFolderChanged(FolderChangedArgs) as "user::known-folder-changed",

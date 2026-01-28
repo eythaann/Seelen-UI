@@ -1,3 +1,5 @@
+// todo remove all anys from this file, should be done with the remotion of redux state.
+
 import { useComputed } from "@preact/signals";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { ToolbarJsScope } from "@seelen-ui/lib/types";
@@ -104,12 +106,12 @@ function useMediaScope() {
     id,
     volume = 0,
     muted: isMuted = true,
-  } = useSelector((state: RootState) => Selectors.mediaOutputs(state).find((d) => d.isDefaultMultimedia)) || {};
+  } = useSelector((state: RootState) => Selectors.mediaOutputs(state).find((d: any) => d.isDefaultMultimedia)) || {};
 
   const { volume: inputVolume = 0, muted: inputIsMuted = true } =
-    useSelector((state: RootState) => Selectors.mediaInputs(state).find((d) => d.isDefaultMultimedia)) || {};
+    useSelector((state: RootState) => Selectors.mediaInputs(state).find((d: any) => d.isDefaultMultimedia)) || {};
 
-  const mediaSession = useSelector((state: RootState) => Selectors.mediaSessions(state).find((d) => d.default)) ||
+  const mediaSession = useSelector((state: RootState) => Selectors.mediaSessions(state).find((d: any) => d.default)) ||
     null;
 
   function onWheel(e: WheelEvent) {
@@ -135,11 +137,11 @@ function useMediaScope() {
 }
 
 function useNetworkScope() {
-  const networkAdapters = useSelector(Selectors.networkAdapters);
+  const networkAdapters: any = useSelector(Selectors.networkAdapters);
   const defaultIp = useSelector(Selectors.networkLocalIp);
   const online = useSelector(Selectors.online);
 
-  const usingAdapter = networkAdapters.find((i) => i.ipv4 === defaultIp) || null;
+  const usingAdapter = networkAdapters.find((i: any) => i.ipv4 === defaultIp) || null;
 
   return {
     online,
@@ -149,10 +151,10 @@ function useNetworkScope() {
 }
 
 function useKeyboardScope() {
-  const languages = useSelector(Selectors.languages);
+  const languages: any = useSelector(Selectors.languages);
 
-  const activeLang = languages.find((l) => l.keyboardLayouts.some((k) => k.active)) || languages[0];
-  const activeKeyboard = activeLang?.keyboardLayouts.find((k) => k.active) || activeLang?.keyboardLayouts[0];
+  const activeLang = languages.find((l: any) => l.keyboardLayouts.some((k: any) => k.active)) || languages[0];
+  const activeKeyboard = activeLang?.keyboardLayouts.find((k: any) => k.active) || activeLang?.keyboardLayouts[0];
 
   if (!activeLang || !activeKeyboard) {
     console.error("No active keyboard for unknown reason");
@@ -168,14 +170,14 @@ function useKeyboardScope() {
   let activeLangPrefix = activeLang.nativeName
     .split("")
     .slice(0, 3)
-    .filter((c) => !["(", ")", " "].includes(c))
+    .filter((c: any) => !["(", ")", " "].includes(c))
     .join("")
     .toLocaleUpperCase();
 
   let words = activeKeyboard.displayName.split(/[\s\-\(\)]/);
   let activeKeyboardPrefix = words.length > 1
     ? words
-      .map((word) => word[0])
+      .map((word: any) => word[0])
       .join("")
       .toLocaleUpperCase()
     : words[0]?.slice(0, 3).toLocaleUpperCase() || "";
@@ -198,8 +200,8 @@ function useUserScope() {
 }
 
 function useBluetoothScope() {
-  const bluetoothDevices = useSelector(Selectors.bluetoothDevices);
-  const connectedDevices = bluetoothDevices.filter((item) => item.connected);
+  const bluetoothDevices: any = useSelector(Selectors.bluetoothDevices);
+  const connectedDevices = bluetoothDevices.filter((item: any) => item.connected);
 
   return {
     devices: bluetoothDevices,

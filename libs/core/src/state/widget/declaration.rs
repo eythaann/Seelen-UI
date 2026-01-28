@@ -109,30 +109,36 @@ impl<'de> Deserialize<'de> for WidgetConfigDefinition {
 
 /// Individual widget setting item with type-specific configuration
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(tag = "type", rename_all = "kebab-case")]
+#[serde(tag = "type")]
 pub enum WidgetSettingItem {
     /// Toggle switch for boolean values.\
     /// Renders as a switch/toggle component in the UI.
+    #[serde(alias = "switch")]
     Switch(WidgetSettingSwitch),
 
     /// Selection from a list of options.\
     /// Can be rendered as a dropdown list or inline buttons depending on subtype.
+    #[serde(alias = "select")]
     Select(WidgetSettingSelect),
 
     /// Text input field.\
     /// Supports both single-line and multiline input with optional validation.
+    #[serde(alias = "text", alias = "input-text")]
     InputText(WidgetSettingInputText),
 
     /// Numeric input field.\
     /// Renders as a number input with optional min/max/step constraints.
+    #[serde(alias = "number", alias = "input-number")]
     InputNumber(WidgetSettingInputNumber),
 
     /// Slider/range input for numeric values.\
     /// Renders as a visual slider component.
+    #[serde(alias = "range")]
     Range(WidgetSettingRange),
 
     /// Color picker input.\
     /// Allows users to select colors with optional alpha/transparency support.
+    #[serde(alias = "color")]
     Color(WidgetSettingColor),
 }
 

@@ -9,33 +9,32 @@ interface args {
   alignY?: Alignment | null;
 }
 
-// deno-lint-ignore no-explicit-any
-const isSeelenUIEnviroment = (globalThis as any).__SLU_WIDGET;
-
 const monitors = {
-  value: isSeelenUIEnviroment ? invoke(SeelenCommand.SystemGetMonitors) : Promise.resolve([]),
+  value: [] as PhysicalMonitor[],
 };
-if (isSeelenUIEnviroment) {
+
+export async function initMonitorsState(): Promise<void> {
+  monitors.value = await invoke(SeelenCommand.SystemGetMonitors);
   subscribe(SeelenEvent.SystemMonitorsChanged, ({ payload }) => {
-    monitors.value = Promise.resolve(payload);
+    monitors.value = payload;
   });
 }
 
-async function monitorFromPoint(x: number, y: number): Promise<PhysicalMonitor | undefined> {
-  return (await monitors.value).find(
+function monitorFromPoint(x: number, y: number): PhysicalMonitor | undefined {
+  return monitors.value.find(
     (m) => m.rect.left <= x && x < m.rect.right && m.rect.top <= y && y < m.rect.bottom,
   );
 }
 
-async function primaryMonitor(): Promise<PhysicalMonitor | undefined> {
-  return (await monitors.value).find((m) => m.isPrimary);
+function primaryMonitor(): PhysicalMonitor | undefined {
+  return monitors.value.find((m) => m.isPrimary);
 }
 
-export async function adjustPositionByPlacement({
+export function adjustPositionByPlacement({
   frame: { x, y, width, height },
   alignX,
   alignY,
-}: args): Promise<Frame> {
+}: args): Frame {
   if (alignX === Alignment.Center) {
     x -= width / 2;
   } else if (alignX === Alignment.Start) {
@@ -48,7 +47,7 @@ export async function adjustPositionByPlacement({
     y -= height;
   }
 
-  const newFrame = await fitIntoMonitor({ x, y, width, height });
+  const newFrame = fitIntoMonitor({ x, y, width, height });
   return {
     x: Math.round(newFrame.x),
     y: Math.round(newFrame.y),
@@ -57,8 +56,8 @@ export async function adjustPositionByPlacement({
   };
 }
 
-export async function fitIntoMonitor({ x, y, width, height }: Frame): Promise<Frame> {
-  const monitor = (await monitorFromPoint(Math.round(x), Math.round(y))) || (await primaryMonitor());
+export function fitIntoMonitor({ x, y, width, height }: Frame): Frame {
+  const monitor = monitorFromPoint(Math.round(x), Math.round(y)) || primaryMonitor();
   if (monitor) {
     width = Math.min(width, monitor.rect.right - monitor.rect.left);
     height = Math.min(height, monitor.rect.bottom - monitor.rect.top);

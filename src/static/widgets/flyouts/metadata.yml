@@ -1,0 +1,62 @@
+id: "@seelen/flyouts"
+icon: LuRectangleEllipsis
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+loader: Internal
+preset: Overlay
+settings:
+  - type: select
+    key: placement
+    label: Placement
+    options:
+      - label: Left
+        value: left
+        icon: CgToolbarLeft
+      - label: Top
+        value: top
+        icon: CgToolbarTop
+      - label: Bottom
+        value: bottom
+        icon: CgToolbarBottom
+      - label: Right
+        value: right
+        icon: CgToolbarRight
+    defaultValue: top
+    subtype: Inline
+
+  - type: number
+    key: margin
+    label: Side Margin
+    min: 0
+    defaultValue: 60
+
+  - type: number
+    key: timeToShow
+    label: Time to show (seconds)
+    min: 1
+    max: 10
+    defaultValue: 4
+
+  - group:
+      label: "Show on:"
+      items:
+        - type: switch
+          key: showBrightnessChange
+          label: Brightness change
+          defaultValue: true
+
+        - type: switch
+          key: showVolumeChange
+          label: Volume change
+          defaultValue: true
+
+        - type: switch
+          key: showMediaPlayerChange
+          label: Media player change
+          defaultValue: true
+
+        - type: switch
+          key: showWorkspaceChange
+          label: Workspace change
+          defaultValue: true

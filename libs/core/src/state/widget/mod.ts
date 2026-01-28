@@ -1,4 +1,5 @@
 import {
+  type Frame,
   type Rect,
   type ThirdPartyWidgetSettings,
   type Widget as IWidget,
@@ -14,19 +15,11 @@ import { List } from "../../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { getCurrentWebviewWindow, type WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { decodeBase64Url } from "@std/encoding";
-import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
-import { monitorFromPoint } from "@tauri-apps/api/window";
 import { debounce } from "../../utils/async.ts";
 import { WidgetAutoSizer } from "./sizing.ts";
-import { adjustPositionByPlacement } from "./positioning.ts";
+import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
-
-export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
-export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
-export const SeelenWegWidgetId: WidgetId = "@seelen/weg" as WidgetId;
-export const SeelenToolbarWidgetId: WidgetId = "@seelen/fancy-toolbar" as WidgetId;
-export const SeelenWindowManagerWidgetId: WidgetId = "@seelen/window-manager" as WidgetId;
-export const SeelenWallWidgetId: WidgetId = "@seelen/wallpaper-manager" as WidgetId;
+import type { InitWidgetOptions, WidgetInformation } from "./interfaces.ts";
 
 export class WidgetList extends List<IWidget> {
   static getAsync(): Promise<WidgetList> {
@@ -42,94 +35,23 @@ export class WidgetList extends List<IWidget> {
   }
 }
 
-export interface WidgetInformation {
-  /** decoded webview label */
-  label: string;
-  /** Will be present if the widget replicas is set to by monitor */
-  monitorId: string | null;
-  /** Will be present if the widget replicas is set to multiple */
-  instanceId: string | null;
-  /** params present on the webview label */
-  params: { readonly [key in string]?: string };
-}
-
-export interface InitWidgetOptions {
-  /**
-   * If show the widget on Ready
-   *
-   * @default !widget.lazy
-   */
-  show?: boolean;
-  /**
-   * Will auto size the widget to the content size of the element
-   * @example
-   *  autoSizeByContent: document.body,
-   *  autoSizeByContent: document.getElementById("root"),
-   * @default undefined
-   */
-  autoSizeByContent?: HTMLElement | null;
-  /**
-   * Will save the position and size of the widget on change.
-   * This is intedeed to be used when the size and position of the widget is
-   * allowed to be changed by the user, Normally used on desktop widgets.
-   *
-   * @default widget.preset === "Desktop"
-   */
-  saveAndRestoreLastRect?: boolean;
-}
-
 interface WidgetInternalState {
   initialized: boolean;
   ready: boolean;
+  position: {
+    x: number;
+    y: number;
+  };
+  size: {
+    width: number;
+    height: number;
+  };
 }
 
 /**
  * Represents the widget instance running in the current webview
  */
 export class Widget {
-  /** widget id */
-  public readonly id: WidgetId;
-  /** widget definition */
-  public readonly def: IWidget;
-  /** decoded widget instance information */
-  public readonly decoded: WidgetInformation;
-  /** current webview window */
-  public readonly webview: WebviewWindow;
-
-  private autoSizer?: WidgetAutoSizer;
-  private initOptions: InitWidgetOptions = {};
-  private runtimeState: WidgetInternalState = {
-    initialized: false,
-    ready: false,
-  };
-
-  private constructor(widget: IWidget) {
-    this.def = widget;
-    this.webview = getCurrentWebviewWindow();
-
-    const [id, query] = Widget.getDecodedWebviewLabel();
-    const params = new URLSearchParams(query);
-    const paramsObj = Object.freeze(Object.fromEntries(params));
-
-    this.id = id as WidgetId;
-    this.decoded = Object.freeze({
-      label: `${id}${query ? `?${query}` : ""}`,
-      monitorId: paramsObj.monitorId || null,
-      instanceId: paramsObj.instanceId || null,
-      params: Object.freeze(Object.fromEntries(params)),
-    });
-  }
-
-  private static getDecodedWebviewLabel(): [WidgetId, string | undefined] {
-    const encondedLabel = getCurrentWebviewWindow().label;
-    const decodedLabel = new TextDecoder().decode(decodeBase64Url(encondedLabel));
-    const [id, query] = decodedLabel.split("?");
-    if (!id) {
-      throw new Error("Missing widget id on webview label");
-    }
-    return [id as WidgetId, query];
-  }
-
   /**
    * Alternative accesor for the current running widget.\
    * Will throw if the library is being used on a non Seelen UI environment
@@ -149,33 +71,62 @@ export class Widget {
     return Widget.getCurrent();
   }
 
-  private static getDefinitionDefaultValues(
-    definition: WidgetConfigDefinition,
-  ): Record<string, unknown> {
-    const config: Record<string, unknown> = {};
+  /** widget id */
+  public readonly id: WidgetId;
+  /** widget definition */
+  public readonly def: IWidget;
+  /** decoded widget instance information */
+  public readonly decoded: WidgetInformation;
+  /** current webview window */
+  public readonly webview: WebviewWindow;
 
-    // Check if it's a group (has "group" property)
-    if ("group" in definition) {
-      // Recursively process all items in the group
-      for (const item of definition.group.items) {
-        Object.assign(config, Widget.getDefinitionDefaultValues(item));
-      }
-    } else {
-      // It's a setting item, extract key and defaultValue
-      const item = definition as WidgetSettingItem;
-      if ("key" in item && "defaultValue" in item) {
-        config[item.key] = item.defaultValue;
-      }
-    }
+  private autoSizer?: WidgetAutoSizer;
+  private initOptions: InitWidgetOptions = {};
+  private runtimeState: WidgetInternalState = {
+    initialized: false,
+    ready: false,
+    position: {
+      x: 0,
+      y: 0,
+    },
+    size: {
+      width: 0,
+      height: 0,
+    },
+  };
 
-    return config;
+  private constructor(widget: IWidget) {
+    this.def = widget;
+    this.webview = getCurrentWebviewWindow();
+
+    const [id, query] = getDecodedWebviewLabel();
+    const params = new URLSearchParams(query);
+    const paramsObj = Object.freeze(Object.fromEntries(params));
+
+    this.id = id as WidgetId;
+    this.decoded = Object.freeze({
+      label: `${id}${query ? `?${query}` : ""}`,
+      monitorId: paramsObj.monitorId || null,
+      instanceId: paramsObj.instanceId || null,
+      params: Object.freeze(Object.fromEntries(params)),
+    });
+  }
+
+  /** Returns the current position and size of the widget */
+  get frame(): Frame {
+    return {
+      x: this.runtimeState.position.x,
+      y: this.runtimeState.position.y,
+      width: this.runtimeState.size.width,
+      height: this.runtimeState.size.height,
+    };
   }
 
   /** Returns the default config of the widget, declared on the widget definition */
   public getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
     for (const definition of this.def.settings) {
-      Object.assign(config, Widget.getDefinitionDefaultValues(definition));
+      Object.assign(config, getDefinitionDefaultValues(definition));
     }
     return config;
   }
@@ -224,13 +175,12 @@ export class Widget {
       hideWebview.cancel();
 
       if (desiredPosition) {
-        const { width, height } = await this.webview.outerSize();
-        const adjusted = await adjustPositionByPlacement({
+        const adjusted = adjustPositionByPlacement({
           frame: {
             x: desiredPosition.x,
             y: desiredPosition.y,
-            width,
-            height,
+            width: this.runtimeState.size.width,
+            height: this.runtimeState.size.height,
           },
           alignX,
           alignY,
@@ -255,19 +205,21 @@ export class Widget {
     const storage = globalThis.window.localStorage;
 
     const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${k}`));
+    if (x && y && width && height) {
+      const frame = {
+        x: Number(x),
+        y: Number(y),
+        width: Number(width),
+        height: Number(height),
+      };
 
-    if (x && y) {
-      const pos = new PhysicalPosition(Math.round(Number(x)), Math.round(Number(y)));
-      // check if the stored position is still valid
-      const monitor = await monitorFromPoint(pos.x, pos.y);
-      if (monitor) {
-        await this.webview.setPosition(pos);
-      }
-    }
-
-    if (width && height) {
-      const size = new PhysicalSize(Math.round(Number(width)), Math.round(Number(height)));
-      await this.webview.setSize(size);
+      const safeFrame = fitIntoMonitor(frame);
+      await this.setPosition({
+        left: safeFrame.x,
+        top: safeFrame.y,
+        right: safeFrame.x + safeFrame.width,
+        bottom: safeFrame.y + safeFrame.height,
+      });
     }
 
     this.webview.onMoved(
@@ -304,11 +256,7 @@ export class Widget {
     this.initOptions = options;
 
     if (options.autoSizeByContent) {
-      this.autoSizer = new WidgetAutoSizer(this.webview, options.autoSizeByContent);
-      // fix for cutted popups, ensure correct size on trigger.
-      this.onTrigger(() => {
-        this.autoSizer?.execute();
-      });
+      this.autoSizer = new WidgetAutoSizer(this, options.autoSizeByContent);
     } else if (options.saveAndRestoreLastRect ?? this.def.preset === WidgetPreset.Desktop) {
       await this.persistPositionAndSize();
     }
@@ -328,6 +276,21 @@ export class Widget {
     }
 
     await startThemingTool();
+    await initMonitorsState();
+
+    // state initialization
+    this.runtimeState.size = await this.webview.outerSize();
+    this.runtimeState.position = await this.webview.outerPosition();
+
+    this.webview.onResized((e) => {
+      this.runtimeState.size.width = e.payload.width;
+      this.runtimeState.size.height = e.payload.height;
+    });
+
+    this.webview.onMoved((e) => {
+      this.runtimeState.position.x = e.payload.x;
+      this.runtimeState.position.y = e.payload.y;
+    });
   }
 
   /**
@@ -364,8 +327,13 @@ export class Widget {
   }
 
   /** If animations are enabled this will animate the movement of the widget */
-  public async setPosition(rect: Rect): Promise<void> {
-    await invoke(SeelenCommand.SetSelfPosition, {
+  public setPosition(rect: Rect): Promise<void> {
+    this.runtimeState.position.x = rect.left;
+    this.runtimeState.position.y = rect.top;
+    this.runtimeState.size.width = rect.right - rect.left;
+    this.runtimeState.size.height = rect.bottom - rect.top;
+
+    return invoke(SeelenCommand.SetSelfPosition, {
       rect: {
         left: Math.round(rect.left),
         top: Math.round(rect.top),
@@ -375,13 +343,17 @@ export class Widget {
     });
   }
 
-  public async show(): Promise<void> {
+  public async show(forceFocus: boolean = true): Promise<void> {
     debouncedClose.cancel();
-    const hwnd = await invoke(SeelenCommand.GetSelfWindowId);
-    await this.webview.show();
-    await invoke(SeelenCommand.RequestFocus, { hwnd }).catch(() => {
-      console.warn(`Failed to focus widget: ${this.decoded.label}`);
-    });
+    if (forceFocus) {
+      const hwnd = await invoke(SeelenCommand.GetSelfWindowId);
+      await this.webview.show();
+      await invoke(SeelenCommand.RequestFocus, { hwnd }).catch(() => {
+        console.warn(`Failed to focus widget: ${this.decoded.label}`);
+      });
+    } else {
+      await this.webview.show();
+    }
   }
 
   public hide(closeAfterInactivity?: boolean): void {
@@ -393,10 +365,47 @@ export class Widget {
 }
 
 const debouncedClose = debounce(() => {
-  Widget.self.webview.hide();
+  Widget.self.webview.close();
 }, 30_000);
 
 type ExtendedGlobalThis = typeof globalThis & {
   __SLU_WIDGET?: IWidget;
   __SLU_WIDGET_INSTANCE?: Widget;
 };
+
+export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
+export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
+export const SeelenWegWidgetId: WidgetId = "@seelen/weg" as WidgetId;
+export const SeelenToolbarWidgetId: WidgetId = "@seelen/fancy-toolbar" as WidgetId;
+export const SeelenWindowManagerWidgetId: WidgetId = "@seelen/window-manager" as WidgetId;
+export const SeelenWallWidgetId: WidgetId = "@seelen/wallpaper-manager" as WidgetId;
+
+function getDecodedWebviewLabel(): [WidgetId, string | undefined] {
+  const encondedLabel = getCurrentWebviewWindow().label;
+  const decodedLabel = new TextDecoder().decode(decodeBase64Url(encondedLabel));
+  const [id, query] = decodedLabel.split("?");
+  if (!id) {
+    throw new Error("Missing widget id on webview label");
+  }
+  return [id as WidgetId, query];
+}
+
+function getDefinitionDefaultValues(definition: WidgetConfigDefinition): Record<string, unknown> {
+  const config: Record<string, unknown> = {};
+
+  // Check if it's a group (has "group" property)
+  if ("group" in definition) {
+    // Recursively process all items in the group
+    for (const item of definition.group.items) {
+      Object.assign(config, getDefinitionDefaultValues(item));
+    }
+  } else {
+    // It's a setting item, extract key and defaultValue
+    const item = definition as WidgetSettingItem;
+    if ("key" in item && "defaultValue" in item) {
+      config[item.key] = item.defaultValue;
+    }
+  }
+
+  return config;
+}

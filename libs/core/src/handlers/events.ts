@@ -6,6 +6,7 @@ export enum SeelenEvent {
   HandleLayeredHitboxes = "handle-layered",
   SystemMonitorsChanged = "system::monitors-changed",
   SystemLanguagesChanged = "system::languages-changed",
+  SystemBrightnessChanged = "system::brightness-changed",
   UserChanged = "user-changed",
   UserFolderChanged = "user::known-folder-changed",
   UserAppWindowsChanged = "user::windows-changed",

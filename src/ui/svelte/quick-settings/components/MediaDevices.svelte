@@ -2,34 +2,18 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { state } from "../state.svelte";
+  import { throttle } from "lodash";
 
   let defaultOutput = $derived(state.mediaOutputs.find((d) => d.isDefaultMultimedia));
   let defaultInput = $derived(state.mediaInputs.find((d) => d.isDefaultMultimedia));
 
-  let volumeTimeouts = new Map<string, number>();
-
-  function onVolumeChange(deviceId: string, e: Event) {
-    const target = e.target as HTMLInputElement;
-    const value = Number(target.value);
-
-    // Clear existing timeout for this device
-    const existingTimeout = volumeTimeouts.get(deviceId);
-    if (existingTimeout) {
-      clearTimeout(existingTimeout);
-    }
-
-    // Set new timeout
-    const timeout = setTimeout(() => {
-      invoke(SeelenCommand.SetVolumeLevel, {
-        deviceId,
-        sessionId: null,
-        level: value,
-      });
-      volumeTimeouts.delete(deviceId);
-    }, 100) as any;
-
-    volumeTimeouts.set(deviceId, timeout);
-  }
+  const setVolumeThrottled = throttle((deviceId: string, level: number) => {
+    invoke(SeelenCommand.SetVolumeLevel, {
+      deviceId,
+      sessionId: null,
+      level,
+    });
+  }, 100);
 
   function toggleMute(deviceId: string) {
     invoke(SeelenCommand.MediaToggleMute, { deviceId, sessionId: null });
@@ -52,7 +36,9 @@
       type="range"
       data-skin="flat"
       value={defaultOutput.volume}
-      oninput={(e) => onVolumeChange(defaultOutput!.id, e)}
+      oninput={(e) => {
+        setVolumeThrottled(defaultOutput.id, Number(e.currentTarget.value));
+      }}
       min={0}
       max={1}
       step={0.01}
@@ -72,7 +58,9 @@
       type="range"
       data-skin="flat"
       value={defaultInput.volume}
-      oninput={(e) => onVolumeChange(defaultInput!.id, e)}
+      oninput={(e) => {
+        setVolumeThrottled(defaultInput.id, Number(e.currentTarget.value));
+      }}
       min={0}
       max={1}
       step={0.01}

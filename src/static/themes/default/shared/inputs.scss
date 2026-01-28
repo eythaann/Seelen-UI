@@ -7,7 +7,7 @@ input[type="range"] {
 
 input[type="range"][data-skin="flat"] {
   height: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   background: var(--color-gray-300);
 
   &::-webkit-slider-runnable-track {
@@ -21,9 +21,14 @@ input[type="range"][data-skin="flat"] {
     box-shadow: -100vw 0 0 100vw var(--ui-color);
   }
 
-  &:hover {
+  &[data-orientation="vertical"] {
+    width: 1.5rem;
+    height: 100%;
+    writing-mode: vertical-lr;
+    direction: rtl;
+
     &::-webkit-slider-thumb {
-      box-shadow: -100vw 0 0 100vw var(--ui-hover-color);
+      box-shadow: 0 100vh 0 100vh var(--ui-color);
     }
   }
 }

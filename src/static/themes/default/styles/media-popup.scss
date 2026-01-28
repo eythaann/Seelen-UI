@@ -159,13 +159,15 @@
     position: relative;
     z-index: 1;
     flex: 1;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     .media-session-title {
-      margin: 0;
+      width: 100%;
       font-size: 14px;
       font-weight: 600;
       overflow: hidden;

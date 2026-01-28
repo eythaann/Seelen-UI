@@ -13,6 +13,7 @@
 - allow set start of week on calendars.
 - extended wallpapers across all monitors.
 - new start menu widget.
+- customizable flyouts (volume, brightness, workspaces, notification, etc)
 
 ### enhancements
 

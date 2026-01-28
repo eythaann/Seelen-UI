@@ -15,6 +15,7 @@ import {
 } from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
+import Compact from "antd/es/space/Compact";
 
 export function FancyToolbarSettings() {
   const settings = getToolbarConfig();
@@ -48,7 +49,7 @@ export function FancyToolbarSettings() {
           </SettingsOption>
           <SettingsOption>
             <span>{t("toolbar.dock_side")}</span>
-            <Button.Group style={{ width: "60px" }}>
+            <Compact>
               {Object.values(FancyToolbarSide).map((side) => (
                 <Button
                   key={side}
@@ -58,7 +59,7 @@ export function FancyToolbarSettings() {
                   <Icon iconName={`CgToolbar${side}`} size={18} />
                 </Button>
               ))}
-            </Button.Group>
+            </Compact>
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>

@@ -4,6 +4,7 @@
   import { Icon, FileIcon } from "libs/ui/svelte/components/Icon";
   import { path } from "@tauri-apps/api";
   import { convertFileSrc } from "@tauri-apps/api/core";
+  import { defaultThumbnail } from "../state.svelte";
 
   interface Props {
     session: MediaPlayer;
@@ -16,18 +17,6 @@
   const BRIGHTNESS_MULTIPLIER = 1.5;
 
   let luminance = $state(0);
-  let defaultThumbnail = $state("");
-
-  async function initDefaultThumbnail() {
-    defaultThumbnail = await path.resolve(
-      await path.resourceDir(),
-      "static",
-      "icons",
-      "music_thumbnail.jpg",
-    );
-  }
-
-  initDefaultThumbnail();
 
   let thumbnailSrc = $derived(convertFileSrc(session?.thumbnail || defaultThumbnail));
 
@@ -105,16 +94,16 @@
     <span class="media-session-author">{session.author}</span>
     <div class="media-session-actions">
       <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaPrev)}>
-        <Icon iconName="TbPlayerSkipBackFilled" {color} />
+        <Icon iconName="IoPlaySkipBack" {color} />
       </button>
       <button
         data-skin="transparent"
         onclick={() => onClickBtn(SeelenCommand.MediaTogglePlayPause)}
       >
-        <Icon iconName={session.playing ? "TbPlayerPauseFilled" : "TbPlayerPlayFilled"} {color} />
+        <Icon iconName={session.playing ? "IoPause" : "IoPlay"} {color} />
       </button>
       <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaNext)}>
-        <Icon iconName="TbPlayerSkipForwardFilled" {color} />
+        <Icon iconName="IoPlaySkipForward" {color} />
       </button>
     </div>
   </div>

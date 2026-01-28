@@ -1,10 +1,17 @@
-import type { WidgetConfigDefinition, WidgetSettingItem, WidgetSettingsDeclarationList } from "@seelen-ui/lib/types";
+import {
+  type WidgetConfigDefinition,
+  WidgetSelectSubtype,
+  type WidgetSettingItem,
+  type WidgetSettingsDeclarationList,
+} from "@seelen-ui/lib/types";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
-import { ColorPicker, Input, InputNumber, Select, Slider, Switch } from "antd";
+import { Button, ColorPicker, Input, InputNumber, Select, Slider, Switch, Tooltip } from "antd";
 import type { ReactNode } from "react";
 import { useMemo } from "react";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
+import Compact from "antd/es/space/Compact";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 
 interface Props {
   // settings definitions
@@ -88,7 +95,11 @@ interface WidgetSettingItemRendererProps {
   onConfigChange: (key: string, value: any) => void;
 }
 
-function WidgetSettingItemRenderer({ def, values, onConfigChange }: WidgetSettingItemRendererProps) {
+function WidgetSettingItemRenderer({
+  def,
+  values,
+  onConfigChange,
+}: WidgetSettingItemRendererProps) {
   // Check if all dependencies are met
   const isDependencyMet = useMemo(() => {
     if (!def.dependencies || def.dependencies.length === 0) {
@@ -125,13 +136,32 @@ function renderInput(
   };
 
   switch (def.type) {
-    case "switch": {
+    case "Switch": {
       return <Switch {...commonProps} />;
     }
 
-    case "select": {
+    case "Select": {
+      if (def.subtype === WidgetSelectSubtype.Inline) {
+        return (
+          <Compact>
+            {def.options.map(({ value, label, icon }) => (
+              <Tooltip key={value} title={<ResourceText text={label} />}>
+                <Button
+                  key={value}
+                  type={value === (values[def.key] ?? def.defaultValue) ? "primary" : "default"}
+                  onClick={() => onConfigChange(def.key, value)}
+                >
+                  {icon ? <Icon iconName={icon as any} /> : value}
+                </Button>
+              </Tooltip>
+            ))}
+          </Compact>
+        );
+      }
+
       // Convert WidgetSelectOption[] to Ant Design Select options format
       const options = def.options.map((opt) => ({
+        icon: opt.icon ? <Icon iconName={opt.icon as any} /> : undefined,
         label: <ResourceText text={opt.label} />,
         value: opt.value,
       }));
@@ -139,7 +169,7 @@ function renderInput(
       return <Select {...commonProps} options={options} />;
     }
 
-    case "input-text": {
+    case "InputText": {
       const textProps = {
         ...commonProps,
         minLength: def.minLength ?? undefined,
@@ -155,7 +185,7 @@ function renderInput(
       return <Input {...textProps} />;
     }
 
-    case "input-number": {
+    case "InputNumber": {
       return (
         <InputNumber
           {...commonProps}
@@ -166,7 +196,7 @@ function renderInput(
       );
     }
 
-    case "range": {
+    case "Range": {
       return (
         <Slider
           {...commonProps}
@@ -178,7 +208,7 @@ function renderInput(
       );
     }
 
-    case "color": {
+    case "Color": {
       return (
         <ColorPicker
           {...commonProps}

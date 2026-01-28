@@ -112,7 +112,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
                   onClick={onClickBtn.bind(null, "media_prev")}
                 >
                   <Icon
-                    iconName="TbPlayerSkipBackFilled"
+                    iconName="IoPlaySkipBack"
                     color={color}
                     size={12}
                   />
@@ -123,7 +123,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
                   onClick={onClickBtn.bind(null, "media_toggle_play_pause")}
                 >
                   <Icon
-                    iconName={session?.playing ? "TbPlayerPauseFilled" : "TbPlayerPlayFilled"}
+                    iconName={session?.playing ? "IoPause" : "IoPlay"}
                     color={color}
                     size={12}
                   />
@@ -134,7 +134,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
                   onClick={onClickBtn.bind(null, "media_next")}
                 >
                   <Icon
-                    iconName="TbPlayerSkipForwardFilled"
+                    iconName="IoPlaySkipForward"
                     color={color}
                     size={12}
                   />
