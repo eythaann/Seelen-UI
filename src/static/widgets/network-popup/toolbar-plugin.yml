@@ -8,10 +8,10 @@ plugin:
   scopes:
     - Network
   tooltip: >-
-    return online ? t("placeholder.ethernet_connected") :
-    t("placeholder.ethernet_disconnected")
+    return online ? t("placeholder.ethernet_connected") : t("placeholder.ethernet_disconnected")
   template: >-
-    if (!online) return icon("TbWorldCancel"); if (usingInterface?.type ===
-    "IEEE80211") return icon("FaWifi"); return icon("FaComputer");
+    if (!online) return icon("TbWorldCancel");
+    if (usingInterface?.type === "IEEE80211") return icon("FaWifi");
+    return icon("FaComputer");
   onClickV2: |-
     trigger("@seelen/network-popup");

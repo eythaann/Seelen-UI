@@ -1,5 +1,3 @@
-// todo remove all anys from this file, should be done with the remotion of redux state.
-
 import { useComputed } from "@preact/signals";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { ToolbarJsScope } from "@seelen-ui/lib/types";
@@ -7,12 +5,10 @@ import { useSyncClockInterval, useThrottle } from "libs/ui/react/utils/hooks";
 import moment from "moment";
 import { useEffect, useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { Selectors } from "../store/app";
-import type { RootState } from "../store/domain";
 import { $settings } from "./mod";
 import { $virtual_desktop } from "./system";
 import { $focused } from "./windows";
+import * as globalState from "./global";
 
 export function useItemScope(scopes: Readonly<ToolbarJsScope[]>) {
   const scope = {} as Record<any, any>;
@@ -94,25 +90,22 @@ function useDateScope() {
 }
 
 function useNotificationsScope() {
-  const count = useSelector((state: RootState) => Selectors.notifications(state).length);
-
+  const count = useComputed(() => globalState.$notifications.value.length);
   return {
-    count,
+    count: count.value,
   };
 }
 
 function useMediaScope() {
-  const {
-    id,
-    volume = 0,
-    muted: isMuted = true,
-  } = useSelector((state: RootState) => Selectors.mediaOutputs(state).find((d: any) => d.isDefaultMultimedia)) || {};
+  const defaultOutputDevice = useComputed(() => globalState.$media_outputs.value.find((d) => d.isDefaultMultimedia));
+  const defaultInputDevice = useComputed(() => globalState.$media_inputs.value.find((d) => d.isDefaultMultimedia));
+  const defaultMediaSession = useComputed(() => globalState.$media_sessions.value.find((d) => d.default));
 
-  const { volume: inputVolume = 0, muted: inputIsMuted = true } =
-    useSelector((state: RootState) => Selectors.mediaInputs(state).find((d: any) => d.isDefaultMultimedia)) || {};
+  const { id, volume = 0, muted: isMuted = true } = defaultOutputDevice.value || {};
 
-  const mediaSession = useSelector((state: RootState) => Selectors.mediaSessions(state).find((d: any) => d.default)) ||
-    null;
+  const { volume: inputVolume = 0, muted: inputIsMuted = true } = defaultInputDevice.value || {};
+
+  const mediaSession = defaultMediaSession.value || null;
 
   function onWheel(e: WheelEvent) {
     const isUp = e.deltaY < 0;
@@ -137,94 +130,89 @@ function useMediaScope() {
 }
 
 function useNetworkScope() {
-  const networkAdapters: any = useSelector(Selectors.networkAdapters);
-  const defaultIp = useSelector(Selectors.networkLocalIp);
-  const online = useSelector(Selectors.online);
+  const online = useComputed(() => globalState.$online.value);
+  const interfaces = useComputed(() => globalState.$network_adapters.value);
+  const defaultIp = useComputed(() => globalState.$network_local_ip.value);
 
-  const usingAdapter = networkAdapters.find((i: any) => i.ipv4 === defaultIp) || null;
+  const usingInterface = useComputed(
+    () => interfaces.value.find((i) => i.ipv4 === defaultIp.value) || null,
+  );
 
   return {
-    online,
-    interfaces: networkAdapters,
-    usingInterface: usingAdapter,
+    online: online.value,
+    interfaces: interfaces.value,
+    usingInterface: usingInterface.value,
   };
 }
 
 function useKeyboardScope() {
-  const languages: any = useSelector(Selectors.languages);
+  const languages = useComputed(() => globalState.$languages.value);
+  const activeLang = useComputed(
+    () => languages.value.find((l) => l.keyboardLayouts.some((k) => k.active)) || languages.value[0],
+  );
+  const activeKeyboard = useComputed(
+    () =>
+      activeLang.value?.keyboardLayouts.find((k) => k.active) ||
+      activeLang.value?.keyboardLayouts[0],
+  );
 
-  const activeLang = languages.find((l: any) => l.keyboardLayouts.some((k: any) => k.active)) || languages[0];
-  const activeKeyboard = activeLang?.keyboardLayouts.find((k: any) => k.active) || activeLang?.keyboardLayouts[0];
-
-  if (!activeLang || !activeKeyboard) {
-    console.error("No active keyboard for unknown reason");
-    return {
-      activeLang: null,
-      activeKeyboard: null,
-      activeLangPrefix: "",
-      activeKeyboardPrefix: "",
-      languages,
-    };
-  }
-
-  let activeLangPrefix = activeLang.nativeName
+  let activeLangPrefix = activeLang.value?.nativeName
     .split("")
     .slice(0, 3)
-    .filter((c: any) => !["(", ")", " "].includes(c))
+    .filter((c) => !["(", ")", " "].includes(c))
     .join("")
-    .toLocaleUpperCase();
+    .toLocaleUpperCase() || "";
 
-  let words = activeKeyboard.displayName.split(/[\s\-\(\)]/);
+  let words = activeKeyboard.value?.displayName.split(/[\s\-\(\)]/) || [];
   let activeKeyboardPrefix = words.length > 1
     ? words
-      .map((word: any) => word[0])
+      .map((word) => word[0])
       .join("")
       .toLocaleUpperCase()
     : words[0]?.slice(0, 3).toLocaleUpperCase() || "";
 
   return {
-    activeLang,
-    activeKeyboard,
+    activeLang: activeLang.value,
+    activeKeyboard: activeKeyboard.value,
     activeLangPrefix,
     activeKeyboardPrefix,
-    languages,
+    languages: languages.value,
   };
 }
 
 function useUserScope() {
-  const user = useSelector(Selectors.user);
+  const user = useComputed(() => globalState.$user.value);
 
   return {
-    user,
+    user: user.value,
   };
 }
 
 function useBluetoothScope() {
-  const bluetoothDevices: any = useSelector(Selectors.bluetoothDevices);
-  const connectedDevices = bluetoothDevices.filter((item: any) => item.connected);
+  const bluetoothDevices = useComputed(() => globalState.$bluetooth_devices.value);
+  const connectedDevices = useComputed(() => bluetoothDevices.value.filter((item) => item.connected));
 
   return {
-    devices: bluetoothDevices,
-    connectedDevices,
+    devices: bluetoothDevices.value,
+    connectedDevices: connectedDevices.value,
   };
 }
 
 function usePowerScope() {
-  const power = useSelector(Selectors.powerStatus);
-  const powerMode = useSelector(Selectors.powerPlan);
-  const batteries = useSelector(Selectors.batteries);
+  const power = useComputed(() => globalState.$power_status.value);
+  const powerMode = useComputed(() => globalState.$power_plan.value);
+  const batteries = useComputed(() => globalState.$batteries.value);
 
   return {
-    power,
-    powerMode,
-    batteries,
+    power: power.value,
+    powerMode: powerMode.value,
+    batteries: batteries.value,
   };
 }
 
 function useFocusedAppScope() {
-  const focusedApp = $focused.value;
   return {
-    focusedApp,
+    focusedApp: $focused.value,
   };
 }
 
