@@ -1,8 +1,8 @@
-goodbye: 再见{{0}}
+goodbye: 再见 {{0}}
 hibernate: 休眠
 lock: 锁定会话
-log_out: 退出
-reboot: 重新启动
-shutdown: 关闭电源
-suspend: 暂停
-uptime: 正常运行时间
+log_out: 注销
+reboot: 重启
+shutdown: 关机
+suspend: 挂起
+uptime: 运行时间
