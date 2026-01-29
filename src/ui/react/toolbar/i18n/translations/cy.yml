@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Ar ôl'
+  smart_charge: Tâl Smart
 bluetooth:
   available: Dyfeisiau sydd ar gael (heb baru)
   cancel: Chansliff
@@ -40,14 +43,13 @@ notifications:
   settings: Gosodiadau Mwy o Hysbysiadau
   title: Hysbysiadau
 placeholder:
-  battery_remaining: '% yn weddill'
   bluetooth_devices: Bluetooth a Dyfeisiau
   ethernet_connected: Mynediad i'r Rhyngrwyd
   ethernet_disconnected: Dim Mynediad i'r Rhyngrwyd
   notifications: Hysbysiadau
   settings: Gosodiadau Cyflym
-  smart_charge: '- Tâl craff'
   volume: Nghyfrol
+plugged: Wedi'i blygio
 settings:
   app_settings: Gosodiadau App
   brightness: Disgleirdeb

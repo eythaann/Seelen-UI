@@ -5,7 +5,13 @@ folder: תיקייה
 no_matching_items: לא נמצאו פריטים התואמים לחיפוש שלך
 open_file_location: פתח את מיקום הקובץ
 pin: פִּין
+query:
+  all: כֹּל
+  apps: אפליקציות
+  files: קבצים
+  web: אינטרנט
 run_as_admin: הפעל כמנהל
 unpin: לְהוֹצִיא סִיכָּה
+web_search: הקש Enter כדי לחפש באינטרנט
 welcome_message: ברוכים הבאים לתפריט אפליקציית ממשק המשתמש של Seelen.
 welcome_message2: בכרטיסייה זו, תוכל להצמיד את האפליקציות המועדפות עליך.

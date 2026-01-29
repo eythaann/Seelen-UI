@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% დარჩენილია'
+  smart_charge: ჭკვიანი დამუხტვა
 bluetooth:
   available: ხელმისაწვდომი მოწყობილობები (არ არის დაწყვილებული)
   cancel: გაუქმება
@@ -40,14 +43,13 @@ notifications:
   settings: მეტი შეტყობინებების პარამეტრები
   title: შეტყობინებები
 placeholder:
-  battery_remaining: დარჩენილი
   bluetooth_devices: Bluetooth & მოწყობილობები
   ethernet_connected: ინტერნეტი
   ethernet_disconnected: ინტერნეტი არ არის
   notifications: შეტყობინებები
   settings: სწრაფი პარამეტრები
-  smart_charge: '- ჭკვიანი მუხტი'
   volume: ტომი
+plugged: შეერთებულა
 settings:
   app_settings: პროგრამის პარამეტრები
   brightness: სიკაშკაშე

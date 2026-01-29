@@ -1,3 +1,6 @@
+battery:
+  remaining: 剩餘 {{0}}%
+  smart_charge: 智能充電
 bluetooth:
   available: 可用設備（未配對）
   cancel: 取消
@@ -40,14 +43,13 @@ notifications:
   settings: 更多的通知設置
   title: 通知
 placeholder:
-  battery_remaining: ％ 其餘的
   bluetooth_devices: 藍牙和設備
   ethernet_connected: 互聯網訪問
   ethernet_disconnected: 沒有互聯網訪問
   notifications: 通知
   settings: 快速設置
-  smart_charge: '  - 明智的費用'
   volume: 體積
+plugged: 堵塞
 settings:
   app_settings: 應用設置
   brightness: 亮度

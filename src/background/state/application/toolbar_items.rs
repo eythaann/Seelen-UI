@@ -1,28 +1,26 @@
-use std::{fs::OpenOptions, io::Write};
+use std::{collections::HashSet, fs::OpenOptions, io::Write};
 
-use seelen_core::{
-    handlers::SeelenEvent,
-    state::{GenericToolbarItem, Placeholder, TextToolbarItem, ToolbarItem, ToolbarItem2},
-};
+use seelen_core::state::{ToolbarItem, ToolbarItem2, ToolbarJsScope, ToolbarState};
 
-use crate::{app::emit_to_webviews, error::Result, utils::constants::SEELEN_COMMON};
+use crate::{error::Result, utils::constants::SEELEN_COMMON};
 
 use super::FullState;
 
 impl FullState {
-    pub fn initial_toolbar_items() -> Placeholder {
-        Placeholder {
+    pub fn initial_toolbar_items() -> ToolbarState {
+        ToolbarState {
             left: vec![
                 ToolbarItem2::Plugin("@seelen/tb-user-menu".into()),
-                ToolbarItem2::Inline(Box::new(ToolbarItem::Text(TextToolbarItem {
+                ToolbarItem2::Inline(Box::new(ToolbarItem {
                     template: "return \"|\"".into(),
                     ..Default::default()
-                }))),
+                })),
                 ToolbarItem2::Plugin("@default/focused-app".into()),
-                ToolbarItem2::Inline(Box::new(ToolbarItem::Generic(GenericToolbarItem {
-                    template: "return window.title ? \"-\" : \"\"".into(),
+                ToolbarItem2::Inline(Box::new(ToolbarItem {
+                    scopes: HashSet::from([ToolbarJsScope::FocusedApp]),
+                    template: "return focusedApp.title ? \"-\" : \"\"".into(),
                     ..Default::default()
-                }))),
+                })),
                 ToolbarItem2::Plugin("@default/focused-app-title".into()),
             ],
             center: vec![ToolbarItem2::Plugin("@seelen/tb-calendar-popup".into())],
@@ -38,11 +36,6 @@ impl FullState {
             ],
             ..Default::default()
         }
-    }
-
-    pub fn emit_toolbar_items(&self) -> Result<()> {
-        emit_to_webviews(SeelenEvent::StateToolbarItemsChanged, &self.toolbar_items);
-        Ok(())
     }
 
     fn _read_toolbar_items(&mut self) -> Result<()> {
@@ -66,7 +59,7 @@ impl FullState {
         }
     }
 
-    pub fn write_toolbar_items(&self, items: &Placeholder) -> Result<()> {
+    pub fn write_toolbar_items(&self, items: &ToolbarState) -> Result<()> {
         let mut file = OpenOptions::new()
             .write(true)
             .create(true)

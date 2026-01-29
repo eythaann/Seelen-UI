@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}} ٪ باقی'
+  smart_charge: سمارٹ چارج
 bluetooth:
   available: دستیاب آلات (جوڑا نہیں)
   cancel: منسوخ کریں
@@ -40,14 +43,13 @@ notifications:
   settings: مزید اطلاعات کی ترتیبات
   title: اطلاعات
 placeholder:
-  battery_remaining: ٪ یٹری
   bluetooth_devices: بلوٹوتھ اور ڈیوائسز
   ethernet_connected: ایتھر نیٹ کنیکٹڈ
   ethernet_disconnected: ایتھر نیٹ ڈسکنیکٹ
   notifications: اطلاعات
   settings: سیٹٹنگ
-  smart_charge: '- سمارٹ چارج'
   volume: والیم
+plugged: پلگ
 settings:
   app_settings: ایپ کی ترتیبات
   brightness: چمک

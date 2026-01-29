@@ -1,3 +1,6 @@
+battery:
+  remaining: เหลืออีก {{0}}%
+  smart_charge: ชาร์จอัจฉริยะ
 bluetooth:
   available: อุปกรณ์ที่มีอยู่ (ไม่จับคู่)
   cancel: ยกเลิก
@@ -40,14 +43,13 @@ notifications:
   settings: การตั้งค่าการแจ้งเตือนเพิ่มเติม
   title: การแจ้งเตือน
 placeholder:
-  battery_remaining: '% ที่เหลืออยู่'
   bluetooth_devices: บลูทู ธ และอุปกรณ์
   ethernet_connected: การเข้าถึงอินเทอร์เน็ต
   ethernet_disconnected: ไม่มีการเข้าถึงอินเทอร์เน็ต
   notifications: การแจ้งเตือน
   settings: การตั้งค่าอย่างรวดเร็ว
-  smart_charge: '- ชาร์จอัจฉริยะ'
   volume: ปริมาณ
+plugged: เสียบปลั๊กแล้ว
 settings:
   app_settings: การตั้งค่าแอป
   brightness: ความสว่าง

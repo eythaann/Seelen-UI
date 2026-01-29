@@ -1,3 +1,6 @@
+battery:
+  remaining: នៅសល់ {{0}}%
+  smart_charge: ការសាកថ្មឆ្លាតវៃ
 bluetooth:
   available: ឧបករណ៍ដែលអាចប្រើបាន (មិនមានគូ)
   cancel: លប់ចោល
@@ -40,14 +43,13 @@ notifications:
   settings: ការកំណត់ការជូនដំណឹងបន្ថែម
   title: ការជូនដំណឹង
 placeholder:
-  battery_remaining: នៅសល់%
   bluetooth_devices: ប៊្លូធូសនិងឧបករណ៍
   ethernet_connected: ការចូលប្រើអ៊ីនធឺណិត
   ethernet_disconnected: គ្មានការចូលប្រើអ៊ីនធឺណិតទេ
   notifications: ការជូនដំណឹង
   settings: ការកំណត់រហ័ស
-  smart_charge: '- គិតថ្លៃឆ្លាត'
   volume: ចមនយន
+plugged: ដោត
 settings:
   app_settings: ការកំណត់កម្មវិធី
   brightness: ពន្លឺ

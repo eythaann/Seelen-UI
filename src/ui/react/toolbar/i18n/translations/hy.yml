@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Մնացել է'
+  smart_charge: Խելացի լիցքավորում
 bluetooth:
   available: Առկա սարքեր (զույգը չեն)
   cancel: Չեղարկել
@@ -40,14 +43,13 @@ notifications:
   settings: Ավելի շատ ծանուցումների պարամետրեր
   title: Ծանուցումներ
 placeholder:
-  battery_remaining: Մնացած
   bluetooth_devices: Bluetooth & սարքեր
   ethernet_connected: Ինտերնետ հասանելիության
   ethernet_disconnected: Ոչ մի ինտերնետ մուտք չկա
   notifications: Ծանուցումներ
   settings: Արագ պարամետրեր
-  smart_charge: '- Խելացի վճար'
   volume: Ծավալ
+plugged: Խցանված
 settings:
   app_settings: Ծրագրի կարգավորումներ
   brightness: Պայծառություն

@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% ይቀራል'
+  smart_charge: ብልጥ ክፍያ
 bluetooth:
   available: የሚገኙ መሣሪያዎች (የተጣመሩ)
   cancel: ይቅር
@@ -40,14 +43,13 @@ notifications:
   settings: ተጨማሪ የማሳወቂያዎች ቅንብሮች
   title: ማሳወቂያዎች
 placeholder:
-  battery_remaining: '% ይቀራል'
   bluetooth_devices: ብሉቱዝ እና መሣሪያዎች
   ethernet_connected: የበይነመረብ መዳረሻ
   ethernet_disconnected: ምንም የበይነመረብ ግንኙነት የለም
   notifications: ማሳወቂያዎች
   settings: ፈጣን ቅንብሮች
-  smart_charge: '- ዘመናዊ ክፍያ'
   volume: ድምጽ
+plugged: ተሰክቷል
 settings:
   app_settings: የመተግበሪያ ቅንጅቶች
   brightness: ብሩህነት

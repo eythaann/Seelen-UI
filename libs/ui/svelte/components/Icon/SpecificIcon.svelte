@@ -13,7 +13,9 @@
   let { name, class: className, ...imgProps }: Props = $props();
 
   let state: IconState = $derived.by(() => {
-    const icon = iconPackManager.value.getMissingIcon();
+    // Depend on _version to trigger reactivity when icon pack changes
+    iconPackManager._version;
+    const icon = iconPackManager.value.getCustomIcon(name);
     if (icon) {
       return {
         src: (prefersDarkColorScheme.value ? icon.dark : icon.light) || icon.base,

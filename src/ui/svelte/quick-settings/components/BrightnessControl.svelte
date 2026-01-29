@@ -2,33 +2,14 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { state } from "../state.svelte";
+  import { brightnessIcon } from "libs/ui/utils";
+  import { throttle } from "lodash";
 
   let brightnessValue = $derived(state.brightness?.current ?? 0);
 
-  function brightnessIcon(brightness: number) {
-    if (brightness >= 60) {
-      return "TbBrightnessUp";
-    }
-    return brightness >= 30 ? "TbBrightnessDown" : "TbBrightnessDownFilled";
-  }
-
-  let brightnessTimeout: number | null = null;
-  function onBrightnessChange(e: Event) {
-    const target = e.target as HTMLInputElement;
-    const value = Number(target.value);
-
-    if (state.brightness) {
-      state.brightness = { ...state.brightness, current: value };
-
-      // Throttle brightness changes
-      if (brightnessTimeout) {
-        clearTimeout(brightnessTimeout);
-      }
-      brightnessTimeout = setTimeout(() => {
-        invoke(SeelenCommand.SetMainMonitorBrightness, { brightness: value });
-      }, 100) as any;
-    }
-  }
+  const setBrightnessThrottled = throttle((brightness: number) => {
+    invoke(SeelenCommand.SetMainMonitorBrightness, { brightness });
+  }, 100);
 </script>
 
 {#if state.brightness}
@@ -40,13 +21,15 @@
         /* TODO: add auto brightness toggle */
       }}
     >
-      <Icon iconName={brightnessIcon(brightnessValue)} size={20} />
+      <Icon iconName={brightnessIcon(brightnessValue)} />
     </button>
     <input
       type="range"
       data-skin="flat"
       value={brightnessValue}
-      oninput={onBrightnessChange}
+      oninput={(e) => {
+        setBrightnessThrottled(Number(e.currentTarget.value));
+      }}
       min={state.brightness.min}
       max={state.brightness.max}
     />

@@ -15,7 +15,11 @@
   let { path, umid, class: className, lazy, ...imgProps }: Props = $props();
 
   let mounted = { value: false };
-  let state: IconState = $derived.by(() => {
+
+  let previousSrc = $state<string | null>(null);
+  let icon: IconState = $derived.by(() => {
+    // Depend on _version to trigger reactivity when icon pack changes
+    iconPackManager._version;
     const icon = iconPackManager.value.getIcon({ path, umid });
     if (icon) {
       return {
@@ -30,22 +34,28 @@
 
   // Watch for src becoming null (trigger icon extraction)
   $effect(() => {
-    if (state.src === null || !mounted.value) {
+    if (!mounted.value) {
       IconPackManager.requestIconExtraction({ path, umid });
       mounted.value = true;
     }
+
+    // Trigger icon extraction when src goes from non-null to null
+    if (previousSrc !== null && icon.src === null) {
+      IconPackManager.requestIconExtraction({ path, umid });
+    }
+    previousSrc = icon.src;
   });
 </script>
 
-{#if state.src}
+{#if icon.src}
   <figure
     {...imgProps}
     class={["slu-icon-outer", className]}
-    data-shape={state.isAproximatelySquare ? "square" : "unknown"}
+    data-shape={icon.isAproximatelySquare ? "square" : "unknown"}
   >
-    <img src={state.src} alt="" loading={lazy ? "lazy" : "eager"} />
-    {#if state.mask}
-      <div class="slu-icon-mask" style="mask-image: url('{state.mask}')"></div>
+    <img src={icon.src} alt="" loading={lazy ? "lazy" : "eager"} />
+    {#if icon.mask}
+      <div class="slu-icon-mask" style="mask-image: url('{icon.mask}')"></div>
     {/if}
   </figure>
 {:else}

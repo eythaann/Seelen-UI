@@ -5,7 +5,13 @@ folder: Mappa
 no_matching_items: Engin atriði fundust sem passa við leitina þína
 open_file_location: Opnaðu skráarstaðsetningu
 pin: Pinna
+query:
+  all: Allt
+  apps: Forrit
+  files: Skrár
+  web: Vefur
 run_as_admin: Keyra sem stjórnandi
 unpin: Losaðu
+web_search: Ýttu á Enter til að leita á vefnum
 welcome_message: Velkomin í Seelen UI app valmyndina.
 welcome_message2: Á þessum flipa geturðu fest uppáhaldsforritin þín.

@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% ਬਾਕੀ'
+  smart_charge: ਸਮਾਰਟ ਚਾਰਜ
 bluetooth:
   available: ਉਪਲਬਧ ਜੰਤਰ (ਪੇਅਰਡ ਨਹੀਂ)
   cancel: ਰੱਦ ਕਰੋ
@@ -40,14 +43,13 @@ notifications:
   settings: ਹੋਰ ਸੂਚਨਾਵਾਂ ਸੈਟਿੰਗਾਂ
   title: ਸੂਚਨਾਵਾਂ
 placeholder:
-  battery_remaining: '% ਬਾਕੀ'
   bluetooth_devices: ਬਲਿ Bluetooth ਟੁੱਥ ਅਤੇ ਉਪਕਰਣ
   ethernet_connected: ਇੰਟਰਨੈੱਟ ਪਹੁੰਚ
   ethernet_disconnected: ਕੋਈ ਇੰਟਰਨੈੱਟ ਪਹੁੰਚ ਨਹੀਂ
   notifications: ਸੂਚਨਾਵਾਂ
   settings: ਤੇਜ਼ ਸੈਟਿੰਗ
-  smart_charge: '- ਸਮਾਰਟ ਚਾਰਜ'
   volume: ਵਾਲੀਅਮ
+plugged: ਪਲੱਗ ਕੀਤਾ
 settings:
   app_settings: ਐਪ ਸੈਟਿੰਗਾਂ
   brightness: ਚਮਕ

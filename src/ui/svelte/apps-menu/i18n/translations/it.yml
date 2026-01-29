@@ -5,7 +5,13 @@ folder: Cartella
 no_matching_items: Nessun articolo trovato corrispondente alla tua ricerca
 open_file_location: Apri Posizione file
 pin: Spillo
+query:
+  all: Tutto
+  apps: App
+  files: File
+  web: Rete
 run_as_admin: Esegui come amministratore
 unpin: Sblocca
+web_search: Premi Invio per effettuare ricerche sul Web
 welcome_message: Benvenuto nel menu dell'app Seelen UI.
 welcome_message2: In questa scheda puoi aggiungere le tue app preferite.

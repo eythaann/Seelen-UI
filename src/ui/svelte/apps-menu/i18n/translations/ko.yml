@@ -5,7 +5,13 @@ folder: 폴더
 no_matching_items: 검색어와 일치하는 항목을 찾을 수 없습니다.
 open_file_location: 파일 위치 열기
 pin: 핀
+query:
+  all: 모두
+  apps: 앱
+  files: 파일
+  web: 편물
 run_as_admin: 관리자로 실행
 unpin: 고정 해제
+web_search: 웹을 검색하려면 Enter를 누르세요.
 welcome_message: Seelen UI 앱 메뉴에 오신 것을 환영합니다.
 welcome_message2: 이 탭에서는 즐겨찾는 앱을 고정할 수 있습니다.

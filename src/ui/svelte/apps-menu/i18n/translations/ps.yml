@@ -5,7 +5,13 @@ folder: پوښۍ
 no_matching_items: ستاسو د لټون سره سمون خوري هیڅ توکي ونه موندل شول
 open_file_location: د فایل ځای خلاص کړئ
 pin: پن
+query:
+  all: ټول
+  apps: ایپس
+  files: فایلونه
+  web: ویب
 run_as_admin: د مدیر په توګه چلول
 unpin: خلاص کړئ
+web_search: د ویب لټون کولو لپاره Enter فشار ورکړئ
 welcome_message: د Seelen UI ایپ مینو ته ښه راغلاست.
 welcome_message2: په دې ټب کې، تاسو کولی شئ خپل غوره ایپسونه پین ​​کړئ.

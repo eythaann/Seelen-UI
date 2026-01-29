@@ -5,7 +5,13 @@ folder: Kansio
 no_matching_items: Hakuasi vastaavia kohteita ei löytynyt
 open_file_location: Avaa Tiedoston sijainti
 pin: Pin
+query:
+  all: Kaikki
+  apps: Sovellukset
+  files: Tiedostot
+  web: Web
 run_as_admin: Suorita järjestelmänvalvojana
 unpin: Irrota kiinnitys
+web_search: Hae verkosta painamalla Enter
 welcome_message: Tervetuloa Seelen UI -sovellusvalikkoon.
 welcome_message2: Tällä välilehdellä voit kiinnittää suosikkisovelluksesi.

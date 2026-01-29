@@ -25,7 +25,7 @@
     lazy = false,
   }: Props = $props();
 
-  const itemId = $derived(item.umid || item.path);
+  const itemId = $derived(item.umid || item.path.toLowerCase());
   const isPreselected = $derived(
     globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem),
   );

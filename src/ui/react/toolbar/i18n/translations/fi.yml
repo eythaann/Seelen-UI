@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}} % jäljellä'
+  smart_charge: Älykäs lataus
 bluetooth:
   available: Käytettävissä olevat laitteet (ei paritettu)
   cancel: Peruuta
@@ -40,14 +43,13 @@ notifications:
   settings: Lisää ilmoitusten asetuksia
   title: Ilmoitukset
 placeholder:
-  battery_remaining: '% jäljelle jäänyt'
   bluetooth_devices: Bluetooth ja laitteet
   ethernet_connected: Internet-yhteys
   ethernet_disconnected: Ei Internet-yhteyttä
   notifications: Ilmoitukset
   settings: Pika -asetukset
-  smart_charge: '- Älykäs maksu'
   volume: Tilavuus
+plugged: Kytketty
 settings:
   app_settings: Sovellusasetukset
   brightness: Kirkkaus

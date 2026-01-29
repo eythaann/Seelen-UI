@@ -28,6 +28,6 @@ pub struct ThirdPartyPlugin {
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(untagged)]
 pub enum PluginValue {
-    Known(KnownPlugin),
+    Known(Box<KnownPlugin>),
     Any(ThirdPartyPlugin),
 }

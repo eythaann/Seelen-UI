@@ -7,6 +7,7 @@ import { OptionsFromEnum } from "../shared/utils/app.ts";
 import { getWegConfig, patchWegConfig } from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
+import Compact from "antd/es/space/Compact";
 
 export const SeelenWegSettings = () => {
   const settings = getWegConfig();
@@ -41,7 +42,7 @@ export const SeelenWegSettings = () => {
           </SettingsOption>
           <SettingsOption>
             <div>{t("weg.dock_side")}</div>
-            <Button.Group style={{ width: "120px" }}>
+            <Compact>
               {Object.values(SeelenWegSide).map((side) => (
                 <Button
                   key={side}
@@ -51,7 +52,7 @@ export const SeelenWegSettings = () => {
                   <Icon iconName={`CgToolbar${side}`} size={18} />
                 </Button>
               ))}
-            </Button.Group>
+            </Compact>
           </SettingsOption>
           <SettingsOption>
             <div>{t("weg.margin")}</div>

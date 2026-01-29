@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% ඉතිරියි'
+  smart_charge: ස්මාර්ට් ආරෝපණය
 bluetooth:
   available: ලබා ගත හැකි උපාංග (යුගලනය නොවේ)
   cancel: අවලංගු කරන්න
@@ -40,14 +43,13 @@ notifications:
   settings: දැනුම්දීම් සැකසුම්
   title: දැනුම්දීම්
 placeholder:
-  battery_remaining: ඉතිරි% ඉතිරිව ඇත
   bluetooth_devices: බ්ලූටූත් සහ උපාංග
   ethernet_connected: අන්තර්ජාල පිවිසුම
   ethernet_disconnected: අන්තර්ජාල ප්රවේශයක් නොමැත
   notifications: දැනුම්දීම්
   settings: ඉක්මන් සැකසුම්
-  smart_charge: '- ස්මාර්ට් ගාස්තුව'
   volume: පරිමාව
+plugged: ප්ලග් කර ඇත
 settings:
   app_settings: යෙදුම් සැකසුම්
   brightness: දීප්තිය

@@ -5,7 +5,13 @@ folder: Ffolder
 no_matching_items: Ni chanfuwyd unrhyw eitemau sy'n cyfateb i'ch chwiliad
 open_file_location: Agor Lleoliad Ffeil
 pin: Pin
+query:
+  all: Pawb
+  apps: Apiau
+  files: Ffeiliau
+  web: Gwe
 run_as_admin: Rhedeg fel Gweinyddwr
 unpin: Dad-binio
+web_search: Pwyswch Enter i chwilio'r we
 welcome_message: Croeso i ddewislen app Seelen UI.
 welcome_message2: Ar y tab hwn, gallwch binio'ch hoff apiau.

@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% બાકી'
+  smart_charge: સ્માર્ટ ચાર્જ
 bluetooth:
   available: ઉપલબ્ધ ઉપકરણો (જોડી નથી)
   cancel: રદ કરવું
@@ -40,14 +43,13 @@ notifications:
   settings: વધુ સૂચનાઓ સેટિંગ્સ
   title: સૂચના
 placeholder:
-  battery_remaining: બાકી %
   bluetooth_devices: બ્લૂટૂથ અને ઉપકરણો
   ethernet_connected: ઇન્ટરનેટનો ઉપયોગ
   ethernet_disconnected: કોઈ ઇન્ટરનેટ એક્સેસ નથી
   notifications: સૂચના
   settings: ઝડપી સેટિંગ્સ
-  smart_charge: '- સ્માર્ટ ચાર્જ'
   volume: જથ્થો
+plugged: પ્લગ કરેલ
 settings:
   app_settings: એપ્લિકેશન સેટિંગ્સ
   brightness: ઉદ્ધતાઈ

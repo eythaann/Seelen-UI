@@ -26,7 +26,7 @@ extern crate num_enum;
 #[cfg(feature = "gen-binds")]
 #[test]
 fn generate_schemas() {
-    use state::{AppConfig, IconPack, Placeholder, Plugin, Settings, Theme, WegItems, Widget};
+    use state::{AppConfig, IconPack, Plugin, Settings, Theme, ToolbarState, WegItems, Widget};
 
     fn write_schema<T>(path: &str)
     where
@@ -40,7 +40,7 @@ fn generate_schemas() {
     write_schema::<Settings>("./gen/schemas/settings.schema.json");
     write_schema::<Vec<AppConfig>>("./gen/schemas/settings_by_app.schema.json");
 
-    write_schema::<Placeholder>("./gen/schemas/toolbar_items.schema.json");
+    write_schema::<ToolbarState>("./gen/schemas/toolbar_items.schema.json");
     write_schema::<WegItems>("./gen/schemas/weg_items.schema.json");
 
     write_schema::<Theme>("./gen/schemas/theme.schema.json");

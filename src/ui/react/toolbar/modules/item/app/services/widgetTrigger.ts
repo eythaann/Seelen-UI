@@ -34,7 +34,7 @@ export async function triggerWidget(widgetId: WidgetId, itemId: string): Promise
   await invoke(SeelenCommand.TriggerWidget, {
     payload: {
       id: widgetId,
-      desiredPosition: [x, y],
+      desiredPosition: { x, y },
       alignX: Alignment.Center,
       alignY: isTopPosition ? Alignment.End : Alignment.Start,
     },

@@ -1,7 +1,8 @@
 #[cfg(test)]
 use crate::{
     rect::Rect, resource::*, state::by_monitor::MonitorConfiguration,
-    state::by_wallpaper::WallpaperInstanceSettings, state::*, system_state::*,
+    state::by_wallpaper::WallpaperInstanceSettings, state::context_menu::*, state::*,
+    system_state::*,
 };
 #[cfg(test)]
 use std::{collections::HashMap, path::PathBuf};
@@ -153,7 +154,7 @@ slu_commands_declaration! {
     StateGetThemes = state_get_themes() -> Vec<Theme>,
     StateGetWegItems = state_get_weg_items(monitor_id: Option<MonitorId>) -> WegItems,
     StateWriteWegItems = state_write_weg_items(items: WegItems),
-    StateGetToolbarItems = state_get_toolbar_items() -> Placeholder,
+    StateGetToolbarItems = state_get_toolbar_items() -> ToolbarState,
     StateGetSettings = state_get_settings(path: Option<PathBuf>) -> Settings,
     StateWriteSettings = state_write_settings(settings: Settings),
     StateGetSettingsByApp = state_get_settings_by_app() -> Vec<AppConfig> ,
@@ -168,6 +169,7 @@ slu_commands_declaration! {
 
     // Widgets
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
+    TriggerContextMenu = trigger_context_menu(menu: ContextMenu, forward_to: Option<String>),
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
     SetSelfPosition = set_self_position(rect: Rect),
@@ -265,4 +267,5 @@ slu_commands_declaration! {
 
     // Start Menu
     GetStartMenuItems = get_start_menu_items() -> Vec<StartMenuItem>,
+    GetNativeStartMenu = get_native_start_menu() -> StartMenuLayout,
 }

@@ -11,22 +11,20 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { useComputed, useSignal } from "@preact/signals";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { ToolbarItem2 } from "@seelen-ui/lib/types";
-import { AnimatedDropdown } from "@shared/components/AnimatedWrappers";
-import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { cx } from "libs/ui/react/utils/styling.ts";
-import { useState } from "react";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import { $toolbar_state } from "../shared/state/items.ts";
 import { $settings } from "../shared/state/mod.ts";
 import { matchIds } from "../shared/utils.ts";
-import { MainContextMenu } from "./ContextMenu.tsx";
 import { ItemsDropableContainer } from "./ItemsContainer.tsx";
 import { componentByModule } from "./mappins.tsx";
 import { $bar_should_be_hidden, $lastFocusedOnMonitor, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
 import { ShowDesktopButton } from "./CornerAction.tsx";
+import { useMainContextMenu } from "./ContextMenu.tsx";
 
 interface Container {
   id: string;
@@ -50,13 +48,7 @@ export function FancyToolbar() {
     },
   ]);
 
-  const [openContextMenu, setOpenContextMenu] = useState(false);
-
-  useWindowFocusChange((focused) => {
-    if (!focused) {
-      setOpenContextMenu(false);
-    }
-  });
+  const contextMenuDef = useMainContextMenu();
 
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: {
@@ -126,49 +118,46 @@ export function FancyToolbar() {
     }
   }
 
+  function onContextMenu() {
+    invoke(SeelenCommand.TriggerContextMenu, {
+      menu: contextMenuDef,
+      forwardTo: null,
+    });
+  }
+
   const activeContainer = $dragging_id.value ? findContainer($dragging_id.value) : undefined;
   const draggingItem = activeContainer?.items.find((item) => matchIds(item, $dragging_id.value!));
 
   return (
-    <AnimatedDropdown
-      animationDescription={{
-        openAnimationName: "ft-bar-context-menu-open",
-        closeAnimationName: "ft-bar-context-menu-close",
-      }}
-      trigger={["contextMenu"]}
-      open={openContextMenu}
-      onOpenChange={setOpenContextMenu}
-      popupRender={() => <MainContextMenu />}
+    <div
+      className={cx("ft-bar", $settings.value.position.toLowerCase(), {
+        "ft-bar-hidden": $bar_should_be_hidden.value,
+      })}
+      data-there-is-maximized-on-background={$thereIsMaximizedOnBg.value}
+      data-focused-is-maximized={!!$lastFocusedOnMonitor.value?.isMaximized}
+      data-focused-is-overlay={!!$lastFocusedOnMonitor.value?.isSeelenOverlay}
+      onContextMenu={onContextMenu}
     >
-      <div
-        className={cx("ft-bar", $settings.value.position.toLowerCase(), {
-          "ft-bar-hidden": $bar_should_be_hidden.value,
-        })}
-        data-there-is-maximized-on-background={$thereIsMaximizedOnBg.value}
-        data-focused-is-maximized={!!$lastFocusedOnMonitor.value?.isMaximized}
-        data-focused-is-overlay={!!$lastFocusedOnMonitor.value?.isSeelenOverlay}
+      <ShowDesktopButton />
+      <BackgroundByLayersV2 prefix="ft-bar" />
+
+      <DndContext
+        collisionDetection={closestCorners}
+        onDragStart={({ active }: DragStartEvent) => {
+          $dragging_id.value = active.id as string;
+        }}
+        onDragOver={handleDragOver}
+        onDragEnd={(e: DragEndEvent) => {
+          handleDragEnd(e);
+          $dragging_id.value = null;
+        }}
+        sensors={sensors}
       >
-        <ShowDesktopButton />
-        <BackgroundByLayersV2 prefix="ft-bar" />
+        {$containers.value.map(({ id, items }) => <ItemsDropableContainer key={id} id={id} items={items} />)}
+        <DragOverlay>{draggingItem && componentByModule(draggingItem)}</DragOverlay>
+      </DndContext>
 
-        <DndContext
-          collisionDetection={closestCorners}
-          onDragStart={({ active }: DragStartEvent) => {
-            $dragging_id.value = active.id as string;
-          }}
-          onDragOver={handleDragOver}
-          onDragEnd={(e: DragEndEvent) => {
-            handleDragEnd(e);
-            $dragging_id.value = null;
-          }}
-          sensors={sensors}
-        >
-          {$containers.value.map(({ id, items }) => <ItemsDropableContainer key={id} id={id} items={items} />)}
-          <DragOverlay>{draggingItem && componentByModule(draggingItem)}</DragOverlay>
-        </DndContext>
-
-        <ShowDesktopButton />
-      </div>
-    </AnimatedDropdown>
+      <ShowDesktopButton />
+    </div>
   );
 }

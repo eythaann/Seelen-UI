@@ -1,20 +1,34 @@
-import { signal } from "@preact/signals";
-import { invoke, PluginList, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
-import type { PluginId, ToolbarItem2 } from "@seelen-ui/lib/types";
+import { effect, signal } from "@preact/signals";
+import { invoke, PluginList, SeelenCommand } from "@seelen-ui/lib";
+import type { PluginId, ToolbarItem2, ToolbarState } from "@seelen-ui/lib/types";
 
 import { matchIds } from "../utils.ts";
+import { debounce } from "lodash";
+import { path } from "@tauri-apps/api";
+import yaml from "js-yaml";
+import { fs } from "@seelen-ui/lib/tauri";
+import { emit, listen } from "@tauri-apps/api/event";
 
-export const $toolbar_state = signal(
-  await invoke(SeelenCommand.StateGetToolbarItems),
-);
-subscribe(
-  SeelenEvent.StateToolbarItemsChanged,
-  (event) => ($toolbar_state.value = event.payload),
-);
+export const $toolbar_state = signal(await invoke(SeelenCommand.StateGetToolbarItems));
+listen("hidden::sync-toolbar-items", ({ payload }) => {
+  // avoid infinite loop
+  if (JSON.stringify(payload) !== JSON.stringify($toolbar_state.value)) {
+    $toolbar_state.value = payload as ToolbarState;
+  }
+});
 
-export const $plugins = signal(
-  (await PluginList.getAsync()).forCurrentWidget(),
-);
+export const save = debounce(async (value: ToolbarState) => {
+  console.trace("Saving toolbar state");
+  const filePath = await path.join(await path.appDataDir(), "toolbar_items.yml");
+  await fs.writeTextFile(filePath, yaml.dump(value));
+}, 1000);
+
+effect(() => {
+  emit("hidden::sync-toolbar-items", $toolbar_state.value);
+  save($toolbar_state.value);
+});
+
+export const $plugins = signal((await PluginList.getAsync()).forCurrentWidget());
 await PluginList.onChange((list) => {
   $plugins.value = list.forCurrentWidget();
 });
@@ -32,8 +46,7 @@ export const $actions = {
   },
   addItem(id: PluginId) {
     const { left, center, right } = $toolbar_state.value;
-    const alreadyExists = left.includes(id) || right.includes(id) ||
-      center.includes(id);
+    const alreadyExists = left.includes(id) || right.includes(id) || center.includes(id);
     if (!alreadyExists) {
       $toolbar_state.value = {
         ...$toolbar_state.value,

@@ -1,0 +1,22 @@
+.context-menu {
+  width: fit-content;
+  min-width: 200px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .menu-item {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+
+    .menu-item-label {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: left;
+    }
+  }
+}

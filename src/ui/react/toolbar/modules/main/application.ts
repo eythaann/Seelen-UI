@@ -1,18 +1,6 @@
-import { fs } from "@seelen-ui/lib/tauri";
-import { type PluginId, type ToolbarItem, ToolbarModuleType } from "@seelen-ui/lib/types";
-import { path } from "@tauri-apps/api";
-import yaml from "js-yaml";
-import { debounce } from "lodash";
+import { type PluginId, type ToolbarItem, ToolbarJsScope } from "@seelen-ui/lib/types";
 
 import { $toolbar_state } from "../shared/state/items.ts";
-
-$toolbar_state.subscribe(debounce(async (value) => {
-  const filePath = await path.join(
-    await path.appDataDir(),
-    "toolbar_items.yml",
-  );
-  await fs.writeTextFile(filePath, yaml.dump(value));
-}, 1000));
 
 export function RestoreToDefault() {
   // based on src\background\state\application\toolbar_items.rs
@@ -22,14 +10,13 @@ export function RestoreToDefault() {
       "@seelen/tb-user-menu" as PluginId,
       {
         id: crypto.randomUUID(),
-        type: ToolbarModuleType.Text,
         template: 'return "|"',
       } as ToolbarItem,
       "@default/focused-app" as PluginId,
       {
         id: crypto.randomUUID(),
-        type: ToolbarModuleType.Generic,
-        template: 'return window.title ? "-" : ""',
+        scopes: [ToolbarJsScope.FocusedApp],
+        template: 'return focusedApp.title ? "-" : ""',
       } as ToolbarItem,
       "@default/focused-app-title" as PluginId,
     ],

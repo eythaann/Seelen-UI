@@ -92,7 +92,7 @@ impl FullState {
             return base;
         };
 
-        let KnownPlugin::WManager(layout) = plugin else {
+        let KnownPlugin::WManager(layout) = &**plugin else {
             return base;
         };
 

@@ -1,3 +1,6 @@
+battery:
+  remaining: 剩余 {{0}}%
+  smart_charge: 智能充电
 bluetooth:
   available: 可用设备（未配对）
   cancel: 取消
@@ -53,14 +56,13 @@ notifications:
   settings: 更多通知设置
   title: 通知
 placeholder:
-  battery_remaining: '% 剩余'
   bluetooth_devices: 蓝牙与设备
   ethernet_connected: 已连接互联网
   ethernet_disconnected: 无互联网连接
   notifications: 通知
   settings: 快速设置
-  smart_charge: ' - 智能充电'
   volume: 音量
+plugged: 堵塞
 settings:
   app_settings: 应用设置
   brightness: 亮度

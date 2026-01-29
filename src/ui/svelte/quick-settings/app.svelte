@@ -30,11 +30,11 @@
 
   <div class="quick-settings-footer">
     <button data-skin="transparent" onclick={openAppSettings} title="App Settings">
-      <Icon iconName="RiSettings4Fill" size={20} />
+      <Icon iconName="RiSettings4Fill" />
     </button>
 
     <button data-skin="transparent" onclick={openPowerMenu} title="Power">
-      <Icon iconName="IoPower" size={20} />
+      <Icon iconName="IoPower" />
     </button>
   </div>
 </div>

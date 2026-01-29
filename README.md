@@ -146,16 +146,6 @@ Winget versions and also it receives notifications updates on new release.
 Once installed or extracted, simply open the program. The easy-to-use and intuitive GUI will guide you through the
 configuration process. Customize your desktop environment effortlessly.
 
-## Documentation
-
-For in-depth details on various aspects of Seelen UI, explore the following documents:
-
-- [Languages](./documentation/languages.md) - Information regarding translations.
-- [Toolbar](./documentation/toolbar.md) - Details about customizing and using the toolbar.
-- [Themes](https://seelen.io/blog/seelen-ui-theme-tutorial) - Guidance on creating and applying themes.
-- [Window Manager](./documentation/window_manager.md) - Instructions on configuring the window manager.
-- [Project](./documentation/project.md) - General information about the project and its structure.
-
 ## Upcoming Features
 
 I’m excited to share some upcoming features for Seelen UI! Here’s a glimpse of what’s planned for the future:
@@ -198,7 +188,6 @@ The Seelen UI Team
 We welcome contributions!
 
 - Read the [Contribution Guidelines](CONTRIBUTING) to get started with terms.
-- Read the [Project Documentation](documentation/project.md) to understand the project structure and how to use it.
 
 ## License
 

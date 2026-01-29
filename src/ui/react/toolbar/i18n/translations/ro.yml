@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% rămase'
+  smart_charge: Încărcare inteligentă
 bluetooth:
   available: Dispozitive disponibile (neperecheate)
   cancel: Anulează
@@ -40,14 +43,13 @@ notifications:
   settings: Mai multe setări pentru notificări
   title: Notificări
 placeholder:
-  battery_remaining: '% rămas'
   bluetooth_devices: Bluetooth & Devices
   ethernet_connected: acces la internet
   ethernet_disconnected: Fara acces la internet
   notifications: Notificări
   settings: Setări rapide
-  smart_charge: '- Încărcare inteligentă'
   volume: Volum
+plugged: Conectat
 settings:
   app_settings: Setări aplicație
   brightness: Luminozitate

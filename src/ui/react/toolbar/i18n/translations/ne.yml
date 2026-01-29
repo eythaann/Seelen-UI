@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% बाँकी'
+  smart_charge: स्मार्ट चार्ज
 bluetooth:
   available: उपलब्ध उपकरणहरू (जोडी छैन)
   cancel: रद्द गर्नु
@@ -40,14 +43,13 @@ notifications:
   settings: अधिक सूचनाहरू सेटिंग्स
   title: सूचना
 placeholder:
-  battery_remaining: '% बाँकी'
   bluetooth_devices: ब्लुटुथ र उपकरणहरू
   ethernet_connected: इन्टरनेट पहुँच
   ethernet_disconnected: कुनै इन्टर्नेट पहुँच छैन
   notifications: सूचना
   settings: द्रुत सेटिंग्स
-  smart_charge: '- स्मार्ट शुल्क'
   volume: आवाज
+plugged: प्लग गरिएको
 settings:
   app_settings: अनुप्रयोग सेटिंग्स
   brightness: काठको जग

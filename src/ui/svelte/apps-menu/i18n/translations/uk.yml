@@ -5,7 +5,13 @@ folder: Папка
 no_matching_items: Не знайдено елементів, що відповідають вашому пошуку
 open_file_location: Відкрийте розташування файлу
 pin: Pin
+query:
+  all: все
+  apps: програми
+  files: Файли
+  web: Інтернет
 run_as_admin: Запуск від імені адміністратора
 unpin: Відкріпити
+web_search: Натисніть Enter для пошуку в Інтернеті
 welcome_message: Ласкаво просимо в меню програми Seelen UI.
 welcome_message2: На цій вкладці ви можете закріпити улюблені програми.

@@ -1,3 +1,6 @@
+battery:
+  remaining: Залишилося {{0}}%.
+  smart_charge: Smart Charge
 bluetooth:
   available: Доступні пристрої (не в парі)
   cancel: Скасувати
@@ -40,14 +43,13 @@ notifications:
   settings: Більше налаштувань сповіщень
   title: Сповіщення
 placeholder:
-  battery_remaining: '% залишилось'
   bluetooth_devices: Bluetooth та пристрої
   ethernet_connected: Доступ в інтернет
   ethernet_disconnected: Немає доступу до Інтернету
   notifications: Сповіщення
   settings: Швидкі налаштування
-  smart_charge: '- розумний заряд'
   volume: Гучність
+plugged: Підключено
 settings:
   app_settings: Налаштування додатку
   brightness: Яскравість

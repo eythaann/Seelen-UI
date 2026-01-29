@@ -1,3 +1,6 @@
+battery:
+  remaining: ຍັງເຫຼືອ {{0}}%.
+  smart_charge: ການສາກໄຟອັດສະລິຍະ
 bluetooth:
   available: ອຸປະກອນທີ່ມີຢູ່ (ບໍ່ໄດ້ຈັບຄູ່ກັນ)
   cancel: ຍົກເລີກ
@@ -40,14 +43,13 @@ notifications:
   settings: ການຕັ້ງຄ່າການແຈ້ງເຕືອນເພີ່ມເຕີມ
   title: ແຈ້ງການ
 placeholder:
-  battery_remaining: ສ່ວນທີ່ເຫຼືອ
   bluetooth_devices: Bluetooth & ອຸປະກອນ
   ethernet_connected: ການ​ເຂົ້າ​ເຖິງ​ອິນ​ເຕີ​ເນັດ
   ethernet_disconnected: ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ
   notifications: ແຈ້ງການ
   settings: ການຕັ້ງຄ່າດ່ວນ
-  smart_charge: '- ຮັບຜິດຊອບສະຫຼາດ'
   volume: ປະລິມານ
+plugged: ສຽບ
 settings:
   app_settings: ການຕັ້ງຄ່າແອັບ app
   brightness: ຄວາມສະຫວ່າງ

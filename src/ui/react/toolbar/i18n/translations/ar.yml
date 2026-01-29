@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% متبقي'
+  smart_charge: الشحن الذكي
 bluetooth:
   available: الأجهزة المتوفرة (غير مقترنة)
   cancel: إلغاء
@@ -40,14 +43,13 @@ notifications:
   settings: المزيد من إعدادات الإشعارات
   title: الإشعارات
 placeholder:
-  battery_remaining: ٪ متبقي
   bluetooth_devices: بلوتوث
   ethernet_connected: خدمة الإنترنت
   ethernet_disconnected: لا يوجد اتصال بالإنترنت
   notifications: الإشعارات
   settings: الإعدادات السريعة
-  smart_charge: '- الشحن الذكي'
   volume: الصوت
+plugged: موصول
 settings:
   app_settings: إعدادات التطبيقات
   brightness: السطوع

@@ -52,6 +52,7 @@ slu_events_declaration! {
 
     SystemMonitorsChanged(Vec<PhysicalMonitor>) as "system::monitors-changed",
     SystemLanguagesChanged(Vec<SystemLanguage>) as "system::languages-changed",
+    SystemBrightnessChanged(Brightness) as "system::brightness-changed",
 
     UserChanged(User) as "user-changed",
     UserFolderChanged(FolderChangedArgs) as "user::known-folder-changed",
@@ -84,7 +85,6 @@ slu_events_declaration! {
 
     StateSettingsChanged(Settings) as "settings-changed",
     StateWegItemsChanged as "weg-items",
-    StateToolbarItemsChanged(Placeholder) as "toolbar-items",
     StateThemesChanged(Vec<Theme>) as "themes",
     StateSettingsByAppChanged(Vec<AppConfig>) as "settings-by-app",
     StateIconPacksChanged(Vec<IconPack>) as "icon-packs",

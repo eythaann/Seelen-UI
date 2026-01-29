@@ -1,0 +1,108 @@
+body,
+#root {
+  width: min-content;
+  height: min-content;
+  overflow: hidden;
+  background: transparent;
+}
+
+.flyout {
+  border-radius: 10px;
+  padding: 8px;
+  margin: 10px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background: var(--color-gray-100);
+
+  .workspace,
+  .volume,
+  .brightness,
+  .player {
+    height: 1.5rem;
+    width: 16rem;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .workspace-name {
+    font-weight: 600;
+  }
+
+  .player {
+    .player-thumbnail-container {
+      overflow: hidden;
+      border-radius: 50%;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .player-info {
+      flex: 1;
+      overflow: hidden;
+
+      .player-title,
+      .player-author {
+        font-size: 0.8rem;
+        line-height: 1em;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .player-title {
+        font-weight: 600;
+      }
+
+      .player-timeline {
+        display: none;
+      }
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* other themes could display it, but by default it's unused */
+    .player-progress {
+      display: none;
+    }
+  }
+}
+
+.flyout[data-placement="right"],
+.flyout[data-placement="left"] {
+  .workspace,
+  .volume,
+  .brightness,
+  .player {
+    height: 16rem;
+    width: 1.5rem;
+    flex-direction: column;
+  }
+
+  .player-controls {
+    flex-direction: column;
+  }
+}
+
+.flyout[data-placement="right"] {
+  .player-info,
+  .workspace-name {
+    writing-mode: sideways-rl;
+    text-orientation: sideways;
+  }
+}
+
+.flyout[data-placement="left"] {
+  .player-info,
+  .workspace-name {
+    writing-mode: sideways-lr;
+    text-orientation: sideways;
+  }
+}

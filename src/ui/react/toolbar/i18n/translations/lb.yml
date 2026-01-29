@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Rescht'
+  smart_charge: Smart Charge
 bluetooth:
   available: Verfügbaren Apparater (net gepaart)
   cancel: Ofbriechen
@@ -40,14 +43,13 @@ notifications:
   settings: Méi Notifikatiounen Astellunge
   title: Notifikatiounen
 placeholder:
-  battery_remaining: '% bleiwen'
   bluetooth_devices: Bluetooth & Apparater
   ethernet_connected: Internet Zougang
   ethernet_disconnected: Keen Internetzougang
   notifications: Notifikatiounen
   settings: Quick Astellungen
-  smart_charge: '- Smart charge'
   volume: Vuesso
+plugged: Verstoppt
 settings:
   app_settings: App Astellunge
   brightness: Hellegkeet

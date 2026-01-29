@@ -5,7 +5,13 @@ folder: Хавтас
 no_matching_items: Таны хайлтад тохирох зүйл олдсонгүй
 open_file_location: Файлын байршлыг нээх
 pin: Pin
+query:
+  all: Бүгд
+  apps: Програмууд
+  files: Файлууд
+  web: Вэб
 run_as_admin: Администратороор ажиллуулна уу
 unpin: Буулгах
+web_search: Вэбээс хайхын тулд Enter дарна уу
 welcome_message: Seelen UI програмын цэсэнд тавтай морилно уу.
 welcome_message2: Энэ таб дээр та дуртай програмуудаа хавчуулж болно.

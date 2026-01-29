@@ -74,7 +74,8 @@ metadata:
 icon: MdCenterFocusStrong
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: generic
-  template: 'return [AppIcon({ path: window.exe, umid: window.umid }), "  ", window.name]'
+  scopes:
+    - FocusedApp
+  template: 'return [AppIcon({ path: focusedApp.exe, umid: focusedApp.umid }), "  ", focusedApp.name]'
   style:
     flexShrink: 0

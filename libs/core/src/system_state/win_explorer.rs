@@ -12,6 +12,22 @@ pub struct StartMenuItem {
     pub display_name: String,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+#[serde(rename_all = "camelCase")]
+pub struct StartMenuLayout {
+    pub pinned_list: Vec<StartMenuLayoutItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+pub enum StartMenuLayoutItem {
+    DestopAppId(String),
+    PackagedAppId(String),
+    DesktopAppLink(String),
+    SecondaryTile(String),
+}
+
 #[derive(Debug, Clone, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct TrayIcon {

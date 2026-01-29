@@ -18,11 +18,11 @@ use crate::{
 
 use super::{
     application::FULL_STATE,
-    domain::{AppConfig, Placeholder, Settings},
+    domain::{AppConfig, Settings, ToolbarState},
 };
 
 #[tauri::command(async)]
-pub fn state_get_toolbar_items() -> Placeholder {
+pub fn state_get_toolbar_items() -> ToolbarState {
     FULL_STATE.load().toolbar_items.clone()
 }
 

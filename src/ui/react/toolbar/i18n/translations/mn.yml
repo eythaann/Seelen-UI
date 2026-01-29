@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% үлдсэн'
+  smart_charge: Ухаалаг цэнэглэгч
 bluetooth:
   available: Боломжтой төхөөрөмжүүд (хосолсонгүй)
   cancel: Цуаах
@@ -40,14 +43,13 @@ notifications:
   settings: Илүү олон мэдэгдлийн тохиргоо
   title: Мэдэгдэл
 placeholder:
-  battery_remaining: '% үлдсэн'
   bluetooth_devices: Блютүүт ба төхөөрөмж
   ethernet_connected: Интернэт интернет нэвтрэх
   ethernet_disconnected: Интернэтэд нэвтрэх боломжгүй байна
   notifications: Мэдэгдэл
   settings: Түлэлцэн тохиргоо
-  smart_charge: '- ухаалаг цэнэг'
   volume: Хэмжээ
+plugged: Залгаастай
 settings:
   app_settings: Дуулахын тохиргоо
   brightness: Тод

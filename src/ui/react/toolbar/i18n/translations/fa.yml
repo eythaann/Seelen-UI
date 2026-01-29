@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% باقی مانده است'
+  smart_charge: شارژ هوشمند
 bluetooth:
   available: دستگاه های موجود (جفت نشده)
   cancel: لغو کردن
@@ -40,14 +43,13 @@ notifications:
   settings: تنظیمات اعلان بیشتر
   title: اعلان ها
 placeholder:
-  battery_remaining: ٪ باقی مانده
   bluetooth_devices: بلوتوث و دستگاه
   ethernet_connected: دسترسی به اینترنت
   ethernet_disconnected: بدون دسترسی به اینترنت
   notifications: اطلاعیه
   settings: تنظیمات سریع
-  smart_charge: '- شارژ هوشمند'
   volume: جلد
+plugged: وصل شده است
 settings:
   app_settings: تنظیمات برنامه
   brightness: روشنایی

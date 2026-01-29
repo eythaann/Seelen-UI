@@ -51,7 +51,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.2.2",
-    "@nyariv/sandboxjs": "^0.8.24",
+    "@nyariv/sandboxjs": "^0.8.26",
     "@reduxjs/toolkit": "^2.5.0",
     "@seelen-ui/lib": "file:./libs/core/npm",
     "@seelen/translation-toolkit": "^1.1.10",
@@ -84,7 +84,7 @@
     "svelte-check": "^4.3.5",
     "toml": "^3.0.0",
     "tsx": "^4.19.3",
-    "typescript": "5.3.3",
+    "typescript": "^5.9.3",
     "yargs": "^17.7.2",
     "zod": "^3.24.3"
   }

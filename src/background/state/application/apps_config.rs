@@ -25,7 +25,7 @@ impl FullState {
         Ok(self.settings_by_app.search(&title, &class, &exe, &path))
     }
 
-    fn _load_settings_by_app(&mut self) -> Result<()> {
+    fn _load_bundled_settings_by_app(&mut self) -> Result<()> {
         let apps_templates_path = SEELEN_COMMON.bundled_app_configs_path();
 
         self.settings_by_app.clear();
@@ -43,8 +43,8 @@ impl FullState {
         Ok(())
     }
 
-    pub(super) fn load_settings_by_app(&mut self) {
-        if let Err(e) = self._load_settings_by_app() {
+    pub(super) fn load_bundled_settings_by_app(&mut self) {
+        if let Err(e) = self._load_bundled_settings_by_app() {
             log::error!("Error loading settings by app: {e}");
         }
     }

@@ -5,7 +5,8 @@ metadata:
 icon: TbBluetooth
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: generic
+  scopes:
+    - Bluetooth
   tooltip: |-
     return "Bluetooth";
   template: |-

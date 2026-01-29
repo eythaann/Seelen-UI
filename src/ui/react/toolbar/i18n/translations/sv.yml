@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% återstår'
+  smart_charge: Smart Charge
 bluetooth:
   available: Tillgängliga enheter (ej ihopkopplade)
   cancel: Avbryt
@@ -40,14 +43,13 @@ notifications:
   settings: Fler inställningar för aviseringar
   title: Meddelanden
 placeholder:
-  battery_remaining: '% återstående'
   bluetooth_devices: Bluetooth & enheter
   ethernet_connected: internetåtkomst
   ethernet_disconnected: Ingen internetuppkoppling
   notifications: Meddelanden
   settings: Snabbinställningar
-  smart_charge: '- Smart laddning'
   volume: Volym
+plugged: Pluggad
 settings:
   app_settings: App inställningar
   brightness: Ljusstyrka

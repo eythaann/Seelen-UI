@@ -5,7 +5,8 @@ metadata:
 icon: FaRegKeyboard
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: keyboard
+  scopes:
+    - Keyboard
   tooltip: return [activeLang.name, " - ", activeKeyboard.displayName]
   template: |-
     const inputsLenght = activeLang.keyboardLayouts.length;

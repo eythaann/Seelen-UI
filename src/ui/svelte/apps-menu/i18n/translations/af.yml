@@ -5,7 +5,13 @@ folder: Vouer
 no_matching_items: Geen items gevind wat by jou soektog pas nie
 open_file_location: Maak lêerligging oop
 pin: Speld vas
+query:
+  all: Almal
+  apps: Toepassings
+  files: Lêers
+  web: Web
 run_as_admin: Begin as administrateur
 unpin: Ontspeld
+web_search: Druk Enter om op die web te soek
 welcome_message: Welkom by die Seelen UI-programkieslys.
 welcome_message2: Op hierdie oortjie kan jy jou gunsteling programme vaspen.

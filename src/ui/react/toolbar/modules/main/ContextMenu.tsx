@@ -1,23 +1,58 @@
-import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import type { PluginId, WidgetId } from "@seelen-ui/lib/types";
-import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
-import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { Button, Checkbox, Flex, Input, Menu, Space } from "antd";
-import type { MenuItemType } from "antd/es/menu/interface";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import type { ContextMenu, ContextMenuItem, PluginId, WidgetId } from "@seelen-ui/lib/types";
 
-import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
+import { useTranslation } from "react-i18next";
 
 import { RestoreToDefault } from "./application.ts";
 
 import { $actions, $plugins, $toolbar_state } from "../shared/state/items.ts";
-import type { IconName } from "libs/ui/icons.ts";
+import { getResourceText } from "@shared";
 
-export function MainContextMenu() {
-  const [customText, setCustomText] = useState("");
+const identifier = crypto.randomUUID();
+const modulesIdentifier = crypto.randomUUID();
 
-  const { t } = useTranslation();
+const onContextMenuClick = "onContextMenuClick";
+const onTogglePlugin = "onTogglePlugin";
+
+Widget.self.webview.listen(onContextMenuClick, ({ payload }) => {
+  const { key, checked: _checked } = payload as any;
+
+  if (key === "reoder") {
+    $toolbar_state.value = {
+      ...$toolbar_state.value,
+      isReorderDisabled: !$toolbar_state.value.isReorderDisabled,
+    };
+  }
+
+  if (key === "task_manager") {
+    invoke(SeelenCommand.OpenFile, { path: "Taskmgr.exe" });
+  }
+
+  if (key === "settings") {
+    invoke(SeelenCommand.TriggerWidget, {
+      payload: { id: "@seelen/settings" as WidgetId },
+    });
+  }
+
+  if (key === "restore") {
+    RestoreToDefault();
+  }
+});
+
+Widget.self.webview.listen(onTogglePlugin, ({ payload }) => {
+  const { key: pluginId, checked } = payload as any;
+  if (checked) {
+    $actions.addItem(pluginId);
+  } else {
+    $actions.removeItem(pluginId);
+  }
+});
+
+export function useMainContextMenu(): ContextMenu {
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
 
   const allItems = [
     ...$toolbar_state.value.left,
@@ -25,138 +60,70 @@ export function MainContextMenu() {
     ...$toolbar_state.value.right,
   ];
 
-  const isAlreadyAdded = (id: PluginId) => {
+  function isAlreadyAdded(id: PluginId): boolean {
     return allItems.some((item) => item === id);
-  };
-
-  function addCustomTextToToolbar() {
-    $actions.addTextItem(customText);
-    setCustomText("");
   }
 
-  return (
-    <BackgroundByLayersV2 className="tb-context-menu-container">
-      <Menu
-        className="tb-context-menu"
-        items={[
+  return {
+    identifier,
+    items: [
+      {
+        type: "Submenu",
+        icon: "CgExtensionAdd",
+        label: t("context_menu.modules"),
+        identifier: modulesIdentifier,
+        items: [
+          // restore
           {
-            key: "add_module",
-            icon: <Icon iconName="CgExtensionAdd" />,
-            label: (
-              <AnimatedPopover
-                trigger="hover"
-                placement="right"
-                content={
-                  <BackgroundByLayersV2 className="tb-context-menu-container">
-                    <Menu
-                      className="tb-context-menu"
-                      items={[
-                        {
-                          key: "restore",
-                          icon: <Icon iconName="TbRestore" />,
-                          label: t("context_menu.restore"),
-                          onClick() {
-                            RestoreToDefault();
-                          },
-                        },
-                        {
-                          type: "divider",
-                        },
-                        {
-                          key: "custom-text",
-                          label: (
-                            <Space.Compact block>
-                              <Input
-                                placeholder={t("context_menu.add_custom_text")}
-                                value={customText}
-                                onChange={(e) => setCustomText(e.currentTarget.value)}
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter") {
-                                    addCustomTextToToolbar();
-                                  }
-                                }}
-                              />
-                              <Button type="primary" onClick={addCustomTextToToolbar}>
-                                <Icon iconName="MdOutlineTextFields" />
-                              </Button>
-                            </Space.Compact>
-                          ),
-                        },
-                        {
-                          type: "divider",
-                        },
-                        ...$plugins.value
-                          .toSorted((p1, p2) => p1.id.localeCompare(p2.id))
-                          .map<MenuItemType>((plugin) => {
-                            const added = isAlreadyAdded(plugin.id);
-                            return {
-                              key: plugin.id,
-                              label: (
-                                <div className="tb-context-menu-module-item">
-                                  <Icon iconName={plugin.icon as IconName} />
-                                  <Checkbox checked={added} />
-                                  <span className="tb-context-menu-module-item-text">
-                                    {plugin.id}
-                                  </span>
-                                </div>
-                              ),
-                              onClick: () => {
-                                if (added) {
-                                  $actions.removeItem(plugin.id);
-                                } else {
-                                  $actions.addItem(plugin.id);
-                                }
-                              },
-                            };
-                          }),
-                      ]}
-                    />
-                  </BackgroundByLayersV2>
-                }
-              >
-                <Flex justify="space-between" align="center">
-                  {t("context_menu.modules")}
-                  <Icon iconName="FaChevronRight" size={12} />
-                </Flex>
-              </AnimatedPopover>
-            ),
+            type: "Item",
+            key: "restore",
+            icon: "TbRestore",
+            label: t("context_menu.restore"),
+            callbackEvent: onContextMenuClick,
           },
           {
-            type: "divider",
+            type: "Separator",
           },
-          {
-            key: "reoder",
-            icon: <Icon iconName={$toolbar_state.value.isReorderDisabled ? "VscUnlock" : "VscLock"} />,
-            label: t(
-              $toolbar_state.value.isReorderDisabled ? "context_menu.reorder_enable" : "context_menu.reorder_disable",
-            ),
-            onClick() {
-              $toolbar_state.value = {
-                ...$toolbar_state.value,
-                isReorderDisabled: !$toolbar_state.value.isReorderDisabled,
-              };
-            },
-          },
-          {
-            key: "task_manager",
-            icon: <Icon iconName="PiChartLineFill" />,
-            label: t("context_menu.task_manager"),
-            onClick() {
-              invoke(SeelenCommand.OpenFile, { path: "Taskmgr.exe" });
-            },
-          },
-          {
-            key: "settings",
-            icon: <Icon iconName="RiSettings4Fill" />,
-            label: t("context_menu.settings"),
-            onClick() {
-              invoke(SeelenCommand.TriggerWidget, {
-                payload: { id: "@seelen/settings" as WidgetId },
-              });
-            },
-          },
-        ]}
-      />
-    </BackgroundByLayersV2>
-  );
+          ...$plugins.value
+            .map<Extract<ContextMenuItem, { type: "Item" }>>((plugin) => ({
+              type: "Item",
+              key: plugin.id,
+              label: getResourceText(plugin.metadata.displayName, language),
+              icon: plugin.icon,
+              callbackEvent: onTogglePlugin,
+              checked: isAlreadyAdded(plugin.id),
+            }))
+            .toSorted((p1, p2) => p1.label.localeCompare(p2.label)),
+        ],
+      },
+      {
+        type: "Separator",
+      },
+      {
+        type: "Item",
+        key: "reoder",
+        icon: $toolbar_state.value.isReorderDisabled ? "VscUnlock" : "VscLock",
+        label: t(
+          $toolbar_state.value.isReorderDisabled ? "context_menu.reorder_enable" : "context_menu.reorder_disable",
+        ),
+        callbackEvent: onContextMenuClick,
+      },
+      {
+        type: "Item",
+        key: "task_manager",
+        icon: "PiChartLineFill",
+        label: t("context_menu.task_manager"),
+        callbackEvent: onContextMenuClick,
+        checked: null,
+        disabled: false,
+      },
+      {
+        type: "Item",
+        key: "settings",
+        icon: "RiSettings4Fill",
+        label: t("context_menu.settings"),
+        callbackEvent: onContextMenuClick,
+      },
+    ],
+  };
 }

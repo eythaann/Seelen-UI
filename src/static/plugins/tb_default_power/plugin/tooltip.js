@@ -1,24 +1,18 @@
 if (!batteries.length) {
-  return "Plugged in";
+  return t("plugged");
 }
 
-return Group({
-  style: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "4px",
-  },
-  content: batteries.map((battery, index) => {
-    const content = [];
+return batteries
+  .map((battery, index) => {
+    let content = "";
+
     if (batteries.length > 1) {
-      content.push(`${index + 1}. ${battery.model}: `);
+      content += `${index + 1}. ${battery.model}: `;
     }
-    content.push(
-      battery.percentage,
-      t("placeholder.battery_remaining"),
-      battery.smartCharging ? t("placeholder.smart_charge") : "",
-    );
-    // https://github.com/nyariv/SandboxJS/issues/29
-    return Group({ content: content });
-  }),
-});
+
+    content += t("battery.remaining", { 0: battery.percentage });
+    content += battery.smartCharging ? `- ${t("battery.smart_charge")}` : "";
+
+    return content;
+  })
+  .join("\n");

@@ -3,6 +3,7 @@ import type { MediaDevice, MediaPlayer } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import { writable } from "svelte/store";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
+import { path } from "@tauri-apps/api";
 
 let widget = Widget.getCurrent();
 let webview = widget.webview;
@@ -80,3 +81,10 @@ class State {
 }
 
 export const globalState = new State();
+
+export const defaultThumbnail = await path.resolve(
+  await path.resourceDir(),
+  "static",
+  "icons",
+  "music_thumbnail.jpg",
+);

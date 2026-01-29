@@ -53,7 +53,7 @@
         onclick={() => toggleRadio(radio)}
         title={`${radio.name} - ${radio.is_enabled ? "Enabled" : "Disabled"}`}
       >
-        <Icon iconName={getRadioIcon(radio.kind)} size={24} />
+        <Icon iconName={getRadioIcon(radio.kind)} size="2rem" />
         <span class="radio-button-label">{getRadioLabel(radio.kind)}</span>
       </button>
     {/each}

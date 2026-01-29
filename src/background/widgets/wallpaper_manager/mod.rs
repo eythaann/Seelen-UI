@@ -274,17 +274,29 @@ impl SeelenWall {
                 SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
             )?;
 
-            // Ensure WorkerW z-order is correct
+            // Ensure WorkerW z-order is correct (must be at absolute bottom)
             if let Some(worker_w) = desktop_info.worker_w {
-                WindowsApi::set_position(
-                    worker_w,
-                    Some(hwnd),
-                    &Default::default(),
-                    SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
-                )?;
+                Self::ensure_workerw_z_order(worker_w)?;
             }
         }
 
+        Ok(())
+    }
+
+    /// Ensures WorkerW is at the bottom of the z-order
+    /// This is critical for the correct layering: ItemsView > Wallpaper > WorkerW
+    fn ensure_workerw_z_order(worker_w: HWND) -> Result<()> {
+        unsafe {
+            SetWindowPos(
+                worker_w,
+                Some(HWND_BOTTOM),
+                0,
+                0,
+                0,
+                0,
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
+            )?;
+        }
         Ok(())
     }
 

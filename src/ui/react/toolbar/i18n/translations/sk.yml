@@ -1,3 +1,6 @@
+battery:
+  remaining: Zostáva {{0}} %.
+  smart_charge: Inteligentné nabíjanie
 bluetooth:
   available: Dostupné zariadenia (nespárované)
   cancel: Zrušiť
@@ -40,14 +43,13 @@ notifications:
   settings: Ďalšie nastavenia oznámení
   title: Oznámenia
 placeholder:
-  battery_remaining: zostávajúci % %
   bluetooth_devices: Bluetooth a zariadenia
   ethernet_connected: Prístup na internet
   ethernet_disconnected: Žiadny prístup na internet
   notifications: Oznámenia
   settings: Rýchle nastavenia
-  smart_charge: '- Inteligentný poplatok'
   volume: Zväzok
+plugged: Zapojené
 settings:
   app_settings: Nastavenia aplikácií
   brightness: Jas

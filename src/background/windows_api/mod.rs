@@ -611,7 +611,7 @@ impl WindowsApi {
         })
     }
 
-    pub fn resolve_lnk_custom_icon_path(lnk_path: &Path) -> Result<PathBuf> {
+    pub fn resolve_lnk_custom_icon_path(lnk_path: &Path) -> Result<(PathBuf, i32)> {
         Com::run_with_context(|| {
             let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
             let lnk_wide = lnk_path
@@ -632,7 +632,7 @@ impl WindowsApi {
             }
 
             icon_path = Self::resolve_environment_variables(&icon_path)?;
-            Ok(PathBuf::from(icon_path.to_os_string()))
+            Ok((PathBuf::from(icon_path.to_os_string()), icon_idx))
         })
     }
 

@@ -51,6 +51,7 @@ export enum SeelenCommand {
   StateRequestWallpaperAddition = "state_request_wallpaper_addition",
   StateGetPerformanceMode = "state_get_performance_mode",
   TriggerWidget = "trigger_widget",
+  TriggerContextMenu = "trigger_context_menu",
   SetCurrentWidgetStatus = "set_current_widget_status",
   GetSelfWindowId = "get_self_window_handle",
   SetSelfPosition = "set_self_position",
@@ -116,4 +117,5 @@ export enum SeelenCommand {
   DisconnectBluetoothDevice = "disconnect_bluetooth_device",
   ForgetBluetoothDevice = "forget_bluetooth_device",
   GetStartMenuItems = "get_start_menu_items",
+  GetNativeStartMenu = "get_native_start_menu",
 }

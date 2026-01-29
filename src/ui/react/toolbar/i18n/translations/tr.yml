@@ -1,3 +1,6 @@
+battery:
+  remaining: '%{{0}} Kalan'
+  smart_charge: Akıllı Şarj
 bluetooth:
   available: Mevcut Cihazlar (Eşleştirilmemiş)
   cancel: İptal
@@ -40,14 +43,13 @@ notifications:
   settings: Daha Fazla Bildirim Ayarı
   title: Bildirimler
 placeholder:
-  battery_remaining: '% kalan'
   bluetooth_devices: Bluetooth ve Cihazlar
   ethernet_connected: İnternet erişimi
   ethernet_disconnected: İnternet erişimi yok
   notifications: Bildirimler
   settings: Hızlı Ayarlar
-  smart_charge: '- Akıllı şarj'
   volume: Ses
+plugged: Takılı
 settings:
   app_settings: Uygulama Ayarları
   brightness: Parlaklık

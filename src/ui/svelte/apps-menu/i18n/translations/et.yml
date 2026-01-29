@@ -5,7 +5,13 @@ folder: Kaust
 no_matching_items: Teie otsingule vastavaid üksusi ei leitud
 open_file_location: Avage faili asukoht
 pin: Pin
+query:
+  all: Kõik
+  apps: Rakendused
+  files: Failid
+  web: Veeb
 run_as_admin: Käivita administraatorina
 unpin: Vabastage
+web_search: Veebis otsimiseks vajutage sisestusklahvi
 welcome_message: Tere tulemast Seeleni kasutajaliidese rakenduse menüüsse.
 welcome_message2: Sellel vahekaardil saate kinnitada oma lemmikrakendused.

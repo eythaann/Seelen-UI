@@ -13,6 +13,7 @@
 - allow set start of week on calendars.
 - extended wallpapers across all monitors.
 - new start menu widget.
+- customizable flyouts (volume, brightness, workspaces, notification, etc)
 
 ### enhancements
 
@@ -24,6 +25,10 @@
 - extraction on local video wallpapers thumbnails.
 - avoid reload the UI while playing as this can cause fps drops.
 - reduce memory usage!
+
+### refactor
+
+- toolbar items structure (breaking change).
 
 ### fix
 
@@ -39,6 +44,7 @@
 - tiling window manager not pausing on maximized/fullscreen apps.
 - run as admin not working on dock/taskbar.
 - single key shortcuts not taking in care holded keys.
+- wallpaper sometimes not showing on windows 11.
 
 ## [2.4.11]
 

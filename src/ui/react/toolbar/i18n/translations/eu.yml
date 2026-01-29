@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% geratzen da'
+  smart_charge: Karga adimenduna
 bluetooth:
   available: Gailu erabilgarriak (ez da parekatuta)
   cancel: Indargabetu
@@ -40,14 +43,13 @@ notifications:
   settings: Jakinarazpen gehiago ezarpenak
   title: Jakinarazpenak
 placeholder:
-  battery_remaining: '% geratzen'
   bluetooth_devices: Bluetooth eta gailuak
   ethernet_connected: Interneterako sarbidea
   ethernet_disconnected: Ez da Interneteko sarbiderik
   notifications: Jakinarazpenak
   settings: Ezarpen azkarrak
-  smart_charge: '- Karga adimentsua'
   volume: Ozentasun
+plugged: Entxufatuta
 settings:
   app_settings: Aplikazioaren ezarpenak
   brightness: Distira

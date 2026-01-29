@@ -1,3 +1,6 @@
+battery:
+  remaining: '{{0}}% Okusele'
+  smart_charge: Ukushaja okuhlakaniphile
 bluetooth:
   available: Amadivayisi atholakalayo (angabhangqwa)
   cancel: Hlikihla
@@ -40,14 +43,13 @@ notifications:
   settings: Izilungiselelo zezaziso eziningi
   title: Izaziso
 placeholder:
-  battery_remaining: '% okusele'
   bluetooth_devices: I-Bluetooth & Amadivayisi
   ethernet_connected: Ukufinyelela i-Inthanethi
   ethernet_disconnected: Akukho ukufinyelela kwe-inthanethi
   notifications: Izaziso
   settings: Izilungiselelo ezisheshayo
-  smart_charge: '- Ukushaja okuhle'
   volume: Ukuvimbanisa
+plugged: Kuxhunyiwe
 settings:
   app_settings: Izilungiselelo zohlelo lokusebenza
   brightness: Ukugqama

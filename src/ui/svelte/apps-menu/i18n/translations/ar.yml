@@ -5,7 +5,13 @@ folder: مجلد
 no_matching_items: لم يتم العثور على عناصر مطابقة لبحثك
 open_file_location: فتح موقع الملف
 pin: دبوس
+query:
+  all: الجميع
+  apps: تطبيقات
+  files: ملفات
+  web: ويب
 run_as_admin: تشغيل كمسؤول
 unpin: إزالة التثبيت
+web_search: اضغط على Enter للبحث في الويب
 welcome_message: مرحبًا بك في قائمة تطبيق Seelen UI.
 welcome_message2: في علامة التبويب هذه، يمكنك تثبيت تطبيقاتك المفضلة.
