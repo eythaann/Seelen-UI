@@ -196,9 +196,9 @@ slu_commands_declaration! {
     MediaToggleMute = media_toggle_mute(device_id: String, session_id: Option<String>),
     MediaSetDefaultDevice = media_set_default_device(id: String, role: String),
 
-    // Brightness
-    GetMainMonitorBrightness = get_main_monitor_brightness() -> Option<Brightness>,
-    SetMainMonitorBrightness = set_main_monitor_brightness(brightness: u8),
+    // Brightness - Multi-monitor support
+    GetAllMonitorsBrightness = get_all_monitors_brightness() -> Vec<MonitorBrightness>,
+    SetMonitorBrightness = set_monitor_brightness(instance_name: String, level: u8),
 
     // Power
     GetPowerStatus = get_power_status() -> PowerStatus,

@@ -9,8 +9,8 @@ let mediaPlaying = lazyRune(() => invoke(SeelenCommand.GetMediaSessions));
 await subscribe(SeelenEvent.MediaSessions, mediaPlaying.setByPayload);
 await mediaPlaying.init();
 
-let brightness = lazyRune(() => invoke(SeelenCommand.GetMainMonitorBrightness));
-await subscribe(SeelenEvent.SystemBrightnessChanged, brightness.setByPayload);
+let brightness = lazyRune(() => invoke(SeelenCommand.GetAllMonitorsBrightness));
+await subscribe(SeelenEvent.SystemMonitorsBrightnessChanged, brightness.setByPayload);
 await brightness.init();
 
 let workspaces = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
@@ -28,7 +28,7 @@ export const state = {
     return mediaPlaying.value;
   },
   get brightness() {
-    return brightness.value;
+    return brightness.value[0] || null;
   },
   get workspaces() {
     return workspaces.value;

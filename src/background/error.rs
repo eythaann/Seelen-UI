@@ -39,6 +39,7 @@ define_app_errors!(
     Lib(seelen_core::SeelenLibError);
     TauriShell(tauri_plugin_shell::Error);
     Windows(windows::core::Error);
+    WMI(wmi::WMIError);
     SerdeJson(serde_json::Error);
     SerdeYaml(serde_yaml::Error);
     SerdeXml(quick_xml::de::DeError);

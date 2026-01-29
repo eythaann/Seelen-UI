@@ -17,6 +17,16 @@ pub struct Brightness {
     pub current: u32,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct MonitorBrightness {
+    pub instance_name: String,
+    pub current_brightness: u8,
+    pub levels: u32,
+    pub available_levels: Vec<u8>,
+    pub active: bool,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
 pub struct MonitorId(pub String);
 

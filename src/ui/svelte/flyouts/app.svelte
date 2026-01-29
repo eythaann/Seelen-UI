@@ -40,7 +40,7 @@
 
   let volume = $derived(output?.volume || 0);
   let playingTitle = $derived(playing?.title);
-  let brightnessLevel = $derived(gState.brightness?.current || 0);
+  let brightnessLevel = $derived(gState.brightness?.currentBrightness);
   let activeWorkspace = $derived(vd?.active_workspace);
 
   // svelte-ignore state_referenced_locally
@@ -90,8 +90,8 @@
     }
   });
 
-  const setBrightnessThrottled = throttle((brightness: number) => {
-    invoke(SeelenCommand.SetMainMonitorBrightness, { brightness });
+  const setBrightnessThrottled = throttle((name: string, level: number) => {
+    invoke(SeelenCommand.SetMonitorBrightness, { instanceName: name, level });
   }, 100);
 
   const setVolumeThrottled = throttle((deviceId: string, level: number) => {
@@ -140,17 +140,17 @@
 
   {#if lastChanged === "brightness" && gState.brightness}
     <div class="brightness">
-      <Icon iconName={brightnessIcon(gState.brightness.current)} />
+      <Icon iconName={brightnessIcon(gState.brightness.currentBrightness)} />
       <input
         type="range"
         data-skin="flat"
         data-orientation={orientation}
-        value={gState.brightness.current}
+        value={gState.brightness.currentBrightness}
         oninput={(e) => {
-          setBrightnessThrottled(Number(e.currentTarget.value));
+          setBrightnessThrottled(gState.brightness!.instanceName, Number(e.currentTarget.value));
         }}
-        min={gState.brightness.min}
-        max={gState.brightness.max}
+        min={gState.brightness.availableLevels[0]}
+        max={gState.brightness.availableLevels[gState.brightness.levels]}
       />
     </div>
   {/if}

@@ -5,33 +5,26 @@
   import { brightnessIcon } from "libs/ui/utils";
   import { throttle } from "lodash";
 
-  let brightnessValue = $derived(state.brightness?.current ?? 0);
-
-  const setBrightnessThrottled = throttle((brightness: number) => {
-    invoke(SeelenCommand.SetMainMonitorBrightness, { brightness });
+  const setBrightnessThrottled = throttle((instanceName: string, level: number) => {
+    invoke(SeelenCommand.SetMonitorBrightness, { instanceName, level });
   }, 100);
 </script>
 
-{#if state.brightness}
+{#each state.brightness as brightness}
   <span class="quick-settings-label">Brightness</span>
   <div class="quick-settings-item">
-    <button
-      data-skin="transparent"
-      onclick={() => {
-        /* TODO: add auto brightness toggle */
-      }}
-    >
-      <Icon iconName={brightnessIcon(brightnessValue)} />
+    <button data-skin="transparent">
+      <Icon iconName={brightnessIcon(brightness.currentBrightness)} />
     </button>
     <input
       type="range"
       data-skin="flat"
-      value={brightnessValue}
+      value={brightness.currentBrightness}
       oninput={(e) => {
-        setBrightnessThrottled(Number(e.currentTarget.value));
+        setBrightnessThrottled(brightness.instanceName, Number(e.currentTarget.value));
       }}
-      min={state.brightness.min}
-      max={state.brightness.max}
+      min={brightness.availableLevels[0]}
+      max={brightness.availableLevels[brightness.levels]}
     />
   </div>
-{/if}
+{/each}
