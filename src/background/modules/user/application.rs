@@ -121,6 +121,13 @@ impl UserManager {
         Ok((email, PathBuf::from(path)))
     }
 
+    fn get_xbox_gamertag() -> Result<String> {
+        let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+        let settings = hkcu.open_subkey("SOFTWARE\\Microsoft\\XboxLive")?;
+        let gamertag: String = settings.get_value("Gamertag")?;
+        Ok(gamertag)
+    }
+
     fn get_logged_user() -> User {
         let domain = WindowsApi::get_computer_name(ComputerNameDnsDomain).unwrap_or_default();
         let name = WindowsApi::get_username(NameDisplay)
@@ -143,6 +150,7 @@ impl UserManager {
             email: None,
             one_drive_path: None,
             profile_picture_path: None,
+            xbox_gamertag: None,
         };
 
         if let Ok(sid) = Self::get_logged_on_user_sid() {
@@ -153,6 +161,8 @@ impl UserManager {
                 user.one_drive_path = Some(one_drive_path);
             }
         }
+
+        user.xbox_gamertag = Self::get_xbox_gamertag().ok();
 
         user
     }

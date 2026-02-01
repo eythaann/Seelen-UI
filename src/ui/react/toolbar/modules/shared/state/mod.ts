@@ -11,13 +11,17 @@ export const $settings = signal({
   dateFormat: initialSettings.dateFormat,
   startOfWeek: initialSettings.startOfWeek,
 });
+export const $allByWidget = signal(initialSettings.byWidget);
 Settings.onChange(
-  (settings) => ($settings.value = {
-    ...settings.byWidget["@seelen/fancy-toolbar"],
-    language: settings.language || "en",
-    dateFormat: settings.dateFormat,
-    startOfWeek: settings.startOfWeek,
-  }),
+  (settings) => {
+    $settings.value = {
+      ...settings.byWidget["@seelen/fancy-toolbar"],
+      language: settings.language || "en",
+      dateFormat: settings.dateFormat,
+      startOfWeek: settings.startOfWeek,
+    };
+    $allByWidget.value = settings.byWidget;
+  },
 );
 
 export const $widget_rect = computed(() => {

@@ -1,11 +1,12 @@
 import { useComputed } from "@preact/signals";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { ToolbarJsScope } from "@seelen-ui/lib/types";
+import type { WidgetId } from "@seelen-ui/lib/types";
 import { useSyncClockInterval, useThrottle } from "libs/ui/react/utils/hooks";
 import moment from "moment";
 import { useEffect, useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { $settings } from "./mod";
+import { $allByWidget, $settings } from "./mod";
 import { $virtual_desktop } from "./system";
 import { $focused } from "./windows";
 import * as globalState from "./global";
@@ -182,9 +183,20 @@ function useKeyboardScope() {
 
 function useUserScope() {
   const user = useComputed(() => globalState.$user.value);
+  const userMenuConfig = useComputed(
+    () => $allByWidget.value?.["@seelen/user-menu" as WidgetId],
+  );
+
+  const displayName = useComputed(() => {
+    const source = (userMenuConfig.value as Record<string, unknown> | undefined)?.displayNameSource;
+    if (source === "xboxGamertag" && user.value?.xboxGamertag) {
+      return user.value.xboxGamertag;
+    }
+    return user.value?.name;
+  });
 
   return {
-    user: user.value,
+    user: { ...user.value, displayName: displayName.value },
   };
 }
 

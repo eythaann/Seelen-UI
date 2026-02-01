@@ -8,5 +8,15 @@ loader: Internal
 preset: Popup
 hidden: true
 lazy: true
+settings:
+  - type: select
+    key: displayNameSource
+    label: Display Name
+    options:
+      - label: Profile Name
+        value: profileName
+      - label: Xbox Gamertag
+        value: xboxGamertag
+    defaultValue: profileName
 plugins:
   - !extend ./toolbar-plugin.yml
