@@ -26,7 +26,7 @@ $effect.root(() => {
     }
 
     const placement = ConfigState.config.placement;
-    const padding = ConfigState.config.margin * monitor.scaleFactor;
+    const padding = ConfigState.config.margin * window.devicePixelRatio;
 
     const monitorWidth = monitor.rect.right - monitor.rect.left;
     const monitorHeight = monitor.rect.bottom - monitor.rect.top;
@@ -51,7 +51,9 @@ $effect.root(() => {
       y = monitor.rect.bottom - height - padding;
     }
 
-    Widget.self.webview.setPosition(new PhysicalPosition(x, y)).then(() => Widget.self.show(false));
+    Widget.self.webview
+      .setPosition(new PhysicalPosition(Math.round(x), Math.round(y)))
+      .then(() => Widget.self.show(false));
   });
 });
 

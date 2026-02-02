@@ -10,9 +10,7 @@ import {
   WidgetStatus,
   type WidgetTriggerPayload,
 } from "@seelen-ui/types";
-import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
-import { List } from "../../utils/List.ts";
-import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
+import { invoke, SeelenCommand, SeelenEvent } from "../../handlers/mod.ts";
 import { getCurrentWebviewWindow, type WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { decodeBase64Url } from "@std/encoding";
 import { debounce } from "../../utils/async.ts";
@@ -21,21 +19,8 @@ import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./
 import { startThemingTool } from "../theme/theming.ts";
 import type { InitWidgetOptions, WidgetInformation } from "./interfaces.ts";
 
-export class WidgetList extends List<IWidget> {
-  static getAsync(): Promise<WidgetList> {
-    return newFromInvoke(this, SeelenCommand.StateGetWidgets);
-  }
-
-  static onChange(cb: (payload: WidgetList) => void): Promise<UnSubscriber> {
-    return newOnEvent(cb, this, SeelenEvent.StateWidgetsChanged);
-  }
-
-  findById(id: WidgetId): IWidget | undefined {
-    return this.asArray().find((widget) => widget.id === id);
-  }
-}
-
 interface WidgetInternalState {
+  hwnd: number;
   initialized: boolean;
   ready: boolean;
   position: {
@@ -82,7 +67,9 @@ export class Widget {
 
   private autoSizer?: WidgetAutoSizer;
   private initOptions: InitWidgetOptions = {};
+
   private runtimeState: WidgetInternalState = {
+    hwnd: 0,
     initialized: false,
     ready: false,
     position: {
@@ -110,6 +97,11 @@ export class Widget {
       instanceId: paramsObj.instanceId || null,
       params: Object.freeze(Object.fromEntries(params)),
     });
+  }
+
+  /** Returns the current window id of the widget */
+  get windowId(): number {
+    return this.runtimeState.hwnd;
   }
 
   /** Returns the current position and size of the widget */
@@ -174,6 +166,11 @@ export class Widget {
       // avoid flickering when clicking a button that triggers the widget
       hideWebview.cancel();
 
+      if (this.autoSizer && alignX && alignY) {
+        this.autoSizer.originX = alignX;
+        this.autoSizer.originY = alignY;
+      }
+
       if (desiredPosition) {
         const adjusted = adjustPositionByPlacement({
           frame: {
@@ -182,9 +179,10 @@ export class Widget {
             width: this.runtimeState.size.width,
             height: this.runtimeState.size.height,
           },
-          alignX,
-          alignY,
+          originX: alignX,
+          originY: alignY,
         });
+
         await this.setPosition({
           left: adjusted.x,
           top: adjusted.y,
@@ -251,6 +249,8 @@ export class Widget {
       console.warn(`Widget already initialized`);
       return;
     }
+
+    this.runtimeState.hwnd = await invoke(SeelenCommand.GetSelfWindowId);
 
     this.runtimeState.initialized = true;
     this.initOptions = options;
@@ -345,15 +345,23 @@ export class Widget {
 
   public async show(forceFocus: boolean = true): Promise<void> {
     debouncedClose.cancel();
+
+    if (await this.webview.isVisible()) {
+      return;
+    }
+
     if (forceFocus) {
-      const hwnd = await invoke(SeelenCommand.GetSelfWindowId);
       await this.webview.show();
-      await invoke(SeelenCommand.RequestFocus, { hwnd }).catch(() => {
-        console.warn(`Failed to focus widget: ${this.decoded.label}`);
-      });
+      await this.focus();
     } else {
       await this.webview.show();
     }
+  }
+
+  public async focus(): Promise<void> {
+    await invoke(SeelenCommand.RequestFocus, { hwnd: this.runtimeState.hwnd }).catch(() => {
+      console.warn(`Failed to focus widget: ${this.decoded.label}`);
+    });
   }
 
   public hide(closeAfterInactivity?: boolean): void {

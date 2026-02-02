@@ -29,7 +29,7 @@ settings:
     key: margin
     label: Side Margin
     min: 0
-    defaultValue: 60
+    defaultValue: 30
 
   - type: number
     key: timeToShow

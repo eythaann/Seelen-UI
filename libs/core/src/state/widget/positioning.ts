@@ -5,8 +5,8 @@ import { SeelenEvent } from "../../handlers/events.ts";
 
 interface args {
   frame: Frame;
-  alignX?: Alignment | null;
-  alignY?: Alignment | null;
+  originX?: Alignment | null;
+  originY?: Alignment | null;
 }
 
 const monitors = {
@@ -32,18 +32,18 @@ function primaryMonitor(): PhysicalMonitor | undefined {
 
 export function adjustPositionByPlacement({
   frame: { x, y, width, height },
-  alignX,
-  alignY,
+  originX,
+  originY,
 }: args): Frame {
-  if (alignX === Alignment.Center) {
+  if (originX === Alignment.Center) {
     x -= width / 2;
-  } else if (alignX === Alignment.Start) {
+  } else if (originX === Alignment.End) {
     x -= width;
   }
 
-  if (alignY === Alignment.Center) {
+  if (originY === Alignment.Center) {
     y -= height / 2;
-  } else if (alignY === Alignment.Start) {
+  } else if (originY === Alignment.End) {
     y -= height;
   }
 
