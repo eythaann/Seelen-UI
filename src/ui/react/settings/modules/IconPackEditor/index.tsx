@@ -1,12 +1,13 @@
 import type { Icon, IconPackEntry } from "@seelen-ui/lib/types";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { Input } from "antd";
+import { Button, Input, message } from "antd";
 import { useMemo, useState } from "react";
 
 import { iconPacks } from "../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
 import cs from "./index.module.css";
+import { Icon as ReactIcon } from "libs/ui/react/components/Icon/index.tsx";
 
 function resolveAsSrc(parent: string, icon: Icon): Icon {
   return {
@@ -65,35 +66,81 @@ export function IconPackEditorView() {
 }
 
 function IconTitle({ entry }: { entry: IconPackEntry }) {
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        message.success(`${label} copied to clipboard`);
+      })
+      .catch(() => {
+        message.error(`Failed to copy ${label}`);
+      });
+  };
+
   if (entry.type === "unique") {
     return (
-      <h3>
-        <p>
-          <b>umid:</b>
-          {entry.umid}
-        </p>
-        <p>
-          <b>path or filename:</b>
-          {entry.path}
-        </p>
-      </h3>
+      <div>
+        {entry.umid && (
+          <p>
+            <b>umid:</b>
+            {entry.umid}
+            <Button
+              type="text"
+              size="small"
+              onClick={() => copyToClipboard(entry.umid!, "UMID")}
+              style={{ marginLeft: 8 }}
+            >
+              <ReactIcon iconName="IoCopyOutline" />
+            </Button>
+          </p>
+        )}
+        {entry.path && (
+          <p>
+            <b>path or filename:</b>
+            {entry.path}
+            <Button
+              type="text"
+              onClick={() => copyToClipboard(entry.path!, "Path")}
+              style={{ marginLeft: 8 }}
+            >
+              <ReactIcon iconName="IoCopyOutline" />
+            </Button>
+          </p>
+        )}
+      </div>
     );
   }
 
   if (entry.type === "shared") {
     return (
-      <h3>
+      <div>
         <b>Extension:</b>
         {entry.extension}
-      </h3>
+        <Button
+          type="text"
+          size="small"
+          onClick={() => copyToClipboard(entry.extension, "Extension")}
+          style={{ marginLeft: 8 }}
+        >
+          <ReactIcon iconName="IoCopyOutline" />
+        </Button>
+      </div>
     );
   }
 
   return (
-    <h3>
+    <div>
       <b>Key:</b>
       {entry.key}
-    </h3>
+      <Button
+        type="text"
+        size="small"
+        onClick={() => copyToClipboard(entry.key, "Key")}
+        style={{ marginLeft: 8 }}
+      >
+        <ReactIcon iconName="IoCopyOutline" />
+      </Button>
+    </div>
   );
 }
 
