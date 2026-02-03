@@ -36,7 +36,7 @@ export async function triggerWidget(widgetId: WidgetId, itemId: string): Promise
       id: widgetId,
       desiredPosition: { x, y },
       alignX: Alignment.Center,
-      alignY: isTopPosition ? Alignment.End : Alignment.Start,
+      alignY: isTopPosition ? Alignment.Start : Alignment.End,
     },
   });
 }

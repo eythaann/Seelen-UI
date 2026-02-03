@@ -192,6 +192,7 @@ export class Widget {
       }
 
       await this.show();
+      await this.focus();
     });
   }
 
@@ -343,21 +344,12 @@ export class Widget {
     });
   }
 
-  public async show(forceFocus: boolean = true): Promise<void> {
+  public async show(): Promise<void> {
     debouncedClose.cancel();
-
-    if (await this.webview.isVisible()) {
-      return;
-    }
-
-    if (forceFocus) {
-      await this.webview.show();
-      await this.focus();
-    } else {
-      await this.webview.show();
-    }
+    await this.webview.show();
   }
 
+  /** Will force foreground the widget */
   public async focus(): Promise<void> {
     await invoke(SeelenCommand.RequestFocus, { hwnd: this.runtimeState.hwnd }).catch(() => {
       console.warn(`Failed to focus widget: ${this.decoded.label}`);

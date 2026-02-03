@@ -53,7 +53,7 @@ $effect.root(() => {
 
     Widget.self.webview
       .setPosition(new PhysicalPosition(Math.round(x), Math.round(y)))
-      .then(() => Widget.self.show(false));
+      .then(() => Widget.self.show());
   });
 });
 

@@ -47,6 +47,7 @@ async function placeCenteredToMonitor(targetMonitor: PhysicalMonitor): Promise<v
 
   if (globalState.showing) {
     await widget.show();
+    await widget.focus();
   }
 }
 

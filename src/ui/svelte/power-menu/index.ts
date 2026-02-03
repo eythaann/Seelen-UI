@@ -26,6 +26,7 @@ widget.webview.onFocusChanged((e) => {
 });
 widget.onTrigger(async () => {
   await widget.show();
+  await widget.focus();
 });
 
 mount(App, {

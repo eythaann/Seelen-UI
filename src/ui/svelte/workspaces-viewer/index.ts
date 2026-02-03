@@ -19,7 +19,8 @@ widget.onTrigger(async () => {
   if (await widget.webview.isVisible()) {
     widget.hide(true);
   } else {
-    widget.show();
+    await widget.show();
+    await widget.focus();
   }
 });
 
