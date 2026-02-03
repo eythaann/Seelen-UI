@@ -60,3 +60,8 @@ settings:
           key: showWorkspaceChange
           label: Workspace change
           defaultValue: true
+
+        - type: switch
+          key: showNotifications
+          label: Arrival notification
+          defaultValue: true

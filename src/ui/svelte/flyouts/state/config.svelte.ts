@@ -14,6 +14,7 @@ const WidgetConfigSchema = z.object({
   showBrightnessChange: z.boolean(),
   showMediaPlayerChange: z.boolean(),
   showWorkspaceChange: z.boolean(),
+  showNotifications: z.boolean(),
 });
 
 const widgetConfig = $derived.by(

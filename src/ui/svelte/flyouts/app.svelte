@@ -7,6 +7,7 @@
   import { convertFileSrc } from "@tauri-apps/api/core";
   import { debounce, throttle } from "lodash";
   import { ConfigState } from "./state/config.svelte";
+  import Notification from "../notifications/components/Notification.svelte";
 
   $effect(() => {
     Widget.getCurrent().ready();
@@ -38,6 +39,11 @@
       .find((workspace) => workspace.id == vd.active_workspace);
   });
 
+  let notification = $derived.by(() =>
+    gState.notifications.toSorted((a, b) => Number(b.date - a.date)).pop(),
+  );
+
+  let notificationId = $derived(notification?.id);
   let volume = $derived(output?.volume || 0);
   let playingTitle = $derived(playing?.title);
   let brightnessLevel = $derived(gState.brightness?.currentBrightness);
@@ -49,6 +55,7 @@
     playingTitle,
     brightnessLevel,
     activeWorkspace,
+    notificationId,
   };
 
   const hideWithDelay = $derived(
@@ -60,27 +67,28 @@
   $effect(() => {
     let somethingChanged = false;
 
-    if (prev.volume.toFixed(2) !== volume.toFixed(2)) {
-      prev.volume = volume;
+    if (ConfigState.config.showVolumeChange && prev.volume.toFixed(2) !== volume.toFixed(2)) {
       lastChanged = "mediaDevices";
       somethingChanged = true;
     }
 
-    if (prev.playingTitle !== playingTitle) {
-      prev.playingTitle = playingTitle;
+    if (ConfigState.config.showMediaPlayerChange && prev.playingTitle !== playingTitle) {
       lastChanged = "mediaPlaying";
       somethingChanged = true;
     }
 
-    if (prev.brightnessLevel !== brightnessLevel) {
-      prev.brightnessLevel = brightnessLevel;
+    if (ConfigState.config.showBrightnessChange && prev.brightnessLevel !== brightnessLevel) {
       lastChanged = "brightness";
       somethingChanged = true;
     }
 
-    if (prev.activeWorkspace !== activeWorkspace) {
-      prev.activeWorkspace = activeWorkspace;
+    if (ConfigState.config.showWorkspaceChange && prev.activeWorkspace !== activeWorkspace) {
       lastChanged = "workspace";
+      somethingChanged = true;
+    }
+
+    if (ConfigState.config.showNotifications && prev.notificationId !== notificationId) {
+      lastChanged = "notification";
       somethingChanged = true;
     }
 
@@ -88,6 +96,12 @@
       setShowing(true);
       hideWithDelay();
     }
+
+    prev.volume = volume;
+    prev.playingTitle = playingTitle;
+    prev.brightnessLevel = brightnessLevel;
+    prev.activeWorkspace = activeWorkspace;
+    prev.notificationId = notificationId;
   });
 
   const setBrightnessThrottled = throttle((name: string, level: number) => {
@@ -108,6 +122,10 @@
 </script>
 
 <div class="flyout" data-placement={ConfigState.config.placement}>
+  {#if lastChanged === "notification" && notification}
+    <Notification {notification} />
+  {/if}
+
   {#if lastChanged === "workspace" && activeWorkspaceData}
     <div class="workspace">
       <span class="workspace-name">

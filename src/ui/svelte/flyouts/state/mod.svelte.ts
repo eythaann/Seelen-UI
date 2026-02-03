@@ -17,6 +17,10 @@ let workspaces = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
 await subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
 await workspaces.init();
 
+let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
+await subscribe(SeelenEvent.Notifications, notifications.setByPayload);
+await notifications.init();
+
 export const state = {
   get mediaInputs() {
     return mediaDevices.value[0];
@@ -32,5 +36,8 @@ export const state = {
   },
   get workspaces() {
     return workspaces.value;
+  },
+  get notifications() {
+    return notifications.value;
   },
 };
