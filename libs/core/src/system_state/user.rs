@@ -48,4 +48,5 @@ pub struct User {
     pub email: Option<String>,
     pub one_drive_path: Option<PathBuf>,
     pub profile_picture_path: Option<PathBuf>,
+    pub xbox_gamertag: Option<String>,
 }

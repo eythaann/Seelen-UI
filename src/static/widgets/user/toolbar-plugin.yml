@@ -8,8 +8,8 @@ plugin:
   scopes:
     - User
   tooltip: |-
-    return user.name;
+    return user.displayName;
   template: |-
-    return [Image({ path: user.profilePicturePath }), ' ', user.name];
+    return [Image({ path: user.profilePicturePath }), ' ', user.displayName];
   onClickV2: |-
     trigger("@seelen/user-menu");
