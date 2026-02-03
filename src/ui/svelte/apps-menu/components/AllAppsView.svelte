@@ -13,89 +13,111 @@
 
   let { onContextMenu }: Props = $props();
 
-  // Parse search query to extract prefix and actual query
-  const query = $derived.by(() => {
-    const query = globalState.searchQuery.trim();
-    const prefixMatch = query.match(/^(apps|files|web):/i);
-
-    if (prefixMatch) {
-      const prefix = prefixMatch[1]?.toLowerCase() || "";
-      const actualQuery = query.slice(prefix.length + 1).trim();
-      return { prefix, search: actualQuery, isSearching: true };
-    }
-
-    return { prefix: null, search: query, isSearching: query.length > 0 };
-  });
-
-  // Filter function based on prefix
-  function shouldIncludeItem(item: StartMenuItem, prefix: string | null): boolean {
-    if (prefix === "web") {
-      return false; // web: doesn't show any items
-    }
+  // Memoized filter function - avoid recreating on each render
+  const shouldIncludeItem = (item: StartMenuItem, prefix: string | null): boolean => {
+    if (prefix === "web") return false;
 
     const isApp =
       !!item.umid ||
       item.path?.toLowerCase().endsWith(".exe") ||
       item.path?.toLowerCase().endsWith(".lnk");
 
-    if (prefix === "apps") {
-      return isApp;
-    }
+    if (prefix === "apps") return isApp;
+    if (prefix === "documents") return !isApp;
 
-    if (prefix === "documents") {
-      return !isApp;
-    }
+    return true;
+  };
 
-    return true; // no prefix, include all
-  }
-
-  // this only will change when start items change
+  // Cache filtered/sorted base items - only recalculates when allItems changes
   const items = $derived.by(() => {
-    return [...globalState.allItems]
-      .filter((item) => {
-        if (!item.path) return !!item.umid;
+    const allItems = globalState.allItems;
+    const filtered: StartMenuItem[] = [];
 
-        let path = item.path.toLowerCase();
-        let filename = path.split(/[\\/]/g).pop() || "";
-        // hide uninstallers and desktop.ini files
-        return !filename.includes("uninstall") && filename !== "desktop.ini";
-      })
-      .sort((a, b) => a.display_name.localeCompare(b.display_name));
+    for (const item of allItems) {
+      if (!item.path) {
+        if (item.umid) filtered.push(item);
+        continue;
+      }
+
+      const path = item.path.toLowerCase();
+      const lastSlash = Math.max(path.lastIndexOf("\\"), path.lastIndexOf("/"));
+      const filename = lastSlash >= 0 ? path.slice(lastSlash + 1) : path;
+
+      if (!filename.includes("uninstall") && filename !== "desktop.ini") {
+        filtered.push(item);
+      }
+    }
+
+    return filtered.sort((a, b) => a.display_name.localeCompare(b.display_name));
   });
 
-  // Combined items including known folders when searching
-  const searchableItems = $derived.by(() => {
+  // Parse query only when searchQuery changes
+  const query = $derived.by(() => {
+    const rawQuery = globalState.searchQuery.trim();
+    const prefixMatch = rawQuery.match(/^(apps|files|web):/i);
+
+    if (prefixMatch) {
+      const prefix = prefixMatch[1]!.toLowerCase();
+      const search = rawQuery.slice(prefix.length + 1).trim();
+      return { prefix, search, isSearching: true };
+    }
+
+    return { prefix: null, search: rawQuery, isSearching: rawQuery.length > 0 };
+  });
+
+  // Only create searcher when items or search state changes - not on every query change
+  let cachedSearcher: fuzzySearch.DynamicSearcher<StartMenuItem, string> | null = null;
+  let lastSearchableItemsKey = "";
+
+  const filteredItems = $derived.by(() => {
+    if (!query.isSearching) {
+      return items;
+    }
+
     if (query.prefix === "web") {
       return [];
     }
-    if (query.isSearching) {
-      return [
-        ...items.filter((item) => shouldIncludeItem(item, query.prefix)),
-        ...foldersAsStartMenuItems.value.filter((item) => shouldIncludeItem(item, query.prefix)),
-      ];
+
+    // Build searchable items list
+    const searchableItems: StartMenuItem[] = [];
+    const { prefix } = query;
+
+    for (const item of items) {
+      if (shouldIncludeItem(item, prefix)) {
+        searchableItems.push(item);
+      }
     }
-    return items;
-  });
 
-  let searcher = $derived.by(() => {
-    const config = fuzzySearch.Config.createDefaultConfig();
-    config.normalizerConfig.allowCharacter = (_c) => true;
-    const searcher = fuzzySearch.SearcherFactory.createSearcher<StartMenuItem, string>(config);
-
-    searcher.indexEntities(
-      searchableItems,
-      (item) => `${item.path}_${item.umid}`,
-      (item) => [item.display_name],
-    );
-    return searcher;
-  });
-
-  const filteredItems = $derived.by(() => {
-    if (query.isSearching) {
-      let result = searcher.getMatches(new fuzzySearch.Query(query.search, 21));
-      return result.matches.map((match) => match.entity);
+    // Add known folders when searching
+    for (const item of foldersAsStartMenuItems.value) {
+      if (shouldIncludeItem(item, prefix)) {
+        searchableItems.push(item);
+      }
     }
-    return items;
+
+    // Create a stable key to check if we need to rebuild the searcher
+    const itemsKey = `${items.length}_${foldersAsStartMenuItems.value.length}_${prefix}`;
+
+    if (cachedSearcher === null || lastSearchableItemsKey !== itemsKey) {
+      const config = fuzzySearch.Config.createDefaultConfig();
+      config.normalizerConfig.allowCharacter = (_c) => true;
+      cachedSearcher = fuzzySearch.SearcherFactory.createSearcher<StartMenuItem, string>(config);
+
+      cachedSearcher.indexEntities(
+        searchableItems,
+        (item) => `${item.path}_${item.umid}`,
+        (item) => [item.display_name],
+      );
+
+      lastSearchableItemsKey = itemsKey;
+    }
+
+    if (!query.search) {
+      return searchableItems;
+    }
+
+    const result = cachedSearcher.getMatches(new fuzzySearch.Query(query.search, 21));
+    return result.matches.map((match) => match.entity);
   });
 </script>
 

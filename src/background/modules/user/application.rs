@@ -91,12 +91,14 @@ impl UserManager {
         for entry in walkdir::WalkDir::new(base_path)
             .follow_links(false)
             .into_iter()
-            .flatten()
+            .filter_entry(|e| !is_ignored_dir(e.path()))
+            .filter_map(|e| e.ok())
         {
             let path = entry.path();
-            if !path.is_file() {
+            if !path.is_file() || is_ignored_file(path) {
                 continue;
             }
+
             list.push(path.to_path_buf());
         }
 
@@ -222,4 +224,46 @@ impl UserManager {
             folders,
         })
     }
+}
+
+fn is_ignored_dir(path: &std::path::Path) -> bool {
+    path.file_name()
+        .and_then(|n| n.to_str())
+        .is_some_and(|name| {
+            matches!(
+                name,
+                ".git"
+                    | "node_modules"
+                    | "target"
+                    | "dist"
+                    | "build"
+                    | "out"
+                    | ".cache"
+                    | ".idea"
+                    | ".vscode"
+                    | ".next"
+            )
+        })
+}
+
+fn is_ignored_file(path: &std::path::Path) -> bool {
+    let Some(extension) = path.extension() else {
+        return true;
+    };
+
+    let ext = extension.to_string_lossy().to_lowercase();
+    [
+        "ini",
+        "dat",
+        "bak",
+        "tmp",
+        "temp",
+        "old",
+        "swp",
+        "download",
+        "crdownload",
+        "lock",
+        "pid",
+    ]
+    .contains(&ext.as_str())
 }
