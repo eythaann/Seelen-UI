@@ -36,7 +36,7 @@ impl LegacyWidgetMonitorContainer {
     pub fn ensure_positions(&mut self) -> Result<()> {
         let monitor = MonitorManager::instance()
             .get_display_view_for_target(&self.view_primary_target_id)?
-            .as_win32_monitor()?;
+            .as_win32_view()?;
 
         if let Some(bar) = &mut self.toolbar {
             bar.set_position(&monitor)?;

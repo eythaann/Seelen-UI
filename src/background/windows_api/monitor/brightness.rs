@@ -1,15 +1,12 @@
 use windows::Win32::{
     Devices::Display::{
-        GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness, DISPLAYPOLICY_AC,
-        DISPLAYPOLICY_DC, DISPLAY_BRIGHTNESS, IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS,
-        IOCTL_VIDEO_SET_DISPLAY_BRIGHTNESS, PHYSICAL_MONITOR,
+        GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness, PHYSICAL_MONITOR,
     },
     Foundation::{BOOL, HANDLE},
     Storage::FileSystem::{
         CreateFileW, FILE_GENERIC_READ, FILE_GENERIC_WRITE, FILE_SHARE_READ, FILE_SHARE_WRITE,
         OPEN_EXISTING,
     },
-    System::IO::DeviceIoControl,
 };
 
 use crate::{
@@ -19,9 +16,6 @@ use crate::{
 
 use super::Monitor;
 
-// Seems to currently be missing from windows crate
-const DISPLAYPOLICY_BOTH: u8 = 3;
-
 #[derive(Debug, Default)]
 pub struct DdcciBrightnessValues {
     pub min: u32,
@@ -29,6 +23,7 @@ pub struct DdcciBrightnessValues {
     pub max: u32,
 }
 
+#[allow(dead_code)]
 impl MonitorTarget {
     /// Opens and returns a file handle for a display device using its DOS device path.\
     /// These handles are only used for the `DeviceIoControl` API (for internal displays);
@@ -50,57 +45,6 @@ impl MonitorTarget {
             )?
         };
         Ok(handle)
-    }
-
-    /// Input/Output Control. Returns 0-100
-    pub fn ioctl_query_display_brightness(&self) -> Result<u8> {
-        let display_brightness = unsafe {
-            let mut bytes_returned = 0;
-            let mut display_brightness = DISPLAY_BRIGHTNESS::default();
-            DeviceIoControl(
-                self.get_file_handle()?,
-                IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS,
-                None,
-                0,
-                Some(&mut display_brightness as *mut _ as *mut _),
-                size_of::<DISPLAY_BRIGHTNESS>() as u32,
-                Some(&mut bytes_returned),
-                None,
-            )?;
-            display_brightness
-        };
-        match display_brightness.ucDisplayPolicy as u32 {
-            DISPLAYPOLICY_AC => Ok(display_brightness.ucACBrightness),
-            DISPLAYPOLICY_DC => Ok(display_brightness.ucDCBrightness),
-            _ => Err("Unexpected display policy".into()),
-        }
-    }
-
-    /// Input/Output Control. Sets 0-100
-    pub fn ioctl_set_display_brightness(&self, value: u8) -> Result<()> {
-        let mut display_brightness = DISPLAY_BRIGHTNESS {
-            ucACBrightness: value,
-            ucDCBrightness: value,
-            ucDisplayPolicy: DISPLAYPOLICY_BOTH,
-        };
-        let mut bytes_returned = 0;
-        unsafe {
-            DeviceIoControl(
-                self.get_file_handle()?,
-                IOCTL_VIDEO_SET_DISPLAY_BRIGHTNESS,
-                Some(&mut display_brightness as *mut _ as *mut _),
-                size_of::<DISPLAY_BRIGHTNESS>() as u32,
-                None,
-                0,
-                Some(&mut bytes_returned),
-                None,
-            )?;
-        }
-        // There is a bug where if the IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS is
-        // called immediately after then it won't show the newly updated values
-        // Doing a very tiny sleep seems to mitigate this
-        std::thread::sleep(std::time::Duration::from_millis(1));
-        Ok(())
     }
 }
 

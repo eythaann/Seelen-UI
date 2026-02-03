@@ -25,6 +25,7 @@
 - extraction on local video wallpapers thumbnails.
 - avoid reload the UI while playing as this can cause fps drops.
 - reduce memory usage!
+- copy button for icon list on settings.
 
 ### refactor
 
@@ -46,6 +47,7 @@
 - single key shortcuts not taking in care holded keys.
 - wallpaper sometimes not showing on windows 11.
 - no emitting brightness events.
+- monitors missmatch.
 
 ## [2.4.11]
 

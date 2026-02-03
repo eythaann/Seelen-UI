@@ -220,13 +220,6 @@ impl MonitorManager {
         let state = state.State()?;
         Ok(state.Views()?.into_iter().map(DisplayView::from).collect())
     }
-
-    pub fn read_view_at(&self, index: u32) -> Result<DisplayView> {
-        let state = self.display_manager.TryReadCurrentStateForAllTargets()?;
-        let state = state.State()?;
-        let view = state.Views()?.GetAt(index)?;
-        Ok(view.into())
-    }
 }
 
 impl Drop for MonitorManager {
