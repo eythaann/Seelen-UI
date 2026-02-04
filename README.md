@@ -241,4 +241,4 @@ We're grateful for the support of our sponsors who help make Seelen UI possible.
 
 📌 **Official Website**: [https://seelen.io](https://seelen.io)
 
-Seelen Inc © 2025 - All rights reserved
+Seelen Inc © 2026 - All rights reserved
