@@ -12,7 +12,7 @@ serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 serde_yaml = { workspace = true }
 serde_alias = "0.0.2"
-schemars = { version = "1.2.0", features = ["url2", "uuid1", "chrono04"] }
+schemars = { version = "1.2.1", features = ["url2", "uuid1", "chrono04"] }
 regex = { workspace = true }
 sys-locale = "0.3.2"
 uuid = { workspace = true, features = ["v4", "serde"] }
@@ -27,7 +27,7 @@ base64 = { workspace = true }
 url = { workspace = true, features = ["serde"] }
 grass = { version = "0.13.4", default-features = false, features = ['random'] }
 num_enum = "0.7.5"
-chrono = { version = "0.4.42", features = ["serde"] }
+chrono = { version = "0.4.43", features = ["serde"] }
 paste = "1.0.15"
 
 [features]
