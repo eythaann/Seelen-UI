@@ -58,6 +58,18 @@ subscribe(SeelenEvent.BluetoothDevicesChanged, $bluetooth_devices.setByPayload);
 export const $notifications = lazySignal(() => invoke(SeelenCommand.GetNotifications));
 subscribe(SeelenEvent.Notifications, $notifications.setByPayload);
 
+export const $disks = lazySignal(() => invoke(SeelenCommand.GetSystemDisks));
+subscribe(SeelenEvent.SystemDisksChanged, $disks.setByPayload);
+
+export const $network_statistics = lazySignal(() => invoke(SeelenCommand.GetSystemNetwork));
+subscribe(SeelenEvent.SystemNetworkChanged, $network_statistics.setByPayload);
+
+export const $memory = lazySignal(() => invoke(SeelenCommand.GetSystemMemory));
+subscribe(SeelenEvent.SystemMemoryChanged, $memory.setByPayload);
+
+export const $cores = lazySignal(() => invoke(SeelenCommand.GetSystemCores));
+subscribe(SeelenEvent.SystemCoresChanged, $cores.setByPayload);
+
 await Promise.all([
   $user.init(),
   $env.init(),
@@ -74,4 +86,8 @@ await Promise.all([
   $wlan_bss_entries.init(),
   $bluetooth_devices.init(),
   $notifications.init(),
+  $disks.init(),
+  $network_statistics.init(),
+  $memory.init(),
+  $cores.init(),
 ]);

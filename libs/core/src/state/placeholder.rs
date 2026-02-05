@@ -20,6 +20,10 @@ pub enum ToolbarJsScope {
     Power,
     FocusedApp,
     Workspaces,
+    Disk,
+    NetworkStatistics,
+    Memory,
+    Cpu,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]

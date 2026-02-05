@@ -14,6 +14,7 @@
 - extended wallpapers across all monitors.
 - new start menu widget.
 - customizable flyouts (volume, brightness, workspaces, notification, etc)
+- resources usage plugins for toolbar.
 
 ### enhancements
 

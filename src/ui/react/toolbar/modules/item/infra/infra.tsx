@@ -1,7 +1,10 @@
-import { useItemScope } from "../../shared/state/scope.ts";
+import { Suspense } from "preact/compat";
 import { InnerItem, type InnerItemProps } from "./Inner.tsx";
 
 export function Item(props: InnerItemProps) {
-  const scope = useItemScope(props.module.scopes);
-  return <InnerItem {...props} extraVars={scope} />;
+  return (
+    <Suspense fallback={null}>
+      <InnerItem {...props} />
+    </Suspense>
+  );
 }

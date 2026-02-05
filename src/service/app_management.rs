@@ -1,6 +1,7 @@
 use std::process::Command;
 
 use slu_ipc::{AppIpc, IPC};
+use sysinfo::ProcessesToUpdate;
 use windows::Win32::{
     Foundation::HANDLE,
     System::Power::{
@@ -54,7 +55,7 @@ pub fn launch_seelen_ui() -> Result<()> {
 pub fn kill_all_seelen_ui_processes() -> Result<()> {
     log::info!("Killing all Seelen UI processes");
     let mut sys = sysinfo::System::new();
-    sys.refresh_processes();
+    sys.refresh_processes(ProcessesToUpdate::All, true);
     let instances: Vec<_> = sys
         .processes()
         .values()

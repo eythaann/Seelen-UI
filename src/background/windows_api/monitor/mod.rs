@@ -178,8 +178,6 @@ impl DisplayView {
         let win32_views = MonitorEnumerator::enumerate_win32()?;
         for win32_view in win32_views {
             let devices = win32_view.devices()?;
-            log::debug!("Devices: {devices:#?}");
-
             for device in devices {
                 if interfaces.contains(&device.id.to_string()) {
                     return Ok(win32_view);

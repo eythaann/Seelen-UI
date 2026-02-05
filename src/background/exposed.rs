@@ -271,6 +271,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::modules::radios::bluetooth::handlers::*;
     use crate::modules::radios::handlers::*;
     use crate::modules::start::infrastructure::*;
+    use crate::modules::system::tauri::*;
     use crate::modules::system_settings::infrastructure::*;
     use crate::modules::system_settings::language::infrastructure::*;
     use crate::modules::system_tray::infrastructure::*;

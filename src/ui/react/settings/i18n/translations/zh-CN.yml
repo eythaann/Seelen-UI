@@ -13,11 +13,11 @@ apps_configurations:
     ok_edit: 更新
     ok_readonly: 另存为新配置
     options:
-      float: 浮动
-      force: 强制管理
-      hidden: 从 Dock / 任务栏 隐藏
-      pinned: 固定
-      unmanage: 取消管理
+      NoInteractive: 没有互动
+      VdPinned: 在所有工作区中显示
+      WmFloat: Twm - 开始浮动
+      WmForce: Twm - 强制管理
+      WmUnmanage: Twm - 取消管理
     options_label: 其他
     title_create: 创建 {{name}}
     title_edit: 编辑 {{name}}
@@ -130,7 +130,7 @@ miscellaneous: 杂项
 monitors_configurations:
   label: 显示器 {{index}}
 more: 更多
-'no': '否'
+'no': 否
 open: 打开
 quit: 退出
 remove: 移除
@@ -211,8 +211,6 @@ toolbar:
   delay_to_hide: 延迟隐藏
   delay_to_show: 延迟显示
   dock_side: 职位
-  dynamic_color: 动态色彩
-  dynamic_color_tooltip: 根据聚焦窗口启用动态背景和前景颜色。(颜色可由主题覆盖）
   enable: 启用精美工具栏
   height: 高度
   hide_mode:
@@ -221,7 +219,6 @@ toolbar:
     on_overlap: 重叠时
   label: 工具栏
   placeholder: {}
-  show_hibernate: 在电源菜单上显示休眠按钮
 update:
   available: 有可用更新！
   channel: 更新通道
@@ -306,7 +303,6 @@ weg:
       all: 全部
       label: 未固定项目的可见性
       on_monitor: 在监视器上
-    thumbnail_generation_enabled: 项目悬停时生成缩略图
     visible_separators: 可见分隔符
   label: Dock / 任务栏
   margin: 边距
@@ -349,4 +345,4 @@ wm:
   space_between_containers: 容器间间距
   workspace_offset: 工作区偏移（边距）
   workspace_padding: 工作区内边距
-'yes': '是'
+'yes': 是

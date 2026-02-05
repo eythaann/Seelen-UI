@@ -1,0 +1,9 @@
+id: "@default/network-usage"
+metadata:
+  displayName: !extend i18n/display_name.yml
+icon: PiArrowsDownUpBold
+target: "@seelen/fancy-toolbar"
+plugin:
+  scopes:
+    - NetworkStatistics
+  template: !include plugin/template.js

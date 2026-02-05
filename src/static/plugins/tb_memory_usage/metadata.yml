@@ -1,0 +1,9 @@
+id: "@default/memory-usage"
+metadata:
+  displayName: !extend i18n/display_name.yml
+icon: FaMemory
+target: "@seelen/fancy-toolbar"
+plugin:
+  scopes:
+    - Memory
+  template: !include plugin/template.js

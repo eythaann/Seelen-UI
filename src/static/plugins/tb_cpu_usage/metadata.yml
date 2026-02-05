@@ -1,0 +1,9 @@
+id: "@default/cpu-usage"
+metadata:
+  displayName: !extend i18n/display_name.yml
+icon: LuCpu
+target: "@seelen/fancy-toolbar"
+plugin:
+  scopes:
+    - Cpu
+  template: !include plugin/template.js

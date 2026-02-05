@@ -6,6 +6,7 @@ pub mod notifications;
 pub mod power;
 pub mod radios;
 pub mod start;
+pub mod system;
 pub mod system_settings;
 pub mod system_tray;
 pub mod user;

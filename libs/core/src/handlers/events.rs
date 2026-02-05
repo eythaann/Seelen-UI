@@ -102,6 +102,12 @@ slu_events_declaration! {
     // Radios
     RadiosChanged(Vec<RadioDevice>) as "radio::changed",
 
+    // System Info
+    SystemDisksChanged(Vec<Disk>) as "system::disks-changed",
+    SystemNetworkChanged(Vec<NetworkStatistics>) as "system::network-changed",
+    SystemMemoryChanged(Memory) as "system::memory-changed",
+    SystemCoresChanged(Vec<Core>) as "system::cores-changed",
+
     BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
 
     // Start Menu

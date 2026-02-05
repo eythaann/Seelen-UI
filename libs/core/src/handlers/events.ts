@@ -40,6 +40,10 @@ export enum SeelenEvent {
   StatePerformanceModeChanged = "state::performance-mode-changed",
   WidgetTriggered = "widget::triggered",
   RadiosChanged = "radio::changed",
+  SystemDisksChanged = "system::disks-changed",
+  SystemNetworkChanged = "system::network-changed",
+  SystemMemoryChanged = "system::memory-changed",
+  SystemCoresChanged = "system::cores-changed",
   BluetoothDevicesChanged = "bluetooth-devices-changed",
   StartMenuItemsChanged = "start-menu::items-changed",
 }

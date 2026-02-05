@@ -5,8 +5,9 @@ import { Signal } from "@preact/signals";
  */
 export class LazySignal<T> extends Signal<T> {
   private initialized = false;
+  private intializing: Promise<Signal<T>> | null = null;
 
-  constructor(private initializer: () => Promise<T> | T) {
+  constructor(private initializer: () => Promise<T>) {
     super();
     this.setByPayload = this.setByPayload.bind(this);
   }
@@ -27,14 +28,16 @@ export class LazySignal<T> extends Signal<T> {
    * Will call the initializer and set the value if not already set
    * via another setters.
    */
-  public async init() {
-    if (!this.initialized) {
-      const awaited = await this.initializer();
-      // double check
-      if (!this.initialized) {
-        this.value = awaited;
-      }
+  public init(): Promise<Signal<T>> {
+    if (!this.intializing) {
+      this.intializing = this.initializer().then((initial) => {
+        if (!this.initialized) {
+          this.value = initial;
+        }
+        return this;
+      });
     }
+    return this.intializing;
   }
 
   /**
@@ -56,6 +59,6 @@ export class LazySignal<T> extends Signal<T> {
  * 2. Set up event listeners that can fire anytime
  * 3. Initialize - won't overwrite if event already fired during fetch
  */
-export function lazySignal<T>(initial: () => Promise<T> | T): LazySignal<T> {
+export function lazySignal<T>(initial: () => Promise<T>): LazySignal<T> {
   return new LazySignal(initial);
 }

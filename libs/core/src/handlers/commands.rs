@@ -256,6 +256,12 @@ slu_commands_declaration! {
     GetRadios = get_radios() -> Vec<RadioDevice>,
     SetRadioState = set_radios_state(kind: RadioDeviceKind, enabled: bool),
 
+    // System Info
+    GetSystemDisks = get_system_disks() -> Vec<Disk>,
+    GetSystemNetwork = get_system_network() -> Vec<NetworkStatistics>,
+    GetSystemMemory = get_system_memory() -> Memory,
+    GetSystemCores = get_system_cores() -> Vec<Core>,
+
     // Bluetooth
     GetBluetoothDevices = get_bluetooth_devices() -> Vec<BluetoothDevice>,
     StartBluetoothScanning = start_bluetooth_scanning(),

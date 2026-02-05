@@ -1,41 +1,41 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useComputed } from "@preact/signals";
+import { computed } from "@preact/signals";
 import type { ToolbarItem } from "@seelen-ui/lib/types";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import type { HTMLAttributes } from "preact/compat";
 
 import { EvaluateAction } from "../app/actionEvaluator.ts";
-import { useItemScope, useRemoteData } from "../app/hooks/index.ts";
 import { $toolbar_state } from "../../shared/state/items.ts";
 import { useItemContextMenu } from "./ContextMenu.tsx";
 import { ElementsFromEvaluated, StringFromEvaluated, useSandboxedCode } from "./EvaluatedComponents.tsx";
+import { useRemoteData } from "../app/hooks/useRemoteData.ts";
+import { useFullItemScope } from "../app/hooks/useItemScope.ts";
+import { useItemScope } from "../app/hooks/scope.ts";
 
-export interface InnerItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface InnerItemProps {
   module: Omit<ToolbarItem, "type">;
-  extraVars?: Record<string, any>;
 }
 
-export function InnerItem(props: InnerItemProps) {
-  const { extraVars = {}, module, ...rest } = props;
+const isReorderDisabled = computed(() => $toolbar_state.value.isReorderDisabled);
 
-  const { onClick, style, id, remoteData = {} } = module;
+export function InnerItem({ module }: InnerItemProps) {
+  const { id, onClick, style, remoteData = {} } = module;
+
+  const extraVars = useItemScope(module.scopes);
+  const fetchedData = useRemoteData(remoteData);
+  const scope = useFullItemScope({
+    itemId: id,
+    extraVars,
+    fetchedData,
+  });
 
   const { onContextMenu } = useItemContextMenu(id);
-
-  const fetchedData = useRemoteData(remoteData);
-  const isReorderDisabled = useComputed(() => $toolbar_state.value.isReorderDisabled);
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
     disabled: isReorderDisabled.value,
     animateLayoutChanges: () => false,
-  });
-
-  const scope = useItemScope({
-    itemId: id,
-    extraVars,
-    fetchedData,
   });
 
   const content = useSandboxedCode({ code: module.template, scope });
@@ -48,7 +48,6 @@ export function InnerItem(props: InnerItemProps) {
 
   return (
     <div
-      {...rest}
       id={id}
       ref={setNodeRef}
       {...listeners}

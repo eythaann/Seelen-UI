@@ -6,10 +6,10 @@ import { useSyncClockInterval, useThrottle } from "libs/ui/react/utils/hooks";
 import moment from "moment";
 import { useEffect, useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { $allByWidget, $settings } from "./mod";
-import { $virtual_desktop } from "./system";
-import { $focused } from "./windows";
-import * as globalState from "./global";
+import { $allByWidget, $settings } from "../../../shared/state/mod";
+import { $virtual_desktop } from "../../../shared/state/system";
+import { $focused } from "../../../shared/state/windows";
+import * as signals from "../../../shared/state/global";
 
 export function useItemScope(scopes: Readonly<ToolbarJsScope[]>) {
   const scope = {} as Record<any, any>;
@@ -54,6 +54,22 @@ export function useItemScope(scopes: Readonly<ToolbarJsScope[]>) {
     Object.assign(scope, useWorkspacesScope());
   }
 
+  if (scopes.includes(ToolbarJsScope.Disk)) {
+    Object.assign(scope, useDiskScope());
+  }
+
+  if (scopes.includes(ToolbarJsScope.NetworkStatistics)) {
+    Object.assign(scope, useNetworkStatisticsScope());
+  }
+
+  if (scopes.includes(ToolbarJsScope.Memory)) {
+    Object.assign(scope, useMemoryScope());
+  }
+
+  if (scopes.includes(ToolbarJsScope.Cpu)) {
+    Object.assign(scope, useCpuScope());
+  }
+
   return scope;
 }
 
@@ -91,16 +107,16 @@ function useDateScope() {
 }
 
 function useNotificationsScope() {
-  const count = useComputed(() => globalState.$notifications.value.length);
+  const count = useComputed(() => signals.$notifications.value.length);
   return {
     count: count.value,
   };
 }
 
 function useMediaScope() {
-  const defaultOutputDevice = useComputed(() => globalState.$media_outputs.value.find((d) => d.isDefaultMultimedia));
-  const defaultInputDevice = useComputed(() => globalState.$media_inputs.value.find((d) => d.isDefaultMultimedia));
-  const defaultMediaSession = useComputed(() => globalState.$media_sessions.value.find((d) => d.default));
+  const defaultOutputDevice = useComputed(() => signals.$media_outputs.value.find((d) => d.isDefaultMultimedia));
+  const defaultInputDevice = useComputed(() => signals.$media_inputs.value.find((d) => d.isDefaultMultimedia));
+  const defaultMediaSession = useComputed(() => signals.$media_sessions.value.find((d) => d.default));
 
   const { id, volume = 0, muted: isMuted = true } = defaultOutputDevice.value || {};
 
@@ -131,9 +147,9 @@ function useMediaScope() {
 }
 
 function useNetworkScope() {
-  const online = useComputed(() => globalState.$online.value);
-  const interfaces = useComputed(() => globalState.$network_adapters.value);
-  const defaultIp = useComputed(() => globalState.$network_local_ip.value);
+  const online = useComputed(() => signals.$online.value);
+  const interfaces = useComputed(() => signals.$network_adapters.value);
+  const defaultIp = useComputed(() => signals.$network_local_ip.value);
 
   const usingInterface = useComputed(
     () => interfaces.value.find((i) => i.ipv4 === defaultIp.value) || null,
@@ -147,7 +163,7 @@ function useNetworkScope() {
 }
 
 function useKeyboardScope() {
-  const languages = useComputed(() => globalState.$languages.value);
+  const languages = useComputed(() => signals.$languages.value);
   const activeLang = useComputed(
     () => languages.value.find((l) => l.keyboardLayouts.some((k) => k.active)) || languages.value[0],
   );
@@ -182,10 +198,8 @@ function useKeyboardScope() {
 }
 
 function useUserScope() {
-  const user = useComputed(() => globalState.$user.value);
-  const userMenuConfig = useComputed(
-    () => $allByWidget.value?.["@seelen/user-menu" as WidgetId],
-  );
+  const user = useComputed(() => signals.$user.value);
+  const userMenuConfig = useComputed(() => $allByWidget.value?.["@seelen/user-menu" as WidgetId]);
 
   const displayName = useComputed(() => {
     const source = (userMenuConfig.value as Record<string, unknown> | undefined)?.displayNameSource;
@@ -201,7 +215,7 @@ function useUserScope() {
 }
 
 function useBluetoothScope() {
-  const bluetoothDevices = useComputed(() => globalState.$bluetooth_devices.value);
+  const bluetoothDevices = useComputed(() => signals.$bluetooth_devices.value);
   const connectedDevices = useComputed(() => bluetoothDevices.value.filter((item) => item.connected));
 
   return {
@@ -211,9 +225,9 @@ function useBluetoothScope() {
 }
 
 function usePowerScope() {
-  const power = useComputed(() => globalState.$power_status.value);
-  const powerMode = useComputed(() => globalState.$power_plan.value);
-  const batteries = useComputed(() => globalState.$batteries.value);
+  const power = useComputed(() => signals.$power_status.value);
+  const powerMode = useComputed(() => signals.$power_plan.value);
+  const batteries = useComputed(() => signals.$batteries.value);
 
   return {
     power: power.value,
@@ -249,5 +263,29 @@ function useWorkspacesScope() {
     workspaces,
     activeWorkspace,
     onWheel,
+  };
+}
+
+function useDiskScope() {
+  return {
+    disks: signals.$disks.value,
+  };
+}
+
+function useNetworkStatisticsScope() {
+  return {
+    networkStatistics: signals.$network_statistics.value,
+  };
+}
+
+function useMemoryScope() {
+  return {
+    memory: signals.$memory.value,
+  };
+}
+
+function useCpuScope() {
+  return {
+    cores: signals.$cores.value,
   };
 }

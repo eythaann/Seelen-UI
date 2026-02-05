@@ -1,70 +1,74 @@
-en: Named Workspaces
-cs: Pojmenované pracovní prostory
-da: Navngivne arbejdsområder
-de: Benannte Arbeitsbereiche
-et: Nimelised tööruumid
-af: Werkruimtes genoem
-es: Espacios de trabajo con nombre
-bs: Imenovane radne prostore
-az: Adlı iş yerləri
-ca: Espais de treball anomenats
-fr: Espaces de travail nommés
-cy: Enwir lleoedd gwaith
-id: Ruang Kerja Bernama
-it: Spazi di lavoro denominati
-eu: Workspaces izendatuak
-tl: Pinangalanang mga lugar ng trabaho
-lv: Nosauktās darbvietas
-hr: Imenovani radni prostori
-lt: Įvardytos darbo vietos
-zu: Izindawo zokusebenzela
-hu: Megnevezett munkaterületek
-is: Nefndur vinnusvæði
-nl: Werkruimten op naam
-ku: Navê karkiran
-sw: Nafasi za kazi zilizopewa jina
-pl: Nazwane obszary robocze
-lb: Mam Numm Aarbechtsberäich
-ms: Dinamakan ruang kerja
-pt: Espaços de trabalho nomeados
-ro: Spații de lucru numite
-mt: Imsemmi spazji tax-xogħol
-"no": Kalt arbeidsområder
-uz: Nomlangan ish joylari
-sk: Pomenované pracovné priestory
-fi: Nimetyt työtilat
 sv: Namngivna arbetsytor
-tr: Adlandırılmış Çalışma Alanları
-el: Ονομασμένοι χώροι εργασίας
-bg: Именувани работни пространства
-so: Magacooyin la yiraahdo
-vi: Có tên là không gian làm việc
-ru: Именованные рабочие пространства
-yo: Ti a npè ni awọn iwe-iṣẹ
-uk: Іменовані робочі області
-mk: Именувани работни места
-mn: Ажлын талбарыг нэрлэсэн
-ar: مساحات العمل المسماة
-sr: Названи радни простори
-tg: Бо номҳои номбаршуда
-ka: დასახელებული სამუშაო ადგილები
-ur: ورک اسپیس کا نام دیا گیا
 hy: Անվանված աշխատատեղեր
-he: נקרא סביבות עבודה
-fa: فضاهای کاری نامگذاری شده
-ps: نومول کاري ځای
-bn: নামকরণ কর্মক্ষেত্র
-am: የተሰየሙ የስራ ቦታዎች
-ne: नामकर्मी नाम
-hi: नामित कार्यक्षेत्र
-ko: 명명된 작업 공간
-pa: ਨਾਮਕ ਵਰਕਸਪੇਸਾਂ
-ta: பெயரிடப்பட்ட பணியிடங்கள்
-zh: 已命名工作区
-gu: વર્કસ્પેસ નામના
-ja: 名前付きワークスペース
-te: పేరున్న వర్క్‌స్పేస్‌లు
-si: වැඩ කරන සේවා කොටස්
-th: Named Workspaces
 lo: ຊື່ວ່າເຮັດວຽກເຮັດງານທໍາ
+lt: Įvardytos darbo vietos
+si: වැඩ කරන සේවා කොටස්
+pt: Espaços de trabalho nomeados
+uz: Nomlangan ish joylari
+nl: Werkruimten op naam
+az: Adlı iş yerləri
 km: កន្លែងធ្វើការដែលមានឈ្មោះ
+so: Magacooyin la yiraahdo
+lb: Mam Numm Aarbechtsberäich
+af: Werkruimtes genoem
+et: Nimelised tööruumid
+bs: Imenovane radne prostore
+id: Ruang Kerja Bernama
+el: Ονομασμένοι χώροι εργασίας
+hu: Megnevezett munkaterületek
+ka: დასახელებული სამუშაო ადგილები
+ps: نومول کاري ځای
+eu: Workspaces izendatuak
+ne: नामकर्मी नाम
+ko: 명명된 작업 공간
+zh: 已命名工作区
+ja: 名前付きワークスペース
+pt-BR: Named Workspaces
+pl: Nazwane obszary robocze
+zu: Izindawo zokusebenzela
+lv: Nosauktās darbvietas
+mn: Ажлын талбарыг нэрлэсэн
+fa: فضاهای کاری نامگذاری شده
+bn: নামকরণ কর্মক্ষেত্র
+zh-TW: 命名工作空間
+he: נקרא סביבות עבודה
+de: Benannte Arbeitsbereiche
+fr: Espaces de travail nommés
+sw: Nafasi za kazi zilizopewa jina
+vi: Có tên là không gian làm việc
+ar: مساحات العمل المسماة
+mk: Именувани работни места
+hi: नामित कार्यक्षेत्र
+hr: Imenovani radni prostori
+is: Nefndur vinnusvæði
+yo: Ti a npè ni awọn iwe-iṣẹ
+pa: ਨਾਮਕ ਵਰਕਸਪੇਸਾਂ
+cy: Enwir lleoedd gwaith
+am: የተሰየሙ የስራ ቦታዎች
+zh-CN: 命名工作空间
+te: పేరున్న వర్క్‌స్పేస్‌లు
+tg: Бо номҳои номбаршуда
+tr: Adlandırılmış Çalışma Alanları
+cs: Pojmenované pracovní prostory
+ro: Spații de lucru numite
+ur: ورک اسپیس کا نام دیا گیا
+th: Named Workspaces
+en: Named Workspaces
+it: Spazi di lavoro denominati
+no: Kalt arbeidsområder
+es: Espacios de trabajo con nombre
+uk: Іменовані робочі області
+ku: Navê karkiran
+ru: Именованные рабочие пространства
+bg: Именувани работни пространства
+gu: વર્કસ્પેસ નામના
+da: Navngivne arbejdsområder
+ca: Espais de treball anomenats
+fi: Nimetyt työtilat
+sk: Pomenované pracovné priestory
+sr: Названи радни простори
+ta: பெயரிடப்பட்ட பணியிடங்கள்
+pt-PT: Espaços de trabalho nomeados
+ms: Dinamakan ruang kerja
+mt: Imsemmi spazji tax-xogħol
+tl: Pinangalanang mga lugar ng trabaho

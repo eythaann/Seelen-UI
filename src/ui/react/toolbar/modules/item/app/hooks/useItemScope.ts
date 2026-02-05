@@ -13,7 +13,7 @@ import type { ItemScopeOptions } from "../../domain/types.ts";
  * @param options - Configuration options for the scope
  * @returns The scope object with all combined data
  */
-export function useItemScope(options: ItemScopeOptions) {
+export function useFullItemScope(options: ItemScopeOptions) {
   const { itemId, extraVars = {}, fetchedData = {} } = options;
 
   const env = useComputed(() => globalState.$env.value);
