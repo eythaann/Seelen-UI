@@ -1,6 +1,13 @@
-use std::{collections::HashSet, fs::OpenOptions, io::Write};
+use std::{
+    collections::HashSet,
+    fs::{create_dir_all, OpenOptions},
+    io::Write,
+};
 
-use seelen_core::state::{ToolbarItem, ToolbarItem2, ToolbarJsScope, ToolbarState};
+use seelen_core::{
+    resource::WidgetId,
+    state::{ToolbarItem, ToolbarItem2, ToolbarJsScope, ToolbarState},
+};
 
 use crate::{error::Result, utils::constants::SEELEN_COMMON};
 
@@ -39,10 +46,12 @@ impl FullState {
     }
 
     fn _read_toolbar_items(&mut self) -> Result<()> {
-        if SEELEN_COMMON.toolbar_items_path().exists() {
-            self.toolbar_items = serde_yaml::from_str(&std::fs::read_to_string(
-                SEELEN_COMMON.toolbar_items_path(),
-            )?)?;
+        let path = SEELEN_COMMON
+            .widget_data_dir(&WidgetId::known_toolbar())
+            .join("state.yml");
+
+        if path.exists() {
+            self.toolbar_items = serde_yaml::from_str(&std::fs::read_to_string(path)?)?;
             self.toolbar_items.sanitize();
         } else {
             self.toolbar_items = Self::initial_toolbar_items();
@@ -55,16 +64,22 @@ impl FullState {
     pub(super) fn read_toolbar_items(&mut self) {
         if let Err(err) = self._read_toolbar_items() {
             log::error!("Failed to read toolbar items: {err}");
-            Self::show_corrupted_state_to_user(SEELEN_COMMON.toolbar_items_path());
+            Self::show_corrupted_state_to_user(
+                &SEELEN_COMMON.widget_data_dir(&WidgetId::known_toolbar()),
+            );
         }
     }
 
     pub fn write_toolbar_items(&self, items: &ToolbarState) -> Result<()> {
+        let dir = SEELEN_COMMON.widget_data_dir(&WidgetId::known_toolbar());
+        create_dir_all(&dir)?;
+
         let mut file = OpenOptions::new()
             .write(true)
             .create(true)
             .truncate(true)
-            .open(SEELEN_COMMON.toolbar_items_path())?;
+            .open(dir.join("state.yml"))?;
+        file.lock()?;
         file.write_all(serde_yaml::to_string(items)?.as_bytes())?;
         file.flush()?;
         Ok(())

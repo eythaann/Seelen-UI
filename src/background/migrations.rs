@@ -1,3 +1,4 @@
+use seelen_core::resource::WidgetId;
 use tauri::{path::BaseDirectory, Manager};
 
 use crate::{app::get_app_handle, error::Result, utils::constants::SEELEN_COMMON};
@@ -26,14 +27,11 @@ impl RestorationAndMigration {
 
     // migration of user settings files below v2.1.0
     fn migration_v2_1_0() -> Result<()> {
-        let old_folder = SEELEN_COMMON.user_placeholders_path();
+        let old_folder = SEELEN_COMMON.app_data_dir().join("placeholders");
         let old = old_folder.join("custom.yml");
         if old.exists() {
-            std::fs::copy(old, SEELEN_COMMON.toolbar_items_path())?;
-            std::fs::rename(
-                old_folder,
-                old_folder.with_file_name("deprecated_placeholders"),
-            )?;
+            std::fs::copy(old, SEELEN_COMMON.app_cache_dir().join("toolbar_items.yml"))?;
+            std::fs::remove_dir_all(old_folder)?;
         }
         Ok(())
     }
@@ -70,6 +68,24 @@ impl RestorationAndMigration {
                 old,
                 SEELEN_COMMON.app_data_dir().join("settings_by_app.yml"),
             )?;
+        }
+
+        let old_weg_save = SEELEN_COMMON.app_data_dir().join("seelenweg_items_v2.yml");
+        if old_weg_save.exists() {
+            let new_weg_save = SEELEN_COMMON
+                .widget_data_dir(&WidgetId::known_weg())
+                .join("state.yml");
+            std::fs::create_dir_all(new_weg_save.parent().unwrap())?;
+            std::fs::rename(old_weg_save, new_weg_save)?;
+        }
+
+        let old_toolbar_save = SEELEN_COMMON.app_data_dir().join("toolbar_items.yml");
+        if old_toolbar_save.exists() {
+            let new_toolbar_save = SEELEN_COMMON
+                .widget_data_dir(&WidgetId::known_toolbar())
+                .join("state.yml");
+            std::fs::create_dir_all(new_toolbar_save.parent().unwrap())?;
+            std::fs::rename(old_toolbar_save, new_toolbar_save)?;
         }
         Ok(())
     }

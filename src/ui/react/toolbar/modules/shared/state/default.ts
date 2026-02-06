@@ -1,23 +1,35 @@
 import { type PluginId, type ToolbarItem, ToolbarJsScope } from "@seelen-ui/lib/types";
+import { $toolbar_state } from "./items";
 
-import { $toolbar_state } from "../shared/state/items.ts";
+const baseItem: ToolbarItem = {
+  id: "-",
+  scopes: [],
+  template: 'return ""',
+  tooltip: null,
+  badge: null,
+  remoteData: {},
+  style: {},
+  onClick: null,
+};
 
-export function RestoreToDefault() {
+export function restoreStateToDefault() {
   // based on src\background\state\application\toolbar_items.rs
   $toolbar_state.value = {
-    ...$toolbar_state.value,
+    isReorderDisabled: false,
     left: [
       "@seelen/tb-user-menu" as PluginId,
       {
-        id: crypto.randomUUID(),
+        ...baseItem,
+        id: crypto.randomUUID() as string,
         template: 'return "|"',
-      } as ToolbarItem,
+      },
       "@default/focused-app" as PluginId,
       {
-        id: crypto.randomUUID(),
+        ...baseItem,
+        id: crypto.randomUUID() as string,
         scopes: [ToolbarJsScope.FocusedApp],
         template: 'return focusedApp.title ? "-" : ""',
-      } as ToolbarItem,
+      },
       "@default/focused-app-title" as PluginId,
     ],
     center: ["@seelen/tb-calendar-popup" as PluginId],

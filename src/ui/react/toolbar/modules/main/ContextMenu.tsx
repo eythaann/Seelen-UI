@@ -3,10 +3,9 @@ import type { ContextMenu, ContextMenuItem, PluginId, WidgetId } from "@seelen-u
 
 import { useTranslation } from "react-i18next";
 
-import { RestoreToDefault } from "./application.ts";
-
 import { $actions, $plugins, $toolbar_state } from "../shared/state/items.ts";
 import { getResourceText } from "@shared";
+import { restoreStateToDefault } from "../shared/state/default.ts";
 
 const identifier = crypto.randomUUID();
 const modulesIdentifier = crypto.randomUUID();
@@ -35,7 +34,7 @@ Widget.self.webview.listen(onContextMenuClick, ({ payload }) => {
   }
 
   if (key === "restore") {
-    RestoreToDefault();
+    restoreStateToDefault();
   }
 });
 

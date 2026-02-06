@@ -15,7 +15,7 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use seelen_core::{
-    resource::ResourceKind,
+    resource::{ResourceKind, WidgetId},
     state::{AppsConfigurationList, CssStyles, SluPopupConfig, SluPopupContent, WegItems},
 };
 use std::{
@@ -101,7 +101,12 @@ impl FullState {
                 icons_changed = true;
             };
 
-            if !weg_items_changed && path == SEELEN_COMMON.weg_items_path() {
+            if !weg_items_changed
+                && path
+                    == &SEELEN_COMMON
+                        .widget_data_dir(&WidgetId::known_weg())
+                        .join("state.yml")
+            {
                 weg_items_changed = true;
             }
 
@@ -210,14 +215,18 @@ impl FullState {
             },
         )?;
 
+        let dock_state = SEELEN_COMMON
+            .widget_data_dir(&WidgetId::known_weg())
+            .join("state.yml");
         let paths: Vec<&Path> = vec![
             SEELEN_COMMON.settings_path(),
-            SEELEN_COMMON.weg_items_path(),
             SEELEN_COMMON.user_icons_path(),
             SEELEN_COMMON.user_themes_path(),
             SEELEN_COMMON.user_plugins_path(),
             SEELEN_COMMON.user_widgets_path(),
             SEELEN_COMMON.user_wallpapers_path(),
+            // special case, this should be removed after refactoring on dock in future versions.
+            &dock_state,
         ];
 
         for path in paths {

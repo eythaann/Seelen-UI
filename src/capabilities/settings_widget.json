@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/windows-schema.json",
   "identifier": "migrated",
-  "description": "permissions that were migrated from v1. windows: [settings, wm]",
+  "description": "Settings Widget Capabilities",
   "local": true,
   "windows": [
     "QHNlZWxlbi9zZXR0aW5ncw"

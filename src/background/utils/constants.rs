@@ -3,6 +3,7 @@ use std::{
     sync::{Arc, LazyLock},
 };
 
+use seelen_core::resource::{ResourceId, WidgetId};
 use tauri::Manager;
 use windows::Win32::UI::Shell::FOLDERID_Windows;
 
@@ -19,8 +20,6 @@ pub struct SeelenCommon {
     temp_dir: PathBuf,
     // specifits
     settings: PathBuf,
-    weg_items: PathBuf,
-    toolbar_items: PathBuf,
     icons: PathBuf,
     system_icon_pack: PathBuf,
     user_themes: PathBuf,
@@ -34,9 +33,6 @@ pub struct SeelenCommon {
     sounds: PathBuf,
     // system
     system_dir: PathBuf,
-
-    // @deprecated since v2.1.0
-    user_placeholders: PathBuf,
 }
 
 #[allow(dead_code)]
@@ -57,8 +53,6 @@ impl SeelenCommon {
 
         Self {
             settings: data_dir.join("settings.json"),
-            weg_items: data_dir.join("seelenweg_items_v2.yml"),
-            toolbar_items: data_dir.join("toolbar_items.yml"),
             icons: data_dir.join("iconpacks"),
             system_icon_pack: cache_dir.join("gen-icon-pack"),
             sounds: data_dir.join("soundpacks"),
@@ -67,7 +61,6 @@ impl SeelenCommon {
             user_plugins: data_dir.join("plugins"),
             bundled_plugins: resource_dir.join("static/plugins"),
             bundled_app_configs: resource_dir.join("static/apps_templates"),
-            user_placeholders: data_dir.join("placeholders"),
             widgets: data_dir.join("widgets"),
             bundled_widgets: resource_dir.join("static/widgets"),
             wallpapers: data_dir.join("wallpapers"),
@@ -105,14 +98,6 @@ impl SeelenCommon {
         &self.settings
     }
 
-    pub fn weg_items_path(&self) -> &Path {
-        &self.weg_items
-    }
-
-    pub fn toolbar_items_path(&self) -> &Path {
-        &self.toolbar_items
-    }
-
     pub fn system_icon_pack_path(&self) -> &Path {
         &self.system_icon_pack
     }
@@ -145,11 +130,6 @@ impl SeelenCommon {
         &self.bundled_app_configs
     }
 
-    /// @deprecated since v2.1.0 will be removed in v3.0
-    pub fn user_placeholders_path(&self) -> &Path {
-        &self.user_placeholders
-    }
-
     pub fn user_widgets_path(&self) -> &Path {
         &self.widgets
     }
@@ -160,5 +140,14 @@ impl SeelenCommon {
 
     pub fn user_wallpapers_path(&self) -> &Path {
         &self.wallpapers
+    }
+
+    pub fn widget_data_dir(&self, id: &WidgetId) -> PathBuf {
+        let data_dir = SEELEN_COMMON.app_data_dir().join("data");
+        let folder = match &**id {
+            ResourceId::Local(id) => id.trim_start_matches("@").replace("/", "-"),
+            ResourceId::Remote(uuid) => uuid.to_string(),
+        };
+        data_dir.join(folder)
     }
 }

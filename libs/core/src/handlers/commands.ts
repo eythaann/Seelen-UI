@@ -39,6 +39,7 @@ export enum SeelenCommand {
   StateGetWegItems = "state_get_weg_items",
   StateWriteWegItems = "state_write_weg_items",
   StateGetToolbarItems = "state_get_toolbar_items",
+  StateWriteToolbarItems = "state_write_toolbar_items",
   StateGetSettings = "state_get_settings",
   StateWriteSettings = "state_write_settings",
   StateGetSettingsByApp = "state_get_settings_by_app",

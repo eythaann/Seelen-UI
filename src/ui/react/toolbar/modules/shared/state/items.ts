@@ -4,10 +4,8 @@ import type { PluginId, ToolbarItem2, ToolbarState } from "@seelen-ui/lib/types"
 
 import { matchIds } from "../utils.ts";
 import { debounce } from "lodash";
-import { path } from "@tauri-apps/api";
-import yaml from "js-yaml";
-import { fs } from "@seelen-ui/lib/tauri";
 import { emit, listen } from "@tauri-apps/api/event";
+import { restoreStateToDefault } from "./default.ts";
 
 export const $toolbar_state = signal(await invoke(SeelenCommand.StateGetToolbarItems));
 listen("hidden::sync-toolbar-items", ({ payload }) => {
@@ -17,20 +15,28 @@ listen("hidden::sync-toolbar-items", ({ payload }) => {
   }
 });
 
-export const save = debounce(async (value: ToolbarState) => {
-  console.trace("Saving toolbar state");
-  const filePath = await path.join(await path.appDataDir(), "toolbar_items.yml");
-  await fs.writeTextFile(filePath, yaml.dump(value));
-}, 1000);
-
-effect(() => {
-  emit("hidden::sync-toolbar-items", $toolbar_state.value);
-  save($toolbar_state.value);
-});
-
 export const $plugins = signal((await PluginList.getAsync()).forCurrentWidget());
 await PluginList.onChange((list) => {
   $plugins.value = list.forCurrentWidget();
+});
+
+export const saveTbState = debounce(async (items: ToolbarState) => {
+  console.trace("Saving toolbar state");
+  await invoke(SeelenCommand.StateWriteToolbarItems, { items });
+}, 1000);
+
+effect(() => {
+  if (
+    $toolbar_state.value.left.length === 0 &&
+    $toolbar_state.value.center.length === 0 &&
+    $toolbar_state.value.right.length === 0
+  ) {
+    restoreStateToDefault();
+    return;
+  }
+
+  emit("hidden::sync-toolbar-items", $toolbar_state.value);
+  saveTbState($toolbar_state.value);
 });
 
 export const $actions = {
