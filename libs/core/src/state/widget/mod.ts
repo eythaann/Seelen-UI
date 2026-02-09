@@ -18,7 +18,6 @@ import { WidgetAutoSizer } from "./sizing.ts";
 import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
 import type { InitWidgetOptions, WidgetInformation } from "./interfaces.ts";
-import { getCurrentWindow } from "@tauri-apps/api/window";
 import { getCurrentWebview } from "@tauri-apps/api/webview";
 
 interface WidgetInternalState {
@@ -33,6 +32,7 @@ interface WidgetInternalState {
     width: number;
     height: number;
   };
+  firstFocus: boolean;
 }
 
 /**
@@ -82,6 +82,7 @@ export class Widget {
       width: 0,
       height: 0,
     },
+    firstFocus: true,
   };
 
   private constructor(widget: IWidget) {
@@ -294,8 +295,6 @@ export class Widget {
       this.runtimeState.position.x = e.payload.x;
       this.runtimeState.position.y = e.payload.y;
     });
-
-    getCurrentWebview().setFocus();
   }
 
   /**
@@ -317,7 +316,7 @@ export class Widget {
     this.runtimeState.ready = true;
     await this.autoSizer?.execute();
 
-    if (this.initOptions.show ?? !this.def.lazy) {
+    if ((this.initOptions.show ?? !this.def.lazy) && !(await this.webview.isVisible())) {
       await this.show();
       await this.focus();
     }
@@ -356,7 +355,13 @@ export class Widget {
 
   /** Will force foreground the widget */
   public async focus(): Promise<void> {
-    await getCurrentWindow().setFocus();
+    if (this.runtimeState.firstFocus) {
+      await getCurrentWebview().setFocus();
+      this.runtimeState.firstFocus = false;
+    }
+    await invoke(SeelenCommand.RequestFocus, { hwnd: this.runtimeState.hwnd }).catch(() => {
+      console.warn(`Failed to focus widget: ${this.decoded.label}`);
+    });
   }
 
   public hide(closeAfterInactivity?: boolean): void {

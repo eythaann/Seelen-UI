@@ -21,12 +21,6 @@ if (!window.__SLU_WIDGET) {
   throw new Error(`Widget definition not found for ${currentWidgetId}`);
 }
 
-// load index.js
-const script = document.createElement("script");
-script.type = "module";
-script.textContent = await indexJsCode;
-document.head.appendChild(script);
-
 // remove default browser actions, we don't need them
 removeDefaultWebviewActions();
 hookLocalStorage(currentWidgetId);
@@ -38,23 +32,25 @@ setTimeout(() => {
 
 if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
   // workaround for tauri/webview2 memory leak
-  setTimeout(async () => {
+  setInterval(async () => {
     const app = await _invoke<FocusedApp>("get_focused_app");
     // avoid reload the UI while playing as this can cause fps drops
-    if (app.isFullscreened) {
+    if (app.isFullscreened || app.exe?.endsWith("seelen-ui.exe")) {
       return;
     }
 
-    if (!app.exe?.endsWith("seelen-ui.exe")) {
-      console.trace("Reloading widget.");
-      // add a query hash to force be a new page
-      location.search = `r=${Date.now()}`;
-    }
-  }, 60_000 * 10); // every 10 minutes
+    console.trace("Reloading widget.");
+    location.search = `r=${Date.now()}`; // add a query hash to force be a new page
+  }, 10_000); // every 10 minutes
 }
 
 listen("internal::session_resumed", () => {
   console.trace("Reloading widget.");
-  // add a query hash to force be a new page
-  location.search = `r=${Date.now()}`;
+  location.search = `r=${Date.now()}`; // add a query hash to force be a new page
 });
+
+// load index.js
+const script = document.createElement("script");
+script.type = "module";
+script.textContent = await indexJsCode;
+document.head.appendChild(script);
