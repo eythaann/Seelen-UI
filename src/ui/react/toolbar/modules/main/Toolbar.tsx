@@ -22,7 +22,7 @@ import { $settings } from "../shared/state/mod.ts";
 import { matchIds } from "../shared/utils.ts";
 import { ItemsDropableContainer } from "./ItemsContainer.tsx";
 import { componentByModule } from "./mappins.tsx";
-import { $bar_should_be_hidden, $lastFocusedOnMonitor, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
+import { $hidden_by_autohide, $lastFocusedOnMonitor, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
 import { ShowDesktopButton } from "./CornerAction.tsx";
 import { useMainContextMenu } from "./ContextMenu.tsx";
 
@@ -131,7 +131,7 @@ export function FancyToolbar() {
   return (
     <div
       className={cx("ft-bar", $settings.value.position.toLowerCase(), {
-        "ft-bar-hidden": $bar_should_be_hidden.value,
+        "ft-bar-hidden": $hidden_by_autohide.value,
       })}
       data-there-is-maximized-on-background={$thereIsMaximizedOnBg.value}
       data-focused-is-maximized={!!$lastFocusedOnMonitor.value?.isMaximized}

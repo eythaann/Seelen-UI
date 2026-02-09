@@ -58,12 +58,16 @@ export const $is_tb_overlapped = computed(() => {
   return true;
 });
 
-export const $bar_should_be_hidden = signal(false);
+export const $hidden_by_autohide = signal(false);
 const setToolbarAsHidden = computed(() => {
-  return debounce(() => ($bar_should_be_hidden.value = true), $settings.value.delayToHide);
+  return debounce(() => ($hidden_by_autohide.value = true), $settings.value.delayToHide);
 });
 const setToolbarAsNotHidden = computed(() => {
-  return debounce(() => ($bar_should_be_hidden.value = false), $settings.value.delayToShow);
+  return debounce(() => ($hidden_by_autohide.value = false), $settings.value.delayToShow);
+});
+
+effect(() => {
+  Widget.self.webview.setIgnoreCursorEvents($hidden_by_autohide.value);
 });
 
 effect(() => {
