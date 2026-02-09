@@ -41,7 +41,7 @@ if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
 
     console.trace("Reloading widget.");
     location.search = `r=${Date.now()}`; // add a query hash to force be a new page
-  }, 10_000); // every 10 minutes
+  }, 60_000 * 10); // every 10 minutes
 }
 
 listen("internal::session_resumed", () => {
