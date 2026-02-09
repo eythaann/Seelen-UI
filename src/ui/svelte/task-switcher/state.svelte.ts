@@ -84,7 +84,7 @@ export const globalState = new State();
 $effect.root(() => {
   $effect(() => {
     if (showing) {
-      widget.show().then(widget.focus);
+      widget.show().then(() => widget.focus());
     } else {
       widget.hide();
     }

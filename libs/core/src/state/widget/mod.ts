@@ -18,6 +18,8 @@ import { WidgetAutoSizer } from "./sizing.ts";
 import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
 import type { InitWidgetOptions, WidgetInformation } from "./interfaces.ts";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { getCurrentWebview } from "@tauri-apps/api/webview";
 
 interface WidgetInternalState {
   hwnd: number;
@@ -292,6 +294,8 @@ export class Widget {
       this.runtimeState.position.x = e.payload.x;
       this.runtimeState.position.y = e.payload.y;
     });
+
+    getCurrentWebview().setFocus();
   }
 
   /**
@@ -315,6 +319,7 @@ export class Widget {
 
     if (this.initOptions.show ?? !this.def.lazy) {
       await this.show();
+      await this.focus();
     }
 
     // this will mark the widget as ready, and send pending trigger event if exists
@@ -351,9 +356,7 @@ export class Widget {
 
   /** Will force foreground the widget */
   public async focus(): Promise<void> {
-    await invoke(SeelenCommand.RequestFocus, { hwnd: this.runtimeState.hwnd }).catch(() => {
-      console.warn(`Failed to focus widget: ${this.decoded.label}`);
-    });
+    await getCurrentWindow().setFocus();
   }
 
   public hide(closeAfterInactivity?: boolean): void {
