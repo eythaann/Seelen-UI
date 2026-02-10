@@ -1,13 +1,10 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { Widget } from "@seelen-ui/lib";
   import { globalState } from "./state.svelte";
   import TaskItem from "./components/TaskItem.svelte";
 
-  const widget = Widget.getCurrent();
-
-  onMount(() => {
-    widget.ready();
+  $effect(() => {
+    Widget.self.ready({ show: false });
   });
 </script>
 

@@ -10,7 +10,7 @@
   import Notification from "../notifications/components/Notification.svelte";
 
   $effect(() => {
-    Widget.getCurrent().ready();
+    Widget.getCurrent().ready({ show: false });
   });
 
   let lastChanged = $state<string | null>(null);

@@ -11,12 +11,6 @@ export interface WidgetInformation {
 
 export interface InitWidgetOptions {
   /**
-   * If show the widget on Ready
-   *
-   * @default !widget.lazy
-   */
-  show?: boolean;
-  /**
    * Will auto size the widget to the content size of the element
    * @example
    *  autoSizeByContent: document.body,
@@ -32,4 +26,13 @@ export interface InitWidgetOptions {
    * @default widget.preset === "Desktop"
    */
   saveAndRestoreLastRect?: boolean;
+}
+
+export interface ReadyWidgetOptions {
+  /**
+   * If show the widget on Ready
+   *
+   * @default !widget.lazy
+   */
+  show?: boolean;
 }

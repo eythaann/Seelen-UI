@@ -9,9 +9,7 @@ import "@shared/styles/reset.css";
 const root = document.getElementById("root")!;
 
 const widget = Widget.getCurrent();
-await widget.init({
-  show: false,
-});
+await widget.init();
 await widget.webview.setResizable(false);
 
 disableAnimationsOnPerformanceMode();

@@ -17,7 +17,7 @@ import { debounce } from "../../utils/async.ts";
 import { WidgetAutoSizer } from "./sizing.ts";
 import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
-import type { InitWidgetOptions, WidgetInformation } from "./interfaces.ts";
+import type { InitWidgetOptions, ReadyWidgetOptions, WidgetInformation } from "./interfaces.ts";
 import { getCurrentWebview } from "@tauri-apps/api/webview";
 
 interface WidgetInternalState {
@@ -68,7 +68,6 @@ export class Widget {
   public readonly webview: WebviewWindow;
 
   private autoSizer?: WidgetAutoSizer;
-  private initOptions: InitWidgetOptions = {};
 
   private runtimeState: WidgetInternalState = {
     hwnd: 0,
@@ -255,9 +254,7 @@ export class Widget {
     }
 
     this.runtimeState.hwnd = await invoke(SeelenCommand.GetSelfWindowId);
-
     this.runtimeState.initialized = true;
-    this.initOptions = options;
 
     if (options.autoSizeByContent) {
       this.autoSizer = new WidgetAutoSizer(this, options.autoSizeByContent);
@@ -303,7 +300,9 @@ export class Widget {
    * If the widget is not lazy this will inmediately show the widget.
    * Lazy widget should be shown on trigger action.
    */
-  public async ready(): Promise<void> {
+  public async ready(options: ReadyWidgetOptions = {}): Promise<void> {
+    const { show = !this.def.lazy } = options;
+
     if (!this.runtimeState.initialized) {
       throw new Error(`Widget was not initialized before ready`);
     }
@@ -316,7 +315,7 @@ export class Widget {
     this.runtimeState.ready = true;
     await this.autoSizer?.execute();
 
-    if ((this.initOptions.show ?? !this.def.lazy) && !(await this.webview.isVisible())) {
+    if (show && !(await this.webview.isVisible())) {
       await this.show();
       await this.focus();
     }

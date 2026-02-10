@@ -13,6 +13,7 @@ import "@shared/styles/reset.css";
 import "./styles/global.css";
 
 await Widget.getCurrent().init();
+Widget.self.webview.setFocusable(false);
 
 await loadTranslations();
 disableAnimationsOnPerformanceMode();

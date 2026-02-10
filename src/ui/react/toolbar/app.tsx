@@ -1,24 +1,27 @@
 import { $system_colors } from "libs/ui/react/utils/signals.ts";
 import { useDarkMode } from "libs/ui/react/utils/styling.ts";
-import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { ConfigProvider, theme } from "antd";
-
+import { Widget } from "@seelen-ui/lib";
 import { ErrorBoundary } from "../weg/components/Error/index.tsx";
 import { ErrorFallback } from "./components/Error/index.tsx";
 import { FancyToolbar } from "./modules/main/Toolbar.tsx";
 import { useSignalEffect } from "@preact/signals";
 import { $lastFocusedOnMonitor } from "./modules/shared/state/windows.ts";
+import { useEffect } from "preact/hooks";
 
-const webview = getCurrentWebviewWindow();
 export function App() {
   const isDarkMode = useDarkMode();
+
+  useEffect(() => {
+    Widget.self.ready({ show: false });
+  }, []);
 
   useSignalEffect(() => {
     const fullscreened = !!$lastFocusedOnMonitor.value?.isFullscreened;
     if (fullscreened) {
-      webview.hide();
+      Widget.self.hide();
     } else {
-      webview.show();
+      Widget.self.show();
     }
   });
 

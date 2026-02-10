@@ -9,7 +9,6 @@ const root = document.getElementById("root")!;
 
 await Widget.self.init({
   autoSizeByContent: root,
-  show: false,
 });
 await Widget.self.webview.setFocusable(false);
 
