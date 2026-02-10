@@ -135,19 +135,29 @@ pub struct WebviewArgs {
 }
 
 impl WebviewArgs {
-    const BASE_OPT: &str = "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer";
-    const BASE_OPT2: &str =
-        "--no-first-run --disable-site-isolation-trials --disable-background-timer-throttling";
-    const PERFORMANCE_OPT: &str = "--enable-low-end-device-mode --in-process-gpu --V8Maglev";
+    const BASE_ARGS: &[&str] = &[
+        "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer",
+        "--no-first-run",
+        "--disable-site-isolation-trials",
+        /* "--disable-breakpad",
+        "--disable-component-update",
+        "--disable-default-apps",
+        "--disable-background-timer-throttling",
+        "--disable-background-networking", */
+    ];
+
+    const PERFORMANCE_ARGS: &[&str] = &["--enable-low-end-device-mode", "--in-process-gpu"];
 
     pub fn new() -> Self {
+        let common_args = Self::BASE_ARGS
+            .iter()
+            .chain(Self::PERFORMANCE_ARGS)
+            .map(|s| s.to_string())
+            .collect();
+
         Self {
-            common_args: vec![
-                Self::BASE_OPT.to_string(),
-                Self::BASE_OPT2.to_string(),
-                Self::PERFORMANCE_OPT.to_string(),
-            ],
-            extra_args: vec![],
+            common_args,
+            extra_args: Vec::new(),
         }
     }
 
@@ -164,7 +174,7 @@ impl WebviewArgs {
         } else {
             SEELEN_COMMON
                 .app_cache_dir()
-                .join(self.extra_args.join("").replace("-", ""))
+                .join(self.extra_args.join("").replace('-', ""))
         }
     }
 }

@@ -1,6 +1,6 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import type { ContextMenu, ContextMenuItem, PluginId, WidgetId } from "@seelen-ui/lib/types";
-
+import { useMemo } from "preact/compat";
 import { useTranslation } from "react-i18next";
 
 import { $actions, $plugins, $toolbar_state } from "../shared/state/items.ts";
@@ -53,76 +53,79 @@ export function useMainContextMenu(): ContextMenu {
     i18n: { language },
   } = useTranslation();
 
-  const allItems = [
-    ...$toolbar_state.value.left,
-    ...$toolbar_state.value.center,
-    ...$toolbar_state.value.right,
-  ];
+  // Memoize context menu to prevent reconstruction on every render
+  return useMemo(() => {
+    const allItems = [
+      ...$toolbar_state.value.left,
+      ...$toolbar_state.value.center,
+      ...$toolbar_state.value.right,
+    ];
 
-  function isAlreadyAdded(id: PluginId): boolean {
-    return allItems.some((item) => item === id);
-  }
+    function isAlreadyAdded(id: PluginId): boolean {
+      return allItems.some((item) => item === id);
+    }
 
-  return {
-    identifier,
-    items: [
-      {
-        type: "Submenu",
-        icon: "CgExtensionAdd",
-        label: t("context_menu.modules"),
-        identifier: modulesIdentifier,
-        items: [
-          // restore
-          {
-            type: "Item",
-            key: "restore",
-            icon: "TbRestore",
-            label: t("context_menu.restore"),
-            callbackEvent: onContextMenuClick,
-          },
-          {
-            type: "Separator",
-          },
-          ...$plugins.value
-            .map<Extract<ContextMenuItem, { type: "Item" }>>((plugin) => ({
+    return {
+      identifier,
+      items: [
+        {
+          type: "Submenu",
+          icon: "CgExtensionAdd",
+          label: t("context_menu.modules"),
+          identifier: modulesIdentifier,
+          items: [
+            // restore
+            {
               type: "Item",
-              key: plugin.id,
-              label: getResourceText(plugin.metadata.displayName, language),
-              icon: plugin.icon,
-              callbackEvent: onTogglePlugin,
-              checked: isAlreadyAdded(plugin.id),
-            }))
-            .toSorted((p1, p2) => p1.label.localeCompare(p2.label)),
-        ],
-      },
-      {
-        type: "Separator",
-      },
-      {
-        type: "Item",
-        key: "reoder",
-        icon: $toolbar_state.value.isReorderDisabled ? "VscUnlock" : "VscLock",
-        label: t(
-          $toolbar_state.value.isReorderDisabled ? "context_menu.reorder_enable" : "context_menu.reorder_disable",
-        ),
-        callbackEvent: onContextMenuClick,
-      },
-      {
-        type: "Item",
-        key: "task_manager",
-        icon: "PiChartLineFill",
-        label: t("context_menu.task_manager"),
-        callbackEvent: onContextMenuClick,
-        checked: null,
-        disabled: false,
-      },
-      {
-        type: "Item",
-        key: "settings",
-        icon: "RiSettings4Fill",
-        label: t("context_menu.settings"),
-        callbackEvent: onContextMenuClick,
-      },
-    ],
-  };
+              key: "restore",
+              icon: "TbRestore",
+              label: t("context_menu.restore"),
+              callbackEvent: onContextMenuClick,
+            },
+            {
+              type: "Separator",
+            },
+            ...$plugins.value
+              .map<Extract<ContextMenuItem, { type: "Item" }>>((plugin) => ({
+                type: "Item",
+                key: plugin.id,
+                label: getResourceText(plugin.metadata.displayName, language),
+                icon: plugin.icon,
+                callbackEvent: onTogglePlugin,
+                checked: isAlreadyAdded(plugin.id),
+              }))
+              .toSorted((p1, p2) => p1.label.localeCompare(p2.label)),
+          ],
+        },
+        {
+          type: "Separator",
+        },
+        {
+          type: "Item",
+          key: "reoder",
+          icon: $toolbar_state.value.isReorderDisabled ? "VscUnlock" : "VscLock",
+          label: t(
+            $toolbar_state.value.isReorderDisabled ? "context_menu.reorder_enable" : "context_menu.reorder_disable",
+          ),
+          callbackEvent: onContextMenuClick,
+        },
+        {
+          type: "Item",
+          key: "task_manager",
+          icon: "PiChartLineFill",
+          label: t("context_menu.task_manager"),
+          callbackEvent: onContextMenuClick,
+          checked: null,
+          disabled: false,
+        },
+        {
+          type: "Item",
+          key: "settings",
+          icon: "RiSettings4Fill",
+          label: t("context_menu.settings"),
+          callbackEvent: onContextMenuClick,
+        },
+      ],
+    };
+  }, [$toolbar_state.value, $plugins.value, t, language]);
 }

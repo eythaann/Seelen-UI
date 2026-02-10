@@ -14,6 +14,7 @@ import { useComputed, useSignal } from "@preact/signals";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { ToolbarItem2 } from "@seelen-ui/lib/types";
 import { cx } from "libs/ui/react/utils/styling.ts";
+import { useCallback } from "preact/compat";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
@@ -57,15 +58,16 @@ export function FancyToolbar() {
   });
   const sensors = useSensors(pointerSensor);
 
-  function findContainer(id: string): Container | undefined {
+  // Memoize findContainer to stabilize drag callbacks and prevent re-renders
+  const findContainer = useCallback((id: string): Container | undefined => {
     if (["left", "center", "right"].includes(id)) {
       return $containers.value.find((c) => c.id === id);
     }
     return $containers.value.find((c) => c.items.some((item) => matchIds(item, id)));
-  }
+  }, [$containers.value]);
 
   // this handles the item container change while dragging
-  function handleDragOver({ active, over }: DragOverEvent) {
+  const handleDragOver = useCallback(({ active, over }: DragOverEvent) => {
     if (!over) return;
 
     const activeContainer = findContainer(active.id as string);
@@ -91,10 +93,10 @@ export function FancyToolbar() {
       ),
       [overContainer.id]: newOverContainerItems,
     };
-  }
+  }, [findContainer]);
 
   // this will handle the sorting
-  function handleDragEnd({ active, over }: DragEndEvent) {
+  const handleDragEnd = useCallback(({ active, over }: DragEndEvent) => {
     if (!over || active.id === over.id) {
       return;
     }
@@ -116,14 +118,14 @@ export function FancyToolbar() {
         [activeContainer.id]: newItems,
       };
     }
-  }
+  }, [findContainer]);
 
-  function onContextMenu() {
+  const onContextMenu = useCallback(() => {
     invoke(SeelenCommand.TriggerContextMenu, {
       menu: contextMenuDef,
       forwardTo: null,
     });
-  }
+  }, [contextMenuDef]);
 
   const activeContainer = $dragging_id.value ? findContainer($dragging_id.value) : undefined;
   const draggingItem = activeContainer?.items.find((item) => matchIds(item, $dragging_id.value!));

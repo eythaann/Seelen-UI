@@ -9,68 +9,114 @@ import { useTranslation } from "react-i18next";
 import { $allByWidget, $settings } from "../../../shared/state/mod";
 import { $virtual_desktop } from "../../../shared/state/system";
 import { $focused } from "../../../shared/state/windows";
-import * as signals from "../../../shared/state/global";
+import {
+  useLazyBatteries,
+  useLazyBluetoothDevices,
+  useLazyCores,
+  useLazyDisks,
+  useLazyLanguages,
+  useLazyMediaDevices,
+  useLazyMediaSessions,
+  useLazyMemory,
+  useLazyNetworkAdapters,
+  useLazyNetworkLocalIp,
+  useLazyNetworkStatistics,
+  useLazyNotifications,
+  useLazyOnline,
+  useLazyPowerMode,
+  useLazyPowerStatus,
+  useLazyUser,
+} from "../../../shared/state/lazy";
 
 export function useItemScope(scopes: Readonly<ToolbarJsScope[]>) {
+  let fetching = false;
   const scope = {} as Record<any, any>;
 
   if (scopes.includes(ToolbarJsScope.Date)) {
-    Object.assign(scope, useDateScope());
+    const dateScope = useDateScope();
+    if (dateScope.fetching) fetching = true;
+    if (dateScope.data) Object.assign(scope, dateScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Notifications)) {
-    Object.assign(scope, useNotificationsScope());
+    const notificationsScope = useNotificationsScope();
+    if (notificationsScope.fetching) fetching = true;
+    if (notificationsScope.data) Object.assign(scope, notificationsScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Media)) {
-    Object.assign(scope, useMediaScope());
+    const mediaScope = useMediaScope();
+    if (mediaScope.fetching) fetching = true;
+    if (mediaScope.data) Object.assign(scope, mediaScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Network)) {
-    Object.assign(scope, useNetworkScope());
+    const networkScope = useNetworkScope();
+    if (networkScope.fetching) fetching = true;
+    if (networkScope.data) Object.assign(scope, networkScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Keyboard)) {
-    Object.assign(scope, useKeyboardScope());
+    const keyboardScope = useKeyboardScope();
+    if (keyboardScope.fetching) fetching = true;
+    if (keyboardScope.data) Object.assign(scope, keyboardScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.User)) {
-    Object.assign(scope, useUserScope());
+    const userScope = useUserScope();
+    if (userScope.fetching) fetching = true;
+    if (userScope.data) Object.assign(scope, userScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Bluetooth)) {
-    Object.assign(scope, useBluetoothScope());
+    const bluetoothScope = useBluetoothScope();
+    if (bluetoothScope.fetching) fetching = true;
+    if (bluetoothScope.data) Object.assign(scope, bluetoothScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Power)) {
-    Object.assign(scope, usePowerScope());
+    const powerScope = usePowerScope();
+    if (powerScope.fetching) fetching = true;
+    if (powerScope.data) Object.assign(scope, powerScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.FocusedApp)) {
-    Object.assign(scope, useFocusedAppScope());
+    const focusedAppScope = useFocusedAppScope();
+    if (focusedAppScope.fetching) fetching = true;
+    if (focusedAppScope.data) Object.assign(scope, focusedAppScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Workspaces)) {
-    Object.assign(scope, useWorkspacesScope());
+    const workspacesScope = useWorkspacesScope();
+    if (workspacesScope.fetching) fetching = true;
+    if (workspacesScope.data) Object.assign(scope, workspacesScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Disk)) {
-    Object.assign(scope, useDiskScope());
+    const diskScope = useDiskScope();
+    if (diskScope.fetching) fetching = true;
+    if (diskScope.data) Object.assign(scope, diskScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.NetworkStatistics)) {
-    Object.assign(scope, useNetworkStatisticsScope());
+    const networkStatisticsScope = useNetworkStatisticsScope();
+    if (networkStatisticsScope.fetching) fetching = true;
+    if (networkStatisticsScope.data) Object.assign(scope, networkStatisticsScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Memory)) {
-    Object.assign(scope, useMemoryScope());
+    const memoryScope = useMemoryScope();
+    if (memoryScope.fetching) fetching = true;
+    if (memoryScope.data) Object.assign(scope, memoryScope.data);
   }
 
   if (scopes.includes(ToolbarJsScope.Cpu)) {
-    Object.assign(scope, useCpuScope());
+    const cpuScope = useCpuScope();
+    if (cpuScope.fetching) fetching = true;
+    if (cpuScope.data) Object.assign(scope, cpuScope.data);
   }
 
-  return scope;
+  return { fetching, data: scope };
 }
 
 function useDateScope() {
@@ -102,27 +148,43 @@ function useDateScope() {
   );
 
   return {
-    date,
+    fetching: false,
+    data: { date },
   };
 }
 
 function useNotificationsScope() {
-  const count = useComputed(() => signals.$notifications.value.length);
+  const { fetching, data: notifications } = useLazyNotifications();
+
+  if (fetching) {
+    return { fetching: true, data: null };
+  }
+
   return {
-    count: count.value,
+    fetching: false,
+    data: { count: notifications?.length || 0 },
   };
 }
 
 function useMediaScope() {
-  const defaultOutputDevice = useComputed(() => signals.$media_outputs.value.find((d) => d.isDefaultMultimedia));
-  const defaultInputDevice = useComputed(() => signals.$media_inputs.value.find((d) => d.isDefaultMultimedia));
-  const defaultMediaSession = useComputed(() => signals.$media_sessions.value.find((d) => d.default));
+  const { fetching: fetchingDevices, data: mediaDevices } = useLazyMediaDevices();
+  const { fetching: fetchingSessions, data: mediaSessions } = useLazyMediaSessions();
 
-  const { id, volume = 0, muted: isMuted = true } = defaultOutputDevice.value || {};
+  if (fetchingDevices || fetchingSessions) {
+    return { fetching: true, data: null };
+  }
 
-  const { volume: inputVolume = 0, muted: inputIsMuted = true } = defaultInputDevice.value || {};
+  const [mediaInputs, mediaOutputs] = mediaDevices!;
 
-  const mediaSession = defaultMediaSession.value || null;
+  const defaultOutputDevice = mediaOutputs.find((d: any) => d.isDefaultMultimedia);
+  const defaultInputDevice = mediaInputs.find((d: any) => d.isDefaultMultimedia);
+  const defaultMediaSession = mediaSessions!.find((d: any) => d.default);
+
+  const { id, volume = 0, muted: isMuted = true } = defaultOutputDevice || {};
+
+  const { volume: inputVolume = 0, muted: inputIsMuted = true } = defaultInputDevice || {};
+
+  const mediaSession = defaultMediaSession || null;
 
   function onWheel(e: WheelEvent) {
     const isUp = e.deltaY < 0;
@@ -137,108 +199,138 @@ function useMediaScope() {
   }
 
   return {
-    volume,
-    isMuted,
-    inputVolume,
-    inputIsMuted,
-    mediaSession,
-    onWheel,
+    fetching: false,
+    data: {
+      volume,
+      isMuted,
+      inputVolume,
+      inputIsMuted,
+      mediaSession,
+      onWheel,
+    },
   };
 }
 
 function useNetworkScope() {
-  const online = useComputed(() => signals.$online.value);
-  const interfaces = useComputed(() => signals.$network_adapters.value);
-  const defaultIp = useComputed(() => signals.$network_local_ip.value);
+  const { fetching: fetchingOnline, data: online } = useLazyOnline();
+  const { fetching: fetchingInterfaces, data: interfaces } = useLazyNetworkAdapters();
+  const { fetching: fetchingIp, data: defaultIp } = useLazyNetworkLocalIp();
 
-  const usingInterface = useComputed(
-    () => interfaces.value.find((i) => i.ipv4 === defaultIp.value) || null,
-  );
+  if (fetchingOnline || fetchingInterfaces || fetchingIp) {
+    return { fetching: true, data: null };
+  }
+
+  const usingInterface = interfaces?.find((i: any) => i.ipv4 === defaultIp) || null;
 
   return {
-    online: online.value,
-    interfaces: interfaces.value,
-    usingInterface: usingInterface.value,
+    fetching: false,
+    data: {
+      online,
+      interfaces,
+      usingInterface,
+    },
   };
 }
 
 function useKeyboardScope() {
-  const languages = useComputed(() => signals.$languages.value);
-  const activeLang = useComputed(
-    () => languages.value.find((l) => l.keyboardLayouts.some((k) => k.active)) || languages.value[0],
-  );
-  const activeKeyboard = useComputed(
-    () =>
-      activeLang.value?.keyboardLayouts.find((k) => k.active) ||
-      activeLang.value?.keyboardLayouts[0],
-  );
+  const { fetching, data: languages } = useLazyLanguages();
 
-  let activeLangPrefix = activeLang.value?.nativeName
-    .split("")
+  if (fetching) {
+    return { fetching: true, data: null };
+  }
+
+  const activeLang = languages?.find((l: any) => l.keyboardLayouts.some((k: any) => k.active)) || languages?.[0];
+  const activeKeyboard = activeLang?.keyboardLayouts.find((k: any) => k.active) || activeLang?.keyboardLayouts[0];
+
+  let activeLangPrefix = activeLang?.nativeName
+    ?.split("")
     .slice(0, 3)
-    .filter((c) => !["(", ")", " "].includes(c))
+    .filter((c: any) => !["(", ")", " "].includes(c))
     .join("")
     .toLocaleUpperCase() || "";
 
-  let words = activeKeyboard.value?.displayName.split(/[\s\-\(\)]/) || [];
+  let words = activeKeyboard?.displayName?.split(/[\s\-\(\)]/) || [];
   let activeKeyboardPrefix = words.length > 1
     ? words
-      .map((word) => word[0])
+      .map((word: any) => word[0])
       .join("")
       .toLocaleUpperCase()
     : words[0]?.slice(0, 3).toLocaleUpperCase() || "";
 
   return {
-    activeLang: activeLang.value,
-    activeKeyboard: activeKeyboard.value,
-    activeLangPrefix,
-    activeKeyboardPrefix,
-    languages: languages.value,
+    fetching: false,
+    data: {
+      activeLang,
+      activeKeyboard,
+      activeLangPrefix,
+      activeKeyboardPrefix,
+      languages,
+    },
   };
 }
 
 function useUserScope() {
-  const user = useComputed(() => signals.$user.value);
-  const userMenuConfig = useComputed(() => $allByWidget.value?.["@seelen/user-menu" as WidgetId]);
+  const { fetching, data: user } = useLazyUser();
 
-  const displayName = useComputed(() => {
-    const source = (userMenuConfig.value as Record<string, unknown> | undefined)?.displayNameSource;
-    if (source === "xboxGamertag" && user.value?.xboxGamertag) {
-      return user.value.xboxGamertag;
-    }
-    return user.value?.name;
-  });
+  if (fetching) {
+    return { fetching: true, data: null };
+  }
+
+  const userMenuConfig = $allByWidget.value?.["@seelen/user-menu" as WidgetId];
+  const source = (userMenuConfig as Record<string, unknown> | undefined)?.displayNameSource;
+  const displayName = source === "xboxGamertag" && user?.xboxGamertag ? user.xboxGamertag : user?.name;
 
   return {
-    user: { ...user.value, displayName: displayName.value },
+    fetching: false,
+    data: {
+      user: { ...user, displayName },
+    },
   };
 }
 
 function useBluetoothScope() {
-  const bluetoothDevices = useComputed(() => signals.$bluetooth_devices.value);
-  const connectedDevices = useComputed(() => bluetoothDevices.value.filter((item) => item.connected));
+  const { fetching, data: bluetoothDevices } = useLazyBluetoothDevices();
+
+  if (fetching) {
+    return { fetching: true, data: null };
+  }
+
+  const connectedDevices = bluetoothDevices?.filter((item: any) => item.connected) || [];
 
   return {
-    devices: bluetoothDevices.value,
-    connectedDevices: connectedDevices.value,
+    fetching: false,
+    data: {
+      devices: bluetoothDevices,
+      connectedDevices,
+    },
   };
 }
 
 function usePowerScope() {
-  const power = useComputed(() => signals.$power_status.value);
-  const powerMode = useComputed(() => signals.$power_plan.value);
-  const batteries = useComputed(() => signals.$batteries.value);
+  const { fetching: fetchingPower, data: power } = useLazyPowerStatus();
+  const { fetching: fetchingMode, data: powerMode } = useLazyPowerMode();
+  const { fetching: fetchingBatteries, data: batteries } = useLazyBatteries();
+
+  if (fetchingPower || fetchingMode || fetchingBatteries) {
+    return { fetching: true, data: null };
+  }
 
   return {
-    power: power.value,
-    powerMode: powerMode.value,
-    batteries: batteries.value,
+    fetching: false,
+    data: {
+      power,
+      powerMode,
+      batteries,
+    },
   };
 }
 
 function useFocusedAppScope() {
   return {
-    focusedApp: $focused.value,
+    fetching: false,
+    data: {
+      focusedApp: $focused.value,
+    },
   };
 }
 
@@ -248,7 +340,7 @@ function useWorkspacesScope() {
 
   const onWheel = useThrottle(
     (isUp: boolean) => {
-      const index = workspaces.findIndex((w) => w.id === activeWorkspace);
+      const index = workspaces.findIndex((w: any) => w.id === activeWorkspace);
       const newIndex = isUp ? index - 1 : index + 1;
       if (newIndex >= 0 && newIndex < workspaces.length) {
         let workspace = workspaces[newIndex]!;
@@ -260,32 +352,63 @@ function useWorkspacesScope() {
   );
 
   return {
-    workspaces,
-    activeWorkspace,
-    onWheel,
+    fetching: false,
+    data: {
+      workspaces,
+      activeWorkspace,
+      onWheel,
+    },
   };
 }
 
 function useDiskScope() {
+  const { fetching, data: disks } = useLazyDisks();
+
+  if (fetching) {
+    return { fetching: true, data: null };
+  }
+
   return {
-    disks: signals.$disks.value,
+    fetching: false,
+    data: { disks },
   };
 }
 
 function useNetworkStatisticsScope() {
+  const { fetching, data: networkStatistics } = useLazyNetworkStatistics();
+
+  if (fetching) {
+    return { fetching: true, data: null };
+  }
+
   return {
-    networkStatistics: signals.$network_statistics.value,
+    fetching: false,
+    data: { networkStatistics },
   };
 }
 
 function useMemoryScope() {
+  const { fetching, data: memory } = useLazyMemory();
+
+  if (fetching) {
+    return { fetching: true, data: null };
+  }
+
   return {
-    memory: signals.$memory.value,
+    fetching: false,
+    data: { memory },
   };
 }
 
 function useCpuScope() {
+  const { fetching, data: cores } = useLazyCores();
+
+  if (fetching) {
+    return { fetching: true, data: null };
+  }
+
   return {
-    cores: signals.$cores.value,
+    fetching: false,
+    data: { cores },
   };
 }

@@ -22,6 +22,10 @@ export const $current_monitor = computed(
   () => $monitors.value.find((m) => m.id === currentMonitorId)!,
 );
 
+// PERFORMANCE NOTE: Mouse position tracking is always active for auto-hide detection.
+// This is a high-frequency event but the computed $mouse_at_edge is lightweight (simple comparisons).
+// Further optimization could conditionally subscribe only when hideMode !== Never,
+// but requires more complex lifecycle management.
 const $mouse_pos = lazySignal(() => invoke(SeelenCommand.GetMousePosition));
 await subscribe(SeelenEvent.GlobalMouseMove, $mouse_pos.setByPayload);
 await $mouse_pos.init();

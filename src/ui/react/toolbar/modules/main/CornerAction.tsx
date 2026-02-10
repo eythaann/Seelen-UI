@@ -1,14 +1,17 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { memo, useCallback } from "preact/compat";
 
-export function ShowDesktopButton() {
+export const ShowDesktopButton = memo(function ShowDesktopButton() {
+  const handleClick = useCallback(() => {
+    invoke(SeelenCommand.ShowDesktop);
+  }, []);
+
   return (
     <button
       className="ft-corner-button"
-      onClick={() => {
-        invoke(SeelenCommand.ShowDesktop);
-      }}
+      onClick={handleClick}
       title="Show Desktop"
       aria-label="Show Desktop"
     />
   );
-}
+});
