@@ -53,7 +53,7 @@
   </tr>
 </table>
 
-## Overview
+## 📖 Overview
 
 [Seelen UI](https://seelen.io/apps/seelen-ui) is a tool designed to enhance your Windows desktop experience with a focus
 on customization and productivity. It integrates smoothly into your system, providing a range of features that allow you
@@ -95,7 +95,7 @@ to personalize your desktop and optimize your workflow.
 
 <br/>
 
-## Installation
+## 💾 Installation
 
 > [!CAUTION]
 > Seelen UI requires the WebView runtime to be installed. On Windows 11, it comes pre-installed with the system.
@@ -109,7 +109,7 @@ to personalize your desktop and optimize your workflow.
 
 You can choose from different installation options based on your preference:
 
-### Microsoft Store <em>(recommended)</em>
+### 🏪 Microsoft Store <em>(recommended)</em>
 
 Download the latest version from the [Store](https://www.microsoft.com/store/productId/9P67C2D4T9FB?ocid=pdpshare) page.
 This is the recommended option because you will receive updates and a secure version of the program.
@@ -117,7 +117,7 @@ This is the recommended option because you will receive updates and a secure ver
 _**Note**_: It may take around 1 to 3 business days for changes to be reflected in the Microsoft Store, as updates are
 approved by real people in the store.
 
-### Winget
+### 📦 Winget
 
 Install the latest version using:
 
@@ -129,24 +129,24 @@ This option also uses the signed `.msix` package and ensures you have the latest
 Microsoft Store, it may take around 1 to 3 business days for changes to be reflected in Winget, as updates are approved
 by real people in the `winget-pkg` project.
 
-### .msix Installer
+### 📥 .msix Installer
 
 Download the `.msix` installer from the [Releases](https://github.com/eythaann/seelen-ui/releases) page. This package is
 signed, ensuring a secure installation. This is the same option as the Microsoft Store but is a portable installer.
 
-### .exe Installer
+### ⚙️ .exe Installer
 
 Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the
 `setup.exe` installer. This option is less recommended as the installer is not signed, which may cause it to be flagged
 as a potential threat by some antivirus programs. The `setup.exe` is updated more quickly than the Microsoft Store or
 Winget versions and also it receives notifications updates on new release.
 
-## Usage
+## 🚀 Usage
 
 Once installed or extracted, simply open the program. The easy-to-use and intuitive GUI will guide you through the
 configuration process. Customize your desktop environment effortlessly.
 
-## Upcoming Features
+## 🔮 Upcoming Features
 
 I’m excited to share some upcoming features for Seelen UI! Here’s a glimpse of what’s planned for the future:
 
@@ -158,21 +158,21 @@ will provide a sleek and highly customizable way to quickly access your applicat
 ![App Launcher Preview](https://raw.githubusercontent.com/adi1090x/files/master/rofi/previews/colorful/main.gif) _Image
 courtesy of [rofi-themes](https://github.com/dctxmei/rofi-themes)_
 
-### Customizable Popup Widgets
+### 🎨 Customizable Popup Widgets
 
 I aim to introduce a set of fully customizable popup widgets, similar to the features available in
 [EWW](https://github.com/elkowar/eww). These widgets will be highly configurable and adaptable to your needs, providing
 an enhanced and interactive way to manage your desktop environment.
 
-![Customizable Widgets Preview](https://raw.githubusercontent.com/adi1090x/widgets/main/previews/dashboard.png) _Image
+![Customizable Widgets Preview](./documentation/images/dashboard.png) _Image
 courtesy of [adi1090x](https://github.com/adi1090x/widgets)_
 
-### Custom Alt + Tab (Task Switching)
+### ⌨️ Custom Alt + Tab (Task Switching)
 
 An upgraded Alt + Tab system for task switching is on the horizon. This will offer a more visually appealing and
 functional experience, allowing for smoother transitions between open applications and windows.
 
-### Custom Virtual Desktops Viewer and Animations
+### 🖥️ Custom Virtual Desktops Viewer and Animations
 
 I’m also working on a custom virtual desktops viewer and dynamic animations to improve navigation between different
 workspaces. This will provide a more intuitive and immersive multitasking experience.
@@ -183,21 +183,21 @@ Happy customizing!
 
 The Seelen UI Team
 
-## Contributing
+## 🤝 Contributing
 
 We welcome contributions!
 
 - Read the [Contribution Guidelines](CONTRIBUTING) to get started with terms.
 
-## License
+## 📜 License
 
 See the [LICENSE](LICENSE) file for details.
 
-## Contact
+## 📬 Contact
 
 For inquiries and support, please contact me on [Discord](https://discord.gg/ABfASx5ZAJ).
 
-## Sponsors
+## 🙏 Sponsors
 
 We're grateful for the support of our sponsors who help make Seelen UI possible.
 
@@ -206,7 +206,7 @@ We're grateful for the support of our sponsors who help make Seelen UI possible.
 | [![DigitalOcean](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=955c7335abf5&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge) | **DigitalOcean** provides cloud infrastructure services that power our development and testing environments. |
 |                                                                [![SignPath](https://avatars.githubusercontent.com/u/34448643?s=60)](https://signpath.io/)                                                                | **SignPath** provides free code signing certificates, ensuring secure and trusted releases for our users.    |
 
-## See you later
+## 👋 See you later
 
 ```
                  .      .&     _,x&"``
@@ -239,6 +239,10 @@ We're grateful for the support of our sponsors who help make Seelen UI possible.
 
 ---
 
+<div align="center">
+
 📌 **Official Website**: [https://seelen.io](https://seelen.io)
 
-Seelen Inc © 2025 - All rights reserved
+Seelen Inc © 2026 - All rights reserved
+
+</div>
