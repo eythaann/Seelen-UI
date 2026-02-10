@@ -261,7 +261,7 @@ jobs:
           name: bundles-${{ matrix.target }}
           path: target/${{ matrix.target }}/release/bundle
 
-  marge-bundles:
+  merge-bundles:
     needs: bundle
     runs-on: ubuntu-latest
     outputs:
@@ -278,7 +278,7 @@ jobs:
   sign-bundles:
     needs:
       - update-tag
-      - marge-bundles
+      - merge-bundles
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -329,7 +329,7 @@ jobs:
           project-slug: seelen-ui
           signing-policy-slug: release-signing
           artifact-configuration-slug: bundles
-          github-artifact-id: ${{ needs.marge-bundles.outputs.artifact-id }}
+          github-artifact-id: ${{ needs.merge-bundles.outputs.artifact-id }}
           output-artifact-directory: bundles
 
       - name: File Tree

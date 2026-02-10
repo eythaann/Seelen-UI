@@ -65,9 +65,7 @@ jobs:
           cache-key-prefix: rust-build-${{ matrix.target }}
       - name: Install frontend dependencies
         run: npm install
-      - name: Set Version
-        run: |
-          npx tsx scripts/versionish.ts release v${{ env.PACKAGE_VERSION }}
+
       - name: Build Hook DLL
         run: cargo build --release --target ${{ matrix.target }} -p sluhk
       - name: Build (no bundle)
@@ -88,10 +86,10 @@ jobs:
     needs: build-binaries
     runs-on: ubuntu-latest
     outputs:
-      artifact-id: ${{ steps.merge.outputs.artifact-id }}
+      artifact-id: ${{ steps.merge-binaries.outputs.artifact-id }}
     steps:
       - name: Merge binaries artifacts
-        id: merge
+        id: merge-binaries
         uses: actions/upload-artifact/merge@v4
         with:
           name: binaries
@@ -102,10 +100,8 @@ jobs:
   sign-binaries:
     needs: merge-binaries
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Submit binaries to SignPath
+      - name: Sign binaries with SignPath
         uses: signpath/github-action-submit-signing-request@v1
         with:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
@@ -117,46 +113,22 @@ jobs:
           output-artifact-directory: signed-binaries
           wait-for-completion: true
 
-      - name: List signed binaries
-        run: tree -a signed-binaries || true
-
-      - name: Clean existing binary assets from release (optional)
-        uses: actions/github-script@v7
+      - name: Upload signed binaries by target
+        uses: actions/upload-artifact@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const tagName = `v${process.env.PACKAGE_VERSION}`;
-            const release = await github.rest.repos.getReleaseByTag({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag: tagName,
-            });
-            const { data: assets } = await github.rest.repos.listReleaseAssets({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: release.data.id,
-            });
-            core.info(`Found ${assets.length} existing assets to clean`);
-            // Delete assets that look like binaries (optional filtering)
-            const deletions = assets
-              .filter(a => a.name && a.name.toLowerCase().includes('seelen ui') || a.name && a.name.toLowerCase().includes('binaries'))
-              .map(asset => github.rest.repos.deleteReleaseAsset({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                asset_id: asset.id,
-              }));
-            await Promise.all(deletions);
-            core.info('✅ Existing binary-related assets cleaned');
+          name: signed-binaries-x86_64-pc-windows-msvc
+          path: signed-binaries/binaries-x86_64-pc-windows-msvc/**/*
 
-      - name: Upload signed binaries to release
-        uses: softprops/action-gh-release@v2
+      - name: Upload signed binaries by target
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: v${{ env.PACKAGE_VERSION }}
-          name: Seelen UI v${{ env.PACKAGE_VERSION }} - Signed Binaries
-          files: signed-binaries/**/*
+          name: signed-binaries-aarch64-pc-windows-msvc
+          path: signed-binaries/binaries-aarch64-pc-windows-msvc/**/*
 
-  build-bundles:
-    needs: sign-binaries
+  bundle:
+    needs:
+      - create-release
+      - sign-binaries
     strategy:
       fail-fast: false
       matrix:
@@ -165,15 +137,20 @@ jobs:
             target: x86_64-pc-windows-msvc
           - platform: windows-2025
             target: aarch64-pc-windows-msvc
+
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true # needed to fetch fixed runtimes (.cab) files
       - uses: ./.github/actions/setup
         with:
           rust-targets: ${{ matrix.target }}
           cache-key-prefix: rust-bundle-${{ matrix.target }}
+
       - name: Install frontend dependencies
         run: npm install
+
       - name: Install MSIX dependencies
         shell: pwsh
         run: |
@@ -181,14 +158,16 @@ jobs:
           winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
-      - name: Set Version
-        run: |
-          npx tsx scripts/versionish.ts release v${{ env.PACKAGE_VERSION }}
-      - name: Download signed binaries for target
+
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+
+      - name: Download signed binaries
         uses: actions/download-artifact@v4
         with:
           name: signed-binaries-${{ matrix.target }}
           path: target/${{ matrix.target }}/release
+
       - name: Clean bundle folder from cache
         shell: pwsh
         run: |
@@ -197,37 +176,107 @@ jobs:
             Remove-Item -Path $bundlePath -Recurse -Force
             Write-Output "Old bundles files deleted: $bundlePath"
           }
-      - name: Bundle (no signing here — SignPath / tauri signer later)
+
+      - name: Bundle
         run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign
+
+      - name: Rename normal bundle to temp
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
+          $version = $env:PACKAGE_VERSION
+          $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
+          $setupFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
+          $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
+
+          if (Test-Path $setupFile) {
+            Move-Item -Path $setupFile -Destination $tempFile
+            Write-Output "Renamed $setupFile to $tempFile"
+          }
+
+      - name: Set Fixed Runtime
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
+          ./scripts/SetFixedRuntime.ps1 -Architecture $arch
+
+      - name: Copy Runtime to target directory
+        shell: pwsh
+        run: |
+          $runtimeSource = Get-ChildItem -Path "src/runtime" -Directory | Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } | Select-Object -First 1
+          if ($runtimeSource) {
+            $targetRuntimeDir = "target/${{ matrix.target }}/release/runtime"
+            New-Item -ItemType Directory -Force -Path $targetRuntimeDir | Out-Null
+            Copy-Item -Path $runtimeSource.FullName -Destination "$targetRuntimeDir/$($runtimeSource.Name)" -Recurse -Force
+            Write-Output "Copied runtime from $($runtimeSource.FullName) to $targetRuntimeDir/$($runtimeSource.Name)"
+          } else {
+            Write-Error "Runtime version directory not found in src/runtime"
+            exit 1
+          }
+
+      - name: Bundle with Fixed Runtime
+        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign
+
+      - name: Rename bundles
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
+          $version = $env:PACKAGE_VERSION
+          $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
+          $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
+          $normalFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
+          $fixedFile = "$bundlePath/Seelen UI_${version}_${arch}-setup-fixed.exe"
+
+          if (Test-Path $normalFile) {
+            Move-Item -Path $normalFile -Destination $fixedFile
+            Write-Output "Renamed fixed runtime bundle to $fixedFile"
+          }
+
+          if (Test-Path $tempFile) {
+            Move-Item -Path $tempFile -Destination $normalFile
+            Write-Output "Renamed normal bundle back to $normalFile"
+          }
+
       - name: Bundle MSIX
         run: npx tsx scripts/bundle.msix.ts --target ${{ matrix.target }}
+
       - name: Upload bundles to artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-bundles-${{ matrix.target }}
+          name: bundles-${{ matrix.target }}
           path: target/${{ matrix.target }}/release/bundle
 
   merge-bundles:
-    needs: build-bundles
+    needs: bundle
     runs-on: ubuntu-latest
     outputs:
-      artifact-id: ${{ steps.merge-bundles.outputs.artifact-id }}
+      artifact-id: ${{ steps.upload-merged.outputs.artifact-id }}
     steps:
-      - name: Merge bundles artifacts
-        id: merge-bundles
+      - name: Merge artifacts
+        id: upload-merged
         uses: actions/upload-artifact/merge@v4
         with:
           name: bundles
-          pattern: build-bundles-*
+          pattern: bundles-*
           delete-merged: true
 
   sign-bundles:
-    needs: merge-bundles
-    runs-on: ubuntu-latest
+    needs:
+      - create-release
+      - merge-bundles
     permissions:
       contents: write
+    runs-on: ubuntu-latest
     steps:
-      - name: Submit bundles to SignPath
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+
+      - name: Submit to SignPath
         uses: signpath/github-action-submit-signing-request@v1
         with:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
@@ -237,31 +286,30 @@ jobs:
           artifact-configuration-slug: bundles
           github-artifact-id: ${{ needs.merge-bundles.outputs.artifact-id }}
           output-artifact-directory: bundles
-          wait-for-completion: true
 
-      - name: File Tree of signed bundles
+      - name: File Tree
         run: |-
-          tree bundles || true
+          tree bundles
 
-      - name: Tauri Updater Signature (regenerate .sig with private key)
+      - name: Tauri Updater Signature
         env:
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         run: |
           npm install -g @tauri-apps/cli
+
           echo "Removing existing .sig files to regenerate with Tauri updater keys..."
-          find ./bundles -name "*.sig" -type f -delete || true
+          find ./bundles -name "*.sig" -type f -delete
+          echo "Existing signatures removed"
+
           VERSION=${{ env.PACKAGE_VERSION }}
           PATH1="bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
           PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
-          if [ -f "$PATH1" ]; then
-            echo "Signing ${PATH1}..."
-            tauri signer sign --verbose -k "$TAURI_PRIVATE_KEY" -p "$TAURI_PRIVATE_KEY_PASSWORD" "$PATH1"
-          fi
-          if [ -f "$PATH2" ]; then
-            echo "Signing ${PATH2}..."
-            tauri signer sign --verbose -k "$TAURI_PRIVATE_KEY" -p "$TAURI_PRIVATE_KEY_PASSWORD" "$PATH2"
-          fi
+
+          echo "Signing ${PATH1}..."
+          tauri signer sign --verbose "$PATH1"
+          echo "Signing ${PATH2}..."
+          tauri signer sign --verbose "$PATH2"
 
       - name: Remove self-signed MSIX files (store-signed handled elsewhere)
         run: |
@@ -273,11 +321,12 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ env.PACKAGE_VERSION }}
-          name: Seelen UI v${{ env.PACKAGE_VERSION }} - Signed Bundles
+          name: Seelen UI v${{ env.PACKAGE_VERSION }}
+          prerelease: false
           files: bundles/**/*
 
   publish-release:
-    needs: [create-release, sign-binaries, sign-bundles]
+    needs: [create-release, sign-bundles]
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -295,6 +344,30 @@ jobs:
               release_id: process.env.releaseId,
               draft: false,
             });
+
+  microsoft-store-submission:
+    needs: [publish-release, merge-bundles]
+    runs-on: windows-2025
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download merged bundles (unsigned)
+        uses: actions/download-artifact@v4
+        with:
+          name: bundles
+          path: target/release/bundle
+
+      # Use Store Broker to publish to Microsoft Store
+      - name: Submit to Partner Center (aka DevCenter)
+        shell: pwsh
+        run: |
+          ./scripts/SubmitToStore.ps1
+        env:
+          PartnerCenterStoreId: ${{ secrets.MS_PRODUCT_ID }}
+          PartnerCenterTenantId: ${{ secrets.MS_TENANT_ID }}
+          PartnerCenterClientId: ${{ secrets.MS_CLIENT_ID }}
+          PartnerCenterClientSecret: ${{ secrets.MS_CLIENT_SECRET }}
+          SBDisableTelemetry: true
 
   generate-update-file:
     needs: [create-release, publish-release]
