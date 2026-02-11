@@ -11,6 +11,9 @@ on:
       - "crowdin.yml"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
@@ -279,8 +282,6 @@ jobs:
     needs:
       - update-tag
       - merge-bundles
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -367,8 +368,6 @@ jobs:
     needs:
       - update-tag
       - sign-bundles
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

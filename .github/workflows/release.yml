@@ -33,8 +33,6 @@ jobs:
   create-release:
     needs: get-version
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     outputs:
       release_id: ${{ steps.create-release.outputs.result }}
     steps:
@@ -293,8 +291,6 @@ jobs:
       - get-version
       - create-release
       - merge-bundles
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -352,8 +348,6 @@ jobs:
 
   publish-release:
     needs: [create-release, sign-bundles]
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Publish release (un-draft)
@@ -361,7 +355,7 @@ jobs:
         env:
           releaseId: ${{ needs.create-release.outputs.release_id }}
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             await github.rest.repos.updateRelease({
               owner: context.repo.owner,
@@ -396,8 +390,6 @@ jobs:
 
   generate-update-file:
     needs: [get-version, create-release, publish-release]
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
