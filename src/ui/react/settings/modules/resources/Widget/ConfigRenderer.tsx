@@ -130,8 +130,7 @@ function renderInput(
   onConfigChange: (key: string, value: any) => void,
 ): ReactNode {
   const commonProps = {
-    defaultValue: def.defaultValue as any,
-    value: values[def.key],
+    value: values[def.key] ?? def.defaultValue,
     onChange: (value: any) => onConfigChange(def.key, value),
   };
 

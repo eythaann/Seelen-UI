@@ -1,5 +1,6 @@
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { getResourceText } from "libs/ui/react/utils/index.ts";
 import { Tooltip } from "antd";
 import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,7 +18,7 @@ export const Navigation = memo(() => {
   const activeThemes = settings.value.activeThemes;
   const devTools = settings.value.devTools;
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
 
   const Mapper = (route: RoutePath | null) => {
@@ -81,7 +82,11 @@ export const Navigation = memo(() => {
         <div className={cs.group}>
           {widgets.value
             .filter((widget) => !widget.hidden)
-            .toSorted((a, b) => a.id.localeCompare(b.id))
+            .toSorted((a, b) => {
+              const aName = getResourceText(a.metadata.displayName, i18n.language);
+              const bName = getResourceText(b.metadata.displayName, i18n.language);
+              return aName.localeCompare(bName, i18n.language);
+            })
             .map((widget) => (
               <Item
                 key={widget.id}
@@ -99,7 +104,11 @@ export const Navigation = memo(() => {
             <div className={cs.separator} />
             <div className={cs.group}>
               {themesDirectAccess
-                .toSorted((a, b) => a.id.localeCompare(b.id))
+                .toSorted((a, b) => {
+                  const aName = getResourceText(a.metadata.displayName, i18n.language);
+                  const bName = getResourceText(b.metadata.displayName, i18n.language);
+                  return aName.localeCompare(bName, i18n.language);
+                })
                 .map((theme) => (
                   <Item
                     key={theme.id}
