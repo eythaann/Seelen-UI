@@ -190,7 +190,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = $env:PACKAGE_VERSION
+          $version = ${{ env.PACKAGE_VERSION }}
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $setupFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
@@ -198,6 +198,9 @@ jobs:
           if (Test-Path $setupFile) {
             Move-Item -Path $setupFile -Destination $tempFile
             Write-Output "Renamed $setupFile to $tempFile"
+          } else {
+            Write-Error "Setup file not found: $setupFile"
+            exit 1
           }
 
       - name: Set Fixed Runtime
@@ -227,20 +230,27 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = $env:PACKAGE_VERSION
+          $version = ${{ env.PACKAGE_VERSION }}
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
           $normalFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
           $fixedFile = "$bundlePath/Seelen UI_${version}_${arch}-setup-fixed.exe"
 
+          Write-Output "Checking files in $bundlePath"
+          Get-ChildItem -Path $bundlePath -Filter "*.exe" | ForEach-Object { Write-Output "  Found: $($_.Name)" }
+
           if (Test-Path $normalFile) {
-            Move-Item -Path $normalFile -Destination $fixedFile
+            Move-Item -Path $normalFile -Destination $fixedFile -Force
             Write-Output "Renamed fixed runtime bundle to $fixedFile"
+          } else {
+            Write-Output "Warning: $normalFile does not exist"
           }
 
           if (Test-Path $tempFile) {
-            Move-Item -Path $tempFile -Destination $normalFile
+            Move-Item -Path $tempFile -Destination $normalFile -Force
             Write-Output "Renamed normal bundle back to $normalFile"
+          } else {
+            Write-Output "Warning: $tempFile does not exist"
           }
 
       - name: Bundle MSIX
