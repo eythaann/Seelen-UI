@@ -69,8 +69,13 @@ jobs:
 
       - name: Build Hook DLL
         run: cargo build --release --target ${{ matrix.target }} -p sluhk
+
       - name: Build (no bundle)
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
+
       - name: Upload binaries to artifacts
         uses: actions/upload-artifact@v4
         with:
