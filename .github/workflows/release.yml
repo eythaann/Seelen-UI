@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
       - name: Create release (draft)
         id: create-release
         uses: actions/github-script@v7
@@ -161,7 +161,7 @@ jobs:
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
       - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
       - name: Download signed binaries
         uses: actions/download-artifact@v4
@@ -275,7 +275,7 @@ jobs:
           node-version: 20
 
       - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
       - name: Submit to SignPath
         uses: signpath/github-action-submit-signing-request@v1
@@ -378,7 +378,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
       - uses: ./.github/actions/generate-update-manifest
         with:
           release-id: ${{ needs.create-release.outputs.release_id }}
