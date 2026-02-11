@@ -11,13 +11,13 @@ use crate::{
     error::Result,
     log_error,
     modules::power::application::{PowerManager, PowerManagerEvent},
-    trace_lock,
+    utils::lock_free::TracedMutex,
     windows_api::WindowsApi,
 };
 
 /// Lazy initialization wrapper that registers Tauri events on first access
 /// This keeps Tauri logic separate from system logic while ensuring lazy initialization
-fn get_power_manager() {
+fn get_power_manager() -> &'static TracedMutex<PowerManager> {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
         PowerManager::subscribe(|event| match event {
@@ -32,26 +32,22 @@ fn get_power_manager() {
             }
         });
     });
-    // Access the lazy lock to ensure initialization
-    let _ = &*trace_lock!(PowerManager::instance());
+    PowerManager::instance()
 }
 
 #[tauri::command(async)]
 pub fn get_power_status() -> PowerStatus {
-    get_power_manager();
-    trace_lock!(PowerManager::instance()).power_status.clone()
+    get_power_manager().lock().power_status.clone()
 }
 
 #[tauri::command(async)]
 pub fn get_power_mode() -> PowerMode {
-    get_power_manager();
-    trace_lock!(PowerManager::instance()).current_power_mode
+    get_power_manager().lock().power_mode
 }
 
 #[tauri::command(async)]
 pub fn get_batteries() -> Vec<Battery> {
-    get_power_manager();
-    trace_lock!(PowerManager::instance()).batteries.clone()
+    get_power_manager().lock().batteries.clone()
 }
 
 #[tauri::command(async)]

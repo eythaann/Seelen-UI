@@ -1,6 +1,5 @@
-use std::sync::{Arc, LazyLock};
+use std::sync::LazyLock;
 
-use parking_lot::Mutex;
 use seelen_core::system_state::{Battery, PowerMode, PowerStatus};
 use windows::Win32::{
     Foundation::HANDLE,
@@ -22,22 +21,16 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     modules::power::domain::power_mode_to_serializable,
-    trace_lock,
+    utils::lock_free::TracedMutex,
     windows_api::{event_window::subscribe_to_background_window, WindowsApi},
 };
 
 use super::domain::{battery_to_slu_battery, power_status_to_serializable};
 
-static POWER_MANAGER: LazyLock<Arc<Mutex<PowerManager>>> = LazyLock::new(|| {
-    let mut pm = PowerManager::new();
-    pm.init().log_error();
-    Arc::new(Mutex::new(pm))
-});
-
 #[derive(Debug)]
 pub struct PowerManager {
     pub power_status: PowerStatus,
-    pub current_power_mode: PowerMode,
+    pub power_mode: PowerMode,
     pub batteries: Vec<Battery>,
 
     power_setting_battery_percent_token: Option<HPOWERNOTIFY>,
@@ -47,7 +40,12 @@ pub struct PowerManager {
 event_manager!(PowerManager, PowerManagerEvent);
 
 impl PowerManager {
-    pub fn instance() -> &'static Arc<Mutex<Self>> {
+    pub fn instance() -> &'static TracedMutex<Self> {
+        static POWER_MANAGER: LazyLock<TracedMutex<PowerManager>> = LazyLock::new(|| {
+            let mut pm = PowerManager::new();
+            pm.init().log_error();
+            TracedMutex::new(pm)
+        });
         &POWER_MANAGER
     }
 
@@ -59,6 +57,22 @@ impl PowerManager {
         // Get initial power status and batteries
         self.power_status = Self::get_power_status()?;
         self.batteries = Self::get_batteries()?;
+
+        let eid = Self::subscribe(|event| {
+            let mut guard = Self::instance().lock();
+            match event {
+                PowerManagerEvent::BatteriesChanged(batteries) => {
+                    guard.batteries = batteries;
+                }
+                PowerManagerEvent::PowerStatusChanged(status) => {
+                    guard.power_status = status;
+                }
+                PowerManagerEvent::PowerModeChanged(mode) => {
+                    guard.power_mode = mode;
+                }
+            }
+        });
+        Self::set_event_handler_priority(&eid, 1);
 
         // https://learn.microsoft.com/en-us/windows/win32/api/powersetting/nf-powersetting-powerregisterforeffectivepowermodenotifications#remarks
         unsafe {
@@ -101,11 +115,11 @@ impl PowerManager {
         mode: EFFECTIVE_POWER_MODE,
         _ctx: *const std::ffi::c_void,
     ) {
-        let mut guard = trace_lock!(POWER_MANAGER);
+        let mut guard = Self::instance().lock();
         let mode: PowerMode = power_mode_to_serializable(mode);
-        if guard.current_power_mode != mode {
+        if guard.power_mode != mode {
             log::trace!("Power mode changed to {mode:?}");
-            guard.current_power_mode = mode;
+            guard.power_mode = mode;
             Self::send(PowerManagerEvent::PowerModeChanged(mode));
         }
     }
@@ -143,15 +157,13 @@ impl PowerManager {
 
         match w_param as u32 {
             PBT_APMPOWERSTATUSCHANGE => {
-                let mut guard = trace_lock!(POWER_MANAGER);
                 let new_status = Self::get_power_status()?;
-                if guard.power_status.ac_line_status != new_status.ac_line_status {
-                    let batteries = Self::get_batteries()?;
-                    guard.batteries = batteries.clone();
-                    Self::send(PowerManagerEvent::BatteriesChanged(batteries));
+                if Self::instance().lock().power_status.ac_line_status != new_status.ac_line_status
+                {
+                    Self::send(PowerManagerEvent::BatteriesChanged(Self::get_batteries()?));
                 }
+
                 log::trace!("Power status changed to {new_status:?}");
-                guard.power_status = new_status.clone();
                 Self::send(PowerManagerEvent::PowerStatusChanged(new_status));
             }
             PBT_APMRESUMESUSPEND | PBT_APMRESUMEAUTOMATIC => {
@@ -163,20 +175,12 @@ impl PowerManager {
 
                     log::trace!("Refreshing power state after wake up");
                     if let Ok(new_status) = Self::get_power_status() {
-                        let mut guard = trace_lock!(POWER_MANAGER);
-                        guard.power_status = new_status.clone();
                         Self::send(PowerManagerEvent::PowerStatusChanged(new_status));
                     }
 
                     if let Ok(batteries) = Self::get_batteries() {
-                        let mut guard = trace_lock!(POWER_MANAGER);
-                        guard.batteries = batteries.clone();
                         Self::send(PowerManagerEvent::BatteriesChanged(batteries));
                     }
-
-                    let guard = trace_lock!(POWER_MANAGER);
-                    let current_mode = guard.current_power_mode;
-                    Self::send(PowerManagerEvent::PowerModeChanged(current_mode));
                 });
             }
             _ => {}
@@ -198,7 +202,7 @@ impl Default for PowerManager {
     fn default() -> Self {
         Self {
             power_status: power_status_to_serializable(SYSTEM_POWER_STATUS::default()),
-            current_power_mode: PowerMode::Unknown,
+            power_mode: PowerMode::Unknown,
             batteries: Vec::new(),
             power_mode_event_token: None,
             power_setting_battery_percent_token: None,
