@@ -5205,7 +5205,7 @@ dependencies = [
  "win-hotkeys",
  "win-screenshot",
  "windows 0.59.0",
- "windows-core 0.59.0",
+ "windows-core 0.62.2",
  "winreg 0.55.0",
  "wmi",
 ]
@@ -5563,7 +5563,7 @@ dependencies = [
  "slu-ipc",
  "uuid 1.20.0",
  "windows 0.59.0",
- "windows-core 0.59.0",
+ "windows-core 0.62.2",
 ]
 
 [[package]]
