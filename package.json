@@ -3,6 +3,7 @@
   "version": "2.5.0",
   "description": "Seelen UI Project",
   "type": "module",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "tauri": "tauri",
     "tauri:update": "tsx scripts/UpdateTauri.ts",
@@ -26,7 +27,6 @@
     "type": "git",
     "url": "https://github.com/eythaann/seelen-ui.git"
   },
-  "license": "Polyform Strict License",
   "dependencies": {
     "@dnd-kit-svelte/svelte": "^0.1.5",
     "@dnd-kit/core": "^6.3.1",
