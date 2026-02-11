@@ -23,7 +23,7 @@ jobs:
     needs: continuous-integration
     runs-on: ubuntu-latest
     outputs:
-      nightly-version: ${{ steps.gen-version.outputs.result }}
+      version: ${{ steps.gen-version.outputs.result }}
     steps:
       - uses: actions/checkout@v4
       - run: git fetch --tags --prune
@@ -72,7 +72,7 @@ jobs:
 
       - name: Set Version
         run: |
-          npx tsx scripts/versionish.ts ci ${{ needs.update-tag.outputs.nightly-version }}
+          npx tsx scripts/versionish.ts ci ${{ needs.update-tag.outputs.version }}
 
       - name: Build Hook DLL
         run: cargo build --release --target ${{ matrix.target }} -p sluhk
@@ -175,7 +175,7 @@ jobs:
 
       - name: Set Version
         run: |
-          npx tsx scripts/versionish.ts ci ${{ needs.update-tag.outputs.nightly-version }}
+          npx tsx scripts/versionish.ts ci ${{ needs.update-tag.outputs.version }}
 
       - name: Download signed binaries
         uses: actions/download-artifact@v4
@@ -199,7 +199,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = ${{ needs.update-tag.outputs.nightly-version }}
+          $version = ${{ needs.update-tag.outputs.version }}
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $setupFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
@@ -236,7 +236,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = ${{ needs.update-tag.outputs.nightly-version }}
+          $version = ${{ needs.update-tag.outputs.version }}
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
           $normalFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
@@ -347,7 +347,7 @@ jobs:
           find ./bundles -name "*.sig" -type f -delete
           echo "Existing signatures removed"
 
-          VERSION=${{ needs.update-tag.outputs.nightly-version }}
+          VERSION=${{ needs.update-tag.outputs.version }}
           PATH1="bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
           PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
 
@@ -357,12 +357,11 @@ jobs:
           tauri signer sign --verbose "$PATH2"
 
       - name: Upload Signed Installers to release
-        uses: softprops/action-gh-release@v2
+        uses: svenstaro/upload-release-action@v2
         with:
-          tag_name: nightly
-          name: Seelen UI Nightly
-          prerelease: true
-          files: bundles/**/*
+          tag: nightly
+          file: bundles/**/*
+          file_glob: true
 
   generate-update-file:
     needs:
@@ -388,5 +387,5 @@ jobs:
       - uses: ./.github/actions/generate-update-manifest
         with:
           release-id: ${{ steps.get-release.outputs.result }}
-          version: ${{ needs.update-tag.outputs.nightly-version }}
+          version: ${{ needs.update-tag.outputs.version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}

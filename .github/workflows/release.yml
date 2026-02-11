@@ -14,8 +14,24 @@ jobs:
   continuous-integration:
     uses: ./.github/workflows/ci.yml
 
-  create-release:
+  get-version:
     needs: continuous-integration
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-version.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get version
+        id: get-version
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            return packageJson.version;
+
+  create-release:
+    needs: get-version
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -23,23 +39,22 @@ jobs:
       release_id: ${{ steps.create-release.outputs.result }}
     steps:
       - uses: actions/checkout@v4
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
       - name: Create release (draft)
         id: create-release
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
+            const version = ${{ needs.get-version.outputs.version }};
             const changelogContent = fs.readFileSync('changelog.md', 'utf-8');
-            const regex = new RegExp(`(?<=\\[${process.env.PACKAGE_VERSION}\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
+            const regex = new RegExp(`(?<=\\[${version}\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
             const releaseNotes = changelogContent.match(regex)?.[0].trim() || '';
 
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: `v${process.env.PACKAGE_VERSION}`,
-              name: `Seelen UI v${process.env.PACKAGE_VERSION}`,
+              tag_name: `v${version}`,
+              name: `Seelen UI v${version}`,
               body: releaseNotes,
               generate_release_notes: true,
               draft: true,
@@ -133,7 +148,7 @@ jobs:
 
   bundle:
     needs:
-      - create-release
+      - get-version
       - sign-binaries
     strategy:
       fail-fast: false
@@ -165,9 +180,6 @@ jobs:
           winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
           winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
-
       - name: Download signed binaries
         uses: actions/download-artifact@v4
         with:
@@ -190,7 +202,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = ${{ env.PACKAGE_VERSION }}
+          $version = ${{ needs.get-version.outputs.version }}
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $setupFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
@@ -230,7 +242,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = ${{ env.PACKAGE_VERSION }}
+          $version = ${{ needs.get-version.outputs.version }}
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
           $normalFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
@@ -278,6 +290,7 @@ jobs:
 
   sign-bundles:
     needs:
+      - get-version
       - create-release
       - merge-bundles
     permissions:
@@ -288,9 +301,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
       - name: Submit to SignPath
         uses: signpath/github-action-submit-signing-request@v1
@@ -318,7 +328,7 @@ jobs:
           find ./bundles -name "*.sig" -type f -delete
           echo "Existing signatures removed"
 
-          VERSION=${{ env.PACKAGE_VERSION }}
+          VERSION=${{ needs.get-version.outputs.version }}
           PATH1="bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
           PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
 
@@ -334,12 +344,11 @@ jobs:
           echo "Self-signed .msix files removed (Store-signed MSIX will be added later by msix.yml workflow)"
 
       - name: Upload Signed Installers to release
-        uses: softprops/action-gh-release@v2
+        uses: svenstaro/upload-release-action@v2
         with:
-          tag_name: v${{ env.PACKAGE_VERSION }}
-          name: Seelen UI v${{ env.PACKAGE_VERSION }}
-          prerelease: false
-          files: bundles/**/*
+          release_id: ${{ needs.create-release.outputs.release_id }}
+          file: bundles/**/*
+          file_glob: true
 
   publish-release:
     needs: [create-release, sign-bundles]
@@ -386,18 +395,16 @@ jobs:
           SBDisableTelemetry: true
 
   generate-update-file:
-    needs: [create-release, publish-release]
+    needs: [get-version, create-release, publish-release]
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
       - uses: ./.github/actions/generate-update-manifest
         with:
           release-id: ${{ needs.create-release.outputs.release_id }}
-          version: ${{ env.PACKAGE_VERSION }}
+          version: ${{ needs.get-version.outputs.version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   discord:
