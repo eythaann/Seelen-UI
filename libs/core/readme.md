@@ -32,7 +32,7 @@ Contributions are welcome! Please read our [contributing guidelines](contributin
 
 ## License
 
-This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the AGPL-3.0 License. See the [LICENSE](LICENSE) file for details.
 
 ## Links
 

@@ -1,6 +1,6 @@
+import { PhysicalSize } from "@tauri-apps/api/dpi";
 import type { Widget } from "./mod.ts";
 import { Alignment } from "@seelen-ui/types";
-import { PhysicalSize } from "@seelen-ui/lib/tauri";
 
 export class WidgetAutoSizer {
   /** From which side the widget will grow */

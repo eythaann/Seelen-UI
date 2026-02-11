@@ -2,3 +2,4 @@
 SLU_SERVICE_CONNECTION_TOKEN = "__local__"
 TS_RS_EXPORT_DIR = "./gen/types"
 TS_RS_IMPORT_EXTENSION = "ts"
+TS_RS_LARGE_INT = "number"

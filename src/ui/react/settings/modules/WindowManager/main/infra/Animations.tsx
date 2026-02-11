@@ -38,8 +38,7 @@ export function WmAnimationsSettings() {
               max={1500}
               value={Number(animations.durationMs)}
               onChange={(value) => {
-                // TODO: the type is bigint but in reality it's a number, tis should be fixed on the types lib
-                let parsed = (value || 100) as unknown as bigint;
+                let parsed = value || 100;
                 setWmAnimations({
                   ...animations,
                   durationMs: parsed,

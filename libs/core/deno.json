@@ -2,7 +2,7 @@
   "name": "@seelen-ui/lib",
   "version": "2.5.0",
   "description": "Seelen UI Library for Widgets",
-  "license": "AGPL-3.0-or-later",
+  "license": "AGPL-3.0-only",
   "exports": {
     ".": "./src/lib.ts",
     "./types": "./gen/types/mod.ts",
@@ -53,7 +53,6 @@
     "include": [
       "src",
       "gen",
-      "LICENSE",
       "readme.md"
     ],
     "exclude": [
