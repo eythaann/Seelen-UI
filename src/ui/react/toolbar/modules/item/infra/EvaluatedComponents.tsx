@@ -74,9 +74,9 @@ export function useSandboxedCode({ code, scope }: SanboxedComponentProps): unkno
       const { env: _, ...rest } = scope;
 
       console.error("Error while executing JS sandboxed code:", {
+        error,
         code,
         scope: rest,
-        error,
       });
       return null;
     }

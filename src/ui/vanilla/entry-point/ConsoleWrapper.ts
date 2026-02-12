@@ -1,22 +1,14 @@
 import * as logger from "./_ConsoleWrapper.ts";
+import inspect from "object-inspect";
 
 function StringifyParams(params: any[]): string {
-  return params.reduce((acc, current) => {
+  return params.reduce((acc: string, current: unknown) => {
     if (typeof current === "string") {
       return acc + " " + current;
     }
 
-    if (current instanceof Error) {
-      return `${acc} ${current.name}(${current.message})\n${current.stack}`;
-    }
-
     if (typeof current === "object") {
-      let stringObj = "";
-      try {
-        stringObj = JSON.stringify(current, null, 2);
-      } catch (_e) {
-        stringObj = `${current}`;
-      }
+      let stringObj = inspect(current, { indent: 2, quoteStyle: "double" });
       return acc + " " + stringObj;
     }
 
@@ -31,6 +23,7 @@ function forwardConsole(
   const original = console[fnName];
   console[fnName] = (...params: any[]) => {
     original(...params);
+
     let message = StringifyParams(params);
     /// ignore Ant Design Warnings
     if (message.includes("[Ant Design CSS-in-JS]")) {
