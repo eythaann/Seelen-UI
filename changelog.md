@@ -2,6 +2,10 @@
 
 ## [2.5.1-dev]
 
+### enhancements
+
+- add liveness prove for widgets.
+
 ## [2.5.0]
 
 ### features

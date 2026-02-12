@@ -1,13 +1,25 @@
-use std::sync::Arc;
+use std::{
+    sync::{atomic::AtomicU8, Arc},
+    time::Duration,
+};
 
 use seelen_core::state::{Widget, WidgetInstanceMode, WidgetStatus};
+use tauri::{Emitter, Listener};
+use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use uuid::Uuid;
 
 use crate::{
+    app::get_app_handle,
+    error::ResultLogExt,
+    get_tokio_handle,
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview, WidgetWebviewLabel},
 };
+
+const LIVENESS_PROVE_INTERVAL: Duration = Duration::from_secs(10);
+const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(5);
+const LIVENESS_PROVE_MAX_RETRIES: u8 = 5;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum InstanceType {
@@ -79,6 +91,9 @@ pub struct WidgetInstance {
     pub instance_type: InstanceType,
     window: Option<WidgetWebview>,
     _status: WidgetStatus,
+
+    live: Arc<tokio::sync::Notify>,
+    retries: Arc<AtomicU8>,
 }
 
 impl WidgetInstance {
@@ -95,6 +110,8 @@ impl WidgetInstance {
             instance_type,
             window: None,
             _status: WidgetStatus::Pending,
+            live: Arc::new(tokio::sync::Notify::new()),
+            retries: Arc::new(AtomicU8::new(0)),
         }
     }
 
@@ -112,42 +129,92 @@ impl WidgetInstance {
     }
 
     fn start_webview(&mut self, definition: &Widget) {
-        if self.status() == &WidgetStatus::Pending {
-            self.set_status(WidgetStatus::Creating);
+        if self.status() != &WidgetStatus::Pending {
+            return;
+        }
 
-            match WidgetWebview::create(definition, &self.label) {
-                Ok(window) => {
-                    let label = self.label.clone();
-                    let instance_type = self.instance_type;
-                    window.0.on_window_event(move |event| {
-                        if let tauri::WindowEvent::Destroyed = event {
+        self.set_status(WidgetStatus::Creating);
+        let window = match WidgetWebview::create(definition, &self.label) {
+            Ok(window) => window,
+            Err(err) => {
+                log::error!("Failed to create webview: {}", err);
+                self.set_status(WidgetStatus::CrashedOnCreation);
+                return;
+            }
+        };
+        self.set_status(WidgetStatus::Mounting);
+
+        let live = self.live.clone();
+        let label = self.label.clone();
+        let retries = self.retries.clone();
+        let liveness_prove = get_tokio_handle().spawn(async move {
+            let app = get_app_handle();
+
+            loop {
+                tokio::time::sleep(LIVENESS_PROVE_INTERVAL).await;
+                let _ = app.emit_to(&label.raw, "internal::liveness-ping", ());
+
+                tokio::select! {
+                    _ = live.notified() => {
+                        // log::trace!("Liveness prove succeeded for {label}");
+                    }
+                    _ = tokio::time::sleep(LIVENESS_PROVE_WAIT_TIMEOUT) => {
+                        log::warn!("Liveness prove failed for {label}, reloading webview.");
+
+                        let attempt = retries.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+                        if attempt < LIVENESS_PROVE_MAX_RETRIES {
                             WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
-                                match instance_type {
-                                    InstanceType::Runtime => {
-                                        // Remove runtime instances on destroy
-                                        c.instances.remove(&label);
+                                c.instances.get(&label, |w| {
+                                    w.set_status(WidgetStatus::Pending);
+                                    if let Some(window) = &w.window {
+                                        window.0.reload().log_error();
                                     }
-                                    InstanceType::Static => {
-                                        // Reset static instances to pending state
-                                        c.instances.get(&label, |w| {
-                                            w.window = None;
-                                            w.set_status(WidgetStatus::Pending);
-                                        });
-                                    }
-                                }
+                                });
                             });
+                        } else {
+                            log::error!("Liveness prove failed for {label} too many times, giving up.");
+                            app.dialog()
+                                .message(format!("Liveness prove failed for {label} too many times.\nYou can try restarting the app."))
+                                .kind(MessageDialogKind::Error)
+                                .buttons(MessageDialogButtons::Ok)
+                                .show(|_| {});
+                            break;
                         }
-                    });
-
-                    self.window = Some(window);
-                    self.set_status(WidgetStatus::Mounting);
-                }
-                Err(err) => {
-                    log::error!("Failed to create webview: {}", err);
-                    self.set_status(WidgetStatus::CrashedOnCreation);
+                    }
                 }
             }
-        }
+        });
+
+        let label = self.label.clone();
+        let instance_type = self.instance_type;
+        window.0.on_window_event(move |event| {
+            if let tauri::WindowEvent::Destroyed = event {
+                WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
+                    liveness_prove.abort();
+                    match instance_type {
+                        // Remove runtime instances on destroy
+                        InstanceType::Runtime => {
+                            c.instances.remove(&label);
+                        }
+                        // Reset static instances to pending state
+                        InstanceType::Static => {
+                            c.instances.get(&label, |w| {
+                                w.window = None;
+                                w.retries.store(0, std::sync::atomic::Ordering::SeqCst);
+                                w.set_status(WidgetStatus::Pending);
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+        let live = self.live.clone();
+        window.0.listen("internal::liveness-pong", move |_event| {
+            live.notify_waiters();
+        });
+
+        self.window = Some(window);
     }
 }
 

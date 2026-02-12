@@ -1,9 +1,7 @@
 use std::{future::Future, sync::Arc};
 
 use interprocess::os::windows::named_pipe::{
-    PipeListenerOptions,
-    pipe_mode::Bytes,
-    tokio::{DuplexPipeStream as AsyncDuplexPipeStream, PipeListenerOptionsExt},
+    PipeListenerOptions, pipe_mode::Bytes, tokio::DuplexPipeStream as AsyncDuplexPipeStream,
 };
 
 use crate::{

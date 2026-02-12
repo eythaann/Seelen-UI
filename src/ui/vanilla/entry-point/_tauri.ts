@@ -4,13 +4,21 @@ import type { InvokeArgs, InvokeOptions } from "@tauri-apps/api/core";
 
 export class WebviewInformation {
   _label: string | null = null;
+
+  get rawLabel() {
+    let label = window.__TAURI_INTERNALS__?.metadata?.currentWebview?.label;
+    if (!label) {
+      throw new Error("Missing webview label");
+    }
+    return label;
+  }
+
   get label() {
     if (this._label) {
       return this._label;
     }
 
-    const viewLabel = window.__TAURI_INTERNALS__?.metadata?.currentWebview
-      ?.label;
+    const viewLabel = window.__TAURI_INTERNALS__?.metadata?.currentWebview?.label;
     this._label = viewLabel ? decodeUrlSafeBase64(viewLabel) : "Unknown";
     return this._label;
   }
@@ -31,10 +39,6 @@ function decodeUrlSafeBase64(base64Str: string) {
   return atob(standardBase64);
 }
 
-export function _invoke<T>(
-  cmd: string,
-  args?: InvokeArgs,
-  options?: InvokeOptions,
-): Promise<T> {
+export function _invoke<T>(cmd: string, args?: InvokeArgs, options?: InvokeOptions): Promise<T> {
   return window.__TAURI_INTERNALS__!.invoke(cmd, args, options);
 }

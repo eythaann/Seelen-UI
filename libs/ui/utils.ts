@@ -32,3 +32,20 @@ export function outputVolumeIcon(muted: boolean, volume: number) {
 
   return volume === 0 ? "IoVolumeOffOutline" : "IoVolumeLowOutline";
 }
+
+export function crashPageByMemory() {
+  console.debug("Attempting to crash the page by allocating excessive memory...");
+  let arr = [];
+  // Create an array with the largest possible number of elements repeatedly
+  // use interval to avoid blocking the main thread
+  setInterval(() => {
+    arr.push(new Array(1_000_000).fill(0)); // Allocates memory in chunks
+  }, 1);
+}
+
+export function freezePageByLoop() {
+  console.debug("Attempting to freeze the page with an infinite loop...");
+  while (true) {
+    // An empty loop is sufficient to block the main thread
+  }
+}

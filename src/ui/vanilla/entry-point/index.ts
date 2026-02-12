@@ -5,7 +5,7 @@
 import "./ConsoleWrapper.ts";
 
 import type { FocusedApp, Widget } from "@seelen-ui/lib/types";
-import { listen } from "@tauri-apps/api/event";
+import { emitTo, listen } from "@tauri-apps/api/event";
 import { _invoke, WebviewInformation } from "src/ui/vanilla/entry-point/_tauri.ts";
 
 import { hookLocalStorage, removeDefaultWebviewActions } from "src/ui/vanilla/entry-point/setup.ts";
@@ -13,7 +13,8 @@ import { hookLocalStorage, removeDefaultWebviewActions } from "src/ui/vanilla/en
 const indexJsCode = fetch("./index.js").then((res) => res.text());
 
 // initialize global widget variable, needed by slu-lib
-const currentWidgetId = new WebviewInformation().widgetId;
+const info = new WebviewInformation();
+const currentWidgetId = info.widgetId;
 const widgetList = await _invoke<Widget[]>("state_get_widgets");
 window.__SLU_WIDGET = widgetList.find((widget) => widget.id === currentWidgetId)!;
 
@@ -48,6 +49,19 @@ listen("internal::session_resumed", () => {
   console.trace("Reloading widget.");
   location.search = `r=${Date.now()}`; // add a query hash to force be a new page
 });
+
+listen<string>(
+  "internal::liveness-ping",
+  () => {
+    emitTo(info.rawLabel, "internal::liveness-pong");
+  },
+  {
+    target: {
+      kind: "WebviewWindow",
+      label: info.rawLabel,
+    },
+  },
+);
 
 // load index.js
 const script = document.createElement("script");

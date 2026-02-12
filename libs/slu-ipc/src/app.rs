@@ -1,9 +1,8 @@
 use std::sync::Arc;
 
 use interprocess::os::windows::named_pipe::{
-    DuplexPipeStream, PipeListenerOptions,
-    pipe_mode::Bytes,
-    tokio::{DuplexPipeStream as AsyncDuplexPipeStream, PipeListenerOptionsExt},
+    DuplexPipeStream, PipeListenerOptions, pipe_mode::Bytes,
+    tokio::DuplexPipeStream as AsyncDuplexPipeStream,
 };
 use windows::Win32::System::RemoteDesktop::{ProcessIdToSessionId, WTSGetActiveConsoleSessionId};
 
