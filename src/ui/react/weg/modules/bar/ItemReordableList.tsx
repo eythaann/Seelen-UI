@@ -1,20 +1,5 @@
-import {
-  closestCorners,
-  DndContext,
-  type DragEndEvent,
-  DragOverlay,
-  type DragStartEvent,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
-import {
-  arrayMove,
-  horizontalListSortingStrategy,
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { batch, useSignal } from "@preact/signals";
+import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
+import { move } from "@dnd-kit/helpers";
 import { WegItemType } from "@seelen-ui/lib/types";
 import { useTranslation } from "react-i18next";
 
@@ -30,65 +15,35 @@ import { $dock_state } from "../shared/state/items.ts";
 import { DraggableItem } from "./DraggableItem.tsx";
 import { ShowDesktopModule } from "../item/infra/ShowDesktop.tsx";
 
-export function DockItems({ isHorizontal }: { isHorizontal: boolean }) {
-  const $active_id = useSignal<string | null>(null);
+export function DockItems() {
   const { t } = useTranslation();
-
-  const pointerSensor = useSensor(PointerSensor, {
-    activationConstraint: {
-      distance: 5,
-    },
-  });
-  const sensors = useSensors(pointerSensor);
 
   const isEmpty = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length === 0;
 
-  function handleDragStart(e: DragStartEvent) {
-    $active_id.value = e.active.id as string;
-  }
-
-  function handleDragEnd(e: DragEndEvent) {
-    const { active, over } = e;
-    if (!over || active.id === over.id) {
-      $active_id.value = null;
-      return;
-    }
-
-    const originalPos = $dock_state.value.items.findIndex((c) => c.id === active.id);
-    const newPos = $dock_state.value.items.findIndex((c) => c.id === over.id);
-    const newItems = arrayMove($dock_state.value.items, originalPos, newPos);
-
-    batch(() => {
-      $active_id.value = null;
-      $dock_state.value = { ...$dock_state.value, items: newItems };
-    });
-  }
-
-  const dragginItem = $dock_state.value.items.find((c) => c.id === $active_id.value);
   return (
-    <DndContext
-      collisionDetection={closestCorners}
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-      sensors={sensors}
+    <DragDropProvider
+      onDragOver={(event) => {
+        const newItems = move($dock_state.value.items, event);
+        $dock_state.value = { ...$dock_state.value, items: newItems };
+      }}
     >
       <div className="weg-items">
         {isEmpty ? <span className="weg-empty-state-label">{t("weg.empty")}</span> : (
-          <SortableContext
-            items={$dock_state.value.items}
-            strategy={isHorizontal ? horizontalListSortingStrategy : verticalListSortingStrategy}
-            disabled={$dock_state.value.isReorderDisabled}
-          >
-            {$dock_state.value.items.map((item) => (
-              <DraggableItem item={item} key={item.id}>
-                {ItemByType(item, false)}
-              </DraggableItem>
-            ))}
-          </SortableContext>
+          $dock_state.value.items.map((item, index) => (
+            <DraggableItem item={item} key={item.id} index={index}>
+              {ItemByType(item, false)}
+            </DraggableItem>
+          ))
         )}
-        <DragOverlay>{dragginItem && ItemByType(dragginItem, true)}</DragOverlay>
       </div>
-    </DndContext>
+
+      <DragOverlay>
+        {(source) => {
+          const item = $dock_state.value.items.find((c) => c.id === source.id);
+          return item ? ItemByType(item, true) : null;
+        }}
+      </DragOverlay>
+    </DragDropProvider>
   );
 }
 

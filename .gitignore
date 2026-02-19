@@ -13,3 +13,7 @@ src/runtime
 
 # rust-analyzer
 rustc-ice-*.txt
+
+CLAUDE.md
+GEMINI.md
+.claude

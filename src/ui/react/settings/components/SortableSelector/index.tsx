@@ -1,18 +1,6 @@
-import {
-  closestCorners,
-  DndContext,
-  type DragEndEvent,
-  type DragOverEvent,
-  DragOverlay,
-  type DragStartEvent,
-  PointerSensor,
-  useDroppable,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
-import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { useSignal } from "@preact/signals";
+import { DragDropProvider, DragOverlay, useDroppable } from "@dnd-kit/react";
+import { useSortable } from "@dnd-kit/react/sortable";
+import { arrayMove } from "@dnd-kit/helpers";
 import { throttle } from "lodash";
 import type { ComponentChildren } from "preact";
 import { useMemo } from "preact/hooks";
@@ -49,58 +37,36 @@ export function VerticalSortableSelect<T extends string>({
     },
   ];
 
-  const $dragging_id = useSignal<string | null>(null);
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 5,
-      },
-    }),
-  );
-
-  function handleDragStart(e: DragStartEvent) {
-    $dragging_id.value = e.active.id as string;
-  }
-
   const _handleDragOver = useMemo(() => throttle(genericHandleDragOver<T>, 100), []);
-  function handleDragOver(e: DragOverEvent) {
-    _handleDragOver(e, containers, (newContainers) => {
+  function handleDragOver(event: any) {
+    _handleDragOver(event, containers, (newContainers) => {
       const enabledIds = newContainers.find((c) => c.id === "enabled")?.items ?? [];
       onChange(enabledIds);
     });
   }
 
-  function handleDragEnd(e: DragEndEvent) {
-    const { active, over } = e;
-    if (!over || active.id === over.id) {
-      $dragging_id.value = null;
-      return;
-    }
+  function handleDragEnd(event: any) {
+    const { source, target } = event.operation;
+    if (!target || source.id === target.id || event.canceled) return;
 
-    const oldPos = enabled.indexOf(active.id as T);
-    const newPos = enabled.indexOf(over.id as T);
+    const oldPos = enabled.indexOf(source.id as T);
+    const newPos = enabled.indexOf(target.id as T);
     const newEnabled = arrayMove(enabled, oldPos, newPos).filter(Boolean);
     onChange(newEnabled);
   }
 
-  const draggingOption = options.find(({ value }) => value === $dragging_id.value) ?? null;
   return (
-    <DndContext
-      sensors={sensors}
-      onDragStart={handleDragStart}
+    <DragDropProvider
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
-      onDragCancel={() => ($dragging_id.value = null)}
-      collisionDetection={closestCorners}
     >
       <div className={cs.container}>
         {containers.map(({ id, items }) => (
           <div className={cs.box}>
             <div className={cs.header}>{id === "enabled" ? "Enabled" : "Disabled"}</div>
             <DndDropableAndSortableContainer key={id} id={id} items={items} className={cs.list}>
-              {items.map((id) => (
-                <Entry key={id} value={id} disabled={disabled}>
+              {items.map((id, index) => (
+                <Entry key={id} value={id} disabled={disabled} index={index}>
                   <div className={cs.item}>{options.find(({ value }) => value === id)?.label}</div>
                 </Entry>
               ))}
@@ -108,16 +74,18 @@ export function VerticalSortableSelect<T extends string>({
           </div>
         ))}
         <DragOverlay>
-          {draggingOption && <div className={cs.item}>{draggingOption.label}</div>}
+          {(source) => {
+            const opt = options.find(({ value }) => value === source.id);
+            return opt ? <div className={cs.item}>{opt.label}</div> : null;
+          }}
         </DragOverlay>
       </div>
-    </DndContext>
+    </DragDropProvider>
   );
 }
 
 function DndDropableAndSortableContainer({
   id,
-  items,
   className,
   children,
 }: {
@@ -126,14 +94,12 @@ function DndDropableAndSortableContainer({
   className?: string;
   children: ComponentChildren;
 }) {
-  const { setNodeRef } = useDroppable({ id });
+  const droppable = useDroppable({ id });
 
   return (
-    <SortableContext items={items} strategy={verticalListSortingStrategy}>
-      <div ref={setNodeRef} className={className}>
-        {children}
-      </div>
-    </SortableContext>
+    <div ref={droppable.ref} className={className}>
+      {children}
+    </div>
   );
 }
 
@@ -141,20 +107,22 @@ function Entry({
   value,
   children,
   disabled,
+  index,
 }: {
   value: string;
   children: ComponentChildren;
   disabled: boolean;
+  index: number;
 }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const sortable = useSortable({
     id: value,
+    index,
     disabled,
-    animateLayoutChanges: () => false,
   });
 
   let opacity = 1;
 
-  if (isDragging) {
+  if (sortable.isDragging) {
     opacity = 0.1;
   }
 
@@ -163,16 +131,7 @@ function Entry({
   }
 
   return (
-    <div
-      ref={setNodeRef}
-      {...(attributes as any)}
-      {...listeners}
-      style={{
-        transform: CSS.Translate.toString(transform),
-        transition,
-        opacity,
-      }}
-    >
+    <div ref={sortable.ref} style={{ opacity }}>
       {children}
     </div>
   );

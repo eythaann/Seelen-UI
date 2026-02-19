@@ -29,7 +29,7 @@ export function SeelenWeg() {
       >
         <BackgroundByLayersV2 prefix="taskbar" />
         <div className="weg-items-container">
-          <DockItems isHorizontal={isHorizontal} />
+          <DockItems />
         </div>
       </div>
     </WithContextMenu>

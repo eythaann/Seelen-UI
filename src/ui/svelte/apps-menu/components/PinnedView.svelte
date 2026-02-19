@@ -5,11 +5,12 @@
   import FolderItem from "./FolderItem.svelte";
   import { arrayMove } from "../utils";
   import { DragDropProvider } from "@dnd-kit-svelte/svelte";
-  import type { UniqueIdentifier } from "@dnd-kit/core";
   import { debounce } from "lodash";
 
   import type { StartMenuItem } from "@seelen-ui/lib/types";
   import type { FavFolderItem } from "../state/mod.svelte";
+
+  type UniqueIdentifier = string | number;
 
   interface Props {
     onContextMenu: (event: MouseEvent, item: StartMenuItem | FavFolderItem) => void;

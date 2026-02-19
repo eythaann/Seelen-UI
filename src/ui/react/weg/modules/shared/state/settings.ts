@@ -23,6 +23,12 @@ await Settings.onChange((settings) => {
 });
 await $settings.init();
 
+export const isHorizontalDock = computed(
+  () =>
+    $settings.value.position === SeelenWegSide.Top ||
+    $settings.value.position === SeelenWegSide.Bottom,
+);
+
 effect(() => {
   const settings = $settings.value;
   i18n.changeLanguage(settings.language || undefined);

@@ -1,48 +1,56 @@
-import { useDroppable } from "@dnd-kit/core";
-import { horizontalListSortingStrategy, SortableContext } from "@dnd-kit/sortable";
-import type { ToolbarItem2 } from "@seelen-ui/lib/types";
-import { memo, useMemo } from "preact/compat";
+import { useDroppable } from "@dnd-kit/react";
+import type { ToolbarItem, ToolbarItem2 } from "@seelen-ui/lib/types";
+import { memo } from "preact/compat";
+import { computed } from "@preact/signals";
 
-import { componentByModule } from "./mappins.tsx";
+import { $plugins } from "../shared/state/items.ts";
+import { SortableItem } from "../item/infra/infra.tsx";
+import { isEqual } from "lodash";
+import { CollisionPriority } from "@dnd-kit/abstract";
+
+const plugins = computed(() => {
+  const dict: Record<string, ToolbarItem> = {};
+  for (const plugin of $plugins.value) {
+    dict[plugin.id] = plugin.plugin as ToolbarItem;
+  }
+  return dict;
+});
 
 interface Props {
   id: string;
   items: ToolbarItem2[];
 }
 
-function __ItemsDropableContainer({ id, items }: Props) {
-  const { setNodeRef } = useDroppable({ id });
-
-  // Memoize item IDs to prevent recalculation on every render
-  const itemIds = useMemo(
-    () => items.map((item) => (typeof item === "string" ? item : item.id)),
-    [items],
-  );
+function GroupComponent({ id, items }: Props) {
+  const droppable = useDroppable({
+    id,
+    type: "container",
+    accept: "item",
+    collisionPriority: CollisionPriority.Low,
+  });
 
   return (
-    <div ref={setNodeRef} className={`ft-bar-${id}`}>
-      <SortableContext items={itemIds} strategy={horizontalListSortingStrategy}>
-        {items.map(componentByModule)}
-      </SortableContext>
+    <div ref={droppable.ref} className={`ft-bar-container ft-bar-${id}`} data-drop-target={droppable.isDropTarget}>
+      {items.map((entry, index) => {
+        let module: ToolbarItem | undefined;
+
+        if (typeof entry === "string") {
+          const cached = plugins.value[entry];
+          if (!cached) {
+            return null;
+          }
+
+          module = { ...cached, id: entry };
+        } else {
+          module = entry;
+        }
+
+        return <SortableItem key={module.id} module={module} index={index} group={id} />;
+      })}
     </div>
   );
 }
 
-export const ItemsDropableContainer = memo(__ItemsDropableContainer, (prevProps, nextProps) => {
-  // Only re-render if id changed or items array changed (deep comparison)
-  return (
-    prevProps.id === nextProps.id &&
-    prevProps.items.length === nextProps.items.length &&
-    prevProps.items.every((item, idx) => {
-      const prevItem = item;
-      const nextItem = nextProps.items[idx];
-      if (typeof prevItem === "string" && typeof nextItem === "string") {
-        return prevItem === nextItem;
-      }
-      if (typeof prevItem === "object" && typeof nextItem === "object") {
-        return prevItem.id === nextItem.id;
-      }
-      return false;
-    })
-  );
+export const Group = memo(GroupComponent, (prevProps, nextProps) => {
+  return isEqual(prevProps, nextProps);
 });
