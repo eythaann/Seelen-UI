@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.5.2-dev]
+
 ## [2.5.1]
 
 ### enhancements

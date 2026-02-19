@@ -41,6 +41,11 @@ function createGitCommit(message: string): void {
   console.log(`✓ Git commit created: ${message}`);
 }
 
+function createGitTag(tag: string): void {
+  execSync(`git tag ${tag}`, { stdio: "inherit" });
+  console.log(`✓ Git tag created: ${tag}`);
+}
+
 function updateAllVersions(version: string, skipLockfiles = false): void {
   // Update library versions
   console.log("Updating library versions...");
@@ -122,6 +127,7 @@ async function main(args: string[]) {
         console.log(`\n✓ Version ${currentVersion} set successfully`);
 
         createGitCommit(`chore(release): finish v${currentVersion}`);
+        createGitTag(`v${currentVersion}`);
       },
     )
     .demandCommand(1, "You must provide a command (start, ci, or finish)")
