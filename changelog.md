@@ -6,6 +6,10 @@
 
 - add liveness prove for widgets.
 
+### fix
+
+- app failing opening on MSIX version.
+
 ## [2.5.0]
 
 ### features
