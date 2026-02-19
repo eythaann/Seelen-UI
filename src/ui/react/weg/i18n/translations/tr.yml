@@ -2,8 +2,8 @@ app_menu:
   close: Kapat
   close_multiple: Tümünü Kapat
   copy_handles: Tanıtıcıları Kopyala
-  kill: Süreci Sonlandır
-  kill_multiple: Tüm Süreçleri Öldür
+  kill: Görevi Sonlandır
+  kill_multiple: Tüm Görevleri Sonlandır
   open_file_location: Dosya Konumunu Aç
   pin: Sabitle
   pin_to_center: Ortaya Sabitle
@@ -16,7 +16,7 @@ context_menu:
   reorder_disable: Görev çubuğunu kilitle
   reorder_enable: Görev çubuğunun kilidini aç
 media:
-  not_playing: Hiçbir şey oynamıyor
+  not_playing: Medya oynatılmıyor
 show_desktop:
   label: Masaüstünü Göster
 start:
