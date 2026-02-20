@@ -63,7 +63,7 @@
     "@types/react-dom": "^19.0.0",
     "@types/yargs": "^17.0.33",
     "antd": "^5.23.0",
-    "esbuild": "^0.25.5",
+    "esbuild": "^0.27.3",
     "esbuild-css-modules-plugin": "^3.1.4",
     "express": "^4.21.2",
     "framer-motion": "^12.23.0",
