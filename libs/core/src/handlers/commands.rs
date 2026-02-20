@@ -110,6 +110,7 @@ slu_commands_declaration! {
     OpenFile = open_file(path: PathBuf),
     SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),
     Run = run(program: PathBuf, args: Option<RelaunchArguments>, working_dir: Option<PathBuf>, elevated: bool),
+    SimulatePerm = simulate_perm(widget_id: String, perm: String),
 
     IsDevMode = is_dev_mode() -> bool,
     IsAppxPackage = is_appx_package() -> bool,

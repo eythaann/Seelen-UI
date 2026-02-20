@@ -23,11 +23,11 @@ use crate::{
         icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
         pwsh::PwshScript,
     },
+    widgets::permissions::{request_widget_permission, WidgetPerm},
     windows_api::{hdc::DeviceContext, string_utils::WindowsString, window::Window, WindowsApi},
 };
 
-#[tauri::command(async)]
-pub fn open_file(path: String) -> Result<()> {
+pub fn open_file_inner(path: String) -> Result<()> {
     std::process::Command::new("cmd")
         .raw_arg("/c")
         .raw_arg("start")
@@ -42,6 +42,12 @@ pub fn open_file(path: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
+pub fn open_file(webview: tauri::WebviewWindow, path: String) -> Result<()> {
+    request_widget_permission(&webview, WidgetPerm::OpenFile)?;
+    open_file_inner(path)
+}
+
+#[tauri::command(async)]
 fn select_file_on_explorer(path: String) -> Result<()> {
     get_app_handle()
         .shell()
@@ -53,11 +59,13 @@ fn select_file_on_explorer(path: String) -> Result<()> {
 
 #[tauri::command(async)]
 async fn run(
+    webview: tauri::WebviewWindow,
     program: String,
     args: Option<RelaunchArguments>,
     working_dir: Option<PathBuf>,
     elevated: bool,
 ) -> Result<()> {
+    request_widget_permission(&webview, WidgetPerm::Run)?;
     let args = args.map(|args| args.to_string());
     WindowsApi::execute(program, args, working_dir, elevated)
 }
@@ -255,6 +263,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::cli::*;
     use crate::state::infrastructure::*;
     use crate::virtual_desktops::handlers::*;
+    use crate::widgets::permissions::*;
     use crate::widgets::popups::handlers::*;
     use crate::widgets::weg::handler::*;
     use crate::widgets::window_manager::handler::*;

@@ -70,7 +70,7 @@ pub fn activate_notification(
 
     // as fallback in case of not being able to use the toast activator, just open the app.
     log::trace!("Using activation fallback (open app - no arguments)");
-    crate::exposed::open_file(format!("shell:AppsFolder\\{app_umid}"))?;
+    crate::exposed::open_file_inner(format!("shell:AppsFolder\\{app_umid}"))?;
     Ok(())
 }
 

@@ -1,6 +1,7 @@
 pub mod cli;
 pub mod loader;
 pub mod manager;
+pub mod permissions;
 pub mod popups;
 pub mod task_switcher;
 pub mod toolbar;

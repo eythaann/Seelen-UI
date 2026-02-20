@@ -3,6 +3,10 @@ import { path } from "@tauri-apps/api";
 import { settings } from "../../state/mod";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 
+export async function simulatePerm(widgetId: string, perm: string): Promise<void> {
+  await invoke(SeelenCommand.SimulatePerm, { widgetId, perm });
+}
+
 /**
  * Gets the devTools setting
  */

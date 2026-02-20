@@ -2,6 +2,10 @@
 
 ## [2.5.2-dev]
 
+### features
+
+- add new widget security layer for exposed commands.
+
 ## [2.5.1]
 
 ### enhancements

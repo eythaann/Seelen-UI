@@ -76,6 +76,12 @@ devtools:
   install_folder: Installation Folder
   load: Load
   settings_file: Settings File
+  simulate_perm:
+    label: Simulate Widget Permission Request
+    widget_id_placeholder: "@author/widget-name"
+    trigger: Simulate
+    result_allowed: "✓ Permission granted"
+    result_denied: "✗ Permission denied"
 extras:
   clear_icons: Clear System Icons Cache
   clear_icons_tooltip: A restart could be required to fully take effect on all widgets

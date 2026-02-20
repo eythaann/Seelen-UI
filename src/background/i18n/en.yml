@@ -40,3 +40,8 @@ shortcut:
   register:
     placeholder: Press any key combination
     title: Registering new shortcut
+widget_permissions:
+  request_title: Widget Permission Request
+  request_description: "The widget '%{widget_id}' is requesting permission to %{command}.\n\nDo you want to allow this?"
+  perm_run: run programs
+  perm_open_file: open files
