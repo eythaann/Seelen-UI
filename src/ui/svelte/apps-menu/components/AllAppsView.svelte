@@ -5,7 +5,7 @@
   import { t } from "../i18n";
   import AppItem from "./AppItem.svelte";
   import * as fuzzySearch from "@m31coding/fuzzy-search";
-  import { DragDropProvider } from "@dnd-kit-svelte/svelte";
+  import { DragDropProvider } from "@dnd-kit/svelte";
 
   interface Props {
     onContextMenu: (event: MouseEvent, item: StartMenuItem) => void;

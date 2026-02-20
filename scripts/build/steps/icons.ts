@@ -2,7 +2,9 @@
 
 import fs from "fs";
 import path from "path";
-import { renderToStaticMarkup } from "real-react-dom/server"; // preact compat doesn't work for extracting icons
+// preact-render-to-string doesn't work here: react-icons emits real React elements
+// ($$typeof: Symbol(react.element)), not Preact VNodes, so we need the real React SSR renderer.
+import { renderToStaticMarkup } from "real-react-dom/server";
 import { ICONS_DIR, NODE_MODULES_DIR } from "../config.ts";
 
 /**

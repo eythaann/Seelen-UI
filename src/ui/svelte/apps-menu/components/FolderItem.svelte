@@ -3,7 +3,7 @@
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
-  import { useDraggable, useDroppable } from "@dnd-kit-svelte/svelte";
+  import { createDraggable, createDroppable } from "@dnd-kit/svelte";
   import FolderModal from "./FolderModal.svelte";
   import type { StartMenuItem } from "@seelen-ui/lib/types";
 
@@ -24,7 +24,7 @@
   });
 
   const isPreselected = $derived(
-    globalState.preselectedItem === folder.itemId || (idx === 0 && !globalState.preselectedItem)
+    globalState.preselectedItem === folder.itemId || (idx === 0 && !globalState.preselectedItem),
   );
 
   const folderName = $derived(folder.name || $t("folder"));
@@ -32,18 +32,22 @@
     folder.itemIds.map((id) => ({
       id,
       item: globalState.getMenuItem(id)!,
-    }))
+    })),
   );
 
-  const draggable = useDraggable({
-    id: () => folder.itemId,
-    type: "folder",
-  });
+  const draggable = $derived(
+    createDraggable({
+      id: folder.itemId,
+      type: "folder",
+    }),
+  );
 
-  const droppable = useDroppable({
-    id: () => folder.itemId,
-    type: "folder",
-  });
+  const droppable = $derived(
+    createDroppable({
+      id: folder.itemId,
+      type: "folder",
+    }),
+  );
 
   function openModal() {
     isModalOpen = true;
@@ -55,13 +59,13 @@
 </script>
 
 <button
-  {@attach draggable.ref}
-  {@attach droppable.ref}
+  {@attach draggable.attach}
+  {@attach droppable.attach}
   data-item-id={folder.itemId}
   class="folder"
   class:preselected={isPreselected && globalState.searchQuery}
-  class:is-dragging={draggable.isDragging.current}
-  class:is-dropping={draggable.isDropping.current}
+  class:is-dragging={draggable.isDragging}
+  class:is-dropping={draggable.isDropping}
   class:is-drop-target={isActiveDropzone}
   onclick={openModal}
   oncontextmenu={(event) => {

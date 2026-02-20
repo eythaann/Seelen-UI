@@ -4,7 +4,7 @@
   import AppItem from "./AppItem.svelte";
   import FolderItem from "./FolderItem.svelte";
   import { arrayMove } from "../utils";
-  import { DragDropProvider } from "@dnd-kit-svelte/svelte";
+  import { DragDropProvider } from "@dnd-kit/svelte";
   import { debounce } from "lodash";
 
   import type { StartMenuItem } from "@seelen-ui/lib/types";

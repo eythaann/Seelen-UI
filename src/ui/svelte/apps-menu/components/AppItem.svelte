@@ -3,7 +3,7 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { globalState } from "../state/mod.svelte";
-  import { useDraggable, useDroppable } from "@dnd-kit-svelte/svelte";
+  import { createDroppable, createDraggable } from "@dnd-kit/svelte";
 
   interface Props {
     item: StartMenuItem;
@@ -30,18 +30,22 @@
     globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem),
   );
 
-  const draggable = useDraggable({
-    id: () => itemId,
-    disabled: () => !isDraggable,
-    type: () => (isInsideFolder ? "grouped-app" : "app"),
-  });
+  const draggable = $derived(
+    createDraggable({
+      id: itemId,
+      disabled: !isDraggable,
+      type: isInsideFolder ? "grouped-app" : "app",
+    }),
+  );
 
-  const droppable = useDroppable({
-    id: () => itemId,
-    disabled: () => !isDraggable,
-    accept: () => (isInsideFolder ? "grouped-app" : ["folder", "app"]),
-    type: () => (isInsideFolder ? "grouped-app" : "app"),
-  });
+  const droppable = $derived(
+    createDroppable({
+      id: itemId,
+      disabled: !isDraggable,
+      accept: isInsideFolder ? "grouped-app" : ["folder", "app"],
+      type: isInsideFolder ? "grouped-app" : "app",
+    }),
+  );
 
   function handleClick(event: MouseEvent) {
     globalState.showing = false; // inmediate close
@@ -57,13 +61,13 @@
 </script>
 
 <button
-  {@attach draggable.ref}
-  {@attach droppable.ref}
+  {@attach draggable.attach}
+  {@attach droppable.attach}
   data-item-id={itemId}
   class="app"
   class:preselected={isPreselected && globalState.searchQuery}
-  class:is-dragging={draggable.isDragging.current}
-  class:is-dropping={draggable.isDropping.current}
+  class:is-dragging={draggable.isDragging}
+  class:is-dropping={draggable.isDropping}
   class:is-drop-target={isActiveDropzone}
   onclick={handleClick}
   oncontextmenu={handleContextMenu}

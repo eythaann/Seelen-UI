@@ -42,6 +42,7 @@ export function createSvelteBuildConfig(
             plugins: [],
           },
         }),
+        filterWarnings: (warning) => !warning.filename?.includes("node_modules"),
       }),
       createCopyPublicPlugin(appFolders),
     ],

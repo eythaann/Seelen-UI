@@ -7,8 +7,7 @@
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
 
-  const props: { monitor: PhysicalMonitor } = $props();
-  const { monitor } = props;
+  const { monitor } = $props<{ monitor: PhysicalMonitor } >();
 
   const width = $derived((monitor.rect.right - monitor.rect.left) / monitor.scaleFactor);
   const height = $derived((monitor.rect.bottom - monitor.rect.top) / monitor.scaleFactor);

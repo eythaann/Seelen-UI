@@ -7,7 +7,6 @@
   import { Widget } from "@seelen-ui/lib";
   import { t } from "./i18n";
   import { MissingIcon } from "libs/ui/svelte/components/Icon";
-  import { scale } from "framer-motion";
 
   onMount(() => {
     Widget.getCurrent().ready();

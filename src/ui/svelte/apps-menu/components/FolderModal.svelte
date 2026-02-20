@@ -3,7 +3,7 @@
   import type { FavFolderItem } from "../state/mod.svelte";
   import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
-  import { DragDropProvider } from "@dnd-kit-svelte/svelte";
+  import { DragDropProvider } from "@dnd-kit/svelte";
   import AppItem from "./AppItem.svelte";
   import { arrayMove } from "../utils";
 
