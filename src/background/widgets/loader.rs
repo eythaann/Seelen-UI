@@ -12,6 +12,7 @@ use crate::{
     app::get_app_handle,
     error::ResultLogExt,
     get_tokio_handle,
+    resources::RESOURCES,
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview, WidgetWebviewLabel},
@@ -173,8 +174,14 @@ impl WidgetInstance {
                             });
                         } else {
                             log::error!("Liveness prove failed for {label} too many times, giving up.");
+                            let lang = rust_i18n::locale();
+                            let widget_name = RESOURCES
+                                .widgets
+                                .read(&label.widget_id, |_, w| w.metadata.display_name.get(&lang).to_string())
+                                .unwrap_or_else(|| label.widget_id.to_string());
                             app.dialog()
-                                .message(format!("Liveness prove failed for {label} too many times.\nYou can try restarting the app."))
+                                .message(t!("widget_liveness.failed_description", widget_name = widget_name))
+                                .title(t!("widget_liveness.failed_title"))
                                 .kind(MessageDialogKind::Error)
                                 .buttons(MessageDialogButtons::Ok)
                                 .show(|_| {});

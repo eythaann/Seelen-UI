@@ -128,9 +128,17 @@ impl PermissionsManager {
             return Self::decision_to_result(granted, widget_id, &command);
         }
 
+        let lang = rust_i18n::locale();
+        let widget_name = RESOURCES
+            .widgets
+            .read(widget_id, |_, w| {
+                w.metadata.display_name.get(&lang).to_string()
+            })
+            .unwrap_or_else(|| widget_id.to_string());
+
         let message = t!(
             "widget_permissions.request_description",
-            widget_id = widget_id.to_string(),
+            widget_name = widget_name,
             command = command.i18n_label()
         );
 
