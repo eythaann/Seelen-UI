@@ -1,0 +1,49 @@
+name: "Discord Notify"
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to announce (e.g. v2.5.1)"
+        required: true
+  workflow_call:
+    inputs:
+      tag:
+        description: "Release tag to announce"
+        type: string
+        required: true
+
+jobs:
+  notify:
+    name: Send Announcement To Discord Server
+    runs-on: ubuntu-latest
+    steps:
+      # The SethCohen action reads github.event.release (set by the runner on a
+      # `release: [published]` event). For workflow_dispatch / workflow_call that
+      # context is empty, so we fetch the release by tag and write a synthetic
+      # event payload, then override GITHUB_EVENT_PATH so the action picks it up.
+      - name: Load release into event context
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = '${{ inputs.tag }}';
+            const { data: release } = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: tag,
+            });
+            const fs = require('fs');
+            const eventPath = '/tmp/github-release-event.json';
+            fs.writeFileSync(eventPath, JSON.stringify({ release, action: 'published' }));
+            core.exportVariable('GITHUB_EVENT_PATH', eventPath);
+            core.exportVariable('GITHUB_EVENT_NAME', 'release');
+
+      - name: Discord notification
+        uses: SethCohen/github-releases-to-discord@v1
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          color: "5814783"
+          username: "Seelen"
+          avatar_url: "https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/images/logo_with_margins.png"
+          footer_title: "Seelen Inc."
+          reduce_headings: true

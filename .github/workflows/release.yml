@@ -400,29 +400,11 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   discord:
-    needs: publish-release
-    name: Send Announcement To Discord Server
-    runs-on: ubuntu-latest
-    steps:
-      - name: Discord notification
-        uses: LeGitHubDeTai/github-to-discord@main
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_USERNAME: Seelen
-          DISCORD_AVATAR: https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/images/logo_with_margins.png
-
-          AUTHOR_NAME: eythaann
-          AUTHOR_URL: "https://github.com/eythaann"
-          AUTHOR_AVATAR: "https://avatars.githubusercontent.com/u/76607907?v=4"
-
-          MESSAGE_TITLE: Seelen UI
-          MESSAGE_DESCRIPTION: A new release of Seelen UI has been published
-          MESSAGE_COLOR: 5814783
-
-          SECTION_NAME: "ChangeLog"
-
-          FOOTER_TEXT: "Seelen Inc."
-          FOOTER_URL: "https://github.com/eythaann/seelen-ui"
+    needs: [get-version, publish-release]
+    uses: ./.github/workflows/discord-notify.yml
+    with:
+      tag: v${{ needs.get-version.outputs.version }}
+    secrets: inherit
 
   publish-core-library:
     needs: publish-release
