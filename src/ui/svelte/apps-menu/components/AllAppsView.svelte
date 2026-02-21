@@ -78,20 +78,31 @@
       return [];
     }
 
-    // Build searchable items list
+    // Build searchable items list, deduplicating by key to avoid crashes on duplicate entries
     const searchableItems: StartMenuItem[] = [];
+    const seenKeys = new Set<string>();
     const { prefix } = query;
+
+    const getItemKey = (item: StartMenuItem) => `${item.path}_${item.umid}`;
 
     for (const item of items) {
       if (shouldIncludeItem(item, prefix)) {
-        searchableItems.push(item);
+        const key = getItemKey(item);
+        if (!seenKeys.has(key)) {
+          seenKeys.add(key);
+          searchableItems.push(item);
+        }
       }
     }
 
     // Add known folders when searching
     for (const item of foldersAsStartMenuItems.value) {
       if (shouldIncludeItem(item, prefix)) {
-        searchableItems.push(item);
+        const key = getItemKey(item);
+        if (!seenKeys.has(key)) {
+          seenKeys.add(key);
+          searchableItems.push(item);
+        }
       }
     }
 
@@ -100,12 +111,17 @@
 
     if (cachedSearcher === null || lastSearchableItemsKey !== itemsKey) {
       const config = fuzzySearch.Config.createDefaultConfig();
-      config.normalizerConfig.allowCharacter = (_c) => true;
+      // Allow all non-surrogate characters so non-Latin scripts (CJK, Arabic, etc.) are searchable,
+      // but exclude surrogate code points (0xD800–0xDFFF) which the library cannot safely handle.
+      config.normalizerConfig.allowCharacter = (c) => {
+        const code = c.charCodeAt(0);
+        return code < 0xd800 || code > 0xdfff;
+      };
       cachedSearcher = fuzzySearch.SearcherFactory.createSearcher<StartMenuItem, string>(config);
 
       cachedSearcher.indexEntities(
         searchableItems,
-        (item) => `${item.path}_${item.umid}`,
+        getItemKey,
         (item) => [item.display_name],
       );
 
@@ -116,8 +132,14 @@
       return searchableItems;
     }
 
-    const result = cachedSearcher.getMatches(new fuzzySearch.Query(query.search, 21));
-    return result.matches.map((match) => match.entity);
+    try {
+      const result = cachedSearcher.getMatches(new fuzzySearch.Query(query.search, 21));
+      return result.matches.map((match) => match.entity);
+    } catch {
+      // Fall back to simple case-insensitive substring match if fuzzy search fails
+      const lower = query.search.toLowerCase();
+      return searchableItems.filter((item) => item.display_name.toLowerCase().includes(lower));
+    }
   });
 </script>
 
