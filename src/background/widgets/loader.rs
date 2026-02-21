@@ -196,8 +196,8 @@ impl WidgetInstance {
         let instance_type = self.instance_type;
         window.0.on_window_event(move |event| {
             if let tauri::WindowEvent::Destroyed = event {
+                liveness_prove.abort();
                 WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
-                    liveness_prove.abort();
                     match instance_type {
                         // Remove runtime instances on destroy
                         InstanceType::Runtime => {

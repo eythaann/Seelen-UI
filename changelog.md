@@ -10,6 +10,7 @@
 
 - infinity switching of items on toolbar.
 - app not starting correctly from service.
+- power menu clossing instantly.
 
 ## [2.5.1]
 
