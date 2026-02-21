@@ -6,7 +6,10 @@ use winreg::{
 use crate::error::Result;
 
 pub fn was_installed_using_msix() -> bool {
-    std::env::current_exe().is_ok_and(|p| p.with_file_name("AppxManifest.xml").exists())
+    static CACHE: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *CACHE.get_or_init(|| {
+        std::env::current_exe().is_ok_and(|p| p.with_file_name("AppxManifest.xml").exists())
+    })
 }
 
 pub fn open_machine_enviroment() -> Result<RegKey> {

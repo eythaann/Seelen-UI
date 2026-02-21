@@ -1,5 +1,3 @@
-use std::process::Command;
-
 use slu_ipc::{AppIpc, IPC};
 use sysinfo::ProcessesToUpdate;
 use windows::Win32::{
@@ -10,7 +8,7 @@ use windows::Win32::{
     UI::WindowsAndMessaging::{DEVICE_NOTIFY_CALLBACK, PBT_APMRESUMESUSPEND},
 };
 
-use crate::{enviroment::was_installed_using_msix, error::Result};
+use crate::{enviroment::was_installed_using_msix, error::Result, windows_api::WindowsApi};
 
 /// Starts monitoring the Seelen UI app for the current session
 /// Restarts it if it crashes unexpectedly
@@ -32,24 +30,22 @@ pub fn start_app_monitoring() {
 
             #[cfg(not(debug_assertions))]
             crate::log_error!(launch_seelen_ui());
+            std::thread::sleep(std::time::Duration::from_secs(2));
         }
     });
 }
 
 /// will start the app on the interactive session
 pub fn launch_seelen_ui() -> Result<()> {
-    // start it using explorer to spawn it as unelevated and as current interactive user
-    Command::new("explorer.exe")
-        .arg(&if was_installed_using_msix() {
-            "shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App".to_string()
-        } else {
-            std::env::current_exe()?
-                .with_file_name("seelen-ui.exe")
-                .to_string_lossy()
-                .to_string()
-        })
-        .status()?;
-    Ok(())
+    let path = if was_installed_using_msix() {
+        "shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App".to_string()
+    } else {
+        std::env::current_exe()?
+            .with_file_name("seelen-ui.exe")
+            .to_string_lossy()
+            .to_string()
+    };
+    WindowsApi::shell_execute(&path)
 }
 
 pub fn kill_all_seelen_ui_processes() -> Result<()> {

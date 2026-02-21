@@ -28,14 +28,18 @@ pub fn get_fixed_runtime_path() -> Option<PathBuf> {
 }
 
 pub fn is_running_as_appx() -> bool {
-    unsafe {
+    static CACHE: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *CACHE.get_or_init(|| unsafe {
         let mut len = 0u32;
         let _ = GetCurrentPackageId(&mut len, None);
         let mut buffer = vec![0u8; len as usize];
         GetCurrentPackageId(&mut len, Some(buffer.as_mut_ptr())).is_ok()
-    }
+    })
 }
 
 pub fn was_installed_using_msix() -> bool {
-    std::env::current_exe().is_ok_and(|p| p.with_file_name("AppxManifest.xml").exists())
+    static CACHE: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *CACHE.get_or_init(|| {
+        std::env::current_exe().is_ok_and(|p| p.with_file_name("AppxManifest.xml").exists())
+    })
 }

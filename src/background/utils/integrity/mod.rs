@@ -9,7 +9,6 @@ use tauri::webview_version;
 use windows::Win32::{
     Foundation::{GetLastError, ERROR_ALREADY_EXISTS},
     System::Threading::CreateMutexW,
-    UI::Shell::FOLDERID_Windows,
 };
 
 use crate::{
@@ -90,22 +89,22 @@ pub fn print_initial_information() {
 }
 
 pub fn restart_as_appx() -> Result<!> {
-    let explorer = WindowsApi::known_folder(FOLDERID_Windows)?.join("explorer.exe");
-    std::process::Command::new(explorer)
-        .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
-        .spawn()?;
+    WindowsApi::execute(
+        r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App".to_string(),
+        None,
+        None,
+        false,
+    )?;
     std::process::exit(0);
 }
 
 pub fn restart_as_interactive_user() -> Result<!> {
-    // start it using explorer to spawn it as unelevated and as current interactive user
-    let explorer = WindowsApi::known_folder(FOLDERID_Windows)?.join("explorer.exe");
-    let arg = if was_installed_using_msix() {
+    let path = if was_installed_using_msix() {
         "shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App".to_string()
     } else {
         std::env::current_exe()?.to_string_lossy().to_string()
     };
-    std::process::Command::new(explorer).arg(&arg).spawn()?;
+    WindowsApi::execute(path, None, None, false)?;
     std::process::exit(0);
 }
 

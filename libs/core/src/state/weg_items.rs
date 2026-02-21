@@ -143,7 +143,7 @@ impl WegItem {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct WegItems {
@@ -152,33 +152,6 @@ pub struct WegItems {
     pub left: Vec<WegItem>,
     pub center: Vec<WegItem>,
     pub right: Vec<WegItem>,
-}
-
-#[allow(deprecated)]
-impl Default for WegItems {
-    fn default() -> Self {
-        Self {
-            is_reorder_disabled: false,
-            left: vec![
-                WegItem::StartMenu { id: String::new() },
-                WegItem::ShowDesktop { id: String::new() },
-            ],
-            center: vec![WegItem::Pinned(PinnedWegItemData {
-                id: String::new(),
-                umid: None,
-                subtype: WegItemSubtype::App,
-                path: "C:\\Windows\\explorer.exe".into(),
-                display_name: "Explorer".into(),
-                relaunch_program: "C:\\Windows\\explorer.exe".into(),
-                relaunch_args: None,
-                relaunch_in: None,
-                is_dir: false,
-                windows: vec![],
-                pin_disabled: false,
-            })],
-            right: vec![WegItem::Media { id: String::new() }],
-        }
-    }
 }
 
 #[allow(deprecated)]
