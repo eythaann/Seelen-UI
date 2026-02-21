@@ -158,8 +158,6 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true # needed to fetch fixed runtimes (.cab) files
       - uses: ./.github/actions/setup
         with:
           rust-targets: ${{ matrix.target }}
@@ -197,63 +195,6 @@ jobs:
 
       - name: Bundle
         run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign
-
-      - name: Rename normal bundle to temp
-        shell: pwsh
-        run: |
-          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = ${{ needs.update-tag.outputs.version }}
-          $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
-          $setupFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
-          $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
-
-          if (Test-Path $setupFile) {
-            Move-Item -Path $setupFile -Destination $tempFile
-            Write-Output "Renamed $setupFile to $tempFile"
-          }
-
-      - name: Set Fixed Runtime
-        shell: pwsh
-        run: |
-          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          ./scripts/SetFixedRuntime.ps1 -Architecture $arch
-
-      - name: Copy Runtime to target directory
-        shell: pwsh
-        run: |
-          $runtimeSource = Get-ChildItem -Path "src/runtime" -Directory | Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } | Select-Object -First 1
-          if ($runtimeSource) {
-            $targetRuntimeDir = "target/${{ matrix.target }}/release/runtime"
-            New-Item -ItemType Directory -Force -Path $targetRuntimeDir | Out-Null
-            Copy-Item -Path $runtimeSource.FullName -Destination "$targetRuntimeDir/$($runtimeSource.Name)" -Recurse -Force
-            Write-Output "Copied runtime from $($runtimeSource.FullName) to $targetRuntimeDir/$($runtimeSource.Name)"
-          } else {
-            Write-Error "Runtime version directory not found in src/runtime"
-            exit 1
-          }
-
-      - name: Bundle with Fixed Runtime
-        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign
-
-      - name: Rename bundles
-        shell: pwsh
-        run: |
-          $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = ${{ needs.update-tag.outputs.version }}
-          $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
-          $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
-          $normalFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
-          $fixedFile = "$bundlePath/Seelen UI_${version}_${arch}-setup-fixed.exe"
-
-          if (Test-Path $normalFile) {
-            Move-Item -Path $normalFile -Destination $fixedFile
-            Write-Output "Renamed fixed runtime bundle to $fixedFile"
-          }
-
-          if (Test-Path $tempFile) {
-            Move-Item -Path $tempFile -Destination $normalFile
-            Write-Output "Renamed normal bundle back to $normalFile"
-          }
 
       - name: Bundle MSIX
         run: npx tsx scripts/bundle.msix.ts --target ${{ matrix.target }}
@@ -329,7 +270,7 @@ jobs:
           organization-id: 1a9e9b37-229a-4540-a639-137deebee4e1
           project-slug: seelen-ui
           signing-policy-slug: release-signing
-          artifact-configuration-slug: bundles
+          artifact-configuration-slug: nightly-bundles
           github-artifact-id: ${{ needs.merge-bundles.outputs.artifact-id }}
           output-artifact-directory: bundles
 

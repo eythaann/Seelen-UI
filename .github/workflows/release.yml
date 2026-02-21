@@ -160,8 +160,6 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true # needed to fetch fixed runtimes (.cab) files
       - uses: ./.github/actions/setup
         with:
           rust-targets: ${{ matrix.target }}
