@@ -104,7 +104,12 @@ pub fn restart_as_interactive_user() -> Result<!> {
     } else {
         std::env::current_exe()?.to_string_lossy().to_string()
     };
-    WindowsApi::execute(path, None, None, false)?;
+    // Use explorer.exe to spawn the process de-elevated (with the interactive user's token).
+    // ShellExecuteExW called from an elevated process inherits the elevated token,
+    // causing an infinite restart loop when the service launches the app elevated.
+    std::process::Command::new("explorer.exe")
+        .arg(&path)
+        .spawn()?;
     std::process::exit(0);
 }
 

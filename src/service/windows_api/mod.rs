@@ -20,12 +20,11 @@ use windows::Win32::{
     },
     UI::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
-        Shell::{SHGetKnownFolderPath, ShellExecuteExW, KF_FLAG_DEFAULT, SHELLEXECUTEINFOW},
+        Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
         WindowsAndMessaging::{
             BringWindowToTop, FindWindowW, GetClassNameW, GetForegroundWindow, GetWindowTextW,
             GetWindowThreadProcessId, IsIconic, SetWindowPos, ShowWindow, ShowWindowAsync,
             SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
-            SW_SHOWNORMAL,
         },
     },
 };
@@ -216,22 +215,6 @@ impl WindowsApi {
         String::from_utf16_lossy(&text[..length])
     }
 
-    /// Launches a file or shell URI using the Windows shell (ShellExecuteExW).
-    /// Handles both file paths and shell URIs like `shell:AppsFolder\...`.
-    /// Unlike spawning `explorer.exe` directly, this does not block and correctly
-    /// reports errors without silently spawning broken processes.
-    pub fn shell_execute(path: &str) -> Result<()> {
-        let file = WindowsString::from_str(path);
-        let mut info = SHELLEXECUTEINFOW {
-            cbSize: std::mem::size_of::<SHELLEXECUTEINFOW>() as _,
-            lpFile: file.as_pcwstr(),
-            nShow: SW_SHOWNORMAL.0,
-            ..Default::default()
-        };
-        unsafe { ShellExecuteExW(&mut info)? };
-        Ok(())
-    }
-
     pub fn wait_for_native_shell() {
         log::info!("Waiting for native shell...");
         let mut attempt = 0;
@@ -243,8 +226,8 @@ impl WindowsApi {
                 attempt += 1;
             }
         }
-        if attempt == 10 {
-            panic!("Native shell not found");
+        if attempt >= 50 {
+            log::warn!("Native shell not found after 5 seconds, continuing anyway...");
         }
         log::info!("Native shell found, continueing setup...");
     }

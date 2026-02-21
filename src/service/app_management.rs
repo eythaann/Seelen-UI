@@ -8,7 +8,7 @@ use windows::Win32::{
     UI::WindowsAndMessaging::{DEVICE_NOTIFY_CALLBACK, PBT_APMRESUMESUSPEND},
 };
 
-use crate::{enviroment::was_installed_using_msix, error::Result, windows_api::WindowsApi};
+use crate::{enviroment::was_installed_using_msix, error::Result};
 
 /// Starts monitoring the Seelen UI app for the current session
 /// Restarts it if it crashes unexpectedly
@@ -24,13 +24,13 @@ pub fn start_app_monitoring() {
 
             log::info!("Seelen UI was closed unexpectedly.");
             crash_counter += 1;
-            if crash_counter > 10 {
+            if crash_counter > 5 {
                 break;
             }
 
             #[cfg(not(debug_assertions))]
             crate::log_error!(launch_seelen_ui());
-            std::thread::sleep(std::time::Duration::from_secs(2));
+            std::thread::sleep(std::time::Duration::from_secs(3));
         }
     });
 }
@@ -45,7 +45,13 @@ pub fn launch_seelen_ui() -> Result<()> {
             .to_string_lossy()
             .to_string()
     };
-    WindowsApi::shell_execute(&path)
+    // Use explorer.exe to spawn the app de-elevated (with the interactive user's token),
+    // since the service runs elevated (TASK_RUNLEVEL_HIGHEST). ShellExecuteExW called
+    // from an elevated process inherits the elevated token, causing an infinite restart loop.
+    std::process::Command::new("explorer.exe")
+        .arg(&path)
+        .spawn()?;
+    Ok(())
 }
 
 pub fn kill_all_seelen_ui_processes() -> Result<()> {
