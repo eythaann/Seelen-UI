@@ -31,7 +31,7 @@ use windows::Win32::{
 use windows_api::WindowsApi;
 
 use crate::{
-    app_management::{launch_seelen_ui, start_listening_system_events},
+    app_management::launch_seelen_ui,
     enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
     hotkeys::stop_app_shortcuts,
 };
@@ -64,21 +64,17 @@ pub fn is_development() -> bool {
 
 pub fn exit(code: u32) {
     EXITING.store(true, std::sync::atomic::Ordering::SeqCst);
-    get_async_handler().spawn(async move {
-        EXIT_CHANNEL.get().unwrap().send(code).await.unwrap();
-    });
-}
-
-#[cfg(debug_assertions)]
-fn stop_service_on_seelen_ui_closed() {
-    // it's ok closing the GUI before the service on development
-    tokio::spawn(async {
-        while AppIpc::can_stablish_connection() {
-            tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-        }
-        log::info!("Seelen UI closed, stopping the service");
-        exit(0);
-    });
+    if let Some(tx) = EXIT_CHANNEL.get() {
+        let tx = tx.clone();
+        get_async_handler().spawn(async move {
+            if tx.send(code).await.is_err() {
+                log::warn!("Exit channel closed before exit signal could be sent (code={code})");
+            }
+        });
+    } else {
+        log::error!("exit() called before EXIT_CHANNEL was initialized, forcing process exit");
+        std::process::exit(code as i32);
+    }
 }
 
 pub fn setup() -> Result<()> {
@@ -91,13 +87,8 @@ pub fn setup() -> Result<()> {
         log_error!(launch_seelen_ui());
     }
 
+    std::thread::sleep(std::time::Duration::from_secs(2));
     crate::app_management::start_app_monitoring();
-
-    #[cfg(debug_assertions)]
-    {
-        std::thread::sleep(std::time::Duration::from_secs(2));
-        stop_service_on_seelen_ui_closed();
-    }
     Ok(())
 }
 
@@ -155,14 +146,20 @@ async fn main() -> Result<()> {
 
     log::info!("Starting Seelen UI Service");
     log::info!("Arguments: {:?}", std::env::args().collect_vec());
-    setup()?;
-    let _handlers = start_listening_system_events()?;
+
+    if let Err(err) = setup() {
+        log::error!("Service setup failed: {:?}", err);
+        // Run cleanup even on setup failure so the taskbar/hotkeys are restored
+        log_error!(restore_native_taskbar());
+        stop_app_shortcuts();
+        return Err("Service setup failed".into());
+    };
 
     // ===================== wait for stop signal ====================
     let exit_code = rx.recv().await.unwrap_or_default();
 
     // shutdown tasks:
-    restore_native_taskbar()?;
+    log_error!(restore_native_taskbar());
     stop_app_shortcuts();
     log::info!("Seelen UI Service exited with code {exit_code}");
 

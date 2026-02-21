@@ -1,37 +1,51 @@
 use slu_ipc::{AppIpc, IPC};
 use sysinfo::ProcessesToUpdate;
-use windows::Win32::{
-    Foundation::HANDLE,
-    System::Power::{
-        RegisterSuspendResumeNotification, DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS, HPOWERNOTIFY,
-    },
-    UI::WindowsAndMessaging::{DEVICE_NOTIFY_CALLBACK, PBT_APMRESUMESUSPEND},
-};
 
-use crate::{enviroment::was_installed_using_msix, error::Result};
+use crate::{enviroment::was_installed_using_msix, error::Result, exit};
 
 /// Starts monitoring the Seelen UI app for the current session
 /// Restarts it if it crashes unexpectedly
 pub fn start_app_monitoring() {
     std::thread::spawn(move || {
         let mut crash_counter = 0;
+        let max_tries = if cfg!(debug_assertions) { 0 } else { 5 };
+        let mut app_was_connected = false;
+
         loop {
             std::thread::sleep(std::time::Duration::from_secs(1));
 
+            if crate::EXITING.load(std::sync::atomic::Ordering::SeqCst) {
+                return;
+            }
+
             if AppIpc::can_stablish_connection() {
+                // Reset counter once the app is confirmed running after a restart
+                if crash_counter > 0 && !app_was_connected {
+                    log::info!("Seelen UI reconnected successfully, resetting crash counter.");
+                    crash_counter = 0;
+                }
+                app_was_connected = true;
                 continue;
             }
 
+            // Only count as a crash if we had a confirmed connection before
+            if !app_was_connected {
+                continue;
+            }
+
+            app_was_connected = false;
             log::info!("Seelen UI was closed unexpectedly.");
             crash_counter += 1;
-            if crash_counter > 5 {
+            if crash_counter > max_tries {
                 break;
             }
 
-            #[cfg(not(debug_assertions))]
             crate::log_error!(launch_seelen_ui());
             std::thread::sleep(std::time::Duration::from_secs(3));
         }
+
+        log::error!("Seelen UI crashed {crash_counter} times in a row, stopping service.");
+        exit(1);
     });
 }
 
@@ -67,40 +81,4 @@ pub fn kill_all_seelen_ui_processes() -> Result<()> {
         instance.kill();
     }
     Ok(())
-}
-
-/// on Dropped will unregister all the handlers
-#[allow(dead_code)]
-pub struct SystemEventHandlers {
-    power: HPOWERNOTIFY,
-}
-
-pub fn start_listening_system_events() -> Result<SystemEventHandlers> {
-    let mut recipient = DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS {
-        Callback: Some(power_sleep_resume_proc),
-        ..Default::default()
-    };
-    let handler = unsafe {
-        RegisterSuspendResumeNotification(
-            HANDLE(&mut recipient as *mut _ as _),
-            DEVICE_NOTIFY_CALLBACK,
-        )
-    }?;
-
-    Ok(SystemEventHandlers { power: handler })
-}
-
-/// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registersuspendresumenotification
-/// https://learn.microsoft.com/en-us/windows/win32/api/powrprof/nc-powrprof-device_notify_callback_routine
-unsafe extern "system" fn power_sleep_resume_proc(
-    _context: *const core::ffi::c_void,
-    event: u32,
-    _setting: *const core::ffi::c_void,
-) -> u32 {
-    log::debug!("Received power event: {event}");
-    if event == PBT_APMRESUMESUSPEND {
-        // this probably won't be needed anymore
-        // kill_all_seelen_ui_processes().unwrap();
-    }
-    0
 }
