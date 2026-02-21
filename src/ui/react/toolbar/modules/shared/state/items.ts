@@ -7,25 +7,36 @@ import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
 import { restoreStateToDefault } from "./default.ts";
 
+/** True while a drag operation is in progress. Prevents emit/save feedback loop during onDragOver. */
+export const $isDragging = signal(false);
 export const $toolbar_state = signal(await invoke(SeelenCommand.StateGetToolbarItems));
-listen("hidden::sync-toolbar-items", ({ payload }) => {
-  // avoid infinite loop
-  if (JSON.stringify(payload) !== JSON.stringify($toolbar_state.value)) {
-    $toolbar_state.value = payload as ToolbarState;
-  }
-});
 
 export const $plugins = signal((await PluginList.getAsync()).forCurrentWidget());
 await PluginList.onChange((list) => {
   $plugins.value = list.forCurrentWidget();
 });
 
-export const saveTbState = debounce(async (items: ToolbarState) => {
+listen("hidden::sync-toolbar-items", ({ payload }) => {
+  // avoid infinite loop
+  if (!$isDragging.value && JSON.stringify(payload) !== JSON.stringify($toolbar_state.value)) {
+    $toolbar_state.value = payload as ToolbarState;
+  }
+});
+
+const emitSyncEvent = debounce((items: ToolbarState) => {
+  emit("hidden::sync-toolbar-items", items);
+}, 300);
+
+const saveTbState = debounce(async (items: ToolbarState) => {
   console.trace("Saving toolbar state");
   await invoke(SeelenCommand.StateWriteToolbarItems, { items });
 }, 1000);
 
 effect(() => {
+  // Skip emit/save while dragging; onDragEnd will flip $isDragging back to false,
+  // which re-triggers this effect once with the final committed order.
+  if ($isDragging.value) return;
+
   if (
     $toolbar_state.value.left.length === 0 &&
     $toolbar_state.value.center.length === 0 &&
@@ -35,7 +46,7 @@ effect(() => {
     return;
   }
 
-  emit("hidden::sync-toolbar-items", $toolbar_state.value);
+  emitSyncEvent($toolbar_state.value);
   saveTbState($toolbar_state.value);
 });
 

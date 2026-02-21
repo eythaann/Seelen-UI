@@ -7,7 +7,7 @@ import { useCallback } from "preact/compat";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
-import { $plugins, $toolbar_state } from "../shared/state/items.ts";
+import { $isDragging, $plugins, $toolbar_state } from "../shared/state/items.ts";
 import { $settings } from "../shared/state/mod.ts";
 import { Group } from "./ItemsContainer.tsx";
 import { Item } from "../item/infra/infra.tsx";
@@ -46,6 +46,12 @@ export function FancyToolbar() {
       <BackgroundByLayersV2 prefix="ft-bar" />
 
       <DragDropProvider
+        onDragStart={() => {
+          $isDragging.value = true;
+        }}
+        onDragEnd={() => {
+          $isDragging.value = false;
+        }}
         onDragOver={(event) => {
           let temp = {
             left: $containers.value.left.map((item) => (typeof item === "string" ? item : item.id)),
