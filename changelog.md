@@ -6,6 +6,11 @@
 
 - add new widget security layer for exposed commands.
 
+### fix
+
+- infinity switching of items on toolbar.
+- app not starting correctly from service.
+
 ## [2.5.1]
 
 ### enhancements
