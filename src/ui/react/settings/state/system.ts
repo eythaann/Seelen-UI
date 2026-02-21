@@ -3,11 +3,11 @@ import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import { signal } from "@preact/signals";
 
 export const uiColors = lazySignal(() => invoke(SeelenCommand.SystemGetColors));
-await subscribe(SeelenEvent.ColorsChanged, uiColors.setByPayload);
+subscribe(SeelenEvent.ColorsChanged, uiColors.setByPayload);
 await uiColors.init();
 
 export const monitors = lazySignal(() => invoke(SeelenCommand.SystemGetMonitors));
-await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
+subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 await monitors.init();
 
 export const autostart = signal(await invoke(SeelenCommand.GetAutoStartStatus));

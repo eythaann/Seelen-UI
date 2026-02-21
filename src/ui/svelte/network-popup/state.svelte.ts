@@ -19,7 +19,7 @@ subscribe(SeelenEvent.NetworkWlanScanned, ({ payload }) => {
 });
 
 let radios = lazyRune(() => invoke(SeelenCommand.GetRadios));
-await subscribe(SeelenEvent.RadiosChanged, radios.setByPayload);
+subscribe(SeelenEvent.RadiosChanged, radios.setByPayload);
 await radios.init();
 
 let isScanning = $state(false);

@@ -3,12 +3,27 @@ import type { Wallpaper } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 
 let monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
-await monitors.init();
+subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 
 let wallpapers = lazyRune(() => invoke(SeelenCommand.StateGetWallpapers));
-await subscribe(SeelenEvent.StateWallpapersChanged, wallpapers.setByPayload);
-await wallpapers.init();
+subscribe(SeelenEvent.StateWallpapersChanged, wallpapers.setByPayload);
+
+let workspaces = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
+subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
+
+let windows = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
+subscribe(SeelenEvent.UserAppWindowsChanged, windows.setByPayload);
+
+let previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
+subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
+
+await Promise.all([
+  monitors.init(),
+  wallpapers.init(),
+  workspaces.init(),
+  windows.init(),
+  previews.init(),
+]);
 
 let desktopRect = $derived.by(() => {
   let rect: Rect = { top: 0, left: 0, right: 0, bottom: 0 };
@@ -41,18 +56,6 @@ $effect.root(() => {
     Widget.self.setPosition(desktopRect);
   });
 });
-
-let workspaces = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
-await subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
-await workspaces.init();
-
-let windows = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
-await subscribe(SeelenEvent.UserAppWindowsChanged, windows.setByPayload);
-await windows.init();
-
-let previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
-await subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
-await previews.init();
 
 class State {
   get monitors() {

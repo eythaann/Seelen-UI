@@ -9,16 +9,13 @@ const widget = Widget.getCurrent();
 const selfWinId = await invoke(SeelenCommand.GetSelfWindowId);
 
 export const $interactables = lazySignal(() => invoke(SeelenCommand.GetUserAppWindows));
-await subscribe(SeelenEvent.UserAppWindowsChanged, $interactables.setByPayload);
-await $interactables.init();
+subscribe(SeelenEvent.UserAppWindowsChanged, $interactables.setByPayload);
 
 export const $previews = lazySignal(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
-await subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, $previews.setByPayload);
-await $previews.init();
+subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, $previews.setByPayload);
 
 /** Used to check which window was last focused on interactions with the current window */
 export const $delayedFocused = signal<FocusedApp | null>(null);
-
 export const $focused = lazySignal(() => invoke(SeelenCommand.GetFocusedApp));
 export const $lastFocusedOnMonitor = lazySignal<FocusedApp | null>(async () => {
   const focused = await invoke(SeelenCommand.GetFocusedApp);
@@ -29,7 +26,7 @@ const setDelayedFocused = debounce((v: FocusedApp) => {
   $delayedFocused.value = v;
 }, 200);
 
-await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
+subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   $focused.value = e.payload;
 
   if (e.payload.monitor === widget.decoded.monitorId) {
@@ -41,8 +38,13 @@ await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
     setDelayedFocused.flush();
   }
 });
-await $focused.init();
-await $lastFocusedOnMonitor.init();
+
+await Promise.all([
+  $interactables.init(),
+  $previews.init(),
+  $focused.init(),
+  $lastFocusedOnMonitor.init(),
+]);
 
 export const $is_dock_overlapped = computed(() => {
   const by = $lastFocusedOnMonitor.value;

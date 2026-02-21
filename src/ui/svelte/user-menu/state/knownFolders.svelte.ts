@@ -1,29 +1,21 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import { FolderType } from "@seelen-ui/lib/types";
 
-let desktop = $state(
-  await invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Desktop }),
-);
+const [desktopInit, downloadsInit, documentsInit, musicInit, picturesInit, videosInit] = await Promise.all([
+  invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Desktop }),
+  invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Downloads }),
+  invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Documents }),
+  invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Music }),
+  invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Pictures }),
+  invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Videos }),
+]);
 
-let downloads = $state(
-  await invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Downloads }),
-);
-
-let documents = $state(
-  await invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Documents }),
-);
-
-let music = $state(
-  await invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Music }),
-);
-
-let pictures = $state(
-  await invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Pictures }),
-);
-
-let videos = $state(
-  await invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Videos }),
-);
+let desktop = $state(desktopInit);
+let downloads = $state(downloadsInit);
+let documents = $state(documentsInit);
+let music = $state(musicInit);
+let pictures = $state(picturesInit);
+let videos = $state(videosInit);
 
 subscribe(SeelenEvent.UserFolderChanged, ({ payload: { ofFolder, content } }) => {
   switch (ofFolder) {

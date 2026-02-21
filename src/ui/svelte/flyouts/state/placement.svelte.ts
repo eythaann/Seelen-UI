@@ -6,16 +6,16 @@ import { PhysicalPosition } from "@tauri-apps/api/window";
 let showing = $state(false);
 
 const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
-await monitors.init();
+subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
+
+const widgetSize = lazyRune(() => Widget.self.webview.outerSize());
+await Widget.self.webview.onResized(widgetSize.setByPayload);
+
+await Promise.all([monitors.init(), widgetSize.init()]);
 
 const primaryMonitor = $derived.by(() => {
   return monitors.value.find((m) => m.isPrimary) || monitors.value[0];
 });
-
-const widgetSize = lazyRune(() => Widget.self.webview.outerSize());
-await Widget.self.webview.onResized(widgetSize.setByPayload);
-await widgetSize.init();
 
 $effect.root(() => {
   $effect(() => {

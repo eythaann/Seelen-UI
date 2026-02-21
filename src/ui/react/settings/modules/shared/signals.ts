@@ -6,7 +6,7 @@ export const $virtual_desktops = lazySignal(async () => {
   return await invoke(SeelenCommand.StateGetVirtualDesktops);
 });
 
-await subscribe(SeelenEvent.VirtualDesktopsChanged, (event) => {
+subscribe(SeelenEvent.VirtualDesktopsChanged, (event) => {
   $virtual_desktops.value = event.payload;
 });
 

@@ -9,7 +9,7 @@ import { bundledAppConfigs, iconPacks, themes } from "./resources";
 
 export const settings = signal(await invoke(SeelenCommand.StateGetSettings, { path: null }));
 const initialSettings = signal(JSON.stringify(settings.value));
-await subscribe(SeelenEvent.StateSettingsChanged, ({ payload }) => {
+subscribe(SeelenEvent.StateSettingsChanged, ({ payload }) => {
   settings.value = payload;
   initialSettings.value = JSON.stringify(payload);
 });

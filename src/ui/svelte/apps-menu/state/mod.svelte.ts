@@ -5,16 +5,15 @@ import { StartDisplayMode, StartView } from "../constants";
 import type { unionToIntersection } from "readable-types";
 
 const user = lazyRune(() => invoke(SeelenCommand.GetUser));
-await subscribe(SeelenEvent.UserChanged, user.setByPayload);
-await user.init();
+subscribe(SeelenEvent.UserChanged, user.setByPayload);
 
 const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
-await monitors.init();
+subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 
 const startMenuItems = lazyRune(() => invoke(SeelenCommand.GetStartMenuItems));
-await subscribe(SeelenEvent.StartMenuItemsChanged, startMenuItems.setByPayload);
-await startMenuItems.init();
+subscribe(SeelenEvent.StartMenuItemsChanged, startMenuItems.setByPayload);
+
+await Promise.all([user.init(), monitors.init(), startMenuItems.init()]);
 
 // Folder and pinned items types
 export interface FavFolderItem {

@@ -14,7 +14,7 @@ settings.subscribe((settings) => {
 });
 
 let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
-await subscribe(SeelenEvent.Notifications, notifications.setByPayload);
+subscribe(SeelenEvent.Notifications, notifications.setByPayload);
 await notifications.init();
 
 webview.onFocusChanged((e) => {

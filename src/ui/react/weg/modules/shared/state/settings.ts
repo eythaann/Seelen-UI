@@ -14,7 +14,7 @@ export const $settings = lazySignal(async () => {
     devTools: settings.devTools,
   };
 });
-await Settings.onChange((settings) => {
+Settings.onChange((settings) => {
   $settings.value = {
     ...settings.byWidget["@seelen/weg"],
     language: settings.language,

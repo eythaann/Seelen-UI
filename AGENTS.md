@@ -274,7 +274,7 @@ const $data = lazySignal(async () => {
   return await invoke(SeelenCommand.GetYourData);
 });
 
-await subscribe(SeelenEvent.YourDataChanged, (event) => {
+subscribe(SeelenEvent.YourDataChanged, (event) => {
   $data.value = event.payload;
 });
 

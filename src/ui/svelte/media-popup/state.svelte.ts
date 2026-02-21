@@ -15,12 +15,12 @@ settings.subscribe((settings) => {
 });
 
 let mediaDevices = lazyRune(() => invoke(SeelenCommand.GetMediaDevices));
-await subscribe(SeelenEvent.MediaDevices, mediaDevices.setByPayload);
-await mediaDevices.init();
+subscribe(SeelenEvent.MediaDevices, mediaDevices.setByPayload);
 
 let mediaSessions = lazyRune(() => invoke(SeelenCommand.GetMediaSessions));
-await subscribe(SeelenEvent.MediaSessions, mediaSessions.setByPayload);
-await mediaSessions.init();
+subscribe(SeelenEvent.MediaSessions, mediaSessions.setByPayload);
+
+await Promise.all([mediaDevices.init(), mediaSessions.init()]);
 
 let currentView = $state<"main" | "mixer">("main");
 let selectedDeviceId = $state<string | null>(null);

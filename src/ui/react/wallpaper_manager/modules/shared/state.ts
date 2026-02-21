@@ -1,5 +1,5 @@
 import { computed, signal } from "@preact/signals";
-import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, UIColors } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { debounce } from "lodash";
 
@@ -18,18 +18,36 @@ Settings.onChange(
   }),
 );
 
-(await UIColors.getAsync()).setAsCssVariables();
-UIColors.onChange((colors) => colors.setAsCssVariables());
+export const $focused = lazySignal(() => invoke(SeelenCommand.GetFocusedApp));
+subscribe(SeelenEvent.GlobalFocusChanged, $focused.setByPayload);
 
-export const $focused = signal(await invoke(SeelenCommand.GetFocusedApp));
-subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
-  $focused.value = e.payload;
-});
+export const $monitors = lazySignal(() => invoke(SeelenCommand.SystemGetMonitors));
+subscribe(SeelenEvent.SystemMonitorsChanged, $monitors.setByPayload);
+
+export const $virtualDesktops = lazySignal(() => invoke(SeelenCommand.StateGetVirtualDesktops));
+subscribe(SeelenEvent.VirtualDesktopsChanged, $virtualDesktops.setByPayload);
+
+export const $wallpapers = lazySignal(() => invoke(SeelenCommand.StateGetWallpapers));
+subscribe(SeelenEvent.StateWallpapersChanged, $wallpapers.setByPayload);
+
+export const $performance_mode = lazySignal(() => invoke(SeelenCommand.StateGetPerformanceMode));
+subscribe(SeelenEvent.StatePerformanceModeChanged, $performance_mode.setByPayload);
+
+await Promise.all([
+  $focused.init(),
+  $monitors.init(),
+  $virtualDesktops.init(),
+  $wallpapers.init(),
+  $performance_mode.init(),
+]);
 
 export const $idle = signal(false);
-const setAsIdle = debounce(() => {
-  $idle.value = true;
-}, 1000 * 60 * 3); // 3 min
+const setAsIdle = debounce(
+  () => {
+    $idle.value = true;
+  },
+  1000 * 60 * 3,
+); // 3 min
 subscribe(SeelenEvent.GlobalMouseMove, () => {
   // avoid state change on every mouse move
   if ($idle.value) {
@@ -50,19 +68,3 @@ export const $paused = computed(() => {
     $performance_mode.value !== "Disabled"
   );
 });
-
-export const $monitors = lazySignal(() => invoke(SeelenCommand.SystemGetMonitors));
-await subscribe(SeelenEvent.SystemMonitorsChanged, $monitors.setByPayload);
-await $monitors.init();
-
-export const $virtualDesktops = lazySignal(() => invoke(SeelenCommand.StateGetVirtualDesktops));
-await subscribe(SeelenEvent.VirtualDesktopsChanged, $virtualDesktops.setByPayload);
-await $virtualDesktops.init();
-
-export const $wallpapers = lazySignal(() => invoke(SeelenCommand.StateGetWallpapers));
-await subscribe(SeelenEvent.StateWallpapersChanged, $wallpapers.setByPayload);
-await $wallpapers.init();
-
-export const $performance_mode = lazySignal(() => invoke(SeelenCommand.StateGetPerformanceMode));
-await subscribe(SeelenEvent.StatePerformanceModeChanged, $performance_mode.setByPayload);
-await $performance_mode.init();

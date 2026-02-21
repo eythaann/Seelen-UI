@@ -5,20 +5,19 @@ import { lazyRune } from "libs/ui/svelte/utils";
 // Initialize lazy signals
 const brightness = lazyRune(() => invoke(SeelenCommand.GetAllMonitorsBrightness));
 subscribe(SeelenEvent.SystemMonitorsBrightnessChanged, brightness.setByPayload);
-await brightness.init();
 
 const mediaDevices = lazyRune(async () => {
   const [inputs, outputs] = await invoke(SeelenCommand.GetMediaDevices);
   return { inputs, outputs };
 });
-await subscribe(SeelenEvent.MediaDevices, ({ payload: [inputs, outputs] }) => {
+subscribe(SeelenEvent.MediaDevices, ({ payload: [inputs, outputs] }) => {
   mediaDevices.value = { inputs, outputs };
 });
-await mediaDevices.init();
 
 const radios = lazyRune(() => invoke(SeelenCommand.GetRadios));
-await subscribe(SeelenEvent.RadiosChanged, radios.setByPayload);
-await radios.init();
+subscribe(SeelenEvent.RadiosChanged, radios.setByPayload);
+
+await Promise.all([brightness.init(), mediaDevices.init(), radios.init()]);
 
 class State {
   get brightness() {

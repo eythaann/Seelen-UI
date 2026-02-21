@@ -4,24 +4,29 @@ import type { FocusedApp, WindowManagerSettings } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
 let layouts = lazyRune(() => invoke(SeelenCommand.WmGetRenderTree));
-await subscribe(SeelenEvent.WMTreeChanged, layouts.setByPayload);
-await layouts.init();
+subscribe(SeelenEvent.WMTreeChanged, layouts.setByPayload);
 
 let interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
-await subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
-await interactables.init();
+subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
 
 let forceRepositioning = $state(0);
-await subscribe(SeelenEvent.WMForceRetiling, () => {
+subscribe(SeelenEvent.WMForceRetiling, () => {
   forceRepositioning++;
 });
 
-let focusedApp = $state<FocusedApp>(await invoke(SeelenCommand.GetFocusedApp));
-await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
+const [focusedAppInit, settingsInit] = await Promise.all([
+  invoke(SeelenCommand.GetFocusedApp),
+  Settings.getAsync(),
+  layouts.init(),
+  interactables.init(),
+]);
+
+let focusedApp = $state<FocusedApp>(focusedAppInit);
+subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focusedApp = e.payload;
 });
 
-let settings = $state<WindowManagerSettings>((await Settings.getAsync()).byWidget["@seelen/window-manager"]);
+let settings = $state<WindowManagerSettings>(settingsInit.byWidget["@seelen/window-manager"]);
 Settings.onChange((s) => (settings = s.byWidget["@seelen/window-manager"]));
 
 // =================================================

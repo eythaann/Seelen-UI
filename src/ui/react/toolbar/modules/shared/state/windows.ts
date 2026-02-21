@@ -11,7 +11,7 @@ import { lazySignal } from "libs/ui/react/utils/LazySignal";
 const widget = Widget.getCurrent();
 
 export const $interactables = lazySignal(() => invoke(SeelenCommand.GetUserAppWindows));
-await subscribe(SeelenEvent.UserAppWindowsChanged, $interactables.setByPayload);
+subscribe(SeelenEvent.UserAppWindowsChanged, $interactables.setByPayload);
 await $interactables.init();
 
 export const $thereIsMaximizedOnBg = computed(() => {
@@ -25,7 +25,7 @@ export const $lastFocusedOnMonitor = lazySignal<FocusedApp | null>(async () => {
   const focused = await invoke(SeelenCommand.GetFocusedApp);
   return focused.monitor === widget.decoded.monitorId ? focused : null;
 });
-await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
+subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   $focused.value = e.payload;
   if (e.payload.monitor === widget.decoded.monitorId) {
     $lastFocusedOnMonitor.value = e.payload;

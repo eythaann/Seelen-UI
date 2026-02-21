@@ -6,6 +6,10 @@
 
 - add new widget security layer for exposed commands.
 
+### enhancements
+
+- widgets loading time.
+
 ### fix
 
 - infinity switching of items on toolbar.

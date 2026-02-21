@@ -1,35 +1,32 @@
-import { computed, signal } from "@preact/signals";
+import { computed } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { SeelenWegSide } from "@seelen-ui/lib/types";
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 
 const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
 
-export const $monitors = signal(await invoke(SeelenCommand.SystemGetMonitors));
-subscribe(SeelenEvent.SystemMonitorsChanged, (e) => {
-  $monitors.value = e.payload;
-});
-
-export const $current_monitor = computed(
-  () => $monitors.value.find((m) => m.id === currentMonitorId)!,
-);
+export const $monitors = lazySignal(() => invoke(SeelenCommand.SystemGetMonitors));
+subscribe(SeelenEvent.SystemMonitorsChanged, $monitors.setByPayload);
 
 export const $players = lazySignal(() => invoke(SeelenCommand.GetMediaSessions));
-await subscribe(SeelenEvent.MediaSessions, $players.setByPayload);
-await $players.init();
+subscribe(SeelenEvent.MediaSessions, $players.setByPayload);
 
 export const $notifications = lazySignal(() => invoke(SeelenCommand.GetNotifications));
-await subscribe(SeelenEvent.Notifications, $notifications.setByPayload);
-await $notifications.init();
+subscribe(SeelenEvent.Notifications, $notifications.setByPayload);
 
 export const $mouse_pos = lazySignal(async () => {
   const [x, y] = await invoke(SeelenCommand.GetMousePosition);
   return { x, y };
 });
-await subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
+subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
   $mouse_pos.value = { x, y };
 });
-await $mouse_pos.init();
+
+await Promise.all([$monitors.init(), $players.init(), $notifications.init(), $mouse_pos.init()]);
+
+export const $current_monitor = computed(
+  () => $monitors.value.find((m) => m.id === currentMonitorId)!,
+);
 
 export const $mouse_at_edge = computed<SeelenWegSide | null>(() => {
   const box = $current_monitor.value.rect;

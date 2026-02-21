@@ -7,18 +7,20 @@ let showing = $state(false);
 let autoConfirm = $state(false);
 
 let windows = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
-await subscribe(SeelenEvent.UserAppWindowsChanged, windows.setByPayload);
-await windows.init();
+subscribe(SeelenEvent.UserAppWindowsChanged, windows.setByPayload);
 
 let previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
-await subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
-await previews.init();
+subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
 
 let focusedWinId = lazyRune(async () => (await invoke(SeelenCommand.GetFocusedApp)).hwnd);
-await subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
+subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focusedWinId.value = e.payload.hwnd;
 });
-await focusedWinId.init();
+
+let monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
+subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
+
+await Promise.all([windows.init(), previews.init(), focusedWinId.init(), monitors.init()]);
 
 let selectedWindow = $state<number | null>(focusedWinId.value);
 
@@ -154,10 +156,6 @@ window.onkeyup = (e) => {
 };
 
 // +++++++++++++++++++++++ Sizing +++++++++++++++++++++++
-
-let monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
-await monitors.init();
 
 let primaryMonitor = $derived.by(() => {
   return monitors.value.find((m) => m.isPrimary) || monitors.value[0];

@@ -14,12 +14,12 @@ settings.subscribe((settings) => {
 });
 
 let devices = lazyRune(() => invoke(SeelenCommand.GetBluetoothDevices));
-await subscribe(SeelenEvent.BluetoothDevicesChanged, devices.setByPayload);
-await devices.init();
+subscribe(SeelenEvent.BluetoothDevicesChanged, devices.setByPayload);
 
 let radios = lazyRune(() => invoke(SeelenCommand.GetRadios));
-await subscribe(SeelenEvent.RadiosChanged, radios.setByPayload);
-await radios.init();
+subscribe(SeelenEvent.RadiosChanged, radios.setByPayload);
+
+await Promise.all([devices.init(), radios.init()]);
 
 let isScanning = $state(false);
 let selectedDeviceId = $state<string | null>(null);

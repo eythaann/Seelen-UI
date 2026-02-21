@@ -10,8 +10,9 @@ settings.subscribe((settings) => {
 });
 
 let monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-await subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
-await monitors.init();
+subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
+
+const [userInit] = await Promise.all([invoke(SeelenCommand.GetUser), monitors.init()]);
 
 let desktopRect = $derived.by(() => {
   let rect: Rect = { top: 0, left: 0, right: 0, bottom: 0 };
@@ -46,7 +47,7 @@ let relativePrimaryMonitor = $derived.by(() => {
   return null;
 });
 
-let user = $state(await invoke(SeelenCommand.GetUser));
+let user = $state(userInit);
 subscribe(SeelenEvent.UserChanged, (e) => {
   user = e.payload;
 });

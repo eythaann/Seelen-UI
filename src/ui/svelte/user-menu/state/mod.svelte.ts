@@ -14,7 +14,7 @@ settings.subscribe((settings) => {
 });
 
 const user = lazyRune(() => invoke(SeelenCommand.GetUser));
-await subscribe(SeelenEvent.UserChanged, user.setByPayload);
+subscribe(SeelenEvent.UserChanged, user.setByPayload);
 await user.init();
 
 let openCategory = $state<FolderType | null>(null);
