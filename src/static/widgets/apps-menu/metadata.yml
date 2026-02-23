@@ -5,4 +5,4 @@ metadata:
 instances: Single
 loader: Internal
 hidden: true
-lazy: true
+# lazy: true

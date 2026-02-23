@@ -69,9 +69,9 @@ impl WidgetManager {
 
         // lazy creation of webviews to reduce startup time
         std::thread::spawn(|| {
-            WIDGET_MANAGER.groups.for_each(|(_, c)| {
-                if !c.definition.lazy {
-                    c.start_all_webviews();
+            WIDGET_MANAGER.groups.for_each(|(_, container)| {
+                if !container.definition.lazy {
+                    container.start_all_webviews();
                 }
             });
         });

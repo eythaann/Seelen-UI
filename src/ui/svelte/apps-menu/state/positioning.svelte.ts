@@ -61,7 +61,7 @@ $effect.root(() => {
 
   $effect(() => {
     if (!globalState.showing) {
-      Widget.getCurrent().webview.hide();
+      Widget.self.hide();
     }
   });
 });

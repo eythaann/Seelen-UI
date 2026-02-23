@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { t } from "./i18n";
   import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
   import type { WidgetId } from "@seelen-ui/lib/types";
@@ -123,8 +122,8 @@
     globalState.preselectedItem = null;
   });
 
-  onMount(() => {
-    Widget.getCurrent().ready();
+  $effect(() => {
+    Widget.self.ready({ show: false });
   });
 
   function openUserMenu() {
