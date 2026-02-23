@@ -18,8 +18,8 @@ use crate::{
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview, WidgetWebviewLabel},
 };
 
-const LIVENESS_PROVE_INTERVAL: Duration = Duration::from_secs(10);
-const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(5);
+const LIVENESS_PROVE_INTERVAL: Duration = Duration::from_secs(5);
+const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(2);
 const LIVENESS_PROVE_MAX_RETRIES: u8 = 5;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

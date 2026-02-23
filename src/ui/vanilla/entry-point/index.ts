@@ -27,9 +27,9 @@ removeDefaultWebviewActions();
 hookLocalStorage(currentWidgetId);
 
 // trigger garbage collection
-setTimeout(() => {
+setInterval(() => {
   window.gc?.();
-}, 1000);
+}, 5000);
 
 if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
   // workaround for tauri/webview2 memory leak

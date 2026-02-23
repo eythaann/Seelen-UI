@@ -146,7 +146,10 @@ impl WebviewArgs {
         "--disable-background-networking", */
     ];
 
-    const PERFORMANCE_ARGS: &[&str] = &["--enable-low-end-device-mode", "--in-process-gpu"];
+    const PERFORMANCE_ARGS: &[&str] = &[
+        //  "--enable-low-end-device-mode",
+        "--in-process-gpu",
+    ];
 
     pub fn new() -> Self {
         let common_args = Self::BASE_ARGS
