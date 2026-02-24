@@ -1,11 +1,15 @@
-use crate::resource::ResourceText;
+use crate::{resource::ResourceText, state::Alignment};
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(feature = "gen-binds", ts(export, optional_fields = nullable))]
 pub struct ContextMenu {
     pub identifier: uuid::Uuid,
     pub items: Vec<ContextMenuItem>,
+    /// Alignment of the context menu on the X axis relative to the trigger point.
+    pub align_x: Option<Alignment>,
+    /// Alignment of the context menu on the Y axis relative to the trigger point.
+    pub align_y: Option<Alignment>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]

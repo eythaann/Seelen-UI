@@ -121,6 +121,8 @@ pub fn trigger_context_menu(
 
     let mut payload = WidgetTriggerPayload::new("@seelen/context-menu".into());
     payload.instance_id = Some(menu.identifier);
+    payload.align_x = menu.align_x;
+    payload.align_y = menu.align_y;
 
     payload.add_custom_arg("menu", serde_json::to_value(menu)?);
     payload.add_custom_arg("owner", serde_json::to_value(&owner.raw)?);

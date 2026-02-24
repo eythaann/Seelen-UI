@@ -1,5 +1,6 @@
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { Settings } from "@seelen-ui/lib";
+import { Alignment } from "@seelen-ui/lib/types";
 import { computed, effect } from "@preact/signals";
 import i18n from "../../../i18n";
 import { $current_monitor } from "./system";
@@ -43,6 +44,19 @@ effect(() => {
   styles.setProperty("--config-item-zoom-size", `${settings.zoomSize}px`);
   styles.setProperty("--config-space-between-items", `${settings.spaceBetweenItems}px`);
 });
+
+export function getDockContextMenuAlignment(position: SeelenWegSide): { alignX: Alignment; alignY: Alignment } {
+  switch (position) {
+    case SeelenWegSide.Bottom:
+      return { alignX: Alignment.Center, alignY: Alignment.End };
+    case SeelenWegSide.Top:
+      return { alignX: Alignment.Center, alignY: Alignment.Start };
+    case SeelenWegSide.Left:
+      return { alignX: Alignment.Start, alignY: Alignment.Center };
+    case SeelenWegSide.Right:
+      return { alignX: Alignment.End, alignY: Alignment.Center };
+  }
+}
 
 export const $widget_rect = computed(() => {
   const rect = { ...$current_monitor.value.rect };

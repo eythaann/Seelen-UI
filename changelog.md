@@ -17,6 +17,7 @@
 - app not starting correctly from service.
 - power menu clossing instantly.
 - settings by apps not working after saving new state.
+- context menu on toolbar bottom position.
 
 ## [2.5.1]
 

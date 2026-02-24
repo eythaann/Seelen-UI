@@ -1,54 +1,77 @@
-import { SeelenCommand } from "@seelen-ui/lib";
-import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { invoke } from "@tauri-apps/api/core";
-import type { ItemType } from "antd/es/menu/interface";
+import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import type { ContextMenu } from "@seelen-ui/lib/types";
 import type { TFunction } from "i18next";
+
+import { WegItemType } from "@seelen-ui/lib/types";
 
 import type { SwItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
-import { WegItemType } from "@seelen-ui/lib/types";
 
-export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
+const identifier = crypto.randomUUID();
+const onItemMenuClick = "weg::item_menu_click";
+
+let pendingItem: SwItem | null = null;
+
+Widget.self.webview.listen(onItemMenuClick, ({ payload }) => {
+  const { key } = payload as { key: string };
+  const item = pendingItem;
+  if (!item) return;
+
+  if (key === "remove" || key === "unpin") {
+    $dock_state_actions.remove(item.id);
+  } else if (key === "open_location") {
+    if ("path" in item) {
+      invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path });
+    }
+  }
+});
+
+export function getMenuForItem(t: TFunction, item: SwItem): ContextMenu {
+  pendingItem = item;
+
   if (
     item.type === WegItemType.ShowDesktop ||
     item.type === WegItemType.Media ||
     item.type === WegItemType.StartMenu
   ) {
-    return [
-      {
-        key: "remove",
-        label: t("context_menu.remove_module"),
-        icon: <Icon iconName="CgExtensionRemove" />,
-        onClick() {
-          $dock_state_actions.remove(item.id);
+    return {
+      identifier,
+      items: [
+        {
+          type: "Item",
+          key: "remove",
+          icon: "CgExtensionRemove",
+          label: t("context_menu.remove_module"),
+          callbackEvent: onItemMenuClick,
         },
-      },
-    ];
+      ],
+    };
   }
 
   // File or Folder pinned items
   if (item.type === WegItemType.Pinned) {
-    return [
-      {
-        key: "remove",
-        label: t("app_menu.unpin"),
-        icon: <Icon iconName="RiUnpinLine" />,
-        onClick() {
-          $dock_state_actions.remove(item.id);
+    return {
+      identifier,
+      items: [
+        {
+          type: "Item",
+          key: "unpin",
+          icon: "RiUnpinLine",
+          label: t("app_menu.unpin"),
+          callbackEvent: onItemMenuClick,
         },
-      },
-      {
-        type: "divider",
-      },
-      {
-        key: "weg_select_file_on_explorer",
-        label: t("app_menu.open_file_location"),
-        icon: <Icon iconName="MdOutlineMyLocation" />,
-        onClick: () => invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path }),
-      },
-    ];
+        { type: "Separator" },
+        {
+          type: "Item",
+          key: "open_location",
+          icon: "MdOutlineMyLocation",
+          label: t("app_menu.open_file_location"),
+          callbackEvent: onItemMenuClick,
+        },
+      ],
+    };
   }
 
-  return [];
+  return { identifier, items: [] };
 }

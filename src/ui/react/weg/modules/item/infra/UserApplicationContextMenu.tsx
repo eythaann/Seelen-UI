@@ -1,7 +1,5 @@
-import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
-import type { MenuProps } from "antd";
-import type { ItemType } from "antd/es/menu/interface";
+import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import type { ContextMenu, ContextMenuItem } from "@seelen-ui/lib/types";
 import type { TFunction } from "i18next";
 
 import type { PinnedWegItem, TemporalWegItem } from "../../shared/types.ts";
@@ -9,132 +7,138 @@ import type { PinnedWegItem, TemporalWegItem } from "../../shared/types.ts";
 import { $dock_state_actions } from "../../shared/state/items.ts";
 import { $settings } from "../../shared/state/settings.ts";
 
+const identifier = crypto.randomUUID();
+const onAppMenuClick = "weg::app_menu_click";
+
+let pendingAppItem: PinnedWegItem | TemporalWegItem | null = null;
+
+Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
+  const { key } = payload as { key: string };
+  const item = pendingAppItem;
+  if (!item) return;
+
+  if (key === "unpin") {
+    if (item.windows.length) {
+      $dock_state_actions.unpinApp(item.id);
+    } else {
+      $dock_state_actions.remove(item.id);
+    }
+  } else if (key === "pin") {
+    $dock_state_actions.pinApp(item.id);
+  } else if (key === "run") {
+    invoke(SeelenCommand.Run, {
+      program: item.relaunchProgram,
+      args: item.relaunchArgs,
+      workingDir: item.relaunchIn,
+      elevated: false,
+    });
+  } else if (key === "open_location") {
+    invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path });
+  } else if (key === "run_as") {
+    invoke(SeelenCommand.Run, {
+      program: item.relaunchProgram,
+      args: item.relaunchArgs,
+      workingDir: item.relaunchIn,
+      elevated: true,
+    });
+  } else if (key === "copy_hwnd") {
+    navigator.clipboard.writeText(
+      JSON.stringify(item.windows.map((window) => window.handle.toString(16))),
+    );
+  } else if (key === "close") {
+    item.windows.forEach((window) => {
+      invoke(SeelenCommand.WegCloseApp, { hwnd: window.handle });
+    });
+  } else if (key === "kill") {
+    item.windows.forEach((window) => {
+      invoke(SeelenCommand.WegKillApp, { hwnd: window.handle });
+    });
+  }
+});
+
 export function getUserApplicationContextMenu(
   t: TFunction,
   item: PinnedWegItem | TemporalWegItem,
-): ItemType[] {
-  const isPinned = item.type === "Pinned";
+): ContextMenu {
+  pendingAppItem = item;
 
-  const menu: MenuProps["items"] = [];
+  const isPinned = item.type === "Pinned";
+  const items: ContextMenuItem[] = [];
 
   if (!item.pinDisabled) {
     if (isPinned) {
-      menu.push({
+      items.push({
+        type: "Item",
+        key: "unpin",
+        icon: "RiUnpinLine",
         label: t("app_menu.unpin"),
-        key: "weg_unpin_app",
-        icon: <Icon iconName="RiUnpinLine" />,
-        onClick: () => {
-          if (item.windows.length) {
-            $dock_state_actions.unpinApp(item.id);
-          } else {
-            $dock_state_actions.remove(item.id);
-          }
-        },
+        callbackEvent: onAppMenuClick,
       });
     } else {
-      menu.push({
-        key: "weg_pin_app",
-        icon: <Icon iconName="RiPushpinLine" />,
-        label: (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              margin: "-10px",
-              padding: "10px",
-            }}
-          >
-            {t("app_menu.pin")}
-          </div>
-        ),
-        onClick: () => {
-          $dock_state_actions.pinApp(item.id);
-        },
+      items.push({
+        type: "Item",
+        key: "pin",
+        icon: "RiPushpinLine",
+        label: t("app_menu.pin"),
+        callbackEvent: onAppMenuClick,
       });
     }
-
-    menu.push({
-      type: "divider",
-    });
+    items.push({ type: "Separator" });
   }
 
-  menu.push(
+  items.push(
     {
-      key: "weg_run_new",
+      type: "Item",
+      key: "run",
+      icon: "IoOpenOutline",
       label: item.displayName,
-      icon: <FileIcon className="weg-context-menu-item-icon" path={item.path} umid={item.umid} />,
-      onClick: () => {
-        invoke(SeelenCommand.Run, {
-          program: item.relaunchProgram,
-          args: item.relaunchArgs,
-          workingDir: item.relaunchIn,
-          elevated: false,
-        });
-      },
+      callbackEvent: onAppMenuClick,
     },
     {
-      key: "weg_select_file_on_explorer",
+      type: "Item",
+      key: "open_location",
+      icon: "MdOutlineMyLocation",
       label: t("app_menu.open_file_location"),
-      icon: <Icon iconName="MdOutlineMyLocation" />,
-      onClick: () => invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path }),
+      callbackEvent: onAppMenuClick,
     },
     {
-      key: "weg_runas",
+      type: "Item",
+      key: "run_as",
+      icon: "MdOutlineAdminPanelSettings",
       label: t("app_menu.run_as"),
-      icon: <Icon iconName="MdOutlineAdminPanelSettings" />,
-      onClick: () => {
-        invoke(SeelenCommand.Run, {
-          program: item.relaunchProgram,
-          args: item.relaunchArgs,
-          workingDir: item.relaunchIn,
-          elevated: true,
-        });
-      },
+      callbackEvent: onAppMenuClick,
     },
   );
 
-  if (!item.windows.length) {
-    return menu;
-  }
-
-  if ($settings.value.devTools) {
-    menu.push({
-      key: "weg_copy_hwnd",
-      label: t("app_menu.copy_handles"),
-      icon: <Icon iconName="AiOutlineCopy" />,
-      onClick: () =>
-        navigator.clipboard.writeText(
-          JSON.stringify(item.windows.map((window) => window.handle.toString(16))),
-        ),
-    });
-  }
-
-  menu.push({
-    key: "weg_close_app",
-    label: item.windows.length > 1 ? t("app_menu.close_multiple") : t("app_menu.close"),
-    icon: <Icon iconName="BiWindowClose" />,
-    onClick() {
-      item.windows.forEach((window) => {
-        invoke(SeelenCommand.WegCloseApp, { hwnd: window.handle });
+  if (item.windows.length) {
+    if ($settings.value.devTools) {
+      items.push({
+        type: "Item",
+        key: "copy_hwnd",
+        icon: "AiOutlineCopy",
+        label: t("app_menu.copy_handles"),
+        callbackEvent: onAppMenuClick,
       });
-    },
-    danger: true,
-  });
+    }
 
-  if ($settings.value.showEndTask) {
-    menu.push({
-      key: "weg_kill_app",
-      label: item.windows.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),
-      icon: <Icon iconName="MdOutlineDangerous" size={18} />,
-      onClick() {
-        item.windows.forEach((window) => {
-          // todo replace by enum
-          invoke(SeelenCommand.WegKillApp, { hwnd: window.handle });
-        });
-      },
-      danger: true,
+    items.push({
+      type: "Item",
+      key: "close",
+      icon: "BiWindowClose",
+      label: item.windows.length > 1 ? t("app_menu.close_multiple") : t("app_menu.close"),
+      callbackEvent: onAppMenuClick,
     });
+
+    if ($settings.value.showEndTask) {
+      items.push({
+        type: "Item",
+        key: "kill",
+        icon: "MdOutlineDangerous",
+        label: item.windows.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),
+        callbackEvent: onAppMenuClick,
+      });
+    }
   }
 
-  return menu;
+  return { identifier, items };
 }

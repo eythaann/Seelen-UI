@@ -1,7 +1,8 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import type { ContextMenu } from "@seelen-ui/lib/types";
+import { Alignment, type ContextMenu, FancyToolbarSide } from "@seelen-ui/lib/types";
 
 import { $actions } from "../../shared/state/items.ts";
+import { $settings } from "../../shared/state/mod.ts";
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useMemo } from "preact/hooks";
 
@@ -45,11 +46,12 @@ export function useItemContextMenu(itemId: string) {
 
   // Memoize the callback to prevent recreation
   const onContextMenu = useCallback(() => {
+    const alignY = $settings.value.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start;
     invoke(SeelenCommand.TriggerContextMenu, {
-      menu,
+      menu: { ...menu, alignX: Alignment.Center, alignY },
       forwardTo: null,
     });
-  }, [menu]);
+  }, [menu, $settings.value.position]);
 
   return {
     onContextMenu,

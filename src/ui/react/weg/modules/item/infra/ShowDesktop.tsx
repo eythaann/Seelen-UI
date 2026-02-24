@@ -1,14 +1,13 @@
-import { SeelenCommand } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { SpecificIcon } from "libs/ui/react/components/Icon/index.tsx";
-import { invoke } from "@tauri-apps/api/core";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import type { ShowDesktopWegItem } from "../../shared/types.ts";
 
-import { WithContextMenu } from "../../../components/WithContextMenu.tsx";
+import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getMenuForItem } from "./Menu.tsx";
 
 interface Props {
@@ -18,18 +17,28 @@ interface Props {
 export const ShowDesktopModule = memo(({ item }: Props) => {
   const { t } = useTranslation();
 
+  const onContextMenu = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation();
+      const { alignX, alignY } = getDockContextMenuAlignment($settings.value.position);
+      invoke(SeelenCommand.TriggerContextMenu, {
+        menu: { ...getMenuForItem(t, item), alignX, alignY },
+        forwardTo: null,
+      });
+    },
+    [item, t],
+  );
+
   return (
-    <WithContextMenu items={getMenuForItem(t, item)}>
-      <div
-        className="weg-item weg-item-show-desktop"
-        onClick={() => {
-          invoke(SeelenCommand.ShowDesktop);
-        }}
-        onContextMenu={(e) => e.stopPropagation()}
-      >
-        <BackgroundByLayersV2 />
-        <SpecificIcon className="weg-item-icon" name="@seelen/weg::show-desktop" />
-      </div>
-    </WithContextMenu>
+    <div
+      className="weg-item weg-item-show-desktop"
+      onClick={() => {
+        invoke(SeelenCommand.ShowDesktop);
+      }}
+      onContextMenu={onContextMenu}
+    >
+      <BackgroundByLayersV2 />
+      <SpecificIcon className="weg-item-icon" name="@seelen/weg::show-desktop" />
+    </div>
   );
 });

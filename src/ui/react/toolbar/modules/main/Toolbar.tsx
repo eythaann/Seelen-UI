@@ -9,6 +9,7 @@ import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayer
 
 import { $isDragging, $plugins, $toolbar_state } from "../shared/state/items.ts";
 import { $settings } from "../shared/state/mod.ts";
+import { Alignment, FancyToolbarSide } from "@seelen-ui/lib/types";
 import { Group } from "./ItemsContainer.tsx";
 import { Item } from "../item/infra/infra.tsx";
 import { $hidden_by_autohide, $lastFocusedOnMonitor, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
@@ -26,11 +27,12 @@ export function FancyToolbar() {
   const contextMenuDef = useMainContextMenu();
 
   const onContextMenu = useCallback(() => {
+    const alignY = $settings.value.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start;
     invoke(SeelenCommand.TriggerContextMenu, {
-      menu: contextMenuDef,
+      menu: { ...contextMenuDef, alignX: Alignment.Center, alignY },
       forwardTo: null,
     });
-  }, [contextMenuDef]);
+  }, [contextMenuDef, $settings.value.position]);
 
   return (
     <div

@@ -4,15 +4,15 @@ import { FileIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import moment from "moment";
-import { memo, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
 import type { PinnedWegItem, TemporalWegItem } from "../../shared/types.ts";
 
-import { WithContextMenu } from "../../../components/WithContextMenu.tsx";
 import { $delayedFocused, $focused, $notifications, $settings } from "../../shared/state/mod.ts";
+import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getUserApplicationContextMenu } from "./UserApplicationContextMenu.tsx";
 import { UserApplicationPreview } from "./UserApplicationPreview.tsx";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
@@ -24,7 +24,6 @@ interface Props {
 
 export const UserApplication = memo(({ item, isOverlay }: Props) => {
   const [openPreview, setOpenPreview] = useState(false);
-  const [openContextMenu, setOpenContextMenu] = useState(false);
   const [blockUntil, setBlockUntil] = useState(moment(new Date()));
 
   const { t } = useTranslation();
@@ -52,9 +51,21 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
     if (!focused) {
       setBlockUntil(moment(new Date()).add(1, "second"));
       setOpenPreview(false);
-      setOpenContextMenu(false);
     }
   });
+
+  const onContextMenu = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation();
+      setOpenPreview(false);
+      const { alignX, alignY } = getDockContextMenuAlignment($settings.value.position);
+      invoke(SeelenCommand.TriggerContextMenu, {
+        menu: { ...getUserApplicationContextMenu(t, item), alignX, alignY },
+        forwardTo: null,
+      });
+    },
+    [item, t],
+  );
 
   const notificationsCount = $notifications.value.filter((n) => n.appUmid === item.umid).length;
   const itemLabel = $settings.value.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;
@@ -84,6 +95,7 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
           invoke(SeelenCommand.WegCloseApp, { hwnd: window.handle });
         }
       }}
+      onContextMenu={onContextMenu}
     >
       <BackgroundByLayersV2 prefix="item" />
       <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
@@ -110,49 +122,39 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
   }
 
   return (
-    <WithContextMenu
-      items={getUserApplicationContextMenu(t, item) || []}
-      onOpenChange={(isOpen) => {
-        setOpenContextMenu(isOpen);
-        if (openPreview && isOpen) {
-          setOpenPreview(false);
-        }
+    <AnimatedPopover
+      animationDescription={{
+        openAnimationName: "weg-item-preview-container-open",
+        closeAnimationName: "weg-item-preview-container-close",
       }}
+      open={openPreview}
+      placement={calculatePlacement($settings.value.position)}
+      onOpenChange={(open) => setOpenPreview(open && moment(new Date()) > blockUntil)}
+      trigger="hover"
+      content={
+        <BackgroundByLayersV2
+          className={cx("weg-item-preview-container", $settings.value.position.toLowerCase())}
+          onMouseMoveCapture={(e) => e.stopPropagation()}
+          onContextMenu={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+          prefix="preview"
+        >
+          <div className="weg-item-preview-scrollbar">
+            {item.windows.map((window) => (
+              <UserApplicationPreview
+                key={window.handle}
+                title={window.title}
+                hwnd={window.handle}
+              />
+            ))}
+            {item.windows.length === 0 && <div className="weg-item-display-name">{item.displayName}</div>}
+          </div>
+        </BackgroundByLayersV2>
+      }
     >
-      <AnimatedPopover
-        animationDescription={{
-          openAnimationName: "weg-item-preview-container-open",
-          closeAnimationName: "weg-item-preview-container-close",
-        }}
-        open={openPreview}
-        placement={calculatePlacement($settings.value.position)}
-        onOpenChange={(open) => setOpenPreview(open && !openContextMenu && moment(new Date()) > blockUntil)}
-        trigger="hover"
-        content={
-          <BackgroundByLayersV2
-            className={cx("weg-item-preview-container", $settings.value.position.toLowerCase())}
-            onMouseMoveCapture={(e) => e.stopPropagation()}
-            onContextMenu={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-            }}
-            prefix="preview"
-          >
-            <div className="weg-item-preview-scrollbar">
-              {item.windows.map((window) => (
-                <UserApplicationPreview
-                  key={window.handle}
-                  title={window.title}
-                  hwnd={window.handle}
-                />
-              ))}
-              {item.windows.length === 0 && <div className="weg-item-display-name">{item.displayName}</div>}
-            </div>
-          </BackgroundByLayersV2>
-        }
-      >
-        {itemNode}
-      </AnimatedPopover>
-    </WithContextMenu>
+      {itemNode}
+    </AnimatedPopover>
   );
 });
