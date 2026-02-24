@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 
 import { ThemeConfigDefinition } from "./components/ThemeConfigDefinition.tsx";
-import { ResourceTextAsMarkdown } from "libs/ui/react/components/ResourceText/index.tsx";
+import { ResourceDescription } from "../ResourceCard.tsx";
 import { resetThemeVariables } from "./application.ts";
 import { themes } from "../../../state/resources.ts";
 
@@ -29,7 +29,7 @@ export function ThemeView() {
   return (
     <>
       <SettingsGroup>
-        <ResourceTextAsMarkdown text={theme.metadata.description} />
+        <ResourceDescription text={theme.metadata.description} />
       </SettingsGroup>
 
       <SettingsGroup>

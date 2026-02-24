@@ -11,6 +11,7 @@ import { patchWallpaperSettings, resetWallpaperSettings } from "./application.ts
 import { wallpapers } from "../../../state/resources.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
+import { ResourceDescription } from "../ResourceCard.tsx";
 
 import styles from "./View.module.css";
 import { settings } from "../../../state/mod.ts";
@@ -70,6 +71,10 @@ export function SingleWallpaperView() {
         <b style={{ textAlign: "center", fontSize: "1.1rem" }}>
           <ResourceText text={editingWallpaper.metadata.displayName} />
         </b>
+        <ResourceDescription text={editingWallpaper.metadata.description} />
+      </SettingsGroup>
+
+      <SettingsGroup>
         <SettingsOption
           label={t("reset_all_to_default")}
           action={

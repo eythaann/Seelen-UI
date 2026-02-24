@@ -15,6 +15,7 @@ import { widgets } from "../../../state/resources.ts";
 import { getDevTools } from "../../developer/application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
+import { ResourceDescription } from "../ResourceCard.tsx";
 import { RenderBySettingsDeclaration } from "./ConfigRenderer.tsx";
 import { WidgetInstanceSelector } from "./InstanceSelector.tsx";
 import { SeelenWegSettings } from "../../seelenweg/infra.tsx";
@@ -76,6 +77,10 @@ export function WidgetConfiguration({
 
   return (
     <>
+      <SettingsGroup>
+        <ResourceDescription text={widget.metadata.description} />
+      </SettingsGroup>
+
       {showToggleEnabled && (
         <SettingsGroup>
           <SettingsOption>

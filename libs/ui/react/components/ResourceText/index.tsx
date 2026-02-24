@@ -1,4 +1,5 @@
 import type { ResourceText as IResourceText } from "@seelen-ui/lib/types";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { useTranslation } from "react-i18next";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
@@ -55,7 +56,21 @@ export function ResourceTextAsMarkdown({ text }: MarkdownViewerProps) {
     return null;
   }
 
-  return <div className="richText" dangerouslySetInnerHTML={{ __html: html.value }} />;
+  return (
+    <div
+      className="richText"
+      dangerouslySetInnerHTML={{ __html: html.value }}
+      onClick={(e) => {
+        const target = e.target as HTMLElement;
+        const anchor = target.closest("a");
+        if (anchor?.href) {
+          // force links on markdown being opened on browser
+          e.preventDefault();
+          invoke(SeelenCommand.OpenFile, { path: anchor.href });
+        }
+      }}
+    />
+  );
 }
 
 /** this can be used on untrusted markdown, ex user inputs */

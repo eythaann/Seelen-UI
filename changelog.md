@@ -18,6 +18,7 @@
 - power menu clossing instantly.
 - settings by apps not working after saving new state.
 - context menu on toolbar bottom position.
+- external links being opened on webview instead external browser.
 
 ## [2.5.1]
 

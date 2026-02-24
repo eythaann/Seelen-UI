@@ -207,6 +207,15 @@ export function ResourcePortrait({ resource, kind, children }: ResourcePortraitP
   );
 }
 
+export function ResourceDescription({ text }: { text?: IResourceText }) {
+  if (!text) return null;
+  return (
+    <div className={cs.description}>
+      <ResourceTextAsMarkdown text={text} />
+    </div>
+  );
+}
+
 export function resolveDisplayName(name: IResourceText | undefined, language: string): string {
   if (!name) return "";
   if (typeof name === "string") return name;

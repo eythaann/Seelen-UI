@@ -156,6 +156,14 @@
   }
 }
 
+.description {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-right: calc(var(--spacing-s) * -1);
+  padding-right: var(--spacing-s);
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
