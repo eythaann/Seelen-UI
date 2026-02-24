@@ -27,6 +27,12 @@
       height: 25%;
     }
   }
+
+  .kindDisabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }
 
 .container {

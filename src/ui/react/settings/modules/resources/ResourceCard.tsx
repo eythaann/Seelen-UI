@@ -1,14 +1,22 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import type { Resource, ResourceId, ResourceKind, ResourceMetadata, Wallpaper } from "@seelen-ui/lib/types";
+import type {
+  Resource,
+  ResourceId,
+  ResourceKind,
+  ResourceMetadata,
+  ResourceText as IResourceText,
+  Wallpaper,
+} from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { ResourceText, ResourceTextAsMarkdown } from "libs/ui/react/components/ResourceText/index.tsx";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { Button, Popconfirm, Tooltip } from "antd";
+import { Button, Flex, Input, Popconfirm, Tooltip } from "antd";
 import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
 
+import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
 import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
 import type { IconName } from "libs/ui/icons.ts";
@@ -17,6 +25,7 @@ import { $corruptedWallpapers } from "../shared/signals.ts";
 type AnyResource = {
   id: ResourceId;
   metadata: ResourceMetadata;
+  icon?: string | null;
 };
 
 interface ResourceCardProps {
@@ -182,6 +191,10 @@ function ResourcePortraitInner({ resource, kind }: ResourcePortraitProps) {
     }
   }
 
+  if (resource.icon) {
+    return <Icon className={cs.kindIcon} iconName={resource.icon as IconName} />;
+  }
+
   return <ResourceIcon kind={kind} />;
 }
 
@@ -191,6 +204,51 @@ export function ResourcePortrait({ resource, kind, children }: ResourcePortraitP
       <ResourcePortraitInner resource={resource} kind={kind} />
       {children}
     </figure>
+  );
+}
+
+export function resolveDisplayName(name: IResourceText | undefined, language: string): string {
+  if (!name) return "";
+  if (typeof name === "string") return name;
+  return name[language] ?? name["en"] ?? "";
+}
+
+interface ResourceListHeaderProps {
+  discoverUrl: string;
+  search: string;
+  onSearch: (v: string) => void;
+  children?: ComponentChildren;
+}
+
+export function ResourceListHeader({
+  discoverUrl,
+  search,
+  onSearch,
+  children,
+}: ResourceListHeaderProps) {
+  const { t } = useTranslation();
+  return (
+    <>
+      <SettingsGroup>
+        <Flex gap={10}>
+          <b>{t("search")}:</b>
+          <Input
+            type="search"
+            value={search}
+            onChange={(e) => onSearch((e.target as HTMLInputElement).value)}
+            style={{ width: "100%" }}
+          />
+        </Flex>
+
+        <SettingsOption>
+          <span>{t("resources.discover")}:</span>
+          <Button href={discoverUrl} target="_blank" type="link">
+            {discoverUrl}
+          </Button>
+        </SettingsOption>
+        {children}
+      </SettingsGroup>
+    </>
   );
 }
 

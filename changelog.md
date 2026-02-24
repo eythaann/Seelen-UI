@@ -9,12 +9,14 @@
 ### enhancements
 
 - widgets loading time.
+- settings resources lists.
 
 ### fix
 
 - infinity switching of items on toolbar.
 - app not starting correctly from service.
 - power menu clossing instantly.
+- settings by apps not working after saving new state.
 
 ## [2.5.1]
 

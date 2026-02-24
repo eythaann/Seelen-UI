@@ -1,22 +1,18 @@
-import { SeelenCommand } from "@seelen-ui/lib";
 import { type Plugin, ResourceKind } from "@seelen-ui/lib/types";
-import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
-import { path } from "@tauri-apps/api";
-import { invoke } from "@tauri-apps/api/core";
-import { Button } from "antd";
-import React from "react";
 import { useTranslation } from "react-i18next";
+import { useState } from "preact/hooks";
+import React from "react";
 
 import cs from "./infra.module.css";
 
 import { plugins, widgets } from "../../state/resources.ts";
 
-import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
-import { ResourceCard } from "./ResourceCard.tsx";
+import { resolveDisplayName, ResourceCard, ResourceListHeader } from "./ResourceCard.tsx";
 
 export function PluginsView() {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const [search, setSearch] = useState("");
 
   function targetLabel(target: string) {
     const widget = widgets.value.find((w) => w.id === target);
@@ -26,7 +22,13 @@ export function PluginsView() {
     return <span>{target}</span>;
   }
 
-  const groupedByTarget = plugins.value.reduce((acc, plugin) => {
+  const filtered = search
+    ? plugins.value.filter((p) =>
+      resolveDisplayName(p.metadata.displayName, i18n.language).toLowerCase().includes(search.toLowerCase())
+    )
+    : plugins.value;
+
+  const groupedByTarget = filtered.reduce((acc, plugin) => {
     acc[plugin.target] ??= {
       label: targetLabel(plugin.target),
       plugins: [],
@@ -41,28 +43,11 @@ export function PluginsView() {
 
   return (
     <>
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t("resources.open_folder")}</b>
-          <Button
-            type="default"
-            onClick={async () => {
-              const dataDir = await path.appDataDir();
-              invoke(SeelenCommand.OpenFile, {
-                path: await path.join(dataDir, "plugins"),
-              });
-            }}
-          >
-            <Icon iconName="PiFoldersDuotone" />
-          </Button>
-        </SettingsOption>
-        <SettingsOption>
-          <span>{t("resources.discover")}:</span>
-          <Button href="https://seelen.io/resources/s?category=Plugin" target="_blank" type="link">
-            https://seelen.io/resources/s?category=Plugin
-          </Button>
-        </SettingsOption>
-      </SettingsGroup>
+      <ResourceListHeader
+        discoverUrl="https://seelen.io/resources/s?category=Plugin"
+        search={search}
+        onSearch={setSearch}
+      />
 
       <div className={cs.list}>
         {Object.values(groupedByTarget).map((group, idx) => (

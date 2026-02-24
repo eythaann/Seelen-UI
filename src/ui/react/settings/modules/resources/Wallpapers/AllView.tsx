@@ -1,39 +1,35 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { ResourceKind, type Wallpaper } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { path } from "@tauri-apps/api";
 import { Button } from "antd";
 import { useTranslation } from "react-i18next";
+import { useState } from "preact/hooks";
 import { NavLink } from "react-router";
 
 import cs from "../infra.module.css";
 
 import { wallpapers } from "../../../state/resources.ts";
 
-import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
-import { ResourceCard } from "../ResourceCard.tsx";
+import { resolveDisplayName, ResourceCard, ResourceListHeader } from "../ResourceCard.tsx";
 
 export function AllWallpapersView() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [search, setSearch] = useState("");
+
+  const filtered = search
+    ? wallpapers.value.filter((w) =>
+      resolveDisplayName(w.metadata.displayName, i18n.language).toLowerCase().includes(search.toLowerCase())
+    )
+    : wallpapers.value;
 
   return (
     <>
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t("resources.open_folder")}</b>
-          <Button
-            type="default"
-            onClick={async () => {
-              const dataDir = await path.appDataDir();
-              invoke(SeelenCommand.OpenFile, {
-                path: await path.join(dataDir, "wallpapers"),
-              });
-            }}
-          >
-            <Icon iconName="PiFoldersDuotone" />
-          </Button>
-        </SettingsOption>
-        <SettingsOption>
+      <ResourceListHeader
+        discoverUrl="https://seelen.io/resources/s?category=Wallpaper"
+        search={search}
+        onSearch={setSearch}
+      >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <b>{t("resources.import_wallpapers")}</b>
           <Button
             type="default"
@@ -43,21 +39,11 @@ export function AllWallpapersView() {
           >
             <Icon iconName="MdLibraryAdd" />
           </Button>
-        </SettingsOption>
-        <SettingsOption>
-          <span>{t("resources.discover")}:</span>
-          <Button
-            href="https://seelen.io/resources/s?category=Wallpaper"
-            target="_blank"
-            type="link"
-          >
-            https://seelen.io/resources/s?category=Wallpaper
-          </Button>
-        </SettingsOption>
-      </SettingsGroup>
+        </div>
+      </ResourceListHeader>
 
       <div className={cs.list}>
-        {wallpapers.value.map((resource) => <WallpaperItem key={resource.id} resource={resource} />)}
+        {filtered.map((resource) => <WallpaperItem key={resource.id} resource={resource} />)}
       </div>
     </>
   );
@@ -66,17 +52,14 @@ export function AllWallpapersView() {
 function WallpaperItem({ resource }: { resource: Wallpaper }) {
   return (
     <ResourceCard
-      key={resource.id}
       resource={resource}
       kind={ResourceKind.Wallpaper}
       actions={
-        <>
-          <NavLink to={`/wallpaper?${new URLSearchParams({ id: resource.id })}`}>
-            <Button type="text">
-              <Icon iconName="RiSettings4Fill" />
-            </Button>
-          </NavLink>
-        </>
+        <NavLink to={`/wallpaper?${new URLSearchParams({ id: resource.id })}`}>
+          <Button type="text">
+            <Icon iconName="RiSettings4Fill" />
+          </Button>
+        </NavLink>
       }
     />
   );

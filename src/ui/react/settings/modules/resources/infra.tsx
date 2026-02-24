@@ -14,6 +14,7 @@ import { AllWallpapersView } from "./Wallpapers/AllView.tsx";
 import { WidgetsView } from "./Widget/AllView.tsx";
 
 const kinds = Object.values(ResourceKind);
+const DISABLED_KINDS: ResourceKind[] = [ResourceKind.SoundPack];
 
 export function ResourcesView() {
   return (
@@ -34,16 +35,26 @@ function KindSelector() {
 
   return (
     <div className={cs.kindSelector}>
-      {kinds.map((kind) => (
-        <NavLink
-          key={kind}
-          to={`${RoutePath.Resource}/${kind.toLowerCase()}`}
-          className={cs.kind}
-        >
-          <ResourceIcon kind={kind} />
-          <b>{t(`header.labels.${kind.toLowerCase()}`)}</b>
-        </NavLink>
-      ))}
+      {kinds.map((kind) => {
+        const disabled = DISABLED_KINDS.includes(kind);
+        return disabled
+          ? (
+            <div key={kind} className={`${cs.kind} ${cs.kindDisabled}`}>
+              <ResourceIcon kind={kind} />
+              <b>{t(`header.labels.${kind.toLowerCase()}`)}</b>
+            </div>
+          )
+          : (
+            <NavLink
+              key={kind}
+              to={`${RoutePath.Resource}/${kind.toLowerCase()}`}
+              className={cs.kind}
+            >
+              <ResourceIcon kind={kind} />
+              <b>{t(`header.labels.${kind.toLowerCase()}`)}</b>
+            </NavLink>
+          );
+      })}
     </div>
   );
 }

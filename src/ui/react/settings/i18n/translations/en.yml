@@ -68,6 +68,7 @@ apps_configurations:
 cancel: Cancel
 close: Close
 delete: Delete
+search: Search
 devtools:
   app_folders: App Folders
   custom_config_file: Load Custom Config File

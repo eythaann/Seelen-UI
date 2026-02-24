@@ -1,11 +1,9 @@
-import { SeelenCommand } from "@seelen-ui/lib";
 import { ResourceKind, type Theme, type ThemeId, type Widget } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { path } from "@tauri-apps/api";
-import { invoke } from "@tauri-apps/api/core";
 import { Button, Switch, Tooltip } from "antd";
 import { Reorder } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useState } from "preact/hooks";
 import { NavLink } from "react-router";
 
 import cs from "../infra.module.css";
@@ -13,14 +11,14 @@ import cs from "../infra.module.css";
 import { setActiveThemes, settings } from "../../../state/mod.ts";
 import { themes, widgets } from "../../../state/resources.ts";
 
-import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
-import { ResourceCard } from "../ResourceCard.tsx";
+import { resolveDisplayName, ResourceCard, ResourceListHeader } from "../ResourceCard.tsx";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { cx } from "../../shared/utils/app.ts";
 
 export function ThemesView() {
   const activeIds = settings.value.activeThemes;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [search, setSearch] = useState("");
 
   function toggleTheme(themeId: ThemeId) {
     if (activeIds.includes(themeId)) {
@@ -34,9 +32,15 @@ export function ThemesView() {
     setActiveThemes(themes);
   }
 
+  const allFiltered = search
+    ? themes.value.filter((theme) =>
+      resolveDisplayName(theme.metadata.displayName, i18n.language).toLowerCase().includes(search.toLowerCase())
+    )
+    : themes.value;
+
   const disabled: Theme[] = [];
   const enabled: Theme[] = [];
-  for (const theme of themes.value) {
+  for (const theme of allFiltered) {
     if (activeIds.includes(theme.id)) {
       enabled.push(theme);
     } else {
@@ -47,28 +51,11 @@ export function ThemesView() {
 
   return (
     <>
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t("resources.open_folder")}</b>
-          <Button
-            type="default"
-            onClick={async () => {
-              const dataDir = await path.appDataDir();
-              invoke(SeelenCommand.OpenFile, {
-                path: await path.join(dataDir, "themes"),
-              });
-            }}
-          >
-            <Icon iconName="PiFoldersDuotone" />
-          </Button>
-        </SettingsOption>
-        <SettingsOption>
-          <span>{t("resources.discover")}:</span>
-          <Button href="https://seelen.io/resources/s?category=Theme" target="_blank" type="link">
-            https://seelen.io/resources/s?category=Theme
-          </Button>
-        </SettingsOption>
-      </SettingsGroup>
+      <ResourceListHeader
+        discoverUrl="https://seelen.io/resources/s?category=Theme"
+        search={search}
+        onSearch={setSearch}
+      />
 
       <div className={cs.list}>
         <b>{t("general.theme.selected")}</b>

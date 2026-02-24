@@ -76,7 +76,8 @@ pub fn state_get_default_wallpaper_settings() -> WallpaperInstanceSettings {
 }
 
 #[tauri::command(async)]
-pub fn state_write_settings(settings: Settings) -> Result<()> {
+pub fn state_write_settings(mut settings: Settings) -> Result<()> {
+    settings.sanitize()?;
     FULL_STATE.rcu(move |state| {
         let mut state = state.cloned();
         state.settings = settings.clone();
