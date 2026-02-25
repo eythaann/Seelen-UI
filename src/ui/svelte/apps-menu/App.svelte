@@ -8,6 +8,8 @@
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { navigateInDirection } from "./keyboard-navigation";
   import { convertFileSrc } from "@tauri-apps/api/core";
+  import { ConfigState } from "./state/config.svelte";
+  import { Effect } from "@tauri-apps/api/window";
 
   let inputElement: HTMLInputElement | undefined = $state();
 
@@ -126,6 +128,11 @@
     Widget.self.ready({ show: false });
   });
 
+  $effect(() => {
+    const effects = ConfigState.config.acrylic ? [Effect.Acrylic] : [];
+    Widget.self.webview.setEffects({ effects });
+  });
+
   function openUserMenu() {
     invoke(SeelenCommand.TriggerWidget, {
       payload: { id: "@seelen/user-menu" as WidgetId },
@@ -146,7 +153,11 @@
 </script>
 
 <svelte:window onkeydown={handleDocKeyDown} />
-<div class="apps-menu" class:fullscreen={globalState.displayMode === StartDisplayMode.Fullscreen}>
+<div
+  class="apps-menu"
+  class:fullscreen={globalState.displayMode === StartDisplayMode.Fullscreen}
+  data-acrylic={ConfigState.config.acrylic}
+>
   <div class="apps-menu-header">
     <input
       bind:this={inputElement}

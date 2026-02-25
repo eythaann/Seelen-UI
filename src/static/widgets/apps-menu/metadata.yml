@@ -6,3 +6,8 @@ instances: Single
 loader: Internal
 hidden: true
 # lazy: true
+settings:
+  - type: switch
+    key: acrylic
+    label: Acrylic Effect
+    defaultValue: false

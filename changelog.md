@@ -5,6 +5,7 @@
 ### features
 
 - add new widget security layer for exposed commands.
+- apps menu optinal acrylic effect.
 
 ### enhancements
 

@@ -7,7 +7,6 @@ import { onTriggered } from "./state/positioning.svelte.ts";
 
 import "@shared/styles/reset.css";
 import "@shared/styles/colors.css";
-import { Effect } from "@tauri-apps/api/window";
 import { debounce } from "lodash";
 import { globalState } from "./state/mod.svelte.ts";
 
@@ -23,9 +22,6 @@ await Promise.all([
   webview.setMinimizable(false),
   webview.setClosable(false),
   webview.setSkipTaskbar(true),
-  webview.setEffects({
-    effects: [Effect.Acrylic],
-  }),
   webview.setAlwaysOnTop(true),
   webview.setResizable(false),
 ]);
