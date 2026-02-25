@@ -85,13 +85,21 @@ impl UserManager {
         Ok(settings.get_value("LastLoggedOnUserSID")?)
     }
 
-    fn get_folder_content(base_path: PathBuf) -> Result<Vec<PathBuf>> {
+    fn get_folder_content(base_path: PathBuf, folder_type: FolderType) -> Result<Vec<PathBuf>> {
+        // Recent is a flat folder of .lnk shortcuts; others are scanned up to 5 levels deep
+        // to avoid exploding on large/deep folder trees.
+        let max_depth = match folder_type {
+            FolderType::Recent => 1,
+            _ => 5,
+        };
+
         let mut list = Vec::new();
 
-        for entry in walkdir::WalkDir::new(base_path)
+        for entry in walkdir::WalkDir::new(&base_path)
             .follow_links(false)
+            .max_depth(max_depth)
             .into_iter()
-            .filter_entry(|e| !is_ignored_dir(e.path()))
+            .filter_entry(|e| !is_ignored_entry(e.path()))
             .filter_map(|e| e.ok())
         {
             let path = entry.path();
@@ -173,7 +181,7 @@ impl UserManager {
         folder_type: FolderType,
     ) -> Result<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>> {
         let debouncer = new_debouncer(
-            Duration::from_millis(300),
+            Duration::from_millis(1000),
             None,
             move |result: DebounceEventResult| match result {
                 Ok(_events) => {
@@ -191,7 +199,8 @@ impl UserManager {
         let mut manager = trace_lock!(Self::instance());
 
         if let Some(folder_details) = manager.folders.get_mut(&folder_type) {
-            folder_details.content = Self::get_folder_content(folder_details.path.clone())?;
+            folder_details.content =
+                Self::get_folder_content(folder_details.path.clone(), folder_type)?;
             drop(manager);
             let _ = Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type));
         }
@@ -204,7 +213,8 @@ impl UserManager {
 
         for &folder_type in FolderType::values() {
             if let Some(path) = Self::get_path_from_folder(&folder_type) {
-                let content = Self::get_folder_content(path.clone()).unwrap_or_default();
+                let content =
+                    Self::get_folder_content(path.clone(), folder_type).unwrap_or_default();
                 let mut watcher = Self::create_folder_watcher(folder_type)?;
                 watcher.watcher().watch(&path, RecursiveMode::Recursive)?;
 
@@ -226,33 +236,54 @@ impl UserManager {
     }
 }
 
-fn is_ignored_dir(path: &std::path::Path) -> bool {
-    path.file_name()
-        .and_then(|n| n.to_str())
-        .is_some_and(|name| {
-            matches!(
-                name,
-                ".git"
-                    | "node_modules"
-                    | "target"
-                    | "dist"
-                    | "build"
-                    | "out"
-                    | ".cache"
-                    | ".idea"
-                    | ".vscode"
-                    | ".next"
-            )
-        })
+/// Returns true if the entry should be excluded from the file list.
+/// When applied via `filter_entry`, returning true for a directory prunes its entire subtree.
+fn is_ignored_entry(path: &std::path::Path) -> bool {
+    let Some(name) = path.file_name().and_then(|n| n.to_str()) else {
+        return false;
+    };
+
+    matches!(
+        name,
+        // Dev artifact directories
+        "node_modules"
+            | "target"
+            | "dist"
+            | "build"
+            | "out"
+            | "__pycache__"
+            | "venv"
+            | ".venv"
+            | "env"
+            | "vendor"
+            // VCS
+            | ".git"
+            | ".svn"
+            | ".hg"
+            // IDE/editor
+            | ".idea"
+            | ".vscode"
+            | ".next"
+            // Cache
+            | ".cache"
+            | "cache"
+            | "Cache"
+            // Windows system
+            | "$RECYCLE.BIN"
+            | "System Volume Information"
+            | "WindowsApps"
+            | "MicrosoftEdgeBackups"
+    )
 }
 
 fn is_ignored_file(path: &std::path::Path) -> bool {
     let Some(extension) = path.extension() else {
-        return true;
+        return true; // filter files without extension
     };
 
     let ext = extension.to_string_lossy().to_lowercase();
     [
+        // Temp / backup
         "ini",
         "dat",
         "bak",
@@ -260,10 +291,29 @@ fn is_ignored_file(path: &std::path::Path) -> bool {
         "temp",
         "old",
         "swp",
+        // In-progress downloads
         "download",
         "crdownload",
+        "part",
+        // Lock / pid files
         "lock",
         "pid",
+        // Log files
+        "log",
+        // Database / cache files
+        "db",
+        "sqlite",
+        "sqlite3",
+        "ldb",
+        // Build artifacts
+        "obj",
+        "pdb",
+        "ilk",
+        "exp",
+        "iobj",
+        "ipdb",
+        // Windows shortcut noise (internet shortcuts, not file shortcuts)
+        "url",
     ]
     .contains(&ext.as_str())
 }
