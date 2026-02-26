@@ -59,7 +59,7 @@
     "@types/express": "^5.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.24",
-    "@types/node": "^20.11.19",
+    "@types/node": "^25.3.2",
     "@types/react-dom": "^19.0.0",
     "@types/yargs": "^17.0.33",
     "antd": "^5.23.0",
