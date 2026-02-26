@@ -154,10 +154,12 @@ input[type="checkbox"][data-skin="switch"] {
 }
 
 select[data-skin="default"] {
+  display: flex;
   appearance: base-select;
 
   &::picker-icon {
     color: var(--color-gray-400);
+    width: min-content;
     transition: transform 0.4s ease;
   }
 

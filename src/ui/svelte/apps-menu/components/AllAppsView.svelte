@@ -13,6 +13,8 @@
 
   let { onContextMenu }: Props = $props();
 
+  const getItemKey = (item: StartMenuItem) => `${item.path}_${item.umid}`;
+
   // Memoized filter function - avoid recreating on each render
   const shouldIncludeItem = (item: StartMenuItem, prefix: string | null): boolean => {
     if (prefix === "web") return false;
@@ -32,10 +34,17 @@
   const items = $derived.by(() => {
     const allItems = globalState.allItems;
     const filtered: StartMenuItem[] = [];
+    const seen = new Set<string>();
 
     for (const item of allItems) {
       if (!item.path) {
-        if (item.umid) filtered.push(item);
+        if (item.umid) {
+          const key = getItemKey(item);
+          if (!seen.has(key)) {
+            seen.add(key);
+            filtered.push(item);
+          }
+        }
         continue;
       }
 
@@ -44,7 +53,11 @@
       const filename = lastSlash >= 0 ? path.slice(lastSlash + 1) : path;
 
       if (!filename.includes("uninstall") && filename !== "desktop.ini") {
-        filtered.push(item);
+        const key = getItemKey(item);
+        if (!seen.has(key)) {
+          seen.add(key);
+          filtered.push(item);
+        }
       }
     }
 
@@ -83,8 +96,6 @@
     const seenKeys = new Set<string>();
     const { prefix } = query;
 
-    const getItemKey = (item: StartMenuItem) => `${item.path}_${item.umid}`;
-
     for (const item of items) {
       if (shouldIncludeItem(item, prefix)) {
         const key = getItemKey(item);
@@ -119,11 +130,7 @@
       };
       cachedSearcher = fuzzySearch.SearcherFactory.createSearcher<StartMenuItem, string>(config);
 
-      cachedSearcher.indexEntities(
-        searchableItems,
-        getItemKey,
-        (item) => [item.display_name],
-      );
+      cachedSearcher.indexEntities(searchableItems, getItemKey, (item) => [item.display_name]);
 
       lastSearchableItemsKey = itemsKey;
     }
@@ -146,7 +153,7 @@
 <DragDropProvider>
   <div class="all-apps-view">
     <div class="all-apps-view-list">
-      {#each filteredItems as item, idx (item.umid || item.path)}
+      {#each filteredItems as item, idx (getItemKey(item))}
         <AppItem {item} {idx} {onContextMenu} draggable={false} lazy />
       {/each}
     </div>
