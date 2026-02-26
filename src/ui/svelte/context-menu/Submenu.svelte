@@ -15,6 +15,8 @@
       menu: {
         identifier: item.identifier,
         items: item.items,
+        alignX: state.data?.alignX,
+        alignY: state.data?.alignY,
       },
       forwardTo: state.forwardTo || state.owner,
     });
