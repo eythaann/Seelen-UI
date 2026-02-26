@@ -51,7 +51,7 @@
     "unified": "^11.0.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.6.1",
+    "@commitlint/cli": "^20.4.2",
     "@commitlint/config-conventional": "^19.2.2",
     "@nyariv/sandboxjs": "^0.8.27",
     "@seelen-ui/lib": "file:./libs/core/npm",
