@@ -2,20 +2,20 @@ battery:
   remaining: 残り {{0}}%
   smart_charge: スマートチャージ
 bluetooth:
-  available: 利用可能なデバイス（ペアリングされていない）
+  available: 利用可能なデバイス
   cancel: キャンセル
-  connected: コネクテッド・デバイス
-  forget: 忘れる
-  lowenergy: 低エネルギー
+  connected: 接続済みデバイス
+  forget: 削除
+  lowenergy: LE
   more: その他のBluetooth設定
   not_found: Bluetoothデバイスが見つかりません
-  pair: ペア
-  paired: 保存されたデバイス
+  pair: ペアリング
+  paired: 保存済みデバイス
   placeholder:
     passphrase: パスフレーズ、コードまたはPIN
   scanning: デバイスのスキャン
 context_menu:
-  add_custom_text: カスタムテキスト項目の追加
+  add_custom_text: カスタムテキストの追加
   modules: モジュール
   remove: モジュールを削除
   reorder_disable: ツールバーをロック
@@ -44,12 +44,12 @@ notifications:
   title: 通知
 placeholder:
   bluetooth_devices: Bluetoothとデバイス
-  ethernet_connected: 接続されています
-  ethernet_disconnected: 接続されていません
+  ethernet_connected: 接続済み
+  ethernet_disconnected: 未接続
   notifications: 通知
   settings: SeelenUIの設定
   volume: 音量
-plugged: 詰まった
+plugged: 接続済み
 settings:
   app_settings: SeelenUIの設定
   brightness: 明るさ

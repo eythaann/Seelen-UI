@@ -1,5 +1,5 @@
 action:
-  confirm: 本気ですか？
+  confirm: 操作を続行しますか？
   confirm_body: このアクションを元に戻すことはできません。
 apps_configurations:
   app:
@@ -44,14 +44,14 @@ apps_configurations:
     kind: 識別方法
     matching_strategy: マッチングの方法
     matching_strategy_option:
-      contains: 含まれています
+      contains: 含む
       ends_with: で終わる
       equals: 等しい
       regex: 正規表現
       starts_with: で始まる
-    negation: マッチングを否定する
+    negation: 否定
     or: または
-    remove: ブロックを削除
+    remove: 削除
     type:
       class: クラス
       exe: EXE
@@ -81,24 +81,24 @@ extras:
   relaunch: SeelenUIを再起動
   version: バージョン
   version_fixed: >-
-    アプリケーションとWebView2 Runtimeのバージョンは修正されています。これは、アプリケーションが更新を受信せず、WebView2
+    アプリケーションとWebView2 Runtimeのバージョンは固定されています。これは、アプリケーションが更新を受信せず、WebView2
     ランタイムが Windows 更新で自動的に更新されないことを意味します。
 general:
   accent_color: アクセントカラー
   date_format: 日付形式
   icon_pack:
-    available: 利用可能なアイコン パック
-    selected: アクティブなアイコン パック
+    available: 利用可能なアイコンパック
+    selected: アクティブなアイコンパック
   language: 言語
   monday: 月曜日
   performance_mode:
-    on_battery: バッテリー上
-    on_energy_saver: エネルギーセーバーについて
+    on_battery: バッテリー駆動時
+    on_energy_saver: 省電力モード時
     options:
       disabled: 無効
-      extreme: 過激
+      extreme: 極限
       minimal: 最小限
-    plugged: プラグまたは充電
+    plugged: 電源接続時
   saturday: 土曜日
   start_of_week: 週の始まり
   startup: 起動時に実行する
@@ -108,7 +108,7 @@ general:
     selected: アクティブなテーマ
 header:
   labels:
-    config: コンフィギュレーション
+    config: 設定
     developer: 開発者向け
     extras: エクストラ
     general: 全般
@@ -134,15 +134,15 @@ loading: 読み込み中...
 miscellaneous: その他
 monitors_configurations:
   label: モニター{{index}}
-more: もっと
+more: さらに表示
 'no': いいえ
 open: 開く
 quit: 終了
 remove: 取り除く
-reset_all_to_default: すべてをデフォルト値に戻す
-reset_to_default: デフォルト値にリセット
+reset_all_to_default: すべての設定をデフォルトに戻す
+reset_to_default: デフォルトに戻す
 resources:
-  app_outdated: このリソースが正しく動作するには、新しいバージョンのSeelen UIが必要です。
+  app_outdated: このリソースが正しく動作するためには、新しいバージョンのSeelen UIが必要です。
   corrupted_wallpaper: サムネイルの抽出に失敗しました - 破損したビデオ形式またはサポートされていないビデオ形式です
   delete: リソースを削除します
   discover: その他のリソース
@@ -153,9 +153,9 @@ resources:
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
   see_on_website: ウェブサイトで見る
 review_request:
-  not_now: 今じゃない
+  not_now: また今度
   sure: もちろん！
-  title: Seelen UI をお楽しみですか?
+  title: Seelen UI をお楽しみですか？
 save: 保存
 save_and_restart: 保存して再起動
 see_more: もっと見る
@@ -164,48 +164,48 @@ shortcuts:
   enable: ビルトインショートカットシステムを有効にします
   enable_tooltip: Seelen UIクライアントを使用して独自のショートカットシステムを実装する場合は無効にします
   labels:
-    create_new_workspace: 新しいワークスペースを作成します
-    cycle_stack_next: 次にサイクルスタック
-    cycle_stack_prev: サイクルスタック前
-    cycle_wallpaper_next: 次の壁紙に変更します
-    cycle_wallpaper_prev: 前の壁紙に変更します
-    decrease_height: 高さを減らします
-    decrease_width: 幅を減らします
-    destroy_current_workspace: 現在のワークスペースを破壊します
-    focus_bottom: フォーカスボトム
-    focus_latest: 最新の焦点
-    focus_left: フォーカスを左にします
-    focus_right: 焦点を合わせてください
-    focus_top: フォーカストップ
-    increase_height: 高さを増やします
-    increase_width: 幅を増やします
-    misc_force_quit: 強制終了
-    misc_force_restart: 強制再起動
+    create_new_workspace: 新しいワークスペースを作成
+    cycle_stack_next: 次のサイクルスタックに進む
+    cycle_stack_prev: 前のサイクルスタックに戻る
+    cycle_wallpaper_next: 次の壁紙に変更
+    cycle_wallpaper_prev: 前の壁紙に変更
+    decrease_height: 高さを減らす
+    decrease_width: 幅を減らす
+    destroy_current_workspace: 現在のワークスペースを破棄
+    focus_bottom: 下にフォーカス
+    focus_latest: 最新のウィンドウにフォーカス
+    focus_left: 左にフォーカス
+    focus_right: 右にフォーカス
+    focus_top: 上にフォーカス
+    increase_height: 高さを増やす
+    increase_width: 幅を増やす
+    misc_force_quit: 強制終了する
+    misc_force_restart: 強制再起動する
     misc_open_settings: 設定を開く
-    misc_toggle_lock_tracing: トグルロックトレース（ログ）
-    misc_toggle_win_event_tracing: トグルウィンイベントトレース（ログ）
+    misc_toggle_lock_tracing: ロックトレース（ログ）の切り替え
+    misc_toggle_win_event_tracing: ウィンイベントトレース（ログ）の切り替え
     move_to_workspace: ワークスペースに移動{{0}}
-    move_window_down: ウィンドウを下に移動します
-    move_window_left: ウィンドウを左に移動します
-    move_window_right: ウィンドウを右に移動します
-    move_window_up: ウィンドウを上に移動します
-    pause_tiling: タイル張りウィンドウマネージャーを一時停止します
-    reserve_bottom: 底を予約します
-    reserve_float: 予備のフロート
-    reserve_left: 左に予備
-    reserve_right: 右に予約します
-    reserve_stack: 予備スタック
-    reserve_top: トップを予約します
-    restore_sizes: サイズを復元します
-    send_to_workspace: workspaceに送信{{0}}
-    start_weg_app: フォーカスまたは開始アプリケーション{{0}}
-    switch_to_next_workspace: 次のワークスペースに切り替えます
-    switch_to_previous_workspace: 前のワークスペースに切り替えます
-    switch_workspace: ワークスペースに切り替えます{{0}}
-    toggle_float: ウィンドウフロートモードを切り替えます
-    toggle_monocle: ワークスペースモノクルモードのトグル
-  readonly_tooltip: これは読み取り専用のショートカットです
-  reset: デフォルトにリセットします
+    move_window_down: ウィンドウを下に移動する
+    move_window_left: ウィンドウを左に移動する
+    move_window_right: ウィンドウを右に移動する
+    move_window_up: ウィンドウを上に移動する
+    pause_tiling: タイル張りウィンドウマネージャーを一時停止する
+    reserve_bottom: 下を予約する
+    reserve_float: フローティングを予約する
+    reserve_left: 左を予約する
+    reserve_right: 右を予約する
+    reserve_stack: スタックを予約する
+    reserve_top: 上を予約する
+    restore_sizes: サイズを復元する
+    send_to_workspace: ワークスペース {{0}} に送信
+    start_weg_app: アプリケーション {{0}} にフォーカスまたは開始
+    switch_to_next_workspace: 次のワークスペースに切り替え
+    switch_to_previous_workspace: 前のワークスペースに切り替え
+    switch_workspace: ワークスペースに切り替え{{0}}
+    toggle_float: ウィンドウフロートモードを切り替え
+    toggle_monocle: ワークスペースモノクルモードの切り替え
+  readonly_tooltip: 読み取り専用
+  reset: デフォルトにリセット
 sides:
   bottom: 下
   left: 左
@@ -213,15 +213,15 @@ sides:
   top: 上
 toolbar:
   auto_hide: 自動的に隠す
-  delay_to_hide: 隠れるまでの遅延
-  delay_to_show: 表示が遅れる
+  delay_to_hide: 隠れるまでの時間
+  delay_to_show: 表示されるまでの時間
   dock_side: ポジション
   enable: ツールバーを有効にする
   height: 高さ
   hide_mode:
-    always: いつも
-    never: 一度もない
-    on_overlap: オーバーラップ時
+    always: 常に
+    never: 無効
+    on_overlap: 重なり時
   label: ツールバーの設定
   placeholder: {}
 update:
@@ -232,73 +232,73 @@ wall:
   backgrounds: 壁紙
   blur: ブラー
   cancel: キャンセル
-  close: 近い
+  close: 閉じる
   collection_name: コレクション名
   collections: コレクション
   contrast: コントラスト
   corrupted_wallpapers_message: 壁紙が破損している場合は、削除することを検討してください。
   create: 作成する
-  create_collection: コレクションの作成
+  create_collection: コレクションを作成
   default_collection: デフォルトのコレクション
   delete_collection: コレクションの削除
   edit_collection: コレクションの編集
-  enable: 壁紙マネージャーを有効にします
-  extend: プライマリを拡張する
+  enable: 壁紙マネージャーを有効にする
+  extend: 拡張
   fit:
     contain: コンテイン
     cover: カバー
-    fill: 充填
-  flipHorizontal: 水平フリップ
-  flipVertical: 垂直フリップ
+    fill: フィル
+  flipHorizontal: 水平反転
+  flipVertical: 垂直反転
   generating_thumbnails: 壁紙のサムネイルの生成
   hours: 時間
-  interval: 壁紙を毎回変更します
+  interval: 壁紙変更の間隔
   minutes: 分
-  monitor_collection: モニター収集
+  monitor_collection: モニターコレクション
   multimonitor_behaviour: マルチモニターの動作
-  muted: ビデオの音声をミュートする
+  muted: ビデオの音声をミュート
   no_background: 壁紙に使用するファイルを選択
   no_collections: まだコレクションは作成されていません。 + ボタンをクリックして作成します。
-  objectFit: バックグラウンド・フィット
-  objectPosition: バックグラウンド
+  objectFit: 背景のフィット
+  objectPosition: 背景の位置
   overlayColor: オーバーレイカラー
   overlayMixBlendMode: オーバーレイミックスブレンドモード
   per_monitor: モニターごと
   playback: 再生速度
   position:
-    bottom: ボトム
-    center: センター
+    bottom: 下
+    center: 中央
     left: 左
     right: 右
-    top: トップ
+    top: 上
   processing_video: ビデオの処理
-  random: スライドショーをランダム化します
-  saturation: 飽和
+  random: スライドショーをランダム化
+  saturation: 彩度
   seconds: 秒
   select_collection: コレクションの選択
   thumbnail_generation_complete: サムネイルの生成が完了しました
   thumbnail_generation_finished: サムネイルの生成が正常に終了しました
   wallpaper_collection: 壁紙コレクション
-  wallpaper_settings: 壁紙設定
+  wallpaper_settings: 壁紙の設定
   withOverlay: オーバーレイ付き
   workspace_collections: ワークスペースコレクション
 weg:
   auto_hide: 自動的に隠す
-  delay_to_hide: 隠れるまでの遅延
-  delay_to_show: 表示が遅れる
+  delay_to_hide: 隠れるまでの時間
+  delay_to_show: 表示されるまでの時間
   dock_side: 位置
   enable: ドック（タスクバー）を有効にする
   filtering: アイテムのフィルタリング
   gap: アイテム間のスペース
   hide_mode:
-    always: いつも
-    never: 一度もない
-    on_overlap: オーバーラップ時
+    always: 常に
+    never: 無効
+    on_overlap: 重なり時
   items:
     gap: アイテム間のスペース
     label: ドック上のアイテム
     pinned_visibility:
-      always: いつも
+      always: 常に
       label: ピン留めされたアイテムの表示設定
       when_primary: モニターがプライマリの場合
     show_instance_counter: 開いているウィンドウのカウンターを表示する
@@ -315,7 +315,7 @@ weg:
     full_width: 全画面幅
     min_content: できるだけ小さく
   padding: 余白
-  show_end_task: タスクバーに終了タスクを表示する
+  show_end_task: タスクバーに終了ボタンを表示する
   width: ドックの幅
 welcome:
   give_a_review: レビューを投稿する

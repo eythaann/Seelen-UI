@@ -27,7 +27,7 @@ taskbar_menu:
   desktop: デスクトップモジュールの追加
   media: メディアモジュールを追加
   settings: 設定
-  start: 開始モジュールを追加
+  start: スタートメニューの追加
   task_manager: タスクマネージャー
 weg:
   empty: 表示する項目がありません

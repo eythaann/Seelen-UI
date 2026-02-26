@@ -15,7 +15,7 @@ paired: ペアリング済み
 pairing: ペアリング中...
 pairing_failed: ペアリングに失敗しました
 password: パスワード
-provide_address: 住所を入力してください
+provide_address: アドレスを入力してください
 provide_password: ユーザー名とパスワードを入力してください
 provide_pin: PINを入力してください
 scanning: デバイスをスキャンしています...

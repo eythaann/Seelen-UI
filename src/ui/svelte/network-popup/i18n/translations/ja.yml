@@ -1,12 +1,12 @@
 available: 利用可能なネットワーク
-connect: 接続する
-connected: に接続されています
-disconnect: 切断する
+connect: 接続
+connected: 接続済み
+disconnect: 切断
 hidden: 隠れたネットワーク
 more: その他のネットワーク設定
 no_adapter: Wi-Fiアダプターが見つかりません
 not_found: Wi-Fi ネットワークが見つかりません
 password: パスワード
-saved: 保存されたネットワーク
+saved: 保存済みネットワーク
 scanning: ネットワークのスキャン
 secured: 暗号化されたネットワーク

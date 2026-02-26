@@ -2,7 +2,7 @@ goodbye: さようなら{{0}}
 hibernate: 休止状態
 lock: ロックセッション
 log_out: ログアウト
-reboot: リブート
+reboot: 再起動
 shutdown: 電源を切る
-suspend: つるす
+suspend: スリープ
 uptime: 稼働時間
