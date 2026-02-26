@@ -1,17 +1,17 @@
 all: すべてのアプリ
 back: 戻る
-disband: フォルダの解散
+disband: フォルダの登録解除
 folder: フォルダー
-no_matching_items: 検索に一致するアイテムは見つかりませんでした
+no_matching_items: 検索に一致するアイテムはありません
 open_file_location: ファイルの場所を開く
-pin: ピン
+pin: ピン留め
 query:
   all: 全て
   apps: アプリ
   files: ファイル
   web: ウェブ
 run_as_admin: 管理者として実行
-unpin: 固定を解除する
-web_search: Enter キーを押して Web を検索します
+unpin: ピン留め解除
+web_search: Enter キーを押して Web を検索
 welcome_message: Seelen UI アプリ メニューへようこそ。
 welcome_message2: このタブでは、お気に入りのアプリをピン留めできます。
