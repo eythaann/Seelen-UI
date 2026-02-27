@@ -27,6 +27,7 @@
 - external links being opened on webview instead external browser.
 - apps menu widget freeze on search.
 - change wallpaper shortcuts not working.
+- apps menu drag and drop.
 
 ## [2.5.1]
 

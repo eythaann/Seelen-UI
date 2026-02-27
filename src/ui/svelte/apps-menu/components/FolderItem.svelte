@@ -3,7 +3,7 @@
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
-  import { createDraggable, createDroppable } from "@dnd-kit/svelte";
+  import { createSortable } from "@dnd-kit/svelte/sortable";
   import FolderModal from "./FolderModal.svelte";
   import type { StartMenuItem } from "@seelen-ui/lib/types";
 
@@ -35,19 +35,15 @@
     })),
   );
 
-  const draggable = $derived(
-    createDraggable({
-      id: folder.itemId,
-      type: "folder",
-    }),
-  );
-
-  const droppable = $derived(
-    createDroppable({
-      id: folder.itemId,
-      type: "folder",
-    }),
-  );
+  const sortable = createSortable({
+    get id() {
+      return folder.itemId;
+    },
+    get index() {
+      return idx;
+    },
+    type: "folder",
+  });
 
   function openModal() {
     isModalOpen = true;
@@ -59,13 +55,13 @@
 </script>
 
 <button
-  {@attach draggable.attach}
-  {@attach droppable.attach}
+  {@attach sortable.attach}
+  {@attach sortable.attachHandle}
   data-item-id={folder.itemId}
   class="folder"
   class:preselected={isPreselected && globalState.searchQuery}
-  class:is-dragging={draggable.isDragging}
-  class:is-dropping={draggable.isDropping}
+  class:is-dragging={sortable.isDragging}
+  class:is-dropping={sortable.isDropping}
   class:is-drop-target={isActiveDropzone}
   onclick={openModal}
   oncontextmenu={(event) => {

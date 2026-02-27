@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "@dnd-kit/abstract": "^0.3.2",
-    "@dnd-kit/helpers": "^0.3.1",
-    "@dnd-kit/react": "^0.3.1",
+    "@dnd-kit/helpers": "^0.3.2",
+    "@dnd-kit/react": "^0.3.2",
     "@dnd-kit/svelte": "^0.3.2",
     "@m31coding/fuzzy-search": "^2.0.0",
     "@preact/compat": "^18.3.1",
