@@ -76,6 +76,12 @@ devtools:
   install_folder: Installi kaust
   load: Laadima
   settings_file: Seadete fail
+  simulate_perm:
+    label: Simuleeri vidina loa taotlust
+    result_allowed: ✓ Luba antud
+    result_denied: ✗ Luba ei antud
+    trigger: Simuleerida
+    widget_id_placeholder: '@autor/vidina nimi'
 extras:
   clear_icons: Tühjenda süsteemi ikoonide vahemälu
   clear_icons_tooltip: Kõigi vidinate täielikuks jõustumiseks võib olla vajalik taaskäivitamine.
@@ -90,6 +96,11 @@ extras:
 general:
   accent_color: Aktsentvärv
   date_format: Kuupäeva vorming
+  hardware_acceleration: Riistvaraline kiirendus
+  hardware_acceleration_description: >-
+    Riistvaralise kiirenduse keelamine vähendab mälukasutust, kuid võib
+    põhjustada jõudlusprobleeme. Seda on ohutu keelata, kui te ei kasuta
+    reaalajas taustapilte.
   icon_pack:
     available: Saadaval ikoonipaketid
     selected: Aktiivsed ikoonipaketid
@@ -166,6 +177,7 @@ review_request:
   title: Kas teile meeldib Seeleni kasutajaliides?
 save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
+search: Otsi
 see_more: Vaata lähemalt
 shortcuts:
   duplicate_error: See otsetee on dubleeritud

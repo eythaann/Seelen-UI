@@ -75,6 +75,12 @@ devtools:
   install_folder: مجلد التثبيت
   load: تحميل
   settings_file: ملف الإعدادات
+  simulate_perm:
+    label: محاكاة طلب إذن القطعة
+    result_allowed: ✓ تم منح الإذن
+    result_denied: ✗ تم رفض الإذن
+    trigger: محاكاة
+    widget_id_placeholder: '@author/اسم القطعة'
 extras:
   clear_icons: مسح ذاكرة التخزين المؤقت لأيقونات النظام
   clear_icons_tooltip: قد تكون إعادة التشغيل مطلوبة لتدخل جميع الأدوات حيز التنفيذ بالكامل
@@ -88,6 +94,10 @@ extras:
 general:
   accent_color: اللون الثانوي
   date_format: تنسيق التاريخ
+  hardware_acceleration: تسريع الأجهزة
+  hardware_acceleration_description: >-
+    سيؤدي تعطيل تسريع الأجهزة إلى تقليل استخدام الذاكرة، ولكنه قد يسبب مشكلات في
+    الأداء. يعد تعطيله آمنًا إذا كنت لن تستخدم خلفيات حية.
   icon_pack:
     available: حزم الأيقونات المتوفرة
     selected: حزم الأيقونات النشطة
@@ -160,6 +170,7 @@ review_request:
   title: هل تستمتع بواجهة Seelen؟
 save: حفظ
 save_and_restart: حفظ وإعد التشغيل
+search: يبحث
 see_more: شاهد المزيد
 shortcuts:
   duplicate_error: هذا الاختصار مكرر

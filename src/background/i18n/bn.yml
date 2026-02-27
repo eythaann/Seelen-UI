@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: যে কোনও কী সংমিশ্রণ টিপুন
     title: নতুন শর্টকাট নিবন্ধন
+widget_liveness:
+  failed_description: |-
+    উইজেট '%{widget_name}' অনেকবার সাড়া দেওয়া বন্ধ করেছে।
+
+    আপনি অ্যাপটি পুনরায় চালু করার চেষ্টা করতে পারেন।
+  failed_title: উইজেট ত্রুটি
+widget_permissions:
+  perm_open_file: ফাইল খুলুন
+  perm_run: প্রোগ্রাম চালান
+  request_description: |-
+    উইজেট '%{widget_name}' %{command}-এর কাছে অনুমতির অনুরোধ করছে।
+
+    আপনি এই অনুমতি দিতে চান?
+  request_title: উইজেট অনুমতি অনুরোধ

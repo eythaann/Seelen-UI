@@ -70,6 +70,12 @@ devtools:
   install_folder: 安装文件夹
   load: 加载
   settings_file: 设置文件
+  simulate_perm:
+    label: 模拟Widget权限请求
+    result_allowed: ✓ 已获得许可
+    result_denied: ✗ 权限被拒绝
+    trigger: 模拟
+    widget_id_placeholder: '@作者/小部件名称'
 extras:
   clear_icons: 清除系统图标缓存
   clear_icons_tooltip: 可能需要重启才能在所有小部件上完全生效
@@ -81,6 +87,8 @@ extras:
 general:
   accent_color: 主色调
   date_format: 日期格式
+  hardware_acceleration: 硬件加速
+  hardware_acceleration_description: 禁用硬件加速会减少内存使用量，但可能会导致性能问题。 如果您不使用动态壁纸，可以安全禁用。
   icon_pack:
     available: 可用图标包
     selected: 当前图标包
@@ -153,6 +161,7 @@ review_request:
   title: 喜欢 Seelen UI 吗？
 save: 保存
 save_and_restart: 保存并重启
+search: 搜索
 see_more: 查看更多
 shortcuts:
   duplicate_error: 该快捷键重复

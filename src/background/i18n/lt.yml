@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Paspauskite bet kurį raktų derinį
     title: Registruojant naują nuorodą
+widget_liveness:
+  failed_description: |-
+    Valdiklis '%{widget_name}' nustojo reaguoti per daug kartų.
+
+    Galite pabandyti iš naujo paleisti programą.
+  failed_title: Valdiklio klaida
+widget_permissions:
+  perm_open_file: atidaryti failus
+  perm_run: paleisti programas
+  request_description: |-
+    Valdiklis '%{widget_name}' prašo leidimo %{command}.
+
+    Ar norite tai leisti?
+  request_title: Valdiklio leidimo užklausa

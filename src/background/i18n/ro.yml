@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Apăsați orice combinație de taste
     title: Înregistrarea unei noi comenzi rapide
+widget_liveness:
+  failed_description: |-
+    Widgetul „%{widget_name}” nu mai răspunde de prea multe ori.
+
+    Puteți încerca să reporniți aplicația.
+  failed_title: Eroare widget
+widget_permissions:
+  perm_open_file: deschide fișiere
+  perm_run: rulați programe
+  request_description: |-
+    Widgetul „%{widget_name}” solicită permisiunea %{command}.
+
+    Doriți să permiteți acest lucru?
+  request_title: Solicitare de permisiune pentru widgeturi

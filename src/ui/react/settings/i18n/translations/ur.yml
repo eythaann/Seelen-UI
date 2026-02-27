@@ -77,6 +77,12 @@ devtools:
   install_folder: انسٹالیشن فولڈر
   load: لوڈ
   settings_file: سیٹنگ فاعل
+  simulate_perm:
+    label: ویجیٹ کی اجازت کی درخواست کی تقلید کریں۔
+    result_allowed: ✓ اجازت دی گئی۔
+    result_denied: ✗ اجازت مسترد کر دی گئی۔
+    trigger: نقل کرنا
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: صاف نظام شبیہیں کیشے
   clear_icons_tooltip: دوبارہ شروع کرنے کے لئے تمام ویجٹوں پر مکمل اثر ڈالنے کی ضرورت ہوسکتی ہے
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: رنگ
   date_format: تاریخ کی شکل
+  hardware_acceleration: ہارڈ ویئر ایکسلریشن
+  hardware_acceleration_description: >-
+    ہارڈویئر ایکسلریشن کو غیر فعال کرنے سے میموری کا استعمال کم ہو جائے گا، لیکن
+    کارکردگی کے مسائل پیدا ہو سکتے ہیں۔ اگر آپ لائیو وال پیپر استعمال نہیں کریں
+    گے تو اسے غیر فعال کرنا محفوظ ہے۔
   icon_pack:
     available: دستیاب آئیکن پیک
     selected: ایکٹو آئیکن پیک
@@ -167,6 +178,7 @@ review_request:
   title: سیلین UI سے لطف اندوز ہو رہے ہو؟
 save: محفوظ کریں
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
+search: تلاش کریں۔
 see_more: مزید دیکھیں
 shortcuts:
   duplicate_error: اس شارٹ کٹ کو نقل کیا گیا ہے

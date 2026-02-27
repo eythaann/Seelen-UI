@@ -77,6 +77,12 @@ devtools:
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
+  simulate_perm:
+    label: ვიჯეტის ნებართვის მოთხოვნის სიმულაცია
+    result_allowed: ✓ გაცემულია ნებართვა
+    result_denied: ✗ ნებართვა უარყოფილია
+    trigger: სიმულაცია
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: სუფთა სისტემის ხატები ქეში
   clear_icons_tooltip: გადატვირთვა შეიძლება საჭირო გახდეს, რომ სრულად იმოქმედოს ყველა ვიჯეტზე
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: აქცენტის ფერი
   date_format: თარიღის ფორმატი
+  hardware_acceleration: აპარატურის აჩქარება
+  hardware_acceleration_description: >-
+    ტექნიკის აჩქარების გამორთვა შეამცირებს მეხსიერების გამოყენებას, მაგრამ
+    შეიძლება გამოიწვიოს მუშაობის პრობლემები. უსაფრთხოა გამორთვა, თუ არ
+    გამოიყენებთ ცოცხალ ფონებს.
   icon_pack:
     available: ხელმისაწვდომი ხატების პაკეტები
     selected: აქტიური ხატების პაკეტები
@@ -165,6 +176,7 @@ review_request:
   title: მოგწონთ Seelen UI?
 save: Გადარჩენა
 save_and_restart: შენახვა და გადატვირთვა
+search: ძიება
 see_more: იხილეთ მეტი
 shortcuts:
   duplicate_error: ეს მალსახმობი დუბლირებულია

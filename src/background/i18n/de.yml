@@ -44,3 +44,17 @@ shortcut:
   register:
     placeholder: Drücken Sie eine beliebige Tastenkombination
     title: Registrierung einer neuen Verknüpfung
+widget_liveness:
+  failed_description: |-
+    Das Widget „%{widget_name}“ reagierte zu oft nicht mehr.
+
+    Sie können versuchen, die App neu zu starten.
+  failed_title: Widget-Fehler
+widget_permissions:
+  perm_open_file: Dateien öffnen
+  perm_run: Programme ausführen
+  request_description: |-
+    Das Widget „%{widget_name}“ fordert die Berechtigung für %{command} an.
+
+    Möchten Sie dies zulassen?
+  request_title: Widget-Berechtigungsanfrage

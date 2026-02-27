@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Nhấn bất kỳ kết hợp khóa nào
     title: Đăng ký phím tắt mới
+widget_liveness:
+  failed_description: |-
+    Tiện ích '%{widget_name}' đã ngừng phản hồi quá nhiều lần.
+
+    Bạn có thể thử khởi động lại ứng dụng.
+  failed_title: Lỗi tiện ích
+widget_permissions:
+  perm_open_file: mở tập tin
+  perm_run: chạy chương trình
+  request_description: |-
+    Tiện ích '%{widget_name}' đang yêu cầu quyền đối với %{command}.
+
+    Bạn có muốn cho phép điều này?
+  request_title: Yêu cầu cấp phép tiện ích

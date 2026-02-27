@@ -38,3 +38,17 @@ shortcut:
   register:
     placeholder: Tryck på alla tangentkombinationer
     title: Registrera ny genväg
+widget_liveness:
+  failed_description: |-
+    Widgeten '%{widget_name}' slutade svara för många gånger.
+
+    Du kan prova att starta om appen.
+  failed_title: Widgetfel
+widget_permissions:
+  perm_open_file: öppna filer
+  perm_run: köra program
+  request_description: |-
+    Widgeten '%{widget_name}' begär tillstånd till %{command}.
+
+    Vill du tillåta detta?
+  request_title: Begäran om widgettillstånd

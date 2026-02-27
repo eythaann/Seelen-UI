@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Pressione qualquer combinação de tecla
     title: Registrando um novo atalho
+widget_liveness:
+  failed_description: |-
+    O widget '%{widget_name}' parou de responder muitas vezes.
+
+    Você pode tentar reiniciar o aplicativo.
+  failed_title: Erro de widget
+widget_permissions:
+  perm_open_file: abrir arquivos
+  perm_run: executar programas
+  request_description: |-
+    O widget '%{widget_name}' está solicitando permissão para %{command}.
+
+    Você quer permitir isso?
+  request_title: Solicitação de permissão de widget

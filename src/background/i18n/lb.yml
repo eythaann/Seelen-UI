@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Press all Tastekombinatioun
     title: Registréiert nei Ofkiirzung
+widget_liveness:
+  failed_description: |-
+    De Widget '%{widget_name}' huet opgehalen ze oft ze reagéieren.
+
+    Dir kënnt probéieren d'App nei ze starten.
+  failed_title: Widget Feeler
+widget_permissions:
+  perm_open_file: opmaachen Dateien
+  perm_run: lafen Programmer
+  request_description: |-
+    De Widget '%{widget_name}' freet d'Erlaabnes fir %{command}.
+
+    Wëllt Dir dëst erlaben?
+  request_title: Widget Erlaabnis Ufro

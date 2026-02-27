@@ -45,3 +45,19 @@ shortcut:
   register:
     placeholder: Pindutin ang anumang key na kumbinasyon
     title: Pagrehistro ng Bagong Shortcut
+widget_liveness:
+  failed_description: >-
+    Ang widget na '%{widget_name}' ay huminto sa pagtugon ng masyadong maraming
+    beses.
+
+
+    Maaari mong subukang i-restart ang app.
+  failed_title: Error sa Widget
+widget_permissions:
+  perm_open_file: buksan ang mga file
+  perm_run: magpatakbo ng mga programa
+  request_description: |-
+    Ang widget na '%{widget_name}' ay humihiling ng pahintulot na %{command}.
+
+    Gusto mo bang payagan ito?
+  request_title: Kahilingan ng Pahintulot sa Widget

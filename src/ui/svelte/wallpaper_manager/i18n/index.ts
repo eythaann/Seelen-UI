@@ -1,20 +1,6 @@
-import "moment/min/locales";
 import type { SupportedLanguagesCode } from "@seelen-ui/lib";
-import i18n from "i18next";
+import { locale, setMessages, t } from "libs/ui/svelte/utils";
 import yaml from "js-yaml";
-import { initReactI18next } from "react-i18next";
-
-i18n.use(initReactI18next).init(
-  {
-    lng: "en",
-    fallbackLng: "en",
-    interpolation: {
-      escapeValue: false,
-    },
-    resources: {},
-  },
-  undefined,
-);
 
 export async function loadTranslations() {
   const translations: Record<SupportedLanguagesCode, { default: string }> = {
@@ -29,8 +15,8 @@ export async function loadTranslations() {
     ru: await import("./translations/ru.yml"),
     "pt-BR": await import("./translations/pt-BR.yml"),
     "pt-PT": await import("./translations/pt-PT.yml"),
-    hi: await import("./translations/hi.yml"),
     ja: await import("./translations/ja.yml"),
+    hi: await import("./translations/hi.yml"),
     it: await import("./translations/it.yml"),
     nl: await import("./translations/nl.yml"),
     tr: await import("./translations/tr.yml"),
@@ -92,9 +78,12 @@ export async function loadTranslations() {
     zu: await import("./translations/zu.yml"),
   };
 
+  let temp: Record<string, any> = {};
   for (const [key, value] of Object.entries(translations)) {
-    i18n.addResourceBundle(key, "translation", yaml.load(value.default));
+    temp[key] = yaml.load(value.default);
   }
+
+  setMessages(temp);
 }
 
-export default i18n;
+export { locale, t };

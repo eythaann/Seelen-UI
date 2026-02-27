@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Нажмите любую комбинацию клавиш
     title: Зарегистрирование нового ярлыка
+widget_liveness:
+  failed_description: |-
+    Виджет «%{widget_name}» слишком много раз переставал отвечать.
+
+    Вы можете попробовать перезапустить приложение.
+  failed_title: Ошибка виджета
+widget_permissions:
+  perm_open_file: открывать файлы
+  perm_run: запускать программы
+  request_description: |-
+    Виджет «%{widget_name}» запрашивает разрешение на %{command}.
+
+    Вы хотите это разрешить?
+  request_title: Запрос разрешения виджета

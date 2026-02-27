@@ -77,6 +77,12 @@ devtools:
   install_folder: Installatioun Dossier
   load: Lueden
   settings_file: Settytout-Datei
+  simulate_perm:
+    label: Simulatioun Widget Erlaabnis Ufro
+    result_allowed: ✓ Erlaabnis gëtt
+    result_denied: ✗ Erlaabnis refuséiert
+    trigger: Simuléieren
+    widget_id_placeholder: '@auteur/widget-name'
 extras:
   clear_icons: Kloer System Symboler Cache
   clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Akzenter Faarf
   date_format: Datum Format
+  hardware_acceleration: Hardware Beschleunegung
+  hardware_acceleration_description: >-
+    Desaktivéiere vun Hardware Beschleunegung reduzéiert d'Erënnerungsverbrauch,
+    awer kann Performanceprobleemer verursaachen. Ass sécher ze deaktivéieren
+    wann Dir keng Live Wallpaper benotzt.
   icon_pack:
     available: Verfügbar Ikon Packs
     selected: Aktiv Ikon Packs
@@ -165,6 +176,7 @@ review_request:
   title: Genéisst Seelen UI?
 save: Spuerwäit
 save_and_restart: Spuert & nei starten
+search: Sichen
 see_more: Méi gesinn
 shortcuts:
   duplicate_error: Dës Ofkiirzung gëtt duplizéiert

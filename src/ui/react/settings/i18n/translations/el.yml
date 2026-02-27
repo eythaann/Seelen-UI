@@ -78,6 +78,12 @@ devtools:
   install_folder: Φάκελος εγκατάστασης
   load: Φορτώνω
   settings_file: Αρχείο ρυθμίσεων
+  simulate_perm:
+    label: Προσομοίωση αιτήματος άδειας γραφικού στοιχείου
+    result_allowed: ✓ Χορηγήθηκε άδεια
+    result_denied: ✗ Δεν επιτρέπεται η άδεια
+    trigger: Προσποιούμαι
+    widget_id_placeholder: '@συγγραφέας/όνομα γραφικού στοιχείου'
 extras:
   clear_icons: Εκκαθάριση προσωρινής μνήμης εικονιδίων συστήματος
   clear_icons_tooltip: Μπορεί να απαιτηθεί επανεκκίνηση για να ισχύσει πλήρως σε όλα τα widgets
@@ -92,6 +98,11 @@ extras:
 general:
   accent_color: Έμφαση στο χρώμα
   date_format: Μορφή ημερομηνίας
+  hardware_acceleration: Επιτάχυνση υλικού
+  hardware_acceleration_description: >-
+    Η απενεργοποίηση της επιτάχυνσης υλικού θα μειώσει τη χρήση της μνήμης, αλλά
+    μπορεί να προκαλέσει προβλήματα απόδοσης. Είναι ασφαλές να απενεργοποιήσετε
+    εάν δεν χρησιμοποιείτε ζωντανές ταπετσαρίες.
   icon_pack:
     available: Διαθέσιμα πακέτα εικονιδίων
     selected: Ενεργά πακέτα εικονιδίων
@@ -170,6 +181,7 @@ review_request:
   title: Σας αρέσει το Seelen UI;
 save: Αποθηκεύσετε
 save_and_restart: Αποθήκευση & επανεκκίνηση
+search: Ερευνα
 see_more: Δείτε περισσότερα
 shortcuts:
   duplicate_error: Αυτή η συντόμευση είναι διπλότυπη

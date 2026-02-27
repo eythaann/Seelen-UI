@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Premere qualsiasi combinazione di tasti
     title: Registrazione di nuovi collegamenti
+widget_liveness:
+  failed_description: |-
+    Il widget '%{widget_name}' ha smesso di rispondere troppe volte.
+
+    Puoi provare a riavviare l'app.
+  failed_title: Errore del widget
+widget_permissions:
+  perm_open_file: aprire file
+  perm_run: eseguire programmi
+  request_description: |-
+    Il widget '%{widget_name}' sta richiedendo l'autorizzazione a %{command}.
+
+    Vuoi consentire questo?
+  request_title: Richiesta di autorizzazione del widget

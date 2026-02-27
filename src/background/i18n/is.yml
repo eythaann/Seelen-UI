@@ -38,3 +38,17 @@ shortcut:
   register:
     placeholder: Ýttu á hvaða lykilsamsetningu sem er
     title: Að skrá nýja flýtileið
+widget_liveness:
+  failed_description: |-
+    Græjan '%{widget_name}' hætti að svara of oft.
+
+    Þú getur prófað að endurræsa forritið.
+  failed_title: Búnaður Villa
+widget_permissions:
+  perm_open_file: opna skrár
+  perm_run: keyra forrit
+  request_description: |-
+    Græjan '%{widget_name}' biður um leyfi til að %{command}.
+
+    Viltu leyfa þetta?
+  request_title: Beiðni um leyfi fyrir græju

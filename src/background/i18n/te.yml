@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: ఏదైనా కీ కలయిక నొక్కండి
     title: కొత్త సత్వరమార్గాన్ని నమోదు చేస్తోంది
+widget_liveness:
+  failed_description: |-
+    '%{widget_name}' విడ్జెట్ చాలా సార్లు ప్రతిస్పందించడం ఆగిపోయింది.
+
+    మీరు యాప్‌ని పునఃప్రారంభించి ప్రయత్నించవచ్చు.
+  failed_title: విడ్జెట్ లోపం
+widget_permissions:
+  perm_open_file: ఫైళ్లను తెరవండి
+  perm_run: కార్యక్రమాలను అమలు చేయండి
+  request_description: |-
+    '%{widget_name}' విడ్జెట్ %{command}కి అనుమతిని అభ్యర్థిస్తోంది.
+
+    మీరు దీన్ని అనుమతించాలనుకుంటున్నారా?
+  request_title: విడ్జెట్ అనుమతి అభ్యర్థన

@@ -77,6 +77,12 @@ devtools:
   install_folder: Folder de instalare
   load: Sarcină
   settings_file: Fișier de setări
+  simulate_perm:
+    label: Simulați cererea de permisiune pentru widget
+    result_allowed: ✓ Permisiune acordată
+    result_denied: ✗ Permisiune refuzată
+    trigger: Simula
+    widget_id_placeholder: '@autor/nume-widget'
 extras:
   clear_icons: Ștergeți memoria cache a pictogramelor de sistem
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Culoare de accent
   date_format: Formatul datei
+  hardware_acceleration: Accelerație hardware
+  hardware_acceleration_description: >-
+    Dezactivarea accelerației hardware va reduce utilizarea memoriei, dar poate
+    cauza probleme de performanță. Este sigur de dezactivat dacă nu folosiți
+    imagini de fundal live.
   icon_pack:
     available: Pachete de pictograme disponibile
     selected: Pachete de pictograme active
@@ -169,6 +180,7 @@ review_request:
   title: Vă bucurați de Seelen UI?
 save: Salvați
 save_and_restart: Salvați și reporniți
+search: Căutare
 see_more: A se vedea mai mult
 shortcuts:
   duplicate_error: Această comandă rapidă este duplicată

@@ -30,3 +30,17 @@ shortcut:
   register:
     placeholder: 按任何鍵組合
     title: 註冊新快捷方式
+widget_liveness:
+  failed_description: |-
+    小元件「%{widget_name}」停止回應的次數過多。
+
+    您可以嘗試重新啟動應用程式。
+  failed_title: 小部件錯誤
+widget_permissions:
+  perm_open_file: 開啟文件
+  perm_run: 運行程式
+  request_description: |-
+    小元件「%{widget_name}」正在請求 %{command} 的權限。
+
+    您想允許這樣做嗎？
+  request_title: 小部件權限請求

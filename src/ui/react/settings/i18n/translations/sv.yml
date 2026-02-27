@@ -77,6 +77,12 @@ devtools:
   install_folder: Installationsmapp
   load: Ladda
   settings_file: Inställningsfil
+  simulate_perm:
+    label: Simulera widgettillståndsbegäran
+    result_allowed: ✓ Tillstånd beviljat
+    result_denied: ✗ Tillstånd nekad
+    trigger: Simulera
+    widget_id_placeholder: '@författare/widget-namn'
 extras:
   clear_icons: Rensa cachen för systemikoner
   clear_icons_tooltip: En omstart kan krävas för att få full effekt på alla widgets
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Accentfärg
   date_format: Datumformat
+  hardware_acceleration: Hårdvaruacceleration
+  hardware_acceleration_description: >-
+    Om du inaktiverar hårdvaruacceleration minskar minnesanvändningen, men kan
+    orsaka prestandaproblem. Är säkert att inaktivera om du inte använder
+    levande bakgrundsbilder.
   icon_pack:
     available: Tillgängliga ikonpaket
     selected: Aktiva ikonpaket
@@ -167,6 +178,7 @@ review_request:
   title: Gillar du Seelen UI?
 save: Spara
 save_and_restart: Spara och starta om
+search: Söka
 see_more: Se mer
 shortcuts:
   duplicate_error: Den här genvägen är duplicerad

@@ -77,6 +77,12 @@ devtools:
   install_folder: Инсталациона мапа
   load: Оптеретити
   settings_file: Подешавања
+  simulate_perm:
+    label: Симулирајте захтев за дозволу за виџет
+    result_allowed: ✓ Дозвола је дата
+    result_denied: ✗ Дозвола одбијена
+    trigger: Симулирајте
+    widget_id_placeholder: '@аутхор/видгет-наме'
 extras:
   clear_icons: Цлеар Систем Ицонс Цацхе
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Боја нагласности
   date_format: Формат датума
+  hardware_acceleration: Хардверско убрзање
+  hardware_acceleration_description: >-
+    Онемогућавање хардверског убрзања ће смањити употребу меморије, али може
+    изазвати проблеме са перформансама. Безбедно је онемогућити ако не желите да
+    користите живе позадине.
   icon_pack:
     available: Доступни пакети икона
     selected: Активни пакети икона
@@ -167,6 +178,7 @@ review_request:
   title: Уживате у корисничком интерфејсу Сеелен?
 save: сачувати
 save_and_restart: Сачувај и поново покрените
+search: Тражи
 see_more: Видети више
 shortcuts:
   duplicate_error: Ова пречица је дуплирана

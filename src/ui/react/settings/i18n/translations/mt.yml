@@ -77,6 +77,12 @@ devtools:
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
   settings_file: Settings Fajl
+  simulate_perm:
+    label: Issimula Talba ta' Permess għal Widget
+    result_allowed: ✓ Permess mogħti
+    result_denied: ✗ Permess miċħud
+    trigger: Issimula
+    widget_id_placeholder: '@ awtur/widget-isem'
 extras:
   clear_icons: Ikoni tas-sistema ċara cache
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Kulur tal-aċċent
   date_format: Format tad-data
+  hardware_acceleration: Aċċelerazzjoni tal-Hardware
+  hardware_acceleration_description: >-
+    Id-diżattivazzjoni tal-aċċelerazzjoni tal-ħardwer tnaqqas l-użu tal-memorja,
+    iżda tista 'tikkawża problemi ta' prestazzjoni. Huwa sikur li tiddiżattiva
+    jekk mhux se tuża wallpapers ħajjin.
   icon_pack:
     available: Pakketti ta' Ikoni Disponibbli
     selected: Pakketti tal-Ikoni Attivi
@@ -169,6 +180,7 @@ review_request:
   title: Tgawdi Seelen UI?
 save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
+search: Fittex
 see_more: Ara aktar
 shortcuts:
   duplicate_error: Din is-shortcut hija duplikata

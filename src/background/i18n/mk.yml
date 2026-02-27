@@ -44,3 +44,17 @@ shortcut:
   register:
     placeholder: Притиснете која било комбинација на копче
     title: Регистрирање на нова кратенка
+widget_liveness:
+  failed_description: |-
+    Виџетот „%{widget_name}“ престана да реагира премногу пати.
+
+    Може да се обидете да ја рестартирате апликацијата.
+  failed_title: Грешка во виџетот
+widget_permissions:
+  perm_open_file: отворени датотеки
+  perm_run: стартувајте програми
+  request_description: |-
+    Виџетот „%{widget_name}“ бара дозвола за %{command}.
+
+    Дали сакате да го дозволите ова?
+  request_title: Барање за дозвола за виџети

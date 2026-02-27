@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Tekan sebarang gabungan kekunci
     title: Mendaftarkan pintasan baru
+widget_liveness:
+  failed_description: |-
+    Widget '%{widget_name}' berhenti bertindak balas terlalu banyak kali.
+
+    Anda boleh cuba memulakan semula apl.
+  failed_title: Ralat Widget
+widget_permissions:
+  perm_open_file: buka fail
+  perm_run: menjalankan program
+  request_description: |-
+    Widget '%{widget_name}' meminta kebenaran untuk %{command}.
+
+    Adakah anda mahu membenarkan ini?
+  request_title: Permintaan Kebenaran Widget

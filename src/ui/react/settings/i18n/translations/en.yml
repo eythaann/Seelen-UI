@@ -68,7 +68,6 @@ apps_configurations:
 cancel: Cancel
 close: Close
 delete: Delete
-search: Search
 devtools:
   app_folders: App Folders
   custom_config_file: Load Custom Config File
@@ -79,10 +78,10 @@ devtools:
   settings_file: Settings File
   simulate_perm:
     label: Simulate Widget Permission Request
-    widget_id_placeholder: "@author/widget-name"
+    result_allowed: ✓ Permission granted
+    result_denied: ✗ Permission denied
     trigger: Simulate
-    result_allowed: "✓ Permission granted"
-    result_denied: "✗ Permission denied"
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: Clear System Icons Cache
   clear_icons_tooltip: A restart could be required to fully take effect on all widgets
@@ -97,6 +96,10 @@ extras:
 general:
   accent_color: Accent Color
   date_format: Date Format
+  hardware_acceleration: Hardware Acceleration
+  hardware_acceleration_description: >-
+    Disabling hardware acceleration will reduce memory usage, but can cause
+    performance issues. Is safe to disable if you won't use live wallpapers.
   icon_pack:
     available: Available Icon Packs
     selected: Active Icon Packs
@@ -171,6 +174,7 @@ review_request:
   title: Enjoying Seelen UI?
 save: Save
 save_and_restart: Save & Restart
+search: Search
 see_more: See More
 shortcuts:
   duplicate_error: This shortcut is duplicated

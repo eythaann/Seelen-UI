@@ -36,3 +36,17 @@ shortcut:
   register:
     placeholder: په هر کلي ترکیب فشار ورکړئ
     title: د نوي لنډلارې ثبت کول
+widget_liveness:
+  failed_description: |-
+    ویجیټ '%{widget_name}' ډیر ځله ځواب ورکول بند کړل.
+
+    تاسو کولی شئ د اپلیکیشن بیا پیلولو هڅه وکړئ.
+  failed_title: د ویجټ تېروتنه
+widget_permissions:
+  perm_open_file: فایلونه خلاص کړئ
+  perm_run: پروګرامونه چلوي
+  request_description: |-
+    ویجټ '%{widget_name}' %{command} ته د اجازې غوښتنه کوي.
+
+    ایا تاسو غواړئ دا اجازه ورکړئ؟
+  request_title: د ویجټ اجازې غوښتنه

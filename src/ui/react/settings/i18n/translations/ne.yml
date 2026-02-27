@@ -77,6 +77,12 @@ devtools:
   install_folder: स्थापना फोल्डर
   load: बोभ्क
   settings_file: सेटिंग्स फाइल
+  simulate_perm:
+    label: विजेट अनुमति अनुरोध सिमुलेट
+    result_allowed: ✓ अनुमति दिइएको छ
+    result_denied: ✗ अनुमति अस्वीकार गरियो
+    trigger: अनुकरण गर्नुहोस्
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: स्पष्ट प्रणाली आइकनहरू क्यास
   clear_icons_tooltip: 'सबै विजेटहरूमा पूर्ण रूपमा प्रभाव लिनको लागि एक पुन: सुरू गर्न आवश्यक पर्दछ'
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: हिम्मता रंग
   date_format: मिति ढाँचा
+  hardware_acceleration: हार्डवेयर एक्सेलेरेशन
+  hardware_acceleration_description: >-
+    हार्डवेयर एक्सेलेरेशन असक्षम गर्नाले मेमोरीको प्रयोग घटाउनेछ, तर
+    कार्यसम्पादन समस्याहरू निम्त्याउन सक्छ। यदि तपाइँ लाइभ वालपेपर प्रयोग
+    गर्नुहुन्न भने असक्षम गर्न सुरक्षित छ।
   icon_pack:
     available: उपलब्ध आइकन प्याकहरू
     selected: सक्रिय आइकन प्याकहरू
@@ -167,6 +178,7 @@ review_request:
   title: Seelen UI को मजा लिदै हुनुहुन्छ?
 save: बचाउनु
 save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
+search: खोज्नुहोस्
 see_more: अझ हेर्नुहोस्
 shortcuts:
   duplicate_error: यो सर्टकट दोहोरिएको छ

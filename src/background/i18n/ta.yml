@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: எந்த முக்கிய கலவையையும் அழுத்தவும்
     title: புதிய குறுக்குவழியை பதிவு செய்தல்
+widget_liveness:
+  failed_description: |-
+    '%{widget_name}' விட்ஜெட் பலமுறை பதிலளிப்பதை நிறுத்தியது.
+
+    நீங்கள் பயன்பாட்டை மறுதொடக்கம் செய்ய முயற்சி செய்யலாம்.
+  failed_title: விட்ஜெட் பிழை
+widget_permissions:
+  perm_open_file: கோப்புகளைத் திறக்கவும்
+  perm_run: நிரல்களை இயக்கவும்
+  request_description: |-
+    விட்ஜெட் '%{widget_name}' %{command}க்கு அனுமதி கோருகிறது.
+
+    இதை அனுமதிக்க விரும்புகிறீர்களா?
+  request_title: விட்ஜெட் அனுமதி கோரிக்கை

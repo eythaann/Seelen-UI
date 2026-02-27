@@ -76,6 +76,12 @@ devtools:
   install_folder: Folda ya usanikishaji
   load: Mzigo
   settings_file: Faili ya mipangilio
+  simulate_perm:
+    label: Iga Ombi la Ruhusa ya Wijeti
+    result_allowed: ✓ Ruhusa imetolewa
+    result_denied: ✗ Ruhusa imekataliwa
+    trigger: Iga
+    widget_id_placeholder: '@mwandishi/wijeti-jina'
 extras:
   clear_icons: Kashe ya icons za mfumo wazi
   clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
@@ -90,6 +96,11 @@ extras:
 general:
   accent_color: Rangi ya lafudhi
   date_format: Muundo wa tarehe
+  hardware_acceleration: Kuongeza kasi ya vifaa
+  hardware_acceleration_description: >-
+    Kuzima uongezaji kasi wa maunzi kutapunguza matumizi ya kumbukumbu, lakini
+    kunaweza kusababisha matatizo ya utendaji. Ni salama kuzima ikiwa hutatumia
+    mandhari hai.
   icon_pack:
     available: Vifurushi vya ikoni vinavyopatikana
     selected: Vifurushi vya ikoni zinazotumika
@@ -164,6 +175,7 @@ review_request:
   title: Je, unafurahia UI ya Seelen?
 save: Kuokoa
 save_and_restart: Okoa na uanze tena
+search: Tafuta
 see_more: Tazama zaidi
 shortcuts:
   duplicate_error: Njia hii ya mkato imerudiwa

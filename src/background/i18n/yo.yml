@@ -36,3 +36,17 @@ shortcut:
   register:
     placeholder: Tẹ eyikeyi apapo bọtini
     title: Sisọ ọrọ abuja tuntun
+widget_liveness:
+  failed_description: |-
+    Ẹrọ ailorukọ '%{widget_name}' dẹkun idahun ni ọpọlọpọ igba.
+
+    O le gbiyanju lati tun app naa bẹrẹ.
+  failed_title: Aṣiṣe ẹrọ ailorukọ
+widget_permissions:
+  perm_open_file: ṣii awọn faili
+  perm_run: ṣiṣe awọn eto
+  request_description: |-
+    Ẹrọ ailorukọ '%{widget_name}' n beere fun igbanilaaye lati %{command}.
+
+    Ṣe o fẹ gba eyi laaye?
+  request_title: Ibeere Gbigbanilaaye ailorukọ

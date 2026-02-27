@@ -77,6 +77,12 @@ devtools:
   install_folder: Инсталационна папка
   load: Зареждане
   settings_file: Файл за настройки
+  simulate_perm:
+    label: Искане за разрешение за симулиране на Widget
+    result_allowed: ✓ Предоставено разрешение
+    result_denied: ✗ Разрешението е отказано
+    trigger: Симулирайте
+    widget_id_placeholder: '@автор/име-на-притурка'
 extras:
   clear_icons: Изчистване на кеша на системните икони
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Цвят на акцент
   date_format: Формат на дата
+  hardware_acceleration: Хардуерно ускорение
+  hardware_acceleration_description: >-
+    Деактивирането на хардуерното ускорение ще намали използването на паметта,
+    но може да причини проблеми с производителността. Безопасно е да се
+    деактивира, ако няма да използвате живи тапети.
   icon_pack:
     available: Налични пакети с икони
     selected: Активни пакети с икони
@@ -169,6 +180,7 @@ review_request:
   title: Харесвате ли Seelen UI?
 save: Запазете
 save_and_restart: Запазване и рестартиране
+search: Търсене
 see_more: Вижте повече
 shortcuts:
   duplicate_error: Този пряк път е дублиран

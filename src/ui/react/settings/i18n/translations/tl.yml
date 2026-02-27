@@ -79,6 +79,12 @@ devtools:
   install_folder: Folder ng pag -install
   load: Mag -load
   settings_file: File ng mga setting
+  simulate_perm:
+    label: Gayahin ang Kahilingan ng Pahintulot sa Widget
+    result_allowed: ✓ Ipinagkaloob ang pahintulot
+    result_denied: ✗ Tinanggihan ang pahintulot
+    trigger: Gayahin
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: I -clear ang Mga Icon ng System Cache
   clear_icons_tooltip: >-
@@ -95,6 +101,11 @@ extras:
 general:
   accent_color: Kulay ng accent
   date_format: Format ng petsa
+  hardware_acceleration: Pagpapabilis ng Hardware
+  hardware_acceleration_description: >-
+    Ang hindi pagpapagana ng hardware acceleration ay makakabawas sa paggamit ng
+    memory, ngunit maaaring magdulot ng mga isyu sa performance. Ligtas na hindi
+    paganahin kung hindi ka gagamit ng mga live na wallpaper.
   icon_pack:
     available: Magagamit na Mga Icon Pack
     selected: Mga Aktibong Icon Pack
@@ -173,6 +184,7 @@ review_request:
   title: Nasisiyahan sa Seelen UI?
 save: I -save
 save_and_restart: I -save at i -restart
+search: Maghanap
 see_more: Makita pa
 shortcuts:
   duplicate_error: Ang shortcut na ito ay nadoble

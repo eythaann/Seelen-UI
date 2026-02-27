@@ -36,3 +36,17 @@ shortcut:
   register:
     placeholder: Vajutage mis tahes võtmekombinatsiooni
     title: Uue otsetee registreerimine
+widget_liveness:
+  failed_description: |-
+    Vidin '%{widget_name}' lõpetas reageerimise liiga palju kordi.
+
+    Võite proovida rakenduse taaskäivitada.
+  failed_title: Vidina viga
+widget_permissions:
+  perm_open_file: failid avada
+  perm_run: käivitada programme
+  request_description: |-
+    Vidin '%{widget_name}' taotleb luba käsule %{command}.
+
+    Kas soovite seda lubada?
+  request_title: Vidina loa taotlus

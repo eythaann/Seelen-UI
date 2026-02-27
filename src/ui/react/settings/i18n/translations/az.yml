@@ -76,6 +76,12 @@ devtools:
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
   settings_file: Parametrlər faylı
+  simulate_perm:
+    label: Widget İcazə Sorğunu simulyasiya edin
+    result_allowed: ✓ İcazə verildi
+    result_denied: ✗ İcazə rədd edildi
+    trigger: Simulyasiya edin
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: Sistem nişanlar önbelleği təmizləyin
   clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
@@ -90,6 +96,11 @@ extras:
 general:
   accent_color: Vurğu
   date_format: Tarix formatı
+  hardware_acceleration: Avadanlıq sürətləndirilməsi
+  hardware_acceleration_description: >-
+    Aparat sürətləndirilməsinin söndürülməsi yaddaş istifadəsini azaldacaq,
+    lakin performans problemlərinə səbəb ola bilər. Canlı divar kağızlarından
+    istifadə etməyəcəksinizsə, onu söndürmək təhlükəsizdir.
   icon_pack:
     available: Mövcud İkon Paketləri
     selected: Aktiv İkon Paketləri
@@ -166,6 +177,7 @@ review_request:
   title: Seelen UI-dən zövq alırsınız?
 save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
+search: Axtar
 see_more: Daha çoxuna baxın
 shortcuts:
   duplicate_error: Bu qısayol dublikatdır

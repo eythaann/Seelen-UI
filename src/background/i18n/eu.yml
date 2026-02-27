@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Sakatu edozein tekla konbinazio
     title: Lasterbide berria erregistratzea
+widget_liveness:
+  failed_description: |-
+    '%{widget_name}' widgetak gehiegitan erantzuteari utzi zion.
+
+    Aplikazioa berrabiarazten saia zaitezke.
+  failed_title: Widgetaren errorea
+widget_permissions:
+  perm_open_file: ireki fitxategiak
+  perm_run: exekutatu programak
+  request_description: |-
+    '%{widget_name}' widget-ak %{command}-i baimena eskatzen dio.
+
+    Hau onartu nahi duzu?
+  request_title: Widget-en baimen-eskaera

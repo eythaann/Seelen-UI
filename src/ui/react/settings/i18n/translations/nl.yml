@@ -77,6 +77,12 @@ devtools:
   install_folder: Installatiemap
   load: Laden
   settings_file: Instellingenbestand
+  simulate_perm:
+    label: Simuleer het verzoek om widgettoestemming
+    result_allowed: ✓ Toestemming verleend
+    result_denied: ✗ Toestemming geweigerd
+    trigger: Simuleren
+    widget_id_placeholder: '@auteur/widgetnaam'
 extras:
   clear_icons: Systeempictogrammen cache wissen
   clear_icons_tooltip: Er kan een herstart nodig zijn om volledig effect te hebben op alle widgets
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Accent kleur
   date_format: Datumformaat
+  hardware_acceleration: Hardwareversnelling
+  hardware_acceleration_description: >-
+    Het uitschakelen van hardwareversnelling vermindert het geheugengebruik,
+    maar kan prestatieproblemen veroorzaken. Is veilig uit te schakelen als u
+    geen live achtergronden gebruikt.
   icon_pack:
     available: Beschikbare pictogrampakketten
     selected: Actieve pictogrampakketten
@@ -165,6 +176,7 @@ review_request:
   title: Geniet je van de Seelen-gebruikersinterface?
 save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
+search: Zoekopdracht
 see_more: Meer zien
 shortcuts:
   duplicate_error: Deze snelkoppeling is gedupliceerd

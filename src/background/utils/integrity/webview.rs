@@ -55,7 +55,7 @@ pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<(
 pub fn check_for_webview_optimal_state(app: &tauri::AppHandle) -> Result<()> {
     start_integrity_thread(app.clone());
     let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode("@seelen/integrity");
-    let args = WebviewArgs::new().disable_gpu();
+    let args = WebviewArgs::default();
 
     let window = tauri::WebviewWindowBuilder::new(
         app,

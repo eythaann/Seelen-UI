@@ -77,6 +77,12 @@ devtools:
   install_folder: Uppsetningarmöppu
   load: Hlaða
   settings_file: Stillingarskrá
+  simulate_perm:
+    label: Líktu eftir beiðni um leyfi fyrir græju
+    result_allowed: ✓ Leyfi veitt
+    result_denied: ✗ Leyfi hafnað
+    trigger: Herma eftir
+    widget_id_placeholder: '@höfundur/nafn búnaðar'
 extras:
   clear_icons: Hreinsa kerfistákn skyndiminni
   clear_icons_tooltip: Endurræsing gæti verið nauðsynleg til að taka gildi að fullu á allar búnaðir
@@ -91,6 +97,10 @@ extras:
 general:
   accent_color: Hreim litur
   date_format: Dagsetningarsnið
+  hardware_acceleration: Vélbúnaðarhröðun
+  hardware_acceleration_description: >-
+    Slökkt er á vélbúnaðarhröðun mun draga úr minnisnotkun en getur valdið
+    afköstum. Er óhætt að slökkva á því ef þú notar ekki lifandi veggfóður.
   icon_pack:
     available: Lausir táknpakkar
     selected: Virkir táknpakkar
@@ -165,6 +175,7 @@ review_request:
   title: Hefurðu gaman af Seelen UI?
 save: Vista
 save_and_restart: Vista og endurræsa
+search: Leita
 see_more: Sjáðu meira
 shortcuts:
   duplicate_error: Þessi flýtileið er afrituð

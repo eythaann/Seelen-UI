@@ -32,3 +32,17 @@ shortcut:
   register:
     placeholder: לחץ על כל שילוב מקשים
     title: רישום קיצור דרך חדש
+widget_liveness:
+  failed_description: |-
+    הווידג'ט '%{widget_name}' הפסיק להגיב יותר מדי פעמים.
+
+    אתה יכול לנסות להפעיל מחדש את האפליקציה.
+  failed_title: שגיאת ווידג'ט
+widget_permissions:
+  perm_open_file: לפתוח קבצים
+  perm_run: להפעיל תוכניות
+  request_description: |-
+    הווידג'ט '%{widget_name}' מבקש הרשאה ל-%{command}.
+
+    האם אתה רוצה לאפשר זאת?
+  request_title: בקשת הרשאת יישומון

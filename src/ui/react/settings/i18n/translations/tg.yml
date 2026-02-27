@@ -77,6 +77,12 @@ devtools:
   install_folder: Феҳристи насб
   load: Сарборӣ
   settings_file: Файлҳои танзимот
+  simulate_perm:
+    label: Дархости иҷозати виджетро тақлид кунед
+    result_allowed: ✓ Иҷозат дода шудааст
+    result_denied: ✗ Иҷозат рад карда шуд
+    trigger: Тақлид кардан
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: Нишондиҳандаи системаи тозагӣ
   clear_icons_tooltip: Бозоғоз кардан мумкин аст, ки ба ҳама виджет пурра таъсир расонад
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Ранги ҳисоб
   date_format: Шакли сана
+  hardware_acceleration: Шитоби сахтафзор
+  hardware_acceleration_description: >-
+    Хомӯш кардани суръатбахшии сахтафзор истифодаи хотираро коҳиш медиҳад, аммо
+    метавонад боиси мушкилоти иҷроиш гардад. Агар шумо обои зиндаро истифода
+    набаред, хомӯш кардан бехатар аст.
   icon_pack:
     available: Бастаҳои нишонаи дастрас
     selected: Бастаҳои нишонаи фаъол
@@ -165,6 +176,7 @@ review_request:
   title: Аз Seelen UI лаззат мебаред?
 save: Пул захира кардан
 save_and_restart: Наҷот ва бозоғоз
+search: Ҷустуҷӯ
 see_more: Бештар нигаред
 shortcuts:
   duplicate_error: Ин миёнабур такрор карда шудааст

@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Ягон комбинатсияи тугмаро пахш кунед
     title: Сабти миёнабурҳои нав
+widget_liveness:
+  failed_description: |-
+    Виҷети '%{widget_name}' чанд маротиба посух надод.
+
+    Шумо метавонед кӯшиш кунед, ки барномаро бозоғоз намоед.
+  failed_title: Хатогии виджет
+widget_permissions:
+  perm_open_file: файлҳоро кушоед
+  perm_run: барномаҳоро иҷро кунед
+  request_description: |-
+    Виҷети '%{widget_name}' барои %{command} иҷозат талаб мекунад.
+
+    Оё шумо мехоҳед ба ин иҷозат диҳед?
+  request_title: Дархости иҷозати виджет

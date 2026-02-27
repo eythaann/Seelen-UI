@@ -75,6 +75,12 @@ devtools:
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
   settings_file: Pelê Mîhengan
+  simulate_perm:
+    label: Daxwaza Destûra Widgetê simule bikin
+    result_allowed: ✓ Destûr hat dayîn
+    result_denied: ✗ Destûr red kirin
+    trigger: Simulate
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: Îkonên pergala zelal cache
   clear_icons_tooltip: >-
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Rengê Accent
   date_format: Formata Date
+  hardware_acceleration: Hardware Acceleration
+  hardware_acceleration_description: >-
+    Neçalakkirina bilezkirina hardware dê karanîna bîranînê kêm bike, lê dikare
+    bibe sedema pirsgirêkên performansê. Ger hûn dîwarên zindî bikar neynin
+    neçalakkirina ewledar e.
   icon_pack:
     available: Pakêtên îkonê yên berdest
     selected: Pakêtên Îkonên Çalak
@@ -169,6 +180,7 @@ review_request:
   title: Ji Seelen UI-ê kêfxweş dibin?
 save: Rizgarkirin
 save_and_restart: Save & Restart
+search: Gerr
 see_more: Bêtir bibînin
 shortcuts:
   duplicate_error: Ev kurtebir hatiye dubarekirin

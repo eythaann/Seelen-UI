@@ -77,6 +77,12 @@ devtools:
   install_folder: Installasjonsmappe
   load: Laste
   settings_file: Innstillingsfilen
+  simulate_perm:
+    label: Simuler forespørsel om widgettillatelse
+    result_allowed: ✓ Tillatelse gitt
+    result_denied: ✗ Tillatelse nektet
+    trigger: Simuler
+    widget_id_placeholder: '@forfatter/widgetnavn'
 extras:
   clear_icons: Klare systemikoner cache
   clear_icons_tooltip: Det kan kreves en omstart for å tre i kraft alle widgeter
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Aksentfarge
   date_format: Datoformat
+  hardware_acceleration: Maskinvareakselerasjon
+  hardware_acceleration_description: >-
+    Deaktivering av maskinvareakselerasjon vil redusere minnebruken, men kan
+    forårsake ytelsesproblemer. Er trygt å deaktivere hvis du ikke vil bruke
+    levende bakgrunnsbilder.
   icon_pack:
     available: Tilgjengelige ikonpakker
     selected: Aktive ikonpakker
@@ -167,6 +178,7 @@ review_request:
   title: Liker du Seelen UI?
 save: Lagre
 save_and_restart: Lagre og start på nytt
+search: Søk
 see_more: Se mer
 shortcuts:
   duplicate_error: Denne snarveien er duplisert

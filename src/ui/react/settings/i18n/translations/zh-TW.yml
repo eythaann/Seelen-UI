@@ -72,6 +72,12 @@ devtools:
   install_folder: 安裝文件夾
   load: 載入
   settings_file: 設置文件
+  simulate_perm:
+    label: 模擬Widget權限請求
+    result_allowed: ✓ 已取得許可
+    result_denied: ✗ 權限被拒絕
+    trigger: 模擬
+    widget_id_placeholder: '@作者/小部件名稱'
 extras:
   clear_icons: 清除系統圖標緩存
   clear_icons_tooltip: 可能需要重新啟動才能完全生效所有小部件
@@ -83,6 +89,8 @@ extras:
 general:
   accent_color: 口音顏色
   date_format: 日期格式
+  hardware_acceleration: 硬體加速
+  hardware_acceleration_description: 停用硬體加速會減少記憶體使用量，但可能會導致效能問題。 如果您不使用動態壁紙，可以安全地停用。
   icon_pack:
     available: 可用的圖標包
     selected: 活動圖標包
@@ -155,6 +163,7 @@ review_request:
   title: 喜歡 Seelen UI 嗎？
 save: 節省
 save_and_restart: 保存和重新啟動
+search: 搜尋
 see_more: 查看更多
 shortcuts:
   duplicate_error: 該快捷方式重複

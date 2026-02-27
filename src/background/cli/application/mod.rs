@@ -18,8 +18,8 @@ use crate::{
     virtual_desktops::cli::VirtualDesktopCli,
     widgets::{
         cli::WidgetCli, popups::cli::PopupsCli, show_settings,
-        task_switcher::cli::TaskSwitcherClient, weg::cli::WegCli,
-        window_manager::cli::WindowManagerCli,
+        task_switcher::cli::TaskSwitcherClient, wallpaper_manager::cli::WallpaperCli,
+        weg::cli::WegCli, window_manager::cli::WindowManagerCli,
     },
 };
 
@@ -83,6 +83,7 @@ pub enum AppCliCommand {
     Win32(Win32Cli),
     Art(ArtCli),
     TaskSwitcher(TaskSwitcherClient),
+    Wallpaper(WallpaperCli),
 }
 
 impl SluCliCommand for AppCliCommand {
@@ -280,6 +281,9 @@ impl AppCliCommand {
                 command.process()?;
             }
             AppCliCommand::TaskSwitcher(command) => {
+                command.process()?;
+            }
+            AppCliCommand::Wallpaper(command) => {
                 command.process()?;
             }
             _ => {

@@ -77,6 +77,12 @@ devtools:
   install_folder: O'rnatish papkasini o'rnatish
   load: Yuklamoq
   settings_file: Sozlamalar fayli
+  simulate_perm:
+    label: Vidjetga ruxsat so‘rovini simulyatsiya qilish
+    result_allowed: ✓ Ruxsat berilgan
+    result_denied: ✗ Ruxsat rad etildi
+    trigger: Simulyatsiya qilish
+    widget_id_placeholder: '@muallif/vidjet nomi'
 extras:
   clear_icons: Tozalash tizimi piktogrammalari kesh
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Urg'u rangi
   date_format: Sana formati
+  hardware_acceleration: Uskuna tezlashuvi
+  hardware_acceleration_description: >-
+    Uskuna tezlashtirishni o'chirib qo'yish xotiradan foydalanishni kamaytiradi,
+    lekin ishlash bilan bog'liq muammolarga olib kelishi mumkin. Jonli fon
+    rasmlarini ishlatmasangiz, o'chirib qo'yish xavfsiz.
   icon_pack:
     available: Mavjud piktogramma to'plamlari
     selected: Faol piktogramma to'plamlari
@@ -169,6 +180,7 @@ review_request:
   title: Seelen UI yoqyapsizmi?
 save: Tejash
 save_and_restart: Saqlang va qayta yoqing
+search: Qidiruv
 see_more: Ko'proq ko'rish
 shortcuts:
   duplicate_error: Bu yorliq takrorlanadi

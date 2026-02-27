@@ -77,6 +77,12 @@ devtools:
   install_folder: स्थापना फ़ोल्डर
   load: भार
   settings_file: सेटिंग संचिका
+  simulate_perm:
+    label: विजेट अनुमति अनुरोध का अनुकरण करें
+    result_allowed: ✓ अनुमति दी गई
+    result_denied: ✗ अनुमति अस्वीकृत
+    trigger: अनुकरण
+    widget_id_placeholder: '@लेखक/विजेट-नाम'
 extras:
   clear_icons: स्पष्ट प्रणाली आइकन कैश
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: स्वरोंका रंग
   date_format: तारिख का प्रारूप
+  hardware_acceleration: हार्डवेयर एक्सिलरेशन
+  hardware_acceleration_description: >-
+    हार्डवेयर एक्सेलेरेशन को अक्षम करने से मेमोरी का उपयोग कम हो जाएगा, लेकिन
+    प्रदर्शन संबंधी समस्याएं पैदा हो सकती हैं। यदि आप लाइव वॉलपेपर का उपयोग नहीं
+    करेंगे तो इसे अक्षम करना सुरक्षित है।
   icon_pack:
     available: उपलब्ध चिह्न पैक
     selected: सक्रिय चिह्न पैक
@@ -169,6 +180,7 @@ review_request:
   title: सेलेन यूआई का आनंद ले रहे हैं?
 save: बचाना
 save_and_restart: सहेजें और पुनरारंभ करें
+search: खोज
 see_more: और देखें
 shortcuts:
   duplicate_error: यह शॉर्टकट डुप्लिकेट है

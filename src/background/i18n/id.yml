@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Tekan Kombinasi Kunci apa pun
     title: Mendaftarkan jalan pintas baru
+widget_liveness:
+  failed_description: |-
+    Widget '%{widget_name}' terlalu sering berhenti merespons.
+
+    Anda dapat mencoba memulai ulang aplikasi.
+  failed_title: Kesalahan Widget
+widget_permissions:
+  perm_open_file: membuka file
+  perm_run: menjalankan program
+  request_description: |-
+    Widget '%{widget_name}' meminta izin ke %{command}.
+
+    Apakah Anda ingin mengizinkan ini?
+  request_title: Permintaan Izin Widget

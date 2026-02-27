@@ -77,6 +77,12 @@ devtools:
   install_folder: Folder Instalasi
   load: Memuat
   settings_file: File Pengaturan
+  simulate_perm:
+    label: Simulasikan Permintaan Izin Widget
+    result_allowed: ✓ Izin diberikan
+    result_denied: ✗ Izin ditolak
+    trigger: Simulasikan
+    widget_id_placeholder: '@penulis/nama-widget'
 extras:
   clear_icons: Menghapus Cache Ikon Sistem
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Aksen warna
   date_format: Format tanggal
+  hardware_acceleration: Akselerasi Perangkat Keras
+  hardware_acceleration_description: >-
+    Menonaktifkan akselerasi perangkat keras akan mengurangi penggunaan memori,
+    namun dapat menyebabkan masalah kinerja. Aman untuk dinonaktifkan jika Anda
+    tidak akan menggunakan wallpaper hidup.
   icon_pack:
     available: Paket Ikon yang Tersedia
     selected: Paket Ikon Aktif
@@ -169,6 +180,7 @@ review_request:
   title: Menikmati Seelen UI?
 save: Menyimpan
 save_and_restart: Simpan & restart
+search: Mencari
 see_more: Lihat Lebih Lanjut
 shortcuts:
   duplicate_error: Pintasan ini diduplikasi

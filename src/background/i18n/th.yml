@@ -32,3 +32,17 @@ shortcut:
   register:
     placeholder: กดชุดค่าผสมคีย์ใด ๆ
     title: การลงทะเบียนทางลัดใหม่
+widget_liveness:
+  failed_description: |-
+    วิดเจ็ต '%{widget_name}' หยุดตอบสนองหลายครั้งเกินไป
+
+    คุณสามารถลองรีสตาร์ทแอปได้
+  failed_title: ข้อผิดพลาดของวิดเจ็ต
+widget_permissions:
+  perm_open_file: เปิดไฟล์
+  perm_run: รันโปรแกรม
+  request_description: |-
+    วิดเจ็ต '%{widget_name}' กำลังขออนุญาตไปยัง %{command}
+
+    คุณต้องการอนุญาตสิ่งนี้หรือไม่?
+  request_title: คำขออนุญาตวิดเจ็ต

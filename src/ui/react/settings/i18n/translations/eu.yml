@@ -77,6 +77,12 @@ devtools:
   install_folder: Instalazio karpeta
   load: Zamatu
   settings_file: Ezarpenak fitxategia
+  simulate_perm:
+    label: Simulatu widget-aren baimen-eskaera
+    result_allowed: ✓ Emandako baimena
+    result_denied: ✗ Baimena ukatuta
+    trigger: Simulatu
+    widget_id_placeholder: '@egilea/widget-izena'
 extras:
   clear_icons: Garbitu sistemaren ikonoak cachea
   clear_icons_tooltip: Berrabiarazi behar da widget guztietan erabat indarrean egon dadin
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Azentu kolorea
   date_format: Data formatua
+  hardware_acceleration: Hardwarearen azelerazioa
+  hardware_acceleration_description: >-
+    Hardwarearen azelerazioa desgaitzeak memoriaren erabilera murriztuko du,
+    baina errendimendu arazoak sor ditzake. Zuzeneko horma-irudiak erabiltzen ez
+    badituzu desgaitzea segurua da.
   icon_pack:
     available: Eskuragarri dauden ikono paketeak
     selected: Ikono pakete aktiboak
@@ -167,6 +178,7 @@ review_request:
   title: Seelen UI gozatzen?
 save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
+search: Bilatu
 see_more: Ikusi gehiago
 shortcuts:
   duplicate_error: Lasterbide hau bikoiztuta dago

@@ -32,3 +32,17 @@ shortcut:
   register:
     placeholder: ចុចបន្សំគ្រាប់ចុចណាមួយ
     title: ការចុះឈ្មោះផ្លូវកាត់ថ្មី
+widget_liveness:
+  failed_description: |-
+    ធាតុក្រាហ្វិក '%{widget_name}' បានឈប់ឆ្លើយតបច្រើនដងពេកហើយ។
+
+    អ្នកអាចព្យាយាមចាប់ផ្តើមកម្មវិធីឡើងវិញ។
+  failed_title: កំហុសធាតុក្រាហ្វិក
+widget_permissions:
+  perm_open_file: បើកឯកសារ
+  perm_run: ដំណើរការកម្មវិធី
+  request_description: |-
+    ធាតុក្រាហ្វិក '%{widget_name}' កំពុងស្នើសុំការអនុញ្ញាតទៅ %{command} ។
+
+    តើអ្នកចង់អនុញ្ញាតវាទេ?
+  request_title: សំណើការអនុញ្ញាតធាតុក្រាហ្វិក

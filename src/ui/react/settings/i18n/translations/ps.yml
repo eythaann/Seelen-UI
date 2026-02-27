@@ -76,6 +76,12 @@ devtools:
   install_folder: لګول فولډر
   load: بار
   settings_file: د امستنې دوتنه
+  simulate_perm:
+    label: د ویجټ اجازې غوښتنه سمول
+    result_allowed: ✓ اجازه ورکړل شوه
+    result_denied: ✗ اجازه رد شوه
+    trigger: سمول
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: د ایکسین عکس کې کیچ
   clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
@@ -90,6 +96,10 @@ extras:
 general:
   accent_color: تیزس رنګ
   date_format: د نیټې ب .ه
+  hardware_acceleration: د هارډویر سرعت
+  hardware_acceleration_description: >-
+    د هارډویر سرعت غیر فعال کول به د حافظې کارول کم کړي ، مګر د فعالیت مسلو لامل
+    کیدی شي. غیر فعال کول خوندي دي که تاسو ژوندی وال پیپرونه ونه کاروئ.
   icon_pack:
     available: د آیکون کڅوړې شتون لري
     selected: د فعال آیکون بسته
@@ -162,6 +172,7 @@ review_request:
   title: د Seelen UI څخه خوند اخلئ؟
 save: خوندي کړئ
 save_and_restart: خوندي کول او بیا پیل کړئ
+search: لټون
 see_more: نور وګوره
 shortcuts:
   duplicate_error: دا شارټ کټ نقل شوی دی

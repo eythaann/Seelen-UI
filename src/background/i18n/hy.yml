@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Սեղմեք ցանկացած ստեղնաշարի համադրություն
     title: Նոր դյուրանցում գրանցելը
+widget_liveness:
+  failed_description: |-
+    «%{widget_name}» վիջեթը դադարել է շատ անգամ պատասխանել:
+
+    Կարող եք փորձել վերագործարկել հավելվածը:
+  failed_title: Վիջեթի սխալ
+widget_permissions:
+  perm_open_file: բաց ֆայլեր
+  perm_run: գործարկել ծրագրեր
+  request_description: |-
+    «%{widget_name}» վիջեթը թույլտվություն է խնդրում %{command}-ին:
+
+    Ցանկանու՞մ եք սա թույլ տալ:
+  request_title: Վիջեթի թույլտվության հարցում

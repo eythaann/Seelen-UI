@@ -40,7 +40,7 @@ impl PopupsManager {
     pub fn create(&mut self, config: SluPopupConfig) -> Result<Uuid> {
         let popup_id = Uuid::new_v4();
         let label = WidgetWebviewLabel::new(&WidgetId::known_popup(), None, Some(&popup_id));
-        let args = WebviewArgs::new().disable_gpu();
+        let args = WebviewArgs::default();
 
         let manager = get_app_handle();
         let window = WebviewWindowBuilder::new(

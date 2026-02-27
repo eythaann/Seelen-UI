@@ -77,6 +77,12 @@ devtools:
   install_folder: Folder instalacyjny
   load: Obciążenie
   settings_file: Plik ustawień
+  simulate_perm:
+    label: Symuluj żądanie pozwolenia na widget
+    result_allowed: ✓ Zezwolenie udzielone
+    result_denied: ✗ Odmowa pozwolenia
+    trigger: Symulować
+    widget_id_placeholder: '@autor/nazwa-widgetu'
 extras:
   clear_icons: Wyczyść pamięć podręczną ikon systemowych
   clear_icons_tooltip: >-
@@ -94,6 +100,11 @@ extras:
 general:
   accent_color: Kolor akcentu
   date_format: Format daty
+  hardware_acceleration: Przyspieszenie sprzętowe
+  hardware_acceleration_description: >-
+    Wyłączenie akceleracji sprzętowej zmniejszy zużycie pamięci, ale może
+    spowodować problemy z wydajnością. Można bezpiecznie wyłączyć, jeśli nie
+    będziesz używać animowanych tapet.
   icon_pack:
     available: Dostępne pakiety ikon
     selected: Aktywne pakiety ikon
@@ -170,6 +181,7 @@ review_request:
   title: Podoba Ci się interfejs użytkownika Seelen?
 save: Zastosuj
 save_and_restart: Zastosuj i uruchom ponownie
+search: Szukaj
 see_more: Zobacz więcej
 shortcuts:
   duplicate_error: Ten skrót jest zduplikowany

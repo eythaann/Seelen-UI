@@ -77,6 +77,12 @@ devtools:
   install_folder: Installationsordner
   load: Laden
   settings_file: Einstellungsdatei
+  simulate_perm:
+    label: Widget-Berechtigungsanfrage simulieren
+    result_allowed: ✓ Erlaubnis erteilt
+    result_denied: ✗ Erlaubnis verweigert
+    trigger: Simulieren
+    widget_id_placeholder: '@Autor/Widget-Name'
 extras:
   clear_icons: System-Symbol-Cache löschen
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Akzentfarbe
   date_format: Datumsformat
+  hardware_acceleration: Hardwarebeschleunigung
+  hardware_acceleration_description: >-
+    Das Deaktivieren der Hardwarebeschleunigung verringert die Speichernutzung,
+    kann jedoch zu Leistungsproblemen führen. Kann sicher deaktiviert werden,
+    wenn Sie keine Live-Hintergründe verwenden.
   icon_pack:
     available: Verfügbare Icon-Pakete
     selected: Aktive Icon-Pakete
@@ -171,6 +182,7 @@ review_request:
   title: Gefällt dir die Benutzeroberfläche von Seelen?
 save: Speichern
 save_and_restart: Speichern & neu starten
+search: Suchen
 see_more: Mehr sehen
 shortcuts:
   duplicate_error: Diese Verknüpfung ist dupliziert

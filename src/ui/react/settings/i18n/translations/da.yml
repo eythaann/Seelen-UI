@@ -77,6 +77,12 @@ devtools:
   install_folder: Installationsmappe
   load: belastning
   settings_file: Indstillinger fil
+  simulate_perm:
+    label: Simuler anmodning om widgettilladelse
+    result_allowed: ✓ Tilladelse givet
+    result_denied: ✗ Tilladelse nægtet
+    trigger: Simuler
+    widget_id_placeholder: '@forfatter/widget-navn'
 extras:
   clear_icons: Ryd cache for systemikoner
   clear_icons_tooltip: En genstart kan være nødvendig for at få fuld effekt på alle widgets
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Accentfarve
   date_format: Datoformat
+  hardware_acceleration: Hardwareacceleration
+  hardware_acceleration_description: >-
+    Deaktivering af hardwareacceleration vil reducere hukommelsesforbruget, men
+    kan forårsage ydeevneproblemer. Er sikkert at deaktivere, hvis du ikke vil
+    bruge levende tapeter.
   icon_pack:
     available: Tilgængelige ikonpakker
     selected: Aktive ikonpakker
@@ -167,6 +178,7 @@ review_request:
   title: Nyder du Seelen UI?
 save: Gemme
 save_and_restart: Gem & genstart
+search: Søge
 see_more: Se mere
 shortcuts:
   duplicate_error: Denne genvej er duplikeret

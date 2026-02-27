@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Paina mitä tahansa näppäinyhdistelmää
     title: Uuden pikakuvakkeen rekisteröinti
+widget_liveness:
+  failed_description: |-
+    Widget '%{widget_name}' lakkasi vastaamasta liian monta kertaa.
+
+    Voit yrittää käynnistää sovelluksen uudelleen.
+  failed_title: Widget-virhe
+widget_permissions:
+  perm_open_file: avaa tiedostoja
+  perm_run: ajaa ohjelmia
+  request_description: |-
+    Widget '%{widget_name}' pyytää lupaa komentoon %{command}.
+
+    Haluatko sallia tämän?
+  request_title: Widgetin lupapyyntö

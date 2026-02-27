@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Druk op enige sleutelkombinasie
     title: Nuwe kortpad registreer
+widget_liveness:
+  failed_description: |-
+    Die legstuk '%{widget_name}' het te veel keer opgehou reageer.
+
+    Jy kan probeer om die toepassing te herbegin.
+  failed_title: Legstukfout
+widget_permissions:
+  perm_open_file: maak lêers oop
+  perm_run: programme uit te voer
+  request_description: |-
+    Die legstuk '%{widget_name}' versoek toestemming om %{command}.
+
+    Wil jy dit toelaat?
+  request_title: Widget Toestemming Versoek

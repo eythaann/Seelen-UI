@@ -59,7 +59,7 @@ impl FancyToolbar {
 
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
-        let args = WebviewArgs::new().disable_gpu();
+        let args = WebviewArgs::default();
 
         log::info!("Creating {}", Self::decoded_label(monitor_id));
 

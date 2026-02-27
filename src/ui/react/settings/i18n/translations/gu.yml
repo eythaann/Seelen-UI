@@ -77,6 +77,12 @@ devtools:
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   load: લોડ
   settings_file: સેટિંગ્સ ફાઇલ
+  simulate_perm:
+    label: વિજેટ પરવાનગી વિનંતીનું અનુકરણ કરો
+    result_allowed: ✓ પરવાનગી આપવામાં આવી
+    result_denied: ✗ પરવાનગી નકારી
+    trigger: અનુકરણ કરો
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: સ્પષ્ટ સિસ્ટમ ચિહ્નો કેશ
   clear_icons_tooltip: બધા વિજેટો પર સંપૂર્ણ અસર કરવા માટે ફરીથી પ્રારંભ કરવાની જરૂર પડી શકે છે
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: ઉચ્ચારણ રંગ
   date_format: તારીખ ફોર્મેટ
+  hardware_acceleration: હાર્ડવેર પ્રવેગક
+  hardware_acceleration_description: >-
+    હાર્ડવેર પ્રવેગકને અક્ષમ કરવાથી મેમરીનો વપરાશ ઘટશે, પરંતુ પ્રદર્શન
+    સમસ્યાઓનું કારણ બની શકે છે. જો તમે લાઇવ વૉલપેપરનો ઉપયોગ ન કરો તો તેને અક્ષમ
+    કરવું સલામત છે.
   icon_pack:
     available: ઉપલબ્ધ આઇકન પેક
     selected: સક્રિય આઇકન પેક્સ
@@ -165,6 +176,7 @@ review_request:
   title: Seelen UI માણી રહ્યાં છો?
 save: સાચવો
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
+search: શોધો
 see_more: વધુ જુઓ
 shortcuts:
   duplicate_error: આ શોર્ટકટ ડુપ્લિકેટ છે

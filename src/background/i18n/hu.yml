@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Nyomja meg a gomb kombinációját
     title: Új parancsikon regisztrálása
+widget_liveness:
+  failed_description: |-
+    A(z) '%{widget_name}' widget túl sokszor leállt.
+
+    Megpróbálhatja újraindítani az alkalmazást.
+  failed_title: Widget hiba
+widget_permissions:
+  perm_open_file: nyissa meg a fájlokat
+  perm_run: programokat futtatni
+  request_description: |-
+    A(z) '%{widget_name}' widget engedélyt kér a következőhöz: %{command}.
+
+    Szeretnéd ezt engedélyezni?
+  request_title: Widget engedélykérés

@@ -77,6 +77,12 @@ devtools:
   install_folder: Diegimo aplankas
   load: Įkelti
   settings_file: Nustatymų failas
+  simulate_perm:
+    label: Imituoti valdiklio leidimo užklausą
+    result_allowed: ✓ Leidimas suteiktas
+    result_denied: ✗ Leidimas atmestas
+    trigger: Imituoti
+    widget_id_placeholder: '@autorius/valdiklio pavadinimas'
 extras:
   clear_icons: Išvalyti sistemos piktogramų talpyklą
   clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Akcento spalva
   date_format: Datos formatas
+  hardware_acceleration: Aparatinės įrangos pagreitis
+  hardware_acceleration_description: >-
+    Išjungus aparatinės įrangos spartinimą sumažės atminties naudojimas, tačiau
+    gali kilti našumo problemų. Saugu išjungti, jei nenaudosite tiesioginių
+    tapetų.
   icon_pack:
     available: Galimi piktogramų paketai
     selected: Aktyvūs piktogramų paketai
@@ -167,6 +178,7 @@ review_request:
   title: Mėgaukitės Seelen vartotojo sąsaja?
 save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
+search: Ieškoti
 see_more: Žiūrėti daugiau
 shortcuts:
   duplicate_error: Šis spartusis klavišas pasikartoja

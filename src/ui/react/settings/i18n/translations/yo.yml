@@ -75,6 +75,12 @@ devtools:
   install_folder: Filese Fifi sori ẹrọ
   load: Ẹru
   settings_file: Faili eto
+  simulate_perm:
+    label: Ṣe afiwe Ibeere Gbigbanilaaye ẹrọ ailorukọ
+    result_allowed: ✓ Gbigbanilaaye
+    result_denied: ✗ Ti kọ igbanilaaye
+    trigger: Ṣe afarawe
+    widget_id_placeholder: '@author / ailorukọ-orukọ'
 extras:
   clear_icons: Ko awọn ilana eto kuro
   clear_icons_tooltip: A le nilo atunbere lati ṣe ipa ni kikun lori gbogbo awọn ẹrọ ailorukọ
@@ -89,6 +95,10 @@ extras:
 general:
   accent_color: Awọ ara
   date_format: Ọna kika ọjọ
+  hardware_acceleration: Hardware isare
+  hardware_acceleration_description: >-
+    Pa ohun elo imudara yoo dinku lilo iranti, ṣugbọn o le fa awọn ọran iṣẹ. Ṣe
+    ailewu lati mu ṣiṣẹ ti o ko ba lo iṣẹṣọ ogiri laaye.
   icon_pack:
     available: Awọn akopọ Aami ti o wa
     selected: Awọn akopọ Aami ti nṣiṣe lọwọ
@@ -163,6 +173,7 @@ review_request:
   title: Ngbadun Seelen UI?
 save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
+search: Wa
 see_more: Wo diẹ sii
 shortcuts:
   duplicate_error: Ọna abuja yii jẹ pidánpidán

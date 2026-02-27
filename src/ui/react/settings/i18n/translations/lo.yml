@@ -75,6 +75,12 @@ devtools:
   install_folder: ໂຟນເດີການຕິດຕັ້ງ
   load: ໂຫຼດ
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
+  simulate_perm:
+    label: ຈໍາລອງການຮ້ອງຂໍການອະນຸຍາດ Widget
+    result_allowed: ✓​ການ​ອະ​ນຸ​ຍາດ​ໃຫ້​
+    result_denied: ✗ ການ​ອະ​ນຸ​ຍາດ​ຖືກ​ປະ​ຕິ​ເສດ​
+    trigger: ຈຳລອງ
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
   clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
@@ -89,6 +95,11 @@ extras:
 general:
   accent_color: ສີສໍານຽງ
   date_format: ຮູບແບບວັນທີ
+  hardware_acceleration: ການເລັ່ງຮາດແວ
+  hardware_acceleration_description: >-
+    ການປິດການນຳໃຊ້ການເລັ່ງຮາດແວຈະຫຼຸດການນຳໃຊ້ໜ່ວຍຄວາມຈຳ,
+    ແຕ່ສາມາດເຮັດໃຫ້ເກີດບັນຫາປະສິດທິພາບໄດ້.
+    ແມ່ນປອດໄພທີ່ຈະປິດການໃຊ້ງານຖ້າທ່ານບໍ່ໃຊ້ຮູບວໍເປເປີສົດ.
   icon_pack:
     available: ໄອຄອນຊອງທີ່ມີໃຫ້
     selected: ຊຸດໄອຄອນທີ່ໃຊ້ໄດ້
@@ -163,6 +174,7 @@ review_request:
   title: ເພີດເພີນໄປກັບ Seelen UI ບໍ?
 save: ບັນທຶກ
 save_and_restart: ບັນທຶກແລະ Restart
+search: ຊອກຫາ
 see_more: ເບິ່ງເພີ່ມເຕີມ
 shortcuts:
   duplicate_error: ທາງລັດນີ້ຊໍ້າກັນ

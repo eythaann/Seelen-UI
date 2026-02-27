@@ -76,6 +76,12 @@ devtools:
   install_folder: ස්ථාපන ෆෝල්ඩරය
   load: පැටවීම
   settings_file: සැකසුම් ගොනුව
+  simulate_perm:
+    label: විජට් අවසර ඉල්ලීම අනුකරණය කරන්න
+    result_allowed: ✓ අවසරය ලබා දී ඇත
+    result_denied: ✗ අවසරය ප්‍රතික්ෂේප විය
+    trigger: අනුකරණය කරන්න
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: පැහැදිලි පද්ධති අයිකන හැඹිලිය
   clear_icons_tooltip: >-
@@ -92,6 +98,10 @@ extras:
 general:
   accent_color: උච්චාරණ වර්ණය
   date_format: දිනය ආකෘතිය
+  hardware_acceleration: දෘඪාංග ත්වරණය
+  hardware_acceleration_description: >-
+    දෘඪාංග ත්වරණය අක්‍රිය කිරීම මතක භාවිතය අඩු කරයි, නමුත් කාර්ය සාධන ගැටළු ඇති
+    කළ හැක. ඔබ සජීවී බිතුපත් භාවිතා නොකරන්නේ නම් අබල කිරීම ආරක්ෂිත වේ.
   icon_pack:
     available: පවතින අයිකන ඇසුරුම්
     selected: ක්‍රියාකාරී අයිකන ඇසුරුම්
@@ -166,6 +176,7 @@ review_request:
   title: Seelen UI භුක්ති විඳිනවාද?
 save: සුරකින්න
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
+search: සොයන්න
 see_more: තවත් බලන්න
 shortcuts:
   duplicate_error: මෙම කෙටි මග අනුපිටපත් කර ඇත

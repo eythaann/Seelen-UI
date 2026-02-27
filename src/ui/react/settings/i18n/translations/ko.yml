@@ -74,6 +74,12 @@ devtools:
   install_folder: 설치 폴더
   load: 로드
   settings_file: 설정 파일
+  simulate_perm:
+    label: 위젯 권한 요청 시뮬레이션
+    result_allowed: ✓ 권한이 부여되었습니다
+    result_denied: ✗ 권한이 거부되었습니다
+    trigger: 시뮬레이션
+    widget_id_placeholder: '@작성자/위젯 이름'
 extras:
   clear_icons: 시스템 아이콘 캐시 지우기
   clear_icons_tooltip: 모든 위젯에 완전히 적용하려면 다시 시작해야 할 수 있습니다.
@@ -87,6 +93,10 @@ extras:
 general:
   accent_color: 강조 색상
   date_format: 날짜 형식
+  hardware_acceleration: 하드웨어 가속
+  hardware_acceleration_description: >-
+    하드웨어 가속을 비활성화하면 메모리 사용량이 줄어들지만 성능 문제가 발생할 수 있습니다. 라이브 배경화면을 사용하지 않을 경우
+    비활성화하는 것이 안전합니다.
   icon_pack:
     available: 사용 가능한 아이콘 팩
     selected: 현재 아이콘 팩
@@ -159,6 +169,7 @@ review_request:
   title: Seelen UI를 즐기고 계시나요?
 save: 저장
 save_and_restart: 저장 및 재시작
+search: 찾다
 see_more: 자세히 보기
 shortcuts:
   duplicate_error: 이 바로가기가 중복되었습니다.

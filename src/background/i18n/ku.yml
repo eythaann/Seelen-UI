@@ -36,3 +36,17 @@ shortcut:
   register:
     placeholder: Her kombînasyona kilîtiyê çap bikin
     title: Kurteya nû qeyd bikin
+widget_liveness:
+  failed_description: |-
+    Widgeta '%{widget_name}' gelek caran bersiv nedaye.
+
+    Hûn dikarin biceribînin ku sepanê ji nû ve bidin destpêkirin.
+  failed_title: Çewtiya Widgetê
+widget_permissions:
+  perm_open_file: pelan vekin
+  perm_run: bernameyan bimeşînin
+  request_description: |-
+    Widgeta '%{widget_name}' ji %{command} re destûr dixwaze.
+
+    Ma hûn dixwazin destûrê bidin vê yekê?
+  request_title: Daxwaza Destûra Widgetê

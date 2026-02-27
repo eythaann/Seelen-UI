@@ -38,3 +38,17 @@ shortcut:
   register:
     placeholder: کوئی بھی کلیدی مجموعہ دبائیں
     title: نیا شارٹ کٹ رجسٹر کرنا
+widget_liveness:
+  failed_description: |-
+    ویجیٹ '%{widget_name}' نے کئی بار جواب دینا بند کر دیا۔
+
+    آپ ایپ کو دوبارہ شروع کرنے کی کوشش کر سکتے ہیں۔
+  failed_title: ویجیٹ کی خرابی۔
+widget_permissions:
+  perm_open_file: فائلیں کھولیں
+  perm_run: پروگرام چلائیں
+  request_description: |-
+    ویجیٹ '%{widget_name}' %{command} سے اجازت طلب کر رہا ہے۔
+
+    کیا آپ اس کی اجازت دینا چاہتے ہیں؟
+  request_title: ویجیٹ کی اجازت کی درخواست

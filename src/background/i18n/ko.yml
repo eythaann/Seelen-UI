@@ -30,3 +30,17 @@ shortcut:
   register:
     placeholder: 주요 조합을 누릅니다
     title: 새로운 바로 가기 등록
+widget_liveness:
+  failed_description: |-
+    위젯 '%{widget_name}'이(가) 너무 자주 응답을 중지했습니다.
+
+    앱을 다시 시작해 보세요.
+  failed_title: 위젯 오류
+widget_permissions:
+  perm_open_file: 열린 파일
+  perm_run: 프로그램 실행
+  request_description: |-
+    '%{widget_name}' 위젯이 %{command}에 대한 권한을 요청하고 있습니다.
+
+    이것을 허용하시겠습니까?
+  request_title: 위젯 권한 요청

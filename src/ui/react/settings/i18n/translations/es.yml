@@ -77,6 +77,12 @@ devtools:
   install_folder: Carpeta de instalación
   load: Carga
   settings_file: Archivo de configuración
+  simulate_perm:
+    label: Simular solicitud de permiso de widget
+    result_allowed: ✓ Permiso concedido
+    result_denied: ✗ Permiso denegado
+    trigger: Simular
+    widget_id_placeholder: '@autor/nombre-widget'
 extras:
   clear_icons: Borrar caché de iconos del sistema
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Color de acento
   date_format: Formato de fecha
+  hardware_acceleration: Aceleración de hardware
+  hardware_acceleration_description: >-
+    Deshabilitar la aceleración de hardware reducirá el uso de memoria, pero
+    puede causar problemas de rendimiento. Es seguro desactivarlo si no vas a
+    utilizar fondos de pantalla animados.
   icon_pack:
     available: Paquetes de iconos disponibles
     selected: Packs de iconos activos
@@ -169,6 +180,7 @@ review_request:
   title: ¿Disfrutas de la interfaz de usuario de Seelen?
 save: Guardar
 save_and_restart: Guardar y reiniciar
+search: Buscar
 see_more: Ver más
 shortcuts:
   duplicate_error: Este atajo está duplicado.

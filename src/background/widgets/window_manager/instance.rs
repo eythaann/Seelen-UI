@@ -44,7 +44,7 @@ impl WindowManagerV2 {
         let label = format!("{}?monitorId={}", Self::TARGET, monitor_id);
         log::info!("Creating {label}");
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
-        let args = WebviewArgs::new().disable_gpu();
+        let args = WebviewArgs::default();
 
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),

@@ -76,6 +76,12 @@ devtools:
   install_folder: Суулгалах хүрээ
   load: Ачих
   settings_file: Тохиргооын нэр
+  simulate_perm:
+    label: Виджетийн зөвшөөрлийн хүсэлтийг дуурайлган хийх
+    result_allowed: ✓ Зөвшөөрөл олгосон
+    result_denied: ✗ Зөвшөөрөл татгалзсан
+    trigger: Дуурайх
+    widget_id_placeholder: '@зохиогч/виджетийн нэр'
 extras:
   clear_icons: Системийн дүрсийг цэвэрлэх
   clear_icons_tooltip: >-
@@ -92,6 +98,11 @@ extras:
 general:
   accent_color: Эргүүлэг
   date_format: Огноо формат
+  hardware_acceleration: Техник хангамжийн хурдатгал
+  hardware_acceleration_description: >-
+    Техник хангамжийн хурдатгалыг идэвхгүй болгох нь санах ойн хэрэглээг
+    багасгах боловч гүйцэтгэлийн асуудал үүсгэж болзошгүй. Хэрэв та амьд ханын
+    зураг ашиглахгүй бол идэвхгүй болгоход аюулгүй.
   icon_pack:
     available: Боломжтой Icon багцууд
     selected: Идэвхтэй дүрсний багцууд
@@ -166,6 +177,7 @@ review_request:
   title: Seelen UI таалагдаж байна уу?
 save: Аврах
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
+search: Хайх
 see_more: Дэлгэрэнгүйг үзэх
 shortcuts:
   duplicate_error: Энэ товчлол нь давхардсан байна

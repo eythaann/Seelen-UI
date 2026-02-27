@@ -77,6 +77,12 @@ devtools:
   install_folder: Folder pemasangan
   load: Beban
   settings_file: Fail tetapan
+  simulate_perm:
+    label: Simulasikan Permintaan Kebenaran Widget
+    result_allowed: ✓ Kebenaran diberikan
+    result_denied: ✗ Kebenaran ditolak
+    trigger: Simulasikan
+    widget_id_placeholder: '@nama pengarang/widget'
 extras:
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Warna aksen
   date_format: Format tarikh
+  hardware_acceleration: Pecutan Perkakasan
+  hardware_acceleration_description: >-
+    Melumpuhkan pecutan perkakasan akan mengurangkan penggunaan memori, tetapi
+    boleh menyebabkan masalah prestasi. Selamat untuk dilumpuhkan jika anda
+    tidak akan menggunakan kertas dinding langsung.
   icon_pack:
     available: Pek Ikon Tersedia
     selected: Pek Ikon Aktif
@@ -167,6 +178,7 @@ review_request:
   title: Menikmati UI Seelen?
 save: Simpan
 save_and_restart: Jimat & mulakan semula
+search: Cari
 see_more: Lihat lagi
 shortcuts:
   duplicate_error: Pintasan ini diduplikasi

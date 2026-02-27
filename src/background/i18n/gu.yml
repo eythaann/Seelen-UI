@@ -36,3 +36,17 @@ shortcut:
   register:
     placeholder: કોઈપણ કી સંયોજન દબાવો
     title: નવી શોર્ટકટ નોંધણી
+widget_liveness:
+  failed_description: |-
+    વિજેટ '%{widget_name}' એ ઘણી વખત પ્રતિસાદ આપવાનું બંધ કર્યું.
+
+    તમે એપ્લિકેશનને ફરીથી પ્રારંભ કરવાનો પ્રયાસ કરી શકો છો.
+  failed_title: વિજેટ ભૂલ
+widget_permissions:
+  perm_open_file: ફાઇલો ખોલો
+  perm_run: કાર્યક્રમો ચલાવો
+  request_description: |-
+    વિજેટ '%{widget_name}' %{command} ને પરવાનગીની વિનંતી કરી રહ્યું છે.
+
+    શું તમે આને મંજૂરી આપવા માંગો છો?
+  request_title: વિજેટ પરવાનગી વિનંતી

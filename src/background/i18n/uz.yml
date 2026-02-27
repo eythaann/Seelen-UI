@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Har qanday tugmachani bosing
     title: Yangi yorliqni ro'yxatdan o'tkazish
+widget_liveness:
+  failed_description: |-
+    “%{widget_name}” vidjeti juda ko‘p marta javob berishni to‘xtatdi.
+
+    Ilovani qayta ishga tushirishga urinib ko'rishingiz mumkin.
+  failed_title: Vidjet xatosi
+widget_permissions:
+  perm_open_file: fayllarni oching
+  perm_run: dasturlarni ishga tushirish
+  request_description: |-
+    “%{widget_name}” vidjeti %{command} uchun ruxsat so‘ramoqda.
+
+    Bunga ruxsat bermoqchimisiz?
+  request_title: Vidjetga ruxsat soʻrovi

@@ -77,6 +77,12 @@ devtools:
   install_folder: Ffolder gosod
   load: Lwythet
   settings_file: Ffeil Gosodiadau
+  simulate_perm:
+    label: Efelychu Cais Caniatâd Widget
+    result_allowed: ✓ Rhoddwyd caniatâd
+    result_denied: ✗ Gwrthodwyd caniatâd
+    trigger: Efelychu
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: Storfa eiconau system glir
   clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Lliw acen
   date_format: Fformat dyddiad
+  hardware_acceleration: Cyflymiad Caledwedd
+  hardware_acceleration_description: >-
+    Bydd analluogi cyflymiad caledwedd yn lleihau'r defnydd o gof, ond gall
+    achosi problemau perfformiad. Yn ddiogel i'w analluogi os na fyddwch yn
+    defnyddio papurau wal byw.
   icon_pack:
     available: Pecynnau Eicon Ar Gael
     selected: Pecynnau Eicon Actif
@@ -167,6 +178,7 @@ review_request:
   title: Yn mwynhau Seelen UI?
 save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
+search: Chwiliwch
 see_more: Gweld mwy
 shortcuts:
   duplicate_error: Mae'r llwybr byr hwn yn cael ei ddyblygu

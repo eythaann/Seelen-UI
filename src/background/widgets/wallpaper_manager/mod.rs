@@ -1,3 +1,4 @@
+pub mod cli;
 mod hook;
 
 use base64::Engine;
@@ -53,12 +54,12 @@ impl SeelenWall {
     fn create_window() -> Result<WebviewWindow> {
         let handle = get_app_handle();
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::TARGET);
-        let args = WebviewArgs::new();
+        let args = WebviewArgs::default();
 
         let builder = tauri::WebviewWindowBuilder::new(
             handle,
             label,
-            tauri::WebviewUrl::App("react/wallpaper_manager/index.html".into()),
+            tauri::WebviewUrl::App("svelte/wallpaper_manager/index.html".into()),
         )
         .title(Self::TITLE)
         .minimizable(false)
@@ -86,6 +87,7 @@ impl SeelenWall {
         } */
 
         let window = builder.build()?;
+        // window.open_devtools();
         Ok(window)
     }
 

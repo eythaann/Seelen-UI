@@ -42,3 +42,14 @@ shortcut:
   register:
     placeholder: Appuyez sur n'importe quelle combinaison de touches
     title: Enregistrement de nouveaux raccourcis
+widget_liveness:
+  failed_description: |-
+    Le widget '%{widget_name}' a cessé de répondre trop souvent.
+
+    Vous pouvez essayer de redémarrer l'application.
+  failed_title: Erreur de widget
+widget_permissions:
+  perm_open_file: ouvrir des fichiers
+  perm_run: exécuter des programmes
+  request_description: "Le widget '%{widget_name}' demande l'autorisation de %{command}. \n\nVoulez-vous autoriser cela\_?"
+  request_title: Demande d'autorisation de widget

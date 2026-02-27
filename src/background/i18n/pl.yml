@@ -45,3 +45,17 @@ shortcut:
   register:
     placeholder: Naciśnij dowolną kombinację klawiszy
     title: Rejestracja nowego skrótu
+widget_liveness:
+  failed_description: |-
+    Widżet „%{widget_name}” przestał odpowiadać zbyt wiele razy.
+
+    Możesz spróbować ponownie uruchomić aplikację.
+  failed_title: Błąd widgetu
+widget_permissions:
+  perm_open_file: otwarte pliki
+  perm_run: uruchamiać programy
+  request_description: |-
+    Widżet „%{widget_name}” prosi o pozwolenie na %{command}.
+
+    Czy chcesz na to pozwolić?
+  request_title: Żądanie pozwolenia na widget

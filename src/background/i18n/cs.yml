@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Stiskněte libovolnou kombinaci klíčů
     title: Registrace nové zkratky
+widget_liveness:
+  failed_description: |-
+    Widget '%{widget_name}' přestal reagovat příliš mnohokrát.
+
+    Můžete zkusit restartovat aplikaci.
+  failed_title: Chyba widgetu
+widget_permissions:
+  perm_open_file: otevřít soubory
+  perm_run: spouštět programy
+  request_description: |-
+    Widget '%{widget_name}' požaduje oprávnění k %{command}.
+
+    Chcete to povolit?
+  request_title: Žádost o povolení k widgetu

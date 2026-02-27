@@ -36,3 +36,17 @@ shortcut:
   register:
     placeholder: ඕනෑම යතුරු සංයෝජනයක් ඔබන්න
     title: නව කෙටිමඟ ලියාපදිංචි කිරීම
+widget_liveness:
+  failed_description: |-
+    '%{widget_name}' විජට්ටුව බොහෝ වාර ගණනක් ප්‍රතිචාර දැක්වීම නැවැත්වීය.
+
+    ඔබට යෙදුම නැවත ආරම්භ කිරීමට උත්සාහ කළ හැකිය.
+  failed_title: විජට් දෝෂය
+widget_permissions:
+  perm_open_file: විවෘත ගොනු
+  perm_run: වැඩසටහන් ක්රියාත්මක කරන්න
+  request_description: |-
+    '%{widget_name}' විජට් එක %{command} වෙත අවසර ඉල්ලයි.
+
+    ඔබට මෙයට ඉඩ දීමට අවශ්‍යද?
+  request_title: විජට් අවසර ඉල්ලීම

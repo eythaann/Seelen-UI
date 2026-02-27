@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Agħfas kwalunkwe kombinazzjoni taċ-ċavetta
     title: Tirreġistra shortcut ġdid
+widget_liveness:
+  failed_description: |-
+    Il-widget '%{widget_name}' waqaf jirrispondi wisq drabi.
+
+    Tista 'tipprova terġa' tibda l-app.
+  failed_title: Widget Żball
+widget_permissions:
+  perm_open_file: fajls miftuħa
+  perm_run: imexxu programmi
+  request_description: |-
+    Il-widget '%{widget_name}' qed jitlob permess lil %{kmand}.
+
+    Trid tippermetti dan?
+  request_title: Talba ta' Permess għal Widget

@@ -78,6 +78,12 @@ devtools:
   install_folder: Xeerka rakibaadda
   load: Xammuul
   settings_file: Faylka Dejinta
+  simulate_perm:
+    label: Isku day Codsiga Ogolaanshaha Widget
+    result_allowed: Ogolaanshaha waa la bixiyay
+    result_denied: Ogolaanshaha waa la diiday
+    trigger: Isku day
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: Calaamadaha Calaamadaha Camis Cast
   clear_icons_tooltip: >-
@@ -94,6 +100,11 @@ extras:
 general:
   accent_color: Midab caqabad
   date_format: Taariikh format
+  hardware_acceleration: Dardargelinta Qalabka
+  hardware_acceleration_description: >-
+    Deminta dardargelinta qalabku waxay yarayn doontaa isticmaalka xusuusta,
+    laakiin waxay sababi kartaa arrimo waxqabadka. Waa badbaado in la joojiyo
+    haddii aadan isticmaali doonin gidaarada tooska ah.
   icon_pack:
     available: Xirmooyinka Icon ee la heli karo
     selected: Xirmooyinka Astaanta Firfircoon
@@ -172,6 +183,7 @@ review_request:
   title: Ku raaxaysiga Seelen UI?
 save: Badbaadin
 save_and_restart: Badbaadin & Dib u bilow
+search: Raadi
 see_more: Arag in dheeraad ah
 shortcuts:
   duplicate_error: Jidka gaaban waa la koobiyay

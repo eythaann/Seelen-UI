@@ -73,6 +73,12 @@ devtools:
   install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
+  simulate_perm:
+    label: ਵਿਜੇਟ ਅਨੁਮਤੀ ਬੇਨਤੀ ਦੀ ਨਕਲ ਕਰੋ
+    result_allowed: ✓ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ
+    result_denied: ✗ ਇਜਾਜ਼ਤ ਅਸਵੀਕਾਰ ਕੀਤੀ ਗਈ
+    trigger: ਸਿਮੂਲੇਟ
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: ਸਿਸਟਮ ਆਈਕਾਨ ਕੈਚੇ ਸਾਫ਼ ਕਰੋ
   clear_icons_tooltip: ਸਾਰੇ ਵਿਜੇਟਸ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਹੋਣ ਲਈ ਇੱਕ ਰੀਸਟਾਰਟ ਦੀ ਜ਼ਰੂਰਤ ਹੋ ਸਕਦੀ ਹੈ
@@ -87,6 +93,11 @@ extras:
 general:
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
   date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
+  hardware_acceleration: ਹਾਰਡਵੇਅਰ ਪ੍ਰਵੇਗ
+  hardware_acceleration_description: >-
+    ਹਾਰਡਵੇਅਰ ਪ੍ਰਵੇਗ ਨੂੰ ਅਸਮਰੱਥ ਕਰਨ ਨਾਲ ਮੈਮੋਰੀ ਦੀ ਵਰਤੋਂ ਘੱਟ ਜਾਵੇਗੀ, ਪਰ ਪ੍ਰਦਰਸ਼ਨ
+    ਸੰਬੰਧੀ ਸਮੱਸਿਆਵਾਂ ਪੈਦਾ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਜੇਕਰ ਤੁਸੀਂ ਲਾਈਵ ਵਾਲਪੇਪਰਾਂ ਦੀ ਵਰਤੋਂ ਨਹੀਂ
+    ਕਰਦੇ ਹੋ ਤਾਂ ਅਯੋਗ ਕਰਨਾ ਸੁਰੱਖਿਅਤ ਹੈ।
   icon_pack:
     available: ਉਪਲਬਧ ਆਈਕਨ ਪੈਕ
     selected: ਐਕਟਿਵ ਆਈਕਨ ਪੈਕ
@@ -161,6 +172,7 @@ review_request:
   title: ਸੀਲੇਨ UI ਦਾ ਆਨੰਦ ਮਾਣ ਰਹੇ ਹੋ?
 save: ਸੇਵ ਕਰੋ
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
+search: ਖੋਜ
 see_more: ਹੋਰ ਦੇਖੋ
 shortcuts:
   duplicate_error: ਇਹ ਸ਼ਾਰਟਕੱਟ ਡੁਪਲੀਕੇਟ ਹੈ

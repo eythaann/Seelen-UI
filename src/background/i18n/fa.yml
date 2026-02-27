@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: هر ترکیب کلیدی را فشار دهید
     title: ثبت میانبر جدید
+widget_liveness:
+  failed_description: |-
+    ویجت "%{widget_name}" بارها پاسخ نداد.
+
+    می توانید برنامه را دوباره راه اندازی کنید.
+  failed_title: خطای ویجت
+widget_permissions:
+  perm_open_file: باز کردن فایل ها
+  perm_run: برنامه ها را اجرا کنید
+  request_description: |-
+    ویجت '%{widget_name}' در حال درخواست مجوز برای %{command} است.
+
+    آیا می خواهید این اجازه را بدهید؟
+  request_title: درخواست مجوز ویجت

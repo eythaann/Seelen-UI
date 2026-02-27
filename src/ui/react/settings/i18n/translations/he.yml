@@ -75,6 +75,12 @@ devtools:
   install_folder: תיקיית התקנה
   load: טען
   settings_file: קובץ הגדרות
+  simulate_perm:
+    label: הדמיית בקשת הרשאת יישומון
+    result_allowed: ✓ הרשאה ניתנה
+    result_denied: ✗ הרשאה נדחתה
+    trigger: לְחַקוֹת
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: מטמון סמלי מערכת נקה
   clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
@@ -88,6 +94,10 @@ extras:
 general:
   accent_color: צבע הדגשה
   date_format: פורמט תאריך
+  hardware_acceleration: האצת חומרה
+  hardware_acceleration_description: >-
+    השבתת האצת החומרה תפחית את השימוש בזיכרון, אך עלולה לגרום לבעיות ביצועים.
+    בטוח להשבית אם לא תשתמש בטפטים חיים.
   icon_pack:
     available: חבילות אייקונים זמינות
     selected: ערכות אייקונים פעילות
@@ -160,6 +170,7 @@ review_request:
   title: נהנה ממשק המשתמש של Seelen?
 save: להציל
 save_and_restart: שמור והפעלה מחדש
+search: לְחַפֵּשׂ
 see_more: ראה עוד
 shortcuts:
   duplicate_error: קיצור זה משוכפל

@@ -8,9 +8,11 @@ import { startup } from "../../shared/tauri/infra.ts";
 import { autostart } from "../../../state/system.ts";
 import {
   getDateFormat,
+  getHardwareAcceleration,
   getLanguage,
   getStartOfWeek,
   setDateFormat,
+  setHardwareAcceleration,
   setLanguage,
   setStartOfWeek,
 } from "../application.ts";
@@ -26,6 +28,7 @@ export function General() {
   const language = getLanguage();
   const dateFormat = getDateFormat();
   const startOfWeek = getStartOfWeek();
+  const hardwareAcceleration = getHardwareAcceleration();
 
   const { t } = useTranslation();
 
@@ -49,71 +52,86 @@ export function General() {
   return (
     <>
       <SettingsGroup>
-        <SettingsOption>
-          <b>{t("general.startup")}</b>
-          <Switch
-            onChange={onAutoStart}
-            value={!!autostartStatus}
-            loading={changingAutostart || autostartStatus === null}
-          />
-        </SettingsOption>
+        <SettingsOption
+          label={t("general.startup")}
+          action={
+            <Switch
+              onChange={onAutoStart}
+              value={!!autostartStatus}
+              loading={changingAutostart || autostartStatus === null}
+            />
+          }
+        />
+        <SettingsOption
+          label={t("general.hardware_acceleration")}
+          description={t("general.hardware_acceleration_description")}
+          action={<Switch onChange={setHardwareAcceleration} checked={hardwareAcceleration} />}
+        />
       </SettingsGroup>
+
       <SettingsGroup>
-        <SettingsOption>
-          <b>{t("general.language")}</b>
-          <Select
-            showSearch
-            filterOption={(_searching, option) => {
-              if (!option) {
-                return true;
-              }
-              const searching = _searching.toLocaleLowerCase();
-              let label = option.label.toLocaleLowerCase();
-              let enLabel = option.enLabel.toLocaleLowerCase();
-              return label.includes(searching) || enLabel.includes(searching);
-            }}
-            style={{ width: "200px" }}
-            value={language}
-            options={[...SupportedLanguages]}
-            onSelect={(value) => setLanguage(value)}
-          />
-        </SettingsOption>
-        <SettingsOption>
-          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <b>{t("general.date_format")}</b>
-            <Tooltip
-              title={
-                <a
-                  href="https://momentjs.com/docs/#/displaying/format/"
-                  target="_blank"
-                >
-                  https://momentjs.com/docs/#/displaying/format/
-                </a>
-              }
-            >
-              <Icon iconName="LuCircleHelp" />
-            </Tooltip>
-          </div>
-          <Input
-            style={{ width: "200px", maxWidth: "200px" }}
-            placeholder="YYYY-MM-DD"
-            value={dateFormat}
-            onChange={onDateFormatChange}
-          />
-        </SettingsOption>
-        <SettingsOption>
-          <b>{t("general.start_of_week")}</b>
-          <Select
-            style={{ width: "200px" }}
-            value={startOfWeek}
-            options={[
-              { label: t("general.monday"), value: "Monday" },
-              { label: t("general.sunday"), value: "Sunday" },
-              { label: t("general.saturday"), value: "Saturday" },
-            ]}
-            onSelect={(value) => setStartOfWeek(value)}
-          />
-        </SettingsOption>
+        <SettingsOption
+          label={t("general.language")}
+          action={
+            <Select
+              showSearch
+              filterOption={(_searching, option) => {
+                if (!option) {
+                  return true;
+                }
+                const searching = _searching.toLocaleLowerCase();
+                let label = option.label.toLocaleLowerCase();
+                let enLabel = option.enLabel.toLocaleLowerCase();
+                return label.includes(searching) || enLabel.includes(searching);
+              }}
+              style={{ width: "200px" }}
+              value={language}
+              options={[...SupportedLanguages]}
+              onSelect={(value) => setLanguage(value)}
+            />
+          }
+        />
+
+        <SettingsOption
+          label={
+            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <b>{t("general.date_format")}</b>
+              <Tooltip
+                title={
+                  <a href="https://momentjs.com/docs/#/displaying/format/" target="_blank">
+                    https://momentjs.com/docs/#/displaying/format/
+                  </a>
+                }
+              >
+                <Icon iconName="LuCircleHelp" />
+              </Tooltip>
+            </div>
+          }
+          action={
+            <Input
+              style={{ width: "200px", maxWidth: "200px" }}
+              placeholder="YYYY-MM-DD"
+              value={dateFormat}
+              onChange={onDateFormatChange}
+            />
+          }
+        />
+
+        <SettingsOption
+          label={t("general.start_of_week")}
+          action={
+            <Select
+              style={{ width: "200px" }}
+              value={startOfWeek}
+              options={[
+                { label: t("general.monday"), value: "Monday" },
+                { label: t("general.sunday"), value: "Sunday" },
+                { label: t("general.saturday"), value: "Saturday" },
+              ]}
+              onSelect={(value) => setStartOfWeek(value)}
+            />
+          }
+        />
       </SettingsGroup>
 
       <Colors />

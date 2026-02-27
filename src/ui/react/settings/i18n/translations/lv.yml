@@ -77,6 +77,12 @@ devtools:
   install_folder: Instalēšanas mape
   load: Slodze
   settings_file: Iestatīšanas fails
+  simulate_perm:
+    label: Simulēt logrīka atļaujas pieprasījumu
+    result_allowed: ✓ Atļauja piešķirta
+    result_denied: ✗ Atļauja liegta
+    trigger: Simulēt
+    widget_id_placeholder: '@autors/logrīka nosaukums'
 extras:
   clear_icons: Iztīrīt sistēmas ikonu kešatmiņu
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Akcents
   date_format: Datuma formāts
+  hardware_acceleration: Aparatūras paātrinājums
+  hardware_acceleration_description: >-
+    Aparatūras paātrinājuma atspējošana samazinās atmiņas lietojumu, taču var
+    izraisīt veiktspējas problēmas. To ir droši atspējot, ja neizmantojat dzīvās
+    tapetes.
   icon_pack:
     available: Pieejamie ikonu komplekti
     selected: Aktīvās ikonu pakotnes
@@ -167,6 +178,7 @@ review_request:
   title: Vai jums patīk Seelen UI?
 save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
+search: Meklēt
 see_more: Skatīt vairāk
 shortcuts:
   duplicate_error: Šī saīsne ir dublēta

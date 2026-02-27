@@ -77,6 +77,12 @@ devtools:
   install_folder: Ifolda yokufaka
   load: Thwala
   settings_file: Ifayela lezilungiselelo
+  simulate_perm:
+    label: Lingisa Isicelo Semvume Yewijethi
+    result_allowed: ✓ Imvume inikiwe
+    result_denied: ✗ Imvume inqatshiwe
+    trigger: Lingisa
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: Sula i-Cold yesistimu ye-System
   clear_icons_tooltip: >-
@@ -94,6 +100,11 @@ extras:
 general:
   accent_color: Umbala we-Accent
   date_format: Ifomethi yosuku
+  hardware_acceleration: I-Hardware Acceleration
+  hardware_acceleration_description: >-
+    Ukukhubaza ukusheshisa kwehadiwe kuzonciphisa ukusetshenziswa kwememori,
+    kodwa kungabangela izinkinga zokusebenza. Kuphephile ukukhubaza uma ungeke
+    usebenzise amaphephadonga abukhoma.
   icon_pack:
     available: Amaphekhi esithonjana atholakalayo
     selected: Amaphekhi Wesithonjana Asebenzayo
@@ -170,6 +181,7 @@ review_request:
   title: Ujabulela i-Seelen UI?
 save: Hlenga
 save_and_restart: Gcina futhi Qalisa kabusha
+search: Sesha
 see_more: Buka Okuningi
 shortcuts:
   duplicate_error: Lesi sinqamuleli siyimpinda

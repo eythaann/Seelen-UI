@@ -46,3 +46,17 @@ shortcut:
   register:
     placeholder: Druk op een sleutelcombinatie
     title: Nieuwe snelkoppeling registreren
+widget_liveness:
+  failed_description: |-
+    De widget '%{widget_name}' reageerde te vaak niet meer.
+
+    U kunt proberen de app opnieuw te starten.
+  failed_title: Widgetfout
+widget_permissions:
+  perm_open_file: bestanden openen
+  perm_run: programma's uitvoeren
+  request_description: |-
+    De widget '%{widget_name}' vraagt ​​toestemming voor %{command}.
+
+    Wilt u dit toestaan?
+  request_title: Verzoek om widgettoestemming

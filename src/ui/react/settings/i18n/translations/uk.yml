@@ -77,6 +77,12 @@ devtools:
   install_folder: Папка встановлення
   load: Відкрити
   settings_file: Файл налаштувань
+  simulate_perm:
+    label: Симуляція запиту на дозвіл віджета
+    result_allowed: ✓ Дозвіл надано
+    result_denied: ✗ У дозволі відмовлено
+    trigger: Симулювати
+    widget_id_placeholder: '@author/назва-віджета'
 extras:
   clear_icons: Очистити кеш системних іконок
   clear_icons_tooltip: Може знадобитися перезапуск для повного набрання чинності для всіх віджетів
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Основний колір
   date_format: Формат дати та часу
+  hardware_acceleration: Апаратне прискорення
+  hardware_acceleration_description: >-
+    Вимкнення апаратного прискорення зменшить використання пам’яті, але може
+    спричинити проблеми з продуктивністю. Безпечно вимкнути, якщо ви не хочете
+    використовувати живі шпалери.
   icon_pack:
     available: Доступні пакети іконок
     selected: Активні пакети іконки
@@ -167,6 +178,7 @@ review_request:
   title: Подобається інтерфейс користувача Seelen?
 save: Зберегти
 save_and_restart: Зберегти та перезапустити
+search: Пошук
 see_more: Побачити більше
 shortcuts:
   duplicate_error: Цей ярлик дублюється

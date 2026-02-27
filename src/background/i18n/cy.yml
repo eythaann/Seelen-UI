@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Pwyswch unrhyw gyfuniad allweddol
     title: Cofrestru llwybr byr newydd
+widget_liveness:
+  failed_description: |-
+    Mae'r teclyn '%{widget_name}' wedi stopio ymateb gormod o weithiau.
+
+    Gallwch geisio ailgychwyn yr app.
+  failed_title: Gwall Teclyn
+widget_permissions:
+  perm_open_file: agor ffeiliau
+  perm_run: rhedeg rhaglenni
+  request_description: |-
+    Mae'r teclyn '%{widget_name}' yn gofyn am ganiatâd i %{command}.
+
+    Ydych chi am ganiatáu hyn?
+  request_title: Cais am Ganiatâd Widget

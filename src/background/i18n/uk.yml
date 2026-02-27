@@ -44,3 +44,17 @@ shortcut:
   register:
     placeholder: Натисніть будь -яку комбінацію клавіш
     title: Реєстрація нового ярлика
+widget_liveness:
+  failed_description: |-
+    Віджет "%{widget_name}" переставав відповідати занадто багато разів.
+
+    Ви можете спробувати перезапустити програму.
+  failed_title: Помилка віджета
+widget_permissions:
+  perm_open_file: відкритих файлів
+  perm_run: запускати програми
+  request_description: |-
+    Віджет «%{widget_name}» запитує дозвіл на %{command}.
+
+    Ви хочете це дозволити?
+  request_title: Запит на дозвіл віджета

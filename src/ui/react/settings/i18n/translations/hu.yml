@@ -76,6 +76,12 @@ devtools:
   install_folder: Telepítési mappa
   load: Betöltés
   settings_file: Beállítási fájl
+  simulate_perm:
+    label: Szimulálja a Widget engedélykérését
+    result_allowed: ✓ Engedély megadva
+    result_denied: ✗ Engedély megtagadva
+    trigger: Szimulál
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: Rendszerikonok gyorsítótárának törlése
   clear_icons_tooltip: >-
@@ -92,6 +98,11 @@ extras:
 general:
   accent_color: Akcentus szín
   date_format: Dátum formátum
+  hardware_acceleration: Hardveres gyorsítás
+  hardware_acceleration_description: >-
+    A hardveres gyorsítás letiltása csökkenti a memóriahasználatot, de
+    teljesítménybeli problémákat okozhat. Biztonságosan letiltható, ha nem
+    használ élő háttérképeket.
   icon_pack:
     available: Elérhető ikoncsomagok
     selected: Aktív ikoncsomagok
@@ -166,6 +177,7 @@ review_request:
   title: Élvezed a Seelen felhasználói felületet?
 save: Megment
 save_and_restart: Mentés és újraindítás
+search: Keresés
 see_more: Lásd még
 shortcuts:
   duplicate_error: Ez a parancsikon megkettőződik

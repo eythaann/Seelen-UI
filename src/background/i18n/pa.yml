@@ -38,3 +38,17 @@ shortcut:
   register:
     placeholder: ਕੋਈ ਵੀ ਕੁੰਜੀ ਸੰਜੋਗ ਦਬਾਓ
     title: ਨਵਾਂ ਸ਼ੌਰਟਕਟ ਰਜਿਸਟਰ ਕਰਨਾ
+widget_liveness:
+  failed_description: |-
+    ਵਿਜੇਟ '%{widget_name}' ਨੇ ਬਹੁਤ ਵਾਰ ਜਵਾਬ ਦੇਣਾ ਬੰਦ ਕਰ ਦਿੱਤਾ ਹੈ।
+
+    ਤੁਸੀਂ ਐਪ ਨੂੰ ਰੀਸਟਾਰਟ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰ ਸਕਦੇ ਹੋ।
+  failed_title: ਵਿਜੇਟ ਗਲਤੀ
+widget_permissions:
+  perm_open_file: ਫਾਈਲਾਂ ਖੋਲ੍ਹੋ
+  perm_run: ਪ੍ਰੋਗਰਾਮ ਚਲਾਓ
+  request_description: |-
+    ਵਿਜੇਟ '%{widget_name}' %{command} ਨੂੰ ਇਜਾਜ਼ਤ ਮੰਗ ਰਿਹਾ ਹੈ।
+
+    ਕੀ ਤੁਸੀਂ ਇਸਦੀ ਇਜਾਜ਼ਤ ਦੇਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+  request_title: ਵਿਜੇਟ ਅਨੁਮਤੀ ਦੀ ਬੇਨਤੀ

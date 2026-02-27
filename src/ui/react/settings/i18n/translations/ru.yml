@@ -77,6 +77,12 @@ devtools:
   install_folder: Папка установки
   load: Загрузить
   settings_file: Файл настроек
+  simulate_perm:
+    label: Имитировать запрос разрешения виджета
+    result_allowed: ✓ Разрешение получено
+    result_denied: ✗ Разрешение отклонено
+    trigger: Имитировать
+    widget_id_placeholder: '@автор/имя-виджета'
 extras:
   clear_icons: Очистить кэш системных значков
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Акцентный цвет
   date_format: Формат даты
+  hardware_acceleration: Аппаратное ускорение
+  hardware_acceleration_description: >-
+    Отключение аппаратного ускорения уменьшит использование памяти, но может
+    вызвать проблемы с производительностью. Безопасно отключить, если вы не
+    будете использовать живые обои.
   icon_pack:
     available: Доступные пакеты значков
     selected: Активные пакеты значков
@@ -167,6 +178,7 @@ review_request:
   title: Нравится интерфейс Seelen?
 save: Сохранить
 save_and_restart: Сохранить и перезапустить
+search: Поиск
 see_more: См. подробнее
 shortcuts:
   duplicate_error: Этот ярлык дублируется

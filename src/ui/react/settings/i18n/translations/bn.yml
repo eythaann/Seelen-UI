@@ -77,6 +77,12 @@ devtools:
   install_folder: ইনস্টলেশন ফোল্ডার
   load: বোঝা
   settings_file: সেটিংস ফাইল
+  simulate_perm:
+    label: উইজেট অনুমতি অনুরোধ অনুকরণ
+    result_allowed: ✓ অনুমতি দেওয়া হয়েছে
+    result_denied: ✗ অনুমতি অস্বীকৃত
+    trigger: অনুকরণ
+    widget_id_placeholder: '@লেখক/উইজেট-নাম'
 extras:
   clear_icons: ক্লিয়ার সিস্টেম আইকন ক্যাশে
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: সুরের ধাপের রঙ
   date_format: তারিখ ফর্ম্যাট
+  hardware_acceleration: হার্ডওয়্যার ত্বরণ
+  hardware_acceleration_description: >-
+    হার্ডওয়্যার ত্বরণ নিষ্ক্রিয় করা মেমরি ব্যবহার হ্রাস করবে, কিন্তু
+    কর্মক্ষমতা সমস্যা সৃষ্টি করতে পারে। আপনি লাইভ ওয়ালপেপার ব্যবহার না করলে
+    অক্ষম করা নিরাপদ।
   icon_pack:
     available: উপলব্ধ আইকন প্যাক
     selected: সক্রিয় আইকন প্যাক
@@ -169,6 +180,7 @@ review_request:
   title: Seelen UI উপভোগ করছেন?
 save: সংরক্ষণ
 save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
+search: অনুসন্ধান করুন
 see_more: আরও দেখুন
 shortcuts:
   duplicate_error: এই শর্টকাট ডুপ্লিকেট করা হয়

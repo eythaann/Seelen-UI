@@ -44,3 +44,17 @@ shortcut:
   register:
     placeholder: Натиснете всяка комбинация от клавиши
     title: Регистриране на нов пряк път
+widget_liveness:
+  failed_description: |-
+    Приспособлението „%{widget_name}“ спря да отговаря твърде много пъти.
+
+    Можете да опитате да рестартирате приложението.
+  failed_title: Грешка в притурката
+widget_permissions:
+  perm_open_file: отворени файлове
+  perm_run: стартирайте програми
+  request_description: |-
+    Приспособлението „%{widget_name}“ иска разрешение за %{command}.
+
+    Искате ли да разрешите това?
+  request_title: Заявка за разрешение за джаджа

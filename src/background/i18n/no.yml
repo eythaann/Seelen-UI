@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Trykk på enhver tastekombinasjon
     title: Registrering av ny snarvei
+widget_liveness:
+  failed_description: |-
+    Modulen «%{widget_name}» sluttet å svare for mange ganger.
+
+    Du kan prøve å starte appen på nytt.
+  failed_title: Widget-feil
+widget_permissions:
+  perm_open_file: åpne filer
+  perm_run: kjøre programmer
+  request_description: |-
+    Modulen «%{widget_name}» ber om tillatelse til %{command}.
+
+    Vil du tillate dette?
+  request_title: Forespørsel om widgettillatelse

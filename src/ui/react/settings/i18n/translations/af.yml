@@ -77,6 +77,12 @@ devtools:
   install_folder: Installasie -lêergids
   load: Vrag
   settings_file: Instellingslêer
+  simulate_perm:
+    label: Simuleer Widget Toestemming Versoek
+    result_allowed: ✓ Toestemming verleen
+    result_denied: ✗ Toestemming geweier
+    trigger: Simuleer
+    widget_id_placeholder: '@outeur/legstuknaam'
 extras:
   clear_icons: Maak stelselikone kas uit
   clear_icons_tooltip: '''N Herbegin kan nodig wees om alle widgets ten volle in werking te stel'
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Aksentkleur
   date_format: Datumformaat
+  hardware_acceleration: Hardeware versnelling
+  hardware_acceleration_description: >-
+    Deaktiveer hardewareversnelling sal geheuegebruik verminder, maar kan
+    prestasieprobleme veroorsaak. Is veilig om te deaktiveer as jy nie lewendige
+    agtergronde sal gebruik nie.
   icon_pack:
     available: Beskikbare ikoonpakkette
     selected: Aktiewe ikoonpakkette
@@ -167,6 +178,7 @@ review_request:
   title: Geniet jy van Seelen UI?
 save: Red
 save_and_restart: Stoor en herbegin
+search: Soek
 see_more: Sien meer
 shortcuts:
   duplicate_error: Hierdie kortpad is gedupliseer

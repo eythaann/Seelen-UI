@@ -77,6 +77,12 @@ devtools:
   install_folder: Kurulum Klasörü
   load: Yükle
   settings_file: Ayarlar Dosyası
+  simulate_perm:
+    label: Widget İzin İsteğini Simüle Et
+    result_allowed: ✓ İzin verildi
+    result_denied: ✗ İzin reddedildi
+    trigger: Benzetmek
+    widget_id_placeholder: '@yazar/widget-adı'
 extras:
   clear_icons: Sistem Simgeleri Önbelleğini Temizle
   clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Vurgu Rengi
   date_format: Tarih Biçimi
+  hardware_acceleration: Donanım Hızlandırma
+  hardware_acceleration_description: >-
+    Donanım hızlandırmayı devre dışı bırakmak bellek kullanımını azaltır ancak
+    performans sorunlarına neden olabilir. Canlı duvar kağıtları
+    kullanmayacaksanız devre dışı bırakmak güvenlidir.
   icon_pack:
     available: Mevcut Simge Paketleri
     selected: Aktif Simge Paketleri
@@ -167,6 +178,7 @@ review_request:
   title: Seelen kullanıcı arayüzünden memnun musunuz?
 save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
+search: Aramak
 see_more: Daha Fazla Gör
 shortcuts:
   duplicate_error: Bu kısayol kopyalandı

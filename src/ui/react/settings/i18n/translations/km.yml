@@ -76,6 +76,12 @@ devtools:
   install_folder: ថតឯកសារដំឡើង
   load: ផ្ទុក
   settings_file: ឯកសារការកំណត់
+  simulate_perm:
+    label: ក្លែងធ្វើសំណើការអនុញ្ញាតធាតុក្រាហ្វិក
+    result_allowed: ✓មានការអនុញ្ញាត
+    result_denied: ✗ ការអនុញ្ញាតត្រូវបានបដិសេធ
+    trigger: ក្លែងធ្វើ
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: សម្អាតឃ្លាំងសម្ងាត់ប្រព័ន្ធ
   clear_icons_tooltip: >-
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: ពណ៌សង្កត់សំឡេង
   date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ
+  hardware_acceleration: ការបង្កើនល្បឿនផ្នែករឹង
+  hardware_acceleration_description: >-
+    ការបិទការបង្កើនល្បឿនផ្នែករឹងនឹងកាត់បន្ថយការប្រើប្រាស់អង្គចងចាំ
+    ប៉ុន្តែអាចបណ្តាលឱ្យមានបញ្ហាដំណើរការ។ មានសុវត្ថិភាពក្នុងការបិទ
+    ប្រសិនបើអ្នកមិនប្រើផ្ទាំងរូបភាពផ្ទាល់។
   icon_pack:
     available: កញ្ចប់រូបតំណាងដែលមាន
     selected: កញ្ចប់រូបតំណាងសកម្ម
@@ -165,6 +176,7 @@ review_request:
   title: រីករាយជាមួយ Seelen UI?
 save: រក្សាទុក
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
+search: ស្វែងរក
 see_more: មើលច្រើនទៀត
 shortcuts:
   duplicate_error: ផ្លូវកាត់នេះត្រូវបានចម្លង

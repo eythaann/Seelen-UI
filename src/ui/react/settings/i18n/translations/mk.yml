@@ -77,6 +77,12 @@ devtools:
   install_folder: Папка за инсталација
   load: Оптоварување
   settings_file: Датотека за поставки
+  simulate_perm:
+    label: Симулирајте барање за дозвола за виџети
+    result_allowed: ✓ Дадена е дозвола
+    result_denied: ✗ Дозволата е одбиена
+    trigger: Симулирајте
+    widget_id_placeholder: '@author/виџет-име'
 extras:
   clear_icons: Јасна кеш за икони на системот
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Боја на акцент
   date_format: Формат на датум
+  hardware_acceleration: Хардверско забрзување
+  hardware_acceleration_description: >-
+    Оневозможувањето на хардверското забрзување ќе ја намали употребата на
+    меморијата, но може да предизвика проблеми со перформансите. Безбедно е да
+    се оневозможи ако не користите живи позадини.
   icon_pack:
     available: Достапни пакети со икони
     selected: Пакети со активни икони
@@ -167,6 +178,7 @@ review_request:
   title: Уживате во Seelen UI?
 save: Зачувај
 save_and_restart: Зачувај и рестартирај
+search: Пребарување
 see_more: Погледнете повеќе
 shortcuts:
   duplicate_error: Оваа кратенка е дупликат

@@ -18,7 +18,7 @@ impl WidgetWebview {
         let state = FULL_STATE.load();
         let title = widget.metadata.display_name.get(state.locale());
 
-        let args = WebviewArgs::new().disable_gpu();
+        let args = WebviewArgs::default();
 
         let url = match widget.loader {
             WidgetLoader::Legacy => {
@@ -147,29 +147,11 @@ impl WebviewArgs {
     ];
 
     const PERFORMANCE_ARGS: &[&str] = &[
-        //  "--enable-low-end-device-mode",
-        "--in-process-gpu",
+        // "--enable-low-end-device-mode",
+        // "--in-process-gpu",
+        "--disable-gpu",
+        "--disable-software-rasterizer",
     ];
-
-    pub fn new() -> Self {
-        let common_args = Self::BASE_ARGS
-            .iter()
-            .chain(Self::PERFORMANCE_ARGS)
-            .map(|s| s.to_string())
-            .collect();
-
-        Self {
-            common_args,
-            extra_args: Vec::new(),
-        }
-    }
-
-    pub fn disable_gpu(self) -> Self {
-        // if window manager is enabled (that is expected thing) having 2 processes one with gpu and another without,
-        // is worse than having them together with gpu enabled so this is the reason why this is currently ignored.
-        // self.extra_args.push("--disable-gpu --disable-software-rasterizer".to_string());
-        self
-    }
 
     pub fn data_directory(&self) -> PathBuf {
         if self.extra_args.is_empty() {
@@ -178,6 +160,25 @@ impl WebviewArgs {
             SEELEN_COMMON
                 .app_cache_dir()
                 .join(self.extra_args.join("").replace('-', ""))
+        }
+    }
+}
+
+impl Default for WebviewArgs {
+    fn default() -> Self {
+        let common_args = if FULL_STATE.load().settings.hardware_acceleration {
+            Self::BASE_ARGS.iter().map(|s| s.to_string()).collect()
+        } else {
+            Self::BASE_ARGS
+                .iter()
+                .chain(Self::PERFORMANCE_ARGS)
+                .map(|s| s.to_string())
+                .collect()
+        };
+
+        Self {
+            common_args,
+            extra_args: Vec::new(),
         }
     }
 }

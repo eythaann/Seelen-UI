@@ -76,6 +76,12 @@ devtools:
   install_folder: Thư mục cài đặt
   load: Trọng tải
   settings_file: Cài đặt tập tin
+  simulate_perm:
+    label: Mô phỏng yêu cầu cấp phép widget
+    result_allowed: ✓ Đã được cấp phép
+    result_denied: ✗ Quyền bị từ chối
+    trigger: mô phỏng
+    widget_id_placeholder: '@tác giả/tên widget'
 extras:
   clear_icons: Xóa bộ đệm biểu tượng hệ thống
   clear_icons_tooltip: >-
@@ -92,6 +98,11 @@ extras:
 general:
   accent_color: Màu nhấn
   date_format: Định dạng ngày
+  hardware_acceleration: Tăng tốc phần cứng
+  hardware_acceleration_description: >-
+    Việc tắt tính năng tăng tốc phần cứng sẽ giảm mức sử dụng bộ nhớ nhưng có
+    thể gây ra các vấn đề về hiệu suất. Có thể tắt an toàn nếu bạn không sử dụng
+    hình nền động.
   icon_pack:
     available: Gói biểu tượng có sẵn
     selected: Gói biểu tượng hoạt động
@@ -168,6 +179,7 @@ review_request:
   title: Bạn thích giao diện người dùng Seelen?
 save: Cứu
 save_and_restart: Lưu & Khởi động lại
+search: Tìm kiếm
 see_more: Xem thêm
 shortcuts:
   duplicate_error: Phím tắt này bị trùng lặp

@@ -1,4 +1,4 @@
-import { settings } from "../../state/mod";
+import { needRestart, settings } from "../../state/mod";
 import type { PerformanceModeSettings, StartOfWeek } from "@seelen-ui/lib/types";
 
 /**
@@ -66,6 +66,24 @@ export function setPerformanceMode(performanceMode: PerformanceModeSettings) {
   settings.value = {
     ...settings.value,
     performanceMode,
+  };
+}
+
+/**
+ * Gets the hardware acceleration setting
+ */
+export function getHardwareAcceleration(): boolean {
+  return settings.value.hardwareAcceleration;
+}
+
+/**
+ * Sets the hardware acceleration setting
+ */
+export function setHardwareAcceleration(hardwareAcceleration: boolean) {
+  needRestart.value = true;
+  settings.value = {
+    ...settings.value,
+    hardwareAcceleration,
   };
 }
 

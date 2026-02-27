@@ -77,6 +77,12 @@ devtools:
   install_folder: Inštalačný priečinok
   load: Naložiť
   settings_file: Nastavovací súbor
+  simulate_perm:
+    label: Simulovať žiadosť o povolenie miniaplikácie
+    result_allowed: ✓ Povolenie udelené
+    result_denied: ✗ Povolenie zamietnuté
+    trigger: Simulovať
+    widget_id_placeholder: '@autor/názov-widgetu'
 extras:
   clear_icons: Vymazanie vyrovnávacej pamäte systémových ikon
   clear_icons_tooltip: Aby sa všetky widgety plne prejavili, môže byť potrebný reštart.
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Prízvuk
   date_format: Formát
+  hardware_acceleration: Hardvérová akcelerácia
+  hardware_acceleration_description: >-
+    Vypnutie hardvérovej akcelerácie zníži využitie pamäte, ale môže spôsobiť
+    problémy s výkonom. Je bezpečné ho zakázať, ak nebudete používať živé
+    tapety.
   icon_pack:
     available: Dostupné balíčky ikon
     selected: Balíky aktívnych ikon
@@ -169,6 +180,7 @@ review_request:
   title: Páči sa vám používateľské rozhranie Seelen?
 save: Uložiť
 save_and_restart: Uložiť a reštartovať
+search: Hľadať
 see_more: Pozri viac
 shortcuts:
   duplicate_error: Táto skratka je duplikovaná

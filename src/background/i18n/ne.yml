@@ -36,3 +36,17 @@ shortcut:
   register:
     placeholder: कुनै कुञ्जी संयोजन थिच्नुहोस्
     title: नयाँ सर्टकट दर्ता गर्दै
+widget_liveness:
+  failed_description: |-
+    विजेट '%{widget_name}' धेरै पटक प्रतिक्रिया दिन रोकियो।
+
+    तपाईं एप पुन: सुरु गर्ने प्रयास गर्न सक्नुहुन्छ।
+  failed_title: विजेट त्रुटि
+widget_permissions:
+  perm_open_file: फाइलहरू खोल्नुहोस्
+  perm_run: कार्यक्रमहरू सञ्चालन गर्ने
+  request_description: |-
+    विजेट '%{widget_name}' ले %{command} लाई अनुमति अनुरोध गरिरहेको छ।
+
+    के तपाईं यसलाई अनुमति दिन चाहनुहुन्छ?
+  request_title: विजेट अनुमति अनुरोध

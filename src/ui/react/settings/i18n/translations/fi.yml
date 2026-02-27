@@ -77,6 +77,12 @@ devtools:
   install_folder: Asennuskansio
   load: Ladata
   settings_file: Asetustiedosto
+  simulate_perm:
+    label: Simuloi widgetin lupapyyntö
+    result_allowed: ✓ Lupa myönnetty
+    result_denied: ✗ Lupa evätty
+    trigger: Simuloida
+    widget_id_placeholder: '@author/widgetin nimi'
 extras:
   clear_icons: Tyhjennä järjestelmän kuvakkeiden välimuisti
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: Korostusväri
   date_format: Päiväysmuoto
+  hardware_acceleration: Laitteistokiihdytys
+  hardware_acceleration_description: >-
+    Laitteistokiihdytyksen poistaminen käytöstä vähentää muistin käyttöä, mutta
+    voi aiheuttaa suorituskykyongelmia. On turvallista poistaa käytöstä, jos et
+    käytä live-taustakuvia.
   icon_pack:
     available: Saatavilla kuvakepaketit
     selected: Aktiiviset kuvakepaketit
@@ -169,6 +180,7 @@ review_request:
   title: Pidätkö Seelen-käyttöliittymästä?
 save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
+search: Haku
 see_more: Katso lisää
 shortcuts:
   duplicate_error: Tämä pikanäppäin on kopioitu

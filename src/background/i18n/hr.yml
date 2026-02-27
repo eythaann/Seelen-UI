@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Pritisnite bilo koju kombinaciju tipki
     title: Registriranje novog prečaca
+widget_liveness:
+  failed_description: |-
+    Widget '%{widget_name}' prestao je reagirati previše puta.
+
+    Možete pokušati ponovno pokrenuti aplikaciju.
+  failed_title: Pogreška widgeta
+widget_permissions:
+  perm_open_file: otvorene datoteke
+  perm_run: pokretati programe
+  request_description: |-
+    Widget '%{widget_name}' traži dozvolu za %{command}.
+
+    Želite li to dopustiti?
+  request_title: Zahtjev za dopuštenje widgeta

@@ -44,3 +44,17 @@ shortcut:
   register:
     placeholder: Stlačte ľubovoľnú kombináciu klávesov
     title: Registrácia novej skratky
+widget_liveness:
+  failed_description: |-
+    Miniaplikácia '%{widget_name}' prestala reagovať príliš veľakrát.
+
+    Môžete skúsiť reštartovať aplikáciu.
+  failed_title: Chyba miniaplikácie
+widget_permissions:
+  perm_open_file: otvorené súbory
+  perm_run: spúšťať programy
+  request_description: |-
+    Miniaplikácia '%{widget_name}' požaduje povolenie pre %{command}.
+
+    Chcete to povoliť?
+  request_title: Žiadosť o povolenie miniaplikácie

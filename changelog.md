@@ -6,11 +6,16 @@
 
 - add new widget security layer for exposed commands.
 - apps menu optinal acrylic effect.
+- allow users decide if use or not hardware acceleration.
 
 ### enhancements
 
 - widgets loading time.
 - settings resources lists.
+
+### refactors
+
+- remake wallpaper manager from react to svelte.
 
 ### fix
 
@@ -21,6 +26,7 @@
 - context menu on toolbar bottom position.
 - external links being opened on webview instead external browser.
 - apps menu widget freeze on search.
+- change wallpaper shortcuts not working.
 
 ## [2.5.1]
 

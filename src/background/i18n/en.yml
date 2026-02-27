@@ -41,10 +41,16 @@ shortcut:
     placeholder: Press any key combination
     title: Registering new shortcut
 widget_liveness:
+  failed_description: |-
+    The widget '%{widget_name}' stopped responding too many times.
+
+    You can try restarting the app.
   failed_title: Widget Error
-  failed_description: "The widget '%{widget_name}' stopped responding too many times.\n\nYou can try restarting the app."
 widget_permissions:
-  request_title: Widget Permission Request
-  request_description: "The widget '%{widget_name}' is requesting permission to %{command}.\n\nDo you want to allow this?"
-  perm_run: run programs
   perm_open_file: open files
+  perm_run: run programs
+  request_description: |-
+    The widget '%{widget_name}' is requesting permission to %{command}.
+
+    Do you want to allow this?
+  request_title: Widget Permission Request

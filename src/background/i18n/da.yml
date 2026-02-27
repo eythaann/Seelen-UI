@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Tryk på enhver nøglekombination
     title: Registrering af ny genvej
+widget_liveness:
+  failed_description: |-
+    Widgetten '%{widget_name}' holdt op med at svare for mange gange.
+
+    Du kan prøve at genstarte appen.
+  failed_title: Widget-fejl
+widget_permissions:
+  perm_open_file: åbne filer
+  perm_run: køre programmer
+  request_description: |-
+    Widgetten '%{widget_name}' anmoder om tilladelse til %{command}.
+
+    Vil du tillade dette?
+  request_title: Anmodning om widgettilladelse

@@ -77,6 +77,12 @@ devtools:
   install_folder: Carpeta d'instal·lació
   load: Carregar
   settings_file: Arxiu de configuració
+  simulate_perm:
+    label: Simula la sol·licitud de permís de widget
+    result_allowed: ✓ Autorització concedida
+    result_denied: ✗ Permís denegat
+    trigger: Simular
+    widget_id_placeholder: '@autor/nom-widget'
 extras:
   clear_icons: Esborrar la memòria cau de les icones del sistema
   clear_icons_tooltip: Es pot requerir un reinici per tenir efecte sobre tots els ginys
@@ -92,6 +98,11 @@ extras:
 general:
   accent_color: Color d’accent
   date_format: Format de la data
+  hardware_acceleration: Acceleració de maquinari
+  hardware_acceleration_description: >-
+    Desactivar l'acceleració de maquinari reduirà l'ús de memòria, però pot
+    provocar problemes de rendiment. És segur desactivar-lo si no feu servir
+    fons de pantalla en viu.
   icon_pack:
     available: Paquets d'icones disponibles
     selected: Paquets d'icones actius
@@ -168,6 +179,7 @@ review_request:
   title: Us agrada la interfície d'usuari de Seelen?
 save: Estalviar
 save_and_restart: Desar i reiniciar
+search: Cerca
 see_more: Veure més
 shortcuts:
   duplicate_error: Aquesta drecera està duplicada

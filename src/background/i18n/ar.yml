@@ -32,3 +32,17 @@ shortcut:
   register:
     placeholder: اضغط على أي مجموعة مفاتيح
     title: تسجيل اختصار جديد
+widget_liveness:
+  failed_description: |-
+    توقفت الأداة '%{widget_name}' عن الاستجابة عدة مرات.
+
+    يمكنك محاولة إعادة تشغيل التطبيق.
+  failed_title: خطأ في القطعة
+widget_permissions:
+  perm_open_file: فتح الملفات
+  perm_run: تشغيل البرامج
+  request_description: |-
+    تطلب الأداة '%{widget_name}' إذنًا لـ %{command}.
+
+    هل تريد السماح بهذا؟
+  request_title: طلب إذن القطعة

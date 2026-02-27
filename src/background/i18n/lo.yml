@@ -36,3 +36,17 @@ shortcut:
   register:
     placeholder: ກົດປຸ່ມປະສົມປະສານໃດໆ
     title: ລົງທະບຽນລັດໃຫມ່
+widget_liveness:
+  failed_description: |-
+    ວິດເຈັດ '%{widget_name}' ຢຸດຕອບສະໜອງຫຼາຍເທື່ອເກີນໄປ.
+
+    ທ່ານສາມາດລອງຣີສະຕາດແອັບໄດ້.
+  failed_title: Widget ຜິດພາດ
+widget_permissions:
+  perm_open_file: ເປີດໄຟລ໌
+  perm_run: ດໍາເນີນໂຄງການ
+  request_description: |-
+    ວິດເຈັດ '%{widget_name}' ກໍາລັງຮ້ອງຂໍການອະນຸຍາດ %{command}.
+
+    ທ່ານຕ້ອງການອະນຸຍາດໃຫ້ສິ່ງນີ້ບໍ?
+  request_title: ການຮ້ອງຂໍການອະນຸຍາດ Widget

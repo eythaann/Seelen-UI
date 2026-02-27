@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Premeu qualsevol combinació de tecles
     title: Registre de nou drecera
+widget_liveness:
+  failed_description: |-
+    El widget '%{widget_name}' va deixar de respondre massa vegades.
+
+    Pots provar de reiniciar l'aplicació.
+  failed_title: Error del widget
+widget_permissions:
+  perm_open_file: obrir fitxers
+  perm_run: executar programes
+  request_description: |-
+    El widget '%{widget_name}' demana permís a %{command}.
+
+    Vols permetre això?
+  request_title: Sol·licitud de permís de widget

@@ -30,3 +30,17 @@ shortcut:
   register:
     placeholder: キーを押してください...
     title: ショートカットキーの登録
+widget_liveness:
+  failed_description: |-
+    ウィジェット '%{widget_name}' が何度も応答を停止しました。
+
+    アプリを再起動してみてください。
+  failed_title: ウィジェットエラー
+widget_permissions:
+  perm_open_file: ファイルを開く
+  perm_run: プログラムを実行する
+  request_description: |-
+    ウィジェット '%{widget_name}' は %{command} への権限を要求しています。
+
+    これを許可しますか?
+  request_title: ウィジェットの許可リクエスト

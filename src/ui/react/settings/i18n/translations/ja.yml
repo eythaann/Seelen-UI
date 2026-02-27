@@ -73,6 +73,12 @@ devtools:
   install_folder: アプリのフォルダー
   load: ロード
   settings_file: 設定ファイル
+  simulate_perm:
+    label: ウィジェットの許可リクエストをシミュレートする
+    result_allowed: ✓ 許可の付与
+    result_denied: ✗ 許可が拒否されました
+    trigger: シミュレートする
+    widget_id_placeholder: '@作成者/ウィジェット名'
 extras:
   clear_icons: システムアイコンキャッシュをクリアする
   clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
@@ -86,6 +92,10 @@ extras:
 general:
   accent_color: アクセントカラー
   date_format: 日付形式
+  hardware_acceleration: ハードウェアアクセラレーション
+  hardware_acceleration_description: >-
+    ハードウェア
+    アクセラレーションを無効にするとメモリの使用量は減りますが、パフォーマンスの問題が発生する可能性があります。ライブ壁紙を使用しない場合は無効にしても安全です。
   icon_pack:
     available: 利用可能なアイコンパック
     selected: アクティブなアイコンパック
@@ -158,6 +168,7 @@ review_request:
   title: Seelen UI をお楽しみですか？
 save: 保存
 save_and_restart: 保存して再起動
+search: 検索
 see_more: もっと見る
 shortcuts:
   duplicate_error: このショートカットは重複しています

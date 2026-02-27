@@ -426,6 +426,8 @@ pub struct Settings {
     pub wallpaper_collections: Vec<WallpaperCollection>,
     /// Performance options
     pub performance_mode: PerformanceModeSettings,
+    /// enable or disable hardware acceleration
+    pub hardware_acceleration: bool,
 }
 
 impl Default for Settings {
@@ -448,6 +450,7 @@ impl Default for Settings {
             by_theme: HashMap::new(),
             by_wallpaper: HashMap::new(),
             wallpaper_collections: Vec::new(),
+            hardware_acceleration: true,
         }
     }
 }

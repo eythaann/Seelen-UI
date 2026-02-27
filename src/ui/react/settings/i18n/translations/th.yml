@@ -74,6 +74,12 @@ devtools:
   install_folder: โฟลเดอร์การติดตั้ง
   load: โหลด
   settings_file: ไฟล์การตั้งค่า
+  simulate_perm:
+    label: จำลองคำขออนุญาตวิดเจ็ต
+    result_allowed: ✓ ได้รับอนุญาตแล้ว
+    result_denied: ✗ การอนุญาตถูกปฏิเสธ
+    trigger: จำลอง
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: ล้างไอคอนระบบแคช
   clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
@@ -88,6 +94,11 @@ extras:
 general:
   accent_color: สีเน้น
   date_format: รูปแบบวันที่
+  hardware_acceleration: การเร่งความเร็วด้วยฮาร์ดแวร์
+  hardware_acceleration_description: >-
+    การปิดใช้งานการเร่งด้วยฮาร์ดแวร์จะลดการใช้หน่วยความจำ
+    แต่อาจทำให้เกิดปัญหาด้านประสิทธิภาพได้
+    ปลอดภัยในการปิดใช้งานหากคุณจะไม่ใช้วอลเปเปอร์เคลื่อนไหว
   icon_pack:
     available: ชุดไอคอนที่มีอยู่
     selected: ชุดไอคอนที่ใช้งานอยู่
@@ -160,6 +171,7 @@ review_request:
   title: เพลิดเพลินกับ Seelen UI หรือไม่?
 save: บันทึก
 save_and_restart: บันทึกและรีสตาร์ท
+search: ค้นหา
 see_more: ดูเพิ่มเติม
 shortcuts:
   duplicate_error: ทางลัดนี้ซ้ำกัน

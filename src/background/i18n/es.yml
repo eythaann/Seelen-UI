@@ -44,3 +44,17 @@ shortcut:
   register:
     placeholder: Presione cualquier combinación de teclas
     title: Registrando un nuevo atajo
+widget_liveness:
+  failed_description: |-
+    El widget '%{widget_name}' dejó de responder demasiadas veces.
+
+    Puedes intentar reiniciar la aplicación.
+  failed_title: Error de widget
+widget_permissions:
+  perm_open_file: abrir archivos
+  perm_run: ejecutar programas
+  request_description: |-
+    El widget '%{widget_name}' solicita permiso para %{command}.
+
+    ¿Quieres permitir esto?
+  request_title: Solicitud de permiso de widget

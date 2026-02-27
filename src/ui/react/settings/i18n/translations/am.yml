@@ -75,6 +75,12 @@ devtools:
   install_folder: የመጫን አቃፊ
   load: ጭነት
   settings_file: የቅንብሮች ፋይል
+  simulate_perm:
+    label: የመግብር ፍቃድ ጥያቄን አስመስለው
+    result_allowed: ✓ ፍቃድ ተሰጥቷል።
+    result_denied: ✗ ፍቃድ ተከልክሏል።
+    trigger: አስመስለው
+    widget_id_placeholder: '@ደራሲ/መግብር-ስም'
 extras:
   clear_icons: የስርዓት አዶዎች መሸጎጫ
   clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
@@ -88,6 +94,10 @@ extras:
 general:
   accent_color: የዝግጅት ቀለም
   date_format: የቀን ቅርጸት
+  hardware_acceleration: የሃርድዌር ማጣደፍ
+  hardware_acceleration_description: >-
+    የሃርድዌር ማጣደፍን ማሰናከል የማህደረ ትውስታ አጠቃቀምን ይቀንሳል፣ ነገር ግን የአፈጻጸም ችግሮችን ሊያስከትል ይችላል።
+    የቀጥታ የግድግዳ ወረቀቶችን የማይጠቀሙ ከሆነ ለማሰናከል ደህንነቱ የተጠበቀ ነው።
   icon_pack:
     available: የሚገኙ የአዶ ጥቅሎች
     selected: ንቁ አዶ ጥቅሎች
@@ -160,6 +170,7 @@ review_request:
   title: በ Seelen UI እየተዝናኑ ነው?
 save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
+search: ፈልግ
 see_more: ተጨማሪ ይመልከቱ
 shortcuts:
   duplicate_error: ይህ አቋራጭ የተባዛ ነው።

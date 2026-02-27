@@ -40,3 +40,19 @@ shortcut:
   register:
     placeholder: Πατήστε οποιοδήποτε συνδυασμό πλήκτρων
     title: Εγγραφή νέας συντόμευσης
+widget_liveness:
+  failed_description: >-
+    Το γραφικό στοιχείο '%{widget_name}' σταμάτησε να ανταποκρίνεται πάρα πολλές
+    φορές.
+
+
+    Μπορείτε να δοκιμάσετε να επανεκκινήσετε την εφαρμογή.
+  failed_title: Σφάλμα widget
+widget_permissions:
+  perm_open_file: ανοιχτά αρχεία
+  perm_run: τρέξτε προγράμματα
+  request_description: |-
+    Το γραφικό στοιχείο '%{widget_name}' ζητά άδεια για %{command}.
+
+    Θέλετε να το επιτρέψετε αυτό;
+  request_title: Αίτημα άδειας widget

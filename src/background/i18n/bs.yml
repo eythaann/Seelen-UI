@@ -42,3 +42,17 @@ shortcut:
   register:
     placeholder: Pritisnite bilo koju kombinaciju tipki
     title: Registriranje nove prečice
+widget_liveness:
+  failed_description: |-
+    Vidžet '%{widget_name}' je prestao da odgovara previše puta.
+
+    Možete pokušati ponovo pokrenuti aplikaciju.
+  failed_title: Widget Error
+widget_permissions:
+  perm_open_file: otvorite fajlove
+  perm_run: pokrenuti programe
+  request_description: |-
+    Vidžet '%{widget_name}' traži dozvolu za %{command}.
+
+    Želite li ovo dozvoliti?
+  request_title: Zahtjev za dozvolu za widget

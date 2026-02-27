@@ -44,3 +44,17 @@ shortcut:
   register:
     placeholder: Riix wixii isku darka furaha ah
     title: Diiwaangelinta gaagaaban cusub
+widget_liveness:
+  failed_description: |-
+    Qalabka '%{widget_name}' wuxuu joojiyay jawaab celinta marar badan.
+
+    Waxaad isku dayi kartaa inaad dib u bilowdo abka.
+  failed_title: Khaladka Widget
+widget_permissions:
+  perm_open_file: faylasha furan
+  perm_run: socodsii barnaamijyada
+  request_description: |-
+    Qalabka '%{widget_name}' wuxuu codsanayaa ogolaanshaha %{command}.
+
+    Ma doonaysaa inaad tan ogolaato?
+  request_title: Codsiga Ogolaanshaha Widget

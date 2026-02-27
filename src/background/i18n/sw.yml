@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Bonyeza mchanganyiko wowote muhimu
     title: Kusajili njia ya mkato mpya
+widget_liveness:
+  failed_description: |-
+    Wijeti '%{widget_name}' iliacha kujibu mara nyingi sana.
+
+    Unaweza kujaribu kuanzisha upya programu.
+  failed_title: Hitilafu ya Wijeti
+widget_permissions:
+  perm_open_file: fungua faili
+  perm_run: endesha programu
+  request_description: |-
+    Wijeti '%{widget_name}' inaomba ruhusa kwa %{command}.
+
+    Je, ungependa kuruhusu hili?
+  request_title: Ombi la Ruhusa ya Wijeti

@@ -77,6 +77,12 @@ devtools:
   install_folder: پوشه نصب
   load: بار
   settings_file: پرونده تنظیمات
+  simulate_perm:
+    label: درخواست مجوز ویجت را شبیه سازی کنید
+    result_allowed: ✓ مجوز داده شده است
+    result_denied: ✗ اجازه داده نشد
+    trigger: شبیه سازی کنید
+    widget_id_placeholder: '@author/widget-name'
 extras:
   clear_icons: حافظه نهان سیستم را پاک کنید
   clear_icons_tooltip: >-
@@ -93,6 +99,11 @@ extras:
 general:
   accent_color: رنگ لهجه
   date_format: قالب تاریخ
+  hardware_acceleration: شتاب سخت افزاری
+  hardware_acceleration_description: >-
+    غیرفعال کردن شتاب سخت افزاری مصرف حافظه را کاهش می دهد، اما می تواند باعث
+    مشکلات عملکرد شود. اگر از تصاویر پس زمینه زنده استفاده نکنید، غیرفعال کردن
+    آن بی خطر است.
   icon_pack:
     available: بسته‌های آیکون موجود
     selected: بسته های آیکون فعال
@@ -167,6 +178,7 @@ review_request:
   title: از رابط کاربری Seelen لذت می برید؟
 save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
+search: جستجو کنید
 see_more: بیشتر ببینید
 shortcuts:
   duplicate_error: این میانبر تکراری است

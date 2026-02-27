@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: Аливаа товчлуурын хослолыг дарна уу
     title: Шинэ товчлол бүртгэж байна
+widget_liveness:
+  failed_description: |-
+    '%{widget_name}' виджет хэт олон удаа хариу өгөхөө больсон.
+
+    Та програмыг дахин эхлүүлэхийг оролдож болно.
+  failed_title: Виджетийн алдаа
+widget_permissions:
+  perm_open_file: файлуудыг нээх
+  perm_run: програмуудыг ажиллуулах
+  request_description: |-
+    '%{widget_name}' виджет нь %{command}-д зөвшөөрөл хүсэж байна.
+
+    Та үүнийг зөвшөөрөхийг хүсч байна уу?
+  request_title: Виджетийн зөвшөөрлийн хүсэлт

@@ -40,3 +40,17 @@ shortcut:
   register:
     placeholder: किसी भी प्रमुख संयोजन को दबाएं
     title: नया शॉर्टकट पंजीकृत करना
+widget_liveness:
+  failed_description: |-
+    विजेट '%{widget_name}' ने कई बार प्रत्युत्तर देना बंद कर दिया।
+
+    आप ऐप को पुनः प्रारंभ करने का प्रयास कर सकते हैं.
+  failed_title: विजेट त्रुटि
+widget_permissions:
+  perm_open_file: खुली फ़ाइलें
+  perm_run: प्रोग्राम चलाएँ
+  request_description: |-
+    विजेट '%{widget_name}' %{command} की अनुमति का अनुरोध कर रहा है।
+
+    क्या आप इसकी अनुमति देंगे?
+  request_title: विजेट अनुमति अनुरोध

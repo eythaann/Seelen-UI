@@ -30,3 +30,17 @@ shortcut:
   register:
     placeholder: 按下任意组合键
     title: 注册新快捷键
+widget_liveness:
+  failed_description: |-
+    小组件“%{widget_name}”停止响应的次数过多。
+
+    您可以尝试重新启动应用程序。
+  failed_title: 小部件错误
+widget_permissions:
+  perm_open_file: 打开文件
+  perm_run: 运行程序
+  request_description: |-
+    小组件“%{widget_name}”正在请求 %{command} 的权限。
+
+    您想允许这样做吗？
+  request_title: 小部件权限请求

@@ -30,3 +30,17 @@ shortcut:
   register:
     placeholder: ማንኛውንም የቁልፍ ጥምረት ተጫን
     title: አዲስ አቋራጭ መመዝገብ
+widget_liveness:
+  failed_description: |-
+    መግብር '%{widget_name}' ብዙ ጊዜ ምላሽ መስጠት አቁሟል።
+
+    መተግበሪያውን እንደገና ለማስጀመር መሞከር ይችላሉ።
+  failed_title: የመግብር ስህተት
+widget_permissions:
+  perm_open_file: ፋይሎችን ይክፈቱ
+  perm_run: ፕሮግራሞችን አሂድ
+  request_description: |-
+    መግብር '%{widget_name}' ለ%{command} ፍቃድ እየጠየቀ ነው።
+
+    ይህንን መፍቀድ ይፈልጋሉ?
+  request_title: የመግብር ፍቃድ ጥያቄ

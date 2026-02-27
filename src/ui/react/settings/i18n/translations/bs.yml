@@ -77,6 +77,12 @@ devtools:
   install_folder: Instalacijska mapa
   load: Opteretiti
   settings_file: Datoteka postavki
+  simulate_perm:
+    label: Simulirajte zahtjev za dozvolu za widget
+    result_allowed: ✓ Dozvola data
+    result_denied: ✗ Dozvola odbijena
+    trigger: Simuliraj
+    widget_id_placeholder: '@autor/ime-widgeta'
 extras:
   clear_icons: Clear System Icons predmemorija
   clear_icons_tooltip: Može se ponovo pokrenuti za u potpunosti stupiti na snagu na svim widgetima
@@ -91,6 +97,11 @@ extras:
 general:
   accent_color: Akcentna boja
   date_format: Format datuma
+  hardware_acceleration: Hardversko ubrzanje
+  hardware_acceleration_description: >-
+    Onemogućavanje hardverskog ubrzanja će smanjiti upotrebu memorije, ali može
+    uzrokovati probleme s performansama. Sigurno je onemogućiti ako nećete
+    koristiti žive pozadine.
   icon_pack:
     available: Dostupni paketi ikona
     selected: Aktivni paketi ikona
@@ -165,6 +176,7 @@ review_request:
   title: Uživate u korisničkom sučelju Seelen?
 save: Sačuvati
 save_and_restart: Spremi i ponovno pokretanje
+search: Traži
 see_more: Pogledajte više
 shortcuts:
   duplicate_error: Ova prečica je duplirana

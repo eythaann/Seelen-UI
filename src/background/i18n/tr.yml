@@ -44,3 +44,17 @@ shortcut:
   register:
     placeholder: Herhangi bir tuş kombinasyonuna basın
     title: Yeni kısayol kaydetme
+widget_liveness:
+  failed_description: |-
+    '%{widget_name}' widget'ı birçok kez yanıt vermeyi durdurdu.
+
+    Uygulamayı yeniden başlatmayı deneyebilirsiniz.
+  failed_title: Widget Hatası
+widget_permissions:
+  perm_open_file: dosyaları aç
+  perm_run: programları çalıştır
+  request_description: |-
+    '%{widget_name}' widget'ı %{command} için izin istiyor.
+
+    Buna izin vermek istiyor musun?
+  request_title: Widget İzin Talebi

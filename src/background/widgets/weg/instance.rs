@@ -44,7 +44,7 @@ impl SeelenWeg {
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
         let label = format!("{}?monitorId={}", Self::TARGET, monitor_id);
-        let args = WebviewArgs::new().disable_gpu();
+        let args = WebviewArgs::default();
 
         log::info!("Creating {label}");
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
