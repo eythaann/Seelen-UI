@@ -39,7 +39,7 @@ use utils::{
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
 
-use crate::{app::get_app_handle, windows_api::WindowsApi};
+use crate::{app::get_app_handle, utils::constants::SEELEN_COMMON, windows_api::WindowsApi};
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static TOKIO_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
@@ -116,6 +116,7 @@ async fn main() -> Result<()> {
 
 async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     print_initial_information();
+    create_main_folders()?;
     utils::integrity::validate_webview_runtime_is_installed(app_handle)?;
     utils::integrity::ensure_bundle_files_integrity(app_handle)?;
 
@@ -128,6 +129,20 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
 
     trace_lock!(SEELEN).start()?;
     trace_lock!(PERFORMANCE_HELPER).end("setup");
+    Ok(())
+}
+
+fn create_main_folders() -> Result<()> {
+    std::fs::create_dir_all(SEELEN_COMMON.app_temp_dir())?;
+    std::fs::create_dir_all(SEELEN_COMMON.app_data_dir())?;
+    std::fs::create_dir_all(SEELEN_COMMON.app_cache_dir())?;
+
+    std::fs::create_dir_all(SEELEN_COMMON.user_themes_path())?;
+    std::fs::create_dir_all(SEELEN_COMMON.user_icons_path())?;
+    std::fs::create_dir_all(SEELEN_COMMON.user_wallpapers_path())?;
+    std::fs::create_dir_all(SEELEN_COMMON.user_sounds_path())?;
+    std::fs::create_dir_all(SEELEN_COMMON.user_plugins_path())?;
+    std::fs::create_dir_all(SEELEN_COMMON.user_widgets_path())?;
     Ok(())
 }
 

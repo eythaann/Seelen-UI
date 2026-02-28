@@ -15,7 +15,7 @@ use crate::{
     error::{Result, ResultLogExt},
     hook::register_win_hook,
     log_error,
-    migrations::RestorationAndMigration,
+    migrations::Migrations,
     modules::{
         monitors::{MonitorManager, MonitorManagerEvent},
         system_settings::application::{SystemSettings, SystemSettingsEvent},
@@ -142,7 +142,7 @@ impl Seelen {
     }
 
     pub fn start(&mut self) -> Result<()> {
-        RestorationAndMigration::run()?;
+        Migrations::run()?;
 
         let state = FULL_STATE.load();
         rust_i18n::set_locale(state.locale());

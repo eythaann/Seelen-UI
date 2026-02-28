@@ -3,9 +3,9 @@ use tauri::{path::BaseDirectory, Manager};
 
 use crate::{app::get_app_handle, error::Result, utils::constants::SEELEN_COMMON};
 
-pub struct RestorationAndMigration;
+pub struct Migrations;
 
-impl RestorationAndMigration {
+impl Migrations {
     // migration of user settings files below v1.8.3
     fn migration_v1_8_3() -> Result<()> {
         let path = get_app_handle().path();
@@ -90,20 +90,7 @@ impl RestorationAndMigration {
         Ok(())
     }
 
-    fn recreate_user_folders() -> Result<()> {
-        std::fs::create_dir_all(SEELEN_COMMON.app_temp_dir())?;
-
-        std::fs::create_dir_all(SEELEN_COMMON.user_themes_path())?;
-        std::fs::create_dir_all(SEELEN_COMMON.user_icons_path())?;
-        std::fs::create_dir_all(SEELEN_COMMON.user_wallpapers_path())?;
-        std::fs::create_dir_all(SEELEN_COMMON.user_sounds_path())?;
-        std::fs::create_dir_all(SEELEN_COMMON.user_plugins_path())?;
-        std::fs::create_dir_all(SEELEN_COMMON.user_widgets_path())?;
-        Ok(())
-    }
-
     pub fn run() -> Result<()> {
-        Self::recreate_user_folders()?;
         Self::migration_v1_8_3()?;
         Self::migration_v2_1_0()?;
         Self::migration_v2_3_9()?;

@@ -5,6 +5,7 @@
 ### fix
 
 - can't open apps using apps menu.
+- app crashing for new users.
 
 ## [2.5.2]
 

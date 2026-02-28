@@ -61,7 +61,7 @@ impl FullState {
             weg_items: WegItems::default(),
             toolbar_items: Self::initial_toolbar_items(),
         };
-        manager.load_all()?; // ScaDaned log shows a deadlock here.
+        manager.load_all()?;
         manager.start_listeners()?;
         Ok(manager)
     }
