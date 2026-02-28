@@ -56,7 +56,6 @@
 
 <button
   {@attach sortable.attach}
-  {@attach sortable.attachHandle}
   data-item-id={folder.itemId}
   class="folder"
   class:preselected={isPreselected && globalState.searchQuery}

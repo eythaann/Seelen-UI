@@ -53,7 +53,7 @@
     class={["slu-icon-outer", className]}
     data-shape={icon.isAproximatelySquare ? "square" : "unknown"}
   >
-    <img src={icon.src} alt="" loading={lazy ? "lazy" : "eager"} />
+    <img src={icon.src} alt="" loading={lazy ? "lazy" : "eager"} draggable="false" />
     {#if icon.mask}
       <div class="slu-icon-mask" style="mask-image: url('{icon.mask}')"></div>
     {/if}

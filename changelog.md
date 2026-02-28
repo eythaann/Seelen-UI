@@ -2,6 +2,10 @@
 
 ## [2.5.3-dev]
 
+### fix
+
+- can't open apps using apps menu.
+
 ## [2.5.2]
 
 ### features

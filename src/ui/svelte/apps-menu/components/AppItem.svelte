@@ -63,7 +63,6 @@
 
 <button
   {@attach sortable.attach}
-  {@attach sortable.attachHandle}
   data-item-id={itemId}
   class="app"
   class:preselected={isPreselected && globalState.searchQuery}

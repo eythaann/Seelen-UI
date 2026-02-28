@@ -1,5 +1,3 @@
-use std::path::Path;
-
 use windows::Win32::UI::Shell::FOLDERID_LocalAppData;
 use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
 
@@ -50,20 +48,18 @@ impl SluServiceLogger {
         }));
     }
 
-    pub fn cleanup_if_needed(log_path: &Path) -> Result<()> {
+    pub fn init() -> Result<()> {
+        let logs_folder =
+            WindowsApi::known_folder(FOLDERID_LocalAppData)?.join("com.seelen.seelen-ui/logs");
+        std::fs::create_dir_all(&logs_folder)?;
+
+        let log_path = logs_folder.join("SLU Service.log");
         if log_path.exists() {
-            let metadata = std::fs::metadata(log_path)?;
+            let metadata = std::fs::metadata(&log_path)?;
             if metadata.len() > Self::MAX_LOG_SIZE {
-                std::fs::remove_file(log_path)?;
+                std::fs::remove_file(&log_path)?;
             }
         }
-        Ok(())
-    }
-
-    pub fn init() -> Result<()> {
-        let log_path = WindowsApi::known_folder(FOLDERID_LocalAppData)?
-            .join("com.seelen.seelen-ui/logs/SLU Service.log");
-        Self::cleanup_if_needed(&log_path)?;
 
         let format =
             time::format_description::parse("[[[year]-[month]-[day]][[[hour]:[minute]:[second]]")?;

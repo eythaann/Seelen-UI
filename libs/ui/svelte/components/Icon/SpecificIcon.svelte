@@ -7,10 +7,11 @@
   interface Props {
     name: string;
     class?: ClassValue;
+    lazy?: boolean;
     [key: string]: any;
   }
 
-  let { name, class: className, ...imgProps }: Props = $props();
+  let { name, class: className, lazy, ...imgProps }: Props = $props();
 
   let state: IconState = $derived.by(() => {
     // Depend on _version to trigger reactivity when icon pack changes
@@ -33,7 +34,7 @@
     class={["slu-icon-outer", className]}
     data-shape={state.isAproximatelySquare ? "square" : "unknown"}
   >
-    <img src={state.src} alt="" />
+    <img src={state.src} alt="" loading={lazy ? "lazy" : "eager"} draggable="false" />
     {#if state.mask}
       <div class="slu-icon-mask" style="mask-image: url('{state.mask}')"></div>
     {/if}
