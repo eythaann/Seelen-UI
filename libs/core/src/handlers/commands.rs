@@ -106,6 +106,9 @@ slu_commands_declaration! {
     WallpaperPrev = wallpaper_prev(),
     WallpaperSaveThumbnail = wallpaper_save_thumbnail(wallpaper_id: ResourceId, thumbnail_bytes: Vec<u8>),
 
+    // Logging
+    LogFromWebview = log_from_webview(level: u8, message: String, location: String),
+
     // General
     OpenFile = open_file(path: PathBuf),
     SelectFileOnExplorer = select_file_on_explorer(path: PathBuf),

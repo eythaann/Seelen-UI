@@ -36,6 +36,7 @@ define_app_errors!(
     App(String);
     Io(std::io::Error);
     Tauri(tauri::Error);
+    Logger(log::SetLoggerError);
     Lib(seelen_core::SeelenLibError);
     TauriShell(tauri_plugin_shell::Error);
     Windows(windows::core::Error);

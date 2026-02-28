@@ -3,7 +3,7 @@ use windows::Win32::UI::Shell::FOLDERID_LocalAppData;
 
 use crate::{error::Result, windows_api::WindowsApi};
 
-pub struct SluServiceLogger {}
+pub struct SeelenLogger {}
 
 fn format_now() -> String {
     let fmt = time::format_description::parse("[[[year]-[month]-[day]][[[hour]:[minute]:[second]]")
@@ -14,54 +14,19 @@ fn format_now() -> String {
         .unwrap_or_else(|_| "?time?".to_owned())
 }
 
-impl SluServiceLogger {
+impl SeelenLogger {
     const MAX_LOG_SIZE: u64 = 5 * 1024 * 1024; // 5MB
-
-    /// Legacy cleanup: removes old Windows Event Log registry entries if present.
-    /// No-op in the current fern-based implementation.
-    pub fn uninstall_old_logging() -> Result<()> {
-        Ok(())
-    }
-
-    pub fn register_panic_hook() {
-        let base_hook = std::panic::take_hook();
-        std::panic::set_hook(Box::new(move |info| {
-            let cause = info
-                .payload()
-                .downcast_ref::<String>()
-                .map(|s| s.to_string())
-                .unwrap_or_else(|| {
-                    info.payload()
-                        .downcast_ref::<&str>()
-                        .unwrap_or(&"<cause unknown>")
-                        .to_string()
-                });
-
-            let mut string_location = String::from("<location unknown>");
-            if let Some(location) = info.location() {
-                string_location = format!(
-                    "{}:{}:{}",
-                    location.file(),
-                    location.line(),
-                    location.column()
-                );
-            }
-
-            log::error!("A panic occurred:\n  Cause: {cause}\n  Location: {string_location}");
-            base_hook(info);
-        }));
-    }
 
     pub fn init() -> Result<()> {
         let logs_folder =
             WindowsApi::known_folder(FOLDERID_LocalAppData)?.join("com.seelen.seelen-ui/logs");
         std::fs::create_dir_all(&logs_folder)?;
 
-        let log_path = logs_folder.join("SLU Service.log");
+        let log_path = logs_folder.join("Seelen UI.log");
         if log_path.exists() {
             let metadata = std::fs::metadata(&log_path)?;
             if metadata.len() > Self::MAX_LOG_SIZE {
-                let bak_path = logs_folder.join("SLU Service.log.bak");
+                let bak_path = logs_folder.join("Seelen UI.log.bak");
                 std::fs::rename(&log_path, &bak_path)?;
             }
         }
@@ -80,9 +45,14 @@ impl SluServiceLogger {
 
         let dispatch = fern::Dispatch::new()
             .level(log::LevelFilter::Trace)
+            .level_for("tao", log::LevelFilter::Off)
+            .level_for("os_info", log::LevelFilter::Off)
+            .level_for("notify", log::LevelFilter::Off)
+            .level_for("notify_debouncer_full", log::LevelFilter::Off)
+            .level_for("discord_presence", log::LevelFilter::Off)
             .chain(file_dispatch);
 
-        #[cfg(debug_assertions)]
+        #[cfg(dev)]
         let dispatch = dispatch.chain(
             fern::Dispatch::new()
                 .format(|out, message, record| {
@@ -118,7 +88,6 @@ impl SluServiceLogger {
         );
 
         dispatch.apply()?;
-        Self::register_panic_hook();
         Ok(())
     }
 }
