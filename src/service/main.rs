@@ -127,6 +127,12 @@ async fn main() -> Result<()> {
         add_installation_dir_to_path()?;
     }
 
+    handle_console_client().await?;
+    if is_svc_already_running() {
+        println!("Seelen UI Service is already running");
+        return Ok(());
+    }
+
     ASYNC_RUNTIME_HANDLE
         .set(tokio::runtime::Handle::current())
         .expect("Failed to set runtime handle");
@@ -134,13 +140,6 @@ async fn main() -> Result<()> {
     let (tx, mut rx) = tokio::sync::mpsc::channel(1);
     EXIT_CHANNEL.set(tx).unwrap();
 
-    handle_console_client().await?;
-    if is_svc_already_running() {
-        println!("Seelen UI Service is already running");
-        return Ok(());
-    }
-
-    let _ = SluServiceLogger::uninstall_old_logging();
     SluServiceLogger::init()?;
     TaskSchedulerHelper::create_service_task()?;
 

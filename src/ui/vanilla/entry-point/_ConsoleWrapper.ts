@@ -44,22 +44,12 @@ const webviewInfo = new WebviewInformation();
 async function log(
   level: LogLevel,
   message: string,
-  options?: LogOptions,
+  _options?: LogOptions,
 ): Promise<void> {
-  // we use the webview label as the location, intead call stack as the stack on the Seelen UI case
-  // will be always the same because of the console wrapper, this is different from the tauri plugin
+  // we use the webview label as the location, instead of call stack as the stack on the Seelen UI case
+  // will be always the same because of the console wrapper
   const location = webviewInfo.label;
-
-  const { file, line, keyValues } = options ?? {};
-
-  await _invoke("plugin:log|log", {
-    level,
-    message,
-    location,
-    file,
-    line,
-    keyValues,
-  });
+  await _invoke("log_from_webview", { level, message, location });
 }
 
 /**

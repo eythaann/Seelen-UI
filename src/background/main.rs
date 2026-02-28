@@ -8,6 +8,7 @@ mod cli;
 mod error;
 mod exposed;
 mod hook;
+mod logger;
 mod migrations;
 mod modules;
 mod resources;
@@ -29,6 +30,7 @@ use app::{Seelen, SEELEN};
 use cli::{application::handle_console_client, SelfPipe, ServicePipe};
 use error::Result;
 use exposed::register_invoke_handler;
+use logger::SeelenLogger;
 use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
@@ -58,8 +60,10 @@ pub fn get_tokio_handle() -> &'static tokio::runtime::Handle {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    register_panic_hook();
     handle_console_client().await?;
+
+    register_panic_hook();
+    SeelenLogger::init()?;
 
     if is_already_running() {
         SelfPipe::request_open_settings().await?;

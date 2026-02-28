@@ -72,7 +72,6 @@ positioning = { path = "libs/positioning" }
 sysinfo = "0.38.1"
 tauri = "2.10.2"
 tauri-build = "2.5.5"
-tauri-plugin-autostart = "2.5.1"
 tauri-plugin-deep-link = "2.4.7"
 tauri-plugin-dialog = "2.6.0"
 tauri-plugin-fs = "2.4.5"

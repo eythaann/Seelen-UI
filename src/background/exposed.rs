@@ -27,6 +27,18 @@ use crate::{
     windows_api::{hdc::DeviceContext, string_utils::WindowsString, window::Window, WindowsApi},
 };
 
+#[tauri::command(async)]
+pub fn log_from_webview(level: u8, message: String, location: String) {
+    let level = match level {
+        1 => log::Level::Trace,
+        2 => log::Level::Debug,
+        3 => log::Level::Info,
+        4 => log::Level::Warn,
+        _ => log::Level::Error,
+    };
+    log::log!(target: &*location, level, "{message}");
+}
+
 pub fn open_file_inner(path: String) -> Result<()> {
     std::process::Command::new("cmd")
         .raw_arg("/c")
