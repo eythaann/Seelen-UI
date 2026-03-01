@@ -8,6 +8,7 @@ export enum SeelenCommand {
   WallpaperNext = "wallpaper_next",
   WallpaperPrev = "wallpaper_prev",
   WallpaperSaveThumbnail = "wallpaper_save_thumbnail",
+  LogFromWebview = "log_from_webview",
   OpenFile = "open_file",
   SelectFileOnExplorer = "select_file_on_explorer",
   Run = "run",
