@@ -23,7 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20.x"
+          node-version: 24
           registry-url: "https://registry.npmjs.org"
 
       - name: Setup Rust
@@ -41,4 +41,4 @@ jobs:
       - name: Publish to NPM
         run: |
           cd ./npm
-          npm --verbose publish --provenance --tag latest
+          npm --verbose publish --tag latest
