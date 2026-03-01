@@ -30,11 +30,7 @@ use windows::Win32::{
 };
 use windows_api::WindowsApi;
 
-use crate::{
-    app_management::launch_seelen_ui,
-    enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
-    hotkeys::stop_app_shortcuts,
-};
+use crate::{app_management::launch_seelen_ui, hotkeys::stop_app_shortcuts};
 
 pub static SERVICE_NAME: LazyLock<WindowsString> =
     LazyLock::new(|| WindowsString::from_str("slu-service"));
@@ -120,17 +116,26 @@ fn is_svc_already_running() -> bool {
 }
 
 #[tokio::main]
-async fn main() -> Result<()> {
+async fn main() {
     if is_local_dev() {
         let window = WindowsApi::get_console_window();
         let _ = WindowsApi::show_window(window.0 as _, SW_MINIMIZE.0);
-        add_installation_dir_to_path()?;
     }
 
-    handle_console_client().await?;
+    if let Err(err) = SluServiceLogger::init() {
+        let fallback = std::env::temp_dir().join("slu-service-logger-error.log");
+        let _ = std::fs::write(&fallback, format!("Failed to initialize logger: {err:?}"));
+        std::process::exit(1);
+    }
+
+    if let Err(err) = handle_console_client().await {
+        log::error!("Failed to execute command: {err:?}");
+        std::process::exit(1);
+    }
+
     if is_svc_already_running() {
         println!("Seelen UI Service is already running");
-        return Ok(());
+        return;
     }
 
     ASYNC_RUNTIME_HANDLE
@@ -140,10 +145,16 @@ async fn main() -> Result<()> {
     let (tx, mut rx) = tokio::sync::mpsc::channel(1);
     EXIT_CHANNEL.set(tx).unwrap();
 
-    SluServiceLogger::init()?;
-    TaskSchedulerHelper::create_service_task()?;
+    if let Err(err) = TaskSchedulerHelper::create_service_task() {
+        log::error!("Failed to create service task: {err:?}");
+        std::process::exit(1);
+    }
 
-    log::info!("Starting Seelen UI Service");
+    let version = env!("CARGO_PKG_VERSION");
+    let debug = if is_development() { " (debug)" } else { "" };
+    let local = if is_local_dev() { " (local)" } else { "" };
+    log::info!("──────────────────────────────────────────────────-");
+    log::info!("Starting Seelen UI Service v{version}{local}{debug}");
     log::info!("Arguments: {:?}", std::env::args().collect_vec());
 
     if let Err(err) = setup() {
@@ -151,7 +162,7 @@ async fn main() -> Result<()> {
         // Run cleanup even on setup failure so the taskbar/hotkeys are restored
         log_error!(restore_native_taskbar());
         stop_app_shortcuts();
-        return Err("Service setup failed".into());
+        std::process::exit(1);
     };
 
     // ===================== wait for stop signal ====================
@@ -161,14 +172,5 @@ async fn main() -> Result<()> {
     log_error!(restore_native_taskbar());
     stop_app_shortcuts();
     log::info!("Seelen UI Service exited with code {exit_code}");
-
-    if is_local_dev() {
-        remove_installation_dir_from_path()?;
-    }
-
-    if exit_code == 0 {
-        Ok(())
-    } else {
-        Err("Seelen UI Service exited with error".into())
-    }
+    std::process::exit(exit_code as i32);
 }

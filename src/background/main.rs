@@ -35,13 +35,15 @@ use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
     integrity::{
-        is_already_running, print_initial_information, register_panic_hook, restart_as_appx,
-        restart_as_interactive_user,
+        is_already_running, print_initial_information, restart_as_appx, restart_as_interactive_user,
     },
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
 
-use crate::{app::get_app_handle, utils::constants::SEELEN_COMMON, windows_api::WindowsApi};
+use crate::{
+    app::get_app_handle, error::ResultLogExt, utils::constants::SEELEN_COMMON,
+    windows_api::WindowsApi,
+};
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static TOKIO_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
@@ -59,25 +61,34 @@ pub fn get_tokio_handle() -> &'static tokio::runtime::Handle {
 }
 
 #[tokio::main]
-async fn main() -> Result<()> {
-    handle_console_client().await?;
+async fn main() {
+    if let Err(err) = SeelenLogger::init() {
+        let fallback = std::env::temp_dir().join("seelen-ui-logger-error.log");
+        let _ = std::fs::write(&fallback, format!("Failed to initialize logger: {err:?}"));
+        std::process::exit(1);
+    }
 
-    register_panic_hook();
-    SeelenLogger::init()?;
+    if let Err(err) = handle_console_client().await {
+        log::error!("Failed to execute command: {err:?}");
+        std::process::exit(1);
+    };
 
     if is_already_running() {
-        SelfPipe::request_open_settings().await?;
-        return Ok(());
+        SelfPipe::request_open_settings().await.log_error();
+        return;
     }
 
     // GUI must run as interactive user (not elevated)
-    if WindowsApi::is_elevated()? {
-        println!("GUI was started with elevated privileges, restarting as interactive user...");
-        restart_as_interactive_user()?;
+    if WindowsApi::is_elevated().unwrap_or(false) {
+        log::info!("GUI was started with elevated privileges, restarting as interactive user...");
+        restart_as_interactive_user().log_error();
+        return;
     }
 
     if was_installed_using_msix() && !is_running_as_appx() {
-        restart_as_appx()?;
+        log::info!("GUI was installed using MSIX, restarting as appx...");
+        restart_as_appx().log_error();
+        return;
     }
 
     TOKIO_RUNTIME_HANDLE
@@ -92,7 +103,6 @@ async fn main() -> Result<()> {
 
     // if no custom runtime is present, the app will use the installed with the system
     if let Some(path) = crate::utils::get_fixed_runtime_path() {
-        println!("Using fixed runtime: {path:?}");
         std::env::set_var("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER", path);
     }
 
@@ -115,7 +125,6 @@ async fn main() -> Result<()> {
     // share the current runtime with Tauri
     tauri::async_runtime::set(tokio::runtime::Handle::current());
     app.run(app_callback);
-    Ok(())
 }
 
 async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {

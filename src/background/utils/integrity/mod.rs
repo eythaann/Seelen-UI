@@ -20,35 +20,6 @@ use crate::{
 
 use super::spawn_named_thread;
 
-pub fn register_panic_hook() {
-    let base_hook = std::panic::take_hook();
-    std::panic::set_hook(Box::new(move |info| {
-        let cause = info
-            .payload()
-            .downcast_ref::<String>()
-            .map(|s| s.to_string())
-            .unwrap_or_else(|| {
-                info.payload()
-                    .downcast_ref::<&str>()
-                    .unwrap_or(&"<cause unknown>")
-                    .to_string()
-            });
-
-        let mut string_location = String::from("<location unknown>");
-        if let Some(location) = info.location() {
-            string_location = format!(
-                "{}:{}:{}",
-                location.file(),
-                location.line(),
-                location.column()
-            );
-        }
-
-        log::error!("A panic occurred:\n  Cause: {cause}\n  Location: {string_location}");
-        base_hook(info);
-    }));
-}
-
 /// Prints information about the computer runtime context to help debugging.
 #[rustfmt::skip]
 pub fn print_initial_information() {
