@@ -37,10 +37,24 @@ export function setToolbarEnabled(enabled: boolean) {
 }
 
 /**
- * Sets the toolbar height
+ * Sets the toolbar item size
  */
-export function setToolbarHeight(height: number) {
-  patchToolbarConfig({ height });
+export function setToolbarItemSize(itemSize: number) {
+  patchToolbarConfig({ itemSize });
+}
+
+/**
+ * Sets the toolbar margin
+ */
+export function setToolbarMargin(margin: number) {
+  patchToolbarConfig({ margin });
+}
+
+/**
+ * Sets the toolbar padding
+ */
+export function setToolbarPadding(padding: number) {
+  patchToolbarConfig({ padding });
 }
 
 /**

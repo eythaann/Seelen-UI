@@ -2,6 +2,14 @@
 
 ## [2.5.4-dev]
 
+### features
+
+- new configurations for toolbar customization.
+
+### enhancements
+
+- log system.
+
 ## [2.5.3]
 
 ### fix

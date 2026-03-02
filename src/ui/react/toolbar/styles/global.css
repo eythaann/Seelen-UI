@@ -2,14 +2,22 @@
  * The styles in this file are only structural for toolbar,
  * all the design should be added to the default theme css.
  */
+
+:root {
+  font-size: var(--config-item-size);
+}
+
 body {
   overflow: hidden;
   background: transparent;
   width: 100vw;
   height: 100vh;
+  line-height: var(--config-item-size);
 }
 
 #root {
+  --item-padding: calc(var(--config-padding) / 2);
+
   position: absolute;
   width: 100vw;
   transition: transform 0.2s ease-in-out;
@@ -33,20 +41,28 @@ body {
 
 .ft-bar {
   position: relative;
-  width: 100%;
-  height: var(--config-height);
+  padding: var(--item-padding) calc(var(--config-padding) * 2);
+  margin: var(--config-margin);
+  overflow: hidden;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 var(--config-padding-at-side);
+
+  figure,
+  img {
+    width: var(--config-item-size);
+    height: var(--config-item-size);
+    object-fit: contain;
+  }
 
   .ft-bar-left,
   .ft-bar-center,
   .ft-bar-right {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     height: min-content;
-    gap: 6px;
+    gap: 4px;
   }
 
   .ft-bar-left {
@@ -74,6 +90,8 @@ body {
   align-items: center;
   justify-content: center;
   min-width: 0;
+  height: min-content;
+  padding: var(--item-padding);
 
   .ft-bar-item-content {
     display: flex;

@@ -39,6 +39,7 @@ export function FancyToolbar() {
       className={cx("ft-bar", $settings.value.position.toLowerCase(), {
         "ft-bar-hidden": $hidden_by_autohide.value,
       })}
+      data-has-margin={!!$settings.value.margin}
       data-there-is-maximized-on-background={$thereIsMaximizedOnBg.value}
       data-focused-is-maximized={!!$lastFocusedOnMonitor.value?.isMaximized}
       data-focused-is-overlay={!!$lastFocusedOnMonitor.value?.isSeelenOverlay}

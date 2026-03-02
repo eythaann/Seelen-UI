@@ -113,7 +113,11 @@ export function StringFromEvaluated({ content }: { content: unknown }): string {
 }
 
 // Memoized version to prevent re-renders when content hasn't changed
-export const ElementsFromEvaluated = memo(function ElementsFromEvaluated({ content }: { content: unknown }) {
+export const ElementsFromEvaluated = memo(function ElementsFromEvaluated({
+  content,
+}: {
+  content: unknown;
+}) {
   // Use useMemo for array mapping to generate stable keys
   const renderContent = useMemo(() => {
     switch (typeof content) {
@@ -171,7 +175,11 @@ const EvaluatedButtonPropsSchema = z.object({
   content: z.unknown().nullish(),
   onClick: z.string().nullish(),
 });
-const EvaluatedButton = memo(function EvaluatedButton({ style, content, onClick }: EvaluatedButtonProps) {
+const EvaluatedButton = memo(function EvaluatedButton({
+  style,
+  content,
+  onClick,
+}: EvaluatedButtonProps) {
   const handleClick = useCallback(() => {
     if (onClick) {
       EvaluateAction(onClick, {});
@@ -179,11 +187,7 @@ const EvaluatedButton = memo(function EvaluatedButton({ style, content, onClick 
   }, [onClick]);
 
   return (
-    <button
-      data-skin="transparent"
-      style={style}
-      onClick={handleClick}
-    >
+    <button data-skin="transparent" style={style} onClick={handleClick}>
       <ElementsFromEvaluated content={content} />
     </button>
   );
@@ -193,10 +197,9 @@ type EvaluatedReactIconProps = z.infer<typeof EvaluatedReactIconPropsSchema>;
 const EvaluatedReactIconPropsSchema = z.object({
   "@component": z.literal(ObjectComponentKind.Icon).default(ObjectComponentKind.Icon),
   name: z.string(),
-  size: z.number().optional(),
 });
-const EvaluatedReactIcon = memo(function EvaluatedReactIcon({ name, size }: EvaluatedReactIconProps) {
-  return <Icon iconName={name as any} size={size} />;
+const EvaluatedReactIcon = memo(function EvaluatedReactIcon({ name }: EvaluatedReactIconProps) {
+  return <Icon iconName={name as any} />;
 });
 
 type EvaluatedImageProps = z.infer<typeof EvaluatedImagePropsSchema>;
@@ -204,18 +207,10 @@ const EvaluatedImagePropsSchema = z.object({
   "@component": z.literal(ObjectComponentKind.Image).default(ObjectComponentKind.Image),
   url: z.string().nullish(),
   path: z.string().nullish(),
-  size: z.union([z.string(), z.number()]).default("1rem"),
 });
-const EvaluatedImage = memo(function EvaluatedImage({ url, path, size }: EvaluatedImageProps) {
-  const imageSrc = useMemo(() => path ? convertFileSrc(path) : url || "", [path, url]);
-
-  const imageStyle = useMemo(() => ({
-    width: size,
-    height: size,
-    objectFit: "contain" as const,
-  }), [size]);
-
-  return <img src={imageSrc} style={imageStyle} />;
+const EvaluatedImage = memo(function EvaluatedImage({ url, path }: EvaluatedImageProps) {
+  const imageSrc = useMemo(() => (path ? convertFileSrc(path) : url || ""), [path, url]);
+  return <img src={imageSrc} />;
 });
 
 type EvaluatedAppIconProps = z.infer<typeof EvaluatedAppIconPropsSchema>;
@@ -223,15 +218,9 @@ const EvaluatedAppIconPropsSchema = z.object({
   "@component": z.literal(ObjectComponentKind.AppIcon).default(ObjectComponentKind.AppIcon),
   path: z.string().nullish(),
   umid: z.string().nullish(),
-  size: z.union([z.string(), z.number()]).default("1rem"),
 });
-const EvaluatedAppIcon = memo(function EvaluatedAppIcon({ path, umid, size }: EvaluatedAppIconProps) {
-  const iconStyle = useMemo(() => ({
-    width: size,
-    height: size,
-  }), [size]);
-
-  return <FileIcon path={path} umid={umid} style={iconStyle} />;
+const EvaluatedAppIcon = memo(function EvaluatedAppIcon({ path, umid }: EvaluatedAppIconProps) {
+  return <FileIcon path={path} umid={umid} />;
 });
 
 type EvaluatedGroupProps = z.infer<typeof EvaluatedGroupPropsSchema>;

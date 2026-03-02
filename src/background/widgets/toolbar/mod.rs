@@ -90,7 +90,7 @@ impl FancyToolbar {
         let state = FULL_STATE.load();
         let settings = &state.settings.by_widget.fancy_toolbar;
         let scale_factor = monitor.scale_factor()?;
-        Ok((settings.height as f64 * scale_factor) as i32)
+        Ok((settings.total_size() as f64 * scale_factor) as i32)
     }
 
     pub fn set_position(&mut self, monitor: &Monitor) -> Result<()> {

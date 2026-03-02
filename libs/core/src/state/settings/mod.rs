@@ -40,8 +40,12 @@ use crate::{
 pub struct FancyToolbarSettings {
     /// enable or disable the fancy toolbar
     pub enabled: bool,
-    /// height of the fancy toolbar
-    pub height: u32,
+    /// item size in px
+    pub item_size: u32,
+    /// Toolbar margin in px
+    pub margin: u32,
+    /// Toolbar padding in px
+    pub padding: u32,
     /// position of the toolbar
     pub position: FancyToolbarSide,
     /// hide mode
@@ -56,12 +60,21 @@ impl Default for FancyToolbarSettings {
     fn default() -> Self {
         Self {
             enabled: true,
-            height: 30,
+            item_size: 16,
+            padding: 8,
+            margin: 0,
             position: FancyToolbarSide::Top,
             hide_mode: HideMode::Never,
             delay_to_show: 100,
             delay_to_hide: 800,
         }
+    }
+}
+
+impl FancyToolbarSettings {
+    /// total height of the toolbar
+    pub fn total_size(&self) -> u32 {
+        self.item_size + (self.padding * 2) + (self.margin * 2)
     }
 }
 

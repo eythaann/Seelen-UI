@@ -9,8 +9,10 @@ import {
   setToolbarDelayToHide,
   setToolbarDelayToShow,
   setToolbarEnabled,
-  setToolbarHeight,
   setToolbarHideMode,
+  setToolbarItemSize,
+  setToolbarMargin,
+  setToolbarPadding,
   setToolbarPosition,
 } from "./application.ts";
 
@@ -39,28 +41,55 @@ export function FancyToolbarSettings() {
 
       <SettingsGroup>
         <SettingsSubGroup label={t("toolbar.label")}>
-          <SettingsOption>
-            <span>{t("toolbar.height")}</span>
-            <InputNumber
-              value={settings.height}
-              onChange={(value) => setToolbarHeight(value || 0)}
-              min={0}
-            />
-          </SettingsOption>
-          <SettingsOption>
-            <span>{t("toolbar.dock_side")}</span>
-            <Compact>
-              {Object.values(FancyToolbarSide).map((side) => (
-                <Button
-                  key={side}
-                  type={side === settings.position ? "primary" : "default"}
-                  onClick={() => setToolbarPosition(side)}
-                >
-                  <Icon iconName={`CgToolbar${side}`} size={18} />
-                </Button>
-              ))}
-            </Compact>
-          </SettingsOption>
+          <SettingsOption
+            label={t("toolbar.item_size")}
+            action={
+              <InputNumber
+                value={settings.itemSize}
+                onChange={(value) => setToolbarItemSize(value || 0)}
+                min={0}
+              />
+            }
+          />
+
+          <SettingsOption
+            label={t("toolbar.padding")}
+            action={
+              <InputNumber
+                value={settings.padding}
+                onChange={(value) => setToolbarPadding(value || 0)}
+                min={0}
+              />
+            }
+          />
+
+          <SettingsOption
+            label={t("toolbar.margin")}
+            action={
+              <InputNumber
+                value={settings.margin}
+                onChange={(value) => setToolbarMargin(value || 0)}
+                min={0}
+              />
+            }
+          />
+
+          <SettingsOption
+            label={t("toolbar.dock_side")}
+            action={
+              <Compact>
+                {Object.values(FancyToolbarSide).map((side) => (
+                  <Button
+                    key={side}
+                    type={side === settings.position ? "primary" : "default"}
+                    onClick={() => setToolbarPosition(side)}
+                  >
+                    <Icon iconName={`CgToolbar${side}`} size={18} />
+                  </Button>
+                ))}
+              </Compact>
+            }
+          />
         </SettingsSubGroup>
       </SettingsGroup>
 

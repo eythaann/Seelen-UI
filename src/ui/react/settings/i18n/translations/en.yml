@@ -236,7 +236,9 @@ toolbar:
   delay_to_show: Delay to show
   dock_side: Position
   enable: Enable Fancy Toolbar
-  height: Height
+  item_size: Item Size
+  margin: Margin Size
+  padding: Padding Size
   hide_mode:
     always: Always
     never: Never

@@ -1,4 +1,4 @@
-import { computed, signal } from "@preact/signals";
+import { computed, effect, signal } from "@preact/signals";
 import { Settings } from "@seelen-ui/lib";
 import { FancyToolbarSide } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils";
@@ -23,8 +23,18 @@ Settings.onChange((settings) => {
   $allByWidget.value = settings.byWidget;
 });
 
+effect(() => {
+  const { itemSize, margin, padding } = $settings.value;
+  const styles = document.documentElement.style;
+  styles.setProperty("--config-item-size", `${itemSize}px`);
+  styles.setProperty("--config-margin", `${margin}px`);
+  styles.setProperty("--config-padding", `${padding}px`);
+  styles.setProperty("--config-height", `${itemSize + padding * 2 + margin * 2}px`);
+});
+
 export const $widget_rect = computed(() => {
-  const height = toPhysicalPixels($settings.value.height);
+  const { itemSize, margin, padding } = $settings.value;
+  const height = toPhysicalPixels(itemSize + padding * 2 + margin * 2);
   const rect = { ...$current_monitor.value.rect };
 
   if ($settings.value.position === FancyToolbarSide.Top) {

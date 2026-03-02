@@ -16,6 +16,10 @@
     }
   }
 
+  &[data-has-margin="true"] {
+    border-radius: calc(var(--config-height) / 3);
+  }
+
   // &[data-there-is-maximized-on-background="true"] {} (this attribute exist but is unused)
   // &[data-focused-is-maximized="true"] {} (this attribute exist but is unused)
   // &[data-focused-is-overlay="true"] {} (this attribute exist but is unused)
@@ -23,7 +27,6 @@
 
 .ft-bar-item {
   &.ft-bar-item-clickable {
-    padding: 1px 4px;
     border-radius: 6px;
 
     &:hover {
