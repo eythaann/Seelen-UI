@@ -34,16 +34,11 @@ use logger::SeelenLogger;
 use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
-    integrity::{
-        is_already_running, print_initial_information, restart_as_appx, restart_as_interactive_user,
-    },
+    integrity::{is_already_running, print_initial_information, restart_as_appx, warn_if_elevated},
     is_running_as_appx, was_installed_using_msix, PERFORMANCE_HELPER,
 };
 
-use crate::{
-    app::get_app_handle, error::ResultLogExt, utils::constants::SEELEN_COMMON,
-    windows_api::WindowsApi,
-};
+use crate::{app::get_app_handle, error::ResultLogExt, utils::constants::SEELEN_COMMON};
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static TOKIO_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
@@ -75,13 +70,6 @@ async fn main() {
 
     if is_already_running() {
         SelfPipe::request_open_settings().await.log_error();
-        return;
-    }
-
-    // GUI must run as interactive user (not elevated)
-    if WindowsApi::is_elevated().unwrap_or(false) {
-        log::info!("GUI was started with elevated privileges, restarting as interactive user...");
-        restart_as_interactive_user().log_error();
         return;
     }
 
@@ -142,6 +130,7 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
 
     trace_lock!(SEELEN).start()?;
     trace_lock!(PERFORMANCE_HELPER).end("setup");
+    warn_if_elevated(app_handle);
     Ok(())
 }
 

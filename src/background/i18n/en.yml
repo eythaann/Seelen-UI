@@ -9,6 +9,12 @@ resource:
   downloading: Downloading assets...
   downloading_body: This might take a few seconds, please don't close the window.
   enable: Enable
+elevated:
+  title: Running as Administrator
+  description: |-
+    Seelen UI is running with administrator privileges.
+    This does not add or improve any features, and it may pose a security risk.
+    For better security, please restart it without administrator permissions.
 runtime:
   corrupted_data: Corrupted data
   corrupted_file: A configuration file is corrupted, using default values instead.

@@ -6,6 +6,7 @@ pub use webview::*;
 
 use itertools::Itertools;
 use tauri::webview_version;
+use tauri_plugin_dialog::DialogExt;
 use windows::Win32::{
     Foundation::{GetLastError, ERROR_ALREADY_EXISTS},
     System::Threading::CreateMutexW,
@@ -14,7 +15,7 @@ use windows::Win32::{
 use crate::{
     error::Result,
     is_local_dev,
-    utils::{has_fixed_runtime, is_running_as_appx, was_installed_using_msix},
+    utils::{has_fixed_runtime, is_running_as_appx},
     windows_api::{string_utils::WindowsString, WindowsApi},
 };
 
@@ -69,19 +70,14 @@ pub fn restart_as_appx() -> Result<!> {
     std::process::exit(0);
 }
 
-pub fn restart_as_interactive_user() -> Result<!> {
-    let path = if was_installed_using_msix() {
-        "shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App".to_string()
-    } else {
-        std::env::current_exe()?.to_string_lossy().to_string()
-    };
-    // Use explorer.exe to spawn the process de-elevated (with the interactive user's token).
-    // ShellExecuteExW called from an elevated process inherits the elevated token,
-    // causing an infinite restart loop when the service launches the app elevated.
-    std::process::Command::new("explorer.exe")
-        .arg(&path)
-        .spawn()?;
-    std::process::exit(0);
+pub fn warn_if_elevated(app: &tauri::AppHandle) {
+    if WindowsApi::is_elevated().unwrap_or(false) {
+        app.dialog()
+            .message(t!("elevated.description"))
+            .title(t!("elevated.title"))
+            .kind(tauri_plugin_dialog::MessageDialogKind::Warning)
+            .show(|_| {});
+    }
 }
 
 // https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-createmutexw

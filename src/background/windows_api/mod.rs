@@ -47,8 +47,7 @@ use windows::{
             PHYSICAL_MONITOR,
         },
         Foundation::{
-            CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, POINT, RECT,
-            STATUS_SUCCESS, WPARAM,
+            HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, POINT, RECT, STATUS_SUCCESS, WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -919,7 +918,6 @@ impl WindowsApi {
             let mut ret_len = 0;
 
             let token_handle = Self::open_current_process_token()?;
-
             GetTokenInformation(
                 token_handle,
                 TokenElevation,
@@ -927,9 +925,6 @@ impl WindowsApi {
                 std::mem::size_of::<TOKEN_ELEVATION>() as u32,
                 &mut ret_len,
             )?;
-
-            CloseHandle(token_handle)?;
-
             Ok(elevation.TokenIsElevated != 0)
         }
     }
