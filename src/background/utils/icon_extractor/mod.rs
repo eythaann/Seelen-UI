@@ -508,7 +508,11 @@ fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
 }
 
 pub fn request_icon_extraction_from_file<T: AsRef<Path>>(path: T) {
-    IconExtractor::instance().request(IconExtractorRequest::Path(path.as_ref().to_path_buf()));
+    let path = path.as_ref();
+    if path.as_os_str().is_empty() {
+        return;
+    }
+    IconExtractor::instance().request(IconExtractorRequest::Path(path.to_path_buf()));
 }
 
 pub fn request_icon_extraction_from_umid(aumid: &AppUserModelId) {

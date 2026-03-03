@@ -207,7 +207,6 @@ impl ResourceManager {
 
     /// Internal recursive function that checks for app icon without acquiring locks
     fn _has_app_icon(system_pack: &IconPack, umid: Option<&str>, path: Option<&Path>) -> bool {
-        let current_mtime = path.and_then(last_edit_at);
         let lower_path = path.map(|p| p.to_string_lossy().to_lowercase());
 
         for entry in &system_pack.entries {
@@ -233,15 +232,25 @@ impl ResourceManager {
             }
 
             if let Some(entry) = found {
-                // Check if source file was modified since icon was cached, for invalidation
-                if let (Some(cached), Some(current)) = (entry.source_mtime, current_mtime) {
+                // Check if the entry's own source file was modified since the icon was cached.
+                // We always compare against entry.path (not the caller-provided path) because an
+                // entry can be found by UMID even when its stored path differs from the provided
+                // path (e.g. the exe entry is found by UMID but the caller passes the lnk path).
+                //
+                // Use `continue` instead of `return false` so that a stale entry (e.g. a
+                // leftover from a previous app version whose path has since changed) does not
+                // short-circuit the search and prevent a later, valid entry for the same UMID
+                // from being found.
+                let entry_current_mtime = entry.path.as_deref().and_then(last_edit_at);
+                if let (Some(cached), Some(current)) = (entry.source_mtime, entry_current_mtime) {
                     if cached != current {
-                        return false;
+                        continue;
                     }
                 }
 
                 if let Some(redirect) = &entry.redirect {
-                    return Self::_has_app_icon(system_pack, None, Some(redirect));
+                    return Self::_has_app_icon(system_pack, None, Some(redirect))
+                        || Self::_has_shared_file_icon(system_pack, redirect);
                 }
 
                 if let Some(icon) = &entry.icon {
@@ -255,28 +264,26 @@ impl ResourceManager {
         false
     }
 
+    fn _has_shared_file_icon(system_pack: &IconPack, path: &Path) -> bool {
+        let Some(ext) = path.extension() else {
+            return false;
+        };
+        let extension = ext.to_string_lossy().to_lowercase();
+        system_pack.entries.iter().any(|e| match e {
+            IconPackEntry::Shared(s) => {
+                s.extension.to_lowercase() == extension && Self::icon_exists(&s.icon)
+            }
+            _ => false,
+        })
+    }
+
     /// Get icon pack by app user model id, filename or path
     pub fn has_app_icon(&self, umid: Option<&str>, path: Option<&Path>) -> bool {
         self.with_system_pack(|system_pack| Self::_has_app_icon(system_pack, umid, path))
     }
 
     pub fn has_shared_file_icon(&self, path: &Path) -> bool {
-        let Some(ext) = path.extension() else {
-            return false;
-        };
-        let extension = ext.to_string_lossy().to_lowercase();
-
-        self.with_system_pack(|system_pack| {
-            for entry in &system_pack.entries {
-                if let IconPackEntry::Shared(entry) = entry {
-                    if entry.extension.to_lowercase() == extension && Self::icon_exists(&entry.icon)
-                    {
-                        return true;
-                    }
-                }
-            }
-            false
-        })
+        self.with_system_pack(|system_pack| Self::_has_shared_file_icon(system_pack, path))
     }
 }
 

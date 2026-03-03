@@ -9,6 +9,7 @@
 ### enhancements
 
 - log system.
+- icon pack extractor and cache system.
 
 ## [2.5.3]
 
