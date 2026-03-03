@@ -76,7 +76,7 @@
     "react-icons": "^5.5.0",
     "readable-types": "^4.0.0",
     "real-react-dom": "npm:react-dom@^19.0.0",
-    "svelte": "^5.53.0",
+    "svelte": "^5.53.5",
     "svelte-check": "^4.3.5",
     "toml": "^3.0.0",
     "tsx": "^4.19.3",
