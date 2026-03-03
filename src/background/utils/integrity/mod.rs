@@ -70,8 +70,19 @@ pub fn restart_as_appx() -> Result<!> {
     std::process::exit(0);
 }
 
+fn is_uac_enabled() -> bool {
+    use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
+    let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+    let Ok(key) = hklm.open_subkey(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
+    else {
+        return true; // assume enabled if we can't read
+    };
+    let enable_lua: u32 = key.get_value("EnableLUA").unwrap_or(1);
+    enable_lua != 0
+}
+
 pub fn warn_if_elevated(app: &tauri::AppHandle) {
-    if WindowsApi::is_elevated().unwrap_or(false) {
+    if is_uac_enabled() && WindowsApi::is_elevated().unwrap_or(false) {
         app.dialog()
             .message(t!("elevated.description"))
             .title(t!("elevated.title"))
