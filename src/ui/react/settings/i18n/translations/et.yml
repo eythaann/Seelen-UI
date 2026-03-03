@@ -239,12 +239,14 @@ toolbar:
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
   enable: Luba väljamõeldud tööriistariba
-  height: Kõrgus
   hide_mode:
     always: Alati
     never: Mitte kunagi
     on_overlap: Kattumises
+  item_size: Kauba suurus
   label: Tööriistariba
+  margin: Veerise suurus
+  padding: Polsterduse suurus
   placeholder: {}
 update:
   available: Värskendage saadaval!

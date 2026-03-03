@@ -230,12 +230,14 @@ toolbar:
   delay_to_show: השהה הצגה
   dock_side: מצב
   enable: אפשר
-  height: גובה
   hide_mode:
     always: תמיד
     never: לעולם לא
     on_overlap: על חפיפה
+  item_size: גודל פריט
   label: סרגל כלים
+  margin: גודל השוליים
+  padding: גודל ריפוד
   placeholder: {}
 update:
   available: עדכון זמין!

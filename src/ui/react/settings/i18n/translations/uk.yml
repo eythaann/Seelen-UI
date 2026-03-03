@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Затримка показу
   dock_side: Посада
   enable: Увімкнути панель інструментів
-  height: Висота
   hide_mode:
     always: Завжди
     never: Ніколи
     on_overlap: При перекритті
+  item_size: Розмір елемента
   label: Панель інструментів
+  margin: Розмір маржі
+  padding: Розмір прокладки
   placeholder: {}
 update:
   available: Доступне оновлення!

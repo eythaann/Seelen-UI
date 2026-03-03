@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
   enable: Gaitu tresna-barra
-  height: Luzera
   hide_mode:
     always: Beti
     never: Inoiz ez
     on_overlap: Gainjartzean
+  item_size: Elementuaren tamaina
   label: Tresna barra
+  margin: Marjinaren Tamaina
+  padding: Betegarriaren Tamaina
   placeholder: {}
 update:
   available: Eguneratu eskuragarri!

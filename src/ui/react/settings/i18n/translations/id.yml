@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: Keterlambatan untuk ditampilkan
   dock_side: Posisi
   enable: Aktifkan toolbar mewah
-  height: Tinggi
   hide_mode:
     always: Selalu
     never: Tidak pernah
     on_overlap: Di tumpang tindih
+  item_size: Ukuran Barang
   label: Toolbar
+  margin: Ukuran Margin
+  padding: Ukuran Bantalan
   placeholder: {}
 update:
   available: Perbarui Tersedia!

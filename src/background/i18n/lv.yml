@@ -1,5 +1,15 @@
 cancel: Atcelt
 done: Darīts
+elevated:
+  description: >-
+    Seelen UI darbojas ar administratora privilēģijām.
+
+    Tas nepievieno vai neuzlabo nekādas funkcijas, un tas var radīt drošības
+    risku.
+
+    Lai nodrošinātu labāku drošību, lūdzu, restartējiet to bez administratora
+    atļaujām.
+  title: Darbojas kā administrators
 resource:
   added: Ir pievienots jauns resurss
   download_failed_body: >-

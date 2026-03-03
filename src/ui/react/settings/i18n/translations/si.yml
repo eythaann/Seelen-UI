@@ -238,12 +238,14 @@ toolbar:
   delay_to_show: පෙන්වීමට ප්‍රමාදය
   dock_side: තනතුර
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
-  height: උස
   hide_mode:
     always: සෑම විටම
     never: කවදාවත් නැහැ
     on_overlap: අතිච්ඡාදනය මත
+  item_size: අයිතමයේ ප්රමාණය
   label: මෙවලම් තීරුව
+  margin: ආන්තික ප්රමාණය
+  padding: පිරවුම් ප්රමාණය
   placeholder: {}
 update:
   available: යාවත්කාලීන කිරීම!

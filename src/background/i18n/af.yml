@@ -1,5 +1,15 @@
 cancel: Kanselleer
 done: Gedoen
+elevated:
+  description: >-
+    Seelen UI loop met administrateur regte.
+
+    Dit voeg geen kenmerke by of verbeter dit nie, en dit kan 'n
+    sekuriteitsrisiko inhou.
+
+    Vir beter sekuriteit, herbegin dit asseblief sonder
+    administrateurtoestemmings.
+  title: Loop as administrateur
 resource:
   added: '''N Nuwe hulpbron is bygevoeg'
   download_failed_body: >-

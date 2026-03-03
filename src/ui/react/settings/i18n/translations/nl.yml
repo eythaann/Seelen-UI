@@ -238,12 +238,14 @@ toolbar:
   delay_to_show: Vertraging om te tonen
   dock_side: Positie
   enable: Schakel fancy werkbalk in
-  height: Hoogte
   hide_mode:
     always: Altijd
     never: Nooit
     on_overlap: Op overlap
+  item_size: Artikelgrootte
   label: Werkbalk
+  margin: Margegrootte
+  padding: Maat vulling
   placeholder: {}
 update:
   available: Update beschikbaar!

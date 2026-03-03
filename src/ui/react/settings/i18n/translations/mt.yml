@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
   enable: Jippermetti toolbar tal-fancy
-  height: Għoli
   hide_mode:
     always: Dejjem
     never: Qatt
     on_overlap: Fuq koinċidenza
+  item_size: Daqs tal-Oġġett
   label: Toolbar
+  margin: Daqs tal-Marġini
+  padding: Daqs tal-ikkuttunar
   placeholder: {}
 update:
   available: Aġġornament disponibbli!

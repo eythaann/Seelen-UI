@@ -238,12 +238,14 @@ toolbar:
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
   enable: ჩართეთ ლამაზი პანელი
-  height: სიმაღლე
   hide_mode:
     always: ყოველთვის
     never: არასოდეს
     on_overlap: გადახურვაზე
+  item_size: ნივთის ზომა
   label: ინსტრუმენტთა პანელი
+  margin: მარჟის ზომა
+  padding: ბალიშის ზომა
   placeholder: {}
 update:
   available: განახლება ხელმისაწვდომია!

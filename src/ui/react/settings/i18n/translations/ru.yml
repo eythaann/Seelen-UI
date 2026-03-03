@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Задержка показа
   dock_side: Позиция
   enable: Включить
-  height: Высота
   hide_mode:
     always: Всегда
     never: Никогда
     on_overlap: При перекрытии
+  item_size: Размер товара
   label: Верхняя панель
+  margin: Размер поля
+  padding: Размер заполнения
   placeholder: {}
 update:
   available: Обновление доступно!

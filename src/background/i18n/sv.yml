@@ -1,5 +1,14 @@
 cancel: Avboka
 done: Gjort
+elevated:
+  description: >-
+    Seelen UI körs med administratörsbehörighet.
+
+    Detta lägger inte till eller förbättrar några funktioner, och det kan utgöra
+    en säkerhetsrisk.
+
+    För bättre säkerhet, starta om den utan administratörsbehörighet.
+  title: Kör som administratör
 resource:
   added: En ny resurs har lagts till
   download_failed_body: >-

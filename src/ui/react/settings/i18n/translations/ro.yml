@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: Întârzieți afișarea
   dock_side: Poziția
   enable: Activați bara de instrumente fantezistă
-  height: Înălţime
   hide_mode:
     always: Întotdeauna
     never: Nu
     on_overlap: Pe suprapunere
+  item_size: Dimensiunea articolului
   label: Bara de instrumente
+  margin: Dimensiunea marginii
+  padding: Dimensiunea căptușelii
   placeholder: {}
 update:
   available: Actualizare disponibilă!

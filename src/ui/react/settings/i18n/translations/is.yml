@@ -237,12 +237,14 @@ toolbar:
   delay_to_show: Seinkun á sýningu
   dock_side: Staða
   enable: Virkja Fancy tækjastiku
-  height: Hæð
   hide_mode:
     always: Alltaf
     never: Aldrei
     on_overlap: Á skörun
+  item_size: Atriðastærð
   label: Tækjastikur
+  margin: Framlegð stærð
+  padding: Bólstrun Stærð
   placeholder: {}
 update:
   available: Uppfærsla í boði!

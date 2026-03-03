@@ -229,12 +229,14 @@ toolbar:
   delay_to_show: 표시 지연
   dock_side: 위치
   enable: 툴바 활성화
-  height: 높이
   hide_mode:
     always: 항상
     never: 안 함
     on_overlap: 오버랩 시
+  item_size: 품목 크기
   label: 도구 모음
+  margin: 여백 크기
+  padding: 패딩 크기
   placeholder: {}
 update:
   available: 사용 가능한 업데이트가 존재합니다!

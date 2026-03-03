@@ -1,5 +1,14 @@
 cancel: Stornieren
 done: Erledigt
+elevated:
+  description: >-
+    Seelen UI läuft mit Administratorrechten.
+
+    Dadurch werden keine Funktionen hinzugefügt oder verbessert und es kann ein
+    Sicherheitsrisiko darstellen.
+
+    Aus Sicherheitsgründen starten Sie es bitte ohne Administratorrechte neu.
+  title: Als Administrator ausführen
 resource:
   added: Es wurde eine neue Ressource hinzugefügt
   download_failed_body: >-

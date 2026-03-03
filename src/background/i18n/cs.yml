@@ -1,5 +1,14 @@
 cancel: Zrušit
 done: Hotovo
+elevated:
+  description: >-
+    Seelen UI běží s oprávněními správce.
+
+    To nepřidává ani nevylepšuje žádné funkce a může představovat bezpečnostní
+    riziko.
+
+    Pro lepší zabezpečení jej restartujte bez oprávnění správce.
+  title: Spuštění jako správce
 resource:
   added: Byl přidán nový zdroj
   download_failed_body: >-

@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
   enable: Vebijêrkek Fancy Vebijêrin
-  height: Bilindî
   hide_mode:
     always: Herdem
     never: Qet
     on_overlap: Li ser hevgirtinê
+  item_size: Mezinahiya Babetê
   label: Toolbar
+  margin: Mezinahiya Margin
+  padding: Padding Size
   placeholder: {}
 update:
   available: Nûvekirin!

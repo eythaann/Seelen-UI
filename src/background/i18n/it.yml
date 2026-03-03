@@ -1,5 +1,16 @@
 cancel: Cancellare
 done: Fatto
+elevated:
+  description: >-
+    L'interfaccia utente di Seelen è in esecuzione con privilegi di
+    amministratore.
+
+    Ciò non aggiunge né migliora alcuna funzionalità e potrebbe rappresentare un
+    rischio per la sicurezza.
+
+    Per una maggiore sicurezza, riavvialo senza autorizzazioni di
+    amministratore.
+  title: In esecuzione come amministratore
 resource:
   added: È stata aggiunta una nuova risorsa
   download_failed_body: >-

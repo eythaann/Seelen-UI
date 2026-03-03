@@ -1,5 +1,14 @@
 cancel: Zrušiť
 done: Vykonaný
+elevated:
+  description: >-
+    Používateľské rozhranie Seelen je spustené s oprávneniami správcu.
+
+    Toto nepridáva ani nevylepšuje žiadne funkcie a môže predstavovať
+    bezpečnostné riziko.
+
+    Pre lepšiu bezpečnosť ho reštartujte bez oprávnení správcu.
+  title: Beží ako správca
 resource:
   added: Bol pridaný nový zdroj
   download_failed_body: >-

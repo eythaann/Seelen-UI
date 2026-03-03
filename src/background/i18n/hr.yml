@@ -1,5 +1,15 @@
 cancel: Otkazati
 done: Završen
+elevated:
+  description: >-
+    Seelen UI radi s administratorskim ovlastima.
+
+    Ovo ne dodaje niti poboljšava nikakve značajke i može predstavljati
+    sigurnosni rizik.
+
+    Radi bolje sigurnosti, ponovno ga pokrenite bez administratorskih
+    dopuštenja.
+  title: Pokreće se kao administrator
 resource:
   added: Dodan je novi resurs
   download_failed_body: >-

@@ -238,12 +238,14 @@ toolbar:
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
   enable: ફેન્સી ટૂલબાર સક્ષમ કરો
-  height: ઊંચાઈ
   hide_mode:
     always: હંમેશા
     never: ક્યારેય નહીં
     on_overlap: ઓવરલેપ પર
+  item_size: આઇટમનું કદ
   label: વમળ
+  margin: માર્જિન માપ
+  padding: ગાદી કદ
   placeholder: {}
 update:
   available: અપડેટ ઉપલબ્ધ!

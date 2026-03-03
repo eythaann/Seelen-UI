@@ -1,5 +1,14 @@
 cancel: Cancelar
 done: Feita
+elevated:
+  description: >-
+    Seelen UI está sendo executado com privilégios de administrador.
+
+    Isso não adiciona nem melhora nenhum recurso e pode representar um risco à
+    segurança.
+
+    Para melhor segurança, reinicie-o sem permissões de administrador.
+  title: Executando como Administrador
 resource:
   added: Um novo recurso foi adicionado
   download_failed_body: >-

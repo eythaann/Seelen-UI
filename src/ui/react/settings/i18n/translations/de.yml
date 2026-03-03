@@ -244,12 +244,14 @@ toolbar:
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
   enable: Elegante Werkzeugleiste aktivieren
-  height: Höhe
   hide_mode:
     always: Stets
     never: Niemals
     on_overlap: Auf Überlappung
+  item_size: Artikelgröße
   label: Symbolleiste
+  margin: Randgröße
+  padding: Polstergröße
   placeholder: {}
 update:
   available: Update verfügbar!

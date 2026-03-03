@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
   enable: نوار ابزار فانتزی را فعال کنید
-  height: قد
   hide_mode:
     always: همیشه
     never: هرگز
     on_overlap: روی همپوشانی
+  item_size: اندازه مورد
   label: نوار ابزار
+  margin: اندازه حاشیه
+  padding: اندازه بالشتک
   placeholder: {}
 update:
   available: بروزرسانی موجود!

@@ -243,12 +243,14 @@ toolbar:
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
   enable: Abilita Barra Fancy
-  height: Altezza
   hide_mode:
     always: Sempre
     never: Mai
     on_overlap: Sulla sovrapposizione
+  item_size: Dimensione dell'articolo
   label: Barra
+  margin: Dimensione margine
+  padding: Dimensioni dell'imbottitura
   placeholder: {}
 update:
   available: Aggiornamento Disponibile!

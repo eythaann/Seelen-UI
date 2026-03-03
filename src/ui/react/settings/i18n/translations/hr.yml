@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: Odgoditi prikaz
   dock_side: Položaj
   enable: Omogućite maštovitu alatnu traku
-  height: Visina
   hide_mode:
     always: Uvijek
     never: Nikada
     on_overlap: Na preklapanju
+  item_size: Veličina artikla
   label: Alatna traka
+  margin: Veličina margine
+  padding: Veličina podloge
   placeholder: {}
 update:
   available: Ažuriranje dostupno!

@@ -1,5 +1,14 @@
 cancel: Membatalkan
 done: Selesai
+elevated:
+  description: >-
+    Seelen UI berjalan dengan hak administrator.
+
+    Ini tidak menambah atau meningkatkan fitur apa pun, dan mungkin menimbulkan
+    risiko keamanan.
+
+    Untuk keamanan yang lebih baik, silakan restart tanpa izin administrator.
+  title: Berjalan sebagai Administrator
 resource:
   added: Sumber daya baru telah ditambahkan
   download_failed_body: >-

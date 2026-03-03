@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan
   enable: Dayakan bar alat mewah
-  height: Ketinggian
   hide_mode:
     always: Sentiasa
     never: tidak pernah
     on_overlap: Bertindih
+  item_size: Saiz Barang
   label: Bar alat
+  margin: Saiz Margin
+  padding: Saiz Padding
   placeholder: {}
 update:
   available: Kemas kini tersedia!

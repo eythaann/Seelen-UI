@@ -1,5 +1,15 @@
 cancel: Cancelar
 done: Hecho
+elevated:
+  description: >-
+    La interfaz de usuario de Seelen se ejecuta con privilegios de
+    administrador.
+
+    Esto no agrega ni mejora ninguna característica y puede representar un
+    riesgo de seguridad.
+
+    Para mayor seguridad, reinícielo sin permisos de administrador.
+  title: Corriendo como administradora
 resource:
   added: Se ha añadido un nuevo recurso
   download_failed_body: >-

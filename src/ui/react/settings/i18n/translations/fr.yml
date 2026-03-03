@@ -243,12 +243,14 @@ toolbar:
   delay_to_show: Délai avant d'afficher
   dock_side: Position
   enable: Activer la barre d'outils sophistiquée
-  height: Hauteur
   hide_mode:
     always: Toujours
     never: Jamais
     on_overlap: Sur chevauchement
+  item_size: Taille de l'article
   label: Barre d'outils
+  margin: Taille de la marge
+  padding: Taille du rembourrage
   placeholder: {}
 update:
   available: Mise à jour disponible !

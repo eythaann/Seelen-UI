@@ -1,5 +1,15 @@
 cancel: Burin
 done: Sameeyey
+elevated:
+  description: >-
+    Seelen UI waxa ay la socotaa mudnaanta maamulaha
+
+    Tani ma soo kordhinayso ama ma wanaajinayso wax sifooyin ah, waxaana laga
+    yaabaa inay keento khatar amni.
+
+    Si loo helo nabad-gelyo wanaagsan, fadlan dib u billow la'aanteed maamulaha
+    fasaxa
+  title: U ordaya sidii Maamule
 resource:
   added: Kheyraad Cusub ayaa lagu daray
   download_failed_body: >-

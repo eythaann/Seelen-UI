@@ -1,5 +1,14 @@
 cancel: Chansliff
 done: Wedi gwneud
+elevated:
+  description: >-
+    Mae Seelen UI yn rhedeg gyda breintiau gweinyddwr.
+
+    Nid yw hyn yn ychwanegu nac yn gwella unrhyw nodweddion, a gall achosi risg
+    diogelwch.
+
+    Er mwyn gwella diogelwch, ailgychwynnwch ef heb ganiatâd gweinyddwr.
+  title: Rhedeg fel Gweinyddwr
 resource:
   added: Ychwanegwyd adnodd newydd
   download_failed_body: >-

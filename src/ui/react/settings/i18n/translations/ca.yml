@@ -241,12 +241,14 @@ toolbar:
   delay_to_show: Retard per mostrar
   dock_side: Posició
   enable: Activa la barra d’eines de luxe
-  height: Altura
   hide_mode:
     always: Sempre
     never: Mai
     on_overlap: Sobre la superposició
+  item_size: Mida de l'article
   label: Barra d’eines
+  margin: Mida del marge
+  padding: Mida del farciment
   placeholder: {}
 update:
   available: Actualitzeu disponible.

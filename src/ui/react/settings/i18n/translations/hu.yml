@@ -239,12 +239,14 @@ toolbar:
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció
   enable: Engedélyezze a divatos eszköztárat
-  height: Magasság
   hide_mode:
     always: Mindig
     never: Soha
     on_overlap: Az átfedésben
+  item_size: Elem mérete
   label: Eszköztár
+  margin: Margó mérete
+  padding: Padding Méret
   placeholder: {}
 update:
   available: A frissítés elérhető!

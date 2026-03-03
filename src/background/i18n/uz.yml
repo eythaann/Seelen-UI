@@ -1,5 +1,15 @@
 cancel: Bekor qilmoq
 done: Bajarildi
+elevated:
+  description: >-
+    Seelen UI administrator imtiyozlari bilan ishlaydi.
+
+    Bu hech qanday xususiyatni qo'shmaydi yoki yaxshilamaydi va xavfsizlikka
+    xavf tug'dirishi mumkin.
+
+    Yaxshiroq xavfsizlik uchun administrator ruxsatisiz uni qayta ishga
+    tushiring.
+  title: Administrator sifatida ishga tushirish
 resource:
   added: Yangi manba qo'shildi
   download_failed_body: >-

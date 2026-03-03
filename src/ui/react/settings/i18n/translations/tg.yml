@@ -238,12 +238,14 @@ toolbar:
   delay_to_show: Таъхир барои нишон додан
   dock_side: Вазъият
   enable: Дастрас кардани панели футболи
-  height: Баландӣ
   hide_mode:
     always: Ҳамеша
     never: Ҳеҷ гоҳ
     on_overlap: Дар такрори
+  item_size: Андозаи ашё
   label: Асбобу
+  margin: Андозаи маржа
+  padding: Андозаи пуркунӣ
   placeholder: {}
 update:
   available: Навсозӣ!

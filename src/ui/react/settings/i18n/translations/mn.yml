@@ -239,12 +239,14 @@ toolbar:
   delay_to_show: Үзүүлэхийг хойшлуулсан
   dock_side: Байрлал
   enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
-  height: Өндөрлөг
   hide_mode:
     always: Үргэлж
     never: Хэзээ ч үгүй
     on_overlap: Давхардсан дээр
+  item_size: Барааны хэмжээ
   label: Балтсний хайрцагны хэрэгсэл
+  margin: Маржин хэмжээ
+  padding: Дотор хэмжээ
   placeholder: {}
 update:
   available: Шинэчлэх боломжтой!

@@ -1,5 +1,15 @@
 cancel: Hlikihla
 done: Usulile
+elevated:
+  description: >-
+    I-Seelen UI isebenza ngamalungelo omlawuli.
+
+    Lokhu akungezi noma akuthuthukisi noma yiziphi izici, futhi kungase kudale
+    ingcuphe yezokuphepha.
+
+    Ukuze uthole ukuphepha okungcono, sicela uyiqale kabusha ngaphandle
+    kwezimvume zomlawuli.
+  title: Isebenza njengomlawuli
 resource:
   added: Kufakwe insiza entsha
   download_failed_body: >-

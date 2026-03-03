@@ -1,5 +1,11 @@
 cancel: Fagilee
 done: Ṣe
+elevated:
+  description: |-
+    Seelen UI nṣiṣẹ pẹlu awọn anfani alakoso.
+    Eyi ko ṣafikun tabi mu awọn ẹya eyikeyi dara, ati pe o le jẹ eewu aabo.
+    Fun aabo to dara julọ, jọwọ tun bẹrẹ laisi awọn igbanilaaye alakoso.
+  title: Nṣiṣẹ bi Alakoso
 resource:
   added: A ti ṣafikun awọn orisun titun
   download_failed_body: >-

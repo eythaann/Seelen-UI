@@ -237,12 +237,14 @@ toolbar:
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
   dock_side: តីតាមង
   enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
-  height: កម្ពស់
   hide_mode:
     always: ជានិច្ច
     never: មិនដែល
     on_overlap: នៅលើការត្រួតស៊ីគ្នា។
+  item_size: ទំហំធាតុ
   label: របាររបន៍របយ័ត្ន។ រប
+  margin: ទំហំរឹម
+  padding: ទំហំទ្រនាប់
   placeholder: {}
 update:
   available: មានបច្ចុប្បន្នភាព!

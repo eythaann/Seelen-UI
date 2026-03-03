@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: Забавяне за показване
   dock_side: Позиция
   enable: Активирайте фантастичната лента с инструменти
-  height: Височина
   hide_mode:
     always: Винаги
     never: Никога
     on_overlap: При припокриване
+  item_size: Размер на артикула
   label: Лента с инструменти
+  margin: Размер на маржа
+  padding: Размер на подложката
   placeholder: {}
 update:
   available: Налична актуализация!

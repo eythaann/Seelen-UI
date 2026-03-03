@@ -1,5 +1,14 @@
 cancel: Atšaukti
 done: Padaryta
+elevated:
+  description: >-
+    Seelen vartotojo sąsaja veikia su administratoriaus teisėmis.
+
+    Tai neprideda ir nepatobulina jokių funkcijų ir gali kelti pavojų saugumui.
+
+    Norėdami užtikrinti didesnį saugumą, paleiskite jį iš naujo be
+    administratoriaus leidimo.
+  title: Veikia kaip administratorius
 resource:
   added: Pridėtas naujas išteklius
   download_failed_body: >-

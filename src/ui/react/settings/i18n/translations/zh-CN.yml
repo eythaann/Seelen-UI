@@ -221,12 +221,14 @@ toolbar:
   delay_to_show: 延迟显示
   dock_side: 职位
   enable: 启用精美工具栏
-  height: 高度
   hide_mode:
     always: 总是
     never: 从不
     on_overlap: 重叠时
+  item_size: 商品尺寸
   label: 工具栏
+  margin: 边距大小
+  padding: 填充尺寸
   placeholder: {}
 update:
   available: 有可用更新！

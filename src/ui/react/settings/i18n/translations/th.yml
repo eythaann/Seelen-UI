@@ -231,12 +231,14 @@ toolbar:
   delay_to_show: ล่าช้าในการแสดง
   dock_side: ตำแหน่ง
   enable: เปิดใช้งานแถบเครื่องมือแฟนซี
-  height: ความสูง
   hide_mode:
     always: เสมอ
     never: ไม่เคย
     on_overlap: เมื่อทับซ้อนกัน
+  item_size: ขนาดรายการ
   label: แถบเครื่องมือ
+  margin: ขนาดระยะขอบ
+  padding: ขนาดบุนวม
   placeholder: {}
 update:
   available: อัปเดตพร้อมใช้งาน!

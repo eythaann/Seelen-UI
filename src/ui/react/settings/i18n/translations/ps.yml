@@ -234,12 +234,14 @@ toolbar:
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
   enable: د فینسي تورې پټه وړتیا وړ کړئ
-  height: لوړوالی
   hide_mode:
     always: تل
     never: هیڅکله نه
     on_overlap: پر اوورلیپ
+  item_size: د توکي اندازه
   label: توکپټه
+  margin: د حاشیې اندازه
+  padding: د پیډینګ اندازه
   placeholder: {}
 update:
   available: اوسمهالول شتون لري!

@@ -233,12 +233,14 @@ toolbar:
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
-  height: Giga
   hide_mode:
     always: Nigbagbogbo
     never: Kò
     on_overlap: Lori agbekọja
+  item_size: Iwọn Nkan
   label: Ọpa irinṣẹ
+  margin: Ala Iwon
+  padding: Padding Iwon
   placeholder: {}
 update:
   available: Imudojuiwọn wa!

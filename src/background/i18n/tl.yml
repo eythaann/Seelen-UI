@@ -1,5 +1,15 @@
 cancel: Kanselahin
 done: Tapos na
+elevated:
+  description: >-
+    Gumagana ang Seelen UI na may mga pribilehiyo ng administrator.
+
+    Hindi ito nagdaragdag o nagpapahusay ng anumang mga tampok, at maaari itong
+    magdulot ng panganib sa seguridad.
+
+    Para sa mas mahusay na seguridad, mangyaring i-restart ito nang walang mga
+    pahintulot ng administrator.
+  title: Tumatakbo bilang Administrator
 resource:
   added: Ang isang bagong mapagkukunan ay naidagdag
   download_failed_body: >-

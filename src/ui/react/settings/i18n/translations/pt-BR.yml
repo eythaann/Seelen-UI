@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Demora para mostrar
   dock_side: Posição
   enable: Ativar barra de ferramentas sofisticada
-  height: Altura
   hide_mode:
     always: Sempre
     never: Nunca
     on_overlap: Na sobreposição
+  item_size: Tamanho do item
   label: Barra de ferramentas
+  margin: Tamanho da margem
+  padding: Tamanho do preenchimento
   placeholder: {}
 update:
   available: Atualização disponível!

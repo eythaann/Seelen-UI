@@ -1,5 +1,14 @@
 cancel: Anula
 done: Făcut
+elevated:
+  description: >-
+    Seelen UI rulează cu privilegii de administrator.
+
+    Acest lucru nu adaugă sau îmbunătățește nicio caracteristică și poate
+    prezenta un risc de securitate.
+
+    Pentru o mai bună securitate, reporniți-l fără permisiuni de administrator.
+  title: Funcționează ca administrator
 resource:
   added: O nouă resursă a fost adăugată
   download_failed_body: >-

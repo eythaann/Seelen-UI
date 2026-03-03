@@ -1,5 +1,15 @@
 cancel: Bişûndekirin
 done: Dank
+elevated:
+  description: >-
+    Seelen UI bi îmtiyazên rêvebirê dimeşe.
+
+    Ev tu taybetmendiyan zêde nake an baştir dike, û dibe ku xeterek ewlehiyê
+    çêbike.
+
+    Ji bo ewlehiya çêtir, ji kerema xwe wê bêyî destûrên rêvebir ji nû ve bidin
+    destpêkirin.
+  title: Wekî Rêveber dimeşe
 resource:
   added: Resavkaniyek nû hatiye zêdekirin
   download_failed_body: >-

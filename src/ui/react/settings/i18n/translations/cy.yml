@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Oedi i ddangos
   dock_side: Safle
   enable: Galluogi bar offer ffansi
-  height: Uchder
   hide_mode:
     always: Bob amser
     never: Byth
     on_overlap: Ar gorgyffwrdd
+  item_size: Maint yr Eitem
   label: Bariau
+  margin: Maint Ymyl
+  padding: Maint Padin
   placeholder: {}
 update:
   available: Diweddariad ar gael!

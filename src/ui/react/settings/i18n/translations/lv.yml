@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
   enable: Iespējot izdomātu rīkjoslu
-  height: Augstums
   hide_mode:
     always: Vienmēr
     never: Nekad
     on_overlap: Uz pārklāšanās
+  item_size: Preces izmērs
   label: Rīkjosla
+  margin: Piemales lielums
+  padding: Polsterējuma izmērs
   placeholder: {}
 update:
   available: Pieejams atjauninājums!

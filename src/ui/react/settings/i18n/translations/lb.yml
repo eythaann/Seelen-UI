@@ -238,12 +238,14 @@ toolbar:
   delay_to_show: Verspéidung fir ze weisen
   dock_side: Positioun un
   enable: Aktivéiert Fore Toolbar
-  height: Héicht
   hide_mode:
     always: Ëmmer
     never: Ni
     on_overlap: Op Iwwerlappung
+  item_size: Artikel Gréisst
   label: TO-tcstar
+  margin: Margin Gréisst
+  padding: Padding Gréisst
   placeholder: {}
 update:
   available: Update verfügbar!

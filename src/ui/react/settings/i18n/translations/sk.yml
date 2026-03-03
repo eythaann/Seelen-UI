@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: Oneskorenie zobrazenia
   dock_side: Pozícia
   enable: Povoliť ozdobný panel s nástrojmi
-  height: Výška
   hide_mode:
     always: Vždy
     never: Nikdy
     on_overlap: Na prekrytí
+  item_size: Veľkosť položky
   label: Panel s nástrojmi
+  margin: Veľkosť okraja
+  padding: Veľkosť výplne
   placeholder: {}
 update:
   available: Aktualizácia k dispozícii!

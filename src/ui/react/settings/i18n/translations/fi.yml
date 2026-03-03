@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: Viive näyttöön
   dock_side: Asema
   enable: Ota hieno työkalurivi käyttöön
-  height: Korkeus
   hide_mode:
     always: Aina
     never: Ei koskaan
     on_overlap: Päällekkäin
+  item_size: Tuotteen koko
   label: Työkalurivi
+  margin: Marginaalin koko
+  padding: Pehmusteen koko
   placeholder: {}
 update:
   available: Päivitä saatavilla!

@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: দেখাতে বিলম্ব
   dock_side: অবস্থান
   enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
-  height: উচ্চতা
   hide_mode:
     always: সর্বদা
     never: কখনই না
     on_overlap: ওভারল্যাপে
+  item_size: আইটেম আকার
   label: সরঞ্জামদণ্ড
+  margin: মার্জিন সাইজ
+  padding: প্যাডিং আকার
   placeholder: {}
 update:
   available: আপডেট উপলব্ধ!

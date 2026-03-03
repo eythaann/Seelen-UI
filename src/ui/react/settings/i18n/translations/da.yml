@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Forsinket fremvisning
   dock_side: Position
   enable: Aktivér fancy værktøjslinje
-  height: Højde
   hide_mode:
     always: Altid
     never: Aldrig
     on_overlap: På overlapning
+  item_size: Varestørrelse
   label: Værktøjslinje
+  margin: Marginstørrelse
+  padding: Polstring størrelse
   placeholder: {}
 update:
   available: Opdatering tilgængelig!

@@ -246,12 +246,14 @@ toolbar:
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon
   enable: Paganahin ang magarbong toolbar
-  height: Taas
   hide_mode:
     always: Laging
     never: Hindi kailanman
     on_overlap: Sa overlap
+  item_size: Laki ng Item
   label: Toolbar
+  margin: Laki ng Margin
+  padding: Laki ng Padding
   placeholder: {}
 update:
   available: Mag -update Magagamit!

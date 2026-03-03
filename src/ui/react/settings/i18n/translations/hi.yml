@@ -242,12 +242,14 @@ toolbar:
   delay_to_show: दिखाने में देरी
   dock_side: पद
   enable: फैंसी टूलबार सक्षम करें
-  height: ऊंचाई
   hide_mode:
     always: हमेशा
     never: कभी नहीं
     on_overlap: ओवरलैप पर
+  item_size: आइटम का आकार
   label: उपकरण पट्टी
+  margin: मार्जिन आकार
+  padding: गद्दी का आकार
   placeholder: {}
 update:
   available: उपलब्ध अद्यतन!

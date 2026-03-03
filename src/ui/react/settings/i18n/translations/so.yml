@@ -245,12 +245,14 @@ toolbar:
   delay_to_show: Dib u dhig si loo muujiyo
   dock_side: Meel
   enable: Keeniyaan Qalabka Fancy Toolbar
-  height: Dherer
   hide_mode:
     always: Had iyo jeer
     never: Marna
     on_overlap: Isku dhafka
+  item_size: Cabbirka Shayga
   label: Qalab argamiye
+  margin: Cabirka Margin
+  padding: Cabbirka suufka
   placeholder: {}
 update:
   available: Cusboonaysiinta la heli karo!

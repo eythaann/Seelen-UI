@@ -230,12 +230,14 @@ toolbar:
   delay_to_show: ለማሳየት መዘግየት
   dock_side: አቀማመጥ
   enable: Fangance የመሳሪያ አሞሌን ያንቁ
-  height: ቁመት
   hide_mode:
     always: ሁሌም
     never: በጭራሽ
     on_overlap: መደራረብ ላይ
+  item_size: የንጥል መጠን
   label: የመሣሪያ አሞሌ
+  margin: የኅዳግ መጠን
+  padding: የፓዲንግ መጠን
   placeholder: {}
 update:
   available: ዝመና ይገኛል!

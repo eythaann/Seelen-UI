@@ -1,5 +1,14 @@
 cancel: Ghairi
 done: Imekamilika
+elevated:
+  description: >-
+    Seelen UI inaendeshwa na haki za msimamizi.
+
+    Hii haiongezi au kuboresha vipengele vyovyote, na inaweza kuleta hatari ya
+    usalama.
+
+    Kwa usalama bora, tafadhali iwashe upya bila ruhusa za msimamizi.
+  title: Kuendesha kama Msimamizi
 resource:
   added: Rasilimali mpya imeongezwa
   download_failed_body: >-

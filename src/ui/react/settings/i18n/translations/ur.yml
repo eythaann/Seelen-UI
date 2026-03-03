@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: دکھانے میں تاخیر
   dock_side: پوزیشن
   enable: فینسی ٹول بار کو فعال کریں
-  height: اونچائی
   hide_mode:
     always: ہمیشہ
     never: کبھی نہیں
     on_overlap: اوورلیپ پر
+  item_size: آئٹم کا سائز
   label: ٹول بار
+  margin: مارجن سائز
+  padding: پیڈنگ سائز
   placeholder: {}
 update:
   available: تازہ کاری دستیاب!

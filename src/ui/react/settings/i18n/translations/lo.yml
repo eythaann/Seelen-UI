@@ -234,12 +234,14 @@ toolbar:
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
   enable: ເປີດໃຊ້ແຖບເຄື່ອງມື Fancy
-  height: ຄວາມສູງ
   hide_mode:
     always: ສະເໝີ
     never: ບໍ່ເຄີຍ
     on_overlap: ທັບຊ້ອນກັນ
+  item_size: ຂະໜາດລາຍການ
   label: ແຖບເຄື່ອງມື
+  margin: ຂະໜາດຂອບ
+  padding: ຂະໜາດແຜ່ນ
   placeholder: {}
 update:
   available: ປັບປຸງໃຫ້ທັນສະໄຫມ!

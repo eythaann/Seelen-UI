@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: देखाउन ढिलाइ
   dock_side: स्थिति
   enable: फैन्सी उपकरणपट्टी सक्षम गर्नुहोस्
-  height: ऊचाई
   hide_mode:
     always: सधैं
     never: कहिल्यै
     on_overlap: ओभरल्यापमा
+  item_size: वस्तु आकार
   label: औजारपरो
+  margin: मार्जिन साइज
+  padding: प्याडिङ साइज
   placeholder: {}
 update:
   available: अपडेट उपलब्ध!

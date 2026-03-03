@@ -1,5 +1,11 @@
 cancel: 取消
 done: 完毕
+elevated:
+  description: |-
+    Seelen UI 正在以管理员权限运行。
+    这不会添加或改进任何功能，并且可能会带来安全风险。
+    为了更好的安全性，请在没有管理员权限的情况下重新启动它。
+  title: 以管理员身份运行
 resource:
   added: 已添加新资源
   download_failed_body: 下载资源时出现问题，请向 Seelen 开发团队报告。

@@ -1,5 +1,15 @@
 cancel: Annuleren
 done: Klaar
+elevated:
+  description: >-
+    Seelen UI draait met beheerdersrechten.
+
+    Dit voegt geen functies toe of verbetert deze niet, en het kan een
+    veiligheidsrisico vormen.
+
+    Voor een betere veiligheid dient u het programma opnieuw op te starten
+    zonder beheerdersrechten.
+  title: Uitvoeren als beheerder
 resource:
   added: Er is een nieuwe bron toegevoegd
   download_failed_body: >-

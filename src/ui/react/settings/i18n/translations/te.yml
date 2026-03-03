@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం
   enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
-  height: ఎత్తు
   hide_mode:
     always: ఎల్లప్పుడూ
     never: ఎప్పుడూ
     on_overlap: అతివ్యాప్తిపై
+  item_size: అంశం పరిమాణం
   label: టూల్‌బార్
+  margin: మార్జిన్ పరిమాణం
+  padding: పాడింగ్ పరిమాణం
   placeholder: {}
 update:
   available: నవీకరణ అందుబాటులో ఉంది!

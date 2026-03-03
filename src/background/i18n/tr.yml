@@ -1,5 +1,14 @@
 cancel: İptal etmek
 done: Tamamlamak
+elevated:
+  description: >-
+    Seelen UI yönetici ayrıcalıklarıyla çalışıyor.
+
+    Bu, herhangi bir özelliği eklemez veya iyileştirmez ve güvenlik riski
+    oluşturabilir.
+
+    Daha iyi güvenlik için lütfen yönetici izinleri olmadan yeniden başlatın.
+  title: Yönetici olarak çalıştırma
 resource:
   added: Yeni bir kaynak eklendi
   download_failed_body: >-

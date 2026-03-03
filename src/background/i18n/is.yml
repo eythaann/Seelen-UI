@@ -1,5 +1,14 @@
 cancel: Hætta við
 done: Gert
+elevated:
+  description: >-
+    Seelen UI er í gangi með stjórnandaréttindi.
+
+    Þetta bætir ekki við eða bætir neina eiginleika og það getur valdið
+    öryggisáhættu.
+
+    Til að bæta öryggi, vinsamlegast endurræstu það án leyfis stjórnanda.
+  title: Keyrir sem stjórnandi
 resource:
   added: Nýjum auðlind hefur verið bætt við
   download_failed_body: >-

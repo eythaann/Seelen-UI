@@ -1,5 +1,14 @@
 cancel: Cancel·lar
 done: Fer
+elevated:
+  description: >-
+    La interfície d'usuari de Seelen s'està executant amb privilegis
+    d'administrador.
+
+    Això no afegeix ni millora cap funció i pot suposar un risc de seguretat.
+
+    Per a una millor seguretat, reinicieu-lo sense permís d'administrador.
+  title: Executant com a administrador
 resource:
   added: S'ha afegit un nou recurs
   download_failed_body: >-

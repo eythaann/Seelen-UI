@@ -1,5 +1,15 @@
 cancel: Batalkan
 done: Selesai
+elevated:
+  description: >-
+    UI Seelen berjalan dengan keistimewaan pentadbir.
+
+    Ini tidak menambah atau menambah baik sebarang ciri, dan ia mungkin
+    menimbulkan risiko keselamatan.
+
+    Untuk keselamatan yang lebih baik, sila mulakan semula tanpa kebenaran
+    pentadbir.
+  title: Berjalan sebagai Pentadbir
 resource:
   added: Sumber baru telah ditambah
   download_failed_body: >-

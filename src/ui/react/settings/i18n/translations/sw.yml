@@ -237,12 +237,14 @@ toolbar:
   delay_to_show: Kuchelewa kuonyesha
   dock_side: Msimamo
   enable: Wezesha zana ya dhana
-  height: Urefu
   hide_mode:
     always: Daima
     never: Kamwe
     on_overlap: Juu ya mwingiliano
+  item_size: Ukubwa wa Kipengee
   label: Zana
+  margin: Ukubwa wa Pambizo
+  padding: Ukubwa wa Padding
   placeholder: {}
 update:
   available: Sasisha inapatikana!

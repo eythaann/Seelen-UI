@@ -1,5 +1,15 @@
 cancel: Peruuttaa
 done: Tehty
+elevated:
+  description: >-
+    Seelen-käyttöliittymä toimii järjestelmänvalvojan oikeuksilla.
+
+    Tämä ei lisää tai paranna ominaisuuksia, ja se voi aiheuttaa
+    turvallisuusriskin.
+
+    Turvallisuuden parantamiseksi käynnistä se uudelleen ilman
+    järjestelmänvalvojan oikeuksia.
+  title: Toimii järjestelmänvalvojana
 resource:
   added: Uusi resurssi on lisätty
   download_failed_body: >-

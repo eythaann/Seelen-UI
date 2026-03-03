@@ -241,12 +241,14 @@ toolbar:
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
   enable: Kích hoạt thanh công cụ ưa thích
-  height: Chiều cao
   hide_mode:
     always: Luôn luôn
     never: Không bao giờ
     on_overlap: Trên sự chồng chéo
+  item_size: Kích thước mục
   label: Thanh công cụ
+  margin: Kích thước lề
+  padding: Kích thước đệm
   placeholder: {}
 update:
   available: Cập nhật có sẵn!

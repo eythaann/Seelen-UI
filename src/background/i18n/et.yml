@@ -1,5 +1,15 @@
 cancel: Tühistama
 done: Tehtud
+elevated:
+  description: >-
+    Seelen UI töötab administraatoriõigustega.
+
+    See ei lisa ega täiusta ühtegi funktsiooni ning võib kujutada endast
+    turvariski.
+
+    Parema turvalisuse tagamiseks taaskäivitage see ilma
+    administraatoriõigusteta.
+  title: Töötab administraatorina
 resource:
   added: Lisatud on uus ressurss
   download_failed_body: >-

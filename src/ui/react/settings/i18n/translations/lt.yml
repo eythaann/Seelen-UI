@@ -238,12 +238,14 @@ toolbar:
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija
   enable: Įgalinkite išgalvotą įrankių juostą
-  height: Ūgis
   hide_mode:
     always: Visada
     never: Niekada
     on_overlap: Ant persidengimo
+  item_size: Prekės dydis
   label: Įrankių juosta
+  margin: Maržos dydis
+  padding: Pamušalo dydis
   placeholder: {}
 update:
   available: Galima atnaujinti!

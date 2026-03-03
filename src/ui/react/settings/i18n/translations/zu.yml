@@ -243,12 +243,14 @@ toolbar:
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
   enable: Nika amandla amathuluzi e-fancy
-  height: Ubude
   hide_mode:
     always: Njalo
     never: Ungalokothi
     on_overlap: Ngokugqagqana
+  item_size: Usayizi Wento
   label: Indawo yamathuluzi
+  margin: Usayizi Wemajini
+  padding: Usayizi wePadding
   placeholder: {}
 update:
   available: Ukuvuselelwa Kuyatholakala!

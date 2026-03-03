@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Vertraag om te wys
   dock_side: Posisie
   enable: Aktiveer Fancy Toolbar
-  height: Hoogte
   hide_mode:
     always: Altyd
     never: Nooit nie
     on_overlap: Op oorvleueling
+  item_size: Item Grootte
   label: Werkbalk
+  margin: Marge Grootte
+  padding: Opvulling Grootte
   placeholder: {}
 update:
   available: Opdatering beskikbaar!

@@ -239,12 +239,14 @@ toolbar:
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
   enable: Zərif alət çubuğunu aktivləşdirin
-  height: Hündürlük
   hide_mode:
     always: Həmişə
     never: Heç vaxt
     on_overlap: Üst-üstə düşür
+  item_size: Element Ölçüsü
   label: Alət çubuğu
+  margin: Marja Ölçüsü
+  padding: Doldurma Ölçüsü
   placeholder: {}
 update:
   available: YENİLƏNİB!

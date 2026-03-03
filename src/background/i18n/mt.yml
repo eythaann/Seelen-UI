@@ -1,5 +1,15 @@
 cancel: Ikkanċella
 done: Magħmul
+elevated:
+  description: >-
+    Seelen UI qed taħdem bi privileġġi ta' amministratur.
+
+    Dan ma jżid jew itejjeb l-ebda karatteristika, u jista' joħloq riskju
+    għas-sigurtà.
+
+    Għal sigurtà aħjar, jekk jogħġbok ibda mill-ġdid mingħajr permessi ta'
+    amministratur.
+  title: Tmexxi bħala Amministratur
 resource:
   added: Ġiet miżjuda riżorsa ġdida
   download_failed_body: >-

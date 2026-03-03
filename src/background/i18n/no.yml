@@ -1,5 +1,14 @@
 cancel: Kansellere
 done: Ferdig
+elevated:
+  description: >-
+    Seelen UI kjører med administratorrettigheter.
+
+    Dette legger ikke til eller forbedrer noen funksjoner, og det kan utgjøre en
+    sikkerhetsrisiko.
+
+    For bedre sikkerhet, start den på nytt uten administratortillatelser.
+  title: Kjører som administrator
 resource:
   added: En ny ressurs er lagt til
   download_failed_body: >-

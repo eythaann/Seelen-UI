@@ -1,5 +1,15 @@
 cancel: Anulować
 done: Zrobione
+elevated:
+  description: >-
+    Seelen UI działa z uprawnieniami administratora.
+
+    Nie dodaje to ani nie ulepsza żadnych funkcji i może stanowić zagrożenie
+    bezpieczeństwa.
+
+    Dla większego bezpieczeństwa uruchom go ponownie bez uprawnień
+    administratora.
+  title: Uruchamianie jako Administrator
 resource:
   added: Dodano nowy zasób
   download_failed_body: >-

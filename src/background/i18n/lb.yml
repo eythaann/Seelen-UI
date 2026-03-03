@@ -1,5 +1,14 @@
 cancel: Ofbriechen
 done: Verdataktioun
+elevated:
+  description: >-
+    Seelen UI leeft mat Administrator Privilegien.
+
+    Dëst addt oder verbessert keng Features, an et kann e Sécherheetsrisiko
+    duerstellen.
+
+    Fir besser Sécherheet, w.e.g. nei starten ouni Administrator Permissiounen.
+  title: Lafen als Administrateur
 resource:
   added: Eng nei Ressource gouf bäigefüügt
   download_failed_body: >-

@@ -223,12 +223,14 @@ toolbar:
   delay_to_show: 延遲顯示
   dock_side: 位置
   enable: 啟用高檔工具欄
-  height: 高度
   hide_mode:
     always: 總是
     never: 絕不
     on_overlap: 在重疊
+  item_size: 商品尺寸
   label: 工具欄
+  margin: 邊距大小
+  padding: 填充尺寸
   placeholder: {}
 update:
   available: 更新可用！

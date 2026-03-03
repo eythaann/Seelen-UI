@@ -243,12 +243,14 @@ toolbar:
   delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja
   enable: Włącz pasek narzędzi
-  height: Wysokość
   hide_mode:
     always: Zawsze
     never: Nigdy
     on_overlap: Kiedy zasłania
+  item_size: Rozmiar przedmiotu
   label: Pasek narzędzi
+  margin: Rozmiar marginesu
+  padding: Rozmiar wyściółki
   placeholder: {}
 update:
   available: Dostępna aktualizacja!

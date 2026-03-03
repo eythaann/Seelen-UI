@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք
   enable: Միացնել Fancy Toolbar- ը
-  height: Բարձրություն
   hide_mode:
     always: Միշտ
     never: Երբեք
     on_overlap: Համընկնման վրա
+  item_size: Նյութի չափը
   label: Գործիքագոտու
+  margin: Լուսանցքի չափը
+  padding: Լցոնման չափը
   placeholder: {}
 update:
   available: 'Թարմացրեք մատչելի:'

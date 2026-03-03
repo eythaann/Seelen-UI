@@ -230,12 +230,14 @@ toolbar:
   delay_to_show: تأخير الظهور
   dock_side: المنصب
   enable: فعل شريط الأدوات الفاخر
-  height: الارتفاع
   hide_mode:
     always: دائماً
     never: أبداً
     on_overlap: على التداخل
+  item_size: حجم السلعة
   label: شريط الأدوات
+  margin: حجم الهامش
+  padding: حجم الحشو
   placeholder: {}
 update:
   available: تحديث متاح!

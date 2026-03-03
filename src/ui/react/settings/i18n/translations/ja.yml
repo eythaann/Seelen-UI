@@ -228,12 +228,14 @@ toolbar:
   delay_to_show: 表示されるまでの時間
   dock_side: ポジション
   enable: ツールバーを有効にする
-  height: 高さ
   hide_mode:
     always: 常に
     never: 無効
     on_overlap: 重なり時
+  item_size: 商品サイズ
   label: ツールバーの設定
+  margin: 余白サイズ
+  padding: パディングサイズ
   placeholder: {}
 update:
   available: 更新が利用可能です！

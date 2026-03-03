@@ -1,5 +1,15 @@
 cancel: Hủy bỏ
 done: Xong
+elevated:
+  description: >-
+    Giao diện người dùng Seelen đang chạy với đặc quyền của quản trị viên.
+
+    Điều này không bổ sung hoặc cải thiện bất kỳ tính năng nào và có thể gây ra
+    rủi ro bảo mật.
+
+    Để bảo mật tốt hơn, vui lòng khởi động lại nó mà không có sự cho phép của
+    quản trị viên.
+  title: Chạy với tư cách quản trị viên
 resource:
   added: Một tài nguyên mới đã được thêm vào
   download_failed_body: >-

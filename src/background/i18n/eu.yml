@@ -1,5 +1,15 @@
 cancel: Indargabetu
 done: Egin
+elevated:
+  description: >-
+    Seelen UI administratzaile-pribilegioekin exekutatzen ari da.
+
+    Honek ez du ezaugarririk gehitzen edo hobetzen, eta segurtasun arriskua sor
+    dezake.
+
+    Segurtasun hobea lortzeko, mesedez berrabiarazi administratzaile baimenik
+    gabe.
+  title: Administratzaile gisa exekutatzen
 resource:
   added: Baliabide berri bat gehitu da
   download_failed_body: >-

@@ -240,12 +240,14 @@ toolbar:
   delay_to_show: Одлагање приказивања
   dock_side: Положај
   enable: Омогућите фанци траку са алаткама
-  height: Висина
   hide_mode:
     always: Увек
     never: Никада
     on_overlap: На преклапање
+  item_size: Величина артикла
   label: Алатна трака
+  margin: Величина маргине
+  padding: Паддинг Сизе
   placeholder: {}
 update:
   available: Ажурирање доступно!

@@ -241,12 +241,14 @@ toolbar:
   delay_to_show: காட்ட தாமதம்
   dock_side: நிலை
   enable: ஆடம்பரமான கருவிப்பட்டியை இயக்கவும்
-  height: உயரம்
   hide_mode:
     always: எப்போதும்
     never: ஒருபோதும் இல்லை
     on_overlap: ஒன்றுடன் ஒன்று
+  item_size: பொருளின் அளவு
   label: கருவிப்பட்டி
+  margin: விளிம்பு அளவு
+  padding: திணிப்பு அளவு
   placeholder: {}
 update:
   available: புதுப்பிப்பு கிடைக்கிறது!

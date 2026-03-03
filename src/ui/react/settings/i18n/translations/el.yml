@@ -243,12 +243,14 @@ toolbar:
   delay_to_show: Καθυστέρηση εμφάνισης
   dock_side: Θέση
   enable: Ενεργοποίηση φανταχτερά εργαλεία εργαλείων
-  height: Υψος
   hide_mode:
     always: Πάντοτε
     never: Ποτέ
     on_overlap: Σε επικάλυψη
+  item_size: Μέγεθος αντικειμένου
   label: Γραμμή εργαλείων
+  margin: Μέγεθος περιθωρίου
+  padding: Μέγεθος padding
   placeholder: {}
 update:
   available: Διαθέσιμη ενημέρωση!
