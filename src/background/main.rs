@@ -15,6 +15,7 @@ mod resources;
 mod state;
 mod tauri_context;
 mod tauri_plugins;
+mod telemetry;
 mod utils;
 mod virtual_desktops;
 mod widgets;
@@ -131,6 +132,7 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     trace_lock!(SEELEN).start()?;
     trace_lock!(PERFORMANCE_HELPER).end("setup");
     warn_if_elevated(app_handle);
+    telemetry::start_telemetry();
     Ok(())
 }
 
