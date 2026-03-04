@@ -13,6 +13,10 @@ body {
   width: 100vw;
   height: 100vh;
   line-height: var(--config-item-size);
+
+  button {
+    line-height: var(--config-item-size);
+  }
 }
 
 #root {
@@ -41,6 +45,7 @@ body {
 
 .ft-bar {
   position: relative;
+  height: calc(var(--config-item-size) + var(--config-padding) * 2);
   padding: var(--item-padding) calc(var(--config-padding) * 2);
   margin: var(--config-margin);
   overflow: hidden;
@@ -92,6 +97,12 @@ body {
   min-width: 0;
   height: min-content;
   padding: var(--item-padding);
+
+  button {
+    height: 100%;
+    padding: 0 var(--item-padding);
+    border: 0;
+  }
 
   .ft-bar-item-content {
     display: flex;
