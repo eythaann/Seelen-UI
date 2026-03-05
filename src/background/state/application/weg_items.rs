@@ -1,8 +1,3 @@
-use std::{
-    fs::{create_dir_all, OpenOptions},
-    io::Write,
-};
-
 use seelen_core::{
     handlers::SeelenEvent,
     resource::WidgetId,
@@ -10,8 +5,12 @@ use seelen_core::{
 };
 
 use crate::{
-    app::emit_to_webviews, error::Result, modules::apps::application::msix::MsixAppsManager,
-    trace_lock, utils::constants::SEELEN_COMMON, widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
+    app::emit_to_webviews,
+    error::Result,
+    modules::apps::application::msix::MsixAppsManager,
+    trace_lock,
+    utils::{atomic_write_file, constants::SEELEN_COMMON},
+    widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
 };
 
 use super::FullState;
@@ -66,17 +65,9 @@ impl FullState {
     }
 
     pub fn write_weg_items(&self, items: &WegItems) -> Result<()> {
-        let dir = SEELEN_COMMON.widget_data_dir(&WidgetId::known_weg());
-        create_dir_all(&dir)?;
-
-        let mut file = OpenOptions::new()
-            .write(true)
-            .create(true)
-            .truncate(true)
-            .open(dir.join("state.yml"))?;
-        file.lock()?;
-        file.write_all(serde_yaml::to_string(items)?.as_bytes())?;
-        file.flush()?;
-        Ok(())
+        let path = SEELEN_COMMON
+            .widget_data_dir(&WidgetId::known_weg())
+            .join("state.yml");
+        atomic_write_file(&path, serde_yaml::to_string(items)?.as_bytes())
     }
 }

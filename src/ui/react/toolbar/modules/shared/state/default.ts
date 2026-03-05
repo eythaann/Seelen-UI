@@ -36,7 +36,6 @@ export function restoreStateToDefault() {
     right: [
       "@seelen/tb-system-tray" as PluginId,
       "@seelen/tb-keyboard-selector" as PluginId,
-      "@seelen/keyboard-selector" as PluginId,
       "@seelen/tb-bluetooth-popup" as PluginId,
       "@seelen/tb-network-popup" as PluginId,
       "@seelen/tb-media-popup" as PluginId,

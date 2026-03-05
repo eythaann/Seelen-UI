@@ -11,6 +11,10 @@
 - log system.
 - icon pack extractor and cache system.
 
+### fix
+
+- toolbar and dock state resetting on widget reload.
+
 ## [2.5.3]
 
 ### fix

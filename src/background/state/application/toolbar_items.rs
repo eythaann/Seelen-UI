@@ -1,15 +1,14 @@
-use std::{
-    collections::HashSet,
-    fs::{create_dir_all, OpenOptions},
-    io::Write,
-};
+use std::collections::HashSet;
 
 use seelen_core::{
     resource::WidgetId,
     state::{ToolbarItem, ToolbarItem2, ToolbarJsScope, ToolbarState},
 };
 
-use crate::{error::Result, utils::constants::SEELEN_COMMON};
+use crate::{
+    error::Result,
+    utils::{atomic_write_file, constants::SEELEN_COMMON},
+};
 
 use super::FullState;
 
@@ -71,17 +70,9 @@ impl FullState {
     }
 
     pub fn write_toolbar_items(&self, items: &ToolbarState) -> Result<()> {
-        let dir = SEELEN_COMMON.widget_data_dir(&WidgetId::known_toolbar());
-        create_dir_all(&dir)?;
-
-        let mut file = OpenOptions::new()
-            .write(true)
-            .create(true)
-            .truncate(true)
-            .open(dir.join("state.yml"))?;
-        file.lock()?;
-        file.write_all(serde_yaml::to_string(items)?.as_bytes())?;
-        file.flush()?;
-        Ok(())
+        let path = SEELEN_COMMON
+            .widget_data_dir(&WidgetId::known_toolbar())
+            .join("state.yml");
+        atomic_write_file(&path, serde_yaml::to_string(items)?.as_bytes())
     }
 }

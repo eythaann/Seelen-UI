@@ -28,7 +28,7 @@ use crate::{
     error::Result,
     resources::RESOURCES,
     state::application::FULL_STATE,
-    utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap},
+    utils::{atomic_write_file, constants::SEELEN_COMMON, lock_free::SyncHashMap},
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebviewLabel},
     windows_api::{
         input::{Keyboard, Mouse},
@@ -190,7 +190,7 @@ pub fn write_data_file(
 ) -> Result<()> {
     let base_path = widget_data_dir(&webview)?;
     let path = resolve_safe_path(&base_path, &filename)?;
-    std::fs::write(path, content)?;
+    atomic_write_file(&path, content.as_bytes())?;
     Ok(())
 }
 

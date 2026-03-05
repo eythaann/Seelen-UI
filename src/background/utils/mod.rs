@@ -12,6 +12,8 @@ pub use winver::*;
 
 use std::{
     collections::HashMap,
+    fs::{create_dir_all, File},
+    io::Write,
     path::{Path, PathBuf},
     sync::{atomic::AtomicBool, Arc, LazyLock},
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
@@ -25,6 +27,23 @@ use windows::{
 };
 
 use crate::{error::Result, get_tokio_handle};
+
+/// Writes `content` to `path` atomically: writes to a sibling `.tmp` file first,
+/// syncs to disk, then renames into place. This guarantees the target file is
+/// never left empty or partially written, even if the process is killed mid-write.
+pub fn atomic_write_file(path: &Path, content: &[u8]) -> Result<()> {
+    let dir = path.parent().ok_or("Path has no parent directory")?;
+    create_dir_all(dir)?;
+
+    let tmp_path = path.with_extension("tmp");
+    let mut file = File::create(&tmp_path)?;
+    file.write_all(content)?;
+    file.flush()?;
+    file.sync_all()?;
+    drop(file); // must close before rename on Windows
+    std::fs::rename(&tmp_path, path)?;
+    Ok(())
+}
 
 pub fn pcwstr(s: &str) -> windows::core::PCWSTR {
     windows::core::PCWSTR::from_raw(s.encode_utf16().chain(Some(0)).collect_vec().as_ptr())

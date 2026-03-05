@@ -29,8 +29,12 @@ pub fn state_get_toolbar_items() -> ToolbarState {
 #[tauri::command(async)]
 pub fn state_write_toolbar_items(mut items: ToolbarState) -> Result<()> {
     items.sanitize();
-    let guard = FULL_STATE.load();
-    guard.write_toolbar_items(&items)
+    FULL_STATE.rcu(|state| {
+        let mut state = state.cloned();
+        state.toolbar_items = items.clone();
+        state
+    });
+    FULL_STATE.load().write_toolbar_items(&items)
 }
 
 #[tauri::command(async)]
@@ -46,7 +50,12 @@ pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Resu
     {
         return Ok(());
     }
-    guard.write_weg_items(&items)
+    FULL_STATE.rcu(|state| {
+        let mut state = state.cloned();
+        state.weg_items = items.clone();
+        state
+    });
+    FULL_STATE.load().write_weg_items(&items)
 }
 
 #[tauri::command(async)]
