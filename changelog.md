@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.5.4-dev]
+## [2.5.4]
 
 ### features
 
