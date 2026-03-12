@@ -21,7 +21,7 @@ use itertools::Itertools;
 use process::ProcessInformationFlag;
 use string_utils::WindowsString;
 use widestring::U16CStr;
-use windows_core::Interface;
+use windows_core::{Interface, Owned};
 
 use std::{
     ffi::OsString,
@@ -63,9 +63,9 @@ use windows::{
         Security::{
             AdjustTokenPrivileges,
             Authentication::Identity::{GetUserNameExW, EXTENDED_NAME_FORMAT},
-            GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TokenLogonSid,
-            SE_PRIVILEGE_ENABLED, SE_SHUTDOWN_NAME, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION,
-            TOKEN_GROUPS, TOKEN_PRIVILEGES, TOKEN_QUERY,
+            GetTokenInformation, LookupPrivilegeValueW, TokenElevation, SE_PRIVILEGE_ENABLED,
+            SE_SHUTDOWN_NAME, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_PRIVILEGES,
+            TOKEN_QUERY,
         },
         Storage::{
             EnhancedStorage::{
@@ -406,11 +406,14 @@ impl WindowsApi {
         access_rights: PROCESS_ACCESS_RIGHTS,
         inherit_handle: bool,
         process_id: u32,
-    ) -> Result<HANDLE> {
-        unsafe { Ok(OpenProcess(access_rights, inherit_handle, process_id)?) }
+    ) -> Result<Owned<HANDLE>> {
+        unsafe {
+            let handled = OpenProcess(access_rights, inherit_handle, process_id)?;
+            Ok(Owned::new(handled))
+        }
     }
 
-    pub fn open_current_process_token() -> Result<HANDLE> {
+    pub fn open_current_process_token() -> Result<Owned<HANDLE>> {
         let mut token_handle = HANDLE::default();
         unsafe {
             OpenProcessToken(
@@ -418,29 +421,12 @@ impl WindowsApi {
                 TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
                 &mut token_handle,
             )?;
-        }
-        if token_handle.is_invalid() {
-            return Err("OpenProcessToken failed".into());
-        }
-        Ok(token_handle)
-    }
 
-    #[allow(dead_code)]
-    pub fn get_current_process_info() -> Result<()> {
-        let token_handle = Self::open_current_process_token()?;
-        let mut returnlength = 0;
-        unsafe {
-            let data = TOKEN_GROUPS::default();
-
-            GetTokenInformation(
-                token_handle,
-                TokenLogonSid,
-                Some(&data as *const _ as *mut _),
-                std::mem::size_of::<TOKEN_GROUPS>() as u32,
-                &mut returnlength,
-            )?;
+            if token_handle.is_invalid() {
+                return Err("OpenProcessToken failed".into());
+            }
+            Ok(Owned::new(token_handle))
         }
-        Ok(())
     }
 
     pub fn get_luid(system: PCWSTR, name: PCWSTR) -> Result<LUID> {
@@ -459,7 +445,7 @@ impl WindowsApi {
         tkp.Privileges[0].Luid = Self::get_luid(PCWSTR::null(), name)?;
         tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
-        unsafe { AdjustTokenPrivileges(token_handle, false, Some(&tkp), 0, None, None)? };
+        unsafe { AdjustTokenPrivileges(*token_handle, false, Some(&tkp), 0, None, None)? };
         Ok(())
     }
 
@@ -480,7 +466,7 @@ impl WindowsApi {
         let is_frozen = unsafe {
             let mut buffer: [PROCESS_EXTENDED_BASIC_INFORMATION; 1] = std::mem::zeroed();
             let status = NtQueryInformationProcess(
-                handle,
+                *handle,
                 ProcessBasicInformation,
                 buffer.as_mut_ptr() as _,
                 std::mem::size_of::<PROCESS_EXTENDED_BASIC_INFORMATION>() as _,
@@ -505,7 +491,7 @@ impl WindowsApi {
         let mut path = WindowsString::new_to_fill(1024);
         let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
         unsafe {
-            QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, path.as_pwstr(), &mut 1024)?;
+            QueryFullProcessImageNameW(*handle, PROCESS_NAME_WIN32, path.as_pwstr(), &mut 1024)?;
         }
         Ok(path.to_os_string())
     }
@@ -919,7 +905,7 @@ impl WindowsApi {
 
             let token_handle = Self::open_current_process_token()?;
             GetTokenInformation(
-                token_handle,
+                *token_handle,
                 TokenElevation,
                 Some(&mut elevation as *mut _ as *mut _),
                 std::mem::size_of::<TOKEN_ELEVATION>() as u32,

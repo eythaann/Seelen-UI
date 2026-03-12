@@ -28,7 +28,7 @@ use windows::Win32::{
         },
     },
 };
-use windows_core::PCWSTR;
+use windows_core::{Owned, PCWSTR};
 
 use crate::{
     error::{Result, WindowsResultExt},
@@ -158,7 +158,7 @@ impl WindowsApi {
         session_id
     }
 
-    pub fn open_current_process_token() -> Result<HANDLE> {
+    pub fn open_current_process_token() -> Result<Owned<HANDLE>> {
         let mut token_handle = HANDLE::default();
         unsafe {
             OpenProcessToken(
@@ -166,11 +166,12 @@ impl WindowsApi {
                 TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
                 &mut token_handle,
             )?;
+
+            if token_handle.is_invalid() {
+                return Err("OpenProcessToken failed".into());
+            }
+            Ok(Owned::new(token_handle))
         }
-        if token_handle.is_invalid() {
-            return Err("OpenProcessToken failed".into());
-        }
-        Ok(token_handle)
     }
 
     pub fn get_luid(system: PCWSTR, name: PCWSTR) -> Result<LUID> {
@@ -189,7 +190,7 @@ impl WindowsApi {
         tkp.Privileges[0].Luid = Self::get_luid(PCWSTR::null(), name)?;
         tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
-        unsafe { AdjustTokenPrivileges(token_handle, false, Some(&tkp), 0, None, None)? };
+        unsafe { AdjustTokenPrivileges(*token_handle, false, Some(&tkp), 0, None, None)? };
         Ok(())
     }
 

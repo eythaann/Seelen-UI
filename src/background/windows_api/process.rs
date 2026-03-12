@@ -9,6 +9,7 @@ use windows::{
         System::Threading::{PROCESS_QUERY_INFORMATION, PROCESS_QUERY_LIMITED_INFORMATION},
     },
 };
+use windows_core::Owned;
 
 use crate::error::Result;
 
@@ -44,12 +45,12 @@ impl Process {
         self.0
     }
 
-    pub fn open_handle(&self) -> Result<HANDLE> {
+    pub fn open_handle(&self) -> Result<Owned<HANDLE>> {
         WindowsApi::open_process(PROCESS_QUERY_INFORMATION, false, self.0)
     }
 
     /// will fail if the process is owned by another user
-    pub fn open_limited_handle(&self) -> Result<HANDLE> {
+    pub fn open_limited_handle(&self) -> Result<Owned<HANDLE>> {
         WindowsApi::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, self.0)
     }
 
@@ -62,7 +63,7 @@ impl Process {
         let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;
         let mut id = WindowsString::new_to_fill(len as usize);
-        unsafe { GetApplicationUserModelId(hprocess, &mut len, Some(id.as_pwstr())).ok()? };
+        unsafe { GetApplicationUserModelId(*hprocess, &mut len, Some(id.as_pwstr())).ok()? };
         Ok(AppUserModelId::Appx(id.to_string()))
     }
 

@@ -5,6 +5,7 @@
 ### fix
 
 - slow down on performace while dragging apps.
+- prevent win32 handle leaks.
 
 ## [2.5.4]
 

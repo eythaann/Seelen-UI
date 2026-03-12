@@ -9,7 +9,7 @@ use windows::Win32::{
     },
 };
 
-use windows_core::BOOL;
+use windows_core::{Owned, BOOL};
 
 use crate::{
     error::Result,
@@ -30,7 +30,7 @@ impl MonitorTarget {
     /// Opens and returns a file handle for a display device using its DOS device path.\
     /// These handles are only used for the `DeviceIoControl` API (for internal displays);
     /// a handle can still be returned for external displays, but it should not be used.
-    fn get_file_handle(&self) -> Result<HANDLE> {
+    fn get_file_handle(&self) -> Result<Owned<HANDLE>> {
         let device_id = self.0.TryGetMonitor()?.DeviceId()?.to_os_string();
         let device_id = WindowsString::from(device_id);
 
@@ -46,7 +46,7 @@ impl MonitorTarget {
                 None,
             )?
         };
-        Ok(handle)
+        Ok(unsafe { Owned::new(handle) })
     }
 }
 

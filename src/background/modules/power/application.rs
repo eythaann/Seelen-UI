@@ -17,6 +17,8 @@ use windows::Win32::{
     },
 };
 
+use windows_core::Owned;
+
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
@@ -33,7 +35,7 @@ pub struct PowerManager {
     pub power_mode: PowerMode,
     pub batteries: Vec<Battery>,
 
-    power_setting_battery_percent_token: Option<HPOWERNOTIFY>,
+    power_setting_battery_percent_token: Option<Owned<HPOWERNOTIFY>>,
     power_mode_event_token: Option<isize>,
 }
 
@@ -104,7 +106,7 @@ impl PowerManager {
             )
             .ok()?;
             self.power_setting_battery_percent_token =
-                Some(HPOWERNOTIFY(unregister_token_ptr as isize));
+                Some(Owned::new(HPOWERNOTIFY(unregister_token_ptr as isize)));
         }
 
         subscribe_to_background_window(Self::on_bg_window_proc);

@@ -29,6 +29,21 @@ use crate::error::Result;
 
 use super::NetworkManager;
 
+pub struct WlanHandle(HANDLE);
+
+impl Drop for WlanHandle {
+    fn drop(&mut self) {
+        unsafe { WlanCloseHandle(self.0, None) };
+    }
+}
+
+impl std::ops::Deref for WlanHandle {
+    type Target = HANDLE;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 fn from_raw_entry(entry: &WLAN_BSS_ENTRY) -> WlanBssEntry {
     let ssid = String::from_utf8_lossy(&entry.dot11Ssid.ucSSID)
         .replace("\0", "")
@@ -57,7 +72,7 @@ fn from_raw_entry(entry: &WLAN_BSS_ENTRY) -> WlanBssEntry {
 static SCANNING: AtomicBool = AtomicBool::new(false);
 
 impl NetworkManager {
-    pub fn open_wlan() -> Result<HANDLE> {
+    pub fn open_wlan() -> Result<WlanHandle> {
         let mut client_handle = HANDLE::default();
         let mut negotiated_version = 0;
 
@@ -74,7 +89,7 @@ impl NetworkManager {
             return Err(format!("Failed to open Wlan, error code: {result}").into());
         }
 
-        Ok(client_handle)
+        Ok(WlanHandle(client_handle))
     }
 
     fn get_connected_wlan<'a>(
@@ -104,23 +119,19 @@ impl NetworkManager {
 
     pub fn is_connected_to(ssid: &str) -> Result<bool> {
         let client_handle = Self::open_wlan()?;
-        unsafe {
-            for interface in Self::get_wlan_interfaces(client_handle)? {
-                let connection = Self::get_connected_wlan(client_handle, &interface.InterfaceGuid);
-                if let Some(connection) = connection {
-                    let connected_ssid = String::from_utf8_lossy(
-                        &connection.wlanAssociationAttributes.dot11Ssid.ucSSID,
-                    )
-                    .replace("\0", "")
-                    .to_string();
+        for interface in Self::get_wlan_interfaces(*client_handle)? {
+            let connection = Self::get_connected_wlan(*client_handle, &interface.InterfaceGuid);
+            if let Some(connection) = connection {
+                let connected_ssid =
+                    String::from_utf8_lossy(&connection.wlanAssociationAttributes.dot11Ssid.ucSSID)
+                        .replace("\0", "")
+                        .to_string();
 
-                    if connected_ssid == ssid {
-                        return Ok(connection.isState.0 & wlan_interface_state_connected.0
-                            == connection.isState.0);
-                    }
+                if connected_ssid == ssid {
+                    return Ok(connection.isState.0 & wlan_interface_state_connected.0
+                        == connection.isState.0);
                 }
             }
-            WlanCloseHandle(client_handle, None);
         }
         Ok(false)
     }
@@ -248,26 +259,26 @@ impl NetworkManager {
         let mut wlan_entries = Vec::new();
 
         unsafe {
-            for interface in Self::get_wlan_interfaces(client_handle)? {
+            for interface in Self::get_wlan_interfaces(*client_handle)? {
                 let interface_guid = interface.InterfaceGuid;
-                let result = WlanScan(client_handle, &interface_guid, None, None, None);
+                let result = WlanScan(*client_handle, &interface_guid, None, None, None);
 
                 if result != 0 {
                     return Err(format!("Failed to scan, error code: {result}").into());
                 }
 
                 let available_networks =
-                    Self::get_available_networks(client_handle, &interface_guid)?;
+                    Self::get_available_networks(*client_handle, &interface_guid)?;
                 if available_networks.is_empty() {
                     continue;
                 }
 
-                let bss_entries = Self::get_bss_entries(client_handle, &interface_guid)?;
+                let bss_entries = Self::get_bss_entries(*client_handle, &interface_guid)?;
                 if bss_entries.is_empty() {
                     continue;
                 }
 
-                let connection = Self::get_connected_wlan(client_handle, &interface_guid);
+                let connection = Self::get_connected_wlan(*client_handle, &interface_guid);
                 for entry in bss_entries {
                     let mut wrapped_entry = from_raw_entry(&entry);
 
@@ -295,8 +306,6 @@ impl NetworkManager {
                     wlan_entries.push(wrapped_entry);
                 }
             }
-
-            WlanCloseHandle(client_handle, None);
         }
 
         Ok(wlan_entries)

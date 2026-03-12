@@ -5,9 +5,10 @@ use windows::{
     Win32::{
         Foundation::{HMODULE, LPARAM, LRESULT, WPARAM},
         System::LibraryLoader::{GetProcAddress, LoadLibraryW},
-        UI::WindowsAndMessaging::{SetWindowsHookExW, UnhookWindowsHookEx, HHOOK, WH_CALLWNDPROC},
+        UI::WindowsAndMessaging::{SetWindowsHookExW, HHOOK, WH_CALLWNDPROC},
     },
 };
+use windows_core::Owned;
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -33,8 +34,9 @@ unsafe impl Send for TrayHookLoader {}
 unsafe impl Sync for TrayHookLoader {}
 
 pub struct TrayHookLoader {
-    _dll_handle: Option<HMODULE>,
-    hook_handle: Option<HHOOK>,
+    // Drop order matches declaration order: hook is uninstalled before DLL is freed
+    _hook_handle: Option<Owned<HHOOK>>,
+    _dll_handle: Option<Owned<HMODULE>>,
 }
 
 impl TrayHookLoader {
@@ -43,7 +45,7 @@ impl TrayHookLoader {
     pub fn new() -> Result<Self> {
         let dll_path = Self::get_dll_path()?;
         let dll_handle = Self::load_dll(&dll_path)?;
-        let call_msg_proc = Self::get_proc_address::<GetMsgProcFn>(dll_handle, "CallWndProc")?;
+        let call_msg_proc = Self::get_proc_address::<GetMsgProcFn>(*dll_handle, "CallWndProc")?;
 
         let shell_tray = WindowsApi::find_window(None, None, None, Some("Shell_TrayWnd"))?;
         let (_pid, thread_id) = WindowsApi::window_thread_process_id(shell_tray);
@@ -52,7 +54,7 @@ impl TrayHookLoader {
             SetWindowsHookExW(
                 WH_CALLWNDPROC,
                 Some(call_msg_proc),
-                Some(dll_handle.into()),
+                Some((*dll_handle).into()),
                 thread_id, // 0 = global hook for all threads
             )
             .map_err(|e| format!("Failed to install hook: {:?}", e))?
@@ -63,8 +65,8 @@ impl TrayHookLoader {
         Util::refresh_icons().log_error();
 
         Ok(Self {
+            _hook_handle: Some(unsafe { Owned::new(hook_handle) }),
             _dll_handle: Some(dll_handle),
-            hook_handle: Some(hook_handle),
         })
     }
 
@@ -102,7 +104,7 @@ impl TrayHookLoader {
     }
 
     /// Loads the DLL into memory
-    fn load_dll(path: &Path) -> Result<HMODULE> {
+    fn load_dll(path: &Path) -> Result<Owned<HMODULE>> {
         let path_wide: Vec<u16> = path
             .to_string_lossy()
             .encode_utf16()
@@ -111,7 +113,7 @@ impl TrayHookLoader {
 
         unsafe {
             let handle = LoadLibraryW(PCWSTR(path_wide.as_ptr()))?;
-            Ok(handle)
+            Ok(Owned::new(handle))
         }
     }
 
@@ -134,17 +136,8 @@ impl TrayHookLoader {
 
 impl Drop for TrayHookLoader {
     fn drop(&mut self) {
-        // Uninstall the hook
-        if let Some(hook) = self.hook_handle.take() {
-            unsafe {
-                if let Err(e) = UnhookWindowsHookEx(hook) {
-                    log::warn!("Failed to uninstall hook: {:?}", e);
-                }
-            }
-        }
-
-        // The DLL will be freed automatically when the process terminates
-        // No need to call FreeLibrary explicitly
+        // Owned<HHOOK> calls UnhookWindowsHookEx, Owned<HMODULE> calls FreeLibrary automatically.
+        // Fields drop in declaration order: hook_handle first, then _dll_handle.
         log::info!("Tray hook unloaded");
     }
 }

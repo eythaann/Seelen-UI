@@ -121,9 +121,9 @@ impl NetworkManager {
 
     pub fn disconnect_all() -> Result<()> {
         let client_handle = Self::open_wlan()?;
-        for interface in Self::get_wlan_interfaces(client_handle)? {
+        for interface in Self::get_wlan_interfaces(*client_handle)? {
             unsafe {
-                WlanDisconnect(client_handle, &interface.InterfaceGuid, None);
+                WlanDisconnect(*client_handle, &interface.InterfaceGuid, None);
             }
         }
         Ok(())

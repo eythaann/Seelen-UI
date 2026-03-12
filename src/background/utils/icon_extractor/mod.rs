@@ -30,6 +30,7 @@ use windows::Win32::{
 };
 
 use seelen_core::state::Icon;
+use windows_core::Owned;
 
 use crate::{
     error::Result,
@@ -92,6 +93,8 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
             return Err("Failed to get icon info".into());
         }
 
+        let _hbm_mask = Owned::new(icon_info.hbmMask);
+        let _hbm_color = Owned::new(icon_info.hbmColor);
         convert_hbitmap_to_rgba_image(icon_info.hbmColor)
     }
 }
@@ -130,7 +133,7 @@ pub fn convert_hbitmap_to_rgba_image(hbitmap: HBITMAP) -> Result<RgbaImage> {
 
         let mut buffer = vec![0u8; (width * height * 4) as usize];
 
-        if GetDIBits(
+        let dibits_result = GetDIBits(
             hdc_mem,
             hbitmap,
             0,
@@ -138,15 +141,16 @@ pub fn convert_hbitmap_to_rgba_image(hbitmap: HBITMAP) -> Result<RgbaImage> {
             Some(buffer.as_mut_ptr() as *mut _),
             &mut bmp_info,
             DIB_RGB_COLORS,
-        ) == 0
-        {
+        );
+
+        // Cleanup GDI always, even on error
+        SelectObject(hdc_mem, hbm_old);
+        let _ = DeleteDC(hdc_mem);
+        let _ = DeleteDC(hdc_screen);
+
+        if dibits_result == 0 {
             return Err("Failed to get dibits".into());
         }
-
-        // Cleanup GDI
-        SelectObject(hdc_mem, hbm_old);
-        DeleteDC(hdc_mem).ok()?;
-        DeleteDC(hdc_screen).ok()?;
 
         // Alpha fix (important!)
         fix_alpha_channel(buffer.as_mut_slice());
@@ -280,6 +284,7 @@ pub fn extract_icon_from_module(path: &Path, index: i32) -> Result<RgbaImage> {
         if extracted == 0 || hicon.is_invalid() {
             return Err(format!("Icon index {index} not found").into());
         }
+        let hicon = Owned::new(hicon);
 
         let image = crop_transparent_borders(&convert_hicon_to_rgba_image(&hicon)?);
         Ok(image)
@@ -319,7 +324,7 @@ pub fn get_shell_icon(path: &Path) -> Result<RgbaImage> {
         // this is useful for some icons where color depth is less than 32,
         // example: icon of 124x124 16bits and other 64x64 32bits this will return the 32bits icon
         // color depth is prioritized over size
-        let icon = image_list.GetIcon(file_info.iIcon, ILD_TRANSPARENT.0)?;
+        let icon = Owned::new(image_list.GetIcon(file_info.iIcon, ILD_TRANSPARENT.0)?);
         let image = crop_transparent_borders(&convert_hicon_to_rgba_image(&icon)?);
         Ok(image)
     }
