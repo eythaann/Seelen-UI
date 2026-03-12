@@ -44,7 +44,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const version = ${{ needs.get-version.outputs.version }};
+            const version = "${{ needs.get-version.outputs.version }}";
             const changelogContent = fs.readFileSync('changelog.md', 'utf-8');
             const regex = new RegExp(`(?<=\\[${version}\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
             const releaseNotes = changelogContent.match(regex)?.[0].trim() || '';
@@ -199,7 +199,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = ${{ needs.get-version.outputs.version }}
+          $version = "${{ needs.get-version.outputs.version }}"
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $setupFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
@@ -239,7 +239,7 @@ jobs:
         shell: pwsh
         run: |
           $arch = "${{ matrix.target }}".Contains("aarch64") ? "arm64" : "x64"
-          $version = ${{ needs.get-version.outputs.version }}
+          $version = "${{ needs.get-version.outputs.version }}"
           $bundlePath = "target/${{ matrix.target }}/release/bundle/nsis"
           $tempFile = "$bundlePath/Seelen UI_${version}_${arch}-setup_temp.exe"
           $normalFile = "$bundlePath/Seelen UI_${version}_${arch}-setup.exe"
@@ -323,7 +323,7 @@ jobs:
           find ./bundles -name "*.sig" -type f -delete
           echo "Existing signatures removed"
 
-          VERSION=${{ needs.get-version.outputs.version }}
+          VERSION="${{ needs.get-version.outputs.version }}"
           PATH1="bundles/nsis/Seelen UI_${VERSION}_arm64-setup.exe"
           PATH2="bundles/nsis/Seelen UI_${VERSION}_x64-setup.exe"
 
