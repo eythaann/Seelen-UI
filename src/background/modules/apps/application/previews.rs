@@ -7,9 +7,13 @@ use win_screenshot::prelude::capture_window;
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
-    modules::apps::application::{UserAppWinEvent, UserAppsManager},
+    hook::HookManager,
+    modules::apps::application::{UserAppWinEvent, UserAppsManager, USER_APPS_MANAGER},
     utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap},
-    windows_api::{window::Window, WindowsApi},
+    windows_api::{
+        window::{event::WinEvent, Window},
+        WindowsApi,
+    },
 };
 
 static WINDOWS_PREVIEWS: LazyLock<WinPreviewManager> = LazyLock::new(WinPreviewManager::create);
@@ -57,10 +61,7 @@ impl WinPreviewManager {
                 let window = Window::from(addr);
                 WINDOWS_PREVIEWS.capture_window(&window).log_error();
             }
-            UserAppWinEvent::Updated(addr) => {
-                let window = Window::from(addr);
-                WINDOWS_PREVIEWS.capture_window(&window).log_error();
-            }
+            UserAppWinEvent::Updated(_) => {}
             UserAppWinEvent::Removed(addr) => {
                 if let Some(preview) = WINDOWS_PREVIEWS.previews.remove(&addr) {
                     if preview.path.exists() {
@@ -70,6 +71,28 @@ impl WinPreviewManager {
                 }
             }
         });
+
+        HookManager::subscribe(|(event, window)| {
+            if !USER_APPS_MANAGER.contains_win(&window) {
+                return;
+            }
+
+            match event {
+                WinEvent::ObjectNameChange | WinEvent::SynDebouncedForegroundRectChange => {
+                    WINDOWS_PREVIEWS.capture_window(&window).log_error();
+                }
+                WinEvent::SystemMinimizeEnd => {
+                    let addr = window.address();
+                    std::thread::spawn(move || {
+                        std::thread::sleep(std::time::Duration::from_millis(300));
+                        let window = Window::from(addr);
+                        WINDOWS_PREVIEWS.capture_window(&window).log_error();
+                    });
+                }
+                _ => {}
+            }
+        });
+
         Ok(())
     }
 
@@ -79,6 +102,7 @@ impl WinPreviewManager {
         }
 
         let addr = window.address();
+        log::trace!("capturing window ({addr:x})");
 
         let buf = capture_window(window.address()).map_err(|_| "Failed to capture window")?;
         let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels)

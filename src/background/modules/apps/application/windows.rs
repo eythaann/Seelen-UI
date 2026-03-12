@@ -125,7 +125,7 @@ impl UserAppsManager {
                 WinEvent::ObjectNameChange
                     | WinEvent::SystemMinimizeStart
                     | WinEvent::SystemMinimizeEnd
-                    | WinEvent::SyntheticForegroundLocationChange
+                    | WinEvent::SynDebouncedForegroundRectChange
                     | WinEvent::SyntheticFullscreenStart
                     | WinEvent::SyntheticFullscreenEnd
                     | WinEvent::SyntheticMonitorChanged

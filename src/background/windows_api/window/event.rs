@@ -96,7 +96,8 @@ pub enum WinEvent {
     Unknown(u32),
     // ================== Synthetic events ==================
     /// intended to reduce the amount of events processed by other listeners
-    SyntheticForegroundLocationChange,
+    SynThrottledForegroundRectChange,
+    SynDebouncedForegroundRectChange,
     SyntheticFullscreenStart,
     SyntheticFullscreenEnd,
     SyntheticMonitorChanged,
@@ -201,7 +202,19 @@ static LAZY_LOCATION_CHANGE_EVENT: LazyLock<slu_utils::Throttle<isize>> = LazyLo
         |addr| {
             let window = Window::from(addr);
             if window.is_focused() {
-                HookManager::send((WinEvent::SyntheticForegroundLocationChange, window));
+                HookManager::send((WinEvent::SynThrottledForegroundRectChange, window));
+            }
+        },
+        std::time::Duration::from_millis(100),
+    )
+});
+
+static LAZY_LOCATION_CHANGE_EVENT2: LazyLock<slu_utils::Debounce<isize>> = LazyLock::new(|| {
+    slu_utils::debounce(
+        |addr| {
+            let window = Window::from(addr);
+            if window.is_focused() {
+                HookManager::send((WinEvent::SynDebouncedForegroundRectChange, window));
             }
         },
         std::time::Duration::from_millis(100),
@@ -213,9 +226,11 @@ impl WinEvent {
         match self {
             Self::ObjectLocationChange if origin.is_focused() => {
                 LAZY_LOCATION_CHANGE_EVENT.call(origin.address());
+                LAZY_LOCATION_CHANGE_EVENT2.call(origin.address());
             }
             Self::SystemMoveSizeEnd => {
                 LAZY_LOCATION_CHANGE_EVENT.terminate();
+                LAZY_LOCATION_CHANGE_EVENT2.terminate();
             }
             _ => {}
         }

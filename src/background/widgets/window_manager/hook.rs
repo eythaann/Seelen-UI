@@ -112,7 +112,7 @@ impl WindowManagerV2 {
 
     pub fn process_win_event(event: WinEvent, window: &Window) -> Result<()> {
         match event {
-            WinEvent::SyntheticForegroundLocationChange => {
+            WinEvent::SynThrottledForegroundRectChange => {
                 Self::synthetic_foreground_location_change(window)?;
             }
             WinEvent::SystemMoveSizeEnd => {

@@ -34,7 +34,7 @@ impl SeelenWeg {
             }
             WinEvent::SystemMinimizeStart
             | WinEvent::SystemMinimizeEnd
-            | WinEvent::SyntheticForegroundLocationChange => {
+            | WinEvent::SynThrottledForegroundRectChange => {
                 if Self::contains_app(window) {
                     Self::update_app(window)?;
                 }

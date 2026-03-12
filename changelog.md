@@ -2,6 +2,10 @@
 
 ## [2.5.5-dev]
 
+### fix
+
+- slow down on performace while dragging apps.
+
 ## [2.5.4]
 
 ### features
