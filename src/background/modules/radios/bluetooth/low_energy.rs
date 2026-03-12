@@ -19,7 +19,7 @@ pub struct BluetoothLEDeviceWrapper {
 
 impl BluetoothLEDeviceWrapper {
     pub fn create(device_id: &str) -> Result<Self> {
-        let device = BluetoothLEDevice::FromIdAsync(&device_id.into())?.get()?;
+        let device = BluetoothLEDevice::FromIdAsync(&device_id.into())?.join()?;
 
         let id = device_id.to_string();
         let name_changed_token =
@@ -62,7 +62,7 @@ impl BluetoothLEDeviceWrapper {
 
         // For BLE devices, we need to close all GATT sessions first, then services
         // According to Microsoft docs, closing sessions is what actually triggers disconnect
-        let services = self.raw.GetGattServicesAsync()?.get()?.Services()?;
+        let services = self.raw.GetGattServicesAsync()?.join()?.Services()?;
         for service in services {
             if let Ok(session) = service.Session() {
                 session.Close()?;

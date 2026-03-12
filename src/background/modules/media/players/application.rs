@@ -73,7 +73,7 @@ unsafe impl Sync for PlayersManager {}
 
 impl PlayersManager {
     fn new() -> Result<Self> {
-        let manager = GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?.get()?;
+        let manager = GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?.join()?;
 
         Ok(Self {
             playing: SyncHashMap::new(),
@@ -146,7 +146,7 @@ impl PlayersManager {
                 // load_session could fail with 0x80070015 "The device is not ready."
                 // when trying to load a recently added player so we retry a few times
                 let mut max_attempts = 0;
-                while session.TryGetMediaPropertiesAsync()?.get().is_err() && max_attempts < 15 {
+                while session.TryGetMediaPropertiesAsync()?.join().is_err() && max_attempts < 15 {
                     max_attempts += 1;
                     std::thread::sleep(Duration::from_millis(10));
                 }
@@ -201,7 +201,7 @@ impl PlayersManager {
     fn load_session(&self, session: GlobalSystemMediaTransportControlsSession) -> Result<()> {
         let source_app_umid: AppUserModelId =
             session.SourceAppUserModelId()?.to_string_lossy().into();
-        let properties = session.TryGetMediaPropertiesAsync()?.get()?;
+        let properties = session.TryGetMediaPropertiesAsync()?.join()?;
 
         let timeline = session.GetTimelineProperties()?;
         let playback_info = session.GetPlaybackInfo()?;
@@ -286,10 +286,10 @@ impl PlayersManager {
     }
 
     fn on_media_players_changed(
-        session_manager: &Option<GlobalSystemMediaTransportControlsSessionManager>,
-        _args: &Option<SessionsChangedEventArgs>,
+        session_manager: windows_core::Ref<GlobalSystemMediaTransportControlsSessionManager>,
+        _args: windows_core::Ref<SessionsChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        if let Some(session_manager) = session_manager {
+        if let Some(session_manager) = session_manager.as_ref() {
             let mut current_list = Vec::new();
             PlayersManager::instance().playing.for_each(|(_, session)| {
                 if session.removed_at.is_none() {
@@ -314,12 +314,12 @@ impl PlayersManager {
     }
 
     fn on_media_player_properties_changed(
-        session: &Option<GlobalSystemMediaTransportControlsSession>,
-        _args: &Option<MediaPropertiesChangedEventArgs>,
+        session: windows_core::Ref<GlobalSystemMediaTransportControlsSession>,
+        _args: windows_core::Ref<MediaPropertiesChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        if let Some(session) = session {
+        if let Some(session) = session.as_ref() {
             let id = session.SourceAppUserModelId()?.to_string();
-            let properties = session.TryGetMediaPropertiesAsync()?.get()?;
+            let properties = session.TryGetMediaPropertiesAsync()?.join()?;
             let tx = PlayersManager::event_tx();
             let result = tx.send(PlayersEvent::PropertiesChanged {
                 id,
@@ -333,10 +333,10 @@ impl PlayersManager {
     }
 
     fn on_media_player_playback_changed(
-        session: &Option<GlobalSystemMediaTransportControlsSession>,
-        _args: &Option<PlaybackInfoChangedEventArgs>,
+        session: windows_core::Ref<GlobalSystemMediaTransportControlsSession>,
+        _args: windows_core::Ref<PlaybackInfoChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        if let Some(session) = session {
+        if let Some(session) = session.as_ref() {
             let playback = session.GetPlaybackInfo()?;
             let player_id = session.SourceAppUserModelId()?;
             let tx = PlayersManager::event_tx();
@@ -351,10 +351,10 @@ impl PlayersManager {
     }
 
     fn on_media_player_timeline_changed(
-        session: &Option<GlobalSystemMediaTransportControlsSession>,
-        _args: &Option<TimelinePropertiesChangedEventArgs>,
+        session: windows_core::Ref<GlobalSystemMediaTransportControlsSession>,
+        _args: windows_core::Ref<TimelinePropertiesChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        if let Some(session) = session {
+        if let Some(session) = session.as_ref() {
             let tx = PlayersManager::event_tx();
             let event = PlayersEvent::TimelineChanged {
                 id: session.SourceAppUserModelId()?.to_string(),

@@ -52,6 +52,7 @@ sysinfo = { workspace = true }
 battery = { workspace = true }
 winreg = { workspace = true }
 windows-core = { workspace = true } # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-future = { workspace = true }
 win-screenshot = { workspace = true }
 base64 = { workspace = true }
 arc-swap = { workspace = true }
@@ -150,7 +151,6 @@ windows = { workspace = true, features = [
     "UI_Notifications_Management",
     "UI_ViewManagement",
     "UI_StartScreen",
-    "deprecated",
     "Win32_NetworkManagement_IpHelper",
     "Win32_NetworkManagement_Ndis",
     "Win32_Networking_WinSock",

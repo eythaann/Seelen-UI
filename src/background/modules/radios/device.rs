@@ -15,14 +15,15 @@ pub struct SluRadioDevice {
 
 impl SluRadioDevice {
     pub fn create(device_id: &str) -> Result<SluRadioDevice> {
-        let radio = Radio::FromIdAsync(&device_id.into())?.get()?;
+        let radio = Radio::FromIdAsync(&device_id.into())?.join()?;
 
         let id = device_id.to_string();
         let state_changed_token = radio.StateChanged(&TypedEventHandler::new(
-            move |sender: &Option<Radio>, _args: &Option<windows_core::IInspectable>| {
+            move |sender: windows_core::Ref<Radio>,
+                  _args: windows_core::Ref<windows_core::IInspectable>| {
                 // Get the state OUTSIDE the lock to avoid deadlock
                 // The Windows API call (State()) can trigger re-entrant events
-                if let Some(sender) = sender {
+                if let Some(sender) = sender.as_ref() {
                     let is_enabled = sender.State().is_ok_and(|s| s == RadioState::On);
                     // Now update the cache with the lock (fast operation)
                     RadioManager::instance().radios.get(&id, |r| {

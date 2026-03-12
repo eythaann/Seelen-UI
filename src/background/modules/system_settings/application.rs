@@ -70,16 +70,16 @@ impl SystemSettings {
     }
 
     fn internal_on_colors_change(
-        _listener: &Option<UISettings>,
-        _args: &Option<IInspectable>,
+        _listener: windows_core::Ref<UISettings>,
+        _args: windows_core::Ref<IInspectable>,
     ) -> windows_core::Result<()> {
         let _ = Self::event_tx().send(SystemSettingsEvent::ColorChanged);
         Ok(())
     }
 
     fn internal_on_text_scale_change(
-        _listener: &Option<UISettings>,
-        _args: &Option<IInspectable>,
+        _listener: windows_core::Ref<UISettings>,
+        _args: windows_core::Ref<IInspectable>,
     ) -> windows_core::Result<()> {
         let _ = Self::event_tx().send(SystemSettingsEvent::TextScaleChanged);
         Ok(())

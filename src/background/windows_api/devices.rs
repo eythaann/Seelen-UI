@@ -83,8 +83,9 @@ impl DeviceEnumerator {
             let callback = callback.clone();
             let enumeration_completed = Arc::clone(&enumeration_completed);
             let handler = TypedEventHandler::new(
-                move |_: &Option<DeviceWatcher>, info: &Option<DeviceInformation>| {
-                    if let Some(info) = info {
+                move |_: windows_core::Ref<DeviceWatcher>,
+                      info: windows_core::Ref<DeviceInformation>| {
+                    if let Some(info) = info.as_ref() {
                         // Always add device to our internal list
                         devices.lock().push(info.clone());
 
@@ -106,8 +107,9 @@ impl DeviceEnumerator {
         {
             let callback = callback.clone();
             let handler = TypedEventHandler::new(
-                move |_: &Option<DeviceWatcher>, update: &Option<DeviceInformationUpdate>| {
-                    if let Some(update) = update {
+                move |_: windows_core::Ref<DeviceWatcher>,
+                      update: windows_core::Ref<DeviceInformationUpdate>| {
+                    if let Some(update) = update.as_ref() {
                         if let Ok(id) = update.Id() {
                             callback(DeviceEvent::Updated(id.to_string()));
                         }
@@ -123,8 +125,9 @@ impl DeviceEnumerator {
             let devices = Arc::clone(&devices);
             let callback = callback.clone();
             let handler = TypedEventHandler::new(
-                move |_: &Option<DeviceWatcher>, update: &Option<DeviceInformationUpdate>| {
-                    if let Some(update) = update {
+                move |_: windows_core::Ref<DeviceWatcher>,
+                      update: windows_core::Ref<DeviceInformationUpdate>| {
+                    if let Some(update) = update.as_ref() {
                         if let Ok(id) = update.Id() {
                             let id_str = id.to_string();
 
@@ -148,7 +151,8 @@ impl DeviceEnumerator {
             let tx = enumeration_tx.clone();
             let enumeration_completed = Arc::clone(&enumeration_completed);
             let handler = TypedEventHandler::new(
-                move |_: &Option<DeviceWatcher>, _: &Option<windows::core::IInspectable>| {
+                move |_: windows_core::Ref<DeviceWatcher>,
+                      _: windows_core::Ref<windows_core::IInspectable>| {
                     // Mark enumeration as completed FIRST
                     // This allows subsequent Added events to be propagated to the callback
                     enumeration_completed.store(true, Ordering::Release);

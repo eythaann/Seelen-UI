@@ -29,7 +29,7 @@ pub fn get_media_sessions() -> Result<Vec<MediaPlayer>> {
 pub fn media_next(id: String) -> Result<()> {
     let manager = get_players_manager();
     if let Some(session) = manager.get_media_player(&id) {
-        let success = session.TrySkipNextAsync()?.get()?;
+        let success = session.TrySkipNextAsync()?.join()?;
         if !success {
             return Err("failed to skip next".into());
         }
@@ -41,7 +41,7 @@ pub fn media_next(id: String) -> Result<()> {
 pub fn media_prev(id: String) -> Result<()> {
     let manager = get_players_manager();
     if let Some(session) = manager.get_media_player(&id) {
-        let success = session.TrySkipPreviousAsync()?.get()?;
+        let success = session.TrySkipPreviousAsync()?.join()?;
         if !success {
             return Err("failed to skip previous".into());
         }
@@ -53,7 +53,7 @@ pub fn media_prev(id: String) -> Result<()> {
 pub fn media_toggle_play_pause(id: String) -> Result<()> {
     let manager = get_players_manager();
     if let Some(session) = manager.get_media_player(&id) {
-        let success = session.TryTogglePlayPauseAsync()?.get()?;
+        let success = session.TryTogglePlayPauseAsync()?.join()?;
         if !success {
             return Err("failed to toggle play".into());
         }

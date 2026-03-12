@@ -1,8 +1,9 @@
 use windows::Win32::{
-    Foundation::{BOOL, HWND, LPARAM, RECT},
+    Foundation::{HWND, LPARAM, RECT},
     Graphics::Gdi::{HDC, HMONITOR},
     UI::WindowsAndMessaging::{EnumChildWindows, EnumWindows},
 };
+use windows_core::BOOL;
 
 use crate::{error::Result, windows_api::WindowsApi};
 

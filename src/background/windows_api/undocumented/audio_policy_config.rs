@@ -4,11 +4,12 @@ use windows::{
     core::{Interface, Param, Result, GUID, HRESULT, PCWSTR},
     Devices::Custom::DeviceSharingMode,
     Win32::{
-        Foundation::{BOOL, PROPERTYKEY},
+        Foundation::PROPERTYKEY,
         Media::Audio::{ERole, WAVEFORMATEX},
         System::Com::StructuredStorage::PROPVARIANT,
     },
 };
+use windows_core::BOOL;
 
 #[allow(non_upper_case_globals)]
 pub const PolicyConfig: GUID = GUID::from_u128(0x870af99c_171d_4f9e_af0d_e63df40c2bc9);

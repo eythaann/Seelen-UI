@@ -19,7 +19,7 @@ pub struct BluetoothDeviceWrapper {
 
 impl BluetoothDeviceWrapper {
     pub fn create(device_id: &str) -> Result<Self> {
-        let device = BluetoothDevice::FromIdAsync(&device_id.into())?.get()?;
+        let device = BluetoothDevice::FromIdAsync(&device_id.into())?.join()?;
 
         let id = device_id.to_string();
         let name_changed_token =

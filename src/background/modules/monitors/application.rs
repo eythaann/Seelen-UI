@@ -112,13 +112,13 @@ impl MonitorManager {
     // Is recommended that subscribers re-enumerate all targets and state in this call,
     // since the system display stack could be left in any state before this event is raised.
     fn on_enabled(
-        _sender: &Option<DisplayManager>,
-        args: &Option<DisplayManagerEnabledEventArgs>,
+        _sender: windows_core::Ref<DisplayManager>,
+        args: windows_core::Ref<DisplayManagerEnabledEventArgs>,
     ) -> windows_core::Result<()> {
         log::trace!("DisplayManager enabled");
 
         // Critical!: app will crash if this is not set
-        if let Some(args) = args {
+        if let Some(args) = args.as_ref() {
             args.SetHandled(true)?;
         }
         Ok(())
@@ -127,13 +127,13 @@ impl MonitorManager {
     // Is recommended that subscribers attempt to clean up when Disabled is invoked.
     // Most display APIs will fail while the session display stack is disabled.
     fn on_disabled(
-        _sender: &Option<DisplayManager>,
-        args: &Option<DisplayManagerDisabledEventArgs>,
+        _sender: windows_core::Ref<DisplayManager>,
+        args: windows_core::Ref<DisplayManagerDisabledEventArgs>,
     ) -> windows_core::Result<()> {
         log::trace!("DisplayManager disabled");
 
         // Critical!: app will crash if this is not set
-        if let Some(args) = args {
+        if let Some(args) = args.as_ref() {
             args.SetHandled(true)?;
         }
         Ok(())
@@ -141,29 +141,29 @@ impl MonitorManager {
 
     // this only detects changes on the display adapters like connect/disconnect of displays
     fn on_changed(
-        _sender: &Option<DisplayManager>,
-        args: &Option<DisplayManagerChangedEventArgs>,
+        _sender: windows_core::Ref<DisplayManager>,
+        args: windows_core::Ref<DisplayManagerChangedEventArgs>,
     ) -> windows_core::Result<()> {
         log::trace!("DisplayManager changed");
         Self::check_for_display_changes().log_error();
 
         // Critical!: app will crash if this is not set
-        if let Some(args) = args {
+        if let Some(args) = args.as_ref() {
             args.SetHandled(true)?;
         }
         Ok(())
     }
 
     fn on_paths_failed_or_invalidated(
-        _sender: &Option<DisplayManager>,
-        args: &Option<DisplayManagerPathsFailedOrInvalidatedEventArgs>,
+        _sender: windows_core::Ref<DisplayManager>,
+        args: windows_core::Ref<DisplayManagerPathsFailedOrInvalidatedEventArgs>,
     ) -> windows_core::Result<()> {
         log::trace!("DisplayManager paths failed or invalidated");
         // Treat this as a change event
         Self::check_for_display_changes().log_error();
 
         // Critical!: app will crash if this is not set
-        if let Some(args) = args {
+        if let Some(args) = args.as_ref() {
             args.SetHandled(true)?;
         }
         Ok(())

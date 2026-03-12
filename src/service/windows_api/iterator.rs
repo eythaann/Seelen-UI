@@ -1,7 +1,8 @@
 use windows::Win32::{
-    Foundation::{BOOL, HWND, LPARAM},
+    Foundation::{HWND, LPARAM},
     UI::WindowsAndMessaging::{EnumChildWindows, EnumWindows},
 };
+use windows_core::BOOL;
 
 use crate::error::Result;
 

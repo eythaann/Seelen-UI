@@ -3868,7 +3868,7 @@ dependencies = [
  "log",
  "scc",
  "thiserror 2.0.18",
- "windows 0.59.0",
+ "windows 0.62.2",
 ]
 
 [[package]]
@@ -4955,8 +4955,9 @@ dependencies = [
  "widestring",
  "win-hotkeys",
  "win-screenshot",
- "windows 0.59.0",
- "windows-core 0.59.0",
+ "windows 0.62.2",
+ "windows-core 0.62.2",
+ "windows-future 0.3.2",
  "winreg",
  "wmi",
 ]
@@ -5289,7 +5290,7 @@ dependencies = [
  "thiserror 2.0.18",
  "tokio",
  "uuid 1.20.0",
- "windows 0.59.0",
+ "windows 0.62.2",
 ]
 
 [[package]]
@@ -5307,8 +5308,8 @@ version = "0.1.0"
 dependencies = [
  "slu-ipc",
  "uuid 1.20.0",
- "windows 0.59.0",
- "windows-core 0.59.0",
+ "windows 0.62.2",
+ "windows-core 0.62.2",
 ]
 
 [[package]]
@@ -6985,16 +6986,6 @@ dependencies = [
 
 [[package]]
 name = "windows"
-version = "0.59.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f919aee0a93304be7f62e8e5027811bbba96bcb1de84d6618be56e43f8a32a1"
-dependencies = [
- "windows-core 0.59.0",
- "windows-targets 0.53.5",
-]
-
-[[package]]
-name = "windows"
 version = "0.60.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ddf874e74c7a99773e62b1c671427abf01a425e77c3d3fb9fb1e4883ea934529"
@@ -7056,19 +7047,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23b2d95af1a8a14a3c7367e1ed4fc9c20e0a26e79551b1454d72583c97cc6610"
 dependencies = [
  "windows-core 0.62.2",
-]
-
-[[package]]
-name = "windows-core"
-version = "0.59.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "810ce18ed2112484b0d4e15d022e5f598113e220c53e373fb31e67e21670c1ce"
-dependencies = [
- "windows-implement 0.59.0",
- "windows-interface",
- "windows-result 0.3.4",
- "windows-strings 0.3.1",
- "windows-targets 0.53.5",
 ]
 
 [[package]]

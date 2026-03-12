@@ -2,12 +2,14 @@ use windows::Win32::{
     Devices::Display::{
         GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness, PHYSICAL_MONITOR,
     },
-    Foundation::{BOOL, HANDLE},
+    Foundation::HANDLE,
     Storage::FileSystem::{
         CreateFileW, FILE_GENERIC_READ, FILE_GENERIC_WRITE, FILE_SHARE_READ, FILE_SHARE_WRITE,
         OPEN_EXISTING,
     },
 };
+
+use windows_core::BOOL;
 
 use crate::{
     error::Result,

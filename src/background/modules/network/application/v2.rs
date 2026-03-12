@@ -66,9 +66,9 @@ impl NetworkManagerV2 {
             &NetworkInformation::GetInternetConnectionProfile()?,
         )?;
         let result = if enabled {
-            hotspot.StartTetheringAsync()?.get()?
+            hotspot.StartTetheringAsync()?.join()?
         } else {
-            hotspot.StopTetheringAsync()?.get()?
+            hotspot.StopTetheringAsync()?.join()?
         };
         let status = result.Status()?;
         if status != TetheringOperationStatus::Success {

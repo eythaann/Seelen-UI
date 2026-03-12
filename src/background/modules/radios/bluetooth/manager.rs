@@ -14,9 +14,10 @@ use windows::{
             DevicePairingResultStatus,
         },
     },
-    Foundation::{Deferral, IAsyncOperation, TypedEventHandler},
+    Foundation::{Deferral, TypedEventHandler},
     Security::Credentials::PasswordCredential,
 };
+use windows_future::IAsyncOperation;
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -257,7 +258,7 @@ impl BluetoothManager {
         DeviceInformationCustomPairing,
         DevicePairingProtectionLevel,
     )> {
-        let device = DeviceInformation::CreateFromIdAsync(&device_id.into())?.get()?;
+        let device = DeviceInformation::CreateFromIdAsync(&device_id.into())?.join()?;
         let pairing = device.Pairing()?;
 
         if pairing.IsPaired()? {
@@ -454,10 +455,10 @@ impl BluetoothManager {
     /// Handles the pairing requested callback from Windows.
     /// Determines what action is needed and updates the pending request.
     fn on_pair_request(
-        request: &Option<DevicePairingRequestedEventArgs>,
+        request: windows_core::Ref<DevicePairingRequestedEventArgs>,
         device_id: String,
     ) -> Result<DevicePairingNeededAction> {
-        let Some(request) = request else {
+        let Some(request) = request.as_ref() else {
             return Err(format!("Pairing args are null for device {}", device_id).into());
         };
 

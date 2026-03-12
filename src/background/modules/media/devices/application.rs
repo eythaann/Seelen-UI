@@ -565,7 +565,7 @@ impl IAudioSessionEvents_Impl for MediaSessionEventHandler_Impl {
     fn OnSimpleVolumeChanged(
         &self,
         new_volume: f32,
-        new_mute: windows::Win32::Foundation::BOOL,
+        new_mute: windows::core::BOOL,
         _event_context: *const windows::core::GUID,
     ) -> windows::core::Result<()> {
         let tx = DevicesManager::event_tx();

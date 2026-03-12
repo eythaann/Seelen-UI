@@ -106,7 +106,7 @@ impl NotificationManager {
     }
 
     fn init(&mut self) -> Result<()> {
-        let access = self.listener.RequestAccessAsync()?.get()?;
+        let access = self.listener.RequestAccessAsync()?.join()?;
         if access != UserNotificationListenerAccessStatus::Allowed {
             return Err("Failed to get notification access".into());
         }
@@ -114,7 +114,7 @@ impl NotificationManager {
         let u_notifications = self
             .listener
             .GetNotificationsAsync(NotificationKinds::Toast)?
-            .get()?;
+            .join()?;
         for u_notification in u_notifications {
             log_error!(self.load_notification(u_notification));
         }
@@ -149,10 +149,10 @@ impl NotificationManager {
     }
 
     fn on_notifications_change(
-        listener: &Option<UserNotificationListener>,
-        args: &Option<UserNotificationChangedEventArgs>,
+        listener: windows_core::Ref<UserNotificationListener>,
+        args: windows_core::Ref<UserNotificationChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        let (Some(_listener), Some(args)) = (listener, args) else {
+        let (Some(_listener), Some(args)) = (listener.as_ref(), args.as_ref()) else {
             return Ok(());
         };
 
@@ -177,7 +177,7 @@ impl NotificationManager {
 
         for u_notification in listener
             .GetNotificationsAsync(NotificationKinds::Toast)?
-            .get()?
+            .join()?
         {
             let id: u32 = u_notification.Id()?;
             if !old_toasts.contains(&id) {

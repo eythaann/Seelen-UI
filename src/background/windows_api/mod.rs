@@ -946,7 +946,7 @@ impl WindowsApi {
         let input_stream = stream.GetInputStreamAt(0)?;
         let data_reader = DataReader::CreateDataReader(&input_stream)?;
 
-        data_reader.LoadAsync(size as u32)?.get()?;
+        data_reader.LoadAsync(size as u32)?.join()?;
         data_reader.ReadBytes(&mut buffer)?;
 
         let image = image::load_from_memory_with_format(&buffer, image::ImageFormat::Png)?;
@@ -963,7 +963,7 @@ impl WindowsApi {
     }
 
     pub fn extract_thumbnail_from_ref(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
-        Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.get()?)
+        Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.join()?)
     }
 
     pub fn lock_machine() -> Result<()> {
