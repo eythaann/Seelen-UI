@@ -1,9 +1,5 @@
-import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance";
-
 import "@shared/styles/colors.css";
 import "./reset.css";
-
-disableAnimationsOnPerformanceMode();
 
 const { js, css, html } = window.__SLU_WIDGET;
 

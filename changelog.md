@@ -2,6 +2,10 @@
 
 ## [2.5.5-dev]
 
+### features
+
+- disable all css animations on performance mode extreme.
+
 ### fix
 
 - slow down on performace while dragging apps.

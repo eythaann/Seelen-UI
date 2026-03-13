@@ -21,11 +21,11 @@ export function PerformanceSettings() {
     },
     {
       label: t("general.performance_mode.options.minimal"),
-      value: PerformanceMode.Extreme,
+      value: PerformanceMode.Minimal,
     },
     {
       label: t("general.performance_mode.options.extreme"),
-      value: PerformanceMode.Minimal,
+      value: PerformanceMode.Extreme,
     },
   ];
 

@@ -14,7 +14,24 @@
 
 :root {
   --ui-color: light-dark(var(--system-accent-dark-color), var(--system-accent-light-color));
-  --ui-hover-color: light-dark(var(--system-accent-darker-color), var(--system-accent-lighter-color));
+  --ui-hover-color: light-dark(
+    var(--system-accent-darker-color),
+    var(--system-accent-lighter-color)
+  );
+}
+
+// Used by performance mode to reduce cpu/gpu usage
+html[data-animations-off] *,
+html[data-animations-off] *::before,
+html[data-animations-off] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  animation-delay: 0s !important;
+
+  transition-duration: 0.001ms !important;
+  transition-delay: 0s !important;
+
+  scroll-behavior: auto !important;
 }
 
 // Accessibility Improvement

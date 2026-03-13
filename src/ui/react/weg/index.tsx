@@ -1,7 +1,6 @@
 import { SeelenCommand, Widget } from "@seelen-ui/lib";
 import { getRootContainer } from "libs/ui/react/utils/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
-import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance.ts";
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { createRoot } from "react-dom/client";
@@ -19,8 +18,6 @@ import "./styles/global.css";
 await declareDocumentAsLayeredHitbox();
 await loadTranslations();
 await Widget.getCurrent().init();
-
-disableAnimationsOnPerformanceMode();
 
 const container = getRootContainer();
 createRoot(container).render(

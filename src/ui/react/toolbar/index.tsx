@@ -1,5 +1,4 @@
 import { getRootContainer } from "libs/ui/react/utils/index.ts";
-import { disableAnimationsOnPerformanceMode } from "libs/ui/react/utils/performance.ts";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 
@@ -14,7 +13,6 @@ import "@shared/styles/reset.css";
 import "./styles/global.css";
 
 await loadTranslations();
-disableAnimationsOnPerformanceMode();
 
 await Widget.getCurrent().init();
 

@@ -26,6 +26,12 @@ export interface InitWidgetOptions {
    * @default widget.preset === "Desktop"
    */
   saveAndRestoreLastRect?: boolean;
+  /**
+   * Will disable the css animations on the widget when performace mode is set to Extreme
+   *
+   * @default true
+   */
+  disableCssAnimations?: boolean;
 }
 
 export interface ReadyWidgetOptions {

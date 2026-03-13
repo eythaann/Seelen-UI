@@ -18,6 +18,7 @@ import { WidgetAutoSizer } from "./sizing.ts";
 import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
 import type { InitWidgetOptions, ReadyWidgetOptions, WidgetInformation } from "./interfaces.ts";
+import { disableAnimationsOnPerformanceMode } from "./performance.ts";
 import { getCurrentWebview } from "@tauri-apps/api/webview";
 
 interface WidgetInternalState {
@@ -278,6 +279,12 @@ export class Widget {
 
     await startThemingTool();
     await initMonitorsState();
+
+    if (options.disableCssAnimations ?? true) {
+      await disableAnimationsOnPerformanceMode();
+    } else {
+      console.trace("Animations won't be disabled because widget configuration");
+    }
 
     // state initialization
     this.runtimeState.size = await this.webview.outerSize();
