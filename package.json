@@ -69,7 +69,7 @@
     "framer-motion": "^12.23.0",
     "i18next": "^25.8.18",
     "js-yaml": "^4.1.0",
-    "lefthook": "^1.6.18",
+    "lefthook": "^2.1.4",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "react-i18next": "^15.0.0",
