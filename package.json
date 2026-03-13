@@ -42,7 +42,7 @@
     "object-inspect": "^1.13.4",
     "preact": "^10.28.4",
     "preact-render-to-string": "^6.6.5",
-    "react-router": "^7.6.0",
+    "react-router": "^7.13.1",
     "rehype-stringify": "^10.0.1",
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
