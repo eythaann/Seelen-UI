@@ -408,6 +408,8 @@ jobs:
   publish-core-library:
     needs: publish-release
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     steps:
       - name: Trigger publish-core workflow
         uses: actions/github-script@v7
