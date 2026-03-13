@@ -10,6 +10,7 @@
 
 - slow down on performace while dragging apps.
 - prevent win32 handle leaks.
+- user menu slow render.
 
 ## [2.5.4]
 

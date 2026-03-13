@@ -53,8 +53,18 @@
   }
 </script>
 
-<details class="user-directory" open={isOpen}>
-  <summary class="user-directory-summary" onclick={openOnExplorer}>
+<div class="user-directory">
+  <div
+    class="user-directory-summary"
+    tabindex="0"
+    role="button"
+    onclick={openOnExplorer}
+    onkeydown={(e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.currentTarget.click();
+      }
+    }}
+  >
     <Icon iconName={icon as any} class="user-directory-icon" />
     <span class="user-directory-title">{$t(getFolderTranslationKey(type))}</span>
     <button data-skin="transparent" onclick={onClickChevron}>
@@ -68,15 +78,17 @@
         ]}
       />
     </button>
-  </summary>
-
-  <div class="file-list">
-    {#if content.length === 0}
-      <EmptyList />
-    {/if}
-
-    {#each content as file (file.path)}
-      <FilePreview path={file.path} displayName={file.displayName} />
-    {/each}
   </div>
-</details>
+
+  {#if isOpen}
+    <div class="file-list">
+      {#if content.length === 0}
+        <EmptyList />
+      {/if}
+
+      {#each content as file (file.path)}
+        <FilePreview path={file.path} displayName={file.displayName} />
+      {/each}
+    </div>
+  {/if}
+</div>
