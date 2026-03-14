@@ -244,7 +244,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: rgba(var(--system-accent-color-rgb), 0.1);
+        background-color: #{"rgb(from var(--system-accent-color) r g b / 0.1)"};
       }
     }
   }

@@ -89,7 +89,7 @@
         }
 
         &.wlan-entry-selected {
-          background-color: rgba(var(--system-accent-color-rgb), 0.2);
+          background-color: #{"rgb(from var(--system-accent-color) r g b / 0.2)"};
         }
 
         .wlan-entry-info {

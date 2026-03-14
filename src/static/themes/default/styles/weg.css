@@ -1,10 +1,10 @@
 :root {
-  --dock-item-hover-color: rgba(var(--system-accent-light-color-rgb), 0.2);
+  --dock-item-hover-color: rgb(from var(--system-accent-light-color) r g b / 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --dock-item-hover-color: rgba(var(--system-accent-color-rgb), 0.2);
+    --dock-item-hover-color: rgb(from var(--system-accent-color) r g b / 0.2);
   }
 }
 

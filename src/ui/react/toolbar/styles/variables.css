@@ -4,9 +4,6 @@
   --config-padding: 4px;
   --config-height: calc(var(--config-item-size) + var(--config-padding) * 2 + var(--config-margin) * 2);
 
-  --system-accent-color: #ff0000;
-  --system-accent-color-rgb: 255, 0, 0;
-
   --config-time-before-hide: 800ms;
   --config-time-before-show: 100ms;
 }

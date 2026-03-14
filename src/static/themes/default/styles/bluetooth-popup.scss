@@ -89,7 +89,7 @@
         }
 
         &.bt-device-selected {
-          background-color: rgba(var(--system-accent-color-rgb), 0.2);
+          background-color: #{"rgb(from var(--system-accent-color) r g b / 0.2)"};
         }
 
         .bt-device-info {
@@ -129,7 +129,7 @@
             justify-content: center;
             width: 100%;
             padding: 16px 12px;
-            background-color: rgba(var(--system-accent-color-rgb), 0.1);
+            background-color: #{"rgb(from var(--system-accent-color) r g b / 0.1)"};
             border: 2px solid var(--system-accent-color);
             border-radius: 8px;
             font-size: 1.5rem;

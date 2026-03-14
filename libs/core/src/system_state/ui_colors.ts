@@ -50,14 +50,6 @@ export class UIColors {
 
       if (name.startsWith("accent")) {
         newStyles.addVariable(`--system-${name}-color`, value.slice(0, 7));
-        newStyles.addVariable(`--system-${name}-color-rgb`, `${r}, ${g}, ${b}`);
-
-        const complement = color.complementary();
-        newStyles.addVariable(`--system-${name}-complementary-color`, complement.toHexString());
-        newStyles.addVariable(
-          `--system-${name}-complementary-color-rgb`,
-          `${complement.r}, ${complement.g}, ${complement.b}`,
-        );
       }
     }
 
@@ -156,8 +148,6 @@ export class Color {
    * the name will be parsed to lower kebab case and remove non-alphanumeric characters
    * this will create some css variables as:\
    * `--color-{name}` -> #RRGGBBAA\
-   * `--color-{name}-rgb` -> R, G, B
-   * `--color-{name}-rgba` -> R, G, B, A
    */
   setAsCssVariable(name: string): void {
     const parsedName = name
@@ -167,8 +157,6 @@ export class Color {
 
     this.insertIntoStyleSheet({
       [`--color-${parsedName}`]: this.toHexString(),
-      [`--color-${parsedName}-rgb`]: `${this.r}, ${this.g}, ${this.b}`,
-      [`--color-${parsedName}-rgba`]: `${this.r}, ${this.g}, ${this.b}, ${this.a}`,
     });
   }
 
