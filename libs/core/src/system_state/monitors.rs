@@ -31,3 +31,9 @@ pub struct MonitorBrightness {
 pub struct MonitorId(pub String);
 
 identifier_impl!(MonitorId, String);
+
+impl Default for MonitorId {
+    fn default() -> Self {
+        Self("null".to_string())
+    }
+}

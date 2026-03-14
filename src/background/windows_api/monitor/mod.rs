@@ -86,15 +86,15 @@ impl Monitor {
         let info = WindowsApi::monitor_info(self.0)?;
         let rect = info.monitorInfo.rcMonitor;
 
-        let (paths, modes) = query_active_display_config()?;
-        for path in &paths {
+        let display_config = DisplayConfigAndModes::query_active()?;
+        for path in &display_config.paths {
             unsafe {
                 // Only consider paths that have a source mode (desktop surface).
                 let mode_idx = path.sourceInfo.Anonymous.modeInfoIdx as usize;
                 if mode_idx == 0xFFFF_FFFF {
                     continue;
                 }
-                let Some(mode) = modes.get(mode_idx) else {
+                let Some(mode) = display_config.modes.get(mode_idx) else {
                     continue;
                 };
                 if mode.infoType != DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE {
@@ -134,11 +134,7 @@ impl Monitor {
         Err("No WinRT DisplayTarget found for HMONITOR".into())
     }
 
-    pub fn stable_id(&self) -> Result<String> {
-        Ok(self.get_stable_info()?.0.to_string())
-    }
-
-    pub fn stable_id2(&self) -> Result<MonitorId> {
+    pub fn stable_id(&self) -> Result<MonitorId> {
         Ok(self.get_stable_info()?.0)
     }
 
@@ -176,7 +172,7 @@ pub struct DisplayView(WinRTDisplayView);
 
 impl DisplayView {
     pub fn as_win32_view(&self) -> Result<Monitor> {
-        let (paths, modes) = query_active_display_config()?;
+        let display_config = DisplayConfigAndModes::query_active()?;
 
         for display_path in self.0.Paths()? {
             let target = display_path.Target()?;
@@ -185,7 +181,7 @@ impl DisplayView {
 
             // Match directly by adapter LUID + target ID — no DeviceInterfacePath
             // string lookup or DisplayConfigGetDeviceInfo calls needed.
-            for path in &paths {
+            for path in &display_config.paths {
                 unsafe {
                     if path.targetInfo.adapterId.LowPart != adapter_id.LowPart
                         || path.targetInfo.adapterId.HighPart != adapter_id.HighPart
@@ -197,7 +193,7 @@ impl DisplayView {
                     if mode_idx == 0xFFFF_FFFF {
                         continue;
                     }
-                    let Some(mode) = modes.get(mode_idx) else {
+                    let Some(mode) = display_config.modes.get(mode_idx) else {
                         continue;
                     };
                     if mode.infoType != DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE {
@@ -247,27 +243,38 @@ impl From<WinRTDisplayTarget> for MonitorTarget {
 // ============================= DisplayConfig helpers (Win32-only) ================================
 // =================================================================================================
 
-fn query_active_display_config(
-) -> Result<(Vec<DISPLAYCONFIG_PATH_INFO>, Vec<DISPLAYCONFIG_MODE_INFO>)> {
-    unsafe {
-        let mut num_paths: u32 = 0;
-        let mut num_modes: u32 = 0;
-        GetDisplayConfigBufferSizes(QDC_ONLY_ACTIVE_PATHS, &mut num_paths, &mut num_modes).ok()?;
+/// Bridge struct holding the Win32 `QueryDisplayConfig` output.
+///
+/// Used to correlate Win32 (`HMONITOR`) and WinRT (`DisplayTarget`) display objects
+/// by matching adapter LUID + target ID against paths and source mode positions.
+struct DisplayConfigAndModes {
+    paths: Vec<DISPLAYCONFIG_PATH_INFO>,
+    modes: Vec<DISPLAYCONFIG_MODE_INFO>,
+}
 
-        let mut paths = vec![DISPLAYCONFIG_PATH_INFO::default(); num_paths as usize];
-        let mut modes = vec![DISPLAYCONFIG_MODE_INFO::default(); num_modes as usize];
-        QueryDisplayConfig(
-            QDC_ONLY_ACTIVE_PATHS,
-            &mut num_paths,
-            paths.as_mut_ptr(),
-            &mut num_modes,
-            modes.as_mut_ptr(),
-            None,
-        )
-        .ok()?;
-        paths.truncate(num_paths as usize);
-        modes.truncate(num_modes as usize);
-        Ok((paths, modes))
+impl DisplayConfigAndModes {
+    fn query_active() -> Result<Self> {
+        unsafe {
+            let mut num_paths: u32 = 0;
+            let mut num_modes: u32 = 0;
+            GetDisplayConfigBufferSizes(QDC_ONLY_ACTIVE_PATHS, &mut num_paths, &mut num_modes)
+                .ok()?;
+
+            let mut paths = vec![DISPLAYCONFIG_PATH_INFO::default(); num_paths as usize];
+            let mut modes = vec![DISPLAYCONFIG_MODE_INFO::default(); num_modes as usize];
+            QueryDisplayConfig(
+                QDC_ONLY_ACTIVE_PATHS,
+                &mut num_paths,
+                paths.as_mut_ptr(),
+                &mut num_modes,
+                modes.as_mut_ptr(),
+                None,
+            )
+            .ok()?;
+            paths.truncate(num_paths as usize);
+            modes.truncate(num_modes as usize);
+            Ok(Self { paths, modes })
+        }
     }
 }
 

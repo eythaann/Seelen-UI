@@ -226,7 +226,7 @@ impl Window {
 
     pub fn monitor_id(&self) -> MonitorId {
         self.monitor()
-            .stable_id2()
+            .stable_id()
             .unwrap_or_else(|_| MonitorId("null".to_string()))
     }
 

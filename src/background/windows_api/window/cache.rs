@@ -11,7 +11,7 @@ impl Window {
     pub fn to_serializable(self: &Window) -> UserAppWindow {
         UserAppWindow {
             hwnd: self.address(),
-            monitor: self.monitor().stable_id().unwrap_or_default().into(),
+            monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             app_name: self.app_display_name().unwrap_or_default(),
             is_iconic: self.is_minimized(),
@@ -27,7 +27,7 @@ impl Window {
 
         FocusedApp {
             hwnd: self.address(),
-            monitor: self.monitor().stable_id().unwrap_or_default().into(),
+            monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             class: self.class(),
             name: self

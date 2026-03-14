@@ -253,7 +253,7 @@ impl SluWorkspacesManager2 {
         let window_id = window.address();
 
         // Get monitor ID with fallback to pinned list
-        let Ok(monitor_id) = window.monitor().stable_id2() else {
+        let Ok(monitor_id) = window.monitor().stable_id() else {
             // As fallback we gonna add the window to the pinned list.
             // If getting monitor id continues to fail, this won't be able to be unpinned.
             if !self.pinned.contains(&window_id) {

@@ -93,7 +93,7 @@ impl SeelenWeg {
     pub fn set_position(&mut self, monitor: &Monitor) -> Result<()> {
         let state = FULL_STATE.load();
         let toolbar_config = &state.settings.by_widget.fancy_toolbar;
-        let is_toolbar_enabled = state.is_bar_enabled_on_monitor(&monitor.stable_id2()?);
+        let is_toolbar_enabled = state.is_bar_enabled_on_monitor(&monitor.stable_id()?);
 
         let settings = &state.settings.by_widget.weg;
 

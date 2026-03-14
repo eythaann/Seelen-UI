@@ -1,4 +1,4 @@
-use seelen_core::{state::WidgetTriggerPayload, system_state::MonitorId};
+use seelen_core::state::WidgetTriggerPayload;
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -52,7 +52,7 @@ impl VirtualDesktopCli {
 impl VdCommand {
     pub fn process(self) -> Result<()> {
         let focused_win = Window::get_foregrounded();
-        let monitor_id: MonitorId = focused_win.monitor().stable_id()?.into();
+        let monitor_id = focused_win.monitor().stable_id()?;
         let vd = SluWorkspacesManager2::instance();
 
         match self {

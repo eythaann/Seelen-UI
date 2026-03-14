@@ -77,8 +77,8 @@ impl WindowManagerV2 {
         let toolbar_config = &state.settings.by_widget.fancy_toolbar;
         let weg_config = &state.settings.by_widget.weg;
 
-        let is_toolbar_enabled = state.is_bar_enabled_on_monitor(&monitor.stable_id2()?);
-        let is_weg_enabled = state.is_weg_enabled_on_monitor(&monitor.stable_id2()?);
+        let is_toolbar_enabled = state.is_bar_enabled_on_monitor(&monitor.stable_id()?);
+        let is_weg_enabled = state.is_weg_enabled_on_monitor(&monitor.stable_id()?);
 
         let hwnd = HWND(self.hwnd()?.0);
         let monitor_info = WindowsApi::monitor_info(monitor.handle())?;

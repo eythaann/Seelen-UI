@@ -31,7 +31,7 @@ impl WegCli {
     pub fn process(self) -> Result<()> {
         #[allow(irrefutable_let_patterns)]
         if let WegCommand::ForegroundOrRunApp { index } = self.subcommand {
-            let id = Monitor::from(WindowsApi::monitor_from_cursor_point()).stable_id2()?;
+            let id = Monitor::from(WindowsApi::monitor_from_cursor_point()).stable_id()?;
 
             let items = trace_lock!(SEELEN_WEG_STATE).get_filtered_by_monitor()?;
             if let Some(wegitems) = items.get(&id) {

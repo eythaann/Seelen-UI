@@ -361,7 +361,7 @@ impl SeelenWegState {
         let state = FULL_STATE.load();
 
         for monitor in MonitorEnumerator::enumerate_win32()? {
-            let monitor_id = monitor.stable_id()?.into();
+            let monitor_id = monitor.stable_id()?;
             if !state.is_weg_enabled_on_monitor(&monitor_id) {
                 continue;
             }
