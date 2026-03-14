@@ -227,6 +227,6 @@ impl WidgetInstance {
 
 impl Drop for WidgetInstance {
     fn drop(&mut self) {
-        log::info!("Dropping {:?}", self.label);
+        log::info!("Dropping {}", self.label);
     }
 }

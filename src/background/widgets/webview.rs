@@ -69,7 +69,7 @@ pub struct WidgetWebviewLabel {
     /// this should be used as the real webview label
     pub raw: String,
     /// this is the decoded label, useful for debugging and logging
-    decoded: String,
+    pub decoded: String,
     /// widget id from this label was created
     pub widget_id: WidgetId,
 }

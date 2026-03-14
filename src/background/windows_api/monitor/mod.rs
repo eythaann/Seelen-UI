@@ -2,25 +2,24 @@ mod brightness;
 
 use windows::{
     Devices::Display::Core::{
-        DisplayManager, DisplayTarget as WinRTDisplayTarget, DisplayView as WinRTDisplayView,
+        DisplayManager, DisplayManagerOptions, DisplayTarget as WinRTDisplayTarget,
+        DisplayView as WinRTDisplayView,
     },
     Win32::{
         Devices::Display::{
             DisplayConfigGetDeviceInfo, GetDisplayConfigBufferSizes, QueryDisplayConfig,
-            DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME, DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME,
-            DISPLAYCONFIG_DEVICE_INFO_HEADER, DISPLAYCONFIG_MODE_INFO,
-            DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE, DISPLAYCONFIG_PATH_INFO,
-            DISPLAYCONFIG_SOURCE_DEVICE_NAME, DISPLAYCONFIG_TARGET_DEVICE_NAME,
-            QDC_ONLY_ACTIVE_PATHS,
+            DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME, DISPLAYCONFIG_DEVICE_INFO_HEADER,
+            DISPLAYCONFIG_MODE_INFO, DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE, DISPLAYCONFIG_PATH_INFO,
+            DISPLAYCONFIG_TARGET_DEVICE_NAME, QDC_ONLY_ACTIVE_PATHS,
         },
-        Graphics::Gdi::{EnumDisplayDevicesW, DISPLAY_DEVICEW, HMONITOR, MONITORINFOEXW},
+        Graphics::Gdi::{HMONITOR, MONITORINFOEXW},
     },
 };
 
 use crate::{error::Result, windows_api::string_utils::WindowsString};
 use seelen_core::{rect::Rect, system_state::MonitorId};
 
-use super::{MonitorEnumerator, WindowsApi};
+use super::WindowsApi;
 
 /// This struct represents a screen, a screen could be shown in multiple display devices.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -63,64 +62,88 @@ impl Monitor {
         self.0 == WindowsApi::primary_monitor()
     }
 
+    pub fn at_point(point: &seelen_core::Point) -> Monitor {
+        Monitor(WindowsApi::monitor_from_point(point))
+    }
+
     pub fn info(&self) -> Result<MONITORINFOEXW> {
         WindowsApi::monitor_info(self.0)
     }
 
-    pub fn devices(&self) -> Result<Vec<DisplayDevice>> {
-        let info = self.info()?;
-        let device = WindowsString::from_slice(&info.szDevice);
+    /// Returns (MonitorId, friendly name) for this HMONITOR.
+    ///
+    /// Strategy:
+    /// 1. Obtain the monitor's virtual-desktop position from `GetMonitorInfo`.
+    /// 2. Find all `QueryDisplayConfig` paths whose source mode sits at that position.
+    /// 3. For each candidate path try `winrt_stable_id_for_target`:
+    ///    - WinRT `DisplayManager.GetCurrentTargets()` only surfaces physical display
+    ///      targets. Virtual/render-only paths (e.g. the NVIDIA dGPU Optimus path) are
+    ///      absent from that list, so they naturally produce no match and we continue
+    ///      to the next candidate.
+    ///    - The first path whose `targetInfo` matches a WinRT `DisplayTarget` gives us
+    ///      the authoritative `StableMonitorId` and the friendly name.
+    pub fn get_stable_info(&self) -> Result<(MonitorId, String)> {
+        let info = WindowsApi::monitor_info(self.0)?;
+        let rect = info.monitorInfo.rcMonitor;
 
-        let mut devices = Vec::new();
-        unsafe {
-            let mut idx = 0;
-            loop {
-                let mut display = DISPLAY_DEVICEW {
-                    cb: std::mem::size_of::<DISPLAY_DEVICEW>() as u32,
-                    ..Default::default()
+        let (paths, modes) = query_active_display_config()?;
+        for path in &paths {
+            unsafe {
+                // Only consider paths that have a source mode (desktop surface).
+                let mode_idx = path.sourceInfo.Anonymous.modeInfoIdx as usize;
+                if mode_idx == 0xFFFF_FFFF {
+                    continue;
+                }
+                let Some(mode) = modes.get(mode_idx) else {
+                    continue;
                 };
-
-                let success =
-                    EnumDisplayDevicesW(device.as_pcwstr(), idx, &mut display, 1).as_bool();
-                if !success {
-                    break;
+                if mode.infoType != DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE {
+                    continue;
+                }
+                // Match by top-left corner of the monitor on the virtual desktop.
+                let pos = mode.Anonymous.sourceMode.position;
+                if pos.x != rect.left || pos.y != rect.top {
+                    continue;
                 }
 
-                devices.push(display.into());
-                idx += 1;
+                // Query the DisplayConfig target device name for the friendly name.
+                let mut target_name = DISPLAYCONFIG_TARGET_DEVICE_NAME {
+                    header: DISPLAYCONFIG_DEVICE_INFO_HEADER {
+                        r#type: DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME,
+                        size: std::mem::size_of::<DISPLAYCONFIG_TARGET_DEVICE_NAME>() as u32,
+                        adapterId: path.targetInfo.adapterId,
+                        id: path.targetInfo.id,
+                    },
+                    ..Default::default()
+                };
+                let _ = DisplayConfigGetDeviceInfo(&mut target_name.header);
+                let friendly_name =
+                    WindowsString::from_slice(&target_name.monitorFriendlyDeviceName).to_string();
+
+                // Try WinRT lookup — virtual paths won't match and we'll skip them.
+                if let Ok(result) = winrt_stable_id_for_target(
+                    path.targetInfo.adapterId.LowPart,
+                    path.targetInfo.adapterId.HighPart,
+                    path.targetInfo.id,
+                    friendly_name,
+                ) {
+                    return Ok(result);
+                }
             }
         }
-
-        Ok(devices)
-    }
-
-    pub fn get_primary_device(&self) -> Result<DisplayDevice> {
-        let devices = self.devices()?;
-        let device = devices.first().ok_or("no primary device")?;
-        Ok(device.clone())
-    }
-
-    pub fn get_primary_target(&self) -> Result<MonitorTarget> {
-        let device = self.get_primary_device()?;
-        MonitorTarget::from_device_id(&device.id)
+        Err("No WinRT DisplayTarget found for HMONITOR".into())
     }
 
     pub fn stable_id(&self) -> Result<String> {
-        Ok(self.stable_id2()?.to_string())
+        Ok(self.get_stable_info()?.0.to_string())
     }
 
     pub fn stable_id2(&self) -> Result<MonitorId> {
-        // Primary: use EnumDisplayDevicesW (works when GPU drivers are loaded)
-        if let Ok(target) = self.get_primary_target() {
-            return target.stable_id();
-        }
+        Ok(self.get_stable_info()?.0)
+    }
 
-        // Fallback: use QueryDisplayConfig, which operates at the DWM level and works
-        // even when users have disabled their GPU driver (e.g., for gaming performance).
-        let info = self.info()?;
-        let gdi_device_name = WindowsString::from_slice(&info.szDevice).to_string();
-        let interface_path = gdi_device_name_to_interface_path(&gdi_device_name)?;
-        MonitorTarget::from_device_id(&WindowsString::from_str(&interface_path))?.stable_id()
+    pub fn friendly_name(&self) -> Result<String> {
+        Ok(self.get_stable_info()?.1)
     }
 
     pub fn rect(&self) -> Result<Rect> {
@@ -140,41 +163,6 @@ impl Monitor {
     }
 }
 
-/// Represents a win32 display device
-#[derive(Clone)]
-#[allow(dead_code)]
-pub struct DisplayDevice {
-    pub id: WindowsString,
-    pub name: WindowsString,
-    pub description: WindowsString,
-    pub key: WindowsString,
-    pub flags: u32,
-}
-
-impl From<DISPLAY_DEVICEW> for DisplayDevice {
-    fn from(device: DISPLAY_DEVICEW) -> Self {
-        Self {
-            id: WindowsString::from_slice(&device.DeviceID),
-            name: WindowsString::from_slice(&device.DeviceName),
-            description: WindowsString::from_slice(&device.DeviceString),
-            key: WindowsString::from_slice(&device.DeviceKey),
-            flags: device.StateFlags.0,
-        }
-    }
-}
-
-impl std::fmt::Debug for DisplayDevice {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("DisplayDevice")
-            .field("id", &self.id.to_os_string())
-            .field("name", &self.name.to_os_string())
-            .field("description", &self.description.to_os_string())
-            .field("key", &self.key.to_os_string())
-            .field("flags", &self.flags)
-            .finish()
-    }
-}
-
 // =================================================================================================
 // =========================================== RT ==================================================
 // =================================================================================================
@@ -188,31 +176,39 @@ pub struct DisplayView(WinRTDisplayView);
 
 impl DisplayView {
     pub fn as_win32_view(&self) -> Result<Monitor> {
-        let mut interfaces = Vec::new();
-        for path in self.0.Paths()? {
-            let target = path.Target()?;
-            let interface_path = target.DeviceInterfacePath()?;
-            interfaces.push(interface_path.to_string());
-        }
+        let (paths, modes) = query_active_display_config()?;
 
-        // Primary: match via QueryDisplayConfig, which works at the DWM level and
-        // does not depend on GPU drivers being loaded (covers users who disable their
-        // GPU driver for gaming). Maps DeviceInterfacePath → desktop position →
-        // MonitorFromPoint → HMONITOR.
-        for interface_path in &interfaces {
-            if let Ok(pos) = interface_path_to_desktop_position(interface_path) {
-                return Ok(Monitor::from(WindowsApi::monitor_from_point(&pos)));
-            }
-        }
+        for display_path in self.0.Paths()? {
+            let target = display_path.Target()?;
+            let adapter_id = target.Adapter()?.Id()?;
+            let target_id = target.AdapterRelativeId()?;
 
-        // Fallback: original EnumDisplayDevicesW matching.
-        let win32_views = MonitorEnumerator::enumerate_win32()?;
-        for win32_view in win32_views {
-            if let Ok(devices) = win32_view.devices() {
-                for device in devices {
-                    if interfaces.contains(&device.id.to_string()) {
-                        return Ok(win32_view);
+            // Match directly by adapter LUID + target ID — no DeviceInterfacePath
+            // string lookup or DisplayConfigGetDeviceInfo calls needed.
+            for path in &paths {
+                unsafe {
+                    if path.targetInfo.adapterId.LowPart != adapter_id.LowPart
+                        || path.targetInfo.adapterId.HighPart != adapter_id.HighPart
+                        || path.targetInfo.id != target_id
+                    {
+                        continue;
                     }
+                    let mode_idx = path.sourceInfo.Anonymous.modeInfoIdx as usize;
+                    if mode_idx == 0xFFFF_FFFF {
+                        continue;
+                    }
+                    let Some(mode) = modes.get(mode_idx) else {
+                        continue;
+                    };
+                    if mode.infoType != DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE {
+                        continue;
+                    }
+
+                    let pos = mode.Anonymous.sourceMode.position;
+                    return Ok(Monitor::at_point(&seelen_core::Point {
+                        x: pos.x,
+                        y: pos.y,
+                    }));
                 }
             }
         }
@@ -235,25 +231,9 @@ impl From<WinRTDisplayView> for DisplayView {
 pub struct MonitorTarget(WinRTDisplayTarget);
 
 impl MonitorTarget {
-    pub fn from_device_id(device_id: &WindowsString) -> Result<Self> {
-        for target in DisplayManager::Create(Default::default())?.GetCurrentTargets()? {
-            let Ok(id) = target.DeviceInterfacePath() else {
-                continue;
-            };
-
-            if id == device_id.to_hstring() {
-                return Ok(MonitorTarget(target));
-            }
-        }
-        Err("Target for device id not found".into())
-    }
-
+    /// Returns the WinRT StableMonitorId — the canonical, authoritative stable ID.
     pub fn stable_id(&self) -> Result<MonitorId> {
         Ok(self.0.StableMonitorId()?.to_string().into())
-    }
-
-    pub fn name(&self) -> Result<String> {
-        Ok(self.0.TryGetMonitor()?.DisplayName()?.to_string())
     }
 }
 
@@ -264,13 +244,8 @@ impl From<WinRTDisplayTarget> for MonitorTarget {
 }
 
 // =================================================================================================
-// ================================ QueryDisplayConfig helpers =====================================
+// ============================= DisplayConfig helpers (Win32-only) ================================
 // =================================================================================================
-//
-// These helpers use QueryDisplayConfig which operates at the DWM / display subsystem level,
-// independently of individual GPU device drivers. They provide a reliable mapping between
-// WinRT DeviceInterfacePath values and Win32 HMONITOR handles even when EnumDisplayDevicesW
-// fails to return device interface names (e.g., users who disable their GPU driver for gaming).
 
 fn query_active_display_config(
 ) -> Result<(Vec<DISPLAYCONFIG_PATH_INFO>, Vec<DISPLAYCONFIG_MODE_INFO>)> {
@@ -296,91 +271,32 @@ fn query_active_display_config(
     }
 }
 
-/// Given a WinRT `DeviceInterfacePath`, returns its position in virtual desktop coordinates
-/// by matching against QueryDisplayConfig's `monitorDevicePath` and reading the source mode.
-fn interface_path_to_desktop_position(interface_path: &str) -> Result<seelen_core::Point> {
-    let (paths, modes) = query_active_display_config()?;
-    for path in &paths {
-        unsafe {
-            let mut target_name = DISPLAYCONFIG_TARGET_DEVICE_NAME {
-                header: DISPLAYCONFIG_DEVICE_INFO_HEADER {
-                    r#type: DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME,
-                    size: std::mem::size_of::<DISPLAYCONFIG_TARGET_DEVICE_NAME>() as u32,
-                    adapterId: path.targetInfo.adapterId,
-                    id: path.targetInfo.id,
-                },
-                ..Default::default()
-            };
-            if DisplayConfigGetDeviceInfo(&mut target_name.header) != 0 {
-                continue;
-            }
-            let device_path = WindowsString::from_slice(&target_name.monitorDevicePath).to_string();
-            if device_path != interface_path {
-                continue;
-            }
-            // Matched — retrieve the source mode desktop position.
-            let mode_idx = path.sourceInfo.Anonymous.modeInfoIdx as usize;
-            if mode_idx == 0xFFFFFFFF {
-                continue;
-            }
-            if let Some(mode) = modes.get(mode_idx) {
-                if mode.infoType == DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE {
-                    let pos = mode.Anonymous.sourceMode.position;
-                    return Ok(seelen_core::Point { x: pos.x, y: pos.y });
-                }
-            }
+/// Looks up the WinRT `DisplayTarget` matching the given adapter LUID and target ID,
+/// and returns (StableMonitorId, friendly_name).
+///
+/// `DisplayManager.GetCurrentTargets()` only surfaces **physical** display targets.
+/// Virtual or render-only paths (e.g. the NVIDIA dGPU Optimus indirect-display path)
+/// are absent from the WinRT target list, so they naturally produce no match.
+/// This means the caller does not need extra filtering — iterating over all QDC paths
+/// at the monitor's position and calling this function for each one will succeed only
+/// on the path that corresponds to the real scan-out adapter.
+fn winrt_stable_id_for_target(
+    luid_low: u32,
+    luid_high: i32,
+    target_id: u32,
+    friendly_name: String,
+) -> Result<(MonitorId, String)> {
+    let dm = DisplayManager::Create(DisplayManagerOptions::None)?;
+    for target in dm.GetCurrentTargets()? {
+        let adapter_id = target.Adapter()?.Id()?;
+        if adapter_id.LowPart != luid_low || adapter_id.HighPart != luid_high {
+            continue;
         }
-    }
-    Err("No QueryDisplayConfig entry found for device interface path".into())
-}
-
-/// Given a GDI device name (e.g. `\\.\DISPLAY1`), returns the corresponding WinRT
-/// `DeviceInterfacePath` by matching QueryDisplayConfig's source GDI device names.
-fn gdi_device_name_to_interface_path(gdi_device_name: &str) -> Result<String> {
-    let (paths, _) = query_active_display_config()?;
-    for path in &paths {
-        unsafe {
-            let mut source_name = DISPLAYCONFIG_SOURCE_DEVICE_NAME {
-                header: DISPLAYCONFIG_DEVICE_INFO_HEADER {
-                    r#type: DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME,
-                    size: std::mem::size_of::<DISPLAYCONFIG_SOURCE_DEVICE_NAME>() as u32,
-                    adapterId: path.sourceInfo.adapterId,
-                    id: path.sourceInfo.id,
-                },
-                ..Default::default()
-            };
-
-            if DisplayConfigGetDeviceInfo(&mut source_name.header) != 0 {
-                continue;
-            }
-
-            let name = WindowsString::from_slice(&source_name.viewGdiDeviceName).to_string();
-            if name != gdi_device_name {
-                continue;
-            }
-
-            // Matched source — get target device path.
-            let mut target_name = DISPLAYCONFIG_TARGET_DEVICE_NAME {
-                header: DISPLAYCONFIG_DEVICE_INFO_HEADER {
-                    r#type: DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME,
-                    size: std::mem::size_of::<DISPLAYCONFIG_TARGET_DEVICE_NAME>() as u32,
-                    adapterId: path.targetInfo.adapterId,
-                    id: path.targetInfo.id,
-                },
-                ..Default::default()
-            };
-
-            if DisplayConfigGetDeviceInfo(&mut target_name.header) != 0 {
-                continue;
-            }
-
-            let interface_path =
-                WindowsString::from_slice(&target_name.monitorDevicePath).to_string();
-            if !interface_path.is_empty() {
-                return Ok(interface_path);
-            }
+        if target.AdapterRelativeId()? != target_id {
+            continue;
         }
+        let stable_id: MonitorId = target.StableMonitorId()?.to_string().into();
+        return Ok((stable_id, friendly_name));
     }
-
-    Err("No QueryDisplayConfig entry found for GDI device name".into())
+    Err("No WinRT DisplayTarget found for adapter/target".into())
 }

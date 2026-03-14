@@ -36,7 +36,7 @@ pub fn log_from_webview(level: u8, message: String, location: String) {
         4 => log::Level::Warn,
         _ => log::Level::Error,
     };
-    log::log!(target: &*location, level, "{message}");
+    log::log!(target: &location, level, "{message}");
 }
 
 pub fn open_file_inner(path: String) -> Result<()> {
