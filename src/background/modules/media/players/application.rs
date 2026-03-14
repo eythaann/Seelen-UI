@@ -23,6 +23,12 @@ use crate::{
 
 use super::domain::{MediaPlayer, MediaPlayerSession};
 
+/// Grace period (ms) a player must have been absent before it is released.
+const REMOVAL_GRACE_MS: u128 = 1500;
+/// Delay (ms) before sending CleanRequested after marking a player for removal.
+/// Must be strictly greater than REMOVAL_GRACE_MS so elapsed > threshold when processed.
+const REMOVAL_SCHEDULE_MS: u64 = 2000;
+
 fn timeline_from_raw(
     raw: GlobalSystemMediaTransportControlsSessionTimelineProperties,
 ) -> windows_core::Result<MediaPlayerTimeline> {
@@ -85,13 +91,13 @@ impl PlayersManager {
     pub fn instance() -> &'static Self {
         static MANAGER: LazyLock<PlayersManager> = LazyLock::new(|| {
             let mut manager = PlayersManager::new().expect("Failed to create players manager");
-            unsafe { manager.init().log_error() };
+            manager.init().log_error();
             manager
         });
         &MANAGER
     }
 
-    unsafe fn init(&mut self) -> Result<()> {
+    fn init(&mut self) -> Result<()> {
         for session in self.manager.GetSessions()? {
             self.load_session(session)?;
         }
@@ -102,7 +108,18 @@ impl PlayersManager {
 
         let eid = Self::subscribe(|event| {
             PlayersManager::instance().process_event(&event).log_error();
-            PlayersManager::instance().update_recommended_player();
+            // Only re-evaluate the recommended player when the session list or
+            // playback status changes. Timeline/property events fire very frequently
+            // (every position tick) and do not affect which player is "current".
+            match event {
+                PlayersEvent::PlayerAdded(_)
+                | PlayersEvent::PlayerRemoved(_)
+                | PlayersEvent::CleanRequested
+                | PlayersEvent::PlaybackStatusChanged { .. } => {
+                    PlayersManager::instance().update_recommended_player();
+                }
+                _ => {}
+            }
         });
         Self::set_event_handler_priority(&eid, 1);
 
@@ -145,20 +162,26 @@ impl PlayersManager {
 
                 // load_session could fail with 0x80070015 "The device is not ready."
                 // when trying to load a recently added player so we retry a few times
-                let mut max_attempts = 0;
-                while session.TryGetMediaPropertiesAsync()?.join().is_err() && max_attempts < 15 {
-                    max_attempts += 1;
+                let mut attempts = 0;
+                while session.TryGetMediaPropertiesAsync()?.join().is_err() && attempts < 15 {
+                    attempts += 1;
                     std::thread::sleep(Duration::from_millis(10));
                 }
                 self.load_session(session.clone())?;
             }
             PlayersEvent::PlayerRemoved(id) => {
                 self.playing.get(id, |player| {
-                    player.removed_at = Some(std::time::Instant::now());
-                    std::thread::spawn(move || {
-                        std::thread::sleep(Duration::from_millis(1000));
-                        PlayersManager::send(PlayersEvent::CleanRequested);
-                    });
+                    // Only start the removal timer if not already pending removal.
+                    // Avoids resetting the timer on repeated SessionsChanged events.
+                    if player.removed_at.is_none() {
+                        player.removed_at = Some(std::time::Instant::now());
+                        std::thread::spawn(move || {
+                            // Must sleep longer than the REMOVAL_GRACE_MS threshold so that
+                            // by the time CleanRequested is processed, elapsed > threshold.
+                            std::thread::sleep(Duration::from_millis(REMOVAL_SCHEDULE_MS));
+                            PlayersManager::send(PlayersEvent::CleanRequested);
+                        });
+                    }
                 });
             }
             PlayersEvent::CleanRequested => {
@@ -263,17 +286,27 @@ impl PlayersManager {
     }
 
     fn release_pending_players(&self) -> Result<()> {
-        let mut ids = Vec::new();
+        let mut ids_to_release = Vec::new();
+        let mut needs_reschedule = false;
         self.playing.for_each(|(id, player)| {
-            if player
-                .removed_at
-                .is_some_and(|t| t.elapsed().as_millis() > 1500)
-            {
-                ids.push(id.clone());
+            if let Some(removed_at) = player.removed_at {
+                if removed_at.elapsed().as_millis() > REMOVAL_GRACE_MS {
+                    ids_to_release.push(id.clone());
+                } else {
+                    // Timer fired early (e.g. another event triggered CleanRequested);
+                    // reschedule so this player is eventually cleaned up.
+                    needs_reschedule = true;
+                }
             }
         });
-        for id in ids {
+        for id in ids_to_release {
             self.release_session(&id)?;
+        }
+        if needs_reschedule {
+            std::thread::spawn(|| {
+                std::thread::sleep(Duration::from_millis(REMOVAL_SCHEDULE_MS));
+                PlayersManager::send(PlayersEvent::CleanRequested);
+            });
         }
         Ok(())
     }
@@ -321,11 +354,16 @@ impl PlayersManager {
             let id = session.SourceAppUserModelId()?.to_string();
             let properties = session.TryGetMediaPropertiesAsync()?.join()?;
             let tx = PlayersManager::event_tx();
+            // Use unwrap_or_default / .ok() to match load_session's resilience:
+            // some players (e.g. system sounds) do not expose title, artist, or thumbnail.
             let result = tx.send(PlayersEvent::PropertiesChanged {
                 id,
-                title: properties.Title()?.to_string(),
-                author: properties.Artist()?.to_string(),
-                thumbnail: WindowsApi::extract_thumbnail_from_ref(properties.Thumbnail()?).ok(),
+                title: properties.Title().unwrap_or_default().to_string_lossy(),
+                author: properties.Artist().unwrap_or_default().to_string_lossy(),
+                thumbnail: properties
+                    .Thumbnail()
+                    .ok()
+                    .and_then(|s| WindowsApi::extract_thumbnail_from_ref(s).ok()),
             });
             result.log_error();
         }
