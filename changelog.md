@@ -11,6 +11,8 @@
 - slow down on performace while dragging apps.
 - prevent win32 handle leaks.
 - user menu slow render.
+- calendar language not being changed.
+- media player stucked state.
 
 ## [2.5.4]
 

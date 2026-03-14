@@ -7,7 +7,8 @@
   const today = moment();
 
   let weekDays = $derived.by(() => {
-    const weekStart = moment().startOf("week");
+    const lang = globalState.date.locale();
+    const weekStart = moment().locale(lang).startOf("week");
     return Array.from({ length: 7 }, (_, i) =>
       weekStart.clone().add(i, "days").format("dd")
     );
