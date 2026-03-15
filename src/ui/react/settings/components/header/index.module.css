@@ -1,6 +1,9 @@
 .header {
   height: 100%;
+
+  background-color: light-dark(var(--color-fixed-gray-50), var(--color-fixed-gray-900));
   border-bottom: 1px solid var(--color-gray-200);
+
   font-weight: 600;
   padding: 0 var(--spacing-s);
   display: flex;
@@ -24,7 +27,7 @@
     overflow: hidden;
 
     a:hover {
-      color: var(--color-blue-600);
+      color: var(--color-blue-500);
       cursor: pointer;
     }
 

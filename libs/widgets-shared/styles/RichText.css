@@ -29,7 +29,7 @@
     }
 
     &:visited {
-      color: var(--color-purple-1100);
+      color: var(--color-purple-900);
     }
   }
 

@@ -1,8 +1,8 @@
 .info {
   a {
-    color: var(--color-blue-600);
+    color: var(--color-blue-500);
     &:hover {
-      color: var(--color-blue-800);
+      color: var(--color-blue-700);
     }
   }
 
