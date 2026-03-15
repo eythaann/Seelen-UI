@@ -5,7 +5,7 @@ import {
   type WidgetSettingsDeclarationList,
 } from "@seelen-ui/lib/types";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
-import { Button, ColorPicker, Input, InputNumber, Select, Slider, Switch, Tooltip } from "antd";
+import { Button, ColorPicker, Flex, Input, InputNumber, Select, Slider, Switch, Tooltip } from "antd";
 import type { ReactNode } from "react";
 import { useMemo } from "react";
 
@@ -160,8 +160,12 @@ function renderInput(
 
       // Convert WidgetSelectOption[] to Ant Design Select options format
       const options = def.options.map((opt) => ({
-        icon: opt.icon ? <Icon iconName={opt.icon as any} /> : undefined,
-        label: <ResourceText text={opt.label} />,
+        label: (
+          <Flex gap={8} align="center">
+            {opt.icon && <Icon iconName={opt.icon as any} />}
+            <ResourceText text={opt.label} />
+          </Flex>
+        ),
         value: opt.value,
       }));
 

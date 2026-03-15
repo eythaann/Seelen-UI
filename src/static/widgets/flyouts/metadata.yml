@@ -10,20 +10,38 @@ settings:
     key: placement
     label: Placement
     options:
-      - label: Left
-        value: left
-        icon: CgToolbarLeft
+      - label: Top Left
+        value: top-left
+        icon: TbBoxAlignTopLeft
+
       - label: Top
         value: top
-        icon: CgToolbarTop
-      - label: Bottom
-        value: bottom
-        icon: CgToolbarBottom
+        icon: TbBoxAlignTop
+
+      - label: Top Right
+        value: top-right
+        icon: TbBoxAlignTopRight
+
+      - label: Left
+        value: left
+        icon: TbBoxAlignLeft
+
       - label: Right
         value: right
-        icon: CgToolbarRight
+        icon: TbBoxAlignRight
+
+      - label: Bottom Left
+        value: bottom-left
+        icon: TbBoxAlignBottomLeft
+
+      - label: Bottom
+        value: bottom
+        icon: TbBoxAlignBottom
+
+      - label: Bottom Right
+        value: bottom-right
+        icon: TbBoxAlignBottomRight
     defaultValue: top
-    subtype: Inline
 
   - type: number
     key: margin

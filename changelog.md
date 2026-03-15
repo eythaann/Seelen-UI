@@ -5,6 +5,7 @@
 ### features
 
 - disable all css animations on performance mode extreme.
+- add more position options for flyouts.
 
 ### fix
 

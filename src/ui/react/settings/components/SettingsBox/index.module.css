@@ -88,10 +88,11 @@
   }
 
   :global(.ant-select) {
-    min-width: 100px;
+    min-width: 150px;
   }
 
-  :global(.ant-input) {
+  :global(.ant-input),
+  :global(.ant-input-number) {
     min-width: 90px;
   }
 }

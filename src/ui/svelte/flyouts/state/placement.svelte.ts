@@ -46,6 +46,18 @@ $effect.root(() => {
     } else if (placement === "right") {
       x = monitor.rect.right - width - padding;
       y = Math.round(monitorCenterY - height / 2);
+    } else if (placement === "top-left") {
+      x = monitor.rect.left + padding;
+      y = monitor.rect.top + padding;
+    } else if (placement === "top-right") {
+      x = monitor.rect.right - width - padding;
+      y = monitor.rect.top + padding;
+    } else if (placement === "bottom-left") {
+      x = monitor.rect.left + padding;
+      y = monitor.rect.bottom - height - padding;
+    } else if (placement === "bottom-right") {
+      x = monitor.rect.right - width - padding;
+      y = monitor.rect.bottom - height - padding;
     } else {
       x = Math.round(monitorCenterX - width / 2);
       y = monitor.rect.bottom - height - padding;
