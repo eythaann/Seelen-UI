@@ -8,12 +8,10 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use seelen_core::system_state::StartMenuItem;
+use windows::Win32::UI::Shell::{FOLDERID_CommonStartMenu, FOLDERID_StartMenu};
 use windows::{
-    ApplicationModel::PackageCatalog,
-    Foundation::TypedEventHandler,
-    Management::Deployment::PackageManager,
-    Win32::UI::Shell::{FOLDERID_CommonPrograms, FOLDERID_Programs},
-    UI::StartScreen::StartScreenManager,
+    ApplicationModel::PackageCatalog, Foundation::TypedEventHandler,
+    Management::Deployment::PackageManager, UI::StartScreen::StartScreenManager,
 };
 
 use crate::{
@@ -35,6 +33,7 @@ pub struct StartMenuManager {
 pub enum StartMenuEvent {
     ItemAdded(Arc<StartMenuItem>),
     ItemRemoved(Arc<StartMenuItem>),
+    ItemsRefreshed,
 }
 
 event_manager!(StartMenuManager, StartMenuEvent);
@@ -45,13 +44,14 @@ unsafe impl Sync for StartMenuManager {}
 impl StartMenuManager {
     /// programs shared by all users
     pub fn common_items_path() -> PathBuf {
-        WindowsApi::known_folder(FOLDERID_CommonPrograms)
-            .expect("Failed to get common programs folder")
+        WindowsApi::known_folder(FOLDERID_CommonStartMenu)
+            .expect("Failed to get FOLDERID_CommonStartMenu folder path")
     }
 
     /// programs specific to the current user
     pub fn user_items_path() -> PathBuf {
-        WindowsApi::known_folder(FOLDERID_Programs).expect("Failed to get user programs folder")
+        WindowsApi::known_folder(FOLDERID_StartMenu)
+            .expect("Failed to get FOLDERID_StartMenu folder path")
     }
 
     fn new() -> StartMenuManager {
@@ -79,10 +79,16 @@ impl StartMenuManager {
                     // refresh without blocking
                     std::thread::spawn(|| {
                         let menu = StartMenuManager::instance();
-                        if let Ok(items) = Self::load_start_menu_items() {
-                            menu.list.replace(items);
-                            menu.store_cache().log_error();
-                        };
+                        match Self::load_start_menu_items() {
+                            Ok(items) => {
+                                menu.list.replace(items);
+                                menu.store_cache().log_error();
+                                Self::send(StartMenuEvent::ItemsRefreshed);
+                            }
+                            Err(e) => {
+                                log::error!("Failed to load start menu items: {e}");
+                            }
+                        }
                     });
                     // Setup listeners after loading cache
                     self.setup_listeners().log_error();

@@ -20,6 +20,7 @@
 - user menu slow render.
 - calendar language not being changed.
 - media player stucked state.
+- some lnk files (ex: docker) not appearing on apps menu.
 
 ## [2.5.4]
 
