@@ -140,10 +140,12 @@ impl StartMenuManager {
         for entry in std::fs::read_dir(dir)?.flatten() {
             let path = entry.path();
             let file_type = entry.file_type()?;
+
             if file_type.is_dir() {
                 items.extend(Self::_get_items(&path)?);
                 continue;
             }
+
             if file_type.is_file() {
                 let target = WindowsApi::resolve_lnk_target(&path).ok().map(|(t, _)| t);
                 // Get display name from filename without extension

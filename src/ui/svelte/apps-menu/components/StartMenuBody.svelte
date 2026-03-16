@@ -7,7 +7,8 @@
   import AllAppsView from "./AllAppsView.svelte";
   import { t } from "../i18n";
   import { Icon } from "libs/ui/svelte/components/Icon";
-  import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, SeelenEvent } from "@seelen-ui/lib";
+  import { emit } from "@tauri-apps/api/event";
 
   let contextMenu = $state<HTMLDivElement>();
   let contextMenuX = $state(0);
@@ -33,6 +34,22 @@
   function handleTogglePin() {
     if (activeContextMenuItem && "path" in activeContextMenuItem) {
       globalState.togglePin(activeContextMenuItem);
+    }
+    activeContextMenuItem = null;
+  }
+
+  function handlePinToDock() {
+    if (activeContextMenuItem && "path" in activeContextMenuItem) {
+      const item = activeContextMenuItem;
+      emit(SeelenEvent.WegAddItem, {
+        id: crypto.randomUUID(),
+        displayName: item.display_name,
+        umid: item.umid,
+        path: item.path,
+        pinned: true,
+        preventPinning: false,
+        relaunch: null,
+      });
     }
     activeContextMenuItem = null;
   }
@@ -115,6 +132,11 @@
           <span>{$t("open_file_location")}</span>
         </button>
       {/if}
+
+      <button class="context-menu-item" onclick={handlePinToDock}>
+        <Icon iconName="RiPushpinLine" />
+        <span>{$t("pin_to_dock")}</span>
+      </button>
 
       {#if activeContextMenuItem.umid || activeContextMenuItem.path.toLowerCase().endsWith(".lnk")}
         <button

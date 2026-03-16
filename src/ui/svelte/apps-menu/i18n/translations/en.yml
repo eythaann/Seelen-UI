@@ -5,6 +5,7 @@ folder: Folder
 no_matching_items: No items found matching your search
 open_file_location: Open File Location
 pin: Pin
+pin_to_dock: Pin to Dock
 query:
   all: All
   apps: Apps

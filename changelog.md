@@ -7,6 +7,7 @@
 - disable all css animations on performance mode extreme.
 - add more position options for flyouts.
 - show custom browser profile icons instead program one.
+- add 'pin to dock' option on apps menu widget.
 
 ### refactor
 
