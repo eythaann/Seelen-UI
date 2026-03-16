@@ -66,7 +66,7 @@
     "esbuild": "^0.27.3",
     "esbuild-css-modules-plugin": "^3.1.4",
     "express": "^4.21.2",
-    "framer-motion": "^12.23.0",
+    "framer-motion": "^12.37.0",
     "i18next": "^25.8.18",
     "js-yaml": "^4.1.0",
     "lefthook": "^2.1.4",
