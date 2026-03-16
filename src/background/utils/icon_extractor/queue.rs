@@ -1,4 +1,7 @@
-use std::{path::PathBuf, sync::LazyLock};
+use std::{
+    path::{Path, PathBuf},
+    sync::LazyLock,
+};
 
 use serde::{Deserialize, Serialize};
 use slu_utils::{debounce, Debounce};
@@ -15,6 +18,19 @@ use super::{_extract_and_save_icon_from_file, _extract_and_save_icon_umid};
 /// File extensions that are per-file (each has its own unique icon).
 /// Everything else is per-extension (all files of that type share the same shell icon).
 const PER_FILE_EXTENSIONS: &[&str] = &["exe", "lnk", "url"];
+
+/// Returns the real file path for Windows `path,index` icon notation (e.g. `"file.ico,0"` → `"file.ico"`).
+/// For normal paths the input is returned unchanged.
+fn real_path_for_ext(path: &Path) -> std::borrow::Cow<'_, std::path::Path> {
+    if let Some(s) = path.to_str() {
+        if let Some(comma) = s.rfind(',') {
+            if s[comma + 1..].trim().parse::<i32>().is_ok() {
+                return std::borrow::Cow::Owned(PathBuf::from(&s[..comma]));
+            }
+        }
+    }
+    std::borrow::Cow::Borrowed(path)
+}
 
 pub struct IconExtractor {
     failures: SyncVec<IconExtractorRequest>,
@@ -45,7 +61,8 @@ impl IconExtractor {
                 |_| {
                     let path = SEELEN_COMMON.app_cache_dir().join("icon_failures2.yml");
                     if let Ok(file) = std::fs::File::create(&path) {
-                        let _ = serde_yaml::to_writer(file, &Self::instance().failures.to_vec());
+                        serde_yaml::to_writer(file, &Self::instance().failures.to_vec())
+                            .log_error();
                     }
                 },
                 std::time::Duration::from_secs(2),
@@ -95,7 +112,8 @@ impl IconExtractor {
         }
         // For generic file paths, also check if the whole extension has been marked as failed.
         if let IconExtractorRequest::Path(path) = request {
-            if let Some(ext) = path.extension() {
+            let real = real_path_for_ext(path);
+            if let Some(ext) = real.extension() {
                 let ext_lower = ext.to_string_lossy().to_lowercase();
                 if !PER_FILE_EXTENSIONS.contains(&ext_lower.as_str()) {
                     return self
@@ -112,7 +130,8 @@ impl IconExtractor {
     /// with that extension to keep the failure list compact.
     fn record_failure(&self, request: IconExtractorRequest) {
         if let IconExtractorRequest::Path(ref path) = request {
-            if let Some(ext) = path.extension() {
+            let real = real_path_for_ext(path);
+            if let Some(ext) = real.extension() {
                 let ext_lower = ext.to_string_lossy().to_lowercase();
                 if !PER_FILE_EXTENSIONS.contains(&ext_lower.as_str()) {
                     // Remove any individual path entries already stored for this extension.

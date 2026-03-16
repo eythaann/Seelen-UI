@@ -32,7 +32,7 @@
   }}
 >
   <div class="window-header">
-    <FileIcon umid={windowData?.umid} path={windowData?.process?.path} />
+    <FileIcon umid={windowData?.umid} path={windowData?.relaunch?.icon || windowData?.process?.path} />
     <div class="window-title">
       {windowData?.title || hwnd.toString(16)}
     </div>

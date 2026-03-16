@@ -1,4 +1,7 @@
-use std::{path::Path, sync::LazyLock};
+use std::{
+    path::{Path, PathBuf},
+    sync::LazyLock,
+};
 
 use seelen_core::chrono::{DateTime, Utc};
 use seelen_core::{
@@ -150,7 +153,8 @@ impl ResourceManager {
             return;
         }
 
-        let source_mtime = path.and_then(last_edit_at);
+        // Strip any `path,index` suffix before stat-ing the file so mtime is always valid.
+        let source_mtime = path.map(strip_icon_index).as_deref().and_then(last_edit_at);
         self.with_system_pack(|system_pack| {
             system_pack.add_entry(IconPackEntry::Unique(UniqueIconPackEntry {
                 umid: umid.map(|s| s.to_string()),
@@ -241,7 +245,12 @@ impl ResourceManager {
                 // leftover from a previous app version whose path has since changed) does not
                 // short-circuit the search and prevent a later, valid entry for the same UMID
                 // from being found.
-                let entry_current_mtime = entry.path.as_deref().and_then(last_edit_at);
+                let entry_current_mtime = entry
+                    .path
+                    .as_deref()
+                    .map(strip_icon_index)
+                    .as_deref()
+                    .and_then(last_edit_at);
                 if let (Some(cached), Some(current)) = (entry.source_mtime, entry_current_mtime) {
                     if cached != current {
                         continue;
@@ -291,4 +300,18 @@ fn last_edit_at(path: &Path) -> Option<DateTime<Utc>> {
     let meta = std::fs::metadata(path).ok()?;
     let date = meta.modified().ok()?;
     Some(date.into())
+}
+
+/// Strips the Windows `path,index` icon notation suffix if present, returning the real file path.
+/// For example `"C:\foo\bar.ico,0"` → `PathBuf("C:\foo\bar.ico")`.
+/// Paths without a `,<integer>` suffix are returned as-is.
+fn strip_icon_index(path: &Path) -> std::borrow::Cow<'_, Path> {
+    if let Some(s) = path.to_str() {
+        if let Some(comma) = s.rfind(',') {
+            if s[comma + 1..].trim().parse::<i32>().is_ok() {
+                return std::borrow::Cow::Owned(PathBuf::from(&s[..comma]));
+            }
+        }
+    }
+    std::borrow::Cow::Borrowed(path)
 }

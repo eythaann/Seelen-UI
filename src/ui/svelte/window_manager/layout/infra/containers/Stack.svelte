@@ -27,7 +27,7 @@
           data-allow-mouse-events={overlayVisible}
         >
           <FileIcon
-            path={info?.process?.path}
+            path={info?.relaunch?.icon || info?.process?.path}
             umid={info?.umid}
             class="wm-stack-bar-item-icon"
             data-allow-mouse-events={overlayVisible}

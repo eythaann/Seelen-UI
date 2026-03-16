@@ -96,7 +96,7 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       onContextMenu={onContextMenu}
     >
       <BackgroundByLayersV2 prefix="item" />
-      <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
+      <FileIcon className="weg-item-icon" path={item.relaunch?.icon || item.path} umid={item.umid} />
       {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
       {notificationsCount > 0 && <div className="weg-item-notification-badge">{notificationsCount}</div>}
       {$settings.value.showInstanceCounter && windows.length > 1 && (

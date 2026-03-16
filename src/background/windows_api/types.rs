@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 use super::WindowsApi;
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", content = "value")]
 pub enum AppUserModelId {
     /// aumid added to the app start menu shortcut (eg: "com.squirrel.Discord.Discord")
     PropertyStore(String),

@@ -135,10 +135,19 @@ export function getUserApplicationContextMenu(
 }
 
 export function launchItem(item: AppOrFileWegItem, elevated: boolean) {
+  if (item.relaunch) {
+    return invoke(SeelenCommand.Run, {
+      program: item.relaunch.command,
+      args: item.relaunch.args,
+      workingDir: item.relaunch.workingDir,
+      elevated,
+    });
+  }
+
   return invoke(SeelenCommand.Run, {
-    program: item.relaunch?.command || item.umid ? `shell:AppsFolder\\${item.umid}` : item.path,
-    args: item.relaunch?.args || null,
-    workingDir: item.relaunch?.workingDir || null,
+    program: item.umid ? `shell:AppsFolder\\${item.umid}` : item.path,
+    args: null,
+    workingDir: null,
     elevated,
   });
 }

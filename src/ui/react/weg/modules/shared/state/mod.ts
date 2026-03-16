@@ -8,6 +8,8 @@ effect(() => {
   const interactables = $interactables.value;
   const state = $dock_state.value;
 
+  console.log(interactables);
+
   const appOrFileItems = state.items.filter(
     (item): item is AppOrFileWegItem => item.type === WegItemType.AppOrFile,
   );

@@ -208,6 +208,7 @@ impl<T, E: Into<AppError>> ErrorMap<T> for core::result::Result<T, E> {
 
 impl<T, E: Into<AppError>> ResultLogExt for core::result::Result<T, E> {
     #[inline(always)]
+    #[track_caller]
     fn log_error(self) {
         if let Err(err) = self {
             log::error!("{:?}", err.into());

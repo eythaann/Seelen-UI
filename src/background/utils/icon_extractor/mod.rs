@@ -335,7 +335,7 @@ fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
     let reader = std::io::BufReader::new(file);
 
     let mut icon_file = None;
-    let mut _icon_idx: Option<i32> = None;
+    let mut icon_idx: Option<i32> = None;
 
     // in theory .url files are encoded in UTF-8 so we don't need to use OsString
     for line in reader.lines() {
@@ -343,12 +343,65 @@ fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
         if let Some(stripped) = line.strip_prefix("IconFile=") {
             icon_file = Some(PathBuf::from(stripped));
         } else if let Some(stripped) = line.strip_prefix("IconIndex=") {
-            _icon_idx = Some(stripped.parse()?);
+            icon_idx = Some(stripped.parse()?);
         }
     }
 
     let icon_file = icon_file.ok_or("Url does not have IconFile")?;
-    extract_icon_from_module(&icon_file, _icon_idx.unwrap_or(0))
+    extract_icon_from_module(&icon_file, icon_idx.unwrap_or(0))
+}
+
+/// Parses Windows-style `path,index` icon notation (e.g. `C:\foo\bar.ico,0`).
+///
+/// Returns `(path, index)` only when the string ends with `,<integer>` **and** the path
+/// before the comma points to an existing file.
+fn parse_path_with_icon_index(raw: &Path) -> Option<(PathBuf, i32)> {
+    let s = raw.to_str()?;
+    let comma = s.rfind(',')?;
+    let index: i32 = s[comma + 1..].trim().parse().ok()?;
+    let path = PathBuf::from(s[..comma].trim());
+    if path.exists() && !path.is_dir() {
+        Some((path, index))
+    } else {
+        None
+    }
+}
+
+/// Extracts an icon from a file at a specific resource index and saves it.
+///
+/// `key` is the original `path,index` string (e.g. `C:\foo\bar.ico,0`) used as the lookup
+/// key in RESOURCES, so different indices of the same file are stored independently.
+/// `path` is the actual file path without the index suffix.
+fn _extract_and_save_icon_from_module_with_index(
+    key: &Path,
+    path: &Path,
+    index: i32,
+) -> Result<()> {
+    if RESOURCES.has_app_icon(None, Some(key)) {
+        return Ok(());
+    }
+
+    let filestem = path.file_stem().ok_or("Failed to get file stem")?;
+    let gen_icon_filename = format!("{}_{}.png", filestem.to_string_lossy(), date_based_hex_id());
+
+    log::trace!("Extracting icon (index {index}) for {:?}", path.file_name());
+
+    let image = extract_icon_from_module(path, index)?;
+    let image = crop_transparent_borders(&image);
+
+    let gen_icon = Icon {
+        base: Some(gen_icon_filename.clone()),
+        is_aproximately_square: is_aproximately_a_square(&image),
+        ..Default::default()
+    };
+
+    image.save(
+        SEELEN_COMMON
+            .system_icon_pack_path()
+            .join(&gen_icon_filename),
+    )?;
+    RESOURCES.add_system_app_icon(None, Some(key), gen_icon);
+    Ok(())
 }
 
 /// returns the path of the icon extracted from the executable or copied if is an UWP app.
@@ -358,6 +411,10 @@ fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
 /// umid on this case only applys to Property Store umid
 fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> Result<()> {
     if !origin.exists() || origin.is_dir() {
+        // Handle Windows path,index notation (e.g. "C:\path\app.exe,2" or "file.ico,0")
+        if let Some((real_path, index)) = parse_path_with_icon_index(origin) {
+            return _extract_and_save_icon_from_module_with_index(origin, &real_path, index);
+        }
         return Err(format!("File not found: {}", origin.display()).into());
     }
 

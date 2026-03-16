@@ -93,7 +93,7 @@
   onfocus={handleFocus}
 >
   <div class="task-header">
-    <FileIcon class="task-icon" umid={task.umid} path={task.process.path} />
+    <FileIcon class="task-icon" path={task.relaunch?.icon || task.process.path} umid={task.umid} />
     <div class="task-title">{task.title}</div>
     <button
       data-skin="transparent"
