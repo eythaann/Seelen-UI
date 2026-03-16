@@ -33,6 +33,10 @@ pub struct UserAppWindow {
     pub umid: Option<String>,
     /// if the window is a frame, this information will be mapped to the process creator
     pub process: ProcessInformation,
+    /// this app window can not be pinned
+    pub prevent_pinning: bool,
+    /// custom method to create start this application
+    pub relaunch: Option<Relaunch>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -48,4 +52,34 @@ pub struct UserAppWindowPreview {
     pub path: PathBuf,
     pub width: u32,
     pub height: u32,
+}
+
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
+pub struct Relaunch {
+    /// program to be executed
+    pub command: String,
+    /// arguments to be passed to the relaunch program
+    pub args: Option<RelaunchArguments>,
+    /// path where ejecute the relaunch command
+    pub working_dir: Option<PathBuf>,
+    /// custom relaunch/window icon
+    pub icon: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(untagged)]
+pub enum RelaunchArguments {
+    Array(Vec<String>),
+    String(String),
+}
+
+impl std::fmt::Display for RelaunchArguments {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let args = match self {
+            RelaunchArguments::String(args) => args.clone(),
+            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
+        };
+        write!(f, "{}", args)
+    }
 }

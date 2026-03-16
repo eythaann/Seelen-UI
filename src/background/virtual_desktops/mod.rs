@@ -5,11 +5,12 @@ pub mod wallpapers;
 
 use std::collections::HashMap;
 use std::fs::File;
+use std::io::Write;
 use std::sync::LazyLock;
 
 use seelen_core::state::{DesktopWorkspace, VirtualDesktopMonitor, VirtualDesktops, WorkspaceId};
 use seelen_core::system_state::MonitorId;
-use tokio::io::AsyncWriteExt;
+use slu_utils::{debounce, Debounce};
 use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
 
 use crate::error::{Result, ResultLogExt};
@@ -18,7 +19,6 @@ use crate::modules::apps::application::{UserAppWinEvent, UserAppsManager};
 use crate::modules::monitors::{MonitorManager, MonitorManagerEvent};
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::lock_free::{SyncHashMap, SyncVec};
-use crate::utils::Debouncer;
 use crate::virtual_desktops::wallpapers::WorkspaceWallpapersManager;
 use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
@@ -54,18 +54,25 @@ impl SluWorkspacesManager2 {
     }
 
     fn request_save(&self) {
-        static SAVE_DEBOUNCER: LazyLock<Debouncer> =
-            LazyLock::new(|| Debouncer::new(std::time::Duration::from_secs(2)));
-
-        SAVE_DEBOUNCER.call(async move || {
-            let state: VirtualDesktops = Self::instance().into();
-            let path = SEELEN_COMMON.app_cache_dir().join("workspaces2.json");
-            let mut file = tokio::fs::File::create(path).await?;
-            file.write_all(&serde_json::to_vec(&state)?).await?;
-            file.flush().await?;
-            log::trace!("desktop workspaces successfully saved");
-            Result::Ok(())
+        static SAVE_DEBOUNCER: LazyLock<Debounce<()>> = LazyLock::new(|| {
+            debounce(
+                |_| {
+                    let fun = || {
+                        let state: VirtualDesktops = SluWorkspacesManager2::instance().into();
+                        let path = SEELEN_COMMON.app_cache_dir().join("workspaces2.json");
+                        let mut file = std::fs::File::create(path)?;
+                        file.write_all(&serde_json::to_vec(&state)?)?;
+                        file.flush()?;
+                        log::trace!("desktop workspaces successfully saved");
+                        Result::Ok(())
+                    };
+                    fun().log_error();
+                },
+                std::time::Duration::from_secs(2),
+            )
         });
+
+        SAVE_DEBOUNCER.call(());
     }
 
     fn create() -> Self {

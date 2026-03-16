@@ -15,7 +15,7 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use seelen_core::{
-    resource::{ResourceKind, WidgetId},
+    resource::ResourceKind,
     state::{AppsConfigurationList, CssStyles, SluPopupConfig, SluPopupContent, WegItems},
 };
 use std::{
@@ -93,22 +93,12 @@ impl FullState {
         let mut wallpapers_changed = false;
 
         let mut settings_changed = false;
-        let mut weg_items_changed = false;
 
         // Single iteration over the changed paths
         for path in changed {
             if !icons_changed && path.starts_with(SEELEN_COMMON.user_icons_path()) {
                 icons_changed = true;
             };
-
-            if !weg_items_changed
-                && path
-                    == &SEELEN_COMMON
-                        .widget_data_dir(&WidgetId::known_weg())
-                        .join("state.yml")
-            {
-                weg_items_changed = true;
-            }
 
             if !themes_changed
                 && (path.starts_with(SEELEN_COMMON.user_themes_path())
@@ -137,15 +127,6 @@ impl FullState {
 
             if !wallpapers_changed && path.starts_with(SEELEN_COMMON.user_wallpapers_path()) {
                 wallpapers_changed = true;
-            }
-        }
-
-        if weg_items_changed {
-            let old = self.weg_items.clone();
-            self.read_weg_items();
-            if old != self.weg_items {
-                log::info!("Weg Items changed");
-                self.emit_weg_items()?;
             }
         }
 
@@ -215,9 +196,6 @@ impl FullState {
             },
         )?;
 
-        let dock_state = SEELEN_COMMON
-            .widget_data_dir(&WidgetId::known_weg())
-            .join("state.yml");
         let paths: Vec<&Path> = vec![
             SEELEN_COMMON.settings_path(),
             SEELEN_COMMON.user_icons_path(),
@@ -225,8 +203,6 @@ impl FullState {
             SEELEN_COMMON.user_plugins_path(),
             SEELEN_COMMON.user_widgets_path(),
             SEELEN_COMMON.user_wallpapers_path(),
-            // special case, this should be removed after refactoring on dock in future versions.
-            &dock_state,
         ];
 
         for path in paths {

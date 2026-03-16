@@ -9,16 +9,17 @@ import { useTranslation } from "react-i18next";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
-import type { PinnedWegItem, TemporalWegItem } from "../../shared/types.ts";
+import type { AppOrFileWegItem } from "../../shared/types.ts";
 
-import { $delayedFocused, $focused, $notifications, $settings } from "../../shared/state/mod.ts";
+import { $delayedFocused, $focused, $interactables, $notifications, $settings } from "../../shared/state/mod.ts";
 import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
-import { getUserApplicationContextMenu } from "./UserApplicationContextMenu.tsx";
+import { getWindowsForItem } from "../../shared/state/windows.ts";
+import { getUserApplicationContextMenu, launchItem } from "./UserApplicationContextMenu.tsx";
 import { UserApplicationPreview } from "./UserApplicationPreview.tsx";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
 
 interface Props {
-  item: PinnedWegItem | TemporalWegItem;
+  item: AppOrFileWegItem;
   isOverlay?: boolean;
 }
 
@@ -54,45 +55,42 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
     }
   });
 
+  const windows = getWindowsForItem(item, $interactables.value);
+
   const onContextMenu = useCallback(
     (e: MouseEvent) => {
       e.stopPropagation();
       setOpenPreview(false);
       const { alignX, alignY } = getDockContextMenuAlignment($settings.value.position);
       invoke(SeelenCommand.TriggerContextMenu, {
-        menu: { ...getUserApplicationContextMenu(t, item), alignX, alignY },
+        menu: { ...getUserApplicationContextMenu(t, item, windows), alignX, alignY },
         forwardTo: null,
       });
     },
-    [item, t],
+    [item, windows, t],
   );
 
   const notificationsCount = $notifications.value.filter((n) => n.appUmid === item.umid).length;
-  const itemLabel = $settings.value.showWindowTitle && item.windows.length ? item.windows[0]!.title : null;
+  const itemLabel = $settings.value.showWindowTitle && windows.length ? windows[0]!.title : null;
 
   const itemNode = (
     <div
       className="weg-item"
       onClick={() => {
-        let window = item.windows[0];
+        const window = windows[0];
         if (!window) {
-          invoke(SeelenCommand.Run, {
-            program: item.relaunchProgram,
-            args: item.relaunchArgs,
-            workingDir: item.relaunchIn,
-            elevated: false,
-          });
+          launchItem(item, false);
         } else {
           invoke(SeelenCommand.WegToggleWindowState, {
-            hwnd: window.handle,
-            wasFocused: $delayedFocused.value?.hwnd === window.handle,
+            hwnd: window.hwnd,
+            wasFocused: $delayedFocused.value?.hwnd === window.hwnd,
           });
         }
       }}
       onAuxClick={(e) => {
-        let window = item.windows[0];
+        const window = windows[0];
         if (e.button === 1 && window) {
-          invoke(SeelenCommand.WegCloseApp, { hwnd: window.handle });
+          invoke(SeelenCommand.WegCloseApp, { hwnd: window.hwnd });
         }
       }}
       onContextMenu={onContextMenu}
@@ -101,16 +99,14 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       <FileIcon className="weg-item-icon" path={item.path} umid={item.umid} />
       {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
       {notificationsCount > 0 && <div className="weg-item-notification-badge">{notificationsCount}</div>}
-      {$settings.value.showInstanceCounter && item.windows.length > 1 && (
-        <div className="weg-item-instance-counter-badge">{item.windows.length}</div>
+      {$settings.value.showInstanceCounter && windows.length > 1 && (
+        <div className="weg-item-instance-counter-badge">{windows.length}</div>
       )}
       {!$settings.value.showWindowTitle && (
         <div
           className={cx("weg-item-open-sign", {
-            "weg-item-open-sign-active": !!item.windows.length,
-            "weg-item-open-sign-focused": item.windows.some(
-              (w) => w.handle === $focused.value.hwnd,
-            ),
+            "weg-item-open-sign-active": windows.length > 0,
+            "weg-item-open-sign-focused": windows.some((w) => w.hwnd === $focused.value.hwnd),
           })}
         />
       )}
@@ -142,14 +138,10 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
           prefix="preview"
         >
           <div className="weg-item-preview-scrollbar">
-            {item.windows.map((window) => (
-              <UserApplicationPreview
-                key={window.handle}
-                title={window.title}
-                hwnd={window.handle}
-              />
+            {windows.map((window) => (
+              <UserApplicationPreview key={window.hwnd} title={window.title} hwnd={window.hwnd} />
             ))}
-            {item.windows.length === 0 && <div className="weg-item-display-name">{item.displayName}</div>}
+            {windows.length === 0 && <div className="weg-item-display-name">{item.displayName}</div>}
           </div>
         </BackgroundByLayersV2>
       }

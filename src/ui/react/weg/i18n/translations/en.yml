@@ -23,7 +23,6 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: Pin Custom File
-  add_folder: Pin Custom Folder
   desktop: Add Desktop Module
   media: Add Media Module
   settings: Settings

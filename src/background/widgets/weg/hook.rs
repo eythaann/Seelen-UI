@@ -15,35 +15,6 @@ use crate::{
 use super::{SeelenWeg, TASKBAR_CLASS};
 
 impl SeelenWeg {
-    pub fn process_global_win_event(event: WinEvent, window: &Window) -> Result<()> {
-        match event {
-            WinEvent::SystemMoveSizeEnd => {
-                if Self::contains_app(window) {
-                    Self::update_app(window)?;
-                }
-            }
-            WinEvent::SystemForeground => {
-                if Self::contains_app(window) {
-                    Self::foregrounded_app(window)?;
-                }
-            }
-            WinEvent::ObjectNameChange => {
-                if Self::contains_app(window) {
-                    Self::update_app(window)?;
-                }
-            }
-            WinEvent::SystemMinimizeStart
-            | WinEvent::SystemMinimizeEnd
-            | WinEvent::SynThrottledForegroundRectChange => {
-                if Self::contains_app(window) {
-                    Self::update_app(window)?;
-                }
-            }
-            _ => {}
-        }
-        Ok(())
-    }
-
     pub fn process_individual_win_event(&mut self, event: WinEvent, origin: &Window) -> Result<()> {
         if event == WinEvent::ObjectLocationChange && origin.hwnd() == self.hwnd()? {
             self.reposition_if_needed()?;

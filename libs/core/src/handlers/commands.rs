@@ -156,7 +156,7 @@ slu_commands_declaration! {
     RemoveResource = remove_resource(id: ResourceId, kind: ResourceKind),
 
     StateGetThemes = state_get_themes() -> Vec<Theme>,
-    StateGetWegItems = state_get_weg_items(monitor_id: Option<MonitorId>) -> WegItems,
+    StateGetWegItems = state_get_weg_items() -> WegItems,
     StateWriteWegItems = state_write_weg_items(items: WegItems),
     StateGetToolbarItems = state_get_toolbar_items() -> ToolbarState,
     StateWriteToolbarItems = state_write_toolbar_items(items: ToolbarState),

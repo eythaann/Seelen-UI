@@ -3,7 +3,7 @@ import { dialog } from "@seelen-ui/lib/tauri";
 import type { ContextMenu } from "@seelen-ui/lib/types";
 import type { TFunction } from "i18next";
 
-import { WegItemType, type WidgetId } from "@seelen-ui/lib/types";
+import type { WidgetId } from "@seelen-ui/lib/types";
 
 import { $dock_state, $dock_state_actions } from "../shared/state/items.ts";
 
@@ -44,44 +44,11 @@ Widget.self.webview.listen(onBarMenuClick, async ({ payload }) => {
     for (const path of files || []) {
       await invoke(SeelenCommand.WegPinItem, { path });
     }
-  } else if (key === "add-folder") {
-    const folder = await dialog.open({
-      title: _t("taskbar_menu.add_folder"),
-      directory: true,
-    });
-    if (folder) {
-      await invoke(SeelenCommand.WegPinItem, { path: folder });
-    }
   }
 });
 
 export function getSeelenWegMenu(t: TFunction): ContextMenu {
   _t = t;
-
-  const isRestrictedBar = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length > 0 &&
-    $dock_state.value.items.every((item) => item.type === WegItemType.Temporal && item.pinDisabled);
-
-  if (isRestrictedBar) {
-    return {
-      identifier,
-      items: [
-        {
-          type: "Item",
-          key: "task_manager",
-          icon: "PiChartLineFill",
-          label: t("taskbar_menu.task_manager"),
-          callbackEvent: onBarMenuClick,
-        },
-        {
-          type: "Item",
-          key: "settings",
-          icon: "RiSettings4Fill",
-          label: t("taskbar_menu.settings"),
-          callbackEvent: onBarMenuClick,
-        },
-      ],
-    };
-  }
 
   return {
     identifier,
@@ -113,13 +80,6 @@ export function getSeelenWegMenu(t: TFunction): ContextMenu {
         key: "add-item",
         icon: "RiFileAddLine",
         label: t("taskbar_menu.add_file"),
-        callbackEvent: onBarMenuClick,
-      },
-      {
-        type: "Item",
-        key: "add-folder",
-        icon: "RiFolderAddLine",
-        label: t("taskbar_menu.add_folder"),
         callbackEvent: onBarMenuClick,
       },
       { type: "Separator" },

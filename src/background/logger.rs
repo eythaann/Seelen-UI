@@ -73,6 +73,7 @@ impl SeelenLogger {
                         if record.level() == log::Level::Error {
                             record
                                 .file()
+                                .filter(|f| !f.contains("exposed.rs"))
                                 .map(|f| {
                                     format!(
                                         "{}:{}",

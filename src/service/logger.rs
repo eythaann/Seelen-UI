@@ -94,11 +94,11 @@ impl SluServiceLogger {
                     out.finish(format_args!(
                         "[{}][{}] {}",
                         match record.level() {
-                            log::Level::Error => "ERROR".red().to_string(),
-                            log::Level::Warn => "WARN~".yellow().to_string(),
-                            log::Level::Info => "INFO~".bright_blue().to_string(),
-                            log::Level::Debug => "DEBUG".bright_green().to_string(),
-                            log::Level::Trace => "TRACE".bright_black().to_string(),
+                            log::Level::Error => "ERROR".to_string(),
+                            log::Level::Warn => "WARN~".to_string(),
+                            log::Level::Info => "INFO~".to_string(),
+                            log::Level::Debug => "DEBUG".to_string(),
+                            log::Level::Trace => "TRACE".to_string(),
                         },
                         if record.level() == log::Level::Error {
                             record

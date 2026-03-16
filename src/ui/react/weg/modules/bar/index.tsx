@@ -9,7 +9,7 @@ import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayer
 import { $dock_should_be_hidden, $settings } from "../shared/state/mod.ts";
 import { getDockContextMenuAlignment } from "../shared/state/settings.ts";
 import { DockItems } from "./ItemReordableList.tsx";
-import { getSeelenWegMenu } from "./menu.tsx";
+import { getSeelenWegMenu } from "./DockMenu.tsx";
 
 export function SeelenWeg() {
   const { t } = useTranslation();

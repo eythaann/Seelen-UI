@@ -15,7 +15,7 @@ use std::{
     fs::{create_dir_all, File},
     io::Write,
     path::{Path, PathBuf},
-    sync::{atomic::AtomicBool, Arc, LazyLock},
+    sync::{atomic::AtomicBool, LazyLock},
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
@@ -26,7 +26,7 @@ use windows::{
     Win32::UI::Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
 };
 
-use crate::{error::Result, get_tokio_handle};
+use crate::error::Result;
 
 /// Writes `content` to `path` atomically: writes to a sibling `.tmp` file first,
 /// syncs to disk, then renames into place. This guarantees the target file is
@@ -197,38 +197,28 @@ pub fn date_based_hex_id() -> String {
     format!("{since_epoch:x}")
 }
 
-pub struct Debouncer {
-    delay: Duration,
-    task: Arc<Mutex<Option<tokio::task::JoinHandle<()>>>>,
-}
+pub fn get_parts_of_inline_command(cmd: &str) -> (String, Option<String>) {
+    let start_double_quoted = cmd.starts_with("\"");
+    if start_double_quoted || cmd.starts_with("'") {
+        let delimiter = if start_double_quoted { '"' } else { '\'' };
+        let mut parts = cmd.split(['"', '\'']).filter(|s| !s.is_empty());
 
-impl Debouncer {
-    /// Create a new debouncer with a delay.
-    pub fn new(delay: Duration) -> Self {
-        Debouncer {
-            delay,
-            task: Arc::new(Mutex::new(None)),
-        }
+        let program = parts.next().unwrap_or_default().trim().to_owned();
+        let args = cmd
+            .trim_start_matches(&format!("{delimiter}{program}{delimiter}"))
+            .trim()
+            .to_owned();
+        return (program, if args.is_empty() { None } else { Some(args) });
     }
 
-    /// Call the function after the delay.
-    pub fn call<F, Fut, R>(&self, f: F)
-    where
-        F: FnOnce() -> Fut + Send + 'static,
-        Fut: std::future::Future<Output = R> + Send + 'static,
-    {
-        let mut task = self.task.lock();
-
-        // Cancel existing timer if it exists
-        if let Some(handle) = task.take() {
-            handle.abort();
-        }
-
-        // Set a new timer
-        let delay = self.delay;
-        *task = Some(get_tokio_handle().spawn(async move {
-            tokio::time::sleep(delay).await;
-            f().await;
-        }));
+    let cmd_as_path = PathBuf::from(cmd);
+    if cmd_as_path.exists() {
+        let program = cmd_as_path.to_string_lossy().to_string();
+        return (program, None);
     }
+
+    let mut parts = cmd.split(" ").filter(|s| !s.is_empty());
+    let program = parts.next().unwrap_or_default().trim().to_owned();
+    let args = cmd.trim_start_matches(&program).trim().to_owned();
+    (program, if args.is_empty() { None } else { Some(args) })
 }

@@ -1,34 +1,14 @@
-use std::{ffi::OsStr, path::PathBuf};
+use std::path::PathBuf;
 
-use seelen_core::{
-    state::{PinnedWegItemData, RelaunchArguments, WegItem, WegItemSubtype, WegItems},
-    system_state::MonitorId,
-};
+use seelen_core::{handlers::SeelenEvent, state::WegItemData};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    app::get_app_handle,
+    app::{emit_to_webviews, get_app_handle},
     error::Result,
-    state::application::FULL_STATE,
-    trace_lock,
-    widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
     windows_api::{window::Window, WindowsApi},
 };
 use windows::Win32::UI::WindowsAndMessaging::{SW_SHOWMINNOACTIVE, WM_CLOSE};
-
-#[tauri::command(async)]
-pub fn state_get_weg_items(monitor_id: Option<MonitorId>) -> WegItems {
-    let guard = trace_lock!(SEELEN_WEG_STATE);
-    if let Some(id) = monitor_id {
-        return guard
-            .get_filtered_by_monitor()
-            .unwrap_or_default()
-            .get(&id)
-            .cloned()
-            .unwrap_or_else(|| guard.items.clone());
-    }
-    guard.items.clone()
-}
 
 #[tauri::command(async)]
 pub fn weg_close_app(hwnd: isize) -> Result<()> {
@@ -63,56 +43,29 @@ pub fn weg_toggle_window_state(hwnd: isize, was_focused: bool) -> Result<()> {
     Ok(())
 }
 
-#[allow(deprecated)]
 #[tauri::command(async)]
 pub fn weg_pin_item(path: PathBuf) -> Result<()> {
-    let display_name = if let Some(name) = path.file_name() {
-        name.to_string_lossy().to_string()
-    } else {
-        "Unknown".to_string()
-    };
-
-    let subtype = if path.is_dir() {
-        WegItemSubtype::Folder
-    } else if path.ends_with(".exe") {
-        WegItemSubtype::App
-    } else {
-        WegItemSubtype::File
-    };
-
-    // todo add support to UWP for seelen rofi
-    let mut data = PinnedWegItemData {
-        id: uuid::Uuid::new_v4().to_string(),
-        subtype,
-        umid: None,
-        display_name,
-        path: path.clone(),
-        is_dir: false,
-        relaunch_program: path.to_string_lossy().to_string(),
-        relaunch_args: None,
-        relaunch_in: None,
-        windows: vec![],
-        pin_disabled: false,
-    };
-
-    if path.extension() == Some(OsStr::new("lnk")) {
-        data.umid = WindowsApi::get_file_umid(&path).ok();
-        let (program, arguments) = WindowsApi::resolve_lnk_target(&path)?;
-        data.is_dir = program.is_dir();
-        data.relaunch_program = program.to_string_lossy().to_string(); //
-        data.relaunch_args = Some(RelaunchArguments::String(
-            arguments.to_string_lossy().to_string(),
-        ));
-
-        if program.extension() == Some(OsStr::new("exe")) {
-            data.subtype = WegItemSubtype::App;
-        }
+    if !path.exists() || path.is_dir() {
+        return Err("Invalid path".into());
     }
 
-    let guard = FULL_STATE.load();
-    let mut items = guard.weg_items.clone();
-    items.center.insert(0, WegItem::Pinned(data));
-    items.sanitize();
-    guard.write_weg_items(&items)?;
+    let umid = WindowsApi::get_file_umid(&path).ok();
+    let display_name = WindowsApi::get_executable_display_name(&path).unwrap_or_else(|_| {
+        path.file_stem()
+            .map(|s| s.to_string_lossy().to_string())
+            .unwrap_or_else(|| "Unknown".to_string())
+    });
+
+    let item = WegItemData {
+        id: uuid::Uuid::new_v4(),
+        display_name,
+        umid,
+        path,
+        pinned: true,
+        prevent_pinning: false,
+        relaunch: None,
+    };
+
+    emit_to_webviews(SeelenEvent::WegAddItem, &item);
     Ok(())
 }

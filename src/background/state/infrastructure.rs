@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{
     by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, IconPackEntry,
-    PerformanceMode, Wallpaper, WegItems, WegPinnedItemsVisibility,
+    PerformanceMode, Wallpaper, WegItems,
 };
 use tauri_plugin_dialog::DialogExt;
 
@@ -13,7 +13,7 @@ use crate::{
     log_error,
     state::application::performance::PERFORMANCE_MODE,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
-    windows_api::{window::Window, WindowsApi},
+    windows_api::WindowsApi,
 };
 
 use super::{
@@ -38,18 +38,13 @@ pub fn state_write_toolbar_items(mut items: ToolbarState) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Result<()> {
-    items.sanitize();
-    let guard = FULL_STATE.load();
+pub fn state_get_weg_items() -> WegItems {
+    FULL_STATE.load().weg_items.clone()
+}
 
-    let monitor = Window::from(window.hwnd()?.0 as isize).monitor();
-    let device_id = monitor.stable_id()?;
-    if guard.get_weg_pinned_item_visibility(&device_id) == WegPinnedItemsVisibility::WhenPrimary
-        && !monitor.is_primary()
-        || items == guard.weg_items
-    {
-        return Ok(());
-    }
+#[tauri::command(async)]
+pub fn state_write_weg_items(mut items: WegItems) -> Result<()> {
+    items.sanitize();
     FULL_STATE.rcu(|state| {
         let mut state = state.cloned();
         state.weg_items = items.clone();

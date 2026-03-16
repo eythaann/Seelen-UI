@@ -6,7 +6,6 @@ use crate::{
     resources::RESOURCES,
     trace_lock,
     utils::constants::SEELEN_COMMON,
-    widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
 };
 
 use super::FullState;
@@ -14,9 +13,7 @@ use super::FullState;
 impl FullState {
     pub(super) fn emit_settings(&self) -> Result<()> {
         emit_to_webviews(SeelenEvent::StateSettingsChanged, &self.settings);
-
         trace_lock!(SEELEN).on_settings_change(self)?;
-        trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }
 

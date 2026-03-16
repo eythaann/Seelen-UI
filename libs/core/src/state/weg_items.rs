@@ -1,118 +1,53 @@
 use std::{collections::HashSet, path::PathBuf};
 
-use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use ts_rs::TS;
 
-#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+use crate::system_state::{Relaunch, RelaunchArguments};
+
+#[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
 #[serde(default, rename_all = "camelCase")]
-pub struct WegAppGroupItem {
-    pub handle: isize,
-    pub title: String,
-    pub is_iconic: bool,
-    pub is_zoomed: bool,
-    /// last time the app was active, timestamp in milliseconds,
-    /// could be 0 if we don't know when the app was actived
-    pub last_active: u64,
-}
-
-#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
-pub enum WegItemSubtype {
-    File,
-    Folder,
-    App,
-    /// this is used for backward compatibility, will be removed in v3
-    #[default]
-    UnknownV2_1_6,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(untagged)]
-pub enum RelaunchArguments {
-    Array(Vec<String>),
-    String(String),
-}
-
-impl std::fmt::Display for RelaunchArguments {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let args = match self {
-            RelaunchArguments::String(args) => args.clone(),
-            RelaunchArguments::Array(args) => args.join(" ").trim().to_owned(),
-        };
-        write!(f, "{}", args)
-    }
-}
-
-#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
-pub struct PinnedWegItemData {
+pub struct WegItemData {
     /// internal UUID to differentiate items
-    pub id: String,
-    /// Subtype of the item (mandatory, but is optional for backward compatibility)
-    pub subtype: WegItemSubtype,
-    /// Application user model id.
-    pub umid: Option<String>,
-    /// path to file, forder or program.
-    pub path: PathBuf,
-    /// program to be executed
-    pub relaunch_program: String,
-    /// arguments to be passed to the relaunch program
-    pub relaunch_args: Option<RelaunchArguments>,
-    /// path where ejecute the relaunch command
-    pub relaunch_in: Option<PathBuf>,
+    pub id: uuid::Uuid,
     /// display name of the item
     pub display_name: String,
-    ///@deprecaed will be removed in v3, use subtype `Folder` instead.
-    #[ts(skip)]
-    #[serde(skip_serializing)]
-    #[deprecated]
-    pub is_dir: bool,
-    /// Window handles in the app group, in case of pinned file/dir always will be empty
-    #[serde(skip_deserializing)]
-    pub windows: Vec<WegAppGroupItem>,
-    /// This intention is to prevent pinned state change, when this is neccesary
-    #[serde(skip_deserializing)]
-    pub pin_disabled: bool,
+    /// Application user model id.
+    pub umid: Option<String>,
+    /// path to file or program.
+    pub path: PathBuf,
+    /// the item will persist after all windows are closed
+    pub pinned: bool,
+    /// this item should not be pinnable
+    pub prevent_pinning: bool,
+    /// custom information to relaunch this app, if none, UMID or path should be used
+    pub relaunch: Option<Relaunch>,
 }
 
-impl PinnedWegItemData {
-    pub fn set_pin_disabled(&mut self, pin_disabled: bool) {
-        self.pin_disabled = pin_disabled;
-    }
-
-    /// Some apps changes of place on update, commonly this contains an App User Model Id
-    /// the path should be updated to the new location on these cases.
-    pub fn should_ensure_path(&self) -> bool {
-        self.umid.is_none() || self.path.extension().is_some_and(|ext| ext == "lnk")
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(tag = "type")]
 pub enum WegItem {
-    #[serde(alias = "PinnedApp")]
-    Pinned(PinnedWegItemData),
-    Temporal(PinnedWegItemData),
+    #[serde(alias = "PinnedApp", alias = "Pinned")]
+    DeprecatedOldPinned(OldWegItemData),
+    AppOrFile(WegItemData),
     Separator {
-        id: String,
+        id: uuid::Uuid,
     },
     Media {
-        id: String,
+        id: uuid::Uuid,
     },
     StartMenu {
-        id: String,
+        id: uuid::Uuid,
     },
     ShowDesktop {
-        id: String,
+        id: uuid::Uuid,
     },
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
 #[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
 pub enum WegItemType {
-    Pinned,
-    Temporal,
+    AppOrFile,
     Separator,
     Media,
     StartMenu,
@@ -120,10 +55,10 @@ pub enum WegItemType {
 }
 
 impl WegItem {
-    pub fn id(&self) -> &String {
+    pub fn id(&self) -> &uuid::Uuid {
         match self {
-            WegItem::Pinned(data) => &data.id,
-            WegItem::Temporal(data) => &data.id,
+            WegItem::DeprecatedOldPinned(data) => &data.id,
+            WegItem::AppOrFile(data) => &data.id,
             WegItem::Separator { id } => id,
             WegItem::Media { id } => id,
             WegItem::StartMenu { id } => id,
@@ -131,10 +66,10 @@ impl WegItem {
         }
     }
 
-    fn set_id(&mut self, identifier: String) {
+    fn set_id(&mut self, identifier: uuid::Uuid) {
         match self {
-            WegItem::Pinned(data) => data.id = identifier,
-            WegItem::Temporal(data) => data.id = identifier,
+            WegItem::DeprecatedOldPinned(data) => data.id = identifier,
+            WegItem::AppOrFile(data) => data.id = identifier,
             WegItem::Separator { id } => *id = identifier,
             WegItem::Media { id } => *id = identifier,
             WegItem::StartMenu { id } => *id = identifier,
@@ -143,7 +78,7 @@ impl WegItem {
     }
 }
 
-#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct WegItems {
@@ -154,64 +89,86 @@ pub struct WegItems {
     pub right: Vec<WegItem>,
 }
 
-#[allow(deprecated)]
 impl WegItems {
-    fn sanitize_items(dict: &mut HashSet<String>, items: Vec<WegItem>) -> Vec<WegItem> {
+    fn migrate_item(item: WegItem) -> Option<WegItem> {
+        let WegItem::DeprecatedOldPinned(mut data) = item else {
+            return Some(item);
+        };
+
+        // migration step for items before v2.1.6
+        if data.subtype == OldWegItemSubtype::UnknownV2_1_6 {
+            data.subtype = if data.relaunch_program.to_lowercase().contains(".exe") {
+                OldWegItemSubtype::App
+            } else if data.path.is_dir() {
+                OldWegItemSubtype::Folder
+            } else {
+                OldWegItemSubtype::File
+            };
+        }
+
+        if data.subtype == OldWegItemSubtype::Folder {
+            return None;
+        }
+
+        // migration of old scheme before v2.5
+        if let Some(args) = &data.relaunch_args {
+            if data.relaunch_program.contains("explorer")
+                && args.to_string().starts_with("shell:AppsFolder")
+            {
+                data.relaunch_program = args.to_string();
+                data.relaunch_args = None;
+            }
+        }
+
+        if data.relaunch_program.is_empty() {
+            data.relaunch_program = data.path.to_string_lossy().to_string();
+        }
+
+        let relaunch = Some(Relaunch {
+            command: data.relaunch_program,
+            args: data.relaunch_args,
+            working_dir: data.relaunch_in,
+            icon: None,
+        });
+
+        Some(WegItem::AppOrFile(WegItemData {
+            id: data.id,
+            display_name: data.display_name,
+            umid: data.umid,
+            path: data.path,
+            pinned: true,
+            prevent_pinning: data.pin_disabled,
+            relaunch,
+        }))
+    }
+
+    fn migrate_items(items: Vec<WegItem>) -> Vec<WegItem> {
+        items.into_iter().filter_map(Self::migrate_item).collect()
+    }
+
+    pub fn migrate(&mut self) {
+        self.left = Self::migrate_items(std::mem::take(&mut self.left));
+        self.center = Self::migrate_items(std::mem::take(&mut self.center));
+        self.right = Self::migrate_items(std::mem::take(&mut self.right));
+    }
+
+    fn sanitize_items(dict: &mut HashSet<uuid::Uuid>, items: Vec<WegItem>) -> Vec<WegItem> {
         let mut result = Vec::new();
         for mut item in items {
-            match &mut item {
-                WegItem::Pinned(data) => {
-                    if data.path.as_os_str().is_empty()
-                        || (data.should_ensure_path() && !data.path.exists())
-                    {
-                        continue;
-                    }
-
-                    // migration step for items before v2.1.6
-                    if data.subtype == WegItemSubtype::UnknownV2_1_6 {
-                        data.subtype = if data.is_dir {
-                            WegItemSubtype::Folder
-                        } else if data.relaunch_program.to_lowercase().contains(".exe") {
-                            WegItemSubtype::App
-                        } else {
-                            WegItemSubtype::File
-                        };
-                    }
-
-                    // migration of old scheme before v2.5
-                    if let Some(args) = &data.relaunch_args {
-                        if data.relaunch_program.contains("explorer")
-                            && args.to_string().starts_with("shell:AppsFolder")
-                        {
-                            data.relaunch_program = args.to_string();
-                            data.relaunch_args = None;
-                        }
-                    }
-
-                    if data.relaunch_program.is_empty() {
-                        data.relaunch_program = data.path.to_string_lossy().to_string();
-                    }
+            if let WegItem::AppOrFile(data) = &item {
+                let should_ensure_path =
+                    data.umid.is_none() || data.path.extension().is_some_and(|e| e == "lnk");
+                if data.path.as_os_str().is_empty() || (should_ensure_path && !data.path.exists()) {
+                    continue;
                 }
-                WegItem::Temporal(data) => {
-                    if data.path.as_os_str().is_empty()
-                        || data.windows.is_empty()
-                        || (data.should_ensure_path() && !data.path.exists())
-                    {
-                        continue;
-                    }
-                    if data.relaunch_program.is_empty() {
-                        data.relaunch_program = data.path.to_string_lossy().to_string();
-                    }
-                }
-                _ => {}
             }
 
-            if item.id().is_empty() {
-                item.set_id(uuid::Uuid::new_v4().to_string());
+            if item.id().is_nil() {
+                item.set_id(uuid::Uuid::new_v4());
             }
 
             if !dict.contains(item.id()) {
-                dict.insert(item.id().clone());
+                dict.insert(*item.id());
                 result.push(item);
             }
         }
@@ -219,9 +176,46 @@ impl WegItems {
     }
 
     pub fn sanitize(&mut self) {
+        self.migrate();
         let mut dict = HashSet::new();
         self.left = Self::sanitize_items(&mut dict, std::mem::take(&mut self.left));
         self.center = Self::sanitize_items(&mut dict, std::mem::take(&mut self.center));
         self.right = Self::sanitize_items(&mut dict, std::mem::take(&mut self.right));
     }
+}
+
+// ===================== DEPRECATED STRUCTS =====================
+
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
+pub enum OldWegItemSubtype {
+    File,
+    Folder,
+    App,
+    #[default]
+    UnknownV2_1_6,
+}
+
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[serde(default, rename_all = "camelCase")]
+pub struct OldWegItemData {
+    /// internal UUID to differentiate items
+    pub id: uuid::Uuid,
+    /// Subtype of the item (mandatory, but is optional for backward compatibility)
+    pub subtype: OldWegItemSubtype,
+    /// Application user model id.
+    pub umid: Option<String>,
+    /// path to file, folder or program.
+    pub path: PathBuf,
+    /// program to be executed
+    pub relaunch_program: String,
+    /// arguments to be passed to the relaunch program
+    pub relaunch_args: Option<RelaunchArguments>,
+    /// path where ejecute the relaunch command
+    pub relaunch_in: Option<PathBuf>,
+    /// display name of the item
+    pub display_name: String,
+    /// This intention is to prevent pinned state change, when this is neccesary
+    #[serde(skip_deserializing)]
+    pub pin_disabled: bool,
 }

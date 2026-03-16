@@ -84,9 +84,8 @@ slu_events_declaration! {
     PopupContentChanged(SluPopupConfig) as "popup-content-changed",
 
     StateSettingsChanged(Settings) as "settings-changed",
-    StateWegItemsChanged as "weg-items",
-    StateThemesChanged(Vec<Theme>) as "themes",
     StateSettingsByAppChanged(Vec<AppConfig>) as "settings-by-app",
+    StateThemesChanged(Vec<Theme>) as "themes",
     StateIconPacksChanged(Vec<IconPack>) as "icon-packs",
     StatePluginsChanged(Vec<Plugin>) as "plugins-changed",
     StateWidgetsChanged(Vec<Widget>) as "widgets-changed",
@@ -112,4 +111,7 @@ slu_events_declaration! {
 
     // Start Menu
     StartMenuItemsChanged(Vec<StartMenuItem>) as "start-menu::items-changed",
+
+    // SeelenWeg
+    WegAddItem(WegItemData) as "weg::add-item",
 }

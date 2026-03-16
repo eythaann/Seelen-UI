@@ -1,40 +1,53 @@
 use seelen_core::{
-    handlers::SeelenEvent,
     resource::WidgetId,
-    state::{WegItem, WegItems},
+    state::{WegItem, WegItemData, WegItems},
 };
 
 use crate::{
-    app::emit_to_webviews,
     error::Result,
     modules::apps::application::msix::MsixAppsManager,
-    trace_lock,
     utils::{atomic_write_file, constants::SEELEN_COMMON},
-    widgets::weg::weg_items_impl::SEELEN_WEG_STATE,
 };
 
 use super::FullState;
 
 impl FullState {
-    fn update_weg_items_paths(items: &mut [WegItem]) {
-        for item in items {
-            match item {
-                WegItem::Pinned(data) | WegItem::Temporal(data) => {
-                    if let Some(umid) = &data.umid {
-                        if let Ok(Some(app_path)) = MsixAppsManager::instance().get_app_path(umid) {
-                            data.path = app_path;
-                        }
-                    }
-                }
-                _ => {}
-            }
+    pub fn initial_weg_items(&self) -> WegItems {
+        WegItems {
+            is_reorder_disabled: false,
+            left: vec![
+                WegItem::StartMenu {
+                    id: uuid::Uuid::new_v4(),
+                },
+                WegItem::ShowDesktop {
+                    id: uuid::Uuid::new_v4(),
+                },
+            ],
+            center: vec![WegItem::AppOrFile(WegItemData {
+                id: uuid::Uuid::new_v4(),
+                umid: None,
+                path: "C:\\Windows\\explorer.exe".into(),
+                display_name: t!("file_explorer").to_string(),
+                pinned: true,
+                prevent_pinning: false,
+                relaunch: None,
+            })],
+            right: vec![WegItem::Media {
+                id: uuid::Uuid::new_v4(),
+            }],
         }
     }
 
-    pub fn emit_weg_items(&self) -> Result<()> {
-        emit_to_webviews(SeelenEvent::StateWegItemsChanged, &self.weg_items);
-        trace_lock!(SEELEN_WEG_STATE).on_stored_changed(self.weg_items.clone())?;
-        Ok(())
+    fn update_weg_items_paths(items: &mut [WegItem]) {
+        for item in items {
+            if let WegItem::AppOrFile(data) = item {
+                if let Some(umid) = &data.umid {
+                    if let Ok(Some(app_path)) = MsixAppsManager::instance().get_app_path(umid) {
+                        data.path = app_path;
+                    }
+                }
+            }
+        }
     }
 
     fn _read_weg_items(&mut self) -> Result<()> {
@@ -49,6 +62,7 @@ impl FullState {
             Self::update_weg_items_paths(&mut self.weg_items.center);
             Self::update_weg_items_paths(&mut self.weg_items.right);
         } else {
+            self.weg_items = self.initial_weg_items();
             self.weg_items.sanitize();
             self.write_weg_items(&self.weg_items)?;
         }

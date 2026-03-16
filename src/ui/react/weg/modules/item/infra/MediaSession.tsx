@@ -15,7 +15,7 @@ import type { MediaWegItem } from "../../shared/types.ts";
 
 import { $players, $settings } from "../../shared/state/mod.ts";
 import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
-import { getMenuForItem } from "./Menu.tsx";
+import { getMenuForItem } from "./GeneralMenu.tsx";
 
 import "./MediaSession.css";
 

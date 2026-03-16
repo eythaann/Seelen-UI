@@ -1,9 +1,28 @@
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
-import type { FocusedApp } from "@seelen-ui/lib/types";
+import type { FocusedApp, UserAppWindow } from "@seelen-ui/lib/types";
 import { $widget_rect } from "./settings";
 import { computed, signal } from "@preact/signals";
 import { debounce } from "lodash";
+import type { AppOrFileWegItem } from "../types";
+
+// on change of this function update src\background\widgets\weg\cli.rs too.
+export function getWindowsForItem(
+  item: AppOrFileWegItem,
+  interactables: UserAppWindow[],
+): UserAppWindow[] {
+  if (item.umid) {
+    return interactables.filter((w) => w.umid && w.umid === item.umid);
+  }
+
+  const itemCommand = item.relaunch?.command.toLowerCase();
+  const itemPath = item.path.toLowerCase();
+
+  return interactables.filter((w) => {
+    const winPath = w.process.path?.toLowerCase() ?? "";
+    return winPath !== "" && (itemCommand === winPath || itemPath === winPath);
+  });
+}
 
 const widget = Widget.getCurrent();
 const selfWinId = await invoke(SeelenCommand.GetSelfWindowId);

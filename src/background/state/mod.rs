@@ -7,7 +7,7 @@ use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
         value::{KnownPlugin, PluginValue},
-        WegPinnedItemsVisibility, WegTemporalItemsVisibility, WindowManagerLayout, WorkspaceId,
+        WindowManagerLayout, WorkspaceId,
     },
     system_state::MonitorId,
 };
@@ -132,36 +132,6 @@ impl FullState {
         } */
 
         default
-    }
-
-    pub fn get_weg_temporal_item_visibility(
-        &self,
-        _monitor_id: &MonitorId,
-    ) -> WegTemporalItemsVisibility {
-        /* match self.settings.monitors_v2.get(monitor_id) {
-            Some(config) => config
-                .by_widget
-                .weg
-                .temporal_items_visibility
-                .unwrap_or(default),
-            None => default,
-        } */
-        self.settings.by_widget.weg.temporal_items_visibility
-    }
-
-    pub fn get_weg_pinned_item_visibility(
-        &self,
-        _monitor_id: &MonitorId,
-    ) -> WegPinnedItemsVisibility {
-        /* match self.settings.monitors_v2.get(monitor_id) {
-            Some(config) => config
-                .by_widget
-                .weg
-                .pinned_items_visibility
-                .unwrap_or(default),
-            None => default,
-        } */
-        self.settings.by_widget.weg.pinned_items_visibility
     }
 
     pub fn locale(&self) -> &String {

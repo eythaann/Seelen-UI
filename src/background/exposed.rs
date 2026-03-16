@@ -5,8 +5,7 @@ use seelen_core::{
     command_handler_list,
     constants::SUPPORTED_LANGUAGES,
     resource::ResourceText,
-    state::RelaunchArguments,
-    system_state::{Color, StartMenuLayout, StartMenuLayoutItem},
+    system_state::{Color, RelaunchArguments, StartMenuLayout, StartMenuLayoutItem},
 };
 
 use tauri::{Builder, WebviewWindow, Wry};

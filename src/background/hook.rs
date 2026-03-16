@@ -164,9 +164,6 @@ impl HookManager {
         }
 
         let app_state = FULL_STATE.load();
-        if app_state.is_weg_enabled() {
-            log_error!(SeelenWeg::process_global_win_event(event, &origin), event);
-        }
 
         if app_state.is_window_manager_enabled() {
             log_error!(WindowManagerV2::process_win_event(event, &origin), event);

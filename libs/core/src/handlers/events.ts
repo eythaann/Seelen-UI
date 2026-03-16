@@ -29,9 +29,8 @@ export enum SeelenEvent {
   WMTreeChanged = "wm::tree-changed",
   PopupContentChanged = "popup-content-changed",
   StateSettingsChanged = "settings-changed",
-  StateWegItemsChanged = "weg-items",
-  StateThemesChanged = "themes",
   StateSettingsByAppChanged = "settings-by-app",
+  StateThemesChanged = "themes",
   StateIconPacksChanged = "icon-packs",
   StatePluginsChanged = "plugins-changed",
   StateWidgetsChanged = "widgets-changed",
@@ -46,4 +45,5 @@ export enum SeelenEvent {
   SystemCoresChanged = "system::cores-changed",
   BluetoothDevicesChanged = "bluetooth-devices-changed",
   StartMenuItemsChanged = "start-menu::items-changed",
+  WegAddItem = "weg::add-item",
 }

@@ -1,8 +1,8 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import type { ContextMenu, ContextMenuItem } from "@seelen-ui/lib/types";
+import type { ContextMenu, ContextMenuItem, UserAppWindow } from "@seelen-ui/lib/types";
 import type { TFunction } from "i18next";
 
-import type { PinnedWegItem, TemporalWegItem } from "../../shared/types.ts";
+import type { AppOrFileWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
 import { $settings } from "../../shared/state/settings.ts";
@@ -10,15 +10,17 @@ import { $settings } from "../../shared/state/settings.ts";
 const identifier = crypto.randomUUID();
 const onAppMenuClick = "weg::app_menu_click";
 
-let pendingAppItem: PinnedWegItem | TemporalWegItem | null = null;
+let pendingAppItem: AppOrFileWegItem | null = null;
+let pendingAppWindows: UserAppWindow[] = [];
 
 Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
   const { key } = payload as { key: string };
   const item = pendingAppItem;
+  const windows = pendingAppWindows;
   if (!item) return;
 
   if (key === "unpin") {
-    if (item.windows.length) {
+    if (windows.length) {
       $dock_state_actions.unpinApp(item.id);
     } else {
       $dock_state_actions.remove(item.id);
@@ -26,47 +28,36 @@ Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
   } else if (key === "pin") {
     $dock_state_actions.pinApp(item.id);
   } else if (key === "run") {
-    invoke(SeelenCommand.Run, {
-      program: item.relaunchProgram,
-      args: item.relaunchArgs,
-      workingDir: item.relaunchIn,
-      elevated: false,
-    });
+    launchItem(item, false);
   } else if (key === "open_location") {
     invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path });
   } else if (key === "run_as") {
-    invoke(SeelenCommand.Run, {
-      program: item.relaunchProgram,
-      args: item.relaunchArgs,
-      workingDir: item.relaunchIn,
-      elevated: true,
-    });
+    launchItem(item, true);
   } else if (key === "copy_hwnd") {
-    navigator.clipboard.writeText(
-      JSON.stringify(item.windows.map((window) => window.handle.toString(16))),
-    );
+    navigator.clipboard.writeText(JSON.stringify(windows.map((w) => w.hwnd.toString(16))));
   } else if (key === "close") {
-    item.windows.forEach((window) => {
-      invoke(SeelenCommand.WegCloseApp, { hwnd: window.handle });
+    windows.forEach((w) => {
+      invoke(SeelenCommand.WegCloseApp, { hwnd: w.hwnd });
     });
   } else if (key === "kill") {
-    item.windows.forEach((window) => {
-      invoke(SeelenCommand.WegKillApp, { hwnd: window.handle });
+    windows.forEach((w) => {
+      invoke(SeelenCommand.WegKillApp, { hwnd: w.hwnd });
     });
   }
 });
 
 export function getUserApplicationContextMenu(
   t: TFunction,
-  item: PinnedWegItem | TemporalWegItem,
+  item: AppOrFileWegItem,
+  windows: UserAppWindow[],
 ): ContextMenu {
   pendingAppItem = item;
+  pendingAppWindows = windows;
 
-  const isPinned = item.type === "Pinned";
   const items: ContextMenuItem[] = [];
 
-  if (!item.pinDisabled) {
-    if (isPinned) {
+  if (!item.preventPinning) {
+    if (item.pinned) {
       items.push({
         type: "Item",
         key: "unpin",
@@ -110,7 +101,7 @@ export function getUserApplicationContextMenu(
     },
   );
 
-  if (item.windows.length) {
+  if (windows.length) {
     if ($settings.value.devTools) {
       items.push({
         type: "Item",
@@ -125,7 +116,7 @@ export function getUserApplicationContextMenu(
       type: "Item",
       key: "close",
       icon: "BiWindowClose",
-      label: item.windows.length > 1 ? t("app_menu.close_multiple") : t("app_menu.close"),
+      label: windows.length > 1 ? t("app_menu.close_multiple") : t("app_menu.close"),
       callbackEvent: onAppMenuClick,
     });
 
@@ -134,11 +125,20 @@ export function getUserApplicationContextMenu(
         type: "Item",
         key: "kill",
         icon: "MdOutlineDangerous",
-        label: item.windows.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),
+        label: windows.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),
         callbackEvent: onAppMenuClick,
       });
     }
   }
 
   return { identifier, items };
+}
+
+export function launchItem(item: AppOrFileWegItem, elevated: boolean) {
+  return invoke(SeelenCommand.Run, {
+    program: item.relaunch?.command || item.umid ? `shell:AppsFolder\\${item.umid}` : item.path,
+    args: item.relaunch?.args || null,
+    workingDir: item.relaunch?.workingDir || null,
+    elevated,
+  });
 }

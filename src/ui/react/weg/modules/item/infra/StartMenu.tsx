@@ -8,7 +8,7 @@ import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayer
 import type { StartMenuWegItem } from "../../shared/types.ts";
 
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
-import { getMenuForItem } from "./Menu.tsx";
+import { getMenuForItem } from "./GeneralMenu.tsx";
 import { $delayedFocused } from "../../shared/state/windows.ts";
 
 interface Props {

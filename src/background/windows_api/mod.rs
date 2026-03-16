@@ -121,7 +121,7 @@ use crate::{
     error::{Result, WindowsResultExt},
     hook::HookManager,
     windows_api::{
-        input::{Keyboard, Mouse},
+        input::Keyboard,
         window::{event::WinEvent, Window},
     },
 };
@@ -740,21 +740,6 @@ impl WindowsApi {
 
     pub fn monitor_from_window(hwnd: HWND) -> HMONITOR {
         unsafe { MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY) }
-    }
-
-    pub fn monitor_from_cursor_point() -> HMONITOR {
-        if let Ok(point) = Mouse::get_cursor_pos() {
-            return unsafe {
-                MonitorFromPoint(
-                    POINT {
-                        x: point.x,
-                        y: point.y,
-                    },
-                    MONITOR_DEFAULTTOPRIMARY,
-                )
-            };
-        }
-        Self::primary_monitor()
     }
 
     pub fn monitor_from_point(point: &seelen_core::Point) -> HMONITOR {

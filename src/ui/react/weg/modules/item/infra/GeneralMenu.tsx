@@ -50,7 +50,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ContextMenu {
   }
 
   // File or Folder pinned items
-  if (item.type === WegItemType.Pinned) {
+  if (item.type === WegItemType.AppOrFile) {
     return {
       identifier,
       items: [

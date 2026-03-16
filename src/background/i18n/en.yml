@@ -60,3 +60,4 @@ widget_permissions:
 
     Do you want to allow this?
   request_title: Widget Permission Request
+file_explorer: File Explorer

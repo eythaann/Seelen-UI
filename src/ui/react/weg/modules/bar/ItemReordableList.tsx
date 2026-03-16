@@ -3,7 +3,6 @@ import { move } from "@dnd-kit/helpers";
 import { WegItemType } from "@seelen-ui/lib/types";
 import { useTranslation } from "react-i18next";
 
-import { FileOrFolder } from "../item/infra/File.tsx";
 import { MediaSession } from "../item/infra/MediaSession.tsx";
 import { Separator } from "../item/infra/Separator.tsx";
 import { StartMenu } from "../item/infra/StartMenu.tsx";
@@ -18,7 +17,8 @@ import { ShowDesktopModule } from "../item/infra/ShowDesktop.tsx";
 export function DockItems() {
   const { t } = useTranslation();
 
-  const isEmpty = $dock_state.value.items.filter((c) => c.type !== WegItemType.Separator).length === 0;
+  const visibleItems = $dock_state.value.items;
+  const isEmpty = visibleItems.filter((c) => c.type !== WegItemType.Separator).length === 0;
 
   return (
     <DragDropProvider
@@ -29,7 +29,7 @@ export function DockItems() {
     >
       <div className="weg-items">
         {isEmpty ? <span className="weg-empty-state-label">{t("weg.empty")}</span> : (
-          $dock_state.value.items.map((item, index) => (
+          visibleItems.map((item, index) => (
             <DraggableItem item={item} key={item.id} index={index}>
               {ItemByType(item, false)}
             </DraggableItem>
@@ -39,7 +39,7 @@ export function DockItems() {
 
       <DragOverlay>
         {(source) => {
-          const item = $dock_state.value.items.find((c) => c.id === source.id);
+          const item = visibleItems.find((c) => c.id === source.id);
           return item ? ItemByType(item, true) : null;
         }}
       </DragOverlay>
@@ -48,14 +48,7 @@ export function DockItems() {
 }
 
 function ItemByType(item: SwItem, isOverlay: boolean) {
-  if (item.type === WegItemType.Pinned) {
-    if (item.subtype === "App") {
-      return <UserApplication key={item.id} item={item} isOverlay={isOverlay} />;
-    }
-    return <FileOrFolder key={item.id} item={item} />;
-  }
-
-  if (item.type === WegItemType.Temporal) {
+  if (item.type === WegItemType.AppOrFile) {
     return <UserApplication key={item.id} item={item} isOverlay={isOverlay} />;
   }
 

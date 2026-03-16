@@ -23,10 +23,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     trace_lock,
     utils::discord::start_discord_rpc,
-    widgets::{
-        wallpaper_manager::SeelenWall,
-        weg::{weg_items_impl::SEELEN_WEG_STATE, SeelenWeg},
-    },
+    widgets::{wallpaper_manager::SeelenWall, weg::SeelenWeg},
     windows_api::{
         event_window::{create_background_window, IS_INTERACTIVE_SESSION},
         Com,
@@ -179,8 +176,6 @@ impl Seelen {
         self.widgets_per_display
             .push(LegacyWidgetMonitorContainer::new(monitor_id, &state)?);
         self.refresh_windows_positions()?;
-        // why this is here? TODO: refactor this.
-        trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }
 
@@ -188,8 +183,6 @@ impl Seelen {
         self.widgets_per_display
             .retain(|m| &m.view_primary_target_id != id);
         self.refresh_windows_positions()?;
-        // why this is here? TODO: refactor this.
-        trace_lock!(SEELEN_WEG_STATE).emit_to_webview()?;
         Ok(())
     }
 

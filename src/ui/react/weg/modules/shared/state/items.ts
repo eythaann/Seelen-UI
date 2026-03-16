@@ -1,62 +1,113 @@
-import { signal } from "@preact/signals";
-import { WegItems, Widget } from "@seelen-ui/lib";
-import { type WegItem, WegItemType } from "@seelen-ui/lib/types";
+import { effect, signal } from "@preact/signals";
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { type WegItem, type WegItems, WegItemType } from "@seelen-ui/lib/types";
 import { debounce } from "lodash";
 
 import type { SeparatorWegItem } from "../types.ts";
+import { emit, listen } from "@tauri-apps/api/event";
 
-interface DockState {
+interface OptimisticDockState {
   isReorderDisabled: boolean;
   items: WegItem[];
 }
 
-export const HardcodedSeparator1: SeparatorWegItem = {
+interface SyncPayload {
+  source: string;
+  state: OptimisticDockState;
+}
+
+const CLIENT_ID = crypto.randomUUID();
+
+export const HARDCODED_SEPARATOR_LEFT: SeparatorWegItem = {
   id: "hardcoded-separator-1",
   type: WegItemType.Separator,
 };
 
-export const HardcodedSeparator2: SeparatorWegItem = {
+export const HARDCODED_SEPARATOR_RIGHT: SeparatorWegItem = {
   id: "hardcoded-separator-2",
   type: WegItemType.Separator,
 };
 
-function getStateFromStored(raw: WegItems): DockState {
+export const $dock_state = signal(getStateFromStored(await invoke(SeelenCommand.StateGetWegItems)));
+
+subscribe(SeelenEvent.WegAddItem, (e) => {
+  const item: WegItem = {
+    ...e.payload,
+    id: crypto.randomUUID(), // ensure uniqueness
+    type: WegItemType.AppOrFile,
+  };
+
+  const items = [...$dock_state.value.items];
+  const separatorIdx = items.indexOf(HARDCODED_SEPARATOR_RIGHT);
+  items.splice(separatorIdx, 0, item);
+  $dock_state.value = { ...$dock_state.value, items };
+});
+
+let isRemoteUpdate = false;
+listen<SyncPayload>("hidden::sync-dock-items", ({ payload }) => {
+  if (payload.source === CLIENT_ID) return;
+
+  if (JSON.stringify(payload.state) !== JSON.stringify($dock_state.value)) {
+    isRemoteUpdate = true;
+    $dock_state.value = payload.state;
+  }
+});
+
+const emitSyncEvent = debounce((items: OptimisticDockState) => {
+  emit<SyncPayload>("hidden::sync-dock-items", {
+    source: CLIENT_ID,
+    state: items,
+  });
+}, 300);
+
+const saveDockState = debounce(async (state: OptimisticDockState) => {
+  console.trace("Saving dock state");
+
+  const index1 = state.items.indexOf(HARDCODED_SEPARATOR_LEFT);
+  const index2 = state.items.indexOf(HARDCODED_SEPARATOR_RIGHT);
+  const filter = (_item: WegItem) => true; // TODO filter items without windows
+
+  await invoke(SeelenCommand.StateWriteWegItems, {
+    items: {
+      isReorderDisabled: state.isReorderDisabled,
+      left: state.items.slice(0, index1).filter(filter),
+      center: state.items.slice(index1 + 1, index2).filter(filter),
+      right: state.items.slice(index2 + 1).filter(filter),
+    },
+  });
+}, 1000);
+
+let mounted = false;
+effect(() => {
+  const state = $dock_state.value;
+
+  // avoid writing on start of the widget
+  if (!mounted) {
+    mounted = true;
+    return;
+  }
+
+  if (isRemoteUpdate) {
+    isRemoteUpdate = false;
+    return;
+  }
+
+  emitSyncEvent(state);
+  saveDockState(state);
+});
+
+function getStateFromStored(state: WegItems): OptimisticDockState {
   return {
-    isReorderDisabled: raw.inner.isReorderDisabled,
+    isReorderDisabled: state.isReorderDisabled,
     items: [
-      ...raw.inner.left,
-      HardcodedSeparator1,
-      ...raw.inner.center,
-      HardcodedSeparator2,
-      ...raw.inner.right,
+      ...state.left,
+      HARDCODED_SEPARATOR_LEFT,
+      ...state.center,
+      HARDCODED_SEPARATOR_RIGHT,
+      ...state.right,
     ],
   };
 }
-
-function stateToStored(state: DockState): WegItems {
-  const index1 = state.items.indexOf(HardcodedSeparator1);
-  const index2 = state.items.indexOf(HardcodedSeparator2);
-  const filter = (item: WegItem) => item.type !== WegItemType.Temporal;
-
-  return new WegItems({
-    isReorderDisabled: state.isReorderDisabled,
-    left: state.items.slice(0, index1).filter(filter),
-    center: state.items.slice(index1 + 1, index2).filter(filter),
-    right: state.items.slice(index2 + 1).filter(filter),
-  });
-}
-
-let monitorId = Widget.getCurrent().decoded.monitorId!;
-export const $dock_state = signal(getStateFromStored(await WegItems.getForMonitor(monitorId)));
-WegItems.onChange(async () => {
-  $dock_state.value = getStateFromStored(await WegItems.getForMonitor(monitorId));
-});
-
-$dock_state.subscribe(
-  debounce((v) => {
-    stateToStored(v).save();
-  }, 1000),
-);
 
 export const $dock_state_actions = {
   remove(idToRemove: string) {
@@ -69,8 +120,8 @@ export const $dock_state_actions = {
     $dock_state.value = {
       ...$dock_state.value,
       items: $dock_state.value.items.map((item) => {
-        if (item.id === id && item.type === WegItemType.Temporal) {
-          return { ...item, type: WegItemType.Pinned };
+        if (item.id === id) {
+          return { ...item, pinned: true };
         }
         return item;
       }),
@@ -80,8 +131,8 @@ export const $dock_state_actions = {
     $dock_state.value = {
       ...$dock_state.value,
       items: $dock_state.value.items.map((item) => {
-        if (item.id === id && item.type === WegItemType.Pinned) {
-          return { ...item, type: WegItemType.Temporal };
+        if (item.id === id) {
+          return { ...item, pinned: false };
         }
         return item;
       }),

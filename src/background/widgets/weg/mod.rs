@@ -2,13 +2,11 @@ pub mod cli;
 pub mod handler;
 pub mod hook;
 pub mod instance;
-pub mod weg_items_impl;
 
 pub use instance::SeelenWeg;
 
 use std::thread::JoinHandle;
 
-use weg_items_impl::SEELEN_WEG_STATE;
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{SW_HIDE, SW_SHOWNORMAL},
@@ -17,30 +15,9 @@ use windows::Win32::{
 use crate::{
     error::Result,
     state::application::FULL_STATE,
-    trace_lock,
     utils::sleep_millis,
-    windows_api::{window::Window, AppBarData, AppBarDataState, WindowEnumerator, WindowsApi},
+    windows_api::{AppBarData, AppBarDataState, WindowEnumerator, WindowsApi},
 };
-
-impl SeelenWeg {
-    pub fn contains_app(window: &Window) -> bool {
-        trace_lock!(SEELEN_WEG_STATE).contains(window)
-    }
-
-    pub fn foregrounded_app(window: &Window) -> Result<()> {
-        let mut weg = trace_lock!(SEELEN_WEG_STATE);
-        weg.update_window_activation(window);
-        weg.emit_to_webview()?;
-        Ok(())
-    }
-
-    pub fn update_app(window: &Window) -> Result<()> {
-        let mut weg = trace_lock!(SEELEN_WEG_STATE);
-        weg.update_window_info(window);
-        weg.emit_to_webview()?;
-        Ok(())
-    }
-}
 
 // ====================
 // TASKBAR HIDDEN LOGIC

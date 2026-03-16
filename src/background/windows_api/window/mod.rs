@@ -160,7 +160,6 @@ impl Window {
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
-    #[allow(dead_code)]
     pub fn relaunch_icon(&self) -> Option<String> {
         WindowsApi::get_window_relaunch_icon_resource(self.0).ok()
     }
@@ -178,9 +177,18 @@ impl Window {
     }
 
     pub fn app_display_name(&self) -> Result<String> {
-        if let Some(AppUserModelId::Appx(umid)) = self.app_user_model_id() {
-            let info = AppInfo::GetFromAppUserModelId(&umid.into())?;
-            return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
+        if let Some(umid) = self.app_user_model_id() {
+            match umid {
+                AppUserModelId::Appx(umid) => {
+                    let info = AppInfo::GetFromAppUserModelId(&umid.into())?;
+                    return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
+                }
+                AppUserModelId::PropertyStore(_) => {
+                    if let Some(display_name) = self.relaunch_display_name() {
+                        return Ok(display_name);
+                    }
+                }
+            }
         }
         self.process().program_display_name()
     }

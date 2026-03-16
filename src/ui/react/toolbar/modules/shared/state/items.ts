@@ -32,6 +32,7 @@ const saveTbState = debounce(async (items: ToolbarState) => {
   await invoke(SeelenCommand.StateWriteToolbarItems, { items });
 }, 1000);
 
+// TODO: do the same sync method as was done for the dock widget
 effect(() => {
   // Skip emit/save while dragging; onDragEnd will flip $isDragging back to false,
   // which re-triggers this effect once with the final committed order.

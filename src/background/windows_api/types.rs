@@ -14,6 +14,10 @@ impl AppUserModelId {
     pub fn is_appx(&self) -> bool {
         matches!(self, AppUserModelId::Appx(_))
     }
+
+    pub fn is_property_store(&self) -> bool {
+        matches!(self, AppUserModelId::PropertyStore(_))
+    }
 }
 
 impl std::fmt::Display for AppUserModelId {
