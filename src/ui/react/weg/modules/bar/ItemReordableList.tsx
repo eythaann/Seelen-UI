@@ -20,19 +20,26 @@ import { $interactables, getWindowsForItem } from "../shared/state/windows.ts";
 
 const visibleItems = computed(() => {
   const { pinnedItemsVisibility, temporalItemsVisibility } = $settings.value;
-  const showPinned = pinnedItemsVisibility === WegPinnedItemsVisibility.Always || $current_monitor.value.isPrimary;
+  const monitor = $current_monitor.value;
 
-  const windows = $interactables.value.filter((w) => {
-    return (
-      temporalItemsVisibility !== WegTemporalItemsVisibility.OnMonitor ||
-      w.monitor === $current_monitor.value.id
-    );
-  });
+  const showPinned = pinnedItemsVisibility === WegPinnedItemsVisibility.Always || monitor.isPrimary;
+  const filterByMonitor = temporalItemsVisibility === WegTemporalItemsVisibility.OnMonitor;
+
+  const windows = filterByMonitor
+    ? $interactables.value.filter((w) => {
+      return w.monitor === monitor.id;
+    })
+    : $interactables.value;
 
   return $dock_state.value.items.filter((item) => {
     if (item.type !== "AppOrFile") {
       return showPinned;
     }
+
+    if (item.pinned && showPinned) {
+      return true;
+    }
+
     return getWindowsForItem(item, windows).length > 0;
   });
 });

@@ -158,7 +158,7 @@ impl WegItems {
             if let WegItem::AppOrFile(data) = &item {
                 let should_ensure_path =
                     data.umid.is_none() || data.path.extension().is_some_and(|e| e == "lnk");
-                if data.path.as_os_str().is_empty() || (should_ensure_path && !data.path.exists()) {
+                if should_ensure_path && !data.path.exists() {
                     continue;
                 }
             }

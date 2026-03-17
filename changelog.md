@@ -2,6 +2,10 @@
 
 ## [2.5.6-dev]
 
+### fix
+
+- dock pinned apps not being rendered correctly.
+
 ## [2.5.5]
 
 ### features
