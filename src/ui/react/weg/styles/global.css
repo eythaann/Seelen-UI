@@ -228,19 +228,9 @@ body {
         }
       }
     }
-
-    .weg-item-preview-image-container {
-      width: 240px;
-      height: calc(240px / 1.77);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .weg-item-preview-image {
-        max-height: 100%;
-        height: 100%;
-        object-fit: scale-down;
-      }
-    }
   }
+}
+
+.ant-popover-container {
+  padding: 0 !important;
 }

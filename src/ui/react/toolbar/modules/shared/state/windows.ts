@@ -5,7 +5,6 @@ import { debounce } from "lodash";
 import { $settings, $widget_rect } from "./mod";
 import { $mouse_at_edge } from "./system";
 import { $is_this_webview_focused } from "libs/ui/react/utils/signals";
-import { $there_are_open_popups } from "@shared/components/AnimatedWrappers/PopupsState";
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 
 const widget = Widget.getCurrent();
@@ -82,12 +81,11 @@ effect(() => {
       flush = true;
       break;
     case HideMode.Always:
-      hidden = !$is_this_webview_focused.value && !$there_are_open_popups.value && !isMouseOverEdge;
+      hidden = !$is_this_webview_focused.value && !isMouseOverEdge;
       break;
     case HideMode.OnOverlap:
       hidden = $is_tb_overlapped.value &&
         !$is_this_webview_focused.value &&
-        !$there_are_open_popups.value &&
         !isMouseOverEdge;
       break;
   }

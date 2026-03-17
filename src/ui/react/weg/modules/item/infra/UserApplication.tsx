@@ -1,5 +1,4 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { AnimatedPopover } from "@shared/components/AnimatedWrappers";
 import { FileIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { cx } from "libs/ui/react/utils/styling.ts";
@@ -11,12 +10,20 @@ import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayer
 
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
-import { $delayedFocused, $focused, $interactables, $notifications, $settings } from "../../shared/state/mod.ts";
+import {
+  $delayedFocused,
+  $focused,
+  $interactables,
+  $notifications,
+  $open_popups,
+  $settings,
+} from "../../shared/state/mod.ts";
 import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getWindowsForItem } from "../../shared/state/windows.ts";
 import { getUserApplicationContextMenu, launchItem } from "./UserApplicationContextMenu.tsx";
 import { UserApplicationPreview } from "./UserApplicationPreview.tsx";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
+import { Popover } from "antd";
 
 interface Props {
   item: AppOrFileWegItem;
@@ -96,7 +103,11 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       onContextMenu={onContextMenu}
     >
       <BackgroundByLayersV2 prefix="item" />
-      <FileIcon className="weg-item-icon" path={item.relaunch?.icon || item.path} umid={item.umid} />
+      <FileIcon
+        className="weg-item-icon"
+        path={item.relaunch?.icon || item.path}
+        umid={item.umid}
+      />
       {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
       {notificationsCount > 0 && <div className="weg-item-notification-badge">{notificationsCount}</div>}
       {$settings.value.showInstanceCounter && windows.length > 1 && (
@@ -118,15 +129,15 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
   }
 
   return (
-    <AnimatedPopover
-      animationDescription={{
-        openAnimationName: "weg-item-preview-container-open",
-        closeAnimationName: "weg-item-preview-container-close",
-      }}
+    <Popover
       open={openPreview}
       placement={calculatePlacement($settings.value.position)}
-      onOpenChange={(open) => setOpenPreview(open && moment(new Date()) > blockUntil)}
+      onOpenChange={(open) => {
+        setOpenPreview(open && moment(new Date()) > blockUntil);
+        $open_popups.value[item.id] = open;
+      }}
       trigger="hover"
+      arrow={false}
       content={
         <BackgroundByLayersV2
           className={cx("weg-item-preview-container", $settings.value.position.toLowerCase())}
@@ -147,6 +158,6 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       }
     >
       {itemNode}
-    </AnimatedPopover>
+    </Popover>
   );
 });

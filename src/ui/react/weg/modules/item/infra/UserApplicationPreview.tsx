@@ -47,7 +47,7 @@ export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
               src={convertFileSrc(preview.path) + "?v=" + preview.hash}
             />
           )
-          : <MissingIcon />}
+          : <MissingIcon className="weg-item-no-preview" />}
       </div>
     </div>
   );
