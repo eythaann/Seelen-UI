@@ -12,7 +12,7 @@ use crate::{
 use super::FullState;
 
 impl FullState {
-    pub fn initial_weg_items(&self) -> WegItems {
+    pub fn initial_weg_items() -> WegItems {
         WegItems {
             is_reorder_disabled: false,
             left: vec![
@@ -62,7 +62,7 @@ impl FullState {
             Self::update_weg_items_paths(&mut self.weg_items.center);
             Self::update_weg_items_paths(&mut self.weg_items.right);
         } else {
-            self.weg_items = self.initial_weg_items();
+            self.weg_items = Self::initial_weg_items();
             self.weg_items.sanitize();
             self.write_weg_items(&self.weg_items)?;
         }

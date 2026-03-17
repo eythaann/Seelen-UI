@@ -58,10 +58,10 @@ impl FullState {
             // ======== data ========
             settings: Settings::default(),
             settings_by_app: AppsConfigurationList::default(),
-            weg_items: WegItems::default(),
+            weg_items: Self::initial_weg_items(),
             toolbar_items: Self::initial_toolbar_items(),
         };
-        manager.load_all()?;
+        manager.load_all();
         manager.start_listeners()?;
         Ok(manager)
     }
@@ -214,7 +214,7 @@ impl FullState {
     }
 
     /// We log each step on this cuz for some reason a deadlock is happening somewhere.
-    fn load_all(&mut self) -> Result<()> {
+    fn load_all(&mut self) {
         log::trace!("Initial load: settings");
         self.read_settings();
 
@@ -226,42 +226,43 @@ impl FullState {
 
         log::trace!("Initial load: toolbar items");
         self.read_toolbar_items();
-
-        Ok(())
     }
 
     fn show_corrupted_state_to_user(path: &Path) {
-        let mut manager = POPUPS_MANAGER.lock();
-        let config = SluPopupConfig {
-            title: vec![SluPopupContent::Group {
-                items: vec![
-                    SluPopupContent::Icon {
-                        name: "BiSolidError".to_string(),
-                        styles: Some(
-                            CssStyles::new()
-                                .add("color", "var(--color-red-800)")
-                                .add("height", "1.2rem"),
-                        ),
+        let path = path.to_path_buf();
+        std::thread::spawn(move || {
+            let mut manager = POPUPS_MANAGER.lock();
+            let config = SluPopupConfig {
+                title: vec![SluPopupContent::Group {
+                    items: vec![
+                        SluPopupContent::Icon {
+                            name: "BiSolidError".to_string(),
+                            styles: Some(
+                                CssStyles::new()
+                                    .add("color", "var(--color-red-800)")
+                                    .add("height", "1.2rem"),
+                            ),
+                        },
+                        SluPopupContent::Text {
+                            value: t!("runtime.corrupted_data").to_string(),
+                            styles: None,
+                        },
+                    ],
+                    styles: Some(CssStyles::new().add("alignItems", "center")),
+                }],
+                content: vec![
+                    SluPopupContent::Text {
+                        value: t!("runtime.corrupted_file").to_string(),
+                        styles: None,
                     },
                     SluPopupContent::Text {
-                        value: t!("runtime.corrupted_data").to_string(),
+                        value: format!("{}: {:?}", t!("runtime.corrupted_file_path"), path),
                         styles: None,
                     },
                 ],
-                styles: Some(CssStyles::new().add("alignItems", "center")),
-            }],
-            content: vec![
-                SluPopupContent::Text {
-                    value: t!("runtime.corrupted_file").to_string(),
-                    styles: None,
-                },
-                SluPopupContent::Text {
-                    value: format!("{}: {:?}", t!("runtime.corrupted_file_path"), path),
-                    styles: None,
-                },
-            ],
-            ..Default::default()
-        };
-        log_error!(manager.create(config));
+                ..Default::default()
+            };
+            log_error!(manager.create(config));
+        });
     }
 }

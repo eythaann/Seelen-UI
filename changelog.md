@@ -21,6 +21,7 @@
 - calendar language not being changed.
 - media player stucked state.
 - some lnk files (ex: docker) not appearing on apps menu.
+- app not starting on corrupted settings files.
 
 ## [2.5.4]
 
