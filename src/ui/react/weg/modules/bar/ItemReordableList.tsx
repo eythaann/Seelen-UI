@@ -1,6 +1,6 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { move } from "@dnd-kit/helpers";
-import { WegItemType } from "@seelen-ui/lib/types";
+import { WegItemType, WegPinnedItemsVisibility, WegTemporalItemsVisibility } from "@seelen-ui/lib/types";
 import { useTranslation } from "react-i18next";
 
 import { MediaSession } from "../item/infra/MediaSession.tsx";
@@ -13,12 +13,34 @@ import type { SwItem } from "../shared/types.ts";
 import { $dock_state } from "../shared/state/items.ts";
 import { DraggableItem } from "./DraggableItem.tsx";
 import { ShowDesktopModule } from "../item/infra/ShowDesktop.tsx";
+import { $settings } from "../shared/state/settings.ts";
+import { $current_monitor } from "../shared/state/system.ts";
+import { computed } from "@preact/signals";
+import { $interactables, getWindowsForItem } from "../shared/state/windows.ts";
+
+const visibleItems = computed(() => {
+  const { pinnedItemsVisibility, temporalItemsVisibility } = $settings.value;
+  const showPinned = pinnedItemsVisibility === WegPinnedItemsVisibility.Always || $current_monitor.value.isPrimary;
+
+  const windows = $interactables.value.filter((w) => {
+    return (
+      temporalItemsVisibility !== WegTemporalItemsVisibility.OnMonitor ||
+      w.monitor === $current_monitor.value.id
+    );
+  });
+
+  return $dock_state.value.items.filter((item) => {
+    if (item.type !== "AppOrFile") {
+      return showPinned;
+    }
+    return getWindowsForItem(item, windows).length > 0;
+  });
+});
 
 export function DockItems() {
   const { t } = useTranslation();
 
-  const visibleItems = $dock_state.value.items;
-  const isEmpty = visibleItems.filter((c) => c.type !== WegItemType.Separator).length === 0;
+  const isEmpty = visibleItems.value.filter((c) => c.type !== WegItemType.Separator).length === 0;
 
   return (
     <DragDropProvider
@@ -29,17 +51,19 @@ export function DockItems() {
     >
       <div className="weg-items">
         {isEmpty ? <span className="weg-empty-state-label">{t("weg.empty")}</span> : (
-          visibleItems.map((item, index) => (
-            <DraggableItem item={item} key={item.id} index={index}>
-              {ItemByType(item, false)}
-            </DraggableItem>
-          ))
+          visibleItems.value.map((item, index) => {
+            return (
+              <DraggableItem item={item} key={item.id} index={index}>
+                {ItemByType(item, false)}
+              </DraggableItem>
+            );
+          })
         )}
       </div>
 
       <DragOverlay>
         {(source) => {
-          const item = visibleItems.find((c) => c.id === source.id);
+          const item = visibleItems.value.find((c) => c.id === source.id);
           return item ? ItemByType(item, true) : null;
         }}
       </DragOverlay>

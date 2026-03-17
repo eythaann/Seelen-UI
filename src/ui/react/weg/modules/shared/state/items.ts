@@ -38,7 +38,7 @@ subscribe(SeelenEvent.WegAddItem, (e) => {
   };
 
   const items = [...$dock_state.value.items];
-  const separatorIdx = items.indexOf(HARDCODED_SEPARATOR_RIGHT);
+  const separatorIdx = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
   items.splice(separatorIdx, 0, item);
   $dock_state.value = { ...$dock_state.value, items };
 });
@@ -62,17 +62,17 @@ const emitSyncEvent = debounce((items: OptimisticDockState) => {
 
 const saveDockState = debounce(async (state: OptimisticDockState) => {
   console.trace("Saving dock state");
+  console.log(state);
 
-  const index1 = state.items.indexOf(HARDCODED_SEPARATOR_LEFT);
-  const index2 = state.items.indexOf(HARDCODED_SEPARATOR_RIGHT);
-  const filter = (_item: WegItem) => true; // TODO filter items without windows
+  const index1 = state.items.findIndex((i) => i.id === HARDCODED_SEPARATOR_LEFT.id);
+  const index2 = state.items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
 
   await invoke(SeelenCommand.StateWriteWegItems, {
     items: {
       isReorderDisabled: state.isReorderDisabled,
-      left: state.items.slice(0, index1).filter(filter),
-      center: state.items.slice(index1 + 1, index2).filter(filter),
-      right: state.items.slice(index2 + 1).filter(filter),
+      left: state.items.slice(0, index1),
+      center: state.items.slice(index1 + 1, index2),
+      right: state.items.slice(index2 + 1),
     },
   });
 }, 1000);

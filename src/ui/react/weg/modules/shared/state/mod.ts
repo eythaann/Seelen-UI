@@ -8,8 +8,6 @@ effect(() => {
   const interactables = $interactables.value;
   const state = $dock_state.value;
 
-  console.log(interactables);
-
   const appOrFileItems = state.items.filter(
     (item): item is AppOrFileWegItem => item.type === WegItemType.AppOrFile,
   );
@@ -52,7 +50,7 @@ effect(() => {
   if (itemsToRemove.size === 0 && newItems.length === 0) return;
 
   const filteredItems = state.items.filter((item) => !itemsToRemove.has(item.id));
-  const separatorRightIdx = filteredItems.indexOf(HARDCODED_SEPARATOR_RIGHT);
+  const separatorRightIdx = filteredItems.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
   $dock_state.value = {
     ...state,
     items: [

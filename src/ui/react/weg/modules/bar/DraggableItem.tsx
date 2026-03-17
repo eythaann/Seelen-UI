@@ -9,9 +9,10 @@ import { isHorizontalDock } from "../shared/state/settings.ts";
 interface Props extends PropsWithChildren {
   item: SwItem;
   index: number;
+  ghost?: boolean;
 }
 
-export function DraggableItem({ children, item, index }: Props) {
+export function DraggableItem({ children, item, index, ghost }: Props) {
   const sortable = useSortable({
     id: item.id,
     index,
@@ -21,7 +22,7 @@ export function DraggableItem({ children, item, index }: Props) {
   return (
     <div
       ref={sortable.ref}
-      style={{ opacity: sortable.isDragging ? 0.3 : 1 }}
+      style={{ opacity: sortable.isDragging || ghost ? 0.3 : 1 }}
       data-dragging={sortable.isDragging}
       className="weg-item-drag-container"
       // this was added here to avoid need to pass it to all the items types,
