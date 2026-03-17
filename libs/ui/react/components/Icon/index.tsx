@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from "preact/compat";
+import { forwardRef, type HTMLAttributes } from "preact/compat";
 
 import { cx } from "../../utils/styling.ts";
 import InlineSVG from "../InlineSvg/index.tsx";
@@ -13,18 +13,19 @@ interface ReactIconProps extends HTMLAttributes<HTMLElement> {
 }
 
 /** React Icons */
-export function Icon(props: ReactIconProps) {
+export const Icon = forwardRef<HTMLElement, ReactIconProps>((props, ref) => {
   const { iconName, size, color, className, style, ...rest } = props;
 
   return (
     <InlineSVG
+      ref={ref}
       {...rest}
       src={`/icons/${iconName}.svg`}
       className={cx("slu-icon", cs.reactIcon, className)}
       style={{ height: size, color, ...(style || {}) }}
     />
   );
-}
+});
 
 export * from "./FileIcon.tsx";
 export * from "./MissingIcon.tsx";

@@ -1,5 +1,5 @@
 import { cx } from "libs/ui/react/utils/styling";
-import { type HTMLAttributes, useEffect, useState } from "react";
+import { forwardRef, type HTMLAttributes, useEffect, useState } from "react";
 
 import cs from "./index.module.css";
 
@@ -7,9 +7,8 @@ interface Props extends HTMLAttributes<HTMLElement> {
   src: string;
 }
 
-const InlineSVG = ({ src, className, ...rest }: Props) => {
+const InlineSVG = forwardRef<HTMLElement, Props>(({ src, className, ...rest }, ref) => {
   const [svgContent, setSvgContent] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchSVG = async () => {
@@ -21,24 +20,21 @@ const InlineSVG = ({ src, className, ...rest }: Props) => {
         const svgText = await response.text();
         setSvgContent(svgText);
       } catch (err: any) {
-        setError(err?.message);
+        console.error(err);
       }
     };
 
     fetchSVG();
   }, [src]);
 
-  if (error || !svgContent) {
-    return null;
-  }
-
   return (
     <i
+      ref={ref}
       {...rest}
       className={cx(cs.inlineSvg, className)}
-      dangerouslySetInnerHTML={{ __html: svgContent }}
+      dangerouslySetInnerHTML={{ __html: svgContent ?? "" }}
     />
   );
-};
+});
 
 export default InlineSVG;

@@ -62,7 +62,6 @@ const emitSyncEvent = debounce((items: OptimisticDockState) => {
 
 const saveDockState = debounce(async (state: OptimisticDockState) => {
   console.trace("Saving dock state");
-  console.log(state);
 
   const index1 = state.items.findIndex((i) => i.id === HARDCODED_SEPARATOR_LEFT.id);
   const index2 = state.items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);

@@ -102,6 +102,7 @@ export function General() {
                     https://momentjs.com/docs/#/displaying/format/
                   </a>
                 }
+                placement="right"
               >
                 <Icon iconName="LuCircleHelp" />
               </Tooltip>

@@ -53,6 +53,7 @@ pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<(
 ///
 /// The event loop is still running after fail so we can easily restart the app just using tauri.
 pub fn check_for_webview_optimal_state(app: &tauri::AppHandle) -> Result<()> {
+    log::info!("Testing webview optimal state...");
     start_integrity_thread(app.clone());
     let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode("@seelen/integrity");
     let args = WebviewArgs::default();

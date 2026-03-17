@@ -38,7 +38,6 @@ async function getPromotedNews(): Promise<New[]> {
     return [];
   }
   let blogs: Blog[] = await response.json();
-  console.log(blogs);
 
   return blogs
     .filter(

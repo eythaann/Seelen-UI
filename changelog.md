@@ -2,6 +2,10 @@
 
 ## [2.5.7-dev]
 
+### fix
+
+- not displaying tooltips on settings.
+
 ## [2.5.6]
 
 ### fix
