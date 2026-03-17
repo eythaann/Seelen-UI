@@ -7,38 +7,51 @@ import { useTranslation } from "react-i18next";
 
 import cs from "./News.module.css";
 
-const BASE_NEWS_URL = "https://raw.githubusercontent.com/Seelen-Inc/slu-blog/refs/heads/main/news";
+const PRODUCT_API_URL = "https://product.seelen.io";
 
-async function getNewNames(): Promise<string[]> {
-  let response = await fetch(BASE_NEWS_URL + "/show_on_app.json");
+interface BlogPromotion {
+  type: "None" | "ShowEverywhere" | "ShowInApp";
+  value?: string;
+}
 
-  if (response.ok) {
-    let data = await response.json();
-    return data;
-  }
-
-  return [];
+interface Blog {
+  _id: string;
+  slug: string;
+  promotion: BlogPromotion;
+  body: {
+    title: string;
+    description: string;
+    portrait: string | null;
+  };
 }
 
 interface New {
   title: string;
   message: string;
   url: string;
-  image: string;
+  image: string | null;
 }
 
-async function getNew(name: string): Promise<New | null> {
-  try {
-    let response = await fetch(`${BASE_NEWS_URL}/${name}/metadata.json`);
-    if (response.ok) {
-      let data: New = await response.json();
-      data.image = `${BASE_NEWS_URL}/${name}/image.png`;
-      return data;
-    }
-  } catch (_error) {
-    return null;
+async function getPromotedNews(): Promise<New[]> {
+  let response = await fetch(`${PRODUCT_API_URL}/blogs`);
+  if (!response.ok) {
+    return [];
   }
-  return null;
+  let blogs: Blog[] = await response.json();
+  console.log(blogs);
+
+  return blogs
+    .filter(
+      (b) =>
+        (b.promotion.type === "ShowInApp" && b.promotion.value === "seelen-ui") ||
+        b.promotion.type === "ShowEverywhere",
+    )
+    .map((b) => ({
+      title: b.body.title,
+      message: b.body.description,
+      url: `https://seelen.io/blog/${b.slug}`,
+      image: b.body.portrait,
+    }));
 }
 
 export function NoticeSlider() {
@@ -49,12 +62,7 @@ export function NoticeSlider() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    async function fetchData() {
-      let names = await getNewNames();
-      let news = await Promise.all(names.map((name) => getNew(name)));
-      setNews(news.filter((item) => item !== null) as New[]);
-    }
-    fetchData();
+    getPromotedNews().then(setNews);
   }, []);
 
   useInterval(
@@ -76,11 +84,9 @@ export function NoticeSlider() {
         {current
           ? (
             <>
-              <img
-                className={cs.image}
-                src={current.image}
-                alt={current.title}
-              />
+              {current.image
+                ? <img className={cs.image} src={current.image} alt={current.title} />
+                : <div className={cs.image} />}
               <div className={cs.content}>
                 <h3 className={cs.title}>{current.title}</h3>
                 <p className={cs.message}>{current.message}</p>
