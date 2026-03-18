@@ -76,13 +76,18 @@
         }
 
         if (shouldSort && sourceIndex !== targetIndex) {
+          cancelDropzone();
           globalState.pinnedItems = arrayMove(globalState.pinnedItems, sourceIndex, targetIndex);
+          return;
         }
 
         if (source.type === "folder" && target.type === "app") {
           return;
         }
         activateDropzone(target.id);
+      }}
+      onDragOver={(event) => {
+        event.preventDefault();
       }}
       onDragEnd={(event) => {
         const { source, target } = event.operation;

@@ -9,6 +9,8 @@
 ### fix
 
 - not displaying tooltips on settings.
+- apps menu folder creation being skipped.
+- apps menu folder items not scrollable when overflowing.
 
 ## [2.5.6]
 

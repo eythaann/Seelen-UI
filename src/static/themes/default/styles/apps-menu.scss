@@ -346,6 +346,8 @@ body {
     display: grid;
     grid-template-columns: repeat(var(--folder-columns), 1fr);
     gap: 1rem;
+    overflow-y: auto;
+    align-content: start;
 
     // .app { .. }
   }
