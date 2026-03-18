@@ -32,9 +32,14 @@ impl FullState {
                 prevent_pinning: false,
                 relaunch: None,
             })],
-            right: vec![WegItem::Media {
-                id: uuid::Uuid::new_v4(),
-            }],
+            right: vec![
+                WegItem::TrashBin {
+                    id: uuid::Uuid::new_v4(),
+                },
+                WegItem::Media {
+                    id: uuid::Uuid::new_v4(),
+                },
+            ],
         }
     }
 

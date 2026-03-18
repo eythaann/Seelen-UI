@@ -19,6 +19,8 @@ media:
   not_playing: Nothing is playing
 show_desktop:
   label: Show Desktop
+trash_bin:
+  empty_bin: Empty Recycle Bin
 start:
   label: Start Menu
 taskbar_menu:
@@ -28,5 +30,6 @@ taskbar_menu:
   settings: Settings
   start: Add Start Module
   task_manager: Task Manager
+  trash_bin: Add Recycle Bin Module
 weg:
   empty: No items to show

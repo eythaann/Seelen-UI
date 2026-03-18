@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import type { ContextMenu } from "@seelen-ui/lib/types";
+import type { ContextMenu, ContextMenuItem } from "@seelen-ui/lib/types";
 import type { TFunction } from "i18next";
 
 import { WegItemType } from "@seelen-ui/lib/types";
@@ -24,6 +24,8 @@ Widget.self.webview.listen(onItemMenuClick, ({ payload }) => {
     if ("path" in item) {
       invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path });
     }
+  } else if (key === "empty_bin") {
+    invoke(SeelenCommand.TrashBinEmpty);
   }
 });
 
@@ -33,19 +35,35 @@ export function getMenuForItem(t: TFunction, item: SwItem): ContextMenu {
   if (
     item.type === WegItemType.ShowDesktop ||
     item.type === WegItemType.Media ||
-    item.type === WegItemType.StartMenu
+    item.type === WegItemType.StartMenu ||
+    item.type === WegItemType.TrashBin
   ) {
-    return {
-      identifier,
-      items: [
+    const items: ContextMenuItem[] = [
+      {
+        type: "Item",
+        key: "remove",
+        icon: "CgExtensionRemove",
+        label: t("context_menu.remove_module"),
+        callbackEvent: onItemMenuClick,
+      },
+    ];
+
+    if (item.type === WegItemType.TrashBin) {
+      items.unshift(
         {
           type: "Item",
-          key: "remove",
-          icon: "CgExtensionRemove",
-          label: t("context_menu.remove_module"),
+          key: "empty_bin",
+          icon: "FaRegTrashAlt",
+          label: t("trash_bin.empty_bin"),
           callbackEvent: onItemMenuClick,
         },
-      ],
+        { type: "Separator" },
+      );
+    }
+
+    return {
+      identifier,
+      items,
     };
   }
 

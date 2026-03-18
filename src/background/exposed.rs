@@ -295,6 +295,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::modules::system_settings::infrastructure::*;
     use crate::modules::system_settings::language::infrastructure::*;
     use crate::modules::system_tray::infrastructure::*;
+    use crate::modules::trash_bin::infrastructure::*;
     use crate::modules::user::infrastructure::*;
 
     use crate::resources::commands::*;

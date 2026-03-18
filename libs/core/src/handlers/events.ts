@@ -46,4 +46,5 @@ export enum SeelenEvent {
   BluetoothDevicesChanged = "bluetooth-devices-changed",
   StartMenuItemsChanged = "start-menu::items-changed",
   WegAddItem = "weg::add-item",
+  TrashBinChanged = "trash-bin::changed",
 }

@@ -22,7 +22,16 @@ subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
   $mouse_pos.value = { x, y };
 });
 
-await Promise.all([$monitors.init(), $players.init(), $notifications.init(), $mouse_pos.init()]);
+export const $trash_bin_info = lazySignal(() => invoke(SeelenCommand.GetTrashBinInfo));
+subscribe(SeelenEvent.TrashBinChanged, $trash_bin_info.setByPayload);
+
+await Promise.all([
+  $monitors.init(),
+  $players.init(),
+  $notifications.init(),
+  $mouse_pos.init(),
+  $trash_bin_info.init(),
+]);
 
 export const $current_monitor = computed(
   () => $monitors.value.find((m) => m.id === currentMonitorId)!,

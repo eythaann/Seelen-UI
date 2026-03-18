@@ -9,6 +9,7 @@ pub mod start;
 pub mod system;
 pub mod system_settings;
 pub mod system_tray;
+pub mod trash_bin;
 pub mod user;
 
 #[macro_export]

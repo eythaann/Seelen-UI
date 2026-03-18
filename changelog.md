@@ -5,6 +5,7 @@
 ### features
 
 - allow split multiple windows into separated items on dock.
+- trash bin module for dock.
 
 ### fix
 

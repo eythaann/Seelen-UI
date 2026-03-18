@@ -125,4 +125,6 @@ export enum SeelenCommand {
   ForgetBluetoothDevice = "forget_bluetooth_device",
   GetStartMenuItems = "get_start_menu_items",
   GetNativeStartMenu = "get_native_start_menu",
+  GetTrashBinInfo = "get_trash_bin_info",
+  TrashBinEmpty = "trash_bin_empty",
 }

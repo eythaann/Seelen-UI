@@ -5,12 +5,18 @@ use windows::Win32::{
         Power::RegisterSuspendResumeNotification,
         RemoteDesktop::{WTSRegisterSessionNotification, NOTIFY_FOR_THIS_SESSION},
     },
-    UI::WindowsAndMessaging::{
-        CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
-        RegisterClassW, RegisterShellHookWindow, RegisterWindowMessageW, TranslateMessage,
-        DEVICE_NOTIFY_WINDOW_HANDLE, MSG, WINDOW_EX_STYLE, WINDOW_STYLE, WM_DESTROY,
-        WM_WTSSESSION_CHANGE, WNDCLASSW, WTS_SESSION_LOCK, WTS_SESSION_LOGOFF, WTS_SESSION_LOGON,
-        WTS_SESSION_UNLOCK,
+    UI::{
+        Shell::{
+            Common::ITEMIDLIST, SHChangeNotifyEntry, SHChangeNotifyRegister,
+            SHGetSpecialFolderLocation, SHCNRF_SOURCE,
+        },
+        WindowsAndMessaging::{
+            CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
+            RegisterClassW, RegisterShellHookWindow, RegisterWindowMessageW, TranslateMessage,
+            DEVICE_NOTIFY_WINDOW_HANDLE, MSG, WINDOW_EX_STYLE, WINDOW_STYLE, WM_APP, WM_DESTROY,
+            WM_WTSSESSION_CHANGE, WNDCLASSW, WTS_SESSION_LOCK, WTS_SESSION_LOGOFF,
+            WTS_SESSION_LOGON, WTS_SESSION_UNLOCK,
+        },
     },
 };
 
@@ -28,6 +34,16 @@ pub const HSHELL_FULLSCREEN_ENTER: u32 = 53;
 pub const HSHELL_FULLSCREEN_EXIT: u32 = 54;
 
 pub static BACKGROUND_HWND: AtomicIsize = AtomicIsize::new(0);
+
+/// Window message sent to the background window when the recycle bin state changes.
+pub const WM_TRASH_BIN_NOTIFY: u32 = WM_APP + 100;
+
+/// CSIDL for the Recycle Bin virtual folder.
+const CSIDL_BITBUCKET: i32 = 0x000a;
+/// SHCNRF_ShellLevel
+const SHCNRF_SHELL_LEVEL: SHCNRF_SOURCE = SHCNRF_SOURCE(0x0002);
+/// SHCNE_ALLEVENTS
+const SHCNE_ALL_EVENTS: i32 = 0x7FFFFFFF_u32 as i32;
 
 /// Global flag to track if the current session is interactive (not locked/switched).
 /// Used to pause background threads and event processing when the session is not interactive.
@@ -87,6 +103,10 @@ impl BgWindowProc {
         // This is critical for pausing background threads when session is not interactive
         WTSRegisterSessionNotification(hwnd, NOTIFY_FOR_THIS_SESSION)?;
 
+        // Register for shell change notifications so that WM_TRASH_BIN_NOTIFY is sent
+        // to the background window whenever the recycle bin contents change.
+        register_shell_notifications(hwnd);
+
         done.send(())?;
         let mut msg = MSG::default();
 
@@ -129,6 +149,28 @@ impl BgWindowProc {
         Self::send((msg, w_param.0, l_param.0));
         DefWindowProcW(hwnd, msg, w_param, l_param)
     }
+}
+
+/// Registers shell change notifications for the Recycle Bin on the background window.
+/// When the recycle bin contents change, Windows sends `WM_TRASH_BIN_NOTIFY` to `hwnd`,
+/// which is then broadcast to all `subscribe_to_background_window` subscribers.
+unsafe fn register_shell_notifications(hwnd: HWND) {
+    let pidl: *mut ITEMIDLIST =
+        SHGetSpecialFolderLocation(None, CSIDL_BITBUCKET).unwrap_or(std::ptr::null_mut());
+
+    let entry = SHChangeNotifyEntry {
+        pidl,
+        fRecursive: true.into(),
+    };
+
+    SHChangeNotifyRegister(
+        hwnd,
+        SHCNRF_SHELL_LEVEL,
+        SHCNE_ALL_EVENTS,
+        WM_TRASH_BIN_NOTIFY,
+        1,
+        &entry,
+    );
 }
 
 /// the objective with this window is having a thread that will receive window events

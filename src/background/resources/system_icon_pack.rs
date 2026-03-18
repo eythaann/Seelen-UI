@@ -66,6 +66,10 @@ impl ResourceManager {
         ensure_icon("start-menu.svg")?;
         ensure_icon("folder.svg")?;
         ensure_icon("desktop.svg")?;
+
+        ensure_icon("trash_bin_empty.png")?;
+        ensure_icon("trash_bin_full.png")?;
+        ensure_icon("trash_bin_mask.png")?;
         Ok(())
     }
 
@@ -116,6 +120,24 @@ impl ResourceManager {
             key: "defaultPlayerThumbnail".to_owned(),
             icon: Icon {
                 base: Some("music_thumbnail.jpg".to_owned()),
+                ..Default::default()
+            },
+        }));
+
+        system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+            key: "bin::empty".to_owned(),
+            icon: Icon {
+                base: Some("trash_bin_empty.png".to_owned()),
+                mask: Some("trash_bin_mask.png".to_owned()),
+                ..Default::default()
+            },
+        }));
+
+        system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+            key: "bin::full".to_owned(),
+            icon: Icon {
+                base: Some("trash_bin_full.png".to_owned()),
+                mask: Some("trash_bin_mask.png".to_owned()),
                 ..Default::default()
             },
         }));

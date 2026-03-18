@@ -167,4 +167,14 @@ export const $dock_state_actions = {
       $dock_state.value = { ...$dock_state.value, items: newItems };
     }
   },
+  addTrashBinModule() {
+    if (!$dock_state.value.items.some((current) => current.type === WegItemType.TrashBin)) {
+      const newItems = [...$dock_state.value.items];
+      newItems.push({
+        id: crypto.randomUUID(),
+        type: WegItemType.TrashBin,
+      });
+      $dock_state.value = { ...$dock_state.value, items: newItems };
+    }
+  },
 };

@@ -17,6 +17,7 @@ import { $settings } from "../shared/state/settings.ts";
 import { $current_monitor } from "../shared/state/system.ts";
 import { computed } from "@preact/signals";
 import { $interactables, getWindowsForItem } from "../shared/state/windows.ts";
+import { TrashBin } from "../item/infra/RecycleBin.tsx";
 
 const visibleItems = computed(() => {
   const { pinnedItemsVisibility, temporalItemsVisibility } = $settings.value;
@@ -97,6 +98,10 @@ function ItemByType(item: SwItem, isOverlay: boolean) {
 
   if (item.type === WegItemType.Separator) {
     return <Separator key={item.id} item={item} />;
+  }
+
+  if (item.type === WegItemType.TrashBin) {
+    return <TrashBin key={item.id} item={item} />;
   }
 
   return null;

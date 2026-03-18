@@ -42,6 +42,9 @@ pub enum WegItem {
     ShowDesktop {
         id: uuid::Uuid,
     },
+    TrashBin {
+        id: uuid::Uuid,
+    },
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
@@ -52,6 +55,7 @@ pub enum WegItemType {
     Media,
     StartMenu,
     ShowDesktop,
+    TrashBin,
 }
 
 impl WegItem {
@@ -63,6 +67,7 @@ impl WegItem {
             WegItem::Media { id } => id,
             WegItem::StartMenu { id } => id,
             WegItem::ShowDesktop { id } => id,
+            WegItem::TrashBin { id } => id,
         }
     }
 
@@ -74,6 +79,7 @@ impl WegItem {
             WegItem::Media { id } => *id = identifier,
             WegItem::StartMenu { id } => *id = identifier,
             WegItem::ShowDesktop { id } => *id = identifier,
+            WegItem::TrashBin { id } => *id = identifier,
         }
     }
 }

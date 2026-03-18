@@ -279,4 +279,8 @@ slu_commands_declaration! {
     // Start Menu
     GetStartMenuItems = get_start_menu_items() -> Vec<StartMenuItem>,
     GetNativeStartMenu = get_native_start_menu() -> StartMenuLayout,
+
+    // Trash Bin
+    GetTrashBinInfo = get_trash_bin_info() -> TrashBinInfo,
+    TrashBinEmpty = trash_bin_empty(),
 }
