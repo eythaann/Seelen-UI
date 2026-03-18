@@ -181,6 +181,13 @@ export const SeelenWegSettings = () => {
               onChange={(value) => patchWegConfig({ visibleSeparators: value })}
             />
           </SettingsOption>
+          <SettingsOption>
+            <div>{t("weg.items.split_windows")}</div>
+            <Switch
+              checked={settings.splitWindows}
+              onChange={(value) => patchWegConfig({ splitWindows: value })}
+            />
+          </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
     </>

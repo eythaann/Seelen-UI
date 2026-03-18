@@ -330,6 +330,7 @@ weg:
       label: Unpinned Items Visibility
       on_monitor: On Monitor
     visible_separators: Visible Separators
+    split_windows: Split Windows (one item per window)
   label: Dock/Taskbar
   margin: Margin
   mode:

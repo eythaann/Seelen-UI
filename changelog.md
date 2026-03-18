@@ -2,6 +2,10 @@
 
 ## [2.5.7-dev]
 
+### features
+
+- allow split multiple windows into separated items on dock.
+
 ### fix
 
 - not displaying tooltips on settings.

@@ -141,6 +141,8 @@ pub struct SeelenWegSettings {
     pub mode: SeelenWegMode,
     /// When to hide the dock
     pub hide_mode: HideMode,
+    /// Split windows into separated items instead of grouped.
+    pub split_windows: bool,
     /// Which temporal items to show on the dock instance (this can be overridden per monitor)
     pub temporal_items_visibility: WegTemporalItemsVisibility,
     /// Determines is the pinned item should be shown or not (this can be overridden per monitor).
@@ -191,6 +193,7 @@ impl Default for SeelenWegSettings {
             delay_to_show: 100,
             delay_to_hide: 800,
             show_end_task: false,
+            split_windows: false,
         }
     }
 }

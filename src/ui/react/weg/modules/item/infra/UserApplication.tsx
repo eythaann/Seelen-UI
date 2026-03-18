@@ -1,9 +1,10 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { SeelenWegSide, type UserAppWindow } from "@seelen-ui/lib/types";
 import { FileIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import moment from "moment";
-import { memo, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
@@ -22,15 +23,18 @@ import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getWindowsForItem } from "../../shared/state/windows.ts";
 import { getUserApplicationContextMenu, launchItem } from "./UserApplicationContextMenu.tsx";
 import { UserApplicationPreview } from "./UserApplicationPreview.tsx";
-import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
-import { Popover } from "antd";
+import { Flex, Popover } from "antd";
 
 interface Props {
   item: AppOrFileWegItem;
   isOverlay?: boolean;
 }
 
-export const UserApplication = memo(({ item, isOverlay }: Props) => {
+interface InnerProps extends Props {
+  windows: UserAppWindow[];
+}
+
+function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
   const [openPreview, setOpenPreview] = useState(false);
   const [blockUntil, setBlockUntil] = useState(moment(new Date()));
 
@@ -61,8 +65,6 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       setOpenPreview(false);
     }
   });
-
-  const windows = getWindowsForItem(item, $interactables.value);
 
   const onContextMenu = useCallback(
     (e: MouseEvent) => {
@@ -160,4 +162,26 @@ export const UserApplication = memo(({ item, isOverlay }: Props) => {
       {itemNode}
     </Popover>
   );
-});
+}
+
+export function UserApplication({ item, isOverlay }: Props) {
+  const windows = getWindowsForItem(item, $interactables.value);
+
+  const { splitWindows, spaceBetweenItems } = $settings.value;
+  if (splitWindows && windows.length > 1) {
+    return (
+      <Flex align="center" gap={spaceBetweenItems}>
+        {windows.map((window) => (
+          <UserApplicationItem
+            key={window.hwnd}
+            item={item}
+            isOverlay={isOverlay}
+            windows={[window]}
+          />
+        ))}
+      </Flex>
+    );
+  }
+
+  return <UserApplicationItem item={item} isOverlay={isOverlay} windows={windows} />;
+}
