@@ -12,6 +12,8 @@
 - not displaying tooltips on settings.
 - apps menu folder creation being skipped.
 - apps menu folder items not scrollable when overflowing.
+- some msix apps using resources mapping via 'pri' files not having icons (ex: iCloud).
+- PWA edge apps not extracting icons.
 
 ## [2.5.6]
 

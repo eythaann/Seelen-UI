@@ -248,6 +248,7 @@ impl ResourceManager {
             }
 
             if found.is_none()
+                && lower_path.is_some()
                 && entry
                     .path
                     .as_ref()

@@ -69,6 +69,7 @@ impl MsixAppsManager {
     /// light and dark icons
     pub fn get_app_icon_path(&self, app_umid: &str) -> Result<(PathBuf, PathBuf)> {
         let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
+
         let package = app_info.Package()?;
 
         let manifest = PackageManifest::try_read_for(&package)?;
@@ -81,6 +82,7 @@ impl MsixAppsManager {
             Some(app) => app,
             None => {
                 return get_hightest_quality_posible_for_uwp_image(&store_logo)
+                    .or_else(|| get_icon_via_display_info(&app_info, app_umid))
                     .ok_or("Could not find package logo path".into())
             }
         };
@@ -91,7 +93,8 @@ impl MsixAppsManager {
         get_hightest_quality_posible_for_uwp_image(&app_logo_44)
             .or_else(|| get_hightest_quality_posible_for_uwp_image(&app_logo_150))
             .or_else(|| get_hightest_quality_posible_for_uwp_image(&store_logo))
-            .ok_or_else(|| format!("App icon not found for {app_umid}").into())
+            .or_else(|| get_icon_via_display_info(&app_info, app_umid))
+            .ok_or_else(|| format!("App icon not found for {app_umid} in {package_path:?}").into())
     }
 }
 
@@ -105,6 +108,56 @@ impl PackageManifest {
 
         Ok(quick_xml::de::from_reader(&mut reader)?)
     }
+}
+
+/// Fallback icon extraction using `AppDisplayInfo::GetLogo`.
+///
+/// When the manifest-based file search fails (e.g. paths remapped by resources.pri,
+/// `ms-resource:` URIs, locale subdirectories), the WinRT `AppInfo.DisplayInfo.GetLogo`
+/// API resolves the correct icon for the current context and returns its raw bytes.
+/// Those bytes are written to a temporary file so the rest of the pipeline can use
+/// `image::open()` on a normal path.
+///
+/// Returns `(path, path)` — a single file used for both light and dark since
+/// `GetLogo` does not distinguish themes.
+fn get_icon_via_display_info(app_info: &AppInfo, app_umid: &str) -> Option<(PathBuf, PathBuf)> {
+    use std::hash::{DefaultHasher, Hash, Hasher};
+    use windows::Foundation::Size;
+    use windows::Storage::Streams::{Buffer, DataReader, InputStreamOptions};
+
+    let display_info = app_info.DisplayInfo().ok()?;
+    let logo_ref = display_info
+        .GetLogo(Size {
+            Width: 256.0,
+            Height: 256.0,
+        })
+        .ok()?;
+
+    let stream = logo_ref.OpenReadAsync().ok()?.join().ok()?;
+
+    let size = stream.Size().ok()? as u32;
+    if size == 0 {
+        return None;
+    }
+
+    let buffer = Buffer::Create(size).ok()?;
+    let filled = stream
+        .ReadAsync(&buffer, size, InputStreamOptions::None)
+        .ok()?
+        .join()
+        .ok()?;
+
+    let len = filled.Length().ok()? as usize;
+    let reader = DataReader::FromBuffer(&filled).ok()?;
+    let mut bytes = vec![0u8; len];
+    reader.ReadBytes(&mut bytes).ok()?;
+
+    let mut hasher = DefaultHasher::new();
+    app_umid.hash(&mut hasher);
+    let path = std::env::temp_dir().join(format!("seelen_logo_{:x}.png", hasher.finish()));
+    std::fs::write(&path, &bytes).ok()?;
+
+    Some((path.clone(), path))
 }
 
 // returns light and dark icons

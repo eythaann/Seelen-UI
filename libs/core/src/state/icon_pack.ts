@@ -192,7 +192,17 @@ export class IconPackManager {
     }
 
     const lowerPath = path?.toLowerCase();
-    const extension = lowerPath?.split(".").pop();
+
+    // Extract extension only when there's an actual dot after the last path separator,
+    // to avoid treating directory names without dots as extensions.
+    const lastDot = lowerPath?.lastIndexOf(".");
+    const lastSlash = lowerPath?.lastIndexOf("\\") ?? -1;
+    const extension = (lastDot !== undefined && lastDot > lastSlash) ? lowerPath!.slice(lastDot + 1) : undefined;
+
+    // Add the starting path to __seen so that direct A→B→A cycles are caught in 2 hops.
+    if (lowerPath) {
+      __seen.add(lowerPath);
+    }
 
     for (const pack of this.activeIconPacks) {
       let entry: UniqueIconPackEntry | undefined;
@@ -214,7 +224,8 @@ export class IconPackManager {
           // only search for filename in case of executable files
           if (extension === "exe") {
             const filename = lowerPath.split("\\").pop();
-            if (filename && e.path.endsWith(filename)) {
+            // Use separator-aware check to avoid partial name matches (e.g. "mysteam.exe" != "steam.exe")
+            if (filename && (e.path === filename || e.path.endsWith("\\" + filename))) {
               return true;
             }
           }
