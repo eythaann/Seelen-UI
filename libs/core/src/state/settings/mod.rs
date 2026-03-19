@@ -444,6 +444,8 @@ pub struct Settings {
     pub performance_mode: PerformanceModeSettings,
     /// enable or disable hardware acceleration
     pub hardware_acceleration: bool,
+    /// interval to poll for system resources like cpu, memory, network usage, etc, in seconds.
+    pub polling_interval: u64,
 }
 
 impl Default for Settings {
@@ -467,6 +469,7 @@ impl Default for Settings {
             by_wallpaper: HashMap::new(),
             wallpaper_collections: Vec::new(),
             hardware_acceleration: true,
+            polling_interval: 3,
         }
     }
 }
@@ -529,6 +532,8 @@ impl Settings {
 
         self.shortcuts.sanitize();
         self.by_app.prepare();
+
+        self.polling_interval = self.polling_interval.max(1);
         Ok(())
     }
 

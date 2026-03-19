@@ -7,6 +7,7 @@ use seelen_core::system_state::{Core, Disk, Memory, NetworkStatistics};
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
+    state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
 };
 
@@ -64,7 +65,8 @@ impl SystemInfo {
 
         // Spawn monitoring thread
         std::thread::spawn(|| loop {
-            std::thread::sleep(std::time::Duration::from_secs(1));
+            let interval = FULL_STATE.load().settings.polling_interval;
+            std::thread::sleep(std::time::Duration::from_secs(interval));
             SystemInfo::instance().check_and_emit_changes();
         });
 
@@ -155,6 +157,7 @@ impl SystemInfo {
     }
 
     fn disks(&self) -> Vec<Disk> {
+        let interval = FULL_STATE.load().settings.polling_interval;
         let mut guard = self.disks.lock();
         guard.refresh(true);
         guard
@@ -168,24 +171,25 @@ impl SystemInfo {
                     total_space: disk.total_space(),
                     available_space: disk.available_space(),
                     is_removable: disk.is_removable(),
-                    read_bytes: usage.read_bytes,
-                    written_bytes: usage.written_bytes,
+                    read_bytes: usage.read_bytes / interval,
+                    written_bytes: usage.written_bytes / interval,
                 }
             })
             .collect()
     }
 
     fn network(&self) -> Vec<NetworkStatistics> {
+        let interval = FULL_STATE.load().settings.polling_interval;
         let mut guard = self.networks.lock();
         guard.refresh(true);
         guard
             .iter()
             .map(|(name, network)| NetworkStatistics {
                 name: name.clone(),
-                received: network.received(),
-                transmitted: network.transmitted(),
-                packets_received: network.packets_received(),
-                packets_transmitted: network.packets_transmitted(),
+                received: network.received() / interval,
+                transmitted: network.transmitted() / interval,
+                packets_received: network.packets_received() / interval,
+                packets_transmitted: network.packets_transmitted() / interval,
             })
             .collect()
     }

@@ -54,6 +54,10 @@
         color: var(--color-gray-600);
         font-size: 0.8rem;
         line-height: 1.4em;
+
+        a {
+          color: var(--color-blue-500);
+        }
       }
     }
 

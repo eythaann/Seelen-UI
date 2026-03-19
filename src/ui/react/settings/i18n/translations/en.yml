@@ -94,27 +94,32 @@ extras:
     application will not receive updates and the WebView2 Runtime will not be
     automatically updated with Windows updates.
 general:
-  accent_color: Accent Color
-  date_format: Date Format
-  hardware_acceleration: Hardware Acceleration
+  accent_color: Accent color
+  date_format: Date format
+  date_format_how_to: How to write a date format?
+  hardware_acceleration: Hardware acceleration
   hardware_acceleration_description: >-
     Disabling hardware acceleration will reduce memory usage, but can cause
     performance issues. Is safe to disable if you won't use live wallpapers.
+  polling_interval: System polling interval
+  polling_interval_description: >-
+    How often (in seconds) Seelen UI samples system resources like CPU, RAM,
+    network, and disk activity.
   icon_pack:
     available: Available Icon Packs
     selected: Active Icon Packs
   language: Language
   monday: Monday
   performance_mode:
-    on_battery: On Battery
-    on_energy_saver: On Energy Saver
+    on_battery: On battery
+    on_energy_saver: On energy saver
     options:
       disabled: Disabled
       extreme: Extreme
       minimal: Minimal
-    plugged: Plugged or Charging
+    plugged: Plugged or charging
   saturday: Saturday
-  start_of_week: Start of Week
+  start_of_week: Start of week
   startup: Run on startup?
   sunday: Sunday
   theme:

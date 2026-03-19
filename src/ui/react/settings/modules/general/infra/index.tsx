@@ -1,7 +1,6 @@
 import { SupportedLanguages } from "@seelen-ui/lib";
-import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { Input, Select, Switch, Tooltip } from "antd";
-import { type ChangeEvent, useState } from "react";
+import { Input, InputNumber, Select, Switch } from "antd";
+import { useTransition } from "react";
 import { useTranslation } from "react-i18next";
 
 import { startup } from "../../shared/tauri/infra.ts";
@@ -10,10 +9,12 @@ import {
   getDateFormat,
   getHardwareAcceleration,
   getLanguage,
+  getPollingInterval,
   getStartOfWeek,
   setDateFormat,
   setHardwareAcceleration,
   setLanguage,
+  setPollingInterval,
   setStartOfWeek,
 } from "../application.ts";
 
@@ -22,50 +23,37 @@ import { Colors } from "./Colors.tsx";
 import { PerformanceSettings } from "./Performance.tsx";
 
 export function General() {
-  const [changingAutostart, setChangingAutostart] = useState(false);
+  const [changingAutostart, startTransition] = useTransition();
 
-  const autostartStatus = autostart.value;
   const language = getLanguage();
   const dateFormat = getDateFormat();
   const startOfWeek = getStartOfWeek();
   const hardwareAcceleration = getHardwareAcceleration();
+  const pollingInterval = getPollingInterval();
 
   const { t } = useTranslation();
 
-  const onAutoStart = async (value: boolean) => {
-    setChangingAutostart(true);
-    try {
-      if (value) {
-        await startup.enable();
-      } else {
-        await startup.disable();
+  function onAutoStart(value: boolean) {
+    startTransition(async () => {
+      try {
+        if (value) {
+          await startup.enable();
+        } else {
+          await startup.disable();
+        }
+        autostart.value = await startup.isEnabled();
+      } catch (e) {
+        console.error(e);
       }
-      autostart.value = await startup.isEnabled();
-    } catch (e) {
-      console.error(e);
-    }
-    setChangingAutostart(false);
-  };
-
-  const onDateFormatChange = (e: ChangeEvent<HTMLInputElement>) => setDateFormat(e.currentTarget.value);
+    });
+  }
 
   return (
     <>
       <SettingsGroup>
         <SettingsOption
           label={t("general.startup")}
-          action={
-            <Switch
-              onChange={onAutoStart}
-              value={!!autostartStatus}
-              loading={changingAutostart || autostartStatus === null}
-            />
-          }
-        />
-        <SettingsOption
-          label={t("general.hardware_acceleration")}
-          description={t("general.hardware_acceleration_description")}
-          action={<Switch onChange={setHardwareAcceleration} checked={hardwareAcceleration} />}
+          action={<Switch onChange={onAutoStart} value={autostart.value} loading={changingAutostart} />}
         />
       </SettingsGroup>
 
@@ -93,27 +81,24 @@ export function General() {
         />
 
         <SettingsOption
-          label={
-            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-              <b>{t("general.date_format")}</b>
-              <Tooltip
-                title={
-                  <a href="https://momentjs.com/docs/#/displaying/format/" target="_blank">
-                    https://momentjs.com/docs/#/displaying/format/
-                  </a>
-                }
-                placement="right"
-              >
-                <Icon iconName="LuCircleHelp" />
-              </Tooltip>
-            </div>
+          label={t("general.date_format")}
+          description={
+            <a
+              href="https://momentjs.com/docs/#/displaying/format/"
+              target="_blank"
+              style={{ opacity: 0.8 }}
+            >
+              {t("general.date_format_how_to")}
+            </a>
           }
           action={
             <Input
               style={{ width: "200px", maxWidth: "200px" }}
               placeholder="YYYY-MM-DD"
               value={dateFormat}
-              onChange={onDateFormatChange}
+              onChange={(e) => {
+                setDateFormat(e.currentTarget.value);
+              }}
             />
           }
         />
@@ -136,6 +121,29 @@ export function General() {
       </SettingsGroup>
 
       <Colors />
+
+      <SettingsGroup>
+        <SettingsOption
+          label={t("general.hardware_acceleration")}
+          description={t("general.hardware_acceleration_description")}
+          action={<Switch onChange={setHardwareAcceleration} checked={hardwareAcceleration} />}
+        />
+
+        <SettingsOption
+          label={t("general.polling_interval")}
+          description={t("general.polling_interval_description")}
+          action={
+            <InputNumber
+              style={{ width: "100px" }}
+              min={1}
+              step={1}
+              precision={0}
+              value={pollingInterval}
+              onChange={(value) => value !== null && setPollingInterval(value)}
+            />
+          }
+        />
+      </SettingsGroup>
 
       <PerformanceSettings />
     </>

@@ -6,6 +6,7 @@
 
 - allow split multiple windows into separated items on dock.
 - trash bin module for dock.
+- allow change polling interval for system resources (cpu, ram, network usage, etc).
 
 ### fix
 

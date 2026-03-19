@@ -70,6 +70,23 @@ export function setPerformanceMode(performanceMode: PerformanceModeSettings) {
 }
 
 /**
+ * Gets the polling interval (seconds)
+ */
+export function getPollingInterval(): number {
+  return settings.value.pollingInterval;
+}
+
+/**
+ * Sets the polling interval (seconds, minimum 1)
+ */
+export function setPollingInterval(pollingInterval: number) {
+  settings.value = {
+    ...settings.value,
+    pollingInterval: Math.max(1, Math.floor(pollingInterval)),
+  };
+}
+
+/**
  * Gets the hardware acceleration setting
  */
 export function getHardwareAcceleration(): boolean {
