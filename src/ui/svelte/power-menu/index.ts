@@ -32,9 +32,14 @@ await widget.init();
 await widget.webview.setResizable(false);
 
 // play with zoom level to reset device pixel ratio to 1:1
-await widget.webview.setZoom(1 / (await widget.webview.scaleFactor()));
-widget.webview.onScaleChanged(({ payload }) => {
-  widget.webview.setZoom(1 / payload.scaleFactor);
+let lastDPR = window.devicePixelRatio;
+await widget.webview.setZoom(1 / lastDPR);
+widget.webview.onScaleChanged(() => {
+  if (window.devicePixelRatio !== lastDPR) {
+    // when zoom was set dpr changed, so in case of change this is accomulative unit
+    lastDPR = lastDPR * window.devicePixelRatio;
+    widget.webview.setZoom(1 / (lastDPR * window.devicePixelRatio));
+  }
 });
 
 mount(App, {

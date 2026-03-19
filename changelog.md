@@ -14,6 +14,7 @@
 - apps menu folder items not scrollable when overflowing.
 - some msix apps using resources mapping via 'pri' files not having icons (ex: iCloud).
 - PWA edge apps not extracting icons.
+- power menu and workspace viewer not scaling properly when users set text scale factor.
 
 ## [2.5.6]
 
